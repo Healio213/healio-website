@@ -3,7 +3,7 @@ import React from 'react';
 import SEOHead from '@/components/SEOHead';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
-import TrustBar from '@/components/sections/ambulant/TrustBar';
+
 import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
 import AmbulantHowItWorks from '@/components/sections/ambulant/AmbulantHowItWorks';
@@ -25,7 +25,6 @@ const AmbulantPage = () => {
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />
         <AmbulantTicker />
-        <TrustBar />
         <AmbulantVideoSection />
         <AmbulantConceptAccordion />
         
