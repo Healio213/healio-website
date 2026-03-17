@@ -11,7 +11,7 @@ const tickerItems = [
   { icon: TrendingUp, text: "Effektiv 0 € dank IKK Bonus" },
   { icon: Users, text: "127 neue Kunden diese Woche" },
   { icon: Star, text: "Osteopathie & Massagen inklusive" },
-  { icon: Heart, text: "Sehhilfen bis 300 € pro Jahr" },
+  { icon: Heart, text: "Sieh im Video, wie es funktioniert ▶" },
 ];
 
 const AmbulantTicker = () => {

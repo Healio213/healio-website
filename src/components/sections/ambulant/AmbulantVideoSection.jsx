@@ -14,6 +14,9 @@ const AmbulantVideoSection = () => {
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
             Jetzt Vorteile im Video entdecken
           </h2>
+          <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
+            In nur 2 Minuten erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung effektiv für 0 € bekommst.
+          </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
