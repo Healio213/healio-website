@@ -1,0 +1,96 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Official Healio Brand Colors */
+    --healio-primary: #25c990;      /* Primary Teal */
+    --healio-slate: #464f5d;        /* Dark Slate */
+    --healio-gray: #bec7c9;         /* Light Gray */
+    --healio-mint: #effdf4;         /* Light Mint */
+    --healio-green: #25c990;        /* Healio Green */
+    
+    --healio-primary-dark: #076046; /* Dark Green */
+    --healio-accent: #25c990;       /* Primary Teal */
+    --healio-dark: #464f5d;         /* Dark Slate */
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 159 68% 47%; 
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 159 68% 47%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 159 68% 47%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 159 68% 47%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-white text-healio-slate;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .healio-section {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .healio-container {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .healio-btn-primary {
+    @apply bg-healio-primary hover:bg-healio-primary-dark text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  }
+
+  .healio-btn-secondary {
+    @apply bg-transparent border-2 border-healio-slate text-healio-slate hover:bg-healio-slate hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  .healio-gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-healio-primary to-healio-primary-dark;
+  }
+}

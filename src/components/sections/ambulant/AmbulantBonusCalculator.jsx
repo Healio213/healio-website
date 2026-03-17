@@ -1,0 +1,186 @@
+
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Gift, ArrowRightLeft } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+
+const ACTIVITIES = [
+  { id: 'impfung', title: 'Schutzimpfung', desc: '(bis zu 8x) - 30€ je Impfung', amount: 240 },
+  { id: 'zahn', title: 'Zahnvorsorge', desc: '(bis 2x) - 30€ je Besuch', amount: 60 },
+  { id: 'checkup', title: 'Gesundheits-Check-up', desc: '1x pro Jahr', amount: 75 },
+  { id: 'krebs', title: 'Krebsvorsorge', desc: '1x pro Jahr', amount: 75 },
+  { id: 'ultraschall', title: 'Ultraschallscreening', desc: '1x pro Jahr', amount: 75 },
+  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: 'Mehrfach möglich', amount: 75 },
+  { id: 'sport', title: 'Sport Verein/Studio', desc: 'Pro Mitgliedschaft', amount: 75 },
+  { id: 'abzeichen', title: 'Sportabzeichen', desc: 'Jedes Abzeichen', amount: 75 },
+  { id: 'bmi', title: 'BMI im Normalbereich', desc: '1x pro Jahr', amount: 75 },
+  { id: 'blutdruck', title: 'Blutdruck normal', desc: '1x pro Jahr', amount: 75 },
+  { id: 'zahnreinigung', title: 'Zahnreinigung', desc: '1x pro Jahr', amount: 40 },
+  { id: 'kind', title: 'U-Untersuchungen Kind', desc: 'je Untersuchung', amount: 30 },
+];
+
+const AmbulantBonusCalculator = () => {
+  const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant&agentId1=901235&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJOb2xpIiwibGFzdE5hbWUiOiJHbWJIIiwiY29tcGanySI6Ik5vbGkgR21iSCIsInN0cmVldCI6IkFybmR0c3RyLiA2IiwiemlwY29kZSI6IjIyMDg1IiwiY2l0eSI6IkhhbWJ1cmciLCJtb2JpbGUiOiIwMTc2MjQxNTMxODgiLCJlbWFpbCI6ImZyYW5rQG5vbGktdmVyc2ljaGVydW5nLmRlIn0=&remarks=IkJlaSBGcmFnZW4gc2luZCB3aXIgZvxyIFNpZSBkYS4i&defaultContact=true&employeeInsurance=NOT_BKV";
+  const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V3700025016";
+
+  const [selectedActivities, setSelectedActivities] = useState({});
+
+  const handleToggle = (id) => {
+    setSelectedActivities((prev) => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  const handleReset = () => {
+    setSelectedActivities({});
+  };
+
+  const totalBonus = useMemo(() => {
+    return ACTIVITIES.reduce((sum, activity) => {
+      return selectedActivities[activity.id] ? sum + activity.amount : sum;
+    }, 0);
+  }, [selectedActivities]);
+
+  return (
+    <section id="bonus-calculator" className="bg-white py-24 font-sans">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-extrabold text-healio-dark mb-4"
+          >
+            Dein persönlicher <span className="text-healio-primary">Bonus-Rechner</span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-xl text-gray-600 max-w-3xl mx-auto font-medium"
+          >
+            So funktioniert der IKK Classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!
+          </motion.p>
+        </div>
+
+        {/* Two Column Layout */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start relative">
+          
+          {/* Left Column: Checkboxes (60%) */}
+          <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
+            <h3 className="text-2xl font-bold text-healio-dark mb-6">Wähle deine Aktivitäten:</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {ACTIVITIES.map((activity, index) => (
+                <motion.label 
+                  key={activity.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer select-none
+                    ${selectedActivities[activity.id] 
+                      ? 'border-healio-primary bg-healio-light' 
+                      : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
+                    }`}
+                >
+                  <div className="mt-1">
+                    <Checkbox 
+                      id={activity.id}
+                      checked={!!selectedActivities[activity.id]}
+                      onCheckedChange={() => handleToggle(activity.id)}
+                      className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-healio-dark truncate leading-tight mb-1">
+                      {activity.title}
+                    </div>
+                    <div className="text-sm text-gray-500 leading-snug">
+                      {activity.desc}
+                    </div>
+                  </div>
+                  <div className="font-bold text-healio-primary whitespace-nowrap">
+                    +{activity.amount}€
+                  </div>
+                </motion.label>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center md:text-left">
+              <button 
+                onClick={handleReset}
+                className="text-gray-400 hover:text-healio-dark underline text-sm font-medium transition-colors"
+              >
+                Auswahl zurücksetzen
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Sticky Result Box (40%) */}
+          <div className="w-full lg:w-[40%] lg:sticky lg:top-24">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-b from-[#25c990] to-[#076046] rounded-2xl p-8 lg:p-10 shadow-xl border border-healio-primary/20 overflow-hidden relative"
+            >
+              <div className="relative z-10 text-center">
+                <h3 className="text-xl lg:text-2xl font-semibold text-white mb-4">
+                  Dein möglicher Bonus:
+                </h3>
+                
+                <div className="flex justify-center items-center h-32 mb-6">
+                  <AnimatePresence mode="popLayout">
+                    <motion.div
+                      key={totalBonus}
+                      initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                      animate={{ scale: 1, opacity: 1, y: 0 }}
+                      exit={{ scale: 1.2, opacity: 0, y: -20 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      className="text-7xl lg:text-8xl font-extrabold tracking-tighter text-white"
+                    >
+                      {totalBonus}€
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                
+                <p className="text-white/90 text-base leading-relaxed mb-8 max-w-sm mx-auto font-medium">
+                  Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet.
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <a 
+                    href={calculatorUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
+                  >
+                    <Gift className="w-5 h-5 mr-2" />
+                    Tarif rechnen
+                  </a>
+                  
+                  <a 
+                    href={ikkLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10 hover:shadow-md transition-all duration-300 w-full"
+                  >
+                    <ArrowRightLeft className="w-5 h-5 mr-2" />
+                    Jetzt zur IKK wechseln
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AmbulantBonusCalculator;
