@@ -14,7 +14,7 @@ const AmbulantConceptAccordion = () => {
 
   const coverageCards = [
     { icon: Eye, title: "Sehhilfen (Brillen, Kontaktlinsen)", desc: "bis 500 Euro", premium: false },
-    { icon: Sparkles, title: "Augen-Laser (Refraktive Chirurgie/LASIK)", desc: "100% je Auge", premium: true },
+    { icon: Sparkles, title: "Augen-Laser (Refraktive Chirurgie/LASIK)", desc: "100% je Auge", premium: false },
     { icon: Leaf, title: "Heilpraktiker und Naturheilverfahren", desc: "inkl. Hufelandverzeichnis", premium: false },
     { icon: Hand, title: "Osteopathie und Chiropraktik", desc: "", premium: false },
     { icon: Activity, title: "Traditionelle Chinesische Medizin (TCM)", desc: "", premium: false },
