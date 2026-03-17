@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Helmet } from 'react-helmet';
+import SEOHead from '@/components/SEOHead';
 import { 
   ShieldCheck, Zap, Sparkles, Star, ChevronDown, CheckCircle2, 
   ArrowRight, Leaf, Eye, Stethoscope, Hand, Gift, Plane 
@@ -28,10 +28,19 @@ const BenefitItem = ({ icon: Icon, title, desc }) => (
 const AmbulantZusatzversicherungPage = () => {
   return (
     <>
-      <Helmet>
-        <title>Ambulante Zusatzversicherung | Premium Schutz | Healio</title>
-        <meta name="description" content="Sichern Sie sich Privatpatienten-Status mit der ambulanten Zusatzversicherung von Healio. Heilpraktiker, Sehhilfen & mehr. Jetzt informieren!" />
-      </Helmet>
+      <SEOHead
+        title="Ambulante Zusatzversicherung | Premium Schutz | Healio"
+        description="Sichern Sie sich Privatpatienten-Status mit der ambulanten Zusatzversicherung von Healio. Heilpraktiker, Sehhilfen & mehr. Jetzt informieren!"
+        canonicalUrl="https://www.healio.de/ambulante-zusatzversicherung"
+        schemaMarkup={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Ambulante Zusatzversicherung",
+          "description": "Sichern Sie sich Privatpatienten-Status mit der ambulanten Zusatzversicherung von Healio.",
+          "url": "https://www.healio.de/ambulante-zusatzversicherung",
+          "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
+        }}
+      />
 
       <main className="bg-slate-50 overflow-hidden">
         {/* Hero Section */}

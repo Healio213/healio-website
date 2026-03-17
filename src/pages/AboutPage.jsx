@@ -61,7 +61,7 @@ const AboutPage = () => {
       <SEOHead 
         title="Über uns - Healio" 
         description="Wir glauben daran, dass Gesundheitsvorsorge einfach, transparent und für jeden zugänglich sein sollte. Lernen Sie Healio und unsere Werte kennen." 
-        canonicalUrl="https://healio.de/about" 
+        canonicalUrl="https://www.healio.de/about" 
         schemaMarkup={schemaMarkup} 
       />
       

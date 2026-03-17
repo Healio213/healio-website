@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Calendar, CheckCircle2, Home, ArrowLeft, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import SEOHead from '@/components/SEOHead';
 
 const ConfirmationPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ const ConfirmationPage = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col items-center py-20 px-6">
+      <SEOHead
+        title="Bestätigung | Healio"
+        description="Vielen Dank für Ihre Anfrage bei Healio. Wir melden uns in Kürze bei Ihnen."
+        canonicalUrl="https://www.healio.de/confirmation"
+      />
       <div className="max-w-4xl w-full pt-12">
         
         {/* SECTION 1 - CONFIRMATION MESSAGE */}

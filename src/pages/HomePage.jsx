@@ -43,11 +43,11 @@ const HomePage = () => {
       <SEOHead
         title="Healio - Ganzheitliche Gesundheit & Bonusoptimierung | healio.de"
         description="Healio revolutioniert Gesundheit durch intelligente Bonusoptimierung. Maximiere deine Gesundheitsvorteile mit unserem innovativen Konzept. Jetzt kostenlos entdecken."
-        canonicalUrl="https://healio.de/"
+        canonicalUrl="https://www.healio.de/"
         ogTitle="Healio - Ganzheitliche Gesundheit & Bonusoptimierung"
         ogDescription="Maximiere deine Gesundheitsvorteile mit Healio. Bis zu 100% Erstattung für Heilpraktiker, Massagen und mehr durch clevere Kombination aus Zusatzversicherung und IKK Bonusprogramm."
-        ogImage="https://healio.de/og-image-home.png"
-        ogUrl="https://healio.de/"
+        ogImage="https://www.healio.de/og-image-home.png"
+        ogUrl="https://www.healio.de/"
         schemaMarkup={schemaMarkup}
       />
       <article>

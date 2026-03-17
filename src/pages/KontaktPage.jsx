@@ -84,7 +84,7 @@ const KontaktPage = () => {
       <SEOHead 
         title="Kontakt | Healio" 
         description="Ob Geschäftskunde oder Privatpatient wir sind persönlich für Sie da. In Hamburg und digital." 
-        canonicalUrl="https://healio.de/kontakt" 
+        canonicalUrl="https://www.healio.de/kontakt" 
         schemaMarkup={schemaMarkup} 
       />
 

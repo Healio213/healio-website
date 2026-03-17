@@ -34,11 +34,11 @@ const MainHomePage = () => {
       <SEOHead
         title="Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten"
         description="Optimieren Sie Ihre betriebliche Altersvorsorge und Krankenversicherung mit Healio. Höhere Renditen, echte Mitarbeiterbindung und steuerliche Vorteile für Ihr Unternehmen."
-        canonicalUrl="https://healio.de/"
+        canonicalUrl="https://www.healio.de/"
         ogTitle="Healio – Verantwortung lohnt sich für Ihr Unternehmen"
         ogDescription="Verwandeln Sie Pflichtaufgaben in Wettbewerbsvorteile. Modernes bAV & bKV Consulting für den Mittelstand."
-        ogImage="https://healio.de/og-image-b2b.png"
-        ogUrl="https://healio.de/"
+        ogImage="https://www.healio.de/og-image-b2b.png"
+        ogUrl="https://www.healio.de/"
         schemaMarkup={schemaMarkup}
       />
       <main className="w-full bg-white">

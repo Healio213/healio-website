@@ -17,10 +17,10 @@ const AgbPage = () => {
       <SEOHead
         title="Allgemeine Geschäftsbedingungen - Healio"
         description="AGB von Healio. Lese unsere Geschäftsbedingungen und verstehe die Nutzungsrichtlinien unserer Gesundheitsplattform."
-        canonicalUrl="https://healio.de/agb"
+        canonicalUrl="https://www.healio.de/agb"
         ogTitle="Allgemeine Geschäftsbedingungen - Healio"
         ogDescription="Allgemeine Geschäftsbedingungen (AGB) für Versicherungsmakler der Noli GmbH."
-        ogUrl="https://healio.de/agb"
+        ogUrl="https://www.healio.de/agb"
         schemaMarkup={schemaMarkup}
       />
       <main className="bg-white py-16 sm:py-24">

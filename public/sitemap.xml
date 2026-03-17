@@ -1,105 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://healio.de/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <loc>https://www.healio.de/</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://healio.de/about</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/about</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/leistungen</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/leistungen</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/partner</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/partner</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/kontakt</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/kontakt</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/terminvereinbarung</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/terminvereinbarung</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/ambulant</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/ambulant</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/zahn</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/zahn</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/healio-zahnzusatz</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/healio-zahnzusatz</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/stationaer</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/stationaer</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/klinik-upgrade</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/klinik-upgrade</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://healio.de/impressum</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/potenzialanalyse</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://healio.de/agb</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/tierkrankenversicherung</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://healio.de/datenschutz</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/impressum</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://healio.de/potenzialanalyse</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/agb</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://healio.de/confirmation</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/tierkrankenversicherung</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
+    <loc>https://www.healio.de/datenschutz</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

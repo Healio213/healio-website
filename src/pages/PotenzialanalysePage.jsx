@@ -9,6 +9,7 @@ import { AlertCircle, Mail, Phone, Loader2, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { emailjsService } from '@/services/emailjsService';
 import Header from '@/components/Header';
+import SEOHead from '@/components/SEOHead';
 import {
   Select,
   SelectContent,
@@ -135,6 +136,19 @@ const PotenzialanalysePage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Kostenlose Potenzialanalyse | Healio B2B"
+        description="Erfahren Sie in unserer kostenlosen Potenzialanalyse, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann. Jetzt unverbindlich anfragen!"
+        canonicalUrl="https://www.healio.de/potenzialanalyse"
+        schemaMarkup={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Kostenlose Potenzialanalyse",
+          "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
+          "url": "https://www.healio.de/potenzialanalyse",
+          "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
+        }}
+      />
       <Header />
       <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-gray-100">
         <div className="max-w-3xl mx-auto px-6 py-24 sm:py-32">

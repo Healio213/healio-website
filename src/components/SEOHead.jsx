@@ -7,7 +7,7 @@ const SEOHead = ({
   canonicalUrl, 
   ogTitle, 
   ogDescription, 
-  ogImage = 'https://healio.de/og-image.png', 
+  ogImage = 'https://www.healio.de/og-image.png',
   ogUrl,
   ogType = 'website',
   twitterCard = 'summary_large_image',
@@ -20,7 +20,7 @@ const SEOHead = ({
   const finalDescription = description || defaultDescription;
   const finalOgTitle = ogTitle || finalTitle;
   const finalOgDescription = ogDescription || finalDescription;
-  const finalOgUrl = ogUrl || canonicalUrl || 'https://healio.de';
+  const finalOgUrl = ogUrl || canonicalUrl || 'https://www.healio.de';
 
   return (
     <Helmet>

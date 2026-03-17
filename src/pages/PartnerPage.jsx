@@ -74,7 +74,7 @@ const PartnerPage = () => {
       <SEOHead 
         title="Für Therapeuten | Healio Partnernetzwerk" 
         description="Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken." 
-        canonicalUrl="https://healio.de/partner" 
+        canonicalUrl="https://www.healio.de/partner" 
         schemaMarkup={schemaMarkup} 
       />
 

@@ -13,7 +13,7 @@ const VeterinaryHomePage = () => {
       <SEOHead
         title="Tierkrankenversicherung - Veterinärmedizinische Versorgung sichern | Healio"
         description="Schützen Sie Ihr Haustier vor hohen Tierarztkosten. Optimale Absicherung für Hunde & Katzen inkl. OP-Schutz und Vorsorge nach neuer GOT."
-        canonicalUrl="https://healio.de/tierkrankenversicherung"
+        canonicalUrl="https://www.healio.de/tierkrankenversicherung"
         ogTitle="Healio Tierkrankenversicherung - Bester Schutz für Ihr Tier"
         ogDescription="Sichern Sie sich gegen steigende Tierarztkosten ab. Jetzt Beitrag berechnen."
       />

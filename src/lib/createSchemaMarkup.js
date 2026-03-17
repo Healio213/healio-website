@@ -6,11 +6,11 @@ export const createOrganizationSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Healio",
-    "legalName": "Noli GmbH",
-    "url": "https://healio.de",
-    "logo": "https://healio.de/logo.png",
-    "description": "Healio revolutioniert Gesundheit durch intelligente Bonusoptimierung und ganzheitliche Gesundheitskonzepte.",
+    "name": "HEALIO GmbH",
+    "legalName": "HEALIO GmbH",
+    "url": "https://www.healio.de",
+    "logo": "https://www.healio.de/favicon.svg",
+    "description": "Ihr Experte für betriebliche Altersvorsorge (bAV) und betriebliche Krankenversicherung (bKV) in Hamburg.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Arndtstraße 6",
@@ -20,9 +20,9 @@ export const createOrganizationSchema = () => {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+49-40-1802-4898-0",
+      "telephone": "+494089755705",
       "contactType": "customer service",
-      "email": "info@noli-versicherung.de",
+      "email": "info@healio.de",
       "availableLanguage": ["German"]
     },
     "foundingDate": "2021",
@@ -44,7 +44,7 @@ export const createServiceSchema = () => {
     "provider": {
       "@type": "Organization",
       "name": "Healio",
-      "url": "https://healio.de"
+      "url": "https://www.healio.de"
     },
     "areaServed": {
       "@type": "Country",
@@ -52,7 +52,7 @@ export const createServiceSchema = () => {
     },
     "availableChannel": {
       "@type": "ServiceChannel",
-      "serviceUrl": "https://healio.de",
+      "serviceUrl": "https://www.healio.de",
       "servicePhone": "+49-40-1802-4898-0"
     },
     "offers": {
@@ -84,7 +84,7 @@ export const createWebPageSchema = (pageName, description) => {
     "@type": "WebPage",
     "name": pageName,
     "description": description,
-    "url": `https://healio.de/${pageName.toLowerCase().replace(/\s+/g, '-')}`,
+    "url": `https://www.healio.de/${pageName.toLowerCase().replace(/\s+/g, '-')}`,
     "publisher": {
       "@type": "Organization",
       "name": "Healio"

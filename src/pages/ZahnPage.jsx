@@ -30,11 +30,11 @@ const ZahnPage = () => {
       <SEOHead
         title="Zahnzusatzversicherung – Bis zu 100% Erstattung | Healio"
         description="Bis zu 100 % Erstattung für Zahnersatz, Prophylaxe und Kieferorthopädie. Ohne Wartezeiten. Sichern Sie sich jetzt ab."
-        canonicalUrl="https://healio.de/zahn"
+        canonicalUrl="https://www.healio.de/zahn"
         ogTitle="Zahnzusatzversicherung – Zahnersatz, der nicht Ihr Konto belastet."
         ogDescription="Investieren Sie in Ihr Lächeln. Umfassender Schutz für Zahnersatz, Prophylaxe und Kieferorthopädie."
-        ogImage="https://healio.de/og-image-zahn.png"
-        ogUrl="https://healio.de/zahn"
+        ogImage="https://www.healio.de/og-image-zahn.png"
+        ogUrl="https://www.healio.de/zahn"
         schemaMarkup={schemaMarkup}
       />
       <article>

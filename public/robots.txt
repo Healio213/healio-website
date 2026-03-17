@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://healio.de/sitemap.xml
+Disallow: /confirmation
+
+Sitemap: https://www.healio.de/sitemap.xml

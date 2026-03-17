@@ -16,7 +16,7 @@ const ImpressumPage = () => {
       <SEOHead 
         title="Impressum - Healio" 
         description="Impressum und Kontaktinformationen von Healio." 
-        canonicalUrl="https://healio.de/impressum" 
+        canonicalUrl="https://www.healio.de/impressum" 
         schemaMarkup={schemaMarkup} 
       />
       <main className="bg-gray-50 py-16 sm:py-24 min-h-screen">

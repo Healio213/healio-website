@@ -49,7 +49,7 @@ const LeistungenPage = () => {
       <SEOHead 
         title="Unsere Leistungen | Healio Versicherungslösungen"
         description="Von Zahnzusatz bis Krankenhaus: Healio bietet Ihnen erstklassigen Schutz in allen Lebenslagen. Entdecken Sie jetzt unser Leistungsportfolio."
-        canonicalUrl="https://healio.de/leistungen"
+        canonicalUrl="https://www.healio.de/leistungen"
         schemaMarkup={schemaMarkup}
       />
       

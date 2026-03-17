@@ -19,7 +19,7 @@ const AmbulantPage = () => {
       <SEOHead
         title="Ambulante Zusatzversicherung – Dein 3.000€ Gesundheits-Budget | Healio"
         description="Heilpraktiker, Osteopathie, Massagen, Sehhilfen – alles was die GKV nicht abdeckt. Mit Healio ambulant genießt du Privatpatienten-Leistungen effektiv für 0€."
-        canonicalUrl="https://healio.de/ambulant"
+        canonicalUrl="https://www.healio.de/ambulant"
       />
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />

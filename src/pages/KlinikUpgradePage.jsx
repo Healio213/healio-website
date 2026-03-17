@@ -13,7 +13,7 @@ const KlinikUpgradePage = () => {
       <SEOHead
         title="Klinik Upgrade - Privatpatient im Krankenhaus | Healio"
         description="Sichern Sie sich Einbettzimmer & Chefarztbehandlung im Krankenhaus. Auch mit Vorerkrankungen möglich & durch Bonusprogramme finanzierbar."
-        canonicalUrl="https://healio.de/klinik-upgrade"
+        canonicalUrl="https://www.healio.de/klinik-upgrade"
       />
       <main className="bg-white">
         <KlinikHero />

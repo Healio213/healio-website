@@ -23,11 +23,11 @@ const StationaerPage = () => {
       <SEOHead
         title="Stationäre Zusatzversicherung – Privatpatienten-Status | Healio"
         description="Einzelzimmer. Chefarztbehandlung. Freie Klinikwahl. Sichern Sie sich jetzt die beste Versorgung im Krankenhaus."
-        canonicalUrl="https://healio.de/stationaer"
+        canonicalUrl="https://www.healio.de/stationaer"
         ogTitle="Stationäre Zusatzversicherung – Beste Versorgung im Krankenhaus"
         ogDescription="Einzelzimmer, Chefarzt, freie Klinikwahl. Privatpatienten-Status, ohne privat versichert zu sein."
-        ogImage="https://healio.de/og-image-stationaer.png"
-        ogUrl="https://healio.de/stationaer"
+        ogImage="https://www.healio.de/og-image-stationaer.png"
+        ogUrl="https://www.healio.de/stationaer"
         schemaMarkup={schemaMarkup}
       />
       <article>
