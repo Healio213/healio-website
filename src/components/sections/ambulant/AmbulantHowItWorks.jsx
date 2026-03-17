@@ -77,7 +77,6 @@ const AmbulantHowItWorks = () => {
                   <div className="relative z-10 flex flex-col md:items-center w-full">
                     <step.icon className="w-10 h-10 text-healio-primary mb-6 md:mx-auto" />
                     <h3 className="text-2xl font-bold text-healio-dark mb-3">
-                      {titleParts => step.title}
                       {step.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed font-medium">

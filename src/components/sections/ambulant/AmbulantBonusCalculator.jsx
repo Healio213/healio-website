@@ -96,14 +96,14 @@ const AmbulantBonusCalculator = () => {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="font-bold text-healio-dark truncate leading-tight mb-1">
+                    <div className="font-bold text-healio-dark leading-tight mb-1">
                       {activity.title}
                     </div>
                     <div className="text-sm text-gray-500 leading-snug">
                       {activity.desc}
                     </div>
                   </div>
-                  <div className="font-bold text-healio-primary whitespace-nowrap">
+                  <div className="font-bold text-healio-primary whitespace-nowrap flex-shrink-0">
                     +{activity.amount}€
                   </div>
                 </motion.label>
