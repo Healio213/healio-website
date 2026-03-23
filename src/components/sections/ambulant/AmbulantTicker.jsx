@@ -2,16 +2,16 @@ import React from 'react';
 import { TrendingUp, Users, Star, Heart, ShieldCheck, Zap } from 'lucide-react';
 
 const tickerItems = [
-  { icon: TrendingUp, text: "Ø 2.400 € Erstattung pro Jahr" },
-  { icon: Users, text: "5.000+ zufriedene Kunden" },
-  { icon: Star, text: "4,9 / 5 Sterne Bewertung" },
+  { icon: TrendingUp, text: "Bis zu 2.500 € Gesundheitsbudget" },
+  { icon: ShieldCheck, text: "SDK – seit 1926 am Markt" },
+  { icon: Users, text: "IKK Classic – 3 Mio. Versicherte" },
   { icon: Heart, text: "Heilpraktiker zu 100% abgedeckt" },
   { icon: ShieldCheck, text: "Keine Wartezeit – sofort geschützt" },
   { icon: Zap, text: "In nur 3 Minuten abgeschlossen" },
   { icon: TrendingUp, text: "Effektiv 0 € dank IKK Bonus" },
-  { icon: Users, text: "127 neue Kunden diese Woche" },
+  { icon: Star, text: "Keine Gesundheitsprüfung nötig" },
   { icon: Star, text: "Osteopathie & Massagen inklusive" },
-  { icon: Heart, text: "Sieh im Video, wie es funktioniert ▶" },
+  { icon: Heart, text: "Sieh im Video, wie es funktioniert" },
 ];
 
 const AmbulantTicker = () => {

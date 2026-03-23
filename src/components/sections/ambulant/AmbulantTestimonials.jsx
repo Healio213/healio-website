@@ -72,14 +72,6 @@ const reviewSchema = {
   "@type": "FinancialService",
   "name": "HEALIO GmbH",
   "url": "https://www.healio.de",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "5000",
-    "reviewCount": "347"
-  },
   "review": testimonials.map(t => ({
     "@type": "Review",
     "author": { "@type": "Person", "name": t.name },
@@ -90,9 +82,9 @@ const reviewSchema = {
 };
 
 const stats = [
-  { value: "5.000+", label: "zufriedene Kunden" },
-  { value: "4,9/5", label: "Sterne Bewertung" },
-  { value: "Ø 2.400 €", label: "Erstattung pro Jahr" },
+  { value: "SDK", label: "Seit 1926 am Markt" },
+  { value: "IKK", label: "3 Mio. Versicherte" },
+  { value: "2.500 €", label: "Budget in 2 Jahren" },
   { value: "0 €", label: "effektive Kosten" },
 ];
 

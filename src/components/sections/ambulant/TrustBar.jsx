@@ -8,7 +8,7 @@ const TrustBar = () => {
     { icon: <CheckCircle className="w-5 h-5 text-healio-primary flex-shrink-0" />, text: "IKK Classic Partner" },
     { icon: <Shield className="w-5 h-5 text-healio-primary flex-shrink-0" />, text: "100% digital" },
     { icon: <Clock className="w-5 h-5 text-healio-primary flex-shrink-0" />, text: "Keine Wartezeit" },
-    { icon: <Users className="w-5 h-5 text-healio-primary flex-shrink-0" />, text: "Über 5.000 zufriedene Kunden" }
+    { icon: <Users className="w-5 h-5 text-healio-primary flex-shrink-0" />, text: "Unabhängiger Makler (§34d GewO)" }
   ];
 
   return (
