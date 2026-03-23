@@ -10,7 +10,7 @@ import { ArrowRight, Stethoscope, ShieldPlus, Hotel as Hospital, Dog } from 'luc
 const insuranceTypes = [
   {
     title: "Ambulante Zusatzversicherung",
-    description: "Umfassender ambulanter Schutz für Facharztbehandlungen, Heilpraktiker und Vorsorge. Bis zu 3.000 € Gesundheitsbudget.",
+    description: "Umfassender ambulanter Schutz für Facharztbehandlungen, Heilpraktiker und Vorsorge. Bis zu 2.500 € Gesundheitsbudget.",
     icon: Stethoscope,
     link: "/ambulant",
     color: "bg-blue-50 text-blue-600"

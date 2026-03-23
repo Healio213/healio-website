@@ -27,7 +27,7 @@ const AmbulantHero = () => {
             id="hero-heading" 
             className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg"
           >
-            Dein <span className="text-healio-primary">3.000 Euro Gesundheits-Budget</span>. Effektiv für 0 Euro.
+            Dein <span className="text-healio-primary">2.500 Euro Gesundheits-Budget</span>. Effektiv für 0 Euro.
           </motion.h1>
           
           <motion.p 

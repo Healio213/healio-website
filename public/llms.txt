@@ -1,6 +1,6 @@
 # HEALIO GmbH - Gesundheitsbudget für gesetzlich Versicherte
 
-> HEALIO ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren ermöglicht - effektiv für 0 Euro durch intelligente Kombination von SDK Zusatzversicherung und IKK Classic Bonusprogramm.
+> HEALIO ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 2.500 Euro in zwei Jahren ermöglicht - effektiv für 0 Euro durch intelligente Kombination von SDK Zusatzversicherung und IKK Classic Bonusprogramm.
 
 ## Was ist HEALIO?
 
@@ -33,7 +33,7 @@ HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, 
 | AP5   | 50%       | 200 Euro  | 500 Euro          | 200 Euro | 500 Euro    | 1.400 Euro |
 | AP7   | 70%       | 300 Euro  | 700 Euro          | 300 Euro | 700 Euro    | 2.000 Euro |
 | AP9   | 90%       | 400 Euro  | 900 Euro          | 400 Euro | 900 Euro    | 2.600 Euro |
-| AP1   | 100%      | 500 Euro  | 1.000 Euro        | 500 Euro | 1.000 Euro  | 3.000 Euro |
+| AP1   | 100%      | 500 Euro  | 1.000 Euro        | 500 Euro | 1.000 Euro  | 2.500 Euro |
 
 ## IKK Classic Bonus-Bausteine
 
@@ -88,7 +88,7 @@ Zwischen 15 und 50 Euro, abhängig von Alter und Tarif. Durch den IKK Bonus kön
 ## Seiten
 
 - [Startseite](https://www.healio.de/) - HEALIO Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
-- [Ambulante Zusatzversicherung](https://www.healio.de/ambulant) - 3.000 Euro Gesundheitsbudget, SDK Tarife, IKK Bonus
+- [Ambulante Zusatzversicherung](https://www.healio.de/ambulant) - 2.500 Euro Gesundheitsbudget, SDK Tarife, IKK Bonus
 - [Über uns](https://www.healio.de/about) - Über HEALIO und das Team
 - [Leistungen](https://www.healio.de/leistungen) - Alle Versicherungsleistungen im Überblick
 - [Partner werden](https://www.healio.de/partner) - Netzwerkpartnerschaft für Heilpraktiker und Hebammen
