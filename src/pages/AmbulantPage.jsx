@@ -25,6 +25,19 @@ const AmbulantPage = () => {
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />
         <AmbulantTicker />
+
+        {/* SDK Qualitätssiegel */}
+        <section className="py-8 bg-white border-b border-gray-100">
+          <div className="container mx-auto px-4">
+            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unser Partner: SDK Süddeutsche Krankenversicherung</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-3xl mx-auto">
+              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025 - Gesamtsieger Private Krankenversicherer" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet - PKV Beitragsstabilität" className="h-16 md:h-20 w-auto" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
         <AmbulantVideoSection />
         <AmbulantConceptAccordion />
         
