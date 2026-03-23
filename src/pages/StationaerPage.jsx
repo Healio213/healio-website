@@ -5,8 +5,6 @@ import SEOHead from '@/components/SEOHead';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
-import Testimonials from '@/components/sections/Testimonials';
-import Faq from '@/components/sections/Faq';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle } from 'lucide-react';
@@ -55,11 +53,11 @@ const StationaerPage = () => {
                 className="w-full"
               >
                 <h1 id="stationaer-hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
-                  Im Krankenhaus zählt nur eines: die beste Versorgung.
+                  <span className="text-healio-primary">Privatpatient</span> im Krankenhaus. Ab 11 € im Monat.
                 </h1>
-                
+
                 <p className="mt-4 text-lg sm:text-xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
-                  Einzelzimmer. Chefarztbehandlung. Freie Klinikwahl. Sofortschutz bei Unfällen.
+                  KlinikUpgrade: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. Keine Begrenzung auf die Gebührenordnung. Franke & Bornberg: FFF+ hervorragend.
                 </p>
 
                 <motion.div
@@ -70,7 +68,7 @@ const StationaerPage = () => {
                 >
                   <CheckCircle className="w-8 h-8 sm:w-6 sm:h-6 text-[#25c990] flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <p className="text-white text-base sm:text-lg font-medium drop-shadow-sm text-center sm:text-left">
-                    <strong>Sofortschutz bei Unfällen:</strong> Keine Wartezeiten bei Unfällen, kurze Wartezeiten bei Krankheit. Sichern Sie sich jetzt ab.
+                    <strong>Sofortschutz ohne Wartezeit:</strong> Keine allgemeine Wartezeit. Erstattung auch über dem 3,5-fachen Satz der Gebührenordnung. Bis zu 100 € Ersatz-Krankenhaustagegeld pro Tag.
                   </p>
                 </motion.div>
 
@@ -93,10 +91,18 @@ const StationaerPage = () => {
           </div>
         </section>
 
+        {/* Qualitätssiegel */}
+        <section className="py-10 bg-white border-b border-gray-100">
+          <div className="healio-container px-4">
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
+            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
+              <img src="/siegel/klinik-siegel.png" alt="Qualitätssiegel: Franke & Bornberg FFF+ hervorragend, Morgen & Morgen Ausgezeichnet, LevelNine Exzellent" className="w-full h-auto" loading="lazy" />
+            </motion.div>
+          </div>
+        </section>
+
         <HospitalConcept />
         <HospitalBenefits />
-        <Testimonials headline="Was Kunden berichten." />
-        <Faq />
         <HospitalContactForm />
       </article>
     </>

@@ -25,43 +25,43 @@ const mainBenefits = [
 const featureCards = [
   {
     icon: <Building2 className="w-8 h-8" />,
-    title: "Ein- oder Zweibettzimmer",
-    description: "Privatsphäre und Ruhe für Ihre Genesung."
+    title: "Einbettzimmer",
+    description: "Maximale Privatsphäre und Ruhe. Im Top-Tarif Einbettzimmer, im Plus-Tarif Zweibettzimmer."
   },
   {
     icon: <User className="w-8 h-8" />,
     title: "Chefarztbehandlung",
-    description: "Die erfahrensten Spezialisten. Für Sie."
+    description: "Privatärztliche Behandlung durch Chefarzt, Spezialisten und Belegarzt. Ohne Begrenzung der Gebührenordnung."
   },
   {
     icon: <MapPin className="w-8 h-8" />,
     title: "Freie Krankenhauswahl",
-    description: "Jede Klinik in Deutschland. Auch Privatkliniken."
+    description: "Jede Klinik in Deutschland. Mit GKV-Versorgungsvertrag selbst ausgewählt. Auch Spezialkliniken."
   },
   {
     icon: <Clock className="w-8 h-8" />,
-    title: "Keine Wartezeiten",
-    description: "Sofortschutz bei Unfällen. Kurze Wartezeiten bei Krankheit."
+    title: "Keine Wartezeit",
+    description: "Sofortiger Versicherungsschutz ab Tag 1. Keine allgemeine Wartezeit. Einzige Ausnahme: Entbindungen (8 Monate)."
   },
   {
     icon: <Wallet className="w-8 h-8" />,
-    title: "Ersatzkrankenhaustage",
-    description: "Tagegeld, wenn Sie auf den stationären Aufenthalt verzichten."
+    title: "Bis zu 100 € Tagegeld",
+    description: "Ersatz-Krankenhaustagegeld bei Verzicht auf Einbettzimmer oder privatärztliche Behandlung."
   },
   {
     icon: <Globe className="w-8 h-8" />,
-    title: "Weltweiter Schutz",
-    description: "Ihr Schutz gilt weltweit. Auch im Ausland."
+    title: "Ambulante OPs",
+    description: "Ambulante Durchführung von Operationen im Krankenhaus wird erstattet. Inkl. Aufnahme- und Abschlussuntersuchung."
   },
   {
     icon: <Baby className="w-8 h-8" />,
-    title: "Rooming-in",
-    description: "Bleiben Sie bei Ihrem Kind. Kosten übernommen."
+    title: "Familienzimmer & Rooming-In",
+    description: "Eltern bleiben bei ihren Kindern (unter 14). Nach Entbindung: Familienzimmer für die erste gemeinsame Zeit."
   },
   {
     icon: <Coffee className="w-8 h-8" />,
-    title: "Premium-Komfort",
-    description: "Erweiterte Besuchszeiten. Bessere Verpflegung."
+    title: "Vor- & Nachstationär",
+    description: "Vor- und nachstationäre Behandlungen sind vollständig abgedeckt. Lückenloser Schutz rund um den Aufenthalt."
   }
 ];
 

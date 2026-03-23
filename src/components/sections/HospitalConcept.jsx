@@ -1,90 +1,144 @@
 import React from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { motion } from 'framer-motion';
+import { Check, ArrowRight, TrendingUp, Award } from 'lucide-react';
 
 const HospitalConcept = () => {
   return (
-    <section className="healio-section bg-gray-50" aria-labelledby="hospital-concept-heading">
-      <div className="healio-container">
-        <div className="max-w-3xl mx-auto mb-16">
-          <h2 id="hospital-concept-heading" className="sr-only">Das Healio Stationärversicherungs-Konzept</h2>
-          <div className="bg-white rounded-2xl shadow-xl p-3 transform hover:scale-[1.02] transition-transform duration-300 relative z-10">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1" className="border-b-0">
-                <AccordionTrigger className="text-xl font-bold text-healio-text hover:no-underline text-left px-6 py-4" aria-label="Mehr über die stationäre Zusatzversicherung erfahren">
-                  Stationäre Zusatzversicherung: Ihr Komfort im Krankenhaus
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <div className="prose prose-lg max-w-none text-healio-text-light">
-                    
-                    <h3 className="text-lg font-bold text-healio-text mb-2">Warum eine stationäre Zusatzversicherung?</h3>
-                    <p className="mb-4">
-                      Als gesetzlich Versicherter haben Sie im Krankenhaus Anspruch auf eine medizinisch notwendige Behandlung – aber nicht unbedingt auf Komfort und freie Arztwahl. Sie landen im Mehrbettzimmer und werden vom diensthabenden Arzt behandelt. Mit einer stationären Zusatzversicherung genießen Sie Privatpatientenkomfort: Einzelzimmer, Chefarztbehandlung und freie Krankenhauswahl.
-                    </p>
+    <section className="healio-section bg-gray-50 py-20" aria-labelledby="hospital-concept-heading">
+      <div className="healio-container px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 id="hospital-concept-heading" className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">
+              KlinikUpgrade Top – Privatpatient im Krankenhaus
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Einbettzimmer, Chefarztbehandlung, freie Krankenhauswahl. Keine Begrenzung auf die Gebührenordnung. Erstattung auch über dem 3,5-fachen Satz der GOÄ möglich.
+            </p>
+          </div>
 
-                    <h3 className="text-lg font-bold text-healio-text mb-2">Was ist abgedeckt?</h3>
-                    <p className="mb-2">Unsere stationäre Zusatzversicherung bietet Ihnen:</p>
-                    <ul className="list-disc pl-5 mb-6 space-y-1">
-                      <li><strong>Unterkunft:</strong> Ein- oder Zweibettzimmer statt Mehrbettzimmer</li>
-                      <li><strong>Chefarztbehandlung:</strong> Die erfahrensten Spezialisten kümmern sich um Sie</li>
-                      <li><strong>Freie Krankenhauswahl:</strong> Auch Privatkliniken und Spezialkliniken deutschlandweit</li>
-                      <li><strong>Rooming-in:</strong> Eltern können bei ihren kranken Kindern im Krankenhaus bleiben</li>
-                      <li><strong>Krankenhaustagegeld:</strong> Zusätzliche finanzielle Unterstützung bei stationärem Aufenthalt</li>
-                      <li><strong>Weltweiter Schutz:</strong> Auch im Ausland sind Sie abgesichert</li>
-                    </ul>
+          {/* Haupt-Tarifkarte */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-2xl shadow-xl p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
+          >
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-healio-primary text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
+              <Award className="w-3 h-3" /> Empfehlung
+            </div>
 
-                    <h3 className="text-lg font-bold text-healio-text mb-2">So funktioniert es – einfach erklärt</h3>
-                    <div className="space-y-4 mb-6">
-                      <div>
-                        <h4 className="font-bold text-healio-text">Schritt 1: Versicherung abschließen</h4>
-                        <p className="mt-1">Wählen Sie online Ihren passenden Tarif, beantworten Sie die Gesundheitsfragen und schließen Sie digital ab. Bei Unfällen gibt es keine Wartezeit, bei Krankheit nur kurze Wartezeiten.</p>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-healio-text">Schritt 2: Im Krankenhaus behandeln lassen</h4>
-                        <p className="mt-1">Wenn ein Krankenhausaufenthalt notwendig wird, wählen Sie frei das Krankenhaus und lassen sich von erfahrenen Chefärzten behandeln. Genießen Sie die Privatsphäre Ihres Ein- oder Zweibettzimmers.</p>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-healio-text">Schritt 3: Automatische Abrechnung</h4>
-                        <p className="mt-1">In den meisten Fällen rechnet das Krankenhaus direkt mit Ihrer Versicherung ab – Sie müssen sich um nichts kümmern. Bei Eigenleistungen reichen Sie einfach die Rechnung ein.</p>
-                      </div>
-                    </div>
+            <div className="text-center mb-8 mt-2">
+              <h3 className="text-2xl font-extrabold text-slate-900">KlinikUpgrade Top</h3>
+              <p className="text-4xl font-extrabold text-healio-primary mt-2">Einbettzimmer</p>
+              <p className="text-slate-500 mt-1">ab 11,22 €/Monat (ohne AR) | ab 33,33 € (mit AR)</p>
+            </div>
 
-                    <h3 className="text-lg font-bold text-healio-text mb-2">Beispielrechnung: Der Unterschied</h3>
-                    <p className="mb-4">Vergleich: 5 Tage Krankenhausaufenthalt nach einer Operation</p>
-                    <div className="grid md:grid-cols-2 gap-4 mb-6">
-                      <div className="bg-red-50 p-4 rounded-lg">
-                        <h5 className="font-bold text-healio-text mb-2">Ohne Zusatzversicherung (GKV)</h5>
-                        <ul className="text-sm space-y-1">
-                          <li>• Mehrbettzimmer (3-4 Personen)</li>
-                          <li>• Behandlung durch diensthabenden Arzt</li>
-                          <li>• Begrenzte Besuchszeiten</li>
-                          <li>• Standardverpflegung</li>
-                        </ul>
-                      </div>
-                      <div className="bg-green-50 p-4 rounded-lg">
-                        <h5 className="font-bold text-healio-text mb-2">Mit Zusatzversicherung</h5>
-                        <ul className="text-sm space-y-1">
-                          <li>• Einzelzimmer mit eigenem Bad</li>
-                          <li>• Chefarztbehandlung</li>
-                          <li>• Erweiterte Besuchszeiten</li>
-                          <li>• Premium-Verpflegung</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <p className="mb-6">Monatlicher Beitrag: Ab ca. 15-25 € – für deutlich mehr Komfort und bessere medizinische Versorgung.</p>
+            <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
+              {[
+                ["Komfort-Unterbringung", "Einbettzimmer"],
+                ["Freie Krankenhauswahl", "Ja"],
+                ["Rooming-In (Kinder unter 14)", "Ja"],
+                ["Familienzimmer bei Entbindung", "Ja"],
+                ["Privatärztliche Behandlung", "Chefarzt, Spezialisten, Belegarzt"],
+                ["Gebührenordnung", "Keine Begrenzung (über 3,5-fach GOÄ)"],
+                ["Ambulante OPs im Krankenhaus", "Ja"],
+                ["Vor- und nachstationäre Behandlung", "Ja"],
+                ["Ersatz-Krankenhaustagegeld", "Bis zu 100 €/Tag"],
+                ["Keine allgemeine Wartezeit", "Ja"],
+              ].map(([label, value], i) => (
+                <div key={i} className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-slate-600">{label}</span>
+                  <span className="font-semibold text-slate-900 text-right whitespace-nowrap ml-4">{value}</span>
+                </div>
+              ))}
+            </div>
 
-                    <h3 className="text-lg font-bold text-healio-text mb-2">Warum über Healio?</h3>
-                    <ul className="list-disc pl-5 mb-6 space-y-1">
-                      <li><strong>Transparenter Vergleich:</strong> Finden Sie den besten Tarif für Ihre Bedürfnisse</li>
-                      <li><strong>Schneller Online-Abschluss:</strong> Digital, einfach, ohne Papierkram</li>
-                      <li><strong>Kompetente Beratung:</strong> Wir helfen Ihnen bei allen Fragen</li>
-                      <li><strong>Langfristiger Partner:</strong> Auch nach Abschluss stehen wir Ihnen zur Seite</li>
-                    </ul>
-                    
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            {/* Top vs Plus Vergleich */}
+            <div className="bg-green-50 rounded-xl p-6">
+              <h4 className="font-bold text-slate-900 mb-4 text-center">KlinikUpgrade Top vs. Plus</h4>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm flex-1">
+                  <p className="text-lg font-extrabold text-slate-700">Plus</p>
+                  <p className="text-sm text-slate-500 mt-1">Zweibettzimmer</p>
+                  <p className="text-sm text-slate-500">Tagegeld bis 80 €</p>
+                  <p className="text-healio-primary font-bold mt-2">ab 8,98 €/Monat</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-400 hidden md:block" />
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm flex-1 ring-2 ring-healio-primary">
+                  <p className="text-lg font-extrabold text-healio-primary">Top</p>
+                  <p className="text-sm text-slate-500 mt-1">Einbettzimmer</p>
+                  <p className="text-sm text-slate-500">Tagegeld bis 100 €</p>
+                  <p className="text-healio-primary font-bold mt-2">ab 11,22 €/Monat</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Beispielrechnungen */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl shadow-md p-6 border border-gray-100"
+            >
+              <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-healio-primary" />
+                Beispiel: Blinddarm-OP (4 Tage)
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between"><span className="text-slate-600">GKV-Fallpauschale</span><span>3.993,38 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">Einbettzimmer (4 Tage)</span><span>600,00 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">Privatärztliche Leistungen</span><span>1.233,12 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">Zuzahlung pro Tag</span><span>40,00 €</span></div>
+                <div className="flex justify-between border-t pt-2"><span className="text-slate-600 font-bold">Zu zahlen</span><span className="text-red-500 font-bold">1.873,12 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">Erstattung KlinikUpgrade Top</span><span className="text-healio-primary font-bold">1.833,12 €</span></div>
+                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">Dein Eigenanteil</span><span className="text-healio-primary font-extrabold text-lg">40,00 €</span></div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl shadow-md p-6 border border-gray-100"
+            >
+              <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-healio-primary" />
+                Beispiel: Ambulante Leistenbruch-OP
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between"><span className="text-slate-600">Privatärztliche Leistungen</span><span className="font-bold">1.206,35 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">GKV-Übernahme</span><span>606,02 €</span></div>
+                <div className="flex justify-between border-t pt-2"><span className="text-slate-600 font-bold">Zu zahlen</span><span className="text-red-500 font-bold">600,33 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">Erstattung KlinikUpgrade</span><span className="text-healio-primary font-bold">600,33 €</span></div>
+                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">Dein Eigenanteil</span><span className="text-healio-primary font-extrabold text-lg">0,00 €</span></div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Besonderheiten */}
+          <div className="bg-white rounded-2xl shadow-md p-8 max-w-4xl mx-auto border border-gray-100">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Das macht KlinikUpgrade besonders</h3>
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+              {[
+                "Keine allgemeine Wartezeit – Sofortschutz",
+                "Keine Begrenzung auf Gebührenordnung (über 3,5-fach GOÄ)",
+                "Einbettzimmer im Top-Tarif, Zweibettzimmer im Plus-Tarif",
+                "Ersatz-Krankenhaustagegeld bis 100 €/Tag",
+                "Familienzimmer bei stationärer Entbindung",
+                "Rooming-In: Elternbegleitung bei Kindern unter 14 Jahren",
+                "Ambulante Operationen im Krankenhaus abgedeckt",
+                "Vor- und nachstationäre Behandlung inklusive",
+                "Keine Altersbegrenzung beim Abschluss",
+                "Tarife mit oder ohne Alterungsrückstellungen wählbar",
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
