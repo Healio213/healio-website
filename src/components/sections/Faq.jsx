@@ -5,36 +5,44 @@ import { ChevronDown } from 'lucide-react';
 
 const faqsData = [
   {
-    question: "Was kostet das ZahnUpgrade monatlich?",
-    answer: "Die Beiträge starten ab 5 Euro im Monat (ZahnUpgrade 50) ohne Alterungsrückstellungen. Der beliebteste Tarif ZahnUpgrade 70+ liegt ab 8 Euro, der Testsieger ZahnUpgrade 90+ ab 13,50 Euro. Optional können Beiträge mit Alterungsrückstellungen abgeschlossen werden, um im Alter günstigere Beiträge zu sichern."
+    question: "Was kostet das ZahnUpgrade 90+ monatlich?",
+    answer: "Der ZahnUpgrade 90+ Tarif beginnt ab 13,50 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 29,06 Euro. In Kombination mit dem IKK Classic Bonusprogramm (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst. Bei nur 162 Euro Jahresbeitrag und über 300 Euro Bonus zahlst du unterm Strich 0 Euro."
+  },
+  {
+    question: "Wie komme ich von 90 % auf 100 % Erstattung?",
+    answer: "Durch BonusPlus steigt deine Erstattung automatisch: Sofort ab Tag 1 bekommst du 90 % erstattet. Wenn du ein lückenlos geführtes Bonusheft deiner Krankenkasse vorweisen kannst, steigt die Erstattung nach 5 Jahren auf 95 % und nach 10 Jahren auf volle 100 %. BonusPlus ist ab 21 Jahren verfügbar. Du musst nichts extra beantragen, der Nachweis des Bonushefts reicht."
   },
   {
     question: "Kann ich die Versicherung auch mit fehlenden Zähnen abschließen?",
-    answer: "Ja. Bis zu 3 bereits fehlende Zähne können mitversichert werden. Der Risikozuschlag beträgt lediglich 5 Euro pro fehlendem Zahn und Monat. Das ist ein echtes Alleinstellungsmerkmal, denn viele andere Zahnzusatzversicherungen lehnen Kunden mit fehlenden Zähnen ab."
+    answer: "Ja, das ist ein echtes Alleinstellungsmerkmal. Bis zu 3 bereits fehlende Zähne können mitversichert werden. Der Risikozuschlag beträgt lediglich 5 Euro pro fehlendem Zahn und Monat. Viele andere Zahnzusatzversicherungen lehnen Kunden mit fehlenden Zähnen komplett ab oder schließen diese von der Erstattung aus."
   },
   {
-    question: "Was ist BonusPlus und wie funktioniert es?",
-    answer: "BonusPlus erhöht Ihre Erstattung automatisch, wenn Sie ein lückenlos geführtes Bonusheft vorweisen können. Im Tarif ZahnUpgrade 70+ steigt die Erstattung von 70 % auf 75 % (nach 5 Jahren Bonusheft). Im Tarif ZahnUpgrade 90+ steigt sie von 90 % auf 95 % (5 Jahre) und sogar auf 100 % (10 Jahre). BonusPlus ist ab 21 Jahren verfügbar."
+    question: "Gibt es Wartezeiten?",
+    answer: "Nein. Der volle Versicherungsschutz gilt sofort ab Tag 1. Professionelle Zahnreinigung, Prophylaxe, Fissurenversiegelung und alle anderen Leistungen kannst du direkt in Anspruch nehmen. In den ersten Kalenderjahren gilt eine Summenbegrenzung von 1.000 Euro (1./2. Jahr), die danach entfällt und ab dem 5. Kalenderjahr komplett unbegrenzt ist."
   },
   {
-    question: "Gibt es Wartezeiten beim ZahnUpgrade?",
-    answer: "Nein. Der Versicherungsschutz gilt sofort ab dem ersten Tag. Professionelle Zahnreinigung, Prophylaxe und alle anderen Leistungen können direkt in Anspruch genommen werden. In den ersten Kalenderjahren gelten allerdings Summenbegrenzungen (1.000 Euro im 1./2. Jahr), die danach entfallen."
+    question: "Ich habe bereits eine Zahnzusatzversicherung. Lohnt sich ein Wechsel?",
+    answer: "Sehr wahrscheinlich ja, besonders wenn du aktuell weniger als 90 % Erstattung bekommst. Dein großer Vorteil: Die Vorversicherung wird angerechnet. Wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat, entfällt die Summenbegrenzung im ersten Kalenderjahr komplett. Du startest also sofort mit vollem Leistungsumfang, nicht bei Null."
   },
   {
-    question: "Ich habe bereits eine Zahnzusatzversicherung. Kann ich wechseln?",
-    answer: "Ja. Bei einem Wechsel von einer anderen Zahnzusatzversicherung zum ZahnUpgrade wird Ihre Vorversicherung angerechnet. Die Summenbegrenzung im ersten Kalenderjahr wird erlassen, wenn Ihre bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Die Wechsel-Option ermöglicht es, nach 3, 6 oder 9 Jahren ohne erneute Gesundheitsprüfung in den höheren Tarif zu wechseln."
+    question: "Was genau wird alles erstattet?",
+    answer: "Der ZahnUpgrade 90+ erstattet 90 bis 100 Prozent für: Hochwertigen Zahnersatz wie Implantate, Kronen, Brücken und Inlays. Zahnbehandlungen wie Füllungen, Wurzelbehandlungen, Parodontose und Knirscherschienen. Professionelle Zahnreinigung und Fissurenversiegelung (bis 180 Euro pro Jahr). Bleaching und besondere Schmerzausschaltung wie Lachgas, Hypnose oder Akupunktur. Kieferorthopädie für Kinder (90 %, max. 2.500 Euro). Dazu Unfall-Sofortschutz ohne Höchstsummen."
   },
   {
-    question: "Welche Leistungen sind in allen Tarifen enthalten?",
-    answer: "Alle drei Tarife beinhalten: Hochwertigen Zahnersatz (Implantate, Kronen, Brücken, Inlays), Zahnbehandlungen (Füllungen, Wurzelbehandlungen, Parodontose, Knirscherschienen), professionelle Zahnreinigung und Fissurenversiegelung, Unfall-Sofortschutz ohne Höchstsummen, Inflationsvorsorge und Innovationsvorsorge. Ab dem 70+-Tarif kommen zusätzlich Bleaching und besondere Schmerzausschaltung (Lachgas, Hypnose, Akupunktur) hinzu."
+    question: "Wie funktioniert das zusammen mit dem IKK Classic Bonus?",
+    answer: "Die Kombination ist der Schlüssel: Du schließt den ZahnUpgrade 90+ ab (13,50 Euro pro Monat = 162 Euro im Jahr). Gleichzeitig sammelst du als IKK Classic Mitglied Bonuspunkte für gesundheitsbewusstes Verhalten: Impfungen, Zahnvorsorge, Sportverein, Gesundheits-Check-ups. Der Bonus beträgt über 300 Euro pro Jahr, steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr für Zahnreinigung und Vorsorge. Ergebnis: Dein Zahnschutz kostet dich effektiv 0 Euro."
   },
   {
-    question: "Wie wurde das ZahnUpgrade bewertet?",
-    answer: "Der Tarif ZahnUpgrade 90+ wurde von Stiftung Warentest mit der Note SEHR GUT (0,8) ausgezeichnet und ist Testsieger in der Kategorie 'Gut und günstig' (Finanzen, Ausgabe 07/2025). Zusätzlich hat der Versicherer das Siegel 'Höchste Kundenzufriedenheit' von Focus Money erhalten und wird von Morgen & Morgen als 'Ausgezeichnet' bewertet."
+    question: "Brauche ich eine Gesundheitsprüfung?",
+    answer: "Nein, es gibt keine aufwändige Gesundheitsprüfung. Der Antrag enthält maximal 3 einfache Gesundheitsfragen. Das macht den Abschluss schnell und unkompliziert. Selbst mit bis zu 3 fehlenden Zähnen wirst du angenommen (gegen einen kleinen Risikozuschlag von 5 Euro pro Zahn)."
   },
   {
-    question: "Können auch Kinder versichert werden?",
-    answer: "Ja. Die ZahnUpgrade-Tarife bieten auch für Kinder eine hervorragende Absicherung. Kieferorthopädische Behandlungen werden je nach Tarif mit 50 % bis 90 % erstattet (max. 1.500 bis 2.500 Euro). Die Kinderbeiträge starten bei 6,50 Euro monatlich. Auch bei leichten Fehlstellungen (KIG 1-5) wird geleistet, nicht erst ab KIG 3 wie bei manchen Mitbewerbern."
+    question: "Können auch meine Kinder mitversichert werden?",
+    answer: "Ja. Für Kinder bietet der ZahnUpgrade 90+ eine besonders starke Absicherung: Kieferorthopädische Behandlungen werden zu 90 % erstattet, maximal 2.500 Euro für die gesamte Vertragsdauer. Auch bei leichten Fehlstellungen (KIG 1-5) wird geleistet, nicht erst ab KIG 3 wie bei vielen Mitbewerbern. Der Kinderbeitrag liegt bei 21,50 Euro im Monat. Behandlungsbeginn muss vor dem 18. Lebensjahr sein."
+  },
+  {
+    question: "Wie wurde der ZahnUpgrade 90+ von unabhängigen Testern bewertet?",
+    answer: "Der ZahnUpgrade 90+ wurde von Stiftung Warentest mit der Note SEHR GUT (0,8) ausgezeichnet und ist Testsieger in der Kategorie 'Gut und günstig' (Finanzen, Ausgabe 07/2025). Darüber hinaus hat der Versicherer das Siegel 'Höchste Kundenzufriedenheit' von Focus Money und die Bestnote 'Ausgezeichnet' von Morgen und Morgen erhalten."
   },
 ];
 
