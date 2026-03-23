@@ -132,7 +132,7 @@ const StationaerPage = () => {
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
             <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
+            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-xl mx-auto px-4">
               <img src="/siegel/klinik-siegel.png" alt="Qualitätssiegel: Franke & Bornberg FFF+ hervorragend, Morgen & Morgen Ausgezeichnet, LevelNine Exzellent" className="w-full h-auto" loading="lazy" />
             </motion.div>
           </div>

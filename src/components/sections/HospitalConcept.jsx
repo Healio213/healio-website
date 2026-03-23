@@ -12,7 +12,7 @@ const HospitalConcept = () => {
               KlinikUpgrade Top – Privatpatient im Krankenhaus
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Einbettzimmer, Chefarztbehandlung, freie Krankenhauswahl. Keine Begrenzung auf die Gebührenordnung. Erstattung auch über dem 3,5-fachen Satz der GOÄ möglich.
+              Einbettzimmer, Chefarztbehandlung, freie Krankenhauswahl. Keine Begrenzung auf die Gebührenordnung für Ärzte (GOÄ).
             </p>
           </div>
 
@@ -40,15 +40,15 @@ const HospitalConcept = () => {
                 ["Rooming-In (Kinder unter 14)", "Ja"],
                 ["Familienzimmer bei Entbindung", "Ja"],
                 ["Privatärztliche Behandlung", "Chefarzt, Spezialisten, Belegarzt"],
-                ["Gebührenordnung", "Keine Begrenzung (über 3,5-fach GOÄ)"],
+                ["Gebührenordnung", "Keine Begrenzung"],
                 ["Ambulante OPs im Krankenhaus", "Ja"],
                 ["Vor- und nachstationäre Behandlung", "Ja"],
                 ["Ersatz-Krankenhaustagegeld", "Bis zu 100 €/Tag"],
                 ["Keine allgemeine Wartezeit", "Ja"],
               ].map(([label, value], i) => (
-                <div key={i} className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-slate-600">{label}</span>
-                  <span className="font-semibold text-slate-900 text-right whitespace-nowrap ml-4">{value}</span>
+                <div key={i} className="flex justify-between items-start py-2 border-b border-gray-50 gap-4">
+                  <span className="text-slate-600 flex-shrink-0">{label}</span>
+                  <span className="font-semibold text-slate-900 text-right">{value}</span>
                 </div>
               ))}
             </div>
