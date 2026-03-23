@@ -6,43 +6,43 @@ import { Clock, Stethoscope, FileText, ShieldCheck, Sparkles, Shield, Smile, Sta
 const dentalBenefitsData = [
   {
     icon: <Clock className="w-8 h-8" />,
-    title: "Sofortschutz",
-    description: "Kein Warten. Versicherungsschutz ab Tag 1."
-  },
-  {
-    icon: <Stethoscope className="w-8 h-8" />,
-    title: "Freie Zahnarztwahl",
-    description: "Jeder Zahnarzt. Weltweit. Ohne Einschränkung."
-  },
-  {
-    icon: <FileText className="w-8 h-8" />,
-    title: "Schnelle Erstattung",
-    description: "Rechnung einreichen. Erstattung in wenigen Tagen."
-  },
-  {
-    icon: <ShieldCheck className="w-8 h-8" />,
-    title: "Lebenslanger Schutz",
-    description: "Einmal abgeschlossen. Dauerhaft geschützt."
-  },
-  {
-    icon: <Sparkles className="w-8 h-8" />,
-    title: "Professionelle Zahnreinigung",
-    description: "100 % Erstattung. Bis zu 2x pro Jahr."
+    title: "Keine Wartezeiten",
+    description: "Sofortschutz ab Tag 1. Professionelle Zahnreinigung und Prophylaxe sofort nutzbar."
   },
   {
     icon: <Shield className="w-8 h-8" />,
-    title: "Zahnersatz Premium",
-    description: "Bis zu 100 % Erstattung für Implantate, Kronen und Brücken."
+    title: "Bis zu 100 % Zahnersatz",
+    description: "Kronen, Brücken, Implantate und Inlays. Mit BonusPlus steigt die Erstattung auf bis zu 100 %."
+  },
+  {
+    icon: <Sparkles className="w-8 h-8" />,
+    title: "Prophylaxe & Zahnreinigung",
+    description: "Professionelle Zahnreinigung, Fissurenversiegelung und Prophylaxe in allen Tarifen inklusive."
   },
   {
     icon: <Smile className="w-8 h-8" />,
-    title: "Ästhetische Zahnmedizin",
-    description: "Bleaching, Veneers, ästhetische Korrektionen — mitversichert."
+    title: "Bleaching & Ästhetik",
+    description: "Ab dem 70+-Tarif: Bleaching, Schmerzausschaltung (Lachgas, Hypnose, Akupunktur) mitversichert."
   },
   {
     icon: <Star className="w-8 h-8" />,
     title: "Kieferorthopädie",
-    description: "Erstattung für KFO-Behandlungen. Kinder und Erwachsene."
+    description: "50-90 % Erstattung für Kinder und Jugendliche. Bei Unfall auch für Erwachsene."
+  },
+  {
+    icon: <ShieldCheck className="w-8 h-8" />,
+    title: "Fehlende Zähne versicherbar",
+    description: "Bis zu 3 bereits fehlende Zähne mitversicherbar. Nur 5 € Risikozuschlag pro fehlendem Zahn."
+  },
+  {
+    icon: <Stethoscope className="w-8 h-8" />,
+    title: "Unfall-Sofortschutz",
+    description: "Keine Höchstsummen und keine Altersbegrenzung bei Zahnschäden durch Unfälle."
+  },
+  {
+    icon: <FileText className="w-8 h-8" />,
+    title: "Nur 3 Gesundheitsfragen",
+    description: "Einfacher Antrag. Maximal 3 Gesundheitsfragen. Stabil kalkuliert und leistungsfähig."
   }
 ];
 

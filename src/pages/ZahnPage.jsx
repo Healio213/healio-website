@@ -62,11 +62,11 @@ const ZahnPage = () => {
                 className="w-full"
               >
                 <h1 id="zahn-hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
-                  Zahnersatz, der nicht Ihr Konto belastet.
+                  Zahnersatz bis zu <span className="text-healio-primary">100 % erstattet</span>. Ab 5 € im Monat.
                 </h1>
-                
+
                 <p className="mt-4 text-lg sm:text-xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
-                  Bis zu 100 % Erstattung für Zahnersatz, Prophylaxe und Kieferorthopädie. Ohne Wartezeiten.
+                  ZahnUpgrade: Stiftung Warentest SEHR GUT (0,8). Keine Wartezeiten. Bis zu 3 fehlende Zähne mitversicherbar. Vorversicherung wird angerechnet.
                 </p>
 
                 <motion.div
@@ -77,7 +77,7 @@ const ZahnPage = () => {
                 >
                   <CheckCircle className="w-8 h-8 sm:w-6 sm:h-6 text-[#25c990] flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <p className="text-white text-base sm:text-lg font-medium drop-shadow-sm text-center sm:text-left">
-                    <strong>Sofortschutz ohne Wartezeiten:</strong> Sie profitieren ab Tag 1 von professioneller Zahnreinigung und weiteren Leistungen. Keine Wartezeiten bei Zahnersatz.
+                    <strong>Sofortschutz ab Tag 1:</strong> Professionelle Zahnreinigung, Prophylaxe und voller Versicherungsschutz ohne Wartezeiten. Mit BonusPlus steigt die Erstattung auf bis zu 100 %.
                   </p>
                 </motion.div>
 
