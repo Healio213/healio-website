@@ -1,87 +1,76 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, X, Award, TrendingUp } from 'lucide-react';
-
-const tarife = [
-  {
-    name: "ZahnUpgrade 50",
-    highlight: false,
-    erstattung: "50 %",
-    zahnersatz: "50 %",
-    zahnbehandlung: "50 %",
-    extra: "50 %, bis 100 €/Jahr",
-    bleaching: false,
-    bonusPlus: false,
-    wechselOption: false,
-    maxErstattung: "1.000 € / 2.500 € / unbegrenzt",
-    kfo: "50 % (Kinder)",
-    beitragAb: "ab 5 €",
-    kinderBeitrag: "6,50 €",
-  },
-  {
-    name: "ZahnUpgrade 70+",
-    highlight: true,
-    erstattung: "70 %",
-    zahnersatz: "70 % (mit BonusPlus 75 %)",
-    zahnbehandlung: "70 % (mit BonusPlus 75 %)",
-    extra: "70 %, bis 140 €/Jahr",
-    bleaching: true,
-    bonusPlus: true,
-    wechselOption: true,
-    maxErstattung: "1.000 € / 4.000 € / unbegrenzt",
-    kfo: "70 % (Kinder), max. 2.000 €",
-    beitragAb: "ab 8 €",
-    kinderBeitrag: "14,50 €",
-  },
-  {
-    name: "ZahnUpgrade 90+",
-    highlight: false,
-    erstattung: "90 %",
-    zahnersatz: "90 % (mit BonusPlus bis 100 %)",
-    zahnbehandlung: "90 % (mit BonusPlus bis 100 %)",
-    extra: "90 %, bis 180 €/Jahr",
-    bleaching: true,
-    bonusPlus: true,
-    wechselOption: false,
-    maxErstattung: "1.000 € / 4.000 € / unbegrenzt",
-    kfo: "90 % (Kinder), max. 2.500 €",
-    beitragAb: "ab 13,50 €",
-    kinderBeitrag: "21,50 €",
-    testsieger: true,
-  },
-];
+import { Check, Award, TrendingUp, ArrowRight } from 'lucide-react';
 
 const DentalConcept = () => {
   return (
     <section className="healio-section bg-gray-50 py-20" aria-labelledby="dental-concept-heading">
       <div className="healio-container px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 id="dental-concept-heading" className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">
-              ZahnUpgrade – Drei Tarife, ein Ziel
+              ZahnUpgrade 90+ – Bis zu 100 % Erstattung
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Drei leistungsstarke Tarife für deinen perfekten Zahnschutz. Stiftung Warentest: SEHR GUT (0,8). Maximal 3 Gesundheitsfragen, bis zu 3 fehlende Zähne mitversicherbar.
+              Der Testsieger von Stiftung Warentest: SEHR GUT (0,8). Mit BonusPlus steigt die Erstattung automatisch von 90 % auf 100 %. In Kombination mit dem IKK Classic Bonus effektiv für 0 €.
             </p>
           </div>
 
-          {/* Vorversicherung Highlight */}
+          {/* Haupt-Tarifkarte ZahnUpgrade 90+ */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-healio-primary/10 to-green-50 border-2 border-healio-primary/30 rounded-2xl p-6 md:p-8 mb-12 max-w-4xl mx-auto"
+            className="bg-white rounded-2xl shadow-xl p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
           >
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-16 h-16 bg-healio-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <TrendingUp className="w-8 h-8 text-healio-primary" />
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
+              <Award className="w-3 h-3" /> Stiftung Warentest Testsieger
+            </div>
+
+            <div className="text-center mb-8 mt-2">
+              <h3 className="text-2xl font-extrabold text-slate-900">ZahnUpgrade 90+</h3>
+              <p className="text-4xl font-extrabold text-healio-primary mt-2">90 – 100 %</p>
+              <p className="text-slate-500 mt-1">Erstattung, ab 13,50 €/Monat</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
+              {[
+                ["Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "90 %"],
+                ["Zahnbehandlungen (Füllungen, Wurzel, Parodontose)", "90 %"],
+                ["Prophylaxe, PZR & Fissurenversiegelung", "90 %, bis 180 €/Jahr"],
+                ["Bleaching & Schmerzausschaltung", "90 %, bis 180 €/Jahr"],
+                ["Kieferorthopädie (Kinder)", "90 %, max. 2.500 €"],
+                ["Unfall-Sofortschutz", "Ohne Höchstsumme"],
+                ["Max. Erstattung", "1.000 € / 4.000 € / unbegrenzt"],
+                ["Kinder-Beitrag", "ab 21,50 €/Monat"],
+              ].map(([label, value], i) => (
+                <div key={i} className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-slate-600">{label}</span>
+                  <span className="font-semibold text-slate-900 text-right whitespace-nowrap ml-4">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* BonusPlus Staffel */}
+            <div className="bg-green-50 rounded-xl p-6 mb-6">
+              <h4 className="font-bold text-slate-900 mb-4 text-center">BonusPlus – So steigt deine Erstattung auf 100 %</h4>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1">
+                  <p className="text-2xl font-extrabold text-healio-primary">90 %</p>
+                  <p className="text-xs text-slate-500 mt-1">Sofort ab Tag 1</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-400 hidden md:block" />
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1">
+                  <p className="text-2xl font-extrabold text-healio-primary">95 %</p>
+                  <p className="text-xs text-slate-500 mt-1">Nach 5 Jahren Bonusheft</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-slate-400 hidden md:block" />
+                <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1 ring-2 ring-healio-primary">
+                  <p className="text-2xl font-extrabold text-healio-primary">100 %</p>
+                  <p className="text-xs text-slate-500 mt-1">Nach 10 Jahren Bonusheft</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Du hast bereits eine Zahnzusatzversicherung? Perfekt!</h3>
-                <p className="text-slate-700">
-                  <strong>Deine Vorversicherung wird angerechnet.</strong> Die Summenbegrenzung im ersten Kalenderjahr entfällt komplett, wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Du startest also nicht bei Null, sondern profitierst sofort vom vollen Leistungsumfang. Ein Wechsel lohnt sich besonders, wenn du bisher weniger als 90 % Erstattung bekommst.
-                </p>
-              </div>
+              <p className="text-xs text-slate-500 mt-4 text-center">BonusPlus ist ab 21 Jahren verfügbar. Lückenlos geführtes Bonusheft der gesetzlichen Krankenkasse erforderlich.</p>
             </div>
           </motion.div>
 
@@ -90,7 +79,7 @@ const DentalConcept = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-300/50 rounded-2xl p-6 md:p-8 mb-12 max-w-4xl mx-auto"
+            className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-300/50 rounded-2xl p-6 md:p-8 mb-8 max-w-3xl mx-auto"
           >
             <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl font-extrabold text-yellow-600">
@@ -99,75 +88,31 @@ const DentalConcept = () => {
               <div>
                 <h3 className="text-xl font-extrabold text-slate-900 mb-2">Effektiv 0 € mit IKK Classic Bonus</h3>
                 <p className="text-slate-700">
-                  In Kombination mit dem IKK Classic Bonusprogramm finanziert sich das ZahnUpgrade komplett selbst. Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei monatlichen Beiträgen ab 5 € gleicht der Bonus die Kosten vollständig aus. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.
+                  Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 13,50 € (= 162 €/Jahr) deckt der Bonus die Kosten mehr als vollständig. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Tarif-Karten */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {tarife.map((tarif, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`bg-white rounded-2xl shadow-lg p-6 relative ${tarif.highlight ? 'ring-2 ring-healio-primary' : 'border border-gray-100'}`}
-              >
-                {tarif.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-healio-primary text-white text-xs font-bold px-4 py-1 rounded-full">
-                    Beliebtester Tarif
-                  </div>
-                )}
-                {tarif.testsieger && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-                    <Award className="w-3 h-3" /> Testsieger
-                  </div>
-                )}
-
-                <h3 className="text-xl font-extrabold text-slate-900 mt-2 mb-1">{tarif.name}</h3>
-                <p className="text-3xl font-extrabold text-healio-primary mb-1">{tarif.erstattung}</p>
-                <p className="text-sm text-slate-500 mb-6">Erstattung, {tarif.beitragAb}/Monat</p>
-
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">Zahnersatz</span>
-                    <span className="font-semibold text-slate-900 text-right">{tarif.zahnersatz}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">Zahnbehandlung</span>
-                    <span className="font-semibold text-slate-900 text-right">{tarif.zahnbehandlung}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">Prophylaxe & PZR</span>
-                    <span className="font-semibold text-slate-900 text-right">{tarif.extra}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">Bleaching</span>
-                    {tarif.bleaching ? <Check className="w-5 h-5 text-healio-primary" /> : <X className="w-5 h-5 text-gray-300" />}
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">BonusPlus</span>
-                    {tarif.bonusPlus ? <Check className="w-5 h-5 text-healio-primary" /> : <X className="w-5 h-5 text-gray-300" />}
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">KFO Kinder</span>
-                    <span className="font-semibold text-slate-900 text-right">{tarif.kfo}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-50">
-                    <span className="text-slate-600">Kinder-Beitrag</span>
-                    <span className="font-semibold text-slate-900">{tarif.kinderBeitrag}/Monat</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-slate-600">Max. Erstattung</span>
-                    <span className="font-semibold text-slate-900 text-right text-xs">{tarif.maxErstattung}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {/* Vorversicherung Highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-healio-primary/10 to-green-50 border-2 border-healio-primary/30 rounded-2xl p-6 md:p-8 mb-12 max-w-3xl mx-auto"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="w-16 h-16 bg-healio-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <TrendingUp className="w-8 h-8 text-healio-primary" />
+              </div>
+              <div>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Vorversicherung wird angerechnet</h3>
+                <p className="text-slate-700">
+                  <strong>Die Summenbegrenzung im ersten Jahr entfällt komplett</strong>, wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Du startest sofort mit vollem Leistungsumfang. Ein Wechsel lohnt sich besonders, wenn du bisher weniger als 90 % Erstattung bekommst.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Beispielrechnungen */}
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
