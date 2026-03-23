@@ -62,11 +62,11 @@ const ZahnPage = () => {
                 className="w-full"
               >
                 <h1 id="zahn-hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
-                  Zahnersatz bis zu <span className="text-healio-primary">100 % erstattet</span>. Ab 5 € im Monat.
+                  Zahnersatz bis zu <span className="text-healio-primary">100 % erstattet</span>. Effektiv für 0 €.
                 </h1>
 
                 <p className="mt-4 text-lg sm:text-xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
-                  ZahnUpgrade: Stiftung Warentest SEHR GUT (0,8). Keine Wartezeiten. Bis zu 3 fehlende Zähne mitversicherbar. Vorversicherung wird angerechnet.
+                  ZahnUpgrade ab 5 € im Monat. In Kombination mit dem IKK Classic Bonus finanziert sich die Zahnzusatzversicherung komplett selbst. Stiftung Warentest: SEHR GUT (0,8).
                 </p>
 
                 <motion.div
@@ -77,7 +77,7 @@ const ZahnPage = () => {
                 >
                   <CheckCircle className="w-8 h-8 sm:w-6 sm:h-6 text-[#25c990] flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <p className="text-white text-base sm:text-lg font-medium drop-shadow-sm text-center sm:text-left">
-                    <strong>Sofortschutz ab Tag 1:</strong> Professionelle Zahnreinigung, Prophylaxe und voller Versicherungsschutz ohne Wartezeiten. Mit BonusPlus steigt die Erstattung auf bis zu 100 %.
+                    <strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK Classic Bonus (über 300 € pro Jahr, steuerfrei) kann die Beiträge vollständig ausgleichen. Keine Wartezeiten, bis zu 3 fehlende Zähne mitversicherbar.
                   </p>
                 </motion.div>
 

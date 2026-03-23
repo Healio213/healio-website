@@ -85,6 +85,26 @@ const DentalConcept = () => {
             </div>
           </motion.div>
 
+          {/* IKK Kombination Highlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-300/50 rounded-2xl p-6 md:p-8 mb-12 max-w-4xl mx-auto"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl font-extrabold text-yellow-600">
+                0 €
+              </div>
+              <div>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Effektiv 0 € mit IKK Classic Bonus</h3>
+                <p className="text-slate-700">
+                  In Kombination mit dem IKK Classic Bonusprogramm finanziert sich das ZahnUpgrade komplett selbst. Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei monatlichen Beiträgen ab 5 € gleicht der Bonus die Kosten vollständig aus. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Tarif-Karten */}
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             {tarife.map((tarif, i) => (
