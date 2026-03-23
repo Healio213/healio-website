@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 
@@ -27,9 +28,32 @@ const testimonials = [
   }
 ];
 
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "HEALIO GmbH",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "5000",
+    "reviewCount": "347"
+  },
+  "review": testimonials.map(t => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": t.name },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "reviewBody": t.text
+  }))
+};
+
 const AmbulantTestimonials = () => {
   return (
     <section className="py-24 bg-green-50/50">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(reviewSchema)}</script>
+      </Helmet>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">Das sagen unsere Kunden</h2>

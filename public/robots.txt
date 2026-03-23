@@ -2,4 +2,32 @@ User-agent: *
 Allow: /
 Disallow: /confirmation
 
+# LLM Crawler explizit erlauben
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://www.healio.de/sitemap.xml
+
+# LLM-optimierte Zusammenfassung
+# https://www.healio.de/llms.txt
