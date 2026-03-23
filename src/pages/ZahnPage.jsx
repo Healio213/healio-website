@@ -10,7 +10,7 @@ import Faq from '@/components/sections/Faq';
 import DentalContactForm from '@/components/sections/DentalContactForm';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
-import { Calculator, ArrowDown, CheckCircle, Award, Shield, Star } from 'lucide-react';
+import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
 
 const ZahnPage = () => {
   const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant&agentId1=901235&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJOb2xpIiwiY29tcGfueSI6Ik5vbGkgR21iSCIsInN0cmVldCI6IkFybmR0c3RyLiA2IiwiemlwY29kZSI6IjIyMDg1IiwiY2l0eSI6IkhhbWJ1cmciLCJtb2JpbGUiOiIwMTc2MjQxNTMxODgiLCJlbWFpbCI6ImZyYW5rQG5vbGktdmVyc2ljaGVydW5nLmRlIn0=&remarks=IkJlaSBGcmFnZW4gc2luZCB3aXIgZvxyIFNpZSBkYS4i&defaultContact=true&employeeInsurance=NOT_BKV";
@@ -101,43 +101,22 @@ const ZahnPage = () => {
         </section>
 
         {/* Qualitätssiegel */}
-        <section className="py-12 bg-white border-b border-gray-100">
+        <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
-            <p className="text-center text-sm text-slate-400 mb-8 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50">
-                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-3">
-                  <Award className="w-6 h-6 text-red-600" />
-                </div>
-                <p className="font-extrabold text-slate-900 text-sm">Stiftung Warentest</p>
-                <p className="text-healio-primary font-bold text-lg">SEHR GUT</p>
-                <p className="text-xs text-slate-400">Note 0,8 | 07/2025</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-3">
-                  <Star className="w-6 h-6 text-yellow-600" />
-                </div>
-                <p className="font-extrabold text-slate-900 text-sm">Focus Money</p>
-                <p className="text-healio-primary font-bold text-lg leading-tight">Höchste Kundenzufriedenheit</p>
-                <p className="text-xs text-slate-400">Ausgabe 9/2025</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                  <Shield className="w-6 h-6 text-blue-600" />
-                </div>
-                <p className="font-extrabold text-slate-900 text-sm">Morgen & Morgen</p>
-                <p className="text-healio-primary font-bold text-lg">Ausgezeichnet</p>
-                <p className="text-xs text-slate-400">5 Sterne Rating</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
-                  <Award className="w-6 h-6 text-green-600" />
-                </div>
-                <p className="font-extrabold text-slate-900 text-sm">Focus Money</p>
-                <p className="text-healio-primary font-bold text-lg leading-tight">Höchste Weiterempfehlung</p>
-                <p className="text-xs text-slate-400">Ausgabe 24/2025</p>
-              </motion.div>
-            </div>
+            <p className="text-center text-sm text-slate-400 mb-6 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto"
+            >
+              <img
+                src="/siegel/alle-siegel.png"
+                alt="Qualitätssiegel: Franke & Bornberg FFF+, Focus Money Höchste Kundenzufriedenheit, Focus Money Höchste Weiterempfehlung, Stiftung Warentest SEHR GUT (0,8)"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </motion.div>
           </div>
         </section>
 
