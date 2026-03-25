@@ -47,6 +47,9 @@ const ImpressumPage = () => {
                   <p className="pt-2">Handelsregister: HRB 196 905</p>
                   <p>Registergericht: Amtsgericht Hamburg</p>
                   <p>Steuer-Nr. 43/729/01735</p>
+                  <p className="pt-2">Registrierungsnummer nach § 34d Abs. 1 GewO: D-C1LE-OVLQH-98</p>
+                  <p>Registrierungsstelle: IHK Hamburg, Adolphsplatz 1, 20457 Hamburg</p>
+                  <p>Vermittlerregister: <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">www.vermittlerregister.info</a></p>
                 </div>
               </section>
 
