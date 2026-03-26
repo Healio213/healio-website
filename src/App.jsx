@@ -26,6 +26,8 @@ const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
 const ConfirmationPage = React.lazy(() => import('@/pages/ConfirmationPage'));
 const TerminvereinbarungPage = React.lazy(() => import('@/pages/TerminvereinbarungPage'));
+const BlogPage = React.lazy(() => import('@/pages/BlogPage'));
+const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -83,6 +85,8 @@ function App() {
               <Route path="impressum" element={<ImpressumPage />} />
               <Route path="agb" element={<AgbPage />} />
               <Route path="datenschutz" element={<DatenschutzPage />} />
+              <Route path="blog" element={<BlogPage />} />
+              <Route path="blog/:slug" element={<BlogArticlePage />} />
             </Route>
 
             <Route path="/potenzialanalyse" element={<PotenzialanalysePage />} />

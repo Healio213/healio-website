@@ -28,6 +28,7 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.healio.de/sitemap.xml
+Sitemap: https://app.healio.de/api/v1/content/sitemap
 
 # LLM-optimierte Zusammenfassung
 # https://www.healio.de/llms.txt
