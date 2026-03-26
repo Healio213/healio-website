@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stethoscope, Smile, Building2, Heart } from 'lucide-react';
 import ServiceCard from '@/components/ServiceCard';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const ServicesSection = () => {
   const services = [
@@ -47,7 +48,7 @@ const ServicesSection = () => {
             Unsere Leistungen
           </span>
           <h2 className="text-3xl lg:text-5xl font-bold text-healio-slate mb-6">
-            Deine Gesundheit ist <span className="text-healio-primary">keine Glückssache</span>
+            Deine Gesundheit ist <TextHighlight>keine Glückssache</TextHighlight>
           </h2>
           <p className="text-lg text-healio-text-light leading-relaxed">
             Sichere Dir den Status eines Privatpatienten. Schütze Dein Vermögen vor hohen Zuzahlungen und garantiere Dir und Deiner Familie den Zugang zu den besten Spezialitäten.

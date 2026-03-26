@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gift, ArrowRightLeft } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const ACTIVITIES = [
   { id: 'impfung', title: 'Schutzimpfung', desc: '(bis zu 8x) - 30€ je Impfung', amount: 240 },
@@ -53,7 +54,7 @@ const AmbulantBonusCalculator = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-extrabold text-healio-dark mb-4"
           >
-            Dein persönlicher <span className="text-healio-primary">Bonus-Rechner</span>
+            Dein persönlicher <TextHighlight>Bonus-Rechner</TextHighlight>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

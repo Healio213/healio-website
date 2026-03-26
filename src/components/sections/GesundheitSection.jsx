@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Stethoscope, TrendingDown, PiggyBank, HeartHandshake } from 'lucide-react';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const GesundheitSection = () => {
   const hrBenefits = [
@@ -45,7 +46,7 @@ const GesundheitSection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
-              Was eine bKV wirklich kostet — und was sie <span className="text-[#25c990]">bringt.</span>
+              Was eine bKV wirklich kostet — und was sie <TextHighlight>bringt.</TextHighlight>
             </h2>
             <p className="text-lg text-slate-600">
               Zahlen lügen nicht. Eine bKV ist kein Wohlfühl-Benefit. Sie ist eine Investition mit messbarem Return.

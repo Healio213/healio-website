@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, TrendingDown, DollarSign, Gift } from 'lucide-react';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const BavProviderComparison = () => {
   const benefits = [
@@ -48,7 +49,7 @@ const BavProviderComparison = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-              Betriebliche Altersvorsorge — Was die meisten Unternehmen <span className="text-[#25c990]">falsch machen</span>
+              Betriebliche Altersvorsorge — Was die meisten Unternehmen <TextHighlight>falsch machen</TextHighlight>
             </h2>
             
             <div className="w-24 h-1.5 bg-[#25c990] rounded-full mx-auto my-8 shadow-sm"></div>

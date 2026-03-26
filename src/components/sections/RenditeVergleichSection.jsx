@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Info, TrendingUp, Users, ArrowDown, ArrowUp, CheckCircle2, XCircle } from 'lucide-react';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const RenditeVergleichSection = () => {
   // Fixed values instead of state
@@ -88,7 +89,7 @@ const RenditeVergleichSection = () => {
         >
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4">
             Rendite Vergleich <br className="hidden md:block"/>
-            <span className="text-[#25c990]">Healio vs. Klassische bAV</span>
+            <TextHighlight>Healio vs. Klassische bAV</TextHighlight>
           </h2>
           <p className="text-base text-slate-600 leading-relaxed max-w-3xl mx-auto">
             Berechnung bei einer monatlichen Sparrate von {pmt} € über eine Laufzeit von {jahre} Jahren.

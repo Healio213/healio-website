@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 import { TrendingUp, TrendingDown, Info } from 'lucide-react';
+import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const CompoundInterestCalculator = () => {
   const [sparrate, setSparrate] = useState(338);
@@ -43,7 +44,7 @@ const CompoundInterestCalculator = () => {
             className="space-y-6"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-              Der Zinseszins wartet auf <span className="text-[#25c990]">niemanden.</span>
+              Der Zinseszins wartet auf <TextHighlight>niemanden.</TextHighlight>
             </h2>
             <p className="text-xl text-slate-600">
               Berechnen Sie hier, wie sich kleine Unterschiede im Zinssatz über die Jahre auf Ihr Vermögen auswirken.
