@@ -189,24 +189,25 @@ export const ParallaxSection = ({ children, bgImage, speed = 0.3, className = ''
 };
 
 // Text-Highlight Animation: Glow + Farbwechsel (grau → grün mit Leuchten)
-export const TextHighlight = ({ children, color = '#25C990', delay = 0.5 }) => (
+export const TextHighlight = ({ children, color = '#25C990', delay = 0 }) => (
   <motion.span
-    className="relative inline-block font-semibold"
-    initial={{ color: '#9CA3AF', textShadow: '0 0 0px transparent' }}
+    className="relative inline-block font-bold"
+    initial={{ color: '#6B7280', textShadow: '0 0 0px transparent', opacity: 0.5 }}
     whileInView={{
       color: color,
+      opacity: 1,
       textShadow: [
         '0 0 0px transparent',
-        `0 0 20px ${color}80`,
-        `0 0 8px ${color}40`,
+        `0 0 30px ${color}`,
+        `0 0 10px ${color}60`,
       ],
     }}
-    viewport={{ once: true, margin: '-60px' }}
+    viewport={{ once: true, margin: '-40px' }}
     transition={{
-      duration: 1.2,
+      duration: 0.8,
       delay,
-      ease: [0.25, 0.46, 0.45, 0.94],
-      textShadow: { duration: 1.5, delay, times: [0, 0.5, 1] },
+      ease: 'easeOut',
+      textShadow: { duration: 1.2, delay, times: [0, 0.4, 1] },
     }}
   >
     {children}
