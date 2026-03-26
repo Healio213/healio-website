@@ -5,56 +5,34 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image - Updated to professional business handshake */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: 'url("https://images.unsplash.com/photo-1686771416282-3888ddaf249b")' 
-        }}
-      />
-      
-      {/* Dark Overlay with Gradient */}
-      <div 
-        className="absolute inset-0 z-10"
-        style={{
-          background: 'linear-gradient(135deg, rgba(26,35,50,0.92) 0%, rgba(26,35,50,0.85) 50%, rgba(26,35,50,0.92) 100%)'
-        }}
-      />
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* Hero Bild – Fullscreen */}
+      <div className="relative flex-1 flex items-center justify-center">
+        <motion.img
+          src="/hero-b2b.png"
+          alt="HEALIO – Gesundheit fördern. Mitarbeiter binden. Steuern sparen. Unabhängige Experten für betriebliche Vorsorge und Zusatzversicherungen. Speicherstadt Hamburg."
+          className="w-full h-screen object-contain sm:object-cover object-center bg-[#1a2332]"
+          initial={{ opacity: 0, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        />
 
-      {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 relative z-20 flex flex-col items-center text-center pt-20 pb-16">
+        {/* Dezenter Gradient unten für Übergang */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1a2332] to-transparent z-10" />
+
+        {/* CTA Button über dem Bild */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="absolute bottom-16 left-0 right-0 z-20 flex justify-center"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl mx-auto flex flex-col items-center"
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
-            Machen Sie das Finanzamt zum Sponsor Ihrer Mitarbeiterloyalität.
-          </h1>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl leading-relaxed opacity-90 font-light"
+          <Link
+            to="/terminvereinbarung"
+            className="inline-block bg-[#25C990] hover:bg-[#1da877] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,201,144,0.39)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.23)] hover:-translate-y-0.5"
           >
-            Clevere Arbeitgeber verwandeln unvermeidbare Abgaben in wertvolle Gesundheitsbudgets. Das Ergebnis ist maximale Bindung Ihrer Leistungsträger bei minimalen Kosten. Nutzen Sie das System zu Ihrem Vorteil.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          >
-            <Link 
-              to="/terminvereinbarung"
-              className="inline-block bg-[#25C990] hover:bg-[#1da877] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,201,144,0.39)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.23)] hover:-translate-y-0.5"
-            >
-              Strategiegespräch sichern
-            </Link>
-          </motion.div>
+            Strategiegespräch sichern
+          </Link>
         </motion.div>
       </div>
     </section>
