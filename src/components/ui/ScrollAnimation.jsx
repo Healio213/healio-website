@@ -188,27 +188,27 @@ export const ParallaxSection = ({ children, bgImage, speed = 0.3, className = ''
   );
 };
 
-// Text-Highlight Animation (wie "wirklich" bei PHC)
+// Text-Highlight Animation: Glow + Farbwechsel (grau → grün mit Leuchten)
 export const TextHighlight = ({ children, color = '#25C990', delay = 0.5 }) => (
   <motion.span
-    className="relative inline-block"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
+    className="relative inline-block font-semibold"
+    initial={{ color: '#9CA3AF', textShadow: '0 0 0px transparent' }}
+    whileInView={{
+      color: color,
+      textShadow: [
+        '0 0 0px transparent',
+        `0 0 20px ${color}80`,
+        `0 0 8px ${color}40`,
+      ],
+    }}
+    viewport={{ once: true, margin: '-60px' }}
+    transition={{
+      duration: 1.2,
+      delay,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      textShadow: { duration: 1.5, delay, times: [0, 0.5, 1] },
+    }}
   >
-    <span className="relative z-10 italic font-semibold" style={{ color }}>
-      {children}
-    </span>
-    <motion.span
-      className="absolute bottom-0 left-0 right-0 h-[2px] origin-left"
-      style={{ backgroundColor: color }}
-      variants={{
-        hidden: { scaleX: 0 },
-        visible: {
-          scaleX: 1,
-          transition: { duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] },
-        },
-      }}
-    />
+    {children}
   </motion.span>
 );
