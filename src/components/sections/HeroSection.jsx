@@ -11,7 +11,7 @@ const HeroSection = () => {
         <motion.img
           src="/hero-b2b.png"
           alt="HEALIO – Gesundheit fördern. Mitarbeiter binden. Steuern sparen. Unabhängige Experten für betriebliche Vorsorge und Zusatzversicherungen. Speicherstadt Hamburg."
-          className="w-full h-screen object-contain sm:object-cover object-center bg-[#1a2332]"
+          className="w-full h-screen object-cover object-[20%_center] bg-[#1a2332]"
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
