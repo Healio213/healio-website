@@ -12,6 +12,7 @@ import BonusCalculator from '@/components/sections/BonusCalculator';
 import Testimonials from '@/components/sections/Testimonials';
 import Faq from '@/components/sections/Faq';
 import Contact from '@/components/sections/Contact';
+import { FadeInUp } from '@/components/ui/ScrollAnimation';
 
 const HomePage = () => {
   // Create combined schema markup
@@ -52,15 +53,15 @@ const HomePage = () => {
       />
       <article>
         <Hero />
-        <Concept />
-        <Benefits />
-        <RenditeVergleichSection />
-        <CompoundInterestCalculator />
-        <GesundheitSection />
-        <BonusCalculator />
-        <Testimonials />
-        <Faq />
-        <Contact />
+        <FadeInUp><Concept /></FadeInUp>
+        <FadeInUp><Benefits /></FadeInUp>
+        <FadeInUp><RenditeVergleichSection /></FadeInUp>
+        <FadeInUp><CompoundInterestCalculator /></FadeInUp>
+        <FadeInUp><GesundheitSection /></FadeInUp>
+        <FadeInUp><BonusCalculator /></FadeInUp>
+        <FadeInUp><Testimonials /></FadeInUp>
+        <FadeInUp><Faq /></FadeInUp>
+        <FadeInUp><Contact /></FadeInUp>
       </article>
     </>
   );

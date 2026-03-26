@@ -1,6 +1,7 @@
 
 import React from 'react';
 import SEOHead from '@/components/SEOHead';
+import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
 
@@ -27,28 +28,51 @@ const AmbulantPage = () => {
         <AmbulantTicker />
 
         {/* SDK Qualitätssiegel */}
-        <section className="py-8 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-4">
-            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unser Partner: SDK Süddeutsche Krankenversicherung</p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-3xl mx-auto">
-              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025 - Gesamtsieger Private Krankenversicherer" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet - PKV Beitragsstabilität" className="h-16 md:h-20 w-auto" loading="lazy" />
+        <FadeInUp>
+          <section className="py-8 bg-white border-b border-gray-100">
+            <div className="container mx-auto px-4">
+              <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unser Partner: SDK Süddeutsche Krankenversicherung</p>
+              <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-3xl mx-auto">
+                <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
+                <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025 - Gesamtsieger Private Krankenversicherer" className="h-16 md:h-20 w-auto" loading="lazy" />
+                <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet - PKV Beitragsstabilität" className="h-16 md:h-20 w-auto" loading="lazy" />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </FadeInUp>
 
-        <AmbulantVideoSection />
-        <AmbulantConceptAccordion />
-        
-        {/* Task 2: Reordered components sequence */}
-        <AmbulantBonusCalculator />
-        <AmbulantHowItWorks />
-        <AmbulantBenefits />
-        
-        <AmbulantTestimonials />
-        <AmbulantFAQ />
-        <AmbulantFinalCTA />
+        <FadeInUp>
+          <AmbulantVideoSection />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantConceptAccordion />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantBonusCalculator />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantHowItWorks />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantBenefits />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantTestimonials />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantFAQ />
+        </FadeInUp>
+
+        <FadeInUp>
+          <AmbulantFinalCTA />
+        </FadeInUp>
+
         <StickyCalculatorButton />
       </main>
     </>

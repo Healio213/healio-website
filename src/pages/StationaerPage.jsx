@@ -10,6 +10,7 @@ import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown, Star } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
+import { FadeInUp } from '@/components/ui/ScrollAnimation';
 
 const stationaerFaqs = [
   { q: "Was kostet das KlinikUpgrade monatlich?", a: "Das KlinikUpgrade Top (Einbettzimmer) gibt es ab 11,22 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 33,33 Euro. Das KlinikUpgrade Plus (Zweibettzimmer) startet ab 8,98 Euro. In Kombination mit dem IKK Classic Bonus (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst." },
@@ -129,6 +130,7 @@ const StationaerPage = () => {
         </section>
 
         {/* Qualitätssiegel */}
+        <FadeInUp>
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
             <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
@@ -137,11 +139,13 @@ const StationaerPage = () => {
             </motion.div>
           </div>
         </section>
+        </FadeInUp>
 
-        <HospitalConcept />
-        <HospitalBenefits />
+        <FadeInUp><HospitalConcept /></FadeInUp>
+        <FadeInUp><HospitalBenefits /></FadeInUp>
 
         {/* Testimonials */}
+        <FadeInUp>
         <section className="py-20 bg-white">
           <div className="healio-container px-4">
             <div className="text-center mb-12">
@@ -165,8 +169,10 @@ const StationaerPage = () => {
             </div>
           </div>
         </section>
+        </FadeInUp>
 
         {/* FAQ */}
+        <FadeInUp>
         <section className="py-20 bg-slate-50">
           <div className="healio-container max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
@@ -176,8 +182,9 @@ const StationaerPage = () => {
             <StationaerFaq />
           </div>
         </section>
+        </FadeInUp>
 
-        <HospitalContactForm />
+        <FadeInUp><HospitalContactForm /></FadeInUp>
       </article>
     </>
   );

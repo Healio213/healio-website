@@ -2,6 +2,7 @@
 import React, { Suspense } from 'react';
 import SEOHead from '@/components/SEOHead';
 import { createOrganizationSchema } from '@/lib/createSchemaMarkup';
+import { FadeInUp } from '@/components/ui/ScrollAnimation';
 
 // Eagerly load the Hero section as it's above the fold (LCP)
 import HeroSection from '@/components/sections/HeroSection';
@@ -44,44 +45,51 @@ const MainHomePage = () => {
       <main className="w-full bg-white">
         {/* Critical LCP component loaded immediately */}
         <HeroSection />
-        
+
         {/* Defer loading of all below-the-fold sections */}
         <Suspense fallback={<SectionLoader />}>
-          
-          {/* New Order: BavProviderComparison BEFORE CompoundInterestCalculator */}
-          <div>
+
+          <FadeInUp>
             <BavProviderComparison />
-          </div>
-          
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
-
-          <div className="py-16 lg:py-20 bg-white">
-            <CompoundInterestCalculator />
-          </div>
+          </FadeInUp>
 
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
 
-          <div className="py-16 lg:py-20 bg-emerald-50/30">
-            <CombinedZeitfalleRenditeSection />
-          </div>
+          <FadeInUp delay={0.1}>
+            <div className="py-16 lg:py-20 bg-white">
+              <CompoundInterestCalculator />
+            </div>
+          </FadeInUp>
 
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
 
-          <div className="py-16 lg:py-20 bg-white">
-            <GesundheitSection />
-          </div>
+          <FadeInUp delay={0.1}>
+            <div className="py-16 lg:py-20 bg-emerald-50/30">
+              <CombinedZeitfalleRenditeSection />
+            </div>
+          </FadeInUp>
 
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
 
-          <div>
+          <FadeInUp delay={0.1}>
+            <div className="py-16 lg:py-20 bg-white">
+              <GesundheitSection />
+            </div>
+          </FadeInUp>
+
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
+
+          <FadeInUp delay={0.1}>
             <WhyBkvWithHealio />
-          </div>
+          </FadeInUp>
 
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
 
-          <div id="contact" className="bg-slate-50 py-16 lg:py-24">
-              <Contact />
-          </div>
+          <FadeInUp delay={0.1}>
+            <div id="contact" className="bg-slate-50 py-16 lg:py-24">
+                <Contact />
+            </div>
+          </FadeInUp>
         </Suspense>
       </main>
     </>

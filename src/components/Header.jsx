@@ -58,20 +58,25 @@ const Header = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-[100] transition-all duration-300",
-      scrolled 
-        ? "bg-slate-900/95 backdrop-blur-md shadow-lg py-4" 
-        : "bg-transparent py-6"
+      "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-out",
+      scrolled
+        ? "bg-slate-900/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)] py-3"
+        : "bg-transparent py-5"
     )} role="banner">
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
         <Link to="/" className="flex items-center z-50 group">
-          <img 
-            src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png" 
-            alt="Healio Logo" 
+          <motion.img
+            src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png"
+            alt="Healio Logo"
             className={cn(
-              "h-10 md:h-12 w-auto transition-all duration-300",
+              "w-auto transition-all duration-500",
+              scrolled ? "h-8 md:h-10" : "h-10 md:h-12",
               "brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
             )}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            whileHover={{ scale: 1.05 }}
           />
         </Link>
 

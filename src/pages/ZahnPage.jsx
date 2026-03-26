@@ -11,6 +11,7 @@ import DentalContactForm from '@/components/sections/DentalContactForm';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
+import { FadeInUp } from '@/components/ui/ScrollAnimation';
 
 const ZahnPage = () => {
   const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant&agentId1=901235&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJOb2xpIiwiY29tcGfueSI6Ik5vbGkgR21iSCIsInN0cmVldCI6IkFybmR0c3RyLiA2IiwiemlwY29kZSI6IjIyMDg1IiwiY2l0eSI6IkhhbWJ1cmciLCJtb2JpbGUiOiIwMTc2MjQxNTMxODgiLCJlbWFpbCI6ImZyYW5rQG5vbGktdmVyc2ljaGVydW5nLmRlIn0=&remarks=IkJlaSBGcmFnZW4gc2luZCB3aXIgZvxyIFNpZSBkYS4i&defaultContact=true&employeeInsurance=NOT_BKV";
@@ -101,6 +102,7 @@ const ZahnPage = () => {
         </section>
 
         {/* Qualitätssiegel */}
+        <FadeInUp>
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
             <p className="text-center text-sm text-slate-400 mb-6 font-medium uppercase tracking-wider">Ausgezeichnet von unabhängigen Testern</p>
@@ -119,14 +121,15 @@ const ZahnPage = () => {
             </motion.div>
           </div>
         </section>
+        </FadeInUp>
 
-        <DentalConcept />
-        <DentalBenefits />
+        <FadeInUp><DentalConcept /></FadeInUp>
+        <FadeInUp><DentalBenefits /></FadeInUp>
 
-        <Testimonials headline="Was Kunden berichten." />
+        <FadeInUp><Testimonials headline="Was Kunden berichten." /></FadeInUp>
 
-        <Faq />
-        <DentalContactForm />
+        <FadeInUp><Faq /></FadeInUp>
+        <FadeInUp><DentalContactForm /></FadeInUp>
       </article>
     </>
   );
