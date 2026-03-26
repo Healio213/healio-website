@@ -188,28 +188,35 @@ export const ParallaxSection = ({ children, bgImage, speed = 0.3, className = ''
   );
 };
 
-// Text-Highlight Animation: Glow + Farbwechsel (grau → grün mit Leuchten)
+// Text-Highlight Animation: Wisch von links nach rechts + Glow
 export const TextHighlight = ({ children, color = '#25C990', delay = 0 }) => (
   <motion.span
     className="relative inline-block font-bold"
-    initial={{ color: '#6B7280', textShadow: '0 0 0px transparent', opacity: 0.5 }}
-    whileInView={{
-      color: color,
-      opacity: 1,
-      textShadow: [
-        '0 0 0px transparent',
-        `0 0 30px ${color}`,
-        `0 0 10px ${color}60`,
-      ],
-    }}
+    initial="hidden"
+    whileInView="visible"
     viewport={{ once: true, margin: '-40px' }}
-    transition={{
-      duration: 0.8,
-      delay,
-      ease: 'easeOut',
-      textShadow: { duration: 1.2, delay, times: [0, 0.4, 1] },
-    }}
   >
-    {children}
+    {/* Sichtbarer Text (grau, wird überdeckt durch den Wisch) */}
+    <span className="relative z-10" style={{ color: '#6B7280' }}>
+      {children}
+    </span>
+
+    {/* Grüner Text mit Glow der von links nach rechts wischt */}
+    <motion.span
+      className="absolute inset-0 z-20 overflow-hidden font-bold"
+      style={{
+        color: color,
+        textShadow: `0 0 20px ${color}80`,
+      }}
+      variants={{
+        hidden: { clipPath: 'inset(0 100% 0 0)' },
+        visible: {
+          clipPath: 'inset(0 0% 0 0)',
+          transition: { duration: 1.0, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+        },
+      }}
+    >
+      {children}
+    </motion.span>
   </motion.span>
 );
