@@ -188,35 +188,48 @@ export const ParallaxSection = ({ children, bgImage, speed = 0.3, className = ''
   );
 };
 
-// Text-Highlight Animation: Wisch von links nach rechts + Glow
-export const TextHighlight = ({ children, color = '#25C990', delay = 0 }) => (
-  <motion.span
-    className="relative inline-block font-bold"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: '-40px' }}
-  >
-    {/* Sichtbarer Text (grau, wird überdeckt durch den Wisch) */}
-    <span className="relative z-10" style={{ color: '#6B7280' }}>
-      {children}
-    </span>
+// Text-Highlight Animation: Holografischer Schimmer-Effekt
+export const TextHighlight = ({ children, color = '#25C990' }) => {
+  const ref = React.useRef(null);
+  const [shimmerPos, setShimmerPos] = React.useState(-100);
 
-    {/* Grüner Text mit Glow der von links nach rechts wischt */}
-    <motion.span
-      className="absolute inset-0 z-20 overflow-hidden font-bold"
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      // Position im Viewport (0 = oben, 1 = unten)
+      const progress = 1 - (rect.top / viewHeight);
+      // Shimmer wandert von -100% bis 200% basierend auf Scroll-Position
+      const pos = (progress * 300) - 100;
+      setShimmerPos(pos);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <span
+      ref={ref}
+      className="relative inline-block font-bold"
       style={{
         color: color,
-        textShadow: `0 0 20px ${color}80`,
-      }}
-      variants={{
-        hidden: { clipPath: 'inset(0 100% 0 0)' },
-        visible: {
-          clipPath: 'inset(0 0% 0 0)',
-          transition: { duration: 1.0, delay, ease: [0.25, 0.46, 0.45, 0.94] },
-        },
+        backgroundImage: `linear-gradient(
+          120deg,
+          ${color} 0%,
+          ${color} ${shimmerPos - 15}%,
+          #ffffff ${shimmerPos}%,
+          ${color} ${shimmerPos + 15}%,
+          ${color} 100%
+        )`,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        transition: 'background-image 0.05s linear',
       }}
     >
       {children}
-    </motion.span>
-  </motion.span>
-);
+    </span>
+  );
+};
