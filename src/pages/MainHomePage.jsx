@@ -42,7 +42,7 @@ const MainHomePage = () => {
         ogUrl="https://www.healio.de/"
         schemaMarkup={schemaMarkup}
       />
-      <main className="w-full bg-white">
+      <main className="w-full">
         {/* Critical LCP component loaded immediately */}
         <HeroSection />
 
@@ -53,41 +53,25 @@ const MainHomePage = () => {
             <BavProviderComparison />
           </FadeInUp>
 
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
-
           <FadeInUp delay={0.1}>
-            <div className="py-16 lg:py-20 bg-white">
-              <CompoundInterestCalculator />
-            </div>
+            <CompoundInterestCalculator />
           </FadeInUp>
 
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
-
           <FadeInUp delay={0.1}>
-            <div className="py-16 lg:py-20 bg-emerald-50/30">
-              <CombinedZeitfalleRenditeSection />
-            </div>
+            <CombinedZeitfalleRenditeSection />
           </FadeInUp>
 
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
-
           <FadeInUp delay={0.1}>
-            <div className="py-16 lg:py-20 bg-white">
-              <GesundheitSection />
-            </div>
+            <GesundheitSection />
           </FadeInUp>
-
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
 
           <FadeInUp delay={0.1}>
             <WhyBkvWithHealio />
           </FadeInUp>
 
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#25c990]/30 to-transparent"></div>
-
           <FadeInUp delay={0.1}>
-            <div id="contact" className="bg-slate-50 py-16 lg:py-24">
-                <Contact />
+            <div id="contact">
+              <Contact />
             </div>
           </FadeInUp>
         </Suspense>

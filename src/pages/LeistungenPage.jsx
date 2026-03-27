@@ -98,7 +98,7 @@ const LeistungenPage = () => {
         </section>
 
         {/* 2x2 Grid Section */}
-        <section className="bg-slate-50 py-16 md:py-24 lg:py-32">
+        <section className="bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white py-16 md:py-24 lg:py-32">
           <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6">
@@ -117,7 +117,7 @@ const LeistungenPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col h-full border border-slate-100 group"
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col h-full border border-slate-100 group"
                 >
                   <div className="p-6 md:p-8 lg:p-10 flex-grow flex flex-col">
                     <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${type.color}`}>

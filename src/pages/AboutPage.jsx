@@ -161,7 +161,7 @@ const AboutPage = () => {
         </section>
 
         {/* VALUES SECTION */}
-        <section className="py-20 lg:py-32 bg-slate-50 border-y border-slate-100">
+        <section className="py-20 lg:py-32 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-6 max-w-7xl">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -183,9 +183,9 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 flex flex-col items-center text-center"
+                  className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 flex flex-col items-center text-center"
                 >
-                  <div className="text-5xl mb-6 bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center">
+                  <div className="text-5xl mb-6 bg-emerald-50 w-20 h-20 rounded-full flex items-center justify-center">
                     {value.emoji}
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">{value.title}</h3>
@@ -220,7 +220,7 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-                  className="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white rounded-xl p-8 text-center border border-slate-100 shadow-md hover:shadow-lg transition-shadow"
                 >
                   <div className="text-5xl md:text-6xl font-extrabold text-[#25c990] mb-4">
                     {metric.number}

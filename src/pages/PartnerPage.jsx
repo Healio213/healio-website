@@ -144,7 +144,7 @@ const PartnerPage = () => {
         <PartnerTrustBar />
 
         {/* SECTION 2: PROBLEM AWARENESS */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -221,7 +221,7 @@ const PartnerPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 sm:p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-[0_10px_40px_-15px_rgba(37,201,144,0.4)] hover:scale-105 transition-all duration-300 flex flex-col items-center md:items-start text-center md:text-left"
+                  className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center md:items-start text-center md:text-left"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-6 text-[#25c990]">
                     <Icon className="w-8 h-8" />
@@ -241,7 +241,7 @@ const PartnerPage = () => {
         <PartnerFAQ />
 
         {/* SECTION 5: BOOKING */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-white border-t border-slate-100">
+        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}

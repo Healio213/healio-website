@@ -63,7 +63,7 @@ const PartnerFAQ = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-slate-50 border border-slate-100 rounded-xl px-6 data-[state=open]:border-[#25c990] data-[state=open]:shadow-md transition-all duration-300"
+                className="bg-white border border-slate-100 rounded-xl px-6 data-[state=open]:border-[#25c990] data-[state=open]:shadow-md transition-all duration-300"
               >
                 <AccordionTrigger className="text-left text-lg font-semibold text-slate-800 hover:text-[#25c990] hover:no-underline py-6">
                   <span className="flex items-center gap-3">

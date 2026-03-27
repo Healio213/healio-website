@@ -62,9 +62,17 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
-    <!-- ElevenLabs Conversational AI Widget -->
-    <elevenlabs-convai agent-id="agent_3701kkc8xr4be70a3v4mfmzptpqs" variant="tiny"></elevenlabs-convai>
+    <!-- ElevenLabs Conversational AI Widget – zentriert für Desktop & Mobil -->
+    <elevenlabs-convai agent-id="agent_3701kkc8xr4be70a3v4mfmzptpqs"></elevenlabs-convai>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-    <script>setTimeout(function(){if(!sessionStorage.getItem('mia_opened')){var w=document.querySelector('elevenlabs-convai');if(w&&w.shadowRoot){var b=w.shadowRoot.querySelector('button');if(b){b.click();sessionStorage.setItem('mia_opened','1');}}}},60000);</script>
+    <style>
+      elevenlabs-convai {
+        position: fixed;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9999;
+      }
+    </style>
   </body>
 </html>

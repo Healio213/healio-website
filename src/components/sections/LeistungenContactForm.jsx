@@ -52,23 +52,23 @@ const LeistungenContactForm = () => {
   };
 
   return (
-    <section className="py-16 bg-white" id="leistungen-contact">
+    <section className="py-16 bg-gradient-to-b from-white to-emerald-50/20" id="leistungen-contact">
       <div className="container mx-auto px-6 max-w-xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100">
+          <div className="bg-white p-8 rounded-2xl shadow-md border border-slate-100">
             <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Unverbindlich beraten lassen</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name *</Label>
-                <Input id="name" name="name" required value={formData.name} onChange={handleChange} className="bg-white text-slate-900" />
+                <Input id="name" name="name" required value={formData.name} onChange={handleChange} className="bg-slate-50 text-slate-900 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">E-Mail *</Label>
-                <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="bg-white text-slate-900" />
+                <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="bg-slate-50 text-slate-900 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefon (optional)</Label>
-                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="bg-white text-slate-900" />
+                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="bg-slate-50 text-slate-900 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" />
               </div>
               <Button type="submit" disabled={isSubmitting} className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white h-12 mt-4">
                 {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Wird gesendet...</> : <><Send className="mr-2 h-4 w-4" /> Anfrage senden</>}

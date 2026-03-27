@@ -58,13 +58,15 @@ const AmbulantFinalCTA = () => {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
-          <Link 
-            to="/potenzialanalyse" 
+          <a
+            href="https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS%C3%BCja2ZyYWdlbiBzaW5kIHdpciBnZXJuZSBm%C3%BCyIFNpZSBkYS4i&defaultContact=false&employeeInsurance=NOT_BKV"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center bg-healio-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <Calculator className="w-5 h-5 mr-2" />
-            Tarif rechnen
-          </Link>
+            Tarif berechnen
+          </a>
           <Link 
             to="/kontakt" 
             className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-healio-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"

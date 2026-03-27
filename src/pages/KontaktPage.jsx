@@ -88,7 +88,7 @@ const KontaktPage = () => {
         schemaMarkup={schemaMarkup} 
       />
 
-      <main className="bg-slate-50 min-h-screen pt-32 pb-16">
+      <main className="bg-gradient-to-b from-white via-emerald-50/20 to-white min-h-screen pt-32 pb-16">
         
         {/* SECTION 1: Introduction */}
         <section className="healio-container px-4 sm:px-6 md:px-8 mb-16">
@@ -118,12 +118,12 @@ const KontaktPage = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-col h-full"
             >
-              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-slate-200 h-full">
+              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100 h-full">
                 <h2 className="text-2xl font-bold text-slate-900 mb-8">Zentrale Hamburg</h2>
                 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
                       <MapPin className="w-6 h-6" />
                     </div>
                     <div>
@@ -137,7 +137,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
                       <Mail className="w-6 h-6" />
                     </div>
                     <div>
@@ -149,7 +149,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
+                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
                       <Phone className="w-6 h-6" />
                     </div>
                     <div>
@@ -181,7 +181,7 @@ const KontaktPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-lg border border-slate-200">
+              <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   
                   <div className="space-y-2">

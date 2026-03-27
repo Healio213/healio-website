@@ -29,7 +29,7 @@ const testimonials = [
 
 const PartnerTestimonials = () => {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-gradient-to-b from-emerald-50/30 via-emerald-50/10 to-white">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ const PartnerTestimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-[#25c990] relative flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="bg-white p-8 rounded-2xl shadow-md border-t-4 border-[#25c990] relative flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <div>
                 <div className="flex space-x-1 mb-6">

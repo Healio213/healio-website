@@ -12,7 +12,7 @@ const PartnerTrustBar = () => {
   ];
 
   return (
-    <section className="bg-slate-50 border-b border-slate-100 py-8 px-4 relative z-30" aria-label="Vertrauenssignale">
+    <section className="bg-white border-b border-slate-100 py-8 px-4 relative z-30" aria-label="Vertrauenssignale">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center">
           {trustItems.map((item, index) => (
