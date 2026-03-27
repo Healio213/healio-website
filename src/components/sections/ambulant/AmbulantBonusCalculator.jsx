@@ -161,7 +161,7 @@ const AmbulantBonusCalculator = () => {
                     className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
                   >
                     <Gift className="w-5 h-5 mr-2" />
-                    Tarif rechnen
+                    Tarif berechnen
                   </a>
                   
                   <a 
