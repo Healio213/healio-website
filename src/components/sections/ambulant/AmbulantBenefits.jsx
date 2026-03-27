@@ -13,7 +13,8 @@ const benefits = [
   { emoji: "💊", title: "Arznei-, Heil- und Verbandmittel", desc: "", bgColor: "bg-blue-50" },
   { emoji: "✈️", title: "Auslandsschutz", desc: "100%, beliebig viele Reisen bis 56 Tage", bgColor: "bg-amber-50" },
   { emoji: "🫶", title: "Medizinisch-Psychologischer Beratungsservice", desc: "", bgColor: "bg-purple-50" },
-  { emoji: "👨‍⚕️", title: "Facharzt", desc: "Erstattung für Facharztbehandlungen und spezielle ärztliche Leistungen", bgColor: "bg-rose-50" }
+  { emoji: "👨‍⚕️", title: "Facharzt", desc: "Erstattung für Facharztbehandlungen und spezielle ärztliche Leistungen", bgColor: "bg-rose-50" },
+  { emoji: "📍", title: "Akupunktur", desc: "Professionelle Akupunkturbehandlungen", bgColor: "bg-teal-50" }
 ];
 
 const AmbulantBenefits = () => {

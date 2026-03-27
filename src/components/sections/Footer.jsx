@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = ({ hideCta = false }) => {
   return (
     <footer className="bg-slate-950 text-white pt-20 pb-8 mt-auto relative overflow-hidden">
       {/* Top gradient line */}
@@ -42,18 +42,20 @@ const Footer = () => {
         </div>
 
         {/* CTA Banner */}
-        <div className="bg-gradient-to-r from-healio-primary/10 to-emerald-500/10 border border-healio-primary/20 rounded-2xl p-8 lg:p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">Bereit für den nächsten Schritt?</h3>
-            <p className="text-slate-400">15 Minuten. Keine Verkaufspräsentation. Nur Zahlen.</p>
+        {!hideCta && (
+          <div className="bg-gradient-to-r from-healio-primary/10 to-emerald-500/10 border border-healio-primary/20 rounded-2xl p-8 lg:p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">Bereit für den nächsten Schritt?</h3>
+              <p className="text-slate-400">15 Minuten. Keine Verkaufspräsentation. Nur Zahlen.</p>
+            </div>
+            <Link
+              to="/terminvereinbarung"
+              className="inline-block bg-healio-primary hover:bg-[#1da877] text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-[0_6px_20px_rgba(37,201,144,0.3)] hover:-translate-y-0.5 whitespace-nowrap"
+            >
+              Strategiegespräch sichern
+            </Link>
           </div>
-          <Link
-            to="/terminvereinbarung"
-            className="inline-block bg-healio-primary hover:bg-[#1da877] text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-[0_6px_20px_rgba(37,201,144,0.3)] hover:-translate-y-0.5 whitespace-nowrap"
-          >
-            Strategiegespräch sichern
-          </Link>
-        </div>
+        )}
 
         <div className="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
           <p>&copy; {new Date().getFullYear()} Healio GmbH. Alle Rechte vorbehalten.</p>

@@ -9,7 +9,7 @@ const tickerItems = [
   { icon: ShieldCheck, text: "Keine Wartezeit – sofort geschützt" },
   { icon: Zap, text: "In nur 3 Minuten abgeschlossen" },
   { icon: TrendingUp, text: "Effektiv 0 € dank IKK Bonus" },
-  { icon: Star, text: "Keine Gesundheitsprüfung nötig" },
+  { icon: Star, text: "Akupunktur inklusive" },
   { icon: Star, text: "Osteopathie & Massagen inklusive" },
   { icon: Heart, text: "Sieh im Video, wie es funktioniert" },
 ];
