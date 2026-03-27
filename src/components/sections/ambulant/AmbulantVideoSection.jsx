@@ -30,9 +30,9 @@ const AmbulantVideoSection = () => {
           >
             {!isPlaying ? (
               <>
-                <img 
-                  src={stockImageUrl} 
-                  alt="Aktives Paar in der Natur" 
+                <img
+                  src={stockImageUrl}
+                  alt="Aktives Paar in der Natur"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
@@ -42,9 +42,15 @@ const AmbulantVideoSection = () => {
                 </div>
               </>
             ) : (
-              <div className="w-full h-full bg-black flex items-center justify-center text-white">
-                <p>Video Placeholder (YouTube/Vimeo Iframe würde hier laden)</p>
-              </div>
+              <video
+                className="w-full h-full"
+                controls
+                autoPlay
+                playsInline
+              >
+                <source src="/erklaervideo.mp4" type="video/mp4" />
+                Ihr Browser unterstützt kein Video.
+              </video>
             )}
           </motion.div>
         </div>
