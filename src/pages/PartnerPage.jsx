@@ -62,12 +62,7 @@ const PartnerPage = () => {
     'Befreien Sie Ihre Patienten von finanziellen Sorgen. Das Healio Partnernetzwerk für ganzheitliche Therapeuten und Behandler.'
   );
 
-  const handleVideoClick = () => {
-    toast({
-      title: "Video wird geladen",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀",
-    });
-  };
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   return (
     <>
@@ -123,17 +118,30 @@ const PartnerPage = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="lg:col-span-5 flex justify-center order-2 lg:order-2 w-full max-w-md mx-auto lg:max-w-none mt-4 lg:mt-0"
               >
-                <div 
-                  onClick={handleVideoClick}
-                  className="w-full aspect-video bg-slate-900/60 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center shadow-2xl group cursor-pointer hover:bg-slate-800/80 transition-all overflow-hidden relative"
-                >
-                  {/* Decorative Play Button Container */}
-                  <div className="absolute inset-0 flex items-center justify-center z-10">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#25c990] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(37,201,144,0.5)] group-hover:scale-110 transition-transform duration-300">
-                      <PlayCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
+                <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl relative">
+                  {!isVideoPlaying ? (
+                    <div
+                      onClick={() => setIsVideoPlaying(true)}
+                      className="w-full h-full bg-slate-900/60 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center group cursor-pointer hover:bg-slate-800/80 transition-all relative"
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#25c990] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(37,201,144,0.5)] group-hover:scale-110 transition-transform duration-300">
+                          <PlayCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-tr from-slate-800 to-slate-700 opacity-50 mix-blend-overlay"></div>
                     </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-800 to-slate-700 opacity-50 mix-blend-overlay"></div>
+                  ) : (
+                    <video
+                      className="w-full h-full rounded-2xl"
+                      controls
+                      autoPlay
+                      playsInline
+                    >
+                      <source src="/erklaervideo-partner.mp4" type="video/mp4" />
+                      Ihr Browser unterstützt kein Video.
+                    </video>
+                  )}
                 </div>
               </motion.div>
             </div>
