@@ -78,7 +78,7 @@ const DatenschutzPage = () => {
               <p>
                 Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:
                 <br /><br />
-                <strong>E-Mail:</strong> info@healio.de
+                <strong>E-Mail:</strong> <a href="mailto:datenschutz@healio.de" className="text-healio-primary hover:underline">datenschutz@healio.de</a>
               </p>
 
               <p className="mt-12 text-sm text-gray-500 pt-8 border-t border-gray-100">Stand: März 2026</p>
