@@ -28,14 +28,14 @@ const fears = [
 
 const ikkExtras = [
   {
-    icon: "🦴",
-    title: "Osteopathie — 160 €/Jahr",
-    desc: "4 Sitzungen à 40 € pro Kalenderjahr — auch für Babys und Kinder, ohne Altersbegrenzung."
-  },
-  {
     icon: "🤰",
     title: "Schwangerschaft — über 1.100 €",
     desc: "250 € Hebammen-Rufbereitschaft, 100 € Vorsorge-Zuschuss, 180 € Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive."
+  },
+  {
+    icon: "🦴",
+    title: "Osteopathie — 160 €/Jahr",
+    desc: "4 Sitzungen à 40 € pro Kalenderjahr — auch für Babys und Kinder, ohne Altersbegrenzung."
   },
   {
     icon: "🎁",
@@ -56,6 +56,11 @@ const ikkExtras = [
     icon: "🧘",
     title: "Präventionskurse",
     desc: "Zuschüsse für Yoga, Rückentraining, Stressbewältigung und mehr — für deine aktive Gesundheitsvorsorge."
+  },
+  {
+    icon: "🌿",
+    title: "10 % für die Umwelt",
+    desc: "Healio spendet 10 % an Umweltverbände. Gesundheit beginnt in einer intakten Umwelt — mit deinem Wechsel unterstützt du aktiv den Umweltschutz."
   }
 ];
 
@@ -140,24 +145,6 @@ const AmbulantIKKWechsel = () => {
             ))}
           </div>
         </div>
-
-        {/* 10% Umweltspende */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-emerald-50 rounded-2xl p-8 mb-12 flex flex-col md:flex-row items-center gap-6"
-        >
-          <div className="bg-emerald-100 rounded-full p-4 flex-shrink-0">
-            <Leaf className="w-8 h-8 text-emerald-600" />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">10 % für die Umwelt</h3>
-            <p className="text-gray-600">
-              Healio spendet 10 % an Umweltverbände. Denn Gesundheit beginnt nicht erst beim Arzt — sondern in einer intakten Umwelt. Mit deinem Wechsel zur IKK classic über Healio unterstützt du aktiv den Umweltschutz.
-            </p>
-          </div>
-        </motion.div>
 
         {/* So funktioniert der Wechsel */}
         <motion.div

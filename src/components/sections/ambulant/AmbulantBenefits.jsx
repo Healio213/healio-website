@@ -76,7 +76,8 @@ const highlightCards = [
       { name: "Rückbildungsgymnastik", info: "Volle Kostenübernahme + 25 € Bonus über IKK Bonusprogramm" },
       { name: "Baby-Bonus", info: "180 € im ersten Lebensjahr über das IKK Bonusprogramm" },
       { name: "Haus- & Geburtshausgeburt", info: "Volle Kostenübernahme für Hebamme + Zuschuss Betriebskosten" },
-    ]
+    ],
+    hint: "Die IKK classic bietet noch weitere Schwangerschafts-Leistungen \u2014 mehr dazu weiter unten im Abschnitt \u201EIKK classic\u201C."
   },
 ];
 
@@ -130,6 +131,11 @@ const BenefitCard = ({ benefit, index }) => {
                   </li>
                 ))}
               </ul>
+              {benefit.hint && (
+                <p className="mt-4 text-xs text-emerald-600 bg-emerald-50 rounded-lg px-3 py-2 text-left">
+                  {benefit.hint}
+                </p>
+              )}
             </div>
           </motion.div>
         )}
