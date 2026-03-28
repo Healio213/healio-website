@@ -4,11 +4,12 @@ import SEOHead from '@/components/SEOHead';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
+import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
-import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
+import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimonials';
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
@@ -40,6 +41,11 @@ const AmbulantPage = () => {
           </section>
         </FadeInUp>
 
+        {/* Erklärvideo — direkt nach Siegel für vorbereitete Besucher */}
+        <FadeInUp>
+          <AmbulantVideoSection />
+        </FadeInUp>
+
         {/* 4 Highlight-Leistungskarten + Akkordeon */}
         <FadeInUp>
           <AmbulantBenefits />
@@ -55,14 +61,14 @@ const AmbulantPage = () => {
           <AmbulantBonusCalculator />
         </FadeInUp>
 
-        {/* Erklärvideo */}
-        <FadeInUp>
-          <AmbulantVideoSection />
-        </FadeInUp>
-
-        {/* Konzept-Akkordeon (gestrafft) */}
+        {/* Konzept-Akkordeon (ausführlich, 6 Punkte) */}
         <FadeInUp>
           <AmbulantConceptAccordion />
+        </FadeInUp>
+
+        {/* IKK Classic Wechsel — Angst nehmen */}
+        <FadeInUp>
+          <AmbulantIKKWechsel />
         </FadeInUp>
 
         {/* Testimonials */}

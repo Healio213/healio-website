@@ -32,6 +32,13 @@ const highlightCards = [
     budget: "Bis zu 1.000 € (alle 2 Jahre) | plus Auslandsschutz inklusive",
     bgColor: "bg-green-50"
   },
+  {
+    emoji: "🤰",
+    title: "Schwangerschaft & Hebamme",
+    desc: "Hebammen-Rufbereitschaft, Geburtsvorbereitung, Rückbildung, Vorsorge",
+    budget: "Bis zu 250 € Rufbereitschaft | 100 € Vorsorgezuschuss (IKK classic)",
+    bgColor: "bg-pink-50"
+  },
 ];
 
 const moreBenefits = [
@@ -39,6 +46,7 @@ const moreBenefits = [
   { emoji: "☯️", title: "Traditionelle Chinesische Medizin (TCM)", desc: "" },
   { emoji: "✈️", title: "Auslandsschutz", desc: "100%, beliebig viele Reisen bis 56 Tage" },
   { emoji: "🫶", title: "Medizinisch-Psychologischer Beratungsservice", desc: "" },
+  { emoji: "👶", title: "Geburtsvorbereitungskurse & Rückbildung", desc: "Kostenübernahme durch die GKV" },
   { emoji: "👨‍⚕️", title: "Naturheilkundliche Behandlungen durch Ärzte", desc: "Erstattung für ärztliche Naturheilverfahren nach GOÄ bis zum 3,5-fachen Satz" },
   { emoji: "📍", title: "Akupunktur", desc: "Professionelle Akupunkturbehandlungen" },
 ];
@@ -56,7 +64,7 @@ const AmbulantBenefits = () => {
         </div>
 
         {/* 4 Highlight Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {highlightCards.map((benefit, index) => (
             <motion.div
               key={index}
