@@ -36,30 +36,26 @@ const AmbulantHero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-100 font-medium max-w-2xl mx-auto leading-relaxed mb-6 drop-shadow-md"
           >
-            Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Wir haben den Weg entschlüsselt, wie Sie Privatpatienten-Status genießen, ohne die hohen Kosten zu tragen. Der IKK-Wechsel-Bonus deckt Ihren Beitrag. Sie genießen die Leistung.
+            Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 2.500 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Keine Gesundheitsprüfung. Sofort loslegen.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center justify-center gap-2 mb-8 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full w-fit mx-auto border border-white/10"
+            className="flex flex-wrap items-center justify-center gap-4 mb-10"
           >
-            <Euro className="w-4 h-4 text-white" />
-            <span className="text-sm text-white font-medium">Ab 0 Euro effektiv monatlich dank IKK Bonus</span>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 max-w-xl mx-auto shadow-2xl border border-white/10 mb-10 text-left"
-          >
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-8 h-8 text-[#25c990] flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="text-white text-base md:text-lg font-semibold leading-relaxed">
-                Garantiert & ohne Wartezeit: Du wirst sofort angenommen, auch bei bestehenden Vorerkrankungen (ggf. mit Risikozuschlag). Starte direkt durch und sichere dir deine Wunschleistungen!
-              </p>
+            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full border border-white/10">
+              <Euro className="w-4 h-4 text-healio-primary" />
+              <span className="text-sm text-white font-medium">Ab 0 Euro effektiv monatlich dank IKK Bonus</span>
+            </div>
+            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full border border-white/10">
+              <CheckCircle className="w-4 h-4 text-healio-primary" />
+              <span className="text-sm text-white font-medium">Garantiert ohne Wartezeit</span>
+            </div>
+            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full border border-white/10">
+              <CheckCircle className="w-4 h-4 text-healio-primary" />
+              <span className="text-sm text-white font-medium">Stiftung Warentest: Sehr Gut (0,9)</span>
             </div>
           </motion.div>
 

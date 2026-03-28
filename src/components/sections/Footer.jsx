@@ -13,7 +13,10 @@ const Footer = ({ hideCta = false }) => {
           <div>
             <h3 className="text-2xl font-bold mb-4 text-white">Healio</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Ihre Experten für betriebliche Altersvorsorge und Krankenversicherung.
+              Dein digitaler Versicherungsmakler für smartere Gesundheitsvorsorge.
+            </p>
+            <p className="text-slate-500 text-xs mt-2 leading-relaxed">
+              Healio ist ein unabhängiger Versicherungsmakler nach §34d GewO. 10% unserer Erlöse gehen an Umweltorganisationen.
             </p>
           </div>
           <div>
@@ -27,7 +30,7 @@ const Footer = ({ hideCta = false }) => {
           <div>
             <h4 className="font-semibold mb-4 text-slate-200">Kontakt</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><a href="mailto:info@healio.de" className="hover:text-healio-primary transition-colors">info@healio.de</a></li>
+              <li><a href="mailto:kontakt@healio.de" className="hover:text-healio-primary transition-colors">kontakt@healio.de</a></li>
               <li><a href="tel:+494089755705" className="hover:text-healio-primary transition-colors">+49 40 89755705</a></li>
             </ul>
           </div>
@@ -37,6 +40,7 @@ const Footer = ({ hideCta = false }) => {
               <li><Link to="/impressum" className="hover:text-healio-primary transition-colors">Impressum</Link></li>
               <li><Link to="/datenschutz" className="hover:text-healio-primary transition-colors">Datenschutz</Link></li>
               <li><Link to="/agb" className="hover:text-healio-primary transition-colors">AGB</Link></li>
+              <li><Link to="/erstinformation" className="hover:text-healio-primary transition-colors">Erstinformation (§60 VVG)</Link></li>
             </ul>
           </div>
         </div>

@@ -4,12 +4,11 @@ import SEOHead from '@/components/SEOHead';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
-
+import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
+import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
+import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
-import AmbulantHowItWorks from '@/components/sections/ambulant/AmbulantHowItWorks';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
-import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimonials';
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
@@ -41,34 +40,42 @@ const AmbulantPage = () => {
           </section>
         </FadeInUp>
 
-        <FadeInUp>
-          <AmbulantVideoSection />
-        </FadeInUp>
-
-        <FadeInUp>
-          <AmbulantConceptAccordion />
-        </FadeInUp>
-
-        <FadeInUp>
-          <AmbulantBonusCalculator />
-        </FadeInUp>
-
-        <FadeInUp>
-          <AmbulantHowItWorks />
-        </FadeInUp>
-
+        {/* 4 Highlight-Leistungskarten + Akkordeon */}
         <FadeInUp>
           <AmbulantBenefits />
         </FadeInUp>
 
+        {/* Beispielrechnung (offen, prominent) */}
+        <FadeInUp>
+          <AmbulantBeispielrechnung />
+        </FadeInUp>
+
+        {/* Interaktiver Bonus-Rechner */}
+        <FadeInUp>
+          <AmbulantBonusCalculator />
+        </FadeInUp>
+
+        {/* Erklärvideo */}
+        <FadeInUp>
+          <AmbulantVideoSection />
+        </FadeInUp>
+
+        {/* Konzept-Akkordeon (gestrafft) */}
+        <FadeInUp>
+          <AmbulantConceptAccordion />
+        </FadeInUp>
+
+        {/* Testimonials */}
         <FadeInUp>
           <AmbulantTestimonials />
         </FadeInUp>
 
+        {/* FAQ */}
         <FadeInUp>
           <AmbulantFAQ />
         </FadeInUp>
 
+        {/* Closing CTA + Footer */}
         <FadeInUp>
           <AmbulantFinalCTA />
         </FadeInUp>
