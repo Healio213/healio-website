@@ -1,7 +1,7 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft, Plus, Minus } from 'lucide-react';
+import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
@@ -27,6 +27,11 @@ const AmbulantBonusCalculator = () => {
 
   // For single activities: true/false, for multi activities: count (0, 1, 2, ...)
   const [selectedActivities, setSelectedActivities] = useState({});
+  const [monatsbeitrag, setMonatsbeitrag] = useState(45);
+  const [beitragEditing, setBeitragEditing] = useState(false);
+  const beitragInputRef = useRef(null);
+  const analyticsTimer = useRef(null);
+  const lastTracked = useRef(null);
 
   const handleToggle = (id) => {
     setSelectedActivities((prev) => ({
@@ -45,9 +50,22 @@ const AmbulantBonusCalculator = () => {
 
   const handleReset = () => {
     setSelectedActivities({});
+    setMonatsbeitrag(45);
   };
 
-  const AP1_JAHRESBEITRAG = 480; // Ambulant 100 (AP1): 40 €/Monat
+  const handleBeitragChange = (e) => {
+    const val = e.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
+    setMonatsbeitrag(val === '' ? '' : Number(val));
+  };
+
+  const handleBeitragBlur = () => {
+    setBeitragEditing(false);
+    if (monatsbeitrag === '' || isNaN(monatsbeitrag) || monatsbeitrag < 0) {
+      setMonatsbeitrag(45);
+    }
+  };
+
+  const jahresbeitrag = Math.round((monatsbeitrag || 0) * 12);
 
   const totalBonus = useMemo(() => {
     return ACTIVITIES.reduce((sum, activity) => {
@@ -59,7 +77,41 @@ const AmbulantBonusCalculator = () => {
     }, 0);
   }, [selectedActivities]);
 
-  const nettoErgebnis = totalBonus - AP1_JAHRESBEITRAG;
+  const nettoErgebnis = totalBonus - jahresbeitrag;
+
+  // Analytics: Track nach 2 Minuten Inaktivität (Debounce)
+  const trackUsage = useCallback(() => {
+    if (typeof window === 'undefined' || !window.gtag) return;
+    if (totalBonus === 0) return;
+
+    const trackData = JSON.stringify({ totalBonus, jahresbeitrag, nettoErgebnis });
+    if (trackData === lastTracked.current) return;
+    lastTracked.current = trackData;
+
+    window.gtag('event', 'bonus_calculator_result', {
+      event_category: 'Bonusrechner',
+      event_label: nettoErgebnis >= 0 ? 'Plus' : 'Minus',
+      bonus_total: totalBonus,
+      jahresbeitrag: jahresbeitrag,
+      netto_ergebnis: nettoErgebnis,
+      monatsbeitrag: monatsbeitrag,
+      aktivitaeten_count: Object.values(selectedActivities).filter(v => v && v !== 0).length,
+    });
+  }, [totalBonus, jahresbeitrag, nettoErgebnis, monatsbeitrag, selectedActivities]);
+
+  useEffect(() => {
+    if (totalBonus === 0) return;
+    if (analyticsTimer.current) clearTimeout(analyticsTimer.current);
+    analyticsTimer.current = setTimeout(trackUsage, 120000); // 2 Minuten
+    return () => { if (analyticsTimer.current) clearTimeout(analyticsTimer.current); };
+  }, [totalBonus, jahresbeitrag, trackUsage]);
+
+  useEffect(() => {
+    if (beitragEditing && beitragInputRef.current) {
+      beitragInputRef.current.focus();
+      beitragInputRef.current.select();
+    }
+  }, [beitragEditing]);
 
   return (
     <section id="bonus-calculator" className="bg-white py-24 font-sans">
@@ -223,12 +275,42 @@ const AmbulantBonusCalculator = () => {
                   </AnimatePresence>
                 </div>
                 
-                {/* Netto-Vergleich mit AP1 */}
+                {/* Netto-Vergleich mit editierbarem Beitrag */}
                 <div className="bg-white/15 rounded-xl p-4 mb-6 backdrop-blur-sm">
-                  <p className="text-white/80 text-sm font-medium mb-2">Tarif Ambulant 100 (AP1) — 100 % Erstattung</p>
+                  <p className="text-white/80 text-sm font-medium mb-3">Tarif Ambulant 100 (AP1) — 100 % Erstattung</p>
+
+                  {/* Editierbarer Monatsbeitrag */}
+                  <div className="flex justify-between items-center text-white text-sm mb-2">
+                    <span>Dein Monatsbeitrag:</span>
+                    {beitragEditing ? (
+                      <div className="flex items-center gap-1">
+                        <input
+                          ref={beitragInputRef}
+                          type="text"
+                          inputMode="decimal"
+                          value={monatsbeitrag}
+                          onChange={handleBeitragChange}
+                          onBlur={handleBeitragBlur}
+                          onKeyDown={(e) => e.key === 'Enter' && handleBeitragBlur()}
+                          className="w-16 bg-white/20 border border-white/40 rounded px-2 py-0.5 text-white text-right font-bold text-sm focus:outline-none focus:border-white"
+                        />
+                        <span className="font-bold">€</span>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setBeitragEditing(true)}
+                        className="flex items-center gap-1.5 font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
+                      >
+                        <span>{monatsbeitrag} €/Monat</span>
+                        <Pencil className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+                      </button>
+                    )}
+                  </div>
+
                   <div className="flex justify-between text-white text-sm mb-1">
-                    <span>Jahresbeitrag:</span>
-                    <span className="font-bold">480 €</span>
+                    <span>= Jahresbeitrag:</span>
+                    <span className="font-bold">{jahresbeitrag} €</span>
                   </div>
                   <div className="flex justify-between text-white text-sm mb-1">
                     <span>Dein Bonus:</span>
@@ -238,6 +320,10 @@ const AmbulantBonusCalculator = () => {
                     <span>Ergebnis:</span>
                     <span>{nettoErgebnis >= 0 ? `+${nettoErgebnis} € Plus` : `${nettoErgebnis} €`}</span>
                   </div>
+
+                  <p className="text-white/50 text-xs mt-2">
+                    Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).
+                  </p>
                 </div>
 
                 <p className="text-white/90 text-sm leading-relaxed mb-8 max-w-sm mx-auto font-medium">
