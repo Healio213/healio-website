@@ -11,10 +11,10 @@ const ACTIVITIES = [
   { id: 'checkup', title: 'Gesundheits-Check-up', desc: '1x pro Jahr', amount: 75 },
   { id: 'krebs', title: 'Krebsvorsorge', desc: '1x pro Jahr', amount: 75 },
   { id: 'ultraschall', title: 'Ultraschallscreening', desc: '1x pro Jahr', amount: 75 },
-  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: 'Mehrfach möglich', amount: 75 },
-  { id: 'sport', title: 'Sport Verein/Studio', desc: 'Pro Mitgliedschaft', amount: 75 },
+  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: 'Geheimtipp! Mehrfach möglich: 75 + 75 + 75 €', amount: 225, tip: true },
+  { id: 'sport', title: 'Sport Verein/Studio', desc: 'Mehrere Mitgliedschaften zählen: 75 + 75 €', amount: 150 },
   { id: 'abzeichen', title: 'Sportabzeichen', desc: 'Jedes Abzeichen', amount: 75 },
-  { id: 'bmi', title: 'BMI im Normalbereich', desc: '1x pro Jahr', amount: 75 },
+  { id: 'bmi', title: 'BMI im Normalbereich', desc: 'Einfach nachweisen — 75 € sichern', amount: 75 },
   { id: 'blutdruck', title: 'Blutdruck normal', desc: '1x pro Jahr', amount: 75 },
   { id: 'zahnreinigung', title: 'Zahnreinigung', desc: '1x pro Jahr', amount: 40 },
   { id: 'kind', title: 'U-Untersuchungen Kind', desc: 'je Untersuchung', amount: 30 },
@@ -103,8 +103,9 @@ const AmbulantBonusCalculator = () => {
                   <div className="flex-1 min-w-0">
                     <div className="font-bold text-healio-dark leading-tight mb-1">
                       {activity.title}
+                      {activity.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">Tipp</span>}
                     </div>
-                    <div className="text-sm text-gray-500 leading-snug">
+                    <div className={`text-sm leading-snug ${activity.tip ? 'text-amber-600 font-medium' : 'text-gray-500'}`}>
                       {activity.desc}
                     </div>
                   </div>
@@ -115,8 +116,19 @@ const AmbulantBonusCalculator = () => {
               ))}
             </div>
 
-            <div className="mt-8 text-center md:text-left">
-              <button 
+            {/* Vertrauens-Hinweis */}
+            <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex gap-3 items-start">
+              <span className="text-xl flex-shrink-0 mt-0.5">🤝</span>
+              <div>
+                <p className="text-sm font-bold text-blue-900 mb-1">Unkompliziert & auf Vertrauensbasis</p>
+                <p className="text-sm text-blue-800 leading-relaxed">
+                  Die IKK Classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Du musst also nicht jede Aktivität aufwändig belegen — einfach angeben und Bonus kassieren.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 text-center md:text-left">
+              <button
                 onClick={handleReset}
                 className="text-gray-400 hover:text-healio-dark underline text-sm font-medium transition-colors"
               >
