@@ -1,29 +1,31 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft } from 'lucide-react';
+import { Gift, ArrowRightLeft, Plus, Minus } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const ACTIVITIES = [
-  { id: 'impfung', title: 'Schutzimpfung', desc: '(bis zu 8x) - 30€ je Impfung', amount: 240 },
-  { id: 'zahn', title: 'Zahnvorsorge', desc: '(bis 2x) - 30€ je Besuch', amount: 60 },
+  { id: 'impfung', title: 'Schutzimpfung', desc: '30 € je Impfung', perUnit: 30, max: 8, unit: 'Impfung(en)' },
+  { id: 'zahn', title: 'Zahnvorsorge', desc: '30 € je Besuch', perUnit: 30, max: 2, unit: 'Besuch(e)' },
   { id: 'checkup', title: 'Gesundheits-Check-up', desc: '1x pro Jahr', amount: 75 },
   { id: 'krebs', title: 'Krebsvorsorge', desc: '1x pro Jahr', amount: 75 },
   { id: 'ultraschall', title: 'Ultraschallscreening', desc: '1x pro Jahr', amount: 75 },
-  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: 'Geheimtipp! Mehrfach möglich: 75 + 75 + 75 €', amount: 225, tip: true },
-  { id: 'sport', title: 'Sport Verein/Studio', desc: 'Mehrere Mitgliedschaften zählen: 75 + 75 €', amount: 150 },
+  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: '75 € je Kurs', perUnit: 75, max: 5, unit: 'Kurs(e)', tip: true },
+  { id: 'sport', title: 'Sport Verein/Studio', desc: '75 € je Mitgliedschaft', perUnit: 75, max: 4, unit: 'Mitgliedschaft(en)' },
   { id: 'abzeichen', title: 'Sportabzeichen', desc: 'Jedes Abzeichen', amount: 75 },
   { id: 'bmi', title: 'BMI im Normalbereich', desc: 'Einfach nachweisen — 75 € sichern', amount: 75 },
   { id: 'blutdruck', title: 'Blutdruck normal', desc: '1x pro Jahr', amount: 75 },
   { id: 'zahnreinigung', title: 'Zahnreinigung', desc: '1x pro Jahr', amount: 40 },
-  { id: 'kind', title: 'U-Untersuchungen Kind', desc: 'je Untersuchung', amount: 30 },
+  { id: 'kind', title: 'U-Untersuchungen Kind', desc: '30 € je Untersuchung', perUnit: 30, max: 6, unit: 'Untersuchung(en)' },
+  { id: 'fitness', title: 'Fitnessgerät (z. B. Apple Watch)', desc: 'Zuschuss-Variante: bis 180 € für Fitnessuhr/Tracker', amount: 180, tip: true },
 ];
 
 const AmbulantBonusCalculator = () => {
   const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV";
   const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V3700025016";
 
+  // For single activities: true/false, for multi activities: count (0, 1, 2, ...)
   const [selectedActivities, setSelectedActivities] = useState({});
 
   const handleToggle = (id) => {
@@ -31,6 +33,14 @@ const AmbulantBonusCalculator = () => {
       ...prev,
       [id]: !prev[id]
     }));
+  };
+
+  const handleCount = (id, delta, max) => {
+    setSelectedActivities((prev) => {
+      const current = prev[id] || 0;
+      const next = Math.max(0, Math.min(max, current + delta));
+      return { ...prev, [id]: next };
+    });
   };
 
   const handleReset = () => {
@@ -41,6 +51,10 @@ const AmbulantBonusCalculator = () => {
 
   const totalBonus = useMemo(() => {
     return ACTIVITIES.reduce((sum, activity) => {
+      if (activity.perUnit) {
+        const count = selectedActivities[activity.id] || 0;
+        return sum + count * activity.perUnit;
+      }
       return selectedActivities[activity.id] ? sum + activity.amount : sum;
     }, 0);
   }, [selectedActivities]);
@@ -79,41 +93,74 @@ const AmbulantBonusCalculator = () => {
             <h3 className="text-2xl font-bold text-healio-dark mb-6">Wähle deine Aktivitäten:</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {ACTIVITIES.map((activity, index) => (
-                <motion.label 
-                  key={activity.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer select-none
-                    ${selectedActivities[activity.id] 
-                      ? 'border-healio-primary bg-healio-light' 
-                      : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
-                    }`}
-                >
-                  <div className="mt-1">
-                    <Checkbox 
-                      id={activity.id}
-                      checked={!!selectedActivities[activity.id]}
-                      onCheckedChange={() => handleToggle(activity.id)}
-                      className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-healio-dark leading-tight mb-1">
-                      {activity.title}
-                      {activity.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">Tipp</span>}
+              {ACTIVITIES.map((activity, index) => {
+                const isMulti = !!activity.perUnit;
+                const count = isMulti ? (selectedActivities[activity.id] || 0) : 0;
+                const isActive = isMulti ? count > 0 : !!selectedActivities[activity.id];
+                const displayAmount = isMulti ? count * activity.perUnit : activity.amount;
+
+                return (
+                  <motion.div
+                    key={activity.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                    className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 select-none
+                      ${isActive
+                        ? 'border-healio-primary bg-healio-light'
+                        : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
+                      } ${!isMulti ? 'cursor-pointer' : ''}`}
+                    onClick={!isMulti ? () => handleToggle(activity.id) : undefined}
+                  >
+                    {!isMulti && (
+                      <div className="mt-1">
+                        <Checkbox
+                          id={activity.id}
+                          checked={isActive}
+                          onCheckedChange={() => handleToggle(activity.id)}
+                          className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-healio-dark leading-tight mb-1">
+                        {activity.title}
+                        {activity.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">Tipp</span>}
+                      </div>
+                      <div className={`text-sm leading-snug ${activity.tip ? 'text-amber-600 font-medium' : 'text-gray-500'}`}>
+                        {activity.desc}
+                      </div>
+                      {isMulti && (
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            type="button"
+                            onClick={() => handleCount(activity.id, -1, activity.max)}
+                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
+                            disabled={count === 0}
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="w-6 text-center font-bold text-healio-dark text-lg">{count}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCount(activity.id, 1, activity.max)}
+                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
+                            disabled={count === activity.max}
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="text-xs text-gray-400 ml-1">max. {activity.max}</span>
+                        </div>
+                      )}
                     </div>
-                    <div className={`text-sm leading-snug ${activity.tip ? 'text-amber-600 font-medium' : 'text-gray-500'}`}>
-                      {activity.desc}
+                    <div className="font-bold text-healio-primary whitespace-nowrap flex-shrink-0">
+                      {isMulti && count > 1 && <span className="text-xs font-normal text-gray-400 block text-right">{count}× {activity.perUnit}€</span>}
+                      +{displayAmount}€
                     </div>
-                  </div>
-                  <div className="font-bold text-healio-primary whitespace-nowrap flex-shrink-0">
-                    +{activity.amount}€
-                  </div>
-                </motion.label>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Vertrauens-Hinweis */}
