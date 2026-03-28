@@ -69,8 +69,8 @@ const VeterinaryContact = () => {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs sm:text-sm text-gray-500 uppercase font-semibold tracking-wider">E-Mail Kontakt</p>
-                  <a href="mailto:info@healio.de" className="font-bold text-base sm:text-lg text-slate-900 hover:text-[#1E3A8A] transition-colors block truncate">
-                    info@healio.de
+                  <a href="mailto:kontakt@healio.de" className="font-bold text-base sm:text-lg text-slate-900 hover:text-[#1E3A8A] transition-colors block truncate">
+                    kontakt@healio.de
                   </a>
                 </div>
               </div>

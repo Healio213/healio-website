@@ -139,7 +139,7 @@ const BonusCalculator = () => {
 
                 <div className="flex flex-col gap-4">
                   <Button asChild className="bg-white text-[#25c990] hover:bg-gray-50 h-14 w-full text-base font-bold shadow-lg transition-all hover:scale-[1.02]">
-                    <a href={calculatorUrl} target="_blank" rel="noopener noreferrer">
+                    <a href="/ambulant">
                       <Gift className="w-5 h-5 mr-2" />
                       Tarif berechnen
                     </a>

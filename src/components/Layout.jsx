@@ -5,7 +5,8 @@ import Footer from '@/components/sections/Footer';
 
 const Layout = () => {
   const { pathname } = useLocation();
-  const hideCta = pathname === '/ambulant';
+  const showCta = pathname === '/' || pathname === '/partner';
+  const hideCta = !showCta;
 
   return (
     <div className="flex flex-col min-h-screen w-full">

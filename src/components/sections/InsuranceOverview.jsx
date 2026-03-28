@@ -139,7 +139,7 @@ const InsuranceOverview = () => {
             Nicht sicher, welche Versicherung die richtige für Sie ist?
           </p>
           <Button asChild variant="outline" className="healio-button">
-            <a href="mailto:info@healio.de">
+            <a href="mailto:kontakt@healio.de">
               Kostenlose Beratung anfragen
             </a>
           </Button>

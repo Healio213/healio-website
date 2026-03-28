@@ -19,7 +19,7 @@ const AgbPage = () => {
         description="AGB von Healio. Lese unsere Geschäftsbedingungen und verstehe die Nutzungsrichtlinien unserer Gesundheitsplattform."
         canonicalUrl="https://www.healio.de/agb"
         ogTitle="Allgemeine Geschäftsbedingungen - Healio"
-        ogDescription="Allgemeine Geschäftsbedingungen (AGB) für Versicherungsmakler der Noli GmbH."
+        ogDescription="Allgemeine Geschäftsbedingungen (AGB) für Versicherungsmakler der Healio GmbH."
         ogUrl="https://www.healio.de/agb"
         schemaMarkup={schemaMarkup}
       />
@@ -36,7 +36,7 @@ const AgbPage = () => {
               <Link to="/datenschutz" className="text-healio-green hover:underline">Datenschutz</Link>
             </nav>
 
-            <p className="text-healio-text-light mb-8">Healio ist eine Marke der Noli GmbH.</p>
+            <p className="text-healio-text-light mb-8">Healio GmbH – Allgemeine Geschäftsbedingungen für Versicherungsmakler.</p>
             
             <h2 className="text-2xl font-bold text-healio-text mt-12 mb-4">1. Vertragsgegenstand lt. Maklervertrag</h2>
             

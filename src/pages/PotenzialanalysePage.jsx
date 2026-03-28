@@ -318,7 +318,7 @@ const PotenzialanalysePage = () => {
               <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-gray-400" />
-                  <span>E-Mail: <a href="mailto:info@healio.de" className="text-healio-primary hover:underline font-medium">info@healio.de</a></span>
+                  <span>E-Mail: <a href="mailto:kontakt@healio.de" className="text-healio-primary hover:underline font-medium">kontakt@healio.de</a></span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-gray-400" />

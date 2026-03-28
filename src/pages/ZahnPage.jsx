@@ -84,7 +84,7 @@ const ZahnPage = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-xl mx-auto">
                   <Button asChild className="bg-[#25c990] hover:bg-[#1db37f] text-white shadow-[0_4px_14px_rgba(37,201,144,0.4)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.6)] text-lg px-8 py-6 h-auto rounded-xl border-none transition-all duration-300 w-full sm:w-auto">
-                    <a href={calculatorUrl} target="_blank" rel="noopener noreferrer">
+                    <a href="/ambulant">
                       <Calculator className="w-5 h-5 mr-2" aria-hidden="true" />
                       Tarif berechnen
                     </a>

@@ -43,7 +43,7 @@ const LeistungenContactForm = () => {
     } catch (error) {
       toast({
         title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@healio.de",
+        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
         variant: "destructive",
       });
     } finally {

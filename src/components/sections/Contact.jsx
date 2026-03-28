@@ -86,7 +86,7 @@ const Contact = () => {
     } catch (error) {
       toast({
         title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@healio.de",
+        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
         variant: "destructive",
       });
     } finally {
@@ -136,8 +136,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-slate-500 mb-1">Schreiben Sie uns direkt</p>
-                  <a href="mailto:info@healio.de" className="font-bold text-lg text-white hover:text-healio-primary transition-colors block">
-                    info@healio.de
+                  <a href="mailto:kontakt@healio.de" className="font-bold text-lg text-white hover:text-healio-primary transition-colors block">
+                    kontakt@healio.de
                   </a>
                 </div>
               </div>

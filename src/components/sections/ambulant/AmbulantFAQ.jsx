@@ -54,7 +54,7 @@ const faqSchema = {
 
 const AmbulantFAQ = () => {
   return (
-    <section className="py-24 bg-white" itemScope itemType="https://schema.org/FAQPage">
+    <section className="pt-24 pb-32 bg-white" itemScope itemType="https://schema.org/FAQPage">
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
