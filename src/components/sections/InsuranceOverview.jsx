@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -53,6 +55,9 @@ const insuranceTypes = [
 ];
 
 const InsuranceOverview = () => {
+  const { t } = useTranslation('home');
+  const { getPath } = useLanguage();
+
   return (
     <section className="healio-section bg-gradient-to-b from-white to-gray-50" aria-labelledby="insurance-overview-heading">
       <div className="healio-container">
@@ -64,10 +69,10 @@ const InsuranceOverview = () => {
           className="text-center mb-16"
         >
           <h2 id="insurance-overview-heading" className="text-3xl lg:text-5xl font-extrabold text-healio-text mb-4">
-            Unsere <span className="healio-gradient-text">Versicherungslösungen</span>
+            {t('insurance.title')}
           </h2>
           <p className="text-lg text-healio-text-light max-w-3xl mx-auto">
-            Wählen Sie die Versicherung, die zu Ihrem Leben passt – oder kombinieren Sie mehrere für umfassenden Schutz.
+            {t('insurance.subtitle')}
           </p>
         </motion.div>
 
@@ -118,7 +123,7 @@ const InsuranceOverview = () => {
                 {/* CTA Button */}
                 <Button asChild className="w-full healio-button bg-gradient-to-r from-healio-primary to-healio-dark hover:shadow-lg group">
                   <Link to={insurance.link}>
-                    Mehr erfahren
+                    {t('insurance.moreInfo')}
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
                 </Button>
@@ -136,11 +141,11 @@ const InsuranceOverview = () => {
           className="mt-16 text-center"
         >
           <p className="text-lg text-healio-text-light mb-6">
-            Nicht sicher, welche Versicherung die richtige für Sie ist?
+            {t('insurance.notSure')}
           </p>
           <Button asChild variant="outline" className="healio-button">
             <a href="mailto:kontakt@healio.de">
-              Kostenlose Beratung anfragen
+              {t('insurance.freeConsultation')}
             </a>
           </Button>
         </motion.div>

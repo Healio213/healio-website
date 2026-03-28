@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 
@@ -9,15 +10,17 @@ const testimonialsData = [
 ];
 
 const Testimonials = () => {
+  const { t } = useTranslation('home');
+
   return (
     <section className="healio-section bg-white" aria-labelledby="testimonials-heading">
       <div className="healio-container">
         <div className="text-center mb-12">
           <h2 id="testimonials-heading" className="text-3xl lg:text-5xl font-extrabold text-healio-text">
-            Echte Kunden, <span className="healio-gradient-text">echte Ersparnis</span>
+            {t('testimonials.title')}
           </h2>
           <p className="mt-4 text-lg text-healio-text-light max-w-3xl mx-auto">
-            Zufriedene Nutzer:innen teilen ihre Erfahrungen mit dem Healio-Konzept.
+            {t('testimonials.subtitle')}
           </p>
         </div>
         <div className="grid lg:grid-cols-3 gap-8">

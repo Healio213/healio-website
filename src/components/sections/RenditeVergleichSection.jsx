@@ -1,11 +1,13 @@
 
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Info, TrendingUp, Users, ArrowDown, ArrowUp, CheckCircle2, XCircle } from 'lucide-react';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const RenditeVergleichSection = () => {
+  const { t } = useTranslation('home');
   // Fixed values instead of state
   const pmt = 338;
   const jahre = 25;
@@ -88,11 +90,11 @@ const RenditeVergleichSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Rendite Vergleich <br className="hidden md:block"/>
-            <TextHighlight>Healio vs. Klassische bAV</TextHighlight>
+            {t('rendite.title')} <br className="hidden md:block"/>
+            <TextHighlight>{t('rendite.subtitle')}</TextHighlight>
           </h2>
           <p className="text-base text-slate-600 leading-relaxed max-w-3xl mx-auto">
-            Berechnung bei einer monatlichen Sparrate von {pmt} € über eine Laufzeit von {jahre} Jahren.
+            {t('rendite.calculation')}
           </p>
         </motion.div>
 
@@ -113,21 +115,21 @@ const RenditeVergleichSection = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#25c990]/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
                 <h4 className="text-white font-bold text-xl mb-6 flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#25c990]"></div>
-                  Healio Strategie (8,47%)
+                  {t('rendite.healioStrategy')}
                 </h4>
-                
+
                 <div className="space-y-4 relative z-10">
                   <div className="flex justify-between text-base">
-                    <span className="text-slate-300">Einzahlung:</span>
+                    <span className="text-slate-300">{t('rendite.deposit')}</span>
                     <span className="text-white font-medium">{formatCurrency(currentHealio.einzahlung)}</span>
                   </div>
                   <div className="flex justify-between text-base">
-                    <span className="text-slate-300">Gewinn:</span>
+                    <span className="text-slate-300">{t('rendite.profit')}</span>
                     <span className="text-[#25c990] font-medium">+{formatCurrency(currentHealio.gewinn)}</span>
                   </div>
                   <div className="h-px w-full bg-white/20 my-4"></div>
                   <div className="flex justify-between items-end">
-                    <span className="text-slate-300 font-medium text-lg">Endkapital:</span>
+                    <span className="text-slate-300 font-medium text-lg">{t('rendite.finalCapital')}</span>
                     <span className="text-3xl font-bold text-white">{formatCurrency(currentHealio.endkapital)}</span>
                   </div>
                 </div>
@@ -137,21 +139,21 @@ const RenditeVergleichSection = () => {
               <div className="bg-white rounded-2xl p-8 shadow-md border border-slate-200">
                 <h4 className="text-slate-900 font-bold text-xl mb-6 flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-slate-400"></div>
-                  Klassische bAV (0,7%)
+                  {t('rendite.classicBav')}
                 </h4>
-                
+
                 <div className="space-y-4">
                   <div className="flex justify-between text-base">
-                    <span className="text-slate-500">Einzahlung:</span>
+                    <span className="text-slate-500">{t('rendite.deposit')}</span>
                     <span className="text-slate-900 font-medium">{formatCurrency(currentKlassisch.einzahlung)}</span>
                   </div>
                   <div className="flex justify-between text-base">
-                    <span className="text-slate-500">Gewinn:</span>
+                    <span className="text-slate-500">{t('rendite.profit')}</span>
                     <span className="text-slate-600 font-medium">+{formatCurrency(currentKlassisch.gewinn)}</span>
                   </div>
                   <div className="h-px w-full bg-slate-200 my-4"></div>
                   <div className="flex justify-between items-end">
-                    <span className="text-slate-500 font-medium text-lg">Endkapital:</span>
+                    <span className="text-slate-500 font-medium text-lg">{t('rendite.finalCapital')}</span>
                     <span className="text-2xl font-bold text-slate-900">{formatCurrency(currentKlassisch.endkapital)}</span>
                   </div>
                 </div>
@@ -167,7 +169,7 @@ const RenditeVergleichSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-lg font-bold text-slate-900 mb-6 text-center">Wertentwicklung über {jahre} Jahre</h3>
+            <h3 className="text-lg font-bold text-slate-900 mb-6 text-center">{t('rendite.chartTitle')}</h3>
             
             <div className="flex-1 min-h-[300px] w-full mt-auto">
               <ResponsiveContainer width="100%" height="100%">
@@ -225,9 +227,9 @@ const RenditeVergleichSection = () => {
 
             <div className="mt-6 p-4 bg-[#25c990]/10 rounded-xl border border-[#25c990]/20 text-center">
               <p className="text-sm md:text-base font-medium text-slate-800">
-                Der Zinseszinseffekt generiert bei der Healio Strategie ein <br className="hidden md:block"/>
+                {t('rendite.compoundEffect')} <br className="hidden md:block"/>
                 <span className="text-[#25c990] font-bold">
-                  Mehrkapital von {formatCurrency(currentHealio.endkapital - currentKlassisch.endkapital)}
+                  {formatCurrency(currentHealio.endkapital - currentKlassisch.endkapital)}
                 </span>
               </p>
             </div>
@@ -246,10 +248,10 @@ const RenditeVergleichSection = () => {
           <div className="relative z-10">
             <div className="text-center mb-10">
               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-                Lohnerhöhung vs. Gesundheits-Benefit
+                {t('rendite.salaryVsBenefit')}
               </h3>
               <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-                Warum eine klassische Gehaltserhöhung verpufft, während ein Gesundheits-Benefit bei Ihren Mitarbeitern im Gedächtnis bleibt.
+                {t('rendite.salaryVsBenefitDesc')}
               </p>
             </div>
 
@@ -261,25 +263,25 @@ const RenditeVergleichSection = () => {
                   <XCircle className="w-8 h-8 text-red-400" />
                 </div>
                 <h4 className="text-xl font-bold text-slate-800 mb-6 text-center">
-                  Klassische Lohnerhöhung
+                  {t('rendite.classicRaise')}
                 </h4>
-                
+
                 <div className="space-y-4 mb-8 flex-grow">
                   <div className="flex justify-between items-center py-3 border-b border-slate-200">
-                    <span className="text-slate-600 font-medium">AG-Aufwand</span>
+                    <span className="text-slate-600 font-medium">{t('rendite.employerCost')}</span>
                     <span className="text-lg font-bold text-slate-800">50 €</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-slate-200">
                     <div className="flex items-center gap-2">
                       <ArrowDown className="w-4 h-4 text-red-500" />
-                      <span className="text-slate-600">Steuern & Abgaben</span>
+                      <span className="text-slate-600">{t('rendite.taxesCharges')}</span>
                     </div>
                     <span className="text-lg font-bold text-red-500">- 29 €</span>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-xl p-5 text-center border border-slate-200 shadow-sm mt-auto">
-                  <span className="block text-sm text-slate-500 font-medium mb-1 uppercase tracking-wide">Netto-Effekt Mitarbeiter</span>
+                  <span className="block text-sm text-slate-500 font-medium mb-1 uppercase tracking-wide">{t('rendite.netEffect')}</span>
                   <span className="text-3xl font-black text-slate-800">21 €</span>
                 </div>
               </div>
@@ -290,25 +292,25 @@ const RenditeVergleichSection = () => {
                   <CheckCircle2 className="w-8 h-8 text-[#25c990]" />
                 </div>
                 <h4 className="text-xl font-bold text-green-900 mb-6 text-center">
-                  Healio Gesundheits-Benefit
+                  {t('rendite.healthBenefit')}
                 </h4>
-                
+
                 <div className="space-y-4 mb-8 flex-grow">
                   <div className="flex justify-between items-center py-3 border-b border-green-200/60">
-                    <span className="text-green-800 font-medium">AG-Aufwand</span>
+                    <span className="text-green-800 font-medium">{t('rendite.employerCost')}</span>
                     <span className="text-lg font-bold text-green-900">50 €</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-green-200/60">
                     <div className="flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-emerald-600" />
-                      <span className="text-green-800">Steuerfrei für Mitarbeiter</span>
+                      <span className="text-green-800">{t('rendite.taxFree')}</span>
                     </div>
                     <span className="text-lg font-bold text-emerald-600">✓</span>
                   </div>
                 </div>
 
                 <div className="bg-[#25c990] rounded-xl p-5 text-center shadow-lg mt-auto transform hover:scale-[1.02] transition-transform">
-                  <span className="block text-sm text-green-50 font-medium mb-1 uppercase tracking-wide">Gesundheitsbudget / Jahr</span>
+                  <span className="block text-sm text-green-50 font-medium mb-1 uppercase tracking-wide">{t('rendite.healthBudgetYear')}</span>
                   <div className="flex items-center justify-center gap-2">
                     <span className="text-4xl font-black text-white">1.500 €</span>
                     <TrendingUp className="w-6 h-6 text-white" />

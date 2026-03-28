@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { PlayCircle, AlertCircle, Smile, Leaf, Clock, HeartHandshake as Handshake, Package, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,8 @@ import PartnerTestimonials from '@/components/sections/partner/PartnerTestimonia
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 
 const PartnerPage = () => {
+  const { t } = useTranslation('partner');
+  const { t: tSeo } = useTranslation('seo');
   const [scriptError, setScriptError] = useState(false);
   const { toast } = useToast();
 
@@ -58,19 +61,19 @@ const PartnerPage = () => {
   };
 
   const schemaMarkup = createWebPageSchema(
-    'Für Therapeuten & Praxen', 
-    'Befreien Sie Ihre Patienten von finanziellen Sorgen. Das Healio Partnernetzwerk für ganzheitliche Therapeuten und Behandler.'
+    tSeo('partner.title'),
+    tSeo('partner.description')
   );
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   return (
     <>
-      <SEOHead 
-        title="Für Therapeuten | Healio Partnernetzwerk" 
-        description="Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken." 
-        canonicalUrl="https://www.healio.de/partner" 
-        schemaMarkup={schemaMarkup} 
+      <SEOHead
+        title={tSeo('partner.title')}
+        description={tSeo('partner.description')}
+        canonicalUrl="https://www.healio.de/partner"
+        schemaMarkup={schemaMarkup}
       />
 
       <main className="bg-white overflow-hidden w-full">
@@ -104,11 +107,10 @@ const PartnerPage = () => {
                 className="lg:col-span-7 max-w-2xl order-1 lg:order-1 text-center lg:text-left w-full"
               >
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                  Voller Fokus auf die Heilung. <br className="hidden sm:block" />
-                  <span className="text-[#25c990] drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">Nicht auf die Kosten.</span>
+                  {t('hero.title')}
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-xl mx-auto lg:mx-0">
-                  Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken.
+                  {t('hero.subtitle')}
                 </p>
               </motion.div>
               
@@ -139,7 +141,7 @@ const PartnerPage = () => {
                       playsInline
                     >
                       <source src="/erklaervideo-partner.mp4" type="video/mp4" />
-                      Ihr Browser unterstützt kein Video.
+                      {t('hero.videoFallback')}
                     </video>
                   )}
                 </div>
@@ -162,12 +164,10 @@ const PartnerPage = () => {
               className="max-w-4xl mx-auto text-center"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-6 sm:mb-8">
-                Wenn das Budget die Therapie bestimmt.
+                {t('problem.title')}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed">
-                Sie wissen genau welche ganzheitliche Behandlung einem Menschen jetzt helfen würde. 
-                Doch der Patient zögert weil die Kosten nicht von der Kasse getragen werden. 
-                Das blockiert den Heilungsprozess und frustriert Sie als Behandler weil Sie nicht Ihr volles Potenzial ausschöpfen können.
+                {t('problem.text')}
               </p>
             </motion.div>
           </div>
@@ -183,8 +183,7 @@ const PartnerPage = () => {
               className="text-center mb-12 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800">
-                Wir nehmen das Thema Geld <br className="hidden md:block" />
-                <span className="text-[#25c990]">aus dem Behandlungsraum.</span>
+                {t('solution.title')}
               </h2>
             </motion.div>
 
@@ -192,33 +191,33 @@ const PartnerPage = () => {
               {[
                 {
                   icon: Smile,
-                  title: "Entspannte Patienten",
-                  text: "Eine hohe Erstattung durch unsere Systeme nimmt den finanziellen Druck. Das fördert die innere Ruhe, die für jede Heilung essenziell ist."
+                  title: t('solution.relaxedPatients'),
+                  text: t('solution.relaxedPatientsDesc')
                 },
                 {
                   icon: Leaf,
-                  title: "Nachhaltige Therapien",
-                  text: "Patienten brechen wichtige Behandlungen nicht mehr aus Sorge um die Rechnung ab."
+                  title: t('solution.sustainableTherapy'),
+                  text: t('solution.sustainableTherapyDesc')
                 },
                 {
                   icon: Clock,
-                  title: "Ihre Zeit bleibt geschützt",
-                  text: "Sie überreichen lediglich unsere Information. Den gesamten administrativen Prozess übernehmen wir."
+                  title: t('solution.protectedTime'),
+                  text: t('solution.protectedTimeDesc')
                 },
                 {
                   icon: Handshake,
-                  title: "Das kurze Kennenlernen",
-                  text: "Wir prüfen in wenigen Minuten ob unsere Philosophie zu Ihrer Praxis passt."
+                  title: t('steps.step1Title'),
+                  text: t('steps.step1Desc')
                 },
                 {
                   icon: Package,
-                  title: "Die kostenfreie Ausstattung",
-                  text: "Sie erhalten unsere hochwertigen Informationskarten kostenfrei für Ihr Wartezimmer."
+                  title: t('steps.step2Title'),
+                  text: t('steps.step2Desc')
                 },
                 {
                   icon: TrendingUp,
-                  title: "Die profitable Zusammenarbeit",
-                  text: "Ihre Patienten profitieren sofort. Sie konzentrieren sich auf das, was Sie am besten können."
+                  title: t('steps.step3Title'),
+                  text: t('steps.step3Desc')
                 }
               ].map((item, index) => {
                 const Icon = item.icon;
@@ -258,10 +257,10 @@ const PartnerPage = () => {
               className="text-center mb-8 sm:mb-12"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                Jetzt kostenlos Partnerpraxis werden
+                {t('cta.title')}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                In nur 5 Minuten zum Healio-Partner. Buchen Sie Ihren Kennenlerntermin.
+                {t('cta.subtitle')}
               </p>
             </motion.div>
 
@@ -276,8 +275,8 @@ const PartnerPage = () => {
                 {scriptError ? (
                   <div className="w-full min-h-[400px] flex flex-col items-center justify-center text-center p-6 sm:p-8 bg-slate-50 rounded-xl border border-slate-200">
                     <AlertCircle className="w-10 h-10 sm:w-12 sm:h-12 text-red-400 mb-4" />
-                    <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-2">Kalender konnte nicht geladen werden</h3>
-                    <p className="text-sm sm:text-base text-slate-600">Bitte überprüfen Sie Ihre Internetverbindung oder deaktivieren Sie eventuelle Adblocker.</p>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-2">{t('cta.calendarError')}</h3>
+                    <p className="text-sm sm:text-base text-slate-600">{t('cta.calendarErrorDesc')}</p>
                   </div>
                 ) : (
                   <div 

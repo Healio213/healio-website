@@ -1,11 +1,15 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { TrendingUp, Clock, AlertTriangle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const CombinedZeitfalleRenditeSection = () => {
+  const { t } = useTranslation('home');
+  const { getPath } = useLanguage();
   return (
     <section className="py-28 lg:py-36 bg-slate-50 overflow-hidden relative" aria-labelledby="zeitfalle-heading">
       <div className="healio-container relative z-10">
@@ -53,7 +57,7 @@ const CombinedZeitfalleRenditeSection = () => {
 
             <div className="mt-10">
               <Button asChild className="bg-healio-primary hover:bg-healio-primary-dark text-white px-8 py-6 rounded-xl text-lg shadow-lg">
-                <Link to="/potenzialanalyse">
+                <Link to={getPath('potenzialanalyse')}>
                   Erstgespräch vereinbaren
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
@@ -79,7 +83,7 @@ const CombinedZeitfalleRenditeSection = () => {
                 {/* Scenario 1 */}
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
-                    <span className="text-slate-400 font-medium">Klassische Lohnerhöhung</span>
+                    <span className="text-slate-400 font-medium">{t('rendite.classicRaise')}</span>
                     <span className="text-xl font-bold">50 € AG-Aufwand</span>
                   </div>
                   <div className="h-4 bg-white/10 rounded-full overflow-hidden">
@@ -99,7 +103,7 @@ const CombinedZeitfalleRenditeSection = () => {
                 {/* Scenario 2 */}
                 <div className="space-y-4">
                   <div className="flex justify-between items-end">
-                    <span className="text-slate-400 font-medium">Healio Gesundheits-Benefit</span>
+                    <span className="text-slate-400 font-medium">{t('rendite.healthBenefit')}</span>
                     <span className="text-xl font-bold">50 € AG-Aufwand</span>
                   </div>
                   <div className="h-4 bg-white/10 rounded-full overflow-hidden">

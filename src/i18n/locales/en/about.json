@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "The People Behind Healio.",
+    "founder": "Frank Steinfurt",
+    "founderRole": "Founder & CEO",
+    "quote1": "I founded Healio because I am convinced that every person deserves access to first-class healthcare — regardless of their insurance status.",
+    "quote2": "After years in the traditional insurance industry, it became clear to me: the system is too complicated, often non-transparent, and rarely puts people first.",
+    "quote3": "With Healio, we set out to change that. We created a platform that untangles complex health insurance plans and offers clear, honest solutions. No incomprehensible clauses, no false promises. Simply excellent healthcare that truly makes a difference in everyday life."
+  },
+  "values": {
+    "title": "Our Values",
+    "subtitle": "These four pillars form the foundation of our daily work and our vision for the future of health.",
+    "transparency": "Transparency",
+    "transparencyDesc": "No hidden costs, no surprises. We communicate honestly and openly.",
+    "trust": "Trust",
+    "trustDesc": "Over 120 partner practices and thousands of satisfied customers trust Healio.",
+    "innovation": "Innovation",
+    "innovationDesc": "We are digitizing healthcare and making it easier than ever before.",
+    "humanity": "Humanity",
+    "humanityDesc": "Behind every policy is a person. We never forget that."
+  },
+  "stats": {
+    "title": "Our Success Story in Numbers",
+    "partners": "Partner Practices",
+    "budget": "max. Health Budget",
+    "areas": "Insurance Areas",
+    "satisfaction": "Customer Satisfaction as Goal"
+  },
+  "social": {
+    "title": "Success That Gives Back.",
+    "text1": "We deeply believe that economic success carries a social responsibility. Companies do not exist in a vacuum, but within a society that supports them.",
+    "text2": "That is why we donate 10% of our annual profits to charitable and social projects, out of full conviction.",
+    "text3": "No corporate marketing, no buzzwords — just our honest promise to help where support is needed most. That is what humanity in practice means to us."
+  },
+  "cta": {
+    "title": "Ready for Better Healthcare?",
+    "subtitle": "Let's find out together how we can provide optimal coverage for you or your company.",
+    "button": "Get Advice Now",
+    "explore": "Discover"
+  }
+}

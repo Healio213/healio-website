@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "badge": "GOT-compliant coverage",
+    "titleLine1": "Since the GOT reform:",
+    "titleLine2": "Veterinary medicine has",
+    "titleLine3": "a new price tag.",
+    "subtitle": "Anyone without insurance coverage today makes emergency decisions based on budget — not medicine. It doesn't have to be this way.",
+    "ctaPrimary": "Calculate premium",
+    "ctaSecondary": "Cost analysis",
+    "imageAlt": "Woman hugging her Golden Retriever"
+  },
+  "tariffs": {
+    "title": "Two Concepts. One Goal.",
+    "subtitle": "Breed, age, history — we calculate individually. You decide.",
+    "fullCover": {
+      "title": "Full Coverage",
+      "desc": "All-inclusive package for outpatient and inpatient treatments.",
+      "features": {
+        "treatments": "Medical treatments & medications",
+        "prevention": "Preventive care (vaccinations, check-ups)",
+        "surgery": "Unlimited surgeries"
+      },
+      "badge": "Ideal for young animals & puppies",
+      "cta": "Request a quote"
+    },
+    "opCover": {
+      "title": "Surgery Coverage",
+      "desc": "Focus on the high cost risk of surgical procedures.",
+      "features": {
+        "surgery": "Surgeries incl. diagnostics",
+        "aftercare": "Post-operative aftercare",
+        "clinicChoice": "Free choice of clinic"
+      },
+      "badge": "Ideal for older animals or lower premiums",
+      "cta": "Request a quote"
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "page": {
+    "title": "Get in Touch",
+    "office": "Headquarters Hamburg",
+    "address": "Address",
+    "addressValue": "Healio GmbH\nArndtstr. 6\n22085 Hamburg",
+    "email": "Email",
+    "phone": "Phone",
+    "startCall": "Start Call"
+  },
+  "form": {
+    "name": "Name *",
+    "namePlaceholder": "Your full name",
+    "email": "Email Address *",
+    "emailPlaceholder": "name@example.com",
+    "company": "Company (optional)",
+    "companyPlaceholder": "Your company",
+    "phone": "Phone (optional)",
+    "phonePlaceholder": "Your phone number",
+    "message": "Your Message *",
+    "messagePlaceholder": "How can we help you?",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "missingFields": "Missing Information",
+    "missingFieldsDesc": "Please fill in all required fields.",
+    "success": "Your inquiry has been sent successfully.",
+    "successDesc": "We will get back to you shortly.",
+    "error": "Error",
+    "errorDesc": "Unfortunately, your inquiry could not be sent. Please try again or contact us at kontakt@healio.de"
+  },
+  "contactForm": {
+    "title": "Get a Non-Binding Consultation",
+    "subtitle": "Are you publicly insured and want to get more out of your healthcare? Write to us — we'll find the right coverage for you.",
+    "firstName": "First Name *",
+    "lastName": "Last Name *",
+    "email": "Email *",
+    "phone": "Phone (optional)",
+    "interest": "Interested in *",
+    "interestOptions": {
+      "ambulant": "Outpatient Supplementary Insurance",
+      "zahn": "Dental Supplementary Insurance",
+      "stationaer": "Hospital Supplementary Insurance",
+      "tier": "Pet Health Insurance",
+      "multiple": "Multiple Areas"
+    },
+    "message": "Message *",
+    "requiredFields": "* Required fields. Your data will be transmitted securely and treated confidentially.",
+    "missingFields": "Missing Fields",
+    "missingFieldsDesc": "Please fill in all required fields."
+  },
+  "termin": {
+    "title": "Book an Appointment",
+    "subtitle": "Secure your preferred slot for a free and non-binding initial consultation.",
+    "confirmation": "You will automatically receive a confirmation by email after booking."
+  },
+  "dental": {
+    "title": "Request a Quote Now",
+    "submit": "Send Request"
+  },
+  "hospital": {
+    "title": "Request Private Patient Status"
+  },
+  "leistungenForm": {
+    "title": "Get a Non-Binding Consultation"
+  },
+  "potenzialanalyse": {
+    "title": "Your Potential Analysis.",
+    "subtitle": "Let us check in 15 minutes how much untapped payroll budget your company currently has.",
+    "name": "Your Name *",
+    "namePlaceholder": "First and last name",
+    "company": "Company *",
+    "companyPlaceholder": "Company name",
+    "email": "Business Email Address *",
+    "emailPlaceholder": "name@company.com",
+    "phone": "Phone Number",
+    "employees": "Number of Employees *",
+    "employeesPlaceholder": "Please select...",
+    "employees1to10": "1 to 10 employees",
+    "employees11to50": "11 to 50 employees",
+    "employees51to200": "51 to 200 employees",
+    "employeesOver200": "Over 200 employees",
+    "bavFocus": "Focus on corporate pension (bAV)? *",
+    "bkvFocus": "Focus on corporate health insurance (bKV)? *",
+    "yesStrong": "Yes, strong interest",
+    "yesRather": "Rather yes",
+    "noCurrently": "No, not currently",
+    "success": "Successfully sent!",
+    "successDesc": "Thank you! Your inquiry has been saved successfully. We will contact you shortly.",
+    "errorSend": "Error sending",
+    "errorSendDesc": "An unexpected error occurred. Please try again later.",
+    "validation": "Validation failed",
+    "validationDesc": "Please fill in all marked required fields.",
+    "nameRequired": "Name is required",
+    "companyRequired": "Company is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "employeesRequired": "Please select the number of employees",
+    "bavRequired": "Please indicate whether focus is on bAV",
+    "bkvRequired": "Please indicate whether focus is on bKV",
+    "transferFailed": "Transfer failed",
+    "submit": "Submit Request",
+    "retry": "Try Again",
+    "alternatives": "Alternative Contact Options"
+  },
+  "confirmation": {
+    "title": "Appointment Request Successfully Sent!",
+    "subtitle": "Review process initiated.",
+    "text1": "Thank you for your inquiry. We have received your data and forwarded a confirmation to our team (info@healio.de). We will get back to you shortly to finalize the appointment.",
+    "text2": "Thank you for your information. We are currently reviewing your details to calculate the exact savings potential for your company.",
+    "bookSlot": "Choose an Appointment",
+    "bookSlotDesc": "Secure a suitable time for our meeting directly in our calendar.",
+    "nextSteps": "What Happens Next?",
+    "yourAppointment": "Your Appointment for the Audit",
+    "appointmentDesc": "One of our experts will review your appointment request and get in touch with you shortly.",
+    "alternativeCalendar": "Alternatively, you can also book the appointment directly in a new tab if the calendar above doesn't load correctly.",
+    "openCalendar": "Open Alternative Calendar",
+    "calendarRedirect": "You will be redirected to Google Calendar to securely book your appointment.",
+    "backToHome": "Back to Homepage",
+    "newAppointment": "Request New Appointment"
+  }
+}

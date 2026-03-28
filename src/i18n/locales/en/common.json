@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "leistungen": "Services",
+    "ambulant": "Outpatient Insurance",
+    "zahn": "Dental Insurance",
+    "stationaer": "Hospital Insurance",
+    "tier": "Pet Insurance",
+    "partner": "Partner",
+    "about": "About Us",
+    "kontakt": "Contact",
+    "erstgespraech": "Free Consultation",
+    "toggleDropdown": "Toggle dropdown"
+  },
+  "aria": {
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "footer": {
+    "tagline": "Your digital insurance broker for smarter health coverage.",
+    "disclaimer": "Healio is an independent insurance broker licensed under §34d GewO. 10% of our revenue goes to environmental organizations.",
+    "company": "Company",
+    "contact": "Contact",
+    "legal": "Legal",
+    "aboutUs": "About Us",
+    "leistungen": "Services",
+    "partner": "Partner",
+    "impressum": "Legal Notice",
+    "datenschutz": "Privacy Policy",
+    "agb": "Terms & Conditions",
+    "erstinformation": "Initial Information (§60 VVG)",
+    "ctaTitle": "Ready for the next step?",
+    "ctaSubtitle": "15 minutes. No sales pitch. Just the numbers.",
+    "ctaButton": "Book a Strategy Call",
+    "copyright": "© {{year}} Healio GmbH. All rights reserved."
+  },
+  "langSwitch": "DE"
+}

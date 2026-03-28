@@ -1,9 +1,13 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
+  const { t } = useTranslation('home');
+  const { getPath } = useLanguage();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hintergrundbild */}
@@ -39,7 +43,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
-          Gesundheit fördern. Mitarbeiter binden. Steuern sparen.
+          {t('hero.title')}
         </motion.h1>
 
         {/* Subtext */}
@@ -49,7 +53,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
         >
-          Machen Sie das Finanzamt zum Sponsor Ihrer Mitarbeiterloyalität.
+          {t('hero.subtitle')}
         </motion.p>
 
         <motion.p
@@ -58,7 +62,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          Unabhängige Experten für betriebliche Vorsorge & Zusatzversicherungen.
+          {t('hero.description')}
         </motion.p>
 
         {/* CTA Button */}
@@ -68,10 +72,10 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         >
           <Link
-            to="/terminvereinbarung"
+            to={getPath('terminvereinbarung')}
             className="inline-block bg-[#25C990] hover:bg-[#1da877] text-white font-semibold text-base md:text-lg px-8 md:px-10 py-3 md:py-4 rounded-lg transition-all duration-300 shadow-[0_4px_14px_0_rgba(37,201,144,0.39)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.23)] hover:-translate-y-0.5"
           >
-            Strategiegespräch sichern
+            {t('hero.cta')}
           </Link>
         </motion.div>
       </div>

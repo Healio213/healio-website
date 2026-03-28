@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "title": "Gesundheit fördern. Mitarbeiter binden. Steuern sparen.",
+    "subtitle": "Machen Sie das Finanzamt zum Sponsor Ihrer Mitarbeiterloyalität.",
+    "description": "Unabhängige Experten für betriebliche Vorsorge & Zusatzversicherungen.",
+    "cta": "Strategiegespräch sichern"
+  },
+  "seo": {
+    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten",
+    "description": "Optimieren Sie Ihre betriebliche Altersvorsorge und Krankenversicherung mit Healio. Höhere Renditen, echte Mitarbeiterbindung und steuerliche Vorteile für Ihr Unternehmen.",
+    "ogTitle": "Healio – Verantwortung lohnt sich für Ihr Unternehmen",
+    "ogDescription": "Verwandeln Sie Pflichtaufgaben in Wettbewerbsvorteile. Modernes bAV & bKV Consulting für den Mittelstand."
+  },
+  "services": {
+    "title": "Unsere Leistungen",
+    "subtitle": "Deine Gesundheit ist keine Glückssache",
+    "description": "Sichere Dir den Status eines Privatpatienten – mit dem innovativen Gesundheitskonzept von Healio.",
+    "ambulant": {
+      "title": "Ambulante Zusatzversicherung",
+      "description": "Warum selbst zahlen? Wir übernehmen die Rechnung für Massagen, Chiropraktiker und Heilpraktiker.",
+      "cta": "Prüf deinen Tarif"
+    },
+    "zahn": {
+      "title": "Zahnzusatzversicherung",
+      "description": "Dein Lächeln öffnet Türen. Wir sorgen dafür, dass die Rechnung kein Hindernis ist.",
+      "cta": "Zahnschutz aktivieren"
+    },
+    "stationaer": {
+      "title": "Stationäre Zusatzversicherung",
+      "description": "Lass deine Gesundheit nicht vom Zufall abhängen. Chefarzt, Einzelzimmer, freie Klinikwahl.",
+      "cta": "Mehr erfahren"
+    },
+    "tier": {
+      "title": "Tierkrankenversicherung",
+      "description": "Die Kosten beim Tierarzt explodieren gerade. Sichere dein Tier optimal ab.",
+      "cta": "Schütze dein Tier"
+    }
+  },
+  "bav": {
+    "title": "Betriebliche Altersvorsorge — Was die meisten Unternehmen falsch machen",
+    "legalClaim": "Gesetzlicher Anspruch",
+    "legalClaimDesc": "§ 1a BetrAVG. Pflicht für jeden Arbeitgeber. Kein Verhandlungsspielraum.",
+    "pensionGap": "Rentenlücke schließen",
+    "pensionGapDesc": "800 € monatliche Lücke im Durchschnitt. Ihre Mitarbeiter spüren es schon heute.",
+    "taxBenefits": "Enorme Steuervorteile",
+    "taxBenefitsDesc": "Bis 338 €/Monat steuer- und sozialabgabenfrei.",
+    "employerSubsidy": "Arbeitgeberzuschuss",
+    "employerSubsidyDesc": "15 % gesetzlicher Mindestzuschuss.",
+    "gapPerMonth": "Rentenlücke / Monat",
+    "taxFreePerMonth": "Steuerfrei / Monat",
+    "mandatorySubsidy": "Pflichtzuschuss AG",
+    "legalClaimSince": "Gesetzlicher Anspruch seit"
+  },
+  "rendite": {
+    "title": "Rendite Vergleich",
+    "subtitle": "Healio vs. Klassische bAV",
+    "calculation": "Berechnung bei einer monatlichen Sparrate von 338 € über eine Laufzeit von 25 Jahren.",
+    "healioStrategy": "Healio Strategie (8,47%)",
+    "classicBav": "Klassische bAV (0,7%)",
+    "deposit": "Einzahlung:",
+    "profit": "Gewinn:",
+    "finalCapital": "Endkapital:",
+    "chartTitle": "Wertentwicklung über 25 Jahre",
+    "compoundEffect": "Der Zinseszinseffekt generiert bei der Healio Strategie ein Mehrkapital von",
+    "salaryVsBenefit": "Lohnerhöhung vs. Gesundheits-Benefit",
+    "salaryVsBenefitDesc": "Warum eine klassische Gehaltserhöhung verpufft.",
+    "classicRaise": "Klassische Lohnerhöhung",
+    "employerCost": "AG-Aufwand",
+    "taxesCharges": "Steuern & Abgaben",
+    "netEffect": "Netto-Effekt Mitarbeiter",
+    "healthBenefit": "Healio Gesundheits-Benefit",
+    "taxFree": "Steuerfrei für Mitarbeiter",
+    "healthBudgetYear": "Gesundheitsbudget / Jahr"
+  },
+  "gesundheit": {
+    "title": "Was eine bKV wirklich kostet — und was sie bringt.",
+    "fasterAppointments": "Schnellere Facharzttermine",
+    "fasterAppointmentsDesc": "5–10 Tage statt 6–8 Wochen Wartezeit beim Facharzt.",
+    "lessSickDays": "Kranktage senken",
+    "lessSickDaysDesc": "Bis zu 30 % weniger Ausfallzeiten durch bessere Gesundheitsversorgung.",
+    "saveCosts": "Kosten sparen",
+    "saveCostsDesc": "Ein Krankheitstag kostet 400 € im Durchschnitt.",
+    "retention": "Mitarbeiterbindung",
+    "retentionDesc": "Gesundheit ist das persönlichste Thema. Wer hier investiert, bindet.",
+    "lessAbsence": "Weniger Ausfallzeiten",
+    "costPerDay": "Kosten pro Krankheitstag",
+    "insteadOfWeeks": "Statt 6–8 Wochen Wartezeit"
+  },
+  "zeitfalle": {
+    "title": "Der Zeitfaktor",
+    "subtitle": "Der Zinseszins wartet auf niemanden.",
+    "description": "Warum \"Später\" Sie und Ihr Team ein Vermögen kostet.",
+    "explanation": "Zeit ist im Zinseszins-Modell wichtiger als die Höhe der Einzahlung.",
+    "healioAdvantage": "Der Vorteil von Healio:",
+    "monthlyRate": "Monatliche Sparrate",
+    "duration": "Laufzeit (Jahre)",
+    "advantage": "Vorteil Healio:"
+  },
+  "values": {
+    "title": "Unsere Werte",
+    "subtitle": "Was uns antreibt und warum Sie uns vertrauen können.",
+    "mission": "Unsere Mission",
+    "missionDesc": "Wir wollen Gesundheitsversicherung neu denken.",
+    "transparency": "Transparenz",
+    "transparencyDesc": "Keine versteckten Kosten, keine komplizierten Klauseln.",
+    "customerFocus": "Kundenorientierung",
+    "customerFocusDesc": "Ihre Gesundheit und Zufriedenheit stehen im Mittelpunkt.",
+    "innovation": "Innovation",
+    "innovationDesc": "Wir nutzen modernste Technologie.",
+    "reliability": "Verlässlichkeit",
+    "reliabilityDesc": "Wir arbeiten nur mit renommierten Versicherungspartnern zusammen.",
+    "empathy": "Empathie",
+    "empathyDesc": "Gesundheit ist persönlich.",
+    "efficiency": "Effizienz",
+    "efficiencyDesc": "Zeit ist wertvoll."
+  },
+  "videos": {
+    "title": "Persönlich & Transparent erklärt",
+    "subtitle": "Wir zeigen dir in kurzen Videos, wer wir sind und wie unser Konzept funktioniert.",
+    "conceptTitle": "Konzept erklärt: So funktioniert's",
+    "conceptDesc": "Schritt für Schritt erklärt: Wie du zur vollen Erstattung kommst.",
+    "conceptLabel": "Das Konzept",
+    "detailLabel": "Das Konzept im Detail erklärt"
+  },
+  "testimonials": {
+    "title": "Echte Kunden, echte Ersparnis",
+    "subtitle": "Zufriedene Nutzer:innen teilen ihre Erfahrungen mit dem Healio-Konzept."
+  },
+  "insurance": {
+    "title": "Unsere Versicherungslösungen",
+    "subtitle": "Wählen Sie die Versicherung, die zu Ihrem Leben passt.",
+    "moreInfo": "Mehr erfahren",
+    "notSure": "Nicht sicher, welche Versicherung die richtige für Sie ist?",
+    "freeConsultation": "Kostenlose Beratung anfragen"
+  }
+}

@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 
 const API_BASE = import.meta.env.VITE_APP_API_URL || 'https://app.healio.de';
 
-const TARGET_GROUP_LABELS = {
-  heilpraktiker: 'Heilpraktiker',
-  hebammen: 'Hebammen',
-  endkunden: 'Für Versicherte',
-  optiker: 'Optiker',
-  hoerakustiker: 'Hörakustiker',
-  physiotherapeut: 'Physiotherapie',
-  arbeitgeber: 'Arbeitgeber',
+const TARGET_GROUP_KEYS = {
+  heilpraktiker: 'categories.heilpraktiker',
+  hebammen: 'categories.hebammen',
+  endkunden: 'categories.versicherte',
+  optiker: 'categories.optiker',
+  hoerakustiker: 'categories.hoerakustiker',
+  physiotherapeut: 'categories.physiotherapie',
+  arbeitgeber: 'categories.arbeitgeber',
 };
 
 const BlogArticlePage = () => {
+  const { t } = useTranslation('blog');
+  const { getPath } = useLanguage();
   const { slug } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,9 +62,9 @@ const BlogArticlePage = () => {
   if (error || !article) {
     return (
       <div className="pt-32 pb-20 text-center">
-        <h1 className="text-2xl font-bold text-[#464f5d] mb-4">Artikel nicht gefunden</h1>
-        <Link to="/blog" className="text-[#25c990] hover:underline">
-          Zurück zum Ratgeber
+        <h1 className="text-2xl font-bold text-[#464f5d] mb-4">{t('notFound')}</h1>
+        <Link to={getPath('blog')} className="text-[#25c990] hover:underline">
+          {t('backToGuide')}
         </Link>
       </div>
     );
@@ -99,17 +103,17 @@ const BlogArticlePage = () => {
         {/* Header */}
         <header className="max-w-3xl mx-auto px-4 mb-12">
           <Link
-            to="/blog"
+            to={getPath('blog')}
             className="inline-flex items-center text-sm text-gray-500 hover:text-[#25c990] mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
-            Zurück zum Ratgeber
+            {t('backToGuide')}
           </Link>
 
           <div className="flex items-center gap-2 mb-4">
             <span className="px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
               <Tag className="inline w-3 h-3 mr-1" />
-              {TARGET_GROUP_LABELS[article.target_group] || article.target_group}
+              {TARGET_GROUP_KEYS[article.target_group] ? t(TARGET_GROUP_KEYS[article.target_group]) : article.target_group}
             </span>
           </div>
 
@@ -129,7 +133,7 @@ const BlogArticlePage = () => {
             {article.reading_time_minutes && (
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                {article.reading_time_minutes} Min. Lesezeit
+                {article.reading_time_minutes} {t('readTime')}
               </span>
             )}
           </div>
@@ -153,7 +157,7 @@ const BlogArticlePage = () => {
           {/* GEO-Nugget Section */}
           {article.geo_section && (
             <aside className="mt-12 p-6 bg-[#e8f8f0] rounded-2xl border border-[#25c990]/20">
-              <h3 className="text-lg font-bold text-[#076046] mb-3">Auf einen Blick</h3>
+              <h3 className="text-lg font-bold text-[#076046] mb-3">{t('atAGlance')}</h3>
               <p className="text-[#464f5d] leading-relaxed">{article.geo_section}</p>
             </aside>
           )}
@@ -161,23 +165,23 @@ const BlogArticlePage = () => {
           {/* CTA Section */}
           <div className="mt-16 p-8 bg-gradient-to-r from-[#25c990] to-[#076046] rounded-2xl text-white text-center">
             <h3 className="text-2xl font-bold mb-3">
-              Ihr persönliches Gesundheitsbudget berechnen
+              {t('calculateBudget')}
             </h3>
             <p className="text-white/90 mb-6 max-w-lg mx-auto">
-              Erfahren Sie in 2 Minuten, wie viel Budget Ihnen zusteht – kostenlos und unverbindlich.
+              {t('calculateBudgetDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                to="/potenzialanalyse"
+                to={getPath('potenzialanalyse')}
                 className="px-6 py-3 bg-white text-[#076046] font-semibold rounded-lg hover:bg-gray-100 transition-colors"
               >
-                Jetzt berechnen
+                {t('calculateNow')}
               </Link>
               <Link
-                to="/terminvereinbarung"
+                to={getPath('terminvereinbarung')}
                 className="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                Beratungstermin buchen
+                {t('bookConsultation')}
               </Link>
             </div>
           </div>

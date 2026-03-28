@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Effectively for €0.",
+    "subtitle": "DentalUpgrade from €5 per month. Combined with the IKK Classic bonus, dental supplementary insurance pays for itself entirely. Stiftung Warentest: VERY GOOD (0.8).",
+    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK Classic bonus (over €300 per year, tax-free) can fully offset the premiums. No waiting periods, up to 3 missing teeth insurable.",
+    "ctaCalculate": "Calculate your plan",
+    "ctaBenefits": "View benefits",
+    "heroImageAlt": "Professional dental practice"
+  },
+  "siegel": {
+    "title": "Awarded by independent testers",
+    "alt": "Quality seals: Franke & Bornberg FFF+, Focus Money Highest Customer Satisfaction, Focus Money Highest Recommendation, Stiftung Warentest VERY GOOD (0.8)"
+  },
+  "concept": {
+    "title": "DentalUpgrade 90+ – Up to 100% Reimbursement",
+    "subtitle": "The test winner from Stiftung Warentest: VERY GOOD (0.8). With BonusPlus, reimbursement automatically increases from 90% to 100%. Combined with the IKK Classic bonus, effectively for €0.",
+    "testsieger": "Stiftung Warentest Test Winner",
+    "tariffName": "DentalUpgrade 90+",
+    "tariffRate": "90 – 100%",
+    "tariffRateLabel": "Reimbursement, from €13.50/month",
+    "tariffDetails": {
+      "zahnersatz": { "label": "Dental prosthetics (crowns, bridges, implants, inlays)", "value": "90%" },
+      "zahnbehandlung": { "label": "Dental treatments (fillings, root canal, periodontitis)", "value": "90%" },
+      "prophylaxe": { "label": "Prophylaxis, professional cleaning & fissure sealing", "value": "90%, up to €180/year" },
+      "bleaching": { "label": "Bleaching & pain management", "value": "90%, up to €180/year" },
+      "kfo": { "label": "Orthodontics (children)", "value": "90%, max. €2,500" },
+      "unfall": { "label": "Accident instant coverage", "value": "No maximum limit" },
+      "maxErstattung": { "label": "Max. reimbursement", "value": "€1,000 / €4,000 / unlimited" },
+      "kinderBeitrag": { "label": "Children's premium", "value": "from €21.50/month" }
+    },
+    "bonusPlusTitle": "BonusPlus – How Your Reimbursement Rises to 100%",
+    "bonusPlus90": "90%",
+    "bonusPlus90Label": "Immediately from day 1",
+    "bonusPlus95": "95%",
+    "bonusPlus95Label": "After 5 years bonus booklet",
+    "bonusPlus100": "100%",
+    "bonusPlus100Label": "After 10 years bonus booklet",
+    "bonusPlusNote": "BonusPlus is available from age 21. A continuously maintained bonus booklet from your statutory health insurance fund is required.",
+    "ikkComboTitle": "Effectively €0 with IKK Classic Bonus",
+    "ikkComboText": "The IKK bonus rewards health-conscious behavior with <strong>over €300 per year (tax-free)</strong>. At a monthly premium of €13.50 (= €162/year), the bonus more than fully covers the costs. Additionally, the IKK health account reimburses up to €600 per year for dental cleanings and preventive care.",
+    "vorversicherungTitle": "Prior insurance is credited",
+    "vorversicherungText": "<strong>The sum limit in the first year is completely waived</strong> if your previous insurance covered at least 40% of dental prosthetics. You start immediately with full coverage. Switching is especially worthwhile if you currently receive less than 90% reimbursement.",
+    "exampleImplantat": "Example: Implant",
+    "exampleBleaching": "Example: Bleaching",
+    "rechnungsbetrag": "Invoice amount",
+    "gkvLeistung": "Statutory insurance coverage",
+    "eigenanteilOhne": "Out-of-pocket without insurance",
+    "erstattungZahn": "Reimbursement DentalUpgrade 90+",
+    "deinEigenanteil": "Your out-of-pocket cost",
+    "mitBonusPlus10": "With BonusPlus (10 years bonus booklet)",
+    "mitBonusPlus5": "With BonusPlus (5 years bonus booklet)",
+    "besonderheitenTitle": "What Makes DentalUpgrade Special",
+    "besonderheiten": [
+      "No waiting periods – Instant coverage from day 1",
+      "Maximum 3 health questions on the application",
+      "Up to 3 missing teeth insurable (€5 surcharge/tooth)",
+      "BonusPlus: Reimbursement rises to up to 100%",
+      "Prior insurance is credited (sum limit waived in year 1)",
+      "Switch option: After 3 years, upgrade to a higher plan without health checks",
+      "Accident instant coverage without maximum limits or age restrictions",
+      "Inflation protection: Reimbursement limits are index-adjusted",
+      "Innovation protection: Future treatment methods are covered",
+      "Optional with aging provisions for lower premiums in old age"
+    ]
+  },
+  "benefits": {
+    "title": "Dental Supplementary Insurance: What Statutory Insurance Doesn't Cover.",
+    "subtitle": "Statutory health insurance only covers the standard care rate for dental prosthetics. You pay the rest yourself — or a smart supplementary insurance does.",
+    "noWait": { "title": "No Waiting Periods", "desc": "Instant coverage from day 1. Professional dental cleaning and prophylaxis available immediately." },
+    "zahnersatz": { "title": "Up to 100% Dental Prosthetics", "desc": "Crowns, bridges, implants and inlays. With BonusPlus, reimbursement rises to up to 100%." },
+    "prophylaxe": { "title": "Prophylaxis & Dental Cleaning", "desc": "Professional dental cleaning, fissure sealing and prophylaxis included in all plans." },
+    "bleaching": { "title": "Bleaching & Aesthetics", "desc": "From the 70+ plan: Bleaching, pain management (nitrous oxide, hypnosis, acupuncture) included." },
+    "kfo": { "title": "Orthodontics", "desc": "50-90% reimbursement for children and adolescents. In case of accident, also for adults." },
+    "fehlend": { "title": "Missing Teeth Insurable", "desc": "Up to 3 already missing teeth can be insured. Only €5 risk surcharge per missing tooth." },
+    "unfall": { "title": "Accident Instant Coverage", "desc": "No maximum limits and no age restrictions for dental damage caused by accidents." },
+    "gesundheitsfragen": { "title": "Only 3 Health Questions", "desc": "Simple application. Maximum 3 health questions. Stably calculated and high-performing." }
+  },
+  "testimonials": {
+    "headline": "What Customers Report."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions — Answered Directly.",
+    "subtitle": "The most important facts at a glance. Clear and transparent.",
+    "items": [
+      { "q": "How much does DentalUpgrade 90+ cost per month?", "a": "The DentalUpgrade 90+ plan starts at €13.50 per month without aging provisions. With aging provisions from €29.06. Combined with the IKK Classic bonus program (over €300 per year, tax-free), the insurance effectively pays for itself entirely. At just €162 annual premium and over €300 in bonus, you pay effectively €0." },
+      { "q": "How do I get from 90% to 100% reimbursement?", "a": "Through BonusPlus, your reimbursement increases automatically: From day 1, you receive 90% reimbursement. If you can show a continuously maintained bonus booklet from your health insurance fund, reimbursement rises to 95% after 5 years and to a full 100% after 10 years. BonusPlus is available from age 21. You don't need to apply for anything extra — proof of the bonus booklet is sufficient." },
+      { "q": "Can I get the insurance even with missing teeth?", "a": "Yes, this is a genuine unique selling point. Up to 3 already missing teeth can be co-insured. The risk surcharge is only €5 per missing tooth per month. Many other dental supplementary insurances reject customers with missing teeth entirely or exclude them from reimbursement." },
+      { "q": "Are there waiting periods?", "a": "No. Full insurance coverage applies immediately from day 1. Professional dental cleaning, prophylaxis, fissure sealing and all other benefits can be used right away. In the first calendar years, there is a sum limit of €1,000 (1st/2nd year), which is then lifted and becomes completely unlimited from the 5th calendar year." },
+      { "q": "I already have dental supplementary insurance. Is switching worth it?", "a": "Very likely yes, especially if you currently receive less than 90% reimbursement. Your big advantage: Prior insurance is credited. If your previous insurance covered at least 40% of dental prosthetics, the sum limit in the first calendar year is completely waived. So you start immediately with full coverage, not from zero." },
+      { "q": "What exactly is covered?", "a": "DentalUpgrade 90+ reimburses 90 to 100 percent for: High-quality dental prosthetics such as implants, crowns, bridges and inlays. Dental treatments such as fillings, root canals, periodontitis and bite guards. Professional dental cleaning and fissure sealing (up to €180 per year). Bleaching and special pain management such as nitrous oxide, hypnosis or acupuncture. Orthodontics for children (90%, max. €2,500). Plus accident instant coverage without maximum limits." },
+      { "q": "How does it work together with the IKK Classic bonus?", "a": "The combination is the key: You take out DentalUpgrade 90+ (€13.50 per month = €162 per year). At the same time, as an IKK Classic member you collect bonus points for health-conscious behavior: vaccinations, dental check-ups, sports club, health screenings. The bonus amounts to over €300 per year, tax-free. Additionally, the IKK health account reimburses up to €600 per year for dental cleaning and preventive care. Result: Your dental coverage effectively costs you €0." },
+      { "q": "Do I need a health examination?", "a": "No, there is no extensive health examination. The application contains a maximum of 3 simple health questions. This makes the process quick and straightforward. Even with up to 3 missing teeth, you will be accepted (for a small risk surcharge of €5 per tooth)." },
+      { "q": "Can my children be co-insured?", "a": "Yes. For children, DentalUpgrade 90+ offers particularly strong coverage: Orthodontic treatments are reimbursed at 90%, up to a maximum of €2,500 for the entire contract period. Benefits are provided even for mild misalignments (KIG 1-5), not only from KIG 3 as with many competitors. The children's premium is €21.50 per month. Treatment must begin before the age of 18." },
+      { "q": "How was DentalUpgrade 90+ rated by independent testers?", "a": "DentalUpgrade 90+ was awarded VERY GOOD (0.8) by Stiftung Warentest and is the test winner in the 'Good and affordable' category (Finanzen, issue 07/2025). Additionally, the insurer received the 'Highest Customer Satisfaction' seal from Focus Money and the top rating 'Excellent' from Morgen und Morgen." }
+    ]
+  },
+  "zahnzusatz": {
+    "hero": {
+      "title": "No more high dental bills. <highlight>Secure private patient status</highlight> at the dentist.",
+      "subtitle": "Whether implants, crowns or professional dental cleaning: We cover the costs your health insurance fund doesn't pay.",
+      "cta": "Calculate your plan now",
+      "imageAlt": "Radiant smile"
+    },
+    "problem": {
+      "badge": "The Cost Trap",
+      "title": "The Problem: Statutory Health Insurance Covers Almost Nothing",
+      "text1": "When things get serious at the dentist, it gets expensive. Statutory health insurance funds only pay a small fixed subsidy for dental prosthetics — often less than 50% of the most basic treatment.",
+      "text2": "High-quality implants, ceramic crowns or inlays must be paid for almost entirely out of pocket. A single bill can quickly amount to <strong>several thousand euros</strong>. Without supplementary insurance, you're stuck with these costs."
+    },
+    "solution": {
+      "badge": "The Solution",
+      "title": "Comprehensive Protection for Your Teeth",
+      "erstattung": { "title": "100% Reimbursement", "desc": "We cover up to 100% of costs for high-quality dental prosthetics, inlays and implants. No more compromises on quality." },
+      "zahnreinigung": { "title": "Dental Cleaning Included", "desc": "Professional dental cleaning as often as you like. We reimburse your prophylaxis costs — for a radiant smile." },
+      "sofortschutz": { "title": "Instant Coverage", "desc": "No waiting periods. Your insurance coverage begins immediately from day one. Submit invoices right away." }
+    },
+    "tariffFinder": {
+      "title": "Find the Plan That Is Guaranteed to Accept You.",
+      "subtitle": "Select your current dental status for a tailored offer.",
+      "optionHealthy": { "title": "Everything healthy & complete", "desc": "I have no missing teeth and no ongoing treatments." },
+      "option1Missing": { "title": "1 tooth currently missing", "desc": "I am currently missing one tooth (excluding wisdom teeth) that has not been replaced." },
+      "option2to3Missing": { "title": "2 to 3 teeth missing", "desc": "I am currently missing multiple teeth for which I need replacements." },
+      "showTariff": "Show plan"
+    }
+  }
+}

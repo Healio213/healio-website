@@ -1,18 +1,35 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Check, Award, TrendingUp, ArrowRight } from 'lucide-react';
 
 const DentalConcept = () => {
+  const { t } = useTranslation('zahn');
+
+  const tariffDetails = t('concept.tariffDetails', { returnObjects: true });
+  const besonderheiten = t('concept.besonderheiten', { returnObjects: true });
+
+  const tariffRows = tariffDetails ? [
+    [tariffDetails.zahnersatz?.label, tariffDetails.zahnersatz?.value],
+    [tariffDetails.zahnbehandlung?.label, tariffDetails.zahnbehandlung?.value],
+    [tariffDetails.prophylaxe?.label, tariffDetails.prophylaxe?.value],
+    [tariffDetails.bleaching?.label, tariffDetails.bleaching?.value],
+    [tariffDetails.kfo?.label, tariffDetails.kfo?.value],
+    [tariffDetails.unfall?.label, tariffDetails.unfall?.value],
+    [tariffDetails.maxErstattung?.label, tariffDetails.maxErstattung?.value],
+    [tariffDetails.kinderBeitrag?.label, tariffDetails.kinderBeitrag?.value],
+  ] : [];
+
   return (
     <section className="healio-section bg-gray-50 py-20" aria-labelledby="dental-concept-heading">
       <div className="healio-container px-4">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 id="dental-concept-heading" className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">
-              ZahnUpgrade 90+ – Bis zu 100 % Erstattung
+              {t('concept.title')}
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Der Testsieger von Stiftung Warentest: SEHR GUT (0,8). Mit BonusPlus steigt die Erstattung automatisch von 90 % auf 100 %. In Kombination mit dem IKK Classic Bonus effektiv für 0 €.
+              {t('concept.subtitle')}
             </p>
           </div>
 
@@ -24,26 +41,17 @@ const DentalConcept = () => {
             className="bg-white rounded-2xl shadow-xl p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-              <Award className="w-3 h-3" /> Stiftung Warentest Testsieger
+              <Award className="w-3 h-3" /> {t('concept.testsieger')}
             </div>
 
             <div className="text-center mb-8 mt-2">
-              <h3 className="text-2xl font-extrabold text-slate-900">ZahnUpgrade 90+</h3>
-              <p className="text-4xl font-extrabold text-healio-primary mt-2">90 – 100 %</p>
-              <p className="text-slate-500 mt-1">Erstattung, ab 13,50 €/Monat</p>
+              <h3 className="text-2xl font-extrabold text-slate-900">{t('concept.tariffName')}</h3>
+              <p className="text-4xl font-extrabold text-healio-primary mt-2">{t('concept.tariffRate')}</p>
+              <p className="text-slate-500 mt-1">{t('concept.tariffRateLabel')}</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
-              {[
-                ["Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "90 %"],
-                ["Zahnbehandlungen (Füllungen, Wurzel, Parodontose)", "90 %"],
-                ["Prophylaxe, PZR & Fissurenversiegelung", "90 %, bis 180 €/Jahr"],
-                ["Bleaching & Schmerzausschaltung", "90 %, bis 180 €/Jahr"],
-                ["Kieferorthopädie (Kinder)", "90 %, max. 2.500 €"],
-                ["Unfall-Sofortschutz", "Ohne Höchstsumme"],
-                ["Max. Erstattung", "1.000 € / 4.000 € / unbegrenzt"],
-                ["Kinder-Beitrag", "ab 21,50 €/Monat"],
-              ].map(([label, value], i) => (
+              {tariffRows.map(([label, value], i) => (
                 <div key={i} className="flex justify-between py-2 border-b border-gray-50">
                   <span className="text-slate-600">{label}</span>
                   <span className="font-semibold text-slate-900 text-right whitespace-nowrap ml-4">{value}</span>
@@ -53,24 +61,24 @@ const DentalConcept = () => {
 
             {/* BonusPlus Staffel */}
             <div className="bg-green-50 rounded-xl p-6 mb-6">
-              <h4 className="font-bold text-slate-900 mb-4 text-center">BonusPlus – So steigt deine Erstattung auf 100 %</h4>
+              <h4 className="font-bold text-slate-900 mb-4 text-center">{t('concept.bonusPlusTitle')}</h4>
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1">
-                  <p className="text-2xl font-extrabold text-healio-primary">90 %</p>
-                  <p className="text-xs text-slate-500 mt-1">Sofort ab Tag 1</p>
+                  <p className="text-2xl font-extrabold text-healio-primary">{t('concept.bonusPlus90')}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('concept.bonusPlus90Label')}</p>
                 </div>
                 <ArrowRight className="w-5 h-5 text-slate-400 hidden md:block" />
                 <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1">
-                  <p className="text-2xl font-extrabold text-healio-primary">95 %</p>
-                  <p className="text-xs text-slate-500 mt-1">Nach 5 Jahren Bonusheft</p>
+                  <p className="text-2xl font-extrabold text-healio-primary">{t('concept.bonusPlus95')}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('concept.bonusPlus95Label')}</p>
                 </div>
                 <ArrowRight className="w-5 h-5 text-slate-400 hidden md:block" />
                 <div className="text-center p-3 bg-white rounded-lg shadow-sm flex-1 ring-2 ring-healio-primary">
-                  <p className="text-2xl font-extrabold text-healio-primary">100 %</p>
-                  <p className="text-xs text-slate-500 mt-1">Nach 10 Jahren Bonusheft</p>
+                  <p className="text-2xl font-extrabold text-healio-primary">{t('concept.bonusPlus100')}</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('concept.bonusPlus100Label')}</p>
                 </div>
               </div>
-              <p className="text-xs text-slate-500 mt-4 text-center">BonusPlus ist ab 21 Jahren verfügbar. Lückenlos geführtes Bonusheft der gesetzlichen Krankenkasse erforderlich.</p>
+              <p className="text-xs text-slate-500 mt-4 text-center">{t('concept.bonusPlusNote')}</p>
             </div>
           </motion.div>
 
@@ -86,10 +94,8 @@ const DentalConcept = () => {
                 0 €
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Effektiv 0 € mit IKK Classic Bonus</h3>
-                <p className="text-slate-700">
-                  Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 13,50 € (= 162 €/Jahr) deckt der Bonus die Kosten mehr als vollständig. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.
-                </p>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-2">{t('concept.ikkComboTitle')}</h3>
+                <p className="text-slate-700" dangerouslySetInnerHTML={{ __html: t('concept.ikkComboText') }} />
               </div>
             </div>
           </motion.div>
@@ -106,10 +112,8 @@ const DentalConcept = () => {
                 <TrendingUp className="w-8 h-8 text-healio-primary" />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Vorversicherung wird angerechnet</h3>
-                <p className="text-slate-700">
-                  <strong>Die Summenbegrenzung im ersten Jahr entfällt komplett</strong>, wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Du startest sofort mit vollem Leistungsumfang. Ein Wechsel lohnt sich besonders, wenn du bisher weniger als 90 % Erstattung bekommst.
-                </p>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-2">{t('concept.vorversicherungTitle')}</h3>
+                <p className="text-slate-700" dangerouslySetInnerHTML={{ __html: t('concept.vorversicherungText') }} />
               </div>
             </div>
           </motion.div>
@@ -124,16 +128,16 @@ const DentalConcept = () => {
             >
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-healio-primary" />
-                Beispiel: Implantat
+                {t('concept.exampleImplantat')}
               </h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-slate-600">Rechnungsbetrag</span><span className="font-bold">1.998,95 €</span></div>
-                <div className="flex justify-between"><span className="text-slate-600">GKV-Leistung</span><span>539,65 €</span></div>
-                <div className="flex justify-between"><span className="text-slate-600">Eigenanteil ohne Versicherung</span><span className="text-red-500 font-bold">1.459,30 €</span></div>
-                <div className="flex justify-between border-t pt-2"><span className="text-slate-600">Erstattung ZahnUpgrade 90+</span><span className="text-healio-primary font-bold">1.459,30 €</span></div>
-                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">Dein Eigenanteil</span><span className="text-healio-primary font-extrabold text-lg">0,00 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.rechnungsbetrag')}</span><span className="font-bold">1.998,95 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.gkvLeistung')}</span><span>539,65 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.eigenanteilOhne')}</span><span className="text-red-500 font-bold">1.459,30 €</span></div>
+                <div className="flex justify-between border-t pt-2"><span className="text-slate-600">{t('concept.erstattungZahn')}</span><span className="text-healio-primary font-bold">1.459,30 €</span></div>
+                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">{t('concept.deinEigenanteil')}</span><span className="text-healio-primary font-extrabold text-lg">0,00 €</span></div>
               </div>
-              <p className="text-xs text-slate-400 mt-3">Mit BonusPlus (10 Jahre Bonusheft)</p>
+              <p className="text-xs text-slate-400 mt-3">{t('concept.mitBonusPlus10')}</p>
             </motion.div>
 
             <motion.div
@@ -144,35 +148,24 @@ const DentalConcept = () => {
             >
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-healio-primary" />
-                Beispiel: Bleaching
+                {t('concept.exampleBleaching')}
               </h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between"><span className="text-slate-600">Rechnungsbetrag</span><span className="font-bold">400,00 €</span></div>
-                <div className="flex justify-between"><span className="text-slate-600">GKV-Leistung</span><span>0,00 €</span></div>
-                <div className="flex justify-between"><span className="text-slate-600">Eigenanteil ohne Versicherung</span><span className="text-red-500 font-bold">400,00 €</span></div>
-                <div className="flex justify-between border-t pt-2"><span className="text-slate-600">Erstattung ZahnUpgrade 90+</span><span className="text-healio-primary font-bold">190,00 €</span></div>
-                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">Dein Eigenanteil</span><span className="text-healio-primary font-extrabold text-lg">210,00 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.rechnungsbetrag')}</span><span className="font-bold">400,00 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.gkvLeistung')}</span><span>0,00 €</span></div>
+                <div className="flex justify-between"><span className="text-slate-600">{t('concept.eigenanteilOhne')}</span><span className="text-red-500 font-bold">400,00 €</span></div>
+                <div className="flex justify-between border-t pt-2"><span className="text-slate-600">{t('concept.erstattungZahn')}</span><span className="text-healio-primary font-bold">190,00 €</span></div>
+                <div className="flex justify-between bg-green-50 rounded-lg p-2 mt-2"><span className="font-bold">{t('concept.deinEigenanteil')}</span><span className="text-healio-primary font-extrabold text-lg">210,00 €</span></div>
               </div>
-              <p className="text-xs text-slate-400 mt-3">Mit BonusPlus (5 Jahre Bonusheft)</p>
+              <p className="text-xs text-slate-400 mt-3">{t('concept.mitBonusPlus5')}</p>
             </motion.div>
           </div>
 
           {/* Besonderheiten */}
           <div className="bg-white rounded-2xl shadow-md p-8 max-w-4xl mx-auto border border-gray-100">
-            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Das macht ZahnUpgrade besonders</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">{t('concept.besonderheitenTitle')}</h3>
             <div className="grid sm:grid-cols-2 gap-4 text-sm">
-              {[
-                "Keine Wartezeiten – Sofortschutz ab Tag 1",
-                "Maximal 3 Gesundheitsfragen beim Antrag",
-                "Bis zu 3 fehlende Zähne mitversicherbar (5 € Zuschlag/Zahn)",
-                "BonusPlus: Erstattung steigt auf bis zu 100 %",
-                "Vorversicherung wird angerechnet (Summenbegrenzung entfällt im 1. Jahr)",
-                "Wechsel-Option: Nach 3 Jahren in höheren Tarif ohne Gesundheitsprüfung",
-                "Unfall-Sofortschutz ohne Höchstsummen oder Altersbegrenzung",
-                "Inflationsvorsorge: Erstattungsgrenzen werden indexorientiert angepasst",
-                "Innovationsvorsorge: Zukünftige Behandlungsmethoden werden abgedeckt",
-                "Optional mit Alterungsrückstellungen für günstigere Beiträge im Alter",
-              ].map((item, i) => (
+              {Array.isArray(besonderheiten) && besonderheiten.map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" />
                   <span className="text-slate-700">{item}</span>

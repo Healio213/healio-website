@@ -1,20 +1,23 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { TrendingUp, Users, Star, Heart, ShieldCheck, Zap } from 'lucide-react';
 
-const tickerItems = [
-  { icon: TrendingUp, text: "Bis zu 2.500 € Gesundheitsbudget" },
-  { icon: ShieldCheck, text: "SDK – seit 1926 am Markt" },
-  { icon: Users, text: "IKK Classic – 3 Mio. Versicherte" },
-  { icon: Heart, text: "Heilpraktiker zu 100% abgedeckt" },
-  { icon: ShieldCheck, text: "Keine Wartezeit – sofort geschützt" },
-  { icon: Zap, text: "In nur 3 Minuten abgeschlossen" },
-  { icon: TrendingUp, text: "Effektiv 0 € dank IKK Bonus" },
-  { icon: Star, text: "Akupunktur inklusive" },
-  { icon: Star, text: "Osteopathie & Massagen inklusive" },
-  { icon: Heart, text: "Sieh im Video, wie es funktioniert" },
+const tickerDefs = [
+  { icon: TrendingUp, key: 'ticker.budget' },
+  { icon: ShieldCheck, key: 'ticker.sdk' },
+  { icon: Users, key: 'ticker.ikk' },
+  { icon: Heart, key: 'ticker.heilpraktiker' },
+  { icon: ShieldCheck, key: 'ticker.noWait' },
+  { icon: Zap, key: 'ticker.fast' },
+  { icon: TrendingUp, key: 'ticker.effective' },
+  { icon: Star, key: 'ticker.akupunktur' },
+  { icon: Star, key: 'ticker.osteopathie' },
+  { icon: Heart, key: 'ticker.video' },
 ];
 
 const AmbulantTicker = () => {
+  const { t } = useTranslation('ambulant');
+
   return (
     <div className="relative bg-gradient-to-r from-healio-dark via-slate-900 to-healio-dark overflow-hidden py-3 z-30 border-b border-white/5">
       {/* Gradient fade edges */}
@@ -23,7 +26,7 @@ const AmbulantTicker = () => {
 
       <div className="flex animate-ticker">
         {/* Render items twice for seamless loop */}
-        {[...tickerItems, ...tickerItems].map((item, index) => {
+        {[...tickerDefs, ...tickerDefs].map((item, index) => {
           const Icon = item.icon;
           return (
             <div
@@ -31,7 +34,7 @@ const AmbulantTicker = () => {
               className="flex items-center gap-2 px-6 flex-shrink-0 whitespace-nowrap"
             >
               <Icon className="w-4 h-4 text-healio-primary flex-shrink-0" />
-              <span className="text-sm font-medium text-gray-200">{item.text}</span>
+              <span className="text-sm font-medium text-gray-200">{t(item.key)}</span>
               <span className="text-healio-primary/40 mx-2">•</span>
             </div>
           );

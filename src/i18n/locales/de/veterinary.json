@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "badge": "GOT-konformer Schutz",
+    "title": "Seit der GOT-Reform:",
+    "titleHighlight": "Veterinärmedizin hat",
+    "titleEnd": "einen neuen Preis.",
+    "subtitle": "Wer heute keinen Versicherungsschutz hat, entscheidet im Ernstfall nicht nach Medizin — sondern nach Budget. Das muss nicht sein.",
+    "ctaCalculate": "Beitrag berechnen",
+    "ctaAnalysis": "Kostenanalyse",
+    "heroImageAlt": "Frau umarmt ihren Golden Retriever"
+  },
+  "costAnalysis": {
+    "badge": "Marktsituation",
+    "title": "Die finanzielle Realität nach der GOT Reform",
+    "text1": "Seit der Anpassung der Gebührenordnung für Tierärzte (GOT) sind die Kosten für veterinärmedizinische Behandlungen spürbar gestiegen. Was früher Routine war, kann heute schnell zu einer finanziellen Belastung werden.",
+    "text2": "Besonders im Notdienst oder bei Spezialisten können bis zum 4-fachen Satz abgerechnet werden. Eine einfache Kreuzband-OP kann inklusive Nachsorge schnell <strong>über 3.000 Euro</strong> kosten.",
+    "steigendeSaetze": "Steigende Sätze",
+    "steigendeSaetzeDesc": "Abrechnung bis zum 4-fachen Satz im Notdienst möglich.",
+    "spezialisten": "Spezialisten",
+    "spezialistenDesc": "Moderne Diagnostik (MRT/CT) verursacht hohe Fixkosten.",
+    "beispielTitle": "Beispielkosten: Kreuzbandriss",
+    "beispielSubtitle": "Typischer Behandlungsverlauf",
+    "diagnostik": "Diagnostik (Röntgen/CT)",
+    "diagnostikValue": "ca. 650 €",
+    "operation": "Operation (TPLO)",
+    "operationValue": "ca. 2.100 €",
+    "narkose": "Narkose & Überwachung",
+    "narkoseValue": "ca. 350 €",
+    "medikamente": "Medikamente & Nachsorge",
+    "medikamenteValue": "ca. 450 €",
+    "gesamtkosten": "Gesamtkosten",
+    "gesamtkostenValue": "~ 3.550 €",
+    "kostenHinweis": "Diese Kosten müssen oft sofort beglichen werden. Eine Tierkrankenversicherung übernimmt diese Rechnungen direkt."
+  },
+  "costBenefit": {
+    "title": "Kosten-Nutzen Analyse",
+    "subtitle": "Verwandeln Sie ein unkalkulierbares Großrisiko in eine kleine, planbare monatliche Ausgabe.",
+    "withoutProtection": {
+      "title": "Ohne Absicherung",
+      "riskLabel": "Finanzielles Risiko",
+      "riskValue": "Unbegrenzt",
+      "riskNote": "Im Ernstfall 3.000€ - 5.000€ sofort fällig",
+      "point1": "Volles Kostenrisiko bei jeder Behandlung",
+      "point2": "Entscheidung über Behandlung oft budgetabhängig",
+      "point3": "Keine Kostenerstattung für Vorsorge",
+      "fazit": "Eine einzige Operation kann Ihre Ersparnisse aufbrauchen."
+    },
+    "withProtection": {
+      "title": "Mit Absicherung",
+      "costLabel": "Planbare Kosten",
+      "costValue": "ab 20 €",
+      "costUnit": "/Monat",
+      "costNote": "Für reinen OP-Schutz",
+      "point1": "Kostenübernahme bis zum 4-fachen GOT-Satz",
+      "point2": "Freie Tierarzt- und Klinikwahl",
+      "point3": "Beste medizinische Versorgung gesichert",
+      "fazit": "Kalkulierbare Kosten. Bestmögliche Versorgung."
+    }
+  },
+  "tariffs": {
+    "title": "Zwei Konzepte. Ein Ziel.",
+    "subtitle": "Rasse, Alter, Vorgeschichte — wir kalkulieren individuell. Sie entscheiden.",
+    "vollschutz": {
+      "title": "Vollschutz",
+      "desc": "Rundum-Sorglos-Paket für ambulante und stationäre Behandlungen.",
+      "point1": "Heilbehandlungen & Medikamente",
+      "point2": "Vorsorge (Impfungen, Check-ups)",
+      "point3": "Operationen unbegrenzt",
+      "badge": "Ideal für junge Tiere & Welpen",
+      "cta": "Angebot anfordern"
+    },
+    "opSchutz": {
+      "title": "Operationsschutz",
+      "desc": "Fokus auf das hohe Kostenrisiko bei chirurgischen Eingriffen.",
+      "point1": "Operationen inkl. Diagnostik",
+      "point2": "Nachsorge nach OPs",
+      "point3": "Freie Klinikwahl",
+      "badge": "Ideal für ältere Tiere oder günstige Beiträge",
+      "cta": "Angebot anfordern"
+    }
+  },
+  "contact": {
+    "infoLabel": "Sie wollen wissen, was Absicherung für Ihr Tier kostet?",
+    "infoText": "Rasse, Alter, Gesundheitsstatus — wir berechnen Ihren individuellen Tarif. Keine Verkaufsgespräche. Zahlen und Fakten.",
+    "phoneLabel": "Beratungstelefon",
+    "emailLabel": "E-Mail Kontakt",
+    "formTitle": "Beitrag berechnen",
+    "nameLabel": "Ihr Name",
+    "namePlaceholder": "Max Mustermann",
+    "emailFormLabel": "E-Mail Adresse",
+    "emailPlaceholder": "name@example.com",
+    "animalTypeLabel": "Tierart / Rasse",
+    "animalTypePlaceholder": "z.B. Hund, Labrador",
+    "ageLabel": "Alter",
+    "agePlaceholder": "z.B. 3 Jahre",
+    "submitButton": "Beitrag berechnen",
+    "freeNote": "Kostenlose & unverbindliche Anfrage",
+    "toastTitle": "Anfrage eingegangen",
+    "toastDesc": "Wir erstellen eine unverbindliche Berechnung für Ihr Tier."
+  }
+}

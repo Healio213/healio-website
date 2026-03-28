@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import KlinikHero from '@/components/sections/klinik-upgrade/KlinikHero';
 import UnterbringungSection from '@/components/sections/klinik-upgrade/UnterbringungSection';
@@ -8,11 +9,13 @@ import KlinikUpgradeCTA from '@/components/sections/klinik-upgrade/KlinikUpgrade
 import Contact from '@/components/sections/Contact';
 
 const KlinikUpgradePage = () => {
+  const { t: tSeo } = useTranslation('seo');
+
   return (
     <>
       <SEOHead
-        title="Klinik Upgrade - Privatpatient im Krankenhaus | Healio"
-        description="Sichern Sie sich Einbettzimmer & Chefarztbehandlung im Krankenhaus. Auch mit Vorerkrankungen möglich & durch Bonusprogramme finanzierbar."
+        title={tSeo('klinik.title')}
+        description={tSeo('klinik.description')}
         canonicalUrl="https://www.healio.de/klinik-upgrade"
       />
       <main className="bg-white">

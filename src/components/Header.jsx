@@ -2,9 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +15,8 @@ const Header = () => {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
+  const { t } = useTranslation('common');
+  const { lang, getPath, switchLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,20 +44,20 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { 
-      label: 'Leistungen', 
-      to: '/leistungen',
+    {
+      label: t('nav.leistungen'),
+      to: getPath('leistungen'),
       type: 'dropdown',
       subLinks: [
-        { to: '/ambulant', label: 'Ambulante Zusatzversicherung' },
-        { to: '/zahn', label: 'Zahnzusatzversicherung' },
-        { to: '/stationaer', label: 'Stationäre Zusatzversicherung' },
-        { to: '/tierkrankenversicherung', label: 'Tierkrankenversicherung' },
+        { to: getPath('ambulant'), label: t('nav.ambulant') },
+        { to: getPath('zahn'), label: t('nav.zahn') },
+        { to: getPath('stationaer'), label: t('nav.stationaer') },
+        { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
     },
-    { to: '/partner', label: 'Partner', type: 'link' },
-    { to: '/about', label: 'Über uns', type: 'link' },
-    { to: '/kontakt', label: 'Kontakt', type: 'link' },
+    { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
+    { to: getPath('about'), label: t('nav.about'), type: 'link' },
+    { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
   ];
 
   return (
@@ -64,7 +68,7 @@ const Header = () => {
         : "bg-transparent py-5"
     )} role="banner">
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
-        <Link to="/" className="flex items-center z-50 group">
+        <Link to={getPath('home')} className="flex items-center z-50 group">
           <motion.img
             src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png"
             alt="Healio Logo"
@@ -83,8 +87,8 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-8">
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
-              <li 
-                key={link.label} 
+              <li
+                key={link.label}
                 className="relative"
                 ref={link.type === 'dropdown' ? dropdownRef : null}
                 onMouseEnter={() => link.type === 'dropdown' && setDropdownOpen(true)}
@@ -92,30 +96,30 @@ const Header = () => {
               >
                 {link.type === 'dropdown' ? (
                   <div className="flex items-center h-full py-2">
-                    <Link 
+                    <Link
                       to={link.to}
                       className={cn(
                         "flex items-center gap-1 text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
-                        (location.pathname.includes('/ambulant') || 
-                         location.pathname.includes('/zahn') || 
-                         location.pathname.includes('/stationaer') || 
-                         location.pathname.includes('/tierkrankenversicherung') ||
-                         location.pathname === '/leistungen') && "text-healio-mint font-bold"
+                        (location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
+                         location.pathname.includes('/zahn') || location.pathname.includes('/dental') ||
+                         location.pathname.includes('/stationaer') || location.pathname.includes('/inpatient') ||
+                         location.pathname.includes('/tierkrankenversicherung') || location.pathname.includes('/pet-insurance') ||
+                         location.pathname === '/leistungen' || location.pathname === '/en/services') && "text-healio-mint font-bold"
                       )}
                     >
                       {link.label}
                     </Link>
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         setDropdownOpen(!dropdownOpen);
                       }}
                       className="ml-1 text-white hover:text-healio-mint drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                      aria-label="Toggle dropdown"
+                      aria-label={t('nav.toggleDropdown')}
                     >
                       <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", dropdownOpen && "rotate-180")} />
                     </button>
-                    
+
                     <AnimatePresence>
                       {dropdownOpen && (
                         <motion.div
@@ -146,8 +150,8 @@ const Header = () => {
                     </AnimatePresence>
                   </div>
                 ) : link.type === 'link' ? (
-                  <Link 
-                    to={link.to} 
+                  <Link
+                    to={link.to}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
                       location.pathname === link.to && "text-healio-mint font-bold"
@@ -159,8 +163,8 @@ const Header = () => {
                     )}
                   </Link>
                 ) : (
-                  <a 
-                    href={link.to} 
+                  <a
+                    href={link.to}
                     className="text-sm font-medium transition-colors hover:text-healio-mint text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                   >
                     {link.label}
@@ -169,12 +173,19 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <Button 
+          <button
+            onClick={switchLanguage}
+            className="text-sm font-semibold text-white/80 hover:text-white transition-colors px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40"
+            aria-label={lang === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'}
+          >
+            {t('langSwitch')}
+          </button>
+          <Button
             asChild
             className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
           >
-            <Link to="/potenzialanalyse">
-              Erstgespräch
+            <Link to={getPath('potenzialanalyse')}>
+              {t('nav.erstgespraech')}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
@@ -183,7 +194,7 @@ const Header = () => {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 z-50 transition-colors text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint"
-          aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
+          aria-label={mobileMenuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
         >
           {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
@@ -203,21 +214,21 @@ const Header = () => {
                     {link.type === 'dropdown' ? (
                       <div className="flex flex-col items-center w-full">
                         <div className="flex items-center justify-center gap-2 w-full">
-                          <Link 
+                          <Link
                             to={link.to}
                             onClick={() => setMobileMenuOpen(false)}
                             className="font-medium hover:text-healio-mint transition-colors text-white"
                           >
                             {link.label}
                           </Link>
-                          <button 
+                          <button
                             onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
                             className="p-2 text-white hover:text-healio-mint"
                           >
                             <ChevronDown className={cn("w-5 h-5 transition-transform", mobileDropdownOpen && "rotate-180")} />
                           </button>
                         </div>
-                        
+
                         <AnimatePresence>
                           {mobileDropdownOpen && (
                             <motion.div
@@ -244,7 +255,7 @@ const Header = () => {
                         </AnimatePresence>
                       </div>
                     ) : link.type === 'link' ? (
-                      <Link 
+                      <Link
                         to={link.to}
                         onClick={() => setMobileMenuOpen(false)}
                         className={cn(
@@ -255,7 +266,7 @@ const Header = () => {
                         {link.label}
                       </Link>
                     ) : (
-                      <a 
+                      <a
                         href={link.to}
                         onClick={() => setMobileMenuOpen(false)}
                         className="block text-white font-medium hover:text-healio-mint transition-colors w-full"
@@ -266,12 +277,18 @@ const Header = () => {
                   </li>
                 ))}
               </ul>
-              <Button 
+              <button
+                onClick={() => { switchLanguage(); setMobileMenuOpen(false); }}
+                className="text-lg font-semibold text-white/80 hover:text-white transition-colors px-6 py-2 rounded-full border border-white/20 hover:border-white/40"
+              >
+                {t('langSwitch')}
+              </button>
+              <Button
                 asChild
                 className="w-full max-w-xs bg-[#10B981] hover:bg-[#059669] text-white py-6 text-lg shadow-xl shadow-[#10B981]/20 rounded-xl mt-6 border-0 shrink-0"
               >
-                <Link to="/potenzialanalyse" onClick={() => setMobileMenuOpen(false)}>
-                  Erstgespräch
+                <Link to={getPath('potenzialanalyse')} onClick={() => setMobileMenuOpen(false)}>
+                  {t('nav.erstgespraech')}
                 </Link>
               </Button>
             </motion.div>

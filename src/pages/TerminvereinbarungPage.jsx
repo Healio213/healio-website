@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 
 const TerminvereinbarungPage = () => {
+  const { t } = useTranslation('contact');
+  const { t: tSeo } = useTranslation('seo');
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -10,9 +13,9 @@ const TerminvereinbarungPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 pt-32 pb-24">
-      <SEOHead 
-        title="Termin vereinbaren | Healio" 
-        description="Wählen Sie einen passenden Termin für Ihr persönliches Beratungsgespräch direkt in unserem Kalender aus."
+      <SEOHead
+        title={tSeo('termin.title')}
+        description={tSeo('termin.description')}
       />
       
       <div className="healio-container max-w-4xl mx-auto px-4 sm:px-6">
@@ -24,10 +27,10 @@ const TerminvereinbarungPage = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-            Termin vereinbaren
+            {t('termin.title')}
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Sichern Sie sich jetzt direkt Ihren Wunschtermin für ein kostenloses und unverbindliches Erstgespräch.
+            {t('termin.subtitle')}
           </p>
         </motion.div>
 
@@ -59,7 +62,7 @@ const TerminvereinbarungPage = () => {
           className="mt-12 text-center"
         >
           <p className="text-slate-500 text-sm">
-            Sie erhalten nach der Buchung automatisch eine Bestätigung per E-Mail.
+            {t('termin.confirmation')}
           </p>
         </motion.div>
       </div>

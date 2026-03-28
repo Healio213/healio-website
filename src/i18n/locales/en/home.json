@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "title": "Promote health. Retain employees. Save on taxes.",
+    "subtitle": "Turn the tax office into a sponsor of your employee loyalty.",
+    "description": "Independent experts for corporate benefits & supplementary insurance.",
+    "cta": "Book a Strategy Call"
+  },
+  "seo": {
+    "title": "Healio B2B – Corporate Benefits Reimagined | bAV & bKV Experts",
+    "description": "Optimize your corporate pension and health insurance with Healio. Higher returns, genuine employee retention and tax advantages for your company.",
+    "ogTitle": "Healio – Responsibility Pays Off for Your Company",
+    "ogDescription": "Turn compliance into competitive advantage. Modern bAV & bKV consulting for mid-sized businesses."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Your health is not a matter of luck",
+    "description": "Secure private-patient status with Healio's innovative health concept.",
+    "ambulant": {
+      "title": "Outpatient Supplementary Insurance",
+      "description": "Why pay out of pocket? We cover the bills for massages, chiropractors and Heilpraktiker.",
+      "cta": "Check your plan"
+    },
+    "zahn": {
+      "title": "Dental Supplementary Insurance",
+      "description": "Your smile opens doors. We make sure the bill is never an obstacle.",
+      "cta": "Activate dental cover"
+    },
+    "stationaer": {
+      "title": "Hospital Supplementary Insurance",
+      "description": "Don't leave your health to chance. Chief physician, private room, free choice of hospital.",
+      "cta": "Learn more"
+    },
+    "tier": {
+      "title": "Pet Health Insurance",
+      "description": "Vet costs are skyrocketing. Protect your pet with optimal coverage.",
+      "cta": "Protect your pet"
+    }
+  },
+  "bav": {
+    "title": "Corporate Pension (bAV) — What Most Companies Get Wrong",
+    "legalClaim": "Legal Entitlement",
+    "legalClaimDesc": "§ 1a BetrAVG. Mandatory for every employer. No room for negotiation.",
+    "pensionGap": "Close the Pension Gap",
+    "pensionGapDesc": "€800 monthly gap on average. Your employees feel it already.",
+    "taxBenefits": "Enormous Tax Advantages",
+    "taxBenefitsDesc": "Up to €338/month free of tax and social security contributions.",
+    "employerSubsidy": "Employer Subsidy",
+    "employerSubsidyDesc": "15% minimum statutory subsidy.",
+    "gapPerMonth": "Pension gap / month",
+    "taxFreePerMonth": "Tax-free / month",
+    "mandatorySubsidy": "Mandatory employer subsidy",
+    "legalClaimSince": "Legal entitlement since"
+  },
+  "rendite": {
+    "title": "Return Comparison",
+    "subtitle": "Healio vs. Traditional bAV",
+    "calculation": "Calculation based on a monthly savings rate of €338 over a 25-year term.",
+    "healioStrategy": "Healio Strategy (8.47%)",
+    "classicBav": "Traditional bAV (0.7%)",
+    "deposit": "Deposits:",
+    "profit": "Profit:",
+    "finalCapital": "Final capital:",
+    "chartTitle": "Growth over 25 years",
+    "compoundEffect": "The compound interest effect generates additional capital of",
+    "salaryVsBenefit": "Pay Raise vs. Health Benefit",
+    "salaryVsBenefitDesc": "Why a traditional pay raise evaporates.",
+    "classicRaise": "Traditional Pay Raise",
+    "employerCost": "Employer cost",
+    "taxesCharges": "Taxes & charges",
+    "netEffect": "Net effect for employee",
+    "healthBenefit": "Healio Health Benefit",
+    "taxFree": "Tax-free for employees",
+    "healthBudgetYear": "Health budget / year"
+  },
+  "gesundheit": {
+    "title": "What a corporate health plan (bKV) really costs — and what it delivers.",
+    "fasterAppointments": "Faster Specialist Appointments",
+    "fasterAppointmentsDesc": "5–10 days instead of 6–8 weeks waiting for a specialist.",
+    "lessSickDays": "Reduce Sick Days",
+    "lessSickDaysDesc": "Up to 30% fewer absences through better healthcare access.",
+    "saveCosts": "Save Costs",
+    "saveCostsDesc": "One sick day costs €400 on average.",
+    "retention": "Employee Retention",
+    "retentionDesc": "Health is the most personal topic. Invest here and you build loyalty.",
+    "lessAbsence": "Fewer absences",
+    "costPerDay": "Cost per sick day",
+    "insteadOfWeeks": "Instead of 6–8 weeks waiting"
+  },
+  "zeitfalle": {
+    "title": "The Time Factor",
+    "subtitle": "Compound interest waits for no one.",
+    "description": "Why \"later\" costs you and your team a fortune.",
+    "explanation": "In a compound interest model, time matters more than the amount invested.",
+    "healioAdvantage": "The Healio advantage:",
+    "monthlyRate": "Monthly savings rate",
+    "duration": "Term (years)",
+    "advantage": "Healio advantage:"
+  },
+  "values": {
+    "title": "Our Values",
+    "subtitle": "What drives us and why you can trust us.",
+    "mission": "Our Mission",
+    "missionDesc": "We want to rethink health insurance.",
+    "transparency": "Transparency",
+    "transparencyDesc": "No hidden costs, no complicated clauses.",
+    "customerFocus": "Customer Focus",
+    "customerFocusDesc": "Your health and satisfaction are at the center of everything we do.",
+    "innovation": "Innovation",
+    "innovationDesc": "We use the latest technology.",
+    "reliability": "Reliability",
+    "reliabilityDesc": "We only work with reputable insurance partners.",
+    "empathy": "Empathy",
+    "empathyDesc": "Health is personal.",
+    "efficiency": "Efficiency",
+    "efficiencyDesc": "Time is valuable."
+  },
+  "videos": {
+    "title": "Personal & Transparent",
+    "subtitle": "In short videos, we show you who we are and how our concept works.",
+    "conceptTitle": "Concept Explained: How It Works",
+    "conceptDesc": "Step by step: How you get full reimbursement.",
+    "conceptLabel": "The Concept",
+    "detailLabel": "The concept explained in detail"
+  },
+  "testimonials": {
+    "title": "Real Customers, Real Savings",
+    "subtitle": "Satisfied users share their experiences with the Healio concept."
+  },
+  "insurance": {
+    "title": "Our Insurance Solutions",
+    "subtitle": "Choose the insurance that fits your life.",
+    "moreInfo": "Learn more",
+    "notSure": "Not sure which insurance is right for you?",
+    "freeConsultation": "Request free consultation"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "leistungen": "Leistungen",
+    "ambulant": "Ambulante Zusatzversicherung",
+    "zahn": "Zahnzusatzversicherung",
+    "stationaer": "Stationäre Zusatzversicherung",
+    "tier": "Tierkrankenversicherung",
+    "partner": "Partner",
+    "about": "Über uns",
+    "kontakt": "Kontakt",
+    "erstgespraech": "Erstgespräch",
+    "toggleDropdown": "Toggle dropdown"
+  },
+  "aria": {
+    "menuOpen": "Menü öffnen",
+    "menuClose": "Menü schließen"
+  },
+  "footer": {
+    "tagline": "Dein digitaler Versicherungsmakler für smartere Gesundheitsvorsorge.",
+    "disclaimer": "Healio ist ein unabhängiger Versicherungsmakler nach §34d GewO. 10% unserer Erlöse gehen an Umweltorganisationen.",
+    "company": "Unternehmen",
+    "contact": "Kontakt",
+    "legal": "Rechtliches",
+    "aboutUs": "Über uns",
+    "leistungen": "Leistungen",
+    "partner": "Partner",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "agb": "AGB",
+    "erstinformation": "Erstinformation (§60 VVG)",
+    "ctaTitle": "Bereit für den nächsten Schritt?",
+    "ctaSubtitle": "15 Minuten. Keine Verkaufspräsentation. Nur Zahlen.",
+    "ctaButton": "Strategiegespräch sichern",
+    "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
+  },
+  "langSwitch": "EN"
+}

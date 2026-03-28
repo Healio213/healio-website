@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "title": "Die Menschen hinter Healio.",
+    "founder": "Frank Steinfurt",
+    "founderRole": "Gründer & Geschäftsführer",
+    "quote1": "Ich habe Healio gegründet, weil ich überzeugt bin, dass jeder Mensch Zugang zu erstklassiger Gesundheitsvorsorge verdient — unabhängig von seinem Versicherungsstatus.",
+    "quote2": "Nach Jahren in der traditionellen Versicherungsbranche wurde mir klar: Das System ist zu kompliziert, oft intransparent und stellt selten den Menschen in den Mittelpunkt.",
+    "quote3": "Mit Healio wollten wir das ändern. Wir haben eine Plattform geschaffen, die komplexe Gesundheitstarife entwirrt und klare, ehrliche Lösungen anbietet. Keine unverständlichen Klauseln, keine falschen Versprechen. Einfach exzellente Vorsorge, die im Alltag wirklich ankommt."
+  },
+  "values": {
+    "title": "Unsere Werte",
+    "subtitle": "Diese vier Säulen bilden das Fundament unserer täglichen Arbeit und unserer Vision für die Zukunft der Gesundheit.",
+    "transparency": "Transparenz",
+    "transparencyDesc": "Keine versteckten Kosten, keine Überraschungen. Wir kommunizieren ehrlich und offen.",
+    "trust": "Vertrauen",
+    "trustDesc": "Über 120 Partnerpraxen und tausende zufriedene Kunden vertrauen auf Healio.",
+    "innovation": "Innovation",
+    "innovationDesc": "Wir digitalisieren die Gesundheitsvorsorge und machen sie so einfach wie nie zuvor.",
+    "humanity": "Menschlichkeit",
+    "humanityDesc": "Hinter jeder Police steht ein Mensch. Das vergessen wir nie."
+  },
+  "stats": {
+    "title": "Unsere Erfolgsgeschichte in Zahlen",
+    "partners": "Partnerpraxen",
+    "budget": "max. Gesundheits-Budget",
+    "areas": "Versicherungsbereiche",
+    "satisfaction": "Kundenzufriedenheit als Ziel"
+  },
+  "social": {
+    "title": "Erfolg, der weitergegeben wird.",
+    "text1": "Wir glauben tief daran, dass wirtschaftlicher Erfolg eine gesellschaftliche Verantwortung mit sich bringt. Unternehmen existieren nicht im luftleeren Raum, sondern in einer Gesellschaft, die sie trägt.",
+    "text2": "Deshalb spenden wir aus vollster Überzeugung 10% unseres jährlichen Gewinns an gemeinnützige und soziale Projekte.",
+    "text3": "Kein Corporate-Marketing, keine Buzzwords – sondern unser ehrliches Versprechen, dort zu helfen, wo Unterstützung am dringendsten benötigt wird. Das ist für uns Menschlichkeit in der Praxis."
+  },
+  "cta": {
+    "title": "Bereit für bessere Gesundheitsvorsorge?",
+    "subtitle": "Lass uns gemeinsam herausfinden, wie wir dich oder dein Unternehmen optimal absichern können.",
+    "button": "Jetzt beraten lassen",
+    "explore": "Entdecken"
+  }
+}

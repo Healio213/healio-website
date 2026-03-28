@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 import { emailjsService } from '@/services/emailjsService';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import {
 import { Loader2, Send } from 'lucide-react';
 
 const ContactFormSection = () => {
+  const { t } = useTranslation('contact');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -42,8 +44,8 @@ const ContactFormSection = () => {
     
     if (!formData.vorname || !formData.nachname || !formData.email || !formData.interesse || !formData.nachricht) {
       toast({
-        title: "Fehlende Felder",
-        description: "Bitte füllen Sie alle Pflichtfelder aus.",
+        title: t('contactForm.missingFields'),
+        description: t('contactForm.missingFieldsDesc'),
         variant: "destructive",
       });
       return;
@@ -61,8 +63,8 @@ const ContactFormSection = () => {
       }, "Startseite");
 
       toast({
-        title: "Ihre Anfrage wurde erfolgreich gesendet.",
-        description: "Wir melden uns in Kürze bei Ihnen.",
+        title: t('form.success'),
+        description: t('form.successDesc'),
       });
 
       setFormData({
@@ -75,8 +77,8 @@ const ContactFormSection = () => {
       });
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
+        title: t('form.error'),
+        description: t('form.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -95,10 +97,10 @@ const ContactFormSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
-            Jetzt unverbindlich beraten lassen
+            {t('contactForm.title')}
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Sie sind gesetzlich versichert und möchten mehr aus Ihrer Gesundheitsvorsorge herausholen? Schreiben Sie uns — wir finden den passenden Schutz für Sie.
+            {t('contactForm.subtitle')}
           </p>
         </motion.div>
 
@@ -112,7 +114,7 @@ const ContactFormSection = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="vorname">Vorname *</Label>
+                <Label htmlFor="vorname">{t('contactForm.firstName')}</Label>
                 <Input
                   id="vorname"
                   name="vorname"
@@ -124,7 +126,7 @@ const ContactFormSection = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="nachname">Nachname *</Label>
+                <Label htmlFor="nachname">{t('contactForm.lastName')}</Label>
                 <Input
                   id="nachname"
                   name="nachname"
@@ -139,7 +141,7 @@ const ContactFormSection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="email">E-Mail *</Label>
+                <Label htmlFor="email">{t('contactForm.email')}</Label>
                 <Input
                   id="email"
                   name="email"
@@ -152,7 +154,7 @@ const ContactFormSection = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="telefon">Telefon (optional)</Label>
+                <Label htmlFor="telefon">{t('contactForm.phone')}</Label>
                 <Input
                   id="telefon"
                   name="telefon"
@@ -166,23 +168,23 @@ const ContactFormSection = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="interesse">Interesse an *</Label>
+              <Label htmlFor="interesse">{t('contactForm.interest')}</Label>
               <Select value={formData.interesse} onValueChange={handleSelectChange} required>
                 <SelectTrigger className="bg-slate-50 border-slate-200 focus:ring-[#25c990]">
                   <SelectValue placeholder="Bitte wählen..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Ambulante Zusatzversicherung">Ambulante Zusatzversicherung</SelectItem>
-                  <SelectItem value="Zahnzusatzversicherung">Zahnzusatzversicherung</SelectItem>
-                  <SelectItem value="Stationäre Zusatzversicherung">Stationäre Zusatzversicherung</SelectItem>
-                  <SelectItem value="Tierkrankenversicherung">Tierkrankenversicherung</SelectItem>
-                  <SelectItem value="Mehrere Bereiche">Mehrere Bereiche</SelectItem>
+                  <SelectItem value="Ambulante Zusatzversicherung">{t('contactForm.interestOptions.ambulant')}</SelectItem>
+                  <SelectItem value="Zahnzusatzversicherung">{t('contactForm.interestOptions.zahn')}</SelectItem>
+                  <SelectItem value="Stationäre Zusatzversicherung">{t('contactForm.interestOptions.stationaer')}</SelectItem>
+                  <SelectItem value="Tierkrankenversicherung">{t('contactForm.interestOptions.tier')}</SelectItem>
+                  <SelectItem value="Mehrere Bereiche">{t('contactForm.interestOptions.multiple')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="nachricht">Nachricht *</Label>
+              <Label htmlFor="nachricht">{t('contactForm.message')}</Label>
               <Textarea
                 id="nachricht"
                 name="nachricht"
@@ -203,17 +205,17 @@ const ContactFormSection = () => {
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Wird gesendet...
+                  {t('form.sending')}
                 </>
               ) : (
                 <>
-                  Anfrage senden
+                  {t('form.submit')}
                   <Send className="ml-2 h-5 w-5" />
                 </>
               )}
             </Button>
             <p className="text-xs text-center text-slate-500 mt-4">
-              * Pflichtfelder. Ihre Daten werden sicher übermittelt und vertraulich behandelt.
+              {t('contactForm.requiredFields')}
             </p>
           </form>
         </motion.div>

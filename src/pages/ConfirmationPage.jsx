@@ -3,9 +3,14 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Calendar, CheckCircle2, Home, ArrowLeft, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 
 const ConfirmationPage = () => {
+  const { t } = useTranslation('contact');
+  const { t: tSeo } = useTranslation('seo');
+  const { getPath } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const isAppointment = location.state?.type === 'appointment';
@@ -20,8 +25,8 @@ const ConfirmationPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col items-center py-20 px-6">
       <SEOHead
-        title="Bestätigung | Healio"
-        description="Vielen Dank für Ihre Anfrage bei Healio. Wir melden uns in Kürze bei Ihnen."
+        title={tSeo('confirmation.title')}
+        description={tSeo('confirmation.description')}
         canonicalUrl="https://www.healio.de/confirmation"
       />
       <div className="max-w-4xl w-full pt-12">
@@ -44,13 +49,13 @@ const ConfirmationPage = () => {
           </div>
           
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-            {isAppointment ? "Terminanfrage erfolgreich gesendet!" : "Prüfungsprozess initiiert."}
+            {isAppointment ? t('confirmation.title') : t('confirmation.subtitle')}
           </h1>
-          
+
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {isAppointment 
-              ? "Vielen Dank für Ihre Anfrage. Wir haben Ihre Daten erhalten und eine Bestätigung an unser Team (info@healio.de) weitergeleitet. Wir werden uns in Kürze bei Ihnen melden, um den Termin final zu bestätigen."
-              : "Vielen Dank für Ihre Daten. Wir sichten Ihre Angaben aktuell um die exakten Einsparpotenziale für Ihr Unternehmen zu berechnen."}
+            {isAppointment
+              ? t('confirmation.text1')
+              : t('confirmation.text2')}
           </p>
         </motion.div>
 
@@ -65,10 +70,10 @@ const ConfirmationPage = () => {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
               <Clock className="w-8 h-8 text-healio-primary" />
-              Wählen Sie einen Termin
+              {t('confirmation.bookSlot')}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Sichern Sie sich jetzt direkt einen passenden Zeitpunkt für unser gemeinsames Gespräch in unserem Kalender.
+              {t('confirmation.bookSlotDesc')}
             </p>
           </div>
           
@@ -96,13 +101,13 @@ const ConfirmationPage = () => {
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center justify-center gap-3">
               <Calendar className="w-8 h-8 text-healio-primary" />
-              {isAppointment ? "Wie geht es weiter?" : "Ihr Termin für das Audit"}
+              {isAppointment ? t('confirmation.nextSteps') : t('confirmation.yourAppointment')}
             </h2>
             
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
               {isAppointment
-                ? "Einer unserer Experten wird Ihre Terminanfrage prüfen und sich zeitnah mit Ihnen in Verbindung setzen. Sie können sich auch jederzeit telefonisch unter +49 40 1802 4898 0 bei uns melden, falls Sie dringende Rückfragen haben."
-                : "Alternativ können Sie den Termin auch direkt in einem neuen Tab buchen, falls der Kalender oben nicht korrekt lädt."}
+                ? t('confirmation.appointmentDesc')
+                : t('confirmation.alternativeCalendar')}
             </p>
             
             {!isAppointment && (
@@ -111,12 +116,12 @@ const ConfirmationPage = () => {
                   onClick={() => window.open(calendarUrl, '_blank', 'noopener,noreferrer')}
                   className="bg-healio-primary hover:bg-healio-primary-dark text-white rounded-full px-10 py-7 text-lg font-semibold shadow-lg shadow-healio-primary/20 transition-all hover:scale-105 active:scale-95 border-0 flex items-center gap-3 mx-auto"
                 >
-                  Alternativen Kalender öffnen
+                  {t('confirmation.openCalendar')}
                   <ExternalLink className="w-5 h-5" />
                 </Button>
                 
                 <p className="mt-8 text-sm text-gray-400">
-                  Sie werden zu Google Calendar weitergeleitet, um Ihren Termin sicher zu buchen.
+                  {t('confirmation.calendarRedirect')}
                 </p>
               </>
             )}
@@ -131,22 +136,22 @@ const ConfirmationPage = () => {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button 
-            onClick={() => navigate('/')}
+          <Button
+            onClick={() => navigate(getPath('home'))}
             variant="outline"
             className="rounded-full px-8 py-6 text-base font-medium flex items-center gap-2 w-full sm:w-auto"
           >
             <Home className="w-4 h-4" />
-            Zurück zur Startseite
+            {t('confirmation.backToHome')}
           </Button>
-          
-          <Button 
-            onClick={() => navigate('/terminvereinbarung')}
+
+          <Button
+            onClick={() => navigate(getPath('terminvereinbarung'))}
             variant="ghost"
             className="rounded-full px-8 py-6 text-base font-medium flex items-center gap-2 w-full sm:w-auto text-healio-primary hover:text-healio-primary-dark hover:bg-healio-primary/10"
           >
             <ArrowLeft className="w-4 h-4" />
-            Neuen Termin anfragen
+            {t('confirmation.newAppointment')}
           </Button>
         </motion.div>
 

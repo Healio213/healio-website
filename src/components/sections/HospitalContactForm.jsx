@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,7 @@ import { Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 
 const HospitalContactForm = () => {
+  const { t } = useTranslation('contact');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,15 +37,15 @@ const HospitalContactForm = () => {
       }, "Stationäre");
       
       toast({
-        title: "Ihre Anfrage wurde erfolgreich gesendet.",
-        description: "Wir melden uns in Kürze bei Ihnen.",
+        title: t('form.success'),
+        description: t('form.successDesc'),
       });
-      
+
       setFormData({ name: '', email: '', phone: '' });
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
+        title: t('form.error'),
+        description: t('form.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -56,22 +58,22 @@ const HospitalContactForm = () => {
       <div className="container mx-auto px-6 max-w-xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100">
-            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Privatpatienten-Status anfragen</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('hospital.title')}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Name *</Label>
+                <Label htmlFor="name">{t('form.name')}</Label>
                 <Input id="name" name="name" required value={formData.name} onChange={handleChange} className="bg-white" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">E-Mail *</Label>
+                <Label htmlFor="email">{t('form.email')}</Label>
                 <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="bg-white" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">Telefon (optional)</Label>
+                <Label htmlFor="phone">{t('form.phone')}</Label>
                 <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="bg-white" />
               </div>
               <Button type="submit" disabled={isSubmitting} className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white h-12 mt-4">
-                {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Wird gesendet...</> : <><Send className="mr-2 h-4 w-4" /> Anfrage senden</>}
+                {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 h-4 w-4" /> {t('form.submit')}</>}
               </Button>
             </form>
           </div>

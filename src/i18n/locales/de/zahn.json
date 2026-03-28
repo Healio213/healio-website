@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Effektiv für 0 €.",
+    "subtitle": "ZahnUpgrade ab 5 € im Monat. In Kombination mit dem IKK Classic Bonus finanziert sich die Zahnzusatzversicherung komplett selbst. Stiftung Warentest: SEHR GUT (0,8).",
+    "ikkNote": "<strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK Classic Bonus (über 300 € pro Jahr, steuerfrei) kann die Beiträge vollständig ausgleichen. Keine Wartezeiten, bis zu 3 fehlende Zähne mitversicherbar.",
+    "ctaCalculate": "Tarif berechnen",
+    "ctaBenefits": "Leistungen ansehen",
+    "heroImageAlt": "Professionelle Zahnarztpraxis"
+  },
+  "siegel": {
+    "title": "Ausgezeichnet von unabhängigen Testern",
+    "alt": "Qualitätssiegel: Franke & Bornberg FFF+, Focus Money Höchste Kundenzufriedenheit, Focus Money Höchste Weiterempfehlung, Stiftung Warentest SEHR GUT (0,8)"
+  },
+  "concept": {
+    "title": "ZahnUpgrade 90+ – Bis zu 100 % Erstattung",
+    "subtitle": "Der Testsieger von Stiftung Warentest: SEHR GUT (0,8). Mit BonusPlus steigt die Erstattung automatisch von 90 % auf 100 %. In Kombination mit dem IKK Classic Bonus effektiv für 0 €.",
+    "testsieger": "Stiftung Warentest Testsieger",
+    "tariffName": "ZahnUpgrade 90+",
+    "tariffRate": "90 – 100 %",
+    "tariffRateLabel": "Erstattung, ab 13,50 €/Monat",
+    "tariffDetails": {
+      "zahnersatz": { "label": "Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "value": "90 %" },
+      "zahnbehandlung": { "label": "Zahnbehandlungen (Füllungen, Wurzel, Parodontose)", "value": "90 %" },
+      "prophylaxe": { "label": "Prophylaxe, PZR & Fissurenversiegelung", "value": "90 %, bis 180 €/Jahr" },
+      "bleaching": { "label": "Bleaching & Schmerzausschaltung", "value": "90 %, bis 180 €/Jahr" },
+      "kfo": { "label": "Kieferorthopädie (Kinder)", "value": "90 %, max. 2.500 €" },
+      "unfall": { "label": "Unfall-Sofortschutz", "value": "Ohne Höchstsumme" },
+      "maxErstattung": { "label": "Max. Erstattung", "value": "1.000 € / 4.000 € / unbegrenzt" },
+      "kinderBeitrag": { "label": "Kinder-Beitrag", "value": "ab 21,50 €/Monat" }
+    },
+    "bonusPlusTitle": "BonusPlus – So steigt deine Erstattung auf 100 %",
+    "bonusPlus90": "90 %",
+    "bonusPlus90Label": "Sofort ab Tag 1",
+    "bonusPlus95": "95 %",
+    "bonusPlus95Label": "Nach 5 Jahren Bonusheft",
+    "bonusPlus100": "100 %",
+    "bonusPlus100Label": "Nach 10 Jahren Bonusheft",
+    "bonusPlusNote": "BonusPlus ist ab 21 Jahren verfügbar. Lückenlos geführtes Bonusheft der gesetzlichen Krankenkasse erforderlich.",
+    "ikkComboTitle": "Effektiv 0 € mit IKK Classic Bonus",
+    "ikkComboText": "Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 13,50 € (= 162 €/Jahr) deckt der Bonus die Kosten mehr als vollständig. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.",
+    "vorversicherungTitle": "Vorversicherung wird angerechnet",
+    "vorversicherungText": "<strong>Die Summenbegrenzung im ersten Jahr entfällt komplett</strong>, wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Du startest sofort mit vollem Leistungsumfang. Ein Wechsel lohnt sich besonders, wenn du bisher weniger als 90 % Erstattung bekommst.",
+    "exampleImplantat": "Beispiel: Implantat",
+    "exampleBleaching": "Beispiel: Bleaching",
+    "rechnungsbetrag": "Rechnungsbetrag",
+    "gkvLeistung": "GKV-Leistung",
+    "eigenanteilOhne": "Eigenanteil ohne Versicherung",
+    "erstattungZahn": "Erstattung ZahnUpgrade 90+",
+    "deinEigenanteil": "Dein Eigenanteil",
+    "mitBonusPlus10": "Mit BonusPlus (10 Jahre Bonusheft)",
+    "mitBonusPlus5": "Mit BonusPlus (5 Jahre Bonusheft)",
+    "besonderheitenTitle": "Das macht ZahnUpgrade besonders",
+    "besonderheiten": [
+      "Keine Wartezeiten – Sofortschutz ab Tag 1",
+      "Maximal 3 Gesundheitsfragen beim Antrag",
+      "Bis zu 3 fehlende Zähne mitversicherbar (5 € Zuschlag/Zahn)",
+      "BonusPlus: Erstattung steigt auf bis zu 100 %",
+      "Vorversicherung wird angerechnet (Summenbegrenzung entfällt im 1. Jahr)",
+      "Wechsel-Option: Nach 3 Jahren in höheren Tarif ohne Gesundheitsprüfung",
+      "Unfall-Sofortschutz ohne Höchstsummen oder Altersbegrenzung",
+      "Inflationsvorsorge: Erstattungsgrenzen werden indexorientiert angepasst",
+      "Innovationsvorsorge: Zukünftige Behandlungsmethoden werden abgedeckt",
+      "Optional mit Alterungsrückstellungen für günstigere Beiträge im Alter"
+    ]
+  },
+  "benefits": {
+    "title": "Zahnzusatzversicherung: Was die gesetzliche Kasse nicht zahlt.",
+    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest zahlen Sie selbst — oder eine intelligente Zusatzversicherung.",
+    "noWait": { "title": "Keine Wartezeiten", "desc": "Sofortschutz ab Tag 1. Professionelle Zahnreinigung und Prophylaxe sofort nutzbar." },
+    "zahnersatz": { "title": "Bis zu 100 % Zahnersatz", "desc": "Kronen, Brücken, Implantate und Inlays. Mit BonusPlus steigt die Erstattung auf bis zu 100 %." },
+    "prophylaxe": { "title": "Prophylaxe & Zahnreinigung", "desc": "Professionelle Zahnreinigung, Fissurenversiegelung und Prophylaxe in allen Tarifen inklusive." },
+    "bleaching": { "title": "Bleaching & Ästhetik", "desc": "Ab dem 70+-Tarif: Bleaching, Schmerzausschaltung (Lachgas, Hypnose, Akupunktur) mitversichert." },
+    "kfo": { "title": "Kieferorthopädie", "desc": "50-90 % Erstattung für Kinder und Jugendliche. Bei Unfall auch für Erwachsene." },
+    "fehlend": { "title": "Fehlende Zähne versicherbar", "desc": "Bis zu 3 bereits fehlende Zähne mitversicherbar. Nur 5 € Risikozuschlag pro fehlendem Zahn." },
+    "unfall": { "title": "Unfall-Sofortschutz", "desc": "Keine Höchstsummen und keine Altersbegrenzung bei Zahnschäden durch Unfälle." },
+    "gesundheitsfragen": { "title": "Nur 3 Gesundheitsfragen", "desc": "Einfacher Antrag. Maximal 3 Gesundheitsfragen. Stabil kalkuliert und leistungsfähig." }
+  },
+  "testimonials": {
+    "headline": "Was Kunden berichten."
+  },
+  "faq": {
+    "title": "Häufige Fragen — direkt beantwortet.",
+    "subtitle": "Die wichtigsten Fakten im Überblick. Klar und transparent.",
+    "items": [
+      { "q": "Was kostet das ZahnUpgrade 90+ monatlich?", "a": "Der ZahnUpgrade 90+ Tarif beginnt ab 13,50 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 29,06 Euro. In Kombination mit dem IKK Classic Bonusprogramm (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst. Bei nur 162 Euro Jahresbeitrag und über 300 Euro Bonus zahlst du unterm Strich 0 Euro." },
+      { "q": "Wie komme ich von 90 % auf 100 % Erstattung?", "a": "Durch BonusPlus steigt deine Erstattung automatisch: Sofort ab Tag 1 bekommst du 90 % erstattet. Wenn du ein lückenlos geführtes Bonusheft deiner Krankenkasse vorweisen kannst, steigt die Erstattung nach 5 Jahren auf 95 % und nach 10 Jahren auf volle 100 %. BonusPlus ist ab 21 Jahren verfügbar. Du musst nichts extra beantragen, der Nachweis des Bonushefts reicht." },
+      { "q": "Kann ich die Versicherung auch mit fehlenden Zähnen abschließen?", "a": "Ja, das ist ein echtes Alleinstellungsmerkmal. Bis zu 3 bereits fehlende Zähne können mitversichert werden. Der Risikozuschlag beträgt lediglich 5 Euro pro fehlendem Zahn und Monat. Viele andere Zahnzusatzversicherungen lehnen Kunden mit fehlenden Zähnen komplett ab oder schließen diese von der Erstattung aus." },
+      { "q": "Gibt es Wartezeiten?", "a": "Nein. Der volle Versicherungsschutz gilt sofort ab Tag 1. Professionelle Zahnreinigung, Prophylaxe, Fissurenversiegelung und alle anderen Leistungen kannst du direkt in Anspruch nehmen. In den ersten Kalenderjahren gilt eine Summenbegrenzung von 1.000 Euro (1./2. Jahr), die danach entfällt und ab dem 5. Kalenderjahr komplett unbegrenzt ist." },
+      { "q": "Ich habe bereits eine Zahnzusatzversicherung. Lohnt sich ein Wechsel?", "a": "Sehr wahrscheinlich ja, besonders wenn du aktuell weniger als 90 % Erstattung bekommst. Dein großer Vorteil: Die Vorversicherung wird angerechnet. Wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat, entfällt die Summenbegrenzung im ersten Kalenderjahr komplett. Du startest also sofort mit vollem Leistungsumfang, nicht bei Null." },
+      { "q": "Was genau wird alles erstattet?", "a": "Der ZahnUpgrade 90+ erstattet 90 bis 100 Prozent für: Hochwertigen Zahnersatz wie Implantate, Kronen, Brücken und Inlays. Zahnbehandlungen wie Füllungen, Wurzelbehandlungen, Parodontose und Knirscherschienen. Professionelle Zahnreinigung und Fissurenversiegelung (bis 180 Euro pro Jahr). Bleaching und besondere Schmerzausschaltung wie Lachgas, Hypnose oder Akupunktur. Kieferorthopädie für Kinder (90 %, max. 2.500 Euro). Dazu Unfall-Sofortschutz ohne Höchstsummen." },
+      { "q": "Wie funktioniert das zusammen mit dem IKK Classic Bonus?", "a": "Die Kombination ist der Schlüssel: Du schließt den ZahnUpgrade 90+ ab (13,50 Euro pro Monat = 162 Euro im Jahr). Gleichzeitig sammelst du als IKK Classic Mitglied Bonuspunkte für gesundheitsbewusstes Verhalten: Impfungen, Zahnvorsorge, Sportverein, Gesundheits-Check-ups. Der Bonus beträgt über 300 Euro pro Jahr, steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr für Zahnreinigung und Vorsorge. Ergebnis: Dein Zahnschutz kostet dich effektiv 0 Euro." },
+      { "q": "Brauche ich eine Gesundheitsprüfung?", "a": "Nein, es gibt keine aufwändige Gesundheitsprüfung. Der Antrag enthält maximal 3 einfache Gesundheitsfragen. Das macht den Abschluss schnell und unkompliziert. Selbst mit bis zu 3 fehlenden Zähnen wirst du angenommen (gegen einen kleinen Risikozuschlag von 5 Euro pro Zahn)." },
+      { "q": "Können auch meine Kinder mitversichert werden?", "a": "Ja. Für Kinder bietet der ZahnUpgrade 90+ eine besonders starke Absicherung: Kieferorthopädische Behandlungen werden zu 90 % erstattet, maximal 2.500 Euro für die gesamte Vertragsdauer. Auch bei leichten Fehlstellungen (KIG 1-5) wird geleistet, nicht erst ab KIG 3 wie bei vielen Mitbewerbern. Der Kinderbeitrag liegt bei 21,50 Euro im Monat. Behandlungsbeginn muss vor dem 18. Lebensjahr sein." },
+      { "q": "Wie wurde der ZahnUpgrade 90+ von unabhängigen Testern bewertet?", "a": "Der ZahnUpgrade 90+ wurde von Stiftung Warentest mit der Note SEHR GUT (0,8) ausgezeichnet und ist Testsieger in der Kategorie 'Gut und günstig' (Finanzen, Ausgabe 07/2025). Darüber hinaus hat der Versicherer das Siegel 'Höchste Kundenzufriedenheit' von Focus Money und die Bestnote 'Ausgezeichnet' von Morgen und Morgen erhalten." }
+    ]
+  },
+  "zahnzusatz": {
+    "hero": {
+      "title": "Schluss mit hohen Zahnarzt-Rechnungen. <highlight>Sichern Sie sich Privatpatienten-Status</highlight> beim Zahnarzt.",
+      "subtitle": "Egal ob Implantate, Kronen oder professionelle Zahnreinigung: Wir übernehmen die Kosten, die Ihre Krankenkasse nicht zahlt.",
+      "cta": "Jetzt Tarif berechnen",
+      "imageAlt": "Strahlendes Lächeln"
+    },
+    "problem": {
+      "badge": "Die Kostenfalle",
+      "title": "Das Problem: Gesetzliche Krankenversicherung deckt fast nichts ab",
+      "text1": "Wenn es beim Zahnarzt ernst wird, wird es teuer. Die gesetzlichen Kassen zahlen bei Zahnersatz nur einen geringen Festzuschuss – oft weniger als 50% der einfachsten Versorgung.",
+      "text2": "Hochwertige Implantate, Keramikkronen oder Inlays müssen Sie fast komplett selbst bezahlen. Eine einzelne Rechnung kann schnell <strong>mehrere tausend Euro</strong> betragen. Ohne Zusatzversicherung bleiben Sie auf diesen Kosten sitzen."
+    },
+    "solution": {
+      "badge": "Die Lösung",
+      "title": "Rundum-Schutz für Ihre Zähne",
+      "erstattung": { "title": "100% Erstattung", "desc": "Wir übernehmen bis zu 100% der Kosten für hochwertigen Zahnersatz, Inlays und Implantate. Keine Kompromisse mehr bei der Qualität." },
+      "zahnreinigung": { "title": "Zahnreinigung inklusive", "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe – für ein strahlendes Lächeln." },
+      "sofortschutz": { "title": "Sofort-Schutz", "desc": "Keine Wartezeiten. Ihr Versicherungsschutz beginnt sofort ab dem ersten Tag. Reichen Sie Rechnungen direkt ein." }
+    },
+    "tariffFinder": {
+      "title": "Finden Sie den Tarif, der Sie garantiert annimmt.",
+      "subtitle": "Wählen Sie Ihren aktuellen Zahnstatus für ein maßgeschneidertes Angebot.",
+      "optionHealthy": { "title": "Alles gesund & vollzählig", "desc": "Ich habe keine fehlenden Zähne und keine laufenden Behandlungen." },
+      "option1Missing": { "title": "1 Zahn fehlt aktuell", "desc": "Mir fehlt derzeit ein Zahn (außer Weisheitszähne), der noch nicht ersetzt ist." },
+      "option2to3Missing": { "title": "2 bis 3 Zähne fehlen", "desc": "Mir fehlen derzeit mehrere Zähne, für die ich Ersatz benötige." },
+      "showTariff": "Tarif anzeigen"
+    }
+  }
+}

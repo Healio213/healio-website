@@ -1,39 +1,42 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Stethoscope, TrendingDown, PiggyBank, HeartHandshake } from 'lucide-react';
 import { TextHighlight, AnimatedCounter } from '@/components/ui/ScrollAnimation';
 
 const GesundheitSection = () => {
+  const { t } = useTranslation('home');
+
   const hrBenefits = [
     {
       icon: <Stethoscope className="w-10 h-10" />,
-      title: "Schnellere Facharzttermine",
-      desc: "5–10 Tage statt 6–8 Wochen. Schnellere Diagnose. Schnellere Rückkehr. Weniger Lohnfortzahlung.",
+      title: t('gesundheit.fasterAppointments'),
+      desc: t('gesundheit.fasterAppointmentsDesc'),
       accent: "text-emerald-600",
       accentBg: "bg-emerald-50",
       border: "border-l-emerald-500"
     },
     {
       icon: <TrendingDown className="w-10 h-10" />,
-      title: "Kranktage senken",
-      desc: "Bis zu 30 % weniger Ausfallzeiten. Das ist kein Versprechen — das ist die Statistik.",
+      title: t('gesundheit.lessSickDays'),
+      desc: t('gesundheit.lessSickDaysDesc'),
       accent: "text-blue-600",
       accentBg: "bg-blue-50",
       border: "border-l-blue-500"
     },
     {
       icon: <PiggyBank className="w-10 h-10" />,
-      title: "Kosten sparen",
-      desc: "Ein Krankheitstag kostet 400 €. Zwei eingesparte Fehltage amortisieren die gesamten Jahreskosten.",
+      title: t('gesundheit.saveCosts'),
+      desc: t('gesundheit.saveCostsDesc'),
       accent: "text-amber-600",
       accentBg: "bg-amber-50",
       border: "border-l-amber-500"
     },
     {
       icon: <HeartHandshake className="w-10 h-10" />,
-      title: "Mitarbeiterbindung",
-      desc: "Gesundheit ist das persönlichste Thema. Wer hier investiert, signalisiert echte Wertschätzung — nicht nur ein höheres Gehalt.",
+      title: t('gesundheit.retention'),
+      desc: t('gesundheit.retentionDesc'),
       accent: "text-rose-600",
       accentBg: "bg-rose-50",
       border: "border-l-rose-500"
@@ -50,7 +53,7 @@ const GesundheitSection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-              Was eine bKV wirklich kostet — und was sie <TextHighlight>bringt.</TextHighlight>
+              {t('gesundheit.title')}
             </h2>
             <p className="text-lg text-slate-500">
               Zahlen lügen nicht. Eine bKV ist kein Wohlfühl-Benefit. Sie ist eine Investition mit messbarem Return.
@@ -61,9 +64,9 @@ const GesundheitSection = () => {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-20">
           {[
-            { value: 30, suffix: " %", label: "Weniger Ausfallzeiten" },
-            { value: 400, suffix: " €", label: "Kosten pro Krankheitstag" },
-            { value: 5, suffix: " Tage", label: "Statt 6–8 Wochen Wartezeit" }
+            { value: 30, suffix: " %", label: t('gesundheit.lessAbsence') },
+            { value: 400, suffix: " €", label: t('gesundheit.costPerDay') },
+            { value: 5, suffix: " Tage", label: t('gesundheit.insteadOfWeeks') }
           ].map((stat, idx) => (
             <motion.div
               key={idx}

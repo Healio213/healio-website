@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 import { emailjsService } from '@/services/emailjsService';
 
 const Contact = () => {
+  const { t } = useTranslation('contact');
+  const { getPath } = useLanguage();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,8 +52,8 @@ const Contact = () => {
 
     if (!formData.employees || !formData.focus) {
       toast({
-        title: "Fehlende Angaben",
-        description: "Bitte füllen Sie alle erforderlichen Felder aus.",
+        title: t('form.missingFields'),
+        description: t('form.missingFieldsDesc'),
         variant: "destructive",
       });
       return;
@@ -67,8 +71,8 @@ const Contact = () => {
       }, "Kontakt");
 
       toast({
-        title: "Ihre Anfrage wurde erfolgreich gesendet.",
-        description: "Wir melden uns in Kürze bei Ihnen.",
+        title: t('form.success'),
+        description: t('form.successDesc'),
       });
 
       setFormData({
@@ -81,12 +85,12 @@ const Contact = () => {
       });
 
       setTimeout(() => {
-        navigate('/potenzialanalyse');
+        navigate(getPath('potenzialanalyse'));
       }, 1000);
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
+        title: t('form.error'),
+        description: t('form.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -248,7 +252,7 @@ const Contact = () => {
                 disabled={isSubmitting}
                 className="w-full bg-healio-primary hover:bg-[#1da877] text-white h-14 text-lg font-bold rounded-xl shadow-lg hover:shadow-[0_6px_20px_rgba(37,201,144,0.3)] transition-all mt-4"
               >
-                {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Wird gesendet...</> : <><Send className="mr-2 w-5 h-5" /> Gespräch anfragen</>}
+                {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 w-5 h-5" /> {t('form.submit')}</>}
               </Button>
 
             </form>

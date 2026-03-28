@@ -1,5 +1,6 @@
 
 import React, { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createOrganizationSchema } from '@/lib/createSchemaMarkup';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
@@ -23,6 +24,9 @@ const SectionLoader = () => (
 );
 
 const MainHomePage = () => {
+  const { t } = useTranslation('home');
+  const { t: tSeo } = useTranslation('seo');
+
   const schemaMarkup = {
     ...createOrganizationSchema(),
     description: "Spezialisiert auf betriebliche Altersvorsorge (bAV) und betriebliche Krankenversicherung (bKV) für Unternehmen.",
@@ -33,11 +37,11 @@ const MainHomePage = () => {
   return (
     <>
       <SEOHead
-        title="Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten"
-        description="Optimieren Sie Ihre betriebliche Altersvorsorge und Krankenversicherung mit Healio. Höhere Renditen, echte Mitarbeiterbindung und steuerliche Vorteile für Ihr Unternehmen."
+        title={t('seo.title')}
+        description={t('seo.description')}
         canonicalUrl="https://www.healio.de/"
-        ogTitle="Healio – Verantwortung lohnt sich für Ihr Unternehmen"
-        ogDescription="Verwandeln Sie Pflichtaufgaben in Wettbewerbsvorteile. Modernes bAV & bKV Consulting für den Mittelstand."
+        ogTitle={t('seo.ogTitle')}
+        ogDescription={t('seo.ogDescription')}
         ogImage="https://www.healio.de/og-image-b2b.png"
         ogUrl="https://www.healio.de/"
         schemaMarkup={schemaMarkup}

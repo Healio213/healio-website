@@ -1,24 +1,27 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import VideoCard from '@/components/VideoCard';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Videos = () => {
+  const { t } = useTranslation('home');
+
   return (
     <section className="healio-section">
       <div className="healio-container">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-5xl font-extrabold text-healio-text">
-            Persönlich & Transparent <span className="healio-gradient-text">erklärt</span>
+            {t('videos.title')}
           </h2>
           <p className="mt-4 text-lg text-healio-text-light max-w-3xl mx-auto">
-            Wir zeigen dir in kurzen Videos, wer wir sind und wie Healio genau funktioniert.
+            {t('videos.subtitle')}
           </p>
         </div>
         <div className="max-w-xl mx-auto">
           <VideoCard
-            title="Konzept erklärt: So funktioniert's"
-            description="Schritt für Schritt erklärt: Wie du zur vollen Erstattung kommst."
-            thumbnailText="Das Konzept"
+            title={t('videos.conceptTitle')}
+            description={t('videos.conceptDesc')}
+            thumbnailText={t('videos.conceptLabel')}
             delay={0}
           />
 
@@ -26,7 +29,7 @@ const Videos = () => {
              <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-lg font-semibold text-healio-text-light hover:no-underline text-left px-4">
-                  Das Konzept im Detail erklärt
+                  {t('videos.detailLabel')}
                 </AccordionTrigger>
                 <AccordionContent className="px-4">
                   <div className="prose prose-lg max-w-none text-healio-text-light">

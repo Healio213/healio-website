@@ -1,0 +1,25 @@
+{
+  "title": "Healio Ratgeber",
+  "subtitle": "Expertenwissen zu Gesundheitsbudgets, Zusatzversicherungen und steuerfreien Benefits – verständlich erklärt und immer aktuell.",
+  "allPosts": "Alle Beiträge",
+  "noPostsYet": "Noch keine Beiträge in dieser Kategorie.",
+  "comingSoon": "Unsere Redaktion arbeitet bereits an neuen Inhalten.",
+  "readMore": "Weiterlesen",
+  "backToGuide": "Zurück zum Ratgeber",
+  "readTime": "Min. Lesezeit",
+  "calculateBudget": "Ihr persönliches Gesundheitsbudget berechnen",
+  "calculateBudgetDesc": "Erfahren Sie in 2 Minuten, wie viel Budget Ihnen zusteht – kostenlos und unverbindlich.",
+  "calculateNow": "Jetzt berechnen",
+  "bookConsultation": "Beratungstermin buchen",
+  "atAGlance": "Auf einen Blick",
+  "notFound": "Artikel nicht gefunden",
+  "categories": {
+    "heilpraktiker": "Heilpraktiker",
+    "hebammen": "Hebammen",
+    "versicherte": "Für Versicherte",
+    "optiker": "Optiker",
+    "hoerakustiker": "Hörakustiker",
+    "physiotherapie": "Physiotherapie",
+    "arbeitgeber": "Arbeitgeber"
+  }
+}

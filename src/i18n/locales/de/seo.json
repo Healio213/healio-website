@@ -1,0 +1,78 @@
+{
+  "home": {
+    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten",
+    "description": "Optimieren Sie Ihre betriebliche Altersvorsorge und Krankenversicherung mit Healio."
+  },
+  "ambulant": {
+    "title": "Ambulante Zusatzversicherung – Dein 2.500€ Gesundheits-Budget | Healio",
+    "description": "Heilpraktiker, Osteopathie, Massagen, Sehhilfen – alles was die GKV nicht abdeckt. Mit Healio ambulant genießt du Privatpatienten-Leistungen effektiv für 0€."
+  },
+  "zahn": {
+    "title": "Zahnzusatzversicherung – Bis zu 100% Erstattung | Healio",
+    "description": "Bis zu 100 % Erstattung für Zahnersatz, Prophylaxe und Kieferorthopädie. Ohne Wartezeiten."
+  },
+  "stationaer": {
+    "title": "Stationäre Zusatzversicherung – Privatpatienten-Status | Healio",
+    "description": "Einzelzimmer. Chefarztbehandlung. Freie Klinikwahl. Sichern Sie sich jetzt die beste Versorgung im Krankenhaus."
+  },
+  "klinik": {
+    "title": "Klinik Upgrade - Privatpatient im Krankenhaus | Healio",
+    "description": "Sichern Sie sich Einbettzimmer & Chefarztbehandlung im Krankenhaus."
+  },
+  "partner": {
+    "title": "Für Therapeuten | Healio Partnernetzwerk",
+    "description": "Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken."
+  },
+  "about": {
+    "title": "Über uns - Healio",
+    "description": "Wir glauben daran, dass Gesundheitsvorsorge einfach, transparent und für jeden zugänglich sein sollte."
+  },
+  "leistungen": {
+    "title": "Unsere Leistungen | Healio",
+    "description": "Entdecken Sie unsere Versicherungslösungen: Ambulant, Zahn, Stationär und Tierkrankenversicherung."
+  },
+  "kontakt": {
+    "title": "Kontakt | Healio",
+    "description": "Ob Geschäftskunde oder Privatpatient — wir sind persönlich für Sie da."
+  },
+  "termin": {
+    "title": "Termin vereinbaren | Healio",
+    "description": "Wählen Sie einen passenden Termin für Ihr persönliches Beratungsgespräch."
+  },
+  "impressum": {
+    "title": "Impressum - Healio",
+    "description": "Impressum und Kontaktinformationen von Healio."
+  },
+  "agb": {
+    "title": "Allgemeine Geschäftsbedingungen - Healio",
+    "description": "AGB von Healio."
+  },
+  "datenschutz": {
+    "title": "Datenschutz - Healio",
+    "description": "Datenschutzerklärung von Healio."
+  },
+  "blog": {
+    "title": "Healio Ratgeber – Gesundheitsbudget, Zusatzversicherung & Benefits",
+    "description": "Expertenwissen für Kassenpatienten, Heilpraktiker, Hebammen und Arbeitgeber."
+  },
+  "veterinary": {
+    "title": "Tierkrankenversicherung - Veterinärmedizinische Versorgung sichern | Healio",
+    "description": "Schützen Sie Ihr Haustier vor hohen Tierarztkosten."
+  },
+  "potenzialanalyse": {
+    "title": "Kostenlose Potenzialanalyse | Healio B2B",
+    "description": "Erfahren Sie in unserer kostenlosen Potenzialanalyse, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann."
+  },
+  "confirmation": {
+    "title": "Bestätigung | Healio",
+    "description": "Vielen Dank für Ihre Anfrage bei Healio."
+  },
+  "zahnzusatz": {
+    "title": "Healio Zahnzusatz - Zahnzusatzversicherung mit 100% Erstattung",
+    "description": "Sichern Sie sich Privatpatienten-Status beim Zahnarzt. 100% Kostenerstattung für Zahnersatz, Implantate und professionelle Zahnreinigung."
+  },
+  "defaults": {
+    "title": "Healio - Ganzheitliche Gesundheit & Bonusoptimierung",
+    "description": "Healio revolutioniert Gesundheit durch intelligente Bonusoptimierung. Maximiere deine Gesundheitsvorteile mit unserem innovativen Konzept."
+  }
+}

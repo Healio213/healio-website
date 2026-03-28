@@ -1,47 +1,49 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Target, Users, Lightbulb, Shield, Heart, Zap } from 'lucide-react';
 
-const values = [
-  {
-    icon: Target,
-    title: 'Transparenz',
-    description: 'Keine versteckten Kosten, keine komplizierten Klauseln. Wir zeigen Ihnen genau, was Sie bekommen und was es kostet.',
-    gradient: 'from-blue-500 to-cyan-400'
-  },
-  {
-    icon: Users,
-    title: 'Kundenorientierung',
-    description: 'Ihre Gesundheit und Zufriedenheit stehen im Mittelpunkt. Wir sind für Sie da – vor, während und nach dem Abschluss.',
-    gradient: 'from-emerald-500 to-teal-400'
-  },
-  {
-    icon: Lightbulb,
-    title: 'Innovation',
-    description: 'Wir nutzen modernste Technologie, um Ihnen ein einfaches, digitales und zeitgemäßes Versicherungserlebnis zu bieten.',
-    gradient: 'from-purple-500 to-pink-400'
-  },
-  {
-    icon: Shield,
-    title: 'Verlässlichkeit',
-    description: 'Wir arbeiten nur mit renommierten Versicherungspartnern zusammen und stehen zu unseren Versprechen.',
-    gradient: 'from-orange-500 to-red-400'
-  },
-  {
-    icon: Heart,
-    title: 'Empathie',
-    description: 'Gesundheit ist persönlich. Wir verstehen Ihre Bedürfnisse und finden die Lösung, die wirklich zu Ihnen passt.',
-    gradient: 'from-pink-500 to-rose-400'
-  },
-  {
-    icon: Zap,
-    title: 'Effizienz',
-    description: 'Zeit ist wertvoll. Deshalb gestalten wir alle Prozesse so einfach und schnell wie möglich – ohne Kompromisse bei der Qualität.',
-    gradient: 'from-yellow-500 to-amber-400'
-  }
-];
-
 const CompanyValues = () => {
+  const { t } = useTranslation('home');
+
+  const values = [
+    {
+      icon: Target,
+      title: t('values.transparency'),
+      description: t('values.transparencyDesc'),
+      gradient: 'from-blue-500 to-cyan-400'
+    },
+    {
+      icon: Users,
+      title: t('values.customerFocus'),
+      description: t('values.customerFocusDesc'),
+      gradient: 'from-emerald-500 to-teal-400'
+    },
+    {
+      icon: Lightbulb,
+      title: t('values.innovation'),
+      description: t('values.innovationDesc'),
+      gradient: 'from-purple-500 to-pink-400'
+    },
+    {
+      icon: Shield,
+      title: t('values.reliability'),
+      description: t('values.reliabilityDesc'),
+      gradient: 'from-orange-500 to-red-400'
+    },
+    {
+      icon: Heart,
+      title: t('values.empathy'),
+      description: t('values.empathyDesc'),
+      gradient: 'from-pink-500 to-rose-400'
+    },
+    {
+      icon: Zap,
+      title: t('values.efficiency'),
+      description: t('values.efficiencyDesc'),
+      gradient: 'from-yellow-500 to-amber-400'
+    }
+  ];
   return (
     <section className="healio-section bg-white" aria-labelledby="values-heading">
       <div className="healio-container">
@@ -53,10 +55,10 @@ const CompanyValues = () => {
           className="text-center mb-16"
         >
           <h2 id="values-heading" className="text-3xl lg:text-5xl font-extrabold text-healio-text mb-4">
-            Unsere <span className="healio-gradient-text">Werte</span>
+            {t('values.title')}
           </h2>
           <p className="text-lg text-healio-text-light max-w-3xl mx-auto">
-            Was uns antreibt und warum Sie uns vertrauen können.
+            {t('values.subtitle')}
           </p>
         </motion.div>
 
@@ -107,11 +109,9 @@ const CompanyValues = () => {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
             
             <div className="relative text-center">
-              <h3 className="text-3xl font-bold mb-4">Unsere Mission</h3>
+              <h3 className="text-3xl font-bold mb-4">{t('values.mission')}</h3>
               <p className="text-xl text-emerald-100 leading-relaxed">
-                Wir wollen Gesundheitsversicherung neu denken. Einfach, transparent und auf Ihre Bedürfnisse zugeschnitten. 
-                Mit Healio erhalten Sie nicht nur Versicherungsschutz, sondern einen Partner, der Sie auf Ihrem Weg zu besserer 
-                Gesundheit begleitet – digital, persönlich und mit echtem Mehrwert.
+                {t('values.missionDesc')}
               </p>
             </div>
           </div>

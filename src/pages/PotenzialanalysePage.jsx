@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,6 +20,8 @@ import {
 } from '@/components/ui/select';
 
 const PotenzialanalysePage = () => {
+  const { t } = useTranslation('contact');
+  const { t: tSeo } = useTranslation('seo');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
@@ -53,16 +56,16 @@ const PotenzialanalysePage = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name ist erforderlich';
-    if (!formData.company.trim()) newErrors.company = 'Unternehmen ist erforderlich';
+    if (!formData.name.trim()) newErrors.name = t('potenzialanalyse.nameRequired');
+    if (!formData.company.trim()) newErrors.company = t('potenzialanalyse.companyRequired');
     if (!formData.email.trim()) {
-      newErrors.email = 'E-Mail ist erforderlich';
+      newErrors.email = t('potenzialanalyse.emailRequired');
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Ungültige E-Mail-Adresse';
+      newErrors.email = t('potenzialanalyse.emailInvalid');
     }
-    if (!formData.mitarbeiteranzahl) newErrors.mitarbeiteranzahl = 'Bitte wählen Sie die Mitarbeiteranzahl';
-    if (!formData.fokus_bav) newErrors.fokus_bav = 'Bitte geben Sie an, ob Fokus auf bAV liegt';
-    if (!formData.fokus_bkv) newErrors.fokus_bkv = 'Bitte geben Sie an, ob Fokus auf bKV liegt';
+    if (!formData.mitarbeiteranzahl) newErrors.mitarbeiteranzahl = t('potenzialanalyse.employeesRequired');
+    if (!formData.fokus_bav) newErrors.fokus_bav = t('potenzialanalyse.bavRequired');
+    if (!formData.fokus_bkv) newErrors.fokus_bkv = t('potenzialanalyse.bkvRequired');
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -75,8 +78,8 @@ const PotenzialanalysePage = () => {
     if (!validateForm()) {
       toast({
         variant: "destructive",
-        title: "Überprüfung fehlgeschlagen",
-        description: "Bitte füllen Sie alle markierten Pflichtfelder aus.",
+        title: t('potenzialanalyse.validation'),
+        description: t('potenzialanalyse.validationDesc'),
       });
       return;
     }
@@ -111,8 +114,8 @@ const PotenzialanalysePage = () => {
       }
 
       toast({
-        title: "Erfolgreich gesendet!",
-        description: "Vielen Dank! Ihre Anfrage wurde erfolgreich gespeichert. Wir kontaktieren Sie in Kürze.",
+        title: t('potenzialanalyse.success'),
+        description: t('potenzialanalyse.successDesc'),
         className: "bg-green-50 border-green-200 text-green-900",
       });
       
@@ -121,8 +124,8 @@ const PotenzialanalysePage = () => {
       setSubmitError(error.message || "Ein Netzwerkfehler ist aufgetreten.");
       toast({
         variant: "destructive",
-        title: "Fehler beim Senden",
-        description: error.message || "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+        title: t('potenzialanalyse.errorSend'),
+        description: error.message || t('potenzialanalyse.errorSendDesc'),
       });
     } finally {
       setIsSubmitting(false);
@@ -137,8 +140,8 @@ const PotenzialanalysePage = () => {
   return (
     <>
       <SEOHead
-        title="Kostenlose Potenzialanalyse | Healio B2B"
-        description="Erfahren Sie in unserer kostenlosen Potenzialanalyse, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann. Jetzt unverbindlich anfragen!"
+        title={tSeo('potenzialanalyse.title')}
+        description={tSeo('potenzialanalyse.description')}
         canonicalUrl="https://www.healio.de/potenzialanalyse"
         schemaMarkup={{
           "@context": "https://schema.org",
@@ -160,10 +163,10 @@ const PotenzialanalysePage = () => {
             className="text-center mb-20"
           >
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-              Ihre Potenzialanalyse.
+              {t('potenzialanalyse.title')}
             </h1>
             <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto font-light leading-relaxed">
-              Lassen Sie uns in 15 Minuten prüfen, wie viel ungenutztes Budget für Lohnnebenkosten aktuell in Ihrem Unternehmen steckt.
+              {t('potenzialanalyse.subtitle')}
             </p>
           </motion.div>
 
@@ -176,10 +179,10 @@ const PotenzialanalysePage = () => {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-gray-900 font-medium">Ihr Name *</Label>
+                <Label htmlFor="name" className="text-gray-900 font-medium">{t('potenzialanalyse.name')}</Label>
                 <Input 
                   id="name" 
-                  placeholder="Vorname und Nachname" 
+                  placeholder={t('potenzialanalyse.namePlaceholder')} 
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -189,10 +192,10 @@ const PotenzialanalysePage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="company" className="text-gray-900 font-medium">Unternehmen *</Label>
+                <Label htmlFor="company" className="text-gray-900 font-medium">{t('potenzialanalyse.company')}</Label>
                 <Input 
                   id="company" 
-                  placeholder="Firmenname" 
+                  placeholder={t('potenzialanalyse.companyPlaceholder')} 
                   value={formData.company}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -202,11 +205,11 @@ const PotenzialanalysePage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-gray-900 font-medium">Geschäftliche E-Mail Adresse *</Label>
+                <Label htmlFor="email" className="text-gray-900 font-medium">{t('potenzialanalyse.email')}</Label>
                 <Input 
                   id="email" 
                   type="email"
-                  placeholder="name@unternehmen.de" 
+                  placeholder={t('potenzialanalyse.emailPlaceholder')} 
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -216,7 +219,7 @@ const PotenzialanalysePage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-gray-900 font-medium">Telefonnummer</Label>
+                <Label htmlFor="phone" className="text-gray-900 font-medium">{t('potenzialanalyse.phone')}</Label>
                 <Input 
                   id="phone" 
                   type="tel"
@@ -229,46 +232,46 @@ const PotenzialanalysePage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">Anzahl Mitarbeiter *</Label>
+                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.employees')}</Label>
                 <Select disabled={isSubmitting} value={formData.mitarbeiteranzahl} onValueChange={(val) => handleSelectChange('mitarbeiteranzahl', val)}>
                   <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.mitarbeiteranzahl ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                    <SelectValue placeholder="Bitte wählen..." />
+                    <SelectValue placeholder={t('potenzialanalyse.employeesPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1-10">1 bis 10 Mitarbeiter</SelectItem>
-                    <SelectItem value="11-50">11 bis 50 Mitarbeiter</SelectItem>
-                    <SelectItem value="51-200">51 bis 200 Mitarbeiter</SelectItem>
-                    <SelectItem value="200+">Über 200 Mitarbeiter</SelectItem>
+                    <SelectItem value="1-10">{t('potenzialanalyse.employees1to10')}</SelectItem>
+                    <SelectItem value="11-50">{t('potenzialanalyse.employees11to50')}</SelectItem>
+                    <SelectItem value="51-200">{t('potenzialanalyse.employees51to200')}</SelectItem>
+                    <SelectItem value="200+">{t('potenzialanalyse.employeesOver200')}</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.mitarbeiteranzahl && <p className="text-sm text-red-500">{errors.mitarbeiteranzahl}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">Fokus auf Betriebliche Altersvorsorge (bAV)? *</Label>
+                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.bavFocus')}</Label>
                 <Select disabled={isSubmitting} value={formData.fokus_bav} onValueChange={(val) => handleSelectChange('fokus_bav', val)}>
                   <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bav ? 'border-red-500 focus:ring-red-500' : ''}`}>
                     <SelectValue placeholder="Bitte wählen..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Ja">Ja, starkes Interesse</SelectItem>
-                    <SelectItem value="Eher Ja">Eher Ja</SelectItem>
-                    <SelectItem value="Nein">Nein, aktuell nicht</SelectItem>
+                    <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
+                    <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
+                    <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.fokus_bav && <p className="text-sm text-red-500">{errors.fokus_bav}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">Fokus auf Betriebliche Krankenversicherung (bKV)? *</Label>
+                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.bkvFocus')}</Label>
                 <Select disabled={isSubmitting} value={formData.fokus_bkv} onValueChange={(val) => handleSelectChange('fokus_bkv', val)}>
                   <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bkv ? 'border-red-500 focus:ring-red-500' : ''}`}>
                     <SelectValue placeholder="Bitte wählen..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Ja">Ja, starkes Interesse</SelectItem>
-                    <SelectItem value="Eher Ja">Eher Ja</SelectItem>
-                    <SelectItem value="Nein">Nein, aktuell nicht</SelectItem>
+                    <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
+                    <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
+                    <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.fokus_bkv && <p className="text-sm text-red-500">{errors.fokus_bkv}</p>}
@@ -278,7 +281,7 @@ const PotenzialanalysePage = () => {
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-800 text-sm">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold mb-1">Übertragung fehlgeschlagen</p>
+                    <p className="font-semibold mb-1">{t('potenzialanalyse.transferFailed')}</p>
                     <p>{submitError}</p>
                   </div>
                 </div>
@@ -296,15 +299,15 @@ const PotenzialanalysePage = () => {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
-                      Wird gesendet...
+                      {t('form.sending')}
                     </>
                   ) : submitError ? (
                     <>
                       <RefreshCw className="w-5 h-5" />
-                      Erneut versuchen
+                      {t('potenzialanalyse.retry')}
                     </>
                   ) : (
-                    'Anfrage absenden'
+                    t('potenzialanalyse.submit')
                   )}
                 </Button>
               </div>
@@ -313,7 +316,7 @@ const PotenzialanalysePage = () => {
             <div className="mt-12 p-6 bg-gray-50 rounded-xl border border-gray-200">
               <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4" />
-                Alternative Kontaktmöglichkeiten
+                {t('potenzialanalyse.alternatives')}
               </h3>
               <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex items-center gap-2">

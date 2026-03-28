@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "badge": "For Therapists & Practices",
+    "title": "Full Focus on Healing. Not on the Costs.",
+    "subtitle": "Free your patients from financial worries and enable therapies that truly work to completion.",
+    "videoFallback": "Your browser does not support video."
+  },
+  "problem": {
+    "title": "When the Budget Dictates the Therapy.",
+    "text": "You know exactly which holistic treatment would help a person right now. But the patient hesitates because the costs aren't covered by their health insurance fund. This blocks the healing process and frustrates you as a practitioner because you can't fully apply your expertise."
+  },
+  "solution": {
+    "title": "We take the topic of money out of the treatment room.",
+    "relaxedPatients": "Relaxed Patients",
+    "relaxedPatientsDesc": "High reimbursement through our systems removes the financial pressure. This fosters the inner calm that is essential for any healing process.",
+    "sustainableTherapy": "Sustainable Therapies",
+    "sustainableTherapyDesc": "Patients no longer discontinue important treatments out of concern about the bill.",
+    "protectedTime": "Your Time Stays Protected",
+    "protectedTimeDesc": "You simply hand over our information materials. We handle the entire administrative process."
+  },
+  "steps": {
+    "step1Title": "A Brief Introduction",
+    "step1Desc": "We check in just a few minutes whether our philosophy fits your practice.",
+    "step2Title": "Free Materials",
+    "step2Desc": "You receive our high-quality information cards free of charge for your waiting room.",
+    "step3Title": "A Profitable Partnership",
+    "step3Desc": "Your patients benefit immediately. You focus on what you do best."
+  },
+  "cta": {
+    "title": "Become a Partner Practice for Free",
+    "subtitle": "Become a Healio partner in just 5 minutes. Book your introductory meeting.",
+    "calendarError": "Calendar could not be loaded",
+    "calendarErrorDesc": "Please check your internet connection or disable any ad blockers."
+  }
+}

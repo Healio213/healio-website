@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import LeistungenContactForm from '@/components/sections/LeistungenContactForm';
@@ -7,48 +9,52 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { motion } from 'framer-motion';
 import { ArrowRight, Stethoscope, ShieldPlus, Hotel as Hospital, Dog } from 'lucide-react';
 
-const insuranceTypes = [
-  {
-    title: "Ambulante Zusatzversicherung",
-    description: "Umfassender ambulanter Schutz für Facharztbehandlungen, Heilpraktiker und Vorsorge. Bis zu 2.500 € Gesundheitsbudget.",
-    icon: Stethoscope,
-    link: "/ambulant",
-    color: "bg-blue-50 text-blue-600"
-  },
-  {
-    title: "Zahnzusatzversicherung",
-    description: "Kompletter Zahnschutz für Prophylaxe, Behandlungen und Zahnersatz. Schützt vor hohen Eigenanteilen mit erstklassigen Erstattungssätzen.",
-    icon: ShieldPlus,
-    link: "/zahn",
-    color: "bg-teal-50 text-teal-600"
-  },
-  {
-    title: "Stationäre Zusatzversicherung",
-    description: "Premium-Schutz für Krankenhausaufenthalte. Einzelzimmer, Chefarztbehandlung und freie Klinikwahl. Bestmögliche Versorgung im Ernstfall.",
-    icon: Hospital,
-    link: "/stationaer",
-    color: "bg-indigo-50 text-indigo-600"
-  },
-  {
-    title: "Tierkrankenversicherung",
-    description: "Umfassender Gesundheitsschutz für Ihr Haustier. Deckt Tierarztbesuche, Operationen und Vorsorge verlässlich ab.",
-    icon: Dog,
-    link: "/tierkrankenversicherung",
-    color: "bg-orange-50 text-orange-600"
-  }
-];
-
 const LeistungenPage = () => {
+  const { t } = useTranslation('leistungen');
+  const { t: tSeo } = useTranslation('seo');
+  const { getPath } = useLanguage();
+
+  const insuranceTypes = [
+    {
+      title: t('cards.ambulant.title'),
+      description: t('cards.ambulant.description'),
+      icon: Stethoscope,
+      link: getPath('ambulant'),
+      color: "bg-blue-50 text-blue-600"
+    },
+    {
+      title: t('cards.zahn.title'),
+      description: t('cards.zahn.description'),
+      icon: ShieldPlus,
+      link: getPath('zahn'),
+      color: "bg-teal-50 text-teal-600"
+    },
+    {
+      title: t('cards.stationaer.title'),
+      description: t('cards.stationaer.description'),
+      icon: Hospital,
+      link: getPath('stationaer'),
+      color: "bg-indigo-50 text-indigo-600"
+    },
+    {
+      title: t('cards.tier.title'),
+      description: t('cards.tier.description'),
+      icon: Dog,
+      link: getPath('tierkrankenversicherung'),
+      color: "bg-orange-50 text-orange-600"
+    }
+  ];
+
   const schemaMarkup = createWebPageSchema(
-    'Unsere Leistungen | Healio',
-    'Entdecken Sie unsere Versicherungslösungen: Ambulant, Zahn, Stationär und Tierkrankenversicherung. Maßgeschneidert für Ihre Bedürfnisse.'
+    tSeo('leistungen.title'),
+    tSeo('leistungen.description')
   );
 
   return (
     <>
-      <SEOHead 
-        title="Unsere Leistungen | Healio Versicherungslösungen"
-        description="Von Zahnzusatz bis Krankenhaus: Healio bietet Ihnen erstklassigen Schutz in allen Lebenslagen. Entdecken Sie jetzt unser Leistungsportfolio."
+      <SEOHead
+        title={tSeo('leistungen.title')}
+        description={tSeo('leistungen.description')}
         canonicalUrl="https://www.healio.de/leistungen"
         schemaMarkup={schemaMarkup}
       />
@@ -77,14 +83,13 @@ const LeistungenPage = () => {
               className="max-w-4xl mx-auto"
             >
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 lg:mb-8 leading-tight tracking-tight drop-shadow-md">
-                Keine Kompromisse <br className="hidden md:block" />
-                <span className="text-[#10B981]">bei Ihrer Leistung.</span>
+                {t('hero.title')}
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl text-white leading-relaxed font-bold mb-4 lg:mb-6 mx-auto drop-shadow-md">
-                Versicherungen gibt es wie Sand am Meer. Die meisten enttäuschen, wenn es darauf ankommt.
+                {t('hero.subtitle')}
               </p>
               <p className="text-base md:text-lg lg:text-xl text-slate-100 leading-relaxed font-medium max-w-3xl mx-auto drop-shadow-md">
-                Wir haben aussortiert. Sie erhalten nur Tarife, die im Ernstfall sofort leisten. Qualität statt Kleingedrucktes.
+                {t('hero.description')}
               </p>
             </motion.div>
           </div>
@@ -102,10 +107,10 @@ const LeistungenPage = () => {
           <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6">
-                Unsere Versicherungslösungen. Faktisch. Geprüft.
+                {t('services.title')}
               </h2>
               <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto font-medium px-4">
-                Wählen Sie den optimalen Schutz für Ihren individuellen Bedarf. Wir bieten maßgeschneiderte Konzepte für jeden Lebensbereich.
+                {t('services.subtitle')}
               </p>
             </div>
 
@@ -137,7 +142,7 @@ const LeistungenPage = () => {
                         to={type.link}
                         className="inline-flex items-center text-[#10B981] font-bold hover:text-[#059669] transition-colors"
                       >
-                        Mehr erfahren
+                        {t('services.moreInfo')}
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>

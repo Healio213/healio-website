@@ -1,0 +1,25 @@
+{
+  "title": "Healio Guide",
+  "subtitle": "Expert knowledge on health budgets, supplementary insurance and tax-free benefits — clearly explained and always up to date.",
+  "allPosts": "All Articles",
+  "noPostsYet": "No articles in this category yet.",
+  "comingSoon": "Our editorial team is already working on new content.",
+  "readMore": "Read more",
+  "backToGuide": "Back to Guide",
+  "readTime": "min. read",
+  "calculateBudget": "Calculate your personal health budget",
+  "calculateBudgetDesc": "Find out in 2 minutes how much budget you're entitled to — free and non-binding.",
+  "calculateNow": "Calculate now",
+  "bookConsultation": "Book consultation",
+  "atAGlance": "At a Glance",
+  "notFound": "Article not found",
+  "categories": {
+    "heilpraktiker": "Heilpraktiker",
+    "hebammen": "Midwives",
+    "versicherte": "For Insured",
+    "optiker": "Opticians",
+    "hoerakustiker": "Hearing Aid Specialists",
+    "physiotherapie": "Physiotherapy",
+    "arbeitgeber": "Employers"
+  }
+}

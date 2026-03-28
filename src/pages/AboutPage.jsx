@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
@@ -7,11 +9,14 @@ import { createWebPageSchema, createOrganizationSchema } from '@/lib/createSchem
 import { ArrowRight } from 'lucide-react';
 
 const AboutPage = () => {
+  const { t } = useTranslation('about');
+  const { t: tSeo } = useTranslation('seo');
+  const { getPath } = useLanguage();
   // SEO Schema
   const schemaMarkup = {
     ...createWebPageSchema(
-      'Über uns - Healio', 
-      'Wir glauben daran, dass Gesundheitsvorsorge einfach, transparent und für jeden zugänglich sein sollte. Lernen Sie Healio und unsere Werte kennen.'
+      tSeo('about.title'),
+      tSeo('about.description')
     ),
     ...createOrganizationSchema()
   };
@@ -29,40 +34,40 @@ const AboutPage = () => {
   const values = [
     {
       emoji: "💡",
-      title: "Transparenz",
-      description: "Keine versteckten Kosten, keine Überraschungen. Wir kommunizieren ehrlich und offen."
+      title: t('values.transparency'),
+      description: t('values.transparencyDesc')
     },
     {
       emoji: "🤝",
-      title: "Vertrauen",
-      description: "Über 120 Partnerpraxen und tausende zufriedene Kunden vertrauen auf Healio."
+      title: t('values.trust'),
+      description: t('values.trustDesc')
     },
     {
       emoji: "🚀",
-      title: "Innovation",
-      description: "Wir digitalisieren die Gesundheitsvorsorge und machen sie so einfach wie nie zuvor."
+      title: t('values.innovation'),
+      description: t('values.innovationDesc')
     },
     {
       emoji: "❤️",
-      title: "Menschlichkeit",
-      description: "Hinter jeder Police steht ein Mensch. Das vergessen wir nie."
+      title: t('values.humanity'),
+      description: t('values.humanityDesc')
     }
   ];
 
   const metrics = [
-    { number: "120+", label: "Partnerpraxen" },
-    { number: "2.500€", label: "max. Gesundheits-Budget" },
-    { number: "4", label: "Versicherungsbereiche" },
-    { number: "100%", label: "Kundenzufriedenheit als Ziel" }
+    { number: "120+", label: t('stats.partners') },
+    { number: "2.500€", label: t('stats.budget') },
+    { number: "4", label: t('stats.areas') },
+    { number: "100%", label: t('stats.satisfaction') }
   ];
 
   return (
     <>
-      <SEOHead 
-        title="Über uns - Healio" 
-        description="Wir glauben daran, dass Gesundheitsvorsorge einfach, transparent und für jeden zugänglich sein sollte. Lernen Sie Healio und unsere Werte kennen." 
-        canonicalUrl="https://www.healio.de/about" 
-        schemaMarkup={schemaMarkup} 
+      <SEOHead
+        title={tSeo('about.title')}
+        description={tSeo('about.description')}
+        canonicalUrl="https://www.healio.de/about"
+        schemaMarkup={schemaMarkup}
       />
       
       <main className="bg-white overflow-hidden selection:bg-[#25c990] selection:text-white">
@@ -78,7 +83,7 @@ const AboutPage = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-8 tracking-tight"
             >
-              Die Menschen <br className="hidden md:block" /> hinter Healio.
+              {t('hero.title')}
             </motion.h1>
             
             <motion.p 
@@ -98,7 +103,7 @@ const AboutPage = () => {
             transition={{ delay: 1, duration: 1 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
           >
-            <span className="text-sm font-medium tracking-widest uppercase">Entdecken</span>
+            <span className="text-sm font-medium tracking-widest uppercase">{t('cta.explore')}</span>
             <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
           </motion.div>
         </section>
@@ -133,26 +138,26 @@ const AboutPage = () => {
               >
                 <div>
                   <motion.h2 variants={fadeInUp} className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
-                    Frank Steinfurt
+                    {t('hero.founder')}
                   </motion.h2>
                   <motion.p variants={fadeInUp} className="text-[#25c990] font-semibold text-lg uppercase tracking-wide">
-                    Gründer & Geschäftsführer
+                    {t('hero.founderRole')}
                   </motion.p>
                 </div>
 
                 <motion.div variants={fadeInUp} className="relative">
                   <span className="absolute -top-6 -left-6 text-6xl text-slate-200 font-serif leading-none">"</span>
                   <p className="text-2xl lg:text-3xl text-slate-800 font-medium leading-snug italic relative z-10">
-                    Ich habe Healio gegründet, weil ich überzeugt bin, dass jeder Mensch Zugang zu erstklassiger Gesundheitsvorsorge verdient - unabhängig von seinem Versicherungsstatus.
+                    {t('hero.quote1')}
                   </p>
                 </motion.div>
 
                 <motion.div variants={fadeInUp} className="space-y-4 text-lg text-slate-600 leading-relaxed">
                   <p>
-                    Nach Jahren in der traditionellen Versicherungsbranche wurde mir klar: Das System ist zu kompliziert, oft intransparent und stellt selten den Menschen in den Mittelpunkt.
+                    {t('hero.quote2')}
                   </p>
                   <p>
-                    Mit Healio wollten wir das ändern. Wir haben eine Plattform geschaffen, die komplexe Gesundheitstarife entwirrt und klare, ehrliche Lösungen anbietet. Keine unverständlichen Klauseln, keine falschen Versprechen. Einfach exzellente Vorsorge, die im Alltag wirklich ankommt.
+                    {t('hero.quote3')}
                   </p>
                 </motion.div>
               </motion.div>
@@ -169,9 +174,9 @@ const AboutPage = () => {
               viewport={{ once: true }}
               className="text-center max-w-3xl mx-auto mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Unsere Werte</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{t('values.title')}</h2>
               <p className="text-xl text-slate-600">
-                Diese vier Säulen bilden das Fundament unserer täglichen Arbeit und unserer Vision für die Zukunft der Gesundheit.
+                {t('values.subtitle')}
               </p>
             </motion.div>
 
@@ -208,7 +213,7 @@ const AboutPage = () => {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-                Unsere Erfolgsgeschichte in Zahlen
+                {t('stats.title')}
               </h2>
             </motion.div>
 
@@ -246,17 +251,17 @@ const AboutPage = () => {
             >
               <div className="text-6xl animate-pulse inline-block mb-4">❤️</div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Erfolg, der weitergegeben wird.
+                {t('social.title')}
               </h2>
               <div className="text-xl text-slate-300 leading-relaxed space-y-6">
                 <p>
-                  Wir glauben tief daran, dass wirtschaftlicher Erfolg eine gesellschaftliche Verantwortung mit sich bringt. Unternehmen existieren nicht im luftleeren Raum, sondern in einer Gesellschaft, die sie trägt.
+                  {t('social.text1')}
                 </p>
                 <p>
-                  Deshalb spenden wir aus vollster Überzeugung <strong className="text-white">10% unseres jährlichen Gewinns</strong> an gemeinnützige und soziale Projekte. 
+                  {t('social.text2')}
                 </p>
                 <p>
-                  Kein Corporate-Marketing, keine Buzzwords – sondern unser ehrliches Versprechen, dort zu helfen, wo Unterstützung am dringendsten benötigt wird. Das ist für uns Menschlichkeit in der Praxis.
+                  {t('social.text3')}
                 </p>
               </div>
             </motion.div>
@@ -272,16 +277,16 @@ const AboutPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
-                Bereit für bessere Gesundheitsvorsorge?
+                {t('cta.title')}
               </h2>
               <p className="text-xl text-slate-600 mb-10">
-                Lass uns gemeinsam herausfinden, wie wir dich oder dein Unternehmen optimal absichern können.
+                {t('cta.subtitle')}
               </p>
-              <Link 
-                to="/kontakt"
+              <Link
+                to={getPath('kontakt')}
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-[#25c990] hover:bg-[#1db37f] rounded-xl shadow-lg shadow-[#25c990]/30 hover:shadow-xl hover:shadow-[#25c990]/40 transition-all duration-300 hover:-translate-y-1 group"
               >
-                Jetzt beraten lassen
+                {t('cta.button')}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>

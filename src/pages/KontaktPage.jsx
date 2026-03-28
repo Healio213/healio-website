@@ -6,11 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { emailjsService } from '@/services/emailjsService';
 
 const KontaktPage = () => {
+  const { t } = useTranslation('contact');
+  const { t: tSeo } = useTranslation('seo');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,8 +36,8 @@ const KontaktPage = () => {
     
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Fehlende Angaben",
-        description: "Bitte füllen Sie alle erforderlichen Felder aus.",
+        title: t('form.missingFields'),
+        description: t('form.missingFieldsDesc'),
         variant: "destructive",
       });
       return;
@@ -52,8 +55,8 @@ const KontaktPage = () => {
       }, "Kontakt");
 
       toast({
-        title: "Ihre Anfrage wurde erfolgreich gesendet.",
-        description: "Wir melden uns in Kürze bei Ihnen.",
+        title: t('form.success'),
+        description: t('form.successDesc'),
       });
       
       setFormData({
@@ -65,8 +68,8 @@ const KontaktPage = () => {
       });
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
+        title: t('form.error'),
+        description: t('form.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -75,17 +78,17 @@ const KontaktPage = () => {
   };
 
   const schemaMarkup = createWebPageSchema(
-    'Kontakt', 
-    'Ob Geschäftskunde oder Privatpatient wir sind persönlich für Sie da. In Hamburg und digital.'
+    'Kontakt',
+    tSeo('kontakt.description')
   );
 
   return (
     <>
-      <SEOHead 
-        title="Kontakt | Healio" 
-        description="Ob Geschäftskunde oder Privatpatient wir sind persönlich für Sie da. In Hamburg und digital." 
-        canonicalUrl="https://www.healio.de/kontakt" 
-        schemaMarkup={schemaMarkup} 
+      <SEOHead
+        title={tSeo('kontakt.title')}
+        description={tSeo('kontakt.description')}
+        canonicalUrl="https://www.healio.de/kontakt"
+        schemaMarkup={schemaMarkup}
       />
 
       <main className="bg-gradient-to-b from-white via-emerald-50/20 to-white min-h-screen pt-32 pb-16">
@@ -99,10 +102,10 @@ const KontaktPage = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
-              Hier erreichen Sie uns
+              {t('page.title')}
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed">
-              Ob Geschäftskunde oder Privatpatient wir sind persönlich für Sie da. In Hamburg und digital.
+              {tSeo('kontakt.description')}
             </p>
           </motion.div>
         </section>
@@ -119,15 +122,15 @@ const KontaktPage = () => {
               className="flex flex-col h-full"
             >
               <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100 h-full">
-                <h2 className="text-2xl font-bold text-slate-900 mb-8">Zentrale Hamburg</h2>
-                
+                <h2 className="text-2xl font-bold text-slate-900 mb-8">{t('page.office')}</h2>
+
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
                       <MapPin className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-500 mb-1">Adresse</h3>
+                      <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.address')}</h3>
                       <p className="text-lg text-slate-900 font-medium">
                         Healio GmbH<br />
                         Arndtstr. 6<br />
@@ -141,7 +144,7 @@ const KontaktPage = () => {
                       <Mail className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-500 mb-1">E-Mail</h3>
+                      <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
                       <a href="mailto:kontakt@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
                         kontakt@healio.de
                       </a>
@@ -153,7 +156,7 @@ const KontaktPage = () => {
                       <Phone className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-500 mb-1">Telefon</h3>
+                      <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.phone')}</h3>
                       <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
                         +49 40 89755705
                       </a>
@@ -168,7 +171,7 @@ const KontaktPage = () => {
                   >
                     <a href="tel:+494089755705">
                       <Phone className="mr-2 w-5 h-5" />
-                      Anruf starten
+                      {t('page.startCall')}
                     </a>
                   </Button>
                 </div>
@@ -185,7 +188,7 @@ const KontaktPage = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-sm font-semibold text-slate-700">Name *</Label>
+                    <Label htmlFor="name" className="text-sm font-semibold text-slate-700">{t('form.name')}</Label>
                     <Input 
                       id="name" 
                       name="name" 
@@ -194,12 +197,12 @@ const KontaktPage = () => {
                       value={formData.name} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
-                      placeholder="Ihr vollständiger Name" 
+                      placeholder={t('form.namePlaceholder')} 
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-semibold text-slate-700">E-Mail Adresse *</Label>
+                    <Label htmlFor="email" className="text-sm font-semibold text-slate-700">{t('form.email')}</Label>
                     <Input 
                       id="email" 
                       name="email" 
@@ -208,12 +211,12 @@ const KontaktPage = () => {
                       value={formData.email} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
-                      placeholder="name@beispiel.de" 
+                      placeholder={t('form.emailPlaceholder')} 
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="company" className="text-sm font-semibold text-slate-700">Unternehmen (optional)</Label>
+                    <Label htmlFor="company" className="text-sm font-semibold text-slate-700">{t('form.company')}</Label>
                     <Input 
                       id="company" 
                       name="company" 
@@ -221,12 +224,12 @@ const KontaktPage = () => {
                       value={formData.company} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
-                      placeholder="Ihr Unternehmen" 
+                      placeholder={t('form.companyPlaceholder')} 
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-sm font-semibold text-slate-700">Telefon (optional)</Label>
+                    <Label htmlFor="phone" className="text-sm font-semibold text-slate-700">{t('form.phone')}</Label>
                     <Input 
                       id="phone" 
                       name="phone" 
@@ -234,12 +237,12 @@ const KontaktPage = () => {
                       value={formData.phone} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
-                      placeholder="Ihre Telefonnummer" 
+                      placeholder={t('form.phonePlaceholder')} 
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-sm font-semibold text-slate-700">Ihre Nachricht *</Label>
+                    <Label htmlFor="message" className="text-sm font-semibold text-slate-700">{t('form.message')}</Label>
                     <textarea 
                       id="message" 
                       name="message" 
@@ -247,7 +250,7 @@ const KontaktPage = () => {
                       value={formData.message} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 min-h-[150px] p-4 rounded-xl border border-slate-200 focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-all resize-y" 
-                      placeholder="Wie können wir Ihnen helfen?" 
+                      placeholder={t('form.messagePlaceholder')} 
                     />
                   </div>
 
@@ -256,7 +259,7 @@ const KontaktPage = () => {
                     disabled={isSubmitting}
                     className="w-full bg-[#10B981] hover:bg-[#059669] text-white h-14 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all"
                   >
-                    {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Wird gesendet...</> : <><Send className="mr-2 w-5 h-5" /> Nachricht senden</>}
+                    {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 w-5 h-5" /> {t('form.submit')}</>}
                   </Button>
                   
                 </form>

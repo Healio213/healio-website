@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,7 @@ import { Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 
 const VeterinaryContactForm = () => {
+  const { t } = useTranslation('contact');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -37,15 +39,15 @@ const VeterinaryContactForm = () => {
       }, "Tierkrankenversicherung");
       
       toast({
-        title: "Ihre Anfrage wurde erfolgreich gesendet.",
-        description: "Wir melden uns in Kürze bei Ihnen.",
+        title: t('form.success'),
+        description: t('form.successDesc'),
       });
-      
+
       setFormData({ name: '', email: '', animal_type: '', breed: '', age: '' });
     } catch (error) {
       toast({
-        title: "Fehler",
-        description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de",
+        title: t('form.error'),
+        description: t('form.errorDesc'),
         variant: "destructive",
       });
     } finally {
@@ -83,7 +85,7 @@ const VeterinaryContactForm = () => {
                 <Input id="breed" name="breed" value={formData.breed} onChange={handleChange} className="bg-white" />
               </div>
               <Button type="submit" disabled={isSubmitting} className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white h-12 mt-4">
-                {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Wird gesendet...</> : <><Send className="mr-2 h-4 w-4" /> Anfrage senden</>}
+                {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 h-4 w-4" /> {t('form.submit')}</>}
               </Button>
             </form>
           </div>

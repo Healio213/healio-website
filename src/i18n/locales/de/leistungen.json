@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "Keine Kompromisse bei Ihrer Leistung.",
+    "subtitle": "Versicherungen gibt es wie Sand am Meer. Die meisten enttäuschen, wenn es darauf ankommt.",
+    "description": "Wir haben aussortiert. Sie erhalten nur Tarife, die im Ernstfall sofort leisten. Qualität statt Kleingedrucktes."
+  },
+  "services": {
+    "title": "Unsere Versicherungslösungen. Faktisch. Geprüft.",
+    "subtitle": "Wählen Sie den optimalen Schutz für Ihren individuellen Bedarf. Wir bieten maßgeschneiderte Konzepte für jeden Lebensbereich.",
+    "moreInfo": "Mehr erfahren"
+  },
+  "cards": {
+    "ambulant": {
+      "title": "Ambulante Zusatzversicherung",
+      "description": "Umfassender ambulanter Schutz für Facharztbehandlungen, Heilpraktiker und Vorsorge. Bis zu 2.500 € Gesundheitsbudget."
+    },
+    "zahn": {
+      "title": "Zahnzusatzversicherung",
+      "description": "Kompletter Zahnschutz für Prophylaxe, Behandlungen und Zahnersatz. Schützt vor hohen Eigenanteilen mit erstklassigen Erstattungssätzen."
+    },
+    "stationaer": {
+      "title": "Stationäre Zusatzversicherung",
+      "description": "Premium-Schutz für Krankenhausaufenthalte. Einzelzimmer, Chefarztbehandlung und freie Klinikwahl."
+    },
+    "tier": {
+      "title": "Tierkrankenversicherung",
+      "description": "Umfassender Gesundheitsschutz für Ihr Haustier. Deckt Tierarztbesuche, Operationen und Vorsorge verlässlich ab."
+    }
+  }
+}

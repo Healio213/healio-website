@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Info, AlertCircle } from 'lucide-react';
 
 const ZeitfalleSection = () => {
+  const { t } = useTranslation('home');
   // Default values
   const [contribution, setContribution] = useState(338);
   const [years, setYears] = useState(25);
@@ -109,20 +111,20 @@ const ZeitfalleSection = () => {
           >
             <div className="inline-flex items-center gap-2 mb-6 text-[#07C090] font-bold bg-[#07C090]/10 px-4 py-1.5 rounded-full text-sm uppercase tracking-wide">
               <Clock className="w-4 h-4" />
-              <span>Der Zeitfaktor</span>
+              <span>{t('zeitfalle.title')}</span>
             </div>
             
             <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-[1.15]">
-              Der Zinseszins wartet auf niemanden.
+              {t('zeitfalle.subtitle')}
             </h2>
-            
+
             <h3 className="text-xl text-gray-600 font-medium mb-8">
-              Warum "Später" Sie und Ihr Team ein Vermögen kostet.
+              {t('zeitfalle.description')}
             </h3>
 
             <div className="prose prose-lg text-gray-600 mb-10">
               <p>
-                Zeit ist im Zinseszins-Modell wichtiger als die Höhe der Einzahlung. Jeder Monat, den Sie zögern, ist ein Monat, in dem das Kapital Ihrer Mitarbeiter nicht für sie arbeiten kann.
+                {t('zeitfalle.explanation')}
               </p>
               <p>
                 In der klassischen bAV wird das Geld oft durch Kosten und niedrige Zinsen "aufgefressen". Mit der Healio-Strategie nutzen wir die Kraft des Kapitalmarktes – steueroptimiert und effizient.
@@ -144,7 +146,7 @@ const ZeitfalleSection = () => {
               {/* Slider 1: Monthly Contribution */}
               <div className="mb-8">
                 <div className="flex justify-between items-end mb-4">
-                  <label className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Monatliche Sparrate</label>
+                  <label className="text-sm font-semibold text-gray-900 uppercase tracking-wide">{t('zeitfalle.monthlyRate')}</label>
                   <div className="text-xl font-bold text-gray-900 bg-[#E5E7EB] px-4 py-1.5 rounded-lg border border-gray-300 min-w-[90px] text-center shadow-inner">
                     {contribution} €
                   </div>
@@ -167,7 +169,7 @@ const ZeitfalleSection = () => {
               {/* Slider 2: Duration */}
               <div className="mb-8">
                 <div className="flex justify-between items-end mb-4">
-                  <label className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Laufzeit (Jahre)</label>
+                  <label className="text-sm font-semibold text-gray-900 uppercase tracking-wide">{t('zeitfalle.duration')}</label>
                   <div className="text-xl font-bold text-gray-900 bg-[#E5E7EB] px-4 py-1.5 rounded-lg border border-gray-300 min-w-[90px] text-center shadow-inner">
                     {years} J.
                   </div>
@@ -201,13 +203,13 @@ const ZeitfalleSection = () => {
               <div className="relative z-10">
                 <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
                   <AlertCircle className="w-6 h-6 text-white" />
-                  Der Vorteil von Healio:
+                  {t('zeitfalle.healioAdvantage')}
                 </h3>
                 <p className="text-white leading-relaxed font-medium text-lg">
                   Während klassische Produkte oft kaum die Inflation ausgleichen, baut die Healio-Strategie echtes Vermögen auf. Das ist der Unterschied zwischen "gut gemeint" und "gut gemacht".
                 </p>
                 <div className="mt-6 pt-5 border-t border-white/20 font-extrabold text-2xl">
-                  Vorteil Healio: {formatCurrency(difference)}
+                  {t('zeitfalle.advantage')} {formatCurrency(difference)}
                 </div>
               </div>
               {/* Background decoration */}

@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "No Compromises on Your Coverage.",
+    "subtitle": "There are countless insurance policies out there. Most disappoint when it matters.",
+    "description": "We've done the filtering for you. You only get plans that deliver when you need them most. Quality over fine print."
+  },
+  "services": {
+    "title": "Our Insurance Solutions. Fact-Based. Verified.",
+    "subtitle": "Choose the optimal coverage for your individual needs. We offer tailored concepts for every area of life.",
+    "moreInfo": "Learn more"
+  },
+  "cards": {
+    "ambulant": {
+      "title": "Outpatient Supplementary Insurance",
+      "description": "Comprehensive outpatient coverage for specialist treatments, Heilpraktiker and preventive care. Up to €2,500 health budget."
+    },
+    "zahn": {
+      "title": "Dental Supplementary Insurance",
+      "description": "Complete dental protection for prophylaxis, treatments and dental prosthetics. Protects against high out-of-pocket costs with top-tier reimbursement rates."
+    },
+    "stationaer": {
+      "title": "Hospital Supplementary Insurance",
+      "description": "Premium protection for hospital stays. Private room, chief physician treatment and free choice of hospital."
+    },
+    "tier": {
+      "title": "Pet Health Insurance",
+      "description": "Comprehensive health protection for your pet. Reliably covers vet visits, surgeries and preventive care."
+    }
+  }
+}

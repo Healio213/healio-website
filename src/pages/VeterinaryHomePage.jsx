@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import VeterinaryHero from '@/components/sections/veterinary/VeterinaryHero';
 import CostAnalysisSection from '@/components/sections/veterinary/CostAnalysisSection';
@@ -8,11 +9,13 @@ import TariffSelection from '@/components/sections/veterinary/TariffSelection';
 import VeterinaryContactForm from '@/components/sections/VeterinaryContactForm';
 
 const VeterinaryHomePage = () => {
+  const { t: tSeo } = useTranslation('seo');
+
   return (
     <>
       <SEOHead
-        title="Tierkrankenversicherung - Veterinärmedizinische Versorgung sichern | Healio"
-        description="Schützen Sie Ihr Haustier vor hohen Tierarztkosten. Optimale Absicherung für Hunde & Katzen inkl. OP-Schutz und Vorsorge nach neuer GOT."
+        title={tSeo('veterinary.title')}
+        description={tSeo('veterinary.description')}
         canonicalUrl="https://www.healio.de/tierkrankenversicherung"
         ogTitle="Healio Tierkrankenversicherung - Bester Schutz für Ihr Tier"
         ogDescription="Sichern Sie sich gegen steigende Tierarztkosten ab. Jetzt Beitrag berechnen."

@@ -1,20 +1,22 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, ArrowRight } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 
 const VeterinaryHero = () => {
+  const { t } = useTranslation('veterinary');
   const heroImageUrl = "https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/508591fd10937d976179573701053d1f.png";
 
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden w-full" aria-labelledby="vet-hero-heading">
       {/* Background Image spanning full viewport height */}
       <div className="absolute inset-0 z-0 w-full h-full">
-        <OptimizedImage 
-          src={heroImageUrl} 
-          alt="Frau umarmt ihren Golden Retriever" 
+        <OptimizedImage
+          src={heroImageUrl}
+          alt={t('hero.heroImageAlt')} 
           lazy={false}
           priority={true}
           className="absolute inset-0 w-full h-full object-cover"
@@ -39,7 +41,7 @@ const VeterinaryHero = () => {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-4 sm:mb-6 shadow-lg">
               <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300" />
-              <span className="text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm">GOT-konformer Schutz</span>
+              <span className="text-xs sm:text-sm font-medium tracking-wide drop-shadow-sm">{t('hero.badge')}</span>
             </div>
 
             <h1 
@@ -47,13 +49,13 @@ const VeterinaryHero = () => {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] break-words hyphens-auto"
               lang="de"
             >
-              Seit der GOT-Reform: <br />
-              <span className="text-blue-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">Veterinärmedizin hat</span> <br />
-              einen neuen Preis.
+              {t('hero.title')} <br />
+              <span className="text-blue-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">{t('hero.titleHighlight')}</span> <br />
+              {t('hero.titleEnd')}
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed max-w-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium">
-              Wer heute keinen Versicherungsschutz hat, entscheidet im Ernstfall nicht nach Medizin — sondern nach Budget. Das muss nicht sein.
+              {t('hero.subtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -61,7 +63,7 @@ const VeterinaryHero = () => {
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-5 sm:px-8 sm:py-6 text-base sm:text-lg rounded-xl shadow-[0_4px_14px_rgba(37,99,235,0.4)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.6)] transition-all duration-300 border-0 w-full sm:w-auto"
                 onClick={() => document.getElementById('vet-contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Beitrag berechnen
+                {t('hero.ctaCalculate')}
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <Button 
@@ -69,7 +71,7 @@ const VeterinaryHero = () => {
                 className="bg-white/10 hover:bg-white/20 sm:bg-white/10 sm:hover:bg-white/20 text-white border-white/20 px-6 py-5 sm:px-8 sm:py-6 text-base sm:text-lg rounded-xl backdrop-blur-md transition-all duration-300 shadow-xl w-full sm:w-auto"
                 onClick={() => document.getElementById('vet-analysis')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Kostenanalyse
+                {t('hero.ctaAnalysis')}
               </Button>
             </div>
           </motion.div>

@@ -1,0 +1,121 @@
+{
+  "page": {
+    "title": "Hier erreichen Sie uns",
+    "office": "Zentrale Hamburg",
+    "address": "Adresse",
+    "addressValue": "Healio GmbH\nArndtstr. 6\n22085 Hamburg",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "startCall": "Anruf starten"
+  },
+  "form": {
+    "name": "Name *",
+    "namePlaceholder": "Ihr vollständiger Name",
+    "email": "E-Mail Adresse *",
+    "emailPlaceholder": "name@beispiel.de",
+    "company": "Unternehmen (optional)",
+    "companyPlaceholder": "Ihr Unternehmen",
+    "phone": "Telefon (optional)",
+    "phonePlaceholder": "Ihre Telefonnummer",
+    "message": "Ihre Nachricht *",
+    "messagePlaceholder": "Wie können wir Ihnen helfen?",
+    "submit": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "missingFields": "Fehlende Angaben",
+    "missingFieldsDesc": "Bitte füllen Sie alle erforderlichen Felder aus.",
+    "success": "Ihre Anfrage wurde erfolgreich gesendet.",
+    "successDesc": "Wir melden uns in Kürze bei Ihnen.",
+    "error": "Fehler",
+    "errorDesc": "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de"
+  },
+  "contactForm": {
+    "title": "Jetzt unverbindlich beraten lassen",
+    "subtitle": "Sie sind gesetzlich versichert und möchten mehr aus Ihrer Gesundheitsvorsorge herausholen? Schreiben Sie uns — wir finden den passenden Schutz für Sie.",
+    "firstName": "Vorname *",
+    "lastName": "Nachname *",
+    "email": "E-Mail *",
+    "phone": "Telefon (optional)",
+    "interest": "Interesse an *",
+    "interestOptions": {
+      "ambulant": "Ambulante Zusatzversicherung",
+      "zahn": "Zahnzusatzversicherung",
+      "stationaer": "Stationäre Zusatzversicherung",
+      "tier": "Tierkrankenversicherung",
+      "multiple": "Mehrere Bereiche"
+    },
+    "message": "Nachricht *",
+    "requiredFields": "* Pflichtfelder. Ihre Daten werden sicher übermittelt und vertraulich behandelt.",
+    "missingFields": "Fehlende Felder",
+    "missingFieldsDesc": "Bitte füllen Sie alle Pflichtfelder aus."
+  },
+  "termin": {
+    "title": "Termin vereinbaren",
+    "subtitle": "Sichern Sie sich jetzt direkt Ihren Wunschtermin für ein kostenloses und unverbindliches Erstgespräch.",
+    "confirmation": "Sie erhalten nach der Buchung automatisch eine Bestätigung per E-Mail."
+  },
+  "dental": {
+    "title": "Jetzt Angebot anfordern",
+    "submit": "Anfrage senden"
+  },
+  "hospital": {
+    "title": "Privatpatienten-Status anfragen"
+  },
+  "leistungenForm": {
+    "title": "Unverbindlich beraten lassen"
+  },
+  "potenzialanalyse": {
+    "title": "Ihre Potenzialanalyse.",
+    "subtitle": "Lassen Sie uns in 15 Minuten prüfen, wie viel ungenutztes Budget für Lohnnebenkosten aktuell in Ihrem Unternehmen steckt.",
+    "name": "Ihr Name *",
+    "namePlaceholder": "Vorname und Nachname",
+    "company": "Unternehmen *",
+    "companyPlaceholder": "Firmenname",
+    "email": "Geschäftliche E-Mail Adresse *",
+    "emailPlaceholder": "name@unternehmen.de",
+    "phone": "Telefonnummer",
+    "employees": "Anzahl Mitarbeiter *",
+    "employeesPlaceholder": "Bitte wählen...",
+    "employees1to10": "1 bis 10 Mitarbeiter",
+    "employees11to50": "11 bis 50 Mitarbeiter",
+    "employees51to200": "51 bis 200 Mitarbeiter",
+    "employeesOver200": "Über 200 Mitarbeiter",
+    "bavFocus": "Fokus auf Betriebliche Altersvorsorge (bAV)? *",
+    "bkvFocus": "Fokus auf Betriebliche Krankenversicherung (bKV)? *",
+    "yesStrong": "Ja, starkes Interesse",
+    "yesRather": "Eher Ja",
+    "noCurrently": "Nein, aktuell nicht",
+    "success": "Erfolgreich gesendet!",
+    "successDesc": "Vielen Dank! Ihre Anfrage wurde erfolgreich gespeichert. Wir kontaktieren Sie in Kürze.",
+    "errorSend": "Fehler beim Senden",
+    "errorSendDesc": "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+    "validation": "Überprüfung fehlgeschlagen",
+    "validationDesc": "Bitte füllen Sie alle markierten Pflichtfelder aus.",
+    "nameRequired": "Name ist erforderlich",
+    "companyRequired": "Unternehmen ist erforderlich",
+    "emailRequired": "E-Mail ist erforderlich",
+    "emailInvalid": "Ungültige E-Mail-Adresse",
+    "employeesRequired": "Bitte wählen Sie die Mitarbeiteranzahl",
+    "bavRequired": "Bitte geben Sie an, ob Fokus auf bAV liegt",
+    "bkvRequired": "Bitte geben Sie an, ob Fokus auf bKV liegt",
+    "transferFailed": "Übertragung fehlgeschlagen",
+    "submit": "Anfrage absenden",
+    "retry": "Erneut versuchen",
+    "alternatives": "Alternative Kontaktmöglichkeiten"
+  },
+  "confirmation": {
+    "title": "Terminanfrage erfolgreich gesendet!",
+    "subtitle": "Prüfungsprozess initiiert.",
+    "text1": "Vielen Dank für Ihre Anfrage. Wir haben Ihre Daten erhalten und eine Bestätigung an unser Team (info@healio.de) weitergeleitet. Wir werden uns in Kürze bei Ihnen melden, um den Termin final zu bestätigen.",
+    "text2": "Vielen Dank für Ihre Daten. Wir sichten Ihre Angaben aktuell um die exakten Einsparpotenziale für Ihr Unternehmen zu berechnen.",
+    "bookSlot": "Wählen Sie einen Termin",
+    "bookSlotDesc": "Sichern Sie sich jetzt direkt einen passenden Zeitpunkt für unser gemeinsames Gespräch in unserem Kalender.",
+    "nextSteps": "Wie geht es weiter?",
+    "yourAppointment": "Ihr Termin für das Audit",
+    "appointmentDesc": "Einer unserer Experten wird Ihre Terminanfrage prüfen und sich zeitnah mit Ihnen in Verbindung setzen.",
+    "alternativeCalendar": "Alternativ können Sie den Termin auch direkt in einem neuen Tab buchen, falls der Kalender oben nicht korrekt lädt.",
+    "openCalendar": "Alternativen Kalender öffnen",
+    "calendarRedirect": "Sie werden zu Google Calendar weitergeleitet, um Ihren Termin sicher zu buchen.",
+    "backToHome": "Zurück zur Startseite",
+    "newAppointment": "Neuen Termin anfragen"
+  }
+}

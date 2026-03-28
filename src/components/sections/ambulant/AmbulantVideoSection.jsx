@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 
 const AmbulantVideoSection = () => {
+  const { t } = useTranslation('ambulant');
   const [isPlaying, setIsPlaying] = useState(false);
   const stockImageUrl = "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&q=80&w=2000"; // Hiking/Nature/Active couple
 
@@ -12,15 +14,15 @@ const AmbulantVideoSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            Jetzt Vorteile im Video entdecken
+            {t('video.title')}
           </h2>
           <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
-            In nur 2 Minuten erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung effektiv für 0 € bekommst.
+            {t('video.subtitle')}
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -32,7 +34,7 @@ const AmbulantVideoSection = () => {
               <>
                 <img
                   src={stockImageUrl}
-                  alt="Aktives Paar in der Natur"
+                  alt={t('video.imageAlt')}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
@@ -49,7 +51,7 @@ const AmbulantVideoSection = () => {
                 playsInline
               >
                 <source src="/erklaervideo.mp4" type="video/mp4" />
-                Ihr Browser unterstützt kein Video.
+                {t('video.videoFallback')}
               </video>
             )}
           </motion.div>

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "badge": "Für Therapeuten & Praxen",
+    "title": "Voller Fokus auf die Heilung. Nicht auf die Kosten.",
+    "subtitle": "Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken.",
+    "videoFallback": "Ihr Browser unterstützt kein Video."
+  },
+  "problem": {
+    "title": "Wenn das Budget die Therapie bestimmt.",
+    "text": "Sie wissen genau welche ganzheitliche Behandlung einem Menschen jetzt helfen würde. Doch der Patient zögert weil die Kosten nicht von der Kasse getragen werden. Das blockiert den Heilungsprozess und frustriert Sie als Behandler weil Sie nicht Ihr volles Potenzial ausschöpfen können."
+  },
+  "solution": {
+    "title": "Wir nehmen das Thema Geld aus dem Behandlungsraum.",
+    "relaxedPatients": "Entspannte Patienten",
+    "relaxedPatientsDesc": "Eine hohe Erstattung durch unsere Systeme nimmt den finanziellen Druck. Das fördert die innere Ruhe, die für jede Heilung essenziell ist.",
+    "sustainableTherapy": "Nachhaltige Therapien",
+    "sustainableTherapyDesc": "Patienten brechen wichtige Behandlungen nicht mehr aus Sorge um die Rechnung ab.",
+    "protectedTime": "Ihre Zeit bleibt geschützt",
+    "protectedTimeDesc": "Sie überreichen lediglich unsere Information. Den gesamten administrativen Prozess übernehmen wir."
+  },
+  "steps": {
+    "step1Title": "Das kurze Kennenlernen",
+    "step1Desc": "Wir prüfen in wenigen Minuten ob unsere Philosophie zu Ihrer Praxis passt.",
+    "step2Title": "Die kostenfreie Ausstattung",
+    "step2Desc": "Sie erhalten unsere hochwertigen Informationskarten kostenfrei für Ihr Wartezimmer.",
+    "step3Title": "Die profitable Zusammenarbeit",
+    "step3Desc": "Ihre Patienten profitieren sofort. Sie konzentrieren sich auf das, was Sie am besten können."
+  },
+  "cta": {
+    "title": "Jetzt kostenlos Partnerpraxis werden",
+    "subtitle": "In nur 5 Minuten zum Healio-Partner. Buchen Sie Ihren Kennenlerntermin.",
+    "calendarError": "Kalender konnte nicht geladen werden",
+    "calendarErrorDesc": "Bitte überprüfen Sie Ihre Internetverbindung oder deaktivieren Sie eventuelle Adblocker."
+  }
+}

@@ -1,18 +1,20 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Check, X } from 'lucide-react';
 
 const CostBenefitAnalysis = () => {
+  const { t } = useTranslation('veterinary');
   return (
     <section className="py-20 bg-slate-50">
       <div className="healio-container">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#1E3A8A] mb-4">
-            Kosten-Nutzen Analyse
+            {t('costBenefit.title')}
           </h2>
           <p className="text-lg text-slate-600">
-            Verwandeln Sie ein unkalkulierbares Großrisiko in eine kleine, planbare monatliche Ausgabe.
+            {t('costBenefit.subtitle')}
           </p>
         </div>
 
@@ -29,33 +31,33 @@ const CostBenefitAnalysis = () => {
                 <span className="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-white">
                   <X className="w-5 h-5" />
                 </span>
-                Ohne Absicherung
+                {t('costBenefit.withoutProtection.title')}
               </h3>
             </div>
             <div className="p-8 flex-1 flex flex-col">
               <div className="mb-8">
-                <p className="text-slate-500 mb-2">Finanzielles Risiko</p>
-                <div className="text-4xl font-bold text-red-500">Unbegrenzt</div>
-                <p className="text-sm text-slate-400 mt-1">Im Ernstfall 3.000€ - 5.000€ sofort fällig</p>
+                <p className="text-slate-500 mb-2">{t('costBenefit.withoutProtection.riskLabel')}</p>
+                <div className="text-4xl font-bold text-red-500">{t('costBenefit.withoutProtection.riskValue')}</div>
+                <p className="text-sm text-slate-400 mt-1">{t('costBenefit.withoutProtection.riskNote')}</p>
               </div>
-              
+
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-slate-600">
                   <X className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
-                  <span>Volles Kostenrisiko bei jeder Behandlung</span>
+                  <span>{t('costBenefit.withoutProtection.point1')}</span>
                 </li>
                 <li className="flex items-start gap-3 text-slate-600">
                   <X className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
-                  <span>Entscheidung über Behandlung oft budgetabhängig</span>
+                  <span>{t('costBenefit.withoutProtection.point2')}</span>
                 </li>
                 <li className="flex items-start gap-3 text-slate-600">
                   <X className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
-                  <span>Keine Kostenerstattung für Vorsorge</span>
+                  <span>{t('costBenefit.withoutProtection.point3')}</span>
                 </li>
               </ul>
 
               <div className="mt-auto p-4 bg-red-50 rounded-lg border border-red-100 text-red-800 text-sm">
-                <strong>Fazit:</strong> Eine einzige Operation kann Ihre Ersparnisse aufbrauchen.
+                <strong>Fazit:</strong> {t('costBenefit.withoutProtection.fazit')}
               </div>
             </div>
           </motion.div>
@@ -73,33 +75,33 @@ const CostBenefitAnalysis = () => {
                 <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#1E3A8A]">
                   <Check className="w-5 h-5" />
                 </span>
-                Mit Absicherung
+                {t('costBenefit.withProtection.title')}
               </h3>
             </div>
             <div className="p-8 flex-1 flex flex-col">
               <div className="mb-8">
-                <p className="text-blue-600/80 mb-2 font-medium">Planbare Kosten</p>
-                <div className="text-4xl font-bold text-[#1E3A8A]">ab 20 € <span className="text-lg text-slate-500 font-normal">/Monat</span></div>
-                <p className="text-sm text-slate-400 mt-1">Für reinen OP-Schutz</p>
+                <p className="text-blue-600/80 mb-2 font-medium">{t('costBenefit.withProtection.costLabel')}</p>
+                <div className="text-4xl font-bold text-[#1E3A8A]">{t('costBenefit.withProtection.costValue')} <span className="text-lg text-slate-500 font-normal">{t('costBenefit.withProtection.costUnit')}</span></div>
+                <p className="text-sm text-slate-400 mt-1">{t('costBenefit.withProtection.costNote')}</p>
               </div>
-              
+
               <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-slate-600">
                   <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Kostenübernahme bis zum 4-fachen GOT-Satz</span>
+                  <span>{t('costBenefit.withProtection.point1')}</span>
                 </li>
                 <li className="flex items-start gap-3 text-slate-600">
                   <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Freie Tierarzt- und Klinikwahl</span>
+                  <span>{t('costBenefit.withProtection.point2')}</span>
                 </li>
                 <li className="flex items-start gap-3 text-slate-600">
                   <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Beste medizinische Versorgung gesichert</span>
+                  <span>{t('costBenefit.withProtection.point3')}</span>
                 </li>
               </ul>
 
               <div className="mt-auto p-4 bg-blue-50 rounded-lg border border-blue-100 text-[#1E3A8A] text-sm">
-                <strong>Fazit:</strong> Kalkulierbare Kosten. Bestmögliche Versorgung.
+                <strong>Fazit:</strong> {t('costBenefit.withProtection.fazit')}
               </div>
             </div>
           </motion.div>

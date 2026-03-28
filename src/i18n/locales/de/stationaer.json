@@ -1,0 +1,167 @@
+{
+  "hero": {
+    "title": "<highlight>Privatpatient</highlight> im Krankenhaus. Effektiv für 0 €.",
+    "subtitle": "KlinikUpgrade ab 11 € im Monat. In Kombination mit dem IKK Classic Bonus finanziert sich die stationäre Zusatzversicherung komplett selbst. Franke & Bornberg: FFF+ hervorragend.",
+    "ikkNote": "<strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK Classic Bonus (über 300 € pro Jahr, steuerfrei) deckt die Beiträge vollständig. Einbettzimmer, Chefarzt, freie Klinikwahl – ohne Zuzahlung.",
+    "ctaCalculate": "Tarif berechnen",
+    "ctaBonus": "Bonus sichern",
+    "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
+  },
+  "siegel": {
+    "title": "Ausgezeichnet von unabhängigen Testern",
+    "alt": "Qualitätssiegel: Franke & Bornberg FFF+ hervorragend, Morgen & Morgen Ausgezeichnet, LevelNine Exzellent"
+  },
+  "concept": {
+    "title": "KlinikUpgrade Top – Privatpatient im Krankenhaus",
+    "subtitle": "Einbettzimmer, Chefarztbehandlung, freie Krankenhauswahl. Keine Begrenzung auf die Gebührenordnung für Ärzte (GOÄ).",
+    "empfehlung": "Empfehlung",
+    "tariffName": "KlinikUpgrade Top",
+    "tariffType": "Einbettzimmer",
+    "tariffPrice": "ab 11,22 €/Monat (ohne AR) | ab 33,33 € (mit AR)",
+    "tariffDetails": {
+      "komfort": { "label": "Komfort-Unterbringung", "value": "Einbettzimmer" },
+      "klinikwahl": { "label": "Freie Krankenhauswahl", "value": "Ja" },
+      "roomingIn": { "label": "Rooming-In (Kinder unter 14)", "value": "Ja" },
+      "familienzimmer": { "label": "Familienzimmer bei Entbindung", "value": "Ja" },
+      "privatarzt": { "label": "Privatärztliche Behandlung", "value": "Chefarzt, Spezialisten, Belegarzt" },
+      "gebuehren": { "label": "Gebührenordnung", "value": "Keine Begrenzung" },
+      "ambulanteOps": { "label": "Ambulante OPs im Krankenhaus", "value": "Ja" },
+      "vorNachStationaer": { "label": "Vor- und nachstationäre Behandlung", "value": "Ja" },
+      "tagegeld": { "label": "Ersatz-Krankenhaustagegeld", "value": "Bis zu 100 €/Tag" },
+      "keineWartezeit": { "label": "Keine allgemeine Wartezeit", "value": "Ja" }
+    },
+    "vergleichTitle": "KlinikUpgrade Top vs. Plus",
+    "plus": { "name": "Plus", "zimmer": "Zweibettzimmer", "tagegeld": "Tagegeld bis 80 €", "preis": "ab 8,98 €/Monat" },
+    "top": { "name": "Top", "zimmer": "Einbettzimmer", "tagegeld": "Tagegeld bis 100 €", "preis": "ab 11,22 €/Monat" },
+    "ikkComboTitle": "Effektiv 0 € mit IKK Classic Bonus",
+    "ikkComboText": "Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 11,22 € (= 135 €/Jahr) deckt der Bonus die Kosten mehr als doppelt. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Vorsorge und Gesundheitsleistungen.",
+    "exampleBlinddarm": "Beispiel: Blinddarm-OP (4 Tage)",
+    "exampleLeistenbruch": "Beispiel: Ambulante Leistenbruch-OP",
+    "gkvFallpauschale": "GKV-Fallpauschale",
+    "einbettzimmer": "Einbettzimmer (4 Tage)",
+    "privatarztLeistungen": "Privatärztliche Leistungen",
+    "zuzahlungTag": "Zuzahlung pro Tag",
+    "zuZahlen": "Zu zahlen",
+    "erstattungKlinik": "Erstattung KlinikUpgrade Top",
+    "erstattungKlinikGeneral": "Erstattung KlinikUpgrade",
+    "gkvUebernahme": "GKV-Übernahme",
+    "deinEigenanteil": "Dein Eigenanteil",
+    "besonderheitenTitle": "Das macht KlinikUpgrade besonders",
+    "besonderheiten": [
+      "Keine allgemeine Wartezeit – Sofortschutz",
+      "Keine Begrenzung auf Gebührenordnung (über 3,5-fach GOÄ)",
+      "Einbettzimmer im Top-Tarif, Zweibettzimmer im Plus-Tarif",
+      "Ersatz-Krankenhaustagegeld bis 100 €/Tag",
+      "Familienzimmer bei stationärer Entbindung",
+      "Rooming-In: Elternbegleitung bei Kindern unter 14 Jahren",
+      "Ambulante Operationen im Krankenhaus abgedeckt",
+      "Vor- und nachstationäre Behandlung inklusive",
+      "Keine Altersbegrenzung beim Abschluss",
+      "Tarife mit oder ohne Alterungsrückstellungen wählbar"
+    ]
+  },
+  "benefits": {
+    "title": "Stationäre Zusatzversicherung: Privatpatienten-Status. Ohne privat versichert zu sein.",
+    "subtitle": "Wer ins Krankenhaus muss, sollte sich auf die Genesung konzentrieren — nicht auf das Budget. Mit der stationären Zusatzversicherung erhalten Sie Zugang zu den besten Ärzten und Kliniken.",
+    "mainBenefits": {
+      "spitzenversorgung": { "title": "Medizinische Spitzenversorgung", "desc": "Zugang zu Spezialisten und modernster Diagnostik." },
+      "privatsphaere": { "title": "Mehr Privatsphäre", "desc": "Einzelzimmer statt Mehrbettzimmer. Bessere Erholung." },
+      "wartezeiten": { "title": "Kürzere Wartezeiten", "desc": "Schnellerer Zugang zu Operationen und Behandlungen." },
+      "familienfreundlich": { "title": "Familienfreundlich", "desc": "Rooming-in: Eltern bleiben bei ihren Kindern." }
+    },
+    "features": {
+      "einbettzimmer": { "title": "Einbettzimmer", "desc": "Maximale Privatsphäre und Ruhe. Im Top-Tarif Einbettzimmer, im Plus-Tarif Zweibettzimmer." },
+      "chefarzt": { "title": "Chefarztbehandlung", "desc": "Privatärztliche Behandlung durch Chefarzt, Spezialisten und Belegarzt. Ohne Begrenzung der Gebührenordnung." },
+      "klinikwahl": { "title": "Freie Krankenhauswahl", "desc": "Jede Klinik in Deutschland. Mit GKV-Versorgungsvertrag selbst ausgewählt. Auch Spezialkliniken." },
+      "keineWartezeit": { "title": "Keine Wartezeit", "desc": "Sofortiger Versicherungsschutz ab Tag 1. Keine allgemeine Wartezeit. Einzige Ausnahme: Entbindungen (8 Monate)." },
+      "tagegeld": { "title": "Bis zu 100 € Tagegeld", "desc": "Ersatz-Krankenhaustagegeld bei Verzicht auf Einbettzimmer oder privatärztliche Behandlung." },
+      "ambulanteOps": { "title": "Ambulante OPs", "desc": "Ambulante Durchführung von Operationen im Krankenhaus wird erstattet. Inkl. Aufnahme- und Abschlussuntersuchung." },
+      "familienzimmer": { "title": "Familienzimmer & Rooming-In", "desc": "Eltern bleiben bei ihren Kindern (unter 14). Nach Entbindung: Familienzimmer für die erste gemeinsame Zeit." },
+      "vorNachStationaer": { "title": "Vor- & Nachstationär", "desc": "Vor- und nachstationäre Behandlungen sind vollständig abgedeckt. Lückenloser Schutz rund um den Aufenthalt." }
+    }
+  },
+  "testimonials": {
+    "title": "Echte Kunden, <highlight>echte Sicherheit</highlight>",
+    "subtitle": "Erfahrungen von Menschen, die den Privatpatientenstatus im Krankenhaus erlebt haben.",
+    "items": [
+      { "name": "Markus H. (52), Hannover", "text": "Nach meiner Knie-OP lag ich im Einbettzimmer, wurde vom Chefarzt persönlich operiert und betreut. Mein Kollege im gleichen Krankenhaus lag im Dreibettzimmer und hatte den Assistenzarzt. Der Unterschied ist gewaltig. Für 11 Euro im Monat eine der besten Entscheidungen meines Lebens." },
+      { "name": "Petra & Jan W. (34), Bremen", "text": "Bei der Geburt unseres Sohnes hatten wir dank KlinikUpgrade ein Familienzimmer. Die ersten Nächte als Familie zusammen im Krankenhaus verbringen zu können, war unbezahlbar. Und durch den IKK Bonus zahlen wir effektiv keinen Cent für die Versicherung." },
+      { "name": "Sabine K. (41), Leipzig", "text": "Mein Blinddarm musste plötzlich raus. Dank KlinikUpgrade hatte ich sofort ein Einzelzimmer und der Chefarzt hat operiert. Von fast 1.900 Euro Mehrkosten hat die Versicherung über 1.800 Euro übernommen. Ohne die Zusatzversicherung hätte ich im Mehrbettzimmer gelegen." }
+    ]
+  },
+  "faq": {
+    "title": "Häufige Fragen zur stationären Zusatzversicherung",
+    "subtitle": "Alles was du über das KlinikUpgrade und den IKK Classic Bonus wissen musst.",
+    "items": [
+      { "q": "Was kostet das KlinikUpgrade monatlich?", "a": "Das KlinikUpgrade Top (Einbettzimmer) gibt es ab 11,22 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 33,33 Euro. Das KlinikUpgrade Plus (Zweibettzimmer) startet ab 8,98 Euro. In Kombination mit dem IKK Classic Bonus (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst." },
+      { "q": "Was ist der Unterschied zwischen KlinikUpgrade Plus und Top?", "a": "KlinikUpgrade Plus bietet Zweibettzimmer und ein Ersatz-Krankenhaustagegeld von bis zu 80 Euro pro Tag. KlinikUpgrade Top bietet Einbettzimmer, bis zu 100 Euro Tagegeld pro Tag und im Top-Tarif ein Familienzimmer bei stationärer Entbindung (nicht begrenzt auf die Kosten eines Zweibettzimmers). Beide Tarife umfassen Chefarztbehandlung, freie Krankenhauswahl und keine Begrenzung auf die Gebührenordnung." },
+      { "q": "Gibt es Wartezeiten?", "a": "Nein. Es gibt keine allgemeine Wartezeit. Der Versicherungsschutz beginnt sofort ab Tag 1 mit Anspruch auf alle versicherten Leistungen. Einzige Ausnahme: Bei Entbindungen gilt eine Wartezeit von acht Monaten." },
+      { "q": "Werden auch privatärztliche Leistungen über dem Höchstsatz erstattet?", "a": "Ja, das ist ein besonderes Merkmal des KlinikUpgrade. Die Erstattung ist nicht auf den 3,5-fachen Satz der Gebührenordnung für Ärzte (GOÄ) begrenzt. Auch darüber hinausgehende Honorare werden erstattet. Das bedeutet: Kein Eigenanteil bei der Arztwahl." },
+      { "q": "Wie funktioniert das KlinikUpgrade zusammen mit dem IKK Classic Bonus?", "a": "Die Kombination macht die stationäre Zusatzversicherung effektiv kostenlos: Du zahlst 11,22 Euro monatlich (= 135 Euro im Jahr) für das KlinikUpgrade Top. Der IKK Classic Bonus bringt über 300 Euro pro Jahr steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr. Der Bonus übersteigt die Beiträge deutlich, sodass du effektiv 0 Euro zahlst und im Krankenhaus trotzdem Privatpatient bist." },
+      { "q": "Was passiert bei einer Entbindung?", "a": "Bei einer stationären Entbindung übernimmt das KlinikUpgrade die privatärztlichen Leistungen und die Unterbringung. Im Top-Tarif bekommst du ein Familienzimmer, in dem du die ersten Tage gemeinsam mit deinem Partner und dem Neugeborenen verbringen kannst. Die Kosten werden nicht auf die Höhe eines Zweibettzimmers begrenzt." },
+      { "q": "Bekomme ich Geld, wenn ich auf das Einbettzimmer verzichte?", "a": "Ja. Wenn du bei einem Krankenhausaufenthalt auf die Unterbringung im Ein- oder Zweibettzimmer oder auf privatärztliche Behandlung verzichtest, erhältst du ein Ersatz-Krankenhaustagegeld: bis zu 100 Euro pro Tag im Top-Tarif und bis zu 80 Euro pro Tag im Plus-Tarif. Für Kinder und Jugendliche bis zum 16. Lebensjahr beträgt das Tagegeld im Top-Tarif bis zu 50 Euro." },
+      { "q": "Gibt es eine Altersbegrenzung?", "a": "Nein, es gibt keine Höchst- oder Mindesteintrittsalter. Der Abschluss ist in jedem Alter möglich. Voraussetzung ist lediglich die Mitgliedschaft in einer gesetzlichen Krankenversicherung. Berechtigte der Heilfürsorge (z.B. Polizisten oder Soldaten) sind ausgeschlossen." }
+    ]
+  },
+  "klinikUpgrade": {
+    "hero": {
+      "badge": "Privatpatienten-Status",
+      "title": "Stationärer Komfort als Patientenrecht.",
+      "titleHighlight": "Finanzierbar durch Bonus Strategie.",
+      "subtitle": "Wie Sie trotz Vorerkrankung oder BMI Themen den Status eines Privatpatienten im Krankenhaus erhalten. Finanziert durch Ihre Krankenkasse.",
+      "cta": "Anspruch prüfen"
+    },
+    "unterbringung": {
+      "title": "Die Unterbringungssituation",
+      "subtitle": "Der Unterschied zwischen Kassenleistung und Privatstatus ist nirgendwo so spürbar wie im Krankenhaus. Sichern Sie sich die Umgebung, die Ihre Genesung optimal unterstützt.",
+      "privatsphaere": { "title": "Privatsphäre & Ruhe", "desc": "Genesung erfordert Ruhe. Im Einbettzimmer haben Sie keinen fremden Besuch, keine nächtlichen Störungen und volle Diskretion für vertrauliche Arztgespräche." },
+      "hotelStandard": { "title": "Hotel-Standard", "desc": "Eigene Nasszelle, hochwertiges Menü, Multimedia-Ausstattung und Service-Leistungen, die den Krankenhausaufenthalt so angenehm wie möglich gestalten." },
+      "chefarzt": { "title": "Chefarzt-Behandlung", "desc": "Freie Arztwahl im Krankenhaus. Sie werden nicht vom diensthabenden Assistenzarzt, sondern vom Spezialisten Ihrer Wahl oder dem Chefarzt behandelt." },
+      "kostendeckung": { "title": "Volle Kostendeckung", "desc": "Erstattung auch über die Höchstsätze der Gebührenordnung (GOÄ) hinaus. Keine versteckten Eigenanteile bei Spezialisten-Honoraren." }
+    },
+    "wirtschaftlichkeit": {
+      "title": "Wirtschaftlichkeitsanalyse",
+      "subtitle": "Qualität hat ihren Preis – aber durch intelligente Kombination mit Bonusprogrammen wird sie finanzierbar.",
+      "bruttoBeitrag": "Brutto-Beitrag",
+      "bruttoBeitragValue": "~ 70 €",
+      "bruttoBeitragUnit": "/ Monat",
+      "bruttoBeitragDesc": "Ein Tarif ohne Gesundheitsfragen oder mit vereinfachter Prüfung für Menschen mit Vorerkrankungen kostet ca. 70 Euro monatlich.",
+      "bonusErstattung": "Bonus-Erstattung",
+      "bonusErstattungValue": "bis 500 €",
+      "bonusErstattungUnit": "/ Jahr",
+      "bonusErstattungDesc": "Der IKK Gesundheitsbonus erstattet bis zu 500 Euro pro Jahr für private Zusatzversicherungen.",
+      "effektivkosten": "Effektivkosten",
+      "effektivkostenValue": "~ 20 €",
+      "effektivkostenUnit": "/ Monat",
+      "effektivkostenDesc": "Ihr effektiver Eigenanteil sinkt auf ca 20 Euro monatlich nach Verrechnung des Bonus.",
+      "fazit": "Hochwertige Medizin wird durch intelligente Finanzierung für jeden bezahlbar."
+    },
+    "versorgungsweg": {
+      "title": "Ihr Weg zum Status",
+      "subtitle": "Wir unterscheiden zwei Wege, die zum gleichen Ziel führen: Beste medizinische Versorgung. Welcher Weg für Sie der richtige ist, klären wir im Kurzcheck.",
+      "pathA": {
+        "badge": "Gesund",
+        "title": "Standard Acceptance",
+        "subtitle": "Versorgungsweg A",
+        "desc": "Für Antragsteller ohne schwere Vorerkrankungen und mit normalem BMI. Hier greifen Standard-Tarife mit besonders günstigen Konditionen.",
+        "point1": "Gesundheitsprüfung erforderlich",
+        "point2": "Niedrigster Monatsbeitrag",
+        "point3": "Bonus deckt oft 100% der Kosten"
+      },
+      "pathB": {
+        "badge": "Spezial",
+        "title": "Extended Acceptance",
+        "subtitle": "Versorgungsweg B",
+        "desc": "Für Antragsteller mit Vorerkrankungen oder erhöhtem BMI. Spezialisierte Tarife ohne Gesundheitsfragen oder mit stark vereinfachter Prüfung.",
+        "point1": "Keine / Vereinfachte Gesundheitsfragen",
+        "point2": "Annahme trotz Diagnosen möglich",
+        "point3": "Effektivkosten ~20€ durch Bonus"
+      }
+    },
+    "cta": {
+      "title": "Warten Sie nicht bis zum Ernstfall.",
+      "subtitle": "Prüfen Sie jetzt unverbindlich, welcher Versorgungsweg für Sie offen steht und wie hoch Ihr persönlicher Bonus ausfällt.",
+      "button": "Jetzt Annahme prüfen"
+    }
+  }
+}

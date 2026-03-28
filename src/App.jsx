@@ -67,6 +67,7 @@ function App() {
         <Toaster />
         <Suspense fallback={<PageLoader />}>
           <Routes>
+            {/* German routes (default) */}
             <Route path="/" element={<Layout />}>
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
@@ -74,10 +75,8 @@ function App() {
               <Route path="partner" element={<PartnerPage />} />
               <Route path="kontakt" element={<KontaktPage />} />
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
-              
               <Route path="ambulant" element={<AmbulantPage />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
-              
               <Route path="zahn" element={<ZahnPage />} />
               <Route path="healio-zahnzusatz" element={<HealioZahnzusatzPage />} />
               <Route path="stationaer" element={<StationaerPage />} />
@@ -89,11 +88,34 @@ function App() {
               <Route path="blog/:slug" element={<BlogArticlePage />} />
             </Route>
 
+            {/* English routes */}
+            <Route path="/en" element={<Layout />}>
+              <Route index element={<MainHomePage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="services" element={<LeistungenPage />} />
+              <Route path="partner" element={<PartnerPage />} />
+              <Route path="contact" element={<KontaktPage />} />
+              <Route path="appointment" element={<TerminvereinbarungPage />} />
+              <Route path="outpatient" element={<AmbulantPage />} />
+              <Route path="dental" element={<ZahnPage />} />
+              <Route path="healio-dental" element={<HealioZahnzusatzPage />} />
+              <Route path="inpatient" element={<StationaerPage />} />
+              <Route path="hospital-upgrade" element={<KlinikUpgradePage />} />
+              <Route path="legal-notice" element={<ImpressumPage />} />
+              <Route path="terms" element={<AgbPage />} />
+              <Route path="privacy" element={<DatenschutzPage />} />
+              <Route path="blog" element={<BlogPage />} />
+              <Route path="blog/:slug" element={<BlogArticlePage />} />
+            </Route>
+
             <Route path="/potenzialanalyse" element={<PotenzialanalysePage />} />
+            <Route path="/en/potential-analysis" element={<PotenzialanalysePage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
+            <Route path="/en/confirmation" element={<ConfirmationPage />} />
 
             <Route element={<VeterinaryLayout />}>
                <Route path="/tierkrankenversicherung" element={<VeterinaryHomePage />} />
+               <Route path="/en/pet-insurance" element={<VeterinaryHomePage />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

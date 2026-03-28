@@ -1,0 +1,98 @@
+{
+  "title": "Frequently Asked Questions",
+  "subtitle": "Everything you need to know about the Healio health budget, SDK supplementary insurance and the IKK Classic bonus program.",
+  "categories": {
+    "kosten": {
+      "title": "Costs & Financing",
+      "items": [
+        {
+          "q": "Is there a catch? Sounds too good to be true.",
+          "a": "This is the most common question we get, and it's absolutely fair. No, there's no catch. The Healio concept uses two existing, reputable systems within the German healthcare system: SDK Suddeutsche Krankenversicherung (on the market for over 90 years) and the IKK Classic bonus program (Germany's largest guild health insurance fund). You simply need to actively participate in the bonus program — for example, attending preventive check-ups, going for dental cleanings, or providing proof of exercise. These are things that benefit your health anyway."
+        },
+        {
+          "q": "How much does outpatient supplementary insurance cost per month?",
+          "a": "Monthly premiums for SDK outpatient supplementary insurance range from €15 to €50 depending on age and chosen plan. A 30-year-old pays approximately €25 per month for the AP7 plan (70% reimbursement). The special part: Through the IKK Classic bonus program, you can receive over €300 per year tax-free. In many cases, the bonus fully covers the premiums, meaning the insurance effectively costs you €0."
+        },
+        {
+          "q": "Does statutory health insurance cover Heilpraktiker costs?",
+          "a": "Statutory health insurance (GKV) generally does not cover Heilpraktiker costs. With SDK outpatient supplementary insurance, Heilpraktiker treatments are reimbursed at 50% to 100% depending on the plan. The AP1 plan provides up to €1,000 over two years for natural medicine and Heilpraktiker alone."
+        },
+        {
+          "q": "Is the IKK Classic bonus tax-free?",
+          "a": "Yes, the IKK Classic bonus is completely tax-free. It is paid out as a reward for health-conscious behavior and is not subject to income tax. That means: over €300 per year lands net in your account."
+        }
+      ]
+    },
+    "leistungen": {
+      "title": "Benefits & Reimbursement",
+      "items": [
+        {
+          "q": "What services are covered by outpatient supplementary insurance?",
+          "a": "SDK outpatient supplementary insurance covers, depending on the plan (AP5 to AP1): Heilpraktiker and natural medicine, vision aids up to €500, eye laser surgery at 100%, preventive examinations, vaccinations, medications and remedies, international travel coverage and a 24/7 medical-psychological counseling service. There are no waiting periods."
+        },
+        {
+          "q": "Is osteopathy covered?",
+          "a": "Yes, osteopathy is covered twice. First through SDK supplementary insurance: 50% to 100% of costs are reimbursed depending on the plan. Second through the IKK Classic health account: IKK reimburses osteopathy as part of up to €600 per year."
+        },
+        {
+          "q": "Can I get new glasses reimbursed?",
+          "a": "Yes. With SDK supplementary insurance, you receive up to €500 for vision aids within two years depending on the plan. This applies to lenses, frames and contact lenses. Eye laser surgeries like LASIK are even reimbursed at 100% per eye."
+        },
+        {
+          "q": "How does reimbursement work? How do I submit invoices?",
+          "a": "You photograph the invoice with the SDK Suddeutsche Krankenversicherung app and submit it digitally. The review usually takes just a few days, then the reimbursement amount is transferred directly to your account."
+        },
+        {
+          "q": "What happens if I don't fully use the IKK bonus?",
+          "a": "The SDK supplementary insurance works independently of the bonus. You receive your benefits in any case. The IKK bonus is an additional advantage that reduces your effective costs — but it's not a prerequisite for insurance coverage."
+        }
+      ]
+    },
+    "ablauf": {
+      "title": "Process & Insurance Fund Switch",
+      "items": [
+        {
+          "q": "How do I switch to IKK Classic? Is it complicated?",
+          "a": "Switching to IKK Classic is completely digital and takes about 5 minutes. IKK cancels your old health insurance fund for you. Prerequisite: You have been insured with your current fund for at least 12 months."
+        },
+        {
+          "q": "Do I need a health check for the supplementary insurance?",
+          "a": "No. SDK outpatient supplementary insurance has no health check and no health questions. You are guaranteed acceptance, even with pre-existing conditions. There are also no waiting periods."
+        },
+        {
+          "q": "Do I have to handle everything myself or does someone help me?",
+          "a": "Healio guides you through every step. You can complete the entire process conveniently online or schedule a free consultation."
+        },
+        {
+          "q": "Can I get the supplementary insurance without switching health insurance funds?",
+          "a": "Yes, SDK outpatient supplementary insurance works with any statutory health insurance fund in Germany. Switching to IKK Classic is optional but recommended for the full health budget."
+        }
+      ]
+    },
+    "vertrauen": {
+      "title": "Trust & Security",
+      "items": [
+        {
+          "q": "Who is behind Healio?",
+          "a": "Healio is an independent insurance broker based in Hamburg, founded by Frank Steinfurt. Partners are SDK Suddeutsche Krankenversicherung (since 1926) and IKK Classic (over 3 million insured members)."
+        },
+        {
+          "q": "Can I cancel the insurance at any time?",
+          "a": "SDK outpatient supplementary insurance has a minimum term of 2 years. After that, you can cancel with 3 months' notice. IKK Classic has a binding period of 12 months."
+        },
+        {
+          "q": "Is Healio trustworthy? Can I trust the reviews?",
+          "a": "Healio is licensed as an insurance broker under §34d GewO and registered in the broker registry. We are supervised by the IHK Hamburg."
+        },
+        {
+          "q": "Is Healio an insurance company?",
+          "a": "No. Healio is an independent insurance broker under §34d GewO. We broker plans from SDK (Suddeutsche Krankenversicherung). Your contract is directly with SDK."
+        },
+        {
+          "q": "Who benefits most from the Healio health budget?",
+          "a": "Especially glasses wearers, patients who regularly visit a Heilpraktiker, families with children, people who value preventive care, and career starters looking for an affordable entry point."
+        }
+      ]
+    }
+  }
+}

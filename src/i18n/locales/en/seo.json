@@ -1,0 +1,78 @@
+{
+  "home": {
+    "title": "Healio B2B – Corporate Benefits Reimagined | bAV & bKV Experts",
+    "description": "Optimize your corporate pension and health insurance with Healio."
+  },
+  "ambulant": {
+    "title": "Outpatient Supplementary Insurance – Your €2,500 Health Budget | Healio",
+    "description": "Heilpraktiker, osteopathy, massages, vision aids – everything statutory insurance doesn't cover. With Healio outpatient, enjoy private-patient benefits effectively for €0."
+  },
+  "zahn": {
+    "title": "Dental Supplementary Insurance – Up to 100% Reimbursement | Healio",
+    "description": "Up to 100% reimbursement for dental prosthetics, prophylaxis and orthodontics. No waiting periods."
+  },
+  "stationaer": {
+    "title": "Hospital Supplementary Insurance – Private Patient Status | Healio",
+    "description": "Private room. Chief physician treatment. Free choice of hospital. Secure the best care now."
+  },
+  "klinik": {
+    "title": "Hospital Upgrade – Private Patient in Hospital | Healio",
+    "description": "Secure a private room & chief physician treatment in hospital."
+  },
+  "partner": {
+    "title": "For Therapists | Healio Partner Network",
+    "description": "Free your patients from financial worries and enable therapies that truly work to completion."
+  },
+  "about": {
+    "title": "About Us - Healio",
+    "description": "We believe that healthcare should be simple, transparent and accessible to everyone."
+  },
+  "leistungen": {
+    "title": "Our Services | Healio",
+    "description": "Discover our insurance solutions: Outpatient, Dental, Hospital and Pet Insurance."
+  },
+  "kontakt": {
+    "title": "Contact | Healio",
+    "description": "Whether business client or private patient — we are here for you personally."
+  },
+  "termin": {
+    "title": "Book an Appointment | Healio",
+    "description": "Choose a suitable time for your personal consultation."
+  },
+  "impressum": {
+    "title": "Legal Notice - Healio",
+    "description": "Legal notice and contact information for Healio."
+  },
+  "agb": {
+    "title": "Terms & Conditions - Healio",
+    "description": "Terms and conditions of Healio."
+  },
+  "datenschutz": {
+    "title": "Privacy Policy - Healio",
+    "description": "Privacy policy of Healio."
+  },
+  "blog": {
+    "title": "Healio Guide – Health Budget, Supplementary Insurance & Benefits",
+    "description": "Expert knowledge for publicly insured patients, Heilpraktiker, midwives and employers."
+  },
+  "veterinary": {
+    "title": "Pet Health Insurance – Secure Veterinary Care | Healio",
+    "description": "Protect your pet from high veterinary costs."
+  },
+  "potenzialanalyse": {
+    "title": "Free Potential Analysis | Healio B2B",
+    "description": "Find out in our free potential analysis how your company can benefit from corporate benefits."
+  },
+  "confirmation": {
+    "title": "Confirmation | Healio",
+    "description": "Thank you for your inquiry with Healio."
+  },
+  "zahnzusatz": {
+    "title": "Healio Dental – Dental Insurance with 100% Reimbursement",
+    "description": "Secure private-patient status at the dentist. 100% reimbursement for dental prosthetics, implants and professional teeth cleaning."
+  },
+  "defaults": {
+    "title": "Healio – Holistic Health & Bonus Optimization",
+    "description": "Healio revolutionizes healthcare through intelligent bonus optimization. Maximize your health benefits with our innovative concept."
+  }
+}

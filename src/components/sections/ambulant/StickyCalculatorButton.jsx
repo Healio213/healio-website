@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const StickyCalculatorButton = () => {
+  const { t } = useTranslation('ambulant');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const StickyCalculatorButton = () => {
         className="flex items-center justify-center w-full md:w-auto bg-healio-primary text-white font-bold px-6 py-4 md:py-3 rounded-xl md:rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
       >
         <Calculator className="w-5 h-5 mr-2" />
-        Tarif berechnen
+        {t('stickyButton.ctaCalculate')}
       </a>
     </div>
   );

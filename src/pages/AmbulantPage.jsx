@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
@@ -16,11 +17,13 @@ import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
 import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalculatorButton';
 
 const AmbulantPage = () => {
+  const { t } = useTranslation('seo');
+
   return (
     <>
       <SEOHead
-        title="Ambulante Zusatzversicherung – Dein 2.500€ Gesundheits-Budget | Healio"
-        description="Heilpraktiker, Osteopathie, Massagen, Sehhilfen – alles was die GKV nicht abdeckt. Mit Healio ambulant genießt du Privatpatienten-Leistungen effektiv für 0€."
+        title={t('ambulant.title')}
+        description={t('ambulant.description')}
         canonicalUrl="https://www.healio.de/ambulant"
       />
       <main className="min-h-screen bg-white relative">
