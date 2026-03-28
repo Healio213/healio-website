@@ -54,8 +54,13 @@ const ikkExtras = [
   },
   {
     icon: "🧘",
-    title: "Präventionskurse",
-    desc: "Zuschüsse für Yoga, Rückentraining, Stressbewältigung und mehr — für deine aktive Gesundheitsvorsorge."
+    title: "Gesundheitskurse — 180 €/Jahr extra",
+    desc: "2 Kurse à 90 € pro Jahr für Yoga, Rückentraining, Ernährung oder Stressbewältigung. Dieses Budget ist unabhängig vom Bonusprogramm — kommt also on top."
+  },
+  {
+    icon: "📅",
+    title: "Bonusantrag bis Ende März",
+    desc: "Du hast bis zum 31. März des Folgejahres Zeit, deinen Bonus einzureichen. Kein Stress, kein Zeitdruck — und ab 2026 reicht schon eine einzige Maßnahme."
   },
   {
     icon: "🌿",
