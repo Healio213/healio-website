@@ -28,8 +28,8 @@ const AmbulantBeispielrechnung = () => {
           {/* SDK Beitrag */}
           <div className="space-y-4 text-lg mb-8">
             <div className="flex justify-between items-center pb-3 border-b border-green-200">
-              <span className="text-gray-700 font-medium">SDK Ambulant 90 (Tarif AP9):</span>
-              <span className="text-gray-900 font-bold">22 €/Monat = 264 €/Jahr</span>
+              <span className="text-gray-700 font-medium">SDK Ambulant 100 (Tarif AP1) — 100 % Erstattung:</span>
+              <span className="text-gray-900 font-bold">40 €/Monat = 480 €/Jahr</span>
             </div>
           </div>
 
@@ -41,8 +41,12 @@ const AmbulantBeispielrechnung = () => {
                 { label: "Grippeimpfung", amount: "30 €" },
                 { label: "Zahnvorsorge (2×)", amount: "60 €" },
                 { label: "Gesundheits-Check-up", amount: "75 €" },
+                { label: "Krebsvorsorge", amount: "75 €" },
                 { label: "Fitnessstudio-Mitgliedschaft", amount: "75 €" },
                 { label: "BMI im Normalbereich", amount: "75 €" },
+                { label: "Blutdruck normal", amount: "75 €" },
+                { label: "Zahnreinigung", amount: "40 €" },
+                { label: "IKK-Gesundheitskurs", amount: "75 €" },
               ].map((item, idx) => (
                 <div key={idx} className="flex justify-between items-center text-gray-700">
                   <span className="flex items-center gap-2">
@@ -54,7 +58,7 @@ const AmbulantBeispielrechnung = () => {
               ))}
               <div className="flex justify-between items-center pt-3 border-t border-green-300 font-bold text-gray-900">
                 <span>= Bonus gesamt:</span>
-                <span className="text-[#10b981]">315 €/Jahr</span>
+                <span className="text-[#10b981]">580 €/Jahr</span>
               </div>
             </div>
           </div>
@@ -63,10 +67,10 @@ const AmbulantBeispielrechnung = () => {
           <div className="bg-white rounded-xl p-6 shadow-md">
             <div className="flex justify-between items-center mb-4">
               <span className="text-xl font-bold text-gray-900">Ergebnis:</span>
-              <span className="text-xl font-extrabold text-[#10b981]">315 € Bonus − 264 € Beitrag = 51 € Plus</span>
+              <span className="text-xl font-extrabold text-[#10b981]">580 € Bonus − 480 € Beitrag = 100 € Plus</span>
             </div>
             <p className="text-gray-600 text-base leading-relaxed">
-              Frau Müller bekommt mehr zurück als sie zahlt — und hat 900 € Budget für Heilpraktiker, Brille und Vorsorge.
+              Frau Müller bekommt mehr zurück als sie zahlt — und hat 2.500 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr.
             </p>
           </div>
         </motion.div>

@@ -37,11 +37,15 @@ const AmbulantBonusCalculator = () => {
     setSelectedActivities({});
   };
 
+  const AP1_JAHRESBEITRAG = 480; // Ambulant 100 (AP1): 40 €/Monat
+
   const totalBonus = useMemo(() => {
     return ACTIVITIES.reduce((sum, activity) => {
       return selectedActivities[activity.id] ? sum + activity.amount : sum;
     }, 0);
   }, [selectedActivities]);
+
+  const nettoErgebnis = totalBonus - AP1_JAHRESBEITRAG;
 
   return (
     <section id="bonus-calculator" className="bg-white py-24 font-sans">
@@ -149,8 +153,25 @@ const AmbulantBonusCalculator = () => {
                   </AnimatePresence>
                 </div>
                 
-                <p className="text-white/90 text-base leading-relaxed mb-8 max-w-sm mx-auto font-medium">
-                  Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet.
+                {/* Netto-Vergleich mit AP1 */}
+                <div className="bg-white/15 rounded-xl p-4 mb-6 backdrop-blur-sm">
+                  <p className="text-white/80 text-sm font-medium mb-2">Tarif Ambulant 100 (AP1) — 100 % Erstattung</p>
+                  <div className="flex justify-between text-white text-sm mb-1">
+                    <span>Jahresbeitrag:</span>
+                    <span className="font-bold">480 €</span>
+                  </div>
+                  <div className="flex justify-between text-white text-sm mb-1">
+                    <span>Dein Bonus:</span>
+                    <span className="font-bold">{totalBonus} €</span>
+                  </div>
+                  <div className={`flex justify-between text-sm pt-2 border-t border-white/30 font-extrabold ${nettoErgebnis >= 0 ? 'text-green-200' : 'text-yellow-200'}`}>
+                    <span>Ergebnis:</span>
+                    <span>{nettoErgebnis >= 0 ? `+${nettoErgebnis} € Plus` : `${nettoErgebnis} €`}</span>
+                  </div>
+                </div>
+
+                <p className="text-white/90 text-sm leading-relaxed mb-8 max-w-sm mx-auto font-medium">
+                  Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet. Bei 100 % Erstattung bekommst du 2.500 € Jahresbudget.
                 </p>
 
                 <div className="flex flex-col gap-4">
