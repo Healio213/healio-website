@@ -102,7 +102,7 @@ const AmbulantBonusCalculator = () => {
   useEffect(() => {
     if (totalBonus === 0) return;
     if (analyticsTimer.current) clearTimeout(analyticsTimer.current);
-    analyticsTimer.current = setTimeout(trackUsage, 120000); // 2 Minuten
+    analyticsTimer.current = setTimeout(trackUsage, 480000); // 8 Minuten
     return () => { if (analyticsTimer.current) clearTimeout(analyticsTimer.current); };
   }, [totalBonus, jahresbeitrag, trackUsage]);
 
