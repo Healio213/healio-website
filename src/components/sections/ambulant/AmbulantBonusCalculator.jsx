@@ -127,6 +127,17 @@ const AmbulantBonusCalculator = () => {
               </div>
             </div>
 
+            {/* Fitnessgeräte-Zuschuss */}
+            <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
+              <span className="text-xl flex-shrink-0 mt-0.5">⌚</span>
+              <div>
+                <p className="text-sm font-bold text-purple-900 mb-1">Bis zu 180 € Zuschuss für Fitnessgeräte</p>
+                <p className="text-sm text-purple-800 leading-relaxed">
+                  Die IKK Classic bezuschusst Fitnessgeräte wie Apple Watch, Fitnesstracker und andere Fitnessuhren. Wähle dafür beim Bonusantrag einfach die Zuschuss-Variante und reiche deinen Kaufbeleg ein. Die Höhe richtet sich nach deinen gesammelten Bonuspunkten.
+                </p>
+              </div>
+            </div>
+
             <div className="mt-4 text-center md:text-left">
               <button
                 onClick={handleReset}
