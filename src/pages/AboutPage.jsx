@@ -56,7 +56,7 @@ const AboutPage = () => {
 
   const metrics = [
     { number: "120+", label: t('stats.partners') },
-    { number: "2.500€", label: t('stats.budget') },
+    { number: "3.000€", label: t('stats.budget') },
     { number: "4", label: t('stats.areas') },
     { number: "100%", label: t('stats.satisfaction') }
   ];

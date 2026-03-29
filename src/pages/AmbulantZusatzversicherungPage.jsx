@@ -70,7 +70,7 @@ const AmbulantZusatzversicherungPage = () => {
                 </h1>
                 
                 <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Sichere dir bis zu 2.500 € Gesundheits-Budget pro Jahr für Heilpraktiker, Brillen, Fachärzte und mehr. Effektiv für 0 € durch den IKK-Bonus.
+                  Sichere dir bis zu 3.000 € Gesundheits-Budget pro Jahr für Heilpraktiker, Brillen, Fachärzte und mehr. Effektiv für 0 € durch den IKK-Bonus.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

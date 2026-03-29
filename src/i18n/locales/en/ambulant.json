@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Your <highlight>€2,500 Health Budget</highlight>. Effectively for €0.",
-    "subtitle": "Why pay for treatments yourself when the system can cover them? With SDK supplementary insurance + the IKK Classic bonus program, you get up to €2,500 for Heilpraktiker, glasses, preventive care and more — and effectively pay nothing thanks to the bonus. No waiting periods. No health check. Start right away.",
+    "title": "Your <highlight>€3,000 Health Budget</highlight>. Effectively for €0.",
+    "subtitle": "Why pay for treatments yourself when the system can cover them? With SDK supplementary insurance + the IKK Classic bonus program, you get up to €3,000 for Heilpraktiker, glasses, preventive care and more — and effectively pay nothing thanks to the bonus. No waiting periods. No health check. Start right away.",
     "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
     "badgeNoWait": "Guaranteed no waiting period",
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
@@ -17,7 +17,7 @@
     "ariaLabel": "Trust signals"
   },
   "ticker": {
-    "budget": "Up to €2,500 health budget",
+    "budget": "Up to €3,000 health budget",
     "sdk": "SDK — on the market since 1926",
     "ikk": "IKK Classic — 3 million members",
     "heilpraktiker": "Heilpraktiker 100% covered",
@@ -150,7 +150,7 @@
       "benefitsTitle": "Benefits:",
       "benefit1": "Up to €1,000 for alternative treatments",
       "benefit2": "Up to €500 for glasses",
-      "benefit3": "Up to €2,500 annual benefits total"
+      "benefit3": "Up to €3,000 annual benefits total"
     },
     "section6Title": "Why Choose Healio?",
     "whyHealio": {
@@ -195,7 +195,7 @@
     "resultLabel": "Result:",
     "resultPlus": "Plus",
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
-    "bonusPayout": "Your bonus is paid out or directly offset against your supplementary insurance. With 100% reimbursement, you get a €2,500 annual budget.",
+    "bonusPayout": "Your bonus is paid out or directly offset against your supplementary insurance. With 100% reimbursement, you get a €3,000 annual budget.",
     "ctaCalculate": "Calculate your plan",
     "ctaSwitchIKK": "Switch to IKK now"
   },
@@ -218,7 +218,7 @@
     "bonusTotalValue": "€580/year",
     "resultTitle": "Result:",
     "resultValue": "€580 bonus - €480 premium = €100 surplus",
-    "resultDesc": "Ms. Mueller gets back more than she pays — and has a €2,500 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more."
+    "resultDesc": "Ms. Mueller gets back more than she pays — and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more."
   },
   "howItWorks": {
     "title": "How It Works",
@@ -242,7 +242,7 @@
     "stats": {
       "sdk": { "value": "SDK", "label": "On the market since 1926" },
       "ikk": { "value": "IKK", "label": "3 million members" },
-      "budget": { "value": "€2,500", "label": "Budget in 2 years" },
+      "budget": { "value": "€3,000", "label": "Budget in 2 years" },
       "cost": { "value": "€0", "label": "effective cost" }
     },
     "items": {

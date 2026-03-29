@@ -20,7 +20,7 @@ const insuranceTypes = [
       'Vorsorge & Impfungen'
     ],
     link: '/ambulant',
-    budget: '2.500€ Jahresbudget'
+    budget: '3.000€ Jahresbudget'
   },
   {
     id: 'zahn',

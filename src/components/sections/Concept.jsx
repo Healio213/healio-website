@@ -129,7 +129,7 @@ const Concept = () => {
                     <ul className="list-disc pl-5 mb-4 space-y-1">
                       <li>1.000 € alternative Behandlungen / Massagen / Osteopathie oder 1000 € für Facharzt ( Igel Leistungen )</li>
                       <li>500 € Brille</li>
-                      <li>plus weitere ambulante Leistungen bis zu 2.500 € Jahresleistung</li>
+                      <li>plus weitere ambulante Leistungen bis zu 3.000 € Jahresleistung</li>
                     </ul>
                     <p className="mb-6">Das ist der Punkt: Du bekommst echten Leistungsumfang – und kannst den Beitrag durch den Bonus effektiv ausgleichen.</p>
 
