@@ -31,7 +31,12 @@ const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass })
         <div className="flex justify-between items-start mb-3">
           <div>
             <span className="text-[28px] block mb-1">{card.icon}</span>
-            <h2 className="text-lg font-bold text-white">{card.title}</h2>
+            <h2 className="text-lg font-bold text-white">
+              {card.title}
+              {card.budgetHighlight && (
+                <span className="ml-2 text-[12px] font-bold text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded-md align-middle">{card.budgetHighlight}</span>
+              )}
+            </h2>
             <p className="text-[13px] text-slate-400 leading-relaxed mt-1">{card.subtitle}</p>
           </div>
           <div className="text-right flex-shrink-0 ml-4">
@@ -100,6 +105,7 @@ const TikTokPage = () => {
               className="h-10 w-auto mx-auto brightness-0 invert"
             />
             <p className="text-[15px] text-slate-400 mt-1">{t('header.tagline')}</p>
+            <p className="text-[14px] text-cyan-400 font-semibold mt-2 italic">{t('header.provocation')}</p>
           </motion.header>
 
           {/* Trust Badges */}

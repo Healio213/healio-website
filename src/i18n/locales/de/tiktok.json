@@ -5,7 +5,8 @@
   },
   "header": {
     "logo": "Healio",
-    "tagline": "Privatpatient. Ohne privat versichert zu sein."
+    "tagline": "Privatpatient. Ohne privat versichert zu sein.",
+    "provocation": "Warum Rechnungen selber zahlen?"
   },
   "trust": {
     "noWaiting": "Keine Wartezeit",
@@ -15,6 +16,7 @@
     "ambulant": {
       "icon": "🩺",
       "title": "Ambulant",
+      "budgetHighlight": "3.000 € Budget",
       "subtitle": "Brille, Heilpraktiker, Vorsorge, Osteopathie, Schwangerschaft",
       "price": "0 €*",
       "period": "effektiv/Monat",

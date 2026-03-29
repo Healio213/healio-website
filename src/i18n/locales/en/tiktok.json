@@ -5,7 +5,8 @@
   },
   "header": {
     "logo": "Healio",
-    "tagline": "Private patient. Without private insurance."
+    "tagline": "Private patient. Without private insurance.",
+    "provocation": "Why pay your bills yourself?"
   },
   "trust": {
     "noWaiting": "No waiting period",
@@ -15,6 +16,7 @@
     "ambulant": {
       "icon": "🩺",
       "title": "Outpatient",
+      "budgetHighlight": "€3,000 Budget",
       "subtitle": "Glasses, alternative medicine, preventive care, osteopathy, pregnancy",
       "price": "0 €*",
       "period": "effective/month",
