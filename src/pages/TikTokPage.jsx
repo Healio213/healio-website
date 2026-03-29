@@ -113,10 +113,6 @@ const TikTokPage = () => {
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
               {t('trust.noWaiting')}
             </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
-              {t('trust.noQuestions')}
-            </span>
           </motion.div>
 
           {/* Product Cards */}
@@ -155,7 +151,7 @@ const TikTokPage = () => {
             className="flex justify-center mb-6"
           >
             <div className="inline-flex items-center gap-1.5 bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2 text-[12px] text-slate-400">
-              {t('poweredBy')} <strong className="text-white">{t('sdk')}</strong> + <strong className="text-white">{t('ikk')}</strong>
+              {t('poweredBy')} <strong className="text-white">Healio</strong>
             </div>
           </motion.div>
 

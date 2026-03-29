@@ -9,7 +9,7 @@
   },
   "trust": {
     "noWaiting": "No waiting period",
-    "noQuestions": "No health questions"
+    "noQuestions": ""
   },
   "cards": {
     "ambulant": {
