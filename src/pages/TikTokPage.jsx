@@ -94,9 +94,11 @@ const TikTokPage = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-9"
           >
-            <h1 className="text-[32px] font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-              {t('header.logo')}
-            </h1>
+            <img
+              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png"
+              alt="Healio Logo"
+              className="h-10 w-auto mx-auto brightness-0 invert"
+            />
             <p className="text-[15px] text-slate-400 mt-1">{t('header.tagline')}</p>
           </motion.header>
 
