@@ -27,6 +27,8 @@ import deVeterinary from './locales/de/veterinary.json';
 import enVeterinary from './locales/en/veterinary.json';
 import deSeo from './locales/de/seo.json';
 import enSeo from './locales/en/seo.json';
+import deTiktok from './locales/de/tiktok.json';
+import enTiktok from './locales/en/tiktok.json';
 
 i18n
   .use(initReactI18next)
@@ -46,6 +48,7 @@ i18n
         legal: deLegal,
         veterinary: deVeterinary,
         seo: deSeo,
+        tiktok: deTiktok,
       },
       en: {
         common: enCommon,
@@ -61,6 +64,7 @@ i18n
         legal: enLegal,
         veterinary: enVeterinary,
         seo: enSeo,
+        tiktok: enTiktok,
       },
     },
     lng: 'de',

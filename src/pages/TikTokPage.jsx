@@ -1,0 +1,176 @@
+
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import SEOHead from '@/components/SEOHead';
+import { ChevronRight } from 'lucide-react';
+
+/**
+ * TikTok Bio-Link Landing Page
+ *
+ * Eigenständige Seite OHNE Header/Footer — rein mobile-optimiert.
+ * Nutzer kommen über den TikTok Bio-Link hierher und wählen ihr Produkt.
+ * Jede Karte leitet auf die vollständige Verkaufsseite weiter.
+ */
+
+const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+    >
+      <Link
+        to={card.link}
+        className="group block relative bg-white/[0.06] border border-white/10 rounded-2xl p-6 transition-all duration-200 active:scale-[0.98] hover:bg-white/[0.1] overflow-hidden"
+      >
+        {/* Top accent line */}
+        <div className={`absolute top-0 left-0 right-0 h-[3px] ${gradientClass}`} />
+
+        <div className="flex justify-between items-start mb-3">
+          <div>
+            <span className="text-[28px] block mb-1">{card.icon}</span>
+            <h2 className="text-lg font-bold text-white">{card.title}</h2>
+            <p className="text-[13px] text-slate-400 leading-relaxed mt-1">{card.subtitle}</p>
+          </div>
+          <div className="text-right flex-shrink-0 ml-4">
+            <span className={`text-[22px] font-extrabold ${textColorClass}`}>{card.price}</span>
+            <span className="block text-[11px] text-slate-500">{card.period}</span>
+          </div>
+        </div>
+
+        <div className="inline-block bg-emerald-500/15 text-emerald-400 text-[11px] font-semibold px-2.5 py-1 rounded-md mt-2">
+          {card.badge}
+        </div>
+
+        <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-hover:translate-x-1 transition-transform" />
+      </Link>
+    </motion.div>
+  );
+};
+
+const TikTokPage = () => {
+  const { t } = useTranslation('tiktok');
+
+  const cards = [
+    {
+      ...t('cards.ambulant', { returnObjects: true }),
+      gradient: 'bg-gradient-to-r from-cyan-400 to-blue-500',
+      textColor: 'text-cyan-400',
+    },
+    {
+      ...t('cards.zahn', { returnObjects: true }),
+      gradient: 'bg-gradient-to-r from-violet-400 to-purple-500',
+      textColor: 'text-violet-400',
+    },
+    {
+      ...t('cards.klinik', { returnObjects: true }),
+      gradient: 'bg-gradient-to-r from-emerald-400 to-green-500',
+      textColor: 'text-emerald-400',
+    },
+  ];
+
+  const stats = t('stats', { returnObjects: true });
+
+  return (
+    <>
+      <SEOHead
+        title={t('meta.title')}
+        description={t('meta.description')}
+        canonicalUrl="https://www.healio.de/tiktok"
+        ogTitle={t('meta.title')}
+        ogDescription={t('meta.description')}
+        ogUrl="https://www.healio.de/tiktok"
+      />
+
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center text-white">
+        <div className="w-full max-w-[420px] px-5 py-10 pb-16">
+
+          {/* Logo + Tagline */}
+          <motion.header
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-9"
+          >
+            <h1 className="text-[32px] font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
+              {t('header.logo')}
+            </h1>
+            <p className="text-[15px] text-slate-400 mt-1">{t('header.tagline')}</p>
+          </motion.header>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex justify-center gap-4 mb-8 text-[12px] text-slate-500"
+          >
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+              {t('trust.noWaiting')}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+              {t('trust.noQuestions')}
+            </span>
+          </motion.div>
+
+          {/* Product Cards */}
+          <div className="space-y-4 mb-8">
+            {cards.map((card, i) => (
+              <ProductCard
+                key={i}
+                card={card}
+                index={i}
+                gradientClass={card.gradient}
+                textColorClass={card.textColor}
+              />
+            ))}
+          </div>
+
+          {/* Stats Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            className="flex justify-center gap-6 py-4 px-4 bg-white/[0.03] rounded-xl mb-7"
+          >
+            {Object.values(stats).map((stat, i) => (
+              <div key={i} className="text-center">
+                <span className="block text-[14px] font-extrabold text-white">{stat.value}</span>
+                <span className="block text-[11px] text-slate-500 mt-0.5">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Powered By */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.7 }}
+            className="flex justify-center mb-6"
+          >
+            <div className="inline-flex items-center gap-1.5 bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2 text-[12px] text-slate-400">
+              {t('poweredBy')} <strong className="text-white">{t('sdk')}</strong> + <strong className="text-white">{t('ikk')}</strong>
+            </div>
+          </motion.div>
+
+          {/* Footer */}
+          <footer className="text-center">
+            <p className="text-[11px] text-slate-600 mb-2">{t('footnote')}</p>
+            <div className="text-[12px] text-slate-600 space-x-2">
+              <Link to="/" className="hover:text-slate-400 transition-colors">{t('links.home')}</Link>
+              <span>·</span>
+              <Link to="/impressum" className="hover:text-slate-400 transition-colors">{t('links.impressum')}</Link>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default TikTokPage;

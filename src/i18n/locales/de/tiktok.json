@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Healio — Dein Gesundheits-Upgrade",
+    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahnersatz, Chefarzt — effektiv 0 € dank IKK Bonus."
+  },
+  "header": {
+    "logo": "Healio",
+    "tagline": "Privatpatient. Ohne privat versichert zu sein."
+  },
+  "trust": {
+    "noWaiting": "Keine Wartezeit",
+    "noQuestions": "Keine Gesundheitsfragen"
+  },
+  "cards": {
+    "ambulant": {
+      "icon": "🩺",
+      "title": "Ambulant",
+      "subtitle": "Brille, Heilpraktiker, Vorsorge, Osteopathie, Schwangerschaft",
+      "price": "0 €*",
+      "period": "effektiv/Monat",
+      "badge": "IKK Bonus deckt die Kosten",
+      "link": "/ambulant"
+    },
+    "zahn": {
+      "icon": "🦷",
+      "title": "ZahnUpgrade 90+",
+      "subtitle": "Implantate, Kronen, Brücken, Zahnreinigung — 90-100 %",
+      "price": "0 €*",
+      "period": "effektiv/Monat",
+      "badge": "IKK Bonus deckt die Kosten",
+      "link": "/zahn"
+    },
+    "klinik": {
+      "icon": "🏥",
+      "title": "KlinikUpgrade Top",
+      "subtitle": "Einzelzimmer, Chefarzt, freie Krankenhauswahl",
+      "price": "0 €*",
+      "period": "effektiv/Monat",
+      "badge": "IKK Bonus deckt Kosten 2x",
+      "link": "/stationaer"
+    }
+  },
+  "stats": {
+    "budget": {
+      "value": "3.000 €",
+      "label": "Ambulant-Budget"
+    },
+    "dental": {
+      "value": "90-100 %",
+      "label": "Zahnersatz"
+    },
+    "bonus": {
+      "value": "300 €+",
+      "label": "IKK Bonus/Jahr"
+    }
+  },
+  "poweredBy": "Powered by",
+  "sdk": "SDK Versicherung",
+  "ikk": "IKK Classic",
+  "footnote": "* Effektiv 0 € durch IKK Classic Bonusprogramm (300+ €/Jahr steuerfrei)",
+  "links": {
+    "home": "healio.de",
+    "impressum": "Impressum"
+  }
+}

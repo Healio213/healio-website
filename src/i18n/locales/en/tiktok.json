@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Healio — Your Health Upgrade",
+    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital — effectively 0 € with IKK Bonus."
+  },
+  "header": {
+    "logo": "Healio",
+    "tagline": "Private patient. Without private insurance."
+  },
+  "trust": {
+    "noWaiting": "No waiting period",
+    "noQuestions": "No health questions"
+  },
+  "cards": {
+    "ambulant": {
+      "icon": "🩺",
+      "title": "Outpatient",
+      "subtitle": "Glasses, alternative medicine, preventive care, osteopathy, pregnancy",
+      "price": "0 €*",
+      "period": "effective/month",
+      "badge": "IKK Bonus covers the cost",
+      "link": "/en/outpatient"
+    },
+    "zahn": {
+      "icon": "🦷",
+      "title": "DentalUpgrade 90+",
+      "subtitle": "Implants, crowns, bridges, cleaning — 90-100%",
+      "price": "0 €*",
+      "period": "effective/month",
+      "badge": "IKK Bonus covers the cost",
+      "link": "/en/dental"
+    },
+    "klinik": {
+      "icon": "🏥",
+      "title": "HospitalUpgrade Top",
+      "subtitle": "Private room, chief physician, free hospital choice",
+      "price": "0 €*",
+      "period": "effective/month",
+      "badge": "IKK Bonus covers cost 2x",
+      "link": "/en/inpatient"
+    }
+  },
+  "stats": {
+    "budget": {
+      "value": "€3,000",
+      "label": "Outpatient budget"
+    },
+    "dental": {
+      "value": "90-100%",
+      "label": "Dental coverage"
+    },
+    "bonus": {
+      "value": "€300+",
+      "label": "IKK Bonus/year"
+    }
+  },
+  "poweredBy": "Powered by",
+  "sdk": "SDK Insurance",
+  "ikk": "IKK Classic",
+  "footnote": "* Effectively 0 € through IKK Classic Bonus Program (300+ €/year tax-free)",
+  "links": {
+    "home": "healio.de",
+    "impressum": "Legal Notice"
+  }
+}
