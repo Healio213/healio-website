@@ -10,6 +10,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import Faq from '@/components/sections/Faq';
 import DentalContactForm from '@/components/sections/DentalContactForm';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
+import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
@@ -133,6 +134,7 @@ const ZahnPage = () => {
         <FadeInUp><DentalBenefits /></FadeInUp>
 
         <FadeInUp><AmbulantBonusCalculator /></FadeInUp>
+        <FadeInUp><AmbulantIKKWechsel /></FadeInUp>
 
         <FadeInUp><Testimonials headline={t('testimonials.headline')} /></FadeInUp>
 
