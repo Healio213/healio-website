@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Dein <highlight>2.500 Euro Gesundheits-Budget</highlight>. Effektiv für 0 Euro.",
-    "subtitle": "Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 2.500 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Keine Gesundheitsprüfung. Sofort loslegen.",
+    "title": "Dein <highlight>3.000 Euro Gesundheits-Budget</highlight>. Effektiv für 0 Euro.",
+    "subtitle": "Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 3.000 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Keine Gesundheitsprüfung. Sofort loslegen.",
     "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
     "badgeNoWait": "Garantiert ohne Wartezeit",
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
@@ -17,7 +17,7 @@
     "ariaLabel": "Vertrauenssignale"
   },
   "ticker": {
-    "budget": "Bis zu 2.500 € Gesundheitsbudget",
+    "budget": "Bis zu 3.000 € Gesundheitsbudget",
     "sdk": "SDK – seit 1926 am Markt",
     "ikk": "IKK Classic – 3 Mio. Versicherte",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
@@ -150,7 +150,7 @@
       "benefitsTitle": "Leistungen:",
       "benefit1": "Bis zu 1.000 Euro für alternative Behandlungen",
       "benefit2": "Bis zu 500 Euro für Brille",
-      "benefit3": "Bis zu 2.500 Euro Jahresleistung insgesamt"
+      "benefit3": "Bis zu 3.000 Euro Jahresleistung insgesamt"
     },
     "section6Title": "Warum über Healio?",
     "whyHealio": {
@@ -195,7 +195,7 @@
     "resultLabel": "Ergebnis:",
     "resultPlus": "Plus",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
-    "bonusPayout": "Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet. Bei 100 % Erstattung bekommst du 2.500 € Jahresbudget.",
+    "bonusPayout": "Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet. Bei 100 % Erstattung bekommst du 3.000 € Jahresbudget.",
     "ctaCalculate": "Tarif berechnen",
     "ctaSwitchIKK": "Jetzt zur IKK wechseln"
   },
@@ -218,7 +218,7 @@
     "bonusTotalValue": "580 €/Jahr",
     "resultTitle": "Ergebnis:",
     "resultValue": "580 € Bonus − 480 € Beitrag = 100 € Plus",
-    "resultDesc": "Frau Müller bekommt mehr zurück als sie zahlt — und hat 2.500 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr."
+    "resultDesc": "Frau Müller bekommt mehr zurück als sie zahlt — und hat 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr."
   },
   "howItWorks": {
     "title": "So einfach funktioniert's",
@@ -242,7 +242,7 @@
     "stats": {
       "sdk": { "value": "SDK", "label": "Seit 1926 am Markt" },
       "ikk": { "value": "IKK", "label": "3 Mio. Versicherte" },
-      "budget": { "value": "2.500 €", "label": "Budget in 2 Jahren" },
+      "budget": { "value": "3.000 €", "label": "Budget in 2 Jahren" },
       "cost": { "value": "0 €", "label": "effektive Kosten" }
     },
     "items": {
