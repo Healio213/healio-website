@@ -8,6 +8,7 @@ import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
+import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown, Star } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -146,6 +147,8 @@ const StationaerPage = () => {
 
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>
+
+        <FadeInUp><AmbulantBonusCalculator /></FadeInUp>
 
         {/* Testimonials */}
         <FadeInUp>
