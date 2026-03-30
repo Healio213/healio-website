@@ -12,8 +12,8 @@ import { TextHighlight } from '@/components/ui/ScrollAnimation';
 // Spalte 3: 25€ → 75€ (Regelmäßige Aktivitäten + Statuswerte)
 const ACTIVITY_DEFS = [
   // Vorsorgeuntersuchungen 5€ | 15€*
-  { id: 'impfung', amount: 15 },
-  { id: 'zahn', amount: 15 },
+  { id: 'impfung', perUnit: 15, max: 8 },
+  { id: 'zahn', perUnit: 15, max: 2 },
   { id: 'zahnFrueh', amount: 15 },
   { id: 'hautkrebs', amount: 15 },
   { id: 'ultraschall', amount: 15 },

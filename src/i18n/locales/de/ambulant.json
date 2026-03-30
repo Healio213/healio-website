@@ -166,8 +166,8 @@
     "subtitle": "So funktioniert der IKK Classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!",
     "selectActivities": "Wähle deine Aktivitäten:",
     "activities": {
-      "impfung": { "title": "Schutzimpfung", "desc": "1x pro Kalenderjahr" },
-      "zahn": { "title": "Zahnvorsorge", "desc": "2x pro Jahr" },
+      "impfung": { "title": "Schutzimpfung", "desc": "Bis zu 8x pro Jahr", "unit": "Impfung(en)" },
+      "zahn": { "title": "Zahnvorsorge", "desc": "Bis zu 2x pro Jahr", "unit": "Besuch(e)" },
       "zahnFrueh": { "title": "Zahnärztl. Früherkennung Z1–Z6", "desc": "Für Kinder" },
       "hautkrebs": { "title": "Hautkrebsvorsorge", "desc": "1x pro Kalenderjahr" },
       "ultraschall": { "title": "Ultraschallscreening", "desc": "Bauchaortenaneurysmen" },

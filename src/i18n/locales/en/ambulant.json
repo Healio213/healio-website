@@ -166,8 +166,8 @@
     "subtitle": "This is how the IKK Classic bonus works: Select your activities and see instantly how much you can get back!",
     "selectActivities": "Select your activities:",
     "activities": {
-      "impfung": { "title": "Vaccination", "desc": "1x per calendar year" },
-      "zahn": { "title": "Dental checkup", "desc": "2x per year" },
+      "impfung": { "title": "Vaccination", "desc": "Up to 8x per year", "unit": "vaccination(s)" },
+      "zahn": { "title": "Dental checkup", "desc": "Up to 2x per year", "unit": "visit(s)" },
       "zahnFrueh": { "title": "Dental screening Z1–Z6", "desc": "For children" },
       "hautkrebs": { "title": "Skin cancer screening", "desc": "1x per calendar year" },
       "ultraschall": { "title": "Ultrasound screening", "desc": "Abdominal aortic aneurysm" },
