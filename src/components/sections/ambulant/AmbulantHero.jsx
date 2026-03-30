@@ -86,13 +86,15 @@ const AmbulantHero = () => {
               <Calculator className="w-5 h-5 mr-2" />
               {t('hero.ctaCalculate')}
             </a>
-            <Link
-              to={getPath('kontakt')}
+            <a
+              href="https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-healio-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               <Gift className="w-5 h-5 mr-2" />
               {t('hero.ctaBonus')}
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>
