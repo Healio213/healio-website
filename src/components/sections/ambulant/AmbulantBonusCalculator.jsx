@@ -6,20 +6,39 @@ import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
+// IKK Classic Bonustabelle (mit Zusatzversicherung = 3x Multiplikator)
+// Spalte 1: 5€ → 15€ (Vorsorgeuntersuchungen)
+// Spalte 2: 10€ → 30€ (Vorsorgeuntersuchungen)
+// Spalte 3: 25€ → 75€ (Regelmäßige Aktivitäten + Statuswerte)
 const ACTIVITY_DEFS = [
-  { id: 'impfung', perUnit: 30, max: 8 },
-  { id: 'zahn', perUnit: 30, max: 2 },
-  { id: 'checkup', amount: 75 },
-  { id: 'krebs', amount: 75 },
-  { id: 'ultraschall', amount: 75 },
+  // Vorsorgeuntersuchungen 5€ | 15€*
+  { id: 'impfung', amount: 15 },
+  { id: 'zahn', amount: 15 },
+  { id: 'zahnFrueh', amount: 15 },
+  { id: 'hautkrebs', amount: 15 },
+  { id: 'ultraschall', amount: 15 },
+  { id: 'mammographie', amount: 15 },
+  { id: 'mutterschaft', amount: 15 },
+  { id: 'kind', perUnit: 15, max: 11 },
+  { id: 'jugend', perUnit: 15, max: 2 },
+  { id: 'amblyopie', amount: 15 },
+  // Vorsorgeuntersuchungen 10€ | 30€*
+  { id: 'checkup', amount: 30 },
+  { id: 'krebs', amount: 30 },
+  { id: 'darmkrebs', amount: 30 },
+  { id: 'outdoorSport', amount: 30 },
+  { id: 'rueckbildung', amount: 30 },
+  // Regelmäßige Aktivitäten 25€ | 75€*
   { id: 'kurs', perUnit: 75, max: 5, tip: true },
-  { id: 'sport', perUnit: 75, max: 4 },
+  { id: 'fitness', amount: 75, tip: true },
+  { id: 'sport', amount: 75 },
   { id: 'abzeichen', amount: 75 },
+  { id: 'leistungsabzeichen', amount: 75 },
+  // Statuswerte 25€ | 75€* (müssen mit regelmäßiger Aktivität kombiniert werden)
   { id: 'bmi', amount: 75 },
   { id: 'blutdruck', amount: 75 },
-  { id: 'zahnreinigung', amount: 40 },
-  { id: 'kind', perUnit: 30, max: 6 },
-  { id: 'fitness', amount: 180, tip: true },
+  // Zuschuss-Variante (Fitnessgeräte)
+  { id: 'fitnessGeraet', amount: 180, tip: true },
 ];
 
 const AmbulantBonusCalculator = () => {
@@ -242,13 +261,13 @@ const AmbulantBonusCalculator = () => {
               </div>
             </div>
 
-            {/* Fitnessgeräte-Zuschuss */}
-            <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
-              <span className="text-xl flex-shrink-0 mt-0.5">⌚</span>
+            {/* Hinweis: 3-facher Betrag */}
+            <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3 items-start">
+              <span className="text-xl flex-shrink-0 mt-0.5">✨</span>
               <div>
-                <p className="text-sm font-bold text-purple-900 mb-1">{t('bonusCalculator.fitnessNote')}</p>
-                <p className="text-sm text-purple-800 leading-relaxed">
-                  {t('bonusCalculator.fitnessNoteDesc')}
+                <p className="text-sm font-bold text-emerald-900 mb-1">{t('bonusCalculator.multiplierNote')}</p>
+                <p className="text-sm text-emerald-800 leading-relaxed">
+                  {t('bonusCalculator.multiplierNoteDesc')}
                 </p>
               </div>
             </div>
