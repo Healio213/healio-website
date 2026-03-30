@@ -2,43 +2,21 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
+import { Gift, ArrowRightLeft, Pencil } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
-// IKK Classic Bonustabelle (mit Zusatzversicherung = 3x Multiplikator)
-// Spalte 1: 5€ → 15€ (Vorsorgeuntersuchungen)
-// Spalte 2: 10€ → 30€ (Vorsorgeuntersuchungen)
-// Spalte 3: 25€ → 75€ (Regelmäßige Aktivitäten + Statuswerte)
+// IKK Classic Bonus pro Jahr
 const ACTIVITY_DEFS = [
-  // Vorsorgeuntersuchungen 5€ | 15€*
-  { id: 'impfung', perUnit: 15, max: 8 },
-  { id: 'zahn', perUnit: 15, max: 2 },
-  { id: 'zahnFrueh', amount: 15 },
-  { id: 'hautkrebs', amount: 15 },
-  { id: 'ultraschall', amount: 15 },
-  { id: 'mammographie', amount: 15 },
-  { id: 'mutterschaft', amount: 15 },
-  { id: 'kind', perUnit: 15, max: 11 },
-  { id: 'jugend', perUnit: 15, max: 2 },
-  { id: 'amblyopie', amount: 15 },
-  // Vorsorgeuntersuchungen 10€ | 30€*
-  { id: 'checkup', amount: 30 },
-  { id: 'krebs', amount: 30 },
-  { id: 'darmkrebs', amount: 30 },
-  { id: 'outdoorSport', amount: 30 },
-  { id: 'rueckbildung', amount: 30 },
-  // Regelmäßige Aktivitäten 25€ | 75€*
-  { id: 'kurs', perUnit: 75, max: 5, tip: true },
-  { id: 'fitness', amount: 75, tip: true },
-  { id: 'sport', amount: 75 },
-  { id: 'abzeichen', amount: 75 },
-  { id: 'leistungsabzeichen', amount: 75 },
-  // Statuswerte 25€ | 75€* (müssen mit regelmäßiger Aktivität kombiniert werden)
+  { id: 'impfung', amount: 30 },
+  { id: 'zahn', amount: 60 },
+  { id: 'checkup', amount: 75 },
+  { id: 'krebs', amount: 75 },
+  { id: 'fitness', amount: 75 },
   { id: 'bmi', amount: 75 },
   { id: 'blutdruck', amount: 75 },
-  // Zuschuss-Variante (Fitnessgeräte)
-  { id: 'fitnessGeraet', amount: 180, tip: true },
+  { id: 'zahnreinigung', amount: 40 },
+  { id: 'kurs', amount: 75 },
 ];
 
 const AmbulantBonusCalculator = () => {
@@ -54,7 +32,7 @@ const AmbulantBonusCalculator = () => {
   })), [t]);
 
   const [selectedActivities, setSelectedActivities] = useState({});
-  const [monatsbeitrag, setMonatsbeitrag] = useState(45);
+  const [monatsbeitrag, setMonatsbeitrag] = useState(40);
   const [beitragEditing, setBeitragEditing] = useState(false);
   const beitragInputRef = useRef(null);
   const analyticsTimer = useRef(null);
@@ -67,17 +45,9 @@ const AmbulantBonusCalculator = () => {
     }));
   };
 
-  const handleCount = (id, delta, max) => {
-    setSelectedActivities((prev) => {
-      const current = prev[id] || 0;
-      const next = Math.max(0, Math.min(max, current + delta));
-      return { ...prev, [id]: next };
-    });
-  };
-
   const handleReset = () => {
     setSelectedActivities({});
-    setMonatsbeitrag(45);
+    setMonatsbeitrag(40);
   };
 
   const handleBeitragChange = (e) => {
@@ -88,7 +58,7 @@ const AmbulantBonusCalculator = () => {
   const handleBeitragBlur = () => {
     setBeitragEditing(false);
     if (monatsbeitrag === '' || isNaN(monatsbeitrag) || monatsbeitrag < 0) {
-      setMonatsbeitrag(45);
+      setMonatsbeitrag(40);
     }
   };
 
@@ -96,10 +66,6 @@ const AmbulantBonusCalculator = () => {
 
   const totalBonus = useMemo(() => {
     return ACTIVITY_DEFS.reduce((sum, activity) => {
-      if (activity.perUnit) {
-        const count = selectedActivities[activity.id] || 0;
-        return sum + count * activity.perUnit;
-      }
       return selectedActivities[activity.id] ? sum + activity.amount : sum;
     }, 0);
   }, [selectedActivities]);
@@ -181,10 +147,7 @@ const AmbulantBonusCalculator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ACTIVITIES.map((activity, index) => {
                 const def = ACTIVITY_DEFS[index];
-                const isMulti = !!def.perUnit;
-                const count = isMulti ? (selectedActivities[def.id] || 0) : 0;
-                const isActive = isMulti ? count > 0 : !!selectedActivities[def.id];
-                const displayAmount = isMulti ? count * def.perUnit : def.amount;
+                const isActive = !!selectedActivities[def.id];
 
                 return (
                   <motion.div
@@ -193,57 +156,31 @@ const AmbulantBonusCalculator = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 select-none
+                    className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 select-none cursor-pointer
                       ${isActive
                         ? 'border-healio-primary bg-healio-light'
                         : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
-                      } ${!isMulti ? 'cursor-pointer' : ''}`}
-                    onClick={!isMulti ? () => handleToggle(def.id) : undefined}
+                      }`}
+                    onClick={() => handleToggle(def.id)}
                   >
-                    {!isMulti && (
-                      <div className="mt-1">
-                        <Checkbox
-                          id={def.id}
-                          checked={isActive}
-                          onCheckedChange={() => handleToggle(def.id)}
-                          className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
-                        />
-                      </div>
-                    )}
+                    <div className="mt-1">
+                      <Checkbox
+                        id={def.id}
+                        checked={isActive}
+                        onCheckedChange={() => handleToggle(def.id)}
+                        className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
+                      />
+                    </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-healio-dark leading-tight mb-1">
                         {activity.title}
-                        {def.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">{t('bonusCalculator.tip')}</span>}
                       </div>
-                      <div className={`text-sm leading-snug ${def.tip ? 'text-amber-600 font-medium' : 'text-gray-500'}`}>
+                      <div className="text-sm leading-snug text-gray-500">
                         {activity.desc}
                       </div>
-                      {isMulti && (
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            type="button"
-                            onClick={() => handleCount(def.id, -1, def.max)}
-                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
-                            disabled={count === 0}
-                          >
-                            <Minus className="w-3.5 h-3.5" />
-                          </button>
-                          <span className="w-6 text-center font-bold text-healio-dark text-lg">{count}</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCount(def.id, 1, def.max)}
-                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
-                            disabled={count === def.max}
-                          >
-                            <Plus className="w-3.5 h-3.5" />
-                          </button>
-                          <span className="text-xs text-gray-400 ml-1">{t('bonusCalculator.max')} {def.max}</span>
-                        </div>
-                      )}
                     </div>
                     <div className="font-bold text-healio-primary whitespace-nowrap flex-shrink-0">
-                      {isMulti && count > 1 && <span className="text-xs font-normal text-gray-400 block text-right">{count}× {def.perUnit}€</span>}
-                      +{displayAmount}€
+                      +{def.amount}€
                     </div>
                   </motion.div>
                 );
@@ -257,17 +194,6 @@ const AmbulantBonusCalculator = () => {
                 <p className="text-sm font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
                 <p className="text-sm text-blue-800 leading-relaxed">
                   {t('bonusCalculator.trustNoteDesc')}
-                </p>
-              </div>
-            </div>
-
-            {/* Hinweis: 3-facher Betrag */}
-            <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3 items-start">
-              <span className="text-xl flex-shrink-0 mt-0.5">✨</span>
-              <div>
-                <p className="text-sm font-bold text-emerald-900 mb-1">{t('bonusCalculator.multiplierNote')}</p>
-                <p className="text-sm text-emerald-800 leading-relaxed">
-                  {t('bonusCalculator.multiplierNoteDesc')}
                 </p>
               </div>
             </div>
