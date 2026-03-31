@@ -404,7 +404,8 @@
       "feature3": { "title": "Quality-assured", "desc": "Doctors are selected based on medical data and experience values" },
       "feature4": { "title": "Appointment service", "desc": "BetterDoc can arrange the appointment with the specialist for you" },
       "priceTag": "Free & non-binding",
-      "priceNote": "Hotline: 0800 444 6 999 (Mon–Fri, 9am–5pm)"
+      "priceNote": "Hotline: 0800 444 6 999 (Mon–Fri, 9am–5pm)",
+      "videoTitle": "How BetterDoc works — explained in 2 minutes"
     },
     "bottomCta": {
       "title": "Everything included — no extra cost",

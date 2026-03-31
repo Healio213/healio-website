@@ -404,7 +404,8 @@
       "feature3": { "title": "Qualitätsgesichert", "desc": "Ärzte werden anhand medizinischer Daten und Erfahrungswerte ausgewählt" },
       "feature4": { "title": "Terminservice", "desc": "BetterDoc übernimmt auf Wunsch die Terminvereinbarung beim Spezialisten" },
       "priceTag": "Kostenlos & unverbindlich",
-      "priceNote": "Hotline: 0800 444 6 999 (Mo–Fr, 9–17 Uhr)"
+      "priceNote": "Hotline: 0800 444 6 999 (Mo–Fr, 9–17 Uhr)",
+      "videoTitle": "So funktioniert BetterDoc — in 2 Minuten erklärt"
     },
     "bottomCta": {
       "title": "Alles inklusive — ohne Zusatzkosten",

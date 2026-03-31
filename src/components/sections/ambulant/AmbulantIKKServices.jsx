@@ -122,6 +122,28 @@ const AmbulantIKKServices = () => {
 
         </div>
 
+        {/* BetterDoc Erklärvideo */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12"
+        >
+          <div className="max-w-3xl mx-auto">
+            <p className="text-center text-lg font-bold text-gray-900 mb-4">{t('ikkServices.betterdoc.videoTitle')}</p>
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-purple-100" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube-nocookie.com/embed/pCxt4tZBq7s"
+                title="BetterDoc Erklärvideo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </motion.div>
+
         {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
