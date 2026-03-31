@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Shield, Clock, ArrowRight, CheckCircle, Heart, Leaf, HelpCircle } from 'lucide-react';
+import { ChevronDown, Shield, Clock, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
 
 const fearKeys = ['leistungen', 'arzt', 'kompliziert', 'luecke', 'behandlungen'];
 
@@ -14,7 +14,6 @@ const extraDefs = [
   { key: 'reiseimpfungen', emoji: "✈️" },
   { key: 'gesundheitskurse', emoji: "🧘" },
   { key: 'bonusantrag', emoji: "📅" },
-  { key: 'umwelt', emoji: "🌿" },
 ];
 
 const switchStepIcons = [Clock, ArrowRight, Shield];
