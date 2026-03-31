@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Your <highlight>€3,000 Health Budget</highlight>. Effectively for €0.",
-    "subtitle": "Why pay for treatments yourself when the system can cover them? With SDK supplementary insurance + the IKK Classic bonus program, you get up to €3,000 for Heilpraktiker, glasses, preventive care and more — and effectively pay nothing thanks to the bonus. No waiting periods. No health check. Start right away.",
+    "subtitle": "Why pay for treatments yourself when the system can cover them? With SDK supplementary insurance + the IKK Classic bonus program, you get up to €3,000 for Heilpraktiker, glasses, preventive care and more — and effectively pay nothing thanks to the bonus. No waiting periods. Start right away.",
     "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
     "badgeNoWait": "Guaranteed no waiting period",
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
@@ -377,5 +377,50 @@
   },
   "stickyButton": {
     "ctaCalculate": "Calculate your plan"
+  },
+
+  "ikkServices": {
+    "badge": "Free IKK Extras",
+    "title": "Telemedicine & Specialists — free for you",
+    "subtitle": "As an IKK Classic member, you get two powerful digital services for free. No extra cost, no paperwork.",
+    "teleclinic": {
+      "title": "TeleClinic",
+      "badge": "24/7 Online Doctor",
+      "desc": "Reach doctors from 60+ specialties around the clock via the app — by video, no waiting room.",
+      "feature1": { "title": "Available 24/7", "desc": "Doctor consultation within 30 minutes, even at night and on weekends" },
+      "feature2": { "title": "60+ specialties", "desc": "From general medicine to dermatology — almost every concern is covered" },
+      "feature3": { "title": "Skin Checker", "desc": "Photo diagnosis for skin changes within 24 hours" },
+      "feature4": { "title": "E-prescription & sick note", "desc": "Electronic prescriptions and sick notes directly to your phone" },
+      "feature5": { "title": "Premium status", "desc": "As an IKK member, you enjoy priority treatment in the app" },
+      "priceTag": "Free for IKK members",
+      "priceNote": "Simply download the TeleClinic app and register with your IKK insurance number"
+    },
+    "betterdoc": {
+      "title": "BetterDoc",
+      "badge": "Specialist search & second opinion",
+      "desc": "Need a specialist or unsure about a surgery? BetterDoc finds the best doctor for your case.",
+      "feature1": { "title": "Independent doctor search", "desc": "BetterDoc researches the optimally qualified specialist for your diagnosis" },
+      "feature2": { "title": "Second opinion before surgery", "desc": "Especially for back, knee, and hip — 85% of back surgeries could be avoided" },
+      "feature3": { "title": "Quality-assured", "desc": "Doctors are selected based on medical data and experience values" },
+      "feature4": { "title": "Appointment service", "desc": "BetterDoc can arrange the appointment with the specialist for you" },
+      "priceTag": "Free & non-binding",
+      "priceNote": "Hotline: 0800 444 6 999 (Mon–Fri, 9am–5pm)"
+    },
+    "bottomCta": {
+      "title": "Everything included — no extra cost",
+      "desc": "TeleClinic and BetterDoc are an integral part of your IKK Classic membership. No surcharge, no waiting — just use them."
+    }
+  },
+
+  "umwelt": {
+    "badge": "Healio for the environment",
+    "title": "10% for the environment",
+    "subtitle": "Health starts in a healthy environment — by switching through Healio, you actively support environmental protection.",
+    "headline": "for environmental organizations",
+    "desc": "Healio donates 10% of its revenue to environmental organizations. Not because we have to, but because we believe: those who promote health must also protect the environment.",
+    "pillar1": { "title": "Nature conservation", "desc": "Supporting projects to preserve natural habitats" },
+    "pillar2": { "title": "Clean water", "desc": "Promoting initiatives for clean waters and drinking water" },
+    "pillar3": { "title": "Healthy future", "desc": "Investing in a world where health and nature belong together" },
+    "note": "Donations go directly to selected, certified environmental organizations. Healio acts out of its own conviction — no extra cost for you."
   }
 }

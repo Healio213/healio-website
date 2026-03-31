@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Dein <highlight>3.000 Euro Gesundheits-Budget</highlight>. Effektiv für 0 Euro.",
-    "subtitle": "Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 3.000 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Keine Gesundheitsprüfung. Sofort loslegen.",
+    "subtitle": "Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 3.000 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Sofort loslegen.",
     "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
     "badgeNoWait": "Garantiert ohne Wartezeit",
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
@@ -377,5 +377,50 @@
   },
   "stickyButton": {
     "ctaCalculate": "Tarif berechnen"
+  },
+
+  "ikkServices": {
+    "badge": "Kostenlose IKK-Extras",
+    "title": "Telemedizin & Spezialisten — kostenlos für dich",
+    "subtitle": "Als IKK-Classic-Mitglied bekommst du zwei starke Digital-Services gratis dazu. Kein Aufpreis, kein Papierkram.",
+    "teleclinic": {
+      "title": "TeleClinic",
+      "badge": "24/7 Online-Arzt",
+      "desc": "Per App erreichst du rund um die Uhr Fachärzte aus über 60 Bereichen — per Video, ohne Wartezimmer.",
+      "feature1": { "title": "24/7 verfügbar", "desc": "Arztgespräch innerhalb von 30 Minuten, auch nachts und am Wochenende" },
+      "feature2": { "title": "60+ Fachrichtungen", "desc": "Von Allgemeinmedizin bis Dermatologie — fast jedes Anliegen wird abgedeckt" },
+      "feature3": { "title": "Skin Checker", "desc": "Foto-Diagnose für Hautveränderungen innerhalb von 24 Stunden" },
+      "feature4": { "title": "E-Rezept & eAU", "desc": "Elektronische Rezepte und Krankschreibungen direkt aufs Handy" },
+      "feature5": { "title": "Premium-Status", "desc": "Als IKK-Mitglied genießt du bevorzugte Behandlung in der App" },
+      "priceTag": "Kostenlos für IKK-Mitglieder",
+      "priceNote": "Einfach TeleClinic-App herunterladen und mit IKK-Versichertennummer registrieren"
+    },
+    "betterdoc": {
+      "title": "BetterDoc",
+      "badge": "Spezialistensuche & Zweitmeinung",
+      "desc": "Du brauchst einen Spezialisten oder bist unsicher vor einer OP? BetterDoc findet den besten Arzt für dein Anliegen.",
+      "feature1": { "title": "Unabhängige Arztsuche", "desc": "BetterDoc recherchiert den optimal qualifizierten Spezialisten für deine Diagnose" },
+      "feature2": { "title": "Zweitmeinung vor OPs", "desc": "Besonders bei Rücken, Knie und Hüfte — 85 % der Rücken-OPs wären vermeidbar" },
+      "feature3": { "title": "Qualitätsgesichert", "desc": "Ärzte werden anhand medizinischer Daten und Erfahrungswerte ausgewählt" },
+      "feature4": { "title": "Terminservice", "desc": "BetterDoc übernimmt auf Wunsch die Terminvereinbarung beim Spezialisten" },
+      "priceTag": "Kostenlos & unverbindlich",
+      "priceNote": "Hotline: 0800 444 6 999 (Mo–Fr, 9–17 Uhr)"
+    },
+    "bottomCta": {
+      "title": "Alles inklusive — ohne Zusatzkosten",
+      "desc": "TeleClinic und BetterDoc sind fester Bestandteil deiner IKK-Classic-Mitgliedschaft. Kein Aufpreis, keine Wartezeit — einfach nutzen."
+    }
+  },
+
+  "umwelt": {
+    "badge": "Healio für die Umwelt",
+    "title": "10 % für die Umwelt",
+    "subtitle": "Gesundheit beginnt in einer intakten Umwelt — mit deinem Wechsel über Healio unterstützt du aktiv den Umweltschutz.",
+    "headline": "für Umweltverbände",
+    "desc": "Healio spendet 10 % seiner Einnahmen an Umweltverbände. Nicht weil wir müssen, sondern weil wir überzeugt sind: Wer Gesundheit fördert, muss auch die Umwelt schützen.",
+    "pillar1": { "title": "Naturschutz", "desc": "Unterstützung von Projekten zum Erhalt natürlicher Lebensräume" },
+    "pillar2": { "title": "Sauberes Wasser", "desc": "Förderung von Initiativen für saubere Gewässer und Trinkwasser" },
+    "pillar3": { "title": "Gesunde Zukunft", "desc": "Investition in eine Welt, in der Gesundheit und Natur zusammengehören" },
+    "note": "Die Spenden gehen direkt an ausgewählte, zertifizierte Umweltorganisationen. Healio handelt aus eigener Überzeugung — ohne Aufpreis für dich."
   }
 }

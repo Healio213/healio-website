@@ -10,6 +10,8 @@ import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
+import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
+import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown, Star } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -151,6 +153,8 @@ const StationaerPage = () => {
 
         <FadeInUp><AmbulantBonusCalculator /></FadeInUp>
         <FadeInUp><AmbulantIKKWechsel /></FadeInUp>
+        <FadeInUp><AmbulantIKKServices /></FadeInUp>
+        <FadeInUp><AmbulantUmwelt /></FadeInUp>
 
         {/* Testimonials */}
         <FadeInUp>

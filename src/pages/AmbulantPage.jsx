@@ -11,6 +11,8 @@ import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBei
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
+import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
+import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
 import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimonials';
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
@@ -72,6 +74,16 @@ const AmbulantPage = () => {
         {/* IKK Classic Wechsel — Angst nehmen */}
         <FadeInUp>
           <AmbulantIKKWechsel />
+        </FadeInUp>
+
+        {/* TeleClinic + BetterDoc */}
+        <FadeInUp>
+          <AmbulantIKKServices />
+        </FadeInUp>
+
+        {/* 10 % für die Umwelt */}
+        <FadeInUp>
+          <AmbulantUmwelt />
         </FadeInUp>
 
         {/* Testimonials */}
