@@ -6,35 +6,32 @@ import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
-// IKK Classic Bonustabelle (mit Zusatzversicherung = 3x Multiplikator)
-// Spalte 1: 5€ → 15€ (Vorsorgeuntersuchungen)
-// Spalte 2: 10€ → 30€ (Vorsorgeuntersuchungen)
-// Spalte 3: 25€ → 75€ (Regelmäßige Aktivitäten + Statuswerte)
+// IKK Classic Bonustabelle (mit Zusatzversicherung)
 const ACTIVITY_DEFS = [
-  // Vorsorgeuntersuchungen 5€ | 15€*
-  { id: 'impfung', perUnit: 15, max: 8 },
-  { id: 'zahn', perUnit: 15, max: 2 },
+  // Vorsorgeuntersuchungen
+  { id: 'impfung', perUnit: 30, max: 8 },
+  { id: 'zahn', perUnit: 30, max: 2 },
   { id: 'zahnFrueh', amount: 15 },
   { id: 'hautkrebs', amount: 15 },
-  { id: 'ultraschall', amount: 15 },
-  { id: 'mammographie', amount: 15 },
-  { id: 'mutterschaft', amount: 15 },
-  { id: 'kind', perUnit: 15, max: 11 },
-  { id: 'jugend', perUnit: 15, max: 2 },
-  { id: 'amblyopie', amount: 15 },
-  // Vorsorgeuntersuchungen 10€ | 30€*
-  { id: 'checkup', amount: 30 },
-  { id: 'krebs', amount: 30 },
+  { id: 'ultraschall', amount: 30 },
+  { id: 'mammographie', amount: 30 },
+  { id: 'mutterschaft', amount: 30 },
+  { id: 'kind', perUnit: 30, max: 11 },
+  { id: 'jugend', perUnit: 30, max: 2 },
+  { id: 'amblyopie', amount: 30 },
+  // Vorsorgeuntersuchungen (höhere Stufe)
+  { id: 'checkup', amount: 75 },
+  { id: 'krebs', amount: 75 },
   { id: 'darmkrebs', amount: 30 },
-  { id: 'outdoorSport', amount: 30 },
-  { id: 'rueckbildung', amount: 30 },
-  // Regelmäßige Aktivitäten 25€ | 75€*
-  { id: 'kurs', perUnit: 75, max: 5, tip: true },
+  { id: 'outdoorSport', amount: 75 },
+  { id: 'rueckbildung', amount: 75 },
+  // Regelmäßige Aktivitäten
+  { id: 'kurs', amount: 75, tip: true },
   { id: 'fitness', amount: 75, tip: true },
   { id: 'sport', amount: 75 },
   { id: 'abzeichen', amount: 75 },
   { id: 'leistungsabzeichen', amount: 75 },
-  // Statuswerte 25€ | 75€* (müssen mit regelmäßiger Aktivität kombiniert werden)
+  // Statuswerte
   { id: 'bmi', amount: 75 },
   { id: 'blutdruck', amount: 75 },
   // Zuschuss-Variante (Fitnessgeräte)
