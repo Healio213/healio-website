@@ -34,8 +34,6 @@ const ACTIVITY_DEFS = [
   // Statuswerte
   { id: 'bmi', amount: 75 },
   { id: 'blutdruck', amount: 75 },
-  // Zuschuss-Variante (Fitnessgeräte)
-  { id: 'fitnessGeraet', amount: 180, tip: true },
 ];
 
 const AmbulantBonusCalculator = () => {
@@ -258,13 +256,13 @@ const AmbulantBonusCalculator = () => {
               </div>
             </div>
 
-            {/* Hinweis: 3-facher Betrag */}
-            <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3 items-start">
-              <span className="text-xl flex-shrink-0 mt-0.5">✨</span>
+            {/* Apple Watch Hinweis */}
+            <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
+              <span className="text-xl flex-shrink-0 mt-0.5">⌚</span>
               <div>
-                <p className="text-sm font-bold text-emerald-900 mb-1">{t('bonusCalculator.multiplierNote')}</p>
-                <p className="text-sm text-emerald-800 leading-relaxed">
-                  {t('bonusCalculator.multiplierNoteDesc')}
+                <p className="text-sm font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
+                <p className="text-sm text-purple-800 leading-relaxed">
+                  {t('bonusCalculator.appleWatchNoteDesc')}
                 </p>
               </div>
             </div>

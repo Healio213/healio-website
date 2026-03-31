@@ -187,15 +187,14 @@
       "abzeichen": { "title": "German sports badge", "desc": "1x per calendar year" },
       "leistungsabzeichen": { "title": "Sports federation badge", "desc": "German sports federation" },
       "bmi": { "title": "BMI in normal range", "desc": "Status value — combine with activity" },
-      "blutdruck": { "title": "Normal blood pressure", "desc": "Status value — combine with activity" },
-      "fitnessGeraet": { "title": "Fitness device (e.g. Apple Watch)", "desc": "Subsidy option: up to €180 for fitness watch/tracker" }
+      "blutdruck": { "title": "Normal blood pressure", "desc": "Status value — combine with activity" }
     },
     "tip": "Tip",
     "max": "max.",
     "trustNote": "Simple & trust-based",
     "trustNoteDesc": "IKK Classic trusts its members. Proof is only requested in rare individual cases and on a spot-check basis. You don't need to meticulously document every activity — just report it and collect your bonus.",
-    "multiplierNote": "3x amount with supplementary insurance",
-    "multiplierNoteDesc": "All displayed amounts already include the 3x multiplier, which applies when you have a private supplementary insurance (e.g. via SDK). Without supplementary insurance, the bonus would be only one third.",
+    "appleWatchNote": "Bonus for Apple Watch & fitness devices",
+    "appleWatchNoteDesc": "You can also use your IKK bonus towards an Apple Watch, fitness tracker, or other fitness devices. Simply submit it through the bonus program and collect the subsidy.",
     "resetSelection": "Reset selection",
     "yourBonus": "Your potential bonus:",
     "tariffInfo": "Plan Ambulant 100 (AP1) — 100% reimbursement",

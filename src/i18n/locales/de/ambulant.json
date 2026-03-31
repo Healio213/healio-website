@@ -187,15 +187,14 @@
       "abzeichen": { "title": "Deutsches Sportabzeichen", "desc": "1x pro Kalenderjahr" },
       "leistungsabzeichen": { "title": "Leistungsabzeichen Sportverband", "desc": "Eines deutschen Sportverbandes" },
       "bmi": { "title": "BMI im Normalbereich", "desc": "Statuswert — mit Aktivität kombinieren" },
-      "blutdruck": { "title": "Blutdruck normal", "desc": "Statuswert — mit Aktivität kombinieren" },
-      "fitnessGeraet": { "title": "Fitnessgerät (z. B. Apple Watch)", "desc": "Zuschuss-Variante: bis 180 € für Fitnessuhr/Tracker" }
+      "blutdruck": { "title": "Blutdruck normal", "desc": "Statuswert — mit Aktivität kombinieren" }
     },
     "tip": "Tipp",
     "max": "max.",
     "trustNote": "Unkompliziert & auf Vertrauensbasis",
     "trustNoteDesc": "Die IKK Classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Du musst also nicht jede Aktivität aufwändig belegen — einfach angeben und Bonus kassieren.",
-    "multiplierNote": "3-facher Betrag mit Zusatzversicherung",
-    "multiplierNoteDesc": "Alle angezeigten Beträge gelten bereits mit dem 3-fachen Multiplikator, der greift, wenn du eine private Zusatzversicherung (z. B. über die SDK) nachweist. Ohne Zusatzversicherung wäre der Bonus nur ein Drittel.",
+    "appleWatchNote": "Bonus für Apple Watch & Fitnessgeräte",
+    "appleWatchNoteDesc": "Du kannst deinen IKK-Bonus auch für eine Apple Watch, einen Fitnesstracker oder andere Fitnessgeräte einsetzen. Einfach beim Bonusprogramm einreichen und den Zuschuss kassieren.",
     "resetSelection": "Auswahl zurücksetzen",
     "yourBonus": "Dein möglicher Bonus:",
     "tariffInfo": "Tarif Ambulant 100 (AP1) — 100 % Erstattung",
