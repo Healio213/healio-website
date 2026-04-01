@@ -141,9 +141,12 @@ const StationaerPage = () => {
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
             <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK Classic</p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-5xl mx-auto">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
               <img src="/siegel/klinik-siegel.png" alt={t('siegel.alt')} className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/ikk-siegel.png" alt="IKK Classic Gütesiegel — BILD Höchste Empfehlung, Focus Money Beste Wahltarif-Kombination, Handelsblatt Exzellent, Digital Champion" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-16 md:h-20 w-auto" loading="lazy" />
             </div>
           </div>
         </section>
