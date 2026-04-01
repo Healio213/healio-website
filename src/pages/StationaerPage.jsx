@@ -136,14 +136,15 @@ const StationaerPage = () => {
           </div>
         </section>
 
-        {/* Qualitätssiegel */}
+        {/* Qualitätssiegel: SDK + IKK Classic */}
         <FadeInUp>
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
-            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">{t('siegel.title')}</p>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-xl mx-auto px-4">
-              <img src="/siegel/klinik-siegel.png" alt={t('siegel.alt')} className="w-full h-auto" loading="lazy" />
-            </motion.div>
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK Classic</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-5xl mx-auto">
+              <img src="/siegel/klinik-siegel.png" alt={t('siegel.alt')} className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/ikk-siegel.png" alt="IKK Classic Gütesiegel — BILD Höchste Empfehlung, Focus Money Beste Wahltarif-Kombination, Handelsblatt Exzellent, Digital Champion" className="h-16 md:h-20 w-auto" loading="lazy" />
+            </div>
           </div>
         </section>
         </FadeInUp>
