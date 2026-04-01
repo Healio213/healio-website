@@ -29,6 +29,7 @@ const TerminvereinbarungPage = React.lazy(() => import('@/pages/Terminvereinbaru
 const BlogPage = React.lazy(() => import('@/pages/BlogPage'));
 const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
+const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -112,6 +113,10 @@ function App() {
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}
             <Route path="/tiktok" element={<TikTokPage />} />
             <Route path="/en/tiktok" element={<TikTokPage />} />
+
+            {/* Instagram Bio-Link — standalone, ohne Layout/Header/Footer */}
+            <Route path="/instagram" element={<InstagramPage />} />
+            <Route path="/en/instagram" element={<InstagramPage />} />
 
             <Route path="/potenzialanalyse" element={<PotenzialanalysePage />} />
             <Route path="/en/potential-analysis" element={<PotenzialanalysePage />} />
