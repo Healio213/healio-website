@@ -147,6 +147,9 @@ const StationaerPage = () => {
               <img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern — Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/senioren-test.webp" alt="Krankenkassentest für Senioren — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
             </div>
           </div>
         </section>
