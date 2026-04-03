@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "vite --host :: --port 3000",
-    "build": "node tools/generate-llms.js || true && vite build",
+    "build": "node tools/generate-llms.js || true && vite build && node scripts/generate-seo-pages.mjs",
     "preview": "vite preview --host :: --port 3000",
     "lint": "eslint . --quiet"
   },
