@@ -178,6 +178,7 @@
       "kind": { "title": "U-Untersuchungen (U1–U11)", "desc": "30 € je Untersuchung", "unit": "Untersuchung(en)" },
       "jugend": { "title": "Jugenduntersuchungen J1–J2", "desc": "30 € je Untersuchung", "unit": "Untersuchung(en)" },
       "amblyopie": { "title": "Amblyopiescreening Kinder", "desc": "Früherkennungsuntersuchung" },
+      "lungenkrebs": { "title": "Lungenkrebs-Früherkennung", "desc": "Neu ab 04/2026 · 1× pro Jahr" },
       "checkup": { "title": "Gesundheits-Check-up", "desc": "1x pro Kalenderjahr" },
       "krebs": { "title": "Krebsfrüherkennung", "desc": "1x pro Kalenderjahr" },
       "darmkrebs": { "title": "Darmkrebsvorsorge", "desc": "1x pro Kalenderjahr" },

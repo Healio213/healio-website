@@ -21,6 +21,7 @@ const ACTIVITY_DEFS = [
   { id: 'kind', perUnit: 30, max: 11 },
   { id: 'jugend', perUnit: 30, max: 2 },
   { id: 'amblyopie', amount: 30 },
+  { id: 'lungenkrebs', amount: 30 },
   // Vorsorgeuntersuchungen
   { id: 'checkup', amount: 30 },
   { id: 'krebs', amount: 30 },

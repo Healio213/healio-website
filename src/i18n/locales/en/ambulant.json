@@ -176,6 +176,7 @@
       "kind": { "title": "Child checkups (U1–U11)", "desc": "€30 per checkup", "unit": "checkup(s)" },
       "jugend": { "title": "Youth checkups J1–J2", "desc": "€30 per checkup", "unit": "checkup(s)" },
       "amblyopie": { "title": "Amblyopia screening (children)", "desc": "Early detection exam" },
+      "lungenkrebs": { "title": "Lung cancer screening", "desc": "New from 04/2026 · 1× per year" },
       "checkup": { "title": "Health check-up", "desc": "1x per calendar year" },
       "krebs": { "title": "Cancer screening", "desc": "1x per calendar year" },
       "darmkrebs": { "title": "Colon cancer screening", "desc": "1x per calendar year" },
