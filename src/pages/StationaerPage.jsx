@@ -51,7 +51,7 @@ const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
 
-  const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV";
+  // Hero verlinkt auf /ambulant — SDK-Weiterleitung passiert dort
   const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016";
 
   const schemaMarkup = createServiceSchema();
@@ -136,20 +136,14 @@ const StationaerPage = () => {
           </div>
         </section>
 
-        {/* Qualitätssiegel: SDK + IKK Classic */}
+        {/* Qualitätssiegel: SDK + IKK classic */}
         <FadeInUp>
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
-            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK Classic</p>
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unser Partner: SDK Süddeutsche Krankenversicherung</p>
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
               <img src="/siegel/klinik-siegel.png" alt={t('siegel.alt')} className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern — Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-
+              {/* IKK classic Siegel — Erlaubnis ausstehend, siehe _IKK_SIEGEL_BACKUP.txt */}
             </div>
           </div>
         </section>

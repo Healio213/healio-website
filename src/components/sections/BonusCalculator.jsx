@@ -6,22 +6,22 @@ import { Gift, ArrowRightLeft } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 
 const ACTIVITIES = [
-  { id: 'impfung', title: 'Schutzimpfung', desc: '(bis zu 8x) - 30€ je Impfung', amount: 240 },
-  { id: 'zahn', title: 'Zahnvorsorge', desc: '(bis 2x) - 30€ je Besuch', amount: 60 },
-  { id: 'checkup', title: 'Gesundheits-Check-up', desc: '1x pro Jahr', amount: 75 },
-  { id: 'krebs', title: 'Krebsvorsorge', desc: '1x pro Jahr', amount: 75 },
-  { id: 'ultraschall', title: 'Ultraschallscreening', desc: '1x pro Jahr', amount: 75 },
-  { id: 'kurs', title: 'IKK-Gesundheitskurs', desc: 'Mehrfach möglich', amount: 75 },
+  { id: 'impfung', title: 'Schutzimpfung', desc: '(bis zu 8x) – 15 € je Impfung', amount: 120 },
+  { id: 'zahn', title: 'Zahnvorsorge', desc: '(bis 2x) – 15 € je Besuch', amount: 30 },
+  { id: 'checkup', title: 'Gesundheits-Check-up', desc: '1x pro Kalenderjahr', amount: 30 },
+  { id: 'krebs', title: 'Krebsfrüherkennung', desc: '1x pro Kalenderjahr', amount: 30 },
+  { id: 'ultraschall', title: 'Ultraschallscreening', desc: '1x pro Kalenderjahr', amount: 30 },
+  { id: 'kurs', title: 'IKK Gesundheitskurs', desc: 'Mehrfach möglich', amount: 75 },
   { id: 'sport', title: 'Sport Verein/Studio', desc: 'Pro Mitgliedschaft', amount: 75 },
   { id: 'abzeichen', title: 'Sportabzeichen', desc: 'Jedes Abzeichen', amount: 75 },
-  { id: 'bmi', title: 'BMI im Normalbereich', desc: '1x pro Jahr', amount: 75 },
-  { id: 'blutdruck', title: 'Blutdruck normal', desc: '1x pro Jahr', amount: 75 },
-  { id: 'zahnreinigung', title: 'Zahnreinigung', desc: '1x pro Jahr', amount: 40 },
+  { id: 'bmi', title: 'BMI im Normalbereich', desc: '1x pro Kalenderjahr', amount: 75 },
+  { id: 'blutdruck', title: 'Blutdruck normal', desc: '1x pro Kalenderjahr', amount: 75 },
+  { id: 'hautkrebs', title: 'Hautkrebsvorsorge', desc: '1x pro Kalenderjahr', amount: 30 },
   { id: 'kind', title: 'U-Untersuchungen Kind', desc: 'je Untersuchung', amount: 30 },
 ];
 
 const BonusCalculator = () => {
-  const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV";
+  // "Tarif berechnen" verlinkt auf /ambulant — SDK-Weiterleitung passiert dort
   const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016";
 
   const [selectedActivities, setSelectedActivities] = useState({});
@@ -52,7 +52,7 @@ const BonusCalculator = () => {
             Dein persönlicher <span className="text-[#25c990]">Bonus-Rechner</span>
           </h2>
           <p className="text-lg text-[#bec7c9] max-w-3xl mx-auto font-medium">
-            So funktioniert der IKK Classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!
+            So funktioniert der IKK classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!
           </p>
         </div>
 

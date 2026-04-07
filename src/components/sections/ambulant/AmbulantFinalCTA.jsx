@@ -2,6 +2,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calculator, PhoneCall, CheckCircle } from 'lucide-react';
@@ -9,6 +11,8 @@ import { Calculator, PhoneCall, CheckCircle } from 'lucide-react';
 const AmbulantFinalCTA = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
+  const referrer = useReferrer();
+  const sdkUrl = buildSdkUrl({ ref: referrer });
 
   return (
     <section className="py-24 bg-healio-dark text-white relative overflow-hidden">
@@ -64,9 +68,10 @@ const AmbulantFinalCTA = () => {
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
           <a
-            href="https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV"
+            href={sdkUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackSdkClick('ambulant-final-cta', referrer)}
             className="inline-flex items-center justify-center bg-healio-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <Calculator className="w-5 h-5 mr-2" />

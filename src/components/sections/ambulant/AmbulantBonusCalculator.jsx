@@ -1,27 +1,29 @@
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
-// IKK Classic Bonustabelle (mit Zusatzversicherung)
+// IKK classic Bonustabelle (mit Zusatzversicherung)
 const ACTIVITY_DEFS = [
   // Vorsorgeuntersuchungen
-  { id: 'impfung', perUnit: 30, max: 8 },
-  { id: 'zahn', perUnit: 30, max: 2 },
+  { id: 'impfung', perUnit: 15, max: 8 },
+  { id: 'zahn', perUnit: 15, max: 2 },
   { id: 'zahnFrueh', amount: 15 },
-  { id: 'hautkrebs', amount: 15 },
+  { id: 'hautkrebs', amount: 30 },
   { id: 'ultraschall', amount: 30 },
   { id: 'mammographie', amount: 30 },
   { id: 'mutterschaft', amount: 30 },
   { id: 'kind', perUnit: 30, max: 11 },
   { id: 'jugend', perUnit: 30, max: 2 },
   { id: 'amblyopie', amount: 30 },
-  // Vorsorgeuntersuchungen (höhere Stufe)
-  { id: 'checkup', amount: 75 },
-  { id: 'krebs', amount: 75 },
+  // Vorsorgeuntersuchungen
+  { id: 'checkup', amount: 30 },
+  { id: 'krebs', amount: 30 },
   { id: 'darmkrebs', amount: 30 },
   { id: 'outdoorSport', amount: 75 },
   { id: 'rueckbildung', amount: 75 },
@@ -38,8 +40,9 @@ const ACTIVITY_DEFS = [
 
 const AmbulantBonusCalculator = () => {
   const { t } = useTranslation('ambulant');
-  const calculatorUrl = "https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV";
-  const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016";
+  const referrer = useReferrer();
+  const calculatorUrl = buildSdkUrl({ ref: referrer });
+  const ikkLink = IKK_LINK;
 
   const ACTIVITIES = useMemo(() => ACTIVITY_DEFS.map(def => ({
     ...def,
@@ -365,6 +368,7 @@ const AmbulantBonusCalculator = () => {
                     href={calculatorUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackSdkClick('bonus-calculator', referrer)}
                     className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
                   >
                     <Gift className="w-5 h-5 mr-2" />

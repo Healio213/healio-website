@@ -2,6 +2,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Calculator, Gift, CheckCircle, Euro } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,8 +11,8 @@ import { Link } from 'react-router-dom';
 const AmbulantHero = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
-  const bgImageUrl = "https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/1974bac73b0ea234e889ffe0cb5e3fad.png";
-
+  const referrer = useReferrer();
+  const sdkUrl = buildSdkUrl({ ref: referrer });
   // Parse title: replace <highlight>...</highlight> with span
   const rawTitle = t('hero.title');
   const titleParts = rawTitle.split(/<highlight>(.*?)<\/highlight>/);
@@ -18,12 +20,16 @@ const AmbulantHero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" aria-labelledby="hero-heading">
       <div className="absolute inset-0 z-0">
-        <img
-          src={bgImageUrl}
-          alt={t('hero.heroImageAlt')}
-          className="w-full h-full object-cover absolute inset-0"
-        />
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        <picture>
+          <source srcSet="/images/hero-ambulant.webp" type="image/webp" />
+          <img
+            src="/images/hero-ambulant.png"
+            alt={t('hero.heroImageAlt')}
+            className="w-full h-full object-cover object-top absolute inset-0"
+            fetchpriority="high"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 z-10" />
       </div>
 
       <div className="container mx-auto px-4 relative z-20 pt-20 pb-16">
@@ -78,16 +84,17 @@ const AmbulantHero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href="https://insurances-online.levelnine.biz/?mandant=sdk&tarifftypes=Ambulant,Station%C3%A4r&agentId1=901334&agentId2=&insurers=36&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9&remarks=IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==&defaultContact=false&employeeInsurance=NOT_BKV"
+              href={sdkUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackSdkClick('ambulant-hero', referrer)}
               className="inline-flex items-center justify-center bg-healio-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <Calculator className="w-5 h-5 mr-2" />
               {t('hero.ctaCalculate')}
             </a>
             <a
-              href="https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016"
+              href={IKK_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-healio-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
