@@ -99,7 +99,7 @@ const Concept = () => {
                         <p className="mt-1">Gesundheitsfragen digital beantworten, Vertrag papierlos abschließen, Police per E‑Mail. Fertig.</p>
                       </div>
                       <div>
-                        <h4 className="font-bold text-healio-text">Schritt 3: Optional: Zur IKK Classic wechseln ( Bonus aktivieren )</h4>
+                        <h4 className="font-bold text-healio-text">Schritt 3: Optional: Zur IKK classic wechseln ( Bonus aktivieren )</h4>
                         <p className="mt-1">Wenn du den maximalen Vorteil willst, nutzt du den IKK‑Bonus. Der Wechsel ist einfach geregelt:</p>
                         <ul className="list-disc pl-5 mt-1 space-y-1">
                           <li>Kündigungsfrist in der GKV: zwei volle Kalendermonate</li>

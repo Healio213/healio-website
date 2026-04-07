@@ -8,14 +8,18 @@ const Hero = () => {
     <section className="relative min-h-screen flex flex-col overflow-hidden">
       {/* Hero Bild – Fullscreen */}
       <div className="relative flex-1 flex items-center justify-center">
-        <motion.img
-          src="/hero-b2b.png"
-          alt="HEALIO – Gesundheit fördern. Mitarbeiter binden. Steuern sparen. Unabhängige Experten für betriebliche Vorsorge und Zusatzversicherungen. Speicherstadt Hamburg."
-          className="w-full h-screen object-cover object-center"
-          initial={{ opacity: 0, scale: 1.02 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        />
+        <picture>
+          <source srcSet="/hero-b2b.webp" type="image/webp" />
+          <motion.img
+            src="/hero-b2b.jpg"
+            alt="HEALIO – Gesundheit fördern. Mitarbeiter binden. Steuern sparen. Unabhängige Experten für betriebliche Vorsorge und Zusatzversicherungen. Speicherstadt Hamburg."
+            className="w-full h-screen object-cover object-center"
+            initial={{ opacity: 0, scale: 1.02 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            fetchpriority="high"
+          />
+        </picture>
 
         {/* Dezenter Gradient unten für Übergang */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1a2332] to-transparent z-10" />

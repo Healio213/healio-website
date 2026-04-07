@@ -1,4 +1,26 @@
 {
+  "headers": [
+    {
+      "source": "/hero-bg(-mobile)?\\.(webp|jpg)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "healio.de" }],
+      "destination": "https://www.healio.de/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/((?!assets|favicon|og-image|sitemap|robots).*)", "destination": "/index.html" }
   ]

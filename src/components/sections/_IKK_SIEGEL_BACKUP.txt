@@ -1,0 +1,30 @@
+/* =============================================================
+   IKK CLASSIC SIEGEL — BACKUP
+   Entfernt am 01.04.2026 — Erlaubnis von IKK classic ausstehend.
+   Sobald Genehmigung vorliegt, diese Zeilen wieder einsetzen.
+   ============================================================= */
+
+/* --- Für AmbulantPage.jsx, StationaerPage.jsx (h-16 md:h-20) --- */
+<img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-16 md:h-20 w-auto" loading="lazy" />
+<img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
+<img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
+<img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-16 md:h-20 w-auto" loading="lazy" />
+<img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern — Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+<img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+
+/* --- Für ZahnPage.jsx (h-14 md:h-16) --- */
+<img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-14 md:h-16 w-auto" loading="lazy" />
+<img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-14 md:h-16 w-auto" loading="lazy" />
+<img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-14 md:h-16 w-auto" loading="lazy" />
+<img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-14 md:h-16 w-auto" loading="lazy" />
+<img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern — Note 1,7 Gut" className="h-14 md:h-16 w-auto" loading="lazy" />
+<img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-14 md:h-16 w-auto" loading="lazy" />
+
+/* --- Siegel-Dateien im Ordner public/siegel/ikk/ --- */
+beratungsqualitaet.webp
+chip-bester-online.webp
+digital-champion.webp
+euro-top-bonus.webp
+familien-test.webp
+schwangere-test.webp
+senioren-test.webp

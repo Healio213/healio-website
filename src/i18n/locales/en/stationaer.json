@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "<highlight>Private patient</highlight> in hospital. Effectively for €0.",
-    "subtitle": "HospitalUpgrade from €11 per month. Combined with the IKK Classic bonus, hospital supplementary insurance pays for itself entirely. Franke & Bornberg: FFF+ excellent.",
-    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK Classic bonus (over €300 per year, tax-free) fully covers the premiums. Private room, chief physician, free choice of hospital — at no additional cost.",
+    "subtitle": "HospitalUpgrade from €11 per month. Combined with the IKK classic bonus, hospital supplementary insurance pays for itself entirely. Franke & Bornberg: FFF+ excellent.",
+    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK classic bonus (over €300 per year, tax-free) fully covers the premiums. Private room, chief physician, free choice of hospital — at no additional cost.",
     "ctaCalculate": "Calculate your plan",
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Modern hospital private room"
@@ -33,7 +33,7 @@
     "vergleichTitle": "HospitalUpgrade Top vs. Plus",
     "plus": { "name": "Plus", "zimmer": "Semi-private room", "tagegeld": "Daily allowance up to €80", "preis": "from €8.98/month" },
     "top": { "name": "Top", "zimmer": "Private room", "tagegeld": "Daily allowance up to €100", "preis": "from €11.22/month" },
-    "ikkComboTitle": "Effectively €0 with IKK Classic Bonus",
+    "ikkComboTitle": "Effectively €0 with IKK classic Bonus",
     "ikkComboText": "The IKK bonus rewards health-conscious behavior with <strong>over €300 per year (tax-free)</strong>. At a monthly premium of €11.22 (= €135/year), the bonus more than doubles the coverage of costs. Additionally, the IKK health account reimburses up to €600 per year for preventive care and health services.",
     "exampleBlinddarm": "Example: Appendectomy (4 days)",
     "exampleLeistenbruch": "Example: Outpatient hernia surgery",
@@ -91,13 +91,13 @@
   },
   "faq": {
     "title": "Frequently Asked Questions About Hospital Supplementary Insurance",
-    "subtitle": "Everything you need to know about HospitalUpgrade and the IKK Classic bonus.",
+    "subtitle": "Everything you need to know about HospitalUpgrade and the IKK classic bonus.",
     "items": [
-      { "q": "How much does HospitalUpgrade cost per month?", "a": "HospitalUpgrade Top (private room) starts at €11.22 per month without aging provisions. With aging provisions from €33.33. HospitalUpgrade Plus (semi-private room) starts at €8.98. Combined with the IKK Classic bonus (over €300 per year, tax-free), the insurance effectively pays for itself entirely." },
+      { "q": "How much does HospitalUpgrade cost per month?", "a": "HospitalUpgrade Top (private room) starts at €11.22 per month without aging provisions. With aging provisions from €33.33. HospitalUpgrade Plus (semi-private room) starts at €8.98. Combined with the IKK classic bonus (over €300 per year, tax-free), the insurance effectively pays for itself entirely." },
       { "q": "What is the difference between HospitalUpgrade Plus and Top?", "a": "HospitalUpgrade Plus offers a semi-private room and substitute hospital daily allowance of up to €80 per day. HospitalUpgrade Top offers a private room, up to €100 daily allowance per day, and in the Top plan a family room for inpatient delivery (not limited to the cost of a semi-private room). Both plans include chief physician treatment, free choice of hospital and no limitation on the fee schedule." },
       { "q": "Are there waiting periods?", "a": "No. There is no general waiting period. Insurance coverage begins immediately from day 1 with entitlement to all insured benefits. The only exception: For deliveries, there is a waiting period of eight months." },
       { "q": "Are private physician services above the maximum rate also reimbursed?", "a": "Yes, this is a special feature of HospitalUpgrade. Reimbursement is not limited to the 3.5x rate of the physician fee schedule (GOA). Fees exceeding this are also reimbursed. This means: No out-of-pocket costs when choosing your physician." },
-      { "q": "How does HospitalUpgrade work together with the IKK Classic bonus?", "a": "The combination makes hospital supplementary insurance effectively free: You pay €11.22 per month (= €135 per year) for HospitalUpgrade Top. The IKK Classic bonus provides over €300 per year tax-free. Additionally, the IKK health account reimburses up to €600 per year. The bonus significantly exceeds the premiums, so you effectively pay €0 and still have private patient status in hospital." },
+      { "q": "How does HospitalUpgrade work together with the IKK classic bonus?", "a": "The combination makes hospital supplementary insurance effectively free: You pay €11.22 per month (= €135 per year) for HospitalUpgrade Top. The IKK classic bonus provides over €300 per year tax-free. Additionally, the IKK health account reimburses up to €600 per year. The bonus significantly exceeds the premiums, so you effectively pay €0 and still have private patient status in hospital." },
       { "q": "What happens during childbirth?", "a": "For inpatient delivery, HospitalUpgrade covers private physician services and accommodation. In the Top plan, you get a family room where you can spend the first days together with your partner and newborn. Costs are not limited to the level of a semi-private room." },
       { "q": "Do I get money if I forgo the private room?", "a": "Yes. If you forgo accommodation in a private or semi-private room or private physician treatment during a hospital stay, you receive a substitute hospital daily allowance: up to €100 per day in the Top plan and up to €80 per day in the Plus plan. For children and adolescents up to the age of 16, the daily allowance in the Top plan is up to €50." },
       { "q": "Is there an age limit?", "a": "No, there is no maximum or minimum entry age. Enrollment is possible at any age. The only requirement is membership in a statutory health insurance fund. Recipients of free medical care (e.g., police officers or soldiers) are excluded." }

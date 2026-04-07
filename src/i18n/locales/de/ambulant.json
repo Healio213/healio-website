@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Dein <highlight>3.000 Euro Gesundheits-Budget</highlight>. Effektiv für 0 Euro.",
-    "subtitle": "Warum Behandlungen selbst bezahlen, wenn das System sie übernehmen kann? Mit der SDK Zusatzversicherung + dem IKK Classic Bonusprogramm bekommst du bis zu 3.000 Euro für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst dank Bonus effektiv nichts dafür. Keine Wartezeiten. Sofort loslegen.",
+    "subtitle": "Warum selbst zahlen, wenn es auch anders geht? Bis zu 3.000 € für Heilpraktiker, Brille & Vorsorge — effektiv ab 0 €. Keine Wartezeiten.",
     "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
     "badgeNoWait": "Garantiert ohne Wartezeit",
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
@@ -10,7 +10,7 @@
     "heroImageAlt": "Gesunde Menschen in der Natur"
   },
   "trustBar": {
-    "ikkPartner": "IKK Classic Partner",
+    "ikkPartner": "IKK classic Partner",
     "digital": "100% digital",
     "noWait": "Keine Wartezeit",
     "independentBroker": "Unabhängiger Makler (§34d GewO)",
@@ -19,7 +19,7 @@
   "ticker": {
     "budget": "Bis zu 3.000 € Gesundheitsbudget",
     "sdk": "SDK – seit 1926 am Markt",
-    "ikk": "IKK Classic – 3 Mio. Versicherte",
+    "ikk": "IKK classic – 3 Mio. Versicherte",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
     "noWait": "Keine Wartezeit – sofort geschützt",
     "fast": "In nur 3 Minuten abgeschlossen",
@@ -38,13 +38,13 @@
       "desc": "Heilpraktiker, Osteopathie, TCM, Chiropraktik, Akupunktur",
       "budget": "Bis zu 1.000 € (alle 2 Jahre) | inkl. Hufelandverzeichnis",
       "details": {
-        "heilpraktikerbehandlungen": { "name": "Heilpraktikerbehandlungen", "info": "Bis zu 1.000 € alle 2 Jahre nach Hufelandverzeichnis" },
-        "chiropraktik": { "name": "Chiropraktik", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten" },
-        "osteopathie": { "name": "Osteopathie", "info": "Bis zu 160 €/Jahr über IKK classic (4 Sitzungen à 40 €) + Zusatzbudget" },
-        "akupunktur": { "name": "Akupunktur", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten" },
-        "tcm": { "name": "Traditionelle Chinesische Medizin (TCM)", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten" },
-        "naturheilkunde": { "name": "Naturheilkundliche Behandlungen durch Ärzte", "info": "Erstattung nach GOÄ bis zum 3,5-fachen Satz" },
-        "homoeopathie": { "name": "Homöopathie", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten" }
+        "heilpraktikerbehandlungen": { "name": "Heilpraktikerbehandlungen", "info": "Bis zu 1.000 € alle 2 Jahre nach Hufelandverzeichnis", "source": "sdk" },
+        "chiropraktik": { "name": "Chiropraktik", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
+        "osteopathie": { "name": "Osteopathie", "info": "Bis zu 160 €/Jahr (4 Sitzungen à 40 €) über IKK Gesundheitskonto + SDK Zusatzbudget", "source": "both" },
+        "akupunktur": { "name": "Akupunktur", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
+        "tcm": { "name": "Traditionelle Chinesische Medizin (TCM)", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
+        "naturheilkunde": { "name": "Naturheilkundliche Behandlungen durch Ärzte", "info": "Erstattung nach GOÄ bis zum 3,5-fachen Satz", "source": "sdk" },
+        "homoeopathie": { "name": "Homöopathie", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" }
       }
     },
     "sehhilfen": {
@@ -52,10 +52,10 @@
       "desc": "Brillen, Kontaktlinsen, Sonnenbrillen mit Sehstärke",
       "budget": "Bis zu 500 € (alle 2 Jahre) | LASIK bis 1.000 € je Auge",
       "details": {
-        "brillen": { "name": "Brillen & Brillengläser", "info": "Bis zu 500 € alle 2 Jahre" },
-        "kontaktlinsen": { "name": "Kontaktlinsen", "info": "Im Budget Sehhilfen enthalten" },
-        "sonnenbrillen": { "name": "Sonnenbrillen mit Sehstärke", "info": "Im Budget Sehhilfen enthalten" },
-        "laser": { "name": "Augen-Laser (LASIK/LASEK)", "info": "Bis zu 1.000 € je Auge (einmalig)" }
+        "brillen": { "name": "Brillen & Brillengläser", "info": "Bis zu 500 € alle 2 Jahre", "source": "sdk" },
+        "kontaktlinsen": { "name": "Kontaktlinsen", "info": "Im Budget Sehhilfen enthalten", "source": "sdk" },
+        "sonnenbrillen": { "name": "Sonnenbrillen mit Sehstärke", "info": "Im Budget Sehhilfen enthalten", "source": "sdk" },
+        "laser": { "name": "Augen-Laser (LASIK/LASEK)", "info": "Bis zu 1.000 € je Auge (einmalig)", "source": "sdk" }
       }
     },
     "vorsorge": {
@@ -63,12 +63,12 @@
       "desc": "Krebsvorsorge, Schwangerschaftsvorsorge, Check-ups, Impfungen",
       "budget": "Bis zu 500 € (alle 2 Jahre) | inkl. Präventionskurse",
       "details": {
-        "krebsvorsorge": { "name": "Krebsvorsorge-Untersuchungen", "info": "Erweiterte Vorsorge über GKV-Leistung hinaus" },
-        "schwangerschaft": { "name": "Schwangerschaftsvorsorge", "info": "z. B. Toxoplasmose-Test, Streptokokken-Test, zusätzliche Ultraschall-Untersuchungen" },
-        "checkups": { "name": "Gesundheits-Check-ups", "info": "Erweiterte Laborwerte und Diagnostik" },
-        "stiko": { "name": "STIKO-Impfungen", "info": "Alle empfohlenen Standardimpfungen" },
-        "reiseimpfungen": { "name": "Reiseimpfungen", "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus" },
-        "praeventionskurse": { "name": "Präventionskurse", "info": "z. B. Yoga, Rückentraining, Stressbewältigung" }
+        "krebsvorsorge": { "name": "Krebsvorsorge-Untersuchungen", "info": "Erweiterte Vorsorge über GKV-Leistung hinaus", "source": "sdk" },
+        "schwangerschaft": { "name": "Schwangerschaftsvorsorge", "info": "z. B. Toxoplasmose-Test, Streptokokken-Test, zusätzliche Ultraschall-Untersuchungen", "source": "sdk" },
+        "checkups": { "name": "Gesundheits-Check-ups", "info": "Erweiterte Laborwerte und Diagnostik", "source": "sdk" },
+        "stiko": { "name": "STIKO-Impfungen", "info": "Alle empfohlenen Standardimpfungen", "source": "ikk" },
+        "reiseimpfungen": { "name": "Reiseimpfungen", "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus — Zuschuss über IKK Gesundheitskonto", "source": "ikk" },
+        "praeventionskurse": { "name": "Präventionskurse", "info": "z. B. Yoga, Rückentraining, Stressbewältigung — Zuschuss über IKK", "source": "ikk" }
       }
     },
     "arzneimittel": {
@@ -76,26 +76,28 @@
       "desc": "Gesetzliche Zuzahlungen für Arznei-, Heil- und Hilfsmittel",
       "budget": "Bis zu 1.000 € (alle 2 Jahre) | plus Auslandsschutz inklusive",
       "details": {
-        "arzneimittel": { "name": "Arzneimittel-Zuzahlungen", "info": "Erstattung der gesetzlichen Zuzahlung (5–10 € pro Medikament)" },
-        "heilmittel": { "name": "Heilmittel-Zuzahlungen", "info": "z. B. Physiotherapie, Ergotherapie, Logopädie" },
-        "hilfsmittel": { "name": "Hilfsmittel-Zuzahlungen", "info": "z. B. Einlagen, Bandagen, Kompressionsstrümpfe" },
-        "ausland": { "name": "Auslandsschutz", "info": "100 % Erstattung, beliebig viele Reisen bis 56 Tage" },
-        "beratung": { "name": "Medizinisch-psychologischer Beratungsservice", "info": "Telefonische Beratung inklusive" }
+        "arzneimittel": { "name": "Arzneimittel-Zuzahlungen", "info": "Erstattung der gesetzlichen Zuzahlung (5–10 € pro Medikament)", "source": "sdk" },
+        "heilmittel": { "name": "Heilmittel-Zuzahlungen", "info": "z. B. Physiotherapie, Ergotherapie, Logopädie", "source": "sdk" },
+        "hilfsmittel": { "name": "Hilfsmittel-Zuzahlungen", "info": "z. B. Einlagen, Bandagen, Kompressionsstrümpfe", "source": "sdk" },
+        "ausland": { "name": "Auslandsschutz", "info": "100 % Erstattung, beliebig viele Reisen bis 56 Tage", "source": "sdk" },
+        "beratung": { "name": "Medizinisch-psychologischer Beratungsservice", "info": "Telefonische Beratung inklusive", "source": "sdk" }
       }
     },
     "schwangerschaft": {
       "title": "Schwangerschaft & Geburt",
-      "desc": "Über 1.100 € Gesamtleistung mit IKK classic — Hebamme, Vorsorge, Baby-Bonus",
-      "budget": "250 € Hebamme | 100 € Vorsorge | 180 € Baby-Bonus (IKK classic)",
-      "hint": "Die IKK classic bietet noch weitere Schwangerschafts-Leistungen \u2014 mehr dazu weiter unten im Abschnitt \u201EIKK classic\u201C.",
+      "desc": "Über 1.100 € Gesamtleistung — IKK classic (555 €) + SDK (600 €)",
+      "budget": "250 € Hebamme | 100 € Mineralstoffe | 100 € Vorsorge (IKK) + 600 € SDK",
+      "hint": "Gesamtrechnung: 555 € (IKK classic) + 600 € (SDK Zusatzversicherung) = über 1.150 € Schwangerschafts-Budget.",
       "details": {
-        "hebamme": { "name": "Hebammen-Rufbereitschaft", "info": "Bis zu 250 € je Schwangerschaft (IKK classic)" },
-        "vorsorgeSchwangerschaft": { "name": "Schwangerschaftsvorsorge (IGeL)", "info": "100 € für Toxoplasmose-Test, Streptokokken, zusätzliche Ultraschalls" },
-        "mineralstoffe": { "name": "Mineralstoffe in der Schwangerschaft", "info": "Eisen, Folsäure & Magnesium — Kostenübernahme durch IKK classic" },
-        "geburtsvorbereitung": { "name": "Geburtsvorbereitungskurse", "info": "Kostenübernahme inkl. kostenloser Partner-Kurs (Keleya)" },
-        "rueckbildung": { "name": "Rückbildungsgymnastik", "info": "Volle Kostenübernahme + 25 € Bonus über IKK Bonusprogramm" },
-        "babyBonus": { "name": "Baby-Bonus", "info": "180 € im ersten Lebensjahr über das IKK Bonusprogramm" },
-        "hausgeburt": { "name": "Haus- & Geburtshausgeburt", "info": "Volle Kostenübernahme für Hebamme + Zuschuss Betriebskosten" }
+        "hebamme": { "name": "Hebammen-Rufbereitschaft", "info": "Bis zu 250 € je Schwangerschaft", "source": "ikk", "amount": "250 €" },
+        "mineralstoffe": { "name": "Mineralstoffe in der Schwangerschaft", "info": "Eisen, Folsäure & Magnesium — bis zu 100 € pro Kalenderjahr", "source": "ikk", "amount": "100 €" },
+        "vorsorgeSchwangerschaftIkk": { "name": "Ergänzende Vorsorge", "info": "100 € Zuschuss für Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie", "source": "ikk", "amount": "100 €" },
+        "rueckbildung": { "name": "Rückbildungsgymnastik", "info": "Volle Kostenübernahme + 75 € Bonus (mit Zusatzversicherung)", "source": "ikk", "amount": "75 €" },
+        "mutterschaftsbonus": { "name": "Mutterschaftsvorsorge Bonus", "info": "30 € je Vorsorgeuntersuchung (mit Zusatzversicherung)", "source": "ikk", "amount": "30 €" },
+        "geburtsvorbereitung": { "name": "Geburtsvorbereitungskurse", "info": "Volle Kostenübernahme inkl. Partner-Kurs (Keleya)", "source": "ikk", "amount": "kostenlos" },
+        "hausgeburt": { "name": "Haus- & Geburtshausgeburt", "info": "Volle Kostenübernahme für Hebamme + Zuschuss Betriebskosten", "source": "ikk", "amount": "kostenlos" },
+        "sdkVorsorge": { "name": "Vorsorge-Budget", "info": "500 € alle 2 Jahre für Vorsorge inkl. Schwangerschafts-IGeL", "source": "sdk", "amount": "500 €" },
+        "sdkSchwangerschaft": { "name": "Schwangerschaftsvorsorge extra", "info": "Zusätzlich 100 € für erweiterte Schwangerschaftsvorsorge (IGeL-Leistungen)", "source": "sdk", "amount": "100 €" }
       }
     }
   },
@@ -163,7 +165,7 @@
   },
   "bonusCalculator": {
     "title": "Dein persönlicher <highlight>Bonus-Rechner</highlight>",
-    "subtitle": "So funktioniert der IKK Classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!",
+    "subtitle": "So funktioniert der IKK classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!",
     "selectActivities": "Wähle deine Aktivitäten:",
     "activities": {
       "impfung": { "title": "Schutzimpfung", "desc": "Bis zu 8x pro Jahr", "unit": "Impfung(en)" },
@@ -192,7 +194,7 @@
     "tip": "Tipp",
     "max": "max.",
     "trustNote": "Unkompliziert & auf Vertrauensbasis",
-    "trustNoteDesc": "Die IKK Classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Du musst also nicht jede Aktivität aufwändig belegen — einfach angeben und Bonus kassieren.",
+    "trustNoteDesc": "Die IKK classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Du musst also nicht jede Aktivität aufwändig belegen — einfach angeben und Bonus kassieren.",
     "appleWatchNote": "Bonus für Apple Watch & Fitnessgeräte",
     "appleWatchNoteDesc": "Du kannst deinen IKK-Bonus auch für eine Apple Watch, einen Fitnesstracker oder andere Fitnessgeräte einsetzen. Einfach beim Bonusprogramm einreichen und den Zuschuss kassieren.",
     "resetSelection": "Auswahl zurücksetzen",
@@ -213,7 +215,7 @@
     "example": "Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert",
     "sdkTariff": "SDK Ambulant 100 (Tarif AP1) — 100 % Erstattung:",
     "sdkTariffValue": "40 €/Monat = 480 €/Jahr",
-    "ikkBonusTitle": "IKK Classic Bonus pro Jahr:",
+    "ikkBonusTitle": "IKK classic Bonus pro Jahr:",
     "grippeimpfung": "Grippeimpfung",
     "zahnvorsorge": "Zahnvorsorge (2×)",
     "checkup": "Gesundheits-Check-up",
@@ -221,13 +223,13 @@
     "fitnessstudio": "Fitnessstudio-Mitgliedschaft",
     "bmi": "BMI im Normalbereich",
     "blutdruck": "Blutdruck normal",
-    "zahnreinigung": "Zahnreinigung",
-    "gesundheitskurs": "IKK-Gesundheitskurs",
+    "hautkrebs": "Hautkrebsvorsorge",
+    "gesundheitskurs": "IKK Gesundheitskurs",
     "bonusTotal": "= Bonus gesamt:",
-    "bonusTotalValue": "580 €/Jahr",
+    "bonusTotalValue": "435 €/Jahr",
     "resultTitle": "Ergebnis:",
-    "resultValue": "580 € Bonus − 480 € Beitrag = 100 € Plus",
-    "resultDesc": "Frau Müller bekommt mehr zurück als sie zahlt — und hat 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr."
+    "resultValue": "435 € Bonus − 480 € Beitrag = −45 € pro Jahr",
+    "resultDesc": "Frau Müller zahlt nur 45 € pro Jahr effektiv — und hat dafür 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
   },
   "howItWorks": {
     "title": "So einfach funktioniert's",
@@ -382,7 +384,7 @@
   "ikkServices": {
     "badge": "Kostenlose IKK-Extras",
     "title": "Telemedizin & Spezialisten — kostenlos für dich",
-    "subtitle": "Als IKK-Classic-Mitglied bekommst du zwei starke Digital-Services gratis dazu. Kein Aufpreis, kein Papierkram.",
+    "subtitle": "Als IKK-classic-Mitglied bekommst du zwei starke Digital-Services gratis dazu. Kein Aufpreis, kein Papierkram.",
     "teleclinic": {
       "title": "TeleClinic",
       "badge": "24/7 Online-Arzt",
@@ -409,7 +411,7 @@
     },
     "bottomCta": {
       "title": "Alles inklusive — ohne Zusatzkosten",
-      "desc": "TeleClinic und BetterDoc sind fester Bestandteil deiner IKK-Classic-Mitgliedschaft. Kein Aufpreis, keine Wartezeit — einfach nutzen."
+      "desc": "TeleClinic und BetterDoc sind fester Bestandteil deiner IKK-classic-Mitgliedschaft. Kein Aufpreis, keine Wartezeit — einfach nutzen."
     }
   },
 

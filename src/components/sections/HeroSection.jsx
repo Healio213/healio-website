@@ -10,11 +10,30 @@ const HeroSection = () => {
   const { getPath } = useLanguage();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Hintergrundbild */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("/hero-bg.png")' }}
-      />
+      {/* Hintergrundbild — optimiert mit <picture> für WebP + responsive */}
+      <picture className="absolute inset-0 z-0">
+        <source
+          media="(max-width: 768px)"
+          srcSet="/hero-bg-mobile.webp"
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 768px)"
+          srcSet="/hero-bg-mobile.jpg"
+          type="image/jpeg"
+        />
+        <source
+          srcSet="/hero-bg.webp"
+          type="image/webp"
+        />
+        <img
+          src="/hero-bg.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
 
       {/* Dunkler Overlay für Lesbarkeit */}
       <div

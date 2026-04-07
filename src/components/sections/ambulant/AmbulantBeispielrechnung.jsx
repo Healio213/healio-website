@@ -8,14 +8,14 @@ const AmbulantBeispielrechnung = () => {
   const { t } = useTranslation('ambulant');
 
   const bonusItems = [
-    { labelKey: 'beispielrechnung.grippeimpfung', amount: "30 €" },
-    { labelKey: 'beispielrechnung.zahnvorsorge', amount: "60 €" },
-    { labelKey: 'beispielrechnung.checkup', amount: "75 €" },
-    { labelKey: 'beispielrechnung.krebsvorsorge', amount: "75 €" },
+    { labelKey: 'beispielrechnung.grippeimpfung', amount: "15 €" },
+    { labelKey: 'beispielrechnung.zahnvorsorge', amount: "30 €" },
+    { labelKey: 'beispielrechnung.checkup', amount: "30 €" },
+    { labelKey: 'beispielrechnung.krebsvorsorge', amount: "30 €" },
     { labelKey: 'beispielrechnung.fitnessstudio', amount: "75 €" },
     { labelKey: 'beispielrechnung.bmi', amount: "75 €" },
     { labelKey: 'beispielrechnung.blutdruck', amount: "75 €" },
-    { labelKey: 'beispielrechnung.zahnreinigung', amount: "40 €" },
+    { labelKey: 'beispielrechnung.hautkrebs', amount: "30 €" },
     { labelKey: 'beispielrechnung.gesundheitskurs', amount: "75 €" },
   ];
 

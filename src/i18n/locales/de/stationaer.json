@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "<highlight>Privatpatient</highlight> im Krankenhaus. Effektiv für 0 €.",
-    "subtitle": "KlinikUpgrade ab 11 € im Monat. In Kombination mit dem IKK Classic Bonus finanziert sich die stationäre Zusatzversicherung komplett selbst. Franke & Bornberg: FFF+ hervorragend.",
-    "ikkNote": "<strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK Classic Bonus (über 300 € pro Jahr, steuerfrei) deckt die Beiträge vollständig. Einbettzimmer, Chefarzt, freie Klinikwahl – ohne Zuzahlung.",
+    "subtitle": "KlinikUpgrade ab 11 € im Monat. In Kombination mit dem IKK classic Bonus finanziert sich die stationäre Zusatzversicherung komplett selbst. Franke & Bornberg: FFF+ hervorragend.",
+    "ikkNote": "<strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK classic Bonus (über 300 € pro Jahr, steuerfrei) deckt die Beiträge vollständig. Einbettzimmer, Chefarzt, freie Klinikwahl – ohne Zuzahlung.",
     "ctaCalculate": "Tarif berechnen",
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
@@ -33,7 +33,7 @@
     "vergleichTitle": "KlinikUpgrade Top vs. Plus",
     "plus": { "name": "Plus", "zimmer": "Zweibettzimmer", "tagegeld": "Tagegeld bis 80 €", "preis": "ab 8,98 €/Monat" },
     "top": { "name": "Top", "zimmer": "Einbettzimmer", "tagegeld": "Tagegeld bis 100 €", "preis": "ab 11,22 €/Monat" },
-    "ikkComboTitle": "Effektiv 0 € mit IKK Classic Bonus",
+    "ikkComboTitle": "Effektiv 0 € mit IKK classic Bonus",
     "ikkComboText": "Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 11,22 € (= 135 €/Jahr) deckt der Bonus die Kosten mehr als doppelt. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Vorsorge und Gesundheitsleistungen.",
     "exampleBlinddarm": "Beispiel: Blinddarm-OP (4 Tage)",
     "exampleLeistenbruch": "Beispiel: Ambulante Leistenbruch-OP",
@@ -91,13 +91,13 @@
   },
   "faq": {
     "title": "Häufige Fragen zur stationären Zusatzversicherung",
-    "subtitle": "Alles was du über das KlinikUpgrade und den IKK Classic Bonus wissen musst.",
+    "subtitle": "Alles was du über das KlinikUpgrade und den IKK classic Bonus wissen musst.",
     "items": [
-      { "q": "Was kostet das KlinikUpgrade monatlich?", "a": "Das KlinikUpgrade Top (Einbettzimmer) gibt es ab 11,22 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 33,33 Euro. Das KlinikUpgrade Plus (Zweibettzimmer) startet ab 8,98 Euro. In Kombination mit dem IKK Classic Bonus (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst." },
+      { "q": "Was kostet das KlinikUpgrade monatlich?", "a": "Das KlinikUpgrade Top (Einbettzimmer) gibt es ab 11,22 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 33,33 Euro. Das KlinikUpgrade Plus (Zweibettzimmer) startet ab 8,98 Euro. In Kombination mit dem IKK classic Bonus (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst." },
       { "q": "Was ist der Unterschied zwischen KlinikUpgrade Plus und Top?", "a": "KlinikUpgrade Plus bietet Zweibettzimmer und ein Ersatz-Krankenhaustagegeld von bis zu 80 Euro pro Tag. KlinikUpgrade Top bietet Einbettzimmer, bis zu 100 Euro Tagegeld pro Tag und im Top-Tarif ein Familienzimmer bei stationärer Entbindung (nicht begrenzt auf die Kosten eines Zweibettzimmers). Beide Tarife umfassen Chefarztbehandlung, freie Krankenhauswahl und keine Begrenzung auf die Gebührenordnung." },
       { "q": "Gibt es Wartezeiten?", "a": "Nein. Es gibt keine allgemeine Wartezeit. Der Versicherungsschutz beginnt sofort ab Tag 1 mit Anspruch auf alle versicherten Leistungen. Einzige Ausnahme: Bei Entbindungen gilt eine Wartezeit von acht Monaten." },
       { "q": "Werden auch privatärztliche Leistungen über dem Höchstsatz erstattet?", "a": "Ja, das ist ein besonderes Merkmal des KlinikUpgrade. Die Erstattung ist nicht auf den 3,5-fachen Satz der Gebührenordnung für Ärzte (GOÄ) begrenzt. Auch darüber hinausgehende Honorare werden erstattet. Das bedeutet: Kein Eigenanteil bei der Arztwahl." },
-      { "q": "Wie funktioniert das KlinikUpgrade zusammen mit dem IKK Classic Bonus?", "a": "Die Kombination macht die stationäre Zusatzversicherung effektiv kostenlos: Du zahlst 11,22 Euro monatlich (= 135 Euro im Jahr) für das KlinikUpgrade Top. Der IKK Classic Bonus bringt über 300 Euro pro Jahr steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr. Der Bonus übersteigt die Beiträge deutlich, sodass du effektiv 0 Euro zahlst und im Krankenhaus trotzdem Privatpatient bist." },
+      { "q": "Wie funktioniert das KlinikUpgrade zusammen mit dem IKK classic Bonus?", "a": "Die Kombination macht die stationäre Zusatzversicherung effektiv kostenlos: Du zahlst 11,22 Euro monatlich (= 135 Euro im Jahr) für das KlinikUpgrade Top. Der IKK classic Bonus bringt über 300 Euro pro Jahr steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr. Der Bonus übersteigt die Beiträge deutlich, sodass du effektiv 0 Euro zahlst und im Krankenhaus trotzdem Privatpatient bist." },
       { "q": "Was passiert bei einer Entbindung?", "a": "Bei einer stationären Entbindung übernimmt das KlinikUpgrade die privatärztlichen Leistungen und die Unterbringung. Im Top-Tarif bekommst du ein Familienzimmer, in dem du die ersten Tage gemeinsam mit deinem Partner und dem Neugeborenen verbringen kannst. Die Kosten werden nicht auf die Höhe eines Zweibettzimmers begrenzt." },
       { "q": "Bekomme ich Geld, wenn ich auf das Einbettzimmer verzichte?", "a": "Ja. Wenn du bei einem Krankenhausaufenthalt auf die Unterbringung im Ein- oder Zweibettzimmer oder auf privatärztliche Behandlung verzichtest, erhältst du ein Ersatz-Krankenhaustagegeld: bis zu 100 Euro pro Tag im Top-Tarif und bis zu 80 Euro pro Tag im Plus-Tarif. Für Kinder und Jugendliche bis zum 16. Lebensjahr beträgt das Tagegeld im Top-Tarif bis zu 50 Euro." },
       { "q": "Gibt es eine Altersbegrenzung?", "a": "Nein, es gibt keine Höchst- oder Mindesteintrittsalter. Der Abschluss ist in jedem Alter möglich. Voraussetzung ist lediglich die Mitgliedschaft in einer gesetzlichen Krankenversicherung. Berechtigte der Heilfürsorge (z.B. Polizisten oder Soldaten) sind ausgeschlossen." }

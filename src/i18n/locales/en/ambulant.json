@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Your <highlight>€3,000 Health Budget</highlight>. Effectively for €0.",
-    "subtitle": "Why pay for treatments yourself when the system can cover them? With SDK supplementary insurance + the IKK Classic bonus program, you get up to €3,000 for Heilpraktiker, glasses, preventive care and more — and effectively pay nothing thanks to the bonus. No waiting periods. Start right away.",
+    "subtitle": "Why pay yourself when there's a better way? Up to €3,000 for alternative medicine, glasses & preventive care — effectively from €0. No waiting periods.",
     "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
     "badgeNoWait": "Guaranteed no waiting period",
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
@@ -10,7 +10,7 @@
     "heroImageAlt": "Healthy people in nature"
   },
   "trustBar": {
-    "ikkPartner": "IKK Classic Partner",
+    "ikkPartner": "IKK classic Partner",
     "digital": "100% digital",
     "noWait": "No waiting period",
     "independentBroker": "Independent broker (§34d GewO)",
@@ -19,7 +19,7 @@
   "ticker": {
     "budget": "Up to €3,000 health budget",
     "sdk": "SDK — on the market since 1926",
-    "ikk": "IKK Classic — 3 million members",
+    "ikk": "IKK classic — 3 million members",
     "heilpraktiker": "Heilpraktiker 100% covered",
     "noWait": "No waiting period — instant coverage",
     "fast": "Complete in just 3 minutes",
@@ -163,7 +163,7 @@
   },
   "bonusCalculator": {
     "title": "Your Personal <highlight>Bonus Calculator</highlight>",
-    "subtitle": "This is how the IKK Classic bonus works: Select your activities and see instantly how much you can get back!",
+    "subtitle": "This is how the IKK classic bonus works: Select your activities and see instantly how much you can get back!",
     "selectActivities": "Select your activities:",
     "activities": {
       "impfung": { "title": "Vaccination", "desc": "Up to 8x per year", "unit": "vaccination(s)" },
@@ -192,7 +192,7 @@
     "tip": "Tip",
     "max": "max.",
     "trustNote": "Simple & trust-based",
-    "trustNoteDesc": "IKK Classic trusts its members. Proof is only requested in rare individual cases and on a spot-check basis. You don't need to meticulously document every activity — just report it and collect your bonus.",
+    "trustNoteDesc": "IKK classic trusts its members. Proof is only requested in rare individual cases and on a spot-check basis. You don't need to meticulously document every activity — just report it and collect your bonus.",
     "appleWatchNote": "Bonus for Apple Watch & fitness devices",
     "appleWatchNoteDesc": "You can also use your IKK bonus towards an Apple Watch, fitness tracker, or other fitness devices. Simply submit it through the bonus program and collect the subsidy.",
     "resetSelection": "Reset selection",
@@ -213,7 +213,7 @@
     "example": "Example: Ms. Mueller, 32 years old, publicly insured",
     "sdkTariff": "SDK Ambulant 100 (Plan AP1) — 100% reimbursement:",
     "sdkTariffValue": "€40/month = €480/year",
-    "ikkBonusTitle": "IKK Classic bonus per year:",
+    "ikkBonusTitle": "IKK classic bonus per year:",
     "grippeimpfung": "Flu vaccination",
     "zahnvorsorge": "Dental checkup (2x)",
     "checkup": "Health check-up",
@@ -221,13 +221,13 @@
     "fitnessstudio": "Gym membership",
     "bmi": "BMI in normal range",
     "blutdruck": "Normal blood pressure",
-    "zahnreinigung": "Dental cleaning",
+    "hautkrebs": "Skin cancer screening",
     "gesundheitskurs": "IKK health course",
     "bonusTotal": "= Total bonus:",
-    "bonusTotalValue": "€580/year",
+    "bonusTotalValue": "€435/year",
     "resultTitle": "Result:",
-    "resultValue": "€580 bonus - €480 premium = €100 surplus",
-    "resultDesc": "Ms. Mueller gets back more than she pays — and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more."
+    "resultValue": "€435 bonus - €480 premium = -€45 per year",
+    "resultDesc": "Ms. Mueller pays only €45 per year effectively — and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can be increased even further."
   },
   "howItWorks": {
     "title": "How It Works",
@@ -382,7 +382,7 @@
   "ikkServices": {
     "badge": "Free IKK Extras",
     "title": "Telemedicine & Specialists — free for you",
-    "subtitle": "As an IKK Classic member, you get two powerful digital services for free. No extra cost, no paperwork.",
+    "subtitle": "As an IKK classic member, you get two powerful digital services for free. No extra cost, no paperwork.",
     "teleclinic": {
       "title": "TeleClinic",
       "badge": "24/7 Online Doctor",
@@ -409,7 +409,7 @@
     },
     "bottomCta": {
       "title": "Everything included — no extra cost",
-      "desc": "TeleClinic and BetterDoc are an integral part of your IKK Classic membership. No surcharge, no waiting — just use them."
+      "desc": "TeleClinic and BetterDoc are an integral part of your IKK classic membership. No surcharge, no waiting — just use them."
     }
   },
 
