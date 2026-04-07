@@ -7,6 +7,7 @@ import Layout from '@/components/Layout';
 import RouteNormalizer from '@/components/RouteNormalizer';
 import VeterinaryLayout from '@/components/sections/veterinary/VeterinaryLayout';
 import PerformanceMetrics from '@/components/PerformanceMetrics';
+import { useReferrer } from '@/hooks/useReferrer';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -40,6 +41,8 @@ const PageLoader = () => (
 
 function App() {
   const location = useLocation();
+  // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
+  useReferrer();
 
   useEffect(() => {
     // Performance monitoring for slow image load times
