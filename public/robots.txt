@@ -15,6 +15,9 @@ Allow: /
 User-agent: Anthropic-ai
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: Claude-Web
 Allow: /
 
@@ -27,8 +30,7 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://www.healio.de/sitemap.xml
-Sitemap: https://app.healio.de/api/v1/content/sitemap
+Sitemap: https://healio.de/sitemap.xml
 
 # LLM-optimierte Zusammenfassung
-# https://www.healio.de/llms.txt
+# https://healio.de/llms.txt
