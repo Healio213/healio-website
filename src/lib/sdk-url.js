@@ -15,8 +15,8 @@ const INSURER_ID = '36';
 // Healio GmbH Kontaktdaten (Base64-encoded JSON)
 const CONTACT_INFO = 'eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9';
 
-// Bemerkungsfeld (Base64)
-const REMARKS = 'IkJlaSBS/GNrZnJhZ2VuIHNpbmQgd2lyIGdlcm5lIGb8ciBTaWUgZGEuIg==';
+// Bemerkungsfeld (Base64, UTF-8)
+const REMARKS = 'IkJlaSBSw7xja2ZyYWdlbiBzaW5kIHdpciBnZXJuZSBmw7xyIFNpZSBkYS4i';
 
 const IKK_LINK = 'https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016';
 
