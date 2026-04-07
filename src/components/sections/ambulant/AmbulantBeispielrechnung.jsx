@@ -70,10 +70,13 @@ const AmbulantBeispielrechnung = () => {
 
           {/* Ergebnis */}
           <div className="bg-white rounded-xl p-6 shadow-md">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-2">
               <span className="text-xl font-bold text-gray-900">{t('beispielrechnung.resultTitle')}</span>
               <span className="text-xl font-extrabold text-[#10b981]">{t('beispielrechnung.resultValue')}</span>
             </div>
+            <p className="text-right text-lg font-bold text-[#10b981] mb-4">
+              {t('beispielrechnung.resultMonthly')}
+            </p>
             <p className="text-gray-600 text-base leading-relaxed">
               {t('beispielrechnung.resultDesc')}
             </p>

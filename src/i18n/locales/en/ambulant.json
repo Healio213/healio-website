@@ -227,8 +227,9 @@
     "bonusTotal": "= Total bonus:",
     "bonusTotalValue": "€435/year",
     "resultTitle": "Result:",
-    "resultValue": "€435 bonus - €480 premium = -€45 per year",
-    "resultDesc": "Ms. Mueller pays only €45 per year effectively — and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can be increased even further."
+    "resultValue": "€480 premium − €435 bonus = only €45 per year",
+    "resultMonthly": "That's only €3.75 per month.",
+    "resultDesc": "Ms. Mueller pays only €3.75 per month effectively — and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can be increased even further."
   },
   "howItWorks": {
     "title": "How It Works",

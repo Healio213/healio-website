@@ -229,8 +229,9 @@
     "bonusTotal": "= Bonus gesamt:",
     "bonusTotalValue": "435 €/Jahr",
     "resultTitle": "Ergebnis:",
-    "resultValue": "435 € Bonus − 480 € Beitrag = −45 € pro Jahr",
-    "resultDesc": "Frau Müller zahlt nur 45 € pro Jahr effektiv — und hat dafür 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
+    "resultValue": "480 € Beitrag − 435 € Bonus = nur 45 € pro Jahr",
+    "resultMonthly": "Das sind nur 3,75 € im Monat.",
+    "resultDesc": "Frau Müller zahlt effektiv nur 3,75 € im Monat — und hat dafür 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
   },
   "howItWorks": {
     "title": "So einfach funktioniert's",
