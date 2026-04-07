@@ -21,9 +21,9 @@ const AmbulantHero = () => {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" aria-labelledby="hero-heading">
       <div className="absolute inset-0 z-0">
         <picture>
-          <source srcSet="/images/hero-ambulant.webp" type="image/webp" />
+          <source srcSet="/images/hero-ambulant.webp?v=2" type="image/webp" />
           <img
-            src="/images/hero-ambulant.png"
+            src="/images/hero-ambulant.png?v=2"
             alt={t('hero.heroImageAlt')}
             className="w-full h-full object-cover object-top absolute inset-0"
             fetchpriority="high"
