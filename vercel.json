@@ -13,14 +13,6 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "healio.de" }],
-      "destination": "https://www.healio.de/$1",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     { "source": "/((?!assets|favicon|og-image|sitemap|robots).*)", "destination": "/index.html" }
   ]
