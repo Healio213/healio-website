@@ -66,6 +66,38 @@ const PartnerPage = () => {
   );
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = React.useRef(null);
+  const videoMilestonesRef = React.useRef(new Set());
+
+  const trackVideoEvent = (action, label, value) => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', action, {
+        event_category: 'video',
+        event_label: label || 'erklaervideo-partner',
+        value: value || 0,
+      });
+    }
+  };
+
+  const handleVideoPlay = () => {
+    trackVideoEvent('video_play', 'erklaervideo-partner');
+  };
+
+  const handleVideoTimeUpdate = () => {
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+    const pct = Math.floor((video.currentTime / video.duration) * 100);
+    [25, 50, 75, 100].forEach((milestone) => {
+      if (pct >= milestone && !videoMilestonesRef.current.has(milestone)) {
+        videoMilestonesRef.current.add(milestone);
+        trackVideoEvent('video_progress', `erklaervideo-partner_${milestone}%`, milestone);
+      }
+    });
+  };
+
+  const handleVideoEnded = () => {
+    trackVideoEvent('video_complete', 'erklaervideo-partner', 100);
+  };
 
   const partnerTypes = [
     { icon: Stethoscope, title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
@@ -150,10 +182,14 @@ const PartnerPage = () => {
                   </div>
                 ) : (
                   <video
+                    ref={videoRef}
                     className="w-full h-full rounded-2xl"
                     controls
                     autoPlay
                     playsInline
+                    onPlay={handleVideoPlay}
+                    onTimeUpdate={handleVideoTimeUpdate}
+                    onEnded={handleVideoEnded}
                   >
                     <source src="/erklaervideo-partner.mp4" type="video/mp4" />
                     {t('hero.videoFallback')}
