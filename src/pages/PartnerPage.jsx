@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, AlertCircle, Smile, Leaf, Clock, HeartHandshake as Handshake, Package, TrendingUp } from 'lucide-react';
+import { PlayCircle, AlertCircle, Smile, Leaf, Clock, HeartHandshake as Handshake, Package, TrendingUp, Stethoscope, Brain, Flower2, Activity, Glasses, Baby, Euro, Heart, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -67,6 +67,15 @@ const PartnerPage = () => {
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
+  const partnerTypes = [
+    { icon: Stethoscope, title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
+    { icon: Activity, title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
+    { icon: Flower2, title: t('partners.tcm'), text: t('partners.tcmDesc') },
+    { icon: Brain, title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
+    { icon: Glasses, title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
+    { icon: Baby, title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
+  ];
+
   return (
     <>
       <SEOHead
@@ -77,20 +86,20 @@ const PartnerPage = () => {
       />
 
       <main className="bg-white overflow-hidden w-full">
-        
+
         {/* SECTION 1: HERO */}
         <section className="relative min-h-[100svh] flex items-center pt-28 pb-16 lg:pt-20 lg:pb-0">
           <div className="absolute inset-0 z-0">
             {/* Mobile Image */}
-            <img 
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/4f016c2da039efb25e0e023c7adf970d.png" 
-              alt="Two women in professional consultation with natural window light" 
+            <img
+              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/4f016c2da039efb25e0e023c7adf970d.png"
+              alt="Two women in professional consultation with natural window light"
               className="w-full h-full object-cover object-center md:hidden"
             />
             {/* Desktop Image */}
-            <img 
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/66ea53b24c418ef3f92004d9368a889c.png" 
-              alt="Warm, welcoming therapy session with a smiling therapist in a bright wellness room" 
+            <img
+              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/66ea53b24c418ef3f92004d9368a889c.png"
+              alt="Warm, welcoming therapy session with a smiling therapist in a bright wellness room"
               className="w-full h-full object-cover object-center hidden md:block"
             />
             {/* Lighter Overlay for desktop, stronger for mobile to ensure text readability */}
@@ -161,7 +170,7 @@ const PartnerPage = () => {
         {/* SECTION 2: PROBLEM AWARENESS */}
         <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -178,10 +187,117 @@ const PartnerPage = () => {
           </div>
         </section>
 
-        {/* SECTION 3: THE SOLUTION (BENEFITS) */}
+        {/* SECTION 3: BUDGET OVERVIEW */}
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12 sm:mb-16"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
+                {t('budget.title')}
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                {t('budget.subtitle')}
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* Total Budget - Featured */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
+              >
+                <Heart className="w-10 h-10 mx-auto mb-4 opacity-90" />
+                <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
+                <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
+                <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
+              </motion.div>
+
+              {/* Naturheilkunde */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-4">
+                  <Stethoscope className="w-7 h-7 text-[#25c990]" />
+                </div>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
+                <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
+                <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
+              </motion.div>
+
+              {/* Sehhilfen */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-4">
+                  <Glasses className="w-7 h-7 text-[#25c990]" />
+                </div>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
+                <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
+                <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 4: FÜR WEN? (Partner Types) */}
+        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12 sm:mb-16"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
+                {t('partners.title')}
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                {t('partners.subtitle')}
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+              {partnerTypes.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-5 text-[#25c990]">
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5: SO EINFACH FUNKTIONIERT ES (Benefits + Steps) */}
         <section className="py-16 sm:py-20 lg:py-24 pb-24 lg:pb-32 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -192,49 +308,40 @@ const PartnerPage = () => {
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
               {[
-                {
-                  icon: Smile,
-                  title: t('solution.relaxedPatients'),
-                  text: t('solution.relaxedPatientsDesc')
-                },
-                {
-                  icon: Leaf,
-                  title: t('solution.sustainableTherapy'),
-                  text: t('solution.sustainableTherapyDesc')
-                },
-                {
-                  icon: Clock,
-                  title: t('solution.protectedTime'),
-                  text: t('solution.protectedTimeDesc')
-                },
                 {
                   icon: Handshake,
                   title: t('steps.step1Title'),
-                  text: t('steps.step1Desc')
+                  text: t('steps.step1Desc'),
+                  step: '1'
                 },
                 {
                   icon: Package,
                   title: t('steps.step2Title'),
-                  text: t('steps.step2Desc')
+                  text: t('steps.step2Desc'),
+                  step: '2'
                 },
                 {
                   icon: TrendingUp,
                   title: t('steps.step3Title'),
-                  text: t('steps.step3Desc')
+                  text: t('steps.step3Desc'),
+                  step: '3'
                 }
               ].map((item, index) => {
                 const Icon = item.icon;
                 return (
-                <motion.div 
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center md:items-start text-center md:text-left"
+                  className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center relative"
                 >
+                  <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-[#25c990] text-white flex items-center justify-center font-bold text-sm shadow-md">
+                    {item.step}
+                  </div>
                   <div className="w-16 h-16 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-6 text-[#25c990]">
                     <Icon className="w-8 h-8" />
                   </div>
@@ -242,6 +349,33 @@ const PartnerPage = () => {
                   <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.div>
               )})}
+            </div>
+
+            {/* Benefits below steps */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
+              {[
+                { icon: Smile, title: t('solution.relaxedPatients'), text: t('solution.relaxedPatientsDesc') },
+                { icon: Leaf, title: t('solution.sustainableTherapy'), text: t('solution.sustainableTherapyDesc') },
+                { icon: Shield, title: t('solution.protectedTime'), text: t('solution.protectedTimeDesc') },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex flex-col items-center text-center p-6"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4 text-[#25c990]">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800 mb-2">{item.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -252,10 +386,10 @@ const PartnerPage = () => {
         {/* FAQ */}
         <PartnerFAQ />
 
-        {/* SECTION 5: BOOKING */}
+        {/* SECTION: BOOKING */}
         <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -284,8 +418,8 @@ const PartnerPage = () => {
                     <p className="text-sm sm:text-base text-slate-600">{t('cta.calendarErrorDesc')}</p>
                   </div>
                 ) : (
-                  <div 
-                    id="calendly-embed" 
+                  <div
+                    id="calendly-embed"
                     className="w-full"
                     style={{ minHeight: '700px' }}
                   >

@@ -10,29 +10,34 @@ import {
 
 const faqs = [
   {
-    question: "Kostet die Partnerschaft etwas?",
+    question: "Was genau ist das Healio Gesundheitsbudget?",
     emoji: "💰",
-    answer: "Nein, die Partnerschaft mit Healio ist vollständig kostenlos. Sie zahlen nur für die Materialien, die Sie tatsächlich nutzen."
+    answer: "Ihre Patienten kombinieren den IKK-Kassenbonus (über 700 € pro Jahr) mit einer günstigen Zusatzversicherung. So entsteht ein echtes Gesundheitsbudget von bis zu 3.000 € in zwei Jahren — davon bis zu 1.000 € für Naturheilkunde, Osteopathie, TCM und alternative Therapien."
   },
   {
-    question: "Welche Materialien bekomme ich?",
-    emoji: "📚",
-    answer: "Sie erhalten professionelle Therapiematerialien, Patienteninformationen und Marketing-Unterstützung für Ihre Praxis."
-  },
-  {
-    question: "Wie profitieren meine Patienten?",
-    emoji: "👥",
-    answer: "Ihre Patienten erhalten Zugang zu hochwertigen Therapiematerialien und können ihre Behandlung optimal unterstützen."
-  },
-  {
-    question: "Wie werde ich Partner?",
+    question: "Kostet mich die Partnerschaft etwas?",
     emoji: "🤝",
-    answer: "Buchen Sie einfach einen Kennenlerntermin. Unser Team stellt Ihnen alles vor und beantwortet Ihre Fragen."
+    answer: "Nein. Die Partnerschaft ist komplett kostenlos. Die Informationsmaterialien und den Aufsteller für Ihr Wartezimmer liefern wir ebenfalls kostenfrei. Es gibt keine Vertragsbindung und keine Verpflichtungen."
   },
   {
-    question: "Muss ich mein Praxis-Konzept ändern?",
+    question: "Was muss ich als Behandler tun?",
+    emoji: "📋",
+    answer: "Praktisch nichts. Sie stellen unseren Aufsteller mit Flyern in Ihr Wartezimmer oder geben die Karten direkt an interessierte Patienten weiter. Den gesamten Rest — Beratung, Antrag, Abwicklung — übernimmt Healio. Sie konzentrieren sich auf Ihre Behandlung."
+  },
+  {
+    question: "Welche Leistungen werden erstattet?",
+    emoji: "✅",
+    answer: "Das Budget deckt ein breites Spektrum ab: Heilpraktiker-Behandlungen, Osteopathie, TCM (Akupunktur, Kräutertherapie), Chiropraktik, Sehhilfen (Brillen, Kontaktlinsen), Zahnbehandlungen und vieles mehr. Die genauen Erstattungssätze hängen vom gewählten Tarif ab."
+  },
+  {
+    question: "Muss ich mein Praxiskonzept ändern?",
     emoji: "🏥",
-    answer: "Nein, Sie behalten Ihre Unabhängigkeit. Healio passt sich Ihrer Praxis an, nicht umgekehrt."
+    answer: "Nein. Sie behandeln weiter wie bisher. Healio verändert nicht Ihre Arbeit, sondern ermöglicht es Ihren Patienten, sich diese Arbeit auch leisten zu können. Sie behalten Ihre volle fachliche Unabhängigkeit."
+  },
+  {
+    question: "Ist das auch für Brillengeschäfte und Optiker interessant?",
+    emoji: "👓",
+    answer: "Ja. Das Gesundheitsbudget enthält bis zu 600 € für Sehhilfen. Ihre Kunden können sich damit die Brille leisten, die sie wirklich möchten — statt nur das günstigste Kassengestell. Das erhöht Ihren durchschnittlichen Auftragswert."
   }
 ];
 
@@ -40,7 +45,7 @@ const PartnerFAQ = () => {
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,7 +53,7 @@ const PartnerFAQ = () => {
         >
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Häufige Fragen zur Partnerschaft</h2>
           <p className="text-lg text-slate-600">
-            Hier finden Sie die Antworten auf die wichtigsten Fragen.
+            Alles was Sie wissen müssen — kurz und ehrlich.
           </p>
         </motion.div>
 
@@ -60,8 +65,8 @@ const PartnerFAQ = () => {
         >
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
+              <AccordionItem
+                key={index}
                 value={`item-${index}`}
                 className="bg-white border border-slate-100 rounded-xl px-6 data-[state=open]:border-[#25c990] data-[state=open]:shadow-md transition-all duration-300"
               >

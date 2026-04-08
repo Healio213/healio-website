@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Gift, Shield, Users } from 'lucide-react';
+import { CheckCircle, Gift, Shield, Euro } from 'lucide-react';
 
 const PartnerTrustBar = () => {
   const trustItems = [
-    { icon: <CheckCircle className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Über 120 Partnerpraxen" },
-    { icon: <Gift className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Kostenloses Material" },
-    { icon: <Shield className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Keine Verpflichtungen" },
-    { icon: <Users className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Persönlicher Ansprechpartner" }
+    { icon: <Euro className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Bis zu 3.000 € Patientenbudget" },
+    { icon: <Gift className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Kostenlose Materialien" },
+    { icon: <Shield className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Keine Kosten, keine Verpflichtung" },
+    { icon: <CheckCircle className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "In 5 Minuten startklar" }
   ];
 
   return (

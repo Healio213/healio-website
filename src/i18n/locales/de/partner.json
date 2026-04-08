@@ -1,34 +1,66 @@
 {
   "hero": {
-    "badge": "Für Therapeuten & Praxen",
-    "title": "Voller Fokus auf die Heilung. Nicht auf die Kosten.",
-    "subtitle": "Befreien Sie Ihre Patienten von finanziellen Sorgen und ermöglichen Sie Therapien die wirklich bis zum Ende wirken.",
+    "badge": "Für Therapeuten, Praxen & Fachgeschäfte",
+    "title": "Bis zu 1.000 € Budget — für Ihre Leistungen.",
+    "subtitle": "Ihre Patienten erhalten ein Gesundheitsbudget von bis zu 3.000 €. Davon stehen bis zu 1.000 € für Naturheilkunde, Osteopathie und alternative Therapien bereit. Das bedeutet für Sie: volle Behandlungszyklen und keine Therapieabbrüche.",
     "videoFallback": "Ihr Browser unterstützt kein Video."
   },
   "problem": {
-    "title": "Wenn das Budget die Therapie bestimmt.",
-    "text": "Sie wissen genau welche ganzheitliche Behandlung einem Menschen jetzt helfen würde. Doch der Patient zögert weil die Kosten nicht von der Kasse getragen werden. Das blockiert den Heilungsprozess und frustriert Sie als Behandler weil Sie nicht Ihr volles Potenzial ausschöpfen können."
+    "title": "Kennen Sie das?",
+    "text": "Sie wissen genau, welche Behandlung Ihrem Patienten jetzt helfen würde — 10 Sitzungen Osteopathie, eine ganzheitliche Schmerztherapie, eine vollständige TCM-Kur. Doch nach der dritten Sitzung bricht der Patient ab. Nicht weil die Therapie nicht wirkt, sondern weil er sie sich nicht mehr leisten kann. Das frustriert Sie als Behandler — und schadet dem Patienten."
+  },
+  "budget": {
+    "title": "Das Healio Gesundheitsbudget",
+    "subtitle": "Ihre Patienten kombinieren den IKK-Kassenbonus mit einer Zusatzversicherung und erhalten so ein echtes Budget für Gesundheitsleistungen.",
+    "total": "Gesundheitsbudget gesamt",
+    "totalAmount": "bis zu 3.000 €",
+    "totalDesc": "in 2 Jahren — durch IKK-Bonus + Zusatzversicherung",
+    "naturheilkunde": "Naturheilkunde & Alternativmedizin",
+    "naturheilkundeAmount": "bis zu 1.000 €",
+    "naturheilkundeDesc": "Für Heilpraktiker, Osteopathie, TCM, Chiropraktik und mehr",
+    "sehhilfen": "Sehhilfen",
+    "sehhilfenAmount": "bis zu 600 €",
+    "sehhilfenDesc": "Für Brillen, Kontaktlinsen und Sonnenbrillen mit Sehstärke",
+    "ikk": "IKK-Kassenbonus",
+    "ikkAmount": "über 700 €",
+    "ikkDesc": "Jährlicher Bonus der gesetzlichen Krankenkasse"
+  },
+  "partners": {
+    "title": "Für wen ist Healio?",
+    "subtitle": "Diese Berufsgruppen profitieren direkt vom Gesundheitsbudget ihrer Patienten und Kunden.",
+    "heilpraktiker": "Heilpraktiker",
+    "heilpraktikerDesc": "Bis zu 1.000 € für Ihre Behandlungen — Ihre Patienten können sich die volle Therapie leisten.",
+    "osteopath": "Osteopathen",
+    "osteopathDesc": "Osteopathische Behandlungen werden aus dem Naturheilkunde-Budget erstattet — vollständige Behandlungszyklen statt Einzelsitzungen.",
+    "tcm": "TCM-Therapeuten",
+    "tcmDesc": "Akupunktur, Kräutertherapie, Tuina — Ihre Patienten können die gesamte TCM-Kur durchziehen.",
+    "chiropraktiker": "Chiropraktiker",
+    "chiropraktikerDesc": "Chiropraktische Justierungen und Behandlungsserien werden über das Naturheilkunde-Budget abgedeckt.",
+    "brillenladen": "Brillengeschäfte & Optiker",
+    "brillenladenDesc": "Bis zu 600 € Sehhilfen-Budget — Ihre Kunden können sich die Brille leisten, die sie wirklich wollen.",
+    "hebamme": "Hebammen",
+    "hebammeDesc": "Empfehlen Sie Ihren Familien das Gesundheitsbudget — für Vorsorge, Naturheilkunde und Kinderversorgung."
   },
   "solution": {
-    "title": "Wir nehmen das Thema Geld aus dem Behandlungsraum.",
-    "relaxedPatients": "Entspannte Patienten",
-    "relaxedPatientsDesc": "Eine hohe Erstattung durch unsere Systeme nimmt den finanziellen Druck. Das fördert die innere Ruhe, die für jede Heilung essenziell ist.",
-    "sustainableTherapy": "Nachhaltige Therapien",
-    "sustainableTherapyDesc": "Patienten brechen wichtige Behandlungen nicht mehr aus Sorge um die Rechnung ab.",
-    "protectedTime": "Ihre Zeit bleibt geschützt",
-    "protectedTimeDesc": "Sie überreichen lediglich unsere Information. Den gesamten administrativen Prozess übernehmen wir."
+    "title": "So einfach funktioniert es für Sie.",
+    "relaxedPatients": "Null Aufwand für Sie",
+    "relaxedPatientsDesc": "Sie legen unsere Informationskarten ins Wartezimmer oder geben sie direkt mit. Alles Weitere übernehmen wir — Beratung, Antrag, Abwicklung.",
+    "sustainableTherapy": "Volle Behandlungszyklen",
+    "sustainableTherapyDesc": "Patienten mit Gesundheitsbudget brechen nicht nach der dritten Sitzung ab. Sie bleiben bis zum Ende der Therapie — das verbessert Ihre Ergebnisse und Ihren Umsatz.",
+    "protectedTime": "Null Risiko, null Kosten",
+    "protectedTimeDesc": "Die Partnerschaft ist komplett kostenlos. Die Informationsmaterialien liefern wir kostenfrei. Keine Vertragsbindung, keine Verpflichtungen."
   },
   "steps": {
-    "step1Title": "Das kurze Kennenlernen",
-    "step1Desc": "Wir prüfen in wenigen Minuten ob unsere Philosophie zu Ihrer Praxis passt.",
-    "step2Title": "Die kostenfreie Ausstattung",
-    "step2Desc": "Sie erhalten unsere hochwertigen Informationskarten kostenfrei für Ihr Wartezimmer.",
-    "step3Title": "Die profitable Zusammenarbeit",
-    "step3Desc": "Ihre Patienten profitieren sofort. Sie konzentrieren sich auf das, was Sie am besten können."
+    "step1Title": "Kurzes Kennenlernen",
+    "step1Desc": "5 Minuten reichen. Wir erklären das Konzept und Sie entscheiden, ob es zu Ihrer Praxis passt.",
+    "step2Title": "Materialien erhalten",
+    "step2Desc": "Sie bekommen unseren hochwertigen Aufsteller mit Flyern für Ihr Wartezimmer — kostenlos und fertig zum Aufstellen.",
+    "step3Title": "Patienten profitieren",
+    "step3Desc": "Ihre Patienten scannen den QR-Code, sichern sich ihr Budget und können sich Ihre Behandlung leisten. Sie konzentrieren sich aufs Heilen."
   },
   "cta": {
     "title": "Jetzt kostenlos Partnerpraxis werden",
-    "subtitle": "In nur 5 Minuten zum Healio-Partner. Buchen Sie Ihren Kennenlerntermin.",
+    "subtitle": "In 5 Minuten zum Healio-Partner. Kein Risiko, keine Kosten, keine Verpflichtung.",
     "calendarError": "Kalender konnte nicht geladen werden",
     "calendarErrorDesc": "Bitte überprüfen Sie Ihre Internetverbindung oder deaktivieren Sie eventuelle Adblocker."
   }

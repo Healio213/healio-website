@@ -9,21 +9,21 @@ const testimonials = [
     initials: "DM",
     profession: "Heilpraktiker",
     city: "Hamburg",
-    text: "Seit wir Healio-Partner sind, können meine Patienten endlich die volle Behandlung in Anspruch nehmen."
+    text: "Seitdem meine Patienten das Gesundheitsbudget nutzen, brechen deutlich weniger Behandlungen ab. Die Patienten können sich die volle Therapie leisten — das macht einen enormen Unterschied."
   },
   {
-    name: "Anna Schmidt",
-    initials: "AS",
-    profession: "Physiotherapeutin",
+    name: "Li Wei Chen",
+    initials: "LC",
+    profession: "TCM-Therapeutin",
     city: "Berlin",
-    text: "Die Unterstützung durch Healio hat unsere Praxis transformiert. Unsere Patienten sind zufriedener und die Behandlungsergebnisse sind deutlich besser."
+    text: "Meine Patienten können jetzt die komplette TCM-Kur durchziehen — Akupunktur, Kräutertherapie, alles. Vorher haben viele nach der dritten Sitzung aufgehört. Das war frustrierend."
   },
   {
     name: "Thomas Weber",
     initials: "TW",
-    profession: "Osteopath",
+    profession: "Osteopath & Chiropraktiker",
     city: "München",
-    text: "Als Partner profitieren wir von professionellem Material und echter Unterstützung. Das macht den Unterschied für unsere Patienten."
+    text: "Der Aufsteller steht im Wartezimmer, die Patienten informieren sich selbst. Ich muss nichts verkaufen, nichts erklären. Das läuft einfach."
   }
 ];
 
@@ -31,15 +31,15 @@ const PartnerTestimonials = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-emerald-50/30 via-emerald-50/10 to-white">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Erfahrungen aus der Praxis</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Stimmen aus der Praxis</h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Das sagen Therapeuten und Behandler über die Zusammenarbeit mit unserem Netzwerk.
+            Das sagen Therapeuten und Behandler über die Zusammenarbeit mit Healio.
           </p>
         </motion.div>
 
