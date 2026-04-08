@@ -14,9 +14,9 @@ const testimonials = [
   {
     name: "Li Wei Chen",
     initials: "LC",
-    profession: "TCM-Therapeutin",
+    profession: "TCM Therapeutin",
     city: "Berlin",
-    text: "Meine Patienten können jetzt die komplette TCM-Kur durchziehen — Akupunktur, Kräutertherapie, alles. Vorher haben viele nach der dritten Sitzung aufgehört. Das war frustrierend."
+    text: "Meine Patienten können jetzt die komplette TCM Kur durchziehen — Akupunktur, Kräutertherapie, alles. Vorher haben viele nach der dritten Sitzung aufgehört. Das war frustrierend."
   },
   {
     name: "Thomas Weber",
