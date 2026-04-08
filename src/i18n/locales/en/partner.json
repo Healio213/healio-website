@@ -1,20 +1,20 @@
 {
   "hero": {
     "badge": "For Therapists, Practices & Specialty Shops",
-    "title": "Up to €1,000 Budget — for Your Services.",
+    "title": "Up to €1,000 Budget for Your Services.",
     "subtitle": "Your patients receive a health budget of up to €3,000. Up to €1,000 of that is available for naturopathy, osteopathy, and alternative therapies. For you, that means: full treatment cycles and no more therapy dropouts.",
     "videoFallback": "Your browser does not support video."
   },
   "problem": {
     "title": "Does This Sound Familiar?",
-    "text": "You know exactly which treatment would help your patient right now — 10 sessions of osteopathy, a holistic pain therapy, a complete TCM program. But after the third session, the patient drops out. Not because the therapy isn't working, but because they can no longer afford it. That's frustrating for you as a practitioner — and harmful to the patient."
+    "text": "You know exactly which treatment would help your patient right now. 10 sessions of osteopathy, a holistic pain therapy, a complete TCM program. But after the third session, the patient drops out. Not because the therapy isn't working, but because the costs are too high. That's frustrating for you as a practitioner and harmful to your patient."
   },
   "budget": {
     "title": "The Healio Health Budget",
     "subtitle": "Your patients combine the IKK health insurance bonus with supplementary insurance to receive a real budget for health services.",
     "total": "Total Health Budget",
     "totalAmount": "up to €3,000",
-    "totalDesc": "over 2 years — through IKK bonus + supplementary insurance",
+    "totalDesc": "over 2 years through IKK bonus + supplementary insurance",
     "naturheilkunde": "Naturopathy & Alternative Medicine",
     "naturheilkundeAmount": "up to €1,000",
     "naturheilkundeDesc": "For naturopaths, osteopathy, TCM, chiropractic and more",
@@ -29,38 +29,38 @@
     "title": "Who Is Healio For?",
     "subtitle": "These professionals benefit directly from their patients' and customers' health budget.",
     "heilpraktiker": "Naturopaths",
-    "heilpraktikerDesc": "Up to €1,000 for your treatments — your patients can afford the full therapy.",
+    "heilpraktikerDesc": "Up to €1,000 for your treatments. Your patients can afford the full therapy.",
     "osteopath": "Osteopaths",
-    "osteopathDesc": "Osteopathic treatments are covered by the naturopathy budget — complete treatment cycles instead of single sessions.",
+    "osteopathDesc": "Osteopathic treatments are covered by the naturopathy budget. Complete treatment cycles instead of single sessions.",
     "tcm": "TCM Practitioners",
-    "tcmDesc": "Acupuncture, herbal therapy, Tuina — your patients can complete the entire TCM program.",
+    "tcmDesc": "Acupuncture, herbal therapy, Tuina. Your patients can complete the entire TCM program.",
     "chiropraktiker": "Chiropractors",
     "chiropraktikerDesc": "Chiropractic adjustments and treatment series are covered through the naturopathy budget.",
     "brillenladen": "Optical Shops & Opticians",
-    "brillenladenDesc": "Up to €600 vision budget — your customers can afford the glasses they truly want.",
+    "brillenladenDesc": "Up to €600 vision budget. Your customers can afford the glasses they truly want.",
     "hebamme": "Midwives",
-    "hebammeDesc": "Recommend the health budget to your families — for preventive care, naturopathy, and child health services."
+    "hebammeDesc": "Recommend the health budget to your families for preventive care, naturopathy, and child health services."
   },
   "solution": {
     "title": "This Is How Easy It Works for You.",
     "relaxedPatients": "Zero Effort for You",
-    "relaxedPatientsDesc": "Place our information cards in your waiting room or hand them out directly. We handle everything else — consultation, application, processing.",
+    "relaxedPatientsDesc": "Place our information cards in your waiting room or hand them out directly. We handle everything else. Consultation, application, processing.",
     "sustainableTherapy": "Full Treatment Cycles",
-    "sustainableTherapyDesc": "Patients with a health budget don't drop out after the third session. They stay until the end of therapy — improving your outcomes and your revenue.",
+    "sustainableTherapyDesc": "Patients with a health budget don't drop out after the third session. They stay until the end of therapy. That improves your outcomes and your revenue.",
     "protectedTime": "Zero Risk, Zero Cost",
     "protectedTimeDesc": "The partnership is completely free. We deliver the information materials at no charge. No contracts, no obligations."
   },
   "steps": {
     "step1Title": "Quick Introduction",
-    "step1Desc": "5 minutes is all it takes. We explain the concept and you decide if it fits your practice.",
+    "step1Desc": "15 minutes is all it takes. We explain the concept and you decide if it fits your practice.",
     "step2Title": "Receive Materials",
-    "step2Desc": "You receive our premium display stand with flyers for your waiting room — free and ready to set up.",
+    "step2Desc": "You receive our premium display stand with flyers for your waiting room. Free and ready to set up.",
     "step3Title": "Patients Benefit",
     "step3Desc": "Your patients scan the QR code, secure their budget, and can afford your treatment. You focus on healing."
   },
   "cta": {
     "title": "Become a Partner Practice for Free",
-    "subtitle": "Become a Healio partner in 5 minutes. No risk, no cost, no obligation.",
+    "subtitle": "Become a Healio partner in 15 minutes. No risk, no cost, no obligation.",
     "calendarError": "Calendar could not be loaded",
     "calendarErrorDesc": "Please check your internet connection or disable any ad blockers."
   }

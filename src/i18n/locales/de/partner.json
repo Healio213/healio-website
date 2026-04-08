@@ -1,20 +1,20 @@
 {
   "hero": {
     "badge": "Für Therapeuten, Praxen & Fachgeschäfte",
-    "title": "Bis zu 1.000 € Budget — für Ihre Leistungen.",
+    "title": "Bis zu 1.000 € Budget für Ihre Leistungen.",
     "subtitle": "Ihre Patienten erhalten ein Gesundheitsbudget von bis zu 3.000 €. Davon stehen bis zu 1.000 € für Naturheilkunde, Osteopathie und alternative Therapien bereit. Das bedeutet für Sie: volle Behandlungszyklen und keine Therapieabbrüche.",
     "videoFallback": "Ihr Browser unterstützt kein Video."
   },
   "problem": {
     "title": "Kennen Sie das?",
-    "text": "Sie wissen genau, welche Behandlung Ihrem Patienten jetzt helfen würde — 10 Sitzungen Osteopathie, eine ganzheitliche Schmerztherapie, eine vollständige TCM-Kur. Doch nach der dritten Sitzung bricht der Patient ab. Nicht weil die Therapie nicht wirkt, sondern weil die Kosten zu hoch sind. Das frustriert Sie als Behandler — und schadet Ihrem Patienten."
+    "text": "Sie wissen genau, welche Behandlung Ihrem Patienten jetzt helfen würde. 10 Sitzungen Osteopathie, eine ganzheitliche Schmerztherapie, eine vollständige TCM-Kur. Doch nach der dritten Sitzung bricht der Patient ab. Nicht weil die Therapie nicht wirkt, sondern weil die Kosten zu hoch sind. Das frustriert Sie als Behandler und schadet Ihrem Patienten."
   },
   "budget": {
     "title": "Das Healio Gesundheitsbudget",
     "subtitle": "Ihre Patienten kombinieren den IKK-Kassenbonus mit einer Zusatzversicherung und erhalten so ein echtes Budget für Gesundheitsleistungen.",
     "total": "Gesundheitsbudget gesamt",
     "totalAmount": "bis zu 3.000 €",
-    "totalDesc": "in 2 Jahren — durch IKK-Bonus + Zusatzversicherung",
+    "totalDesc": "in 2 Jahren durch IKK-Bonus + Zusatzversicherung",
     "naturheilkunde": "Naturheilkunde & Alternativmedizin",
     "naturheilkundeAmount": "bis zu 1.000 €",
     "naturheilkundeDesc": "Für Heilpraktiker, Osteopathie, TCM, Chiropraktik und mehr",
@@ -29,38 +29,38 @@
     "title": "Für wen ist Healio?",
     "subtitle": "Diese Berufsgruppen profitieren direkt vom Gesundheitsbudget ihrer Patienten und Kunden.",
     "heilpraktiker": "Heilpraktiker",
-    "heilpraktikerDesc": "Bis zu 1.000 € für Ihre Behandlungen — Ihre Patienten können sich die volle Therapie leisten.",
+    "heilpraktikerDesc": "Bis zu 1.000 € für Ihre Behandlungen. Ihre Patienten können sich die volle Therapie leisten.",
     "osteopath": "Osteopathen",
-    "osteopathDesc": "Osteopathische Behandlungen werden aus dem Naturheilkunde-Budget erstattet — vollständige Behandlungszyklen statt Einzelsitzungen.",
+    "osteopathDesc": "Osteopathische Behandlungen werden aus dem Naturheilkunde-Budget erstattet. Vollständige Behandlungszyklen statt Einzelsitzungen.",
     "tcm": "TCM-Therapeuten",
-    "tcmDesc": "Akupunktur, Kräutertherapie, Tuina — Ihre Patienten können die gesamte TCM-Kur durchziehen.",
+    "tcmDesc": "Akupunktur, Kräutertherapie, Tuina. Ihre Patienten können die gesamte TCM-Kur durchziehen.",
     "chiropraktiker": "Chiropraktiker",
     "chiropraktikerDesc": "Chiropraktische Justierungen und Behandlungsserien werden über das Naturheilkunde-Budget abgedeckt.",
     "brillenladen": "Brillengeschäfte & Optiker",
-    "brillenladenDesc": "Bis zu 600 € Sehhilfen-Budget — Ihre Kunden können sich die Brille leisten, die sie wirklich wollen.",
+    "brillenladenDesc": "Bis zu 600 € Sehhilfen-Budget. Ihre Kunden können sich die Brille leisten, die sie wirklich wollen.",
     "hebamme": "Hebammen",
-    "hebammeDesc": "Empfehlen Sie Ihren Familien das Gesundheitsbudget — für Vorsorge, Naturheilkunde und Kinderversorgung."
+    "hebammeDesc": "Empfehlen Sie Ihren Familien das Gesundheitsbudget für Vorsorge, Naturheilkunde und Kinderversorgung."
   },
   "solution": {
     "title": "So einfach funktioniert es für Sie.",
     "relaxedPatients": "Null Aufwand für Sie",
-    "relaxedPatientsDesc": "Sie legen unsere Informationskarten ins Wartezimmer oder geben sie direkt mit. Alles Weitere übernehmen wir — Beratung, Antrag, Abwicklung.",
+    "relaxedPatientsDesc": "Sie legen unsere Informationskarten ins Wartezimmer oder geben sie direkt mit. Alles Weitere übernehmen wir. Beratung, Antrag, Abwicklung.",
     "sustainableTherapy": "Volle Behandlungszyklen",
-    "sustainableTherapyDesc": "Patienten mit Gesundheitsbudget brechen nicht nach der dritten Sitzung ab. Sie bleiben bis zum Ende der Therapie — das verbessert Ihre Ergebnisse und Ihren Umsatz.",
+    "sustainableTherapyDesc": "Patienten mit Gesundheitsbudget brechen nicht nach der dritten Sitzung ab. Sie bleiben bis zum Ende der Therapie. Das verbessert Ihre Ergebnisse und Ihren Umsatz.",
     "protectedTime": "Null Risiko, null Kosten",
     "protectedTimeDesc": "Die Partnerschaft ist komplett kostenlos. Die Informationsmaterialien liefern wir kostenfrei. Keine Vertragsbindung, keine Verpflichtungen."
   },
   "steps": {
     "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "5 Minuten reichen. Wir erklären das Konzept und Sie entscheiden, ob es zu Ihrer Praxis passt.",
+    "step1Desc": "15 Minuten reichen. Wir erklären das Konzept und Sie entscheiden, ob es zu Ihrer Praxis passt.",
     "step2Title": "Materialien erhalten",
-    "step2Desc": "Sie bekommen unseren hochwertigen Aufsteller mit Flyern für Ihr Wartezimmer — kostenlos und fertig zum Aufstellen.",
+    "step2Desc": "Sie bekommen unseren hochwertigen Aufsteller mit Flyern für Ihr Wartezimmer. Kostenlos und fertig zum Aufstellen.",
     "step3Title": "Patienten profitieren",
     "step3Desc": "Ihre Patienten scannen den QR-Code, sichern sich ihr Budget und können sich Ihre Behandlung leisten. Sie konzentrieren sich aufs Heilen."
   },
   "cta": {
     "title": "Jetzt kostenlos Partnerpraxis werden",
-    "subtitle": "In 5 Minuten zum Healio-Partner. Kein Risiko, keine Kosten, keine Verpflichtung.",
+    "subtitle": "In 15 Minuten zum Healio-Partner. Kein Risiko, keine Kosten, keine Verpflichtung.",
     "calendarError": "Kalender konnte nicht geladen werden",
     "calendarErrorDesc": "Bitte überprüfen Sie Ihre Internetverbindung oder deaktivieren Sie eventuelle Adblocker."
   }
