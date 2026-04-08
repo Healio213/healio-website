@@ -16,6 +16,8 @@ import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown, Star } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
 
 const StationaerFaq = () => {
   const { t } = useTranslation('stationaer');
@@ -50,9 +52,8 @@ const StationaerFaq = () => {
 const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
-
-  // Hero verlinkt auf /ambulant — SDK-Weiterleitung passiert dort
-  const ikkLink = "https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=koop_reg&pid=V37000250016";
+  const referrer = useReferrer();
+  const sdkUrl = buildSdkUrl({ ref: referrer });
 
   const schemaMarkup = createServiceSchema();
 
@@ -119,13 +120,13 @@ const StationaerPage = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-xl mx-auto">
                   <Button asChild className="bg-[#25c990] hover:bg-[#1db37f] text-white shadow-[0_4px_14px_rgba(37,201,144,0.4)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.6)] text-lg px-8 py-6 h-auto rounded-xl border-none transition-all duration-300 w-full sm:w-auto">
-                    <a href="/ambulant">
+                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('stationaer-hero', referrer)}>
                       <Calculator className="w-5 h-5 mr-2" aria-hidden="true" />
                       {t('hero.ctaCalculate')}
                     </a>
                   </Button>
                   <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md shadow-xl text-lg px-8 py-6 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto">
-                    <a href={ikkLink} target="_blank" rel="noopener noreferrer">
+                    <a href={IKK_LINK} target="_blank" rel="noopener noreferrer">
                       <Gift className="w-5 h-5 mr-2" aria-hidden="true" />
                       {t('hero.ctaBonus')}
                     </a>
@@ -142,7 +143,9 @@ const StationaerPage = () => {
           <div className="healio-container px-4">
             <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
-              <img src="/siegel/klinik-siegel.png" alt={t('siegel.alt')} className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
