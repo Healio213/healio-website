@@ -179,6 +179,13 @@ const PartnerPage = () => {
                 <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-xl mx-auto">
                   {t('hero.subtitle')}
                 </p>
+                <Button
+                  size="lg"
+                  className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
+                  onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  {t('hero.cta')}
+                </Button>
               </motion.div>
             </div>
           </div>
@@ -512,6 +519,31 @@ const PartnerPage = () => {
           </div>
         </section>
 
+        {/* FOOTER BANNER */}
+        <section className="py-16 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+                {t('footer.title')}
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8">
+                {t('footer.subtitle')}
+              </p>
+              <Button
+                size="lg"
+                className="bg-white text-[#25c990] hover:bg-slate-100 font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
+                onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('footer.cta')}
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+
       </main>
 
       {/* Proaktive Mia-Sprechblase */}
@@ -538,7 +570,7 @@ const PartnerPage = () => {
               <div>
                 <p className="text-sm font-semibold text-gray-900 mb-1">Mia von Healio</p>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Hallo! Soll ich Ihnen kurz erklären, wie das Versorgungswerk für Ihre Praxis funktioniert?
+                  Hallo! Soll ich dir kurz erklären, wie das Healio Partnernetzwerk für deine Praxis funktioniert?
                 </p>
                 <button
                   onClick={handleMiaClick}
