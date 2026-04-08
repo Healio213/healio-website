@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "badge": "Especially for Midwives",
+    "title": "Full courses for you and the best care for your families.",
+    "subtitle": "How your expectant mothers effectively pay zero euros for important extras starting today and you get fairly rewarded for your work.",
+    "cta": "Book your free introduction now"
+  },
+  "problem": {
+    "title": "Who actually pays for all the extras?",
+    "text": "Birth preparation, acupuncture for nausea, yoga or the important postnatal recovery course. You know exactly what would be good for mother and child right now. But these important services add up quickly and health insurance often only covers the bare minimum. Many families forgo your valuable offerings for purely financial reasons."
+  },
+  "solution": {
+    "title": "The Solution: The Healio Health Budget",
+    "text": "Your families secure a budget of up to 3,000 euros. Through smart offsetting with the health insurance bonus, this budget ideally finances itself completely. Your patients have full coverage and effectively pay zero euros for your courses and treatments.",
+    "amount": "up to €3,000",
+    "amountLabel": "Health Budget"
+  },
+  "leistungen": {
+    "title": "The €1,100 budget for your families",
+    "subtitle": "So your patients know exactly what to expect, you can show them these benefits directly. The budget ensures that medical extras no longer have to be paid out of pocket.",
+    "highlights": [
+      {
+        "title": "€1,100 for your health",
+        "desc": "This budget is exclusively available for natural medicine, osteopathy and important prenatal care during pregnancy."
+      },
+      {
+        "title": "Gynaecologist extras included",
+        "desc": "Whether additional ultrasound or important tests like nuchal translucency measurement. The budget covers these IGeL services."
+      },
+      {
+        "title": "Gentle medicine",
+        "desc": "Acupuncture for pregnancy complaints or osteopathic treatments for the newborn are fully reimbursed."
+      },
+      {
+        "title": "Medication and aids",
+        "desc": "Medications like Femibion or aids that would otherwise be paid privately are covered by the budget."
+      },
+      {
+        "title": "Private patient status for the baby",
+        "desc": "Your child enjoys access to the best medicine from day one without you having to worry about costs."
+      }
+    ],
+    "ikkTitle": "IKK classic Benefits",
+    "ikkItems": [
+      { "name": "Midwife on-call service", "amount": "€250", "detail": "per pregnancy" },
+      { "name": "Minerals", "amount": "€100", "detail": "Iron, folic acid & magnesium per year" },
+      { "name": "Supplementary screening", "amount": "€100", "detail": "Toxoplasmosis, Streptococcus, Rubella, Cytomegalovirus" },
+      { "name": "Postnatal recovery", "amount": "€75", "detail": "Bonus with supplementary insurance" },
+      { "name": "Maternity care", "amount": "€30", "detail": "per check-up" },
+      { "name": "Birth preparation courses", "amount": "free", "detail": "incl. partner course (Keleya)" },
+      { "name": "Home and birth center birth", "amount": "free", "detail": "Midwife + operating cost subsidy" }
+    ],
+    "sdkTitle": "SDK Supplementary Insurance",
+    "sdkItems": [
+      { "name": "Pregnancy care", "amount": "€500", "detail": "IGeL like nuchal scan, extra ultrasound, tests" },
+      { "name": "Natural healing", "amount": "€1,000", "detail": "Acupuncture, osteopathy, TCM incl. prescribed medication" },
+      { "name": "Medication and aids", "amount": "€1,000", "detail": "Co-payments for medication, remedies and aids" }
+    ],
+    "totalLabel": "Total Pregnancy Budget",
+    "totalAmount": "over €1,100",
+    "totalNote": "The best part: Through the smart combination with the statutory health insurance bonus, the costs for this package pay for themselves completely. For the expectant mother, this means the best care at effectively zero euros."
+  },
+  "benefits": {
+    "title": "The perfect win win for your work",
+    "text": "When money is no longer an issue, families book exactly the courses they really need. Your schedule is full and the mothers are optimally cared for.",
+    "premiumText": "Additionally, we want to thank you for your trust. For every successful recommendation of our budget, you receive a premium of 50 euros.",
+    "controlText": "You always have full control:",
+    "option1Title": "Payout to you",
+    "option1Desc": "You receive the 50 euros as a classic referral premium, paid out directly and easily.",
+    "option2Title": "The Healio Donation",
+    "option2Desc": "You waive the premium and we donate 50 euros in your name to a renowned foundation for children's health.",
+    "flexNote": "You decide flexibly anew with each family."
+  },
+  "legal": {
+    "title": "Your Neutrality. 100 Percent Protected.",
+    "subtitle": "As a midwife, you are committed to the well-being of your patients and strict neutrality. That's exactly how we built our concept for you.",
+    "text": "The model is legally completely safe. You never act as an advisor and don't recommend specific tariffs. You simply pass on information about how families can smartly cover the services you recommend anyway. The complete and market-independent consultation is handled by us at Healio.",
+    "summary": "You act as a pure referrer. Your independence is always maintained and you remain in perfect alignment with your strict professional code."
+  },
+  "steps": {
+    "title": "This is how easy it works for you.",
+    "step1Title": "Quick Introduction",
+    "step1Desc": "15 minutes is enough. We explain the concept and you decide at your own pace whether it suits you.",
+    "step2Title": "Receive Materials",
+    "step2Desc": "You receive high-quality and unobtrusive information flyers for your home visits or practice rooms. Completely free.",
+    "step3Title": "Families Benefit",
+    "step3Desc": "Your patients scan the QR code on the flyer, secure their budget online in minutes and can book your services with ease. We handle the entire administrative process.",
+    "easeNote": "We want to make your everyday life easier in every way. Feel free to talk to us about this!"
+  },
+  "cta": {
+    "title": "Ready for a quick introduction?",
+    "subtitle": "15 minutes. No sales pitch. Just real facts for your work.",
+    "button": "Book strategy session"
+  }
+}

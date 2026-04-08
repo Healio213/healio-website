@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "badge": "Speziell für Hebammen",
+    "title": "Volle Kurse für dich und die beste Versorgung für deine Familien.",
+    "subtitle": "Wie deine Schwangeren ab heute effektiv null Euro für wichtige Extras zahlen und du für deinen Einsatz fair belohnt wirst.",
+    "cta": "Jetzt kostenloses Kennenlernen sichern"
+  },
+  "problem": {
+    "title": "Wer zahlt eigentlich die ganzen Extras?",
+    "text": "Geburtsvorbereitung, Akupunktur gegen Übelkeit, Yoga oder der wichtige Kurs zur Rückbildung. Du weißt genau, was Mutter und Kind jetzt gut tun würde. Doch diese wichtigen Leistungen gehen schnell ins Geld und die Kasse zahlt oft nur das absolute Minimum. Viele Familien verzichten deshalb aus rein finanziellen Gründen auf deine wertvollen Angebote."
+  },
+  "solution": {
+    "title": "Die Lösung: Das Healio Gesundheitsbudget",
+    "text": "Deine Familien sichern sich ein Budget von bis zu 3000 Euro. Durch die intelligente Verrechnung mit dem Bonus der Krankenkasse finanziert sich dieses Budget im Idealfall komplett von selbst. Deine Patientinnen haben den vollen Schutz und zahlen effektiv null Euro für deine Kurse und Behandlungen.",
+    "amount": "bis zu 3.000 €",
+    "amountLabel": "Gesundheitsbudget"
+  },
+  "leistungen": {
+    "title": "Das 1100 Euro Budget für deine Familien",
+    "subtitle": "Damit deine Patientinnen genau wissen was sie erwartet kannst du ihnen diese Vorteile direkt zeigen. Das Budget sorgt dafür dass medizinische Extras nicht mehr aus eigener Tasche gezahlt werden müssen.",
+    "highlights": [
+      {
+        "title": "1100 Euro für deine Gesundheit",
+        "desc": "Dieses Budget steht exklusiv für Naturheilkunde und Osteopathie sowie für wichtige Vorsorgeuntersuchungen während der Schwangerschaft bereit."
+      },
+      {
+        "title": "Frauenarzt Extras inklusive",
+        "desc": "Ob zusätzlicher Ultraschall oder wichtige Tests wie die Nackenfaltenmessung. Das Budget übernimmt die Kosten für diese IGeL Leistungen."
+      },
+      {
+        "title": "Sanfte Medizin",
+        "desc": "Akupunktur gegen Schwangerschaftsbeschwerden oder osteopathische Behandlungen für das Neugeborene werden voll erstattet."
+      },
+      {
+        "title": "Arznei und Hilfsmittel",
+        "desc": "Medikamente wie Femibion oder Hilfsmittel die sonst privat gezahlt werden müssten sind über das Budget abgedeckt."
+      },
+      {
+        "title": "Privatpatienten Status für das Baby",
+        "desc": "Dein Kind genießt von Tag eins an den Zugang zur besten Medizin ohne dass du dir Sorgen um die Kosten machen musst."
+      }
+    ],
+    "ikkTitle": "IKK classic Leistungen",
+    "ikkItems": [
+      { "name": "Hebammen Rufbereitschaft", "amount": "250 €", "detail": "je Schwangerschaft" },
+      { "name": "Mineralstoffe", "amount": "100 €", "detail": "Eisen, Folsäure, Magnesium (z.B. Femibion)" },
+      { "name": "Ergänzende Vorsorge", "amount": "100 €", "detail": "Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie" },
+      { "name": "Rückbildungsgymnastik", "amount": "75 €", "detail": "Bonus mit Zusatzversicherung" },
+      { "name": "Mutterschaftsvorsorge", "amount": "30 €", "detail": "je Vorsorgeuntersuchung" },
+      { "name": "Geburtsvorbereitungskurse", "amount": "kostenlos", "detail": "inkl. Partner Kurs (Keleya)" },
+      { "name": "Haus und Geburtshausgeburt", "amount": "kostenlos", "detail": "Hebamme + Betriebskosten Zuschuss" }
+    ],
+    "sdkTitle": "SDK Zusatzversicherung",
+    "sdkItems": [
+      { "name": "Schwangerschaftsvorsorge", "amount": "500 €", "detail": "IGeL wie Nackenfaltenmessung, extra Ultraschall, Tests" },
+      { "name": "Naturheilverfahren", "amount": "1.000 €", "detail": "Akupunktur, Osteopathie, TCM inkl. verordneter Arzneimittel" },
+      { "name": "Arznei und Hilfsmittel", "amount": "1.000 €", "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel" }
+    ],
+    "totalLabel": "Schwangerschafts Budget gesamt",
+    "totalAmount": "über 1.100 €",
+    "totalNote": "Der Clou: Durch die intelligente Kombination mit dem Bonus der gesetzlichen Krankenkasse refinanzieren sich die Kosten für dieses Paket komplett von selbst. Für die Schwangere bedeutet das die beste Versorgung bei effektiv null Euro Kosten."
+  },
+  "benefits": {
+    "title": "Das perfekte Win Win für deine Arbeit",
+    "text": "Wenn Geld keine Rolle mehr spielt, buchen die Familien genau die Kurse, die sie wirklich brauchen. Dein Terminkalender ist voll und die Mütter sind optimal versorgt.",
+    "premiumText": "Zusätzlich möchten wir uns für dein Vertrauen bedanken. Für jede erfolgreiche Empfehlung unseres Budgets erhältst du eine Prämie von 50 Euro.",
+    "controlText": "Du hast dabei immer die volle Kontrolle:",
+    "option1Title": "Die Auszahlung an dich",
+    "option1Desc": "Du erhältst die 50 Euro als klassische Tippgeber Prämie direkt und unkompliziert ausgezahlt.",
+    "option2Title": "Die Healio Spende",
+    "option2Desc": "Du verzichtest auf die Prämie und wir spenden die 50 Euro in deinem Namen an eine renommierte Stiftung für Kindergesundheit.",
+    "flexNote": "Du entscheidest bei jeder Familie ganz flexibel neu."
+  },
+  "legal": {
+    "title": "Deine Neutralität. Zu 100 Prozent geschützt.",
+    "subtitle": "Als Hebamme bist du dem Wohl deiner Patientinnen und der strikten Neutralität verpflichtet. Genau so haben wir unser Konzept für dich aufgebaut.",
+    "text": "Das Modell ist rechtlich absolut sicher. Du trittst niemals als Berater auf und empfiehlst keine bestimmten Tarife. Du gibst lediglich eine Information weiter, wie Familien die von dir ohnehin empfohlenen Leistungen finanziell smart abdecken können. Die komplette und marktunabhängige Beratung übernehmen wir bei Healio.",
+    "summary": "Du agierst als reiner Tippgeber. Damit ist deine Unabhängigkeit jederzeit gewahrt und du bleibst im perfekten Einklang mit deiner strengen Berufsordnung."
+  },
+  "steps": {
+    "title": "So einfach funktioniert es für dich.",
+    "step1Title": "Kurzes Kennenlernen",
+    "step1Desc": "15 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
+    "step2Title": "Materialien erhalten",
+    "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche oder deine Praxisräume. Völlig kostenlos.",
+    "step3Title": "Familien profitieren",
+    "step3Desc": "Deine Patientinnen scannen den QR Code auf dem Flyer, sichern sich ihr Budget in wenigen Minuten online und können deine Leistungen entspannt buchen. Wir übernehmen den gesamten administrativen Prozess.",
+    "easeNote": "Wir möchten dir den Alltag in jeder Hinsicht erleichtern. Sprich uns hierzu gerne nochmal an!"
+  },
+  "cta": {
+    "title": "Bereit für ein kurzes Kennenlernen?",
+    "subtitle": "15 Minuten. Keine Verkaufspräsentation. Nur echte Fakten für deine Arbeit.",
+    "button": "Strategiegespräch sichern"
+  }
+}

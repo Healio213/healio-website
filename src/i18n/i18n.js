@@ -15,6 +15,8 @@ import deStationaer from './locales/de/stationaer.json';
 import enStationaer from './locales/en/stationaer.json';
 import dePartner from './locales/de/partner.json';
 import enPartner from './locales/en/partner.json';
+import deHebammen from './locales/de/hebammen.json';
+import enHebammen from './locales/en/hebammen.json';
 import deLeistungen from './locales/de/leistungen.json';
 import enLeistungen from './locales/en/leistungen.json';
 import deAbout from './locales/de/about.json';
@@ -44,6 +46,7 @@ i18n
         zahn: deZahn,
         stationaer: deStationaer,
         partner: dePartner,
+        hebammen: deHebammen,
         leistungen: deLeistungen,
         about: deAbout,
         contact: deContact,
@@ -61,6 +64,7 @@ i18n
         zahn: enZahn,
         stationaer: enStationaer,
         partner: enPartner,
+        hebammen: enHebammen,
         leistungen: enLeistungen,
         about: enAbout,
         contact: enContact,

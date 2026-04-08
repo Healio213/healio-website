@@ -23,6 +23,7 @@ const AgbPage = React.lazy(() => import('@/pages/AgbPage'));
 const DatenschutzPage = React.lazy(() => import('@/pages/DatenschutzPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
+const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
 const ConfirmationPage = React.lazy(() => import('@/pages/ConfirmationPage'));
@@ -78,6 +79,7 @@ function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="leistungen" element={<LeistungenPage />} />
               <Route path="partner" element={<PartnerPage />} />
+              <Route path="hebammen" element={<HebammenPage />} />
               <Route path="kontakt" element={<KontaktPage />} />
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
               <Route path="ambulant" element={<AmbulantPage />} />
@@ -100,6 +102,7 @@ function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<LeistungenPage />} />
               <Route path="partner" element={<PartnerPage />} />
+              <Route path="midwives" element={<HebammenPage />} />
               <Route path="contact" element={<KontaktPage />} />
               <Route path="appointment" element={<TerminvereinbarungPage />} />
               <Route path="outpatient" element={<AmbulantPage />} />
