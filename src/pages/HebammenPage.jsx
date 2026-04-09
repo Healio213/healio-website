@@ -64,6 +64,24 @@ const HebammenPage = () => {
           </div>
         </section>
 
+        {/* Qualitätssiegel: SDK + IKK classic */}
+        <motion.section className="py-8 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <div className="container mx-auto px-4">
+            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
+              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/beratungsqualitaet.webp" alt="Deutschland Test Nr. 1 Höchste Beratungsqualität" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/chip-bester-online.webp" alt="CHIP Bester Online-Vertragsabschluss" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/digital-champion.webp" alt="Digital Champion — Focus Money" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/euro-top-bonus.webp" alt="Euro TOP Bonusprogramme" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern — Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+            </div>
+          </div>
+        </motion.section>
+
         {/* PROBLEM & LÖSUNG */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
