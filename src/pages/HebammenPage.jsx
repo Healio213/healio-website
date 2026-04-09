@@ -325,7 +325,7 @@ const HebammenPage = () => {
               >
                 <div id="calendly-hebammen">
                   <iframe
-                    src="https://calendly.com/healio-beratung/kennenlernen?hide_gdpr_banner=1&primary_color=25c990"
+                    src="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
                     width="100%"
                     height="700"
                     frameBorder="0"
