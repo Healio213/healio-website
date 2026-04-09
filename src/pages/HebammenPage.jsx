@@ -31,27 +31,36 @@ const HebammenPage = () => {
       <main className="bg-white overflow-hidden w-full">
 
         {/* HERO */}
-        <section className="relative pt-32 pb-20 bg-gradient-to-br from-rose-50 via-white to-emerald-50">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                <span className="inline-block bg-rose-100 text-rose-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-                  {t('hero.badge')}
-                </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight mb-6">
-                  {t('hero.title')}
-                </h1>
-                <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8">
-                  {t('hero.subtitle')}
-                </p>
-                <Button
-                  onClick={scrollToCalendly}
-                  className="bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-                >
-                  {t('hero.cta')}
-                </Button>
-              </motion.div>
-            </div>
+        <section className="relative min-h-[100svh] flex items-center pt-28 pb-16 lg:pt-20 lg:pb-0">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/images/hero-hebammen.webp"
+              alt="Hebamme im Gespräch mit schwangerer Patientin"
+              className="w-full h-full object-cover object-center"
+              fetchpriority="high"
+            />
+            <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent z-10" />
+          </div>
+
+          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
+            <motion.div className="max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <span className="inline-block bg-rose-100 text-rose-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+                {t('hero.badge')}
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                {t('hero.title')}
+              </h1>
+              <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8">
+                {t('hero.subtitle')}
+              </p>
+              <Button
+                onClick={scrollToCalendly}
+                className="bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
+              >
+                {t('hero.cta')}
+              </Button>
+            </motion.div>
           </div>
         </section>
 
