@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Shield, Wallet, HeartHandshake, Scale, MessageCircle, FileText, QrCode, Heart, Check, Baby } from 'lucide-react';
@@ -9,33 +9,6 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
-
-  const [scriptError, setScriptError] = useState(false);
-
-  useEffect(() => {
-    if (document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
-      if (window.Calendly) initCalendly();
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    script.onload = () => initCalendly();
-    script.onerror = () => setScriptError(true);
-    document.body.appendChild(script);
-    return () => { if (document.body.contains(script)) document.body.removeChild(script); };
-  }, []);
-
-  const initCalendly = () => {
-    if (window.Calendly) {
-      window.Calendly.initInlineWidget({
-        url: 'https://calendly.com/healio-beratung/kennenlernen',
-        parentElement: document.getElementById('calendly-hebammen'),
-        prefill: {},
-        utm: {},
-      });
-    }
-  };
 
   const scrollToCalendly = () => {
     document.getElementById('calendly-hebammen')?.scrollIntoView({ behavior: 'smooth' });
@@ -350,14 +323,16 @@ const HebammenPage = () => {
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="bg-white rounded-2xl shadow-xl p-4 sm:p-6"
               >
-                {scriptError ? (
-                  <div className="text-center py-10">
-                    <p className="text-slate-600 mb-2">Kalender konnte nicht geladen werden.</p>
-                    <p className="text-sm text-slate-400">Bitte überprüfe deine Internetverbindung oder deaktiviere eventuelle Adblocker.</p>
-                  </div>
-                ) : (
-                  <div id="calendly-hebammen" style={{ minHeight: '650px' }} />
-                )}
+                <div id="calendly-hebammen">
+                  <iframe
+                    src="https://calendly.com/healio-beratung/kennenlernen?hide_gdpr_banner=1&primary_color=25c990"
+                    width="100%"
+                    height="700"
+                    frameBorder="0"
+                    title="Termin buchen"
+                    style={{ minHeight: '700px', border: 'none' }}
+                  />
+                </div>
               </motion.div>
             </div>
           </div>
