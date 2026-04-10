@@ -9,14 +9,14 @@ const testimonials = [
     initials: "DM",
     profession: "Heilpraktiker",
     city: "Hamburg",
-    text: "Seitdem meine Patienten das Gesundheitsbudget nutzen, brechen deutlich weniger Behandlungen ab. Die Patienten können sich die volle Therapie leisten — das macht einen enormen Unterschied."
+    text: "Seitdem meine Patienten das Gesundheitsbudget nutzen, brechen deutlich weniger Behandlungen ab. Die Patienten können sich die volle Therapie leisten, das macht einen enormen Unterschied."
   },
   {
     name: "Li Wei Chen",
     initials: "LC",
     profession: "TCM Therapeutin",
     city: "Berlin",
-    text: "Meine Patienten können jetzt die komplette TCM Kur durchziehen — Akupunktur, Kräutertherapie, alles. Vorher haben viele nach der dritten Sitzung aufgehört. Das war frustrierend."
+    text: "Meine Patienten können jetzt die komplette TCM Kur durchziehen: Akupunktur, Kräutertherapie, alles. Vorher haben viele nach der dritten Sitzung aufgehört. Das war frustrierend."
   },
   {
     name: "Thomas Weber",
@@ -37,9 +37,9 @@ const PartnerTestimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Stimmen aus der Praxis</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Stimmen aus der <span className="text-healio-primary">Praxis</span></h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Das sagen Therapeuten und Behandler über die Zusammenarbeit mit Healio.
+            Das sagen Therapeuten und Behandler über die Zusammenarbeit mit <span className="text-healio-primary font-semibold">Healio</span>.
           </p>
         </motion.div>
 

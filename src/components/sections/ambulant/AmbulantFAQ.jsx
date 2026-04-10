@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import HighlightText from '@/components/ui/HighlightText';
 
 const categoryKeys = ['kosten', 'leistungen', 'ablauf', 'vertrauen'];
 
@@ -46,8 +47,12 @@ const AmbulantFAQ = () => {
       </Helmet>
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">{t('title')}</h2>
-          <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">{t('subtitle')}</p>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
+            <HighlightText text={t('title')} />
+          </h2>
+          <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
+            <HighlightText text={t('subtitle')} />
+          </p>
         </div>
 
         {categories.map((category, catIdx) => (

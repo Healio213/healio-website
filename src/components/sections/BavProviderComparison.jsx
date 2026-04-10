@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Shield, TrendingDown, DollarSign, Gift } from 'lucide-react';
 import { TextHighlight, AnimatedCounter } from '@/components/ui/ScrollAnimation';
+import HighlightText from '@/components/ui/HighlightText';
 
 const BavProviderComparison = () => {
   const { t } = useTranslation('home');
@@ -56,7 +57,7 @@ const BavProviderComparison = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
-              {t('bav.title')}
+              <HighlightText text={t('bav.title')} />
             </h2>
 
             <div className="w-24 h-1.5 bg-gradient-to-r from-[#25c990] to-emerald-300 rounded-full mx-auto my-8"></div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantVideoSection = () => {
   const { t } = useTranslation('ambulant');
@@ -14,10 +15,10 @@ const AmbulantVideoSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            {t('video.title')}
+            <HighlightText text={t('video.title')} />
           </h2>
           <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-2xl mx-auto font-medium">
-            {t('video.subtitle')}
+            <HighlightText text={t('video.subtitle')} />
           </p>
         </div>
 

@@ -7,15 +7,13 @@ import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Calculator, Gift, CheckCircle, Euro } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantHero = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer });
-  // Parse title: replace <highlight>...</highlight> with span
-  const rawTitle = t('hero.title');
-  const titleParts = rawTitle.split(/<highlight>(.*?)<\/highlight>/);
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" aria-labelledby="hero-heading">
@@ -41,11 +39,7 @@ const AmbulantHero = () => {
             id="hero-heading"
             className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg"
           >
-            {titleParts.map((part, i) =>
-              i % 2 === 1
-                ? <span key={i} className="text-healio-primary">{part}</span>
-                : <React.Fragment key={i}>{part}</React.Fragment>
-            )}
+            <HighlightText text={t('hero.title')} />
           </motion.h1>
 
           <motion.p
@@ -54,7 +48,7 @@ const AmbulantHero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl text-gray-100 font-medium max-w-2xl mx-auto leading-relaxed mb-6 drop-shadow-md"
           >
-            {t('hero.subtitle')}
+            <HighlightText text={t('hero.subtitle')} />
           </motion.p>
 
           <motion.div

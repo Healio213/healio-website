@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Leaf, Heart, TreePine, Droplets } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantUmwelt = () => {
   const { t } = useTranslation('ambulant');
@@ -31,11 +32,11 @@ const AmbulantUmwelt = () => {
 
           {/* Big Statement */}
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
-            {t('umwelt.title')}
+            <HighlightText text={t('umwelt.title')} />
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            {t('umwelt.subtitle')}
+            <HighlightText text={t('umwelt.subtitle')} />
           </p>
         </motion.div>
 

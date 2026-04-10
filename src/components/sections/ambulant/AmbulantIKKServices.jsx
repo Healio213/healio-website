@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Video, Stethoscope, Smartphone, Clock, Shield, Search } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantIKKServices = () => {
   const { t } = useTranslation('ambulant');
@@ -18,10 +19,10 @@ const AmbulantIKKServices = () => {
             {t('ikkServices.badge')}
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            {t('ikkServices.title')}
+            <HighlightText text={t('ikkServices.title')} />
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            {t('ikkServices.subtitle')}
+            <HighlightText text={t('ikkServices.subtitle')} />
           </p>
         </div>
 

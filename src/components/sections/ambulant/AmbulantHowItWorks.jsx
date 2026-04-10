@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Calculator, MessageCircle, Heart } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const stepIcons = [Calculator, MessageCircle, Heart];
 const stepKeys = ['step1', 'step2', 'step3'];
@@ -27,7 +28,7 @@ const AmbulantHowItWorks = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-extrabold text-healio-dark mb-4"
           >
-            {t('howItWorks.title')}
+            <HighlightText text={t('howItWorks.title')} />
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -36,7 +37,7 @@ const AmbulantHowItWorks = () => {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-600 font-medium"
           >
-            {t('howItWorks.subtitle')}
+            <HighlightText text={t('howItWorks.subtitle')} />
           </motion.p>
         </div>
 

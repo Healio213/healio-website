@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Star, Quote, TrendingUp, Heart, Glasses, Baby, GraduationCap, Stethoscope } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const testimonialKeys = ['julia', 'thomas', 'max', 'sandra', 'andreas', 'lisa'];
 const testimonialIcons = {
@@ -66,8 +67,12 @@ const AmbulantTestimonials = () => {
       </Helmet>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">{t('testimonials.title')}</h2>
-          <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">{t('testimonials.subtitle')}</p>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
+            <HighlightText text={t('testimonials.title')} />
+          </h2>
+          <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
+            <HighlightText text={t('testimonials.subtitle')} />
+          </p>
         </div>
 
         {/* Trust Stats */}

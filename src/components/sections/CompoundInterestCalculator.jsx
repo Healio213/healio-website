@@ -44,7 +44,7 @@ const CompoundInterestCalculator = () => {
             className="space-y-6"
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-              Der Zinseszins wartet auf <TextHighlight>niemanden.</TextHighlight>
+              Der <span className="text-healio-primary">Zinseszins</span> wartet auf <TextHighlight>niemanden.</TextHighlight>
             </h2>
             <p className="text-xl text-slate-600">
               Berechnen Sie hier, wie sich kleine Unterschiede im Zinssatz über die Jahre auf Ihr Vermögen auswirken.
@@ -144,7 +144,7 @@ const CompoundInterestCalculator = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto bg-slate-50 rounded-2xl p-8 border border-slate-100"
         >
-          <h3 className="text-2xl font-bold text-slate-900 mb-4">Die Rentenlücke schließen</h3>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Die <span className="text-healio-primary">Rentenlücke</span> schließen</h3>
           <p className="text-slate-600 leading-relaxed">
             Statistisch gesehen klafft bei vielen Arbeitnehmern im Alter eine Lücke von ca. <strong className="text-slate-900">800€ monatlich</strong>. 
             Durch kluges, zinseszins-optimiertes Sparen mit der Healio-Strategie können Sie diese Lücke nicht nur schließen, 

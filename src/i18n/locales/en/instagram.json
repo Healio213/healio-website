@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Healio — Your Health Upgrade",
-    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital — effectively 0 € with IKK Bonus."
+    "title": "Healio, Your Health Upgrade",
+    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital, effectively 0 € with IKK Bonus."
   },
   "header": {
     "logo": "Healio",
@@ -26,7 +26,7 @@
     "zahn": {
       "icon": "🦷",
       "title": "DentalUpgrade 90+",
-      "subtitle": "Implants, crowns, bridges, cleaning — 90-100%",
+      "subtitle": "Implants, crowns, bridges, cleaning, 90-100%",
       "price": "0 €*",
       "period": "effective/month",
       "badge": "IKK Bonus covers the cost",

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { TrendingUp, Clock, AlertTriangle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import HighlightText from '@/components/ui/HighlightText';
 
 const CombinedZeitfalleRenditeSection = () => {
   const { t } = useTranslation('home');
@@ -23,17 +24,17 @@ const CombinedZeitfalleRenditeSection = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 id="zeitfalle-heading" className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-              Die Wahrheit über Gehaltserhöhungen, die Ihr Steuerberater Ihnen nicht sagt.
+              Die Wahrheit über <HighlightText text="<highlight>Gehaltserhöhungen</highlight>" />, die Ihr Steuerberater Ihnen nicht sagt.
             </h2>
 
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
               <p>
-                Eine Lohnerhöhung von 50 € kostet Sie als Arbeitgeber ca. 60 €. Beim Mitarbeiter kommen 21 € an. Der Rest geht an Staat und Sozialversicherung. Unternehmen, die das verstanden haben, nutzen Healio.
+                Eine Lohnerhöhung von <span className="font-bold text-slate-900">50 €</span> kostet Sie als Arbeitgeber ca. <span className="font-bold text-slate-900">60 €</span>. Beim Mitarbeiter kommen <span className="font-bold text-healio-primary">21 €</span> an. Der Rest geht an Staat und Sozialversicherung. Unternehmen, die das verstanden haben, nutzen Healio.
               </p>
 
               <div className="bg-healio-primary/5 border-l-4 border-healio-primary p-6 rounded-r-xl">
                 <p className="font-medium text-slate-800 italic">
-                  "50 € Arbeitgeberaufwand. 21 € beim Mitarbeiter. Das ist keine Großzügigkeit — das ist ein Strukturproblem."
+                  "50 € Arbeitgeberaufwand. 21 € beim Mitarbeiter. Das ist keine Großzügigkeit, das ist ein Strukturproblem."
                 </p>
               </div>
 

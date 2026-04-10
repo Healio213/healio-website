@@ -2,33 +2,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PiggyBank, Clock, Shield, Star } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const WhyBkvWithHealio = () => {
   const cards = [
     {
       icon: <PiggyBank className="w-12 h-12" />,
-      title: "Hören Sie auf, Geld zu verschenken.",
+      title: "Hören Sie auf, <highlight>Geld zu verschenken</highlight>.",
       text: "Eine Bruttogehaltserhöhung von 50 € kostet Sie ca. 60 €. Beim Mitarbeiter kommen netto 21 € an. Der Rest geht an Steuern und Sozialabgaben. Ein Gesundheitsbudget von 600 € jährlich kostet Sie denselben Betrag, wird aber zu 100 % vom Mitarbeiter als Wertschätzung wahrgenommen.",
       accent: "text-blue-600",
       accentBg: "bg-blue-50"
     },
     {
       icon: <Clock className="w-12 h-12" />,
-      title: "Wartezeit ist Ihr teuerster Kostenfaktor.",
-      text: "Ein kranker Mitarbeiter, der 6 Wochen auf einen Facharzttermin wartet, kostet Lohnfortzahlung ohne Gegenleistung. Healio reduziert diese Wartezeit auf 5 Tage. Ein Krankheitstag kostet im Schnitt 400 € – berechnen Sie Ihren ROI selbst.",
+      title: "<highlight>Wartezeit</highlight> ist Ihr teuerster Kostenfaktor.",
+      text: "Ein kranker Mitarbeiter, der 6 Wochen auf einen Facharzttermin wartet, kostet Lohnfortzahlung ohne Gegenleistung. Healio reduziert diese Wartezeit auf 5 Tage. Ein Krankheitstag kostet im Schnitt 400 €. Berechnen Sie Ihren ROI selbst.",
       accent: "text-emerald-600",
       accentBg: "bg-emerald-50"
     },
     {
       icon: <Shield className="w-12 h-12" />,
-      title: "Zugang für alle. Ohne Ausnahme.",
-      text: "Keine Gesundheitsprüfung. Keine Wartezeiten. Keine Ausschlüsse. Jeder Mitarbeiter im Kollektiv wird sofort aufgenommen – auch solche mit chronischen Vorerkrankungen, die privat sonst abgelehnt würden.",
+      title: "Zugang für alle. <highlight>Ohne Ausnahme</highlight>.",
+      text: "Keine Gesundheitsprüfung. Keine Wartezeiten. Keine Ausschlüsse. Jeder Mitarbeiter im Kollektiv wird sofort aufgenommen, auch solche mit chronischen Vorerkrankungen, die privat sonst abgelehnt würden.",
       accent: "text-indigo-600",
       accentBg: "bg-indigo-50"
     },
     {
       icon: <Star className="w-12 h-12" />,
-      title: "Fachkräfte erkennen den Unterschied.",
+      title: "Fachkräfte erkennen den <highlight>Unterschied</highlight>.",
       text: "Obstkörbe und Tischkicker binden keine Leistungsträger mehr. Ein freies, steueroptimiertes Gesundheitsbudget schon. Es signalisiert echte Wertschätzung und verschafft Ihnen einen klaren Wettbewerbsvorteil auf dem Arbeitsmarkt.",
       accent: "text-amber-600",
       accentBg: "bg-amber-50"
@@ -45,7 +46,7 @@ const WhyBkvWithHealio = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-              Warum Unternehmen zu Healio wechseln.
+              Warum Unternehmen zu <span className="text-healio-primary">Healio</span> wechseln.
             </h2>
             <p className="text-lg text-slate-500 font-medium">
               Vier Gründe. Keine Floskeln.
@@ -68,7 +69,7 @@ const WhyBkvWithHealio = () => {
               </div>
 
               <h3 className="text-xl font-bold text-slate-900 mb-4">
-                {card.title}
+                <HighlightText text={card.title} />
               </h3>
 
               <p className="text-slate-500 text-base leading-relaxed">

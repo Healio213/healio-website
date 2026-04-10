@@ -7,7 +7,7 @@
       "items": [
         {
           "q": "Is there a catch? Sounds too good to be true.",
-          "a": "This is the most common question we get, and it's absolutely fair. No, there's no catch. The Healio concept uses two existing, reputable systems within the German healthcare system: SDK Suddeutsche Krankenversicherung (on the market for over 90 years) and the IKK classic bonus program (Germany's largest guild health insurance fund). You simply need to actively participate in the bonus program — for example, attending preventive check-ups, going for dental cleanings, or providing proof of exercise. These are things that benefit your health anyway."
+          "a": "This is the most common question we get, and it's absolutely fair. No, there's no catch. The Healio concept uses two existing, reputable systems within the German healthcare system: SDK Suddeutsche Krankenversicherung (on the market for over 90 years) and the IKK classic bonus program (Germany's largest guild health insurance fund). You simply need to actively participate in the bonus program, for example, attending preventive check-ups, going for dental cleanings, or providing proof of exercise. These are things that benefit your health anyway."
         },
         {
           "q": "How much does outpatient supplementary insurance cost per month?",
@@ -44,7 +44,7 @@
         },
         {
           "q": "What happens if I don't fully use the IKK bonus?",
-          "a": "The SDK supplementary insurance works independently of the bonus. You receive your benefits in any case. The IKK bonus is an additional advantage that reduces your effective costs — but it's not a prerequisite for insurance coverage."
+          "a": "The SDK supplementary insurance works independently of the bonus. You receive your benefits in any case. The IKK bonus is an additional advantage that reduces your effective costs, but it's not a prerequisite for insurance coverage."
         }
       ]
     },

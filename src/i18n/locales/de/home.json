@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Gesundheit fördern. Mitarbeiter binden. Steuern sparen.",
-    "subtitle": "Machen Sie das Finanzamt zum Sponsor Ihrer Mitarbeiterloyalität.",
+    "title": "Gesundheit fördern. <highlight>Mitarbeiter binden</highlight>. <highlight>Steuern sparen</highlight>.",
+    "subtitle": "Machen Sie das <highlight>Finanzamt</highlight> zum Sponsor Ihrer Mitarbeiterloyalität.",
     "description": "Unabhängige Experten für betriebliche Vorsorge & Zusatzversicherungen.",
     "cta": "Strategiegespräch sichern"
   },
@@ -13,8 +13,8 @@
   },
   "services": {
     "title": "Unsere Leistungen",
-    "subtitle": "Deine Gesundheit ist keine Glückssache",
-    "description": "Sichere Dir den Status eines Privatpatienten – mit dem innovativen Gesundheitskonzept von Healio.",
+    "subtitle": "Deine <highlight>Gesundheit</highlight> ist keine Glückssache",
+    "description": "Sichere Dir den Status eines <highlight>Privatpatienten</highlight>, mit dem innovativen Gesundheitskonzept von Healio.",
     "ambulant": {
       "title": "Ambulante Zusatzversicherung",
       "description": "Warum selbst zahlen? Wir übernehmen die Rechnung für Massagen, Chiropraktiker und Heilpraktiker.",
@@ -37,7 +37,7 @@
     }
   },
   "bav": {
-    "title": "Betriebliche Altersvorsorge — Was die meisten Unternehmen falsch machen",
+    "title": "Betriebliche Altersvorsorge: Was die meisten Unternehmen <highlight>falsch machen</highlight>",
     "legalClaim": "Gesetzlicher Anspruch",
     "legalClaimDesc": "§ 1a BetrAVG. Pflicht für jeden Arbeitgeber. Kein Verhandlungsspielraum.",
     "pensionGap": "Rentenlücke schließen",
@@ -52,8 +52,8 @@
     "legalClaimSince": "Gesetzlicher Anspruch seit"
   },
   "rendite": {
-    "title": "Rendite Vergleich",
-    "subtitle": "Healio vs. Klassische bAV",
+    "title": "Rendite <highlight>Vergleich</highlight>",
+    "subtitle": "<highlight>Healio</highlight> vs. Klassische bAV",
     "calculation": "Berechnung bei einer monatlichen Sparrate von 338 € über eine Laufzeit von 25 Jahren.",
     "healioStrategy": "Healio Strategie (8,47%)",
     "classicBav": "Klassische bAV (0,7%)",
@@ -73,7 +73,7 @@
     "healthBudgetYear": "Gesundheitsbudget / Jahr"
   },
   "gesundheit": {
-    "title": "Was eine bKV wirklich kostet — und was sie bringt.",
+    "title": "Was eine bKV wirklich <highlight>kostet</highlight>, und was sie <highlight>bringt</highlight>.",
     "fasterAppointments": "Schnellere Facharzttermine",
     "fasterAppointmentsDesc": "5–10 Tage statt 6–8 Wochen Wartezeit beim Facharzt.",
     "lessSickDays": "Kranktage senken",
@@ -87,8 +87,8 @@
     "insteadOfWeeks": "Statt 6–8 Wochen Wartezeit"
   },
   "zeitfalle": {
-    "title": "Der Zeitfaktor",
-    "subtitle": "Der Zinseszins wartet auf niemanden.",
+    "title": "Der <highlight>Zeitfaktor</highlight>",
+    "subtitle": "Der <highlight>Zinseszins</highlight> wartet auf niemanden.",
     "description": "Warum \"Später\" Sie und Ihr Team ein Vermögen kostet.",
     "explanation": "Zeit ist im Zinseszins-Modell wichtiger als die Höhe der Einzahlung.",
     "healioAdvantage": "Der Vorteil von Healio:",
@@ -115,7 +115,7 @@
     "efficiencyDesc": "Zeit ist wertvoll."
   },
   "videos": {
-    "title": "Persönlich & Transparent erklärt",
+    "title": "<highlight>Persönlich</highlight> & <highlight>Transparent</highlight> erklärt",
     "subtitle": "Wir zeigen dir in kurzen Videos, wer wir sind und wie unser Konzept funktioniert.",
     "conceptTitle": "Konzept erklärt: So funktioniert's",
     "conceptDesc": "Schritt für Schritt erklärt: Wie du zur vollen Erstattung kommst.",
@@ -123,7 +123,7 @@
     "detailLabel": "Das Konzept im Detail erklärt"
   },
   "testimonials": {
-    "title": "Echte Kunden, echte Ersparnis",
+    "title": "Echte Kunden, echte <highlight>Ersparnis</highlight>",
     "subtitle": "Zufriedene Nutzer:innen teilen ihre Erfahrungen mit dem Healio-Konzept."
   },
   "insurance": {

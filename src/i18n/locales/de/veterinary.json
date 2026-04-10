@@ -4,7 +4,7 @@
     "title": "Seit der GOT-Reform:",
     "titleHighlight": "Veterinärmedizin hat",
     "titleEnd": "einen neuen Preis.",
-    "subtitle": "Wer heute keinen Versicherungsschutz hat, entscheidet im Ernstfall nicht nach Medizin — sondern nach Budget. Das muss nicht sein.",
+    "subtitle": "Wer heute keinen Versicherungsschutz hat, entscheidet im Ernstfall nicht nach Medizin, sondern nach Budget. Das muss nicht sein.",
     "ctaCalculate": "Beitrag berechnen",
     "ctaAnalysis": "Kostenanalyse",
     "heroImageAlt": "Frau umarmt ihren Golden Retriever"
@@ -59,7 +59,7 @@
   },
   "tariffs": {
     "title": "Zwei Konzepte. Ein Ziel.",
-    "subtitle": "Rasse, Alter, Vorgeschichte — wir kalkulieren individuell. Sie entscheiden.",
+    "subtitle": "Rasse, Alter, Vorgeschichte, wir kalkulieren individuell. Sie entscheiden.",
     "vollschutz": {
       "title": "Vollschutz",
       "desc": "Rundum-Sorglos-Paket für ambulante und stationäre Behandlungen.",
@@ -81,7 +81,7 @@
   },
   "contact": {
     "infoLabel": "Sie wollen wissen, was Absicherung für Ihr Tier kostet?",
-    "infoText": "Rasse, Alter, Gesundheitsstatus — wir berechnen Ihren individuellen Tarif. Keine Verkaufsgespräche. Zahlen und Fakten.",
+    "infoText": "Rasse, Alter, Gesundheitsstatus, wir berechnen Ihren individuellen Tarif. Keine Verkaufsgespräche. Zahlen und Fakten.",
     "phoneLabel": "Beratungstelefon",
     "emailLabel": "E-Mail Kontakt",
     "formTitle": "Beitrag berechnen",

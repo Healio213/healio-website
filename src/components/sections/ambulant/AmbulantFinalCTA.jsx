@@ -7,6 +7,7 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calculator, PhoneCall, CheckCircle } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantFinalCTA = () => {
   const { t } = useTranslation('ambulant');
@@ -26,7 +27,7 @@ const AmbulantFinalCTA = () => {
           viewport={{ once: true }}
           className="text-4xl md:text-6xl font-extrabold mb-6"
         >
-          {t('finalCTA.title')}
+          <HighlightText text={t('finalCTA.title')} />
         </motion.h2>
 
         <motion.p
@@ -36,7 +37,7 @@ const AmbulantFinalCTA = () => {
           transition={{ delay: 0.1 }}
           className="text-xl text-gray-300 mb-8"
         >
-          {t('finalCTA.subtitle')}
+          <HighlightText text={t('finalCTA.subtitle')} />
         </motion.p>
 
         <motion.div

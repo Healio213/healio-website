@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const CATEGORY_KEYS = [
   { key: 'heilpraktiker', emoji: "🌿", bgColor: "bg-amber-50" },
@@ -143,9 +144,11 @@ const AmbulantBenefits = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            {t('benefits.title')}
+            <HighlightText text={t('benefits.title')} />
           </h2>
-          <p className="text-gray-500 mt-4 text-lg">{t('benefits.subtitle')}</p>
+          <p className="text-gray-500 mt-4 text-lg">
+            <HighlightText text={t('benefits.subtitle')} />
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

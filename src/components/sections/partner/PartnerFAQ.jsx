@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "Was genau ist das Healio Gesundheitsbudget?",
     emoji: "💰",
-    answer: "Deine Patienten kombinieren den IKK Kassenbonus (über 700 € pro Jahr) mit einer günstigen Zusatzversicherung. So entsteht ein echtes Gesundheitsbudget von bis zu 3.000 € in zwei Jahren — davon bis zu 1.000 € für Naturheilkunde, Osteopathie, TCM und alternative Therapien."
+    answer: "Deine Patienten kombinieren den IKK Kassenbonus (über 700 € pro Jahr) mit einer günstigen Zusatzversicherung. So entsteht ein echtes Gesundheitsbudget von bis zu 3.000 € in zwei Jahren, davon bis zu 1.000 € für Naturheilkunde, Osteopathie, TCM und alternative Therapien."
   },
   {
     question: "Kostet mich die Partnerschaft etwas?",
@@ -22,7 +22,7 @@ const faqs = [
   {
     question: "Was muss ich als Behandler tun?",
     emoji: "📋",
-    answer: "Praktisch nichts. Du stellst unseren Aufsteller mit Flyern in dein Wartezimmer oder gibst die Karten direkt an interessierte Patienten weiter. Den gesamten Rest — Beratung, Antrag, Abwicklung — übernimmt Healio. Du konzentrierst dich auf deine Behandlung."
+    answer: "Praktisch nichts. Du stellst unseren Aufsteller mit Flyern in dein Wartezimmer oder gibst die Karten direkt an interessierte Patienten weiter. Den gesamten Rest, also Beratung, Antrag und Abwicklung, übernimmt Healio. Du konzentrierst dich auf deine Behandlung."
   },
   {
     question: "Welche Leistungen werden erstattet?",
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "Ist das auch für Brillengeschäfte und Optiker interessant?",
     emoji: "👓",
-    answer: "Ja. Das Gesundheitsbudget enthält bis zu 600 € für Sehhilfen. Deine Kunden können sich damit die Brille leisten, die sie wirklich möchten — statt nur das günstigste Kassengestell. Das erhöht deinen durchschnittlichen Auftragswert."
+    answer: "Ja. Das Gesundheitsbudget enthält bis zu 600 € für Sehhilfen. Deine Kunden können sich damit die Brille leisten, die sie wirklich möchten, statt nur das günstigste Kassengestell. Das erhöht deinen durchschnittlichen Auftragswert."
   }
 ];
 
@@ -51,9 +51,9 @@ const PartnerFAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Häufige Fragen zur Partnerschaft</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">Häufige Fragen zur <span className="text-healio-primary">Partnerschaft</span></h2>
           <p className="text-lg text-slate-600">
-            Alles was du wissen musst — kurz und ehrlich.
+            Alles was du wissen musst, kurz und ehrlich.
           </p>
         </motion.div>
 

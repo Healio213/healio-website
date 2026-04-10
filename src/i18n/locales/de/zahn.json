@@ -65,7 +65,7 @@
   },
   "benefits": {
     "title": "Zahnzusatzversicherung: Was die gesetzliche Kasse nicht zahlt.",
-    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest zahlen Sie selbst — oder eine intelligente Zusatzversicherung.",
+    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest zahlen Sie selbst, oder eine intelligente Zusatzversicherung.",
     "noWait": { "title": "Keine Wartezeiten", "desc": "Sofortschutz ab Tag 1. Professionelle Zahnreinigung und Prophylaxe sofort nutzbar." },
     "zahnersatz": { "title": "Bis zu 100 % Zahnersatz", "desc": "Kronen, Brücken, Implantate und Inlays. Mit BonusPlus steigt die Erstattung auf bis zu 100 %." },
     "prophylaxe": { "title": "Prophylaxe & Zahnreinigung", "desc": "Professionelle Zahnreinigung, Fissurenversiegelung und Prophylaxe in allen Tarifen inklusive." },
@@ -79,7 +79,7 @@
     "headline": "Was Kunden berichten."
   },
   "faq": {
-    "title": "Häufige Fragen — direkt beantwortet.",
+    "title": "Häufige Fragen, direkt beantwortet.",
     "subtitle": "Die wichtigsten Fakten im Überblick. Klar und transparent.",
     "items": [
       { "q": "Was kostet das ZahnUpgrade 90+ monatlich?", "a": "Der ZahnUpgrade 90+ Tarif beginnt ab 13,50 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 29,06 Euro. In Kombination mit dem IKK classic Bonusprogramm (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst. Bei nur 162 Euro Jahresbeitrag und über 300 Euro Bonus zahlst du unterm Strich 0 Euro." },

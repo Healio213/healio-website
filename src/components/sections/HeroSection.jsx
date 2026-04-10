@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import HighlightText from '@/components/ui/HighlightText';
 
 const HeroSection = () => {
   const { t } = useTranslation('home');
@@ -62,7 +63,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
-          {t('hero.title')}
+          <HighlightText text={t('hero.title')} />
         </motion.h1>
 
         {/* Subtext */}
@@ -72,7 +73,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
         >
-          {t('hero.subtitle')}
+          <HighlightText text={t('hero.subtitle')} />
         </motion.p>
 
         <motion.p

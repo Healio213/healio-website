@@ -1,6 +1,6 @@
 {
-  "title": "Häufig gestellte Fragen",
-  "subtitle": "Alles was du über das Healio Gesundheitsbudget, die SDK Zusatzversicherung und das IKK classic Bonusprogramm wissen musst.",
+  "title": "Häufig gestellte <highlight>Fragen</highlight>",
+  "subtitle": "Alles was du über das <highlight>Healio Gesundheitsbudget</highlight>, die SDK Zusatzversicherung und das IKK classic Bonusprogramm wissen musst.",
   "categories": {
     "kosten": {
       "title": "Kosten & Finanzierung",
@@ -44,7 +44,7 @@
         },
         {
           "q": "Was passiert, wenn ich den IKK-Bonus nicht voll ausschöpfe?",
-          "a": "Die SDK-Zusatzversicherung funktioniert unabhängig vom Bonus. Du bekommst deine Leistungen in jedem Fall. Der IKK-Bonus ist ein zusätzlicher Vorteil, der deine effektiven Kosten senkt — aber nicht Voraussetzung für den Versicherungsschutz."
+          "a": "Die SDK-Zusatzversicherung funktioniert unabhängig vom Bonus. Du bekommst deine Leistungen in jedem Fall. Der IKK-Bonus ist ein zusätzlicher Vorteil, der deine effektiven Kosten senkt, aber nicht Voraussetzung für den Versicherungsschutz."
         }
       ]
     },

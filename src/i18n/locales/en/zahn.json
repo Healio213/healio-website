@@ -65,7 +65,7 @@
   },
   "benefits": {
     "title": "Dental Supplementary Insurance: What Statutory Insurance Doesn't Cover.",
-    "subtitle": "Statutory health insurance only covers the standard care rate for dental prosthetics. You pay the rest yourself — or a smart supplementary insurance does.",
+    "subtitle": "Statutory health insurance only covers the standard care rate for dental prosthetics. You pay the rest yourself, or a smart supplementary insurance does.",
     "noWait": { "title": "No Waiting Periods", "desc": "Instant coverage from day 1. Professional dental cleaning and prophylaxis available immediately." },
     "zahnersatz": { "title": "Up to 100% Dental Prosthetics", "desc": "Crowns, bridges, implants and inlays. With BonusPlus, reimbursement rises to up to 100%." },
     "prophylaxe": { "title": "Prophylaxis & Dental Cleaning", "desc": "Professional dental cleaning, fissure sealing and prophylaxis included in all plans." },
@@ -79,11 +79,11 @@
     "headline": "What Customers Report."
   },
   "faq": {
-    "title": "Frequently Asked Questions — Answered Directly.",
+    "title": "Frequently Asked Questions, Answered Directly.",
     "subtitle": "The most important facts at a glance. Clear and transparent.",
     "items": [
       { "q": "How much does DentalUpgrade 90+ cost per month?", "a": "The DentalUpgrade 90+ plan starts at €13.50 per month without aging provisions. With aging provisions from €29.06. Combined with the IKK classic bonus program (over €300 per year, tax-free), the insurance effectively pays for itself entirely. At just €162 annual premium and over €300 in bonus, you pay effectively €0." },
-      { "q": "How do I get from 90% to 100% reimbursement?", "a": "Through BonusPlus, your reimbursement increases automatically: From day 1, you receive 90% reimbursement. If you can show a continuously maintained bonus booklet from your health insurance fund, reimbursement rises to 95% after 5 years and to a full 100% after 10 years. BonusPlus is available from age 21. You don't need to apply for anything extra — proof of the bonus booklet is sufficient." },
+      { "q": "How do I get from 90% to 100% reimbursement?", "a": "Through BonusPlus, your reimbursement increases automatically: From day 1, you receive 90% reimbursement. If you can show a continuously maintained bonus booklet from your health insurance fund, reimbursement rises to 95% after 5 years and to a full 100% after 10 years. BonusPlus is available from age 21. You don't need to apply for anything extra, proof of the bonus booklet is sufficient." },
       { "q": "Can I get the insurance even with missing teeth?", "a": "Yes, this is a genuine unique selling point. Up to 3 already missing teeth can be co-insured. The risk surcharge is only €5 per missing tooth per month. Many other dental supplementary insurances reject customers with missing teeth entirely or exclude them from reimbursement." },
       { "q": "Are there waiting periods?", "a": "No. Full insurance coverage applies immediately from day 1. Professional dental cleaning, prophylaxis, fissure sealing and all other benefits can be used right away. In the first calendar years, there is a sum limit of €1,000 (1st/2nd year), which is then lifted and becomes completely unlimited from the 5th calendar year." },
       { "q": "I already have dental supplementary insurance. Is switching worth it?", "a": "Very likely yes, especially if you currently receive less than 90% reimbursement. Your big advantage: Prior insurance is credited. If your previous insurance covered at least 40% of dental prosthetics, the sum limit in the first calendar year is completely waived. So you start immediately with full coverage, not from zero." },
@@ -104,14 +104,14 @@
     "problem": {
       "badge": "The Cost Trap",
       "title": "The Problem: Statutory Health Insurance Covers Almost Nothing",
-      "text1": "When things get serious at the dentist, it gets expensive. Statutory health insurance funds only pay a small fixed subsidy for dental prosthetics — often less than 50% of the most basic treatment.",
+      "text1": "When things get serious at the dentist, it gets expensive. Statutory health insurance funds only pay a small fixed subsidy for dental prosthetics, often less than 50% of the most basic treatment.",
       "text2": "High-quality implants, ceramic crowns or inlays must be paid for almost entirely out of pocket. A single bill can quickly amount to <strong>several thousand euros</strong>. Without supplementary insurance, you're stuck with these costs."
     },
     "solution": {
       "badge": "The Solution",
       "title": "Comprehensive Protection for Your Teeth",
       "erstattung": { "title": "100% Reimbursement", "desc": "We cover up to 100% of costs for high-quality dental prosthetics, inlays and implants. No more compromises on quality." },
-      "zahnreinigung": { "title": "Dental Cleaning Included", "desc": "Professional dental cleaning as often as you like. We reimburse your prophylaxis costs — for a radiant smile." },
+      "zahnreinigung": { "title": "Dental Cleaning Included", "desc": "Professional dental cleaning as often as you like. We reimburse your prophylaxis costs, for a radiant smile." },
       "sofortschutz": { "title": "Instant Coverage", "desc": "No waiting periods. Your insurance coverage begins immediately from day one. Submit invoices right away." }
     },
     "tariffFinder": {

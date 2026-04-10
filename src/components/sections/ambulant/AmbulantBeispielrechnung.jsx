@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Calculator, CheckCircle } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantBeispielrechnung = () => {
   const { t } = useTranslation('ambulant');
@@ -24,7 +25,7 @@ const AmbulantBeispielrechnung = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            {t('beispielrechnung.title')}
+            <HighlightText text={t('beispielrechnung.title')} />
           </h2>
         </div>
 

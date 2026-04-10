@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/use-toast';
 import PartnerTrustBar from '@/components/sections/partner/PartnerTrustBar';
 import PartnerTestimonials from '@/components/sections/partner/PartnerTestimonials';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
+import HighlightText from '@/components/ui/HighlightText';
 
 const PartnerPage = () => {
   const { t } = useTranslation('partner');
@@ -174,10 +175,10 @@ const PartnerPage = () => {
                 transition={{ duration: 0.8 }}
               >
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                  {t('hero.title')}
+                  <HighlightText text={t('hero.title')} />
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-xl mx-auto">
-                  {t('hero.subtitle')}
+                  <HighlightText text={t('hero.subtitle')} />
                 </p>
                 <Button
                   size="lg"
@@ -266,10 +267,10 @@ const PartnerPage = () => {
               className="max-w-4xl mx-auto text-center"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-6 sm:mb-8">
-                {t('problem.title')}
+                <HighlightText text={t('problem.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed">
-                {t('problem.text')}
+                <HighlightText text={t('problem.text')} />
               </p>
             </motion.div>
           </div>
@@ -285,10 +286,10 @@ const PartnerPage = () => {
               className="text-center mb-12 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                {t('budget.title')}
+                <HighlightText text={t('budget.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                {t('budget.subtitle')}
+                <HighlightText text={t('budget.subtitle')} />
               </p>
             </motion.div>
 
@@ -351,10 +352,10 @@ const PartnerPage = () => {
               className="text-center mb-12 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                {t('partners.title')}
+                <HighlightText text={t('partners.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                {t('partners.subtitle')}
+                <HighlightText text={t('partners.subtitle')} />
               </p>
             </motion.div>
 
@@ -392,7 +393,7 @@ const PartnerPage = () => {
               className="text-center mb-12 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800">
-                {t('solution.title')}
+                <HighlightText text={t('solution.title')} />
               </h2>
             </motion.div>
 
@@ -459,7 +460,7 @@ const PartnerPage = () => {
                     <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4 text-[#25c990]">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-800 mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>
                 );
@@ -484,10 +485,10 @@ const PartnerPage = () => {
               className="text-center mb-8 sm:mb-12"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                {t('cta.title')}
+                <HighlightText text={t('cta.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                {t('cta.subtitle')}
+                <HighlightText text={t('cta.subtitle')} />
               </p>
             </motion.div>
 
@@ -528,7 +529,7 @@ const PartnerPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                {t('footer.title')}
+                <HighlightText text={t('footer.title')} className="text-white underline decoration-white/70 decoration-4 underline-offset-4" />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8">
                 {t('footer.subtitle')}

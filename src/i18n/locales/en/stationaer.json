@@ -2,7 +2,7 @@
   "hero": {
     "title": "<highlight>Private patient</highlight> in hospital. Effectively for €0.",
     "subtitle": "HospitalUpgrade from €11 per month. Combined with the IKK classic bonus, hospital supplementary insurance pays for itself entirely. Franke & Bornberg: FFF+ excellent.",
-    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK classic bonus (over €300 per year, tax-free) fully covers the premiums. Private room, chief physician, free choice of hospital — at no additional cost.",
+    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK classic bonus (over €300 per year, tax-free) fully covers the premiums. Private room, chief physician, free choice of hospital, at no additional cost.",
     "ctaCalculate": "Calculate your plan",
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Modern hospital private room"
@@ -62,7 +62,7 @@
   },
   "benefits": {
     "title": "Hospital Supplementary Insurance: Private Patient Status. Without Being Privately Insured.",
-    "subtitle": "When you need to go to the hospital, you should focus on recovery — not the budget. With hospital supplementary insurance, you get access to the best doctors and clinics.",
+    "subtitle": "When you need to go to the hospital, you should focus on recovery, not the budget. With hospital supplementary insurance, you get access to the best doctors and clinics.",
     "mainBenefits": {
       "spitzenversorgung": { "title": "Top-Tier Medical Care", "desc": "Access to specialists and state-of-the-art diagnostics." },
       "privatsphaere": { "title": "More Privacy", "desc": "Private room instead of shared room. Better recovery." },
@@ -121,7 +121,7 @@
     },
     "wirtschaftlichkeit": {
       "title": "Cost-Effectiveness Analysis",
-      "subtitle": "Quality has its price — but through smart combination with bonus programs, it becomes affordable.",
+      "subtitle": "Quality has its price, but through smart combination with bonus programs, it becomes affordable.",
       "bruttoBeitrag": "Gross premium",
       "bruttoBeitragValue": "~ €70",
       "bruttoBeitragUnit": "/ month",

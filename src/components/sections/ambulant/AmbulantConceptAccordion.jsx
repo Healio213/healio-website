@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { CheckCircle, Zap, Lightbulb, Gift, Eye, Sparkles, Leaf, Hand, Activity, Shield, Syringe, Pill, Globe, Heart, Target, Users, Calculator } from 'lucide-react';
+import HighlightText from '@/components/ui/HighlightText';
 
 const coreValueIcons = [CheckCircle, Zap, Lightbulb, Gift];
 const coreValueKeys = ['planbarkeit', 'erstattung', 'einfachheit', 'turbo'];
@@ -25,7 +26,7 @@ const AmbulantConceptAccordion = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            {t('conceptAccordion.title')}
+            <HighlightText text={t('conceptAccordion.title')} />
           </h2>
         </div>
 

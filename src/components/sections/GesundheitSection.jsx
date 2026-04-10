@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Stethoscope, TrendingDown, PiggyBank, HeartHandshake } from 'lucide-react';
 import { TextHighlight, AnimatedCounter } from '@/components/ui/ScrollAnimation';
+import HighlightText from '@/components/ui/HighlightText';
 
 const GesundheitSection = () => {
   const { t } = useTranslation('home');
@@ -53,10 +54,10 @@ const GesundheitSection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-              {t('gesundheit.title')}
+              <HighlightText text={t('gesundheit.title')} />
             </h2>
             <p className="text-lg text-slate-500">
-              Zahlen lügen nicht. Eine bKV ist kein Wohlfühl-Benefit. Sie ist eine Investition mit messbarem Return.
+              Zahlen lügen nicht. Eine bKV ist kein Wohlfühl-Benefit. Sie ist eine <span className="text-healio-primary font-semibold">Investition mit messbarem Return</span>.
             </p>
           </motion.div>
         </div>

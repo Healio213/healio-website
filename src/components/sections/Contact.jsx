@@ -118,7 +118,7 @@ const Contact = () => {
               Sie wollen wissen, wo Ihr Budget verpufft?
             </h2>
             <p className="text-lg lg:text-xl text-slate-400 mb-10 leading-relaxed font-medium">
-              15 Minuten. Keine Verkaufspräsentation. Ein wirtschaftliches Audit auf Augenhöhe. Wir zeigen Ihnen die Zahlen — Sie entscheiden.
+              15 Minuten. Keine Verkaufspräsentation. Ein wirtschaftliches Audit auf Augenhöhe. Wir zeigen Ihnen die Zahlen, Sie entscheiden.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Healio — Dein Gesundheits-Upgrade",
-    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahnersatz, Chefarzt — effektiv 0 € dank IKK Bonus."
+    "title": "Healio, Dein Gesundheits-Upgrade",
+    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahnersatz, Chefarzt, effektiv 0 € dank IKK Bonus."
   },
   "header": {
     "logo": "Healio",
@@ -26,7 +26,7 @@
     "zahn": {
       "icon": "🦷",
       "title": "ZahnUpgrade 90+",
-      "subtitle": "Implantate, Kronen, Brücken, Zahnreinigung — 90-100 %",
+      "subtitle": "Implantate, Kronen, Brücken, Zahnreinigung, 90-100 %",
       "price": "0 €*",
       "period": "effektiv/Monat",
       "badge": "IKK Bonus deckt die Kosten",
