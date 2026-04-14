@@ -21,6 +21,7 @@ const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
 const AgbPage = React.lazy(() => import('@/pages/AgbPage'));
 const DatenschutzPage = React.lazy(() => import('@/pages/DatenschutzPage'));
+const KontoLoeschenPage = React.lazy(() => import('@/pages/KontoLoeschenPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
@@ -92,6 +93,7 @@ function App() {
               <Route path="impressum" element={<ImpressumPage />} />
               <Route path="agb" element={<AgbPage />} />
               <Route path="datenschutz" element={<DatenschutzPage />} />
+              <Route path="konto-loeschen" element={<KontoLoeschenPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogArticlePage />} />
             </Route>
