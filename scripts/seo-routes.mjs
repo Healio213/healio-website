@@ -8,8 +8,8 @@ export const seoRoutes = [
   // === DEUTSCH ===
   {
     path: '/',
-    title: 'Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten Hamburg',
-    description: 'HEALIO – Ihr Experte für betriebliche Altersvorsorge (bAV) und betriebliche Krankenversicherung (bKV) in Hamburg. Individuelle Beratung für Unternehmen.',
+    title: 'Healio: 3.000 € Gesundheitsbudget für Heilpraktiker & Naturheilkunde',
+    description: 'Bis zu 3.000 € in 2 Jahren für Heilpraktiker, Osteopathie und Naturheilkunde. Clever kombiniert aus Kassenboni und Zusatzversicherung. Ohne Wartezeit starten.',
     canonical: 'https://healio.de',
     lang: 'de',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
