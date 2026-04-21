@@ -1,0 +1,228 @@
+{
+  "hero": {
+    "badge": "For Naturopaths and Osteopaths",
+    "exclusiveLabel": "Exclusive framework conditions · Only via Healio",
+    "title": "Health that holds. For people and their therapists.",
+    "subtitle": "Healio makes health professionals and their patients financially safer.",
+    "description": "Personal protection and practice coverage in one bundle, with conditions you cannot get alone.",
+    "ctaPrimary": "Start your coverage check",
+    "ctaSecondary": "Become a partner",
+    "trust": [
+      "Over 1,000 naturopaths and osteopaths in the network",
+      "Licensed insurance broker under §34d GewO",
+      "Based in Hamburg"
+    ]
+  },
+  "exklusivitaet": {
+    "eyebrow": "The Healio advantage",
+    "title": "Conditions you cannot get alone.",
+    "subtitle": "We negotiate framework agreements with the major insurers. These terms are available exclusively through Healio. Not through the open broker network, not directly from the insurer.",
+    "cards": [
+      {
+        "title": "Negotiated",
+        "text": "Framework agreements with Volkswohl Bund, Gothaer MediRisk, HDI Heilberufe, Continentale and Die Bayerische. Actively maintained and reviewed each year."
+      },
+      {
+        "title": "Vetted",
+        "text": "Only tariffs with top-rated conditions (Morgen & Morgen, franke-bornberg). No soft standard contracts, no compromise on coverage."
+      },
+      {
+        "title": "Exclusive",
+        "text": "Access only through Healio and our association partnerships. Up to 30 percent cheaper than publicly comparable individual tariffs."
+      }
+    ],
+    "footnote": "The exact conditions are presented in the personal consultation, tariff-current and transparent."
+  },
+  "problem": {
+    "title": "The three gaps that hit almost every naturopath",
+    "subtitle": "Self-employed without a chamber-based retirement scheme means no default safety net. Three typical consequences follow.",
+    "cards": [
+      {
+        "title": "No safety net when you cannot work",
+        "text": "A slipped disc. Three months out of practice. No income. The rent still needs to be paid, and so does the practice."
+      },
+      {
+        "title": "No structured retirement planning",
+        "text": "No statutory pension. No Rürup. At 67 the realization: the practice is your only retirement income."
+      },
+      {
+        "title": "Fragmented practice insurance",
+        "text": "Five separate contracts from five decades. Nobody knows exactly what is covered. The premiums run every month anyway."
+      }
+    ]
+  },
+  "solution": {
+    "title": "Your healthcare professional bundle, all in one hand",
+    "subtitle": "Two pillars, eight building blocks. You choose what you need. Healio bundles, negotiates, looks after it.",
+    "pillars": [
+      {
+        "title": "Practice coverage",
+        "description": "The healthcare bundled policy for your practice",
+        "blocks": [
+          {
+            "title": "Professional liability",
+            "text": "Up to 10 million euros coverage. All therapy procedures included, even invasive ones like acupuncture, injections, detoxification."
+          },
+          {
+            "title": "Practice interruption",
+            "text": "3 days waiting period, 24 months coverage. Also for infection and official closure."
+          },
+          {
+            "title": "Cyber protection",
+            "text": "GDPR-compliant protection against data breaches, ransomware and the 72-hour reporting requirement."
+          },
+          {
+            "title": "Legal expenses",
+            "text": "German health advertising law, employment, contract law, tax disputes."
+          }
+        ]
+      },
+      {
+        "title": "Personal pension and protection",
+        "description": "Your private cover, bundled",
+        "blocks": [
+          {
+            "title": "Disability insurance",
+            "text": "Volkswohl Bund Existenz. Terms rated very good to excellent. Up to 30 percent cheaper in a group contract."
+          },
+          {
+            "title": "Rürup base pension",
+            "text": "Fund-linked, fully deductible. 2026: up to 30,826 euros (single), up to 61,652 euros (married)."
+          },
+          {
+            "title": "Basic skills insurance",
+            "text": "As a backup if disability insurance is only available with surcharges or exclusions."
+          },
+          {
+            "title": "Term life and care",
+            "text": "For family, partner and practice loans. Private long-term care as an optional add-on."
+          }
+        ]
+      }
+    ]
+  },
+  "mehrwert": {
+    "title": "You pay less, are better covered, save taxes",
+    "subtitle": "Three levers that really work when bundled.",
+    "columns": [
+      {
+        "icon": "TrendingDown",
+        "title": "Pay less",
+        "points": [
+          "Group conditions on the coverage side: 10 to 20 percent below market",
+          "Bundle discount at three or more blocks: up to 12 percent",
+          "Group contract for disability insurance: up to 30 percent cheaper"
+        ]
+      },
+      {
+        "icon": "Shield",
+        "title": "Better covered",
+        "points": [
+          "Minimum coverage of 5 million euros professional liability",
+          "All invasive procedures included",
+          "Re-insurance guarantees without new medical check",
+          "Cyber and legal expenses integrated instead of add-ons"
+        ]
+      },
+      {
+        "icon": "Calculator",
+        "title": "Save taxes",
+        "points": [
+          "Rürup fully deductible as a special expense",
+          "Example: 15,000 euros into Rürup at 42 percent marginal tax rate equals about 6,300 euros tax savings per year",
+          "Disability insurance premiums additionally deductible"
+        ]
+      }
+    ]
+  },
+  "ablauf": {
+    "title": "Four steps, no paperwork",
+    "subtitle": "From first question to complete coverage in just a few days.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "30-second check",
+        "text": "Short form. Profession, practice size, contact. That is enough to start."
+      },
+      {
+        "number": "02",
+        "title": "Coverage appointment",
+        "text": "30 minutes. Remote or on-site in Hamburg. No preparation needed."
+      },
+      {
+        "number": "03",
+        "title": "Offer",
+        "text": "Concrete blocks, transparent premiums, explained in plain language. No small print."
+      },
+      {
+        "number": "04",
+        "title": "Ongoing service",
+        "text": "Digital contract management. Annual review. One contact person for everything."
+      }
+    ]
+  },
+  "socialProof": {
+    "title": "What colleagues say",
+    "testimonials": [
+      {
+        "name": "Maria K.",
+        "role": "Naturopath, Hamburg",
+        "quote": "I had five contracts with four companies. Healio consolidated everything into one bundle in two weeks. I pay 22 percent less."
+      },
+      {
+        "name": "Thomas R.",
+        "role": "Osteopath, Munich",
+        "quote": "Finally I understand what I pay for every month. And the Rürup savings make a real difference."
+      },
+      {
+        "name": "Sabine M.",
+        "role": "Naturopath, Bremen",
+        "quote": "This was the first advice that really helped me. No insurance jargon, just plain language."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequent questions",
+    "items": [
+      {
+        "q": "Does the check cost anything?",
+        "a": "No. The initial consultation and the comparison are free of charge and without obligation."
+      },
+      {
+        "q": "Can I pick individual blocks?",
+        "a": "Yes. You start with what is most important to you. Bundle discount starts at three blocks."
+      },
+      {
+        "q": "How does this relate to my existing contracts?",
+        "a": "We check notice periods and coverage. No blind switch, but a real analysis."
+      },
+      {
+        "q": "I am a member of FDH, VOD or UDH. Are there special conditions?",
+        "a": "Yes, through our association partnerships. Talk to us to clarify your status."
+      },
+      {
+        "q": "What about pre-existing conditions?",
+        "a": "In our group solution, simplified health checks are possible. Even if you were rejected individually, we often find a way."
+      },
+      {
+        "q": "Who is Healio?",
+        "a": "Hamburg-based insurance broker under §34d GewO, specialized in healthcare professions, already active in a network of over 1,000 practices."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Your next step",
+    "subtitle": "Two ways, both lead to a clear assessment of your protection.",
+    "primary": {
+      "title": "Book an appointment",
+      "description": "30 minutes with Frank Steinfurt personally. Remote or on-site in Hamburg.",
+      "cta": "Choose your slot"
+    },
+    "secondary": {
+      "title": "Request a coverage check",
+      "description": "Short form, you will get an initial assessment within 24 hours.",
+      "cta": "Go to the form"
+    },
+    "disclaimer": "The Healio healthcare professional coverage concept is a private-law insurance concept based on individual and group insurance contracts. Insurance brokerage by Healio GmbH, licensed broker under §34d GewO."
+  }
+}

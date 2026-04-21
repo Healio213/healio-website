@@ -1,0 +1,228 @@
+{
+  "hero": {
+    "badge": "Für Heilpraktiker und Osteopathen",
+    "exclusiveLabel": "Exklusive Rahmenkonditionen · Nur über Healio",
+    "title": "Gesundheit, die trägt. Für Menschen und ihre Therapeuten.",
+    "subtitle": "Healio macht Heilberufe und ihre Patienten finanziell sicherer.",
+    "description": "Vorsorge und Praxisschutz aus einer Hand, mit Konditionen, die du allein nicht bekommst.",
+    "ctaPrimary": "Vorsorge-Check starten",
+    "ctaSecondary": "Empfehlungspartner werden",
+    "trust": [
+      "Über 1.000 Heilpraktiker und Osteopathen im Netzwerk",
+      "Makler nach §34d GewO",
+      "Hamburg"
+    ]
+  },
+  "exklusivitaet": {
+    "eyebrow": "Der Healio Vorteil",
+    "title": "Konditionen, die du allein nicht bekommst.",
+    "subtitle": "Wir verhandeln Rahmenverträge mit den großen Produktgebern. Diese Konditionen gibt es exklusiv über Healio. Nicht über das offene Maklernetz, nicht direkt beim Versicherer.",
+    "cards": [
+      {
+        "title": "Verhandelt",
+        "text": "Rahmenverträge mit Volkswohl Bund, Gothaer MediRisk, HDI Heilberufe, Continentale und Die Bayerische. Aktiv gepflegt und jährlich geschärft."
+      },
+      {
+        "title": "Geprüft",
+        "text": "Nur Tarife mit Top-Bedingungswerken (Morgen & Morgen, franke-bornberg). Keine weichen Standardverträge, keine Kompromisse beim Leistungsumfang."
+      },
+      {
+        "title": "Exklusiv",
+        "text": "Zugang nur über Healio und unsere Verbandskooperationen. Bis 30 Prozent günstiger als öffentlich vergleichbare Einzeltarife."
+      }
+    ],
+    "footnote": "Die konkreten Konditionen werden im persönlichen Gespräch ausgewiesen, tarifaktuell und transparent."
+  },
+  "problem": {
+    "title": "Die drei Lücken, die fast jeden Heilpraktiker treffen",
+    "subtitle": "Als Selbstständige in einem nicht verkammerten Heilberuf stehst du ohne das übliche Auffangnetz da. Das hat drei typische Folgen.",
+    "cards": [
+      {
+        "title": "Kein Auffangnetz bei Arbeitsunfähigkeit",
+        "text": "Ein Bandscheibenvorfall, drei Monate Behandlungspause, keine Einnahmen. Die Miete läuft weiter. Die Praxis auch."
+      },
+      {
+        "title": "Keine strukturierte Altersvorsorge",
+        "text": "Ohne gesetzliche Rente. Ohne Rürup. Mit 67 die Erkenntnis: Die Praxis ist dein einziges Alterseinkommen."
+      },
+      {
+        "title": "Fragmentierte Praxisversicherungen",
+        "text": "Fünf Einzelverträge aus fünf Jahrzehnten. Keiner weiß genau, was drin ist. Die Prämien laufen trotzdem jeden Monat ab."
+      }
+    ]
+  },
+  "solution": {
+    "title": "Dein Heilberufe-Paket, alles aus einer Hand",
+    "subtitle": "Zwei Säulen, acht Bausteine. Du wählst, was du brauchst. Healio bündelt, verhandelt, betreut.",
+    "pillars": [
+      {
+        "title": "Praxisschutz",
+        "description": "Die Heilwesen-Bündelpolice für deine Praxis",
+        "blocks": [
+          {
+            "title": "Berufshaftpflicht",
+            "text": "Bis 10 Mio. Euro Deckung. Alle Therapieverfahren drin, auch invasive wie Akupunktur, Injektionen, Ausleitung."
+          },
+          {
+            "title": "Praxisausfall",
+            "text": "3 Tage Karenz, 24 Monate Haftzeit. Auch bei Infektion und behördlicher Schließung."
+          },
+          {
+            "title": "Cyber-Schutz",
+            "text": "DSGVO-konforme Absicherung gegen Datenpannen, Ransomware und 72-Stunden-Meldepflicht."
+          },
+          {
+            "title": "Rechtsschutz",
+            "text": "Heilmittelwerbegesetz, Arbeitsrecht, Vertragsrecht, Steuerstreit."
+          }
+        ]
+      },
+      {
+        "title": "Persönliche Vorsorge",
+        "description": "Deine private Absicherung, aus einer Hand",
+        "blocks": [
+          {
+            "title": "Berufsunfähigkeit",
+            "text": "Volkswohl Bund Existenz. Bedingungswerk sehr gut bis exzellent. Bis 30 Prozent günstiger im Gruppenvertrag."
+          },
+          {
+            "title": "Rürup Basisrente",
+            "text": "Fondsgebunden, voll als Sonderausgabe absetzbar. 2026 bis 30.826 Euro (ledig), bis 61.652 Euro (verheiratet)."
+          },
+          {
+            "title": "Grundfähigkeit",
+            "text": "Als Backup, wenn BU mit Zuschlägen oder Ausschlüssen annehmbar ist."
+          },
+          {
+            "title": "Risikoleben und Pflege",
+            "text": "Für Familie, Partner und Praxiskredit. Private Pflegevorsorge als Ergänzung."
+          }
+        ]
+      }
+    ]
+  },
+  "mehrwert": {
+    "title": "Du zahlst weniger, bist besser abgesichert, sparst Steuern",
+    "subtitle": "Drei Hebel, die im Paket echte Wirkung zeigen.",
+    "columns": [
+      {
+        "icon": "TrendingDown",
+        "title": "Weniger zahlen",
+        "points": [
+          "Gruppenkondition auf Sach-Seite: 10 bis 20 Prozent unter Marktpreis",
+          "Bündelrabatt bei drei oder mehr Bausteinen: bis 12 Prozent",
+          "Gruppenvertrag Berufsunfähigkeit: bis 30 Prozent günstiger"
+        ]
+      },
+      {
+        "icon": "Shield",
+        "title": "Besser abgesichert",
+        "points": [
+          "Mindestdeckung 5 Mio. Euro Berufshaftpflicht",
+          "Alle invasiven Verfahren eingeschlossen",
+          "Nachversicherungsgarantien ohne erneute Prüfung",
+          "Cyber und Rechtsschutz integriert statt Zusatzkauf"
+        ]
+      },
+      {
+        "icon": "Calculator",
+        "title": "Steuern sparen",
+        "points": [
+          "Rürup voll als Sonderausgabe absetzbar",
+          "Rechenbeispiel: 15.000 Euro Rürup bei 42 Prozent Grenzsteuersatz ergibt ca. 6.300 Euro Steuerersparnis pro Jahr",
+          "BU-Beiträge zusätzlich als Sonderausgabe absetzbar"
+        ]
+      }
+    ]
+  },
+  "ablauf": {
+    "title": "Vier Schritte, kein Papierkram",
+    "subtitle": "Von der ersten Frage bis zur fertigen Absicherung in wenigen Tagen.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "30-Sekunden-Check",
+        "text": "Kurzes Formular. Beruf, Praxisgröße, Kontakt. Das reicht für den Einstieg."
+      },
+      {
+        "number": "02",
+        "title": "Vorsorge-Termin",
+        "text": "30 Minuten. Remote oder Hamburg vor Ort. Keine Vorbereitung nötig."
+      },
+      {
+        "number": "03",
+        "title": "Angebot",
+        "text": "Konkrete Bausteine, transparente Prämien, verständlich erklärt. Kein Kleingedrucktes."
+      },
+      {
+        "number": "04",
+        "title": "Laufender Service",
+        "text": "Digitale Vertragsverwaltung. Jährlicher Mehrwert-Check. Ein Ansprechpartner für alles."
+      }
+    ]
+  },
+  "socialProof": {
+    "title": "Was Kolleginnen und Kollegen sagen",
+    "testimonials": [
+      {
+        "name": "Maria K.",
+        "role": "Heilpraktikerin, Hamburg",
+        "quote": "Ich hatte fünf Verträge bei vier Gesellschaften. Healio hat das in zwei Wochen auf ein Paket reduziert. Ich zahle 22 Prozent weniger."
+      },
+      {
+        "name": "Thomas R.",
+        "role": "Osteopath, München",
+        "quote": "Endlich verstehe ich, wofür ich jeden Monat bezahle. Und die Rürup-Ersparnis macht den Unterschied zu meiner alten Strategie."
+      },
+      {
+        "name": "Sabine M.",
+        "role": "Heilpraktikerin, Bremen",
+        "quote": "Die Beratung war die erste, die mir wirklich geholfen hat. Nicht Versicherungsjargon, sondern Klartext."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Kostet der Check etwas?",
+        "a": "Nein. Die Erstberatung und der Vergleich sind kostenfrei und unverbindlich."
+      },
+      {
+        "q": "Kann ich einzelne Bausteine wählen?",
+        "a": "Ja. Du startest mit dem, was dir am wichtigsten ist. Bündelrabatt gibt es ab drei Bausteinen."
+      },
+      {
+        "q": "Wie verhält sich das zu meinen bestehenden Verträgen?",
+        "a": "Wir prüfen Kündigungsfristen und Leistungsvergleich. Kein blinder Wechsel, sondern echte Analyse."
+      },
+      {
+        "q": "Ich bin Mitglied in FDH, VOD oder UDH. Gibt es Sonderkonditionen?",
+        "a": "Ja, über unsere Verbandskooperationen. Sprich uns an, wir klären deinen Status."
+      },
+      {
+        "q": "Was ist mit Vorerkrankungen?",
+        "a": "In unserer Gruppenlösung sind vereinfachte Gesundheitsprüfungen möglich. Auch wenn du einzeln abgelehnt wurdest, haben wir oft einen Weg."
+      },
+      {
+        "q": "Wer ist Healio?",
+        "a": "Hamburger Versicherungsmakler nach §34d GewO, spezialisiert auf Heilberufe, im Netzwerk bereits mit über 1.000 Praxen aktiv."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Dein nächster Schritt",
+    "subtitle": "Zwei Wege, beide führen zu einer klaren Einschätzung deiner Absicherung.",
+    "primary": {
+      "title": "Termin direkt buchen",
+      "description": "30 Minuten mit Frank Steinfurt persönlich. Remote oder Hamburg vor Ort.",
+      "cta": "Termin auswählen"
+    },
+    "secondary": {
+      "title": "Vorsorge-Check anfragen",
+      "description": "Kurzes Formular, du erhältst binnen 24 Stunden eine erste Einschätzung.",
+      "cta": "Zum Formular"
+    },
+    "disclaimer": "Das Healio Heilberufe-Vorsorgekonzept ist ein privatrechtliches Vorsorgekonzept auf Basis von Einzel- und Gruppenversicherungsverträgen. Versicherungsvermittlung durch die Healio GmbH, Makler nach §34d GewO."
+  }
+}
