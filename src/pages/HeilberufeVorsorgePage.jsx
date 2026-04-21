@@ -26,7 +26,27 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
+import HighlightText from '@/components/ui/HighlightText';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
+
+// Reusable Eyebrow-Pill für alle Sektionen
+const SectionEyebrow = ({ children, variant = 'light' }) => {
+  const styles = variant === 'dark'
+    ? 'bg-white/10 border-white/20 text-white/95'
+    : 'bg-teal-50 border-teal-100 text-teal-800';
+  return (
+    <div className={`inline-flex items-center gap-2 border text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5 ${styles}`}>
+      <Sparkles className="w-3.5 h-3.5" />
+      {children}
+    </div>
+  );
+};
+
+// Reusable Divider-Strich für H2
+const SectionDivider = ({ variant = 'light' }) => {
+  const color = variant === 'dark' ? 'from-white/50 to-[#25c990]' : 'from-teal-500 to-[#25c990]';
+  return <div className={`w-20 h-1 bg-gradient-to-r ${color} rounded-full mx-auto mb-5`} />;
+};
 
 const pillarIcons = [
   [Shield, Clock, Lock, Scale],
@@ -155,13 +175,11 @@ const HeilberufeVorsorgePage = () => {
 
           <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center mb-14">
-              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
-                <Sparkles className="w-3.5 h-3.5" />
-                {t('exklusivitaet.eyebrow')}
-              </div>
+              <SectionEyebrow variant="dark">{t('exklusivitaet.eyebrow')}</SectionEyebrow>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                 {t('exklusivitaet.title')}
               </h2>
+              <SectionDivider variant="dark" />
               <p className="text-lg text-white/90 leading-relaxed">
                 {t('exklusivitaet.subtitle')}
               </p>
@@ -208,10 +226,12 @@ const HeilberufeVorsorgePage = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <SectionEyebrow>{t('problem.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('problem.title')}
               </h2>
+              <SectionDivider />
               <p className="text-lg text-slate-600 leading-relaxed">
                 {t('problem.subtitle')}
               </p>
@@ -222,14 +242,14 @@ const HeilberufeVorsorgePage = () => {
                 return (
                   <motion.div
                     key={i}
-                    className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100"
+                    className="group bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 hover:border-rose-200 transition-all"
                     initial={{ opacity: 1, y: 0 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center mb-5">
-                      <Icon className="w-6 h-6 text-rose-600" />
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <Icon className="w-7 h-7 text-rose-600" />
                     </div>
                     <h3 className="text-xl font-semibold text-slate-900 mb-3">
                       {card.title}
@@ -258,14 +278,11 @@ const HeilberufeVorsorgePage = () => {
 
           <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Die Lösung
-              </div>
+              <SectionEyebrow>Die Lösung</SectionEyebrow>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('solution.title')}
               </h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-[#25c990] rounded-full mx-auto mb-5" />
+              <SectionDivider />
               <p className="text-lg text-slate-600 leading-relaxed">
                 {t('solution.subtitle')}
               </p>
@@ -345,7 +362,7 @@ const HeilberufeVorsorgePage = () => {
                               {block.title}
                             </h4>
                             <p className="text-sm text-slate-600 leading-relaxed">
-                              {block.text}
+                              <HighlightText text={block.text} className="font-semibold text-[#1fb37f]" />
                             </p>
                           </div>
                         );
@@ -360,18 +377,25 @@ const HeilberufeVorsorgePage = () => {
 
         {/* MEHRWERT */}
         <motion.section
-          className="py-20 bg-slate-900 text-white"
+          className="relative py-24 bg-gradient-to-br from-slate-950 via-slate-900 to-[#0b4d4a] text-white overflow-hidden"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-10 right-10 w-96 h-96 bg-[#25c990] rounded-full blur-3xl" />
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-teal-500 rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <SectionEyebrow variant="dark">{t('mehrwert.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                 {t('mehrwert.title')}
               </h2>
-              <p className="text-lg text-white/75 leading-relaxed">
+              <SectionDivider variant="dark" />
+              <p className="text-lg text-white/80 leading-relaxed">
                 {t('mehrwert.subtitle')}
               </p>
             </div>
@@ -381,18 +405,37 @@ const HeilberufeVorsorgePage = () => {
                 return (
                   <motion.div
                     key={i}
-                    className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+                    className="relative bg-white/[0.07] backdrop-blur-sm rounded-2xl p-8 border border-white/15 hover:border-[#25c990]/40 hover:bg-white/[0.1] transition-all overflow-hidden"
                     initial={{ opacity: 1, y: 0 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#25c990]/20 flex items-center justify-center mb-5">
-                      <Icon className="w-6 h-6 text-[#25c990]" />
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 shrink-0 rounded-2xl bg-gradient-to-br from-[#25c990]/30 to-[#25c990]/10 ring-1 ring-[#25c990]/40 flex items-center justify-center">
+                        <Icon className="w-7 h-7 text-[#25c990]" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-white/60">
+                          {col.title}
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold mb-5">
-                      {col.title}
-                    </h3>
+                    <div className="mb-6 pb-6 border-b border-white/10">
+                      <div className="text-4xl md:text-5xl font-bold leading-none mb-2"
+                        style={{
+                          backgroundImage: 'linear-gradient(135deg, #5eeab8 0%, #25c990 45%, #0f6646 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: 'transparent'
+                        }}>
+                        {col.bigNumber}
+                      </div>
+                      <p className="text-sm text-white/75 leading-snug">
+                        {col.bigNumberLabel}
+                      </p>
+                    </div>
                     <ul className="space-y-3">
                       {col.points.map((point, pIdx) => (
                         <li key={pIdx} className="flex gap-3 text-sm text-white/85 leading-relaxed">
@@ -410,38 +453,43 @@ const HeilberufeVorsorgePage = () => {
 
         {/* ABLAUF */}
         <motion.section
-          className="py-20 bg-white"
+          className="py-24 bg-white"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <SectionEyebrow>{t('ablauf.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('ablauf.title')}
               </h2>
+              <SectionDivider />
               <p className="text-lg text-slate-600 leading-relaxed">
                 {t('ablauf.subtitle')}
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {/* Verbindungslinie zwischen Schritten (nur Desktop) */}
+              <div className="hidden lg:block absolute top-10 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-teal-200 via-[#25c990]/40 to-teal-200 z-0" />
+
               {ablaufSteps.map((step, i) => (
                 <motion.div
                   key={i}
-                  className="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-7 border border-slate-100"
+                  className="relative bg-white rounded-2xl p-7 border-2 border-slate-100 hover:border-[#25c990]/30 hover:shadow-lg transition-all z-10"
                   initial={{ opacity: 1, y: 0 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <div className="text-4xl font-bold text-[#25c990]/30 mb-3">
-                    {step.number}
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#25c990] to-[#1fb37f] flex items-center justify-center mb-5 shadow-lg shadow-[#25c990]/20 mx-auto lg:mx-0">
+                    <span className="text-white font-bold text-lg">{step.number}</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3 text-center lg:text-left">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed text-center lg:text-left">
                     {step.text}
                   </p>
                 </motion.div>
@@ -452,35 +500,44 @@ const HeilberufeVorsorgePage = () => {
 
         {/* SOCIAL PROOF */}
         <motion.section
-          className="py-20 bg-slate-50"
+          className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <SectionEyebrow>{t('socialProof.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('socialProof.title')}
               </h2>
+              <SectionDivider />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {testimonials.map((testimonial, i) => (
                 <motion.div
                   key={i}
-                  className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100"
+                  className="relative bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all"
                   initial={{ opacity: 1, y: 0 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <Users className="w-8 h-8 text-[#25c990] mb-4" />
-                  <blockquote className="text-slate-700 leading-relaxed mb-5 italic">
-                    „{testimonial.quote}"
+                  <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-gradient-to-br from-[#25c990] to-[#1fb37f] flex items-center justify-center shadow-lg shadow-[#25c990]/30">
+                    <span className="text-white text-2xl leading-none font-serif">„</span>
+                  </div>
+                  <blockquote className="text-slate-700 leading-relaxed mb-5 italic mt-4">
+                    {testimonial.quote}
                   </blockquote>
-                  <div className="text-sm">
-                    <div className="font-semibold text-slate-900">{testimonial.name}</div>
-                    <div className="text-slate-500">{testimonial.role}</div>
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-100 to-[#25c990]/20 flex items-center justify-center">
+                      <Users className="w-5 h-5 text-[#1fb37f]" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-slate-900 text-sm">{testimonial.name}</div>
+                      <div className="text-slate-500 text-xs">{testimonial.role}</div>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -490,43 +547,52 @@ const HeilberufeVorsorgePage = () => {
 
         {/* FAQ */}
         <motion.section
-          className="py-20 bg-white"
+          className="py-24 bg-white"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <div className="max-w-3xl mx-auto text-center mb-14">
+              <SectionEyebrow>{t('faq.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('faq.title')}
               </h2>
+              <SectionDivider />
             </div>
             <div className="max-w-3xl mx-auto space-y-3">
-              {faqItems.map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-slate-50 rounded-xl overflow-hidden border border-slate-100"
-                >
-                  <button
-                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-slate-100 transition-colors"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
+              {faqItems.map((item, i) => {
+                const isOpen = openFaq === i;
+                return (
+                  <div
+                    key={i}
+                    className={`rounded-xl overflow-hidden border-2 transition-all ${
+                      isOpen
+                        ? 'bg-white border-[#25c990]/40 shadow-md'
+                        : 'bg-slate-50 border-slate-100 hover:border-slate-200'
+                    }`}
                   >
-                    <span className="font-semibold text-slate-900">{item.q}</span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-slate-500 shrink-0 transition-transform ${
-                        openFaq === i ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-6 pb-5 text-slate-600 leading-relaxed">
-                      {item.a}
-                    </div>
-                  )}
-                </div>
-              ))}
+                    <button
+                      className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 transition-colors"
+                      onClick={() => setOpenFaq(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="font-semibold text-slate-900">{item.q}</span>
+                      <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center transition-all ${
+                        isOpen ? 'bg-[#25c990] text-white rotate-180' : 'bg-white text-slate-500'
+                      }`}>
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </button>
+                    {isOpen && (
+                      <div className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                        {item.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.section>
@@ -534,13 +600,18 @@ const HeilberufeVorsorgePage = () => {
         {/* FINAL CTA */}
         <section
           id="final-cta"
-          className="py-20 bg-gradient-to-br from-[#0b4d4a] via-slate-900 to-slate-900 text-white"
+          className="relative py-24 bg-gradient-to-br from-[#0b4d4a] via-slate-900 to-slate-950 text-white overflow-hidden"
         >
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#25c990] rounded-full blur-3xl" />
+          </div>
+          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center mb-14">
+              <SectionEyebrow variant="dark">{t('cta.eyebrow')}</SectionEyebrow>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                 {t('cta.title')}
               </h2>
+              <SectionDivider variant="dark" />
               <p className="text-lg text-white/80">
                 {t('cta.subtitle')}
               </p>

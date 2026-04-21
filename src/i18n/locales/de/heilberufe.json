@@ -34,6 +34,7 @@
     "footnote": "Die konkreten Konditionen werden im persönlichen Gespräch ausgewiesen, tarifaktuell und transparent."
   },
   "problem": {
+    "eyebrow": "Die Problematik",
     "title": "Die drei Lücken, die fast jeden Heilpraktiker treffen",
     "subtitle": "Als Selbstständige in einem nicht verkammerten Heilberuf stehst du ohne das übliche Auffangnetz da. Das hat drei typische Folgen.",
     "cards": [
@@ -61,7 +62,7 @@
         "blocks": [
           {
             "title": "Berufshaftpflicht",
-            "text": "Bis 10 Mio. Euro Deckung. Alle Therapieverfahren drin, auch invasive wie Akupunktur, Injektionen, Ausleitung."
+            "text": "<highlight>Bis 10 Mio. Euro Deckung</highlight>. Alle Therapieverfahren drin, auch invasive wie Akupunktur, Injektionen, Ausleitung."
           },
           {
             "title": "Praxisausfall",
@@ -83,11 +84,11 @@
         "blocks": [
           {
             "title": "Berufsunfähigkeit",
-            "text": "Volkswohl Bund Existenz. Bedingungswerk sehr gut bis exzellent. Bis 30 Prozent günstiger im Gruppenvertrag."
+            "text": "Volkswohl Bund Existenz. Bedingungswerk sehr gut bis exzellent. <highlight>Bis 30 Prozent günstiger</highlight> im Gruppenvertrag."
           },
           {
             "title": "Rürup Basisrente",
-            "text": "Fondsgebunden, voll als Sonderausgabe absetzbar. Beispiel: 15.000 Euro Einzahlung bei 42 Prozent Grenzsteuersatz ergeben rund 6.300 Euro Steuerersparnis pro Jahr. Höchstbetrag 2026: 30.826 Euro (ledig), 61.652 Euro (verheiratet)."
+            "text": "Fondsgebunden, voll als Sonderausgabe absetzbar. Beispiel: 15.000 Euro Einzahlung bei 42 Prozent Grenzsteuersatz ergeben <highlight>rund 6.300 Euro Steuerersparnis pro Jahr</highlight>. Höchstbetrag 2026: 30.826 Euro (ledig), 61.652 Euro (verheiratet)."
           },
           {
             "title": "Grundfähigkeit",
@@ -102,11 +103,14 @@
     ]
   },
   "mehrwert": {
+    "eyebrow": "Dein Mehrwert",
     "title": "Du zahlst weniger, bist besser abgesichert, sparst Steuern",
     "subtitle": "Drei Hebel, die im Paket echte Wirkung zeigen.",
     "columns": [
       {
         "icon": "TrendingDown",
+        "bigNumber": "bis 30 %",
+        "bigNumberLabel": "günstiger als Einzelverträge",
         "title": "Weniger zahlen",
         "points": [
           "Gruppenkondition auf Sach-Seite: 10 bis 20 Prozent unter Marktpreis",
@@ -116,6 +120,8 @@
       },
       {
         "icon": "Shield",
+        "bigNumber": "5 Mio. €",
+        "bigNumberLabel": "Mindestdeckung Haftpflicht",
         "title": "Besser abgesichert",
         "points": [
           "Mindestdeckung 5 Mio. Euro Berufshaftpflicht",
@@ -126,6 +132,8 @@
       },
       {
         "icon": "Calculator",
+        "bigNumber": "6.300 €",
+        "bigNumberLabel": "Steuerersparnis pro Jahr",
         "title": "Steuern sparen",
         "points": [
           "Rürup voll als Sonderausgabe absetzbar",
@@ -136,6 +144,7 @@
     ]
   },
   "ablauf": {
+    "eyebrow": "So läuft es ab",
     "title": "Vier Schritte, kein Papierkram",
     "subtitle": "Von der ersten Frage bis zur fertigen Absicherung in wenigen Tagen.",
     "steps": [
@@ -162,6 +171,7 @@
     ]
   },
   "socialProof": {
+    "eyebrow": "Stimmen aus der Branche",
     "title": "Was Kolleginnen und Kollegen sagen",
     "testimonials": [
       {
@@ -182,7 +192,8 @@
     ]
   },
   "faq": {
-    "title": "Häufige Fragen",
+    "eyebrow": "Häufige Fragen",
+    "title": "Alles, was du wissen willst",
     "items": [
       {
         "q": "Kostet der Check etwas?",
@@ -211,6 +222,7 @@
     ]
   },
   "cta": {
+    "eyebrow": "Jetzt handeln",
     "title": "Dein nächster Schritt",
     "subtitle": "Zwei Wege, beide führen zu einer klaren Einschätzung deiner Absicherung.",
     "primary": {

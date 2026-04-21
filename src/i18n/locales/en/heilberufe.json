@@ -34,6 +34,7 @@
     "footnote": "The exact conditions are presented in the personal consultation, tariff-current and transparent."
   },
   "problem": {
+    "eyebrow": "The problem",
     "title": "The three gaps that hit almost every naturopath",
     "subtitle": "Self-employed without a chamber-based retirement scheme means no default safety net. Three typical consequences follow.",
     "cards": [
@@ -61,7 +62,7 @@
         "blocks": [
           {
             "title": "Professional liability",
-            "text": "Up to 10 million euros coverage. All therapy procedures included, even invasive ones like acupuncture, injections, detoxification."
+            "text": "<highlight>Up to 10 million euros coverage</highlight>. All therapy procedures included, even invasive ones like acupuncture, injections, detoxification."
           },
           {
             "title": "Practice interruption",
@@ -83,11 +84,11 @@
         "blocks": [
           {
             "title": "Disability insurance",
-            "text": "Volkswohl Bund Existenz. Terms rated very good to excellent. Up to 30 percent cheaper in a group contract."
+            "text": "Volkswohl Bund Existenz. Terms rated very good to excellent. <highlight>Up to 30 percent cheaper</highlight> in a group contract."
           },
           {
             "title": "Rürup base pension",
-            "text": "Fund-linked, fully deductible as special expenses. Example: 15,000 euro annual contribution at 42 percent marginal tax rate yields about 6,300 euro tax savings per year. 2026 limits: 30,826 euro (single), 61,652 euro (married)."
+            "text": "Fund-linked, fully deductible as special expenses. Example: 15,000 euro annual contribution at 42 percent marginal tax rate yields <highlight>about 6,300 euro tax savings per year</highlight>. 2026 limits: 30,826 euro (single), 61,652 euro (married)."
           },
           {
             "title": "Basic skills insurance",
@@ -102,11 +103,14 @@
     ]
   },
   "mehrwert": {
+    "eyebrow": "Your advantage",
     "title": "You pay less, are better covered, save taxes",
     "subtitle": "Three levers that really work when bundled.",
     "columns": [
       {
         "icon": "TrendingDown",
+        "bigNumber": "up to 30 %",
+        "bigNumberLabel": "cheaper than individual contracts",
         "title": "Pay less",
         "points": [
           "Group conditions on the coverage side: 10 to 20 percent below market",
@@ -116,6 +120,8 @@
       },
       {
         "icon": "Shield",
+        "bigNumber": "5 million €",
+        "bigNumberLabel": "minimum liability coverage",
         "title": "Better covered",
         "points": [
           "Minimum coverage of 5 million euros professional liability",
@@ -126,6 +132,8 @@
       },
       {
         "icon": "Calculator",
+        "bigNumber": "6,300 €",
+        "bigNumberLabel": "tax savings per year",
         "title": "Save taxes",
         "points": [
           "Rürup fully deductible as a special expense",
@@ -136,6 +144,7 @@
     ]
   },
   "ablauf": {
+    "eyebrow": "How it works",
     "title": "Four steps, no paperwork",
     "subtitle": "From first question to complete coverage in just a few days.",
     "steps": [
@@ -162,6 +171,7 @@
     ]
   },
   "socialProof": {
+    "eyebrow": "Voices from the field",
     "title": "What colleagues say",
     "testimonials": [
       {
@@ -182,7 +192,8 @@
     ]
   },
   "faq": {
-    "title": "Frequent questions",
+    "eyebrow": "Frequent questions",
+    "title": "Everything you want to know",
     "items": [
       {
         "q": "Does the check cost anything?",
@@ -211,6 +222,7 @@
     ]
   },
   "cta": {
+    "eyebrow": "Take action",
     "title": "Your next step",
     "subtitle": "Two ways, both lead to a clear assessment of your protection.",
     "primary": {
