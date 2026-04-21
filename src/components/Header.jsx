@@ -56,6 +56,7 @@ const Header = () => {
       ]
     },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
+    { to: getPath('heilberufeVorsorge'), label: t('nav.heilberufeVorsorge'), type: 'link', highlight: true },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
     { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
   ];

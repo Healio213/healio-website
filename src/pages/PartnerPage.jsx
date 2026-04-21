@@ -252,6 +252,46 @@ const PartnerPage = () => {
           </div>
         </section>
 
+        {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
+        <section className="relative py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+          </div>
+          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
+                  <Shield className="w-3.5 h-3.5" />
+                  Neu: Vorsorge für Heilberufe
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                  Und wer sichert eigentlich dich ab?
+                </h2>
+                <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-2">
+                  Berufshaftpflicht, Praxisausfall, Berufsunfähigkeit, Rürup. Gebündelt, digital, mit Konditionen, die du allein nicht bekommst.
+                </p>
+                <p className="text-sm text-white/75">
+                  Exklusive Rahmenverträge, nur über Healio. Bis zu 30 Prozent günstiger als Einzelverträge.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Button
+                  asChild
+                  className="bg-white text-[#0b4d4a] hover:bg-white/90 text-base font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                >
+                  <a href="/heilberufe-vorsorge">
+                    Zur Heilberufe-Vorsorge
+                  </a>
+                </Button>
+                <p className="text-xs text-white/70 text-center">
+                  30 Sekunden Check, unverbindlich
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTION 2: PROBLEM AWARENESS */}
         <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
