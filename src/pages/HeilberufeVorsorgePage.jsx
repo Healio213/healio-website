@@ -74,13 +74,15 @@ const HeilberufeVorsorgePage = () => {
 
         {/* HERO */}
         <section className="relative min-h-[100svh] flex items-center pt-28 pb-16 lg:pt-20 lg:pb-0">
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-900 via-slate-800 to-[#0b4d4a]">
+          <div className="absolute inset-0 z-0">
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-30"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/images/hero-heilberufe-vorsorge.webp')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/30 to-transparent z-10" />
+            {/* Sanfter Gradient links für Textlesbarkeit, rechts volles Bild */}
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/35 to-transparent z-10" />
+            {/* Leichte Vignette unten für CTAs und Trust-Zeile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-transparent to-transparent z-10" />
           </div>
 
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
