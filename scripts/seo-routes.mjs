@@ -38,6 +38,13 @@ export const seoRoutes = [
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
   },
   {
+    path: '/heilberufe-vorsorge',
+    title: 'Heilberufe-Vorsorge für Heilpraktiker und Osteopathen | Healio',
+    description: 'Gebündelte Absicherung für Praxis und Leben: Berufshaftpflicht, Praxisausfall, Cyber, Berufsunfähigkeit und Rürup. Exklusive Rahmenkonditionen nur über Healio.',
+    canonical: 'https://healio.de/heilberufe-vorsorge',
+    lang: 'de',
+  },
+  {
     path: '/zahn',
     title: 'Zahnzusatzversicherung – Bis zu 100 % Erstattung | Healio',
     description: 'Zahnzusatzversicherung mit bis zu 100 % Erstattung für Zahnersatz, Prophylaxe und KFO. Ab 8,55 € im Monat. Jetzt Beitrag berechnen!',
