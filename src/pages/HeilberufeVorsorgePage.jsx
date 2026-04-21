@@ -79,10 +79,8 @@ const HeilberufeVorsorgePage = () => {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/images/hero-heilberufe-vorsorge.webp')" }}
             />
-            {/* Sanfter Gradient links für Textlesbarkeit, rechts volles Bild */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/35 to-transparent z-10" />
-            {/* Leichte Vignette unten für CTAs und Trust-Zeile */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-transparent to-transparent z-10" />
+            {/* Sehr zarter Gradient links, nur so viel wie nötig für Lesbarkeit */}
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/55 via-slate-900/5 to-transparent z-10" />
           </div>
 
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
@@ -102,13 +100,13 @@ const HeilberufeVorsorgePage = () => {
                   {t('hero.exclusiveLabel')}
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-[0_4px_16px_rgba(0,0,0,0.7)]">
                 {t('hero.title')}
               </h1>
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-4 max-w-2xl">
+              <p className="text-lg sm:text-xl text-white leading-relaxed mb-4 max-w-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                 {t('hero.subtitle')}
               </p>
-              <p className="text-base text-white/75 mb-10 max-w-2xl">
+              <p className="text-base text-white/90 mb-10 max-w-2xl drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
                 {t('hero.description')}
               </p>
               <div className="flex flex-wrap gap-4">
@@ -127,10 +125,10 @@ const HeilberufeVorsorgePage = () => {
                   </Button>
                 </Link>
               </div>
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/95 drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]">
                 {trustPoints.map((point, i) => (
                   <React.Fragment key={i}>
-                    {i > 0 && <span className="hidden sm:inline text-white/40">·</span>}
+                    {i > 0 && <span className="hidden sm:inline text-white/60">·</span>}
                     <span className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#25c990]" />
                       {point}
@@ -248,62 +246,114 @@ const HeilberufeVorsorgePage = () => {
 
         {/* LÖSUNG */}
         <motion.section
-          className="py-20 bg-white"
+          className="relative py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          {/* Deko-Akzente */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-20 right-10 w-72 h-72 bg-[#25c990]/5 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
+                <Sparkles className="w-3.5 h-3.5" />
+                Die Lösung
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
                 {t('solution.title')}
               </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-[#25c990] rounded-full mx-auto mb-5" />
               <p className="text-lg text-slate-600 leading-relaxed">
                 {t('solution.subtitle')}
               </p>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {pillars.map((pillar, pIdx) => (
-                <div
-                  key={pIdx}
-                  className="rounded-3xl p-8 md:p-10 bg-gradient-to-br from-slate-50 to-teal-50/30 border border-slate-100"
-                >
-                  <div className="mb-8">
-                    <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-teal-700 mb-3">
-                      <Sparkles className="w-4 h-4" />
-                      {pIdx === 0 ? 'Säule 1' : 'Säule 2'}
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-slate-600">
-                      {pillar.description}
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {pillar.blocks.map((block, bIdx) => {
-                      const Icon = pillarIcons[pIdx][bIdx];
-                      return (
-                        <div
-                          key={bIdx}
-                          className="bg-white rounded-xl p-5 border border-slate-100"
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center mb-3">
-                            <Icon className="w-5 h-5 text-teal-700" />
-                          </div>
-                          <h4 className="text-base font-semibold text-slate-900 mb-2">
-                            {block.title}
-                          </h4>
-                          <p className="text-sm text-slate-600 leading-relaxed">
-                            {block.text}
-                          </p>
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+              {/* Plus-Symbol zwischen den Säulen (nur auf Desktop) */}
+              <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white shadow-xl border-2 border-slate-100 items-center justify-center">
+                <span className="text-2xl font-light text-slate-400">+</span>
+              </div>
+
+              {pillars.map((pillar, pIdx) => {
+                const isFirst = pIdx === 0;
+                const colorScheme = isFirst
+                  ? {
+                      headerBg: 'bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900',
+                      eyebrow: 'text-teal-300',
+                      number: 'text-teal-400/30',
+                      iconBg: 'bg-teal-500/15 ring-1 ring-teal-400/30',
+                      iconColor: 'text-teal-300',
+                      cardIconBg: 'bg-teal-50',
+                      cardIconColor: 'text-teal-700',
+                      cardHover: 'hover:border-teal-200 hover:shadow-teal-100'
+                    }
+                  : {
+                      headerBg: 'bg-gradient-to-br from-[#0b4d4a] via-[#1fb37f] to-[#25c990]',
+                      eyebrow: 'text-white/85',
+                      number: 'text-white/25',
+                      iconBg: 'bg-white/15 ring-1 ring-white/30',
+                      iconColor: 'text-white',
+                      cardIconBg: 'bg-[#25c990]/10',
+                      cardIconColor: 'text-[#1fb37f]',
+                      cardHover: 'hover:border-[#25c990]/30 hover:shadow-emerald-100'
+                    };
+
+                return (
+                  <motion.div
+                    key={pIdx}
+                    className="rounded-3xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col"
+                    initial={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: pIdx * 0.15 }}
+                  >
+                    {/* Header mit Farbverlauf */}
+                    <div className={`relative ${colorScheme.headerBg} p-8 md:p-10 text-white overflow-hidden`}>
+                      <div className={`absolute -top-4 -right-2 text-[120px] font-black leading-none select-none ${colorScheme.number}`}>
+                        0{pIdx + 1}
+                      </div>
+                      <div className="relative z-10">
+                        <div className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider ${colorScheme.eyebrow} mb-3`}>
+                          <Sparkles className="w-3.5 h-3.5" />
+                          {isFirst ? 'Säule 1 · Praxis' : 'Säule 2 · Du'}
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                          {pillar.title}
+                        </h3>
+                        <p className="text-white/85 text-base">
+                          {pillar.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bausteine */}
+                    <div className="p-6 md:p-7 grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 bg-slate-50/40">
+                      {pillar.blocks.map((block, bIdx) => {
+                        const Icon = pillarIcons[pIdx][bIdx];
+                        return (
+                          <div
+                            key={bIdx}
+                            className={`group bg-white rounded-xl p-5 border border-slate-200 transition-all ${colorScheme.cardHover} hover:shadow-md hover:-translate-y-0.5`}
+                          >
+                            <div className={`w-10 h-10 rounded-lg ${colorScheme.cardIconBg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                              <Icon className={`w-5 h-5 ${colorScheme.cardIconColor}`} />
+                            </div>
+                            <h4 className="text-base font-semibold text-slate-900 mb-2">
+                              {block.title}
+                            </h4>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                              {block.text}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </motion.section>
