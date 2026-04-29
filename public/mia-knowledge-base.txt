@@ -14,7 +14,7 @@ Unser Konzept kombiniert die ambulante Zusatzversicherung der SDK Süddeutsche K
 
 ## Das HEALIO Konzept — So funktioniert es
 
-Schritt 1: Du schließt eine ambulante Zusatzversicherung bei der SDK ab. Das geht komplett online in 3 Minuten, ohne Gesundheitsfragen, ohne Wartezeit.
+Schritt 1: Du schließt eine ambulante Zusatzversicherung bei der SDK ab. Das geht komplett online in wenigen Minuten und greift ohne Wartezeit ab dem ersten Tag. Gesundheitsfragen werden gestellt, müssen wahrheitsgemäß beantwortet werden.
 
 Schritt 2: Optional wechselst du zur IKK Classic als gesetzliche Krankenkasse. Das ist kostenlos, die IKK erledigt die Kündigung bei deiner alten Kasse. 98% aller Leistungen sind bei allen gesetzlichen Kassen identisch.
 
@@ -41,11 +41,17 @@ Es gibt auch günstigere Tarife: AP9 mit 90% Erstattung, AP7 mit 70% und AP5 mit
 
 ---
 
-## Keine Gesundheitsprüfung
+## Annahmebedingungen und Wartezeit
 
-Ganz wichtig: Die SDK Zusatzversicherung hat KEINE Gesundheitsfragen und KEINE Gesundheitsprüfung. Du wirst garantiert angenommen — auch bei Vorerkrankungen. Es gibt auch keine Wartezeiten. Der volle Versicherungsschutz beginnt ab dem ersten Tag. Das gilt für alle Tarife von AP5 bis AP1.
+Bei der SDK gibt es eine Gesundheitsprüfung im Antragsformular. Vorerkrankungen, Behandlungen und Beschwerden der letzten Jahre müssen wahrheitsgemäß und vollständig angegeben werden. Das ist gesetzlich vorgeschrieben nach Paragraf 19 Versicherungsvertragsgesetz.
 
-Auch Neugeborene können innerhalb der ersten 2 Lebensmonate ohne Gesundheitsprüfung mitversichert werden.
+Gute Nachricht: Die SDK lehnt grundsätzlich niemanden ab. Auch mit Vorerkrankungen ist eine Aufnahme in die Tarife AP5 bis AP1 möglich. Je nach Diagnose kann allerdings ein Risikozuschlag auf den Beitrag erhoben werden, in seltenen Fällen auch ein Leistungsausschluss für eine bestimmte Erkrankung.
+
+Wartezeiten gibt es bei den ambulanten AP-Tarifen keine. Der volle Versicherungsschutz beginnt ab dem ersten Tag. Das gilt für alle Tarife AP5, AP7, AP9 und AP1.
+
+Wichtig für Schwangere: Wer bei Antragstellung bereits schwanger ist, bekommt für die laufende Schwangerschaft nur Komplikationen erstattet, nicht aber die regulären Vorsorgeuntersuchungen. Der Vorsorge-Schutz greift erst für eine spätere Schwangerschaft.
+
+Auch Neugeborene können innerhalb der ersten 2 Lebensmonate ohne neue Gesundheitsprüfung mitversichert werden, wenn ein Elternteil bei der SDK versichert ist.
 
 ---
 
@@ -146,12 +152,28 @@ Ergebnis: 580 Euro Bonus minus 540 Euro Beitrag gleich 40 Euro Plus. Frau Mülle
 
 ## Schwangerschaft und Geburt
 
-Für Schwangere und junge Familien gibt es über 1.100 Euro an Leistungen:
+Für Schwangere und junge Familien gibt es über 1.100 Euro an Leistungen aus dem Bonusprogramm und der Zusatzversicherung kombiniert.
+
+Aus dem IKK Bonusprogramm:
 - 250 Euro Hebammen-Rufbereitschaft
-- 100 Euro Vorsorge-Zuschuss
+- 100 Euro Vorsorge-Zuschuss für ergänzende Untersuchungen wie Toxoplasmose, Streptokokken, Röteln, Cytomegalie
+- 100 Euro Mineralstoffe und Nahrungsergänzung wie Eisen, Folsäure, Magnesium
 - 180 Euro Baby-Bonus im ersten Lebensjahr
 - Kostenloser Partner-Geburtsvorbereitungskurs
-- Mineralstoffe und Nahrungsergänzung inklusive
+- Geburtsvorbereitung kostenlos
+
+Aus der SDK Zusatzversicherung im Tarif AP1:
+- Bis zu 500 Euro für Schwangerschafts-Vorsorge in 2 Kalenderjahren. Das deckt IGeL-Leistungen ab, die Schwangere beim Frauenarzt sonst selbst zahlen, zum Beispiel Feinultraschall zwischen 19. und 22. Schwangerschaftswoche, zusätzliche Ultraschalls, Toxoplasmose-Test, Streptokokken-Test, Cytomegalie-Test und Nackenfaltenmessung.
+- Bis zu 1.000 Euro für Naturheilverfahren in 2 Kalenderjahren, zum Beispiel Akupunktur in der Schwangerschaft, Osteopathie, Homöopathie, TCM, sowie verordnete Apothekenpräparate über den Heilpraktiker.
+- Bis zu 1.000 Euro für Hilfsmittel und Zuzahlungen in 2 Kalenderjahren, zum Beispiel ärztlich verordnete Vitamin-D-Präparate, Eisen-Präparate oder apothekenpflichtige Folsäure.
+
+Was die SDK NICHT übernimmt:
+- NIPT, also nicht-invasive Pränataltests wie Praena, Harmony oder Panorama, sind ausgeschlossen, weil Gendiagnostische Untersuchungen generell nicht versichert sind.
+- Die Behandlung von Schwangerschaftsbeschwerden und die Geburt selbst sind nicht versichert. Komplikationen, Frühgeburten bis Ende der 36. Schwangerschaftswoche und Fehlgeburten sind allerdings als Ausnahme versichert.
+- Nahrungsergänzungsmittel aus Drogerie oder Supermarkt sind keine Arzneimittel und werden daher nicht erstattet.
+- 3D oder 4D Babykino ohne medizinischen Vorsorgezweck ist nicht versichert.
+
+Wichtig: Schwangere sollten den Tarif idealerweise vor der Schwangerschaft abschließen, damit der volle Schutz greift. Bei Abschluss während laufender Schwangerschaft sind die regulären Vorsorgeuntersuchungen für diese Schwangerschaft nicht erstattungsfähig, weil die Versicherung nicht für Versicherungsfälle leistet, die vor Versicherungsbeginn eingetreten sind.
 
 ---
 
@@ -243,7 +265,7 @@ Frage: Ist der Bonus wirklich steuerfrei?
 Antwort: Ja, der IKK Bonus ist komplett steuerfrei. Er wird direkt ausgezahlt oder mit deiner Zusatzversicherung verrechnet.
 
 Frage: Brauche ich eine Gesundheitsprüfung?
-Antwort: Nein, überhaupt nicht. Die SDK hat keine Gesundheitsfragen. Du wirst garantiert angenommen, auch bei Vorerkrankungen. Es gibt auch keine Wartezeiten.
+Antwort: Ja, im Antragsformular gibt es Gesundheitsfragen, die du wahrheitsgemäß beantworten musst. Die gute Nachricht: Die SDK lehnt grundsätzlich niemanden ab. Auch mit Vorerkrankungen kommst du rein. Bei manchen Diagnosen kann ein Risikozuschlag dazukommen. Wartezeiten gibt es keine, der Schutz beginnt ab Tag eins.
 
 Frage: Lohnt sich das auch für junge Leute?
 Antwort: Auf jeden Fall! Gerade junge Menschen zahlen weniger Beitrag und können trotzdem den vollen Bonus nutzen. Für Studenten gibt es zum Beispiel den Bonus für Hochschulsport.
