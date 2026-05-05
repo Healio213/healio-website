@@ -53,7 +53,7 @@
   },
   "steps": {
     "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "15 Minuten reichen. Wir erklären das Konzept und du entscheidest, ob es zu deiner Praxis passt.",
+    "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest, ob es zu deiner Praxis passt.",
     "step2Title": "Materialien erhalten",
     "step2Desc": "Du bekommst unseren hochwertigen Aufsteller mit Flyern für dein Wartezimmer. Kostenlos und fertig zum Aufstellen.",
     "step3Title": "Patienten profitieren",
@@ -61,7 +61,7 @@
   },
   "cta": {
     "title": "Jetzt <highlight>kostenlos</highlight> Partnerpraxis werden",
-    "subtitle": "In 15 Minuten zum <highlight>Healio Partner</highlight>. Kein Risiko, keine Kosten, keine Verpflichtung.",
+    "subtitle": "In 45 Minuten zum <highlight>Healio Partner</highlight>. Kein Risiko, keine Kosten, keine Verpflichtung.",
     "calendarError": "Kalender konnte nicht geladen werden",
     "calendarErrorDesc": "Bitte überprüfe deine Internetverbindung oder deaktiviere eventuelle Adblocker."
   },
@@ -71,7 +71,7 @@
   },
   "footer": {
     "title": "Bereit für den <highlight>nächsten Schritt</highlight>?",
-    "subtitle": "15 Minuten. Keine Verkaufspräsentation. Nur Zahlen.",
+    "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur Zahlen.",
     "cta": "Strategiegespräch sichern"
   }
 }

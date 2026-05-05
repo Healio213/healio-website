@@ -52,7 +52,7 @@
   },
   "steps": {
     "step1Title": "Quick Introduction",
-    "step1Desc": "15 minutes is all it takes. We explain the concept and you decide if it fits your practice.",
+    "step1Desc": "45 minutes is all it takes. We explain the concept and you decide if it fits your practice.",
     "step2Title": "Receive Materials",
     "step2Desc": "You receive our premium display stand with flyers for your waiting room. Free and ready to set up.",
     "step3Title": "Patients Benefit",
@@ -60,7 +60,7 @@
   },
   "cta": {
     "title": "Become a Partner Practice for Free",
-    "subtitle": "Become a Healio partner in 15 minutes. No risk, no cost, no obligation.",
+    "subtitle": "Become a Healio partner in 45 minutes. No risk, no cost, no obligation.",
     "calendarError": "Calendar could not be loaded",
     "calendarErrorDesc": "Please check your internet connection or disable any ad blockers."
   }

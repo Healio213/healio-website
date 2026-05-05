@@ -80,7 +80,7 @@
   "steps": {
     "title": "So einfach funktioniert es für dich.",
     "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "15 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
+    "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
     "step2Title": "Materialien erhalten",
     "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche oder deine Praxisräume. Völlig kostenlos.",
     "step3Title": "Familien profitieren",
@@ -89,7 +89,7 @@
   },
   "cta": {
     "title": "Bereit für ein kurzes Kennenlernen?",
-    "subtitle": "15 Minuten. Keine Verkaufspräsentation. Nur echte Fakten für deine Arbeit.",
+    "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur echte Fakten für deine Arbeit.",
     "button": "Strategiegespräch sichern"
   }
 }

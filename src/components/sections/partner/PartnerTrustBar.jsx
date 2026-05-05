@@ -8,7 +8,7 @@ const PartnerTrustBar = () => {
     { icon: <Euro className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Bis zu 3.000 € Patientenbudget" },
     { icon: <Gift className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Kostenlose Materialien" },
     { icon: <Shield className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Keine Kosten, keine Verpflichtung" },
-    { icon: <CheckCircle className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "In 15 Minuten startklar" }
+    { icon: <CheckCircle className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "In 45 Minuten startklar" }
   ];
 
   return (
