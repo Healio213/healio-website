@@ -14,10 +14,9 @@ const DentalConcept = () => {
     [tariffDetails.zahnbehandlung?.label, tariffDetails.zahnbehandlung?.value],
     [tariffDetails.prophylaxe?.label, tariffDetails.prophylaxe?.value],
     [tariffDetails.bleaching?.label, tariffDetails.bleaching?.value],
-    [tariffDetails.kfo?.label, tariffDetails.kfo?.value],
+    [tariffDetails.fehlendeZaehne?.label, tariffDetails.fehlendeZaehne?.value],
     [tariffDetails.unfall?.label, tariffDetails.unfall?.value],
     [tariffDetails.maxErstattung?.label, tariffDetails.maxErstattung?.value],
-    [tariffDetails.kinderBeitrag?.label, tariffDetails.kinderBeitrag?.value],
   ] : [];
 
   return (

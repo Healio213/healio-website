@@ -6,7 +6,7 @@ import { Star } from 'lucide-react';
 const testimonialsData = [
   { name: "Michael K. (45), Frankfurt", tag: "Implantat", highlight: "1.460 € erstattet", text: "Ein Implantat für knapp 2.000 Euro. Ohne Zusatzversicherung wäre mein Eigenanteil bei 1.460 Euro gelegen. Mit dem ZahnUpgrade 90+ und meinem Bonusheft habe ich alles erstattet bekommen. Eigenanteil: 0 Euro. Das hat sich innerhalb eines Eingriffs für Jahre bezahlt gemacht.", rating: 5 },
   { name: "Stefanie R. (33), Düsseldorf", tag: "Zahnreinigung", highlight: "Effektiv 0 €", text: "Zweimal im Jahr professionelle Zahnreinigung, komplett erstattet. Dazu der IKK Bonus von über 300 Euro im Jahr. Mein Beitrag von 13,50 Euro im Monat ist damit mehr als ausgeglichen. Ich zahle effektiv nichts und bekomme Top-Leistungen. So muss Versicherung sein.", rating: 5 },
-  { name: "Familie W. (38 & 40), Hamburg", tag: "KFO Kinder", highlight: "2.250 € für Zahnspange", text: "Unsere Tochter brauchte eine Zahnspange. Die Kasse hat nur einen Teil übernommen, unser Eigenanteil wäre 2.800 Euro gewesen. Das ZahnUpgrade hat davon 2.250 Euro erstattet. Und das Beste: Auch leichte Fehlstellungen werden übernommen, nicht erst ab KIG 3.", rating: 5 },
+  { name: "Andreas M. (52), Hamburg", tag: "Fehlende Zähne", highlight: "3 fehlende Zähne mitversichert", text: "Ich hatte bereits fehlende Zähne und war unsicher, ob mich überhaupt noch eine Zahnzusatzversicherung annimmt. Bei Healio war genau das möglich: bis zu 3 fehlende Zähne mitversichert und trotzdem starker Schutz für hochwertigen Zahnersatz.", rating: 5 },
 ];
 
 const Testimonials = () => {

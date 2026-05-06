@@ -30,12 +30,12 @@ const insuranceTypes = [
     description: 'Von der Prophylaxe bis zum hochwertigen Zahnersatz – Ihr Lächeln verdient den besten Schutz.',
     features: [
       'Professionelle Zahnreinigung',
-      'Zahnersatz bis 90%',
+      'Zahnersatz bis 100%',
       'Implantate & Kronen',
-      'Kieferorthopädie'
+      'Bis zu 3 fehlende Zähne'
     ],
     link: '/zahn',
-    budget: 'Bis 90% Erstattung'
+    budget: 'Bis 100% Zahnersatz'
   },
   {
     id: 'stationaer',

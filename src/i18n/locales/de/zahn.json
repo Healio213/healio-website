@@ -19,14 +19,13 @@
     "tariffRate": "90 – 100 %",
     "tariffRateLabel": "Erstattung, ab 13,50 €/Monat",
     "tariffDetails": {
-      "zahnersatz": { "label": "Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "value": "90 %" },
+      "zahnersatz": { "label": "Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "value": "bis zu 100 %" },
       "zahnbehandlung": { "label": "Zahnbehandlungen (Füllungen, Wurzel, Parodontose)", "value": "90 %" },
       "prophylaxe": { "label": "Prophylaxe, PZR & Fissurenversiegelung", "value": "90 %, bis 180 €/Jahr" },
       "bleaching": { "label": "Bleaching & Schmerzausschaltung", "value": "90 %, bis 180 €/Jahr" },
-      "kfo": { "label": "Kieferorthopädie (Kinder)", "value": "90 %, max. 2.500 €" },
+      "fehlendeZaehne": { "label": "Bis zu 3 fehlende Zähne", "value": "mitversicherbar" },
       "unfall": { "label": "Unfall-Sofortschutz", "value": "Ohne Höchstsumme" },
-      "maxErstattung": { "label": "Max. Erstattung", "value": "1.000 € / 4.000 € / unbegrenzt" },
-      "kinderBeitrag": { "label": "Kinder-Beitrag", "value": "ab 21,50 €/Monat" }
+      "maxErstattung": { "label": "Max. Erstattung", "value": "1.000 € / 4.000 € / unbegrenzt" }
     },
     "bonusPlusTitle": "BonusPlus – So steigt deine Erstattung auf 100 %",
     "bonusPlus90": "90 %",
@@ -70,7 +69,6 @@
     "zahnersatz": { "title": "Bis zu 100 % Zahnersatz", "desc": "Kronen, Brücken, Implantate und Inlays. Mit BonusPlus steigt die Erstattung auf bis zu 100 %." },
     "prophylaxe": { "title": "Prophylaxe & Zahnreinigung", "desc": "Professionelle Zahnreinigung, Fissurenversiegelung und Prophylaxe in allen Tarifen inklusive." },
     "bleaching": { "title": "Bleaching & Ästhetik", "desc": "Ab dem 70+-Tarif: Bleaching, Schmerzausschaltung (Lachgas, Hypnose, Akupunktur) mitversichert." },
-    "kfo": { "title": "Kieferorthopädie", "desc": "50-90 % Erstattung für Kinder und Jugendliche. Bei Unfall auch für Erwachsene." },
     "fehlend": { "title": "Fehlende Zähne versicherbar", "desc": "Bis zu 3 bereits fehlende Zähne mitversicherbar. Nur 5 € Risikozuschlag pro fehlendem Zahn." },
     "unfall": { "title": "Unfall-Sofortschutz", "desc": "Keine Höchstsummen und keine Altersbegrenzung bei Zahnschäden durch Unfälle." },
     "gesundheitsfragen": { "title": "Nur 3 Gesundheitsfragen", "desc": "Einfacher Antrag. Maximal 3 Gesundheitsfragen. Stabil kalkuliert und leistungsfähig." }
@@ -87,10 +85,9 @@
       { "q": "Kann ich die Versicherung auch mit fehlenden Zähnen abschließen?", "a": "Ja, das ist ein echtes Alleinstellungsmerkmal. Bis zu 3 bereits fehlende Zähne können mitversichert werden. Der Risikozuschlag beträgt lediglich 5 Euro pro fehlendem Zahn und Monat. Viele andere Zahnzusatzversicherungen lehnen Kunden mit fehlenden Zähnen komplett ab oder schließen diese von der Erstattung aus." },
       { "q": "Gibt es Wartezeiten?", "a": "Nein. Der volle Versicherungsschutz gilt sofort ab Tag 1. Professionelle Zahnreinigung, Prophylaxe, Fissurenversiegelung und alle anderen Leistungen kannst du direkt in Anspruch nehmen. In den ersten Kalenderjahren gilt eine Summenbegrenzung von 1.000 Euro (1./2. Jahr), die danach entfällt und ab dem 5. Kalenderjahr komplett unbegrenzt ist." },
       { "q": "Ich habe bereits eine Zahnzusatzversicherung. Lohnt sich ein Wechsel?", "a": "Sehr wahrscheinlich ja, besonders wenn du aktuell weniger als 90 % Erstattung bekommst. Dein großer Vorteil: Die Vorversicherung wird angerechnet. Wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat, entfällt die Summenbegrenzung im ersten Kalenderjahr komplett. Du startest also sofort mit vollem Leistungsumfang, nicht bei Null." },
-      { "q": "Was genau wird alles erstattet?", "a": "Der ZahnUpgrade 90+ erstattet 90 bis 100 Prozent für: Hochwertigen Zahnersatz wie Implantate, Kronen, Brücken und Inlays. Zahnbehandlungen wie Füllungen, Wurzelbehandlungen, Parodontose und Knirscherschienen. Professionelle Zahnreinigung und Fissurenversiegelung (bis 180 Euro pro Jahr). Bleaching und besondere Schmerzausschaltung wie Lachgas, Hypnose oder Akupunktur. Kieferorthopädie für Kinder (90 %, max. 2.500 Euro). Dazu Unfall-Sofortschutz ohne Höchstsummen." },
+      { "q": "Was genau wird alles erstattet?", "a": "Der ZahnUpgrade 90+ erstattet 90 bis 100 Prozent für hochwertigen Zahnersatz wie Implantate, Kronen, Brücken und Inlays. Dazu kommen Zahnbehandlungen wie Füllungen, Wurzelbehandlungen, Parodontose und Knirscherschienen, professionelle Zahnreinigung und Fissurenversiegelung bis 180 Euro pro Jahr, Bleaching und besondere Schmerzausschaltung wie Lachgas, Hypnose oder Akupunktur. Außerdem können bis zu 3 bereits fehlende Zähne mitversichert werden." },
       { "q": "Wie funktioniert das zusammen mit dem IKK classic Bonus?", "a": "Die Kombination ist der Schlüssel: Du schließt den ZahnUpgrade 90+ ab (13,50 Euro pro Monat = 162 Euro im Jahr). Gleichzeitig sammelst du als IKK classic Mitglied Bonuspunkte für gesundheitsbewusstes Verhalten: Impfungen, Zahnvorsorge, Sportverein, Gesundheits-Check-ups. Der Bonus beträgt über 300 Euro pro Jahr, steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr für Zahnreinigung und Vorsorge. Ergebnis: Dein Zahnschutz kostet dich effektiv 0 Euro." },
       { "q": "Brauche ich eine Gesundheitsprüfung?", "a": "Nein, es gibt keine aufwändige Gesundheitsprüfung. Der Antrag enthält maximal 3 einfache Gesundheitsfragen. Das macht den Abschluss schnell und unkompliziert. Selbst mit bis zu 3 fehlenden Zähnen wirst du angenommen (gegen einen kleinen Risikozuschlag von 5 Euro pro Zahn)." },
-      { "q": "Können auch meine Kinder mitversichert werden?", "a": "Ja. Für Kinder bietet der ZahnUpgrade 90+ eine besonders starke Absicherung: Kieferorthopädische Behandlungen werden zu 90 % erstattet, maximal 2.500 Euro für die gesamte Vertragsdauer. Auch bei leichten Fehlstellungen (KIG 1-5) wird geleistet, nicht erst ab KIG 3 wie bei vielen Mitbewerbern. Der Kinderbeitrag liegt bei 21,50 Euro im Monat. Behandlungsbeginn muss vor dem 18. Lebensjahr sein." },
       { "q": "Wie wurde der ZahnUpgrade 90+ von unabhängigen Testern bewertet?", "a": "Der ZahnUpgrade 90+ wurde von Stiftung Warentest mit der Note SEHR GUT (0,8) ausgezeichnet und ist Testsieger in der Kategorie 'Gut und günstig' (Finanzen, Ausgabe 07/2025). Darüber hinaus hat der Versicherer das Siegel 'Höchste Kundenzufriedenheit' von Focus Money und die Bestnote 'Ausgezeichnet' von Morgen und Morgen erhalten." }
     ]
   },

@@ -54,7 +54,7 @@ export const seoRoutes = [
   {
     path: '/zahn',
     title: 'Zahnzusatzversicherung – Bis zu 100 % Erstattung | Healio',
-    description: 'Zahnzusatzversicherung mit bis zu 100 % Erstattung für Zahnersatz, Prophylaxe und KFO. Ab 8,55 € im Monat. Jetzt Beitrag berechnen!',
+    description: 'Zahnzusatzversicherung mit bis zu 100 % Erstattung für Zahnersatz. Bis zu 3 fehlende Zähne mitversicherbar. Jetzt Beitrag berechnen!',
     canonical: 'https://healio.de/zahn',
     lang: 'de',
     hreflang: { de: 'https://healio.de/zahn', en: 'https://healio.de/en/dental' },
@@ -151,7 +151,7 @@ export const seoRoutes = [
   {
     path: '/healio-zahnzusatz',
     title: 'Healio Zahnzusatz – Premium Zahnversicherung | Healio',
-    description: 'Premium Zahnzusatzversicherung von Healio: Bis zu 100 % Erstattung für Zahnersatz, Implantate, Prophylaxe und Kieferorthopädie.',
+    description: 'Premium Zahnzusatzversicherung von Healio: Bis zu 100 % Erstattung für Zahnersatz, Implantate und Inlays. Bis zu 3 fehlende Zähne mitversicherbar.',
     canonical: 'https://healio.de/healio-zahnzusatz',
     lang: 'de',
   },

@@ -2,20 +2,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Clock, Stethoscope, FileText, ShieldCheck, Sparkles, Shield, Smile, Star } from 'lucide-react';
+import { Clock, Stethoscope, FileText, ShieldCheck, Sparkles, Shield, Smile } from 'lucide-react';
 
 const benefitIcons = [
   <Clock className="w-8 h-8" />,
   <Shield className="w-8 h-8" />,
   <Sparkles className="w-8 h-8" />,
   <Smile className="w-8 h-8" />,
-  <Star className="w-8 h-8" />,
   <ShieldCheck className="w-8 h-8" />,
   <Stethoscope className="w-8 h-8" />,
   <FileText className="w-8 h-8" />,
 ];
 
-const benefitKeys = ['noWait', 'zahnersatz', 'prophylaxe', 'bleaching', 'kfo', 'fehlend', 'unfall', 'gesundheitsfragen'];
+const benefitKeys = ['noWait', 'zahnersatz', 'prophylaxe', 'bleaching', 'fehlend', 'unfall', 'gesundheitsfragen'];
 
 const DentalBenefits = () => {
   const { t } = useTranslation('zahn');
