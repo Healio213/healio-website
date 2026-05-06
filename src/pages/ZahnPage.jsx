@@ -38,11 +38,11 @@ const ZahnPage = () => {
       <SEOHead
         title={tSeo('zahn.title')}
         description={tSeo('zahn.description')}
-        canonicalUrl="https://www.healio.de/zahn"
+        canonicalUrl="https://healio.de/zahn"
         ogTitle={tSeo('zahn.title')}
         ogDescription={tSeo('zahn.description')}
-        ogImage="https://www.healio.de/og-image-zahn.png"
-        ogUrl="https://www.healio.de/zahn"
+        ogImage="https://healio.de/og-image-zahn.png"
+        ogUrl="https://healio.de/zahn"
         schemaMarkup={schemaMarkup}
       />
       <article>

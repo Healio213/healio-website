@@ -50,7 +50,7 @@ const AmbulantTestimonials = () => {
     "@context": "https://schema.org",
     "@type": "FinancialService",
     "name": "HEALIO GmbH",
-    "url": "https://www.healio.de",
+    "url": "https://healio.de",
     "review": testimonials.map(item => ({
       "@type": "Review",
       "author": { "@type": "Person", "name": item.name },

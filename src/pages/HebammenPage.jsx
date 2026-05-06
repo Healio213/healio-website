@@ -24,7 +24,7 @@ const HebammenPage = () => {
       <SEOHead
         title={tSeo('hebammen.title')}
         description={tSeo('hebammen.description')}
-        canonicalUrl="https://www.healio.de/hebammen"
+        canonicalUrl="https://healio.de/hebammen"
         schemaMarkup={schemaMarkup}
       />
 

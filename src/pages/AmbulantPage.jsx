@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
@@ -20,13 +21,24 @@ import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalcula
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
+  const { pathname } = useLocation();
+  const isHeilpraktikerLanding = pathname === '/heilpraktiker-zusatzversicherung';
+  const seoTitle = isHeilpraktikerLanding
+    ? 'Heilpraktiker Zusatzversicherung – 3.000 € Budget | Vergleich 2026 | Healio'
+    : t('ambulant.title');
+  const seoDescription = isHeilpraktikerLanding
+    ? 'Heilpraktiker Zusatzversicherung im Vergleich 2026: Bis zu 3.000 € Gesundheitsbudget durch IKK Bonus + SDK Zusatzversicherung. Ohne Wartezeit starten.'
+    : t('ambulant.description');
+  const canonicalPath = isHeilpraktikerLanding
+    ? '/heilpraktiker-zusatzversicherung'
+    : '/ambulant';
 
   return (
     <>
       <SEOHead
-        title={t('ambulant.title')}
-        description={t('ambulant.description')}
-        canonicalUrl="https://www.healio.de/ambulant"
+        title={seoTitle}
+        description={seoDescription}
+        canonicalUrl={`https://healio.de${canonicalPath}`}
       />
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />

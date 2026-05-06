@@ -142,13 +142,13 @@ const PotenzialanalysePage = () => {
       <SEOHead
         title={tSeo('potenzialanalyse.title')}
         description={tSeo('potenzialanalyse.description')}
-        canonicalUrl="https://www.healio.de/potenzialanalyse"
+        canonicalUrl="https://healio.de/potenzialanalyse"
         schemaMarkup={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Kostenlose Potenzialanalyse",
           "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
-          "url": "https://www.healio.de/potenzialanalyse",
+          "url": "https://healio.de/potenzialanalyse",
           "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
         }}
       />

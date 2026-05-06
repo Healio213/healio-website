@@ -2,14 +2,16 @@
  * Utility functions to create JSON-LD Schema Markup for SEO
  */
 
+const SITE_URL = "https://healio.de";
+
 export const createOrganizationSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "HEALIO GmbH",
     "legalName": "HEALIO GmbH",
-    "url": "https://www.healio.de",
-    "logo": "https://www.healio.de/favicon.svg",
+    "url": SITE_URL,
+    "logo": `${SITE_URL}/favicon.svg`,
     "description": "Ihr Experte für betriebliche Altersvorsorge (bAV) und betriebliche Krankenversicherung (bKV) in Hamburg.",
     "address": {
       "@type": "PostalAddress",
@@ -44,7 +46,7 @@ export const createServiceSchema = () => {
     "provider": {
       "@type": "Organization",
       "name": "Healio",
-      "url": "https://www.healio.de"
+      "url": SITE_URL
     },
     "areaServed": {
       "@type": "Country",
@@ -52,7 +54,7 @@ export const createServiceSchema = () => {
     },
     "availableChannel": {
       "@type": "ServiceChannel",
-      "serviceUrl": "https://www.healio.de",
+      "serviceUrl": SITE_URL,
       "servicePhone": "+49-40-1802-4898-0"
     },
     "offers": {
@@ -78,13 +80,15 @@ export const createAggregateRatingSchema = () => {
   };
 };
 
-export const createWebPageSchema = (pageName, description) => {
+export const createWebPageSchema = (pageName, description, url = null) => {
+  const pageUrl = url || (typeof window !== "undefined" ? `${SITE_URL}${window.location.pathname}` : SITE_URL);
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": pageName,
     "description": description,
-    "url": `https://www.healio.de/${pageName.toLowerCase().replace(/\s+/g, '-')}`,
+    "url": pageUrl,
     "publisher": {
       "@type": "Organization",
       "name": "Healio"

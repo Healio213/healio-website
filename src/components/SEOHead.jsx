@@ -3,13 +3,22 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 
+const SITE_URL = 'https://healio.de';
+
+const normalizeHealioUrl = (url) => {
+  if (!url) return url;
+  return url
+    .replace(/^https?:\/\/www\.healio\.de/i, SITE_URL)
+    .replace(/^http:\/\/healio\.de/i, SITE_URL);
+};
+
 const SEOHead = ({
   title,
   description,
   canonicalUrl,
   ogTitle,
   ogDescription,
-  ogImage = 'https://www.healio.de/og-image.png',
+  ogImage = `${SITE_URL}/og-image.png`,
   ogUrl,
   ogType = 'website',
   twitterCard = 'summary_large_image',
@@ -25,7 +34,9 @@ const SEOHead = ({
   const finalDescription = description || defaultDescription;
   const finalOgTitle = ogTitle || finalTitle;
   const finalOgDescription = ogDescription || finalDescription;
-  const finalOgUrl = ogUrl || canonicalUrl || 'https://www.healio.de';
+  const finalCanonicalUrl = normalizeHealioUrl(canonicalUrl);
+  const finalOgUrl = normalizeHealioUrl(ogUrl || finalCanonicalUrl || SITE_URL);
+  const finalOgImage = normalizeHealioUrl(ogImage);
 
   const locale = lang === 'de' ? 'de_DE' : 'en_US';
   const altLocale = lang === 'de' ? 'en_US' : 'de_DE';
@@ -40,14 +51,14 @@ const SEOHead = ({
       <meta name="description" content={finalDescription} />
 
       {/* Canonical URL */}
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+      {finalCanonicalUrl && <link rel="canonical" href={finalCanonicalUrl} />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={finalOgUrl} />
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={finalOgImage} />
       <meta property="og:site_name" content="Healio" />
       <meta property="og:locale" content={locale} />
       <meta property="og:locale:alternate" content={altLocale} />
@@ -57,7 +68,7 @@ const SEOHead = ({
       <meta property="twitter:url" content={finalOgUrl} />
       <meta property="twitter:title" content={finalOgTitle} />
       <meta property="twitter:description" content={finalOgDescription} />
-      <meta property="twitter:image" content={ogImage} />
+      <meta property="twitter:image" content={finalOgImage} />
 
       {/* Additional SEO Meta Tags */}
       <meta name="robots" content="index, follow" />

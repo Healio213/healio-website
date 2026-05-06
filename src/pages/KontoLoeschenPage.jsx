@@ -8,7 +8,7 @@ const KontoLoeschenPage = () => {
       <SEOHead
         title="Konto löschen | HEALIO"
         description="So kannst du dein HEALIO Konto und alle zugehörigen Daten löschen."
-        canonicalUrl="https://www.healio.de/konto-loeschen"
+        canonicalUrl="https://healio.de/konto-loeschen"
       />
       <main className="bg-gray-50 py-16 sm:py-24 min-h-screen">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

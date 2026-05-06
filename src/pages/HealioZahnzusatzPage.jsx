@@ -14,7 +14,7 @@ const HealioZahnzusatzPage = () => {
       <SEOHead
         title={tSeo('zahnzusatz.title')}
         description={tSeo('zahnzusatz.description')}
-        canonicalUrl="https://www.healio.de/healio-zahnzusatz"
+        canonicalUrl="https://healio.de/healio-zahnzusatz"
       />
       
       <main className="bg-white">

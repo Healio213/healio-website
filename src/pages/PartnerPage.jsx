@@ -141,7 +141,7 @@ const PartnerPage = () => {
       <SEOHead
         title={tSeo('partner.title')}
         description={tSeo('partner.description')}
-        canonicalUrl="https://www.healio.de/partner"
+        canonicalUrl="https://healio.de/partner"
         schemaMarkup={schemaMarkup}
       />
 

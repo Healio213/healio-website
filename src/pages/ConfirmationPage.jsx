@@ -27,7 +27,7 @@ const ConfirmationPage = () => {
       <SEOHead
         title={tSeo('confirmation.title')}
         description={tSeo('confirmation.description')}
-        canonicalUrl="https://www.healio.de/confirmation"
+        canonicalUrl="https://healio.de/confirmation"
       />
       <div className="max-w-4xl w-full pt-12">
         

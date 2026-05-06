@@ -87,7 +87,7 @@ const KontaktPage = () => {
       <SEOHead
         title={tSeo('kontakt.title')}
         description={tSeo('kontakt.description')}
-        canonicalUrl="https://www.healio.de/kontakt"
+        canonicalUrl="https://healio.de/kontakt"
         schemaMarkup={schemaMarkup}
       />
 

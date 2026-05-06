@@ -77,7 +77,7 @@ const BlogArticlePage = () => {
     description: article.meta_description,
     datePublished: article.published_at,
     author: { '@type': 'Organization', name: 'Healio GmbH' },
-    publisher: { '@type': 'Organization', name: 'Healio GmbH', url: 'https://www.healio.de' },
+    publisher: { '@type': 'Organization', name: 'Healio GmbH', url: 'https://healio.de' },
   };
 
   const faqSchema = article.structured_data?.faq || null;
@@ -91,10 +91,10 @@ const BlogArticlePage = () => {
       <SEOHead
         title={article.title}
         description={article.meta_description}
-        canonicalUrl={`https://www.healio.de/blog/${article.slug}`}
+        canonicalUrl={`https://healio.de/blog/${article.slug}`}
         ogTitle={article.title}
         ogDescription={article.meta_description}
-        ogUrl={`https://www.healio.de/blog/${article.slug}`}
+        ogUrl={`https://healio.de/blog/${article.slug}`}
         ogType="article"
         schemaMarkup={combinedSchema}
       />

@@ -24,7 +24,7 @@ const DatenschutzPage = () => {
       <SEOHead
         title={tSeo('datenschutz.title')}
         description={tSeo('datenschutz.description')}
-        canonicalUrl="https://www.healio.de/datenschutz"
+        canonicalUrl="https://healio.de/datenschutz"
         schemaMarkup={schemaMarkup}
       />
       <main className="bg-gray-50 py-16 sm:py-24 min-h-screen">

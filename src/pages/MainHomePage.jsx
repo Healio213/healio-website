@@ -39,11 +39,11 @@ const MainHomePage = () => {
       <SEOHead
         title={t('seo.title')}
         description={t('seo.description')}
-        canonicalUrl="https://www.healio.de/"
+        canonicalUrl="https://healio.de/"
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
-        ogImage="https://www.healio.de/og-image-b2b.png"
-        ogUrl="https://www.healio.de/"
+        ogImage="https://healio.de/og-image-b2b.png"
+        ogUrl="https://healio.de/"
         schemaMarkup={schemaMarkup}
       />
       <main className="w-full">

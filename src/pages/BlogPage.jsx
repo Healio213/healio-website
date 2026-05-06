@@ -69,11 +69,11 @@ const BlogPage = () => {
     '@type': 'Blog',
     name: 'Healio Ratgeber',
     description: 'Expertenwissen zu Gesundheitsbudgets, Zusatzversicherungen und steuerfreien Benefits für Arbeitnehmer, Praxen und Partner.',
-    url: 'https://www.healio.de/blog',
+    url: 'https://healio.de/blog',
     publisher: {
       '@type': 'Organization',
       name: 'Healio GmbH',
-      url: 'https://www.healio.de',
+      url: 'https://healio.de',
     },
   };
 
@@ -82,10 +82,10 @@ const BlogPage = () => {
       <SEOHead
         title={tSeo('blog.title')}
         description={tSeo('blog.description')}
-        canonicalUrl="https://www.healio.de/blog"
+        canonicalUrl="https://healio.de/blog"
         ogTitle="Healio Ratgeber – Ihr Weg zum Gesundheitsbudget"
         ogDescription="Fachartikel zu steuerfreien Gesundheitsleistungen, Naturheilverfahren und smarter Vorsorge."
-        ogUrl="https://www.healio.de/blog"
+        ogUrl="https://healio.de/blog"
         ogType="blog"
         schemaMarkup={schemaMarkup}
       />

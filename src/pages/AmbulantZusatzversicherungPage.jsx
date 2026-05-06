@@ -31,13 +31,13 @@ const AmbulantZusatzversicherungPage = () => {
       <SEOHead
         title="Ambulante Zusatzversicherung | Premium Schutz | Healio"
         description="Sichern Sie sich Privatpatienten-Status mit der ambulanten Zusatzversicherung von Healio. Heilpraktiker, Sehhilfen & mehr. Jetzt informieren!"
-        canonicalUrl="https://www.healio.de/ambulante-zusatzversicherung"
+        canonicalUrl="https://healio.de/ambulante-zusatzversicherung"
         schemaMarkup={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Ambulante Zusatzversicherung",
           "description": "Sichern Sie sich Privatpatienten-Status mit der ambulanten Zusatzversicherung von Healio.",
-          "url": "https://www.healio.de/ambulante-zusatzversicherung",
+          "url": "https://healio.de/ambulante-zusatzversicherung",
           "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
         }}
       />

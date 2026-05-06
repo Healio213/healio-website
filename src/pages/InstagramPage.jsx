@@ -83,10 +83,10 @@ const InstagramPage = () => {
       <SEOHead
         title={t('meta.title')}
         description={t('meta.description')}
-        canonicalUrl="https://www.healio.de/instagram"
+        canonicalUrl="https://healio.de/instagram"
         ogTitle={t('meta.title')}
         ogDescription={t('meta.description')}
-        ogUrl="https://www.healio.de/instagram"
+        ogUrl="https://healio.de/instagram"
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center text-white">

@@ -66,7 +66,7 @@ const AboutPage = () => {
       <SEOHead
         title={tSeo('about.title')}
         description={tSeo('about.description')}
-        canonicalUrl="https://www.healio.de/about"
+        canonicalUrl="https://healio.de/about"
         schemaMarkup={schemaMarkup}
       />
       

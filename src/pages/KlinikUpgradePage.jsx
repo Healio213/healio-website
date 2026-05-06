@@ -16,7 +16,7 @@ const KlinikUpgradePage = () => {
       <SEOHead
         title={tSeo('klinik.title')}
         description={tSeo('klinik.description')}
-        canonicalUrl="https://www.healio.de/klinik-upgrade"
+        canonicalUrl="https://healio.de/klinik-upgrade"
       />
       <main className="bg-white">
         <KlinikHero />

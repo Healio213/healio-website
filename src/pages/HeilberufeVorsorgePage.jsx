@@ -86,7 +86,7 @@ const HeilberufeVorsorgePage = () => {
       <SEOHead
         title={tSeo('heilberufe.title')}
         description={tSeo('heilberufe.description')}
-        canonicalUrl="https://www.healio.de/heilberufe-vorsorge"
+        canonicalUrl="https://healio.de/heilberufe-vorsorge"
         schemaMarkup={schemaMarkup}
       />
 

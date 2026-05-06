@@ -16,7 +16,7 @@ const VeterinaryHomePage = () => {
       <SEOHead
         title={tSeo('veterinary.title')}
         description={tSeo('veterinary.description')}
-        canonicalUrl="https://www.healio.de/tierkrankenversicherung"
+        canonicalUrl="https://healio.de/tierkrankenversicherung"
         ogTitle="Healio Tierkrankenversicherung - Bester Schutz für Ihr Tier"
         ogDescription="Sichern Sie sich gegen steigende Tierarztkosten ab. Jetzt Beitrag berechnen."
       />

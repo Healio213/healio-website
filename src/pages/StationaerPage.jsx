@@ -65,11 +65,11 @@ const StationaerPage = () => {
       <SEOHead
         title={tSeo('stationaer.title')}
         description={tSeo('stationaer.description')}
-        canonicalUrl="https://www.healio.de/stationaer"
+        canonicalUrl="https://healio.de/stationaer"
         ogTitle={tSeo('stationaer.title')}
         ogDescription={tSeo('stationaer.description')}
-        ogImage="https://www.healio.de/og-image-stationaer.png"
-        ogUrl="https://www.healio.de/stationaer"
+        ogImage="https://healio.de/og-image-stationaer.png"
+        ogUrl="https://healio.de/stationaer"
         schemaMarkup={schemaMarkup}
       />
       <article>
