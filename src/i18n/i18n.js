@@ -17,6 +17,8 @@ import dePartner from './locales/de/partner.json';
 import enPartner from './locales/en/partner.json';
 import deHebammen from './locales/de/hebammen.json';
 import enHebammen from './locales/en/hebammen.json';
+import deUnternehmen from './locales/de/unternehmen.json';
+import enUnternehmen from './locales/en/unternehmen.json';
 import deHeilberufe from './locales/de/heilberufe.json';
 import enHeilberufe from './locales/en/heilberufe.json';
 import deLeistungen from './locales/de/leistungen.json';
@@ -49,6 +51,7 @@ i18n
         stationaer: deStationaer,
         partner: dePartner,
         hebammen: deHebammen,
+        unternehmen: deUnternehmen,
         heilberufe: deHeilberufe,
         leistungen: deLeistungen,
         about: deAbout,
@@ -68,6 +71,7 @@ i18n
         stationaer: enStationaer,
         partner: enPartner,
         hebammen: enHebammen,
+        unternehmen: enUnternehmen,
         heilberufe: enHeilberufe,
         leistungen: enLeistungen,
         about: enAbout,

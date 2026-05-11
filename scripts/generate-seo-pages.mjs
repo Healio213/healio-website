@@ -51,6 +51,17 @@ function generateHtml(route) {
     `<meta name="description" content="${e(route.description)}">`
   );
 
+  // Robots
+  const robotsTag = `<meta name="robots" content="${e(route.robots || 'index, follow')}">`;
+  if (/<meta name="robots" content="[^"]*">/.test(html)) {
+    html = html.replace(/<meta name="robots" content="[^"]*">/, robotsTag);
+  } else {
+    html = html.replace(
+      /(<meta name="description" content="[^"]*">)/,
+      `$1\n    ${robotsTag}`
+    );
+  }
+
   // Canonical URL
   html = html.replace(
     /<link rel="canonical" href="[^"]*">/,

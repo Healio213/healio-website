@@ -37,7 +37,7 @@ const HebammenPage = () => {
               src="/images/hero-hebammen.webp"
               alt="Hebamme im Gespräch mit schwangerer Patientin"
               className="w-full h-full object-cover object-center"
-              fetchpriority="high"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent z-10" />

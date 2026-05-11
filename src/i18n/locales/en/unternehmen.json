@@ -1,0 +1,161 @@
+{
+  "seo": {
+    "title": "Corporate Benefits for Companies | bAV & bKV | Healio",
+    "description": "Healio makes corporate pension, health insurance and tax-efficient health benefits usable for companies: clear analysis, stronger retention and modern implementation."
+  },
+  "hero": {
+    "eyebrow": "For companies",
+    "title": "Corporate benefits that do more than exist on paper.",
+    "description": "Healio combines corporate pension, health insurance and tax-efficient health benefits into a system employees actually notice and companies can use strategically.",
+    "primaryCta": "Start potential analysis",
+    "imageAlt": "Hamburg Speicherstadt as a professional background for Healio B2B",
+    "metrics": [
+      { "value": "45 min.", "label": "focused analysis" },
+      { "value": "bAV + bKV", "label": "integrated approach" },
+      { "value": "tax-efficient", "label": "benefits used well" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Why companies act",
+    "title": "Salary increases are expensive. Useful benefits are remembered.",
+    "description": "Many companies spend more without enough value reaching the team. Healio shows where budget is lost and how pension, healthcare and appreciation can work together more effectively.",
+    "points": [
+      "Strengthen retention without relying only on gross salary",
+      "Make pension and health benefits understandable instead of invisible",
+      "Turn tax-efficient health benefits into something employees actually use"
+    ]
+  },
+  "solutions": {
+    "eyebrow": "What we structure",
+    "title": "Three levers for modern corporate benefits",
+    "items": [
+      {
+        "title": "Corporate pension",
+        "description": "Review existing pension solutions and make subsidies, returns, costs and communication easier to understand."
+      },
+      {
+        "title": "Corporate health insurance",
+        "description": "Health budgets, prevention and access-to-care modules that employees actually understand and use.",
+        "points": [
+          "Predictable cost per employee instead of another invisible salary increase",
+          "Fewer long absences when employees get specialist appointments and treatment faster",
+          "High perceived value because health becomes immediately personal",
+          "Can be structured as a tax-efficient benefit within the monthly allowance"
+        ]
+      },
+      {
+        "title": "Tax-efficient health benefits",
+        "description": "Use budget intentionally: for prevention, retention and appreciation with clear value for employees."
+      }
+    ]
+  },
+  "bkvEmployer": {
+    "eyebrow": "Employer value of bKV",
+    "title": "Why corporate health insurance makes immediate sense for employers.",
+    "description": "A bKV is not a nice-to-have. It is a visible health benefit: employees experience concrete services while companies keep budget, rollout and communication under control.",
+    "points": [
+      {
+        "title": "More perceived value per euro",
+        "description": "A health budget feels more tangible than a small gross salary increase because employees can use it directly for vision, dental, prevention or treatment."
+      },
+      {
+        "title": "Fewer sick days",
+        "description": "Faster specialist appointments can prevent health issues from remaining unresolved and absences from becoming longer than necessary."
+      },
+      {
+        "title": "Stronger recruiting",
+        "description": "bKV is an exclusive employer benefit and helps when candidates choose between similar salary packages."
+      },
+      {
+        "title": "Retention through real care",
+        "description": "Taking health seriously sends a clear signal: this company invests not only in work, but in people."
+      },
+      {
+        "title": "Lean implementation",
+        "description": "Clear tariffs, employee communication and digital administration keep the value visible without overloading HR."
+      }
+    ]
+  },
+  "bkvAbsence": {
+    "eyebrow": "Absence calculator",
+    "title": "What fewer absence days can mean financially.",
+    "description": "Faster specialist appointments are not only a comfort benefit. When issues are clarified earlier, absences may stay shorter or not escalate in the first place.",
+    "employeeCount": "Employees",
+    "costPerDay": "Cost per absence day",
+    "sickDaysWithout": "Absence days without bKV",
+    "sickDaysWith": "Absence days with bKV",
+    "daysValue": "{{days}} days",
+    "withoutLabel": "Without bKV per year",
+    "withLabel": "With bKV per year",
+    "savingsLabel": "Potential annual relief",
+    "daysSavedLabel": "{{days}} potentially avoided absence days",
+    "note": "Simplified model calculation. It does not replace occupational health or actuarial assessment and does not show a guaranteed reduction in sick days."
+  },
+  "healthBudget": {
+    "eyebrow": "Additional low-budget value",
+    "title": "A €3,000 health budget as a strong add-on for your team",
+    "description": "Not every company can immediately open a large health-insurance budget. This is where the Healio health budget helps: employees combine health-insurance bonuses and supplementary coverage intelligently while you communicate real value.",
+    "amount": "€3,000",
+    "amountLabel": "health budget over 2 years",
+    "points": [
+      "Relevant for employees using naturopathy, osteopathy, vision aids or preventive care",
+      "Strong benefit communication even when employer budgets are limited",
+      "A clean add-on to pension and health benefits, not a replacement"
+    ],
+    "cta": "Check as a benefit"
+  },
+  "compound": {
+    "eyebrow": "Pension timing lever",
+    "title": "With compound interest, waiting is the expensive mistake.",
+    "description": "For companies, corporate pension is not just a contract. It is timing. The earlier employees start, the longer capital can work in the background. The visible dynamic often appears later: returns on returns, year after year.",
+    "cta": "Check compound potential",
+    "visualEyebrow": "Interactive calculator",
+    "visualTitle": "What a later start can cost",
+    "startTodayLabel": "Start today",
+    "delayLabel": "Start in {{years}} years",
+    "advantageLabel": "Time advantage from starting earlier",
+    "monthlyContribution": "Monthly contribution",
+    "duration": "Duration",
+    "returnRate": "Assumed annual return",
+    "delay": "Start delay",
+    "yearsValue": "{{years}} years",
+    "visualDescription": "Simplified model calculation excluding costs, taxes, inflation and guarantees. It shows the timing and compounding effect, not the concrete performance of a product.",
+    "points": [
+      {
+        "title": "Time is the lever",
+        "description": "The first years may look small, but they give capital the long runway."
+      },
+      {
+        "title": "The turbo comes late",
+        "description": "The strongest effects appear when returns start generating further returns."
+      },
+      {
+        "title": "Communication matters",
+        "description": "Employees understand pension faster when they can see the cost of waiting."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "From status quo to a usable benefits system",
+    "steps": [
+      {
+        "title": "Analysis",
+        "description": "We review existing contracts, costs, communication and unused tax-efficient options."
+      },
+      {
+        "title": "Concept",
+        "description": "You receive a clear recommendation on which combination of pension, health insurance and benefits makes economic sense."
+      },
+      {
+        "title": "Implementation",
+        "description": "Healio supports rollout, employee communication and ongoing optimization."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Let us check where your benefits budget can create more impact.",
+    "description": "In 45 minutes, you will see which levers are realistic for your company and which next steps make sense.",
+    "primary": "Free potential analysis"
+  }
+}

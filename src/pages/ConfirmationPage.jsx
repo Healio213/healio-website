@@ -28,6 +28,7 @@ const ConfirmationPage = () => {
         title={tSeo('confirmation.title')}
         description={tSeo('confirmation.description')}
         canonicalUrl="https://healio.de/confirmation"
+        robots="noindex, nofollow"
       />
       <div className="max-w-4xl w-full pt-12">
         

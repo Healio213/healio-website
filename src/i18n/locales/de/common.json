@@ -1,6 +1,7 @@
 {
   "nav": {
     "leistungen": "Leistungen",
+    "unternehmen": "Unternehmen",
     "ambulant": "Ambulante Zusatzversicherung",
     "zahn": "Zahnzusatzversicherung",
     "stationaer": "Stationäre Zusatzversicherung",
@@ -23,6 +24,7 @@
     "contact": "Kontakt",
     "legal": "Rechtliches",
     "aboutUs": "Über uns",
+    "unternehmen": "Für Unternehmen",
     "leistungen": "Leistungen",
     "partner": "Partner",
     "impressum": "Impressum",

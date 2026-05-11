@@ -9,14 +9,14 @@ const mainBenefitKeys = ['spitzenversorgung', 'privatsphaere', 'wartezeiten', 'f
 const featureKeys = ['einbettzimmer', 'chefarzt', 'klinikwahl', 'keineWartezeit', 'tagegeld', 'ambulanteOps', 'familienzimmer', 'vorNachStationaer'];
 
 const featureIcons = [
-  <Building2 className="w-8 h-8" />,
-  <User className="w-8 h-8" />,
-  <MapPin className="w-8 h-8" />,
-  <Clock className="w-8 h-8" />,
-  <Wallet className="w-8 h-8" />,
-  <Globe className="w-8 h-8" />,
-  <Baby className="w-8 h-8" />,
-  <Coffee className="w-8 h-8" />,
+  <Building2 key="building" className="w-8 h-8" />,
+  <User key="user" className="w-8 h-8" />,
+  <MapPin key="map-pin" className="w-8 h-8" />,
+  <Clock key="clock" className="w-8 h-8" />,
+  <Wallet key="wallet" className="w-8 h-8" />,
+  <Globe key="globe" className="w-8 h-8" />,
+  <Baby key="baby" className="w-8 h-8" />,
+  <Coffee key="coffee" className="w-8 h-8" />,
 ];
 
 const HospitalBenefits = () => {

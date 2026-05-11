@@ -68,7 +68,7 @@ const StationaerPage = () => {
         canonicalUrl="https://healio.de/stationaer"
         ogTitle={tSeo('stationaer.title')}
         ogDescription={tSeo('stationaer.description')}
-        ogImage="https://healio.de/og-image-stationaer.png"
+        ogImage="https://healio.de/og-image.png"
         ogUrl="https://healio.de/stationaer"
         schemaMarkup={schemaMarkup}
       />

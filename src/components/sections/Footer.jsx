@@ -28,6 +28,7 @@ const Footer = ({ hideCta = false }) => {
             <h4 className="font-semibold mb-4 text-slate-200">{t('footer.company')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
+              <li><Link to={getPath('unternehmen')} className="hover:text-healio-primary transition-colors">{t('footer.unternehmen')}</Link></li>
               <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
               <li><Link to={getPath('partner')} className="hover:text-healio-primary transition-colors">{t('footer.partner')}</Link></li>
             </ul>

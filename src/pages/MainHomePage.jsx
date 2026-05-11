@@ -7,6 +7,7 @@ import { FadeInUp } from '@/components/ui/ScrollAnimation';
 
 // Eagerly load the Hero section as it's above the fold (LCP)
 import HeroSection from '@/components/sections/HeroSection';
+import AudienceGateway from '@/components/sections/AudienceGateway';
 
 // Lazy load below-the-fold components to reduce initial bundle size
 const CompoundInterestCalculator = React.lazy(() => import('@/components/sections/CompoundInterestCalculator'));
@@ -25,7 +26,6 @@ const SectionLoader = () => (
 
 const MainHomePage = () => {
   const { t } = useTranslation('home');
-  const { t: tSeo } = useTranslation('seo');
 
   const schemaMarkup = {
     ...createOrganizationSchema(),
@@ -42,13 +42,15 @@ const MainHomePage = () => {
         canonicalUrl="https://healio.de/"
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
-        ogImage="https://healio.de/og-image-b2b.png"
+        ogImage="https://healio.de/og-image.png"
         ogUrl="https://healio.de/"
         schemaMarkup={schemaMarkup}
       />
       <main className="w-full">
         {/* Critical LCP component loaded immediately */}
         <HeroSection />
+
+        <AudienceGateway />
 
         {/* Defer loading of all below-the-fold sections */}
         <Suspense fallback={<SectionLoader />}>

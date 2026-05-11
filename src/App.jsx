@@ -23,6 +23,7 @@ const AgbPage = React.lazy(() => import('@/pages/AgbPage'));
 const DatenschutzPage = React.lazy(() => import('@/pages/DatenschutzPage'));
 const KontoLoeschenPage = React.lazy(() => import('@/pages/KontoLoeschenPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
+const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
@@ -80,6 +81,9 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="leistungen" element={<LeistungenPage />} />
+              <Route path="unternehmen" element={<UnternehmenPage />} />
+              <Route path="betriebliche-vorsorge" element={<Navigate to="/unternehmen" replace />} />
+              <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
               <Route path="partner" element={<PartnerPage />} />
               <Route path="hebammen" element={<HebammenPage />} />
               <Route path="heilberufe-vorsorge" element={<HeilberufeVorsorgePage />} />
@@ -108,6 +112,8 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<LeistungenPage />} />
+              <Route path="companies" element={<UnternehmenPage />} />
+              <Route path="corporate-benefits" element={<Navigate to="/en/companies" replace />} />
               <Route path="partner" element={<PartnerPage />} />
               <Route path="midwives" element={<HebammenPage />} />
               <Route path="contact" element={<KontaktPage />} />

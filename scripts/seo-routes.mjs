@@ -8,11 +8,19 @@ export const seoRoutes = [
   // === DEUTSCH ===
   {
     path: '/',
-    title: 'Healio: 3.000 € Gesundheitsbudget für Heilpraktiker & Naturheilkunde',
-    description: 'Bis zu 3.000 € in 2 Jahren für Heilpraktiker, Osteopathie und Naturheilkunde. Clever kombiniert aus Kassenboni und Zusatzversicherung. Ohne Wartezeit starten.',
+    title: 'Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV',
+    description: 'Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.',
     canonical: 'https://healio.de',
     lang: 'de',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
+  },
+  {
+    path: '/unternehmen',
+    title: 'Betriebliche Vorsorge für Unternehmen | bAV & bKV | Healio',
+    description: 'Healio macht bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen nutzbar: klare Analyse, bessere Mitarbeiterbindung und moderne Umsetzung.',
+    canonical: 'https://healio.de/unternehmen',
+    lang: 'de',
+    hreflang: { de: 'https://healio.de/unternehmen', en: 'https://healio.de/en/companies' },
   },
   {
     path: '/ambulant',
@@ -163,6 +171,14 @@ export const seoRoutes = [
     lang: 'de',
   },
   {
+    path: '/confirmation',
+    title: 'Bestätigung | Healio',
+    description: 'Vielen Dank für Ihre Anfrage bei Healio.',
+    canonical: 'https://healio.de/confirmation',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
     path: '/tierkrankenversicherung',
     title: 'Tierkrankenversicherung – Schutz für Hund & Katze | Healio',
     description: 'Tierkrankenversicherung für Hund und Katze: OP-Schutz, Krankenvollversicherung, schnelle Erstattung. Jetzt Tarife vergleichen.',
@@ -194,22 +210,22 @@ export const seoRoutes = [
   // === BLOG-ARTIKEL (Heilpraktiker-Zielgruppe) ===
   {
     path: '/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget',
-    title: 'Heilpraktiker Kostenübernahme: 0 € Gesundheitsbudget für Patienten | Healio',
-    description: '40% der Patienten brechen Heilpraktiker-Behandlungen aus Kostengründen ab. Das 0-Euro-Gesundheitsbudget ermöglicht bis zu 1.000 € Kostenübernahme.',
+    title: 'Heilpraktiker Kostenübernahme: 3.000 € Budget | Healio',
+    description: 'Patienten brechen Heilpraktiker-Behandlungen oft aus Kostengründen ab. Das Healio Gesundheitsbudget ermöglicht bis zu 3.000 € in 2 Jahren.',
     canonical: 'https://healio.de/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget',
     lang: 'de',
   },
   {
     path: '/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
     title: 'Heilpraktiker Abrechnung vereinfachen: Digitale Erstattung App | Healio',
-    description: 'Digitale Erstattung per App eliminiert Rechnungsdiskussionen. 0-Euro-Gesundheitsbudget für Heilpraktiker mit Zusatzversicherung.',
+    description: 'Digitale Erstattung per App reduziert Rechnungsdiskussionen. Healio verbindet Zusatzversicherung und Kassenbonus zum 3.000 € Gesundheitsbudget.',
     canonical: 'https://healio.de/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
     lang: 'de',
   },
   {
     path: '/blog/heilpraktiker-kosten-gkv-erstattung-healio',
     title: 'Heilpraktiker-Kosten GKV: Warum alles selbst zahlen + Lösung | Healio',
-    description: 'GKV zahlt keine Heilpraktiker-Kosten. Erfahren Sie warum und wie Healio bis zu 1.100 € Erstattung für Naturheilverfahren ermöglicht.',
+    description: 'GKV zahlt Heilpraktiker-Kosten meist nicht. Erfahre, wie Healio Kassenbonus und Zusatzversicherung zu bis zu 3.000 € Budget kombiniert.',
     canonical: 'https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio',
     lang: 'de',
   },
@@ -217,11 +233,19 @@ export const seoRoutes = [
   // === ENGLISCH ===
   {
     path: '/en',
-    title: 'Healio B2B – Corporate Benefits Reimagined | Hamburg',
-    description: 'HEALIO – Your expert for company pension schemes and corporate health insurance in Hamburg. Tailored consulting for businesses.',
+    title: 'Healio B2B – Corporate Benefits | bAV & bKV Experts',
+    description: 'Optimize corporate pension, health insurance and tax-efficient health benefits with Healio. Clear consulting for stronger employee retention.',
     canonical: 'https://healio.de/en',
     lang: 'en',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
+  },
+  {
+    path: '/en/companies',
+    title: 'Corporate Benefits for Companies | bAV & bKV | Healio',
+    description: 'Healio makes corporate pension, health insurance and tax-efficient health benefits usable for companies: clear analysis and stronger retention.',
+    canonical: 'https://healio.de/en/companies',
+    lang: 'en',
+    hreflang: { de: 'https://healio.de/unternehmen', en: 'https://healio.de/en/companies' },
   },
   {
     path: '/en/outpatient',

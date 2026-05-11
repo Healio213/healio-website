@@ -24,7 +24,7 @@ const AmbulantHero = () => {
             src="/images/hero-ambulant.png?v=2"
             alt={t('hero.heroImageAlt')}
             className="w-full h-full object-cover object-top absolute inset-0"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 z-10" />

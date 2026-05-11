@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 import { Clock, Stethoscope, FileText, ShieldCheck, Sparkles, Shield, Smile } from 'lucide-react';
 
 const benefitIcons = [
-  <Clock className="w-8 h-8" />,
-  <Shield className="w-8 h-8" />,
-  <Sparkles className="w-8 h-8" />,
-  <Smile className="w-8 h-8" />,
-  <ShieldCheck className="w-8 h-8" />,
-  <Stethoscope className="w-8 h-8" />,
-  <FileText className="w-8 h-8" />,
+  <Clock key="clock" className="w-8 h-8" />,
+  <Shield key="shield" className="w-8 h-8" />,
+  <Sparkles key="sparkles" className="w-8 h-8" />,
+  <Smile key="smile" className="w-8 h-8" />,
+  <ShieldCheck key="shield-check" className="w-8 h-8" />,
+  <Stethoscope key="stethoscope" className="w-8 h-8" />,
+  <FileText key="file-text" className="w-8 h-8" />,
 ];
 
 const benefitKeys = ['noWait', 'zahnersatz', 'prophylaxe', 'bleaching', 'fehlend', 'unfall', 'gesundheitsfragen'];

@@ -17,7 +17,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </picture>
 

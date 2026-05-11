@@ -41,7 +41,7 @@ const ZahnPage = () => {
         canonicalUrl="https://healio.de/zahn"
         ogTitle={tSeo('zahn.title')}
         ogDescription={tSeo('zahn.description')}
-        ogImage="https://healio.de/og-image-zahn.png"
+        ogImage="https://healio.de/og-image.png"
         ogUrl="https://healio.de/zahn"
         schemaMarkup={schemaMarkup}
       />

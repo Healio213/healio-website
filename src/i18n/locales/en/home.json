@@ -7,9 +7,33 @@
   },
   "seo": {
     "title": "Healio B2B – Corporate Benefits Reimagined | bAV & bKV Experts",
-    "description": "Optimize your corporate pension and health insurance with Healio. Higher returns, genuine employee retention and tax advantages for your company.",
-    "ogTitle": "Healio – Responsibility Pays Off for Your Company",
-    "ogDescription": "Turn compliance into competitive advantage. Modern bAV & bKV consulting for mid-sized businesses."
+    "description": "Optimize corporate pension, health insurance and tax-efficient health benefits with Healio. Clear consulting for stronger employee retention.",
+    "ogTitle": "Healio – Corporate Benefits That Strengthen Retention",
+    "ogDescription": "Combine bAV, bKV and health benefits strategically. Healio supports companies with clear consulting and modern implementation."
+  },
+  "audience": {
+    "eyebrow": "Choose your entry point",
+    "title": "One benefits ecosystem for companies, practices and patients",
+    "subtitle": "The homepage speaks to companies first. Practices and patients can move directly into the Healio offer that fits their role.",
+    "context": "B2B first. Clear paths for everyone.",
+    "companies": {
+      "signal": "Primary entry",
+      "title": "For companies",
+      "description": "Corporate pension, health insurance and tax-efficient health benefits as practical tools for retention, recruiting and care.",
+      "cta": "Check B2B potential"
+    },
+    "practices": {
+      "signal": "Partner network",
+      "title": "For practices",
+      "description": "Naturopaths, osteopaths and adjacent health professionals help patients make treatments easier to finance.",
+      "cta": "View partner program"
+    },
+    "patients": {
+      "signal": "Health budget",
+      "title": "For patients",
+      "description": "Up to €3,000 health budget over 2 years for naturopathy, osteopathy, vision aids, preventive care and more.",
+      "cta": "Explore health budget"
+    }
   },
   "services": {
     "title": "Our Services",

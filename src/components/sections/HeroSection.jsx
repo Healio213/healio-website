@@ -31,7 +31,7 @@ const HeroSection = () => {
           src="/hero-bg.jpg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
+          fetchPriority="high"
           decoding="async"
         />
       </picture>

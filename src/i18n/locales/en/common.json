@@ -1,6 +1,7 @@
 {
   "nav": {
     "leistungen": "Services",
+    "unternehmen": "Companies",
     "ambulant": "Outpatient Insurance",
     "zahn": "Dental Insurance",
     "stationaer": "Hospital Insurance",
@@ -23,6 +24,7 @@
     "contact": "Contact",
     "legal": "Legal",
     "aboutUs": "About Us",
+    "unternehmen": "For Companies",
     "leistungen": "Services",
     "partner": "Partner",
     "impressum": "Legal Notice",

@@ -6,10 +6,34 @@
     "cta": "Strategiegespräch sichern"
   },
   "seo": {
-    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV Experten",
-    "description": "Optimieren Sie Ihre betriebliche Altersvorsorge und Krankenversicherung mit Healio. Höhere Renditen, echte Mitarbeiterbindung und steuerliche Vorteile für Ihr Unternehmen.",
-    "ogTitle": "Healio – Verantwortung lohnt sich für Ihr Unternehmen",
-    "ogDescription": "Verwandeln Sie Pflichtaufgaben in Wettbewerbsvorteile. Modernes bAV & bKV Consulting für den Mittelstand."
+    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV",
+    "description": "Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.",
+    "ogTitle": "Healio – Betriebliche Vorsorge, die Mitarbeiter bindet",
+    "ogDescription": "bAV, bKV und Gesundheitsbenefits strategisch kombinieren. Healio begleitet Unternehmen mit klarer Beratung und moderner Umsetzung."
+  },
+  "audience": {
+    "eyebrow": "Der passende Einstieg",
+    "title": "Ein Vorsorge-Ökosystem für Unternehmen, Praxen und Patient:innen",
+    "subtitle": "Die Startseite richtet sich an Unternehmen. Für Praxen und Patient:innen führen eigene Einstiege direkt zum passenden Healio-Angebot.",
+    "context": "B2B zuerst. Klare Wege für alle.",
+    "companies": {
+      "signal": "Primärer Einstieg",
+      "title": "Für Unternehmen",
+      "description": "Betriebliche Altersvorsorge, bKV und steuerfreie Gesundheitsbenefits als klares Instrument für Bindung, Recruiting und Fürsorge.",
+      "cta": "B2B-Potenzial prüfen"
+    },
+    "practices": {
+      "signal": "Partnernetzwerk",
+      "title": "Für Praxen",
+      "description": "Heilpraktiker, Osteopathen und angrenzende Gesundheitsberufe helfen Patient:innen, Behandlungen besser finanzierbar zu machen.",
+      "cta": "Partnerprogramm ansehen"
+    },
+    "patients": {
+      "signal": "Gesundheitsbudget",
+      "title": "Für Patient:innen",
+      "description": "Bis zu 3.000 € Gesundheitsbudget in 2 Jahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und mehr.",
+      "cta": "Gesundheitsbudget entdecken"
+    }
   },
   "services": {
     "title": "Unsere Leistungen",

@@ -44,6 +44,7 @@ const Header = () => {
   }, []);
 
   const navLinks = [
+    { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     {
       label: t('nav.leistungen'),
       to: getPath('leistungen'),

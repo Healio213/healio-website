@@ -1,0 +1,161 @@
+{
+  "seo": {
+    "title": "Betriebliche Vorsorge für Unternehmen | bAV & bKV | Healio",
+    "description": "Healio macht bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen nutzbar: klare Analyse, bessere Mitarbeiterbindung und moderne Umsetzung."
+  },
+  "hero": {
+    "eyebrow": "Für Unternehmen",
+    "title": "Betriebliche Vorsorge, die nicht nur verwaltet, sondern bindet.",
+    "description": "Healio verbindet bAV, bKV und steuerfreie Gesundheitsbenefits zu einem System, das Mitarbeitende wirklich spüren und Unternehmen messbar entlastet.",
+    "primaryCta": "Potenzialanalyse starten",
+    "imageAlt": "Hamburger Speicherstadt als professioneller Hintergrund für Healio B2B",
+    "metrics": [
+      { "value": "45 Min.", "label": "kompakte Analyse" },
+      { "value": "bAV + bKV", "label": "integriert gedacht" },
+      { "value": "steuerfrei", "label": "Benefits clever nutzen" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Warum Unternehmen handeln",
+    "title": "Gehaltserhöhungen werden teuer. Gute Benefits bleiben hängen.",
+    "description": "Viele Unternehmen zahlen mehr, ohne dass beim Team genug ankommt. Healio prüft, wo Budget verpufft und wie Vorsorge, Gesundheit und Wertschätzung wirtschaftlicher zusammenspielen.",
+    "points": [
+      "Mitarbeiterbindung stärken, ohne nur über Bruttogehalt zu gehen",
+      "bAV und bKV verständlich erklären statt als Papierprodukt ablegen",
+      "Steuerfreie Gesundheitsbenefits sichtbar und nutzbar machen"
+    ]
+  },
+  "solutions": {
+    "eyebrow": "Was wir strukturieren",
+    "title": "Drei Hebel für moderne betriebliche Vorsorge",
+    "items": [
+      {
+        "title": "Betriebliche Altersvorsorge",
+        "description": "Bestehende bAV-Lösungen prüfen, Zuschüsse sauber erklären und Rendite, Kosten und Kommunikation verständlich machen."
+      },
+      {
+        "title": "Betriebliche Krankenversicherung",
+        "description": "Gesundheitsbudgets, Vorsorge- und Versorgungsbausteine, die Mitarbeitende im Alltag wirklich verstehen und nutzen.",
+        "points": [
+          "Planbare Kosten pro Mitarbeiter statt anonymer Gehaltsrunde",
+          "Weniger lange Ausfälle, weil Mitarbeitende schneller Facharzttermine und Behandlung bekommen",
+          "Hoher wahrgenommener Wert, weil Gesundheit sofort persönlich wird",
+          "Als steuerfreier Sachbezug bis 50 € monatlich möglich, wenn sauber strukturiert"
+        ]
+      },
+      {
+        "title": "Steuerfreie Gesundheitsbenefits",
+        "description": "Budget gezielt einsetzen: für Vorsorge, Bindung und Wertschätzung mit klarer Wirkung für Mitarbeitende."
+      }
+    ]
+  },
+  "bkvEmployer": {
+    "eyebrow": "Arbeitgeber-Mehrwert bKV",
+    "title": "Warum bKV für Arbeitgeber sofort Sinn ergibt.",
+    "description": "Eine bKV ist kein nettes Extra, sondern ein sichtbarer Gesundheits-Benefit: Mitarbeitende erleben konkrete Leistungen, während Unternehmen Budget, Einführung und Kommunikation kontrollieren können.",
+    "points": [
+      {
+        "title": "Mehr Netto-Gefühl pro Euro",
+        "description": "Ein Gesundheitsbudget wirkt konkreter als eine kleine Brutto-Erhöhung, weil Mitarbeitende es direkt für Brille, Zahn, Vorsorge oder Heilbehandlung einsetzen können."
+      },
+      {
+        "title": "Weniger Krankentage",
+        "description": "Schnellere Facharzttermine können verhindern, dass Beschwerden unnötig lange liegen bleiben und Ausfälle sich verlängern."
+      },
+      {
+        "title": "Stärkeres Recruiting",
+        "description": "bKV ist ein exklusiver Arbeitgeber-Benefit und hilft besonders dort, wo Fachkräfte zwischen ähnlichen Gehältern entscheiden."
+      },
+      {
+        "title": "Bindung durch echte Fürsorge",
+        "description": "Wer Gesundheit ernst nimmt, sendet ein klares Signal: Dieses Unternehmen investiert nicht nur in Arbeit, sondern in Menschen."
+      },
+      {
+        "title": "Schlanke Umsetzung",
+        "description": "Mit klaren Tarifen, Mitarbeiterkommunikation und digitaler Verwaltung bleibt der Nutzen sichtbar, ohne HR dauerhaft zu belasten."
+      }
+    ]
+  },
+  "bkvAbsence": {
+    "eyebrow": "Fehltage-Rechner",
+    "title": "Was weniger Fehltage wirtschaftlich bedeuten können.",
+    "description": "Schnellere Facharzttermine sind nicht nur ein Komfortthema. Wenn Beschwerden früher abgeklärt werden, können Ausfälle kürzer bleiben oder gar nicht erst eskalieren.",
+    "employeeCount": "Mitarbeitende",
+    "costPerDay": "Kosten pro Fehltag",
+    "sickDaysWithout": "Fehltage ohne bKV",
+    "sickDaysWith": "Fehltage mit bKV",
+    "daysValue": "{{days}} Tage",
+    "withoutLabel": "Ohne bKV pro Jahr",
+    "withLabel": "Mit bKV pro Jahr",
+    "savingsLabel": "Mögliche Entlastung pro Jahr",
+    "daysSavedLabel": "{{days}} potenziell vermiedene Fehltage",
+    "note": "Vereinfachte Modellrechnung. Sie ersetzt keine arbeitsmedizinische oder versicherungsmathematische Bewertung und zeigt keine garantierte Reduktion von Krankentagen."
+  },
+  "healthBudget": {
+    "eyebrow": "Zusätzlicher Low-Budget-Mehrwert",
+    "title": "3.000 € Gesundheitsbudget als starke Ergänzung für Ihr Team",
+    "description": "Nicht jedes Unternehmen kann sofort ein großes bKV-Budget öffnen. Genau dann kann das Healio Gesundheitsbudget helfen: Mitarbeitende nutzen Kassenbonus und Zusatzversicherung clever, während Sie als Arbeitgeber echten Mehrwert kommunizieren.",
+    "amount": "3.000 €",
+    "amountLabel": "Gesundheitsbudget in 2 Jahren",
+    "points": [
+      "Interessant für Mitarbeitende, die Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen",
+      "Starker Benefit in der Kommunikation, auch wenn das Arbeitgeberbudget begrenzt ist",
+      "Saubere Ergänzung zu bAV und bKV, ohne diese zu ersetzen"
+    ],
+    "cta": "Als Benefit prüfen"
+  },
+  "compound": {
+    "eyebrow": "Zeit-Hebel bAV",
+    "title": "Beim Zinseszins ist Warten der teuerste Fehler.",
+    "description": "Für Unternehmen ist bAV nicht nur ein Vertrag, sondern Timing. Je früher Mitarbeitende starten, desto länger kann Kapital im Hintergrund arbeiten. Die sichtbare Dynamik entsteht oft erst hinten raus: Rendite auf Rendite, Jahr für Jahr.",
+    "cta": "Zinseszins-Potenzial prüfen",
+    "visualEyebrow": "Interaktiver Rechner",
+    "visualTitle": "Was ein späterer Start kosten kann",
+    "startTodayLabel": "Start heute",
+    "delayLabel": "Start in {{years}} Jahren",
+    "advantageLabel": "Zeitvorsprung durch früheren Start",
+    "monthlyContribution": "Monatlicher Beitrag",
+    "duration": "Laufzeit",
+    "returnRate": "Angenommene Rendite p. a.",
+    "delay": "Startverzögerung",
+    "yearsValue": "{{years}} Jahre",
+    "visualDescription": "Vereinfachte Modellrechnung ohne Kosten, Steuern, Inflation und Garantien. Sie zeigt den Zeit- und Zinseszinseffekt, nicht die konkrete Wertentwicklung eines Produkts.",
+    "points": [
+      {
+        "title": "Zeit ist der Hebel",
+        "description": "Die ersten Jahre wirken klein, aber sie geben dem Kapital die lange Strecke."
+      },
+      {
+        "title": "Der Turbo kommt spät",
+        "description": "Die stärksten Effekte entstehen, wenn Erträge selbst wieder Erträge erzeugen."
+      },
+      {
+        "title": "Kommunikation entscheidet",
+        "description": "Mitarbeitende verstehen bAV schneller, wenn sie den Zeitverlust sehen können."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Ablauf",
+    "title": "Vom Status quo zum nutzbaren Vorsorge-System",
+    "steps": [
+      {
+        "title": "Analyse",
+        "description": "Wir prüfen bestehende Verträge, Kosten, Kommunikation und ungenutzte steuerliche Spielräume."
+      },
+      {
+        "title": "Konzept",
+        "description": "Sie bekommen eine klare Empfehlung, welche Kombination aus bAV, bKV und Benefits wirtschaftlich sinnvoll ist."
+      },
+      {
+        "title": "Umsetzung",
+        "description": "Healio begleitet Einführung, Mitarbeiterkommunikation und laufende Optimierung."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Lassen Sie uns prüfen, wo Ihr Benefit-Budget mehr Wirkung entfalten kann.",
+    "description": "In 45 Minuten sehen Sie, welche Hebel für Ihr Unternehmen realistisch sind und welche nächsten Schritte sich lohnen.",
+    "primary": "Kostenlose Potenzialanalyse"
+  }
+}

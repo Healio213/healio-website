@@ -188,6 +188,7 @@ Du hast bis Ende März des Folgejahres Zeit, deinen Bonusantrag einzureichen. Al
 ## Seiten
 
 - [Startseite](https://healio.de/) - HEALIO Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
+- [Für Unternehmen](https://healio.de/unternehmen) - Betriebliche Vorsorge, bAV, bKV und steuerfreie Gesundheitsbenefits
 - [Ambulante Zusatzversicherung](https://healio.de/ambulant) - 3.000 Euro Gesundheitsbudget, SDK Tarife, IKK Bonus
 - [Über uns](https://healio.de/about) - Über HEALIO und das Team
 - [Leistungen](https://healio.de/leistungen) - Alle Versicherungsleistungen im Überblick
