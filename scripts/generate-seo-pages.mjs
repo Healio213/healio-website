@@ -16,6 +16,7 @@ import { seoRoutes } from './seo-routes.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
+const articleApiBase = process.env.VITE_APP_API_URL || 'https://app.healio.de';
 
 // Basis-Template laden (die von Vite gebaute index.html)
 const templatePath = path.join(distDir, 'index.html');
@@ -35,7 +36,164 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-function generateHtml(route) {
+function getBlogSlug(routePath) {
+  const match = routePath.match(/^\/blog\/([^/]+)$/);
+  return match ? match[1] : null;
+}
+
+function stripScripts(html = '') {
+  return html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+}
+
+function stripLeadingArticleHeading(html = '') {
+  return html.replace(/^\s*<article>\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '<article>');
+}
+
+function stripHtml(html = '') {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&euro;/g, '€')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Intl.DateTimeFormat('de-DE', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(dateStr));
+}
+
+function createStaticBlogArticleHtml(article) {
+  const safeContent = stripScripts(stripLeadingArticleHeading(article.content_html || ''));
+  const published = formatDate(article.published_at);
+  const meta = [
+    article.author || 'Healio Redaktion',
+    published,
+    article.reading_time_minutes ? `${article.reading_time_minutes} Min. Lesezeit` : '',
+  ].filter(Boolean).join(' · ');
+
+  return `
+    <article class="pt-32 pb-20" data-static-blog-article>
+      <header class="max-w-3xl mx-auto px-4 mb-12">
+        <p class="text-sm font-medium text-[#25c990] mb-4">Healio Ratgeber</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-[#464f5d] mb-4 leading-tight">${escapeHtml(article.title || 'Healio Ratgeber')}</h1>
+        <p class="text-sm text-gray-500">${escapeHtml(meta)}</p>
+      </header>
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="prose prose-lg max-w-none">${safeContent}</div>
+      </div>
+    </article>
+  `;
+}
+
+function extractFaqSchema(article) {
+  const html = article.content_html || '';
+  const faqStart = html.search(/<h2[^>]*>\s*Häufige Fragen/i);
+  if (faqStart === -1) return null;
+
+  const afterFaqHeading = html.slice(faqStart);
+  const headingEnd = afterFaqHeading.search(/<\/h2>/i);
+  if (headingEnd === -1) return null;
+
+  const faqBody = afterFaqHeading.slice(headingEnd + 5);
+  const nextHeadingIndex = faqBody.search(/<h2[^>]*>/i);
+  const faqSection = nextHeadingIndex === -1 ? faqBody : faqBody.slice(0, nextHeadingIndex);
+  const questions = [];
+  const questionRegex = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
+  let match;
+
+  while ((match = questionRegex.exec(faqSection)) !== null) {
+    const name = stripHtml(match[1]);
+    const text = stripHtml(match[2]);
+    if (name && text) {
+      questions.push({
+        '@type': 'Question',
+        name,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text,
+        },
+      });
+    }
+  }
+
+  if (!questions.length) return null;
+
+  return {
+    '@type': 'FAQPage',
+    mainEntity: questions,
+  };
+}
+
+function createBlogArticleSchema(article, route) {
+  const graph = [
+    {
+      '@type': 'Article',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': route.canonical,
+      },
+      headline: article.title || route.title,
+      description: article.meta_description || route.description,
+      datePublished: article.published_at,
+      dateModified: article.updated_at || article.published_at,
+      author: {
+        '@type': 'Organization',
+        name: 'Healio GmbH',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Healio GmbH',
+        url: 'https://healio.de',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://healio.de/favicon.png',
+        },
+      },
+    },
+  ];
+
+  const faqSchema = extractFaqSchema(article);
+  if (faqSchema) graph.push(faqSchema);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  };
+}
+
+async function fetchArticle(slug) {
+  try {
+    const response = await fetch(`${articleApiBase}/api/v1/content/articles?slug=${encodeURIComponent(slug)}`, {
+      headers: { accept: 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.article || null;
+  } catch (error) {
+    console.warn(`SEO: Blogartikel "${slug}" konnte nicht vorgeladen werden: ${error.message}`);
+    return null;
+  }
+}
+
+async function loadBlogArticles() {
+  const slugs = [...new Set(seoRoutes.map((route) => getBlogSlug(route.path)).filter(Boolean))];
+  const entries = await Promise.all(slugs.map(async (slug) => [slug, await fetchArticle(slug)]));
+  return new Map(entries.filter(([, article]) => article));
+}
+
+function generateHtml(route, article = null) {
   let html = template;
   const e = escapeHtml;
 
@@ -132,11 +290,19 @@ function generateHtml(route) {
     );
   }
 
-  // Statisches route-spezifisches JSON-LD für wichtige Landingpages.
-  if (route.schemaMarkup) {
+  if (article) {
+    html = html.replace(
+      '<div id="root"></div>',
+      `<div id="root">${createStaticBlogArticleHtml(article)}</div>`
+    );
+  }
+
+  // Statisches route-spezifisches JSON-LD für wichtige Landingpages und Blogartikel.
+  const schemaMarkup = route.schemaMarkup || (article ? createBlogArticleSchema(article, route) : null);
+  if (schemaMarkup) {
     html = html.replace(
       '</head>',
-      `    <script type="application/ld+json">${JSON.stringify(route.schemaMarkup)}</script>\n  </head>`
+      `    <script type="application/ld+json">${JSON.stringify(schemaMarkup)}</script>\n  </head>`
     );
   }
 
@@ -145,9 +311,11 @@ function generateHtml(route) {
 
 // Für jede Route eine eigene HTML-Datei erzeugen
 let count = 0;
+const blogArticles = await loadBlogArticles();
 
 for (const route of seoRoutes) {
-  const html = generateHtml(route);
+  const slug = getBlogSlug(route.path);
+  const html = generateHtml(route, slug ? blogArticles.get(slug) : null);
 
   if (route.path === '/') {
     // Root-Route: dist/index.html überschreiben
@@ -162,4 +330,4 @@ for (const route of seoRoutes) {
   count++;
 }
 
-console.log(`SEO: ${count} Seiten mit individuellen Meta-Tags generiert.`);
+console.log(`SEO: ${count} Seiten mit individuellen Meta-Tags generiert. ${blogArticles.size} Blogartikel statisch vorgeladen.`);

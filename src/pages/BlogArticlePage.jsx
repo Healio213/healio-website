@@ -17,6 +17,11 @@ const TARGET_GROUP_KEYS = {
   arbeitgeber: 'categories.arbeitgeber',
 };
 
+const stripLeadingArticleHeading = (html) => {
+  if (!html) return '';
+  return html.replace(/^\s*<article>\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '<article>');
+};
+
 const BlogArticlePage = () => {
   const { t } = useTranslation('blog');
   const { getPath } = useLanguage();
@@ -85,6 +90,7 @@ const BlogArticlePage = () => {
   const combinedSchema = faqSchema
     ? [articleSchema, faqSchema]
     : articleSchema;
+  const articleBodyHtml = stripLeadingArticleHeading(article.content_html);
 
   return (
     <>
@@ -151,7 +157,7 @@ const BlogArticlePage = () => {
               prose-a:text-[#25c990] prose-a:no-underline hover:prose-a:underline
               prose-ul:text-gray-700 prose-li:mb-1
               prose-blockquote:border-l-[#25c990] prose-blockquote:bg-[#e8f8f0] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg"
-            dangerouslySetInnerHTML={{ __html: article.content_html }}
+            dangerouslySetInnerHTML={{ __html: articleBodyHtml }}
           />
 
           {/* GEO-Nugget Section */}

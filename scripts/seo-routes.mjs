@@ -29,7 +29,7 @@ export const seoRoutes = [
     title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
     description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie & Naturheilkunde. Kassenboni + Zusatzversicherung clever kombiniert. Jetzt berechnen!',
     canonical: 'https://healio.de/ambulant',
-    keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, IKK Bonus, SDK Zusatzversicherung',
+    keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, Kassenbonus Zusatzversicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/ambulant', en: 'https://healio.de/en/outpatient' },
     schemaMarkup: {
@@ -67,7 +67,7 @@ export const seoRoutes = [
               name: 'Gibt es einen Haken? Klingt zu gut um wahr zu sein.',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Nein. Das Healio Konzept nutzt zwei bestehende Systeme des deutschen Gesundheitswesens: die SDK Süddeutsche Krankenversicherung und das IKK classic Bonusprogramm. Voraussetzung ist, dass Versicherte aktiv am Bonusprogramm teilnehmen.'
+                text: 'Nein. Das Healio Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens: Kassenboni und passende ambulante Zusatzversicherungen. Voraussetzung ist, dass Versicherte aktiv am Bonusprogramm teilnehmen und die Tarifbedingungen erfüllen.'
               }
             },
             {
@@ -75,7 +75,7 @@ export const seoRoutes = [
               name: 'Was kostet eine ambulante Zusatzversicherung monatlich?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Die monatlichen Beiträge liegen je nach Alter und Tarif typischerweise zwischen 15 und 50 Euro. Durch das IKK classic Bonusprogramm kann der Bonus die Beiträge in vielen Fällen teilweise oder vollständig ausgleichen.'
+                text: 'Die monatlichen Beiträge liegen je nach Alter und Tarif typischerweise zwischen 15 und 50 Euro. Durch ein starkes Kassenbonusprogramm kann der Bonus die Beiträge in vielen Fällen teilweise oder vollständig ausgleichen.'
               }
             },
             {
@@ -83,7 +83,7 @@ export const seoRoutes = [
               name: 'Übernimmt die Krankenkasse Heilpraktiker-Kosten?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Die gesetzliche Krankenversicherung übernimmt Heilpraktiker-Kosten in der Regel nicht. Mit einer ambulanten Zusatzversicherung der SDK werden Heilpraktiker-Behandlungen je nach Tarif anteilig bis vollständig erstattet.'
+                text: 'Die gesetzliche Krankenversicherung übernimmt Heilpraktiker-Kosten in der Regel nicht. Mit einer passenden ambulanten Zusatzversicherung werden Heilpraktiker-Behandlungen je nach Tarif anteilig bis vollständig erstattet.'
               }
             },
             {
@@ -91,7 +91,7 @@ export const seoRoutes = [
               name: 'Werden Osteopathie-Behandlungen erstattet?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Ja. Osteopathie kann über die SDK Zusatzversicherung und zusätzlich über das IKK classic Gesundheitskonto abgedeckt werden, sofern die jeweiligen Tarif- und Bonusbedingungen erfüllt sind.'
+                text: 'Ja. Osteopathie kann über eine passende Zusatzversicherung und je nach Krankenkasse zusätzlich über Kassenleistungen oder Bonusprogramme abgedeckt werden, sofern die jeweiligen Tarif- und Bonusbedingungen erfüllt sind.'
               }
             }
           ]
@@ -202,8 +202,8 @@ export const seoRoutes = [
   },
   {
     path: '/blog/gesundheitsbudget-3000-euro',
-    title: '3.000 € Gesundheitsbudget: IKK Bonus + Zusatzversicherung | Healio',
-    description: 'Wie du bis zu 3.000 € Gesundheitsbudget in 2 Jahren nutzt: IKK Bonus, SDK Zusatzversicherung und Erstattung für Naturheilkunde.',
+    title: '3.000 € Gesundheitsbudget: Kassenbonus + Zusatzversicherung | Healio',
+    description: 'Wie du bis zu 3.000 € Gesundheitsbudget in 2 Jahren nutzt: Kassenbonus, Zusatzversicherung und Erstattung für Naturheilkunde.',
     canonical: 'https://healio.de/blog/gesundheitsbudget-3000-euro',
     lang: 'de',
   },
