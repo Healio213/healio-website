@@ -180,6 +180,13 @@ export const seoRoutes = [
     lang: 'de',
   },
   {
+    path: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026',
+    title: 'Heilpraktiker Zusatzversicherung Vergleich 2026 | Healio',
+    description: 'Heilpraktiker Zusatzversicherung 2026: Welche Leistungen wichtig sind, welche Grenzen es gibt und wie du Erstattung mit Kassenbonus planst.',
+    canonical: 'https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026',
+    lang: 'de',
+  },
+  {
     path: '/blog/ikk-classic-bonus-700-euro',
     title: 'IKK Classic Bonus 700 €+: So nutzt du den Kassenbonus | Healio',
     description: 'So funktioniert der IKK Classic Bonus mit 700 €+ pro Jahr: Aktivitäten, Nachweise und Kombination mit dem Healio Gesundheitsbudget.',
