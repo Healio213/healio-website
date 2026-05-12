@@ -13,6 +13,10 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/heilpraktiker-zusatzversicherung", "destination": "/ambulant", "permanent": true },
+    { "source": "/Ambulante-zusatzversicherung", "destination": "/ambulant", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!assets|favicon|og-image|sitemap|robots).*)", "destination": "/index.html" }
   ]

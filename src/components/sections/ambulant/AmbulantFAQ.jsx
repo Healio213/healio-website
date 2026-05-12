@@ -1,7 +1,6 @@
 
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import HighlightText from '@/components/ui/HighlightText';
 
@@ -25,26 +24,8 @@ const AmbulantFAQ = () => {
     });
   }, [t]);
 
-  const allFaqs = useMemo(() => categories.flatMap(c => c.items), [categories]);
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": allFaqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  };
-
   return (
     <section className="pt-24 pb-32 bg-white" itemScope itemType="https://schema.org/FAQPage">
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">

@@ -11,6 +11,7 @@ export const seoRoutes = [
     title: 'Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV',
     description: 'Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.',
     canonical: 'https://healio.de',
+    keywords: 'betriebliche Altersvorsorge, bAV, betriebliche Krankenversicherung, bKV, Gesundheitsbenefits, Mitarbeiterbindung, steuerfreie Benefits, Healio',
     lang: 'de',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
   },
@@ -19,6 +20,7 @@ export const seoRoutes = [
     title: 'Betriebliche Vorsorge für Unternehmen | bAV & bKV | Healio',
     description: 'Healio macht bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen nutzbar: klare Analyse, bessere Mitarbeiterbindung und moderne Umsetzung.',
     canonical: 'https://healio.de/unternehmen',
+    keywords: 'betriebliche Vorsorge, bAV, bKV, betriebliche Krankenversicherung, Benefits Arbeitgeber, Gesundheitsbenefits Unternehmen',
     lang: 'de',
     hreflang: { de: 'https://healio.de/unternehmen', en: 'https://healio.de/en/companies' },
   },
@@ -27,21 +29,82 @@ export const seoRoutes = [
     title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
     description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie & Naturheilkunde. Kassenboni + Zusatzversicherung clever kombiniert. Jetzt berechnen!',
     canonical: 'https://healio.de/ambulant',
+    keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, IKK Bonus, SDK Zusatzversicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/ambulant', en: 'https://healio.de/en/outpatient' },
-  },
-  {
-    path: '/heilpraktiker-zusatzversicherung',
-    title: 'Heilpraktiker Zusatzversicherung – 3.000 € Budget | Vergleich 2026 | Healio',
-    description: 'Heilpraktiker Zusatzversicherung im Vergleich 2026: Bis zu 3.000 € Gesundheitsbudget durch IKK Bonus + SDK Zusatzversicherung. Ohne Wartezeit starten.',
-    canonical: 'https://healio.de/heilpraktiker-zusatzversicherung',
-    lang: 'de',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Service',
+          name: 'Healio Gesundheitsbudget für Heilpraktiker, Osteopathie und Naturheilkunde',
+          serviceType: 'Ambulante Zusatzversicherung und Gesundheitsbudget',
+          url: 'https://healio.de/ambulant',
+          description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie und Naturheilkunde durch die Kombination aus Kassenbonus und ambulanter Zusatzversicherung.',
+          provider: {
+            '@type': 'Organization',
+            name: 'Healio GmbH',
+            url: 'https://healio.de',
+            telephone: '+494089755705',
+            email: 'info@healio.de'
+          },
+          areaServed: {
+            '@type': 'Country',
+            name: 'Germany'
+          },
+          offers: {
+            '@type': 'Offer',
+            availability: 'https://schema.org/InStock',
+            priceCurrency: 'EUR',
+            description: 'Kostenlose Beratung und Berechnung des möglichen Gesundheitsbudgets'
+          }
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'Gibt es einen Haken? Klingt zu gut um wahr zu sein.',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Nein. Das Healio Konzept nutzt zwei bestehende Systeme des deutschen Gesundheitswesens: die SDK Süddeutsche Krankenversicherung und das IKK classic Bonusprogramm. Voraussetzung ist, dass Versicherte aktiv am Bonusprogramm teilnehmen.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'Was kostet eine ambulante Zusatzversicherung monatlich?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Die monatlichen Beiträge liegen je nach Alter und Tarif typischerweise zwischen 15 und 50 Euro. Durch das IKK classic Bonusprogramm kann der Bonus die Beiträge in vielen Fällen teilweise oder vollständig ausgleichen.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'Übernimmt die Krankenkasse Heilpraktiker-Kosten?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Die gesetzliche Krankenversicherung übernimmt Heilpraktiker-Kosten in der Regel nicht. Mit einer ambulanten Zusatzversicherung der SDK werden Heilpraktiker-Behandlungen je nach Tarif anteilig bis vollständig erstattet.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'Werden Osteopathie-Behandlungen erstattet?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Ja. Osteopathie kann über die SDK Zusatzversicherung und zusätzlich über das IKK classic Gesundheitskonto abgedeckt werden, sofern die jeweiligen Tarif- und Bonusbedingungen erfüllt sind.'
+              }
+            }
+          ]
+        }
+      ]
+    },
   },
   {
     path: '/partner',
     title: 'Für Heilpraktiker – Mehr Patienten durch Kostenübernahme | Healio',
     description: 'Healio-Partnerprogramm für Heilpraktiker: Therapieabbrüche verhindern, Patientenbindung stärken, Umsatz steigern. Kostenlose Partnerschaft.',
     canonical: 'https://healio.de/partner',
+    keywords: 'Healio Partner, Heilpraktiker Partnerprogramm, Patienten Finanzierung Heilpraktiker, Kostenübernahme Naturheilkunde',
     lang: 'de',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
   },
@@ -64,6 +127,7 @@ export const seoRoutes = [
     title: 'Zahnzusatzversicherung – Bis zu 100 % Erstattung | Healio',
     description: 'Zahnzusatzversicherung mit bis zu 100 % Erstattung für Zahnersatz. Bis zu 3 fehlende Zähne mitversicherbar. Jetzt Beitrag berechnen!',
     canonical: 'https://healio.de/zahn',
+    keywords: 'Zahnzusatzversicherung, Zahnersatz Erstattung, Implantate Versicherung, Zahnversicherung Vergleich',
     lang: 'de',
     hreflang: { de: 'https://healio.de/zahn', en: 'https://healio.de/en/dental' },
   },
@@ -72,6 +136,7 @@ export const seoRoutes = [
     title: 'Stationäre Zusatzversicherung – Privatpatient im Krankenhaus | Healio',
     description: 'Stationäre Zusatzversicherung: Einzelzimmer, Chefarztbehandlung, freie Krankenhauswahl. Privatpatienten-Status als Kassenpatient.',
     canonical: 'https://healio.de/stationaer',
+    keywords: 'stationäre Zusatzversicherung, Krankenhaus Zusatzversicherung, Chefarztbehandlung, Einbettzimmer Versicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/stationaer', en: 'https://healio.de/en/inpatient' },
   },

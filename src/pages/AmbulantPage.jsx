@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
+import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
@@ -19,8 +20,11 @@ import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
 import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalculatorButton';
 
+const faqCategoryKeys = ['kosten', 'leistungen', 'ablauf', 'vertrauen'];
+
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
+  const { t: tFaq } = useTranslation('ambulant-faq');
   const { pathname } = useLocation();
   const isHeilpraktikerLanding = pathname === '/heilpraktiker-zusatzversicherung';
   const seoTitle = isHeilpraktikerLanding
@@ -32,13 +36,38 @@ const AmbulantPage = () => {
   const canonicalPath = isHeilpraktikerLanding
     ? '/heilpraktiker-zusatzversicherung'
     : '/ambulant';
+  const canonicalUrl = `https://healio.de${canonicalPath}`;
+  const faqItems = faqCategoryKeys.flatMap((key) => {
+    const items = tFaq(`categories.${key}.items`, { returnObjects: true });
+    return Array.isArray(items) ? items : [];
+  });
+  const schemaMarkup = [
+    createWebPageSchema(seoTitle, seoDescription, canonicalUrl),
+    createServiceSchema({
+      serviceType: 'Ambulante Zusatzversicherung und Gesundheitsbudget',
+      name: 'Healio Gesundheitsbudget für Heilpraktiker, Osteopathie und Naturheilkunde',
+      description: seoDescription,
+      url: canonicalUrl,
+      availableChannel: {
+        serviceUrl: canonicalUrl
+      },
+      offers: {
+        description: 'Kostenlose Beratung und Berechnung des möglichen Gesundheitsbudgets'
+      }
+    }),
+    createFAQSchema(faqItems.map((faq) => ({
+      question: faq.q,
+      answer: faq.a
+    })))
+  ];
 
   return (
     <>
       <SEOHead
         title={seoTitle}
         description={seoDescription}
-        canonicalUrl={`https://healio.de${canonicalPath}`}
+        canonicalUrl={canonicalUrl}
+        schemaMarkup={schemaMarkup}
       />
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />

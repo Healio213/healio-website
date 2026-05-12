@@ -93,7 +93,7 @@ function App() {
               <Route path="kontakt" element={<KontaktPage />} />
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
               <Route path="ambulant" element={<AmbulantPage />} />
-              <Route path="heilpraktiker-zusatzversicherung" element={<AmbulantPage />} />
+              <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />
               <Route path="healio-zahnzusatz" element={<HealioZahnzusatzPage />} />

@@ -3,6 +3,7 @@
  */
 
 const SITE_URL = "https://healio.de";
+const HEALIO_PHONE = "+494089755705";
 
 export const createOrganizationSchema = () => {
   return {
@@ -22,22 +23,20 @@ export const createOrganizationSchema = () => {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+494089755705",
+      "telephone": HEALIO_PHONE,
       "contactType": "customer service",
       "email": "info@healio.de",
       "availableLanguage": ["German"]
     },
     "foundingDate": "2021",
     "sameAs": [
-      "https://www.facebook.com/healio",
-      "https://www.instagram.com/healio",
-      "https://www.linkedin.com/company/healio"
+      "https://www.tiktok.com/@healio.de"
     ]
   };
 };
 
-export const createServiceSchema = () => {
-  return {
+export const createServiceSchema = (overrides = {}) => {
+  const baseSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Gesundheitsoptimierung & Bonusprogramm",
@@ -55,13 +54,30 @@ export const createServiceSchema = () => {
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": SITE_URL,
-      "servicePhone": "+49-40-1802-4898-0"
+      "servicePhone": HEALIO_PHONE
     },
     "offers": {
       "@type": "Offer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
       "description": "Kostenlose Beratung und Tarifberechnung"
+    }
+  };
+
+  return {
+    ...baseSchema,
+    ...overrides,
+    provider: {
+      ...baseSchema.provider,
+      ...overrides.provider
+    },
+    availableChannel: {
+      ...baseSchema.availableChannel,
+      ...overrides.availableChannel
+    },
+    offers: {
+      ...baseSchema.offers,
+      ...overrides.offers
     }
   };
 };

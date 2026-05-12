@@ -62,6 +62,23 @@ function generateHtml(route) {
     );
   }
 
+  // Keywords: Google ignoriert dieses Tag, aber wenn es vorhanden ist,
+  // darf es keine seitenfremden Root-Keywords auf Unterseiten vererben.
+  const keywordsRegex = /<meta name="keywords" content="[^"]*">\n?/;
+  if (route.keywords) {
+    const keywordsTag = `<meta name="keywords" content="${e(route.keywords)}">`;
+    if (keywordsRegex.test(html)) {
+      html = html.replace(keywordsRegex, `${keywordsTag}\n`);
+    } else {
+      html = html.replace(
+        /(<meta name="robots" content="[^"]*">)/,
+        `$1\n    ${keywordsTag}`
+      );
+    }
+  } else {
+    html = html.replace(keywordsRegex, '');
+  }
+
   // Canonical URL
   html = html.replace(
     /<link rel="canonical" href="[^"]*">/,
@@ -112,6 +129,14 @@ function generateHtml(route) {
     html = html.replace(
       '</head>',
       `${hreflangTags}\n${xDefault}\n  </head>`
+    );
+  }
+
+  // Statisches route-spezifisches JSON-LD für wichtige Landingpages.
+  if (route.schemaMarkup) {
+    html = html.replace(
+      '</head>',
+      `    <script type="application/ld+json">${JSON.stringify(route.schemaMarkup)}</script>\n  </head>`
     );
   }
 
