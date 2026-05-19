@@ -31,6 +31,8 @@
   "benefits": {
     "title": "What You Get with Healio",
     "subtitle": "Click on a category for all individual benefits",
+    "budgetBadgeValue": "3,000 EUR",
+    "budgetBadgeLabel": "health budget over 2 years",
     "showLess": "Show less",
     "showDetails": "Benefits in detail",
     "heilpraktiker": {
@@ -102,19 +104,20 @@
   "conceptAccordion": {
     "title": "Healio: The Concept That Pays for Itself",
     "section1Title": "Why We Founded Healio",
-    "section1Text1": "Statutory health insurance provides you with solid basic coverage. But let's be honest: for what many people truly need, it's often not enough.",
-    "section1Text2": "Whether Heilpraktiker, osteopathy, premium care or simply a new pair of glasses, you typically pay for all of it out of pocket.",
-    "section1Text3": "Healio combines two things that are already strong on their own, but together form a real system:",
-    "section1Bullet1": "Outpatient supplementary insurance that closes your coverage gaps.",
-    "section1Bullet2": "And IKK classic with a bonus program that practically refinances this supplementary insurance.",
-    "section2Title": "The Core Benefit for You",
+    "section1Text1": "Statutory health insurance is the foundation. But many services people actually want to use are only partially covered or not covered at all.",
+    "section1Text2": "Heilpraktiker, osteopathy, glasses, preventive care, medication and therapy co-payments: this is where people often postpone treatment or pay out of pocket.",
+    "section1Text3": "Healio therefore starts with the outpatient SDK plan. The plan creates the health budget. The IKK classic bonus can then fully or partially refinance the premium.",
+    "section1Bullet1": "You take out the outpatient SDK plan and get benefits you can use immediately, with no waiting period.",
+    "section1Bullet2": "Optionally, you use the IKK classic bonus to recover the premium through bonus payments.",
+    "section2Title": "The Core Benefit: 3,000 EUR for Your Health",
+    "section2Intro": "The real benefit is not simply having another insurance plan. The benefit is building a usable health budget for treatments you would otherwise often pay for yourself.",
     "coreValues": {
-      "planbarkeit": { "title": "Predictability", "desc": "You know in advance what you'll get, no unpleasant surprises." },
-      "erstattung": { "title": "Reimbursement", "desc": "Upload your invoice, reimbursement follows, no paperwork." },
-      "einfachheit": { "title": "Simplicity", "desc": "Guided step by step." },
-      "turbo": { "title": "Turbo", "desc": "Bonus payments can offset your premiums." }
+      "gesundheitsbudget": { "title": "3,000 EUR Health Budget", "desc": "You are not investing in an abstract tariff, but in usable benefits for Heilpraktiker, glasses, preventive care and more." },
+      "behandlungen": { "title": "Don't Postpone Treatment", "desc": "When you need support, you can use it sooner instead of waiting because of the cost." },
+      "erstattung": { "title": "100% Reimbursement in AP1", "desc": "In the recommended SDK Ambulant 100 plan, you submit invoices and receive reimbursement for insured benefits up to the budgets." },
+      "bonus": { "title": "IKK Bonus as a Boost", "desc": "The bonus is not the plan itself, but the lever that can fully or partially offset your premium depending on the bonus amount." }
     },
-    "hinweis": "Healio is not a health insurance fund, but the digital platform for outpatient benefits.",
+    "hinweis": "Healio is not a health insurance fund. Healio helps you combine the outpatient SDK plan and the IKK classic bonus in a meaningful way.",
     "section3Title": "What Is Typically Covered?",
     "coverage": {
       "sehhilfen": { "title": "Vision aids (glasses, contact lenses)", "desc": "up to €500" },
@@ -130,11 +133,11 @@
     },
     "section4Title": "How Healio Works, The Clear Process",
     "steps": {
-      "step1": { "title": "Calculate your plan (30 sec.)", "desc": "Enter your age and desired coverage." },
-      "step2": { "title": "Sign up online", "desc": "No paperwork, everything digital." },
-      "step3": { "title": "Optionally switch to IKK classic", "desc": "For maximum refinancing." },
-      "step4": { "title": "Use your bonus", "desc": "Log activities and secure your reward." },
-      "step5": { "title": "Use your benefits", "desc": "Submit invoice, receive reimbursement." }
+      "step1": { "title": "Calculate SDK plan", "desc": "You see what the outpatient plan costs for you and which budgets matter for your situation." },
+      "step2": { "title": "Take out outpatient cover", "desc": "The SDK coverage starts with no waiting period. From the start date, you can use insured benefits." },
+      "step3": { "title": "Use your health budget", "desc": "Heilpraktiker, osteopathy, glasses, preventive care or co-payments: submit invoices and get money back." },
+      "step4": { "title": "Optionally switch to IKK classic", "desc": "If you want to use the bonus optimally, you switch to IKK classic. 98% of statutory benefits stay the same." },
+      "step5": { "title": "Recover bonus payments", "desc": "You activate the IKK bonus and can fully or partially offset your premium depending on the bonus amount." }
     },
     "section5Title": "Example Calculation",
     "exampleCalc": {
@@ -144,13 +147,13 @@
       "yearlyCost": "Annual cost:",
       "yearlyCostValue": "€480/year",
       "ikkBonus": "IKK bonus program:",
-      "ikkBonusValue": "up to €550/year",
+      "ikkBonusValue": "up to 700 EUR+ / year",
       "result": "Result:",
       "resultValue": "The bonus can fully offset the premium",
       "benefitsTitle": "Benefits:",
-      "benefit1": "Up to €1,000 for alternative treatments",
-      "benefit2": "Up to €500 for glasses",
-      "benefit3": "Up to €3,000 annual benefits total"
+      "benefit1": "Up to 1,000 EUR for Heilpraktiker and natural medicine",
+      "benefit2": "Up to 500 EUR for glasses and contact lenses",
+      "benefit3": "Up to 3,000 EUR health budget over 2 years"
     },
     "section6Title": "Why Choose Healio?",
     "whyHealio": {
@@ -205,9 +208,9 @@
     "resultLabel": "Result:",
     "resultPlus": "Plus",
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
-    "bonusPayout": "Your bonus is paid out or directly offset against your supplementary insurance. With 100% reimbursement, you get a €3,000 annual budget.",
+    "bonusPayout": "Your bonus is paid out or used as a subsidy for paid supplementary insurance premiums. This can make your health budget of up to €3,000 over 2 years effectively much cheaper.",
     "ctaCalculate": "Calculate your plan",
-    "ctaSwitchIKK": "Switch to IKK now"
+    "ctaSwitchIKK": "Secure your IKK bonus"
   },
   "beispielrechnung": {
     "title": "How Your Health Budget Pays Off",
@@ -307,10 +310,33 @@
       }
     }
   },
-  "ikkWechsel": {
+    "ikkWechsel": {
     "badge": "Switching health insurance made easy",
-    "title": "IKK classic, your partner for better health",
-    "subtitle": "IKK classic is one of Germany's largest statutory health insurance funds with over 3 million members and more than 140 years of experience. You get all statutory benefits, plus many valuable extras.",
+    "title": "You stay publicly insured and unlock more bonus",
+    "subtitle": "Whether you are with AOK, TK, Barmer or another statutory health insurer: you are not leaving the statutory system. You are switching to the fund that fits the Healio health budget better.",
+    "reassuranceKicker": "The key reassurance",
+    "reassuranceTitle": "You are not giving up your healthcare. You are only changing provider.",
+    "reassuranceText": "Your statutory core coverage stays in place. Doctors, specialists, hospitals, prescriptions and ongoing treatments remain the secure foundation. The real difference is in the extras, the bonus program and how well the fund supports your health budget.",
+    "ctaBonus": "Secure your IKK bonus",
+    "ctaTimeline": "Understand the switch timeline in 2 minutes",
+    "reassuranceItems": {
+      "system": { "title": "You stay publicly insured", "desc": "This is not a jump into a new system, but a switch within statutory health insurance." },
+      "doctors": { "title": "Doctors and hospitals stay", "desc": "Your GP, specialists, hospitals and therapists do not change because you switch health funds." },
+      "coverage": { "title": "Core coverage remains", "desc": "98% of benefits are defined by law and are the same across all statutory health insurers." },
+      "oldFund": { "title": "Your old fund is informed automatically", "desc": "IKK classic handles cancellation with your previous health insurer. You do not need to call them yourself." }
+    },
+    "threeD": {
+      "oldFund": "AOK / TK / Barmer",
+      "stable": "98% stays the same",
+      "stableLegal": "benefits guaranteed by law",
+      "bonus": "IKK bonus",
+      "bonusFund": "IKK classic",
+      "bonusShort": "Bonus",
+      "budget": "3,000 EUR health budget",
+      "budgetValue": "3,000 EUR",
+      "budgetLabel": "Health budget",
+      "ariaLabel": "3D visualization: switching from the previous statutory health insurer to IKK classic while statutory core coverage remains stable and the IKK bonus supports the health budget."
+    },
     "identicalPercent": "98%",
     "identicalTitle": "of all benefits are identical",
     "identicalSubtitle": "at every statutory health insurance fund, guaranteed by law",
@@ -344,6 +370,20 @@
       "step2": { "title": "IKK handles the rest", "desc": "IKK classic automatically cancels your old health insurance fund for you. You don't need to do anything." },
       "step3": { "title": "Seamlessly insured", "desc": "After 2 months, you're a member. Your insurance coverage continues without interruption." }
     },
+    "timelineTitle": "The switch timeline, as an example",
+    "timelineSubtitle": "The order matters: supplementary SDK coverage can start on the selected insurance date. The IKK switch runs in parallel so you can use the bonus afterwards.",
+    "timelineSteps": {
+      "sdk": { "label": "May", "title": "Take out the SDK plan", "desc": "You calculate the outpatient plan and complete it online. The start depends on the selected insurance date and acceptance." },
+      "treatment": { "label": "from start", "title": "Use benefits", "desc": "With no waiting period, you can use Heilpraktiker, osteopathy, glasses or preventive care and submit invoices to SDK." },
+      "ikkStart": { "label": "Aug 1", "title": "IKK membership starts", "desc": "If the membership declaration is submitted in May, the regular start after two full calendar months is August 1 in this example." },
+      "bonus": { "label": "afterwards", "title": "Activate the bonus", "desc": "As an IKK member, you can start the bonus or subsidy in the app and use paid supplementary insurance premiums as eligible expenses." }
+    },
+    "timelineFinanceLabel": "Transition period",
+    "timelineFinanceTitle": "Covered from the start, bonus follows later",
+    "timelineFinanceDesc": "The key point: supplementary insurance already protects you from the insurance start date. The IKK bonus comes later and can fully or partially offset premiums depending on bonus, subsidy and premium amount.",
+    "timelineBridgeValue": "approx. 3 months",
+    "timelineBridgeLabel": "typical pre-financing in the May example before the IKK bonus can be used",
+    "timelineNote": "Illustrative example. Requirements include a timely membership declaration, completion of the 12-month binding period at the previous statutory health insurer and acceptance of the SDK application. Special cancellation rights, job changes or different start dates can change the timeline.",
     "fearsTitle": "Common Concerns, And Why They're Unfounded",
     "fears": {
       "leistungen": {
@@ -367,6 +407,14 @@
         "a": "Ongoing treatments are not interrupted. Approved therapies, cures or rehabilitation measures continue, the new fund takes over."
       }
     }
+  },
+  "miaPrompt": {
+    "ariaLabel": "Mia offers help with the Healio concept",
+    "close": "Close Mia prompt",
+    "eyebrow": "Mia from Healio",
+    "title": "Want me to explain the concept?",
+    "body": "I can explain clearly how the SDK plan, 3,000 EUR health budget and IKK classic bonus work together.",
+    "cta": "Yes, explain it"
   },
   "finalCTA": {
     "title": "Ready to Fund Your Health Smartly?",

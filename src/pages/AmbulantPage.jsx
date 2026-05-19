@@ -19,6 +19,7 @@ import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimo
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
 import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalculatorButton';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 
 const faqCategoryKeys = ['kosten', 'leistungen', 'ablauf', 'vertrauen'];
 
@@ -99,9 +100,14 @@ const AmbulantPage = () => {
           <AmbulantBenefits />
         </FadeInUp>
 
-        {/* Beispielrechnung (offen, prominent) */}
+        {/* Konzept zuerst: SDK-Tarif und Healio-System erklären */}
         <FadeInUp>
-          <AmbulantBeispielrechnung />
+          <AmbulantConceptAccordion />
+        </FadeInUp>
+
+        {/* IKK classic Wechsel — Bonus als Verstärker und Refinanzierung erklären */}
+        <FadeInUp>
+          <AmbulantIKKWechsel />
         </FadeInUp>
 
         {/* Interaktiver Bonus-Rechner */}
@@ -109,14 +115,9 @@ const AmbulantPage = () => {
           <AmbulantBonusCalculator />
         </FadeInUp>
 
-        {/* Konzept-Akkordeon (ausführlich, 6 Punkte) */}
+        {/* Beispielrechnung — konkrete Einordnung nach dem Bonus-Rechner */}
         <FadeInUp>
-          <AmbulantConceptAccordion />
-        </FadeInUp>
-
-        {/* IKK classic Wechsel — Angst nehmen */}
-        <FadeInUp>
-          <AmbulantIKKWechsel />
+          <AmbulantBeispielrechnung />
         </FadeInUp>
 
         {/* TeleClinic + BetterDoc */}
@@ -145,6 +146,7 @@ const AmbulantPage = () => {
         </FadeInUp>
 
         <StickyCalculatorButton />
+        <AmbulantMiaPrompt />
       </main>
     </>
   );

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Wallet } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const CATEGORY_KEYS = [
@@ -149,6 +149,15 @@ const AmbulantBenefits = () => {
           <p className="text-gray-500 mt-4 text-lg">
             <HighlightText text={t('benefits.subtitle')} />
           </p>
+          <div className="mt-6 inline-flex max-w-full flex-wrap items-center justify-center gap-3 rounded-full border border-emerald-200 bg-emerald-50 px-5 py-3 text-emerald-950 shadow-sm">
+            <Wallet className="h-5 w-5 text-emerald-600" aria-hidden="true" />
+            <span className="text-xl font-black tracking-tight sm:text-2xl">
+              {t('benefits.budgetBadgeValue')}
+            </span>
+            <span className="text-sm font-bold sm:text-base">
+              {t('benefits.budgetBadgeLabel')}
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

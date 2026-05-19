@@ -6,8 +6,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { CheckCircle, Zap, Lightbulb, Gift, Eye, Sparkles, Leaf, Hand, Activity, Shield, Syringe, Pill, Globe, Heart, Target, Users, Calculator } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
-const coreValueIcons = [CheckCircle, Zap, Lightbulb, Gift];
-const coreValueKeys = ['planbarkeit', 'erstattung', 'einfachheit', 'turbo'];
+const coreValueIcons = [Target, Heart, CheckCircle, Gift];
+const coreValueKeys = ['gesundheitsbudget', 'behandlungen', 'erstattung', 'bonus'];
 
 const coverageIcons = [Eye, Sparkles, Leaf, Hand, Activity, Shield, Syringe, Pill, Globe, Heart];
 const coverageKeys = ['sehhilfen', 'augenLaser', 'heilpraktiker', 'osteopathie', 'tcm', 'vorsorge', 'impfungen', 'arzneimittel', 'ausland', 'beratung'];
@@ -63,6 +63,9 @@ const AmbulantConceptAccordion = () => {
                 {t('conceptAccordion.section2Title')}
               </AccordionTrigger>
               <AccordionContent className="pt-4 pb-6">
+                <p className="mb-6 max-w-3xl text-lg leading-relaxed text-gray-600">
+                  {t('conceptAccordion.section2Intro')}
+                </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                   {coreValueKeys.map((key, idx) => {
                     const Icon = coreValueIcons[idx];

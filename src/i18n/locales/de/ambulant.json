@@ -31,6 +31,8 @@
   "benefits": {
     "title": "Das bekommst du mit <highlight>Healio</highlight>",
     "subtitle": "Klicke auf eine Kategorie für alle Einzelleistungen",
+    "budgetBadgeValue": "3.000 EUR",
+    "budgetBadgeLabel": "Gesundheitsbudget in 2 Jahren",
     "showLess": "Weniger anzeigen",
     "showDetails": "Leistungen im Detail",
     "heilpraktiker": {
@@ -104,19 +106,20 @@
   "conceptAccordion": {
     "title": "Healio: Das Konzept, das sich <highlight>selbst rechnet</highlight>",
     "section1Title": "Warum wir Healio gegründet haben",
-    "section1Text1": "Die gesetzliche Krankenversicherung bietet dir eine solide Grundversorgung. Aber seien wir ehrlich: Für das, was viele Menschen wirklich brauchen, reicht sie oft nicht.",
-    "section1Text2": "Ob Heilpraktiker, Osteopathie, hochwertige Versorgung oder einfach nur eine neue Brille - all das zahlst du in der Regel selbst.",
-    "section1Text3": "Healio verbindet zwei Dinge, die einzeln schon stark sind - zusammen aber ein echtes System ergeben:",
-    "section1Bullet1": "Eine ambulante Zusatzversicherung, die deine Lücken schließt.",
-    "section1Bullet2": "Und die IKK classic mit einem Bonusprogramm, das diese Zusatzversicherung praktisch refinanziert.",
-    "section2Title": "Der Kernnutzen für dich",
+    "section1Text1": "Die gesetzliche Krankenversicherung ist die Basis. Aber vieles, was Menschen wirklich nutzen möchten, wird nur begrenzt oder gar nicht übernommen.",
+    "section1Text2": "Heilpraktiker, Osteopathie, Brille, Vorsorge, Arznei- und Heilmittel-Zuzahlungen: Genau hier entsteht oft der Moment, in dem man Behandlungen verschiebt oder selbst zahlt.",
+    "section1Text3": "Healio setzt deshalb zuerst beim ambulanten SDK-Tarif an. Der Tarif schafft das Gesundheitsbudget. Der IKK-classic-Bonus kann den Beitrag anschließend ganz oder teilweise refinanzieren.",
+    "section1Bullet1": "Du schließt den ambulanten SDK-Tarif ab und bekommst sofort nutzbare Leistungen ohne Wartezeit.",
+    "section1Bullet2": "Optional nutzt du den IKK-classic-Bonus, um den Beitrag über Bonuszahlungen zurückzuholen.",
+    "section2Title": "Der Kernnutzen: 3.000 EUR für deine Gesundheit",
+    "section2Intro": "Der eigentliche Nutzen ist nicht, dass du eine weitere Versicherung hast. Der Nutzen ist, dass du dir ein echtes Gesundheitsbudget aufbaust und Behandlungen nutzen kannst, die du sonst oft aus eigener Tasche zahlen würdest.",
     "coreValues": {
-      "planbarkeit": { "title": "Planbarkeit", "desc": "Du weißt vorher, was du bekommst - keine bösen Überraschungen." },
-      "erstattung": { "title": "Erstattung", "desc": "Rechnung hochladen, Erstattung folgt, ohne Papierkram." },
-      "einfachheit": { "title": "Einfachheit", "desc": "Schritt für Schritt geführt." },
-      "turbo": { "title": "Turbo", "desc": "Bonuszahlungen können Beitrag ausgleichen." }
+      "gesundheitsbudget": { "title": "3.000 EUR Gesundheitsbudget", "desc": "Du investierst nicht abstrakt in einen Tarif, sondern in nutzbare Leistungen für Heilpraktiker, Brille, Vorsorge und mehr." },
+      "behandlungen": { "title": "Behandlungen nicht aufschieben", "desc": "Wenn du Unterstützung brauchst, kannst du sie eher nutzen, statt wegen der Kosten zu warten." },
+      "erstattung": { "title": "100 % Erstattung im AP1", "desc": "Im empfohlenen SDK-Tarif Ambulant 100 reichst du Rechnungen ein und bekommst versicherte Leistungen bis zu den Budgets erstattet." },
+      "bonus": { "title": "IKK-Bonus als Verstärker", "desc": "Der Bonus ist nicht der Tarif selbst, sondern der Hebel, der deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen kann." }
     },
-    "hinweis": "Healio ist keine Krankenkasse, sondern die digitale Plattform für ambulante Leistungen.",
+    "hinweis": "Healio ist keine Krankenkasse. Healio hilft dir, den ambulanten SDK-Tarif und den IKK-classic-Bonus sinnvoll zusammenzubringen.",
     "section3Title": "Was ist typischerweise abgedeckt?",
     "coverage": {
       "sehhilfen": { "title": "Sehhilfen (Brillen, Kontaktlinsen)", "desc": "bis 500 Euro" },
@@ -132,11 +135,11 @@
     },
     "section4Title": "So funktioniert Healio - der klare Ablauf",
     "steps": {
-      "step1": { "title": "Tarif berechnen (30 Sek.)", "desc": "Gib dein Alter und gewünschte Leistung ein." },
-      "step2": { "title": "Online abschließen", "desc": "Kein Papierkram, alles digital." },
-      "step3": { "title": "Optional zur IKK classic wechseln", "desc": "Für maximale Refinanzierung." },
-      "step4": { "title": "Bonus nutzen", "desc": "Aktivitäten erfassen und Prämie sichern." },
-      "step5": { "title": "Leistung nutzen", "desc": "Rechnung einreichen, Erstattung erhalten." }
+      "step1": { "title": "SDK-Tarif berechnen", "desc": "Du siehst, was der ambulante Tarif für dich kostet und welche Budgets für dich relevant sind." },
+      "step2": { "title": "Ambulanten Tarif abschließen", "desc": "Der SDK-Schutz startet ohne Wartezeit. Ab Versicherungsbeginn kannst du versicherte Leistungen nutzen." },
+      "step3": { "title": "Gesundheit nutzen", "desc": "Heilpraktiker, Osteopathie, Brille, Vorsorge oder Zuzahlungen: Du reichst Rechnungen ein und bekommst Geld zurück." },
+      "step4": { "title": "Optional IKK classic wechseln", "desc": "Wenn du den Bonus optimal nutzen möchtest, wechselst du zur IKK classic. 98 % der gesetzlichen Leistungen bleiben gleich." },
+      "step5": { "title": "Bonus zurückholen", "desc": "Du aktivierst den IKK-Bonus und kannst damit deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen." }
     },
     "section5Title": "Beispielrechnung",
     "exampleCalc": {
@@ -146,13 +149,13 @@
       "yearlyCost": "Jährliche Kosten:",
       "yearlyCostValue": "480 Euro/Jahr",
       "ikkBonus": "IKK-Bonusprogramm:",
-      "ikkBonusValue": "bis zu 550 Euro/Jahr",
+      "ikkBonusValue": "bis zu 700 EUR+ / Jahr",
       "result": "Ergebnis:",
       "resultValue": "Der Bonus kann den Beitrag vollständig ausgleichen",
       "benefitsTitle": "Leistungen:",
-      "benefit1": "Bis zu 1.000 Euro für alternative Behandlungen",
-      "benefit2": "Bis zu 500 Euro für Brille",
-      "benefit3": "Bis zu 3.000 Euro Jahresleistung insgesamt"
+      "benefit1": "Bis zu 1.000 EUR für Heilpraktiker und Naturheilverfahren",
+      "benefit2": "Bis zu 500 EUR für Brille und Kontaktlinsen",
+      "benefit3": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren"
     },
     "section6Title": "Warum über Healio?",
     "whyHealio": {
@@ -207,9 +210,9 @@
     "resultLabel": "Ergebnis:",
     "resultPlus": "Plus",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
-    "bonusPayout": "Dein Bonus wird ausgezahlt oder direkt mit deiner Zusatzversicherung verrechnet. Bei 100 % Erstattung bekommst du 3.000 € Jahresbudget.",
+    "bonusPayout": "Dein Bonus wird ausgezahlt oder als Zuschuss für gezahlte Beiträge deiner Zusatzversicherung genutzt. So kann dein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren effektiv deutlich günstiger werden.",
     "ctaCalculate": "Tarif berechnen",
-    "ctaSwitchIKK": "Jetzt zur IKK wechseln"
+    "ctaSwitchIKK": "IKK-Bonus sichern"
   },
   "beispielrechnung": {
     "title": "So <highlight>rechnet sich</highlight> dein Gesundheits-Budget",
@@ -309,10 +312,33 @@
       }
     }
   },
-  "ikkWechsel": {
+    "ikkWechsel": {
     "badge": "Krankenkassenwechsel leicht gemacht",
-    "title": "IKK classic, dein Partner für <highlight>mehr Gesundheit</highlight>",
-    "subtitle": "Die IKK classic ist eine der größten gesetzlichen Krankenkassen Deutschlands mit über <highlight>3 Millionen Versicherten</highlight> und mehr als <highlight>140 Jahren Erfahrung</highlight>. Du bekommst alle gesetzlichen Leistungen, plus viele wertvolle Extras.",
+    "title": "Du bleibst gesetzlich versichert und holst dir <highlight>mehr Bonus</highlight>",
+    "subtitle": "Ob AOK, TK, Barmer oder eine andere gesetzliche Krankenkasse: Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, die besser zum Healio-Gesundheitsbudget passt.",
+    "reassuranceKicker": "Die wichtigste Klarstellung",
+    "reassuranceTitle": "Du gibst deine Versorgung nicht auf. Du wechselst nur den Anbieter.",
+    "reassuranceText": "Deine gesetzliche Grundversorgung bleibt bestehen. Ärzte, Fachärzte, Kliniken, Rezepte und laufende Behandlungen bleiben der sichere Rahmen. Der Unterschied liegt vor allem in den Extras, im Bonusprogramm und darin, wie gut die Kasse dein Gesundheitsbudget unterstützt.",
+    "ctaBonus": "IKK-Bonus sichern",
+    "ctaTimeline": "In 2 Minuten Wechselstrecke verstehen",
+    "reassuranceItems": {
+      "system": { "title": "Du bleibst gesetzlich versichert", "desc": "Es ist kein Sprung in ein neues System, sondern ein Wechsel innerhalb der gesetzlichen Krankenversicherung." },
+      "doctors": { "title": "Ärzte und Kliniken bleiben", "desc": "Hausarzt, Fachärzte, Krankenhäuser und Therapeuten ändern sich durch den Kassenwechsel nicht." },
+      "coverage": { "title": "Die Grundversorgung bleibt", "desc": "98 % der Leistungen sind gesetzlich geregelt und bei allen gesetzlichen Krankenkassen gleich." },
+      "oldFund": { "title": "Die alte Kasse wird automatisch informiert", "desc": "Die IKK classic übernimmt die Kündigung deiner bisherigen Krankenkasse. Du musst dort nicht selbst anrufen." }
+    },
+    "threeD": {
+      "oldFund": "AOK / TK / Barmer",
+      "stable": "98 % bleibt gleich",
+      "stableLegal": "Leistungen gesetzlich garantiert",
+      "bonus": "IKK-Bonus",
+      "bonusFund": "IKK classic",
+      "bonusShort": "Bonus",
+      "budget": "3.000 EUR Gesundheitsbudget",
+      "budgetValue": "3.000 EUR",
+      "budgetLabel": "Gesundheitsbudget",
+      "ariaLabel": "3D-Visualisierung: Wechsel von der bisherigen gesetzlichen Krankenkasse zur IKK classic, während die gesetzliche Grundversorgung stabil bleibt und der IKK-Bonus das Gesundheitsbudget unterstützt."
+    },
     "identicalPercent": "98%",
     "identicalTitle": "aller Leistungen sind identisch",
     "identicalSubtitle": "bei jeder gesetzlichen Krankenkasse, per Gesetz garantiert",
@@ -346,6 +372,20 @@
       "step2": { "title": "IKK erledigt den Rest", "desc": "Die IKK classic kündigt deine alte Kasse automatisch für dich. Du musst nichts tun." },
       "step3": { "title": "Nahtlos versichert", "desc": "Nach 2 Monaten bist du Mitglied. Dein Versicherungsschutz läuft durchgehend weiter." }
     },
+    "timelineTitle": "Die Wechselstrecke im Beispiel",
+    "timelineSubtitle": "Wichtig ist die Reihenfolge: Der SDK-Zusatzschutz kann direkt zum gewählten Versicherungsbeginn starten. Der IKK-Wechsel läuft parallel, damit du den Bonus anschließend nutzen kannst.",
+    "timelineSteps": {
+      "sdk": { "label": "Mai", "title": "Ambulanten Tarif abschließen", "desc": "Du berechnest den ambulanten Tarif und schließt ihn online ab. Der Start richtet sich nach dem gewählten Versicherungsbeginn und der Annahme." },
+      "treatment": { "label": "ab Start", "title": "Leistungen nutzen", "desc": "Ohne Wartezeit kannst du Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen und Rechnungen bei der SDK einreichen." },
+      "ikkStart": { "label": "1. August", "title": "IKK-Mitgliedschaft startet", "desc": "Geht die Mitgliedserklärung im Mai ein, ist der reguläre Start nach zwei vollen Kalendermonaten im Beispiel der 1. August." },
+      "bonus": { "label": "danach", "title": "Bonus aktivieren", "desc": "Als IKK-Mitglied kannst du Bonus oder Zuschuss in der App starten und gezahlte Beiträge zur Zusatzversicherung als Zuschussleistung nutzen." }
+    },
+    "timelineFinanceLabel": "Übergangszeit",
+    "timelineFinanceTitle": "Ab Start geschützt, danach Bonus nutzen",
+    "timelineFinanceDesc": "Der entscheidende Punkt: Die Zusatzversicherung schützt dich bereits ab Versicherungsbeginn. Der IKK-Bonus kommt zeitversetzt dazu und kann die Beiträge je nach Bonushöhe ganz oder teilweise ausgleichen.",
+    "timelineBridgeValue": "ca. 3 Monate",
+    "timelineBridgeLabel": "typische Vorfinanzierung im Mai-Beispiel, bevor der IKK-Bonus genutzt werden kann",
+    "timelineNote": "Beispielhafte Darstellung. Voraussetzung sind unter anderem eine rechtzeitig eingegangene Mitgliedserklärung, eine erfüllte 12-Monats-Bindungsfrist bei der bisherigen Krankenkasse und die Annahme des SDK-Antrags. Bei Sonderkündigung, Arbeitgeberwechsel oder anderem Startdatum kann die Strecke abweichen.",
     "fearsTitle": "Häufige Bedenken, und warum sie unbegründet sind",
     "fears": {
       "leistungen": {
@@ -369,6 +409,14 @@
         "a": "Laufende Behandlungen werden nicht unterbrochen. Genehmigte Therapien, Kuren oder Reha-Maßnahmen laufen weiter, die neue Kasse übernimmt."
       }
     }
+  },
+  "miaPrompt": {
+    "ariaLabel": "Mia bietet Hilfe zum Healio-Konzept an",
+    "close": "Mia-Hinweis schließen",
+    "eyebrow": "Mia von Healio",
+    "title": "Soll ich dir das Konzept erklären?",
+    "body": "Ich kann dir kurz und verständlich zeigen, wie SDK-Tarif, 3.000 EUR Gesundheitsbudget und IKK-classic-Bonus zusammenwirken.",
+    "cta": "Ja, Konzept erklären"
   },
   "finalCTA": {
     "title": "Bereit deine Gesundheit <highlight>clever zu finanzieren</highlight>?",
