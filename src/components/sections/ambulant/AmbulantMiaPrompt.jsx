@@ -4,8 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
 
 const STORAGE_KEY = 'healio:ambulant-mia-prompt-dismissed';
-const PROMPT_DELAY_MS = 16000;
-const SCROLL_THRESHOLD_PX = 520;
+const PROMPT_DELAY_MS = 150000;
 
 const getPromptDismissed = () => {
   try {
@@ -48,19 +47,9 @@ const AmbulantMiaPrompt = () => {
     };
 
     const timer = window.setTimeout(revealPrompt, PROMPT_DELAY_MS);
-    let scrollTimer;
-    const handleScroll = () => {
-      if (window.scrollY < SCROLL_THRESHOLD_PX) return;
-      window.removeEventListener('scroll', handleScroll);
-      scrollTimer = window.setTimeout(revealPrompt, 1200);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.clearTimeout(timer);
-      if (scrollTimer) window.clearTimeout(scrollTimer);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
