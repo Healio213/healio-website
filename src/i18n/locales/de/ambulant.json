@@ -103,6 +103,28 @@
       }
     }
   },
+  "conversionNudge": {
+    "kicker": "Die wichtigste Kostenfrage",
+    "title": "<highlight>Selbst zahlen</highlight> oder schlauer lösen?",
+    "text": "Wenn du Heilpraktiker, Brille oder Vorsorge ohnehin nutzt, ist die zentrale Frage: Warum diese Rechnungen allein tragen? Mit dem ambulanten Tarif baust du dir bis zu <highlight>3.000 EUR Gesundheitsbudget</highlight> auf; der IKK-classic-Bonus kann deinen Beitrag im besten Fall wieder ausgleichen.",
+    "ctaCalculate": "Tarif berechnen",
+    "ctaUnderstand": "Konzept verstehen",
+    "note": "Du schließt nicht einfach irgendetwas Zusätzliches ab. Du wandelst typische Selbstzahler-Rechnungen in ein nutzbares Gesundheitsbudget um.",
+    "items": {
+      "selfPay": {
+        "title": "Bisher",
+        "desc": "Viele Zusatzleistungen zahlst du direkt aus eigener Tasche, sobald die gesetzliche Kasse nicht übernimmt."
+      },
+      "budget": {
+        "title": "Mit Budget",
+        "desc": "Versicherte Leistungen werden bis zu den Budgets erstattet, statt jedes Mal privat hängen zu bleiben."
+      },
+      "bonus": {
+        "title": "Mit Bonus-Hebel",
+        "desc": "Der IKK-classic-Bonus kann den Beitrag je nach Bonushöhe ganz oder teilweise zurückholen."
+      }
+    }
+  },
   "conceptAccordion": {
     "title": "Healio: Das Konzept, das sich <highlight>selbst rechnet</highlight>",
     "section1Title": "Warum wir Healio gegründet haben",

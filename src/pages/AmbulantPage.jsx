@@ -7,6 +7,7 @@ import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
+import AmbulantConversionNudge from '@/components/sections/ambulant/AmbulantConversionNudge';
 import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
@@ -73,6 +74,9 @@ const AmbulantPage = () => {
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />
         <AmbulantTicker />
+
+        {/* Entscheidungsimpuls: Selbstzahler-Problem direkt greifbar machen */}
+        <AmbulantConversionNudge />
 
         {/* Qualitätssiegel: SDK + IKK classic */}
         <FadeInUp>

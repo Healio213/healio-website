@@ -101,6 +101,28 @@
       }
     }
   },
+  "conversionNudge": {
+    "kicker": "The key cost question",
+    "title": "<highlight>Pay out of pocket</highlight> or solve it smarter?",
+    "text": "If you already use alternative medicine, glasses or preventive care, the real question is: why carry those bills alone? With the outpatient plan, you build up to <highlight>3,000 EUR in health budget</highlight>; the IKK classic bonus can offset your premium in the best case.",
+    "ctaCalculate": "Calculate your plan",
+    "ctaUnderstand": "Understand the concept",
+    "note": "You are not simply adding something extra. You turn typical out-of-pocket bills into a usable health budget.",
+    "items": {
+      "selfPay": {
+        "title": "Today",
+        "desc": "Many extra services are paid directly out of pocket as soon as statutory cover does not step in."
+      },
+      "budget": {
+        "title": "With budget",
+        "desc": "Insured benefits are reimbursed up to the budgets instead of becoming private bills every time."
+      },
+      "bonus": {
+        "title": "With bonus leverage",
+        "desc": "The IKK classic bonus can recover the premium fully or partially depending on the bonus amount."
+      }
+    }
+  },
   "conceptAccordion": {
     "title": "Healio: The Concept That Pays for Itself",
     "section1Title": "Why We Founded Healio",
