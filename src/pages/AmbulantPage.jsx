@@ -73,10 +73,8 @@ const AmbulantPage = () => {
       />
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />
-        <AmbulantTicker />
 
-        {/* Entscheidungsimpuls: Selbstzahler-Problem direkt greifbar machen */}
-        <AmbulantConversionNudge />
+        <AmbulantTicker />
 
         {/* Qualitätssiegel: SDK + IKK classic */}
         <FadeInUp>
@@ -94,7 +92,10 @@ const AmbulantPage = () => {
           </section>
         </FadeInUp>
 
-        {/* Erklärvideo — direkt nach Siegel für vorbereitete Besucher */}
+        {/* Entscheidungsimpuls: Selbstzahler-Problem direkt greifbar machen */}
+        <AmbulantConversionNudge />
+
+        {/* Erklärvideo — nach Vertrauens- und Entscheidungsbereich */}
         <FadeInUp>
           <AmbulantVideoSection />
         </FadeInUp>
