@@ -31,6 +31,7 @@ const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
 const ConfirmationPage = React.lazy(() => import('@/pages/ConfirmationPage'));
 const AppEmailConfirmedPage = React.lazy(() => import('@/pages/AppEmailConfirmedPage'));
+const AppPasswordResetPage = React.lazy(() => import('@/pages/AppPasswordResetPage'));
 const TerminvereinbarungPage = React.lazy(() => import('@/pages/TerminvereinbarungPage'));
 const BlogPage = React.lazy(() => import('@/pages/BlogPage'));
 const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
@@ -144,6 +145,7 @@ function App() {
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/en/confirmation" element={<ConfirmationPage />} />
             <Route path="/app-bestaetigt" element={<AppEmailConfirmedPage />} />
+            <Route path="/reset-password" element={<AppPasswordResetPage />} />
             <Route path="/auth/confirmed" element={<Navigate to="/app-bestaetigt" replace />} />
 
             <Route element={<VeterinaryLayout />}>
