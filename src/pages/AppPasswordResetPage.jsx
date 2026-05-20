@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 
 const getAuthParams = () => {
-  if (typeof window === 'undefined') return { raw: '', hasTokens: false, hasError: false, message: '' };
+  if (typeof window === 'undefined') {
+    return { appQuery: '', hasTokens: false, hasError: false, message: '' };
+  }
 
   const raw = window.location.hash || (window.location.search ? `#${window.location.search.slice(1)}` : '');
   const params = new URLSearchParams(raw.replace(/^#/, ''));
   const error = params.get('error_description') || params.get('error');
 
   return {
-    raw,
+    appQuery: params.toString() ? `?${params.toString()}` : '',
     hasTokens: Boolean(params.get('access_token') && params.get('refresh_token')),
     hasError: Boolean(error),
     message: error ? decodeURIComponent(error.replace(/\+/g, ' ')) : '',
@@ -27,8 +29,8 @@ const cleanAuthParamsFromUrl = () => {
 const AppPasswordResetPage = () => {
   const authState = useMemo(getAuthParams, []);
   const appUrl = useMemo(
-    () => `healio://auth/reset-password${authState.raw || ''}`,
-    [authState.raw]
+    () => `healio://auth/reset-password${authState.appQuery || ''}`,
+    [authState.appQuery]
   );
 
   useEffect(() => {
