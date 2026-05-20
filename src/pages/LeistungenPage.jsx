@@ -63,15 +63,17 @@ const LeistungenPage = () => {
         {/* Full Viewport Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
           {/* Background Image */}
-          <div 
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: 'url(https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/41dc2d4d1a04e6100d26683bb596286d.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundAttachment: 'fixed'
-            }}
-          />
+          <picture className="absolute inset-0 z-0 block">
+            <source media="(max-width: 767px)" srcSet="/hero-bg-mobile.webp" type="image/webp" />
+            <source srcSet="/hero-bg.webp" type="image/webp" />
+            <img
+              src="/hero-bg.jpg"
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover object-center"
+              loading="eager"
+            />
+          </picture>
           
           <div className="absolute inset-0 bg-slate-900/50 z-[1]" />
           

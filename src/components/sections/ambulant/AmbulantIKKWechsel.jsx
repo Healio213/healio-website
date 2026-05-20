@@ -55,11 +55,11 @@ const AmbulantIKKWechsel = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-slate-950 text-white rounded-2xl shadow-xl p-8 md:p-10 mb-12 overflow-hidden relative"
+          className="bg-slate-950 text-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-10 mb-12 overflow-hidden relative"
         >
           <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-500/20 to-transparent pointer-events-none" />
           <div className="relative z-10 space-y-8">
-            <Suspense fallback={<div className="h-[380px] sm:h-[460px] rounded-2xl border border-white/10 bg-white/[0.04]" />}>
+            <Suspense fallback={<div className="h-[420px] sm:h-[520px] lg:h-[560px] rounded-2xl border border-white/10 bg-white/[0.04]" />}>
               <IkkSwitch3DScene />
             </Suspense>
 

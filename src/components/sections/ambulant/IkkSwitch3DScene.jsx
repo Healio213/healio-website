@@ -305,9 +305,12 @@ const createPersonSprite = () => {
     new THREE.SpriteMaterial({
       map: sadMap,
       transparent: true,
+      depthTest: false,
       depthWrite: false,
+      fog: false,
     })
   );
+  sprite.renderOrder = 20;
   sprite.scale.set(0.68, 1.18, 1);
   return { sprite, sadMap, happyMap };
 };
@@ -444,8 +447,8 @@ const IkkSwitch3DScene = () => {
     group.add(oldLabel);
 
     const shield = createShield();
-    shield.position.set(0, 0.25, 0.78);
-    shield.scale.setScalar(0.86);
+    shield.position.set(0, 0.96, 0.22);
+    shield.scale.setScalar(0.5);
     group.add(shield);
 
     const bonusPanel = createGlassPanel(1.72, 0.94, 0x10b981, 0.24);
@@ -519,15 +522,23 @@ const IkkSwitch3DScene = () => {
     shadow.rotation.x = -Math.PI / 2;
     group.add(shadow);
 
+    let mobileViewport = false;
+
     const resize = () => {
       const rect = container.getBoundingClientRect();
       const width = Math.max(320, rect.width);
       const height = Math.max(260, rect.height);
+      const isMobile = width < 600;
+      mobileViewport = isMobile;
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
-      camera.position.set(0, width < 600 ? 0.12 : 0.04, width < 600 ? 8.4 : 7.15);
+      camera.fov = isMobile ? 38 : 36;
+      camera.position.set(0, isMobile ? 0.1 : 0.06, isMobile ? 9.6 : 8.35);
       camera.lookAt(0, -0.42, 0);
       camera.updateProjectionMatrix();
+      group.scale.set(isMobile ? 0.74 : 0.94, isMobile ? 0.94 : 0.98, isMobile ? 0.96 : 0.98);
+      shield.position.set(0, isMobile ? 0.98 : 0.96, 0.22);
+      shield.scale.setScalar(isMobile ? 0.5 : 0.5);
     };
 
     const observer = new ResizeObserver(resize);
@@ -543,9 +554,10 @@ const IkkSwitch3DScene = () => {
       const point = curve.getPoint(progress);
       const mood = THREE.MathUtils.smoothstep(progress, 0.24, 0.9);
       const walk = Math.sin(elapsed * 7.2);
+      const personScaleBoost = mobileViewport ? 1.18 : 1;
 
-      person.sprite.position.set(point.x, point.y + 0.63 + Math.abs(walk) * 0.018, point.z + 0.46);
-      person.sprite.scale.set(0.62 + mood * 0.12, 1.08 + mood * 0.08, 1);
+      person.sprite.position.set(point.x, point.y + 0.63 + Math.abs(walk) * 0.018, point.z + 0.58);
+      person.sprite.scale.set((0.62 + mood * 0.12) * personScaleBoost, (1.08 + mood * 0.08) * personScaleBoost, 1);
       const nextMap = progress > 0.46 ? person.happyMap : person.sadMap;
       if (person.sprite.material.map !== nextMap) {
         person.sprite.material.map = nextMap;
@@ -609,7 +621,7 @@ const IkkSwitch3DScene = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[380px] sm:h-[460px] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 shadow-inner shadow-emerald-900/20"
+      className="relative h-[420px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 shadow-inner shadow-emerald-900/20"
       aria-label={t('ikkWechsel.threeD.ariaLabel')}
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
@@ -623,8 +635,8 @@ const IkkSwitch3DScene = () => {
           </span>
         </span>
       </div>
-      <div className="pointer-events-none absolute bottom-4 left-1/2 w-[min(90%,420px)] -translate-x-1/2 rounded-2xl border border-emerald-200/30 bg-emerald-50/95 px-5 py-3 text-center shadow-2xl shadow-emerald-950/30 backdrop-blur">
-        <div className="text-xl font-black tracking-tight text-emerald-950 sm:text-2xl">{t('ikkWechsel.threeD.budget')}</div>
+      <div className="pointer-events-none absolute bottom-3 left-1/2 w-[min(84%,320px)] -translate-x-1/2 rounded-xl border border-emerald-200/30 bg-emerald-50/95 px-3 py-2 text-center shadow-2xl shadow-emerald-950/30 backdrop-blur sm:bottom-4 sm:w-[min(90%,420px)] sm:rounded-2xl sm:px-5 sm:py-3">
+        <div className="text-lg font-black tracking-tight text-emerald-950 sm:text-2xl">{t('ikkWechsel.threeD.budget')}</div>
       </div>
     </div>
   );
