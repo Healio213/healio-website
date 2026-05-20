@@ -1,9 +1,8 @@
 
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Star, Quote, TrendingUp, Heart, Glasses, Baby, GraduationCap, Stethoscope } from 'lucide-react';
+import { Star, TrendingUp, Heart, Glasses, Baby, GraduationCap, Stethoscope } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const testimonialKeys = ['julia', 'thomas', 'max', 'sandra', 'andreas', 'lisa'];
@@ -46,25 +45,8 @@ const AmbulantTestimonials = () => {
     label: t(`testimonials.stats.${key}.label`),
   })), [t]);
 
-  const reviewSchema = {
-    "@context": "https://schema.org",
-    "@type": "FinancialService",
-    "name": "HEALIO GmbH",
-    "url": "https://healio.de",
-    "review": testimonials.map(item => ({
-      "@type": "Review",
-      "author": { "@type": "Person", "name": item.name },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": item.text,
-      "datePublished": "2026-03-01"
-    }))
-  };
-
   return (
     <section className="py-24 bg-green-50/50">
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(reviewSchema)}</script>
-      </Helmet>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">

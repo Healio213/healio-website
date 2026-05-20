@@ -82,20 +82,6 @@ export const createServiceSchema = (overrides = {}) => {
   };
 };
 
-export const createAggregateRatingSchema = () => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    "itemReviewed": {
-      "@type": "Service",
-      "name": "Healio Gesundheitskonzept"
-    },
-    "ratingValue": "5",
-    "bestRating": "5",
-    "ratingCount": "3"
-  };
-};
-
 export const createWebPageSchema = (pageName, description, url = null) => {
   const pageUrl = url || (typeof window !== "undefined" ? `${SITE_URL}${window.location.pathname}` : SITE_URL);
 

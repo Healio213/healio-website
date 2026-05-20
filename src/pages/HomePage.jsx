@@ -1,7 +1,7 @@
 
 import React from 'react';
 import SEOHead from '@/components/SEOHead';
-import { createOrganizationSchema, createServiceSchema, createAggregateRatingSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
+import { createOrganizationSchema, createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import Hero from '@/components/sections/Hero';
 import Concept from '@/components/sections/Concept';
 import Benefits from '@/components/sections/Benefits';
@@ -21,7 +21,6 @@ const HomePage = () => {
     "@graph": [
       createOrganizationSchema(),
       createServiceSchema(),
-      createAggregateRatingSchema(),
       createFAQSchema([
         {
           question: "Wie funktioniert das genau mit der Erstattung?",
