@@ -327,7 +327,7 @@ const IkkSwitch3DScene = () => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x07111f, 6.5, 11);
+    scene.fog = new THREE.Fog(0x0b1b2b, 7.2, 12);
 
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
     const renderer = new THREE.WebGLRenderer({
@@ -342,19 +342,19 @@ const IkkSwitch3DScene = () => {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    const ambient = new THREE.AmbientLight(0xffffff, 1.05);
+    const ambient = new THREE.AmbientLight(0xffffff, 1.24);
     scene.add(ambient);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.7);
     keyLight.position.set(2.6, 4.2, 4.6);
     keyLight.castShadow = true;
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x8ee7ff, 1.1);
+    const rimLight = new THREE.DirectionalLight(0x8ee7ff, 1.28);
     rimLight.position.set(-3.2, 2.8, 3.6);
     scene.add(rimLight);
 
-    const budgetLight = new THREE.PointLight(0xfacc15, 3.2, 5.5);
+    const budgetLight = new THREE.PointLight(0xfacc15, 3.55, 5.8);
     budgetLight.position.set(3.1, 1.2, 1.35);
     scene.add(budgetLight);
 
@@ -364,7 +364,7 @@ const IkkSwitch3DScene = () => {
     const floor = new THREE.Mesh(
       new THREE.PlaneGeometry(8.8, 4.6),
       new THREE.MeshStandardMaterial({
-        color: 0x0f172a,
+        color: 0x142033,
         roughness: 0.76,
         metalness: 0.08,
       })
@@ -621,12 +621,12 @@ const IkkSwitch3DScene = () => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[420px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 shadow-inner shadow-emerald-900/20"
+      className="relative h-[420px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 shadow-inner shadow-emerald-900/20"
       aria-label={t('ikkWechsel.threeD.ariaLabel')}
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_74%_36%,rgba(250,204,21,0.12),transparent_32%),radial-gradient(ellipse_at_50%_18%,rgba(52,211,153,0.18),transparent_44%),linear-gradient(135deg,rgba(15,23,42,0.18),rgba(2,6,23,0.66))]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_top,rgba(2,6,23,0.84),transparent)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_74%_36%,rgba(250,204,21,0.16),transparent_34%),radial-gradient(ellipse_at_50%_18%,rgba(52,211,153,0.22),transparent_46%),linear-gradient(135deg,rgba(15,23,42,0.08),rgba(2,6,23,0.5))]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_top,rgba(2,6,23,0.68),transparent)]" />
       <div className="pointer-events-none absolute left-4 right-4 top-4 flex items-start justify-center text-center text-[11px] font-bold uppercase tracking-[0.14em]">
         <span className="rounded-2xl border border-emerald-300/25 bg-emerald-400/15 px-4 py-2 text-emerald-100 shadow-lg shadow-emerald-950/20 backdrop-blur-md">
           <span className="block">{t('ikkWechsel.threeD.stable')}</span>

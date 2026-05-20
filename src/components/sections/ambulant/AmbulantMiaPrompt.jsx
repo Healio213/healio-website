@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
 
 const STORAGE_KEY = 'healio:ambulant-mia-prompt-dismissed';
-const PROMPT_DELAY_MS = 150000;
+const PROMPT_DELAY_MS = 60000;
 
 const getPromptDismissed = () => {
   try {
