@@ -11,30 +11,20 @@ const StickyCalculatorButton = () => {
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer });
   const [isVisible, setIsVisible] = useState(false);
-  const [isBlockedByStory, setIsBlockedByStory] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      const storySection = document.querySelector('#ikk-wechsel');
-      const storyRect = storySection?.getBoundingClientRect();
-      const storyInView = storyRect
-        ? storyRect.top < window.innerHeight - 80 && storyRect.bottom > 120
-        : false;
-
       setIsVisible(window.scrollY > 300);
-      setIsBlockedByStory(storyInView);
     };
 
     window.addEventListener("scroll", toggleVisibility);
-    window.addEventListener("resize", toggleVisibility);
     toggleVisibility();
     return () => {
       window.removeEventListener("scroll", toggleVisibility);
-      window.removeEventListener("resize", toggleVisibility);
     };
   }, []);
 
-  if (!isVisible || isBlockedByStory) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
