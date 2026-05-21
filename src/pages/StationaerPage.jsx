@@ -84,8 +84,8 @@ const StationaerPage = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Dark Gradient Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/60 z-10" />
-            <div className="absolute inset-0 bg-slate-900/40 mix-blend-multiply z-10" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/40 z-10" />
+            <div className="absolute inset-0 bg-slate-900/15 mix-blend-multiply z-10" aria-hidden="true" />
           </div>
 
           <div className="healio-container relative z-20 px-4 sm:px-6 md:px-8">
