@@ -29,23 +29,24 @@ const timelineStepKeys = ['sdk', 'treatment', 'ikkStart', 'bonus'];
 const AmbulantIKKWechsel = () => {
   const { t } = useTranslation('ambulant');
   const [openIndex, setOpenIndex] = useState(null);
+  const [mobileTimelineOpen, setMobileTimelineOpen] = useState(false);
 
   const identicalItems = t('ikkWechsel.identicalItems', { returnObjects: true });
 
   return (
-    <section id="ikk-wechsel" className="scroll-mt-24 py-20 bg-gradient-to-b from-white to-emerald-50/30">
+    <section id="ikk-wechsel" className="scroll-mt-24 py-12 md:py-20 bg-gradient-to-b from-white to-emerald-50/30">
       <div className="container mx-auto px-4 max-w-6xl">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
             <Shield className="w-4 h-4" />
             {t('ikkWechsel.badge')}
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-4">
             <HighlightText text={t('ikkWechsel.title')} />
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
             <HighlightText text={t('ikkWechsel.subtitle')} />
           </p>
         </div>
@@ -136,7 +137,35 @@ const AmbulantIKKWechsel = () => {
         </motion.div>
 
         {/* IKK Extras */}
-        <div className="mb-12">
+        <details className="group mb-12 rounded-2xl border border-emerald-100 bg-white shadow-lg md:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 [&::-webkit-details-marker]:hidden">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">
+                {t('ikkWechsel.extrasTitle')}
+              </h3>
+              <p className="mt-1 text-sm leading-relaxed text-gray-500">
+                {t('ikkWechsel.extrasSubtitle')}
+              </p>
+            </div>
+            <ChevronDown className="h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="grid gap-3 px-5 pb-5">
+            {extraDefs.map((extra) => (
+              <div
+                key={extra.key}
+                className="rounded-xl border border-gray-100 bg-emerald-50/30 p-4"
+              >
+                <div className="mb-2 flex items-center gap-3">
+                  <span className="text-2xl">{extra.emoji}</span>
+                  <h4 className="font-bold text-gray-900">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
+                </div>
+                <p className="text-sm leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
+              </div>
+            ))}
+          </div>
+        </details>
+
+        <div className="mb-12 hidden md:block">
           <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
             {t('ikkWechsel.extrasTitle')}
           </h3>
@@ -192,9 +221,25 @@ const AmbulantIKKWechsel = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           id="wechselstrecke"
-          className="bg-white rounded-2xl shadow-lg border border-emerald-100 p-8 mb-12 overflow-hidden"
+          className="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 md:p-8 mb-12 overflow-hidden"
         >
-          <div className="text-center max-w-3xl mx-auto mb-10">
+          <button
+            type="button"
+            onClick={() => setMobileTimelineOpen((value) => !value)}
+            className="flex w-full items-center justify-between gap-4 text-left md:hidden"
+          >
+            <div>
+              <h3 className="text-xl font-extrabold text-gray-900">
+                {t('ikkWechsel.timelineTitle')}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                {t('ikkWechsel.timelineSubtitle')}
+              </p>
+            </div>
+            <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileTimelineOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          <div className="hidden text-center max-w-3xl mx-auto mb-10 md:block">
             <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">
               {t('ikkWechsel.timelineTitle')}
             </h3>
@@ -203,61 +248,63 @@ const AmbulantIKKWechsel = () => {
             </p>
           </div>
 
-          <div className="relative">
-            <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
-            <div className="grid gap-5 lg:grid-cols-4 relative z-10">
-              {timelineStepKeys.map((key, idx) => {
-                const Icon = timelineStepIcons[idx];
-                return (
-                  <div
-                    key={key}
-                    className="bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-5 shadow-sm"
-                  >
-                    <div className="flex items-center gap-3 mb-4 lg:flex-col lg:items-start">
-                      <div className="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/20 ring-8 ring-white">
-                        <Icon className="w-6 h-6" />
+          <div className={`${mobileTimelineOpen ? 'block' : 'hidden'} md:block`}>
+            <div className="relative mt-6 md:mt-0">
+              <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
+              <div className="grid gap-4 lg:grid-cols-4 lg:gap-5 relative z-10">
+                {timelineStepKeys.map((key, idx) => {
+                  const Icon = timelineStepIcons[idx];
+                  return (
+                    <div
+                      key={key}
+                      className="bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-4 md:p-5 shadow-sm"
+                    >
+                      <div className="flex items-center gap-3 mb-3 md:mb-4 lg:flex-col lg:items-start">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/20 ring-8 ring-white">
+                          <Icon className="w-5 h-5 md:w-6 md:h-6" />
+                        </div>
+                        <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
+                          {t(`ikkWechsel.timelineSteps.${key}.label`)}
+                        </div>
                       </div>
-                      <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
-                        {t(`ikkWechsel.timelineSteps.${key}.label`)}
-                      </div>
+                      <h4 className="font-bold text-gray-900 text-base md:text-lg mb-2">
+                        {t(`ikkWechsel.timelineSteps.${key}.title`)}
+                      </h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {t(`ikkWechsel.timelineSteps.${key}.desc`)}
+                      </p>
                     </div>
-                    <h4 className="font-bold text-gray-900 text-lg mb-2">
-                      {t(`ikkWechsel.timelineSteps.${key}.title`)}
-                    </h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {t(`ikkWechsel.timelineSteps.${key}.desc`)}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="mt-8 grid md:grid-cols-[1.4fr_0.8fr] gap-5 items-stretch">
-            <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-6">
-              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700 mb-2">
-                {t('ikkWechsel.timelineFinanceLabel')}
-              </p>
-              <h4 className="text-xl font-bold text-gray-900 mb-2">
-                {t('ikkWechsel.timelineFinanceTitle')}
-              </h4>
-              <p className="text-gray-700 leading-relaxed">
-                {t('ikkWechsel.timelineFinanceDesc')}
-              </p>
-            </div>
-            <div className="bg-emerald-600 text-white rounded-xl p-6 flex flex-col justify-center">
-              <div className="text-4xl font-black mb-2">
-                {t('ikkWechsel.timelineBridgeValue')}
+                  );
+                })}
               </div>
-              <p className="text-white/90 font-medium">
-                {t('ikkWechsel.timelineBridgeLabel')}
-              </p>
             </div>
-          </div>
 
-          <p className="text-xs text-gray-500 leading-relaxed mt-5">
-            {t('ikkWechsel.timelineNote')}
-          </p>
+            <div className="mt-6 md:mt-8 grid md:grid-cols-[1.4fr_0.8fr] gap-4 md:gap-5 items-stretch">
+              <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 md:p-6">
+                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700 mb-2">
+                  {t('ikkWechsel.timelineFinanceLabel')}
+                </p>
+                <h4 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
+                  {t('ikkWechsel.timelineFinanceTitle')}
+                </h4>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                  {t('ikkWechsel.timelineFinanceDesc')}
+                </p>
+              </div>
+              <div className="bg-emerald-600 text-white rounded-xl p-5 md:p-6 flex flex-col justify-center">
+                <div className="text-3xl md:text-4xl font-black mb-2">
+                  {t('ikkWechsel.timelineBridgeValue')}
+                </div>
+                <p className="text-white/90 font-medium">
+                  {t('ikkWechsel.timelineBridgeLabel')}
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-500 leading-relaxed mt-5">
+              {t('ikkWechsel.timelineNote')}
+            </p>
+          </div>
         </motion.div>
 
         {/* Häufige Bedenken */}

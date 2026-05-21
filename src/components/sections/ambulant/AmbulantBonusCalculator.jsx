@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft, Plus, Minus, Pencil } from 'lucide-react';
+import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
@@ -55,6 +55,7 @@ const AmbulantBonusCalculator = () => {
   const [selectedActivities, setSelectedActivities] = useState({});
   const [monatsbeitrag, setMonatsbeitrag] = useState(40);
   const [beitragEditing, setBeitragEditing] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const beitragInputRef = useRef(null);
   const analyticsTimer = useRef(null);
   const lastTracked = useRef(null);
@@ -143,10 +144,30 @@ const AmbulantBonusCalculator = () => {
   const titleParts = rawTitle.split(/<highlight>(.*?)<\/highlight>/);
 
   return (
-    <section id="bonus-calculator" className="bg-white py-24 font-sans">
+    <section id="bonus-calculator" className="bg-white py-12 md:py-24 font-sans">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <button
+          type="button"
+          onClick={() => setMobileOpen((value) => !value)}
+          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-left shadow-lg md:hidden"
+        >
+          <div>
+            <h2 className="text-2xl font-extrabold leading-tight text-healio-dark">
+              {titleParts.map((part, i) =>
+                i % 2 === 1
+                  ? <TextHighlight key={i}>{part}</TextHighlight>
+                  : <React.Fragment key={i}>{part}</React.Fragment>
+              )}
+            </h2>
+            <p className="mt-2 text-sm font-medium leading-relaxed text-gray-600">
+              {t('bonusCalculator.subtitle')}
+            </p>
+          </div>
+          <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
+        </button>
+
+        <div className="hidden text-center mb-16 md:block">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -171,7 +192,7 @@ const AmbulantBonusCalculator = () => {
         </div>
 
         {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start relative">
+        <div className={`${mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
 
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">

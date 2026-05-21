@@ -1,19 +1,40 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Video, Stethoscope, Smartphone, Clock, Shield, Search } from 'lucide-react';
+import { Video, Stethoscope, Smartphone, Clock, Shield, Search, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantIKKServices = () => {
   const { t } = useTranslation('ambulant');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-blue-50/30">
+    <section className="py-12 md:py-20 bg-gradient-to-b from-white to-blue-50/30">
       <div className="container mx-auto px-4 max-w-6xl">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <button
+          type="button"
+          onClick={() => setMobileOpen((value) => !value)}
+          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-blue-100 bg-white p-5 text-left shadow-lg md:hidden"
+        >
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-700">
+              <Smartphone className="w-4 h-4" />
+              {t('ikkServices.badge')}
+            </div>
+            <h2 className="text-2xl font-extrabold leading-tight text-gray-900">
+              <HighlightText text={t('ikkServices.title')} />
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              <HighlightText text={t('ikkServices.subtitle')} />
+            </p>
+          </div>
+          <ChevronDown className={`h-6 w-6 flex-shrink-0 text-blue-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
+        </button>
+
+        <div className="hidden text-center mb-16 md:block">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
             <Smartphone className="w-4 h-4" />
             {t('ikkServices.badge')}
@@ -26,8 +47,9 @@ const AmbulantIKKServices = () => {
           </p>
         </div>
 
-        {/* Two Cards: TeleClinic + BetterDoc */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className={`${mobileOpen ? 'block' : 'hidden'} md:block`}>
+          {/* Two Cards: TeleClinic + BetterDoc */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8">
 
           {/* TeleClinic */}
           <motion.div
@@ -157,6 +179,7 @@ const AmbulantIKKServices = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">{t('ikkServices.bottomCta.desc')}</p>
           </div>
         </motion.div>
+        </div>
 
       </div>
     </section>
