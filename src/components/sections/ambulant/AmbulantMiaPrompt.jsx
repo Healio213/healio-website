@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MessageCircle, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const STORAGE_KEY = 'healio:ambulant-mia-prompt-dismissed';
 const PROMPT_DELAY_MS = 60000;
@@ -90,9 +90,12 @@ const AmbulantMiaPrompt = () => {
             </button>
 
             <div className="flex items-start gap-3 pr-6">
-              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25">
-                <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              </div>
+              <img
+                src="/nita-avatar.jpg"
+                alt=""
+                className="h-11 w-11 flex-shrink-0 rounded-full object-cover shadow-lg shadow-emerald-500/25 ring-2 ring-emerald-100"
+                aria-hidden="true"
+              />
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-600">
                   {t('miaPrompt.eyebrow')}

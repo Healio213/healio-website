@@ -71,7 +71,7 @@ const KontoLoeschenPage = () => {
               <ul className="space-y-2 text-gray-700 list-disc pl-5">
                 <li>Dein Nutzerprofil (Name, E-Mail, Adresse, Telefonnummer)</li>
                 <li>Alle eingereichten Rechnungen und dazugehörige Fotos</li>
-                <li>Chat-Verlauf mit Mia</li>
+                <li>Chat-Verlauf mit Nita</li>
                 <li>Empfehlungscode und Lead-Verlauf</li>
                 <li>Auszahlungsanfragen (bereits abgerechnete Zahlungen bleiben aus steuerrechtlichen Gründen gespeichert)</li>
                 <li>Flyer-Bestellungen (aus buchhalterischen Gründen bleiben Rechnungen 10 Jahre gespeichert)</li>

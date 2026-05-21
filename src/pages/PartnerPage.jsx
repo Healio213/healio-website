@@ -583,7 +583,7 @@ const PartnerPage = () => {
 
       </main>
 
-      {/* Proaktive Mia-Sprechblase */}
+      {/* Proaktive Nita-Sprechblase */}
       {showMiaPrompt && (
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -601,11 +601,14 @@ const PartnerPage = () => {
               ×
             </button>
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#25c990] flex items-center justify-center flex-shrink-0">
-                <span className="text-white text-lg">💬</span>
-              </div>
+              <img
+                src="/nita-avatar.jpg"
+                alt=""
+                className="w-10 h-10 rounded-full object-cover flex-shrink-0 ring-2 ring-[#25c990]/20"
+                aria-hidden="true"
+              />
               <div>
-                <p className="text-sm font-semibold text-gray-900 mb-1">Mia von Healio</p>
+                <p className="text-sm font-semibold text-gray-900 mb-1">Nita von Healio</p>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   Hallo! Soll ich dir kurz erklären, wie das Healio Partnernetzwerk für deine Praxis funktioniert?
                 </p>

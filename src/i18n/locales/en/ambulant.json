@@ -431,9 +431,9 @@
     }
   },
   "miaPrompt": {
-    "ariaLabel": "Mia offers help with the Healio concept",
-    "close": "Close Mia prompt",
-    "eyebrow": "Mia from Healio",
+    "ariaLabel": "Nita offers help with the Healio concept",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
     "title": "Want me to explain the concept?",
     "body": "I can explain clearly how the outpatient plan, 3,000 EUR health budget and IKK classic bonus work together.",
     "cta": "Yes, explain it"
