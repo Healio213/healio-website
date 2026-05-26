@@ -88,6 +88,22 @@ const AmbulantPage = () => {
                 <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern, Note 1,7 Gut" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
                 <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
               </div>
+              <div className="mt-8 md:mt-10 max-w-4xl mx-auto rounded-lg border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 px-5 py-5 md:px-8 md:py-6 shadow-sm">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-center sm:text-left">
+                  <p className="text-xs md:text-sm font-bold uppercase tracking-[0.22em] text-slate-500">
+                    In Kooperation mit
+                  </p>
+                  <img
+                    src="/logos/ikk-classic.svg"
+                    alt="IKK classic Logo"
+                    className="h-14 sm:h-16 md:h-20 w-auto max-w-[240px] object-contain"
+                    loading="lazy"
+                  />
+                  <p className="max-w-sm text-sm md:text-base text-slate-600 font-medium leading-relaxed">
+                    IKK classic Bonusprogramm als zentraler Baustein für dein Healio-Gesundheitsbudget.
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
         </FadeInUp>
