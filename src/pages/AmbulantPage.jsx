@@ -108,6 +108,7 @@ const AmbulantPage = () => {
                 <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
                 <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
                 <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
+                <img src="/siegel/sdk/assekuranz-award-nachhaltigkeit-kranken.png" alt="Assekuranz Award Gewinner 2024/2025 Nachhaltigkeit Kranken" className="h-24 sm:h-28 md:h-32 lg:h-36 w-auto object-contain" loading="lazy" />
                 <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere & junge Eltern, Note 1,7 Gut" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
                 <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain" loading="lazy" />
               </div>
