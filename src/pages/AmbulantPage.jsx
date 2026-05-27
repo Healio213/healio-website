@@ -24,6 +24,29 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 
 const faqCategoryKeys = ['kosten', 'leistungen', 'ablauf', 'vertrauen'];
 
+const ikkKrankenkasseninfoSeals = [
+  {
+    src: '/siegel/ikk/krankenkasseninfo-gesamt.png',
+    alt: 'Krankenkasseninfo IKK classic Gesamttest Note 1,3 Sehr Gut, Stand 03/2026'
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-leistungen.png',
+    alt: 'Krankenkasseninfo IKK classic Leistungstest Note 1,5 Sehr Gut, Stand 03/2026'
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-selbststaendige.png',
+    alt: 'Krankenkasseninfo IKK classic Selbstständige Krankenkassentest Note 1,5 Sehr Gut, Stand 03/2026'
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-senioren.png',
+    alt: 'Krankenkasseninfo IKK classic Krankenkassentest für Senioren Note 1,6 Gut, Stand 03/2026'
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-studenten.png',
+    alt: 'Krankenkasseninfo IKK classic Studenten Krankenkassentest Note 1,4 Sehr Gut, Stand 03/2026'
+  }
+];
+
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
   const { t: tFaq } = useTranslation('ambulant-faq');
@@ -102,6 +125,22 @@ const AmbulantPage = () => {
                   <p className="max-w-sm text-sm md:text-base text-slate-600 font-medium leading-relaxed">
                     IKK classic Bonusprogramm als zentraler Baustein für dein Healio-Gesundheitsbudget.
                   </p>
+                </div>
+              </div>
+              <div className="mt-7 md:mt-8 max-w-6xl mx-auto">
+                <p className="text-center text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-slate-400 mb-4">
+                  Weitere IKK classic Auszeichnungen
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
+                  {ikkKrankenkasseninfoSeals.map((seal) => (
+                    <img
+                      key={seal.src}
+                      src={seal.src}
+                      alt={seal.alt}
+                      className="w-[132px] sm:w-[150px] md:w-[168px] lg:w-[180px] h-auto rounded-md shadow-sm ring-1 ring-slate-100"
+                      loading="lazy"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
