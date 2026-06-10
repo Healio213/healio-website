@@ -34,6 +34,15 @@
     "ctaTitle": "Bereit für den nächsten Schritt?",
     "ctaSubtitle": "45 Minuten. Keine Verkaufspräsentation. Nur Zahlen.",
     "ctaButton": "Strategiegespräch sichern",
+    "appLabel": "Healio App",
+    "appTitle": "Dein Gesundheitsbudget immer dabei.",
+    "appBody": "Mit der Healio App behältst du dein Budget, den IKK Bonus und eingereichte Belege direkt auf dem Smartphone im Blick.",
+    "appFeatureBudget": "3.000 EUR Budget",
+    "appFeatureReceipts": "Belege im Blick",
+    "appFeatureBonus": "IKK Bonus verfolgen",
+    "appStore": "App Store",
+    "playStore": "Google Play",
+    "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
     "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
   },
   "langSwitch": "EN"

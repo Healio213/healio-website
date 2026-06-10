@@ -34,6 +34,15 @@
     "ctaTitle": "Ready for the next step?",
     "ctaSubtitle": "45 minutes. No sales pitch. Just the numbers.",
     "ctaButton": "Book a Strategy Call",
+    "appLabel": "Healio App",
+    "appTitle": "Your health budget on the go.",
+    "appBody": "With the Healio app, you can keep your budget, IKK bonus and submitted receipts in view directly on your smartphone.",
+    "appFeatureBudget": "EUR 3,000 budget",
+    "appFeatureReceipts": "Receipts in view",
+    "appFeatureBonus": "Track IKK bonus",
+    "appStore": "App Store",
+    "playStore": "Google Play",
+    "appScreenshotAlt": "Healio app dashboard showing the available health budget",
     "copyright": "© {{year}} Healio GmbH. All rights reserved."
   },
   "langSwitch": "DE"

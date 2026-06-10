@@ -3,6 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import { CheckCircle2, ExternalLink, Smartphone } from 'lucide-react';
+
+const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
 
 const Footer = ({ hideCta = false }) => {
   const { t } = useTranslation('common');
@@ -14,6 +18,64 @@ const Footer = ({ hideCta = false }) => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-healio-primary/40 to-transparent"></div>
 
       <div className="healio-container">
+        <div className="relative mb-16 overflow-hidden rounded-2xl border border-healio-primary/20 bg-gradient-to-br from-slate-900 via-[#071d24] to-slate-950 p-6 shadow-2xl shadow-black/25 md:p-8 lg:p-10">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-healio-primary/60 to-transparent" />
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
+            <div className="max-w-2xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-healio-primary/25 bg-healio-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-healio-primary">
+                <Smartphone className="h-4 w-4" />
+                {t('footer.appLabel')}
+              </div>
+              <h3 className="text-2xl font-bold leading-tight text-white md:text-3xl">
+                {t('footer.appTitle')}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">
+                {t('footer.appBody')}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 text-sm text-slate-200">
+                {[t('footer.appFeatureBudget'), t('footer.appFeatureReceipts'), t('footer.appFeatureBonus')].map((feature) => (
+                  <span key={feature} className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2">
+                    <CheckCircle2 className="h-4 w-4 text-healio-primary" />
+                    {feature}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-slate-100"
+                >
+                  {t('footer.appStore')}
+                  <ExternalLink className="h-4 w-4 text-slate-500" />
+                </a>
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.06] px-5 py-3 text-sm font-bold text-white transition hover:border-healio-primary/50 hover:bg-healio-primary/12"
+                >
+                  {t('footer.playStore')}
+                  <ExternalLink className="h-4 w-4 text-slate-500" />
+                </a>
+              </div>
+            </div>
+            <div className="mx-auto w-full max-w-[190px] sm:max-w-[210px] md:max-w-[250px] lg:max-w-[270px]">
+              <div className="rotate-2 rounded-[2rem] border border-white/15 bg-slate-950 p-2.5 shadow-2xl shadow-healio-primary/10">
+                <div className="overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-900">
+                  <img
+                    src="/images/healio-app-dashboard.png"
+                    alt={t('footer.appScreenshotAlt')}
+                    className="block h-auto w-full"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
           <div>
             <h3 className="text-2xl font-bold mb-4 text-white">Healio</h3>
