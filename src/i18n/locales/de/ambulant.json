@@ -347,7 +347,8 @@
       "system": { "title": "Du bleibst gesetzlich versichert", "desc": "Es ist kein Sprung in ein neues System, sondern ein Wechsel innerhalb der gesetzlichen Krankenversicherung." },
       "doctors": { "title": "Ärzte und Kliniken bleiben", "desc": "Hausarzt, Fachärzte, Krankenhäuser und Therapeuten ändern sich durch den Kassenwechsel nicht." },
       "coverage": { "title": "Die Grundversorgung bleibt", "desc": "98 % der Leistungen sind gesetzlich geregelt und bei allen gesetzlichen Krankenkassen gleich." },
-      "oldFund": { "title": "Die alte Kasse wird automatisch informiert", "desc": "Die IKK classic übernimmt die Kündigung deiner bisherigen Krankenkasse. Du musst dort nicht selbst anrufen." }
+      "oldFund": { "title": "Die alte Kasse wird automatisch informiert", "desc": "Die IKK classic übernimmt die Kündigung deiner bisherigen Krankenkasse. Du musst dort nicht selbst anrufen." },
+      "ongoingTreatments": { "title": "Laufende Behandlungen kurz melden", "desc": "Informiere die IKK classic nach dem Wechsel einmal über laufende Behandlungen. Aus Datenschutzgründen werden diese Informationen nicht automatisch von deiner alten Kasse übertragen." }
     },
     "threeD": {
       "oldFund": "AOK / TK / Barmer",
@@ -420,7 +421,7 @@
       },
       "kompliziert": {
         "q": "Ist der Wechsel kompliziert?",
-        "a": "Überhaupt nicht. Du meldest dich online bei der IKK classic an, das dauert wenige Minuten. Die IKK classic kündigt deine alte Kasse automatisch für dich. Du musst dich um nichts weiter kümmern."
+        "a": "Überhaupt nicht. Du meldest dich online bei der IKK classic an, das dauert wenige Minuten. Die IKK classic kündigt deine alte Kasse automatisch für dich. Wenn bereits eine Behandlung läuft, gib der IKK classic nach dem Wechsel zusätzlich kurz Bescheid."
       },
       "luecke": {
         "q": "Gibt es eine Lücke in meiner Versorgung?",
@@ -428,7 +429,7 @@
       },
       "behandlungen": {
         "q": "Was ist mit laufenden Behandlungen?",
-        "a": "Laufende Behandlungen werden nicht unterbrochen. Genehmigte Therapien, Kuren oder Reha-Maßnahmen laufen weiter, die neue Kasse übernimmt."
+        "a": "Laufende Behandlungen werden grundsätzlich nicht unterbrochen. Wichtig ist nur: Aus Datenschutzgründen werden diese Informationen nicht automatisch von deiner alten Kasse an die IKK classic übertragen. Informiere die IKK classic nach dem Wechsel kurz darüber, bei welchem Arzt, Therapeuten oder Behandler eine Behandlung läuft."
       }
     }
   },

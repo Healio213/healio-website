@@ -345,7 +345,8 @@
       "system": { "title": "You stay publicly insured", "desc": "This is not a jump into a new system, but a switch within statutory health insurance." },
       "doctors": { "title": "Doctors and hospitals stay", "desc": "Your GP, specialists, hospitals and therapists do not change because you switch health funds." },
       "coverage": { "title": "Core coverage remains", "desc": "98% of benefits are defined by law and are the same across all statutory health insurers." },
-      "oldFund": { "title": "Your old fund is informed automatically", "desc": "IKK classic handles cancellation with your previous health insurer. You do not need to call them yourself." }
+      "oldFund": { "title": "Your old fund is informed automatically", "desc": "IKK classic handles cancellation with your previous health insurer. You do not need to call them yourself." },
+      "ongoingTreatments": { "title": "Briefly report ongoing treatments", "desc": "After switching, inform IKK classic once about ongoing treatments. For privacy reasons, these details are not automatically transferred by your previous health insurer." }
     },
     "threeD": {
       "oldFund": "AOK / TK / Barmer",
@@ -418,7 +419,7 @@
       },
       "kompliziert": {
         "q": "Is the switch complicated?",
-        "a": "Not at all. You sign up online with IKK classic, it takes just a few minutes. IKK classic automatically cancels your old fund for you. You don't need to worry about anything."
+        "a": "Not at all. You sign up online with IKK classic, it takes just a few minutes. IKK classic automatically cancels your old fund for you. If you already have an ongoing treatment, briefly inform IKK classic after the switch."
       },
       "luecke": {
         "q": "Will there be a gap in my coverage?",
@@ -426,7 +427,7 @@
       },
       "behandlungen": {
         "q": "What about ongoing treatments?",
-        "a": "Ongoing treatments are not interrupted. Approved therapies, cures or rehabilitation measures continue, the new fund takes over."
+        "a": "Ongoing treatments are generally not interrupted. The important point is that, for privacy reasons, this information is not automatically transferred from your old fund to IKK classic. After switching, briefly inform IKK classic which doctor, therapist or provider is treating you."
       }
     }
   },

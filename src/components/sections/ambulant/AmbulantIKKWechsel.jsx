@@ -9,7 +9,7 @@ import { IKK_LINK } from '@/lib/sdk-url';
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
 
 const fearKeys = ['leistungen', 'arzt', 'kompliziert', 'luecke', 'behandlungen'];
-const reassuranceKeys = ['system', 'doctors', 'coverage', 'oldFund'];
+const reassuranceKeys = ['system', 'doctors', 'coverage', 'oldFund', 'ongoingTreatments'];
 
 const extraDefs = [
   { key: 'schwangerschaft', emoji: "🤰" },
