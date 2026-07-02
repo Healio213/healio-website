@@ -14,6 +14,7 @@
     }
   ],
   "redirects": [
+    { "source": "/budget", "destination": "/ambulant?utm_source=linkedin&utm_campaign=therapieabbruch", "permanent": false },
     { "source": "/heilpraktiker-zusatzversicherung", "destination": "/ambulant", "permanent": true },
     { "source": "/Ambulante-zusatzversicherung", "destination": "/ambulant", "permanent": true }
   ],
