@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Krankenhauszusatzversicherung: <highlight>Privatpatient</highlight> im Krankenhaus.",
-    "subtitle": "Einbettzimmer, Chefarztbehandlung und freie Klinikwahl mit den Klinik-Tarifen der SDK. Für 30-Jährige zum Beispiel ab 6,84 € im Monat. Beitrag in 2 Minuten berechnen.",
+    "subtitle": "Einbettzimmer, Chefarztbehandlung und freie Klinikwahl mit den Klinik-Tarifen der SDK, ohne Wartezeiten. Für 30-Jährige zum Beispiel ab 6,84 € im Monat. Beitrag in 2 Minuten berechnen.",
     "ikkNote": "<strong>Refinanzierung über den IKK classic Bonus:</strong> Die IKK classic belohnt gesundes Verhalten mit steuerfreien Boni und Zuschüssen. Je nach deinen Aktivitäten kann das einen großen Teil deines Beitrags decken, beim Unfall-Tarif oft sogar den ganzen. Rechne es unten individuell aus.",
     "ctaCalculate": "Tarif berechnen",
     "ctaBonus": "Bonus sichern",
@@ -56,8 +56,8 @@
         "value": "10 €/Tag bei vollstationärer Behandlung"
       },
       "keineWartezeit": {
-        "label": "Fahrt- und Transportkosten",
-        "value": "Bis 250 € pro Jahr"
+        "label": "Wartezeiten",
+        "value": "Keine, Schutz ab Versicherungsbeginn"
       }
     },
     "vergleichTitle": "Klinik 2-Bett oder Klinik 1-Bett?",
@@ -88,6 +88,7 @@
     "deinEigenanteil": "Dein Eigenanteil",
     "besonderheitenTitle": "Das zeichnet die SDK Klinik-Tarife aus",
     "besonderheiten": [
+      "Keine Wartezeiten: voller Schutz ab Versicherungsbeginn",
       "Privatärztliche Behandlung durch Chefarzt oder Belegarzt",
       "Erstattung auch über die GOÄ-Höchstsätze hinaus",
       "Freie Krankenhauswahl, auch Privatkliniken und Spezialkliniken",
@@ -189,6 +190,10 @@
       {
         "q": "Was ist der Tarif Klinik bei Unfall?",
         "a": "Der Tarif SPU leistet alle Klinik-Leistungen (Ein- oder Zweibettzimmer, Chefarztbehandlung, freie Klinikwahl), allerdings nur bei unfallbedingten Behandlungen. Dafür ist er besonders günstig: für 30-Jährige 6,84 Euro im Monat. Ideal für Sportler und Aktive, die sich für den Ernstfall absichern wollen."
+      },
+      {
+        "q": "Gibt es Wartezeiten?",
+        "a": "Nein. Die SDK verzichtet in den Klinik-Tarifen auf Wartezeiten, der volle Schutz gilt ab Versicherungsbeginn. Wichtig ist nur: Der Vertrag muss vor der Behandlung stehen, denn für Versicherungsfälle, die vor Versicherungsbeginn eingetreten sind, wird nicht geleistet."
       },
       {
         "q": "Werden auch privatärztliche Leistungen über dem Höchstsatz erstattet?",

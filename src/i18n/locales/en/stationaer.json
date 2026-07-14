@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Hospital supplementary insurance: <highlight>private patient</highlight> in hospital.",
-    "subtitle": "Private room, chief physician treatment and free hospital choice with SDK's hospital plans. For a 30-year-old, from 6.84 € per month. Calculate your premium in 2 minutes.",
+    "subtitle": "Private room, chief physician treatment and free hospital choice with SDK's hospital plans, with no waiting periods. For a 30-year-old, from 6.84 € per month. Calculate your premium in 2 minutes.",
     "ikkNote": "<strong>Refinancing via the IKK classic bonus:</strong> IKK classic rewards healthy behaviour with tax-free bonuses and subsidies. Depending on your activities, this can cover a large part of your premium, and for the accident plan often all of it. Calculate yours below.",
     "ctaCalculate": "Calculate premium",
     "ctaBonus": "Secure bonus",
@@ -56,8 +56,8 @@
         "value": "10 €/day for inpatient treatment"
       },
       "keineWartezeit": {
-        "label": "Travel and transport costs",
-        "value": "Up to 250 € per year"
+        "label": "Waiting periods",
+        "value": "None, full cover from the start date"
       }
     },
     "vergleichTitle": "Klinik 2-Bett or Klinik 1-Bett?",
@@ -88,6 +88,7 @@
     "deinEigenanteil": "Your share",
     "besonderheitenTitle": "What sets the SDK hospital plans apart",
     "besonderheiten": [
+      "No waiting periods: full cover from the start of the policy",
       "Private medical treatment by chief physician or attending specialist",
       "Reimbursement even beyond the GOÄ maximum rates",
       "Free hospital choice, incl. private and specialist clinics",
@@ -189,6 +190,10 @@
       {
         "q": "What is the Klinik bei Unfall plan?",
         "a": "The SPU plan provides all hospital benefits (private or twin room, chief physician treatment, free hospital choice), but only for accident-related treatments. In return it is particularly affordable: 6.84 € per month for a 30-year-old. Ideal for athletes and active people."
+      },
+      {
+        "q": "Are there waiting periods?",
+        "a": "No. SDK waives waiting periods in its hospital plans, full cover applies from the policy start date. The only requirement: the contract must be in place before treatment, as insured events that occurred before the start date are not covered."
       },
       {
         "q": "Are private medical fees above the maximum rate reimbursed?",
