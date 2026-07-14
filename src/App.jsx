@@ -15,7 +15,6 @@ const AboutPage = React.lazy(() => import('@/pages/AboutPage'));
 const LeistungenPage = React.lazy(() => import('@/pages/LeistungenPage'));
 const AmbulantPage = React.lazy(() => import('@/pages/AmbulantPage'));
 const HealioZahnzusatzPage = React.lazy(() => import('@/pages/HealioZahnzusatzPage'));
-const KlinikUpgradePage = React.lazy(() => import('@/pages/KlinikUpgradePage'));
 const StationaerPage = React.lazy(() => import('@/pages/StationaerPage'));
 const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
@@ -100,7 +99,7 @@ function App() {
               <Route path="zahn" element={<ZahnPage />} />
               <Route path="healio-zahnzusatz" element={<HealioZahnzusatzPage />} />
               <Route path="stationaer" element={<StationaerPage />} />
-              <Route path="klinik-upgrade" element={<KlinikUpgradePage />} />
+              <Route path="klinik-upgrade" element={<Navigate to="/stationaer" replace />} />
               <Route path="impressum" element={<ImpressumPage />} />
               <Route path="agb" element={<AgbPage />} />
               <Route path="datenschutz" element={<DatenschutzPage />} />
@@ -124,7 +123,7 @@ function App() {
               <Route path="dental" element={<ZahnPage />} />
               <Route path="healio-dental" element={<HealioZahnzusatzPage />} />
               <Route path="inpatient" element={<StationaerPage />} />
-              <Route path="hospital-upgrade" element={<KlinikUpgradePage />} />
+              <Route path="hospital-upgrade" element={<Navigate to="/en/inpatient" replace />} />
               <Route path="legal-notice" element={<ImpressumPage />} />
               <Route path="terms" element={<AgbPage />} />
               <Route path="privacy" element={<DatenschutzPage />} />

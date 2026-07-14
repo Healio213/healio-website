@@ -236,13 +236,6 @@ export const seoRoutes = [
     lang: 'de',
   },
   {
-    path: '/klinik-upgrade',
-    title: 'Klinik-Upgrade – Privatpatient im Krankenhaus | Healio',
-    description: 'Klinik-Upgrade: Chefarzt, Einzelzimmer und freie Krankenhauswahl als Kassenpatient. Jetzt Privatpatienten-Komfort sichern.',
-    canonical: 'https://healio.de/klinik-upgrade',
-    lang: 'de',
-  },
-  {
     path: '/healio-zahnzusatz',
     title: 'Healio Zahnzusatz – Premium Zahnversicherung | Healio',
     description: 'Premium Zahnzusatzversicherung von Healio: Bis zu 100 % Erstattung für Zahnersatz, Implantate und Inlays. Bis zu 3 fehlende Zähne mitversicherbar.',
@@ -359,8 +352,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/inpatient',
-    title: 'Hospital Insurance – Private Patient Status | Healio',
-    description: 'Hospital supplementary insurance: Private room, chief physician treatment, free hospital choice.',
+    title: 'Hospital Supplementary Insurance: Private Patient in Hospital | Healio',
+    description: 'Hospital supplementary insurance: private room, chief physician treatment, free hospital choice. SDK hospital plans, e.g. from 6.84 €/month (accident plan, age 30).',
     canonical: 'https://healio.de/en/inpatient',
     lang: 'en',
     hreflang: { de: 'https://healio.de/stationaer', en: 'https://healio.de/en/inpatient' },
