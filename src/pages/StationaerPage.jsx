@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import SEOHead from '@/components/SEOHead';
-import { createServiceSchema } from '@/lib/createSchemaMarkup';
+import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
@@ -13,7 +13,7 @@ import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechse
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
 import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
 import { Button } from '@/components/ui/button';
-import { Calculator, Gift, CheckCircle, ChevronDown, Star } from 'lucide-react';
+import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import { useReferrer } from '@/hooks/useReferrer';
@@ -53,9 +53,13 @@ const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer });
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
 
-  const schemaMarkup = createServiceSchema();
+  const faqForSchema = t('faq.items', { returnObjects: true });
+  const schemaMarkup = [
+    createServiceSchema(),
+    createFAQSchema((Array.isArray(faqForSchema) ? faqForSchema : []).map(item => ({ question: item.q, answer: item.a })))
+  ];
 
   const testimonials = t('testimonials.items', { returnObjects: true });
   const testimonialItems = Array.isArray(testimonials) ? testimonials : [];
@@ -177,12 +181,9 @@ const StationaerPage = () => {
             </div>
             <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {testimonialItems.map((item, i) => (
-                <motion.article key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 text-center">
-                  <div className="flex items-center gap-1 justify-center">
-                    {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-yellow-400 text-yellow-400" />)}
-                  </div>
-                  <p className="text-slate-600 italic leading-relaxed">"{item.text}"</p>
-                  <p className="font-bold text-slate-900 pt-2">{item.name}</p>
+                <motion.article key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 text-left">
+                  <p className="font-bold text-healio-primary">{item.name}</p>
+                  <p className="text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.article>
               ))}
             </div>

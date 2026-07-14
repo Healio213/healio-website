@@ -133,12 +133,26 @@ export const seoRoutes = [
   },
   {
     path: '/stationaer',
-    title: 'Stationäre Zusatzversicherung – Privatpatient im Krankenhaus | Healio',
-    description: 'Stationäre Zusatzversicherung: Einzelzimmer, Chefarztbehandlung, freie Krankenhauswahl. Privatpatienten-Status als Kassenpatient.',
+    title: 'Krankenhauszusatzversicherung: Privatpatient im Krankenhaus | Healio',
+    description: 'Krankenhauszusatzversicherung: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. SDK Klinik-Tarife z. B. ab 6,84 €/Monat (Unfall-Tarif, 30 Jahre). Jetzt berechnen.',
     canonical: 'https://healio.de/stationaer',
-    keywords: 'stationäre Zusatzversicherung, Krankenhaus Zusatzversicherung, Chefarztbehandlung, Einbettzimmer Versicherung',
+    keywords: 'Krankenhauszusatzversicherung, stationäre Zusatzversicherung, Krankenhaus Zusatzversicherung, Chefarztbehandlung, Einbettzimmer Versicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/stationaer', en: 'https://healio.de/en/inpatient' },
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Was kostet die Krankenhauszusatzversicherung?', acceptedAnswer: { '@type': 'Answer', text: 'Der Beitrag hängt von Alter und Tarif ab. Beispiele für 30-Jährige: Klinik bei Unfall 6,84 Euro, Klinik 2-Bett 32,82 Euro, Klinik 1-Bett 49,78 Euro im Monat. Mit 46 Jahren: 10,49 / 44,91 / 69,74 Euro. Den persönlichen Beitrag zeigt der Tarifrechner in 2 Minuten.' } },
+        { '@type': 'Question', name: 'Was ist der Unterschied zwischen Klinik 1-Bett und Klinik 2-Bett?', acceptedAnswer: { '@type': 'Answer', text: 'Klinik 1-Bett (SP1) bietet die Unterbringung im Ein- oder Zweibettzimmer und 10 Euro Krankenhaustagegeld pro Tag. Klinik 2-Bett (SP2) bietet das Zweibettzimmer und eine Wechseloption in den 1-Bett-Tarif ab dem 30. Geburtstag, alle 5 Jahre bis 65. Beide Tarife enthalten Chefarztbehandlung ohne GOÄ-Begrenzung, freie Krankenhauswahl und Rooming-in.' } },
+        { '@type': 'Question', name: 'Was ist der Tarif Klinik bei Unfall?', acceptedAnswer: { '@type': 'Answer', text: 'Der Tarif SPU leistet alle Klinik-Leistungen (Ein- oder Zweibettzimmer, Chefarztbehandlung, freie Klinikwahl), allerdings nur bei unfallbedingten Behandlungen. Dafür ist er besonders günstig: für 30-Jährige 6,84 Euro im Monat. Ideal für Sportler und Aktive.' } },
+        { '@type': 'Question', name: 'Werden auch privatärztliche Leistungen über dem Höchstsatz erstattet?', acceptedAnswer: { '@type': 'Answer', text: 'Ja. Die Erstattung ist nicht auf die Höchstsätze der Gebührenordnung für Ärzte (GOÄ) begrenzt. Auch darüber hinausgehende Honorare werden erstattet.' } },
+        { '@type': 'Question', name: 'Wie hilft der IKK classic Bonus bei der Finanzierung?', acceptedAnswer: { '@type': 'Answer', text: 'Die IKK classic belohnt gesundes Verhalten mit steuerfreien Geldboni und Zuschüssen, zum Beispiel für Vorsorge, Impfungen, Sportverein, Fitness oder das Sportabzeichen. Je nach Aktivitäten kann der Bonus einen großen Teil des Beitrags decken, beim Unfall-Tarif oft sogar den ganzen.' } },
+        { '@type': 'Question', name: 'Gilt der Schutz auch für Kinder?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, die Klinik-Tarife gibt es für alle gesetzlich Versicherten, auch für Kinder. Rooming-in gehört zu den Leistungen: Ein Elternteil bleibt beim Kind im Krankenhaus.' } },
+        { '@type': 'Question', name: 'Gibt es eine Gesundheitsprüfung?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, wie bei stationären Zusatztarifen üblich gehören Gesundheitsfragen zum Antrag. Der beste Zeitpunkt für den Abschluss ist deshalb, solange man gesund und aktiv ist.' } },
+        { '@type': 'Question', name: 'Für wen lohnt sich die Krankenhauszusatzversicherung besonders?', acceptedAnswer: { '@type': 'Answer', text: 'Für alle, die im Ernstfall Wahlfreiheit wollen: Sportler und Aktive (auch über den günstigen Unfall-Tarif), Selbstständige und Familien, die beim Kind bleiben wollen. Voraussetzung ist eine gesetzliche Krankenversicherung.' } }
+      ]
+    },
   },
   {
     path: '/leistungen',
