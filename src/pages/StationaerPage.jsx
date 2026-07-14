@@ -160,7 +160,7 @@ const StationaerPage = () => {
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>
 
-        <FadeInUp><AmbulantBonusCalculator /></FadeInUp>
+        <FadeInUp><AmbulantBonusCalculator tarifTypes="Stationär" /></FadeInUp>
         <FadeInUp><AmbulantIKKWechsel /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>

@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "Your €3,000 Health Budget. Effectively for <highlight>€0</highlight>.",
+    "title": "Your €3,000 Health Budget. Effectively from <highlight>€0</highlight>.",
     "subtitle": "Why pay yourself when there's a better way? Up to €3,000 for alternative medicine, glasses & preventive care, effectively from €0. No waiting periods.",
     "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
     "badgeNoWait": "Guaranteed no waiting period",
@@ -23,7 +23,7 @@
     "heilpraktiker": "Heilpraktiker 100% covered",
     "noWait": "No waiting period, instant coverage",
     "fast": "Complete in just 3 minutes",
-    "effective": "Effectively €0 thanks to IKK bonus",
+    "effective": "Effectively from €0 thanks to IKK bonus",
     "akupunktur": "Acupuncture included",
     "osteopathie": "Osteopathy & massages included",
     "video": "See how it works in the video"
@@ -40,13 +40,34 @@
       "desc": "Heilpraktiker, osteopathy, TCM, chiropractic, acupuncture",
       "budget": "Up to €1,000 (every 2 years) | incl. Hufeland directory",
       "details": {
-        "heilpraktikerbehandlungen": { "name": "Heilpraktiker treatments", "info": "Up to €1,000 every 2 years per Hufeland directory" },
-        "chiropraktik": { "name": "Chiropractic", "info": "Included in the Heilpraktiker & natural medicine budget" },
-        "osteopathie": { "name": "Osteopathy", "info": "Up to €160/year via IKK classic (4 sessions at €40) + additional budget" },
-        "akupunktur": { "name": "Acupuncture", "info": "Included in the Heilpraktiker & natural medicine budget" },
-        "tcm": { "name": "Traditional Chinese Medicine (TCM)", "info": "Included in the Heilpraktiker & natural medicine budget" },
-        "naturheilkunde": { "name": "Natural medicine treatments by physicians", "info": "Reimbursement per GOA up to 3.5x rate" },
-        "homoeopathie": { "name": "Homeopathy", "info": "Included in the Heilpraktiker & natural medicine budget" }
+        "heilpraktikerbehandlungen": {
+          "name": "Heilpraktiker treatments",
+          "info": "Up to €1,000 every 2 years per Hufeland directory"
+        },
+        "chiropraktik": {
+          "name": "Chiropractic",
+          "info": "Included in the Heilpraktiker & natural medicine budget"
+        },
+        "osteopathie": {
+          "name": "Osteopathy",
+          "info": "Up to €160/year via IKK classic (4 sessions at €40) + additional budget"
+        },
+        "akupunktur": {
+          "name": "Acupuncture",
+          "info": "Included in the Heilpraktiker & natural medicine budget"
+        },
+        "tcm": {
+          "name": "Traditional Chinese Medicine (TCM)",
+          "info": "Included in the Heilpraktiker & natural medicine budget"
+        },
+        "naturheilkunde": {
+          "name": "Natural medicine treatments by physicians",
+          "info": "Reimbursement per GOA up to 3.5x rate"
+        },
+        "homoeopathie": {
+          "name": "Homeopathy",
+          "info": "Included in the Heilpraktiker & natural medicine budget"
+        }
       }
     },
     "sehhilfen": {
@@ -54,10 +75,22 @@
       "desc": "Glasses, contact lenses, prescription sunglasses",
       "budget": "Up to €500 (every 2 years) | LASIK up to €1,000 per eye",
       "details": {
-        "brillen": { "name": "Glasses & lenses", "info": "Up to €500 every 2 years" },
-        "kontaktlinsen": { "name": "Contact lenses", "info": "Included in the vision aids budget" },
-        "sonnenbrillen": { "name": "Prescription sunglasses", "info": "Included in the vision aids budget" },
-        "laser": { "name": "Eye laser (LASIK/LASEK)", "info": "Up to €1,000 per eye (one-time)" }
+        "brillen": {
+          "name": "Glasses & lenses",
+          "info": "Up to €500 every 2 years"
+        },
+        "kontaktlinsen": {
+          "name": "Contact lenses",
+          "info": "Included in the vision aids budget"
+        },
+        "sonnenbrillen": {
+          "name": "Prescription sunglasses",
+          "info": "Included in the vision aids budget"
+        },
+        "laser": {
+          "name": "Eye laser (LASIK/LASEK)",
+          "info": "Up to €1,000 per eye (one-time)"
+        }
       }
     },
     "vorsorge": {
@@ -65,12 +98,30 @@
       "desc": "Cancer screening, prenatal care, check-ups, vaccinations",
       "budget": "Up to €500 (every 2 years) | incl. prevention courses",
       "details": {
-        "krebsvorsorge": { "name": "Cancer screening examinations", "info": "Extended screening beyond statutory insurance coverage" },
-        "schwangerschaft": { "name": "Prenatal care", "info": "e.g. toxoplasmosis test, streptococcus test, additional ultrasounds" },
-        "checkups": { "name": "Health check-ups", "info": "Extended lab values and diagnostics" },
-        "stiko": { "name": "STIKO vaccinations", "info": "All recommended standard vaccinations" },
-        "reiseimpfungen": { "name": "Travel vaccinations", "info": "e.g. yellow fever, Hepatitis A/B, typhoid" },
-        "praeventionskurse": { "name": "Prevention courses", "info": "e.g. yoga, back training, stress management" }
+        "krebsvorsorge": {
+          "name": "Cancer screening examinations",
+          "info": "Extended screening beyond statutory insurance coverage"
+        },
+        "schwangerschaft": {
+          "name": "Prenatal care",
+          "info": "e.g. toxoplasmosis test, streptococcus test, additional ultrasounds"
+        },
+        "checkups": {
+          "name": "Health check-ups",
+          "info": "Extended lab values and diagnostics"
+        },
+        "stiko": {
+          "name": "STIKO vaccinations",
+          "info": "All recommended standard vaccinations"
+        },
+        "reiseimpfungen": {
+          "name": "Travel vaccinations",
+          "info": "e.g. yellow fever, Hepatitis A/B, typhoid"
+        },
+        "praeventionskurse": {
+          "name": "Prevention courses",
+          "info": "e.g. yoga, back training, stress management"
+        }
       }
     },
     "arzneimittel": {
@@ -78,11 +129,26 @@
       "desc": "Statutory co-payments for medications, remedies and aids",
       "budget": "Up to €1,000 (every 2 years) | plus international coverage included",
       "details": {
-        "arzneimittel": { "name": "Medication co-payments", "info": "Reimbursement of statutory co-payment (€5–10 per medication)" },
-        "heilmittel": { "name": "Remedy co-payments", "info": "e.g. physiotherapy, occupational therapy, speech therapy" },
-        "hilfsmittel": { "name": "Medical aid co-payments", "info": "e.g. insoles, bandages, compression stockings" },
-        "ausland": { "name": "International coverage", "info": "100% reimbursement, unlimited trips up to 56 days" },
-        "beratung": { "name": "Medical-psychological counseling service", "info": "Telephone counseling included" }
+        "arzneimittel": {
+          "name": "Medication co-payments",
+          "info": "Reimbursement of statutory co-payment (€5–10 per medication)"
+        },
+        "heilmittel": {
+          "name": "Remedy co-payments",
+          "info": "e.g. physiotherapy, occupational therapy, speech therapy"
+        },
+        "hilfsmittel": {
+          "name": "Medical aid co-payments",
+          "info": "e.g. insoles, bandages, compression stockings"
+        },
+        "ausland": {
+          "name": "International coverage",
+          "info": "100% reimbursement, unlimited trips up to 56 days"
+        },
+        "beratung": {
+          "name": "Medical-psychological counseling service",
+          "info": "Telephone counseling included"
+        }
       }
     },
     "schwangerschaft": {
@@ -91,13 +157,34 @@
       "budget": "€250 midwife | €100 prenatal care | €180 baby bonus (IKK classic)",
       "hint": "IKK classic offers additional pregnancy benefits, more details in the IKK classic section below.",
       "details": {
-        "hebamme": { "name": "Midwife on-call service", "info": "Up to €250 per pregnancy (IKK classic)" },
-        "vorsorgeSchwangerschaft": { "name": "Prenatal screening (IGeL)", "info": "€100 for toxoplasmosis test, streptococcus, additional ultrasounds" },
-        "mineralstoffe": { "name": "Minerals during pregnancy", "info": "Iron, folic acid & magnesium, covered by IKK classic" },
-        "geburtsvorbereitung": { "name": "Birth preparation courses", "info": "Covered incl. free partner course (Keleya)" },
-        "rueckbildung": { "name": "Postnatal recovery exercises", "info": "Fully covered + €25 bonus via IKK bonus program" },
-        "babyBonus": { "name": "Baby bonus", "info": "€180 in the first year of life via IKK bonus program" },
-        "hausgeburt": { "name": "Home & birth center delivery", "info": "Full coverage for midwife + contribution to operating costs" }
+        "hebamme": {
+          "name": "Midwife on-call service",
+          "info": "Up to €250 per pregnancy (IKK classic)"
+        },
+        "vorsorgeSchwangerschaft": {
+          "name": "Prenatal screening (IGeL)",
+          "info": "€100 for toxoplasmosis test, streptococcus, additional ultrasounds"
+        },
+        "mineralstoffe": {
+          "name": "Minerals during pregnancy",
+          "info": "Iron, folic acid & magnesium, covered by IKK classic"
+        },
+        "geburtsvorbereitung": {
+          "name": "Birth preparation courses",
+          "info": "Covered incl. free partner course (Keleya)"
+        },
+        "rueckbildung": {
+          "name": "Postnatal recovery exercises",
+          "info": "Fully covered + €25 bonus via IKK bonus program"
+        },
+        "babyBonus": {
+          "name": "Baby bonus",
+          "info": "€180 in the first year of life via IKK bonus program"
+        },
+        "hausgeburt": {
+          "name": "Home & birth center delivery",
+          "info": "Full coverage for midwife + contribution to operating costs"
+        }
       }
     }
   },
@@ -134,32 +221,89 @@
     "section2Title": "The Core Benefit: 3,000 EUR for Your Health",
     "section2Intro": "The real benefit is not simply having another insurance plan. The benefit is building a usable health budget for treatments you would otherwise often pay for yourself.",
     "coreValues": {
-      "gesundheitsbudget": { "title": "3,000 EUR Health Budget", "desc": "You are not investing in an abstract tariff, but in usable benefits for Heilpraktiker, glasses, preventive care and more." },
-      "behandlungen": { "title": "Don't Postpone Treatment", "desc": "When you need support, you can use it sooner instead of waiting because of the cost." },
-      "erstattung": { "title": "100% Reimbursement in AP1", "desc": "In the recommended SDK Ambulant 100 plan, you submit invoices and receive reimbursement for insured benefits up to the budgets." },
-      "bonus": { "title": "IKK Bonus as a Boost", "desc": "The bonus is not the plan itself, but the lever that can fully or partially offset your premium depending on the bonus amount." }
+      "gesundheitsbudget": {
+        "title": "3,000 EUR Health Budget",
+        "desc": "You are not investing in an abstract tariff, but in usable benefits for Heilpraktiker, glasses, preventive care and more."
+      },
+      "behandlungen": {
+        "title": "Don't Postpone Treatment",
+        "desc": "When you need support, you can use it sooner instead of waiting because of the cost."
+      },
+      "erstattung": {
+        "title": "100% Reimbursement in AP1",
+        "desc": "In the recommended SDK Ambulant 100 plan, you submit invoices and receive reimbursement for insured benefits up to the budgets."
+      },
+      "bonus": {
+        "title": "IKK Bonus as a Boost",
+        "desc": "The bonus is not the plan itself, but the lever that can fully or partially offset your premium depending on the bonus amount."
+      }
     },
     "hinweis": "Healio is not a health insurance fund. Healio helps you combine the outpatient SDK plan and the IKK classic bonus in a meaningful way.",
     "section3Title": "What Is Typically Covered?",
     "coverage": {
-      "sehhilfen": { "title": "Vision aids (glasses, contact lenses)", "desc": "up to €500" },
-      "augenLaser": { "title": "Eye laser (refractive surgery/LASIK)", "desc": "100% per eye" },
-      "heilpraktiker": { "title": "Heilpraktiker and natural medicine", "desc": "incl. Hufeland directory" },
-      "osteopathie": { "title": "Osteopathy and chiropractic", "desc": "" },
-      "tcm": { "title": "Traditional Chinese Medicine (TCM)", "desc": "" },
-      "vorsorge": { "title": "Preventive examinations and early detection", "desc": "" },
-      "impfungen": { "title": "Vaccinations (STIKO, flu, tick-borne, travel)", "desc": "" },
-      "arzneimittel": { "title": "Medications, remedies and bandages", "desc": "" },
-      "ausland": { "title": "International coverage", "desc": "100%, unlimited trips up to 56 days" },
-      "beratung": { "title": "Medical-psychological counseling service", "desc": "" }
+      "sehhilfen": {
+        "title": "Vision aids (glasses, contact lenses)",
+        "desc": "up to €500"
+      },
+      "augenLaser": {
+        "title": "Eye laser (refractive surgery/LASIK)",
+        "desc": "100% per eye"
+      },
+      "heilpraktiker": {
+        "title": "Heilpraktiker and natural medicine",
+        "desc": "incl. Hufeland directory"
+      },
+      "osteopathie": {
+        "title": "Osteopathy and chiropractic",
+        "desc": ""
+      },
+      "tcm": {
+        "title": "Traditional Chinese Medicine (TCM)",
+        "desc": ""
+      },
+      "vorsorge": {
+        "title": "Preventive examinations and early detection",
+        "desc": ""
+      },
+      "impfungen": {
+        "title": "Vaccinations (STIKO, flu, tick-borne, travel)",
+        "desc": ""
+      },
+      "arzneimittel": {
+        "title": "Medications, remedies and bandages",
+        "desc": ""
+      },
+      "ausland": {
+        "title": "International coverage",
+        "desc": "100%, unlimited trips up to 56 days"
+      },
+      "beratung": {
+        "title": "Medical-psychological counseling service",
+        "desc": ""
+      }
     },
     "section4Title": "How Healio Works, The Clear Process",
     "steps": {
-      "step1": { "title": "Calculate SDK plan", "desc": "You see what the outpatient plan costs for you and which budgets matter for your situation." },
-      "step2": { "title": "Take out outpatient cover", "desc": "The SDK coverage starts with no waiting period. From the start date, you can use insured benefits." },
-      "step3": { "title": "Use your health budget", "desc": "Heilpraktiker, osteopathy, glasses, preventive care or co-payments: submit invoices and get money back." },
-      "step4": { "title": "Optionally switch to IKK classic", "desc": "If you want to use the bonus optimally, you switch to IKK classic. 98% of statutory benefits stay the same." },
-      "step5": { "title": "Recover bonus payments", "desc": "You activate the IKK bonus and can fully or partially offset your premium depending on the bonus amount." }
+      "step1": {
+        "title": "Calculate SDK plan",
+        "desc": "You see what the outpatient plan costs for you and which budgets matter for your situation."
+      },
+      "step2": {
+        "title": "Take out outpatient cover",
+        "desc": "The SDK coverage starts with no waiting period. From the start date, you can use insured benefits."
+      },
+      "step3": {
+        "title": "Use your health budget",
+        "desc": "Heilpraktiker, osteopathy, glasses, preventive care or co-payments: submit invoices and get money back."
+      },
+      "step4": {
+        "title": "Optionally switch to IKK classic",
+        "desc": "If you want to use the bonus optimally, you switch to IKK classic. 98% of statutory benefits stay the same."
+      },
+      "step5": {
+        "title": "Recover bonus payments",
+        "desc": "You activate the IKK bonus and can fully or partially offset your premium depending on the bonus amount."
+      }
     },
     "section5Title": "Example Calculation",
     "exampleCalc": {
@@ -179,11 +323,26 @@
     },
     "section6Title": "Why Choose Healio?",
     "whyHealio": {
-      "ergebnisse": { "title": "Results, not tariffs", "desc": "We show you what you get, not what you should pay." },
-      "begleitung": { "title": "Guidance", "desc": "You won't be left alone." },
-      "klarheit": { "title": "Clarity", "desc": "Everything explained clearly, no insurance jargon." },
-      "ansprechpartner": { "title": "Single point of contact", "desc": "One contact for everything." },
-      "bonusnutzung": { "title": "Strategic bonus usage", "desc": "We help you get the maximum." }
+      "ergebnisse": {
+        "title": "Results, not tariffs",
+        "desc": "We show you what you get, not what you should pay."
+      },
+      "begleitung": {
+        "title": "Guidance",
+        "desc": "You won't be left alone."
+      },
+      "klarheit": {
+        "title": "Clarity",
+        "desc": "Everything explained clearly, no insurance jargon."
+      },
+      "ansprechpartner": {
+        "title": "Single point of contact",
+        "desc": "One contact for everything."
+      },
+      "bonusnutzung": {
+        "title": "Strategic bonus usage",
+        "desc": "We help you get the maximum."
+      }
     }
   },
   "bonusCalculator": {
@@ -191,29 +350,102 @@
     "subtitle": "This is how the IKK classic bonus works: Select your activities and see instantly how much you can get back!",
     "selectActivities": "Select your activities:",
     "activities": {
-      "impfung": { "title": "Vaccination", "desc": "Up to 8x per year", "unit": "vaccination(s)" },
-      "zahn": { "title": "Dental checkup", "desc": "Up to 2x per year", "unit": "visit(s)" },
-      "zahnFrueh": { "title": "Dental screening Z1–Z6", "desc": "For children" },
-      "hautkrebs": { "title": "Skin cancer screening", "desc": "1x per calendar year" },
-      "ultraschall": { "title": "Ultrasound screening", "desc": "Abdominal aortic aneurysm" },
-      "mammographie": { "title": "Mammography screening", "desc": "1x per calendar year" },
-      "mutterschaft": { "title": "Maternity checkup", "desc": "1x per calendar year" },
-      "kind": { "title": "Child checkups (U1–U11)", "desc": "€30 per checkup", "unit": "checkup(s)" },
-      "jugend": { "title": "Youth checkups J1–J2", "desc": "€30 per checkup", "unit": "checkup(s)" },
-      "amblyopie": { "title": "Amblyopia screening (children)", "desc": "Early detection exam" },
-      "lungenkrebs": { "title": "Lung cancer screening", "desc": "New from 04/2026 · 1× per year" },
-      "checkup": { "title": "Health check-up", "desc": "1x per calendar year" },
-      "krebs": { "title": "Cancer screening", "desc": "1x per calendar year" },
-      "darmkrebs": { "title": "Colon cancer screening", "desc": "1x per calendar year" },
-      "outdoorSport": { "title": "Outdoor group sports", "desc": "With qualified instructor" },
-      "rueckbildung": { "title": "Postnatal exercise", "desc": "For women" },
-      "kurs": { "title": "IKK health course", "desc": "1x per year" },
-      "fitness": { "title": "Fitness or sports studio", "desc": "Quality-certified studio" },
-      "sport": { "title": "Sports club / company sports", "desc": "Club or university sports" },
-      "abzeichen": { "title": "German sports badge", "desc": "1x per calendar year" },
-      "leistungsabzeichen": { "title": "Sports federation badge", "desc": "German sports federation" },
-      "bmi": { "title": "BMI in normal range", "desc": "Status value, combine with activity" },
-      "blutdruck": { "title": "Normal blood pressure", "desc": "Status value, combine with activity" }
+      "impfung": {
+        "title": "Vaccination",
+        "desc": "Up to 8x per year",
+        "unit": "vaccination(s)"
+      },
+      "zahn": {
+        "title": "Dental checkup",
+        "desc": "Up to 2x per year",
+        "unit": "visit(s)"
+      },
+      "zahnFrueh": {
+        "title": "Dental screening Z1–Z6",
+        "desc": "For children"
+      },
+      "hautkrebs": {
+        "title": "Skin cancer screening",
+        "desc": "1x per calendar year"
+      },
+      "ultraschall": {
+        "title": "Ultrasound screening",
+        "desc": "Abdominal aortic aneurysm"
+      },
+      "mammographie": {
+        "title": "Mammography screening",
+        "desc": "1x per calendar year"
+      },
+      "mutterschaft": {
+        "title": "Maternity checkup",
+        "desc": "1x per calendar year"
+      },
+      "kind": {
+        "title": "Child checkups (U1–U11)",
+        "desc": "€30 per checkup",
+        "unit": "checkup(s)"
+      },
+      "jugend": {
+        "title": "Youth checkups J1–J2",
+        "desc": "€30 per checkup",
+        "unit": "checkup(s)"
+      },
+      "amblyopie": {
+        "title": "Amblyopia screening (children)",
+        "desc": "Early detection exam"
+      },
+      "lungenkrebs": {
+        "title": "Lung cancer screening",
+        "desc": "New from 04/2026 · 1× per year"
+      },
+      "checkup": {
+        "title": "Health check-up",
+        "desc": "1x per calendar year"
+      },
+      "krebs": {
+        "title": "Cancer screening",
+        "desc": "1x per calendar year"
+      },
+      "darmkrebs": {
+        "title": "Colon cancer screening",
+        "desc": "1x per calendar year"
+      },
+      "outdoorSport": {
+        "title": "Outdoor group sports",
+        "desc": "With qualified instructor"
+      },
+      "rueckbildung": {
+        "title": "Postnatal exercise",
+        "desc": "For women"
+      },
+      "kurs": {
+        "title": "IKK health course",
+        "desc": "1x per year"
+      },
+      "fitness": {
+        "title": "Fitness or sports studio",
+        "desc": "Quality-certified studio"
+      },
+      "sport": {
+        "title": "Sports club / company sports",
+        "desc": "Club or university sports"
+      },
+      "abzeichen": {
+        "title": "German sports badge",
+        "desc": "1x per calendar year"
+      },
+      "leistungsabzeichen": {
+        "title": "Sports federation badge",
+        "desc": "German sports federation"
+      },
+      "bmi": {
+        "title": "BMI in normal range",
+        "desc": "Status value, combine with activity"
+      },
+      "blutdruck": {
+        "title": "Normal blood pressure",
+        "desc": "Status value, combine with activity"
+      }
     },
     "tip": "Tip",
     "max": "max.",
@@ -268,71 +500,71 @@
   },
   "video": {
     "title": "Discover the Benefits in the Video",
-    "subtitle": "In just 2 minutes, learn how the IKK switch bonus lets you get your supplementary insurance effectively for €0.",
+    "subtitle": "In just 2 minutes, learn how the IKK switch bonus lets you get your supplementary insurance effectively from €0.",
     "imageAlt": "Active couple in nature",
     "videoFallback": "Your browser does not support video."
   },
   "testimonials": {
-    "title": "What Our Customers Say",
-    "subtitle": "Real experiences from people who are already using the Healio health budget.",
+    "title": "How the <highlight>health budget</highlight> adds up",
+    "subtitle": "Six example scenarios of how plan benefits and IKK bonuses can be combined. Model calculations based on the plan conditions, not customer reviews.",
     "stats": {
-      "sdk": { "value": "SDK", "label": "On the market since 1926" },
-      "ikk": { "value": "IKK", "label": "3 million members" },
-      "budget": { "value": "€3,000", "label": "Budget in 2 years" },
-      "cost": { "value": "€0", "label": "effective cost" }
+      "sdk": {
+        "value": "SDK",
+        "label": "On the market since 1926"
+      },
+      "ikk": {
+        "value": "IKK",
+        "label": "3 million insured"
+      },
+      "budget": {
+        "value": "3,000 €",
+        "label": "budget over 2 years"
+      },
+      "cost": {
+        "value": "from 0 €",
+        "label": "effective costs possible"
+      }
     },
     "items": {
       "julia": {
-        "name": "Julia S.",
-        "age": "28",
-        "city": "Berlin",
+        "name": "Example: osteopathy series",
         "tag": "Osteopathy",
-        "highlight": "€540 reimbursed",
-        "text": "I've been going to osteopathy for years, but paying €80 per session out of pocket was too much long-term. With Healio, 6 treatments were reimbursed at 90% last year. Together with the IKK bonus, I actually came out ahead. I wish I had known about this sooner!"
+        "highlight": "up to 1,000 € / 2 years",
+        "text": "Paying 80 euros per session yourself adds up quickly. In the Ambulant 100 plan, naturopathic treatments by non-medical practitioners and doctors are reimbursed with up to 1,000 euros over two years. IKK bonuses for check-ups and sports come on top."
       },
       "thomas": {
-        "name": "Thomas & Katrin T.",
-        "age": "34 & 36",
-        "city": "Hamburg",
+        "name": "Example: family",
         "tag": "Family",
-        "highlight": "€1,200 saved",
-        "text": "We signed up with Healio for the whole family: new glasses for our son, my osteopathy after pregnancy, dental cleanings for all four of us and the bonus for the sports club. In one year we received over €1,200 in benefits and effectively pay nothing thanks to the IKK bonus."
+        "highlight": "Budgets per person",
+        "text": "Glasses for the child, osteopathy after pregnancy, dental cleaning via the IKK health account and the sports club bonus: every insured family member has their own budgets, and IKK bonuses apply per person."
       },
       "max": {
-        "name": "Max B.",
-        "age": "24",
-        "city": "Munich",
+        "name": "Example: student life",
         "tag": "Student",
-        "highlight": "Glasses for €0",
-        "text": "As a student, every euro counts. My new glasses cost €380, of which €300 was reimbursed by SDK. Plus €75 IKK bonus for university sports and €30 for the flu shot. My insurance premium is €19 per month. The math really works out."
+        "highlight": "Glasses + sports bonus",
+        "text": "Glasses are subsidised with up to 500 euros every two years in the Ambulant 100 plan. On top come IKK bonuses, for example 75 euros for university sports or a sports club and 15 euros per vaccination. The plan costs 31.64 euros per month at age 30."
       },
       "sandra": {
-        "name": "Sandra M.",
-        "age": "42",
-        "city": "Cologne",
-        "tag": "Heilpraktiker",
-        "highlight": "3 new patients/month",
-        "text": "As a Heilpraktiker, I recommend Healio to my patients. Since then, many can afford longer treatment series that previously failed due to cost. For my practice, it means predictable income, and my patients get the therapy they truly need. A real win-win situation."
+        "name": "Example: treatment series",
+        "tag": "Therapy",
+        "highlight": "Completing therapy",
+        "text": "Many patients break off treatment series because the money runs out. With the budget for naturopathic treatments, longer series can be planned without therapy failing for financial reasons. That is exactly what the health budget is for."
       },
       "andreas": {
-        "name": "Andreas K.",
-        "age": "51",
-        "city": "Frankfurt",
-        "tag": "Glasses wearer",
-        "highlight": "€500 vision aids",
-        "text": "Progressive lenses for €680, of which €500 was reimbursed by SDK. Plus professional dental cleaning twice a year via the IKK health account. I've been publicly insured for 30 years and have never had such good benefits. The switch to IKK took 5 minutes."
+        "name": "Example: varifocal glasses",
+        "tag": "Glasses",
+        "highlight": "up to 500 € / 2 years",
+        "text": "For varifocal glasses costing 680 euros, the Ambulant 100 plan covers up to 500 euros. Professional dental cleaning can additionally be subsidised via the IKK health account."
       },
       "lisa": {
-        "name": "Lisa & Markus F.",
-        "age": "31 & 33",
-        "city": "Stuttgart",
+        "name": "Example: young family",
         "tag": "Young parents",
-        "highlight": "Baby insured immediately",
-        "text": "Our son was born in January and we were able to add him within 2 months without a health check. Midwife follow-up care, osteopathy for the baby and my postnatal recovery courses are all subsidized. And the best part: thanks to the family bonus at IKK, we effectively don't pay anything extra."
+        "highlight": "Newborn cover",
+        "text": "Newborns can be added within two months without a health assessment. Midwife on-call service, minerals during pregnancy and postnatal courses are subsidised via IKK bonuses."
       }
     }
   },
-    "ikkWechsel": {
+  "ikkWechsel": {
     "badge": "Switching health insurance made easy",
     "title": "You stay publicly insured and unlock more bonus",
     "subtitle": "Whether you are with AOK, TK, Barmer or another statutory health insurer: you are not leaving the statutory system. You are switching to the fund that fits the Healio health budget better.",
@@ -342,11 +574,26 @@
     "ctaBonus": "Secure your IKK bonus",
     "ctaTimeline": "Understand the switch timeline in 2 minutes",
     "reassuranceItems": {
-      "system": { "title": "You stay publicly insured", "desc": "This is not a jump into a new system, but a switch within statutory health insurance." },
-      "doctors": { "title": "Doctors and hospitals stay", "desc": "Your GP, specialists, hospitals and therapists do not change because you switch health funds." },
-      "coverage": { "title": "Core coverage remains", "desc": "98% of benefits are defined by law and are the same across all statutory health insurers." },
-      "oldFund": { "title": "Your old fund is informed automatically", "desc": "IKK classic handles cancellation with your previous health insurer. You do not need to call them yourself." },
-      "ongoingTreatments": { "title": "Briefly report ongoing treatments", "desc": "After switching, inform IKK classic once about ongoing treatments. For privacy reasons, these details are not automatically transferred by your previous health insurer." }
+      "system": {
+        "title": "You stay publicly insured",
+        "desc": "This is not a jump into a new system, but a switch within statutory health insurance."
+      },
+      "doctors": {
+        "title": "Doctors and hospitals stay",
+        "desc": "Your GP, specialists, hospitals and therapists do not change because you switch health funds."
+      },
+      "coverage": {
+        "title": "Core coverage remains",
+        "desc": "98% of benefits are defined by law and are the same across all statutory health insurers."
+      },
+      "oldFund": {
+        "title": "Your old fund is informed automatically",
+        "desc": "IKK classic handles cancellation with your previous health insurer. You do not need to call them yourself."
+      },
+      "ongoingTreatments": {
+        "title": "Briefly report ongoing treatments",
+        "desc": "After switching, inform IKK classic once about ongoing treatments. For privacy reasons, these details are not automatically transferred by your previous health insurer."
+      }
     },
     "threeD": {
       "oldFund": "AOK / TK / Barmer",
@@ -378,28 +625,77 @@
     "extrasTitle": "The IKK classic Extras",
     "extrasSubtitle": "Where health insurance funds differ, IKK classic offers more",
     "extras": {
-      "schwangerschaft": { "title": "Pregnancy, over €1,100", "desc": "€250 midwife on-call, €100 prenatal care subsidy, €180 baby bonus, free partner course, minerals included." },
-      "osteopathie": { "title": "Osteopathy, €160/year", "desc": "4 sessions at €40 per calendar year, also for babies and children, no age limit." },
-      "bonus": { "title": "Bonus program, over €700 possible", "desc": "For preventive care, sports and vaccinations. The subsidy option triples your cash bonus, with no cap." },
-      "spartarif": { "title": "Savings plan, up to €600/year back", "desc": "Premium refund if you only use preventive care. Vaccinations, check-ups and cancer screening don't count against you." },
-      "reiseimpfungen": { "title": "Travel vaccinations", "desc": "Yellow fever, Hepatitis A/B, typhoid and more, subsidized via the IKK classic health account." },
-      "gesundheitskurse": { "title": "Health courses, €180/year extra", "desc": "2 courses at €90 per year for yoga, back training, nutrition or stress management. This budget is independent of the bonus program, so it comes on top." },
-      "bonusantrag": { "title": "Bonus application until end of March", "desc": "You have until March 31 of the following year to submit your bonus. No stress, no time pressure, and from 2026, a single activity is already enough." },
-      "umwelt": { "title": "10% for the environment", "desc": "Healio donates 10% to environmental organizations. Health starts in a healthy environment, your switch actively supports environmental protection." }
+      "schwangerschaft": {
+        "title": "Pregnancy, over €1,100",
+        "desc": "€250 midwife on-call, €100 prenatal care subsidy, €180 baby bonus, free partner course, minerals included."
+      },
+      "osteopathie": {
+        "title": "Osteopathy, €160/year",
+        "desc": "4 sessions at €40 per calendar year, also for babies and children, no age limit."
+      },
+      "bonus": {
+        "title": "Bonus program, over €700 possible",
+        "desc": "For preventive care, sports and vaccinations. The subsidy option triples your cash bonus, with no cap."
+      },
+      "spartarif": {
+        "title": "Savings plan, up to €600/year back",
+        "desc": "Premium refund if you only use preventive care. Vaccinations, check-ups and cancer screening don't count against you."
+      },
+      "reiseimpfungen": {
+        "title": "Travel vaccinations",
+        "desc": "Yellow fever, Hepatitis A/B, typhoid and more, subsidized via the IKK classic health account."
+      },
+      "gesundheitskurse": {
+        "title": "Health courses, €180/year extra",
+        "desc": "2 courses at €90 per year for yoga, back training, nutrition or stress management. This budget is independent of the bonus program, so it comes on top."
+      },
+      "bonusantrag": {
+        "title": "Bonus application until end of March",
+        "desc": "You have until March 31 of the following year to submit your bonus. No stress, no time pressure, and from 2026, a single activity is already enough."
+      },
+      "umwelt": {
+        "title": "10% for the environment",
+        "desc": "Healio donates 10% to environmental organizations. Health starts in a healthy environment, your switch actively supports environmental protection."
+      }
     },
     "switchTitle": "How the Switch Works",
     "switchSteps": {
-      "step1": { "title": "Submit application", "desc": "You sign up online with IKK classic. It takes just a few minutes." },
-      "step2": { "title": "IKK handles the rest", "desc": "IKK classic automatically cancels your old health insurance fund for you. You don't need to do anything." },
-      "step3": { "title": "Seamlessly insured", "desc": "After 2 months, you're a member. Your insurance coverage continues without interruption." }
+      "step1": {
+        "title": "Submit application",
+        "desc": "You sign up online with IKK classic. It takes just a few minutes."
+      },
+      "step2": {
+        "title": "IKK handles the rest",
+        "desc": "IKK classic automatically cancels your old health insurance fund for you. You don't need to do anything."
+      },
+      "step3": {
+        "title": "Seamlessly insured",
+        "desc": "After 2 months, you're a member. Your insurance coverage continues without interruption."
+      }
     },
     "timelineTitle": "The switch timeline, as an example",
     "timelineSubtitle": "The order matters: supplementary SDK coverage can start on the selected insurance date. The IKK switch runs in parallel so you can use the bonus afterwards.",
     "timelineSteps": {
-      "sdk": { "label": "May", "title": "Take out the SDK plan", "desc": "You calculate the outpatient plan and complete it online. The start depends on the selected insurance date and acceptance." },
-      "treatment": { "label": "from start", "title": "Use benefits", "desc": "With no waiting period, you can use Heilpraktiker, osteopathy, glasses or preventive care and submit invoices to SDK." },
-      "ikkStart": { "label": "Aug 1", "title": "IKK membership starts", "desc": "If the membership declaration is submitted in May, the regular start after two full calendar months is August 1 in this example." },
-      "bonus": { "label": "afterwards", "title": "Activate the bonus", "desc": "As an IKK member, you can start the bonus or subsidy in the app and use paid supplementary insurance premiums as eligible expenses." }
+      "sdk": {
+        "label": "May",
+        "title": "Take out the SDK plan",
+        "desc": "You calculate the outpatient plan and complete it online. The start depends on the selected insurance date and acceptance."
+      },
+      "treatment": {
+        "label": "from start",
+        "title": "Use benefits",
+        "desc": "With no waiting period, you can use Heilpraktiker, osteopathy, glasses or preventive care and submit invoices to SDK."
+      },
+      "ikkStart": {
+        "label": "Aug 1",
+        "title": "IKK membership starts",
+        "desc": "If the membership declaration is submitted in May, the regular start after two full calendar months is August 1 in this example."
+      },
+      "bonus": {
+        "label": "afterwards",
+        "title": "Activate the bonus",
+        "desc": "As an IKK member, you can start the bonus or subsidy in the app and use paid supplementary insurance premiums as eligible expenses."
+      }
     },
     "timelineFinanceLabel": "Transition period",
     "timelineFinanceTitle": "Covered from the start, bonus follows later",
@@ -451,7 +747,6 @@
   "stickyButton": {
     "ctaCalculate": "Calculate your plan"
   },
-
   "ikkServices": {
     "badge": "Free IKK Extras",
     "title": "Telemedicine & Specialists, free for you",
@@ -460,11 +755,26 @@
       "title": "TeleClinic",
       "badge": "24/7 Online Doctor",
       "desc": "Reach doctors from 60+ specialties around the clock via the app, by video, no waiting room.",
-      "feature1": { "title": "Available 24/7", "desc": "Doctor consultation within 30 minutes, even at night and on weekends" },
-      "feature2": { "title": "60+ specialties", "desc": "From general medicine to dermatology, almost every concern is covered" },
-      "feature3": { "title": "Skin Checker", "desc": "Photo diagnosis for skin changes within 24 hours" },
-      "feature4": { "title": "E-prescription & sick note", "desc": "Electronic prescriptions and sick notes directly to your phone" },
-      "feature5": { "title": "Premium status", "desc": "As an IKK member, you enjoy priority treatment in the app" },
+      "feature1": {
+        "title": "Available 24/7",
+        "desc": "Doctor consultation within 30 minutes, even at night and on weekends"
+      },
+      "feature2": {
+        "title": "60+ specialties",
+        "desc": "From general medicine to dermatology, almost every concern is covered"
+      },
+      "feature3": {
+        "title": "Skin Checker",
+        "desc": "Photo diagnosis for skin changes within 24 hours"
+      },
+      "feature4": {
+        "title": "E-prescription & sick note",
+        "desc": "Electronic prescriptions and sick notes directly to your phone"
+      },
+      "feature5": {
+        "title": "Premium status",
+        "desc": "As an IKK member, you enjoy priority treatment in the app"
+      },
       "priceTag": "Free for IKK members",
       "priceNote": "Simply download the TeleClinic app and register with your IKK insurance number"
     },
@@ -472,10 +782,22 @@
       "title": "BetterDoc",
       "badge": "Specialist search & second opinion",
       "desc": "Need a specialist or unsure about a surgery? BetterDoc finds the best doctor for your case.",
-      "feature1": { "title": "Independent doctor search", "desc": "BetterDoc researches the optimally qualified specialist for your diagnosis" },
-      "feature2": { "title": "Second opinion before surgery", "desc": "Especially for back, knee, and hip, 85% of back surgeries could be avoided" },
-      "feature3": { "title": "Quality-assured", "desc": "Doctors are selected based on medical data and experience values" },
-      "feature4": { "title": "Appointment service", "desc": "BetterDoc can arrange the appointment with the specialist for you" },
+      "feature1": {
+        "title": "Independent doctor search",
+        "desc": "BetterDoc researches the optimally qualified specialist for your diagnosis"
+      },
+      "feature2": {
+        "title": "Second opinion before surgery",
+        "desc": "Especially for back, knee, and hip, 85% of back surgeries could be avoided"
+      },
+      "feature3": {
+        "title": "Quality-assured",
+        "desc": "Doctors are selected based on medical data and experience values"
+      },
+      "feature4": {
+        "title": "Appointment service",
+        "desc": "BetterDoc can arrange the appointment with the specialist for you"
+      },
       "priceTag": "Free & non-binding",
       "priceNote": "Hotline: 0800 444 6 999 (Mon–Fri, 9am–5pm)",
       "videoTitle": "How BetterDoc works, explained in 2 minutes"
@@ -485,16 +807,24 @@
       "desc": "TeleClinic and BetterDoc are an integral part of your IKK classic membership. No surcharge, no waiting, just use them."
     }
   },
-
   "umwelt": {
     "badge": "Healio for the environment",
     "title": "10% for the environment",
     "subtitle": "Health starts in a healthy environment, by switching through Healio, you actively support environmental protection.",
     "headline": "for environmental organizations",
     "desc": "Healio donates 10% of its revenue to environmental organizations. Not because we have to, but because we believe: those who promote health must also protect the environment.",
-    "pillar1": { "title": "Nature conservation", "desc": "Supporting projects to preserve natural habitats" },
-    "pillar2": { "title": "Clean water", "desc": "Promoting initiatives for clean waters and drinking water" },
-    "pillar3": { "title": "Healthy future", "desc": "Investing in a world where health and nature belong together" },
+    "pillar1": {
+      "title": "Nature conservation",
+      "desc": "Supporting projects to preserve natural habitats"
+    },
+    "pillar2": {
+      "title": "Clean water",
+      "desc": "Promoting initiatives for clean waters and drinking water"
+    },
+    "pillar3": {
+      "title": "Healthy future",
+      "desc": "Investing in a world where health and nature belong together"
+    },
     "note": "Donations go directly to selected, certified environmental organizations. Healio acts out of its own conviction, no extra cost for you."
   }
 }

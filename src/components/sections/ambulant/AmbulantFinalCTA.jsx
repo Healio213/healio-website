@@ -13,7 +13,7 @@ const AmbulantFinalCTA = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer });
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (
     <section className="py-24 bg-healio-dark text-white relative overflow-hidden">

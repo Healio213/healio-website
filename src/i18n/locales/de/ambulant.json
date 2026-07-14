@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "Dein <highlight>3.000 Euro</highlight> Gesundheits-<highlight>Budget</highlight>. Effektiv für <highlight>0 Euro</highlight>.",
+    "title": "Dein <highlight>3.000 Euro</highlight> Gesundheits-<highlight>Budget</highlight>. Effektiv ab <highlight>0 Euro</highlight>.",
     "subtitle": "Warum selbst zahlen, wenn es auch anders geht? Bis zu <highlight>3.000 €</highlight> für Heilpraktiker, Brille & Vorsorge, effektiv ab <highlight>0 €</highlight>. Keine Wartezeiten.",
     "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
     "badgeNoWait": "Garantiert ohne Wartezeit",
@@ -23,7 +23,7 @@
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
     "noWait": "Keine Wartezeit – sofort geschützt",
     "fast": "In nur 3 Minuten abgeschlossen",
-    "effective": "Effektiv 0 € dank IKK Bonus",
+    "effective": "Effektiv ab 0 € dank IKK Bonus",
     "akupunktur": "Akupunktur inklusive",
     "osteopathie": "Osteopathie & Massagen inklusive",
     "video": "Sieh im Video, wie es funktioniert"
@@ -40,13 +40,41 @@
       "desc": "Heilpraktiker, Osteopathie, TCM, Chiropraktik, Akupunktur",
       "budget": "Bis zu 1.000 € (alle 2 Jahre) | inkl. Hufelandverzeichnis",
       "details": {
-        "heilpraktikerbehandlungen": { "name": "Heilpraktikerbehandlungen", "info": "Bis zu 1.000 € alle 2 Jahre nach Hufelandverzeichnis", "source": "sdk" },
-        "chiropraktik": { "name": "Chiropraktik", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
-        "osteopathie": { "name": "Osteopathie", "info": "Bis zu 160 €/Jahr (4 Sitzungen à 40 €) über IKK Gesundheitskonto + SDK Zusatzbudget", "source": "both" },
-        "akupunktur": { "name": "Akupunktur", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
-        "tcm": { "name": "Traditionelle Chinesische Medizin (TCM)", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" },
-        "naturheilkunde": { "name": "Naturheilkundliche Behandlungen durch Ärzte", "info": "Erstattung nach GOÄ bis zum 3,5-fachen Satz", "source": "sdk" },
-        "homoeopathie": { "name": "Homöopathie", "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten", "source": "sdk" }
+        "heilpraktikerbehandlungen": {
+          "name": "Heilpraktikerbehandlungen",
+          "info": "Bis zu 1.000 € alle 2 Jahre nach Hufelandverzeichnis",
+          "source": "sdk"
+        },
+        "chiropraktik": {
+          "name": "Chiropraktik",
+          "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten",
+          "source": "sdk"
+        },
+        "osteopathie": {
+          "name": "Osteopathie",
+          "info": "Bis zu 160 €/Jahr (4 Sitzungen à 40 €) über IKK Gesundheitskonto + SDK Zusatzbudget",
+          "source": "both"
+        },
+        "akupunktur": {
+          "name": "Akupunktur",
+          "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten",
+          "source": "sdk"
+        },
+        "tcm": {
+          "name": "Traditionelle Chinesische Medizin (TCM)",
+          "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten",
+          "source": "sdk"
+        },
+        "naturheilkunde": {
+          "name": "Naturheilkundliche Behandlungen durch Ärzte",
+          "info": "Erstattung nach GOÄ bis zum 3,5-fachen Satz",
+          "source": "sdk"
+        },
+        "homoeopathie": {
+          "name": "Homöopathie",
+          "info": "Im Budget Heilpraktiker & Naturheilkunde enthalten",
+          "source": "sdk"
+        }
       }
     },
     "sehhilfen": {
@@ -54,10 +82,26 @@
       "desc": "Brillen, Kontaktlinsen, Sonnenbrillen mit Sehstärke",
       "budget": "Bis zu 500 € (alle 2 Jahre) | LASIK bis 1.000 € je Auge",
       "details": {
-        "brillen": { "name": "Brillen & Brillengläser", "info": "Bis zu 500 € alle 2 Jahre", "source": "sdk" },
-        "kontaktlinsen": { "name": "Kontaktlinsen", "info": "Im Budget Sehhilfen enthalten", "source": "sdk" },
-        "sonnenbrillen": { "name": "Sonnenbrillen mit Sehstärke", "info": "Im Budget Sehhilfen enthalten", "source": "sdk" },
-        "laser": { "name": "Augen-Laser (LASIK/LASEK)", "info": "Bis zu 1.000 € je Auge (einmalig)", "source": "sdk" }
+        "brillen": {
+          "name": "Brillen & Brillengläser",
+          "info": "Bis zu 500 € alle 2 Jahre",
+          "source": "sdk"
+        },
+        "kontaktlinsen": {
+          "name": "Kontaktlinsen",
+          "info": "Im Budget Sehhilfen enthalten",
+          "source": "sdk"
+        },
+        "sonnenbrillen": {
+          "name": "Sonnenbrillen mit Sehstärke",
+          "info": "Im Budget Sehhilfen enthalten",
+          "source": "sdk"
+        },
+        "laser": {
+          "name": "Augen-Laser (LASIK/LASEK)",
+          "info": "Bis zu 1.000 € je Auge (einmalig)",
+          "source": "sdk"
+        }
       }
     },
     "vorsorge": {
@@ -65,12 +109,36 @@
       "desc": "Krebsvorsorge, Schwangerschaftsvorsorge, Check-ups, Impfungen",
       "budget": "Bis zu 500 € (alle 2 Jahre) | inkl. Präventionskurse",
       "details": {
-        "krebsvorsorge": { "name": "Krebsvorsorge-Untersuchungen", "info": "Erweiterte Vorsorge über GKV-Leistung hinaus", "source": "sdk" },
-        "schwangerschaft": { "name": "Schwangerschaftsvorsorge", "info": "z. B. Toxoplasmose-Test, Streptokokken-Test, zusätzliche Ultraschall-Untersuchungen", "source": "sdk" },
-        "checkups": { "name": "Gesundheits-Check-ups", "info": "Erweiterte Laborwerte und Diagnostik", "source": "sdk" },
-        "stiko": { "name": "STIKO-Impfungen", "info": "Alle empfohlenen Standardimpfungen", "source": "ikk" },
-        "reiseimpfungen": { "name": "Reiseimpfungen", "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus, Zuschuss über IKK Gesundheitskonto", "source": "ikk" },
-        "praeventionskurse": { "name": "Präventionskurse", "info": "z. B. Yoga, Rückentraining, Stressbewältigung, Zuschuss über IKK", "source": "ikk" }
+        "krebsvorsorge": {
+          "name": "Krebsvorsorge-Untersuchungen",
+          "info": "Erweiterte Vorsorge über GKV-Leistung hinaus",
+          "source": "sdk"
+        },
+        "schwangerschaft": {
+          "name": "Schwangerschaftsvorsorge",
+          "info": "z. B. Toxoplasmose-Test, Streptokokken-Test, zusätzliche Ultraschall-Untersuchungen",
+          "source": "sdk"
+        },
+        "checkups": {
+          "name": "Gesundheits-Check-ups",
+          "info": "Erweiterte Laborwerte und Diagnostik",
+          "source": "sdk"
+        },
+        "stiko": {
+          "name": "STIKO-Impfungen",
+          "info": "Alle empfohlenen Standardimpfungen",
+          "source": "ikk"
+        },
+        "reiseimpfungen": {
+          "name": "Reiseimpfungen",
+          "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus, Zuschuss über IKK Gesundheitskonto",
+          "source": "ikk"
+        },
+        "praeventionskurse": {
+          "name": "Präventionskurse",
+          "info": "z. B. Yoga, Rückentraining, Stressbewältigung, Zuschuss über IKK",
+          "source": "ikk"
+        }
       }
     },
     "arzneimittel": {
@@ -78,11 +146,31 @@
       "desc": "Gesetzliche Zuzahlungen für Arznei-, Heil- und Hilfsmittel",
       "budget": "Bis zu 1.000 € (alle 2 Jahre) | plus Auslandsschutz inklusive",
       "details": {
-        "arzneimittel": { "name": "Arzneimittel-Zuzahlungen", "info": "Erstattung der gesetzlichen Zuzahlung (5–10 € pro Medikament)", "source": "sdk" },
-        "heilmittel": { "name": "Heilmittel-Zuzahlungen", "info": "z. B. Physiotherapie, Ergotherapie, Logopädie", "source": "sdk" },
-        "hilfsmittel": { "name": "Hilfsmittel-Zuzahlungen", "info": "z. B. Einlagen, Bandagen, Kompressionsstrümpfe", "source": "sdk" },
-        "ausland": { "name": "Auslandsschutz", "info": "100 % Erstattung, beliebig viele Reisen bis 56 Tage", "source": "sdk" },
-        "beratung": { "name": "Medizinisch-psychologischer Beratungsservice", "info": "Telefonische Beratung inklusive", "source": "sdk" }
+        "arzneimittel": {
+          "name": "Arzneimittel-Zuzahlungen",
+          "info": "Erstattung der gesetzlichen Zuzahlung (5–10 € pro Medikament)",
+          "source": "sdk"
+        },
+        "heilmittel": {
+          "name": "Heilmittel-Zuzahlungen",
+          "info": "z. B. Physiotherapie, Ergotherapie, Logopädie",
+          "source": "sdk"
+        },
+        "hilfsmittel": {
+          "name": "Hilfsmittel-Zuzahlungen",
+          "info": "z. B. Einlagen, Bandagen, Kompressionsstrümpfe",
+          "source": "sdk"
+        },
+        "ausland": {
+          "name": "Auslandsschutz",
+          "info": "100 % Erstattung, beliebig viele Reisen bis 56 Tage",
+          "source": "sdk"
+        },
+        "beratung": {
+          "name": "Medizinisch-psychologischer Beratungsservice",
+          "info": "Telefonische Beratung inklusive",
+          "source": "sdk"
+        }
       }
     },
     "schwangerschaft": {
@@ -91,15 +179,60 @@
       "budget": "250 € Hebamme | 100 € Mineralstoffe | 100 € Vorsorge (IKK) + 600 € SDK",
       "hint": "Gesamtrechnung: 555 € (IKK classic) + 600 € (SDK Zusatzversicherung) = über 1.150 € Schwangerschafts-Budget.",
       "details": {
-        "hebamme": { "name": "Hebammen-Rufbereitschaft", "info": "Bis zu 250 € je Schwangerschaft", "source": "ikk", "amount": "250 €" },
-        "mineralstoffe": { "name": "Mineralstoffe in der Schwangerschaft", "info": "Eisen, Folsäure & Magnesium, bis zu 100 € pro Kalenderjahr", "source": "ikk", "amount": "100 €" },
-        "vorsorgeSchwangerschaftIkk": { "name": "Ergänzende Vorsorge", "info": "100 € Zuschuss für Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie", "source": "ikk", "amount": "100 €" },
-        "rueckbildung": { "name": "Rückbildungsgymnastik", "info": "Volle Kostenübernahme + 75 € Bonus (mit Zusatzversicherung)", "source": "ikk", "amount": "75 €" },
-        "mutterschaftsbonus": { "name": "Mutterschaftsvorsorge Bonus", "info": "30 € je Vorsorgeuntersuchung (mit Zusatzversicherung)", "source": "ikk", "amount": "30 €" },
-        "geburtsvorbereitung": { "name": "Geburtsvorbereitungskurse", "info": "Volle Kostenübernahme inkl. Partner-Kurs (Keleya)", "source": "ikk", "amount": "kostenlos" },
-        "hausgeburt": { "name": "Haus- & Geburtshausgeburt", "info": "Volle Kostenübernahme für Hebamme + Zuschuss Betriebskosten", "source": "ikk", "amount": "kostenlos" },
-        "sdkVorsorge": { "name": "Vorsorge-Budget", "info": "500 € alle 2 Jahre für Vorsorge inkl. Schwangerschafts-IGeL", "source": "sdk", "amount": "500 €" },
-        "sdkSchwangerschaft": { "name": "Schwangerschaftsvorsorge extra", "info": "Zusätzlich 100 € für erweiterte Schwangerschaftsvorsorge (IGeL-Leistungen)", "source": "sdk", "amount": "100 €" }
+        "hebamme": {
+          "name": "Hebammen-Rufbereitschaft",
+          "info": "Bis zu 250 € je Schwangerschaft",
+          "source": "ikk",
+          "amount": "250 €"
+        },
+        "mineralstoffe": {
+          "name": "Mineralstoffe in der Schwangerschaft",
+          "info": "Eisen, Folsäure & Magnesium, bis zu 100 € pro Kalenderjahr",
+          "source": "ikk",
+          "amount": "100 €"
+        },
+        "vorsorgeSchwangerschaftIkk": {
+          "name": "Ergänzende Vorsorge",
+          "info": "100 € Zuschuss für Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie",
+          "source": "ikk",
+          "amount": "100 €"
+        },
+        "rueckbildung": {
+          "name": "Rückbildungsgymnastik",
+          "info": "Volle Kostenübernahme + 75 € Bonus (mit Zusatzversicherung)",
+          "source": "ikk",
+          "amount": "75 €"
+        },
+        "mutterschaftsbonus": {
+          "name": "Mutterschaftsvorsorge Bonus",
+          "info": "30 € je Vorsorgeuntersuchung (mit Zusatzversicherung)",
+          "source": "ikk",
+          "amount": "30 €"
+        },
+        "geburtsvorbereitung": {
+          "name": "Geburtsvorbereitungskurse",
+          "info": "Volle Kostenübernahme inkl. Partner-Kurs (Keleya)",
+          "source": "ikk",
+          "amount": "kostenlos"
+        },
+        "hausgeburt": {
+          "name": "Haus- & Geburtshausgeburt",
+          "info": "Volle Kostenübernahme für Hebamme + Zuschuss Betriebskosten",
+          "source": "ikk",
+          "amount": "kostenlos"
+        },
+        "sdkVorsorge": {
+          "name": "Vorsorge-Budget",
+          "info": "500 € alle 2 Jahre für Vorsorge inkl. Schwangerschafts-IGeL",
+          "source": "sdk",
+          "amount": "500 €"
+        },
+        "sdkSchwangerschaft": {
+          "name": "Schwangerschaftsvorsorge extra",
+          "info": "Zusätzlich 100 € für erweiterte Schwangerschaftsvorsorge (IGeL-Leistungen)",
+          "source": "sdk",
+          "amount": "100 €"
+        }
       }
     }
   },
@@ -136,32 +269,89 @@
     "section2Title": "Der Kernnutzen: 3.000 EUR für deine Gesundheit",
     "section2Intro": "Der eigentliche Nutzen ist nicht, dass du eine weitere Versicherung hast. Der Nutzen ist, dass du dir ein echtes Gesundheitsbudget aufbaust und Behandlungen nutzen kannst, die du sonst oft aus eigener Tasche zahlen würdest.",
     "coreValues": {
-      "gesundheitsbudget": { "title": "3.000 EUR Gesundheitsbudget", "desc": "Du investierst nicht abstrakt in einen Tarif, sondern in nutzbare Leistungen für Heilpraktiker, Brille, Vorsorge und mehr." },
-      "behandlungen": { "title": "Behandlungen nicht aufschieben", "desc": "Wenn du Unterstützung brauchst, kannst du sie eher nutzen, statt wegen der Kosten zu warten." },
-      "erstattung": { "title": "100 % Erstattung im AP1", "desc": "Im empfohlenen SDK-Tarif Ambulant 100 reichst du Rechnungen ein und bekommst versicherte Leistungen bis zu den Budgets erstattet." },
-      "bonus": { "title": "IKK-Bonus als Verstärker", "desc": "Der Bonus ist nicht der Tarif selbst, sondern der Hebel, der deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen kann." }
+      "gesundheitsbudget": {
+        "title": "3.000 EUR Gesundheitsbudget",
+        "desc": "Du investierst nicht abstrakt in einen Tarif, sondern in nutzbare Leistungen für Heilpraktiker, Brille, Vorsorge und mehr."
+      },
+      "behandlungen": {
+        "title": "Behandlungen nicht aufschieben",
+        "desc": "Wenn du Unterstützung brauchst, kannst du sie eher nutzen, statt wegen der Kosten zu warten."
+      },
+      "erstattung": {
+        "title": "100 % Erstattung im AP1",
+        "desc": "Im empfohlenen SDK-Tarif Ambulant 100 reichst du Rechnungen ein und bekommst versicherte Leistungen bis zu den Budgets erstattet."
+      },
+      "bonus": {
+        "title": "IKK-Bonus als Verstärker",
+        "desc": "Der Bonus ist nicht der Tarif selbst, sondern der Hebel, der deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen kann."
+      }
     },
     "hinweis": "Healio ist keine Krankenkasse. Healio hilft dir, den ambulanten SDK-Tarif und den IKK-classic-Bonus sinnvoll zusammenzubringen.",
     "section3Title": "Was ist typischerweise abgedeckt?",
     "coverage": {
-      "sehhilfen": { "title": "Sehhilfen (Brillen, Kontaktlinsen)", "desc": "bis 500 Euro" },
-      "augenLaser": { "title": "Augen-Laser (Refraktive Chirurgie/LASIK)", "desc": "100% je Auge" },
-      "heilpraktiker": { "title": "Heilpraktiker und Naturheilverfahren", "desc": "inkl. Hufelandverzeichnis" },
-      "osteopathie": { "title": "Osteopathie und Chiropraktik", "desc": "" },
-      "tcm": { "title": "Traditionelle Chinesische Medizin (TCM)", "desc": "" },
-      "vorsorge": { "title": "Vorsorgeuntersuchungen und Früherkennung", "desc": "" },
-      "impfungen": { "title": "Schutzimpfungen (STIKO, Grippe, Zecken, Reise)", "desc": "" },
-      "arzneimittel": { "title": "Arznei-, Heil- und Verbandmittel", "desc": "" },
-      "ausland": { "title": "Auslandsschutz", "desc": "100%, beliebig viele Reisen bis 56 Tage" },
-      "beratung": { "title": "Medizinisch-Psychologischer Beratungsservice", "desc": "" }
+      "sehhilfen": {
+        "title": "Sehhilfen (Brillen, Kontaktlinsen)",
+        "desc": "bis 500 Euro"
+      },
+      "augenLaser": {
+        "title": "Augen-Laser (Refraktive Chirurgie/LASIK)",
+        "desc": "100% je Auge"
+      },
+      "heilpraktiker": {
+        "title": "Heilpraktiker und Naturheilverfahren",
+        "desc": "inkl. Hufelandverzeichnis"
+      },
+      "osteopathie": {
+        "title": "Osteopathie und Chiropraktik",
+        "desc": ""
+      },
+      "tcm": {
+        "title": "Traditionelle Chinesische Medizin (TCM)",
+        "desc": ""
+      },
+      "vorsorge": {
+        "title": "Vorsorgeuntersuchungen und Früherkennung",
+        "desc": ""
+      },
+      "impfungen": {
+        "title": "Schutzimpfungen (STIKO, Grippe, Zecken, Reise)",
+        "desc": ""
+      },
+      "arzneimittel": {
+        "title": "Arznei-, Heil- und Verbandmittel",
+        "desc": ""
+      },
+      "ausland": {
+        "title": "Auslandsschutz",
+        "desc": "100%, beliebig viele Reisen bis 56 Tage"
+      },
+      "beratung": {
+        "title": "Medizinisch-Psychologischer Beratungsservice",
+        "desc": ""
+      }
     },
     "section4Title": "So funktioniert Healio - der klare Ablauf",
     "steps": {
-      "step1": { "title": "SDK-Tarif berechnen", "desc": "Du siehst, was der ambulante Tarif für dich kostet und welche Budgets für dich relevant sind." },
-      "step2": { "title": "Ambulanten Tarif abschließen", "desc": "Der SDK-Schutz startet ohne Wartezeit. Ab Versicherungsbeginn kannst du versicherte Leistungen nutzen." },
-      "step3": { "title": "Gesundheit nutzen", "desc": "Heilpraktiker, Osteopathie, Brille, Vorsorge oder Zuzahlungen: Du reichst Rechnungen ein und bekommst Geld zurück." },
-      "step4": { "title": "Optional IKK classic wechseln", "desc": "Wenn du den Bonus optimal nutzen möchtest, wechselst du zur IKK classic. 98 % der gesetzlichen Leistungen bleiben gleich." },
-      "step5": { "title": "Bonus zurückholen", "desc": "Du aktivierst den IKK-Bonus und kannst damit deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen." }
+      "step1": {
+        "title": "SDK-Tarif berechnen",
+        "desc": "Du siehst, was der ambulante Tarif für dich kostet und welche Budgets für dich relevant sind."
+      },
+      "step2": {
+        "title": "Ambulanten Tarif abschließen",
+        "desc": "Der SDK-Schutz startet ohne Wartezeit. Ab Versicherungsbeginn kannst du versicherte Leistungen nutzen."
+      },
+      "step3": {
+        "title": "Gesundheit nutzen",
+        "desc": "Heilpraktiker, Osteopathie, Brille, Vorsorge oder Zuzahlungen: Du reichst Rechnungen ein und bekommst Geld zurück."
+      },
+      "step4": {
+        "title": "Optional IKK classic wechseln",
+        "desc": "Wenn du den Bonus optimal nutzen möchtest, wechselst du zur IKK classic. 98 % der gesetzlichen Leistungen bleiben gleich."
+      },
+      "step5": {
+        "title": "Bonus zurückholen",
+        "desc": "Du aktivierst den IKK-Bonus und kannst damit deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen."
+      }
     },
     "section5Title": "Beispielrechnung",
     "exampleCalc": {
@@ -181,11 +371,26 @@
     },
     "section6Title": "Warum über Healio?",
     "whyHealio": {
-      "ergebnisse": { "title": "Ergebnisse statt Tarife", "desc": "Wir zeigen dir, was du bekommst - nicht, was du zahlen sollst." },
-      "begleitung": { "title": "Begleitung", "desc": "Du wirst nicht allein gelassen." },
-      "klarheit": { "title": "Klarheit", "desc": "Alles verständlich erklärt, kein Versicherungsdeutsch." },
-      "ansprechpartner": { "title": "Zentraler Ansprechpartner", "desc": "Ein Kontakt für alles." },
-      "bonusnutzung": { "title": "Strategische Bonusnutzung", "desc": "Wir helfen dir, das Maximum rauszuholen." }
+      "ergebnisse": {
+        "title": "Ergebnisse statt Tarife",
+        "desc": "Wir zeigen dir, was du bekommst - nicht, was du zahlen sollst."
+      },
+      "begleitung": {
+        "title": "Begleitung",
+        "desc": "Du wirst nicht allein gelassen."
+      },
+      "klarheit": {
+        "title": "Klarheit",
+        "desc": "Alles verständlich erklärt, kein Versicherungsdeutsch."
+      },
+      "ansprechpartner": {
+        "title": "Zentraler Ansprechpartner",
+        "desc": "Ein Kontakt für alles."
+      },
+      "bonusnutzung": {
+        "title": "Strategische Bonusnutzung",
+        "desc": "Wir helfen dir, das Maximum rauszuholen."
+      }
     }
   },
   "bonusCalculator": {
@@ -193,29 +398,102 @@
     "subtitle": "So funktioniert der IKK classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!",
     "selectActivities": "Wähle deine Aktivitäten:",
     "activities": {
-      "impfung": { "title": "Schutzimpfung", "desc": "Bis zu 8x pro Jahr", "unit": "Impfung(en)" },
-      "zahn": { "title": "Zahnvorsorge", "desc": "Bis zu 2x pro Jahr", "unit": "Besuch(e)" },
-      "zahnFrueh": { "title": "Zahnärztl. Früherkennung Z1–Z6", "desc": "Für Kinder" },
-      "hautkrebs": { "title": "Hautkrebsvorsorge", "desc": "1x pro Kalenderjahr" },
-      "ultraschall": { "title": "Ultraschallscreening", "desc": "Bauchaortenaneurysmen" },
-      "mammographie": { "title": "Mammographie-Screening", "desc": "1x pro Kalenderjahr" },
-      "mutterschaft": { "title": "Mutterschaftsvorsorge", "desc": "1x pro Kalenderjahr" },
-      "kind": { "title": "U-Untersuchungen (U1–U11)", "desc": "30 € je Untersuchung", "unit": "Untersuchung(en)" },
-      "jugend": { "title": "Jugenduntersuchungen J1–J2", "desc": "30 € je Untersuchung", "unit": "Untersuchung(en)" },
-      "amblyopie": { "title": "Amblyopiescreening Kinder", "desc": "Früherkennungsuntersuchung" },
-      "lungenkrebs": { "title": "Lungenkrebs-Früherkennung", "desc": "Neu ab 04/2026 · 1× pro Jahr" },
-      "checkup": { "title": "Gesundheits-Check-up", "desc": "1x pro Kalenderjahr" },
-      "krebs": { "title": "Krebsfrüherkennung", "desc": "1x pro Kalenderjahr" },
-      "darmkrebs": { "title": "Darmkrebsvorsorge", "desc": "1x pro Kalenderjahr" },
-      "outdoorSport": { "title": "Gemeinschaftssport im Freien", "desc": "Mit qualifiziertem Übungsleiter" },
-      "rueckbildung": { "title": "Rückbildungsgymnastik", "desc": "Für Frauen" },
-      "kurs": { "title": "IKK-Gesundheitskurs", "desc": "1x pro Jahr" },
-      "fitness": { "title": "Fitness- oder Sportstudio", "desc": "Qualitätsgesichertes Studio" },
-      "sport": { "title": "Sportverein / Betriebssport", "desc": "Vereins- oder Hochschulsport" },
-      "abzeichen": { "title": "Deutsches Sportabzeichen", "desc": "1x pro Kalenderjahr" },
-      "leistungsabzeichen": { "title": "Leistungsabzeichen Sportverband", "desc": "Eines deutschen Sportverbandes" },
-      "bmi": { "title": "BMI im Normalbereich", "desc": "Statuswert, mit Aktivität kombinieren" },
-      "blutdruck": { "title": "Blutdruck normal", "desc": "Statuswert, mit Aktivität kombinieren" }
+      "impfung": {
+        "title": "Schutzimpfung",
+        "desc": "Bis zu 8x pro Jahr",
+        "unit": "Impfung(en)"
+      },
+      "zahn": {
+        "title": "Zahnvorsorge",
+        "desc": "Bis zu 2x pro Jahr",
+        "unit": "Besuch(e)"
+      },
+      "zahnFrueh": {
+        "title": "Zahnärztl. Früherkennung Z1–Z6",
+        "desc": "Für Kinder"
+      },
+      "hautkrebs": {
+        "title": "Hautkrebsvorsorge",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "ultraschall": {
+        "title": "Ultraschallscreening",
+        "desc": "Bauchaortenaneurysmen"
+      },
+      "mammographie": {
+        "title": "Mammographie-Screening",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "mutterschaft": {
+        "title": "Mutterschaftsvorsorge",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "kind": {
+        "title": "U-Untersuchungen (U1–U11)",
+        "desc": "30 € je Untersuchung",
+        "unit": "Untersuchung(en)"
+      },
+      "jugend": {
+        "title": "Jugenduntersuchungen J1–J2",
+        "desc": "30 € je Untersuchung",
+        "unit": "Untersuchung(en)"
+      },
+      "amblyopie": {
+        "title": "Amblyopiescreening Kinder",
+        "desc": "Früherkennungsuntersuchung"
+      },
+      "lungenkrebs": {
+        "title": "Lungenkrebs-Früherkennung",
+        "desc": "Neu ab 04/2026 · 1× pro Jahr"
+      },
+      "checkup": {
+        "title": "Gesundheits-Check-up",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "krebs": {
+        "title": "Krebsfrüherkennung",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "darmkrebs": {
+        "title": "Darmkrebsvorsorge",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "outdoorSport": {
+        "title": "Gemeinschaftssport im Freien",
+        "desc": "Mit qualifiziertem Übungsleiter"
+      },
+      "rueckbildung": {
+        "title": "Rückbildungsgymnastik",
+        "desc": "Für Frauen"
+      },
+      "kurs": {
+        "title": "IKK-Gesundheitskurs",
+        "desc": "1x pro Jahr"
+      },
+      "fitness": {
+        "title": "Fitness- oder Sportstudio",
+        "desc": "Qualitätsgesichertes Studio"
+      },
+      "sport": {
+        "title": "Sportverein / Betriebssport",
+        "desc": "Vereins- oder Hochschulsport"
+      },
+      "abzeichen": {
+        "title": "Deutsches Sportabzeichen",
+        "desc": "1x pro Kalenderjahr"
+      },
+      "leistungsabzeichen": {
+        "title": "Leistungsabzeichen Sportverband",
+        "desc": "Eines deutschen Sportverbandes"
+      },
+      "bmi": {
+        "title": "BMI im Normalbereich",
+        "desc": "Statuswert, mit Aktivität kombinieren"
+      },
+      "blutdruck": {
+        "title": "Blutdruck normal",
+        "desc": "Statuswert, mit Aktivität kombinieren"
+      }
     },
     "tip": "Tipp",
     "max": "max.",
@@ -270,71 +548,71 @@
   },
   "video": {
     "title": "Jetzt Vorteile im <highlight>Video</highlight> entdecken",
-    "subtitle": "In nur 2 Minuten erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>effektiv für 0 €</highlight> bekommst.",
+    "subtitle": "In nur 2 Minuten erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>effektiv ab 0 €</highlight> bekommst.",
     "imageAlt": "Aktives Paar in der Natur",
     "videoFallback": "Ihr Browser unterstützt kein Video."
   },
   "testimonials": {
-    "title": "Das sagen unsere <highlight>Kunden</highlight>",
-    "subtitle": "Echte Erfahrungen von Menschen, die das <highlight>Healio Gesundheitsbudget</highlight> bereits nutzen.",
+    "title": "So rechnet sich das <highlight>Gesundheitsbudget</highlight>",
+    "subtitle": "Sechs Beispiel-Szenarien, wie sich Tarifleistungen und IKK-Boni kombinieren lassen. Modellhafte Rechnungen auf Basis der Tarifbedingungen, keine Kundenbewertungen.",
     "stats": {
-      "sdk": { "value": "SDK", "label": "Seit 1926 am Markt" },
-      "ikk": { "value": "IKK", "label": "3 Mio. Versicherte" },
-      "budget": { "value": "3.000 €", "label": "Budget in 2 Jahren" },
-      "cost": { "value": "0 €", "label": "effektive Kosten" }
+      "sdk": {
+        "value": "SDK",
+        "label": "Seit 1926 am Markt"
+      },
+      "ikk": {
+        "value": "IKK",
+        "label": "3 Mio. Versicherte"
+      },
+      "budget": {
+        "value": "3.000 €",
+        "label": "Budget in 2 Jahren"
+      },
+      "cost": {
+        "value": "ab 0 €",
+        "label": "effektive Kosten möglich"
+      }
     },
     "items": {
       "julia": {
-        "name": "Julia S.",
-        "age": "28",
-        "city": "Berlin",
+        "name": "Beispiel: Osteopathie-Serie",
         "tag": "Osteopathie",
-        "highlight": "540 € erstattet",
-        "text": "Ich gehe seit Jahren zur Osteopathie, aber 80 Euro pro Sitzung selbst zahlen war auf Dauer zu viel. Mit Healio wurden letztes Jahr 6 Behandlungen zu 90% erstattet. Zusammen mit dem IKK Bonus habe ich unterm Strich sogar plus gemacht. Hätte ich das mal früher gewusst!"
+        "highlight": "bis 1.000 € / 2 Jahre",
+        "text": "80 Euro pro Sitzung selbst zahlen summiert sich schnell. Im Tarif Ambulant 100 werden Naturheilverfahren bei Heilpraktikern und Ärzten (GebüH, Hufelandverzeichnis) mit bis zu 1.000 Euro in zwei Jahren erstattet. IKK-Boni für Vorsorge und Sport kommen obendrauf."
       },
       "thomas": {
-        "name": "Thomas & Katrin T.",
-        "age": "34 & 36",
-        "city": "Hamburg",
+        "name": "Beispiel: Familie",
         "tag": "Familie",
-        "highlight": "1.200 € gespart",
-        "text": "Wir haben Healio für die ganze Familie abgeschlossen: Neue Brille für unseren Sohn, meine Osteopathie nach der Schwangerschaft, Zahnreinigung für alle vier und der Bonus für den Sportverein. In einem Jahr haben wir über 1.200 Euro an Leistungen bekommen und zahlen durch den IKK Bonus effektiv nichts dafür."
+        "highlight": "Budgets pro Person",
+        "text": "Brille fürs Kind, Osteopathie nach der Schwangerschaft, Zahnreinigung über das IKK Gesundheitskonto und der Bonus für den Sportverein: Jedes versicherte Familienmitglied hat eigene Budgets, und die IKK-Boni gibt es pro Person."
       },
       "max": {
-        "name": "Max B.",
-        "age": "24",
-        "city": "München",
+        "name": "Beispiel: Studium",
         "tag": "Student",
-        "highlight": "Brille für 0 €",
-        "text": "Als Student zählt wirklich jeder Euro. Meine neue Brille hat 380 Euro gekostet, davon wurden 300 Euro von der SDK erstattet. Dazu kommen noch 75 Euro IKK Bonus für den Hochschulsport und 30 Euro für die Grippeimpfung. Mein Versicherungsbeitrag liegt bei 19 Euro im Monat. Die Rechnung geht voll auf."
+        "highlight": "Brille + Sport-Bonus",
+        "text": "Sehhilfen werden im Tarif Ambulant 100 mit bis zu 500 Euro alle zwei Jahre bezuschusst. Dazu kommen IKK-Boni, zum Beispiel 75 Euro Zuschuss für Hochschulsport oder Sportverein und 15 Euro je Schutzimpfung. Der Tarif kostet für 30-Jährige 31,64 Euro im Monat."
       },
       "sandra": {
-        "name": "Sandra M.",
-        "age": "42",
-        "city": "Köln",
-        "tag": "Heilpraktikerin",
-        "highlight": "3 neue Patienten/Monat",
-        "text": "Als Heilpraktikerin empfehle ich Healio meinen Patienten. Seitdem können sich viele längere Behandlungsserien leisten, die vorher am Geld gescheitert sind. Für meine Praxis bedeutet das planbare Einnahmen, und meine Patienten bekommen die Therapie, die sie wirklich brauchen. Eine echte Win-Win-Situation."
+        "name": "Beispiel: Behandlungsserie",
+        "tag": "Therapie",
+        "highlight": "Therapie durchziehen",
+        "text": "Viele Patienten brechen Behandlungsserien ab, weil das Geld fehlt. Mit dem Budget für Naturheilverfahren lassen sich längere Serien planen, ohne dass die Therapie am Geld scheitert. Genau dafür ist das Gesundheitsbudget gedacht."
       },
       "andreas": {
-        "name": "Andreas K.",
-        "age": "51",
-        "city": "Frankfurt",
-        "tag": "Brillenträger",
-        "highlight": "500 € Sehhilfen",
-        "text": "Gleitsichtbrille für 680 Euro, davon 500 Euro von der SDK erstattet. Dazu die professionelle Zahnreinigung zweimal im Jahr über das IKK Gesundheitskonto. Ich bin seit 30 Jahren gesetzlich versichert und hatte noch nie so gute Leistungen. Der Wechsel zur IKK war in 5 Minuten erledigt."
+        "name": "Beispiel: Gleitsichtbrille",
+        "tag": "Sehhilfen",
+        "highlight": "bis 500 € / 2 Jahre",
+        "text": "Bei einer Gleitsichtbrille für 680 Euro übernimmt der Tarif Ambulant 100 bis zu 500 Euro. Die professionelle Zahnreinigung lässt sich zusätzlich über das IKK Gesundheitskonto bezuschussen."
       },
       "lisa": {
-        "name": "Lisa & Markus F.",
-        "age": "31 & 33",
-        "city": "Stuttgart",
+        "name": "Beispiel: Junge Familie",
         "tag": "Junge Eltern",
-        "highlight": "Baby sofort versichert",
-        "text": "Unser Sohn wurde im Januar geboren und wir konnten ihn innerhalb von 2 Monaten ohne Gesundheitsprüfung mitversichern. Die Hebammen-Nachsorge, Osteopathie fürs Baby und meine Rückbildungskurse werden alle bezuschusst. Und das Beste: Durch den Familienbonus bei der IKK zahlen wir effektiv nichts drauf."
+        "highlight": "Nachversicherung fürs Baby",
+        "text": "Neugeborene können innerhalb von zwei Monaten ohne Gesundheitsprüfung mitversichert werden. Hebammen-Rufbereitschaft, Mineralstoffe in der Schwangerschaft und Rückbildung werden über die IKK-Boni bezuschusst."
       }
     }
   },
-    "ikkWechsel": {
+  "ikkWechsel": {
     "badge": "Krankenkassenwechsel leicht gemacht",
     "title": "Du bleibst gesetzlich versichert und holst dir <highlight>mehr Bonus</highlight>",
     "subtitle": "Ob AOK, TK, Barmer oder eine andere gesetzliche Krankenkasse: Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, die besser zum Healio-Gesundheitsbudget passt.",
@@ -344,11 +622,26 @@
     "ctaBonus": "IKK-Bonus sichern",
     "ctaTimeline": "In 2 Minuten Wechselstrecke verstehen",
     "reassuranceItems": {
-      "system": { "title": "Du bleibst gesetzlich versichert", "desc": "Es ist kein Sprung in ein neues System, sondern ein Wechsel innerhalb der gesetzlichen Krankenversicherung." },
-      "doctors": { "title": "Ärzte und Kliniken bleiben", "desc": "Hausarzt, Fachärzte, Krankenhäuser und Therapeuten ändern sich durch den Kassenwechsel nicht." },
-      "coverage": { "title": "Die Grundversorgung bleibt", "desc": "98 % der Leistungen sind gesetzlich geregelt und bei allen gesetzlichen Krankenkassen gleich." },
-      "oldFund": { "title": "Die alte Kasse wird automatisch informiert", "desc": "Die IKK classic übernimmt die Kündigung deiner bisherigen Krankenkasse. Du musst dort nicht selbst anrufen." },
-      "ongoingTreatments": { "title": "Laufende Behandlungen kurz melden", "desc": "Informiere die IKK classic nach dem Wechsel einmal über laufende Behandlungen. Aus Datenschutzgründen werden diese Informationen nicht automatisch von deiner alten Kasse übertragen." }
+      "system": {
+        "title": "Du bleibst gesetzlich versichert",
+        "desc": "Es ist kein Sprung in ein neues System, sondern ein Wechsel innerhalb der gesetzlichen Krankenversicherung."
+      },
+      "doctors": {
+        "title": "Ärzte und Kliniken bleiben",
+        "desc": "Hausarzt, Fachärzte, Krankenhäuser und Therapeuten ändern sich durch den Kassenwechsel nicht."
+      },
+      "coverage": {
+        "title": "Die Grundversorgung bleibt",
+        "desc": "98 % der Leistungen sind gesetzlich geregelt und bei allen gesetzlichen Krankenkassen gleich."
+      },
+      "oldFund": {
+        "title": "Die alte Kasse wird automatisch informiert",
+        "desc": "Die IKK classic übernimmt die Kündigung deiner bisherigen Krankenkasse. Du musst dort nicht selbst anrufen."
+      },
+      "ongoingTreatments": {
+        "title": "Laufende Behandlungen kurz melden",
+        "desc": "Informiere die IKK classic nach dem Wechsel einmal über laufende Behandlungen. Aus Datenschutzgründen werden diese Informationen nicht automatisch von deiner alten Kasse übertragen."
+      }
     },
     "threeD": {
       "oldFund": "AOK / TK / Barmer",
@@ -380,28 +673,77 @@
     "extrasTitle": "Die Extras der IKK classic",
     "extrasSubtitle": "Dort, wo sich Krankenkassen unterscheiden, bietet die IKK classic mehr",
     "extras": {
-      "schwangerschaft": { "title": "Schwangerschaft, über 1.100 €", "desc": "250 € Hebammen-Rufbereitschaft, 100 € Vorsorge-Zuschuss, 180 € Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive." },
-      "osteopathie": { "title": "Osteopathie, 160 €/Jahr", "desc": "4 Sitzungen à 40 € pro Kalenderjahr, auch für Babys und Kinder, ohne Altersbegrenzung." },
-      "bonus": { "title": "Bonusprogramm, über 700 € möglich", "desc": "Für Vorsorge, Sport und Impfungen. Die Zuschuss-Option verdreifacht deinen Geldbonus, ohne Obergrenze." },
-      "spartarif": { "title": "Spartarif, bis 600 €/Jahr zurück", "desc": "Beitragsrückerstattung, wenn du nur Vorsorge nutzt. Impfungen, Check-ups und Krebsvorsorge zählen nicht gegen dich." },
-      "reiseimpfungen": { "title": "Reiseimpfungen", "desc": "Gelbfieber, Hepatitis A/B, Typhus u. v. m., Zuschuss über das Gesundheitskonto der IKK classic." },
-      "gesundheitskurse": { "title": "Gesundheitskurse, 180 €/Jahr extra", "desc": "2 Kurse à 90 € pro Jahr für Yoga, Rückentraining, Ernährung oder Stressbewältigung. Dieses Budget ist unabhängig vom Bonusprogramm, kommt also on top." },
-      "bonusantrag": { "title": "Bonusantrag bis Ende März", "desc": "Du hast bis zum 31. März des Folgejahres Zeit, deinen Bonus einzureichen. Kein Stress, kein Zeitdruck, und ab 2026 reicht schon eine einzige Maßnahme." },
-      "umwelt": { "title": "10 % für die Umwelt", "desc": "Healio spendet 10 % an Umweltverbände. Gesundheit beginnt in einer intakten Umwelt, mit deinem Wechsel unterstützt du aktiv den Umweltschutz." }
+      "schwangerschaft": {
+        "title": "Schwangerschaft, über 1.100 €",
+        "desc": "250 € Hebammen-Rufbereitschaft, 100 € Vorsorge-Zuschuss, 180 € Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive."
+      },
+      "osteopathie": {
+        "title": "Osteopathie, 160 €/Jahr",
+        "desc": "4 Sitzungen à 40 € pro Kalenderjahr, auch für Babys und Kinder, ohne Altersbegrenzung."
+      },
+      "bonus": {
+        "title": "Bonusprogramm, über 700 € möglich",
+        "desc": "Für Vorsorge, Sport und Impfungen. Die Zuschuss-Option verdreifacht deinen Geldbonus, ohne Obergrenze."
+      },
+      "spartarif": {
+        "title": "Spartarif, bis 600 €/Jahr zurück",
+        "desc": "Beitragsrückerstattung, wenn du nur Vorsorge nutzt. Impfungen, Check-ups und Krebsvorsorge zählen nicht gegen dich."
+      },
+      "reiseimpfungen": {
+        "title": "Reiseimpfungen",
+        "desc": "Gelbfieber, Hepatitis A/B, Typhus u. v. m., Zuschuss über das Gesundheitskonto der IKK classic."
+      },
+      "gesundheitskurse": {
+        "title": "Gesundheitskurse, 180 €/Jahr extra",
+        "desc": "2 Kurse à 90 € pro Jahr für Yoga, Rückentraining, Ernährung oder Stressbewältigung. Dieses Budget ist unabhängig vom Bonusprogramm, kommt also on top."
+      },
+      "bonusantrag": {
+        "title": "Bonusantrag bis Ende März",
+        "desc": "Du hast bis zum 31. März des Folgejahres Zeit, deinen Bonus einzureichen. Kein Stress, kein Zeitdruck, und ab 2026 reicht schon eine einzige Maßnahme."
+      },
+      "umwelt": {
+        "title": "10 % für die Umwelt",
+        "desc": "Healio spendet 10 % an Umweltverbände. Gesundheit beginnt in einer intakten Umwelt, mit deinem Wechsel unterstützt du aktiv den Umweltschutz."
+      }
     },
     "switchTitle": "So funktioniert der Wechsel",
     "switchSteps": {
-      "step1": { "title": "Antrag stellen", "desc": "Du meldest dich online bei der IKK classic an. Das dauert wenige Minuten." },
-      "step2": { "title": "IKK erledigt den Rest", "desc": "Die IKK classic kündigt deine alte Kasse automatisch für dich. Du musst nichts tun." },
-      "step3": { "title": "Nahtlos versichert", "desc": "Nach 2 Monaten bist du Mitglied. Dein Versicherungsschutz läuft durchgehend weiter." }
+      "step1": {
+        "title": "Antrag stellen",
+        "desc": "Du meldest dich online bei der IKK classic an. Das dauert wenige Minuten."
+      },
+      "step2": {
+        "title": "IKK erledigt den Rest",
+        "desc": "Die IKK classic kündigt deine alte Kasse automatisch für dich. Du musst nichts tun."
+      },
+      "step3": {
+        "title": "Nahtlos versichert",
+        "desc": "Nach 2 Monaten bist du Mitglied. Dein Versicherungsschutz läuft durchgehend weiter."
+      }
     },
     "timelineTitle": "Die Wechselstrecke im Beispiel",
     "timelineSubtitle": "Wichtig ist die Reihenfolge: Der SDK-Zusatzschutz kann direkt zum gewählten Versicherungsbeginn starten. Der IKK-Wechsel läuft parallel, damit du den Bonus anschließend nutzen kannst.",
     "timelineSteps": {
-      "sdk": { "label": "Mai", "title": "Ambulanten Tarif abschließen", "desc": "Du berechnest den ambulanten Tarif und schließt ihn online ab. Der Start richtet sich nach dem gewählten Versicherungsbeginn und der Annahme." },
-      "treatment": { "label": "ab Start", "title": "Leistungen nutzen", "desc": "Ohne Wartezeit kannst du Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen und Rechnungen bei der SDK einreichen." },
-      "ikkStart": { "label": "1. August", "title": "IKK-Mitgliedschaft startet", "desc": "Geht die Mitgliedserklärung im Mai ein, ist der reguläre Start nach zwei vollen Kalendermonaten im Beispiel der 1. August." },
-      "bonus": { "label": "danach", "title": "Bonus aktivieren", "desc": "Als IKK-Mitglied kannst du Bonus oder Zuschuss in der App starten und gezahlte Beiträge zur Zusatzversicherung als Zuschussleistung nutzen." }
+      "sdk": {
+        "label": "Mai",
+        "title": "Ambulanten Tarif abschließen",
+        "desc": "Du berechnest den ambulanten Tarif und schließt ihn online ab. Der Start richtet sich nach dem gewählten Versicherungsbeginn und der Annahme."
+      },
+      "treatment": {
+        "label": "ab Start",
+        "title": "Leistungen nutzen",
+        "desc": "Ohne Wartezeit kannst du Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen und Rechnungen bei der SDK einreichen."
+      },
+      "ikkStart": {
+        "label": "1. August",
+        "title": "IKK-Mitgliedschaft startet",
+        "desc": "Geht die Mitgliedserklärung im Mai ein, ist der reguläre Start nach zwei vollen Kalendermonaten im Beispiel der 1. August."
+      },
+      "bonus": {
+        "label": "danach",
+        "title": "Bonus aktivieren",
+        "desc": "Als IKK-Mitglied kannst du Bonus oder Zuschuss in der App starten und gezahlte Beiträge zur Zusatzversicherung als Zuschussleistung nutzen."
+      }
     },
     "timelineFinanceLabel": "Übergangszeit",
     "timelineFinanceTitle": "Ab Start geschützt, danach Bonus nutzen",
@@ -453,7 +795,6 @@
   "stickyButton": {
     "ctaCalculate": "Tarif berechnen"
   },
-
   "ikkServices": {
     "badge": "Kostenlose IKK-Extras",
     "title": "Telemedizin & Spezialisten, <highlight>kostenlos</highlight> für dich",
@@ -462,11 +803,26 @@
       "title": "TeleClinic",
       "badge": "24/7 Online-Arzt",
       "desc": "Per App erreichst du rund um die Uhr Fachärzte aus über 60 Bereichen, per Video, ohne Wartezimmer.",
-      "feature1": { "title": "24/7 verfügbar", "desc": "Arztgespräch innerhalb von 30 Minuten, auch nachts und am Wochenende" },
-      "feature2": { "title": "60+ Fachrichtungen", "desc": "Von Allgemeinmedizin bis Dermatologie, fast jedes Anliegen wird abgedeckt" },
-      "feature3": { "title": "Skin Checker", "desc": "Foto-Diagnose für Hautveränderungen innerhalb von 24 Stunden" },
-      "feature4": { "title": "E-Rezept & eAU", "desc": "Elektronische Rezepte und Krankschreibungen direkt aufs Handy" },
-      "feature5": { "title": "Premium-Status", "desc": "Als IKK-Mitglied genießt du bevorzugte Behandlung in der App" },
+      "feature1": {
+        "title": "24/7 verfügbar",
+        "desc": "Arztgespräch innerhalb von 30 Minuten, auch nachts und am Wochenende"
+      },
+      "feature2": {
+        "title": "60+ Fachrichtungen",
+        "desc": "Von Allgemeinmedizin bis Dermatologie, fast jedes Anliegen wird abgedeckt"
+      },
+      "feature3": {
+        "title": "Skin Checker",
+        "desc": "Foto-Diagnose für Hautveränderungen innerhalb von 24 Stunden"
+      },
+      "feature4": {
+        "title": "E-Rezept & eAU",
+        "desc": "Elektronische Rezepte und Krankschreibungen direkt aufs Handy"
+      },
+      "feature5": {
+        "title": "Premium-Status",
+        "desc": "Als IKK-Mitglied genießt du bevorzugte Behandlung in der App"
+      },
       "priceTag": "Kostenlos für IKK-Mitglieder",
       "priceNote": "Einfach TeleClinic-App herunterladen und mit IKK-Versichertennummer registrieren"
     },
@@ -474,10 +830,22 @@
       "title": "BetterDoc",
       "badge": "Spezialistensuche & Zweitmeinung",
       "desc": "Du brauchst einen Spezialisten oder bist unsicher vor einer OP? BetterDoc findet den besten Arzt für dein Anliegen.",
-      "feature1": { "title": "Unabhängige Arztsuche", "desc": "BetterDoc recherchiert den optimal qualifizierten Spezialisten für deine Diagnose" },
-      "feature2": { "title": "Zweitmeinung vor OPs", "desc": "Besonders bei Rücken, Knie und Hüfte, 85 % der Rücken-OPs wären vermeidbar" },
-      "feature3": { "title": "Qualitätsgesichert", "desc": "Ärzte werden anhand medizinischer Daten und Erfahrungswerte ausgewählt" },
-      "feature4": { "title": "Terminservice", "desc": "BetterDoc übernimmt auf Wunsch die Terminvereinbarung beim Spezialisten" },
+      "feature1": {
+        "title": "Unabhängige Arztsuche",
+        "desc": "BetterDoc recherchiert den optimal qualifizierten Spezialisten für deine Diagnose"
+      },
+      "feature2": {
+        "title": "Zweitmeinung vor OPs",
+        "desc": "Besonders bei Rücken, Knie und Hüfte, 85 % der Rücken-OPs wären vermeidbar"
+      },
+      "feature3": {
+        "title": "Qualitätsgesichert",
+        "desc": "Ärzte werden anhand medizinischer Daten und Erfahrungswerte ausgewählt"
+      },
+      "feature4": {
+        "title": "Terminservice",
+        "desc": "BetterDoc übernimmt auf Wunsch die Terminvereinbarung beim Spezialisten"
+      },
       "priceTag": "Kostenlos & unverbindlich",
       "priceNote": "Hotline: 0800 444 6 999 (Mo–Fr, 9–17 Uhr)",
       "videoTitle": "So funktioniert BetterDoc, in 2 Minuten erklärt"
@@ -487,16 +855,24 @@
       "desc": "TeleClinic und BetterDoc sind fester Bestandteil deiner IKK-classic-Mitgliedschaft. Kein Aufpreis, keine Wartezeit, einfach nutzen."
     }
   },
-
   "umwelt": {
     "badge": "Healio für die Umwelt",
     "title": "<highlight>10 %</highlight> für die Umwelt",
     "subtitle": "Gesundheit beginnt in einer <highlight>intakten Umwelt</highlight>, mit deinem Wechsel über Healio unterstützt du aktiv den <highlight>Umweltschutz</highlight>.",
     "headline": "für Umweltverbände",
     "desc": "Healio spendet 10 % seiner Einnahmen an Umweltverbände. Nicht weil wir müssen, sondern weil wir überzeugt sind: Wer Gesundheit fördert, muss auch die Umwelt schützen.",
-    "pillar1": { "title": "Naturschutz", "desc": "Unterstützung von Projekten zum Erhalt natürlicher Lebensräume" },
-    "pillar2": { "title": "Sauberes Wasser", "desc": "Förderung von Initiativen für saubere Gewässer und Trinkwasser" },
-    "pillar3": { "title": "Gesunde Zukunft", "desc": "Investition in eine Welt, in der Gesundheit und Natur zusammengehören" },
+    "pillar1": {
+      "title": "Naturschutz",
+      "desc": "Unterstützung von Projekten zum Erhalt natürlicher Lebensräume"
+    },
+    "pillar2": {
+      "title": "Sauberes Wasser",
+      "desc": "Förderung von Initiativen für saubere Gewässer und Trinkwasser"
+    },
+    "pillar3": {
+      "title": "Gesunde Zukunft",
+      "desc": "Investition in eine Welt, in der Gesundheit und Natur zusammengehören"
+    },
     "note": "Die Spenden gehen direkt an ausgewählte, zertifizierte Umweltorganisationen. Healio handelt aus eigener Überzeugung, ohne Aufpreis für dich."
   }
 }

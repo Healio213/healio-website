@@ -41,10 +41,10 @@ const ACTIVITY_DEFS = [
 
 // ctaOverride: { href, label } ersetzt den SDK-Abschluss-CTA, z.B. auf /zahn
 // (dort soll der Button zur Tarif-Weiche scrollen statt zur SDK-Strecke).
-const AmbulantBonusCalculator = ({ ctaOverride }) => {
+const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const calculatorUrl = buildSdkUrl({ ref: referrer });
+  const calculatorUrl = buildSdkUrl({ ref: referrer, tarifTypes });
   const ikkLink = IKK_LINK;
 
   const handleOverrideClick = (e) => {

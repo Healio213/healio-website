@@ -13,7 +13,7 @@ const AmbulantHero = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer });
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" aria-labelledby="hero-heading">

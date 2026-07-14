@@ -15,7 +15,7 @@ const nudgeItems = [
 const AmbulantConversionNudge = () => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer });
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (
     <section className="relative overflow-hidden border-b border-emerald-100/70 bg-gradient-to-br from-white via-emerald-50/70 to-white py-8 md:py-14">

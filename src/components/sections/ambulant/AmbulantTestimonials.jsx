@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Star, TrendingUp, Heart, Glasses, Baby, GraduationCap, Stethoscope } from 'lucide-react';
+import { TrendingUp, Heart, Glasses, Baby, GraduationCap, Stethoscope } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const testimonialKeys = ['julia', 'thomas', 'max', 'sandra', 'andreas', 'lisa'];
@@ -14,14 +14,6 @@ const testimonialIcons = {
   andreas: Glasses,
   lisa: Baby,
 };
-const testimonialInitials = {
-  julia: 'JS',
-  thomas: 'TK',
-  max: 'MB',
-  sandra: 'SM',
-  andreas: 'AK',
-  lisa: 'LM',
-};
 
 const statKeys = ['sdk', 'ikk', 'budget', 'cost'];
 
@@ -31,13 +23,10 @@ const AmbulantTestimonials = () => {
   const testimonials = useMemo(() => testimonialKeys.map(key => ({
     key,
     name: t(`testimonials.items.${key}.name`),
-    age: t(`testimonials.items.${key}.age`),
-    city: t(`testimonials.items.${key}.city`),
     tag: t(`testimonials.items.${key}.tag`),
     highlight: t(`testimonials.items.${key}.highlight`),
     text: t(`testimonials.items.${key}.text`),
     icon: testimonialIcons[key],
-    initials: testimonialInitials[key],
   })), [t]);
 
   const stats = useMemo(() => statKeys.map(key => ({
@@ -100,28 +89,13 @@ const AmbulantTestimonials = () => {
                     </span>
                   </div>
 
-                  {/* Stars */}
-                  <div className="flex space-x-0.5 mb-3">
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index} className="w-4 h-4 fill-[#FBBF24] text-[#FBBF24]" />
-                    ))}
-                  </div>
+                  {/* Szenario-Titel */}
+                  <p className="font-bold text-gray-900 mb-3">{item.name}</p>
 
-                  {/* Quote */}
-                  <p className="text-gray-600 relative z-10 mb-6 text-[15px] leading-relaxed">
-                    "{item.text}"
+                  {/* Beschreibung */}
+                  <p className="text-gray-600 relative z-10 text-[15px] leading-relaxed">
+                    {item.text}
                   </p>
-                </div>
-
-                {/* Author */}
-                <div className="border-t border-gray-100 pt-4 flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-healio-primary text-white flex items-center justify-center font-bold text-sm mr-3 flex-shrink-0">
-                    {item.initials}
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 text-sm">{item.name}</p>
-                    <p className="text-xs text-gray-400">{item.age} Jahre, {item.city}</p>
-                  </div>
                 </div>
               </motion.div>
             );
