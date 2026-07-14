@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Effektiv für 0 €.",
-    "subtitle": "ZahnUpgrade ab 5 € im Monat. In Kombination mit dem IKK classic Bonus finanziert sich die Zahnzusatzversicherung komplett selbst. Stiftung Warentest: SEHR GUT (0,8).",
-    "ikkNote": "<strong>Effektiv 0 € dank IKK Bonus:</strong> Der IKK classic Bonus (über 300 € pro Jahr, steuerfrei) kann die Beiträge vollständig ausgleichen. Keine Wartezeiten, bis zu 3 fehlende Zähne mitversicherbar.",
+    "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
+    "subtitle": "ZahnUpgrade ab 5 € im Monat. Der IKK classic Bonus kann den Beitrag bis zu 100 % refinanzieren, wie viel genau, prüfen wir individuell mit dir. Stiftung Warentest: SEHR GUT (0,8).",
+    "ikkNote": "<strong>Dein Beitrag kann sich komplett refinanzieren:</strong> Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Je nach Bonus gleicht das den Beitrag bis zu 100 % aus, rechne es dir unten direkt aus. Keine Wartezeiten, bis zu 3 fehlende Zähne mitversicherbar.",
     "ctaCalculate": "Tarif berechnen",
     "ctaBenefits": "Leistungen ansehen",
     "heroImageAlt": "Professionelle Zahnarztpraxis"
@@ -10,6 +10,47 @@
   "siegel": {
     "title": "Ausgezeichnet von unabhängigen Testern",
     "alt": "Qualitätssiegel: Franke & Bornberg FFF+, Focus Money Höchste Kundenzufriedenheit, Focus Money Höchste Weiterempfehlung, Stiftung Warentest SEHR GUT (0,8)"
+  },
+  "insurerChoice": {
+    "badge": "Sofortschutz und Vorsorge",
+    "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
+    "intro": "Fast alle glauben: Wenn der Zahnarzt schon eine Behandlung angeraten hat, sei der Zug abgefahren. Das ist falsch. Es ist eine Schande, dass Menschen auf tausenden Euro Zahnarztkosten sitzen bleiben, nur weil ihnen niemand sagt, dass es auch jetzt noch eine Lösung gibt. Bei Healio findest du für beide Situationen den passenden Schutz.",
+    "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
+    "sofort": {
+      "answer": "Ja, eine Behandlung ist angeraten oder läuft schon",
+      "label": "Sofortschutz für den Ernstfall",
+      "insurer": "die Bayerische",
+      "tariff": "Zahntarif + Baustein ZAHN Sofort",
+      "text": "Mit dem Baustein ZAHN Sofort gibt dir die Bayerische bis zu 1.500 EUR Zuschuss für eine bereits angeratene oder begonnene Behandlung (750 EUR pro Kalenderjahr, zusätzlich zum Festzuschuss deiner Krankenkasse). Entscheidend ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt.",
+      "bullets": [
+        "Bis zu 1.500 EUR Zuschuss für angeratene und laufende Behandlungen",
+        "Sofortschutz ohne Wartezeit, der Zahntarif läuft danach für alles Neue weiter",
+        "Wichtig: erst abschließen, dann Rechnung erhalten"
+      ],
+      "cta": "Beitrag berechnen und abschließen",
+      "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet."
+    },
+    "vorsorge": {
+      "answer": "Nein, seit über 2 Jahren nichts angeraten",
+      "label": "Starke Vorsorge, bevor etwas ansteht",
+      "insurer": "UKV (Union Krankenversicherung)",
+      "tariff": "ZahnPRIVAT",
+      "text": "Wenn dein Zahnarzt in den letzten 2 Jahren keine Behandlung angeraten hat, sicherst du dir mit ZahnPRIVAT hohe Erstattungen für Zahnersatz, Zahnbehandlung und professionelle Zahnreinigung. Drei Tarifstufen, damit der Schutz zu deinem Budget passt.",
+      "bullets": [
+        "Drei Tarifstufen zur Auswahl",
+        "Zahnersatz, Zahnbehandlung und Prophylaxe",
+        "Online-Abschluss in wenigen Minuten"
+      ],
+      "cta": "Tarife ansehen und online abschließen",
+      "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Wähle dort den Bereich Zahn."
+    },
+    "ikk": {
+      "badge": "bis zu 100 %",
+      "title": "Und der Beitrag? Der kann sich über den IKK Bonus komplett refinanzieren.",
+      "text": "Egal für welchen Weg du dich entscheidest: Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Wie viel du herausholst, ist individuell und lässt sich vorab prüfen. Je nach Bonus ist bis zu 100 % Refinanzierung deines Beitrags möglich. Rechne es dir direkt aus.",
+      "cta": "IKK Bonus jetzt berechnen"
+    },
+    "disclaimer": "Die Annahme richtet sich nach den Gesundheitsfragen und Annahmerichtlinien des jeweiligen Versicherers."
   },
   "concept": {
     "title": "ZahnUpgrade 90+ – Bis zu 100 % Erstattung",

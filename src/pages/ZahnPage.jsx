@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import DentalBenefits from '@/components/sections/DentalBenefits';
 import DentalConcept from '@/components/sections/DentalConcept';
+import DentalInsurerChoice from '@/components/sections/DentalInsurerChoice';
 import Testimonials from '@/components/sections/Testimonials';
 import Faq from '@/components/sections/Faq';
 import DentalContactForm from '@/components/sections/DentalContactForm';
@@ -127,6 +128,8 @@ const ZahnPage = () => {
           </div>
         </section>
         </FadeInUp>
+
+        <FadeInUp><DentalInsurerChoice /></FadeInUp>
 
         <FadeInUp><DentalConcept /></FadeInUp>
         <FadeInUp><DentalBenefits /></FadeInUp>

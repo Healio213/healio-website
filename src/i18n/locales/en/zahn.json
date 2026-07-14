@@ -1,8 +1,8 @@
 {
   "hero": {
-    "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Effectively for €0.",
-    "subtitle": "DentalUpgrade from €5 per month. Combined with the IKK classic bonus, dental supplementary insurance pays for itself entirely. Stiftung Warentest: VERY GOOD (0.8).",
-    "ikkNote": "<strong>Effectively €0 thanks to IKK bonus:</strong> The IKK classic bonus (over €300 per year, tax-free) can fully offset the premiums. No waiting periods, up to 3 missing teeth insurable.",
+    "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Your IKK bonus helps pay the premium.",
+    "subtitle": "DentalUpgrade from €5 per month. The IKK classic bonus can refinance up to 100% of the premium, and we check your individual potential with you. Stiftung Warentest: VERY GOOD (0.8).",
+    "ikkNote": "<strong>Your premium can fully refinance itself:</strong> IKK classic rewards health-conscious behaviour with a strong bonus programme. Depending on your bonus, it offsets up to 100% of the premium. Calculate yours below. No waiting periods, up to 3 missing teeth insurable.",
     "ctaCalculate": "Calculate your plan",
     "ctaBenefits": "View benefits",
     "heroImageAlt": "Professional dental practice"
@@ -10,6 +10,47 @@
   "siegel": {
     "title": "Awarded by independent testers",
     "alt": "Quality seals: Franke & Bornberg FFF+, Focus Money Highest Customer Satisfaction, Focus Money Highest Recommendation, Stiftung Warentest VERY GOOD (0.8)"
+  },
+  "insurerChoice": {
+    "badge": "Immediate cover and prevention",
+    "title": "Need dental work? It is not too late for insurance.",
+    "intro": "Almost everyone believes that once your dentist has recommended treatment, the ship has sailed. That is wrong. It is a disgrace that people end up paying thousands of euros in dental bills simply because nobody tells them there is still a solution. At Healio you will find the right cover for both situations.",
+    "question": "One question decides: Has your dentist recommended or started a treatment within the last 2 years?",
+    "sofort": {
+      "answer": "Yes, treatment has been recommended or is already underway",
+      "label": "Immediate cover for urgent cases",
+      "insurer": "die Bayerische",
+      "tariff": "Dental tariff + ZAHN Sofort module",
+      "text": "With the ZAHN Sofort module, die Bayerische adds up to €1,500 towards a treatment that has already been recommended or started (€750 per calendar year, on top of the subsidy from your statutory health insurance). Timing is what matters: you must sign up before your dentist issues the invoice.",
+      "bullets": [
+        "Up to €1,500 towards recommended and ongoing treatments",
+        "Immediate protection without waiting periods, the dental tariff then continues for everything new",
+        "Important: sign up first, receive the invoice afterwards"
+      ],
+      "cta": "Calculate premium and sign up",
+      "note": "You will be redirected to the online calculator of die Bayerische."
+    },
+    "vorsorge": {
+      "answer": "No, nothing recommended in the past 2 years",
+      "label": "Strong prevention before anything comes up",
+      "insurer": "UKV (Union Krankenversicherung)",
+      "tariff": "ZahnPRIVAT",
+      "text": "If your dentist has not recommended any treatment in the past 2 years, ZahnPRIVAT gives you high reimbursements for dentures, dental treatment and professional teeth cleaning. Three tariff levels, so the cover fits your budget.",
+      "bullets": [
+        "Three tariff levels to choose from",
+        "Dentures, dental treatment and prophylaxis",
+        "Online sign-up in just a few minutes"
+      ],
+      "cta": "View tariffs and sign up online",
+      "note": "You will be redirected to the online application of Versicherungskammer (UKV). Select the dental section there."
+    },
+    "ikk": {
+      "badge": "up to 100 %",
+      "title": "And the premium? The IKK bonus can fully refinance it.",
+      "text": "Whichever path you choose: IKK classic rewards health-conscious behaviour with a strong bonus programme. How much you get back is individual and can be checked in advance. Depending on your bonus, up to 100 % of your premium can be refinanced. Calculate it right away.",
+      "cta": "Calculate your IKK bonus now"
+    },
+    "disclaimer": "Acceptance is subject to the health questions and underwriting guidelines of the respective insurer."
   },
   "concept": {
     "title": "DentalUpgrade 90+ – Up to 100% Reimbursement",
