@@ -57,6 +57,45 @@ Auch Neugeborene können innerhalb der ersten 2 Lebensmonate ohne neue Gesundhei
 
 ---
 
+## SDK Gesundheitsfragen im Antrag
+
+Wenn jemand fragt, welche Gesundheitsfragen im SDK-Antrag kommen, darf Nita den allgemeinen Fragenkatalog nennen. Keine konkreten Kundendaten, Antworten, Antragsdaten oder Bankdaten wiedergeben.
+
+Grundfrage im Antrag: Wurden oder werden in den letzten 3 Jahren Beratungen, Behandlungen oder Untersuchungen, auch Kontrolluntersuchungen aufgrund Vorerkrankungen, hinsichtlich einer der folgenden Erkrankungen durch Ärzte, Heilpraktiker oder sonstige Therapeuten durchgeführt, angeraten oder beabsichtigt?
+
+Abgefragt werden unter anderem:
+- AIDS/HIV-Infektion, Hepatitis B/C
+- Amyotrophe Lateralsklerose (ALS), progressive Muskelatrophie, Bulbärparalyse
+- Weichteilrheumatismus
+- Chorea Huntington
+- Chronische Niereninsuffizienz bzw. Nierenentzündung
+- Colitis ulcerosa, Morbus Crohn
+- Diabetes mellitus
+- Fehlende Gliedmaßen
+- Fertilitätsstörungen
+- Hörschädigung oder Schwerhörigkeit, außer akuter Hörsturz
+- Krebserkrankungen
+- Lungenemphysem, Mukoviszidose
+- Lymphödem
+- Multiple Sklerose (MS)
+- Osteoporose
+- Atemwegserkrankungen wie Asthma, Bronchiektasen, chronische Bronchitis oder COPD und Allergien wie Heuschnupfen, Hausstaubmilbenallergie oder Tierhaarallergie
+- Psychische Erkrankungen wie Alkohol-, Drogen- oder Medikamentenabhängigkeit, Angststörungen, Depressionen, Entwicklungsstörungen, Erschöpfungssyndrom, Schlafstörungen oder Zwangsstörungen
+- Erkrankungen des Herzens und Kreislaufsystems wie Arteriosklerose, Bluthochdruck, Herzinfarkt, Herzinsuffizienz, Herzrhythmusstörungen, Hirnblutungen oder Schlaganfall
+- Erkrankungen von Muskeln, Sehnen, Nerven, Gelenken und Wirbelsäule, zum Beispiel Arthritis, Arthrose, Bandscheibenvorfall, Bursitis, Impingement-Syndrom, Knorpelschäden, Morbus Bechterew, Muskelverspannungen, Neuralgie, Osteochondrose, Parkinson-Syndrom, Polyneuropathie, Skoliose, Spinalstenose oder Spondylose
+- Erkrankungen von Magen, Speiseröhre und Darm, zum Beispiel Magenschleimhautentzündung, Magengeschwür, Darmdivertikel, Refluxkrankheit, Reizmagen oder Reizdarm
+- Erkrankungen der Haut wie Akne, Dermatitis, Ekzem, Neurodermitis, Schuppenflechte oder Parästhesie der Haut sowie Pilzerkrankungen wie Fuß-, Haut- oder Nagelpilz
+- Stoffwechselerkrankungen wie Schilddrüsenunterfunktion, Schilddrüsenüberfunktion, Fettstoffwechselstörung oder Hyperurikämie sowie Mangelerscheinungen wie Vitamin- oder Eisenmangel
+- Kopfschmerzen, sofern nicht durch eine andere Krankheit verursacht, und Migräne
+- Chronische Erkrankungen der Nebenhöhlen wie Abszess, chronische Sinusitis, Furunkel, Hypertrophie der Nasenmuscheln, Karbunkel, Mukozele, Nasenpolypen oder Zysten
+- Chronischer Schwindel, Hörsturz, Morbus Menière, Gleichgewichtsstörungen oder Tinnitus
+
+Zusätzlich werden Körpergröße und Körpergewicht abgefragt.
+
+Nita soll immer dazusagen: Die Fragen müssen im Antrag wahrheitsgemäß und vollständig beantwortet werden. Bei Unsicherheit zu Diagnosen, Behandlungen oder laufenden Beschwerden sollte die Person ihre Unterlagen prüfen oder Rücksprache mit Arzt, Therapeut, SDK oder Frank halten. Nita beantwortet nur, welche Fragen typischerweise gestellt werden, und bewertet keine Gesundheitsangaben.
+
+---
+
 ## Das IKK Classic Bonusprogramm — Details
 
 Das Bonusprogramm belohnt gesundheitsbewusstes Verhalten mit echtem Geld. Hier sind die einzelnen Aktivitäten und was sie bringen:
