@@ -22,13 +22,20 @@ import { FadeInUp } from '@/components/ui/ScrollAnimation';
 const ZahnPage = () => {
   const { t } = useTranslation('zahn');
   const { t: tSeo } = useTranslation('seo');
-  // Hero verlinkt auf /ambulant — SDK-Weiterleitung passiert dort
 
   const schemaMarkup = createServiceSchema();
 
   const scrollToBenefits = (e) => {
     e.preventDefault();
     const element = document.getElementById('leistungen');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToWeiche = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('tarif-weiche');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -94,7 +101,7 @@ const ZahnPage = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-xl mx-auto">
                   <Button asChild className="bg-[#25c990] hover:bg-[#1db37f] text-white shadow-[0_4px_14px_rgba(37,201,144,0.4)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.6)] text-lg px-8 py-6 h-auto rounded-xl border-none transition-all duration-300 w-full sm:w-auto">
-                    <a href="/ambulant">
+                    <a href="#tarif-weiche" onClick={scrollToWeiche}>
                       <Calculator className="w-5 h-5 mr-2" aria-hidden="true" />
                       {t('hero.ctaCalculate')}
                     </a>
@@ -134,7 +141,7 @@ const ZahnPage = () => {
         <FadeInUp><DentalConcept /></FadeInUp>
         <FadeInUp><DentalBenefits /></FadeInUp>
 
-        <FadeInUp><AmbulantBonusCalculator /></FadeInUp>
+        <FadeInUp><AmbulantBonusCalculator ctaOverride={{ href: '#tarif-weiche', label: t('insurerChoice.bonusCta') }} /></FadeInUp>
         <FadeInUp><AmbulantIKKWechsel /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>

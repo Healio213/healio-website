@@ -39,11 +39,23 @@ const ACTIVITY_DEFS = [
   { id: 'blutdruck', amount: 75 },
 ];
 
-const AmbulantBonusCalculator = () => {
+// ctaOverride: { href, label } ersetzt den SDK-Abschluss-CTA, z.B. auf /zahn
+// (dort soll der Button zur Tarif-Weiche scrollen statt zur SDK-Strecke).
+const AmbulantBonusCalculator = ({ ctaOverride }) => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
   const calculatorUrl = buildSdkUrl({ ref: referrer });
   const ikkLink = IKK_LINK;
+
+  const handleOverrideClick = (e) => {
+    if (ctaOverride && ctaOverride.href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.getElementById(ctaOverride.href.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const ACTIVITIES = useMemo(() => ACTIVITY_DEFS.map(def => ({
     ...def,
@@ -386,16 +398,27 @@ const AmbulantBonusCalculator = () => {
                 </p>
 
                 <div className="flex flex-col gap-4">
-                  <a
-                    href={calculatorUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackSdkClick('bonus-calculator', referrer)}
-                    className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
-                  >
-                    <Gift className="w-5 h-5 mr-2" />
-                    {t('bonusCalculator.ctaCalculate')}
-                  </a>
+                  {ctaOverride ? (
+                    <a
+                      href={ctaOverride.href}
+                      onClick={handleOverrideClick}
+                      className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
+                    >
+                      <Gift className="w-5 h-5 mr-2" />
+                      {ctaOverride.label}
+                    </a>
+                  ) : (
+                    <a
+                      href={calculatorUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackSdkClick('bonus-calculator', referrer)}
+                      className="inline-flex items-center justify-center bg-white text-healio-primary font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-full"
+                    >
+                      <Gift className="w-5 h-5 mr-2" />
+                      {t('bonusCalculator.ctaCalculate')}
+                    </a>
+                  )}
 
                   <a
                     href={ikkLink}

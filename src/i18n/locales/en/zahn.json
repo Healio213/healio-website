@@ -1,9 +1,9 @@
 {
   "hero": {
     "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Your IKK bonus helps pay the premium.",
-    "subtitle": "DentalUpgrade from €5 per month. The IKK classic bonus can refinance up to 100% of the premium, and we check your individual potential with you. Stiftung Warentest: VERY GOOD (0.8).",
+    "subtitle": "Dental cover from just a few euros per month. The IKK classic bonus can refinance up to 100% of the premium, and we check your individual potential with you.",
     "ikkNote": "<strong>Your premium can fully refinance itself:</strong> IKK classic rewards health-conscious behaviour with a strong bonus programme. Depending on your bonus, it offsets up to 100% of the premium. Calculate yours below. No waiting periods, up to 3 missing teeth insurable.",
-    "ctaCalculate": "Calculate your plan",
+    "ctaCalculate": "Find your tariff",
     "ctaBenefits": "View benefits",
     "heroImageAlt": "Professional dental practice"
   },
@@ -50,6 +50,7 @@
       "text": "Whichever path you choose: IKK classic rewards health-conscious behaviour with a strong bonus programme. How much you get back is individual and can be checked in advance. Depending on your bonus, up to 100 % of your premium can be refinanced. Calculate it right away.",
       "cta": "Calculate your IKK bonus now"
     },
+    "bonusCta": "Choose your dental tariff now",
     "disclaimer": "Acceptance is subject to the health questions and underwriting guidelines of the respective insurer."
   },
   "concept": {
@@ -94,7 +95,7 @@
     "besonderheiten": [
       "No waiting periods – Instant coverage from day 1",
       "Maximum 3 health questions on the application",
-      "Up to 3 missing teeth insurable (€5 surcharge/tooth)",
+      "Up to 3 missing teeth insurable (surcharge depends on tariff)",
       "BonusPlus: Reimbursement rises to up to 100%",
       "Prior insurance is credited (sum limit waived in year 1)",
       "Switch option: After 3 years, upgrade to a higher plan without health checks",
@@ -112,7 +113,7 @@
     "prophylaxe": { "title": "Prophylaxis & Dental Cleaning", "desc": "Professional dental cleaning, fissure sealing and prophylaxis included in all plans." },
     "bleaching": { "title": "Bleaching & Aesthetics", "desc": "From the 70+ plan: Bleaching, pain management (nitrous oxide, hypnosis, acupuncture) included." },
     "kfo": { "title": "Orthodontics", "desc": "50-90% reimbursement for children and adolescents. In case of accident, also for adults." },
-    "fehlend": { "title": "Missing Teeth Insurable", "desc": "Up to 3 already missing teeth can be insured. Only €5 risk surcharge per missing tooth." },
+    "fehlend": { "title": "Missing Teeth Insurable", "desc": "Up to 3 already missing teeth can be insured. The surcharge depends on the insurer and tariff, and we find the most affordable solution for you." },
     "unfall": { "title": "Accident Instant Coverage", "desc": "No maximum limits and no age restrictions for dental damage caused by accidents." },
     "gesundheitsfragen": { "title": "Only 3 Health Questions", "desc": "Simple application. Maximum 3 health questions. Stably calculated and high-performing." }
   },
@@ -125,12 +126,12 @@
     "items": [
       { "q": "How much does DentalUpgrade 90+ cost per month?", "a": "The DentalUpgrade 90+ plan starts at €13.50 per month without aging provisions. With aging provisions from €29.06. Combined with the IKK classic bonus program (over €300 per year, tax-free), the insurance effectively pays for itself entirely. At just €162 annual premium and over €300 in bonus, you pay effectively €0." },
       { "q": "How do I get from 90% to 100% reimbursement?", "a": "Through BonusPlus, your reimbursement increases automatically: From day 1, you receive 90% reimbursement. If you can show a continuously maintained bonus booklet from your health insurance fund, reimbursement rises to 95% after 5 years and to a full 100% after 10 years. BonusPlus is available from age 21. You don't need to apply for anything extra, proof of the bonus booklet is sufficient." },
-      { "q": "Can I get the insurance even with missing teeth?", "a": "Yes, this is a genuine unique selling point. Up to 3 already missing teeth can be co-insured. The risk surcharge is only €5 per missing tooth per month. Many other dental supplementary insurances reject customers with missing teeth entirely or exclude them from reimbursement." },
+      { "q": "Can I get the insurance even with missing teeth?", "a": "Yes, this is a genuine unique selling point. Up to 3 already missing teeth can be co-insured. The surcharge depends on the insurer and tariff, ranging from a few euros per tooth per month to a percentage-based supplement. Many other dental supplementary insurances reject customers with missing teeth entirely or exclude them from reimbursement." },
       { "q": "Are there waiting periods?", "a": "No. Full insurance coverage applies immediately from day 1. Professional dental cleaning, prophylaxis, fissure sealing and all other benefits can be used right away. In the first calendar years, there is a sum limit of €1,000 (1st/2nd year), which is then lifted and becomes completely unlimited from the 5th calendar year." },
       { "q": "I already have dental supplementary insurance. Is switching worth it?", "a": "Very likely yes, especially if you currently receive less than 90% reimbursement. Your big advantage: Prior insurance is credited. If your previous insurance covered at least 40% of dental prosthetics, the sum limit in the first calendar year is completely waived. So you start immediately with full coverage, not from zero." },
       { "q": "What exactly is covered?", "a": "DentalUpgrade 90+ reimburses 90 to 100 percent for: High-quality dental prosthetics such as implants, crowns, bridges and inlays. Dental treatments such as fillings, root canals, periodontitis and bite guards. Professional dental cleaning and fissure sealing (up to €180 per year). Bleaching and special pain management such as nitrous oxide, hypnosis or acupuncture. Orthodontics for children (90%, max. €2,500). Plus accident instant coverage without maximum limits." },
       { "q": "How does it work together with the IKK classic bonus?", "a": "The combination is the key: You take out DentalUpgrade 90+ (€13.50 per month = €162 per year). At the same time, as an IKK classic member you collect bonus points for health-conscious behavior: vaccinations, dental check-ups, sports club, health screenings. The bonus amounts to over €300 per year, tax-free. Additionally, the IKK health account reimburses up to €600 per year for dental cleaning and preventive care. Result: Your dental coverage effectively costs you €0." },
-      { "q": "Do I need a health examination?", "a": "No, there is no extensive health examination. The application contains a maximum of 3 simple health questions. This makes the process quick and straightforward. Even with up to 3 missing teeth, you will be accepted (for a small risk surcharge of €5 per tooth)." },
+      { "q": "Do I need a health examination?", "a": "No, there is no extensive health examination. The application contains a maximum of 3 simple health questions. This makes the process quick and straightforward. Even with up to 3 missing teeth, you will be accepted (for a surcharge that depends on the tariff)." },
       { "q": "Can my children be co-insured?", "a": "Yes. For children, DentalUpgrade 90+ offers particularly strong coverage: Orthodontic treatments are reimbursed at 90%, up to a maximum of €2,500 for the entire contract period. Benefits are provided even for mild misalignments (KIG 1-5), not only from KIG 3 as with many competitors. The children's premium is €21.50 per month. Treatment must begin before the age of 18." },
       { "q": "How was DentalUpgrade 90+ rated by independent testers?", "a": "DentalUpgrade 90+ was awarded VERY GOOD (0.8) by Stiftung Warentest and is the test winner in the 'Good and affordable' category (Finanzen, issue 07/2025). Additionally, the insurer received the 'Highest Customer Satisfaction' seal from Focus Money and the top rating 'Excellent' from Morgen und Morgen." }
     ]
