@@ -118,19 +118,17 @@ const ZahnPage = () => {
           </div>
         </section>
 
-        {/* Qualitätssiegel: SDK + IKK classic */}
+        {/* Qualitätssiegel: die Bayerische + UKV + IKK classic */}
         <FadeInUp>
         <section className="py-10 bg-white border-b border-gray-100">
           <div className="healio-container px-4">
-            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: LKH Landeskrankenhilfe & IKK classic</p>
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 max-w-6xl mx-auto">
-              <img src="/siegel/lkh/lkh-1.png" alt="Franke Bornberg – LKH GesundheitsUpgrade Premium FFF+" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/lkh/lkh-2.png" alt="Franke Bornberg – LKH GesundheitsUpgrade Komfort FFF" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/lkh/lkh-3.png" alt="Höchste Kundenzufriedenheit – LKH Zahnzusatzversicherer" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/lkh/lkh-4.png" alt="Focus Money – Höchste Weiterempfehlung LKH" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/lkh/lkh-5.png" alt="Stiftung Warentest SEHR GUT (0,8) – LKH ZU90+" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-14 md:h-16 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-14 md:h-16 w-auto" loading="lazy" />
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: die Bayerische, UKV & IKK classic</p>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-5xl mx-auto">
+              <img src="/siegel/bayerische/warentest-zahn-prestige-2025.jpg" alt="Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, Ausgabe 07/2025" className="h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/bayerische/ascore-tarif-des-jahres-2024.jpg" alt="Ascore Analyse, Tarif des Jahres 2024, Zahn Prestige der Bayerischen" className="h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 08/2025" className="h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-20 md:h-24 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-20 md:h-24 w-auto" loading="lazy" />
             </div>
           </div>
         </section>
