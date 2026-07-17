@@ -123,7 +123,7 @@ const HealthPassHeroVisual = () => {
             aria-hidden="true"
           >
             <img
-              src="/images/healio-health-pass-hero-v2.png"
+              src="/images/healio-health-pass-hero-v2.webp"
               alt=""
               width="1536"
               height="1024"
