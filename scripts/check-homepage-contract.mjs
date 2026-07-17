@@ -60,12 +60,16 @@ assert.match(healthPassHeroVisual, /\/images\/healio-health-pass-hero-v2\.webp/)
 assert.doesNotMatch(healthPassHeroVisual, /healio-health-pass-hero-v2\.png/);
 assert.match(healthPassHeroVisual, /useScroll/);
 assert.match(healthPassHeroVisual, /useReducedMotion/);
+assert.match(healthPassHeroVisual, /useInView/);
+assert.match(healthPassHeroVisual, /visibilitychange/);
+assert.match(healthPassHeroVisual, /motionEnabled/);
 assert.match(healthPassHeroVisual, /data-health-pass-visual/);
 assert.doesNotMatch(healthPassHeroVisual, /data-protection-label/);
 assert.doesNotMatch(homeHero, /hero\.sceneLabel/);
 assert.match(healthPassHeroVisual, /data-health-pass-depth-ring/);
 assert.match(healthPassHeroVisual, /data-health-pass-wordmark/);
-assert.match(healthPassHeroVisual, /\/healio-logo-white\.svg/);
+assert.match(healthPassHeroVisual, /\/images\/healio-wordmark-white\.webp/);
+assert.doesNotMatch(healthPassHeroVisual, /\/healio-logo-white\.svg/);
 assert.match(healthPassHeroVisual, /duration: (?:1[6-9]|2[0-2])/);
 assert.match(homeHero, /\[hyphens:manual\]/);
 assert.doesNotMatch(homeHero, /hyphens-auto/);

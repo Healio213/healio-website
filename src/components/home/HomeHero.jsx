@@ -32,15 +32,15 @@ const HomeHero = () => {
 
       <div className="healio-container grid min-h-[720px] items-center gap-4 px-4 pb-16 sm:gap-7 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:grid-cols-[minmax(0,0.88fr)_minmax(540px,1.12fr)] lg:gap-4 lg:px-8 lg:pb-12">
         <div className="relative z-20 max-w-2xl">
-          <p className="home-eyebrow mb-6">{t('hero.eyebrow')}</p>
-          <h1 id="home-hero-heading" lang={i18n.resolvedLanguage || i18n.language} className="max-w-full [hyphens:manual] font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:max-w-[14ch] sm:text-5xl sm:[hyphens:none] lg:text-6xl xl:text-7xl">
+          <p className="home-eyebrow mb-4 sm:mb-6">{t('hero.eyebrow')}</p>
+          <h1 id="home-hero-heading" lang={i18n.resolvedLanguage || i18n.language} className="max-w-full [hyphens:manual] font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:max-w-[14ch] sm:text-5xl lg:text-6xl lg:[hyphens:none] xl:text-7xl">
             {displayHeroTitle}
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
+          <p className="mt-5 max-w-xl text-lg leading-7 text-slate-300 sm:mt-7 sm:text-xl sm:leading-8">
             {t('hero.description')}
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
             <a href="#schutz" className="home-focus inline-flex items-center justify-center gap-2 rounded-full bg-home-mint px-7 py-4 font-display text-base font-extrabold text-home-midnight shadow-[0_14px_40px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus-visible:ring-offset-home-midnight">
               {t('hero.primaryCta')}
               <ArrowDown className="h-4 w-4" />
@@ -52,7 +52,7 @@ const HomeHero = () => {
           </div>
         </div>
 
-        <div className="relative -mx-4 min-h-[430px] sm:mx-0 lg:min-h-[560px] lg:self-start xl:min-h-[580px] 2xl:min-h-[650px]">
+        <div className="relative z-10 -mx-4 -mt-10 min-h-[430px] sm:mx-0 sm:mt-0 lg:min-h-[560px] lg:self-start xl:min-h-[580px] 2xl:min-h-[650px]">
           <HealthPassHeroVisual />
         </div>
       </div>
