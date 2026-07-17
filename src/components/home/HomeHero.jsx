@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import HealthPassHeroVisual from './HealthPassHeroVisual';
 
 const HomeHero = () => {
-  const { t } = useTranslation('home');
+  const { t, i18n } = useTranslation('home');
 
   useEffect(() => {
     const root = document.documentElement;
@@ -29,7 +29,7 @@ const HomeHero = () => {
       <div className="healio-container grid min-h-[720px] items-center gap-4 px-4 pb-16 sm:gap-7 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:grid-cols-[minmax(0,0.88fr)_minmax(540px,1.12fr)] lg:gap-4 lg:px-8 lg:pb-12">
         <div className="relative z-20 max-w-2xl">
           <p className="home-eyebrow mb-6">{t('hero.eyebrow')}</p>
-          <h1 id="home-hero-heading" className="max-w-full break-words font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white [overflow-wrap:anywhere] sm:max-w-[14ch] sm:text-5xl sm:[overflow-wrap:normal] lg:text-6xl xl:text-7xl">
+          <h1 id="home-hero-heading" lang={i18n.resolvedLanguage || i18n.language} className="max-w-full hyphens-auto font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:max-w-[14ch] sm:text-5xl lg:text-6xl xl:text-7xl">
             {t('hero.title')}
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
