@@ -121,6 +121,26 @@ assert.match(heroWebGlCanvas, /visibilitychange/);
 assert.match(heroWebGlCanvas, /isSmallViewport \? 1\.25 : 1\.5/);
 assert.match(heroWebGlCanvas, /cancelAnimationFrame/);
 assert.match(heroWebGlCanvas, /renderer\.dispose\(\)/);
+assert.match(
+  heroWebGlCanvas,
+  /const resize = \(\) => \{[\s\S]*?const currentIsSmall = window\.matchMedia\('\(max-width: 767px\)'\)\.matches;[\s\S]*?renderer\.setPixelRatio\(Math\.min\(window\.devicePixelRatio \|\| 1, currentIsSmall \? 1\.25 : 1\.5\)\);/
+);
+assert.match(heroWebGlCanvas, /let isIntersecting = false;/);
+assert.doesNotMatch(heroWebGlCanvas, /resize\(\);\s*startAnimation\(\);/);
+assert.match(heroWebGlCanvas, /const onReadyRef = useRef\(onReady\);/);
+assert.match(heroWebGlCanvas, /const onErrorRef = useRef\(onError\);/);
+assert.match(
+  heroWebGlCanvas,
+  /useEffect\(\(\) => \{\s*onReadyRef\.current = onReady;\s*\}, \[onReady\]\);/
+);
+assert.match(
+  heroWebGlCanvas,
+  /useEffect\(\(\) => \{\s*onErrorRef\.current = onError;\s*\}, \[onError\]\);/
+);
+assert.match(heroWebGlCanvas, /onReadyRef\.current\?\.\(\);/);
+assert.match(heroWebGlCanvas, /onErrorRef\.current\?\.\(error\);/);
+assert.match(heroWebGlCanvas, /\}, \[createExperience\]\);/);
+assert.doesNotMatch(heroWebGlCanvas, /\}, \[createExperience, onError, onReady\]\);/);
 assert.match(protectionSceneShared, /export const createShieldGeometry/);
 assert.match(protectionSceneShared, /export const disposeObject3D/);
 

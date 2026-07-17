@@ -4,6 +4,16 @@ import { damp, disposeObject3D, easeOutCubic } from './sceneShared';
 
 const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' }) => {
   const canvasRef = useRef(null);
+  const onReadyRef = useRef(onReady);
+  const onErrorRef = useRef(onError);
+
+  useEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady]);
+
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,7 +32,7 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
     let frameId = null;
     let lastFrameTime = null;
     let elapsed = 0;
-    let isIntersecting = true;
+    let isIntersecting = false;
     let disposed = false;
     let didSignalReady = false;
     let didSignalError = false;
@@ -33,7 +43,7 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
     const reportError = (error) => {
       if (didSignalError) return;
       didSignalError = true;
-      onError?.(error);
+      onErrorRef.current?.(error);
     };
 
     const stopAnimation = () => {
@@ -74,6 +84,8 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
       const bounds = sizeTarget.getBoundingClientRect();
       const width = Math.max(Math.round(bounds.width || canvas.clientWidth || 1), 1);
       const height = Math.max(Math.round(bounds.height || canvas.clientHeight || 1), 1);
+      const currentIsSmall = window.matchMedia('(max-width: 767px)').matches;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, currentIsSmall ? 1.25 : 1.5));
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
@@ -138,7 +150,7 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
         renderer.render(scene, camera);
         if (!didSignalReady) {
           didSignalReady = true;
-          onReady?.();
+          onReadyRef.current?.();
         }
       } catch (error) {
         stopAnimation();
@@ -173,14 +185,13 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
       canvas.addEventListener('pointermove', handlePointerMove, { passive: true });
       canvas.addEventListener('pointerleave', handlePointerLeave);
       resize();
-      startAnimation();
     } catch (error) {
       reportError(error);
       cleanup();
     }
 
     return cleanup;
-  }, [createExperience, onError, onReady]);
+  }, [createExperience]);
 
   return (
     <canvas
