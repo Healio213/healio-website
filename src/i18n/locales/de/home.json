@@ -1,15 +1,109 @@
 {
   "hero": {
-    "title": "Gesundheit fördern. <highlight>Mitarbeiter binden</highlight>. <highlight>Steuern sparen</highlight>.",
-    "subtitle": "Machen Sie das <highlight>Finanzamt</highlight> zum Sponsor Ihrer Mitarbeiterloyalität.",
-    "description": "Unabhängige Experten für betriebliche Vorsorge & Zusatzversicherungen.",
-    "cta": "Strategiegespräch sichern"
+    "eyebrow": "Dein digitaler Versicherungsmakler",
+    "title": "Krankenzusatzversicherung, einfach digital.",
+    "description": "Ambulant, Zahn oder stationär: Wir zeigen dir verständlich, welcher Schutz zu deinem Leben passt – und begleiten dich auch nach dem Abschluss.",
+    "primaryCta": "Schutz auswählen",
+    "secondaryCta": "So funktioniert Healio",
+    "sceneLabel": "Drei Schutzbereiche. Ein digitaler Begleiter.",
+    "sceneCenter": "Dein Schutz",
+    "sceneModules": ["Ambulant", "Zahn", "Stationär"]
   },
   "seo": {
-    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV",
-    "description": "Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.",
-    "ogTitle": "Healio – Betriebliche Vorsorge, die Mitarbeiter bindet",
-    "ogDescription": "bAV, bKV und Gesundheitsbenefits strategisch kombinieren. Healio begleitet Unternehmen mit klarer Beratung und moderner Umsetzung."
+    "title": "Krankenzusatzversicherung einfach digital | Healio",
+    "description": "Ambulante, Zahn- und stationäre Zusatzversicherung verständlich vergleichen. Healio begleitet dich digital und persönlich – vom passenden Schutz bis zum laufenden Service.",
+    "ogTitle": "Healio – Krankenzusatzversicherung, einfach digital",
+    "ogDescription": "Ambulant, Zahn oder stationär: Finde verständlich den Schutz, der zu deinem Leben passt."
+  },
+  "products": {
+    "eyebrow": "Dein Schutz",
+    "title": "Wähle, was du besser absichern möchtest.",
+    "description": "Jeder Bereich führt dich direkt zu den passenden Leistungen und nächsten Schritten.",
+    "items": [
+      {
+        "key": "ambulant",
+        "routeKey": "ambulant",
+        "label": "Ambulant",
+        "title": "Mehr Budget für Gesundheit",
+        "description": "Heilpraktiker, Osteopathie, Brille und Vorsorge – mit bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren.",
+        "detail": "Naturheilkunde · Sehhilfen · Vorsorge",
+        "cta": "Ambulanten Schutz ansehen"
+      },
+      {
+        "key": "dental",
+        "routeKey": "zahn",
+        "label": "Zahn",
+        "title": "Starker Schutz für dein Lächeln",
+        "description": "Zahnersatz, Zahnbehandlung und Vorsorge verständlich absichern.",
+        "detail": "Zahnersatz · Behandlung · Prophylaxe",
+        "cta": "Zahnschutz ansehen"
+      },
+      {
+        "key": "hospital",
+        "routeKey": "stationaer",
+        "label": "Stationär",
+        "title": "Im Krankenhaus besser versorgt",
+        "description": "Einbettzimmer, Spezialisten und freie Klinikwahl – abhängig vom gewählten Tarif.",
+        "detail": "Einbettzimmer · Spezialisten · Klinikwahl",
+        "cta": "Klinikschutz ansehen"
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "So funktioniert Healio",
+    "title": "Versicherung darf sich einfach anfühlen.",
+    "description": "Wir übersetzen Tarife in klare Entscheidungen und bleiben auch nach dem Abschluss an deiner Seite.",
+    "steps": [
+      {"number": "01", "title": "Schutz auswählen", "description": "Du startest mit dem Bereich, den du besser absichern möchtest."},
+      {"number": "02", "title": "Möglichkeiten verstehen", "description": "Wir machen Leistungen, Grenzen und Kosten verständlich vergleichbar."},
+      {"number": "03", "title": "Digital abschließen", "description": "Du gehst den passenden Abschluss strukturiert und ohne Papierchaos an."},
+      {"number": "04", "title": "Begleitet bleiben", "description": "Healio unterstützt dich bei Verträgen, Budget, Belegen und Fragen."}
+    ],
+    "appEyebrow": "Healio App",
+    "appTitle": "Dein Schutz bleibt übersichtlich.",
+    "appDescription": "Budget, Belege und wichtige Vertragsinformationen an einem Ort – mit einem persönlichen Ansprechpartner im Hintergrund.",
+    "appFeatures": ["Budget im Blick", "Belege verwalten", "Persönliche Begleitung"]
+  },
+  "budget": {
+    "eyebrow": "Ambulantes Highlight",
+    "amount": "3.000 EUR",
+    "amountLabel": "Gesundheitsbudget in 2 Jahren",
+    "title": "Aus Selbstzahlerkosten wird planbarer Gesundheitsspielraum.",
+    "description": "Der ambulante Zusatzschutz kann Leistungen für Heilpraktiker, Osteopathie, Brille und Vorsorge absichern. In Kombination mit einem passenden Kassenbonus entsteht zusätzlicher finanzieller Spielraum.",
+    "features": ["Heilpraktiker und Naturheilkunde", "Osteopathie und Vorsorge", "Brille und weitere ambulante Leistungen"],
+    "note": "Die konkrete Leistung und der effektive Beitrag hängen vom gewählten Tarif, deiner persönlichen Situation und dem tatsächlich erreichten Bonus ab.",
+    "cta": "Gesundheitsbudget entdecken"
+  },
+  "trust": {
+    "eyebrow": "Klar beraten. Weiter begleitet.",
+    "title": "Mehr als ein schneller Online-Abschluss.",
+    "description": "Healio verbindet digitale Einfachheit mit persönlicher Verantwortung.",
+    "items": [
+      {"title": "Unabhängiger Makler", "description": "Wir beraten als Versicherungsmakler und erklären, worauf es wirklich ankommt."},
+      {"title": "Verständlicher Vergleich", "description": "Leistungen und Grenzen werden klar, bevor du dich entscheidest."},
+      {"title": "Persönlich erreichbar", "description": "Bei Fragen erreichst du einen echten Ansprechpartner statt nur ein Portal."},
+      {"title": "Service nach Abschluss", "description": "Verträge, Budget und Belege bleiben auch danach Teil der Begleitung."}
+    ]
+  },
+  "audiences": {
+    "eyebrow": "Healio für mehr als Privatkunden",
+    "title": "Du suchst Healio für dein Unternehmen oder deine Praxis?",
+    "description": "Die spezialisierten Bereiche führen direkt zu den passenden Informationen.",
+    "items": [
+      {"routeKey": "unternehmen", "label": "Für Unternehmen", "title": "Betriebliche Vorsorge, die Mitarbeiter bindet.", "cta": "Unternehmenslösungen ansehen"},
+      {"routeKey": "partner", "label": "Für Praxen", "title": "Behandlungen für Patienten besser finanzierbar machen.", "cta": "Partnerprogramm ansehen"}
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Dein nächster Schritt",
+    "title": "Welcher Schutz passt zu dir?",
+    "description": "Starte direkt mit deinem Thema oder sprich persönlich mit Healio.",
+    "consultation": "Persönlich beraten lassen",
+    "items": [
+      {"routeKey": "ambulant", "label": "Ambulant"},
+      {"routeKey": "zahn", "label": "Zahn"},
+      {"routeKey": "stationaer", "label": "Stationär"}
+    ]
   },
   "audience": {
     "eyebrow": "Der passende Einstieg",

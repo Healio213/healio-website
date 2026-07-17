@@ -1,15 +1,85 @@
 {
   "hero": {
-    "title": "Promote health. Retain employees. Save on taxes.",
-    "subtitle": "Turn the tax office into a sponsor of your employee loyalty.",
-    "description": "Independent experts for corporate benefits & supplementary insurance.",
-    "cta": "Book a Strategy Call"
+    "eyebrow": "Your digital insurance broker",
+    "title": "Supplementary health insurance, made simple.",
+    "description": "Outpatient, dental or hospital cover: we make it clear which protection fits your life and stay by your side after you sign up.",
+    "primaryCta": "Choose your cover",
+    "secondaryCta": "How Healio works",
+    "sceneLabel": "Three areas of cover. One digital companion.",
+    "sceneCenter": "Your cover",
+    "sceneModules": ["Outpatient", "Dental", "Hospital"]
   },
   "seo": {
-    "title": "Healio B2B – Corporate Benefits Reimagined | bAV & bKV Experts",
-    "description": "Optimize corporate pension, health insurance and tax-efficient health benefits with Healio. Clear consulting for stronger employee retention.",
-    "ogTitle": "Healio – Corporate Benefits That Strengthen Retention",
-    "ogDescription": "Combine bAV, bKV and health benefits strategically. Healio supports companies with clear consulting and modern implementation."
+    "title": "Supplementary Health Insurance Made Simple | Healio",
+    "description": "Compare outpatient, dental and hospital supplementary insurance with clarity. Healio supports you digitally and personally, from choosing cover to ongoing service.",
+    "ogTitle": "Healio – Supplementary health insurance, made simple",
+    "ogDescription": "Outpatient, dental or hospital cover: find protection that fits your life."
+  },
+  "products": {
+    "eyebrow": "Your cover",
+    "title": "Choose what you want to protect better.",
+    "description": "Each area leads directly to the relevant benefits and next steps.",
+    "items": [
+      {"key":"ambulant","routeKey":"ambulant","label":"Outpatient","title":"More room in your health budget","description":"Naturopathy, osteopathy, vision aids and preventive care, with a health budget of up to EUR 3,000 over 2 years.","detail":"Naturopathy · Vision aids · Prevention","cta":"Explore outpatient cover"},
+      {"key":"dental","routeKey":"zahn","label":"Dental","title":"Strong protection for your smile","description":"Make dental treatment, restorations and preventive care easier to cover.","detail":"Restorations · Treatment · Prevention","cta":"Explore dental cover"},
+      {"key":"hospital","routeKey":"stationaer","label":"Hospital","title":"Better supported in hospital","description":"Private room, specialist treatment and choice of hospital, depending on the selected plan.","detail":"Private room · Specialists · Hospital choice","cta":"Explore hospital cover"}
+    ]
+  },
+  "process": {
+    "eyebrow": "How Healio works",
+    "title": "Insurance can feel straightforward.",
+    "description": "We translate plans into clear decisions and stay by your side after you sign up.",
+    "steps": [
+      {"number":"01","title":"Choose your cover","description":"Start with the area you want to protect better."},
+      {"number":"02","title":"Understand the options","description":"We make benefits, limits and costs easier to compare."},
+      {"number":"03","title":"Sign up digitally","description":"Complete the right application in a structured, paperless flow."},
+      {"number":"04","title":"Stay supported","description":"Healio helps with contracts, budgets, receipts and questions."}
+    ],
+    "appEyebrow": "Healio app",
+    "appTitle": "Keep your cover in view.",
+    "appDescription": "Budget, receipts and important policy information in one place, backed by a personal contact.",
+    "appFeatures": ["Track your budget", "Manage receipts", "Personal support"]
+  },
+  "budget": {
+    "eyebrow": "Outpatient highlight",
+    "amount": "EUR 3,000",
+    "amountLabel": "health budget over 2 years",
+    "title": "Turn out-of-pocket costs into planned room for health.",
+    "description": "Outpatient supplementary cover can protect services such as naturopathy, osteopathy, vision aids and preventive care. A suitable health-insurance bonus can create additional financial room.",
+    "features": ["Naturopathy and alternative treatment", "Osteopathy and preventive care", "Vision aids and other outpatient benefits"],
+    "note": "Actual benefits and effective contributions depend on the selected plan, your personal situation and the bonus you achieve.",
+    "cta": "Explore the health budget"
+  },
+  "trust": {
+    "eyebrow": "Clear advice. Ongoing support.",
+    "title": "More than a quick online sign-up.",
+    "description": "Healio combines digital simplicity with personal responsibility.",
+    "items": [
+      {"title":"Independent broker","description":"We advise as an insurance broker and explain what really matters."},
+      {"title":"Understandable comparison","description":"Benefits and limits are clear before you decide."},
+      {"title":"A real contact","description":"When you have questions, you can reach a person rather than only a portal."},
+      {"title":"Service after sign-up","description":"Contracts, budgets and receipts remain part of our support."}
+    ]
+  },
+  "audiences": {
+    "eyebrow": "Healio beyond individual cover",
+    "title": "Looking for Healio for your company or practice?",
+    "description": "The specialist areas lead directly to the information you need.",
+    "items": [
+      {"routeKey":"unternehmen","label":"For companies","title":"Corporate benefits that strengthen retention.","cta":"Explore company solutions"},
+      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable for patients.","cta":"Explore the partner programme"}
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Your next step",
+    "title": "Which cover fits you?",
+    "description": "Start with your topic or talk to Healio personally.",
+    "consultation": "Get personal advice",
+    "items": [
+      {"routeKey":"ambulant","label":"Outpatient"},
+      {"routeKey":"zahn","label":"Dental"},
+      {"routeKey":"stationaer","label":"Hospital"}
+    ]
   },
   "audience": {
     "eyebrow": "Choose your entry point",
