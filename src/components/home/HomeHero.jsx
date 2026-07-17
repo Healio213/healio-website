@@ -1,32 +1,37 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import HomeProtectionFallback from './protection/HomeProtectionFallback';
 
 const HomeProtectionScene = lazy(() => import('./HomeProtectionScene'));
 
-const SceneFallback = ({ centerLabel, labels }) => (
-  <div className="grid min-h-[420px] place-items-center" aria-hidden="true">
-    <div className="relative h-[340px] w-full max-w-[520px]">
-      <div className="absolute left-1/2 top-1/2 grid h-36 w-48 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[2rem] border border-white/15 bg-white/[0.08] text-center shadow-2xl shadow-home-mint/10 backdrop-blur-xl">
-        <span className="font-display text-lg font-bold text-white">{centerLabel}</span>
-      </div>
-      {labels.map((label, index) => {
-        const positions = ['left-0 top-5', 'right-0 top-16', 'bottom-4 left-1/2 -translate-x-1/2'];
-        return (
-          <div key={label} className={`absolute ${positions[index]} rounded-2xl border border-white/15 bg-home-midnight/85 px-4 py-3 font-display text-sm font-bold text-white`}>
-            <span className="mr-2 inline-block h-2 w-2 rounded-full bg-home-mint" />
-            {label}
-          </div>
-        );
-      })}
-    </div>
-  </div>
-);
+const readConcept = () => {
+  const requestedConcept = new URLSearchParams(window.location.search).get('hero');
+  return requestedConcept === 'core' || requestedConcept === 'scroll' ? requestedConcept : 'glass';
+};
+
+const conceptOptions = [
+  { concept: 'glass', label: 'A · Glass Shield' },
+  { concept: 'core', label: 'B · Protection Core' },
+  { concept: 'scroll', label: 'C · Scroll Unfold' },
+];
 
 const HomeHero = () => {
   const { t } = useTranslation('home');
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [heroConcept, setHeroConcept] = useState(readConcept);
   const sceneLabels = t('hero.sceneModules', { returnObjects: true });
+
+  const selectConcept = (concept) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('hero', concept);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}?${searchParams.toString()}${window.location.hash}`
+    );
+    setHeroConcept(concept);
+  };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -91,8 +96,23 @@ const HomeHero = () => {
 
         <div className="relative -mx-4 min-h-[430px] sm:mx-0 lg:min-h-[620px]">
           <div className="absolute inset-x-[12%] bottom-[8%] h-20 rounded-[50%] bg-home-mint/15 blur-3xl" aria-hidden="true" />
-          <Suspense fallback={<SceneFallback centerLabel={t('hero.sceneCenter')} labels={sceneLabels} />}>
-            <HomeProtectionScene reducedMotion={reducedMotion} centerLabel={t('hero.sceneCenter')} labels={sceneLabels} />
+          {import.meta.env.DEV && (
+            <div className="absolute inset-x-3 top-2 z-30 flex flex-wrap justify-center gap-1 rounded-2xl border border-white/10 bg-home-midnight/75 p-1.5 shadow-lg backdrop-blur-md sm:inset-x-auto sm:right-2" role="group" aria-label="Hero-Konzept wählen">
+              {conceptOptions.map(({ concept, label }) => (
+                <button
+                  key={concept}
+                  type="button"
+                  aria-pressed={heroConcept === concept}
+                  onClick={() => selectConcept(concept)}
+                  className={`rounded-full px-2.5 py-1.5 font-display text-[10px] font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-home-mint sm:text-xs ${heroConcept === concept ? 'bg-home-mint text-home-midnight' : 'text-slate-400 hover:bg-white/10 hover:text-white'}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+          <Suspense fallback={<HomeProtectionFallback concept={heroConcept} labels={sceneLabels} />}>
+            <HomeProtectionScene concept={heroConcept} reducedMotion={reducedMotion} labels={sceneLabels} />
           </Suspense>
           <p className="absolute inset-x-0 bottom-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
             {t('hero.sceneLabel')}

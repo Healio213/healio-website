@@ -48,13 +48,27 @@ assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
 
 const homeHero = readText('src/components/home/HomeHero.jsx');
 const protectionScene = readText('src/components/home/HomeProtectionScene.jsx');
+const protectionLabels = readText('src/components/home/protection/ProtectionLabels.jsx');
+const protectionFallback = readText('src/components/home/protection/HomeProtectionFallback.jsx');
 
 assert.match(homeHero, /id="home-hero-heading"/);
 assert.match(homeHero, /prefers-reduced-motion/);
 assert.match(homeHero, /home-hero-passed/);
-assert.match(protectionScene, /renderer\.dispose\(\)/);
-assert.match(protectionScene, /cancelAnimationFrame/);
-assert.match(protectionScene, /aria-hidden="true"/);
+assert.match(homeHero, /URLSearchParams/);
+assert.match(homeHero, /searchParams\.set\('hero', concept\)/);
+assert.match(homeHero, /'glass'/);
+assert.match(homeHero, /'core'/);
+assert.match(homeHero, /'scroll'/);
+assert.match(homeHero, /import\.meta\.env\.DEV/);
+assert.match(protectionScene, /GlassShieldScene/);
+assert.match(protectionScene, /ProtectionCoreScene/);
+assert.match(protectionScene, /ScrollUnfoldScene/);
+assert.match(protectionScene, /reducedMotion/);
+assert.match(protectionLabels, /labels\.map/);
+assert.match(protectionLabels, /data-concept/);
+assert.match(protectionFallback, /data-fallback-concept/);
+assert.match(protectionScene, /showLabels=\{false\}/);
+assert.doesNotMatch(protectionScene, /createLabelTexture|createLabelSprite|centerLabel/);
 
 const insurancePathway = readText('src/components/home/InsurancePathway.jsx');
 const howHealioWorks = readText('src/components/home/HowHealioWorks.jsx');
