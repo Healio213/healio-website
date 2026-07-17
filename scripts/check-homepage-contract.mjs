@@ -67,4 +67,25 @@ assert.match(insurancePathway, /hospital:/);
 assert.match(howHealioWorks, /id="so-funktioniert"/);
 assert.match(howHealioWorks, /\/images\/healio-app-dashboard\.png/);
 
+const ambulantBudgetFeature = readText('src/components/home/AmbulantBudgetFeature.jsx');
+const homeTrust = readText('src/components/home/HomeTrust.jsx');
+const audienceLinks = readText('src/components/home/AudienceLinks.jsx');
+const homeFinalCta = readText('src/components/home/HomeFinalCTA.jsx');
+
+assert.match(ambulantBudgetFeature, /t\('budget\.amount'\)/);
+assert.match(ambulantBudgetFeature, /getPath\('ambulant'\)/);
+assert.match(homeTrust, /trust\.items/);
+assert.match(audienceLinks, /getPath\(item\.routeKey\)/);
+assert.match(homeFinalCta, /getPath\('terminvereinbarung'\)/);
+
+const homeComponentDir = path.join(rootDir, 'src/components/home');
+const nonBudgetHomeSource = fs.existsSync(homeComponentDir)
+  ? fs.readdirSync(homeComponentDir)
+    .filter((file) => file.endsWith('.jsx') && file !== 'AmbulantBudgetFeature.jsx')
+    .map((file) => fs.readFileSync(path.join(homeComponentDir, file), 'utf8'))
+    .join('\n')
+  : '';
+
+assert.doesNotMatch(nonBudgetHomeSource, /3[.,]000\s*(?:EUR|€)/);
+
 console.log('Homepage contract passed.');
