@@ -113,4 +113,15 @@ assert.match(indexHtml, /home-hero-active:not\(\.home-hero-passed\)/);
 assert.match(seoRoutes, /path: '\/'[\s\S]{0,240}title: 'Krankenzusatzversicherung/);
 assert.match(schemaMarkup, /unabhängiger Versicherungsmakler/);
 
+const heroWebGlCanvas = readText('src/components/home/protection/HeroWebGLCanvas.jsx');
+const protectionSceneShared = readText('src/components/home/protection/sceneShared.js');
+
+assert.match(heroWebGlCanvas, /IntersectionObserver/);
+assert.match(heroWebGlCanvas, /visibilitychange/);
+assert.match(heroWebGlCanvas, /isSmallViewport \? 1\.25 : 1\.5/);
+assert.match(heroWebGlCanvas, /cancelAnimationFrame/);
+assert.match(heroWebGlCanvas, /renderer\.dispose\(\)/);
+assert.match(protectionSceneShared, /export const createShieldGeometry/);
+assert.match(protectionSceneShared, /export const disposeObject3D/);
+
 console.log('Homepage contract passed.');
