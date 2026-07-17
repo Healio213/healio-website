@@ -56,4 +56,15 @@ assert.match(protectionScene, /renderer\.dispose\(\)/);
 assert.match(protectionScene, /cancelAnimationFrame/);
 assert.match(protectionScene, /aria-hidden="true"/);
 
+const insurancePathway = readText('src/components/home/InsurancePathway.jsx');
+const howHealioWorks = readText('src/components/home/HowHealioWorks.jsx');
+
+assert.match(insurancePathway, /id="schutz"/);
+assert.match(insurancePathway, /getPath\(item\.routeKey\)/);
+assert.match(insurancePathway, /ambulant:/);
+assert.match(insurancePathway, /dental:/);
+assert.match(insurancePathway, /hospital:/);
+assert.match(howHealioWorks, /id="so-funktioniert"/);
+assert.match(howHealioWorks, /\/images\/healio-app-dashboard\.png/);
+
 console.log('Homepage contract passed.');
