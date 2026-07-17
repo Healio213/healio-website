@@ -34,6 +34,9 @@ const HealthPassHeroVisual = () => {
   const scrollY = useTransform(scrollYProgress, [0, 0.48, 1], [24, 0, -38]);
   const scrollScale = useTransform(scrollYProgress, [0, 0.48, 1], [0.985, 1, 0.965]);
   const motionEnabled = !reducedMotion && isInView && documentVisible;
+  const restTransition = reducedMotion
+    ? { duration: 0 }
+    : { duration: 0.35, ease: 'easeOut' };
 
   useEffect(() => {
     const handleVisibilityChange = () => setDocumentVisible(!document.hidden);
@@ -75,7 +78,7 @@ const HealthPassHeroVisual = () => {
         }}
       >
         <div
-          className="pointer-events-none absolute left-[15%] top-1/2 w-[180%] -translate-x-1/2 -translate-y-1/2 sm:left-[20%] sm:w-[165%] lg:left-[15%] lg:w-[180%]"
+          className="pointer-events-none absolute left-1/2 top-1/2 w-[112%] -translate-x-1/2 -translate-y-1/2 sm:left-[20%] sm:w-[165%] lg:left-[15%] lg:w-[180%]"
           style={{ maskImage: wordmarkMask, WebkitMaskImage: wordmarkMask }}
           aria-hidden="true"
         >
@@ -87,6 +90,7 @@ const HealthPassHeroVisual = () => {
             height="256"
             draggable="false"
             className="h-auto w-full select-none opacity-[0.075] blur-[0.25px] mix-blend-screen"
+            initial={false}
             animate={motionEnabled ? {
               x: [-10, 12, -10],
               y: [6, -8, 6],
@@ -96,7 +100,7 @@ const HealthPassHeroVisual = () => {
               duration: 22,
               ease: 'easeInOut',
               repeat: Infinity,
-            } : { duration: 0.35, ease: 'easeOut' }}
+            } : restTransition}
           />
         </div>
 
@@ -104,12 +108,13 @@ const HealthPassHeroVisual = () => {
           <motion.div
             data-health-pass-depth-ring
             className="absolute inset-0 rounded-[50%] opacity-40"
+            initial={false}
             animate={motionEnabled ? { rotate: [-8, -368] } : { rotate: -8 }}
             transition={motionEnabled ? {
               duration: 20,
               ease: 'linear',
               repeat: Infinity,
-            } : { duration: 0.35, ease: 'easeOut' }}
+            } : restTransition}
             style={{
               background: 'conic-gradient(from 25deg, transparent 0deg, rgba(115,226,189,0.24) 65deg, rgba(140,203,255,0.1) 140deg, transparent 205deg, rgba(185,167,255,0.16) 285deg, transparent 360deg)',
               maskImage: depthRingMask,
@@ -120,6 +125,7 @@ const HealthPassHeroVisual = () => {
 
         <motion.div
           className="absolute inset-0"
+          initial={false}
           animate={motionEnabled ? {
             rotateY: [-0.7, 0.7, -0.7],
             rotateZ: [-0.4, 0.4, -0.4],
@@ -128,7 +134,7 @@ const HealthPassHeroVisual = () => {
             duration: 11,
             ease: 'easeInOut',
             repeat: Infinity,
-          } : { duration: 0.35, ease: 'easeOut' }}
+          } : restTransition}
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div

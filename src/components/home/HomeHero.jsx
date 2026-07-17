@@ -9,6 +9,13 @@ const HomeHero = () => {
   const displayHeroTitle = (i18n.resolvedLanguage || i18n.language || '').startsWith('de')
     ? heroTitle.replace('Krankenzusatzversicherung', 'Krankenzusatz\u00adversicherung')
     : heroTitle;
+  const titleSeparatorIndex = displayHeroTitle.indexOf(', ');
+  const titleLead = titleSeparatorIndex >= 0
+    ? displayHeroTitle.slice(0, titleSeparatorIndex + 1)
+    : displayHeroTitle;
+  const titleTail = titleSeparatorIndex >= 0
+    ? displayHeroTitle.slice(titleSeparatorIndex + 2)
+    : '';
 
   useEffect(() => {
     const root = document.documentElement;
@@ -33,8 +40,9 @@ const HomeHero = () => {
       <div className="healio-container grid min-h-[720px] items-center gap-4 px-4 pb-16 sm:gap-7 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:grid-cols-[minmax(0,0.88fr)_minmax(540px,1.12fr)] lg:gap-4 lg:px-8 lg:pb-12">
         <div className="relative z-20 max-w-2xl">
           <p className="home-eyebrow mb-4 sm:mb-6">{t('hero.eyebrow')}</p>
-          <h1 id="home-hero-heading" lang={i18n.resolvedLanguage || i18n.language} className="max-w-full [hyphens:manual] font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:max-w-[14ch] sm:text-5xl lg:text-6xl lg:[hyphens:none] xl:text-7xl">
-            {displayHeroTitle}
+          <h1 id="home-hero-heading" lang={i18n.resolvedLanguage || i18n.language} className="max-w-full [hyphens:manual] font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:max-w-[14ch] sm:text-5xl lg:w-[min(30ch,calc(100vw-4rem))] lg:max-w-none lg:text-6xl lg:[hyphens:none] xl:w-[min(24ch,calc(100vw-4rem))] xl:text-7xl">
+            <span className="lg:block lg:whitespace-nowrap">{titleLead}</span>
+            {titleTail && <>{' '}<span className="lg:block">{titleTail}</span></>}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-7 text-slate-300 sm:mt-7 sm:text-xl sm:leading-8">
             {t('hero.description')}
