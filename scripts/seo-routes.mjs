@@ -8,10 +8,10 @@ export const seoRoutes = [
   // === DEUTSCH ===
   {
     path: '/',
-    title: 'Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV',
-    description: 'Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.',
+    title: 'Krankenzusatzversicherung einfach digital | Healio',
+    description: 'Ambulante, Zahn- und stationäre Zusatzversicherung verständlich vergleichen. Healio begleitet dich digital und persönlich – vom passenden Schutz bis zum laufenden Service.',
     canonical: 'https://healio.de',
-    keywords: 'betriebliche Altersvorsorge, bAV, betriebliche Krankenversicherung, bKV, Gesundheitsbenefits, Mitarbeiterbindung, steuerfreie Benefits, Healio',
+    keywords: 'Krankenzusatzversicherung, ambulante Zusatzversicherung, Zahnzusatzversicherung, Krankenhauszusatzversicherung, Gesundheitsbudget, Healio',
     lang: 'de',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
   },
@@ -313,8 +313,8 @@ export const seoRoutes = [
   // === ENGLISCH ===
   {
     path: '/en',
-    title: 'Healio B2B – Corporate Benefits | bAV & bKV Experts',
-    description: 'Optimize corporate pension, health insurance and tax-efficient health benefits with Healio. Clear consulting for stronger employee retention.',
+    title: 'Supplementary health insurance, made simple | Healio',
+    description: 'Compare outpatient, dental and hospital supplementary insurance with clarity. Healio supports you digitally and personally, from selection to ongoing service.',
     canonical: 'https://healio.de/en',
     lang: 'en',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },

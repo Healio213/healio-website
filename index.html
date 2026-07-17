@@ -15,13 +15,13 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/healio-icon-512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV</title>
-    <meta name="description" content="Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.">
+    <title>Krankenzusatzversicherung einfach digital | Healio</title>
+    <meta name="description" content="Ambulante, Zahn- und stationäre Zusatzversicherung verständlich vergleichen. Healio begleitet dich digital und persönlich – vom passenden Schutz bis zum laufenden Service.">
     <meta name="robots" content="index, follow">
-    <meta name="keywords" content="betriebliche Altersvorsorge, bAV, betriebliche Krankenversicherung, bKV, Gesundheitsbenefits, Mitarbeiterbindung, steuerfreie Benefits, Healio">
+    <meta name="keywords" content="Krankenzusatzversicherung, ambulante Zusatzversicherung, Zahnzusatzversicherung, Krankenhauszusatzversicherung, Gesundheitsbudget, Healio">
     <meta name="author" content="HEALIO GmbH">
-    <meta property="og:title" content="Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV">
-    <meta property="og:description" content="Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.">
+    <meta property="og:title" content="Healio – Krankenzusatzversicherung, einfach digital">
+    <meta property="og:description" content="Ambulant, Zahn oder stationär: Finde verständlich den Schutz, der zu deinem Leben passt.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://healio.de">
     <meta property="og:locale" content="de_DE">
@@ -29,19 +29,14 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV">
-    <meta name="twitter:description" content="Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen.">
+    <meta name="twitter:title" content="Healio – Krankenzusatzversicherung, einfach digital">
+    <meta name="twitter:description" content="Ambulant, Zahn oder stationär: Finde verständlich den Schutz, der zu deinem Leben passt.">
     <meta name="twitter:image" content="https://healio.de/og-image.png">
     <link rel="canonical" href="https://healio.de">
     
     <!-- Preconnect to critical external domains to establish early connections -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-    <!-- Preload LCP Hero Image — WebP mit JPEG-Fallback, responsive -->
-    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/hero-bg-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 
     <!-- Critical CSS Inlined to prevent FOUC -->
     <style>
@@ -60,7 +55,7 @@
       }
       #root { display: block; min-height: 100vh; }
     </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Healio GmbH","description":"Healio berät Unternehmen zu betrieblicher Altersvorsorge, betrieblicher Krankenversicherung und steuerfreien Gesundheitsbenefits. Für Patient:innen bündelt Healio Kassenboni und Zusatzversicherungen zu einem Gesundheitsbudget von bis zu 3.000 € in 2 Jahren.","url":"https://healio.de","logo":"https://healio.de/favicon.png","telephone":"+494089755705","email":"info@healio.de","address":{"@type":"PostalAddress","streetAddress":"Arndtstraße 6","addressLocality":"Hamburg","postalCode":"22085","addressCountry":"DE"},"geo":{"@type":"GeoCoordinates","latitude":"53.5722","longitude":"10.0254"},"areaServed":"DE","sameAs":["https://www.tiktok.com/@healio.de"]}</script></head>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Healio GmbH","description":"Healio ist ein unabhängiger Versicherungsmakler für ambulante, Zahn- und stationäre Krankenzusatzversicherungen mit digitaler und persönlicher Begleitung.","url":"https://healio.de","logo":"https://healio.de/favicon.png","telephone":"+494089755705","email":"info@healio.de","address":{"@type":"PostalAddress","streetAddress":"Arndtstraße 6","addressLocality":"Hamburg","postalCode":"22085","addressCountry":"DE"},"geo":{"@type":"GeoCoordinates","latitude":"53.5722","longitude":"10.0254"},"areaServed":"DE","sameAs":["https://www.tiktok.com/@healio.de"]}</script></head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
@@ -82,6 +77,20 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 9999;
+      }
+      @media (max-width: 767px) {
+        elevenlabs-convai {
+          right: 12px;
+          top: auto;
+          bottom: 16px;
+          transform: none;
+          transition: opacity 180ms ease, transform 180ms ease;
+        }
+        html.home-hero-active:not(.home-hero-passed) elevenlabs-convai {
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(12px);
+        }
       }
     </style>
   </body>

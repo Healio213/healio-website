@@ -13,7 +13,7 @@ export const createOrganizationSchema = () => {
     "legalName": "HEALIO GmbH",
     "url": SITE_URL,
     "logo": `${SITE_URL}/favicon.svg`,
-    "description": "Ihr Experte für betriebliche Altersvorsorge (bAV) und betriebliche Krankenversicherung (bKV) in Hamburg.",
+    "description": "Healio ist ein unabhängiger Versicherungsmakler für ambulante, Zahn- und stationäre Krankenzusatzversicherungen mit digitaler und persönlicher Begleitung.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Arndtstraße 6",

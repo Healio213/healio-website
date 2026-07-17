@@ -88,4 +88,29 @@ const nonBudgetHomeSource = fs.existsSync(homeComponentDir)
 
 assert.doesNotMatch(nonBudgetHomeSource, /3[.,]000\s*(?:EUR|€)/);
 
+const mainHomePage = readText('src/pages/MainHomePage.jsx');
+const indexHtml = readText('index.html');
+const seoRoutes = readText('scripts/seo-routes.mjs');
+const schemaMarkup = readText('src/lib/createSchemaMarkup.js');
+
+[
+  'HomeHero',
+  'InsurancePathway',
+  'HowHealioWorks',
+  'AmbulantBudgetFeature',
+  'HomeTrust',
+  'AudienceLinks',
+  'HomeFinalCTA',
+].forEach((componentName) => assert.match(mainHomePage, new RegExp(componentName)));
+
+assert.doesNotMatch(
+  mainHomePage,
+  /BavProviderComparison|CompoundInterestCalculator|CombinedZeitfalleRenditeSection|GesundheitSection|WhyBkvWithHealio|Contact/
+);
+assert.match(indexHtml, /<title>Krankenzusatzversicherung einfach digital \| Healio<\/title>/);
+assert.doesNotMatch(indexHtml, /Healio B2B/);
+assert.match(indexHtml, /home-hero-active:not\(\.home-hero-passed\)/);
+assert.match(seoRoutes, /path: '\/'[\s\S]{0,240}title: 'Krankenzusatzversicherung/);
+assert.match(schemaMarkup, /unabhängiger Versicherungsmakler/);
+
 console.log('Homepage contract passed.');
