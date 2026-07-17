@@ -1,16 +1,22 @@
 {
   "nav": {
-    "leistungen": "Leistungen",
-    "unternehmen": "Unternehmen",
+    "leistungen": "Versicherungen",
+    "versicherungen": "Versicherungen",
+    "unternehmen": "Für Unternehmen",
     "ambulant": "Ambulante Zusatzversicherung",
     "zahn": "Zahnzusatzversicherung",
     "stationaer": "Stationäre Zusatzversicherung",
     "tier": "Tierkrankenversicherung",
-    "partner": "Partner",
+    "partner": "Für Praxen",
     "heilberufeVorsorge": "Für Heilberufe",
-    "about": "Über uns",
+    "about": "Über Healio",
+    "ratgeber": "Ratgeber",
     "kontakt": "Kontakt",
     "erstgespraech": "Erstgespräch",
+    "schutzWaehlen": "Schutz auswählen",
+    "beratung": "Beratung starten",
+    "potenzialanalyse": "Potenzialanalyse",
+    "kennenlernen": "Kennenlernen",
     "toggleDropdown": "Toggle dropdown"
   },
   "aria": {

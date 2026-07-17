@@ -10,8 +10,17 @@ module.exports = {
   			'2xl': '1400px'
   		}
   	},
-  	extend: {
-  		colors: {
+	extend: {
+		fontFamily: {
+			display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
+			sans: ['Inter', 'system-ui', 'sans-serif']
+		},
+		colors: {
+			'home-midnight': '#07111F',
+			'home-slate': '#46515E',
+			'home-mint': '#25C990',
+			'home-mint-active': '#5EE0B1',
+			'home-ice': '#F4FAF7',
   			'healio-primary': '#25c990',
   			'healio-primary-dark': '#076046',
   			'healio-slate': '#464f5d',

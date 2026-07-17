@@ -1,16 +1,22 @@
 {
   "nav": {
-    "leistungen": "Services",
-    "unternehmen": "Companies",
+    "leistungen": "Insurance",
+    "versicherungen": "Insurance",
+    "unternehmen": "For Companies",
     "ambulant": "Outpatient Insurance",
     "zahn": "Dental Insurance",
     "stationaer": "Hospital Insurance",
     "tier": "Pet Insurance",
-    "partner": "Partner",
+    "partner": "For Practices",
     "heilberufeVorsorge": "For Healthcare Pros",
-    "about": "About Us",
+    "about": "About Healio",
+    "ratgeber": "Insights",
     "kontakt": "Contact",
     "erstgespraech": "Free Consultation",
+    "schutzWaehlen": "Choose Cover",
+    "beratung": "Get Advice",
+    "potenzialanalyse": "Potential Analysis",
+    "kennenlernen": "Meet Healio",
     "toggleDropdown": "Toggle dropdown"
   },
   "aria": {

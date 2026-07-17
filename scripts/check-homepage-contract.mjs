@@ -11,6 +11,10 @@ const readJson = (relativePath) => JSON.parse(
 
 const de = readJson('src/i18n/locales/de/home.json');
 const en = readJson('src/i18n/locales/en/home.json');
+const deCommon = readJson('src/i18n/locales/de/common.json');
+const enCommon = readJson('src/i18n/locales/en/common.json');
+const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
+const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
 assert.equal(de.hero.title, 'Krankenzusatzversicherung, einfach digital.');
 assert.equal(en.hero.title, 'Supplementary health insurance, made simple.');
@@ -29,5 +33,13 @@ assert.deepEqual(
 assert.match(de.seo.title, /Krankenzusatzversicherung/);
 assert.equal(en.products.items.length, de.products.items.length);
 assert.equal(en.process.steps.length, de.process.steps.length);
+assert.equal(deCommon.nav.versicherungen, 'Versicherungen');
+assert.equal(deCommon.nav.unternehmen, 'Für Unternehmen');
+assert.equal(deCommon.nav.partner, 'Für Praxen');
+assert.equal(deCommon.nav.ratgeber, 'Ratgeber');
+assert.equal(deCommon.nav.schutzWaehlen, 'Schutz auswählen');
+assert.equal(enCommon.nav.versicherungen, 'Insurance');
+assert.match(indexCss, /family=Manrope/);
+assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
 
 console.log('Homepage contract passed.');

@@ -5,7 +5,7 @@ import Footer from '@/components/sections/Footer';
 
 const Layout = () => {
   const { pathname } = useLocation();
-  const showCta = pathname === '/' || pathname === '/partner';
+  const showCta = pathname === '/partner' || pathname === '/en/partner';
   const hideCta = !showCta;
 
   return (

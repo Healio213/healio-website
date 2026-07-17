@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -84,12 +84,35 @@
     @apply max-w-7xl mx-auto;
   }
 
+  .home-section {
+    @apply px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28;
+  }
+
+  .home-eyebrow {
+    @apply font-display text-xs font-bold uppercase tracking-[0.22em] text-home-mint;
+  }
+
+  .home-focus {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4;
+  }
+
   .healio-btn-primary {
     @apply bg-healio-primary hover:bg-healio-primary-dark text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
   }
 
   .healio-btn-secondary {
     @apply bg-transparent border-2 border-healio-slate text-healio-slate hover:bg-healio-slate hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .home-motion {
+    animation: none !important;
+    transition: none !important;
   }
 }
 

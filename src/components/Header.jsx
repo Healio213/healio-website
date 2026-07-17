@@ -17,6 +17,9 @@ const Header = () => {
   const location = useLocation();
   const { t } = useTranslation('common');
   const { lang, getPath, switchLanguage } = useLanguage();
+  const isHome = location.pathname === '/' || location.pathname === '/en';
+  const isCompany = location.pathname === '/unternehmen' || location.pathname === '/en/companies';
+  const isPartner = location.pathname === '/partner' || location.pathname === '/en/partner';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +47,8 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     {
-      label: t('nav.leistungen'),
+      label: t('nav.versicherungen'),
       to: getPath('leistungen'),
       type: 'dropdown',
       subLinks: [
@@ -56,11 +58,21 @@ const Header = () => {
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
     },
+    { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
-    { to: getPath('heilberufeVorsorge'), label: t('nav.heilberufeVorsorge'), type: 'link', highlight: true },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
-    { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
+    { to: getPath('blog'), label: t('nav.ratgeber'), type: 'link' },
   ];
+
+  const ctaLabel = isHome
+    ? t('nav.schutzWaehlen')
+    : isCompany
+      ? t('nav.potenzialanalyse')
+      : isPartner
+        ? t('nav.kennenlernen')
+        : t('nav.beratung');
+
+  const ctaPath = isCompany ? getPath('potenzialanalyse') : getPath('terminvereinbarung');
 
   return (
     <header className={cn(
@@ -186,10 +198,17 @@ const Header = () => {
             asChild
             className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
           >
-            <Link to={getPath('potenzialanalyse')}>
-              {t('nav.erstgespraech')}
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
+            {isHome ? (
+              <a href="#schutz">
+                {ctaLabel}
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
+            ) : (
+              <Link to={ctaPath}>
+                {ctaLabel}
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            )}
           </Button>
         </div>
 
@@ -289,9 +308,15 @@ const Header = () => {
                 asChild
                 className="w-full max-w-xs bg-[#10B981] hover:bg-[#059669] text-white py-6 text-lg shadow-xl shadow-[#10B981]/20 rounded-xl mt-6 border-0 shrink-0"
               >
-                <Link to={getPath('potenzialanalyse')} onClick={() => setMobileMenuOpen(false)}>
-                  {t('nav.erstgespraech')}
-                </Link>
+                {isHome ? (
+                  <a href="#schutz" onClick={() => setMobileMenuOpen(false)}>
+                    {ctaLabel}
+                  </a>
+                ) : (
+                  <Link to={ctaPath} onClick={() => setMobileMenuOpen(false)}>
+                    {ctaLabel}
+                  </Link>
+                )}
               </Button>
             </motion.div>
           )}
