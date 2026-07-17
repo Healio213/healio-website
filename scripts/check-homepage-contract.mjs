@@ -116,6 +116,7 @@ assert.match(schemaMarkup, /unabhängiger Versicherungsmakler/);
 const heroWebGlCanvas = readText('src/components/home/protection/HeroWebGLCanvas.jsx');
 const protectionSceneShared = readText('src/components/home/protection/sceneShared.js');
 const glassShieldScene = readText('src/components/home/protection/GlassShieldScene.jsx');
+const protectionCoreScene = readText('src/components/home/protection/ProtectionCoreScene.jsx');
 
 assert.match(heroWebGlCanvas, /IntersectionObserver/);
 assert.match(heroWebGlCanvas, /visibilitychange/);
@@ -149,5 +150,10 @@ assert.match(glassShieldScene, /MeshPhysicalMaterial/);
 assert.match(glassShieldScene, /transmission:/);
 assert.match(glassShieldScene, /layerProgress/);
 assert.doesNotMatch(glassShieldScene, /TorusGeometry/);
+assert.match(protectionCoreScene, /createShieldGeometry/);
+assert.match(protectionCoreScene, /TorusGeometry/);
+assert.match(protectionCoreScene, /CatmullRomCurve3/);
+assert.match(protectionCoreScene, /PointsMaterial/);
+assert.match(protectionCoreScene, /activationProgress/);
 
 console.log('Homepage contract passed.');
