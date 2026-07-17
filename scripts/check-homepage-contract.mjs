@@ -8,6 +8,10 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (relativePath) => JSON.parse(
   fs.readFileSync(path.join(rootDir, relativePath), 'utf8')
 );
+const readText = (relativePath) => {
+  const absolutePath = path.join(rootDir, relativePath);
+  return fs.existsSync(absolutePath) ? fs.readFileSync(absolutePath, 'utf8') : '';
+};
 
 const de = readJson('src/i18n/locales/de/home.json');
 const en = readJson('src/i18n/locales/en/home.json');
@@ -41,5 +45,15 @@ assert.equal(deCommon.nav.schutzWaehlen, 'Schutz auswählen');
 assert.equal(enCommon.nav.versicherungen, 'Insurance');
 assert.match(indexCss, /family=Manrope/);
 assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
+
+const homeHero = readText('src/components/home/HomeHero.jsx');
+const protectionScene = readText('src/components/home/HomeProtectionScene.jsx');
+
+assert.match(homeHero, /id="home-hero-heading"/);
+assert.match(homeHero, /prefers-reduced-motion/);
+assert.match(homeHero, /home-hero-passed/);
+assert.match(protectionScene, /renderer\.dispose\(\)/);
+assert.match(protectionScene, /cancelAnimationFrame/);
+assert.match(protectionScene, /aria-hidden="true"/);
 
 console.log('Homepage contract passed.');
