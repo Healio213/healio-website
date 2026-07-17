@@ -8,15 +8,11 @@ import {
   useTransform,
 } from 'framer-motion';
 
-const calloutPositions = [
-  'left-[1%] top-[33%] sm:left-[4%] lg:left-[4%] lg:top-[36%]',
-  'right-0 top-[22%] sm:right-[2%] lg:right-[5%] lg:top-[27%]',
-  'right-[3%] bottom-[4%] sm:right-[8%] lg:left-[56%] lg:right-auto lg:bottom-[4%]',
-];
-
 const imageMask = 'radial-gradient(ellipse 68% 86% at 68% 50%, #000 58%, rgba(0,0,0,0.96) 73%, transparent 100%)';
+const depthRingMask = 'radial-gradient(ellipse at center, transparent 0 62%, #000 63%, #000 64.5%, transparent 66%)';
+const wordmarkMask = 'linear-gradient(90deg, transparent 0%, #000 22%, #000 76%, transparent 100%)';
 
-const HealthPassHeroVisual = ({ labels = [] }) => {
+const HealthPassHeroVisual = () => {
   const visualRef = useRef(null);
   const reducedMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -44,8 +40,6 @@ const HealthPassHeroVisual = ({ labels = [] }) => {
     pointerY.set(0);
   };
 
-  const visibleLabels = Array.isArray(labels) ? labels.slice(0, 3) : [];
-
   return (
     <motion.div
       ref={visualRef}
@@ -66,6 +60,50 @@ const HealthPassHeroVisual = ({ labels = [] }) => {
           transformStyle: 'preserve-3d',
         }}
       >
+        <div
+          className="pointer-events-none absolute left-[54%] top-1/2 w-[96%] -translate-x-1/2 -translate-y-1/2 sm:w-[88%] lg:left-[63%] lg:w-[86%]"
+          style={{ maskImage: wordmarkMask, WebkitMaskImage: wordmarkMask }}
+          aria-hidden="true"
+        >
+          <motion.img
+            data-health-pass-wordmark
+            src="/healio-logo-white.svg"
+            alt=""
+            width="1000"
+            height="400"
+            draggable="false"
+            className="h-auto w-full select-none opacity-[0.05] blur-[0.4px]"
+            animate={reducedMotion ? { x: 0, y: 0, rotate: -3 } : {
+              x: [-10, 12, -10],
+              y: [6, -8, 6],
+              rotate: [-3, -1.5, -3],
+            }}
+            transition={reducedMotion ? { duration: 0 } : {
+              duration: 22,
+              ease: 'easeInOut',
+              repeat: Infinity,
+            }}
+          />
+        </div>
+
+        <div className="pointer-events-none absolute left-[54%] top-1/2 h-[62%] w-[92%] -translate-x-1/2 -translate-y-1/2 sm:w-[84%] lg:left-[63%] lg:h-[64%] lg:w-[78%]" aria-hidden="true">
+          <motion.div
+            data-health-pass-depth-ring
+            className="absolute inset-0 rounded-[50%] opacity-40"
+            animate={reducedMotion ? { rotate: -8 } : { rotate: [-8, -368] }}
+            transition={reducedMotion ? { duration: 0 } : {
+              duration: 20,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+            style={{
+              background: 'conic-gradient(from 25deg, transparent 0deg, rgba(115,226,189,0.24) 65deg, rgba(140,203,255,0.1) 140deg, transparent 205deg, rgba(185,167,255,0.16) 285deg, transparent 360deg)',
+              maskImage: depthRingMask,
+              WebkitMaskImage: depthRingMask,
+            }}
+          />
+        </div>
+
         <motion.div
           className="absolute inset-0"
           animate={reducedMotion ? { rotateY: 0, rotateZ: 0 } : {
@@ -94,53 +132,6 @@ const HealthPassHeroVisual = ({ labels = [] }) => {
               className="h-auto w-full max-w-none select-none mix-blend-screen"
             />
           </div>
-
-          <svg
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible lg:hidden"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="health-pass-callout-line-mobile" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#73E2BD" stopOpacity="0.88" />
-                <stop offset="1" stopColor="#8CCBFF" stopOpacity="0.22" />
-              </linearGradient>
-            </defs>
-            <path d="M 9 50 L 9 38 L 25 38" fill="none" stroke="url(#health-pass-callout-line-mobile)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-            <path d="M 93 42 L 93 27 L 79 27" fill="none" stroke="url(#health-pass-callout-line-mobile)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-            <path d="M 39 91 L 68 91" fill="none" stroke="url(#health-pass-callout-line-mobile)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-          </svg>
-
-          <svg
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible lg:block"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="health-pass-callout-line-desktop" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#73E2BD" stopOpacity="0.88" />
-                <stop offset="1" stopColor="#8CCBFF" stopOpacity="0.22" />
-              </linearGradient>
-            </defs>
-            <path d="M 25 48 L 25 41 L 20 41" fill="none" stroke="url(#health-pass-callout-line-desktop)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-            <path d="M 92 40 L 92 32 L 83 32" fill="none" stroke="url(#health-pass-callout-line-desktop)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-            <path d="M 50 95 L 50 92 L 57 92" fill="none" stroke="url(#health-pass-callout-line-desktop)" strokeWidth="0.55" vectorEffect="non-scaling-stroke" />
-          </svg>
-
-          {visibleLabels.map((label, index) => (
-            <div
-              key={label}
-              data-protection-label
-              className={`absolute z-10 border-l border-home-mint/70 bg-home-midnight/75 py-2 pl-3 pr-4 shadow-[0_12px_34px_rgba(0,0,0,0.32)] backdrop-blur-md ${calloutPositions[index]}`}
-              style={{ transform: 'translateZ(26px)' }}
-            >
-              <span className="font-display text-[11px] font-extrabold uppercase tracking-[0.16em] text-white sm:text-xs">
-                {label}
-              </span>
-            </div>
-          ))}
         </motion.div>
       </motion.div>
     </motion.div>

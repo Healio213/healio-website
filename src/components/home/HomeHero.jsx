@@ -5,7 +5,6 @@ import HealthPassHeroVisual from './HealthPassHeroVisual';
 
 const HomeHero = () => {
   const { t } = useTranslation('home');
-  const sceneLabels = t('hero.sceneModules', { returnObjects: true });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -30,7 +29,7 @@ const HomeHero = () => {
       <div className="healio-container grid min-h-[720px] items-center gap-4 px-4 pb-16 sm:gap-7 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:grid-cols-[minmax(0,0.88fr)_minmax(540px,1.12fr)] lg:gap-4 lg:px-8 lg:pb-12">
         <div className="relative z-20 max-w-2xl">
           <p className="home-eyebrow mb-6">{t('hero.eyebrow')}</p>
-          <h1 id="home-hero-heading" className="max-w-[14ch] font-display text-4xl font-extrabold leading-[1.04] tracking-[-0.045em] text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 id="home-hero-heading" className="max-w-full break-words font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white [overflow-wrap:anywhere] sm:max-w-[14ch] sm:text-5xl sm:[overflow-wrap:normal] lg:text-6xl xl:text-7xl">
             {t('hero.title')}
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
@@ -50,10 +49,7 @@ const HomeHero = () => {
         </div>
 
         <div className="relative -mx-4 min-h-[430px] sm:mx-0 lg:min-h-[560px] lg:self-start xl:min-h-[580px] 2xl:min-h-[650px]">
-          <HealthPassHeroVisual labels={sceneLabels} />
-          <p className="absolute inset-x-0 bottom-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-            {t('hero.sceneLabel')}
-          </p>
+          <HealthPassHeroVisual />
         </div>
       </div>
     </section>
