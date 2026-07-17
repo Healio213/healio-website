@@ -2,10 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { damp, disposeObject3D, easeOutCubic } from './sceneShared';
 
-const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' }) => {
+const HeroWebGLCanvas = ({
+  createExperience,
+  onReady,
+  onError,
+  className = '',
+  trackScroll = false,
+}) => {
   const canvasRef = useRef(null);
   const onReadyRef = useRef(onReady);
   const onErrorRef = useRef(onError);
+  const scrollProgressRef = useRef(0);
 
   useEffect(() => {
     onReadyRef.current = onReady;
@@ -14,6 +21,31 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
   useEffect(() => {
     onErrorRef.current = onError;
   }, [onError]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !trackScroll) {
+      scrollProgressRef.current = 0;
+      return undefined;
+    }
+
+    const container = canvas.parentElement || canvas;
+    const updateScrollProgress = () => {
+      const rect = container.getBoundingClientRect();
+      const travel = Math.max(window.innerHeight * 0.78, rect.height * 0.86, 1);
+      scrollProgressRef.current = Math.min(
+        Math.max((-rect.top + (window.innerHeight * 0.12)) / travel, 0),
+        1
+      );
+    };
+
+    updateScrollProgress();
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollProgress);
+    };
+  }, [trackScroll]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -146,6 +178,7 @@ const HeroWebGLCanvas = ({ createExperience, onReady, onError, className = '' })
           delta,
           introProgress: easeOutCubic(Math.min(elapsed / 1.2, 1)),
           pointer,
+          scrollProgress: scrollProgressRef.current,
         });
         renderer.render(scene, camera);
         if (!didSignalReady) {

@@ -117,6 +117,7 @@ const heroWebGlCanvas = readText('src/components/home/protection/HeroWebGLCanvas
 const protectionSceneShared = readText('src/components/home/protection/sceneShared.js');
 const glassShieldScene = readText('src/components/home/protection/GlassShieldScene.jsx');
 const protectionCoreScene = readText('src/components/home/protection/ProtectionCoreScene.jsx');
+const scrollUnfoldScene = readText('src/components/home/protection/ScrollUnfoldScene.jsx');
 
 assert.match(heroWebGlCanvas, /IntersectionObserver/);
 assert.match(heroWebGlCanvas, /visibilitychange/);
@@ -155,5 +156,12 @@ assert.match(protectionCoreScene, /TorusGeometry/);
 assert.match(protectionCoreScene, /CatmullRomCurve3/);
 assert.match(protectionCoreScene, /PointsMaterial/);
 assert.match(protectionCoreScene, /activationProgress/);
+assert.match(heroWebGlCanvas, /trackScroll/);
+assert.match(heroWebGlCanvas, /scrollProgress/);
+assert.match(heroWebGlCanvas, /addEventListener\('scroll'/);
+assert.match(scrollUnfoldScene, /createShieldGeometry/);
+assert.match(scrollUnfoldScene, /trackScroll/);
+assert.match(scrollUnfoldScene, /scrollProgress/);
+assert.match(scrollUnfoldScene, /unfoldProgress/);
 
 console.log('Homepage contract passed.');
