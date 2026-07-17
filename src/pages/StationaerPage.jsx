@@ -100,7 +100,7 @@ const StationaerPage = () => {
                 transition={{ duration: 0.8 }}
                 className="w-full"
               >
-                <h1 id="stationaer-hero-heading" className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+                <h1 id="stationaer-hero-heading" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg break-words hyphens-auto">
                   {t('hero.title').split('<highlight>').map((part, i) => {
                     if (i === 0) return part;
                     const [highlighted, rest] = part.split('</highlight>');
@@ -196,7 +196,7 @@ const StationaerPage = () => {
         <section className="py-20 bg-slate-50">
           <div className="healio-container max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4">{t('faq.title')}</h2>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 break-words hyphens-auto">{t('faq.title')}</h2>
               <p className="text-lg text-slate-600">{t('faq.subtitle')}</p>
             </div>
             <StationaerFaq />

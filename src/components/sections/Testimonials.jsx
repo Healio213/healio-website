@@ -9,15 +9,22 @@ const testimonialsData = [
   { name: "Andreas M. (52), Hamburg", tag: "Fehlende Zähne", highlight: "3 fehlende Zähne mitversichert", text: "Ich hatte bereits fehlende Zähne und war unsicher, ob mich überhaupt noch eine Zahnzusatzversicherung annimmt. Bei Healio war genau das möglich: bis zu 3 fehlende Zähne mitversichert und trotzdem starker Schutz für hochwertigen Zahnersatz.", rating: 5 },
 ];
 
-const Testimonials = () => {
+const renderHighlight = (text) =>
+  text.split('<highlight>').map((part, i) => {
+    if (i === 0) return part;
+    const [highlighted, rest] = part.split('</highlight>');
+    return <React.Fragment key={i}><span className="text-healio-primary">{highlighted}</span>{rest}</React.Fragment>;
+  });
+
+const Testimonials = ({ headline }) => {
   const { t } = useTranslation('home');
 
   return (
     <section className="healio-section bg-white" aria-labelledby="testimonials-heading">
       <div className="healio-container">
         <div className="text-center mb-12">
-          <h2 id="testimonials-heading" className="text-3xl lg:text-5xl font-extrabold text-healio-text">
-            {t('testimonials.title')}
+          <h2 id="testimonials-heading" className="text-3xl lg:text-5xl font-extrabold text-healio-text break-words hyphens-auto">
+            {renderHighlight(headline || t('testimonials.title'))}
           </h2>
           <p className="mt-4 text-lg text-healio-text-light max-w-3xl mx-auto">
             {t('testimonials.subtitle')}

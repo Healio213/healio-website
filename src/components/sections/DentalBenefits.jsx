@@ -29,7 +29,7 @@ const DentalBenefits = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <h2 id="dental-benefits-heading" className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+          <h2 id="dental-benefits-heading" className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight break-words hyphens-auto">
             {t('benefits.title')}
           </h2>
           <p className="mt-6 text-lg text-slate-600 font-medium">

@@ -57,8 +57,8 @@ const HospitalConcept = () => {
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
               {tariffRows.map(([label, value], i) => (
                 <div key={i} className="flex justify-between items-start py-2 border-b border-gray-50 gap-4">
-                  <span className="text-slate-600 flex-shrink-0">{label}</span>
-                  <span className="font-semibold text-slate-900 text-right">{value}</span>
+                  <span className="text-slate-600">{label}</span>
+                  <span className="font-semibold text-slate-900 text-right break-words min-w-0">{value}</span>
                 </div>
               ))}
             </div>
