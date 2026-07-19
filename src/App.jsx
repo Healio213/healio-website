@@ -20,6 +20,7 @@ const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
 const AgbPage = React.lazy(() => import('@/pages/AgbPage'));
 const DatenschutzPage = React.lazy(() => import('@/pages/DatenschutzPage'));
+const ErstinformationPage = React.lazy(() => import('@/pages/ErstinformationPage'));
 const KontoLoeschenPage = React.lazy(() => import('@/pages/KontoLoeschenPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
 const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
@@ -103,6 +104,7 @@ function App() {
               <Route path="impressum" element={<ImpressumPage />} />
               <Route path="agb" element={<AgbPage />} />
               <Route path="datenschutz" element={<DatenschutzPage />} />
+              <Route path="erstinformation" element={<ErstinformationPage />} />
               <Route path="konto-loeschen" element={<KontoLoeschenPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogArticlePage />} />
@@ -127,6 +129,7 @@ function App() {
               <Route path="legal-notice" element={<ImpressumPage />} />
               <Route path="terms" element={<AgbPage />} />
               <Route path="privacy" element={<DatenschutzPage />} />
+              <Route path="initial-information" element={<ErstinformationPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogArticlePage />} />
             </Route>

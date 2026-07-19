@@ -131,3 +131,37 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-healio-primary to-healio-primary-dark;
   }
 }
+
+@media print {
+  header[role="banner"],
+  footer,
+  elevenlabs-convai {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  @page {
+    margin: 16mm;
+  }
+
+  .legal-print-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .legal-information-document h1,
+  .legal-information-document h2,
+  .legal-information-document h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}
+
+html.legal-information-active elevenlabs-convai {
+  display: none !important;
+}

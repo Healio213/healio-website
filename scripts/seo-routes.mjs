@@ -289,6 +289,14 @@ export const seoRoutes = [
     canonical: 'https://healio.de/datenschutz',
     lang: 'de',
   },
+  {
+    path: '/erstinformation',
+    title: 'Erstinformation für Versicherungsnehmer | Healio',
+    description: 'Erstinformation der Healio GmbH gemäß §§ 15 und 16 VersVermV mit Vermittlerstatus, Vergütung, Registerangaben, Schlichtungsstellen und Beratungsgrundlage nach § 60 VVG.',
+    canonical: 'https://healio.de/erstinformation',
+    lang: 'de',
+    hreflang: { de: 'https://healio.de/erstinformation', en: 'https://healio.de/en/initial-information' },
+  },
 
   // === BLOG-ARTIKEL (Heilpraktiker-Zielgruppe) ===
   {
@@ -388,6 +396,14 @@ export const seoRoutes = [
     canonical: 'https://healio.de/en/contact',
     lang: 'en',
     hreflang: { de: 'https://healio.de/kontakt', en: 'https://healio.de/en/contact' },
+  },
+  {
+    path: '/en/initial-information',
+    title: 'Initial information for insurance customers | Healio',
+    description: 'Initial information from Healio GmbH pursuant to §§ 15 and 16 VersVermV, including intermediary status, remuneration, register details, dispute resolution bodies and the basis of advice under section 60 VVG.',
+    canonical: 'https://healio.de/en/initial-information',
+    lang: 'en',
+    hreflang: { de: 'https://healio.de/erstinformation', en: 'https://healio.de/en/initial-information' },
   },
   {
     path: '/en/blog',

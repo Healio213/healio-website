@@ -11,7 +11,8 @@
     "lint": "eslint . --quiet",
     "test:homepage": "node scripts/check-homepage-contract.mjs",
     "test:company": "node scripts/check-company-contract.mjs",
-    "test:services": "node scripts/check-services-contract.mjs"
+    "test:services": "node scripts/check-services-contract.mjs",
+    "test:first-information": "node scripts/check-first-information-contract.mjs"
   },
   "dependencies": {
     "@babel/traverse": "^7.26.4",

@@ -35,6 +35,8 @@ const HREFLANG_BY_CANONICAL = {
   [`${SITE_URL}/en/about`]: { de: `${SITE_URL}/about`, en: `${SITE_URL}/en/about` },
   [`${SITE_URL}/kontakt`]: { de: `${SITE_URL}/kontakt`, en: `${SITE_URL}/en/contact` },
   [`${SITE_URL}/en/contact`]: { de: `${SITE_URL}/kontakt`, en: `${SITE_URL}/en/contact` },
+  [`${SITE_URL}/erstinformation`]: { de: `${SITE_URL}/erstinformation`, en: `${SITE_URL}/en/initial-information` },
+  [`${SITE_URL}/en/initial-information`]: { de: `${SITE_URL}/erstinformation`, en: `${SITE_URL}/en/initial-information` },
   [`${SITE_URL}/blog`]: { de: `${SITE_URL}/blog`, en: `${SITE_URL}/en/blog` },
   [`${SITE_URL}/en/blog`]: { de: `${SITE_URL}/blog`, en: `${SITE_URL}/en/blog` }
 };

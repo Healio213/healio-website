@@ -26,6 +26,7 @@ const Header = () => {
     '/impressum', '/en/legal-notice',
     '/agb', '/en/terms',
     '/datenschutz', '/en/privacy',
+    '/erstinformation', '/en/initial-information',
     '/konto-loeschen',
     '/blog', '/en/blog',
   ];

@@ -54,5 +54,68 @@
     "section5Text": "If you have any questions about data protection, please send us an email.",
     "emailLabel": "Email:",
     "lastUpdated": "Last updated: March 2026"
+  },
+  "erstinformation": {
+    "shortTitle": "Initial information",
+    "title": "Initial information pursuant to §§ 15 and 16 VersVermV",
+    "eyebrow": "Insurance brokerage · Clearly documented",
+    "intro": "This page provides all information on our intermediary status, remuneration, the intermediary register and the competent dispute resolution bodies. Section 60 VVG is explained separately as the basis of our advice.",
+    "breadcrumb": "Page navigation",
+    "freeOfCharge": "Provided free of charge",
+    "lastUpdated": "Last updated: 19 July 2026",
+    "contents": "Contents",
+    "print": "Print or save as PDF",
+    "lawPanel": {
+      "primaryTitle": "Initial information and provision",
+      "primaryText": "Mandatory information at the first business contact and the form in which it is provided.",
+      "secondaryTitle": "Basis of advice",
+      "secondaryText": "Basis of product selection and disclosure where the selection is restricted."
+    },
+    "nav": {
+      "provider": "Provider and address",
+      "status": "Status and intermediary register",
+      "advice": "Advice and remuneration",
+      "participations": "Shareholdings",
+      "dispute": "Dispute resolution bodies",
+      "advisoryBasis": "Basis of advice under section 60 VVG"
+    },
+    "provider": {
+      "title": "Provider and business address",
+      "managingDirectorLabel": "Managing director:",
+      "commercialRegisterLabel": "Commercial register:",
+      "registryCourtLabel": "Registry court:"
+    },
+    "status": {
+      "title": "Type of activity, permission and intermediary register",
+      "type": "Healio GmbH is registered with the Hamburg Chamber of Commerce as an insurance broker with permission pursuant to section 34d(1) of the German Trade Regulation Act (GewO) and is entered in the intermediary register under registration number D-C1LE-OVLQH-98. The entry can be verified at www.vermittlerregister.info.",
+      "authorityTitle": "Competent licensing and supervisory authority",
+      "registerTitle": "Entry in the intermediary register",
+      "registerNumberLabel": "Registration number",
+      "registryOfficeTitle": "Joint register office pursuant to section 11a GewO",
+      "phoneLabel": "Phone:",
+      "phoneFee": "EUR 0.20 per call"
+    },
+    "advice": {
+      "title": "Advice and type of remuneration",
+      "offered": "Healio GmbH offers advice in connection with the brokerage of insurance contracts.",
+      "remuneration": "For brokering and servicing insurance contracts, Healio GmbH exclusively receives commission or brokerage from the insurance company. This remuneration is included in the insurance premium.",
+      "noOtherRemuneration": "Customers do not pay any separate direct remuneration to Healio GmbH. No additional remuneration, other benefits or combination of different types of remuneration is received."
+    },
+    "participations": {
+      "title": "Shareholdings",
+      "outbound": "Healio GmbH has no direct or indirect shareholding in the voting rights or capital of any insurance company.",
+      "inbound": "No insurance company or parent company of an insurance company has any direct or indirect shareholding in the voting rights or capital of Healio GmbH."
+    },
+    "dispute": {
+      "title": "Addresses of the dispute resolution bodies",
+      "intro": "In the event of disputes arising from insurance brokerage, consumers may contact the following recognised dispute resolution bodies:"
+    },
+    "advisoryBasis": {
+      "title": "Basis of advice pursuant to section 60 VVG",
+      "lead": "Section 60 VVG governs the basis of our advice, not the status-related initial information.",
+      "text": "As an insurance broker, we generally base our recommendation on a sufficient number of insurance contracts and insurers available on the market, allowing us to recommend, on the basis of professional criteria, which contract is suitable to meet your needs.",
+      "restricted": "If, in an individual case, a recommendation is not based on a sufficient breadth of the market, we will expressly inform you before you submit your contractual declaration about the restricted selection of insurers and contracts, the market and information basis used and the insurers taken into account."
+    },
+    "closing": "This information is provided free of charge. Please retain it for your records. Your browser's print function allows you to print the page or save it as a PDF."
   }
 }

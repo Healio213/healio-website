@@ -54,5 +54,68 @@
     "section5Text": "Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail.",
     "emailLabel": "E-Mail:",
     "lastUpdated": "Stand: März 2026"
+  },
+  "erstinformation": {
+    "shortTitle": "Erstinformation",
+    "title": "Erstinformation gemäß §§ 15 und 16 VersVermV",
+    "eyebrow": "Versicherungsvermittlung · Klar dokumentiert",
+    "intro": "Hier finden Sie alle Angaben zu unserem Vermittlerstatus, unserer Vergütung, dem Vermittlerregister und den zuständigen Schlichtungsstellen. § 60 VVG wird als Beratungsgrundlage gesondert erläutert.",
+    "breadcrumb": "Seitennavigation",
+    "freeOfCharge": "Unentgeltlich bereitgestellt",
+    "lastUpdated": "Stand: 19. Juli 2026",
+    "contents": "Inhalt",
+    "print": "Drucken oder als PDF speichern",
+    "lawPanel": {
+      "primaryTitle": "Erstinformation und Bereitstellung",
+      "primaryText": "Pflichtangaben beim ersten Geschäftskontakt und Form ihrer Übermittlung.",
+      "secondaryTitle": "Beratungsgrundlage",
+      "secondaryText": "Grundlage der Produktauswahl und Hinweise bei einer eingeschränkten Auswahl."
+    },
+    "nav": {
+      "provider": "Anbieter und Anschrift",
+      "status": "Status und Vermittlerregister",
+      "advice": "Beratung und Vergütung",
+      "participations": "Beteiligungsverhältnisse",
+      "dispute": "Schlichtungsstellen",
+      "advisoryBasis": "Beratungsgrundlage nach § 60 VVG"
+    },
+    "provider": {
+      "title": "Anbieter und betriebliche Anschrift",
+      "managingDirectorLabel": "Geschäftsführer:",
+      "commercialRegisterLabel": "Handelsregister:",
+      "registryCourtLabel": "Registergericht:"
+    },
+    "status": {
+      "title": "Tätigkeitsart, Erlaubnis und Vermittlerregister",
+      "type": "Die Healio GmbH ist bei der Handelskammer Hamburg als Versicherungsmakler mit Erlaubnis nach § 34d Absatz 1 Gewerbeordnung (GewO) gemeldet und unter der Registrierungsnummer D-C1LE-OVLQH-98 im Vermittlerregister eingetragen. Die Eintragung kann unter www.vermittlerregister.info überprüft werden.",
+      "authorityTitle": "Zuständige Erlaubnis- und Aufsichtsbehörde",
+      "registerTitle": "Eintragung im Vermittlerregister",
+      "registerNumberLabel": "Registrierungsnummer",
+      "registryOfficeTitle": "Gemeinsame Registerstelle nach § 11a GewO",
+      "phoneLabel": "Telefon:",
+      "phoneFee": "0,20 EUR je Anruf"
+    },
+    "advice": {
+      "title": "Beratung und Art der Vergütung",
+      "offered": "Die Healio GmbH bietet Beratung im Zusammenhang mit der Vermittlung von Versicherungsverträgen an.",
+      "remuneration": "Für die Vermittlung und Betreuung von Versicherungsverträgen erhält die Healio GmbH ausschließlich eine Courtage beziehungsweise Provision vom Versicherungsunternehmen. Diese Vergütung ist in der Versicherungsprämie enthalten.",
+      "noOtherRemuneration": "Kunden zahlen keine gesonderte direkte Vergütung an die Healio GmbH. Weitere Vergütungen, andere Zuwendungen oder eine Kombination verschiedener Vergütungsarten werden nicht bezogen."
+    },
+    "participations": {
+      "title": "Beteiligungsverhältnisse",
+      "outbound": "Die Healio GmbH hält keine unmittelbare oder mittelbare Beteiligung an den Stimmrechten oder am Kapital eines Versicherungsunternehmens.",
+      "inbound": "Kein Versicherungsunternehmen und kein Mutterunternehmen eines Versicherungsunternehmens hält eine unmittelbare oder mittelbare Beteiligung an den Stimmrechten oder am Kapital der Healio GmbH."
+    },
+    "dispute": {
+      "title": "Anschriften der Schlichtungsstellen",
+      "intro": "Bei Streitigkeiten aus der Versicherungsvermittlung können sich Verbraucher an die folgenden anerkannten Schlichtungsstellen wenden:"
+    },
+    "advisoryBasis": {
+      "title": "Beratungsgrundlage nach § 60 VVG",
+      "lead": "§ 60 VVG regelt die Grundlage unserer Beratung – nicht die statusbezogene Erstinformation.",
+      "text": "Als Versicherungsmakler stützen wir unsere Empfehlung grundsätzlich auf eine hinreichende Zahl von auf dem Markt angebotenen Versicherungsverträgen und Versicherungsunternehmen, sodass wir nach fachlichen Kriterien empfehlen können, welcher Vertrag geeignet ist, Ihre Bedürfnisse zu erfüllen.",
+      "restricted": "Sollte einer Empfehlung im Einzelfall keine hinreichende Marktbreite zugrunde liegen, informieren wir Sie vor Abgabe Ihrer Vertragserklärung ausdrücklich über die eingeschränkte Versicherer- und Vertragsauswahl, die zugrunde gelegte Markt- und Informationsgrundlage sowie die berücksichtigten Versicherungsunternehmen."
+    },
+    "closing": "Diese Information wird unentgeltlich bereitgestellt. Bitte bewahren Sie sie für Ihre Unterlagen auf. Über die Druckfunktion Ihres Browsers können Sie die Seite ausdrucken oder als PDF speichern."
   }
 }
