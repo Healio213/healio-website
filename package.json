@@ -12,7 +12,9 @@
     "test:homepage": "node scripts/check-homepage-contract.mjs",
     "test:company": "node scripts/check-company-contract.mjs",
     "test:services": "node scripts/check-services-contract.mjs",
-    "test:first-information": "node scripts/check-first-information-contract.mjs"
+    "test:first-information": "node scripts/check-first-information-contract.mjs",
+    "test:partner": "node scripts/check-partner-contract.mjs",
+    "test:about": "node scripts/check-about-contract.mjs"
   },
   "dependencies": {
     "@babel/traverse": "^7.26.4",

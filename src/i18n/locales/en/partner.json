@@ -1,67 +1,138 @@
 {
   "hero": {
-    "badge": "For Therapists, Practices & Specialty Shops",
-    "title": "Up to €1,000 Budget for Your Services.",
-    "subtitle": "Your patients receive a health budget of up to €3,000. Up to €1,000 of that is available for naturopathy, osteopathy, and alternative therapies. For you, that means: full treatment cycles and no more therapy dropouts.",
+    "badge": "For practices, therapists and opticians",
+    "title": "So good care does not stop at <highlight>out-of-pocket costs</highlight>.",
+    "subtitle": "Depending on their tariff and personal eligibility, your patients may be able to use a health budget of up to <highlight>EUR 3,000 over two years</highlight>. Your practice provides neutral information. Healio checks, advises and supports.",
+    "cta": "Book a 30-minute introduction",
+    "roleNote": "No insurance advice by the practice is required.",
+    "imageAltMobile": "Consultation in a bright healthcare practice",
+    "imageAltDesktop": "A confidential conversation between a therapist and patient",
+    "videoPreviewAlt": "Preview of Healio's explainer video for partner practices",
+    "videoPlayLabel": "Play explainer video",
     "videoFallback": "Your browser does not support video."
   },
+  "trust": {
+    "budget": "Up to EUR 3,000 health budget",
+    "information": "Neutral patient information",
+    "advice": "Healio advises and brokers",
+    "meeting": "30-minute introduction"
+  },
+  "quality": {
+    "label": "Awards and tests for selected providers in the Healio concept"
+  },
+  "professionalCover": {
+    "badge": "Protection for healthcare professionals",
+    "title": "And who protects you?",
+    "text": "Professional liability, practice interruption, occupational disability and Rürup pensions – combined professionally, organised digitally and supported personally.",
+    "note": "The right solution depends on your profession, protection needs and existing cover.",
+    "cta": "Explore professional protection",
+    "meta": "Short check, free and without obligation"
+  },
   "problem": {
-    "title": "Does This Sound Familiar?",
-    "text": "You know exactly which treatment would help your patient right now. 10 sessions of osteopathy, a holistic pain therapy, a complete TCM program. But after the third session, the patient drops out. Not because the therapy isn't working, but because the costs are too high. That's frustrating for you as a practitioner and harmful to your patient."
+    "title": "The treatment plan is ready. <highlight>The budget is not always.</highlight>",
+    "text": "When patient contributions rise, recommended services may be postponed, reduced or not started at all. Healio helps patients understand which reimbursement and bonus options may be available to them – without influencing the practice's medical decision."
   },
   "budget": {
-    "title": "The Healio Health Budget",
-    "subtitle": "Your patients combine the IKK health insurance bonus with supplementary insurance to receive a real budget for health services.",
-    "total": "Total Health Budget",
-    "totalAmount": "up to €3,000",
-    "totalDesc": "over 2 years through IKK bonus + supplementary insurance",
-    "naturheilkunde": "Naturopathy & Alternative Medicine",
-    "naturheilkundeAmount": "up to €1,000",
-    "naturheilkundeDesc": "For naturopaths, osteopathy, TCM, chiropractic and more",
-    "sehhilfen": "Vision Care",
-    "sehhilfenAmount": "up to €600",
-    "sehhilfenDesc": "For glasses, contact lenses and prescription sunglasses",
-    "ikk": "IKK Insurance Bonus",
-    "ikkAmount": "over €700",
-    "ikkDesc": "Annual bonus from the statutory health insurance"
+    "title": "The <highlight>Healio health budget</highlight>",
+    "subtitle": "Depending on their personal situation, patients may be able to combine health insurer bonuses with supplementary insurance benefits. Healio checks eligibility individually and explains which components can actually be used.",
+    "total": "Total health budget",
+    "totalAmount": "up to EUR 3,000",
+    "totalDesc": "over two years from potential health insurer bonuses and tariff benefits",
+    "naturheilkunde": "Naturopathy and alternative medicine",
+    "naturheilkundeAmount": "up to EUR 1,000",
+    "naturheilkundeDesc": "Tariff benefits for services including naturopathy, osteopathy, TCM and chiropractic care",
+    "sehhilfen": "Vision aids",
+    "sehhilfenAmount": "up to EUR 500",
+    "sehhilfenDesc": "SDK tariff benefit for vision aids. A potential freely usable IKK cash bonus may further reduce the patient's contribution.",
+    "footnote": "The actual amount and availability depend, among other things, on the selected tariff, its conditions and documented bonus activities."
   },
   "partners": {
-    "title": "Who Is Healio For?",
-    "subtitle": "These professionals benefit directly from their patients' and customers' health budget.",
+    "title": "Who is <highlight>Healio</highlight> for?",
+    "subtitle": "For practices and specialist retailers whose patients or customers regularly co-finance healthcare services themselves.",
     "heilpraktiker": "Naturopaths",
-    "heilpraktikerDesc": "Up to €1,000 for your treatments. Your patients can afford the full therapy.",
+    "heilpraktikerDesc": "Tariff benefits for naturopathy may give patients additional financial room for planned treatments.",
     "osteopath": "Osteopaths",
-    "osteopathDesc": "Osteopathic treatments are covered by the naturopathy budget. Complete treatment cycles instead of single sessions.",
-    "tcm": "TCM Practitioners",
-    "tcmDesc": "Acupuncture, herbal therapy, Tuina. Your patients can complete the entire TCM program.",
+    "osteopathDesc": "Osteopathic services may be partially reimbursed depending on the tariff and eligibility requirements.",
+    "tcm": "TCM practitioners",
+    "tcmDesc": "Depending on the tariff, benefits from the naturopathy budget may apply to acupuncture, herbal therapy or Tuina.",
     "chiropraktiker": "Chiropractors",
-    "chiropraktikerDesc": "Chiropractic adjustments and treatment series are covered through the naturopathy budget.",
-    "brillenladen": "Optical Shops & Opticians",
-    "brillenladenDesc": "Up to €600 vision budget. Your customers can afford the glasses they truly want.",
+    "chiropraktikerDesc": "Healio checks whether and to what extent chiropractic services are covered by the patient's individual tariff.",
+    "brillenladen": "Optical shops and opticians",
+    "brillenladenDesc": "The SDK tariff provides up to EUR 500 for vision aids. A potential IKK cash bonus may be used freely in addition.",
     "hebamme": "Midwives",
-    "hebammeDesc": "Recommend the health budget to your families for preventive care, naturopathy, and child health services."
+    "hebammeDesc": "You can neutrally point families to the information. Healio handles the individual check, advice and brokerage."
   },
   "solution": {
-    "title": "This Is How Easy It Works for You.",
-    "relaxedPatients": "Zero Effort for You",
-    "relaxedPatientsDesc": "Place our information cards in your waiting room or hand them out directly. We handle everything else. Consultation, application, processing.",
-    "sustainableTherapy": "Full Treatment Cycles",
-    "sustainableTherapyDesc": "Patients with a health budget don't drop out after the third session. They stay until the end of therapy. That improves your outcomes and your revenue.",
-    "protectedTime": "Zero Risk, Zero Cost",
-    "protectedTimeDesc": "The partnership is completely free. We deliver the information materials at no charge. No contracts, no obligations."
+    "title": "A clear process. <highlight>Clear roles.</highlight>",
+    "manageableEffort": "Manageable practice effort",
+    "manageableEffortDesc": "You provide neutral information or a QR code. Insurance advice and application support remain with Healio.",
+    "financialRoom": "More financial room",
+    "financialRoomDesc": "A suitable health budget may reduce patient contributions. Patients decide for themselves whether and how to use benefits.",
+    "freeParticipation": "Participate free of charge",
+    "freeParticipationDesc": "Partner practices pay no participation fee. Healio provides information materials free of charge."
   },
   "steps": {
-    "step1Title": "Quick Introduction",
-    "step1Desc": "45 minutes is all it takes. We explain the concept and you decide if it fits your practice.",
-    "step2Title": "Receive Materials",
-    "step2Desc": "You receive our premium display stand with flyers for your waiting room. Free and ready to set up.",
-    "step3Title": "Patients Benefit",
-    "step3Desc": "Your patients scan the QR code, secure their budget, and can afford your treatment. You focus on healing."
+    "step1Title": "30-minute introduction",
+    "step1Desc": "We explain the concept, responsibilities and process. You then decide at your leisure whether Healio fits your practice.",
+    "step2Title": "Provide information",
+    "step2Desc": "You receive neutral cards, flyers or a QR code and decide for yourself where you want to refer to them.",
+    "step3Title": "Healio takes over",
+    "step3Desc": "Interested patients contact Healio directly. We check eligibility, provide individual advice and, if requested, broker a suitable solution."
+  },
+  "roleProcess": {
+    "eyebrow": "Responsibilities clearly separated",
+    "title": "Your practice treats. <highlight>Healio advises.</highlight>",
+    "subtitle": "The partnership creates a simple information path without turning the treatment room into a sales conversation.",
+    "practiceLabel": "Practice",
+    "practiceTitle": "Provide neutral information",
+    "practiceText": "You make patients aware of the concept and provide information materials or a QR code.",
+    "patientLabel": "Patient",
+    "patientTitle": "Decide voluntarily",
+    "patientText": "Interested patients decide for themselves whether they want to learn more and contact Healio directly.",
+    "healioLabel": "Healio",
+    "healioTitle": "Check, advise and support",
+    "healioText": "We clarify eligibility, explain options and, if requested, handle insurance brokerage and ongoing support.",
+    "closing": "You remain professionally independent and focus on treatment."
+  },
+  "faq": {
+    "title": "Frequently asked questions about the <highlight>partnership</highlight>",
+    "subtitle": "Responsibilities, benefits and requirements explained clearly.",
+    "items": [
+      {
+        "question": "What exactly is the Healio health budget?",
+        "answer": "Depending on their personal situation, patients may be able to combine potential health insurer bonuses with supplementary insurance tariff benefits. This can result in a health budget of up to EUR 3,000 over two years. Healio checks individual eligibility."
+      },
+      {
+        "question": "Does the partnership cost my practice anything?",
+        "answer": "Partner practices pay no participation fee. Healio provides information materials and displays free of charge. After the introductory meeting, you decide for yourself whether and where to use the information."
+      },
+      {
+        "question": "Do I have to explain or recommend insurance?",
+        "answer": "No. Your role is limited to providing neutral information. Healio handles the individual check, insurance advice, brokerage and application support directly with the interested patient."
+      },
+      {
+        "question": "Which services may be reimbursed?",
+        "answer": "Depending on the tariff, benefits may include naturopathy, osteopathy, TCM, chiropractic care, vision aids and dental services. Scope, waiting periods and reimbursement conditions are always determined by the selected tariff."
+      },
+      {
+        "question": "Do I have to change my practice concept?",
+        "answer": "No. Treatment, pricing and professional decisions remain entirely with you. Healio only adds a neutral information path for patients who wish to review their funding options."
+      },
+      {
+        "question": "How are the vision aid benefits structured?",
+        "answer": "The SDK tariff provides up to EUR 500 for vision aids. Separately, documented activities may generate a freely usable IKK cash bonus that can further reduce the patient's contribution. It is not a flat-rate glasses subsidy."
+      }
+    ]
   },
   "cta": {
-    "title": "Become a Partner Practice for Free",
-    "subtitle": "Become a Healio partner in 45 minutes. No risk, no cost, no obligation.",
+    "title": "Is Healio right for <highlight>your practice</highlight>?",
+    "subtitle": "In 30 minutes, we clarify the concept, responsibilities and process. You then decide whether you want to offer this information path to your patients.",
     "calendarError": "Calendar could not be loaded",
-    "calendarErrorDesc": "Please check your internet connection or disable any ad blockers."
+    "calendarErrorDesc": "Please check your internet connection or disable any active content blocker."
+  },
+  "footer": {
+    "title": "Good care needs <highlight>clear paths</highlight>.",
+    "subtitle": "30 minutes. Clear roles. An honest decision.",
+    "cta": "Book an introduction"
   }
 }

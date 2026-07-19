@@ -1,77 +1,138 @@
 {
   "hero": {
-    "badge": "Für Therapeuten, Praxen & Fachgeschäfte",
-    "title": "Bis zu <highlight>1.000 €</highlight> Budget für deine Leistungen.",
-    "subtitle": "Deine Patienten erhalten ein Gesundheitsbudget von bis zu <highlight>3.000 €</highlight>. Davon stehen bis zu <highlight>1.000 €</highlight> für Naturheilkunde, Osteopathie und alternative Therapien bereit. Das bedeutet für dich: <highlight>volle Behandlungszyklen</highlight> und <highlight>keine Therapieabbrüche</highlight>.",
-    "cta": "Jetzt kostenloses Kennenlernen sichern",
+    "badge": "Für Praxen, Therapeuten und Optiker",
+    "title": "Damit gute Behandlung nicht am <highlight>Eigenanteil</highlight> endet.",
+    "subtitle": "Mit Healio können deine Patienten – abhängig von Tarif und persönlichen Voraussetzungen – ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> nutzen. Deine Praxis informiert neutral. Healio prüft, berät und begleitet.",
+    "cta": "30-minütiges Kennenlernen buchen",
+    "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
+    "imageAltMobile": "Beratungsgespräch in einer hellen Gesundheitspraxis",
+    "imageAltDesktop": "Vertrauensvolles Gespräch zwischen Therapeut und Patient",
+    "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
+    "videoPlayLabel": "Erklärvideo starten",
     "videoFallback": "Dein Browser unterstützt kein Video."
   },
+  "trust": {
+    "budget": "Bis zu 3.000 EUR Gesundheitsbudget",
+    "information": "Neutrale Informationen für Patienten",
+    "advice": "Healio berät und vermittelt",
+    "meeting": "30 Minuten Kennenlernen"
+  },
+  "quality": {
+    "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept"
+  },
+  "professionalCover": {
+    "badge": "Vorsorge für Heilberufe",
+    "title": "Und wer sichert eigentlich dich ab?",
+    "text": "Berufshaftpflicht, Praxisausfall, Berufsunfähigkeit und Rürup – fachlich gebündelt, digital organisiert und persönlich begleitet.",
+    "note": "Welche Lösung passt, hängt von Beruf, Absicherungsbedarf und bestehendem Schutz ab.",
+    "cta": "Zur Heilberufe-Vorsorge",
+    "meta": "Kurzer Check, kostenlos und unverbindlich"
+  },
   "problem": {
-    "title": "Kennst du das?",
-    "text": "Du weißt genau, welche Behandlung deinem Patienten jetzt helfen würde. 10 Sitzungen Osteopathie, eine ganzheitliche Schmerztherapie, eine vollständige TCM Kur. Doch nach der dritten Sitzung <highlight>bricht der Patient ab</highlight>. Nicht weil die Therapie nicht wirkt, sondern weil die Kosten zu hoch sind. Das frustriert dich als Behandler und schadet deinem Patienten."
+    "title": "Der Behandlungsplan steht. <highlight>Das Budget nicht immer.</highlight>",
+    "text": "Wenn Eigenanteile steigen, werden empfohlene Leistungen manchmal verschoben, reduziert oder gar nicht erst begonnen. Healio zeigt Patienten verständlich, welche Erstattungs- und Bonusmöglichkeiten für sie infrage kommen – ohne die medizinische Entscheidung der Praxis zu beeinflussen."
   },
   "budget": {
     "title": "Das <highlight>Healio Gesundheitsbudget</highlight>",
-    "subtitle": "Deine Patienten kombinieren den <highlight>IKK Kassenbonus</highlight> mit einer <highlight>Zusatzversicherung</highlight> und erhalten so ein echtes Budget für Gesundheitsleistungen.",
+    "subtitle": "Je nach persönlicher Situation können Patienten Kassenboni und Leistungen einer Zusatzversicherung kombinieren. Healio prüft die Voraussetzungen individuell und erklärt, welche Bausteine tatsächlich nutzbar sind.",
     "total": "Gesundheitsbudget gesamt",
-    "totalAmount": "bis zu 3.000 €",
-    "totalDesc": "in 2 Jahren durch IKK Bonus + Zusatzversicherung",
-    "naturheilkunde": "Naturheilkunde & Alternativmedizin",
-    "naturheilkundeAmount": "bis zu 1.000 €",
-    "naturheilkundeDesc": "Für Heilpraktiker, Osteopathie, TCM, Chiropraktik und mehr",
+    "totalAmount": "bis zu 3.000 EUR",
+    "totalDesc": "in zwei Jahren aus möglichen Kassenboni und tariflichen Leistungen",
+    "naturheilkunde": "Naturheilkunde und Alternativmedizin",
+    "naturheilkundeAmount": "bis zu 1.000 EUR",
+    "naturheilkundeDesc": "Tarifliche Leistungen unter anderem für Heilpraktiker, Osteopathie, TCM und Chiropraktik",
     "sehhilfen": "Sehhilfen",
-    "sehhilfenAmount": "bis zu 600 €",
-    "sehhilfenDesc": "Für Brillen, Kontaktlinsen und Sonnenbrillen mit Sehstärke",
-    "ikk": "IKK Kassenbonus",
-    "ikkAmount": "über 700 €",
-    "ikkDesc": "Jährlicher Bonus der gesetzlichen Krankenkasse"
+    "sehhilfenAmount": "bis zu 500 EUR",
+    "sehhilfenDesc": "Tarifliche Sehhilfenleistung der SDK. Ein möglicher, frei verwendbarer IKK-Geldbonus kann den Eigenanteil zusätzlich reduzieren.",
+    "footnote": "Die konkrete Höhe und Verfügbarkeit hängen unter anderem vom gewählten Tarif, den tariflichen Voraussetzungen sowie den nachgewiesenen Bonusmaßnahmen ab."
   },
   "partners": {
-    "title": "Für wen ist <highlight>Healio</highlight>?",
-    "subtitle": "Diese Berufsgruppen profitieren direkt vom <highlight>Gesundheitsbudget</highlight> ihrer Patienten und Kunden.",
+    "title": "Für wen ist <highlight>Healio</highlight> gedacht?",
+    "subtitle": "Für Praxen und Fachgeschäfte, deren Patienten oder Kunden regelmäßig Gesundheitsleistungen selbst mitfinanzieren.",
     "heilpraktiker": "Heilpraktiker",
-    "heilpraktikerDesc": "Bis zu 1.000 € für deine Behandlungen. Deine Patienten können sich die volle Therapie leisten.",
+    "heilpraktikerDesc": "Tarifliche Leistungen für Naturheilkunde können Patienten zusätzlichen finanziellen Spielraum für geplante Behandlungen geben.",
     "osteopath": "Osteopathen",
-    "osteopathDesc": "Osteopathische Behandlungen werden aus dem Naturheilkunde Budget erstattet. Vollständige Behandlungszyklen statt Einzelsitzungen.",
-    "tcm": "TCM Therapeuten",
-    "tcmDesc": "Akupunktur, Kräutertherapie, Tuina. Deine Patienten können die gesamte TCM Kur durchziehen.",
+    "osteopathDesc": "Osteopathische Leistungen können abhängig von Tarif und Voraussetzungen teilweise erstattet werden.",
+    "tcm": "TCM-Therapeuten",
+    "tcmDesc": "Für Akupunktur, Kräutertherapie oder Tuina können je nach Tarif Leistungen aus dem Naturheilkunde-Budget infrage kommen.",
     "chiropraktiker": "Chiropraktiker",
-    "chiropraktikerDesc": "Chiropraktische Justierungen und Behandlungsserien werden über das Naturheilkunde Budget abgedeckt.",
-    "brillenladen": "Brillengeschäfte & Optiker",
-    "brillenladenDesc": "Bis zu 600 € Sehhilfen Budget. Deine Kunden können sich die Brille leisten, die sie wirklich wollen.",
+    "chiropraktikerDesc": "Healio prüft, ob und in welchem Umfang chiropraktische Leistungen im individuellen Tarif berücksichtigt werden.",
+    "brillenladen": "Brillengeschäfte und Optiker",
+    "brillenladenDesc": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Ein möglicher IKK-Geldbonus kann zusätzlich frei eingesetzt werden.",
     "hebamme": "Hebammen",
-    "hebammeDesc": "Empfiehl deinen Familien das Gesundheitsbudget für Vorsorge, Naturheilkunde und Kinderversorgung."
+    "hebammeDesc": "Du kannst Familien neutral auf die Informationen hinweisen. Die individuelle Prüfung, Beratung und Vermittlung übernimmt Healio."
   },
   "solution": {
-    "title": "So <highlight>einfach</highlight> funktioniert es für dich.",
-    "relaxedPatients": "<highlight>Null Aufwand</highlight> für dich",
-    "relaxedPatientsDesc": "Du legst unsere Informationskarten ins Wartezimmer oder gibst sie direkt mit. Alles Weitere übernehmen wir. Beratung, Antrag, Abwicklung.",
-    "sustainableTherapy": "<highlight>Volle Behandlungszyklen</highlight>",
-    "sustainableTherapyDesc": "Patienten mit Gesundheitsbudget brechen nicht nach der dritten Sitzung ab. Sie bleiben bis zum Ende der Therapie. Das verbessert deine Ergebnisse und deinen Umsatz.",
-    "protectedTime": "<highlight>Null Risiko</highlight>, null Kosten",
-    "protectedTimeDesc": "Die Partnerschaft ist komplett kostenlos. Die Informationsmaterialien liefern wir kostenfrei. Keine Vertragsbindung, keine Verpflichtungen."
+    "title": "Ein klarer Prozess. <highlight>Klare Rollen.</highlight>",
+    "manageableEffort": "Überschaubarer Praxisaufwand",
+    "manageableEffortDesc": "Du stellst neutrale Informationen oder einen QR-Code bereit. Versicherungsberatung und Antragsbegleitung bleiben bei Healio.",
+    "financialRoom": "Mehr finanzieller Spielraum",
+    "financialRoomDesc": "Ein passendes Gesundheitsbudget kann Eigenanteile reduzieren. Ob und wie Leistungen genutzt werden, entscheiden Patienten selbst.",
+    "freeParticipation": "Kostenfrei teilnehmen",
+    "freeParticipationDesc": "Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien stellt Healio kostenfrei zur Verfügung."
   },
   "steps": {
-    "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest, ob es zu deiner Praxis passt.",
-    "step2Title": "Materialien erhalten",
-    "step2Desc": "Du bekommst unseren hochwertigen Aufsteller mit Flyern für dein Wartezimmer. Kostenlos und fertig zum Aufstellen.",
-    "step3Title": "Patienten profitieren",
-    "step3Desc": "Deine Patienten scannen den QR Code, sichern sich ihr Budget und können sich deine Behandlung leisten. Du konzentrierst dich aufs Heilen."
+    "step1Title": "30-Minuten-Kennenlernen",
+    "step1Desc": "Wir erklären Konzept, Rollen und Ablauf. Danach entscheidest du in Ruhe, ob Healio zu deiner Praxis passt.",
+    "step2Title": "Information bereitstellen",
+    "step2Desc": "Du erhältst neutrale Karten, Flyer oder einen QR-Code und entscheidest selbst, wo du darauf hinweisen möchtest.",
+    "step3Title": "Healio übernimmt",
+    "step3Desc": "Interessierte Patienten melden sich direkt bei Healio. Wir prüfen Voraussetzungen, beraten individuell und vermitteln auf Wunsch eine passende Lösung."
   },
-  "cta": {
-    "title": "Jetzt <highlight>kostenlos</highlight> Partnerpraxis werden",
-    "subtitle": "In 45 Minuten zum <highlight>Healio Partner</highlight>. Kein Risiko, keine Kosten, keine Verpflichtung.",
-    "calendarError": "Kalender konnte nicht geladen werden",
-    "calendarErrorDesc": "Bitte überprüfe deine Internetverbindung oder deaktiviere eventuelle Adblocker."
+  "roleProcess": {
+    "eyebrow": "Verantwortung sauber getrennt",
+    "title": "Deine Praxis behandelt. <highlight>Healio berät.</highlight>",
+    "subtitle": "Die Partnerschaft schafft einen einfachen Informationsweg, ohne aus dem Behandlungszimmer ein Verkaufsgespräch zu machen.",
+    "practiceLabel": "Praxis",
+    "practiceTitle": "Neutral informieren",
+    "practiceText": "Du machst Patienten auf das Konzept aufmerksam und stellst Informationsmaterial oder einen QR-Code bereit.",
+    "patientLabel": "Patient",
+    "patientTitle": "Freiwillig entscheiden",
+    "patientText": "Interessierte Patienten entscheiden selbst, ob sie mehr erfahren möchten, und wenden sich direkt an Healio.",
+    "healioLabel": "Healio",
+    "healioTitle": "Prüfen, beraten, begleiten",
+    "healioText": "Wir klären Voraussetzungen, erklären Optionen und übernehmen auf Wunsch die Versicherungsvermittlung und weitere Begleitung.",
+    "closing": "Du bleibst fachlich unabhängig und konzentrierst dich auf die Behandlung."
   },
   "faq": {
     "title": "Häufige Fragen zur <highlight>Partnerschaft</highlight>",
-    "subtitle": "Alles was du wissen musst, kurz und ehrlich."
+    "subtitle": "Rollen, Leistungen und Voraussetzungen verständlich erklärt.",
+    "items": [
+      {
+        "question": "Was genau ist das Healio Gesundheitsbudget?",
+        "answer": "Je nach persönlicher Situation können Patienten mögliche Kassenboni mit tariflichen Leistungen einer Zusatzversicherung kombinieren. So sind bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich. Healio prüft im Einzelfall, welche Voraussetzungen erfüllt sind."
+      },
+      {
+        "question": "Kostet mich die Partnerschaft etwas?",
+        "answer": "Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien und Aufsteller stellt Healio kostenfrei zur Verfügung. Nach dem Kennenlernen entscheidest du selbst, ob und wo du die Informationen einsetzen möchtest."
+      },
+      {
+        "question": "Muss ich Versicherungen erklären oder empfehlen?",
+        "answer": "Nein. Deine Aufgabe ist ausschließlich die neutrale Information. Die individuelle Prüfung, Versicherungsberatung, Vermittlung und Antragsbegleitung übernimmt Healio direkt mit dem interessierten Patienten."
+      },
+      {
+        "question": "Welche Leistungen können erstattet werden?",
+        "answer": "Je nach Tarif können unter anderem Naturheilkunde, Osteopathie, TCM, Chiropraktik, Sehhilfen und Zahnleistungen berücksichtigt werden. Umfang, Wartezeiten und Erstattungsvoraussetzungen richten sich immer nach dem gewählten Tarif."
+      },
+      {
+        "question": "Muss ich mein Praxiskonzept ändern?",
+        "answer": "Nein. Behandlung, Preisgestaltung und fachliche Entscheidungen bleiben vollständig bei dir. Healio ergänzt lediglich einen neutralen Informationsweg für Patienten, die ihre Finanzierungsmöglichkeiten prüfen möchten."
+      },
+      {
+        "question": "Wie setzen sich die Leistungen für Sehhilfen zusammen?",
+        "answer": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Separat kann durch nachgewiesene Maßnahmen ein frei verwendbarer IKK-Geldbonus entstehen, der den Eigenanteil zusätzlich reduzieren kann. Er ist kein pauschaler Brillenzuschuss."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Passt Healio zu <highlight>deiner Praxis</highlight>?",
+    "subtitle": "In 30 Minuten klären wir Konzept, Rollen und Ablauf. Danach entscheidest du, ob du deinen Patienten den Informationsweg anbieten möchtest.",
+    "calendarError": "Kalender konnte nicht geladen werden",
+    "calendarErrorDesc": "Bitte überprüfe deine Internetverbindung oder deaktiviere einen möglicherweise aktiven Inhaltsblocker."
   },
   "footer": {
-    "title": "Bereit für den <highlight>nächsten Schritt</highlight>?",
-    "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur Zahlen.",
-    "cta": "Strategiegespräch sichern"
+    "title": "Gute Versorgung braucht <highlight>klare Wege</highlight>.",
+    "subtitle": "30 Minuten. Klare Rollen. Eine ehrliche Entscheidung.",
+    "cta": "Kennenlernen buchen"
   }
 }

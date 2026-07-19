@@ -2,21 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, AlertCircle, Smile, Leaf, Clock, HeartHandshake as Handshake, Package, TrendingUp, Stethoscope, Brain, Flower2, Activity, Glasses, Baby, Euro, Heart, Shield } from 'lucide-react';
+import { PlayCircle, AlertCircle, Smile, Leaf, HeartHandshake as Handshake, Package, TrendingUp, Stethoscope, Brain, Flower2, Activity, Glasses, Baby, Heart, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
-import { useToast } from '@/components/ui/use-toast';
 import PartnerTrustBar from '@/components/sections/partner/PartnerTrustBar';
-import PartnerTestimonials from '@/components/sections/partner/PartnerTestimonials';
+import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 import HighlightText from '@/components/ui/HighlightText';
 
 const PartnerPage = () => {
-  const { t } = useTranslation('partner');
+  const { t, i18n } = useTranslation('partner');
   const { t: tSeo } = useTranslation('seo');
   const [scriptError, setScriptError] = useState(false);
-  const { toast } = useToast();
+  const isEnglish = i18n.language?.startsWith('en');
+  const canonicalUrl = isEnglish ? 'https://healio.de/en/partner' : 'https://healio.de/partner';
 
   useEffect(() => {
     // Prevent multiple script injections
@@ -63,7 +63,9 @@ const PartnerPage = () => {
 
   const schemaMarkup = createWebPageSchema(
     tSeo('partner.title'),
-    tSeo('partner.description')
+    tSeo('partner.description'),
+    canonicalUrl,
+    isEnglish ? 'en-US' : 'de-DE'
   );
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -141,7 +143,7 @@ const PartnerPage = () => {
       <SEOHead
         title={tSeo('partner.title')}
         description={tSeo('partner.description')}
-        canonicalUrl="https://healio.de/partner"
+        canonicalUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
 
@@ -153,13 +155,13 @@ const PartnerPage = () => {
             {/* Mobile Image */}
             <img
               src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/4f016c2da039efb25e0e023c7adf970d.png"
-              alt="Two women in professional consultation with natural window light"
+              alt={t('hero.imageAltMobile')}
               className="w-full h-full object-cover object-center md:hidden"
             />
             {/* Desktop Image */}
             <img
               src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/66ea53b24c418ef3f92004d9368a889c.png"
-              alt="Warm, welcoming therapy session with a smiling therapist in a bright wellness room"
+              alt={t('hero.imageAltDesktop')}
               className="w-full h-full object-cover object-center hidden md:block"
             />
             {/* Lighter Overlay for desktop, stronger for mobile to ensure text readability */}
@@ -168,16 +170,19 @@ const PartnerPage = () => {
           </div>
 
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                <p className="inline-flex mb-5 rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
+                  {t('hero.badge')}
+                </p>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-xl mx-auto">
+                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
                 <Button
@@ -187,6 +192,10 @@ const PartnerPage = () => {
                 >
                   {t('hero.cta')}
                 </Button>
+                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80">
+                  <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
+                  {t('hero.roleNote')}
+                </p>
               </motion.div>
             </div>
           </div>
@@ -203,18 +212,20 @@ const PartnerPage = () => {
                 className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl relative"
               >
                 {!isVideoPlaying ? (
-                  <div
+                  <button
+                    type="button"
                     onClick={() => setIsVideoPlaying(true)}
-                    className="w-full h-full rounded-2xl flex items-center justify-center group cursor-pointer relative overflow-hidden"
+                    aria-label={t('hero.videoPlayLabel')}
+                    className="w-full h-full rounded-2xl flex items-center justify-center group cursor-pointer relative overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25c990]/50 focus-visible:ring-offset-4"
                   >
-                    <img src="/images/video-partner-thumb.jpg" alt="Erklärvideo Vorschau" className="absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/video-partner-thumb.jpg" alt={t('hero.videoPreviewAlt')} className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all" />
                     <div className="absolute inset-0 flex items-center justify-center z-10">
                       <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#25c990] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(37,201,144,0.5)] group-hover:scale-110 transition-transform duration-300">
                         <PlayCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ) : (
                   <video
                     ref={videoRef}
@@ -241,7 +252,7 @@ const PartnerPage = () => {
         {/* QUALITÄTSSIEGEL: SDK + IKK */}
         <section className="py-8 bg-white border-b border-gray-100">
           <div className="container mx-auto px-4">
-            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
+            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">{t('quality.label')}</p>
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
               <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
               <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
@@ -263,16 +274,16 @@ const PartnerPage = () => {
               <div>
                 <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
                   <Shield className="w-3.5 h-3.5" />
-                  Neu: Vorsorge für Heilberufe
+                  {t('professionalCover.badge')}
                 </div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                  Und wer sichert eigentlich dich ab?
+                  {t('professionalCover.title')}
                 </h2>
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-2">
-                  Berufshaftpflicht, Praxisausfall, Berufsunfähigkeit, Rürup. Gebündelt, digital, mit Konditionen, die du allein nicht bekommst.
+                  {t('professionalCover.text')}
                 </p>
                 <p className="text-sm text-white/75">
-                  Exklusive Rahmenverträge, nur über Healio. Bis zu 30 Prozent günstiger als Einzelverträge.
+                  {t('professionalCover.note')}
                 </p>
               </div>
               <div className="flex flex-col gap-3">
@@ -281,11 +292,11 @@ const PartnerPage = () => {
                   className="bg-white text-[#0b4d4a] hover:bg-white/90 text-base font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
                   <a href="/heilberufe-vorsorge">
-                    Zur Heilberufe-Vorsorge
+                    {t('professionalCover.cta')}
                   </a>
                 </Button>
                 <p className="text-xs text-white/70 text-center">
-                  30 Sekunden Check, unverbindlich
+                  {t('professionalCover.meta')}
                 </p>
               </div>
             </div>
@@ -375,6 +386,9 @@ const PartnerPage = () => {
                 <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
               </motion.div>
             </div>
+            <p className="mx-auto mt-7 max-w-4xl text-center text-xs leading-relaxed text-slate-500 sm:text-sm">
+              {t('budget.footnote')}
+            </p>
           </div>
         </section>
 
@@ -479,9 +493,9 @@ const PartnerPage = () => {
             {/* Benefits below steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
               {[
-                { icon: Smile, title: t('solution.relaxedPatients'), text: t('solution.relaxedPatientsDesc') },
-                { icon: Leaf, title: t('solution.sustainableTherapy'), text: t('solution.sustainableTherapyDesc') },
-                { icon: Shield, title: t('solution.protectedTime'), text: t('solution.protectedTimeDesc') },
+                { icon: Smile, title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
+                { icon: Leaf, title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
+                { icon: Shield, title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
               ].map((item, index) => {
                 const Icon = item.icon;
                 return (
@@ -505,8 +519,8 @@ const PartnerPage = () => {
           </div>
         </section>
 
-        {/* TESTIMONIALS */}
-        <PartnerTestimonials />
+        {/* KLARE ROLLEN STATT UNBELEGTER TESTIMONIALS */}
+        <PartnerRoleProcess />
 
         {/* FAQ */}
         <PartnerFAQ />

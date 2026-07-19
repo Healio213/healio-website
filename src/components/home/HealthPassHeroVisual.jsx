@@ -66,6 +66,7 @@ const HealthPassHeroVisual = () => {
       onPointerLeave={resetPointer}
       onPointerCancel={resetPointer}
       style={{ perspective: 1200 }}
+      aria-hidden="true"
     >
       <motion.div
         className={`absolute inset-0 ${motionEnabled ? 'will-change-transform' : ''}`}
@@ -80,7 +81,6 @@ const HealthPassHeroVisual = () => {
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 w-[112%] -translate-x-1/2 -translate-y-1/2 sm:left-[20%] sm:w-[165%] lg:left-[15%] lg:w-[180%]"
           style={{ maskImage: wordmarkMask, WebkitMaskImage: wordmarkMask }}
-          aria-hidden="true"
         >
           <motion.img
             data-health-pass-wordmark
@@ -104,7 +104,7 @@ const HealthPassHeroVisual = () => {
           />
         </div>
 
-        <div className="pointer-events-none absolute left-[54%] top-1/2 h-[62%] w-[92%] -translate-x-1/2 -translate-y-1/2 sm:w-[84%] lg:left-[63%] lg:h-[64%] lg:w-[78%]" aria-hidden="true">
+        <div className="pointer-events-none absolute left-[54%] top-1/2 h-[62%] w-[92%] -translate-x-1/2 -translate-y-1/2 sm:w-[84%] lg:left-[63%] lg:h-[64%] lg:w-[78%]">
           <motion.div
             data-health-pass-depth-ring
             className="absolute inset-0 rounded-[50%] opacity-40"
@@ -138,17 +138,17 @@ const HealthPassHeroVisual = () => {
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div
-            className="absolute left-1/2 top-1/2 w-[180%] -translate-x-[58%] -translate-y-1/2 sm:w-[168%] sm:-translate-x-[57%] lg:w-[145%] lg:-translate-x-[52%] 2xl:w-[150%] 2xl:-translate-x-[53%]"
+            className="absolute left-1/2 top-1/2 w-[180%] -translate-x-[58%] -translate-y-1/2 sm:w-[168%] sm:-translate-x-[57%] lg:w-[145%] lg:-translate-x-[48%] 2xl:w-[150%] 2xl:-translate-x-[49%]"
             style={{ maskImage: imageEdgeMask, WebkitMaskImage: imageEdgeMask }}
-            aria-hidden="true"
           >
             <div style={{ maskImage: imageMask, WebkitMaskImage: imageMask }}>
               <img
-                src="/images/healio-health-pass-hero-v2.webp"
+                src="/images/healio-health-pass-hero-v3.webp"
                 alt=""
                 width="1536"
                 height="1024"
-                fetchPriority="high"
+                loading="eager"
+                {...{ fetchpriority: 'high' }}
                 draggable="false"
                 className="h-auto w-full max-w-none select-none mix-blend-screen"
               />

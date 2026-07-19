@@ -1,41 +1,126 @@
 {
   "hero": {
-    "title": "The People Behind Healio.",
+    "eyebrow": "About Healio",
+    "title": "We make healthcare costs easier to plan.",
+    "description": "Healio GmbH is an independent insurance broker and operates a partner network for individuals, practices and companies. We combine statutory health insurance bonuses, supplementary health insurance and personal advice into solutions that are easy to understand.",
+    "primaryCta": "How Healio works",
+    "secondaryCta": "Book a conversation",
+    "brokerProof": "Healio GmbH · insurance broker licensed under section 34d (1) GewO",
+    "locationProof": "Personal advice from Hamburg",
+    "networkEyebrow": "The Healio principle",
+    "networkTitle": "One concept. Three perspectives.",
+    "networkDescription": "We bring the parties together without blurring their roles.",
+    "audiences": [
+      {
+        "key": "private",
+        "label": "Patients and individuals",
+        "text": "Understand supplementary cover and choose what fits."
+      },
+      {
+        "key": "practices",
+        "label": "Practices and health professionals",
+        "text": "Make financing options visible without acting as an intermediary."
+      },
+      {
+        "key": "companies",
+        "label": "Companies",
+        "text": "Design corporate benefits with clarity."
+      }
+    ]
+  },
+  "story": {
+    "eyebrow": "Why Healio exists",
+    "title": "Good care should not fail because costs are hard to understand.",
+    "paragraphs": [
+      "Frank Steinfurt founded Healio because many people pay for healthcare services themselves or postpone them, even though statutory insurance bonuses and supplementary insurance may create financial room.",
+      "The problem is rarely a lack of choice. It is a lack of orientation: plans, bonus rules and eligibility requirements interact and are often not explained in a way that makes confident decisions easy.",
+      "That is why Healio combines independent insurance advice with a partner network in healthcare. Practices can provide neutral information; assessment, advice and insurance intermediation remain with Healio."
+    ],
+    "conclusion": "The goal is not more insurance, but a solution people understand and can use in everyday life.",
     "founder": "Frank Steinfurt",
-    "founderRole": "Founder & CEO",
-    "quote1": "I founded Healio because I am convinced that every person deserves access to first-class healthcare, regardless of their insurance status.",
-    "quote2": "After years in the traditional insurance industry, it became clear to me: the system is too complicated, often non-transparent, and rarely puts people first.",
-    "quote3": "With Healio, we set out to change that. We created a platform that untangles complex health insurance plans and offers clear, honest solutions. No incomprehensible clauses, no false promises. Simply excellent healthcare that truly makes a difference in everyday life."
+    "founderRole": "Founder and Managing Director",
+    "founderLocation": "Healio GmbH · Hamburg",
+    "founderImageAlt": "Frank Steinfurt, founder and managing director of Healio GmbH"
   },
-  "values": {
-    "title": "Our Values",
-    "subtitle": "These four pillars form the foundation of our daily work and our vision for the future of health.",
-    "transparency": "Transparency",
-    "transparencyDesc": "No hidden costs, no surprises. We communicate honestly and openly.",
-    "trust": "Trust",
-    "trustDesc": "Over 120 partner practices and thousands of satisfied customers trust Healio.",
-    "innovation": "Innovation",
-    "innovationDesc": "We are digitizing healthcare and making it easier than ever before.",
-    "humanity": "Humanity",
-    "humanityDesc": "Behind every policy is a person. We never forget that."
+  "principles": {
+    "eyebrow": "How we work",
+    "title": "Clarity starts before a policy is taken out.",
+    "description": "We do not measure good advice by the number of products. We measure it by whether a decision is suitable and remains easy to understand.",
+    "items": [
+      {
+        "key": "needs",
+        "title": "Needs before plans",
+        "text": "We start with personal circumstances, desired benefits and budget — not with a product."
+      },
+      {
+        "key": "independent",
+        "title": "Independent advice",
+        "text": "As an insurance broker, we are not tied to a single insurer. We explain the selection, conditions and limitations."
+      },
+      {
+        "key": "clear",
+        "title": "Understand the decision",
+        "text": "We make reimbursement limits, health questions, waiting periods and bonus requirements visible."
+      },
+      {
+        "key": "personal",
+        "title": "Personal support",
+        "text": "From the first assessment and application to later questions, Healio remains available."
+      }
+    ]
   },
-  "stats": {
-    "title": "Our Success Story in Numbers",
-    "partners": "Partner Practices",
-    "budget": "max. Health Budget",
-    "areas": "Insurance Areas",
-    "satisfaction": "Customer Satisfaction as Goal"
+  "impact": {
+    "eyebrow": "What may become possible",
+    "title": "Concrete value, not sweeping promises.",
+    "description": "Statutory insurance bonuses and supplementary cover can complement each other. We show which components genuinely fit together and under what conditions.",
+    "items": [
+      {
+        "value": "EUR 3,000",
+        "label": "potential health budget over 2 years",
+        "detail": "from suitable plan benefits and insurance bonuses"
+      },
+      {
+        "value": "EUR 1,000",
+        "label": "potential reimbursement over 2 years",
+        "detail": "for naturopathy and osteopathy"
+      },
+      {
+        "value": "EUR 700+",
+        "label": "potential annual IKK bonus",
+        "detail": "when the relevant bonus activities are completed"
+      }
+    ],
+    "disclaimer": "The amounts shown are not automatic. They depend, among other things, on the selected plan, insurability, membership of IKK classic and the bonus activities actually completed. The applicable insurance and statutory health insurance terms are decisive."
   },
-  "social": {
-    "title": "Success That Gives Back.",
-    "text1": "We deeply believe that economic success carries a social responsibility. Companies do not exist in a vacuum, but within a society that supports them.",
-    "text2": "That is why we donate 10% of our annual profits to charitable and social projects, out of full conviction.",
-    "text3": "No corporate marketing, no buzzwords, just our honest promise to help where support is needed most. That is what humanity in practice means to us."
-  },
-  "cta": {
-    "title": "Ready for Better Healthcare?",
-    "subtitle": "Let's find out together how we can provide optimal coverage for you or your company.",
-    "button": "Get Advice Now",
-    "explore": "Discover"
+  "routes": {
+    "eyebrow": "Choose your starting point",
+    "title": "What can we do for you?",
+    "description": "Choose the area that fits your situation. Each page explains the benefits, requirements and next step.",
+    "items": [
+      {
+        "key": "private",
+        "routeKey": "leistungen",
+        "label": "For individuals",
+        "title": "Supplementary cover for you",
+        "text": "Outpatient, dental or hospital: find out which cover fits your life.",
+        "cta": "Explore insurance options"
+      },
+      {
+        "key": "practices",
+        "routeKey": "partner",
+        "label": "For practices",
+        "title": "More options for patients",
+        "text": "See how you can point out financing options while Healio provides the advice.",
+        "cta": "Explore the partner concept"
+      },
+      {
+        "key": "companies",
+        "routeKey": "unternehmen",
+        "label": "For companies",
+        "title": "Benefits for your workforce",
+        "text": "Bring pensions, health cover and other employee benefits into one clear concept.",
+        "cta": "Explore company solutions"
+      }
+    ]
   }
 }

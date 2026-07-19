@@ -104,8 +104,8 @@ export const seoRoutes = [
   },
   {
     path: '/partner',
-    title: 'Für Heilpraktiker – Mehr Patienten durch Kostenübernahme | Healio',
-    description: 'Healio-Partnerprogramm für Heilpraktiker: Therapieabbrüche verhindern, Patientenbindung stärken, Umsatz steigern. Kostenlose Partnerschaft.',
+    title: 'Für Praxen – Gesundheitsbudget verständlich erklären | Healio',
+    description: 'Kostenfreie Zusammenarbeit für Heilpraktiker, Osteopathen und Hebammen: Die Praxis informiert, Healio prüft und berät Patienten unabhängig.',
     canonical: 'https://healio.de/partner',
     keywords: 'Healio Partner, Heilpraktiker Partnerprogramm, Patienten Finanzierung Heilpraktiker, Kostenübernahme Naturheilkunde',
     lang: 'de',
@@ -168,8 +168,8 @@ export const seoRoutes = [
   },
   {
     path: '/about',
-    title: 'Über Healio – Ganzheitliche Gesundheit neu gedacht | Healio',
-    description: 'Healio verbindet Kassenboni mit Zusatzversicherungen zu einem Gesundheitsbudget von bis zu 3.000 €. Für Patienten und Heilpraktiker.',
+    title: 'Über Healio – Versicherung verständlich begleitet',
+    description: 'Die Healio GmbH verbindet unabhängige Versicherungsberatung mit einem Partnernetzwerk für Praxen und Unternehmen – verständlich, persönlich und digital begleitet.',
     canonical: 'https://healio.de/about',
     lang: 'de',
     hreflang: { de: 'https://healio.de/about', en: 'https://healio.de/en/about' },
@@ -351,8 +351,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/partner',
-    title: 'For Practitioners – More Patients Through Cost Coverage | Healio',
-    description: 'Healio partner program for practitioners: Prevent therapy dropouts, strengthen patient loyalty, increase revenue.',
+    title: 'For Practices – Explain Health Budgets Clearly | Healio',
+    description: 'A free partnership for naturopaths, osteopaths and midwives: The practice provides information while Healio independently reviews and advises patients.',
     canonical: 'https://healio.de/en/partner',
     lang: 'en',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
@@ -383,8 +383,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/about',
-    title: 'About Healio – Holistic Health Reimagined | Healio',
-    description: 'Healio combines insurance bonuses with supplementary coverage for a health budget of up to 3,000 €.',
+    title: 'About Healio – Insurance, Clearly Guided',
+    description: 'Healio GmbH combines independent insurance advice with a partner network for practices and companies – clear, personal and digitally supported.',
     canonical: 'https://healio.de/en/about',
     lang: 'en',
     hreflang: { de: 'https://healio.de/about', en: 'https://healio.de/en/about' },

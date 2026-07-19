@@ -1,41 +1,126 @@
 {
   "hero": {
-    "title": "Die Menschen hinter Healio.",
+    "eyebrow": "Über Healio",
+    "title": "Wir machen Gesundheitskosten planbarer.",
+    "description": "Die Healio GmbH ist unabhängiger Versicherungsmakler und betreibt ein Partnernetzwerk für Patienten, Praxen und Unternehmen. Wir verbinden Kassenboni, Krankenzusatzversicherungen und persönliche Beratung zu nachvollziehbaren Lösungen.",
+    "primaryCta": "So arbeitet Healio",
+    "secondaryCta": "Gespräch vereinbaren",
+    "brokerProof": "Healio GmbH · Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO",
+    "locationProof": "Persönliche Beratung aus Hamburg",
+    "networkEyebrow": "Das Healio-Prinzip",
+    "networkTitle": "Ein Konzept. Drei Perspektiven.",
+    "networkDescription": "Wir bringen die Beteiligten zusammen, ohne ihre Rollen zu vermischen.",
+    "audiences": [
+      {
+        "key": "private",
+        "label": "Patienten und Privatkunden",
+        "text": "Zusatzschutz verstehen und passend auswählen."
+      },
+      {
+        "key": "practices",
+        "label": "Praxen und Gesundheitsberufe",
+        "text": "Finanzierungswege sichtbar machen, ohne selbst zu vermitteln."
+      },
+      {
+        "key": "companies",
+        "label": "Unternehmen",
+        "text": "Betriebliche Vorsorge nachvollziehbar gestalten."
+      }
+    ]
+  },
+  "story": {
+    "eyebrow": "Warum es Healio gibt",
+    "title": "Gute Behandlung sollte nicht an unübersichtlichen Kosten scheitern.",
+    "paragraphs": [
+      "Frank Steinfurt hat Healio gegründet, weil viele Menschen Gesundheitsleistungen selbst bezahlen oder verschieben, obwohl Kassenboni und Zusatzversicherungen finanziellen Spielraum eröffnen können.",
+      "Das Problem ist selten fehlende Auswahl. Es ist fehlende Orientierung: Tarife, Bonusregeln und Voraussetzungen greifen ineinander und sind oft nicht so erklärt, dass eine sichere Entscheidung leichtfällt.",
+      "Darum verbindet Healio unabhängige Versicherungsberatung mit einem Partnernetzwerk im Gesundheitswesen. Praxen können neutrale Informationen bereitstellen; Prüfung, Beratung und Vermittlung bleiben bei Healio."
+    ],
+    "conclusion": "Das Ziel ist nicht mehr Versicherung, sondern eine Lösung, die verstanden wird und im Alltag ankommt.",
     "founder": "Frank Steinfurt",
-    "founderRole": "Gründer & Geschäftsführer",
-    "quote1": "Ich habe Healio gegründet, weil ich überzeugt bin, dass jeder Mensch Zugang zu erstklassiger Gesundheitsvorsorge verdient, unabhängig von seinem Versicherungsstatus.",
-    "quote2": "Nach Jahren in der traditionellen Versicherungsbranche wurde mir klar: Das System ist zu kompliziert, oft intransparent und stellt selten den Menschen in den Mittelpunkt.",
-    "quote3": "Mit Healio wollten wir das ändern. Wir haben eine Plattform geschaffen, die komplexe Gesundheitstarife entwirrt und klare, ehrliche Lösungen anbietet. Keine unverständlichen Klauseln, keine falschen Versprechen. Einfach exzellente Vorsorge, die im Alltag wirklich ankommt."
+    "founderRole": "Gründer und Geschäftsführer",
+    "founderLocation": "Healio GmbH · Hamburg",
+    "founderImageAlt": "Frank Steinfurt, Gründer und Geschäftsführer der Healio GmbH"
   },
-  "values": {
-    "title": "Unsere Werte",
-    "subtitle": "Diese vier Säulen bilden das Fundament unserer täglichen Arbeit und unserer Vision für die Zukunft der Gesundheit.",
-    "transparency": "Transparenz",
-    "transparencyDesc": "Keine versteckten Kosten, keine Überraschungen. Wir kommunizieren ehrlich und offen.",
-    "trust": "Vertrauen",
-    "trustDesc": "Über 120 Partnerpraxen und tausende zufriedene Kunden vertrauen auf Healio.",
-    "innovation": "Innovation",
-    "innovationDesc": "Wir digitalisieren die Gesundheitsvorsorge und machen sie so einfach wie nie zuvor.",
-    "humanity": "Menschlichkeit",
-    "humanityDesc": "Hinter jeder Police steht ein Mensch. Das vergessen wir nie."
+  "principles": {
+    "eyebrow": "Unsere Arbeitsweise",
+    "title": "Klarheit entsteht vor dem Abschluss.",
+    "description": "Wir messen gute Beratung nicht an der Zahl der Produkte, sondern daran, ob eine Entscheidung fachlich passt und verständlich bleibt.",
+    "items": [
+      {
+        "key": "needs",
+        "title": "Bedarf vor Tarif",
+        "text": "Wir beginnen bei Lebenssituation, gewünschten Leistungen und finanziellem Rahmen – nicht bei einem Produkt."
+      },
+      {
+        "key": "independent",
+        "title": "Unabhängig beraten",
+        "text": "Als Versicherungsmakler sind wir keinem einzelnen Versicherer verpflichtet. Wir erläutern Auswahl, Bedingungen und Grenzen."
+      },
+      {
+        "key": "clear",
+        "title": "Verständlich entscheiden",
+        "text": "Wir machen Erstattungsgrenzen, Gesundheitsfragen, Wartezeiten und Bonusvoraussetzungen sichtbar."
+      },
+      {
+        "key": "personal",
+        "title": "Persönlich begleiten",
+        "text": "Von der ersten Prüfung über den Antrag bis zu späteren Fragen bleibt Healio ansprechbar."
+      }
+    ]
   },
-  "stats": {
-    "title": "Unsere Erfolgsgeschichte in Zahlen",
-    "partners": "Partnerpraxen",
-    "budget": "max. Gesundheits-Budget",
-    "areas": "Versicherungsbereiche",
-    "satisfaction": "Kundenzufriedenheit als Ziel"
+  "impact": {
+    "eyebrow": "Was möglich werden kann",
+    "title": "Konkreter Nutzen statt großer Versprechen.",
+    "description": "Kassenbonus und Zusatzschutz können sich sinnvoll ergänzen. Wir zeigen, welche Bausteine unter welchen Voraussetzungen tatsächlich zusammenpassen.",
+    "items": [
+      {
+        "value": "3.000 EUR",
+        "label": "mögliches Gesundheitsbudget in 2 Jahren",
+        "detail": "aus passenden Tarifleistungen und Kassenboni"
+      },
+      {
+        "value": "1.000 EUR",
+        "label": "mögliche Erstattung in 2 Jahren",
+        "detail": "für Naturheilkunde und Osteopathie"
+      },
+      {
+        "value": "700 EUR+",
+        "label": "möglicher IKK-Bonus pro Jahr",
+        "detail": "bei entsprechend erfüllten Bonusmaßnahmen"
+      }
+    ],
+    "disclaimer": "Die genannten Werte entstehen nicht automatisch. Sie hängen unter anderem vom gewählten Tarif, der Versicherbarkeit, einer Mitgliedschaft bei der IKK classic und den tatsächlich erfüllten Bonusmaßnahmen ab. Maßgeblich sind die jeweiligen Versicherungs- und Kassenbedingungen."
   },
-  "social": {
-    "title": "Erfolg, der weitergegeben wird.",
-    "text1": "Wir glauben tief daran, dass wirtschaftlicher Erfolg eine gesellschaftliche Verantwortung mit sich bringt. Unternehmen existieren nicht im luftleeren Raum, sondern in einer Gesellschaft, die sie trägt.",
-    "text2": "Deshalb spenden wir aus vollster Überzeugung 10% unseres jährlichen Gewinns an gemeinnützige und soziale Projekte.",
-    "text3": "Kein Corporate-Marketing, keine Buzzwords – sondern unser ehrliches Versprechen, dort zu helfen, wo Unterstützung am dringendsten benötigt wird. Das ist für uns Menschlichkeit in der Praxis."
-  },
-  "cta": {
-    "title": "Bereit für bessere Gesundheitsvorsorge?",
-    "subtitle": "Lass uns gemeinsam herausfinden, wie wir dich oder dein Unternehmen optimal absichern können.",
-    "button": "Jetzt beraten lassen",
-    "explore": "Entdecken"
+  "routes": {
+    "eyebrow": "Der passende Einstieg",
+    "title": "Was können wir für dich tun?",
+    "description": "Wähle den Bereich, der zu deiner Situation passt. Auf jeder Seite erklären wir Leistungen, Voraussetzungen und den nächsten Schritt.",
+    "items": [
+      {
+        "key": "private",
+        "routeKey": "leistungen",
+        "label": "Für Privatkunden",
+        "title": "Zusatzschutz für dich",
+        "text": "Ambulant, Zahn oder stationär: Finde heraus, welcher Schutz zu deinem Leben passt.",
+        "cta": "Versicherungen ansehen"
+      },
+      {
+        "key": "practices",
+        "routeKey": "partner",
+        "label": "Für Praxen",
+        "title": "Mehr Möglichkeiten für Patienten",
+        "text": "Erfahre, wie du auf Finanzierungswege hinweisen kannst und Healio die Beratung übernimmt.",
+        "cta": "Partnerkonzept ansehen"
+      },
+      {
+        "key": "companies",
+        "routeKey": "unternehmen",
+        "label": "Für Unternehmen",
+        "title": "Vorsorge für die Belegschaft",
+        "text": "Ordne bAV, bKV und weitere Vorsorgebausteine in einem nachvollziehbaren Konzept.",
+        "cta": "Unternehmenslösungen ansehen"
+      }
+    ]
   }
 }

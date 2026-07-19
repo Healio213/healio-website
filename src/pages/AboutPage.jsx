@@ -1,64 +1,66 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLanguage } from '@/hooks/useLanguage';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
+import {
+  ArrowDown,
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  Compass,
+  Headphones,
+  MessageSquare,
+  ShieldCheck,
+  Stethoscope,
+  User,
+} from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import { createWebPageSchema, createOrganizationSchema } from '@/lib/createSchemaMarkup';
-import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
+import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
+
+const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
+
+const audienceIcons = {
+  private: User,
+  practices: Stethoscope,
+  companies: Building2,
+};
+
+const principleIcons = {
+  needs: Compass,
+  independent: ShieldCheck,
+  clear: MessageSquare,
+  personal: Headphones,
+};
 
 const AboutPage = () => {
   const { t } = useTranslation('about');
   const { t: tSeo } = useTranslation('seo');
-  const { getPath } = useLanguage();
-  // SEO Schema
-  const schemaMarkup = {
-    ...createWebPageSchema(
+  const { lang, getPath } = useLanguage();
+  const reduceMotion = useReducedMotion();
+
+  const audiences = t('hero.audiences', { returnObjects: true });
+  const storyParagraphs = t('story.paragraphs', { returnObjects: true });
+  const principles = t('principles.items', { returnObjects: true });
+  const impactItems = t('impact.items', { returnObjects: true });
+  const routes = t('routes.items', { returnObjects: true });
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/about' : 'https://healio.de/about';
+
+  const reveal = (delay = 0) => reduceMotion ? {} : {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.22 },
+    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+  };
+
+  const schemaMarkup = [
+    createWebPageSchema(
       tSeo('about.title'),
-      tSeo('about.description')
+      tSeo('about.description'),
+      canonicalUrl,
+      lang === 'en' ? 'en-US' : 'de-DE'
     ),
-    ...createOrganizationSchema()
-  };
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
-
-  const values = [
-    {
-      emoji: "💡",
-      title: t('values.transparency'),
-      description: t('values.transparencyDesc')
-    },
-    {
-      emoji: "🤝",
-      title: t('values.trust'),
-      description: t('values.trustDesc')
-    },
-    {
-      emoji: "🚀",
-      title: t('values.innovation'),
-      description: t('values.innovationDesc')
-    },
-    {
-      emoji: "❤️",
-      title: t('values.humanity'),
-      description: t('values.humanityDesc')
-    }
-  ];
-
-  const metrics = [
-    { number: "120+", label: t('stats.partners') },
-    { number: "3.000€", label: t('stats.budget') },
-    { number: "4", label: t('stats.areas') },
-    { number: "100%", label: t('stats.satisfaction') }
+    createOrganizationSchema(),
   ];
 
   return (
@@ -66,233 +68,273 @@ const AboutPage = () => {
       <SEOHead
         title={tSeo('about.title')}
         description={tSeo('about.description')}
-        canonicalUrl="https://healio.de/about"
+        canonicalUrl={canonicalUrl}
+        ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
-      
-      <main className="bg-white overflow-hidden selection:bg-[#25c990] selection:text-white">
-        
-        {/* HERO SECTION */}
-        <section className="relative min-h-[100svh] flex items-center justify-center bg-gradient-to-b from-[#25c990] via-[#105c42] to-black px-6">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] bg-repeat opacity-50"></div>
-          
-          <div className="container mx-auto relative z-10 max-w-5xl text-center pt-20">
-            <motion.h1 
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-8 tracking-tight"
-            >
-              {t('hero.title')}
-            </motion.h1>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-xl md:text-2xl text-slate-100 font-medium max-w-3xl mx-auto leading-relaxed"
-            >
-              Wir glauben daran, dass Gesundheitsvorsorge einfach, transparent und für jeden zugänglich sein sollte.
-            </motion.p>
-          </div>
-          
-          {/* Scroll Indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
-          >
-            <span className="text-sm font-medium tracking-widest uppercase">{t('cta.explore')}</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
-          </motion.div>
-        </section>
 
-        {/* FOUNDER SECTION */}
-        <section className="py-20 lg:py-32 bg-white">
-          <div className="container mx-auto px-6 max-w-7xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative group"
-              >
-                <div className="absolute -inset-4 bg-gradient-to-tr from-[#25c990]/20 to-transparent rounded-2xl transform rotate-3 scale-105 opacity-0 group-hover:opacity-100 transition-all duration-500 z-0"></div>
-                <div className="relative aspect-[4/5] lg:aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl z-10 bg-slate-100 border border-slate-200">
-                  <img 
-                    src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/a513c14bcb75e205a5464b120cca5688.jpg" 
-                    alt="Frank Steinfurt - Gründer & Geschäftsführer" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                  />
-                </div>
-              </motion.div>
-
-              <motion.div 
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="space-y-8"
-              >
-                <div>
-                  <motion.h2 variants={fadeInUp} className="text-4xl lg:text-5xl font-bold text-slate-900 mb-2">
-                    {t('hero.founder')}
-                  </motion.h2>
-                  <motion.p variants={fadeInUp} className="text-[#25c990] font-semibold text-lg uppercase tracking-wide">
-                    {t('hero.founderRole')}
-                  </motion.p>
-                </div>
-
-                <motion.div variants={fadeInUp} className="relative">
-                  <span className="absolute -top-6 -left-6 text-6xl text-slate-200 font-serif leading-none">"</span>
-                  <p className="text-2xl lg:text-3xl text-slate-800 font-medium leading-snug italic relative z-10">
-                    {t('hero.quote1')}
-                  </p>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="space-y-4 text-lg text-slate-600 leading-relaxed">
-                  <p>
-                    {t('hero.quote2')}
-                  </p>
-                  <p>
-                    {t('hero.quote3')}
-                  </p>
-                </motion.div>
-              </motion.div>
+      <main className="w-full overflow-hidden bg-white text-[#07111f] selection:bg-[#25c990] selection:text-[#07111f]">
+        <section
+          className="relative flex min-h-[92svh] w-full items-center overflow-hidden bg-[#07111f] px-4 pb-20 pt-32 text-white sm:px-6 sm:pb-24 sm:pt-36 lg:px-8 lg:pb-28 lg:pt-40"
+          aria-labelledby="about-hero-heading"
+        >
+          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div className="absolute -right-[16rem] top-[5%] h-[42rem] w-[42rem] rounded-full border border-white/[0.045]" />
+            <div className="absolute -right-[8rem] top-[15%] h-[30rem] w-[30rem] rounded-full border border-[#25c990]/10" />
+            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+            <div className="absolute bottom-[7%] left-[3%] font-display text-[clamp(5rem,18vw,18rem)] font-extrabold leading-none tracking-[-0.08em] text-white/[0.018]">
+              HEALIO
             </div>
           </div>
-        </section>
 
-        {/* VALUES SECTION */}
-        <section className="py-20 lg:py-32 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
-          <div className="container mx-auto px-6 max-w-7xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center max-w-3xl mx-auto mb-16"
+          <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-3xl"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{t('values.title')}</h2>
-              <p className="text-xl text-slate-600">
-                {t('values.subtitle')}
+              <p className="font-display text-xs font-bold uppercase tracking-[0.24em] text-[#5ee0b1] sm:text-sm">
+                {t('hero.eyebrow')}
               </p>
+              <h1
+                id="about-hero-heading"
+                className="mt-6 max-w-[12ch] font-display text-[clamp(2.1rem,7vw,6.4rem)] font-extrabold leading-[0.96] tracking-[-0.055em] [text-wrap:balance] sm:text-[clamp(2.8rem,7vw,6.4rem)]"
+              >
+                {t('hero.title')}
+              </h1>
+              <p className="mt-7 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:text-xl">
+                {t('hero.description')}
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="#arbeitsweise"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3.5 text-sm font-bold text-[#07111f] transition-colors hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+                >
+                  {t('hero.primaryCta')}
+                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <Link
+                  to={getPath('kontakt')}
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:border-white/40 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+                >
+                  {t('hero.secondaryCta')}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+
+              <div className="mt-9 grid max-w-2xl gap-3 border-t border-white/10 pt-6 text-sm text-slate-300 sm:grid-cols-2">
+                <p className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                  <span>{t('hero.brokerProof')}</span>
+                </p>
+                <p className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                  <span>{t('hero.locationProof')}</span>
+                </p>
+              </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 flex flex-col items-center text-center"
-                >
-                  <div className="text-5xl mb-6 bg-emerald-50 w-20 h-20 rounded-full flex items-center justify-center">
-                    {value.emoji}
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">{value.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* METRICS SECTION */}
-        <section className="py-20 lg:py-32 bg-white">
-          <div className="container mx-auto px-6 max-w-7xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, x: 26 }}
+              animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto w-full max-w-xl"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-                {t('stats.title')}
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {metrics.map((metric, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-                  className="bg-white rounded-xl p-8 text-center border border-slate-100 shadow-md hover:shadow-lg transition-shadow"
-                >
-                  <div className="text-5xl md:text-6xl font-extrabold text-[#25c990] mb-4">
-                    {metric.number}
+              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-7">
+                <div className="flex items-start justify-between gap-5 border-b border-white/10 pb-6">
+                  <div>
+                    <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#5ee0b1]">
+                      {t('hero.networkEyebrow')}
+                    </p>
+                    <h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.035em] sm:text-3xl">
+                      {t('hero.networkTitle')}
+                    </h2>
                   </div>
-                  <div className="text-lg font-medium text-slate-700">
-                    {metric.label}
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#25c990]/35 bg-[#25c990]/10">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#5ee0b1] shadow-[0_0_20px_rgba(94,224,177,0.75)]" />
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+                </div>
 
-        {/* OUR PROMISE SECTION */}
-        <section className="py-20 lg:py-32 bg-slate-900 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[#25c990]/5 z-0"></div>
-          <div className="container mx-auto px-6 max-w-4xl relative z-10 text-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="text-6xl animate-pulse inline-block mb-4">❤️</div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                {t('social.title')}
-              </h2>
-              <div className="text-xl text-slate-300 leading-relaxed space-y-6">
-                <p>
-                  {t('social.text1')}
+                <p className="mt-5 max-w-md text-sm leading-6 text-slate-400 sm:text-base">
+                  {t('hero.networkDescription')}
                 </p>
-                <p>
-                  {t('social.text2')}
-                </p>
-                <p>
-                  {t('social.text3')}
-                </p>
+
+                <div className="relative mt-6">
+                  <div className="absolute bottom-7 left-[1.35rem] top-7 w-px bg-gradient-to-b from-[#5ee0b1]/70 via-white/20 to-[#5ee0b1]/70 sm:left-[1.6rem]" aria-hidden="true" />
+                  <ul className="space-y-3" aria-label={t('hero.networkTitle')}>
+                    {Array.isArray(audiences) && audiences.map((audience) => {
+                      const Icon = audienceIcons[audience.key] || User;
+                      return (
+                        <li
+                          key={audience.key}
+                          className="relative grid grid-cols-[2.75rem_1fr] gap-4 rounded-2xl border border-white/[0.08] bg-[#0b1928]/90 p-4 sm:grid-cols-[3.25rem_1fr] sm:p-5"
+                        >
+                          <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[#25c990]/35 bg-[#0d2430] text-[#5ee0b1] sm:h-[3.25rem] sm:w-[3.25rem]">
+                            <Icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                          </span>
+                          <span>
+                            <span className="block font-display text-sm font-bold text-white sm:text-base">{audience.label}</span>
+                            <span className="mt-1 block text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">{audience.text}</span>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* FINAL CTA SECTION */}
-        <section className="py-20 lg:py-32 bg-white text-center">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
-                {t('cta.title')}
+        <section className="w-full bg-[#f4faf7] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-story-heading">
+          <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:gap-24">
+            <motion.figure {...reveal()} className="order-2 mx-auto w-full max-w-[32rem] lg:order-1 lg:mx-0">
+              <div className="relative">
+                <div className="absolute -bottom-4 -left-4 h-[78%] w-[78%] rounded-[2rem] border border-[#25c990]/25" aria-hidden="true" />
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-slate-200 shadow-[0_24px_70px_rgba(7,17,31,0.14)]">
+                  <img
+                    src={FOUNDER_IMAGE}
+                    alt={t('story.founderImageAlt')}
+                    className="h-full w-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#07111f]/95 via-[#07111f]/50 to-transparent px-6 pb-6 pt-24 text-white sm:px-8 sm:pb-8">
+                    <figcaption>
+                      <span className="block font-display text-xl font-bold">{t('story.founder')}</span>
+                      <span className="mt-1 block text-sm text-slate-300">{t('story.founderRole')}</span>
+                      <span className="mt-3 block text-xs font-semibold uppercase tracking-[0.16em] text-[#5ee0b1]">{t('story.founderLocation')}</span>
+                    </figcaption>
+                  </div>
+                </div>
+              </div>
+            </motion.figure>
+
+            <motion.div {...reveal(0.08)} className="order-1 lg:order-2">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">{t('story.eyebrow')}</p>
+              <h2 id="about-story-heading" className="mt-5 max-w-[16ch] font-display text-[clamp(2.25rem,5vw,4.7rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('story.title')}
               </h2>
-              <p className="text-xl text-slate-600 mb-10">
-                {t('cta.subtitle')}
+              <div className="mt-8 max-w-2xl space-y-5 text-base leading-7 text-[#46515e] sm:text-lg sm:leading-8">
+                {Array.isArray(storyParagraphs) && storyParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <p className="mt-9 max-w-2xl border-l-2 border-[#25c990] pl-5 font-display text-xl font-bold leading-8 text-[#102333] sm:text-2xl sm:leading-9">
+                {t('story.conclusion')}
               </p>
-              <Link
-                to={getPath('kontakt')}
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-[#25c990] hover:bg-[#1db37f] rounded-xl shadow-lg shadow-[#25c990]/30 hover:shadow-xl hover:shadow-[#25c990]/40 transition-all duration-300 hover:-translate-y-1 group"
-              >
-                {t('cta.button')}
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
             </motion.div>
           </div>
         </section>
 
+        <section id="arbeitsweise" className="w-full scroll-mt-24 bg-white px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-principles-heading">
+          <div className="mx-auto w-full max-w-7xl">
+            <motion.div {...reveal()} className="grid gap-8 border-b border-slate-200 pb-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+              <div>
+                <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">{t('principles.eyebrow')}</p>
+                <h2 id="about-principles-heading" className="mt-5 max-w-[15ch] font-display text-[clamp(2.25rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                  {t('principles.title')}
+                </h2>
+              </div>
+              <p className="max-w-2xl text-base leading-7 text-[#5a6673] sm:text-lg sm:leading-8 lg:justify-self-end">
+                {t('principles.description')}
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2">
+              {Array.isArray(principles) && principles.map((principle, index) => {
+                const Icon = principleIcons[principle.key] || CheckCircle2;
+                return (
+                  <motion.article
+                    key={principle.key}
+                    {...reveal(index * 0.05)}
+                    className={`border-slate-200 py-9 md:px-8 md:py-12 ${index % 2 === 0 ? 'md:border-r' : ''} ${index < principles.length - 1 ? 'border-b' : ''} ${index < 2 ? 'md:border-b' : 'md:border-b-0'} ${index % 2 === 0 ? 'md:pl-0' : 'md:pr-0'}`}
+                  >
+                    <div className="flex gap-5 sm:gap-6">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e9f8f1] text-[#0c7a5a]">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <h3 className="font-display text-xl font-bold tracking-[-0.025em] text-[#102333] sm:text-2xl">{principle.title}</h3>
+                        <p className="mt-3 max-w-xl text-sm leading-6 text-[#5a6673] sm:text-base sm:leading-7">{principle.text}</p>
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative w-full overflow-hidden bg-[#0b1928] px-4 py-20 text-white sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-impact-heading">
+          <div className="pointer-events-none absolute -right-40 top-1/2 h-[32rem] w-[32rem] -translate-y-1/2 rounded-full border border-white/[0.04]" aria-hidden="true" />
+          <div className="relative mx-auto w-full max-w-7xl">
+            <motion.div {...reveal()} className="max-w-4xl">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#5ee0b1] sm:text-sm">{t('impact.eyebrow')}</p>
+              <h2 id="about-impact-heading" className="mt-5 max-w-[16ch] font-display text-[clamp(2.25rem,5vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('impact.title')}
+              </h2>
+              <p className="mt-6 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{t('impact.description')}</p>
+            </motion.div>
+
+            <dl className="mt-14 grid border-y border-white/10 lg:grid-cols-3">
+              {Array.isArray(impactItems) && impactItems.map((item, index) => (
+                <motion.div
+                  key={item.value}
+                  {...reveal(index * 0.07)}
+                  className={`flex flex-col py-8 sm:py-10 lg:px-8 lg:py-12 ${index < impactItems.length - 1 ? 'border-b border-white/10 lg:border-b-0 lg:border-r' : ''} ${index === 0 ? 'lg:pl-0' : ''}`}
+                >
+                  <dt className="order-2 mt-4 max-w-xs font-display text-base font-bold leading-6 text-white sm:text-lg">{item.label}</dt>
+                  <dd className="order-1 font-display text-[clamp(2.5rem,5vw,4.8rem)] font-extrabold leading-none tracking-[-0.055em] text-[#5ee0b1]">{item.value}</dd>
+                  <dd className="order-3 mt-2 max-w-xs text-sm leading-6 text-slate-400">{item.detail}</dd>
+                </motion.div>
+              ))}
+            </dl>
+
+            <p className="mt-7 max-w-5xl text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">
+              {t('impact.disclaimer')}
+            </p>
+          </div>
+        </section>
+
+        <section className="w-full bg-[#f4faf7] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-routes-heading">
+          <div className="mx-auto w-full max-w-7xl">
+            <motion.div {...reveal()} className="mx-auto max-w-3xl text-center">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">{t('routes.eyebrow')}</p>
+              <h2 id="about-routes-heading" className="mt-5 font-display text-[clamp(2.25rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('routes.title')}
+              </h2>
+              <p className="mt-6 text-base leading-7 text-[#5a6673] sm:text-lg sm:leading-8">{t('routes.description')}</p>
+            </motion.div>
+
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {Array.isArray(routes) && routes.map((route, index) => {
+                const Icon = audienceIcons[route.key] || User;
+                return (
+                  <motion.article key={route.key} {...reveal(index * 0.06)} className="group flex min-h-full flex-col rounded-[1.6rem] border border-[#dbe8e2] bg-white p-7 shadow-[0_14px_45px_rgba(7,17,31,0.06)] sm:p-8">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e9f8f1] text-[#0c7a5a]">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#0c7a5a]">{route.label}</span>
+                    </div>
+                    <h3 className="mt-8 font-display text-2xl font-bold tracking-[-0.035em] text-[#102333]">{route.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-6 text-[#5a6673] sm:text-base sm:leading-7">{route.text}</p>
+                    <Link
+                      to={getPath(route.routeKey)}
+                      className="mt-8 inline-flex items-center gap-2 self-start font-display text-sm font-bold text-[#076046] transition-colors hover:text-[#0c7a5a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4"
+                    >
+                      {route.cta}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    </Link>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

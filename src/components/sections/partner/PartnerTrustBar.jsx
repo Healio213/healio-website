@@ -2,13 +2,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Gift, Shield, Euro } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const PartnerTrustBar = () => {
+  const { t } = useTranslation('partner');
+
   const trustItems = [
-    { icon: <Euro className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Bis zu 3.000 € Patientenbudget" },
-    { icon: <Gift className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Kostenlose Materialien" },
-    { icon: <Shield className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "Keine Kosten, keine Verpflichtung" },
-    { icon: <CheckCircle className="w-5 h-5 text-[#25c990] flex-shrink-0" />, text: "In 45 Minuten startklar" }
+    { icon: Euro, text: t('trust.budget') },
+    { icon: Gift, text: t('trust.information') },
+    { icon: Shield, text: t('trust.advice') },
+    { icon: CheckCircle, text: t('trust.meeting') },
   ];
 
   return (
@@ -17,13 +20,13 @@ const PartnerTrustBar = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center">
           {trustItems.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.text}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="flex items-center justify-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-slate-100"
             >
-              {item.icon}
+              <item.icon className="w-5 h-5 text-[#25c990] flex-shrink-0" aria-hidden="true" />
               <span className="text-sm md:text-base font-semibold text-slate-700">{item.text}</span>
             </motion.div>
           ))}
