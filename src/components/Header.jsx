@@ -20,6 +20,19 @@ const Header = () => {
   const isHome = location.pathname === '/' || location.pathname === '/en';
   const isCompany = location.pathname === '/unternehmen' || location.pathname === '/en/companies';
   const isPartner = location.pathname === '/partner' || location.pathname === '/en/partner';
+  const solidHeaderRoutes = [
+    '/kontakt', '/en/contact',
+    '/terminvereinbarung', '/en/appointment',
+    '/impressum', '/en/legal-notice',
+    '/agb', '/en/terms',
+    '/datenschutz', '/en/privacy',
+    '/konto-loeschen',
+    '/blog', '/en/blog',
+  ];
+  const forceSolidHeader = solidHeaderRoutes.some((path) => (
+    location.pathname === path || location.pathname.startsWith(`${path}/`)
+  ));
+  const showSolidHeader = scrolled || forceSolidHeader;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +74,7 @@ const Header = () => {
     { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
-    { to: getPath('blog'), label: t('nav.ratgeber'), type: 'link' },
+    { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
   ];
 
   const ctaLabel = isHome
@@ -77,7 +90,7 @@ const Header = () => {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-out",
-      scrolled
+      showSolidHeader
         ? "bg-slate-900/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)] py-3"
         : "bg-transparent py-5"
     )} role="banner">
@@ -88,7 +101,7 @@ const Header = () => {
             alt="Healio Logo"
             className={cn(
               "w-auto transition-all duration-500",
-              scrolled ? "h-8 md:h-10" : "h-10 md:h-12",
+              showSolidHeader ? "h-8 md:h-10" : "h-10 md:h-12",
               "brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
             )}
             initial={{ opacity: 0, x: -20 }}

@@ -27,15 +27,15 @@ const DatenschutzPage = () => {
         canonicalUrl="https://healio.de/datenschutz"
         schemaMarkup={schemaMarkup}
       />
-      <main className="bg-gray-50 py-16 sm:py-24 min-h-screen">
+      <main className="min-h-screen bg-gray-50 pt-28 pb-16 sm:pt-32 sm:pb-24">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.5 }} 
           className="healio-container"
         >
-          <div className="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-sm border border-gray-100">
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-healio-slate mb-6">{t('datenschutz.title')}</h1>
+          <div className="max-w-4xl mx-auto bg-white p-5 sm:p-12 rounded-2xl shadow-sm border border-gray-100 break-words [&_h1]:[hyphens:auto] [&_h2]:[hyphens:auto]">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-healio-slate mb-6">{t('datenschutz.title')}</h1>
 
             <nav aria-label={t('impressum.breadcrumb')} className="mb-8 pb-8 border-b border-gray-100 text-sm">
               <Link to={getPath('home')} className="text-healio-primary hover:underline">{t('impressum.home')}</Link>

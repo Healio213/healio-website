@@ -42,7 +42,7 @@ const HospitalConcept = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
+            className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-healio-primary text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
               <Award className="w-3 h-3" /> {t('concept.empfehlung')}
@@ -56,9 +56,9 @@ const HospitalConcept = () => {
 
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
               {tariffRows.map(([label, value], i) => (
-                <div key={i} className="flex justify-between items-start py-2 border-b border-gray-50 gap-4">
-                  <span className="text-slate-600">{label}</span>
-                  <span className="font-semibold text-slate-900 text-right break-words min-w-0">{value}</span>
+                <div key={i} className="flex flex-col gap-1 py-2 border-b border-gray-50 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <span className="min-w-0 text-slate-600">{label}</span>
+                  <span className="min-w-0 break-words font-semibold text-slate-900 sm:text-right">{value}</span>
                 </div>
               ))}
             </div>

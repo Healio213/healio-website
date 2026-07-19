@@ -24,7 +24,7 @@ const ImpressumPage = () => {
         canonicalUrl="https://healio.de/impressum"
         schemaMarkup={schemaMarkup}
       />
-      <main className="bg-gray-50 py-16 sm:py-24 min-h-screen">
+      <main className="min-h-screen bg-gray-50 pt-28 pb-16 sm:pt-32 sm:pb-24">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 

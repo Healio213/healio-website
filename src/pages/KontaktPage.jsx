@@ -91,7 +91,7 @@ const KontaktPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      <main className="bg-gradient-to-b from-white via-emerald-50/20 to-white min-h-screen pt-32 pb-16">
+      <main className="min-h-screen overflow-x-clip bg-gradient-to-b from-white via-emerald-50/20 to-white pt-32 pb-16">
         
         {/* SECTION 1: Introduction */}
         <section className="healio-container px-4 sm:px-6 md:px-8 mb-16">

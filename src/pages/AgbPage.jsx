@@ -28,10 +28,10 @@ const AgbPage = () => {
         ogUrl="https://healio.de/agb"
         schemaMarkup={schemaMarkup}
       />
-      <main className="bg-white py-16 sm:py-24">
+      <main className="bg-white pt-28 pb-16 sm:pt-32 sm:pb-24">
         <div className="healio-container">
-          <div className="prose prose-lg mx-auto text-healio-text-light max-w-4xl">
-            <h1 className="text-4xl font-extrabold text-healio-text mb-8">{t('agb.title')}</h1>
+          <div className="prose prose-lg mx-auto max-w-4xl break-words text-healio-text-light [&_h1]:[hyphens:auto] [&_h2]:[hyphens:auto]">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-healio-text mb-8">{t('agb.title')}</h1>
 
             <nav aria-label={t('impressum.breadcrumb')} className="mb-8 text-sm">
               <Link to={getPath('home')} className="text-healio-green hover:underline">{t('impressum.home')}</Link>

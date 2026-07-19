@@ -37,7 +37,7 @@ const DentalConcept = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
+            className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 relative ring-2 ring-healio-primary mb-12 max-w-3xl mx-auto"
           >
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-500 text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
               <Award className="w-3 h-3" /> {t('concept.testsieger')}
@@ -51,9 +51,9 @@ const DentalConcept = () => {
 
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-sm mb-8">
               {tariffRows.map(([label, value], i) => (
-                <div key={i} className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-slate-600">{label}</span>
-                  <span className="font-semibold text-slate-900 text-right whitespace-nowrap ml-4">{value}</span>
+                <div key={i} className="flex flex-col gap-1 py-2 border-b border-gray-50 sm:flex-row sm:justify-between">
+                  <span className="min-w-0 text-slate-600">{label}</span>
+                  <span className="min-w-0 break-words font-semibold text-slate-900 sm:ml-4 sm:text-right sm:whitespace-nowrap">{value}</span>
                 </div>
               ))}
             </div>

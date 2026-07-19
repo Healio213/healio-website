@@ -76,9 +76,9 @@ const DentalInsurerChoice = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white rounded-2xl shadow-xl p-8 ring-2 ring-healio-primary flex flex-col relative"
+              className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 ring-2 ring-healio-primary flex flex-col relative"
             >
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-healio-primary text-white text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
+              <div className="absolute -top-3 left-1/2 w-max max-w-[calc(100%-1rem)] -translate-x-1/2 rounded-full bg-healio-primary px-4 py-1 text-center text-xs font-bold leading-tight text-white">
                 {t('insurerChoice.sofort.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
@@ -123,9 +123,9 @@ const DentalInsurerChoice = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="bg-white rounded-2xl shadow-xl p-8 ring-1 ring-slate-200 flex flex-col relative"
+              className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 ring-1 ring-slate-200 flex flex-col relative"
             >
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-700 text-white text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">
+              <div className="absolute -top-3 left-1/2 w-max max-w-[calc(100%-1rem)] -translate-x-1/2 rounded-full bg-slate-700 px-4 py-1 text-center text-xs font-bold leading-tight text-white">
                 {t('insurerChoice.vorsorge.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">

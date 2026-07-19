@@ -15,7 +15,7 @@ const HealioZahnzusatzProblem = () => {
           <span className="inline-block px-4 py-1.5 rounded-full bg-red-100 text-red-600 font-semibold text-sm mb-6">
             Die Kostenfalle
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="break-words text-2xl font-bold leading-tight text-gray-900 [hyphens:auto] sm:text-3xl md:text-4xl mb-8">
             Das Problem: Gesetzliche Krankenversicherung deckt fast nichts ab
           </h2>
           <div className="prose prose-lg mx-auto text-gray-600">

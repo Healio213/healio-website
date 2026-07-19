@@ -41,13 +41,21 @@ assert.equal(en.process.steps.length, de.process.steps.length);
 assert.equal(deCommon.nav.versicherungen, 'Versicherungen');
 assert.equal(deCommon.nav.unternehmen, 'Für Unternehmen');
 assert.equal(deCommon.nav.partner, 'Für Praxen');
-assert.equal(deCommon.nav.ratgeber, 'Ratgeber');
+assert.equal(deCommon.nav.kontakt, 'Kontakt');
 assert.equal(deCommon.nav.schutzWaehlen, 'Schutz auswählen');
 assert.equal(enCommon.nav.versicherungen, 'Insurance');
+assert.equal(enCommon.nav.kontakt, 'Contact');
 assert.match(indexCss, /family=Manrope/);
 assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
 
 const homeHero = readText('src/components/home/HomeHero.jsx');
+const header = readText('src/components/Header.jsx');
+
+assert.match(header, /getPath\('kontakt'\)/);
+assert.match(header, /t\('nav\.kontakt'\)/);
+assert.doesNotMatch(header, /getPath\('blog'\)[\s\S]{0,80}t\('nav\.ratgeber'\)/);
+assert.match(header, /solidHeaderRoutes/);
+assert.match(header, /forceSolidHeader/);
 
 assert.match(homeHero, /id="home-hero-heading"/);
 assert.match(homeHero, /home-hero-passed/);
