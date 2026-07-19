@@ -83,23 +83,36 @@ async function prerenderRoute(page, routePath) {
   return page.evaluate(() => document.getElementById('root').innerHTML);
 }
 
-async function main() {
-  let puppeteer;
+async function launchBrowser() {
+  // 1. Normales puppeteer (lokal, laedt eigenen Chrome)
   try {
-    puppeteer = (await import('puppeteer')).default;
-  } catch {
-    console.warn('[prerender] puppeteer nicht installiert, Seiten bleiben Meta-only.');
-    return;
-  }
-
-  let browser;
-  try {
-    browser = await puppeteer.launch({
+    const puppeteer = (await import('puppeteer')).default;
+    return await puppeteer.launch({
       headless: 'shell',
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
     });
   } catch (err) {
-    console.warn(`[prerender] Browser-Start fehlgeschlagen (${err.message.split('\n')[0]}), Seiten bleiben Meta-only.`);
+    console.warn(`[prerender] puppeteer-Start fehlgeschlagen (${err.message.split('\n')[0]}), versuche @sparticuz/chromium ...`);
+  }
+  // 2. CI-Fallback (Vercel/Lambda): gepacktes Chromium mit allen Systemlibs
+  try {
+    const chromium = (await import('@sparticuz/chromium')).default;
+    const puppeteerCore = (await import('puppeteer-core')).default;
+    return await puppeteerCore.launch({
+      args: [...chromium.args, '--no-sandbox', '--disable-dev-shm-usage'],
+      executablePath: await chromium.executablePath(),
+      headless: 'shell',
+    });
+  } catch (err) {
+    console.warn(`[prerender] @sparticuz/chromium-Start fehlgeschlagen (${err.message.split('\n')[0]}).`);
+    return null;
+  }
+}
+
+async function main() {
+  const browser = await launchBrowser();
+  if (!browser) {
+    console.warn('[prerender] Kein Browser verfuegbar, Seiten bleiben Meta-only.');
     return;
   }
 
