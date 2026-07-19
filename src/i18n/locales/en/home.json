@@ -1,10 +1,11 @@
 {
   "hero": {
-    "eyebrow": "Your digital insurance broker",
-    "title": "Supplementary health insurance, made simple.",
-    "description": "Outpatient, dental or hospital cover: we make it clear which protection fits your life and stay by your side after you sign up.",
-    "primaryCta": "Choose your cover",
+    "eyebrow": "Independent advice. Personal support.",
+    "title": "Supplementary health insurance that fits your life.",
+    "description": "Outpatient, dental or hospital cover: we explain which protection makes sense, with independent, digital and personal support.",
+    "primaryCta": "Find the right cover",
     "secondaryCta": "How Healio works",
+    "proof": ["Independent broker", "A real contact", "Digital support"],
     "sceneLabel": "Three areas of cover. One digital companion.",
     "sceneCenter": "Your cover",
     "sceneModules": ["Outpatient", "Dental", "Hospital"]
@@ -66,8 +67,8 @@
     "title": "Looking for Healio for your company or practice?",
     "description": "The specialist areas lead directly to the information you need.",
     "items": [
-      {"routeKey":"unternehmen","label":"For companies","title":"Corporate benefits that strengthen retention.","cta":"Explore company solutions"},
-      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable for patients.","cta":"Explore the partner programme"}
+      {"routeKey":"unternehmen","label":"For companies","title":"Decisions that shape the next three decades.","description":"Occupational pensions, health insurance and benefits as one responsible system for your workforce.","cta":"Explore company solutions"},
+      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable for patients.","description":"Healio connects patients with suitable cover and helps improve access to your treatment.","cta":"Explore the partner programme"}
     ]
   },
   "finalCta": {

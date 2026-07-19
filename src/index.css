@@ -62,6 +62,14 @@
     --ring: 159 68% 47%;
   }
 
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 100%;
+    max-width: none;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -69,6 +77,8 @@
   body {
     font-family: 'Inter', sans-serif;
     @apply bg-white text-healio-slate;
+    margin: 0;
+    overflow-x: clip;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

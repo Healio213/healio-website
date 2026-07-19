@@ -1,10 +1,11 @@
 {
   "hero": {
-    "eyebrow": "Dein digitaler Versicherungsmakler",
-    "title": "Krankenzusatzversicherung, einfach digital.",
-    "description": "Ambulant, Zahn oder stationär: Wir zeigen dir verständlich, welcher Schutz zu deinem Leben passt – und begleiten dich auch nach dem Abschluss.",
-    "primaryCta": "Schutz auswählen",
+    "eyebrow": "Unabhängig beraten. Persönlich begleitet.",
+    "title": "Krankenzusatzversicherung, die zu deinem Leben passt.",
+    "description": "Ambulant, Zahn oder stationär: Wir zeigen dir verständlich, welcher Schutz sinnvoll ist – unabhängig, digital und persönlich begleitet.",
+    "primaryCta": "Passenden Schutz finden",
     "secondaryCta": "So funktioniert Healio",
+    "proof": ["Unabhängiger Makler", "Persönlich erreichbar", "Digital begleitet"],
     "sceneLabel": "Drei Schutzbereiche. Ein digitaler Begleiter.",
     "sceneCenter": "Dein Schutz",
     "sceneModules": ["Ambulant", "Zahn", "Stationär"]
@@ -90,8 +91,8 @@
     "title": "Du suchst Healio für dein Unternehmen oder deine Praxis?",
     "description": "Die spezialisierten Bereiche führen direkt zu den passenden Informationen.",
     "items": [
-      {"routeKey": "unternehmen", "label": "Für Unternehmen", "title": "Betriebliche Vorsorge, die Mitarbeiter bindet.", "cta": "Unternehmenslösungen ansehen"},
-      {"routeKey": "partner", "label": "Für Praxen", "title": "Behandlungen für Patienten besser finanzierbar machen.", "cta": "Partnerprogramm ansehen"}
+      {"routeKey": "unternehmen", "label": "Für Unternehmen", "title": "Entscheidungen, die über Jahrzehnte wirken.", "description": "bAV, bKV und Gesundheitsbenefits als verantwortungsvolles System für Ihre Belegschaft.", "cta": "Unternehmenslösungen ansehen"},
+      {"routeKey": "partner", "label": "Für Praxen", "title": "Behandlungen für Patienten besser finanzierbar machen.", "description": "Healio verbindet Patienten mit passendem Gesundheitsschutz und stärkt den Zugang zu Ihrer Behandlung.", "cta": "Partnerprogramm ansehen"}
     ]
   },
   "finalCta": {

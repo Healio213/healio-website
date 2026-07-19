@@ -82,7 +82,7 @@ export const createServiceSchema = (overrides = {}) => {
   };
 };
 
-export const createWebPageSchema = (pageName, description, url = null) => {
+export const createWebPageSchema = (pageName, description, url = null, inLanguage = "de-DE") => {
   const pageUrl = url || (typeof window !== "undefined" ? `${SITE_URL}${window.location.pathname}` : SITE_URL);
 
   return {
@@ -95,7 +95,7 @@ export const createWebPageSchema = (pageName, description, url = null) => {
       "@type": "Organization",
       "name": "Healio"
     },
-    "inLanguage": "de-DE"
+    "inLanguage": inLanguage
   };
 };
 

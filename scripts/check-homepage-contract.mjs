@@ -20,8 +20,9 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Krankenzusatzversicherung, einfach digital.');
-assert.equal(en.hero.title, 'Supplementary health insurance, made simple.');
+assert.equal(de.hero.title, 'Krankenzusatzversicherung, die zu deinem Leben passt.');
+assert.equal(en.hero.title, 'Supplementary health insurance that fits your life.');
+assert.equal(de.hero.proof.length, 3);
 assert.equal(de.products.items.length, 3);
 assert.deepEqual(
   de.products.items.map((item) => item.routeKey),
@@ -47,58 +48,34 @@ assert.match(indexCss, /family=Manrope/);
 assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
 
 const homeHero = readText('src/components/home/HomeHero.jsx');
-const healthPassHeroVisual = readText('src/components/home/HealthPassHeroVisual.jsx');
-const protectionScene = readText('src/components/home/HomeProtectionScene.jsx');
-const protectionLabels = readText('src/components/home/protection/ProtectionLabels.jsx');
-const protectionFallback = readText('src/components/home/protection/HomeProtectionFallback.jsx');
 
 assert.match(homeHero, /id="home-hero-heading"/);
 assert.match(homeHero, /home-hero-passed/);
-assert.match(homeHero, /HealthPassHeroVisual/);
-assert.doesNotMatch(homeHero, /conceptOptions|HomeProtectionScene|HomeProtectionFallback/);
-assert.match(healthPassHeroVisual, /\/images\/healio-health-pass-hero-v2\.webp/);
-assert.doesNotMatch(healthPassHeroVisual, /healio-health-pass-hero-v2\.png/);
-assert.match(healthPassHeroVisual, /useScroll/);
-assert.match(healthPassHeroVisual, /useReducedMotion/);
-assert.match(healthPassHeroVisual, /useInView/);
-assert.match(healthPassHeroVisual, /visibilitychange/);
-assert.match(healthPassHeroVisual, /motionEnabled/);
-assert.match(healthPassHeroVisual, /restTransition/);
-assert.match(healthPassHeroVisual, /initial=\{false\}/);
-assert.match(healthPassHeroVisual, /data-health-pass-visual/);
-assert.doesNotMatch(healthPassHeroVisual, /data-protection-label/);
+assert.match(homeHero, /\/hero-bg\.webp/);
+assert.match(homeHero, /object-\[72%_center\]/);
+assert.match(homeHero, /useScroll/);
+assert.match(homeHero, /useTransform/);
+assert.match(homeHero, /useReducedMotion/);
+assert.match(homeHero, /HighlightText/);
+assert.match(homeHero, /<highlight>\$\{titleTail\}<\/highlight>/);
+assert.doesNotMatch(homeHero, /HealthPassHeroVisual|conceptOptions|HomeProtectionScene|HomeProtectionFallback|QuietProtectionHeroVisual/);
+assert.doesNotMatch(homeHero, /PrivateProtectionHeroVisual/);
 assert.doesNotMatch(homeHero, /hero\.sceneLabel/);
-assert.match(healthPassHeroVisual, /data-health-pass-depth-ring/);
-assert.match(healthPassHeroVisual, /data-health-pass-wordmark/);
-assert.match(healthPassHeroVisual, /\/images\/healio-wordmark-white\.webp/);
-assert.doesNotMatch(healthPassHeroVisual, /\/healio-logo-white\.svg/);
-assert.match(healthPassHeroVisual, /duration: (?:1[6-9]|2[0-2])/);
 assert.match(homeHero, /\[hyphens:manual\]/);
 assert.doesNotMatch(homeHero, /hyphens-auto/);
 assert.match(homeHero, /Krankenzusatz\\u00adversicherung/);
-assert.match(homeHero, /titleSeparatorIndex/);
-assert.match(homeHero, /lg:whitespace-nowrap/);
 assert.doesNotMatch(homeHero, /\[overflow-wrap:anywhere\]/);
-assert.match(healthPassHeroVisual, /maskImage/);
-assert.match(healthPassHeroVisual, /repeat: Infinity/);
-assert.match(protectionScene, /GlassShieldScene/);
-assert.match(protectionScene, /ProtectionCoreScene/);
-assert.match(protectionScene, /ScrollUnfoldScene/);
-assert.match(protectionScene, /reducedMotion/);
-assert.match(protectionLabels, /labels\.map/);
-assert.match(protectionLabels, /data-concept/);
-assert.match(protectionFallback, /data-fallback-concept/);
-assert.match(protectionScene, /showLabels=\{false\}/);
-assert.doesNotMatch(protectionScene, /createLabelTexture|createLabelSprite|centerLabel/);
+assert.match(indexCss, /#root[\s\S]{0,160}width: 100%/);
+assert.match(indexCss, /overflow-x: clip/);
 
 const insurancePathway = readText('src/components/home/InsurancePathway.jsx');
 const howHealioWorks = readText('src/components/home/HowHealioWorks.jsx');
 
 assert.match(insurancePathway, /id="schutz"/);
 assert.match(insurancePathway, /getPath\(item\.routeKey\)/);
-assert.match(insurancePathway, /ambulant:/);
-assert.match(insurancePathway, /dental:/);
-assert.match(insurancePathway, /hospital:/);
+assert.match(insurancePathway, /items\.map/);
+assert.match(insurancePathway, /item\.routeKey/);
+assert.doesNotMatch(insurancePathway, /iconMap|cardStyles/);
 assert.match(howHealioWorks, /id="so-funktioniert"/);
 assert.match(howHealioWorks, /\/images\/healio-app-dashboard\.png/);
 
@@ -110,7 +87,9 @@ const homeFinalCta = readText('src/components/home/HomeFinalCTA.jsx');
 assert.match(ambulantBudgetFeature, /t\('budget\.amount'\)/);
 assert.match(ambulantBudgetFeature, /getPath\('ambulant'\)/);
 assert.match(homeTrust, /trust\.items/);
-assert.match(audienceLinks, /getPath\(item\.routeKey\)/);
+assert.match(audienceLinks, /getPath\(company\.routeKey\)/);
+assert.match(audienceLinks, /getPath\(practice\.routeKey\)/);
+assert.match(audienceLinks, /healio-hero-markenrelief-v1\.webp/);
 assert.match(homeFinalCta, /getPath\('terminvereinbarung'\)/);
 
 const homeComponentDir = path.join(rootDir, 'src/components/home');
@@ -147,56 +126,5 @@ assert.doesNotMatch(indexHtml, /Healio B2B/);
 assert.match(indexHtml, /home-hero-active:not\(\.home-hero-passed\)/);
 assert.match(seoRoutes, /path: '\/'[\s\S]{0,240}title: 'Krankenzusatzversicherung/);
 assert.match(schemaMarkup, /unabhängiger Versicherungsmakler/);
-
-const heroWebGlCanvas = readText('src/components/home/protection/HeroWebGLCanvas.jsx');
-const protectionSceneShared = readText('src/components/home/protection/sceneShared.js');
-const glassShieldScene = readText('src/components/home/protection/GlassShieldScene.jsx');
-const protectionCoreScene = readText('src/components/home/protection/ProtectionCoreScene.jsx');
-const scrollUnfoldScene = readText('src/components/home/protection/ScrollUnfoldScene.jsx');
-
-assert.match(heroWebGlCanvas, /IntersectionObserver/);
-assert.match(heroWebGlCanvas, /visibilitychange/);
-assert.match(heroWebGlCanvas, /isSmallViewport \? 1\.25 : 1\.5/);
-assert.match(heroWebGlCanvas, /cancelAnimationFrame/);
-assert.match(heroWebGlCanvas, /renderer\.dispose\(\)/);
-assert.match(
-  heroWebGlCanvas,
-  /const resize = \(\) => \{[\s\S]*?const currentIsSmall = window\.matchMedia\('\(max-width: 767px\)'\)\.matches;[\s\S]*?renderer\.setPixelRatio\(Math\.min\(window\.devicePixelRatio \|\| 1, currentIsSmall \? 1\.25 : 1\.5\)\);/
-);
-assert.match(heroWebGlCanvas, /let isIntersecting = false;/);
-assert.doesNotMatch(heroWebGlCanvas, /resize\(\);\s*startAnimation\(\);/);
-assert.match(heroWebGlCanvas, /const onReadyRef = useRef\(onReady\);/);
-assert.match(heroWebGlCanvas, /const onErrorRef = useRef\(onError\);/);
-assert.match(
-  heroWebGlCanvas,
-  /useEffect\(\(\) => \{\s*onReadyRef\.current = onReady;\s*\}, \[onReady\]\);/
-);
-assert.match(
-  heroWebGlCanvas,
-  /useEffect\(\(\) => \{\s*onErrorRef\.current = onError;\s*\}, \[onError\]\);/
-);
-assert.match(heroWebGlCanvas, /onReadyRef\.current\?\.\(\);/);
-assert.match(heroWebGlCanvas, /onErrorRef\.current\?\.\(error\);/);
-assert.match(heroWebGlCanvas, /\}, \[createExperience\]\);/);
-assert.doesNotMatch(heroWebGlCanvas, /\}, \[createExperience, onError, onReady\]\);/);
-assert.match(protectionSceneShared, /export const createShieldGeometry/);
-assert.match(protectionSceneShared, /export const disposeObject3D/);
-assert.match(glassShieldScene, /createShieldGeometry/);
-assert.match(glassShieldScene, /MeshPhysicalMaterial/);
-assert.match(glassShieldScene, /transmission:/);
-assert.match(glassShieldScene, /layerProgress/);
-assert.doesNotMatch(glassShieldScene, /TorusGeometry/);
-assert.match(protectionCoreScene, /createShieldGeometry/);
-assert.match(protectionCoreScene, /TorusGeometry/);
-assert.match(protectionCoreScene, /CatmullRomCurve3/);
-assert.match(protectionCoreScene, /PointsMaterial/);
-assert.match(protectionCoreScene, /activationProgress/);
-assert.match(heroWebGlCanvas, /trackScroll/);
-assert.match(heroWebGlCanvas, /scrollProgress/);
-assert.match(heroWebGlCanvas, /addEventListener\('scroll'/);
-assert.match(scrollUnfoldScene, /createShieldGeometry/);
-assert.match(scrollUnfoldScene, /trackScroll/);
-assert.match(scrollUnfoldScene, /scrollProgress/);
-assert.match(scrollUnfoldScene, /unfoldProgress/);
 
 console.log('Homepage contract passed.');

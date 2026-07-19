@@ -1,161 +1,207 @@
 {
   "seo": {
-    "title": "Betriebliche Vorsorge für Unternehmen | bAV & bKV | Healio",
-    "description": "Healio macht bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen nutzbar: klare Analyse, bessere Mitarbeiterbindung und moderne Umsetzung."
+    "title": "Betriebliches Vorsorgemanagement | bAV, bKV & BGM | Healio",
+    "description": "Healio bündelt bAV, bKV, BGM-Koordination und Mitarbeiterkommunikation zu einem betrieblichen Vorsorgesystem – transparent, wirtschaftlich und dauerhaft begleitet."
   },
   "hero": {
-    "eyebrow": "Für Unternehmen",
-    "title": "Betriebliche Vorsorge, die nicht nur verwaltet, sondern bindet.",
-    "description": "Healio verbindet bAV, bKV und steuerfreie Gesundheitsbenefits zu einem System, das Mitarbeitende wirklich spüren und Unternehmen messbar entlastet.",
-    "primaryCta": "Potenzialanalyse starten",
-    "imageAlt": "Hamburger Speicherstadt als professioneller Hintergrund für Healio B2B",
-    "metrics": [
-      { "value": "45 Min.", "label": "kompakte Analyse" },
-      { "value": "bAV + bKV", "label": "integriert gedacht" },
-      { "value": "steuerfrei", "label": "Benefits clever nutzen" }
-    ]
+    "eyebrow": "Betriebliches Vorsorge- und Gesundheitsmanagement",
+    "titleLead": "Gesundheit fördern. Mitarbeiter binden.",
+    "titleHighlight": "Vorsorge richtig gestalten.",
+    "description": "Einzelne Benefits sind schnell gekauft. Healio macht daraus ein betreutes System aus bAV, bKV, BGM-Koordination und verständlicher Mitarbeiterkommunikation.",
+    "analysisCta": "Vorsorge-Check starten",
+    "solutionsCta": "30-Jahre-Wirkung ansehen",
+    "proof": ["Unabhängiger Makler", "Bestand einbezogen", "Dauerhaft begleitet"]
   },
-  "problem": {
-    "eyebrow": "Warum Unternehmen handeln",
-    "title": "Gehaltserhöhungen werden teuer. Gute Benefits bleiben hängen.",
-    "description": "Viele Unternehmen zahlen mehr, ohne dass beim Team genug ankommt. Healio prüft, wo Budget verpufft und wie Vorsorge, Gesundheit und Wertschätzung wirtschaftlicher zusammenspielen.",
-    "points": [
-      "Mitarbeiterbindung stärken, ohne nur über Bruttogehalt zu gehen",
-      "bAV und bKV verständlich erklären statt als Papierprodukt ablegen",
-      "Steuerfreie Gesundheitsbenefits sichtbar und nutzbar machen"
-    ]
+  "realityCheck": {
+    "eyebrow": "60-Sekunden-Realitätscheck",
+    "title": "Können Sie diese drei Fragen heute belastbar beantworten?",
+    "questions": [
+      "Was kostet Ihre bestehende Versorgung – inklusive Produktkosten?",
+      "Welcher Anteil Ihrer Belegschaft versteht und nutzt sie?",
+      "Wer prüft regelmäßig Anbieter, Zuschüsse und Kommunikation?"
+    ],
+    "conclusion": "Wenn eine Antwort fehlt, besteht Handlungsbedarf – nicht zwingend für einen Wechsel, aber für eine ehrliche Bestandsaufnahme.",
+    "cta": "Vorsorge-Check starten"
+  },
+  "calculator": {
+    "eyebrow": "Kohortenrechnung {{startYear}}–{{endYear}}",
+    "title": "Der Einzelfall wird zur Verantwortung.",
+    "description": "Zuerst zeigt die Rechnung die Wirkung über {{years}} Jahre für einen einzelnen Mitarbeiter. Danach wird derselbe Unterschied auf alle Teilnehmer der Belegschaft hochgerechnet.",
+    "controlsTitle": "Annahmen verändern",
+    "controlsHint": "Die Ergebnisse reagieren unmittelbar auf Ihre Eingaben.",
+    "employeeCount": "Mitarbeiter im Unternehmen",
+    "participationRate": "Teilnahmequote",
+    "monthlyContribution": "Modellierter Sparbeitrag je Teilnehmer und Monat",
+    "duration": "Laufzeit",
+    "yearsValue": "{{years}} Jahre",
+    "scenarioARate": "Angenommene Bruttorendite A p. a.",
+    "scenarioBRate": "Angenommene Bruttorendite B p. a.",
+    "exampleLabel": "Vereinfachte Beispielrechnung · keine Prognose",
+    "differencePerEmployeeLabel": "Differenz je Teilnehmer nach {{years}} Jahren",
+    "cohortDifferenceLabel": "Hochrechnung auf die Belegschaft",
+    "differencePerEmployeeSuffix": "Differenz im Endkapital",
+    "participantsValue": "{{participants}} teilnehmende Mitarbeiter",
+    "scenarioALabel": "Szenario A · {{rate}} %",
+    "scenarioBLabel": "Szenario B · {{rate}} %",
+    "perEmployee": "Endkapital je Teilnehmer",
+    "cohortSuffix": "für die Kohorte",
+    "contributionsPerEmployee": "Einzahlungen je Teilnehmer",
+    "totalContributions": "Einzahlungen der Kohorte",
+    "contributionsLabel": "Einzahlungen",
+    "modelLine": "Eine durchgehende Modelllinie: konstante Beiträge, konstante Renditeannahmen und keine Unterbrechungen über die gewählte Laufzeit.",
+    "chartAria": "Modellierte Versorgungslinie von {{startYear}} bis {{endYear}} für die beiden Vergleichsszenarien und die Einzahlungen",
+    "assumptionsTitle": "Offengelegte Annahmen",
+    "assumptions": "{{employees}} Mitarbeiter × {{participation}} % Teilnahme = {{participants}} Teilnehmer. {{contribution}} vollständig angelegter Modellbeitrag über {{months}} Monate. Die angenommenen Bruttojahresrenditen vor Kosten werden in äquivalente Monatsrenditen umgerechnet; jeder Beitrag fließt nachschüssig am Monatsende.",
+    "disclaimer": "Vereinfachte Modellrechnung, keine Prognose und keine Garantie. Produktkosten, Steuern und Inflation sind nicht berücksichtigt. Die Szenarien bilden weder konkrete Tarife noch vergleichbare Garantie- oder Risikoprofile ab.",
+    "decisionPrompt": "Die Frage ist nicht, welches Szenario richtig ist. Die Frage ist, ob Sie Kosten, Renditeannahmen und Risiken Ihrer heutigen Lösung kennen.",
+    "cta": "Bestehende Versorgung prüfen lassen"
+  },
+  "responsibility": {
+    "eyebrow": "Verantwortung mit langem Horizont",
+    "title": "Die Entscheidung endet nicht mit dem Vertragsabschluss.",
+    "lead": "Die gesetzliche Rente schafft eine Grundlage. Zusätzliche Sicherheit entsteht dort, wo Vorsorge früh beginnt, verständlich bleibt und über Jahrzehnte konsequent begleitet wird.",
+    "description": "Für Unternehmensleitungen ist bAV deshalb mehr als Verwaltung. Produktkosten, Renditeannahmen, Teilnahme und Kommunikation wirken zusammen – und bestimmen mit, was in 30 Jahren bei der Belegschaft ankommt.",
+    "position": "Healio macht diese Wirkung sichtbar, ohne Renditen zu versprechen. Wir vergleichen Annahmen, prüfen bestehende Lösungen und übersetzen langfristige Folgen in Entscheidungen, die heute belastbar sind.",
+    "sources": {
+      "dai": {
+        "publisher": "Deutsches Aktieninstitut",
+        "title": "Historische Langfristrenditen einordnen",
+        "description": "Für einen 30-jährigen monatlichen DAX-Sparplan bis Ende 2025 weist das Deutsche Aktieninstitut 7,8 % pro Jahr aus. Kosten und Steuern sind nicht berücksichtigt; ein DAX-Sparplan ist kein direkter bAV-Produktvergleich."
+      },
+      "destatis": {
+        "publisher": "Destatis",
+        "title": "Alterssicherung bleibt eine reale Aufgabe",
+        "description": "Nach den Endergebnissen von EU-SILC 2025 waren 19,5 % der Menschen ab 65 Jahren armutsgefährdet; Einkommensbezugsjahr ist 2024."
+      },
+      "bmas": {
+        "publisher": "BMAS",
+        "title": "Modellrechnung bleibt Modellrechnung",
+        "description": "Das Bundesministerium für Arbeit und Soziales stellt klar: Vorausberechnungen im Rentenversicherungsbericht sind Modellrechnungen und keine Prognosen."
+      }
+    }
   },
   "solutions": {
-    "eyebrow": "Was wir strukturieren",
-    "title": "Drei Hebel für moderne betriebliche Vorsorge",
+    "eyebrow": "Betriebliches Vorsorgemanagement",
+    "title": "Vier Bausteine. Ein Vorsorgesystem.",
+    "description": "Einzelne Verträge erzeugen noch keine Versorgung. Erst das Zusammenspiel aus Vorsorge, Gesundheit, Prävention und laufender Steuerung macht aus Leistungen ein System, das Mitarbeiter verstehen und Unternehmen beherrschen können.",
     "items": [
       {
-        "title": "Betriebliche Altersvorsorge",
-        "description": "Bestehende bAV-Lösungen prüfen, Zuschüsse sauber erklären und Rendite, Kosten und Kommunikation verständlich machen."
+        "key": "pension",
+        "horizon": "Morgen · bAV",
+        "title": "Altersvorsorge, die nicht nur verwaltet, sondern wirkt.",
+        "description": "Wir prüfen bestehende Lösungen und machen Kosten, Renditeannahmen, Garantien, Zuschüsse und die Wirkung auf die spätere Versorgung verständlich.",
+        "points": ["Bestand und Kosten transparent prüfen", "Geeignete Durchführungswege einordnen", "Versorgung je Mitarbeiter verständlich erklären"]
       },
       {
-        "title": "Betriebliche Krankenversicherung",
-        "description": "Gesundheitsbudgets, Vorsorge- und Versorgungsbausteine, die Mitarbeitende im Alltag wirklich verstehen und nutzen.",
-        "points": [
-          "Planbare Kosten pro Mitarbeiter statt anonymer Gehaltsrunde",
-          "Weniger lange Ausfälle, weil Mitarbeitende schneller Facharzttermine und Behandlung bekommen",
-          "Hoher wahrgenommener Wert, weil Gesundheit sofort persönlich wird",
-          "Als steuerfreier Sachbezug bis 50 € monatlich möglich, wenn sauber strukturiert"
-        ]
+        "key": "health",
+        "horizon": "Heute · bKV",
+        "title": "Gesundheitsleistungen, die Mitarbeiter sofort verstehen.",
+        "description": "Eine betriebliche Krankenversicherung macht Arbeitgeberleistung unmittelbar erlebbar. Wir entwickeln einen Leistungsumfang, der zur Belegschaft und zum verfügbaren Budget passt.",
+        "points": ["Planbarer Beitrag je versichertem Mitarbeiter", "Leistungen passend zur Belegschaft auswählen", "Einführung und Nutzung verständlich begleiten"],
+        "note": "Welche Leistungen gelten, hängt vom gewählten Tarif und den jeweiligen Versicherungsbedingungen ab."
       },
       {
-        "title": "Steuerfreie Gesundheitsbenefits",
-        "description": "Budget gezielt einsetzen: für Vorsorge, Bindung und Wertschätzung mit klarer Wirkung für Mitarbeitende."
+        "key": "prevention",
+        "horizon": "BGM-Koordination & Prävention",
+        "title": "Ein Gesundheitstag ist noch kein Gesundheitsmanagement.",
+        "description": "Healio unterstützt die Koordination freiwilliger Gesundheitsförderungs- und Präventionsangebote und bindet die zuständigen internen und externen Stellen ein.",
+        "points": ["Bedarf und Zielgruppen strukturiert erfassen", "Qualifizierte Maßnahmen auswählen", "Gesundheitskommunikation planbar machen"],
+        "note": "Healio unterstützt bei BGM-Koordination und freiwilliger Gesundheitsförderung. Gesetzliche Aufgaben aus Arbeitsschutz, BEM oder Betriebsmedizin bleiben bei den jeweils verantwortlichen Stellen."
+      },
+      {
+        "key": "management",
+        "horizon": "Dauerhaft · Steuerung & Kommunikation",
+        "title": "Ein System braucht jemanden, der es am Laufen hält.",
+        "description": "Vorsorgemanagement endet nicht mit der Unterschrift. Healio hält Bestand, Anbieter, Prozesse und Kommunikation zusammen und bleibt zentraler Ansprechpartner.",
+        "points": ["Bestehende Lösungen sinnvoll einbinden", "Personalbereich und Lohnabrechnung unterstützen", "Versorgung regelmäßig überprüfen und nachsteuern"]
       }
     ]
   },
-  "bkvEmployer": {
-    "eyebrow": "Arbeitgeber-Mehrwert bKV",
-    "title": "Warum bKV für Arbeitgeber sofort Sinn ergibt.",
-    "description": "Eine bKV ist kein nettes Extra, sondern ein sichtbarer Gesundheits-Benefit: Mitarbeitende erleben konkrete Leistungen, während Unternehmen Budget, Einführung und Kommunikation kontrollieren können.",
-    "points": [
+  "economics": {
+    "eyebrow": "Wirtschaftlichkeit & Gestaltung",
+    "title": "Wer nur auf den Beitrag schaut, rechnet unvollständig.",
+    "description": "Arbeitgeberfinanzierte Vorsorge- und Gesundheitsleistungen können – abhängig von Baustein und Gestaltung – als Betriebsausgaben berücksichtigt werden. Zusätzliche gesetzliche Steuer- und Beitragsvorteile können den tatsächlichen Unternehmensaufwand weiter verändern.",
+    "cta": "Nettoaufwand im Vorsorge-Check einordnen",
+    "summaryTitle": "Absetzbar heißt nicht kostenlos.",
+    "summaryText": "Ein Betriebsausgabenabzug ist keine vollständige Erstattung. Entscheidend sind Rechtsform, Ergebnis, Steuersatz, Leistungsart und konkrete Umsetzung. Healio macht diese Faktoren transparent und stimmt die Umsetzung auf Wunsch mit Lohnbuchhaltung und steuerlicher Beratung ab.",
+    "sourceLabel": "Amtliche Grundlage",
+    "facts": [
       {
-        "title": "Mehr Netto-Gefühl pro Euro",
-        "description": "Ein Gesundheitsbudget wirkt konkreter als eine kleine Brutto-Erhöhung, weil Mitarbeitende es direkt für Brille, Zahn, Vorsorge oder Heilbehandlung einsetzen können."
+        "key": "expense",
+        "title": "Betriebsausgaben richtig einordnen",
+        "description": "Betrieblich veranlasste Aufwendungen mindern grundsätzlich den steuerpflichtigen Gewinn. Sie werden dadurch nicht vollständig erstattet."
       },
       {
-        "title": "Weniger Krankentage",
-        "description": "Schnellere Facharzttermine können verhindern, dass Beschwerden unnötig lange liegen bleiben und Ausfälle sich verlängern."
+        "key": "pension",
+        "title": "bAV mit gesetzlichen Vorteilen",
+        "description": "Für bestimmte Durchführungswege gelten gesetzliche Steuer- und Beitragsgrenzen. Welche Wirkung entsteht, hängt vom gewählten Modell ab."
       },
       {
-        "title": "Stärkeres Recruiting",
-        "description": "bKV ist ein exklusiver Arbeitgeber-Benefit und hilft besonders dort, wo Fachkräfte zwischen ähnlichen Gehältern entscheiden."
+        "key": "health",
+        "title": "bKV sauber gestalten",
+        "description": "Arbeitgeberfinanzierter Versicherungsschutz kann unter bestimmten Voraussetzungen Sachlohn sein. Geldzuschüsse werden steuerlich anders behandelt."
       },
       {
-        "title": "Bindung durch echte Fürsorge",
-        "description": "Wer Gesundheit ernst nimmt, sendet ein klares Signal: Dieses Unternehmen investiert nicht nur in Arbeit, sondern in Menschen."
-      },
-      {
-        "title": "Schlanke Umsetzung",
-        "description": "Mit klaren Tarifen, Mitarbeiterkommunikation und digitaler Verwaltung bleibt der Nutzen sichtbar, ohne HR dauerhaft zu belasten."
+        "key": "prevention",
+        "title": "Qualifizierte Prävention fördern",
+        "description": "Zusätzlich zum ohnehin geschuldeten Lohn gewährte Maßnahmen können bis zu 600 EUR je Mitarbeiter und Jahr steuerfrei bleiben, wenn sie die gesetzlichen Qualitäts- und Zweckanforderungen erfüllen."
       }
-    ]
-  },
-  "bkvAbsence": {
-    "eyebrow": "Fehltage-Rechner",
-    "title": "Was weniger Fehltage wirtschaftlich bedeuten können.",
-    "description": "Schnellere Facharzttermine sind nicht nur ein Komfortthema. Wenn Beschwerden früher abgeklärt werden, können Ausfälle kürzer bleiben oder gar nicht erst eskalieren.",
-    "employeeCount": "Mitarbeitende",
-    "costPerDay": "Kosten pro Fehltag",
-    "sickDaysWithout": "Fehltage ohne bKV",
-    "sickDaysWith": "Fehltage mit bKV",
-    "daysValue": "{{days}} Tage",
-    "withoutLabel": "Ohne bKV pro Jahr",
-    "withLabel": "Mit bKV pro Jahr",
-    "savingsLabel": "Mögliche Entlastung pro Jahr",
-    "daysSavedLabel": "{{days}} potenziell vermiedene Fehltage",
-    "note": "Vereinfachte Modellrechnung. Sie ersetzt keine arbeitsmedizinische oder versicherungsmathematische Bewertung und zeigt keine garantierte Reduktion von Krankentagen."
-  },
-  "healthBudget": {
-    "eyebrow": "Zusätzlicher Low-Budget-Mehrwert",
-    "title": "3.000 € Gesundheitsbudget als starke Ergänzung für Ihr Team",
-    "description": "Nicht jedes Unternehmen kann sofort ein großes bKV-Budget öffnen. Genau dann kann das Healio Gesundheitsbudget helfen: Mitarbeitende nutzen Kassenbonus und Zusatzversicherung clever, während Sie als Arbeitgeber echten Mehrwert kommunizieren.",
-    "amount": "3.000 €",
-    "amountLabel": "Gesundheitsbudget in 2 Jahren",
-    "points": [
-      "Interessant für Mitarbeitende, die Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen",
-      "Starker Benefit in der Kommunikation, auch wenn das Arbeitgeberbudget begrenzt ist",
-      "Saubere Ergänzung zu bAV und bKV, ohne diese zu ersetzen"
     ],
-    "cta": "Als Benefit prüfen"
-  },
-  "compound": {
-    "eyebrow": "Zeit-Hebel bAV",
-    "title": "Beim Zinseszins ist Warten der teuerste Fehler.",
-    "description": "Für Unternehmen ist bAV nicht nur ein Vertrag, sondern Timing. Je früher Mitarbeitende starten, desto länger kann Kapital im Hintergrund arbeiten. Die sichtbare Dynamik entsteht oft erst hinten raus: Rendite auf Rendite, Jahr für Jahr.",
-    "cta": "Zinseszins-Potenzial prüfen",
-    "visualEyebrow": "Interaktiver Rechner",
-    "visualTitle": "Was ein späterer Start kosten kann",
-    "startTodayLabel": "Start heute",
-    "delayLabel": "Start in {{years}} Jahren",
-    "advantageLabel": "Zeitvorsprung durch früheren Start",
-    "monthlyContribution": "Monatlicher Beitrag",
-    "duration": "Laufzeit",
-    "returnRate": "Angenommene Rendite p. a.",
-    "delay": "Startverzögerung",
-    "yearsValue": "{{years}} Jahre",
-    "visualDescription": "Vereinfachte Modellrechnung ohne Kosten, Steuern, Inflation und Garantien. Sie zeigt den Zeit- und Zinseszinseffekt, nicht die konkrete Wertentwicklung eines Produkts.",
-    "points": [
-      {
-        "title": "Zeit ist der Hebel",
-        "description": "Die ersten Jahre wirken klein, aber sie geben dem Kapital die lange Strecke."
-      },
-      {
-        "title": "Der Turbo kommt spät",
-        "description": "Die stärksten Effekte entstehen, wenn Erträge selbst wieder Erträge erzeugen."
-      },
-      {
-        "title": "Kommunikation entscheidet",
-        "description": "Mitarbeitende verstehen bAV schneller, wenn sie den Zeitverlust sehen können."
-      }
-    ]
+    "disclaimer": "Die steuer- und sozialversicherungsrechtliche Behandlung hängt von der konkreten Gestaltung und den jeweils geltenden gesetzlichen Voraussetzungen ab. Keine Steuerberatung."
   },
   "process": {
-    "eyebrow": "Ablauf",
-    "title": "Vom Status quo zum nutzbaren Vorsorge-System",
+    "eyebrow": "Vom Produkt zum Management",
+    "title": "Einführung ist der Anfang. Nicht das Ende.",
+    "description": "Vorsorge entfaltet erst Wirkung, wenn Mitarbeiter sie verstehen und der Personalbereich sie verlässlich steuern kann. Healio schafft dafür einen belastbaren Prozess.",
     "steps": [
+      {"title": "Bestand verstehen", "description": "Wir prüfen Verträge, Kosten, Zuschüsse, Teilnahme und die bisherige Kommunikation."},
+      {"title": "Konzept rechnen", "description": "Sie sehen nachvollziehbar, welche bAV-, bKV- und Gesundheitsstruktur zu Unternehmen und Budget passt."},
+      {"title": "Verständlich einführen", "description": "Wir koordinieren Entscheidung, Anbieter, Mitarbeiterkommunikation und die relevanten internen Schnittstellen."},
+      {"title": "Laufend betreuen", "description": "Healio bleibt Ansprechpartner, begleitet Mitarbeiter und überprüft die Struktur regelmäßig auf Handlungsbedarf."}
+    ]
+  },
+  "workforce": {
+    "eyebrow": "Alternative ohne eigenes Benefit-Budget",
+    "title": "Wenn das Arbeitgeberbudget noch nicht bereitsteht, muss Gesundheit nicht warten.",
+    "description": "Das Unternehmen ermöglicht den Zugang und die interne Kommunikation. Die Mitarbeiter entscheiden freiwillig, ob das Healio Konzept zu ihnen passt. So kann Gesundheitszugang bereits entstehen, bevor ein arbeitgeberfinanziertes Budget beschlossen wird.",
+    "cardEyebrow": "Einstieg ohne Leistungsbudget",
+    "employerAmount": "0 EUR",
+    "employerLabel": "Versicherungsbeitrag des Arbeitgebers",
+    "budgetLabel": "Für geeignete Mitarbeiter möglich",
+    "budgetAmount": "bis zu 3.000 EUR",
+    "budgetSuffix": "mögliche Versicherungsleistungen in 2 Jahren. Ein passender Kassenbonus kann den Eigenbeitrag ganz oder teilweise ausgleichen.",
+    "points": ["Kein Arbeitgeberbeitrag zur Versicherung erforderlich", "Freiwillige Entscheidung der Mitarbeiter", "Information und persönliche Begleitung durch Healio"],
+    "cta": "Healio für die Belegschaft prüfen",
+    "note": "Die Versicherung wird von den Mitarbeitern selbst abgeschlossen und finanziert. Der Kassenbonus kann Beiträge ganz oder teilweise ausgleichen; ein vollständiger Ausgleich ist nicht garantiert. Für den passenden Bonus kann ein Krankenkassenwechsel erforderlich sein. Leistungen, Beiträge und Bonus hängen von Tarif, persönlicher Situation und tatsächlicher Bonusnutzung ab."
+  },
+  "faq": {
+    "eyebrow": "Vor der Entscheidung",
+    "title": "Vier Fragen, die jedes Unternehmen beantworten sollte.",
+    "description": "Die größte Gefahr ist nicht eine falsche Einzelentscheidung. Es ist ein System, das niemand mehr grundsätzlich hinterfragt.",
+    "items": [
       {
-        "title": "Analyse",
-        "description": "Wir prüfen bestehende Verträge, Kosten, Kommunikation und ungenutzte steuerliche Spielräume."
+        "question": "Müssen bestehende Verträge ersetzt werden?",
+        "answer": "Nein. Der Vorsorge-Check beginnt ergebnisoffen. Tragfähige Lösungen bleiben bestehen; geändert wird nur, wenn Kosten, Wirkung, Prozesse oder Kommunikation nachvollziehbar verbessert werden können."
       },
       {
-        "title": "Konzept",
-        "description": "Sie bekommen eine klare Empfehlung, welche Kombination aus bAV, bKV und Benefits wirtschaftlich sinnvoll ist."
+        "question": "Woran erkennen wir, ob unsere heutige Lösung wirklich gut ist?",
+        "answer": "Nicht am Beitrag allein. Entscheidend sind Kosten, Leistungsumfang, Rendite- und Garantieannahmen, Teilnahme, Verständlichkeit für die Mitarbeiter und der Aufwand im laufenden Betrieb."
       },
       {
-        "title": "Umsetzung",
-        "description": "Healio begleitet Einführung, Mitarbeiterkommunikation und laufende Optimierung."
+        "question": "Was übernimmt Healio nach der Einführung?",
+        "answer": "Healio bleibt zentraler Ansprechpartner, koordiniert Anbieter und Kommunikation, unterstützt Mitarbeiter bei Fragen und prüft regelmäßig, ob sich Rahmenbedingungen oder Handlungsbedarf verändert haben."
+      },
+      {
+        "question": "Was, wenn heute kein eigenes Benefit-Budget möglich ist?",
+        "answer": "Dann kann das Healio Mitarbeiterkonzept als freiwilliger Einstieg ohne arbeitgeberfinanzierten Leistungsbeitrag genutzt werden. Das Unternehmen ermöglicht die interne Information; die Entscheidung und Finanzierung liegen beim Mitarbeiter."
       }
     ]
   },
   "cta": {
-    "title": "Lassen Sie uns prüfen, wo Ihr Benefit-Budget mehr Wirkung entfalten kann.",
-    "description": "In 45 Minuten sehen Sie, welche Hebel für Ihr Unternehmen realistisch sind und welche nächsten Schritte sich lohnen.",
-    "primary": "Kostenlose Potenzialanalyse"
+    "eyebrow": "Jetzt statt irgendwann",
+    "title": "30 Jahre lassen sich nicht nachholen.",
+    "description": "Im Vorsorge-Check ordnen wir Ihre bestehende Versorgung ein, machen wirtschaftliche Hebel sichtbar und zeigen, welche Entscheidung heute wirklich ansteht.",
+    "primary": "Vorsorge-Check starten",
+    "proof": ["45 Minuten", "unverbindlich", "mit erster Bestandsaufnahme"]
   }
 }

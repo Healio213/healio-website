@@ -260,6 +260,28 @@ function generateHtml(route, article = null) {
     /<meta property="og:locale" content="[^"]*">/,
     `<meta property="og:locale" content="${route.lang === 'de' ? 'de_DE' : 'en_US'}">`
   );
+  if (route.ogImage) {
+    html = html.replace(
+      /<meta property="og:image" content="[^"]*">/,
+      `<meta property="og:image" content="${e(route.ogImage)}">`
+    );
+    html = html.replace(
+      /<meta name="twitter:image" content="[^"]*">/,
+      `<meta name="twitter:image" content="${e(route.ogImage)}">`
+    );
+  }
+  if (route.ogImageWidth) {
+    html = html.replace(
+      /<meta property="og:image:width" content="[^"]*">/,
+      `<meta property="og:image:width" content="${e(String(route.ogImageWidth))}">`
+    );
+  }
+  if (route.ogImageHeight) {
+    html = html.replace(
+      /<meta property="og:image:height" content="[^"]*">/,
+      `<meta property="og:image:height" content="${e(String(route.ogImageHeight))}">`
+    );
+  }
 
   // Twitter Tags
   html = html.replace(

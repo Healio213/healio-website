@@ -51,8 +51,8 @@ const MainHomePage = () => {
       <article className="w-full overflow-hidden bg-white">
         <HomeHero />
         <InsurancePathway />
-        <HowHealioWorks />
         <AmbulantBudgetFeature />
+        <HowHealioWorks />
         <HomeTrust />
         <AudienceLinks />
         <HomeFinalCTA />

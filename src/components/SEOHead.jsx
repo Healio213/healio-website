@@ -47,6 +47,8 @@ const SEOHead = ({
   ogDescription,
   ogImage = `${SITE_URL}/og-image.png`,
   ogImageAlt = 'Healio Gesundheitsbudget und Zusatzversicherungen',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
   ogUrl,
   ogType = 'website',
   twitterCard = 'summary_large_image',
@@ -96,8 +98,8 @@ const SEOHead = ({
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
       <meta property="og:image" content={finalOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width" content={String(ogImageWidth)} />
+      <meta property="og:image:height" content={String(ogImageHeight)} />
       <meta property="og:image:alt" content={ogImageAlt} />
       <meta property="og:site_name" content="Healio" />
       <meta property="og:locale" content={locale} />

@@ -1,30 +1,140 @@
 {
+  "seo": {
+    "title": "Supplementary Health Insurance: Outpatient, Dental & Hospital | Healio",
+    "description": "Find the supplementary cover that fits you: outpatient, dental or hospital. Independent advice, clear benefits and no unnecessary modules.",
+    "ogTitle": "Make a clear supplementary health insurance decision | Healio",
+    "ogDescription": "Outpatient, dental or hospital: the Healio protection compass guides you to the right area.",
+    "ogImageAlt": "Healio protection compass for outpatient, dental and hospital supplementary health insurance",
+    "offerDescription": "Free consultation and guidance on suitable supplementary health insurance"
+  },
   "hero": {
-    "title": "No Compromises on Your Coverage.",
-    "subtitle": "There are countless insurance policies out there. Most disappoint when it matters.",
-    "description": "We've done the filtering for you. You only get plans that deliver when you need them most. Quality over fine print."
+    "eyebrow": "Outpatient. Dental. Hospital.",
+    "titleLine1": "Supplementary health insurance.",
+    "titleLine2": "Only where it matters.",
+    "description": "Outpatient, dental or hospital: Healio shows you which supplementary cover fits your life – clearly, independently and without unnecessary modules.",
+    "primaryCta": "Compare cover areas",
+    "secondaryCta": "Get personal advice",
+    "proof": ["Independent insurance broker", "Personally available", "Conditions clearly explained"],
+    "compassEyebrow": "Your protection compass",
+    "compassTitle": "Where should your cover be stronger?",
+    "routes": [
+      {"key": "ambulant", "number": "01", "label": "Outpatient", "description": "Health in everyday life", "anchor": "ambulant"},
+      {"key": "dental", "number": "02", "label": "Dental", "description": "Make out-of-pocket costs predictable", "anchor": "zahn"},
+      {"key": "hospital", "number": "03", "label": "Hospital", "description": "More choice in hospital", "anchor": "stationaer"}
+    ],
+    "compassNoteStrong": "You do not need to cover everything.",
+    "compassNote": "You should consciously decide what you are willing to pay yourself."
   },
-  "services": {
-    "title": "Our Insurance Solutions. Fact-Based. Verified.",
-    "subtitle": "Choose the optimal coverage for your individual needs. We offer tailored concepts for every area of life.",
-    "moreInfo": "Learn more"
+  "paths": {
+    "eyebrow": "Three paths to cover",
+    "title": "Where would you like stronger protection?",
+    "description": "Not everyone needs everything. What matters is which costs you can carry yourself – and where you want more room to choose when it counts.",
+    "items": [
+      {
+        "key": "ambulant",
+        "anchor": "ambulant",
+        "routeKey": "ambulant",
+        "number": "01",
+        "kicker": "Everyday health",
+        "title": "More freedom for treatments that matter to you.",
+        "description": "Depending on the plan, cover can include alternative practitioners, osteopathy, additional preventive care, glasses and other outpatient services.",
+        "decision": "For people who use alternative practitioners, osteopathy, glasses or preventive care – and do not want to carry all of these costs themselves.",
+        "features": ["Alternative medicine and osteopathy", "Glasses and additional preventive care"],
+        "cta": "Explore outpatient cover",
+        "schemaName": "Outpatient supplementary insurance"
+      },
+      {
+        "key": "dental",
+        "anchor": "zahn",
+        "routeKey": "zahn",
+        "number": "02",
+        "kicker": "Limit out-of-pocket costs",
+        "title": "Choose dental quality – not just the lowest price.",
+        "description": "Dental supplementary insurance can make out-of-pocket costs for prosthetics, treatment and preventive care more predictable. Reimbursement, limits and conditions matter.",
+        "decision": "For people who do not want higher-quality dental care to depend on their bank balance.",
+        "features": ["Dental prosthetics and implants", "Treatment and preventive care"],
+        "highlight": {
+          "label": "Highlight · die Bayerische",
+          "title": "ZAHN Sofort – even when treatment has already been recommended.",
+          "description": "The optional module can cover treatment that has already been recommended or begun, without a waiting period.",
+          "facts": ["Benefits up to 1.500 EUR", "Max. 750 EUR per calendar year", "Ends automatically after 2 years"],
+          "note": "The module currently costs 29.90 EUR per month. Completed and already invoiced treatment is not covered. The policy conditions apply."
+        },
+        "cta": "Explore instant protection and dental plans",
+        "schemaName": "Dental supplementary insurance"
+      },
+      {
+        "key": "hospital",
+        "anchor": "stationaer",
+        "routeKey": "stationaer",
+        "number": "03",
+        "kicker": "More choice in hospital",
+        "title": "Important decisions are better made before admission.",
+        "description": "Depending on the plan, private medical treatment, a private or semi-private room and additional costs related to a wider hospital choice may be covered.",
+        "decision": "For people who want more say over treatment and accommodation in hospital.",
+        "features": ["Private medical treatment", "Room comfort and hospital choice"],
+        "cta": "Explore hospital cover",
+        "schemaName": "Hospital supplementary insurance"
+      }
+    ]
   },
-  "cards": {
-    "ambulant": {
-      "title": "Outpatient Supplementary Insurance",
-      "description": "Comprehensive outpatient coverage for specialist treatments, Heilpraktiker and preventive care. Up to €3,000 health budget."
-    },
-    "zahn": {
-      "title": "Dental Supplementary Insurance",
-      "description": "Complete dental protection for prophylaxis, treatments and dental prosthetics. Protects against high out-of-pocket costs with top-tier reimbursement rates."
-    },
-    "stationaer": {
-      "title": "Hospital Supplementary Insurance",
-      "description": "Premium protection for hospital stays. Private room, chief physician treatment and free choice of hospital."
-    },
-    "tier": {
-      "title": "Pet Health Insurance",
-      "description": "Comprehensive health protection for your pet. Reliably covers vet visits, surgeries and preventive care."
-    }
+  "comparison": {
+    "eyebrow": "Quick orientation",
+    "title": "Not every gap is your gap.",
+    "description": "The right protection starts with your priorities, not with a plan. These three questions create more clarity than any product shelf.",
+    "cta": "Clarify my needs",
+    "headers": {"area": "Area", "relevant": "Relevant when …", "check": "Key question"},
+    "items": [
+      {"key": "ambulant", "label": "Outpatient", "relevant": "you regularly use services beyond statutory health insurance.", "check": "Which services are covered – and which budgets, reimbursement rates and exclusions apply?"},
+      {"key": "dental", "label": "Dental", "relevant": "you want higher-quality care for dental treatment and prosthetics.", "check": "How much is reimbursed, which limits apply in the first years – and what about treatment already recommended?"},
+      {"key": "hospital", "label": "Hospital", "relevant": "you want more choice of doctor, hospital or room.", "check": "Which optional services and fee limits apply – and which health questions must you answer before taking out cover?"}
+    ]
+  },
+  "advice": {
+    "eyebrow": "Honest advice",
+    "title": "More modules do not automatically mean better protection.",
+    "description": "We do not recommend as much as possible. We recommend what fits your priorities, budget and situation. Sometimes that means several modules. Sometimes one is enough.",
+    "wrongLabel": "The question that falls short",
+    "wrongQuestion": "Which plan is the cheapest?",
+    "rightLabel": "The deciding question",
+    "rightQuestion": "Which costs are you willing to carry when it matters?",
+    "criteria": [
+      {"title": "Benefits before promises", "description": "What matters is what the plan provides under the agreed conditions – not how impressive an advertising percentage looks."},
+      {"title": "Make limits visible", "description": "Waiting periods, initial limits, maximum amounts and exclusions belong before the decision, not after it."},
+      {"title": "Needs before product", "description": "A strong plan is only strong when its benefits match your real priorities."}
+    ]
+  },
+  "budget": {
+    "eyebrow": "The outpatient Healio concept",
+    "amountPrefix": "Up to",
+    "amount": "3.000 EUR",
+    "amountLabel": "health budget over 2 years",
+    "title": "When the elements work together, real room for health is created.",
+    "description": "With the outpatient Healio concept, a suitable health fund bonus and supplementary insurance can work together. We clearly explain the requirements and show what the calculation looks like for you.",
+    "features": ["Alternative practitioners and natural medicine", "Osteopathy and preventive care", "Glasses and other services", "Consider bonus and plan together"],
+    "note": "Actual benefits and your effective contribution depend on the selected plan, your personal situation and the health fund bonus you achieve.",
+    "cta": "Understand the Healio concept"
+  },
+  "process": {
+    "eyebrow": "How Healio works",
+    "title": "A good decision does not require insurance language.",
+    "description": "We translate conditions into clear consequences and remain personally available after the policy begins.",
+    "steps": [
+      {"number": "01", "title": "Clarify priorities", "description": "We start with your daily life, your preferences and the costs you do not want to carry yourself."},
+      {"number": "02", "title": "Understand conditions", "description": "Benefits, limits and relevant differences are explained in clear language."},
+      {"number": "03", "title": "Decide consciously", "description": "You choose the cover that fits – and continue to have a personal contact afterwards."}
+    ]
+  },
+  "pet": {
+    "eyebrow": "Separate area of cover",
+    "title": "Looking for health insurance for your pet?",
+    "description": "Healio has a dedicated area for this – clearly separate from your own supplementary health insurance.",
+    "cta": "Go to pet health insurance"
+  },
+  "finalCta": {
+    "eyebrow": "Your next step",
+    "title": "You do not have to insure everything today. But you should know what you leave open.",
+    "description": "We clarify your needs and show you the right next steps – clearly, personally and without sales pressure.",
+    "cta": "Find the right cover"
   }
 }

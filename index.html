@@ -77,6 +77,12 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 9999;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+      html.home-hero-active:not(.home-hero-passed) elevenlabs-convai {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-50%) translateX(12px);
       }
       @media (max-width: 767px) {
         elevenlabs-convai {
@@ -84,7 +90,6 @@
           top: auto;
           bottom: 16px;
           transform: none;
-          transition: opacity 180ms ease, transform 180ms ease;
         }
         html.home-hero-active:not(.home-hero-passed) elevenlabs-convai {
           opacity: 0;

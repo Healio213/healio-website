@@ -1,161 +1,207 @@
 {
   "seo": {
-    "title": "Corporate Benefits for Companies | bAV & bKV | Healio",
-    "description": "Healio makes corporate pension, health insurance and tax-efficient health benefits usable for companies: clear analysis, stronger retention and modern implementation."
+    "title": "Corporate Benefits Management | Pension, Health & Wellbeing | Healio",
+    "description": "Healio combines corporate pension, health insurance, wellbeing coordination and employee communication into one managed benefits system."
   },
   "hero": {
-    "eyebrow": "For companies",
-    "title": "Corporate benefits that do more than exist on paper.",
-    "description": "Healio combines corporate pension, health insurance and tax-efficient health benefits into a system employees actually notice and companies can use strategically.",
-    "primaryCta": "Start potential analysis",
-    "imageAlt": "Hamburg Speicherstadt as a professional background for Healio B2B",
-    "metrics": [
-      { "value": "45 min.", "label": "focused analysis" },
-      { "value": "bAV + bKV", "label": "integrated approach" },
-      { "value": "tax-efficient", "label": "benefits used well" }
-    ]
+    "eyebrow": "Corporate benefits and health management",
+    "titleLead": "Promote health. Retain employees.",
+    "titleHighlight": "Get provision right.",
+    "description": "Individual benefits are easy to buy. Healio turns them into one managed system of pension, health insurance, wellbeing coordination and clear employee communication.",
+    "analysisCta": "Start a benefits review",
+    "solutionsCta": "See the 30-year impact",
+    "proof": ["Independent broker", "Existing plans included", "Ongoing support"]
   },
-  "problem": {
-    "eyebrow": "Why companies act",
-    "title": "Salary increases are expensive. Useful benefits are remembered.",
-    "description": "Many companies spend more without enough value reaching the team. Healio shows where budget is lost and how pension, healthcare and appreciation can work together more effectively.",
-    "points": [
-      "Strengthen retention without relying only on gross salary",
-      "Make pension and health benefits understandable instead of invisible",
-      "Turn tax-efficient health benefits into something employees actually use"
-    ]
+  "realityCheck": {
+    "eyebrow": "60-second reality check",
+    "title": "Can you answer these three questions with confidence today?",
+    "questions": [
+      "What does your current provision cost — including product charges?",
+      "What share of your workforce understands and uses it?",
+      "Who reviews providers, contributions and communication regularly?"
+    ],
+    "conclusion": "If one answer is missing, action is needed — not necessarily a switch, but an honest review of the status quo.",
+    "cta": "Start a benefits review"
+  },
+  "calculator": {
+    "eyebrow": "Cohort model {{startYear}}–{{endYear}}",
+    "title": "One individual case becomes a responsibility.",
+    "description": "First, the model shows the effect over {{years}} years for one employee. It then applies the same difference to every participating employee across the workforce.",
+    "controlsTitle": "Adjust the assumptions",
+    "controlsHint": "Results update immediately when you change an input.",
+    "employeeCount": "Employees in the company",
+    "participationRate": "Participation rate",
+    "monthlyContribution": "Modelled monthly savings contribution per participant",
+    "duration": "Duration",
+    "yearsValue": "{{years}} years",
+    "scenarioARate": "Assumed gross return A p.a.",
+    "scenarioBRate": "Assumed gross return B p.a.",
+    "exampleLabel": "Simplified example · not a forecast",
+    "differencePerEmployeeLabel": "Difference per participant after {{years}} years",
+    "cohortDifferenceLabel": "Projection across the workforce",
+    "differencePerEmployeeSuffix": "Difference in final value",
+    "participantsValue": "{{participants}} participating employees",
+    "scenarioALabel": "Scenario A · {{rate}}%",
+    "scenarioBLabel": "Scenario B · {{rate}}%",
+    "perEmployee": "Final value per participant",
+    "cohortSuffix": "for the cohort",
+    "contributionsPerEmployee": "Contributions per participant",
+    "totalContributions": "Cohort contributions",
+    "contributionsLabel": "Contributions",
+    "modelLine": "One continuous model line: constant contributions, constant return assumptions and no interruptions over the selected period.",
+    "chartAria": "Modelled provision line from {{startYear}} to {{endYear}} for two comparison scenarios and contributions",
+    "assumptionsTitle": "Assumptions disclosed",
+    "assumptions": "{{employees}} employees × {{participation}}% participation = {{participants}} participants. {{contribution}} fully invested model contribution over {{months}} months. Assumed gross annual returns before costs are converted into equivalent monthly returns; each contribution is invested in arrears at month-end.",
+    "disclaimer": "Simplified model calculation, not a forecast or guarantee. Product costs, tax and inflation are not included. The scenarios represent neither specific products nor comparable guarantee or risk profiles.",
+    "decisionPrompt": "The question is not which scenario is right. The question is whether you know the costs, return assumptions and risks of your current solution.",
+    "cta": "Review existing provision"
+  },
+  "responsibility": {
+    "eyebrow": "Responsibility with a long horizon",
+    "title": "The decision does not end when the contract is signed.",
+    "lead": "The statutory pension provides a foundation. Additional security is built where provision starts early, remains understandable and is supported consistently over decades.",
+    "description": "For company leaders, corporate pension is therefore more than administration. Product costs, return assumptions, participation and communication all influence what ultimately reaches the workforce in 30 years.",
+    "position": "Healio makes this effect visible without promising returns. We compare assumptions, review existing solutions and translate long-term consequences into decisions that are robust today.",
+    "sources": {
+      "dai": {
+        "publisher": "Deutsches Aktieninstitut",
+        "title": "Putting historical long-term returns into context",
+        "description": "For a 30-year monthly DAX savings plan ending in 2025, the Deutsches Aktieninstitut reports 7.8% a year. Costs and tax are excluded; a DAX savings plan is not a direct comparison with a corporate pension product."
+      },
+      "destatis": {
+        "publisher": "Destatis",
+        "title": "Retirement security remains a real task",
+        "description": "Final EU-SILC 2025 results show that 19.5% of people aged 65 and over were at risk of poverty; the income reference year is 2024."
+      },
+      "bmas": {
+        "publisher": "Federal Labour Ministry",
+        "title": "A model calculation remains a model",
+        "description": "Germany's Federal Ministry of Labour and Social Affairs stresses that projections in the pension insurance report are model calculations, not forecasts."
+      }
+    }
   },
   "solutions": {
-    "eyebrow": "What we structure",
-    "title": "Three levers for modern corporate benefits",
+    "eyebrow": "Corporate benefits management",
+    "title": "Four building blocks. One benefits system.",
+    "description": "A collection of policies is not yet a benefits strategy. Pension, health, prevention and ongoing management must work together so employees understand the value and companies stay in control.",
     "items": [
       {
-        "title": "Corporate pension",
-        "description": "Review existing pension solutions and make subsidies, returns, costs and communication easier to understand."
+        "key": "pension",
+        "horizon": "Tomorrow · Pension",
+        "title": "A pension that does more than create administration.",
+        "description": "We review existing plans and explain costs, return assumptions, guarantees, employer contributions and their effect on future provision.",
+        "points": ["Review existing plans and costs transparently", "Assess suitable implementation routes", "Explain provision clearly at employee level"]
       },
       {
-        "title": "Corporate health insurance",
-        "description": "Health budgets, prevention and access-to-care modules that employees actually understand and use.",
-        "points": [
-          "Predictable cost per employee instead of another invisible salary increase",
-          "Fewer long absences when employees get specialist appointments and treatment faster",
-          "High perceived value because health becomes immediately personal",
-          "Can be structured as a tax-efficient benefit within the monthly allowance"
-        ]
+        "key": "health",
+        "horizon": "Today · Health insurance",
+        "title": "Healthcare benefits employees understand immediately.",
+        "description": "Corporate health insurance makes an employer benefit tangible now. We develop a level of cover that fits the workforce and the available budget.",
+        "points": ["Predictable contribution per insured employee", "Choose benefits suited to the workforce", "Explain rollout and use clearly"],
+        "note": "Available benefits depend on the selected plan and its insurance terms."
       },
       {
-        "title": "Tax-efficient health benefits",
-        "description": "Use budget intentionally: for prevention, retention and appreciation with clear value for employees."
+        "key": "prevention",
+        "horizon": "Wellbeing coordination and prevention",
+        "title": "One health day is not yet health management.",
+        "description": "Healio supports the coordination of voluntary health-promotion and prevention services and involves the responsible internal and external parties.",
+        "points": ["Assess needs and employee groups", "Select qualified measures", "Plan health communication"],
+        "note": "Healio supports wellbeing coordination and voluntary health promotion. Statutory duties relating to occupational health and safety, return-to-work management or occupational medicine remain with the responsible parties."
+      },
+      {
+        "key": "management",
+        "horizon": "Ongoing · Management and communication",
+        "title": "A system needs someone to keep it running.",
+        "description": "Benefits management does not end at signature. Healio connects plans, providers, processes and communication and remains the central point of contact.",
+        "points": ["Integrate existing solutions sensibly", "Support HR and payroll", "Review and adjust provision regularly"]
       }
     ]
   },
-  "bkvEmployer": {
-    "eyebrow": "Employer value of bKV",
-    "title": "Why corporate health insurance makes immediate sense for employers.",
-    "description": "A bKV is not a nice-to-have. It is a visible health benefit: employees experience concrete services while companies keep budget, rollout and communication under control.",
-    "points": [
+  "economics": {
+    "eyebrow": "Economics and structure",
+    "title": "Looking only at the contribution leaves the calculation incomplete.",
+    "description": "Employer-funded pension and health benefits may — depending on the component and structure — qualify as business expenses. Additional statutory tax and contribution advantages may further change the company's effective cost.",
+    "cta": "Assess effective cost in a benefits review",
+    "summaryTitle": "Tax-deductible does not mean free.",
+    "summaryText": "A business-expense deduction is not a full reimbursement. Legal form, profit, tax rate, type of benefit and implementation all matter. Healio makes these factors transparent and, if requested, coordinates implementation with payroll and tax advisers.",
+    "sourceLabel": "Official source",
+    "facts": [
       {
-        "title": "More perceived value per euro",
-        "description": "A health budget feels more tangible than a small gross salary increase because employees can use it directly for vision, dental, prevention or treatment."
+        "key": "expense",
+        "title": "Understand business expenses correctly",
+        "description": "Business-related expenditure generally reduces taxable profit. It is not fully reimbursed as a result."
       },
       {
-        "title": "Fewer sick days",
-        "description": "Faster specialist appointments can prevent health issues from remaining unresolved and absences from becoming longer than necessary."
+        "key": "pension",
+        "title": "Pension within statutory incentives",
+        "description": "Specific implementation routes are subject to statutory tax and contribution limits. The effect depends on the model selected."
       },
       {
-        "title": "Stronger recruiting",
-        "description": "bKV is an exclusive employer benefit and helps when candidates choose between similar salary packages."
+        "key": "health",
+        "title": "Structure health insurance correctly",
+        "description": "Employer-funded insurance cover can qualify as a benefit in kind under certain conditions. Cash subsidies are treated differently for tax purposes."
       },
       {
-        "title": "Retention through real care",
-        "description": "Taking health seriously sends a clear signal: this company invests not only in work, but in people."
-      },
-      {
-        "title": "Lean implementation",
-        "description": "Clear tariffs, employee communication and digital administration keep the value visible without overloading HR."
+        "key": "prevention",
+        "title": "Support qualified prevention",
+        "description": "Measures provided in addition to regular salary may remain tax-free up to EUR 600 per employee and year if statutory quality and purpose requirements are met."
       }
-    ]
-  },
-  "bkvAbsence": {
-    "eyebrow": "Absence calculator",
-    "title": "What fewer absence days can mean financially.",
-    "description": "Faster specialist appointments are not only a comfort benefit. When issues are clarified earlier, absences may stay shorter or not escalate in the first place.",
-    "employeeCount": "Employees",
-    "costPerDay": "Cost per absence day",
-    "sickDaysWithout": "Absence days without bKV",
-    "sickDaysWith": "Absence days with bKV",
-    "daysValue": "{{days}} days",
-    "withoutLabel": "Without bKV per year",
-    "withLabel": "With bKV per year",
-    "savingsLabel": "Potential annual relief",
-    "daysSavedLabel": "{{days}} potentially avoided absence days",
-    "note": "Simplified model calculation. It does not replace occupational health or actuarial assessment and does not show a guaranteed reduction in sick days."
-  },
-  "healthBudget": {
-    "eyebrow": "Additional low-budget value",
-    "title": "A €3,000 health budget as a strong add-on for your team",
-    "description": "Not every company can immediately open a large health-insurance budget. This is where the Healio health budget helps: employees combine health-insurance bonuses and supplementary coverage intelligently while you communicate real value.",
-    "amount": "€3,000",
-    "amountLabel": "health budget over 2 years",
-    "points": [
-      "Relevant for employees using naturopathy, osteopathy, vision aids or preventive care",
-      "Strong benefit communication even when employer budgets are limited",
-      "A clean add-on to pension and health benefits, not a replacement"
     ],
-    "cta": "Check as a benefit"
-  },
-  "compound": {
-    "eyebrow": "Pension timing lever",
-    "title": "With compound interest, waiting is the expensive mistake.",
-    "description": "For companies, corporate pension is not just a contract. It is timing. The earlier employees start, the longer capital can work in the background. The visible dynamic often appears later: returns on returns, year after year.",
-    "cta": "Check compound potential",
-    "visualEyebrow": "Interactive calculator",
-    "visualTitle": "What a later start can cost",
-    "startTodayLabel": "Start today",
-    "delayLabel": "Start in {{years}} years",
-    "advantageLabel": "Time advantage from starting earlier",
-    "monthlyContribution": "Monthly contribution",
-    "duration": "Duration",
-    "returnRate": "Assumed annual return",
-    "delay": "Start delay",
-    "yearsValue": "{{years}} years",
-    "visualDescription": "Simplified model calculation excluding costs, taxes, inflation and guarantees. It shows the timing and compounding effect, not the concrete performance of a product.",
-    "points": [
-      {
-        "title": "Time is the lever",
-        "description": "The first years may look small, but they give capital the long runway."
-      },
-      {
-        "title": "The turbo comes late",
-        "description": "The strongest effects appear when returns start generating further returns."
-      },
-      {
-        "title": "Communication matters",
-        "description": "Employees understand pension faster when they can see the cost of waiting."
-      }
-    ]
+    "disclaimer": "Tax and social-security treatment depends on the specific structure and applicable legal requirements. This is not tax advice."
   },
   "process": {
-    "eyebrow": "Process",
-    "title": "From status quo to a usable benefits system",
+    "eyebrow": "From product to management",
+    "title": "Rollout is the beginning. Not the end.",
+    "description": "Benefits create value only when employees understand them and HR can manage them reliably. Healio creates a robust process for both.",
     "steps": [
+      {"title": "Understand the status quo", "description": "We review contracts, costs, subsidies, participation and existing communication."},
+      {"title": "Build the business case", "description": "You see which pension, health and wellbeing structure fits the company and its budget."},
+      {"title": "Introduce it clearly", "description": "We coordinate the decision, providers, employee communication and relevant internal interfaces."},
+      {"title": "Manage it continuously", "description": "Healio remains the point of contact, supports employees and reviews the structure for action required."}
+    ]
+  },
+  "workforce": {
+    "eyebrow": "Alternative without a company benefit budget",
+    "title": "If the employer budget is not ready yet, better health access does not have to wait.",
+    "description": "The company enables access and internal communication. Employees decide voluntarily whether the Healio concept suits them. Health access can therefore start before an employer-funded budget is approved.",
+    "cardEyebrow": "Entry route without a benefits budget",
+    "employerAmount": "EUR 0",
+    "employerLabel": "employer insurance contribution",
+    "budgetLabel": "Potentially available to eligible employees",
+    "budgetAmount": "up to EUR 3,000",
+    "budgetSuffix": "in potential insurance benefits over 2 years. A suitable statutory-insurance bonus may offset the employee contribution in whole or in part.",
+    "points": ["No employer insurance contribution required", "Voluntary employee decision", "Information and personal support from Healio"],
+    "cta": "Assess Healio for your workforce",
+    "note": "Employees take out and fund the insurance themselves. A statutory-insurance bonus may offset contributions in whole or in part; full reimbursement is not guaranteed. Accessing a suitable bonus may require changing statutory health insurer. Benefits, contributions and bonuses depend on the plan, personal circumstances and actual bonus use."
+  },
+  "faq": {
+    "eyebrow": "Before the decision",
+    "title": "Four questions every company should answer.",
+    "description": "The greatest risk is not one imperfect decision. It is a system nobody challenges at all.",
+    "items": [
       {
-        "title": "Analysis",
-        "description": "We review existing contracts, costs, communication and unused tax-efficient options."
+        "question": "Do existing contracts have to be replaced?",
+        "answer": "No. The benefits review starts with an open assessment. Sound solutions remain in place; changes are made only where costs, impact, processes or communication can be improved transparently."
       },
       {
-        "title": "Concept",
-        "description": "You receive a clear recommendation on which combination of pension, health insurance and benefits makes economic sense."
+        "question": "How do we know whether our current solution is genuinely good?",
+        "answer": "Not from the contribution alone. Costs, scope, return and guarantee assumptions, participation, employee understanding and ongoing administration all matter."
       },
       {
-        "title": "Implementation",
-        "description": "Healio supports rollout, employee communication and ongoing optimization."
+        "question": "What does Healio handle after the rollout?",
+        "answer": "Healio remains the central point of contact, coordinates providers and communication, supports employees with questions and reviews whether circumstances or action required have changed."
+      },
+      {
+        "question": "What if an employer-funded benefit budget is not available yet?",
+        "answer": "The Healio employee concept can provide a voluntary entry route without an employer-funded benefit contribution. The company enables internal communication; employees make and fund their own decision."
       }
     ]
   },
   "cta": {
-    "title": "Let us check where your benefits budget can create more impact.",
-    "description": "In 45 minutes, you will see which levers are realistic for your company and which next steps make sense.",
-    "primary": "Free potential analysis"
+    "eyebrow": "Now, not someday",
+    "title": "You cannot catch up on 30 lost years.",
+    "description": "In a focused benefits review, we assess your current provision, identify economic levers and clarify which decision actually matters today.",
+    "primary": "Start a benefits review",
+    "proof": ["45 minutes", "no obligation", "with an initial plan review"]
   }
 }

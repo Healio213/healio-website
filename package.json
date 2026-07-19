@@ -9,7 +9,9 @@
     "build": "node tools/generate-llms.js || true && vite build && node scripts/generate-seo-pages.mjs",
     "preview": "vite preview --host :: --port 3000",
     "lint": "eslint . --quiet",
-    "test:homepage": "node scripts/check-homepage-contract.mjs"
+    "test:homepage": "node scripts/check-homepage-contract.mjs",
+    "test:company": "node scripts/check-company-contract.mjs",
+    "test:services": "node scripts/check-services-contract.mjs"
   },
   "dependencies": {
     "@babel/traverse": "^7.26.4",
