@@ -26,7 +26,7 @@
     "success": "Ihre Anfrage wurde erfolgreich gesendet.",
     "successDesc": "Wir melden uns in Kürze bei Ihnen.",
     "error": "Fehler",
-    "errorDesc": "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter kontakt@healio.de"
+    "errorDesc": "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@healio.de"
   },
   "contactForm": {
     "title": "Jetzt unverbindlich beraten lassen",

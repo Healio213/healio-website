@@ -140,8 +140,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-slate-500 mb-1">Schreiben Sie uns direkt</p>
-                  <a href="mailto:kontakt@healio.de" className="font-bold text-lg text-white hover:text-healio-primary transition-colors block">
-                    kontakt@healio.de
+                  <a href="mailto:info@healio.de" className="font-bold text-lg text-white hover:text-healio-primary transition-colors block">
+                    info@healio.de
                   </a>
                 </div>
               </div>

@@ -98,7 +98,7 @@ const Footer = ({ hideCta = false }) => {
           <div>
             <h4 className="font-semibold mb-4 text-slate-200">{t('footer.contact')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><a href="mailto:kontakt@healio.de" className="hover:text-healio-primary transition-colors">kontakt@healio.de</a></li>
+              <li><a href="mailto:info@healio.de" className="hover:text-healio-primary transition-colors">info@healio.de</a></li>
               <li><a href="tel:+494089755705" className="hover:text-healio-primary transition-colors">+49 40 89755705</a></li>
             </ul>
           </div>

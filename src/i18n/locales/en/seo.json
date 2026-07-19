@@ -15,10 +15,6 @@
     "title": "Hospital Supplementary Insurance: Private Patient in Hospital | Healio",
     "description": "Hospital supplementary insurance: private room, chief physician treatment, free hospital choice. SDK hospital plans, e.g. from 6.84 €/month (accident plan, age 30)."
   },
-  "klinik": {
-    "title": "Hospital Upgrade – Private Patient in Hospital | Healio",
-    "description": "Secure a private room & chief physician treatment in hospital."
-  },
   "partner": {
     "title": "For Practices – Explain Health Budgets Clearly | Healio",
     "description": "A free partnership for naturopaths, osteopaths and midwives: The practice provides information while Healio independently reviews and advises patients."
@@ -74,10 +70,6 @@
   "confirmation": {
     "title": "Confirmation | Healio",
     "description": "Thank you for your inquiry with Healio."
-  },
-  "zahnzusatz": {
-    "title": "Healio Dental – Dental Insurance with 100% Reimbursement",
-    "description": "Secure private-patient status at the dentist. 100% reimbursement for dental prosthetics, implants and professional teeth cleaning."
   },
   "defaults": {
     "title": "Healio – Holistic Health & Bonus Optimization",

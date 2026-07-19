@@ -3,11 +3,11 @@
     "title": "Legal Notice",
     "breadcrumb": "Page navigation",
     "home": "Home",
-    "section1Title": "Information pursuant to § 5 TMG",
+    "section1Title": "Information pursuant to § 5 DDG",
     "companyName": "Healio GmbH",
     "address1": "Arndtstrasse 6",
     "address2": "22085 Hamburg",
-    "register": "Commercial Register: HRB 196 905",
+    "register": "Commercial Register: HRB 196905",
     "court": "Registry Court: Amtsgericht Hamburg",
     "taxNumber": "Tax No. 43/729/01735",
     "regNumber": "Registration number pursuant to §34d para. 1 GewO: D-C1LE-OVLQH-98",
@@ -18,7 +18,7 @@
     "phoneLabel": "Phone:",
     "emailLabel": "Email:",
     "dispute": "Dispute Resolution",
-    "disputeText": "The European Commission provides a platform for online dispute resolution (ODR): http://ec.europa.eu/consumers/odr/. You can find our email address in the legal notice above."
+    "disputeText": "For complaints related to insurance mediation: Versicherungsombudsmann e.V., Postfach 08 06 32, 10006 Berlin, and Ombudsmann Private Kranken- und Pflegeversicherung, Postfach 06 02 22, 10052 Berlin. You will find our email address above."
   },
   "agb": {
     "title": "General Terms and Conditions for Insurance Brokers",
@@ -34,7 +34,7 @@
     "section2Text": "The client is obligated to cooperate, in particular to provide truthful information promptly and completely.",
     "section3Title": "3. Liability",
     "section3Text": "The broker assumes liability for the proper fulfilment of duties within the framework of statutory provisions.",
-    "lastUpdated": "Last updated: February 2026"
+    "lastUpdated": "Last updated: July 2026"
   },
   "datenschutz": {
     "title": "Privacy Policy",
@@ -50,10 +50,10 @@
     "section3Text": "You have the right at any time to free information about your stored personal data.",
     "section4Title": "4. Cookies",
     "section4Text": "Our website partially uses cookies.",
-    "section5Title": "5. Contact the Data Protection Officer",
+    "section5Title": "5. Contact for privacy questions",
     "section5Text": "If you have any questions about data protection, please send us an email.",
     "emailLabel": "Email:",
-    "lastUpdated": "Last updated: March 2026"
+    "lastUpdated": "Last updated: July 2026"
   },
   "erstinformation": {
     "shortTitle": "Initial information",
@@ -62,7 +62,7 @@
     "intro": "This page provides all information on our intermediary status, remuneration, the intermediary register and the competent dispute resolution bodies. Section 60 VVG is explained separately as the basis of our advice.",
     "breadcrumb": "Page navigation",
     "freeOfCharge": "Provided free of charge",
-    "lastUpdated": "Last updated: 19 July 2026",
+    "lastUpdated": "Last updated: July 2026",
     "contents": "Contents",
     "print": "Print or save as PDF",
     "lawPanel": {

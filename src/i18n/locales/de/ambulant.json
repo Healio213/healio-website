@@ -18,10 +18,10 @@
   },
   "ticker": {
     "budget": "Bis zu 3.000 € Gesundheitsbudget",
-    "sdk": "SDK – seit 1926 am Markt",
-    "ikk": "IKK classic – 3 Mio. Versicherte",
+    "sdk": "SDK: seit 1926 am Markt",
+    "ikk": "IKK classic: 3 Mio. Versicherte",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
-    "noWait": "Keine Wartezeit – sofort geschützt",
+    "noWait": "Keine Wartezeit, sofort geschützt",
     "fast": "In nur 3 Minuten abgeschlossen",
     "effective": "Effektiv ab 0 € dank IKK Bonus",
     "akupunktur": "Akupunktur inklusive",
@@ -295,7 +295,7 @@
       },
       "augenLaser": {
         "title": "Augen-Laser (Refraktive Chirurgie/LASIK)",
-        "desc": "100% je Auge"
+        "desc": "Bis zu 1.000 € je Auge (einmalig)"
       },
       "heilpraktiker": {
         "title": "Heilpraktiker und Naturheilverfahren",

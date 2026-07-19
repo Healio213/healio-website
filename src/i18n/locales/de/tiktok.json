@@ -25,8 +25,8 @@
     },
     "zahn": {
       "icon": "🦷",
-      "title": "ZahnUpgrade 90+",
-      "subtitle": "Implantate, Kronen, Brücken, Zahnreinigung, 90-100 %",
+      "title": "Zahnzusatz: Bayerische & UKV",
+      "subtitle": "Sofortschutz auch bei angeratener Behandlung, bis 1.500 € Zuschuss",
       "price": "0 €*",
       "period": "effektiv/Monat",
       "badge": "IKK Bonus deckt die Kosten",
@@ -48,8 +48,8 @@
       "label": "Ambulant-Budget"
     },
     "dental": {
-      "value": "90-100 %",
-      "label": "Zahnersatz"
+      "value": "bis 1.500 €",
+      "label": "Zahn-Sofortschutz"
     },
     "bonus": {
       "value": "700 €+",

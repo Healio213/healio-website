@@ -2,14 +2,14 @@
   "hero": {
     "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
     "subtitle": "Zahnzusatzschutz ab wenigen Euro im Monat. Der IKK classic Bonus kann den Beitrag bis zu 100 % refinanzieren, wie viel genau, prüfen wir individuell mit dir.",
-    "ikkNote": "<strong>Dein Beitrag kann sich komplett refinanzieren:</strong> Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Je nach Bonus gleicht das den Beitrag bis zu 100 % aus, rechne es dir unten direkt aus. Keine Wartezeiten, bis zu 3 fehlende Zähne mitversicherbar.",
+    "ikkNote": "<strong>Dein Beitrag kann sich komplett refinanzieren:</strong> Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Je nach Bonus gleicht das den Beitrag bis zu 100 % aus, rechne es dir unten direkt aus. Und selbst wenn dein Zahnarzt schon eine Behandlung angeraten hat, gibt es über den Sofortschutz-Weg noch eine Lösung.",
     "ctaCalculate": "Passenden Tarif finden",
     "ctaBenefits": "Leistungen ansehen",
     "heroImageAlt": "Professionelle Zahnarztpraxis"
   },
   "siegel": {
     "title": "Ausgezeichnet von unabhängigen Testern",
-    "alt": "Qualitätssiegel: Franke & Bornberg FFF+, Focus Money Höchste Kundenzufriedenheit, Focus Money Höchste Weiterempfehlung, Stiftung Warentest SEHR GUT (0,8)"
+    "alt": "Qualitätssiegel: Stiftung Warentest SEHR GUT (0,5) für ZAHN Prestige, Ascore Tarif des Jahres 2024, Franke & Bornberg FFF+ für ZahnPRIVAT 100"
   },
   "insurerChoice": {
     "badge": "Sofortschutz und Vorsorge",
@@ -53,84 +53,73 @@
     "bonusCta": "Jetzt passenden Zahntarif wählen",
     "disclaimer": "Die Annahme richtet sich nach den Gesundheitsfragen und Annahmerichtlinien des jeweiligen Versicherers."
   },
-  "concept": {
-    "title": "ZahnUpgrade 90+ – Bis zu 100 % Erstattung",
-    "subtitle": "Der Testsieger von Stiftung Warentest: SEHR GUT (0,8). Mit BonusPlus steigt die Erstattung automatisch von 90 % auf 100 %. In Kombination mit dem IKK classic Bonus effektiv für 0 €.",
-    "testsieger": "Stiftung Warentest Testsieger",
-    "tariffName": "ZahnUpgrade 90+",
-    "tariffRate": "90 – 100 %",
-    "tariffRateLabel": "Erstattung, ab 13,50 €/Monat",
-    "tariffDetails": {
-      "zahnersatz": { "label": "Zahnersatz (Kronen, Brücken, Implantate, Inlays)", "value": "bis zu 100 %" },
-      "zahnbehandlung": { "label": "Zahnbehandlungen (Füllungen, Wurzel, Parodontose)", "value": "90 %" },
-      "prophylaxe": { "label": "Prophylaxe, PZR & Fissurenversiegelung", "value": "90 %, bis 180 €/Jahr" },
-      "bleaching": { "label": "Bleaching & Schmerzausschaltung", "value": "90 %, bis 180 €/Jahr" },
-      "fehlendeZaehne": { "label": "Bis zu 3 fehlende Zähne", "value": "mitversicherbar" },
-      "unfall": { "label": "Unfall-Sofortschutz", "value": "Ohne Höchstsumme" },
-      "maxErstattung": { "label": "Max. Erstattung", "value": "1.000 € / 4.000 € / unbegrenzt" }
-    },
-    "bonusPlusTitle": "BonusPlus – So steigt deine Erstattung auf 100 %",
-    "bonusPlus90": "90 %",
-    "bonusPlus90Label": "Sofort ab Tag 1",
-    "bonusPlus95": "95 %",
-    "bonusPlus95Label": "Nach 5 Jahren Bonusheft",
-    "bonusPlus100": "100 %",
-    "bonusPlus100Label": "Nach 10 Jahren Bonusheft",
-    "bonusPlusNote": "BonusPlus ist ab 21 Jahren verfügbar. Lückenlos geführtes Bonusheft der gesetzlichen Krankenkasse erforderlich.",
-    "ikkComboTitle": "Effektiv 0 € mit IKK classic Bonus",
-    "ikkComboText": "Der IKK Bonus belohnt gesundheitsbewusstes Verhalten mit <strong>über 300 € pro Jahr (steuerfrei)</strong>. Bei einem monatlichen Beitrag von 13,50 € (= 162 €/Jahr) deckt der Bonus die Kosten mehr als vollständig. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 € pro Jahr für Zahnreinigung und Vorsorge.",
-    "vorversicherungTitle": "Vorversicherung wird angerechnet",
-    "vorversicherungText": "<strong>Die Summenbegrenzung im ersten Jahr entfällt komplett</strong>, wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat. Du startest sofort mit vollem Leistungsumfang. Ein Wechsel lohnt sich besonders, wenn du bisher weniger als 90 % Erstattung bekommst.",
-    "exampleImplantat": "Beispiel: Implantat",
-    "exampleBleaching": "Beispiel: Bleaching",
-    "rechnungsbetrag": "Rechnungsbetrag",
-    "gkvLeistung": "GKV-Leistung",
-    "eigenanteilOhne": "Eigenanteil ohne Versicherung",
-    "erstattungZahn": "Erstattung ZahnUpgrade 90+",
-    "deinEigenanteil": "Dein Eigenanteil",
-    "mitBonusPlus10": "Mit BonusPlus (10 Jahre Bonusheft)",
-    "mitBonusPlus5": "Mit BonusPlus (5 Jahre Bonusheft)",
-    "besonderheitenTitle": "Das macht ZahnUpgrade besonders",
-    "besonderheiten": [
-      "Keine Wartezeiten – Sofortschutz ab Tag 1",
-      "Maximal 3 Gesundheitsfragen beim Antrag",
-      "Bis zu 3 fehlende Zähne mitversicherbar (Zuschlag je nach Tarif)",
-      "BonusPlus: Erstattung steigt auf bis zu 100 %",
-      "Vorversicherung wird angerechnet (Summenbegrenzung entfällt im 1. Jahr)",
-      "Wechsel-Option: Nach 3 Jahren in höheren Tarif ohne Gesundheitsprüfung",
-      "Unfall-Sofortschutz ohne Höchstsummen oder Altersbegrenzung",
-      "Inflationsvorsorge: Erstattungsgrenzen werden indexorientiert angepasst",
-      "Innovationsvorsorge: Zukünftige Behandlungsmethoden werden abgedeckt",
-      "Optional mit Alterungsrückstellungen für günstigere Beiträge im Alter"
-    ]
-  },
   "benefits": {
     "title": "Zahnzusatzversicherung: Was die gesetzliche Kasse nicht zahlt.",
-    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest zahlen Sie selbst, oder eine intelligente Zusatzversicherung.",
-    "noWait": { "title": "Keine Wartezeiten", "desc": "Sofortschutz ab Tag 1. Professionelle Zahnreinigung und Prophylaxe sofort nutzbar." },
-    "zahnersatz": { "title": "Bis zu 100 % Zahnersatz", "desc": "Kronen, Brücken, Implantate und Inlays. Mit BonusPlus steigt die Erstattung auf bis zu 100 %." },
-    "prophylaxe": { "title": "Prophylaxe & Zahnreinigung", "desc": "Professionelle Zahnreinigung, Fissurenversiegelung und Prophylaxe in allen Tarifen inklusive." },
-    "bleaching": { "title": "Bleaching & Ästhetik", "desc": "Ab dem 70+-Tarif: Bleaching, Schmerzausschaltung (Lachgas, Hypnose, Akupunktur) mitversichert." },
-    "fehlend": { "title": "Fehlende Zähne versicherbar", "desc": "Bis zu 3 bereits fehlende Zähne mitversicherbar. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, wir finden die günstigste Lösung für dich." },
-    "unfall": { "title": "Unfall-Sofortschutz", "desc": "Keine Höchstsummen und keine Altersbegrenzung bei Zahnschäden durch Unfälle." },
-    "gesundheitsfragen": { "title": "Nur 3 Gesundheitsfragen", "desc": "Einfacher Antrag. Maximal 3 Gesundheitsfragen. Stabil kalkuliert und leistungsfähig." }
+    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest übernimmt je nach Situation die Bayerische oder die UKV.",
+    "noWait": {
+      "title": "Sofortschutz möglich",
+      "desc": "Der Baustein ZAHN Sofort der Bayerischen versichert auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 € Zuschuss. Wichtig: erst abschließen, dann Rechnung erhalten."
+    },
+    "zahnersatz": {
+      "title": "Bis zu 100 % Zahnersatz",
+      "desc": "Kronen, Brücken, Implantate und Inlays, je nach gewähltem Tarif der Bayerischen oder der UKV ZahnPRIVAT."
+    },
+    "prophylaxe": {
+      "title": "Prophylaxe & Zahnreinigung",
+      "desc": "Professionelle Zahnreinigung ist in den Tarifen enthalten, je nach Tarif mit jährlichem Budget."
+    },
+    "bleaching": {
+      "title": "Zahnbehandlung & Ästhetik",
+      "desc": "Füllungen, Wurzel- und Parodontosebehandlungen je nach Tarif bis zu 100 %, Premium-Tarife auch mit ästhetischen Leistungen."
+    },
+    "fehlend": {
+      "title": "Fehlende Zähne versicherbar",
+      "desc": "Bis zu 3 bereits fehlende Zähne mitversicherbar. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, wir finden die günstigste Lösung für dich."
+    },
+    "unfall": {
+      "title": "Zwei ausgezeichnete Versicherer",
+      "desc": "die Bayerische (Stiftung Warentest SEHR GUT 0,5 für ZAHN Prestige, 07/2025) und die UKV (Franke & Bornberg FFF+ für ZahnPRIVAT 100)."
+    },
+    "gesundheitsfragen": {
+      "title": "Faire Annahme",
+      "desc": "Die Annahme richtet sich nach den Gesundheitsfragen des jeweiligen Versicherers. Die Tarif-Weiche oben führt dich zum Weg, der zu deiner Situation passt."
+    }
   },
   "testimonials": {
     "headline": "Was Kunden berichten."
   },
   "faq": {
-    "title": "Häufige Fragen, direkt beantwortet.",
-    "subtitle": "Die wichtigsten Fakten im Überblick. Klar und transparent.",
+    "title": "Häufige Fragen zur Zahnzusatzversicherung",
+    "subtitle": "Alles Wichtige zu Sofortschutz, Tarifen und dem IKK Bonus.",
     "items": [
-      { "q": "Was kostet das ZahnUpgrade 90+ monatlich?", "a": "Der ZahnUpgrade 90+ Tarif beginnt ab 13,50 Euro im Monat ohne Alterungsrückstellungen. Mit Alterungsrückstellungen ab 29,06 Euro. In Kombination mit dem IKK classic Bonusprogramm (über 300 Euro pro Jahr, steuerfrei) finanziert sich die Versicherung effektiv komplett selbst. Bei nur 162 Euro Jahresbeitrag und über 300 Euro Bonus zahlst du unterm Strich 0 Euro." },
-      { "q": "Wie komme ich von 90 % auf 100 % Erstattung?", "a": "Durch BonusPlus steigt deine Erstattung automatisch: Sofort ab Tag 1 bekommst du 90 % erstattet. Wenn du ein lückenlos geführtes Bonusheft deiner Krankenkasse vorweisen kannst, steigt die Erstattung nach 5 Jahren auf 95 % und nach 10 Jahren auf volle 100 %. BonusPlus ist ab 21 Jahren verfügbar. Du musst nichts extra beantragen, der Nachweis des Bonushefts reicht." },
-      { "q": "Kann ich die Versicherung auch mit fehlenden Zähnen abschließen?", "a": "Ja, das ist ein echtes Alleinstellungsmerkmal. Bis zu 3 bereits fehlende Zähne können mitversichert werden. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, von wenigen Euro pro Zahn und Monat bis zu einem prozentualen Aufschlag. Viele andere Zahnzusatzversicherungen lehnen Kunden mit fehlenden Zähnen komplett ab oder schließen diese von der Erstattung aus." },
-      { "q": "Gibt es Wartezeiten?", "a": "Nein. Der volle Versicherungsschutz gilt sofort ab Tag 1. Professionelle Zahnreinigung, Prophylaxe, Fissurenversiegelung und alle anderen Leistungen kannst du direkt in Anspruch nehmen. In den ersten Kalenderjahren gilt eine Summenbegrenzung von 1.000 Euro (1./2. Jahr), die danach entfällt und ab dem 5. Kalenderjahr komplett unbegrenzt ist." },
-      { "q": "Ich habe bereits eine Zahnzusatzversicherung. Lohnt sich ein Wechsel?", "a": "Sehr wahrscheinlich ja, besonders wenn du aktuell weniger als 90 % Erstattung bekommst. Dein großer Vorteil: Die Vorversicherung wird angerechnet. Wenn deine bisherige Versicherung mindestens 40 % Zahnersatz erstattet hat, entfällt die Summenbegrenzung im ersten Kalenderjahr komplett. Du startest also sofort mit vollem Leistungsumfang, nicht bei Null." },
-      { "q": "Was genau wird alles erstattet?", "a": "Der ZahnUpgrade 90+ erstattet 90 bis 100 Prozent für hochwertigen Zahnersatz wie Implantate, Kronen, Brücken und Inlays. Dazu kommen Zahnbehandlungen wie Füllungen, Wurzelbehandlungen, Parodontose und Knirscherschienen, professionelle Zahnreinigung und Fissurenversiegelung bis 180 Euro pro Jahr, Bleaching und besondere Schmerzausschaltung wie Lachgas, Hypnose oder Akupunktur. Außerdem können bis zu 3 bereits fehlende Zähne mitversichert werden." },
-      { "q": "Wie funktioniert das zusammen mit dem IKK classic Bonus?", "a": "Die Kombination ist der Schlüssel: Du schließt den ZahnUpgrade 90+ ab (13,50 Euro pro Monat = 162 Euro im Jahr). Gleichzeitig sammelst du als IKK classic Mitglied Bonuspunkte für gesundheitsbewusstes Verhalten: Impfungen, Zahnvorsorge, Sportverein, Gesundheits-Check-ups. Der Bonus beträgt über 300 Euro pro Jahr, steuerfrei. Zusätzlich erstattet das IKK Gesundheitskonto bis zu 600 Euro pro Jahr für Zahnreinigung und Vorsorge. Ergebnis: Dein Zahnschutz kostet dich effektiv 0 Euro." },
-      { "q": "Brauche ich eine Gesundheitsprüfung?", "a": "Nein, es gibt keine aufwändige Gesundheitsprüfung. Der Antrag enthält maximal 3 einfache Gesundheitsfragen. Das macht den Abschluss schnell und unkompliziert. Selbst mit bis zu 3 fehlenden Zähnen wirst du angenommen (gegen einen Zuschlag, dessen Höhe vom Tarif abhängt)." },
-      { "q": "Wie wurde der ZahnUpgrade 90+ von unabhängigen Testern bewertet?", "a": "Der ZahnUpgrade 90+ wurde von Stiftung Warentest mit der Note SEHR GUT (0,8) ausgezeichnet und ist Testsieger in der Kategorie 'Gut und günstig' (Finanzen, Ausgabe 07/2025). Darüber hinaus hat der Versicherer das Siegel 'Höchste Kundenzufriedenheit' von Focus Money und die Bestnote 'Ausgezeichnet' von Morgen und Morgen erhalten." }
+      {
+        "q": "Mein Zahnarzt hat schon eine Behandlung angeraten. Kann ich noch abschließen?",
+        "a": "Ja, genau dafür gibt es unseren Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt."
+      },
+      {
+        "q": "Welcher Weg passt zu mir: die Bayerische oder die UKV?",
+        "a": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen? Wenn ja, ist die Bayerische mit dem Baustein ZAHN Sofort dein Weg. Wenn nein, sicherst du dir mit der UKV ZahnPRIVAT starke Vorsorge in drei Tarifstufen. Die Tarif-Weiche oben auf dieser Seite führt dich direkt zum passenden Abschluss."
+      },
+      {
+        "q": "Was kostet die Zahnzusatzversicherung monatlich?",
+        "a": "Das hängt von Alter, Tarif und deiner Situation ab. Beide Online-Rechner zeigen dir deinen persönlichen Beitrag in wenigen Minuten. Zur Orientierung: Der Baustein ZAHN Sofort der Bayerischen kostet 29,90 Euro monatlich zusätzlich zum gewählten Zahntarif und endet nach 24 Monaten automatisch, danach läuft dein Zahntarif normal weiter."
+      },
+      {
+        "q": "Kann ich mit fehlenden Zähnen abschließen?",
+        "a": "Ja, bis zu 3 bereits fehlende Zähne können je nach Versicherer und Tarif mitversichert werden. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, von wenigen Euro pro Zahn und Monat bis zu einem prozentualen Aufschlag. Die Annahme richtet sich nach den Gesundheitsfragen des jeweiligen Versicherers."
+      },
+      {
+        "q": "Wie refinanziert sich der Beitrag über den IKK Bonus?",
+        "a": "Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Wie viel du herausholst, ist individuell: Je nach deinen Aktivitäten kann der Bonus deinen Beitrag bis zu 100 Prozent komplett finanzieren. Rechne es dir mit dem Bonusrechner auf dieser Seite direkt aus."
+      },
+      {
+        "q": "Warum ist der Abschluss vor der Rechnungsstellung so wichtig?",
+        "a": "Beim Sofortschutz der Bayerischen gilt eine Behandlung als versicherbar, solange sie noch nicht in Rechnung gestellt wurde. Sobald die Rechnung geschrieben ist, ist es für diese Behandlung zu spät. Deshalb gilt: erst abschließen, dann behandeln lassen bzw. die Rechnung erhalten. Bei Fragen zum Timing melde dich gerne bei uns."
+      },
+      {
+        "q": "Gibt es Wartezeiten?",
+        "a": "Der Baustein ZAHN Sofort der Bayerischen bietet Sofortschutz ohne Wartezeit. Wie es bei den übrigen Tarifen und Leistungen aussieht, zeigt dir die jeweilige Abschlussstrecke transparent, bevor du abschließt."
+      }
     ]
   },
   "zahnzusatz": {
@@ -149,16 +138,34 @@
     "solution": {
       "badge": "Die Lösung",
       "title": "Rundum-Schutz für Ihre Zähne",
-      "erstattung": { "title": "100% Erstattung", "desc": "Wir übernehmen bis zu 100% der Kosten für hochwertigen Zahnersatz, Inlays und Implantate. Keine Kompromisse mehr bei der Qualität." },
-      "zahnreinigung": { "title": "Zahnreinigung inklusive", "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe – für ein strahlendes Lächeln." },
-      "sofortschutz": { "title": "Sofort-Schutz", "desc": "Keine Wartezeiten. Ihr Versicherungsschutz beginnt sofort ab dem ersten Tag. Reichen Sie Rechnungen direkt ein." }
+      "erstattung": {
+        "title": "100% Erstattung",
+        "desc": "Wir übernehmen bis zu 100% der Kosten für hochwertigen Zahnersatz, Inlays und Implantate. Keine Kompromisse mehr bei der Qualität."
+      },
+      "zahnreinigung": {
+        "title": "Zahnreinigung inklusive",
+        "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe – für ein strahlendes Lächeln."
+      },
+      "sofortschutz": {
+        "title": "Sofort-Schutz",
+        "desc": "Keine Wartezeiten. Ihr Versicherungsschutz beginnt sofort ab dem ersten Tag. Reichen Sie Rechnungen direkt ein."
+      }
     },
     "tariffFinder": {
       "title": "Finden Sie den Tarif, der Sie garantiert annimmt.",
       "subtitle": "Wählen Sie Ihren aktuellen Zahnstatus für ein maßgeschneidertes Angebot.",
-      "optionHealthy": { "title": "Alles gesund & vollzählig", "desc": "Ich habe keine fehlenden Zähne und keine laufenden Behandlungen." },
-      "option1Missing": { "title": "1 Zahn fehlt aktuell", "desc": "Mir fehlt derzeit ein Zahn (außer Weisheitszähne), der noch nicht ersetzt ist." },
-      "option2to3Missing": { "title": "2 bis 3 Zähne fehlen", "desc": "Mir fehlen derzeit mehrere Zähne, für die ich Ersatz benötige." },
+      "optionHealthy": {
+        "title": "Alles gesund & vollzählig",
+        "desc": "Ich habe keine fehlenden Zähne und keine laufenden Behandlungen."
+      },
+      "option1Missing": {
+        "title": "1 Zahn fehlt aktuell",
+        "desc": "Mir fehlt derzeit ein Zahn (außer Weisheitszähne), der noch nicht ersetzt ist."
+      },
+      "option2to3Missing": {
+        "title": "2 bis 3 Zähne fehlen",
+        "desc": "Mir fehlen derzeit mehrere Zähne, für die ich Ersatz benötige."
+      },
       "showTariff": "Tarif anzeigen"
     }
   }

@@ -14,7 +14,6 @@ const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
 const AboutPage = React.lazy(() => import('@/pages/AboutPage'));
 const LeistungenPage = React.lazy(() => import('@/pages/LeistungenPage'));
 const AmbulantPage = React.lazy(() => import('@/pages/AmbulantPage'));
-const HealioZahnzusatzPage = React.lazy(() => import('@/pages/HealioZahnzusatzPage'));
 const StationaerPage = React.lazy(() => import('@/pages/StationaerPage'));
 const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
@@ -27,6 +26,7 @@ const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
+const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage'));
 const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
 const ConfirmationPage = React.lazy(() => import('@/pages/ConfirmationPage'));
@@ -98,7 +98,7 @@ function App() {
               <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />
-              <Route path="healio-zahnzusatz" element={<HealioZahnzusatzPage />} />
+              <Route path="healio-zahnzusatz" element={<Navigate to="/zahn" replace />} />
               <Route path="stationaer" element={<StationaerPage />} />
               <Route path="klinik-upgrade" element={<Navigate to="/stationaer" replace />} />
               <Route path="impressum" element={<ImpressumPage />} />
@@ -123,7 +123,7 @@ function App() {
               <Route path="appointment" element={<TerminvereinbarungPage />} />
               <Route path="outpatient" element={<AmbulantPage />} />
               <Route path="dental" element={<ZahnPage />} />
-              <Route path="healio-dental" element={<HealioZahnzusatzPage />} />
+              <Route path="healio-dental" element={<Navigate to="/en/dental" replace />} />
               <Route path="inpatient" element={<StationaerPage />} />
               <Route path="hospital-upgrade" element={<Navigate to="/en/inpatient" replace />} />
               <Route path="legal-notice" element={<ImpressumPage />} />
@@ -155,7 +155,7 @@ function App() {
                <Route path="/en/pet-insurance" element={<VeterinaryHomePage />} />
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </RouteNormalizer>

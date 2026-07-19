@@ -127,8 +127,8 @@ export const seoRoutes = [
   },
   {
     path: '/zahn',
-    title: 'Zahnzusatzversicherung – Bis zu 100 % Erstattung | Healio',
-    description: 'Zahnzusatzversicherung mit bis zu 100 % Erstattung für Zahnersatz. Bis zu 3 fehlende Zähne mitversicherbar. Jetzt Beitrag berechnen!',
+    title: 'Zahnzusatzversicherung: Bis zu 100 % Erstattung | Healio',
+    description: 'Zahnzusatzversicherung, auch wenn die Behandlung schon angeraten ist: Sofortschutz mit bis zu 1.500 € Zuschuss oder starke Vorsorge mit ZahnPRIVAT. Jetzt passenden Tarif finden!',
     canonical: 'https://healio.de/zahn',
     keywords: 'Zahnzusatzversicherung, Zahnersatz Erstattung, Implantate Versicherung, Zahnversicherung Vergleich',
     lang: 'de',
@@ -237,13 +237,6 @@ export const seoRoutes = [
     title: 'Kostenlose Potenzialanalyse – Betriebliche Vorsorge | Healio B2B',
     description: 'Potenzialanalyse für betriebliche Altersvorsorge (bAV) und Krankenversicherung (bKV). Individuelle Berechnung für Ihr Unternehmen.',
     canonical: 'https://healio.de/potenzialanalyse',
-    lang: 'de',
-  },
-  {
-    path: '/healio-zahnzusatz',
-    title: 'Healio Zahnzusatz – Premium Zahnversicherung | Healio',
-    description: 'Premium Zahnzusatzversicherung von Healio: Bis zu 100 % Erstattung für Zahnersatz, Implantate und Inlays. Bis zu 3 fehlende Zähne mitversicherbar.',
-    canonical: 'https://healio.de/healio-zahnzusatz',
     lang: 'de',
   },
   {

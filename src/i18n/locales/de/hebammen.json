@@ -20,7 +20,7 @@
     "subtitle": "Damit deine Patientinnen genau wissen was sie erwartet kannst du ihnen diese Vorteile direkt zeigen. Das Budget sorgt dafür dass medizinische Extras nicht mehr aus eigener Tasche gezahlt werden müssen.",
     "highlights": [
       {
-        "title": "1100 Euro für deine Gesundheit",
+        "title": "1.000 Euro+ für die Gesundheit deiner Patientinnen",
         "desc": "Dieses Budget steht exklusiv für Naturheilkunde und Osteopathie sowie für wichtige Vorsorgeuntersuchungen während der Schwangerschaft bereit."
       },
       {
@@ -57,7 +57,7 @@
       { "name": "Arznei und Hilfsmittel", "amount": "1.000 €", "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel" }
     ],
     "totalLabel": "Schwangerschafts Budget gesamt",
-    "totalAmount": "über 1.100 €",
+    "totalAmount": "über 1.000 €",
     "totalNote": "Der Clou: Durch die intelligente Kombination mit dem Bonus der gesetzlichen Krankenkasse refinanzieren sich die Kosten für dieses Paket komplett von selbst. Für die Schwangere bedeutet das die beste Versorgung bei effektiv null Euro Kosten."
   },
   "benefits": {

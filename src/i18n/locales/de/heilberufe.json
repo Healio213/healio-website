@@ -156,7 +156,7 @@
       {
         "number": "02",
         "title": "Vorsorge-Termin",
-        "text": "30 Minuten. Remote oder Hamburg vor Ort. Keine Vorbereitung nötig."
+        "text": "30 Minuten. Per Telefon oder Videocall, deutschlandweit. Keine Vorbereitung nötig."
       },
       {
         "number": "03",
@@ -227,7 +227,7 @@
     "subtitle": "Zwei Wege, beide führen zu einer klaren Einschätzung deiner Absicherung.",
     "primary": {
       "title": "Termin direkt buchen",
-      "description": "30 Minuten mit Frank Steinfurt persönlich. Remote oder Hamburg vor Ort.",
+      "description": "30 Minuten mit Frank Steinfurt persönlich. Per Telefon oder Videocall, deutschlandweit.",
       "cta": "Termin auswählen"
     },
     "secondary": {

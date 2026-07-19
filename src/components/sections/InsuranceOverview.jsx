@@ -144,7 +144,7 @@ const InsuranceOverview = () => {
             {t('insurance.notSure')}
           </p>
           <Button asChild variant="outline" className="healio-button">
-            <a href="mailto:kontakt@healio.de">
+            <a href="mailto:info@healio.de">
               {t('insurance.freeConsultation')}
             </a>
           </Button>

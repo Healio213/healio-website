@@ -69,6 +69,32 @@ const DatenschutzPage = () => {
                 Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
               </p>
 
+              <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">Eingesetzte Dienste und Drittanbieter</h2>
+              <h3 className="text-xl font-semibold mt-6 mb-3">Hosting und Auslieferung (Vercel, Cloudflare)</h3>
+              <p>
+                Diese Website wird bei Vercel Inc. (USA) gehostet und über das Content-Delivery-Netzwerk von Cloudflare Inc. (USA) ausgeliefert. Dabei werden technisch notwendige Verbindungsdaten (u. a. IP-Adresse) verarbeitet, um die Seite bereitzustellen und vor Angriffen zu schützen. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und performanten Betrieb (Art. 6 Abs. 1 lit. f DSGVO). Mit beiden Anbietern bestehen Auftragsverarbeitungsverträge mit EU-Standardvertragsklauseln.
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">Google Analytics 4</h3>
+              <p>
+                Wir verwenden Google Analytics 4 (Google Ireland Ltd.), um die Nutzung unserer Website statistisch auszuwerten (z. B. aufgerufene Seiten, Verweildauer). IP-Adressen werden von Google Analytics 4 nicht gespeichert. Die gewonnenen Statistiken helfen uns, unser Angebot zu verbessern. Sie können der Erfassung jederzeit widersprechen, etwa über Browser-Einstellungen, Tracking-Schutz oder Browser-Add-ons zur Deaktivierung von Google Analytics.
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">Nita, unser KI-Assistent (ElevenLabs)</h3>
+              <p>
+                Auf unseren Seiten kann ein Sprach- bzw. Chat-Assistent ("Nita") eingebunden sein, der über die Plattform ElevenLabs Inc. (USA) betrieben wird. Wenn Sie den Assistenten aktiv nutzen, werden Ihre Eingaben bzw. Ihre Sprache zur Beantwortung an ElevenLabs übertragen. Die Nutzung ist freiwillig; ohne aktive Nutzung werden keine Gesprächsdaten übertragen. Bitte teilen Sie dem Assistenten keine sensiblen Gesundheitsdaten mit, eine persönliche Beratung erfolgt über unsere genannten Kontaktwege.
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">Terminbuchung (Calendly)</h3>
+              <p>
+                Für die Online-Terminbuchung nutzen wir Calendly LLC (USA). Wenn Sie einen Termin buchen, werden die von Ihnen eingegebenen Daten (Name, E-Mail-Adresse, gewählter Termin) an Calendly übertragen und uns bereitgestellt. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">E-Mail-Kommunikation (Brevo)</h3>
+              <p>
+                Für den Versand von Informations-E-Mails nutzen wir Brevo (Sendinblue GmbH, Deutschland). Ihre E-Mail-Adresse wird dafür nur verwendet, wenn Sie eingewilligt haben oder eine Geschäftsbeziehung besteht; Sie können sich jederzeit über den Abmeldelink austragen.
+              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">Externe Abschlussstrecken der Versicherer</h3>
+              <p>
+                Für Beitragsrechner und Online-Abschlüsse verlinken wir auf Strecken der jeweiligen Versicherer (z. B. SDK, die Bayerische, UKV/Versicherungskammer). Dort gelten die Datenschutzerklärungen des jeweiligen Anbieters; die dort eingegebenen Daten verarbeitet der Versicherer als Verantwortlicher.
+              </p>
+
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section3Title')}</h2>
               <p>
                 Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten.
@@ -81,9 +107,9 @@ const DatenschutzPage = () => {
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section5Title')}</h2>
               <p>
-                Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:
+                Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail:
                 <br /><br />
-                <strong>E-Mail:</strong> <a href="mailto:datenschutz@healio.de" className="text-healio-primary hover:underline">datenschutz@healio.de</a>
+                <strong>E-Mail:</strong> <a href="mailto:info@healio.de" className="text-healio-primary hover:underline">info@healio.de</a>
               </p>
 
               <p className="mt-12 text-sm text-gray-500 pt-8 border-t border-gray-100">{t('datenschutz.lastUpdated')}</p>

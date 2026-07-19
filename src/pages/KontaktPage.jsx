@@ -145,8 +145,8 @@ const KontaktPage = () => {
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
-                      <a href="mailto:kontakt@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
-                        kontakt@healio.de
+                      <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
+                        info@healio.de
                       </a>
                     </div>
                   </div>

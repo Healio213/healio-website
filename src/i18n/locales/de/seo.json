@@ -15,10 +15,6 @@
     "title": "Krankenhauszusatzversicherung: Privatpatient im Krankenhaus | Healio",
     "description": "Krankenhauszusatzversicherung: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. SDK Klinik-Tarife z. B. ab 6,84 €/Monat (Unfall-Tarif, 30 Jahre). Jetzt berechnen."
   },
-  "klinik": {
-    "title": "Klinik Upgrade - Privatpatient im Krankenhaus | Healio",
-    "description": "Sichern Sie sich Einbettzimmer & Chefarztbehandlung im Krankenhaus."
-  },
   "partner": {
     "title": "Für Praxen – Gesundheitsbudget verständlich erklären | Healio",
     "description": "Kostenfreie Zusammenarbeit für Heilpraktiker, Osteopathen und Hebammen: Die Praxis informiert, Healio prüft und berät Patienten unabhängig."
@@ -78,10 +74,6 @@
   "confirmation": {
     "title": "Bestätigung | Healio",
     "description": "Vielen Dank für Ihre Anfrage bei Healio."
-  },
-  "zahnzusatz": {
-    "title": "Healio Zahnzusatz - Zahnzusatzversicherung mit 100% Erstattung",
-    "description": "Sichern Sie sich Privatpatienten-Status beim Zahnarzt. 100% Kostenerstattung für Zahnersatz, Implantate und professionelle Zahnreinigung."
   },
   "defaults": {
     "title": "Healio - Ganzheitliche Gesundheit & Bonusoptimierung",

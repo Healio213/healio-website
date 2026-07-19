@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import DentalBenefits from '@/components/sections/DentalBenefits';
-import DentalConcept from '@/components/sections/DentalConcept';
 import DentalInsurerChoice from '@/components/sections/DentalInsurerChoice';
 import Testimonials from '@/components/sections/Testimonials';
 import Faq from '@/components/sections/Faq';
@@ -136,7 +135,6 @@ const ZahnPage = () => {
 
         <FadeInUp><DentalInsurerChoice /></FadeInUp>
 
-        <FadeInUp><DentalConcept /></FadeInUp>
         <FadeInUp><DentalBenefits /></FadeInUp>
 
         <FadeInUp><AmbulantBonusCalculator ctaOverride={{ href: '#tarif-weiche', label: t('insurerChoice.bonusCta') }} /></FadeInUp>

@@ -74,10 +74,9 @@ const ImpressumPage = () => {
               <section>
                 <h2 className="text-xl font-bold text-healio-slate mb-3">{t('impressum.dispute')}</h2>
                 <p>
-                  Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{' '}
-                  <a href="http://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">
-                    http://ec.europa.eu/consumers/odr/
-                  </a>.
+                  Für Beschwerden im Zusammenhang mit Versicherungsvermittlung können Sie sich an die folgenden Schlichtungsstellen wenden:
+                  Versicherungsombudsmann e.V., Postfach 08 06 32, 10006 Berlin (www.versicherungsombudsmann.de) sowie
+                  Ombudsmann Private Kranken- und Pflegeversicherung, Postfach 06 02 22, 10052 Berlin (www.pkv-ombudsmann.de).
                   {' '}Unsere E-Mail-Adresse finden Sie oben im Impressum.
                 </p>
               </section>
