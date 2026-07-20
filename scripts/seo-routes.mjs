@@ -313,6 +313,20 @@ export const seoRoutes = [
     canonical: 'https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio',
     lang: 'de',
   },
+  {
+    path: '/blog/zahnzusatzversicherung-trotz-angeratener-behandlung',
+    title: 'Zahnzusatzversicherung trotz angeratener Behandlung: Sofortschutz | Healio',
+    description: 'Behandlung schon angeraten? Der Baustein ZAHN Sofort der Bayerischen zahlt bis zu 1.500 € Zuschuss, wenn der Abschluss vor der Rechnung erfolgt.',
+    canonical: 'https://healio.de/blog/zahnzusatzversicherung-trotz-angeratener-behandlung',
+    lang: 'de',
+  },
+  {
+    path: '/blog/krankenhauszusatzversicherung-sportverein-best-ager',
+    title: 'Krankenhauszusatzversicherung ab 50: Sportverein zahlt sich doppelt aus | Healio',
+    description: 'Fit im Sportverein? Dann bekommst du den Klinik-Tarif leichter und der IKK Bonus kann den Beitrag bis zu 100 % refinanzieren.',
+    canonical: 'https://healio.de/blog/krankenhauszusatzversicherung-sportverein-best-ager',
+    lang: 'de',
+  },
 
   // === ENGLISCH ===
   {
