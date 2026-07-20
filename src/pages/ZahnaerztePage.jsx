@@ -75,7 +75,7 @@ const ZahnaerztePage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.h2
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-12"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12"
             >
               {t('stats.title')}
             </motion.h2>
@@ -100,7 +100,7 @@ const ZahnaerztePage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-10">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-5">{t('problem.title')}</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-5">{t('problem.title')}</h2>
                 <p className="text-slate-600 leading-relaxed">{t('problem.text')}</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
