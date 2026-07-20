@@ -27,6 +27,11 @@
         "Sofortschutz ohne Wartezeit, der Zahntarif läuft danach für alles Neue weiter",
         "Wichtig: erst abschließen, dann Rechnung erhalten"
       ],
+      "highlight": {
+        "badge": "Spar-Logik",
+        "title": "Der Kalenderjahres-Trick: 1.500 statt 750 Euro",
+        "text": "Der Zuschuss gilt je Kalenderjahr (bis zu 750 Euro, insgesamt bis zu 1.500 Euro). Beispiel: Diagnose im September, Abschluss sofort, noch bevor die Rechnung gestellt wird. Läuft der erste Behandlungsschritt mit Rechnung noch im Dezember und der Abschluss der Behandlung im neuen Jahr, nutzt du beide Jahres-Töpfe, also bis zu 1.500 Euro. Gerade größere Behandlungen strecken sich ohnehin über den Jahreswechsel, sprich den Behandlungsplan einfach mit deinem Zahnarzt durch."
+      },
       "cta": "Beitrag berechnen und abschließen",
       "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet."
     },
@@ -42,6 +47,11 @@
         "Kulante Annahme: Die Gesundheitsfragen schauen nur 2 Jahre zurück",
         "Bis zu 3 fehlende Zähne gegen festen Zuschlag mitversicherbar"
       ],
+      "highlight": {
+        "badge": "Familien-Highlight",
+        "title": "Bis zu 5.000 Euro für die Kieferorthopädie deines Kindes",
+        "text": "In den Top-Stufen von ZahnPRIVAT sind für Kinder bis zu 5.000 Euro Kieferorthopädie-Budget drin. Zum Vergleich: Bei vielen Zahntarifen ist deutlich früher Schluss. Wichtig ist der frühe Abschluss, bevor der Kieferorthopäde eine Behandlung empfiehlt."
+      },
       "cta": "Tarife ansehen und online abschließen",
       "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Wähle dort den Bereich Zahn."
     },

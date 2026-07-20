@@ -27,6 +27,11 @@
         "Immediate protection without waiting periods, the dental tariff then continues for everything new",
         "Important: sign up first, receive the invoice afterwards"
       ],
+      "highlight": {
+        "badge": "Savings logic",
+        "title": "The calendar-year trick: 1,500 instead of 750 euros",
+        "text": "The subsidy applies per calendar year (up to 750 euros, up to 1,500 euros in total). Example: diagnosis in September, sign up immediately, before the invoice is issued. If the first treatment step is invoiced in December and the treatment is completed in the new year, you use both annual allowances, up to 1,500 euros. Larger treatments often span the turn of the year anyway, just discuss the treatment plan with your dentist."
+      },
       "cta": "Calculate premium and sign up",
       "note": "You will be redirected to the online calculator of die Bayerische."
     },
@@ -42,6 +47,11 @@
         "Lenient acceptance: health questions only look back 2 years",
         "Up to 3 missing teeth insurable for a fixed surcharge"
       ],
+      "highlight": {
+        "badge": "Family highlight",
+        "title": "Up to 5,000 euros for your child's orthodontics",
+        "text": "The top tiers of ZahnPRIVAT include an orthodontics budget of up to 5,000 euros for children. For comparison: many dental tariffs stop far earlier. Signing up early matters, before the orthodontist recommends a treatment."
+      },
       "cta": "View tariffs and sign up online",
       "note": "You will be redirected to the online application of Versicherungskammer (UKV). Select the dental section there."
     },

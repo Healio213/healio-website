@@ -102,6 +102,13 @@ const DentalInsurerChoice = () => {
                   </li>
                 ))}
               </ul>
+              <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-4 sm:p-5 mb-8">
+                <span className="inline-block bg-[#25c990] text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
+                  {t('insurerChoice.sofort.highlight.badge')}
+                </span>
+                <p className="font-extrabold text-slate-900 mb-1">{t('insurerChoice.sofort.highlight.title')}</p>
+                <p className="text-sm text-slate-700 leading-relaxed">{t('insurerChoice.sofort.highlight.text')}</p>
+              </div>
               <div className="mt-auto">
                 <Button asChild className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white text-base px-6 py-6 h-auto rounded-xl shadow-[0_4px_14px_rgba(37,201,144,0.4)] transition-all duration-300">
                   <a
@@ -149,6 +156,13 @@ const DentalInsurerChoice = () => {
                   </li>
                 ))}
               </ul>
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 sm:p-5 mb-8">
+                <span className="inline-block bg-blue-500 text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
+                  {t('insurerChoice.vorsorge.highlight.badge')}
+                </span>
+                <p className="font-extrabold text-slate-900 mb-1">{t('insurerChoice.vorsorge.highlight.title')}</p>
+                <p className="text-sm text-slate-700 leading-relaxed">{t('insurerChoice.vorsorge.highlight.text')}</p>
+              </div>
               <div className="mt-auto">
                 <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-healio-primary hover:bg-emerald-50 text-slate-900 text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
                   <a
