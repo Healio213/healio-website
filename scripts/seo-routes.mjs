@@ -327,6 +327,34 @@ export const seoRoutes = [
     canonical: 'https://healio.de/blog/krankenhauszusatzversicherung-sportverein-best-ager',
     lang: 'de',
   },
+  {
+    path: '/blog/healio-konzept-fuer-heilpraktiker',
+    title: 'Das Healio-Konzept für Heilpraktiker | Healio',
+    description: 'Therapieabbrüche wegen Geld? Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Gesundheitsbudget für Naturheilkunde.',
+    canonical: 'https://healio.de/blog/healio-konzept-fuer-heilpraktiker',
+    lang: 'de',
+  },
+  {
+    path: '/blog/healio-konzept-fuer-osteopathen',
+    title: 'Das Healio-Konzept für Osteopathen | Healio',
+    description: 'Kassen streichen Osteopathie-Zuschüsse. Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Budget, IKK-Bonus inklusive.',
+    canonical: 'https://healio.de/blog/healio-konzept-fuer-osteopathen',
+    lang: 'de',
+  },
+  {
+    path: '/blog/healio-konzept-fuer-tcm-praxen',
+    title: 'Das Healio-Konzept für TCM-Praxen | Healio',
+    description: 'GKV zahlt Akupunktur nur in Ausnahmen. Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Budget für TCM beim Heilpraktiker.',
+    canonical: 'https://healio.de/blog/healio-konzept-fuer-tcm-praxen',
+    lang: 'de',
+  },
+  {
+    path: '/blog/healio-konzept-fuer-hebammen',
+    title: 'Das Healio-Konzept für Hebammen | Healio',
+    description: 'Werdende Eltern vertrauen deiner Empfehlung. Das Healio-Konzept bringt Familien bis zu 3.000 € Gesundheitsbudget plus Vorsorge-Topf.',
+    canonical: 'https://healio.de/blog/healio-konzept-fuer-hebammen',
+    lang: 'de',
+  },
 
   // === ENGLISCH ===
   {

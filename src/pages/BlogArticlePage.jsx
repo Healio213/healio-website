@@ -10,6 +10,8 @@ const API_BASE = import.meta.env.VITE_APP_API_URL || 'https://app.healio.de';
 const TARGET_GROUP_KEYS = {
   heilpraktiker: 'categories.heilpraktiker',
   hebammen: 'categories.hebammen',
+  osteopathen: 'categories.osteopathen',
+  tcm: 'categories.tcm',
   endkunden: 'categories.versicherte',
   optiker: 'categories.optiker',
   hoerakustiker: 'categories.hoerakustiker',
