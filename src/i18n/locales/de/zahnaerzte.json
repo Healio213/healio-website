@@ -1,7 +1,7 @@
 {
   "hero": {
     "badge": "Für Zahnarztpraxen",
-    "title": "Deine Patienten scheitern nicht am Behandlungsplan. Sondern am Eigenanteil.",
+    "title": "Deine Patienten scheitern nicht am Behandlungsplan. Sondern <highlight>am Eigenanteil</highlight>.",
     "subtitle": "Healio sorgt dafür, dass mehr deiner Patienten versichert im Wartezimmer sitzen. Ohne Aufwand für dein Team, ohne Provision, berufsrechtlich sauber gestaltet.",
     "cta": "Kennenlern-Termin vereinbaren"
   },

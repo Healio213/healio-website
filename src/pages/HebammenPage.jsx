@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Shield, Wallet, HeartHandshake, Scale, MessageCircle, FileText, QrCode, Heart, Check, Baby } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
+import HighlightText from '@/components/ui/HighlightText';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const HebammenPage = () => {
@@ -49,7 +50,7 @@ const HebammenPage = () => {
                 {t('hero.badge')}
               </span>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-                {t('hero.title')}
+                <HighlightText text={t('hero.title')} className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent" />
               </h1>
               <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8">
                 {t('hero.subtitle')}
