@@ -2,7 +2,7 @@
   "hero": {
     "badge": "Speziell für Hebammen",
     "title": "Volle Kurse für dich und die beste Versorgung für deine Familien.",
-    "subtitle": "Wie deine Schwangeren ab heute effektiv null Euro für wichtige Extras zahlen und du für deinen Einsatz fair belohnt wirst.",
+    "subtitle": "Wie deine Schwangeren wichtige Extras nicht mehr aus eigener Tasche zahlen müssen und du deinen Familien echten Mehrwert weitergibst.",
     "cta": "Jetzt kostenloses Kennenlernen sichern"
   },
   "problem": {
@@ -11,33 +11,33 @@
   },
   "solution": {
     "title": "Die Lösung: Das Healio Gesundheitsbudget",
-    "text": "Deine Familien sichern sich ein Budget von bis zu 3000 Euro. Durch die intelligente Verrechnung mit dem Bonus der Krankenkasse finanziert sich dieses Budget im Idealfall komplett von selbst. Deine Patientinnen haben den vollen Schutz und zahlen effektiv null Euro für deine Kurse und Behandlungen.",
+    "text": "Deine Familien sichern sich ein Budget von bis zu 3.000 Euro in 2 Jahren. Durch die Verrechnung mit dem Bonus der Krankenkasse kann sich dieses Budget im Idealfall komplett von selbst finanzieren. Deine Patientinnen haben den vollen Schutz, und deine Kurse und Behandlungen können je nach Tarif bis zu 100 Prozent erstattet werden.",
     "amount": "bis zu 3.000 €",
     "amountLabel": "Gesundheitsbudget"
   },
   "leistungen": {
-    "title": "Das 1100 Euro Budget für deine Familien",
-    "subtitle": "Damit deine Patientinnen genau wissen was sie erwartet kannst du ihnen diese Vorteile direkt zeigen. Das Budget sorgt dafür dass medizinische Extras nicht mehr aus eigener Tasche gezahlt werden müssen.",
+    "title": "Das Gesundheitsbudget für deine Familien",
+    "subtitle": "Bis zu 3.000 Euro in 2 Jahren, damit medizinische Extras nicht mehr an der eigenen Tasche scheitern. Diese Vorteile kannst du deinen Patientinnen direkt zeigen.",
     "highlights": [
       {
-        "title": "1.000 Euro+ für die Gesundheit deiner Patientinnen",
-        "desc": "Dieses Budget steht exklusiv für Naturheilkunde und Osteopathie sowie für wichtige Vorsorgeuntersuchungen während der Schwangerschaft bereit."
+        "title": "Bis zu 1.000 Euro für Naturheilkunde und Osteopathie",
+        "desc": "Je zwei Kalenderjahre, dazu ein eigener Vorsorge-Topf für zusätzliche Untersuchungen in der Schwangerschaft."
       },
       {
-        "title": "Frauenarzt Extras inklusive",
-        "desc": "Ob zusätzlicher Ultraschall oder wichtige Tests wie die Nackenfaltenmessung. Das Budget übernimmt die Kosten für diese IGeL Leistungen."
+        "title": "Frauenarzt Extras mitgedacht",
+        "desc": "Ob zusätzlicher Ultraschall oder weitere Vorsorgeuntersuchungen: Viele IGeL Leistungen können je nach Tarif über den Vorsorge-Topf erstattet werden. Welche im Einzelfall, klärt Healio in der Beratung."
       },
       {
         "title": "Sanfte Medizin",
-        "desc": "Akupunktur gegen Schwangerschaftsbeschwerden oder osteopathische Behandlungen für das Neugeborene werden voll erstattet."
+        "desc": "Akupunktur gegen Schwangerschaftsbeschwerden oder osteopathische Behandlungen für das Neugeborene können je nach Tarif bis zu 100 Prozent erstattet werden."
       },
       {
         "title": "Arznei und Hilfsmittel",
-        "desc": "Medikamente wie Femibion oder Hilfsmittel die sonst privat gezahlt werden müssten sind über das Budget abgedeckt."
+        "desc": "Medikamente wie Femibion oder Hilfsmittel, die sonst privat gezahlt werden müssten, können über das Budget abgedeckt werden."
       },
       {
-        "title": "Privatpatienten Status für das Baby",
-        "desc": "Dein Kind genießt von Tag eins an den Zugang zur besten Medizin ohne dass du dir Sorgen um die Kosten machen musst."
+        "title": "Das Baby von Tag eins an mitversichert",
+        "desc": "Gerade für Kinder sind die Beiträge niedrig. So sind Extras wie die Osteopathie für das Neugeborene von Anfang an abgesichert."
       }
     ],
     "ikkTitle": "IKK classic Leistungen",
@@ -52,13 +52,13 @@
     ],
     "sdkTitle": "SDK Zusatzversicherung",
     "sdkItems": [
-      { "name": "Schwangerschaftsvorsorge", "amount": "500 €", "detail": "IGeL wie Nackenfaltenmessung, extra Ultraschall, Tests" },
+      { "name": "Schwangerschaftsvorsorge", "amount": "500 €", "detail": "Vorsorge-Topf im Top-Tarif, z. B. für zusätzlichen Ultraschall und Tests" },
       { "name": "Naturheilverfahren", "amount": "1.000 €", "detail": "Akupunktur, Osteopathie, TCM inkl. verordneter Arzneimittel" },
       { "name": "Arznei und Hilfsmittel", "amount": "1.000 €", "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel" }
     ],
     "totalLabel": "Schwangerschafts Budget gesamt",
     "totalAmount": "über 1.000 €",
-    "totalNote": "Der Clou: Durch die intelligente Kombination mit dem Bonus der gesetzlichen Krankenkasse refinanzieren sich die Kosten für dieses Paket komplett von selbst. Für die Schwangere bedeutet das die beste Versorgung bei effektiv null Euro Kosten."
+    "totalNote": "Der Clou: Durch die Kombination mit dem Bonus der gesetzlichen Krankenkasse können sich die Kosten für dieses Paket bis zu 100 Prozent refinanzieren. Für die Schwangere bedeutet das starke Versorgung, deren Beitrag der Bonus im Idealfall komplett mitträgt."
   },
   "benefits": {
     "title": "Das perfekte Win Win für deine Arbeit",
@@ -74,7 +74,7 @@
   "legal": {
     "title": "Deine Neutralität. Zu 100 Prozent geschützt.",
     "subtitle": "Als Hebamme bist du dem Wohl deiner Patientinnen und der strikten Neutralität verpflichtet. Genau so haben wir unser Konzept für dich aufgebaut.",
-    "text": "Das Modell ist rechtlich absolut sicher. Du trittst niemals als Berater auf und empfiehlst keine bestimmten Tarife. Du gibst lediglich eine Information weiter, wie Familien die von dir ohnehin empfohlenen Leistungen finanziell smart abdecken können. Die komplette und marktunabhängige Beratung übernehmen wir bei Healio.",
+    "text": "Das Modell ist rechtlich sauber aufgebaut. Du trittst niemals als Berater auf und empfiehlst keine bestimmten Tarife. Du gibst lediglich eine Information weiter, wie Familien die von dir ohnehin empfohlenen Leistungen finanziell smart abdecken können. Die komplette und marktunabhängige Beratung übernehmen wir bei Healio.",
     "summary": "Du agierst als reiner Tippgeber. Damit ist deine Unabhängigkeit jederzeit gewahrt und du bleibst im perfekten Einklang mit deiner strengen Berufsordnung."
   },
   "steps": {
@@ -82,10 +82,16 @@
     "step1Title": "Kurzes Kennenlernen",
     "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
     "step2Title": "Materialien erhalten",
-    "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche oder deine Praxisräume. Völlig kostenlos.",
+    "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche und deine Kurse. Völlig kostenlos.",
     "step3Title": "Familien profitieren",
     "step3Desc": "Deine Patientinnen scannen den QR Code auf dem Flyer, sichern sich ihr Budget in wenigen Minuten online und können deine Leistungen entspannt buchen. Wir übernehmen den gesamten administrativen Prozess.",
     "easeNote": "Wir möchten dir den Alltag in jeder Hinsicht erleichtern. Sprich uns hierzu gerne nochmal an!"
+  },
+  "moral": {
+    "title": "Mal ehrlich: Deine Familien vertrauen dir wie kaum jemandem sonst.",
+    "text1": "Wenn du weißt, dass es ein System gibt, das jungen Familien ein Gesundheitsbudget von bis zu 3.000 Euro erschließen kann, dann ist es das Mindeste, es weiterzugeben. Mehr musst du nicht tun, den Rest übernimmt Healio.",
+    "text2": "Dreh es einmal um: Deine eigene Hebamme wüsste von so einer Möglichkeit und sagt dir nichts. Du wärst sauer, zu Recht. Wer Wissen zurückhält, das spürbar hilft, verspielt genau das Vertrauen, von dem deine Arbeit lebt.",
+    "text3": "Der Aufwand ist minimal, der Mehrwert für deine Familien riesig. Da darf sich jede an die eigene Nase fassen und sich fragen: Gebe ich meinen Familien genug zurück?"
   },
   "cta": {
     "title": "Bereit für ein kurzes Kennenlernen?",

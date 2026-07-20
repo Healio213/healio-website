@@ -36,7 +36,19 @@ const ZahnaerztePage = () => {
       <main className="bg-white overflow-hidden w-full">
 
         {/* HERO */}
-        <section className="relative flex items-center pt-36 pb-20 lg:pt-44 lg:pb-28 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950">
+        <section className="relative flex items-center pt-36 pb-20 lg:pt-44 lg:pb-28 bg-[#06131c] overflow-hidden">
+          <img
+            src="/images/healio-hero-markenrelief-v1.webp"
+            alt=""
+            width="1586"
+            height="992"
+            loading="eager"
+            decoding="async"
+            draggable="false"
+            className="absolute inset-0 z-0 hidden h-full w-full select-none object-cover object-[62%_center] md:block"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 z-10 hidden bg-[linear-gradient(90deg,rgba(3,12,21,0.97)_0%,rgba(3,12,21,0.88)_38%,rgba(3,12,21,0.48)_58%,rgba(3,12,21,0.08)_78%)] md:block" />
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
             <motion.div className="max-w-3xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <span className="inline-block bg-emerald-100 text-emerald-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
@@ -161,6 +173,26 @@ const ZahnaerztePage = () => {
                   </motion.div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MORAL */}
+        <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
+                {t('moral.title')}
+              </motion.h2>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text1')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text2')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-lg font-semibold text-emerald-300 leading-relaxed">
+                {t('moral.text3')}
+              </motion.p>
             </div>
           </div>
         </section>

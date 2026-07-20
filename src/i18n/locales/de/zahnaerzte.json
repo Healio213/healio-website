@@ -42,6 +42,12 @@
       { "title": "Ein echtes Service-Plus", "text": "Auch für Patienten, bei denen bereits eine Behandlung angeraten ist, gibt es Versicherungslösungen. Diese Information steht auf dem Infoblatt, nicht in deinem Beratungsgespräch." }
     ]
   },
+  "moral": {
+    "title": "Mal ehrlich: Deine Patienten geben dir ihr Vertrauen. Und ihr Geld.",
+    "text1": "Wenn du weißt, dass es ein System gibt, das deinen Patienten tausende Euro Eigenanteil ersparen kann, dann ist es das Mindeste, ihnen die Tür dorthin zu öffnen. Mehr als die Tür öffnen musst du nicht: Das Infoblatt liegt aus, den Rest machen deine Patienten selbst.",
+    "text2": "Dreh es einmal um: Dein eigener Behandler wüsste von so einer Möglichkeit und sagt dir nichts. Du wärst sauer, zu Recht. Vielleicht kämst du nicht wieder, denn wer Wissen zurückhält, das spürbar hilft, verspielt Vertrauen.",
+    "text3": "Der Aufwand ist minimal, der Mehrwert für deine Patienten riesig. Da darf sich jeder an die eigene Nase fassen und sich fragen: Gebe ich meinen wertvollen Patienten genug zurück?"
+  },
   "steps": {
     "title": "So einfach läuft es ab",
     "step1Title": "Kurzes Kennenlernen",

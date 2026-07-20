@@ -87,6 +87,12 @@
     "step3Desc": "Your patients scan the QR code on the flyer, secure their budget online in minutes and can book your services with ease. We handle the entire administrative process.",
     "easeNote": "We want to make your everyday life easier in every way. Feel free to talk to us about this!"
   },
+  "moral": {
+    "title": "Let's be honest: your families trust you like almost no one else.",
+    "text1": "If you know there is a system that can unlock a health budget of up to 3,000 euros for young families, then passing it on is the least you can do. You don't need to do more, Healio takes care of the rest.",
+    "text2": "Turn it around: your own midwife knew about such an option and never told you. You would be upset, rightly so. Withholding knowledge that tangibly helps destroys exactly the trust your work is built on.",
+    "text3": "The effort is minimal, the value for your families is huge. It is worth asking yourself: am I giving my families enough back?"
+  },
   "cta": {
     "title": "Ready for a quick introduction?",
     "subtitle": "45 minutes. No sales pitch. Just real facts for your work.",

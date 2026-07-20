@@ -124,6 +124,12 @@
       }
     ]
   },
+  "moral": {
+    "title": "Let's be honest: your patients give you their trust. And their money.",
+    "text1": "If you know there is a system that can unlock a health budget of up to 3,000 euros for your patients, then informing them is the least you can do. You don't need to do more, Healio takes care of the rest.",
+    "text2": "Turn it around: your own practitioner knew about such an option and never told you. You would be upset, rightly so. You might not come back, because withholding knowledge that tangibly helps destroys trust.",
+    "text3": "The effort is minimal, the value for your patients is huge. Everyone should ask themselves: am I giving enough back to my valued patients?"
+  },
   "cta": {
     "title": "Is Healio right for <highlight>your practice</highlight>?",
     "subtitle": "In 30 minutes, we clarify the concept, responsibilities and process. You then decide whether you want to offer this information path to your patients.",

@@ -329,6 +329,26 @@ const HebammenPage = () => {
           </div>
         </section>
 
+        {/* MORAL */}
+        <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
+                {t('moral.title')}
+              </motion.h2>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text1')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text2')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-lg font-semibold text-emerald-300 leading-relaxed">
+                {t('moral.text3')}
+              </motion.p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA + CALENDLY */}
         <section className="py-16 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
