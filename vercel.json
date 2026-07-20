@@ -3,24 +3,68 @@
     {
       "source": "/hero-bg(-mobile)?\\.(webp|jpg)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ],
   "redirects": [
-    { "source": "/budget", "destination": "/ambulant?utm_source=linkedin&utm_campaign=therapieabbruch", "permanent": false },
-    { "source": "/klinik-upgrade", "destination": "/stationaer", "permanent": true },
-    { "source": "/en/hospital-upgrade", "destination": "/en/inpatient", "permanent": true },
-    { "source": "/heilpraktiker-zusatzversicherung", "destination": "/ambulant", "permanent": true },
-    { "source": "/Ambulante-zusatzversicherung", "destination": "/ambulant", "permanent": true }
+    {
+      "source": "/budget",
+      "destination": "/ambulant?utm_source=linkedin&utm_campaign=therapieabbruch",
+      "permanent": false
+    },
+    {
+      "source": "/klinik-upgrade",
+      "destination": "/stationaer",
+      "permanent": true
+    },
+    {
+      "source": "/en/hospital-upgrade",
+      "destination": "/en/inpatient",
+      "permanent": true
+    },
+    {
+      "source": "/heilpraktiker-zusatzversicherung",
+      "destination": "/ambulant",
+      "permanent": true
+    },
+    {
+      "source": "/Ambulante-zusatzversicherung",
+      "destination": "/ambulant",
+      "permanent": true
+    },
+    {
+      "source": "/healio-zahnzusatz",
+      "destination": "/zahn",
+      "permanent": true
+    },
+    {
+      "source": "/healio-dental",
+      "destination": "/en/dental",
+      "permanent": true
+    },
+    {
+      "source": "/en/healio-dental",
+      "destination": "/en/dental",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/((?!assets|favicon|og-image|sitemap|robots).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!assets|favicon|og-image|sitemap|robots).*)",
+      "destination": "/index.html"
+    }
   ]
 }
