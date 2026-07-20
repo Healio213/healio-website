@@ -121,7 +121,7 @@ export const seoRoutes = [
   {
     path: '/zahnaerzte',
     title: 'Für Zahnarztpraxen: Mehr versicherte Patienten, null Aufwand | Healio',
-    description: 'Neutrale Patienteninformation mit QR-Code für Ihr Wartezimmer: berufsrechtlich sauber, ohne Provision, kostenlos.',
+    description: 'Neutrale Patienteninformation mit QR-Code für dein Wartezimmer: berufsrechtlich sauber, ohne Provision, kostenlos.',
     canonical: 'https://healio.de/zahnaerzte',
     lang: 'de',
   },
