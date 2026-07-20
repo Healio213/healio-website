@@ -51,6 +51,43 @@
       "text": "Egal für welchen Weg du dich entscheidest: Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Wie viel du herausholst, ist individuell und lässt sich vorab prüfen. Je nach Bonus ist bis zu 100 % Refinanzierung deines Beitrags möglich. Rechne es dir direkt aus.",
       "cta": "IKK Bonus jetzt berechnen"
     },
+    "finder": {
+      "title": "Noch unsicher? So entscheidest du nach Bedarf",
+      "subtitle": "Sechs typische Situationen, eine klare Empfehlung.",
+      "recommendation": "Unsere Empfehlung",
+      "items": [
+        {
+          "situation": "Eine Behandlung ist angeraten oder läuft schon",
+          "empfehlung": "die Bayerische: Zahntarif plus Baustein ZAHN Sofort. Wichtig: abschließen, bevor die Rechnung gestellt wird.",
+          "weg": "bayerische"
+        },
+        {
+          "situation": "Maximale Leistung bei gesunden Zähnen",
+          "empfehlung": "die Bayerische ZAHN Prestige: Testsieger bei Stiftung Warentest (Note 0,5), 100 % für Zahnersatz.",
+          "weg": "bayerische"
+        },
+        {
+          "situation": "Familie mit Kindern",
+          "empfehlung": "UKV ZahnPRIVAT 90 oder 100: Kieferorthopädie für Kinder mit bis zu 5.000 EUR.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Dir ist die professionelle Zahnreinigung wichtig",
+          "empfehlung": "UKV ZahnPRIVAT 90 oder 100: Zahnreinigung ohne Jahreslimit. Bei der Bayerischen ist sie je Kalenderjahr gedeckelt.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Zahn-Vorgeschichte, etwa Parodontitis oder ältere Befunde",
+          "empfehlung": "UKV ZahnPRIVAT: Die Gesundheitsfragen schauen nur 2 Jahre zurück, ältere Diagnosen und Empfehlungen musst du nicht angeben.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Günstiger Einstieg",
+          "empfehlung": "die Bayerische ZAHN Smart oder UKV ZahnPRIVAT 75: solide Grundabsicherung, mit 30 Jahren beispielsweise ab rund 10 Euro im Monat.",
+          "weg": "beide"
+        }
+      ]
+    },
     "bonusCta": "Jetzt passenden Zahntarif wählen",
     "disclaimer": "Die Annahme richtet sich nach den Gesundheitsfragen und Annahmerichtlinien des jeweiligen Versicherers."
   },

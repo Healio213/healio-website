@@ -25,6 +25,7 @@ const DentalInsurerChoice = () => {
 
   const sofortBullets = t('insurerChoice.sofort.bullets', { returnObjects: true }) || [];
   const vorsorgeBullets = t('insurerChoice.vorsorge.bullets', { returnObjects: true }) || [];
+  const finderItems = t('insurerChoice.finder.items', { returnObjects: true }) || [];
 
   const scrollToBonusCalculator = (e) => {
     e.preventDefault();
@@ -164,6 +165,34 @@ const DentalInsurerChoice = () => {
               </div>
             </motion.div>
           </div>
+
+          {/* Bedarfs-Finder: welcher Tarif für welche Situation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-10"
+          >
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">{t('insurerChoice.finder.title')}</h3>
+              <p className="text-slate-600">{t('insurerChoice.finder.subtitle')}</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {finderItems.map((item, i) => (
+                <div
+                  key={i}
+                  className={`bg-white rounded-xl border border-slate-200 p-5 border-l-4 ${
+                    item.weg === 'bayerische' ? 'border-l-[#25c990]' : item.weg === 'ukv' ? 'border-l-blue-500' : 'border-l-slate-400'
+                  }`}
+                >
+                  <p className="font-bold text-slate-900 mb-2">{item.situation}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">{t('insurerChoice.finder.recommendation')}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item.empfehlung}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* IKK Bonus Banner */}
           <motion.div

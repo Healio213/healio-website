@@ -51,6 +51,43 @@
       "text": "Whichever path you choose: IKK classic rewards health-conscious behaviour with a strong bonus programme. How much you get back is individual and can be checked in advance. Depending on your bonus, up to 100 % of your premium can be refinanced. Calculate it right away.",
       "cta": "Calculate your IKK bonus now"
     },
+    "finder": {
+      "title": "Still unsure? Decide by what you need",
+      "subtitle": "Six typical situations, one clear recommendation.",
+      "recommendation": "Our recommendation",
+      "items": [
+        {
+          "situation": "A treatment has been recommended or is already underway",
+          "empfehlung": "die Bayerische: dental tariff plus the ZAHN Sofort module. Important: sign up before the invoice is issued.",
+          "weg": "bayerische"
+        },
+        {
+          "situation": "Maximum coverage with healthy teeth",
+          "empfehlung": "die Bayerische ZAHN Prestige: Stiftung Warentest winner (grade 0.5), 100% for dentures.",
+          "weg": "bayerische"
+        },
+        {
+          "situation": "Family with children",
+          "empfehlung": "UKV ZahnPRIVAT 90 or 100: orthodontics for children with up to 5,000 EUR.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Professional teeth cleaning matters to you",
+          "empfehlung": "UKV ZahnPRIVAT 90 or 100: teeth cleaning with no annual limit. With die Bayerische it is capped per calendar year.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Dental history, such as periodontitis or older findings",
+          "empfehlung": "UKV ZahnPRIVAT: health questions only look back 2 years, older diagnoses and recommendations do not need to be declared.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Affordable entry",
+          "empfehlung": "die Bayerische ZAHN Smart or UKV ZahnPRIVAT 75: solid basic cover, at age 30 for example from around 10 euros per month.",
+          "weg": "beide"
+        }
+      ]
+    },
     "bonusCta": "Choose your dental tariff now",
     "disclaimer": "Acceptance is subject to the health questions and underwriting guidelines of the respective insurer."
   },
