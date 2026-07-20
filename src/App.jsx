@@ -25,6 +25,7 @@ const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage')
 const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
+const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
 const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage'));
 const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
@@ -88,6 +89,7 @@ function App() {
               <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
               <Route path="partner" element={<PartnerPage />} />
               <Route path="hebammen" element={<HebammenPage />} />
+              <Route path="zahnaerzte" element={<ZahnaerztePage />} />
               <Route path="heilberufe-vorsorge" element={<HeilberufeVorsorgePage />} />
               <Route path="heilpraktiker-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="osteopathen-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />

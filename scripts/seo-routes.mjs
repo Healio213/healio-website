@@ -119,6 +119,13 @@ export const seoRoutes = [
     lang: 'de',
   },
   {
+    path: '/zahnaerzte',
+    title: 'Für Zahnarztpraxen: Mehr versicherte Patienten, null Aufwand | Healio',
+    description: 'Neutrale Patienteninformation mit QR-Code für Ihr Wartezimmer: berufsrechtlich sauber, ohne Provision, kostenlos.',
+    canonical: 'https://healio.de/zahnaerzte',
+    lang: 'de',
+  },
+  {
     path: '/heilberufe-vorsorge',
     title: 'Heilberufe-Vorsorge für Heilpraktiker und Osteopathen | Healio',
     description: 'Gebündelte Absicherung für Praxis und Leben: Berufshaftpflicht, Praxisausfall, Cyber, Berufsunfähigkeit und Rürup. Exklusive Rahmenkonditionen nur über Healio.',

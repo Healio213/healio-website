@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "badge": "Für Zahnarztpraxen",
+    "title": "Ihre Patienten scheitern nicht am Behandlungsplan. Sondern am Eigenanteil.",
+    "subtitle": "Healio sorgt dafür, dass mehr Ihrer Patienten versichert im Wartezimmer sitzen. Ohne Aufwand für Ihr Team, ohne Provision, berufsrechtlich sauber gestaltet.",
+    "cta": "Kennenlern-Termin vereinbaren"
+  },
+  "stats": {
+    "title": "Die Ausgangslage in Zahlen",
+    "items": [
+      { "value": "879 €", "label": "durchschnittlicher Eigenanteil je Zahnersatz-Neuversorgung", "source": "BARMER Zahnreport" },
+      { "value": "Jeder 5.", "label": "Patient hat Behandlungen aus Kostengründen vertagt oder abgebrochen", "source": "Discover Dental Praxisreport 2025" },
+      { "value": "3 von 4", "label": "gesetzlich Versicherten haben keine Zahnzusatzversicherung", "source": "abgeleitet aus PKV-Verbandszahlen" }
+    ]
+  },
+  "problem": {
+    "title": "Das Problem kennen Sie aus jedem Beratungsgespräch",
+    "text": "Der fachlich beste Heil- und Kostenplan hilft wenig, wenn der Eigenanteil abschreckt. Patienten entscheiden sich für die Regelversorgung, verschieben die Behandlung oder sagen ganz ab. Nicht aus medizinischen Gründen, sondern aus finanziellen."
+  },
+  "solution": {
+    "title": "Die Lösung liegt im Wartezimmer",
+    "amount": "1 Infoblatt",
+    "amountLabel": "neutral, sachlich, kostenlos",
+    "text": "Eine neutrale Patienteninformation erklärt, was Zahnersatz wirklich kostet und dass Zusatzversicherungen die Lücke schließen können. Interessierte Patienten scannen den QR-Code selbst, die unabhängige Beratung übernimmt Healio als Versicherungsmakler. Ihre Praxis bleibt komplett außen vor."
+  },
+  "legal": {
+    "title": "Berufsrechtlich sauber, von Anfang an",
+    "subtitle": "Wir haben die Kooperation entlang der Berufsordnung gebaut, damit Ihre Praxis auf der sicheren Seite ist.",
+    "items": [
+      { "title": "Keine Provision, keine Vorteile", "text": "Ihre Praxis erhält bewusst keinerlei Vergütung. Die einzige Leistung ist kostenloses, neutrales Informationsmaterial für Ihre Patienten." },
+      { "title": "Sachliche Information statt Werbung", "text": "Das Material ist als neutrale Patienteninformation gestaltet, nicht als Werbeflyer. Es wird ausgelegt, nicht aktiv ausgehändigt." },
+      { "title": "Sie empfehlen nichts", "text": "Patienten informieren sich selbst und scannen den QR-Code eigenständig. Ihre Praxis vermittelt keine Versicherung und berät nicht zu Tarifen." },
+      { "title": "Leitfaden für Ihr Team", "text": "Sie erhalten eine Ein-Seiten-Übersicht, was Ihr Team sagen darf und was nicht. Damit ist jede Kollegin am Empfang auf der sicheren Seite." }
+    ],
+    "disclaimer": "Hinweis: Keine Rechtsberatung. Das Material orientiert sich am Gebot sachlicher Information der Berufsordnung; maßgeblich ist die Berufsordnung Ihrer Landeszahnärztekammer."
+  },
+  "benefits": {
+    "title": "Was Ihre Praxis davon hat",
+    "items": [
+      { "title": "Höhere Behandlungsakzeptanz", "text": "Versicherte Patienten entscheiden sich leichter für die hochwertige Versorgung statt für die Regelversorgung. Der Großteil des Zahnersatz-Volumens liegt heute schon über der Regelversorgung, wenn Patienten es sich leisten können." },
+      { "title": "Weniger Kostendiskussionen", "text": "Je mehr Patienten abgesichert sind, desto seltener scheitern Behandlungspläne und Zahlungen am Eigenanteil." },
+      { "title": "Ein echtes Service-Plus", "text": "Auch für Patienten, bei denen bereits eine Behandlung angeraten ist, gibt es Versicherungslösungen. Diese Information steht auf dem Infoblatt, nicht in Ihrem Beratungsgespräch." }
+    ]
+  },
+  "steps": {
+    "title": "So einfach läuft es ab",
+    "step1Title": "Kurzes Kennenlernen",
+    "step1Desc": "15 Minuten per Telefon oder Videocall, deutschlandweit. Wir zeigen Ihnen das Material und beantworten alle Fragen.",
+    "step2Title": "Sie erhalten das Praxis-Set",
+    "step2Desc": "Neutrale Patienteninformation, Beileger für die HKP-Mappe und der Leitfaden für Ihr Team. Kostenlos, inklusive Nachbestellung.",
+    "step3Title": "Auslegen, fertig",
+    "step3Desc": "Ihre Patienten informieren sich selbst per QR-Code. Die unabhängige Beratung und alles Weitere übernimmt Healio.",
+    "easeNote": "Ihr Aufwand ab dem ersten Tag: das Infoblatt liegt aus. Mehr nicht."
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": [
+      { "q": "Was kostet die Kooperation?", "a": "Nichts. Es gibt keine Gebühren, keine Mindestlaufzeit und keine Verpflichtungen. Die Kooperation ist jederzeit beendbar." },
+      { "q": "Erhält unsere Praxis eine Provision?", "a": "Nein, bewusst nicht. Das Berufsrecht untersagt Vorteile für Empfehlungen, und genau deshalb ist unser Modell so gebaut, dass Ihre Praxis nichts erhält außer dem kostenlosen Informationsmaterial. Das schützt Sie." },
+      { "q": "Muss unser Team Versicherungen erklären?", "a": "Nein, im Gegenteil: Ihr Team soll gerade nicht zu Tarifen beraten. Bei Patientenfragen genügt der Hinweis auf das Infoblatt. Die Beratung übernimmt Healio als unabhängiger Versicherungsmakler." },
+      { "q": "Mit welchen Versicherern arbeitet Healio?", "a": "Healio ist unabhängiger Versicherungsmakler und arbeitet im Zahnbereich unter anderem mit der Bayerischen und der UKV. Zusätzlich informieren wir Patienten über Bonusprogramme der gesetzlichen Kassen, die den Beitrag mitfinanzieren können." }
+    ]
+  },
+  "cta": {
+    "title": "Lernen wir uns kennen.",
+    "subtitle": "15 Minuten genügen. Telefon oder Videocall, deutschlandweit. Oder rufen Sie direkt an: 040 89755705."
+  }
+}
