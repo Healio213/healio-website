@@ -39,11 +39,19 @@ assert.match(de.calculator.description, /Belegschaft/);
 assert.match(de.calculator.eyebrow, /\{\{endYear\}\}/);
 assert.match(de.calculator.differencePerEmployeeLabel, /\{\{years\}\}/);
 assert.match(de.calculator.scenarioARate, /Bruttorendite/);
+assert.match(de.calculator.scenarioARateHint, /\(bisher\)/);
+assert.match(de.calculator.scenarioBRateHint, /\(neu\)/);
+assert.match(en.calculator.scenarioARateHint, /\(existing\)/);
+assert.match(en.calculator.scenarioBRateHint, /\(new\)/);
+assert.match(de.calculator.scenarioALabel, /bisher/);
+assert.match(de.calculator.scenarioBLabel, /neu/);
 assert.match(de.calculator.disclaimer, /keine Prognose und keine Garantie/);
 assert.match(de.calculator.monthlyContribution, /Modellierter Sparbeitrag/);
 assert.match(de.calculator.decisionPrompt, /Kosten, Renditeannahmen und Risiken/);
 assert.match(calculator, /Math\.min\(5, scenarioBRate - 0\.1\)/);
 assert.match(calculator, /Math\.max\(2, scenarioARate \+ 0\.1\)/);
+assert.match(calculator, /scenarioARateHint/);
+assert.match(calculator, /scenarioBRateHint/);
 
 const projection = calculateCohortProjection({
   employeeCount: 1000,

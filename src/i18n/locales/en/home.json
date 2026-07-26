@@ -38,6 +38,7 @@
     ],
     "appEyebrow": "Healio app",
     "appTitle": "Keep your cover in view.",
+    "appScreenshotAlt": "Healio app dashboard with policy and health budget overview",
     "appDescription": "Budget, receipts and important policy information in one place, backed by a personal contact.",
     "appFeatures": ["Track your budget", "Manage receipts", "Personal support"]
   },

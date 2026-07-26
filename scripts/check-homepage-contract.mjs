@@ -78,6 +78,7 @@ assert.match(indexCss, /overflow-x: clip/);
 
 const insurancePathway = readText('src/components/home/InsurancePathway.jsx');
 const howHealioWorks = readText('src/components/home/HowHealioWorks.jsx');
+const footer = readText('src/components/sections/Footer.jsx');
 
 assert.match(insurancePathway, /id="schutz"/);
 assert.match(insurancePathway, /getPath\(item\.routeKey\)/);
@@ -85,7 +86,17 @@ assert.match(insurancePathway, /items\.map/);
 assert.match(insurancePathway, /item\.routeKey/);
 assert.doesNotMatch(insurancePathway, /iconMap|cardStyles/);
 assert.match(howHealioWorks, /id="so-funktioniert"/);
-assert.match(howHealioWorks, /\/images\/healio-app-dashboard\.png/);
+assert.match(howHealioWorks, /\/images\/healio-app-dashboard-card\.webp/);
+assert.match(howHealioWorks, /width="720"/);
+assert.match(howHealioWorks, /height="1565"/);
+assert.match(howHealioWorks, /loading="eager"/);
+assert.match(howHealioWorks, /process\.appScreenshotAlt/);
+assert.notEqual(de.process.appScreenshotAlt, de.process.appTitle);
+assert.notEqual(en.process.appScreenshotAlt, en.process.appTitle);
+assert.match(footer, /\/images\/healio-app-dashboard-card\.webp/);
+assert.match(footer, /width="720"/);
+assert.match(footer, /height="1565"/);
+assert.match(footer, /loading="lazy"/);
 
 const ambulantBudgetFeature = readText('src/components/home/AmbulantBudgetFeature.jsx');
 const homeTrust = readText('src/components/home/HomeTrust.jsx');
@@ -94,6 +105,8 @@ const homeFinalCta = readText('src/components/home/HomeFinalCTA.jsx');
 
 assert.match(ambulantBudgetFeature, /t\('budget\.amount'\)/);
 assert.match(ambulantBudgetFeature, /getPath\('ambulant'\)/);
+assert.match(ambulantBudgetFeature, /max-\[359px\]:text-\[1\.4rem\]/);
+assert.doesNotMatch(ambulantBudgetFeature, /max-\[359px\]:\[hyphens:auto\]/);
 assert.match(homeTrust, /trust\.items/);
 assert.match(audienceLinks, /getPath\(company\.routeKey\)/);
 assert.match(audienceLinks, /getPath\(practice\.routeKey\)/);

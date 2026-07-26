@@ -62,6 +62,7 @@
     ],
     "appEyebrow": "Healio App",
     "appTitle": "Dein Schutz bleibt übersichtlich.",
+    "appScreenshotAlt": "Healio App Dashboard mit Tarif- und Gesundheitsbudget-Übersicht",
     "appDescription": "Budget, Belege und wichtige Vertragsinformationen an einem Ort – mit einem persönlichen Ansprechpartner im Hintergrund.",
     "appFeatures": ["Budget im Blick", "Belege verwalten", "Persönliche Begleitung"]
   },

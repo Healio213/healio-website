@@ -10,9 +10,9 @@ const AmbulantBudgetFeature = () => {
   const features = t('budget.features', { returnObjects: true });
 
   return (
-    <section className="home-section overflow-hidden bg-home-midnight text-white" aria-labelledby="ambulant-budget-title">
+    <section className="home-section overflow-hidden bg-home-midnight text-white max-[359px]:px-2" aria-labelledby="ambulant-budget-title">
       <div className="healio-container">
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0c1a2a] px-6 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0c1a2a] px-5 py-10 max-[359px]:px-3 sm:px-10 sm:py-12 lg:px-14 lg:py-16">
           <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-home-mint/15" aria-hidden="true" />
           <div className="absolute -right-6 -top-6 h-52 w-52 rounded-full border border-home-mint/10" aria-hidden="true" />
           <div className="absolute bottom-0 left-0 h-40 w-2/3 bg-gradient-to-r from-home-mint/[0.06] to-transparent" aria-hidden="true" />
@@ -25,7 +25,7 @@ const AmbulantBudgetFeature = () => {
                 </span>
                 <p className="home-eyebrow">{t('budget.eyebrow')}</p>
               </div>
-              <p className="mt-9 font-display text-[clamp(3.6rem,10vw,7.75rem)] font-extrabold leading-[0.78] tracking-[-0.075em] text-white">
+              <p className="mt-9 whitespace-nowrap font-display text-[clamp(2.75rem,13.75vw,3.6rem)] font-extrabold leading-[0.88] tracking-[-0.055em] text-white sm:text-[clamp(3.6rem,10vw,7.75rem)] sm:leading-[0.78] sm:tracking-[-0.075em]">
                 {t('budget.amount')}
               </p>
               <p className="mt-7 max-w-xs font-display text-sm font-bold uppercase tracking-[0.18em] text-home-mint">
@@ -34,7 +34,10 @@ const AmbulantBudgetFeature = () => {
             </div>
 
             <div>
-              <h2 id="ambulant-budget-title" className="max-w-[15ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl">
+              <h2
+                id="ambulant-budget-title"
+                className="max-w-none font-display text-[clamp(1.65rem,6.8vw,2rem)] font-extrabold leading-[1.12] tracking-[-0.03em] [hyphens:none] [overflow-wrap:normal] max-[359px]:text-[1.4rem] max-[359px]:leading-[1.16] sm:max-w-[15ch] sm:text-5xl sm:leading-tight sm:tracking-[-0.04em]"
+              >
                 {t('budget.title')}
               </h2>
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">{t('budget.description')}</p>

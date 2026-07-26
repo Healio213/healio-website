@@ -65,10 +65,13 @@ const Footer = ({ hideCta = false }) => {
               <div className="rotate-2 rounded-[2rem] border border-white/15 bg-slate-950 p-2.5 shadow-2xl shadow-healio-primary/10">
                 <div className="overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-900">
                   <img
-                    src="/images/healio-app-dashboard.png"
+                    src="/images/healio-app-dashboard-card.webp"
                     alt={t('footer.appScreenshotAlt')}
                     className="block h-auto w-full"
+                    width="720"
+                    height="1565"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>

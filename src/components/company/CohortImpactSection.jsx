@@ -10,11 +10,18 @@ import {
 } from '@/lib/companyProjection';
 import CohortProjectionChart from './CohortProjectionChart';
 
-const RangeControl = ({ label, valueLabel, min, max, step, value, onChange }) => (
+const RangeControl = ({ label, hint, valueLabel, min, max, step, value, onChange }) => (
   <label className="block">
-    <span className="mb-3 flex items-end justify-between gap-4">
-      <span className="text-sm font-bold text-slate-800">{label}</span>
-      <span className="rounded-md bg-slate-100 px-3 py-1.5 font-display text-sm font-extrabold tabular-nums text-[#07141d]">{valueLabel}</span>
+    <span className="mb-3 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
+      <span className="min-w-0">
+        <span className="block text-sm font-bold leading-5 text-slate-800">{label}</span>
+        {hint && (
+          <span className="mt-0.5 block text-xs font-medium leading-4 text-slate-500">
+            {hint}
+          </span>
+        )}
+      </span>
+      <span className="whitespace-nowrap rounded-md bg-slate-100 px-3 py-1.5 font-display text-sm font-extrabold tabular-nums text-[#07141d]">{valueLabel}</span>
     </span>
     <input
       type="range"
@@ -159,6 +166,7 @@ const CohortImpactSection = () => {
                   <div className="grid gap-6 border-t border-slate-200 pt-7 sm:grid-cols-2">
                     <RangeControl
                       label={t('calculator.scenarioARate')}
+                      hint={t('calculator.scenarioARateHint')}
                       valueLabel={`${formatPercent(scenarioARate)} %`}
                       min={0}
                       max={Math.min(5, scenarioBRate - 0.1)}
@@ -168,6 +176,7 @@ const CohortImpactSection = () => {
                     />
                     <RangeControl
                       label={t('calculator.scenarioBRate')}
+                      hint={t('calculator.scenarioBRateHint')}
                       valueLabel={`${formatPercent(scenarioBRate)} %`}
                       min={Math.max(2, scenarioARate + 0.1)}
                       max={9}

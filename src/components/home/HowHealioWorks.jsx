@@ -55,10 +55,13 @@ const HowHealioWorks = () => {
               <div className="mx-auto w-[180px] rotate-2 rounded-[2rem] border border-white/15 bg-slate-950 p-2 shadow-2xl shadow-home-mint/10">
                 <div className="overflow-hidden rounded-[1.45rem] border border-white/10 bg-slate-900">
                   <img
-                    src="/images/healio-app-dashboard.png"
-                    alt={t('process.appTitle')}
+                    src="/images/healio-app-dashboard-card.webp"
+                    alt={t('process.appScreenshotAlt')}
                     className="block h-auto w-full"
-                    loading="lazy"
+                    width="720"
+                    height="1565"
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
               </div>
