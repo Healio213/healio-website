@@ -141,7 +141,15 @@ const LebenshilfePage = () => {
 
       <main className="bg-white overflow-hidden w-full">
         {/* HERO */}
-        <section className="relative bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white pt-32 pb-20 lg:pt-40 lg:pb-28">
+        <section className="relative text-white pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/images/hero-lebenshilfe.webp')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/75 to-slate-900/25" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+          </div>
           <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
               className="max-w-3xl"
@@ -149,14 +157,17 @@ const LebenshilfePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex flex-wrap items-center gap-4 mb-6">
-                <div className="inline-flex items-center bg-white rounded-xl px-4 py-2.5">
-                  <img
-                    src="/images/lebenshilfe-logo.png"
-                    alt="Lebenshilfe im Kreis Pinneberg"
-                    className="h-10 w-auto"
-                  />
-                </div>
+              <div className="inline-flex flex-col items-start bg-white rounded-2xl px-7 py-4 mb-6 shadow-lg">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                  In Zusammenarbeit mit
+                </span>
+                <img
+                  src="/images/lebenshilfe-logo.png"
+                  alt="Lebenshilfe im Kreis Pinneberg"
+                  className="h-14 md:h-[4.5rem] w-auto"
+                />
+              </div>
+              <div className="mb-6">
                 <span className="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/25 text-white/95 text-sm font-medium px-4 py-1.5 rounded-full">
                   <Users className="w-4 h-4" />
                   Für Mitarbeitende der Lebenshilfe im Kreis Pinneberg
