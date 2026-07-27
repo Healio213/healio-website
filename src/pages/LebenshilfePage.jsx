@@ -143,12 +143,17 @@ const LebenshilfePage = () => {
         {/* HERO */}
         <section className="relative text-white pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/images/hero-lebenshilfe.webp')" }}
+            <img
+              src="/images/hero-lebenshilfe-ruhestand.webp"
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover object-[77%_center] md:object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/75 to-slate-900/25" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+            <div className="absolute inset-0 bg-slate-950/35 md:bg-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/70 to-slate-900/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-slate-950/10" />
           </div>
           <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <motion.div
@@ -157,14 +162,14 @@ const LebenshilfePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="inline-flex flex-col items-start bg-white rounded-2xl px-7 py-4 mb-6 shadow-lg">
+              <div className="inline-flex flex-col items-start bg-white/95 backdrop-blur-sm rounded-2xl px-6 py-3.5 mb-6 shadow-xl shadow-slate-950/15 ring-1 ring-white/80">
                 <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                   In Zusammenarbeit mit
                 </span>
                 <img
                   src="/images/lebenshilfe-logo.png"
                   alt="Lebenshilfe im Kreis Pinneberg"
-                  className="h-14 md:h-[4.5rem] w-auto"
+                  className="h-12 md:h-14 w-auto"
                 />
               </div>
               <div className="mb-6">
@@ -173,15 +178,13 @@ const LebenshilfePage = () => {
                   Für Mitarbeitende der Lebenshilfe im Kreis Pinneberg
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-                Ihre betriebliche Altersvorsorge: verstehen, ausschöpfen, mehr herausholen
+              <h1 className="text-4xl md:text-6xl font-bold leading-[1.08] tracking-tight mb-6 text-balance">
+                Kurs auf einen glücklichen Ruhestand.
               </h1>
-              <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
-                Ihr Arbeitgeber zahlt zusätzlich 4,6 Prozent Ihres Bruttogehalts in Ihre Vorsorge.
-                2,3 Prozent legen Sie verpflichtend selbst dazu. Geben Sie Ihr Gehalt ein und
-                sehen Sie im Vorher-Nachher-Vergleich, was Ihre Beiträge heute erwirtschaften und
-                was möglich wäre. Ganz ohne Formulare: Informieren, berechnen und direkt hier
-                einen Termin buchen.
+              <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl">
+                Die Lebenshilfe zahlt zusätzlich 4,6 Prozent Ihres Bruttogehalts in Ihre
+                betriebliche Altersvorsorge. Berechnen Sie, was bereits für Sie zurückgelegt wird,
+                welcher Förder-Spielraum noch offen ist und was langfristig daraus entstehen kann.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -201,6 +204,13 @@ const LebenshilfePage = () => {
                   <CalendarCheck className="w-5 h-5 mr-2" />
                   Termin direkt buchen
                 </Button>
+              </div>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/75">
+                <span><strong className="text-white font-semibold">4,6 %</strong> Arbeitgeberbeitrag</span>
+                <span className="hidden sm:block w-px h-4 bg-white/30" aria-hidden="true" />
+                <span><strong className="text-white font-semibold">2,3 %</strong> Eigenanteil</span>
+                <span className="hidden sm:block w-px h-4 bg-white/30" aria-hidden="true" />
+                <span>Spielraum bis <strong className="text-white font-semibold">{SV_FREI_MONAT} €</strong></span>
               </div>
             </motion.div>
           </div>
