@@ -86,28 +86,28 @@ const nachleseThemen = [
 
 const LebenshilfePage = () => {
   const [brutto, setBrutto] = useState(3200);
+  const [laufzeit, setLaufzeit] = useState(30);
+  const [mitLuecke, setMitLuecke] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
   const werte = useMemo(() => {
     const agBeitrag = brutto * AG_SATZ;
     const pflicht = brutto * AN_PFLICHT_SATZ;
     const luecke = Math.max(0, SV_FREI_MONAT - pflicht);
-    const gesamtMitLuecke = agBeitrag + pflicht + luecke;
-    return { agBeitrag, pflicht, luecke, gesamtMitLuecke };
-  }, [brutto]);
+    const sparbeitrag = agBeitrag + pflicht + (mitLuecke ? luecke : 0);
+    return { agBeitrag, pflicht, luecke, sparbeitrag };
+  }, [brutto, mitLuecke]);
 
-  const szenarien = useMemo(() => {
-    const basis = werte.luecke;
-    return [
-      { rendite: 0.01, label: '1,0 % p. a.' },
-      { rendite: 0.05, label: '5,0 % p. a.' },
-      { rendite: 0.07, label: '7,0 % p. a.' }
-    ].map((s) => ({
-      ...s,
-      kapital: endkapital(basis, s.rendite, 30),
-      einzahlung: basis * 12 * 30
-    }));
-  }, [werte.luecke]);
+  // Vorher-Nachher: identischer Sparbeitrag, nur die Anlage unterscheidet sich
+  const vergleich = useMemo(() => {
+    const basis = werte.sparbeitrag;
+    return {
+      einzahlung: basis * 12 * laufzeit,
+      heute: endkapital(basis, 0.01, laufzeit),
+      mittel: endkapital(basis, 0.05, laufzeit),
+      markt: endkapital(basis, 0.07, laufzeit)
+    };
+  }, [werte.sparbeitrag, laufzeit]);
 
   const scrollToRechner = () => {
     document.getElementById('rechner')?.scrollIntoView({ behavior: 'smooth' });
@@ -141,9 +141,10 @@ const LebenshilfePage = () => {
               </h1>
               <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed">
                 Ihr Arbeitgeber zahlt zusätzlich 4,6 Prozent Ihres Bruttogehalts in Ihre Vorsorge.
-                2,3 Prozent legen Sie verpflichtend selbst dazu. Die meisten Mitarbeitenden haben
-                darüber hinaus einen ungenutzten Förder-Spielraum. Hier sehen Sie in einer Minute,
-                wie groß Ihrer ist.
+                2,3 Prozent legen Sie verpflichtend selbst dazu. Geben Sie Ihr Gehalt ein und
+                sehen Sie im Vorher-Nachher-Vergleich, was Ihre Beiträge heute erwirtschaften und
+                was möglich wäre. Ganz ohne Formulare: Informieren, berechnen und direkt hier
+                einen Termin buchen.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -153,19 +154,16 @@ const LebenshilfePage = () => {
                   <Calculator className="w-5 h-5 mr-2" />
                   Meinen Spielraum berechnen
                 </Button>
-                <a
-                  href="https://calendly.com/healio-info/30min?utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    document.getElementById('termin')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="border-white/40 bg-transparent text-white hover:bg-white/10 px-7 py-6 text-base rounded-full"
                 >
-                  <Button
-                    variant="outline"
-                    className="border-white/40 bg-transparent text-white hover:bg-white/10 px-7 py-6 text-base rounded-full"
-                  >
-                    <CalendarCheck className="w-5 h-5 mr-2" />
-                    Beratungstermin buchen
-                  </Button>
-                </a>
+                  <CalendarCheck className="w-5 h-5 mr-2" />
+                  Termin direkt buchen
+                </Button>
               </div>
             </motion.div>
           </div>
@@ -291,7 +289,60 @@ const LebenshilfePage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-white/5 rounded-xl p-4 mt-6 text-sm text-white/75">
+                <div className="grid sm:grid-cols-2 gap-4 mt-6">
+                  <div className="bg-white/5 ring-1 ring-white/15 rounded-2xl p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <label htmlFor="laufzeit" className="text-sm text-white/80">
+                        Zeit bis zur Rente
+                      </label>
+                      <span className="font-bold">{laufzeit} Jahre</span>
+                    </div>
+                    <input
+                      id="laufzeit"
+                      type="range"
+                      min="10"
+                      max="40"
+                      step="1"
+                      value={laufzeit}
+                      onChange={(e) => setLaufzeit(Number(e.target.value))}
+                      className="w-full accent-[#25c990]"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setMitLuecke(!mitLuecke)}
+                    className={`rounded-2xl p-5 text-left transition ring-1 ${
+                      mitLuecke
+                        ? 'bg-[#25c990]/15 ring-[#25c990]'
+                        : 'bg-white/5 ring-white/15 hover:ring-white/40'
+                    }`}
+                    aria-pressed={mitLuecke}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-sm text-white/85">
+                        Förder-Spielraum von {euro(werte.luecke)} € zusätzlich nutzen
+                      </span>
+                      <span
+                        className={`shrink-0 w-11 h-6 rounded-full relative transition ${
+                          mitLuecke ? 'bg-[#25c990]' : 'bg-white/20'
+                        }`}
+                      >
+                        <span
+                          className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-all ${
+                            mitLuecke ? 'left-[22px]' : 'left-0.5'
+                          }`}
+                        />
+                      </span>
+                    </div>
+                    <p className="text-xs text-white/55 mt-2">
+                      {mitLuecke
+                        ? `Gerechnet wird mit ${euro(werte.sparbeitrag)} € Gesamtbeitrag im Monat.`
+                        : `Aktuell gerechnet: Ihr heutiger Beitrag von ${euro(werte.sparbeitrag)} € im Monat.`}
+                    </p>
+                  </button>
+                </div>
+
+                <div className="flex items-start gap-3 bg-white/5 rounded-xl p-4 mt-4 text-sm text-white/75">
                   <Info className="w-5 h-5 shrink-0 mt-0.5 text-[#25c990]" />
                   <p>
                     Vereinfachte Darstellung auf Basis der Rahmenwerte {JAHR} (4 % der
@@ -302,49 +353,56 @@ const LebenshilfePage = () => {
                 </div>
               </div>
 
-              {/* SZENARIEN */}
-              {werte.luecke > 0 && (
-                <div className="mt-12">
-                  <h3 className="text-2xl font-bold text-slate-900 text-center mb-2">
-                    Was aus {euro(werte.luecke)} € im Monat werden kann
-                  </h3>
-                  <p className="text-slate-600 text-center max-w-2xl mx-auto mb-8">
-                    Unverbindliche Modellrechnung über 30 Jahre, Einzahlung jeweils zum Monatsende,
-                    ohne Steuern, Kosten und Förderungen. Entscheidend ist, wo Ihr Geld arbeitet.
-                  </p>
-                  <div className="grid sm:grid-cols-3 gap-4">
-                    {szenarien.map((s, i) => (
-                      <div
-                        key={s.label}
-                        className={`rounded-2xl border p-6 text-center ${
-                          i === 2
-                            ? 'border-[#25c990] bg-teal-50/60 shadow-md'
-                            : 'border-slate-200 bg-white'
-                        }`}
-                      >
-                        <p className="text-sm text-slate-500 mb-1">bei {s.label}</p>
-                        <p className="text-3xl font-bold text-slate-900 mb-1">
-                          {euro(s.kapital)} €
-                        </p>
-                        <p className="text-xs text-slate-500">
-                          Einzahlungen gesamt: {euro(s.einzahlung)} €
-                        </p>
-                        {i === 2 && (
-                          <p className="text-xs font-medium text-teal-700 mt-2 inline-flex items-center gap-1">
-                            <TrendingUp className="w-3.5 h-3.5" />
-                            marktorientierte Anlage
-                          </p>
-                        )}
-                      </div>
-                    ))}
+              {/* VORHER-NACHHER */}
+              <div className="mt-12">
+                <h3 className="text-2xl font-bold text-slate-900 text-center mb-2">
+                  Vorher und nachher: Ihre {euro(werte.sparbeitrag)} € im Monat
+                </h3>
+                <p className="text-slate-600 text-center max-w-2xl mx-auto mb-8">
+                  Identische Einzahlung über {laufzeit} Jahre ({euro(vergleich.einzahlung)} € gesamt),
+                  jeweils zum Monatsende. Der einzige Unterschied: wo Ihr Geld arbeitet.
+                </p>
+                <div className="grid md:grid-cols-2 gap-4 items-stretch">
+                  <div className="rounded-2xl border border-slate-200 bg-white p-7">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full mb-4">
+                      Vorher: heutige Lösung
+                    </span>
+                    <p className="text-sm text-slate-500 mb-1">
+                      klassisch angelegt, rund 1 % effektiv
+                    </p>
+                    <p className="text-4xl font-bold text-slate-700">{euro(vergleich.heute)} €</p>
+                    <p className="text-xs text-slate-400 mt-2">
+                      Nach Inflation entspricht das real einem Kaufkraftverlust.
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-400 text-center mt-4 max-w-3xl mx-auto">
-                    Modellrechnung, keine Garantie und keine Prognose. Fondsgebundene Anlagen
-                    unterliegen Wertschwankungen bis hin zum Verlustrisiko. Frühere
-                    Wertentwicklungen sind kein verlässlicher Indikator für künftige Ergebnisse.
+                  <div className="rounded-2xl border-2 border-[#25c990] bg-teal-50/60 p-7 shadow-md">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-wider text-teal-800 bg-[#25c990]/20 px-3 py-1 rounded-full mb-4">
+                      Nachher: marktorientiert
+                    </span>
+                    <p className="text-sm text-slate-600 mb-1">
+                      bis zu 100 % Aktien-/ETF-Quote, Modellszenario 7 % p. a.
+                    </p>
+                    <p className="text-4xl font-bold text-teal-800">{euro(vergleich.markt)} €</p>
+                    <p className="text-xs text-slate-500 mt-2 inline-flex items-center gap-1">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                      im mittleren Szenario mit 5 % p. a.: {euro(vergleich.mittel)} €
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 rounded-2xl bg-slate-900 text-white text-center py-5 px-6">
+                  <p className="text-sm text-white/70 mb-1">Unterschied im Modellvergleich</p>
+                  <p className="text-3xl font-bold text-[#25c990]">
+                    + {euro(vergleich.markt - vergleich.heute)} €
                   </p>
                 </div>
-              )}
+                <p className="text-xs text-slate-400 text-center mt-4 max-w-3xl mx-auto">
+                  Unverbindliche Modellrechnung ohne Steuern, Kosten und Förderungen, keine
+                  Garantie und keine Prognose. Fondsgebundene Anlagen unterliegen Wertschwankungen
+                  bis hin zum Verlustrisiko. Frühere Wertentwicklungen sind kein verlässlicher
+                  Indikator für künftige Ergebnisse. Die Einordnung der heutigen Lösung beruht auf
+                  unserer Auswertung typischer Bestandsverträge.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -394,29 +452,29 @@ const LebenshilfePage = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white">
+        {/* CTA MIT DIREKTER TERMINBUCHUNG */}
+        <section id="termin" className="py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                15 Minuten für Ihren Ist-Check
+                Termin direkt hier buchen
               </h2>
-              <p className="text-white/80 mb-8 leading-relaxed">
-                Wir schauen gemeinsam auf Ihren aktuellen Stand: Was läuft bereits, wo liegt Ihr
-                Spielraum, und wo arbeitet Ihr Geld heute? Kostenfrei, unverbindlich, per Telefon
-                oder Videocall.
+              <p className="text-white/80 mb-3 leading-relaxed max-w-2xl mx-auto">
+                Kein Formular, kein Unterschriftenzettel, keine Umwege: Wählen Sie einfach unten
+                einen freien Termin. Wir schauen gemeinsam auf Ihren Stand: Was läuft bereits, wo
+                liegt Ihr Spielraum, und wo arbeitet Ihr Geld heute? Kostenfrei und unverbindlich,
+                per Telefon oder Videocall.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <a
-                  href="https://calendly.com/healio-info/30min?utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button className="bg-[#25c990] hover:bg-[#1fb17e] text-slate-900 font-semibold px-7 py-6 text-base rounded-full">
-                    <CalendarCheck className="w-5 h-5 mr-2" />
-                    Termin online buchen
-                  </Button>
-                </a>
+              <div className="bg-white rounded-2xl overflow-hidden shadow-xl p-1 sm:p-2 mb-8">
+                <iframe
+                  src="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  title="Termin online buchen"
+                  aria-label="Kalender zur Terminbuchung"
+                  className="w-full h-[600px] md:h-[680px] rounded-xl"
+                ></iframe>
               </div>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-white/70">
                 <a href="tel:+494089755705" className="inline-flex items-center gap-2 hover:text-white">
