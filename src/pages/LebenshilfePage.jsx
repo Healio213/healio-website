@@ -36,6 +36,17 @@ const endkapital = (monatlich, zinsProJahr, jahre) => {
   return monatlich * ((Math.pow(1 + i, n) - 1) / i);
 };
 
+// Vereinfachte Brutto-Netto-Naeherung: AN-Anteil Sozialversicherung ~20 %,
+// Grenzsteuersatz grob nach Monatsbrutto (Steuerklasse-I-Naeherung)
+const SV_SATZ_AN = 0.2;
+const schaetzeGrenzsteuersatz = (brutto) => {
+  if (brutto < 2000) return 0.2;
+  if (brutto < 3000) return 0.27;
+  if (brutto < 4000) return 0.32;
+  if (brutto < 5000) return 0.37;
+  return 0.42;
+};
+
 const nachleseThemen = [
   {
     frage: 'Was ist Entgeltumwandlung genau?',
@@ -95,7 +106,13 @@ const LebenshilfePage = () => {
     const pflicht = brutto * AN_PFLICHT_SATZ;
     const luecke = Math.max(0, SV_FREI_MONAT - pflicht);
     const sparbeitrag = agBeitrag + pflicht + (mitLuecke ? luecke : 0);
-    return { agBeitrag, pflicht, luecke, sparbeitrag };
+    // Brutto-Netto: Eigenbeitrag kommt aus dem Brutto, spart also Steuern + Sozialabgaben
+    const eigenbeitrag = pflicht + (mitLuecke ? luecke : 0);
+    const steuersatz = schaetzeGrenzsteuersatz(brutto);
+    const ersparnis = eigenbeitrag * (steuersatz + SV_SATZ_AN);
+    const nettoKosten = eigenbeitrag - ersparnis;
+    const hebel = nettoKosten > 0 ? sparbeitrag / nettoKosten : 0;
+    return { agBeitrag, pflicht, luecke, sparbeitrag, eigenbeitrag, steuersatz, ersparnis, nettoKosten, hebel };
   }, [brutto, mitLuecke]);
 
   // Vorher-Nachher: identischer Sparbeitrag, nur die Anlage unterscheidet sich
@@ -132,10 +149,19 @@ const LebenshilfePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/25 text-white/95 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-                <Users className="w-4 h-4" />
-                Für Mitarbeitende der Lebenshilfe im Kreis Pinneberg
-              </span>
+              <div className="flex flex-wrap items-center gap-4 mb-6">
+                <div className="inline-flex items-center bg-white rounded-xl px-4 py-2.5">
+                  <img
+                    src="/images/lebenshilfe-logo.png"
+                    alt="Lebenshilfe im Kreis Pinneberg"
+                    className="h-10 w-auto"
+                  />
+                </div>
+                <span className="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/25 text-white/95 text-sm font-medium px-4 py-1.5 rounded-full">
+                  <Users className="w-4 h-4" />
+                  Für Mitarbeitende der Lebenshilfe im Kreis Pinneberg
+                </span>
+              </div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
                 Ihre betriebliche Altersvorsorge: verstehen, ausschöpfen, mehr herausholen
               </h1>
@@ -342,13 +368,56 @@ const LebenshilfePage = () => {
                   </button>
                 </div>
 
+                <div className="mt-6 rounded-2xl bg-white/5 ring-1 ring-white/15 p-5">
+                  <p className="text-sm font-semibold text-white/90 mb-4">
+                    Brutto und Netto: Was kostet Sie Ihr Eigenbeitrag wirklich?
+                  </p>
+                  <div className="grid sm:grid-cols-3 gap-4">
+                    <div>
+                      <p className="text-sm text-white/70 mb-1">Eigenbeitrag aus dem Brutto</p>
+                      <p className="text-2xl font-bold">{euro(werte.eigenbeitrag)} €</p>
+                      <p className="text-xs text-white/50 mt-1">
+                        {mitLuecke ? 'Pflichtanteil plus Spielraum' : 'Ihr Pflichtanteil (2,3 %)'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/70 mb-1">Steuer- und Abgabenersparnis</p>
+                      <p className="text-2xl font-bold text-[#25c990]">
+                        − {euro(werte.ersparnis)} €
+                      </p>
+                      <p className="text-xs text-white/50 mt-1">
+                        ca. {Math.round(werte.steuersatz * 100)} % Steuer + 20 % Sozialabgaben
+                      </p>
+                    </div>
+                    <div className="rounded-xl bg-[#25c990]/15 ring-2 ring-[#25c990] p-3 -m-3 sm:m-0 sm:p-3">
+                      <p className="text-sm text-white/80 mb-1">Echte Netto-Kosten</p>
+                      <p className="text-2xl font-bold text-[#25c990]">
+                        nur ≈ {euro(werte.nettoKosten)} €
+                      </p>
+                      <p className="text-xs text-white/60 mt-1">im Monat, nach Ersparnis</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-white/85 mt-4 pt-4 border-t border-white/10">
+                    Zusammen mit dem Arbeitgeberbeitrag fließen{' '}
+                    <b>{euro(werte.sparbeitrag)} €</b> monatlich in Ihre Vorsorge, Sie spüren davon
+                    netto nur rund <b>{euro(werte.nettoKosten)} €</b>. Das heißt:{' '}
+                    <b className="text-[#25c990]">
+                      Für jeden Netto-Euro arbeiten rund {werte.hebel.toFixed(1).replace('.', ',')} Euro
+                    </b>{' '}
+                    für Ihre Rente.
+                  </p>
+                </div>
+
                 <div className="flex items-start gap-3 bg-white/5 rounded-xl p-4 mt-4 text-sm text-white/75">
                   <Info className="w-5 h-5 shrink-0 mt-0.5 text-[#25c990]" />
                   <p>
                     Vereinfachte Darstellung auf Basis der Rahmenwerte {JAHR} (4 % der
                     Beitragsbemessungsgrenze = {SV_FREI_MONAT} € sozialabgabenfrei, {STEUERFREI_MONAT} €
-                    steuerfrei nach § 3 Nr. 63 EStG). Ihre tatsächlichen Werte hängen von Tarif,
-                    Steuerklasse und Vertrag ab und werden im Gespräch individuell geprüft.
+                    steuerfrei nach § 3 Nr. 63 EStG). Die Brutto-Netto-Werte sind eine Näherung mit
+                    geschätztem Grenzsteuersatz (Steuerklasse I) und rund 20 % Arbeitnehmeranteil zur
+                    Sozialversicherung. Ihre tatsächlichen Werte hängen von Steuerklasse, Kirchensteuer,
+                    Tarif und Vertrag ab und werden im Gespräch individuell geprüft, inklusive der
+                    exakten Gegenüberstellung Ihrer Lohnabrechnung vorher und nachher.
                   </p>
                 </div>
               </div>
