@@ -27,6 +27,7 @@ const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
+const LebenshilfePage = React.lazy(() => import('@/pages/LebenshilfePage'));
 const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage'));
 const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
@@ -91,6 +92,7 @@ function App() {
               <Route path="hebammen" element={<HebammenPage />} />
               <Route path="zahnaerzte" element={<ZahnaerztePage />} />
               <Route path="heilberufe-vorsorge" element={<HeilberufeVorsorgePage />} />
+              <Route path="lebenshilfe" element={<LebenshilfePage />} />
               <Route path="heilpraktiker-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="osteopathen-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="praxis-absicherung" element={<Navigate to="/heilberufe-vorsorge" replace />} />
