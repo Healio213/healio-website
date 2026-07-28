@@ -12,8 +12,9 @@ const SDK_BASE = 'https://insurances-online.levelnine.biz/';
 const AGENT_ID = '901334';
 const INSURER_ID = '36';
 
-// Healio GmbH Kontaktdaten (Base64-encoded JSON)
-const CONTACT_INFO = 'eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDE3NjI0MTUzMTg4IiwiZW1haWwiOiJpbmZvQGhlYWxpby5kZSJ9';
+// Healio GmbH Kontaktdaten (Base64-encoded JSON) — als Rückrufnummer nur die
+// öffentliche Festnetznummer verwenden, niemals die private 0176-Nummer
+const CONTACT_INFO = 'eyJmaXJzdE5hbWUiOiJIZWFsaW8iLCJsYXN0TmFtZSI6IkdtYkgiLCJjb21wYW55IjoiSGVhbGlvIEdtYkgiLCJzdHJlZXQiOiJBcm5kdHN0ci4gNiIsInppcGNvZGUiOiIyMjA4NSIsImNpdHkiOiJIYW1idXJnIiwibW9iaWxlIjoiMDQwODk3NTU3MDUiLCJlbWFpbCI6ImluZm9AaGVhbGlvLmRlIn0=';
 
 // Bemerkungsfeld (Base64, UTF-8)
 const REMARKS = 'IkJlaSBSw7xja2ZyYWdlbiBzaW5kIHdpciBnZXJuZSBmw7xyIFNpZSBkYS4i';
