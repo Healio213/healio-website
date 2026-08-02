@@ -170,44 +170,53 @@
         "secondary": "Or view UKV ZahnPRIVAT 75",
         "secondaryType": "ukv"
       },
-      "beratungAkutLuecke": {
-        "insurer": "Healio advice",
-        "title": "Your case needs a direct line to us",
-        "text": "A recommended gap closure plus missing teeth: this is exactly where the standard applications reject or defer. There are still ways, such as special tariffs or a preliminary inquiry directly with the insurer. We check that for you free of charge.",
+      "ergoLuecke": {
+        "insurer": "ERGO, direct sign-up",
+        "title": "Zahnersatz Sofort: a solution despite gap and recommendation",
+        "text": "For your combination, neither of our two partner insurers accepts. There is still a clear path: ERGO Zahnersatz Sofort asks no health questions and co-insures already missing teeth, with no limit on the number.",
         "reasons": [
-          "We know the acceptance guidelines in detail and, if in doubt, ask the insurer directly",
-          "Free and non-binding, by phone or video call",
-          "Important: do not rush anything and do not let the invoice be issued yet"
+          "No health questions, already missing teeth are co-insured",
+          "Doubles the fixed subsidy of your statutory insurer: the standard solution (Regelversorgung) is usually covered up to 100 %, for higher-value care such as implants you pay the difference",
+          "Also applies to dentures already recommended: the first treatment and cost plan for the measure must be no older than 6 months at the start of the policy and the treatment not yet completed"
         ],
-        "cta": "Request a free consultation",
-        "ctaType": "contact",
-        "note": "Or call us directly: +49 40 89755705"
+        "warning": "Benefits are capped in the first two policy years: a maximum of €1,000 in the first, €2,000 in both combined; from the third policy year the cap no longer applies. Minimum term 24 months, currently €37.60 per month (as of 08/2026).",
+        "cta": "Go to ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparency: we do not broker this tariff and earn nothing from it. Based on our market assessment (as of August 2026), it is one of the very few tariffs that accept your situation. The sign-up runs directly with ERGO, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
+        "secondary": "Prefer to talk to us first? Request a free consultation",
+        "secondaryType": "contact"
       },
-      "beratungVorgeschichte": {
-        "insurer": "Healio advice",
-        "title": "Acute finding plus history: let us solve this personally",
-        "text": "None of the online applications maps your combination cleanly. Before you run into a rejection, we take a free look and find the path that actually works.",
+      "ergoVorgeschichte": {
+        "insurer": "ERGO or DA Direkt, direct sign-up",
+        "title": "Your path depends on one question: dentures or dental treatment?",
+        "text": "Our two partner insurers do not accept your combination. There are still two clear paths without health questions, depending on what has been recommended for you.",
         "reasons": [
-          "We check which insurer accepts your situation, with a preliminary inquiry if needed",
-          "Free and non-binding, by phone or video call",
-          "Important: do not let the invoice for the upcoming treatment be issued yet"
+          "If it is about dentures (crown, bridge, prosthesis): ERGO Zahnersatz Sofort. A denture or periodontitis history plays no role there. The tariff doubles your statutory subsidy, so the standard solution is usually covered up to 100 %",
+          "ERGO requirement: the first treatment and cost plan is no older than 6 months at the start of the policy and the treatment not yet completed",
+          "If it is about dental treatment (filling, root canal or periodontitis treatment): ERGO pays nothing for that. Then DA Direkt Zahnschutz with Akut-Soforthilfe is the path that also covers dental treatments"
         ],
-        "cta": "Request a free consultation",
-        "ctaType": "contact",
-        "note": "Or call us directly: +49 40 89755705"
+        "warning": "Both immediate-cover solutions have benefit caps in the first policy years (ERGO: €1,000/€2,000). Check the details in the respective application before signing up.",
+        "cta": "Dentures recommended: go to ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparency: we do not broker either tariff and earn nothing from them. The sign-up runs directly with the respective insurer, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
+        "secondary": "Dental treatment recommended: view DA Direkt with Akut-Soforthilfe",
+        "secondaryType": "dadirekt"
       },
-      "beratungViele": {
-        "insurer": "Healio advice",
-        "title": "From 4 missing teeth: honest advice instead of rejection",
-        "text": "With more than 3 missing, unreplaced teeth the standard dental tariffs no longer accept. There are still sensible options, from special solutions to smart self-provision. We look at it honestly with you.",
+      "ergoViele": {
+        "insurer": "ERGO, direct sign-up",
+        "title": "Even with many missing teeth: a clear option",
+        "text": "From 4 missing teeth the standard dental tariffs no longer accept, including our two partner insurers. ERGO Zahnersatz Sofort still accepts: no health questions, missing teeth co-insured with no limit on the number.",
         "reasons": [
-          "Honest assessment instead of false promises",
-          "We check special solutions on the market for you",
-          "Free and non-binding"
+          "No health questions, already missing teeth are co-insured with no limit on the number",
+          "Doubles the fixed subsidy of your statutory insurer; the standard solution (bridge or prosthesis) is usually covered up to 100 %, higher-value care costs extra",
+          "From the third policy year without a benefit cap; especially with several gaps it pays to stagger the treatment over time with your dentist"
         ],
-        "cta": "Request a free consultation",
-        "ctaType": "contact",
-        "note": "Or call us directly: +49 40 89755705"
+        "warning": "In the first two policy years the caps of €1,000/€2,000 also apply to replacing already missing teeth. Minimum term 24 months, currently €37.60 per month (as of 08/2026).",
+        "cta": "Go to ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparency: we do not broker this tariff and earn nothing from it. Based on our market assessment (as of August 2026), it is the path we know of that genuinely co-insures this situation. The sign-up runs directly with ERGO, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
+        "secondary": "Prefer to talk to us first? Request a free consultation",
+        "secondaryType": "contact"
       }
     }
   },
@@ -301,7 +310,7 @@
         },
         {
           "situation": "More than 3 missing teeth",
-          "empfehlung": "Talk to us: from 4 missing teeth the standard tariffs no longer accept, but special solutions exist. Free and honest advice at +49 40 89755705.",
+          "empfehlung": "ERGO Zahnersatz Sofort: accepts without health questions, missing teeth co-insured with no limit on the number (doubled statutory subsidy, benefit caps in the first two policy years). We do not broker this tariff ourselves, but the dental check above links to it because it is the clear path for this case.",
           "weg": "beide"
         },
         {
@@ -367,7 +376,7 @@
       },
       {
         "q": "Can I sign up with missing teeth?",
-        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. Timing matters: you must sign up before your dentist recommends the replacement for the gap. die Bayerische currently does not accept missing teeth, and from 4 missing teeth we help you personally with special solutions. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
+        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. Timing matters: you must sign up before your dentist recommends the replacement for the gap. die Bayerische currently does not accept missing teeth. From 4 missing teeth, ERGO Zahnersatz Sofort offers a path entirely without health questions (doubled statutory subsidy; we do not broker this tariff ourselves), and the dental check above takes you straight there. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
       },
       {
         "q": "I recently had periodontitis. Is anything still possible?",

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Lock, RotateCcw, Sparkles, AlertTriangle, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BAYERISCHE_URL, UKV_URL, trackZahnEvent } from './dentalLinks';
+import { BAYERISCHE_URL, UKV_URL, ERGO_URL, DADIREKT_URL, trackZahnEvent } from './dentalLinks';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
@@ -12,10 +12,10 @@ const needsQ4 = (answers) =>
   answers.q1 === 'nein' && answers.q2 === 'keine' && answers.q3 === 'nein';
 
 const computeResult = (answers) => {
-  if (answers.q2 === 'viele') return 'beratungViele';
+  if (answers.q2 === 'viele') return 'ergoViele';
   if (answers.q1 === 'ja') {
-    if (answers.q2 === 'wenige') return 'beratungAkutLuecke';
-    if (answers.q3 === 'ja') return 'beratungVorgeschichte';
+    if (answers.q2 === 'wenige') return 'ergoLuecke';
+    if (answers.q3 === 'ja') return 'ergoVorgeschichte';
     return 'sofort';
   }
   if (answers.q2 === 'wenige') return 'ukvLuecke';
@@ -35,6 +35,8 @@ const computeResult = (answers) => {
 const CTA_HREFS = {
   bayerische: BAYERISCHE_URL,
   ukv: UKV_URL,
+  ergo: ERGO_URL,
+  dadirekt: DADIREKT_URL,
 };
 
 const DentalZahnCheck = () => {

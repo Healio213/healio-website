@@ -170,44 +170,53 @@
         "secondary": "Oder UKV ZahnPRIVAT 75 ansehen",
         "secondaryType": "ukv"
       },
-      "beratungAkutLuecke": {
-        "insurer": "Healio Beratung",
-        "title": "Dein Fall braucht den direkten Draht zu uns",
-        "text": "Angeratener Lückenschluss plus fehlende Zähne: Genau hier lehnen die Standard-Strecken ab oder stellen zurück. Es gibt trotzdem Wege, zum Beispiel Spezialtarife oder eine Voranfrage direkt beim Versicherer. Das prüfen wir kostenlos für dich.",
+      "ergoLuecke": {
+        "insurer": "ERGO, Direktabschluss",
+        "title": "Zahnersatz Sofort: eine Lösung trotz Lücke und Anratung",
+        "text": "Für deine Kombination nehmen unsere beiden Partner-Versicherer nicht an. Es gibt trotzdem einen klaren Weg: ERGO Zahnersatz Sofort stellt keine Gesundheitsfragen und versichert auch bereits fehlende Zähne mit, ohne Begrenzung der Anzahl.",
         "reasons": [
-          "Wir kennen die Annahmerichtlinien im Detail und fragen im Zweifel direkt beim Versicherer an",
-          "Kostenlos und unverbindlich, telefonisch oder per Videocall",
-          "Wichtig: nichts überstürzen und die Rechnung noch nicht stellen lassen"
+          "Keine Gesundheitsfragen, auch bereits fehlende Zähne sind mitversichert",
+          "Verdoppelt den Festzuschuss deiner Krankenkasse: Die Standardlösung (Regelversorgung) ist damit meist bis zu 100 % bezahlt, bei höherwertiger Versorgung wie Implantaten bleibt ein Eigenanteil",
+          "Gilt auch für bereits angeratenen Zahnersatz: Der erste Heil- und Kostenplan für die Maßnahme darf bei Versicherungsbeginn nicht älter als 6 Monate und die Behandlung noch nicht abgeschlossen sein"
         ],
-        "cta": "Kostenlose Beratung anfragen",
-        "ctaType": "contact",
-        "note": "Oder ruf uns direkt an: 040 89755705"
+        "warning": "In den ersten beiden Versicherungsjahren sind die Leistungen begrenzt: maximal 1.000 Euro im ersten, maximal 2.000 Euro in beiden zusammen, ab dem dritten Versicherungsjahr entfällt die Summengrenze. Mindestlaufzeit 24 Monate, aktuell 37,60 Euro im Monat (Stand 08/2026).",
+        "cta": "Zum ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparenz: Diesen Tarif vermitteln wir nicht und verdienen daran nichts. Nach unserer Markteinschätzung (Stand August 2026) ist er einer der ganz wenigen Tarife, die dich mit dieser Ausgangslage annehmen. Der Abschluss läuft direkt bei ERGO, ohne Beratung durch uns; prüfe dort die Tarifbedingungen. Für eine persönliche Einschätzung vorab: 040 89755705.",
+        "secondary": "Lieber erst mit uns sprechen? Kostenlose Beratung anfragen",
+        "secondaryType": "contact"
       },
-      "beratungVorgeschichte": {
-        "insurer": "Healio Beratung",
-        "title": "Akuter Befund plus Vorgeschichte: Das klären wir persönlich",
-        "text": "Deine Kombination bildet keine der Online-Strecken sauber ab. Bevor du in eine Ablehnung läufst, schauen wir kostenlos drauf und finden den Weg, der wirklich funktioniert.",
+      "ergoVorgeschichte": {
+        "insurer": "ERGO oder DA Direkt, Direktabschluss",
+        "title": "Dein Fahrplan hängt an einer Frage: Zahnersatz oder Zahnbehandlung?",
+        "text": "Unsere beiden Partner-Versicherer nehmen bei deiner Kombination nicht an. Es gibt trotzdem zwei klare Wege ohne Gesundheitsfragen, je nachdem, was bei dir angeraten ist.",
         "reasons": [
-          "Wir prüfen, welcher Versicherer deine Situation annimmt, im Zweifel per Voranfrage",
-          "Kostenlos und unverbindlich, telefonisch oder per Videocall",
-          "Wichtig: Die Rechnung für die anstehende Behandlung noch nicht stellen lassen"
+          "Geht es um Zahnersatz (Krone, Brücke, Prothese): ERGO Zahnersatz Sofort. Prothese oder Parodontitis-Vorgeschichte spielen dort keine Rolle. Der Tarif verdoppelt den Festzuschuss deiner Kasse, die Regelversorgung ist damit meist bis zu 100 % bezahlt",
+          "Voraussetzung bei ERGO: Der erste Heil- und Kostenplan ist bei Versicherungsbeginn nicht älter als 6 Monate und die Behandlung noch nicht abgeschlossen",
+          "Geht es um eine Zahnbehandlung (Füllung, Wurzel- oder Parodontitis-Behandlung): Dafür leistet ERGO nichts. Dann ist DA Direkt Zahnschutz mit Akut-Soforthilfe der Weg, der auch Zahnbehandlungen abdeckt"
         ],
-        "cta": "Kostenlose Beratung anfragen",
-        "ctaType": "contact",
-        "note": "Oder ruf uns direkt an: 040 89755705"
+        "warning": "Bei beiden Sofort-Lösungen gelten in den ersten Versicherungsjahren Summengrenzen (bei ERGO 1.000/2.000 Euro). Prüfe die Details in der jeweiligen Abschlussstrecke, bevor du abschließt.",
+        "cta": "Zahnersatz angeraten: zum ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparenz: Beide Tarife vermitteln wir nicht und verdienen daran nichts. Der Abschluss läuft direkt beim jeweiligen Versicherer, ohne Beratung durch uns; prüfe dort die Tarifbedingungen. Für eine persönliche Einschätzung vorab: 040 89755705.",
+        "secondary": "Zahnbehandlung angeraten: DA Direkt mit Akut-Soforthilfe ansehen",
+        "secondaryType": "dadirekt"
       },
-      "beratungViele": {
-        "insurer": "Healio Beratung",
-        "title": "Ab 4 fehlenden Zähnen: ehrliche Beratung statt Absage",
-        "text": "Bei mehr als 3 fehlenden, nicht ersetzten Zähnen nehmen die Standard-Zahntarife nicht mehr an. Es gibt trotzdem sinnvolle Optionen, von Speziallösungen bis zur klugen Eigenvorsorge. Wir schauen ehrlich mit dir drauf, was sich für dich rechnet.",
+      "ergoViele": {
+        "insurer": "ERGO, Direktabschluss",
+        "title": "Auch mit vielen fehlenden Zähnen: eine klare Option",
+        "text": "Ab 4 fehlenden Zähnen nehmen die Standard-Zahntarife nicht mehr an, auch unsere beiden Partner-Versicherer nicht. ERGO Zahnersatz Sofort nimmt trotzdem an: keine Gesundheitsfragen, fehlende Zähne ohne Begrenzung der Anzahl mitversichert.",
         "reasons": [
-          "Ehrliche Einschätzung statt falscher Versprechen",
-          "Wir prüfen Speziallösungen am Markt für dich",
-          "Kostenlos und unverbindlich"
+          "Keine Gesundheitsfragen, bereits fehlende Zähne sind ohne Begrenzung der Anzahl mitversichert",
+          "Verdoppelt den Festzuschuss deiner Krankenkasse; die Standardlösung (Brücke oder Prothese) ist damit meist bis zu 100 % bezahlt, höherwertige Versorgung kostet Eigenanteil",
+          "Ab dem dritten Versicherungsjahr ohne Summengrenze; gerade bei mehreren Lücken lohnt es sich, die Versorgung mit dem Zahnarzt zeitlich zu staffeln"
         ],
-        "cta": "Kostenlose Beratung anfragen",
-        "ctaType": "contact",
-        "note": "Oder ruf uns direkt an: 040 89755705"
+        "warning": "In den ersten beiden Versicherungsjahren gelten die Summengrenzen von 1.000/2.000 Euro auch für den Ersatz bereits fehlender Zähne. Mindestlaufzeit 24 Monate, aktuell 37,60 Euro im Monat (Stand 08/2026).",
+        "cta": "Zum ERGO Zahnersatz Sofort",
+        "ctaType": "ergo",
+        "note": "Transparenz: Diesen Tarif vermitteln wir nicht und verdienen daran nichts. Nach unserer Markteinschätzung (Stand August 2026) ist er der uns bekannte Weg, der diese Ausgangslage wirklich mitversichert. Der Abschluss läuft direkt bei ERGO, ohne Beratung durch uns; prüfe dort die Tarifbedingungen. Für eine persönliche Einschätzung vorab: 040 89755705.",
+        "secondary": "Lieber erst mit uns sprechen? Kostenlose Beratung anfragen",
+        "secondaryType": "contact"
       }
     }
   },
@@ -301,7 +310,7 @@
         },
         {
           "situation": "Mehr als 3 fehlende Zähne",
-          "empfehlung": "Sprich mit uns: Ab 4 fehlenden Zähnen nehmen die Standard-Tarife nicht mehr an, es gibt aber Speziallösungen. Kostenlos und ehrlich unter 040 89755705.",
+          "empfehlung": "ERGO Zahnersatz Sofort: nimmt ohne Gesundheitsfragen an, fehlende Zähne sind ohne Anzahl-Begrenzung mitversichert (Festzuschuss-Verdopplung, Summengrenzen in den ersten beiden Versicherungsjahren). Diesen Tarif vermitteln wir nicht selbst, der Zahn-Check oben verlinkt ihn trotzdem, weil er für diesen Fall der klare Weg ist.",
           "weg": "beide"
         },
         {
@@ -367,7 +376,7 @@
       },
       {
         "q": "Kann ich mit fehlenden Zähnen abschließen?",
-        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Wichtig ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt den Ersatz für die Lücke anrät. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an, und ab 4 fehlenden Zähnen helfen wir dir persönlich mit Speziallösungen weiter. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
+        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Wichtig ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt den Ersatz für die Lücke anrät. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es mit ERGO Zahnersatz Sofort einen Weg ganz ohne Gesundheitsfragen (Festzuschuss-Verdopplung; diesen Tarif vermitteln wir nicht selbst), der Zahn-Check oben führt dich direkt hin. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
       },
       {
         "q": "Ich hatte vor Kurzem Parodontitis. Geht trotzdem etwas?",
