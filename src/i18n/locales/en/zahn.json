@@ -11,6 +11,206 @@
     "title": "Awarded by independent testers",
     "alt": "Quality seals: Stiftung Warentest VERY GOOD (0.5) for ZAHN Prestige, Ascore Tariff of the Year 2024, Franke & Bornberg FFF+ for ZahnPRIVAT 100"
   },
+  "check": {
+    "badge": "The Healio dental check",
+    "title": "Your clear recommendation in 1 minute",
+    "subtitle": "Answer up to 4 short questions. We know the insurers' acceptance rules in detail and lead you straight to the tariff that will actually accept you.",
+    "progress": "Question {{current}}",
+    "back": "Back",
+    "restart": "Restart the check",
+    "resultKicker": "Your recommendation",
+    "warningLabel": "Important:",
+    "trust": "Your answers are not stored or transmitted. They are only used for the recommendation on this page.",
+    "disclaimer": "Acceptance is only checked bindingly in the application of the respective insurer. The check does not replace individual advice.",
+    "ikkNote": "By the way: the IKK classic bonus can refinance up to 100 % of your premium.",
+    "ikkCta": "Calculate your bonus",
+    "questions": {
+      "q1": {
+        "text": "Has your dentist recommended or started a treatment within the last 2 years?",
+        "hint": "For example a crown, root canal, filling, implant or a treatment and cost plan. A documented finding in your patient record also counts as recommended.",
+        "options": {
+          "ja": { "label": "Yes, something is due or already underway", "sub": "Even if only a finding has been documented so far" },
+          "nein": { "label": "No, nothing for more than 2 years", "sub": "Routine check-ups without findings do not count" }
+        }
+      },
+      "q2": {
+        "text": "Are you currently missing teeth that have not been replaced?",
+        "hint": "Wisdom teeth do not count. A gap closure confirmed by your dentist does not count as a missing tooth either.",
+        "options": {
+          "keine": { "label": "No, all teeth present or replaced" },
+          "wenige": { "label": "Yes, 1 to 3 teeth" },
+          "viele": { "label": "Yes, more than 3 teeth" }
+        }
+      },
+      "q3": {
+        "text": "Does any of these apply to you?",
+        "hint": "Removable full or partial denture, dental prosthetics older than 10 years, or periodontitis or enamel defects within the last 3 years.",
+        "options": {
+          "ja": { "label": "Yes, at least one" },
+          "nein": { "label": "No, none of these" }
+        }
+      },
+      "q4": {
+        "text": "What matters most to you?",
+        "options": {
+          "leistung": { "label": "Maximum coverage", "sub": "Test-winner level for dentures" },
+          "familie": { "label": "Family and orthodontics", "sub": "Strong benefits for children" },
+          "pzr": { "label": "Professional teeth cleaning", "sub": "Ideally without an annual limit" },
+          "preis": { "label": "Affordable entry", "sub": "Solid cover for a small premium" }
+        }
+      }
+    },
+    "results": {
+      "sofort": {
+        "insurer": "die Bayerische",
+        "title": "Dental tariff plus the ZAHN Sofort module",
+        "text": "For your situation there is a path hardly anyone knows: die Bayerische co-insures the treatment that has already been recommended or started, as long as the invoice has not been issued yet.",
+        "reasons": [
+          "Up to €1,500 towards the recommended treatment (€750 per calendar year), on top of your statutory subsidy",
+          "Applies to dentures and dental treatment, from crowns to root canals",
+          "The module ends automatically after 24 months, then your dental tariff continues, for example the test winner ZAHN Prestige"
+        ],
+        "warning": "Sign up before your dentist issues the invoice. And choose the module directly at sign-up, it cannot be added later.",
+        "cta": "Calculate premium and sign up",
+        "ctaType": "bayerische",
+        "note": "You will be redirected to the online calculator of die Bayerische. It asks 4 short health questions.",
+        "secondary": "Prefer to talk first? Request a free consultation",
+        "secondaryType": "contact"
+      },
+      "ukvLuecke": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT with your gap co-insured",
+        "text": "UKV is one of the very few insurers that fully co-insure up to 3 missing teeth, for a fixed surcharge per tooth.",
+        "reasons": [
+          "Up to 3 missing teeth fully co-insured, for €6.10 to €10.90 surcharge per tooth per month depending on the tier",
+          "Your reimbursement scale remains uncut",
+          "Health questions only look back 2 years"
+        ],
+        "warning": "Sign up before your dentist recommends the replacement for the gap. Once the gap closure is recommended, this path closes too.",
+        "cta": "View tariffs and sign up online",
+        "ctaType": "ukv",
+        "note": "You will be redirected to the online application of Versicherungskammer (UKV). State the number of missing teeth there.",
+        "secondary": "Prefer to talk first? Request a free consultation",
+        "secondaryType": "contact"
+      },
+      "ukvVorgeschichte": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT: lenient acceptance despite dental history",
+        "text": "With a denture, older dental prosthetics or a periodontitis history you are far better off with UKV: the application only looks back a maximum of 2 years.",
+        "reasons": [
+          "Dental prosthetics older than 10 years and intact dentures are no exclusion reason at UKV",
+          "Diagnoses and recommendations older than 2 years do not need to be declared at all",
+          "Periodontitis within the last 2 years: acceptance with an exclusion only for periodontal treatments, instead of rejection"
+        ],
+        "cta": "View tariffs and sign up online",
+        "ctaType": "ukv",
+        "note": "You will be redirected to the online application of Versicherungskammer (UKV).",
+        "secondary": "Unsure about your history? Request a free consultation",
+        "secondaryType": "contact"
+      },
+      "ukvFamilie": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT 90 or 100 for your family",
+        "text": "For families, UKV is the clear number one: no other of our paths offers this much orthodontics budget for children.",
+        "reasons": [
+          "Orthodontics for children up to €5,000, in all KIG levels 1 to 5, including clear aligners",
+          "Professional teeth cleaning without an annual limit in the top tiers",
+          "Reimbursement scale unlimited from year 4 onwards"
+        ],
+        "warning": "Insure your children before the orthodontist recommends a treatment. Afterwards, cover for that exact treatment no longer applies.",
+        "cta": "View family tariffs and sign up",
+        "ctaType": "ukv",
+        "note": "You will be redirected to the online application of Versicherungskammer (UKV).",
+        "secondary": "Alternative for adults: view the test-winner tariff of die Bayerische",
+        "secondaryType": "bayerische"
+      },
+      "ukvPzr": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT 90 or 100 with a teeth-cleaning flat rate",
+        "text": "If professional teeth cleaning matters to you, there is hardly a way around UKV.",
+        "reasons": [
+          "Professional teeth cleaning without an annual limit, as often as dentally reasonable",
+          "Teeth cleaning is not counted towards your reimbursement scale",
+          "Full benefits even without your statutory insurer paying first, for example at a private dentist"
+        ],
+        "cta": "View tariffs and sign up online",
+        "ctaType": "ukv",
+        "note": "You will be redirected to the online application of Versicherungskammer (UKV).",
+        "secondary": "Alternative: view the test-winner tariff of die Bayerische",
+        "secondaryType": "bayerische"
+      },
+      "prestige": {
+        "insurer": "die Bayerische",
+        "title": "ZAHN Prestige: the test winner",
+        "text": "With healthy teeth you get the maximum here: top grade at Stiftung Warentest and 100 % reimbursement for dentures and dental treatment.",
+        "reasons": [
+          "Stiftung Warentest VERY GOOD (0.5), Finanztest 07/2025, repeat test winner",
+          "100 % for dentures, implants, inlays and dental treatment, without waiting periods",
+          "Bleaching up to €200 per year included"
+        ],
+        "warning": "Sign up while nothing is recommended. Once your dentist documents a finding, different rules apply.",
+        "cta": "Calculate premium and sign up",
+        "ctaType": "bayerische",
+        "note": "You will be redirected to the online calculator of die Bayerische. It asks 4 short health questions.",
+        "secondary": "Strong alternative for families: view UKV ZahnPRIVAT",
+        "secondaryType": "ukv"
+      },
+      "preis": {
+        "insurer": "die Bayerische or UKV",
+        "title": "Start affordably: ZAHN Smart or ZahnPRIVAT 75",
+        "text": "Solid basic cover from a few euros per month, so a serious case never hits you with the full costs.",
+        "reasons": [
+          "75 % reimbursement for dentures and dental treatment in both variants",
+          "At age 30, for example, from around €10 to €12 per month",
+          "The IKK bonus can particularly easily refinance the small premium in full"
+        ],
+        "cta": "Calculate die Bayerische ZAHN Smart",
+        "ctaType": "bayerische",
+        "note": "You will be redirected to the online calculator of die Bayerische.",
+        "secondary": "Or view UKV ZahnPRIVAT 75",
+        "secondaryType": "ukv"
+      },
+      "beratungAkutLuecke": {
+        "insurer": "Healio advice",
+        "title": "Your case needs a direct line to us",
+        "text": "A recommended gap closure plus missing teeth: this is exactly where the standard applications reject or defer. There are still ways, such as special tariffs or a preliminary inquiry directly with the insurer. We check that for you free of charge.",
+        "reasons": [
+          "We know the acceptance guidelines in detail and, if in doubt, ask the insurer directly",
+          "Free and non-binding, by phone or video call",
+          "Important: do not rush anything and do not let the invoice be issued yet"
+        ],
+        "cta": "Request a free consultation",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705"
+      },
+      "beratungVorgeschichte": {
+        "insurer": "Healio advice",
+        "title": "Acute finding plus history: let us solve this personally",
+        "text": "None of the online applications maps your combination cleanly. Before you run into a rejection, we take a free look and find the path that actually works.",
+        "reasons": [
+          "We check which insurer accepts your situation, with a preliminary inquiry if needed",
+          "Free and non-binding, by phone or video call",
+          "Important: do not let the invoice for the upcoming treatment be issued yet"
+        ],
+        "cta": "Request a free consultation",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705"
+      },
+      "beratungViele": {
+        "insurer": "Healio advice",
+        "title": "From 4 missing teeth: honest advice instead of rejection",
+        "text": "With more than 3 missing, unreplaced teeth the standard dental tariffs no longer accept. There are still sensible options, from special solutions to smart self-provision. We look at it honestly with you.",
+        "reasons": [
+          "Honest assessment instead of false promises",
+          "We check special solutions on the market for you",
+          "Free and non-binding"
+        ],
+        "cta": "Request a free consultation",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705"
+      }
+    }
+  },
   "insurerChoice": {
     "badge": "Immediate cover and prevention",
     "title": "Need dental work? It is not too late for insurance.",
@@ -24,7 +224,9 @@
       "text": "With the ZAHN Sofort module, die Bayerische adds up to €1,500 towards a treatment that has already been recommended or started (€750 per calendar year, on top of the subsidy from your statutory health insurance). Timing is what matters: you must sign up before your dentist issues the invoice.",
       "bullets": [
         "Up to €1,500 towards recommended and ongoing treatments",
+        "Applies to dentures and dental treatment, from crowns to root canals",
         "Immediate protection without waiting periods, the dental tariff then continues for everything new",
+        "Only available at initial sign-up: choose the module right away, it cannot be added later",
         "Important: sign up first, receive the invoice afterwards"
       ],
       "highlight": {
@@ -42,10 +244,11 @@
       "tariff": "ZahnPRIVAT",
       "text": "If your dentist has not recommended any treatment in the past 2 years, ZahnPRIVAT gives you high reimbursements for dentures, dental treatment and professional teeth cleaning. Three tariff levels, so the cover fits your budget. Especially strong for families.",
       "bullets": [
-        "Orthodontics for children: up to 5,000 EUR in the top tiers",
-        "Professional teeth cleaning with no annual limit in the top tiers",
+        "Orthodontics for children: up to 5,000 EUR in the top tiers, all KIG levels, including aligners",
+        "Professional teeth cleaning with no annual limit in the top tiers, not counted towards the reimbursement scale",
         "Lenient acceptance: health questions only look back 2 years",
-        "Up to 3 missing teeth insurable for a fixed surcharge"
+        "Up to 3 missing teeth fully co-insured for a fixed surcharge, the reimbursement scale remains uncut",
+        "Full benefits even without your statutory insurer paying first, for example at a private dentist"
       ],
       "highlight": {
         "badge": "Family highlight",
@@ -63,7 +266,7 @@
     },
     "finder": {
       "title": "Still unsure? Decide by what you need",
-      "subtitle": "Six typical situations, one clear recommendation.",
+      "subtitle": "Eight typical situations, one clear recommendation.",
       "recommendation": "Our recommendation",
       "items": [
         {
@@ -87,9 +290,19 @@
           "weg": "ukv"
         },
         {
-          "situation": "Dental history, such as periodontitis or older findings",
-          "empfehlung": "UKV ZahnPRIVAT: health questions only look back 2 years, older diagnoses and recommendations do not need to be declared.",
+          "situation": "Dental history, such as periodontitis, a denture or older prosthetics",
+          "empfehlung": "UKV ZahnPRIVAT: health questions only look back 2 years, older diagnoses and recommendations do not need to be declared. Even with periodontitis within the last 2 years you are accepted, with an exclusion only for periodontal treatments instead of a rejection.",
           "weg": "ukv"
+        },
+        {
+          "situation": "You are missing 1 to 3 teeth that have not been replaced",
+          "empfehlung": "UKV ZahnPRIVAT: fixed surcharge per tooth, the gaps are fully co-insured and the scale remains. Important: sign up before the replacement is recommended. die Bayerische does not accept missing teeth.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "More than 3 missing teeth",
+          "empfehlung": "Talk to us: from 4 missing teeth the standard tariffs no longer accept, but special solutions exist. Free and honest advice at +49 40 89755705.",
+          "weg": "beide"
         },
         {
           "situation": "Affordable entry",
@@ -122,7 +335,7 @@
     },
     "fehlend": {
       "title": "Missing teeth insurable",
-      "desc": "Up to 3 already missing teeth can be insured. The surcharge depends on the insurer and tariff, and we find the most affordable solution for you."
+      "desc": "With UKV, up to 3 already missing teeth can be fully co-insured for a fixed surcharge per tooth, and the reimbursement scale remains untouched. Important: sign up before your dentist recommends the replacement."
     },
     "unfall": {
       "title": "Two award-winning insurers",
@@ -154,7 +367,15 @@
       },
       {
         "q": "Can I sign up with missing teeth?",
-        "a": "Yes, up to 3 already missing teeth can be co-insured depending on the insurer and tariff. The surcharge ranges from a few euros per tooth per month to a percentage-based supplement. Acceptance is subject to the health questions of the respective insurer."
+        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. Timing matters: you must sign up before your dentist recommends the replacement for the gap. die Bayerische currently does not accept missing teeth, and from 4 missing teeth we help you personally with special solutions. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
+      },
+      {
+        "q": "I recently had periodontitis. Is anything still possible?",
+        "a": "Yes. UKV only looks back 2 years: if the periodontitis is older and nothing has been recommended again since, you do not need to declare it at all. If it is within the last 2 years, UKV still accepts you, with an exclusion only for periodontal treatments, all other benefits apply in full. die Bayerische asks 3 years back and does not accept periodontitis or enamel defects within that period."
+      },
+      {
+        "q": "Can I add the immediate-cover module later?",
+        "a": "No. The ZAHN Sofort module of die Bayerische can only be chosen once, at the initial sign-up together with the dental tariff. Adding it to an existing contract is not possible. It ends automatically after 24 months, and your dental tariff then continues as normal. So if something is or could be recommended for you, take the module right away at sign-up."
       },
       {
         "q": "How does the IKK bonus refinance the premium?",
@@ -166,7 +387,7 @@
       },
       {
         "q": "Are there waiting periods?",
-        "a": "The ZAHN Sofort module of die Bayerische offers immediate cover without waiting periods. For the other tariffs and benefits, the respective application process shows you the details transparently before you sign up."
+        "a": "UKV ZahnPRIVAT has no waiting periods in any of its three tiers. The test-winner tariff ZAHN Prestige of die Bayerische has none either, and the ZAHN Sofort module pays from day one. For the other tariffs and benefits, the respective application process shows you the details transparently before you sign up."
       }
     ]
   },

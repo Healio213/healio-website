@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import DentalBenefits from '@/components/sections/DentalBenefits';
 import DentalInsurerChoice from '@/components/sections/DentalInsurerChoice';
+import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
 import Testimonials from '@/components/sections/Testimonials';
 import Faq from '@/components/sections/Faq';
 import DentalContactForm from '@/components/sections/DentalContactForm';
@@ -32,9 +33,9 @@ const ZahnPage = () => {
     }
   };
 
-  const scrollToWeiche = (e) => {
+  const scrollToCheck = (e) => {
     e.preventDefault();
-    const element = document.getElementById('tarif-weiche');
+    const element = document.getElementById('zahn-check');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -100,7 +101,7 @@ const ZahnPage = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-xl mx-auto">
                   <Button asChild className="bg-[#25c990] hover:bg-[#1db37f] text-white shadow-[0_4px_14px_rgba(37,201,144,0.4)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.6)] text-lg px-8 py-6 h-auto rounded-xl border-none transition-all duration-300 w-full sm:w-auto">
-                    <a href="#tarif-weiche" onClick={scrollToWeiche}>
+                    <a href="#zahn-check" onClick={scrollToCheck}>
                       <Calculator className="w-5 h-5 mr-2" aria-hidden="true" />
                       {t('hero.ctaCalculate')}
                     </a>
@@ -132,6 +133,8 @@ const ZahnPage = () => {
           </div>
         </section>
         </FadeInUp>
+
+        <FadeInUp><DentalZahnCheck /></FadeInUp>
 
         <FadeInUp><DentalInsurerChoice /></FadeInUp>
 

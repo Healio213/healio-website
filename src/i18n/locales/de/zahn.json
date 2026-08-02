@@ -11,6 +11,206 @@
     "title": "Ausgezeichnet von unabhängigen Testern",
     "alt": "Qualitätssiegel: Stiftung Warentest SEHR GUT (0,5) für ZAHN Prestige, Ascore Tarif des Jahres 2024, Franke & Bornberg FFF+ für ZahnPRIVAT 100"
   },
+  "check": {
+    "badge": "Der Healio Zahn-Check",
+    "title": "In 1 Minute zu deiner klaren Empfehlung",
+    "subtitle": "Beantworte bis zu 4 kurze Fragen. Wir kennen die Annahmeregeln der Versicherer im Detail und führen dich direkt zu dem Tarif, der dich wirklich annimmt.",
+    "progress": "Frage {{current}}",
+    "back": "Zurück",
+    "restart": "Check neu starten",
+    "resultKicker": "Deine Empfehlung",
+    "warningLabel": "Wichtig:",
+    "trust": "Deine Antworten werden nicht gespeichert und nicht übertragen. Sie dienen nur der Empfehlung auf dieser Seite.",
+    "disclaimer": "Verbindlich geprüft wird die Annahme erst im Antrag des jeweiligen Versicherers. Der Check ersetzt keine individuelle Beratung.",
+    "ikkNote": "Übrigens: Dein Beitrag kann sich über den IKK classic Bonus bis zu 100 % refinanzieren.",
+    "ikkCta": "Bonus berechnen",
+    "questions": {
+      "q1": {
+        "text": "Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
+        "hint": "Zum Beispiel Krone, Wurzelbehandlung, Füllung, Implantat oder ein Heil- und Kostenplan. Auch ein dokumentierter Befund in der Patientenakte zählt als angeraten.",
+        "options": {
+          "ja": { "label": "Ja, es steht etwas an oder läuft schon", "sub": "Auch wenn bisher nur ein Befund dokumentiert wurde" },
+          "nein": { "label": "Nein, seit über 2 Jahren nichts", "sub": "Reine Kontrolltermine ohne Befund zählen nicht" }
+        }
+      },
+      "q2": {
+        "text": "Fehlen dir aktuell Zähne, die noch nicht ersetzt sind?",
+        "hint": "Weisheitszähne zählen nicht. Auch ein vom Zahnarzt bestätigter Lückenschluss zählt nicht als fehlender Zahn.",
+        "options": {
+          "keine": { "label": "Nein, alle Zähne da oder ersetzt" },
+          "wenige": { "label": "Ja, 1 bis 3 Zähne" },
+          "viele": { "label": "Ja, mehr als 3 Zähne" }
+        }
+      },
+      "q3": {
+        "text": "Trifft einer dieser Punkte auf dich zu?",
+        "hint": "Herausnehmbare Voll- oder Teilprothese, Zahnersatz, der älter als 10 Jahre ist, oder Parodontitis bzw. Zahnschmelzdefekt in den letzten 3 Jahren.",
+        "options": {
+          "ja": { "label": "Ja, mindestens einer" },
+          "nein": { "label": "Nein, nichts davon" }
+        }
+      },
+      "q4": {
+        "text": "Worauf legst du den größten Wert?",
+        "options": {
+          "leistung": { "label": "Maximale Leistung", "sub": "Testsieger-Niveau für Zahnersatz" },
+          "familie": { "label": "Familie und Kieferorthopädie", "sub": "Starke Leistungen für Kinder" },
+          "pzr": { "label": "Professionelle Zahnreinigung", "sub": "Am besten ohne Jahreslimit" },
+          "preis": { "label": "Günstiger Einstieg", "sub": "Solider Schutz zum kleinen Beitrag" }
+        }
+      }
+    },
+    "results": {
+      "sofort": {
+        "insurer": "die Bayerische",
+        "title": "Zahntarif plus Baustein ZAHN Sofort",
+        "text": "Genau für deine Situation gibt es einen Weg, den kaum jemand kennt: Die Bayerische versichert die bereits angeratene oder begonnene Behandlung mit, solange die Rechnung noch nicht gestellt ist.",
+        "reasons": [
+          "Bis zu 1.500 EUR Zuschuss für die angeratene Behandlung (750 EUR je Kalenderjahr), zusätzlich zum Festzuschuss deiner Kasse",
+          "Gilt für Zahnersatz und Zahnbehandlung, von der Krone bis zur Wurzelbehandlung",
+          "Der Baustein endet nach 24 Monaten automatisch, danach läuft dein Zahntarif weiter, zum Beispiel der Testsieger ZAHN Prestige"
+        ],
+        "warning": "Schließe ab, bevor dein Zahnarzt die Rechnung stellt. Und wähle den Baustein direkt beim Abschluss dazu, nachträglich geht es nicht.",
+        "cta": "Beitrag berechnen und abschließen",
+        "ctaType": "bayerische",
+        "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet. Dort beantwortest du 4 kurze Gesundheitsfragen.",
+        "secondary": "Lieber erst sprechen? Kostenlose Beratung anfragen",
+        "secondaryType": "contact"
+      },
+      "ukvLuecke": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT mit Mitversicherung deiner Lücke",
+        "text": "Die UKV ist einer der ganz wenigen Versicherer, die bis zu 3 fehlende Zähne wirklich voll mitversichern, gegen einen festen Zuschlag je Zahn.",
+        "reasons": [
+          "Bis zu 3 fehlende Zähne voll mitversichert, je nach Tarifstufe für 6,10 bis 10,90 EUR Zuschlag je Zahn und Monat",
+          "Deine Erstattungs-Staffel bleibt dabei ungekürzt",
+          "Die Gesundheitsfragen schauen nur 2 Jahre zurück"
+        ],
+        "warning": "Schließe ab, bevor dein Zahnarzt den Ersatz für die Lücke empfiehlt. Sobald der Lückenschluss angeraten ist, ist auch dieser Weg zu.",
+        "cta": "Tarife ansehen und online abschließen",
+        "ctaType": "ukv",
+        "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Gib dort die Anzahl der fehlenden Zähne an.",
+        "secondary": "Lieber erst sprechen? Kostenlose Beratung anfragen",
+        "secondaryType": "contact"
+      },
+      "ukvVorgeschichte": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT: kulante Annahme trotz Vorgeschichte",
+        "text": "Mit Prothese, älterem Zahnersatz oder einer Parodontitis-Historie bist du bei der UKV deutlich besser aufgehoben: Der Antrag schaut maximal 2 Jahre zurück.",
+        "reasons": [
+          "Zahnersatz, der älter als 10 Jahre ist, und intakte Prothesen sind bei der UKV kein Ausschlussgrund",
+          "Diagnosen und Empfehlungen, die länger als 2 Jahre zurückliegen, musst du gar nicht angeben",
+          "Parodontitis innerhalb der letzten 2 Jahre: Annahme mit Ausschluss nur für Parodontose-Behandlungen, statt Ablehnung"
+        ],
+        "cta": "Tarife ansehen und online abschließen",
+        "ctaType": "ukv",
+        "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet.",
+        "secondary": "Unsicher wegen deiner Vorgeschichte? Kostenlose Beratung anfragen",
+        "secondaryType": "contact"
+      },
+      "ukvFamilie": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT 90 oder 100 für deine Familie",
+        "text": "Für Familien ist die UKV die klare Nummer eins: Kein anderer unserer Wege bietet so viel Kieferorthopädie-Budget für Kinder.",
+        "reasons": [
+          "Kieferorthopädie für Kinder bis 5.000 EUR, in allen KIG-Stufen 1 bis 5, auch transparente Aligner",
+          "Professionelle Zahnreinigung ohne Jahreslimit in den Top-Stufen",
+          "Erstattungs-Staffel bereits ab dem 4. Jahr unbegrenzt"
+        ],
+        "warning": "Sichere deine Kinder ab, bevor der Kieferorthopäde eine Behandlung empfiehlt. Danach greift der Schutz für genau diese Behandlung nicht mehr.",
+        "cta": "Familien-Tarife ansehen und abschließen",
+        "ctaType": "ukv",
+        "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet.",
+        "secondary": "Alternative für Erwachsene: Testsieger-Tarif der Bayerischen ansehen",
+        "secondaryType": "bayerische"
+      },
+      "ukvPzr": {
+        "insurer": "UKV (Union Krankenversicherung)",
+        "title": "ZahnPRIVAT 90 oder 100 mit Zahnreinigungs-Flatrate",
+        "text": "Wenn dir die professionelle Zahnreinigung wichtig ist, führt an der UKV kaum ein Weg vorbei.",
+        "reasons": [
+          "Professionelle Zahnreinigung ohne Jahreslimit, so oft sie zahnmedizinisch sinnvoll ist",
+          "Die Zahnreinigung wird nicht auf deine Erstattungs-Staffel angerechnet",
+          "Volle Leistung auch ohne Vorleistung der Krankenkasse, zum Beispiel beim Privatzahnarzt"
+        ],
+        "cta": "Tarife ansehen und online abschließen",
+        "ctaType": "ukv",
+        "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet.",
+        "secondary": "Alternative: Testsieger-Tarif der Bayerischen ansehen",
+        "secondaryType": "bayerische"
+      },
+      "prestige": {
+        "insurer": "die Bayerische",
+        "title": "ZAHN Prestige: der Testsieger",
+        "text": "Bei gesunden Zähnen bekommst du hier das Maximum: Bestnote bei Stiftung Warentest und 100 % Erstattung für Zahnersatz und Zahnbehandlung.",
+        "reasons": [
+          "Stiftung Warentest SEHR GUT (0,5), Finanztest 07/2025, zum wiederholten Mal Testsieger",
+          "100 % für Zahnersatz, Implantate, Inlays und Zahnbehandlung, ohne Wartezeiten",
+          "Bleaching bis 200 EUR jährlich inklusive"
+        ],
+        "warning": "Schließe ab, solange nichts angeraten ist. Sobald dein Zahnarzt einen Befund dokumentiert, gelten andere Regeln.",
+        "cta": "Beitrag berechnen und abschließen",
+        "ctaType": "bayerische",
+        "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet. Dort beantwortest du 4 kurze Gesundheitsfragen.",
+        "secondary": "Starke Alternative für Familien: UKV ZahnPRIVAT ansehen",
+        "secondaryType": "ukv"
+      },
+      "preis": {
+        "insurer": "die Bayerische oder UKV",
+        "title": "Günstig starten: ZAHN Smart oder ZahnPRIVAT 75",
+        "text": "Solide Grundabsicherung ab wenigen Euro im Monat, damit dich der Ernstfall nie mit vollen Kosten trifft.",
+        "reasons": [
+          "75 % Erstattung für Zahnersatz und Zahnbehandlung in beiden Varianten",
+          "Mit 30 Jahren zum Beispiel ab rund 10 bis 12 EUR im Monat",
+          "Der IKK Bonus kann den kleinen Beitrag besonders leicht komplett refinanzieren"
+        ],
+        "cta": "Bayerische ZAHN Smart berechnen",
+        "ctaType": "bayerische",
+        "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet.",
+        "secondary": "Oder UKV ZahnPRIVAT 75 ansehen",
+        "secondaryType": "ukv"
+      },
+      "beratungAkutLuecke": {
+        "insurer": "Healio Beratung",
+        "title": "Dein Fall braucht den direkten Draht zu uns",
+        "text": "Angeratener Lückenschluss plus fehlende Zähne: Genau hier lehnen die Standard-Strecken ab oder stellen zurück. Es gibt trotzdem Wege, zum Beispiel Spezialtarife oder eine Voranfrage direkt beim Versicherer. Das prüfen wir kostenlos für dich.",
+        "reasons": [
+          "Wir kennen die Annahmerichtlinien im Detail und fragen im Zweifel direkt beim Versicherer an",
+          "Kostenlos und unverbindlich, telefonisch oder per Videocall",
+          "Wichtig: nichts überstürzen und die Rechnung noch nicht stellen lassen"
+        ],
+        "cta": "Kostenlose Beratung anfragen",
+        "ctaType": "contact",
+        "note": "Oder ruf uns direkt an: 040 89755705"
+      },
+      "beratungVorgeschichte": {
+        "insurer": "Healio Beratung",
+        "title": "Akuter Befund plus Vorgeschichte: Das klären wir persönlich",
+        "text": "Deine Kombination bildet keine der Online-Strecken sauber ab. Bevor du in eine Ablehnung läufst, schauen wir kostenlos drauf und finden den Weg, der wirklich funktioniert.",
+        "reasons": [
+          "Wir prüfen, welcher Versicherer deine Situation annimmt, im Zweifel per Voranfrage",
+          "Kostenlos und unverbindlich, telefonisch oder per Videocall",
+          "Wichtig: Die Rechnung für die anstehende Behandlung noch nicht stellen lassen"
+        ],
+        "cta": "Kostenlose Beratung anfragen",
+        "ctaType": "contact",
+        "note": "Oder ruf uns direkt an: 040 89755705"
+      },
+      "beratungViele": {
+        "insurer": "Healio Beratung",
+        "title": "Ab 4 fehlenden Zähnen: ehrliche Beratung statt Absage",
+        "text": "Bei mehr als 3 fehlenden, nicht ersetzten Zähnen nehmen die Standard-Zahntarife nicht mehr an. Es gibt trotzdem sinnvolle Optionen, von Speziallösungen bis zur klugen Eigenvorsorge. Wir schauen ehrlich mit dir drauf, was sich für dich rechnet.",
+        "reasons": [
+          "Ehrliche Einschätzung statt falscher Versprechen",
+          "Wir prüfen Speziallösungen am Markt für dich",
+          "Kostenlos und unverbindlich"
+        ],
+        "cta": "Kostenlose Beratung anfragen",
+        "ctaType": "contact",
+        "note": "Oder ruf uns direkt an: 040 89755705"
+      }
+    }
+  },
   "insurerChoice": {
     "badge": "Sofortschutz und Vorsorge",
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
@@ -24,7 +224,9 @@
       "text": "Mit dem Baustein ZAHN Sofort gibt dir die Bayerische bis zu 1.500 EUR Zuschuss für eine bereits angeratene oder begonnene Behandlung (750 EUR pro Kalenderjahr, zusätzlich zum Festzuschuss deiner Krankenkasse). Entscheidend ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt.",
       "bullets": [
         "Bis zu 1.500 EUR Zuschuss für angeratene und laufende Behandlungen",
+        "Gilt für Zahnersatz und Zahnbehandlung, von der Krone bis zur Wurzelbehandlung",
         "Sofortschutz ohne Wartezeit, der Zahntarif läuft danach für alles Neue weiter",
+        "Nur beim Neuabschluss wählbar: Baustein direkt mitnehmen, nachträglich geht es nicht",
         "Wichtig: erst abschließen, dann Rechnung erhalten"
       ],
       "highlight": {
@@ -42,10 +244,11 @@
       "tariff": "ZahnPRIVAT",
       "text": "Wenn dein Zahnarzt in den letzten 2 Jahren keine Behandlung angeraten hat, sicherst du dir mit ZahnPRIVAT hohe Erstattungen für Zahnersatz, Zahnbehandlung und professionelle Zahnreinigung. Drei Tarifstufen, damit der Schutz zu deinem Budget passt. Besonders stark für Familien.",
       "bullets": [
-        "Kieferorthopädie für Kinder: bis zu 5.000 EUR in den Top-Stufen",
-        "Professionelle Zahnreinigung in den Top-Stufen ohne Jahreslimit",
+        "Kieferorthopädie für Kinder: bis zu 5.000 EUR in den Top-Stufen, alle KIG-Stufen, auch Aligner",
+        "Professionelle Zahnreinigung in den Top-Stufen ohne Jahreslimit, zählt nicht in die Erstattungs-Staffel",
         "Kulante Annahme: Die Gesundheitsfragen schauen nur 2 Jahre zurück",
-        "Bis zu 3 fehlende Zähne gegen festen Zuschlag mitversicherbar"
+        "Bis zu 3 fehlende Zähne gegen festen Zuschlag voll mitversichert, die Staffel bleibt ungekürzt",
+        "Volle Leistung auch ohne Vorleistung der Krankenkasse, zum Beispiel beim Privatzahnarzt"
       ],
       "highlight": {
         "badge": "Familien-Highlight",
@@ -63,7 +266,7 @@
     },
     "finder": {
       "title": "Noch unsicher? So entscheidest du nach Bedarf",
-      "subtitle": "Sechs typische Situationen, eine klare Empfehlung.",
+      "subtitle": "Acht typische Situationen, eine klare Empfehlung.",
       "recommendation": "Unsere Empfehlung",
       "items": [
         {
@@ -87,9 +290,19 @@
           "weg": "ukv"
         },
         {
-          "situation": "Zahn-Vorgeschichte, etwa Parodontitis oder ältere Befunde",
-          "empfehlung": "UKV ZahnPRIVAT: Die Gesundheitsfragen schauen nur 2 Jahre zurück, ältere Diagnosen und Empfehlungen musst du nicht angeben.",
+          "situation": "Zahn-Vorgeschichte, etwa Parodontitis, Prothese oder älterer Zahnersatz",
+          "empfehlung": "UKV ZahnPRIVAT: Die Gesundheitsfragen schauen nur 2 Jahre zurück, ältere Diagnosen und Empfehlungen musst du nicht angeben. Selbst bei Parodontitis innerhalb der letzten 2 Jahre gibt es die Annahme mit Ausschluss nur für Parodontose-Behandlungen statt einer Ablehnung.",
           "weg": "ukv"
+        },
+        {
+          "situation": "Dir fehlen 1 bis 3 Zähne, die noch nicht ersetzt sind",
+          "empfehlung": "UKV ZahnPRIVAT: fester Zuschlag je Zahn, die Lücken sind voll mitversichert und die Staffel bleibt. Wichtig: abschließen, bevor der Ersatz angeraten wird. Die Bayerische nimmt bei fehlenden Zähnen nicht an.",
+          "weg": "ukv"
+        },
+        {
+          "situation": "Mehr als 3 fehlende Zähne",
+          "empfehlung": "Sprich mit uns: Ab 4 fehlenden Zähnen nehmen die Standard-Tarife nicht mehr an, es gibt aber Speziallösungen. Kostenlos und ehrlich unter 040 89755705.",
+          "weg": "beide"
         },
         {
           "situation": "Günstiger Einstieg",
@@ -122,7 +335,7 @@
     },
     "fehlend": {
       "title": "Fehlende Zähne versicherbar",
-      "desc": "Bis zu 3 bereits fehlende Zähne mitversicherbar. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, wir finden die günstigste Lösung für dich."
+      "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn voll mitversicherbar, die Erstattungs-Staffel bleibt dabei unangetastet. Wichtig: abschließen, bevor der Zahnarzt den Ersatz anrät."
     },
     "unfall": {
       "title": "Zwei ausgezeichnete Versicherer",
@@ -154,7 +367,15 @@
       },
       {
         "q": "Kann ich mit fehlenden Zähnen abschließen?",
-        "a": "Ja, bis zu 3 bereits fehlende Zähne können je nach Versicherer und Tarif mitversichert werden. Die Höhe des Zuschlags hängt von Versicherer und Tarif ab, von wenigen Euro pro Zahn und Monat bis zu einem prozentualen Aufschlag. Die Annahme richtet sich nach den Gesundheitsfragen des jeweiligen Versicherers."
+        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Wichtig ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt den Ersatz für die Lücke anrät. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an, und ab 4 fehlenden Zähnen helfen wir dir persönlich mit Speziallösungen weiter. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
+      },
+      {
+        "q": "Ich hatte vor Kurzem Parodontitis. Geht trotzdem etwas?",
+        "a": "Ja. Die UKV fragt nur 2 Jahre zurück: Liegt die Parodontitis länger zurück und wurde seitdem nichts erneut angeraten, musst du sie gar nicht angeben. Liegt sie innerhalb der letzten 2 Jahre, nimmt dich die UKV trotzdem an, dann mit einem Ausschluss nur für Parodontose-Behandlungen, alle übrigen Leistungen gelten voll. Die Bayerische fragt 3 Jahre zurück und nimmt bei Parodontitis oder Zahnschmelzdefekten in diesem Zeitraum nicht an."
+      },
+      {
+        "q": "Kann ich den Sofortschutz-Baustein später noch dazubuchen?",
+        "a": "Nein. Der Baustein ZAHN Sofort der Bayerischen kann nur einmalig beim Neuabschluss zusammen mit dem Zahntarif gewählt werden, ein nachträglicher Einschluss in einen bestehenden Vertrag ist nicht möglich. Er endet nach 24 Monaten automatisch, dein Zahntarif läuft danach normal weiter. Wenn bei dir etwas angeraten ist oder sein könnte, nimm den Baustein deshalb direkt beim Abschluss mit."
       },
       {
         "q": "Wie refinanziert sich der Beitrag über den IKK Bonus?",
@@ -166,7 +387,7 @@
       },
       {
         "q": "Gibt es Wartezeiten?",
-        "a": "Der Baustein ZAHN Sofort der Bayerischen bietet Sofortschutz ohne Wartezeit. Wie es bei den übrigen Tarifen und Leistungen aussieht, zeigt dir die jeweilige Abschlussstrecke transparent, bevor du abschließt."
+        "a": "Bei der UKV ZahnPRIVAT gibt es in allen drei Stufen keine Wartezeiten. Beim Testsieger-Tarif ZAHN Prestige der Bayerischen ebenfalls nicht, und der Baustein ZAHN Sofort leistet ab dem ersten Tag. Wie es bei den übrigen Tarifen und Leistungen aussieht, zeigt dir die jeweilige Abschlussstrecke transparent, bevor du abschließt."
       }
     ]
   },
