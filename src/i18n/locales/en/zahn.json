@@ -170,53 +170,44 @@
         "secondary": "Or view UKV ZahnPRIVAT 75",
         "secondaryType": "ukv"
       },
-      "ergoLuecke": {
-        "insurer": "ERGO, direct sign-up",
-        "title": "Zahnersatz Sofort: a solution despite gap and recommendation",
-        "text": "For your combination, neither of our two partner insurers accepts. There is still a clear path: ERGO Zahnersatz Sofort asks no health questions and co-insures already missing teeth, with no limit on the number.",
+      "sonderLuecke": {
+        "insurer": "Your special path at Healio",
+        "title": "There is a special path for you that hardly anyone knows",
+        "text": "Honest answer: for the combination of a recommended treatment and missing teeth, neither of our two online applications fits, you would be rejected or deferred there. But there are immediate-cover tariffs on the market without health questions that co-insure exactly your case. We name the right one for you, free of charge.",
         "reasons": [
-          "No health questions, already missing teeth are co-insured",
-          "Doubles the fixed subsidy of your statutory insurer: the standard solution (Regelversorgung) is usually covered up to 100 %, for higher-value care such as implants you pay the difference",
-          "Also applies to dentures already recommended: the first treatment and cost plan for the measure must be no older than 6 months at the start of the policy and the treatment not yet completed"
+          "We tell you specifically which immediate-cover tariff accepts your case, free and non-binding",
+          "A short phone call is enough, afterwards you can sign up directly online",
+          "Important: the treatment must not be completed yet, so do not wait too long"
         ],
-        "warning": "Benefits are capped in the first two policy years: a maximum of €1,000 in the first, €2,000 in both combined; from the third policy year the cap no longer applies. Minimum term 24 months, currently €37.60 per month (as of 08/2026).",
-        "cta": "Go to ERGO Zahnersatz Sofort",
-        "ctaType": "ergo",
-        "note": "Transparency: we do not broker this tariff and earn nothing from it. Based on our market assessment (as of August 2026), it is one of the very few tariffs that accept your situation. The sign-up runs directly with ERGO, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
-        "secondary": "Prefer to talk to us first? Request a free consultation",
-        "secondaryType": "contact"
+        "cta": "Get the right tariff named",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705. Your answers from this check are not transmitted, the conversation starts fresh."
       },
-      "ergoVorgeschichte": {
-        "insurer": "ERGO or DA Direkt, direct sign-up",
-        "title": "Your path depends on one question: dentures or dental treatment?",
-        "text": "Our two partner insurers do not accept your combination. There are still two clear paths without health questions, depending on what has been recommended for you.",
+      "sonderVorgeschichte": {
+        "insurer": "Your special path at Healio",
+        "title": "One question decides your path, we clarify it in 2 minutes",
+        "text": "With a recommended treatment plus dental history, the right tariff depends on whether you need dentures (crown, bridge, prosthesis) or dental treatment (filling, root canal or periodontitis treatment). For both cases there is an immediate-cover solution on the market without health questions, but a different one each. We name the right one for you, free of charge.",
         "reasons": [
-          "If it is about dentures (crown, bridge, prosthesis): ERGO Zahnersatz Sofort. A denture or periodontitis history plays no role there. The tariff doubles your statutory subsidy, so the standard solution is usually covered up to 100 %",
-          "ERGO requirement: the first treatment and cost plan is no older than 6 months at the start of the policy and the treatment not yet completed",
-          "If it is about dental treatment (filling, root canal or periodontitis treatment): ERGO pays nothing for that. Then DA Direkt Zahnschutz with Akut-Soforthilfe is the path that also covers dental treatments"
+          "We clarify on the phone in 2 minutes which immediate-cover tariff fits your treatment",
+          "Free and non-binding, afterwards you sign up directly online",
+          "Important: the treatment must not be completed yet, so do not wait too long"
         ],
-        "warning": "Both immediate-cover solutions have benefit caps in the first policy years (ERGO: €1,000/€2,000). Check the details in the respective application before signing up.",
-        "cta": "Dentures recommended: go to ERGO Zahnersatz Sofort",
-        "ctaType": "ergo",
-        "note": "Transparency: we do not broker either tariff and earn nothing from them. The sign-up runs directly with the respective insurer, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
-        "secondary": "Dental treatment recommended: view DA Direkt with Akut-Soforthilfe",
-        "secondaryType": "dadirekt"
+        "cta": "Get the right tariff named",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705. Your answers from this check are not transmitted, the conversation starts fresh."
       },
-      "ergoViele": {
-        "insurer": "ERGO, direct sign-up",
-        "title": "Even with many missing teeth: a clear option",
-        "text": "From 4 missing teeth the standard dental tariffs no longer accept, including our two partner insurers. ERGO Zahnersatz Sofort still accepts: no health questions, missing teeth co-insured with no limit on the number.",
+      "sonderViele": {
+        "insurer": "Your special path at Healio",
+        "title": "Even with many missing teeth there is a path",
+        "text": "From 4 missing teeth our two partner insurers no longer accept, and neither do most dental tariffs on the market. But there is an immediate-cover solution without health questions that also co-insures many missing teeth. We name it for you free of charge and tell you honestly what it covers and what it does not.",
         "reasons": [
-          "No health questions, already missing teeth are co-insured with no limit on the number",
-          "Doubles the fixed subsidy of your statutory insurer; the standard solution (bridge or prosthesis) is usually covered up to 100 %, higher-value care costs extra",
-          "From the third policy year without a benefit cap; especially with several gaps it pays to stagger the treatment over time with your dentist"
+          "We name the tariff that genuinely co-insures your situation, free and non-binding",
+          "With an honest assessment: what is paid, where the limits are and how to plan your treatment smartly",
+          "A short phone call is enough, afterwards you can sign up directly online"
         ],
-        "warning": "In the first two policy years the caps of €1,000/€2,000 also apply to replacing already missing teeth. Minimum term 24 months, currently €37.60 per month (as of 08/2026).",
-        "cta": "Go to ERGO Zahnersatz Sofort",
-        "ctaType": "ergo",
-        "note": "Transparency: we do not broker this tariff and earn nothing from it. Based on our market assessment (as of August 2026), it is the path we know of that genuinely co-insures this situation. The sign-up runs directly with ERGO, without advice from us; check the terms there. For a personal assessment beforehand: +49 40 89755705.",
-        "secondary": "Prefer to talk to us first? Request a free consultation",
-        "secondaryType": "contact"
+        "cta": "Get the right tariff named",
+        "ctaType": "contact",
+        "note": "Or call us directly: +49 40 89755705. Your answers from this check are not transmitted, the conversation starts fresh."
       }
     }
   },
@@ -310,7 +301,7 @@
         },
         {
           "situation": "More than 3 missing teeth",
-          "empfehlung": "ERGO Zahnersatz Sofort: accepts without health questions, missing teeth co-insured with no limit on the number (doubled statutory subsidy, benefit caps in the first two policy years). We do not broker this tariff ourselves, but the dental check above links to it because it is the clear path for this case.",
+          "empfehlung": "Special path: our two partners do not accept from 4 missing teeth. But there is an immediate-cover solution on the market without health questions that co-insures this too. We name it for you free of charge: +49 40 89755705.",
           "weg": "beide"
         },
         {
@@ -376,7 +367,7 @@
       },
       {
         "q": "Can I sign up with missing teeth?",
-        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. Timing matters: you must sign up before your dentist recommends the replacement for the gap. die Bayerische currently does not accept missing teeth. From 4 missing teeth, ERGO Zahnersatz Sofort offers a path entirely without health questions (doubled statutory subsidy; we do not broker this tariff ourselves), and the dental check above takes you straight there. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
+        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. Timing matters: you must sign up before your dentist recommends the replacement for the gap. die Bayerische currently does not accept missing teeth. From 4 missing teeth there is an immediate-cover solution on the market entirely without health questions, and we name it for you free of charge by phone: +49 40 89755705. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
       },
       {
         "q": "I recently had periodontitis. Is anything still possible?",

@@ -5,10 +5,11 @@
 export const BAYERISCHE_URL = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
 export const UKV_URL = 'https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Zahn&agentId1=180188803&agentId2=226487&insurers=37&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJVS1YiLCJsYXN0TmFtZSI6IlVuaW9uIEtyYW5rZW52ZXJzaWNoZXJ1bmcgQUciLCJjb21wYW55IjoiIiwic3RyZWV0IjoiUGV0ZXItWmltbWVyLVN0ci4gMiIsInppcGNvZGUiOiI2NjEyMyIsImNpdHkiOiJTYWFyYnL8Y2tlbiIsIm1vYmlsZSI6IiIsImVtYWlsIjoia3JhbmtlbkBmb25kc2ZpbmFuei5kZSJ9&remarks=IiI=&defaultContact=false';
 
-// ERGO Zahnersatz Sofort und DA Direkt Akut-Soforthilfe: bewusste Fremd-Tipps
-// ohne Vermittlung/Verguetung fuer Faelle, die Bayerische und UKV ablehnen
-// (keine Gesundheitsfragen; ERGO = Zahnersatz, DA Direkt = auch Zahnbehandlung).
-// Fakten primaerquellig verifiziert 02.08.2026 (ergo.de bzw. da-direkt.de).
+// Vorbereitet, aktuell BEWUSST NICHT verlinkt (Franks Ansage 02.08.2026:
+// Fremdanbieter noch nicht oeffentlich benennen, Strecke bleibt Bayerische/UKV).
+// Fuer die Sonderfaelle nennt das Team den Tarif telefonisch; Fakten
+// primaerquellig verifiziert 02.08.2026 (ergo.de bzw. da-direkt.de):
+// ERGO Zahnersatz Sofort (ZEK) und DA Direkt Akut-Soforthilfe.
 export const ERGO_URL = 'https://www.ergo.de/de/Produkte/Zahnzusatzversicherung/Zahnzusatzversicherung-ohne-Wartezeit';
 export const DADIREKT_URL = 'https://www.da-direkt.de/zahnzusatzversicherung-sofort';
 
