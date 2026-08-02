@@ -17,7 +17,8 @@ const HomeHero = () => {
   const displayHeroTitle = (i18n.resolvedLanguage || i18n.language || '').startsWith('de')
     ? heroTitle.replace('Krankenzusatzversicherung', 'Krankenzusatz\u00adversicherung')
     : heroTitle;
-  const titleSeparatorIndex = displayHeroTitle.indexOf(', ');
+  const titleCommaIndex = displayHeroTitle.indexOf(', ');
+  const titleSeparatorIndex = titleCommaIndex >= 0 ? titleCommaIndex : displayHeroTitle.indexOf('. ');
   const titleLead = titleSeparatorIndex >= 0
     ? displayHeroTitle.slice(0, titleSeparatorIndex + 1)
     : displayHeroTitle;
@@ -96,7 +97,7 @@ const HomeHero = () => {
             lang={i18n.resolvedLanguage || i18n.language}
             className="max-w-[15ch] [hyphens:manual] font-display text-[2.4rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] sm:text-5xl lg:max-w-[18ch] lg:text-[4rem] xl:max-w-[21ch] xl:text-[4.5rem]"
           >
-            <span className="block xl:whitespace-nowrap">{titleLead}</span>
+            <span className="block">{titleLead}</span>
             {titleTail && (
               <span className="block">
                 <HighlightText text={`<highlight>${titleTail}</highlight>`} />
@@ -106,6 +107,10 @@ const HomeHero = () => {
 
           <motion.p {...entrance(0.23)} className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-7 sm:text-xl">
             {t('hero.description')}
+          </motion.p>
+
+          <motion.p {...entrance(0.27)} className="mt-3 max-w-2xl text-sm leading-6 text-slate-300/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            {t('hero.disclaimer')}
           </motion.p>
 
           <motion.div {...entrance(0.31)} className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-3">

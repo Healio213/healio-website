@@ -20,8 +20,10 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Krankenzusatzversicherung, die zu deinem Leben passt.');
-assert.equal(en.hero.title, 'Supplementary health insurance that fits your life.');
+assert.equal(de.hero.title, 'Deine Krankenkasse zahlt dir Geld fürs Gesundbleiben. Hol es dir.');
+assert.equal(en.hero.title, 'Your health insurer pays you for staying healthy. Go get it.');
+assert.ok(de.hero.disclaimer.length > 40, 'DE Pflicht-Zusatz (individuelle Bonushöhe) muss neben der Kassenboni-Headline stehen');
+assert.ok(en.hero.disclaimer.length > 40, 'EN Pflicht-Zusatz (individuelle Bonushöhe) muss neben der Kassenboni-Headline stehen');
 assert.equal(de.hero.proof.length, 3);
 assert.equal(de.products.items.length, 3);
 assert.deepEqual(

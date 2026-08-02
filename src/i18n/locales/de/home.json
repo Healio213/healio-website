@@ -1,8 +1,9 @@
 {
   "hero": {
     "eyebrow": "Unabhängig beraten. Persönlich begleitet.",
-    "title": "Krankenzusatzversicherung, die zu deinem Leben passt.",
-    "description": "Ambulant, Zahn oder stationär: Wir zeigen dir verständlich, welcher Schutz sinnvoll ist – unabhängig, digital und persönlich begleitet.",
+    "title": "Deine Krankenkasse zahlt dir Geld fürs Gesundbleiben. Hol es dir.",
+    "description": "Wir machen deine Kassenboni so fit, dass du davon deine Zusatzversicherung bezahlen kannst. Sportverein, Fitnessstudio, Vorsorge: Vieles, was du längst tust, ist bares Geld wert. Kostenloser Bonus-Check in 2 Minuten.",
+    "disclaimer": "Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es kostenlos und individuell für dich aus.",
     "primaryCta": "Passenden Schutz finden",
     "secondaryCta": "So funktioniert Healio",
     "proof": ["Unabhängiger Makler", "Persönlich erreichbar", "Digital begleitet"],
