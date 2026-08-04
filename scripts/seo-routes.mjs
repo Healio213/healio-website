@@ -122,7 +122,7 @@ export const seoRoutes = [
   {
     path: '/zahnaerzte',
     title: 'Patientenservice für Zahnarztpraxen | Healio',
-    description: 'Neutrale Patienteninformation zu Eigenanteilen, Kassenboni und Zahnschutz – ohne Tarifberatung, Provision oder Patientendaten durch dein Praxisteam.',
+    description: 'Neutrale Patienteninformation zu Eigenanteilen, Kassenboni und Zahnschutz. Ohne Tarifberatung, Provision oder Patientendaten durch dein Praxisteam.',
     canonical: 'https://healio.de/zahnaerzte',
     lang: 'de',
   },
