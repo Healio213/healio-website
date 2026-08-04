@@ -67,15 +67,15 @@ const HebammenPage = () => {
         </section>
 
         {/* Qualitätssiegel: SDK + IKK classic */}
-        <motion.section className="py-8 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.section className="py-10 sm:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="container mx-auto px-4">
-            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
-              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-6xl mx-auto">
+              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
             </div>
           </div>
         </motion.section>
@@ -215,41 +215,35 @@ const HebammenPage = () => {
                 </p>
               </motion.div>
 
+              {/* Kernbotschaft, hervorgehoben */}
+              <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+                className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-7 sm:p-10 mb-8 text-white shadow-lg"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 leading-snug">{t('klinik.kernTitle')}</h3>
+                {t('klinik.kernText').split('\n\n').map((abs, i) => (
+                  <p key={i} className="text-emerald-50 leading-relaxed mb-3 last:mb-0">{abs}</p>
+                ))}
+              </motion.div>
+
               <div className="space-y-5 mb-12">
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  className="bg-slate-100 border-l-4 border-slate-400 rounded-r-xl p-6"
-                >
-                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.ehrlichTitle')}</h4>
-                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.ehrlichText')}</p>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.06 }}
-                  className="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-xl p-6"
-                >
-                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.chanceTitle')}</h4>
-                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.chanceText')}</p>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.12 }}
-                  className="bg-sky-50 border-l-4 border-sky-500 rounded-r-xl p-6"
-                >
-                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.chanceObenTitle')}</h4>
-                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.chanceObenText')}</p>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.16 }}
-                  className="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-6"
-                >
-                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.deadlineTitle')}</h4>
-                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.deadlineText')}</p>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.24 }}
-                  className="bg-white border border-sky-200 rounded-xl p-6"
-                >
-                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.roomingTitle')}</h4>
-                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.roomingText')}</p>
-                </motion.div>
+                {[
+                  { key: 'chance', bg: 'bg-rose-50', border: 'border-rose-500' },
+                  { key: 'chanceOben', bg: 'bg-sky-50', border: 'border-sky-500' },
+                  { key: 'deadline', bg: 'bg-amber-50', border: 'border-amber-500' },
+                  { key: 'ehrlich', bg: 'bg-slate-100', border: 'border-slate-400' },
+                  { key: 'rooming', bg: 'bg-emerald-50', border: 'border-emerald-500' },
+                ].map((block, i) => (
+                  <motion.div
+                    key={block.key}
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+                    className={`${block.bg} border-l-4 ${block.border} rounded-r-xl p-6 sm:p-7`}
+                  >
+                    <h4 className="font-bold text-slate-900 mb-3 text-lg">{t(`klinik.${block.key}Title`)}</h4>
+                    {t(`klinik.${block.key}Text`).split('\n\n').map((abs, j) => (
+                      <p key={j} className="text-slate-700 leading-relaxed mb-3 last:mb-0">{abs}</p>
+                    ))}
+                  </motion.div>
+                ))}
               </div>
 
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
