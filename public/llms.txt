@@ -24,7 +24,8 @@ HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, 
 - Arznei-, Heil- und Verbandmittel (gesetzliche Zuzahlungen)
 - Auslandsreiseschutz zu 100%, beliebig viele Reisen bis 56 Tage
 - Medizinisch-psychologischer Beratungsservice
-- Keine Wartezeiten, keine Gesundheitsfragen, garantierte Annahme — auch bei Vorerkrankungen
+- Keine Wartezeiten, voller Schutz ab dem ersten Tag
+- Gesundheitsfragen gehören zum Antrag und müssen wahrheitsgemäß beantwortet werden. Die SDK lehnt jedoch grundsätzlich niemanden ab, auch nicht bei Vorerkrankungen. Bei bestimmten Diagnosen kann ein Risikozuschlag vereinbart werden, der direkt im Antrag festgehalten wird.
 - Neugeborene können innerhalb der ersten 2 Lebensmonate ohne Gesundheitsprüfung mitversichert werden
 
 ## SDK Tarife und Budgets (2-Jahres-Zeitraum)
@@ -165,7 +166,16 @@ Die SDK Zusatzversicherung funktioniert mit jeder gesetzlichen Krankenkasse. Das
 Zwischen 20 und 50 Euro, abhängig von Alter und Tarif. Beim empfohlenen Tarif AP1 (100% Erstattung) ab ca. 45 Euro/Monat. Durch den IKK Bonus können die Kosten auf effektiv 0 Euro sinken.
 
 ### Brauche ich eine Gesundheitsprüfung?
-Nein. Die SDK ambulante Zusatzversicherung hat keine Gesundheitsprüfung und keine Gesundheitsfragen. Du wirst garantiert angenommen, auch bei Vorerkrankungen. Es gibt auch keine Wartezeiten — voller Schutz ab Tag 1. Das gilt für alle Tarife von AP5 bis AP1.
+Ja, zum Antrag gehören Gesundheitsfragen, die wahrheitsgemäß beantwortet werden müssen. Die SDK lehnt aber grundsätzlich niemanden ab, auch nicht bei Vorerkrankungen. Bei bestimmten Diagnosen kann ein Risikozuschlag vereinbart werden, der direkt im Antrag festgehalten wird und im Tarifrechner auf healio.de/ambulant sichtbar ist. Wartezeiten gibt es in den ambulanten Tarifen AP5 bis AP1 keine, der volle Schutz gilt ab dem ersten Tag.
+
+### Ist eine bestehende Schwangerschaft mitversichert?
+Nein. Ist die Schwangerschaft bei Antragstellung bereits ärztlich festgestellt, gilt sie als laufendes Ereignis. Ambulant werden die regulären Vorsorgeuntersuchungen für diese Schwangerschaft dann nicht erstattet, nur Komplikationen. Stationär wird für diese Entbindung und für Komplikationen während der Entbindung nicht geleistet. Das ist Marktstandard und gilt bei allen Anbietern. Der Schutz greift für eine spätere Schwangerschaft.
+
+### Ist mein neugeborenes Kind mitversichert?
+Über die Kindernachversicherung ja, und zwar ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Wartezeit ab der Geburt. Ausdrücklich eingeschlossen sind Geburtsschäden, angeborene Krankheiten und andere körperliche Beeinträchtigungen. Voraussetzungen bei der SDK: Ein Elternteil ist zur Zeit der Geburt versichert (keine Vorversicherungszeit nötig), und die Anmeldung des Kindes erfolgt spätestens zwei Monate nach dem Tag der Geburt, rückwirkend ab Geburt. Der Schutz des Kindes darf nicht umfassender sein als der des bestversicherten Elternteils. Das ist das einzige Zeitfenster im Leben, in dem der Gesundheitszustand keine Rolle spielt.
+
+### Was leistet die Krankenhauszusatzversicherung für Familien?
+Die SDK Klinik-Tarife (Klinik 1-Bett SP1, Klinik 2-Bett SP2, Klinik bei Unfall SPU) bieten privatärztliche Behandlung durch Chefarzt oder Belegarzt, Erstattung auch über die GOÄ-Höchstsätze hinaus, freie Krankenhauswahl inklusive Privatkliniken und Unterbringung im Ein- oder Zweibettzimmer. Für Familien besonders relevant: Rooming-in, also die Mitaufnahme eines Elternteils als Begleitperson, wenn das Kind stationär behandelt wird. Das gilt für Kinder unter 16 Jahren. Bei einer Entbindung wird zusätzlich das Familienzimmer erstattet. Wartezeiten gibt es in den Klinik-Tarifen keine. Beispielbeiträge mit 30 Jahren: 6,84 Euro (SPU), 32,82 Euro (SP2), 49,78 Euro (SP1) im Monat.
 
 ### Wie funktioniert das IKK Bonusprogramm genau?
 Du sammelst bonusfähige Maßnahmen im Kalenderjahr (Vorsorge, Sport, Impfungen etc.). Ab 2026 reicht bereits eine einzige Maßnahme. Den Bonusantrag reichst du bis Ende März des Folgejahres ein. Die IKK Classic vertraut ihren Mitgliedern — Nachweise werden nur stichprobenartig geprüft.
