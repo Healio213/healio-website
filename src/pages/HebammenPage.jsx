@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Shield, Wallet, HeartHandshake, Scale, MessageCircle, FileText, QrCode, Heart, Check, Baby } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Shield, Wallet, HeartHandshake, Scale, MessageCircle, FileText, QrCode, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -198,8 +199,116 @@ const HebammenPage = () => {
           </div>
         </section>
 
-        {/* VORTEILE & PRÄMIE */}
+        {/* KRANKENHAUS / STATIONÄR */}
         <section className="py-16 sm:py-20 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="max-w-4xl mx-auto">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+                <div className="w-16 h-16 rounded-2xl bg-sky-100 flex items-center justify-center mx-auto mb-6">
+                  <Building2 className="w-8 h-8 text-sky-600" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                  {t('klinik.title')}
+                </h2>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                  {t('klinik.subtitle')}
+                </p>
+              </motion.div>
+
+              <div className="space-y-5 mb-12">
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  className="bg-slate-100 border-l-4 border-slate-400 rounded-r-xl p-6"
+                >
+                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.ehrlichTitle')}</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.ehrlichText')}</p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.06 }}
+                  className="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-xl p-6"
+                >
+                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.chanceTitle')}</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.chanceText')}</p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.12 }}
+                  className="bg-sky-50 border-l-4 border-sky-500 rounded-r-xl p-6"
+                >
+                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.chanceObenTitle')}</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.chanceObenText')}</p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.16 }}
+                  className="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-6"
+                >
+                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.deadlineTitle')}</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.deadlineText')}</p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.24 }}
+                  className="bg-white border border-sky-200 rounded-xl p-6"
+                >
+                  <h4 className="font-bold text-slate-900 mb-2">{t('klinik.roomingTitle')}</h4>
+                  <p className="text-sm text-slate-700 leading-relaxed">{t('klinik.roomingText')}</p>
+                </motion.div>
+              </div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">{t('klinik.compareTitle')}</h3>
+                <p className="text-slate-600 max-w-2xl mx-auto">{t('klinik.compareSubtitle')}</p>
+              </motion.div>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                {/* Die Bayerische */}
+                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                  className="bg-white border-2 border-sky-200 rounded-2xl p-6 sm:p-8 flex flex-col"
+                >
+                  <h3 className="text-xl font-bold text-sky-900">{t('klinik.bayerischeName')}</h3>
+                  <p className="text-sm font-semibold text-sky-600 mb-6">{t('klinik.bayerischeTag')}</p>
+                  <div className="space-y-3 flex-1">
+                    {t('klinik.bayerischeItems', { returnObjects: true }).map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-slate-700 leading-relaxed">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.bayerischeCaveat')}</p>
+                </motion.div>
+
+                {/* SDK */}
+                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                  className="bg-white border-2 border-emerald-200 rounded-2xl p-6 sm:p-8 flex flex-col"
+                >
+                  <h3 className="text-xl font-bold text-emerald-900">{t('klinik.sdkName')}</h3>
+                  <p className="text-sm font-semibold text-emerald-600 mb-6">{t('klinik.sdkTag')}</p>
+                  <div className="space-y-3 flex-1">
+                    {t('klinik.sdkItems', { returnObjects: true }).map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-slate-700 leading-relaxed">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.sdkCaveat')}</p>
+                </motion.div>
+              </div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="bg-blue-50 border border-blue-200 rounded-2xl p-6 sm:p-8"
+              >
+                <p className="text-slate-700 leading-relaxed mb-4">{t('klinik.bonusNote')}</p>
+                <p className="text-slate-700 leading-relaxed mb-6">{t('klinik.closingNote')}</p>
+                <Link to="/stationaer" className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors">
+                  {t('klinik.ctaLink')}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* VORTEILE & PRÄMIE */}
+        <section className="py-16 sm:py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
@@ -246,7 +355,7 @@ const HebammenPage = () => {
         </section>
 
         {/* RECHTLICHE SICHERHEIT */}
-        <section className="py-16 sm:py-20 bg-white">
+        <section className="py-16 sm:py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
@@ -281,7 +390,7 @@ const HebammenPage = () => {
         </section>
 
         {/* ABLAUF — 3 SCHRITTE */}
-        <section className="py-16 sm:py-20 bg-slate-50">
+        <section className="py-16 sm:py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.h2
