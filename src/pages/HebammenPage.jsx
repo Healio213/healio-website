@@ -113,6 +113,26 @@ const HebammenPage = () => {
           </div>
         </section>
 
+        {/* MORAL */}
+        <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
+                {t('moral.title')}
+              </motion.h2>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text1')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-white/85 leading-relaxed mb-6">
+                {t('moral.text2')}
+              </motion.p>
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-lg font-semibold text-emerald-300 leading-relaxed">
+                {t('moral.text3')}
+              </motion.p>
+            </div>
+          </div>
+        </section>
+
         {/* LEISTUNGEN FÜR SCHWANGERE */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
@@ -138,7 +158,7 @@ const HebammenPage = () => {
                     className="bg-rose-50 border border-rose-200 rounded-xl p-5"
                   >
                     <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                    <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                    <p className="text-base text-slate-600 leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -155,11 +175,11 @@ const HebammenPage = () => {
                         <div className="flex items-start gap-3 flex-1">
                           <Check className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="font-medium text-slate-900 text-sm">{item.name}</p>
-                            <p className="text-xs text-slate-500">{item.detail}</p>
+                            <p className="font-medium text-slate-900 text-base">{item.name}</p>
+                            <p className="text-sm text-slate-500">{item.detail}</p>
                           </div>
                         </div>
-                        <span className="text-sm font-bold text-blue-700 whitespace-nowrap">{item.amount}</span>
+                        <span className="text-base font-bold text-blue-700 whitespace-nowrap">{item.amount}</span>
                       </div>
                     ))}
                   </div>
@@ -176,11 +196,11 @@ const HebammenPage = () => {
                         <div className="flex items-start gap-3 flex-1">
                           <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="font-medium text-slate-900 text-sm">{item.name}</p>
-                            <p className="text-xs text-slate-500">{item.detail}</p>
+                            <p className="font-medium text-slate-900 text-base">{item.name}</p>
+                            <p className="text-sm text-slate-500">{item.detail}</p>
                           </div>
                         </div>
-                        <span className="text-sm font-bold text-emerald-700 whitespace-nowrap">{item.amount}</span>
+                        <span className="text-base font-bold text-emerald-700 whitespace-nowrap">{item.amount}</span>
                       </div>
                     ))}
                   </div>
@@ -221,7 +241,7 @@ const HebammenPage = () => {
               >
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 leading-snug">{t('klinik.kernTitle')}</h3>
                 {t('klinik.kernText').split('\n\n').map((abs, i) => (
-                  <p key={i} className="text-emerald-50 leading-relaxed mb-3 last:mb-0">{abs}</p>
+                  <p key={i} className="text-lg text-emerald-50 leading-relaxed mb-4 last:mb-0">{abs}</p>
                 ))}
               </motion.div>
 
@@ -238,9 +258,9 @@ const HebammenPage = () => {
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
                     className={`${block.bg} border-l-4 ${block.border} rounded-r-xl p-6 sm:p-7`}
                   >
-                    <h4 className="font-bold text-slate-900 mb-3 text-lg">{t(`klinik.${block.key}Title`)}</h4>
+                    <h4 className="font-bold text-slate-900 mb-3 text-xl">{t(`klinik.${block.key}Title`)}</h4>
                     {t(`klinik.${block.key}Text`).split('\n\n').map((abs, j) => (
-                      <p key={j} className="text-slate-700 leading-relaxed mb-3 last:mb-0">{abs}</p>
+                      <p key={j} className="text-lg text-slate-700 leading-relaxed mb-4 last:mb-0">{abs}</p>
                     ))}
                   </motion.div>
                 ))}
@@ -257,16 +277,16 @@ const HebammenPage = () => {
                   className="bg-white border-2 border-sky-200 rounded-2xl p-6 sm:p-8 flex flex-col"
                 >
                   <h3 className="text-xl font-bold text-sky-900">{t('klinik.bayerischeName')}</h3>
-                  <p className="text-sm font-semibold text-sky-600 mb-6">{t('klinik.bayerischeTag')}</p>
+                  <p className="text-base font-semibold text-sky-600 mb-6">{t('klinik.bayerischeTag')}</p>
                   <div className="space-y-3 flex-1">
                     {t('klinik.bayerischeItems', { returnObjects: true }).map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-slate-700 leading-relaxed">{item}</p>
+                        <p className="text-base text-slate-700 leading-relaxed">{item}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.bayerischeCaveat')}</p>
+                  <p className="text-sm text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.bayerischeCaveat')}</p>
                 </motion.div>
 
                 {/* SDK */}
@@ -274,16 +294,16 @@ const HebammenPage = () => {
                   className="bg-white border-2 border-emerald-200 rounded-2xl p-6 sm:p-8 flex flex-col"
                 >
                   <h3 className="text-xl font-bold text-emerald-900">{t('klinik.sdkName')}</h3>
-                  <p className="text-sm font-semibold text-emerald-600 mb-6">{t('klinik.sdkTag')}</p>
+                  <p className="text-base font-semibold text-emerald-600 mb-6">{t('klinik.sdkTag')}</p>
                   <div className="space-y-3 flex-1">
                     {t('klinik.sdkItems', { returnObjects: true }).map((item, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-slate-700 leading-relaxed">{item}</p>
+                        <p className="text-base text-slate-700 leading-relaxed">{item}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.sdkCaveat')}</p>
+                  <p className="text-sm text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.sdkCaveat')}</p>
                 </motion.div>
               </div>
 
@@ -292,7 +312,7 @@ const HebammenPage = () => {
               >
                 <p className="text-slate-700 leading-relaxed mb-4">{t('klinik.bonusNote')}</p>
                 <p className="text-slate-700 leading-relaxed mb-6">{t('klinik.closingNote')}</p>
-                <Link to="/stationaer" className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-900 transition-colors">
+                <Link to="/stationaer" className="inline-flex items-center gap-2 text-base font-semibold text-blue-700 hover:text-blue-900 transition-colors">
                   {t('klinik.ctaLink')}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -429,26 +449,6 @@ const HebammenPage = () => {
                   {t('steps.easeNote')}
                 </p>
               </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* MORAL */}
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
-                {t('moral.title')}
-              </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-white/85 leading-relaxed mb-6">
-                {t('moral.text1')}
-              </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-white/85 leading-relaxed mb-6">
-                {t('moral.text2')}
-              </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-lg font-semibold text-emerald-300 leading-relaxed">
-                {t('moral.text3')}
-              </motion.p>
             </div>
           </div>
         </section>
