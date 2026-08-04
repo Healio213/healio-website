@@ -7,16 +7,19 @@ import CostAnalysisSection from '@/components/sections/veterinary/CostAnalysisSe
 import CostBenefitAnalysis from '@/components/sections/veterinary/CostBenefitAnalysis';
 import TariffSelection from '@/components/sections/veterinary/TariffSelection';
 import VeterinaryContactForm from '@/components/sections/VeterinaryContactForm';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const VeterinaryHomePage = () => {
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/pet-insurance' : 'https://healio.de/tierkrankenversicherung';
 
   return (
     <>
       <SEOHead
         title={tSeo('veterinary.title')}
         description={tSeo('veterinary.description')}
-        canonicalUrl="https://healio.de/tierkrankenversicherung"
+        canonicalUrl={canonicalUrl}
         ogTitle="Healio Tierkrankenversicherung - Bester Schutz für Ihr Tier"
         ogDescription="Sichern Sie sich gegen steigende Tierarztkosten ab. Jetzt Beitrag berechnen."
       />

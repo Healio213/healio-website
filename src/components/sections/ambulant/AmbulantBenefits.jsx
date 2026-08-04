@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Wallet } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const CATEGORY_KEYS = [
-  { key: 'heilpraktiker', emoji: "🌿", bgColor: "bg-amber-50" },
-  { key: 'sehhilfen', emoji: "👓", bgColor: "bg-blue-50" },
-  { key: 'vorsorge', emoji: "🩺", bgColor: "bg-teal-50" },
-  { key: 'arzneimittel', emoji: "💊", bgColor: "bg-green-50" },
-  { key: 'schwangerschaft', emoji: "🤰", bgColor: "bg-pink-50" },
+  { key: 'heilpraktiker', emoji: '🌿', tone: 'butter' },
+  { key: 'sehhilfen', emoji: '👓', tone: 'sky' },
+  { key: 'vorsorge', emoji: '🩺', tone: 'mint' },
+  { key: 'arzneimittel', emoji: '💊', tone: 'lavender' },
+  { key: 'schwangerschaft', emoji: '🤰', tone: 'coral' },
 ];
 
 const SourceBadge = ({ source }) => {
@@ -62,11 +63,13 @@ const BenefitCard = ({ benefit, index, t }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full p-6 flex flex-col items-center text-center cursor-pointer"
       >
-        <div className={`${benefit.bgColor} rounded-full p-5 w-fit mb-4`}>
-          <span className="text-4xl" role="img" aria-label={t(`benefits.${benefit.key}.title`)}>
-            {benefit.emoji}
-          </span>
-        </div>
+        <FriendlyIcon
+          emoji={benefit.emoji}
+          label={t(`benefits.${benefit.key}.title`)}
+          tone={benefit.tone}
+          size="lg"
+          className="mb-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-2"
+        />
         <h3 className="text-xl font-bold text-gray-900 mb-2">{t(`benefits.${benefit.key}.title`)}</h3>
         <p className="text-gray-600 text-sm mb-3">{t(`benefits.${benefit.key}.desc`)}</p>
         <p className="text-[#10b981] font-semibold text-sm mb-3">{t(`benefits.${benefit.key}.budget`)}</p>

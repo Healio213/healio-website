@@ -352,4 +352,41 @@ for (const route of seoRoutes) {
   count++;
 }
 
-console.log(`SEO: ${count} Seiten mit individuellen Meta-Tags generiert. ${blogArticles.size} Blogartikel statisch vorgeladen.`);
+// 404-Fallback erzeugen.
+//
+// Unbekannte URLs liefen bisher ueber den Vercel-Catch-all auf die
+// Startseiten-HTML. Damit sah Googlebot fuer jede Tippfehler- oder Alt-URL
+// 200 OK + <link rel="canonical" href="https://healio.de"> und meldete sie
+// als "Alternative Seite mit richtigem kanonischen Tag".
+//
+// Diese Seite bekommt deshalb bewusst KEIN Canonical (sonst zeigt sie wieder
+// auf die Startseite) und ein hartes noindex. Die SPA laedt normal weiter und
+// rendert die NotFoundPage, damit alte Links aus Flyern und QR-Codes weiter
+// auf einer bedienbaren Seite mit Navigation landen.
+{
+  let notFound = template;
+  notFound = notFound.replace(
+    /<title>[^<]*<\/title>/,
+    '<title>Seite nicht gefunden | Healio</title>'
+  );
+  notFound = notFound.replace(
+    /<meta name="description" content="[^"]*">/,
+    '<meta name="description" content="Diese Seite existiert nicht oder wurde verschoben.">'
+  );
+  const robotsTag = '<meta name="robots" content="noindex, follow">';
+  if (/<meta name="robots" content="[^"]*">/.test(notFound)) {
+    notFound = notFound.replace(/<meta name="robots" content="[^"]*">/, robotsTag);
+  } else {
+    notFound = notFound.replace(
+      /(<meta name="description" content="[^"]*">)/,
+      `$1\n    ${robotsTag}`
+    );
+  }
+  // Canonical und hreflang entfernen: eine 404-Seite darf auf nichts zeigen.
+  notFound = notFound.replace(/\s*<link rel="canonical" href="[^"]*">/g, '');
+  notFound = notFound.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*"\s*\/?>/g, '');
+  notFound = notFound.replace(/<meta name="keywords" content="[^"]*">\n?/, '');
+  fs.writeFileSync(path.join(distDir, '404.html'), notFound);
+}
+
+console.log(`SEO: ${count} Seiten mit individuellen Meta-Tags generiert. ${blogArticles.size} Blogartikel statisch vorgeladen. 404-Fallback erzeugt.`);

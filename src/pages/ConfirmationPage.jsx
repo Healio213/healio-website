@@ -10,7 +10,8 @@ import SEOHead from '@/components/SEOHead';
 const ConfirmationPage = () => {
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/confirmation' : 'https://healio.de/confirmation';
   const navigate = useNavigate();
   const location = useLocation();
   const isAppointment = location.state?.type === 'appointment';
@@ -27,7 +28,7 @@ const ConfirmationPage = () => {
       <SEOHead
         title={tSeo('confirmation.title')}
         description={tSeo('confirmation.description')}
-        canonicalUrl="https://healio.de/confirmation"
+        canonicalUrl={canonicalUrl}
         robots="noindex, nofollow"
       />
       <div className="max-w-4xl w-full pt-12">

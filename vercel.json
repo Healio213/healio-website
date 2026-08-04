@@ -26,6 +26,41 @@
       "permanent": false
     },
     {
+      "source": "/betriebliche-vorsorge",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/bav-bkv",
+      "destination": "/unternehmen",
+      "permanent": true
+    },
+    {
+      "source": "/en/corporate-benefits",
+      "destination": "/en/companies",
+      "permanent": true
+    },
+    {
+      "source": "/heilpraktiker-vorsorge",
+      "destination": "/heilberufe-vorsorge",
+      "permanent": true
+    },
+    {
+      "source": "/osteopathen-vorsorge",
+      "destination": "/heilberufe-vorsorge",
+      "permanent": true
+    },
+    {
+      "source": "/praxis-absicherung",
+      "destination": "/heilberufe-vorsorge",
+      "permanent": true
+    },
+    {
+      "source": "/auth/confirmed",
+      "destination": "/app-bestaetigt",
+      "permanent": true
+    },
+    {
       "source": "/klinik-upgrade",
       "destination": "/stationaer",
       "permanent": true
@@ -63,7 +98,11 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets|favicon|og-image|sitemap|robots).*)",
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/en/blog/:slug",
       "destination": "/index.html"
     }
   ]

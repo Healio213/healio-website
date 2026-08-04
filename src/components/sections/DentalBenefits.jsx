@@ -2,17 +2,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Clock, Stethoscope, FileText, ShieldCheck, Sparkles, Shield, Smile } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const benefitIcons = [
-  <Clock key="clock" className="w-8 h-8" />,
-  <Shield key="shield" className="w-8 h-8" />,
-  <Sparkles key="sparkles" className="w-8 h-8" />,
-  <Smile key="smile" className="w-8 h-8" />,
-  <ShieldCheck key="shield-check" className="w-8 h-8" />,
-  <Stethoscope key="stethoscope" className="w-8 h-8" />,
-  <FileText key="file-text" className="w-8 h-8" />,
-];
+const benefitIcons = ['⏱️', '🦷', '✨', '😁', '🧩', '🛡️', '📋'];
+const benefitTones = ['butter', 'mint', 'lavender', 'sky', 'coral', 'mint', 'butter'];
 
 const benefitKeys = ['noWait', 'zahnersatz', 'prophylaxe', 'bleaching', 'fehlend', 'unfall', 'gesundheitsfragen'];
 
@@ -47,9 +40,12 @@ const DentalBenefits = () => {
               viewport={{ once: true }}
               className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-[#25c990]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-16 h-16 bg-[#25c990]/10 text-[#25c990] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-                {benefitIcons[index]}
-              </div>
+              <FriendlyIcon
+                emoji={benefitIcons[index]}
+                label={t(`benefits.${key}.title`)}
+                tone={benefitTones[index]}
+                className="mb-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-2"
+              />
               <h3 className="text-xl font-bold text-slate-900 mb-3">{t(`benefits.${key}.title`)}</h3>
               <p className="text-slate-600 leading-relaxed">{t(`benefits.${key}.desc`)}</p>
             </motion.article>

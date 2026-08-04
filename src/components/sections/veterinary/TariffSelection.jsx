@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Shield, Activity, Syringe, HeartPulse } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const TariffSelection = () => {
   const { t } = useTranslation('veterinary');
@@ -25,9 +26,7 @@ const TariffSelection = () => {
             whileHover={{ y: -5 }}
             className="group p-8 rounded-3xl bg-white border border-gray-200 hover:border-blue-400 shadow-lg transition-all duration-300"
           >
-            <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#1E3A8A] transition-colors">
-              <Shield className="w-8 h-8 text-[#1E3A8A] group-hover:text-white transition-colors" />
-            </div>
+            <FriendlyIcon emoji="🛡️" label={t('tariffs.vollschutz.title')} tone="mint" className="mb-6" />
             
             <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('tariffs.vollschutz.title')}</h3>
             <p className="text-slate-500 mb-6 h-12">{t('tariffs.vollschutz.desc')}</p>
@@ -62,9 +61,7 @@ const TariffSelection = () => {
             whileHover={{ y: -5 }}
             className="group p-8 rounded-3xl bg-white border border-gray-200 hover:border-blue-400 shadow-lg transition-all duration-300"
           >
-            <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#1E3A8A] transition-colors">
-              <Activity className="w-8 h-8 text-[#1E3A8A] group-hover:text-white transition-colors" />
-            </div>
+            <FriendlyIcon emoji="🏥" label={t('tariffs.opSchutz.title')} tone="sky" className="mb-6" />
             
             <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('tariffs.opSchutz.title')}</h3>
             <p className="text-slate-500 mb-6 h-12">{t('tariffs.opSchutz.desc')}</p>

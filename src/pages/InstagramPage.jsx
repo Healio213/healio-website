@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { ChevronRight } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 /**
  * Instagram Bio-Link Landing Page
@@ -57,6 +58,8 @@ const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass })
 
 const InstagramPage = () => {
   const { t } = useTranslation('instagram');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/instagram' : 'https://healio.de/instagram';
 
   const cards = [
     {
@@ -83,10 +86,11 @@ const InstagramPage = () => {
       <SEOHead
         title={t('meta.title')}
         description={t('meta.description')}
-        canonicalUrl="https://healio.de/instagram"
+        canonicalUrl={canonicalUrl}
         ogTitle={t('meta.title')}
         ogDescription={t('meta.description')}
-        ogUrl="https://healio.de/instagram"
+        ogUrl={canonicalUrl}
+        robots="noindex, follow"
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center text-white">

@@ -1,8 +1,9 @@
 import React from 'react';
-import { ArrowUpRight, Check, HeartPulse } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const AmbulantBudgetFeature = () => {
   const { t } = useTranslation('home');
@@ -20,9 +21,7 @@ const AmbulantBudgetFeature = () => {
           <div className="relative grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
             <div>
               <div className="flex items-center gap-3 text-home-mint">
-                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-home-mint/15">
-                  <HeartPulse className="h-5 w-5" aria-hidden="true" />
-                </span>
+                <FriendlyIcon emoji="💚" label={t('budget.eyebrow')} tone="mint" size="sm" />
                 <p className="home-eyebrow">{t('budget.eyebrow')}</p>
               </div>
               <p className="mt-9 whitespace-nowrap font-display text-[clamp(2.75rem,13.75vw,3.6rem)] font-extrabold leading-[0.88] tracking-[-0.055em] text-white sm:text-[clamp(3.6rem,10vw,7.75rem)] sm:leading-[0.78] sm:tracking-[-0.075em]">

@@ -9,6 +9,7 @@ const KontoLoeschenPage = () => {
         title="Konto löschen | HEALIO"
         description="So kannst du dein HEALIO Konto und alle zugehörigen Daten löschen."
         canonicalUrl="https://healio.de/konto-loeschen"
+        robots="noindex, follow"
       />
       <main className="min-h-screen bg-gray-50 pt-28 pb-16 sm:pt-32 sm:pb-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

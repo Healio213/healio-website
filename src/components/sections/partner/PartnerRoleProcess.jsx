@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Building2, User, ShieldCheck, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const PartnerRoleProcess = () => {
   const { t } = useTranslation('partner');
@@ -10,19 +11,22 @@ const PartnerRoleProcess = () => {
 
   const roles = [
     {
-      icon: Building2,
+      emoji: '🏥',
+      tone: 'sky',
       label: t('roleProcess.practiceLabel'),
       title: t('roleProcess.practiceTitle'),
       text: t('roleProcess.practiceText'),
     },
     {
-      icon: User,
+      emoji: '🙋',
+      tone: 'butter',
       label: t('roleProcess.patientLabel'),
       title: t('roleProcess.patientTitle'),
       text: t('roleProcess.patientText'),
     },
     {
-      icon: ShieldCheck,
+      emoji: '🛡️',
+      tone: 'mint',
       label: t('roleProcess.healioLabel'),
       title: t('roleProcess.healioTitle'),
       text: t('roleProcess.healioText'),
@@ -56,7 +60,6 @@ const PartnerRoleProcess = () => {
 
         <ol className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-3 lg:gap-8" aria-label={t('roleProcess.eyebrow')}>
           {roles.map((role, index) => {
-            const Icon = role.icon;
             return (
               <motion.li
                 key={role.label}
@@ -67,9 +70,7 @@ const PartnerRoleProcess = () => {
                 className="relative rounded-2xl border border-white/10 bg-white/[0.055] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:p-8"
               >
                 <div className="mb-8 flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#75e6bf]/25 bg-[#25c990]/10 text-[#75e6bf]">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
+                  <FriendlyIcon emoji={role.emoji} label={role.title} tone={role.tone} size="sm" />
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
                     {role.label}
                   </span>

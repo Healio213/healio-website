@@ -5,32 +5,26 @@ import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowDown,
   ArrowRight,
-  Building2,
   CheckCircle2,
-  Compass,
-  Headphones,
-  MessageSquare,
-  ShieldCheck,
-  Stethoscope,
-  User,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
 const audienceIcons = {
-  private: User,
-  practices: Stethoscope,
-  companies: Building2,
+  private: { emoji: '🙋', tone: 'butter' },
+  practices: { emoji: '🩺', tone: 'mint' },
+  companies: { emoji: '🏢', tone: 'sky' },
 };
 
 const principleIcons = {
-  needs: Compass,
-  independent: ShieldCheck,
-  clear: MessageSquare,
-  personal: Headphones,
+  needs: { emoji: '🧭', tone: 'sky' },
+  independent: { emoji: '🛡️', tone: 'mint' },
+  clear: { emoji: '💬', tone: 'lavender' },
+  personal: { emoji: '🎧', tone: 'butter' },
 };
 
 const AboutPage = () => {
@@ -165,15 +159,13 @@ const AboutPage = () => {
                   <div className="absolute bottom-7 left-[1.35rem] top-7 w-px bg-gradient-to-b from-[#5ee0b1]/70 via-white/20 to-[#5ee0b1]/70 sm:left-[1.6rem]" aria-hidden="true" />
                   <ul className="space-y-3" aria-label={t('hero.networkTitle')}>
                     {Array.isArray(audiences) && audiences.map((audience) => {
-                      const Icon = audienceIcons[audience.key] || User;
+                      const icon = audienceIcons[audience.key] || { emoji: '✨', tone: 'mint' };
                       return (
                         <li
                           key={audience.key}
                           className="relative grid grid-cols-[2.75rem_1fr] gap-4 rounded-2xl border border-white/[0.08] bg-[#0b1928]/90 p-4 sm:grid-cols-[3.25rem_1fr] sm:p-5"
                         >
-                          <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[#25c990]/35 bg-[#0d2430] text-[#5ee0b1] sm:h-[3.25rem] sm:w-[3.25rem]">
-                            <Icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
-                          </span>
+                          <FriendlyIcon emoji={icon.emoji} label={audience.label} tone={icon.tone} size="sm" className="relative z-10" />
                           <span>
                             <span className="block font-display text-sm font-bold text-white sm:text-base">{audience.label}</span>
                             <span className="mt-1 block text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">{audience.text}</span>
@@ -245,7 +237,7 @@ const AboutPage = () => {
 
             <div className="grid md:grid-cols-2">
               {Array.isArray(principles) && principles.map((principle, index) => {
-                const Icon = principleIcons[principle.key] || CheckCircle2;
+                const icon = principleIcons[principle.key] || { emoji: '✅', tone: 'mint' };
                 return (
                   <motion.article
                     key={principle.key}
@@ -253,9 +245,7 @@ const AboutPage = () => {
                     className={`border-slate-200 py-9 md:px-8 md:py-12 ${index % 2 === 0 ? 'md:border-r' : ''} ${index < principles.length - 1 ? 'border-b' : ''} ${index < 2 ? 'md:border-b' : 'md:border-b-0'} ${index % 2 === 0 ? 'md:pl-0' : 'md:pr-0'}`}
                   >
                     <div className="flex gap-5 sm:gap-6">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e9f8f1] text-[#0c7a5a]">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
-                      </span>
+                      <FriendlyIcon emoji={icon.emoji} label={principle.title} tone={icon.tone} size="sm" />
                       <div>
                         <h3 className="font-display text-xl font-bold tracking-[-0.025em] text-[#102333] sm:text-2xl">{principle.title}</h3>
                         <p className="mt-3 max-w-xl text-sm leading-6 text-[#5a6673] sm:text-base sm:leading-7">{principle.text}</p>
@@ -311,13 +301,11 @@ const AboutPage = () => {
 
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
               {Array.isArray(routes) && routes.map((route, index) => {
-                const Icon = audienceIcons[route.key] || User;
+                const icon = audienceIcons[route.key] || { emoji: '✨', tone: 'mint' };
                 return (
                   <motion.article key={route.key} {...reveal(index * 0.06)} className="group flex min-h-full flex-col rounded-[1.6rem] border border-[#dbe8e2] bg-white p-7 shadow-[0_14px_45px_rgba(7,17,31,0.06)] sm:p-8">
                     <div className="flex items-center justify-between gap-4">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e9f8f1] text-[#0c7a5a]">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
-                      </span>
+                      <FriendlyIcon emoji={icon.emoji} label={route.title} tone={icon.tone} size="sm" />
                       <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#0c7a5a]">{route.label}</span>
                     </div>
                     <h3 className="mt-8 font-display text-2xl font-bold tracking-[-0.035em] text-[#102333]">{route.title}</h3>

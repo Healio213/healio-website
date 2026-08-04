@@ -616,6 +616,14 @@
     "badge": "Krankenkassenwechsel leicht gemacht",
     "title": "Du bleibst gesetzlich versichert und holst dir <highlight>mehr Bonus</highlight>",
     "subtitle": "Ob AOK, TK, Barmer oder eine andere gesetzliche Krankenkasse: Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, die besser zum Healio-Gesundheitsbudget passt.",
+    "advantagesEyebrow": "Deine Vorteile beim Wechsel",
+    "advantagesTitle": "Du wechselst entspannter, als du denkst.",
+    "advantagesItems": [
+      "Grundversorgung bleibt gesetzlich geregelt",
+      "Versicherungsschutz bleibt lückenlos bestehen",
+      "Wechsel ohne Papierkram"
+    ],
+    "advantagesImageAlt": "Entspannte Person in einer Hängematte mit Smartphone, Schutzschild und Gesundheitsbudget-Symbolen",
     "reassuranceKicker": "Die wichtigste Klarstellung",
     "reassuranceTitle": "Du gibst deine Versorgung nicht auf. Du wechselst nur den Anbieter.",
     "reassuranceText": "Deine gesetzliche Grundversorgung bleibt bestehen. Ärzte, Fachärzte, Kliniken, Rezepte und laufende Behandlungen bleiben der sichere Rahmen. Der Unterschied liegt vor allem in den Extras, im Bonusprogramm und darin, wie gut die Kasse dein Gesundheitsbudget unterstützt.",

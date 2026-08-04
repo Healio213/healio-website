@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { AlertCircle, TrendingUp, Stethoscope, Clock } from 'lucide-react';
+import { AlertCircle, Clock } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const CostAnalysisSection = () => {
   const { t } = useTranslation('veterinary');
@@ -30,9 +31,7 @@ const CostAnalysisSection = () => {
 
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="p-4 sm:p-5 md:p-6 bg-blue-50 rounded-xl border border-blue-100 flex flex-col items-start">
-                <div className="bg-[#1E3A8A] w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-3 sm:mb-4 shrink-0">
-                  <TrendingUp className="text-white w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
+                <FriendlyIcon emoji="📈" label={t('costAnalysis.steigendeSaetze')} tone="sky" size="sm" className="mb-4" />
                 <div>
                   <h3 className="font-bold text-slate-900 mb-1 sm:mb-2 text-base sm:text-lg">{t('costAnalysis.steigendeSaetze')}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
@@ -42,9 +41,7 @@ const CostAnalysisSection = () => {
               </div>
               
               <div className="p-4 sm:p-5 md:p-6 bg-blue-50 rounded-xl border border-blue-100 flex flex-col items-start">
-                <div className="bg-[#1E3A8A] w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-3 sm:mb-4 shrink-0">
-                  <Stethoscope className="text-white w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
+                <FriendlyIcon emoji="🩺" label={t('costAnalysis.spezialisten')} tone="mint" size="sm" className="mb-4" />
                 <div>
                   <h3 className="font-bold text-slate-900 mb-1 sm:mb-2 text-base sm:text-lg">{t('costAnalysis.spezialisten')}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">

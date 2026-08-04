@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 import SEOHead from '@/components/SEOHead';
 import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
@@ -18,6 +17,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const StationaerFaq = () => {
   const { t } = useTranslation('stationaer');
@@ -52,6 +52,8 @@ const StationaerFaq = () => {
 const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/inpatient' : 'https://healio.de/stationaer';
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
 
@@ -69,11 +71,11 @@ const StationaerPage = () => {
       <SEOHead
         title={tSeo('stationaer.title')}
         description={tSeo('stationaer.description')}
-        canonicalUrl="https://healio.de/stationaer"
+        canonicalUrl={canonicalUrl}
         ogTitle={tSeo('stationaer.title')}
         ogDescription={tSeo('stationaer.description')}
         ogImage="https://healio.de/og-image.png"
-        ogUrl="https://healio.de/stationaer"
+        ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
       <article>

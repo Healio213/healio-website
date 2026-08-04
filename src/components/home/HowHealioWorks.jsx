@@ -1,6 +1,10 @@
 import React from 'react';
 import { CheckCircle2, Smartphone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+
+const stepIcons = ['🧭', '🧮', '🛡️', '📱'];
+const stepTones = ['sky', 'butter', 'mint', 'lavender'];
 
 const HowHealioWorks = () => {
   const { t } = useTranslation('home');
@@ -19,9 +23,12 @@ const HowHealioWorks = () => {
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{t('process.description')}</p>
 
             <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-200 sm:grid-cols-2">
-              {steps.map((step) => (
-                <li key={step.number} className="min-h-[210px] bg-white p-6 sm:p-7">
-                  <span className="font-display text-xs font-extrabold tracking-[0.18em] text-emerald-700">{step.number}</span>
+              {steps.map((step, index) => (
+                <li key={step.number} className="min-h-[230px] bg-white p-6 sm:p-7">
+                  <div className="flex items-center justify-between gap-5">
+                    <FriendlyIcon emoji={stepIcons[index]} label={step.title} tone={stepTones[index]} size="sm" />
+                    <span className="font-display text-xs font-extrabold tracking-[0.18em] text-emerald-700">{step.number}</span>
+                  </div>
                   <h3 className="mt-7 font-display text-xl font-extrabold text-home-midnight">{step.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-600">{step.description}</p>
                 </li>

@@ -26,7 +26,7 @@ const stripLeadingArticleHeading = (html) => {
 
 const BlogArticlePage = () => {
   const { t } = useTranslation('blog');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
   const { slug } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -93,16 +93,19 @@ const BlogArticlePage = () => {
     ? [articleSchema, faqSchema]
     : articleSchema;
   const articleBodyHtml = stripLeadingArticleHeading(article.content_html);
+  const canonicalUrl = lang === 'en'
+    ? `https://healio.de/en/blog/${article.slug}`
+    : `https://healio.de/blog/${article.slug}`;
 
   return (
     <>
       <SEOHead
         title={article.title}
         description={article.meta_description}
-        canonicalUrl={`https://healio.de/blog/${article.slug}`}
+        canonicalUrl={canonicalUrl}
         ogTitle={article.title}
         ogDescription={article.meta_description}
-        ogUrl={`https://healio.de/blog/${article.slug}`}
+        ogUrl={canonicalUrl}
         ogType="article"
         schemaMarkup={combinedSchema}
       />

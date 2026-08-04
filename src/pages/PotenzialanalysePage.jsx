@@ -11,6 +11,7 @@ import { supabase } from '@/lib/customSupabaseClient';
 import { emailjsService } from '@/services/emailjsService';
 import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
+import { useLanguage } from '@/hooks/useLanguage';
 import {
   Select,
   SelectContent,
@@ -22,6 +23,8 @@ import {
 const PotenzialanalysePage = () => {
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/potential-analysis' : 'https://healio.de/potenzialanalyse';
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
@@ -142,13 +145,13 @@ const PotenzialanalysePage = () => {
       <SEOHead
         title={tSeo('potenzialanalyse.title')}
         description={tSeo('potenzialanalyse.description')}
-        canonicalUrl="https://healio.de/potenzialanalyse"
+        canonicalUrl={canonicalUrl}
         schemaMarkup={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Kostenlose Potenzialanalyse",
           "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
-          "url": "https://healio.de/potenzialanalyse",
+          "url": canonicalUrl,
           "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
         }}
       />

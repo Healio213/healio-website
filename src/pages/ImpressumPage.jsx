@@ -10,7 +10,8 @@ import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchem
 const ImpressumPage = () => {
   const { t } = useTranslation('legal');
   const { t: tSeo } = useTranslation('seo');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/legal-notice' : 'https://healio.de/impressum';
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@graph": [createOrganizationSchema(), createWebPageSchema(t('impressum.title'), tSeo('impressum.description'))]
@@ -21,7 +22,7 @@ const ImpressumPage = () => {
       <SEOHead
         title={tSeo('impressum.title')}
         description={tSeo('impressum.description')}
-        canonicalUrl="https://healio.de/impressum"
+        canonicalUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
       <main className="min-h-screen bg-gray-50 pt-28 pb-16 sm:pt-32 sm:pb-24">

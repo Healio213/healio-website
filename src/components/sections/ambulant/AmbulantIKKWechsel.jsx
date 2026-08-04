@@ -51,6 +51,46 @@ const AmbulantIKKWechsel = () => {
           </p>
         </div>
 
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 overflow-hidden rounded-[2rem] border border-[#d8d3ec] bg-[linear-gradient(135deg,#f6f2ff_0%,#fffbe8_48%,#edf9f4_100%)] shadow-[0_24px_70px_rgba(49,42,84,0.10)] md:rounded-[2.75rem]"
+        >
+          <div className="grid items-center gap-4 lg:grid-cols-[0.78fr_1.22fr]">
+            <div className="p-7 sm:p-10 lg:py-12 lg:pl-12 lg:pr-4">
+              <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-violet-700">
+                {t('ikkWechsel.advantagesEyebrow')}
+              </p>
+              <h3 className="mt-4 max-w-[14ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#1b1637] sm:text-4xl">
+                {t('ikkWechsel.advantagesTitle')}
+              </h3>
+              <ul className="mt-7 space-y-4">
+                {t('ikkWechsel.advantagesItems', { returnObjects: true }).map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-base font-semibold leading-7 text-[#4d5274]">
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/80 text-violet-700 shadow-sm ring-1 ring-violet-200">
+                      <CheckCircle className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="relative min-h-[280px] self-stretch sm:min-h-[360px] lg:min-h-[430px]">
+              <img
+                src="/images/healio-vorteile-illustration-v1.webp"
+                alt={t('ikkWechsel.advantagesImageAlt')}
+                width="1448"
+                height="1086"
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center mix-blend-multiply"
+              />
+            </div>
+          </div>
+        </motion.article>
+
         {/* Psychologische Brücke: Wechselangst abbauen */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

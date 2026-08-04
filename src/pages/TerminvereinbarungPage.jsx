@@ -2,10 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const TerminvereinbarungPage = () => {
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/appointment' : 'https://healio.de/terminvereinbarung';
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -16,6 +19,7 @@ const TerminvereinbarungPage = () => {
       <SEOHead
         title={tSeo('termin.title')}
         description={tSeo('termin.description')}
+        canonicalUrl={canonicalUrl}
       />
       
       <div className="healio-container max-w-4xl mx-auto px-4 sm:px-6">

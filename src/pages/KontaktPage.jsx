@@ -10,10 +10,13 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { emailjsService } from '@/services/emailjsService';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const KontaktPage = () => {
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/contact' : 'https://healio.de/kontakt';
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -87,7 +90,7 @@ const KontaktPage = () => {
       <SEOHead
         title={tSeo('kontakt.title')}
         description={tSeo('kontakt.description')}
-        canonicalUrl="https://healio.de/kontakt"
+        canonicalUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
 

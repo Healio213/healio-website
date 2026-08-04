@@ -568,6 +568,14 @@
     "badge": "Switching health insurance made easy",
     "title": "You stay publicly insured and unlock more bonus",
     "subtitle": "Whether you are with AOK, TK, Barmer or another statutory health insurer: you are not leaving the statutory system. You are switching to the fund that fits the Healio health budget better.",
+    "advantagesEyebrow": "Your switch advantages",
+    "advantagesTitle": "Switching is easier than you think.",
+    "advantagesItems": [
+      "Core coverage remains regulated by law",
+      "Your insurance protection continues seamlessly",
+      "Switch without paperwork"
+    ],
+    "advantagesImageAlt": "Relaxed person in a hammock with a smartphone, shield and health budget symbols",
     "reassuranceKicker": "The key reassurance",
     "reassuranceTitle": "You are not giving up your healthcare. You are only changing provider.",
     "reassuranceText": "Your statutory core coverage stays in place. Doctors, specialists, hospitals, prescriptions and ongoing treatments remain the secure foundation. The real difference is in the extras, the bonus program and how well the fund supports your health budget.",

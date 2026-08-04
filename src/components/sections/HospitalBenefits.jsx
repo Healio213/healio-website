@@ -2,22 +2,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Building2, User, Clock, Wallet, Globe, Baby, Coffee, MapPin } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const mainBenefitKeys = ['spitzenversorgung', 'privatsphaere', 'wartezeiten', 'familienfreundlich'];
 
 const featureKeys = ['einbettzimmer', 'chefarzt', 'klinikwahl', 'keineWartezeit', 'tagegeld', 'ambulanteOps', 'familienzimmer', 'vorNachStationaer'];
 
-const featureIcons = [
-  <Building2 key="building" className="w-8 h-8" />,
-  <User key="user" className="w-8 h-8" />,
-  <MapPin key="map-pin" className="w-8 h-8" />,
-  <Clock key="clock" className="w-8 h-8" />,
-  <Wallet key="wallet" className="w-8 h-8" />,
-  <Globe key="globe" className="w-8 h-8" />,
-  <Baby key="baby" className="w-8 h-8" />,
-  <Coffee key="coffee" className="w-8 h-8" />,
-];
+const mainBenefitIcons = ['🩺', '🛏️', '⏱️', '👨‍👩‍👧'];
+const featureIcons = ['🏥', '🧑‍⚕️', '🗺️', '⏱️', '💶', '🌍', '👶', '☕'];
+const featureTones = ['mint', 'lavender', 'sky', 'butter', 'butter', 'sky', 'coral', 'lavender'];
 
 const HospitalBenefits = () => {
   const { t } = useTranslation('stationaer');
@@ -49,9 +42,12 @@ const HospitalBenefits = () => {
         >
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {mainBenefitKeys.map((key, idx) => (
-              <article key={key} className="bg-[#25c990]/5 p-6 rounded-xl border border-[#25c990]/20 flex flex-col justify-center text-left">
+              <article key={key} className="bg-[#25c990]/5 p-6 rounded-2xl border border-[#25c990]/20 flex items-start gap-5 text-left">
+                <FriendlyIcon emoji={mainBenefitIcons[idx]} tone={idx % 2 ? 'lavender' : 'mint'} size="sm" />
+                <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-2">{t(`benefits.mainBenefits.${key}.title`)}</h4>
                 <p className="text-slate-600">{t(`benefits.mainBenefits.${key}.desc`)}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -67,9 +63,12 @@ const HospitalBenefits = () => {
               viewport={{ once: true }}
               className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:border-[#25c990]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-16 h-16 bg-[#25c990]/10 text-[#25c990] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-                {featureIcons[index]}
-              </div>
+              <FriendlyIcon
+                emoji={featureIcons[index]}
+                label={t(`benefits.features.${key}.title`)}
+                tone={featureTones[index]}
+                className="mb-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-2"
+              />
               <h3 className="text-lg font-bold text-slate-900 mb-3">{t(`benefits.features.${key}.title`)}</h3>
               <p className="text-slate-600 text-sm leading-relaxed">{t(`benefits.features.${key}.desc`)}</p>
             </motion.article>

@@ -1,74 +1,186 @@
 {
   "hero": {
-    "badge": "Für Zahnarztpraxen",
-    "title": "Deine Patienten scheitern nicht am Behandlungsplan. Sondern <highlight>am Eigenanteil</highlight>.",
-    "subtitle": "Healio sorgt dafür, dass mehr deiner Patienten versichert im Wartezimmer sitzen. Ohne Aufwand für dein Team, ohne Provision, berufsrechtlich sauber gestaltet.",
-    "cta": "Kennenlern-Termin vereinbaren"
+    "eyebrow": "Patientenservice für Zahnarztpraxen",
+    "title": "Damit der Eigenanteil nicht über die <highlight>Behandlung entscheidet.</highlight>",
+    "subtitle": "Healio gibt deinen Patienten eine neutrale Informationsspur zu Zahnersatz, Kassenboni und ergänzendem Schutz. Deine Praxis bleibt medizinischer Ansprechpartner – Healio übernimmt die Versicherungsberatung.",
+    "primaryCta": "Unverbindlich kennenlernen",
+    "secondaryCta": "Klare Rollen ansehen",
+    "note": "Für deine Praxis kostenfrei. Ohne Provision, Tarifempfehlung oder Übermittlung von Patientendaten durch dein Team.",
+    "visualLabel": "Schematische Darstellung eines Behandlungsplans mit neutraler Patienteninformation",
+    "plan": {
+      "kicker": "Behandlung & Kosten",
+      "title": "Der Plan ist medizinisch klar.",
+      "medicalLabel": "Versorgungsziel",
+      "medicalValue": "fachlich empfohlen",
+      "costLabel": "Offene Frage",
+      "costValue": "Eigenanteil",
+      "solutionLabel": "Information statt Empfehlung",
+      "solutionText": "Der Patient informiert sich eigenständig über mögliche Erstattungs- und Absicherungswege.",
+      "roleLabel": "Rolle der Praxis",
+      "roleValue": "Hinweis bereitstellen. Nicht beraten.",
+      "stamp": "Healio übernimmt"
+    }
   },
-  "stats": {
-    "title": "Die Ausgangslage in Zahlen",
+  "proof": {
+    "label": "Die drei Grenzen der Zusammenarbeit",
     "items": [
-      { "value": "879 €", "label": "durchschnittlicher Eigenanteil je Zahnersatz-Neuversorgung", "source": "BARMER Zahnreport" },
-      { "value": "Jeder 5.", "label": "Patient hat Behandlungen aus Kostengründen vertagt oder abgebrochen", "source": "Discover Dental Praxisreport 2025" },
-      { "value": "3 von 4", "label": "gesetzlich Versicherten haben keine Zahnzusatzversicherung", "source": "abgeleitet aus PKV-Verbandszahlen" }
+      {
+        "title": "Keine Provision",
+        "text": "Kein wirtschaftlicher Vorteil für die Praxis."
+      },
+      {
+        "title": "Keine Tarifberatung",
+        "text": "Dein Team erklärt und empfiehlt keine Versicherungsprodukte."
+      },
+      {
+        "title": "Keine Patientendaten",
+        "text": "Interessierte Patienten wenden sich selbst an Healio."
+      }
     ]
   },
-  "problem": {
-    "title": "Das Problem kennst du aus jedem Beratungsgespräch",
-    "text": "Der fachlich beste Heil- und Kostenplan hilft wenig, wenn der Eigenanteil abschreckt. Patienten entscheiden sich für die Regelversorgung, verschieben die Behandlung oder sagen ganz ab. Nicht aus medizinischen Gründen, sondern aus finanziellen."
+  "insurerHighlights": {
+    "eyebrow": "Warum der Hinweis sinnvoll ist",
+    "title": "Darüber zu informieren ist echter Patientenservice.",
+    "intro": "Es geht nicht darum, Versicherungen in deiner Praxis zu verkaufen. Es geht darum, Patienten nicht im Unwissen zu lassen: Oft gibt es Zuschuss- und Absicherungswege, die ihre Behandlungsentscheidung finanziell erleichtern können und die sie ohne einen kurzen Hinweis nie kennenlernen würden.",
+    "highlights": [
+      {
+        "kicker": "Besonders wichtig: Sofortschutz",
+        "title": "Auch wenn eine Behandlung bereits angeraten oder begonnen ist.",
+        "text": "Der Baustein ZAHN Sofort der Bayerischen kann ohne Wartezeit bis zu 1.500 EUR leisten, maximal 750 EUR je Kalenderjahr. Entscheidend: Er muss gewählt sein, bevor die Behandlung abgeschlossen oder in Rechnung gestellt ist."
+      },
+      {
+        "kicker": "Vorsorge",
+        "title": "Zahnreinigung ohne Jahreslimit",
+        "text": "Die UKV-Tarife ZahnPRIVAT 90 und 100 erstatten professionelle Zahnreinigung ohne jährliche Begrenzung."
+      },
+      {
+        "kicker": "Hochwertiger Zahnersatz",
+        "title": "Bis zu 100 % Erstattung",
+        "text": "Leistungsstarke Tarife können je nach Ausgangslage bis zu 100 % der erstattungsfähigen Kosten einschließlich der Kassenleistung absichern."
+      },
+      {
+        "kicker": "Wichtig bei Zahnlücken",
+        "metric": "Bis zu 3",
+        "title": "Bis zu 3 fehlende Zähne mitversicherbar",
+        "text": "Bei der UKV können bis zu 3 bereits fehlende, noch nicht ersetzte Zähne gegen einen festen Zuschlag mitversichert werden. Damit ist der spätere Zahnersatz zum Schließen dieser Lücken im tariflichen Umfang abgesichert. Voraussetzung: Der Lückenschluss wurde vor Abschluss noch nicht angeraten; Erstattungsstaffeln und Annahmeprüfung gelten."
+      }
+    ],
+    "teamTitle": "Ein Satz für dein Team reicht:",
+    "teamQuote": "Wenn du Unterstützung beim Eigenanteil suchst, findest du über Healio mögliche Zuschuss- und Absicherungswege. Die Beratung übernimmt Healio.",
+    "practiceNote": "Deine Praxis gibt keine Tarifempfehlung. Healio prüft Voraussetzungen, erklärt Leistungsgrenzen und übernimmt die dokumentierte Beratung.",
+    "sourceNote": "Tarifauszüge, Stand August 2026. Maßgeblich sind die jeweils gültigen Versicherungsbedingungen, Erstattungshöchstbeträge und die individuelle Annahmeentscheidung."
   },
-  "solution": {
-    "title": "Die Lösung liegt im Wartezimmer",
-    "amount": "1 Infoblatt",
-    "amountLabel": "neutral, sachlich, kostenlos",
-    "text": "Eine neutrale Patienteninformation erklärt, was Zahnersatz wirklich kostet und dass Zusatzversicherungen die Lücke schließen können. Interessierte Patienten scannen den QR-Code selbst, die unabhängige Beratung übernimmt Healio als Versicherungsmakler. Deine Praxis bleibt komplett außen vor."
+  "challenge": {
+    "eyebrow": "Die Situation",
+    "title": "Die beste Versorgung ist geplant. Dann beginnt das Gespräch über Geld.",
+    "text": "Ein fachlich überzeugender Heil- und Kostenplan kann ins Wanken geraten, sobald der Eigenanteil sichtbar wird. Patienten verschieben Entscheidungen, wählen eine einfachere Versorgung oder verlassen das Gespräch mit Unsicherheit.",
+    "closing": "Deine Praxis soll dieses Finanzierungsproblem nicht lösen müssen. Gleichzeitig kann sie eine neutrale Tür zu unabhängiger Information öffnen."
+  },
+  "bonus": {
+    "eyebrow": "Der Healio-Hebel",
+    "title": "Erst prüfen, was im System bereits vorhanden ist.",
+    "intro": "Viele Patienten kennen weder das Potenzial ihrer Kassenboni noch die Unterschiede beim ergänzenden Zahnschutz. Healio verbindet beides in einer persönlichen Prüfung – nachvollziehbar, freiwillig und passend zum aktuellen Zahnstatus.",
+    "steps": [
+      {
+        "title": "Bonuspotenzial klären",
+        "text": "Wir prüfen, welche dokumentierten Bonusmaßnahmen und Zuschusswege der jeweiligen Krankenkasse nutzbar sein können."
+      },
+      {
+        "title": "Schutz passend auswählen",
+        "text": "Gesundheitszustand, angeratene Behandlungen, Leistungswünsche und Budget bestimmen, welche Lösung überhaupt sinnvoll ist."
+      },
+      {
+        "title": "Beitrag ehrlich einordnen",
+        "text": "Wir zeigen transparent, welchen Teil eines Beitrags ein erreichbarer Kassenbonus im konkreten Fall auffangen kann."
+      }
+    ],
+    "disclaimer": "Es gibt kein pauschales Gratisversprechen. Bonus, Zuschuss und Versicherungsleistung hängen immer von persönlichen Voraussetzungen, Nachweisen sowie Kassen- und Tarifbedingungen ab."
+  },
+  "founder": {
+    "eyebrow": "Warum Healio",
+    "quote": "Medizinisch sinnvolle Versorgung sollte nicht daran scheitern, dass Menschen ihre Bonusmöglichkeiten und Absicherungswege nicht kennen.",
+    "text": "Ich habe Healio gegründet, um genau diese Lücke zu schließen. Wir wollen nicht einfach Versicherungen vermitteln. Wir wollen vorhandene Möglichkeiten verständlich machen, Patienten finanziell entlasten und Zahnärzten den Raum geben, sich auf die Behandlung zu konzentrieren.",
+    "name": "Frank Steinfurt",
+    "role": "Gründer und Geschäftsführer der Healio GmbH",
+    "imageAlt": "Frank Steinfurt, Gründer und Geschäftsführer von Healio"
   },
   "legal": {
-    "title": "Berufsrechtlich sauber, von Anfang an",
-    "subtitle": "Wir haben die Kooperation entlang der Berufsordnung gebaut, damit deine Praxis auf der sicheren Seite ist.",
+    "eyebrow": "Klare Zuständigkeiten",
+    "title": "Vertrauen entsteht durch saubere Grenzen.",
+    "intro": "Die Zusammenarbeit ist bewusst zurückhaltend angelegt. Deine Praxis informiert weder über konkrete Tarife noch wirkt sie am Abschluss mit. Healio übernimmt den vollständigen Vermittlungs- und Beratungsprozess gegenüber dem interessierten Patienten.",
     "items": [
-      { "title": "Keine Provision, keine Vorteile", "text": "Deine Praxis erhält bewusst keinerlei Vergütung. Die einzige Leistung ist kostenloses, neutrales Informationsmaterial für deine Patienten." },
-      { "title": "Sachliche Information statt Werbung", "text": "Das Material ist als neutrale Patienteninformation gestaltet, nicht als Werbeflyer. Es wird ausgelegt, nicht aktiv ausgehändigt." },
-      { "title": "Du empfiehlst nichts", "text": "Patienten informieren sich selbst und scannen den QR-Code eigenständig. Deine Praxis vermittelt keine Versicherung und berät nicht zu Tarifen." },
-      { "title": "Leitfaden für dein Team", "text": "Du erhältst eine Ein-Seiten-Übersicht, was dein Team sagen darf und was nicht. Damit ist jede Kollegin am Empfang auf der sicheren Seite." }
+      {
+        "title": "Unentgeltliche Zusammenarbeit",
+        "text": "Deine Praxis erhält keine Provision, Prämie oder sonstige Gegenleistung für Kontakte oder Abschlüsse."
+      },
+      {
+        "title": "Neutrales Informationsmaterial",
+        "text": "Die Patienteninformation erklärt sachlich Kosten- und Absicherungswege. Das Material nennt keine Produktempfehlung und fordert nicht zum Abschluss auf."
+      },
+      {
+        "title": "Keine Beratung durch das Team",
+        "text": "Bei Versicherungsfragen verweist dein Praxisteam ausschließlich auf Healio. Produktauswahl, Dokumentation und Beratung erfolgen dort."
+      },
+      {
+        "title": "Direkter Kontakt des Patienten",
+        "text": "Deine Praxis erhebt oder übermittelt keine Daten. Der Patient scannt den QR-Code selbst und entscheidet eigenständig über die Kontaktaufnahme."
+      }
     ],
-    "disclaimer": "Hinweis: Keine Rechtsberatung. Das Material orientiert sich am Gebot sachlicher Information der Berufsordnung; maßgeblich ist die Berufsordnung deiner Landeszahnärztekammer."
+    "closingTitle": "Deine Praxis bleibt medizinischer Ansprechpartner. Healio bleibt Versicherungsvermittler.",
+    "closingText": "Für einen regionalen Rollout wird das konkrete Material vorab an der Berufsordnung der zuständigen Landeszahnärztekammer gespiegelt. Damit wird nicht mit pauschalen Rechtsversprechen gearbeitet, sondern mit einem nachvollziehbaren Prüfprozess.",
+    "disclaimer": "Hinweis: Diese Darstellung ist keine Rechtsberatung. Maßgeblich sind die Berufsordnung der jeweiligen Landeszahnärztekammer, die konkrete Gestaltung und die tatsächliche Handhabung in der Praxis."
   },
-  "benefits": {
-    "title": "Was deine Praxis davon hat",
+  "package": {
+    "eyebrow": "Das Praxis-Set",
+    "title": "Wenig Material. Klare Funktion.",
+    "intro": "Deine Praxis erhält genau die Unterlagen, die für einen zurückhaltenden Patientenservice nötig sind – ohne Schulungsprogramm und ohne Verkaufsprozess am Empfang.",
     "items": [
-      { "title": "Höhere Behandlungsakzeptanz", "text": "Versicherte Patienten entscheiden sich leichter für die hochwertige Versorgung statt für die Regelversorgung. Der Großteil des Zahnersatz-Volumens liegt heute schon über der Regelversorgung, wenn Patienten es sich leisten können." },
-      { "title": "Weniger Kostendiskussionen", "text": "Je mehr Patienten abgesichert sind, desto seltener scheitern Behandlungspläne und Zahlungen am Eigenanteil." },
-      { "title": "Ein echtes Service-Plus", "text": "Auch für Patienten, bei denen bereits eine Behandlung angeraten ist, gibt es Versicherungslösungen. Diese Information steht auf dem Infoblatt, nicht in deinem Beratungsgespräch." }
-    ]
-  },
-  "moral": {
-    "title": "Mal ehrlich: Deine Patienten geben dir ihr Vertrauen. Und ihr Geld.",
-    "text1": "Wenn du weißt, dass es ein System gibt, das deinen Patienten tausende Euro Eigenanteil ersparen kann, dann ist es das Mindeste, ihnen die Tür dorthin zu öffnen. Mehr als die Tür öffnen musst du nicht: Das Infoblatt liegt aus, den Rest machen deine Patienten selbst.",
-    "text2": "Dreh es einmal um: Dein eigener Behandler wüsste von so einer Möglichkeit und sagt dir nichts. Du wärst sauer, zu Recht. Vielleicht kämst du nicht wieder, denn wer Wissen zurückhält, das spürbar hilft, verspielt Vertrauen.",
-    "text3": "Der Aufwand ist minimal, der Mehrwert für deine Patienten riesig. Da darf sich jeder an die eigene Nase fassen und sich fragen: Gebe ich meinen wertvollen Patienten genug zurück?"
-  },
-  "steps": {
-    "title": "So einfach läuft es ab",
-    "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "15 Minuten per Telefon oder Videocall, deutschlandweit. Wir zeigen dir das Material und beantworten alle Fragen.",
-    "step2Title": "Du erhältst das Praxis-Set",
-    "step2Desc": "Neutrale Patienteninformation, Beileger für die HKP-Mappe und der Leitfaden für dein Team. Kostenlos, inklusive Nachbestellung.",
-    "step3Title": "Auslegen, fertig",
-    "step3Desc": "Deine Patienten informieren sich selbst per QR-Code. Die unabhängige Beratung und alles Weitere übernimmt Healio.",
-    "easeNote": "Dein Aufwand ab dem ersten Tag: das Infoblatt liegt aus. Mehr nicht."
+      {
+        "title": "Neutrale Patienteninformation",
+        "text": "Eine sachliche Übersicht zu Eigenanteilen, Kassenleistungen und möglichen ergänzenden Absicherungswegen."
+      },
+      {
+        "title": "Ein-Seiten-Leitfaden",
+        "text": "Klare Formulierungen für Rückfragen und ebenso klare Grenzen dessen, was das Praxisteam nicht übernimmt."
+      },
+      {
+        "title": "Praxisbezogener QR-Code",
+        "text": "Der Patient gelangt direkt zu Healio. Deine Praxis erhält auf Wunsch nur zusammengefasste Nutzungszahlen, niemals Namen oder Gesundheitsdaten."
+      }
+    ],
+    "note": "Platzierung und Form des Materials werden im Pilot mit der zuständigen Kammer abgestimmt. Werbliche Großaufsteller oder aktive Tarifansprache sind nicht Bestandteil des Modells."
   },
   "faq": {
-    "title": "Häufige Fragen",
+    "eyebrow": "Kurz beantwortet",
+    "title": "Fragen aus dem Praxisalltag",
+    "intro": "Die wichtigsten Punkte für Praxisinhaber und Praxismanagement auf einen Blick.",
     "items": [
-      { "q": "Was kostet die Kooperation?", "a": "Nichts. Es gibt keine Gebühren, keine Mindestlaufzeit und keine Verpflichtungen. Die Kooperation ist jederzeit beendbar." },
-      { "q": "Erhält meine Praxis eine Provision?", "a": "Nein, bewusst nicht. Das Berufsrecht untersagt Vorteile für Empfehlungen, und genau deshalb ist unser Modell so gebaut, dass deine Praxis nichts erhält außer dem kostenlosen Informationsmaterial. Das schützt dich." },
-      { "q": "Muss mein Team Versicherungen erklären?", "a": "Nein, im Gegenteil: Dein Team soll gerade nicht zu Tarifen beraten. Bei Patientenfragen genügt der Hinweis auf das Infoblatt. Die Beratung übernimmt Healio als unabhängiger Versicherungsmakler." },
-      { "q": "Mit welchen Versicherern arbeitet Healio?", "a": "Healio ist unabhängiger Versicherungsmakler und arbeitet im Zahnbereich unter anderem mit der Bayerischen und der UKV. Zusätzlich informieren wir Patienten über Bonusprogramme der gesetzlichen Kassen, die den Beitrag mitfinanzieren können." }
+      {
+        "q": "Was kostet die Zusammenarbeit für meine Praxis?",
+        "a": "Das Kennenlernen und das abgestimmte Informationsmaterial sind für deine Praxis kostenfrei. Es gibt keine Mindestlaufzeit und keine Vergütung für Empfehlungen."
+      },
+      {
+        "q": "Soll mein Team Patienten aktiv auf eine Versicherung ansprechen?",
+        "a": "Nein. Das Modell setzt auf sachliche, passive Information. Dein Team empfiehlt weder einen Tarif noch drängt es zur Kontaktaufnahme. Bei Rückfragen verweist es ausschließlich auf Healio."
+      },
+      {
+        "q": "Kann ein Kassenbonus den Versicherungsbeitrag vollständig ausgleichen?",
+        "a": "Das kann in einzelnen Konstellationen möglich sein, ist aber keine pauschale Zusage. Entscheidend sind Krankenkasse, erreichte Bonusmaßnahmen, nachgewiesene Kosten, Tarif und Beitrag. Healio rechnet das individuell und transparent vor."
+      },
+      {
+        "q": "Was geschieht mit Patientendaten?",
+        "a": "Deine Praxis erhebt und übermittelt keine Daten an Healio. Erst wenn ein Patient selbst Kontakt aufnimmt, verarbeitet Healio die dafür erforderlichen Angaben im eigenen Verantwortungsbereich."
+      },
+      {
+        "q": "Ist das Modell in jedem Kammerbezirk identisch einsetzbar?",
+        "a": "Die Musterberufsordnung ist nur der Ausgangspunkt; verbindlich ist die jeweilige Landesberufsordnung. Deshalb gehört die Prüfung des konkreten Materials mit der zuständigen Kammer zum regionalen Pilotprozess."
+      }
     ]
   },
   "cta": {
-    "title": "Lernen wir uns kennen.",
-    "subtitle": "15 Minuten genügen. Telefon oder Videocall, deutschlandweit. Oder ruf direkt an: 040 89755705."
+    "eyebrow": "30 Minuten kennenlernen",
+    "title": "Passt dieser Patientenservice zu deiner Praxis?",
+    "subtitle": "Wir zeigen dir Material, Ablauf und klare Zuständigkeiten. Danach entscheidest du in Ruhe, ob ein gemeinsamer Pilot sinnvoll ist.",
+    "calendarTitle": "Kennenlerntermin für Zahnarztpraxen buchen"
   }
 }

@@ -5,21 +5,14 @@ import { Link } from 'react-router-dom';
 import {
   Shield,
   Stethoscope,
-  Calculator,
   Clock,
   TrendingDown,
-  Lock,
   Briefcase,
   CheckCircle2,
   Sparkles,
   Users,
   ChevronDown,
   FileCheck,
-  Activity,
-  Scale,
-  Heart,
-  PiggyBank,
-  HeartPulse,
   HeartHandshake,
   BadgeCheck,
   KeyRound
@@ -27,6 +20,7 @@ import {
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 // Reusable Eyebrow-Pill für alle Sektionen
@@ -48,15 +42,25 @@ const SectionDivider = ({ variant = 'light' }) => {
   return <div className={`w-20 h-1 bg-gradient-to-r ${color} rounded-full mx-auto mb-5`} />;
 };
 
-const pillarIcons = [
-  [Shield, Clock, Lock, Scale],
-  [Activity, PiggyBank, HeartPulse, Heart]
+const pillarFriendlyIcons = [
+  [
+    { emoji: '🛡️', tone: 'mint' },
+    { emoji: '⏱️', tone: 'butter' },
+    { emoji: '🔒', tone: 'lavender' },
+    { emoji: '⚖️', tone: 'sky' },
+  ],
+  [
+    { emoji: '🏃', tone: 'sky' },
+    { emoji: '🪙', tone: 'butter' },
+    { emoji: '❤️‍🩹', tone: 'coral' },
+    { emoji: '💚', tone: 'mint' },
+  ],
 ];
 
-const mehrwertIcons = {
-  TrendingDown,
-  Shield,
-  Calculator
+const mehrwertFriendlyIcons = {
+  TrendingDown: { emoji: '📉', tone: 'sky' },
+  Shield: { emoji: '🛡️', tone: 'mint' },
+  Calculator: { emoji: '🧮', tone: 'butter' },
 };
 
 const HeilberufeVorsorgePage = () => {
@@ -349,15 +353,19 @@ const HeilberufeVorsorgePage = () => {
                     {/* Bausteine */}
                     <div className="p-6 md:p-7 grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 bg-slate-50/40">
                       {pillar.blocks.map((block, bIdx) => {
-                        const Icon = pillarIcons[pIdx][bIdx];
+                        const friendlyIcon = pillarFriendlyIcons[pIdx][bIdx];
                         return (
                           <div
                             key={bIdx}
                             className={`group bg-white rounded-xl p-5 border border-slate-200 transition-all ${colorScheme.cardHover} hover:shadow-md hover:-translate-y-0.5`}
                           >
-                            <div className={`w-10 h-10 rounded-lg ${colorScheme.cardIconBg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                              <Icon className={`w-5 h-5 ${colorScheme.cardIconColor}`} />
-                            </div>
+                            <FriendlyIcon
+                              emoji={friendlyIcon.emoji}
+                              label={block.title}
+                              tone={friendlyIcon.tone}
+                              size="sm"
+                              className="mb-3 transition-transform group-hover:-translate-y-1 group-hover:rotate-2"
+                            />
                             <h4 className="text-base font-semibold text-slate-900 mb-2">
                               {block.title}
                             </h4>
@@ -401,7 +409,7 @@ const HeilberufeVorsorgePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {mehrwertColumns.map((col, i) => {
-                const Icon = mehrwertIcons[col.icon] || CheckCircle2;
+                const friendlyIcon = mehrwertFriendlyIcons[col.icon] || { emoji: '✅', tone: 'mint' };
                 return (
                   <motion.div
                     key={i}
@@ -412,9 +420,7 @@ const HeilberufeVorsorgePage = () => {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-14 h-14 shrink-0 rounded-2xl bg-gradient-to-br from-[#25c990]/30 to-[#25c990]/10 ring-1 ring-[#25c990]/40 flex items-center justify-center">
-                        <Icon className="w-7 h-7 text-[#25c990]" />
-                      </div>
+                      <FriendlyIcon emoji={friendlyIcon.emoji} label={col.title} tone={friendlyIcon.tone} />
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-wider text-white/60">
                           {col.title}

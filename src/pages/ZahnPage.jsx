@@ -18,10 +18,13 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const ZahnPage = () => {
   const { t } = useTranslation('zahn');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/dental' : 'https://healio.de/zahn';
 
   const schemaMarkup = createServiceSchema();
 
@@ -46,11 +49,11 @@ const ZahnPage = () => {
       <SEOHead
         title={tSeo('zahn.title')}
         description={tSeo('zahn.description')}
-        canonicalUrl="https://healio.de/zahn"
+        canonicalUrl={canonicalUrl}
         ogTitle={tSeo('zahn.title')}
         ogDescription={tSeo('zahn.description')}
         ogImage="https://healio.de/og-image.png"
-        ogUrl="https://healio.de/zahn"
+        ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
       <article>

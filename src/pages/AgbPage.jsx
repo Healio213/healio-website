@@ -8,7 +8,8 @@ import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchem
 const AgbPage = () => {
   const { t } = useTranslation('legal');
   const { t: tSeo } = useTranslation('seo');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/terms' : 'https://healio.de/agb';
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@graph": [
@@ -22,10 +23,10 @@ const AgbPage = () => {
       <SEOHead
         title={tSeo('agb.title')}
         description={tSeo('agb.description')}
-        canonicalUrl="https://healio.de/agb"
+        canonicalUrl={canonicalUrl}
         ogTitle="Allgemeine Geschäftsbedingungen - Healio"
         ogDescription="Allgemeine Geschäftsbedingungen (AGB) für Versicherungsmakler der Healio GmbH."
-        ogUrl="https://healio.de/agb"
+        ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
       <main className="bg-white pt-28 pb-16 sm:pt-32 sm:pb-24">

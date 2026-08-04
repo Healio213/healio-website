@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, AlertCircle, Smile, Leaf, HeartHandshake as Handshake, Package, TrendingUp, Stethoscope, Brain, Flower2, Activity, Glasses, Baby, Heart, Shield } from 'lucide-react';
+import { PlayCircle, AlertCircle, Stethoscope, Glasses, Heart, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -10,6 +10,7 @@ import PartnerTrustBar from '@/components/sections/partner/PartnerTrustBar';
 import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const PartnerPage = () => {
   const { t, i18n } = useTranslation('partner');
@@ -130,12 +131,12 @@ const PartnerPage = () => {
   };
 
   const partnerTypes = [
-    { icon: Stethoscope, title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
-    { icon: Activity, title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
-    { icon: Flower2, title: t('partners.tcm'), text: t('partners.tcmDesc') },
-    { icon: Brain, title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
-    { icon: Glasses, title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
-    { icon: Baby, title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
+    { emoji: '🌿', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
+    { emoji: '🙌', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
+    { emoji: '🌸', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
+    { emoji: '🧠', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
+    { emoji: '👓', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
+    { emoji: '🤱', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
   ];
 
   return (
@@ -411,7 +412,6 @@ const PartnerPage = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
               {partnerTypes.map((item, index) => {
-                const Icon = item.icon;
                 return (
                   <motion.div
                     key={index}
@@ -421,9 +421,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                     className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-5 text-[#25c990]">
-                      <Icon className="w-7 h-7" />
-                    </div>
+                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>
@@ -450,25 +448,27 @@ const PartnerPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
               {[
                 {
-                  icon: Handshake,
+                  emoji: '🤝',
+                  tone: 'mint',
                   title: t('steps.step1Title'),
                   text: t('steps.step1Desc'),
                   step: '1'
                 },
                 {
-                  icon: Package,
+                  emoji: '📦',
+                  tone: 'butter',
                   title: t('steps.step2Title'),
                   text: t('steps.step2Desc'),
                   step: '2'
                 },
                 {
-                  icon: TrendingUp,
+                  emoji: '📈',
+                  tone: 'sky',
                   title: t('steps.step3Title'),
                   text: t('steps.step3Desc'),
                   step: '3'
                 }
               ].map((item, index) => {
-                const Icon = item.icon;
                 return (
                 <motion.div
                   key={index}
@@ -481,9 +481,7 @@ const PartnerPage = () => {
                   <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-[#25c990] text-white flex items-center justify-center font-bold text-sm shadow-md">
                     {item.step}
                   </div>
-                  <div className="w-16 h-16 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-6 text-[#25c990]">
-                    <Icon className="w-8 h-8" />
-                  </div>
+                  <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-6" />
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">{item.title}</h3>
                   <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.div>
@@ -493,11 +491,10 @@ const PartnerPage = () => {
             {/* Benefits below steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
               {[
-                { icon: Smile, title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
-                { icon: Leaf, title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
-                { icon: Shield, title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
+                { emoji: '😊', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
+                { emoji: '🌱', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
+                { emoji: '🛡️', tone: 'lavender', title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
               ].map((item, index) => {
-                const Icon = item.icon;
                 return (
                   <motion.div
                     key={index}
@@ -507,9 +504,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="flex flex-col items-center text-center p-6"
                   >
-                    <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4 text-[#25c990]">
-                      <Icon className="w-6 h-6" />
-                    </div>
+                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>

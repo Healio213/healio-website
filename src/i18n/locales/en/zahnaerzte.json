@@ -1,119 +1,186 @@
 {
   "hero": {
-    "badge": "Für Zahnarztpraxen",
-    "title": "Deine Patienten scheitern nicht am Behandlungsplan. Sondern <highlight>am Eigenanteil</highlight>.",
-    "subtitle": "Healio sorgt dafür, dass mehr deiner Patienten versichert im Wartezimmer sitzen. Ohne Aufwand für dein Team, ohne Provision, berufsrechtlich sauber gestaltet.",
-    "cta": "Kennenlern-Termin vereinbaren"
+    "eyebrow": "Patient service for dental practices",
+    "title": "So the out-of-pocket cost does not decide the <highlight>treatment.</highlight>",
+    "subtitle": "Healio gives your patients a neutral path to information about dental treatment costs, health fund bonuses and supplementary cover. Your practice remains the medical point of contact — Healio handles the insurance advice.",
+    "primaryCta": "Get to know us",
+    "secondaryCta": "See the clear boundaries",
+    "note": "Free for your practice. No commission, product recommendation or transfer of patient data by your team.",
+    "visualLabel": "Schematic treatment plan with neutral patient information",
+    "plan": {
+      "kicker": "Treatment & costs",
+      "title": "The medical plan is clear.",
+      "medicalLabel": "Treatment goal",
+      "medicalValue": "medically recommended",
+      "costLabel": "Open question",
+      "costValue": "Patient share",
+      "solutionLabel": "Information, not recommendation",
+      "solutionText": "Patients independently learn about possible reimbursement and protection routes.",
+      "roleLabel": "Practice role",
+      "roleValue": "Provide information. Do not advise.",
+      "stamp": "Healio takes over"
+    }
   },
-  "stats": {
-    "title": "Die Ausgangslage in Zahlen",
+  "proof": {
+    "label": "The three boundaries of the partnership",
     "items": [
       {
-        "value": "879 €",
-        "label": "durchschnittlicher Eigenanteil je Zahnersatz-Neuversorgung",
-        "source": "BARMER Zahnreport"
+        "title": "No commission",
+        "text": "No financial benefit for the practice."
       },
       {
-        "value": "Jeder 5.",
-        "label": "Patient hat Behandlungen aus Kostengründen vertagt oder abgebrochen",
-        "source": "Discover Dental Praxisreport 2025"
+        "title": "No product advice",
+        "text": "Your team does not explain or recommend insurance products."
       },
       {
-        "value": "3 von 4",
-        "label": "gesetzlich Versicherten haben keine Zahnzusatzversicherung",
-        "source": "abgeleitet aus PKV-Verbandszahlen"
+        "title": "No patient data",
+        "text": "Interested patients contact Healio themselves."
       }
     ]
   },
-  "problem": {
-    "title": "Das Problem kennst du aus jedem Beratungsgespräch",
-    "text": "Der fachlich beste Heil- und Kostenplan hilft wenig, wenn der Eigenanteil abschreckt. Patienten entscheiden sich für die Regelversorgung, verschieben die Behandlung oder sagen ganz ab. Nicht aus medizinischen Gründen, sondern aus finanziellen."
-  },
-  "solution": {
-    "title": "Die Lösung liegt im Wartezimmer",
-    "amount": "1 Infoblatt",
-    "amountLabel": "neutral, sachlich, kostenlos",
-    "text": "Eine neutrale Patienteninformation erklärt, was Zahnersatz wirklich kostet und dass Zusatzversicherungen die Lücke schließen können. Interessierte Patienten scannen den QR-Code selbst, die unabhängige Beratung übernimmt Healio als Versicherungsmakler. Deine Praxis bleibt komplett außen vor."
-  },
-  "legal": {
-    "title": "Berufsrechtlich sauber, von Anfang an",
-    "subtitle": "Wir haben die Kooperation entlang der Berufsordnung gebaut, damit deine Praxis auf der sicheren Seite ist.",
-    "items": [
+  "insurerHighlights": {
+    "eyebrow": "Why the referral matters",
+    "title": "Providing this information is genuine patient service.",
+    "intro": "This is not about selling insurance in your practice. It is about not leaving patients unaware: subsidy and protection routes may make a treatment decision financially easier, yet many patients would never discover them without a brief referral.",
+    "highlights": [
       {
-        "title": "Keine Provision, keine Vorteile",
-        "text": "Deine Praxis erhält bewusst keinerlei Vergütung. Die einzige Leistung ist kostenloses, neutrales Informationsmaterial für deine Patienten."
+        "kicker": "Most important: immediate cover",
+        "title": "Even when treatment has already been advised or started.",
+        "text": "The Bayerische ZAHN Sofort component can pay up to 1,500 EUR without a waiting period, capped at 750 EUR per calendar year. It must be selected before treatment is completed or invoiced."
       },
       {
-        "title": "Sachliche Information statt Werbung",
-        "text": "Das Material ist als neutrale Patienteninformation gestaltet, nicht als Werbeflyer. Es wird ausgelegt, nicht aktiv ausgehändigt."
+        "kicker": "Prevention",
+        "title": "Dental cleaning without an annual limit",
+        "text": "UKV ZahnPRIVAT 90 and 100 reimburse professional dental cleaning without an annual limit."
       },
       {
-        "title": "Du empfiehlst nichts",
-        "text": "Patienten informieren sich selbst und scannen den QR-Code eigenständig. Deine Praxis vermittelt keine Versicherung und berät nicht zu Tarifen."
+        "kicker": "High-quality dental restoration",
+        "title": "Up to 100% reimbursement",
+        "text": "Depending on the starting position, strong plans may cover up to 100% of eligible costs including statutory health insurance benefits."
       },
       {
-        "title": "Leitfaden für dein Team",
-        "text": "Du erhältst eine Ein-Seiten-Übersicht, was dein Team sagen darf und was nicht. Damit ist jede Kollegin am Empfang auf der sicheren Seite."
+        "kicker": "Important for dental gaps",
+        "metric": "Up to 3",
+        "title": "Up to 3 missing teeth can be insured",
+        "text": "With UKV, up to 3 existing, unreplaced missing teeth can be included for a fixed surcharge. Future dental restoration used to close those gaps can then be covered within the policy terms. The gap closure must not have been advised before purchase; reimbursement schedules and underwriting still apply."
       }
     ],
-    "disclaimer": "Hinweis: Keine Rechtsberatung. Das Material orientiert sich am Gebot sachlicher Information der Berufsordnung; maßgeblich ist die Berufsordnung deiner Landeszahnärztekammer."
+    "teamTitle": "One sentence for your team is enough:",
+    "teamQuote": "If you would like help with your patient share, Healio shows you possible subsidy and protection routes. Healio provides the advice.",
+    "practiceNote": "Your practice does not recommend a plan. Healio checks eligibility, explains benefit limits and provides the documented advice.",
+    "sourceNote": "Policy extracts as of August 2026. The current policy terms, reimbursement limits and individual underwriting decision apply."
   },
-  "benefits": {
-    "title": "Was deine Praxis davon hat",
+  "challenge": {
+    "eyebrow": "The situation",
+    "title": "The best treatment is planned. Then the conversation turns to money.",
+    "text": "A convincing treatment and cost plan can falter once the patient share becomes visible. Patients delay decisions, choose a simpler treatment or leave the conversation uncertain.",
+    "closing": "Your practice should not have to solve this financial question. It can, however, open a neutral door to independent information."
+  },
+  "bonus": {
+    "eyebrow": "The Healio lever",
+    "title": "First check what is already available in the system.",
+    "intro": "Many patients know neither the potential of their health fund bonuses nor the differences between supplementary dental plans. Healio brings both into a personal review — transparent, voluntary and appropriate to the current dental status.",
+    "steps": [
+      {
+        "title": "Clarify bonus potential",
+        "text": "We check which documented bonus activities and reimbursement routes of the relevant health fund may be available."
+      },
+      {
+        "title": "Select suitable protection",
+        "text": "Health status, advised treatment, benefit preferences and budget determine which solution is appropriate at all."
+      },
+      {
+        "title": "Put the premium in context",
+        "text": "We show transparently which portion of a premium an attainable health fund bonus may cover in the individual case."
+      }
+    ],
+    "disclaimer": "There is no blanket promise of free cover. Bonuses, subsidies and insurance benefits always depend on personal circumstances, evidence and the applicable fund and policy terms."
+  },
+  "founder": {
+    "eyebrow": "Why Healio",
+    "quote": "Medically appropriate care should not fail because people do not know their bonus options and protection routes.",
+    "text": "I founded Healio to close precisely that gap. We do not merely want to broker insurance. We want to make existing options understandable, provide patients with financial relief and give dentists the space to focus on treatment.",
+    "name": "Frank Steinfurt",
+    "role": "Founder and Managing Director of Healio GmbH",
+    "imageAlt": "Frank Steinfurt, founder and managing director of Healio"
+  },
+  "legal": {
+    "eyebrow": "Clear responsibilities",
+    "title": "Trust grows from clear boundaries.",
+    "intro": "The partnership is deliberately restrained. Your practice neither provides information on specific plans nor participates in a purchase. Healio handles the full brokerage and advisory process with interested patients.",
     "items": [
       {
-        "title": "Höhere Behandlungsakzeptanz",
-        "text": "Versicherte Patienten entscheiden sich leichter für die hochwertige Versorgung statt für die Regelversorgung. Der Großteil des Zahnersatz-Volumens liegt heute schon über der Regelversorgung, wenn Patienten es sich leisten können."
+        "title": "Unpaid partnership",
+        "text": "The practice receives no commission, reward or other benefit for contacts or purchases."
       },
       {
-        "title": "Weniger Kostendiskussionen",
-        "text": "Je mehr Patienten abgesichert sind, desto seltener scheitern Behandlungspläne und Zahlungen am Eigenanteil."
+        "title": "Neutral information material",
+        "text": "The patient information explains cost and protection routes objectively. It recommends no product and does not call for a purchase."
       },
       {
-        "title": "Ein echtes Service-Plus",
-        "text": "Auch für Patienten, bei denen bereits eine Behandlung angeraten ist, gibt es Versicherungslösungen. Diese Information steht auf dem Infoblatt, nicht in deinem Beratungsgespräch."
+        "title": "No advice by the team",
+        "text": "For insurance questions, the practice team refers patients exclusively to Healio. Product selection, documentation and advice take place there."
+      },
+      {
+        "title": "Direct patient contact",
+        "text": "The practice collects or transfers no data. Patients scan the QR code themselves and independently choose whether to get in touch."
       }
-    ]
+    ],
+    "closingTitle": "Your practice remains the medical point of contact. Healio remains the insurance broker.",
+    "closingText": "For a regional rollout, the actual material is reviewed against the professional rules of the relevant regional dental chamber. This replaces blanket legal promises with a documented review process.",
+    "disclaimer": "Note: This presentation does not constitute legal advice. The applicable regional professional rules, the actual design and the way the material is used in the practice are decisive."
   },
-  "moral": {
-    "title": "Mal ehrlich: Deine Patienten geben dir ihr Vertrauen. Und ihr Geld.",
-    "text1": "Wenn du weißt, dass es ein System gibt, das deinen Patienten tausende Euro Eigenanteil ersparen kann, dann ist es das Mindeste, ihnen die Tür dorthin zu öffnen. Mehr als die Tür öffnen musst du nicht: Das Infoblatt liegt aus, den Rest machen deine Patienten selbst.",
-    "text2": "Dreh es einmal um: Dein eigener Behandler wüsste von so einer Möglichkeit und sagt dir nichts. Du wärst sauer, zu Recht. Vielleicht kämst du nicht wieder, denn wer Wissen zurückhält, das spürbar hilft, verspielt Vertrauen.",
-    "text3": "Der Aufwand ist minimal, der Mehrwert für deine Patienten riesig. Da darf sich jeder an die eigene Nase fassen und sich fragen: Gebe ich meinen wertvollen Patienten genug zurück?"
-  },
-  "steps": {
-    "title": "So einfach läuft es ab",
-    "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "15 Minuten per Telefon oder Videocall, deutschlandweit. Wir zeigen dir das Material und beantworten alle Fragen.",
-    "step2Title": "Du erhältst das Praxis-Set",
-    "step2Desc": "Neutrale Patienteninformation, Beileger für die HKP-Mappe und der Leitfaden für dein Team. Kostenlos, inklusive Nachbestellung.",
-    "step3Title": "Auslegen, fertig",
-    "step3Desc": "Deine Patienten informieren sich selbst per QR-Code. Die unabhängige Beratung und alles Weitere übernimmt Healio.",
-    "easeNote": "Dein Aufwand ab dem ersten Tag: das Infoblatt liegt aus. Mehr nicht."
+  "package": {
+    "eyebrow": "The practice set",
+    "title": "Little material. One clear function.",
+    "intro": "Your practice receives exactly what is needed for a restrained patient service — without a training programme or a sales process at reception.",
+    "items": [
+      {
+        "title": "Neutral patient information",
+        "text": "An objective overview of patient shares, statutory benefits and possible supplementary protection routes."
+      },
+      {
+        "title": "One-page team guide",
+        "text": "Clear wording for patient questions and equally clear boundaries around what the practice team does not provide."
+      },
+      {
+        "title": "Practice-specific QR code",
+        "text": "Patients go directly to Healio. On request, the practice receives aggregate usage figures only, never names or health data."
+      }
+    ],
+    "note": "The placement and format of the material are coordinated with the relevant chamber during the pilot. Large promotional displays and active product pitches are not part of the model."
   },
   "faq": {
-    "title": "Häufige Fragen",
+    "eyebrow": "In brief",
+    "title": "Questions from everyday practice",
+    "intro": "The most important points for practice owners and practice management at a glance.",
     "items": [
       {
-        "q": "Was kostet die Kooperation?",
-        "a": "Nichts. Es gibt keine Gebühren, keine Mindestlaufzeit und keine Verpflichtungen. Die Kooperation ist jederzeit beendbar."
+        "q": "What does the partnership cost our practice?",
+        "a": "The introductory meeting and coordinated information material are free for your practice. There is no minimum term and no compensation for recommendations."
       },
       {
-        "q": "Erhält meine Praxis eine Provision?",
-        "a": "Nein, bewusst nicht. Das Berufsrecht untersagt Vorteile für Empfehlungen, und genau deshalb ist unser Modell so gebaut, dass deine Praxis nichts erhält außer dem kostenlosen Informationsmaterial. Das schützt dich."
+        "q": "Should our team actively approach patients about insurance?",
+        "a": "No. The model uses objective, passive information. Your team neither recommends a plan nor presses patients to make contact. It refers insurance questions exclusively to Healio."
       },
       {
-        "q": "Muss mein Team Versicherungen erklären?",
-        "a": "Nein, im Gegenteil: Dein Team soll gerade nicht zu Tarifen beraten. Bei Patientenfragen genügt der Hinweis auf das Infoblatt. Die Beratung übernimmt Healio als unabhängiger Versicherungsmakler."
+        "q": "Can a health fund bonus cover the full insurance premium?",
+        "a": "This may be possible in individual situations, but it is not a blanket promise. The health fund, completed bonus activities, evidenced costs, policy and premium are decisive. Healio provides an individual and transparent calculation."
       },
       {
-        "q": "Mit welchen Versicherern arbeitet Healio?",
-        "a": "Healio ist unabhängiger Versicherungsmakler und arbeitet im Zahnbereich unter anderem mit der Bayerischen und der UKV. Zusätzlich informieren wir Patienten über Bonusprogramme der gesetzlichen Kassen, die den Beitrag mitfinanzieren können."
+        "q": "What happens to patient data?",
+        "a": "Your practice neither collects nor transfers data to Healio. Only when a patient contacts Healio independently does Healio process the information required within its own area of responsibility."
+      },
+      {
+        "q": "Can the model be used identically in every chamber district?",
+        "a": "The model professional code is only a starting point; the relevant regional professional rules are binding. Reviewing the actual material with the relevant chamber is therefore part of the regional pilot process."
       }
     ]
   },
   "cta": {
-    "title": "Lernen wir uns kennen.",
-    "subtitle": "15 Minuten genügen. Telefon oder Videocall, deutschlandweit. Oder ruf direkt an: 040 89755705."
+    "eyebrow": "A 30-minute introduction",
+    "title": "Does this patient service fit your practice?",
+    "subtitle": "We show you the material, the process and the clear responsibilities. You then decide at your own pace whether a joint pilot makes sense.",
+    "calendarTitle": "Book an introductory meeting for dental practices"
   }
 }

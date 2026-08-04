@@ -2,15 +2,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Wallet, HeartHandshake, Scale, MessageCircle, FileText, QrCode, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
+import { Shield, Wallet, HeartHandshake, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/midwives' : 'https://healio.de/hebammen';
 
   const scrollToCalendly = () => {
     document.getElementById('calendly-hebammen')?.scrollIntoView({ behavior: 'smooth' });
@@ -26,7 +30,7 @@ const HebammenPage = () => {
       <SEOHead
         title={tSeo('hebammen.title')}
         description={tSeo('hebammen.description')}
-        canonicalUrl="https://healio.de/hebammen"
+        canonicalUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
 
@@ -416,21 +420,18 @@ const HebammenPage = () => {
 
               <div className="space-y-8">
                 {[
-                  { icon: MessageCircle, num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc', color: 'emerald' },
-                  { icon: FileText, num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc', color: 'blue' },
-                  { icon: QrCode, num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc', color: 'rose' },
+                  { emoji: '💬', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
+                  { emoji: '📄', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
+                  { emoji: '📱', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                     className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex items-start gap-5"
                   >
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full bg-[#25c990] flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">{item.num}</span>
-                      </div>
-                    </div>
+                    <FriendlyIcon emoji={item.emoji} label={t(item.titleKey)} tone={item.tone} size="sm" />
                     <div>
+                      <p className="mb-1 text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">0{item.num}</p>
                       <h3 className="text-lg font-semibold text-slate-900 mb-1">{t(item.titleKey)}</h3>
                       <p className="text-slate-600 leading-relaxed">{t(item.descKey)}</p>
                     </div>

@@ -34,7 +34,8 @@ const TARGET_GROUP_COLORS = {
 const BlogPage = () => {
   const { t } = useTranslation('blog');
   const { t: tSeo } = useTranslation('seo');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
+  const canonicalUrl = lang === 'en' ? 'https://healio.de/en/blog' : 'https://healio.de/blog';
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('alle');
@@ -73,7 +74,7 @@ const BlogPage = () => {
     '@type': 'Blog',
     name: 'Healio Ratgeber',
     description: 'Expertenwissen zu Gesundheitsbudgets, Zusatzversicherungen und steuerfreien Benefits für Arbeitnehmer, Praxen und Partner.',
-    url: 'https://healio.de/blog',
+    url: canonicalUrl,
     publisher: {
       '@type': 'Organization',
       name: 'Healio GmbH',
@@ -86,10 +87,10 @@ const BlogPage = () => {
       <SEOHead
         title={tSeo('blog.title')}
         description={tSeo('blog.description')}
-        canonicalUrl="https://healio.de/blog"
+        canonicalUrl={canonicalUrl}
         ogTitle="Healio Ratgeber – Ihr Weg zum Gesundheitsbudget"
         ogDescription="Fachartikel zu steuerfreien Gesundheitsleistungen, Naturheilverfahren und smarter Vorsorge."
-        ogUrl="https://healio.de/blog"
+        ogUrl={canonicalUrl}
         ogType="blog"
         schemaMarkup={schemaMarkup}
       />

@@ -1,12 +1,13 @@
 import React from 'react';
-import { Activity, Check, HeartPulse, PiggyBank, Settings2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const icons = {
-  pension: PiggyBank,
-  health: HeartPulse,
-  prevention: Activity,
-  management: Settings2,
+  pension: { emoji: '🪙', tone: 'butter' },
+  health: { emoji: '💚', tone: 'mint' },
+  prevention: { emoji: '🩺', tone: 'sky' },
+  management: { emoji: '⚙️', tone: 'lavender' },
 };
 
 const CompanySolutions = () => {
@@ -35,13 +36,11 @@ const CompanySolutions = () => {
 
         <div className="mt-14 grid overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-200 shadow-[0_22px_70px_rgba(15,34,42,0.06)] md:grid-cols-2">
           {items.map((item, index) => {
-            const Icon = icons[item.key];
+            const icon = icons[item.key] || { emoji: '✨', tone: 'mint' };
             return (
               <article key={item.key} className="bg-white p-7 sm:p-9 lg:p-10">
                 <div className="flex items-center justify-between gap-6">
-                  <span className="grid h-[3.25rem] w-[3.25rem] place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </span>
+                  <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} />
                   <span className="font-display text-xs font-extrabold tracking-[0.18em] text-slate-400">0{index + 1}</span>
                 </div>
 
