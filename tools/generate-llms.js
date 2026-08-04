@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const CLEAN_CONTENT_REGEX = {
   comments: /\/\*[\s\S]*?\*\/|\/\/.*$/gm,
@@ -162,20 +163,37 @@ function main() {
       .filter(Boolean);
   }
 
-  if (pages.length === 0) {
-    console.error('❌ No pages with Helmet components found!');
-    process.exit(1);
-  }
+  // Schutzklausel: Dieses Skript sucht nach <Helmet>-Komponenten. Seit der
+  // Umstellung auf <SEOHead> hat nur noch NotFoundPage.jsx ein <Helmet>, das
+  // Skript fand also genau eine Seite und hat die gepflegte public/llms.txt
+  // bei jedem Vercel-Build durch eine Datei mit einem einzigen Eintrag
+  // ("Seite nicht gefunden") ersetzt. Genau diese Datei lesen ChatGPT,
+  // Perplexity und Claude aus. Deshalb wird nur noch geschrieben, wenn
+  // plausibel viele Seiten erkannt wurden. Andernfalls bleibt die manuell
+  // gepflegte Fassung unangetastet.
+  const MIN_ERWARTETE_SEITEN = 10;
 
+  if (pages.length < MIN_ERWARTETE_SEITEN) {
+    console.warn(
+      `[llms] Nur ${pages.length} Seite(n) mit <Helmet> gefunden, erwartet mindestens ${MIN_ERWARTETE_SEITEN}. ` +
+      'public/llms.txt wird NICHT ueberschrieben, die gepflegte Fassung bleibt erhalten.'
+    );
+    return;
+  }
 
   const llmsTxtContent = generateLlmsTxt(pages);
   const outputPath = path.join(process.cwd(), 'public', 'llms.txt');
-  
+
   ensureDirectoryExists(path.dirname(outputPath));
   fs.writeFileSync(outputPath, llmsTxtContent, 'utf8');
 }
 
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+// Der frühere Vergleich `import.meta.url === \`file://${process.argv[1]}\`` war
+// pfadabhängig: Bei relativem Aufruf (npm run build lokal) schlug er fehl und
+// main() lief nie, auf Vercel dagegen schon. Dadurch war das Verhalten lokal
+// und im Deployment unterschiedlich, was den llms.txt-Fehler lange verdeckt hat.
+const isMainModule =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isMainModule) {
   main();

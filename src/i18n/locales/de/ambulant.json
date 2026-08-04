@@ -175,9 +175,9 @@
     },
     "schwangerschaft": {
       "title": "Schwangerschaft & Geburt",
-      "desc": "Über 1.100 € Gesamtleistung, IKK classic (555 €) + SDK (600 €)",
-      "budget": "250 € Hebamme | 100 € Mineralstoffe | 100 € Vorsorge (IKK) + 600 € SDK",
-      "hint": "Gesamtrechnung: 555 € (IKK classic) + 600 € (SDK Zusatzversicherung) = über 1.150 € Schwangerschafts-Budget.",
+      "desc": "Über 1.000 € Gesamtleistung, IKK classic (555 €) + SDK Vorsorge-Topf (500 €)",
+      "budget": "250 € Hebamme | 100 € Mineralstoffe | 100 € Vorsorge (IKK) + 500 € SDK",
+      "hint": "Gesamtrechnung: 555 € (IKK classic) + 500 € (SDK Vorsorge-Topf im Tarif AP1) = über 1.000 € Schwangerschafts-Budget.",
       "details": {
         "hebamme": {
           "name": "Hebammen-Rufbereitschaft",
@@ -682,7 +682,7 @@
     "extrasSubtitle": "Dort, wo sich Krankenkassen unterscheiden, bietet die IKK classic mehr",
     "extras": {
       "schwangerschaft": {
-        "title": "Schwangerschaft, über 1.100 €",
+        "title": "Schwangerschaft, über 1.000 €",
         "desc": "250 € Hebammen-Rufbereitschaft, 100 € Vorsorge-Zuschuss, 180 € Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive."
       },
       "osteopathie": {

@@ -153,7 +153,7 @@
     },
     "schwangerschaft": {
       "title": "Pregnancy & Birth",
-      "desc": "Over €1,100 total benefits with IKK classic, midwife, prenatal care, baby bonus",
+      "desc": "Over €1,000 total benefits with IKK classic, midwife, prenatal care, baby bonus",
       "budget": "€250 midwife | €100 prenatal care | €180 baby bonus (IKK classic)",
       "hint": "IKK classic offers additional pregnancy benefits, more details in the IKK classic section below.",
       "details": {
@@ -634,7 +634,7 @@
     "extrasSubtitle": "Where health insurance funds differ, IKK classic offers more",
     "extras": {
       "schwangerschaft": {
-        "title": "Pregnancy, over €1,100",
+        "title": "Pregnancy, over €1,000",
         "desc": "€250 midwife on-call, €100 prenatal care subsidy, €180 baby bonus, free partner course, minerals included."
       },
       "osteopathie": {

@@ -16,11 +16,11 @@
     "amountLabel": "Health Budget"
   },
   "leistungen": {
-    "title": "The €1,100 budget for your families",
+    "title": "The €1,000 budget for your families",
     "subtitle": "So your patients know exactly what to expect, you can show them these benefits directly. The budget ensures that medical extras no longer have to be paid out of pocket.",
     "highlights": [
       {
-        "title": "€1,100 for your health",
+        "title": "€1,000 for your health",
         "desc": "This budget is exclusively available for natural medicine, osteopathy and important prenatal care during pregnancy."
       },
       {
@@ -42,23 +42,109 @@
     ],
     "ikkTitle": "IKK classic Benefits",
     "ikkItems": [
-      { "name": "Midwife on-call service", "amount": "€250", "detail": "per pregnancy" },
-      { "name": "Minerals", "amount": "€100", "detail": "Iron, folic acid & magnesium per year" },
-      { "name": "Supplementary screening", "amount": "€100", "detail": "Toxoplasmosis, Streptococcus, Rubella, Cytomegalovirus" },
-      { "name": "Postnatal recovery", "amount": "€75", "detail": "Bonus with supplementary insurance" },
-      { "name": "Maternity care", "amount": "€30", "detail": "per check-up" },
-      { "name": "Birth preparation courses", "amount": "free", "detail": "incl. partner course (Keleya)" },
-      { "name": "Home and birth center birth", "amount": "free", "detail": "Midwife + operating cost subsidy" }
+      {
+        "name": "Midwife on-call service",
+        "amount": "€250",
+        "detail": "per pregnancy"
+      },
+      {
+        "name": "Minerals",
+        "amount": "€100",
+        "detail": "Iron, folic acid & magnesium per year"
+      },
+      {
+        "name": "Supplementary screening",
+        "amount": "€100",
+        "detail": "Toxoplasmosis, Streptococcus, Rubella, Cytomegalovirus"
+      },
+      {
+        "name": "Postnatal recovery",
+        "amount": "€75",
+        "detail": "Bonus with supplementary insurance"
+      },
+      {
+        "name": "Maternity care",
+        "amount": "€30",
+        "detail": "per check-up"
+      },
+      {
+        "name": "Birth preparation courses",
+        "amount": "free",
+        "detail": "incl. partner course (Keleya)"
+      },
+      {
+        "name": "Home and birth center birth",
+        "amount": "free",
+        "detail": "Midwife + operating cost subsidy"
+      }
     ],
     "sdkTitle": "SDK Supplementary Insurance",
     "sdkItems": [
-      { "name": "Pregnancy care", "amount": "€500", "detail": "IGeL like nuchal scan, extra ultrasound, tests" },
-      { "name": "Natural healing", "amount": "€1,000", "detail": "Acupuncture, osteopathy, TCM incl. prescribed medication" },
-      { "name": "Medication and aids", "amount": "€1,000", "detail": "Co-payments for medication, remedies and aids" }
+      {
+        "name": "Pregnancy care",
+        "amount": "€500",
+        "detail": "IGeL like nuchal scan, extra ultrasound, tests"
+      },
+      {
+        "name": "Natural healing",
+        "amount": "€1,000",
+        "detail": "Acupuncture, osteopathy, TCM incl. prescribed medication"
+      },
+      {
+        "name": "Medication and aids",
+        "amount": "€1,000",
+        "detail": "Co-payments for medication, remedies and aids"
+      }
     ],
     "totalLabel": "Total Pregnancy Budget",
-    "totalAmount": "over €1,100",
+    "totalAmount": "over €1,000",
     "totalNote": "The best part: Through the smart combination with the statutory health insurance bonus, the costs for this package pay for themselves completely. For the expectant mother, this means the best care at effectively zero euros."
+  },
+  "klinik": {
+    "title": "The most important part comes last: the newborn",
+    "subtitle": "Everything so far was about the mother. Now it is about the child, and this is the part almost nobody knows. If you take away only one thing from this page, please let it be this one.",
+    "kernTitle": "Every person has exactly one window in which their state of health does not matter. It lasts two months and begins at birth.",
+    "kernText": "A supplementary insurance normally always asks about your state of health. Anyone with a diagnosis pays a surcharge or loses cover for that particular condition. For a newborn, this rule does not apply. SDK's terms state literally that cover begins at birth without risk surcharges and without benefit exclusions, and expressly including birth injuries, congenital conditions and other physical impairments. No health assessment. No waiting period. No surcharge. The question is simply not asked. This window closes two months after birth, and for that child it is then closed for good.",
+    "chanceTitle": "You know better than most why this matters so much",
+    "chanceText": "You see it regularly: the newborn jaundice that does need phototherapy after all. The baby arriving a few weeks early and being moved to the neonatal unit. The heart defect that no screening picked up beforehand. Feeding difficulties, an infection, an adaptation disorder. In the vast majority of cases it turns out fine, but it happens often enough, and it happens without warning.\n\nHere is the point. A child diagnosed with something serious in its first days of life will not be accepted into private supplementary insurance later on. Not at five, not at twelve, never. The health questions on the application have then been answered, and not in their favour. If the child was taken on beforehand through newborn enrolment, that very diagnosis is covered, and the protection stays in place for life. It is the only chance a family gets.",
+    "chanceObenTitle": "What this means for the family when the baby has to stay in hospital",
+    "chanceObenText": "If the child needs inpatient treatment, one parent may be admitted alongside them. Accommodation and meals are covered, so the family does not pay for them. This is rooming-in, and it applies up to the child's 16th birthday, so well beyond the baby years.\n\nOn top of that comes free choice of hospital. The family can go to a specialised children's hospital rather than the one they were referred to, even if it is further away. The child is treated privately, meaning by the head physician or a specialist, and stays in a single or twin room instead of a shared ward. Anyone who has spent a night in a four-bed room with a crying newborn knows what that means for a mother recovering from birth.\n\nAnd for a child all of this costs very little. Depending on the insurer and tariff, the premium is in the range of a few euros per month.",
+    "deadlineTitle": "What you need to do, and why you are almost never too late",
+    "deadlineText": "The requirement is simple: one parent must be insured when the child is born. After that there are two months to enrol the child, backdated to the day of birth.\n\nSDK asks for no prior insurance period. It is enough that the mother's or father's policy is running at the time of birth. Even if a woman only hears about it in her eighth month, her baby is fully covered from its first breath. So your pointer is almost never too late. And once the child has arrived, you still have that two-month window during postnatal care, which is exactly when you are in the house anyway.\n\nTwo things to know so you never tell anyone something wrong: Die Bayerische requires three months of prior insurance, so there the deadline falls in the sixth month of pregnancy. And a child can only receive the level of cover held by the best-insured parent. If you want a single room for your child, you need to hold it yourself.",
+    "ehrlichTitle": "What honestly no longer works: the current birth",
+    "ehrlichText": "So that you never promise something that does not hold: once a pregnancy has been medically confirmed, it counts as an event already under way. No supplementary insurance will pay for that particular birth, with any provider. If a woman comes to you in her fifth month, she can no longer insure a family room or head physician treatment for the birth itself. That is not the weakness of one tariff, it is the same everywhere.\n\nNone of this changes anything about the points above. In insurance terms the child is a separate person with a separate contract. For the baby it is not too late, even when it is too late for the birth. Almost nobody understands that distinction, which is exactly why your pointer is worth so much.",
+    "roomingTitle": "And with the next child the birth is included too",
+    "roomingText": "SDK waives waiting periods entirely in its hospital tariffs. Anyone who holds the policy before a next pregnancy is medically confirmed has the birth fully covered as well: the family room, private medical treatment and even the separately invoiced services of independent midwives.\n\nThat is why the postnatal period is the best moment to mention it. The family secures cover for its newborn now, and for a further child everything is included that was not possible this time.",
+    "compareTitle": "Which tariff for families? Our honest assessment",
+    "compareSubtitle": "Healio is independent and compares the market. In short: for women planning a pregnancy there is hardly a way past SDK, because it works without waiting periods. If the goal is to insure the child and the family affordably, Die Bayerische is usually the better choice.",
+    "bayerischeName": "Die Bayerische",
+    "bayerischeTag": "Our recommendation for young families",
+    "bayerischeItems": [
+      "Child from around 4 euros per month in the top tariff, entry tariff from around 2 euros",
+      "Rooming-in for children up to 16, family room without limit in the top tariff",
+      "Head physician at 100 per cent, with no cap at the maximum GOÄ rates",
+      "Privately invoiced midwife covered during an inpatient stay",
+      "Streamlined acceptance with only two health questions",
+      "Adults aged 30 from around 13 euros per month",
+      "The child's entry tariff can be upgraded later without a further health assessment"
+    ],
+    "bayerischeCaveat": "To be honest about it: a special waiting period of eight months applies to childbirth, and for the newborn a parent must already have been insured for three months. The deadline therefore falls in the sixth month of pregnancy. The tariff also builds no ageing provisions, so the premium is very low at a young age and rises considerably by design in old age. For children and the family years that is exactly the strongest lever, but as a lifelong solution you need to know it.",
+    "sdkName": "SDK",
+    "sdkTag": "The first choice when planning a pregnancy",
+    "sdkItems": [
+      "No waiting periods, stated literally in the terms. Cover applies from day one, including for childbirth",
+      "Newborn enrolment with no prior insurance period: it is enough that one parent is insured at the time of birth",
+      "Family room for childbirth, covered at 100 per cent in the single-room tariff",
+      "Separately invoiced services of independent midwives are covered",
+      "Rooming-in: one parent stays with the child, up to age 16",
+      "Reimbursement beyond the maximum GOÄ rates, free choice of hospital including private clinics",
+      "Calculated with ageing provisions, therefore more stable across the decades",
+      "Example premiums at age 30: hospital twin room 32.82 euros, hospital single room 49.78 euros per month"
+    ],
+    "sdkCaveat": "To be honest about it: for a young family that is a lot of money, often three to four times Die Bayerische. Health questions are part of the application here too. And the limit remains: if the pregnancy has been medically confirmed at the time of application, no benefits are paid for that birth.",
+    "bonusNote": "Both can be combined with the statutory health fund's bonus programme. The supplementary insurance is recognised there as a subsidised benefit and triples the cash bonus, capped at the premiums actually paid. For many families the bonus therefore covers a substantial share of the premium.",
+    "closingNote": "Which route fits in an individual case depends on age, budget and state of health. Healio clarifies that free of charge in a consultation. You do not have to explain any of it or work anything out, a pointer at the right moment is enough.",
+    "ctaLink": "All the details on hospital supplementary insurance"
   },
   "benefits": {
     "title": "The perfect win win for your work",
