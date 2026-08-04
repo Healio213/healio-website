@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Patientenservice für Zahnarztpraxen",
     "title": "Damit der Eigenanteil nicht über die <highlight>Behandlung entscheidet.</highlight>",
-    "subtitle": "Healio gibt deinen Patienten eine neutrale Informationsspur zu Zahnersatz, Kassenboni und ergänzendem Schutz. Deine Praxis bleibt medizinischer Ansprechpartner – Healio übernimmt die Versicherungsberatung.",
+    "subtitle": "Healio gibt deinen Patienten eine neutrale Informationsspur zu Zahnersatz, Kassenboni und ergänzendem Schutz. Deine Praxis bleibt medizinischer Ansprechpartner. Healio übernimmt die Versicherungsberatung.",
     "primaryCta": "Unverbindlich kennenlernen",
     "secondaryCta": "Klare Rollen ansehen",
     "note": "Für deine Praxis kostenfrei. Ohne Provision, Tarifempfehlung oder Übermittlung von Patientendaten durch dein Team.",
@@ -79,7 +79,7 @@
   "bonus": {
     "eyebrow": "Der Healio-Hebel",
     "title": "Erst prüfen, was im System bereits vorhanden ist.",
-    "intro": "Viele Patienten kennen weder das Potenzial ihrer Kassenboni noch die Unterschiede beim ergänzenden Zahnschutz. Healio verbindet beides in einer persönlichen Prüfung – nachvollziehbar, freiwillig und passend zum aktuellen Zahnstatus.",
+    "intro": "Viele Patienten kennen weder das Potenzial ihrer Kassenboni noch die Unterschiede beim ergänzenden Zahnschutz. Healio verbindet beides in einer persönlichen Prüfung: nachvollziehbar, freiwillig und passend zum aktuellen Zahnstatus.",
     "steps": [
       {
         "title": "Bonuspotenzial klären",
@@ -99,7 +99,7 @@
   "founder": {
     "eyebrow": "Warum Healio",
     "quote": "Medizinisch sinnvolle Versorgung sollte nicht daran scheitern, dass Menschen ihre Bonusmöglichkeiten und Absicherungswege nicht kennen.",
-    "text": "Ich habe Healio gegründet, um genau diese Lücke zu schließen. Wir wollen nicht einfach Versicherungen vermitteln. Wir wollen vorhandene Möglichkeiten verständlich machen, Patienten finanziell entlasten und Zahnärzten den Raum geben, sich auf die Behandlung zu konzentrieren.",
+    "text": "Ich habe Healio gegründet, um genau diese Lücke zu schließen. Wir wollen nicht einfach Versicherungen vermitteln. Wir wollen vorhandene Möglichkeiten verständlich machen, Patienten finanziell entlasten und Zahnärzten den Raum geben, sich auf die Behandlung zu konzentrieren. Deshalb meine Bitte an dich: Hilf mit, dass deine Patienten überhaupt erfahren, was ihnen zusteht. Mehr braucht es nicht. Den Rest übernehmen wir.",
     "name": "Frank Steinfurt",
     "role": "Gründer und Geschäftsführer der Healio GmbH",
     "imageAlt": "Frank Steinfurt, Gründer und Geschäftsführer von Healio"
@@ -133,7 +133,7 @@
   "package": {
     "eyebrow": "Das Praxis-Set",
     "title": "Wenig Material. Klare Funktion.",
-    "intro": "Deine Praxis erhält genau die Unterlagen, die für einen zurückhaltenden Patientenservice nötig sind – ohne Schulungsprogramm und ohne Verkaufsprozess am Empfang.",
+    "intro": "Deine Praxis erhält genau die Unterlagen, die für einen zurückhaltenden Patientenservice nötig sind, ohne Schulungsprogramm und ohne Verkaufsprozess am Empfang.",
     "items": [
       {
         "title": "Neutrale Patienteninformation",

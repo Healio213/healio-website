@@ -102,7 +102,7 @@ const StationaerPage = () => {
                 transition={{ duration: 0.8 }}
                 className="w-full"
               >
-                <h1 id="stationaer-hero-heading" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg break-words hyphens-auto">
+                <h1 id="stationaer-hero-heading" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg break-words">
                   {t('hero.title').split('<highlight>').map((part, i) => {
                     if (i === 0) return part;
                     const [highlighted, rest] = part.split('</highlight>');

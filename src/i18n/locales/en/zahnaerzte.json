@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Patient service for dental practices",
     "title": "So the out-of-pocket cost does not decide the <highlight>treatment.</highlight>",
-    "subtitle": "Healio gives your patients a neutral path to information about dental treatment costs, health fund bonuses and supplementary cover. Your practice remains the medical point of contact — Healio handles the insurance advice.",
+    "subtitle": "Healio gives your patients a neutral path to information about dental treatment costs, health fund bonuses and supplementary cover. Your practice remains the medical point of contact. Healio handles the insurance advice.",
     "primaryCta": "Get to know us",
     "secondaryCta": "See the clear boundaries",
     "note": "Free for your practice. No commission, product recommendation or transfer of patient data by your team.",
@@ -79,7 +79,7 @@
   "bonus": {
     "eyebrow": "The Healio lever",
     "title": "First check what is already available in the system.",
-    "intro": "Many patients know neither the potential of their health fund bonuses nor the differences between supplementary dental plans. Healio brings both into a personal review — transparent, voluntary and appropriate to the current dental status.",
+    "intro": "Many patients know neither the potential of their health fund bonuses nor the differences between supplementary dental plans. Healio brings both into a personal review: transparent, voluntary and appropriate to the current dental status.",
     "steps": [
       {
         "title": "Clarify bonus potential",
@@ -99,7 +99,7 @@
   "founder": {
     "eyebrow": "Why Healio",
     "quote": "Medically appropriate care should not fail because people do not know their bonus options and protection routes.",
-    "text": "I founded Healio to close precisely that gap. We do not merely want to broker insurance. We want to make existing options understandable, provide patients with financial relief and give dentists the space to focus on treatment.",
+    "text": "I founded Healio to close precisely that gap. We do not merely want to broker insurance. We want to make existing options understandable, provide patients with financial relief and give dentists the space to focus on treatment. So here is my request to you: help make sure your patients even find out what they are entitled to. That is all it takes. We handle the rest.",
     "name": "Frank Steinfurt",
     "role": "Founder and Managing Director of Healio GmbH",
     "imageAlt": "Frank Steinfurt, founder and managing director of Healio"
@@ -133,7 +133,7 @@
   "package": {
     "eyebrow": "The practice set",
     "title": "Little material. One clear function.",
-    "intro": "Your practice receives exactly what is needed for a restrained patient service — without a training programme or a sales process at reception.",
+    "intro": "Your practice receives exactly what is needed for a restrained patient service, without a training programme or a sales process at reception.",
     "items": [
       {
         "title": "Neutral patient information",
