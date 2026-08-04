@@ -218,6 +218,33 @@ Wichtig: Schwangere sollten den Tarif idealerweise vor der Schwangerschaft absch
 
 ---
 
+## Krankenhaus für Familien — die wichtigste Timing-Regel
+
+Das ist der stationäre Teil, also die Krankenhauszusatzversicherung mit den SDK Klinik-Tarifen SP1, SP2 und SPU. Er ist getrennt vom ambulanten Tarif zu betrachten.
+
+Die Kernlogik in einem Satz: Die Geburt selbst ist nicht mehr absicherbar, sobald die Schwangerschaft ärztlich festgestellt ist. Aber alles, was danach mit dem Kind passiert, ist absicherbar.
+
+Schritt 1, die Geburt: Ist die Schwangerschaft bei Antragstellung bereits ärztlich festgestellt, wird für diese Entbindung und für Komplikationen während der Entbindung nicht geleistet. Das steht wörtlich in den SDK-Bedingungen zum Tarif SP1. Das gilt am gesamten Markt so, es ist keine Besonderheit der SDK. Anruferinnen, die schon schwanger sind, dürfen hier keine Hoffnung gemacht bekommen. Ehrlich sagen, dass es für diese Geburt zu spät ist.
+
+Schritt 2, das Kind: Das Neugeborene ist ein eigener Versicherungsfall. Es wird ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Wartezeit aufgenommen. In den allgemeinen Bedingungen der SDK steht ausdrücklich, dass auch Geburtsschäden, angeborene Krankheiten und andere körperliche Beeinträchtigungen mitversichert sind. Das ist das einzige Zeitfenster im Leben, in dem der Gesundheitszustand keine Rolle spielt. Typische Fälle: Neugeborenengelbsucht mit Fototherapie, Frühgeburt auf der Neonatologie, ein angeborener Herzfehler.
+
+Voraussetzungen für diese Kindernachversicherung bei der SDK:
+- Ein Elternteil ist zur Zeit der Geburt bei der SDK versichert. Es gibt KEINE Vorversicherungszeit, der Abschluss kann also noch kurz vor der Geburt erfolgen.
+- Die Anmeldung des Kindes erfolgt spätestens 2 Monate nach dem Tag der Geburt, rückwirkend ab Geburt.
+- Der Schutz des Kindes darf nicht höher sein als der des bestversicherten Elternteils. Wer für das Kind das Einbettzimmer möchte, muss selbst den Tarif Klinik 1-Bett haben.
+
+Schritt 3, was die Familie davon hat: Muss das Kind stationär behandelt werden, wird ein Elternteil als Begleitperson mit aufgenommen. Das ist das Rooming-in, es gilt für Kinder, die zu Beginn der Behandlung jünger als 16 Jahre sind. Dazu kommen freie Krankenhauswahl inklusive spezialisierter Kinderkliniken, privatärztliche Behandlung durch Chefarzt oder Belegarzt und die Unterbringung im Ein- oder Zweibettzimmer.
+
+Schritt 4, die nächste Schwangerschaft: Die SDK verzichtet in den Klinik-Tarifen vollständig auf Wartezeiten, wörtlich "Es bestehen keine Wartezeiten". Wer den Vertrag hat, bevor eine nächste Schwangerschaft ärztlich festgestellt wird, hat auch die Entbindung voll abgesichert. Dann sind das Familienzimmer bei der Entbindung und die gesondert berechenbaren Leistungen von Beleghebammen und Belegentbindungspflegern eingeschlossen. Deshalb ist das Wochenbett ein sehr guter Zeitpunkt für den Abschluss.
+
+Unterschied zu anderen Anbietern: Die Bayerische hat eine besondere Wartezeit von 8 Monaten für die Entbindung und verlangt für die Kindernachversicherung 3 Monate Vorversicherungszeit. Dort läuft die Frist also schon im sechsten Schwangerschaftsmonat ab. Dafür ist sie deutlich günstiger, ein Kind kostet dort ab rund 4 Euro im Monat. Faustregel: Bei Kinderwunsch die SDK, weil sie ohne Wartezeit auskommt. Für günstigen Familien- und Kinderschutz die Bayerische.
+
+Beitragsbeispiele SDK mit 30 Jahren: Klinik bei Unfall 6,84 Euro, Klinik 2-Bett 32,82 Euro, Klinik 1-Bett 49,78 Euro im Monat.
+
+Wichtig für das Gespräch: Diese Regeln nie als Zusage formulieren. Immer sagen, dass der konkrete Fall in der Beratung geprüft wird. Und nie behaupten, es gebe keine Gesundheitsfragen. Es gibt sie, die SDK lehnt aber grundsätzlich niemanden ab.
+
+---
+
 ## Osteopathie
 
 Die IKK Classic übernimmt 160 Euro pro Jahr für Osteopathie — das sind 4 Sitzungen à 40 Euro pro Kalenderjahr. Das gilt auch für Babys und Kinder, ohne Altersbegrenzung.
@@ -281,6 +308,8 @@ HEALIO bietet eine kostenlose Netzwerkpartnerschaft:
 - Kostenloses Flyer-Startpaket für die Praxis
 - Alle Informationen auf healio.de/partner, für Hebammen auf healio.de/hebammen
 
+Speziell für Hebammen: Sie sind für werdende Eltern die Vertrauensperson Nummer eins und geben lediglich einen Hinweis weiter. Sie beraten nicht, verkaufen nichts und tragen keine Verantwortung, die Eltern kümmern sich um alles Weitere selbst. Damit bleibt die berufsrechtliche Neutralität gewahrt. Für vermittelte Kontakte gibt es eine Tippgeber-Prämie von 50 Euro, die auf Wunsch auch als Spende an eine Stiftung für Kindergesundheit gehen kann. Das wichtigste inhaltliche Argument für Hebammen ist die Timing-Regel im Abschnitt "Krankenhaus für Familien": Für die laufende Geburt ist es zu spät, für das Kind nie.
+
 ---
 
 ## Kontaktdaten
@@ -316,6 +345,18 @@ Antwort: Digital über die App der SDK Süddeutsche Krankenversicherung. Der Ers
 
 Frage: Ist der Bonus wirklich steuerfrei?
 Antwort: Ja, der IKK Bonus ist komplett steuerfrei. Er wird direkt ausgezahlt oder mit deiner Zusatzversicherung verrechnet.
+
+Frage: Ich bin schwanger, lohnt sich das jetzt noch?
+Antwort: Ehrlich gesagt kommt es darauf an, worum es dir geht. Für diese Geburt selbst ist es leider zu spät. Sobald eine Schwangerschaft ärztlich festgestellt ist, zahlt keine Zusatzversicherung mehr für diese Entbindung, das ist am ganzen Markt so. Was aber sehr wohl geht, ist dein Kind. Ein Neugeborenes wird aufgenommen, ohne dass jemand nach seiner Gesundheit fragt, ohne Wartezeit und ohne Zuschlag, sogar bei Geburtsschäden oder angeborenen Krankheiten. Voraussetzung ist nur, dass ein Elternteil zum Zeitpunkt der Geburt versichert ist und das Kind innerhalb von zwei Monaten nach der Geburt angemeldet wird. Das ist die einzige Gelegenheit im Leben, zu der der Gesundheitszustand keine Rolle spielt. Und für ein weiteres Kind wärst du dann komplett abgesichert.
+
+Frage: Warum ist die Geburt nicht mitversichert?
+Antwort: Weil eine festgestellte Schwangerschaft versicherungsrechtlich als bereits laufendes Ereignis gilt. Versicherungen leisten grundsätzlich nicht für Fälle, die vor Vertragsbeginn schon eingetreten sind. Das ist bei allen Anbietern gleich. Deshalb ist der beste Zeitpunkt für einen Abschluss immer vor der Schwangerschaft, oder eben im Wochenbett mit Blick auf ein weiteres Kind.
+
+Frage: Was ist Rooming-in?
+Antwort: Wenn dein Kind ins Krankenhaus muss, darf ein Elternteil mit aufgenommen werden und bei ihm bleiben. Unterbringung und Verpflegung der Begleitperson werden übernommen, ihr zahlt sie also nicht selbst. Das gilt für Kinder unter 16 Jahren. Dazu kommt die freie Klinikwahl, also auch eine spezialisierte Kinderklinik statt des nächstgelegenen Krankenhauses.
+
+Frage: Ist mein Baby automatisch mitversichert?
+Antwort: Nicht automatisch, es muss angemeldet werden. Aber unter sehr guten Bedingungen: Ist ein Elternteil zum Zeitpunkt der Geburt versichert und wird das Kind innerhalb von zwei Monaten angemeldet, gilt der Schutz rückwirkend ab Geburt, ohne Gesundheitsprüfung und ohne Wartezeit. Wichtig ist nur: Das Kind kann nur so viel Schutz bekommen, wie der bestversicherte Elternteil hat.
 
 Frage: Brauche ich eine Gesundheitsprüfung?
 Antwort: Ja, im Antragsformular gibt es Gesundheitsfragen, die du wahrheitsgemäß beantworten musst. Die gute Nachricht: Die SDK lehnt grundsätzlich niemanden ab. Auch mit Vorerkrankungen kommst du rein. Bei manchen Diagnosen kann ein Risikozuschlag dazukommen. Wartezeiten gibt es keine, der Schutz beginnt ab Tag eins.
