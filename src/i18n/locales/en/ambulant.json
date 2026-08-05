@@ -566,8 +566,8 @@
   },
   "ikkWechsel": {
     "badge": "Switching health insurance made easy",
-    "title": "You stay publicly insured and unlock more bonus",
-    "subtitle": "Whether you are with AOK, TK, Barmer or another statutory health insurer: you are not leaving the statutory system. You are switching to the fund that fits the Healio health budget better.",
+    "title": "You stay publicly insured and use the <highlight>better bonus</highlight>",
+    "subtitle": "You are not leaving the statutory system. You are only switching to the fund whose bonus better supports the supplementary cover you want.",
     "advantagesEyebrow": "Your switch advantages",
     "advantagesTitle": "Switching is easier than you think.",
     "advantagesItems": [
@@ -578,9 +578,9 @@
     "advantagesImageAlt": "Relaxed person in a hammock with a smartphone, shield and health budget symbols",
     "reassuranceKicker": "The key reassurance",
     "reassuranceTitle": "You are not giving up your healthcare. You are only changing provider.",
-    "reassuranceText": "Your statutory core coverage stays in place. Doctors, specialists, hospitals, prescriptions and ongoing treatments remain the secure foundation. The real difference is in the extras, the bonus program and how well the fund supports your health budget.",
+    "reassuranceText": "Your statutory core coverage stays in place. Doctors, specialists, hospitals, prescriptions and ongoing treatments remain the secure foundation. The real difference is in the extras, the bonus program and how well the fund supports the premium for your supplementary cover.",
     "ctaBonus": "Secure your IKK bonus",
-    "ctaTimeline": "Understand the switch timeline in 2 minutes",
+    "ctaTimeline": "Understand the switch timeline",
     "reassuranceItems": {
       "system": {
         "title": "You stay publicly insured",
@@ -604,16 +604,50 @@
       }
     },
     "threeD": {
-      "oldFund": "AOK / TK / Barmer",
-      "stable": "98% stays the same",
-      "stableLegal": "benefits guaranteed by law",
-      "bonus": "IKK bonus",
-      "bonusFund": "IKK classic",
-      "bonusShort": "Bonus",
-      "budget": "3,000 EUR health budget",
-      "budgetValue": "3,000 EUR",
-      "budgetLabel": "Health budget",
-      "ariaLabel": "3D visualization: switching from the previous statutory health insurer to IKK classic while statutory core coverage remains stable and the IKK bonus supports the health budget."
+      "sourceKicker": "Start",
+      "sourceFund": "Your current public fund",
+      "destinationKicker": "New health fund",
+      "destinationFund": "IKK classic",
+      "continuity": "Your cover continues seamlessly",
+      "continuitySub": "You only change statutory health fund",
+      "bonusValue": "EUR 700+",
+      "bonusLabel": "bonus possible",
+      "flowLabel": "The bonus supports your premium",
+      "variants": {
+        "ambulant": {
+          "product": "Outpatient supplementary cover",
+          "resultValue": "Up to EUR 3,000",
+          "resultLabel": "Health budget over 2 years",
+          "ariaLabel": "Animation: a person walks from left to right across a bridge from their previous statutory health fund to IKK classic and cheers on arrival. Cover stays uninterrupted and the possible bonus supports the outpatient supplementary policy with a health budget of up to EUR 3,000 over two years.",
+          "timeline": {
+            "label": "first",
+            "title": "Take out outpatient cover",
+            "desc": "You select suitable outpatient supplementary cover. The insurance start depends on the application, acceptance and your chosen start date."
+          }
+        },
+        "zahn": {
+          "product": "Dental supplementary cover",
+          "resultValue": "Dentures covered",
+          "resultLabel": "With immediate cover and no waiting period on a first policy",
+          "ariaLabel": "Animation: a person walks from left to right across a bridge from their previous statutory health fund to IKK classic and cheers on arrival. Cover stays uninterrupted and the possible bonus supports the dental supplementary premium with dentures covered.",
+          "timeline": {
+            "label": "first",
+            "title": "Choose suitable dental cover",
+            "desc": "You use the plan guide to choose dental cover that fits your current dental situation and set the desired insurance start date."
+          }
+        },
+        "stationaer": {
+          "product": "Hospital supplementary cover",
+          "resultValue": "Hospital tariff secured",
+          "resultLabel": "Senior physician treatment and elective hospital benefits",
+          "ariaLabel": "Animation: a person walks from left to right across a bridge from their previous statutory health fund to IKK classic and cheers on arrival. Cover stays uninterrupted and the possible bonus supports the premium for the hospital tariff.",
+          "timeline": {
+            "label": "first",
+            "title": "Take out hospital cover",
+            "desc": "You select suitable inpatient supplementary cover. The insurance start depends on the application, acceptance and your chosen start date."
+          }
+        }
+      }
     },
     "identicalPercent": "98%",
     "identicalTitle": "of all benefits are identical",
@@ -681,36 +715,31 @@
         "desc": "After 2 months, you're a member. Your insurance coverage continues without interruption."
       }
     },
-    "timelineTitle": "The switch timeline, as an example",
-    "timelineSubtitle": "The order matters: supplementary SDK coverage can start on the selected insurance date. The IKK switch runs in parallel so you can use the bonus afterwards.",
+    "timelineTitle": "How supplementary cover and the health fund switch work together",
+    "timelineSubtitle": "Your supplementary insurance and the switch of statutory health fund are two separate steps. Supplementary cover can start on the selected insurance date, while the IKK switch runs in parallel and adds the bonus afterwards.",
     "timelineSteps": {
-      "sdk": {
-        "label": "May",
-        "title": "Take out the SDK plan",
-        "desc": "You calculate the outpatient plan and complete it online. The start depends on the selected insurance date and acceptance."
-      },
-      "treatment": {
-        "label": "from start",
-        "title": "Use benefits",
-        "desc": "With no waiting period, you can use Heilpraktiker, osteopathy, glasses or preventive care and submit invoices to SDK."
+      "switch": {
+        "label": "in parallel",
+        "title": "Apply to switch health fund",
+        "desc": "You submit your membership application to IKK classic. The new fund automatically informs your previous statutory health fund."
       },
       "ikkStart": {
-        "label": "Aug 1",
+        "label": "after the switch period",
         "title": "IKK membership starts",
-        "desc": "If the membership declaration is submitted in May, the regular start after two full calendar months is August 1 in this example."
+        "desc": "The exact start depends on statutory notice periods and your previous binding period. Your statutory insurance cover continues without a gap."
       },
       "bonus": {
         "label": "afterwards",
-        "title": "Activate the bonus",
-        "desc": "As an IKK member, you can start the bonus or subsidy in the app and use paid supplementary insurance premiums as eligible expenses."
+        "title": "Use the bonus for the premium",
+        "desc": "As an IKK member, you can activate the bonus and submit premiums for the chosen supplementary insurance as eligible expenses under the applicable bonus terms."
       }
     },
-    "timelineFinanceLabel": "Transition period",
-    "timelineFinanceTitle": "Covered from the start, bonus follows later",
-    "timelineFinanceDesc": "The key point: supplementary insurance already protects you from the insurance start date. The IKK bonus comes later and can fully or partially offset premiums depending on bonus, subsidy and premium amount.",
-    "timelineBridgeValue": "approx. 3 months",
-    "timelineBridgeLabel": "typical pre-financing in the May example before the IKK bonus can be used",
-    "timelineNote": "Illustrative example. Requirements include a timely membership declaration, completion of the 12-month binding period at the previous statutory health insurer and acceptance of the SDK application. Special cancellation rights, job changes or different start dates can change the timeline.",
+    "timelineFinanceLabel": "How the funding works",
+    "timelineFinanceTitle": "Supplementary cover first, bonus afterwards",
+    "timelineFinanceDesc": "Supplementary cover applies from the agreed insurance start date. The IKK bonus is added after the health fund switch and may offset all or part of your premium depending on the bonus amount and plan.",
+    "timelineBridgeValue": "all or part",
+    "timelineBridgeLabel": "of your supplementary insurance premium may be offset by the bonus",
+    "timelineNote": "Simplified illustration. Requirements include acceptance for the chosen supplementary insurance plan, fulfillment of the conditions for switching statutory health fund and the applicable bonus terms. Start date and bonus amount may vary individually.",
     "fearsTitle": "Common Concerns, And Why They're Unfounded",
     "fears": {
       "leistungen": {

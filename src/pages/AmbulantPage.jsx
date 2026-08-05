@@ -168,7 +168,7 @@ const AmbulantPage = () => {
 
         {/* IKK classic Wechsel — Bonus als Verstärker und Refinanzierung erklären */}
         <FadeInUp>
-          <AmbulantIKKWechsel />
+          <AmbulantIKKWechsel variant="ambulant" />
         </FadeInUp>
 
         {/* Interaktiver Bonus-Rechner */}

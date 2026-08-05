@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const benefitIcons = ['⏱️', '🦷', '✨', '😁', '🧩', '🛡️', '📋'];
+// Sofortschutz, Zahnersatz, Prophylaxe, Behandlung, fehlende Zähne,
+// ausgezeichnete Versicherer, faire Annahme
+const benefitIcons = ['⏱️', '🦷', '✨', '😁', '🧩', '🏅', '📋'];
 const benefitTones = ['butter', 'mint', 'lavender', 'sky', 'coral', 'mint', 'butter'];
 
 const benefitKeys = ['noWait', 'zahnersatz', 'prophylaxe', 'bleaching', 'fehlend', 'unfall', 'gesundheitsfragen'];

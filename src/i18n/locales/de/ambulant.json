@@ -614,8 +614,8 @@
   },
   "ikkWechsel": {
     "badge": "Krankenkassenwechsel leicht gemacht",
-    "title": "Du bleibst gesetzlich versichert und holst dir <highlight>mehr Bonus</highlight>",
-    "subtitle": "Ob AOK, TK, Barmer oder eine andere gesetzliche Krankenkasse: Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, die besser zum Healio-Gesundheitsbudget passt.",
+    "title": "Du bleibst gesetzlich versichert und nutzt den <highlight>besseren Bonus</highlight>",
+    "subtitle": "Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, deren Bonus besser zu deinem gewünschten Zusatzschutz passt.",
     "advantagesEyebrow": "Deine Vorteile beim Wechsel",
     "advantagesTitle": "Du wechselst entspannter, als du denkst.",
     "advantagesItems": [
@@ -626,9 +626,9 @@
     "advantagesImageAlt": "Entspannte Person in einer Hängematte mit Smartphone, Schutzschild und Gesundheitsbudget-Symbolen",
     "reassuranceKicker": "Die wichtigste Klarstellung",
     "reassuranceTitle": "Du gibst deine Versorgung nicht auf. Du wechselst nur den Anbieter.",
-    "reassuranceText": "Deine gesetzliche Grundversorgung bleibt bestehen. Ärzte, Fachärzte, Kliniken, Rezepte und laufende Behandlungen bleiben der sichere Rahmen. Der Unterschied liegt vor allem in den Extras, im Bonusprogramm und darin, wie gut die Kasse dein Gesundheitsbudget unterstützt.",
+    "reassuranceText": "Deine gesetzliche Grundversorgung bleibt bestehen. Ärzte, Fachärzte, Kliniken, Rezepte und laufende Behandlungen bleiben der sichere Rahmen. Der Unterschied liegt vor allem in den Extras, im Bonusprogramm und darin, wie gut die Kasse den Beitrag zu deinem Zusatzschutz unterstützt.",
     "ctaBonus": "IKK-Bonus sichern",
-    "ctaTimeline": "In 2 Minuten Wechselstrecke verstehen",
+    "ctaTimeline": "Wechselstrecke verstehen",
     "reassuranceItems": {
       "system": {
         "title": "Du bleibst gesetzlich versichert",
@@ -652,16 +652,50 @@
       }
     },
     "threeD": {
-      "oldFund": "AOK / TK / Barmer",
-      "stable": "98 % bleibt gleich",
-      "stableLegal": "Leistungen gesetzlich garantiert",
-      "bonus": "IKK-Bonus",
-      "bonusFund": "IKK classic",
-      "bonusShort": "Bonus",
-      "budget": "3.000 EUR Gesundheitsbudget",
-      "budgetValue": "3.000 EUR",
-      "budgetLabel": "Gesundheitsbudget",
-      "ariaLabel": "3D-Visualisierung: Wechsel von der bisherigen gesetzlichen Krankenkasse zur IKK classic, während die gesetzliche Grundversorgung stabil bleibt und der IKK-Bonus das Gesundheitsbudget unterstützt."
+      "sourceKicker": "Start",
+      "sourceFund": "Deine bisherige GKV",
+      "destinationKicker": "Neue Krankenkasse",
+      "destinationFund": "IKK classic",
+      "continuity": "Versicherungsschutz bleibt lückenlos",
+      "continuitySub": "Du wechselst nur die gesetzliche Krankenkasse",
+      "bonusValue": "700 EUR+",
+      "bonusLabel": "Bonus möglich",
+      "flowLabel": "Der Bonus unterstützt deinen Beitrag",
+      "variants": {
+        "ambulant": {
+          "product": "Ambulante Zusatzversicherung",
+          "resultValue": "Bis zu 3.000 EUR",
+          "resultLabel": "Gesundheitsbudget in 2 Jahren",
+          "ariaLabel": "Animation: Eine Person geht von links nach rechts über eine Brücke von ihrer bisherigen gesetzlichen Krankenkasse zur IKK classic und jubelt am Ziel. Der Versicherungsschutz bleibt lückenlos und der mögliche Bonus unterstützt die ambulante Zusatzversicherung mit bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren.",
+          "timeline": {
+            "label": "zuerst",
+            "title": "Ambulanten Tarif abschließen",
+            "desc": "Du wählst den passenden ambulanten Zusatzschutz. Der Versicherungsbeginn richtet sich nach Antrag, Annahme und deinem gewählten Startdatum."
+          }
+        },
+        "zahn": {
+          "product": "Zahnzusatzversicherung",
+          "resultValue": "Zahnersatz abgesichert",
+          "resultLabel": "Beim Erstabschluss sogar mit Sofortschutz ohne Wartezeit",
+          "ariaLabel": "Animation: Eine Person geht von links nach rechts über eine Brücke von ihrer bisherigen gesetzlichen Krankenkasse zur IKK classic und jubelt am Ziel. Der Versicherungsschutz bleibt lückenlos und der mögliche Bonus unterstützt den Beitrag zur Zahnzusatzversicherung mit abgesichertem Zahnersatz.",
+          "timeline": {
+            "label": "zuerst",
+            "title": "Passenden Zahntarif abschließen",
+            "desc": "Du wählst über die Tarif-Weiche den Zahnschutz, der zu deiner aktuellen Zahnsituation passt, und legst den gewünschten Versicherungsbeginn fest."
+          }
+        },
+        "stationaer": {
+          "product": "Krankenhauszusatzversicherung",
+          "resultValue": "Krankenhaustarif gesichert",
+          "resultLabel": "Chefarztbehandlung und Wahlleistungen im Krankenhaus",
+          "ariaLabel": "Animation: Eine Person geht von links nach rechts über eine Brücke von ihrer bisherigen gesetzlichen Krankenkasse zur IKK classic und jubelt am Ziel. Der Versicherungsschutz bleibt lückenlos und der mögliche Bonus unterstützt den Beitrag zum Krankenhaustarif.",
+          "timeline": {
+            "label": "zuerst",
+            "title": "Klinik-Tarif abschließen",
+            "desc": "Du wählst den passenden stationären Zusatzschutz. Der Versicherungsbeginn richtet sich nach Antrag, Annahme und deinem gewählten Startdatum."
+          }
+        }
+      }
     },
     "identicalPercent": "98%",
     "identicalTitle": "aller Leistungen sind identisch",
@@ -729,36 +763,31 @@
         "desc": "Nach 2 Monaten bist du Mitglied. Dein Versicherungsschutz läuft durchgehend weiter."
       }
     },
-    "timelineTitle": "Die Wechselstrecke im Beispiel",
-    "timelineSubtitle": "Wichtig ist die Reihenfolge: Der SDK-Zusatzschutz kann direkt zum gewählten Versicherungsbeginn starten. Der IKK-Wechsel läuft parallel, damit du den Bonus anschließend nutzen kannst.",
+    "timelineTitle": "So greifen Zusatzschutz und Kassenwechsel ineinander",
+    "timelineSubtitle": "Deine Zusatzversicherung und der Wechsel der gesetzlichen Krankenkasse sind zwei getrennte Schritte. Der Zusatzschutz kann zum gewählten Versicherungsbeginn starten, der IKK-Wechsel läuft parallel und bringt den Bonus anschließend dazu.",
     "timelineSteps": {
-      "sdk": {
-        "label": "Mai",
-        "title": "Ambulanten Tarif abschließen",
-        "desc": "Du berechnest den ambulanten Tarif und schließt ihn online ab. Der Start richtet sich nach dem gewählten Versicherungsbeginn und der Annahme."
-      },
-      "treatment": {
-        "label": "ab Start",
-        "title": "Leistungen nutzen",
-        "desc": "Ohne Wartezeit kannst du Heilpraktiker, Osteopathie, Brille oder Vorsorge nutzen und Rechnungen bei der SDK einreichen."
+      "switch": {
+        "label": "parallel",
+        "title": "Kassenwechsel beantragen",
+        "desc": "Du stellst den Mitgliedsantrag bei der IKK classic. Die neue Kasse informiert deine bisherige Krankenkasse automatisch."
       },
       "ikkStart": {
-        "label": "1. August",
+        "label": "nach der Wechselphase",
         "title": "IKK-Mitgliedschaft startet",
-        "desc": "Geht die Mitgliedserklärung im Mai ein, ist der reguläre Start nach zwei vollen Kalendermonaten im Beispiel der 1. August."
+        "desc": "Der genaue Start richtet sich nach den gesetzlichen Fristen und deiner bisherigen Bindungszeit. Dein gesetzlicher Versicherungsschutz läuft ohne Lücke weiter."
       },
       "bonus": {
         "label": "danach",
-        "title": "Bonus aktivieren",
-        "desc": "Als IKK-Mitglied kannst du Bonus oder Zuschuss in der App starten und gezahlte Beiträge zur Zusatzversicherung als Zuschussleistung nutzen."
+        "title": "Bonus für den Beitrag nutzen",
+        "desc": "Als IKK-Mitglied kannst du den Bonus aktivieren und Beiträge zur gewählten Zusatzversicherung nach den Bonusbedingungen als Zuschussleistung einreichen."
       }
     },
-    "timelineFinanceLabel": "Übergangszeit",
-    "timelineFinanceTitle": "Ab Start geschützt, danach Bonus nutzen",
-    "timelineFinanceDesc": "Der entscheidende Punkt: Die Zusatzversicherung schützt dich bereits ab Versicherungsbeginn. Der IKK-Bonus kommt zeitversetzt dazu und kann die Beiträge je nach Bonushöhe ganz oder teilweise ausgleichen.",
-    "timelineBridgeValue": "ca. 3 Monate",
-    "timelineBridgeLabel": "typische Vorfinanzierung im Mai-Beispiel, bevor der IKK-Bonus genutzt werden kann",
-    "timelineNote": "Beispielhafte Darstellung. Voraussetzung sind unter anderem eine rechtzeitig eingegangene Mitgliedserklärung, eine erfüllte 12-Monats-Bindungsfrist bei der bisherigen Krankenkasse und die Annahme des SDK-Antrags. Bei Sonderkündigung, Arbeitgeberwechsel oder anderem Startdatum kann die Strecke abweichen.",
+    "timelineFinanceLabel": "Die Finanzierungslogik",
+    "timelineFinanceTitle": "Zusatzschutz zuerst, Bonus danach",
+    "timelineFinanceDesc": "Der Zusatzschutz gilt ab dem vereinbarten Versicherungsbeginn. Der IKK-Bonus kommt nach dem Kassenwechsel dazu und kann deinen Beitrag je nach Bonushöhe und Tarif ganz oder teilweise ausgleichen.",
+    "timelineBridgeValue": "ganz oder teilweise",
+    "timelineBridgeLabel": "kann der Bonus den Beitrag zu deinem Zusatzschutz ausgleichen",
+    "timelineNote": "Vereinfachte Darstellung. Voraussetzung sind unter anderem die Annahme des gewählten Zusatzversicherungstarifs, die erfüllten Bedingungen für den Krankenkassenwechsel sowie die jeweils geltenden Bonusbedingungen. Startzeitpunkt und Bonushöhe können individuell abweichen.",
     "fearsTitle": "Häufige Bedenken, und warum sie unbegründet sind",
     "fears": {
       "leistungen": {

@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const processIcons = ['🧭', '📋', '🚀', '🤝'];
+// Bestand verstehen, Konzept rechnen, verständlich einführen, laufend betreuen
+const processIcons = ['🔍', '🧮', '🚀', '🤝'];
 const processTones = ['sky', 'butter', 'mint', 'lavender'];
 
 const CompanyProcess = () => {

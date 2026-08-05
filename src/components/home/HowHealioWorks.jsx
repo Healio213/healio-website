@@ -3,7 +3,8 @@ import { CheckCircle2, Smartphone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const stepIcons = ['🧭', '🧮', '🛡️', '📱'];
+// Schutz auswählen, Möglichkeiten verstehen, digital abschließen, begleitet bleiben
+const stepIcons = ['🛡️', '🧮', '✍️', '📱'];
 const stepTones = ['sky', 'butter', 'mint', 'lavender'];
 
 const HowHealioWorks = () => {

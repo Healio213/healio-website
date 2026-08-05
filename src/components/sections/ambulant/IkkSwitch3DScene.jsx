@@ -1,644 +1,708 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as THREE from 'three';
+import { ShieldCheck } from 'lucide-react';
 
-const drawRoundRect = (context, x, y, width, height, radius) => {
-  context.beginPath();
-  context.moveTo(x + radius, y);
-  context.lineTo(x + width - radius, y);
-  context.quadraticCurveTo(x + width, y, x + width, y + radius);
-  context.lineTo(x + width, y + height - radius);
-  context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  context.lineTo(x + radius, y + height);
-  context.quadraticCurveTo(x, y + height, x, y + height - radius);
-  context.lineTo(x, y + radius);
-  context.quadraticCurveTo(x, y, x + radius, y);
-  context.closePath();
+const VALID_VARIANTS = new Set(['ambulant', 'zahn', 'stationaer']);
+const END_HOLD_MS = 4000;
+
+const outcomeIconPosition = {
+  ambulant: '0%',
+  zahn: '50%',
+  stationaer: '100%',
 };
 
-const createLabelTexture = (lines, options = {}) => {
-  const canvas = document.createElement('canvas');
-  canvas.width = options.width || 640;
-  canvas.height = options.height || 320;
-  const context = canvas.getContext('2d');
-  const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, options.backgroundFrom || 'rgba(15, 23, 42, 0.94)');
-  gradient.addColorStop(1, options.backgroundTo || 'rgba(20, 184, 166, 0.38)');
+// Gemessen am Dreamina-Film: Sie läuft von links nach rechts, steht ab etwa
+// 5,7 s auf dem Podest und hebt ab etwa 7,7 s die Faust. Das Jubelbild bleibt
+// danach bis zum Neustart bei knapp 10 s sichtbar.
+const rewardParticles = [
+  { x: '-74px', y: '-64px', tone: 'gold', shape: 'star' },
+  { x: '-30px', y: '-98px', tone: 'mint', shape: 'dot' },
+  { x: '24px', y: '-104px', tone: 'gold', shape: 'star' },
+  { x: '76px', y: '-68px', tone: 'violet', shape: 'bar' },
+  { x: '92px', y: '-12px', tone: 'gold', shape: 'dot' },
+  { x: '64px', y: '34px', tone: 'mint', shape: 'star' },
+  { x: '-64px', y: '28px', tone: 'violet', shape: 'bar' },
+  { x: '-96px', y: '-14px', tone: 'gold', shape: 'dot' },
+];
 
-  drawRoundRect(context, 24, 24, canvas.width - 48, canvas.height - 48, options.radius || 42);
-  context.fillStyle = gradient;
-  context.fill();
-  context.strokeStyle = options.border || 'rgba(255,255,255,0.28)';
-  context.lineWidth = options.borderWidth || 5;
-  context.stroke();
-
-  if (options.accent) {
-    context.fillStyle = options.accent;
-    drawRoundRect(context, 48, 46, 112, 20, 10);
-    context.fill();
-  }
-
-  context.fillStyle = options.color || '#ffffff';
-  context.textAlign = 'center';
-  context.textBaseline = 'middle';
-  context.font = options.font || '900 64px system-ui, -apple-system, BlinkMacSystemFont, sans-serif';
-  const lineHeight = options.lineHeight || 70;
-  const startY = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2 + (options.offsetY || 0);
-  lines.forEach((line, index) => context.fillText(line, canvas.width / 2, startY + index * lineHeight));
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-  return texture;
-};
-
-const createLabelPlane = (lines, width, height, options = {}) => {
-  const texture = createLabelTexture(lines, options);
-  return new THREE.Mesh(
-    new THREE.PlaneGeometry(width, height),
-    new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      depthWrite: false,
-    })
-  );
-};
-
-const createGlassPanel = (width, height, color = 0x14b8a6, opacity = 0.22) => {
-  const panel = new THREE.Mesh(
-    new THREE.BoxGeometry(width, height, 0.08),
-    new THREE.MeshPhysicalMaterial({
-      color,
-      transparent: true,
-      opacity,
-      roughness: 0.18,
-      metalness: 0.16,
-      transmission: 0.16,
-      thickness: 0.35,
-      clearcoat: 0.78,
-      clearcoatRoughness: 0.18,
-    })
-  );
-  panel.castShadow = true;
-  panel.receiveShadow = true;
-  return panel;
-};
-
-const createCoinTexture = () => {
-  const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
-  const context = canvas.getContext('2d');
-  const gradient = context.createRadialGradient(84, 62, 10, 128, 128, 126);
-  gradient.addColorStop(0, '#fff8c7');
-  gradient.addColorStop(0.48, '#e8b94e');
-  gradient.addColorStop(1, '#9b621c');
-  context.fillStyle = gradient;
-  context.fillRect(0, 0, 256, 256);
-  context.strokeStyle = 'rgba(104, 62, 12, 0.44)';
-  context.lineWidth = 14;
-  context.beginPath();
-  context.arc(128, 128, 92, 0, Math.PI * 2);
-  context.stroke();
-  context.fillStyle = '#6b3f0b';
-  context.font = '900 58px system-ui, -apple-system, BlinkMacSystemFont, sans-serif';
-  context.textAlign = 'center';
-  context.textBaseline = 'middle';
-  context.fillText('700+', 128, 128);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-  return texture;
-};
-
-const createCoin = (texture, radius = 0.14, depth = 0.035) => {
-  const side = new THREE.MeshStandardMaterial({ color: 0xa66b1f, roughness: 0.22, metalness: 0.62 });
-  const face = new THREE.MeshStandardMaterial({ color: 0xf7cb61, map: texture, roughness: 0.18, metalness: 0.64 });
-  const coin = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, depth, 64), [side, face, face]);
-  coin.rotation.x = Math.PI / 2;
-  coin.castShadow = true;
-  return coin;
-};
-
-const createBudgetCard = (value, label) => {
-  const group = new THREE.Group();
-  const card = createLabelPlane([value, label], 1.48, 0.82, {
-    width: 720,
-    height: 400,
-    backgroundFrom: 'rgba(255, 251, 235, 0.98)',
-    backgroundTo: 'rgba(252, 211, 77, 0.9)',
-    border: 'rgba(255,255,255,0.9)',
-    color: '#713f12',
-    font: '900 66px system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: 76,
-    accent: '#10b981',
-  });
-  const backing = new THREE.Mesh(
-    new THREE.BoxGeometry(1.52, 0.86, 0.055),
-    new THREE.MeshStandardMaterial({
-      color: 0xf8fafc,
-      roughness: 0.28,
-      metalness: 0.12,
-    })
-  );
-  backing.position.z = -0.035;
-  backing.castShadow = true;
-  backing.receiveShadow = true;
-  group.add(backing, card);
-
-  const coinTexture = createCoinTexture();
-  for (let index = 0; index < 7; index += 1) {
-    const coin = createCoin(coinTexture, 0.115 + (index % 2) * 0.018);
-    coin.position.set(-0.58 + index * 0.16, -0.55 + (index % 3) * 0.035, 0.12);
-    coin.rotation.z = -0.3 + index * 0.22;
-    group.add(coin);
-  }
-
-  return group;
-};
-
-const createShield = () => {
-  const group = new THREE.Group();
-  const shape = new THREE.Shape();
-  shape.moveTo(0, 0.42);
-  shape.lineTo(0.34, 0.26);
-  shape.bezierCurveTo(0.32, 0.02, 0.22, -0.24, 0, -0.42);
-  shape.bezierCurveTo(-0.22, -0.24, -0.32, 0.02, -0.34, 0.26);
-  shape.lineTo(0, 0.42);
-
-  const shield = new THREE.Mesh(
-    new THREE.ExtrudeGeometry(shape, {
-      depth: 0.055,
-      bevelEnabled: true,
-      bevelSize: 0.022,
-      bevelThickness: 0.016,
-      bevelSegments: 4,
-    }),
-    new THREE.MeshPhysicalMaterial({
-      color: 0x14b8a6,
-      emissive: 0x047857,
-      emissiveIntensity: 0.18,
-      roughness: 0.24,
-      metalness: 0.22,
-      clearcoat: 0.75,
-    })
-  );
-  shield.position.z = -0.03;
-  shield.castShadow = true;
-  group.add(shield);
-
-  const label = createLabelPlane(['98%', 'bleibt'], 0.6, 0.4, {
-    width: 420,
-    height: 280,
-    backgroundFrom: 'rgba(236,253,245,0.96)',
-    backgroundTo: 'rgba(167,243,208,0.9)',
-    border: 'rgba(255,255,255,0.82)',
-    color: '#064e3b',
-    font: '900 56px system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
-    lineHeight: 58,
-  });
-  label.position.set(0, 0.04, 0.07);
-  group.add(label);
-  return group;
-};
-
-const drawCharacter = (happy) => {
-  const canvas = document.createElement('canvas');
-  canvas.width = 320;
-  canvas.height = 560;
-  const context = canvas.getContext('2d');
-  context.clearRect(0, 0, 320, 560);
-
-  context.save();
-  context.translate(happy ? 10 : -8, happy ? -4 : 12);
-  context.shadowColor = 'rgba(2, 6, 23, 0.28)';
-  context.shadowBlur = 18;
-  context.shadowOffsetY = 12;
-
-  const jacket = context.createLinearGradient(90, 190, 235, 420);
-  jacket.addColorStop(0, happy ? '#10b981' : '#64748b');
-  jacket.addColorStop(1, happy ? '#047857' : '#334155');
-  context.fillStyle = jacket;
-  drawRoundRect(context, 95, 190, 130, 210, 44);
-  context.fill();
-
-  context.fillStyle = '#f8fafc';
-  drawRoundRect(context, 132, 202, 56, 132, 18);
-  context.fill();
-
-  context.fillStyle = happy ? '#0f766e' : '#475569';
-  drawRoundRect(context, 104, 360, 48, 150, 22);
-  context.fill();
-  drawRoundRect(context, 168, 360, 48, 150, 22);
-  context.fill();
-
-  context.fillStyle = '#0f172a';
-  drawRoundRect(context, 93, 494, 70, 30, 15);
-  context.fill();
-  drawRoundRect(context, 160, 494, 70, 30, 15);
-  context.fill();
-
-  context.strokeStyle = happy ? '#059669' : '#64748b';
-  context.lineWidth = 22;
-  context.lineCap = 'round';
-  context.beginPath();
-  context.moveTo(106, 220);
-  context.quadraticCurveTo(happy ? 62 : 78, happy ? 282 : 304, happy ? 74 : 92, happy ? 352 : 374);
-  context.stroke();
-  context.beginPath();
-  context.moveTo(214, 220);
-  context.quadraticCurveTo(happy ? 258 : 242, happy ? 280 : 306, happy ? 244 : 230, happy ? 342 : 370);
-  context.stroke();
-
-  context.fillStyle = '#f1c6a8';
-  context.beginPath();
-  context.arc(160, 128, 54, 0, Math.PI * 2);
-  context.fill();
-
-  context.fillStyle = '#1f2937';
-  context.beginPath();
-  context.ellipse(154, 93, 58, 36, -0.18, 0, Math.PI * 2);
-  context.fill();
-  context.fillRect(106, 100, 22, 48);
-
-  context.fillStyle = '#0f172a';
-  context.beginPath();
-  context.arc(140, 128, 4.5, 0, Math.PI * 2);
-  context.arc(180, 128, 4.5, 0, Math.PI * 2);
-  context.fill();
-
-  context.strokeStyle = '#0f172a';
-  context.lineWidth = 5;
-  context.lineCap = 'round';
-  context.beginPath();
-  if (happy) {
-    context.moveTo(137, 154);
-    context.quadraticCurveTo(160, 174, 184, 154);
-  } else {
-    context.moveTo(137, 166);
-    context.quadraticCurveTo(160, 150, 184, 166);
-  }
-  context.stroke();
-
-  if (happy) {
-    context.strokeStyle = '#bbf7d0';
-    context.lineWidth = 8;
-    context.beginPath();
-    context.moveTo(124, 204);
-    context.lineTo(196, 204);
-    context.stroke();
-  }
-
-  context.restore();
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-  return texture;
-};
-
-const createPersonSprite = () => {
-  const sadMap = drawCharacter(false);
-  const happyMap = drawCharacter(true);
-  const sprite = new THREE.Sprite(
-    new THREE.SpriteMaterial({
-      map: sadMap,
-      transparent: true,
-      depthTest: false,
-      depthWrite: false,
-      fog: false,
-    })
-  );
-  sprite.renderOrder = 20;
-  sprite.scale.set(0.68, 1.18, 1);
-  return { sprite, sadMap, happyMap };
-};
-
-const IkkSwitch3DScene = () => {
+/**
+ * Der Gang ueber die Bruecke laeuft als kurzer Film. Die Textkarten liegen als
+ * echtes HTML darueber, damit sie uebersetzbar bleiben, je Tarif wechseln und
+ * von Suchmaschinen gelesen werden koennen.
+ */
+const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
   const { t } = useTranslation('ambulant');
-  const containerRef = useRef(null);
-  const canvasRef = useRef(null);
+  const sceneRef = useRef(null);
+  const videoRef = useRef(null);
+  const lastVideoTimeRef = useRef(0);
+  const restartTimerRef = useRef(null);
+  const isInViewRef = useRef(false);
+  // Jeder Neustart des Films zaehlt hoch und setzt damit die Einblendungen
+  // der Karten zurueck, weil React die Ebene neu aufbaut.
+  const [runKey, setRunKey] = useState(0);
+  const [staticView, setStaticView] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const activeVariant = VALID_VARIANTS.has(variant) ? variant : 'ambulant';
+  const variantKey = `ikkWechsel.threeD.variants.${activeVariant}`;
 
   useEffect(() => {
-    const container = containerRef.current;
-    const canvas = canvasRef.current;
-    if (!container || !canvas) return undefined;
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x0b1b2b, 7.2, 12);
-
-    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    const ambient = new THREE.AmbientLight(0xffffff, 1.24);
-    scene.add(ambient);
-
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.7);
-    keyLight.position.set(2.6, 4.2, 4.6);
-    keyLight.castShadow = true;
-    scene.add(keyLight);
-
-    const rimLight = new THREE.DirectionalLight(0x8ee7ff, 1.28);
-    rimLight.position.set(-3.2, 2.8, 3.6);
-    scene.add(rimLight);
-
-    const budgetLight = new THREE.PointLight(0xfacc15, 3.55, 5.8);
-    budgetLight.position.set(3.1, 1.2, 1.35);
-    scene.add(budgetLight);
-
-    const group = new THREE.Group();
-    scene.add(group);
-
-    const floor = new THREE.Mesh(
-      new THREE.PlaneGeometry(8.8, 4.6),
-      new THREE.MeshStandardMaterial({
-        color: 0x142033,
-        roughness: 0.76,
-        metalness: 0.08,
-      })
-    );
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -1.24;
-    floor.receiveShadow = true;
-    group.add(floor);
-
-    const bridgePoints = [
-      new THREE.Vector3(-3.05, -0.44, 0.05),
-      new THREE.Vector3(-1.45, 0.08, 0.18),
-      new THREE.Vector3(0, 0.24, 0.28),
-      new THREE.Vector3(1.42, 0.08, 0.18),
-      new THREE.Vector3(3.05, -0.44, 0.05),
-    ];
-    const curve = new THREE.CatmullRomCurve3(bridgePoints);
-    const bridgeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x4ddbb2,
-      emissive: 0x0f766e,
-      emissiveIntensity: 0.2,
-      roughness: 0.32,
-      metalness: 0.22,
-    });
-    const deckMaterial = new THREE.MeshStandardMaterial({
-      color: 0xd8fff2,
-      roughness: 0.36,
-      metalness: 0.08,
-    });
-    const railMaterial = new THREE.MeshStandardMaterial({
-      color: 0x99f6e4,
-      emissive: 0x0f766e,
-      emissiveIntensity: 0.16,
-      roughness: 0.24,
-      metalness: 0.18,
-    });
-
-    const bridgeCore = new THREE.Mesh(new THREE.TubeGeometry(curve, 160, 0.045, 16, false), bridgeMaterial);
-    bridgeCore.castShadow = true;
-    group.add(bridgeCore);
-
-    const makeOffsetCurve = (zOffset, yOffset = 0) =>
-      new THREE.CatmullRomCurve3(
-        bridgePoints.map((point) => new THREE.Vector3(point.x, point.y + yOffset, point.z + zOffset))
-      );
-    group.add(
-      new THREE.Mesh(new THREE.TubeGeometry(makeOffsetCurve(-0.36, 0.18), 160, 0.014, 10, false), railMaterial),
-      new THREE.Mesh(new THREE.TubeGeometry(makeOffsetCurve(0.36, 0.18), 160, 0.014, 10, false), railMaterial)
-    );
-
-    const plankGeometry = new THREE.BoxGeometry(0.32, 0.04, 0.62);
-    for (let index = 0; index < 19; index += 1) {
-      const tValue = index / 18;
-      const point = curve.getPoint(tValue);
-      const tangent = curve.getTangent(tValue);
-      const plank = new THREE.Mesh(plankGeometry, deckMaterial);
-      plank.position.set(point.x, point.y - 0.05, point.z);
-      plank.rotation.y = -Math.atan2(tangent.z, tangent.x);
-      plank.castShadow = true;
-      plank.receiveShadow = true;
-      group.add(plank);
+    const scene = sceneRef.current;
+    const video = videoRef.current;
+    if (!scene || !video) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setStaticView(true);
+      setIsInView(true);
+      return undefined;
     }
 
-    const oldPanel = createGlassPanel(1.7, 0.94, 0x64748b, 0.22);
-    oldPanel.position.set(-3.2, -0.66, -0.08);
-    oldPanel.rotation.y = 0.24;
-    group.add(oldPanel);
-    const oldLabel = createLabelPlane(['AOK / TK', 'BARMER'], 1.9, 0.68, {
-      width: 760,
-      height: 340,
-      backgroundFrom: 'rgba(15,23,42,0.9)',
-      backgroundTo: 'rgba(71,85,105,0.72)',
-      border: 'rgba(148,163,184,0.48)',
-      color: '#e2e8f0',
-      font: '900 72px system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
-      lineHeight: 82,
-    });
-    oldLabel.position.set(-3.02, -0.84, 0.78);
-    oldLabel.rotation.set(-0.08, 0.22, 0.02);
-    group.add(oldLabel);
-
-    const shield = createShield();
-    shield.position.set(0, 0.96, 0.22);
-    shield.scale.setScalar(0.5);
-    group.add(shield);
-
-    const bonusPanel = createGlassPanel(1.72, 0.94, 0x10b981, 0.24);
-    bonusPanel.position.set(3.14, -0.66, -0.08);
-    bonusPanel.rotation.y = -0.24;
-    group.add(bonusPanel);
-    const bonusLabel = createLabelPlane(
-      [t('ikkWechsel.threeD.bonusFund'), t('ikkWechsel.threeD.bonusShort')],
-      1.86,
-      0.68,
-      {
-        width: 760,
-        height: 340,
-        backgroundFrom: 'rgba(236,253,245,0.95)',
-        backgroundTo: 'rgba(52,211,153,0.82)',
-        border: 'rgba(255,255,255,0.76)',
-        color: '#064e3b',
-        font: '900 72px system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
-        lineHeight: 82,
-      }
-    );
-    bonusLabel.position.set(3.1, -0.84, 0.8);
-    bonusLabel.rotation.set(-0.08, -0.22, -0.02);
-    group.add(bonusLabel);
-
-    const budgetCard = createBudgetCard(t('ikkWechsel.threeD.budgetValue'), t('ikkWechsel.threeD.budgetLabel'));
-    budgetCard.position.set(3.03, 0.38, 0.86);
-    budgetCard.rotation.set(-0.1, -0.24, 0.035);
-    group.add(budgetCard);
-
-    const confetti = [];
-    const confettiGeometry = new THREE.PlaneGeometry(0.034, 0.092);
-    const confettiColors = [0xfacc15, 0xf59e0b, 0xfef3c7, 0x86efac];
-    for (let index = 0; index < 34; index += 1) {
-      const material = new THREE.MeshBasicMaterial({
-        color: confettiColors[index % confettiColors.length],
-        transparent: true,
-        opacity: 0,
-        depthWrite: false,
-        side: THREE.DoubleSide,
-      });
-      const mesh = new THREE.Mesh(confettiGeometry, material);
-      const base = new THREE.Vector3(
-        2.35 + Math.random() * 1.28,
-        1.42 + Math.random() * 0.48,
-        0.66 + Math.random() * 0.62
-      );
-      mesh.position.copy(base);
-      mesh.visible = false;
-      confetti.push({
-        mesh,
-        base,
-        phase: Math.random(),
-        spin: 0.8 + Math.random() * 1.8,
-        drift: -0.08 + Math.random() * 0.16,
-      });
-      group.add(mesh);
-    }
-
-    const person = createPersonSprite();
-    group.add(person.sprite);
-    const shadow = new THREE.Mesh(
-      new THREE.CircleGeometry(0.25, 32),
-      new THREE.MeshBasicMaterial({
-        color: 0x020617,
-        transparent: true,
-        opacity: 0.28,
-        depthWrite: false,
-      })
-    );
-    shadow.rotation.x = -Math.PI / 2;
-    group.add(shadow);
-
-    let mobileViewport = false;
-
-    const resize = () => {
-      const rect = container.getBoundingClientRect();
-      const width = Math.max(320, rect.width);
-      const height = Math.max(260, rect.height);
-      const isMobile = width < 600;
-      mobileViewport = isMobile;
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.fov = isMobile ? 38 : 36;
-      camera.position.set(0, isMobile ? 0.1 : 0.06, isMobile ? 9.6 : 8.35);
-      camera.lookAt(0, -0.42, 0);
-      camera.updateProjectionMatrix();
-      group.scale.set(isMobile ? 0.74 : 0.94, isMobile ? 0.94 : 0.98, isMobile ? 0.96 : 0.98);
-      shield.position.set(0, isMobile ? 0.98 : 0.96, 0.22);
-      shield.scale.setScalar(isMobile ? 0.5 : 0.5);
+    // Film und HTML-Einblendungen pausieren gemeinsam ausserhalb des
+    // sichtbaren Bereichs. Beim nativen Video-Loop wird die Overlay-Ebene neu
+    // aufgebaut, damit Karten und Belohnung in jedem Durchlauf synchron sind.
+    const play = () => {
+      const started = video.play();
+      if (started && typeof started.catch === 'function') started.catch(() => {});
     };
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(container);
-    resize();
-
-    let animationId;
-    const clock = new THREE.Clock();
-
-    const render = () => {
-      const elapsed = clock.getElapsedTime();
-      const progress = reducedMotion ? 0.74 : (elapsed * 0.07) % 1;
-      const point = curve.getPoint(progress);
-      const mood = THREE.MathUtils.smoothstep(progress, 0.24, 0.9);
-      const walk = Math.sin(elapsed * 7.2);
-      const personScaleBoost = mobileViewport ? 1.18 : 1;
-
-      person.sprite.position.set(point.x, point.y + 0.63 + Math.abs(walk) * 0.018, point.z + 0.58);
-      person.sprite.scale.set((0.62 + mood * 0.12) * personScaleBoost, (1.08 + mood * 0.08) * personScaleBoost, 1);
-      const nextMap = progress > 0.46 ? person.happyMap : person.sadMap;
-      if (person.sprite.material.map !== nextMap) {
-        person.sprite.material.map = nextMap;
-        person.sprite.material.needsUpdate = true;
-      }
-
-      shadow.position.set(point.x, -1.215, point.z + 0.36);
-      shadow.scale.setScalar(0.82 + mood * 0.18);
-      shadow.material.opacity = 0.2 + mood * 0.1;
-
-      bridgeMaterial.emissiveIntensity = 0.18 + mood * 0.18 + Math.sin(elapsed * 2.2) * 0.025;
-      budgetCard.position.y = 0.38 + Math.sin(elapsed * 1.1 + 0.5) * 0.026;
-      budgetLight.intensity = 2.8 + mood * 1.35 + Math.sin(elapsed * 1.8) * 0.18;
-      const celebration = THREE.MathUtils.smoothstep(progress, 0.64, 0.84);
-      confetti.forEach(({ mesh, base, phase, spin, drift }) => {
-        const fall = (elapsed * 0.58 + phase) % 1;
-        mesh.visible = celebration > 0.02;
-        mesh.position.set(
-          base.x + Math.sin(elapsed * 1.2 + phase * 8) * 0.08 + drift * fall,
-          base.y - fall * 1.16,
-          base.z + Math.cos(elapsed * 1.4 + phase * 6) * 0.08
-        );
-        mesh.rotation.set(elapsed * spin + phase * 4, elapsed * (spin * 0.7), phase * Math.PI);
-        mesh.material.opacity = celebration * Math.max(0, 0.86 - fall * 0.34);
-      });
-      shield.rotation.y = Math.sin(elapsed * 0.55) * 0.045;
-      group.rotation.y = Math.sin(elapsed * 0.32) * 0.045;
-      group.rotation.x = -0.045 + Math.sin(elapsed * 0.28) * 0.012;
-
-      renderer.render(scene, camera);
-      if (!reducedMotion) {
-        animationId = requestAnimationFrame(render);
+    const clearRestartTimer = () => {
+      if (restartTimerRef.current) {
+        window.clearTimeout(restartTimerRef.current);
+        restartTimerRef.current = null;
       }
     };
 
-    render();
+    const onPlay = () => {
+      if (video.currentTime < 0.25) setRunKey((n) => n + 1);
+    };
+
+    const onTimeUpdate = () => {
+      const currentTime = video.currentTime;
+      if (currentTime + 1 < lastVideoTimeRef.current) {
+        setRunKey((n) => n + 1);
+      }
+      lastVideoTimeRef.current = currentTime;
+    };
+
+    // Am Ziel bleibt das Erfolgsbild bewusst stehen. Erst nach vier Sekunden
+    // beginnt der nächste Durchlauf – die Belohnungsanimation läuft während
+    // dieser Pause weiter und bekommt dadurch einen echten Abschluss.
+    const onEnded = () => {
+      clearRestartTimer();
+      restartTimerRef.current = window.setTimeout(() => {
+        lastVideoTimeRef.current = 0;
+        video.currentTime = 0;
+        if (isInViewRef.current) play();
+      }, END_HOLD_MS);
+    };
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('timeupdate', onTimeUpdate);
+    video.addEventListener('ended', onEnded);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInViewRef.current = entry.isIntersecting;
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && !video.ended) play();
+        else video.pause();
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(scene);
+
+    const rect = scene.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) play();
 
     return () => {
-      if (animationId) cancelAnimationFrame(animationId);
+      clearRestartTimer();
       observer.disconnect();
-      person.sadMap.dispose();
-      person.happyMap.dispose();
-      renderer.dispose();
-      scene.traverse((object) => {
-        if (object.geometry) object.geometry.dispose();
-        if (object.material) {
-          if (Array.isArray(object.material)) {
-            object.material.forEach((material) => {
-              if (material.map) material.map.dispose();
-              material.dispose();
-            });
-          } else {
-            if (object.material.map) object.material.map.dispose();
-            object.material.dispose();
-          }
-        }
-      });
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('timeupdate', onTimeUpdate);
+      video.removeEventListener('ended', onEnded);
     };
-  }, [t]);
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative h-[420px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 shadow-inner shadow-emerald-900/20"
-      aria-label={t('ikkWechsel.threeD.ariaLabel')}
+    <figure
+      ref={sceneRef}
+      data-variant={activeVariant}
+      className="ikk-clay-journey"
+      role="img"
+      aria-label={t(`${variantKey}.ariaLabel`)}
     >
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_74%_36%,rgba(250,204,21,0.16),transparent_34%),radial-gradient(ellipse_at_50%_18%,rgba(52,211,153,0.22),transparent_46%),linear-gradient(135deg,rgba(15,23,42,0.08),rgba(2,6,23,0.5))]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(to_top,rgba(2,6,23,0.68),transparent)]" />
-      <div className="pointer-events-none absolute left-4 right-4 top-4 flex items-start justify-center text-center text-[11px] font-bold uppercase tracking-[0.14em]">
-        <span className="rounded-2xl border border-emerald-300/25 bg-emerald-400/15 px-4 py-2 text-emerald-100 shadow-lg shadow-emerald-950/20 backdrop-blur-md">
-          <span className="block">{t('ikkWechsel.threeD.stable')}</span>
-          <span className="mt-0.5 block text-[10px] tracking-[0.1em] text-emerald-50/70">
-            {t('ikkWechsel.threeD.stableLegal')}
+      <video
+        ref={videoRef}
+        className="ikk-clay-journey__film"
+        poster={staticView ? '/videos/ikk-bridge-walk-poster.jpg?v=dreamina-1' : '/videos/ikk-bridge-walk-start-poster.jpg?v=dreamina-1'}
+        muted
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        <source src="/videos/ikk-bridge-walk.webm?v=dreamina-1" type="video/webm" />
+        <source src="/videos/ikk-bridge-walk.mp4?v=dreamina-1" type="video/mp4" />
+      </video>
+
+      <div
+        key={runKey}
+        className={`ikk-clay-journey__overlay ${staticView ? 'is-static' : ''} ${isInView ? '' : 'is-paused'}`}
+      >
+        <div className="ikk-clay-journey__fund ikk-clay-journey__fund--source">
+          <small>{t('ikkWechsel.threeD.sourceKicker')}</small>
+          <strong>{t('ikkWechsel.threeD.sourceFund')}</strong>
+        </div>
+
+        <div className="ikk-clay-journey__outcome">
+          <div
+            className="ikk-clay-journey__outcome-icon"
+            style={{ backgroundPositionX: outcomeIconPosition[activeVariant] }}
+            aria-hidden="true"
+          />
+          <div className="ikk-clay-journey__outcome-copy">
+            <small>{t('ikkWechsel.threeD.flowLabel')}</small>
+            <strong>{t(`${variantKey}.product`)}</strong>
+            <span>{t(`${variantKey}.resultValue`)}</span>
+            <p>{t(`${variantKey}.resultLabel`)}</p>
+          </div>
+        </div>
+
+        {/* Belohnung im Moment der Ankunft */}
+        <div className="ikk-clay-journey__reward" aria-hidden="true">
+          <span className="ikk-clay-journey__reward-halo" />
+          <span className="ikk-clay-journey__reward-ring" />
+          {rewardParticles.map((p, index) => (
+            <span
+              key={`${p.x}-${p.y}`}
+              className={`ikk-clay-journey__particle is-${p.tone} is-${p.shape}`}
+              style={{ '--i': index, '--bx': p.x, '--by': p.y }}
+            />
+          ))}
+        </div>
+
+        <div className="ikk-clay-journey__fund ikk-clay-journey__fund--destination">
+          <small>{t('ikkWechsel.threeD.destinationKicker')}</small>
+          <strong>{t('ikkWechsel.threeD.destinationFund')}</strong>
+          <span>{t('ikkWechsel.threeD.bonusValue')} {t('ikkWechsel.threeD.bonusLabel')}</span>
+        </div>
+
+        <div className="ikk-clay-journey__continuity">
+          <span className="ikk-clay-journey__continuity-icon" aria-hidden="true">
+            <ShieldCheck />
           </span>
-        </span>
+          <span>
+            <strong>{t('ikkWechsel.threeD.continuity')}</strong>
+            <small>{t('ikkWechsel.threeD.continuitySub')}</small>
+          </span>
+        </div>
       </div>
-      <div className="pointer-events-none absolute bottom-3 left-1/2 w-[min(84%,320px)] -translate-x-1/2 rounded-xl border border-emerald-200/30 bg-emerald-50/95 px-3 py-2 text-center shadow-2xl shadow-emerald-950/30 backdrop-blur sm:bottom-4 sm:w-[min(90%,420px)] sm:rounded-2xl sm:px-5 sm:py-3">
-        <div className="text-lg font-black tracking-tight text-emerald-950 sm:text-2xl">{t('ikkWechsel.threeD.budget')}</div>
-      </div>
-    </div>
+
+      <style>{`
+        .ikk-clay-journey {
+          position: relative;
+          isolation: isolate;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          border: 1px solid rgba(204, 195, 229, 0.82);
+          border-radius: 2rem;
+          background: #fffcf5;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 24px 60px rgba(69, 53, 108, .12);
+          color: #211a3e;
+        }
+
+        .ikk-clay-journey__film {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        /* --- Karten ------------------------------------------------------ */
+
+        /* Die Ebene wird bei jedem Filmstart neu aufgebaut, dadurch laufen die
+           Einblendungen synchron zum Film:
+             0,4 s  Start-Karte
+             1,0 s  Ergebniskarte, sie ist daran vorbei
+             4,4 s  Hinweiskarte, sie ist daran vorbei
+             5,7 s  IKK-Karte am Ziel
+             7,7 s  Belohnung, die Faust geht hoch                           */
+        .ikk-clay-journey__overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+        }
+
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__fund,
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__outcome,
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__continuity,
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__reward-halo,
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__reward-ring,
+        .ikk-clay-journey__overlay.is-paused .ikk-clay-journey__particle {
+          animation-play-state: paused;
+        }
+
+        .ikk-clay-journey__overlay.is-static .ikk-clay-journey__fund,
+        .ikk-clay-journey__overlay.is-static .ikk-clay-journey__outcome,
+        .ikk-clay-journey__overlay.is-static .ikk-clay-journey__continuity {
+          opacity: 1;
+          animation: none;
+        }
+
+        .ikk-clay-journey__overlay.is-static .ikk-clay-journey__reward {
+          display: none;
+        }
+
+        @keyframes ikk-card-in {
+          from { opacity: 0; transform: translateY(10px) scale(.96); }
+          to   { opacity: 1; transform: none; }
+        }
+
+        @keyframes ikk-fund-glow {
+          0%   { box-shadow: 0 14px 34px rgba(69,53,108,.14); }
+          35%  { box-shadow: 0 0 0 7px rgba(247,210,102,.34), 0 18px 42px rgba(91,151,113,.3); }
+          100% { box-shadow: 0 14px 34px rgba(69,53,108,.14); }
+        }
+
+        .ikk-clay-journey__continuity {
+          position: absolute;
+          /* Freies Feld zwischen Ergebniskarte (endet bei 37 %) und der
+             erhobenen Faust der Figur (ab etwa 71 %). */
+          z-index: 3;
+          top: 5%;
+          left: 39.5%;
+          display: flex;
+          align-items: center;
+          gap: .55rem;
+          width: 30%;
+          padding: .62rem .9rem;
+          border: 1px solid rgba(255,255,255,.94);
+          border-radius: 1.1rem;
+          background: rgba(255,255,255,.86);
+          box-shadow: 0 12px 30px rgba(69,53,108,.12);
+          backdrop-filter: blur(12px);
+          opacity: 0;
+          animation: ikk-card-in .55s cubic-bezier(.16,1,.3,1) 4.4s forwards;
+        }
+
+        .ikk-clay-journey__continuity-icon {
+          display: grid;
+          flex: 0 0 auto;
+          width: 2.25rem;
+          height: 2.25rem;
+          place-items: center;
+          border-radius: .8rem;
+          color: #3d8f69;
+          background: linear-gradient(145deg, #dff4e8, #a9d7bd);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 12px rgba(61,143,105,.18);
+        }
+
+        .ikk-clay-journey__continuity-icon svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+
+        .ikk-clay-journey__continuity strong,
+        .ikk-clay-journey__continuity small {
+          display: block;
+          line-height: 1.15;
+        }
+
+        .ikk-clay-journey__continuity strong {
+          font-size: clamp(.72rem, 1.25vw, .9rem);
+          font-weight: 900;
+        }
+
+        .ikk-clay-journey__continuity small {
+          margin-top: .18rem;
+          color: #6d6883;
+          font-size: clamp(.58rem, .95vw, .7rem);
+          font-weight: 700;
+        }
+
+        .ikk-clay-journey__fund {
+          position: absolute;
+          z-index: 3;
+          bottom: 4.5%;
+          min-width: 17%;
+          padding: .65rem .85rem;
+          border: 1px solid rgba(255,255,255,.96);
+          border-radius: 1rem;
+          background: rgba(255,255,255,.86);
+          box-shadow: 0 14px 34px rgba(69,53,108,.14);
+          backdrop-filter: blur(10px);
+        }
+
+        .ikk-clay-journey__fund--source {
+          left: 3.5%;
+          text-align: left;
+          opacity: 0;
+          animation: ikk-card-in .55s cubic-bezier(.16,1,.3,1) .4s forwards;
+        }
+
+        .ikk-clay-journey__fund--destination {
+          right: 3.5%;
+          text-align: right;
+          opacity: 0;
+          animation:
+            ikk-card-in .55s cubic-bezier(.16,1,.3,1) 5.65s forwards,
+            ikk-fund-glow 1.95s ease-out 8.02s 3;
+        }
+
+        .ikk-clay-journey__fund small,
+        .ikk-clay-journey__fund strong,
+        .ikk-clay-journey__fund span {
+          display: block;
+          line-height: 1.15;
+        }
+
+        .ikk-clay-journey__fund small {
+          color: #756d8d;
+          font-size: clamp(.55rem, 1vw, .7rem);
+          font-weight: 800;
+          letter-spacing: .09em;
+          text-transform: uppercase;
+        }
+
+        .ikk-clay-journey__fund strong {
+          margin-top: .23rem;
+          font-size: clamp(.78rem, 1.55vw, 1.05rem);
+          font-weight: 900;
+        }
+
+        .ikk-clay-journey__fund span {
+          margin-top: .28rem;
+          color: #347a59;
+          font-size: clamp(.62rem, 1.1vw, .78rem);
+          font-weight: 900;
+        }
+
+        .ikk-clay-journey__outcome {
+          position: absolute;
+          z-index: 3;
+          top: 6%;
+          left: 3.5%;
+          display: grid;
+          width: min(34%, 340px);
+          grid-template-columns: minmax(56px, 30%) 1fr;
+          align-items: center;
+          gap: .75rem;
+          padding: .75rem .85rem;
+          border: 1px solid rgba(255,255,255,.96);
+          border-radius: 1.3rem;
+          background: rgba(255,255,255,.9);
+          box-shadow: 0 18px 44px rgba(69,53,108,.16);
+          backdrop-filter: blur(14px);
+          opacity: 0;
+          animation: ikk-card-in .55s cubic-bezier(.16,1,.3,1) 2.6s forwards;
+        }
+
+        /* --- Belohnung bei der Ankunft ------------------------------------ */
+
+        .ikk-clay-journey__reward {
+          position: absolute;
+          left: 78.5%;
+          top: 18.5%;
+          width: 1px;
+          height: 1px;
+          pointer-events: none;
+        }
+
+        .ikk-clay-journey__reward-halo,
+        .ikk-clay-journey__reward-ring {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          border-radius: 50%;
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(.45);
+        }
+
+        .ikk-clay-journey__reward-halo {
+          width: clamp(96px, 15vw, 190px);
+          aspect-ratio: 1;
+          background: radial-gradient(circle, rgba(255,239,158,.8) 0 12%, rgba(188,230,207,.45) 34%, rgba(200,181,239,.2) 58%, transparent 72%);
+          filter: blur(2px);
+          mix-blend-mode: multiply;
+          animation: ikk-reward-halo 1.95s cubic-bezier(.16,1,.3,1) 8.02s 3;
+        }
+
+        .ikk-clay-journey__reward-ring {
+          width: clamp(74px, 11vw, 140px);
+          aspect-ratio: 1;
+          border: 5px solid rgba(246, 202, 87, .66);
+          box-shadow: 0 0 0 8px rgba(183, 226, 202, .2), inset 0 0 18px rgba(255, 239, 158, .45);
+          animation: ikk-reward-ring 1.95s cubic-bezier(.16,1,.3,1) 8.04s 3;
+        }
+
+        .ikk-clay-journey__particle {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 11px;
+          height: 11px;
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0) rotate(0deg);
+          animation: ikk-reward-burst 1.8s cubic-bezier(.16,1,.3,1) calc(8.08s + var(--i) * .055s) 3;
+        }
+
+        .ikk-clay-journey__particle.is-dot {
+          border-radius: 50%;
+          box-shadow: inset 0 2px 2px rgba(255,255,255,.65), 0 5px 10px rgba(69,53,108,.15);
+        }
+
+        .ikk-clay-journey__particle.is-bar {
+          width: 8px;
+          height: 20px;
+          border-radius: 999px;
+          box-shadow: inset 0 2px 2px rgba(255,255,255,.55), 0 5px 10px rgba(69,53,108,.12);
+        }
+
+        .ikk-clay-journey__particle.is-star {
+          width: 15px;
+          height: 15px;
+          clip-path: polygon(50% 0, 60% 38%, 100% 50%, 60% 62%, 50% 100%, 40% 62%, 0 50%, 40% 38%);
+          filter: drop-shadow(0 4px 5px rgba(121, 82, 28, .14));
+        }
+
+        .ikk-clay-journey__particle.is-gold { background: linear-gradient(145deg, #fff2aa, #e7aa3d); }
+        .ikk-clay-journey__particle.is-mint { background: linear-gradient(145deg, #dcf4e7, #68bd92); }
+        .ikk-clay-journey__particle.is-violet { background: linear-gradient(145deg, #eee4ff, #a684dc); }
+
+        @keyframes ikk-reward-halo {
+          0%   { opacity: 0; transform: translate(-50%, -50%) scale(.42); }
+          18%  { opacity: .85; transform: translate(-50%, -50%) scale(.85); }
+          42%  { opacity: .5;  transform: translate(-50%, -50%) scale(1.2); }
+          100% { opacity: .28; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes ikk-reward-ring {
+          0%   { opacity: 0;   transform: translate(-50%, -50%) scale(.38); }
+          30%  { opacity: .85; transform: translate(-50%, -50%) scale(.75); }
+          100% { opacity: 0;   transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        @keyframes ikk-reward-burst {
+          0%   { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+          14%  { opacity: 1; transform: translate(-50%, -50%) scale(.45) rotate(0deg); }
+          62%  { opacity: 1; transform: translate(var(--bx), var(--by)) scale(1) rotate(115deg); }
+          100% { opacity: .34; transform: translate(var(--bx), var(--by)) scale(.76) rotate(190deg); }
+        }
+
+        .ikk-clay-journey__outcome-icon {
+          width: 100%;
+          aspect-ratio: 1;
+          background-image: url('/images/ikk-switch/ikk-outcome-icons-v1.webp');
+          background-repeat: no-repeat;
+          background-size: 300% 100%;
+          filter: drop-shadow(0 8px 10px rgba(69,53,108,.12));
+        }
+
+        .ikk-clay-journey__outcome-copy small,
+        .ikk-clay-journey__outcome-copy strong,
+        .ikk-clay-journey__outcome-copy span,
+        .ikk-clay-journey__outcome-copy p {
+          display: block;
+          margin: 0;
+          line-height: 1.18;
+        }
+
+        .ikk-clay-journey__outcome-copy {
+          min-width: 0;
+        }
+
+        .ikk-clay-journey__outcome-copy strong,
+        .ikk-clay-journey__outcome-copy span,
+        .ikk-clay-journey__outcome-copy p {
+          overflow-wrap: anywhere;
+          hyphens: auto;
+        }
+
+        .ikk-clay-journey__outcome-copy small {
+          color: #347a59;
+          font-size: clamp(.52rem, .95vw, .66rem);
+          font-weight: 900;
+          letter-spacing: .04em;
+          text-transform: uppercase;
+        }
+
+        .ikk-clay-journey__outcome-copy strong {
+          margin-top: .22rem;
+          color: #211a3e;
+          font-size: clamp(.72rem, 1.3vw, .95rem);
+          font-weight: 900;
+        }
+
+        .ikk-clay-journey__outcome-copy span {
+          margin-top: .33rem;
+          color: #6d47a8;
+          font-size: clamp(.82rem, 1.6vw, 1.2rem);
+          font-weight: 950;
+        }
+
+        .ikk-clay-journey__outcome-copy p {
+          margin-top: .2rem;
+          color: #6b6680;
+          font-size: clamp(.58rem, 1.05vw, .72rem);
+          font-weight: 700;
+        }
+
+        /* --- Mobil ------------------------------------------------------- */
+
+        @media (max-width: 639px) {
+          .ikk-clay-journey {
+            aspect-ratio: 4 / 5;
+            border-radius: 1.55rem;
+          }
+
+          /* Der komplette 16:9-Film bleibt sichtbar. Die Textkarten nutzen die
+             ruhigen Flaechen darueber und darunter, statt die Figur seitlich
+             aus dem Film zu schneiden. */
+          .ikk-clay-journey__film {
+            inset: 27% 0 auto;
+            height: 45%;
+            object-fit: contain;
+            object-position: center;
+          }
+
+          .ikk-clay-journey__continuity {
+            top: 2.5%;
+            right: auto;
+            left: 4%;
+            width: 92%;
+            padding: .55rem .7rem;
+          }
+
+          .ikk-clay-journey__continuity-icon {
+            width: 2rem;
+            height: 2rem;
+          }
+
+          .ikk-clay-journey__fund {
+            min-width: 40%;
+            padding: .52rem .62rem;
+            border-radius: .85rem;
+          }
+
+          .ikk-clay-journey__fund--source {
+            top: 15%;
+            bottom: auto;
+            left: 4%;
+            text-align: left;
+          }
+
+          .ikk-clay-journey__fund--destination {
+            top: 15%;
+            bottom: auto;
+            right: 4%;
+            text-align: right;
+          }
+
+          .ikk-clay-journey__outcome {
+            top: auto;
+            left: 4%;
+            bottom: 3%;
+            width: 92%;
+            grid-template-columns: minmax(62px, 22%) 1fr;
+            gap: .58rem;
+            padding: .62rem .68rem;
+            border-radius: 1.05rem;
+          }
+
+          .ikk-clay-journey__reward {
+            left: 78.5%;
+            top: 34.5%;
+          }
+
+          .ikk-clay-journey__reward-halo { width: 88px; }
+          .ikk-clay-journey__reward-ring { width: 70px; }
+
+          .ikk-clay-journey__particle {
+            animation-name: ikk-reward-burst-mobile;
+          }
+
+          @keyframes ikk-reward-burst-mobile {
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+            14%  { opacity: 1; transform: translate(-50%, -50%) scale(.4) rotate(0deg); }
+            62%  { opacity: 1; transform: translate(calc(var(--bx) * .58), calc(var(--by) * .58)) scale(.84) rotate(110deg); }
+            100% { opacity: .34; transform: translate(calc(var(--bx) * .58), calc(var(--by) * .58)) scale(.64) rotate(175deg); }
+          }
+
+          .ikk-clay-journey__outcome-copy small { font-size: .56rem; }
+          .ikk-clay-journey__outcome-copy strong { font-size: .82rem; }
+          .ikk-clay-journey__outcome-copy span { font-size: clamp(.9rem, 4vw, 1.05rem); }
+          .ikk-clay-journey__outcome-copy p { font-size: .65rem; }
+        }
+
+        @media (max-width: 374px) {
+          .ikk-clay-journey__film {
+            inset: 34% 0 auto;
+            height: 40%;
+          }
+
+          .ikk-clay-journey__continuity {
+            top: 2%;
+            left: 2%;
+            width: 96%;
+            gap: .38rem;
+            padding: .4rem .48rem;
+          }
+
+          .ikk-clay-journey__continuity-icon {
+            width: 1.65rem;
+            height: 1.65rem;
+          }
+
+          .ikk-clay-journey__continuity-icon svg {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          .ikk-clay-journey__continuity strong { font-size: .6rem; }
+          .ikk-clay-journey__continuity small { font-size: .5rem; }
+
+          .ikk-clay-journey__fund {
+            top: 19%;
+            min-width: 42%;
+            max-width: 44%;
+            padding: .4rem .44rem;
+          }
+
+          .ikk-clay-journey__fund--source { left: 2%; }
+          .ikk-clay-journey__fund--destination {
+            right: 2%;
+            max-width: 46%;
+          }
+          .ikk-clay-journey__fund small {
+            font-size: .42rem;
+            letter-spacing: .04em;
+          }
+          .ikk-clay-journey__fund strong { font-size: .66rem; }
+          .ikk-clay-journey__fund span { font-size: .48rem; }
+
+          .ikk-clay-journey__outcome {
+            left: 2%;
+            bottom: 2%;
+            width: 96%;
+            grid-template-columns: minmax(42px, 19%) 1fr;
+            gap: .38rem;
+            padding: .48rem .52rem;
+          }
+
+          .ikk-clay-journey__outcome-copy small { font-size: .48rem; }
+          .ikk-clay-journey__outcome-copy strong { font-size: .68rem; }
+          .ikk-clay-journey__outcome-copy span { font-size: .78rem; }
+          .ikk-clay-journey__outcome-copy p { font-size: .55rem; }
+
+          .ikk-clay-journey__reward {
+            left: 78.5%;
+            top: 40.5%;
+          }
+        }
+      `}</style>
+    </figure>
   );
 };
 

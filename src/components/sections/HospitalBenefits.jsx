@@ -3,14 +3,17 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { Check } from 'lucide-react';
 
 const mainBenefitKeys = ['spitzenversorgung', 'privatsphaere', 'wartezeiten', 'familienfreundlich'];
 
 const featureKeys = ['einbettzimmer', 'chefarzt', 'klinikwahl', 'keineWartezeit', 'tagegeld', 'ambulanteOps', 'familienzimmer', 'vorNachStationaer'];
 
-const mainBenefitIcons = ['🩺', '🛏️', '⏱️', '👨‍👩‍👧'];
-const featureIcons = ['🏥', '🧑‍⚕️', '🗺️', '⏱️', '💶', '🌍', '👶', '☕'];
-const featureTones = ['mint', 'lavender', 'sky', 'butter', 'butter', 'sky', 'coral', 'lavender'];
+// Nur die vier Hauptvorteile tragen eine Emoji-Kachel. Die acht Detailpunkte
+// darunter bekommen ein schlichtes Häkchen, sonst konkurrieren zwölf bunte
+// Kacheln direkt untereinander.
+// Reihenfolge: Spitzenversorgung, Privatsphäre, Einstieg für Aktive, Familie
+const mainBenefitIcons = ['🩺', '🛏️', '🏃', '👨‍👩‍👧'];
 
 const HospitalBenefits = () => {
   const { t } = useTranslation('stationaer');
@@ -63,12 +66,12 @@ const HospitalBenefits = () => {
               viewport={{ once: true }}
               className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:border-[#25c990]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <FriendlyIcon
-                emoji={featureIcons[index]}
-                label={t(`benefits.features.${key}.title`)}
-                tone={featureTones[index]}
-                className="mb-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-2"
-              />
+              <span
+                className="mb-5 grid h-10 w-10 place-items-center rounded-full bg-[#25c990]/10 text-[#25c990] ring-1 ring-[#25c990]/25 transition-transform duration-300 group-hover:-translate-y-0.5"
+                aria-hidden="true"
+              >
+                <Check className="h-5 w-5" strokeWidth={3} />
+              </span>
               <h3 className="text-lg font-bold text-slate-900 mb-3">{t(`benefits.features.${key}.title`)}</h3>
               <p className="text-slate-600 text-sm leading-relaxed">{t(`benefits.features.${key}.desc`)}</p>
             </motion.article>

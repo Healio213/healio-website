@@ -2,7 +2,7 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Shield, Clock, ArrowRight, CheckCircle, HelpCircle, FileText, Stethoscope, CalendarCheck, Wallet } from 'lucide-react';
+import { ChevronDown, Shield, Clock, ArrowRight, CheckCircle, HelpCircle, CalendarCheck, Wallet } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import { IKK_LINK } from '@/lib/sdk-url';
 
@@ -23,15 +23,21 @@ const extraDefs = [
 
 const switchStepIcons = [Clock, ArrowRight, Shield];
 const switchStepKeys = ['step1', 'step2', 'step3'];
-const timelineStepIcons = [FileText, Stethoscope, CalendarCheck, Wallet];
-const timelineStepKeys = ['sdk', 'treatment', 'ikkStart', 'bonus'];
+const timelineStepIcons = [Shield, ArrowRight, CalendarCheck, Wallet];
+const timelineStepKeys = ['product', 'switch', 'ikkStart', 'bonus'];
 
-const AmbulantIKKWechsel = () => {
+const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
   const { t } = useTranslation('ambulant');
   const [openIndex, setOpenIndex] = useState(null);
   const [mobileTimelineOpen, setMobileTimelineOpen] = useState(false);
+  const activeVariant = ['ambulant', 'zahn', 'stationaer'].includes(variant) ? variant : 'ambulant';
 
   const identicalItems = t('ikkWechsel.identicalItems', { returnObjects: true });
+  const timelineText = (key, field) => (
+    key === 'product'
+      ? t(`ikkWechsel.threeD.variants.${activeVariant}.timeline.${field}`)
+      : t(`ikkWechsel.timelineSteps.${key}.${field}`)
+  );
 
   return (
     <section id="ikk-wechsel" className="scroll-mt-24 py-12 md:py-20 bg-gradient-to-b from-white to-emerald-50/30">
@@ -96,23 +102,23 @@ const AmbulantIKKWechsel = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-slate-950 text-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-10 mb-12 overflow-hidden relative"
+          className="relative mb-12 overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] p-4 text-[#211a3e] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-10"
         >
-          <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-500/20 to-transparent pointer-events-none" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-200/30 to-transparent" />
           <div className="relative z-10 space-y-8">
-            <Suspense fallback={<div className="h-[420px] sm:h-[520px] lg:h-[560px] rounded-2xl border border-white/10 bg-white/[0.04]" />}>
-              <IkkSwitch3DScene />
+            <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
+              <IkkSwitch3DScene variant={activeVariant} />
             </Suspense>
 
             <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-300 mb-3">
+                <p className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-violet-700">
                   {t('ikkWechsel.reassuranceKicker')}
                 </p>
-                <h3 className="text-2xl md:text-4xl font-extrabold leading-tight mb-4">
+                <h3 className="mb-4 text-2xl font-extrabold leading-tight text-[#211a3e] md:text-4xl">
                   {t('ikkWechsel.reassuranceTitle')}
                 </h3>
-                <p className="text-white/75 text-lg leading-relaxed mb-6">
+                <p className="mb-6 text-lg leading-relaxed text-[#5d5b76]">
                   {t('ikkWechsel.reassuranceText')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -120,14 +126,14 @@ const AmbulantIKKWechsel = () => {
                     href={IKK_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-6 py-3 rounded-lg shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c]"
                   >
                     {t('ikkWechsel.ctaBonus')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </a>
                   <a
                     href="#wechselstrecke"
-                    className="inline-flex items-center justify-center border border-white/25 hover:border-emerald-300 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+                    className="inline-flex items-center justify-center rounded-xl border border-[#bdb2df] bg-white/55 px-6 py-3 font-semibold text-[#4e426f] transition-colors hover:border-violet-400 hover:bg-white/80"
                   >
                     {t('ikkWechsel.ctaTimeline')}
                   </a>
@@ -136,11 +142,13 @@ const AmbulantIKKWechsel = () => {
 
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                 {reassuranceKeys.map((key) => (
-                  <div key={key} className="bg-white/8 border border-white/10 rounded-xl p-4 flex gap-3">
-                    <CheckCircle className="w-5 h-5 text-emerald-300 flex-shrink-0 mt-0.5" />
+                  <div key={key} className="flex gap-3 rounded-2xl border border-white/90 bg-white/65 p-4 shadow-[0_10px_28px_rgba(74,58,110,0.07)] backdrop-blur-sm">
+                    <span className="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[#ece6ff] text-violet-700 ring-1 ring-[#d5caef]">
+                      <CheckCircle className="h-4 w-4" aria-hidden="true" />
+                    </span>
                     <div>
-                      <h4 className="font-bold text-white mb-1">{t(`ikkWechsel.reassuranceItems.${key}.title`)}</h4>
-                      <p className="text-sm text-white/65 leading-relaxed">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
+                      <h4 className="mb-1 font-bold text-[#2e274d]">{t(`ikkWechsel.reassuranceItems.${key}.title`)}</h4>
+                      <p className="text-sm leading-relaxed text-[#66647d]">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
                     </div>
                   </div>
                 ))}
@@ -304,14 +312,14 @@ const AmbulantIKKWechsel = () => {
                           <Icon className="w-5 h-5 md:w-6 md:h-6" />
                         </div>
                         <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
-                          {t(`ikkWechsel.timelineSteps.${key}.label`)}
+                          {timelineText(key, 'label')}
                         </div>
                       </div>
                       <h4 className="font-bold text-gray-900 text-base md:text-lg mb-2">
-                        {t(`ikkWechsel.timelineSteps.${key}.title`)}
+                        {timelineText(key, 'title')}
                       </h4>
                       <p className="text-sm text-gray-600 leading-relaxed">
-                        {t(`ikkWechsel.timelineSteps.${key}.desc`)}
+                        {timelineText(key, 'desc')}
                       </p>
                     </div>
                   );
