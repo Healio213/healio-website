@@ -51,7 +51,11 @@ Gute Nachricht: Die SDK lehnt grundsätzlich niemanden ab. Auch mit Vorerkrankun
 
 Wartezeiten gibt es bei den ambulanten AP-Tarifen keine. Der volle Versicherungsschutz beginnt ab dem ersten Tag. Das gilt für alle Tarife AP5, AP7, AP9 und AP1.
 
-Wichtig für Schwangere: Wer bei Antragstellung bereits schwanger ist, bekommt für die laufende Schwangerschaft nur Komplikationen erstattet, nicht aber die regulären Vorsorgeuntersuchungen. Der Vorsorge-Schutz greift erst für eine spätere Schwangerschaft.
+Wichtig für Schwangere, ambulant und stationär unterscheiden sich hier grundlegend:
+- Ambulant ist die Vorsorge während der Schwangerschaft in den Bedingungen ausdrücklich als versicherte Leistung genannt (AVB 1.753a: "Versichert sind die Kosten für ambulante Vorsorgeuntersuchungen zur Früherkennung von Krankheiten, die Vorsorge während der Schwangerschaft, sportmedizinische Untersuchungen"). Weil es zusätzlich keine Wartezeiten gibt, steht der Vorsorge-Topf auch dann zur Verfügung, wenn die Schwangerschaft bei Antragstellung bereits feststeht.
+- Nicht versichert ist ambulant die Untersuchung und Behandlung wegen Schwangerschaft und Entbindung sowie deren Folgen, also die Behandlung von Beschwerden. Ausdrücklich doch erstattet werden Schwangerschaftskomplikationen, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche, Fehlgeburten und ein medizinisch indizierter Schwangerschaftsabbruch.
+- Stationär gilt das Gegenteil: Ist die Schwangerschaft bei Antragstellung ärztlich festgestellt, wird für diese Entbindung und für Komplikationen während der Entbindung nicht geleistet.
+Kurzformel fürs Gespräch: Die Vorsorge geht noch, die Geburt im Krankenhaus nicht mehr.
 
 Auch Neugeborene können innerhalb der ersten 2 Lebensmonate ohne neue Gesundheitsprüfung mitversichert werden, wenn ein Elternteil bei der SDK versichert ist.
 
@@ -214,7 +218,7 @@ Was die SDK NICHT übernimmt:
 - Nahrungsergänzungsmittel aus Drogerie oder Supermarkt sind keine Arzneimittel und werden daher nicht erstattet.
 - 3D oder 4D Babykino ohne medizinischen Vorsorgezweck ist nicht versichert.
 
-Wichtig: Schwangere sollten den Tarif idealerweise vor der Schwangerschaft abschließen, damit der volle Schutz greift. Bei Abschluss während laufender Schwangerschaft sind die regulären Vorsorgeuntersuchungen für diese Schwangerschaft nicht erstattungsfähig, weil die Versicherung nicht für Versicherungsfälle leistet, die vor Versicherungsbeginn eingetreten sind.
+Wichtig: Der ambulante Vorsorge-Topf steht auch bei bereits bestehender Schwangerschaft zur Verfügung, weil die Vorsorge während der Schwangerschaft in den Bedingungen ausdrücklich als versicherte Leistung genannt ist und es keine Wartezeiten gibt. Ein Abschluss lohnt sich also auch dann noch. Was für diese Schwangerschaft nicht mehr geht, ist der stationäre Bereich, also Wahlleistungen bei der Entbindung im Krankenhaus. Und ambulant bleibt die Behandlung von Schwangerschaftsbeschwerden ausgeschlossen, versichert sind aber Komplikationen, Frühgeburten bis Ende der 36. Woche und Fehlgeburten.
 
 ---
 
@@ -347,7 +351,7 @@ Frage: Ist der Bonus wirklich steuerfrei?
 Antwort: Ja, der IKK Bonus ist komplett steuerfrei. Er wird direkt ausgezahlt oder mit deiner Zusatzversicherung verrechnet.
 
 Frage: Ich bin schwanger, lohnt sich das jetzt noch?
-Antwort: Ehrlich gesagt kommt es darauf an, worum es dir geht. Für diese Geburt selbst ist es leider zu spät. Sobald eine Schwangerschaft ärztlich festgestellt ist, zahlt keine Zusatzversicherung mehr für diese Entbindung, das ist am ganzen Markt so. Was aber sehr wohl geht, ist dein Kind. Ein Neugeborenes wird aufgenommen, ohne dass jemand nach seiner Gesundheit fragt, ohne Wartezeit und ohne Zuschlag, sogar bei Geburtsschäden oder angeborenen Krankheiten. Voraussetzung ist nur, dass ein Elternteil zum Zeitpunkt der Geburt versichert ist und das Kind innerhalb von zwei Monaten nach der Geburt angemeldet wird. Das ist die einzige Gelegenheit im Leben, zu der der Gesundheitszustand keine Rolle spielt. Und für ein weiteres Kind wärst du dann komplett abgesichert.
+Antwort: Ja, es lohnt sich, und zwar aus zwei Gründen. Erstens ambulant: Die Vorsorge während der Schwangerschaft ist ausdrücklich mitversichert und es gibt keine Wartezeiten. Die Zusatzuntersuchungen beim Frauenarzt, die du sonst selbst zahlst, laufen also über den Vorsorge-Topf, auch wenn die Schwangerschaft schon feststeht. Nur die Behandlung von Beschwerden ist ausgeschlossen, Komplikationen dagegen versichert. Zweitens, und das ist der noch wichtigere Punkt: dein Kind. Ehrlich dazusagen muss ich, dass für die Entbindung im Krankenhaus, also Familienzimmer und Chefarzt, der Zug abgefahren ist. Sobald eine Schwangerschaft ärztlich festgestellt ist, zahlt dafür keine Zusatzversicherung mehr, das ist am ganzen Markt so. Was aber sehr wohl geht, ist dein Kind. Ein Neugeborenes wird aufgenommen, ohne dass jemand nach seiner Gesundheit fragt, ohne Wartezeit und ohne Zuschlag, sogar bei Geburtsschäden oder angeborenen Krankheiten. Voraussetzung ist nur, dass ein Elternteil zum Zeitpunkt der Geburt versichert ist und das Kind innerhalb von zwei Monaten nach der Geburt angemeldet wird. Das ist die einzige Gelegenheit im Leben, zu der der Gesundheitszustand keine Rolle spielt. Und für ein weiteres Kind wärst du dann komplett abgesichert.
 
 Frage: Warum ist die Geburt nicht mitversichert?
 Antwort: Weil eine festgestellte Schwangerschaft versicherungsrechtlich als bereits laufendes Ereignis gilt. Versicherungen leisten grundsätzlich nicht für Fälle, die vor Vertragsbeginn schon eingetreten sind. Das ist bei allen Anbietern gleich. Deshalb ist der beste Zeitpunkt für einen Abschluss immer vor der Schwangerschaft, oder eben im Wochenbett mit Blick auf ein weiteres Kind.

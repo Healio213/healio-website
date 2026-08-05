@@ -42,19 +42,59 @@
     ],
     "ikkTitle": "IKK classic Leistungen",
     "ikkItems": [
-      { "name": "Hebammen Rufbereitschaft", "amount": "250 €", "detail": "je Schwangerschaft" },
-      { "name": "Mineralstoffe", "amount": "100 €", "detail": "Eisen, Folsäure, Magnesium (z.B. Femibion)" },
-      { "name": "Ergänzende Vorsorge", "amount": "100 €", "detail": "Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie" },
-      { "name": "Rückbildungsgymnastik", "amount": "75 €", "detail": "Bonus mit Zusatzversicherung" },
-      { "name": "Mutterschaftsvorsorge", "amount": "30 €", "detail": "je Vorsorgeuntersuchung, Bonus mit Zusatzversicherung" },
-      { "name": "Geburtsvorbereitungskurse", "amount": "kostenlos", "detail": "inkl. Partner Kurs (Keleya)" },
-      { "name": "Haus und Geburtshausgeburt", "amount": "kostenlos", "detail": "Hebamme + Betriebskosten Zuschuss" }
+      {
+        "name": "Hebammen Rufbereitschaft",
+        "amount": "250 €",
+        "detail": "je Schwangerschaft"
+      },
+      {
+        "name": "Mineralstoffe",
+        "amount": "100 €",
+        "detail": "Eisen, Folsäure, Magnesium (z.B. Femibion)"
+      },
+      {
+        "name": "Ergänzende Vorsorge",
+        "amount": "100 €",
+        "detail": "Toxoplasmose, Streptokokken, Ringelröteln, Zytomegalie"
+      },
+      {
+        "name": "Rückbildungsgymnastik",
+        "amount": "75 €",
+        "detail": "Bonus mit Zusatzversicherung"
+      },
+      {
+        "name": "Mutterschaftsvorsorge",
+        "amount": "30 €",
+        "detail": "je Vorsorgeuntersuchung, Bonus mit Zusatzversicherung"
+      },
+      {
+        "name": "Geburtsvorbereitungskurse",
+        "amount": "kostenlos",
+        "detail": "inkl. Partner Kurs (Keleya)"
+      },
+      {
+        "name": "Haus und Geburtshausgeburt",
+        "amount": "kostenlos",
+        "detail": "Hebamme + Betriebskosten Zuschuss"
+      }
     ],
     "sdkTitle": "SDK Zusatzversicherung",
     "sdkItems": [
-      { "name": "Schwangerschaftsvorsorge", "amount": "500 €", "detail": "Vorsorge-Topf im Top-Tarif, z. B. für zusätzlichen Ultraschall und Tests" },
-      { "name": "Naturheilverfahren", "amount": "1.000 €", "detail": "Akupunktur, Osteopathie, TCM inkl. verordneter Arzneimittel" },
-      { "name": "Arznei und Hilfsmittel", "amount": "1.000 €", "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel" }
+      {
+        "name": "Schwangerschaftsvorsorge",
+        "amount": "500 €",
+        "detail": "Vorsorge-Topf im Top-Tarif, z. B. für zusätzlichen Ultraschall und Tests"
+      },
+      {
+        "name": "Naturheilverfahren",
+        "amount": "1.000 €",
+        "detail": "Akupunktur, Osteopathie, TCM inkl. verordneter Arzneimittel"
+      },
+      {
+        "name": "Arznei und Hilfsmittel",
+        "amount": "1.000 €",
+        "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel"
+      }
     ],
     "totalLabel": "Schwangerschafts Budget gesamt",
     "totalAmount": "über 1.000 €",
@@ -71,8 +111,8 @@
     "chanceObenText": "Muss das Kind stationär behandelt werden, darf ein Elternteil als Begleitperson mit aufgenommen werden. Unterbringung und Verpflegung werden übernommen, die Familie zahlt sie nicht selbst. Das ist das Rooming-in, und es gilt bis zum 16. Lebensjahr des Kindes, also weit über die Babyzeit hinaus.\n\nDazu kommt die freie Krankenhauswahl. Die Familie kann in die spezialisierte Kinderklinik gehen statt in das Haus, in das eingewiesen wurde, auch wenn es weiter weg ist. Das Kind wird privatärztlich behandelt, also durch den Chefarzt oder einen Spezialisten, und liegt im Ein oder Zweibettzimmer statt im Mehrbettzimmer. Wer schon einmal mit einem schreienden Säugling nachts in einem Vierbettzimmer lag, weiß, was das für eine Mutter im Wochenbett bedeutet.\n\nUnd das alles kostet für ein Kind sehr wenig. Je nach Anbieter und Tarif liegt der Beitrag im Bereich weniger Euro im Monat.",
     "deadlineTitle": "Was du dafür tun musst, und warum du fast nie zu spät kommst",
     "deadlineText": "Die Voraussetzung ist einfach: Ein Elternteil muss versichert sein, wenn das Kind zur Welt kommt. Danach bleiben zwei Monate Zeit, das Kind anzumelden, rückwirkend ab dem Tag der Geburt.\n\nDie SDK verlangt dafür keine Vorlaufzeit. Es genügt, dass der Vertrag der Mutter oder des Vaters zum Zeitpunkt der Geburt läuft. Selbst wenn eine Frau erst im achten Monat davon erfährt, ist ihr Baby ab dem ersten Atemzug vollständig geschützt. Dein Hinweis kommt also fast nie zu spät. Und wenn das Kind schon da ist, hast du in der Wochenbettbetreuung immer noch das Zwei-Monats-Fenster, das ist genau deine Zeit im Haus.\n\nZwei Dinge solltest du wissen, damit du niemandem etwas Falsches sagst: Die Bayerische verlangt drei Monate Vorlauf, dort ist im sechsten Schwangerschaftsmonat Schluss. Und das Kind kann nur den Schutz bekommen, den der bestversicherte Elternteil hat. Wer für sein Kind das Einbettzimmer möchte, muss es selbst versichert haben.",
-    "ehrlichTitle": "Was ehrlicherweise nicht mehr geht: die laufende Geburt",
-    "ehrlichText": "Damit du nichts versprichst, was am Ende nicht hält: Sobald eine Schwangerschaft beim Arzt festgestellt ist, gilt sie als laufendes Ereignis. Für diese eine Entbindung zahlt dann keine Zusatzversicherung mehr, bei keinem Anbieter. Kommt eine Frau im fünften Monat zu dir, kann sie für die Geburt selbst kein Familienzimmer und keinen Chefarzt mehr absichern. Das ist keine Schwäche eines einzelnen Tarifs, das ist überall so.\n\nDas ändert aber nichts an allem, was oben steht. Das Kind ist versicherungsrechtlich ein eigener Mensch und ein eigener Vertrag. Für das Baby ist es nicht zu spät, auch wenn es für die Geburt zu spät ist. Genau diese Unterscheidung versteht kaum jemand, und genau deshalb ist dein Hinweis so viel wert.",
+    "ehrlichTitle": "Wichtig: ambulant und stationär fallen völlig unterschiedlich aus",
+    "ehrlichText": "Damit du nichts versprichst, was am Ende nicht hält, und nichts verschenkst, was möglich wäre: Bei einer bereits festgestellten Schwangerschaft verhalten sich die beiden Bereiche gegensätzlich.\n\nStationär, also die Entbindung im Krankenhaus, ist es zu spät. Steht die Schwangerschaft bei Antragstellung ärztlich fest, wird für diese Entbindung nicht geleistet. Kommt eine Frau im fünften Monat zu dir, kann sie für diese Geburt kein Familienzimmer und keinen Chefarzt mehr absichern. Das ist keine Schwäche eines einzelnen Tarifs, das ist am Markt überall so.\n\nAmbulant sieht es dagegen gut aus, und das wissen die wenigsten. In den Bedingungen der SDK ist die Vorsorge während der Schwangerschaft ausdrücklich als versicherte Leistung aufgeführt, und Wartezeiten gibt es in den ambulanten Tarifen keine. Der Vorsorge-Topf steht damit auch dann zur Verfügung, wenn die Schwangerschaft bei Abschluss schon feststeht. Die Zusatzuntersuchungen beim Frauenarzt sind für deine Familien also nicht verloren.\n\nDie Grenze verläuft zwischen Vorsorge und Behandlung: Die Behandlung von Schwangerschaftsbeschwerden ist ausgeschlossen. Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten sind dagegen versichert.",
     "roomingTitle": "Und beim nächsten Kind ist dann auch die Geburt dabei",
     "roomingText": "Die SDK verzichtet in den Klinik-Tarifen vollständig auf Wartezeiten. Wer den Vertrag hat, bevor eine nächste Schwangerschaft ärztlich festgestellt wird, hat auch die Entbindung voll abgesichert: das Familienzimmer, die privatärztliche Behandlung und sogar die gesondert berechenbaren Leistungen von Beleghebammen und Belegentbindungspflegern.\n\nDeshalb ist das Wochenbett der beste Moment für ein Wort dazu. Die Familie sichert jetzt ihr Neugeborenes ab, und für ein weiteres Kind ist dann alles dabei, was diesmal nicht mehr ging.",
     "compareTitle": "Welcher Tarif für Familien? Unsere ehrliche Einordnung",
