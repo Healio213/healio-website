@@ -146,6 +146,14 @@
     "description": "Dafür gibt es bei Healio einen eigenen Bereich – klar getrennt von deiner Krankenzusatzversicherung.",
     "cta": "Zur Tierkrankenversicherung"
   },
+  "ticker": {
+    "ariaLabel": "Orientierung für den passenden Zusatzschutz",
+    "threeAreas": "Ambulant, Zahn oder stationär – nur dort, wo es zählt",
+    "notEverything": "Nicht jeder braucht alles",
+    "needsFirst": "Bedarf vor Produkt",
+    "clearConditions": "Leistungen, Grenzen und Ausschlüsse klar verstehen",
+    "personalSupport": "Persönlicher Ansprechpartner – auch nach dem Abschluss"
+  },
   "finalCta": {
     "eyebrow": "Dein nächster Schritt",
     "title": "Du musst heute nicht alles versichern. Aber du solltest wissen, was du offenlässt.",

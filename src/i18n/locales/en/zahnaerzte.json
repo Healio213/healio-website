@@ -182,5 +182,21 @@
     "title": "Does this patient service fit your practice?",
     "subtitle": "We show you the material, the process and the clear responsibilities. You then decide at your own pace whether a joint pilot makes sense.",
     "calendarTitle": "Book an introductory meeting for dental practices"
+  },
+  "ticker": {
+    "ariaLabel": "Important benefits for dental practices and patients",
+    "immediateCover": "ZAHN Sofort: up to EUR 1,500 with no waiting period",
+    "cleaning": "Selected plans: dental cleaning with no annual limit",
+    "reimbursement": "Strong plans: up to 100% of eligible costs",
+    "missingTeeth": "Up to three missing teeth may be insured for a surcharge",
+    "clearRoles": "The practice informs – Healio checks and advises"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita offers help with the Healio concept for dental practices",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
+    "title": "Would you like me to explain the practice concept?",
+    "body": "I can briefly show how you inform patients without giving insurance advice, while Healio handles the rest.",
+    "cta": "Yes, explain the practice concept"
   }
 }

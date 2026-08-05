@@ -6,7 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
-import AmbulantTicker from '@/components/sections/ambulant/AmbulantTicker';
+import ProductTicker from '@/components/sections/ProductTicker';
 import AmbulantConversionNudge from '@/components/sections/ambulant/AmbulantConversionNudge';
 import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
@@ -97,7 +97,7 @@ const AmbulantPage = () => {
       <main className="min-h-screen bg-white relative">
         <AmbulantHero />
 
-        <AmbulantTicker />
+        <ProductTicker variant="ambulant" />
 
         {/* Qualitätssiegel: SDK + IKK classic */}
         <FadeInUp>

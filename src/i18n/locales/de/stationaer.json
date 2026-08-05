@@ -7,14 +7,27 @@
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
   },
+  "ticker": {
+    "ariaLabel": "Aktuelle Highlights der Krankenhauszusatzversicherung",
+    "privateRoom": "Ein- oder Zweibettzimmer – je nach Klinik-Tarif",
+    "privateDoctor": "Privatärztliche Behandlung durch Chefarzt oder Belegarzt",
+    "clinicChoice": "Freie Krankenhauswahl – auch Privat- und Spezialkliniken",
+    "noWait": "Keine Wartezeit für neue Versicherungsfälle ab Versicherungsbeginn",
+    "roomingIn": "SDK Rooming-in für Kinder unter 16 Jahren",
+    "accidentCover": "SDK Unfalltarif ohne Gesundheitsprüfung",
+    "replacementAllowance": "Im SP1 bei Leistungsverzicht bis zu 100 EUR pro Tag",
+    "ikkBonus": "Je nach Bonus kann die IKK classic den Klinikbeitrag teilweise oder vollständig ausgleichen"
+  },
   "siegel": {
     "eyebrow": "Vertrauen im Ernstfall",
     "title": "Ausgezeichneter Klinikschutz. Starke Kooperation.",
     "subtitle": "Die Auszeichnungen des aktuellen Klinikpartners und die IKK classic Kooperation werden getrennt gezeigt – damit jederzeit klar bleibt, wofür jedes Siegel steht.",
+    "partnersLabel": "Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic",
     "awardsLabel": "Auszeichnungen der SDK",
     "cooperationLabel": "In Kooperation mit",
     "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deines Klinik-Tarifs je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
     "ikkAwardsLabel": "Aktuelle IKK classic Auszeichnungen",
+    "moreAwardsLabel": "Weitere IKK classic Auszeichnungen",
     "ikkLogoAlt": "Logo der IKK classic",
     "awards": {
       "warentest": "Stiftung Warentest SEHR GUT (0,9) für die SDK Krankheitskostenvollversicherung",
@@ -22,6 +35,11 @@
       "morgenMorgen": "Morgen und Morgen Auszeichnung für die SDK"
     },
     "ikkAwards": {
+      "performance": "Krankenkassentest für Leistung, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
+      "overall": "Krankenkassentest Gesamt, IKK classic Note 1,3 Sehr Gut, Stand 03/2026",
+      "selfEmployed": "Krankenkassentest für Selbstständige, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
+      "seniors": "Krankenkassentest für Senioren, IKK classic Note 1,6 Gut, Stand 03/2026",
+      "students": "Krankenkassentest für Studenten, IKK classic Note 1,4 Sehr Gut, Stand 03/2026",
       "family": "Krankenkassentest für Familien, IKK classic Note 1,6 Gut, Stand 03/2026",
       "parents": "Krankenkassentest für Schwangere und junge Eltern, IKK classic Note 1,7 Gut, Stand 03/2026"
     }
@@ -277,5 +295,13 @@
         "a": "Für alle, die im Ernstfall Wahlfreiheit wollen: Sportler und Aktive (auch über den günstigen Unfall-Tarif), Selbstständige, die schnell wieder auf die Beine müssen, und Familien, die beim Kind bleiben wollen. Voraussetzung ist eine gesetzliche Krankenversicherung."
       }
     ]
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Klinik-Konzept an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir den Klinikschutz erklären?",
+    "body": "Ich erkläre dir kurz, wie Klinik-Tarif und IKK-Bonus zusammenspielen und welcher Schutz zu dir passt.",
+    "cta": "Ja, Klinikschutz erklären"
   }
 }

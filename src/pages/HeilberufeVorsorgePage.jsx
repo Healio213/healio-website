@@ -21,6 +21,8 @@ import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 // Reusable Eyebrow-Pill für alle Sektionen
@@ -163,6 +165,8 @@ const HeilberufeVorsorgePage = () => {
             </motion.div>
           </div>
         </section>
+
+        <ProductTicker variant="heilberufe" />
 
         {/* EXKLUSIVITÄT – Rahmenverträge */}
         <motion.section
@@ -666,6 +670,7 @@ const HeilberufeVorsorgePage = () => {
         </section>
 
       </main>
+      <AmbulantMiaPrompt variant="heilberufe" />
     </>
   );
 };

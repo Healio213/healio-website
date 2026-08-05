@@ -28,14 +28,49 @@ const awardSets = {
   ],
 };
 
-const ikkAwards = [
+const primaryIkkAwards = {
+  zahn: [
+    {
+      src: '/siegel/ikk/krankenkasseninfo-leistungen.png',
+      altKey: 'siegel.ikkAwards.performance',
+    },
+    {
+      src: '/siegel/ikk/familien-test.webp',
+      altKey: 'siegel.ikkAwards.family',
+    },
+  ],
+  stationaer: [
+    {
+      src: '/siegel/ikk/familien-test.webp',
+      altKey: 'siegel.ikkAwards.family',
+    },
+    {
+      src: '/siegel/ikk/schwangere-test.webp',
+      altKey: 'siegel.ikkAwards.parents',
+    },
+  ],
+};
+
+const furtherIkkAwards = [
   {
-    src: '/siegel/ikk/familien-test.webp',
-    altKey: 'siegel.ikkAwards.family',
+    src: '/siegel/ikk/krankenkasseninfo-gesamt.png',
+    altKey: 'siegel.ikkAwards.overall',
   },
   {
-    src: '/siegel/ikk/schwangere-test.webp',
-    altKey: 'siegel.ikkAwards.parents',
+    src: '/siegel/ikk/krankenkasseninfo-leistungen.png',
+    altKey: 'siegel.ikkAwards.performance',
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-selbststaendige.png',
+    altKey: 'siegel.ikkAwards.selfEmployed',
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-senioren.png',
+    altKey: 'siegel.ikkAwards.seniors',
+  },
+  {
+    src: '/siegel/ikk/krankenkasseninfo-studenten.png',
+    altKey: 'siegel.ikkAwards.students',
   },
 ];
 
@@ -43,81 +78,61 @@ const QualityCooperationSection = ({ variant }) => {
   const namespace = variant === 'zahn' ? 'zahn' : 'stationaer';
   const { t } = useTranslation(namespace);
   const awards = awardSets[namespace];
+  const mainAwards = [...awards, ...primaryIkkAwards[namespace]];
+  const mainAwardPaths = new Set(mainAwards.map((award) => award.src));
+  const remainingIkkAwards = furtherIkkAwards.filter((award) => !mainAwardPaths.has(award.src));
 
   return (
-    <section className="border-b border-slate-100 bg-white py-12 md:py-16" aria-labelledby={`${namespace}-quality-heading`}>
-      <div className="healio-container px-4">
-        <header className="mx-auto mb-8 max-w-3xl text-center">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-emerald-600">
-            {t('siegel.eyebrow')}
-          </p>
-          <h2 id={`${namespace}-quality-heading`} className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
-            {t('siegel.title')}
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-            {t('siegel.subtitle')}
-          </p>
-        </header>
+    <section className="border-b border-slate-100 bg-white py-10 md:py-12" aria-label={t('siegel.partnersLabel')}>
+      <div className="container mx-auto px-4">
+        <p className="mb-7 text-center text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 md:text-base">
+          {t('siegel.partnersLabel')}
+        </p>
 
-        <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-[1.08fr_0.92fr]">
-          <article className="flex h-full flex-col rounded-[1.75rem] border border-slate-200/80 bg-gradient-to-br from-white via-white to-slate-50 p-5 shadow-[0_18px_45px_rgba(35,48,67,0.08)] sm:p-7">
-            <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-              {t('siegel.awardsLabel')}
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-6 md:gap-x-12 md:gap-y-8">
+          {mainAwards.map((award) => (
+            <img
+              key={award.src}
+              src={award.src}
+              alt={t(award.altKey)}
+              className="h-20 w-auto max-w-[170px] object-contain sm:h-24 sm:max-w-[190px] md:h-28 lg:h-32"
+              loading="lazy"
+            />
+          ))}
+        </div>
+
+        <div className="mx-auto mt-8 max-w-4xl rounded-lg border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-emerald-50 px-5 py-5 shadow-sm md:mt-10 md:px-8 md:py-6">
+          <div className="flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-6 sm:text-left">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500 md:text-sm">
+              {t('siegel.cooperationLabel')}
             </p>
-            <div className={`grid flex-1 content-center gap-4 ${awards.length === 2 ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'}`}>
-              {awards.map((award) => (
-                <div
-                  key={award.src}
-                  className={`flex min-h-36 items-center justify-center rounded-2xl border border-white bg-white px-3 py-4 shadow-[0_10px_24px_rgba(45,58,76,0.08)] ring-1 ring-slate-100 ${awards.length === 3 ? 'last:col-span-2 last:mx-auto last:w-1/2 sm:last:col-span-1 sm:last:mx-0 sm:last:w-auto' : ''}`}
-                >
-                  <img
-                    src={award.src}
-                    alt={t(award.altKey)}
-                    className="max-h-28 w-full max-w-44 object-contain"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </article>
+            <img
+              src="/logos/ikk-classic.svg"
+              alt={t('siegel.ikkLogoAlt')}
+              className="h-14 w-auto max-w-[240px] object-contain sm:h-16 md:h-20"
+              loading="lazy"
+            />
+            <p className="max-w-sm text-sm font-medium leading-relaxed text-slate-600 md:text-base">
+              {t('siegel.cooperationText')}
+            </p>
+          </div>
+        </div>
 
-          <article className="relative isolate overflow-hidden rounded-[1.75rem] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-emerald-50 p-6 shadow-[0_18px_45px_rgba(25,126,119,0.10)] sm:p-8">
-            <span className="absolute -right-12 -top-14 h-40 w-40 rounded-full bg-sky-200/30 blur-2xl" aria-hidden="true" />
-            <span className="absolute -bottom-16 -left-12 h-44 w-44 rounded-full bg-emerald-200/35 blur-2xl" aria-hidden="true" />
-
-            <div className="relative flex h-full flex-col items-center text-center">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
-                {t('siegel.cooperationLabel')}
-              </p>
+        <div className="mx-auto mt-7 max-w-6xl md:mt-8">
+          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 md:text-sm">
+            {t('siegel.moreAwardsLabel')}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
+            {remainingIkkAwards.map((award) => (
               <img
-                src="/logos/ikk-classic.svg"
-                alt={t('siegel.ikkLogoAlt')}
-                className="my-4 h-16 w-auto max-w-[230px] object-contain sm:h-20"
+                key={award.src}
+                src={award.src}
+                alt={t(award.altKey)}
+                className="h-auto w-[132px] rounded-md shadow-sm ring-1 ring-slate-100 sm:w-[150px] md:w-[168px] lg:w-[180px]"
                 loading="lazy"
               />
-              <p className="max-w-md text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
-                {t('siegel.cooperationText')}
-              </p>
-
-              <div className="mt-6 w-full border-t border-slate-200/70 pt-5">
-                <p className="mb-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-slate-400">
-                  {t('siegel.ikkAwardsLabel')}
-                </p>
-                <div className="flex items-center justify-center gap-3">
-                  {ikkAwards.map((award) => (
-                    <div key={award.src} className="rounded-xl bg-white/90 p-2 shadow-sm ring-1 ring-slate-100">
-                      <img
-                        src={award.src}
-                        alt={t(award.altKey)}
-                        className="h-16 w-auto object-contain sm:h-20"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

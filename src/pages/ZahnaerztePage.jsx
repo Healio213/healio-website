@@ -20,6 +20,8 @@ import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
@@ -154,6 +156,8 @@ const ZahnaerztePage = () => {
             })}
           </div>
         </section>
+
+        <ProductTicker variant="zahnaerzte" />
 
         <section className="px-4 py-24 sm:px-6 md:px-8 lg:py-32">
           <div className="container mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-20">
@@ -437,6 +441,7 @@ const ZahnaerztePage = () => {
           </div>
         </section>
       </main>
+      <AmbulantMiaPrompt variant="zahnaerzte" />
     </>
   );
 };

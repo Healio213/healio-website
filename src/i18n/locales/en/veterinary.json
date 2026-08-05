@@ -9,6 +9,14 @@
     "ctaSecondary": "Cost analysis",
     "imageAlt": "Woman hugging her Golden Retriever"
   },
+  "ticker": {
+    "ariaLabel": "Benefits of pet health insurance",
+    "emergencyRates": "Emergency treatment may be billed at up to 4x the GOT rate",
+    "surgeryCosts": "Cruciate ligament surgery with aftercare can cost more than EUR 3,000",
+    "surgeryCover": "Surgery-only cover from EUR 20 per month in the example",
+    "freeChoice": "Free choice of vet and clinic, depending on the plan",
+    "coverOptions": "Full cover or surgery-only cover, calculated individually"
+  },
   "tariffs": {
     "title": "Two Concepts. One Goal.",
     "subtitle": "Breed, age, history, we calculate individually. You decide.",

@@ -236,5 +236,21 @@
       "cta": "Zum Formular"
     },
     "disclaimer": "Das Healio Heilberufe-Vorsorgekonzept ist ein privatrechtliches Vorsorgekonzept auf Basis von Einzel- und Gruppenversicherungsverträgen. Versicherungsvermittlung durch die Healio GmbH, Makler nach §34d GewO."
+  },
+  "ticker": {
+    "ariaLabel": "Vorteile des Healio-Vorsorgekonzepts für Heilberufe",
+    "completeProtection": "Praxisschutz und persönliche Vorsorge aus einer Hand",
+    "liability": "Tarifabhängig bis zu 10 Mio. EUR Berufshaftpflicht",
+    "flexibleModules": "Einzelne Schutzbausteine flexibel wählbar",
+    "contractCheck": "Bestehende Verträge prüfen – kein blinder Wechsel",
+    "freeCheck": "Kostenfreier Check durch Healio, Makler nach §34d GewO"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Vorsorgekonzept für Heilberufe an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir das Vorsorgekonzept erklären?",
+    "body": "Ich erkläre dir kurz, wie Einkommensschutz, Altersvorsorge und Gesundheitsbausteine für Heilberufe zusammenspielen.",
+    "cta": "Ja, Vorsorgekonzept erklären"
   }
 }

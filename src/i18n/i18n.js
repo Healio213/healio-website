@@ -39,6 +39,8 @@ import deTiktok from './locales/de/tiktok.json';
 import enTiktok from './locales/en/tiktok.json';
 import deInstagram from './locales/de/instagram.json';
 import enInstagram from './locales/en/instagram.json';
+import deBlog from './locales/de/blog.json';
+import enBlog from './locales/en/blog.json';
 
 i18n
   .use(initReactI18next)
@@ -64,6 +66,7 @@ i18n
         seo: deSeo,
         tiktok: deTiktok,
         instagram: deInstagram,
+        blog: deBlog,
       },
       en: {
         common: enCommon,
@@ -85,6 +88,7 @@ i18n
         seo: enSeo,
         tiktok: enTiktok,
         instagram: enInstagram,
+        blog: enBlog,
       },
     },
     lng: 'de',

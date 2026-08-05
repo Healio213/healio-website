@@ -131,6 +131,14 @@
     "description": "Healio has a dedicated area for this – clearly separate from your own supplementary health insurance.",
     "cta": "Go to pet health insurance"
   },
+  "ticker": {
+    "ariaLabel": "Guidance for choosing supplementary cover",
+    "threeAreas": "Outpatient, dental or hospital – only where it matters",
+    "notEverything": "Not everyone needs everything",
+    "needsFirst": "Needs before product",
+    "clearConditions": "Understand benefits, limits and exclusions",
+    "personalSupport": "A personal contact – even after sign-up"
+  },
   "finalCta": {
     "eyebrow": "Your next step",
     "title": "You do not have to insure everything today. But you should know what you leave open.",

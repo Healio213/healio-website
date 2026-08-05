@@ -182,5 +182,21 @@
     "title": "Passt dieser Patientenservice zu deiner Praxis?",
     "subtitle": "Wir zeigen dir Material, Ablauf und klare Zuständigkeiten. Danach entscheidest du in Ruhe, ob ein gemeinsamer Pilot sinnvoll ist.",
     "calendarTitle": "Kennenlerntermin für Zahnarztpraxen buchen"
+  },
+  "ticker": {
+    "ariaLabel": "Wichtige Vorteile für Zahnarztpraxen und Patienten",
+    "immediateCover": "ZAHN Sofort: bis zu 1.500 EUR ohne Wartezeit",
+    "cleaning": "Ausgewählte Tarife: Zahnreinigung ohne Jahreslimit",
+    "reimbursement": "Leistungsstarke Tarife: bis zu 100 % der erstattungsfähigen Kosten",
+    "missingTeeth": "Bis zu drei fehlende Zähne gegen Zuschlag mitversicherbar",
+    "clearRoles": "Praxis informiert – Healio prüft und berät"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Healio-Konzept für Zahnarztpraxen an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir das Praxiskonzept erklären?",
+    "body": "Ich zeige dir kurz, wie du Patienten informierst, ohne selbst Versicherung zu beraten – und wie Healio den Rest übernimmt.",
+    "cta": "Ja, Praxiskonzept erklären"
   }
 }

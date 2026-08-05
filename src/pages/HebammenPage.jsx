@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -69,6 +71,8 @@ const HebammenPage = () => {
             </motion.div>
           </div>
         </section>
+
+        <ProductTicker variant="hebammen" />
 
         {/* Qualitätssiegel: SDK + IKK classic */}
         <motion.section className="py-10 sm:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -487,6 +491,7 @@ const HebammenPage = () => {
         </section>
 
       </main>
+      <AmbulantMiaPrompt variant="hebammen" />
     </>
   );
 };

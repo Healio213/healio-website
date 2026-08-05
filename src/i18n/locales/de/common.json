@@ -51,5 +51,13 @@
     "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
     "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
   },
+  "lebenshilfeTicker": {
+    "ariaLabel": "Eckdaten der betrieblichen Altersvorsorge bei der Lebenshilfe",
+    "employerContribution": "4,6 % Arbeitgeberbeitrag vom Bruttogehalt",
+    "employeeContribution": "2,3 % verpflichtender Eigenanteil",
+    "socialSecurity": "2026 bis 338 EUR monatlich sozialabgabenfrei",
+    "taxFree": "2026 bis 676 EUR monatlich steuerfrei",
+    "freeAnalysis": "Erstgespräch und Ist-Analyse kostenfrei und unverbindlich"
+  },
   "langSwitch": "EN"
 }

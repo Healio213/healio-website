@@ -13,6 +13,14 @@
   "bookConsultation": "Beratungstermin buchen",
   "atAGlance": "Auf einen Blick",
   "notFound": "Artikel nicht gefunden",
+  "ticker": {
+    "ariaLabel": "Themen im Healio-Ratgeber",
+    "expertKnowledge": "Expertenwissen verständlich erklärt",
+    "healthBudgets": "Gesundheitsbudgets im Überblick",
+    "supplementaryInsurance": "Zusatzversicherungen besser verstehen",
+    "employerBenefits": "Steuerfreie Benefits für Arbeitgeber",
+    "audiences": "Inhalte für Praxen, Partner und Versicherte"
+  },
   "categories": {
     "heilpraktiker": "Heilpraktiker",
     "hebammen": "Hebammen",

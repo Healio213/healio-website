@@ -92,6 +92,14 @@
     ],
     "disclaimer": "Die genannten Werte entstehen nicht automatisch. Sie hängen unter anderem vom gewählten Tarif, der Versicherbarkeit, einer Mitgliedschaft bei der IKK classic und den tatsächlich erfüllten Bonusmaßnahmen ab. Maßgeblich sind die jeweiligen Versicherungs- und Kassenbedingungen."
   },
+  "ticker": {
+    "ariaLabel": "Dafür steht Healio",
+    "broker": "Unabhängiger Versicherungsmakler nach § 34d Abs. 1 GewO",
+    "hamburg": "Persönliche Beratung aus Hamburg",
+    "threeAudiences": "Ein Konzept für Patienten, Praxen und Unternehmen",
+    "needsFirst": "Bedarf vor Tarif",
+    "clearRoles": "Prüfung, Beratung und Vermittlung bleiben bei Healio"
+  },
   "routes": {
     "eyebrow": "Der passende Einstieg",
     "title": "Was können wir für dich tun?",

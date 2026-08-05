@@ -199,6 +199,14 @@
       }
     ]
   },
+  "ticker": {
+    "ariaLabel": "Benefits of integrated employee benefits management",
+    "oneSystem": "Pension, health insurance, prevention and management as one system",
+    "existingSolutions": "Existing solutions are included",
+    "openReview": "The benefits review starts with an open assessment",
+    "ongoing": "Rollout is the beginning – not the end",
+    "contact": "Healio remains the central point of contact"
+  },
   "cta": {
     "eyebrow": "Now, not someday",
     "title": "You cannot catch up on 30 lost years.",

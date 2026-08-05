@@ -8,10 +8,12 @@ import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
+import ProductTicker from '@/components/sections/ProductTicker';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
 import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -144,6 +146,8 @@ const StationaerPage = () => {
           </div>
         </section>
 
+        <ProductTicker variant="stationaer" />
+
         <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
 
         <FadeInUp><HospitalConcept /></FadeInUp>
@@ -194,6 +198,7 @@ const StationaerPage = () => {
         </FadeInUp>
 
         <FadeInUp><HospitalContactForm /></FadeInUp>
+        <AmbulantMiaPrompt variant="stationaer" />
       </article>
     </>
   );

@@ -79,6 +79,14 @@
       "cta": "Angebot anfordern"
     }
   },
+  "ticker": {
+    "ariaLabel": "Vorteile einer Tierkrankenversicherung",
+    "emergencyRates": "Im Notdienst sind bis zu 4-fache GOT-Sätze möglich",
+    "surgeryCosts": "Kreuzband-OP mit Nachsorge kann über 3.000 EUR kosten",
+    "surgeryCover": "OP-Schutz laut Beispiel ab 20 EUR im Monat",
+    "freeChoice": "Je nach Tarif freie Tierarzt- und Klinikwahl",
+    "coverOptions": "Vollschutz oder OP-Schutz – individuell kalkuliert"
+  },
   "contact": {
     "infoLabel": "Sie wollen wissen, was Absicherung für Ihr Tier kostet?",
     "infoText": "Rasse, Alter, Gesundheitsstatus, wir berechnen Ihren individuellen Tarif. Keine Verkaufsgespräche. Zahlen und Fakten.",

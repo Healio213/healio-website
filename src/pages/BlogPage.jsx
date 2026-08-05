@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { Clock, ArrowRight, User, Tag } from 'lucide-react';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 const API_BASE = import.meta.env.VITE_APP_API_URL || 'https://app.healio.de';
 
@@ -132,6 +133,8 @@ const BlogPage = () => {
           </div>
         </div>
       </section>
+
+      <ProductTicker variant="blog" />
 
       <section className="pb-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">

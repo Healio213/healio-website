@@ -140,5 +140,21 @@
     "title": "Gute Versorgung braucht <highlight>klare Wege</highlight>.",
     "subtitle": "30 Minuten. Klare Rollen. Eine ehrliche Entscheidung.",
     "cta": "Kennenlernen buchen"
+  },
+  "ticker": {
+    "ariaLabel": "Vorteile des Healio-Partnernetzwerks",
+    "healthBudget": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich",
+    "neutralInformation": "Praxis informiert neutral – ohne Versicherungsberatung",
+    "healioAdvice": "Healio prüft, berät und begleitet individuell",
+    "freeParticipation": "Kostenfreie Teilnahme für Partnerpraxen",
+    "directContact": "Patienten kontaktieren Healio direkt"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Healio-Partnerkonzept an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir das Partnerkonzept erklären?",
+    "body": "Ich zeige dir kurz, wie deine Praxis Patienten neutral informiert und Healio die Beratung und Begleitung übernimmt.",
+    "cta": "Ja, Partnerkonzept erklären"
   }
 }

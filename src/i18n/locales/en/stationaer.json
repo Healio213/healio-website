@@ -7,14 +7,27 @@
     "ctaBonus": "Secure bonus",
     "heroImageAlt": "Modern hospital private room"
   },
+  "ticker": {
+    "ariaLabel": "Current hospital supplementary insurance highlights",
+    "privateRoom": "Private or twin room, depending on the hospital plan",
+    "privateDoctor": "Private treatment by a chief physician or attending specialist",
+    "clinicChoice": "Free hospital choice, including private and specialist hospitals",
+    "noWait": "No waiting period for new insured events after cover starts",
+    "roomingIn": "SDK rooming-in for children under 16",
+    "accidentCover": "SDK accident plan with no health assessment",
+    "replacementAllowance": "SP1 cash alternative up to EUR 100 per day when benefits are waived",
+    "ikkBonus": "Depending on your bonus, IKK classic can offset part or all of the hospital plan premium"
+  },
   "siegel": {
     "eyebrow": "Trust when it matters",
     "title": "Award-winning hospital cover. A strong partnership.",
     "subtitle": "Awards for the current hospital insurance partner and the IKK classic partnership are shown separately, so it is always clear what each seal represents.",
+    "partnersLabel": "Our partners: SDK Süddeutsche Krankenversicherung & IKK classic",
     "awardsLabel": "SDK awards",
     "cooperationLabel": "In cooperation with",
     "cooperationText": "Depending on the bonus activities you complete, the IKK classic bonus programme can offset part or all of your hospital plan premium.",
     "ikkAwardsLabel": "Current IKK classic awards",
+    "moreAwardsLabel": "More IKK classic awards",
     "ikkLogoAlt": "IKK classic logo",
     "awards": {
       "warentest": "Stiftung Warentest VERY GOOD (0.9) for SDK comprehensive health insurance",
@@ -22,6 +35,11 @@
       "morgenMorgen": "Morgen & Morgen award for SDK"
     },
     "ikkAwards": {
+      "performance": "Health fund benefits test, IKK classic rated Very Good (1.5), 03/2026",
+      "overall": "Overall health fund test, IKK classic rated Very Good (1.3), 03/2026",
+      "selfEmployed": "Health fund test for self-employed people, IKK classic rated Very Good (1.5), 03/2026",
+      "seniors": "Health fund test for seniors, IKK classic rated Good (1.6), 03/2026",
+      "students": "Health fund test for students, IKK classic rated Very Good (1.4), 03/2026",
       "family": "Health fund test for families, IKK classic rated Good (1.6), 03/2026",
       "parents": "Health fund test for expectant and new parents, IKK classic rated Good (1.7), 03/2026"
     }
@@ -277,5 +295,13 @@
         "a": "Everyone who wants freedom of choice when it matters: athletes and active people (also via the affordable accident plan), self-employed people who need to get back on their feet quickly, and families who want to stay with their child. The requirement is statutory health insurance."
       }
     ]
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita offers help with the hospital concept",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
+    "title": "Would you like me to explain the hospital cover?",
+    "body": "I can briefly explain how the hospital plan and IKK bonus work together and which cover may fit you.",
+    "cta": "Yes, explain hospital cover"
   }
 }

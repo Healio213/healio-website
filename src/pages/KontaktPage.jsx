@@ -11,6 +11,7 @@ import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 const KontaktPage = () => {
   const { t } = useTranslation('contact');
@@ -112,6 +113,8 @@ const KontaktPage = () => {
             </p>
           </motion.div>
         </section>
+
+        <ProductTicker variant="contact" />
 
         {/* SECTION 2: Two-Column Layout */}
         <section className="healio-container px-4 sm:px-6 md:px-8 mb-24">

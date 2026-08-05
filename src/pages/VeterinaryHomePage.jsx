@@ -8,6 +8,7 @@ import CostBenefitAnalysis from '@/components/sections/veterinary/CostBenefitAna
 import TariffSelection from '@/components/sections/veterinary/TariffSelection';
 import VeterinaryContactForm from '@/components/sections/VeterinaryContactForm';
 import { useLanguage } from '@/hooks/useLanguage';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 const VeterinaryHomePage = () => {
   const { t: tSeo } = useTranslation('seo');
@@ -25,6 +26,7 @@ const VeterinaryHomePage = () => {
       />
       <div className="veterinary-page-content overflow-x-clip [&_button.bg-blue-600]:!bg-[#25c990] [&_button.bg-blue-600:hover]:!bg-[#1db37f] [&_button.bg-blue-500]:!bg-[#25c990] [&_button.bg-blue-500:hover]:!bg-[#1db37f] [&_.text-blue-600]:!text-[#25c990] [&_.bg-blue-100]:!bg-[#25c990]/10 [&_.bg-blue-50]:!bg-[#25c990]/5">
         <VeterinaryHero />
+        <ProductTicker variant="veterinary" />
         <CostAnalysisSection />
         <CostBenefitAnalysis />
         <TariffSelection />

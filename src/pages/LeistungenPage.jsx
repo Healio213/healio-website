@@ -8,6 +8,7 @@ import HonestAdvice from '@/components/services/HonestAdvice';
 import ServicesBudget from '@/components/services/ServicesBudget';
 import ServicesProcess from '@/components/services/ServicesProcess';
 import ServicesFinalCTA from '@/components/services/ServicesFinalCTA';
+import ProductTicker from '@/components/sections/ProductTicker';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 
@@ -61,6 +62,7 @@ const LeistungenPage = () => {
       />
       <article className="w-full overflow-hidden bg-white">
         <ServicesHero />
+        <ProductTicker variant="leistungen" />
         <ProtectionNavigator />
         <CoverageComparison />
         <HonestAdvice />

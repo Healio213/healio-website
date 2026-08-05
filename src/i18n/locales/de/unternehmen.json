@@ -199,6 +199,14 @@
       }
     ]
   },
+  "ticker": {
+    "ariaLabel": "Vorteile des betrieblichen Vorsorgemanagements",
+    "oneSystem": "bAV, bKV, Prävention und Steuerung als ein System",
+    "existingSolutions": "Bestehende Lösungen werden einbezogen",
+    "openReview": "Der Vorsorge-Check startet ergebnisoffen",
+    "ongoing": "Einführung ist der Anfang – nicht das Ende",
+    "contact": "Healio bleibt zentraler Ansprechpartner"
+  },
   "cta": {
     "eyebrow": "Jetzt statt irgendwann",
     "title": "30 Jahre lassen sich nicht nachholen.",

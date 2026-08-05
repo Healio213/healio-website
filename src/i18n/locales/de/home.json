@@ -247,6 +247,14 @@
     "title": "Echte Kunden, echte <highlight>Ersparnis</highlight>",
     "subtitle": "Zufriedene Nutzer:innen teilen ihre Erfahrungen mit dem Healio-Konzept."
   },
+  "ticker": {
+    "ariaLabel": "Healio-Vorteile im Überblick",
+    "bonusCheck": "Kostenloser Bonus-Check in 2 Minuten",
+    "threeAreas": "Ambulant, Zahn oder stationär – Schutz passend zum Leben",
+    "healthBudget": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren",
+    "independent": "Unabhängig beraten. Persönlich begleitet.",
+    "ongoingService": "Persönlich erreichbar – auch nach dem Abschluss"
+  },
   "insurance": {
     "title": "Unsere Versicherungslösungen",
     "subtitle": "Wählen Sie die Versicherung, die zu Ihrem Leben passt.",

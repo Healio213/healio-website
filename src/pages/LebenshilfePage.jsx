@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 // Rahmenwerte 2026 (jaehrlich pruefen)
 const AG_SATZ = 0.046; // Arbeitgeberbeitrag der Lebenshilfe: 4,6 % vom Brutto
@@ -215,6 +216,8 @@ const LebenshilfePage = () => {
             </motion.div>
           </div>
         </section>
+
+        <ProductTicker variant="lebenshilfe" />
 
         {/* SO FUNKTIONIERT IHR MODELL */}
         <section className="py-16 lg:py-24 bg-slate-50">

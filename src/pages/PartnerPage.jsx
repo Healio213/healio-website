@@ -9,6 +9,8 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import PartnerTrustBar from '@/components/sections/partner/PartnerTrustBar';
 import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
+import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import ProductTicker from '@/components/sections/ProductTicker';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
@@ -70,33 +72,6 @@ const PartnerPage = () => {
   );
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [showMiaPrompt, setShowMiaPrompt] = useState(false);
-  const [miaPromptDismissed, setMiaPromptDismissed] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!miaPromptDismissed) {
-        setShowMiaPrompt(true);
-      }
-    }, 60000);
-    return () => clearTimeout(timer);
-  }, [miaPromptDismissed]);
-
-  const handleMiaClick = () => {
-    setShowMiaPrompt(false);
-    setMiaPromptDismissed(true);
-    // ElevenLabs Widget aktivieren
-    const widget = document.querySelector('elevenlabs-convai');
-    if (widget && widget.shadowRoot) {
-      const btn = widget.shadowRoot.querySelector('button');
-      if (btn) btn.click();
-    }
-  };
-
-  const handleMiaDismiss = () => {
-    setShowMiaPrompt(false);
-    setMiaPromptDismissed(true);
-  };
   const videoRef = React.useRef(null);
   const videoMilestonesRef = React.useRef(new Set());
 
@@ -201,6 +176,8 @@ const PartnerPage = () => {
             </div>
           </div>
         </section>
+
+        <ProductTicker variant="partner" />
 
         {/* VIDEO SECTION */}
         <section className="py-16 bg-white">
@@ -611,48 +588,7 @@ const PartnerPage = () => {
         </section>
 
       </main>
-
-      {/* Proaktive Nita-Sprechblase */}
-      {showMiaPrompt && (
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="fixed bottom-6 right-20 z-[9998] max-w-xs"
-        >
-          <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 relative">
-            <button
-              onClick={handleMiaDismiss}
-              className="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-lg leading-none"
-              aria-label="Schließen"
-            >
-              ×
-            </button>
-            <div className="flex items-start gap-3">
-              <img
-                src="/nita-avatar.jpg"
-                alt=""
-                className="w-10 h-10 rounded-full object-cover flex-shrink-0 ring-2 ring-[#25c990]/20"
-                aria-hidden="true"
-              />
-              <div>
-                <p className="text-sm font-semibold text-gray-900 mb-1">Nita von Healio</p>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Hallo! Soll ich dir kurz erklären, wie das Healio Partnernetzwerk für deine Praxis funktioniert?
-                </p>
-                <button
-                  onClick={handleMiaClick}
-                  className="mt-3 text-sm font-medium text-white bg-[#25c990] hover:bg-[#1fb37e] px-4 py-2 rounded-lg transition-colors"
-                >
-                  Ja, gerne!
-                </button>
-              </div>
-            </div>
-            <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-b border-r border-gray-100 transform rotate-45" />
-          </div>
-        </motion.div>
-      )}
+      <AmbulantMiaPrompt variant="partner" />
     </>
   );
 };

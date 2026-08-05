@@ -51,5 +51,13 @@
     "appScreenshotAlt": "Healio app dashboard showing the available health budget",
     "copyright": "© {{year}} Healio GmbH. All rights reserved."
   },
+  "lebenshilfeTicker": {
+    "ariaLabel": "Key facts about the Lebenshilfe company pension plan",
+    "employerContribution": "Employer contribution: 4.6% of gross salary",
+    "employeeContribution": "Required employee contribution: 2.3%",
+    "socialSecurity": "In 2026, up to EUR 338 per month is exempt from social security contributions",
+    "taxFree": "In 2026, up to EUR 676 per month is tax-free",
+    "freeAnalysis": "Initial consultation and current-state analysis are free and non-binding"
+  },
   "langSwitch": "DE"
 }

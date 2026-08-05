@@ -92,6 +92,14 @@
     ],
     "disclaimer": "The amounts shown are not automatic. They depend, among other things, on the selected plan, insurability, membership of IKK classic and the bonus activities actually completed. The applicable insurance and statutory health insurance terms are decisive."
   },
+  "ticker": {
+    "ariaLabel": "What Healio stands for",
+    "broker": "Independent insurance broker licensed under section 34d (1) GewO",
+    "hamburg": "Personal advice from Hamburg",
+    "threeAudiences": "One concept for individuals, practices and companies",
+    "needsFirst": "Needs before plans",
+    "clearRoles": "Assessment, advice and intermediation remain with Healio"
+  },
   "routes": {
     "eyebrow": "Choose your starting point",
     "title": "What can we do for you?",

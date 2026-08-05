@@ -102,6 +102,22 @@
     "retry": "Try Again",
     "alternatives": "Alternative Contact Options"
   },
+  "contactTicker": {
+    "ariaLabel": "Ways to contact Healio",
+    "personal": "Personally available for business clients and private patients",
+    "hamburg": "Healio GmbH in Hamburg",
+    "channels": "Contact us by phone or email",
+    "form": "Send your message through the contact form",
+    "response": "We will get back to you shortly after your enquiry"
+  },
+  "appointmentTicker": {
+    "ariaLabel": "Benefits of online appointment booking",
+    "chooseTime": "Choose a suitable time online",
+    "free": "Free initial consultation",
+    "nonBinding": "Non-binding initial consultation",
+    "personal": "Personal consultation",
+    "confirmation": "Automatic confirmation by email"
+  },
   "confirmation": {
     "title": "Appointment Request Successfully Sent!",
     "subtitle": "Review process initiated.",

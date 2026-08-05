@@ -17,6 +17,7 @@
     "ariaLabel": "Trust signals"
   },
   "ticker": {
+    "ariaLabel": "Benefits of outpatient supplementary insurance",
     "budget": "Up to €3,000 health budget",
     "sdk": "SDK, on the market since 1926",
     "ikk": "IKK classic, 3 million members",

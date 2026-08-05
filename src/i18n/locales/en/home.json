@@ -223,6 +223,14 @@
     "title": "Real Customers, Real Savings",
     "subtitle": "Satisfied users share their experiences with the Healio concept."
   },
+  "ticker": {
+    "ariaLabel": "Healio benefits at a glance",
+    "bonusCheck": "Free bonus check in 2 minutes",
+    "threeAreas": "Outpatient, dental or hospital – cover that fits your life",
+    "healthBudget": "Up to EUR 3,000 in health budget over 2 years",
+    "independent": "Independent advice. Personal support.",
+    "ongoingService": "A real contact – even after sign-up"
+  },
   "insurance": {
     "title": "Our Insurance Solutions",
     "subtitle": "Choose the insurance that fits your life.",

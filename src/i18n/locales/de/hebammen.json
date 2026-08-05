@@ -183,5 +183,21 @@
     "title": "Bereit für ein kurzes Kennenlernen?",
     "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur echte Fakten für deine Arbeit.",
     "button": "Strategiegespräch sichern"
+  },
+  "ticker": {
+    "ariaLabel": "Wichtige Vorteile für Hebammen und Familien",
+    "healthBudget": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich",
+    "naturopathy": "Tarifabhängig bis zu 1.000 EUR für Naturheilkunde und Osteopathie",
+    "onCall": "IKK: bis zu 250 EUR für Hebammen-Rufbereitschaft",
+    "newbornCover": "Zwei-Monats-Frist für die Kindernachversicherung prüfen",
+    "clearRoles": "Hebamme informiert – Healio prüft und berät"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Healio-Konzept für Hebammen an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir das Hebammen-Konzept erklären?",
+    "body": "Ich erkläre dir kurz, wie du Familien auf bis zu 3.000 EUR Gesundheitsbudget hinweist und Healio die Beratung übernimmt.",
+    "cta": "Ja, Konzept erklären"
   }
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 const TerminvereinbarungPage = () => {
   const { t } = useTranslation('contact');
@@ -37,6 +38,12 @@ const TerminvereinbarungPage = () => {
             {t('termin.subtitle')}
           </p>
         </motion.div>
+
+      </div>
+
+      <ProductTicker variant="terminvereinbarung" />
+
+      <div className="healio-container max-w-4xl mx-auto mt-12 px-4 sm:px-6">
 
         <motion.div
           initial="hidden"

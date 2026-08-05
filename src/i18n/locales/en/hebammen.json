@@ -183,5 +183,21 @@
     "title": "Ready for a quick introduction?",
     "subtitle": "45 minutes. No sales pitch. Just real facts for your work.",
     "button": "Book strategy session"
+  },
+  "ticker": {
+    "ariaLabel": "Important benefits for midwives and families",
+    "healthBudget": "Up to EUR 3,000 health budget over two years may be available",
+    "naturopathy": "Depending on the plan, up to EUR 1,000 for naturopathy and osteopathy",
+    "onCall": "IKK: up to EUR 250 for midwife on-call services",
+    "newbornCover": "Check the two-month window for newborn enrolment",
+    "clearRoles": "The midwife informs – Healio checks and advises"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita offers help with the Healio concept for midwives",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
+    "title": "Would you like me to explain the midwife concept?",
+    "body": "I can briefly explain how you can point families to up to EUR 3,000 in health budget while Healio handles the advice.",
+    "cta": "Yes, explain the concept"
   }
 }

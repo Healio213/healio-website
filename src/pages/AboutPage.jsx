@@ -11,6 +11,7 @@ import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import ProductTicker from '@/components/sections/ProductTicker';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
@@ -179,6 +180,8 @@ const AboutPage = () => {
             </motion.div>
           </div>
         </section>
+
+        <ProductTicker variant="about" />
 
         <section className="w-full bg-[#f4faf7] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-story-heading">
           <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:gap-24">

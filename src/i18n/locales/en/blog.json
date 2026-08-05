@@ -13,6 +13,14 @@
   "bookConsultation": "Book consultation",
   "atAGlance": "At a Glance",
   "notFound": "Article not found",
+  "ticker": {
+    "ariaLabel": "Topics in the Healio guide",
+    "expertKnowledge": "Expert knowledge, clearly explained",
+    "healthBudgets": "Health budgets at a glance",
+    "supplementaryInsurance": "Understand supplementary insurance",
+    "employerBenefits": "Tax-free benefits for employers",
+    "audiences": "Content for practices, partners and insured people"
+  },
   "categories": {
     "heilpraktiker": "Heilpraktiker",
     "hebammen": "Midwives",

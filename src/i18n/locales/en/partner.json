@@ -140,5 +140,21 @@
     "title": "Good care needs <highlight>clear paths</highlight>.",
     "subtitle": "30 minutes. Clear roles. An honest decision.",
     "cta": "Book an introduction"
+  },
+  "ticker": {
+    "ariaLabel": "Benefits of the Healio partner network",
+    "healthBudget": "Up to EUR 3,000 health budget over two years may be available",
+    "neutralInformation": "The practice provides neutral information – without insurance advice",
+    "healioAdvice": "Healio assesses, advises and supports each patient individually",
+    "freeParticipation": "Free participation for partner practices",
+    "directContact": "Patients contact Healio directly"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita offers help with the Healio partner concept",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
+    "title": "Would you like me to explain the partner concept?",
+    "body": "I can briefly show how your practice provides neutral information while Healio handles advice and support.",
+    "cta": "Yes, explain the partner concept"
   }
 }

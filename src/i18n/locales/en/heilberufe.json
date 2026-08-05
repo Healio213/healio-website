@@ -236,5 +236,21 @@
       "cta": "Go to the form"
     },
     "disclaimer": "The Healio healthcare professional coverage concept is a private-law insurance concept based on individual and group insurance contracts. Insurance brokerage by Healio GmbH, licensed broker under §34d GewO."
+  },
+  "ticker": {
+    "ariaLabel": "Benefits of the Healio protection concept for healthcare professionals",
+    "completeProtection": "Practice coverage and personal protection from one source",
+    "liability": "Depending on the plan, up to EUR 10 million liability cover",
+    "flexibleModules": "Choose individual protection modules to suit your needs",
+    "contractCheck": "Review existing policies first – no blind switch",
+    "freeCheck": "Free check by Healio, a licensed broker under §34d GewO"
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita offers help with the protection concept for healthcare professionals",
+    "close": "Close Nita prompt",
+    "eyebrow": "Nita from Healio",
+    "title": "Would you like me to explain the protection concept?",
+    "body": "I can briefly explain how income protection, retirement planning and health benefits work together for healthcare professionals.",
+    "cta": "Yes, explain the concept"
   }
 }

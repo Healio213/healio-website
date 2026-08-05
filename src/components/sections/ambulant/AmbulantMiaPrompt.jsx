@@ -3,20 +3,19 @@ import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const STORAGE_KEY = 'healio:ambulant-mia-prompt-dismissed';
 const PROMPT_DELAY_MS = 60000;
 
-const getPromptDismissed = () => {
+const getPromptDismissed = (storageKey) => {
   try {
-    return window.sessionStorage.getItem(STORAGE_KEY) === 'true';
+    return window.sessionStorage.getItem(storageKey) === 'true';
   } catch {
     return false;
   }
 };
 
-const setPromptDismissed = () => {
+const setPromptDismissed = (storageKey) => {
   try {
-    window.sessionStorage.setItem(STORAGE_KEY, 'true');
+    window.sessionStorage.setItem(storageKey, 'true');
   } catch {
     // Session storage can be unavailable in strict privacy modes.
   }
@@ -33,15 +32,19 @@ const openMiaWidget = () => {
   return false;
 };
 
-const AmbulantMiaPrompt = () => {
-  const { t } = useTranslation('ambulant');
+const supportedNamespaces = new Set(['ambulant', 'zahn', 'stationaer', 'partner', 'zahnaerzte', 'hebammen', 'heilberufe']);
+
+const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
+  const namespace = supportedNamespaces.has(variant) ? variant : 'ambulant';
+  const storageKey = `healio:${namespace}-nita-prompt-dismissed`;
+  const { t } = useTranslation(namespace);
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
-    if (getPromptDismissed()) return undefined;
+    if (getPromptDismissed(storageKey)) return undefined;
 
     const revealPrompt = () => {
-      if (!getPromptDismissed()) {
+      if (!getPromptDismissed(storageKey)) {
         setShowPrompt(true);
       }
     };
@@ -51,15 +54,15 @@ const AmbulantMiaPrompt = () => {
     return () => {
       window.clearTimeout(timer);
     };
-  }, []);
+  }, [storageKey]);
 
   const handleDismiss = () => {
-    setPromptDismissed();
+    setPromptDismissed(storageKey);
     setShowPrompt(false);
   };
 
   const handleOpen = () => {
-    setPromptDismissed();
+    setPromptDismissed(storageKey);
     setShowPrompt(false);
     [0, 450, 1200].forEach((delay) => {
       window.setTimeout(openMiaWidget, delay);

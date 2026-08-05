@@ -7,20 +7,38 @@
     "ctaBenefits": "Leistungen ansehen",
     "heroImageAlt": "Professionelle Zahnarztpraxis"
   },
+  "ticker": {
+    "ariaLabel": "Aktuelle Highlights der Zahnzusatzversicherung",
+    "sofortschutz": "Sofortschutz kann bei angeratener Behandlung vor Rechnungsstellung möglich sein",
+    "fehlendeZaehne": "UKV: Bis zu 3 fehlende Zähne gegen Zuschlag mitversicherbar",
+    "lueckenschluss": "Lückenschluss absicherbar, bevor er angeraten ist",
+    "pzr": "UKV Top-Tarife: Zahnreinigung ohne Jahreslimit",
+    "zahnersatz": "Zahnersatz je nach Tarif bis zu 100 % erstattet",
+    "noWait": "Ausgewählte Tarife ohne Wartezeit",
+    "ikkBonus": "Je nach Bonus kann die IKK classic den Beitrag teilweise oder vollständig ausgleichen",
+    "check": "In 1 Minute zum passenden Tarifweg"
+  },
   "siegel": {
     "eyebrow": "Vertrauen auf einen Blick",
     "title": "Ausgezeichnete Zahn-Tarife. Starke Kooperation.",
     "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt – und greifen für deinen Schutz sinnvoll ineinander.",
+    "partnersLabel": "Unsere Partner: die Bayerische, UKV & IKK classic",
     "awardsLabel": "Aktuelle Auszeichnungen der Zahn-Tarife",
     "cooperationLabel": "In Kooperation mit",
     "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deiner Zahnzusatzversicherung je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
     "ikkAwardsLabel": "Aktuelle IKK classic Auszeichnungen",
+    "moreAwardsLabel": "Weitere IKK classic Auszeichnungen",
     "ikkLogoAlt": "Logo der IKK classic",
     "awards": {
       "warentest": "Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, Ausgabe 07/2025",
       "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 2025"
     },
     "ikkAwards": {
+      "performance": "Krankenkassentest für Leistung, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
+      "overall": "Krankenkassentest Gesamt, IKK classic Note 1,3 Sehr Gut, Stand 03/2026",
+      "selfEmployed": "Krankenkassentest für Selbstständige, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
+      "seniors": "Krankenkassentest für Senioren, IKK classic Note 1,6 Gut, Stand 03/2026",
+      "students": "Krankenkassentest für Studenten, IKK classic Note 1,4 Sehr Gut, Stand 03/2026",
       "family": "Krankenkassentest für Familien, IKK classic Note 1,6 Gut, Stand 03/2026",
       "parents": "Krankenkassentest für Schwangere und junge Eltern, IKK classic Note 1,7 Gut, Stand 03/2026"
     }
@@ -451,5 +469,13 @@
       },
       "showTariff": "Tarif anzeigen"
     }
+  },
+  "miaPrompt": {
+    "ariaLabel": "Nita bietet Hilfe zum Zahn-Konzept an",
+    "close": "Nita-Hinweis schließen",
+    "eyebrow": "Nita von Healio",
+    "title": "Soll ich dir das Zahn-Konzept erklären?",
+    "body": "Ich erkläre dir kurz, welcher Weg zu deiner Situation passt – auch bei angeratener Behandlung oder fehlenden Zähnen.",
+    "cta": "Ja, Zahn-Konzept erklären"
   }
 }

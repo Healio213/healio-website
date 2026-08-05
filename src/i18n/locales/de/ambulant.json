@@ -17,6 +17,7 @@
     "ariaLabel": "Vertrauenssignale"
   },
   "ticker": {
+    "ariaLabel": "Vorteile der ambulanten Zusatzversicherung",
     "budget": "Bis zu 3.000 € Gesundheitsbudget",
     "sdk": "SDK: seit 1926 am Markt",
     "ikk": "IKK classic: 3 Mio. Versicherte",

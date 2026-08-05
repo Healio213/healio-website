@@ -102,6 +102,22 @@
     "retry": "Erneut versuchen",
     "alternatives": "Alternative Kontaktmöglichkeiten"
   },
+  "contactTicker": {
+    "ariaLabel": "Kontaktmöglichkeiten bei Healio",
+    "personal": "Für Geschäftskunden und Privatpatienten persönlich da",
+    "hamburg": "Healio GmbH in Hamburg",
+    "channels": "Kontakt per Telefon oder E-Mail",
+    "form": "Nachricht direkt über das Kontaktformular senden",
+    "response": "Wir melden uns nach Ihrer Anfrage in Kürze"
+  },
+  "appointmentTicker": {
+    "ariaLabel": "Vorteile der Online-Terminvereinbarung",
+    "chooseTime": "Passenden Termin direkt online wählen",
+    "free": "Kostenloses Erstgespräch",
+    "nonBinding": "Unverbindliches Erstgespräch",
+    "personal": "Persönliches Beratungsgespräch",
+    "confirmation": "Bestätigung automatisch per E-Mail"
+  },
   "confirmation": {
     "title": "Terminanfrage erfolgreich gesendet!",
     "subtitle": "Prüfungsprozess initiiert.",
