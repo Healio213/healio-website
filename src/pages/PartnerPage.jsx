@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, AlertCircle, Stethoscope, Glasses, Heart, Shield } from 'lucide-react';
+import { PlayCircle, AlertCircle, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -326,7 +326,7 @@ const PartnerPage = () => {
                 viewport={{ once: true }}
                 className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
               >
-                <Heart className="w-10 h-10 mx-auto mb-4 opacity-90" />
+                <FriendlyIcon emoji="💚" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
                 <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
                 <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
@@ -340,9 +340,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-4">
-                  <Stethoscope className="w-7 h-7 text-[#25c990]" />
-                </div>
+                <FriendlyIcon emoji="🌿" label={t('budget.naturheilkunde')} tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
@@ -356,9 +354,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mb-4">
-                  <Glasses className="w-7 h-7 text-[#25c990]" />
-                </div>
+                <FriendlyIcon emoji="👓" label={t('budget.sehhilfen')} tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>

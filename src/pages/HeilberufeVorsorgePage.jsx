@@ -5,17 +5,10 @@ import { Link } from 'react-router-dom';
 import {
   Shield,
   Stethoscope,
-  Clock,
-  TrendingDown,
-  Briefcase,
   CheckCircle2,
   Sparkles,
   Users,
-  ChevronDown,
-  FileCheck,
-  HeartHandshake,
-  BadgeCheck,
-  KeyRound
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
@@ -64,6 +57,23 @@ const mehrwertFriendlyIcons = {
   Shield: { emoji: '🛡️', tone: 'mint' },
   Calculator: { emoji: '🧮', tone: 'butter' },
 };
+
+const exclusivityFriendlyIcons = [
+  { emoji: '🤝', tone: 'mint' },
+  { emoji: '🏅', tone: 'sky' },
+  { emoji: '🔑', tone: 'butter' },
+];
+
+const problemFriendlyIcons = [
+  { emoji: '📉', tone: 'coral' },
+  { emoji: '⏳', tone: 'butter' },
+  { emoji: '🗂️', tone: 'lavender' },
+];
+
+const ctaFriendlyIcons = [
+  { emoji: '🗓️', tone: 'mint' },
+  { emoji: '🩺', tone: 'sky' },
+];
 
 const HeilberufeVorsorgePage = () => {
   const { t } = useTranslation('heilberufe');
@@ -195,7 +205,7 @@ const HeilberufeVorsorgePage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {t('exklusivitaet.cards', { returnObjects: true }).map((card, i) => {
-                const Icon = [HeartHandshake, BadgeCheck, KeyRound][i];
+                const friendlyIcon = exclusivityFriendlyIcons[i];
                 return (
                   <motion.div
                     key={i}
@@ -205,9 +215,12 @@ const HeilberufeVorsorgePage = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
+                    <FriendlyIcon
+                      emoji={friendlyIcon.emoji}
+                      tone={friendlyIcon.tone}
+                      size="sm"
+                      className="mb-4"
+                    />
                     <h3 className="text-xl font-semibold mb-3">
                       {card.title}
                     </h3>
@@ -246,7 +259,7 @@ const HeilberufeVorsorgePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {problemCards.map((card, i) => {
-                const Icon = [TrendingDown, Clock, Briefcase][i];
+                const friendlyIcon = problemFriendlyIcons[i];
                 return (
                   <motion.div
                     key={i}
@@ -256,9 +269,12 @@ const HeilberufeVorsorgePage = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                      <Icon className="w-7 h-7 text-rose-600" />
-                    </div>
+                    <FriendlyIcon
+                      emoji={friendlyIcon.emoji}
+                      tone={friendlyIcon.tone}
+                      size="md"
+                      className="mb-5 transition-transform group-hover:-translate-y-1 group-hover:scale-105"
+                    />
                     <h3 className="text-xl font-semibold text-slate-900 mb-3">
                       {card.title}
                     </h3>
@@ -628,9 +644,12 @@ const HeilberufeVorsorgePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-[#25c990] flex items-center justify-center mb-5">
-                  <FileCheck className="w-6 h-6 text-white" />
-                </div>
+                <FriendlyIcon
+                  emoji={ctaFriendlyIcons[0].emoji}
+                  tone={ctaFriendlyIcons[0].tone}
+                  size="sm"
+                  className="mb-5"
+                />
                 <h3 className="text-xl font-semibold mb-3">
                   {t('cta.primary.title')}
                 </h3>
@@ -644,9 +663,12 @@ const HeilberufeVorsorgePage = () => {
                 </Link>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5">
-                  <Stethoscope className="w-6 h-6 text-white" />
-                </div>
+                <FriendlyIcon
+                  emoji={ctaFriendlyIcons[1].emoji}
+                  tone={ctaFriendlyIcons[1].tone}
+                  size="sm"
+                  className="mb-5"
+                />
                 <h3 className="text-xl font-semibold mb-3">
                   {t('cta.secondary.title')}
                 </h3>

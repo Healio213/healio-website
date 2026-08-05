@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Wallet, HeartHandshake, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
+import { Shield, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -353,18 +353,14 @@ const HebammenPage = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   {/* Option 1: Auszahlung */}
                   <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-4">
-                      <Wallet className="w-6 h-6 text-emerald-600" />
-                    </div>
+                    <FriendlyIcon emoji="💶" label={t('benefits.option1Title')} tone="butter" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option1Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option1Desc')}</p>
                   </div>
 
                   {/* Option 2: Spende */}
                   <div className="bg-rose-50 border-2 border-rose-200 rounded-xl p-6">
-                    <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
-                      <HeartHandshake className="w-6 h-6 text-rose-600" />
-                    </div>
+                    <FriendlyIcon emoji="💝" label={t('benefits.option2Title')} tone="coral" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option2Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option2Desc')}</p>
                   </div>

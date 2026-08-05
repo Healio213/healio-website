@@ -28,6 +28,12 @@ const principleIcons = {
   personal: { emoji: '🎧', tone: 'butter' },
 };
 
+const impactIcons = [
+  { emoji: '🩺', tone: 'mint' },
+  { emoji: '🦷', tone: 'sky' },
+  { emoji: '🏥', tone: 'lavender' },
+];
+
 const AboutPage = () => {
   const { t } = useTranslation('about');
   const { t: tSeo } = useTranslation('seo');
@@ -273,17 +279,24 @@ const AboutPage = () => {
             </motion.div>
 
             <dl className="mt-14 grid border-y border-white/10 lg:grid-cols-3">
-              {Array.isArray(impactItems) && impactItems.map((item, index) => (
-                <motion.div
-                  key={item.value}
-                  {...reveal(index * 0.07)}
-                  className={`flex flex-col py-8 sm:py-10 lg:px-8 lg:py-12 ${index < impactItems.length - 1 ? 'border-b border-white/10 lg:border-b-0 lg:border-r' : ''} ${index === 0 ? 'lg:pl-0' : ''}`}
-                >
-                  <dt className="order-2 mt-4 max-w-xs font-display text-base font-bold leading-6 text-white sm:text-lg">{item.label}</dt>
-                  <dd className="order-1 font-display text-[clamp(2.5rem,5vw,4.8rem)] font-extrabold leading-none tracking-[-0.055em] text-[#5ee0b1]">{item.value}</dd>
-                  <dd className="order-3 mt-2 max-w-xs text-sm leading-6 text-slate-400">{item.detail}</dd>
-                </motion.div>
-              ))}
+              {Array.isArray(impactItems) && impactItems.map((item, index) => {
+                const icon = impactIcons[index];
+                return (
+                  <motion.div
+                    key={item.category}
+                    {...reveal(index * 0.07)}
+                    className={`flex flex-col py-8 sm:py-10 lg:px-8 lg:py-12 ${index < impactItems.length - 1 ? 'border-b border-white/10 lg:border-b-0 lg:border-r' : ''} ${index === 0 ? 'lg:pl-0' : ''}`}
+                  >
+                    <div className="mb-7 flex items-center gap-3">
+                      <FriendlyIcon emoji={icon.emoji} tone={icon.tone} size="sm" />
+                      <span className="font-display text-xs font-bold uppercase tracking-[0.2em] text-slate-300">{item.category}</span>
+                    </div>
+                    <dt className="order-2 mt-4 max-w-xs font-display text-base font-bold leading-6 text-white sm:text-lg">{item.label}</dt>
+                    <dd className="order-1 max-w-full font-display text-[clamp(2.15rem,4.2vw,4.5rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#5ee0b1] [text-wrap:balance]">{item.value}</dd>
+                    <dd className="order-3 mt-2 max-w-xs text-sm leading-6 text-slate-400">{item.detail}</dd>
+                  </motion.div>
+                );
+              })}
             </dl>
 
             <p className="mt-7 max-w-5xl text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">

@@ -2,8 +2,9 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Shield, Clock, ArrowRight, CheckCircle, HelpCircle, CalendarCheck, Wallet } from 'lucide-react';
+import { ChevronDown, Shield, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { IKK_LINK } from '@/lib/sdk-url';
 
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
@@ -21,10 +22,22 @@ const extraDefs = [
   { key: 'bonusantrag', emoji: "📅" },
 ];
 
-const switchStepIcons = [Clock, ArrowRight, Shield];
+const switchStepIcons = [
+  { emoji: '📝', tone: 'butter' },
+  { emoji: '🤝', tone: 'mint' },
+  { emoji: '🛡️', tone: 'sky' },
+];
 const switchStepKeys = ['step1', 'step2', 'step3'];
-const timelineStepIcons = [Shield, ArrowRight, CalendarCheck, Wallet];
 const timelineStepKeys = ['product', 'switch', 'ikkStart', 'bonus'];
+
+const timelineIcons = {
+  ambulant: { emoji: '🩺', tone: 'mint' },
+  zahn: { emoji: '🦷', tone: 'sky' },
+  stationaer: { emoji: '🏥', tone: 'lavender' },
+  switch: { emoji: '🔄', tone: 'sky' },
+  ikkStart: { emoji: '🗓️', tone: 'mint' },
+  bonus: { emoji: '🎁', tone: 'butter' },
+};
 
 const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
   const { t } = useTranslation('ambulant');
@@ -248,12 +261,15 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {switchStepKeys.map((key, idx) => {
-              const Icon = switchStepIcons[idx];
+              const icon = switchStepIcons[idx];
               return (
                 <div key={idx} className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-emerald-600" />
-                  </div>
+                  <FriendlyIcon
+                    emoji={icon.emoji}
+                    tone={icon.tone}
+                    size="md"
+                    className="mx-auto mb-4"
+                  />
                   <div className="text-sm font-bold text-emerald-600 mb-1">Schritt {idx + 1}</div>
                   <h4 className="font-bold text-gray-900 mb-2">{t(`ikkWechsel.switchSteps.${key}.title`)}</h4>
                   <p className="text-gray-600 text-sm">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
@@ -301,16 +317,14 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
               <div className="grid gap-4 lg:grid-cols-4 lg:gap-5 relative z-10">
                 {timelineStepKeys.map((key, idx) => {
-                  const Icon = timelineStepIcons[idx];
+                  const icon = key === 'product' ? timelineIcons[activeVariant] : timelineIcons[key];
                   return (
                     <div
                       key={key}
                       className="bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-4 md:p-5 shadow-sm"
                     >
                       <div className="flex items-center gap-3 mb-3 md:mb-4 lg:flex-col lg:items-start">
-                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/20 ring-8 ring-white">
-                          <Icon className="w-5 h-5 md:w-6 md:h-6" />
-                        </div>
+                        <FriendlyIcon emoji={icon.emoji} tone={icon.tone} size="sm" />
                         <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
                           {timelineText(key, 'label')}
                         </div>

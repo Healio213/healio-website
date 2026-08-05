@@ -1,24 +1,29 @@
 import React from 'react';
-import { Activity, ArrowRight, Building2, ExternalLink, HeartPulse, PiggyBank } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const factMeta = {
   expense: {
-    icon: Building2,
+    emoji: '🧾',
+    tone: 'sky',
     href: 'https://www.gesetze-im-internet.de/estg/__4.html',
   },
   pension: {
-    icon: PiggyBank,
+    emoji: '💰',
+    tone: 'butter',
     href: 'https://www.gesetze-im-internet.de/estg/__3.html',
   },
   health: {
-    icon: HeartPulse,
+    emoji: '❤️‍🩹',
+    tone: 'coral',
     href: 'https://www.bundesfinanzhof.de/de/entscheidung/entscheidungen-online/detail/STRE201810155/',
   },
   prevention: {
-    icon: Activity,
+    emoji: '🧘',
+    tone: 'mint',
     href: 'https://www.bundesgesundheitsministerium.de/themen/praevention/betriebliche-gesundheitsfoerderung/steuerliche-vorteile/',
   },
 };
@@ -62,13 +67,10 @@ const CompanyEconomics = () => {
           <div className="mt-9 grid gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-2">
             {facts.map((fact) => {
               const meta = factMeta[fact.key];
-              const Icon = meta.icon;
               return (
                 <article key={fact.key} className="bg-[#0b202a] p-6 sm:p-7">
                   <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#8ee7ca]/10 text-[#8ee7ca]">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
+                    <FriendlyIcon emoji={meta.emoji} tone={meta.tone} size="sm" />
                     <div>
                       <h3 className="font-display text-lg font-extrabold tracking-[-0.02em] text-white">{fact.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-slate-300">{fact.description}</p>

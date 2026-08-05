@@ -70,27 +70,30 @@
     ]
   },
   "impact": {
-    "eyebrow": "Was möglich werden kann",
-    "title": "Konkreter Nutzen statt großer Versprechen.",
-    "description": "Kassenbonus und Zusatzschutz können sich sinnvoll ergänzen. Wir zeigen, welche Bausteine unter welchen Voraussetzungen tatsächlich zusammenpassen.",
+    "eyebrow": "Unsere Mission",
+    "title": "Mindestens einen Schutzbereich über den GKV-Bonus finanzierbar machen.",
+    "description": "Wir helfen Menschen dabei, die Beiträge für mindestens einen Bereich – Ambulant, Zahn oder Stationär – möglichst über den Bonus ihrer gesetzlichen Krankenkasse zu finanzieren. Welcher Schutz wirklich passt, prüfen wir individuell.",
     "items": [
       {
+        "category": "Ambulant",
         "value": "3.000 EUR",
         "label": "mögliches Gesundheitsbudget in 2 Jahren",
-        "detail": "aus passenden Tarifleistungen und Kassenboni"
+        "detail": "für Heilpraktiker, Osteopathie, Brille und Vorsorge"
       },
       {
-        "value": "1.000 EUR",
-        "label": "mögliche Erstattung in 2 Jahren",
-        "detail": "für Naturheilkunde und Osteopathie"
+        "category": "Zahn",
+        "value": "bis zu 100 %",
+        "label": "für Zahnersatz und Zahnbehandlung",
+        "detail": "je nach Tarif auch bei bereits fehlenden Zähnen und späterem Lückenschluss"
       },
       {
-        "value": "700 EUR+",
-        "label": "möglicher IKK-Bonus pro Jahr",
-        "detail": "bei entsprechend erfüllten Bonusmaßnahmen"
+        "category": "Stationär",
+        "value": "1- oder 2-Bett",
+        "label": "Komfort und Privatbehandlung im Krankenhaus",
+        "detail": "Chefarztbehandlung und freie Klinikwahl, je nach Tarif"
       }
     ],
-    "disclaimer": "Die genannten Werte entstehen nicht automatisch. Sie hängen unter anderem vom gewählten Tarif, der Versicherbarkeit, einer Mitgliedschaft bei der IKK classic und den tatsächlich erfüllten Bonusmaßnahmen ab. Maßgeblich sind die jeweiligen Versicherungs- und Kassenbedingungen."
+    "disclaimer": "Die genannten Leistungen entstehen nicht automatisch. Sie hängen unter anderem vom gewählten Tarif, der Versicherbarkeit und den jeweiligen Versicherungsbedingungen ab. Ein möglicher IKK-Bonus von 700 EUR+ pro Jahr setzt eine Mitgliedschaft bei der IKK classic und tatsächlich erfüllte Bonusmaßnahmen voraus."
   },
   "ticker": {
     "ariaLabel": "Dafür steht Healio",

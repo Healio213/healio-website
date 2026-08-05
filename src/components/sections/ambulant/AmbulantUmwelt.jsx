@@ -2,8 +2,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Leaf, Heart, TreePine, Droplets } from 'lucide-react';
+import { Leaf } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+
+const pillarIcons = [
+  { emoji: '🌳', tone: 'mint' },
+  { emoji: '💧', tone: 'sky' },
+  { emoji: '💚', tone: 'butter' },
+];
 
 const AmbulantUmwelt = () => {
   const { t } = useTranslation('ambulant');
@@ -52,9 +59,7 @@ const AmbulantUmwelt = () => {
           <div className="absolute bottom-0 left-0 w-56 h-56 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
           <div className="relative z-10">
-            <div className="w-20 h-20 bg-white/15 rounded-full flex items-center justify-center mx-auto mb-6">
-              <TreePine className="w-10 h-10 text-white" />
-            </div>
+            <FriendlyIcon emoji="🌍" tone="mint" size="lg" className="mx-auto mb-6" />
 
             <p className="text-6xl md:text-7xl font-extrabold mb-4">10 %</p>
             <p className="text-2xl md:text-3xl font-bold mb-6">{t('umwelt.headline')}</p>
@@ -66,11 +71,12 @@ const AmbulantUmwelt = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               {['pillar1', 'pillar2', 'pillar3'].map((key, i) => (
                 <div key={key} className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
-                  <div className="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    {i === 0 && <TreePine className="w-5 h-5 text-white" />}
-                    {i === 1 && <Droplets className="w-5 h-5 text-white" />}
-                    {i === 2 && <Heart className="w-5 h-5 text-white" />}
-                  </div>
+                  <FriendlyIcon
+                    emoji={pillarIcons[i].emoji}
+                    tone={pillarIcons[i].tone}
+                    size="sm"
+                    className="mx-auto mb-3"
+                  />
                   <p className="font-bold text-white mb-1">{t(`umwelt.${key}.title`)}</p>
                   <p className="text-white/70 text-sm">{t(`umwelt.${key}.desc`)}</p>
                 </div>

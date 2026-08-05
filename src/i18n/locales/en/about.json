@@ -70,27 +70,30 @@
     ]
   },
   "impact": {
-    "eyebrow": "What may become possible",
-    "title": "Concrete value, not sweeping promises.",
-    "description": "Statutory insurance bonuses and supplementary cover can complement each other. We show which components genuinely fit together and under what conditions.",
+    "eyebrow": "Our mission",
+    "title": "Make at least one area of cover financeable through a statutory health insurance bonus.",
+    "description": "We help people fund the premium for at least one area – outpatient, dental or hospital – as far as possible through their statutory health insurance bonus. We assess individually which protection genuinely fits.",
     "items": [
       {
+        "category": "Outpatient",
         "value": "EUR 3,000",
         "label": "potential health budget over 2 years",
-        "detail": "from suitable plan benefits and insurance bonuses"
+        "detail": "for naturopathy, osteopathy, glasses and preventive care"
       },
       {
-        "value": "EUR 1,000",
-        "label": "potential reimbursement over 2 years",
-        "detail": "for naturopathy and osteopathy"
+        "category": "Dental",
+        "value": "up to 100%",
+        "label": "for dental treatment and prosthetics",
+        "detail": "depending on the plan, even with existing missing teeth and later gap closure"
       },
       {
-        "value": "EUR 700+",
-        "label": "potential annual IKK bonus",
-        "detail": "when the relevant bonus activities are completed"
+        "category": "Hospital",
+        "value": "single or twin",
+        "label": "comfort and private treatment in hospital",
+        "detail": "consultant treatment and free hospital choice, depending on the plan"
       }
     ],
-    "disclaimer": "The amounts shown are not automatic. They depend, among other things, on the selected plan, insurability, membership of IKK classic and the bonus activities actually completed. The applicable insurance and statutory health insurance terms are decisive."
+    "disclaimer": "The benefits shown are not automatic. They depend, among other things, on the selected plan, insurability and the applicable insurance terms. A potential IKK bonus of EUR 700+ per year requires IKK classic membership and completion of the relevant bonus activities."
   },
   "ticker": {
     "ariaLabel": "What Healio stands for",

@@ -1,13 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Building2,
   Calculator,
   CheckCircle2,
   ChevronDown,
-  Coins,
   Info,
-  PiggyBank,
   Sparkles,
   TrendingUp,
   Users,
@@ -18,6 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import ProductTicker from '@/components/sections/ProductTicker';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 // Rahmenwerte 2026 (jaehrlich pruefen)
 const AG_SATZ = 0.046; // Arbeitgeberbeitrag der Lebenshilfe: 4,6 % vom Brutto
@@ -238,17 +236,20 @@ const LebenshilfePage = () => {
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {[
                 {
-                  icon: Building2,
+                  emoji: '🏢',
+                  tone: 'sky',
                   titel: '4,6 % zahlt Ihr Arbeitgeber',
                   text: 'Die Lebenshilfe beteiligt sich mit 4,6 Prozent Ihres Bruttogehalts an Ihrer Altersvorsorge. Dieses Geld kommt zusätzlich zu Ihrem Gehalt, Sie müssen dafür nichts tun.'
                 },
                 {
-                  icon: Coins,
+                  emoji: '🪙',
+                  tone: 'butter',
                   titel: '2,3 % sind Ihr Pflichtanteil',
                   text: 'Als Eigenanteil sind 2,3 Prozent vom Brutto verpflichtend vorgesehen. Er wird direkt aus dem Bruttogehalt bespart und mindert dadurch Ihre Steuer- und Abgabenlast.'
                 },
                 {
-                  icon: PiggyBank,
+                  emoji: '🐷',
+                  tone: 'mint',
                   titel: `Ihr Spielraum bis ${SV_FREI_MONAT} €`,
                   text: `Bis zu 4 Prozent der Beitragsbemessungsgrenze (${JAHR}: ${SV_FREI_MONAT} Euro im Monat) bleibt Entgeltumwandlung sozialabgabenfrei, bis ${STEUERFREI_MONAT} Euro sogar steuerfrei. Die Differenz zu Ihrem Pflichtanteil ist Ihre persönliche Lücke.`
                 }
@@ -261,9 +262,7 @@ const LebenshilfePage = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center mb-5">
-                    <karte.icon className="w-6 h-6" />
-                  </div>
+                  <FriendlyIcon emoji={karte.emoji} label={karte.titel} tone={karte.tone} size="sm" className="mb-5" />
                   <h3 className="text-xl font-semibold text-slate-900 mb-3">{karte.titel}</h3>
                   <p className="text-slate-600 leading-relaxed">{karte.text}</p>
                 </motion.div>

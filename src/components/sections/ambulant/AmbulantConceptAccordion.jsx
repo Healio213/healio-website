@@ -3,19 +3,42 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CheckCircle, Zap, Lightbulb, Gift, Eye, Sparkles, Leaf, Hand, Activity, Shield, Syringe, Pill, Globe, Heart, Target, Users, Calculator } from 'lucide-react';
+import { CheckCircle, Calculator } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const coreValueIcons = [Target, Heart, CheckCircle, Gift];
+const coreValueIcons = [
+  { emoji: '💶', tone: 'butter' },
+  { emoji: '🩺', tone: 'mint' },
+  { emoji: '🧾', tone: 'sky' },
+  { emoji: '🎁', tone: 'lavender' },
+];
 const coreValueKeys = ['gesundheitsbudget', 'behandlungen', 'erstattung', 'bonus'];
 
-const coverageIcons = [Eye, Sparkles, Leaf, Hand, Activity, Shield, Syringe, Pill, Globe, Heart];
+const coverageIcons = [
+  { emoji: '👓', tone: 'sky' },
+  { emoji: '✨', tone: 'lavender' },
+  { emoji: '🌿', tone: 'butter' },
+  { emoji: '🦴', tone: 'coral' },
+  { emoji: '☯️', tone: 'mint' },
+  { emoji: '🩺', tone: 'mint' },
+  { emoji: '💉', tone: 'coral' },
+  { emoji: '💊', tone: 'lavender' },
+  { emoji: '🌍', tone: 'sky' },
+  { emoji: '💬', tone: 'butter' },
+];
 const coverageKeys = ['sehhilfen', 'augenLaser', 'heilpraktiker', 'osteopathie', 'tcm', 'vorsorge', 'impfungen', 'arzneimittel', 'ausland', 'beratung'];
 
 const stepNums = [1, 2, 3, 4, 5];
 const stepKeys = ['step1', 'step2', 'step3', 'step4', 'step5'];
 
-const whyHealioIcons = [Target, Users, Lightbulb, Shield, Sparkles];
+const whyHealioIcons = [
+  { emoji: '🎯', tone: 'coral' },
+  { emoji: '🤝', tone: 'mint' },
+  { emoji: '💡', tone: 'butter' },
+  { emoji: '🎧', tone: 'lavender' },
+  { emoji: '🎁', tone: 'sky' },
+];
 const whyHealioKeys = ['ergebnisse', 'begleitung', 'klarheit', 'ansprechpartner', 'bonusnutzung'];
 
 const AmbulantConceptAccordion = () => {
@@ -68,7 +91,8 @@ const AmbulantConceptAccordion = () => {
                 </p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                   {coreValueKeys.map((key, idx) => {
-                    const Icon = coreValueIcons[idx];
+                    const icon = coreValueIcons[idx];
+                    const title = t(`conceptAccordion.coreValues.${key}.title`);
                     return (
                       <motion.div
                         key={idx}
@@ -78,8 +102,8 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.1 }}
                         className="bg-gradient-to-br from-green-50 to-white p-6 rounded-xl border border-green-100 hover:shadow-lg transition-shadow"
                       >
-                        <Icon className="w-10 h-10 text-[#10b981] mb-3" />
-                        <h4 className="font-bold text-gray-900 mb-2">{t(`conceptAccordion.coreValues.${key}.title`)}</h4>
+                        <FriendlyIcon emoji={icon.emoji} label={title} tone={icon.tone} size="sm" className="mb-3" />
+                        <h4 className="font-bold text-gray-900 mb-2">{title}</h4>
                         <p className="text-sm text-gray-600">{t(`conceptAccordion.coreValues.${key}.desc`)}</p>
                       </motion.div>
                     );
@@ -99,7 +123,7 @@ const AmbulantConceptAccordion = () => {
               <AccordionContent className="pt-4 pb-6">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {coverageKeys.map((key, idx) => {
-                    const Icon = coverageIcons[idx];
+                    const icon = coverageIcons[idx];
                     const cardTitle = t(`conceptAccordion.coverage.${key}.title`);
                     const cardDesc = t(`conceptAccordion.coverage.${key}.desc`);
                     return (
@@ -111,9 +135,7 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.05 }}
                         className="bg-white border p-4 rounded-xl transition-all flex items-start gap-3 border-gray-200 hover:border-[#10b981] hover:shadow-md"
                       >
-                        <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 bg-green-100">
-                          <Icon className="w-6 h-6 text-[#10b981]" />
-                        </div>
+                        <FriendlyIcon emoji={icon.emoji} label={cardTitle} tone={icon.tone} size="sm" />
                         <div className="pt-1">
                           <h4 className="font-bold text-gray-900 text-sm leading-tight mb-1">
                             {cardTitle}
@@ -216,7 +238,8 @@ const AmbulantConceptAccordion = () => {
               <AccordionContent className="pt-4 pb-6">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {whyHealioKeys.map((key, idx) => {
-                    const Icon = whyHealioIcons[idx];
+                    const icon = whyHealioIcons[idx];
+                    const title = t(`conceptAccordion.whyHealio.${key}.title`);
                     return (
                       <motion.div
                         key={idx}
@@ -226,10 +249,8 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.1 }}
                         className="bg-white border border-gray-200 p-6 rounded-xl hover:shadow-lg hover:border-[#10b981] transition-all"
                       >
-                        <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                          <Icon className="w-6 h-6 text-[#10b981]" />
-                        </div>
-                        <h4 className="font-bold text-gray-900 mb-2">{t(`conceptAccordion.whyHealio.${key}.title`)}</h4>
+                        <FriendlyIcon emoji={icon.emoji} label={title} tone={icon.tone} size="sm" className="mb-4" />
+                        <h4 className="font-bold text-gray-900 mb-2">{title}</h4>
                         <p className="text-sm text-gray-600">{t(`conceptAccordion.whyHealio.${key}.desc`)}</p>
                       </motion.div>
                     );

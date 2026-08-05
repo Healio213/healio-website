@@ -1,15 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calculator, CheckCircle2, ChevronDown, Receipt, Sparkles, WalletCards } from 'lucide-react';
+import { ArrowRight, Calculator, CheckCircle2, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { useReferrer } from '@/hooks/useReferrer';
 
 const nudgeItems = [
-  { key: 'selfPay', icon: Receipt },
-  { key: 'budget', icon: WalletCards },
-  { key: 'bonus', icon: Sparkles },
+  { key: 'selfPay', emoji: '🧾', tone: 'coral' },
+  { key: 'budget', emoji: '💳', tone: 'sky' },
+  { key: 'bonus', emoji: '🎁', tone: 'butter' },
 ];
 
 const AmbulantConversionNudge = () => {
@@ -61,7 +62,6 @@ const AmbulantConversionNudge = () => {
 
           <div className="grid gap-2 md:hidden">
             {nudgeItems.map((item, index) => {
-              const Icon = item.icon;
               return (
                 <details
                   key={item.key}
@@ -70,9 +70,7 @@ const AmbulantConversionNudge = () => {
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 [&::-webkit-details-marker]:hidden">
                     <span className="flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-                        <Icon className="h-4 w-4" />
-                      </span>
+                      <FriendlyIcon emoji={item.emoji} tone={item.tone} size="sm" />
                       <span className="font-extrabold text-slate-950">
                         {t(`conversionNudge.items.${item.key}.title`)}
                       </span>
@@ -89,7 +87,6 @@ const AmbulantConversionNudge = () => {
 
           <div className="hidden gap-3 md:grid md:grid-cols-3">
             {nudgeItems.map((item, index) => {
-              const Icon = item.icon;
               return (
                 <motion.article
                   key={item.key}
@@ -102,9 +99,7 @@ const AmbulantConversionNudge = () => {
                   {index < nudgeItems.length - 1 && (
                     <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 text-emerald-300 md:block" />
                   )}
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
-                    <Icon className="h-5 w-5" />
-                  </div>
+                  <FriendlyIcon emoji={item.emoji} tone={item.tone} size="sm" className="mb-4" />
                   <h3 className="mb-2 text-lg font-extrabold text-slate-950">
                     {t(`conversionNudge.items.${item.key}.title`)}
                   </h3>

@@ -7,13 +7,9 @@ import {
   BadgeCheck,
   Check,
   ClipboardCheck,
-  FileCheck2,
-  FileText,
   HeartHandshake,
   LockKeyhole,
   MessageCircle,
-  QrCode,
-  Scale,
   ShieldCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,8 +53,17 @@ const ZahnaerztePage = () => {
   const insurerTones = ['butter', 'sky', 'mint', 'lavender'];
   const bonusFriendlyIcons = ['🪙', '🛡️', '✅'];
   const bonusTones = ['butter', 'mint', 'lavender'];
-  const legalIcons = [Scale, FileCheck2, MessageCircle, LockKeyhole];
-  const packageIcons = [FileText, ClipboardCheck, QrCode];
+  const legalFriendlyIcons = [
+    { emoji: '⚖️', tone: 'sky' },
+    { emoji: '📋', tone: 'mint' },
+    { emoji: '💬', tone: 'lavender' },
+    { emoji: '🔒', tone: 'butter' },
+  ];
+  const packageFriendlyIcons = [
+    { emoji: '📄', tone: 'sky' },
+    { emoji: '🗒️', tone: 'butter' },
+    { emoji: '📲', tone: 'mint' },
+  ];
 
   const revealProps = (delay = 0) => ({
     initial: shouldReduceMotion ? false : { opacity: 0, y: 24 },
@@ -341,10 +346,10 @@ const ZahnaerztePage = () => {
 
             <div className="mt-14 grid gap-px overflow-hidden border border-[#dbe5e2] bg-[#dbe5e2] md:grid-cols-2">
               {legalItems.map((item, index) => {
-                const Icon = legalIcons[index] || ShieldCheck;
+                const icon = legalFriendlyIcons[index] || { emoji: '🛡️', tone: 'mint' };
                 return (
                   <motion.article key={item.title} {...revealProps(index * 0.05)} className="bg-[#f8fbfa] p-7 sm:p-8">
-                    <Icon className="h-6 w-6 text-[#087654]" aria-hidden="true" />
+                    <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} size="sm" />
                     <h3 className="mt-6 font-display text-xl font-extrabold tracking-[-0.02em] text-[#07111f]">{item.title}</h3>
                     <p className="mt-3 leading-7 text-[#5b6e75]">{item.text}</p>
                   </motion.article>
@@ -375,10 +380,10 @@ const ZahnaerztePage = () => {
 
             <div className="mt-14 grid gap-6 lg:grid-cols-3">
               {packageItems.map((item, index) => {
-                const Icon = packageIcons[index] || FileText;
+                const icon = packageFriendlyIcons[index] || { emoji: '📄', tone: 'sky' };
                 return (
                   <motion.article key={item.title} {...revealProps(index * 0.07)} className="border-t-4 border-[#25c990] bg-white p-7 shadow-[0_14px_44px_rgba(7,17,31,0.06)] sm:p-8">
-                    <Icon className="h-6 w-6 text-[#087654]" aria-hidden="true" />
+                    <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} size="sm" />
                     <h3 className="mt-8 font-display text-xl font-extrabold tracking-[-0.02em] text-[#07111f]">{item.title}</h3>
                     <p className="mt-3 leading-7 text-[#5c6f76]">{item.text}</p>
                   </motion.article>

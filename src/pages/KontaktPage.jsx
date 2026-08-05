@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, Loader2 } from 'lucide-react';
+import { Phone, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -132,9 +133,7 @@ const KontaktPage = () => {
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
-                      <MapPin className="w-6 h-6" />
-                    </div>
+                    <FriendlyIcon emoji="📍" label={t('page.address')} tone="coral" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.address')}</h3>
                       <p className="text-lg text-slate-900 font-medium">
@@ -146,9 +145,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
-                      <Mail className="w-6 h-6" />
-                    </div>
+                    <FriendlyIcon emoji="✉️" label={t('page.email')} tone="sky" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
                       <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
@@ -158,9 +155,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-[#10B981] shrink-0">
-                      <Phone className="w-6 h-6" />
-                    </div>
+                    <FriendlyIcon emoji="📞" label={t('page.phone')} tone="mint" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.phone')}</h3>
                       <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">

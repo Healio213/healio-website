@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Video, Stethoscope, Smartphone, Clock, Shield, Search, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const AmbulantIKKServices = () => {
   const { t } = useTranslation('ambulant');
@@ -60,9 +61,7 @@ const AmbulantIKKServices = () => {
           >
             <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-6">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Video className="w-6 h-6 text-white" />
-                </div>
+                <FriendlyIcon emoji="📱" tone="sky" size="sm" />
                 <div>
                   <h3 className="text-2xl font-bold text-white">{t('ikkServices.teleclinic.title')}</h3>
                   <span className="text-blue-100 text-sm font-medium">{t('ikkServices.teleclinic.badge')}</span>
@@ -107,9 +106,7 @@ const AmbulantIKKServices = () => {
           >
             <div className="bg-gradient-to-r from-purple-600 to-purple-500 p-6">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Search className="w-6 h-6 text-white" />
-                </div>
+                <FriendlyIcon emoji="🔎" tone="lavender" size="sm" />
                 <div>
                   <h3 className="text-2xl font-bold text-white">{t('ikkServices.betterdoc.title')}</h3>
                   <span className="text-purple-100 text-sm font-medium">{t('ikkServices.betterdoc.badge')}</span>

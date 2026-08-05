@@ -21,19 +21,22 @@ assert.deepEqual(de.hero.audiences.map((item) => item.key), ['private', 'practic
 assert.equal(de.principles.items.length, 4);
 assert.equal(en.principles.items.length, de.principles.items.length);
 
-assert.deepEqual(de.impact.items.map((item) => item.value), ['3.000 EUR', '1.000 EUR', '700 EUR+']);
+assert.match(de.impact.title, /GKV-Bonus/);
+assert.deepEqual(de.impact.items.map((item) => item.category), ['Ambulant', 'Zahn', 'Stationär']);
+assert.deepEqual(de.impact.items.map((item) => item.value), ['3.000 EUR', 'bis zu 100 %', '1- oder 2-Bett']);
 assert.match(de.impact.items[0].label, /2 Jahren/);
-assert.match(de.impact.items[1].detail, /Naturheilkunde und Osteopathie/);
-assert.match(de.impact.items[2].detail, /Bonusmaßnahmen/);
+assert.match(de.impact.items[1].detail, /fehlenden Zähnen/);
+assert.match(de.impact.items[2].detail, /Chefarztbehandlung/);
 assert.match(de.impact.disclaimer, /nicht automatisch/);
-assert.match(de.impact.disclaimer, /Versicherungs- und Kassenbedingungen/);
+assert.match(de.impact.disclaimer, /IKK classic/);
+assert.match(de.impact.disclaimer, /700 EUR\+/);
 
 assert.equal(de.routes.items.length, 3);
 assert.deepEqual(de.routes.items.map((item) => item.routeKey), ['leistungen', 'partner', 'unternehmen']);
 assert.deepEqual(en.routes.items.map((item) => item.routeKey), ['leistungen', 'partner', 'unternehmen']);
 
 const combinedCopy = `${JSON.stringify(de)}\n${JSON.stringify(en)}`;
-assert.doesNotMatch(combinedCopy, /120\+|thousands|tausende|100\s*%|10\s*%/i);
+assert.doesNotMatch(combinedCopy, /120\+|thousands|tausende|10\s*%/i);
 assert.doesNotMatch(combinedCopy, /Plattform|platform/i);
 assert.doesNotMatch(combinedCopy, /💡|🤝|🚀|❤️/u);
 
