@@ -8,8 +8,23 @@
     "heroImageAlt": "Modern hospital private room"
   },
   "siegel": {
-    "title": "Awarded by independent testers",
-    "alt": "Quality seals: Franke & Bornberg FFF+ excellent, Morgen & Morgen Excellent, LevelNine Excellent"
+    "eyebrow": "Trust when it matters",
+    "title": "Award-winning hospital cover. A strong partnership.",
+    "subtitle": "Awards for the current hospital insurance partner and the IKK classic partnership are shown separately, so it is always clear what each seal represents.",
+    "awardsLabel": "SDK awards",
+    "cooperationLabel": "In cooperation with",
+    "cooperationText": "Depending on the bonus activities you complete, the IKK classic bonus programme can offset part or all of your hospital plan premium.",
+    "ikkAwardsLabel": "Current IKK classic awards",
+    "ikkLogoAlt": "IKK classic logo",
+    "awards": {
+      "warentest": "Stiftung Warentest VERY GOOD (0.9) for SDK comprehensive health insurance",
+      "fairness": "German Fairness Award for SDK",
+      "morgenMorgen": "Morgen & Morgen award for SDK"
+    },
+    "ikkAwards": {
+      "family": "Health fund test for families, IKK classic rated Good (1.6), 03/2026",
+      "parents": "Health fund test for expectant and new parents, IKK classic rated Good (1.7), 03/2026"
+    }
   },
   "concept": {
     "title": "The SDK hospital plans: private patient in hospital",
@@ -28,8 +43,8 @@
         "value": "Yes, incl. private clinics"
       },
       "roomingIn": {
-        "label": "Rooming-in",
-        "value": "Yes"
+        "label": "Family benefits",
+        "value": "Rooming-in under 16; family room in SP1"
       },
       "familienzimmer": {
         "label": "Rehabilitation measures",
@@ -52,8 +67,8 @@
         "value": "One outpatient examination each"
       },
       "tagegeld": {
-        "label": "Hospital daily allowance",
-        "value": "10 €/day for inpatient treatment"
+        "label": "Hospital cash benefit",
+        "value": "EUR 10/day; up to EUR 100/day if extras are waived"
       },
       "keineWartezeit": {
         "label": "Waiting periods",
@@ -75,17 +90,61 @@
     },
     "ikkComboTitle": "Refinance your premium via the IKK classic bonus",
     "ikkComboText": "IKK classic rewards health-conscious behaviour with <strong>tax-free cash bonuses and subsidies</strong>: preventive check-ups, vaccinations, sports club, fitness and more. Depending on your activities, the bonus can cover a large part of your hospital plan premium, and for the accident plan often all of it. The bonus calculator below shows what you can collect.",
-    "exampleBlinddarm": "Simplified example: appendix surgery (4 days)",
-    "exampleLeistenbruch": "Simplified example: outpatient hernia surgery",
-    "gkvFallpauschale": "Statutory flat rate (GKV)",
-    "einbettzimmer": "Private room (4 days)",
-    "privatarztLeistungen": "Private medical services",
-    "zuzahlungTag": "Statutory co-payment (4 days at 10 €)",
-    "zuZahlen": "Payable without supplementary insurance",
-    "erstattungKlinik": "Hospital plan reimbursement",
-    "erstattungKlinikGeneral": "Hospital plan reimbursement",
-    "gkvUebernahme": "Covered by statutory insurance",
-    "deinEigenanteil": "Your share",
+    "examplesEyebrow": "Transparent, not theoretical",
+    "examplesTitle": "What optional hospital extras can realistically cost",
+    "examplesSubtitle": "Statutory insurance covers medically necessary treatment. These model calculations show optional extras and the statutory co-payment only.",
+    "examples": {
+      "fracture": {
+        "eyebrow": "Realistic model calculation",
+        "title": "Complex leg fracture: 5 days in hospital",
+        "rows": [
+          {
+            "label": "Medically necessary surgery and standard care",
+            "value": "covered by statutory insurance"
+          },
+          {
+            "label": "Optional private room (4 × EUR 143.50)",
+            "value": "EUR 574.00"
+          },
+          {
+            "label": "Statutory co-payment (5 × EUR 10)",
+            "value": "EUR 50.00"
+          }
+        ],
+        "withoutLabel": "Your payment without supplementary cover",
+        "withoutValue": "EUR 624.00",
+        "withLabel": "Remaining with Klinik 1-Bett",
+        "withValue": "EUR 0.00",
+        "note": "In this model, the room costs are reimbursed and EUR 10 hospital daily allowance is paid for each inpatient day."
+      },
+      "familyRoom": {
+        "eyebrow": "Family example",
+        "title": "Family room after birth: 4 days",
+        "rows": [
+          {
+            "label": "Medically necessary delivery and care",
+            "value": "covered by statutory insurance"
+          },
+          {
+            "label": "Optional family room (3 × EUR 146.15)",
+            "value": "EUR 438.45"
+          },
+          {
+            "label": "Statutory co-payment for childbirth",
+            "value": "EUR 0.00"
+          }
+        ],
+        "withoutLabel": "Your payment without supplementary cover",
+        "withoutValue": "EUR 438.45",
+        "withLabel": "Remaining with Klinik 1-Bett",
+        "withValue": "EUR 0.00",
+        "note": "Cover must have started before a pregnancy had already been medically confirmed."
+      }
+    },
+    "examplesSourceIntro": "Model calculations based on published hospital prices and current policy terms. Actual costs and reimbursements may vary.",
+    "examplesSourceBmg": "What statutory insurance covers",
+    "examplesSourceClinic": "Published hospital prices",
+    "examplesSourceTariff": "Current policy terms",
     "besonderheitenTitle": "What sets the SDK hospital plans apart",
     "besonderheiten": [
       "No waiting periods: full cover from the start of the policy",
@@ -93,11 +152,13 @@
       "Reimbursement even beyond the GOÄ maximum rates",
       "Free hospital choice, incl. private and specialist clinics",
       "Outpatient surgery replacing an inpatient stay is covered",
-      "Rooming-in: parents stay with their child",
+      "Rooming-in for insured children under 16",
+      "Family room after childbirth covered at 100% in SP1",
       "Rehabilitation measures included (no withdrawal treatments)",
-      "Travel and transport costs up to 250 € per year",
+      "100% of medically necessary travel and transport costs, subject to specific policy limits",
+      "Up to EUR 100 replacement hospital daily allowance in SP1 if private-doctor care and a comfort room are waived",
       "Klinik 2-Bett with upgrade option to the private-room plan (from age 30, every 5 years until 65)",
-      "Klinik bei Unfall: private patient comfort after accidents, e.g. 6.84 €/month at age 30",
+      "Klinik bei Unfall (SPU): private-patient comfort after accidents without a health assessment",
       "For everyone with statutory health insurance, premium depends on age"
     ]
   },
@@ -114,8 +175,8 @@
         "desc": "Private room instead of shared room. Better recovery."
       },
       "wartezeiten": {
-        "title": "Affordable entry for active people",
-        "desc": "The accident plan gives athletes and active people private patient status after accidents, for a few euros a month."
+        "title": "Accident cover without a health assessment",
+        "desc": "SPU provides the private-room plan benefits for accident-related treatment, at an affordable price and without a health assessment."
       },
       "familienfreundlich": {
         "title": "Family-friendly",
@@ -136,24 +197,24 @@
         "desc": "Any hospital in Germany, incl. private and specialist clinics. You decide where you are treated."
       },
       "keineWartezeit": {
-        "title": "Accident plan for active people",
-        "desc": "Klinik bei Unfall (SPU): all benefits for accident-related treatments, e.g. 6.84 €/month at age 30."
+        "title": "No waiting periods",
+        "desc": "Cover for new insured events starts on the policy start date. Events that occurred before the policy began are not covered."
       },
       "tagegeld": {
-        "title": "Hospital daily allowance",
-        "desc": "10 € per day for inpatient treatment and rehab (plans SP1 and SPU), cushioning the statutory co-payment."
+        "title": "Up to EUR 100 per day",
+        "desc": "SP1 includes a EUR 10 hospital daily allowance. If private-doctor care and a comfort room are waived, an additional replacement allowance of up to EUR 100 per day may be paid."
       },
       "ambulanteOps": {
         "title": "Outpatient surgery",
         "desc": "Outpatient operations replacing an inpatient stay are reimbursed, incl. one pre- and one final examination."
       },
       "familienzimmer": {
-        "title": "Rooming-in",
-        "desc": "Parents stay with their child in hospital. One of the most important benefits for families."
+        "title": "Rooming-in & family room",
+        "desc": "Rooming-in is included for insured children under 16. Following childbirth, SP1 covers the family room at 100%."
       },
       "vorNachStationaer": {
         "title": "Rehab & transport",
-        "desc": "Rehabilitation measures included (no withdrawal treatments). Travel and transport costs up to 250 € per year."
+        "desc": "Rehabilitation is included, excluding withdrawal treatment. Medically necessary travel and transport costs are reimbursed under the policy terms."
       }
     }
   },
@@ -189,7 +250,7 @@
       },
       {
         "q": "What is the Klinik bei Unfall plan?",
-        "a": "The SPU plan provides all hospital benefits (private or twin room, chief physician treatment, free hospital choice), but only for accident-related treatments. In return it is particularly affordable: 6.84 € per month for a 30-year-old. Ideal for athletes and active people."
+        "a": "SPU provides the Klinik 1-Bett benefits – private or twin room, private-doctor treatment and free hospital choice – exclusively for accident-related treatment. It requires no health assessment and costs an illustrative EUR 6.84 per month for a 30-year-old."
       },
       {
         "q": "Are there waiting periods?",

@@ -7,6 +7,7 @@ import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
+import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
@@ -143,21 +144,7 @@ const StationaerPage = () => {
           </div>
         </section>
 
-        {/* Qualitätssiegel: SDK + IKK classic */}
-        <FadeInUp>
-        <section className="py-10 bg-white border-b border-gray-100">
-          <div className="healio-container px-4">
-            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
-              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien — Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-            </div>
-          </div>
-        </section>
-        </FadeInUp>
+        <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
 
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>

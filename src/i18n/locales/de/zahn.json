@@ -8,8 +8,22 @@
     "heroImageAlt": "Professionelle Zahnarztpraxis"
   },
   "siegel": {
-    "title": "Ausgezeichnet von unabhängigen Testern",
-    "alt": "Qualitätssiegel: Stiftung Warentest SEHR GUT (0,5) für ZAHN Prestige, Ascore Tarif des Jahres 2024, Franke & Bornberg FFF+ für ZahnPRIVAT 100"
+    "eyebrow": "Vertrauen auf einen Blick",
+    "title": "Ausgezeichnete Zahn-Tarife. Starke Kooperation.",
+    "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt – und greifen für deinen Schutz sinnvoll ineinander.",
+    "awardsLabel": "Aktuelle Auszeichnungen der Zahn-Tarife",
+    "cooperationLabel": "In Kooperation mit",
+    "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deiner Zahnzusatzversicherung je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
+    "ikkAwardsLabel": "Aktuelle IKK classic Auszeichnungen",
+    "ikkLogoAlt": "Logo der IKK classic",
+    "awards": {
+      "warentest": "Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, Ausgabe 07/2025",
+      "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 2025"
+    },
+    "ikkAwards": {
+      "family": "Krankenkassentest für Familien, IKK classic Note 1,6 Gut, Stand 03/2026",
+      "parents": "Krankenkassentest für Schwangere und junge Eltern, IKK classic Note 1,7 Gut, Stand 03/2026"
+    }
   },
   "check": {
     "badge": "Der Healio Zahn-Check",

@@ -8,8 +8,23 @@
     "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
   },
   "siegel": {
-    "title": "Ausgezeichnet von unabhängigen Testern",
-    "alt": "Qualitätssiegel: Franke & Bornberg FFF+ hervorragend, Morgen & Morgen Ausgezeichnet, LevelNine Exzellent"
+    "eyebrow": "Vertrauen im Ernstfall",
+    "title": "Ausgezeichneter Klinikschutz. Starke Kooperation.",
+    "subtitle": "Die Auszeichnungen des aktuellen Klinikpartners und die IKK classic Kooperation werden getrennt gezeigt – damit jederzeit klar bleibt, wofür jedes Siegel steht.",
+    "awardsLabel": "Auszeichnungen der SDK",
+    "cooperationLabel": "In Kooperation mit",
+    "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deines Klinik-Tarifs je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
+    "ikkAwardsLabel": "Aktuelle IKK classic Auszeichnungen",
+    "ikkLogoAlt": "Logo der IKK classic",
+    "awards": {
+      "warentest": "Stiftung Warentest SEHR GUT (0,9) für die SDK Krankheitskostenvollversicherung",
+      "fairness": "Deutscher Fairness-Preis für die SDK",
+      "morgenMorgen": "Morgen und Morgen Auszeichnung für die SDK"
+    },
+    "ikkAwards": {
+      "family": "Krankenkassentest für Familien, IKK classic Note 1,6 Gut, Stand 03/2026",
+      "parents": "Krankenkassentest für Schwangere und junge Eltern, IKK classic Note 1,7 Gut, Stand 03/2026"
+    }
   },
   "concept": {
     "title": "Die SDK Klinik-Tarife: Privatpatient im Krankenhaus",
@@ -28,8 +43,8 @@
         "value": "Ja, auch Privatkliniken"
       },
       "roomingIn": {
-        "label": "Rooming-in",
-        "value": "Ja"
+        "label": "Familie",
+        "value": "Rooming-in < 16; Familienzimmer im SP1"
       },
       "familienzimmer": {
         "label": "Reha-Maßnahmen",
@@ -52,8 +67,8 @@
         "value": "Je eine ambulante Untersuchung"
       },
       "tagegeld": {
-        "label": "Krankenhaustagegeld",
-        "value": "10 €/Tag bei vollstationärer Behandlung"
+        "label": "Geldleistung im Krankenhaus",
+        "value": "10 EUR/Tag; bei Verzicht bis 100 EUR/Tag"
       },
       "keineWartezeit": {
         "label": "Wartezeiten",
@@ -75,17 +90,61 @@
     },
     "ikkComboTitle": "Beitrag über den IKK classic Bonus refinanzieren",
     "ikkComboText": "Die IKK classic belohnt gesundheitsbewusstes Verhalten mit <strong>steuerfreien Geldboni und Zuschüssen</strong>: Vorsorge, Impfungen, Sportverein, Fitness, Sportabzeichen und mehr. Je nach deinen Aktivitäten kann der Bonus einen großen Teil deines Klinik-Beitrags decken, beim Unfall-Tarif oft sogar den ganzen. Wie viel bei dir zusammenkommt, zeigt dir der Bonusrechner weiter unten.",
-    "exampleBlinddarm": "Vereinfachtes Beispiel: Blinddarm-OP (4 Tage)",
-    "exampleLeistenbruch": "Vereinfachtes Beispiel: Ambulante Leistenbruch-OP",
-    "gkvFallpauschale": "GKV-Fallpauschale",
-    "einbettzimmer": "Einbettzimmer (4 Tage)",
-    "privatarztLeistungen": "Privatärztliche Leistungen",
-    "zuzahlungTag": "Gesetzliche Zuzahlung (4 Tage à 10 €)",
-    "zuZahlen": "Ohne Zusatzversicherung zu zahlen",
-    "erstattungKlinik": "Erstattung Klinik-Tarif",
-    "erstattungKlinikGeneral": "Erstattung Klinik-Tarif",
-    "gkvUebernahme": "GKV-Übernahme",
-    "deinEigenanteil": "Dein Eigenanteil",
+    "examplesEyebrow": "Transparent statt theoretisch",
+    "examplesTitle": "Was freiwillige Krankenhaus-Extras realistisch kosten können",
+    "examplesSubtitle": "Die medizinisch notwendige Behandlung übernimmt die GKV. Diese Modellrechnungen zeigen ausschließlich zusätzliche Wunschleistungen und die gesetzliche Zuzahlung.",
+    "examples": {
+      "fracture": {
+        "eyebrow": "Realistische Modellrechnung",
+        "title": "Komplizierter Beinbruch: 5 Tage im Krankenhaus",
+        "rows": [
+          {
+            "label": "Medizinisch notwendige OP und Standardversorgung",
+            "value": "übernimmt die GKV"
+          },
+          {
+            "label": "Gewünschtes Einbettzimmer (4 × 143,50 EUR)",
+            "value": "574,00 EUR"
+          },
+          {
+            "label": "Gesetzliche Zuzahlung (5 × 10 EUR)",
+            "value": "50,00 EUR"
+          }
+        ],
+        "withoutLabel": "Eigene Zahlung ohne Zusatzversicherung",
+        "withoutValue": "624,00 EUR",
+        "withLabel": "Verbleibend mit Klinik 1-Bett",
+        "withValue": "0,00 EUR",
+        "note": "Im Modell werden die Zimmerkosten erstattet und 10 EUR Krankenhaustagegeld je vollstationärem Tag gezahlt."
+      },
+      "familyRoom": {
+        "eyebrow": "Familienbeispiel",
+        "title": "Familienzimmer nach der Geburt: 4 Tage",
+        "rows": [
+          {
+            "label": "Medizinisch notwendige Entbindung und Versorgung",
+            "value": "übernimmt die GKV"
+          },
+          {
+            "label": "Gewünschtes Familienzimmer (3 × 146,15 EUR)",
+            "value": "438,45 EUR"
+          },
+          {
+            "label": "Gesetzliche Zuzahlung bei Entbindung",
+            "value": "0,00 EUR"
+          }
+        ],
+        "withoutLabel": "Eigene Zahlung ohne Zusatzversicherung",
+        "withoutValue": "438,45 EUR",
+        "withLabel": "Verbleibend mit Klinik 1-Bett",
+        "withValue": "0,00 EUR",
+        "note": "Voraussetzung ist, dass der Schutz bereits bestand, bevor die Schwangerschaft ärztlich festgestellt wurde."
+      }
+    },
+    "examplesSourceIntro": "Modellrechnungen auf Basis veröffentlichter Klinikpreise und der aktuellen Tarifbedingungen. Tatsächliche Kosten und Erstattungen können abweichen.",
+    "examplesSourceBmg": "Was die GKV übernimmt",
+    "examplesSourceClinic": "Veröffentlichte Klinikpreise",
+    "examplesSourceTariff": "Aktuelle Tarifbedingungen",
     "besonderheitenTitle": "Das zeichnet die SDK Klinik-Tarife aus",
     "besonderheiten": [
       "Keine Wartezeiten: voller Schutz ab Versicherungsbeginn",
@@ -93,11 +152,13 @@
       "Erstattung auch über die GOÄ-Höchstsätze hinaus",
       "Freie Krankenhauswahl, auch Privatkliniken und Spezialkliniken",
       "Ambulante stationsersetzende Operationen abgedeckt",
-      "Rooming-in: Eltern bleiben beim Kind",
+      "Rooming-in für versicherte Kinder unter 16 Jahren",
+      "Familienzimmer nach der Entbindung im SP1 zu 100 Prozent",
       "Reha-Maßnahmen eingeschlossen (keine Entwöhnungsbehandlungen)",
-      "Fahrt- und Transportkosten bis 250 € pro Jahr",
+      "Medizinisch notwendige Fahrt- und Transportkosten zu 100 Prozent; besondere Höchstgrenzen laut Tarifbedingungen",
+      "Bei Verzicht auf Privatarzt und Komfortzimmer bis zu 100 EUR Ersatz-Krankenhaustagegeld pro Tag im SP1",
       "Klinik 2-Bett mit Wechseloption in den 1-Bett-Tarif (ab dem 30. Geburtstag, alle 5 Jahre bis 65)",
-      "Klinik bei Unfall: Privatpatienten-Komfort bei Unfällen, z. B. 6,84 €/Monat mit 30 Jahren",
+      "Klinik bei Unfall (SPU): Privatpatienten-Komfort nach Unfällen ohne Gesundheitsprüfung",
       "Für alle gesetzlich Versicherten, Beitrag altersabhängig"
     ]
   },
@@ -114,8 +175,8 @@
         "desc": "Einzelzimmer statt Mehrbettzimmer. Bessere Erholung."
       },
       "wartezeiten": {
-        "title": "Günstiger Einstieg für Aktive",
-        "desc": "Der Unfall-Tarif sichert Sportlern und Aktiven den Privatpatienten-Status bei Unfällen, für wenige Euro im Monat."
+        "title": "Unfallschutz ohne Gesundheitsprüfung",
+        "desc": "Der SPU bietet die Leistungen des 1-Bett-Tarifs bei unfallbedingter Behandlung – günstig und ohne Gesundheitsprüfung."
       },
       "familienfreundlich": {
         "title": "Familienfreundlich",
@@ -136,24 +197,24 @@
         "desc": "Jede Klinik in Deutschland, auch Privatkliniken und Spezialkliniken. Du entscheidest, wo du behandelt wirst."
       },
       "keineWartezeit": {
-        "title": "Unfall-Tarif für Aktive",
-        "desc": "Klinik bei Unfall (SPU): alle Leistungen bei unfallbedingten Behandlungen, z. B. 6,84 €/Monat mit 30 Jahren."
+        "title": "Keine Wartezeiten",
+        "desc": "Schutz für neue Versicherungsfälle ab Versicherungsbeginn. Bereits eingetretene Versicherungsfälle sind nicht versichert."
       },
       "tagegeld": {
-        "title": "Krankenhaustagegeld",
-        "desc": "10 € pro Tag bei vollstationären Behandlungen und Reha (Tarife SP1 und SPU), das federt die gesetzliche Zuzahlung ab."
+        "title": "Bis zu 100 EUR pro Tag",
+        "desc": "Im SP1 sind 10 EUR Krankenhaustagegeld enthalten. Wer auf Privatarzt und Komfortzimmer verzichtet, kann zusätzlich bis zu 100 EUR Ersatz-Krankenhaustagegeld pro Tag erhalten."
       },
       "ambulanteOps": {
         "title": "Ambulante OPs",
         "desc": "Ambulante stationsersetzende Operationen werden erstattet, inklusive je einer Vor- und Abschlussuntersuchung."
       },
       "familienzimmer": {
-        "title": "Rooming-in",
-        "desc": "Eltern bleiben bei ihrem Kind im Krankenhaus. Für Familien einer der wichtigsten Bausteine."
+        "title": "Rooming-in & Familienzimmer",
+        "desc": "Rooming-in ist für versicherte Kinder unter 16 Jahren enthalten. Nach einer Entbindung übernimmt SP1 das Familienzimmer zu 100 Prozent."
       },
       "vorNachStationaer": {
         "title": "Reha & Transport",
-        "desc": "Reha-Maßnahmen eingeschlossen (keine Entwöhnungsbehandlungen). Fahrt- und Transportkosten bis 250 € pro Jahr."
+        "desc": "Reha-Maßnahmen sind eingeschlossen, ausgenommen Entwöhnungsbehandlungen. Medizinisch notwendige Fahrt- und Transportkosten werden nach den Tarifbedingungen erstattet."
       }
     }
   },
@@ -189,7 +250,7 @@
       },
       {
         "q": "Was ist der Tarif Klinik bei Unfall?",
-        "a": "Der Tarif SPU leistet alle Klinik-Leistungen (Ein- oder Zweibettzimmer, Chefarztbehandlung, freie Klinikwahl), allerdings nur bei unfallbedingten Behandlungen. Dafür ist er besonders günstig: für 30-Jährige 6,84 Euro im Monat. Ideal für Sportler und Aktive, die sich für den Ernstfall absichern wollen."
+        "a": "Der Tarif SPU bietet die Leistungen des Klinik-1-Bett-Tarifs – Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Klinikwahl – ausschließlich bei unfallbedingten Behandlungen. Er kommt ohne Gesundheitsprüfung aus und kostet für 30-Jährige beispielhaft 6,84 Euro im Monat."
       },
       {
         "q": "Gibt es Wartezeiten?",

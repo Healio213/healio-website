@@ -8,8 +8,22 @@
     "heroImageAlt": "Professional dental practice"
   },
   "siegel": {
-    "title": "Awarded by independent testers",
-    "alt": "Quality seals: Stiftung Warentest VERY GOOD (0.5) for ZAHN Prestige, Ascore Tariff of the Year 2024, Franke & Bornberg FFF+ for ZahnPRIVAT 100"
+    "eyebrow": "Trust at a glance",
+    "title": "Award-winning dental plans. A strong partnership.",
+    "subtitle": "Independent plan ratings and the IKK classic bonus programme are clearly separated – and work together meaningfully for your cover.",
+    "awardsLabel": "Current dental plan awards",
+    "cooperationLabel": "In cooperation with",
+    "cooperationText": "Depending on the bonus activities you complete, the IKK classic bonus programme can offset part or all of your dental supplementary insurance premium.",
+    "ikkAwardsLabel": "Current IKK classic awards",
+    "ikkLogoAlt": "IKK classic logo",
+    "awards": {
+      "warentest": "Stiftung Warentest VERY GOOD (0.5), ZAHN Prestige by die Bayerische, 07/2025 issue",
+      "frankeBornberg": "Franke & Bornberg FFF+ excellent (0.5), UKV ZahnPRIVAT 100, 2025 rating"
+    },
+    "ikkAwards": {
+      "family": "Health fund test for families, IKK classic rated Good (1.6), 03/2026",
+      "parents": "Health fund test for expectant and new parents, IKK classic rated Good (1.7), 03/2026"
+    }
   },
   "check": {
     "badge": "The Healio dental check",
