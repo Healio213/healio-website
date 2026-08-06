@@ -303,5 +303,24 @@
     "title": "Would you like me to explain the hospital cover?",
     "body": "I can briefly explain how the hospital plan and IKK bonus work together and which cover may fit you.",
     "cta": "Yes, explain hospital cover"
+  },
+  "neugeborene": {
+    "eyebrow": "For expecting parents",
+    "title": "Your baby, in the <highlight>best hands</highlight> from day one",
+    "subtitle": "If you take out the hospital tariff while still pregnant, you can add your child after birth without any health assessment: within two months, retroactive to the day of birth.",
+    "card1Title": "No health assessment",
+    "card1Text": "For a newborn, health status does not matter. This window exists exactly once in a lifetime: it lasts two months and starts at birth.",
+    "card2Title": "The best setting if complications arise",
+    "card2Text": "Premature birth, jaundice treatment, transfer to neonatology: if complications occur after birth, your child has the tariff's full scope of care from the start, including choice of hospital and specialists.",
+    "card3Title": "You stay with your child",
+    "card3Text": "If your child needs inpatient treatment, one parent is admitted as an accompanying person. Accommodation and meals are covered by the tariff (rooming-in).",
+    "requirement": "Requirement: one parent is insured at the time of birth. The SDK hospital tariffs have no waiting periods, so signing up during pregnancy still makes sense, above all for your child.",
+    "cta": "Calculate your family's premium"
+  },
+  "bonusRechner": {
+    "tariffInfo": "Hospital tariff twin room, example premium €32.82 (age 30)",
+    "effectiveLabel": "What you get in the hospital",
+    "effectiveValue": "Private patient status",
+    "effectiveNote": "Example calculation: twin-room hospital tariff at €32.82 per month (age 30). Your premium depends on age and tariff, your bonus on your health insurer and the activities you complete."
   }
 }

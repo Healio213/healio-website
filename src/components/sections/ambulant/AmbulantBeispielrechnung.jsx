@@ -24,29 +24,30 @@ const AmbulantBeispielrechnung = () => {
   return (
     <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
+        {/* Auf allen Viewports eingeklappt (Frank 06.08.): der interaktive
+            Rechner traegt den Beweis, das Beispiel bleibt einen Klick entfernt. */}
         <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
-          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-left shadow-lg md:hidden"
+          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-left shadow-lg md:p-6"
         >
-          <h2 className="text-2xl font-extrabold leading-tight text-gray-900">
-            <HighlightText text={t('beispielrechnung.title')} />
-          </h2>
+          <div>
+            <h2 className="text-2xl font-extrabold leading-tight text-gray-900">
+              <HighlightText text={t('beispielrechnung.title')} />
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              {t('beispielrechnung.example')}
+            </p>
+          </div>
           <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>
-
-        <div className="hidden text-center mb-12 md:block">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            <HighlightText text={t('beispielrechnung.title')} />
-          </h2>
-        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={`${mobileOpen ? 'block' : 'hidden'} md:block bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-[#10b981] rounded-2xl p-5 md:p-10 shadow-lg`}
+          className={`${mobileOpen ? 'block' : 'hidden'} bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-[#10b981] rounded-2xl p-5 md:p-10 shadow-lg`}
         >
           <div className="flex items-center gap-3 mb-6 md:mb-8">
             <Calculator className="w-7 h-7 md:w-8 md:h-8 text-[#10b981]" />

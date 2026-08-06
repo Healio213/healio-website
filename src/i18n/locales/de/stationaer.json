@@ -303,5 +303,24 @@
     "title": "Soll ich dir den Klinikschutz erklären?",
     "body": "Ich erkläre dir kurz, wie Klinik-Tarif und IKK-Bonus zusammenspielen und welcher Schutz zu dir passt.",
     "cta": "Ja, Klinikschutz erklären"
+  },
+  "neugeborene": {
+    "eyebrow": "Für werdende Eltern",
+    "title": "Dein Baby, von <highlight>Tag eins</highlight> bestens versorgt",
+    "subtitle": "Schließt du den Klinik-Tarif noch in der Schwangerschaft ab, kannst du dein Kind nach der Geburt ohne Gesundheitsprüfung nachversichern: innerhalb von zwei Monaten, rückwirkend ab dem Tag der Geburt.",
+    "card1Title": "Ohne Gesundheitsprüfung",
+    "card1Text": "Für ein Neugeborenes spielt der Gesundheitszustand keine Rolle. Dieses Zeitfenster gibt es genau einmal im Leben: Es dauert zwei Monate und beginnt mit der Geburt.",
+    "card2Title": "Bei Komplikationen der beste Rahmen",
+    "card2Text": "Frühgeburt, Gelbsucht unter der Lampe, Verlegung auf die Neonatologie: Kommt es nach der Geburt zu Komplikationen, hat dein Kind von Anfang an den vollen Versorgungsrahmen des Tarifs, inklusive Klinikwahl und Spezialisten.",
+    "card3Title": "Du bleibst bei deinem Kind",
+    "card3Text": "Muss dein Kind stationär behandelt werden, wird ein Elternteil als Begleitperson mit aufgenommen. Unterbringung und Verpflegung übernimmt der Tarif (Rooming-in).",
+    "requirement": "Voraussetzung: Ein Elternteil ist bei der Geburt versichert. Die SDK-Klinik-Tarife kommen ohne Wartezeit aus, ein Abschluss ist also auch in der laufenden Schwangerschaft noch sinnvoll, vor allem für dein Kind.",
+    "cta": "Beitrag für deine Familie berechnen"
+  },
+  "bonusRechner": {
+    "tariffInfo": "Klinik-Tarif 2-Bett, Beispielbeitrag 32,82 € (30 Jahre)",
+    "effectiveLabel": "Dafür bekommst du im Krankenhaus",
+    "effectiveValue": "Privatpatienten-Status",
+    "effectiveNote": "Beispielrechnung: Klinik 2-Bett mit 32,82 € im Monat (30 Jahre). Dein Beitrag hängt von Alter und Tarif ab, dein Bonus von deiner Krankenkasse und den nachgewiesenen Maßnahmen."
   }
 }

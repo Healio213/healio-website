@@ -12,6 +12,7 @@ import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSe
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
+import AmbulantTarifTabelle from '@/components/sections/ambulant/AmbulantTarifTabelle';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
@@ -156,12 +157,27 @@ const AmbulantPage = () => {
           <AmbulantVideoSection />
         </FadeInUp>
 
+        {/* Interaktiver Bonus-Rechner — früh, das ist der versprochene nächste Schritt */}
+        <FadeInUp>
+          <AmbulantBonusCalculator />
+        </FadeInUp>
+
+        {/* Tarifstufen-Übersicht direkt am Rechner: Erstattung, Budget, Beitrag */}
+        <FadeInUp>
+          <AmbulantTarifTabelle />
+        </FadeInUp>
+
+        {/* Beispielrechnung — konkrete Einordnung nach dem Bonus-Rechner */}
+        <FadeInUp>
+          <AmbulantBeispielrechnung />
+        </FadeInUp>
+
         {/* 4 Highlight-Leistungskarten + Akkordeon */}
         <FadeInUp>
           <AmbulantBenefits />
         </FadeInUp>
 
-        {/* Konzept zuerst: SDK-Tarif und Healio-System erklären */}
+        {/* Konzept: SDK-Tarif und Healio-System erklären */}
         <FadeInUp>
           <AmbulantConceptAccordion />
         </FadeInUp>
@@ -169,16 +185,6 @@ const AmbulantPage = () => {
         {/* IKK classic Wechsel — Bonus als Verstärker und Refinanzierung erklären */}
         <FadeInUp>
           <AmbulantIKKWechsel variant="ambulant" />
-        </FadeInUp>
-
-        {/* Interaktiver Bonus-Rechner */}
-        <FadeInUp>
-          <AmbulantBonusCalculator />
-        </FadeInUp>
-
-        {/* Beispielrechnung — konkrete Einordnung nach dem Bonus-Rechner */}
-        <FadeInUp>
-          <AmbulantBeispielrechnung />
         </FadeInUp>
 
         {/* TeleClinic + BetterDoc */}

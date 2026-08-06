@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Leaf } from 'lucide-react';
+import { Leaf, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
@@ -14,6 +14,9 @@ const pillarIcons = [
 
 const AmbulantUmwelt = () => {
   const { t } = useTranslation('ambulant');
+  // Eingeklappt als Standard (Frank 06.08.): Herzensthema bleibt sichtbar,
+  // verlaengert aber nicht den Weg zum Abschluss.
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="py-20 bg-gradient-to-b from-emerald-50/50 to-white relative overflow-hidden">
@@ -25,28 +28,27 @@ const AmbulantUmwelt = () => {
 
       <div className="container mx-auto px-4 max-w-5xl relative z-10">
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
+        <button
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          className="mx-auto mb-6 flex w-full max-w-3xl items-center justify-between gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-left shadow-lg md:p-6"
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-            <Leaf className="w-4 h-4" />
-            {t('umwelt.badge')}
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+              <Leaf className="w-4 h-4" />
+              {t('umwelt.badge')}
+            </div>
+            <h2 className="text-2xl font-extrabold leading-tight text-gray-900">
+              <HighlightText text={t('umwelt.title')} />
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              <HighlightText text={t('umwelt.subtitle')} />
+            </p>
           </div>
+          <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${open ? 'rotate-180' : ''}`} />
+        </button>
 
-          {/* Big Statement */}
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
-            <HighlightText text={t('umwelt.title')} />
-          </h2>
-
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            <HighlightText text={t('umwelt.subtitle')} />
-          </p>
-        </motion.div>
-
+        <div className={open ? 'block' : 'hidden'}>
         {/* Visual Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -94,6 +96,7 @@ const AmbulantUmwelt = () => {
         >
           {t('umwelt.note')}
         </motion.p>
+        </div>
 
       </div>
     </section>

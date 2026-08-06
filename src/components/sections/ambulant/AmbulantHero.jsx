@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
-import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
+import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Calculator, Gift, CheckCircle, Euro } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -88,13 +88,15 @@ const AmbulantHero = () => {
               {t('hero.ctaCalculate')}
             </a>
             <a
-              href={IKK_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#bonus-calculator"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('bonus-calculator')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-healio-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               <Gift className="w-5 h-5 mr-2" />
-              {t('hero.ctaBonus')}
+              {t('hero.ctaBonusCalc')}
             </a>
           </motion.div>
         </div>

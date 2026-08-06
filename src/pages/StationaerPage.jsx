@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
+import HospitalNeugeborene from '@/components/sections/HospitalNeugeborene';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
 import ProductTicker from '@/components/sections/ProductTicker';
@@ -153,7 +154,19 @@ const StationaerPage = () => {
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>
 
-        <FadeInUp><AmbulantBonusCalculator tarifTypes="Stationär" /></FadeInUp>
+        {/* Hinweis für werdende Eltern: Kindernachversicherung ohne Gesundheitsprüfung */}
+        <FadeInUp><HospitalNeugeborene /></FadeInUp>
+
+        <FadeInUp>
+          <AmbulantBonusCalculator
+            tarifTypes="Stationär"
+            defaultMonatsbeitrag={32.82}
+            tariffInfoText={t('bonusRechner.tariffInfo')}
+            effectiveLabel={t('bonusRechner.effectiveLabel')}
+            effectiveValue={t('bonusRechner.effectiveValue')}
+            effectiveNote={t('bonusRechner.effectiveNote')}
+          />
+        </FadeInUp>
         <FadeInUp><AmbulantIKKWechsel variant="stationaer" /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>

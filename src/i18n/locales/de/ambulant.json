@@ -7,7 +7,8 @@
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
     "ctaCalculate": "Tarif berechnen",
     "ctaBonus": "Bonus sichern",
-    "heroImageAlt": "Gesunde Menschen in der Natur"
+    "heroImageAlt": "Gesunde Menschen in der Natur",
+    "ctaBonusCalc": "Bonus berechnen"
   },
   "trustBar": {
     "ikkPartner": "IKK classic Partner",
@@ -513,13 +514,19 @@
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
     "bonusPayout": "Dein Bonus wird ausgezahlt oder als Zuschuss für gezahlte Beiträge deiner Zusatzversicherung genutzt. So kann dein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren effektiv deutlich günstiger werden.",
     "ctaCalculate": "Tarif berechnen",
-    "ctaSwitchIKK": "IKK-Bonus sichern"
+    "ctaSwitchIKK": "IKK-Bonus sichern",
+    "effectiveTitle": "Unterm Strich für dich",
+    "effectiveCosts": "Deine effektiven Kosten im Jahr",
+    "effectiveZeroNote": "Dein Bonus deckt den kompletten Jahresbeitrag.",
+    "effectiveBudget": "Dein Gesundheitsbudget dafür (2 Jahre)",
+    "effectiveBudgetValue": "bis zu 3.000 €",
+    "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Wie viel Bonus du wirklich bekommst, hängt von deiner Krankenkasse und den nachgewiesenen Maßnahmen ab."
   },
   "beispielrechnung": {
     "title": "So <highlight>rechnet sich</highlight> dein Gesundheits-Budget",
-    "example": "Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert",
+    "example": "Beispiel: Frau Müller, 30 Jahre, gesetzlich versichert",
     "sdkTariff": "SDK Ambulant 100 (Tarif AP1), 100 % Erstattung:",
-    "sdkTariffValue": "40 €/Monat = 480 €/Jahr",
+    "sdkTariffValue": "31,64 €/Monat = 380 €/Jahr",
     "ikkBonusTitle": "IKK classic Bonus pro Jahr:",
     "grippeimpfung": "Grippeimpfung",
     "zahnvorsorge": "Zahnvorsorge (2×)",
@@ -533,9 +540,9 @@
     "bonusTotal": "= Bonus gesamt:",
     "bonusTotalValue": "435 €/Jahr",
     "resultTitle": "Ergebnis:",
-    "resultValue": "480 € Beitrag − 435 € Bonus = nur 45 € pro Jahr",
-    "resultMonthly": "Das sind nur 3,75 € im Monat.",
-    "resultDesc": "Frau Müller zahlt effektiv nur 3,75 € im Monat, und hat dafür 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
+    "resultValue": "435 € Bonus decken den Jahresbeitrag von 380 € komplett",
+    "resultMonthly": "Effektiv 0 € im Monat.",
+    "resultDesc": "Frau Müller zahlt effektiv 0 € im Monat, ihr Bonus deckt den kompletten Jahresbeitrag. Dafür hat sie 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
   },
   "howItWorks": {
     "title": "So <highlight>einfach</highlight> funktioniert's",
@@ -549,8 +556,8 @@
   },
   "video": {
     "title": "Jetzt Vorteile im <highlight>Video</highlight> entdecken",
-    "subtitle": "In nur 2 Minuten erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>effektiv ab 0 €</highlight> bekommst.",
-    "imageAlt": "Aktives Paar in der Natur",
+    "subtitle": "In nur 90 Sekunden erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>effektiv ab 0 €</highlight> bekommst.",
+    "imageAlt": "Osteopathin behandelt Patientin, Szene aus dem Healio Erklärvideo",
     "videoFallback": "Ihr Browser unterstützt kein Video."
   },
   "testimonials": {
@@ -912,5 +919,20 @@
       "desc": "Investition in eine Welt, in der Gesundheit und Natur zusammengehören"
     },
     "note": "Die Spenden gehen direkt an ausgewählte, zertifizierte Umweltorganisationen. Healio handelt aus eigener Überzeugung, ohne Aufpreis für dich."
+  },
+  "tarifTable": {
+    "title": "Vier Stufen, <highlight>ein Prinzip</highlight>: Du wählst dein Budget",
+    "subtitle": "Je höher der Erstattungssatz, desto größer dein Gesundheitsbudget. Alle Stufen starten ohne Wartezeit.",
+    "refundLabel": "Erstattungssatz",
+    "budgetLabel": "Gesundheitsbudget in 2 Jahren",
+    "budgetValue": "bis zu {{budget}}",
+    "priceLabel": "Monatsbeitrag",
+    "priceExample": "{{price}} für Erwachsene (30 Jahre)",
+    "priceExampleKids": "Kinder: {{price}}",
+    "priceOnRequest": "Altersabhängig, exakt in 2 Minuten im SDK-Rechner",
+    "recommended": "Meistgewählt",
+    "noWait": "Ohne Wartezeit",
+    "cta": "Beitrag in 2 Minuten berechnen",
+    "footnote": "Alle Beiträge sind altersabhängig. Beispielbeiträge für den Tarif Ambulant 100, Stand 2026. Die Budgets gelten je 2 Jahre laut SDK-Tarifbedingungen; deinen exakten Beitrag zeigt dir die SDK-Rechenstrecke vor dem Abschluss."
   }
 }

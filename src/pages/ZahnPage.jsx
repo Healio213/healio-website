@@ -134,7 +134,16 @@ const ZahnPage = () => {
 
         <FadeInUp><DentalBenefits /></FadeInUp>
 
-        <FadeInUp><AmbulantBonusCalculator ctaOverride={{ href: '#tarif-weiche', label: t('insurerChoice.bonusCta') }} /></FadeInUp>
+        <FadeInUp>
+          <AmbulantBonusCalculator
+            ctaOverride={{ href: '#tarif-weiche', label: t('insurerChoice.bonusCta') }}
+            defaultMonatsbeitrag={10}
+            tariffInfoText={t('bonusRechner.tariffInfo')}
+            effectiveLabel={t('bonusRechner.effectiveLabel')}
+            effectiveValue={t('bonusRechner.effectiveValue')}
+            effectiveNote={t('bonusRechner.effectiveNote')}
+          />
+        </FadeInUp>
         <FadeInUp><AmbulantIKKWechsel variant="zahn" /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>

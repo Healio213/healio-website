@@ -41,7 +41,17 @@ const ACTIVITY_DEFS = [
 
 // ctaOverride: { href, label } ersetzt den SDK-Abschluss-CTA, z.B. auf /zahn
 // (dort soll der Button zur Tarif-Weiche scrollen statt zur SDK-Strecke).
-const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
+// Seitenspezifische Angaben (Beispielbeitrag, Tarifzeile, "Unterm Strich"-Werte)
+// kommen per Props, damit /zahn und /stationaer nicht die Ambulant-Werte zeigen.
+const AmbulantBonusCalculator = ({
+  ctaOverride,
+  tarifTypes = 'Ambulant',
+  defaultMonatsbeitrag = 31.64,
+  tariffInfoText,
+  effectiveLabel,
+  effectiveValue,
+  effectiveNote,
+}) => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
   const calculatorUrl = buildSdkUrl({ ref: referrer, tarifTypes });
@@ -64,10 +74,13 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
     unit: t(`bonusCalculator.activities.${def.id}.unit`, { defaultValue: '' }),
   })), [t]);
 
+  // Beispielbeitrag der jeweiligen Seite (Ambulant 100: 31,64 EUR, 30 Jahre)
+  const DEFAULT_MONATSBEITRAG = defaultMonatsbeitrag;
+
   const [selectedActivities, setSelectedActivities] = useState({});
-  const [monatsbeitrag, setMonatsbeitrag] = useState(40);
+  const [monatsbeitrag, setMonatsbeitrag] = useState(DEFAULT_MONATSBEITRAG);
   const [beitragEditing, setBeitragEditing] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(true);
   const beitragInputRef = useRef(null);
   const analyticsTimer = useRef(null);
   const lastTracked = useRef(null);
@@ -89,7 +102,7 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
 
   const handleReset = () => {
     setSelectedActivities({});
-    setMonatsbeitrag(40);
+    setMonatsbeitrag(DEFAULT_MONATSBEITRAG);
   };
 
   const handleBeitragChange = (e) => {
@@ -100,9 +113,11 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
   const handleBeitragBlur = () => {
     setBeitragEditing(false);
     if (monatsbeitrag === '' || isNaN(monatsbeitrag) || monatsbeitrag < 0) {
-      setMonatsbeitrag(40);
+      setMonatsbeitrag(DEFAULT_MONATSBEITRAG);
     }
   };
+
+  const formatEuro = (value) => String(value).replace('.', ',');
 
   const jahresbeitrag = Math.round((monatsbeitrag || 0) * 12);
 
@@ -117,6 +132,7 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
   }, [selectedActivities]);
 
   const nettoErgebnis = totalBonus - jahresbeitrag;
+  const effektivKosten = Math.max(0, jahresbeitrag - totalBonus);
 
   const trackUsage = useCallback(() => {
     if (typeof window === 'undefined' || !window.gtag) return;
@@ -344,7 +360,7 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
 
                 {/* Netto-Vergleich mit editierbarem Beitrag */}
                 <div className="bg-white/15 rounded-xl p-4 mb-6 backdrop-blur-sm">
-                  <p className="text-white/80 text-sm font-medium mb-3">{t('bonusCalculator.tariffInfo')}</p>
+                  <p className="text-white/80 text-sm font-medium mb-3">{tariffInfoText || t('bonusCalculator.tariffInfo')}</p>
 
                   {/* Editierbarer Monatsbeitrag */}
                   <div className="flex justify-between items-center text-white text-sm mb-2">
@@ -369,7 +385,7 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
                         onClick={() => setBeitragEditing(true)}
                         className="flex items-center gap-1.5 font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
                       >
-                        <span>{monatsbeitrag} €/Monat</span>
+                        <span>{formatEuro(monatsbeitrag)} €/Monat</span>
                         <Pencil className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                       </button>
                     )}
@@ -390,6 +406,40 @@ const AmbulantBonusCalculator = ({ ctaOverride, tarifTypes = 'Ambulant' }) => {
 
                   <p className="text-white/50 text-xs mt-2">
                     {t('bonusCalculator.editHint')}
+                  </p>
+                </div>
+
+                {/* Der Tausch unterm Strich: effektive Kosten gegen 3.000-EUR-Budget */}
+                <div className="bg-white rounded-xl p-5 mb-6 text-left shadow-lg">
+                  <p className="text-healio-dark text-sm font-extrabold uppercase tracking-wide mb-3">
+                    {t('bonusCalculator.effectiveTitle')}
+                  </p>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-gray-600 text-sm font-medium">{t('bonusCalculator.effectiveCosts')}</span>
+                    <AnimatePresence mode="popLayout">
+                      <motion.span
+                        key={effektivKosten}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 1.1, opacity: 0 }}
+                        className={`text-3xl font-extrabold whitespace-nowrap ${effektivKosten === 0 ? 'text-healio-primary' : 'text-healio-dark'}`}
+                      >
+                        {effektivKosten} €
+                      </motion.span>
+                    </AnimatePresence>
+                  </div>
+                  {effektivKosten === 0 && totalBonus > 0 && (
+                    <p className="text-healio-primary text-xs font-bold mt-1">
+                      {t('bonusCalculator.effectiveZeroNote')}
+                    </p>
+                  )}
+                  <div className="my-3 border-t border-gray-100" />
+                  <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+                    <span className="text-gray-600 text-sm font-medium">{effectiveLabel || t('bonusCalculator.effectiveBudget')}</span>
+                    <span className="text-2xl font-extrabold text-healio-dark">{effectiveValue || t('bonusCalculator.effectiveBudgetValue')}</span>
+                  </div>
+                  <p className="text-gray-400 text-xs mt-3 leading-relaxed">
+                    {effectiveNote || t('bonusCalculator.effectiveNote')}
                   </p>
                 </div>
 

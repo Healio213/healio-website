@@ -61,34 +61,62 @@
         "text": "Has your dentist recommended or started a treatment within the last 2 years?",
         "hint": "For example a crown, root canal, filling, implant or a treatment and cost plan. A documented finding in your patient record also counts as recommended.",
         "options": {
-          "ja": { "label": "Yes, something is due or already underway", "sub": "Even if only a finding has been documented so far" },
-          "nein": { "label": "No, nothing for more than 2 years", "sub": "Routine check-ups without findings do not count" }
+          "ja": {
+            "label": "Yes, something is due or already underway",
+            "sub": "Even if only a finding has been documented so far"
+          },
+          "nein": {
+            "label": "No, nothing for more than 2 years",
+            "sub": "Routine check-ups without findings do not count"
+          }
         }
       },
       "q2": {
         "text": "Are you currently missing teeth that have not been replaced?",
         "hint": "Wisdom teeth do not count. A gap closure confirmed by your dentist does not count as a missing tooth either.",
         "options": {
-          "keine": { "label": "No, all teeth present or replaced" },
-          "wenige": { "label": "Yes, 1 to 3 teeth" },
-          "viele": { "label": "Yes, more than 3 teeth" }
+          "keine": {
+            "label": "No, all teeth present or replaced"
+          },
+          "wenige": {
+            "label": "Yes, 1 to 3 teeth"
+          },
+          "viele": {
+            "label": "Yes, more than 3 teeth"
+          }
         }
       },
       "q3": {
         "text": "Does any of these apply to you?",
         "hint": "Removable full or partial denture, dental prosthetics older than 10 years, or periodontitis or enamel defects within the last 3 years.",
         "options": {
-          "ja": { "label": "Yes, at least one" },
-          "nein": { "label": "No, none of these" }
+          "ja": {
+            "label": "Yes, at least one"
+          },
+          "nein": {
+            "label": "No, none of these"
+          }
         }
       },
       "q4": {
         "text": "What matters most to you?",
         "options": {
-          "leistung": { "label": "Maximum coverage", "sub": "Test-winner level for dentures" },
-          "familie": { "label": "Family and orthodontics", "sub": "Strong benefits for children" },
-          "pzr": { "label": "Professional teeth cleaning", "sub": "Ideally without an annual limit" },
-          "preis": { "label": "Affordable entry", "sub": "Solid cover for a small premium" }
+          "leistung": {
+            "label": "Maximum coverage",
+            "sub": "Test-winner level for dentures"
+          },
+          "familie": {
+            "label": "Family and orthodontics",
+            "sub": "Strong benefits for children"
+          },
+          "pzr": {
+            "label": "Professional teeth cleaning",
+            "sub": "Ideally without an annual limit"
+          },
+          "preis": {
+            "label": "Affordable entry",
+            "sub": "Solid cover for a small premium"
+          }
         }
       }
     },
@@ -477,5 +505,11 @@
     "title": "Would you like me to explain the dental concept?",
     "body": "I can briefly explain which route fits your situation, including advised treatment or missing teeth.",
     "cta": "Yes, explain the dental concept"
+  },
+  "bonusRechner": {
+    "tariffInfo": "Dental plan, from around €10 per month at age 30",
+    "effectiveLabel": "What you get at the dentist",
+    "effectiveValue": "up to 100% reimbursement",
+    "effectiveNote": "Example calculation based on your inputs. Your premium depends on tariff and age, your bonus on your health insurer and the activities you complete."
   }
 }

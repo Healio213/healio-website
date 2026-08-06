@@ -178,57 +178,9 @@ const AmbulantConceptAccordion = () => {
               </AccordionContent>
             </AccordionItem>
 
-            {/* SECTION 5 */}
-            <AccordionItem value="item-5" className="border-b border-gray-100 px-6 py-2">
-              <AccordionTrigger className="text-xl font-bold text-gray-900 hover:no-underline hover:text-[#10b981] transition-colors">
-                {t('conceptAccordion.section5Title')}
-              </AccordionTrigger>
-              <AccordionContent className="pt-4 pb-6">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-[#10b981] rounded-2xl p-8 shadow-lg">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Calculator className="w-8 h-8 text-[#10b981]" />
-                    <h4 className="text-2xl font-bold text-gray-900">{t('conceptAccordion.exampleCalc.tariffName')}</h4>
-                  </div>
-
-                  <div className="space-y-4 text-lg">
-                    <div className="flex justify-between items-center pb-3 border-b border-green-200">
-                      <span className="text-gray-700 font-medium">{t('conceptAccordion.exampleCalc.monthlyContribution')}</span>
-                      <span className="text-gray-900 font-bold">{t('conceptAccordion.exampleCalc.monthlyContributionValue')}</span>
-                    </div>
-                    <div className="flex justify-between items-center pb-3 border-b border-green-200">
-                      <span className="text-gray-700 font-medium">{t('conceptAccordion.exampleCalc.yearlyCost')}</span>
-                      <span className="text-gray-900 font-bold">{t('conceptAccordion.exampleCalc.yearlyCostValue')}</span>
-                    </div>
-                    <div className="flex justify-between items-center pb-3 border-b border-green-200">
-                      <span className="text-gray-700 font-medium">{t('conceptAccordion.exampleCalc.ikkBonus')}</span>
-                      <span className="text-[#10b981] font-bold">{t('conceptAccordion.exampleCalc.ikkBonusValue')}</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-2 bg-white rounded-lg p-4 shadow-sm">
-                      <span className="text-gray-900 font-bold text-xl">{t('conceptAccordion.exampleCalc.result')}</span>
-                      <span className="text-[#10b981] font-extrabold text-xl">{t('conceptAccordion.exampleCalc.resultValue')}</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-green-200">
-                    <h5 className="font-bold text-gray-900 mb-3">{t('conceptAccordion.exampleCalc.benefitsTitle')}</h5>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-[#10b981]" />
-                        {t('conceptAccordion.exampleCalc.benefit1')}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-[#10b981]" />
-                        {t('conceptAccordion.exampleCalc.benefit2')}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-[#10b981]" />
-                        {t('conceptAccordion.exampleCalc.benefit3')}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            {/* SECTION 5 (Beispielrechnung) entfernt am 06.08.2026: dupliziert
+                die grosse Beispielrechnungs-Sektion, die direkt nach Rechner
+                und Tariftabelle steht. */}
 
             {/* SECTION 6 */}
             <AccordionItem value="item-6" className="border-b-0 px-6 py-2">

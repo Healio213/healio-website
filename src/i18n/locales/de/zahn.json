@@ -61,34 +61,62 @@
         "text": "Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
         "hint": "Zum Beispiel Krone, Wurzelbehandlung, Füllung, Implantat oder ein Heil- und Kostenplan. Auch ein dokumentierter Befund in der Patientenakte zählt als angeraten.",
         "options": {
-          "ja": { "label": "Ja, es steht etwas an oder läuft schon", "sub": "Auch wenn bisher nur ein Befund dokumentiert wurde" },
-          "nein": { "label": "Nein, seit über 2 Jahren nichts", "sub": "Reine Kontrolltermine ohne Befund zählen nicht" }
+          "ja": {
+            "label": "Ja, es steht etwas an oder läuft schon",
+            "sub": "Auch wenn bisher nur ein Befund dokumentiert wurde"
+          },
+          "nein": {
+            "label": "Nein, seit über 2 Jahren nichts",
+            "sub": "Reine Kontrolltermine ohne Befund zählen nicht"
+          }
         }
       },
       "q2": {
         "text": "Fehlen dir aktuell Zähne, die noch nicht ersetzt sind?",
         "hint": "Weisheitszähne zählen nicht. Auch ein vom Zahnarzt bestätigter Lückenschluss zählt nicht als fehlender Zahn.",
         "options": {
-          "keine": { "label": "Nein, alle Zähne da oder ersetzt" },
-          "wenige": { "label": "Ja, 1 bis 3 Zähne" },
-          "viele": { "label": "Ja, mehr als 3 Zähne" }
+          "keine": {
+            "label": "Nein, alle Zähne da oder ersetzt"
+          },
+          "wenige": {
+            "label": "Ja, 1 bis 3 Zähne"
+          },
+          "viele": {
+            "label": "Ja, mehr als 3 Zähne"
+          }
         }
       },
       "q3": {
         "text": "Trifft einer dieser Punkte auf dich zu?",
         "hint": "Herausnehmbare Voll- oder Teilprothese, Zahnersatz, der älter als 10 Jahre ist, oder Parodontitis bzw. Zahnschmelzdefekt in den letzten 3 Jahren.",
         "options": {
-          "ja": { "label": "Ja, mindestens einer" },
-          "nein": { "label": "Nein, nichts davon" }
+          "ja": {
+            "label": "Ja, mindestens einer"
+          },
+          "nein": {
+            "label": "Nein, nichts davon"
+          }
         }
       },
       "q4": {
         "text": "Worauf legst du den größten Wert?",
         "options": {
-          "leistung": { "label": "Maximale Leistung", "sub": "Testsieger-Niveau für Zahnersatz" },
-          "familie": { "label": "Familie und Kieferorthopädie", "sub": "Starke Leistungen für Kinder" },
-          "pzr": { "label": "Professionelle Zahnreinigung", "sub": "Am besten ohne Jahreslimit" },
-          "preis": { "label": "Günstiger Einstieg", "sub": "Solider Schutz zum kleinen Beitrag" }
+          "leistung": {
+            "label": "Maximale Leistung",
+            "sub": "Testsieger-Niveau für Zahnersatz"
+          },
+          "familie": {
+            "label": "Familie und Kieferorthopädie",
+            "sub": "Starke Leistungen für Kinder"
+          },
+          "pzr": {
+            "label": "Professionelle Zahnreinigung",
+            "sub": "Am besten ohne Jahreslimit"
+          },
+          "preis": {
+            "label": "Günstiger Einstieg",
+            "sub": "Solider Schutz zum kleinen Beitrag"
+          }
         }
       }
     },
@@ -477,5 +505,11 @@
     "title": "Soll ich dir das Zahn-Konzept erklären?",
     "body": "Ich erkläre dir kurz, welcher Weg zu deiner Situation passt – auch bei angeratener Behandlung oder fehlenden Zähnen.",
     "cta": "Ja, Zahn-Konzept erklären"
+  },
+  "bonusRechner": {
+    "tariffInfo": "Zahnzusatz, mit 30 Jahren ab rund 10 € im Monat",
+    "effectiveLabel": "Dafür bekommst du beim Zahnarzt",
+    "effectiveValue": "bis zu 100 % Erstattung",
+    "effectiveNote": "Beispielrechnung mit deinen Angaben. Dein Beitrag hängt von Tarif und Alter ab, dein Bonus von deiner Krankenkasse und den nachgewiesenen Maßnahmen."
   }
 }

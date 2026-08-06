@@ -7,7 +7,8 @@
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
     "ctaCalculate": "Calculate your plan",
     "ctaBonus": "Claim your bonus",
-    "heroImageAlt": "Healthy people in nature"
+    "heroImageAlt": "Healthy people in nature",
+    "ctaBonusCalc": "Calculate bonus"
   },
   "trustBar": {
     "ikkPartner": "IKK classic Partner",
@@ -465,13 +466,19 @@
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
     "bonusPayout": "Your bonus is paid out or used as a subsidy for paid supplementary insurance premiums. This can make your health budget of up to €3,000 over 2 years effectively much cheaper.",
     "ctaCalculate": "Calculate your plan",
-    "ctaSwitchIKK": "Secure your IKK bonus"
+    "ctaSwitchIKK": "Secure your IKK bonus",
+    "effectiveTitle": "Your bottom line",
+    "effectiveCosts": "Your effective yearly cost",
+    "effectiveZeroNote": "Your bonus covers the entire yearly premium.",
+    "effectiveBudget": "Your health budget in return (2 years)",
+    "effectiveBudgetValue": "up to €3,000",
+    "effectiveNote": "Example calculation based on your inputs and the Ambulant 100 tariff. Your actual bonus depends on your health insurer and the activities you complete."
   },
   "beispielrechnung": {
     "title": "How Your Health Budget Pays Off",
-    "example": "Example: Ms. Mueller, 32 years old, publicly insured",
+    "example": "Example: Ms. Müller, age 30, statutorily insured",
     "sdkTariff": "SDK Ambulant 100 (Plan AP1), 100% reimbursement:",
-    "sdkTariffValue": "€40/month = €480/year",
+    "sdkTariffValue": "€31.64/month = €380/year",
     "ikkBonusTitle": "IKK classic bonus per year:",
     "grippeimpfung": "Flu vaccination",
     "zahnvorsorge": "Dental checkup (2x)",
@@ -485,9 +492,9 @@
     "bonusTotal": "= Total bonus:",
     "bonusTotalValue": "€435/year",
     "resultTitle": "Result:",
-    "resultValue": "€480 premium − €435 bonus = only €45 per year",
-    "resultMonthly": "That's only €3.75 per month.",
-    "resultDesc": "Ms. Mueller pays only €3.75 per month effectively, and has a €3,000 budget with 100% reimbursement for Heilpraktiker, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can be increased even further."
+    "resultValue": "€435 bonus fully covers the €380 annual premium",
+    "resultMonthly": "Effectively €0 per month.",
+    "resultDesc": "Ms. Müller effectively pays €0 per month, her bonus covers the entire annual premium. In return she has a €3,000 budget with 100% reimbursement for naturopaths, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can grow even further."
   },
   "howItWorks": {
     "title": "How It Works",
@@ -501,8 +508,8 @@
   },
   "video": {
     "title": "Discover the Benefits in the Video",
-    "subtitle": "In just 2 minutes, learn how the IKK switch bonus lets you get your supplementary insurance effectively from €0.",
-    "imageAlt": "Active couple in nature",
+    "subtitle": "In just 90 seconds, learn how the IKK switch bonus lets you get your supplementary insurance effectively from €0.",
+    "imageAlt": "Osteopath treating a patient, scene from the Healio explainer video",
     "videoFallback": "Your browser does not support video."
   },
   "testimonials": {
@@ -864,5 +871,20 @@
       "desc": "Investing in a world where health and nature belong together"
     },
     "note": "Donations go directly to selected, certified environmental organizations. Healio acts out of its own conviction, no extra cost for you."
+  },
+  "tarifTable": {
+    "title": "Four tiers, <highlight>one principle</highlight>: you choose your budget",
+    "subtitle": "The higher the reimbursement rate, the bigger your health budget. All tiers start without waiting periods.",
+    "refundLabel": "Reimbursement rate",
+    "budgetLabel": "Health budget over 2 years",
+    "budgetValue": "up to {{budget}}",
+    "priceLabel": "Monthly premium",
+    "priceExample": "{{price}} for adults (age 30)",
+    "priceExampleKids": "Children: {{price}}",
+    "priceOnRequest": "Depends on age, exact quote in 2 minutes in the SDK calculator",
+    "recommended": "Most popular",
+    "noWait": "No waiting period",
+    "cta": "Calculate your premium in 2 minutes",
+    "footnote": "All premiums depend on age. Example premiums shown for the Ambulant 100 tariff, as of 2026. Budgets apply per 2-year period according to the SDK tariff terms; the SDK application route shows your exact premium before you sign up."
   }
 }

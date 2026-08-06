@@ -14,11 +14,11 @@ const AmbulantIKKServices = () => {
     <section className="py-12 md:py-20 bg-gradient-to-b from-white to-blue-50/30">
       <div className="container mx-auto px-4 max-w-6xl">
 
-        {/* Header */}
+        {/* Header: auf allen Viewports einklappbar (Frank 06.08.), Sektion ist Zusatzwissen */}
         <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
-          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-blue-100 bg-white p-5 text-left shadow-lg md:hidden"
+          className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-blue-100 bg-white p-5 text-left shadow-lg md:mx-auto md:max-w-3xl md:p-6"
         >
           <div>
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-700">
@@ -35,20 +35,7 @@ const AmbulantIKKServices = () => {
           <ChevronDown className={`h-6 w-6 flex-shrink-0 text-blue-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>
 
-        <div className="hidden text-center mb-16 md:block">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-            <Smartphone className="w-4 h-4" />
-            {t('ikkServices.badge')}
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            <HighlightText text={t('ikkServices.title')} />
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            <HighlightText text={t('ikkServices.subtitle')} />
-          </p>
-        </div>
-
-        <div className={`${mobileOpen ? 'block' : 'hidden'} md:block`}>
+        <div className={mobileOpen ? 'block' : 'hidden'}>
           {/* Two Cards: TeleClinic + BetterDoc */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8">
 
@@ -142,27 +129,8 @@ const AmbulantIKKServices = () => {
 
         </div>
 
-        {/* BetterDoc Erklärvideo */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12"
-        >
-          <div className="max-w-3xl mx-auto">
-            <p className="text-center text-lg font-bold text-gray-900 mb-4">{t('ikkServices.betterdoc.videoTitle')}</p>
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-purple-100" style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/pCxt4tZBq7s"
-                title="BetterDoc Erklärvideo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </motion.div>
+        {/* BetterDoc-YouTube-Video entfernt am 06.08.2026: fremdes Video
+            mitten im Funnel lenkt vom eigenen Abschlussweg ab. */}
 
         {/* Bottom CTA */}
         <motion.div

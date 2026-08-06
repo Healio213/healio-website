@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
@@ -8,7 +8,40 @@ import HighlightText from '@/components/ui/HighlightText';
 const AmbulantVideoSection = () => {
   const { t } = useTranslation('ambulant');
   const [isPlaying, setIsPlaying] = useState(false);
-  const stockImageUrl = "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&q=80&w=2000"; // Hiking/Nature/Active couple
+  const videoRef = useRef(null);
+  const videoMilestonesRef = useRef(new Set());
+  const posterUrl = "/images/erklaervideo-ambulant-poster.jpg";
+
+  const trackVideoEvent = (action, label, value) => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', action, {
+        event_category: 'video',
+        event_label: label || 'erklaervideo-ambulant',
+        value: value || 0,
+      });
+    }
+  };
+
+  const handleStart = () => {
+    setIsPlaying(true);
+    trackVideoEvent('video_play', 'erklaervideo-ambulant');
+  };
+
+  const handleVideoTimeUpdate = () => {
+    const video = videoRef.current;
+    if (!video || !video.duration) return;
+    const pct = Math.floor((video.currentTime / video.duration) * 100);
+    [25, 50, 75, 100].forEach((milestone) => {
+      if (pct >= milestone && !videoMilestonesRef.current.has(milestone)) {
+        videoMilestonesRef.current.add(milestone);
+        trackVideoEvent('video_progress', `erklaervideo-ambulant_${milestone}%`, milestone);
+      }
+    });
+  };
+
+  const handleVideoEnded = () => {
+    trackVideoEvent('video_complete', 'erklaervideo-ambulant', 100);
+  };
 
   return (
     <section className="py-20 bg-gray-50">
@@ -29,13 +62,14 @@ const AmbulantVideoSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group cursor-pointer"
-            onClick={() => setIsPlaying(true)}
+            onClick={() => { if (!isPlaying) handleStart(); }}
           >
             {!isPlaying ? (
               <>
                 <img
-                  src={stockImageUrl}
+                  src={posterUrl}
                   alt={t('video.imageAlt')}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
@@ -46,10 +80,14 @@ const AmbulantVideoSection = () => {
               </>
             ) : (
               <video
+                ref={videoRef}
                 className="w-full h-full"
                 controls
                 autoPlay
                 playsInline
+                poster={posterUrl}
+                onTimeUpdate={handleVideoTimeUpdate}
+                onEnded={handleVideoEnded}
               >
                 <source src="/erklaervideo.mp4" type="video/mp4" />
                 {t('video.videoFallback')}

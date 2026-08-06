@@ -197,24 +197,25 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           </p>
         </motion.div>
 
-        {/* IKK Extras */}
-        <details className="group mb-12 rounded-2xl border border-emerald-100 bg-white shadow-lg md:hidden">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 [&::-webkit-details-marker]:hidden">
+        {/* IKK Extras: auf allen Viewports eingeklappt (Frank 06.08.),
+            der Rechner belegt den Bonus bereits konkret in Euro */}
+        <details className="group mb-12 rounded-2xl border border-emerald-100 bg-white shadow-lg">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 md:px-6 md:py-6 [&::-webkit-details-marker]:hidden">
             <div>
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                 {t('ikkWechsel.extrasTitle')}
               </h3>
-              <p className="mt-1 text-sm leading-relaxed text-gray-500">
+              <p className="mt-1 text-sm md:text-base leading-relaxed text-gray-500">
                 {t('ikkWechsel.extrasSubtitle')}
               </p>
             </div>
             <ChevronDown className="h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform group-open:rotate-180" />
           </summary>
-          <div className="grid gap-3 px-5 pb-5">
+          <div className="grid gap-3 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:px-6 md:pb-6">
             {extraDefs.map((extra) => (
               <div
                 key={extra.key}
-                className="rounded-xl border border-gray-100 bg-emerald-50/30 p-4"
+                className="rounded-xl border border-gray-100 bg-emerald-50/30 p-4 md:p-5"
               >
                 <div className="mb-2 flex items-center gap-3">
                   <span className="text-2xl">{extra.emoji}</span>
@@ -225,29 +226,6 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
             ))}
           </div>
         </details>
-
-        <div className="mb-12 hidden md:block">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-            {t('ikkWechsel.extrasTitle')}
-          </h3>
-          <p className="text-gray-500 text-center mb-8">{t('ikkWechsel.extrasSubtitle')}</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {extraDefs.map((extra, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white border-2 border-gray-100 rounded-xl p-6 hover:border-emerald-300 hover:shadow-lg transition-all"
-              >
-                <span className="text-3xl mb-3 block">{extra.emoji}</span>
-                <h4 className="font-bold text-gray-900 text-lg mb-2">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
-                <p className="text-gray-600 text-sm">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
 
         {/* So funktioniert der Wechsel */}
         <motion.div
