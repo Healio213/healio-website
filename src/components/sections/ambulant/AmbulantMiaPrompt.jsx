@@ -4,6 +4,19 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 
 const PROMPT_DELAY_MS = 60000;
+const VIDEO_RECHECK_MS = 2000;
+
+// Der Prompt darf sich nicht ueber ein laufendes Erklaervideo legen.
+// Blockiert wird, solange ein Video spielt oder pausiert im Blickfeld steht.
+const videoBlockiertPrompt = () => {
+  const videos = Array.from(document.querySelectorAll('video'));
+  return videos.some((video) => {
+    if (video.ended || video.currentTime === 0) return false;
+    if (!video.paused) return true;
+    const rect = video.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  });
+};
 
 const getPromptDismissed = (storageKey) => {
   try {
@@ -43,13 +56,18 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
   useEffect(() => {
     if (getPromptDismissed(storageKey)) return undefined;
 
+    let timer;
+
     const revealPrompt = () => {
-      if (!getPromptDismissed(storageKey)) {
-        setShowPrompt(true);
+      if (getPromptDismissed(storageKey)) return;
+      if (videoBlockiertPrompt()) {
+        timer = window.setTimeout(revealPrompt, VIDEO_RECHECK_MS);
+        return;
       }
+      setShowPrompt(true);
     };
 
-    const timer = window.setTimeout(revealPrompt, PROMPT_DELAY_MS);
+    timer = window.setTimeout(revealPrompt, PROMPT_DELAY_MS);
 
     return () => {
       window.clearTimeout(timer);
