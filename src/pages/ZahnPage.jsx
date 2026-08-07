@@ -21,6 +21,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
+import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const ZahnPage = () => {
@@ -127,6 +128,17 @@ const ZahnPage = () => {
         <ProductTicker variant="zahn" />
 
         <FadeInUp><QualityCooperationSection variant="zahn" /></FadeInUp>
+
+        <FadeInUp>
+          <ErklaervideoSection
+            video="/erklaervideo-zahn.mp4"
+            poster="/images/erklaervideo-zahn-poster.jpg"
+            titel="Welcher Zahnschutz passt zu dir?"
+            untertitel="Nita zeigt dir in drei Minuten, welcher Weg deiner ist und wie du ihn gehst."
+            dauer="3 Minuten"
+            trackingLabel="erklaervideo-zahn"
+          />
+        </FadeInUp>
 
         <FadeInUp><DentalZahnCheck /></FadeInUp>
 

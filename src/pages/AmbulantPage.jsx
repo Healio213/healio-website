@@ -8,7 +8,7 @@ import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import ProductTicker from '@/components/sections/ProductTicker';
 import AmbulantConversionNudge from '@/components/sections/ambulant/AmbulantConversionNudge';
-import AmbulantVideoSection from '@/components/sections/ambulant/AmbulantVideoSection';
+import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
@@ -152,9 +152,16 @@ const AmbulantPage = () => {
         {/* Entscheidungsimpuls: Selbstzahler-Problem direkt greifbar machen */}
         <AmbulantConversionNudge />
 
-        {/* Erklärvideo — nach Vertrauens- und Entscheidungsbereich */}
+        {/* Erklärvideo: was du bekommst und wie du es umsetzt */}
         <FadeInUp>
-          <AmbulantVideoSection />
+          <ErklaervideoSection
+            video="/erklaervideo-ambulant.mp4"
+            poster="/images/erklaervideo-ambulant-poster.jpg"
+            titel="So funktioniert dein Gesundheitsbudget"
+            untertitel="Nita erklärt dir, was du bekommst und wie du es Schritt für Schritt umsetzt."
+            dauer="3 Minuten"
+            trackingLabel="erklaervideo-ambulant"
+          />
         </FadeInUp>
 
         {/* Interaktiver Bonus-Rechner — früh, das ist der versprochene nächste Schritt */}

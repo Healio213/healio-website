@@ -7,6 +7,7 @@ import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import HospitalBenefits from '@/components/sections/HospitalBenefits';
 import HospitalConcept from '@/components/sections/HospitalConcept';
 import HospitalNeugeborene from '@/components/sections/HospitalNeugeborene';
+import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
 import ProductTicker from '@/components/sections/ProductTicker';
@@ -153,6 +154,17 @@ const StationaerPage = () => {
 
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>
+
+        <FadeInUp>
+          <ErklaervideoSection
+            video="/erklaervideo-stationaer.mp4"
+            poster="/images/erklaervideo-stationaer-poster.jpg"
+            titel="Privatpatient im Krankenhaus, einfach erklärt"
+            untertitel="Nita zeigt dir, was der Klinik-Tarif leistet und wie du ihn abschließt."
+            dauer="knapp 3 Minuten"
+            trackingLabel="erklaervideo-stationaer"
+          />
+        </FadeInUp>
 
         {/* Hinweis für werdende Eltern: Kindernachversicherung ohne Gesundheitsprüfung */}
         <FadeInUp><HospitalNeugeborene /></FadeInUp>
