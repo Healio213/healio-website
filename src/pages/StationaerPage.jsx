@@ -152,9 +152,7 @@ const StationaerPage = () => {
 
         <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
 
-        <FadeInUp><HospitalConcept /></FadeInUp>
-        <FadeInUp><HospitalBenefits /></FadeInUp>
-
+        {/* Erklärvideo früh auf der Seite, wie auf /zahn */}
         <FadeInUp>
           <ErklaervideoSection
             video="/erklaervideo-stationaer.mp4"
@@ -165,6 +163,9 @@ const StationaerPage = () => {
             trackingLabel="erklaervideo-stationaer"
           />
         </FadeInUp>
+
+        <FadeInUp><HospitalConcept /></FadeInUp>
+        <FadeInUp><HospitalBenefits /></FadeInUp>
 
         {/* Hinweis für werdende Eltern: Kindernachversicherung ohne Gesundheitsprüfung */}
         <FadeInUp><HospitalNeugeborene /></FadeInUp>
