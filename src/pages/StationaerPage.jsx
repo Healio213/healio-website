@@ -150,9 +150,7 @@ const StationaerPage = () => {
 
         <ProductTicker variant="stationaer" />
 
-        <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
-
-        {/* Erklärvideo früh auf der Seite, wie auf /zahn */}
+        {/* Erklärvideo gleich am Anfang, direkt nach dem Hero (Frank 10.08.) */}
         <FadeInUp>
           <ErklaervideoSection
             video="/erklaervideo-stationaer.mp4"
@@ -163,6 +161,8 @@ const StationaerPage = () => {
             trackingLabel="erklaervideo-stationaer"
           />
         </FadeInUp>
+
+        <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
 
         <FadeInUp><HospitalConcept /></FadeInUp>
         <FadeInUp><HospitalBenefits /></FadeInUp>
