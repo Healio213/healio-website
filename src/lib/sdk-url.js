@@ -1,4 +1,5 @@
 import { getReferrer } from '@/hooks/useReferrer';
+import { trackEvent } from '@/lib/analytics';
 
 /**
  * Zentrale SDK-URL-Konfiguration für Level Nine Antragsstrecke.
@@ -62,14 +63,11 @@ export function buildSdkUrl({ tarifTypes, ref } = {}) {
  * @param {string} page - z.B. "ambulant", "zahn", "stationaer"
  * @param {string|null} referrer - Referrer-Code
  */
-export function trackSdkClick(page, referrer) {
-  if (typeof window === 'undefined' || !window.gtag) return;
-
-  window.gtag('event', 'tarif_berechnen_click', {
-    event_category: 'SDK',
-    event_label: page,
-    referrer_code: referrer || 'direct',
-    page_location: window.location.href,
+export function trackSdkClick(page) {
+  return trackEvent('tariff_calculator_click', {
+    component: 'sdk',
+    destination: 'levelnine',
+    placement: page,
   });
 }
 

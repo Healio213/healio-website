@@ -11,6 +11,7 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
+import CalendlyEmbed from '@/components/CalendlyEmbed';
 
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
@@ -472,13 +473,11 @@ const HebammenPage = () => {
                 className="bg-white rounded-2xl shadow-xl p-4 sm:p-6"
               >
                 <div id="calendly-hebammen">
-                  <iframe
-                    src="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
-                    width="100%"
-                    height="700"
-                    frameBorder="0"
-                    title="Termin buchen"
-                    style={{ minHeight: '700px', border: 'none' }}
+                  <CalendlyEmbed
+                    url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
+                    placement="midwives_page"
+                    title={lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                    className="h-[700px]"
                   />
                 </div>
               </motion.div>

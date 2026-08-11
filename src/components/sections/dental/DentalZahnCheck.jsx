@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Lock, RotateCcw, Sparkles, AlertTriangle, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { BAYERISCHE_URL, UKV_URL, trackZahnEvent } from './dentalLinks';
+import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
@@ -39,6 +39,8 @@ const CTA_HREFS = {
 
 const DentalZahnCheck = () => {
   const { t } = useTranslation('zahn');
+  // Privacy invariant: Antworten bleiben ausschließlich im lokalen React-State.
+  // Dieser Check speichert und sendet weder Antworten noch Ergebnis-/Klick-Events.
   const [answers, setAnswers] = useState({});
   const [path, setPath] = useState([]); // beantwortete Fragen in Reihenfolge
 
@@ -65,15 +67,6 @@ const DentalZahnCheck = () => {
     const nextAnswers = { ...answers, [questionId]: value };
     setAnswers(nextAnswers);
     setPath([...path, questionId]);
-    const nextOpen = QUESTION_ORDER.find((id) => {
-      if (id === 'q4' && !needsQ4(nextAnswers)) return false;
-      return !(id in nextAnswers);
-    });
-    const shortcut =
-      nextAnswers.q2 === 'viele' || (nextAnswers.q1 === 'ja' && nextAnswers.q2 === 'wenige');
-    if (nextOpen === undefined || shortcut) {
-      trackZahnEvent('zahn_check_ergebnis', computeResult(nextAnswers));
-    }
   };
 
   const goBack = () => {
@@ -222,7 +215,7 @@ const DentalZahnCheck = () => {
                         asChild
                         className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white text-base px-6 py-6 h-auto rounded-xl shadow-[0_4px_14px_rgba(37,201,144,0.4)] transition-all duration-300"
                       >
-                        <a href="#dental-contact" onClick={(e) => { trackZahnEvent('zahn_check_cta', resultKey); scrollToContact(e); }}>
+                        <a href="#dental-contact" onClick={scrollToContact}>
                           <PhoneCall className="w-4 h-4 mr-2" aria-hidden="true" />
                           {result.cta}
                         </a>
@@ -236,7 +229,6 @@ const DentalZahnCheck = () => {
                           href={CTA_HREFS[result.ctaType]}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={() => trackZahnEvent('zahn_check_cta', `${resultKey}_${result.ctaType}`)}
                         >
                           {result.cta}
                           <ExternalLink className="w-4 h-4 ml-2" aria-hidden="true" />
@@ -249,7 +241,7 @@ const DentalZahnCheck = () => {
                         href={result.secondaryType === 'contact' ? '#dental-contact' : CTA_HREFS[result.secondaryType]}
                         target={result.secondaryType === 'contact' ? undefined : '_blank'}
                         rel={result.secondaryType === 'contact' ? undefined : 'noopener noreferrer'}
-                        onClick={result.secondaryType === 'contact' ? scrollToContact : () => trackZahnEvent('zahn_check_cta_sekundaer', resultKey)}
+                        onClick={result.secondaryType === 'contact' ? scrollToContact : undefined}
                         className="text-center text-sm font-semibold text-slate-500 hover:text-slate-900 underline underline-offset-4 transition-colors"
                       >
                         {result.secondary}

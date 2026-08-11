@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import ProductTicker from '@/components/sections/ProductTicker';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import CalendlyEmbed from '@/components/CalendlyEmbed';
 
 // Rahmenwerte 2026 (jaehrlich pruefen)
 const AG_SATZ = 0.046; // Arbeitgeberbeitrag der Lebenshilfe: 4,6 % vom Brutto
@@ -558,15 +559,12 @@ const LebenshilfePage = () => {
                 per Telefon oder Videocall.
               </p>
               <div className="bg-white rounded-2xl overflow-hidden shadow-xl p-1 sm:p-2 mb-8">
-                <iframe
-                  src="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  title="Termin online buchen"
-                  aria-label="Kalender zur Terminbuchung"
-                  className="w-full h-[600px] md:h-[680px] rounded-xl"
-                ></iframe>
+                <CalendlyEmbed
+                  url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
+                  placement="lebenshilfe_page"
+                  title="Kalender zur Terminbuchung"
+                  className="h-[600px] rounded-xl md:h-[680px]"
+                />
               </div>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-white/70">
                 <a href="tel:+494089755705" className="inline-flex items-center gap-2 hover:text-white">

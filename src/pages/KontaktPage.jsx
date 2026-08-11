@@ -13,6 +13,7 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
+import GoogleMapEmbed from '@/components/GoogleMapEmbed';
 
 const KontaktPage = () => {
   const { t } = useTranslation('contact');
@@ -272,15 +273,11 @@ const KontaktPage = () => {
 
         {/* SECTION 3: Location (Google Maps) */}
         <section className="w-full">
-          <div className="w-full h-[400px] md:h-[500px] bg-slate-200 relative">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.349633854124!2d10.015241777265267!3d53.56942945826958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18ef0e3f28249%3A0xc02e48e8990b798b!2sArndtstraße%206%2C%2022085%20Hamburg!5e0!3m2!1sen!2sde!4v1710000000000!5m2!1sen!2sde" 
-              className="absolute inset-0 w-full h-full border-0" 
-              allowFullScreen="" 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Healio Standort Hamburg"
-            ></iframe>
+          <div className="w-full bg-slate-200">
+            <GoogleMapEmbed
+              url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.349633854124!2d10.015241777265267!3d53.56942945826958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18ef0e3f28249%3A0xc02e48e8990b798b!2sArndtstraße%206%2C%2022085%20Hamburg!5e0!3m2!1sen!2sde!4v1710000000000!5m2!1sen!2sde"
+              title={lang === 'en' ? 'Healio location in Hamburg' : 'Healio Standort Hamburg'}
+            />
           </div>
         </section>
 

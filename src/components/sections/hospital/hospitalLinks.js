@@ -5,12 +5,10 @@
 export const BAYERISCHE_STATIONAER_URL = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=002637&um=MAK226487';
 
 export const trackStationaerBayerischeClick = (label) => {
-  if (typeof window === 'undefined' || !window.gtag) return;
-
-  window.gtag('event', 'tarif_berechnen_click', {
-    event_category: 'Krankenhauszusatz',
-    event_label: label,
-    insurer: 'die Bayerische',
-    page_location: window.location.href,
+  return trackEvent('tariff_calculator_click', {
+    component: 'stationary_insurer',
+    destination: 'bayerische',
+    placement: label,
   });
 };
+import { trackEvent } from '@/lib/analytics';

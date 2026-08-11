@@ -1,5 +1,5 @@
 
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect, useRef, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -7,7 +7,11 @@ import Layout from '@/components/Layout';
 import RouteNormalizer from '@/components/RouteNormalizer';
 import VeterinaryLayout from '@/components/sections/veterinary/VeterinaryLayout';
 import PerformanceMetrics from '@/components/PerformanceMetrics';
+import { ConsentManager } from '@/components/ConsentManager';
+import { NitaConsentWidget } from '@/components/NitaConsentWidget';
 import { useReferrer } from '@/hooks/useReferrer';
+import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
+import { setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -49,6 +53,8 @@ const PageLoader = () => (
 
 function App() {
   const location = useLocation();
+  const lastTrackedPathRef = useRef(null);
+  const isDentalCheckRoute = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -72,10 +78,37 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = location.pathname.startsWith('/en') ? 'en' : 'de';
+  }, [location.pathname]);
+
+  useEffect(() => {
+    setAnalyticsRouteBlocked(isDentalCheckRoute).catch(() => {});
+    return () => {
+      if (isDentalCheckRoute) setAnalyticsRouteBlocked(false).catch(() => {});
+    };
+  }, [isDentalCheckRoute]);
+
+  useEffect(() => {
+    const trackCurrentPage = (state) => {
+      if (isDentalCheckRoute || !hasConsent('analytics', state)) {
+        lastTrackedPathRef.current = null;
+        return;
+      }
+      if (lastTrackedPathRef.current === location.pathname) return;
+      if (trackPageView(location.pathname)) lastTrackedPathRef.current = location.pathname;
+    };
+
+    trackCurrentPage(getConsentState());
+    return subscribeConsent(trackCurrentPage);
+  }, [isDentalCheckRoute, location.pathname]);
+
   return (
     <>
       <PerformanceMetrics />
       <ScrollToTop />
+      <ConsentManager />
+      <NitaConsentWidget />
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>

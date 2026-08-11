@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
+import { getBlogArticleCta } from '@/lib/blogArticleCta';
 
 // Leer = same-origin. Der Abruf laeuft ueber healio.de und wird von
 // Vercel an app.healio.de weitergereicht (Rewrite in vercel.json,
@@ -125,6 +126,12 @@ const BlogArticlePage = () => {
   const canonicalUrl = lang === 'en'
     ? `https://healio.de/en/blog/${article.slug}`
     : `https://healio.de/blog/${article.slug}`;
+  const articleCta = getBlogArticleCta({
+    slug: article.slug,
+    targetGroup: article.target_group,
+    lang,
+  });
+  const articleCtaCopyKey = `articleCta.${articleCta.copyKey}`;
 
   return (
     <>
@@ -205,17 +212,17 @@ const BlogArticlePage = () => {
           {/* CTA Section */}
           <div className="mt-16 p-8 bg-gradient-to-r from-[#25c990] to-[#076046] rounded-2xl text-white text-center">
             <h3 className="text-2xl font-bold mb-3">
-              {t('calculateBudget')}
+              {t(`${articleCtaCopyKey}.title`)}
             </h3>
             <p className="text-white/90 mb-6 max-w-lg mx-auto">
-              {t('calculateBudgetDesc')}
+              {t(`${articleCtaCopyKey}.description`)}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                to={getPath('potenzialanalyse')}
+                to={articleCta.href}
                 className="px-6 py-3 bg-white text-[#076046] font-semibold rounded-lg hover:bg-gray-100 transition-colors"
               >
-                {t('calculateNow')}
+                {t(`${articleCtaCopyKey}.button`)}
               </Link>
               <Link
                 to={getPath('terminvereinbarung')}

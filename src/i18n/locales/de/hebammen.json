@@ -166,7 +166,7 @@
   "steps": {
     "title": "So einfach funktioniert es für dich.",
     "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
+    "step1Desc": "30 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
     "step2Title": "Materialien erhalten",
     "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche und deine Kurse. Völlig kostenlos.",
     "step3Title": "Familien profitieren",
@@ -174,14 +174,14 @@
     "easeNote": "Wir möchten dir den Alltag in jeder Hinsicht erleichtern. Sprich uns hierzu gerne nochmal an!"
   },
   "moral": {
-    "title": "Mal ehrlich: Deine Familien vertrauen dir wie kaum jemandem sonst.",
-    "text1": "Wenn du weißt, dass es ein System gibt, das jungen Familien ein Gesundheitsbudget von bis zu 3.000 Euro erschließen kann, dann ist es das Mindeste, es weiterzugeben. Mehr musst du nicht tun, den Rest übernimmt Healio.",
-    "text2": "Dreh es einmal um: Deine eigene Hebamme wüsste von so einer Möglichkeit und sagt dir nichts. Du wärst sauer, zu Recht. Wer Wissen zurückhält, das spürbar hilft, verspielt genau das Vertrauen, von dem deine Arbeit lebt.",
-    "text3": "Der Aufwand ist minimal, der Mehrwert für deine Familien riesig. Da darf sich jede an die eigene Nase fassen und sich fragen: Gebe ich meinen Familien genug zurück?"
+    "title": "Gute Information gibt Familien mehr Spielraum.",
+    "text1": "Gerade rund um Schwangerschaft und Familienstart entstehen viele Gesundheitsausgaben. Ein neutraler Hinweis auf mögliche Kassenboni und passenden Zusatzschutz hilft Familien, ihre Optionen in Ruhe zu prüfen.",
+    "text2": "Du bleibst vollständig in deiner Rolle: Du begleitest und informierst. Healio erklärt interessierten Familien die finanziellen Möglichkeiten und übernimmt die weiteren Schritte.",
+    "text3": "So kannst du einen hilfreichen Informationsweg anbieten, ohne beraten oder verkaufen zu müssen. Du entscheidest selbst, wie er zu deiner Arbeit und deinen Familien passt."
   },
   "cta": {
     "title": "Bereit für ein kurzes Kennenlernen?",
-    "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur echte Fakten für deine Arbeit.",
+    "subtitle": "30 Minuten. Keine Verkaufspräsentation. Nur klare Fakten für deine Arbeit.",
     "button": "Strategiegespräch sichern"
   },
   "ticker": {

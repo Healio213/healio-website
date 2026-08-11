@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 // Gemeinsame Erklaervideo-Sektion fuer /ambulant, /zahn und /stationaer.
 // Die Videos erklaeren, was der Zuschauer bekommt und wie er es umsetzt.
@@ -18,19 +19,15 @@ const ErklaervideoSection = ({
   const videoRef = useRef(null);
   const meilensteine = useRef(new Set());
 
-  const track = (action, label, value) => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', action, {
-        event_category: 'video',
-        event_label: label || trackingLabel,
-        value: value || 0,
-      });
-    }
-  };
+  const track = (action, value = 0) => trackEvent(action, {
+    component: 'explanation_video',
+    placement: trackingLabel,
+    value,
+  });
 
   const starten = () => {
     setSpielt(true);
-    track('video_play', trackingLabel);
+    track('video_play');
   };
 
   const fortschritt = () => {
@@ -40,7 +37,7 @@ const ErklaervideoSection = ({
     [25, 50, 75, 100].forEach((m) => {
       if (pct >= m && !meilensteine.current.has(m)) {
         meilensteine.current.add(m);
-        track('video_progress', `${trackingLabel}_${m}%`, m);
+        track('video_progress', m);
       }
     });
   };
@@ -92,7 +89,7 @@ const ErklaervideoSection = ({
                 playsInline
                 poster={poster}
                 onTimeUpdate={fortschritt}
-                onEnded={() => track('video_complete', trackingLabel, 100)}
+                onEnded={() => track('video_complete', 100)}
               >
                 <source src={video} type="video/mp4" />
                 Ihr Browser unterstützt kein Video.

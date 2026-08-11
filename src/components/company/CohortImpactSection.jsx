@@ -30,7 +30,7 @@ const RangeControl = ({ label, hint, valueLabel, min, max, step, value, onChange
       step={step}
       value={value}
       onChange={(event) => onChange(Number(event.target.value))}
-      className="h-2 w-full cursor-pointer accent-[#25c990]"
+      className="h-11 w-full cursor-pointer accent-[#25c990] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-2"
     />
   </label>
 );

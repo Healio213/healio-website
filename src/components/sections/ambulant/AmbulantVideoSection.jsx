@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import { trackEvent } from '@/lib/analytics';
 
 const AmbulantVideoSection = () => {
   const { t } = useTranslation('ambulant');
@@ -12,19 +13,15 @@ const AmbulantVideoSection = () => {
   const videoMilestonesRef = useRef(new Set());
   const posterUrl = "/images/erklaervideo-ambulant-poster.jpg";
 
-  const trackVideoEvent = (action, label, value) => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', action, {
-        event_category: 'video',
-        event_label: label || 'erklaervideo-ambulant',
-        value: value || 0,
-      });
-    }
-  };
+  const trackVideoEvent = (action, value = 0) => trackEvent(action, {
+    component: 'explanation_video',
+    placement: 'ambulant',
+    value,
+  });
 
   const handleStart = () => {
     setIsPlaying(true);
-    trackVideoEvent('video_play', 'erklaervideo-ambulant');
+    trackVideoEvent('video_play');
   };
 
   const handleVideoTimeUpdate = () => {
@@ -34,13 +31,13 @@ const AmbulantVideoSection = () => {
     [25, 50, 75, 100].forEach((milestone) => {
       if (pct >= milestone && !videoMilestonesRef.current.has(milestone)) {
         videoMilestonesRef.current.add(milestone);
-        trackVideoEvent('video_progress', `erklaervideo-ambulant_${milestone}%`, milestone);
+        trackVideoEvent('video_progress', milestone);
       }
     });
   };
 
   const handleVideoEnded = () => {
-    trackVideoEvent('video_complete', 'erklaervideo-ambulant', 100);
+    trackVideoEvent('video_complete', 100);
   };
 
   return (

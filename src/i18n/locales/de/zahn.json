@@ -274,7 +274,7 @@
   "insurerChoice": {
     "badge": "Sofortschutz und Vorsorge",
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
-    "intro": "Fast alle glauben: Wenn der Zahnarzt schon eine Behandlung angeraten hat, sei der Zug abgefahren. Das ist falsch. Es ist eine Schande, dass Menschen auf tausenden Euro Zahnarztkosten sitzen bleiben, nur weil ihnen niemand sagt, dass es auch jetzt noch eine Lösung gibt. Bei Healio findest du für beide Situationen den passenden Schutz.",
+    "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für beide Situationen eine klare, sachliche Einordnung.",
     "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
     "sofort": {
       "answer": "Ja, eine Behandlung ist angeraten oder läuft schon",

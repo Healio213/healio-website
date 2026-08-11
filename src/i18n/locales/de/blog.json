@@ -13,6 +13,63 @@
   "bookConsultation": "Beratungstermin buchen",
   "atAGlance": "Auf einen Blick",
   "notFound": "Artikel nicht gefunden",
+  "articleCta": {
+    "outpatient": {
+      "title": "Ambulante Gesundheitsleistungen absichern",
+      "description": "Prüfen Sie den Schutz für Heilpraktiker, Osteopathie, Vorsorge und weitere ambulante Leistungen.",
+      "button": "Ambulante Absicherung ansehen"
+    },
+    "outpatientComparison": {
+      "title": "Ambulante Zusatzversicherung vergleichen",
+      "description": "Vergleichen Sie die Leistungen der verfügbaren Tarife für Naturheilkunde, Osteopathie und Vorsorge.",
+      "button": "Ambulante Tarife vergleichen"
+    },
+    "healthBudget": {
+      "title": "Ihr Gesundheitsbudget konkret berechnen",
+      "description": "Berechnen Sie, wie Kassenbonus und ambulante Absicherung zu Ihrem persönlichen Gesundheitsbudget beitragen.",
+      "button": "Gesundheitsbudget berechnen"
+    },
+    "bonus": {
+      "title": "IKK classic Bonus berechnen",
+      "description": "Prüfen Sie direkt, welchen Bonus Ihre Aktivitäten ergeben und wie er Ihre Gesundheitskosten entlasten kann.",
+      "button": "Zum Bonusrechner"
+    },
+    "healthFund": {
+      "title": "Krankenkassenbonus und Wechsel prüfen",
+      "description": "Sehen Sie, wie der IKK classic Bonus funktioniert und welche Schritte für einen Wechsel nötig sind.",
+      "button": "IKK-Wechselmöglichkeiten ansehen"
+    },
+    "dental": {
+      "title": "Passenden Zahnschutz prüfen",
+      "description": "Starten Sie den kurzen Zahn-Check und finden Sie heraus, welcher nächste Schritt zu Ihrer Situation passt.",
+      "button": "Zum Zahn-Check"
+    },
+    "inpatient": {
+      "title": "Stationären Schutz gezielt verbessern",
+      "description": "Sehen Sie, welche Krankenhausleistungen eine stationäre Zusatzversicherung ergänzen kann.",
+      "button": "Stationäre Zusatzversicherung ansehen"
+    },
+    "partner": {
+      "title": "Healio Partnerkonzept für Ihre Praxis",
+      "description": "Erfahren Sie, wie Healio Patienten bei der Finanzierung unterstützt und Ihre Praxis im Alltag entlastet.",
+      "button": "Partnerkonzept kennenlernen"
+    },
+    "midwives": {
+      "title": "Healio für Hebammen kennenlernen",
+      "description": "Entdecken Sie das auf Hebammen zugeschnittene Konzept für Patientenbudget, Vorsorge und Zusammenarbeit.",
+      "button": "Zur Fachseite für Hebammen"
+    },
+    "employer": {
+      "title": "Gesundheitsbenefits im Unternehmen analysieren",
+      "description": "Prüfen Sie strukturiert das Potenzial von bAV und bKV für Ihr Unternehmen und Ihre Mitarbeiter.",
+      "button": "Potenzialanalyse für Unternehmen starten"
+    },
+    "services": {
+      "title": "Passende Healio Lösung finden",
+      "description": "Verschaffen Sie sich einen Überblick über Versicherungen, Gesundheitsbudgets und Angebote für Unternehmen und Praxen.",
+      "button": "Healio Leistungen ansehen"
+    }
+  },
   "ticker": {
     "ariaLabel": "Themen im Healio-Ratgeber",
     "expertKnowledge": "Expertenwissen verständlich erklärt",

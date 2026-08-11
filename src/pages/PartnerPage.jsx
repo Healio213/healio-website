@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, AlertCircle, Shield } from 'lucide-react';
+import { PlayCircle, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -13,56 +13,14 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 import ProductTicker from '@/components/sections/ProductTicker';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import CalendlyEmbed from '@/components/CalendlyEmbed';
+import { trackEvent } from '@/lib/analytics';
 
 const PartnerPage = () => {
   const { t, i18n } = useTranslation('partner');
   const { t: tSeo } = useTranslation('seo');
-  const [scriptError, setScriptError] = useState(false);
   const isEnglish = i18n.language?.startsWith('en');
   const canonicalUrl = isEnglish ? 'https://healio.de/en/partner' : 'https://healio.de/partner';
-
-  useEffect(() => {
-    // Prevent multiple script injections
-    if (document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
-      if (window.Calendly) {
-        initCalendly();
-      }
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-
-    script.onload = () => {
-      initCalendly();
-    };
-
-    script.onerror = () => {
-      setScriptError(true);
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  const initCalendly = () => {
-    const container = document.getElementById('calendly-embed');
-    if (window.Calendly && container) {
-      // Clear container first to prevent duplicates if re-initialized
-      container.innerHTML = '';
-      window.Calendly.initInlineWidget({
-        url: 'https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990',
-        parentElement: container,
-      });
-    }
-  };
 
   const schemaMarkup = createWebPageSchema(
     tSeo('partner.title'),
@@ -75,18 +33,14 @@ const PartnerPage = () => {
   const videoRef = React.useRef(null);
   const videoMilestonesRef = React.useRef(new Set());
 
-  const trackVideoEvent = (action, label, value) => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', action, {
-        event_category: 'video',
-        event_label: label || 'erklaervideo-partner',
-        value: value || 0,
-      });
-    }
-  };
+  const trackVideoEvent = (action, value = 0) => trackEvent(action, {
+    component: 'explanation_video',
+    placement: 'partner',
+    value,
+  });
 
   const handleVideoPlay = () => {
-    trackVideoEvent('video_play', 'erklaervideo-partner');
+    trackVideoEvent('video_play');
   };
 
   const handleVideoTimeUpdate = () => {
@@ -96,13 +50,13 @@ const PartnerPage = () => {
     [25, 50, 75, 100].forEach((milestone) => {
       if (pct >= milestone && !videoMilestonesRef.current.has(milestone)) {
         videoMilestonesRef.current.add(milestone);
-        trackVideoEvent('video_progress', `erklaervideo-partner_${milestone}%`, milestone);
+        trackVideoEvent('video_progress', milestone);
       }
     });
   };
 
   const handleVideoEnded = () => {
-    trackVideoEvent('video_complete', 'erklaervideo-partner', 100);
+    trackVideoEvent('video_complete', 100);
   };
 
   const partnerTypes = [
@@ -538,21 +492,14 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white p-2 sm:p-4 md:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col items-center w-full"
               >
-                {scriptError ? (
-                  <div className="w-full min-h-[400px] flex flex-col items-center justify-center text-center p-6 sm:p-8 bg-slate-50 rounded-xl border border-slate-200">
-                    <AlertCircle className="w-10 h-10 sm:w-12 sm:h-12 text-red-400 mb-4" />
-                    <h3 className="text-base sm:text-lg font-bold text-slate-800 mb-2">{t('cta.calendarError')}</h3>
-                    <p className="text-sm sm:text-base text-slate-600">{t('cta.calendarErrorDesc')}</p>
-                  </div>
-                ) : (
-                  <div
-                    id="calendly-embed"
-                    className="w-full"
-                    style={{ minHeight: '700px' }}
-                  >
-                    {/* Calendly will be injected here via initInlineWidget */}
-                  </div>
-                )}
+                <div id="calendly-embed" className="w-full">
+                  <CalendlyEmbed
+                    url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
+                    placement="partner_page"
+                    title={t('cta.title')}
+                    className="h-[700px]"
+                  />
+                </div>
               </motion.div>
             </div>
           </div>

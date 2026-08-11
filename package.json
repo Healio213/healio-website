@@ -15,6 +15,8 @@
     "test:first-information": "node scripts/check-first-information-contract.mjs",
     "test:partner": "node scripts/check-partner-contract.mjs",
     "test:dentists": "node scripts/check-dentists-contract.mjs",
+    "test:blog-cta": "node scripts/check-blog-cta-contract.mjs",
+    "test:privacy": "node scripts/check-privacy-consent-contract.mjs",
     "test:seo": "node scripts/check-site-seo.mjs",
     "test:about": "node scripts/check-about-contract.mjs"
   },

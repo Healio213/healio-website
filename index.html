@@ -3,18 +3,12 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSN76YW5SC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VSN76YW5SC');
-    </script>
+    <!-- Analytics und externe Assistenten werden erst nach Einwilligung geladen. -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/healio-icon-512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Krankenzusatzversicherung einfach digital | Healio</title>
     <meta name="description" content="Ambulante, Zahn- und stationäre Zusatzversicherung verständlich vergleichen. Healio begleitet dich digital und persönlich – vom passenden Schutz bis zum laufenden Service.">
     <meta name="robots" content="index, follow">
@@ -54,49 +48,15 @@
         padding-right: 1rem;
       }
       #root { display: block; min-height: 100vh; }
+      html.home-hero-active:not(.home-hero-passed) .healio-nita-surface {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+      }
     </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Healio GmbH","description":"Healio ist ein unabhängiger Versicherungsmakler für ambulante, Zahn- und stationäre Krankenzusatzversicherungen mit digitaler und persönlicher Begleitung.","url":"https://healio.de","logo":"https://healio.de/favicon.png","telephone":"+494089755705","email":"info@healio.de","address":{"@type":"PostalAddress","streetAddress":"Arndtstraße 6","addressLocality":"Hamburg","postalCode":"22085","addressCountry":"DE"},"geo":{"@type":"GeoCoordinates","latitude":"53.5722","longitude":"10.0254"},"areaServed":"DE","sameAs":["https://www.tiktok.com/@healio.de"]}</script></head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
-    <!-- ElevenLabs Conversational AI Widget – lazy loaded nach 3s für bessere Performance -->
-    <elevenlabs-convai agent-id="agent_3701kkc8xr4be70a3v4mfmzptpqs"></elevenlabs-convai>
-    <script>
-      setTimeout(function() {
-        var s = document.createElement('script');
-        s.src = 'https://elevenlabs.io/convai-widget/index.js';
-        s.type = 'text/javascript';
-        document.body.appendChild(s);
-      }, 3000);
-    </script>
-    <style>
-      elevenlabs-convai {
-        position: fixed;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 9999;
-        transition: opacity 180ms ease, transform 180ms ease;
-      }
-      html.home-hero-active:not(.home-hero-passed) elevenlabs-convai {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-50%) translateX(12px);
-      }
-      @media (max-width: 767px) {
-        elevenlabs-convai {
-          right: 12px;
-          top: auto;
-          bottom: 16px;
-          transform: none;
-        }
-        html.home-hero-active:not(.home-hero-passed) elevenlabs-convai {
-          opacity: 0;
-          pointer-events: none;
-          transform: translateY(12px);
-        }
-      }
-    </style>
   </body>
 </html>

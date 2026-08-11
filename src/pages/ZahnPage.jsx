@@ -16,7 +16,6 @@ import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonu
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
 import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
-import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
@@ -164,7 +163,6 @@ const ZahnPage = () => {
 
         <FadeInUp><Faq /></FadeInUp>
         <FadeInUp><DentalContactForm /></FadeInUp>
-        <AmbulantMiaPrompt variant="zahn" />
       </article>
     </>
   );

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
+import CalendlyEmbed from '@/components/CalendlyEmbed';
 
 const TerminvereinbarungPage = () => {
   const { t } = useTranslation('contact');
@@ -53,15 +54,11 @@ const TerminvereinbarungPage = () => {
           className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100 p-2 sm:p-4"
         >
           <div className="w-full min-h-[600px] md:min-h-[700px] rounded-xl overflow-hidden bg-white">
-            <iframe
-              src="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              title="Calendly Terminvereinbarung"
-              aria-label="Kalender zur Terminvereinbarung"
-              className="w-full h-[600px] md:h-[700px]"
-            ></iframe>
+            <CalendlyEmbed
+              url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+              placement="appointment_page"
+              title={lang === 'en' ? 'Appointment calendar' : 'Kalender zur Terminvereinbarung'}
+            />
           </div>
         </motion.div>
 

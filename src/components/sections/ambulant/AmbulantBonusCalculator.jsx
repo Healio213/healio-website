@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
+import { trackEvent } from '@/lib/analytics';
 
 // IKK classic Bonustabelle (mit Zusatzversicherung)
 const ACTIVITY_DEFS = [
@@ -83,7 +84,7 @@ const AmbulantBonusCalculator = ({
   const [mobileOpen, setMobileOpen] = useState(true);
   const beitragInputRef = useRef(null);
   const analyticsTimer = useRef(null);
-  const lastTracked = useRef(null);
+  const usageTracked = useRef(false);
 
   const handleToggle = (id) => {
     setSelectedActivities((prev) => ({
@@ -135,30 +136,20 @@ const AmbulantBonusCalculator = ({
   const effektivKosten = Math.max(0, jahresbeitrag - totalBonus);
 
   const trackUsage = useCallback(() => {
-    if (typeof window === 'undefined' || !window.gtag) return;
-    if (totalBonus === 0) return;
-
-    const trackData = JSON.stringify({ totalBonus, jahresbeitrag, nettoErgebnis });
-    if (trackData === lastTracked.current) return;
-    lastTracked.current = trackData;
-
-    window.gtag('event', 'bonus_calculator_result', {
-      event_category: 'Bonusrechner',
-      event_label: nettoErgebnis >= 0 ? 'Plus' : 'Minus',
-      bonus_total: totalBonus,
-      jahresbeitrag: jahresbeitrag,
-      netto_ergebnis: nettoErgebnis,
-      monatsbeitrag: monatsbeitrag,
-      aktivitaeten_count: Object.values(selectedActivities).filter(v => v && v !== 0).length,
+    if (totalBonus === 0 || usageTracked.current) return;
+    const tracked = trackEvent('bonus_calculator_used', {
+      component: 'bonus_calculator',
+      interaction_type: 'configured',
     });
-  }, [totalBonus, jahresbeitrag, nettoErgebnis, monatsbeitrag, selectedActivities]);
+    if (tracked) usageTracked.current = true;
+  }, [totalBonus]);
 
   useEffect(() => {
     if (totalBonus === 0) return;
     if (analyticsTimer.current) clearTimeout(analyticsTimer.current);
-    analyticsTimer.current = setTimeout(trackUsage, 480000);
+    analyticsTimer.current = setTimeout(trackUsage, 1500);
     return () => { if (analyticsTimer.current) clearTimeout(analyticsTimer.current); };
-  }, [totalBonus, jahresbeitrag, trackUsage]);
+  }, [totalBonus, trackUsage]);
 
   useEffect(() => {
     if (beitragEditing && beitragInputRef.current) {

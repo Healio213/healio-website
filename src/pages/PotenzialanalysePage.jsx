@@ -1,12 +1,13 @@
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import { AlertCircle, Mail, Phone, Loader2, RefreshCw } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Clock3, Mail, Phone, Loader2, RefreshCw, ShieldCheck } from 'lucide-react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { emailjsService } from '@/services/emailjsService';
 import Header from '@/components/Header';
@@ -20,14 +21,21 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+const CONFIRMATION_STORAGE_KEY = 'healio:potential-analysis-confirmation:v1';
+const CONFIRMATION_TTL_MS = 30 * 60 * 1000;
+
 const PotenzialanalysePage = () => {
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
-  const { lang } = useLanguage();
+  const { lang, getPath } = useLanguage();
+  const navigate = useNavigate();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/potential-analysis' : 'https://healio.de/potenzialanalyse';
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionComplete, setSubmissionComplete] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState('');
+  const submitLockRef = useRef(false);
   
   const initialFormState = {
     name: '',
@@ -44,6 +52,7 @@ const PotenzialanalysePage = () => {
 
   const handleSelectChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    setSubmitError(null);
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
@@ -52,6 +61,7 @@ const PotenzialanalysePage = () => {
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
+    setSubmitError(null);
     if (errors[id]) {
       setErrors(prev => ({ ...prev, [id]: undefined }));
     }
@@ -71,14 +81,21 @@ const PotenzialanalysePage = () => {
     if (!formData.fokus_bkv) newErrors.fokus_bkv = t('potenzialanalyse.bkvRequired');
     
     setErrors(newErrors);
+    const firstInvalidField = Object.keys(newErrors)[0];
+    if (firstInvalidField) {
+      window.requestAnimationFrame(() => document.getElementById(firstInvalidField)?.focus());
+    }
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitLockRef.current || submissionComplete) return;
     setSubmitError(null);
+    setSubmitStatus('');
     
     if (!validateForm()) {
+      setSubmitStatus(t('potenzialanalyse.validationDesc'));
       toast({
         variant: "destructive",
         title: t('potenzialanalyse.validation'),
@@ -87,50 +104,94 @@ const PotenzialanalysePage = () => {
       return;
     }
 
+    submitLockRef.current = true;
+    try {
+      sessionStorage.removeItem(CONFIRMATION_STORAGE_KEY);
+    } catch {
+      // Das Formular funktioniert auch, wenn Session Storage nicht verfügbar ist.
+    }
     setIsSubmitting(true);
+    setSubmitStatus(t('potenzialanalyse.submittingStatus'));
 
     try {
-      // 1. Send via EmailJS
-      await emailjsService.sendEmail({
-        from_name: formData.name,
-        from_email: formData.email,
-        phone: formData.phone,
-        company: formData.company,
-        message: `Mitarbeiteranzahl: ${formData.mitarbeiteranzahl}\nFokus bAV: ${formData.fokus_bav}\nFokus bKV: ${formData.fokus_bkv}`
-      }, "Potenzialanalyse");
-
-      // 2. Save to Supabase (Database)
-      const { error: dbError } = await supabase.from('potenzialanalyse_anfragen').insert([
-        {
-          name: formData.name,
-          company: formData.company,
-          email: formData.email,
+      const emailRequest = Promise.resolve().then(() => emailjsService.sendEmail({
+          from_name: formData.name,
+          from_email: formData.email,
           phone: formData.phone,
-          mitarbeiteranzahl: formData.mitarbeiteranzahl,
-          fokus_bav: formData.fokus_bav,
-          fokus_bkv: formData.fokus_bkv
-        }
-      ]);
+          company: formData.company,
+          message: `Mitarbeiteranzahl: ${formData.mitarbeiteranzahl}\nFokus bAV: ${formData.fokus_bav}\nFokus bKV: ${formData.fokus_bkv}`
+        }, 'Potenzialanalyse'));
 
-      if (dbError) {
-        console.error("Supabase insert error:", dbError);
+      const databaseRequest = Promise.resolve().then(async () => {
+        const { error: dbError } = await supabase.from('potenzialanalyse_anfragen').insert([
+          {
+            name: formData.name,
+            company: formData.company,
+            email: formData.email,
+            phone: formData.phone,
+            mitarbeiteranzahl: formData.mitarbeiteranzahl,
+            fokus_bav: formData.fokus_bav,
+            fokus_bkv: formData.fokus_bkv
+          }
+        ]);
+        if (dbError) throw dbError;
+      });
+
+      const [emailResult, databaseResult] = await Promise.allSettled([emailRequest, databaseRequest]);
+      const delivery = {
+        emailjs: emailResult.status,
+        supabase: databaseResult.status,
+      };
+      const successfulChannels = Object.values(delivery).filter((status) => status === 'fulfilled').length;
+
+      if (successfulChannels === 0) {
+        setSubmitError(t('potenzialanalyse.errorSendDesc'));
+        setSubmitStatus(t('potenzialanalyse.errorLiveStatus'));
+        toast({
+          variant: 'destructive',
+          title: t('potenzialanalyse.errorSend'),
+          description: t('potenzialanalyse.errorSendDesc'),
+        });
+        return;
       }
+
+      const isPartialDelivery = successfulChannels === 1;
+      const createdAt = Date.now();
+      setSubmissionComplete(true);
+      setSubmitStatus(isPartialDelivery
+        ? t('potenzialanalyse.partialSuccessDesc')
+        : t('potenzialanalyse.successDesc'));
 
       toast({
         title: t('potenzialanalyse.success'),
-        description: t('potenzialanalyse.successDesc'),
+        description: isPartialDelivery
+          ? t('potenzialanalyse.partialSuccessDesc')
+          : t('potenzialanalyse.successDesc'),
         className: "bg-green-50 border-green-200 text-green-900",
       });
-      
-      setFormData(initialFormState);
-    } catch (error) {
-      setSubmitError(error.message || "Ein Netzwerkfehler ist aufgetreten.");
+
+      try {
+        sessionStorage.setItem(CONFIRMATION_STORAGE_KEY, JSON.stringify({
+          type: 'potential-analysis',
+          createdAt,
+          expiresAt: createdAt + CONFIRMATION_TTL_MS,
+          delivery,
+        }));
+        navigate(getPath('confirmation'), { replace: true });
+      } catch {
+        // Die Anfrage ist bereits angekommen. Ohne Sessionstatus bleibt die
+        // ehrliche Erfolgsmeldung deshalb auf dieser Seite sichtbar.
+      }
+    } catch {
+      setSubmitError(t('potenzialanalyse.errorSendDesc'));
+      setSubmitStatus(t('potenzialanalyse.errorLiveStatus'));
       toast({
         variant: "destructive",
         title: t('potenzialanalyse.errorSend'),
-        description: error.message || t('potenzialanalyse.errorSendDesc'),
+        description: t('potenzialanalyse.errorSendDesc'),
       });
     } finally {
+      submitLockRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -171,6 +232,28 @@ const PotenzialanalysePage = () => {
             <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto font-light leading-relaxed">
               {t('potenzialanalyse.subtitle')}
             </p>
+            <div className="mt-8 rounded-2xl bg-slate-900 px-6 py-6 text-left text-white shadow-[0_14px_35px_rgba(15,23,42,0.18)]">
+              <div className="grid gap-5 sm:grid-cols-3">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-healio-mint" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed"><strong className="block text-white">{t('potenzialanalyse.resultLabel')}</strong>{t('potenzialanalyse.resultText')}</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-healio-mint" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed"><strong className="block text-white">{t('potenzialanalyse.durationLabel')}</strong>{t('potenzialanalyse.durationText')}</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-healio-mint" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed"><strong className="block text-white">{t('potenzialanalyse.costLabel')}</strong>{t('potenzialanalyse.costText')}</p>
+                </div>
+              </div>
+              <p className="mt-5 border-t border-white/15 pt-4 text-sm leading-relaxed text-slate-200">
+                {t('potenzialanalyse.privacyText')}{' '}
+                <Link to={getPath('datenschutz')} className="font-semibold text-healio-mint underline decoration-healio-mint/40 underline-offset-4 hover:decoration-healio-mint">
+                  {t('potenzialanalyse.privacyLink')}
+                </Link>
+              </p>
+            </div>
           </motion.div>
 
           <motion.div 
@@ -180,7 +263,8 @@ const PotenzialanalysePage = () => {
             variants={fadeIn}
             className="max-w-[500px] mx-auto"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <p className="sr-only" role="status" aria-live="polite">{submitStatus}</p>
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-900 font-medium">{t('potenzialanalyse.name')}</Label>
                 <Input 
@@ -188,10 +272,14 @@ const PotenzialanalysePage = () => {
                   placeholder={t('potenzialanalyse.namePlaceholder')} 
                   value={formData.name}
                   onChange={handleChange}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submissionComplete}
+                  autoComplete="name"
+                  required
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                   className={`py-3 px-4 border-gray-200 focus-visible:ring-gray-300 shadow-sm text-gray-900 ${errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                 />
-                {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+                {errors.name && <p id="name-error" className="text-sm text-red-600">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
@@ -201,10 +289,14 @@ const PotenzialanalysePage = () => {
                   placeholder={t('potenzialanalyse.companyPlaceholder')} 
                   value={formData.company}
                   onChange={handleChange}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submissionComplete}
+                  autoComplete="organization"
+                  required
+                  aria-invalid={Boolean(errors.company)}
+                  aria-describedby={errors.company ? 'company-error' : undefined}
                   className={`py-3 px-4 border-gray-200 focus-visible:ring-gray-300 shadow-sm text-gray-900 ${errors.company ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                 />
-                {errors.company && <p className="text-sm text-red-500">{errors.company}</p>}
+                {errors.company && <p id="company-error" className="text-sm text-red-600">{errors.company}</p>}
               </div>
 
               <div className="space-y-2">
@@ -215,10 +307,14 @@ const PotenzialanalysePage = () => {
                   placeholder={t('potenzialanalyse.emailPlaceholder')} 
                   value={formData.email}
                   onChange={handleChange}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submissionComplete}
+                  autoComplete="email"
+                  required
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                   className={`py-3 px-4 border-gray-200 focus-visible:ring-gray-300 shadow-sm text-gray-900 ${errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                 />
-                {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                {errors.email && <p id="email-error" className="text-sm text-red-600">{errors.email}</p>}
               </div>
 
               <div className="space-y-2">
@@ -229,15 +325,16 @@ const PotenzialanalysePage = () => {
                   placeholder="+49" 
                   value={formData.phone}
                   onChange={handleChange}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submissionComplete}
+                  autoComplete="tel"
                   className="py-3 px-4 border-gray-200 focus-visible:ring-gray-300 shadow-sm text-gray-900"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.employees')}</Label>
-                <Select disabled={isSubmitting} value={formData.mitarbeiteranzahl} onValueChange={(val) => handleSelectChange('mitarbeiteranzahl', val)}>
-                  <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.mitarbeiteranzahl ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                <Label htmlFor="mitarbeiteranzahl" className="text-gray-900 font-medium">{t('potenzialanalyse.employees')}</Label>
+                <Select disabled={isSubmitting || submissionComplete} value={formData.mitarbeiteranzahl} onValueChange={(val) => handleSelectChange('mitarbeiteranzahl', val)}>
+                  <SelectTrigger id="mitarbeiteranzahl" aria-invalid={Boolean(errors.mitarbeiteranzahl)} aria-describedby={errors.mitarbeiteranzahl ? 'employees-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.mitarbeiteranzahl ? 'border-red-500 focus:ring-red-500' : ''}`}>
                     <SelectValue placeholder={t('potenzialanalyse.employeesPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -247,14 +344,14 @@ const PotenzialanalysePage = () => {
                     <SelectItem value="200+">{t('potenzialanalyse.employeesOver200')}</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors.mitarbeiteranzahl && <p className="text-sm text-red-500">{errors.mitarbeiteranzahl}</p>}
+                {errors.mitarbeiteranzahl && <p id="employees-error" className="text-sm text-red-600">{errors.mitarbeiteranzahl}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.bavFocus')}</Label>
-                <Select disabled={isSubmitting} value={formData.fokus_bav} onValueChange={(val) => handleSelectChange('fokus_bav', val)}>
-                  <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bav ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                    <SelectValue placeholder="Bitte wählen..." />
+                <Label htmlFor="fokus_bav" className="text-gray-900 font-medium">{t('potenzialanalyse.bavFocus')}</Label>
+                <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bav} onValueChange={(val) => handleSelectChange('fokus_bav', val)}>
+                  <SelectTrigger id="fokus_bav" aria-invalid={Boolean(errors.fokus_bav)} aria-describedby={errors.fokus_bav ? 'bav-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bav ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                    <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
@@ -262,14 +359,14 @@ const PotenzialanalysePage = () => {
                     <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors.fokus_bav && <p className="text-sm text-red-500">{errors.fokus_bav}</p>}
+                {errors.fokus_bav && <p id="bav-error" className="text-sm text-red-600">{errors.fokus_bav}</p>}
               </div>
 
               <div className="space-y-2">
-                <Label className="text-gray-900 font-medium">{t('potenzialanalyse.bkvFocus')}</Label>
-                <Select disabled={isSubmitting} value={formData.fokus_bkv} onValueChange={(val) => handleSelectChange('fokus_bkv', val)}>
-                  <SelectTrigger className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bkv ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                    <SelectValue placeholder="Bitte wählen..." />
+                <Label htmlFor="fokus_bkv" className="text-gray-900 font-medium">{t('potenzialanalyse.bkvFocus')}</Label>
+                <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bkv} onValueChange={(val) => handleSelectChange('fokus_bkv', val)}>
+                  <SelectTrigger id="fokus_bkv" aria-invalid={Boolean(errors.fokus_bkv)} aria-describedby={errors.fokus_bkv ? 'bkv-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bkv ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                    <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
@@ -277,11 +374,11 @@ const PotenzialanalysePage = () => {
                     <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors.fokus_bkv && <p className="text-sm text-red-500">{errors.fokus_bkv}</p>}
+                {errors.fokus_bkv && <p id="bkv-error" className="text-sm text-red-600">{errors.fokus_bkv}</p>}
               </div>
 
               {submitError && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-800 text-sm">
+                <div role="alert" aria-live="assertive" className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-800 text-sm">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold mb-1">{t('potenzialanalyse.transferFailed')}</p>
@@ -290,10 +387,18 @@ const PotenzialanalysePage = () => {
                 </div>
               )}
 
+              {submissionComplete && (
+                <div role="status" aria-live="polite" className="flex items-start gap-3 rounded-lg bg-emerald-50 p-4 text-sm text-emerald-900">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                  <p>{submitStatus}</p>
+                </div>
+              )}
+
               <div className="pt-4">
                 <Button 
                   type="submit" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submissionComplete}
+                  data-track="potential-analysis-submit"
                   className="w-full py-6 text-base font-medium rounded-lg text-white transition-all shadow-md disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   style={{ backgroundColor: '#2d7a4a' }}
                   onMouseEnter={(e) => { if(!isSubmitting) e.currentTarget.style.backgroundColor = '#23613a' }}
@@ -304,6 +409,8 @@ const PotenzialanalysePage = () => {
                       <Loader2 className="w-5 h-5 animate-spin" />
                       {t('form.sending')}
                     </>
+                  ) : submissionComplete ? (
+                    t('potenzialanalyse.received')
                   ) : submitError ? (
                     <>
                       <RefreshCw className="w-5 h-5" />

@@ -14,6 +14,7 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const mobileMenuButtonRef = useRef(null);
   const location = useLocation();
   const { t } = useTranslation('common');
   const { lang, getPath, switchLanguage } = useLanguage();
@@ -29,6 +30,7 @@ const Header = () => {
     '/erstinformation', '/en/initial-information',
     '/konto-loeschen',
     '/blog', '/en/blog',
+    '/potenzialanalyse', '/en/potential-analysis',
   ];
   const forceSolidHeader = solidHeaderRoutes.some((path) => (
     location.pathname === path || location.pathname.startsWith(`${path}/`)
@@ -49,6 +51,30 @@ const Header = () => {
     setDropdownOpen(false);
     setMobileDropdownOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+
+    const root = document.documentElement;
+    const previousOverflow = document.body.style.overflow;
+    root.classList.add('healio-mobile-menu-active');
+    document.body.style.overflow = 'hidden';
+    window.requestAnimationFrame(() => mobileMenuButtonRef.current?.focus());
+
+    const handleEscape = (event) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      setMobileMenuOpen(false);
+      window.requestAnimationFrame(() => mobileMenuButtonRef.current?.focus());
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      root.classList.remove('healio-mobile-menu-active');
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -142,8 +168,10 @@ const Header = () => {
                         e.preventDefault();
                         setDropdownOpen(!dropdownOpen);
                       }}
-                      className="ml-1 text-white hover:text-healio-mint drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                      className="ml-1 inline-flex h-11 w-11 items-center justify-center text-white hover:text-healio-mint drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                       aria-label={t('nav.toggleDropdown')}
+                      aria-expanded={dropdownOpen}
+                      aria-controls="insurance-dropdown-desktop"
                     >
                       <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", dropdownOpen && "rotate-180")} />
                     </button>
@@ -155,6 +183,7 @@ const Header = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.2 }}
+                          id="insurance-dropdown-desktop"
                           className="absolute left-0 top-full pt-2 z-[110] min-w-[280px]"
                         >
                           <div className="bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-2 flex flex-col gap-1 border border-slate-100 overflow-hidden">
@@ -227,9 +256,12 @@ const Header = () => {
         </div>
 
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 z-50 transition-colors text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint"
+          ref={mobileMenuButtonRef}
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="lg:hidden inline-flex h-11 w-11 items-center justify-center z-50 transition-colors text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint"
           aria-label={mobileMenuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
@@ -237,6 +269,7 @@ const Header = () => {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
+              id="mobile-navigation"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -258,7 +291,10 @@ const Header = () => {
                           </Link>
                           <button
                             onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                            className="p-2 text-white hover:text-healio-mint"
+                            className="inline-flex h-11 w-11 items-center justify-center text-white hover:text-healio-mint"
+                            aria-label={t('nav.toggleDropdown')}
+                            aria-expanded={mobileDropdownOpen}
+                            aria-controls="insurance-dropdown-mobile"
                           >
                             <ChevronDown className={cn("w-5 h-5 transition-transform", mobileDropdownOpen && "rotate-180")} />
                           </button>
@@ -267,6 +303,7 @@ const Header = () => {
                         <AnimatePresence>
                           {mobileDropdownOpen && (
                             <motion.div
+                              id="insurance-dropdown-mobile"
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: 'auto' }}
                               exit={{ opacity: 0, height: 0 }}

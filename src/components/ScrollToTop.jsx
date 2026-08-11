@@ -6,12 +6,42 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     if (hash) {
-      const targetId = decodeURIComponent(hash.slice(1));
-      const timer = window.setTimeout(() => {
-        document.getElementById(targetId)?.scrollIntoView({ block: 'start' });
-      }, 0);
+      let targetId;
+      try {
+        targetId = decodeURIComponent(hash.slice(1));
+      } catch {
+        window.scrollTo(0, 0);
+        return undefined;
+      }
 
-      return () => window.clearTimeout(timer);
+      let stopped = false;
+      let observer;
+      let timeout;
+      const scrollToTarget = () => {
+        if (stopped) return false;
+        const target = document.getElementById(targetId);
+        if (!target) return false;
+        window.requestAnimationFrame(() => {
+          if (!stopped && document.contains(target)) target.scrollIntoView({ block: 'start' });
+        });
+        return true;
+      };
+
+      window.scrollTo(0, 0);
+      if (!scrollToTarget()) {
+        const root = document.getElementById('root') || document.body;
+        observer = new MutationObserver(() => {
+          if (scrollToTarget()) observer.disconnect();
+        });
+        observer.observe(root, { childList: true, subtree: true });
+        timeout = window.setTimeout(() => observer.disconnect(), 5000);
+      }
+
+      return () => {
+        stopped = true;
+        observer?.disconnect();
+        if (timeout) window.clearTimeout(timeout);
+      };
     }
 
     window.scrollTo(0, 0);
