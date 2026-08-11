@@ -135,19 +135,6 @@ export const loadElevenLabsWidget = () => {
   return elevenLabsLoadPromise;
 };
 
-const openLoadedWidget = () => {
-  const widget = document.querySelector('elevenlabs-convai');
-  const buttons = Array.from(widget?.shadowRoot?.querySelectorAll('button') || []);
-  const button = buttons.find((candidate) => (
-    ['Ausklappen', 'Expand', 'Open chat'].includes(candidate.title)
-  ));
-  if (button) {
-    button.click();
-    return true;
-  }
-  return false;
-};
-
 export const requestNitaConsent = () => {
   if (typeof window === 'undefined') return false;
   window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT));
@@ -159,6 +146,7 @@ export const NitaConsentWidget = () => {
   const [consent, setConsent] = useState(() => getConsentState());
   const [promptOpen, setPromptOpen] = useState(false);
   const [loadStatus, setLoadStatus] = useState('idle');
+  const [widgetActivated, setWidgetActivated] = useState(false);
   const closeButtonRef = useRef(null);
   const launcherRef = useRef(null);
   const hiddenOnRoute = HIDDEN_ROUTE_PREFIXES.some((prefix) => (
@@ -170,7 +158,10 @@ export const NitaConsentWidget = () => {
 
   useEffect(() => subscribeConsent((nextConsent) => {
     setConsent(nextConsent);
-    if (!hasConsent('elevenlabs', nextConsent)) setLoadStatus('idle');
+    if (!hasConsent('elevenlabs', nextConsent)) {
+      setLoadStatus('idle');
+      setWidgetActivated(false);
+    }
   }), []);
 
   useEffect(() => {
@@ -199,9 +190,10 @@ export const NitaConsentWidget = () => {
         return;
       }
 
-      loadElevenLabsWidget().then(() => {
-        [0, 350, 900].forEach((delay) => window.setTimeout(openLoadedWidget, delay));
-      }).catch(() => setLoadStatus('error'));
+      setWidgetActivated(true);
+      loadElevenLabsWidget()
+        .then(() => setLoadStatus('ready'))
+        .catch(() => setLoadStatus('error'));
     };
 
     window.addEventListener(NITA_CONSENT_REQUEST_EVENT, handleNitaRequest);
@@ -229,6 +221,7 @@ export const NitaConsentWidget = () => {
   }, [promptOpen]);
 
   const handleAllow = () => {
+    setWidgetActivated(true);
     updateConsentPurpose('elevenlabs', true, 'provider');
     setPromptOpen(false);
   };
@@ -239,6 +232,28 @@ export const NitaConsentWidget = () => {
       .then(() => setLoadStatus('ready'))
       .catch(() => setLoadStatus('error'));
   };
+
+  const handleLauncherClick = () => {
+    if (!providerAllowed) {
+      setPromptOpen(true);
+      return;
+    }
+
+    setWidgetActivated(true);
+    if (loadStatus === 'error') handleRetry();
+  };
+
+  const handleOpenSettings = () => {
+    setPromptOpen(false);
+    openConsentSettings('elevenlabs');
+  };
+
+  const showQuietLauncher = !promptOpen && (
+    !providerAllowed
+    || !widgetActivated
+    || loadStatus === 'idle'
+    || loadStatus === 'loading'
+  );
 
   if (hiddenOnRoute) return null;
 
@@ -280,17 +295,19 @@ export const NitaConsentWidget = () => {
         }
       `}</style>
 
-      {!providerAllowed && !promptOpen && (
+      {showQuietLauncher && (
         <button
           ref={launcherRef}
           type="button"
-          onClick={() => setPromptOpen(true)}
-          className="healio-nita-surface inline-flex min-h-11 items-center gap-2 rounded-full bg-slate-900 px-4 py-3 text-sm font-bold text-white shadow-[0_10px_30px_rgba(15,23,42,0.28)] transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+          onClick={handleLauncherClick}
+          className="healio-nita-surface healio-nita-quiet-launcher inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#277fbe] text-white shadow-[0_4px_14px_rgba(15,23,42,0.16)] transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-[#1f6fa9] hover:shadow-[0_5px_16px_rgba(15,23,42,0.2)] active:translate-y-px motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#277fbe]"
+          aria-label={copy.launcher}
+          title={copy.launcher}
           aria-haspopup="dialog"
-          aria-expanded="false"
+          aria-expanded={providerAllowed && widgetActivated && loadStatus === 'ready'}
+          aria-busy={providerAllowed && widgetActivated && loadStatus === 'loading'}
         >
-          <MessageCircle className="h-5 w-5" aria-hidden="true" />
-          {copy.launcher}
+          <MessageCircle className="h-[18px] w-[18px]" aria-hidden="true" />
         </button>
       )}
 
@@ -338,7 +355,7 @@ export const NitaConsentWidget = () => {
           </div>
           <button
             type="button"
-            onClick={() => openConsentSettings('elevenlabs')}
+            onClick={handleOpenSettings}
             className="mt-3 min-h-11 w-full text-sm font-semibold text-slate-600 underline underline-offset-2"
           >
             {copy.settings}
@@ -346,13 +363,13 @@ export const NitaConsentWidget = () => {
         </section>
       )}
 
-      {providerAllowed && loadStatus === 'loading' && (
-        <p className="healio-nita-surface rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-[0_8px_26px_rgba(15,23,42,0.16)]" role="status">
+      {widgetActivated && providerAllowed && loadStatus === 'loading' && (
+        <p className="sr-only" role="status">
           {copy.loading}
         </p>
       )}
 
-      {providerAllowed && loadStatus === 'error' && (
+      {widgetActivated && providerAllowed && loadStatus === 'error' && (
         <div className="healio-nita-surface w-[min(calc(100vw-1.5rem),20rem)] rounded-2xl border border-rose-200 bg-white p-4 shadow-[0_12px_36px_rgba(15,23,42,0.2)]" role="alert">
           <p className="text-sm font-semibold text-slate-800">{copy.error}</p>
           <button type="button" onClick={handleRetry} className="mt-3 min-h-11 rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white">
@@ -361,11 +378,14 @@ export const NitaConsentWidget = () => {
         </div>
       )}
 
-      {providerAllowed && loadStatus === 'ready' && (
+      {providerAllowed && loadStatus === 'ready' && widgetActivated && (
         <div className="healio-nita-surface healio-nita-widget" aria-label={copy.launcher}>
           <elevenlabs-convai
             agent-id={ELEVENLABS_AGENT_ID}
             language={language}
+            variant="tiny"
+            default-expanded="false"
+            always-expanded="false"
             text-contents={language === 'en' ? EN_WIDGET_TEXT_CONTENTS : undefined}
             dismissible="true"
             text-input="true"

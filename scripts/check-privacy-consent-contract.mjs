@@ -52,6 +52,16 @@ expect(/@elevenlabs\/convai-widget-embed@0\.15\.1\/dist\/index\.js/.test(nitaWid
 expect(/dismissible="true"/.test(nitaWidget), 'Das Nita-Widget muss sich wieder schließen lassen.');
 expect(/text-input="true"/.test(nitaWidget), 'Das Nita-Widget muss neben Sprache auch Chat anbieten.');
 expect(/show-resize-button="true"/.test(nitaWidget), 'Das Nita-Widget muss sich wieder einklappen lassen.');
+expect(/variant="tiny"/.test(nitaWidget), 'Nita muss beim Seitenaufruf als kleiner Punkt starten.');
+expect(/healio-nita-quiet-launcher/.test(nitaWidget), 'Auch vor der ElevenLabs-Freigabe muss Nita als dezenter Punkt erscheinen.');
+expect(/const \[widgetActivated, setWidgetActivated\] = useState\(false\)/.test(nitaWidget), 'Das externe Nita-Widget darf beim Seitenaufruf nicht automatisch aktiviert sein.');
+expect(/providerAllowed && loadStatus === 'ready' && widgetActivated/.test(nitaWidget), 'Das externe Nita-Widget darf erst nach einem bewussten Klick sichtbar werden.');
+expect(/widgetActivated && providerAllowed && loadStatus === 'loading'[\s\S]*?className="sr-only"/.test(nitaWidget), 'Der Nita-Ladevorgang darf erst nach Aktivierung angekündigt und nicht sichtbar eingeblendet werden.');
+expect(/widgetActivated && providerAllowed && loadStatus === 'error'/.test(nitaWidget), 'Ein automatischer Ladefehler darf erst nach einem bewussten Nita-Klick sichtbar werden.');
+expect(/default-expanded="false"/.test(nitaWidget) && /always-expanded="false"/.test(nitaWidget), 'ElevenLabs darf Nita nicht durch eine spätere Dashboard-Änderung automatisch öffnen.');
+expect(/const handleNitaRequest = \(\) => \{[\s\S]*?setWidgetActivated\(true\)/.test(nitaWidget), 'Content-CTAs müssen den kleinen Nita-Punkt bewusst aktivieren.');
+expect(!/shadowRoot/.test(nitaWidget), 'Nita darf nicht von der internen ElevenLabs-DOM-Struktur abhängen.');
+expect(/const handleOpenSettings = \(\) => \{[\s\S]*?setPromptOpen\(false\);[\s\S]*?openConsentSettings\('elevenlabs'\)/.test(nitaWidget), 'Beim Wechsel in die Datenschutz-Einstellungen muss der Nita-Hinweis vorher schließen.');
 expect(/\.healio-nita-widget elevenlabs-convai \{[\s\S]*?bottom: calc\(var\(--healio-nita-safe-bottom/.test(nitaWidget), 'Die echte ElevenLabs-Fläche muss mobil oberhalb der Daumenzone positioniert werden.');
 expect(!/elevenlabs-convai\s*\{\s*display:\s*none\s*!important/.test(companyHero), 'Die Unternehmensseite darf Nita nicht global ausblenden.');
 expect(!/html\.legal-information-active elevenlabs-convai/.test(indexCss), 'Rechtsseiten dürfen das globale Nita-Widget nicht ausblenden.');
