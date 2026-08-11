@@ -37,9 +37,35 @@ const MIME = {
   '.woff2': 'font/woff2', '.ico': 'image/x-icon', '.txt': 'text/plain',
 };
 
+// Gegenstueck zum Rewrite in vercel.json: Die Seiten rufen die
+// Content-API same-origin auf. In der Produktion reicht Vercel das an
+// app.healio.de weiter, hier tut es dieser Server. Ohne den Proxy
+// bekaeme der Prerender statt JSON die index.html zurueck und wuerde
+// den Leer-Zustand der Blogseiten fest einbacken.
+const API_ORIGIN = process.env.VITE_APP_API_URL || 'https://app.healio.de';
+
 function serveDist() {
-  const server = http.createServer((req, res) => {
+  const server = http.createServer(async (req, res) => {
     const urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+
+    if (urlPath.startsWith('/api/')) {
+      try {
+        const upstream = await fetch(`${API_ORIGIN}${req.url}`, {
+          headers: { accept: 'application/json' },
+        });
+        const body = Buffer.from(await upstream.arrayBuffer());
+        res.writeHead(upstream.status, {
+          'Content-Type': upstream.headers.get('content-type') || 'application/json',
+        });
+        res.end(body);
+      } catch (err) {
+        console.warn(`[prerender] API-Proxy fehlgeschlagen (${urlPath}): ${err.message}`);
+        res.writeHead(502, { 'Content-Type': 'application/json' });
+        res.end('{}');
+      }
+      return;
+    }
+
     let filePath = path.join(distDir, urlPath);
     if (!filePath.startsWith(distDir)) { res.writeHead(403); res.end(); return; }
     if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {

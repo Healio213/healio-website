@@ -5,7 +5,12 @@ import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_APP_API_URL || 'https://app.healio.de';
+// Leer = same-origin. Der Abruf laeuft ueber healio.de und wird von
+// Vercel an app.healio.de weitergereicht (Rewrite in vercel.json,
+// im Dev-Server der Proxy in vite.config.js). Direkt gegen
+// app.healio.de zu laden scheiterte an der fehlenden CORS-Freigabe
+// und ersetzte den vorgerenderten Artikel durch "nicht gefunden".
+const API_BASE = import.meta.env.VITE_APP_API_URL || '';
 
 const TARGET_GROUP_KEYS = {
   heilpraktiker: 'categories.heilpraktiker',

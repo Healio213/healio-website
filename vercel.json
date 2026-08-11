@@ -98,6 +98,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/v1/content/:path*",
+      "destination": "https://app.healio.de/api/v1/content/:path*"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/index.html"
     },

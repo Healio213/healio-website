@@ -290,6 +290,16 @@ export default defineConfig({
 			'Cross-Origin-Embedder-Policy': 'credentialless',
 		},
 		allowedHosts: true,
+		// Gegenstueck zum Rewrite in vercel.json: Die Content-API wird
+		// same-origin aufgerufen, damit im Browser keine CORS-Freigabe
+		// noetig ist. Im Dev-Server uebernimmt das dieser Proxy.
+		proxy: {
+			'/api/v1/content': {
+				target: process.env.VITE_APP_API_URL || 'https://app.healio.de',
+				changeOrigin: true,
+				secure: true,
+			},
+		},
 	},
 	resolve: {
 		extensions: ['.jsx', '.js', '.tsx', '.ts', '.json', ],

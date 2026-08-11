@@ -6,7 +6,8 @@ import SEOHead from '@/components/SEOHead';
 import { Clock, ArrowRight, User, Tag } from 'lucide-react';
 import ProductTicker from '@/components/sections/ProductTicker';
 
-const API_BASE = import.meta.env.VITE_APP_API_URL || 'https://app.healio.de';
+// Leer = same-origin, siehe BlogArticlePage.jsx und vercel.json.
+const API_BASE = import.meta.env.VITE_APP_API_URL || '';
 
 const TARGET_GROUP_KEYS = {
   heilpraktiker: 'categories.heilpraktiker',
