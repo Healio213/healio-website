@@ -10,8 +10,11 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 
+const AMBULANT_CTA_DELAY_MS = 30_000;
+
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [ambulantCtaReady, setAmbulantCtaReady] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
@@ -49,6 +52,17 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    setAmbulantCtaReady(false);
+    if (!isAmbulant) return undefined;
+
+    const timer = window.setTimeout(() => {
+      setAmbulantCtaReady(true);
+    }, AMBULANT_CTA_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [isAmbulant, location.pathname]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -260,20 +274,26 @@ const Header = () => {
           </Button>
         </div>
 
-        {isAmbulant && (
-          <a
-            href={ambulantSdkUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackSdkClick('ambulant-header-mobile', referrer)}
-            className="absolute right-[7.75rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
-            aria-label={lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}
-          >
-            <Calculator className="h-4 w-4" aria-hidden="true" />
-            <span className="min-[390px]:hidden">{lang === 'de' ? 'Tarif' : 'Plan'}</span>
-            <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}</span>
-          </a>
-        )}
+        <AnimatePresence initial={false}>
+          {isAmbulant && showSolidHeader && ambulantCtaReady && (
+            <motion.a
+              href={ambulantSdkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackSdkClick('ambulant-header-mobile', referrer)}
+              initial={{ opacity: 0, y: -6, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.96 }}
+              transition={{ duration: 0.24, ease: 'easeOut' }}
+              className="absolute right-[7.75rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+              aria-label={lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}
+            >
+              <Calculator className="h-4 w-4" aria-hidden="true" />
+              <span className="min-[390px]:hidden">{lang === 'de' ? 'Tarif' : 'Plan'}</span>
+              <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}</span>
+            </motion.a>
+          )}
+        </AnimatePresence>
 
         <button
           ref={mobileMenuButtonRef}
