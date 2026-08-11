@@ -54,6 +54,30 @@ const BlogArticlePage = () => {
     }
   };
 
+  // Ein unbekannter Slug wird von der SPA zwangslaeufig mit Status 200
+  // und der index.html beantwortet und erbt damit deren Angaben:
+  // "index, follow" plus Startseiten-Canonical. Fuer Google sieht das
+  // aus wie eine indexierbare Dublette der Startseite (Soft-404).
+  // react-helmet setzt in dieser App nachweislich keine Tags, deshalb
+  // wird hier direkt im DOM korrigiert und beim Verlassen der Seite
+  // wieder zurueckgesetzt.
+  useEffect(() => {
+    if (loading || article) return undefined;
+
+    const robotsTag = document.querySelector('meta[name="robots"]');
+    const canonicalTag = document.querySelector('link[rel="canonical"]');
+    const previousRobots = robotsTag?.getAttribute('content');
+    const previousCanonical = canonicalTag?.getAttribute('href');
+
+    robotsTag?.setAttribute('content', 'noindex, follow');
+    canonicalTag?.setAttribute('href', `${window.location.origin}${window.location.pathname}`);
+
+    return () => {
+      if (previousRobots) robotsTag?.setAttribute('content', previousRobots);
+      if (previousCanonical) canonicalTag?.setAttribute('href', previousCanonical);
+    };
+  }, [loading, article]);
+
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
     return new Date(dateStr).toLocaleDateString('de-DE', {

@@ -10,7 +10,7 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.
 
 const Footer = ({ hideCta = false }) => {
   const { t } = useTranslation('common');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
 
   return (
     <footer className="bg-slate-950 text-white pt-20 pb-8 mt-auto relative overflow-hidden">
@@ -96,6 +96,13 @@ const Footer = ({ hideCta = false }) => {
               <li><Link to={getPath('unternehmen')} className="hover:text-healio-primary transition-colors">{t('footer.unternehmen')}</Link></li>
               <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
               <li><Link to={getPath('partner')} className="hover:text-healio-primary transition-colors">{t('footer.partner')}</Link></li>
+              {/* Diese Seiten hatten site-weit keinen einzigen internen
+                  Link und waren nur ueber die Sitemap erreichbar. */}
+              <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
+              <li><Link to={getPath('hebammen')} className="hover:text-healio-primary transition-colors">{t('footer.hebammen')}</Link></li>
+              {lang === 'de' && (
+                <li><Link to="/zahnaerzte" className="hover:text-healio-primary transition-colors">{t('footer.zahnaerzte')}</Link></li>
+              )}
             </ul>
           </div>
           <div>

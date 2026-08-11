@@ -153,7 +153,12 @@ const BlogPage = () => {
               {filtered.map((article) => (
                 <Link
                   key={article.id}
-                  to={`${getPath('blog')}/${article.slug}`}
+                  // Artikel existieren nur unter /blog/. Auf /en/blog
+                  // wurde bisher auf /en/blog/<slug> verlinkt, was es
+                  // nicht gibt: 15 tote Links, die die Startseite
+                  // auslieferten. Bis es Uebersetzungen gibt, zeigen
+                  // beide Sprachfassungen auf den deutschen Artikel.
+                  to={`/blog/${article.slug}`}
                   className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
                   <div className="p-6">
