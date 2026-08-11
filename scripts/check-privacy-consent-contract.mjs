@@ -47,7 +47,9 @@ expect(/setAnalyticsRouteBlocked\(isDentalCheckRoute\)/.test(app), 'Analytics mu
 expect(/isDentalCheckRoute \|\| !hasConsent\('analytics', state\)/.test(app), 'Der SPA-Tracker muss Zahn-Check-Routen überspringen.');
 expect(!/(?:gtag|trackEvent|trackZahnEvent|analytics|consent)/i.test(dentalCheck), 'Der Zahn-Check muss ohne Analytics und Consent-Logik bleiben.');
 expect(!/AmbulantMiaPrompt/.test(dentalPage), 'Die Zahnseite darf keinen verzögerten Nita-Prompt enthalten.');
-expect(/const HIDDEN_ROUTE_PREFIXES = \[\s*'\/zahn',\s*'\/en\/dental',?\s*\];/.test(nitaWidget), 'Nita muss auf allen Seiten außer den beiden Zahn-Check-Routen verfügbar sein.');
+expect(!/HIDDEN_ROUTE_PREFIXES[\s\S]*?'\/zahn'/.test(nitaWidget), 'Nita muss auch auf der deutschen Zahn-Seite verfügbar sein.');
+expect(!/HIDDEN_ROUTE_PREFIXES[\s\S]*?'\/en\/dental'/.test(nitaWidget), 'Nita muss auch auf der englischen Zahn-Seite verfügbar sein.');
+expect(/!isDentalCheckRoute\s*&&\s*\([\s\S]*?onClick=\{handleOpenSettings\}/.test(nitaWidget), 'Der auf Zahn-Routen gesperrte allgemeine Einstellungsdialog darf dort nicht als wirkungsloser Nita-Button angeboten werden.');
 expect(/@elevenlabs\/convai-widget-embed@0\.15\.1\/dist\/index\.js/.test(nitaWidget), 'Nita muss die aktuelle fest versionierte ElevenLabs-Einbindung verwenden.');
 expect(/dismissible="true"/.test(nitaWidget), 'Das Nita-Widget muss sich wieder schließen lassen.');
 expect(/text-input="true"/.test(nitaWidget), 'Das Nita-Widget muss neben Sprache auch Chat anbieten.');
@@ -81,6 +83,7 @@ expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sp
 expect(/requestNitaConsent\(\)/.test(miaPrompt), 'Der bestehende Nita-Prompt muss den Consent-Flow verwenden.');
 expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler Launcher müssen sich gegenseitig ausschließen.');
 expect(/healio-mobile-menu-active/.test(header), 'Das mobile Menü muss externe Overlays während der Navigation ausblenden.');
+expect(/html\.healio-mobile-menu-active \.healio-nita-surface/.test(nitaWidget), 'Das mobile Menü muss den globalen Nita-Punkt auch visuell und interaktiv ausblenden.');
 
 for (const purpose of ['analytics', 'calendly', 'maps', 'elevenlabs']) {
   expect(consent.includes(`'${purpose}'`), `Consent-Zweck ${purpose} fehlt.`);

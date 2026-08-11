@@ -15,11 +15,6 @@ const ELEVENLABS_AGENT_ID = 'agent_3701kkc8xr4be70a3v4mfmzptpqs';
 const ELEVENLABS_SCRIPT_URL = 'https://unpkg.com/@elevenlabs/convai-widget-embed@0.15.1/dist/index.js';
 const SCRIPT_SELECTOR = 'script[data-healio-elevenlabs="true"]';
 
-const HIDDEN_ROUTE_PREFIXES = [
-  '/zahn',
-  '/en/dental',
-];
-
 const EN_WIDGET_TEXT_CONTENTS = JSON.stringify({
   main_label: 'Need help?',
   start_call: 'Start call',
@@ -149,9 +144,7 @@ export const NitaConsentWidget = () => {
   const [widgetActivated, setWidgetActivated] = useState(false);
   const closeButtonRef = useRef(null);
   const launcherRef = useRef(null);
-  const hiddenOnRoute = HIDDEN_ROUTE_PREFIXES.some((prefix) => (
-    pathname === prefix || pathname.startsWith(`${prefix}/`)
-  ));
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
   const providerAllowed = hasConsent('elevenlabs', consent);
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
@@ -165,7 +158,7 @@ export const NitaConsentWidget = () => {
   }), []);
 
   useEffect(() => {
-    if (!providerAllowed || hiddenOnRoute) return undefined;
+    if (!providerAllowed) return undefined;
     let active = true;
     setLoadStatus('loading');
 
@@ -180,7 +173,7 @@ export const NitaConsentWidget = () => {
     return () => {
       active = false;
     };
-  }, [hiddenOnRoute, providerAllowed]);
+  }, [providerAllowed]);
 
   useEffect(() => {
     const handleNitaRequest = () => {
@@ -255,8 +248,6 @@ export const NitaConsentWidget = () => {
     || loadStatus === 'loading'
   );
 
-  if (hiddenOnRoute) return null;
-
   return (
     <>
       <style>{`
@@ -274,7 +265,8 @@ export const NitaConsentWidget = () => {
         }
         html.home-hero-active:not(.home-hero-passed) .healio-nita-surface,
         html.healio-consent-ui-active .healio-nita-surface,
-        html.healio-nita-teaser-active .healio-nita-surface {
+        html.healio-nita-teaser-active .healio-nita-surface,
+        html.healio-mobile-menu-active .healio-nita-surface {
           opacity: 0;
           pointer-events: none;
           visibility: hidden;
@@ -353,13 +345,15 @@ export const NitaConsentWidget = () => {
               {copy.cancel}
             </button>
           </div>
-          <button
-            type="button"
-            onClick={handleOpenSettings}
-            className="mt-3 min-h-11 w-full text-sm font-semibold text-slate-600 underline underline-offset-2"
-          >
-            {copy.settings}
-          </button>
+          {!isDentalCheckRoute && (
+            <button
+              type="button"
+              onClick={handleOpenSettings}
+              className="mt-3 min-h-11 w-full text-sm font-semibold text-slate-600 underline underline-offset-2"
+            >
+              {copy.settings}
+            </button>
+          )}
         </section>
       )}
 
