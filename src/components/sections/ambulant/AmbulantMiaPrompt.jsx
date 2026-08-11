@@ -44,6 +44,7 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) return undefined;
     if (getPromptDismissed(storageKey)) return undefined;
 
     let timer;

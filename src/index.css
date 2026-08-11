@@ -161,7 +161,3 @@
     page-break-after: avoid;
   }
 }
-
-html.legal-information-active elevenlabs-convai {
-  display: none !important;
-}

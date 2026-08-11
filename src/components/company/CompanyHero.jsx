@@ -33,8 +33,6 @@ const CompanyHero = () => {
       className="relative isolate min-h-[780px] w-full overflow-hidden bg-[#06131c] text-white md:min-h-[100svh]"
       aria-labelledby="company-hero-title"
     >
-      <style>{'elevenlabs-convai { display: none !important; }'}</style>
-
       <motion.img
         src="/images/healio-hero-markenrelief-v1.webp"
         alt=""

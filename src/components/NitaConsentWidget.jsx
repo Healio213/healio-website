@@ -12,31 +12,47 @@ import {
 export const NITA_CONSENT_REQUEST_EVENT = 'healio:nita-consent-request';
 
 const ELEVENLABS_AGENT_ID = 'agent_3701kkc8xr4be70a3v4mfmzptpqs';
-const ELEVENLABS_SCRIPT_URL = 'https://elevenlabs.io/convai-widget/index.js';
+const ELEVENLABS_SCRIPT_URL = 'https://unpkg.com/@elevenlabs/convai-widget-embed@0.15.1/dist/index.js';
 const SCRIPT_SELECTOR = 'script[data-healio-elevenlabs="true"]';
 
 const HIDDEN_ROUTE_PREFIXES = [
   '/zahn',
   '/en/dental',
-  '/unternehmen',
-  '/en/companies',
-  '/potenzialanalyse',
-  '/en/potential-analysis',
-  '/impressum',
-  '/en/legal-notice',
-  '/agb',
-  '/en/terms',
-  '/datenschutz',
-  '/en/privacy',
-  '/erstinformation',
-  '/en/initial-information',
-  '/konto-loeschen',
-  '/confirmation',
-  '/en/confirmation',
-  '/app-bestaetigt',
-  '/reset-password',
-  '/auth',
 ];
+
+const EN_WIDGET_TEXT_CONTENTS = JSON.stringify({
+  main_label: 'Need help?',
+  start_call: 'Start call',
+  start_chat: 'Start chat',
+  new_call: 'New call',
+  end_call: 'End',
+  mute_microphone: 'Mute microphone',
+  change_language: 'Change language',
+  collapse: 'Collapse',
+  expand: 'Expand',
+  accept_terms: 'Accept',
+  dismiss_terms: 'Decline',
+  listening_status: 'Listening…',
+  speaking_status: 'Speak to interrupt',
+  connecting_status: 'Connecting…',
+  chatting_status: 'Chat with Nita',
+  input_label: 'Type a message',
+  input_placeholder: 'Write a message',
+  input_placeholder_text_only: 'Write a message',
+  input_placeholder_new_conversation: 'Start a new conversation',
+  user_ended_conversation: 'You ended the conversation.',
+  agent_ended_conversation: 'Nita ended the conversation.',
+  error_occurred: 'Something went wrong',
+  send_message: 'Send',
+  text_mode: 'Switch to text',
+  voice_mode: 'Switch to voice',
+  switched_to_text_mode: 'Switched to text',
+  switched_to_voice_mode: 'Switched to voice',
+  agent_working: 'Nita is working…',
+  agent_done: 'Done',
+  agent_error: 'Something went wrong',
+  typing_indicator: 'Nita is typing…',
+});
 
 const COPY = {
   de: {
@@ -72,8 +88,8 @@ let elevenLabsLoadPromise = null;
 const getSafeScriptUrl = () => {
   try {
     const url = new URL(ELEVENLABS_SCRIPT_URL);
-    if (url.protocol !== 'https:' || url.hostname !== 'elevenlabs.io') return null;
-    if (url.pathname !== '/convai-widget/index.js' || url.search || url.hash) return null;
+    if (url.protocol !== 'https:' || url.hostname !== 'unpkg.com') return null;
+    if (url.pathname !== '/@elevenlabs/convai-widget-embed@0.15.1/dist/index.js' || url.search || url.hash) return null;
     return url.toString();
   } catch {
     return null;
@@ -121,7 +137,10 @@ export const loadElevenLabsWidget = () => {
 
 const openLoadedWidget = () => {
   const widget = document.querySelector('elevenlabs-convai');
-  const button = widget?.shadowRoot?.querySelector('button');
+  const buttons = Array.from(widget?.shadowRoot?.querySelectorAll('button') || []);
+  const button = buttons.find((candidate) => (
+    ['Ausklappen', 'Expand', 'Open chat'].includes(candidate.title)
+  ));
   if (button) {
     button.click();
     return true;
@@ -229,13 +248,16 @@ export const NitaConsentWidget = () => {
         .healio-nita-surface {
           position: fixed;
           right: 0.75rem;
-          bottom: calc(var(--healio-nita-safe-bottom, 6.75rem) + env(safe-area-inset-bottom));
+          bottom: calc(var(--healio-nita-safe-bottom, 8.5rem) + env(safe-area-inset-bottom));
           z-index: 90;
           transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
         }
-        .healio-nita-widget elevenlabs-convai { display: block; }
+        .healio-nita-widget elevenlabs-convai {
+          display: block;
+          right: 0.75rem !important;
+          bottom: calc(var(--healio-nita-safe-bottom, 8.5rem) + env(safe-area-inset-bottom)) !important;
+        }
         html.home-hero-active:not(.home-hero-passed) .healio-nita-surface,
-        html.legal-information-active .healio-nita-surface,
         html.healio-consent-ui-active .healio-nita-surface,
         html.healio-nita-teaser-active .healio-nita-surface {
           opacity: 0;
@@ -246,7 +268,11 @@ export const NitaConsentWidget = () => {
         @media (min-width: 768px) {
           .healio-nita-surface {
             right: 1.5rem;
-            bottom: 1.5rem;
+            bottom: 5.25rem;
+          }
+          .healio-nita-widget elevenlabs-convai {
+            right: 1.5rem !important;
+            bottom: 5.25rem !important;
           }
         }
         @media print {
@@ -337,7 +363,14 @@ export const NitaConsentWidget = () => {
 
       {providerAllowed && loadStatus === 'ready' && (
         <div className="healio-nita-surface healio-nita-widget" aria-label={copy.launcher}>
-          <elevenlabs-convai agent-id={ELEVENLABS_AGENT_ID}></elevenlabs-convai>
+          <elevenlabs-convai
+            agent-id={ELEVENLABS_AGENT_ID}
+            language={language}
+            text-contents={language === 'en' ? EN_WIDGET_TEXT_CONTENTS : undefined}
+            dismissible="true"
+            text-input="true"
+            show-resize-button="true"
+          ></elevenlabs-convai>
         </div>
       )}
     </>

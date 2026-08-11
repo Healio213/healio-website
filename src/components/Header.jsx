@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, Calculator, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -18,7 +20,9 @@ const Header = () => {
   const location = useLocation();
   const { t } = useTranslation('common');
   const { lang, getPath, switchLanguage } = useLanguage();
+  const referrer = useReferrer();
   const isHome = location.pathname === '/' || location.pathname === '/en';
+  const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
   const isCompany = location.pathname === '/unternehmen' || location.pathname === '/en/companies';
   const isPartner = location.pathname === '/partner' || location.pathname === '/en/partner';
   const solidHeaderRoutes = [
@@ -113,6 +117,7 @@ const Header = () => {
         : t('nav.beratung');
 
   const ctaPath = isCompany ? getPath('potenzialanalyse') : getPath('terminvereinbarung');
+  const ambulantSdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (
     <header className={cn(
@@ -254,6 +259,21 @@ const Header = () => {
             )}
           </Button>
         </div>
+
+        {isAmbulant && (
+          <a
+            href={ambulantSdkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackSdkClick('ambulant-header-mobile', referrer)}
+            className="absolute right-[7.75rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+            aria-label={lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}
+          >
+            <Calculator className="h-4 w-4" aria-hidden="true" />
+            <span className="min-[390px]:hidden">{lang === 'de' ? 'Tarif' : 'Plan'}</span>
+            <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}</span>
+          </a>
+        )}
 
         <button
           ref={mobileMenuButtonRef}

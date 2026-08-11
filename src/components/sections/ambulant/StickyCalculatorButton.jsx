@@ -27,15 +27,15 @@ const StickyCalculatorButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed bottom-6 right-6 z-50 hidden animate-in fade-in slide-in-from-bottom-4 duration-300 md:block">
       <a
         href={sdkUrl}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackSdkClick('ambulant-sticky', referrer)}
-        className="flex items-center justify-center w-full md:w-auto bg-healio-primary text-white font-bold px-6 py-4 md:py-3 rounded-xl md:rounded-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+        className="flex min-h-12 w-auto max-w-[calc(100vw-2rem)] items-center justify-center whitespace-nowrap rounded-full bg-healio-primary px-4 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:rounded-lg md:px-6"
       >
-        <Calculator className="w-5 h-5 mr-2" />
+        <Calculator className="mr-2 h-4 w-4" />
         {t('stickyButton.ctaCalculate')}
       </a>
     </div>

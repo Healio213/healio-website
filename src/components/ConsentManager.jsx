@@ -1,5 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
-import { Settings, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import {
   CONSENT_PURPOSES,
@@ -188,80 +188,57 @@ export const ConsentManager = () => {
   return (
     <>
       <style>{`
-        .healio-consent-settings-trigger {
-          bottom: calc(var(--healio-consent-control-bottom, 6.5rem) + env(safe-area-inset-bottom));
-        }
-        @media (min-width: 768px) {
-          .healio-consent-settings-trigger { bottom: 1rem; }
-        }
-        html.healio-nita-teaser-active .healio-consent-settings-trigger {
-          opacity: 0;
-          pointer-events: none;
-          visibility: hidden;
-        }
         html.healio-mobile-menu-active .healio-consent-surface {
           opacity: 0;
           pointer-events: none;
           visibility: hidden;
         }
         @media print {
-          .healio-consent-surface, .healio-consent-settings-trigger { display: none !important; }
+          .healio-consent-surface { display: none !important; }
         }
       `}</style>
 
       {showBanner && !settingsOpen && !isDentalCheckRoute && (
         <section
-          className="healio-consent-surface fixed inset-x-3 bottom-3 z-[120] mx-auto max-w-5xl rounded-2xl border border-slate-200 bg-white p-4 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] sm:p-5"
+          className="healio-consent-surface fixed inset-x-3 top-[5.25rem] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
             <div className="max-w-2xl min-w-0">
-              <h2 className="text-base font-extrabold text-slate-950 sm:text-lg">{copy.bannerTitle}</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600">
+              <h2 className="text-sm font-extrabold text-slate-950 md:text-lg">{copy.bannerTitle}</h2>
+              <p className="mt-1 text-xs leading-5 text-slate-600 md:text-sm md:leading-6">
                 {copy.bannerText}{' '}
                 <a href={language === 'en' ? '/en/privacy' : '/datenschutz'} className="font-semibold text-slate-800 underline underline-offset-2">
                   {copy.privacy}
                 </a>
               </p>
             </div>
-            <div className="grid shrink-0 gap-2 sm:grid-cols-3">
+            <div className="grid shrink-0 grid-cols-3 gap-1.5 md:gap-2">
               <button
                 type="button"
                 onClick={() => handleNecessaryOnly('banner')}
-                className="min-h-11 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-bold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                className="min-h-11 rounded-xl border border-slate-300 px-2 py-2 text-[11px] font-bold leading-tight text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 md:px-4 md:py-2.5 md:text-sm"
               >
                 {copy.necessaryOnly}
               </button>
               <button
                 type="button"
                 onClick={openSettings}
-                className="min-h-11 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-bold text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                className="min-h-11 rounded-xl border border-slate-300 px-2 py-2 text-[11px] font-bold leading-tight text-slate-800 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 md:px-4 md:py-2.5 md:text-sm"
               >
                 {copy.settings}
               </button>
               <button
                 type="button"
                 onClick={handleAllowAll}
-                className="min-h-11 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+                className="min-h-11 rounded-xl bg-slate-900 px-2 py-2 text-[11px] font-bold leading-tight text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 md:px-4 md:py-2.5 md:text-sm"
               >
                 {copy.allowAll}
               </button>
             </div>
           </div>
         </section>
-      )}
-
-      {consent.decided && !showBanner && !settingsOpen && !isDentalCheckRoute && (
-        <button
-          type="button"
-          onClick={openSettings}
-          className="healio-consent-settings-trigger fixed left-3 z-40 inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-300 bg-white/95 px-3 py-2 text-xs font-bold text-slate-700 shadow-[0_6px_24px_rgba(15,23,42,0.14)] transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
-          aria-label={copy.dialogTitle}
-        >
-          <Settings className="h-4 w-4" aria-hidden="true" />
-          {copy.privacy}
-        </button>
       )}
 
       {settingsOpen && !isDentalCheckRoute && (

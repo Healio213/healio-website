@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { CheckCircle2, ExternalLink, Smartphone } from 'lucide-react';
+import { openConsentSettings } from '@/lib/consent';
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
@@ -11,6 +12,8 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.
 const Footer = ({ hideCta = false }) => {
   const { t } = useTranslation('common');
   const { getPath, lang } = useLanguage();
+  const { pathname } = useLocation();
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
 
   return (
     <footer className="bg-slate-950 text-white pt-20 pb-8 mt-auto relative overflow-hidden">
@@ -117,6 +120,13 @@ const Footer = ({ hideCta = false }) => {
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('impressum')} className="hover:text-healio-primary transition-colors">{t('footer.impressum')}</Link></li>
               <li><Link to={getPath('datenschutz')} className="hover:text-healio-primary transition-colors">{t('footer.datenschutz')}</Link></li>
+              {!isDentalCheckRoute && (
+                <li>
+                  <button type="button" onClick={() => openConsentSettings()} className="text-left transition-colors hover:text-healio-primary">
+                    {t('footer.cookieSettings')}
+                  </button>
+                </li>
+              )}
               <li><Link to={getPath('agb')} className="hover:text-healio-primary transition-colors">{t('footer.agb')}</Link></li>
               <li><Link to={getPath('erstinformation')} className="hover:text-healio-primary transition-colors">{t('footer.erstinformation')}</Link></li>
             </ul>
