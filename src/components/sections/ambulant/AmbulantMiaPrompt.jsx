@@ -82,7 +82,7 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
   const handleOpen = () => {
     setPromptDismissed(storageKey);
     setShowPrompt(false);
-    requestNitaConsent();
+    requestNitaConsent('delayed_prompt');
   };
 
   return (

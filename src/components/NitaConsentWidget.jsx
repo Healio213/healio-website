@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { MessageCircle, ShieldCheck, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import {
@@ -8,6 +8,11 @@ import {
   subscribeConsent,
   updateConsentPurpose,
 } from '@/lib/consent';
+import {
+  buildNitaContext,
+  buildNitaFirstMessage,
+  sanitizeNitaEntryPoint,
+} from '@/lib/nitaContext';
 
 export const NITA_CONSENT_REQUEST_EVENT = 'healio:nita-consent-request';
 
@@ -130,9 +135,11 @@ export const loadElevenLabsWidget = () => {
   return elevenLabsLoadPromise;
 };
 
-export const requestNitaConsent = () => {
+export const requestNitaConsent = (entryPoint = 'delayed_prompt') => {
   if (typeof window === 'undefined') return false;
-  window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT));
+  window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT, {
+    detail: { entryPoint: sanitizeNitaEntryPoint(entryPoint) },
+  }));
   return true;
 };
 
@@ -142,11 +149,15 @@ export const NitaConsentWidget = () => {
   const [promptOpen, setPromptOpen] = useState(false);
   const [loadStatus, setLoadStatus] = useState('idle');
   const [widgetActivated, setWidgetActivated] = useState(false);
+  const [widgetActivationPending, setWidgetActivationPending] = useState(false);
+  const [activeNitaContext, setActiveNitaContext] = useState(() => buildNitaContext(pathname));
   const closeButtonRef = useRef(null);
   const launcherRef = useRef(null);
+  const lastContextPathRef = useRef(pathname);
+  const pendingContextRef = useRef(activeNitaContext);
   const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
   const providerAllowed = hasConsent('elevenlabs', consent);
-  const language = pathname.startsWith('/en') ? 'en' : 'de';
+  const language = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'de';
   const copy = COPY[language];
 
   useEffect(() => subscribeConsent((nextConsent) => {
@@ -154,8 +165,23 @@ export const NitaConsentWidget = () => {
     if (!hasConsent('elevenlabs', nextConsent)) {
       setLoadStatus('idle');
       setWidgetActivated(false);
+      setWidgetActivationPending(false);
     }
   }), []);
+
+  useEffect(() => {
+    if (lastContextPathRef.current === pathname) return;
+    lastContextPathRef.current = pathname;
+    const nextContext = buildNitaContext(pathname, 'global_launcher');
+    pendingContextRef.current = nextContext;
+    setActiveNitaContext(nextContext);
+  }, [pathname]);
+
+  useLayoutEffect(() => {
+    if (!widgetActivationPending) return;
+    setWidgetActivated(true);
+    setWidgetActivationPending(false);
+  }, [activeNitaContext, widgetActivationPending]);
 
   useEffect(() => {
     if (!providerAllowed) return undefined;
@@ -176,14 +202,18 @@ export const NitaConsentWidget = () => {
   }, [providerAllowed]);
 
   useEffect(() => {
-    const handleNitaRequest = () => {
+    const handleNitaRequest = (event) => {
+      const entryPoint = sanitizeNitaEntryPoint(event.detail?.entryPoint);
+      const requestedContext = buildNitaContext(pathname, entryPoint);
+      pendingContextRef.current = requestedContext;
       const currentConsent = getConsentState();
       if (!hasConsent('elevenlabs', currentConsent)) {
         setPromptOpen(true);
         return;
       }
 
-      setWidgetActivated(true);
+      setActiveNitaContext(requestedContext);
+      setWidgetActivationPending(true);
       loadElevenLabsWidget()
         .then(() => setLoadStatus('ready'))
         .catch(() => setLoadStatus('error'));
@@ -191,7 +221,7 @@ export const NitaConsentWidget = () => {
 
     window.addEventListener(NITA_CONSENT_REQUEST_EVENT, handleNitaRequest);
     return () => window.removeEventListener(NITA_CONSENT_REQUEST_EVENT, handleNitaRequest);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!promptOpen) return undefined;
@@ -213,8 +243,13 @@ export const NitaConsentWidget = () => {
     };
   }, [promptOpen]);
 
+  const activateWidgetWithContext = (context) => {
+    setActiveNitaContext(context);
+    setWidgetActivationPending(true);
+  };
+
   const handleAllow = () => {
-    setWidgetActivated(true);
+    activateWidgetWithContext(pendingContextRef.current);
     updateConsentPurpose('elevenlabs', true, 'provider');
     setPromptOpen(false);
   };
@@ -227,12 +262,14 @@ export const NitaConsentWidget = () => {
   };
 
   const handleLauncherClick = () => {
+    const requestedContext = buildNitaContext(pathname, 'global_launcher');
+    pendingContextRef.current = requestedContext;
     if (!providerAllowed) {
       setPromptOpen(true);
       return;
     }
 
-    setWidgetActivated(true);
+    activateWidgetWithContext(requestedContext);
     if (loadStatus === 'error') handleRetry();
   };
 
@@ -377,6 +414,8 @@ export const NitaConsentWidget = () => {
           <elevenlabs-convai
             agent-id={ELEVENLABS_AGENT_ID}
             language={language}
+            dynamic-variables={JSON.stringify(activeNitaContext)}
+            override-first-message={buildNitaFirstMessage(activeNitaContext)}
             variant="tiny"
             default-expanded="false"
             always-expanded="false"

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { buildNitaContext, buildNitaFirstMessage, sanitizeNitaEntryPoint } from '../src/lib/nitaContext.js';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -37,6 +38,24 @@ const completeSource = collectSourceFiles(path.join(root, 'src'))
   .map((file) => fs.readFileSync(file, 'utf8'))
   .join('\n');
 
+const outpatientContext = buildNitaContext('/ambulant', 'global_launcher');
+const outpatientEnglishContext = buildNitaContext('/en/outpatient', 'global_launcher');
+const dentalContext = buildNitaContext('/zahn?score=9#ergebnis', 'delayed_prompt');
+const unknownContext = buildNitaContext('/unbekannt', 'untrusted-entry');
+const dentalContextJson = JSON.stringify(dentalContext);
+const englishPartnerMessage = buildNitaFirstMessage(buildNitaContext('/en/partner', 'delayed_prompt'));
+
+expect(outpatientContext.healio_language === 'de' && outpatientContext.healio_product === 'outpatient' && outpatientContext.healio_page === 'outpatient', 'Nita muss den deutschen Ambulant-Kontext erkennen.');
+expect(outpatientEnglishContext.healio_language === 'en' && outpatientEnglishContext.healio_product === 'outpatient' && outpatientEnglishContext.healio_page === 'outpatient', 'Nita muss den englischen Ambulant-Kontext erkennen.');
+expect(buildNitaContext('/enterprise').healio_language === 'de', 'Nur /en und /en/... dürfen als englische Nita-Seiten gelten.');
+expect(JSON.stringify(Object.keys(dentalContext).sort()) === JSON.stringify(['healio_entry_point', 'healio_language', 'healio_page', 'healio_product']), 'Der Zahn-Kontext darf nur die vier freigegebenen Felder enthalten.');
+expect(dentalContext.healio_language === 'de' && dentalContext.healio_product === 'dental' && dentalContext.healio_page === 'dental', 'Der Zahn-Kontext muss ausschließlich die statische Zahn-Seite beschreiben.');
+expect(!/(score|ergebnis|result|zahn\?)/i.test(dentalContextJson), 'Zahn-Check-Antworten, Ergebnisse und Rohpfade dürfen Nita nie erreichen.');
+expect(buildNitaContext('/blog/geheime-details').healio_page === 'blog' && !JSON.stringify(buildNitaContext('/blog/geheime-details')).includes('geheime-details'), 'Blogartikel dürfen nur als stabile Blog-Seite ohne Slug übergeben werden.');
+expect(unknownContext.healio_page === 'other' && unknownContext.healio_product === 'general', 'Unbekannte Routen müssen auf einen neutralen Kontext zurückfallen.');
+expect(sanitizeNitaEntryPoint('untrusted-entry') === 'global_launcher', 'Unbekannte Nita-Einstiege müssen auf den globalen Launcher zurückfallen.');
+expect(/partnership/i.test(englishPartnerMessage), 'Der englische Partner-Einstieg muss die Partnerschaft statt einer generischen Erklärung aufgreifen.');
+
 expect(!/googletagmanager\.com\/gtag\/js/i.test(indexHtml), 'GA4 darf nicht statisch aus index.html geladen werden.');
 expect(!/elevenlabs\.io\/convai-widget/i.test(indexHtml), 'ElevenLabs darf nicht statisch aus index.html geladen werden.');
 expect(!/window\.gtag/.test(completeSource), 'Alte direkte gtag-Aufrufe müssen den consent-gesteuerten Tracker verwenden.');
@@ -61,7 +80,7 @@ expect(/providerAllowed && loadStatus === 'ready' && widgetActivated/.test(nitaW
 expect(/widgetActivated && providerAllowed && loadStatus === 'loading'[\s\S]*?className="sr-only"/.test(nitaWidget), 'Der Nita-Ladevorgang darf erst nach Aktivierung angekündigt und nicht sichtbar eingeblendet werden.');
 expect(/widgetActivated && providerAllowed && loadStatus === 'error'/.test(nitaWidget), 'Ein automatischer Ladefehler darf erst nach einem bewussten Nita-Klick sichtbar werden.');
 expect(/default-expanded="false"/.test(nitaWidget) && /always-expanded="false"/.test(nitaWidget), 'ElevenLabs darf Nita nicht durch eine spätere Dashboard-Änderung automatisch öffnen.');
-expect(/const handleNitaRequest = \(\) => \{[\s\S]*?setWidgetActivated\(true\)/.test(nitaWidget), 'Content-CTAs müssen den kleinen Nita-Punkt bewusst aktivieren.');
+expect(/const handleNitaRequest = \(event\) => \{[\s\S]*?setWidgetActivationPending\(true\)/.test(nitaWidget), 'Content-CTAs müssen den kleinen Nita-Punkt bewusst mit dem aktuellen Kontext aktivieren.');
 expect(!/shadowRoot/.test(nitaWidget), 'Nita darf nicht von der internen ElevenLabs-DOM-Struktur abhängen.');
 expect(/const handleOpenSettings = \(\) => \{[\s\S]*?setPromptOpen\(false\);[\s\S]*?openConsentSettings\('elevenlabs'\)/.test(nitaWidget), 'Beim Wechsel in die Datenschutz-Einstellungen muss der Nita-Hinweis vorher schließen.');
 expect(/\.healio-nita-widget elevenlabs-convai \{[\s\S]*?bottom: calc\(var\(--healio-nita-safe-bottom/.test(nitaWidget), 'Die echte ElevenLabs-Fläche muss mobil oberhalb der Daumenzone positioniert werden.');
@@ -71,6 +90,13 @@ expect(/top-\[5\.25rem\][\s\S]*md:bottom-3[\s\S]*md:top-auto/.test(consentManage
 expect(!/healio-consent-settings-trigger/.test(consentManager), 'Nach der Auswahl darf kein schwebender Datenschutz-Schalter stehen bleiben.');
 expect(/openConsentSettings\(\)/.test(footer), 'Die Datenschutz-Auswahl muss dezent über den Footer erneut erreichbar bleiben.');
 expect(/text-contents=\{language === 'en'/.test(nitaWidget), 'Nitas Widget-Bedienung muss auf englischen Seiten englisch beschriftet sein.');
+expect(/const language = pathname === '\/en' \|\| pathname\.startsWith\('\/en\/'\) \? 'en' : 'de'/.test(nitaWidget), 'Widget-Sprache und Nita-Kontext müssen dieselbe strikte /en-Routengrenze verwenden.');
+expect(/dynamic-variables=\{JSON\.stringify\(activeNitaContext\)\}/.test(nitaWidget), 'Nita muss den freigegebenen Seitenkontext als Dynamic Variables erhalten.');
+expect(/override-first-message=\{buildNitaFirstMessage\(activeNitaContext\)\}/.test(nitaWidget), 'Nita muss nach dem bestehenden Hilfetext mit einer passenden, fest vorgegebenen Begrüßung fortfahren.');
+expect(/const pendingContextRef = useRef\(activeNitaContext\)[\s\S]*?const activateWidgetWithContext = \(context\) => \{[\s\S]*?setActiveNitaContext\(context\)/.test(nitaWidget), 'Der ausgewählte Nita-Kontext muss vor dem Widget-Start stabil aktiviert werden.');
+expect(/const handleAllow = \(\) => \{[\s\S]*?activateWidgetWithContext\(pendingContextRef\.current\)/.test(nitaWidget), 'Nach der ElevenLabs-Freigabe muss Nita mit dem zuvor gewählten Seitenkontext starten.');
+expect(/useLayoutEffect\(\(\) => \{[\s\S]*?if \(!widgetActivationPending\) return;[\s\S]*?setWidgetActivated\(true\)/.test(nitaWidget), 'Nita darf erst nach dem Rendern des aktuellen Kontextes aktiviert werden.');
+expect(/const lastContextPathRef = useRef\(pathname\)[\s\S]*?lastContextPathRef\.current = pathname;[\s\S]*?const nextContext = buildNitaContext\(pathname, 'global_launcher'\);[\s\S]*?setActiveNitaContext\(nextContext\)/.test(nitaWidget), 'Bei einem SPA-Seitenwechsel muss Nita vor dem nächsten Gespräch den neuen Seitenkontext erhalten.');
 expect(/AMBULANT_CTA_DELAY_MS\s*=\s*30_000/.test(header), 'Der mobile Ambulant-CTA muss 30 Sekunden verzögert werden.');
 expect(/isAmbulant\s*&&\s*showSolidHeader\s*&&\s*ambulantCtaReady/.test(header), 'Der mobile Ambulant-CTA darf erst im dunklen Header nach Ablauf der Wartezeit erscheinen.');
 expect(/ambulant-header-mobile/.test(header), 'Die Ambulant-Seite braucht mobil einen Tarif-CTA im Header.');
@@ -80,7 +106,7 @@ expect(/!isDentalCheckRoute && \(/.test(footer), 'Auch der Footer-Link zu Cookie
 expect(/settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Auch der Einstellungsdialog muss im Zahn-Check ausgeblendet bleiben.');
 expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\['\/zahn', '\/en\/dental'\]\)/.test(analytics), 'Beide Zahn-Check-Routen müssen in der Analytics-Sperrliste stehen.');
 expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sperre muss das GA4-Deaktivierungsflag setzen.');
-expect(/requestNitaConsent\(\)/.test(miaPrompt), 'Der bestehende Nita-Prompt muss den Consent-Flow verwenden.');
+expect(/requestNitaConsent\('delayed_prompt'\)/.test(miaPrompt), 'Der bestehende Nita-Prompt muss seinen freigegebenen Einstieg an Nita weitergeben.');
 expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler Launcher müssen sich gegenseitig ausschließen.');
 expect(/healio-mobile-menu-active/.test(header), 'Das mobile Menü muss externe Overlays während der Navigation ausblenden.');
 expect(/html\.healio-mobile-menu-active \.healio-nita-surface/.test(nitaWidget), 'Das mobile Menü muss den globalen Nita-Punkt auch visuell und interaktiv ausblenden.');
