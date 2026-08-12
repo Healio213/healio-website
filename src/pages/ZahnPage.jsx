@@ -128,16 +128,18 @@ const ZahnPage = () => {
 
         <FadeInUp><QualityCooperationSection variant="zahn" /></FadeInUp>
 
-        <FadeInUp>
-          <ErklaervideoSection
-            video="/erklaervideo-zahn.mp4"
-            poster="/images/erklaervideo-zahn-poster.jpg"
-            titel="Welcher Zahnschutz passt zu dir?"
-            untertitel="Nita zeigt dir in drei Minuten, welcher Weg deiner ist und wie du ihn gehst."
-            dauer="3 Minuten"
-            trackingLabel="erklaervideo-zahn"
-          />
-        </FadeInUp>
+        {lang === 'de' && (
+          <FadeInUp>
+            <ErklaervideoSection
+              video="/erklaervideo-zahn.mp4"
+              poster="/images/erklaervideo-zahn-poster.jpg"
+              titel="Welcher Zahnschutz passt zu dir?"
+              untertitel="Nita zeigt dir in drei Minuten, welcher Weg deiner ist und wie du ihn gehst."
+              dauer="3 Minuten"
+              trackingLabel="erklaervideo-zahn"
+            />
+          </FadeInUp>
+        )}
 
         <FadeInUp><DentalZahnCheck /></FadeInUp>
 
@@ -159,7 +161,7 @@ const ZahnPage = () => {
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>
 
-        <FadeInUp><Testimonials headline={t('testimonials.headline')} /></FadeInUp>
+        {lang === 'de' && <FadeInUp><Testimonials headline={t('testimonials.headline')} /></FadeInUp>}
 
         <FadeInUp><Faq /></FadeInUp>
         <FadeInUp><DentalContactForm /></FadeInUp>

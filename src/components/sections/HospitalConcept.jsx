@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Award, ExternalLink } from 'lucide-react';
+import { Check, ArrowRight, Award, ChevronDown, ExternalLink } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const exampleCards = [
@@ -109,103 +109,126 @@ const HospitalConcept = () => {
           </motion.div>
 
           {/* Realistische Modellrechnungen für freiwillige Wahlleistungen */}
-          <div className="mx-auto mb-12 max-w-5xl">
-            <div className="mx-auto mb-7 max-w-3xl text-center">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-healio-primary">
-                {t('concept.examplesEyebrow')}
-              </p>
-              <h3 className="text-2xl font-extrabold text-slate-900 md:text-3xl">
-                {t('concept.examplesTitle')}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
+          <details className="group mx-auto mb-6 max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-inset sm:px-7 [&::-webkit-details-marker]:hidden">
+              <span>
+                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-healio-primary">
+                  {t('concept.examplesEyebrow')}
+                </span>
+                <span className="mt-1 block text-lg font-extrabold text-slate-900 sm:text-xl">
+                  {t('concept.examplesTitle')}
+                </span>
+                <span className="mt-1 block text-sm font-semibold text-healio-primary group-open:hidden">
+                  {t('concept.examplesShow')}
+                </span>
+                <span className="mt-1 hidden text-sm font-semibold text-healio-primary group-open:block">
+                  {t('concept.examplesHide')}
+                </span>
+              </span>
+              <ChevronDown className="h-5 w-5 flex-shrink-0 text-healio-primary transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+
+            <div className="border-t border-slate-100 px-5 pb-6 pt-5 sm:px-7 sm:pb-7">
+              <p className="mx-auto mb-7 max-w-3xl text-center text-sm leading-relaxed text-slate-600 md:text-base">
                 {t('concept.examplesSubtitle')}
               </p>
-            </div>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              {exampleCards.map((example, index) => {
-                const details = t(`concept.examples.${example.key}`, { returnObjects: true });
-                const rows = Array.isArray(details?.rows) ? details.rows : [];
+              <div className="grid gap-6 md:grid-cols-2">
+                {exampleCards.map((example, index) => {
+                  const details = t(`concept.examples.${example.key}`, { returnObjects: true });
+                  const rows = Array.isArray(details?.rows) ? details.rows : [];
 
-                return (
-                  <motion.article
-                    key={example.key}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.08 }}
-                    viewport={{ once: true }}
-                    className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_18px_45px_rgba(35,48,67,0.09)]"
-                  >
-                    <div className="flex items-start gap-4 border-b border-slate-100 bg-gradient-to-br from-emerald-50/70 via-white to-violet-50/60 p-5 sm:p-6">
-                      <FriendlyIcon emoji={example.emoji} tone={example.tone} size="sm" />
-                      <div>
-                        <p className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.17em] text-healio-primary">
-                          {details?.eyebrow}
-                        </p>
-                        <h4 className="text-lg font-extrabold leading-snug text-slate-900 sm:text-xl">
-                          {details?.title}
-                        </h4>
+                  return (
+                    <motion.article
+                      key={example.key}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.08 }}
+                      viewport={{ once: true }}
+                      className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_18px_45px_rgba(35,48,67,0.09)]"
+                    >
+                      <div className="flex items-start gap-4 border-b border-slate-100 bg-gradient-to-br from-emerald-50/70 via-white to-violet-50/60 p-5 sm:p-6">
+                        <FriendlyIcon emoji={example.emoji} tone={example.tone} size="sm" />
+                        <div>
+                          <p className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.17em] text-healio-primary">
+                            {details?.eyebrow}
+                          </p>
+                          <h4 className="text-lg font-extrabold leading-snug text-slate-900 sm:text-xl">
+                            {details?.title}
+                          </h4>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="flex flex-1 flex-col p-5 sm:p-6">
-                      <dl className="space-y-3 text-sm">
-                        {rows.map((row) => (
-                          <div key={`${example.key}-${row.label}`} className="flex items-start justify-between gap-4 border-b border-slate-100 pb-3 last:border-0">
-                            <dt className="leading-relaxed text-slate-600">{row.label}</dt>
-                            <dd className="max-w-[42%] text-right font-semibold leading-relaxed text-slate-900">{row.value}</dd>
+                      <div className="flex flex-1 flex-col p-5 sm:p-6">
+                        <dl className="space-y-3 text-sm">
+                          {rows.map((row) => (
+                            <div key={`${example.key}-${row.label}`} className="flex items-start justify-between gap-4 border-b border-slate-100 pb-3 last:border-0">
+                              <dt className="leading-relaxed text-slate-600">{row.label}</dt>
+                              <dd className="max-w-[42%] text-right font-semibold leading-relaxed text-slate-900">{row.value}</dd>
+                            </div>
+                          ))}
+                        </dl>
+
+                        <div className="mt-5 rounded-2xl bg-rose-50/80 p-4 ring-1 ring-rose-100">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm font-bold text-slate-700">{details?.withoutLabel}</span>
+                            <span className="text-xl font-extrabold text-rose-600">{details?.withoutValue}</span>
                           </div>
-                        ))}
-                      </dl>
+                        </div>
 
-                      <div className="mt-5 rounded-2xl bg-rose-50/80 p-4 ring-1 ring-rose-100">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="text-sm font-bold text-slate-700">{details?.withoutLabel}</span>
-                          <span className="text-xl font-extrabold text-rose-600">{details?.withoutValue}</span>
+                        <div className="mt-3 rounded-2xl bg-emerald-50 p-4 ring-1 ring-emerald-100">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm font-bold text-slate-800">{details?.withLabel}</span>
+                            <span className="text-xl font-extrabold text-healio-primary">{details?.withValue}</span>
+                          </div>
+                          <p className="mt-2 text-xs leading-relaxed text-slate-600">{details?.note}</p>
                         </div>
                       </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
 
-                      <div className="mt-3 rounded-2xl bg-emerald-50 p-4 ring-1 ring-emerald-100">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="text-sm font-bold text-slate-800">{details?.withLabel}</span>
-                          <span className="text-xl font-extrabold text-healio-primary">{details?.withValue}</span>
-                        </div>
-                        <p className="mt-2 text-xs leading-relaxed text-slate-600">{details?.note}</p>
-                      </div>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
-
-            <div className="mt-5 rounded-2xl border border-slate-200 bg-white/80 p-4 text-center text-xs leading-relaxed text-slate-500 sm:px-6">
-              <p>{t('concept.examplesSourceIntro')}</p>
-              <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-semibold text-slate-600">
-                <a href="https://www.bundesgesundheitsministerium.de/abrechnung-krankenhausleistungen/seite" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
-                  {t('concept.examplesSourceBmg')} <ExternalLink className="h-3 w-3" />
-                </a>
-                <a href="https://www.helios-gesundheit.de/standorte-angebote/kliniken/rottweil/aufenthalt/komfortbereich/zimmerwahl/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
-                  {t('concept.examplesSourceClinic')} <ExternalLink className="h-3 w-3" />
-                </a>
-                <a href="https://www.sdk.de/downloads/Bedingungen/Tarifbeschreibung-Krankenhauszusatzversicherung-SPU-1.671g.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
-                  {t('concept.examplesSourceTariff')} <ExternalLink className="h-3 w-3" />
-                </a>
+              <div className="mt-5 rounded-2xl border border-slate-200 bg-white/80 p-4 text-center text-xs leading-relaxed text-slate-500 sm:px-6">
+                <p>{t('concept.examplesSourceIntro')}</p>
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-semibold text-slate-600">
+                  <a href="https://www.bundesgesundheitsministerium.de/abrechnung-krankenhausleistungen/seite" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
+                    {t('concept.examplesSourceBmg')} <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <a href="https://www.helios-gesundheit.de/standorte-angebote/kliniken/rottweil/aufenthalt/komfortbereich/zimmerwahl/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
+                    {t('concept.examplesSourceClinic')} <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <a href="https://www.sdk.de/downloads/Bedingungen/Tarifbeschreibung-Krankenhauszusatzversicherung-SPU-1.671g.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-healio-primary">
+                    {t('concept.examplesSourceTariff')} <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          </details>
 
           {/* Besonderheiten */}
-          <div className="bg-white rounded-2xl shadow-md p-8 max-w-4xl mx-auto border border-gray-100">
-            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">{t('concept.besonderheitenTitle')}</h3>
-            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+          <details className="group mx-auto max-w-4xl overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-inset sm:px-8 [&::-webkit-details-marker]:hidden">
+              <span>
+                <span className="block text-lg font-bold text-slate-900 sm:text-xl">{t('concept.besonderheitenTitle')}</span>
+                <span className="mt-1 block text-sm font-semibold text-healio-primary group-open:hidden">
+                  {t('concept.besonderheitenShow')}
+                </span>
+                <span className="mt-1 hidden text-sm font-semibold text-healio-primary group-open:block">
+                  {t('concept.besonderheitenHide')}
+                </span>
+              </span>
+              <ChevronDown className="h-5 w-5 flex-shrink-0 text-healio-primary transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="grid gap-4 border-t border-slate-100 px-5 pb-6 pt-5 text-sm sm:grid-cols-2 sm:px-8 sm:pb-8">
               {Array.isArray(besonderheiten) && besonderheiten.map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" />
+                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-healio-primary" />
                   <span className="text-slate-700">{item}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </details>
         </div>
       </div>
     </section>

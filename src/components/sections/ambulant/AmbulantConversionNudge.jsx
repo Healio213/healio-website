@@ -51,7 +51,7 @@ const AmbulantConversionNudge = () => {
                 {t('conversionNudge.ctaCalculate')}
               </a>
               <a
-                href="#healio-konzept"
+                href="#tarif-tabelle"
                 className="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-white px-5 py-3 font-bold text-slate-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-700 md:px-6"
               >
                 {t('conversionNudge.ctaUnderstand')}

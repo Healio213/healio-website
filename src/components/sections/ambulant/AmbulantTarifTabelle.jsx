@@ -11,19 +11,25 @@ import HighlightText from '@/components/ui/HighlightText';
 // desto höher Budget und Beitrag. Beiträge sind altersabhängig; als Beispiel
 // ist nur der verifizierte Beitrag für Ambulant 100 hinterlegt.
 const TIERS = [
-  { key: 'a50', name: 'Ambulant 50', erstattung: '50 %', budget: '1.400 €' },
-  { key: 'a70', name: 'Ambulant 70', erstattung: '70 %', budget: '2.000 €' },
-  { key: 'a90', name: 'Ambulant 90', erstattung: '90 %', budget: '2.600 €' },
-  { key: 'a100', name: 'Ambulant 100', erstattung: '100 %', budget: '3.000 €', beispielBeitrag: '31,64 €', beispielBeitragKind: '20,76 €', empfohlen: true },
+  { key: 'a50', name: 'Ambulant 50', erstattung: '50 %', budget: 1400 },
+  { key: 'a70', name: 'Ambulant 70', erstattung: '70 %', budget: 2000 },
+  { key: 'a90', name: 'Ambulant 90', erstattung: '90 %', budget: 2600 },
+  { key: 'a100', name: 'Ambulant 100', erstattung: '100 %', budget: 3000, beispielBeitrag: 31.64, beispielBeitragKind: 20.76, empfohlen: true },
 ];
 
 const AmbulantTarifTabelle = () => {
-  const { t } = useTranslation('ambulant');
+  const { t, i18n } = useTranslation('ambulant');
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const locale = (i18n.resolvedLanguage || i18n.language || '').startsWith('en') ? 'en-US' : 'de-DE';
+  const formatEuro = (value) => new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: Number.isInteger(value) ? 0 : 2,
+  }).format(value);
 
   return (
-    <section id="tarif-tabelle" className="bg-gray-50 py-16 md:py-24">
+    <section id="tarif-tabelle" className="scroll-mt-24 bg-gray-50 py-16 md:py-24">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-extrabold text-healio-dark mb-4">
@@ -59,15 +65,15 @@ const AmbulantTarifTabelle = () => {
                 </div>
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t('tarifTable.budgetLabel')}</dt>
-                  <dd className="text-2xl font-extrabold text-healio-primary">{t('tarifTable.budgetValue', { budget: tier.budget })}</dd>
+                  <dd className="text-2xl font-extrabold text-healio-primary">{t('tarifTable.budgetValue', { budget: formatEuro(tier.budget) })}</dd>
                 </div>
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-wide text-gray-400">{t('tarifTable.priceLabel')}</dt>
                   {tier.beispielBeitrag ? (
                     <dd className="text-base font-bold text-healio-dark leading-snug">
-                      {t('tarifTable.priceExample', { price: tier.beispielBeitrag })}
+                      {t('tarifTable.priceExample', { price: formatEuro(tier.beispielBeitrag) })}
                       <span className="block text-sm font-medium text-gray-500">
-                        {t('tarifTable.priceExampleKids', { price: tier.beispielBeitragKind })}
+                        {t('tarifTable.priceExampleKids', { price: formatEuro(tier.beispielBeitragKind) })}
                       </span>
                     </dd>
                   ) : (

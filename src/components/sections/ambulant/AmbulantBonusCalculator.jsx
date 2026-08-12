@@ -81,7 +81,7 @@ const AmbulantBonusCalculator = ({
   const [selectedActivities, setSelectedActivities] = useState({});
   const [monatsbeitrag, setMonatsbeitrag] = useState(DEFAULT_MONATSBEITRAG);
   const [beitragEditing, setBeitragEditing] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const beitragInputRef = useRef(null);
   const analyticsTimer = useRef(null);
   const usageTracked = useRef(false);
@@ -163,12 +163,14 @@ const AmbulantBonusCalculator = ({
   const titleParts = rawTitle.split(/<highlight>(.*?)<\/highlight>/);
 
   return (
-    <section id="bonus-calculator" className="bg-white py-12 md:py-24 font-sans">
+    <section id="bonus-calculator" className="scroll-mt-24 bg-white py-12 md:py-24 font-sans">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
         <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
+          aria-expanded={mobileOpen}
+          aria-controls="bonus-calculator-content"
           className="mb-6 flex w-full items-center justify-between gap-4 rounded-2xl border border-emerald-100 bg-white p-5 text-left shadow-lg md:hidden"
         >
           <div>
@@ -211,7 +213,7 @@ const AmbulantBonusCalculator = ({
         </div>
 
         {/* Two Column Layout */}
-        <div className={`${mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
+        <div id="bonus-calculator-content" className={`${mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
 
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
@@ -376,7 +378,7 @@ const AmbulantBonusCalculator = ({
                         onClick={() => setBeitragEditing(true)}
                         className="flex items-center gap-1.5 font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
                       >
-                        <span>{formatEuro(monatsbeitrag)} €/Monat</span>
+                        <span>{formatEuro(monatsbeitrag)} {t('bonusCalculator.perMonth')}</span>
                         <Pencil className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                       </button>
                     )}

@@ -151,16 +151,18 @@ const StationaerPage = () => {
         <ProductTicker variant="stationaer" />
 
         {/* Erklärvideo gleich am Anfang, direkt nach dem Hero (Frank 10.08.) */}
-        <FadeInUp>
-          <ErklaervideoSection
-            video="/erklaervideo-stationaer.mp4"
-            poster="/images/erklaervideo-stationaer-poster.jpg"
-            titel="Privatpatient im Krankenhaus, einfach erklärt"
-            untertitel="Nita zeigt dir, was der Klinik-Tarif leistet und wie du ihn abschließt."
-            dauer="knapp 3 Minuten"
-            trackingLabel="erklaervideo-stationaer"
-          />
-        </FadeInUp>
+        {lang === 'de' && (
+          <FadeInUp>
+            <ErklaervideoSection
+              video="/erklaervideo-stationaer.mp4"
+              poster="/images/erklaervideo-stationaer-poster.jpg"
+              titel="Privatpatient im Krankenhaus, einfach erklärt"
+              untertitel="Nita zeigt dir, was der Klinik-Tarif leistet und wie du ihn abschließt."
+              dauer="knapp 3 Minuten"
+              trackingLabel="erklaervideo-stationaer"
+            />
+          </FadeInUp>
+        )}
 
         <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
 

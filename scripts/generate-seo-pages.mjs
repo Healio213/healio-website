@@ -239,8 +239,8 @@ function generateHtml(route, article = null) {
 
   // Canonical URL
   html = html.replace(
-    /<link rel="canonical" href="[^"]*">/,
-    `<link rel="canonical" href="${e(route.canonical)}">`
+    /<link rel="canonical" href="[^"]*"(?: data-react-helmet="true")?>/,
+    `<link rel="canonical" href="${e(route.canonical)}" data-react-helmet="true">`
   );
 
   // Open Graph Tags
@@ -383,7 +383,7 @@ for (const route of seoRoutes) {
     );
   }
   // Canonical und hreflang entfernen: eine 404-Seite darf auf nichts zeigen.
-  notFound = notFound.replace(/\s*<link rel="canonical" href="[^"]*">/g, '');
+  notFound = notFound.replace(/\s*<link rel="canonical" href="[^"]*"(?: data-react-helmet="true")?>/g, '');
   notFound = notFound.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*"\s*\/?>/g, '');
   notFound = notFound.replace(/<meta name="keywords" content="[^"]*">\n?/, '');
   fs.writeFileSync(path.join(distDir, '404.html'), notFound);

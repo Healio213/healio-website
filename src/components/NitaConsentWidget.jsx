@@ -309,6 +309,17 @@ export const NitaConsentWidget = () => {
           visibility: hidden;
           transform: translateY(0.5rem);
         }
+        @media (max-width: 767px) {
+          .healio-nita-quiet-launcher,
+          .healio-nita-widget {
+            right: 0;
+            bottom: calc(var(--healio-nita-mobile-safe-bottom, 10rem) + env(safe-area-inset-bottom));
+          }
+          .healio-nita-widget elevenlabs-convai {
+            right: 0 !important;
+            bottom: calc(var(--healio-nita-mobile-safe-bottom, 10rem) + env(safe-area-inset-bottom)) !important;
+          }
+        }
         @media (min-width: 768px) {
           .healio-nita-surface {
             right: 1.5rem;

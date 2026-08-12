@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ChevronDown } from 'lucide-react';
 
 const awardSets = {
   zahn: [
@@ -118,11 +119,12 @@ const QualityCooperationSection = ({ variant }) => {
           </div>
         </div>
 
-        <div className="mx-auto mt-7 max-w-6xl md:mt-8">
-          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 md:text-sm">
+        <details className="group mx-auto mt-7 max-w-6xl md:mt-8">
+          <summary className="mx-auto flex min-h-11 w-fit cursor-pointer list-none items-center justify-center gap-2 rounded-lg px-4 text-center text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-700 md:text-sm [&::-webkit-details-marker]:hidden">
             {t('siegel.moreAwardsLabel')}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
+            <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
             {remainingIkkAwards.map((award) => (
               <img
                 key={award.src}
@@ -133,7 +135,7 @@ const QualityCooperationSection = ({ variant }) => {
               />
             ))}
           </div>
-        </div>
+        </details>
       </div>
     </section>
   );

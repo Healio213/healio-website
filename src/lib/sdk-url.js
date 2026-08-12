@@ -1,5 +1,5 @@
-import { getReferrer } from '@/hooks/useReferrer';
 import { trackEvent } from '@/lib/analytics';
+import { readStoredReferrer, sanitizeReferrer } from '@/lib/referrer';
 
 /**
  * Zentrale SDK-URL-Konfiguration für Level Nine Antragsstrecke.
@@ -31,7 +31,7 @@ const IKK_LINK = 'https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=k
  * @returns {string} Vollständige SDK-URL
  */
 export function buildSdkUrl({ tarifTypes, ref } = {}) {
-  const referrer = ref || getReferrer();
+  const referrer = sanitizeReferrer(ref) || readStoredReferrer();
 
   // customValues: JSON → Base64
   // Wenn Referrer vorhanden, in customValues einbetten

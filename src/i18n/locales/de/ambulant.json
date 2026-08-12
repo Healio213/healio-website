@@ -5,10 +5,22 @@
     "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
     "badgeNoWait": "Garantiert ohne Wartezeit",
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
-    "ctaCalculate": "Tarif berechnen",
+    "ctaCalculate": "Beitrag berechnen",
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Gesunde Menschen in der Natur",
-    "ctaBonusCalc": "Bonus berechnen"
+    "ctaBonusCalc": "Bonus berechnen",
+    "ctaCompare": "Tarife vergleichen"
+  },
+  "trust": {
+    "partners": "Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic",
+    "cooperation": "In Kooperation mit",
+    "cooperationText": "IKK classic Bonusprogramm als zentraler Baustein für dein Healio-Gesundheitsbudget.",
+    "moreAwards": "Weitere IKK classic Auszeichnungen"
+  },
+  "explanationVideo": {
+    "title": "So funktioniert dein Gesundheitsbudget",
+    "subtitle": "Nita erklärt dir, was du bekommst und wie du es Schritt für Schritt umsetzt.",
+    "duration": "3 Minuten"
   },
   "trustBar": {
     "ikkPartner": "IKK classic Partner",
@@ -24,7 +36,7 @@
     "ikk": "IKK classic: 3 Mio. Versicherte",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
     "noWait": "Keine Wartezeit, sofort geschützt",
-    "fast": "In nur 3 Minuten abgeschlossen",
+    "fast": "Beitrag in wenigen Minuten berechnen",
     "effective": "Effektiv ab 0 € dank IKK Bonus",
     "akupunktur": "Akupunktur inklusive",
     "osteopathie": "Osteopathie & Massagen inklusive",
@@ -37,6 +49,8 @@
     "budgetBadgeLabel": "Gesundheitsbudget in 2 Jahren",
     "showLess": "Weniger anzeigen",
     "showDetails": "Leistungen im Detail",
+    "sdkLabel": "SDK Zusatzversicherung",
+    "ikkLabel": "IKK classic Leistung",
     "heilpraktiker": {
       "title": "Heilpraktiker & Naturheilkunde",
       "desc": "Heilpraktiker, Osteopathie, TCM, Chiropraktik, Akupunktur",
@@ -242,8 +256,8 @@
     "kicker": "Die wichtigste Kostenfrage",
     "title": "<highlight>Selbst zahlen</highlight> oder schlauer lösen?",
     "text": "Wenn du Heilpraktiker, Brille oder Vorsorge ohnehin nutzt, ist die zentrale Frage: Warum diese Rechnungen allein tragen? Mit dem ambulanten Tarif baust du dir bis zu <highlight>3.000 EUR Gesundheitsbudget</highlight> auf; der IKK-classic-Bonus kann deinen Beitrag im besten Fall wieder ausgleichen.",
-    "ctaCalculate": "Tarif berechnen",
-    "ctaUnderstand": "Konzept verstehen",
+    "ctaCalculate": "Beitrag berechnen",
+    "ctaUnderstand": "Tarife vergleichen",
     "note": "Du schließt nicht einfach irgendetwas Zusätzliches ab. Du wandelst typische Selbstzahler-Rechnungen in ein nutzbares Gesundheitsbudget um.",
     "items": {
       "selfPay": {
@@ -288,6 +302,7 @@
         "desc": "Der Bonus ist nicht der Tarif selbst, sondern der Hebel, der deinen Beitrag je nach Bonushöhe ganz oder teilweise ausgleichen kann."
       }
     },
+    "noteLabel": "Hinweis",
     "hinweis": "Healio ist keine Krankenkasse. Healio hilft dir, den ambulanten SDK-Tarif und den IKK-classic-Bonus sinnvoll zusammenzubringen.",
     "section3Title": "Was ist typischerweise abgedeckt?",
     "coverage": {
@@ -340,7 +355,7 @@
       },
       "step2": {
         "title": "Ambulanten Tarif abschließen",
-        "desc": "Der SDK-Schutz startet ohne Wartezeit. Ab Versicherungsbeginn kannst du versicherte Leistungen nutzen."
+        "desc": "Du beantwortest die Gesundheitsfragen wahrheitsgemäß und sendest den Antrag ab. Nach Annahme startet der Schutz zum bestätigten Versicherungsbeginn – ohne Wartezeit."
       },
       "step3": {
         "title": "Gesundheit nutzen",
@@ -507,13 +522,14 @@
     "yourBonus": "Dein möglicher Bonus:",
     "tariffInfo": "Tarif Ambulant 100 (AP1), 100 % Erstattung",
     "yourMonthly": "Dein Monatsbeitrag:",
+    "perMonth": "€/Monat",
     "yearlyContribution": "= Jahresbeitrag:",
     "yourBonusLabel": "Dein Bonus:",
     "resultLabel": "Ergebnis:",
     "resultPlus": "Plus",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
     "bonusPayout": "Dein Bonus wird ausgezahlt oder als Zuschuss für gezahlte Beiträge deiner Zusatzversicherung genutzt. So kann dein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren effektiv deutlich günstiger werden.",
-    "ctaCalculate": "Tarif berechnen",
+    "ctaCalculate": "Beitrag berechnen",
     "ctaSwitchIKK": "IKK-Bonus sichern",
     "effectiveTitle": "Unterm Strich für dich",
     "effectiveCosts": "Deine effektiven Kosten im Jahr",
@@ -621,6 +637,7 @@
     }
   },
   "ikkWechsel": {
+    "stepLabel": "Schritt {{number}}",
     "badge": "Krankenkassenwechsel leicht gemacht",
     "title": "Du bleibst gesetzlich versichert und nutzt den <highlight>besseren Bonus</highlight>",
     "subtitle": "Du verlässt nicht das gesetzliche System. Du wechselst nur zu der Kasse, deren Bonus besser zu deinem gewünschten Zusatzschutz passt.",
@@ -637,6 +654,8 @@
     "reassuranceText": "Deine gesetzliche Grundversorgung bleibt bestehen. Ärzte, Fachärzte, Kliniken, Rezepte und laufende Behandlungen bleiben der sichere Rahmen. Der Unterschied liegt vor allem in den Extras, im Bonusprogramm und darin, wie gut die Kasse den Beitrag zu deinem Zusatzschutz unterstützt.",
     "ctaBonus": "IKK-Bonus sichern",
     "ctaTimeline": "Wechselstrecke verstehen",
+    "detailsShow": "Kassenwechsel im Detail",
+    "detailsHide": "Details ausblenden",
     "reassuranceItems": {
       "system": {
         "title": "Du bleibst gesetzlich versichert",
@@ -834,11 +853,11 @@
     "noHiddenCosts": "Keine versteckten Kosten",
     "personalAdvice": "Persönliche Beratung",
     "startNow": "Sofort starten",
-    "ctaCalculate": "Tarif berechnen",
+    "ctaCalculate": "Beitrag berechnen & Antrag starten",
     "ctaCallback": "Rückruf anfordern"
   },
   "stickyButton": {
-    "ctaCalculate": "Tarif berechnen"
+    "ctaCalculate": "Beitrag berechnen"
   },
   "ikkServices": {
     "badge": "Kostenlose IKK-Extras",
@@ -932,7 +951,7 @@
     "priceOnRequest": "Altersabhängig, exakt in 2 Minuten im SDK-Rechner",
     "recommended": "Meistgewählt",
     "noWait": "Ohne Wartezeit",
-    "cta": "Beitrag in 2 Minuten berechnen",
+    "cta": "Beitrag berechnen & Antrag starten",
     "footnote": "Alle Beiträge sind altersabhängig. Beispielbeiträge für den Tarif Ambulant 100, Stand 2026. Die Budgets gelten je 2 Jahre laut SDK-Tarifbedingungen; deinen exakten Beitrag zeigt dir die SDK-Rechenstrecke vor dem Abschluss."
   }
 }

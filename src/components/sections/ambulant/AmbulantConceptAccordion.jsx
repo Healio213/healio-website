@@ -110,7 +110,7 @@ const AmbulantConceptAccordion = () => {
                   })}
                 </div>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
-                  <strong>Hinweis:</strong> {t('conceptAccordion.hinweis')}
+                  <strong>{t('conceptAccordion.noteLabel')}:</strong> {t('conceptAccordion.hinweis')}
                 </div>
               </AccordionContent>
             </AccordionItem>

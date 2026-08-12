@@ -43,6 +43,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
   const { t } = useTranslation('ambulant');
   const [openIndex, setOpenIndex] = useState(null);
   const [mobileTimelineOpen, setMobileTimelineOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const activeVariant = ['ambulant', 'zahn', 'stationaer'].includes(variant) ? variant : 'ambulant';
 
   const identicalItems = t('ikkWechsel.identicalItems', { returnObjects: true });
@@ -57,7 +58,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
       <div className="container mx-auto px-4 max-w-6xl">
 
         {/* Header */}
-        <div className="text-center mb-8 md:mb-16">
+        <div className="text-center mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
             <Shield className="w-4 h-4" />
             {t('ikkWechsel.badge')}
@@ -68,8 +69,38 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
             <HighlightText text={t('ikkWechsel.subtitle')} />
           </p>
+
+          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+            <a
+              href={IKK_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+            >
+              {t('ikkWechsel.ctaBonus')}
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </a>
+            <button
+              type="button"
+              onClick={() => setDetailsOpen((value) => !value)}
+              aria-expanded={detailsOpen}
+              aria-controls="ikk-wechsel-details"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-emerald-200 bg-white px-6 py-3 font-bold text-slate-800 transition-colors hover:border-emerald-400 hover:text-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+            >
+              {detailsOpen ? t('ikkWechsel.detailsHide') : t('ikkWechsel.detailsShow')}
+              <ChevronDown
+                className={`ml-2 h-5 w-5 transition-transform ${detailsOpen ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
+            </button>
+          </div>
         </div>
 
+        <div
+          id="ikk-wechsel-details"
+          className={detailsOpen ? 'block' : 'hidden'}
+          aria-hidden={!detailsOpen}
+        >
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,9 +150,11 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
         >
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-200/30 to-transparent" />
           <div className="relative z-10 space-y-8">
-            <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
-              <IkkSwitch3DScene variant={activeVariant} />
-            </Suspense>
+            {detailsOpen && (
+              <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
+                <IkkSwitch3DScene variant={activeVariant} />
+              </Suspense>
+            )}
 
             <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
               <div>
@@ -248,7 +281,9 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                     size="md"
                     className="mx-auto mb-4"
                   />
-                  <div className="text-sm font-bold text-emerald-600 mb-1">Schritt {idx + 1}</div>
+                  <div className="text-sm font-bold text-emerald-600 mb-1">
+                    {t('ikkWechsel.stepLabel', { number: idx + 1 })}
+                  </div>
                   <h4 className="font-bold text-gray-900 mb-2">{t(`ikkWechsel.switchSteps.${key}.title`)}</h4>
                   <p className="text-gray-600 text-sm">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
                 </div>
@@ -384,6 +419,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               </div>
             ))}
           </div>
+        </div>
         </div>
 
       </div>

@@ -276,6 +276,10 @@
     "title": "Need dental work? It is not too late for insurance.",
     "intro": "Many people assume that insurance is no longer possible once treatment has been recommended. Depending on the timing, an immediate-cover route may still be available. Healio gives you a clear, factual assessment for both situations.",
     "question": "One question decides: Has your dentist recommended or started a treatment within the last 2 years?",
+    "details": {
+      "show": "Show benefits and important details",
+      "hide": "Hide benefits and important details"
+    },
     "sofort": {
       "answer": "Yes, treatment has been recommended or is already underway",
       "label": "Immediate cover for urgent cases",
@@ -327,6 +331,8 @@
     "finder": {
       "title": "Still unsure? Decide by what you need",
       "subtitle": "Eight typical situations, one clear recommendation.",
+      "show": "Open needs guide",
+      "hide": "Close needs guide",
       "recommendation": "Our recommendation",
       "items": [
         {
@@ -377,6 +383,8 @@
   "benefits": {
     "title": "Dental insurance: what statutory insurance does not cover.",
     "subtitle": "Statutory insurance only covers the basic rate for dentures. Depending on your situation, die Bayerische or UKV covers the rest.",
+    "moreShow": "Show more benefits",
+    "moreHide": "Hide additional benefits",
     "noWait": {
       "title": "Immediate cover possible",
       "desc": "The ZAHN Sofort module of die Bayerische even covers treatments that have already been recommended or started, with up to €1,500 towards them. Important: sign up first, receive the invoice afterwards."

@@ -256,22 +256,44 @@ const Header = () => {
           >
             {t('langSwitch')}
           </button>
-          <Button
-            asChild
-            className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
-          >
-            {isHome ? (
-              <a href="#schutz">
-                {ctaLabel}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </a>
-            ) : (
-              <Link to={ctaPath}>
-                {ctaLabel}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            )}
-          </Button>
+          {isAmbulant ? (
+            <AnimatePresence initial={false}>
+              {showSolidHeader && ambulantCtaReady && (
+                <motion.a
+                  href={ambulantSdkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackSdkClick('ambulant-header-desktop', referrer)}
+                  initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
+                  data-ambulant-header-cta="desktop"
+                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#10B981] px-6 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-colors hover:bg-[#059669] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <Calculator className="mr-2 h-4 w-4" aria-hidden="true" />
+                  {lang === 'de' ? 'Beitrag berechnen' : 'Quote (German form)'}
+                </motion.a>
+              )}
+            </AnimatePresence>
+          ) : (
+            <Button
+              asChild
+              className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
+            >
+              {isHome ? (
+                <a href="#schutz">
+                  {ctaLabel}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </a>
+              ) : (
+                <Link to={ctaPath}>
+                  {ctaLabel}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Link>
+              )}
+            </Button>
+          )}
         </div>
 
         <AnimatePresence initial={false}>
@@ -285,12 +307,13 @@ const Header = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -6, scale: 0.96 }}
               transition={{ duration: 0.24, ease: 'easeOut' }}
-              className="absolute right-[7.75rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
-              aria-label={lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}
+              data-ambulant-header-cta="mobile"
+              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+              aria-label={lang === 'de' ? 'Beitrag berechnen' : 'Get quote – German form'}
             >
               <Calculator className="h-4 w-4" aria-hidden="true" />
-              <span className="min-[390px]:hidden">{lang === 'de' ? 'Tarif' : 'Plan'}</span>
-              <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Tarif berechnen' : 'Calculate plan'}</span>
+              <span className="min-[390px]:hidden">{lang === 'de' ? 'Beitrag' : 'Quote DE'}</span>
+              <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Beitrag berechnen' : 'Quote (German)'}</span>
             </motion.a>
           )}
         </AnimatePresence>

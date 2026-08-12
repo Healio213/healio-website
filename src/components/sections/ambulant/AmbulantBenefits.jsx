@@ -93,11 +93,11 @@ const BenefitCard = ({ benefit, index, t }) => {
               <div className="flex flex-wrap gap-3 mb-4 pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                  <span className="text-[11px] text-gray-500 font-medium">SDK Zusatzversicherung</span>
+                  <span className="text-[11px] text-gray-500 font-medium">{t('benefits.sdkLabel')}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                  <span className="text-[11px] text-gray-500 font-medium">IKK classic Leistung</span>
+                  <span className="text-[11px] text-gray-500 font-medium">{t('benefits.ikkLabel')}</span>
                 </div>
               </div>
 

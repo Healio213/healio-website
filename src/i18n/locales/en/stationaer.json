@@ -163,7 +163,11 @@
     "examplesSourceBmg": "What statutory insurance covers",
     "examplesSourceClinic": "Published hospital prices",
     "examplesSourceTariff": "Current policy terms",
+    "examplesShow": "View model calculations",
+    "examplesHide": "Hide model calculations",
     "besonderheitenTitle": "What sets the SDK hospital plans apart",
+    "besonderheitenShow": "View all special features",
+    "besonderheitenHide": "Hide special features",
     "besonderheiten": [
       "No waiting periods: full cover from the start of the policy",
       "Private medical treatment by chief physician or attending specialist",
@@ -183,6 +187,8 @@
   "benefits": {
     "title": "Hospital supplementary insurance: private patient status. Without being privately insured.",
     "subtitle": "Anyone who has to go to hospital should focus on recovery, not on the budget. Hospital supplementary insurance gives you access to the best doctors and clinics.",
+    "detailsShow": "View all 8 benefit details",
+    "detailsHide": "Hide benefit details",
     "mainBenefits": {
       "spitzenversorgung": {
         "title": "Top medical care",

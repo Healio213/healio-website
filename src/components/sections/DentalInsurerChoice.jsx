@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Check, ExternalLink, Calculator } from 'lucide-react';
+import { Check, ExternalLink, Calculator, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { BAYERISCHE_URL, UKV_URL, trackZahnEvent } from './dental/dentalLinks';
@@ -80,21 +80,30 @@ const DentalInsurerChoice = () => {
                 </div>
               </div>
               <p className="text-slate-600 leading-relaxed mb-6">{t('insurerChoice.sofort.text')}</p>
-              <ul className="space-y-3 mb-8">
-                {sofortBullets.map((bullet, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                    <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-4 sm:p-5 mb-8">
-                <span className="inline-block bg-[#25c990] text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
-                  {t('insurerChoice.sofort.highlight.badge')}
-                </span>
-                <p className="font-extrabold text-slate-900 mb-1">{t('insurerChoice.sofort.highlight.title')}</p>
-                <p className="text-sm text-slate-700 leading-relaxed">{t('insurerChoice.sofort.highlight.text')}</p>
-              </div>
+              <details className="group mb-8 rounded-xl border border-emerald-200 bg-emerald-50/50">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold text-emerald-950 transition-colors hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
+                  <span className="group-open:hidden">{t('insurerChoice.details.show')}</span>
+                  <span className="hidden group-open:inline">{t('insurerChoice.details.hide')}</span>
+                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-healio-primary transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="border-t border-emerald-200 px-4 pb-4 pt-4">
+                  <ul className="space-y-3">
+                    {sofortBullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-emerald-950">
+                        <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 rounded-xl bg-emerald-50 p-4 sm:p-5">
+                    <span className="inline-block bg-[#25c990] text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
+                      {t('insurerChoice.sofort.highlight.badge')}
+                    </span>
+                    <p className="font-extrabold text-emerald-950 mb-1">{t('insurerChoice.sofort.highlight.title')}</p>
+                    <p className="text-sm text-emerald-950 leading-relaxed">{t('insurerChoice.sofort.highlight.text')}</p>
+                  </div>
+                </div>
+              </details>
               <div className="mt-auto">
                 <Button asChild className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white text-base px-6 py-6 h-auto rounded-xl shadow-[0_4px_14px_rgba(37,201,144,0.4)] transition-all duration-300">
                   <a
@@ -132,23 +141,32 @@ const DentalInsurerChoice = () => {
                 </div>
               </div>
               <p className="text-slate-600 leading-relaxed mb-6">{t('insurerChoice.vorsorge.text')}</p>
-              <ul className="space-y-3 mb-8">
-                {vorsorgeBullets.map((bullet, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                    <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 sm:p-5 mb-8">
-                <span className="inline-block bg-blue-500 text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
-                  {t('insurerChoice.vorsorge.highlight.badge')}
-                </span>
-                <p className="font-extrabold text-slate-900 mb-1">{t('insurerChoice.vorsorge.highlight.title')}</p>
-                <p className="text-sm text-slate-700 leading-relaxed">{t('insurerChoice.vorsorge.highlight.text')}</p>
-              </div>
+              <details className="group mb-8 rounded-xl border border-blue-200 bg-blue-50/50">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold text-blue-950 transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
+                  <span className="group-open:hidden">{t('insurerChoice.details.show')}</span>
+                  <span className="hidden group-open:inline">{t('insurerChoice.details.hide')}</span>
+                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-blue-500 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="border-t border-blue-200 px-4 pb-4 pt-4">
+                  <ul className="space-y-3">
+                    {vorsorgeBullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-blue-950">
+                        <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 rounded-xl bg-blue-50 p-4 sm:p-5">
+                    <span className="inline-block bg-blue-500 text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
+                      {t('insurerChoice.vorsorge.highlight.badge')}
+                    </span>
+                    <p className="font-extrabold text-blue-950 mb-1">{t('insurerChoice.vorsorge.highlight.title')}</p>
+                    <p className="text-sm text-blue-950 leading-relaxed">{t('insurerChoice.vorsorge.highlight.text')}</p>
+                  </div>
+                </div>
+              </details>
               <div className="mt-auto">
-                <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-healio-primary hover:bg-emerald-50 text-slate-900 text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
+                <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-healio-primary hover:text-healio-primary text-slate-900 text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
                   <a
                     href={UKV_URL}
                     target="_blank"
@@ -165,32 +183,36 @@ const DentalInsurerChoice = () => {
           </div>
 
           {/* Bedarfs-Finder: welcher Tarif für welche Situation */}
-          <motion.div
+          <motion.details
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-10"
+            className="group mb-10 rounded-2xl border border-slate-200 bg-slate-50/60"
           >
-            <div className="text-center mb-8">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">{t('insurerChoice.finder.title')}</h3>
-              <p className="text-slate-600">{t('insurerChoice.finder.subtitle')}</p>
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-5 text-left transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 md:px-7 [&::-webkit-details-marker]:hidden">
+              <span>
+                <span className="block text-lg font-extrabold text-slate-900 md:text-xl">{t('insurerChoice.finder.title')}</span>
+                <span className="mt-1 block text-sm text-slate-600">{t('insurerChoice.finder.subtitle')}</span>
+              </span>
+              <span className="flex flex-shrink-0 items-center gap-2 text-sm font-bold text-healio-primary">
+                <span className="sr-only group-open:hidden sm:not-sr-only sm:inline">{t('insurerChoice.finder.show')}</span>
+                <span className="hidden group-open:sr-only sm:group-open:not-sr-only sm:group-open:inline">{t('insurerChoice.finder.hide')}</span>
+                <ChevronDown className="h-5 w-5 transition-transform group-open:rotate-180" aria-hidden="true" />
+              </span>
+            </summary>
+            <div className="border-t border-slate-200 px-5 pb-6 pt-5 md:px-7 md:pb-7">
+              <div className="grid md:grid-cols-2 gap-4">
+                {finderItems.map((item, i) => (
+                  <div key={i} className="bg-white rounded-xl border border-slate-200 p-5">
+                    <p className="font-bold text-slate-900 mb-2">{item.situation}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">{t('insurerChoice.finder.recommendation')}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{item.empfehlung}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {finderItems.map((item, i) => (
-                <div
-                  key={i}
-                  className={`bg-white rounded-xl border border-slate-200 p-5 border-l-4 ${
-                    item.weg === 'bayerische' ? 'border-l-[#25c990]' : item.weg === 'ukv' ? 'border-l-blue-500' : 'border-l-slate-400'
-                  }`}
-                >
-                  <p className="font-bold text-slate-900 mb-2">{item.situation}</p>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1">{t('insurerChoice.finder.recommendation')}</p>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item.empfehlung}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          </motion.details>
 
           {/* IKK Bonus Banner */}
           <motion.div

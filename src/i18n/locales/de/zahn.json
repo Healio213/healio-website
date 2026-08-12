@@ -276,6 +276,10 @@
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
     "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für beide Situationen eine klare, sachliche Einordnung.",
     "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
+    "details": {
+      "show": "Leistungen und Besonderheiten anzeigen",
+      "hide": "Leistungen und Besonderheiten ausblenden"
+    },
     "sofort": {
       "answer": "Ja, eine Behandlung ist angeraten oder läuft schon",
       "label": "Sofortschutz für den Ernstfall",
@@ -327,6 +331,8 @@
     "finder": {
       "title": "Noch unsicher? So entscheidest du nach Bedarf",
       "subtitle": "Acht typische Situationen, eine klare Empfehlung.",
+      "show": "Bedarfsfinder öffnen",
+      "hide": "Bedarfsfinder schließen",
       "recommendation": "Unsere Empfehlung",
       "items": [
         {
@@ -377,6 +383,8 @@
   "benefits": {
     "title": "Zahnzusatzversicherung: Was die gesetzliche Kasse nicht zahlt.",
     "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest übernimmt je nach Situation die Bayerische oder die UKV.",
+    "moreShow": "Weitere Leistungen anzeigen",
+    "moreHide": "Weitere Leistungen ausblenden",
     "noWait": {
       "title": "Sofortschutz möglich",
       "desc": "Der Baustein ZAHN Sofort der Bayerischen versichert auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 € Zuschuss. Wichtig: erst abschließen, dann Rechnung erhalten."

@@ -5,10 +5,22 @@
     "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
     "badgeNoWait": "Guaranteed no waiting period",
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
-    "ctaCalculate": "Calculate your plan",
+    "ctaCalculate": "Get quote – German form",
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Healthy people in nature",
-    "ctaBonusCalc": "Calculate bonus"
+    "ctaBonusCalc": "Calculate bonus",
+    "ctaCompare": "Compare plans"
+  },
+  "trust": {
+    "partners": "Our partners: SDK Süddeutsche Krankenversicherung & IKK classic",
+    "cooperation": "In cooperation with",
+    "cooperationText": "The IKK classic bonus programme is a central building block of your Healio health budget.",
+    "moreAwards": "More IKK classic awards"
+  },
+  "explanationVideo": {
+    "title": "How your health budget works",
+    "subtitle": "Nita explains what you receive and how to put it into practice step by step.",
+    "duration": "3 minutes"
   },
   "trustBar": {
     "ikkPartner": "IKK classic Partner",
@@ -24,7 +36,7 @@
     "ikk": "IKK classic, 3 million members",
     "heilpraktiker": "Heilpraktiker 100% covered",
     "noWait": "No waiting period, instant coverage",
-    "fast": "Complete in just 3 minutes",
+    "fast": "Get your quote in a few minutes",
     "effective": "Effectively from €0 thanks to IKK bonus",
     "akupunktur": "Acupuncture included",
     "osteopathie": "Osteopathy & massages included",
@@ -37,6 +49,8 @@
     "budgetBadgeLabel": "health budget over 2 years",
     "showLess": "Show less",
     "showDetails": "Benefits in detail",
+    "sdkLabel": "SDK supplementary insurance",
+    "ikkLabel": "IKK classic benefit",
     "heilpraktiker": {
       "title": "Heilpraktiker & Natural Medicine",
       "desc": "Heilpraktiker, osteopathy, TCM, chiropractic, acupuncture",
@@ -194,8 +208,8 @@
     "kicker": "The key cost question",
     "title": "<highlight>Pay out of pocket</highlight> or solve it smarter?",
     "text": "If you already use alternative medicine, glasses or preventive care, the real question is: why carry those bills alone? With the outpatient plan, you build up to <highlight>3,000 EUR in health budget</highlight>; the IKK classic bonus can offset your premium in the best case.",
-    "ctaCalculate": "Calculate your plan",
-    "ctaUnderstand": "Understand the concept",
+    "ctaCalculate": "Get quote – German form",
+    "ctaUnderstand": "Compare plans",
     "note": "You are not simply adding something extra. You turn typical out-of-pocket bills into a usable health budget.",
     "items": {
       "selfPay": {
@@ -240,6 +254,7 @@
         "desc": "The bonus is not the plan itself, but the lever that can fully or partially offset your premium depending on the bonus amount."
       }
     },
+    "noteLabel": "Note",
     "hinweis": "Healio is not a health insurance fund. Healio helps you combine the outpatient SDK plan and the IKK classic bonus in a meaningful way.",
     "section3Title": "What Is Typically Covered?",
     "coverage": {
@@ -292,7 +307,7 @@
       },
       "step2": {
         "title": "Take out outpatient cover",
-        "desc": "The SDK coverage starts with no waiting period. From the start date, you can use insured benefits."
+        "desc": "You answer the health questions truthfully and submit the application. After acceptance, cover starts on the confirmed insurance start date with no waiting period."
       },
       "step3": {
         "title": "Use your health budget",
@@ -459,13 +474,14 @@
     "yourBonus": "Your potential bonus:",
     "tariffInfo": "Plan Ambulant 100 (AP1), 100% reimbursement",
     "yourMonthly": "Your monthly premium:",
+    "perMonth": "€/month",
     "yearlyContribution": "= Annual premium:",
     "yourBonusLabel": "Your bonus:",
     "resultLabel": "Result:",
     "resultPlus": "Plus",
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
     "bonusPayout": "Your bonus is paid out or used as a subsidy for paid supplementary insurance premiums. This can make your health budget of up to €3,000 over 2 years effectively much cheaper.",
-    "ctaCalculate": "Calculate your plan",
+    "ctaCalculate": "Get quote – German form",
     "ctaSwitchIKK": "Secure your IKK bonus",
     "effectiveTitle": "Your bottom line",
     "effectiveCosts": "Your effective yearly cost",
@@ -573,6 +589,7 @@
     }
   },
   "ikkWechsel": {
+    "stepLabel": "Step {{number}}",
     "badge": "Switching health insurance made easy",
     "title": "You stay publicly insured and use the <highlight>better bonus</highlight>",
     "subtitle": "You are not leaving the statutory system. You are only switching to the fund whose bonus better supports the supplementary cover you want.",
@@ -589,6 +606,8 @@
     "reassuranceText": "Your statutory core coverage stays in place. Doctors, specialists, hospitals, prescriptions and ongoing treatments remain the secure foundation. The real difference is in the extras, the bonus program and how well the fund supports the premium for your supplementary cover.",
     "ctaBonus": "Secure your IKK bonus",
     "ctaTimeline": "Understand the switch timeline",
+    "detailsShow": "Health fund switch details",
+    "detailsHide": "Hide details",
     "reassuranceItems": {
       "system": {
         "title": "You stay publicly insured",
@@ -786,11 +805,11 @@
     "noHiddenCosts": "No hidden costs",
     "personalAdvice": "Personal advice",
     "startNow": "Start now",
-    "ctaCalculate": "Calculate your plan",
+    "ctaCalculate": "Get quote – German form",
     "ctaCallback": "Request callback"
   },
   "stickyButton": {
-    "ctaCalculate": "Calculate your plan"
+    "ctaCalculate": "Quote (German form)"
   },
   "ikkServices": {
     "badge": "Free IKK Extras",
@@ -884,7 +903,7 @@
     "priceOnRequest": "Depends on age, exact quote in 2 minutes in the SDK calculator",
     "recommended": "Most popular",
     "noWait": "No waiting period",
-    "cta": "Calculate your premium in 2 minutes",
+    "cta": "Get quote – German form",
     "footnote": "All premiums depend on age. Example premiums shown for the Ambulant 100 tariff, as of 2026. Budgets apply per 2-year period according to the SDK tariff terms; the SDK application route shows your exact premium before you sign up."
   }
 }

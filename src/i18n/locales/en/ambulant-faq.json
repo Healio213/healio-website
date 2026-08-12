@@ -11,7 +11,7 @@
         },
         {
           "q": "How much does outpatient supplementary insurance cost per month?",
-          "a": "Monthly premiums for SDK outpatient supplementary insurance range from €15 to €50 depending on age and chosen plan. A 30-year-old pays approximately €25 per month for the AP7 plan (70% reimbursement). The special part: Through the IKK classic bonus program, you can receive over €300 per year tax-free. In many cases, the bonus fully covers the premiums, meaning the insurance effectively costs you €0."
+          "a": "Monthly premiums depend on age and the selected plan. Examples for a 30-year-old are €10.36 for Ambulant 50, €15.82 for Ambulant 70 and €31.64 for Ambulant 100 per month. Depending on the activities you complete, the IKK classic bonus can fully or partially offset the premium. Your exact premium is shown before you submit the application."
         },
         {
           "q": "Does statutory health insurance cover Heilpraktiker costs?",
@@ -19,7 +19,7 @@
         },
         {
           "q": "Is the IKK classic bonus tax-free?",
-          "a": "Yes, the IKK classic bonus is completely tax-free. It is paid out as a reward for health-conscious behavior and is not subject to income tax. That means: over €300 per year lands net in your account."
+          "a": "The tax treatment can depend on the type and amount of the bonus as well as your individual situation. IKK classic shows the applicable bonus conditions; for tax questions, please consult a tax professional. The amount you receive depends on the verified activities."
         }
       ]
     },
@@ -32,7 +32,7 @@
         },
         {
           "q": "Is osteopathy covered?",
-          "a": "Yes, osteopathy is covered twice. First through SDK supplementary insurance: 50% to 100% of costs are reimbursed depending on the plan. Second through the IKK classic health account: IKK reimburses osteopathy as part of up to €600 per year."
+          "a": "Yes. Depending on the plan, SDK reimburses 50% to 100% of eligible osteopathy costs within the applicable natural-medicine budget. IKK classic can additionally reimburse up to €160 per calendar year for recognised osteopathic treatment, subject to its current conditions."
         },
         {
           "q": "Can I get new glasses reimbursed?",
@@ -57,7 +57,7 @@
         },
         {
           "q": "Do I need a health check for the supplementary insurance?",
-          "a": "No. SDK outpatient supplementary insurance has no health check and no health questions. You are guaranteed acceptance, even with pre-existing conditions. There are also no waiting periods."
+          "a": "Yes. The SDK application includes health questions that must be answered truthfully. SDK states that it performs a fair assessment without automatic exclusions; pre-existing conditions may lead to an appropriate surcharge. There are no waiting periods, and cover begins on the confirmed insurance start date after acceptance."
         },
         {
           "q": "Do I have to handle everything myself or does someone help me?",

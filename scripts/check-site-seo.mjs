@@ -93,7 +93,10 @@ assert(
 );
 
 const generator = fs.readFileSync(new URL('./generate-seo-pages.mjs', import.meta.url), 'utf8');
+const htmlTemplate = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 assert(generator.includes("path.join(distDir, '404.html')"), 'Der Build muss eine statische 404.html erzeugen.');
 assert(generator.includes('noindex, follow'), 'Die 404-Seite muss noindex erhalten.');
+assert.match(htmlTemplate, /<link rel="canonical" href="https:\/\/healio\.de" data-react-helmet="true">/, 'Das statische Canonical muss von React Helmet übernommen werden, damit clientseitig kein zweites Canonical entsteht.');
+assert(generator.includes('data-react-helmet="true"'), 'Der SEO-Generator muss das von React Helmet verwaltete Canonical erhalten.');
 
 console.log(`SEO-Vertrag erfüllt: ${publicRouterPaths.length} Router-Seiten, ${bilingualPairs.length} Sprachpaare, ${noindexPaths.size} Noindex-Seiten.`);
