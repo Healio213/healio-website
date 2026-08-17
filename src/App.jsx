@@ -11,7 +11,7 @@ import { ConsentManager } from '@/components/ConsentManager';
 import { NitaConsentWidget } from '@/components/NitaConsentWidget';
 import { useReferrer } from '@/hooks/useReferrer';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
-import { setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
+import { trackPageView } from '@/lib/analytics';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -54,7 +54,6 @@ const PageLoader = () => (
 function App() {
   const location = useLocation();
   const lastTrackedPathRef = useRef(null);
-  const isDentalCheckRoute = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -83,15 +82,8 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    setAnalyticsRouteBlocked(isDentalCheckRoute).catch(() => {});
-    return () => {
-      if (isDentalCheckRoute) setAnalyticsRouteBlocked(false).catch(() => {});
-    };
-  }, [isDentalCheckRoute]);
-
-  useEffect(() => {
     const trackCurrentPage = (state) => {
-      if (isDentalCheckRoute || !hasConsent('analytics', state)) {
+      if (!hasConsent('analytics', state)) {
         lastTrackedPathRef.current = null;
         return;
       }
@@ -101,7 +93,7 @@ function App() {
 
     trackCurrentPage(getConsentState());
     return subscribeConsent(trackCurrentPage);
-  }, [isDentalCheckRoute, location.pathname]);
+  }, [location.pathname]);
 
   return (
     <>

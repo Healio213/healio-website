@@ -21,7 +21,7 @@ import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
 import { useReferrer } from '@/hooks/useReferrer';
-import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
+import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const StationaerFaq = () => {
@@ -137,7 +137,7 @@ const StationaerPage = () => {
                     </a>
                   </Button>
                   <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md shadow-xl text-lg px-8 py-6 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto">
-                    <a href={IKK_LINK} target="_blank" rel="noopener noreferrer">
+                    <a href={IKK_LINK} target="_blank" rel="noopener noreferrer" onClick={() => trackIkkClick('stationaer-hero')}>
                       <Gift className="w-5 h-5 mr-2" aria-hidden="true" />
                       {t('hero.ctaBonus')}
                     </a>
@@ -160,6 +160,12 @@ const StationaerPage = () => {
               untertitel="Nita zeigt dir, was der Klinik-Tarif leistet und wie du ihn abschließt."
               dauer="knapp 3 Minuten"
               trackingLabel="erklaervideo-stationaer"
+              cta={{
+                label: 'Beitrag berechnen und Antrag starten',
+                href: sdkUrl,
+                external: true,
+                onClick: () => trackSdkClick('stationaer-video'),
+              }}
             />
           </FadeInUp>
         )}

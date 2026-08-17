@@ -137,6 +137,7 @@ const ZahnPage = () => {
               untertitel="Nita zeigt dir in drei Minuten, welcher Weg deiner ist und wie du ihn gehst."
               dauer="3 Minuten"
               trackingLabel="erklaervideo-zahn"
+              cta={{ label: 'Jetzt den Zahn-Check machen', href: '#zahn-check' }}
             />
           </FadeInUp>
         )}

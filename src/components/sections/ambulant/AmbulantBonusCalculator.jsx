@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
-import { buildSdkUrl, trackSdkClick, IKK_LINK } from '@/lib/sdk-url';
+import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -78,7 +78,21 @@ const AmbulantBonusCalculator = ({
   // Beispielbeitrag der jeweiligen Seite (Ambulant 100: 31,64 EUR, 30 Jahre)
   const DEFAULT_MONATSBEITRAG = defaultMonatsbeitrag;
 
-  const [selectedActivities, setSelectedActivities] = useState({});
+  // Typische Beispiel-Vorauswahl (Conversion-Paket 2, 17.08.2026): Der Rechner
+  // begrüßte Besucher vorher mit 0 EUR Bonus und negativem Ergebnis in Warngelb,
+  // das exakte Gegenteil des Hero-Versprechens. Das UI kennzeichnet die
+  // Vorauswahl ausdrücklich als anpassbares Beispiel.
+  const EXAMPLE_SELECTION = {
+    kurs: true,
+    fitness: true,
+    checkup: true,
+    zahn: 2,
+    hautkrebs: true,
+    blutdruck: true,
+    bmi: true,
+  };
+
+  const [selectedActivities, setSelectedActivities] = useState(EXAMPLE_SELECTION);
   const [monatsbeitrag, setMonatsbeitrag] = useState(DEFAULT_MONATSBEITRAG);
   const [beitragEditing, setBeitragEditing] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -217,7 +231,8 @@ const AmbulantBonusCalculator = ({
 
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
-            <h3 className="text-2xl font-bold text-healio-dark mb-6">{t('bonusCalculator.selectActivities')}</h3>
+            <h3 className="text-2xl font-bold text-healio-dark mb-2">{t('bonusCalculator.selectActivities')}</h3>
+            <p className="mb-6 text-sm font-medium text-gray-500">{t('bonusCalculator.exampleNote')}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ACTIVITIES.map((activity, index) => {
@@ -467,6 +482,20 @@ const AmbulantBonusCalculator = ({
                     href={ikkLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => {
+                      // Funnel-Fix 17.08.2026: erst der Zusatzschutz, dann der
+                      // IKK-Wechsel. Wenn der Erklär-Abschnitt auf der Seite
+                      // existiert, dorthin scrollen statt direkt in den
+                      // Mitgliedsantrag zu springen.
+                      const section = document.getElementById('ikk-wechsel');
+                      if (section) {
+                        e.preventDefault();
+                        section.scrollIntoView({ behavior: 'smooth' });
+                        trackIkkClick('bonusrechner-scroll');
+                      } else {
+                        trackIkkClick('bonusrechner');
+                      }
+                    }}
                     className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10 hover:shadow-md transition-all duration-300 w-full"
                   >
                     <ArrowRightLeft className="w-5 h-5 mr-2" />

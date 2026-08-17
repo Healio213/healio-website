@@ -15,6 +15,7 @@ const ErklaervideoSection = ({
   trackingLabel,
   hintergrund = 'bg-gray-50',
   sectionId,
+  cta,
 }) => {
   const [spielt, setSpielt] = useState(false);
   const videoRef = useRef(null);
@@ -97,6 +98,23 @@ const ErklaervideoSection = ({
               </video>
             )}
           </motion.div>
+
+          {cta && (
+            <div className="mt-6 text-center">
+              <a
+                href={cta.href}
+                target={cta.external ? '_blank' : undefined}
+                rel={cta.external ? 'noopener noreferrer' : undefined}
+                onClick={(event) => {
+                  track('video_cta_click');
+                  if (cta.onClick) cta.onClick(event);
+                }}
+                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-healio-primary px-8 py-3 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                {cta.label}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </section>

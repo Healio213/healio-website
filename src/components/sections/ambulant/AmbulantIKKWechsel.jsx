@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Shield, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
-import { IKK_LINK } from '@/lib/sdk-url';
+import { IKK_LINK, trackIkkClick } from '@/lib/sdk-url';
 
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
 
@@ -75,6 +75,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               href={IKK_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackIkkClick('ikk-wechsel-hero')}
               className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
             >
               {t('ikkWechsel.ctaBonus')}
@@ -172,6 +173,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                     href={IKK_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackIkkClick('ikk-wechsel-detail')}
                     className="inline-flex items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c]"
                   >
                     {t('ikkWechsel.ctaBonus')}

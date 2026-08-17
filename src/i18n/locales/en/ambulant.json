@@ -323,21 +323,6 @@
       }
     },
     "section5Title": "Example Calculation",
-    "exampleCalc": {
-      "tariffName": "Plan: Ambulant 100",
-      "monthlyContribution": "Monthly premium:",
-      "monthlyContributionValue": "€40/month",
-      "yearlyCost": "Annual cost:",
-      "yearlyCostValue": "€480/year",
-      "ikkBonus": "IKK bonus program:",
-      "ikkBonusValue": "up to 700 EUR+ / year",
-      "result": "Result:",
-      "resultValue": "The bonus can fully offset the premium",
-      "benefitsTitle": "Benefits:",
-      "benefit1": "Up to 1,000 EUR for Heilpraktiker and natural medicine",
-      "benefit2": "Up to 500 EUR for glasses and contact lenses",
-      "benefit3": "Up to 3,000 EUR health budget over 2 years"
-    },
     "section6Title": "Why Choose Healio?",
     "whyHealio": {
       "ergebnisse": {
@@ -362,10 +347,15 @@
       }
     }
   },
+  "inlineCta": {
+    "title": "Ready? Your premium takes two minutes to calculate.",
+    "label": "Calculate premium and start application"
+  },
   "bonusCalculator": {
     "title": "Your Personal <highlight>Bonus Calculator</highlight>",
     "subtitle": "This is how the IKK classic bonus works: Select your activities and see instantly how much you can get back!",
     "selectActivities": "Select your activities:",
+    "exampleNote": "A typical example is already selected. Simply adjust it to your own activities.",
     "activities": {
       "impfung": {
         "title": "Vaccination",

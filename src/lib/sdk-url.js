@@ -71,4 +71,18 @@ export function trackSdkClick(page) {
   });
 }
 
+/**
+ * Trackt Klicks auf IKK-Links (Bonusprogramm/Mitgliedsantrag). Die halbe
+ * 3.000-EUR-Story lief bis 17.08.2026 komplett ohne Messung.
+ *
+ * @param {string} placement - z.B. "bonusrechner", "ikk-wechsel", "stationaer"
+ */
+export function trackIkkClick(placement) {
+  return trackEvent('ikk_bonus_click', {
+    component: 'ikk',
+    destination: 'ikk_classic',
+    placement,
+  });
+}
+
 export { IKK_LINK };

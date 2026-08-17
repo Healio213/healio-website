@@ -2,12 +2,15 @@ import React, { useEffect, useRef } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 import HighlightText from '@/components/ui/HighlightText';
 
 const entranceEase = [0.16, 1, 0.3, 1];
 
 const HomeHero = () => {
   const { t, i18n } = useTranslation('home');
+  const { getPath } = useLanguage();
   const reducedMotion = useReducedMotion();
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
@@ -110,7 +113,13 @@ const HomeHero = () => {
           </motion.p>
 
           <motion.p {...entrance(0.27)} className="mt-3 max-w-2xl text-sm leading-6 text-slate-300/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-            {t('hero.disclaimer')}
+            {t('hero.disclaimer')}{' '}
+            <Link
+              to={`${getPath('ambulant')}#bonus-calculator`}
+              className="home-focus font-bold text-home-mint underline underline-offset-4 transition hover:text-white"
+            >
+              {t('hero.bonusCheckCta')}
+            </Link>
           </motion.p>
 
           <motion.div {...entrance(0.31)} className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-3">

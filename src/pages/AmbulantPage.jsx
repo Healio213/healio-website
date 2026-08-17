@@ -11,6 +11,8 @@ import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import ProductTicker from '@/components/sections/ProductTicker';
 import AmbulantConversionNudge from '@/components/sections/ambulant/AmbulantConversionNudge';
 import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
+import { useReferrer } from '@/hooks/useReferrer';
+import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
@@ -56,6 +58,8 @@ const AmbulantPage = () => {
   const { t: tAmbulant } = useTranslation('ambulant');
   const { pathname } = useLocation();
   const { lang } = useLanguage();
+  const referrer = useReferrer();
+  const videoSdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
   const isHeilpraktikerLanding = pathname === '/heilpraktiker-zusatzversicherung';
   const seoTitle = isHeilpraktikerLanding
     ? 'Heilpraktiker Zusatzversicherung – 3.000 € Budget | Vergleich 2026 | Healio'
@@ -168,6 +172,12 @@ const AmbulantPage = () => {
               dauer={tAmbulant('explanationVideo.duration')}
               trackingLabel="erklaervideo-ambulant"
               sectionId="ambulant-erklaervideo"
+              cta={{
+                label: 'Beitrag berechnen und Antrag starten',
+                href: videoSdkUrl,
+                external: true,
+                onClick: () => trackSdkClick('ambulant-video'),
+              }}
             />
           </FadeInUp>
         )}
@@ -190,6 +200,25 @@ const AmbulantPage = () => {
         {/* 4 Highlight-Leistungskarten + Akkordeon */}
         <FadeInUp>
           <AmbulantBenefits />
+        </FadeInUp>
+
+        {/* Zwischen-CTA (Conversion-Paket 2): zwischen Rechner und Seitenende
+            gab es vorher 16 Sektionen ohne einen einzigen Abschlussweg */}
+        <FadeInUp>
+          <section className="py-8 md:py-10">
+            <div className="container mx-auto px-4 text-center">
+              <p className="mb-4 text-lg font-semibold text-healio-dark">{tAmbulant('inlineCta.title')}</p>
+              <a
+                href={videoSdkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackSdkClick('ambulant-inline-benefits')}
+                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-healio-primary px-8 py-3 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                {tAmbulant('inlineCta.label')}
+              </a>
+            </div>
+          </section>
         </FadeInUp>
 
         {/* Konzept: SDK-Tarif und Healio-System erklären */}
@@ -220,6 +249,24 @@ const AmbulantPage = () => {
         {/* FAQ */}
         <FadeInUp>
           <AmbulantFAQ />
+        </FadeInUp>
+
+        {/* Zwischen-CTA nach dem FAQ: Wer bis hier liest, ist kaufbereit */}
+        <FadeInUp>
+          <section className="py-8 md:py-10">
+            <div className="container mx-auto px-4 text-center">
+              <p className="mb-4 text-lg font-semibold text-healio-dark">{tAmbulant('inlineCta.title')}</p>
+              <a
+                href={videoSdkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackSdkClick('ambulant-inline-faq')}
+                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-healio-primary px-8 py-3 text-base font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                {tAmbulant('inlineCta.label')}
+              </a>
+            </div>
+          </section>
         </FadeInUp>
 
         {/* Closing CTA + Footer */}

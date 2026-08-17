@@ -88,8 +88,10 @@ export const ConsentManager = () => {
   const descriptionId = useId();
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
-  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
-  const consentUiActive = (showBanner && !isDentalCheckRoute) || (settingsOpen && !isDentalCheckRoute);
+  // Seit 17.08.2026 (Conversion-Paket 2) erscheint der Banner auch auf /zahn:
+  // Ohne Consent-Chance blieb die Seite dauerhaft unmessbar. Der Zahn-Check
+  // selbst bleibt lokal und sendet weiterhin keine Antworten.
+  const consentUiActive = showBanner || settingsOpen;
 
   useEffect(() => initializeAnalytics(), []);
 
@@ -115,10 +117,6 @@ export const ConsentManager = () => {
     root.classList.toggle('healio-consent-ui-active', consentUiActive);
     return () => root.classList.remove('healio-consent-ui-active');
   }, [consentUiActive]);
-
-  useEffect(() => {
-    if (isDentalCheckRoute) setSettingsOpen(false);
-  }, [isDentalCheckRoute]);
 
   useEffect(() => {
     if (!settingsOpen) return undefined;
@@ -198,9 +196,9 @@ export const ConsentManager = () => {
         }
       `}</style>
 
-      {showBanner && !settingsOpen && !isDentalCheckRoute && (
+      {showBanner && !settingsOpen && (
         <section
-          className="healio-consent-surface fixed inset-x-3 top-[5.25rem] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
+          className="healio-consent-surface fixed inset-x-3 bottom-3 z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:max-w-5xl md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >
@@ -241,7 +239,7 @@ export const ConsentManager = () => {
         </section>
       )}
 
-      {settingsOpen && !isDentalCheckRoute && (
+      {settingsOpen && (
         <div className="healio-consent-surface fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/55 p-0 sm:items-center sm:p-6">
           <section
             ref={dialogRef}

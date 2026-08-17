@@ -1,9 +1,21 @@
 
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '@/config/emailjs';
+import { trackEvent } from '@/lib/analytics';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+
+// GA4-Parameter erlauben nur einfache Token; Umlaute/Leerzeichen im
+// pageSource-Label würden sonst vom Sanitizer verworfen.
+const toPlacementToken = (value) => (
+  String(value || 'unbekannt')
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60) || 'unbekannt'
+);
 
 export const emailjsService = {
   normalizeData: (data, pageSource) => ({
@@ -26,6 +38,10 @@ export const emailjsService = {
           to_email: 'info@healio.de',
         }
       );
+      trackEvent('generate_lead', {
+        component: 'contact_form',
+        placement: toPlacementToken(pageSource),
+      });
       return { success: true, response };
     } catch (error) {
       console.error('EmailJS Error:', error);
