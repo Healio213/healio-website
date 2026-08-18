@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Healio, Your Health Upgrade",
-    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital, effectively 0 € with IKK Bonus."
+    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital. Up to €3,000 health budget, effectively from €0 with your health insurer's bonus."
   },
   "header": {
     "logo": "Healio",
@@ -9,7 +9,7 @@
     "provocation": "Why pay your bills yourself?"
   },
   "trust": {
-    "noWaiting": "No waiting period",
+    "noWaiting": "Outpatient plan without waiting period",
     "noQuestions": ""
   },
   "cards": {
@@ -18,27 +18,27 @@
       "title": "Outpatient",
       "budgetHighlight": "€3,000 Budget",
       "subtitle": "Glasses, alternative medicine, preventive care, osteopathy, pregnancy",
-      "price": "0 €*",
+      "price": "from €0*",
       "period": "effective/month",
-      "badge": "IKK Bonus covers the cost",
+      "badge": "IKK bonus can fully cover the premium*",
       "link": "/en/outpatient"
     },
     "zahn": {
       "icon": "🦷",
-      "title": "DentalUpgrade 90+",
-      "subtitle": "Implants, crowns, bridges, cleaning, 90-100%",
-      "price": "0 €*",
-      "period": "effective/month",
-      "badge": "IKK Bonus covers the cost",
+      "title": "Dental add-on",
+      "subtitle": "Three paths: test winner, entry level or price-performance. Instant-cover module up to €1,500 even for advised treatment",
+      "price": "from ~€10",
+      "period": "per month",
+      "badge": "IKK bonus can cover the premium*",
       "link": "/en/dental"
     },
     "klinik": {
       "icon": "🏥",
-      "title": "HospitalUpgrade Top",
-      "subtitle": "Private room, chief physician, free hospital choice",
-      "price": "0 €*",
-      "period": "effective/month",
-      "badge": "IKK Bonus covers cost 2x",
+      "title": "Hospital cover",
+      "subtitle": "Private room, chief physician, free hospital choice. Kids' accident cover from €0.75",
+      "price": "from €6.84",
+      "period": "per month",
+      "badge": "IKK bonus can cover the accident module*",
       "link": "/en/inpatient"
     }
   },
@@ -48,18 +48,18 @@
       "label": "Outpatient budget"
     },
     "dental": {
-      "value": "90-100%",
-      "label": "Dental coverage"
+      "value": "up to €1,500",
+      "label": "Dental instant cover"
     },
     "bonus": {
       "value": "€700+",
-      "label": "IKK Bonus/year"
+      "label": "IKK bonus/year"
     }
   },
   "poweredBy": "Powered by",
   "sdk": "SDK Insurance",
   "ikk": "IKK classic",
-  "footnote": "* Effectively €0 through IKK classic Bonus Program (€700+/year tax-free)",
+  "footnote": "* How much your bonus is worth depends on your health insurer and your activities. We calculate it individually for you. IKK classic bonus program: €700+/year possible, tax-free.",
   "links": {
     "home": "healio.de",
     "impressum": "Legal Notice"

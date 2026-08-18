@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Healio, Dein Gesundheits-Upgrade",
-    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahnersatz, Chefarzt, effektiv 0 € dank IKK Bonus."
+    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahn, Krankenhaus. Bis zu 3.000 € Gesundheitsbudget, effektiv ab 0 € möglich dank Kassenbonus."
   },
   "header": {
     "logo": "Healio",
@@ -9,7 +9,7 @@
     "provocation": "Warum Rechnungen selber zahlen?"
   },
   "trust": {
-    "noWaiting": "Keine Wartezeit",
+    "noWaiting": "Ambulant-Tarif ohne Wartezeit",
     "noQuestions": ""
   },
   "cards": {
@@ -18,27 +18,27 @@
       "title": "Ambulant",
       "budgetHighlight": "3.000 € Budget",
       "subtitle": "Brille, Heilpraktiker, Vorsorge, Osteopathie, Schwangerschaft",
-      "price": "0 €*",
+      "price": "ab 0 €*",
       "period": "effektiv/Monat",
-      "badge": "IKK Bonus deckt die Kosten",
+      "badge": "IKK-Bonus kann den Beitrag komplett decken*",
       "link": "/ambulant"
     },
     "zahn": {
       "icon": "🦷",
-      "title": "Zahnzusatz: Bayerische & UKV",
-      "subtitle": "Sofortschutz auch bei angeratener Behandlung, bis 1.500 € Zuschuss",
-      "price": "0 €*",
-      "period": "effektiv/Monat",
-      "badge": "IKK Bonus deckt die Kosten",
+      "title": "Zahnzusatz",
+      "subtitle": "Drei Wege: Testsieger, Einstieg oder Preis-Leistung. Sofortschutz-Baustein bis 1.500 € auch bei angeratener Behandlung",
+      "price": "ab ca. 10 €",
+      "period": "pro Monat",
+      "badge": "IKK-Bonus kann den Beitrag decken*",
       "link": "/zahn"
     },
     "klinik": {
       "icon": "🏥",
-      "title": "KlinikUpgrade Top",
-      "subtitle": "Einzelzimmer, Chefarzt, freie Krankenhauswahl",
-      "price": "0 €*",
-      "period": "effektiv/Monat",
-      "badge": "IKK Bonus deckt Kosten 2x",
+      "title": "Krankenhaus-Schutz",
+      "subtitle": "Einbettzimmer, Chefarzt, freie Klinikwahl. Kinder-Unfallschutz ab 0,75 €",
+      "price": "ab 6,84 €",
+      "period": "pro Monat",
+      "badge": "IKK-Bonus kann den Unfall-Baustein decken*",
       "link": "/stationaer"
     }
   },
@@ -53,13 +53,13 @@
     },
     "bonus": {
       "value": "700 €+",
-      "label": "IKK Bonus/Jahr"
+      "label": "IKK-Bonus/Jahr"
     }
   },
   "poweredBy": "Powered by",
   "sdk": "SDK Versicherung",
   "ikk": "IKK classic",
-  "footnote": "* Effektiv 0 € durch IKK classic Bonusprogramm (700+ €/Jahr steuerfrei)",
+  "footnote": "* Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus. IKK classic Bonusprogramm: 700 €+/Jahr möglich, steuerfrei.",
   "links": {
     "home": "healio.de",
     "impressum": "Impressum"
