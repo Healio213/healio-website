@@ -12,6 +12,10 @@ const awardSets = {
       src: '/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg',
       altKey: 'siegel.awards.frankeBornberg',
     },
+    {
+      src: '/siegel/lkh/lkh-stiftung-warentest.png',
+      altKey: 'siegel.awards.lkhWarentest',
+    },
   ],
   stationaer: [
     {

@@ -13,6 +13,7 @@
     "fehlendeZaehne": "UKV: Bis zu 3 fehlende Zähne gegen Zuschlag mitversicherbar",
     "lueckenschluss": "Lückenschluss absicherbar, bevor er angeraten ist",
     "pzr": "UKV Top-Tarife: Zahnreinigung ohne Jahreslimit",
+    "lkhPreis": "Preis-Tipp LKH ZahnUpgrade 90+: SEHR GUT (0,8) bei Stiftung Warentest",
     "zahnersatz": "Zahnersatz je nach Tarif bis zu 100 % erstattet",
     "noWait": "Ausgewählte Tarife ohne Wartezeit",
     "ikkBonus": "Je nach Bonus kann die IKK classic den Beitrag teilweise oder vollständig ausgleichen",
@@ -22,7 +23,7 @@
     "eyebrow": "Vertrauen auf einen Blick",
     "title": "Ausgezeichnete Zahn-Tarife. Starke Kooperation.",
     "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt – und greifen für deinen Schutz sinnvoll ineinander.",
-    "partnersLabel": "Unsere Partner: die Bayerische, UKV & IKK classic",
+    "partnersLabel": "Unsere Partner: die Bayerische, UKV, LKH & IKK classic",
     "awardsLabel": "Aktuelle Auszeichnungen der Zahn-Tarife",
     "cooperationLabel": "In Kooperation mit",
     "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deiner Zahnzusatzversicherung je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
@@ -31,7 +32,8 @@
     "ikkLogoAlt": "Logo der IKK classic",
     "awards": {
       "warentest": "Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, Ausgabe 07/2025",
-      "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 2025"
+      "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 2025",
+      "lkhWarentest": "Stiftung Warentest SEHR GUT, LKH ZahnUpgrade 90+, Siegel Ausgabe 08/2024"
     },
     "ikkAwards": {
       "performance": "Krankenkassentest für Leistung, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
@@ -216,17 +218,18 @@
         "secondaryType": "ukv"
       },
       "preis": {
-        "insurer": "die Bayerische oder UKV",
-        "title": "Günstig starten: ZAHN Smart oder ZahnPRIVAT 75",
-        "text": "Solide Grundabsicherung ab wenigen Euro im Monat, damit dich der Ernstfall nie mit vollen Kosten trifft.",
+        "insurer": "LKH (Landeskrankenhilfe)",
+        "title": "ZahnUpgrade 90+: starke Leistung zum kleinen Beitrag",
+        "text": "Bei gesunden Zähnen und Preis-Fokus ist der LKH ZahnUpgrade 90+ unser Preis-Leistungs-Tipp: Stiftung Warentest bewertet ihn mit SEHR GUT (0,8) und führt ihn als Testsieger der Kategorie Gut und günstig (Finanztest 07/2025).",
         "reasons": [
-          "75 % Erstattung für Zahnersatz und Zahnbehandlung in beiden Varianten",
-          "Mit 30 Jahren zum Beispiel ab rund 10 bis 12 EUR im Monat",
-          "Der IKK Bonus kann den kleinen Beitrag besonders leicht komplett refinanzieren"
+          "90 % für Zahnersatz und Zahnbehandlung, mit gepflegtem Bonusheft steigend auf bis zu 100 %",
+          "Mit 30 Jahren zum Beispiel 13,50 EUR im Monat, da refinanziert der IKK Bonus besonders leicht",
+          "Keine Wartezeiten, schon ab dem 2. Versicherungsjahr bis zu 4.000 EUR Erstattungsrahmen"
         ],
-        "cta": "Bayerische ZAHN Smart berechnen",
-        "ctaType": "bayerische",
-        "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet.",
+        "warning": "Schließe ab, solange nichts angeraten ist. Sobald dein Zahnarzt einen Befund dokumentiert, gelten andere Regeln.",
+        "cta": "LKH ZahnUpgrade 90+ berechnen",
+        "ctaType": "lkh",
+        "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Der ZahnUpgrade 90+ ist dort bereits vorausgewählt.",
         "secondary": "Oder UKV ZahnPRIVAT 75 ansehen",
         "secondaryType": "ukv"
       },
@@ -272,9 +275,9 @@
     }
   },
   "insurerChoice": {
-    "badge": "Sofortschutz und Vorsorge",
+    "badge": "Sofortschutz, Vorsorge und Preis-Tipp",
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
-    "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für beide Situationen eine klare, sachliche Einordnung.",
+    "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für jede Situation eine klare, sachliche Einordnung: Sofortschutz, starke Vorsorge oder unseren Preis-Leistungs-Tipp.",
     "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
     "details": {
       "show": "Leistungen und Besonderheiten anzeigen",
@@ -321,6 +324,27 @@
       },
       "cta": "Tarife ansehen und online abschließen",
       "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Wähle dort den Bereich Zahn."
+    },
+    "preis": {
+      "answer": "Nein, und der Beitrag soll möglichst klein sein",
+      "label": "Der Preis-Leistungs-Tipp",
+      "insurer": "LKH (Landeskrankenhilfe)",
+      "tariff": "ZahnUpgrade 90+",
+      "text": "Der ZahnUpgrade 90+ der LKH bringt 90 % Erstattung für Zahnersatz, Zahnbehandlung und Kinder-Kieferorthopädie zum besonders kleinen Beitrag, mit 30 Jahren zum Beispiel 13,50 EUR im Monat. Stiftung Warentest bewertet den Tarif mit SEHR GUT (0,8), Testsieger der Kategorie Gut und günstig (Finanztest 07/2025).",
+      "bullets": [
+        "90 % für Zahnersatz, Zahnbehandlung und Kinder-Kieferorthopädie, ohne Wartezeit",
+        "Mit gepflegtem Bonusheft steigt die Erstattung: nach 5 Jahren auf 95 %, nach 10 Jahren auf 100 %",
+        "Schon ab dem 2. Versicherungsjahr bis zu 4.000 EUR Erstattungsrahmen, ab dem 5. Jahr unbegrenzt",
+        "Bis zu 3 fehlende Zähne gegen Zuschlag versicherbar",
+        "Professionelle Zahnreinigung und Bleaching mit jährlichem Budget enthalten"
+      ],
+      "highlight": {
+        "badge": "IKK-Bonus-Hebel",
+        "title": "Kleiner Beitrag, große Chance auf volle Refinanzierung",
+        "text": "Je kleiner der Beitrag, desto leichter gleicht ihn der IKK classic Bonus komplett aus. Beim ZahnUpgrade 90+ reicht dafür je nach Bonus schon ein Teil der Maßnahmen. Wie viel bei dir drin ist, rechnest du unten in einer Minute aus."
+      },
+      "cta": "Beitrag berechnen und abschließen",
+      "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Der ZahnUpgrade 90+ ist dort bereits vorausgewählt."
     },
     "ikk": {
       "badge": "bis zu 100 %",
@@ -371,9 +395,9 @@
           "weg": "beide"
         },
         {
-          "situation": "Günstiger Einstieg",
-          "empfehlung": "die Bayerische ZAHN Smart oder UKV ZahnPRIVAT 75: solide Grundabsicherung, mit 30 Jahren beispielsweise ab rund 10 Euro im Monat.",
-          "weg": "beide"
+          "situation": "Günstiger Einstieg mit starker Leistung",
+          "empfehlung": "LKH ZahnUpgrade 90+: 90 % Erstattung, Stiftung Warentest SEHR GUT (0,8) und Testsieger der Kategorie Gut und günstig (Finanztest 07/2025). Mit 30 Jahren zum Beispiel 13,50 Euro im Monat. Noch günstiger, dafür mit 75 % Erstattung: UKV ZahnPRIVAT 75.",
+          "weg": "lkh"
         }
       ]
     },
@@ -382,7 +406,7 @@
   },
   "benefits": {
     "title": "Zahnzusatzversicherung: Was die gesetzliche Kasse nicht zahlt.",
-    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest übernimmt je nach Situation die Bayerische oder die UKV.",
+    "subtitle": "Die GKV übernimmt bei Zahnersatz nur den Regelversorgungssatz. Den Rest übernimmt je nach Situation die Bayerische, die UKV oder die LKH.",
     "moreShow": "Weitere Leistungen anzeigen",
     "moreHide": "Weitere Leistungen ausblenden",
     "noWait": {
@@ -406,8 +430,8 @@
       "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn voll mitversicherbar, die Erstattungs-Staffel bleibt dabei unangetastet. Wichtig: abschließen, bevor der Zahnarzt den Ersatz anrät."
     },
     "unfall": {
-      "title": "Zwei ausgezeichnete Versicherer",
-      "desc": "die Bayerische (Stiftung Warentest SEHR GUT 0,5 für ZAHN Prestige, 07/2025) und die UKV (Franke & Bornberg FFF+ für ZahnPRIVAT 100)."
+      "title": "Drei ausgezeichnete Versicherer",
+      "desc": "die Bayerische (Stiftung Warentest SEHR GUT 0,5 für ZAHN Prestige, 07/2025), die UKV (Franke & Bornberg FFF+ für ZahnPRIVAT 100) und die LKH (Stiftung Warentest SEHR GUT 0,8 für ZahnUpgrade 90+, 07/2025)."
     },
     "gesundheitsfragen": {
       "title": "Faire Annahme",
@@ -426,8 +450,8 @@
         "a": "Ja, genau dafür gibt es unseren Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt."
       },
       {
-        "q": "Welcher Weg passt zu mir: die Bayerische oder die UKV?",
-        "a": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen? Wenn ja, ist die Bayerische mit dem Baustein ZAHN Sofort dein Weg. Wenn nein, sicherst du dir mit der UKV ZahnPRIVAT starke Vorsorge in drei Tarifstufen. Die Tarif-Weiche oben auf dieser Seite führt dich direkt zum passenden Abschluss."
+        "q": "Welcher Weg passt zu mir: die Bayerische, die UKV oder die LKH?",
+        "a": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen? Wenn ja, ist die Bayerische mit dem Baustein ZAHN Sofort dein Weg. Wenn nein, sicherst du dir mit der UKV ZahnPRIVAT starke Vorsorge in drei Tarifstufen, besonders für Familien. Und wenn dir bei gesunden Zähnen vor allem ein kleiner Beitrag wichtig ist, ist der LKH ZahnUpgrade 90+ unser Preis-Leistungs-Tipp (Stiftung Warentest SEHR GUT 0,8, Finanztest 07/2025). Der Zahn-Check oben auf dieser Seite führt dich direkt zum passenden Abschluss."
       },
       {
         "q": "Was kostet die Zahnzusatzversicherung monatlich?",

@@ -5,6 +5,10 @@ import { trackEvent } from '@/lib/analytics';
 // Zahn-Check-Antworten werden nie an diese Links angehängt.
 const BAYERISCHE_RAW_URL = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
 const UKV_RAW_URL = 'https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Zahn&agentId1=180188803&agentId2=226487&insurers=37&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJVS1YiLCJsYXN0TmFtZSI6IlVuaW9uIEtyYW5rZW52ZXJzaWNoZXJ1bmcgQUciLCJjb21wYW55IjoiIiwic3RyZWV0IjoiUGV0ZXItWmltbWVyLVN0ci4gMiIsInppcGNvZGUiOiI2NjEyMyIsImNpdHkiOiJTYWFyYnL8Y2tlbiIsIm1vYmlsZSI6IiIsImVtYWlsIjoia3JhbmtlbkBmb25kc2ZpbmFuei5kZSJ9&remarks=IiI=&defaultContact=false';
+// LKH-Antragsstrecke mit Tarif-Vorauswahl ZahnUpgrade 90+ (ZU90_PLUS_S = ohne Alterungsrückstellung).
+// untervermittlerId MAK226487 verifiziert 18.08.2026 über den personalisierten SSO-Link der
+// Fonds-Finanz-Wissenswelt (Onlineabschlusslinks KV). Niemals eine andere MAK verwenden.
+const LKH_RAW_URL = 'https://antrag.lkh.de/?tarif=ZU90_PLUS_S&vermittlerId=723884&untervermittlerId=MAK226487';
 
 const PROVIDER_RULES = Object.freeze({
   bayerische: Object.freeze({
@@ -35,6 +39,16 @@ const PROVIDER_RULES = Object.freeze({
       agentId2: '226487',
       insurers: '37',
       defaultContact: 'false',
+    }),
+  }),
+  lkh: Object.freeze({
+    hostname: 'antrag.lkh.de',
+    pathname: '/',
+    allowedSearchParams: Object.freeze(['tarif', 'vermittlerId', 'untervermittlerId']),
+    requiredSearchParams: Object.freeze({
+      tarif: 'ZU90_PLUS_S',
+      vermittlerId: '723884',
+      untervermittlerId: 'MAK226487',
     }),
   }),
 });
@@ -78,6 +92,7 @@ const requireSafeProviderUrl = (rawUrl, rules, provider) => {
 // über agentId2=226487 bleibt unverändert). URL-Parameter niemals manuell ändern.
 export const BAYERISCHE_URL = requireSafeProviderUrl(BAYERISCHE_RAW_URL, PROVIDER_RULES.bayerische, 'die Bayerische');
 export const UKV_URL = requireSafeProviderUrl(UKV_RAW_URL, PROVIDER_RULES.ukv, 'UKV');
+export const LKH_URL = requireSafeProviderUrl(LKH_RAW_URL, PROVIDER_RULES.lkh, 'LKH');
 
 // Vorbereitet, aktuell BEWUSST NICHT verlinkt (Franks Ansage 02.08.2026:
 // Fremdanbieter noch nicht öffentlich benennen, Strecke bleibt Bayerische/UKV).
@@ -87,6 +102,7 @@ export const DADIREKT_URL = 'https://www.da-direkt.de/zahnzusatzversicherung-sof
 const SAFE_INSURER_DESTINATIONS = new Set([
   'bayerische_zahn_sofort',
   'ukv_zahnprivat',
+  'lkh_zahnupgrade',
 ]);
 
 // Ausschließlich neutrale Versicherer-Klicks außerhalb des Zahn-Checks.

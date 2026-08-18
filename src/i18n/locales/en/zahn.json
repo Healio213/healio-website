@@ -13,6 +13,7 @@
     "fehlendeZaehne": "UKV: Up to 3 missing teeth can be insured for an additional premium",
     "lueckenschluss": "Protect a future gap closure before it is advised",
     "pzr": "UKV top plans: dental cleaning with no annual limit",
+    "lkhPreis": "Price tip LKH ZahnUpgrade 90+: VERY GOOD (0.8) from Stiftung Warentest",
     "zahnersatz": "Up to 100% reimbursement for dental prosthetics, depending on the plan",
     "noWait": "Selected plans with no waiting period",
     "ikkBonus": "Depending on your bonus, IKK classic can offset part or all of the premium",
@@ -22,7 +23,7 @@
     "eyebrow": "Trust at a glance",
     "title": "Award-winning dental plans. A strong partnership.",
     "subtitle": "Independent plan ratings and the IKK classic bonus programme are clearly separated – and work together meaningfully for your cover.",
-    "partnersLabel": "Our partners: die Bayerische, UKV & IKK classic",
+    "partnersLabel": "Our partners: die Bayerische, UKV, LKH & IKK classic",
     "awardsLabel": "Current dental plan awards",
     "cooperationLabel": "In cooperation with",
     "cooperationText": "Depending on the bonus activities you complete, the IKK classic bonus programme can offset part or all of your dental supplementary insurance premium.",
@@ -31,7 +32,8 @@
     "ikkLogoAlt": "IKK classic logo",
     "awards": {
       "warentest": "Stiftung Warentest VERY GOOD (0.5), ZAHN Prestige by die Bayerische, 07/2025 issue",
-      "frankeBornberg": "Franke & Bornberg FFF+ excellent (0.5), UKV ZahnPRIVAT 100, 2025 rating"
+      "frankeBornberg": "Franke & Bornberg FFF+ excellent (0.5), UKV ZahnPRIVAT 100, 2025 rating",
+      "lkhWarentest": "Stiftung Warentest VERY GOOD, LKH ZahnUpgrade 90+, seal issue 08/2024"
     },
     "ikkAwards": {
       "performance": "Health fund benefits test, IKK classic rated Very Good (1.5), 03/2026",
@@ -216,17 +218,18 @@
         "secondaryType": "ukv"
       },
       "preis": {
-        "insurer": "die Bayerische or UKV",
-        "title": "Start affordably: ZAHN Smart or ZahnPRIVAT 75",
-        "text": "Solid basic cover from a few euros per month, so a serious case never hits you with the full costs.",
+        "insurer": "LKH (Landeskrankenhilfe)",
+        "title": "ZahnUpgrade 90+: strong benefits at a small premium",
+        "text": "With healthy teeth and a focus on price, the LKH ZahnUpgrade 90+ is our price-performance tip: Stiftung Warentest rates it VERY GOOD (0.8) and lists it as test winner in the Good and affordable category (Finanztest 07/2025).",
         "reasons": [
-          "75 % reimbursement for dentures and dental treatment in both variants",
-          "At age 30, for example, from around €10 to €12 per month",
-          "The IKK bonus can particularly easily refinance the small premium in full"
+          "90 % for dentures and dental treatment, rising to up to 100 % with a well-kept bonus booklet",
+          "At age 30, for example, 13.50 EUR per month, which the IKK bonus refinances particularly easily",
+          "No waiting periods, and up to 4,000 EUR reimbursement allowance from the 2nd policy year onwards"
         ],
-        "cta": "Calculate die Bayerische ZAHN Smart",
-        "ctaType": "bayerische",
-        "note": "You will be redirected to the online calculator of die Bayerische.",
+        "warning": "Sign up while nothing has been recommended. As soon as your dentist documents a finding, different rules apply.",
+        "cta": "Calculate LKH ZahnUpgrade 90+",
+        "ctaType": "lkh",
+        "note": "You will be redirected to the LKH online application. The ZahnUpgrade 90+ is already preselected there.",
         "secondary": "Or view UKV ZahnPRIVAT 75",
         "secondaryType": "ukv"
       },
@@ -272,9 +275,9 @@
     }
   },
   "insurerChoice": {
-    "badge": "Immediate cover and prevention",
+    "badge": "Immediate cover, prevention and price tip",
     "title": "Need dental work? It is not too late for insurance.",
-    "intro": "Many people assume that insurance is no longer possible once treatment has been recommended. Depending on the timing, an immediate-cover route may still be available. Healio gives you a clear, factual assessment for both situations.",
+    "intro": "Many people assume that insurance is no longer possible once treatment has been recommended. Depending on the timing, an immediate-cover route may still be available. Healio gives you a clear, factual assessment for every situation: immediate cover, strong prevention or our price-performance tip.",
     "question": "One question decides: Has your dentist recommended or started a treatment within the last 2 years?",
     "details": {
       "show": "Show benefits and important details",
@@ -321,6 +324,27 @@
       },
       "cta": "View tariffs and sign up online",
       "note": "You will be redirected to the online application of Versicherungskammer (UKV). Select the dental section there."
+    },
+    "preis": {
+      "answer": "No, and the premium should be as small as possible",
+      "label": "The price-performance tip",
+      "insurer": "LKH (Landeskrankenhilfe)",
+      "tariff": "ZahnUpgrade 90+",
+      "text": "The LKH ZahnUpgrade 90+ delivers 90 % reimbursement for dentures, dental treatment and children’s orthodontics at a particularly small premium, at age 30 for example 13.50 EUR per month. Stiftung Warentest rates the tariff VERY GOOD (0.8), test winner in the Good and affordable category (Finanztest 07/2025).",
+      "bullets": [
+        "90 % for dentures, dental treatment and children’s orthodontics, without waiting periods",
+        "With a well-kept bonus booklet the reimbursement rises: to 95 % after 5 years, to 100 % after 10 years",
+        "Up to 4,000 EUR reimbursement allowance from the 2nd policy year onwards, unlimited from year 5",
+        "Up to 3 missing teeth insurable against a surcharge",
+        "Professional dental cleaning and bleaching included with an annual budget"
+      ],
+      "highlight": {
+        "badge": "IKK bonus leverage",
+        "title": "Small premium, great chance of full refinancing",
+        "text": "The smaller the premium, the easier the IKK classic bonus offsets it in full. With the ZahnUpgrade 90+, depending on your bonus, part of the activities may already be enough. Work out below in one minute how much is possible for you."
+      },
+      "cta": "Calculate premium and sign up",
+      "note": "You will be redirected to the LKH online application. The ZahnUpgrade 90+ is already preselected there."
     },
     "ikk": {
       "badge": "up to 100 %",
@@ -371,9 +395,9 @@
           "weg": "beide"
         },
         {
-          "situation": "Affordable entry",
-          "empfehlung": "die Bayerische ZAHN Smart or UKV ZahnPRIVAT 75: solid basic cover, at age 30 for example from around 10 euros per month.",
-          "weg": "beide"
+          "situation": "Affordable entry with strong benefits",
+          "empfehlung": "LKH ZahnUpgrade 90+: 90 % reimbursement, Stiftung Warentest VERY GOOD (0.8) and test winner in the Good and affordable category (Finanztest 07/2025). At age 30, for example, 13.50 euros per month. Even cheaper, but with 75 % reimbursement: UKV ZahnPRIVAT 75.",
+          "weg": "lkh"
         }
       ]
     },
@@ -382,7 +406,7 @@
   },
   "benefits": {
     "title": "Dental insurance: what statutory insurance does not cover.",
-    "subtitle": "Statutory insurance only covers the basic rate for dentures. Depending on your situation, die Bayerische or UKV covers the rest.",
+    "subtitle": "Statutory insurance only covers the basic rate for dentures. Depending on your situation, die Bayerische, UKV or LKH covers the rest.",
     "moreShow": "Show more benefits",
     "moreHide": "Hide additional benefits",
     "noWait": {
@@ -406,8 +430,8 @@
       "desc": "With UKV, up to 3 already missing teeth can be fully co-insured for a fixed surcharge per tooth, and the reimbursement scale remains untouched. Important: sign up before your dentist recommends the replacement."
     },
     "unfall": {
-      "title": "Two award-winning insurers",
-      "desc": "die Bayerische (Stiftung Warentest VERY GOOD 0.5 for ZAHN Prestige, 07/2025) and UKV (Franke & Bornberg FFF+ for ZahnPRIVAT 100)."
+      "title": "Three award-winning insurers",
+      "desc": "die Bayerische (Stiftung Warentest VERY GOOD 0.5 for ZAHN Prestige, 07/2025), UKV (Franke & Bornberg FFF+ for ZahnPRIVAT 100) and LKH (Stiftung Warentest VERY GOOD 0.8 for ZahnUpgrade 90+, 07/2025)."
     },
     "gesundheitsfragen": {
       "title": "Fair acceptance",
@@ -426,8 +450,8 @@
         "a": "Yes, that is exactly what our immediate-cover path is for: with the ZAHN Sofort module, die Bayerische insures treatments that have already been recommended or started, with up to €1,500 towards them (€750 per calendar year) on top of your statutory subsidy. Only the timing matters: you must sign up before your dentist issues the invoice."
       },
       {
-        "q": "Which path fits me: die Bayerische or UKV?",
-        "a": "One question decides: has your dentist recommended or started a treatment within the last 2 years? If yes, die Bayerische with the ZAHN Sofort module is your path. If no, UKV ZahnPRIVAT gives you strong prevention in three tariff levels. The tariff guide at the top of this page takes you straight to the right sign-up."
+        "q": "Which path fits me: die Bayerische, UKV or LKH?",
+        "a": "One question decides: has your dentist recommended or started a treatment within the last 2 years? If yes, die Bayerische with the ZAHN Sofort module is your path. If no, UKV ZahnPRIVAT gives you strong prevention in three tariff levels, especially for families. And if, with healthy teeth, a small premium matters most to you, the LKH ZahnUpgrade 90+ is our price-performance tip (Stiftung Warentest VERY GOOD 0.8, Finanztest 07/2025). The dental check at the top of this page takes you straight to the right sign-up."
       },
       {
         "q": "How much does dental insurance cost per month?",

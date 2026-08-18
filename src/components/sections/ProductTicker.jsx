@@ -94,6 +94,7 @@ const tickerSets = {
     { icon: ShieldCheck, key: 'ticker.fehlendeZaehne' },
     { icon: CheckCircle2, key: 'ticker.lueckenschluss' },
     { icon: Sparkles, key: 'ticker.pzr' },
+    { icon: WalletCards, key: 'ticker.lkhPreis' },
     { icon: BadgeCheck, key: 'ticker.zahnersatz' },
     { icon: HeartPulse, key: 'ticker.noWait' },
     { icon: WalletCards, key: 'ticker.ikkBonus' },
