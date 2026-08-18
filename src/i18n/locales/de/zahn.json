@@ -229,7 +229,7 @@
         "warning": "Schließe ab, solange nichts angeraten ist. Sobald dein Zahnarzt einen Befund dokumentiert, gelten andere Regeln.",
         "cta": "LKH ZahnUpgrade 90+ berechnen",
         "ctaType": "lkh",
-        "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Der ZahnUpgrade 90+ ist dort bereits vorausgewählt.",
+        "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Der ZahnUpgrade 90+ ist dort vorausgewählt, du kannst aber auch die günstigeren Stufen 70+ oder 50+ wählen.",
         "secondary": "Oder UKV ZahnPRIVAT 75 ansehen",
         "secondaryType": "ukv"
       },
@@ -343,8 +343,11 @@
         "title": "Kleiner Beitrag, große Chance auf volle Refinanzierung",
         "text": "Je kleiner der Beitrag, desto leichter gleicht ihn der IKK classic Bonus komplett aus. Beim ZahnUpgrade 90+ reicht dafür je nach Bonus schon ein Teil der Maßnahmen. Wie viel bei dir drin ist, rechnest du unten in einer Minute aus."
       },
-      "cta": "Beitrag berechnen und abschließen",
-      "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Der ZahnUpgrade 90+ ist dort bereits vorausgewählt."
+      "chooseLabel": "Wähle deinen Zahn-Tarif",
+      "cta90": "ZahnUpgrade 90+ ab 13 € (Empfehlung)",
+      "cta70": "70+ ab 8 €",
+      "cta50": "50+ ab 5 €",
+      "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Dein gewählter Tarif ist dort vorausgewählt und lässt sich jederzeit ändern."
     },
     "ikk": {
       "badge": "bis zu 100 %",

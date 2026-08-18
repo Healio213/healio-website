@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, ExternalLink, Calculator, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
-import { BAYERISCHE_URL, UKV_URL, LKH_URL, trackZahnEvent } from './dental/dentalLinks';
+import { BAYERISCHE_URL, UKV_URL, LKH_URLS, trackZahnEvent } from './dental/dentalLinks';
 
 const trackInsurerClick = (insurer) => trackZahnEvent('zahnzusatz_versicherer_click', insurer);
 
@@ -228,17 +228,42 @@ const DentalInsurerChoice = () => {
                 </div>
               </details>
               <div className="mt-auto">
-                <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-teal-600 hover:text-teal-700 text-slate-900 text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
+                <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2 text-center">
+                  {t('insurerChoice.preis.chooseLabel')}
+                </p>
+                <Button asChild className="w-full bg-teal-600 hover:bg-teal-700 text-white text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
                   <a
-                    href={LKH_URL}
+                    href={LKH_URLS.zu90}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackInsurerClick('lkh_zahnupgrade')}
+                    onClick={() => trackInsurerClick('lkh_zahnupgrade_90')}
                   >
-                    {t('insurerChoice.preis.cta')}
+                    {t('insurerChoice.preis.cta90')}
                     <ExternalLink className="w-4 h-4 ml-2" aria-hidden="true" />
                   </a>
                 </Button>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-teal-600 hover:text-teal-700 text-slate-900 text-sm px-3 py-3 h-auto rounded-xl transition-all duration-300">
+                    <a
+                      href={LKH_URLS.zu70}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackInsurerClick('lkh_zahnupgrade_70')}
+                    >
+                      {t('insurerChoice.preis.cta70')}
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-teal-600 hover:text-teal-700 text-slate-900 text-sm px-3 py-3 h-auto rounded-xl transition-all duration-300">
+                    <a
+                      href={LKH_URLS.zu50}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackInsurerClick('lkh_zahnupgrade_50')}
+                    >
+                      {t('insurerChoice.preis.cta50')}
+                    </a>
+                  </Button>
+                </div>
                 <p className="text-xs text-slate-400 mt-3 text-center">{t('insurerChoice.preis.note')}</p>
               </div>
             </motion.div>

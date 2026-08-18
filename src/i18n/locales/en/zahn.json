@@ -229,7 +229,7 @@
         "warning": "Sign up while nothing has been recommended. As soon as your dentist documents a finding, different rules apply.",
         "cta": "Calculate LKH ZahnUpgrade 90+",
         "ctaType": "lkh",
-        "note": "You will be redirected to the LKH online application. The ZahnUpgrade 90+ is already preselected there.",
+        "note": "You will be redirected to the LKH online application. The ZahnUpgrade 90+ is preselected there, but you can also choose the more affordable 70+ or 50+ levels.",
         "secondary": "Or view UKV ZahnPRIVAT 75",
         "secondaryType": "ukv"
       },
@@ -343,8 +343,11 @@
         "title": "Small premium, great chance of full refinancing",
         "text": "The smaller the premium, the easier the IKK classic bonus offsets it in full. With the ZahnUpgrade 90+, depending on your bonus, part of the activities may already be enough. Work out below in one minute how much is possible for you."
       },
-      "cta": "Calculate premium and sign up",
-      "note": "You will be redirected to the LKH online application. The ZahnUpgrade 90+ is already preselected there."
+      "chooseLabel": "Choose your dental tariff",
+      "cta90": "ZahnUpgrade 90+ from €13 (recommended)",
+      "cta70": "70+ from €8",
+      "cta50": "50+ from €5",
+      "note": "You will be redirected to the LKH online application. Your chosen tariff is preselected there and can be changed at any time."
     },
     "ikk": {
       "badge": "up to 100 %",
