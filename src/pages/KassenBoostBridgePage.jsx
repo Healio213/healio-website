@@ -32,6 +32,7 @@ const KassenBoostBridgePage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
+        ogImage="https://healio.de/images/kassenboost-bridge-og.png"
         ogUrl={canonicalUrl}
         ogImageAlt={t('seo.ogImageAlt')}
         schemaMarkup={schemaMarkup}

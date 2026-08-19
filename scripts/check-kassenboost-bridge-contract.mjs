@@ -30,10 +30,13 @@ assert.match(i18n, /kassenboost: enKassenBoost/);
 
 assert.equal(de.privacy.confirmation, 'Keine Angaben aus deinem Vergleich wurden an Healio übertragen.');
 assert.match(en.privacy.confirmation, /No information from your comparison was shared with Healio\./);
+assert.equal(de.seo.ogImageAlt, 'KassenBoost und Healio – neutral vergleichen und selbst entscheiden');
+assert.equal(en.seo.ogImageAlt, 'KassenBoost and Healio – compare neutrally and decide for yourself');
 assert.equal(de.employer.ctaHref, '/unternehmen#healio-belegschaft');
 assert.equal(en.employer.ctaHref, '/en/companies#healio-belegschaft');
 
 assert.match(page, /https:\/\/kassenboost\.de\/\?utm_source=healio&utm_medium=bridge&utm_campaign=kassenboost/);
+assert.match(page, /ogImage="https:\/\/healio\.de\/images\/kassenboost-bridge-og\.png"/);
 assert.equal((page.match(/kassenboost\.de/gi) || []).length, 1, 'Die Brückenseite darf genau einen externen KassenBoost-Vergleichs-CTA enthalten.');
 assert.match(page, /getPath\('leistungen'\)/);
 assert.match(page, /employer\.ctaHref/);
