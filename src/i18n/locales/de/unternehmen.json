@@ -207,6 +207,124 @@
     "ongoing": "Einführung ist der Anfang – nicht das Ende",
     "contact": "Healio bleibt zentraler Ansprechpartner"
   },
+  "bavDecisionCalculator": {
+    "seo": {
+      "title": "bAV-Entscheidungsrechner 2026 | Healio",
+      "description": "Arbeitgeberfinanzierte bAV mit 2026er Beitragsgrenzen, Sozialabgaben und Kapitalprojektion transparent modellieren."
+    },
+    "hero": {
+      "eyebrow": "bAV-Entscheidungsrechner 2026",
+      "title": "Was 676 EUR Vorsorge für Ihr Unternehmen wirklich bedeuten.",
+      "description": "Schieben Sie die wichtigsten Stellschrauben selbst. Der Rechner trennt Arbeitgeberaufwand, mögliche Mitarbeiterwirkung und langfristige Kapitalprojektion – ohne eine Nettorente oder Wirkung zu versprechen.",
+      "back": "Zur Unternehmensseite"
+    },
+    "controls": {
+      "title": "Ihr Unternehmensmodell",
+      "description": "Die Werte sind eine Orientierung für das Erstgespräch. Die endgültige Berechnung erfolgt je Mitarbeiter und Abrechnungsmonat.",
+      "employees": {
+        "label": "Beschäftigte",
+        "hint": "Gesamte Belegschaft, nicht nur erwartete Teilnehmer"
+      },
+      "participation": {
+        "label": "Teilnahmequote",
+        "hint": "Anteil der Beschäftigten im Modell"
+      },
+      "salary": {
+        "label": "Durchschnittliches Monatsbrutto",
+        "hint": "Planungswert für die Beitragsbemessungsgrenzen"
+      },
+      "contribution": {
+        "label": "Arbeitgeberbeitrag pro Teilnehmer und Monat",
+        "hint": "Vollständig arbeitgeberfinanziert; steuerfreier Höchstrahmen 2026",
+        "splitTitle": "Der 338-EUR-Knick",
+        "splitFree": "Die ersten 338 EUR sind im Modell steuer- und sozialversicherungsfrei.",
+        "splitLiable": "Die weiteren 338 EUR bleiben steuerfrei, sind aber grundsätzlich sozialversicherungspflichtig.",
+        "currentLiable": "Davon im Modell grundsätzlich SV-pflichtig: {{amount}}"
+      },
+      "duration": {
+        "label": "Laufzeit",
+        "hint": "Modelliert mit monatlicher Zahlung am Monatsende",
+        "value": "{{years}} Jahre"
+      },
+      "revenue": {
+        "label": "Jahresumsatz",
+        "hint": "Dient nur zur wirtschaftlichen Einordnung"
+      },
+      "returnRate": {
+        "label": "Marktrendite vor Effektivkosten",
+        "hint": "Offensiv modelliert, historisch eingeordnet – keine Prognose",
+        "standard": "Standardszenario",
+        "historical": "Historischer 15-Jahres-Wert",
+        "lower": "Niedrigeres Szenario",
+        "standardDescription": "10 % Marktszenario vor Produktkosten. Bei {{costs}} Prozentpunkten Effektivkosten ergibt das {{netRate}} % Modellrendite nach Kosten.",
+        "historicalDescription": "Der offizielle MSCI World USD Net Return stieg von Juli 2011 bis Juli 2026 von 100 auf 484,83. Das entspricht {{rate}} % p. a.; rechnerisch {{netRate}} % nach der gewählten Kostenannahme von {{costs}} Prozentpunkten."
+      },
+      "costs": {
+        "label": "Renditeminderung durch Effektivkosten",
+        "hint": "Im Angebot durch die konkrete Effektivkostenangabe ersetzen",
+        "description": "Standardmäßig ziehen wir 2,00 Prozentpunkte pro Jahr ab. Das liegt leicht über dem von der BaFin für 30-jährige fondsgebundene Musterverträge ausgewiesenen gewichteten Mittel.",
+        "formulaExample": "10 % − 2 % = 8 %",
+        "formula": "{{gross}} % − {{costs}} % = {{net}} % Modellrendite",
+        "method": "Rechenweg: Die effektive Jahresrendite wird in die äquivalente Monatsrendite umgerechnet. Die Beiträge fließen nachschüssig am Monatsende."
+      }
+    },
+    "results": {
+      "eyebrow": "Das Ergebnis Ihres Modells",
+      "participants": "{{count}} Teilnehmer",
+      "company": {
+        "title": "Unternehmensaufwand",
+        "bav": "bAV-Beiträge pro Jahr",
+        "social": "zusätzliche Arbeitgeber-SV pro Jahr",
+        "total": "vollständiger Aufwand pro Jahr",
+        "payroll": "Anteil an der Brutto-Payroll",
+        "revenue": "Anteil am Jahresumsatz"
+      },
+      "employee": {
+        "title": "Mitarbeiterwirkung",
+        "credit": "bAV-Gutschrift pro Monat",
+        "netImpact": "mögliche zusätzliche SV-Belastung pro Monat",
+        "publicExample": "Im gewählten Modell stehen {{credit}} Vorsorgebeitrag einer möglichen zusätzlichen SV-Belastung von {{impact}} gegenüber.",
+        "headroom": "Die konkrete Belastung sinkt, wenn Beitragsbemessungsgrenzen teilweise oder vollständig erreicht sind."
+      },
+      "capital": {
+        "title": "Kapitalprojektion",
+        "formula": "Gewählte Modellrendite",
+        "contributionsPerPerson": "Einzahlungen je Teilnehmer",
+        "capitalPerPerson": "modelliertes Kapital je Teilnehmer",
+        "capitalGroup": "modelliertes Kapital der Gruppe"
+      }
+    },
+    "sources": {
+      "eyebrow": "Annahmen offenlegen",
+      "title": "Warum 10 Prozent im Standard stehen – und warum 2 Prozent Kosten abgehen.",
+      "msci": {
+        "publisher": "MSCI World · USD Net Return",
+        "description": "Das MSCI-Factsheet per 31. Juli 2026 zeigt für Juli 2011 bis Juli 2026 eine kumulative Entwicklung von 100 auf 484,83. Daraus ergeben sich rechnerisch 11,10 % p. a. in USD; nach pauschal 2 Prozentpunkten Kosten wären es 9,10 %. Net Return bezeichnet bei MSCI eine Indexmethodik unter Berücksichtigung angenommener Quellensteuern auf Dividenden, nicht die Rendite nach individuellen Produktkosten. Historische Einordnung, keine Zukunftsgarantie.",
+        "url": "https://www.msci.com/documents/10199/255599/msci-world-index-usd-net.pdf"
+      },
+      "msciEur": {
+        "publisher": "MSCI · World Index in EUR",
+        "description": "Die offizielle EUR-Net-Return-Reihe zeigt, dass Zeitraum, Währung und Return-Variante das Ergebnis deutlich verändern können.",
+        "url": "https://www.msci.com/resources/factsheets/index_fact_sheet/msci-world-index-eur-net.pdf"
+      },
+      "bafin": {
+        "publisher": "BaFin · Effektivkosten",
+        "description": "Für fondsgebundene Verträge mit 30 Jahren Laufzeit und monatlichem Beitrag lag das gewichtete Mittel der untersuchten meistverkauften Produkte bei 1,90 Prozentpunkten Effektivkosten; der Median lag bei 1,64.",
+        "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
+      },
+      "open": "Primärquelle öffnen"
+    },
+    "disclaimers": {
+      "assumptions": "Standardannahme für die Sozialabgaben: gesetzlich versichert, durchschnittlicher Zusatzbeitrag von 2,9 %, ein Kind und Beschäftigung außerhalb Sachsens.",
+      "projection": "Vereinfachte Modellrechnung, keine Prognose oder Garantie. Die gewählte vereinfachte Renditeminderung ist berücksichtigt; die konkreten Tarifkosten und ihre tatsächliche Wirkung sind ohne Produktunterlagen nicht vollständig abgebildet. Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet. Vergangene Wertentwicklung ist kein verlässlicher Indikator für künftige Ergebnisse.",
+      "payroll": "Das Durchschnittsbrutto ist nur eine Planungsnäherung. Beitragsbemessungsgrenzen, Krankenkasse, Pflegeversicherungsstatus, Beschäftigungsort und weitere Umlagen müssen in der Payroll je Mitarbeiter und Abrechnungsmonat geprüft werden. Keine Steuer- oder Rechtsberatung."
+    },
+    "cta": {
+      "title": "Jetzt das Modell mit der echten Belegschaft prüfen.",
+      "description": "Im Vorsorge-Check ersetzen wir Annahmen durch Mitarbeiterstruktur, Payroll-Daten und konkrete Vertragskosten.",
+      "button": "Vorsorge-Check anfragen"
+    }
+  },
   "cta": {
     "eyebrow": "Jetzt statt irgendwann",
     "title": "30 Jahre lassen sich nicht nachholen.",

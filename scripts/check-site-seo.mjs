@@ -5,11 +5,11 @@ import { seoRoutes } from './seo-routes.mjs';
 const SITE_URL = 'https://healio.de';
 
 const publicRouterPaths = [
-  '/', '/about', '/leistungen', '/kassenboost', '/unternehmen', '/partner', '/hebammen', '/zahnaerzte',
+  '/', '/about', '/leistungen', '/kassenboost', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/hebammen', '/zahnaerzte',
   '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant',
   '/zahn', '/stationaer', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
-  '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/companies', '/en/partner', '/en/midwives',
+  '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/companies', '/en/companies/pension-calculator', '/en/partner', '/en/midwives',
   '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',
   '/tiktok', '/en/tiktok', '/instagram', '/en/instagram',
@@ -21,6 +21,7 @@ const noindexPaths = new Set([
   '/lebenshilfe', '/konto-loeschen', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',
+  '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
 ]);
 
 const bilingualPairs = [
@@ -29,6 +30,7 @@ const bilingualPairs = [
   ['/leistungen', '/en/services'],
   ['/kassenboost', '/en/kassenboost'],
   ['/unternehmen', '/en/companies'],
+  ['/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator'],
   ['/partner', '/en/partner'],
   ['/hebammen', '/en/midwives'],
   ['/kontakt', '/en/contact'],

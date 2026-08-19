@@ -207,6 +207,124 @@
     "ongoing": "Rollout is the beginning – not the end",
     "contact": "Healio remains the central point of contact"
   },
+  "bavDecisionCalculator": {
+    "seo": {
+      "title": "Employer pension decision calculator 2026 | Healio",
+      "description": "Model employer-funded pension contributions with 2026 contribution ceilings, social charges and a transparent capital projection."
+    },
+    "hero": {
+      "eyebrow": "Employer pension decision calculator 2026",
+      "title": "What a EUR 676 pension contribution really means for your company.",
+      "description": "Adjust the decisive variables yourself. The calculator separates company cost, potential employee impact and long-term capital projection without promising a net pension or a business outcome.",
+      "back": "Back to the company page"
+    },
+    "controls": {
+      "title": "Your company model",
+      "description": "These figures are an orientation for an initial discussion. The final calculation must be completed for each employee and payroll month.",
+      "employees": {
+        "label": "Employees",
+        "hint": "Total workforce, not only expected participants"
+      },
+      "participation": {
+        "label": "Participation rate",
+        "hint": "Share of employees included in the model"
+      },
+      "salary": {
+        "label": "Average monthly gross salary",
+        "hint": "Planning value for social-security contribution ceilings"
+      },
+      "contribution": {
+        "label": "Employer contribution per participant and month",
+        "hint": "Fully employer-funded; 2026 tax-free maximum",
+        "splitTitle": "The EUR 338 threshold",
+        "splitFree": "The first EUR 338 is modelled as exempt from tax and social-security contributions.",
+        "splitLiable": "The next EUR 338 remains tax-free but is generally subject to social-security contributions.",
+        "currentLiable": "Generally subject to social-security contributions in this model: {{amount}}"
+      },
+      "duration": {
+        "label": "Term",
+        "hint": "Modelled with monthly contributions paid at month-end",
+        "value": "{{years}} years"
+      },
+      "revenue": {
+        "label": "Annual revenue",
+        "hint": "Used only to put company cost into context"
+      },
+      "returnRate": {
+        "label": "Market return before effective costs",
+        "hint": "An assertive model with historical context – not a forecast",
+        "standard": "Standard scenario",
+        "historical": "Historical 15-year value",
+        "lower": "Lower scenario",
+        "standardDescription": "10% market scenario before product costs. With a {{costs}}-percentage-point effective-cost assumption, this produces a {{netRate}}% model return after costs.",
+        "historicalDescription": "The official MSCI World USD Net Return rose from 100 in July 2011 to 484.83 in July 2026. This equals {{rate}}% p.a.; mathematically {{netRate}}% after the selected {{costs}}-percentage-point cost assumption."
+      },
+      "costs": {
+        "label": "Return reduction from effective costs",
+        "hint": "Replace with the actual effective-cost figure in a proposal",
+        "description": "The default model deducts 2.00 percentage points a year. This is slightly above the BaFin weighted average for the surveyed 30-year unit-linked sample contracts.",
+        "formulaExample": "10% − 2% = 8%",
+        "formula": "{{gross}}% − {{costs}}% = {{net}}% model return",
+        "method": "Calculation method: the effective annual return is converted into its equivalent monthly return. Contributions are paid in arrears at month-end."
+      }
+    },
+    "results": {
+      "eyebrow": "Your model result",
+      "participants": "{{count}} participants",
+      "company": {
+        "title": "Company cost",
+        "bav": "annual pension contributions",
+        "social": "additional annual employer social charges",
+        "total": "total annual employer cost",
+        "payroll": "share of gross payroll",
+        "revenue": "share of annual revenue"
+      },
+      "employee": {
+        "title": "Employee impact",
+        "credit": "monthly pension credit",
+        "netImpact": "potential additional monthly social charge",
+        "publicExample": "In the selected model, a {{credit}} pension contribution is set against a potential additional social charge of {{impact}}.",
+        "headroom": "The actual charge falls where social-security contribution ceilings are partly or fully reached."
+      },
+      "capital": {
+        "title": "Capital projection",
+        "formula": "Selected model return",
+        "contributionsPerPerson": "contributions per participant",
+        "capitalPerPerson": "modelled capital per participant",
+        "capitalGroup": "modelled group capital"
+      }
+    },
+    "sources": {
+      "eyebrow": "Disclose the assumptions",
+      "title": "Why the default is 10 percent – and deducts 2 percent costs.",
+      "msci": {
+        "publisher": "MSCI World · USD Net Return",
+        "description": "The MSCI factsheet dated July 31, 2026 shows cumulative growth from 100 to 484.83 between July 2011 and July 2026. This equals a calculated 11.10% p.a. in USD; after a flat 2-percentage-point cost assumption it would be 9.10%. MSCI Net Return is an index methodology reflecting assumed withholding tax on dividends, not performance after individual product costs. Historical context, not a future guarantee.",
+        "url": "https://www.msci.com/documents/10199/255599/msci-world-index-usd-net.pdf"
+      },
+      "msciEur": {
+        "publisher": "MSCI · World Index in EUR",
+        "description": "The official EUR net-return series shows how period, currency and return variant can materially change the outcome.",
+        "url": "https://www.msci.com/resources/factsheets/index_fact_sheet/msci-world-index-eur-net.pdf"
+      },
+      "bafin": {
+        "publisher": "BaFin · effective costs",
+        "description": "For unit-linked contracts with a 30-year term and monthly contributions, the weighted average among the surveyed best-selling products was a 1.90 percentage-point effective cost; the median was 1.64.",
+        "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
+      },
+      "open": "Open primary source"
+    },
+    "disclaimers": {
+      "assumptions": "Standard social-charge assumption: statutory health insurance, 2.9% average additional contribution, one child and employment outside Saxony.",
+      "projection": "Simplified model calculation, not a forecast or guarantee. The selected simplified return reduction is included; actual tariff costs and their effect are not fully represented without product documents. Tax, inflation and health and long-term-care contributions in the benefit phase are not included. Past performance is not a reliable indicator of future results.",
+      "payroll": "Average gross salary is only a planning approximation. Contribution ceilings, health insurer, care-insurance status, place of employment and further levies must be reviewed in payroll for every employee and payroll month. This is not tax or legal advice."
+    },
+    "cta": {
+      "title": "Now test the model with your real workforce.",
+      "description": "In a benefits review, we replace assumptions with your employee structure, payroll data and actual contract costs.",
+      "button": "Request a benefits review"
+    }
+  },
   "cta": {
     "eyebrow": "Now, not someday",
     "title": "You cannot catch up on 30 lost years.",
