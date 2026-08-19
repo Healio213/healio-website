@@ -27,6 +27,7 @@ const ErstinformationPage = React.lazy(() => import('@/pages/ErstinformationPage
 const KontoLoeschenPage = React.lazy(() => import('@/pages/KontoLoeschenPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
 const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
+const KassenBoostBridgePage = React.lazy(() => import('@/pages/KassenBoostBridgePage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
@@ -110,6 +111,7 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="leistungen" element={<LeistungenPage />} />
+              <Route path="kassenboost" element={<KassenBoostBridgePage />} />
               <Route path="unternehmen" element={<UnternehmenPage />} />
               <Route path="betriebliche-vorsorge" element={<Navigate to="/unternehmen" replace />} />
               <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
@@ -144,6 +146,7 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<LeistungenPage />} />
+              <Route path="kassenboost" element={<KassenBoostBridgePage />} />
               <Route path="companies" element={<UnternehmenPage />} />
               <Route path="corporate-benefits" element={<Navigate to="/en/companies" replace />} />
               <Route path="partner" element={<PartnerPage />} />

@@ -25,6 +25,8 @@ import deHeilberufe from './locales/de/heilberufe.json';
 import enHeilberufe from './locales/en/heilberufe.json';
 import deLeistungen from './locales/de/leistungen.json';
 import enLeistungen from './locales/en/leistungen.json';
+import deKassenBoost from './locales/de/kassenboost.json';
+import enKassenBoost from './locales/en/kassenboost.json';
 import deAbout from './locales/de/about.json';
 import enAbout from './locales/en/about.json';
 import deContact from './locales/de/contact.json';
@@ -59,6 +61,7 @@ i18n
         unternehmen: deUnternehmen,
         heilberufe: deHeilberufe,
         leistungen: deLeistungen,
+        kassenboost: deKassenBoost,
         about: deAbout,
         contact: deContact,
         legal: deLegal,
@@ -81,6 +84,7 @@ i18n
         unternehmen: enUnternehmen,
         heilberufe: enHeilberufe,
         leistungen: enLeistungen,
+        kassenboost: enKassenBoost,
         about: enAbout,
         contact: enContact,
         legal: enLegal,

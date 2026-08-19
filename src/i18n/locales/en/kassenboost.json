@@ -1,0 +1,54 @@
+{
+  "seo": {
+    "title": "KassenBoost & Healio: Compare Health Funds Privately",
+    "description": "Compare statutory health funds privately with KassenBoost. Then decide for yourself whether supplementary cover or a Healio employer offer is relevant to you.",
+    "ogTitle": "Compare your health fund first. Then choose what comes next.",
+    "ogDescription": "KassenBoost remains your neutral comparison. Healio only shows optional next steps when you ask for them.",
+    "ogImageAlt": "KassenBoost and Healio as separate paths for health fund comparison and supplementary cover"
+  },
+  "hero": {
+    "eyebrow": "KassenBoost × Healio",
+    "title": "Compare first. Then decide for yourself.",
+    "description": "KassenBoost helps you compare German statutory health funds neutrally and without creating an account. Healio remains separate and only becomes relevant if you want to explore supplementary cover or an employer offer.",
+    "cta": "Compare health funds with KassenBoost",
+    "externalNote": "The comparison opens on the separate KassenBoost website. Your information stays there and is not automatically shared with Healio."
+  },
+  "privacy": {
+    "eyebrow": "Your comparison stays private",
+    "title": "No hidden data bridge.",
+    "confirmation": "No information from your comparison was shared with Healio.",
+    "listLabel": "Information not shared with Healio",
+    "details": [
+      "No health fund and no comparison result",
+      "No region, income or personal preferences",
+      "No health information and no decision for or against an offer"
+    ]
+  },
+  "protection": {
+    "eyebrow": "Optional next step",
+    "title": "Supplementary cover is a separate decision.",
+    "description": "A lower health fund contribution does not answer every health question. If you wish, Healio can explain three possible areas of cover independently of your comparison.",
+    "items": [
+      {
+        "title": "Outpatient",
+        "description": "More flexibility for areas such as alternative medicine, osteopathy, glasses or additional preventive care, depending on the plan."
+      },
+      {
+        "title": "Dental",
+        "description": "Make out-of-pocket costs for treatment and prosthetics more predictable and understand conditions before taking out cover."
+      },
+      {
+        "title": "Hospital",
+        "description": "More choice of doctor, hospital and accommodation if this freedom matters to you."
+      }
+    ],
+    "cta": "Understand supplementary cover with Healio"
+  },
+  "employer": {
+    "eyebrow": "KassenBoost at work",
+    "title": "Access for employees. No insight for the employer.",
+    "description": "Employers can offer KassenBoost as voluntary guidance. Individual information, results and decisions remain private. Healio manages corporate benefits separately.",
+    "cta": "Explore the employer concept",
+    "ctaHref": "/en/companies#healio-belegschaft"
+  }
+}

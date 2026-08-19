@@ -28,6 +28,15 @@ export const seoRoutes = [
     hreflang: { de: 'https://healio.de/unternehmen', en: 'https://healio.de/en/companies' },
   },
   {
+    path: '/kassenboost',
+    title: 'KassenBoost & Healio: Krankenkasse privat vergleichen',
+    description: 'Vergleiche gesetzliche Krankenkassen privat bei KassenBoost. Danach entscheidest du selbst, ob Zusatzschutz oder ein Arbeitgeberangebot von Healio für dich relevant ist.',
+    canonical: 'https://healio.de/kassenboost',
+    keywords: 'Krankenkassenvergleich, gesetzliche Krankenkasse vergleichen, KassenBoost, Healio, privater Krankenkassenvergleich',
+    lang: 'de',
+    hreflang: { de: 'https://healio.de/kassenboost', en: 'https://healio.de/en/kassenboost' },
+  },
+  {
     path: '/ambulant',
     title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
     description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie & Naturheilkunde. Kassenboni + Zusatzversicherung clever kombiniert. Jetzt berechnen!',
@@ -389,6 +398,14 @@ export const seoRoutes = [
     ogImageHeight: 992,
     lang: 'en',
     hreflang: { de: 'https://healio.de/unternehmen', en: 'https://healio.de/en/companies' },
+  },
+  {
+    path: '/en/kassenboost',
+    title: 'KassenBoost & Healio: Compare Health Funds Privately',
+    description: 'Compare statutory health funds privately with KassenBoost. Then decide whether supplementary cover or a Healio employer offer is relevant to you.',
+    canonical: 'https://healio.de/en/kassenboost',
+    lang: 'en',
+    hreflang: { de: 'https://healio.de/kassenboost', en: 'https://healio.de/en/kassenboost' },
   },
   {
     path: '/en/outpatient',

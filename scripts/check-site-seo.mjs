@@ -5,11 +5,11 @@ import { seoRoutes } from './seo-routes.mjs';
 const SITE_URL = 'https://healio.de';
 
 const publicRouterPaths = [
-  '/', '/about', '/leistungen', '/unternehmen', '/partner', '/hebammen', '/zahnaerzte',
+  '/', '/about', '/leistungen', '/kassenboost', '/unternehmen', '/partner', '/hebammen', '/zahnaerzte',
   '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant',
   '/zahn', '/stationaer', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
-  '/en', '/en/about', '/en/services', '/en/companies', '/en/partner', '/en/midwives',
+  '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/companies', '/en/partner', '/en/midwives',
   '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',
   '/tiktok', '/en/tiktok', '/instagram', '/en/instagram',
@@ -27,6 +27,7 @@ const bilingualPairs = [
   ['/', '/en'],
   ['/about', '/en/about'],
   ['/leistungen', '/en/services'],
+  ['/kassenboost', '/en/kassenboost'],
   ['/unternehmen', '/en/companies'],
   ['/partner', '/en/partner'],
   ['/hebammen', '/en/midwives'],

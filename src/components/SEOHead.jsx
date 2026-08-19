@@ -21,6 +21,8 @@ const HREFLANG_BY_CANONICAL = {
   [`${SITE_URL}/en`]: { de: SITE_URL, en: `${SITE_URL}/en` },
   [`${SITE_URL}/unternehmen`]: { de: `${SITE_URL}/unternehmen`, en: `${SITE_URL}/en/companies` },
   [`${SITE_URL}/en/companies`]: { de: `${SITE_URL}/unternehmen`, en: `${SITE_URL}/en/companies` },
+  [`${SITE_URL}/kassenboost`]: { de: `${SITE_URL}/kassenboost`, en: `${SITE_URL}/en/kassenboost` },
+  [`${SITE_URL}/en/kassenboost`]: { de: `${SITE_URL}/kassenboost`, en: `${SITE_URL}/en/kassenboost` },
   [`${SITE_URL}/ambulant`]: { de: `${SITE_URL}/ambulant`, en: `${SITE_URL}/en/outpatient` },
   [`${SITE_URL}/en/outpatient`]: { de: `${SITE_URL}/ambulant`, en: `${SITE_URL}/en/outpatient` },
   [`${SITE_URL}/partner`]: { de: `${SITE_URL}/partner`, en: `${SITE_URL}/en/partner` },

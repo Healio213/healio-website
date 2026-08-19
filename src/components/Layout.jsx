@@ -7,6 +7,7 @@ const Layout = () => {
   const { pathname } = useLocation();
   const showCta = pathname === '/partner' || pathname === '/en/partner';
   const hideCta = !showCta;
+  const hideAppPromotion = pathname === '/kassenboost' || pathname === '/en/kassenboost';
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -14,7 +15,7 @@ const Layout = () => {
       <main className="flex-grow w-full">
         <Outlet />
       </main>
-      <Footer hideCta={hideCta} />
+      <Footer hideCta={hideCta} hideAppPromotion={hideAppPromotion} />
     </div>
   );
 };

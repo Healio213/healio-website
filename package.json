@@ -12,6 +12,7 @@
     "test:homepage": "node scripts/check-homepage-contract.mjs",
     "test:company": "node scripts/check-company-contract.mjs",
     "test:services": "node scripts/check-services-contract.mjs",
+    "test:kassenboost-bridge": "node scripts/check-kassenboost-bridge-contract.mjs",
     "test:first-information": "node scripts/check-first-information-contract.mjs",
     "test:partner": "node scripts/check-partner-contract.mjs",
     "test:dentists": "node scripts/check-dentists-contract.mjs",

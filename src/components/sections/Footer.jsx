@@ -9,7 +9,7 @@ import { openConsentSettings } from '@/lib/consent';
 const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
 
-const Footer = ({ hideCta = false }) => {
+const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
   const { t } = useTranslation('common');
   const { getPath, lang } = useLanguage();
   const { pathname } = useLocation();
@@ -21,7 +21,8 @@ const Footer = ({ hideCta = false }) => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-healio-primary/40 to-transparent"></div>
 
       <div className="healio-container">
-        <div className="relative mb-16 overflow-hidden rounded-2xl border border-healio-primary/20 bg-gradient-to-br from-slate-900 via-[#071d24] to-slate-950 p-6 shadow-2xl shadow-black/25 md:p-8 lg:p-10">
+        {!hideAppPromotion && (
+          <div className="relative mb-16 overflow-hidden rounded-2xl border border-healio-primary/20 bg-gradient-to-br from-slate-900 via-[#071d24] to-slate-950 p-6 shadow-2xl shadow-black/25 md:p-8 lg:p-10">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-healio-primary/60 to-transparent" />
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
             <div className="max-w-2xl">
@@ -80,7 +81,8 @@ const Footer = ({ hideCta = false }) => {
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
           <div>

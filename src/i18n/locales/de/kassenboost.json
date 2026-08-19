@@ -1,0 +1,54 @@
+{
+  "seo": {
+    "title": "KassenBoost & Healio: Krankenkasse privat vergleichen",
+    "description": "Vergleiche gesetzliche Krankenkassen privat bei KassenBoost. Danach entscheidest du selbst, ob Zusatzschutz oder ein Arbeitgeberangebot von Healio für dich relevant ist.",
+    "ogTitle": "Erst Krankenkasse vergleichen. Dann bewusst weiterdenken.",
+    "ogDescription": "KassenBoost bleibt dein neutraler Vergleich. Healio zeigt dir nur auf Wunsch mögliche nächste Schritte.",
+    "ogImageAlt": "KassenBoost und Healio als getrennte Wege für Krankenkassenvergleich und Zusatzschutz"
+  },
+  "hero": {
+    "eyebrow": "KassenBoost × Healio",
+    "title": "Erst vergleichen. Dann selbst entscheiden.",
+    "description": "KassenBoost hilft dir, gesetzliche Krankenkassen neutral und ohne Login zu vergleichen. Healio ist davon getrennt und wird erst dann relevant, wenn du Zusatzschutz oder ein Angebot deines Arbeitgebers prüfen möchtest.",
+    "cta": "Krankenkassen bei KassenBoost vergleichen",
+    "externalNote": "Der Vergleich öffnet sich auf der eigenständigen Website von KassenBoost. Deine Angaben bleiben dort und werden nicht automatisch an Healio übermittelt."
+  },
+  "privacy": {
+    "eyebrow": "Dein Vergleich bleibt privat",
+    "title": "Keine versteckte Datenbrücke.",
+    "confirmation": "Keine Angaben aus deinem Vergleich wurden an Healio übertragen.",
+    "listLabel": "Nicht an Healio übertragene Angaben",
+    "details": [
+      "Keine Krankenkasse und kein Vergleichsergebnis",
+      "Keine Region, kein Einkommen und keine persönlichen Präferenzen",
+      "Keine Gesundheitsangaben und keine Entscheidung für oder gegen ein Angebot"
+    ]
+  },
+  "protection": {
+    "eyebrow": "Optionaler nächster Schritt",
+    "title": "Zusatzschutz ist eine eigene Entscheidung.",
+    "description": "Ein günstigerer Kassenbeitrag beantwortet noch nicht jede Gesundheitsfrage. Wenn du möchtest, ordnet Healio unabhängig davon drei mögliche Schutzbereiche verständlich ein.",
+    "items": [
+      {
+        "title": "Ambulant",
+        "description": "Mehr Spielraum etwa für Naturheilkunde, Osteopathie, Sehhilfen oder zusätzliche Vorsorge – abhängig vom gewählten Tarif."
+      },
+      {
+        "title": "Zahn",
+        "description": "Eigenanteile bei Behandlung und Zahnersatz planbarer machen und Bedingungen vor dem Abschluss klar verstehen."
+      },
+      {
+        "title": "Stationär",
+        "description": "Mehr Wahl bei Arzt, Klinik und Unterbringung – wenn dir dieser Freiraum im Krankenhaus wichtig ist."
+      }
+    ],
+    "cta": "Zusatzschutz bei Healio verstehen"
+  },
+  "employer": {
+    "eyebrow": "KassenBoost im Unternehmen",
+    "title": "Ein Zugang für Mitarbeiter. Keine Einsicht für den Arbeitgeber.",
+    "description": "Arbeitgeber können KassenBoost freiwillig als Orientierung anbieten. Individuelle Angaben, Ergebnisse und Entscheidungen bleiben privat. Betriebliche Vorsorge wird bei Healio getrennt davon gestaltet.",
+    "cta": "Zum Arbeitgeberkonzept",
+    "ctaHref": "/unternehmen#healio-belegschaft"
+  }
+}
