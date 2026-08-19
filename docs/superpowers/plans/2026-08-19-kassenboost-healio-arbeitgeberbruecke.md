@@ -16,7 +16,7 @@
 - KassenBoost überträgt niemals Kasse, Region, Einkommen, Präferenzen oder Gesundheitsangaben an Healio oder Arbeitgeber.
 - Das Kassenranking bleibt unabhängig von Vergütung, IKK-Beziehungen und Healio-Produkten.
 - bAV-Copy: 676 EUR vollständig arbeitgeberfinanziert; rund 75 EUR möglicher Nettoeffekt; „fast zehnfach“, niemals exaktes 10X-Versprechen.
-- Projektionen zeigen 2/4/6/8 % Marktrendite, ziehen standardmäßig 2,00 Prozentpunkte Effektivkosten sichtbar ab und zeigen keine garantierte oder pauschale Nettorente. Acht Prozent erscheint offensiv, aber ausdrücklich als historisch eingeordnetes Chancenszenario und nicht als Planrendite.
+- Projektionen lassen 0–12 % Marktrendite zu, bieten 4/6/8/10/11,1 % als Schnellwerte an und ziehen standardmäßig 2,00 Prozentpunkte Effektivkosten sichtbar ab. Default: `10 % − 2 % = 8 %`. 11,1 % ist der belegte MSCI-USD-Net-Return-Rückblick Juli 2011 bis Juli 2026, keine Zukunftszusage.
 - Healio-Arbeitgeber-CTA führt zu `/unternehmen` oder `/potenzialanalyse`, niemals zu `/partner`.
 - Deutsche Texte verwenden echte Umlaute, 3.000 EUR und keine Gender-Sonderzeichen.
 - Neue Verhaltensänderungen folgen Red→Green→Refactor; jede Regression wird zuerst als fehlschlagender Test sichtbar gemacht.
@@ -107,7 +107,7 @@ assert.equal(Math.round(leverage.employeeNetImpact * 100) / 100, 71.49);
 assert.equal(Math.round(leverage.leverageFactor * 100) / 100, 9.46);
 ```
 
-Also assert scenario values for 676 EUR over 25, 30 and 35 years at 2 %, 4 %, 6 % and 8 % gross market return with 2.00 percentage points effective-cost reduction, contribution totals, sorted rates and rejection of negative inputs. Explicitly assert that 8 % gross minus 2 % effective costs produces the existing 6-% future value. Keep the 20-year 4-% net model value as a separate technical reference test.
+Assert scenario values for 676 EUR over 25, 30 and 35 years at relevant market rates with 2.00 percentage points effective-cost reduction, contribution totals, sorted rates and rejection of invalid inputs. Explicitly assert that 10 % gross minus 2 % effective costs produces an 8-% model return. Add a provenance calculation: `(484.83 / 100) ** (1 / 15) - 1` equals approximately 11.10 % p. a.; 11.10 minus 2.00 equals approximately 9.10 %. Keep the 20-year 4-% net model value as a separate technical reference test.
 
 Add the BBG-headroom test for 20 employees, 100 % participation, 3.750 EUR average gross, 676 EUR contribution and 3 Mio. EUR revenue: 162.240 EUR annual bAV contributions, 17.156,88 EUR additional employer social contributions, 179.396,88 EUR full annual employer cost, 19,93 % of payroll and 5,98 % of revenue. Validate salary headroom separately for KV/PV and RV/AV.
 
@@ -127,7 +127,7 @@ Expected: `bAV employer leverage contract passed.`
 
 - [ ] **Step 5: Make the company contract fail for the new journey**
 
-Update `scripts/check-company-contract.mjs` to require `CompanyWorkforceConcept` directly after `CompanyRealityCheck`, require `CompanyBavLeverage`, reject the former 1,000-employee/1.5-vs-7 default contract, require the exact 676/75 wording and visible disclaimer, and require the new `anliegen` options in `PotenzialanalysePage.jsx`. Add a dedicated calculator contract that requires the three result groups, 2026 marker, noindex metadata, 338-EUR explanation, revenue context, 2/4/6/8 scenarios, die sichtbare `8 % − 2 % = 6 %`-Logik, MSCI- und BaFin-Quellenzeilen und den payroll-review disclaimer.
+Update `scripts/check-company-contract.mjs` to require `CompanyWorkforceConcept` directly after `CompanyRealityCheck`, require `CompanyBavLeverage`, reject the former 1,000-employee/1.5-vs-7 default contract, require the exact 676/75 wording and visible disclaimer, and require the new `anliegen` options in `PotenzialanalysePage.jsx`. Add a dedicated calculator contract that requires the three result groups, 2026 marker, noindex metadata, 338-EUR explanation, revenue context, die Schnellwerte 4/6/8/10/11,1 %, die sichtbare `10 % − 2 % = 8 %`-Logik, den belegten 15-Jahres-MSCI-Wert 11,10 %, BaFin-Quellenzeile und den payroll-review disclaimer.
 
 - [ ] **Step 6: Verify company contract RED**
 
@@ -138,7 +138,7 @@ Expected: FAIL on missing component/copy/form options.
 
 Move the workforce component near the top, link its main CTA to KassenBoost and its secondary CTA to `/potenzialanalyse?interest=kassenboost`, remove the 3.000-EUR product promise from this entry module, and add a concise bAV leverage section with 25/30/35-year selection plus 2/4/6/8-percent cards. Remove the existing oversized cohort calculator from `/unternehmen`, ohne seine Dateien zu löschen, und verlinke stattdessen auf `/unternehmen/vorsorge-rechner`.
 
-Build the dedicated calculator with compact sliders/presets for workforce size, participation, average gross salary, employer contribution, duration and revenue. Show three separate result groups: company cost, employee effect and capital projection. Use the 2026 BBG headroom per insurance branch, expose assumptions, and never label the projected capital as net pension or guarantee. Make 8 % selectable and visually strong, but label it `Chancenszenario` and place the official MSCI historical context directly in the section. Add a 0.00–4.00-percentage-point effective-cost control with presets 0.90/1.30/1.70/2.00 and default 2.00; display gross rate, cost reduction and net model rate separately. Register the route as `noindex, nofollow`.
+Build the dedicated calculator with compact sliders/presets for workforce size, participation, average gross salary, employer contribution, duration and revenue. Show three separate result groups: company cost, employee effect and capital projection. Use the 2026 BBG headroom per insurance branch, expose assumptions, and never label the projected capital as net pension or guarantee. Make market return adjustable from 0–12 %, with presets 4/6/8/10/11.1 and default 10. Mark 11.1 % as the historical 15-year MSCI USD Net Return observation and place the official source directly in the section. Add a 0.00–4.00-percentage-point effective-cost control with presets 0.90/1.30/1.70/2.00 and default 2.00; display gross rate, cost reduction and net model rate separately. Register the route as `noindex, nofollow`.
 
 Add required `anliegen` with values `kassenboost`, `bav`, `bkv`, `gesamtsystem`, `unsicher`. Preselect `kassenboost` for `?interest=kassenboost`. Require the detailed bAV and bKV selectors only when the selected concern needs them. Preserve the existing Supabase schema by storing explanatory strings in the existing `fokus_bav` and `fokus_bkv` columns; include the concern explicitly in the EmailJS message.
 
@@ -200,7 +200,7 @@ Expected: all content-page tests pass.
 
 - [ ] **Step 1: Write the communication asset**
 
-Include the exact slogans, the 676/75 example, the visible explanation, the separation between employer-funded bAV and salary conversion, the physical-work narrative, die Gesprächslogik des Arbeitgeberrechners and four 2/4/6/8-percent scenarios for 25/30/35 years. Explicitly forbid `2.000–3.000 EUR netto` without tariff-specific evidence and distinguish the historical MSCI USD-/EUR-Reihen from a future product return.
+Include the exact slogans, the 676/75 example, the visible explanation, the separation between employer-funded bAV and salary conversion, the physical-work narrative, die Gesprächslogik des Arbeitgeberrechners, den Default `10−2=8` und den belegten 15-Jahres-Wert `11,10−2=9,10`. Explicitly forbid `2.000–3.000 EUR netto` without tariff-specific evidence and distinguish the historical MSCI USD-/EUR-Reihen from a future product return.
 
 - [ ] **Step 2: Update the strategy synthesis**
 

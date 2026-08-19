@@ -66,20 +66,20 @@ Die Formulierung „10X“ darf nur als „fast zehnfach“ oder „rund 9- bis 
 
 ## Langfristige Darstellung
 
-- Es werden vier Marktszenarien mit 2 %, 4 %, 6 % und 8 % jährlicher Wertentwicklung vor individuellen Produktkosten und Steuern gezeigt. 8 % ist deutlich als **Chancenszenario**, nicht als Planrendite, markiert.
-- Die Standard-Kostenannahme beträgt **2,00 Prozentpunkte Effektivkosten pro Jahr**. Die UI zeigt Marktrendite, Renditeminderung und Modellrendite nach Kosten getrennt: beispielsweise `8 % − 2 % = 6 %`.
+- Die Marktrendite ist von 0 bis 12 % einstellbar; Schnellwerte sind 4 %, 6 %, 8 %, 10 % und 11,1 %. Der Standard ist offensiv und nachvollziehbar: **10 % Marktszenario**.
+- Die Standard-Kostenannahme beträgt **2,00 Prozentpunkte Effektivkosten pro Jahr**. Die UI zeigt Marktrendite, Renditeminderung und Modellrendite nach Kosten getrennt: standardmäßig `10 % − 2 % = 8 %`.
 - Nutzer können 25, 30 oder 35 Jahre auswählen.
 - Angezeigt werden Einzahlung und modelliertes Kapital, keine garantierte oder pauschale Nettorente.
 - Pflichttext: keine Prognose oder Garantie; Produktkosten, Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet.
 - Eine konkrete Monatsrente darf erst mit dem garantierten oder aktuellen Rentenfaktor eines konkreten Tarifs und mit separater Nettoeinordnung gezeigt werden.
 
-Das 8-%-Chancenszenario wird mit zwei offiziellen historischen Einordnungen belegt: MSCI weist für globale Aktien von Januar 1970 bis Dezember 2024 nominal 9,5 % p. a. brutto in USD aus; die aktuelle MSCI-World-Seite weist per Juli 2026 im USD-Net-Return-Fenster 13,43 % p. a. über zehn Jahre aus. Direkt daneben steht als notwendige Gegenperspektive: Der MSCI World EUR Net Return erzielte vom 29.12.2000 bis 31.12.2025 laut MSCI 6,26 % p. a. Diese Reihen unterscheiden sich nach Zeitraum, Währung und Return-Variante und dürfen nicht als identische Produktperformance dargestellt werden.
+Die offensive Einordnung stützt sich auf einen festen aktuellen 15-Jahres-Zeitraum: Das offizielle MSCI-World-Factsheet per 31.07.2026 zeigt für den **MSCI World Net Return in USD** von Juli 2011 bis Juli 2026 einen normierten Anstieg von 100 auf 484,83. Daraus ergibt sich rechnerisch eine annualisierte Wertentwicklung von rund **11,10 % p. a.** Das ist eine Indexhistorie nach der MSCI-Net-Return-Methodik, aber vor individuellen Produktkosten. Nach der transparenten Modellannahme von zwei Prozentpunkten Kosten ergibt sich rein rechnerisch **9,10 %**.
 
 Verbindliche 8-%-Copy:
 
-> **8 % Chancenszenario:** Eine offensive Modellrechnung, historisch eingeordnet – keine Prognose und keine zugesagte Produkt- oder Nettorendite. MSCI dokumentiert für globale Aktien 9,5 % p. a. brutto in USD von 1970 bis 2024; andere Zeiträume und die EUR-Sicht können deutlich abweichen.
+> **Historisch eingeordnet, offensiv gerechnet:** Der MSCI World Net Return in USD entwickelte sich von Juli 2011 bis Juli 2026 annualisiert mit rund 11,10 % p. a. Unser Standardmodell setzt nicht diesen historischen Wert fort, sondern rechnet mit 10 % Marktannahme und zieht zwei Prozentpunkte Kosten ab: 8 % Modellrendite nach Kosten. Historie ist keine Garantie.
 
-Die Behauptung „8 % nach pauschal 3 % Kosten“ bleibt unzulässig, solange kein konkretes Produktinformationsblatt genau diese Renditeminderung und Anlageabbildung belegt. Stattdessen rechnet der Rechner transparent mit 2,00 Prozentpunkten als konservativer Standardannahme. Die BaFin-Auswertung fondsgebundener Policen mit monatlicher Beitragszahlung ergab bei 30 Jahren Laufzeit einen Median von 1,64 und ein gewichtetes Mittel von 1,90 Prozentpunkten Effektivkosten; bei 40 Jahren 1,53 beziehungsweise 1,75. Die Auswertung ist eine Markteinordnung, kein Beleg für ein konkretes Healio-Produkt. Im individuellen Angebot wird die Annahme durch die Effektivkosten aus den Vertragsunterlagen ersetzt.
+Die Behauptung „8 % nach pauschal 3 % Kosten“ bleibt unzulässig, solange kein konkretes Produktinformationsblatt genau diese Renditeminderung und Anlageabbildung belegt. Stattdessen rechnet der Rechner transparent mit 2,00 Prozentpunkten als Standardannahme. Die BaFin-Auswertung fondsgebundener Policen mit monatlicher Beitragszahlung ergab bei 30 Jahren Laufzeit einen Median von 1,64 und ein gewichtetes Mittel von 1,90 Prozentpunkten Effektivkosten; bei 40 Jahren 1,53 beziehungsweise 1,75. Die Auswertung ist eine Markteinordnung, kein Beleg für ein konkretes Healio-Produkt. Im individuellen Angebot wird die Annahme durch die Effektivkosten aus den Vertragsunterlagen ersetzt.
 
 Verbindliche Kostencopy:
 
@@ -97,7 +97,7 @@ Der ausführliche Rechner lebt auf der zunächst `noindex, nofollow` ausgeliefer
 - Vollständig arbeitgeberfinanzierter Monatsbeitrag: 0–676 EUR; der 338-EUR-Knick wird sichtbar erklärt.
 - Laufzeit: 25, 30 oder 35 Jahre.
 - Jahresumsatz: 0,6–500 Mio. EUR über gestufte, nichtlineare Schnellwerte.
-- Wertentwicklung: öffentliche Marktszenarien 2 %, 4 %, 6 % oder 8 %; 8 % als optisch hervorgehobenes Chancenszenario mit sichtbarer historischer Einordnung.
+- Wertentwicklung: 0–12 % Marktrendite; Schnellwerte 4/6/8/10/11,1 %, Default 10 %. Der historische 15-Jahres-Wert 11,1 % ist als belegte Rückschau markiert, nicht als Zukunftsvorgabe.
 - Effektivkosten: Standard 2,00 Prozentpunkte; Schnellwerte 0,90 / 1,30 / 1,70 / 2,00 für das Verkaufsgespräch, jeweils klar als Annahme. Die konkrete Vertragszahl kann präzise eingegeben werden.
 
 ### Rechenlogik 2026
