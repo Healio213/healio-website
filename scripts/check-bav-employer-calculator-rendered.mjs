@@ -31,6 +31,36 @@ for (const [language, html, canonical] of [
   assert.match(html, /id="market-return" type="range" min="0" max="12" step="0.1"/);
   assert.match(html, /id="average-gross" type="range" min="2001" max="6450"/);
 
+  const rangeInputs = [...html.matchAll(/<input\b[^>]*\btype="range"[^>]*>/g)].map((match) => match[0]);
+  assert.equal(rangeInputs.length, 7, `${language}: expected all seven calculator ranges.`);
+  rangeInputs.forEach((input) => {
+    assert.match(input, /aria-valuetext="[^"]+"/, `${language}: range input exposes no meaningful value text.`);
+  });
+
+  const revenueInput = rangeInputs.find((input) => input.includes('id="annual-revenue"'));
+  assert(revenueInput, `${language}: annual revenue range is missing.`);
+  if (language === 'de') {
+    assert.match(revenueInput, /aria-valuetext="3\.000\.000(?:&nbsp;|\u00a0)€"/);
+  } else {
+    assert.match(revenueInput, /aria-valuetext="€3,000,000"/);
+  }
+
+  assert.doesNotMatch(
+    html,
+    /<div class="sm:col-span-2"><div class="border-l-2/,
+    `${language}: definition-list metrics must not have a nested layout wrapper.`,
+  );
+  assert.match(
+    html,
+    /<div class="border-l-2[^\"]*sm:col-span-2"><dt class="[^"]*text-slate-600"/,
+    `${language}: primary metric must own its grid span and use readable term contrast.`,
+  );
+  assert.match(
+    html,
+    /data-results-announcement="true"[^>]*aria-live="polite"[^>]*aria-atomic="true"/,
+    `${language}: results need one concise live announcement.`,
+  );
+
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .map((match) => JSON.parse(match[1]));
   const webPages = schemas.flatMap((schema) => collectWebPages(schema));
@@ -66,6 +96,13 @@ assert.match(de, /9,10 % nach der gewählten Kostenannahme/);
 assert.match(de, /äquivalente Monatsrendite/);
 assert.match(de, /Die gewählte vereinfachte Renditeminderung ist berücksichtigt/);
 assert.match(de, /durchschnittlicher Zusatzbeitrag von 2,9 %/);
+assert.match(de, /modellierter Gesamtaufwand pro Jahr/);
+assert.match(de, /§ 3 Nr\. 63 EStG/);
+assert.match(de, /zwölf gleich hohe Monatsbeiträge/);
+assert.match(de, /Deutsche Rentenversicherung/);
+assert.match(de, /Bundesregierung · Rechengrößen 2026/);
+assert.match(de, /Bundesgesundheitsministerium · GKV/);
+assert.match(de, /Bundesgesundheitsministerium · Pflegeversicherung/);
 
 assert.match(en, /€162,240/);
 assert.match(en, /€17,156\.88/);
@@ -76,5 +113,12 @@ assert.match(en, /Historical 15-year value/);
 assert.match(en, /11\.10% p\.a\./);
 assert.match(en, /9\.10% after the selected 2-percentage-point cost assumption/);
 assert.match(en, /equivalent monthly return/);
+assert.match(en, /modelled total annual employer cost/);
+assert.match(en, /Section 3 no\. 63 EStG/);
+assert.match(en, /twelve equal monthly contributions/);
+assert.match(en, /German Pension Insurance/);
+assert.match(en, /Federal Government · 2026 reference values/);
+assert.match(en, /Federal Ministry of Health · statutory health insurance/);
+assert.match(en, /Federal Ministry of Health · long-term care insurance/);
 
 console.log('Rendered bAV employer calculator contract passed.');

@@ -68,7 +68,16 @@ assert.match(page, /max=\{6450\}/);
 assert.match(page, /publicExample[\s\S]{0,260}credit:/);
 assert.match(page, /publicExample[\s\S]{0,260}impact:/);
 assert.match(page, /aria-describedby/);
+assert.match(page, /aria-valuetext=\{valueLabel\}/);
 assert.match(page, /focus-visible:ring/);
+assert.match(page, /const Metric = \(\{ label, value, primary = false, note, className = '' \}\)/);
+assert.match(page, /<Metric[\s\S]{0,120}className="sm:col-span-2"/);
+assert.doesNotMatch(page, /<div className="sm:col-span-2">\s*<Metric/);
+assert.match(page, /note && <span className="mt-2 block text-xs leading-5 text-slate-600">/);
+assert.match(page, /<dt className="text-xs font-bold uppercase tracking-\[0\.12em\] text-slate-600">/);
+assert.match(page, /valueLabel=\{formatCurrency\(annualRevenue\)\}/);
+assert.match(page, /data-results-announcement/);
+assert.doesNotMatch(page, /<section aria-labelledby="results-title" aria-live=/);
 
 assert.equal(de.hero.eyebrow, 'bAV-Entscheidungsrechner 2026');
 assert.match(de.hero.title, /676 EUR/);
@@ -78,6 +87,14 @@ assert.equal(de.results.capital.title, 'Kapitalprojektion');
 assert.equal(en.results.company.title, 'Company cost');
 assert.equal(en.results.employee.title, 'Employee impact');
 assert.equal(en.results.capital.title, 'Capital projection');
+assert.equal(de.results.company.total, 'modellierter Gesamtaufwand pro Jahr');
+assert.equal(en.results.company.total, 'modelled total annual employer cost');
+assert.match(de.controls.salary.hint, /2\.001–6\.450 EUR/);
+assert.match(de.controls.salary.hint, /Übergangsbereich/);
+assert.match(de.controls.salary.hint, /Jahresarbeitsentgeltgrenze/);
+assert.match(en.controls.salary.hint, /EUR 2,001–6,450/);
+assert.match(en.controls.salary.hint, /transition zone/);
+assert.match(en.controls.salary.hint, /annual income threshold/);
 assert.match(de.controls.contribution.splitFree, /338 EUR/);
 assert.match(de.controls.contribution.splitLiable, /338 EUR/);
 assert.equal(de.controls.returnRate.standard, 'Standardszenario');
@@ -97,7 +114,48 @@ assert.match(de.disclaimers.payroll, /Payroll/);
 assert.match(de.disclaimers.assumptions, /durchschnittlicher Zusatzbeitrag von 2,9 %/);
 assert.match(de.disclaimers.assumptions, /ein Kind/);
 assert.match(de.disclaimers.assumptions, /außerhalb Sachsens/);
+assert.match(de.disclaimers.legalFramework, /§ 3 Nr\. 63 EStG/);
+assert.match(de.disclaimers.legalFramework, /Pensionsfonds/);
+assert.match(de.disclaimers.legalFramework, /Pensionskasse/);
+assert.match(de.disclaimers.legalFramework, /Direktversicherung/);
+assert.match(de.disclaimers.legalFramework, /8\.112 EUR/);
+assert.match(de.disclaimers.legalFramework, /4\.056 EUR/);
+assert.match(de.disclaimers.legalFramework, /nicht durch andere Beiträge ausgeschöpft/);
+assert.match(de.disclaimers.legalFramework, /zwölf gleich hohe Monatsbeiträge/);
+assert.match(en.disclaimers.legalFramework, /Section 3 no\. 63 EStG/);
+assert.match(en.disclaimers.legalFramework, /pension fund/);
+assert.match(en.disclaimers.legalFramework, /pension scheme/);
+assert.match(en.disclaimers.legalFramework, /direct insurance/);
+assert.match(en.disclaimers.legalFramework, /EUR 8,112/);
+assert.match(en.disclaimers.legalFramework, /EUR 4,056/);
+assert.match(en.disclaimers.legalFramework, /not (?:been )?used by other contributions/);
+assert.match(en.disclaimers.legalFramework, /twelve equal monthly contributions/);
+assert.equal(
+  de.sources.drv.url,
+  'https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Arbeitgeber-und-Steuerberater/summa-summarum/Lexikon/B/beitragsfreiheit_von_arbeitgeberbeitraegen_zur_betrieblichen_altersversorgung.html',
+);
+assert.match(de.sources.drv.description, /8\.112 EUR/);
+assert.match(de.sources.drv.description, /4\.056 EUR/);
+assert.equal(
+  de.sources.federalGovernment.url,
+  'https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514',
+);
+assert.match(de.sources.federalGovernment.description, /8\.450 EUR/);
+assert.match(de.sources.federalGovernment.description, /5\.812,50 EUR/);
+assert.match(de.sources.federalGovernment.description, /6\.450 EUR/);
+assert.equal(de.sources.bmgHealth.url, 'https://www.bundesgesundheitsministerium.de/beitraege/seite');
+assert.match(de.sources.bmgHealth.description, /14,6 %/);
+assert.match(de.sources.bmgHealth.description, /2,9 %/);
+assert.equal(
+  de.sources.bmgCare.url,
+  'https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung',
+);
+assert.match(de.sources.bmgCare.description, /3,6 %/);
+for (const sourceKey of ['drv', 'federalGovernment', 'bmgHealth', 'bmgCare']) {
+  assert.equal(en.sources[sourceKey].url, de.sources[sourceKey].url);
+}
 assert.match(page, /bavDecisionCalculator\.disclaimers\.assumptions/);
+assert.match(page, /bavDecisionCalculator\.disclaimers\.legalFramework/);
 assert.match(de.results.employee.publicExample, /\{\{credit\}\}/);
 assert.match(de.results.employee.publicExample, /\{\{impact\}\}/);
 assert.doesNotMatch(JSON.stringify(de), /garantierte Nettorente|garantierter ROI|sichere Rendite/i);

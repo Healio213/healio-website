@@ -246,7 +246,7 @@
       },
       "salary": {
         "label": "Average monthly gross salary",
-        "hint": "Planning value for social-security contribution ceilings"
+        "hint": "Model corridor EUR 2,001–6,450: above the transition zone and up to the 2026 general annual income threshold for statutory health insurance"
       },
       "contribution": {
         "label": "Employer contribution per participant and month",
@@ -286,11 +286,12 @@
     "results": {
       "eyebrow": "Your model result",
       "participants": "{{count}} participants",
+      "announcement": "{{count}} participants. Modelled total annual employer cost {{annualCost}}. Modelled capital {{capital}} per participant.",
       "company": {
         "title": "Company cost",
         "bav": "annual pension contributions",
         "social": "additional annual employer social charges",
-        "total": "total annual employer cost",
+        "total": "modelled total annual employer cost",
         "payroll": "share of gross payroll",
         "revenue": "share of annual revenue"
       },
@@ -311,7 +312,7 @@
     },
     "sources": {
       "eyebrow": "Disclose the assumptions",
-      "title": "Why the default is 10 percent – and deducts 2 percent costs.",
+      "title": "The primary sources behind the 2026 model.",
       "msci": {
         "publisher": "MSCI World · USD Net Return",
         "description": "The MSCI factsheet dated July 31, 2026 shows cumulative growth from 100 to 484.83 between July 2011 and July 2026. This equals a calculated 11.10% p.a. in USD; after a flat 2-percentage-point cost assumption it would be 9.10%. MSCI Net Return is an index methodology reflecting assumed withholding tax on dividends, not performance after individual product costs. Historical context, not a future guarantee.",
@@ -327,10 +328,31 @@
         "description": "For unit-linked contracts with a 30-year term and monthly contributions, the weighted average among the surveyed best-selling products was a 1.90 percentage-point effective cost; the median was 1.64.",
         "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
       },
+      "drv": {
+        "publisher": "German Pension Insurance · pension funding limits",
+        "description": "German Pension Insurance confirms for 2026 employer contributions through a pension fund, pension scheme or direct insurance: up to EUR 8,112 a year tax-free, of which up to EUR 4,056 a year is exempt from social-security contributions.",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Arbeitgeber-und-Steuerberater/summa-summarum/Lexikon/B/beitragsfreiheit_von_arbeitgeberbeitraegen_zur_betrieblichen_altersversorgung.html"
+      },
+      "federalGovernment": {
+        "publisher": "Federal Government · 2026 reference values",
+        "description": "The official 2026 monthly figures are EUR 8,450 for the pension and unemployment contribution ceiling, EUR 5,812.50 for the health and long-term care ceiling, and EUR 6,450 for the general annual income threshold.",
+        "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514"
+      },
+      "bmgHealth": {
+        "publisher": "Federal Ministry of Health · statutory health insurance",
+        "description": "For 2026, the Federal Ministry of Health states a 14.6% general statutory health-insurance rate and a 2.9% average additional contribution; the individual insurer's rate may differ.",
+        "url": "https://www.bundesgesundheitsministerium.de/beitraege/seite"
+      },
+      "bmgCare": {
+        "publisher": "Federal Ministry of Health · long-term care insurance",
+        "description": "The Federal Ministry of Health states a 3.6% general contribution rate for social long-term care insurance. The allocation can vary by number of children, age and place of employment.",
+        "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
+      },
       "open": "Open primary source"
     },
     "disclaimers": {
       "assumptions": "Standard social-charge assumption: statutory health insurance, 2.9% average additional contribution, one child and employment outside Saxony.",
+      "legalFramework": "For the first employment relationship, the model assumes an eligible implementation route under Section 3 no. 63 EStG: pension fund, pension scheme or direct insurance. It assumes that the 2026 annual limits of EUR 8,112 tax-free and EUR 4,056 exempt from social-security contributions have not been used by other contributions and that twelve equal monthly contributions are paid. EUR 676 and EUR 338 are the monthly amounts derived from those annual limits.",
       "projection": "Simplified model calculation, not a forecast or guarantee. The selected simplified return reduction is included; actual tariff costs and their effect are not fully represented without product documents. Tax, inflation and health and long-term-care contributions in the benefit phase are not included. Past performance is not a reliable indicator of future results.",
       "payroll": "Average gross salary is only a planning approximation. Contribution ceilings, health insurer, care-insurance status, place of employment and further levies must be reviewed in payroll for every employee and payroll month. This is not tax or legal advice."
     },

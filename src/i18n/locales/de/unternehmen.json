@@ -246,7 +246,7 @@
       },
       "salary": {
         "label": "Durchschnittliches Monatsbrutto",
-        "hint": "Planungswert für die Beitragsbemessungsgrenzen"
+        "hint": "Modellkorridor 2.001–6.450 EUR: oberhalb des Übergangsbereichs und bis zur allgemeinen Jahresarbeitsentgeltgrenze 2026"
       },
       "contribution": {
         "label": "Arbeitgeberbeitrag pro Teilnehmer und Monat",
@@ -286,11 +286,12 @@
     "results": {
       "eyebrow": "Das Ergebnis Ihres Modells",
       "participants": "{{count}} Teilnehmer",
+      "announcement": "{{count}} Teilnehmer. Modellierter Gesamtaufwand {{annualCost}} pro Jahr. Modelliertes Kapital {{capital}} je Teilnehmer.",
       "company": {
         "title": "Unternehmensaufwand",
         "bav": "bAV-Beiträge pro Jahr",
         "social": "zusätzliche Arbeitgeber-SV pro Jahr",
-        "total": "vollständiger Aufwand pro Jahr",
+        "total": "modellierter Gesamtaufwand pro Jahr",
         "payroll": "Anteil an der Brutto-Payroll",
         "revenue": "Anteil am Jahresumsatz"
       },
@@ -311,7 +312,7 @@
     },
     "sources": {
       "eyebrow": "Annahmen offenlegen",
-      "title": "Warum 10 Prozent im Standard stehen – und warum 2 Prozent Kosten abgehen.",
+      "title": "Welche Primärquellen hinter dem Modell 2026 stehen.",
       "msci": {
         "publisher": "MSCI World · USD Net Return",
         "description": "Das MSCI-Factsheet per 31. Juli 2026 zeigt für Juli 2011 bis Juli 2026 eine kumulative Entwicklung von 100 auf 484,83. Daraus ergeben sich rechnerisch 11,10 % p. a. in USD; nach pauschal 2 Prozentpunkten Kosten wären es 9,10 %. Net Return bezeichnet bei MSCI eine Indexmethodik unter Berücksichtigung angenommener Quellensteuern auf Dividenden, nicht die Rendite nach individuellen Produktkosten. Historische Einordnung, keine Zukunftsgarantie.",
@@ -327,10 +328,31 @@
         "description": "Für fondsgebundene Verträge mit 30 Jahren Laufzeit und monatlichem Beitrag lag das gewichtete Mittel der untersuchten meistverkauften Produkte bei 1,90 Prozentpunkten Effektivkosten; der Median lag bei 1,64.",
         "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
       },
+      "drv": {
+        "publisher": "Deutsche Rentenversicherung · bAV-Fördergrenzen",
+        "description": "Die Deutsche Rentenversicherung bestätigt für Arbeitgeberbeiträge über Pensionsfonds, Pensionskasse oder Direktversicherung im Jahr 2026: bis 8.112 EUR jährlich steuerfrei, davon bis 4.056 EUR jährlich sozialversicherungsfrei.",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Arbeitgeber-und-Steuerberater/summa-summarum/Lexikon/B/beitragsfreiheit_von_arbeitgeberbeitraegen_zur_betrieblichen_altersversorgung.html"
+      },
+      "federalGovernment": {
+        "publisher": "Bundesregierung · Rechengrößen 2026",
+        "description": "Die amtlichen Monatswerte 2026 betragen 8.450 EUR für die BBG der Renten- und Arbeitslosenversicherung, 5.812,50 EUR für die BBG der Kranken- und Pflegeversicherung sowie 6.450 EUR für die allgemeine Jahresarbeitsentgeltgrenze.",
+        "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514"
+      },
+      "bmgHealth": {
+        "publisher": "Bundesgesundheitsministerium · GKV",
+        "description": "Das BMG weist für 2026 den allgemeinen GKV-Beitragssatz von 14,6 % und den durchschnittlichen Zusatzbeitragssatz von 2,9 % aus; der kassenindividuelle Satz kann abweichen.",
+        "url": "https://www.bundesgesundheitsministerium.de/beitraege/seite"
+      },
+      "bmgCare": {
+        "publisher": "Bundesgesundheitsministerium · Pflegeversicherung",
+        "description": "Das BMG weist für die soziale Pflegeversicherung einen allgemeinen Beitragssatz von 3,6 % aus. Kinderzahl, Alter und Beschäftigungsort können die Aufteilung verändern.",
+        "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
+      },
       "open": "Primärquelle öffnen"
     },
     "disclaimers": {
       "assumptions": "Standardannahme für die Sozialabgaben: gesetzlich versichert, durchschnittlicher Zusatzbeitrag von 2,9 %, ein Kind und Beschäftigung außerhalb Sachsens.",
+      "legalFramework": "Das Modell setzt für das erste Dienstverhältnis einen nach § 3 Nr. 63 EStG geeigneten Durchführungsweg voraus: Pensionsfonds, Pensionskasse oder Direktversicherung. Es unterstellt, dass die Jahresgrenzen 2026 von 8.112 EUR steuerfrei und 4.056 EUR sozialversicherungsfrei nicht durch andere Beiträge ausgeschöpft sind und zwölf gleich hohe Monatsbeiträge geleistet werden. 676 EUR und 338 EUR sind die daraus abgeleiteten Monatswerte.",
       "projection": "Vereinfachte Modellrechnung, keine Prognose oder Garantie. Die gewählte vereinfachte Renditeminderung ist berücksichtigt; die konkreten Tarifkosten und ihre tatsächliche Wirkung sind ohne Produktunterlagen nicht vollständig abgebildet. Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet. Vergangene Wertentwicklung ist kein verlässlicher Indikator für künftige Ergebnisse.",
       "payroll": "Das Durchschnittsbrutto ist nur eine Planungsnäherung. Beitragsbemessungsgrenzen, Krankenkasse, Pflegeversicherungsstatus, Beschäftigungsort und weitere Umlagen müssen in der Payroll je Mitarbeiter und Abrechnungsmonat geprüft werden. Keine Steuer- oder Rechtsberatung."
     },

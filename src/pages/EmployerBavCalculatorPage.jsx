@@ -86,6 +86,7 @@ const RangeField = ({
       step={step}
       value={value}
       onChange={(event) => onChange(Number(event.target.value))}
+      aria-valuetext={valueLabel}
       aria-describedby={`${id}-hint`}
       className="mt-3 h-11 w-full cursor-pointer accent-[#25c990] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-2"
     />
@@ -101,13 +102,13 @@ const RangeField = ({
   </div>
 );
 
-const Metric = ({ label, value, primary = false, note }) => (
-  <div className={primary ? 'border-l-2 border-[#25c990] bg-[#25c990]/[0.07] p-5' : 'border-l border-slate-200 pl-4'}>
-    <dt className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{label}</dt>
+const Metric = ({ label, value, primary = false, note, className = '' }) => (
+  <div className={`${primary ? 'border-l-2 border-[#25c990] bg-[#25c990]/[0.07] p-5' : 'border-l border-slate-200 pl-4'} ${className}`}>
+    <dt className="text-xs font-bold uppercase tracking-[0.12em] text-slate-600">{label}</dt>
     <dd className={`${primary ? 'mt-2 text-3xl' : 'mt-1.5 text-xl'} font-display font-extrabold leading-tight tabular-nums text-[#07161f]`}>
       {value}
+      {note && <span className="mt-2 block text-xs leading-5 text-slate-600">{note}</span>}
     </dd>
-    {note && <p className="mt-2 text-xs leading-5 text-slate-500">{note}</p>}
   </div>
 );
 
@@ -326,7 +327,7 @@ const EmployerBavCalculatorPage = () => {
                   id="annual-revenue"
                   label={t('bavDecisionCalculator.controls.revenue.label')}
                   hint={t('bavDecisionCalculator.controls.revenue.hint')}
-                  valueLabel={formatCompactCurrency(annualRevenue)}
+                  valueLabel={formatCurrency(annualRevenue)}
                   min={0}
                   max={REVENUE_OPTIONS.length - 1}
                   step={1}
@@ -449,13 +450,25 @@ const EmployerBavCalculatorPage = () => {
                 </div>
               </section>
 
-              <section aria-labelledby="results-title" aria-live="polite" className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-[0_24px_70px_rgba(7,22,31,0.07)] sm:p-8 lg:p-10">
+              <section aria-labelledby="results-title" className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-[0_24px_70px_rgba(7,22,31,0.07)] sm:p-8 lg:p-10">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#087052]">
                   {t('bavDecisionCalculator.results.eyebrow')}
                 </p>
                 <h2 id="results-title" className="mt-3 font-display text-3xl font-extrabold tracking-[-0.035em]">
                   {t('bavDecisionCalculator.results.participants', { count: formatInteger(participants) })}
                 </h2>
+                <p
+                  data-results-announcement
+                  aria-live="polite"
+                  aria-atomic="true"
+                  className="sr-only"
+                >
+                  {t('bavDecisionCalculator.results.announcement', {
+                    count: formatInteger(participants),
+                    annualCost: formatCurrency(plan.employerAnnualCostTotal, 2),
+                    capital: formatCurrency(selectedScenario.projectedCapital),
+                  })}
+                </p>
 
                 <div className="mt-8 space-y-8">
                   <section data-result-group="company" aria-labelledby="company-results-title" className="rounded-2xl border border-slate-200 p-5 sm:p-6">
@@ -465,9 +478,12 @@ const EmployerBavCalculatorPage = () => {
                     <dl className="mt-6 grid gap-5 sm:grid-cols-2">
                       <Metric label={t('bavDecisionCalculator.results.company.bav')} value={formatCurrency(plan.annualBavContributionTotal)} />
                       <Metric label={t('bavDecisionCalculator.results.company.social')} value={formatCurrency(plan.employerSocialContributionsAnnualTotal, 2)} />
-                      <div className="sm:col-span-2">
-                        <Metric primary label={t('bavDecisionCalculator.results.company.total')} value={formatCurrency(plan.employerAnnualCostTotal, 2)} />
-                      </div>
+                      <Metric
+                        primary
+                        className="sm:col-span-2"
+                        label={t('bavDecisionCalculator.results.company.total')}
+                        value={formatCurrency(plan.employerAnnualCostTotal, 2)}
+                      />
                       <Metric
                         label={t('bavDecisionCalculator.results.company.payroll')}
                         value={plan.employerCostPercentOfPayroll === null ? '–' : `${formatPercent(plan.employerCostPercentOfPayroll)} %`}
@@ -515,14 +531,13 @@ const EmployerBavCalculatorPage = () => {
                     <dl className="mt-6 grid gap-5 sm:grid-cols-2">
                       <Metric label={t('bavDecisionCalculator.results.capital.contributionsPerPerson')} value={formatCurrency(selectedScenario.contributionTotal)} />
                       <Metric label={t('bavDecisionCalculator.results.capital.capitalPerPerson')} value={formatCurrency(selectedScenario.projectedCapital)} />
-                      <div className="sm:col-span-2">
-                        <Metric
-                          primary
-                          label={t('bavDecisionCalculator.results.capital.capitalGroup')}
-                          value={formatCompactCurrency(selectedScenario.projectedCapital * participants)}
-                          note={formatCurrency(selectedScenario.projectedCapital * participants)}
-                        />
-                      </div>
+                      <Metric
+                        primary
+                        className="sm:col-span-2"
+                        label={t('bavDecisionCalculator.results.capital.capitalGroup')}
+                        value={formatCompactCurrency(selectedScenario.projectedCapital * participants)}
+                        note={formatCurrency(selectedScenario.projectedCapital * participants)}
+                      />
                     </dl>
                   </section>
                 </div>
@@ -540,7 +555,15 @@ const EmployerBavCalculatorPage = () => {
               {t('bavDecisionCalculator.sources.title')}
             </h2>
             <div className="mt-9 grid gap-4 lg:grid-cols-3">
-              {['msci', 'msciEur', 'bafin'].map((sourceKey) => (
+              {[
+                'msci',
+                'msciEur',
+                'bafin',
+                'drv',
+                'federalGovernment',
+                'bmgHealth',
+                'bmgCare',
+              ].map((sourceKey) => (
                 <article key={sourceKey} className="rounded-2xl border border-slate-200 bg-[#f7faf9] p-6">
                   <h3 className="font-display text-base font-extrabold">
                     {t(`bavDecisionCalculator.sources.${sourceKey}.publisher`)}
@@ -563,6 +586,9 @@ const EmployerBavCalculatorPage = () => {
             <div className="mt-8 grid gap-4 text-xs leading-5 text-slate-600 lg:grid-cols-2">
               <p className="rounded-2xl border border-[#25c990]/30 bg-[#effaf6] p-5 font-semibold text-[#07563f] lg:col-span-2">
                 {t('bavDecisionCalculator.disclaimers.assumptions')}
+              </p>
+              <p className="rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:col-span-2">
+                {t('bavDecisionCalculator.disclaimers.legalFramework')}
               </p>
               <p className="rounded-2xl border border-slate-200 p-5">
                 {t('bavDecisionCalculator.disclaimers.projection')}
