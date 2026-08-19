@@ -24,7 +24,10 @@ const CompanyBavLeverage = () => {
               >
                 {t('bavLeverage.title')}
               </h2>
-              <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
+              <p className="mt-6 max-w-xl border-l-2 border-[#25c990] pl-5 text-sm font-bold leading-6 text-[#8ee7ca]">
+                {t('bavLeverage.netEffectExplanation')}
+              </p>
+              <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">
                 {t('bavLeverage.description')}
               </p>
               <Link
@@ -47,6 +50,12 @@ const CompanyBavLeverage = () => {
                   {t('bavLeverage.splitLiable')}
                 </p>
               </div>
+              <Link
+                to={`${getPath('vorsorgeRechner')}#calculator-sources-title`}
+                className="mt-3 inline-flex min-h-11 items-center text-xs font-bold text-[#8ee7ca] underline decoration-[#25c990] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f]"
+              >
+                {t('bavLeverage.legalSource')}
+              </Link>
 
               <div className="mt-7 border-l-2 border-[#25c990] pl-5">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8ee7ca]">

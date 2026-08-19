@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const KASSENBOOST_EMPLOYER_URL = 'https://kassenboost.de/?utm_source=healio&utm_medium=website&utm_campaign=arbeitgeberzugang';
 
 const CompanyWorkforceConcept = () => {
   const { t } = useTranslation('unternehmen');
+  const { getPath } = useLanguage();
   const points = t('workforce.points', { returnObjects: true });
+  const inquiryPath = `${getPath('potenzialanalyse')}?interest=kassenboost`;
 
   return (
     <section
@@ -66,7 +69,7 @@ const CompanyWorkforceConcept = () => {
                 {t('workforce.primaryCta')}
               </a>
               <Link
-                to="/potenzialanalyse?interest=kassenboost"
+                to={inquiryPath}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-7 py-3 font-display text-sm font-extrabold text-[#10242c] transition hover:border-[#25c990] hover:bg-[#effaf6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
               >
                 {t('workforce.secondaryCta')}

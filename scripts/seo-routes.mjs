@@ -266,8 +266,8 @@ export const seoRoutes = [
   },
   {
     path: '/potenzialanalyse',
-    title: 'Kostenlose Potenzialanalyse – Betriebliche Vorsorge | Healio B2B',
-    description: 'Potenzialanalyse für betriebliche Altersvorsorge (bAV) und Krankenversicherung (bKV). Individuelle Berechnung für Ihr Unternehmen.',
+    title: 'Potenzialanalyse für KassenBoost, bAV und bKV | Healio',
+    description: 'Kostenlose Potenzialanalyse für KassenBoost als Mitarbeiterzugang, betriebliche Altersvorsorge (bAV), bKV oder ein integriertes Gesamtsystem.',
     canonical: 'https://healio.de/potenzialanalyse',
     lang: 'de',
     hreflang: { de: 'https://healio.de/potenzialanalyse', en: 'https://healio.de/en/potential-analysis' },
@@ -527,8 +527,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/potential-analysis',
-    title: 'Free Potential Analysis – Corporate Benefits | Healio',
-    description: 'Potential analysis for corporate pension (bAV) and corporate health insurance (bKV). Individual calculation for your company.',
+    title: 'Potential analysis for KassenBoost, pension and health | Healio',
+    description: 'Free potential analysis for KassenBoost employee access, corporate pension, corporate health insurance or an integrated benefits system.',
     canonical: 'https://healio.de/en/potential-analysis',
     lang: 'en',
     hreflang: { de: 'https://healio.de/potenzialanalyse', en: 'https://healio.de/en/potential-analysis' },

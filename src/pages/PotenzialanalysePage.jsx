@@ -18,6 +18,7 @@ import {
   createPotentialAnalysisDatabaseRecord,
   getPotentialAnalysisDetailVisibility,
   normalizePotentialInterest,
+  summarizePotentialAnalysisDelivery,
 } from '@/lib/potentialAnalysisModel';
 import {
   Select,
@@ -142,13 +143,13 @@ const PotenzialanalysePage = () => {
       });
 
       const [emailResult, databaseResult] = await Promise.allSettled([emailRequest, databaseRequest]);
-      const delivery = {
-        emailjs: emailResult.status,
-        supabase: databaseResult.status,
-      };
-      const successfulChannels = Object.values(delivery).filter((status) => status === 'fulfilled').length;
+      const {
+        delivery,
+        hasSuccessfulDelivery,
+        isPartialDelivery,
+      } = summarizePotentialAnalysisDelivery({ emailResult, databaseResult });
 
-      if (successfulChannels === 0) {
+      if (!hasSuccessfulDelivery) {
         setSubmitError(t('potenzialanalyse.errorSendDesc'));
         setSubmitStatus(t('potenzialanalyse.errorLiveStatus'));
         toast({
@@ -159,7 +160,6 @@ const PotenzialanalysePage = () => {
         return;
       }
 
-      const isPartialDelivery = successfulChannels === 1;
       const createdAt = Date.now();
       setSubmissionComplete(true);
       setSubmitStatus(isPartialDelivery
@@ -214,8 +214,9 @@ const PotenzialanalysePage = () => {
         schemaMarkup={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Kostenlose Potenzialanalyse",
-          "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
+          "name": t('potenzialanalyse.schemaName'),
+          "description": t('potenzialanalyse.schemaDescription'),
+          "inLanguage": lang === 'en' ? 'en-US' : 'de-DE',
           "url": canonicalUrl,
           "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
         }}

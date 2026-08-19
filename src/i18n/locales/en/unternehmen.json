@@ -178,10 +178,12 @@
   "bavLeverage": {
     "eyebrow": "Employer-funded pension",
     "title": "EUR 676 pension contribution. Around EUR 75 potential net impact.*",
+    "netEffectExplanation": "In the standard example, current take-home pay may fall by around EUR 71 to EUR 74 due to additional social-security contributions – rounded to around EUR 75.",
     "description": "The leverage becomes visible when pension contribution, social charges and long-term model return are kept separate.",
     "splitTitle": "In the standard model, the EUR 676 consists of two parts:",
     "splitFree": "EUR 338 exempt from tax and social-security contributions",
     "splitLiable": "EUR 338 tax-free and generally subject to social-security contributions",
+    "legalSource": "Legal basis and assumptions in the calculator",
     "employerCostLabel": "Show the employer's full cost",
     "employerCost": "Employer social-security contributions may apply to the generally liable portion in addition to the pension contribution. In the standard model this is around EUR 71 extra, bringing total cost to around EUR 747 per participant and month.",
     "returnLabel": "Assertive, evidenced standard scenario",
@@ -210,7 +212,7 @@
       },
       {
         "question": "What if an employer-funded benefit budget is not available yet?",
-        "answer": "The Healio employee concept can provide a voluntary entry route without an employer-funded benefit contribution. The company enables internal communication; employees make and fund their own decision."
+        "answer": "The company can voluntarily point employees to the free KassenBoost comparison. Employees use it privately and without contact details; individual inputs and results are shared with neither the employer nor Healio. A later, separate decision to seek advice or choose a solution may involve costs."
       }
     ]
   },
