@@ -88,6 +88,15 @@
     "employees11to50": "11 bis 50 Mitarbeiter",
     "employees51to200": "51 bis 200 Mitarbeiter",
     "employeesOver200": "Über 200 Mitarbeiter",
+    "concern": "Worum geht es Ihnen? *",
+    "concernPlaceholder": "Bitte wählen...",
+    "concernOptions": {
+      "kassenboost": "KassenBoost als Mitarbeiterzugang",
+      "bav": "Betriebliche Altersvorsorge (bAV)",
+      "bkv": "Betriebliche Krankenversicherung (bKV)",
+      "gesamtsystem": "Gesamtsystem aus Gesundheit und Vorsorge",
+      "unsicher": "Noch unsicher – gemeinsam einordnen"
+    },
     "bavFocus": "Fokus auf Betriebliche Altersvorsorge (bAV)? *",
     "bkvFocus": "Fokus auf Betriebliche Krankenversicherung (bKV)? *",
     "yesStrong": "Ja, starkes Interesse",
@@ -108,6 +117,7 @@
     "emailRequired": "E-Mail ist erforderlich",
     "emailInvalid": "Ungültige E-Mail-Adresse",
     "employeesRequired": "Bitte wählen Sie die Mitarbeiteranzahl",
+    "concernRequired": "Bitte wählen Sie Ihr Anliegen",
     "bavRequired": "Bitte geben Sie an, ob Fokus auf bAV liegt",
     "bkvRequired": "Bitte geben Sie an, ob Fokus auf bKV liegt",
     "transferFailed": "Übertragung fehlgeschlagen",
