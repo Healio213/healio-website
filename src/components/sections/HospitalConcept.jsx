@@ -5,8 +5,8 @@ import { Check, ArrowRight, Award, ChevronDown, ExternalLink } from 'lucide-reac
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const exampleCards = [
-  { key: 'fracture', emoji: '🦴', tone: 'mint' },
-  { key: 'familyRoom', emoji: '👶', tone: 'lavender' },
+  { key: 'fracture', icon: 'hospital-comfort', tone: 'mint' },
+  { key: 'familyRoom', icon: 'family-care', tone: 'lavender' },
 ];
 
 const HospitalConcept = () => {
@@ -148,7 +148,7 @@ const HospitalConcept = () => {
                       className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_18px_45px_rgba(35,48,67,0.09)]"
                     >
                       <div className="flex items-start gap-4 border-b border-slate-100 bg-gradient-to-br from-emerald-50/70 via-white to-violet-50/60 p-5 sm:p-6">
-                        <FriendlyIcon emoji={example.emoji} tone={example.tone} size="sm" />
+                        <FriendlyIcon icon={example.icon} tone={example.tone} size="sm" />
                         <div>
                           <p className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.17em] text-healio-primary">
                             {details?.eyebrow}

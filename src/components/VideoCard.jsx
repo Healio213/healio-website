@@ -7,8 +7,8 @@ const VideoCard = ({ title, description, videoLabel, delay, isHero = false, imag
   const { toast } = useToast();
   const handleVideoPlay = () => {
     toast({
-      title: "🚧 Video-Player in Kürze verfügbar!",
-      description: "Diese Funktion ist noch nicht implementiert. 🚀",
+      title: "Video-Player in Kürze verfügbar",
+      description: "Diese Funktion ist noch nicht implementiert.",
       duration: 5000,
       className: "bg-healio-mint border-healio-primary text-healio-slate"
     });

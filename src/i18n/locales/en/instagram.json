@@ -14,7 +14,7 @@
   },
   "cards": {
     "ambulant": {
-      "icon": "🩺",
+      "icon": "ambulant-care",
       "title": "Outpatient",
       "budgetHighlight": "€3,000 Budget",
       "subtitle": "Glasses, alternative medicine, preventive care, osteopathy, pregnancy",
@@ -24,7 +24,7 @@
       "link": "/en/outpatient"
     },
     "zahn": {
-      "icon": "🦷",
+      "icon": "dental-protection",
       "title": "Dental add-on",
       "subtitle": "Three paths: test winner, entry level or price-performance. Instant-cover module up to €1,500 even for advised treatment",
       "price": "from ~€10",
@@ -33,7 +33,7 @@
       "link": "/en/dental"
     },
     "klinik": {
-      "icon": "🏥",
+      "icon": "hospital-comfort",
       "title": "Hospital cover",
       "subtitle": "Private room, chief physician, free hospital choice. Kids' accident cover from €0.75",
       "price": "from €6.84",

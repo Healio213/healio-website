@@ -14,7 +14,7 @@
   },
   "cards": {
     "ambulant": {
-      "icon": "🩺",
+      "icon": "ambulant-care",
       "title": "Ambulant",
       "budgetHighlight": "3.000 € Budget",
       "subtitle": "Brille, Heilpraktiker, Vorsorge, Osteopathie, Schwangerschaft",
@@ -24,7 +24,7 @@
       "link": "/ambulant"
     },
     "zahn": {
-      "icon": "🦷",
+      "icon": "dental-protection",
       "title": "Zahnzusatz",
       "subtitle": "Drei Wege: Testsieger, Einstieg oder Preis-Leistung. Sofortschutz-Baustein bis 1.500 € auch bei angeratener Behandlung",
       "price": "ab ca. 10 €",
@@ -33,7 +33,7 @@
       "link": "/zahn"
     },
     "klinik": {
-      "icon": "🏥",
+      "icon": "hospital-comfort",
       "title": "Krankenhaus-Schutz",
       "subtitle": "Einbettzimmer, Chefarzt, freie Klinikwahl. Kinder-Unfallschutz ab 0,75 €",
       "price": "ab 6,84 €",

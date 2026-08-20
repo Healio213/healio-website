@@ -60,12 +60,12 @@ const PartnerPage = () => {
   };
 
   const partnerTypes = [
-    { emoji: '🌿', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
-    { emoji: '🙌', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
-    { emoji: '🌸', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
-    { emoji: '🧠', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
-    { emoji: '👓', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
-    { emoji: '🤱', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
+    { icon: 'prevention-care', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
+    { icon: 'ambulant-care', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
+    { icon: 'prevention-care', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
+    { icon: 'ambulant-care', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
+    { icon: 'clear-comparison', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
+    { icon: 'family-care', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
   ];
 
   return (
@@ -280,7 +280,7 @@ const PartnerPage = () => {
                 viewport={{ once: true }}
                 className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
               >
-                <FriendlyIcon emoji="💚" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
+                <FriendlyIcon icon="health-budget" tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
                 <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
                 <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
@@ -294,7 +294,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon emoji="🌿" label={t('budget.naturheilkunde')} tone="mint" className="mb-4" />
+                <FriendlyIcon icon="prevention-care" tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
@@ -308,7 +308,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon emoji="👓" label={t('budget.sehhilfen')} tone="sky" className="mb-4" />
+                <FriendlyIcon icon="clear-comparison" tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
@@ -348,7 +348,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                     className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-5" />
+                    <FriendlyIcon icon={item.icon} tone={item.tone} className="mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>
@@ -375,21 +375,21 @@ const PartnerPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
               {[
                 {
-                  emoji: '🤝',
+                  icon: 'ongoing-service',
                   tone: 'mint',
                   title: t('steps.step1Title'),
                   text: t('steps.step1Desc'),
                   step: '1'
                 },
                 {
-                  emoji: '📦',
+                  icon: 'document-check',
                   tone: 'butter',
                   title: t('steps.step2Title'),
                   text: t('steps.step2Desc'),
                   step: '2'
                 },
                 {
-                  emoji: '📈',
+                  icon: 'pension-growth',
                   tone: 'sky',
                   title: t('steps.step3Title'),
                   text: t('steps.step3Desc'),
@@ -408,7 +408,7 @@ const PartnerPage = () => {
                   <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-[#25c990] text-white flex items-center justify-center font-bold text-sm shadow-md">
                     {item.step}
                   </div>
-                  <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-6" />
+                  <FriendlyIcon icon={item.icon} tone={item.tone} className="mb-6" />
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">{item.title}</h3>
                   <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.div>
@@ -418,9 +418,9 @@ const PartnerPage = () => {
             {/* Benefits below steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
               {[
-                { emoji: '😊', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
-                { emoji: '🌱', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
-                { emoji: '🛡️', tone: 'lavender', title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
+                { icon: 'personal-support', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
+                { icon: 'pension-growth', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
+                { icon: 'protection-path', tone: 'lavender', title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
               ].map((item, index) => {
                 return (
                   <motion.div
@@ -431,7 +431,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="flex flex-col items-center text-center p-6"
                   >
-                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-4" />
+                    <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>

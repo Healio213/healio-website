@@ -16,22 +16,22 @@ import ProductTicker from '@/components/sections/ProductTicker';
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
 const audienceIcons = {
-  private: { emoji: '🙋', tone: 'butter' },
-  practices: { emoji: '🩺', tone: 'mint' },
-  companies: { emoji: '🏢', tone: 'sky' },
+  private: { icon: 'personal-support', tone: 'butter' },
+  practices: { icon: 'ambulant-care', tone: 'mint' },
+  companies: { icon: 'team-introduction', tone: 'sky' },
 };
 
 const principleIcons = {
-  needs: { emoji: '🧭', tone: 'sky' },
-  independent: { emoji: '🛡️', tone: 'mint' },
-  clear: { emoji: '💬', tone: 'lavender' },
-  personal: { emoji: '🎧', tone: 'butter' },
+  needs: { icon: 'independent-guidance', tone: 'sky' },
+  independent: { icon: 'protection-path', tone: 'mint' },
+  clear: { icon: 'clear-comparison', tone: 'lavender' },
+  personal: { icon: 'personal-support', tone: 'butter' },
 };
 
 const impactIcons = [
-  { emoji: '🩺', tone: 'mint' },
-  { emoji: '🦷', tone: 'sky' },
-  { emoji: '🏥', tone: 'lavender' },
+  { icon: 'ambulant-care', tone: 'mint' },
+  { icon: 'dental-protection', tone: 'sky' },
+  { icon: 'hospital-comfort', tone: 'lavender' },
 ];
 
 const AboutPage = () => {
@@ -166,13 +166,13 @@ const AboutPage = () => {
                   <div className="absolute bottom-7 left-[1.35rem] top-7 w-px bg-gradient-to-b from-[#5ee0b1]/70 via-white/20 to-[#5ee0b1]/70 sm:left-[1.6rem]" aria-hidden="true" />
                   <ul className="space-y-3" aria-label={t('hero.networkTitle')}>
                     {Array.isArray(audiences) && audiences.map((audience) => {
-                      const icon = audienceIcons[audience.key] || { emoji: '✨', tone: 'mint' };
+                      const icon = audienceIcons[audience.key] || { icon: 'ongoing-service', tone: 'mint' };
                       return (
                         <li
                           key={audience.key}
                           className="relative grid grid-cols-[2.75rem_1fr] gap-4 rounded-2xl border border-white/[0.08] bg-[#0b1928]/90 p-4 sm:grid-cols-[3.25rem_1fr] sm:p-5"
                         >
-                          <FriendlyIcon emoji={icon.emoji} label={audience.label} tone={icon.tone} size="sm" className="relative z-10" />
+                          <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" className="relative z-10" />
                           <span>
                             <span className="block font-display text-sm font-bold text-white sm:text-base">{audience.label}</span>
                             <span className="mt-1 block text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">{audience.text}</span>
@@ -246,7 +246,7 @@ const AboutPage = () => {
 
             <div className="grid md:grid-cols-2">
               {Array.isArray(principles) && principles.map((principle, index) => {
-                const icon = principleIcons[principle.key] || { emoji: '✅', tone: 'mint' };
+                const icon = principleIcons[principle.key] || { icon: 'protection-path', tone: 'mint' };
                 return (
                   <motion.article
                     key={principle.key}
@@ -254,7 +254,7 @@ const AboutPage = () => {
                     className={`border-slate-200 py-9 md:px-8 md:py-12 ${index % 2 === 0 ? 'md:border-r' : ''} ${index < principles.length - 1 ? 'border-b' : ''} ${index < 2 ? 'md:border-b' : 'md:border-b-0'} ${index % 2 === 0 ? 'md:pl-0' : 'md:pr-0'}`}
                   >
                     <div className="flex gap-5 sm:gap-6">
-                      <FriendlyIcon emoji={icon.emoji} label={principle.title} tone={icon.tone} size="sm" />
+                      <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
                       <div>
                         <h3 className="font-display text-xl font-bold tracking-[-0.025em] text-[#102333] sm:text-2xl">{principle.title}</h3>
                         <p className="mt-3 max-w-xl text-sm leading-6 text-[#5a6673] sm:text-base sm:leading-7">{principle.text}</p>
@@ -288,7 +288,7 @@ const AboutPage = () => {
                     className={`flex flex-col py-8 sm:py-10 lg:px-8 lg:py-12 ${index < impactItems.length - 1 ? 'border-b border-white/10 lg:border-b-0 lg:border-r' : ''} ${index === 0 ? 'lg:pl-0' : ''}`}
                   >
                     <div className="mb-7 flex items-center gap-3">
-                      <FriendlyIcon emoji={icon.emoji} tone={icon.tone} size="sm" />
+                      <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
                       <span className="font-display text-xs font-bold uppercase tracking-[0.2em] text-slate-300">{item.category}</span>
                     </div>
                     <dt className="order-2 mt-4 max-w-xs font-display text-base font-bold leading-6 text-white sm:text-lg">{item.label}</dt>
@@ -317,11 +317,11 @@ const AboutPage = () => {
 
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
               {Array.isArray(routes) && routes.map((route, index) => {
-                const icon = audienceIcons[route.key] || { emoji: '✨', tone: 'mint' };
+                const icon = audienceIcons[route.key] || { icon: 'ongoing-service', tone: 'mint' };
                 return (
                   <motion.article key={route.key} {...reveal(index * 0.06)} className="group flex min-h-full flex-col rounded-[1.6rem] border border-[#dbe8e2] bg-white p-7 shadow-[0_14px_45px_rgba(7,17,31,0.06)] sm:p-8">
                     <div className="flex items-center justify-between gap-4">
-                      <FriendlyIcon emoji={icon.emoji} label={route.title} tone={icon.tone} size="sm" />
+                      <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
                       <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-[#0c7a5a]">{route.label}</span>
                     </div>
                     <h3 className="mt-8 font-display text-2xl font-bold tracking-[-0.035em] text-[#102333]">{route.title}</h3>

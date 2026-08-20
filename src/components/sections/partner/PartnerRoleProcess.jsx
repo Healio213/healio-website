@@ -11,21 +11,21 @@ const PartnerRoleProcess = () => {
 
   const roles = [
     {
-      emoji: '🏥',
+      icon: 'ambulant-care',
       tone: 'sky',
       label: t('roleProcess.practiceLabel'),
       title: t('roleProcess.practiceTitle'),
       text: t('roleProcess.practiceText'),
     },
     {
-      emoji: '🙋',
+      icon: 'personal-support',
       tone: 'butter',
       label: t('roleProcess.patientLabel'),
       title: t('roleProcess.patientTitle'),
       text: t('roleProcess.patientText'),
     },
     {
-      emoji: '🛡️',
+      icon: 'protection-path',
       tone: 'mint',
       label: t('roleProcess.healioLabel'),
       title: t('roleProcess.healioTitle'),
@@ -70,7 +70,7 @@ const PartnerRoleProcess = () => {
                 className="relative rounded-2xl border border-white/10 bg-white/[0.055] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:p-8"
               >
                 <div className="mb-8 flex items-center justify-between gap-4">
-                  <FriendlyIcon emoji={role.emoji} label={role.title} tone={role.tone} size="sm" />
+                  <FriendlyIcon icon={role.icon} tone={role.tone} size="sm" />
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
                     {role.label}
                   </span>

@@ -7,7 +7,15 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 // Sofortschutz, Zahnersatz, Prophylaxe, Behandlung, fehlende Zähne,
 // ausgezeichnete Versicherer, faire Annahme
-const benefitIcons = ['⏱️', '🦷', '✨', '😁', '🧩', '🏅', '📋'];
+const benefitIcons = [
+  'ongoing-service',
+  'dental-protection',
+  'prevention-care',
+  'dental-protection',
+  'dental-protection',
+  'bonus-reward',
+  'document-check',
+];
 const benefitTones = ['butter', 'mint', 'lavender', 'sky', 'coral', 'mint', 'butter'];
 
 const primaryBenefitKeys = ['noWait', 'zahnersatz', 'prophylaxe'];
@@ -22,7 +30,7 @@ const BenefitCard = ({ benefitKey, index, t }) => (
     className="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:border-[#25c990]/30 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center group"
   >
     <FriendlyIcon
-      emoji={benefitIcons[index]}
+      icon={benefitIcons[index]}
       label={t(`benefits.${benefitKey}.title`)}
       tone={benefitTones[index]}
       className="mb-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-2"

@@ -354,14 +354,14 @@ const HebammenPage = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   {/* Option 1: Auszahlung */}
                   <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
-                    <FriendlyIcon emoji="💶" label={t('benefits.option1Title')} tone="butter" size="sm" className="mb-4" />
+                    <FriendlyIcon icon="health-budget" tone="butter" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option1Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option1Desc')}</p>
                   </div>
 
                   {/* Option 2: Spende */}
                   <div className="bg-rose-50 border-2 border-rose-200 rounded-xl p-6">
-                    <FriendlyIcon emoji="💝" label={t('benefits.option2Title')} tone="coral" size="sm" className="mb-4" />
+                    <FriendlyIcon icon="bonus-reward" tone="coral" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option2Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option2Desc')}</p>
                   </div>
@@ -421,16 +421,16 @@ const HebammenPage = () => {
 
               <div className="space-y-8">
                 {[
-                  { emoji: '💬', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
-                  { emoji: '📄', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
-                  { emoji: '📱', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
+                  { icon: 'personal-support', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
+                  { icon: 'document-check', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
+                  { icon: 'digital-completion', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                     className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex items-start gap-5"
                   >
-                    <FriendlyIcon emoji={item.emoji} label={t(item.titleKey)} tone={item.tone} size="sm" />
+                    <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" />
                     <div>
                       <p className="mb-1 text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">0{item.num}</p>
                       <h3 className="text-lg font-semibold text-slate-900 mb-1">{t(item.titleKey)}</h3>

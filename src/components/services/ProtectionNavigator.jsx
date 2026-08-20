@@ -4,6 +4,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+
+const pathIcons = {
+  ambulant: { icon: 'ambulant-care', tone: 'mint' },
+  dental: { icon: 'dental-protection', tone: 'sky' },
+  hospital: { icon: 'hospital-comfort', tone: 'lavender' },
+};
 
 const ProtectionNavigator = () => {
   const { t } = useTranslation('leistungen');
@@ -36,7 +43,10 @@ const ProtectionNavigator = () => {
               className="group scroll-mt-24 border-t border-slate-300/80 py-9 sm:py-11"
             >
               <div className="grid gap-7 lg:grid-cols-[5rem_0.8fr_1.2fr] lg:gap-10">
-                <span className="font-display text-xs font-extrabold tracking-[0.2em] text-emerald-700">{item.number}</span>
+                <div className="flex items-center gap-3 lg:flex-col lg:items-start">
+                  <FriendlyIcon icon={pathIcons[item.key]?.icon} tone={pathIcons[item.key]?.tone} size="sm" />
+                  <span className="font-display text-xs font-extrabold tracking-[0.2em] text-emerald-700">{item.number}</span>
+                </div>
                 <div>
                   <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-slate-600">{item.kicker}</p>
                   <h3 className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#10202A] sm:text-4xl">

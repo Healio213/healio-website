@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sprout } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const SocialProofSection = () => {
   return (
@@ -29,27 +30,19 @@ const SocialProofSection = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-90">
             {/* Placeholders for charity icons - using simple divs with text for now */}
             <div className="flex flex-col items-center group cursor-pointer">
-               <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-3 group-hover:bg-white group-hover:text-healio-primary transition-all duration-300">
-                 🌍
-               </div>
+               <FriendlyIcon icon="planet-care" tone="mint" className="mb-3" />
                <span className="text-sm font-medium">Umweltschutz</span>
             </div>
             <div className="flex flex-col items-center group cursor-pointer">
-               <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-3 group-hover:bg-white group-hover:text-healio-primary transition-all duration-300">
-                 🎓
-               </div>
+               <FriendlyIcon icon="team-introduction" tone="butter" className="mb-3" />
                <span className="text-sm font-medium">Bildung</span>
             </div>
             <div className="flex flex-col items-center group cursor-pointer">
-               <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-3 group-hover:bg-white group-hover:text-healio-primary transition-all duration-300">
-                 🏥
-               </div>
+               <FriendlyIcon icon="ambulant-care" tone="sky" className="mb-3" />
                <span className="text-sm font-medium">Gesundheit</span>
             </div>
             <div className="flex flex-col items-center group cursor-pointer">
-               <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center mb-3 group-hover:bg-white group-hover:text-healio-primary transition-all duration-300">
-                 🤝
-               </div>
+               <FriendlyIcon icon="ongoing-service" tone="lavender" className="mb-3" />
                <span className="text-sm font-medium">Soziales</span>
             </div>
           </div>

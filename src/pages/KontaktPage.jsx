@@ -134,7 +134,7 @@ const KontaktPage = () => {
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon emoji="📍" label={t('page.address')} tone="coral" size="sm" />
+                    <FriendlyIcon icon="independent-guidance" tone="coral" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.address')}</h3>
                       <p className="text-lg text-slate-900 font-medium">
@@ -146,7 +146,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon emoji="✉️" label={t('page.email')} tone="sky" size="sm" />
+                    <FriendlyIcon icon="digital-completion" tone="sky" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
                       <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
@@ -156,7 +156,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon emoji="📞" label={t('page.phone')} tone="mint" size="sm" />
+                    <FriendlyIcon icon="personal-support" tone="mint" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.phone')}</h3>
                       <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">

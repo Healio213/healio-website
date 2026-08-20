@@ -72,7 +72,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.sofort.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon emoji="⚡️" tone="mint" size="sm" />
+                <FriendlyIcon icon="ongoing-service" tone="mint" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.sofort.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">
@@ -133,7 +133,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.vorsorge.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon emoji="🛡️" tone="sky" size="sm" />
+                <FriendlyIcon icon="dental-protection" tone="sky" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.vorsorge.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">
@@ -194,7 +194,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.preis.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon emoji="💶" tone="mint" size="sm" />
+                <FriendlyIcon icon="health-budget" tone="mint" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.preis.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">

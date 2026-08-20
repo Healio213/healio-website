@@ -7,11 +7,11 @@ import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const CATEGORY_KEYS = [
-  { key: 'heilpraktiker', emoji: '🌿', tone: 'butter' },
-  { key: 'sehhilfen', emoji: '👓', tone: 'sky' },
-  { key: 'vorsorge', emoji: '🩺', tone: 'mint' },
-  { key: 'arzneimittel', emoji: '💊', tone: 'lavender' },
-  { key: 'schwangerschaft', emoji: '🤰', tone: 'coral' },
+  { key: 'heilpraktiker', icon: 'ambulant-care', tone: 'butter' },
+  { key: 'sehhilfen', icon: 'clear-comparison', tone: 'sky' },
+  { key: 'vorsorge', icon: 'prevention-care', tone: 'mint' },
+  { key: 'arzneimittel', icon: 'protection-path', tone: 'lavender' },
+  { key: 'schwangerschaft', icon: 'family-care', tone: 'coral' },
 ];
 
 const SourceBadge = ({ source }) => {
@@ -64,7 +64,7 @@ const BenefitCard = ({ benefit, index, t }) => {
         className="w-full p-6 flex flex-col items-center text-center cursor-pointer"
       >
         <FriendlyIcon
-          emoji={benefit.emoji}
+          icon={benefit.icon}
           label={t(`benefits.${benefit.key}.title`)}
           tone={benefit.tone}
           size="lg"

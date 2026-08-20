@@ -14,6 +14,12 @@ export const healioSoftClayIcons = Object.freeze({
   'concept-calculator': '/images/icons/healio-clay/concept-calculator.webp',
   'team-introduction': '/images/icons/healio-clay/team-introduction.webp',
   'business-expense': '/images/icons/healio-clay/business-expense.webp',
+  'bonus-reward': '/images/icons/healio-clay/bonus-reward.webp',
+  'family-care': '/images/icons/healio-clay/family-care.webp',
+  'document-check': '/images/icons/healio-clay/document-check.webp',
+  'planet-care': '/images/icons/healio-clay/planet-care.webp',
+  'active-wellbeing': '/images/icons/healio-clay/active-wellbeing.webp',
+  'pet-care': '/images/icons/healio-clay/pet-care.webp',
 });
 
 export default healioSoftClayIcons;

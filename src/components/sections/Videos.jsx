@@ -63,7 +63,7 @@ const Videos = () => {
                       <li>Versicherung abschließen</li>
                       <li>Bonus sichern mit der IKK classic (optional)</li>
                     </ol>
-                    <p>➡️ Fertig! So einfach bist du rundum ambulant abgesichert.</p>
+                    <p>Fertig: So einfach bist du rundum ambulant abgesichert.</p>
 
                     <h4 className="text-healio-text">Für wen ist Healio ideal?</h4>
                     <ul>
@@ -75,9 +75,9 @@ const Videos = () => {
                     </ul>
                     
                     <h3 className="text-healio-text mt-6">Healio – Gesundheit weitergedacht.</h3>
-                    <p>📌 Jetzt Tarif berechnen</p>
-                    <p>📌 Sofort Beitrag erfahren</p>
-                    <p>📌 Ambulant optimal abgesichert sein</p>
+                    <p>Jetzt Tarif berechnen</p>
+                    <p>Sofort Beitrag erfahren</p>
+                    <p>Ambulant optimal abgesichert sein</p>
                     <p>Hast du noch Fragen? Unser digitaler Assistent hilft dir gerne weiter und erklärt dir ausführlich alles, was du wissen möchtest.</p>
                   </div>
                 </AccordionContent>

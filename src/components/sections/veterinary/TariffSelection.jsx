@@ -26,7 +26,7 @@ const TariffSelection = () => {
             whileHover={{ y: -5 }}
             className="group p-8 rounded-3xl bg-white border border-gray-200 hover:border-blue-400 shadow-lg transition-all duration-300"
           >
-            <FriendlyIcon emoji="🛡️" label={t('tariffs.vollschutz.title')} tone="mint" className="mb-6" />
+            <FriendlyIcon icon="pet-care" tone="mint" className="mb-6" />
             
             <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('tariffs.vollschutz.title')}</h3>
             <p className="text-slate-500 mb-6 h-12">{t('tariffs.vollschutz.desc')}</p>
@@ -61,7 +61,7 @@ const TariffSelection = () => {
             whileHover={{ y: -5 }}
             className="group p-8 rounded-3xl bg-white border border-gray-200 hover:border-blue-400 shadow-lg transition-all duration-300"
           >
-            <FriendlyIcon emoji="🏥" label={t('tariffs.opSchutz.title')} tone="sky" className="mb-6" />
+            <FriendlyIcon icon="hospital-comfort" tone="sky" className="mb-6" />
             
             <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('tariffs.opSchutz.title')}</h3>
             <p className="text-slate-500 mb-6 h-12">{t('tariffs.opSchutz.desc')}</p>
