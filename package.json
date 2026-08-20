@@ -11,6 +11,7 @@
     "lint": "eslint . --quiet",
     "test:homepage": "node scripts/check-homepage-contract.mjs",
     "test:company": "node scripts/check-company-contract.mjs",
+    "test:friendly-icons": "node scripts/check-friendly-icons-contract.mjs",
     "test:potential-analysis": "node scripts/check-potential-analysis-contract.mjs",
     "test:potential-analysis-rendered": "node scripts/check-potential-analysis-rendered.mjs",
     "test:services": "node scripts/check-services-contract.mjs",

@@ -21,7 +21,7 @@ const AmbulantBudgetFeature = () => {
           <div className="relative grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
             <div>
               <div className="flex items-center gap-3 text-home-mint">
-                <FriendlyIcon emoji="💚" label={t('budget.eyebrow')} tone="mint" size="sm" />
+                <FriendlyIcon icon="health-budget" tone="mint" size="sm" />
                 <p className="home-eyebrow">{t('budget.eyebrow')}</p>
               </div>
               <p className="mt-9 whitespace-nowrap font-display text-[clamp(2.75rem,13.75vw,3.6rem)] font-extrabold leading-[0.88] tracking-[-0.055em] text-white sm:text-[clamp(3.6rem,10vw,7.75rem)] sm:leading-[0.78] sm:tracking-[-0.075em]">

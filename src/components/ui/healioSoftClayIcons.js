@@ -1,0 +1,19 @@
+export const healioSoftClayIcons = Object.freeze({
+  'ambulant-care': '/images/icons/healio-clay/ambulant-care.webp',
+  'dental-protection': '/images/icons/healio-clay/dental-protection.webp',
+  'hospital-comfort': '/images/icons/healio-clay/hospital-comfort.webp',
+  'protection-path': '/images/icons/healio-clay/protection-path.webp',
+  'clear-comparison': '/images/icons/healio-clay/clear-comparison.webp',
+  'digital-completion': '/images/icons/healio-clay/digital-completion.webp',
+  'personal-support': '/images/icons/healio-clay/personal-support.webp',
+  'independent-guidance': '/images/icons/healio-clay/independent-guidance.webp',
+  'ongoing-service': '/images/icons/healio-clay/ongoing-service.webp',
+  'pension-growth': '/images/icons/healio-clay/pension-growth.webp',
+  'health-budget': '/images/icons/healio-clay/health-budget.webp',
+  'prevention-care': '/images/icons/healio-clay/prevention-care.webp',
+  'concept-calculator': '/images/icons/healio-clay/concept-calculator.webp',
+  'team-introduction': '/images/icons/healio-clay/team-introduction.webp',
+  'business-expense': '/images/icons/healio-clay/business-expense.webp',
+});
+
+export default healioSoftClayIcons;

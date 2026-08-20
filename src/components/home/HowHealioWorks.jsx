@@ -3,8 +3,7 @@ import { CheckCircle2, Smartphone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-// Schutz auswählen, Möglichkeiten verstehen, digital abschließen, begleitet bleiben
-const stepIcons = ['🛡️', '🧮', '✍️', '📱'];
+const stepIcons = ['protection-path', 'clear-comparison', 'digital-completion', 'personal-support'];
 const stepTones = ['sky', 'butter', 'mint', 'lavender'];
 
 const HowHealioWorks = () => {
@@ -27,7 +26,7 @@ const HowHealioWorks = () => {
               {steps.map((step, index) => (
                 <li key={step.number} className="min-h-[230px] bg-white p-6 sm:p-7">
                   <div className="flex items-center justify-between gap-5">
-                    <FriendlyIcon emoji={stepIcons[index]} label={step.title} tone={stepTones[index]} size="sm" />
+                    <FriendlyIcon icon={stepIcons[index]} tone={stepTones[index]} size="sm" />
                     <span className="font-display text-xs font-extrabold tracking-[0.18em] text-emerald-700">{step.number}</span>
                   </div>
                   <h3 className="mt-7 font-display text-xl font-extrabold text-home-midnight">{step.title}</h3>

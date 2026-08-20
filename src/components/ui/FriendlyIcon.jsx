@@ -1,4 +1,5 @@
 import React from 'react';
+import healioSoftClayIcons from '@/components/ui/healioSoftClayIcons';
 
 const toneClasses = {
   mint: 'from-[#eefaf5] via-[#dff5eb] to-[#c9eddf] ring-[#bddfd2]',
@@ -16,26 +17,45 @@ const sizeClasses = {
 
 const FriendlyIcon = ({
   emoji,
+  icon,
   label,
   tone = 'mint',
   size = 'md',
   className = '',
-}) => (
-  <span
-    className={`relative isolate inline-grid shrink-0 place-items-center overflow-hidden bg-gradient-to-br shadow-[0_12px_28px_rgba(38,61,73,0.11)] ring-1 ${toneClasses[tone] || toneClasses.mint} ${sizeClasses[size] || sizeClasses.md} ${className}`}
-    role={label ? 'img' : undefined}
-    aria-label={label}
-    aria-hidden={label ? undefined : 'true'}
-  >
-    <span className="absolute inset-x-2 top-1.5 h-1/3 rounded-full bg-white/55 blur-[1px]" aria-hidden="true" />
+}) => {
+  const assetSrc = icon ? healioSoftClayIcons[icon] : undefined;
+  const isDecorativeAsset = Boolean(assetSrc);
+
+  return (
     <span
-      className="relative translate-y-[1px] select-none leading-none drop-shadow-[0_5px_5px_rgba(25,44,55,0.16)]"
-      style={{ fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif' }}
-      aria-hidden="true"
+      className={`relative isolate inline-grid shrink-0 place-items-center overflow-hidden bg-gradient-to-br shadow-[0_12px_28px_rgba(38,61,73,0.11)] ring-1 ${toneClasses[tone] || toneClasses.mint} ${sizeClasses[size] || sizeClasses.md} ${className}`}
+      role={!isDecorativeAsset && label ? 'img' : undefined}
+      aria-label={!isDecorativeAsset ? label : undefined}
+      aria-hidden={isDecorativeAsset || !label ? 'true' : undefined}
     >
-      {emoji}
+      <span className="absolute inset-x-2 top-1.5 h-1/3 rounded-full bg-white/55 blur-[1px]" aria-hidden="true" />
+      {assetSrc ? (
+        <img
+          src={assetSrc}
+          alt=""
+          aria-hidden="true"
+          width="192"
+          height="192"
+          loading="lazy"
+          decoding="async"
+          className="relative h-[88%] w-[88%] select-none object-contain drop-shadow-[0_5px_5px_rgba(25,44,55,0.14)]"
+        />
+      ) : (
+        <span
+          className="relative translate-y-[1px] select-none leading-none drop-shadow-[0_5px_5px_rgba(25,44,55,0.16)]"
+          style={{ fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif' }}
+          aria-hidden="true"
+        >
+          {emoji}
+        </span>
+      )}
     </span>
-  </span>
-);
+  );
+};
 
 export default FriendlyIcon;

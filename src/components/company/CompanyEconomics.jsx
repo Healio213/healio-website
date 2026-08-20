@@ -7,22 +7,22 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const factMeta = {
   expense: {
-    emoji: '🧾',
+    icon: 'business-expense',
     tone: 'sky',
     href: 'https://www.gesetze-im-internet.de/estg/__4.html',
   },
   pension: {
-    emoji: '💰',
+    icon: 'pension-growth',
     tone: 'butter',
     href: 'https://www.gesetze-im-internet.de/estg/__3.html',
   },
   health: {
-    emoji: '❤️‍🩹',
+    icon: 'health-budget',
     tone: 'coral',
     href: 'https://www.bundesfinanzhof.de/de/entscheidung/entscheidungen-online/detail/STRE201810155/',
   },
   prevention: {
-    emoji: '🧘',
+    icon: 'prevention-care',
     tone: 'mint',
     href: 'https://www.bundesgesundheitsministerium.de/themen/praevention/betriebliche-gesundheitsfoerderung/steuerliche-vorteile/',
   },
@@ -70,7 +70,7 @@ const CompanyEconomics = () => {
               return (
                 <article key={fact.key} className="bg-[#0b202a] p-6 sm:p-7">
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon emoji={meta.emoji} tone={meta.tone} size="sm" />
+                    <FriendlyIcon icon={meta.icon} tone={meta.tone} size="sm" />
                     <div>
                       <h3 className="font-display text-lg font-extrabold tracking-[-0.02em] text-white">{fact.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-slate-300">{fact.description}</p>

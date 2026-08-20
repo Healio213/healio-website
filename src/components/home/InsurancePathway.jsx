@@ -3,6 +3,13 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+
+const productIllustrations = {
+  ambulant: { icon: 'ambulant-care', tone: 'mint' },
+  dental: { icon: 'dental-protection', tone: 'lavender' },
+  hospital: { icon: 'hospital-comfort', tone: 'sky' },
+};
 
 const InsurancePathway = () => {
   const { t } = useTranslation('home');
@@ -34,9 +41,16 @@ const InsurancePathway = () => {
               <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
                 {item.label}
               </span>
-              <h3 className="max-w-[18ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl">
-                {item.title}
-              </h3>
+              <div className="flex items-center gap-4">
+                <FriendlyIcon
+                  icon={productIllustrations[item.key]?.icon}
+                  tone={productIllustrations[item.key]?.tone}
+                  size="sm"
+                />
+                <h3 className="max-w-[18ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl">
+                  {item.title}
+                </h3>
+              </div>
               <div>
                 <p className="max-w-xl text-base leading-7 text-slate-600">{item.description}</p>
                 <p className="mt-3 text-xs font-bold uppercase tracking-[0.13em] text-slate-400">{item.detail}</p>
