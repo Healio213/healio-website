@@ -22,4 +22,57 @@ export const healioSoftClayIcons = Object.freeze({
   'pet-care': '/images/icons/healio-clay/pet-care.webp',
 });
 
+// Verbindlicher gemeinsamer Inhalts-Icon-Satz für Healio und KassenBoost.
+// Die bestehenden Soft-Clay-IDs bleiben als rückwärtskompatible API erhalten.
+export const friendlyIconAssets = Object.freeze({
+  money: '/images/friendly-icons/money-note.webp',
+  bonus: '/images/friendly-icons/bonus-medal.webp',
+  budget: '/images/friendly-icons/health-wallet.webp',
+  calculator: '/images/friendly-icons/calculator.webp',
+  family: '/images/friendly-icons/family.webp',
+  fitness: '/images/friendly-icons/fitness.webp',
+  smartwatch: '/images/friendly-icons/smartwatch.webp',
+  ambulant: '/images/friendly-icons/medical-stethoscope.webp',
+  dental: '/images/friendly-icons/dental-shield.webp',
+  hospital: '/images/friendly-icons/hospital-room.webp',
+  support: '/images/friendly-icons/personal-support.webp',
+  document: '/images/friendly-icons/document-check.webp',
+  region: '/images/friendly-icons/germany-region.webp',
+  protection: '/images/friendly-icons/protection-shield.webp',
+  comparison: '/images/friendly-icons/compare-value.webp',
+  switch: '/images/friendly-icons/switch-check.webp',
+  privacy: '/images/friendly-icons/privacy-lock.webp',
+  calendar: '/images/friendly-icons/verified-calendar.webp',
+  glasses: '/images/friendly-icons/vision-glasses.webp',
+  pregnancy: '/images/friendly-icons/pregnancy.webp',
+  prevention: '/images/friendly-icons/prevention-vaccination.webp',
+  medication: '/images/friendly-icons/medication-copay.webp',
+  naturopathy: '/images/friendly-icons/naturopathy.webp',
+});
+
+// Alte `icon=`-Aufrufe zeigen automatisch den neuen Standard. Wo kein
+// semantisch passendes Motiv existiert (aktuell Tier), bleibt das alte Asset.
+export const legacyIconKindAliases = Object.freeze({
+  'ambulant-care': 'ambulant',
+  'dental-protection': 'dental',
+  'hospital-comfort': 'hospital',
+  'protection-path': 'protection',
+  'clear-comparison': 'comparison',
+  'digital-completion': 'switch',
+  'personal-support': 'support',
+  'independent-guidance': 'comparison',
+  'ongoing-service': 'support',
+  'pension-growth': 'money',
+  'health-budget': 'budget',
+  'prevention-care': 'prevention',
+  'concept-calculator': 'calculator',
+  'team-introduction': 'support',
+  'business-expense': 'money',
+  'bonus-reward': 'bonus',
+  'family-care': 'family',
+  'document-check': 'document',
+  'planet-care': 'naturopathy',
+  'active-wellbeing': 'fitness',
+});
+
 export default healioSoftClayIcons;

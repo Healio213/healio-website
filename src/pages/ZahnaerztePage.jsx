@@ -4,12 +4,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowDown,
   ArrowRight,
-  BadgeCheck,
-  Check,
-  ClipboardCheck,
-  HeartHandshake,
-  LockKeyhole,
-  MessageCircle,
   ShieldCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -49,7 +43,11 @@ const ZahnaerztePage = () => {
   const packageItems = t('package.items', { returnObjects: true }) || [];
   const faqItems = t('faq.items', { returnObjects: true }) || [];
 
-  const proofIcons = [BadgeCheck, ClipboardCheck, LockKeyhole];
+  const proofIcons = [
+    { kind: 'protection', tone: 'mint' },
+    { kind: 'document', tone: 'sky' },
+    { kind: 'privacy', tone: 'lavender' },
+  ];
   const insurerIcons = ['ongoing-service', 'dental-protection', 'health-budget', 'clear-comparison'];
   const insurerTones = ['butter', 'sky', 'mint', 'lavender'];
   const bonusFriendlyIcons = ['bonus-reward', 'protection-path', 'document-check'];
@@ -149,10 +147,10 @@ const ZahnaerztePage = () => {
         <section className="relative z-20 -mt-8 px-4 sm:px-6 md:px-8" aria-label={t('proof.label')}>
           <div className="container mx-auto grid max-w-6xl border border-[#dbe6e3] bg-white shadow-[0_18px_55px_rgba(7,17,31,0.08)] md:grid-cols-3">
             {proofItems.map((item, index) => {
-              const Icon = proofIcons[index] || Check;
+              const icon = proofIcons[index] || proofIcons[0];
               return (
                 <div key={item.title} className="flex gap-4 border-b border-[#e2ebe8] px-6 py-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
-                  <Icon className="mt-0.5 h-5 w-5 flex-none text-[#087654]" aria-hidden="true" />
+                  <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" className="mt-0.5" />
                   <div>
                     <p className="font-display text-sm font-extrabold text-[#07111f]">{item.title}</p>
                     <p className="mt-1 text-sm leading-6 text-[#60747c]">{item.text}</p>
@@ -251,7 +249,7 @@ const ZahnaerztePage = () => {
 
             <motion.div {...revealProps(0.16)} className="mt-7 border border-[#d9e6e2] bg-[#f8fbfa] p-6 sm:p-8">
               <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-start">
-                <MessageCircle className="h-6 w-6 text-[#087654]" aria-hidden="true" />
+                <FriendlyIcon kind="support" tone="lavender" size="sm" />
                 <div>
                   <p className="font-display text-sm font-extrabold uppercase tracking-[0.08em] text-[#087654]">
                     {t('insurerHighlights.teamTitle')}
@@ -357,7 +355,7 @@ const ZahnaerztePage = () => {
             </div>
 
             <motion.div {...revealProps(0.12)} className="mt-7 grid gap-4 border-l-4 border-[#25c990] bg-[#edf7f4] p-6 sm:grid-cols-[auto_1fr] sm:items-start sm:p-7">
-              <HeartHandshake className="h-6 w-6 text-[#087654]" aria-hidden="true" />
+              <FriendlyIcon kind="support" tone="mint" size="sm" />
               <div>
                 <p className="font-display font-extrabold text-[#07111f]">{t('legal.closingTitle')}</p>
                 <p className="mt-2 text-sm leading-6 text-[#52676e]">{t('legal.closingText')}</p>

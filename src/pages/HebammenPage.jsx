@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Heart, Check, Baby, Building2, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -147,9 +147,7 @@ const HebammenPage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-4xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-                <div className="w-16 h-16 rounded-2xl bg-rose-100 flex items-center justify-center mx-auto mb-6">
-                  <Baby className="w-8 h-8 text-rose-600" />
-                </div>
+                <FriendlyIcon kind="pregnancy" tone="coral" className="mx-auto mb-6" />
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   {t('leistungen.title')}
                 </h2>
@@ -233,9 +231,7 @@ const HebammenPage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-4xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-                <div className="w-16 h-16 rounded-2xl bg-sky-100 flex items-center justify-center mx-auto mb-6">
-                  <Building2 className="w-8 h-8 text-sky-600" />
-                </div>
+                <FriendlyIcon kind="hospital" tone="sky" className="mx-auto mb-6" />
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   {t('klinik.title')}
                 </h2>
@@ -378,9 +374,7 @@ const HebammenPage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <div className="w-16 h-16 rounded-2xl bg-[#25c990]/10 flex items-center justify-center mx-auto mb-6">
-                  <Shield className="w-8 h-8 text-[#25c990]" />
-                </div>
+                <FriendlyIcon kind="protection" tone="mint" className="mx-auto mb-6" />
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   {t('legal.title')}
                 </h2>
@@ -444,9 +438,7 @@ const HebammenPage = () => {
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="mt-10 bg-emerald-50 border border-emerald-200 rounded-xl p-6 flex items-start gap-4"
               >
-                <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Heart className="w-5 h-5 text-emerald-600" />
-                </div>
+                <FriendlyIcon kind="support" tone="mint" size="sm" className="mt-0.5" />
                 <p className="text-slate-700 leading-relaxed font-medium">
                   {t('steps.easeNote')}
                 </p>

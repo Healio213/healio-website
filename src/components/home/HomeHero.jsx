@@ -115,7 +115,7 @@ const HomeHero = () => {
           <motion.p {...entrance(0.27)} className="mt-3 max-w-2xl text-sm leading-6 text-slate-300/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
             {t('hero.disclaimer')}{' '}
             <Link
-              to={`${getPath('ambulant')}#bonus-calculator`}
+              to={getPath('kassenbonus')}
               className="home-focus font-bold text-home-mint underline underline-offset-4 transition hover:text-white"
             >
               {t('hero.bonusCheckCta')}

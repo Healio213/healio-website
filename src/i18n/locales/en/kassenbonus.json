@@ -1,0 +1,168 @@
+{
+  "seo": {
+    "title": "Compare German health insurance bonuses and costs | Healio",
+    "description": "Compare German statutory health insurers by contribution, realistic bonus and relevant extra benefits before making a decision.",
+    "ogTitle": "Get more from your German health insurer | Healio",
+    "ogDescription": "The lowest contribution is only one answer. Compare cost, achievable bonus and useful benefits separately and clearly.",
+    "ogImageAlt": "Healio guide to German health insurance contributions, bonuses and benefits"
+  },
+  "hero": {
+    "eyebrow": "A smarter German health insurance switch",
+    "title": "Get more from your health insurer.",
+    "description": "We first check where you may save on contributions. Then we look at which bonus is realistic for your routine and which benefits genuinely fit your needs.",
+    "cta": "Check my insurance advantage",
+    "ctaHint": "Free comparison on KassenBoost, in German",
+    "proof": [
+      "Start without contact details",
+      "See the result before applying",
+      "Cost, bonus and benefits kept separate"
+    ],
+    "mapEyebrow": "Your comparison",
+    "mapTitle": "One decision, three clear answers.",
+    "mapItems": [
+      { "label": "Cost", "text": "What do you actually pay?" },
+      { "label": "Bonus", "text": "What can you realistically earn?" },
+      { "label": "Benefits", "text": "What helps in everyday life?" }
+    ],
+    "mapNote": "Compare first. Switch with confidence."
+  },
+  "paths": {
+    "eyebrow": "Three comparison paths",
+    "title": "The cheapest insurer does not automatically win.",
+    "description": "Choose what matters most to you. The result keeps all three answers separate, so the difference is immediately clear.",
+    "selectLabel": "Choose your comparison goal",
+    "resultLabel": "What matters",
+    "items": [
+      {
+        "key": "contribution",
+        "tone": "mint",
+        "title": "Save on contributions",
+        "short": "The direct cost comparison",
+        "heading": "How much could you save on contributions?",
+        "description": "Income, insurance status and region all matter. We show the lowest suitable price anchor and useful alternatives behind it.",
+        "checks": [
+          "Classify monthly gross income and insurance status",
+          "Compare only insurers available in your region",
+          "Show other low-cost options next to the price leader"
+        ],
+        "resultTitle": "A clear euro difference instead of percentage clutter",
+        "resultBody": "You see what the difference means per month and per year. Reputation and service can then be part of a conscious decision."
+      },
+      {
+        "key": "bonus",
+        "tone": "butter",
+        "title": "Use a bonus",
+        "short": "The realistic everyday value",
+        "heading": "Which bonus can you realistically achieve?",
+        "description": "An advertised maximum is not useful on its own. What matters is which activities you already do or can reliably complete.",
+        "checks": [
+          "Select preventive care, vaccinations and activity realistically",
+          "Keep cash bonuses and earmarked credits separate",
+          "Explain deadlines, evidence and programme duration"
+        ],
+        "resultTitle": "Your achievable bonus, not an advertising maximum",
+        "resultBody": "We only calculate with information that fits you. The actual bonus always depends on the insurer, its conditions and verified activities."
+      },
+      {
+        "key": "services",
+        "tone": "sky",
+        "title": "Find better benefits",
+        "short": "The relevant added value",
+        "heading": "Which insurer offers more for your routine?",
+        "description": "Sometimes a specific benefit matters more than the final euro of savings, for example for families, osteopathy, dental cleaning or digital service.",
+        "checks": [
+          "Weight benefits by personal relevance",
+          "Make the particular strengths of insurers visible",
+          "Do not combine cost, bonus and benefits into a fictional total"
+        ],
+        "resultTitle": "A benefit match you can understand",
+        "resultBody": "You can see why an insurer fits your needs and which alternative may be cheaper or stronger on benefits."
+      }
+    ],
+    "cta": "Start the comparison on KassenBoost"
+  },
+  "everyday": {
+    "eyebrow": "Bonuses without performance pressure",
+    "title": "You do not need to be a competitive athlete.",
+    "description": "Many bonus programmes also recognise ordinary health routines. You only select what genuinely applies to you.",
+    "items": [
+      "Preventive check-ups",
+      "Recommended vaccinations",
+      "Dental check-ups",
+      "Check-ups for children and during pregnancy",
+      "Health courses or regular activity"
+    ],
+    "noteTitle": "Good to know",
+    "note": "Each insurer sets its own rules for eligible activities, evidence and whether it pays cash or an earmarked reimbursement."
+  },
+  "process": {
+    "eyebrow": "How your result is created",
+    "title": "Four short steps without insurance jargon.",
+    "description": "You only answer questions that can genuinely change the result.",
+    "steps": [
+      { "title": "Region and current insurer", "text": "So only insurers you can actually choose are included." },
+      { "title": "Income and family", "text": "For a suitable contribution calculation and the right personal context." },
+      { "title": "Routine and preferences", "text": "Choose preventive care, activity and benefits one question at a time." },
+      { "title": "Three separate results", "text": "See contribution savings, realistic bonus and benefit match side by side." }
+    ],
+    "note": "No invented progress amounts: during the questions we show completion progress, and only show euro values once they can be calculated responsibly."
+  },
+  "bridge": {
+    "eyebrow": "Use your advantage well",
+    "title": "Keep it or put it towards better cover.",
+    "description": "Savings or a bonus are yours first. If you want, they may also help fund suitable supplementary insurance in part or in full.",
+    "budgetTitle": "A health budget of up to EUR 3,000 over 2 years may be possible.",
+    "budgetNote": "This only applies when an achievable statutory health insurance bonus and suitable supplementary cover are combined and all relevant bonus and policy conditions are met.",
+    "cards": [
+      {
+        "routeKey": "ambulant",
+        "tone": "mint",
+        "title": "Outpatient",
+        "text": "For example for naturopathy, osteopathy, glasses and preventive care.",
+        "cta": "View outpatient cover"
+      },
+      {
+        "routeKey": "zahn",
+        "tone": "butter",
+        "title": "Dental",
+        "text": "For dental cleaning, dental prostheses and further benefits depending on the policy.",
+        "cta": "View dental cover"
+      },
+      {
+        "routeKey": "stationaer",
+        "tone": "sky",
+        "title": "Hospital",
+        "text": "For more comfort and choice in hospital, depending on the policy.",
+        "cta": "View hospital cover"
+      }
+    ]
+  },
+  "transparency": {
+    "eyebrow": "Kept clearly separate",
+    "title": "The result should be real.",
+    "description": "That is why we distinguish between a reliable contribution difference, an expected achievable bonus and particular benefits.",
+    "items": [
+      { "title": "A bonus is not guaranteed", "text": "It depends on programme rules and the activities you actually complete and verify." },
+      { "title": "Cash is not the same as credit", "text": "Freely available cash and earmarked reimbursements are shown separately." },
+      { "title": "Regional really means regional", "text": "An insurer is only compared if it is available where you live or work." }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Frequently asked questions",
+    "title": "Short and clear answers.",
+    "items": [
+      { "q": "Do I need to switch before seeing the comparison?", "a": "No. You see your result first and then decide whether you want to start an application." },
+      { "q": "Is the cheapest insurer always recommended?", "a": "No. The cheapest suitable insurer is a clear price anchor. We also show alternatives when bonus, benefits, reputation or service matter more to you." },
+      { "q": "Is the displayed bonus guaranteed?", "a": "No. Bonus payments depend on the insurer's rules and the activities you actually complete and document. A responsible result distinguishes between a possible and a realistically achievable bonus." },
+      { "q": "Can a health insurance bonus pay for supplementary cover?", "a": "Depending on the achievable bonus and premium, this may be possible in part or in full. It is not guaranteed. Cash bonuses and earmarked reimbursements must be considered separately." },
+      { "q": "Does the comparison work for families?", "a": "Yes. Income, insurance status, children and personal circumstances belong in the calculation because they can affect contributions, long-term care insurance and eligible bonus activities." }
+    ]
+  },
+  "final": {
+    "eyebrow": "Ready to compare?",
+    "title": "Find out which German health insurer genuinely gives you more.",
+    "description": "Start with contribution and region. Bonus and benefits are then explained clearly in context.",
+    "cta": "Check my insurance advantage",
+    "hint": "The German comparison opens on KassenBoost."
+  }
+}

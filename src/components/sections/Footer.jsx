@@ -100,6 +100,7 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
               <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
               <li><Link to={getPath('unternehmen')} className="hover:text-healio-primary transition-colors">{t('footer.unternehmen')}</Link></li>
               <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
+              <li><Link to={getPath('kassenbonus')} className="hover:text-healio-primary transition-colors">{t('footer.kassenbonus')}</Link></li>
               <li><Link to={getPath('partner')} className="hover:text-healio-primary transition-colors">{t('footer.partner')}</Link></li>
               {/* Diese Seiten hatten site-weit keinen einzigen internen
                   Link und waren nur ueber die Sitemap erreichbar. */}

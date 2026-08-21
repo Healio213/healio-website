@@ -114,6 +114,7 @@ const Header = () => {
       to: getPath('leistungen'),
       type: 'dropdown',
       subLinks: [
+        { to: getPath('kassenbonus'), label: t('nav.kassenbonus') },
         { to: getPath('ambulant'), label: t('nav.ambulant') },
         { to: getPath('zahn'), label: t('nav.zahn') },
         { to: getPath('stationaer'), label: t('nav.stationaer') },
@@ -177,7 +178,8 @@ const Header = () => {
                       to={link.to}
                       className={cn(
                         "flex items-center gap-1 text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
-                        (location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
+                        (location.pathname.includes('/kassenbonus') || location.pathname.includes('/health-insurance-bonus') ||
+                         location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
                          location.pathname.includes('/zahn') || location.pathname.includes('/dental') ||
                          location.pathname.includes('/stationaer') || location.pathname.includes('/inpatient') ||
                          location.pathname.includes('/tierkrankenversicherung') || location.pathname.includes('/pet-insurance') ||

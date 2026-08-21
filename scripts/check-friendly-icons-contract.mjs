@@ -35,18 +35,58 @@ const expectedIcons = [
   'pet-care',
 ];
 
+const expectedFriendlyIcons = [
+  'money',
+  'bonus',
+  'budget',
+  'calculator',
+  'family',
+  'fitness',
+  'smartwatch',
+  'ambulant',
+  'dental',
+  'hospital',
+  'support',
+  'document',
+  'region',
+  'protection',
+  'comparison',
+  'switch',
+  'privacy',
+  'calendar',
+  'glasses',
+  'pregnancy',
+  'prevention',
+  'medication',
+  'naturopathy',
+];
+
+const extractRegistry = (source, exportName) => {
+  const registryMatch = source.match(new RegExp(`export const ${exportName} = Object\\.freeze\\(\\{([\\s\\S]*?)\\n\\}\\);`));
+  assert.ok(registryMatch, `Die Registry ${exportName} fehlt.`);
+  return Object.fromEntries(
+    [...registryMatch[1].matchAll(/['"]?([a-z0-9-]+)['"]?\s*:\s*['"]([^'"]+\.webp)['"]/g)]
+      .map((match) => [match[1], match[2]]),
+  );
+};
+
 const registryPath = path.join(rootDir, 'src/components/ui/healioSoftClayIcons.js');
 assert.ok(fs.existsSync(registryPath), 'Die Healio-Soft-Clay-Registry fehlt.');
 
 const registrySource = fs.readFileSync(registryPath, 'utf8');
-const registeredIcons = Object.fromEntries(
-  [...registrySource.matchAll(/'([^']+)':\s*'([^']+\.webp)'/g)].map((match) => [match[1], match[2]]),
-);
+const registeredIcons = extractRegistry(registrySource, 'healioSoftClayIcons');
+const registeredFriendlyIcons = extractRegistry(registrySource, 'friendlyIconAssets');
 
 assert.deepEqual(
   Object.keys(registeredIcons).sort(),
   [...expectedIcons].sort(),
   'Die Soft-Clay-Registry muss exakt den freigegebenen ersten Icon-Satz enthalten.',
+);
+
+assert.deepEqual(
+  Object.keys(registeredFriendlyIcons).sort(),
+  [...expectedFriendlyIcons].sort(),
+  'Die gemeinsame Friendly-Icon-Registry muss exakt den bestätigten 23er-Satz enthalten.',
 );
 
 for (const [iconName, publicPath] of Object.entries(registeredIcons)) {
@@ -67,8 +107,22 @@ for (const [iconName, publicPath] of Object.entries(registeredIcons)) {
   assert.ok(asset.length <= 30 * 1024, `${iconName} ist mit ${asset.length} Bytes zu groß.`);
 }
 
+for (const [iconName, publicPath] of Object.entries(registeredFriendlyIcons)) {
+  assert.match(publicPath, /^\/images\/friendly-icons\/[a-z0-9-]+\.webp$/);
+  const assetPath = path.join(rootDir, 'public', publicPath.replace(/^\//, ''));
+  assert.ok(fs.existsSync(assetPath), `Das Friendly-Icon ${iconName} fehlt unter ${publicPath}.`);
+
+  const asset = fs.readFileSync(assetPath);
+  assert.ok(asset.length > 0, `Das Friendly-Icon ${iconName} ist leer.`);
+  assert.equal(asset.subarray(0, 4).toString('ascii'), 'RIFF', `${iconName} ist kein WebP.`);
+  assert.equal(asset.subarray(8, 12).toString('ascii'), 'WEBP', `${iconName} ist kein WebP.`);
+  assert.ok(asset.length <= 64 * 1024, `${iconName} ist mit ${asset.length} Bytes zu groß.`);
+}
+
 const friendlyIcon = readText('src/components/ui/FriendlyIcon.jsx');
 assert.match(friendlyIcon, /healioSoftClayIcons/);
+assert.match(friendlyIcon, /friendlyIconAssets/);
+assert.match(friendlyIcon, /legacyIconKindAliases/);
 assert.match(friendlyIcon, /<img/);
 assert.match(friendlyIcon, /alt=""/);
 assert.match(friendlyIcon, /aria-hidden="true"/);
@@ -88,9 +142,16 @@ const collectRequestedIcons = (source) => [
     )),
 ];
 
+const collectRequestedKinds = (source) => [
+  ...[...source.matchAll(/\bkind=['"]([^'"]+)['"]/g)].map((match) => match[1]),
+];
+
 const assertKnownIconRequests = (relativePath, source) => {
   for (const requestedIcon of collectRequestedIcons(source)) {
     assert.ok(registeredIcons[requestedIcon], `${relativePath} fordert die unbekannte Icon-ID ${requestedIcon} an.`);
+  }
+  for (const requestedKind of collectRequestedKinds(source)) {
+    assert.ok(registeredFriendlyIcons[requestedKind], `${relativePath} fordert den unbekannten Friendly-Kind ${requestedKind} an.`);
   }
 };
 
@@ -166,6 +227,24 @@ const companySource = [
 ].map(readText).join('\n');
 
 const publicSource = friendlyIconConsumerFiles.map(readText).join('\n');
+const requiredSemanticKinds = [
+  'glasses',
+  'pregnancy',
+  'naturopathy',
+  'prevention',
+  'medication',
+  'money',
+  'bonus',
+  'comparison',
+  'ambulant',
+  'dental',
+  'hospital',
+];
+
+for (const kind of requiredSemanticKinds) {
+  assert.match(publicSource, new RegExp(`['"]${kind}['"]`), `Der semantische Friendly-Kind ${kind} ist auf keiner öffentlichen Seite im Einsatz.`);
+}
+
 for (const iconName of expectedIcons) {
   const quotedIconIds = [`'${iconName}'`, `"${iconName}"`];
   const used = quotedIconIds.some((iconId) => homeSource.includes(iconId))

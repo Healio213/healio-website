@@ -1,0 +1,168 @@
+{
+  "seo": {
+    "title": "Krankenkassenbonus und Beitrag vergleichen | Healio",
+    "description": "Krankenkassen nach Beitrag, realistischem Bonus und besonderen Leistungen vergleichen. Erst den persönlichen Vorteil prüfen, dann bewusst entscheiden.",
+    "ogTitle": "Mehr aus deiner Krankenkasse herausholen | Healio",
+    "ogDescription": "Nicht nur der niedrigste Beitrag zählt. Vergleiche Beitrag, erreichbaren Bonus und passende Leistungen getrennt und verständlich.",
+    "ogImageAlt": "Healio Wegweiser für Krankenkassenbeitrag, Bonus und Leistungen"
+  },
+  "hero": {
+    "eyebrow": "Krankenkassenwechsel mit Plan",
+    "title": "Hol mehr aus deiner Krankenkasse heraus.",
+    "description": "Wir prüfen zuerst, wo du Beitrag sparen kannst. Danach schauen wir, welcher Bonus für deinen Alltag realistisch ist und welche Leistungen wirklich zu dir passen.",
+    "cta": "Meinen Kassenvorteil prüfen",
+    "ctaHint": "Kostenlos vergleichen bei KassenBoost",
+    "proof": [
+      "Ohne Kontaktdaten starten",
+      "Ergebnis vor dem Antrag",
+      "Beitrag, Bonus und Leistung getrennt"
+    ],
+    "mapEyebrow": "Dein Vergleich",
+    "mapTitle": "Eine Entscheidung, drei klare Antworten.",
+    "mapItems": [
+      { "label": "Beitrag", "text": "Was zahlst du wirklich?" },
+      { "label": "Bonus", "text": "Was erreichst du realistisch?" },
+      { "label": "Leistungen", "text": "Was nutzt dir im Alltag?" }
+    ],
+    "mapNote": "Erst vergleichen. Dann bewusst wechseln."
+  },
+  "paths": {
+    "eyebrow": "Die drei Wege",
+    "title": "Nicht automatisch gewinnt die billigste Kasse.",
+    "description": "Wähle, was dir gerade am wichtigsten ist. Im Ergebnis bleiben die drei Antworten getrennt, damit du den Unterschied sofort verstehst.",
+    "selectLabel": "Vergleichsziel auswählen",
+    "resultLabel": "Darauf kommt es an",
+    "items": [
+      {
+        "key": "contribution",
+        "tone": "mint",
+        "title": "Beitrag sparen",
+        "short": "Der direkte Preisvergleich",
+        "heading": "Wie viel kannst du beim Beitrag sparen?",
+        "description": "Dein Einkommen, dein Status und deine Region entscheiden mit. Wir zeigen den günstigsten passenden Preisanker und sinnvolle Alternativen dahinter.",
+        "checks": [
+          "Monatliches Brutto und Versicherungsstatus einordnen",
+          "Zusatzbeiträge nur bei wählbaren Kassen vergleichen",
+          "Weitere günstige Kassen neben dem Preisführer zeigen"
+        ],
+        "resultTitle": "Klare Beitragsdifferenz statt Prozentwirrwarr",
+        "resultBody": "Du siehst, was der Unterschied für dich pro Monat und Jahr bedeutet. Bekanntheit und Service können danach bewusst mitentscheiden."
+      },
+      {
+        "key": "bonus",
+        "tone": "butter",
+        "title": "Bonus nutzen",
+        "short": "Der realistische Alltagswert",
+        "heading": "Welchen Bonus kannst du wirklich erreichen?",
+        "description": "Ein Werbe-Höchstwert hilft dir nicht. Entscheidend ist, welche Maßnahmen du ohnehin machst oder zuverlässig erfüllen kannst.",
+        "checks": [
+          "Vorsorge, Impfungen und Aktivität realistisch auswählen",
+          "Geldbonus und zweckgebundenes Guthaben nicht vermischen",
+          "Fristen, Nachweise und Programmdauer im Ergebnis erklären"
+        ],
+        "resultTitle": "Dein erreichbarer Bonus, nicht das Werbe-Maximum",
+        "resultBody": "Wir rechnen nur mit den Angaben, die zu dir passen. Der tatsächliche Bonus hängt immer von Kasse, Bedingungen und nachgewiesenen Maßnahmen ab."
+      },
+      {
+        "key": "services",
+        "tone": "sky",
+        "title": "Leistungen finden",
+        "short": "Der passende Mehrwert",
+        "heading": "Welche Kasse kann mehr für deinen Alltag?",
+        "description": "Manchmal ist eine besondere Leistung wichtiger als der letzte Euro Beitragsersparnis, zum Beispiel bei Familie, Osteopathie, Zahnreinigung oder digitalem Service.",
+        "checks": [
+          "Leistungswünsche nach persönlicher Relevanz gewichten",
+          "Besondere Stärken einzelner Kassen sichtbar machen",
+          "Preis, Bonus und Leistung nicht zu einem Fantasiewert addieren"
+        ],
+        "resultTitle": "Ein nachvollziehbarer Leistungs-Match",
+        "resultBody": "Du erkennst, warum eine Kasse zu deinen Wünschen passt und welche Alternative günstiger oder leistungsstärker ist."
+      }
+    ],
+    "cta": "Vergleich bei KassenBoost starten"
+  },
+  "everyday": {
+    "eyebrow": "Bonus ohne Leistungsdruck",
+    "title": "Du musst kein Leistungssportler sein.",
+    "description": "Viele Bonusprogramme berücksichtigen auch Dinge, die zu einem normalen Gesundheitsalltag gehören. Du wählst nur aus, was bei dir wirklich zutrifft.",
+    "items": [
+      "Vorsorgeuntersuchungen",
+      "Empfohlene Impfungen",
+      "Zahnvorsorge",
+      "Untersuchungen für Kinder und in der Schwangerschaft",
+      "Gesundheitskurse oder regelmäßige Aktivität"
+    ],
+    "noteTitle": "Wichtig zu wissen",
+    "note": "Welche Maßnahme zählt, wie sie nachgewiesen wird und ob Geld oder ein zweckgebundener Zuschuss ausgezahlt wird, regelt jede Krankenkasse selbst."
+  },
+  "process": {
+    "eyebrow": "So entsteht dein Ergebnis",
+    "title": "Vier kurze Schritte statt Versicherungsdeutsch.",
+    "description": "Du beantwortest nur die Fragen, die das Ergebnis wirklich verändern.",
+    "steps": [
+      { "title": "Region und aktuelle Kasse", "text": "Damit nur Krankenkassen erscheinen, die du tatsächlich wählen kannst." },
+      { "title": "Einkommen und Familie", "text": "Für eine passende Beitragsrechnung und die richtige Einordnung deiner Situation." },
+      { "title": "Alltag und Wünsche", "text": "Vorsorge, Aktivität und Leistungen wählst du Frage für Frage aus." },
+      { "title": "Drei getrennte Ergebnisse", "text": "Du siehst Beitragsersparnis, realistischen Bonus und Leistungs-Match nebeneinander." }
+    ],
+    "note": "Keine erfundenen Zwischenbeträge: Während der Fragen zeigen wir deinen Fortschritt, Geldwerte erst dann, wenn sie belastbar berechnet werden können."
+  },
+  "bridge": {
+    "eyebrow": "Deinen Vorteil sinnvoll nutzen",
+    "title": "Behalten oder in besseren Schutz stecken.",
+    "description": "Eine Ersparnis oder ein Bonus ist zuerst dein Vorteil. Wenn du möchtest, kann er auch dabei helfen, eine passende Zusatzversicherung teilweise oder vollständig zu finanzieren.",
+    "budgetTitle": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren können möglich sein.",
+    "budgetNote": "Das gilt nur, wenn ein erreichbarer Kassenbonus und eine passende Zusatzversicherung kombiniert werden und alle jeweiligen Bonus- und Tarifbedingungen erfüllt sind.",
+    "cards": [
+      {
+        "routeKey": "ambulant",
+        "tone": "mint",
+        "title": "Ambulant",
+        "text": "Zum Beispiel für Heilpraktiker, Osteopathie, Sehhilfen und Vorsorge.",
+        "cta": "Ambulanten Schutz ansehen"
+      },
+      {
+        "routeKey": "zahn",
+        "tone": "butter",
+        "title": "Zahn",
+        "text": "Für Zahnreinigung, Zahnersatz und weitere Leistungen je nach Tarif.",
+        "cta": "Zahnschutz ansehen"
+      },
+      {
+        "routeKey": "stationaer",
+        "tone": "sky",
+        "title": "Stationär",
+        "text": "Für mehr Komfort und freie Entscheidungen im Krankenhaus je nach Tarif.",
+        "cta": "Klinikschutz ansehen"
+      }
+    ]
+  },
+  "transparency": {
+    "eyebrow": "Sauber getrennt",
+    "title": "Das Ergebnis soll echt sein.",
+    "description": "Deshalb unterscheiden wir konsequent zwischen sicherer Beitragsdifferenz, voraussichtlich erreichbarem Bonus und besonderen Leistungen.",
+    "items": [
+      { "title": "Bonus ist nicht garantiert", "text": "Er hängt von den Programmregeln und deinen tatsächlich nachgewiesenen Maßnahmen ab." },
+      { "title": "Geld ist nicht gleich Guthaben", "text": "Frei verfügbares Geld und zweckgebundene Zuschüsse werden separat ausgewiesen." },
+      { "title": "Regional heißt wirklich regional", "text": "Eine Krankenkasse wird nur verglichen, wenn sie an deinem Wohn- oder Arbeitsort wählbar ist." }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Häufige Fragen",
+    "title": "Kurz und verständlich beantwortet.",
+    "items": [
+      { "q": "Muss ich für den Vergleich schon wechseln?", "a": "Nein. Du erhältst zuerst dein Ergebnis und entscheidest danach, ob du einen Wechsel starten möchtest." },
+      { "q": "Wird automatisch die günstigste Krankenkasse empfohlen?", "a": "Nein. Die günstigste passende Kasse ist ein klarer Preisanker. Zusätzlich zeigen wir Alternativen, wenn Bonus, Leistungen, Bekanntheit oder Service für dich wichtiger sind." },
+      { "q": "Bekomme ich den angezeigten Bonus sicher?", "a": "Nein. Bonuszahlungen hängen von den Regeln der Krankenkasse und deinen tatsächlich erfüllten und nachgewiesenen Maßnahmen ab. Deshalb sollte im Ergebnis zwischen möglichem und realistisch erreichbarem Bonus unterschieden werden." },
+      { "q": "Kann der Kassenbonus eine Zusatzversicherung bezahlen?", "a": "Das kann je nach erreichbarem Bonus und Beitrag teilweise oder vollständig möglich sein. Es ist keine Garantie. Geldbonus und zweckgebundene Zuschüsse müssen dabei getrennt betrachtet werden." },
+      { "q": "Funktioniert der Vergleich auch für Familien?", "a": "Ja. Einkommen, Versicherungsstatus, Kinder und die persönliche Situation gehören in die Berechnung, weil sie Beiträge, Pflegeversicherung und mögliche Bonusmaßnahmen beeinflussen können." }
+    ]
+  },
+  "final": {
+    "eyebrow": "Bereit für deinen Vergleich?",
+    "title": "Finde heraus, welche Krankenkasse dir wirklich mehr bringt.",
+    "description": "Starte mit Beitrag und Region. Bonus und Leistungen ordnen wir danach verständlich für dich ein.",
+    "cta": "Jetzt Kassenvorteil prüfen",
+    "hint": "Der Vergleich öffnet sich bei KassenBoost."
+  }
+}

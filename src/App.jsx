@@ -18,6 +18,7 @@ const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
 const AboutPage = React.lazy(() => import('@/pages/AboutPage'));
 const LeistungenPage = React.lazy(() => import('@/pages/LeistungenPage'));
 const AmbulantPage = React.lazy(() => import('@/pages/AmbulantPage'));
+const KassenbonusPage = React.lazy(() => import('@/pages/KassenbonusPage'));
 const StationaerPage = React.lazy(() => import('@/pages/StationaerPage'));
 const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
@@ -128,6 +129,7 @@ function App() {
               <Route path="kontakt" element={<KontaktPage />} />
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
               <Route path="ambulant" element={<AmbulantPage />} />
+              <Route path="kassenbonus" element={<KassenbonusPage />} />
               <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />
@@ -157,6 +159,7 @@ function App() {
               <Route path="contact" element={<KontaktPage />} />
               <Route path="appointment" element={<TerminvereinbarungPage />} />
               <Route path="outpatient" element={<AmbulantPage />} />
+              <Route path="health-insurance-bonus" element={<KassenbonusPage />} />
               <Route path="dental" element={<ZahnPage />} />
               <Route path="healio-dental" element={<Navigate to="/en/dental" replace />} />
               <Route path="inpatient" element={<StationaerPage />} />

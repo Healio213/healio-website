@@ -13,30 +13,30 @@ const fearKeys = ['leistungen', 'arzt', 'kompliziert', 'luecke', 'behandlungen']
 const reassuranceKeys = ['system', 'doctors', 'coverage', 'oldFund', 'ongoingTreatments'];
 
 const extraDefs = [
-  { key: 'schwangerschaft', icon: 'family-care', tone: 'coral' },
-  { key: 'osteopathie', icon: 'ambulant-care', tone: 'mint' },
-  { key: 'bonus', icon: 'bonus-reward', tone: 'butter' },
-  { key: 'spartarif', icon: 'health-budget', tone: 'butter' },
-  { key: 'reiseimpfungen', icon: 'prevention-care', tone: 'sky' },
-  { key: 'gesundheitskurse', icon: 'active-wellbeing', tone: 'mint' },
-  { key: 'bonusantrag', icon: 'document-check', tone: 'lavender' },
+  { key: 'schwangerschaft', kind: 'pregnancy', tone: 'coral' },
+  { key: 'osteopathie', kind: 'naturopathy', tone: 'mint' },
+  { key: 'bonus', kind: 'bonus', tone: 'butter' },
+  { key: 'spartarif', kind: 'money', tone: 'mint' },
+  { key: 'reiseimpfungen', kind: 'prevention', tone: 'sky' },
+  { key: 'gesundheitskurse', kind: 'fitness', tone: 'lavender' },
+  { key: 'bonusantrag', kind: 'document', tone: 'butter' },
 ];
 
 const switchStepIcons = [
-  { icon: 'digital-completion', tone: 'butter' },
-  { icon: 'ongoing-service', tone: 'mint' },
-  { icon: 'protection-path', tone: 'sky' },
+  { kind: 'document', tone: 'butter' },
+  { kind: 'support', tone: 'mint' },
+  { kind: 'protection', tone: 'sky' },
 ];
 const switchStepKeys = ['step1', 'step2', 'step3'];
 const timelineStepKeys = ['product', 'switch', 'ikkStart', 'bonus'];
 
 const timelineIcons = {
-  ambulant: { icon: 'ambulant-care', tone: 'mint' },
-  zahn: { icon: 'dental-protection', tone: 'sky' },
-  stationaer: { icon: 'hospital-comfort', tone: 'lavender' },
-  switch: { icon: 'ongoing-service', tone: 'sky' },
-  ikkStart: { icon: 'digital-completion', tone: 'mint' },
-  bonus: { icon: 'bonus-reward', tone: 'butter' },
+  ambulant: { kind: 'ambulant', tone: 'mint' },
+  zahn: { kind: 'dental', tone: 'sky' },
+  stationaer: { kind: 'hospital', tone: 'lavender' },
+  switch: { kind: 'switch', tone: 'sky' },
+  ikkStart: { kind: 'document', tone: 'mint' },
+  bonus: { kind: 'bonus', tone: 'butter' },
 };
 
 const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
@@ -253,7 +253,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                 className="rounded-xl border border-gray-100 bg-emerald-50/30 p-4 md:p-5"
               >
                 <div className="mb-2 flex items-center gap-3">
-                  <FriendlyIcon icon={extra.icon} tone={extra.tone} size="sm" />
+                  <FriendlyIcon kind={extra.kind} tone={extra.tone} size="sm" />
                   <h4 className="font-bold text-gray-900">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
                 </div>
                 <p className="text-sm leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
@@ -278,7 +278,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               return (
                 <div key={idx} className="text-center">
                   <FriendlyIcon
-                    icon={icon.icon}
+                    kind={icon.kind}
                     tone={icon.tone}
                     size="md"
                     className="mx-auto mb-4"
@@ -339,7 +339,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                       className="bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-4 md:p-5 shadow-sm"
                     >
                       <div className="flex items-center gap-3 mb-3 md:mb-4 lg:flex-col lg:items-start">
-                        <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
+                        <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" />
                         <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
                           {timelineText(key, 'label')}
                         </div>

@@ -52,6 +52,15 @@ export const seoRoutes = [
     },
   },
   {
+    path: '/kassenbonus',
+    title: 'Krankenkassenbonus und Beitrag vergleichen | Healio',
+    description: 'Krankenkassen nach Beitrag, realistischem Bonus und besonderen Leistungen vergleichen. Erst den persönlichen Vorteil prüfen, dann bewusst entscheiden.',
+    canonical: 'https://healio.de/kassenbonus',
+    keywords: 'Krankenkassenbonus Vergleich, Krankenkasse wechseln, Zusatzbeitrag vergleichen, Bonusprogramm Krankenkasse, Krankenkassen Leistungen',
+    lang: 'de',
+    hreflang: { de: 'https://healio.de/kassenbonus', en: 'https://healio.de/en/health-insurance-bonus' },
+  },
+  {
     path: '/ambulant',
     title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
     description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie & Naturheilkunde. Kassenboni + Zusatzversicherung clever kombiniert. Jetzt berechnen!',
@@ -447,6 +456,15 @@ export const seoRoutes = [
       isPartOf: { '@id': 'https://healio.de/#website' },
       about: { '@id': 'https://healio.de/#organization' },
     },
+  },
+  {
+    path: '/en/health-insurance-bonus',
+    title: 'Compare German Health Insurance Bonuses and Costs | Healio',
+    description: 'Compare German statutory health insurers by contribution, realistic bonus and relevant extra benefits before making a decision.',
+    canonical: 'https://healio.de/en/health-insurance-bonus',
+    keywords: 'German health insurance comparison, statutory health insurance bonus, Krankenkasse contribution, health insurance benefits Germany',
+    lang: 'en',
+    hreflang: { de: 'https://healio.de/kassenbonus', en: 'https://healio.de/en/health-insurance-bonus' },
   },
   {
     path: '/en/outpatient',

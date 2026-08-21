@@ -25,6 +25,8 @@ const HREFLANG_BY_CANONICAL = {
   [`${SITE_URL}/en/companies/pension-calculator`]: { de: `${SITE_URL}/unternehmen/vorsorge-rechner`, en: `${SITE_URL}/en/companies/pension-calculator` },
   [`${SITE_URL}/kassenboost`]: { de: `${SITE_URL}/kassenboost`, en: `${SITE_URL}/en/kassenboost` },
   [`${SITE_URL}/en/kassenboost`]: { de: `${SITE_URL}/kassenboost`, en: `${SITE_URL}/en/kassenboost` },
+  [`${SITE_URL}/kassenbonus`]: { de: `${SITE_URL}/kassenbonus`, en: `${SITE_URL}/en/health-insurance-bonus` },
+  [`${SITE_URL}/en/health-insurance-bonus`]: { de: `${SITE_URL}/kassenbonus`, en: `${SITE_URL}/en/health-insurance-bonus` },
   [`${SITE_URL}/ambulant`]: { de: `${SITE_URL}/ambulant`, en: `${SITE_URL}/en/outpatient` },
   [`${SITE_URL}/en/outpatient`]: { de: `${SITE_URL}/ambulant`, en: `${SITE_URL}/en/outpatient` },
   [`${SITE_URL}/partner`]: { de: `${SITE_URL}/partner`, en: `${SITE_URL}/en/partner` },

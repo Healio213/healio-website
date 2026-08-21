@@ -8,24 +8,24 @@ import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const coreValueIcons = [
-  { icon: 'health-budget', tone: 'butter' },
-  { icon: 'ambulant-care', tone: 'mint' },
-  { icon: 'document-check', tone: 'sky' },
-  { icon: 'bonus-reward', tone: 'lavender' },
+  { kind: 'budget', tone: 'butter' },
+  { kind: 'ambulant', tone: 'mint' },
+  { kind: 'calculator', tone: 'sky' },
+  { kind: 'bonus', tone: 'lavender' },
 ];
 const coreValueKeys = ['gesundheitsbudget', 'behandlungen', 'erstattung', 'bonus'];
 
 const coverageIcons = [
-  { icon: 'clear-comparison', tone: 'sky' },
-  { icon: 'prevention-care', tone: 'lavender' },
-  { icon: 'ambulant-care', tone: 'butter' },
-  { icon: 'active-wellbeing', tone: 'coral' },
-  { icon: 'prevention-care', tone: 'mint' },
-  { icon: 'ambulant-care', tone: 'mint' },
-  { icon: 'prevention-care', tone: 'coral' },
-  { icon: 'protection-path', tone: 'lavender' },
-  { icon: 'planet-care', tone: 'sky' },
-  { icon: 'personal-support', tone: 'butter' },
+  { kind: 'glasses', tone: 'sky' },
+  { kind: 'glasses', tone: 'lavender' },
+  { kind: 'naturopathy', tone: 'butter' },
+  { kind: 'naturopathy', tone: 'coral' },
+  { kind: 'naturopathy', tone: 'mint' },
+  { kind: 'prevention', tone: 'mint' },
+  { kind: 'prevention', tone: 'coral' },
+  { kind: 'medication', tone: 'lavender' },
+  { kind: 'region', tone: 'sky' },
+  { kind: 'support', tone: 'butter' },
 ];
 const coverageKeys = ['sehhilfen', 'augenLaser', 'heilpraktiker', 'osteopathie', 'tcm', 'vorsorge', 'impfungen', 'arzneimittel', 'ausland', 'beratung'];
 
@@ -33,11 +33,11 @@ const stepNums = [1, 2, 3, 4, 5];
 const stepKeys = ['step1', 'step2', 'step3', 'step4', 'step5'];
 
 const whyHealioIcons = [
-  { icon: 'independent-guidance', tone: 'coral' },
-  { icon: 'personal-support', tone: 'mint' },
-  { icon: 'clear-comparison', tone: 'butter' },
-  { icon: 'ongoing-service', tone: 'lavender' },
-  { icon: 'bonus-reward', tone: 'sky' },
+  { kind: 'comparison', tone: 'coral' },
+  { kind: 'support', tone: 'mint' },
+  { kind: 'comparison', tone: 'butter' },
+  { kind: 'support', tone: 'lavender' },
+  { kind: 'bonus', tone: 'sky' },
 ];
 const whyHealioKeys = ['ergebnisse', 'begleitung', 'klarheit', 'ansprechpartner', 'bonusnutzung'];
 
@@ -102,7 +102,7 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.1 }}
                         className="bg-gradient-to-br from-green-50 to-white p-6 rounded-xl border border-green-100 hover:shadow-lg transition-shadow"
                       >
-                        <FriendlyIcon icon={icon.icon} label={title} tone={icon.tone} size="sm" className="mb-3" />
+                        <FriendlyIcon kind={icon.kind} label={title} tone={icon.tone} size="sm" className="mb-3" />
                         <h4 className="font-bold text-gray-900 mb-2">{title}</h4>
                         <p className="text-sm text-gray-600">{t(`conceptAccordion.coreValues.${key}.desc`)}</p>
                       </motion.div>
@@ -135,7 +135,7 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.05 }}
                         className="bg-white border p-4 rounded-xl transition-all flex items-start gap-3 border-gray-200 hover:border-[#10b981] hover:shadow-md"
                       >
-                        <FriendlyIcon icon={icon.icon} label={cardTitle} tone={icon.tone} size="sm" />
+                        <FriendlyIcon kind={icon.kind} label={cardTitle} tone={icon.tone} size="sm" />
                         <div className="pt-1">
                           <h4 className="font-bold text-gray-900 text-sm leading-tight mb-1">
                             {cardTitle}
@@ -201,7 +201,7 @@ const AmbulantConceptAccordion = () => {
                         transition={{ delay: idx * 0.1 }}
                         className="bg-white border border-gray-200 p-6 rounded-xl hover:shadow-lg hover:border-[#10b981] transition-all"
                       >
-                        <FriendlyIcon icon={icon.icon} label={title} tone={icon.tone} size="sm" className="mb-4" />
+                        <FriendlyIcon kind={icon.kind} label={title} tone={icon.tone} size="sm" className="mb-4" />
                         <h4 className="font-bold text-gray-900 mb-2">{title}</h4>
                         <p className="text-sm text-gray-600">{t(`conceptAccordion.whyHealio.${key}.desc`)}</p>
                       </motion.div>

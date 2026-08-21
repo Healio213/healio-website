@@ -60,12 +60,12 @@ const PartnerPage = () => {
   };
 
   const partnerTypes = [
-    { icon: 'prevention-care', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
-    { icon: 'ambulant-care', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
-    { icon: 'prevention-care', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
-    { icon: 'ambulant-care', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
-    { icon: 'clear-comparison', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
-    { icon: 'family-care', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
+    { kind: 'naturopathy', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
+    { kind: 'naturopathy', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
+    { kind: 'naturopathy', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
+    { kind: 'naturopathy', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
+    { kind: 'glasses', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
+    { kind: 'pregnancy', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
   ];
 
   return (
@@ -280,7 +280,7 @@ const PartnerPage = () => {
                 viewport={{ once: true }}
                 className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
               >
-                <FriendlyIcon icon="health-budget" tone="butter" className="mx-auto mb-4" />
+                <FriendlyIcon kind="budget" tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
                 <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
                 <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
@@ -294,7 +294,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon icon="prevention-care" tone="mint" className="mb-4" />
+                <FriendlyIcon kind="naturopathy" tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
@@ -308,7 +308,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon icon="clear-comparison" tone="sky" className="mb-4" />
+                <FriendlyIcon kind="glasses" tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
@@ -348,7 +348,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                     className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <FriendlyIcon icon={item.icon} tone={item.tone} className="mb-5" />
+                    <FriendlyIcon kind={item.kind} tone={item.tone} className="mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>
