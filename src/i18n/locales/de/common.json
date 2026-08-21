@@ -5,6 +5,7 @@
     "unternehmen": "Für Unternehmen",
     "ambulant": "Ambulante Zusatzversicherung",
     "kassenbonus": "Kassenbonus & GKV-Vergleich",
+    "kassenboost": "KassenBoost",
     "zahn": "Zahnzusatzversicherung",
     "stationaer": "Stationäre Zusatzversicherung",
     "tier": "Tierkrankenversicherung",
@@ -33,7 +34,7 @@
     "aboutUs": "Über uns",
     "unternehmen": "Für Unternehmen",
     "leistungen": "Leistungen",
-    "kassenbonus": "Kassenbonus vergleichen",
+    "kassenbonus": "KassenBoost",
     "partner": "Partner",
     "ratgeber": "Ratgeber",
     "hebammen": "Für Hebammen",
@@ -56,6 +57,12 @@
     "playStore": "Google Play",
     "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
     "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
+  },
+  "kassenboostHint": {
+    "iconLabel": "Krankenkassen vergleichen",
+    "title": "Noch nicht sicher, ob IKK classic zu dir passt?",
+    "body": "KassenBoost vergleicht Beitrag, Bonus und besondere Leistungen – damit du die gesetzliche Kasse findest, die zu deinem Alltag passt.",
+    "cta": "Meine Krankenkasse vergleichen"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Eckdaten der betrieblichen Altersvorsorge bei der Lebenshilfe",

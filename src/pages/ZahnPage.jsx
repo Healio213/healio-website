@@ -20,6 +20,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
+import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -159,6 +160,7 @@ const ZahnPage = () => {
           />
         </FadeInUp>
         <FadeInUp><AmbulantIKKWechsel variant="zahn" /></FadeInUp>
+        <FadeInUp><KassenBoostChoiceHint /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>
 

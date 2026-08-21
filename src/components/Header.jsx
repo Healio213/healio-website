@@ -114,12 +114,17 @@ const Header = () => {
       to: getPath('leistungen'),
       type: 'dropdown',
       subLinks: [
-        { to: getPath('kassenbonus'), label: t('nav.kassenbonus') },
         { to: getPath('ambulant'), label: t('nav.ambulant') },
         { to: getPath('zahn'), label: t('nav.zahn') },
         { to: getPath('stationaer'), label: t('nav.stationaer') },
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
+    },
+    {
+      to: getPath('kassenbonus'),
+      label: t('nav.kassenboost'),
+      type: 'link',
+      feature: 'kassenboost',
     },
     { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
@@ -162,8 +167,8 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
-          <ul className="flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-8">
+          <ul className="flex items-center gap-4 xl:gap-6 2xl:gap-8">
             {navLinks.map((link) => (
               <li
                 key={link.label}
@@ -178,8 +183,7 @@ const Header = () => {
                       to={link.to}
                       className={cn(
                         "flex items-center gap-1 text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
-                        (location.pathname.includes('/kassenbonus') || location.pathname.includes('/health-insurance-bonus') ||
-                         location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
+                        (location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
                          location.pathname.includes('/zahn') || location.pathname.includes('/dental') ||
                          location.pathname.includes('/stationaer') || location.pathname.includes('/inpatient') ||
                          location.pathname.includes('/tierkrankenversicherung') || location.pathname.includes('/pet-insurance') ||
@@ -235,12 +239,20 @@ const Header = () => {
                   <Link
                     to={link.to}
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
-                      location.pathname === link.to && "text-healio-mint font-bold"
+                      "relative group text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-healio-mint",
+                      link.feature === 'kassenboost'
+                        ? "inline-flex min-h-9 items-center gap-2 rounded-full border border-healio-mint/50 bg-slate-950/25 px-3 text-healio-mint shadow-[0_5px_16px_rgba(7,17,31,0.18)] hover:border-healio-mint hover:bg-slate-950/40"
+                        : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint",
+                      location.pathname === link.to && (link.feature === 'kassenboost'
+                        ? "border-healio-mint bg-healio-mint text-slate-950 font-bold"
+                        : "text-healio-mint font-bold")
                     )}
                   >
+                    {link.feature === 'kassenboost' && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-current shadow-[0_0_8px_currentColor]" aria-hidden="true" />
+                    )}
                     {link.label}
-                    {location.pathname === link.to && (
+                    {location.pathname === link.to && link.feature !== 'kassenboost' && (
                       <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-healio-mint rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
                     )}
                   </Link>
@@ -400,10 +412,18 @@ const Header = () => {
                         to={link.to}
                         onClick={() => setMobileMenuOpen(false)}
                         className={cn(
-                          "block font-medium hover:text-healio-mint transition-colors w-full",
-                          location.pathname === link.to ? "text-healio-mint font-bold" : "text-white"
+                          "font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-healio-mint",
+                          link.feature === 'kassenboost'
+                            ? "inline-flex min-h-11 w-auto items-center justify-center gap-2 rounded-full border border-healio-mint/60 bg-white/5 px-5 text-healio-mint hover:bg-white/10"
+                            : "block w-full hover:text-healio-mint",
+                          location.pathname === link.to
+                            ? (link.feature === 'kassenboost' ? "bg-healio-mint text-slate-950 font-bold" : "text-healio-mint font-bold")
+                            : (link.feature === 'kassenboost' ? "text-healio-mint" : "text-white")
                         )}
                       >
+                        {link.feature === 'kassenboost' && (
+                          <span className="h-2 w-2 rounded-full bg-current shadow-[0_0_8px_currentColor]" aria-hidden="true" />
+                        )}
                         {link.label}
                       </Link>
                     ) : (

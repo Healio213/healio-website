@@ -16,6 +16,7 @@ import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechse
 import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
 import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -189,6 +190,7 @@ const StationaerPage = () => {
           />
         </FadeInUp>
         <FadeInUp><AmbulantIKKWechsel variant="stationaer" /></FadeInUp>
+        <FadeInUp><KassenBoostChoiceHint /></FadeInUp>
         <FadeInUp><AmbulantIKKServices /></FadeInUp>
         <FadeInUp><AmbulantUmwelt /></FadeInUp>
 

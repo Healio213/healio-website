@@ -24,6 +24,7 @@ import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
 import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimonials';
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
+import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalculatorButton';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 
@@ -229,6 +230,10 @@ const AmbulantPage = () => {
         {/* IKK classic Wechsel — Bonus als Verstärker und Refinanzierung erklären */}
         <FadeInUp>
           <AmbulantIKKWechsel variant="ambulant" />
+        </FadeInUp>
+
+        <FadeInUp>
+          <KassenBoostChoiceHint />
         </FadeInUp>
 
         {/* TeleClinic + BetterDoc */}

@@ -24,6 +24,7 @@ const explanationVideo = read('src/components/sections/ErklaervideoSection.jsx')
 const ambulantHero = read('src/components/sections/ambulant/AmbulantHero.jsx');
 const qualityCooperation = read('src/components/sections/QualityCooperationSection.jsx');
 const header = read('src/components/Header.jsx');
+const kassenBoostChoiceHint = read('src/components/sections/KassenBoostChoiceHint.jsx');
 const sdkUrl = read('src/lib/sdk-url.js');
 const localizedAmbulantDetails = [
   read('src/components/sections/ambulant/AmbulantBenefits.jsx'),
@@ -64,6 +65,12 @@ expect(
   inpatientPage.indexOf('<HospitalBenefits />') < inpatientPage.indexOf('<AmbulantIKKWechsel'),
   'Auf Stationär müssen die Produktleistungen vor den optionalen Kassenwechsel-Details stehen.',
 );
+expect(/feature: 'kassenboost'/.test(header) && /t\('nav\.kassenboost'\)/.test(header), 'KassenBoost muss als eigener hervorgehobener Hauptnavigationspunkt erscheinen.');
+expect(/to=\{getPath\('kassenbonus'\)\}/.test(kassenBoostChoiceHint), 'Der dezente KassenBoost-Hinweis muss zur Healio-Kassenbonus-Seite führen.');
+expect(/kassenboostHint\.title/.test(kassenBoostChoiceHint) && /kassenboostHint\.cta/.test(kassenBoostChoiceHint), 'Der KassenBoost-Hinweis muss lokalisierte, verständliche Texte verwenden.');
+expect(ambulantPage.indexOf('<AmbulantIKKWechsel') < ambulantPage.indexOf('<KassenBoostChoiceHint'), 'Auf Ambulant muss die individuelle Kassenalternative direkt nach dem IKK-Weg folgen.');
+expect(dentalPage.indexOf('<AmbulantIKKWechsel') < dentalPage.indexOf('<KassenBoostChoiceHint'), 'Auf Zahn muss die individuelle Kassenalternative direkt nach dem IKK-Weg folgen.');
+expect(inpatientPage.indexOf('<AmbulantIKKWechsel') < inpatientPage.indexOf('<KassenBoostChoiceHint'), 'Auf Stationär muss die individuelle Kassenalternative direkt nach dem IKK-Weg folgen.');
 expect(/scroll-mt-24/.test(bonusCalculator), 'Der Bonus-Rechner muss unter dem festen Header vollständig sichtbar anspringen.');
 expect(/scroll-mt-24/.test(tariffTable), 'Die Tariftabelle muss unter dem festen Header vollständig sichtbar anspringen.');
 expect(sanitizeReferrer('HP-praxis_123') === 'HP-praxis_123', 'Gültige Partnercodes müssen erhalten bleiben.');

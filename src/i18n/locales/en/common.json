@@ -5,6 +5,7 @@
     "unternehmen": "For Companies",
     "ambulant": "Outpatient Insurance",
     "kassenbonus": "Health Insurance Bonus",
+    "kassenboost": "KassenBoost",
     "zahn": "Dental Insurance",
     "stationaer": "Hospital Insurance",
     "tier": "Pet Insurance",
@@ -33,7 +34,7 @@
     "aboutUs": "About Us",
     "unternehmen": "For Companies",
     "leistungen": "Services",
-    "kassenbonus": "Compare Health Insurance",
+    "kassenbonus": "KassenBoost",
     "partner": "Partner",
     "ratgeber": "Insights",
     "hebammen": "For Midwives",
@@ -56,6 +57,12 @@
     "playStore": "Google Play",
     "appScreenshotAlt": "Healio app dashboard showing the available health budget",
     "copyright": "© {{year}} Healio GmbH. All rights reserved."
+  },
+  "kassenboostHint": {
+    "iconLabel": "Compare statutory health insurers",
+    "title": "Not sure IKK classic is right for you?",
+    "body": "KassenBoost compares contributions, bonuses and distinctive benefits so you can find the statutory health insurer that suits your everyday life.",
+    "cta": "Compare health insurers"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Key facts about the Lebenshilfe company pension plan",
