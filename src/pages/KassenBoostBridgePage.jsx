@@ -1,12 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import CalendlyEmbed from '@/components/CalendlyEmbed';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const KASSENBOOST_URL = 'https://kassenboost.de/?utm_source=healio&utm_medium=bridge&utm_campaign=kassenboost';
+const CALENDLY_URL = 'https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990&utm_source=healio&utm_medium=kassenboost-bruecke&utm_campaign=termin';
 
 const KassenBoostBridgePage = () => {
   const { t } = useTranslation('kassenboost');
@@ -16,6 +18,7 @@ const KassenBoostBridgePage = () => {
     : 'https://healio.de/kassenboost';
   const privacyDetails = t('privacy.details', { returnObjects: true });
   const protectionAreas = t('protection.items', { returnObjects: true });
+  const transparencyItems = t('termin.transparency', { returnObjects: true });
 
   const schemaMarkup = createWebPageSchema(
     t('seo.title'),
@@ -54,13 +57,23 @@ const KassenBoostBridgePage = () => {
             <p className="mt-7 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:text-xl">
               {t('hero.description')}
             </p>
+            <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <a
+                href="#termin"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3.5 text-sm font-bold text-[#07111f] transition-colors hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+              >
+                {t('hero.cta')}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <span className="text-sm text-slate-400">{t('hero.ctaHint')}</span>
+            </div>
             <a
               href={KASSENBOOST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-9 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3.5 text-sm font-bold text-[#07111f] transition-colors hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#5ee0b1] underline decoration-[#25c990]/40 decoration-2 underline-offset-4 transition-colors hover:text-white"
             >
-              {t('hero.cta')}
+              {t('hero.secondaryCta')}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">
@@ -95,7 +108,34 @@ const KassenBoostBridgePage = () => {
           </div>
         </section>
 
-        <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28" aria-labelledby="kassenboost-protection-heading">
+        <section className="px-4 py-20 sm:px-6 sm:py-24 lg:px-8" aria-labelledby="kassenboost-bonus-heading">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">
+                {t('bonus.eyebrow')}
+              </p>
+              <h2 id="kassenboost-bonus-heading" className="mt-5 max-w-[18ch] font-display text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('bonus.title')}
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-[#55616e] sm:text-lg sm:leading-8">
+                {t('bonus.description')}
+              </p>
+            </div>
+            <div className="mt-10 rounded-[1.75rem] border border-[#cceadf] bg-[#f4faf7] p-6 sm:p-9">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-[#0c7a5a]">
+                {t('bonus.exampleLabel')}
+              </p>
+              <p className="mt-4 max-w-3xl text-base font-semibold leading-7 text-[#102333] sm:text-lg sm:leading-8">
+                {t('bonus.example')}
+              </p>
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-[#5a6571]">
+                {t('bonus.note')}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8 lg:pb-28" aria-labelledby="kassenboost-protection-heading">
           <div className="mx-auto w-full max-w-7xl">
             <div className="max-w-3xl">
               <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">
@@ -124,6 +164,33 @@ const KassenBoostBridgePage = () => {
               {t('protection.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+          </div>
+        </section>
+
+        <section id="termin" className="bg-[#f4faf7] px-4 py-20 scroll-mt-24 sm:px-6 sm:py-24 lg:px-8" aria-labelledby="kassenboost-termin-heading">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">
+                {t('termin.eyebrow')}
+              </p>
+              <h2 id="kassenboost-termin-heading" className="mt-5 max-w-[16ch] font-display text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('termin.title')}
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-[#55616e] sm:text-lg sm:leading-8">
+                {t('termin.description')}
+              </p>
+            </div>
+            <ul className="mt-8 grid gap-3 md:grid-cols-3">
+              {Array.isArray(transparencyItems) && transparencyItems.map((item) => (
+                <li key={item} className="flex items-start gap-3 rounded-2xl border border-[#cceadf] bg-white px-4 py-4 text-sm leading-6 text-[#46515e]">
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#0c7a5a]" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-[#cceadf] bg-white">
+              <CalendlyEmbed url={CALENDLY_URL} placement="kassenboost_bridge" />
+            </div>
           </div>
         </section>
 

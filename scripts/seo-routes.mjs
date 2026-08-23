@@ -29,8 +29,8 @@ export const seoRoutes = [
   },
   {
     path: '/kassenboost',
-    title: 'KassenBoost & Healio: Krankenkasse privat vergleichen',
-    description: 'Vergleiche gesetzliche Krankenkassen privat bei KassenBoost. Danach entscheidest du selbst, ob Zusatzschutz oder ein Arbeitgeberangebot von Healio für dich relevant ist.',
+    title: 'Kassenbonus nutzen: Von KassenBoost zu Healio',
+    description: 'Du hast bei KassenBoost verglichen? Healio zeigt dir, wie du deinen Kassenbonus als Geld auszahlen lässt oder verdreifacht in Zusatzschutz übersetzt. Kostenlos, unabhängig, ohne Datenübergabe.',
     canonical: 'https://healio.de/kassenboost',
     keywords: 'Krankenkassenvergleich, gesetzliche Krankenkasse vergleichen, KassenBoost, Healio, privater Krankenkassenvergleich',
     ogImage: 'https://healio.de/images/kassenboost-bridge-og.png',
@@ -436,8 +436,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/kassenboost',
-    title: 'KassenBoost & Healio: Compare Health Funds Privately',
-    description: 'Compare statutory health funds privately with KassenBoost. Then decide whether supplementary cover or a Healio employer offer is relevant to you.',
+    title: 'Use your health fund bonus: from KassenBoost to Healio',
+    description: 'Compared funds on KassenBoost? Healio shows you how to take your fund bonus as cash or triple it into supplementary cover. Free, independent, no data transfer.',
     canonical: 'https://healio.de/en/kassenboost',
     ogImage: 'https://healio.de/images/kassenboost-bridge-og.png',
     ogImageAlt: 'KassenBoost and Healio – compare neutrally and decide for yourself',

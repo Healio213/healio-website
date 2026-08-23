@@ -1,54 +1,74 @@
 {
   "seo": {
-    "title": "KassenBoost & Healio: Compare Health Funds Privately",
-    "description": "Compare statutory health funds privately with KassenBoost. Then decide for yourself whether supplementary cover or a Healio employer offer is relevant to you.",
-    "ogTitle": "Compare your health fund first. Then choose what comes next.",
-    "ogDescription": "KassenBoost remains your neutral comparison. Healio only shows optional next steps when you ask for them.",
-    "ogImageAlt": "KassenBoost and Healio – compare neutrally and decide for yourself"
+    "title": "Use your health fund bonus: from KassenBoost to Healio",
+    "description": "Compared funds on KassenBoost? Healio shows you how to take your fund bonus as cash or triple it into supplementary cover. Free, independent, no data transfer.",
+    "ogTitle": "Your fund check is done. Now get more out of it.",
+    "ogDescription": "Cash bonus or triple subsidy for your supplementary insurance: Healio runs the numbers with you.",
+    "ogImageAlt": "KassenBoost and Healio: compare, use your bonus, get covered"
   },
   "hero": {
     "eyebrow": "KassenBoost × Healio",
-    "title": "Compare first. Then decide for yourself.",
-    "description": "KassenBoost helps you compare German statutory health funds neutrally and without creating an account. Healio remains separate and only becomes relevant if you want to explore supplementary cover or an employer offer.",
-    "cta": "Compare health funds with KassenBoost",
-    "externalNote": "The comparison opens on the separate KassenBoost website. Your information stays there and is not automatically shared with Healio."
+    "title": "Your fund check is done. Now get more out of it.",
+    "description": "On KassenBoost you compared what your fund can do, on contributions and bonuses, neutrally. Healio is the brokerage behind it. If you want, we translate your bonus potential into real supplementary cover. Free and without obligation.",
+    "cta": "Book a free call",
+    "ctaHint": "30 minutes, phone or video call",
+    "secondaryCta": "Not compared yet? To the KassenBoost check",
+    "externalNote": "The comparison runs on KassenBoost's own website. Your entries stay there and are never transferred to Healio automatically."
   },
   "privacy": {
     "eyebrow": "Your comparison stays private",
     "title": "No hidden data bridge.",
-    "confirmation": "No information from your comparison was shared with Healio.",
-    "listLabel": "Information not shared with Healio",
+    "confirmation": "Nothing from your KassenBoost comparison was transferred to Healio. You decide what to share in a call.",
+    "listLabel": "Details never transferred to Healio",
     "details": [
       "No health fund and no comparison result",
-      "No region, income or personal preferences",
-      "No health information and no decision for or against an offer"
+      "No region, no income and no personal preferences",
+      "No health details and no decision for or against an offer"
     ]
   },
+  "bonus": {
+    "eyebrow": "How your fund bonus works",
+    "title": "Take the cash. Or triple it into cover.",
+    "description": "Many funds reward prevention and sport twice over: you can take your bonus as cash, or as an earmarked subsidy at triple the amount, for example towards the annual premium of a private supplementary policy. This is exactly where Healio comes in.",
+    "exampleLabel": "Verified example, IKK classic, bonus year 2026",
+    "example": "Every regular activity such as gym or sports club earns 25 EUR in cash there, or counts triple as a 75 EUR subsidy. Private supplementary insurance is explicitly listed as an eligible subsidy item, and the terms state: there is no maximum amount.",
+    "note": "Amounts and conditions depend on the fund and bonus year. Subsidy payouts never exceed your proven costs. We check together what applies to your fund."
+  },
   "protection": {
-    "eyebrow": "Optional next step",
-    "title": "Supplementary cover is a separate decision.",
-    "description": "A lower health fund contribution does not answer every health question. If you wish, Healio can explain three possible areas of cover independently of your comparison.",
+    "eyebrow": "What the bonus is good for",
+    "title": "Cover that fits you.",
+    "description": "Combined with fund bonuses, a health budget of up to 3,000 EUR in 2 years can build up step by step, depending on fund, tariff and the services you actually use. Healio independently explains three areas of cover.",
     "items": [
       {
         "title": "Outpatient",
-        "description": "More flexibility for areas such as alternative medicine, osteopathy, glasses or additional preventive care, depending on the plan."
+        "description": "More room for naturopathy, osteopathy, glasses or extra prevention, depending on the chosen tariff."
       },
       {
         "title": "Dental",
-        "description": "Make out-of-pocket costs for treatment and prosthetics more predictable and understand conditions before taking out cover."
+        "description": "Make out-of-pocket costs for treatment and dentures more plannable and understand conditions before signing."
       },
       {
         "title": "Hospital",
-        "description": "More choice of doctor, hospital and accommodation if this freedom matters to you."
+        "description": "More choice of doctor, clinic and room, if that freedom matters to you."
       }
     ],
-    "cta": "Understand supplementary cover with Healio"
+    "cta": "Understand supplementary cover at Healio"
+  },
+  "termin": {
+    "eyebrow": "Your next step",
+    "title": "Talk to us about your result.",
+    "description": "Pick a slot: 30 minutes, phone or video call. Bring your KassenBoost result and we will run the numbers on which path pays off for you.",
+    "transparency": [
+      "Advice and brokerage are free for you. If you sign a policy, the insurer pays Healio a commission.",
+      "The KassenBoost comparison stays separate. No ranking there is influenced by commission.",
+      "You decide freely. No call obliges you to anything."
+    ]
   },
   "employer": {
     "eyebrow": "KassenBoost at work",
     "title": "Access for employees. No insight for the employer.",
-    "description": "Employers can offer KassenBoost as voluntary guidance. Individual information, results and decisions remain private. Healio manages corporate benefits separately.",
-    "cta": "Explore the employer concept",
+    "description": "Employers can offer KassenBoost voluntarily as orientation. Individual entries, results and decisions stay private. Healio designs company benefits separately from that.",
+    "cta": "To the employer concept",
     "ctaHref": "/en/companies#healio-belegschaft"
   }
 }
