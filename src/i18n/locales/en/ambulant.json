@@ -1,13 +1,14 @@
 {
   "hero": {
-    "title": "Your €3,000 Health Budget. Effectively from <highlight>€0</highlight>.",
-    "subtitle": "Why pay yourself when there's a better way? Up to €3,000 for alternative medicine, glasses & preventive care, effectively from €0. No waiting periods.",
-    "badgeEffective": "From €0 effectively per month thanks to IKK bonus",
+    "title": "Your <highlight>EUR 3,000</highlight> health budget. Effectively from <highlight>EUR 0</highlight>.",
+    "subtitle": "Why keep paying out of pocket? Secure up to EUR 3,000 for alternative medicine, glasses and preventive care – with no waiting period and a quote in just a few minutes.",
+    "badgeEffective": "May be refinanced through a suitable insurer bonus",
     "badgeNoWait": "Guaranteed no waiting period",
     "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
-    "ctaCalculate": "Get quote – German form",
+    "ctaCalculate": "Check my budget for free",
+    "ctaHint": "Digital quote calculator · result before applying · effective cost depends on age, policy and achievable insurer bonus. German form.",
     "ctaBonus": "Claim your bonus",
-    "heroImageAlt": "Healthy people in nature",
+    "heroImageAlt": "Woman using her smartphone to learn about her digital health budget",
     "ctaBonusCalc": "Calculate bonus",
     "ctaCompare": "Compare plans"
   },
@@ -33,11 +34,11 @@
     "ariaLabel": "Benefits of outpatient supplementary insurance",
     "budget": "Up to €3,000 health budget",
     "sdk": "SDK, on the market since 1926",
-    "ikk": "IKK classic, 3 million members",
+    "ikk": "Put the right insurer bonus in context",
     "heilpraktiker": "Heilpraktiker 100% covered",
     "noWait": "No waiting period, instant coverage",
     "fast": "Get your quote in a few minutes",
-    "effective": "Effectively from €0 thanks to IKK bonus",
+    "effective": "May be refinanced through a suitable insurer bonus",
     "akupunktur": "Acupuncture included",
     "osteopathie": "Osteopathy & massages included",
     "video": "See how it works in the video"

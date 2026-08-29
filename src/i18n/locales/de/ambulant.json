@@ -1,13 +1,14 @@
 {
   "hero": {
-    "title": "Dein <highlight>3.000 Euro</highlight> Gesundheits-<highlight>Budget</highlight>. Effektiv ab <highlight>0 Euro</highlight>.",
-    "subtitle": "Warum selbst zahlen, wenn es auch anders geht? Bis zu <highlight>3.000 €</highlight> für Heilpraktiker, Brille & Vorsorge, effektiv ab <highlight>0 €</highlight>. Keine Wartezeiten.",
-    "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
+    "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Effektiv ab <highlight>0 EUR</highlight>.",
+    "subtitle": "Warum weiter selbst zahlen? Sichere dir bis zu 3.000 EUR für Heilpraktiker, Brille und Vorsorge – ohne Wartezeit und in wenigen Minuten berechnet.",
+    "badgeEffective": "Durch passenden Kassenbonus refinanzierbar",
     "badgeNoWait": "Garantiert ohne Wartezeit",
     "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
-    "ctaCalculate": "Beitrag berechnen",
+    "ctaCalculate": "Jetzt Budget kostenlos prüfen",
+    "ctaHint": "Digitaler Beitragsrechner · Ergebnis vor dem Antrag · Effektivbetrag abhängig von Alter, Tarif und erreichbarem Kassenbonus.",
     "ctaBonus": "Bonus sichern",
-    "heroImageAlt": "Gesunde Menschen in der Natur",
+    "heroImageAlt": "Frau mit Smartphone informiert sich über ihr digitales Gesundheitsbudget",
     "ctaBonusCalc": "Bonus berechnen",
     "ctaCompare": "Tarife vergleichen"
   },
@@ -33,11 +34,11 @@
     "ariaLabel": "Vorteile der ambulanten Zusatzversicherung",
     "budget": "Bis zu 3.000 € Gesundheitsbudget",
     "sdk": "SDK: seit 1926 am Markt",
-    "ikk": "IKK classic: 3 Mio. Versicherte",
+    "ikk": "Kassenbonus passend einordnen",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
     "noWait": "Keine Wartezeit, sofort geschützt",
     "fast": "Beitrag in wenigen Minuten berechnen",
-    "effective": "Effektiv ab 0 € dank IKK Bonus",
+    "effective": "Durch passenden Kassenbonus refinanzierbar",
     "akupunktur": "Akupunktur inklusive",
     "osteopathie": "Osteopathie & Massagen inklusive",
     "video": "Sieh im Video, wie es funktioniert"

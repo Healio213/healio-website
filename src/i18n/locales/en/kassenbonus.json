@@ -7,29 +7,36 @@
     "ogImageAlt": "Healio guide to German health insurance contributions, bonuses and benefits"
   },
   "hero": {
-    "eyebrow": "A smarter German health insurance switch",
-    "title": "Get more from your health insurer.",
-    "description": "We first check where you may save on contributions. Then we look at which bonus is realistic for your routine and which benefits genuinely fit your needs.",
+    "eyebrow": "Choose your health insurer with confidence",
+    "title": "Which health insurer genuinely gives you more?",
+    "description": "The lowest contribution is only half the answer. Find out what you could save, which bonus is realistic and which benefits fit your everyday needs.",
     "cta": "Check my insurance advantage",
-    "ctaHint": "Free comparison on KassenBoost, in German",
+    "ctaHint": "Free · no contact details",
     "proof": [
-      "Start without contact details",
       "See the result before applying",
-      "Cost, bonus and benefits kept separate"
+      "Cost, bonus and benefits kept separate",
+      "You remain in control"
     ],
     "mapEyebrow": "Your comparison",
-    "mapTitle": "One decision, three clear answers.",
+    "mapTitle": "What genuinely matters to you?",
     "mapItems": [
       { "label": "Cost", "text": "What do you actually pay?" },
       { "label": "Bonus", "text": "What can you realistically earn?" },
       { "label": "Benefits", "text": "What helps in everyday life?" }
     ],
-    "mapNote": "Compare first. Switch with confidence."
+    "mapNote": "Weigh it up. Understand it. Decide with confidence."
   },
   "paths": {
-    "eyebrow": "Three comparison paths",
-    "title": "The cheapest insurer does not automatically win.",
-    "description": "Choose what matters most to you. The result keeps all three answers separate, so the difference is immediately clear.",
+    "eyebrow": "What matters to you?",
+    "title": "The cheapest insurer is not automatically the best for you.",
+    "description": "Choose where to start. KassenBoost still shows contributions, an achievable bonus and relevant benefits together, while keeping them clearly separate.",
+    "triggerKicker": "Illustrative IKK bonus calculation",
+    "triggerQuestion": "How much could you reach?",
+    "triggerAmount": "EUR 1,155",
+    "triggerScenario": "Active lifestyle + pregnancy",
+    "triggerTerms": "Earmarked · with eligible costs you actually incur",
+    "triggerCta": "Check my insurance advantage",
+    "triggerNote": "EUR 385 cash bonus × 3, including 12 accepted maternity check-ups and further activities in the same bonus year. Not a typical value; choose cash or subsidy, not both. Subsidy is capped at eligible costs actually incurred.",
     "selectLabel": "Choose your comparison goal",
     "resultLabel": "What matters",
     "items": [
@@ -95,56 +102,41 @@
     "noteTitle": "Good to know",
     "note": "Each insurer sets its own rules for eligible activities, evidence and whether it pays cash or an earmarked reimbursement."
   },
-  "process": {
-    "eyebrow": "How your result is created",
-    "title": "Four short steps without insurance jargon.",
-    "description": "You only answer questions that can genuinely change the result.",
-    "steps": [
-      { "title": "Region and current insurer", "text": "So only insurers you can actually choose are included." },
-      { "title": "Income and family", "text": "For a suitable contribution calculation and the right personal context." },
-      { "title": "Routine and preferences", "text": "Choose preventive care, activity and benefits one question at a time." },
-      { "title": "Three separate results", "text": "See contribution savings, realistic bonus and benefit match side by side." }
-    ],
-    "note": "No invented progress amounts: during the questions we show completion progress, and only show euro values once they can be calculated responsibly."
-  },
   "bridge": {
-    "eyebrow": "Use your advantage well",
-    "title": "Keep it or put it towards better cover.",
-    "description": "Savings or a bonus are yours first. If you want, they may also help fund suitable supplementary insurance in part or in full.",
-    "budgetTitle": "A health budget of up to EUR 3,000 over 2 years may be possible.",
-    "budgetNote": "This only applies when an achievable statutory health insurance bonus and suitable supplementary cover are combined and all relevant bonus and policy conditions are met.",
+    "eyebrow": "Take your advantage further",
+    "title": "Keep it – or put it towards better cover.",
+    "description": "Your savings and bonus are yours first. If you choose, they may offset some or all of the premium for suitable supplementary cover.",
     "cards": [
       {
         "routeKey": "ambulant",
         "tone": "mint",
         "title": "Outpatient",
-        "text": "For example for naturopathy, osteopathy, glasses and preventive care.",
+        "badge": "Outpatient 100",
+        "highlight": "Up to EUR 3,000 health budget over 2 years",
+        "text": "For example for naturopathy, glasses and preventive care under Outpatient 100.",
+        "note": "For insured benefits; policy and bonus conditions apply.",
         "cta": "View outpatient cover"
       },
       {
         "routeKey": "zahn",
         "tone": "butter",
         "title": "Dental",
-        "text": "For dental cleaning, dental prostheses and further benefits depending on the policy.",
+        "badge": "Dental Immediate",
+        "highlight": "An immediate subsidy of up to EUR 1,500 may be possible",
+        "text": "Subject to the conditions, cover may also apply to treatment already recommended or started, provided it has not been completed or invoiced.",
+        "note": "Up to EUR 750 per calendar year for no more than 24 months; only available when taking out new cover.",
         "cta": "View dental cover"
       },
       {
         "routeKey": "stationaer",
         "tone": "sky",
         "title": "Hospital",
-        "text": "For more comfort and choice in hospital, depending on the policy.",
+        "badge": "For expectant parents",
+        "highlight": "Two months to arrange cover for your baby",
+        "text": "If one parent is insured under the hospital policy at birth, the child may be covered retrospectively from birth.",
+        "note": "Registration within two months, without medical underwriting; policy conditions apply.",
         "cta": "View hospital cover"
       }
-    ]
-  },
-  "transparency": {
-    "eyebrow": "Kept clearly separate",
-    "title": "The result should be real.",
-    "description": "That is why we distinguish between a reliable contribution difference, an expected achievable bonus and particular benefits.",
-    "items": [
-      { "title": "A bonus is not guaranteed", "text": "It depends on programme rules and the activities you actually complete and verify." },
-      { "title": "Cash is not the same as credit", "text": "Freely available cash and earmarked reimbursements are shown separately." },
-      { "title": "Regional really means regional", "text": "An insurer is only compared if it is available where you live or work." }
     ]
   },
   "faq": {
@@ -161,8 +153,14 @@
   "final": {
     "eyebrow": "Ready to compare?",
     "title": "Find out which German health insurer genuinely gives you more.",
-    "description": "Start with contribution and region. Bonus and benefits are then explained clearly in context.",
+    "description": "Switching is easier than you may think: see your result first and decide afterwards. Your statutory cover remains in place.",
+    "proof": [
+      "Result before applying",
+      "Start without contact details",
+      "You remain in control"
+    ],
     "cta": "Check my insurance advantage",
-    "hint": "The German comparison opens on KassenBoost."
+    "hint": "Free on KassenBoost, in German.",
+    "characterNote": "Compare first. Then decide for yourself."
   }
 }
