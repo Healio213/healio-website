@@ -14,12 +14,12 @@ const pages = [
   {
     file: 'dist/kassenboost/index.html',
     canonical: 'https://healio.de/kassenboost',
-    alt: 'KassenBoost und Healio – neutral vergleichen und selbst entscheiden',
+    alt: 'KassenBoost und Healio: vergleichen, Bonus nutzen, absichern',
   },
   {
     file: 'dist/en/kassenboost/index.html',
     canonical: 'https://healio.de/en/kassenboost',
-    alt: 'KassenBoost and Healio – compare neutrally and decide for yourself',
+    alt: 'KassenBoost and Healio: compare, use your bonus, get covered',
   },
 ];
 

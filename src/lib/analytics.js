@@ -9,10 +9,7 @@ export const GA4_MEASUREMENT_ID = 'G-VSN76YW5SC';
 const GA4_SCRIPT_URL = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
 const GA4_DISABLE_KEY = `ga-disable-${GA4_MEASUREMENT_ID}`;
 const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
-// /zahn wird seit 17.08.2026 wieder getrackt (Conversion-Paket 2): Der
-// Gesundheitsdaten-Schutz liegt im Zahn-Check selbst (keine Antworten als
-// Events, SENSITIVE_PARAM_KEY-Filter), nicht im Seiten-Blackout.
-const ANALYTICS_EXCLUDED_PATHS = new Set([]);
+const ANALYTICS_EXCLUDED_PATHS = new Set(['/zahn', '/en/dental']);
 const SAFE_EVENT_NAME = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_PARAM_KEY = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_TOKEN_VALUE = /^[a-z0-9][a-z0-9._-]{0,63}$/i;

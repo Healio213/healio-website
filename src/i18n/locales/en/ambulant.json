@@ -1,12 +1,13 @@
 {
   "hero": {
-    "title": "Your <highlight>EUR 3,000</highlight> health budget. Effectively from <highlight>EUR 0</highlight>.",
-    "subtitle": "Why keep paying out of pocket? Secure up to EUR 3,000 for alternative medicine, glasses and preventive care – with no waiting period and a quote in just a few minutes.",
-    "badgeEffective": "May be refinanced through a suitable insurer bonus",
-    "badgeNoWait": "Guaranteed no waiting period",
-    "badgeTestResult": "Stiftung Warentest: Very Good (0.9)",
-    "ctaCalculate": "Check my budget for free",
-    "ctaHint": "Digital quote calculator · result before applying · effective cost depends on age, policy and achievable insurer bonus. German form.",
+    "eyebrow": "Outpatient supplementary insurance",
+    "title": "Up to <highlight>EUR 3,000</highlight> for what keeps you well.",
+    "subtitle": "Alternative medicine, osteopathy, glasses and preventive care: find the cover that turns out-of-pocket costs into a real health budget.",
+    "badgeEffective": "Up to 100% of the premium may be offset",
+    "badgeNoWait": "No general waiting period",
+    "badgeTestResult": "Up to 100% reimbursement",
+    "ctaCalculate": "Check budget & premium",
+    "ctaHint": "One-minute orientation · see your personal premium in the tariff calculator afterwards. German form.",
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Woman using her smartphone to learn about her digital health budget",
     "ctaBonusCalc": "Calculate bonus",
@@ -354,69 +355,72 @@
   },
   "bonusCalculator": {
     "title": "Your Personal <highlight>Bonus Calculator</highlight>",
-    "subtitle": "This is how the IKK classic bonus works: Select your activities and see instantly how much you can get back!",
-    "selectActivities": "Select your activities:",
-    "exampleNote": "A typical example is already selected. Simply adjust it to your own activities.",
+    "subtitle": "Select what you already do. The calculator keeps the cash bonus and the threefold subsidy for documented costs separate.",
+    "selectActivities": "What applies to you?",
+    "exampleNote": "A realistic example is preselected. Adjust it to the activities you can actually document.",
     "activities": {
       "impfung": {
         "title": "Vaccination",
-        "desc": "Up to 8x per year",
+        "desc": "Per covered, completed immunisation",
         "unit": "vaccination(s)"
       },
       "zahn": {
         "title": "Dental checkup",
-        "desc": "Up to 2x per year",
+        "desc": "One check per half-year, from age 6",
         "unit": "visit(s)"
       },
       "zahnFrueh": {
         "title": "Dental screening Z1–Z6",
-        "desc": "For children"
+        "desc": "Age 6 to 72 months, per appointment",
+        "unit": "appointment(s)"
       },
       "hautkrebs": {
         "title": "Skin cancer screening",
-        "desc": "1x per calendar year"
+        "desc": "Every 2 years from 35; earlier only with risk"
       },
       "ultraschall": {
         "title": "Ultrasound screening",
-        "desc": "Abdominal aortic aneurysm"
+        "desc": "Abdominal aortic aneurysm, men 65+ once"
       },
       "mammographie": {
         "title": "Mammography screening",
-        "desc": "1x per calendar year"
+        "desc": "Women 50 to 75, every 2 years"
       },
       "mutterschaft": {
         "title": "Maternity checkup",
-        "desc": "1x per calendar year"
+        "desc": "Per statutory pregnancy examination",
+        "unit": "examination(s)"
       },
       "kind": {
         "title": "Child checkups (U1–U11)",
-        "desc": "€30 per checkup",
+        "desc": "Per documented examination",
         "unit": "checkup(s)"
       },
       "jugend": {
         "title": "Youth checkups J1–J2",
-        "desc": "€30 per checkup",
+        "desc": "Per documented examination",
         "unit": "checkup(s)"
       },
       "amblyopie": {
         "title": "Amblyopia screening (children)",
-        "desc": "Early detection exam"
+        "desc": "Two eligible age windows, per screening",
+        "unit": "screening(s)"
       },
       "lungenkrebs": {
         "title": "Lung cancer screening",
-        "desc": "New from 04/2026 · 1× per year"
+        "desc": "For eligible current or former smokers aged 50 to 75, every 12 months"
       },
       "checkup": {
         "title": "Health check-up",
-        "desc": "1x per calendar year"
+        "desc": "According to age and eligible interval"
       },
       "krebs": {
         "title": "Cancer screening",
-        "desc": "1x per calendar year"
+        "desc": "Women 20+, men 45+, annually"
       },
       "darmkrebs": {
         "title": "Colon cancer screening",
-        "desc": "1x per calendar year"
+        "desc": "Every 2 years from 50; earlier only with risk"
       },
       "outdoorSport": {
         "title": "Outdoor group sports",
@@ -440,11 +444,11 @@
       },
       "abzeichen": {
         "title": "German sports badge",
-        "desc": "1x per calendar year"
+        "desc": "Status value; requires a regular activity"
       },
       "leistungsabzeichen": {
         "title": "Sports federation badge",
-        "desc": "German sports federation"
+        "desc": "Status value; requires a regular activity"
       },
       "bmi": {
         "title": "BMI in normal range",
@@ -455,31 +459,42 @@
         "desc": "Status value, combine with activity"
       }
     },
-    "tip": "Tip",
+    "tip": "Strong lever",
     "max": "max.",
-    "trustNote": "Simple & trust-based",
-    "trustNoteDesc": "IKK classic trusts its members. Proof is only requested in rare individual cases and on a spot-check basis. You don't need to meticulously document every activity, just report it and collect your bonus.",
+    "cashShort": "cash bonus",
+    "subsidyShort": "subsidy",
+    "notCounted": "not yet eligible",
+    "statusCondition": "Status values such as BMI, blood pressure or a sports badge only count if you document at least one regular activity in the same year, such as a course, gym, sports club, guided outdoor group sport or postnatal exercise.",
+    "decrease": "Decrease count",
+    "increase": "Increase count",
+    "trustNote": "Submit proof digitally",
+    "trustNoteDesc": "Bonus activities require proof accepted by IKK classic, such as confirmation in the app, a participation certificate or a stamp. For a subsidy towards an insurance premium, you also provide evidence of the insurance type, period and premium paid.",
+    "officialSource": "Official IKK 2026 information sheet (April 2026)",
     "appleWatchNote": "Bonus for Apple Watch & fitness devices",
-    "appleWatchNoteDesc": "You can also use your IKK bonus towards an Apple Watch, fitness tracker, or other fitness devices. Simply submit it through the bonus program and collect the subsidy.",
+    "appleWatchNoteDesc": "A subsidy towards a fitness tracker or another device that records health status may also be available. Payment is limited to the documented cost and subject to the current bonus terms.",
     "resetSelection": "Reset selection",
-    "yourBonus": "Your potential bonus:",
+    "yourBonus": "Potential subsidy towards your premium:",
     "tariffInfo": "Plan Ambulant 100 (AP1), 100% reimbursement",
     "yourMonthly": "Your monthly premium:",
+    "monthlyInputLabel": "Enter monthly plan premium",
+    "editMonthlyLabel": "Change monthly plan premium of {{amount}} euros",
     "perMonth": "€/month",
     "yearlyContribution": "= Annual premium:",
-    "yourBonusLabel": "Your bonus:",
-    "resultLabel": "Result:",
-    "resultPlus": "Plus",
+    "subsidyPotentialLabel": "Subsidy potential earned:",
+    "eligibleSubsidyLabel": "Eligible for this premium:",
+    "orCashBonus": "Or as a freely usable cash bonus:",
+    "unusedPotential": "A further €{{amount}} of subsidy potential would require additional documented eligible costs; it is not paid out as a surplus.",
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
-    "bonusPayout": "Your bonus is paid out or used as a subsidy for paid supplementary insurance premiums. This can make your health budget of up to €3,000 over 2 years effectively much cheaper.",
+    "bonusPayout": "You choose: a freely usable cash bonus or the threefold subsidy for documented eligible costs, such as the annual premium for supplementary insurance.",
+    "choiceDisclaimer": "Cash bonus and subsidy are alternatives and are not added together. The subsidy is capped at your documented eligible costs.",
     "ctaCalculate": "Get quote – German form",
     "ctaSwitchIKK": "Secure your IKK bonus",
     "effectiveTitle": "Your bottom line",
     "effectiveCosts": "Your effective yearly cost",
-    "effectiveZeroNote": "Your bonus covers the entire yearly premium.",
+    "effectiveZeroNote": "Your potential subsidy reaches the documented annual premium.",
     "effectiveBudget": "Your health budget in return (2 years)",
     "effectiveBudgetValue": "up to €3,000",
-    "effectiveNote": "Example calculation based on your inputs and the Ambulant 100 tariff. Your actual bonus depends on your health insurer and the activities you complete."
+    "effectiveNote": "Example calculation based on your inputs and the Ambulant 100 tariff. Payment is capped at the documented annual premium and subject to current bonus and tariff terms."
   },
   "beispielrechnung": {
     "title": "How Your Health Budget Pays Off",

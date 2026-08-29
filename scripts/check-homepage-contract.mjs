@@ -108,6 +108,11 @@ assert.match(footer, /width="720"/);
 assert.match(footer, /height="1565"/);
 assert.match(footer, /loading="lazy"/);
 assert.match(footer, /!hideAppPromotion/);
+assert.match(footer, /hideAppPromotion &&/);
+assert.match(footer, /StoreDownloadButtons/);
+assert.match(footer, /\/images\/healio-app-icon\.png/);
+assert.match(footer, /https:\/\/apps\.apple\.com\/de\/app\/healio\/id6762125390/);
+assert.match(footer, /https:\/\/play\.google\.com\/store\/apps\/details\?id=de\.healio\.gesundheit/);
 assert.match(layout, /pathname === '\/'/);
 assert.match(layout, /<Footer hideCta=\{hideCta\} hideAppPromotion=\{hideAppPromotion\}/);
 

@@ -8,37 +8,43 @@ import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown, HeartHandshake,
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
+import { calculateIkkBonus, capActivityCount } from '@/lib/ikkBonusCalculator';
 
-// IKK classic Bonustabelle (mit Zusatzversicherung)
+// IKK classic Bonustabelle 2026. Geldbonus und Zuschuss sind Alternativen;
+// der Zuschuss beträgt das Dreifache des Geldbonus und ist auf die
+// nachgewiesenen zuschussfähigen Kosten begrenzt.
 const ACTIVITY_DEFS = [
-  // Vorsorgeuntersuchungen
-  { id: 'impfung', perUnit: 15, max: 8 },
-  { id: 'zahn', perUnit: 15, max: 2 },
-  { id: 'zahnFrueh', amount: 15 },
-  { id: 'hautkrebs', amount: 30 },
-  { id: 'ultraschall', amount: 30 },
-  { id: 'mammographie', amount: 30 },
-  { id: 'mutterschaft', amount: 30 },
-  { id: 'kind', perUnit: 30, max: 11 },
-  { id: 'jugend', perUnit: 30, max: 2 },
-  { id: 'amblyopie', amount: 30 },
-  { id: 'lungenkrebs', amount: 30 },
-  // Vorsorgeuntersuchungen
-  { id: 'checkup', amount: 30 },
-  { id: 'krebs', amount: 30 },
-  { id: 'darmkrebs', amount: 30 },
-  { id: 'outdoorSport', amount: 75 },
-  { id: 'rueckbildung', amount: 75 },
+  // Gesetzliche Vorsorge und Impfungen
+  // Bestehende Rechnergrenze für den jährlichen Beispielpfad.
+  { id: 'impfung', cash: 5, subsidy: 15, countable: true, max: 8 },
+  { id: 'zahn', cash: 5, subsidy: 15, countable: true, max: 2 },
+  { id: 'zahnFrueh', cash: 5, subsidy: 15, countable: true, max: 6 },
+  { id: 'hautkrebs', cash: 10, subsidy: 30 },
+  { id: 'ultraschall', cash: 10, subsidy: 30 },
+  { id: 'mammographie', cash: 10, subsidy: 30 },
+  // Das dokumentierte 1.155-EUR-Beispiel setzt zwölf anerkannte Vorsorgen an.
+  { id: 'mutterschaft', cash: 10, subsidy: 30, countable: true, max: 12 },
+  { id: 'kind', cash: 10, subsidy: 30, countable: true, max: 12 },
+  { id: 'jugend', cash: 10, subsidy: 30, countable: true, max: 2 },
+  { id: 'amblyopie', cash: 10, subsidy: 30, countable: true, max: 2 },
+  { id: 'lungenkrebs', cash: 10, subsidy: 30 },
+  { id: 'checkup', cash: 10, subsidy: 30 },
+  { id: 'krebs', cash: 10, subsidy: 30 },
+  { id: 'darmkrebs', cash: 10, subsidy: 30 },
   // Regelmäßige Aktivitäten
-  { id: 'kurs', amount: 75, tip: true },
-  { id: 'fitness', amount: 75, tip: true },
-  { id: 'sport', amount: 75 },
-  { id: 'abzeichen', amount: 75 },
-  { id: 'leistungsabzeichen', amount: 75 },
-  // Statuswerte
-  { id: 'bmi', amount: 75 },
-  { id: 'blutdruck', amount: 75 },
+  { id: 'outdoorSport', cash: 25, subsidy: 75, category: 'regular' },
+  { id: 'rueckbildung', cash: 25, subsidy: 75, category: 'regular' },
+  { id: 'kurs', cash: 25, subsidy: 75, category: 'regular', tip: true },
+  { id: 'fitness', cash: 25, subsidy: 75, category: 'regular', tip: true },
+  { id: 'sport', cash: 25, subsidy: 75, category: 'regular' },
+  // Statuswerte zählen nur zusammen mit mindestens einer regelmäßigen Aktivität.
+  { id: 'abzeichen', cash: 25, subsidy: 75, category: 'status' },
+  { id: 'leistungsabzeichen', cash: 25, subsidy: 75, category: 'status' },
+  { id: 'bmi', cash: 25, subsidy: 75, category: 'status' },
+  { id: 'blutdruck', cash: 25, subsidy: 75, category: 'status' },
 ];
+
+const IKK_BONUS_2026_INFO = 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf';
 
 // ctaOverride: { href, label } ersetzt den SDK-Abschluss-CTA, z.B. auf /zahn
 // (dort soll der Button zur Tarif-Weiche scrollen statt zur SDK-Strecke).
@@ -46,14 +52,17 @@ const ACTIVITY_DEFS = [
 // kommen per Props, damit /zahn und /stationaer nicht die Ambulant-Werte zeigen.
 const AmbulantBonusCalculator = ({
   ctaOverride,
+  secondaryCtaOverride,
   tarifTypes = 'Ambulant',
-  defaultMonatsbeitrag = 31.64,
+  defaultMonatsbeitrag = 44.13,
   tariffInfoText,
   effectiveLabel,
   effectiveValue,
   effectiveNote,
+  bonusPayoutText,
+  embedded = false,
 }) => {
-  const { t } = useTranslation('ambulant');
+  const { t, i18n } = useTranslation('ambulant');
   const referrer = useReferrer();
   const calculatorUrl = buildSdkUrl({ ref: referrer, tarifTypes });
   const ikkLink = IKK_LINK;
@@ -75,7 +84,8 @@ const AmbulantBonusCalculator = ({
     unit: t(`bonusCalculator.activities.${def.id}.unit`, { defaultValue: '' }),
   })), [t]);
 
-  // Beispielbeitrag der jeweiligen Seite (Ambulant 100: 31,64 EUR, 30 Jahre)
+  // Seitenspezifischer Orientierungswert; im eingebetteten Ambulant-Funnel
+  // wird der aktuell veröffentlichte SDK-Wert explizit übergeben.
   const DEFAULT_MONATSBEITRAG = defaultMonatsbeitrag;
 
   // Typische Beispiel-Vorauswahl (Conversion-Paket 2, 17.08.2026): Der Rechner
@@ -109,8 +119,8 @@ const AmbulantBonusCalculator = ({
 
   const handleCount = (id, delta, max) => {
     setSelectedActivities((prev) => {
-      const current = prev[id] || 0;
-      const next = Math.max(0, Math.min(max, current + delta));
+      const current = Number(prev[id]);
+      const next = capActivityCount((Number.isFinite(current) ? current : 0) + delta, max);
       return { ...prev, [id]: next };
     });
   };
@@ -132,38 +142,49 @@ const AmbulantBonusCalculator = ({
     }
   };
 
-  const formatEuro = (value) => String(value).replace('.', ',');
+  const numberLocale = i18n.language?.startsWith('en') ? 'en-US' : 'de-DE';
+  const formatEuro = (value) => new Intl.NumberFormat(numberLocale, {
+    minimumFractionDigits: Number.isInteger(Number(value)) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(Number(value) || 0);
 
-  const jahresbeitrag = Math.round((monatsbeitrag || 0) * 12);
+  const jahresbeitrag = Math.round((monatsbeitrag || 0) * 1200) / 100;
 
-  const totalBonus = useMemo(() => {
-    return ACTIVITY_DEFS.reduce((sum, activity) => {
-      if (activity.perUnit) {
-        const count = selectedActivities[activity.id] || 0;
-        return sum + count * activity.perUnit;
-      }
-      return selectedActivities[activity.id] ? sum + activity.amount : sum;
-    }, 0);
-  }, [selectedActivities]);
+  const hasRegularActivity = useMemo(() => ACTIVITY_DEFS.some((activity) => (
+    activity.category === 'regular' && Boolean(selectedActivities[activity.id])
+  )), [selectedActivities]);
 
-  const nettoErgebnis = totalBonus - jahresbeitrag;
-  const effektivKosten = Math.max(0, jahresbeitrag - totalBonus);
+  const hasBlockedStatusValue = useMemo(() => !hasRegularActivity && ACTIVITY_DEFS.some((activity) => (
+    activity.category === 'status' && Boolean(selectedActivities[activity.id])
+  )), [hasRegularActivity, selectedActivities]);
+
+  const { totalCashBonus, totalSubsidyPotential } = useMemo(() => {
+    return calculateIkkBonus({
+      activityDefs: ACTIVITY_DEFS,
+      selectedActivities,
+      hasRegularActivity,
+    });
+  }, [hasRegularActivity, selectedActivities]);
+
+  const anrechenbarerZuschuss = Math.min(totalSubsidyPotential, jahresbeitrag);
+  const effektivKosten = Math.max(0, Math.round((jahresbeitrag - anrechenbarerZuschuss) * 100) / 100);
+  const ungenutztesZuschusspotenzial = Math.max(0, Math.round((totalSubsidyPotential - anrechenbarerZuschuss) * 100) / 100);
 
   const trackUsage = useCallback(() => {
-    if (totalBonus === 0 || usageTracked.current) return;
+    if (totalSubsidyPotential === 0 || usageTracked.current) return;
     const tracked = trackEvent('bonus_calculator_used', {
       component: 'bonus_calculator',
       interaction_type: 'configured',
     });
     if (tracked) usageTracked.current = true;
-  }, [totalBonus]);
+  }, [totalSubsidyPotential]);
 
   useEffect(() => {
-    if (totalBonus === 0) return;
+    if (totalSubsidyPotential === 0) return;
     if (analyticsTimer.current) clearTimeout(analyticsTimer.current);
     analyticsTimer.current = setTimeout(trackUsage, 1500);
     return () => { if (analyticsTimer.current) clearTimeout(analyticsTimer.current); };
-  }, [totalBonus, trackUsage]);
+  }, [totalSubsidyPotential, trackUsage]);
 
   useEffect(() => {
     if (beitragEditing && beitragInputRef.current) {
@@ -177,10 +198,10 @@ const AmbulantBonusCalculator = ({
   const titleParts = rawTitle.split(/<highlight>(.*?)<\/highlight>/);
 
   return (
-    <section id="bonus-calculator" className="scroll-mt-24 bg-white py-12 md:py-24 font-sans">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section id="bonus-calculator" className={`scroll-mt-24 font-sans ${embedded ? 'bg-transparent py-0' : 'bg-white py-12 md:py-24'}`}>
+      <div className={embedded ? 'mx-auto max-w-7xl' : 'container mx-auto px-4 max-w-7xl'}>
         {/* Header Section */}
-        <button
+        {!embedded && <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
           aria-expanded={mobileOpen}
@@ -200,9 +221,9 @@ const AmbulantBonusCalculator = ({
             </p>
           </div>
           <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
-        </button>
+        </button>}
 
-        <div className="hidden text-center mb-16 md:block">
+        <div className={`${embedded ? 'hidden' : 'hidden md:block'} text-center mb-16`}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -227,7 +248,7 @@ const AmbulantBonusCalculator = ({
         </div>
 
         {/* Two Column Layout */}
-        <div id="bonus-calculator-content" className={`${mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
+        <div id="bonus-calculator-content" className={`${embedded || mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
 
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
@@ -237,10 +258,13 @@ const AmbulantBonusCalculator = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ACTIVITIES.map((activity, index) => {
                 const def = ACTIVITY_DEFS[index];
-                const isMulti = !!def.perUnit;
-                const count = isMulti ? (selectedActivities[def.id] || 0) : 0;
+                const isMulti = !!def.countable;
+                const count = isMulti ? capActivityCount(selectedActivities[def.id], def.max) : 0;
                 const isActive = isMulti ? count > 0 : !!selectedActivities[def.id];
-                const displayAmount = isMulti ? count * def.perUnit : def.amount;
+                const units = isMulti ? count : 1;
+                const displayCash = units * def.cash;
+                const displaySubsidy = units * def.subsidy;
+                const statusBlocked = def.category === 'status' && isActive && !hasRegularActivity;
 
                 return (
                   <motion.div
@@ -255,14 +279,25 @@ const AmbulantBonusCalculator = ({
                         : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
                       } ${!isMulti ? 'cursor-pointer' : ''}`}
                     onClick={!isMulti ? () => handleToggle(def.id) : undefined}
+                    onKeyDown={!isMulti ? (event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleToggle(def.id);
+                      }
+                    } : undefined}
+                    role={!isMulti ? 'checkbox' : undefined}
+                    aria-checked={!isMulti ? isActive : undefined}
+                    aria-label={!isMulti ? `${activity.title}. ${activity.desc}. ${def.cash} ${t('bonusCalculator.cashShort')}, ${def.subsidy} ${t('bonusCalculator.subsidyShort')}.` : undefined}
+                    tabIndex={!isMulti ? 0 : undefined}
                   >
                     {!isMulti && (
                       <div className="mt-1">
                         <Checkbox
                           id={def.id}
                           checked={isActive}
-                          onCheckedChange={() => handleToggle(def.id)}
-                          className="data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
+                          tabIndex={-1}
+                          aria-hidden="true"
+                          className="pointer-events-none data-[state=checked]:bg-healio-primary data-[state=checked]:border-healio-primary"
                         />
                       </div>
                     )}
@@ -279,7 +314,8 @@ const AmbulantBonusCalculator = ({
                           <button
                             type="button"
                             onClick={() => handleCount(def.id, -1, def.max)}
-                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
+                            aria-label={`${activity.title}: ${t('bonusCalculator.decrease')}`}
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-colors hover:border-healio-primary hover:bg-gray-100 hover:text-healio-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 disabled:opacity-30"
                             disabled={count === 0}
                           >
                             <Minus className="w-3.5 h-3.5" />
@@ -288,23 +324,36 @@ const AmbulantBonusCalculator = ({
                           <button
                             type="button"
                             onClick={() => handleCount(def.id, 1, def.max)}
-                            className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:border-healio-primary hover:text-healio-primary transition-colors disabled:opacity-30"
-                            disabled={count === def.max}
+                            aria-label={`${activity.title}: ${t('bonusCalculator.increase')}`}
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-colors hover:border-healio-primary hover:bg-gray-100 hover:text-healio-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 disabled:opacity-30"
+                            disabled={count >= def.max}
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="text-xs text-gray-400 ml-1">{t('bonusCalculator.max')} {def.max}</span>
+                          <span className="text-xs text-gray-400 ml-1">
+                            {def.max ? `${t('bonusCalculator.max')} ${def.max}` : activity.unit}
+                          </span>
                         </div>
                       )}
                     </div>
-                    <div className="font-bold text-healio-primary whitespace-nowrap flex-shrink-0">
-                      {isMulti && count > 1 && <span className="text-xs font-normal text-gray-400 block text-right">{count}× {def.perUnit}€</span>}
-                      +{displayAmount}€
+                    <div className={`whitespace-nowrap flex-shrink-0 text-right ${statusBlocked ? 'text-amber-700' : 'text-healio-primary'}`}>
+                      {isMulti && count > 1 && (
+                        <span className="block text-[11px] font-normal text-gray-400">{count}×</span>
+                      )}
+                      <span className="block text-xs font-bold">{displayCash} € {t('bonusCalculator.cashShort')}</span>
+                      <span className="block text-sm font-extrabold">{displaySubsidy} € {t('bonusCalculator.subsidyShort')}</span>
+                      {statusBlocked && <span className="block text-[10px] font-bold">{t('bonusCalculator.notCounted')}</span>}
                     </div>
                   </motion.div>
                 );
               })}
             </div>
+
+            {hasBlockedStatusValue && (
+              <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium leading-relaxed text-amber-900" role="status">
+                {t('bonusCalculator.statusCondition')}
+              </div>
+            )}
 
             {/* Vertrauens-Hinweis */}
             <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex gap-3 items-start">
@@ -314,6 +363,14 @@ const AmbulantBonusCalculator = ({
                 <p className="text-sm text-blue-800 leading-relaxed">
                   {t('bonusCalculator.trustNoteDesc')}
                 </p>
+                <a
+                  href={IKK_BONUS_2026_INFO}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex text-xs font-bold text-blue-900 underline decoration-blue-400 underline-offset-2 hover:text-blue-700"
+                >
+                  {t('bonusCalculator.officialSource')}
+                </a>
               </div>
             </div>
 
@@ -344,24 +401,24 @@ const AmbulantBonusCalculator = ({
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-b from-[#25c990] to-[#076046] rounded-2xl p-8 lg:p-10 shadow-xl border border-healio-primary/20 overflow-hidden relative"
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-8 shadow-xl lg:p-10"
             >
               <div className="relative z-10 text-center">
                 <h3 className="text-xl lg:text-2xl font-semibold text-white mb-4">
                   {t('bonusCalculator.yourBonus')}
                 </h3>
 
-                <div className="flex justify-center items-center h-32 mb-6">
+                <div className="flex justify-center items-center h-32 mb-6" aria-live="polite" aria-atomic="true">
                   <AnimatePresence mode="popLayout">
                     <motion.div
-                      key={totalBonus}
+                      key={anrechenbarerZuschuss}
                       initial={{ scale: 0.8, opacity: 0, y: 20 }}
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 1.2, opacity: 0, y: -20 }}
                       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className="text-7xl lg:text-8xl font-extrabold tracking-tighter text-white"
+                      className="text-6xl lg:text-7xl font-extrabold tracking-tighter text-white"
                     >
-                      {totalBonus}€
+                      {formatEuro(anrechenbarerZuschuss)} €
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -379,6 +436,7 @@ const AmbulantBonusCalculator = ({
                           ref={beitragInputRef}
                           type="text"
                           inputMode="decimal"
+                          aria-label={t('bonusCalculator.monthlyInputLabel')}
                           value={monatsbeitrag}
                           onChange={handleBeitragChange}
                           onBlur={handleBeitragBlur}
@@ -391,6 +449,7 @@ const AmbulantBonusCalculator = ({
                       <button
                         type="button"
                         onClick={() => setBeitragEditing(true)}
+                        aria-label={t('bonusCalculator.editMonthlyLabel', { amount: formatEuro(monatsbeitrag) })}
                         className="flex items-center gap-1.5 font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
                       >
                         <span>{formatEuro(monatsbeitrag)} {t('bonusCalculator.perMonth')}</span>
@@ -401,18 +460,29 @@ const AmbulantBonusCalculator = ({
 
                   <div className="flex justify-between text-white text-sm mb-1">
                     <span>{t('bonusCalculator.yearlyContribution')}</span>
-                    <span className="font-bold">{jahresbeitrag} €</span>
+                    <span className="font-bold">{formatEuro(jahresbeitrag)} €</span>
                   </div>
                   <div className="flex justify-between text-white text-sm mb-1">
-                    <span>{t('bonusCalculator.yourBonusLabel')}</span>
-                    <span className="font-bold">{totalBonus} €</span>
+                    <span>{t('bonusCalculator.subsidyPotentialLabel')}</span>
+                    <span className="font-bold">{formatEuro(totalSubsidyPotential)} €</span>
                   </div>
-                  <div className={`flex justify-between text-sm pt-2 border-t border-white/30 font-extrabold ${nettoErgebnis >= 0 ? 'text-green-200' : 'text-yellow-200'}`}>
-                    <span>{t('bonusCalculator.resultLabel')}</span>
-                    <span>{nettoErgebnis >= 0 ? `+${nettoErgebnis} € ${t('bonusCalculator.resultPlus')}` : `${nettoErgebnis} €`}</span>
+                  <div className="flex justify-between text-sm pt-2 border-t border-white/30 font-extrabold text-green-100">
+                    <span>{t('bonusCalculator.eligibleSubsidyLabel')}</span>
+                    <span>{formatEuro(anrechenbarerZuschuss)} €</span>
                   </div>
 
-                  <p className="text-white/50 text-xs mt-2">
+                  <div className="mt-3 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-left text-sm text-white">
+                    <span className="font-semibold">{t('bonusCalculator.orCashBonus')}</span>{' '}
+                    <span className="font-extrabold">{formatEuro(totalCashBonus)} €</span>
+                  </div>
+
+                  {ungenutztesZuschusspotenzial > 0 && (
+                    <p className="mt-3 text-left text-xs leading-relaxed text-white/85">
+                      {t('bonusCalculator.unusedPotential', { amount: formatEuro(ungenutztesZuschusspotenzial) })}
+                    </p>
+                  )}
+
+                  <p className="mt-2 text-xs text-white/80">
                     {t('bonusCalculator.editHint')}
                   </p>
                 </div>
@@ -432,11 +502,11 @@ const AmbulantBonusCalculator = ({
                         exit={{ scale: 1.1, opacity: 0 }}
                         className={`text-3xl font-extrabold whitespace-nowrap ${effektivKosten === 0 ? 'text-healio-primary' : 'text-healio-dark'}`}
                       >
-                        {effektivKosten} €
+                        {formatEuro(effektivKosten)} €
                       </motion.span>
                     </AnimatePresence>
                   </div>
-                  {effektivKosten === 0 && totalBonus > 0 && (
+                  {effektivKosten === 0 && totalSubsidyPotential > 0 && (
                     <p className="text-healio-primary text-xs font-bold mt-1">
                       {t('bonusCalculator.effectiveZeroNote')}
                     </p>
@@ -452,7 +522,8 @@ const AmbulantBonusCalculator = ({
                 </div>
 
                 <p className="text-white/90 text-sm leading-relaxed mb-8 max-w-sm mx-auto font-medium">
-                  {t('bonusCalculator.bonusPayout')}
+                  {bonusPayoutText || t('bonusCalculator.bonusPayout')}
+                  <span className="mt-2 block text-xs text-white/80">{t('bonusCalculator.choiceDisclaimer')}</span>
                 </p>
 
                 <div className="flex flex-col gap-4">
@@ -479,10 +550,14 @@ const AmbulantBonusCalculator = ({
                   )}
 
                   <a
-                    href={ikkLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={secondaryCtaOverride?.href || ikkLink}
+                    target={secondaryCtaOverride?.href?.startsWith('/') ? undefined : '_blank'}
+                    rel={secondaryCtaOverride?.href?.startsWith('/') ? undefined : 'noopener noreferrer'}
                     onClick={(e) => {
+                      if (secondaryCtaOverride) {
+                        secondaryCtaOverride.onClick?.(e);
+                        return;
+                      }
                       // Funnel-Fix 17.08.2026: erst der Zusatzschutz, dann der
                       // IKK-Wechsel. Wenn der Erklär-Abschnitt auf der Seite
                       // existiert, dorthin scrollen statt direkt in den
@@ -499,7 +574,7 @@ const AmbulantBonusCalculator = ({
                     className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10 hover:shadow-md transition-all duration-300 w-full"
                   >
                     <ArrowRightLeft className="w-5 h-5 mr-2" />
-                    {t('bonusCalculator.ctaSwitchIKK')}
+                    {secondaryCtaOverride?.label || t('bonusCalculator.ctaSwitchIKK')}
                   </a>
                 </div>
               </div>

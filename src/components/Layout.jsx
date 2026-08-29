@@ -7,10 +7,19 @@ const Layout = () => {
   const { pathname } = useLocation();
   const showCta = pathname === '/partner' || pathname === '/en/partner';
   const hideCta = !showCta;
+  const productSalesRoutes = new Set([
+    '/ambulant',
+    '/en/outpatient',
+    '/zahn',
+    '/en/dental',
+    '/stationaer',
+    '/en/inpatient',
+    '/kassenboost',
+    '/en/kassenboost',
+  ]);
   const hideAppPromotion = pathname === '/'
     || pathname === '/en'
-    || pathname === '/kassenboost'
-    || pathname === '/en/kassenboost';
+    || productSalesRoutes.has(pathname);
 
   return (
     <div className="flex flex-col min-h-screen w-full">
