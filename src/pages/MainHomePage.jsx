@@ -4,7 +4,6 @@ import SEOHead from '@/components/SEOHead';
 import HomeHero from '@/components/home/HomeHero';
 import InsurancePathway from '@/components/home/InsurancePathway';
 import HowHealioWorks from '@/components/home/HowHealioWorks';
-import AmbulantBudgetFeature from '@/components/home/AmbulantBudgetFeature';
 import HomeTrust from '@/components/home/HomeTrust';
 import AudienceLinks from '@/components/home/AudienceLinks';
 import HomeFinalCTA from '@/components/home/HomeFinalCTA';
@@ -52,12 +51,11 @@ const MainHomePage = () => {
       <article className="w-full overflow-hidden bg-white">
         <HomeHero />
         <ProductTicker variant="home" />
-        <InsurancePathway />
-        <AmbulantBudgetFeature />
         <HowHealioWorks />
+        <InsurancePathway />
         <HomeTrust />
-        <AudienceLinks />
         <HomeFinalCTA />
+        <AudienceLinks />
       </article>
     </>
   );

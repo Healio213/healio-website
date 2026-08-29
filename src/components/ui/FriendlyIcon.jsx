@@ -105,6 +105,7 @@ const sizeClasses = {
   sm: 'h-12 w-12 rounded-[1rem] text-[1.65rem]',
   md: 'h-16 w-16 rounded-[1.25rem] text-[2.15rem]',
   lg: 'h-20 w-20 rounded-[1.55rem] text-[2.75rem]',
+  xl: 'h-24 w-24 rounded-[1.75rem] text-[3rem]',
 };
 
 const FriendlyIcon = ({

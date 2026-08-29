@@ -7,7 +7,10 @@ const Layout = () => {
   const { pathname } = useLocation();
   const showCta = pathname === '/partner' || pathname === '/en/partner';
   const hideCta = !showCta;
-  const hideAppPromotion = pathname === '/kassenboost' || pathname === '/en/kassenboost';
+  const hideAppPromotion = pathname === '/'
+    || pathname === '/en'
+    || pathname === '/kassenboost'
+    || pathname === '/en/kassenboost';
 
   return (
     <div className="flex flex-col min-h-screen w-full">

@@ -5,10 +5,28 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const productIllustrations = {
-  ambulant: { icon: 'ambulant-care', tone: 'mint' },
-  dental: { icon: 'dental-protection', tone: 'lavender' },
-  hospital: { icon: 'hospital-comfort', tone: 'sky' },
+const productVisuals = {
+  ambulant: {
+    kind: 'ambulant',
+    tone: 'mint',
+    surface: 'bg-[#E7F7EF]',
+    border: 'border-[#CCE8DA]',
+    label: 'text-emerald-800',
+  },
+  dental: {
+    kind: 'dental',
+    tone: 'butter',
+    surface: 'bg-[#FFF1D6]',
+    border: 'border-[#EBDCBF]',
+    label: 'text-amber-800',
+  },
+  hospital: {
+    kind: 'hospital',
+    tone: 'sky',
+    surface: 'bg-[#EAF2FF]',
+    border: 'border-[#D6E1F1]',
+    label: 'text-sky-800',
+  },
 };
 
 const InsurancePathway = () => {
@@ -17,50 +35,48 @@ const InsurancePathway = () => {
   const items = t('products.items', { returnObjects: true });
 
   return (
-    <section id="schutz" className="home-section relative z-10 scroll-mt-20 bg-white" aria-labelledby="insurance-pathway-title">
+    <section id="schutz" className="home-section relative z-10 scroll-mt-20 overflow-hidden bg-white" aria-labelledby="insurance-pathway-title">
       <div className="healio-container">
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <p className="home-eyebrow text-emerald-700">{t('products.eyebrow')}</p>
-            <h2 id="insurance-pathway-title" className="mt-4 max-w-[15ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight sm:text-5xl">
-              {t('products.title')}
-            </h2>
-          </div>
+          <h2 id="insurance-pathway-title" className="max-w-[15ch] font-friendly text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
+            {t('products.title')}
+          </h2>
           <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">
             {t('products.description')}
           </p>
         </div>
 
-        <div className="mt-12 border-b border-slate-200">
-          {items.map((item) => (
-            <Link
-              key={item.key}
-              to={getPath(item.routeKey)}
-              className="home-focus group relative grid gap-4 border-t border-slate-200 py-8 transition-colors duration-300 hover:bg-[#F5F8F6] sm:px-5 md:grid-cols-[7rem_minmax(0,0.9fr)_minmax(0,1.15fr)_3rem] md:items-center lg:py-10"
-            >
-              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
-                {item.label}
-              </span>
-              <div className="flex items-center gap-4">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {items.map((item) => {
+            const visual = productVisuals[item.key] || productVisuals.ambulant;
+
+            return (
+              <Link
+                key={item.key}
+                to={getPath(item.routeKey)}
+                className={`home-focus group relative flex min-h-[350px] flex-col overflow-hidden rounded-3xl border p-7 shadow-[0_16px_40px_rgba(12,42,33,0.07)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(12,42,33,0.12)] motion-reduce:transform-none ${visual.surface} ${visual.border}`}
+              >
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border border-current opacity-[0.06]" aria-hidden="true" />
                 <FriendlyIcon
-                  icon={productIllustrations[item.key]?.icon}
-                  tone={productIllustrations[item.key]?.tone}
-                  size="sm"
+                  kind={visual.kind}
+                  tone={visual.tone}
+                  size="lg"
+                  className="transition-transform duration-200 group-hover:-rotate-2 group-hover:scale-[1.04] motion-reduce:transform-none"
                 />
-                <h3 className="max-w-[18ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl">
+                <span className={`relative mt-7 text-xs font-extrabold uppercase tracking-[0.18em] ${visual.label}`}>
+                  {item.label}
+                </span>
+                <h3 className="relative mt-3 max-w-[17ch] font-friendly text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
                   {item.title}
                 </h3>
-              </div>
-              <div>
-                <p className="max-w-xl text-base leading-7 text-slate-600">{item.description}</p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-[0.13em] text-slate-400">{item.detail}</p>
-              </div>
-              <span className="grid h-11 w-11 place-items-center rounded-full border border-slate-300 text-home-midnight transition duration-300 group-hover:border-home-mint group-hover:bg-home-mint group-hover:shadow-[0_10px_26px_rgba(37,201,144,0.18)]">
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-                <span className="sr-only">{item.cta}</span>
-              </span>
-            </Link>
-          ))}
+                <p className="relative mt-4 text-sm leading-6 text-slate-600">{item.description}</p>
+                <span className="relative mt-auto inline-flex items-center gap-2 pt-7 font-display text-sm font-extrabold text-home-midnight">
+                  {item.cta}
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

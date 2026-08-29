@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
-import HighlightText from '@/components/ui/HighlightText';
 
 const entranceEase = [0.16, 1, 0.3, 1];
 
@@ -16,18 +15,8 @@ const HomeHero = () => {
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 900], [0, 72]);
   const backgroundScale = useTransform(scrollY, [0, 900], [1.035, 1.08]);
-  const heroTitle = t('hero.title');
-  const displayHeroTitle = (i18n.resolvedLanguage || i18n.language || '').startsWith('de')
-    ? heroTitle.replace('Krankenzusatzversicherung', 'Krankenzusatz\u00adversicherung')
-    : heroTitle;
-  const titleCommaIndex = displayHeroTitle.indexOf(', ');
-  const titleSeparatorIndex = titleCommaIndex >= 0 ? titleCommaIndex : displayHeroTitle.indexOf('. ');
-  const titleLead = titleSeparatorIndex >= 0
-    ? displayHeroTitle.slice(0, titleSeparatorIndex + 1)
-    : displayHeroTitle;
-  const titleTail = titleSeparatorIndex >= 0
-    ? displayHeroTitle.slice(titleSeparatorIndex + 2)
-    : '';
+  const titleLead = t('hero.titleLead');
+  const titleAccent = t('hero.titleAccent');
 
   useEffect(() => {
     const root = document.documentElement;
@@ -90,54 +79,44 @@ const HomeHero = () => {
 
       <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-16 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
         <div className="relative z-20 w-full max-w-[940px]">
-          <motion.p {...entrance(0.06)} className="home-eyebrow mb-5 sm:mb-6">
-            {t('hero.eyebrow')}
-          </motion.p>
-
           <motion.h1
-            {...entrance(0.14)}
+            {...entrance(0.08)}
             id="home-hero-heading"
             lang={i18n.resolvedLanguage || i18n.language}
-            className="max-w-[15ch] [hyphens:manual] font-display text-[2.4rem] font-extrabold leading-[1.04] tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] sm:text-5xl lg:max-w-[18ch] lg:text-[4rem] xl:max-w-[21ch] xl:text-[4.5rem]"
+            className="max-w-[16ch] [hyphens:manual] font-display text-[2.45rem] font-extrabold leading-[1.035] tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] sm:text-[3.35rem] lg:max-w-[17ch] lg:text-[4.25rem] xl:text-[4.75rem]"
           >
             <span className="block">{titleLead}</span>
-            {titleTail && (
-              <span className="block">
-                <HighlightText text={`<highlight>${titleTail}</highlight>`} />
-              </span>
-            )}
+            <span className="relative mt-2 inline-block w-fit max-w-full pb-[0.16em] text-[#F4FFF9] drop-shadow-[0_0_26px_rgba(37,201,144,0.32)]">
+              <span className="absolute -inset-x-6 -inset-y-2 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,201,144,0.22),rgba(37,201,144,0.06)_48%,transparent_74%)] blur-xl" aria-hidden="true" />
+              <span className="relative">{titleAccent}</span>
+              <svg className="absolute -bottom-[0.02em] left-0 h-[0.22em] w-full overflow-visible" viewBox="0 0 520 26" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M8 17 C 118 7, 224 23, 336 13 S 455 8, 512 12" fill="none" stroke="rgba(37,201,144,0.24)" strokeWidth="14" strokeLinecap="round" className="blur-[5px]" />
+                <path d="M8 17 C 118 7, 224 23, 336 13 S 455 8, 512 12" fill="none" stroke="#25C990" strokeWidth="5.5" strokeLinecap="round" />
+              </svg>
+            </span>
           </motion.h1>
 
-          <motion.p {...entrance(0.23)} className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-7 sm:text-xl">
+          <motion.p {...entrance(0.17)} className="mt-6 max-w-2xl text-lg font-medium leading-8 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-7 sm:text-xl">
             {t('hero.description')}
           </motion.p>
 
-          <motion.p {...entrance(0.27)} className="mt-3 max-w-2xl text-sm leading-6 text-slate-300/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-            {t('hero.disclaimer')}{' '}
+          <motion.div {...entrance(0.24)} className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row">
             <Link
-              to={getPath('kassenbonus')}
-              className="home-focus font-bold text-home-mint underline underline-offset-4 transition hover:text-white"
+              to={getPath('leistungen')}
+              className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-4 font-display text-base font-extrabold text-home-midnight shadow-[0_14px_40px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:px-7"
             >
-              {t('hero.bonusCheckCta')}
-            </Link>
-          </motion.p>
-
-          <motion.div {...entrance(0.31)} className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-3">
-            <a href="#schutz" className="home-focus inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-home-mint px-6 py-4 font-display text-base font-extrabold text-home-midnight shadow-[0_14px_40px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus-visible:ring-offset-home-midnight motion-reduce:transform-none xl:px-7">
               {t('hero.primaryCta')}
-              <ArrowDown className="h-4 w-4" aria-hidden="true" />
-            </a>
-            <a href="#so-funktioniert" className="home-focus inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.06] px-6 py-4 font-display text-base font-bold text-white backdrop-blur transition hover:border-white/30 hover:bg-white/[0.1] focus-visible:ring-offset-home-midnight xl:px-7">
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link
+              to={getPath('unternehmen')}
+              className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-6 py-4 font-display text-base font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/[0.13] focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:px-7"
+            >
               {t('hero.secondaryCta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            </Link>
           </motion.div>
 
-          <motion.div {...entrance(0.4)} className="mt-9 grid max-w-2xl grid-cols-3 gap-2 border-t border-white/20 pt-6 text-center text-xs font-semibold text-white/75 drop-shadow-[0_2px_8px_rgba(2,8,15,0.9)] sm:mt-11 sm:flex sm:flex-wrap sm:gap-x-7 sm:gap-y-3 sm:text-left sm:text-sm">
-            {t('hero.proof', { returnObjects: true }).map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>

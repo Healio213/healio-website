@@ -8,10 +8,10 @@ export const seoRoutes = [
   // === DEUTSCH ===
   {
     path: '/',
-    title: 'Krankenzusatzversicherung einfach digital | Healio',
-    description: 'Ambulante, Zahn- und stationäre Zusatzversicherung verständlich vergleichen. Healio begleitet dich digital und persönlich – vom passenden Schutz bis zum laufenden Service.',
+    title: 'Versicherungen für Privatkunden & Unternehmen | Healio',
+    description: 'Private Absicherung und betriebliche Vorsorge verständlich verbinden. Healio begleitet unabhängig, digital und persönlich – von Zusatzschutz bis bAV.',
     canonical: 'https://healio.de',
-    keywords: 'Krankenzusatzversicherung, ambulante Zusatzversicherung, Zahnzusatzversicherung, Krankenhauszusatzversicherung, Gesundheitsbudget, Healio',
+    keywords: 'Versicherungen Privatkunden, betriebliche Vorsorge, Krankenzusatzversicherung, bAV, bKV, Kassenbonus, Healio',
     lang: 'de',
     hreflang: { de: 'https://healio.de', en: 'https://healio.de/en' },
   },

@@ -65,7 +65,12 @@ expect(
   inpatientPage.indexOf('<HospitalBenefits />') < inpatientPage.indexOf('<AmbulantIKKWechsel'),
   'Auf Stationär müssen die Produktleistungen vor den optionalen Kassenwechsel-Details stehen.',
 );
-expect(/feature: 'kassenboost'/.test(header) && /t\('nav\.kassenboost'\)/.test(header), 'KassenBoost muss als eigener hervorgehobener Hauptnavigationspunkt erscheinen.');
+expect(
+  /subLinks:[\s\S]*?getPath\('kassenbonus'\)/.test(header)
+    && /KASSENBOOST_COMPARE_URL/.test(header)
+    && /t\('nav\.kassenvorteil'\)/.test(header),
+  'KassenBoost muss im Versicherungsmenü und als klarer Startseiten-CTA erreichbar bleiben.',
+);
 expect(/to=\{getPath\('kassenbonus'\)\}/.test(kassenBoostChoiceHint), 'Der dezente KassenBoost-Hinweis muss zur Healio-Kassenbonus-Seite führen.');
 expect(/kassenboostHint\.title/.test(kassenBoostChoiceHint) && /kassenboostHint\.cta/.test(kassenBoostChoiceHint), 'Der KassenBoost-Hinweis muss lokalisierte, verständliche Texte verwenden.');
 expect(ambulantPage.indexOf('<AmbulantIKKWechsel') < ambulantPage.indexOf('<KassenBoostChoiceHint'), 'Auf Ambulant muss die individuelle Kassenalternative direkt nach dem IKK-Weg folgen.');

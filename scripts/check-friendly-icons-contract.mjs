@@ -59,6 +59,11 @@ const expectedFriendlyIcons = [
   'prevention',
   'medication',
   'naturopathy',
+  'thinking',
+  'weighing',
+  'choice',
+  'broker',
+  'advisor',
 ];
 
 const extractRegistry = (source, exportName) => {
@@ -86,7 +91,7 @@ assert.deepEqual(
 assert.deepEqual(
   Object.keys(registeredFriendlyIcons).sort(),
   [...expectedFriendlyIcons].sort(),
-  'Die gemeinsame Friendly-Icon-Registry muss exakt den bestätigten 23er-Satz enthalten.',
+  'Die gemeinsame Friendly-Icon-Registry muss exakt den bestätigten 28er-Satz enthalten.',
 );
 
 for (const [iconName, publicPath] of Object.entries(registeredIcons)) {

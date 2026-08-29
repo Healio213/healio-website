@@ -48,6 +48,11 @@ export const friendlyIconAssets = Object.freeze({
   prevention: '/images/friendly-icons/prevention-vaccination.webp',
   medication: '/images/friendly-icons/medication-copay.webp',
   naturopathy: '/images/friendly-icons/naturopathy.webp',
+  thinking: '/images/friendly-icons/decision-thinking.webp',
+  weighing: '/images/friendly-icons/decision-weighing.webp',
+  choice: '/images/friendly-icons/decision-choice.webp',
+  broker: '/images/friendly-icons/trust-broker.webp',
+  advisor: '/images/friendly-icons/trust-advisor.webp',
 });
 
 // Alte `icon=`-Aufrufe zeigen automatisch den neuen Standard. Wo kein
