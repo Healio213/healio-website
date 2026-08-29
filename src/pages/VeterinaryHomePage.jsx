@@ -1,36 +1,43 @@
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 import SEOHead from '@/components/SEOHead';
 import VeterinaryHero from '@/components/sections/veterinary/VeterinaryHero';
 import CostAnalysisSection from '@/components/sections/veterinary/CostAnalysisSection';
-import CostBenefitAnalysis from '@/components/sections/veterinary/CostBenefitAnalysis';
 import TariffSelection from '@/components/sections/veterinary/TariffSelection';
+import VeterinaryTrustStrip from '@/components/sections/veterinary/VeterinaryTrustStrip';
+import VeterinaryFaq from '@/components/sections/veterinary/VeterinaryFaq';
 import VeterinaryContactForm from '@/components/sections/VeterinaryContactForm';
+import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { useLanguage } from '@/hooks/useLanguage';
-import ProductTicker from '@/components/sections/ProductTicker';
 
 const VeterinaryHomePage = () => {
-  const { t: tSeo } = useTranslation('seo');
   const { lang } = useLanguage();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/pet-insurance' : 'https://healio.de/tierkrankenversicherung';
+  const seoTitle = lang === 'en'
+    ? 'Pet health insurance for dogs, cats & horses | Healio'
+    : 'Tierkrankenversicherung für Hund, Katze & Pferd | Healio';
+  const seoDescription = lang === 'en'
+    ? 'Have surgery-only or full cover reviewed personally for your dog, cat or horse – based on age, breed or use and subject to the plan.'
+    : 'OP- oder Vollschutz für Hund, Katze oder Pferd persönlich prüfen lassen – passend zu Alter, Rasse beziehungsweise Nutzung und je nach Tarif.';
+  const [selection, setSelection] = useState({ animalType: '', coverage: '' });
 
   return (
     <>
       <SEOHead
-        title={tSeo('veterinary.title')}
-        description={tSeo('veterinary.description')}
+        title={seoTitle}
+        description={seoDescription}
         canonicalUrl={canonicalUrl}
-        ogTitle="Healio Tierkrankenversicherung - Bester Schutz für Ihr Tier"
-        ogDescription="Sichern Sie sich gegen steigende Tierarztkosten ab. Jetzt Beitrag berechnen."
+        ogTitle="Tierkrankenversicherung für Hund, Katze und Pferd | Healio"
+        ogDescription="OP- oder Vollschutz passend zu Tierart, Alter, Rasse beziehungsweise Nutzung persönlich prüfen lassen."
       />
-      <div className="veterinary-page-content overflow-x-clip [&_button.bg-blue-600]:!bg-[#25c990] [&_button.bg-blue-600:hover]:!bg-[#1db37f] [&_button.bg-blue-500]:!bg-[#25c990] [&_button.bg-blue-500:hover]:!bg-[#1db37f] [&_.text-blue-600]:!text-[#25c990] [&_.bg-blue-100]:!bg-[#25c990]/10 [&_.bg-blue-50]:!bg-[#25c990]/5">
+      <div className="veterinary-page-content overflow-x-clip bg-[#f5f0e7] text-[#11262a]">
         <VeterinaryHero />
-        <ProductTicker variant="veterinary" />
+        <VeterinaryTrustStrip />
+        <TariffSelection selection={selection} onSelectionChange={setSelection} />
         <CostAnalysisSection />
-        <CostBenefitAnalysis />
-        <TariffSelection />
-        <VeterinaryContactForm />
+        <SalesAiAssist className="bg-[#f5f0e7]" variant="pet" />
+        <VeterinaryContactForm selection={selection} onSelectionChange={setSelection} />
+        <VeterinaryFaq />
       </div>
     </>
   );

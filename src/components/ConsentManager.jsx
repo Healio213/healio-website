@@ -17,7 +17,7 @@ const COPY = {
   de: {
     bannerLabel: 'Datenschutzeinstellungen',
     bannerTitle: 'Du entscheidest, was geladen wird.',
-    bannerText: 'Analyse und externe Dienste starten erst nach deiner Zustimmung. Der Zahn-Check bleibt lokal und funktioniert ohne optionale Dienste.',
+    bannerText: 'Analyse und externe Dienste starten erst nach deiner Zustimmung. Unsere Auswahlhilfen bleiben lokal und funktionieren ohne optionale Dienste.',
     necessaryOnly: 'Nur notwendige',
     allowAll: 'Alle erlauben',
     settings: 'Einstellungen',
@@ -30,7 +30,7 @@ const COPY = {
     cancel: 'Abbrechen',
     close: 'Einstellungen schließen',
     purposes: {
-      analytics: ['Analyse', 'Google Analytics hilft uns nach deiner Zustimmung, die Website zu verbessern. Es werden keine Zahn-Check-Antworten übertragen.'],
+      analytics: ['Analyse', 'Google Analytics hilft uns nach deiner Zustimmung, die Website zu verbessern. Antworten aus unseren Auswahlhilfen werden nicht übertragen.'],
       calendly: ['Terminbuchung', 'Calendly wird nur geladen, wenn du eine eingebettete Terminbuchung öffnest.'],
       maps: ['Karten', 'Externe Karten werden erst nach deiner Freigabe geladen.'],
       elevenlabs: ['Nita-Assistent', 'ElevenLabs wird erst geladen, wenn du Nita ausdrücklich erlaubst.'],
@@ -39,7 +39,7 @@ const COPY = {
   en: {
     bannerLabel: 'Privacy settings',
     bannerTitle: 'You decide what is loaded.',
-    bannerText: 'Analytics and external services start only after your consent. The dental check stays local and works without optional services.',
+    bannerText: 'Analytics and external services start only after your consent. Our selection tools stay local and work without optional services.',
     necessaryOnly: 'Necessary only',
     allowAll: 'Allow all',
     settings: 'Settings',
@@ -52,7 +52,7 @@ const COPY = {
     cancel: 'Cancel',
     close: 'Close settings',
     purposes: {
-      analytics: ['Analytics', 'Google Analytics helps us improve the website after your consent. Dental-check answers are never transmitted.'],
+      analytics: ['Analytics', 'Google Analytics helps us improve the website after your consent. Answers from our selection tools are never transmitted.'],
       calendly: ['Appointment booking', 'Calendly loads only when you open an embedded appointment booking.'],
       maps: ['Maps', 'External maps load only after you allow them.'],
       elevenlabs: ['Nita assistant', 'ElevenLabs loads only after you explicitly allow Nita.'],
@@ -88,10 +88,8 @@ export const ConsentManager = () => {
   const descriptionId = useId();
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
-  // Seit 17.08.2026 (Conversion-Paket 2) erscheint der Banner auch auf /zahn:
-  // Ohne Consent-Chance blieb die Seite dauerhaft unmessbar. Der Zahn-Check
-  // selbst bleibt lokal und sendet weiterhin keine Antworten.
-  const consentUiActive = showBanner || settingsOpen;
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  const consentUiActive = (showBanner && !isDentalCheckRoute) || (settingsOpen && !isDentalCheckRoute);
 
   useEffect(() => initializeAnalytics(), []);
 
@@ -117,6 +115,10 @@ export const ConsentManager = () => {
     root.classList.toggle('healio-consent-ui-active', consentUiActive);
     return () => root.classList.remove('healio-consent-ui-active');
   }, [consentUiActive]);
+
+  useEffect(() => {
+    if (isDentalCheckRoute) setSettingsOpen(false);
+  }, [isDentalCheckRoute]);
 
   useEffect(() => {
     if (!settingsOpen) return undefined;
@@ -196,9 +198,9 @@ export const ConsentManager = () => {
         }
       `}</style>
 
-      {showBanner && !settingsOpen && (
+      {showBanner && !settingsOpen && !isDentalCheckRoute && (
         <section
-          className="healio-consent-surface fixed inset-x-3 bottom-3 z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:max-w-5xl md:rounded-2xl md:p-5"
+          className="healio-consent-surface fixed inset-x-3 top-[5.25rem] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >
@@ -239,7 +241,7 @@ export const ConsentManager = () => {
         </section>
       )}
 
-      {settingsOpen && (
+      {settingsOpen && !isDentalCheckRoute && (
         <div className="healio-consent-surface fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/55 p-0 sm:items-center sm:p-6">
           <section
             ref={dialogRef}

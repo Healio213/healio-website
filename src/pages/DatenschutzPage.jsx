@@ -66,8 +66,18 @@ const DatenschutzPage = () => {
               </p>
               
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.contactForm')}</h3>
-              <p>
-                Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+              <p>{t('datenschutz.contactFormText')}</p>
+
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.emailJsTitle')}</h3>
+              <p>{t('datenschutz.emailJsText')}</p>
+              <p className="mt-3">
+                <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">
+                  {t('datenschutz.emailJsPrivacyLink')}
+                </a>
+                {' · '}
+                <a href="https://www.emailjs.com/legal/data-protection-agreement/" target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">
+                  {t('datenschutz.emailJsDpaLink')}
+                </a>
               </p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">Eingesetzte Dienste und Drittanbieter</h2>

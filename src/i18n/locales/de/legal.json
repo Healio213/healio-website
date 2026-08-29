@@ -45,7 +45,11 @@
     "serverLogs": "Server-Log-Dateien",
     "serverLogsText": "Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien.",
     "contactForm": "Kontaktformular",
-    "contactFormText": "Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben zwecks Bearbeitung gespeichert.",
+    "contactFormText": "Wenn Sie uns über ein Kontaktformular schreiben, verarbeiten wir die eingegebenen Angaben, um Ihre Anfrage zu bearbeiten und auf Anschlussfragen zu antworten. Der nachfolgende Abschnitt erläutert den dabei eingesetzten Versanddienst.",
+    "emailJsTitle": "Versand der Kontakt- und Tierformulare über EmailJS",
+    "emailJsText": "Wir übermitteln Formularanfragen über den E-Mail-Versanddienst EmailJS (EmailJS Pte. Ltd., Singapur) an unser Postfach. Je nach Formular werden Name, E-Mail-Adresse, Telefonnummer, Praxis oder Unternehmen und der Inhalt der Nachricht übertragen. Beim Formular zur Tierkrankenversicherung umfasst dies Ihren Namen und Ihre E-Mail-Adresse sowie das Tierprofil mit Tierart, Schutzwunsch, Alter, optionaler Rasse und bei Pferden der angegebenen Nutzung. Zweck ist die Bearbeitung Ihrer Anfrage und unsere Antwort. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage vorvertraglichen Maßnahmen dient; andernfalls Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an der effizienten Bearbeitung eingehender Anfragen. EmailJS verarbeitet die Daten als Auftragsverarbeiter und kann nach eigenen Angaben Anfragedaten und Metadaten speichern. Personenbezogene Daten können in die USA übertragen werden; für europäische Nutzer nennt EmailJS Standardvertragsklauseln als Schutzmaßnahme. Wir speichern Ihre Anfrage nur so lange, wie dies für die Bearbeitung und gesetzliche Aufbewahrungspflichten erforderlich ist.",
+    "emailJsPrivacyLink": "Datenschutzhinweise von EmailJS",
+    "emailJsDpaLink": "Auftragsverarbeitungsvereinbarung von EmailJS",
     "section3Title": "3. Benutzerrechte",
     "section3Text": "Sie haben jederzeit das Recht auf Auskunft über Ihre gespeicherten personenbezogenen Daten.",
     "section4Title": "4. Cookies",
@@ -53,7 +57,7 @@
     "section5Title": "5. Kontakt bei Datenschutzfragen",
     "section5Text": "Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail.",
     "emailLabel": "E-Mail:",
-    "lastUpdated": "Stand: Juli 2026"
+    "lastUpdated": "Stand: August 2026"
   },
   "erstinformation": {
     "shortTitle": "Erstinformation",

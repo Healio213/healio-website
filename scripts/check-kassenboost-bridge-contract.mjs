@@ -22,25 +22,39 @@ const en = readJson('src/i18n/locales/en/kassenboost.json');
 
 assert.match(app, /path="kassenboost" element=\{<KassenBoostBridgePage \/>\}/);
 assert.match(layout, /hideAppPromotion=\{hideAppPromotion\}/);
-assert.match(layout, /pathname === '\/kassenboost'/);
-assert.match(layout, /pathname === '\/en\/kassenboost'/);
+assert.match(layout, /productSalesRoutes[\s\S]*'\/kassenboost'/);
+assert.match(layout, /productSalesRoutes[\s\S]*'\/en\/kassenboost'/);
+assert.match(layout, /productSalesRoutes\.has\(pathname\)/);
 assert.match(footer, /!hideAppPromotion &&/);
 assert.match(i18n, /kassenboost: deKassenBoost/);
 assert.match(i18n, /kassenboost: enKassenBoost/);
 
-assert.equal(de.privacy.confirmation, 'Keine Angaben aus deinem Vergleich wurden an Healio übertragen.');
-assert.match(en.privacy.confirmation, /No information from your comparison was shared with Healio\./);
-assert.equal(de.seo.ogImageAlt, 'KassenBoost und Healio – neutral vergleichen und selbst entscheiden');
-assert.equal(en.seo.ogImageAlt, 'KassenBoost and Healio – compare neutrally and decide for yourself');
+assert.equal(
+  de.privacy.confirmation,
+  'Aus deinem KassenBoost-Vergleich wurde nichts an Healio übertragen. Was du im Gespräch teilst, entscheidest du.',
+);
+assert.equal(
+  en.privacy.confirmation,
+  'Nothing from your KassenBoost comparison was transferred to Healio. You decide what to share in a call.',
+);
+assert.equal(de.seo.ogImageAlt, 'KassenBoost und Healio: vergleichen, Bonus nutzen, absichern');
+assert.equal(en.seo.ogImageAlt, 'KassenBoost and Healio: compare, use your bonus, get covered');
 assert.equal(de.employer.ctaHref, '/unternehmen#healio-belegschaft');
 assert.equal(en.employer.ctaHref, '/en/companies#healio-belegschaft');
+assert.equal(de.bonus.exampleLabel, 'Belegtes Beispiel, IKK classic, Bonusjahr 2026');
+assert.equal(en.bonus.exampleLabel, 'Verified example, IKK classic, bonus year 2026');
 
 assert.match(page, /https:\/\/kassenboost\.de\/\?utm_source=healio&utm_medium=bridge&utm_campaign=kassenboost/);
 assert.match(page, /ogImage="https:\/\/healio\.de\/images\/kassenboost-bridge-og\.png"/);
 assert.equal((page.match(/kassenboost\.de/gi) || []).length, 1, 'Die Brückenseite darf genau einen externen KassenBoost-Vergleichs-CTA enthalten.');
 assert.match(page, /getPath\('leistungen'\)/);
 assert.match(page, /employer\.ctaHref/);
-assert.doesNotMatch(`${page}\n${JSON.stringify(de)}\n${JSON.stringify(en)}`, /IKK(?:\s|\u00a0|-)?classic|IKK Bonus|700\s*EUR/i);
+const deWithoutLabelledExample = JSON.stringify(de).replace(de.bonus.exampleLabel, '');
+const enWithoutLabelledExample = JSON.stringify(en).replace(en.bonus.exampleLabel, '');
+assert.doesNotMatch(
+  `${page}\n${deWithoutLabelledExample}\n${enWithoutLabelledExample}`,
+  /IKK(?:\s|\u00a0|-)?classic|IKK Bonus|700\s*EUR/i,
+);
 
 assert.match(page, /https:\/\/healio\.de\/kassenboost/);
 assert.match(page, /https:\/\/healio\.de\/en\/kassenboost/);
