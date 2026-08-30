@@ -68,6 +68,21 @@ expect(
   'Der Datenschutzvertrag muss an den tatsächlich per EmailJS versandten Kontakt- und Tierprofildaten ausgerichtet bleiben.',
 );
 expect(
+  /reviewOrderAccepted:\s*false/.test(veterinaryForm)
+    && /name="reviewOrderAccepted"[\s\S]*?required[\s\S]*?checked=\{formData\.reviewOrderAccepted\}/.test(veterinaryForm)
+    && /privacyAccepted:\s*false/.test(veterinaryForm)
+    && /name="privacyAccepted"[\s\S]*?required[\s\S]*?checked=\{formData\.privacyAccepted\}/.test(veterinaryForm),
+  'Prüfauftrag und Datenschutzbestätigung müssen getrennt, erforderlich und standardmäßig abgewählt bleiben.',
+);
+expect(
+  /Prüf- und Beratungsauftrag: erteilt/.test(veterinaryForm)
+    && /Auftragstext:/.test(veterinaryForm)
+    && /Auftragsfassung:/.test(veterinaryForm)
+    && /Auftrag erteilt am:/.test(veterinaryForm)
+    && /Datenschutzhinweis bestätigt: ja/.test(veterinaryForm),
+  'Die Tierformular-Nachricht muss Auftragstext, Fassung, Zeitpunkt und Datenschutzbestätigung dokumentieren.',
+);
+expect(
   /datenschutz\.emailJsTitle/.test(privacyPage)
     && /datenschutz\.emailJsText/.test(privacyPage)
     && /https:\/\/www\.emailjs\.com\/legal\/privacy-policy\//.test(privacyPage)
@@ -88,6 +103,9 @@ expect(
     && /Alter/.test(emailJsDisclosureDe)
     && /Rasse/.test(emailJsDisclosureDe)
     && /Nutzung/.test(emailJsDisclosureDe)
+    && /Beauftragung/.test(emailJsDisclosureDe)
+    && /Fassung/.test(emailJsDisclosureDe)
+    && /Zeitpunkt/.test(emailJsDisclosureDe)
     && /USA|Vereinigten Staaten/.test(emailJsDisclosureDe)
     && /Standardvertragsklauseln/.test(emailJsDisclosureDe),
   'Die deutsche EmailJS-Offenlegung muss Anbieter, Datenkategorien und Drittlandtransfer transparent benennen.',
@@ -101,6 +119,9 @@ expect(
     && /age/i.test(emailJsDisclosureEn)
     && /breed/i.test(emailJsDisclosureEn)
     && /use/i.test(emailJsDisclosureEn)
+    && /commission/i.test(emailJsDisclosureEn)
+    && /version/i.test(emailJsDisclosureEn)
+    && /time/i.test(emailJsDisclosureEn)
     && /United States|US processing/i.test(emailJsDisclosureEn)
     && /Standard Contractual Clauses/i.test(emailJsDisclosureEn),
   'Die englische EmailJS-Offenlegung muss dieselben Anbieter-, Daten- und Transferinformationen enthalten.',

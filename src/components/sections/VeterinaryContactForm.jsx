@@ -5,16 +5,12 @@ import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Check, Loader2, PawPrint, Send } from 'lucide-react';
+import { Check, FileCheck2, Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const NEXT_STEP_KEYS = ['profile', 'comparison', 'reply'];
-const ANIMAL_IMAGES = {
-  dog: '/images/veterinary/animal-dog.webp',
-  cat: '/images/veterinary/animal-cat.webp',
-  horse: '/images/veterinary/animal-horse.webp',
-};
+const REVIEW_ORDER_VERSION = 'tier-pruefauftrag-v1-2026-08-30';
 const FIELD_CLASS = 'h-12 rounded-xl border-[#cabfa9] bg-white/75 text-[#10272d] shadow-none focus-visible:border-[#25c990] focus-visible:ring-[#25c990]/25';
 const SELECT_CLASS = 'h-12 w-full rounded-xl border border-[#cabfa9] bg-white/75 px-3 text-sm text-[#10272d] outline-none transition focus:border-[#25c990] focus:ring-2 focus:ring-[#25c990]/25';
 
@@ -31,6 +27,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
     breed: '',
     age: '',
     usage: '',
+    reviewOrderAccepted: false,
     privacyAccepted: false,
   });
 
@@ -61,6 +58,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
 
     const animalLabel = t(`finder.animals.${formData.animal_type}.title`);
     const coverageLabel = t(`finder.coverage.${formData.coverage}.title`);
+    const submittedAt = new Date().toISOString();
 
     try {
       await emailjsService.sendEmail({
@@ -74,6 +72,11 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
           `Alter: ${formData.age}`,
           `Rasse: ${formData.breed || 'nicht angegeben'}`,
           formData.animal_type === 'horse' ? `Nutzung: ${formData.usage}` : null,
+          'Prüf- und Beratungsauftrag: erteilt',
+          `Auftragstext: ${t('form.order.consent')}`,
+          `Auftragsfassung: ${REVIEW_ORDER_VERSION}`,
+          `Auftrag erteilt am: ${submittedAt}`,
+          'Datenschutzhinweis bestätigt: ja',
         ].filter(Boolean).join('\n'),
       }, 'Tierkrankenversicherung – Tarifprüfung');
 
@@ -90,6 +93,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
         breed: '',
         age: '',
         usage: '',
+        reviewOrderAccepted: false,
         privacyAccepted: false,
       }));
     } catch (error) {
@@ -109,7 +113,6 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
   const coverageSummary = formData.coverage
     ? t(`finder.coverage.${formData.coverage}.title`)
     : t('finder.profile.coverageEmpty');
-  const animalImage = ANIMAL_IMAGES[formData.animal_type];
   const profileReady = Boolean(formData.animal_type && formData.coverage);
 
   return (
@@ -128,46 +131,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
 
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-16">
           <div className="order-2 lg:order-1">
-            <div className="relative mx-auto max-w-[410px] px-2 pb-5">
-              <div className="absolute inset-x-6 bottom-0 top-6 rotate-3 rounded-[2.25rem] bg-[#25c990]/15" aria-hidden="true" />
-              <article className="relative rotate-[-1.2deg] overflow-hidden rounded-[2rem] bg-[#f8efdc] shadow-[0_30px_80px_rgba(0,0,0,0.38)]">
-                <header className="flex items-center justify-between bg-[#0d332e] px-6 py-4 text-white">
-                  <span className="font-display text-[0.65rem] font-extrabold uppercase tracking-[0.22em]">{t('finder.profile.passTitle')}</span>
-                  <span className="font-friendly text-sm font-bold text-[#8ee7ca]">Healio</span>
-                </header>
-
-                <div className="relative h-[250px] overflow-hidden bg-[radial-gradient(circle_at_50%_32%,#ffffff_0%,#ede4d2_54%,#d6c29b_100%)]">
-                  <span className="absolute left-5 top-5 rounded-full bg-white/70 px-3 py-1 font-display text-[0.58rem] font-extrabold uppercase tracking-[0.15em] text-[#0a654c] backdrop-blur-sm">
-                    {profileReady ? t('finder.profile.statusReady') : t('finder.profile.statusOpen')}
-                  </span>
-                  {animalImage ? (
-                    <img
-                      src={animalImage}
-                      alt={animalSummary}
-                      width="640"
-                      height="640"
-                      className="absolute bottom-[-10%] left-1/2 h-[108%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_22px_24px_rgba(31,38,33,0.25)]"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <PawPrint className="h-28 w-28 text-[#173b36]/12" />
-                    </div>
-                  )}
-                </div>
-
-                <div className="px-6 pb-6 pt-5 sm:px-7">
-                  <p className="font-display text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#71817d]">{t('form.profileLabel')}</p>
-                  <div className="mt-2 flex items-end justify-between gap-4">
-                    <p className="font-friendly text-3xl font-bold leading-none text-[#10272d]">{animalSummary}</p>
-                    <p className="text-right font-display text-sm font-extrabold text-[#087451]">{coverageSummary}</p>
-                  </div>
-                  <div className="mt-5 h-px border-t-2 border-dotted border-[#173b36]/20" aria-hidden="true" />
-                  <p className="mt-4 text-xs leading-relaxed text-[#6b716a]">{t('finder.disclaimer')}</p>
-                </div>
-              </article>
-            </div>
-
-            <div className="mt-10 max-w-[440px]">
+            <div className="max-w-[440px] lg:pt-2">
               <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#76e2bd]">{t('form.next.eyebrow')}</p>
               <h3 className="mt-3 font-friendly text-3xl font-bold leading-tight text-white">{t('form.next.title')}</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-400">{t('form.next.text')}</p>
@@ -179,6 +143,11 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                   </li>
                 ))}
               </ol>
+
+              <div className="mt-7 flex items-start gap-3 rounded-2xl bg-white/[0.06] px-5 py-4 text-sm leading-relaxed text-slate-300">
+                <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-[#76e2bd]" />
+                <p>{t('form.next.orderBoundary')}</p>
+              </div>
             </div>
           </div>
 
@@ -245,6 +214,45 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                 </div>
               )}
 
+              <div className="rounded-2xl bg-[#0d332e] p-5 text-white sm:p-6">
+                <div className="flex items-start gap-3">
+                  <FileCheck2 className="mt-0.5 h-6 w-6 shrink-0 text-[#76e2bd]" />
+                  <div>
+                    <h3 className="font-friendly text-xl font-bold">{t('form.order.title')}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-300">{t('form.order.lead')}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5 flex items-start gap-3 rounded-xl bg-white/[0.07] px-4 py-4">
+                  <input
+                    id="vet-review-order"
+                    type="checkbox"
+                    name="reviewOrderAccepted"
+                    required
+                    checked={formData.reviewOrderAccepted}
+                    onChange={handleChange}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/40 bg-transparent text-[#25c990] focus:ring-[#76e2bd]"
+                  />
+                  <div className="min-w-0 text-sm leading-relaxed text-slate-100">
+                    <label htmlFor="vet-review-order" className="cursor-pointer font-medium">
+                      {t('form.order.consent')}
+                    </label>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                      {t('form.order.documents')}{' '}
+                      <Link to={getPath('erstinformation')} target="_blank" rel="noopener noreferrer" className="font-bold text-[#8ee7ca] underline decoration-[#25c990]/60 underline-offset-2 hover:text-white">
+                        {t('form.order.initialInformation')}
+                      </Link>
+                      {' · '}
+                      <Link to={getPath('agb')} target="_blank" rel="noopener noreferrer" className="font-bold text-[#8ee7ca] underline decoration-[#25c990]/60 underline-offset-2 hover:text-white">
+                        {t('form.order.terms')}
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-3 text-xs leading-relaxed text-[#9fb8b2]">{t('form.order.limit')}</p>
+              </div>
+
               <label className="flex cursor-pointer items-start gap-3 border-t border-[#8f7e5d]/20 pt-5 text-xs leading-relaxed text-[#5f6965]">
                 <input
                   type="checkbox"
@@ -256,7 +264,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                 />
                 <span>
                   {t('form.privacyPrefix')}{' '}
-                  <Link to={getPath('datenschutz')} className="font-bold text-[#087451] underline decoration-[#25c990]/50 underline-offset-2 hover:text-[#065c41]">
+                  <Link to={getPath('datenschutz')} target="_blank" rel="noopener noreferrer" className="font-bold text-[#087451] underline decoration-[#25c990]/50 underline-offset-2 hover:text-[#065c41]">
                     {t('form.privacyLink')}
                   </Link>.
                 </span>

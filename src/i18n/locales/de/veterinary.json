@@ -17,8 +17,8 @@
   },
   "finder": {
     "eyebrow": "1-Minuten-Schutzcheck",
-    "title": "Tier wählen. Schutzbedarf anklicken. Passende Tarife prüfen.",
-    "subtitle": "Du gibst nur die Richtung vor. Danach prüfen wir Alter, Rasse, Haltung, Nutzung und gesundheitliche Vorgeschichte – persönlich und ohne Tarifchaos.",
+    "title": "Tier wählen. Schutz wählen. Healio beauftragen.",
+    "subtitle": "Du legst zuerst die Richtung fest. Danach ergänzt du die Tierdaten und erteilst Healio ausdrücklich den Prüf- und Beratungsauftrag.",
     "animalQuestion": "Für welches Tier suchst du Schutz?",
     "coverageQuestion": "Was möchtest du absichern?",
     "animals": {
@@ -79,8 +79,15 @@
       "detailsValue": "Alter & Rasse",
       "detailsHorse": "Alter, Haltung & Nutzung"
     },
-    "ctaReady": "Passende Tarife prüfen lassen",
-    "ctaIncomplete": "Tier und Schutz wählen",
+    "review": {
+      "readyLabel": "Auswahl gespeichert",
+      "openLabel": "Noch offen",
+      "openTitle": "Wähle Tier und Schutz",
+      "readyText": "Im nächsten Schritt ergänzt du die Tierdaten und beauftragst Healio mit der persönlichen Tarifprüfung.",
+      "openText": "Danach gelangst du direkt zum Prüf- und Beratungsauftrag."
+    },
+    "ctaReady": "Weiter: Healio beauftragen",
+    "ctaIncomplete": "Zuerst Tier und Schutz wählen",
     "disclaimer": "Die Auswahl ist noch kein Antrag. Annahme, Beitrag und Leistungen hängen von Anbieter, Tierdaten und Gesundheitsprüfung ab."
   },
   "costs": {
@@ -117,9 +124,9 @@
     }
   },
   "form": {
-    "eyebrow": "Deine Tarifprüfung",
-    "title": "Jetzt prüfen wir, was zu deinem Tier passt.",
-    "subtitle": "Mit Alter und Rasse beziehungsweise Nutzung können wir gezielt prüfen, welcher Tarifweg zu deinem Tier und deinem gewünschten Schutz passt.",
+    "eyebrow": "03 · Healio beauftragen",
+    "title": "Gib uns jetzt den Auftrag zur Tarifprüfung.",
+    "subtitle": "Du erlaubst Healio, deine Angaben zu prüfen und dich persönlich zu passenden Tierkranken- oder Tier-OP-Versicherungen zu beraten. Ein Versicherungsantrag entsteht erst nach deiner gesonderten Entscheidung.",
     "profileLabel": "Deine Auswahl",
     "next": {
       "eyebrow": "Was danach passiert",
@@ -129,7 +136,8 @@
         "profile": "Wir ergänzen Alter, Rasse und – beim Pferd – Haltung und Nutzung.",
         "comparison": "Wir prüfen passende OP- oder Vollschutzwege und deren Bedingungen.",
         "reply": "Du erhältst eine persönliche Rückmeldung, bevor du über einen Antrag entscheidest."
-      }
+      },
+      "orderBoundary": "Der Auftrag auf dieser Seite erlaubt Healio die persönliche Tarifprüfung und Beratung. Er ist noch keine Maklervollmacht gegenüber einem Versicherer und kein Versicherungsantrag."
     },
     "fields": {
       "name": "Dein Name *",
@@ -143,11 +151,20 @@
       "usageNote": "Pferdeschutz ist ein eigener Bedarfspfad. Deshalb beziehen wir Haltung und Nutzung ausdrücklich in die Prüfung ein.",
       "select": "Bitte wählen"
     },
+    "order": {
+      "title": "Prüf- und Beratungsauftrag",
+      "lead": "Damit wir wirklich für dich tätig werden dürfen, brauchen wir deine ausdrückliche Beauftragung.",
+      "consent": "Ich beauftrage die Healio GmbH, meine Angaben zu prüfen, passende Tarife zu vergleichen und mich persönlich zu einer Tierkranken- oder Tier-OP-Versicherung zu beraten. Dieser Auftrag ist für mich kostenlos.",
+      "documents": "Vor der Beauftragung verfügbar:",
+      "initialInformation": "Erstinformation",
+      "terms": "AGB für Versicherungsmakler",
+      "limit": "Der Auftrag gilt nur für diese Tarifprüfung. Er erteilt keine Abschluss-, Änderungs- oder Kündigungsvollmacht und ist noch kein Versicherungsantrag."
+    },
     "privacyPrefix": "Ich bin damit einverstanden, dass Healio meine Angaben zur Bearbeitung dieser Anfrage verarbeitet. Weitere Informationen stehen in den",
     "privacyLink": "Datenschutzhinweisen",
-    "submit": "Unverbindliche Tarifprüfung anfragen",
+    "submit": "Healio mit Tarifprüfung beauftragen",
     "sending": "Anfrage wird gesendet …",
-    "responseNote": "Du erhältst zuerst eine Eingangsbestätigung. Danach prüft Healio deine Angaben und meldet sich persönlich.",
+    "responseNote": "Kostenlos · noch kein Versicherungsantrag · persönliche Rückmeldung von Healio",
     "successTitle": "Deine Anfrage ist angekommen",
     "successText": "Wir prüfen deine Angaben und melden uns persönlich bei dir.",
     "errorTitle": "Die Anfrage konnte nicht gesendet werden",

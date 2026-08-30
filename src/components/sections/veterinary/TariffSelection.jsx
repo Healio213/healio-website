@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowDown, Check, PawPrint } from 'lucide-react';
+import { ArrowDown, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ANIMALS = [
@@ -87,7 +87,6 @@ const ProtectionChoice = ({ active, code, title, description, onClick }) => (
 const TariffSelection = ({ selection, onSelectionChange }) => {
   const { t } = useTranslation('veterinary');
   const ready = Boolean(selection.animalType && selection.coverage);
-  const activeAnimal = ANIMALS.find((animal) => animal.value === selection.animalType);
 
   const updateSelection = (key, value) => {
     onSelectionChange((current) => ({ ...current, [key]: value }));
@@ -99,9 +98,6 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
   const coverageLabel = selection.coverage
     ? t(`finder.coverage.${selection.coverage}.title`)
     : t('finder.profile.coverageEmpty');
-  const profileDetails = selection.animalType === 'horse'
-    ? t('finder.profile.detailsHorse')
-    : t('finder.profile.detailsValue');
   const coverageNamespace = selection.animalType === 'horse' ? 'coverageHorse' : 'coverage';
 
   return (
@@ -122,7 +118,7 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#53666a] sm:text-lg">{t('finder.subtitle')}</p>
         </div>
 
-        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_360px] xl:items-start">
+        <div className="mx-auto max-w-5xl">
           <div>
             <div className="flex items-baseline gap-4 border-b border-[#163d37]/15 pb-5">
               <span className="font-display text-4xl font-black tracking-[-0.07em] text-[#25c990]">01</span>
@@ -180,75 +176,45 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
                 </span>
               </button>
             </div>
-          </div>
 
-          <aside className="xl:sticky xl:top-28" aria-live="polite">
-            <div className="relative rounded-[2.15rem] bg-[#08202b] p-2 shadow-[0_30px_80px_rgba(7,24,39,0.3)]">
-              <div className="relative overflow-hidden rounded-[1.75rem] bg-[#f8efdc]">
-                <div className="flex items-center justify-between bg-[#0d332e] px-6 py-4 text-white">
-                  <span className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.24em]">{t('finder.profile.passTitle')}</span>
-                  <span className="font-display text-[0.64rem] font-bold uppercase tracking-[0.12em] text-[#8ee7ca]">{t('finder.profile.checkStage')}</span>
-                </div>
-
-                <div className="relative h-[280px] overflow-hidden bg-[radial-gradient(circle_at_50%_34%,#ffffff_0%,#e9dfc8_56%,#d9c7a4_100%)]">
-                  <div className="absolute inset-y-0 left-4 w-px border-l-2 border-dotted border-[#173b36]/20" aria-hidden="true" />
-                  {activeAnimal ? (
-                    <img
-                      key={activeAnimal.value}
-                      src={activeAnimal.src}
-                      alt={animalLabel}
-                      width="640"
-                      height="640"
-                      className="absolute bottom-[-8%] left-1/2 h-[105%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_20px_24px_rgba(31,38,33,0.22)]"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <PawPrint className="h-24 w-24 text-[#173b36]/12" />
-                    </div>
-                  )}
-                  <span className="absolute bottom-4 right-4 rounded-full border border-white/70 bg-white/75 px-3 py-1 font-display text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#0b4c3a] shadow-sm backdrop-blur-sm">
-                    {ready ? t('finder.profile.statusReady') : t('finder.profile.statusOpen')}
-                  </span>
-                </div>
-
-                <div className="relative px-6 pb-6 pt-5">
-                  <p className="font-display text-[0.65rem] font-extrabold uppercase tracking-[0.18em] text-[#087451]">
-                    {ready ? t('finder.profile.summaryReady') : t('finder.profile.summaryOpen')}
+            <div
+              className={`mt-8 flex flex-col gap-5 rounded-2xl px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 ${
+                ready
+                  ? 'bg-[#0d332e] text-white shadow-[0_18px_42px_rgba(7,24,39,0.18)]'
+                  : 'border border-[#173b36]/15 bg-white/55 text-[#10272d]'
+              }`}
+              aria-live="polite"
+            >
+              <div className="flex min-w-0 items-start gap-3.5">
+                <span className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${ready ? 'bg-[#25c990] text-[#062319]' : 'bg-[#173b36]/8 text-[#71817d]'}`}>
+                  <Check className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className={`font-display text-[0.68rem] font-extrabold uppercase tracking-[0.16em] ${ready ? 'text-[#8ee7ca]' : 'text-[#71817d]'}`}>
+                    {ready ? t('finder.review.readyLabel') : t('finder.review.openLabel')}
                   </p>
-                  <p className="mt-2 font-friendly text-3xl font-bold leading-tight text-[#10272d]">
-                    {ready ? `${animalLabel} · ${coverageLabel}` : t('finder.profile.summaryEmpty')}
+                  <p className="mt-1 font-friendly text-2xl font-bold leading-tight">
+                    {ready ? `${animalLabel} · ${coverageLabel}` : t('finder.review.openTitle')}
                   </p>
-
-                  <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-4 border-y border-[#173b36]/15 py-5">
-                    <div>
-                      <dt className="font-display text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#71817d]">{t('finder.profile.animalLabel')}</dt>
-                      <dd className="mt-1 text-sm font-bold text-[#1a3438]">{animalLabel}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-display text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#71817d]">{t('finder.profile.coverageLabel')}</dt>
-                      <dd className="mt-1 text-sm font-bold text-[#1a3438]">{coverageLabel}</dd>
-                    </div>
-                  </dl>
-
-                  <div className="mt-4 rounded-xl bg-white/70 px-4 py-3">
-                    <p className="font-display text-[0.6rem] font-extrabold uppercase tracking-[0.16em] text-[#71817d]">{t('finder.profile.detailsLabel')}</p>
-                    <p className="mt-1 text-sm font-bold text-[#1a3438]">{profileDetails}</p>
-                  </div>
-
-                  <Button
-                    type="button"
-                    disabled={!ready}
-                    onClick={() => document.getElementById('vet-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                    className="mt-6 h-auto w-full rounded-full bg-[#25c990] px-5 py-4 font-display font-extrabold text-[#062319] shadow-[0_14px_30px_rgba(37,201,144,0.24)] hover:bg-[#5ee0b1] disabled:cursor-not-allowed disabled:bg-[#d8d0bf] disabled:text-[#857f72]"
-                  >
-                    {ready ? t('finder.ctaReady') : t('finder.ctaIncomplete')}
-                    <ArrowDown className="ml-2 h-4 w-4" />
-                  </Button>
-                  <p className="mt-3 text-center text-[0.68rem] leading-relaxed text-[#6f7772]">{t('finder.disclaimer')}</p>
+                  <p className={`mt-1.5 max-w-2xl text-sm leading-relaxed ${ready ? 'text-slate-300' : 'text-[#5d6b6d]'}`}>
+                    {ready ? t('finder.review.readyText') : t('finder.review.openText')}
+                  </p>
                 </div>
               </div>
+
+              <Button
+                type="button"
+                disabled={!ready}
+                onClick={() => document.getElementById('vet-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="h-auto shrink-0 rounded-full bg-[#25c990] px-6 py-3.5 font-display font-extrabold text-[#062319] shadow-[0_12px_26px_rgba(37,201,144,0.2)] hover:bg-[#5ee0b1] disabled:cursor-not-allowed disabled:bg-[#d8d0bf] disabled:text-[#857f72]"
+              >
+                {ready ? t('finder.ctaReady') : t('finder.ctaIncomplete')}
+                <ArrowDown className="ml-2 h-4 w-4" />
+              </Button>
             </div>
-          </aside>
+
+            <p className="mt-3 text-center text-xs leading-relaxed text-[#6f7772]">{t('finder.disclaimer')}</p>
+          </div>
         </div>
       </div>
     </section>

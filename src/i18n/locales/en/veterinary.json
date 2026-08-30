@@ -17,8 +17,8 @@
   },
   "finder": {
     "eyebrow": "One-minute cover check",
-    "title": "Choose the animal. Pick the cover. Have suitable plans checked.",
-    "subtitle": "You only set the direction. We then assess age, breed, keeping, use and medical history — personally and without plan confusion.",
+    "title": "Choose the animal. Choose the cover. Commission Healio.",
+    "subtitle": "First set the direction. Then add the animal details and expressly commission Healio to carry out the plan review and provide advice.",
     "animalQuestion": "Which animal needs cover?",
     "coverageQuestion": "What would you like to cover?",
     "animals": {
@@ -53,8 +53,15 @@
       "detailsValue": "Age & breed",
       "detailsHorse": "Age, keeping & use"
     },
-    "ctaReady": "Have suitable plans checked",
-    "ctaIncomplete": "Choose animal and cover",
+    "review": {
+      "readyLabel": "Selection saved",
+      "openLabel": "Still needed",
+      "openTitle": "Choose animal and cover",
+      "readyText": "In the next step, add the animal details and commission Healio to carry out the personal plan review.",
+      "openText": "You will then proceed directly to the review and advice commission."
+    },
+    "ctaReady": "Continue: commission Healio",
+    "ctaIncomplete": "Choose animal and cover first",
     "disclaimer": "This selection is not an application. Acceptance, price and benefits depend on the insurer, animal data and medical assessment."
   },
   "costs": {
@@ -91,9 +98,9 @@
     }
   },
   "form": {
-    "eyebrow": "Your plan review",
-    "title": "Now let us check what fits your animal.",
-    "subtitle": "With age and breed or use, we can check which route fits your animal and the cover you want.",
+    "eyebrow": "03 · Commission Healio",
+    "title": "Now commission us to review suitable plans.",
+    "subtitle": "You authorise Healio to review your information and personally advise you on suitable pet health or surgery-only cover. An insurance application is only made after a separate decision by you.",
     "profileLabel": "Your selection",
     "next": {
       "eyebrow": "What happens next",
@@ -103,7 +110,8 @@
         "profile": "We add age, breed and, for horses, keeping and use.",
         "comparison": "We review suitable surgery-only or full-cover routes and their conditions.",
         "reply": "You receive a personal response before deciding on an application."
-      }
+      },
+      "orderBoundary": "The commission on this page allows Healio to carry out the personal plan review and provide advice. It is not a power of attorney towards an insurer and not an insurance application."
     },
     "fields": {
       "name": "Your name *",
@@ -117,11 +125,20 @@
       "usageNote": "Horse insurance is a separate needs path. That is why we explicitly include keeping and use in the review.",
       "select": "Please choose"
     },
+    "order": {
+      "title": "Plan review and advice commission",
+      "lead": "We need your express commission before we can start working for you.",
+      "consent": "I commission Healio GmbH to review my information, compare suitable plans and personally advise me on pet health or surgery-only insurance. This commission is free of charge for me.",
+      "documents": "Available before commissioning:",
+      "initialInformation": "Initial information",
+      "terms": "Insurance broker terms",
+      "limit": "This commission applies only to this plan review. It grants no authority to conclude, amend or cancel an insurance contract and is not an insurance application."
+    },
     "privacyPrefix": "I agree that Healio may process my information to handle this inquiry. More information is available in the",
     "privacyLink": "privacy notice",
-    "submit": "Request a non-binding plan review",
+    "submit": "Commission Healio to review plans",
     "sending": "Sending request …",
-    "responseNote": "You first receive confirmation. Healio then reviews your information and responds personally.",
+    "responseNote": "Free of charge · not an insurance application · personal response from Healio",
     "successTitle": "Your inquiry has arrived",
     "successText": "We will review your information and contact you personally.",
     "errorTitle": "The inquiry could not be sent",
