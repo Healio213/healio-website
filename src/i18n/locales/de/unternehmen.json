@@ -184,14 +184,38 @@
     "note": "Die feste Weiterleitung übermittelt keine Mitarbeiterdaten. KassenBoost dient der privaten Orientierung; jede weitere Entscheidung trifft der Mitarbeiter selbst."
   },
   "bavLeverage": {
-    "eyebrow": "Arbeitgeberfinanzierte bAV",
-    "title": "676 EUR Vorsorge. Rund 75 EUR weniger Auszahlungsnetto.*",
-    "netEffectExplanation": "Im Standardbeispiel kann das laufende Auszahlungsnetto durch zusätzliche Sozialabgaben um rund 71 bis 74 EUR sinken – gerundet rund 75 EUR.",
-    "description": "Wir zeigen getrennt, was beim Mitarbeiter ankommt und was das Unternehmen tatsächlich aufwendet.",
-    "detailsIntro": "Die Zahl ist kein Pauschalversprechen. Der Rechenweg bleibt vollständig prüfbar.",
+    "eyebrow": "Arbeitgeberfinanzierte bAV · Rechenbeispiel 2026",
+    "title": "Rund 75 EUR Nettoeffekt. 676 EUR Vorsorge. 30 Jahre Zeit.",
+    "titleLine1": "Rund 75 EUR Nettoeffekt.",
+    "titleLine2": "676 EUR Vorsorge.",
+    "titleLine3": "30 Jahre Zeit.",
+    "netEffectExplanation": "Die rund 75 EUR sind kein Eigenbeitrag. Sie zeigen die mögliche Minderung des Auszahlungsnettos durch zusätzliche Sozialabgaben im Standardbeispiel.",
+    "description": "Der Arbeitgeber füllt den Vertrag. Der Mitarbeiter spürt im Standardbeispiel rund 75 EUR weniger Auszahlungsnetto – und baut mit 676 EUR im Monat einen substanziellen Vorsorgetopf auf.",
+    "detailsIntro": "Offensiv gerechnet. Vollständig offengelegt.",
     "detailsShow": "Rechenweg, Annahmen & Quellen",
     "detailsHide": "Details schließen",
-    "shortDisclaimer": "* Vereinfachtes Standardmodell 2026. Individuelle Werte können abweichen; keine Prognose oder Garantie.",
+    "shortDisclaimer": "Vereinfachtes offensives Modell 2026. Rendite und Monatswerte sind Orientierungen, keine Prognose, Garantie oder Tarif-Rente.",
+    "flow": {
+      "ariaLabel": "Vom möglichen Nettoeffekt über den Arbeitgeberbeitrag zum 30-Jahres-Modell",
+      "formula": "30 Jahre · 10 % Marktannahme − 2 Prozentpunkte Kosten = 8 % Modellrendite",
+      "employeeStage": "Beim Mitarbeiter heute",
+      "employeeCaption": "mögliche Minderung des Auszahlungsnettos",
+      "employeeNote": "im Standardbeispiel – nicht 676 EUR Eigenbeitrag",
+      "firstConnector": "Arbeitgeber finanziert",
+      "contractStage": "Jeden Monat im Vertrag",
+      "contractCaption": "voller arbeitgeberfinanzierter Vorsorgebeitrag",
+      "contractNote": "{{contributions}} Einzahlungen in 30 Jahren",
+      "secondConnector": "30 Jahre",
+      "futureStage": "Was daraus werden kann",
+      "modeLabel": "Modellergebnis anzeigen",
+      "capitalTab": "Kapital",
+      "monthlyTab": "Monatlich",
+      "capitalCaption": "modelliertes Versorgungskapital",
+      "capitalNote": "{{contributions}} Einzahlungen plus Modellwachstum",
+      "monthlyGrossCaption": "monatliche 4-%-Modellauszahlung vor Abgaben",
+      "monthlyAfterCaption": "Orientierungswert nach pauschal {{deduction}} % Modellabzug",
+      "monthlyNote": "Die Monatswerte sind ein Auszahlungsmodell. Keine garantierte oder lebenslange Tarif-Rente."
+    },
     "splitTitle": "Die 676 EUR bestehen im Standardmodell aus zwei Teilen:",
     "splitFree": "338 EUR steuer- und sozialabgabenfrei",
     "splitLiable": "338 EUR steuerfrei, grundsätzlich sozialversicherungspflichtig",
@@ -202,8 +226,10 @@
     "standardFormula": "10 % − 2 Prozentpunkte = 8 % Modellrendite",
     "historicalContext": "Historischer Kontext: MSCI World USD Net Return, Juli 2011 bis Juli 2026, Stichtag 31.07.2026: 11,10 % p. a. Mathematisch nach derselben Kostenannahme 9,10 % p. a.",
     "source": "MSCI-Factsheet öffnen",
-    "disclaimer": "* Vereinfachtes Standardmodell für 2026. Der mögliche Nettoeffekt und der Arbeitgeberaufwand hängen unter anderem von Gehalt, Beitragsbemessungsgrenzen, Krankenkasse und Pflegeversicherungsstatus ab. Die Renditeangaben sind Modellannahmen beziehungsweise historische Einordnung, keine Prognose oder Garantie. Eine Nettorente wird nicht versprochen.",
-    "cta": "Mit der Belegschaft rechnen"
+    "payoutModelTitle": "So entsteht der Monatswert",
+    "payoutModel": "Die Orientierung verteilt jährlich 4 % des Modellkapitals auf zwölf Monate. Zusätzlich zeigen wir einen pauschalen Modellabzug von 30 % für mögliche Steuern sowie Kranken- und Pflegeversicherungsbeiträge. Die tatsächliche Belastung ist individuell; der Wert ist keine garantierte oder lebenslange Tarif-Rente.",
+    "disclaimer": "Vereinfachtes Standardmodell für 2026. Der mögliche Nettoeffekt und der Arbeitgeberaufwand hängen unter anderem von Gehalt, Beitragsbemessungsgrenzen, Krankenkasse und Pflegeversicherungsstatus ab. 8 % sind eine offensive Modellrendite nach der sichtbaren Kostenannahme, keine Prognose oder Garantie. Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge werden nur im pauschalen 30-%-Orientierungswert angenähert.",
+    "cta": "Eigenes Beispiel rechnen"
   },
   "faq": {
     "eyebrow": "Vor der Entscheidung",
@@ -321,6 +347,9 @@
         "formula": "Gewählte Modellrendite",
         "contributionsPerPerson": "Einzahlungen je Teilnehmer",
         "capitalPerPerson": "modelliertes Kapital je Teilnehmer",
+        "monthlyGross": "monatliche 4-%-Modellauszahlung vor Abgaben",
+        "monthlyAfter": "nach pauschalem {{deduction}}-%-Modellabzug",
+        "monthlyNote": "Orientierung aus dem Kapitalmodell – keine garantierte oder lebenslange Tarif-Rente.",
         "capitalGroup": "modelliertes Kapital der Gruppe"
       }
     },
@@ -362,12 +391,22 @@
         "description": "Das BMG weist für die soziale Pflegeversicherung einen allgemeinen Beitragssatz von 3,6 % aus. Kinderzahl, Alter und Beschäftigungsort können die Aufteilung verändern.",
         "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
       },
+      "incomeTax": {
+        "publisher": "Bundesfinanzministerium · Leistungsphase",
+        "description": "Leistungen aus Pensionsfonds, Pensionskassen und Direktversicherungen werden in der Auszahlungsphase nach § 22 Nr. 5 EStG steuerlich eingeordnet. Die tatsächliche Steuerwirkung hängt vom persönlichen Fall ab.",
+        "url": "https://ao.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-03/II/inhalt.html"
+      },
+      "healthContributions": {
+        "publisher": "§ 229 SGB V · Versorgungsbezüge",
+        "description": "Betriebliche Versorgungsleistungen können in der gesetzlichen Kranken- und Pflegeversicherung beitragspflichtig sein. Auch Kapitalleistungen werden dafür gesetzlich auf Monatswerte verteilt; der konkrete Fall ist individuell zu prüfen.",
+        "url": "https://www.gesetze-im-internet.de/sgb_5/__229.html"
+      },
       "open": "Primärquelle öffnen"
     },
     "disclaimers": {
       "assumptions": "Standardannahme für die Sozialabgaben: gesetzlich versichert, durchschnittlicher Zusatzbeitrag von 2,9 %, ein Kind und Beschäftigung außerhalb Sachsens.",
       "legalFramework": "Das Modell setzt für das erste Dienstverhältnis einen nach § 3 Nr. 63 EStG geeigneten Durchführungsweg voraus: Pensionsfonds, Pensionskasse oder Direktversicherung. Es unterstellt, dass die Jahresgrenzen 2026 von 8.112 EUR steuerfrei und 4.056 EUR sozialversicherungsfrei nicht durch andere Beiträge ausgeschöpft sind und zwölf gleich hohe Monatsbeiträge geleistet werden. 676 EUR und 338 EUR sind die daraus abgeleiteten Monatswerte.",
-      "projection": "Vereinfachte Modellrechnung, keine Prognose oder Garantie. Die gewählte vereinfachte Renditeminderung ist berücksichtigt; die konkreten Tarifkosten und ihre tatsächliche Wirkung sind ohne Produktunterlagen nicht vollständig abgebildet. Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet. Vergangene Wertentwicklung ist kein verlässlicher Indikator für künftige Ergebnisse.",
+      "projection": "Vereinfachte Modellrechnung, keine Prognose oder Garantie. Die gewählte vereinfachte Renditeminderung ist berücksichtigt; die konkreten Tarifkosten und ihre tatsächliche Wirkung sind ohne Produktunterlagen nicht vollständig abgebildet. Die monatliche Orientierung verteilt 4 % des Modellkapitals pro Jahr auf zwölf Monate und zeigt zusätzlich einen pauschalen 30-%-Modellabzug. Sie ist keine garantierte oder lebenslange Tarif-Rente. Tatsächliche Steuern sowie Kranken- und Pflegeversicherungsbeiträge sind individuell; Inflation ist nicht berücksichtigt. Vergangene Wertentwicklung ist kein verlässlicher Indikator für künftige Ergebnisse.",
       "payroll": "Das Durchschnittsbrutto ist nur eine Planungsnäherung. Beitragsbemessungsgrenzen, Krankenkasse, Pflegeversicherungsstatus, Beschäftigungsort und weitere Umlagen müssen in der Payroll je Mitarbeiter und Abrechnungsmonat geprüft werden. Keine Steuer- oder Rechtsberatung."
     },
     "cta": {

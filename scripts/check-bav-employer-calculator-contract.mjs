@@ -52,6 +52,8 @@ assert.match(siteSeoContract, /'\/en\/companies\/pension-calculator'/);
 assert.match(page, /robots="noindex, nofollow"/);
 assert.match(page, /calculateEmployerPlan/);
 assert.match(page, /calculateBavScenarios/);
+assert.match(page, /calculateIllustrativeMonthlyWithdrawal/);
+assert.match(page, /BAV_PAYOUT_MODEL/);
 assert.match(page, /data-result-group="company"/);
 assert.match(page, /data-result-group="employee"/);
 assert.match(page, /data-result-group="capital"/);
@@ -84,6 +86,9 @@ assert.match(de.hero.title, /676 EUR/);
 assert.equal(de.results.company.title, 'Unternehmensaufwand');
 assert.equal(de.results.employee.title, 'Mitarbeiterwirkung');
 assert.equal(de.results.capital.title, 'Kapitalprojektion');
+assert.match(de.results.capital.monthlyGross, /4-%-Modellauszahlung/);
+assert.match(de.results.capital.monthlyAfter, /\{\{deduction\}\}/);
+assert.match(de.results.capital.monthlyNote, /keine garantierte oder lebenslange Tarif-Rente/i);
 assert.equal(en.results.company.title, 'Company cost');
 assert.equal(en.results.employee.title, 'Employee impact');
 assert.equal(en.results.capital.title, 'Capital projection');
@@ -110,6 +115,9 @@ assert.match(de.sources.bafin.url, /^https:\/\/bafin\.de\//);
 assert.match(de.disclaimers.projection, /keine Prognose oder Garantie/);
 assert.match(de.disclaimers.projection, /gewählte.*Renditeminderung.*berücksichtigt/i);
 assert.match(de.disclaimers.projection, /konkreten Tarifkosten.*nicht vollständig/i);
+assert.match(de.disclaimers.projection, /4 %/);
+assert.match(de.disclaimers.projection, /30-%-Modellabzug/);
+assert.match(de.disclaimers.projection, /keine garantierte oder lebenslange Tarif-Rente/i);
 assert.match(de.disclaimers.payroll, /Payroll/);
 assert.match(de.disclaimers.assumptions, /durchschnittlicher Zusatzbeitrag von 2,9 %/);
 assert.match(de.disclaimers.assumptions, /ein Kind/);
@@ -151,7 +159,11 @@ assert.equal(
   'https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung',
 );
 assert.match(de.sources.bmgCare.description, /3,6 %/);
-for (const sourceKey of ['drv', 'federalGovernment', 'bmgHealth', 'bmgCare']) {
+assert.equal(de.sources.incomeTax.url, 'https://ao.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-03/II/inhalt.html');
+assert.match(de.sources.incomeTax.description, /§ 22 Nr\. 5 EStG/);
+assert.equal(de.sources.healthContributions.url, 'https://www.gesetze-im-internet.de/sgb_5/__229.html');
+assert.match(de.sources.healthContributions.description, /Kranken- und Pflegeversicherung/);
+for (const sourceKey of ['drv', 'federalGovernment', 'bmgHealth', 'bmgCare', 'incomeTax', 'healthContributions']) {
   assert.equal(en.sources[sourceKey].url, de.sources[sourceKey].url);
 }
 assert.match(page, /bavDecisionCalculator\.disclaimers\.assumptions/);

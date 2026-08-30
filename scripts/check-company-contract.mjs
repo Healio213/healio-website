@@ -57,13 +57,27 @@ assert.match(workforce, /getPath\('potenzialanalyse'\)/);
 assert.match(workforce, /\?interest=kassenboost/);
 assert.doesNotMatch(workforce, /to=["']\/potenzialanalyse\?interest=kassenboost/);
 assert.doesNotMatch(workforce, /getPath\('partner'\)|to=["']\/partner/);
-assert.equal(de.bavLeverage.title, '676 EUR Vorsorge. Rund 75 EUR weniger Auszahlungsnetto.*');
+assert.equal(de.bavLeverage.title, 'Rund 75 EUR Nettoeffekt. 676 EUR Vorsorge. 30 Jahre Zeit.');
+assert.equal(
+  [de.bavLeverage.titleLine1, de.bavLeverage.titleLine2, de.bavLeverage.titleLine3].join(' '),
+  de.bavLeverage.title,
+);
+assert.match(bavLeverage, /bavLeverage\.titleLine2/);
 assert.match(de.bavLeverage.netEffectExplanation, /Auszahlungsnetto/);
-assert.match(de.bavLeverage.netEffectExplanation, /71 bis 74 EUR/);
 assert.match(de.bavLeverage.netEffectExplanation, /rund 75 EUR/);
 assert.match(en.bavLeverage.netEffectExplanation, /take-home pay/i);
-assert.match(en.bavLeverage.netEffectExplanation, /EUR 71 to EUR 74/);
 assert.match(bavLeverage, /bavLeverage\.netEffectExplanation/);
+assert.match(bavLeverage, /calculateBavScenarios/);
+assert.match(bavLeverage, /calculateEmployerBavLeverage/);
+assert.match(bavLeverage, /calculateIllustrativeMonthlyWithdrawal/);
+assert.match(bavLeverage, /useState\('capital'\)/);
+assert.match(bavLeverage, /data-bav-flow="true"/);
+assert.match(bavLeverage, /data-payout-mode=\{resultMode\}/);
+assert.match(de.bavLeverage.flow.formula, /8 % Modellrendite/);
+assert.match(de.bavLeverage.flow.contractNote, /Einzahlungen in 30 Jahren/);
+assert.match(de.bavLeverage.flow.monthlyNote, /keine garantierte oder lebenslange Tarif-Rente/i);
+assert.match(de.bavLeverage.payoutModel, /4 %/);
+assert.match(de.bavLeverage.payoutModel, /30 %/);
 assert.match(bavLeverage, /<details/);
 assert.match(solutions, /<details/);
 assert.match(responsibility, /<details/);

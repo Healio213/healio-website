@@ -1,6 +1,6 @@
 # KassenBoost × Healio × Arbeitgeberbrücke – Spezifikation
 
-Stand: 19.08.2026
+Stand: 19.08.2026, Teilupdate bAV-Zahlenstrecke 30.08.2026
 
 ## Ziel
 
@@ -69,9 +69,10 @@ Die Formulierung „10X“ darf nur als „fast zehnfach“ oder „rund 9- bis 
 - Die Marktrendite ist von 0 bis 12 % einstellbar; Schnellwerte sind 4 %, 6 %, 8 %, 10 % und 11,1 %. Der Standard ist offensiv und nachvollziehbar: **10 % Marktszenario**.
 - Die Standard-Kostenannahme beträgt **2,00 Prozentpunkte Effektivkosten pro Jahr**. Die UI zeigt Marktrendite, Renditeminderung und Modellrendite nach Kosten getrennt: standardmäßig `10 % − 2 % = 8 %`.
 - Nutzer können 25, 30 oder 35 Jahre auswählen.
-- Angezeigt werden Einzahlung und modelliertes Kapital, keine garantierte oder pauschale Nettorente.
-- Pflichttext: keine Prognose oder Garantie; Produktkosten, Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet.
-- Eine konkrete Monatsrente darf erst mit dem garantierten oder aktuellen Rentenfaktor eines konkreten Tarifs und mit separater Nettoeinordnung gezeigt werden.
+- Angezeigt werden Einzahlung und modelliertes Kapital. Zusätzlich darf eine klar getrennte monatliche Auszahlungsorientierung erscheinen: 4 % des Modellkapitals pro Jahr, geteilt durch zwölf Monate, sowie ein zweiter Wert nach einem pauschalen Modellabzug von 30 %.
+- Diese Auszahlungsorientierung ist keine garantierte, lebenslange oder tariflich berechnete Rente. Der 30-%-Abzug ist keine individuelle Nettohochrechnung, sondern eine sichtbare Pauschalannahme für mögliche Steuern sowie Kranken- und Pflegeversicherungsbeiträge.
+- Pflichttext: keine Prognose oder Garantie; konkrete Produktkosten, Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge hängen vom Tarif und persönlichen Fall ab.
+- Eine konkrete Tarif-Rente darf weiterhin erst mit dem garantierten oder aktuellen Rentenfaktor eines konkreten Tarifs und mit separater Nettoeinordnung gezeigt werden.
 
 Die offensive Einordnung stützt sich auf einen festen aktuellen 15-Jahres-Zeitraum: Das offizielle MSCI-World-Factsheet per 31.07.2026 zeigt für den **MSCI World Net Return in USD** von Juli 2011 bis Juli 2026 einen normierten Anstieg von 100 auf 484,83. Daraus ergibt sich rechnerisch eine annualisierte Wertentwicklung von rund **11,10 % p. a.** Das ist eine Indexhistorie nach der MSCI-Net-Return-Methodik, aber vor individuellen Produktkosten. Nach der transparenten Modellannahme von zwei Prozentpunkten Kosten ergibt sich rein rechnerisch **9,10 %**.
 
@@ -87,7 +88,7 @@ Verbindliche Kostencopy:
 
 ## Arbeitgeber-Entscheidungsrechner
 
-Der ausführliche Rechner lebt auf der zunächst `noindex, nofollow` ausgelieferten Route `/unternehmen/vorsorge-rechner`. Die öffentliche Unternehmensseite zeigt nur den verständlichen 676-/75-EUR-Einstieg und führt zur Detailrechnung. Dadurch bleibt `/unternehmen` ruhig und fokussiert.
+Der ausführliche Rechner lebt auf der zunächst `noindex, nofollow` ausgelieferten Route `/unternehmen/vorsorge-rechner`. Die öffentliche Unternehmensseite zeigt eine kompakte Zahlenstrecke aus rund 75 EUR möglichem Nettoeffekt, 676 EUR monatlichem Arbeitgeberbeitrag und dem offensiven 30-Jahres-Modell. Kapital und monatliche Auszahlungsorientierung sind umschaltbar; die Detailannahmen bleiben eingeklappt. Dadurch bleibt `/unternehmen` fokussiert und zugleich verständlich.
 
 ### Eingaben
 
@@ -116,8 +117,9 @@ Der ausführliche Rechner lebt auf der zunächst `noindex, nofollow` ausgeliefer
 - Aufwand als Anteil an Brutto-Payroll und Jahresumsatz.
 - bAV-Gutschrift und möglicher Netto-Cash-Effekt je Mitarbeiter getrennt.
 - Einzahlung und modelliertes Kapital nach der gewählten Kostenannahme je Mitarbeiter sowie für die Gruppe; Marktrendite, Effektivkosten und resultierende Modellrendite bleiben sichtbar.
+- Monatliche Auszahlungsorientierung vor Abgaben sowie nach pauschalem 30-%-Modellabzug; beide Werte sind ausdrücklich kein tarifliches Rentenversprechen.
 
-Der Umsatz beeinflusst nicht das Vorsorgeergebnis, sondern dient ausschließlich zur wirtschaftlichen Einordnung. Der Rechner zeigt keine individuelle Steuerersparnis, Nettorente, Kapitalauszahlung nach Steuern, Fluktuationsrendite, Krankenstandsreduktion oder garantierte Wirkung.
+Der Umsatz beeinflusst nicht das Vorsorgeergebnis, sondern dient ausschließlich zur wirtschaftlichen Einordnung. Der Rechner zeigt keine individuelle Steuerersparnis, Nettorente, Kapitalauszahlung nach Steuern, Fluktuationsrendite, Krankenstandsreduktion oder garantierte Wirkung. Der Wert nach 30-%-Modellabzug ist eine pauschale Orientierung und darf nicht als individuelle Nettorente bezeichnet werden.
 
 Referenztest: 20 Beschäftigte, 100 % Teilnahme, 3.750 EUR Brutto, 676 EUR Beitrag, 3 Mio. EUR Umsatz, 20 Jahre und 4 % ergeben im Standardmodell 162.240 EUR jährlichen bAV-Beitrag, 17.156,88 EUR zusätzliche Arbeitgeber-SV und 179.396,88 EUR vollständigen Arbeitgeber-Jahresaufwand. Für die öffentliche Langfristansicht werden 25/30/35 Jahre verwendet; der 20-Jahres-Wert bleibt ein technischer Rechentest.
 

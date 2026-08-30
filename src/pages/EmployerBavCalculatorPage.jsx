@@ -5,9 +5,11 @@ import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
   BAV_LIMITS_2026,
+  BAV_PAYOUT_MODEL,
   calculateAnnualizedReturn,
   calculateBavScenarios,
   calculateEmployerPlan,
+  calculateIllustrativeMonthlyWithdrawal,
 } from '@/lib/bavEmployerLeverage';
 
 const MARKET_RATE_PRESETS = [4, 6, 8, 10, 11.1];
@@ -176,6 +178,9 @@ const EmployerBavCalculatorPage = () => {
     annualRates: [grossAnnualRate],
     effectiveCostRate,
   })[0], [monthlyContribution, years, grossAnnualRate, effectiveCostRate]);
+  const selectedPayout = useMemo(() => calculateIllustrativeMonthlyWithdrawal({
+    capital: selectedScenario.projectedCapital,
+  }), [selectedScenario.projectedCapital]);
   const historicalAnnualRate = calculateAnnualizedReturn({
     startValue: 100,
     endValue: 484.83,
@@ -532,6 +537,17 @@ const EmployerBavCalculatorPage = () => {
                       <Metric label={t('bavDecisionCalculator.results.capital.contributionsPerPerson')} value={formatCurrency(selectedScenario.contributionTotal)} />
                       <Metric label={t('bavDecisionCalculator.results.capital.capitalPerPerson')} value={formatCurrency(selectedScenario.projectedCapital)} />
                       <Metric
+                        label={t('bavDecisionCalculator.results.capital.monthlyGross')}
+                        value={formatCurrency(selectedPayout.grossMonthlyWithdrawal)}
+                      />
+                      <Metric
+                        label={t('bavDecisionCalculator.results.capital.monthlyAfter', {
+                          deduction: formatInteger(BAV_PAYOUT_MODEL.modelDeductionRate),
+                        })}
+                        value={formatCurrency(selectedPayout.afterModelDeductionMonthly)}
+                        note={t('bavDecisionCalculator.results.capital.monthlyNote')}
+                      />
+                      <Metric
                         primary
                         className="sm:col-span-2"
                         label={t('bavDecisionCalculator.results.capital.capitalGroup')}
@@ -563,6 +579,8 @@ const EmployerBavCalculatorPage = () => {
                 'federalGovernment',
                 'bmgHealth',
                 'bmgCare',
+                'incomeTax',
+                'healthContributions',
               ].map((sourceKey) => (
                 <article key={sourceKey} className="rounded-2xl border border-slate-200 bg-[#f7faf9] p-6">
                   <h3 className="font-display text-base font-extrabold">

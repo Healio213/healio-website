@@ -184,14 +184,38 @@
     "note": "The fixed link transmits no employee data. KassenBoost provides private guidance; each employee makes any subsequent decision independently."
   },
   "bavLeverage": {
-    "eyebrow": "Employer-funded pension",
-    "title": "EUR 676 for retirement. Around EUR 75 less current take-home pay.*",
-    "netEffectExplanation": "In the standard example, current take-home pay may fall by around EUR 71 to EUR 74 due to additional social-security contributions – rounded to around EUR 75.",
-    "description": "We separate what reaches the employee from what the company actually spends.",
-    "detailsIntro": "This figure is not a blanket promise. The full calculation remains open for review.",
+    "eyebrow": "Employer-funded pension · 2026 model example",
+    "title": "Around EUR 75 net impact. EUR 676 for retirement. 30 years of time.",
+    "titleLine1": "Around EUR 75 net impact.",
+    "titleLine2": "EUR 676 for retirement.",
+    "titleLine3": "30 years of time.",
+    "netEffectExplanation": "The roughly EUR 75 is not an employee contribution. It shows the potential reduction in take-home pay caused by additional social charges in the standard example.",
+    "description": "The employer funds the contract. In the standard example the employee sees around EUR 75 less take-home pay while EUR 676 a month builds a substantial retirement pot.",
+    "detailsIntro": "Assertive modelling. Fully disclosed.",
     "detailsShow": "Calculation, assumptions and sources",
     "detailsHide": "Close details",
-    "shortDisclaimer": "* Simplified 2026 standard model. Individual figures may vary; not a forecast or guarantee.",
+    "shortDisclaimer": "Simplified assertive 2026 model. Returns and monthly figures are illustrations, not a forecast, guarantee or tariff pension.",
+    "flow": {
+      "ariaLabel": "From potential take-home pay impact through the employer contribution to the 30-year model",
+      "formula": "30 years · 10% market assumption − 2 percentage points costs = 8% model return",
+      "employeeStage": "Employee today",
+      "employeeCaption": "potential reduction in take-home pay",
+      "employeeNote": "in the standard example — not a EUR 676 employee contribution",
+      "firstConnector": "Employer funds",
+      "contractStage": "Into the contract each month",
+      "contractCaption": "full employer-funded pension contribution",
+      "contractNote": "{{contributions}} contributed over 30 years",
+      "secondConnector": "30 years",
+      "futureStage": "What it could become",
+      "modeLabel": "Show model result",
+      "capitalTab": "Capital",
+      "monthlyTab": "Monthly",
+      "capitalCaption": "modelled retirement capital",
+      "capitalNote": "{{contributions}} in contributions plus model growth",
+      "monthlyGrossCaption": "monthly 4% model withdrawal before deductions",
+      "monthlyAfterCaption": "illustration after a flat {{deduction}}% model deduction",
+      "monthlyNote": "These monthly figures are a withdrawal model, not a guaranteed or lifelong tariff pension."
+    },
     "splitTitle": "In the standard model, the EUR 676 consists of two parts:",
     "splitFree": "EUR 338 exempt from tax and social-security contributions",
     "splitLiable": "EUR 338 tax-free and generally subject to social-security contributions",
@@ -202,8 +226,10 @@
     "standardFormula": "10% − 2 percentage points = 8% model return",
     "historicalContext": "Historical context: MSCI World USD Net Return, July 2011 to July 2026, as at July 31, 2026: 11.10% p.a. Mathematically 9.10% p.a. after the same cost assumption.",
     "source": "Open the MSCI factsheet",
-    "disclaimer": "* Simplified standard model for 2026. Potential net impact and employer cost depend on salary, contribution ceilings, health insurer and long-term-care insurance status, among other factors. Return figures are model assumptions or historical context, not a forecast or guarantee. No net pension is promised.",
-    "cta": "Calculate with your workforce"
+    "payoutModelTitle": "How the monthly figure is derived",
+    "payoutModel": "The illustration spreads 4% of the model capital across twelve months each year. We also show a flat 30% model deduction for potential tax and health and long-term-care contributions. The actual burden is individual; this is not a guaranteed or lifelong tariff pension.",
+    "disclaimer": "Simplified 2026 standard model. Potential take-home pay impact and employer cost depend on salary, contribution ceilings, health insurer and long-term-care status, among other factors. The 8% figure is an assertive model return after the visible cost assumption, not a forecast or guarantee. Tax, inflation and health and long-term-care contributions are approximated only in the flat 30% illustration.",
+    "cta": "Calculate your own example"
   },
   "faq": {
     "eyebrow": "Before the decision",
@@ -321,6 +347,9 @@
         "formula": "Selected model return",
         "contributionsPerPerson": "contributions per participant",
         "capitalPerPerson": "modelled capital per participant",
+        "monthlyGross": "monthly 4% model withdrawal before deductions",
+        "monthlyAfter": "after a flat {{deduction}}% model deduction",
+        "monthlyNote": "Illustration derived from the capital model — not a guaranteed or lifelong tariff pension.",
         "capitalGroup": "modelled group capital"
       }
     },
@@ -362,12 +391,22 @@
         "description": "The Federal Ministry of Health states a 3.6% general contribution rate for social long-term care insurance. The allocation can vary by number of children, age and place of employment.",
         "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
       },
+      "incomeTax": {
+        "publisher": "Federal Ministry of Finance · benefit phase",
+        "description": "Benefits from pension funds, pension schemes and direct insurance are treated for tax purposes under Section 22 no. 5 EStG in the benefit phase. The actual tax effect depends on the individual case.",
+        "url": "https://ao.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-03/II/inhalt.html"
+      },
+      "healthContributions": {
+        "publisher": "Section 229 SGB V · pension benefits",
+        "description": "Occupational pension benefits can be subject to statutory health and long-term-care contributions. Capital benefits are also converted into monthly amounts by law for this purpose; the individual case must be reviewed.",
+        "url": "https://www.gesetze-im-internet.de/sgb_5/__229.html"
+      },
       "open": "Open primary source"
     },
     "disclaimers": {
       "assumptions": "Standard social-charge assumption: statutory health insurance, 2.9% average additional contribution, one child and employment outside Saxony.",
       "legalFramework": "For the first employment relationship, the model assumes an eligible implementation route under Section 3 no. 63 EStG: pension fund, pension scheme or direct insurance. It assumes that the 2026 annual limits of EUR 8,112 tax-free and EUR 4,056 exempt from social-security contributions have not been used by other contributions and that twelve equal monthly contributions are paid. EUR 676 and EUR 338 are the monthly amounts derived from those annual limits.",
-      "projection": "Simplified model calculation, not a forecast or guarantee. The selected simplified return reduction is included; actual tariff costs and their effect are not fully represented without product documents. Tax, inflation and health and long-term-care contributions in the benefit phase are not included. Past performance is not a reliable indicator of future results.",
+      "projection": "Simplified model calculation, not a forecast or guarantee. The selected simplified return reduction is included; actual tariff costs and their effect are not fully represented without product documents. The monthly illustration spreads 4% of model capital over twelve months each year and additionally shows a flat 30% model deduction. It is not a guaranteed or lifelong tariff pension. Actual tax and health and long-term-care contributions are individual; inflation is not included. Past performance is not a reliable indicator of future results.",
       "payroll": "Average gross salary is only a planning approximation. Contribution ceilings, health insurer, care-insurance status, place of employment and further levies must be reviewed in payroll for every employee and payroll month. This is not tax or legal advice."
     },
     "cta": {

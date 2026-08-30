@@ -8,6 +8,11 @@ export const BAV_LIMITS_2026 = Object.freeze({
   averageAdditionalHealthRate: 0.029,
 });
 
+export const BAV_PAYOUT_MODEL = Object.freeze({
+  annualWithdrawalRate: 4,
+  modelDeductionRate: 30,
+});
+
 const STANDARD_SOCIAL_RATES = Object.freeze({
   pensionEmployee: 0.093,
   pensionEmployer: 0.093,
@@ -175,4 +180,24 @@ export const calculateBavScenarios = ({
         }),
       };
     });
+};
+
+export const calculateIllustrativeMonthlyWithdrawal = ({
+  capital,
+  annualWithdrawalRate = BAV_PAYOUT_MODEL.annualWithdrawalRate,
+  modelDeductionRate = BAV_PAYOUT_MODEL.modelDeductionRate,
+}) => {
+  assertFiniteRange('capital', capital);
+  assertFiniteRange('annualWithdrawalRate', annualWithdrawalRate, { max: 100 });
+  assertFiniteRange('modelDeductionRate', modelDeductionRate, { max: 100 });
+
+  const grossMonthlyWithdrawal = capital * (annualWithdrawalRate / 100) / 12;
+  const afterModelDeductionMonthly = grossMonthlyWithdrawal * (1 - modelDeductionRate / 100);
+
+  return {
+    annualWithdrawalRate,
+    modelDeductionRate,
+    grossMonthlyWithdrawal,
+    afterModelDeductionMonthly,
+  };
 };

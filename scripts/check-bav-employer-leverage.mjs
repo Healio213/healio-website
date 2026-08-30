@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import {
+  BAV_PAYOUT_MODEL,
   calculateAnnualizedReturn,
   calculateBavScenarios,
   calculateEmployerBavLeverage,
   calculateEmployerPlan,
+  calculateIllustrativeMonthlyWithdrawal,
 } from '../src/lib/bavEmployerLeverage.js';
 
 const round = (value, digits = 2) => Number(value.toFixed(digits));
@@ -123,6 +125,15 @@ const defaultScenario = calculateBavScenarios({
 assert.equal(defaultScenario.modelAnnualRate, 8);
 assert.equal(round(defaultScenario.projectedCapital), 952_180.2);
 
+const defaultPayout = calculateIllustrativeMonthlyWithdrawal({
+  capital: defaultScenario.projectedCapital,
+});
+
+assert.equal(BAV_PAYOUT_MODEL.annualWithdrawalRate, 4);
+assert.equal(BAV_PAYOUT_MODEL.modelDeductionRate, 30);
+assert.equal(round(defaultPayout.grossMonthlyWithdrawal), 3_173.93);
+assert.equal(round(defaultPayout.afterModelDeductionMonthly), 2_221.75);
+
 const historicalFifteenYearReturn = calculateAnnualizedReturn({
   startValue: 100,
   endValue: 484.83,
@@ -193,6 +204,24 @@ assert.throws(
     years: 30,
     annualRates: [-1],
     effectiveCostRate: 2,
+  }),
+  RangeError,
+);
+assert.throws(
+  () => calculateIllustrativeMonthlyWithdrawal({ capital: -1 }),
+  RangeError,
+);
+assert.throws(
+  () => calculateIllustrativeMonthlyWithdrawal({
+    capital: 952_180.2,
+    annualWithdrawalRate: 101,
+  }),
+  RangeError,
+);
+assert.throws(
+  () => calculateIllustrativeMonthlyWithdrawal({
+    capital: 952_180.2,
+    modelDeductionRate: 101,
   }),
   RangeError,
 );
