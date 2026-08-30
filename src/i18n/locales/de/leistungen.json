@@ -128,7 +128,8 @@
     "description": "Beim ambulanten Healio-Konzept können ein geeigneter Kassenbonus und eine passende Zusatzversicherung zusammenspielen. Wir zeigen dir transparent, welche Voraussetzungen gelten und wie die Rechnung für dich aussieht.",
     "features": ["Heilpraktiker und Naturheilkunde", "Osteopathie und Vorsorge", "Sehhilfen und weitere Leistungen", "Bonus und Tarif gemeinsam betrachten"],
     "note": "Die konkrete Leistung und der effektive Beitrag hängen vom gewählten Tarif, deiner persönlichen Situation und dem tatsächlich erreichten Kassenbonus ab.",
-    "cta": "Healio-Konzept verstehen"
+    "cta": "Healio-Konzept verstehen",
+    "kassenboostCta": "Krankenkassen mit KassenBoost vergleichen"
   },
   "process": {
     "eyebrow": "So arbeitet Healio",

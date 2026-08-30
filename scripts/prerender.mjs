@@ -9,9 +9,9 @@
  * ersetzt React das Markup wie gewohnt (gleiches DOM, kein sichtbarer
  * Unterschied).
  *
- * Fail-safe: Startet der Browser nicht (z. B. fehlende Systemlibs im
- * CI) oder scheitert eine einzelne Route, bleibt die jeweilige Seite
- * einfach Meta-only wie bisher; der Build schlägt NICHT fehl.
+ * Fail-closed: Fehlt der Browser oder bleibt eine indexierbare Route
+ * leer, schlägt der Build fehl. So kann keine weitere Meta-only-Seite
+ * unbemerkt produktiv ausgeliefert werden.
  *
  * Usage: node scripts/prerender.mjs
  */
@@ -20,6 +20,7 @@ import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isNoindexRoute, validatePrerenderOutput } from './check-prerender-output.mjs';
 import { seoRoutes } from './seo-routes.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -109,6 +110,49 @@ async function prerenderRoute(page, routePath) {
   return page.evaluate(() => document.getElementById('root').innerHTML);
 }
 
+async function createPage(browser) {
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1280, height: 900 });
+
+  // Externe Requests blocken: keine Analytics-Hits, keine Widgets,
+  // keine CDN-Abhängigkeit im Build. Content-API bleibt erlaubt.
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const host = new URL(req.url()).hostname;
+    if (host === '127.0.0.1' || host === 'localhost' || ALLOWED_EXTERNAL_HOSTS.has(host)) {
+      req.continue();
+    } else {
+      req.abort();
+    }
+  });
+
+  return page;
+}
+
+async function renderRouteWithRetry(browser, routePath, attempts = 2) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const page = await createPage(browser);
+    const pageErrors = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    try {
+      return await prerenderRoute(page, routePath);
+    } catch (error) {
+      const details = pageErrors.length > 0 ? `; Browserfehler: ${pageErrors.join(' | ')}` : '';
+      lastError = new Error(`${error.message}${details}`);
+      if (attempt < attempts) {
+        console.warn(`[prerender] ${routePath}: Versuch ${attempt} fehlgeschlagen, neuer Browser-Tab folgt.`);
+      }
+    } finally {
+      await page.close().catch(() => {});
+    }
+  }
+
+  throw lastError;
+}
+
 async function launchBrowser() {
   // 1. Normales puppeteer (lokal, laedt eigenen Chrome)
   try {
@@ -138,59 +182,76 @@ async function launchBrowser() {
 async function main() {
   const browser = await launchBrowser();
   if (!browser) {
-    console.warn('[prerender] Kein Browser verfuegbar, Seiten bleiben Meta-only.');
-    return;
+    throw new Error('Kein Browser verfügbar; indexierbare Seiten würden Meta-only bleiben.');
   }
 
   const server = await serveDist();
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 900 });
-
-  // Externe Requests blocken: keine Analytics-Hits, keine Widgets,
-  // keine CDN-Abhängigkeit im Build. Content-API bleibt erlaubt.
-  await page.setRequestInterception(true);
-  page.on('request', (req) => {
-    const host = new URL(req.url()).hostname;
-    if (host === '127.0.0.1' || host === 'localhost' || ALLOWED_EXTERNAL_HOSTS.has(host)) {
-      req.continue();
-    } else {
-      req.abort();
-    }
-  });
-
   let ok = 0;
   let failed = 0;
-  for (const route of seoRoutes) {
-    const htmlPath = routeToHtmlPath(route.path);
-    if (!fs.existsSync(htmlPath)) {
-      console.warn(`[prerender] übersprungen (kein HTML): ${route.path}`);
-      continue;
+  const fatalErrors = [];
+
+  try {
+    for (const route of seoRoutes) {
+      const htmlPath = routeToHtmlPath(route.path);
+      if (!fs.existsSync(htmlPath)) {
+        failed += 1;
+        fatalErrors.push(`${route.path}: HTML-Datei fehlt`);
+        console.error(`[prerender] FEHLER bei ${route.path}: HTML-Datei fehlt.`);
+        continue;
+      }
+
+      const html = fs.readFileSync(htmlPath, 'utf-8');
+      const marker = '<div id="root"></div>';
+      if (!html.includes(marker)) {
+        // Blog-Artikel werden schon von generate-seo-pages.mjs mit
+        // Artikel-Inhalt vorbefüllt und vom Abschlusscheck validiert.
+        console.log(`[prerender] übersprungen (bereits vorbefüllt): ${route.path}`);
+        continue;
+      }
+
+      try {
+        // Eine neue Page pro Route verhindert, dass Router-, Sprach- oder
+        // Animationszustand von der vorherigen Route den Snapshot beeinflusst.
+        const inner = await renderRouteWithRetry(browser, route.path);
+        if (!inner || inner.length < 500) {
+          throw new Error(`Inhalt zu kurz (${inner ? inner.length : 0} Zeichen)`);
+        }
+        fs.writeFileSync(htmlPath, html.replace(marker, `<div id="root">${inner}</div>`));
+        ok += 1;
+        console.log(`[prerender] ok: ${route.path} (${Math.round(inner.length / 1024)} kB)`);
+      } catch (err) {
+        failed += 1;
+        const message = err.message.split('\n')[0];
+        if (isNoindexRoute(route)) {
+          console.warn(`[prerender] WARNUNG bei noindex-Route ${route.path}: ${message}`);
+        } else {
+          fatalErrors.push(`${route.path}: ${message}`);
+          console.error(`[prerender] FEHLER bei ${route.path}: ${message}`);
+        }
+      }
     }
-    const html = fs.readFileSync(htmlPath, 'utf-8');
-    const marker = '<div id="root"></div>';
-    if (!html.includes(marker)) {
-      // Blog-Artikel werden schon von generate-seo-pages.mjs mit
-      // Artikel-Inhalt vorbefuellt und behalten diesen.
-      console.log(`[prerender] übersprungen (bereits vorbefüllt): ${route.path}`);
-      continue;
-    }
-    try {
-      const inner = await prerenderRoute(page, route.path);
-      if (!inner || inner.length < 500) throw new Error(`Inhalt zu kurz (${inner ? inner.length : 0} Zeichen)`);
-      fs.writeFileSync(htmlPath, html.replace(marker, `<div id="root">${inner}</div>`));
-      ok += 1;
-      console.log(`[prerender] ok: ${route.path} (${Math.round(inner.length / 1024)} kB)`);
-    } catch (err) {
-      failed += 1;
-      console.warn(`[prerender] FEHLER bei ${route.path}: ${err.message.split('\n')[0]} (Seite bleibt Meta-only)`);
-    }
+  } finally {
+    await browser.close().catch(() => {});
+    await new Promise((resolve) => server.close(resolve));
   }
 
-  await browser.close();
-  server.close();
+  const validation = validatePrerenderOutput({ distDir });
+  fatalErrors.push(...validation.errors);
+
+  if (fatalErrors.length > 0) {
+    const uniqueErrors = [...new Set(fatalErrors)];
+    throw new Error(
+      `Prerender-Ausgabe unvollständig (${uniqueErrors.length} Fehler):\n- ${uniqueErrors.join('\n- ')}`,
+    );
+  }
+
   console.log(`[prerender] fertig: ${ok} Seiten gerendert, ${failed} fehlgeschlagen.`);
+  console.log(
+    `[prerender-check] ok: ${validation.checkedIndexable} indexierbare und ${validation.checkedNoindex} noindex-Routen geprüft.`,
+  );
 }
 
 main().catch((err) => {
-  console.warn(`[prerender] unerwarteter Fehler: ${err.message}, Build läuft weiter.`);
+  console.error(`[prerender] BUILD ABBRUCH: ${err.message}`);
+  process.exitCode = 1;
 });

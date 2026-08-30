@@ -1,11 +1,14 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const HomeFinalCTA = () => {
   const { t } = useTranslation('home');
+  const { getPath } = useLanguage();
 
   return (
     <section className="bg-[#FDFAF6] px-4 pb-8 sm:px-6 sm:pb-10" aria-labelledby="home-final-cta-title">
@@ -18,6 +21,13 @@ const HomeFinalCTA = () => {
               {t('finalCta.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate-300 lg:mx-0">{t('finalCta.description')}</p>
+            <Link
+              to={getPath('kassenboost')}
+              className="home-focus mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-home-mint underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
+            >
+              {t('finalCta.detailsCta')}
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </Link>
           </div>
 
           <a

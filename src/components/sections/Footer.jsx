@@ -159,6 +159,8 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
               <li><Link to={getPath('kassenbonus')} className="hover:text-healio-primary transition-colors">{t('footer.kassenbonus')}</Link></li>
+              <li><Link to={getPath('kassenboost')} className="hover:text-healio-primary transition-colors">{t('footer.kassenboost')}</Link></li>
+              <li><Link to={getPath('tierkrankenversicherung')} className="hover:text-healio-primary transition-colors">{t('footer.tierkrankenversicherung')}</Link></li>
             </ul>
           </div>
           <div>

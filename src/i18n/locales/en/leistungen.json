@@ -113,7 +113,8 @@
     "description": "With the outpatient Healio concept, a suitable health fund bonus and supplementary insurance can work together. We clearly explain the requirements and show what the calculation looks like for you.",
     "features": ["Alternative practitioners and natural medicine", "Osteopathy and preventive care", "Glasses and other services", "Consider bonus and plan together"],
     "note": "Actual benefits and your effective contribution depend on the selected plan, your personal situation and the health fund bonus you achieve.",
-    "cta": "Understand the Healio concept"
+    "cta": "Understand the Healio concept",
+    "kassenboostCta": "Compare health insurers with KassenBoost"
   },
   "process": {
     "eyebrow": "How Healio works",
