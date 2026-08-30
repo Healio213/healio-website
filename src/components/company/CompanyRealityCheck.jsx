@@ -10,9 +10,9 @@ const CompanyRealityCheck = () => {
   const questions = t('realityCheck.questions', { returnObjects: true });
 
   return (
-    <section className="bg-[#06131c] pb-20 text-white lg:pb-24" aria-labelledby="company-reality-check-title">
+    <section className="bg-[#06131c] pb-14 text-white lg:pb-20" aria-labelledby="company-reality-check-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 border-t border-white/10 pt-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16 lg:pt-16">
+        <div className="grid gap-8 border-t border-white/10 pt-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14 lg:pt-14">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8ee7ca]">{t('realityCheck.eyebrow')}</p>
             <h2
@@ -26,9 +26,9 @@ const CompanyRealityCheck = () => {
           <div>
             <ol className="grid gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-3">
               {questions.map((question, index) => (
-                <li key={question} className="bg-[#0b202a] p-6">
+                <li key={question} className="bg-[#0b202a] p-5 sm:p-6">
                   <span className="font-display text-xs font-extrabold tracking-[0.18em] text-[#8ee7ca]">0{index + 1}</span>
-                  <p className="mt-5 font-display text-base font-extrabold leading-6 tracking-[-0.015em] text-white">{question}</p>
+                  <p className="mt-3 font-display text-base font-extrabold leading-6 tracking-[-0.015em] text-white">{question}</p>
                 </li>
               ))}
             </ol>

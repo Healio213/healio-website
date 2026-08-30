@@ -5,7 +5,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 const visuals = [
   { kind: 'broker', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
   { kind: 'thinking', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
-  { kind: 'advisor', tone: 'lavender', surface: 'bg-[#F2ECFB]', border: 'border-[#DED3EF]' },
+  { kind: 'support', tone: 'lavender', surface: 'bg-[#F2ECFB]', border: 'border-[#DED3EF]' },
 ];
 
 const HomeTrust = () => {

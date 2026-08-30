@@ -127,6 +127,7 @@ const FriendlyIcon = ({
     || healioSoftClayIcons[icon]
     || friendlyIconAssets[emojiKinds[emoji]];
   const isLabelled = !decorative && Boolean(label);
+  const assetScaleClass = assetSrc?.endsWith('/trust-broker-headset.webp') ? 'scale-[1.22]' : '';
 
   return (
     <span
@@ -145,7 +146,7 @@ const FriendlyIcon = ({
           height="192"
           loading="lazy"
           decoding="async"
-          className={`relative h-[94%] w-[94%] select-none object-contain drop-shadow-[0_5px_7px_rgba(25,44,55,0.14)] ${imageClassName}`}
+          className={`relative h-[94%] w-[94%] select-none object-contain drop-shadow-[0_5px_7px_rgba(25,44,55,0.14)] ${assetScaleClass} ${imageClassName}`}
         />
       ) : (
         <span

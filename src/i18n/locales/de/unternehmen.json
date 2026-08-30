@@ -4,23 +4,23 @@
     "description": "Healio bündelt bAV, bKV, BGM-Koordination und Mitarbeiterkommunikation zu einem betrieblichen Vorsorgesystem – transparent, wirtschaftlich und dauerhaft begleitet."
   },
   "hero": {
-    "eyebrow": "Betriebliches Vorsorge- und Gesundheitsmanagement",
-    "titleLead": "Gesundheit fördern. Mitarbeiter binden.",
-    "titleHighlight": "Vorsorge richtig gestalten.",
-    "description": "Einzelne Benefits sind schnell gekauft. Healio macht daraus ein betreutes System aus bAV, bKV, BGM-Koordination und verständlicher Mitarbeiterkommunikation.",
+    "eyebrow": "Betriebliche Vorsorge für Unternehmen",
+    "titleLead": "Vorsorge, die Mitarbeiter verstehen.",
+    "titleHighlight": "Ein System, das Sie steuern.",
+    "description": "Healio prüft Ihren Bestand und bündelt bAV, bKV und Gesundheitsmanagement zu einem betreuten System.",
     "analysisCta": "Vorsorge-Check starten",
-    "solutionsCta": "30-Jahre-Wirkung ansehen",
+    "solutionsCta": "Bausteine ansehen",
     "proof": ["Unabhängiger Makler", "Bestand einbezogen", "Dauerhaft begleitet"]
   },
   "realityCheck": {
     "eyebrow": "60-Sekunden-Realitätscheck",
-    "title": "Können Sie diese drei Fragen heute belastbar beantworten?",
+    "title": "Wo steht Ihre Versorgung heute?",
     "questions": [
       "Was kostet Ihre bestehende Versorgung – inklusive Produktkosten?",
       "Welcher Anteil Ihrer Belegschaft versteht und nutzt sie?",
       "Wer prüft regelmäßig Anbieter, Zuschüsse und Kommunikation?"
     ],
-    "conclusion": "Wenn eine Antwort fehlt, besteht Handlungsbedarf – nicht zwingend für einen Wechsel, aber für eine ehrliche Bestandsaufnahme.",
+    "conclusion": "Eine Antwort fehlt? Dann lohnt sich eine ehrliche Bestandsaufnahme – ohne Wechselpflicht.",
     "cta": "Vorsorge-Check starten"
   },
   "calculator": {
@@ -61,9 +61,11 @@
   "responsibility": {
     "eyebrow": "Verantwortung mit langem Horizont",
     "title": "Die Entscheidung endet nicht mit dem Vertragsabschluss.",
-    "lead": "Die gesetzliche Rente schafft eine Grundlage. Zusätzliche Sicherheit entsteht dort, wo Vorsorge früh beginnt, verständlich bleibt und über Jahrzehnte konsequent begleitet wird.",
+    "lead": "Langfristige Vorsorge braucht verständliche Entscheidungen und dauerhafte Begleitung.",
     "description": "Für Unternehmensleitungen ist bAV deshalb mehr als Verwaltung. Produktkosten, Renditeannahmen, Teilnahme und Kommunikation wirken zusammen – und bestimmen mit, was in 30 Jahren bei der Belegschaft ankommt.",
-    "position": "Healio macht diese Wirkung sichtbar, ohne Renditen zu versprechen. Wir vergleichen Annahmen, prüfen bestehende Lösungen und übersetzen langfristige Folgen in Entscheidungen, die heute belastbar sind.",
+    "position": "Healio macht die Wirkung sichtbar, ohne Renditen zu versprechen. Wir prüfen Bestand und Annahmen und übersetzen langfristige Folgen in belastbare Entscheidungen.",
+    "detailsShow": "Einordnung & Quellen",
+    "detailsHide": "Einordnung schließen",
     "sources": {
       "dai": {
         "publisher": "Deutsches Aktieninstitut",
@@ -85,48 +87,52 @@
   "solutions": {
     "eyebrow": "Betriebliches Vorsorgemanagement",
     "title": "Vier Bausteine. Ein Vorsorgesystem.",
-    "description": "Einzelne Verträge erzeugen noch keine Versorgung. Erst das Zusammenspiel aus Vorsorge, Gesundheit, Prävention und laufender Steuerung macht aus Leistungen ein System, das Mitarbeiter verstehen und Unternehmen beherrschen können.",
+    "description": "Wählen Sie den größten Hebel. Leistungen, Grenzen und Hinweise öffnen Sie nur bei Bedarf.",
+    "detailsShow": "Details ansehen",
+    "detailsHide": "Details schließen",
     "items": [
       {
         "key": "pension",
         "horizon": "Morgen · bAV",
-        "title": "Altersvorsorge, die nicht nur verwaltet, sondern wirkt.",
-        "description": "Wir prüfen bestehende Lösungen und machen Kosten, Renditeannahmen, Garantien, Zuschüsse und die Wirkung auf die spätere Versorgung verständlich.",
+        "title": "bAV, die nachvollziehbar wirkt.",
+        "description": "Wir prüfen Bestand, Kosten, Zuschüsse und Annahmen – verständlich bis auf Mitarbeiterebene.",
         "points": ["Bestand und Kosten transparent prüfen", "Geeignete Durchführungswege einordnen", "Versorgung je Mitarbeiter verständlich erklären"]
       },
       {
         "key": "health",
         "horizon": "Heute · bKV",
-        "title": "Gesundheitsleistungen, die Mitarbeiter sofort verstehen.",
-        "description": "Eine betriebliche Krankenversicherung macht Arbeitgeberleistung unmittelbar erlebbar. Wir entwickeln einen Leistungsumfang, der zur Belegschaft und zum verfügbaren Budget passt.",
+        "title": "bKV, die sofort ankommt.",
+        "description": "Wir entwickeln einen Leistungsumfang, der zur Belegschaft und zum verfügbaren Budget passt.",
         "points": ["Planbarer Beitrag je versichertem Mitarbeiter", "Leistungen passend zur Belegschaft auswählen", "Einführung und Nutzung verständlich begleiten"],
         "note": "Welche Leistungen gelten, hängt vom gewählten Tarif und den jeweiligen Versicherungsbedingungen ab."
       },
       {
         "key": "prevention",
         "horizon": "BGM-Koordination & Prävention",
-        "title": "Ein Gesundheitstag ist noch kein Gesundheitsmanagement.",
-        "description": "Healio unterstützt die Koordination freiwilliger Gesundheitsförderungs- und Präventionsangebote und bindet die zuständigen internen und externen Stellen ein.",
+        "title": "Prävention, die zum Alltag passt.",
+        "description": "Wir koordinieren freiwillige Gesundheits- und Präventionsangebote mit den zuständigen Stellen.",
         "points": ["Bedarf und Zielgruppen strukturiert erfassen", "Qualifizierte Maßnahmen auswählen", "Gesundheitskommunikation planbar machen"],
         "note": "Healio unterstützt bei BGM-Koordination und freiwilliger Gesundheitsförderung. Gesetzliche Aufgaben aus Arbeitsschutz, BEM oder Betriebsmedizin bleiben bei den jeweils verantwortlichen Stellen."
       },
       {
         "key": "management",
         "horizon": "Dauerhaft · Steuerung & Kommunikation",
-        "title": "Ein System braucht jemanden, der es am Laufen hält.",
-        "description": "Vorsorgemanagement endet nicht mit der Unterschrift. Healio hält Bestand, Anbieter, Prozesse und Kommunikation zusammen und bleibt zentraler Ansprechpartner.",
+        "title": "Betreuung, die nach dem Start bleibt.",
+        "description": "Healio hält Bestand, Anbieter, Prozesse und Kommunikation zusammen und bleibt zentraler Ansprechpartner.",
         "points": ["Bestehende Lösungen sinnvoll einbinden", "Personalbereich und Lohnabrechnung unterstützen", "Versorgung regelmäßig überprüfen und nachsteuern"]
       }
     ]
   },
   "economics": {
     "eyebrow": "Wirtschaftlichkeit & Gestaltung",
-    "title": "Wer nur auf den Beitrag schaut, rechnet unvollständig.",
-    "description": "Arbeitgeberfinanzierte Vorsorge- und Gesundheitsleistungen können – abhängig von Baustein und Gestaltung – als Betriebsausgaben berücksichtigt werden. Zusätzliche gesetzliche Steuer- und Beitragsvorteile können den tatsächlichen Unternehmensaufwand weiter verändern.",
+    "title": "Was kostet Ihr Benefit wirklich?",
+    "description": "Beitrag, Abgaben und steuerliche Gestaltung bestimmen gemeinsam den tatsächlichen Unternehmensaufwand.",
     "cta": "Nettoaufwand im Vorsorge-Check einordnen",
     "summaryTitle": "Absetzbar heißt nicht kostenlos.",
-    "summaryText": "Ein Betriebsausgabenabzug ist keine vollständige Erstattung. Entscheidend sind Rechtsform, Ergebnis, Steuersatz, Leistungsart und konkrete Umsetzung. Healio macht diese Faktoren transparent und stimmt die Umsetzung auf Wunsch mit Lohnbuchhaltung und steuerlicher Beratung ab.",
+    "summaryText": "Ein Betriebsausgabenabzug ist keine Erstattung. Die Wirkung hängt von Rechtsform, Steuersatz, Leistungsart und konkreter Umsetzung ab.",
     "sourceLabel": "Amtliche Grundlage",
+    "detailsShow": "Steuerliche Einordnung & Quellen",
+    "detailsHide": "Einordnung schließen",
     "facts": [
       {
         "key": "expense",
@@ -153,8 +159,8 @@
   },
   "process": {
     "eyebrow": "Vom Produkt zum Management",
-    "title": "Einführung ist der Anfang. Nicht das Ende.",
-    "description": "Vorsorge entfaltet erst Wirkung, wenn Mitarbeiter sie verstehen und der Personalbereich sie verlässlich steuern kann. Healio schafft dafür einen belastbaren Prozess.",
+    "title": "Prüfen. Rechnen. Einführen. Begleiten.",
+    "description": "Ein klarer Prozess für Mitarbeiter und Personalbereich – vom Bestand bis zur laufenden Betreuung.",
     "steps": [
       {"title": "Bestand verstehen", "description": "Wir prüfen Verträge, Kosten, Zuschüsse, Teilnahme und die bisherige Kommunikation."},
       {"title": "Konzept rechnen", "description": "Sie sehen nachvollziehbar, welche bAV-, bKV- und Gesundheitsstruktur zu Unternehmen und Budget passt."},
@@ -164,8 +170,8 @@
   },
   "workforce": {
     "eyebrow": "KassenBoost für Mitarbeiter",
-    "title": "Ein guter Vergleich braucht keinen Arbeitgeberblick.",
-    "description": "Sie geben Ihren Mitarbeitern einen freiwilligen, kostenlosen Zugang zu KassenBoost. Der Vergleich funktioniert ohne Kontaktdaten und ohne Weitergabe an Healio oder das Unternehmen.",
+    "title": "Kostenloser Mehrwert. Ohne Arbeitgeberblick.",
+    "description": "Mit KassenBoost vergleichen Mitarbeiter freiwillig und kostenlos. Jede Entscheidung bleibt privat.",
     "cardEyebrow": "Privater Mitarbeiterzugang",
     "cardTitle": "Mitarbeiter vergleichen selbst.",
     "privacyTitle": "Was privat bleibt",
@@ -173,13 +179,19 @@
     "points": ["Freiwillig und kostenlos", "Ohne Kontaktdaten", "Keine Weitergabe individueller Ergebnisse"],
     "primaryCta": "KassenBoost öffnen",
     "secondaryCta": "Zugang für die Belegschaft besprechen",
+    "detailsShow": "Ablauf & Datenschutz",
+    "detailsHide": "Details schließen",
     "note": "Die feste Weiterleitung übermittelt keine Mitarbeiterdaten. KassenBoost dient der privaten Orientierung; jede weitere Entscheidung trifft der Mitarbeiter selbst."
   },
   "bavLeverage": {
     "eyebrow": "Arbeitgeberfinanzierte bAV",
-    "title": "676 EUR Vorsorgebeitrag. Rund 75 EUR möglicher Nettoeffekt.*",
+    "title": "676 EUR Vorsorge. Rund 75 EUR weniger Auszahlungsnetto.*",
     "netEffectExplanation": "Im Standardbeispiel kann das laufende Auszahlungsnetto durch zusätzliche Sozialabgaben um rund 71 bis 74 EUR sinken – gerundet rund 75 EUR.",
-    "description": "Der Hebel wird sichtbar, wenn Vorsorgebeitrag, Sozialabgaben und langfristige Modellrendite sauber voneinander getrennt werden.",
+    "description": "Wir zeigen getrennt, was beim Mitarbeiter ankommt und was das Unternehmen tatsächlich aufwendet.",
+    "detailsIntro": "Die Zahl ist kein Pauschalversprechen. Der Rechenweg bleibt vollständig prüfbar.",
+    "detailsShow": "Rechenweg, Annahmen & Quellen",
+    "detailsHide": "Details schließen",
+    "shortDisclaimer": "* Vereinfachtes Standardmodell 2026. Individuelle Werte können abweichen; keine Prognose oder Garantie.",
     "splitTitle": "Die 676 EUR bestehen im Standardmodell aus zwei Teilen:",
     "splitFree": "338 EUR steuer- und sozialabgabenfrei",
     "splitLiable": "338 EUR steuerfrei, grundsätzlich sozialversicherungspflichtig",
@@ -195,8 +207,8 @@
   },
   "faq": {
     "eyebrow": "Vor der Entscheidung",
-    "title": "Vier Fragen, die jedes Unternehmen beantworten sollte.",
-    "description": "Die größte Gefahr ist nicht eine falsche Einzelentscheidung. Es ist ein System, das niemand mehr grundsätzlich hinterfragt.",
+    "title": "Was Unternehmen vorher wissen wollen.",
+    "description": "Die wichtigsten Antworten – klar, ergebnisoffen und ohne Kleingedrucktes zu verstecken.",
     "items": [
       {
         "question": "Müssen bestehende Verträge ersetzt werden?",
