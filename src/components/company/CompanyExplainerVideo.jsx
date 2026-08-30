@@ -5,15 +5,15 @@ import { useLanguage } from '@/hooks/useLanguage';
 const VIDEO_CONFIG = Object.freeze({
   system: {
     anchor: 'vorsorgemanagement-erklaervideo',
-    source: '/videos/unternehmen/vorsorgemanagement-a-v1.mp4',
-    poster: '/videos/unternehmen/vorsorgemanagement-a-v1-poster.webp',
-    captions: '/videos/unternehmen/vorsorgemanagement-a-v1-de.vtt',
+    source: '/videos/unternehmen/vorsorgemanagement-a-v3.mp4',
+    poster: '/videos/unternehmen/vorsorgemanagement-a-v3-poster.webp',
+    captions: '/videos/unternehmen/vorsorgemanagement-a-v3-de.vtt',
   },
   bav: {
     anchor: 'bav-zahlenbeispiel-video',
-    source: '/videos/unternehmen/bav-zahlenbeispiel-b-v1.mp4',
-    poster: '/videos/unternehmen/bav-zahlenbeispiel-b-v1-poster.webp',
-    captions: '/videos/unternehmen/bav-zahlenbeispiel-b-v1-de.vtt',
+    source: '/videos/unternehmen/bav-zahlenbeispiel-b-v3.mp4',
+    poster: '/videos/unternehmen/bav-zahlenbeispiel-b-v3-poster.webp',
+    captions: '/videos/unternehmen/bav-zahlenbeispiel-b-v3-de.vtt',
   },
 });
 
