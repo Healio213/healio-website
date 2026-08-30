@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import CompanyHero from '@/components/company/CompanyHero';
 import CompanyRealityCheck from '@/components/company/CompanyRealityCheck';
+import CompanyExplainerVideo from '@/components/company/CompanyExplainerVideo';
 import ResponsibilityStory from '@/components/company/ResponsibilityStory';
 import CompanySolutions from '@/components/company/CompanySolutions';
 import CompanyBavLeverage from '@/components/company/CompanyBavLeverage';
@@ -65,8 +66,10 @@ const UnternehmenPage = () => {
       <article className="w-full overflow-hidden bg-white">
         <CompanyHero />
         <CompanyRealityCheck />
+        <CompanyExplainerVideo kind="system" />
         <CompanySolutions />
         <CompanyBavLeverage />
+        <CompanyExplainerVideo kind="bav" />
         <ResponsibilityStory />
         <CompanyEconomics />
         <CompanyProcess />

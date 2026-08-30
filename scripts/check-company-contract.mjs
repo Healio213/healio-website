@@ -14,6 +14,7 @@ const responsibility = readText('src/components/company/ResponsibilityStory.jsx'
 const solutions = readText('src/components/company/CompanySolutions.jsx');
 const economics = readText('src/components/company/CompanyEconomics.jsx');
 const workforce = readText('src/components/company/CompanyWorkforceConcept.jsx');
+const explainerVideos = readText('src/components/company/CompanyExplainerVideo.jsx');
 assert(
   fs.existsSync(path.join(rootDir, 'src/components/company/CompanyBavLeverage.jsx')),
   'Der kompakte bAV-Hebel fehlt.',
@@ -53,6 +54,22 @@ assert.match(economics, /bundesgesundheitsministerium\.de/);
 assert.match(workforce, /healio-belegschaft/);
 assert.match(workforce, /https:\/\/kassenboost\.de\/\?utm_source=healio&utm_medium=website&utm_campaign=arbeitgeberzugang/);
 assert.match(workforce, /useLanguage/);
+assert.match(explainerVideos, /lang !== 'de'/);
+assert.match(explainerVideos, /controls/);
+assert.match(explainerVideos, /playsInline/);
+assert.match(explainerVideos, /preload="metadata"/);
+assert.match(explainerVideos, /kind="captions"/);
+assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
+assert.match(explainerVideos, /vorsorgemanagement-a-v1\.mp4/);
+assert.match(explainerVideos, /bav-zahlenbeispiel-b-v1\.mp4/);
+[
+  'public/videos/unternehmen/vorsorgemanagement-a-v1.mp4',
+  'public/videos/unternehmen/vorsorgemanagement-a-v1-poster.webp',
+  'public/videos/unternehmen/vorsorgemanagement-a-v1-de.vtt',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v1.mp4',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v1-poster.webp',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v1-de.vtt',
+].forEach((relativePath) => assert(fs.existsSync(path.join(rootDir, relativePath)), `${relativePath} fehlt.`));
 assert.match(workforce, /getPath\('potenzialanalyse'\)/);
 assert.match(workforce, /\?interest=kassenboost/);
 assert.doesNotMatch(workforce, /to=["']\/potenzialanalyse\?interest=kassenboost/);
@@ -111,6 +128,7 @@ assert.match(en.faq.items[3].answer, /may involve costs/);
 [
   'CompanyHero',
   'CompanyRealityCheck',
+  'CompanyExplainerVideo',
   'CompanyWorkforceConcept',
   'CompanySolutions',
   'CompanyBavLeverage',
@@ -124,6 +142,15 @@ assert.doesNotMatch(page, /CohortImpactSection/);
 assert(
   page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanySolutions />'),
   'Der Reality Check muss vor den Produktbausteinen stehen.',
+);
+assert(
+  page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanyExplainerVideo kind="system" />')
+    && page.indexOf('<CompanyExplainerVideo kind="system" />') < page.indexOf('<CompanySolutions />'),
+  'Video A muss zwischen Reality Check und Produktbausteinen stehen.',
+);
+assert(
+  page.indexOf('<CompanyBavLeverage />') < page.indexOf('<CompanyExplainerVideo kind="bav" />'),
+  'Video B muss direkt nach dem bAV-Zahlenbeispiel stehen.',
 );
 assert(
   page.indexOf('<CompanyProcess />') < page.indexOf('<CompanyWorkforceConcept />'),

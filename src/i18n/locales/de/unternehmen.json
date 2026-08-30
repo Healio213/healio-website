@@ -23,6 +23,26 @@
     "conclusion": "Eine Antwort fehlt? Dann lohnt sich eine ehrliche Bestandsaufnahme – ohne Wechselpflicht.",
     "cta": "Vorsorge-Check starten"
   },
+  "explainerVideos": {
+    "system": {
+      "eyebrow": "In 95 Sekunden erklärt",
+      "title": "Vier Bausteine. Ein betreutes Vorsorgesystem.",
+      "description": "Vier Bausteine werden zu einem betreuten System: mit klaren Rollen, getrennten Datenwegen und einer Begleitung, die nach der Einführung nicht endet.",
+      "note": "Erst den Bestand und die Ziele prüfen. Dann entscheiden, welche Module wirklich passen.",
+      "videoLabel": "Erklärvideo zum betrieblichen Vorsorgemanagement von Healio",
+      "fallback": "Ihr Browser kann dieses Video nicht wiedergeben.",
+      "captionHint": "Untertitel können im Videoplayer eingeschaltet werden."
+    },
+    "bav": {
+      "eyebrow": "Das Zahlenbeispiel als Video",
+      "title": "676 EUR Vorsorge. Rund 75 EUR möglicher Nettoeffekt.",
+      "description": "Nita führt durch das vollständig arbeitgeberfinanzierte 30-Jahres-Modell und trennt Einzahlungen, Modellkapital und monatlichen Orientierungswert sichtbar voneinander.",
+      "note": "Offensive Modellrechnung, keine Prognose, Garantie oder Tarif-Rente. Der konkrete Vertrag und die Lohnabrechnung entscheiden.",
+      "videoLabel": "Erklärvideo zum arbeitgeberfinanzierten bAV-Zahlenbeispiel von Healio",
+      "fallback": "Ihr Browser kann dieses Video nicht wiedergeben.",
+      "captionHint": "Alle Annahmen und Einschränkungen bleiben im Video sichtbar; Untertitel sind zuschaltbar."
+    }
+  },
   "calculator": {
     "eyebrow": "Kohortenrechnung {{startYear}}–{{endYear}}",
     "title": "Der Einzelfall wird zur Verantwortung.",
