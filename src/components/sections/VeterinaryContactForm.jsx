@@ -5,7 +5,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Check, FileCheck2, Loader2, Send } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { Check, Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -144,8 +145,8 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                 ))}
               </ol>
 
-              <div className="mt-7 flex items-start gap-3 rounded-2xl bg-white/[0.06] px-5 py-4 text-sm leading-relaxed text-slate-300">
-                <FileCheck2 className="mt-0.5 h-5 w-5 shrink-0 text-[#76e2bd]" />
+              <div className="mt-7 flex flex-col items-start gap-4 rounded-2xl bg-white/[0.06] px-5 py-4 text-sm leading-relaxed text-slate-300 sm:flex-row">
+                <FriendlyIcon kind="comparison" tone="butter" size="sm" className="mt-0.5" />
                 <p>{t('form.next.orderBoundary')}</p>
               </div>
             </div>
@@ -215,8 +216,14 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
               )}
 
               <div className="rounded-2xl bg-[#0d332e] p-5 text-white sm:p-6">
-                <div className="flex items-start gap-3">
-                  <FileCheck2 className="mt-0.5 h-6 w-6 shrink-0 text-[#76e2bd]" />
+                <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
+                  <FriendlyIcon
+                    kind="mandate"
+                    tone="mint"
+                    size="xl"
+                    className="-rotate-2 shadow-[0_16px_34px_rgba(0,0,0,0.2)]"
+                    imageClassName="scale-[1.08]"
+                  />
                   <div>
                     <h3 className="font-friendly text-xl font-bold">{t('form.order.title')}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-slate-300">{t('form.order.lead')}</p>

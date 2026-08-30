@@ -37,6 +37,7 @@ export const friendlyIconAssets = Object.freeze({
   hospital: '/images/friendly-icons/hospital-room.webp',
   support: '/images/friendly-icons/trust-broker-headset.webp',
   document: '/images/friendly-icons/document-check.webp',
+  mandate: '/images/friendly-icons/tariff-review-advisor-v1.webp',
   region: '/images/friendly-icons/germany-region.webp',
   protection: '/images/friendly-icons/protection-shield.webp',
   comparison: '/images/friendly-icons/compare-value.webp',

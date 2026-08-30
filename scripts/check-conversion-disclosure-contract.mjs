@@ -28,6 +28,7 @@ const veterinaryPage = read('src/pages/VeterinaryHomePage.jsx');
 const veterinarySelector = read('src/components/sections/veterinary/TariffSelection.jsx');
 const veterinaryForm = read('src/components/sections/VeterinaryContactForm.jsx');
 const veterinaryDe = read('src/i18n/locales/de/veterinary.json');
+const friendlyIcons = read('src/components/ui/healioSoftClayIcons.js');
 const header = read('src/components/Header.jsx');
 const sdkUrl = read('src/lib/sdk-url.js');
 
@@ -81,6 +82,8 @@ expect(/value:\s*'dog'/.test(veterinarySelector) && /value:\s*'cat'/.test(veteri
 expect(/selection\.animalType === 'horse'/.test(veterinarySelector), 'Pferd braucht einen eigenen Bedarfspfad.');
 expect(/Unverbindliche Tarifprüfung|tariff review/i.test(`${veterinaryForm}\n${veterinaryDe}`), 'Das Tierformular muss eine Tarifprüfung statt eines falschen Beitragsrechners versprechen.');
 expect(!/PawPrint/.test(veterinarySelector) && !/PawPrint/.test(veterinaryForm), 'Die Tierstrecke darf keine funktionslose Pfoten- oder Tierpasskarte mehr zeigen.');
+expect(/kind="mandate"/.test(veterinaryForm) && /kind="comparison"/.test(veterinaryForm), 'Prüfauftrag und Auftragsgrenze brauchen semantisch passende Healio-3D-Icons.');
+expect(/mandate:\s*'\/images\/friendly-icons\/tariff-review-advisor-v1\.webp'/.test(friendlyIcons), 'Die persönliche Prüfbeauftragung muss im gemeinsamen FriendlyIcon-System registriert bleiben.');
 expect(/reviewOrderAccepted:\s*false/.test(veterinaryForm) && /name="reviewOrderAccepted"[\s\S]*?required/.test(veterinaryForm), 'Die persönliche Tarifprüfung braucht einen eigenen, nicht vorangekreuzten Pflichtauftrag.');
 expect(/Prüf- und Beratungsauftrag: erteilt/.test(veterinaryForm) && /REVIEW_ORDER_VERSION/.test(veterinaryForm) && /Auftrag erteilt am:/.test(veterinaryForm), 'Der Tier-Prüfauftrag muss mit Fassung und Zeitpunkt in der Anfrage dokumentiert werden.');
 expect(/getPath\('erstinformation'\)/.test(veterinaryForm) && /getPath\('agb'\)/.test(veterinaryForm), 'Erstinformation und Makler-AGB müssen unmittelbar vor dem Tier-Prüfauftrag erreichbar sein.');
