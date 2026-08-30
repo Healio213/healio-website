@@ -10,12 +10,12 @@ const CompanyFinalCTA = () => {
   const proof = t('cta.proof', { returnObjects: true });
 
   return (
-    <section className="w-full bg-[#07141d] py-16 text-white lg:py-20" aria-labelledby="company-final-cta-title">
+    <section className="w-full bg-[#07141d] py-14 text-white lg:py-20" aria-labelledby="company-final-cta-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8ee7ca]">{t('cta.eyebrow')}</p>
-            <h2 id="company-final-cta-title" className="mt-4 max-w-[15ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-6xl">
+            <h2 id="company-final-cta-title" className="mt-4 max-w-[15ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-6xl">
               {t('cta.title')}
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t('cta.description')}</p>

@@ -11,7 +11,6 @@ import CompanyProcess from '@/components/company/CompanyProcess';
 import CompanyFAQ from '@/components/company/CompanyFAQ';
 import CompanyWorkforceConcept from '@/components/company/CompanyWorkforceConcept';
 import CompanyFinalCTA from '@/components/company/CompanyFinalCTA';
-import ProductTicker from '@/components/sections/ProductTicker';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -65,14 +64,13 @@ const UnternehmenPage = () => {
 
       <article className="w-full overflow-hidden bg-white">
         <CompanyHero />
-        <ProductTicker variant="unternehmen" />
         <CompanyRealityCheck />
-        <CompanyWorkforceConcept />
         <CompanySolutions />
         <CompanyBavLeverage />
         <ResponsibilityStory />
         <CompanyEconomics />
         <CompanyProcess />
+        <CompanyWorkforceConcept />
         <CompanyFAQ />
         <CompanyFinalCTA />
       </article>

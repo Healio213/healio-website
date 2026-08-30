@@ -11,6 +11,7 @@ const de = readJson('src/i18n/locales/de/unternehmen.json');
 const en = readJson('src/i18n/locales/en/unternehmen.json');
 const hero = readText('src/components/company/CompanyHero.jsx');
 const responsibility = readText('src/components/company/ResponsibilityStory.jsx');
+const solutions = readText('src/components/company/CompanySolutions.jsx');
 const economics = readText('src/components/company/CompanyEconomics.jsx');
 const workforce = readText('src/components/company/CompanyWorkforceConcept.jsx');
 assert(
@@ -21,15 +22,17 @@ const bavLeverage = readText('src/components/company/CompanyBavLeverage.jsx');
 const page = readText('src/pages/UnternehmenPage.jsx');
 const seoRoutes = readText('scripts/seo-routes.mjs');
 
-assert.equal(de.hero.titleLead, 'Gesundheit fördern. Mitarbeiter binden.');
-assert.equal(de.hero.titleHighlight, 'Vorsorge richtig gestalten.');
+assert.equal(de.hero.titleLead, 'Vorsorge, die Mitarbeiter verstehen.');
+assert.equal(de.hero.titleHighlight, 'Ein System, das Sie steuern.');
 assert.equal(de.hero.analysisCta, 'Vorsorge-Check starten');
-assert.match(de.hero.description, /bAV, bKV, BGM-Koordination/);
-assert.equal(en.hero.titleLead, 'Promote health. Retain employees.');
+assert.match(de.hero.description, /bAV, bKV und Gesundheitsmanagement/);
+assert.equal(en.hero.titleLead, 'Benefits employees understand.');
 assert.match(hero, /healio-hero-markenrelief-v1\.webp/);
 assert.match(hero, /object-\[62%_center\]/);
 assert.doesNotMatch(hero, /healio-wordmark-white/);
 assert.match(hero, /min-h-\[100svh\]/);
+assert.match(hero, /href="#unternehmen-leistungen"/);
+assert.match(solutions, /id="unternehmen-leistungen"/);
 
 assert.match(responsibility, /dai\.de/);
 assert.match(responsibility, /destatis\.de/);
@@ -37,12 +40,12 @@ assert.match(responsibility, /bmas\.de/);
 assert.deepEqual(de.solutions.items.map((item) => item.key), ['pension', 'health', 'prevention', 'management']);
 assert.equal(de.workforce.eyebrow, 'KassenBoost für Mitarbeiter');
 assert.equal(en.workforce.eyebrow, 'KassenBoost for employees');
-assert.match(de.workforce.description, /freiwilligen, kostenlosen Zugang/);
-assert.match(de.workforce.description, /ohne Kontaktdaten/);
+assert.match(de.workforce.description, /freiwillig und kostenlos/);
+assert.match(de.workforce.points.join(' '), /Ohne Kontaktdaten/);
 assert.match(de.workforce.privacyDescription, /weder an den Arbeitgeber noch an Healio übermittelt/);
 assert.doesNotMatch(JSON.stringify(de.workforce), /3\.000|IKK|Bonus/);
 assert.doesNotMatch(JSON.stringify(en.workforce), /3,000|IKK|bonus/i);
-assert.match(de.economics.summaryText, /keine vollständige Erstattung/);
+assert.match(de.economics.summaryText, /keine Erstattung/);
 assert.match(de.economics.disclaimer, /Keine Steuerberatung/);
 assert.match(economics, /gesetze-im-internet\.de\/estg/);
 assert.match(economics, /bundesfinanzhof\.de/);
@@ -54,13 +57,18 @@ assert.match(workforce, /getPath\('potenzialanalyse'\)/);
 assert.match(workforce, /\?interest=kassenboost/);
 assert.doesNotMatch(workforce, /to=["']\/potenzialanalyse\?interest=kassenboost/);
 assert.doesNotMatch(workforce, /getPath\('partner'\)|to=["']\/partner/);
-assert.equal(de.bavLeverage.title, '676 EUR Vorsorgebeitrag. Rund 75 EUR möglicher Nettoeffekt.*');
+assert.equal(de.bavLeverage.title, '676 EUR Vorsorge. Rund 75 EUR weniger Auszahlungsnetto.*');
 assert.match(de.bavLeverage.netEffectExplanation, /Auszahlungsnetto/);
 assert.match(de.bavLeverage.netEffectExplanation, /71 bis 74 EUR/);
 assert.match(de.bavLeverage.netEffectExplanation, /rund 75 EUR/);
 assert.match(en.bavLeverage.netEffectExplanation, /take-home pay/i);
 assert.match(en.bavLeverage.netEffectExplanation, /EUR 71 to EUR 74/);
 assert.match(bavLeverage, /bavLeverage\.netEffectExplanation/);
+assert.match(bavLeverage, /<details/);
+assert.match(solutions, /<details/);
+assert.match(responsibility, /<details/);
+assert.match(economics, /<details/);
+assert.match(workforce, /<details/);
 assert.match(de.bavLeverage.splitFree, /338 EUR/);
 assert.match(de.bavLeverage.splitLiable, /338 EUR/);
 assert.match(de.bavLeverage.employerCost, /rund 747 EUR/);
@@ -100,17 +108,18 @@ assert.match(en.faq.items[3].answer, /may involve costs/);
 ].forEach((componentName) => assert.match(page, new RegExp(componentName)));
 assert.doesNotMatch(page, /CohortImpactSection/);
 assert(
-  page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanyWorkforceConcept />'),
-  'Der Mitarbeiterzugang muss direkt nach dem Reality Check folgen.',
+  page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanySolutions />'),
+  'Der Reality Check muss vor den Produktbausteinen stehen.',
 );
 assert(
-  page.indexOf('<CompanyWorkforceConcept />') < page.indexOf('<CompanySolutions />'),
-  'Der Mitarbeiterzugang muss vor den Produktbausteinen stehen.',
+  page.indexOf('<CompanyProcess />') < page.indexOf('<CompanyWorkforceConcept />'),
+  'Der kostenlose Mitarbeiterzugang soll erst nach dem Hauptprozess erscheinen.',
 );
 assert(
-  !page.slice(page.indexOf('<CompanyRealityCheck />'), page.indexOf('<CompanyWorkforceConcept />')).includes('/>\n        <'),
-  'Zwischen Reality Check und Mitarbeiterzugang darf keine weitere Sektion stehen.',
+  page.indexOf('<CompanyWorkforceConcept />') < page.indexOf('<CompanyFAQ />'),
+  'Der Mitarbeiterzugang muss vor den FAQ stehen.',
 );
+assert.doesNotMatch(page, /ProductTicker/);
 assert.doesNotMatch(page, /<main/);
 
 console.log('Company contract passed.');

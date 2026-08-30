@@ -4,23 +4,23 @@
     "description": "Healio combines corporate pension, health insurance, wellbeing coordination and employee communication into one managed benefits system."
   },
   "hero": {
-    "eyebrow": "Corporate benefits and health management",
-    "titleLead": "Promote health. Retain employees.",
-    "titleHighlight": "Get provision right.",
-    "description": "Individual benefits are easy to buy. Healio turns them into one managed system of pension, health insurance, wellbeing coordination and clear employee communication.",
+    "eyebrow": "Employee benefits for companies",
+    "titleLead": "Benefits employees understand.",
+    "titleHighlight": "One system you can manage.",
+    "description": "Healio reviews your existing plans and brings pension, health insurance and wellbeing into one managed system.",
     "analysisCta": "Start a benefits review",
-    "solutionsCta": "See the 30-year impact",
+    "solutionsCta": "Explore the building blocks",
     "proof": ["Independent broker", "Existing plans included", "Ongoing support"]
   },
   "realityCheck": {
     "eyebrow": "60-second reality check",
-    "title": "Can you answer these three questions with confidence today?",
+    "title": "Where do your benefits stand today?",
     "questions": [
       "What does your current provision cost — including product charges?",
       "What share of your workforce understands and uses it?",
       "Who reviews providers, contributions and communication regularly?"
     ],
-    "conclusion": "If one answer is missing, action is needed — not necessarily a switch, but an honest review of the status quo.",
+    "conclusion": "Missing one answer? An honest review is worthwhile — without any obligation to switch.",
     "cta": "Start a benefits review"
   },
   "calculator": {
@@ -61,9 +61,11 @@
   "responsibility": {
     "eyebrow": "Responsibility with a long horizon",
     "title": "The decision does not end when the contract is signed.",
-    "lead": "The statutory pension provides a foundation. Additional security is built where provision starts early, remains understandable and is supported consistently over decades.",
+    "lead": "Long-term benefits need clear decisions and ongoing support.",
     "description": "For company leaders, corporate pension is therefore more than administration. Product costs, return assumptions, participation and communication all influence what ultimately reaches the workforce in 30 years.",
-    "position": "Healio makes this effect visible without promising returns. We compare assumptions, review existing solutions and translate long-term consequences into decisions that are robust today.",
+    "position": "Healio makes the impact visible without promising returns. We review existing plans and assumptions and turn long-term consequences into robust decisions.",
+    "detailsShow": "Context and sources",
+    "detailsHide": "Close context",
     "sources": {
       "dai": {
         "publisher": "Deutsches Aktieninstitut",
@@ -85,48 +87,52 @@
   "solutions": {
     "eyebrow": "Corporate benefits management",
     "title": "Four building blocks. One benefits system.",
-    "description": "A collection of policies is not yet a benefits strategy. Pension, health, prevention and ongoing management must work together so employees understand the value and companies stay in control.",
+    "description": "Start with the biggest lever. Open benefits, limits and notes only when you need them.",
+    "detailsShow": "View details",
+    "detailsHide": "Close details",
     "items": [
       {
         "key": "pension",
         "horizon": "Tomorrow · Pension",
-        "title": "A pension that does more than create administration.",
-        "description": "We review existing plans and explain costs, return assumptions, guarantees, employer contributions and their effect on future provision.",
+        "title": "A pension people can understand.",
+        "description": "We review plans, costs, contributions and assumptions — clearly, down to employee level.",
         "points": ["Review existing plans and costs transparently", "Assess suitable implementation routes", "Explain provision clearly at employee level"]
       },
       {
         "key": "health",
         "horizon": "Today · Health insurance",
-        "title": "Healthcare benefits employees understand immediately.",
-        "description": "Corporate health insurance makes an employer benefit tangible now. We develop a level of cover that fits the workforce and the available budget.",
+        "title": "Health cover employees value now.",
+        "description": "We develop cover that fits your workforce and available budget.",
         "points": ["Predictable contribution per insured employee", "Choose benefits suited to the workforce", "Explain rollout and use clearly"],
         "note": "Available benefits depend on the selected plan and its insurance terms."
       },
       {
         "key": "prevention",
         "horizon": "Wellbeing coordination and prevention",
-        "title": "One health day is not yet health management.",
-        "description": "Healio supports the coordination of voluntary health-promotion and prevention services and involves the responsible internal and external parties.",
+        "title": "Wellbeing that fits everyday work.",
+        "description": "We coordinate voluntary health and prevention services with the responsible parties.",
         "points": ["Assess needs and employee groups", "Select qualified measures", "Plan health communication"],
         "note": "Healio supports wellbeing coordination and voluntary health promotion. Statutory duties relating to occupational health and safety, return-to-work management or occupational medicine remain with the responsible parties."
       },
       {
         "key": "management",
         "horizon": "Ongoing · Management and communication",
-        "title": "A system needs someone to keep it running.",
-        "description": "Benefits management does not end at signature. Healio connects plans, providers, processes and communication and remains the central point of contact.",
+        "title": "Support that continues after launch.",
+        "description": "Healio connects plans, providers, processes and communication and remains your central contact.",
         "points": ["Integrate existing solutions sensibly", "Support HR and payroll", "Review and adjust provision regularly"]
       }
     ]
   },
   "economics": {
     "eyebrow": "Economics and structure",
-    "title": "Looking only at the contribution leaves the calculation incomplete.",
-    "description": "Employer-funded pension and health benefits may — depending on the component and structure — qualify as business expenses. Additional statutory tax and contribution advantages may further change the company's effective cost.",
+    "title": "What do your benefits really cost?",
+    "description": "Contributions, payroll charges and tax structure together determine the company's effective cost.",
     "cta": "Assess effective cost in a benefits review",
     "summaryTitle": "Tax-deductible does not mean free.",
-    "summaryText": "A business-expense deduction is not a full reimbursement. Legal form, profit, tax rate, type of benefit and implementation all matter. Healio makes these factors transparent and, if requested, coordinates implementation with payroll and tax advisers.",
+    "summaryText": "A business-expense deduction is not a reimbursement. Its effect depends on the legal form, tax rate, benefit and implementation.",
     "sourceLabel": "Official source",
+    "detailsShow": "Tax context and sources",
+    "detailsHide": "Close context",
     "facts": [
       {
         "key": "expense",
@@ -153,8 +159,8 @@
   },
   "process": {
     "eyebrow": "From product to management",
-    "title": "Rollout is the beginning. Not the end.",
-    "description": "Benefits create value only when employees understand them and HR can manage them reliably. Healio creates a robust process for both.",
+    "title": "Review. Model. Launch. Support.",
+    "description": "One clear process for employees and HR — from the existing plans to ongoing support.",
     "steps": [
       {"title": "Understand the status quo", "description": "We review contracts, costs, subsidies, participation and existing communication."},
       {"title": "Build the business case", "description": "You see which pension, health and wellbeing structure fits the company and its budget."},
@@ -164,8 +170,8 @@
   },
   "workforce": {
     "eyebrow": "KassenBoost for employees",
-    "title": "A useful comparison does not need employer access.",
-    "description": "You give employees voluntary, free access to KassenBoost. They can compare without providing contact details and without sharing information with Healio or the company.",
+    "title": "Free employee value. No employer access.",
+    "description": "With KassenBoost, employees compare voluntarily and free of charge. Every decision stays private.",
     "cardEyebrow": "Private employee access",
     "cardTitle": "Employees compare for themselves.",
     "privacyTitle": "What stays private",
@@ -173,13 +179,19 @@
     "points": ["Voluntary and free", "No contact details", "No sharing of individual results"],
     "primaryCta": "Open KassenBoost",
     "secondaryCta": "Discuss access for your workforce",
+    "detailsShow": "Process and privacy",
+    "detailsHide": "Close details",
     "note": "The fixed link transmits no employee data. KassenBoost provides private guidance; each employee makes any subsequent decision independently."
   },
   "bavLeverage": {
     "eyebrow": "Employer-funded pension",
-    "title": "EUR 676 pension contribution. Around EUR 75 potential net impact.*",
+    "title": "EUR 676 for retirement. Around EUR 75 less current take-home pay.*",
     "netEffectExplanation": "In the standard example, current take-home pay may fall by around EUR 71 to EUR 74 due to additional social-security contributions – rounded to around EUR 75.",
-    "description": "The leverage becomes visible when pension contribution, social charges and long-term model return are kept separate.",
+    "description": "We separate what reaches the employee from what the company actually spends.",
+    "detailsIntro": "This figure is not a blanket promise. The full calculation remains open for review.",
+    "detailsShow": "Calculation, assumptions and sources",
+    "detailsHide": "Close details",
+    "shortDisclaimer": "* Simplified 2026 standard model. Individual figures may vary; not a forecast or guarantee.",
     "splitTitle": "In the standard model, the EUR 676 consists of two parts:",
     "splitFree": "EUR 338 exempt from tax and social-security contributions",
     "splitLiable": "EUR 338 tax-free and generally subject to social-security contributions",
@@ -195,8 +207,8 @@
   },
   "faq": {
     "eyebrow": "Before the decision",
-    "title": "Four questions every company should answer.",
-    "description": "The greatest risk is not one imperfect decision. It is a system nobody challenges at all.",
+    "title": "What companies want to know first.",
+    "description": "The essential answers — clear, open-ended and without hiding the fine print.",
     "items": [
       {
         "question": "Do existing contracts have to be replaced?",
