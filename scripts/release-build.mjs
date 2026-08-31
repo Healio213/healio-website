@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { assertVercelReleaseContext } from './lib/release-safety.mjs';
+import { writeReleaseManifest } from './lib/release-manifest.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -52,6 +53,9 @@ function main() {
   run('llms.txt prüfen/generieren', process.execPath, ['tools/generate-llms.js']);
   run('Lint', 'npm', ['run', 'lint']);
   run('Vite-Build', 'npx', ['vite', 'build']);
+  console.log('\n[release] Quellen- und Commit-Nachweis erzeugen');
+  const release = writeReleaseManifest({ rootDir, env: process.env });
+  console.log(`[release] ${release.site} · ${release.branch} · ${release.commitSha}`);
   run('SEO-Seiten erzeugen', process.execPath, ['scripts/generate-seo-pages.mjs']);
   run('Seiten vor-rendern', process.execPath, ['scripts/prerender.mjs']);
   run('Prerender-Ausgabe prüfen', process.execPath, ['scripts/check-prerender-output.mjs']);

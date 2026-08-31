@@ -45,6 +45,14 @@ function fixture() {
     '- [Startseite](https://healio.de/)',
     '- [KassenBoost](https://healio.de/kassenboost)',
   ].join('\n'));
+  fs.writeFileSync(path.join(rootDir, 'dist', 'release.json'), JSON.stringify({
+    site: 'healio.de',
+    source: 'github.com/Healio213/healio-website',
+    commitSha: 'a'.repeat(40),
+    branch: 'main',
+    environment: 'test',
+    builtAt: '2026-08-31T12:00:00.000Z',
+  }));
 
   return rootDir;
 }
@@ -60,6 +68,20 @@ test('Release-Artefakte binden kritische Seiten, Sitemap und KI-Suchcrawler zusa
       ],
     });
     assert.deepEqual(result.errors, []);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('Release-Artefakte scheitern ohne eindeutigen Quellen- und Commit-Nachweis', () => {
+  const rootDir = fixture();
+  try {
+    fs.rmSync(path.join(rootDir, 'dist', 'release.json'));
+    const result = validateReleaseArtifacts({
+      rootDir,
+      routes: [{ path: '/', canonical: 'https://healio.de' }],
+    });
+    assert.match(result.errors.join('\n'), /Release-Nachweis/);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }

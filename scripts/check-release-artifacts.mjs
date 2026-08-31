@@ -65,6 +65,25 @@ export function validateReleaseArtifacts({ rootDir = defaultRootDir, routes = RE
   const robots = read(path.join(distDir, 'robots.txt'), errors, 'robots.txt');
   const sitemap = read(path.join(distDir, 'sitemap.xml'), errors, 'sitemap.xml');
   const llms = read(path.join(distDir, 'llms.txt'), errors, 'llms.txt');
+  const releaseJson = read(path.join(distDir, 'release.json'), errors, 'Release-Nachweis');
+
+  if (releaseJson) {
+    try {
+      const release = JSON.parse(releaseJson);
+      if (
+        release.site !== 'healio.de'
+        || release.source !== 'github.com/Healio213/healio-website'
+        || !/^[a-f0-9]{40}$/.test(release.commitSha || '')
+        || typeof release.branch !== 'string'
+        || release.branch.length === 0
+        || !Number.isFinite(Date.parse(release.builtAt))
+      ) {
+        errors.push('Release-Nachweis enthält nicht die erwartete Quelle und Commit-SHA.');
+      }
+    } catch {
+      errors.push('Release-Nachweis ist kein gültiges JSON.');
+    }
+  }
 
   for (const agent of AI_SEARCH_AGENTS) {
     if (!agentIsAllowed(robots, agent)) {

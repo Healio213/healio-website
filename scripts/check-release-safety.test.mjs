@@ -54,6 +54,7 @@ test('release build is fail-closed and rebuilds every generated artifact before 
     'generate:llms',
     'lint',
     'vite:build',
+    'write:release-manifest',
     'generate:seo-pages',
     'prerender',
     'check:prerender-output',

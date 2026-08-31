@@ -24,6 +24,7 @@ export function createReleaseBuildPlan() {
     'generate:llms',
     'lint',
     'vite:build',
+    'write:release-manifest',
     'generate:seo-pages',
     'prerender',
     'check:prerender-output',
