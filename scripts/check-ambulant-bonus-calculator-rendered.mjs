@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
 import { createServer } from 'vite';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -34,15 +33,32 @@ const server = await createServer({
 
 let browser;
 
+async function launchBrowser() {
+  try {
+    const puppeteer = (await import('puppeteer')).default;
+    return await puppeteer.launch({
+      headless: 'shell',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
+    });
+  } catch (error) {
+    console.warn(`[bonus-rendered] lokaler Chrome-Start fehlgeschlagen (${error.message.split('\n')[0]}), verwende Vercel-Fallback.`);
+  }
+
+  const chromium = (await import('@sparticuz/chromium')).default;
+  const puppeteerCore = (await import('puppeteer-core')).default;
+  return puppeteerCore.launch({
+    args: [...chromium.args, '--no-sandbox', '--disable-dev-shm-usage'],
+    executablePath: await chromium.executablePath(),
+    headless: 'shell',
+  });
+}
+
 try {
   await server.listen();
   const address = server.httpServer?.address();
   assert(address && typeof address !== 'string', 'Vite test server did not expose a local port.');
 
-  browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  browser = await launchBrowser();
 
   const page = await browser.newPage();
   await page.setViewport({ width: 1440, height: 1000 });
