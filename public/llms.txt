@@ -200,6 +200,12 @@ Du hast bis Ende März des Folgejahres Zeit, deinen Bonusantrag einzureichen. Al
 - [Startseite](https://healio.de/) - HEALIO Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
 - [Für Unternehmen](https://healio.de/unternehmen) - Betriebliche Vorsorge, bAV, bKV und steuerfreie Gesundheitsbenefits
 - [Ambulante Zusatzversicherung](https://healio.de/ambulant) - 3.000 EUR Gesundheitsbudget, SDK Tarife, IKK Bonus
+- [Zahnzusatzversicherung](https://healio.de/zahn) - Zahnschutz, Tarifauswahl und persönliche Einordnung
+- [Stationäre Zusatzversicherung](https://healio.de/stationaer) - Klinikschutz, Ein- oder Zweibettzimmer und privatärztliche Behandlung
+- [Tierkrankenversicherung](https://healio.de/tierkrankenversicherung) - Tarifprüfung für Hund, Katze und Pferd
+- [KassenBoost](https://healio.de/kassenboost) - Beitrag, Bonus und Leistungen einer Krankenkasse getrennt vergleichen
+- [Kassenbonus](https://healio.de/kassenbonus) - Bonusprogramme verstehen und den persönlich erreichbaren Vorteil prüfen
+- [Für Zahnärzte](https://healio.de/zahnaerzte) - Healio-Lösungen für Zahnarztpraxen
 - [Über uns](https://healio.de/about) - Über HEALIO und das Team
 - [Leistungen](https://healio.de/leistungen) - Alle Versicherungsleistungen im Überblick
 - [Partner werden](https://healio.de/partner) - Netzwerkpartnerschaft für Heilpraktiker und Hebammen
