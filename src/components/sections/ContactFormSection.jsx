@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Loader2, Send } from 'lucide-react';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const ContactFormSection = () => {
   const { t } = useTranslation('contact');
@@ -41,6 +42,7 @@ const ContactFormSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
     
     if (!formData.vorname || !formData.nachname || !formData.email || !formData.interesse || !formData.nachricht) {
       toast({
@@ -112,12 +114,14 @@ const ContactFormSection = () => {
           className="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-10"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
+            <FormHoneypot />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="vorname">{t('contactForm.firstName')}</Label>
                 <Input
                   id="vorname"
                   name="vorname"
+                  maxLength={100}
                   value={formData.vorname}
                   onChange={handleChange}
                   placeholder="Max"
@@ -130,6 +134,7 @@ const ContactFormSection = () => {
                 <Input
                   id="nachname"
                   name="nachname"
+                  maxLength={100}
                   value={formData.nachname}
                   onChange={handleChange}
                   placeholder="Mustermann"
@@ -146,6 +151,7 @@ const ContactFormSection = () => {
                   id="email"
                   name="email"
                   type="email"
+                  maxLength={254}
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="max@beispiel.de"
@@ -159,6 +165,7 @@ const ContactFormSection = () => {
                   id="telefon"
                   name="telefon"
                   type="tel"
+                  maxLength={40}
                   value={formData.telefon}
                   onChange={handleChange}
                   placeholder="0123 456789"
@@ -188,6 +195,7 @@ const ContactFormSection = () => {
               <Textarea
                 id="nachricht"
                 name="nachricht"
+                maxLength={4000}
                 value={formData.nachricht}
                 onChange={handleChange}
                 placeholder="Beschreiben Sie kurz Ihr Anliegen oder welche Leistungen Sie interessieren..."

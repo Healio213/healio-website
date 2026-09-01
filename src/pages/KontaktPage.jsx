@@ -15,6 +15,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
 import GoogleMapEmbed from '@/components/GoogleMapEmbed';
 import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const KontaktPage = () => {
   const { t } = useTranslation('contact');
@@ -40,6 +41,7 @@ const KontaktPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
     
     if (!formData.name || !formData.email || !formData.message) {
       toast({
@@ -231,6 +233,7 @@ const KontaktPage = () => {
             >
               <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100">
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  <FormHoneypot />
                   
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-semibold text-slate-700">{t('form.name')}</Label>
@@ -238,6 +241,7 @@ const KontaktPage = () => {
                       id="name" 
                       name="name" 
                       type="text" 
+                      maxLength={100}
                       required 
                       value={formData.name} 
                       onChange={handleChange} 
@@ -252,6 +256,7 @@ const KontaktPage = () => {
                       id="email" 
                       name="email" 
                       type="email" 
+                      maxLength={254}
                       required 
                       value={formData.email} 
                       onChange={handleChange} 
@@ -266,6 +271,7 @@ const KontaktPage = () => {
                       id="company" 
                       name="company" 
                       type="text" 
+                      maxLength={160}
                       value={formData.company} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
@@ -279,6 +285,7 @@ const KontaktPage = () => {
                       id="phone" 
                       name="phone" 
                       type="tel" 
+                      maxLength={40}
                       value={formData.phone} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
@@ -292,6 +299,7 @@ const KontaktPage = () => {
                       id="message" 
                       name="message" 
                       required 
+                      maxLength={4000}
                       value={formData.message} 
                       onChange={handleChange} 
                       className="w-full text-slate-900 bg-slate-50 min-h-[150px] p-4 rounded-xl border border-slate-200 focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-all resize-y" 

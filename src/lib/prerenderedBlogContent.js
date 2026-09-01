@@ -1,3 +1,6 @@
+import DOMPurify from 'dompurify';
+import { sanitizeRichHtml } from './contentSecurity';
+
 const prerenderedBlogContent = {
   listHtml: '',
   articleHtml: '',
@@ -11,8 +14,8 @@ export const capturePrerenderedBlogContent = (rootElement) => {
     '[data-prerendered-blog-article], [data-static-blog-article]',
   );
 
-  prerenderedBlogContent.listHtml = list?.outerHTML || '';
-  prerenderedBlogContent.articleHtml = article?.outerHTML || '';
+  prerenderedBlogContent.listHtml = sanitizeRichHtml(list?.outerHTML || '', DOMPurify);
+  prerenderedBlogContent.articleHtml = sanitizeRichHtml(article?.outerHTML || '', DOMPurify);
 };
 
 export const getPrerenderedBlogListHtml = () => prerenderedBlogContent.listHtml;

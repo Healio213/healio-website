@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const HospitalContactForm = () => {
   const { t } = useTranslation('contact');
@@ -25,6 +26,7 @@ const HospitalContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
     setIsSubmitting(true);
 
     try {
@@ -60,17 +62,18 @@ const HospitalContactForm = () => {
           <div className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-100">
             <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('hospital.title')}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
+              <FormHoneypot />
               <div className="space-y-2">
                 <Label htmlFor="name">{t('form.name')}</Label>
-                <Input id="name" name="name" required value={formData.name} onChange={handleChange} className="bg-white" />
+                <Input id="name" name="name" maxLength={100} required value={formData.name} onChange={handleChange} className="bg-white" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">{t('form.email')}</Label>
-                <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="bg-white" />
+                <Input id="email" name="email" type="email" maxLength={254} required value={formData.email} onChange={handleChange} className="bg-white" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">{t('form.phone')}</Label>
-                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="bg-white" />
+                <Input id="phone" name="phone" type="tel" maxLength={40} value={formData.phone} onChange={handleChange} className="bg-white" />
               </div>
               <Button type="submit" disabled={isSubmitting} className="w-full bg-[#25c990] hover:bg-[#1db37f] text-white h-12 mt-4">
                 {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 h-4 w-4" /> {t('form.submit')}</>}

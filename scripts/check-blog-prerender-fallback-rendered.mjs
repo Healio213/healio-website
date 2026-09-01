@@ -14,7 +14,9 @@ const prerenderedMarkup = `
   </div>
   <article data-static-blog-article>
     <h1>${prerenderedArticleTitle}</h1>
-    <p>Dieser Text stammt aus dem vorgerenderten HTML.</p>
+    <p data-safe-fallback onclick="window.__fallbackClickXss = true">Dieser Text stammt aus dem vorgerenderten HTML.</p>
+    <a data-unsafe-fallback-link href="javascript:window.__fallbackLinkXss = true">Unsicherer Link</a>
+    <svg data-unsafe-fallback-svg onload="window.__fallbackSvgXss = true"><circle /></svg>
   </article>
 `;
 
@@ -92,6 +94,14 @@ try {
     'Bei einem API-Ausfall muss der vorgerenderte Artikel sichtbar bleiben.',
   );
   assert.doesNotMatch(articleText, /Artikel nicht gefunden|Article not found/i);
+  const unsafeFallback = await page.$eval('#root', (root) => ({
+    eventAttributes: root.querySelectorAll('[onclick], [onload], [onerror], [onmouseover]').length,
+    unsafeHref: root.querySelector('[data-unsafe-fallback-link]')?.getAttribute('href') || '',
+    svgCount: root.querySelectorAll('[data-unsafe-fallback-svg]').length,
+  }));
+  assert.equal(unsafeFallback.eventAttributes, 0, 'Fallback-HTML darf keine Eventhandler erneut einsetzen.');
+  assert.doesNotMatch(unsafeFallback.unsafeHref, /^javascript:/i, 'Fallback-HTML darf keine javascript:-URL erneut einsetzen.');
+  assert.equal(unsafeFallback.svgCount, 0, 'Fallback-HTML darf keine SVG-Payload erneut einsetzen.');
   const robots = await page.$eval('meta[name="robots"]', (tag) => tag.getAttribute('content'));
   assert.doesNotMatch(
     robots,

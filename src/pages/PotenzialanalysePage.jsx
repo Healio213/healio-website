@@ -11,6 +11,7 @@ import { AlertCircle, CheckCircle2, Clock3, Mail, Phone, Loader2, RefreshCw, Shi
 import { supabase } from '@/lib/customSupabaseClient';
 import { emailjsService } from '@/services/emailjsService';
 import Header from '@/components/Header';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
@@ -90,6 +91,7 @@ const PotenzialanalysePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
     if (submitLockRef.current || submissionComplete) return;
     setSubmitError(null);
     setSubmitStatus('');
@@ -264,11 +266,13 @@ const PotenzialanalysePage = () => {
             className="max-w-[500px] mx-auto"
           >
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <FormHoneypot />
               <p className="sr-only" role="status" aria-live="polite">{submitStatus}</p>
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-900 font-medium">{t('potenzialanalyse.name')}</Label>
                 <Input 
                   id="name" 
+                  maxLength={100}
                   placeholder={t('potenzialanalyse.namePlaceholder')} 
                   value={formData.name}
                   onChange={handleChange}
@@ -286,6 +290,7 @@ const PotenzialanalysePage = () => {
                 <Label htmlFor="company" className="text-gray-900 font-medium">{t('potenzialanalyse.company')}</Label>
                 <Input 
                   id="company" 
+                  maxLength={160}
                   placeholder={t('potenzialanalyse.companyPlaceholder')} 
                   value={formData.company}
                   onChange={handleChange}
@@ -304,6 +309,7 @@ const PotenzialanalysePage = () => {
                 <Input 
                   id="email" 
                   type="email"
+                  maxLength={254}
                   placeholder={t('potenzialanalyse.emailPlaceholder')} 
                   value={formData.email}
                   onChange={handleChange}
@@ -322,6 +328,7 @@ const PotenzialanalysePage = () => {
                 <Input 
                   id="phone" 
                   type="tel"
+                  maxLength={40}
                   placeholder="+49" 
                   value={formData.phone}
                   onChange={handleChange}

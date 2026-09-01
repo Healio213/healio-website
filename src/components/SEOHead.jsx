@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import { serializeJsonLd } from '@/lib/contentSecurity';
 
 const SITE_URL = 'https://healio.de';
 
@@ -143,7 +144,7 @@ const SEOHead = ({
       {/* Schema Markup */}
       {schemaMarkup && (
         <script type="application/ld+json">
-          {JSON.stringify(schemaMarkup)}
+          {serializeJsonLd(schemaMarkup)}
         </script>
       )}
     </Helmet>

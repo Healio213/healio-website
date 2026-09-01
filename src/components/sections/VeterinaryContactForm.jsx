@@ -9,6 +9,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { Check, Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const NEXT_STEP_KEYS = ['profile', 'comparison', 'reply'];
 const REVIEW_ORDER_VERSION = 'tier-pruefauftrag-v1-2026-08-30';
@@ -55,6 +56,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isHoneypotFilled(event.currentTarget)) return;
     setIsSubmitting(true);
 
     const animalLabel = t(`finder.animals.${formData.animal_type}.title`);
@@ -164,14 +166,15 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <FormHoneypot />
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="vet-name" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.name')}</Label>
-                  <Input id="vet-name" name="name" autoComplete="name" required value={formData.name} onChange={handleChange} className={FIELD_CLASS} />
+                  <Input id="vet-name" name="name" maxLength={100} autoComplete="name" required value={formData.name} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="vet-email" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.email')}</Label>
-                  <Input id="vet-email" name="email" type="email" autoComplete="email" required value={formData.email} onChange={handleChange} className={FIELD_CLASS} />
+                  <Input id="vet-email" name="email" type="email" maxLength={254} autoComplete="email" required value={formData.email} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
               </div>
 
@@ -203,14 +206,14 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="vet-breed" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.breed')}</Label>
-                  <Input id="vet-breed" name="breed" value={formData.breed} onChange={handleChange} className={FIELD_CLASS} />
+                  <Input id="vet-breed" name="breed" maxLength={120} value={formData.breed} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
               </div>
 
               {formData.animal_type === 'horse' && (
                 <div className="border-y border-[#a97a2f]/25 bg-[#f3e5c7] px-1 py-5">
                   <Label htmlFor="vet-usage" className="font-display text-xs font-bold text-[#665128]">{t('form.fields.usage')}</Label>
-                  <Input id="vet-usage" name="usage" required value={formData.usage} onChange={handleChange} placeholder={t('form.fields.usagePlaceholder')} className={`${FIELD_CLASS} mt-2 border-[#c6aa73]`} />
+                  <Input id="vet-usage" name="usage" maxLength={200} required value={formData.usage} onChange={handleChange} placeholder={t('form.fields.usagePlaceholder')} className={`${FIELD_CLASS} mt-2 border-[#c6aa73]`} />
                   <p className="mt-2 text-xs leading-relaxed text-[#766a4d]">{t('form.fields.usageNote')}</p>
                 </div>
               )}

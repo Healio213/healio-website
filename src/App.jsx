@@ -69,7 +69,7 @@ function App() {
         const observer = new PerformanceObserver((list) => {
           const entries = list.getEntries();
           entries.forEach((entry) => {
-            if (entry.initiatorType === 'img' && entry.duration > 500) {
+            if (import.meta.env.DEV && entry.initiatorType === 'img' && entry.duration > 500) {
               console.warn(`[Perf] Slow image load detected: ${entry.name} took ${Math.round(entry.duration)}ms`);
             }
           });

@@ -6,6 +6,8 @@ import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 import { getBlogArticleCta } from '@/lib/blogArticleCta';
 import { getPrerenderedBlogArticleHtml } from '@/lib/prerenderedBlogContent';
+import DOMPurify from 'dompurify';
+import { sanitizeRichHtml } from '@/lib/contentSecurity';
 
 // Leer = same-origin. Der Abruf laeuft ueber healio.de und wird von
 // Vercel an app.healio.de weitergereicht (Rewrite in vercel.json,
@@ -152,7 +154,10 @@ const BlogArticlePage = () => {
   const combinedSchema = faqSchema
     ? [articleSchema, faqSchema]
     : articleSchema;
-  const articleBodyHtml = stripLeadingArticleHeading(article.content_html);
+  const articleBodyHtml = sanitizeRichHtml(
+    stripLeadingArticleHeading(article.content_html),
+    DOMPurify,
+  );
   const canonicalUrl = lang === 'en'
     ? `https://healio.de/en/blog/${article.slug}`
     : `https://healio.de/blog/${article.slug}`;

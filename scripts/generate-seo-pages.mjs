@@ -13,6 +13,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
+import { serializeJsonLd } from '../src/lib/contentSecurity.js';
+import { sanitizeStaticBlogHtml } from './lib/blogContentSecurity.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -138,7 +140,7 @@ function mergeRouteSchemas(html, route, schemaMarkup) {
           ...additionalSchemas,
         ]);
         merged = true;
-        return `<script type="application/ld+json">${JSON.stringify(parsed)}</script>`;
+        return `<script type="application/ld+json">${serializeJsonLd(parsed)}</script>`;
       } catch {
         return script;
       }
@@ -155,10 +157,6 @@ function mergeRouteSchemas(html, route, schemaMarkup) {
 function getBlogSlug(routePath) {
   const match = routePath.match(/^\/blog\/([^/]+)$/);
   return match ? match[1] : null;
-}
-
-function stripScripts(html = '') {
-  return html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 }
 
 function stripLeadingArticleHeading(html = '') {
@@ -189,7 +187,9 @@ function formatDate(dateStr) {
 }
 
 function createStaticBlogArticleHtml(article) {
-  const safeContent = stripScripts(stripLeadingArticleHeading(article.content_html || ''));
+  const safeContent = sanitizeStaticBlogHtml(
+    stripLeadingArticleHeading(article.content_html || ''),
+  );
   const published = formatDate(article.published_at);
   const meta = [
     article.author || 'Healio Redaktion',
