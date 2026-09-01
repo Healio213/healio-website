@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 import { getBlogArticleCta } from '@/lib/blogArticleCta';
 import { getPrerenderedBlogArticleHtml } from '@/lib/prerenderedBlogContent';
+import { fetchCachedBlogArticle } from '@/lib/blogContentCache';
 import DOMPurify from 'dompurify';
 import { sanitizeRichHtml } from '@/lib/contentSecurity';
 
@@ -50,17 +51,29 @@ const BlogArticlePage = () => {
     setLoading(true);
     setError(null);
     setArticle(null);
+    let responseStatus = null;
 
     try {
       const res = await fetch(`${API_BASE}/api/v1/content/articles?slug=${slug}`);
+      responseStatus = res.status;
       if (!res.ok) {
-        if (res.status === 404 && !prerenderedArticleHtml) return;
         throw new Error(`HTTP ${res.status}`);
       }
       const data = await res.json();
-      setArticle(data.article || null);
+      if (!data.article) throw new Error('Die Blog-API enthält keinen Artikel.');
+      setArticle(data.article);
     } catch (err) {
-      setError(err.message);
+      try {
+        const cachedArticle = await fetchCachedBlogArticle(slug);
+        if (cachedArticle) {
+          setArticle(cachedArticle);
+          return;
+        }
+      } catch (cacheError) {
+        console.error('Blogartikel konnte nicht aus dem geprüften Cache geladen werden:', cacheError);
+      }
+
+      if (responseStatus !== 404 || prerenderedArticleHtml) setError(err.message);
     } finally {
       setLoading(false);
     }

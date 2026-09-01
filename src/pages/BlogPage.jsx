@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { Clock, ArrowRight, User, Tag } from 'lucide-react';
 import ProductTicker from '@/components/sections/ProductTicker';
 import { getPrerenderedBlogListHtml } from '@/lib/prerenderedBlogContent';
+import { fetchCachedBlogArticles } from '@/lib/blogContentCache';
 
 // Leer = same-origin, siehe BlogArticlePage.jsx und vercel.json.
 const API_BASE = import.meta.env.VITE_APP_API_URL || '';
@@ -55,10 +56,18 @@ const BlogPage = () => {
       const res = await fetch(`${API_BASE}/api/v1/content/articles`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setArticles(Array.isArray(data.articles) ? data.articles : []);
+      if (!Array.isArray(data.articles) || data.articles.length === 0) {
+        throw new Error('Die Blog-API enthält keine Artikel.');
+      }
+      setArticles(data.articles);
     } catch (err) {
-      console.error('Failed to load articles:', err);
-      setLoadFailed(true);
+      console.warn('Blog-API nicht verfügbar, geprüfter Cache wird verwendet:', err.message);
+      try {
+        setArticles(await fetchCachedBlogArticles());
+      } catch (cacheError) {
+        console.error('Blogartikel konnten weder aus der API noch aus dem Cache geladen werden:', cacheError);
+        setLoadFailed(true);
+      }
     } finally {
       setLoading(false);
     }
@@ -168,7 +177,7 @@ const BlogPage = () => {
             <div data-prerendered-blog-list className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((article) => (
                 <Link
-                  key={article.id}
+                  key={article.slug}
                   // Artikel existieren nur unter /blog/. Auf /en/blog
                   // wurde bisher auf /en/blog/<slug> verlinkt, was es
                   // nicht gibt: 15 tote Links, die die Startseite

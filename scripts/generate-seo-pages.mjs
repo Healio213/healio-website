@@ -19,6 +19,7 @@ import { sanitizeStaticBlogHtml } from './lib/blogContentSecurity.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
 const articleApiBase = process.env.VITE_APP_API_URL || 'https://app.healio.de';
+const articleCachePath = path.resolve(__dirname, '..', 'public', 'data', 'blog-articles-cache.json');
 
 // Basis-Template laden (die von Vite gebaute index.html)
 const templatePath = path.join(distDir, 'index.html');
@@ -290,6 +291,7 @@ async function fetchArticle(slug) {
   try {
     const response = await fetch(`${articleApiBase}/api/v1/content/articles?slug=${encodeURIComponent(slug)}`, {
       headers: { accept: 'application/json' },
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!response.ok) {
@@ -304,10 +306,57 @@ async function fetchArticle(slug) {
   }
 }
 
+function isCompleteBlogArticle(article) {
+  return typeof article?.slug === 'string'
+    && article.slug.trim().length > 0
+    && typeof article.title === 'string'
+    && article.title.trim().length >= 10
+    && typeof article.meta_description === 'string'
+    && article.meta_description.trim().length >= 40
+    && typeof article.content_html === 'string'
+    && article.content_html.trim().length >= 500;
+}
+
+function loadCachedBlogArticles() {
+  if (!fs.existsSync(articleCachePath)) {
+    throw new Error('SEO: Geprüfter Blog-Cache fehlt. Vor dem Build `npm run sync:blog-cache` ausführen.');
+  }
+
+  const articles = JSON.parse(fs.readFileSync(articleCachePath, 'utf8'));
+  if (!Array.isArray(articles)) throw new Error('SEO: Blog-Cache hat ein ungültiges Format.');
+
+  const invalidArticles = articles.filter((article) => !isCompleteBlogArticle(article));
+  if (invalidArticles.length > 0) {
+    throw new Error(`SEO: Blog-Cache enthält unvollständige Artikel: ${invalidArticles.map((article) => article?.slug || '(ohne Slug)').join(', ')}`);
+  }
+
+  return new Map(articles.map((article) => [article.slug, article]));
+}
+
 async function loadBlogArticles() {
   const slugs = [...new Set(seoRoutes.map((route) => getBlogSlug(route.path)).filter(Boolean))];
-  const entries = await Promise.all(slugs.map(async (slug) => [slug, await fetchArticle(slug)]));
-  return new Map(entries.filter(([, article]) => article));
+  const cachedArticles = loadCachedBlogArticles();
+  let fallbackCount = 0;
+
+  const entries = await Promise.all(slugs.map(async (slug) => {
+    const liveArticle = await fetchArticle(slug);
+    if (isCompleteBlogArticle(liveArticle)) return [slug, liveArticle];
+
+    const cachedArticle = cachedArticles.get(slug);
+    if (cachedArticle) fallbackCount += 1;
+    return [slug, cachedArticle || null];
+  }));
+
+  const missingSlugs = entries.filter(([, article]) => !article).map(([slug]) => slug);
+  if (missingSlugs.length > 0) {
+    throw new Error(`SEO: Kein vollständiger Artikel für indexierbare Routen: ${missingSlugs.join(', ')}`);
+  }
+
+  if (fallbackCount > 0) {
+    console.warn(`SEO: ${fallbackCount} Blogartikel aus dem geprüften Cache geladen.`);
+  }
+
+  return new Map(entries);
 }
 
 function generateHtml(route, article = null) {

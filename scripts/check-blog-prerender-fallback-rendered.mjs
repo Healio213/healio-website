@@ -37,6 +37,11 @@ const server = await createServer({
         .replace('<script defer src="/_vercel/insights/script.js"></script>', '');
     },
     configureServer(viteServer) {
+      viteServer.middlewares.use('/data/blog-articles-cache.json', (_request, response) => {
+        response.statusCode = 503;
+        response.setHeader('Content-Type', 'application/json');
+        response.end(JSON.stringify({ error: 'Static cache unavailable' }));
+      });
       viteServer.middlewares.use('/api/v1/content/articles', (request, response) => {
         const requestUrl = new URL(request.url, 'http://localhost');
         response.statusCode = requestUrl.searchParams.has('slug') ? 404 : 502;
