@@ -3,7 +3,43 @@
     "badge": "Especially for Midwives",
     "title": "<highlight>Full courses</highlight> for you and the best care for your families.",
     "subtitle": "How your expectant mothers effectively pay zero euros for important extras starting today and you get fairly rewarded for your work.",
-    "cta": "Book your free introduction now"
+    "cta": "Book your free introduction now",
+    "secondaryCta": "View the concept with Nita",
+    "note": "No insurance advice by the midwife is required."
+  },
+  "proof": {
+    "ariaLabel": "Responsibilities in the Healio concept for midwives",
+    "items": [
+      {
+        "title": "Midwife informs",
+        "text": "You provide families with a neutral pointer without giving insurance advice."
+      },
+      {
+        "title": "Families decide",
+        "text": "Interested families choose whether they want to contact Healio."
+      },
+      {
+        "title": "Healio checks",
+        "text": "We clarify eligibility, tariffs and next steps individually."
+      }
+    ]
+  },
+  "explanationVideo": {
+    "title": "The midwife concept at a glance",
+    "subtitle": "The approved Nita video will be added here. You can already clarify your questions directly with Nita.",
+    "status": "Nita video in preparation",
+    "message": "Until the approved video is ready, Nita can guide you through the concept directly.",
+    "points": [
+      "Clear responsibilities for midwives, families and Healio",
+      "Health fund benefits, bonuses and supplementary cover without blanket promises",
+      "Next step: a 30-minute introduction"
+    ],
+    "cta": "Clarify the concept with Nita",
+    "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
+    "fallback": "This video cannot be played in your browser.",
+    "avatarAlt": "Nita, Healio's digital assistant",
+    "assistantName": "Nita, Healio's digital assistant",
+    "error": "The video could not be loaded"
   },
   "problem": {
     "title": "Who actually pays for all the extras?",
@@ -18,6 +54,7 @@
   "leistungen": {
     "title": "The €1,000 budget for your families",
     "subtitle": "So your patients know exactly what to expect, you can show them these benefits directly. The budget ensures that medical extras no longer have to be paid out of pocket.",
+    "detailsLabel": "View details on health fund benefits and supplementary cover",
     "highlights": [
       {
         "title": "€1,000 for your health",
@@ -103,6 +140,7 @@
   "klinik": {
     "title": "The most important part comes last: the newborn",
     "subtitle": "Everything so far was about the mother. Now it is about the child, and this is the part almost nobody knows. If you take away only one thing from this page, please let it be this one.",
+    "detailsLabel": "View details on newborn enrolment and hospital cover",
     "kernTitle": "Every person has exactly one window in which their state of health does not matter. It lasts two months and begins at birth.",
     "kernText": "A supplementary insurance normally always asks about your state of health. Anyone with a diagnosis pays a surcharge or loses cover for that particular condition. For a newborn, this rule does not apply. SDK's terms state literally that cover begins at birth without risk surcharges and without benefit exclusions, and expressly including birth injuries, congenital conditions and other physical impairments. No health assessment. No waiting period. No surcharge. The question is simply not asked. This window closes two months after birth, and for that child it is then closed for good.",
     "chanceTitle": "You know better than most why this matters so much",

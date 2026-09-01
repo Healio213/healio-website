@@ -5,6 +5,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { Clock, ArrowRight, User, Tag } from 'lucide-react';
 import ProductTicker from '@/components/sections/ProductTicker';
+import { getPrerenderedBlogListHtml } from '@/lib/prerenderedBlogContent';
 
 // Leer = same-origin, siehe BlogArticlePage.jsx und vercel.json.
 const API_BASE = import.meta.env.VITE_APP_API_URL || '';
@@ -40,19 +41,24 @@ const BlogPage = () => {
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/blog' : 'https://healio.de/blog';
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [filter, setFilter] = useState('alle');
+  const prerenderedListHtml = getPrerenderedBlogListHtml();
 
   useEffect(() => {
     fetchArticles();
   }, []);
 
   const fetchArticles = async () => {
+    setLoadFailed(false);
     try {
       const res = await fetch(`${API_BASE}/api/v1/content/articles`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setArticles(data.articles || []);
+      setArticles(Array.isArray(data.articles) ? data.articles : []);
     } catch (err) {
       console.error('Failed to load articles:', err);
+      setLoadFailed(true);
     } finally {
       setLoading(false);
     }
@@ -139,9 +145,19 @@ const BlogPage = () => {
 
       <section className="pb-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          {loading ? (
+          {prerenderedListHtml && (loading || loadFailed) ? (
+            <div
+              className="contents"
+              dangerouslySetInnerHTML={{ __html: prerenderedListHtml }}
+            />
+          ) : loading ? (
             <div className="flex justify-center py-20">
               <div className="w-8 h-8 border-4 border-[#25c990] border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : loadFailed ? (
+            <div className="text-center py-20 text-gray-500" role="status">
+              <p className="text-lg">{t('loadErrorTitle')}</p>
+              <p className="mt-2">{t('loadErrorBody')}</p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20 text-gray-500">
@@ -149,7 +165,7 @@ const BlogPage = () => {
               <p className="mt-2">{t('comingSoon')}</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div data-prerendered-blog-list className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((article) => (
                 <Link
                   key={article.id}

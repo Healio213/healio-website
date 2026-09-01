@@ -3,7 +3,43 @@
     "badge": "Für Hebammen und Geburtshäuser",
     "title": "Familien gut informieren. <highlight>In deiner Rolle bleiben.</highlight>",
     "subtitle": "Healio zeigt Familien, welche Kassenleistungen, Boni und Zusatzversicherungen zu ihrer Situation passen können. Du gibst einen neutralen Hinweis; wir prüfen und beraten individuell.",
-    "cta": "30-minütiges Kennenlernen buchen"
+    "cta": "30-minütiges Kennenlernen buchen",
+    "secondaryCta": "Konzept mit Nita ansehen",
+    "note": "Keine Versicherungsberatung durch die Hebamme erforderlich."
+  },
+  "proof": {
+    "ariaLabel": "Die Rollen im Healio-Konzept für Hebammen",
+    "items": [
+      {
+        "title": "Hebamme informiert",
+        "text": "Du gibst Familien einen neutralen Hinweis, ohne Versicherungsberatung zu übernehmen."
+      },
+      {
+        "title": "Familien entscheiden",
+        "text": "Interessierte Familien wählen selbst, ob sie Healio kontaktieren."
+      },
+      {
+        "title": "Healio prüft",
+        "text": "Wir klären Voraussetzungen, Tarife und nächste Schritte individuell."
+      }
+    ]
+  },
+  "explanationVideo": {
+    "title": "Das Hebammenkonzept im Überblick",
+    "subtitle": "Das freigegebene Nita-Video wird hier eingebunden. Deine Fragen kannst du schon jetzt direkt mit Nita klären.",
+    "status": "Nita-Video in Vorbereitung",
+    "message": "Bis das freigegebene Video bereitsteht, führt Nita dich direkt durch das Konzept.",
+    "points": [
+      "Klar getrennte Rollen für Hebamme, Familien und Healio",
+      "Kassenleistungen, Boni und Zusatzschutz ohne Pauschalversprechen",
+      "Nächster Schritt: 30-minütiges Kennenlernen"
+    ],
+    "cta": "Konzept mit Nita klären",
+    "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
+    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden.",
+    "avatarAlt": "Nita, digitale Assistenz von Healio",
+    "assistantName": "Nita, digitale Healio-Assistentin",
+    "error": "Video konnte nicht geladen werden"
   },
   "problem": {
     "title": "Gute Empfehlungen brauchen auch finanziellen Spielraum.",
@@ -18,6 +54,7 @@
   "leistungen": {
     "title": "Welche Bausteine infrage kommen können",
     "subtitle": "Kassenleistungen, Bonusprogramme und Zusatzschutz sind getrennte Bausteine. Welche Leistungen wirklich nutzbar sind, hängt von Kasse, Tarif, Nachweisen und persönlichen Voraussetzungen ab.",
+    "detailsLabel": "Details zu Kassenleistungen und Zusatzschutz ansehen",
     "highlights": [
       {
         "title": "Tarifabhängig bis zu 1.000 EUR für Naturheilverfahren",
@@ -103,6 +140,7 @@
   "klinik": {
     "title": "Beim Neugeborenen zählt vor allem der richtige Zeitpunkt",
     "subtitle": "Die Kindernachversicherung kann wertvoll sein, folgt aber gesetzlichen und tariflichen Voraussetzungen. Hebammen geben nur den Hinweis; Healio prüft den konkreten Fall.",
+    "detailsLabel": "Details zur Kindernachversicherung und zum Klinikschutz ansehen",
     "kernTitle": "Eine Anmeldung innerhalb von zwei Monaten kann rückwirkenden Schutz ab Geburt ermöglichen.",
     "kernText": "Nach § 198 VVG kann ein Neugeborenes unter bestimmten Voraussetzungen ohne Risikozuschläge und Wartezeiten in den bestehenden Krankenversicherungsschutz eines Elternteils aufgenommen werden. Der beantragte Schutz darf nicht höher oder umfassender sein als der des versicherten Elternteils. Versicherer können außerdem eine Vorversicherungszeit des Elternteils verlangen. Deshalb sollte die Familie den konkreten Tarif möglichst vor der Geburt prüfen lassen.",
     "chanceTitle": "Warum eine frühe Prüfung sinnvoll ist",

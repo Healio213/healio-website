@@ -5,6 +5,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 import { getBlogArticleCta } from '@/lib/blogArticleCta';
+import { getPrerenderedBlogArticleHtml } from '@/lib/prerenderedBlogContent';
 
 // Leer = same-origin. Der Abruf laeuft ueber healio.de und wird von
 // Vercel an app.healio.de weitergereicht (Rewrite in vercel.json,
@@ -37,17 +38,25 @@ const BlogArticlePage = () => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const prerenderedArticleHtml = getPrerenderedBlogArticleHtml();
 
   useEffect(() => {
     fetchArticle();
   }, [slug]);
 
   const fetchArticle = async () => {
+    setLoading(true);
+    setError(null);
+    setArticle(null);
+
     try {
       const res = await fetch(`${API_BASE}/api/v1/content/articles?slug=${slug}`);
-      if (!res.ok) throw new Error('Article not found');
+      if (!res.ok) {
+        if (res.status === 404 && !prerenderedArticleHtml) return;
+        throw new Error(`HTTP ${res.status}`);
+      }
       const data = await res.json();
-      setArticle(data.article);
+      setArticle(data.article || null);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -63,7 +72,7 @@ const BlogArticlePage = () => {
   // wird hier direkt im DOM korrigiert und beim Verlassen der Seite
   // wieder zurueckgesetzt.
   useEffect(() => {
-    if (loading || article) return undefined;
+    if (loading || error || article) return undefined;
 
     const robotsTag = document.querySelector('meta[name="robots"]');
     const canonicalTag = document.querySelector('link[rel="canonical"]');
@@ -77,7 +86,7 @@ const BlogArticlePage = () => {
       if (previousRobots) robotsTag?.setAttribute('content', previousRobots);
       if (previousCanonical) canonicalTag?.setAttribute('href', previousCanonical);
     };
-  }, [loading, article]);
+  }, [loading, error, article]);
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
@@ -88,6 +97,15 @@ const BlogArticlePage = () => {
     });
   };
 
+  if (prerenderedArticleHtml && (loading || error)) {
+    return (
+      <div
+        className="contents"
+        dangerouslySetInnerHTML={{ __html: prerenderedArticleHtml }}
+      />
+    );
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -96,7 +114,19 @@ const BlogArticlePage = () => {
     );
   }
 
-  if (error || !article) {
+  if (error) {
+    return (
+      <div className="pt-32 pb-20 text-center" role="status">
+        <h1 className="text-2xl font-bold text-[#464f5d] mb-4">{t('articleLoadErrorTitle')}</h1>
+        <p className="text-gray-600 mb-4">{t('loadErrorBody')}</p>
+        <Link to={getPath('blog')} className="text-[#25c990] hover:underline">
+          {t('backToGuide')}
+        </Link>
+      </div>
+    );
+  }
+
+  if (!article) {
     return (
       <div className="pt-32 pb-20 text-center">
         <h1 className="text-2xl font-bold text-[#464f5d] mb-4">{t('notFound')}</h1>
@@ -146,7 +176,7 @@ const BlogArticlePage = () => {
         schemaMarkup={combinedSchema}
       />
 
-      <article className="pt-32 pb-20">
+      <article data-prerendered-blog-article className="pt-32 pb-20">
         {/* Header */}
         <header className="max-w-3xl mx-auto px-4 mb-12">
           <Link

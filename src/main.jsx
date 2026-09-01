@@ -4,8 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import '@/i18n/i18n';
 import '@/index.css';
+import { capturePrerenderedBlogContent } from '@/lib/prerenderedBlogContent';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+capturePrerenderedBlogContent(rootElement);
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
