@@ -58,7 +58,7 @@ const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass })
 
 const InstagramPage = () => {
   const { t } = useTranslation('instagram');
-  const { lang } = useLanguage();
+  const { lang, getPath } = useLanguage();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/instagram' : 'https://healio.de/instagram';
 
   const cards = [
@@ -169,9 +169,11 @@ const InstagramPage = () => {
           <footer className="text-center">
             <p className="text-[11px] text-slate-600 mb-2">{t('footnote')}</p>
             <div className="text-[12px] text-slate-600 space-x-2">
-              <Link to="/" className="hover:text-slate-400 transition-colors">{t('links.home')}</Link>
+              <Link to={getPath('home')} className="hover:text-slate-400 transition-colors">{t('links.home')}</Link>
               <span>·</span>
-              <Link to="/impressum" className="hover:text-slate-400 transition-colors">{t('links.impressum')}</Link>
+              <Link to={getPath('impressum')} className="hover:text-slate-400 transition-colors">{t('links.impressum')}</Link>
+              <span>·</span>
+              <Link to={getPath('datenschutz')} className="hover:text-slate-400 transition-colors">{t('links.privacy')}</Link>
             </div>
           </footer>
 

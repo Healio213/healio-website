@@ -45,7 +45,7 @@ export const routeMap = {
     vorsorgeRechner: '/en/companies/pension-calculator',
     partner: '/en/partner',
     hebammen: '/en/midwives',
-    heilberufeVorsorge: '/heilberufe-vorsorge',
+    heilberufeVorsorge: '/en/healthcare-professionals-protection',
     kontakt: '/en/contact',
     terminvereinbarung: '/en/appointment',
     impressum: '/en/legal-notice',

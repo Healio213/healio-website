@@ -153,6 +153,9 @@
     "openCalendar": "Alternativen Kalender öffnen",
     "calendarRedirect": "Sie werden zu Google Calendar weitergeleitet, um Ihren Termin sicher zu buchen.",
     "backToHome": "Zurück zur Startseite",
-    "newAppointment": "Neuen Termin anfragen"
+    "newAppointment": "Neuen Termin anfragen",
+    "legalNavLabel": "Rechtliche Informationen",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz"
   }
 }

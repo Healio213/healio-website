@@ -27,6 +27,7 @@ const EXACT_ROUTE_CONTEXTS = new Map([
   ['/en/midwives', ['midwives', 'inpatient']],
   ['/zahnaerzte', ['dentists', 'dental']],
   ['/heilberufe-vorsorge', ['healthcare_professionals', 'general']],
+  ['/en/healthcare-professionals-protection', ['healthcare_professionals', 'general']],
   ['/lebenshilfe', ['life_support', 'general']],
   ['/kontakt', ['contact', 'general']],
   ['/en/contact', ['contact', 'general']],
@@ -150,7 +151,7 @@ const FIRST_MESSAGES = {
     },
     partner: {
       global_launcher: 'Hi, I’m Nita, Healio’s digital assistant. You do not need to explain or recommend plans. Would you like to start with the three roles or the path to an introductory meeting?',
-      delayed_prompt: 'Of course. Your practice provides neutral information, patients decide freely, and Healio checks eligibility and advises individually. Shall I start with the roles or the process?',
+      delayed_prompt: 'Of course. Your practice provides neutral information, patients decide freely, and Healio checks eligibility and advises individually. Shall I start with the roles or the partnership process?',
     },
     midwives: {
       global_launcher: 'Hi, I’m Nita, Healio’s digital assistant. You do not need to explain or recommend plans. Would you like to see how to provide neutral information to families or how Healio handles the next steps?',

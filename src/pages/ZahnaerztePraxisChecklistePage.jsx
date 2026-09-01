@@ -126,8 +126,8 @@ const ZahnaerztePraxisChecklistePage = () => (
           <Link to="/impressum" className="text-slate-700 underline decoration-emerald-300 decoration-2 underline-offset-4 hover:text-[#076046] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4">
             Impressum
           </Link>
-          <Link to="/datenschutz#linkedin-lead-gen-formulare" className="text-slate-700 underline decoration-emerald-300 decoration-2 underline-offset-4 hover:text-[#076046] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4">
-            Datenschutz für LinkedIn-Formulare
+          <Link to="/datenschutz" className="text-slate-700 underline decoration-emerald-300 decoration-2 underline-offset-4 hover:text-[#076046] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4">
+            Datenschutz
           </Link>
           <Link to="/erstinformation" className="text-slate-700 underline decoration-emerald-300 decoration-2 underline-offset-4 hover:text-[#076046] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4">
             Erstinformation

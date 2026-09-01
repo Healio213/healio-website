@@ -32,6 +32,7 @@
     "test:content-security": "node scripts/check-content-security-contract.mjs",
     "test:content-security:rendered": "node scripts/check-blog-content-security-rendered.mjs",
     "test:form-hardening": "node scripts/check-form-hardening-contract.mjs",
+    "test:block3-content": "node scripts/check-block3-content-contract.mjs",
     "test:conversion": "node scripts/check-conversion-disclosure-contract.mjs",
     "test:ambulant-bonus": "npm run test:ambulant-bonus-model && npm run test:ambulant-bonus-rendered",
     "test:ambulant-bonus-model": "node scripts/check-ambulant-bonus-calculator-model.mjs",

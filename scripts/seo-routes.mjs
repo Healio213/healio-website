@@ -165,6 +165,7 @@ export const seoRoutes = [
     description: 'Gebündelte Absicherung für Praxis und Leben: Berufshaftpflicht, Praxisausfall, Cyber, Berufsunfähigkeit und Rürup. Exklusive Rahmenkonditionen nur über Healio.',
     canonical: 'https://healio.de/heilberufe-vorsorge',
     lang: 'de',
+    hreflang: { de: 'https://healio.de/heilberufe-vorsorge', en: 'https://healio.de/en/healthcare-professionals-protection' },
   },
   {
     path: '/zahn',
@@ -481,6 +482,14 @@ export const seoRoutes = [
     canonical: 'https://healio.de/en/partner',
     lang: 'en',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
+  },
+  {
+    path: '/en/healthcare-professionals-protection',
+    title: 'Healthcare Professional Coverage for Naturopaths and Osteopaths | Healio',
+    description: 'Bundled coverage for your practice and your life: professional liability, practice interruption, cyber, disability insurance and Rürup pension.',
+    canonical: 'https://healio.de/en/healthcare-professionals-protection',
+    lang: 'en',
+    hreflang: { de: 'https://healio.de/heilberufe-vorsorge', en: 'https://healio.de/en/healthcare-professionals-protection' },
   },
   {
     path: '/en/dental',

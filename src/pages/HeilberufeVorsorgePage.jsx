@@ -17,6 +17,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
+import { useLanguage } from '@/hooks/useLanguage';
 
 // Reusable Eyebrow-Pill für alle Sektionen
 const SectionEyebrow = ({ children, variant = 'light' }) => {
@@ -78,7 +79,15 @@ const ctaFriendlyIcons = [
 const HeilberufeVorsorgePage = () => {
   const { t } = useTranslation('heilberufe');
   const { t: tSeo } = useTranslation('seo');
+  const { lang, getPath } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
+  const canonicalUrl = lang === 'en'
+    ? 'https://healio.de/en/healthcare-professionals-protection'
+    : 'https://healio.de/heilberufe-vorsorge';
+  const alternateUrls = {
+    de: 'https://healio.de/heilberufe-vorsorge',
+    en: 'https://healio.de/en/healthcare-professionals-protection',
+  };
 
   const scrollToCTA = () => {
     document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' });
@@ -86,7 +95,9 @@ const HeilberufeVorsorgePage = () => {
 
   const schemaMarkup = createWebPageSchema(
     tSeo('heilberufe.title'),
-    tSeo('heilberufe.description')
+    tSeo('heilberufe.description'),
+    canonicalUrl,
+    lang === 'en' ? 'en-US' : 'de-DE'
   );
 
   const pillars = t('solution.pillars', { returnObjects: true });
@@ -102,7 +113,8 @@ const HeilberufeVorsorgePage = () => {
       <SEOHead
         title={tSeo('heilberufe.title')}
         description={tSeo('heilberufe.description')}
-        canonicalUrl="https://healio.de/heilberufe-vorsorge"
+        canonicalUrl={canonicalUrl}
+        alternateUrls={alternateUrls}
         schemaMarkup={schemaMarkup}
       />
 
@@ -152,7 +164,7 @@ const HeilberufeVorsorgePage = () => {
                 >
                   {t('hero.ctaPrimary')}
                 </Button>
-                <Link to="/partner">
+                <Link to={getPath('partner')}>
                   <Button
                     variant="outline"
                     className="bg-white/10 border-white/40 text-white hover:bg-white/20 text-lg px-8 py-6 rounded-xl"
@@ -656,7 +668,7 @@ const HeilberufeVorsorgePage = () => {
                 <p className="text-white/75 mb-6 leading-relaxed">
                   {t('cta.primary.description')}
                 </p>
-                <Link to="/terminvereinbarung">
+                <Link to={getPath('terminvereinbarung')}>
                   <Button className="w-full bg-[#25c990] hover:bg-[#1fb37f] text-white py-6 rounded-xl">
                     {t('cta.primary.cta')}
                   </Button>
@@ -675,7 +687,7 @@ const HeilberufeVorsorgePage = () => {
                 <p className="text-white/75 mb-6 leading-relaxed">
                   {t('cta.secondary.description')}
                 </p>
-                <Link to="/kontakt">
+                <Link to={getPath('kontakt')}>
                   <Button
                     variant="outline"
                     className="w-full bg-white/10 border-white/40 text-white hover:bg-white/20 py-6 rounded-xl"

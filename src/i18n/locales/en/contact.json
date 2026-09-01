@@ -153,6 +153,9 @@
     "openCalendar": "Open Alternative Calendar",
     "calendarRedirect": "You will be redirected to Google Calendar to securely book your appointment.",
     "backToHome": "Back to Homepage",
-    "newAppointment": "Request New Appointment"
+    "newAppointment": "Request New Appointment",
+    "legalNavLabel": "Legal information",
+    "impressum": "Legal Notice",
+    "datenschutz": "Privacy"
   }
 }

@@ -166,6 +166,7 @@ function App() {
               <Route path="corporate-benefits" element={<Navigate to="/en/companies" replace />} />
               <Route path="partner" element={<PartnerPage />} />
               <Route path="midwives" element={<HebammenPage />} />
+              <Route path="healthcare-professionals-protection" element={<HeilberufeVorsorgePage />} />
               <Route path="contact" element={<KontaktPage />} />
               <Route path="appointment" element={<TerminvereinbarungPage />} />
               <Route path="outpatient" element={<AmbulantPage />} />

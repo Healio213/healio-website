@@ -206,7 +206,7 @@ const ErstinformationPage = () => {
                   <p>Arndtstraße 6</p>
                   <p>22085 Hamburg</p>
                   <p className="pt-3"><span className="font-semibold text-slate-950">{t('erstinformation.provider.managingDirectorLabel')}</span> Frank Steinfurt</p>
-                  <p><span className="font-semibold text-slate-950">{t('erstinformation.provider.commercialRegisterLabel')}</span> HRB 196 905</p>
+                  <p><span className="font-semibold text-slate-950">{t('erstinformation.provider.commercialRegisterLabel')}</span> HRB 196905</p>
                   <p><span className="font-semibold text-slate-950">{t('erstinformation.provider.registryCourtLabel')}</span> Amtsgericht Hamburg</p>
                 </div>
                 <div className="space-y-4">

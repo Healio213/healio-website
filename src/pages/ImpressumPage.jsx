@@ -50,6 +50,7 @@ const ImpressumPage = () => {
                   <p className="font-medium text-gray-900">{t('impressum.companyName')}</p>
                   <p>{t('impressum.address1')}</p>
                   <p>{t('impressum.address2')}</p>
+                  <p className="pt-2">{t('impressum.representedBy')}</p>
                   <p className="pt-2">{t('impressum.register')}</p>
                   <p>{t('impressum.court')}</p>
                   <p>{t('impressum.taxNumber')}</p>

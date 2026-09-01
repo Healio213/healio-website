@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Calendar, CheckCircle2, Home, ArrowLeft, Clock, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
@@ -215,6 +215,18 @@ const ConfirmationPage = () => {
         </motion.div>
           </>
         )}
+        <nav
+          aria-label={t('confirmation.legalNavLabel')}
+          className="mt-12 flex items-center justify-center gap-3 text-sm text-slate-500"
+        >
+          <Link to={getPath('impressum')} className="transition-colors hover:text-healio-primary">
+            {t('confirmation.impressum')}
+          </Link>
+          <span aria-hidden="true">·</span>
+          <Link to={getPath('datenschutz')} className="transition-colors hover:text-healio-primary">
+            {t('confirmation.datenschutz')}
+          </Link>
+        </nav>
       </div>
     </div>
   );
