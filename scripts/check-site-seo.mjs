@@ -82,6 +82,17 @@ for (const [dePath, enPath] of bilingualPairs) {
 }
 
 const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
+const robots = fs.readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
+assert.match(
+  robots,
+  /^Sitemap: https:\/\/healio\.de\/sitemap\.xml$/m,
+  'robots.txt muss die statische Haupt-Sitemap nennen.',
+);
+assert.match(
+  robots,
+  /^Sitemap: https:\/\/healio\.de\/api\/v1\/content\/sitemap$/m,
+  'robots.txt muss die dynamische Content-Sitemap nennen, damit neue Blogartikel automatisch auffindbar werden.',
+);
 for (const path of publicRouterPaths) {
   const route = routeMap.get(path);
   const sitemapCanonical = route.canonical === SITE_URL ? `${SITE_URL}/` : route.canonical;
