@@ -4,23 +4,23 @@
     "description": "Healio combines corporate pension, health insurance, wellbeing coordination and employee communication into one managed benefits system."
   },
   "hero": {
-    "eyebrow": "Corporate benefits and health management",
-    "titleLead": "Promote health. Retain employees.",
-    "titleHighlight": "Get provision right.",
-    "description": "Individual benefits are easy to buy. Healio turns them into one managed system of pension, health insurance, wellbeing coordination and clear employee communication.",
+    "eyebrow": "Employee benefits for companies",
+    "titleLead": "Benefits employees understand.",
+    "titleHighlight": "One system you can manage.",
+    "description": "Healio reviews your existing plans and brings pension, health insurance and wellbeing into one managed system.",
     "analysisCta": "Start a benefits review",
-    "solutionsCta": "Explore the solutions",
+    "solutionsCta": "Explore the building blocks",
     "proof": ["Independent broker", "Existing plans included", "Ongoing support"]
   },
   "realityCheck": {
     "eyebrow": "60-second reality check",
-    "title": "Can you answer these three questions with confidence today?",
+    "title": "Where do your benefits stand today?",
     "questions": [
       "What does your current provision cost — including product charges?",
       "What share of your workforce understands and uses it?",
       "Who reviews providers, contributions and communication regularly?"
     ],
-    "conclusion": "If one answer is missing, action is needed — not necessarily a switch, but an honest review of the status quo.",
+    "conclusion": "Missing one answer? An honest review is worthwhile — without any obligation to switch.",
     "cta": "Start a benefits review"
   },
   "calculator": {
@@ -61,9 +61,11 @@
   "responsibility": {
     "eyebrow": "Responsibility with a long horizon",
     "title": "The decision does not end when the contract is signed.",
-    "lead": "The statutory pension provides a foundation. Additional security is built where provision starts early, remains understandable and is supported consistently over decades.",
+    "lead": "Long-term benefits need clear decisions and ongoing support.",
     "description": "For company leaders, corporate pension is therefore more than administration. Product costs, return assumptions, participation and communication all influence what ultimately reaches the workforce in 30 years.",
-    "position": "Healio makes this effect visible without promising returns. We compare assumptions, review existing solutions and translate long-term consequences into decisions that are robust today.",
+    "position": "Healio makes the impact visible without promising returns. We review existing plans and assumptions and turn long-term consequences into robust decisions.",
+    "detailsShow": "Context and sources",
+    "detailsHide": "Close context",
     "sources": {
       "dai": {
         "publisher": "Deutsches Aktieninstitut",
@@ -85,48 +87,52 @@
   "solutions": {
     "eyebrow": "Corporate benefits management",
     "title": "Four building blocks. One benefits system.",
-    "description": "A collection of policies is not yet a benefits strategy. Pension, health, prevention and ongoing management must work together so employees understand the value and companies stay in control.",
+    "description": "Start with the biggest lever. Open benefits, limits and notes only when you need them.",
+    "detailsShow": "View details",
+    "detailsHide": "Close details",
     "items": [
       {
         "key": "pension",
         "horizon": "Tomorrow · Pension",
-        "title": "A pension that does more than create administration.",
-        "description": "We review existing plans and explain costs, return assumptions, guarantees, employer contributions and their effect on future provision.",
+        "title": "A pension people can understand.",
+        "description": "We review plans, costs, contributions and assumptions — clearly, down to employee level.",
         "points": ["Review existing plans and costs transparently", "Assess suitable implementation routes", "Explain provision clearly at employee level"]
       },
       {
         "key": "health",
         "horizon": "Today · Health insurance",
-        "title": "Healthcare benefits employees understand immediately.",
-        "description": "Corporate health insurance makes an employer benefit tangible now. We develop a level of cover that fits the workforce and the available budget.",
+        "title": "Health cover employees value now.",
+        "description": "We develop cover that fits your workforce and available budget.",
         "points": ["Predictable contribution per insured employee", "Choose benefits suited to the workforce", "Explain rollout and use clearly"],
         "note": "Available benefits depend on the selected plan and its insurance terms."
       },
       {
         "key": "prevention",
         "horizon": "Wellbeing coordination and prevention",
-        "title": "One health day is not yet health management.",
-        "description": "Healio supports the coordination of voluntary health-promotion and prevention services and involves the responsible internal and external parties.",
+        "title": "Wellbeing that fits everyday work.",
+        "description": "We coordinate voluntary health and prevention services with the responsible parties.",
         "points": ["Assess needs and employee groups", "Select qualified measures", "Plan health communication"],
         "note": "Healio supports wellbeing coordination and voluntary health promotion. Statutory duties relating to occupational health and safety, return-to-work management or occupational medicine remain with the responsible parties."
       },
       {
         "key": "management",
         "horizon": "Ongoing · Management and communication",
-        "title": "A system needs someone to keep it running.",
-        "description": "Benefits management does not end at signature. Healio connects plans, providers, processes and communication and remains the central point of contact.",
+        "title": "Support that continues after launch.",
+        "description": "Healio connects plans, providers, processes and communication and remains your central contact.",
         "points": ["Integrate existing solutions sensibly", "Support HR and payroll", "Review and adjust provision regularly"]
       }
     ]
   },
   "economics": {
     "eyebrow": "Economics and structure",
-    "title": "Looking only at the contribution leaves the calculation incomplete.",
-    "description": "Employer-funded pension and health benefits may — depending on the component and structure — qualify as business expenses. Additional statutory tax and contribution advantages may further change the company's effective cost.",
+    "title": "What do your benefits really cost?",
+    "description": "Contributions, payroll charges and tax structure together determine the company's effective cost.",
     "cta": "Assess effective cost in a benefits review",
     "summaryTitle": "Tax-deductible does not mean free.",
-    "summaryText": "A business-expense deduction is not a full reimbursement. Legal form, profit, tax rate, type of benefit and implementation all matter. Healio makes these factors transparent and, if requested, coordinates implementation with payroll and tax advisers.",
+    "summaryText": "A business-expense deduction is not a reimbursement. Its effect depends on the legal form, tax rate, benefit and implementation.",
     "sourceLabel": "Official source",
+    "detailsShow": "Tax context and sources",
+    "detailsHide": "Close context",
     "facts": [
       {
         "key": "expense",
@@ -153,8 +159,8 @@
   },
   "process": {
     "eyebrow": "From product to management",
-    "title": "Rollout is the beginning. Not the end.",
-    "description": "Benefits create value only when employees understand them and HR can manage them reliably. Healio creates a robust process for both.",
+    "title": "Review. Model. Launch. Support.",
+    "description": "One clear process for employees and HR — from the existing plans to ongoing support.",
     "steps": [
       {"title": "Understand the status quo", "description": "We review contracts, costs, subsidies, participation and existing communication."},
       {"title": "Build the business case", "description": "You see which pension, health and wellbeing structure fits the company and its budget."},
@@ -163,23 +169,72 @@
     ]
   },
   "workforce": {
-    "eyebrow": "Alternative without a company benefit budget",
-    "title": "If the employer budget is not ready yet, better health access does not have to wait.",
-    "description": "The company enables access and internal communication. Employees decide voluntarily whether the Healio concept suits them. Health access can therefore start before an employer-funded budget is approved.",
-    "cardEyebrow": "Entry route without a benefits budget",
-    "employerAmount": "EUR 0",
-    "employerLabel": "employer insurance contribution",
-    "budgetLabel": "Potentially available to eligible employees",
-    "budgetAmount": "up to EUR 3,000",
-    "budgetSuffix": "in potential insurance benefits over 2 years. A suitable statutory-insurance bonus may offset the employee contribution in whole or in part.",
-    "points": ["No employer insurance contribution required", "Voluntary employee decision", "Information and personal support from Healio"],
-    "cta": "Assess Healio for your workforce",
-    "note": "Employees take out and fund the insurance themselves. A statutory-insurance bonus may offset contributions in whole or in part; full reimbursement is not guaranteed. Accessing a suitable bonus may require changing statutory health insurer. Benefits, contributions and bonuses depend on the plan, personal circumstances and actual bonus use."
+    "eyebrow": "KassenBoost for employees",
+    "title": "Free employee value. No employer access.",
+    "description": "With KassenBoost, employees compare voluntarily and free of charge. Every decision stays private.",
+    "cardEyebrow": "Private employee access",
+    "cardTitle": "Employees compare for themselves.",
+    "privacyTitle": "What stays private",
+    "privacyDescription": "Individual inputs and results remain with the employee. They are not shared with the employer or Healio.",
+    "points": ["Voluntary and free", "No contact details", "No sharing of individual results"],
+    "primaryCta": "Open KassenBoost",
+    "secondaryCta": "Discuss access for your workforce",
+    "detailsShow": "Process and privacy",
+    "detailsHide": "Close details",
+    "note": "The fixed link transmits no employee data. KassenBoost provides private guidance; each employee makes any subsequent decision independently."
+  },
+  "bavLeverage": {
+    "eyebrow": "Employer-funded pension · 2026 model example",
+    "title": "Around EUR 75 net impact. EUR 676 for retirement. 30 years of time.",
+    "titleLine1": "Around EUR 75 net impact.",
+    "titleLine2": "EUR 676 for retirement.",
+    "titleLine3": "30 years of time.",
+    "netEffectExplanation": "The roughly EUR 75 is not an employee contribution. It shows the potential reduction in take-home pay caused by additional social charges in the standard example.",
+    "description": "The employer funds the contract. In the standard example the employee sees around EUR 75 less take-home pay while EUR 676 a month builds a substantial retirement pot.",
+    "detailsIntro": "Assertive modelling. Fully disclosed.",
+    "detailsShow": "Calculation, assumptions and sources",
+    "detailsHide": "Close details",
+    "shortDisclaimer": "Simplified assertive 2026 model. Returns and monthly figures are illustrations, not a forecast, guarantee or tariff pension.",
+    "flow": {
+      "ariaLabel": "From potential take-home pay impact through the employer contribution to the 30-year model",
+      "formula": "30 years · 10% market assumption − 2 percentage points costs = 8% model return",
+      "employeeStage": "Employee today",
+      "employeeCaption": "potential reduction in take-home pay",
+      "employeeNote": "in the standard example — not a EUR 676 employee contribution",
+      "firstConnector": "Employer funds",
+      "contractStage": "Into the contract each month",
+      "contractCaption": "full employer-funded pension contribution",
+      "contractNote": "{{contributions}} contributed over 30 years",
+      "secondConnector": "30 years",
+      "futureStage": "What it could become",
+      "modeLabel": "Show model result",
+      "capitalTab": "Capital",
+      "monthlyTab": "Monthly",
+      "capitalCaption": "modelled retirement capital",
+      "capitalNote": "{{contributions}} in contributions plus model growth",
+      "monthlyGrossCaption": "monthly 4% model withdrawal before deductions",
+      "monthlyAfterCaption": "illustration after a flat {{deduction}}% model deduction",
+      "monthlyNote": "These monthly figures are a withdrawal model, not a guaranteed or lifelong tariff pension."
+    },
+    "splitTitle": "In the standard model, the EUR 676 consists of two parts:",
+    "splitFree": "EUR 338 exempt from tax and social-security contributions",
+    "splitLiable": "EUR 338 tax-free and generally subject to social-security contributions",
+    "legalSource": "Legal basis and assumptions in the calculator",
+    "employerCostLabel": "Show the employer's full cost",
+    "employerCost": "Employer social-security contributions may apply to the generally liable portion in addition to the pension contribution. In the standard model this is around EUR 71 extra, bringing total cost to around EUR 747 per participant and month.",
+    "returnLabel": "Assertive, evidenced standard scenario",
+    "standardFormula": "10% − 2 percentage points = 8% model return",
+    "historicalContext": "Historical context: MSCI World USD Net Return, July 2011 to July 2026, as at July 31, 2026: 11.10% p.a. Mathematically 9.10% p.a. after the same cost assumption.",
+    "source": "Open the MSCI factsheet",
+    "payoutModelTitle": "How the monthly figure is derived",
+    "payoutModel": "The illustration spreads 4% of the model capital across twelve months each year. We also show a flat 30% model deduction for potential tax and health and long-term-care contributions. The actual burden is individual; this is not a guaranteed or lifelong tariff pension.",
+    "disclaimer": "Simplified 2026 standard model. Potential take-home pay impact and employer cost depend on salary, contribution ceilings, health insurer and long-term-care status, among other factors. The 8% figure is an assertive model return after the visible cost assumption, not a forecast or guarantee. Tax, inflation and health and long-term-care contributions are approximated only in the flat 30% illustration.",
+    "cta": "Calculate your own example"
   },
   "faq": {
     "eyebrow": "Before the decision",
-    "title": "Four questions every company should answer.",
-    "description": "The greatest risk is not one imperfect decision. It is a system nobody challenges at all.",
+    "title": "What companies want to know first.",
+    "description": "The essential answers — clear, open-ended and without hiding the fine print.",
     "items": [
       {
         "question": "Do existing contracts have to be replaced?",
@@ -195,7 +250,7 @@
       },
       {
         "question": "What if an employer-funded benefit budget is not available yet?",
-        "answer": "The Healio employee concept can provide a voluntary entry route without an employer-funded benefit contribution. The company enables internal communication; employees make and fund their own decision."
+        "answer": "The company can voluntarily point employees to the free KassenBoost comparison. Employees use it privately and without contact details; individual inputs and results are shared with neither the employer nor Healio. A later, separate decision to seek advice or choose a solution may involve costs."
       }
     ]
   },
@@ -207,11 +262,164 @@
     "ongoing": "Rollout is the beginning – not the end",
     "contact": "Healio remains the central point of contact"
   },
+  "bavDecisionCalculator": {
+    "seo": {
+      "title": "Employer pension decision calculator 2026 | Healio",
+      "description": "Model employer-funded pension contributions with 2026 contribution ceilings, social charges and a transparent capital projection."
+    },
+    "hero": {
+      "eyebrow": "Employer pension decision calculator 2026",
+      "title": "What a EUR 676 pension contribution really means for your company.",
+      "description": "Adjust the decisive variables yourself. The calculator separates company cost, potential employee impact and long-term capital projection without promising a net pension or a business outcome.",
+      "back": "Back to the company page"
+    },
+    "controls": {
+      "title": "Your company model",
+      "description": "These figures are an orientation for an initial discussion. The final calculation must be completed for each employee and payroll month.",
+      "employees": {
+        "label": "Employees",
+        "hint": "Total workforce, not only expected participants"
+      },
+      "participation": {
+        "label": "Participation rate",
+        "hint": "Share of employees included in the model"
+      },
+      "salary": {
+        "label": "Average monthly gross salary",
+        "hint": "Model corridor EUR 2,001–6,450: above the transition zone and up to the 2026 general annual income threshold for statutory health insurance"
+      },
+      "contribution": {
+        "label": "Employer contribution per participant and month",
+        "hint": "Fully employer-funded; 2026 tax-free maximum",
+        "splitTitle": "The EUR 338 threshold",
+        "splitFree": "The first EUR 338 is modelled as exempt from tax and social-security contributions.",
+        "splitLiable": "The next EUR 338 remains tax-free but is generally subject to social-security contributions.",
+        "currentLiable": "Generally subject to social-security contributions in this model: {{amount}}"
+      },
+      "duration": {
+        "label": "Term",
+        "hint": "Modelled with monthly contributions paid at month-end",
+        "value": "{{years}} years"
+      },
+      "revenue": {
+        "label": "Annual revenue",
+        "hint": "Used only to put company cost into context"
+      },
+      "returnRate": {
+        "label": "Market return before effective costs",
+        "hint": "An assertive model with historical context – not a forecast",
+        "standard": "Standard scenario",
+        "historical": "Historical 15-year value",
+        "lower": "Lower scenario",
+        "standardDescription": "10% market scenario before product costs. With a {{costs}}-percentage-point effective-cost assumption, this produces a {{netRate}}% model return after costs.",
+        "historicalDescription": "The official MSCI World USD Net Return rose from 100 in July 2011 to 484.83 in July 2026. This equals {{rate}}% p.a.; mathematically {{netRate}}% after the selected {{costs}}-percentage-point cost assumption."
+      },
+      "costs": {
+        "label": "Return reduction from effective costs",
+        "hint": "Replace with the actual effective-cost figure in a proposal",
+        "description": "The default model deducts 2.00 percentage points a year. This is slightly above the BaFin weighted average for the surveyed 30-year unit-linked sample contracts.",
+        "formulaExample": "10% − 2% = 8%",
+        "formula": "{{gross}}% − {{costs}}% = {{net}}% model return",
+        "method": "Calculation method: the effective annual return is converted into its equivalent monthly return. Contributions are paid in arrears at month-end."
+      }
+    },
+    "results": {
+      "eyebrow": "Your model result",
+      "participants": "{{count}} participants",
+      "announcement": "{{count}} participants. Modelled total annual employer cost {{annualCost}}. Modelled capital {{capital}} per participant.",
+      "company": {
+        "title": "Company cost",
+        "bav": "annual pension contributions",
+        "social": "additional annual employer social charges",
+        "total": "modelled total annual employer cost",
+        "payroll": "share of gross payroll",
+        "revenue": "share of annual revenue"
+      },
+      "employee": {
+        "title": "Employee impact",
+        "credit": "monthly pension credit",
+        "netImpact": "potential additional monthly social charge",
+        "publicExample": "In the selected model, a {{credit}} pension contribution is set against a potential additional social charge of {{impact}}.",
+        "headroom": "The actual charge falls where social-security contribution ceilings are partly or fully reached."
+      },
+      "capital": {
+        "title": "Capital projection",
+        "formula": "Selected model return",
+        "contributionsPerPerson": "contributions per participant",
+        "capitalPerPerson": "modelled capital per participant",
+        "monthlyGross": "monthly 4% model withdrawal before deductions",
+        "monthlyAfter": "after a flat {{deduction}}% model deduction",
+        "monthlyNote": "Illustration derived from the capital model — not a guaranteed or lifelong tariff pension.",
+        "capitalGroup": "modelled group capital"
+      }
+    },
+    "sources": {
+      "eyebrow": "Disclose the assumptions",
+      "title": "The primary sources behind the 2026 model.",
+      "msci": {
+        "publisher": "MSCI World · USD Net Return",
+        "description": "The MSCI factsheet dated July 31, 2026 shows cumulative growth from 100 to 484.83 between July 2011 and July 2026. This equals a calculated 11.10% p.a. in USD; after a flat 2-percentage-point cost assumption it would be 9.10%. MSCI Net Return is an index methodology reflecting assumed withholding tax on dividends, not performance after individual product costs. Historical context, not a future guarantee.",
+        "url": "https://www.msci.com/documents/10199/255599/msci-world-index-usd-net.pdf"
+      },
+      "msciEur": {
+        "publisher": "MSCI · World Index in EUR",
+        "description": "The official EUR net-return series shows how period, currency and return variant can materially change the outcome.",
+        "url": "https://www.msci.com/resources/factsheets/index_fact_sheet/msci-world-index-eur-net.pdf"
+      },
+      "bafin": {
+        "publisher": "BaFin · effective costs",
+        "description": "For unit-linked contracts with a 30-year term and monthly contributions, the weighted average among the surveyed best-selling products was a 1.90 percentage-point effective cost; the median was 1.64.",
+        "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
+      },
+      "drv": {
+        "publisher": "German Pension Insurance · pension funding limits",
+        "description": "German Pension Insurance confirms for 2026 employer contributions through a pension fund, pension scheme or direct insurance: up to EUR 8,112 a year tax-free, of which up to EUR 4,056 a year is exempt from social-security contributions.",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Arbeitgeber-und-Steuerberater/summa-summarum/Lexikon/B/beitragsfreiheit_von_arbeitgeberbeitraegen_zur_betrieblichen_altersversorgung.html"
+      },
+      "federalGovernment": {
+        "publisher": "Federal Government · 2026 reference values",
+        "description": "The official 2026 monthly figures are EUR 8,450 for the pension and unemployment contribution ceiling, EUR 5,812.50 for the health and long-term care ceiling, and EUR 6,450 for the general annual income threshold.",
+        "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514"
+      },
+      "bmgHealth": {
+        "publisher": "Federal Ministry of Health · statutory health insurance",
+        "description": "For 2026, the Federal Ministry of Health states a 14.6% general statutory health-insurance rate and a 2.9% average additional contribution; the individual insurer's rate may differ.",
+        "url": "https://www.bundesgesundheitsministerium.de/beitraege/seite"
+      },
+      "bmgCare": {
+        "publisher": "Federal Ministry of Health · long-term care insurance",
+        "description": "The Federal Ministry of Health states a 3.6% general contribution rate for social long-term care insurance. The allocation can vary by number of children, age and place of employment.",
+        "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
+      },
+      "incomeTax": {
+        "publisher": "Federal Ministry of Finance · benefit phase",
+        "description": "Benefits from pension funds, pension schemes and direct insurance are treated for tax purposes under Section 22 no. 5 EStG in the benefit phase. The actual tax effect depends on the individual case.",
+        "url": "https://ao.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-03/II/inhalt.html"
+      },
+      "healthContributions": {
+        "publisher": "Section 229 SGB V · pension benefits",
+        "description": "Occupational pension benefits can be subject to statutory health and long-term-care contributions. Capital benefits are also converted into monthly amounts by law for this purpose; the individual case must be reviewed.",
+        "url": "https://www.gesetze-im-internet.de/sgb_5/__229.html"
+      },
+      "open": "Open primary source"
+    },
+    "disclaimers": {
+      "assumptions": "Standard social-charge assumption: statutory health insurance, 2.9% average additional contribution, one child and employment outside Saxony.",
+      "legalFramework": "For the first employment relationship, the model assumes an eligible implementation route under Section 3 no. 63 EStG: pension fund, pension scheme or direct insurance. It assumes that the 2026 annual limits of EUR 8,112 tax-free and EUR 4,056 exempt from social-security contributions have not been used by other contributions and that twelve equal monthly contributions are paid. EUR 676 and EUR 338 are the monthly amounts derived from those annual limits.",
+      "projection": "Simplified model calculation, not a forecast or guarantee. The selected simplified return reduction is included; actual tariff costs and their effect are not fully represented without product documents. The monthly illustration spreads 4% of model capital over twelve months each year and additionally shows a flat 30% model deduction. It is not a guaranteed or lifelong tariff pension. Actual tax and health and long-term-care contributions are individual; inflation is not included. Past performance is not a reliable indicator of future results.",
+      "payroll": "Average gross salary is only a planning approximation. Contribution ceilings, health insurer, care-insurance status, place of employment and further levies must be reviewed in payroll for every employee and payroll month. This is not tax or legal advice."
+    },
+    "cta": {
+      "title": "Now test the model with your real workforce.",
+      "description": "In a benefits review, we replace assumptions with your employee structure, payroll data and actual contract costs.",
+      "button": "Request a benefits review"
+    }
+  },
   "cta": {
     "eyebrow": "Now, not someday",
     "title": "You cannot catch up on 30 lost years.",
     "description": "In a focused benefits review, we assess your current provision, identify economic levers and clarify which decision actually matters today.",
     "primary": "Start a benefits review",
-    "proof": ["30 minutes", "no obligation", "with an initial plan review"]
+    "proof": ["45 minutes", "no obligation", "with an initial plan review"]
   }
 }

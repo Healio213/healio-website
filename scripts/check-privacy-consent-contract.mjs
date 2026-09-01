@@ -31,6 +31,10 @@ const footer = read('src/components/sections/Footer.jsx');
 const header = read('src/components/Header.jsx');
 const consent = read('src/lib/consent.js');
 const analytics = read('src/lib/analytics.js');
+const privacyPage = read('src/pages/DatenschutzPage.jsx');
+const veterinaryForm = read('src/components/sections/VeterinaryContactForm.jsx');
+const legalDe = JSON.parse(read('src/i18n/locales/de/legal.json'));
+const legalEn = JSON.parse(read('src/i18n/locales/en/legal.json'));
 const sourceFiles = fs.readdirSync(path.join(root, 'src/pages'))
   .filter((file) => file.endsWith('.jsx'))
   .map((file) => [`src/pages/${file}`, read(`src/pages/${file}`)]);
@@ -55,6 +59,73 @@ expect(buildNitaContext('/blog/geheime-details').healio_page === 'blog' && !JSON
 expect(unknownContext.healio_page === 'other' && unknownContext.healio_product === 'general', 'Unbekannte Routen müssen auf einen neutralen Kontext zurückfallen.');
 expect(sanitizeNitaEntryPoint('untrusted-entry') === 'global_launcher', 'Unbekannte Nita-Einstiege müssen auf den globalen Launcher zurückfallen.');
 expect(/partnership/i.test(englishPartnerMessage), 'Der englische Partner-Einstieg muss die Partnerschaft statt einer generischen Erklärung aufgreifen.');
+
+const emailJsDisclosureDe = `${legalDe.datenschutz.emailJsTitle || ''} ${legalDe.datenschutz.emailJsText || ''}`;
+const emailJsDisclosureEn = `${legalEn.datenschutz.emailJsTitle || ''} ${legalEn.datenschutz.emailJsText || ''}`;
+
+expect(
+  /emailjsService\.sendEmail\([\s\S]*?from_name:\s*formData\.name[\s\S]*?from_email:\s*formData\.email[\s\S]*?Tierart:[\s\S]*?Gewünschter Schutz:[\s\S]*?Alter:[\s\S]*?Rasse:[\s\S]*?Nutzung:/.test(veterinaryForm),
+  'Der Datenschutzvertrag muss an den tatsächlich per EmailJS versandten Kontakt- und Tierprofildaten ausgerichtet bleiben.',
+);
+expect(
+  /reviewOrderAccepted:\s*false/.test(veterinaryForm)
+    && /name="reviewOrderAccepted"[\s\S]*?required[\s\S]*?checked=\{formData\.reviewOrderAccepted\}/.test(veterinaryForm)
+    && /privacyAccepted:\s*false/.test(veterinaryForm)
+    && /name="privacyAccepted"[\s\S]*?required[\s\S]*?checked=\{formData\.privacyAccepted\}/.test(veterinaryForm),
+  'Prüfauftrag und Datenschutzbestätigung müssen getrennt, erforderlich und standardmäßig abgewählt bleiben.',
+);
+expect(
+  /Prüf- und Beratungsauftrag: erteilt/.test(veterinaryForm)
+    && /Auftragstext:/.test(veterinaryForm)
+    && /Auftragsfassung:/.test(veterinaryForm)
+    && /Auftrag erteilt am:/.test(veterinaryForm)
+    && /Datenschutzhinweis bestätigt: ja/.test(veterinaryForm),
+  'Die Tierformular-Nachricht muss Auftragstext, Fassung, Zeitpunkt und Datenschutzbestätigung dokumentieren.',
+);
+expect(
+  /datenschutz\.emailJsTitle/.test(privacyPage)
+    && /datenschutz\.emailJsText/.test(privacyPage)
+    && /https:\/\/www\.emailjs\.com\/legal\/privacy-policy\//.test(privacyPage)
+    && /https:\/\/www\.emailjs\.com\/legal\/data-protection-agreement\//.test(privacyPage),
+  'Die Datenschutzerklärung muss den EmailJS-Transport samt offizieller Anbieterinformation sichtbar ausgeben.',
+);
+expect(
+  /\{t\('datenschutz\.contactFormText'\)\}/.test(privacyPage)
+    && !/Diese Daten geben wir nicht ohne Ihre Einwilligung weiter\./.test(privacyPage),
+  'Die allgemeine Kontaktformular-Erklärung darf dem transparent beschriebenen EmailJS-Transport nicht widersprechen.',
+);
+expect(
+  /EmailJS Pte\. Ltd\./.test(emailJsDisclosureDe)
+    && /Name/.test(emailJsDisclosureDe)
+    && /E-Mail-Adresse/.test(emailJsDisclosureDe)
+    && /Tierart/.test(emailJsDisclosureDe)
+    && /Schutzwunsch/.test(emailJsDisclosureDe)
+    && /Alter/.test(emailJsDisclosureDe)
+    && /Rasse/.test(emailJsDisclosureDe)
+    && /Nutzung/.test(emailJsDisclosureDe)
+    && /Beauftragung/.test(emailJsDisclosureDe)
+    && /Fassung/.test(emailJsDisclosureDe)
+    && /Zeitpunkt/.test(emailJsDisclosureDe)
+    && /USA|Vereinigten Staaten/.test(emailJsDisclosureDe)
+    && /Standardvertragsklauseln/.test(emailJsDisclosureDe),
+  'Die deutsche EmailJS-Offenlegung muss Anbieter, Datenkategorien und Drittlandtransfer transparent benennen.',
+);
+expect(
+  /EmailJS Pte\. Ltd\./.test(emailJsDisclosureEn)
+    && /name/i.test(emailJsDisclosureEn)
+    && /email address/i.test(emailJsDisclosureEn)
+    && /animal type/i.test(emailJsDisclosureEn)
+    && /cover requested/i.test(emailJsDisclosureEn)
+    && /age/i.test(emailJsDisclosureEn)
+    && /breed/i.test(emailJsDisclosureEn)
+    && /use/i.test(emailJsDisclosureEn)
+    && /commission/i.test(emailJsDisclosureEn)
+    && /version/i.test(emailJsDisclosureEn)
+    && /time/i.test(emailJsDisclosureEn)
+    && /United States|US processing/i.test(emailJsDisclosureEn)
+    && /Standard Contractual Clauses/i.test(emailJsDisclosureEn),
+  'Die englische EmailJS-Offenlegung muss dieselben Anbieter-, Daten- und Transferinformationen enthalten.',
+);
 
 expect(!/googletagmanager\.com\/gtag\/js/i.test(indexHtml), 'GA4 darf nicht statisch aus index.html geladen werden.');
 expect(!/elevenlabs\.io\/convai-widget/i.test(indexHtml), 'ElevenLabs darf nicht statisch aus index.html geladen werden.');

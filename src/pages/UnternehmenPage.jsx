@@ -3,13 +3,15 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import CompanyHero from '@/components/company/CompanyHero';
 import CompanyRealityCheck from '@/components/company/CompanyRealityCheck';
+import CompanyExplainerVideo from '@/components/company/CompanyExplainerVideo';
+import ResponsibilityStory from '@/components/company/ResponsibilityStory';
 import CompanySolutions from '@/components/company/CompanySolutions';
+import CompanyBavLeverage from '@/components/company/CompanyBavLeverage';
 import CompanyEconomics from '@/components/company/CompanyEconomics';
 import CompanyProcess from '@/components/company/CompanyProcess';
 import CompanyFAQ from '@/components/company/CompanyFAQ';
 import CompanyWorkforceConcept from '@/components/company/CompanyWorkforceConcept';
 import CompanyFinalCTA from '@/components/company/CompanyFinalCTA';
-import ProductTicker from '@/components/sections/ProductTicker';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -63,12 +65,15 @@ const UnternehmenPage = () => {
 
       <article className="w-full overflow-hidden bg-white">
         <CompanyHero />
-        <ProductTicker variant="unternehmen" />
         <CompanyRealityCheck />
+        <CompanyExplainerVideo kind="system" />
         <CompanySolutions />
-        <CompanyWorkforceConcept />
+        <CompanyBavLeverage />
+        <CompanyExplainerVideo kind="bav" />
+        <ResponsibilityStory />
         <CompanyEconomics />
         <CompanyProcess />
+        <CompanyWorkforceConcept />
         <CompanyFAQ />
         <CompanyFinalCTA />
       </article>

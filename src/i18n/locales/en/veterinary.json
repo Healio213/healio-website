@@ -1,46 +1,175 @@
 {
   "hero": {
-    "badge": "GOT-compliant coverage",
-    "titleLine1": "Since the GOT reform:",
-    "titleLine2": "Veterinary medicine has",
-    "titleLine3": "a new price tag.",
-    "subtitle": "Anyone without insurance coverage today makes emergency decisions based on budget, not medicine. It doesn't have to be this way.",
-    "ctaPrimary": "Calculate premium",
-    "ctaSecondary": "Cost analysis",
-    "imageAlt": "Woman hugging her Golden Retriever"
+    "eyebrow": "Pet health insurance for dogs, cats & horses",
+    "title": "So medicine decides in an emergency –",
+    "titleHighlight": "not your bank balance.",
+    "subtitle": "Choose your animal and the cover you are looking for. We review surgery-only and full cover based on age, breed or use – personally, clearly and subject to the plan.",
+    "cta": "Check cover for my animal",
+    "microcopy": "Non-binding · personal response · no automatic promise of acceptance",
+    "heroImageAlt": "Woman with her Golden Retriever"
   },
-  "ticker": {
-    "ariaLabel": "Benefits of pet health insurance",
-    "emergencyRates": "Emergency treatment may be billed at up to 4x the GOT rate",
-    "surgeryCosts": "Cruciate ligament surgery with aftercare can cost more than EUR 3,000",
-    "surgeryCover": "Surgery-only cover from EUR 20 per month in the example",
-    "freeChoice": "Free choice of vet and clinic, depending on the plan",
-    "coverOptions": "Full cover or surgery-only cover, calculated individually"
+  "trust": {
+    "ariaLabel": "Trust and process",
+    "broker": "Registered insurance broker",
+    "personal": "Personal guidance, not a comparison portal",
+    "nonBinding": "Non-binding plan review",
+    "animals": "For dogs, cats and horses"
   },
-  "tariffs": {
-    "title": "Two Concepts. One Goal.",
-    "subtitle": "Breed, age, history, we calculate individually. You decide.",
-    "fullCover": {
-      "title": "Full Coverage",
-      "desc": "All-inclusive package for outpatient and inpatient treatments.",
-      "features": {
-        "treatments": "Medical treatments & medications",
-        "prevention": "Preventive care (vaccinations, check-ups)",
-        "surgery": "Unlimited surgeries"
-      },
-      "badge": "Ideal for young animals & puppies",
-      "cta": "Request a quote"
+  "finder": {
+    "eyebrow": "One-minute cover check",
+    "title": "Choose the animal. Choose the cover. Commission Healio.",
+    "subtitle": "First set the direction. Then add the animal details and expressly commission Healio to carry out the plan review and provide advice.",
+    "animalQuestion": "Which animal needs cover?",
+    "coverageQuestion": "What would you like to cover?",
+    "animals": {
+      "dog": { "title": "Dog", "description": "Matched to age and breed" },
+      "cat": { "title": "Cat", "description": "For indoor and outdoor cats" },
+      "horse": { "title": "Horse", "description": "A separate path based on keeping and use" }
     },
-    "opCover": {
-      "title": "Surgery Coverage",
-      "desc": "Focus on the high cost risk of surgical procedures.",
-      "features": {
-        "surgery": "Surgeries incl. diagnostics",
-        "aftercare": "Post-operative aftercare",
-        "clinicChoice": "Free choice of clinic"
+    "coverage": {
+      "full": { "title": "Full cover", "code": "FULL", "description": "Treatment, diagnostics and surgery – scope depends on the plan." },
+      "surgery": { "title": "Surgery cover", "code": "OP", "description": "Focused on major surgery and aftercare costs – subject to the plan." },
+      "unsure": { "title": "Not sure yet", "description": "We assess together which type of cover fits your needs." }
+    },
+    "coverageHorse": {
+      "full": { "description": "Medical or full cover for treatment and surgery – subject to the horse plan." },
+      "surgery": { "description": "Protection against major surgery costs and possible aftercare – subject to the plan." },
+      "unsure": { "description": "We consider keeping, use and budget before recommending a direction." }
+    },
+    "profile": {
+      "eyebrow": "Your selection",
+      "passTitle": "Your selection",
+      "checkStage": "Step 1 of 2",
+      "statusReady": "Selection complete",
+      "statusOpen": "Two choices left",
+      "summaryReady": "Your direction is set",
+      "summaryOpen": "Your result will appear here",
+      "summaryEmpty": "Choose animal and cover",
+      "animalEmpty": "Choose an animal",
+      "coverageEmpty": "Choose cover",
+      "animalLabel": "Animal",
+      "coverageLabel": "Cover",
+      "detailsLabel": "We then check",
+      "detailsValue": "Age & breed",
+      "detailsHorse": "Age, keeping & use"
+    },
+    "review": {
+      "readyLabel": "Selection saved",
+      "openLabel": "Still needed",
+      "openTitle": "Choose animal and cover",
+      "readyText": "In the next step, add the animal details and commission Healio to carry out the personal plan review.",
+      "openText": "You will then proceed directly to the review and advice commission."
+    },
+    "ctaReady": "Continue: commission Healio",
+    "ctaIncomplete": "Choose animal and cover first",
+    "disclaimer": "This selection is not an application. Acceptance, price and benefits depend on the insurer, animal data and medical assessment."
+  },
+  "costs": {
+    "eyebrow": "Why it pays to look now",
+    "title": "One major treatment can quickly cost thousands.",
+    "subtitle": "You do not have to insure every vet bill. What matters is choosing a plan that carries the risks that would genuinely strain your budget.",
+    "example": {
+      "eyebrow": "Illustrative dog example",
+      "title": "How cruciate ligament surgery costs can add up",
+      "rows": {
+        "diagnostics": { "label": "Diagnostics", "value": "approx. EUR 650" },
+        "surgery": { "label": "Surgery", "value": "approx. EUR 2,100" },
+        "anaesthesia": { "label": "Anaesthesia & monitoring", "value": "approx. EUR 350" },
+        "aftercare": { "label": "Medication & aftercare", "value": "approx. EUR 450" }
       },
-      "badge": "Ideal for older animals or lower premiums",
-      "cta": "Request a quote"
+      "totalLabel": "Possible total cost",
+      "totalValue": "approx. EUR 3,550",
+      "disclaimer": "Simplified example, not a price promise. The actual invoice depends on treatment, region and the GOT rate charged, among other factors.",
+      "sourceLabel": "View the German veterinary fee schedule (GOT)"
+    },
+    "check": {
+      "eyebrow": "What matters",
+      "title": "We look beyond the monthly premium.",
+      "items": {
+        "reimbursement": "Reimbursement rate and covered treatments",
+        "limits": "Annual limits and benefit schedules",
+        "deductible": "Deductible and out-of-pocket share",
+        "waiting": "Waiting periods and exclusions",
+        "animalData": "Age, breed and medical information",
+        "horseData": "For horses: keeping and use as well"
+      },
+      "noteTitle": "Understand first, then decide.",
+      "note": "Benefits, limits, choice of vet and reimbursement differ by plan. We make those differences clear before you decide."
     }
+  },
+  "form": {
+    "eyebrow": "03 · Commission Healio",
+    "title": "Now commission us to review suitable plans.",
+    "subtitle": "You authorise Healio to review your information and personally advise you on suitable pet health or surgery-only cover. An insurance application is only made after a separate decision by you.",
+    "profileLabel": "Your selection",
+    "next": {
+      "eyebrow": "What happens next",
+      "title": "No guesswork. A clear response.",
+      "text": "We personally review your information and explain which plan features matter for your animal.",
+      "steps": {
+        "profile": "We add age, breed and, for horses, keeping and use.",
+        "comparison": "We review suitable surgery-only or full-cover routes and their conditions.",
+        "reply": "You receive a personal response before deciding on an application."
+      },
+      "orderBoundary": "The commission on this page allows Healio to carry out the personal plan review and provide advice. It is not a power of attorney towards an insurer and not an insurance application."
+    },
+    "fields": {
+      "name": "Your name *",
+      "email": "Your email *",
+      "animal": "Animal *",
+      "coverage": "Cover wanted *",
+      "age": "Age in years *",
+      "breed": "Breed (optional)",
+      "usage": "Horse keeping and use *",
+      "usagePlaceholder": "e.g. leisure, sport, breeding",
+      "usageNote": "Horse insurance is a separate needs path. That is why we explicitly include keeping and use in the review.",
+      "select": "Please choose"
+    },
+    "order": {
+      "title": "Plan review and advice commission",
+      "lead": "We need your express commission before we can start working for you.",
+      "consent": "I commission Healio GmbH to review my information, compare suitable plans and personally advise me on pet health or surgery-only insurance. This commission is free of charge for me.",
+      "documents": "Available before commissioning:",
+      "initialInformation": "Initial information",
+      "terms": "Insurance broker terms",
+      "limit": "This commission applies only to this plan review. It grants no authority to conclude, amend or cancel an insurance contract and is not an insurance application."
+    },
+    "privacyPrefix": "I agree that Healio may process my information to handle this inquiry. More information is available in the",
+    "privacyLink": "privacy notice",
+    "submit": "Commission Healio to review plans",
+    "sending": "Sending request …",
+    "responseNote": "Free of charge · not an insurance application · personal response from Healio",
+    "successTitle": "Your inquiry has arrived",
+    "successText": "We will review your information and contact you personally.",
+    "errorTitle": "The inquiry could not be sent",
+    "errorText": "Your entries have been kept. Please try again or email info@healio.de."
+  },
+  "faq": {
+    "eyebrow": "Quick answers",
+    "title": "The key questions before your plan review",
+    "items": {
+      "difference": {
+        "question": "What is the difference between surgery-only and full cover?",
+        "answer": "Surgery cover focuses on insured operations and, depending on the plan, diagnostics and aftercare. Full cover may also include outpatient treatment, medication and preventive care. The exact scope is always set by the policy terms."
+      },
+      "preExisting": {
+        "question": "What happens with pre-existing conditions?",
+        "answer": "Medical information may lead to exclusions, additional premiums or rejection. The insurer decides whether and on what terms an animal can be accepted after its medical assessment."
+      },
+      "age": {
+        "question": "Does my animal's age matter?",
+        "answer": "Yes. Entry age, premium and available plans may depend on age. We therefore ask for it before making a recommendation and do not promise blanket acceptance."
+      },
+      "horse": {
+        "question": "Why do horses have a separate path?",
+        "answer": "For horses, keeping and use matter alongside age and health. We therefore do not treat horse cover as a copied dog plan, but assess the need separately."
+      },
+      "next": {
+        "question": "What happens after my inquiry?",
+        "answer": "Healio reviews your information and responds personally with an assessment. Only then do you decide whether to submit a specific application. The inquiry itself is not a promise of cover."
+      }
+    },
+    "ctaTitle": "Your animal. Your needs. Check them properly.",
+    "ctaText": "Choose animal and cover – we will assess the rest together."
   }
 }

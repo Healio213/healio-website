@@ -1,42 +1,8 @@
 import React from 'react';
-
-const iconBase = '/images/friendly-icons';
-
-/**
- * Healio's visual icon language. Content components should prefer `kind` over
- * introducing another emoji or one-off SVG. The emoji map below keeps older
- * callsites visually consistent while they are migrated.
- */
-export const friendlyIconAssets = {
-  money: `${iconBase}/money-note.webp`,
-  bonus: `${iconBase}/bonus-medal.webp`,
-  budget: `${iconBase}/health-wallet.webp`,
-  calculator: `${iconBase}/calculator.webp`,
-  family: `${iconBase}/family.webp`,
-  fitness: `${iconBase}/fitness.webp`,
-  smartwatch: `${iconBase}/smartwatch.webp`,
-  ambulant: `${iconBase}/medical-stethoscope.webp`,
-  dental: `${iconBase}/dental-shield.webp`,
-  hospital: `${iconBase}/hospital-room.webp`,
-  support: `${iconBase}/personal-support.webp`,
-  document: `${iconBase}/document-check.webp`,
-  region: `${iconBase}/germany-region.webp`,
-  protection: `${iconBase}/protection-shield.webp`,
-  comparison: `${iconBase}/compare-value.webp`,
-  switch: `${iconBase}/switch-check.webp`,
-  privacy: `${iconBase}/privacy-lock.webp`,
-  calendar: `${iconBase}/verified-calendar.webp`,
-  glasses: `${iconBase}/vision-glasses.webp`,
-  pregnancy: `${iconBase}/pregnancy.webp`,
-  prevention: `${iconBase}/prevention-vaccination.webp`,
-  medication: `${iconBase}/medication-copay.webp`,
-  naturopathy: `${iconBase}/naturopathy.webp`,
-  thinking: `${iconBase}/decision-thinking.webp`,
-  weighing: `${iconBase}/decision-weighing.webp`,
-  choice: `${iconBase}/decision-choice.webp`,
-  broker: `${iconBase}/trust-broker.webp`,
-  advisor: `${iconBase}/trust-advisor.webp`,
-};
+import healioSoftClayIcons, {
+  friendlyIconAssets,
+  legacyIconKindAliases,
+} from '@/components/ui/healioSoftClayIcons';
 
 const emojiKinds = {
   '💶': 'money',
@@ -144,6 +110,7 @@ const sizeClasses = {
 
 const FriendlyIcon = ({
   emoji,
+  icon,
   kind,
   src,
   label,
@@ -153,8 +120,14 @@ const FriendlyIcon = ({
   imageClassName = '',
   decorative = true,
 }) => {
-  const resolvedSrc = src || friendlyIconAssets[kind] || friendlyIconAssets[emojiKinds[emoji]];
+  const legacyKind = icon ? legacyIconKindAliases[icon] : undefined;
+  const assetSrc = src
+    || friendlyIconAssets[kind]
+    || friendlyIconAssets[legacyKind]
+    || healioSoftClayIcons[icon]
+    || friendlyIconAssets[emojiKinds[emoji]];
   const isLabelled = !decorative && Boolean(label);
+  const assetScaleClass = assetSrc?.endsWith('/trust-broker-headset.webp') ? 'scale-[1.22]' : '';
 
   return (
     <span
@@ -164,14 +137,16 @@ const FriendlyIcon = ({
       aria-hidden={isLabelled ? undefined : 'true'}
     >
       <span className="absolute inset-x-2 top-1.5 h-1/3 rounded-full bg-white/55 blur-[1px]" aria-hidden="true" />
-      {resolvedSrc ? (
+      {assetSrc ? (
         <img
-          src={resolvedSrc}
+          src={assetSrc}
           alt=""
-          className={`relative h-[94%] w-[94%] select-none object-contain drop-shadow-[0_5px_7px_rgba(25,44,55,0.14)] ${imageClassName}`}
+          aria-hidden="true"
+          width="192"
+          height="192"
           loading="lazy"
           decoding="async"
-          aria-hidden="true"
+          className={`relative h-[94%] w-[94%] select-none object-contain drop-shadow-[0_5px_7px_rgba(25,44,55,0.14)] ${assetScaleClass} ${imageClassName}`}
         />
       ) : (
         <span

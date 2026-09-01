@@ -28,7 +28,10 @@ const Header = () => {
   const isHome = location.pathname === '/' || location.pathname === '/en';
   const isServices = location.pathname === '/leistungen' || location.pathname === '/en/services';
   const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
-  const isCompany = location.pathname === '/unternehmen' || location.pathname === '/en/companies';
+  const isCompany = location.pathname === '/unternehmen'
+    || location.pathname === '/en/companies'
+    || location.pathname === '/unternehmen/vorsorge-rechner'
+    || location.pathname === '/en/companies/pension-calculator';
   const isPartner = location.pathname === '/partner' || location.pathname === '/en/partner';
   const solidHeaderRoutes = [
     '/kontakt', '/en/contact',
@@ -41,6 +44,7 @@ const Header = () => {
     '/konto-loeschen',
     '/blog', '/en/blog',
     '/potenzialanalyse', '/en/potential-analysis',
+    '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
   ];
   const forceSolidHeader = solidHeaderRoutes.some((path) => (
     location.pathname === path || location.pathname.startsWith(`${path}/`)

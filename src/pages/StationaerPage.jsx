@@ -1,72 +1,29 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
-import { createServiceSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
-import HospitalBenefits from '@/components/sections/HospitalBenefits';
-import HospitalConcept from '@/components/sections/HospitalConcept';
-import HospitalNeugeborene from '@/components/sections/HospitalNeugeborene';
-import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
-import HospitalContactForm from '@/components/sections/HospitalContactForm';
-import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
-import ProductTicker from '@/components/sections/ProductTicker';
-import KassenBoostDecisionBridge from '@/components/sections/KassenBoostDecisionBridge';
-import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
-import { Button } from '@/components/ui/button';
-import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
-import OptimizedImage from '@/components/OptimizedImage';
-import { FadeInUp } from '@/components/ui/ScrollAnimation';
-import { useReferrer } from '@/hooks/useReferrer';
-import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
+import { createFAQSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
-
-const StationaerFaq = () => {
-  const { t } = useTranslation('stationaer');
-  const [openFaq, setOpenFaq] = useState(0);
-
-  const faqItems = t('faq.items', { returnObjects: true });
-  const faqs = Array.isArray(faqItems) ? faqItems : [];
-
-  return (
-    <div className="space-y-4">
-      {faqs.map((faq, index) => (
-        <article key={index} className="border border-slate-100 rounded-xl bg-white overflow-hidden shadow-sm hover:border-slate-300 transition-colors">
-          <button onClick={() => setOpenFaq(openFaq === index ? null : index)} className="w-full flex items-center justify-between p-6 text-left">
-            <h3 className="text-lg font-bold text-slate-900 pr-4">{faq.q}</h3>
-            <motion.div animate={{ rotate: openFaq === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-              <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
-            </motion.div>
-          </button>
-          <AnimatePresence>
-            {openFaq === index && (
-              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-6">
-                <p className="pb-6 text-slate-600 leading-relaxed font-medium">{faq.a}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </article>
-      ))}
-    </div>
-  );
-};
+import StationaerHero from '@/components/sections/stationaer/StationaerHero';
+import StationaerTariffSelector from '@/components/sections/stationaer/StationaerTariffSelector';
+import StationaerBenefits from '@/components/sections/stationaer/StationaerBenefits';
+import StationaerFamily from '@/components/sections/stationaer/StationaerFamily';
+import StationaerBonusBridge from '@/components/sections/stationaer/StationaerBonusBridge';
+import StationaerTrustFaq from '@/components/sections/stationaer/StationaerTrustFaq';
+import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
+import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
+import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 
 const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
   const { lang } = useLanguage();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/inpatient' : 'https://healio.de/stationaer';
-  const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
-
-  const faqForSchema = t('faq.items', { returnObjects: true });
+  const faqItems = t('refresh.faq.items', { returnObjects: true });
+  const faqs = Array.isArray(faqItems) ? faqItems : [];
   const schemaMarkup = [
     createServiceSchema(),
-    createFAQSchema((Array.isArray(faqForSchema) ? faqForSchema : []).map(item => ({ question: item.q, answer: item.a })))
+    createFAQSchema(faqs.map((item) => ({ question: item.q, answer: item.a }))),
   ];
-
-  const testimonials = t('testimonials.items', { returnObjects: true });
-  const testimonialItems = Array.isArray(testimonials) ? testimonials : [];
 
   return (
     <>
@@ -81,143 +38,38 @@ const StationaerPage = () => {
         schemaMarkup={schemaMarkup}
       />
       <article>
-        {/* Hero Section */}
-        <section className="relative min-h-[90svh] flex items-center justify-center pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden w-full" aria-labelledby="stationaer-hero-heading">
-          {/* Background Image & Gradient Overlays */}
-          <div className="absolute inset-0 z-0 w-full h-full">
-            <OptimizedImage
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/89e53e31c640cfd5da7e6cf86c62466b.png"
-              alt={t('hero.heroImageAlt')}
-              priority={true}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Dark Gradient Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/40 z-10" />
-            <div className="absolute inset-0 bg-slate-900/15 mix-blend-multiply z-10" aria-hidden="true" />
-          </div>
-
-          <div className="healio-container relative z-20 px-4 sm:px-6 md:px-8">
-            <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="w-full"
-              >
-                <h1 id="stationaer-hero-heading" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg break-words">
-                  {t('hero.title').split('<highlight>').map((part, i) => {
-                    if (i === 0) return part;
-                    const [highlighted, rest] = part.split('</highlight>');
-                    return <React.Fragment key={i}><span className="text-healio-primary">{highlighted}</span>{rest}</React.Fragment>;
-                  })}
-                </h1>
-
-                <p className="mt-4 text-lg sm:text-xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
-                  {t('hero.subtitle')}
-                </p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="mt-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex flex-col sm:flex-row items-center sm:items-start gap-4 max-w-2xl mx-auto shadow-xl text-left"
-                >
-                  <CheckCircle className="w-8 h-8 sm:w-6 sm:h-6 text-[#25c990] flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <p className="text-white text-base sm:text-lg font-medium drop-shadow-sm text-center sm:text-left" dangerouslySetInnerHTML={{ __html: t('hero.ikkNote') }} />
-                </motion.div>
-
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-xl mx-auto">
-                  <Button asChild className="bg-[#25c990] hover:bg-[#1db37f] text-white shadow-[0_4px_14px_rgba(37,201,144,0.4)] hover:shadow-[0_6px_20px_rgba(37,201,144,0.6)] text-lg px-8 py-6 h-auto rounded-xl border-none transition-all duration-300 w-full sm:w-auto">
-                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('stationaer-hero', referrer)}>
-                      <Calculator className="w-5 h-5 mr-2" aria-hidden="true" />
-                      {t('hero.ctaCalculate')}
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md shadow-xl text-lg px-8 py-6 h-auto rounded-xl transition-all duration-300 w-full sm:w-auto">
-                    <a href={IKK_LINK} target="_blank" rel="noopener noreferrer" onClick={() => trackIkkClick('stationaer-hero')}>
-                      <Gift className="w-5 h-5 mr-2" aria-hidden="true" />
-                      {t('hero.ctaBonus')}
-                    </a>
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <ProductTicker variant="stationaer" />
-
-        {/* Erklärvideo gleich am Anfang, direkt nach dem Hero (Frank 10.08.) */}
+        <StationaerHero />
         {lang === 'de' && (
-          <FadeInUp>
-            <ErklaervideoSection
-              video="/erklaervideo-stationaer.mp4"
-              poster="/images/erklaervideo-stationaer-poster.jpg"
-              titel="Privatpatient im Krankenhaus, einfach erklärt"
-              untertitel="Nita zeigt dir, was der Klinik-Tarif leistet und wie du ihn abschließt."
-              dauer="knapp 3 Minuten"
-              trackingLabel="erklaervideo-stationaer"
-              cta={{
-                label: 'Beitrag berechnen und Antrag starten',
-                href: sdkUrl,
-                external: true,
-                onClick: () => trackSdkClick('stationaer-video'),
-              }}
-            />
-          </FadeInUp>
+          <ExplainerVideoCard
+            id="stationaer-erklaervideo"
+            videoSrc="/erklaervideo-stationaer.mp4"
+            poster="/images/erklaervideo-stationaer-poster.jpg"
+            eyebrow={t('refresh.video.eyebrow')}
+            title={t('refresh.video.title')}
+            ariaLabel={t('refresh.video.aria')}
+            className="bg-[#f4f8f6]"
+          />
         )}
-
-        <FadeInUp><QualityCooperationSection variant="stationaer" /></FadeInUp>
-
-        <FadeInUp><HospitalConcept /></FadeInUp>
-        <FadeInUp><HospitalBenefits /></FadeInUp>
-
-        {/* Hinweis für werdende Eltern: Kindernachversicherung ohne Gesundheitsprüfung */}
-        <FadeInUp><HospitalNeugeborene /></FadeInUp>
-
-        <FadeInUp><KassenBoostDecisionBridge /></FadeInUp>
-
-        {/* Testimonials */}
-        <FadeInUp>
-        <section className="py-20 bg-white">
-          <div className="healio-container px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900">
-                {t('testimonials.title').split('<highlight>').map((part, i) => {
-                  if (i === 0) return part;
-                  const [highlighted, rest] = part.split('</highlight>');
-                  return <React.Fragment key={i}><span className="text-healio-primary">{highlighted}</span>{rest}</React.Fragment>;
-                })}
-              </h2>
-              <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">{t('testimonials.subtitle')}</p>
-            </div>
-            <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {testimonialItems.map((item, i) => (
-                <motion.article key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-4 text-left">
-                  <p className="font-bold text-healio-primary">{item.name}</p>
-                  <p className="text-slate-600 leading-relaxed">{item.text}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-        </FadeInUp>
-
-        {/* FAQ */}
-        <FadeInUp>
-        <section className="py-20 bg-slate-50">
-          <div className="healio-container max-w-4xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 break-words hyphens-auto">{t('faq.title')}</h2>
-              <p className="text-lg text-slate-600">{t('faq.subtitle')}</p>
-            </div>
-            <StationaerFaq />
-          </div>
-        </section>
-        </FadeInUp>
-
-        <FadeInUp><HospitalContactForm /></FadeInUp>
-        <AmbulantMiaPrompt variant="stationaer" />
+        <StationaerTariffSelector />
+        <StationaerBenefits />
+        <StationaerFamily />
+        <StationaerBonusBridge />
+        <CompactBonusFeature
+          className="bg-[#fbfaf7]"
+          calculatorProps={{
+            tarifTypes: 'Stationär',
+            defaultMonatsbeitrag: 33.41,
+            tariffInfoText: t('bonusRechner.tariffInfo'),
+            effectiveLabel: t('bonusRechner.effectiveLabel'),
+            effectiveValue: t('bonusRechner.effectiveValue'),
+            effectiveNote: t('bonusRechner.effectiveNote'),
+            bonusPayoutText: lang === 'en'
+              ? 'Your statutory-insurer bonus may offset part or up to 100% of the eligible hospital-plan premium. The applicable bonus and tariff terms determine the result.'
+              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Klinikschutzes teilweise oder bis zu 100 % ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
+          }}
+        />
+        <SalesAiAssist className="bg-[#fbfaf7]" />
+        <StationaerTrustFaq />
       </article>
     </>
   );

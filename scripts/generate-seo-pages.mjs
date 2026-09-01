@@ -36,6 +36,122 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
+const ORGANIZATION_ID = 'https://healio.de/#organization';
+const WEBSITE_ID = 'https://healio.de/#website';
+
+function schemaTypes(schema) {
+  if (!schema || typeof schema !== 'object') return [];
+  return Array.isArray(schema['@type']) ? schema['@type'] : [schema['@type']].filter(Boolean);
+}
+
+function isWebPageSchema(schema) {
+  return schemaTypes(schema).includes('WebPage');
+}
+
+function isIndexableRoute(route) {
+  return !/^noindex\b/i.test(route.robots || 'index, follow');
+}
+
+function createRouteWebPageSchema(route) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${route.canonical}#webpage`,
+    url: route.canonical,
+    name: route.title,
+    description: route.description,
+    inLanguage: route.lang === 'en' ? 'en-US' : 'de-DE',
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': ORGANIZATION_ID },
+  };
+}
+
+function replaceNestedWebPageDefinitions(value, webPageId) {
+  if (Array.isArray(value)) {
+    return value.map((entry) => replaceNestedWebPageDefinitions(entry, webPageId));
+  }
+  if (!value || typeof value !== 'object') return value;
+  if (isWebPageSchema(value)) return { '@id': webPageId };
+
+  return Object.fromEntries(
+    Object.entries(value).map(([key, entry]) => [
+      key,
+      replaceNestedWebPageDefinitions(entry, webPageId),
+    ]),
+  );
+}
+
+function getRootSchemaEntries(schemaMarkup) {
+  if (!schemaMarkup) return [];
+  if (Array.isArray(schemaMarkup)) {
+    return schemaMarkup.flatMap((entry) => getRootSchemaEntries(entry));
+  }
+  if (typeof schemaMarkup !== 'object') return [];
+  if (Array.isArray(schemaMarkup['@graph'])) {
+    return schemaMarkup['@graph'].flatMap((entry) => getRootSchemaEntries(entry));
+  }
+  return [schemaMarkup];
+}
+
+function getAdditionalSchemaEntries(schemaMarkup, webPageId) {
+  const roots = getRootSchemaEntries(schemaMarkup);
+
+  return roots
+    .filter((entry) => entry && typeof entry === 'object' && !isWebPageSchema(entry))
+    .map((entry) => {
+      const { '@context': _context, ...schema } = entry;
+      return replaceNestedWebPageDefinitions(schema, webPageId);
+    });
+}
+
+function uniqueSchemaEntries(entries) {
+  const seen = new Set();
+  return entries.filter((entry) => {
+    const key = entry?.['@id'] || JSON.stringify(entry);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function mergeRouteSchemas(html, route, schemaMarkup) {
+  const rootSchemas = getRootSchemaEntries(schemaMarkup);
+  const needsWebPage = isIndexableRoute(route) || rootSchemas.some(isWebPageSchema);
+  const webPageSchema = needsWebPage ? createRouteWebPageSchema(route) : null;
+  const webPageId = `${route.canonical}#webpage`;
+  const additionalSchemas = getAdditionalSchemaEntries(schemaMarkup, webPageId);
+  let merged = false;
+
+  const nextHtml = html.replace(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+    (script, json) => {
+      if (merged) return script;
+
+      try {
+        const parsed = JSON.parse(json);
+        if (!Array.isArray(parsed['@graph'])) return script;
+        if (!parsed['@graph'].some((entry) => entry?.['@id'] === WEBSITE_ID)) return script;
+
+        const baseSchemas = parsed['@graph'].filter((entry) => !isWebPageSchema(entry));
+        parsed['@graph'] = uniqueSchemaEntries([
+          ...baseSchemas,
+          ...(webPageSchema ? [webPageSchema] : []),
+          ...additionalSchemas,
+        ]);
+        merged = true;
+        return `<script type="application/ld+json">${JSON.stringify(parsed)}</script>`;
+      } catch {
+        return script;
+      }
+    },
+  );
+
+  if (!merged) {
+    throw new Error(`SEO: Basis-JSON-LD-Graph fehlt für ${route.path}`);
+  }
+
+  return nextHtml;
+}
+
 function getBlogSlug(routePath) {
   const match = routePath.match(/^\/blog\/([^/]+)$/);
   return match ? match[1] : null;
@@ -46,7 +162,9 @@ function stripScripts(html = '') {
 }
 
 function stripLeadingArticleHeading(html = '') {
-  return html.replace(/^\s*<article>\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '<article>');
+  return html
+    .replace(/^(\s*<article\b[^>]*>\s*)<h1[^>]*>[\s\S]*?<\/h1>/i, '$1')
+    .replace(/^\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '');
 }
 
 function stripHtml(html = '') {
@@ -137,8 +255,7 @@ function createBlogArticleSchema(article, route) {
     {
       '@type': 'Article',
       mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': route.canonical,
+        '@id': `${route.canonical}#webpage`,
       },
       headline: article.title || route.title,
       description: article.meta_description || route.description,
@@ -282,6 +399,21 @@ function generateHtml(route, article = null) {
       `<meta property="og:image:height" content="${e(String(route.ogImageHeight))}">`
     );
   }
+  if (route.ogImageAlt) {
+    const ogImageAltTag = `<meta property="og:image:alt" content="${e(route.ogImageAlt)}">`;
+    if (/<meta property="og:image:alt" content="[^"]*">/.test(html)) {
+      html = html.replace(/<meta property="og:image:alt" content="[^"]*">/, ogImageAltTag);
+    } else {
+      html = html.replace(/(<meta property="og:image" content="[^"]*">)/, `$1\n    ${ogImageAltTag}`);
+    }
+
+    const twitterImageAltTag = `<meta name="twitter:image:alt" content="${e(route.ogImageAlt)}">`;
+    if (/<meta name="twitter:image:alt" content="[^"]*">/.test(html)) {
+      html = html.replace(/<meta name="twitter:image:alt" content="[^"]*">/, twitterImageAltTag);
+    } else {
+      html = html.replace(/(<meta name="twitter:image" content="[^"]*">)/, `$1\n    ${twitterImageAltTag}`);
+    }
+  }
 
   // Twitter Tags
   html = html.replace(
@@ -319,14 +451,11 @@ function generateHtml(route, article = null) {
     );
   }
 
-  // Statisches route-spezifisches JSON-LD für wichtige Landingpages und Blogartikel.
+  // Ein kanonischer WebPage-Knoten pro indexierbarer Route. Weitere
+  // Route-Schemas (z. B. FAQ, Service oder Article) werden in denselben
+  // Basis-Graph übernommen, ohne zusätzliche WebPage-Definitionen zu erben.
   const schemaMarkup = route.schemaMarkup || (article ? createBlogArticleSchema(article, route) : null);
-  if (schemaMarkup) {
-    html = html.replace(
-      '</head>',
-      `    <script type="application/ld+json">${JSON.stringify(schemaMarkup)}</script>\n  </head>`
-    );
-  }
+  html = mergeRouteSchemas(html, route, schemaMarkup);
 
   return html;
 }

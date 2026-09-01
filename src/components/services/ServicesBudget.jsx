@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -41,10 +41,16 @@ const ServicesBudget = () => {
             ))}
           </ul>
           <p className="mt-6 max-w-2xl text-xs leading-5 text-slate-600">{t('budget.note')}</p>
-          <Link to={getPath('ambulant')} className="home-focus mt-8 inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
-            {t('budget.cta')}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
+            <Link to={getPath('ambulant')} className="home-focus inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
+              {t('budget.cta')}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link to={getPath('kassenboost')} className="home-focus inline-flex items-center gap-2 font-display text-sm font-extrabold text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
+              {t('budget.kassenboostCta')}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

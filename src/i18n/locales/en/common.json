@@ -5,6 +5,7 @@
     "unternehmen": "For Companies",
     "ambulant": "Outpatient Insurance",
     "kassenbonus": "Health Insurance Bonus",
+    "kassenboost": "KassenBoost",
     "zahn": "Dental Insurance",
     "stationaer": "Hospital Insurance",
     "tier": "Pet Insurance",
@@ -38,6 +39,8 @@
     "unternehmen": "For Companies",
     "leistungen": "Services",
     "kassenbonus": "Compare Health Insurance",
+    "kassenboost": "How KassenBoost works",
+    "tierkrankenversicherung": "Pet health insurance",
     "partner": "Partner",
     "ratgeber": "Insights",
     "hebammen": "For Midwives",
@@ -57,22 +60,23 @@
     "appFeatureBudget": "EUR 3,000 budget",
     "appFeatureReceipts": "Receipts in view",
     "appFeatureBonus": "Track IKK bonus",
+    "appCompactTitle": "Download the Healio app",
+    "appCompactBody": "Keep your health budget, policies and receipts close at hand.",
+    "appDownloadLabel": "Download the Healio app",
+    "appStoreEyebrow": "Download on the",
     "appStore": "App Store",
+    "appStoreAria": "Download Healio on the App Store",
+    "playStoreEyebrow": "Get it on",
     "playStore": "Google Play",
+    "playStoreAria": "Get Healio on Google Play",
     "appScreenshotAlt": "Healio app dashboard showing the available health budget",
     "copyright": "© {{year}} Healio GmbH. All rights reserved."
   },
-  "kassenBoostBridge": {
-    "eyebrow": "Choose your insurer deliberately",
-    "title": "Lowest contribution or greatest personal value?",
-    "description": "KassenBoost separates contributions, achievable bonuses and benefits so you can compare fairly and decide what matters most.",
-    "choices": [
-      {"title": "Contribution first", "description": "For those mainly looking to reduce their monthly cost."},
-      {"title": "Value first", "description": "For those who care more about bonuses and relevant benefits."}
-    ],
-    "noteLabel": "Context, not a recommendation",
-    "note": "IKK classic can be a strong option with a potential bonus of EUR 700+ per year. Whether it fits depends on your region, eligibility and priorities.",
-    "cta": "Compare with KassenBoost"
+  "kassenboostHint": {
+    "iconLabel": "Compare statutory health insurers",
+    "title": "Not sure IKK classic is right for you?",
+    "body": "KassenBoost compares contributions, bonuses and distinctive benefits so you can find the statutory health insurer that suits your everyday life.",
+    "cta": "Compare health insurers"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Key facts about the Lebenshilfe company pension plan",

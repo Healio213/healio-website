@@ -7,29 +7,36 @@
     "ogImageAlt": "Healio Wegweiser für Krankenkassenbeitrag, Bonus und Leistungen"
   },
   "hero": {
-    "eyebrow": "Krankenkassenwechsel mit Plan",
-    "title": "Hol mehr aus deiner Krankenkasse heraus.",
-    "description": "Wir prüfen zuerst, wo du Beitrag sparen kannst. Danach schauen wir, welcher Bonus für deinen Alltag realistisch ist und welche Leistungen wirklich zu dir passen.",
-    "cta": "Meinen Kassenvorteil prüfen",
-    "ctaHint": "Kostenlos vergleichen bei KassenBoost",
+    "eyebrow": "Krankenkasse bewusst wählen",
+    "title": "Welche Krankenkasse bringt dir wirklich mehr?",
+    "description": "Der niedrigste Beitrag ist nur die halbe Antwort. Finde heraus, was du sparen kannst, welchen Bonus du realistisch erreichst und welche Leistungen zu deinem Alltag passen.",
+    "cta": "Kassenvorteil prüfen",
+    "ctaHint": "Kostenlos · ohne Kontaktdaten",
     "proof": [
-      "Ohne Kontaktdaten starten",
       "Ergebnis vor dem Antrag",
-      "Beitrag, Bonus und Leistung getrennt"
+      "Beitrag, Bonus und Leistung getrennt",
+      "Du entscheidest selbst"
     ],
     "mapEyebrow": "Dein Vergleich",
-    "mapTitle": "Eine Entscheidung, drei klare Antworten.",
+    "mapTitle": "Was ist dir wirklich wichtig?",
     "mapItems": [
       { "label": "Beitrag", "text": "Was zahlst du wirklich?" },
       { "label": "Bonus", "text": "Was erreichst du realistisch?" },
       { "label": "Leistungen", "text": "Was nutzt dir im Alltag?" }
     ],
-    "mapNote": "Erst vergleichen. Dann bewusst wechseln."
+    "mapNote": "Abwägen. Verstehen. Bewusst entscheiden."
   },
   "paths": {
-    "eyebrow": "Die drei Wege",
-    "title": "Nicht automatisch gewinnt die billigste Kasse.",
-    "description": "Wähle, was dir gerade am wichtigsten ist. Im Ergebnis bleiben die drei Antworten getrennt, damit du den Unterschied sofort verstehst.",
+    "eyebrow": "Was zählt für dich?",
+    "title": "Die günstigste Kasse ist nicht automatisch die beste für dich.",
+    "description": "Wähle deinen Startpunkt. KassenBoost zeigt dir Beitrag, erreichbaren Bonus und passende Leistungen trotzdem gemeinsam – klar voneinander getrennt.",
+    "triggerKicker": "Mögliches IKK-Bonus-Rechenbeispiel",
+    "triggerQuestion": "Wie viel davon erreichst du?",
+    "triggerAmount": "1.155 EUR",
+    "triggerScenario": "Aktiv + Schwangerschaft",
+    "triggerTerms": "Zweckgebunden · bei anerkannten eigenen Kosten",
+    "triggerCta": "Meinen Kassenvorteil prüfen",
+    "triggerNote": "385 EUR Geldbonus × 3 – unter anderem mit 12 anerkannten Mutterschaftsvorsorgen und weiteren Maßnahmen im selben Bonusjahr. Kein typischer Wert; Geldbonus oder Zuschuss, nicht beides. Zuschuss höchstens bis zu den anerkannten eigenen Kosten.",
     "selectLabel": "Vergleichsziel auswählen",
     "resultLabel": "Darauf kommt es an",
     "items": [
@@ -98,31 +105,20 @@
     "noteTitle": "Wichtig zu wissen",
     "note": "Welche Maßnahme zählt, wie sie nachgewiesen wird und ob Geld oder ein zweckgebundener Zuschuss ausgezahlt wird, regelt jede Krankenkasse selbst."
   },
-  "process": {
-    "eyebrow": "So entsteht dein Ergebnis",
-    "title": "Vier kurze Schritte statt Versicherungsdeutsch.",
-    "description": "Du beantwortest nur die Fragen, die das Ergebnis wirklich verändern.",
-    "steps": [
-      { "title": "Region und aktuelle Kasse", "text": "Damit nur Krankenkassen erscheinen, die du tatsächlich wählen kannst." },
-      { "title": "Einkommen und Familie", "text": "Für eine passende Beitragsrechnung und die richtige Einordnung deiner Situation." },
-      { "title": "Alltag und Wünsche", "text": "Vorsorge, Aktivität und Leistungen wählst du Frage für Frage aus." },
-      { "title": "Drei getrennte Ergebnisse", "text": "Du siehst Beitragsersparnis, realistischen Bonus und Leistungs-Match nebeneinander." }
-    ],
-    "note": "Keine erfundenen Zwischenbeträge: Während der Fragen zeigen wir deinen Fortschritt, Geldwerte erst dann, wenn sie belastbar berechnet werden können."
-  },
   "bridge": {
-    "eyebrow": "Deinen Vorteil sinnvoll nutzen",
-    "title": "Behalten oder in besseren Schutz stecken.",
-    "description": "Eine Ersparnis oder ein Bonus ist zuerst dein Vorteil. Wenn du möchtest, kann er auch dabei helfen, eine passende Zusatzversicherung teilweise oder vollständig zu finanzieren.",
-    "budgetTitle": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren können möglich sein.",
-    "budgetNote": "Das gilt nur, wenn ein erreichbarer Kassenbonus und eine passende Zusatzversicherung kombiniert werden und alle jeweiligen Bonus- und Tarifbedingungen erfüllt sind.",
+    "eyebrow": "Deinen Vorteil weiterdenken",
+    "title": "Behalten – oder gezielt in besseren Schutz stecken.",
+    "description": "Deine Ersparnis und dein Bonus gehören zuerst dir. Wenn du möchtest, können sie den Beitrag für passenden Zusatzschutz ganz oder teilweise ausgleichen.",
     "cards": [
       {
         "routeKey": "ambulant",
         "emoji": "🩺",
         "tone": "mint",
         "title": "Ambulant",
-        "text": "Zum Beispiel für Heilpraktiker, Osteopathie, Sehhilfen und Vorsorge.",
+        "badge": "Ambulant 100",
+        "highlight": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren",
+        "text": "Zum Beispiel für Heilpraktiker, Sehhilfen und Vorsorge im Tarif Ambulant 100.",
+        "note": "Für versicherte Leistungen; Tarif- und Bonusbedingungen beachten.",
         "cta": "Ambulanten Schutz ansehen"
       },
       {
@@ -130,7 +126,10 @@
         "emoji": "🦷",
         "tone": "butter",
         "title": "Zahn",
-        "text": "Für Zahnreinigung, Zahnersatz und weitere Leistungen je nach Tarif.",
+        "badge": "ZAHN Sofort",
+        "highlight": "Bis zu 1.500 EUR Sofortzuschuss möglich",
+        "text": "Kann bei passenden Voraussetzungen auch bei angeratener oder begonnener Behandlung greifen – solange sie noch nicht abgeschlossen oder abgerechnet ist.",
+        "note": "Bis 750 EUR je Kalenderjahr, maximal 24 Monate; nur beim Neuabschluss mitwählbar.",
         "cta": "Zahnschutz ansehen"
       },
       {
@@ -138,19 +137,12 @@
         "emoji": "🛏️",
         "tone": "sky",
         "title": "Stationär",
-        "text": "Für mehr Komfort und freie Entscheidungen im Krankenhaus je nach Tarif.",
+        "badge": "Für werdende Eltern",
+        "highlight": "2 Monate Zeit für den Schutz deines Babys",
+        "text": "Ist ein Elternteil bei der Geburt im Klinik-Tarif versichert, kann das Kind rückwirkend ab Geburt nachversichert werden.",
+        "note": "Anmeldung binnen zwei Monaten, ohne Gesundheitsprüfung; Tarifvoraussetzungen gelten.",
         "cta": "Klinikschutz ansehen"
       }
-    ]
-  },
-  "transparency": {
-    "eyebrow": "Sauber getrennt",
-    "title": "Das Ergebnis soll echt sein.",
-    "description": "Deshalb unterscheiden wir konsequent zwischen sicherer Beitragsdifferenz, voraussichtlich erreichbarem Bonus und besonderen Leistungen.",
-    "items": [
-      { "title": "Bonus ist nicht garantiert", "text": "Er hängt von den Programmregeln und deinen tatsächlich nachgewiesenen Maßnahmen ab." },
-      { "title": "Geld ist nicht gleich Guthaben", "text": "Frei verfügbares Geld und zweckgebundene Zuschüsse werden separat ausgewiesen." },
-      { "title": "Regional heißt wirklich regional", "text": "Eine Krankenkasse wird nur verglichen, wenn sie an deinem Wohn- oder Arbeitsort wählbar ist." }
     ]
   },
   "faq": {
@@ -167,8 +159,14 @@
   "final": {
     "eyebrow": "Bereit für deinen Vergleich?",
     "title": "Finde heraus, welche Krankenkasse dir wirklich mehr bringt.",
-    "description": "Starte mit Beitrag und Region. Bonus und Leistungen ordnen wir danach verständlich für dich ein.",
-    "cta": "Jetzt Kassenvorteil prüfen",
-    "hint": "Der Vergleich öffnet sich bei KassenBoost."
+    "description": "Ein Wechsel ist einfacher, als du denkst: Du siehst zuerst dein Ergebnis und entscheidest danach. Dein gesetzlicher Schutz bleibt bestehen.",
+    "proof": [
+      "Ergebnis vor dem Antrag",
+      "Ohne Kontaktdaten starten",
+      "Du entscheidest selbst"
+    ],
+    "cta": "Kassenvorteil prüfen",
+    "hint": "Kostenlos bei KassenBoost.",
+    "characterNote": "Erst vergleichen. Dann selbst entscheiden."
   }
 }

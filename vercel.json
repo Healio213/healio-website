@@ -21,6 +21,11 @@
   ],
   "redirects": [
     {
+      "source": "/termin",
+      "destination": "/partner?utm_source=kurzlink&utm_medium=nachricht&utm_campaign=termin",
+      "permanent": false
+    },
+    {
       "source": "/budget",
       "destination": "/ambulant?utm_source=linkedin&utm_campaign=therapieabbruch",
       "permanent": false

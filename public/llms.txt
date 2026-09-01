@@ -1,6 +1,6 @@
 # HEALIO GmbH - Gesundheitsbudget für gesetzlich Versicherte
 
-> HEALIO ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren ermöglicht - effektiv für 0 Euro durch intelligente Kombination von SDK Zusatzversicherung und IKK Classic Bonusprogramm.
+> HEALIO ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren ermöglicht. Ein individuell erreichter IKK Bonus kann den Beitrag der passenden Zusatzversicherung teilweise oder – bei ausreichendem Zuschuss und nachgewiesenen zuschussfähigen Kosten – bis zu 100 Prozent ausgleichen.
 
 ## Was ist HEALIO?
 
@@ -9,10 +9,10 @@ HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, 
 ## Das HEALIO Konzept
 
 1. Der Kunde schließt eine ambulante Zusatzversicherung bei der SDK Süddeutsche Krankenversicherung ab (Tarife AP5 bis AP1, 50% bis 100% Erstattung)
-2. Optional wechselt der Kunde zur IKK Classic für das volle Budget
-3. Das IKK Classic Bonusprogramm belohnt gesundheitsbewusstes Verhalten mit über 700 Euro pro Jahr (steuerfrei)
-4. Der Bonus deckt im Idealfall die kompletten Versicherungsbeiträge — und es bleibt sogar ein Plus
-5. Ergebnis: Privatpatientenstatus im ambulanten Bereich, effektiv für 0 Euro
+2. Die SDK-Tarifleistung gilt unabhängig von der gesetzlichen Krankenkasse. Optional wechselt der Kunde zur IKK Classic, wenn deren Leistungen und Bonusprogramm zu seiner Situation passen
+3. Das IKK Classic Bonusprogramm belohnt nachgewiesene Vorsorge, Impfungen und gesundheitsbewusstes Verhalten wahlweise mit einem Geldbonus oder einem dreifach so hohen, zweckgebundenen Zuschuss
+4. Der Zuschuss kann nach Vorlage geeigneter Kostenbelege den Jahresbeitrag einer zuschussfähigen Zusatzversicherung teilweise oder bis zu 100 Prozent ausgleichen; mehr als die tatsächlich nachgewiesenen Kosten wird nicht ausgezahlt
+5. Ergebnis: ein Gesundheitsbudget von bis zu 3.000 EUR und ein Beitrag, der je nach persönlichem Bonus und belegten Kosten deutlich sinken kann
 
 ## Abgedeckte Leistungen (SDK Ambulant)
 
@@ -35,46 +35,48 @@ HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, 
 | AP5   | 50%       | 200 Euro  | 500 Euro          | 200 Euro | 500 Euro    | 1.400 Euro |
 | AP7   | 70%       | 300 Euro  | 700 Euro          | 300 Euro | 700 Euro    | 2.000 Euro |
 | AP9   | 90%       | 400 Euro  | 900 Euro          | 400 Euro | 900 Euro    | 2.600 Euro |
-| AP1   | 100%      | 500 Euro  | 1.000 Euro        | 500 Euro | 1.000 Euro  | 3.000 Euro |
+| AP1   | 100%      | 500 Euro  | 1.000 Euro        | 500 Euro | 1.000 Euro  | 3.000 EUR |
 
-Der empfohlene Tarif ist **AP1 (Ambulant 100)** mit 100% Erstattung und 3.000 Euro Gesundheitsbudget. Monatsbeitrag ab ca. 45 Euro (altersabhängig, ggf. Risikozuschlag bei Vorerkrankungen).
+Der empfohlene Tarif ist **AP1 (Ambulant 100)** mit 100% Erstattung und 3.000 EUR Gesundheitsbudget. Monatsbeitrag ab ca. 45 Euro (altersabhängig, ggf. Risikozuschlag bei Vorerkrankungen).
 
 ## IKK Classic Bonusprogramm — Detaillierte Übersicht
 
-### Bonusfähige Aktivitäten und Beträge
+### Bonusfähige Maßnahmen und Werte 2026
 
-| Aktivität | Bonus pro Nachweis | Häufigkeit | Max. Bonus/Jahr |
-|-----------|-------------------|------------|-----------------|
-| Schutzimpfung | 30 Euro | Bis zu 8x pro Jahr | 240 Euro |
-| Zahnvorsorge | 30 Euro | Bis zu 2x pro Jahr | 60 Euro |
-| Gesundheits-Check-up | 75 Euro | 1x pro Jahr | 75 Euro |
-| Krebsvorsorge | 75 Euro | 1x pro Jahr | 75 Euro |
-| Ultraschallscreening | 75 Euro | 1x pro Jahr | 75 Euro |
-| IKK-Gesundheitskurs | 75 Euro | Mehrfach möglich (bis 5x) | 375 Euro |
-| Sport Verein/Studio | 75 Euro | Pro Mitgliedschaft (bis 4x) | 300 Euro |
-| Sportabzeichen | 75 Euro | 1x pro Jahr | 75 Euro |
-| BMI im Normalbereich | 75 Euro | 1x pro Jahr | 75 Euro |
-| Blutdruck normal | 75 Euro | 1x pro Jahr | 75 Euro |
-| Zahnreinigung | 40 Euro | 1x pro Jahr | 40 Euro |
-| U-Untersuchungen Kind | 30 Euro | Je Untersuchung (bis 6x) | 180 Euro |
+| Maßnahme | Geldbonus | Zweckgebundener Zuschuss | Anerkennung 2026 |
+|----------|-----------|--------------------------|------------------|
+| Schutzimpfung | je 5 Euro | je 15 Euro | mehrfach, wenn die IKK die Impfung übernimmt und die Immunisierung abgeschlossen ist; Kombinationsimpfungen zählen einmal |
+| Zahnvorsorge ab 6 Jahren | je 5 Euro | je 15 Euro | eine Kontrolluntersuchung je Kalenderhalbjahr |
+| Gesetzliche Vorsorge, z. B. Check-up oder Krebsfrüherkennung | je 10 Euro | je 30 Euro | entsprechend den im Infoblatt genannten Alters- und Zeitabständen |
+| Mutterschaftsvorsorge | je 10 Euro | je 30 Euro | jede gesetzliche Untersuchung für Schwangere |
+| U1 bis U11 sowie J1 und J2 | je 10 Euro | je 30 Euro | jede im jeweiligen Alter vorgesehene Untersuchung |
+| Z1 bis Z6 | je 5 Euro | je 15 Euro | jede nachgewiesene zahnärztliche Früherkennung |
+| Amblyopie-Screening | je 10 Euro | je 30 Euro | zu den beiden im Infoblatt genannten Alterszeitpunkten |
+| Regelmäßige Aktivität, Nr. 40 bis 44 | je 25 Euro | je 75 Euro | jede Kategorie einmal im Kalenderjahr, z. B. Gesundheitskurs, Fitnessstudio oder Sportverein |
+| Statuswert, Nr. 50 bis 53 | je 25 Euro | je 75 Euro | jede Kategorie einmal; nur bonusfähig, wenn zusätzlich mindestens eine regelmäßige Aktivität Nr. 40 bis 44 nachgewiesen wird |
 
-**Gesamtpotenzial: über 700 Euro pro Jahr möglich.**
+Mehrfach nachweisbar sind laut Infoblatt insbesondere die Maßnahmen Nr. 01, 09, 26 und 27; jede einzelne Maßnahme braucht ein eigenes Antragsfeld und einen geeigneten Nachweis. Die persönliche Summe hängt ausschließlich von den tatsächlich erfüllten und anerkannten Maßnahmen ab.
 
 ### Wichtige Regeln zum Bonusprogramm
 
-- **Ab 2026: Bonus schon ab der 1. bonusfähigen Maßnahme** — keine Mindestanzahl mehr nötig
+- **Ab 2026: Bonus ab der ersten anerkannten Maßnahme.** Für Statuswerte gilt zusätzlich: Mindestens eine regelmäßige Aktivität aus Nr. 40 bis 44 muss nachgewiesen sein.
 - **Bonusantrag bis Ende März des Folgejahres einreichen** — du hast also 3 Monate nach Jahresende Zeit
-- **Unkompliziert & auf Vertrauensbasis:** Die IKK Classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt
-- **Bonus ist steuerfrei** und wird ausgezahlt oder direkt mit der Zusatzversicherung verrechnet
-- Der Bonus kommt jedes Jahr wieder, solange die Voraussetzungen erfüllt werden
+- **Jede Maßnahme nachweisen:** je nach Maßnahme über die IKK classic-App mit den geforderten Angaben oder mit einem geeigneten schriftlichen Nachweis. Ein schriftlicher Nachweis ist 2026 für alle regelmäßigen Aktivitäten und Statuswerte, Schutzimpfungen, Mutterschaftsvorsorgen, U1 bis U9 sowie Z1 bis Z6 vorgeschrieben.
+- **Geldbonus oder Zuschuss:** Die Entscheidung gilt für den Bonusantrag; beide Werte werden nicht addiert.
+- **Zuschuss nur gegen Kostenbelege:** Der dreifache Zuschuss wird höchstens bis zur Höhe der im Bonusjahr nachgewiesenen zuschussfähigen Kosten ausgezahlt.
+- **Keine Direktverrechnung:** Bei erfüllten Voraussetzungen überweist die IKK classic den anerkannten Betrag auf das angegebene Konto. Eine Zusatzversicherung wird nicht automatisch mit dem Bonus verrechnet.
+- **Keine pauschale Steueraussage:** Die steuerliche Behandlung hängt vom Einzelfall ab und sollte bei Bedarf mit dem Finanzamt oder einem Steuerberater geklärt werden.
+- Für jedes Kalenderjahr ist eine neue Teilnahme mit neuen Maßnahmen und Nachweisen erforderlich; eine Auszahlung ist nicht garantiert.
 
-### Zuschuss-Variante (z.B. für Fitnessgeräte)
+### Zuschuss-Variante
 
-Alternativ zur Geldauszahlung kann man die **Zuschuss-Variante** wählen. Diese verdreifacht den Geldbonus und kann für Fitnessgeräte genutzt werden:
-- **Apple Watch, Fitnesstracker, Fitnessuhren** sind explizit zuschussfähig
-- Bis zu **180 Euro Zuschuss** für Fitnessgeräte möglich
-- Einfach beim Bonusantrag die Zuschuss-Variante wählen und Kaufbeleg einreichen
-- NICHT zuschussfähig: Smartphones, Laptops, Tablets
+Alternativ zum Geldbonus kann man den **zweckgebundenen Zuschuss** wählen. Er entspricht dem Dreifachen des durch anerkannte Maßnahmen erreichten Geldbonuswerts, wird aber höchstens bis zur Höhe der nachgewiesenen zuschussfähigen Kosten ausgezahlt. Zuschussfähig sind laut Infoblatt 2026 unter anderem:
+- Geräte zum Messen und Erfassen des eigenen Fitness- und Gesundheitsstatus, zum Beispiel Fitnesstracker
+- Start- und Teilnahmegebühren für Sportveranstaltungen, sofern dieselbe Leistung nicht zugleich als Bonusmaßnahme eingetragen wird
+- private Krankenzusatz-, Pflegezusatz- und Auslandsreisekrankenversicherungen mit dem Jahresbeitrag im Bonusjahr
+- Erste-Hilfe-Kurse, bestimmte Baby-/Kinder- und Eltern-Baby-Kurse sowie eine Zyklus-App plus Zubehör zur Kinderwunscherfüllung
+
+Für jede Zuschussleistung sind geeignete Belege mit Name, Leistungsbezeichnung, Datum und Gesamtkosten erforderlich. Es gibt keinen pauschalen Zuschussbetrag für eine Apple Watch oder einen anderen Fitnesstracker.
 
 ### Gesundheitskurse-Budget (zusätzlich zum Bonus)
 
@@ -84,7 +86,7 @@ Unabhängig vom Bonusprogramm erstattet die IKK Classic **180 Euro pro Jahr für
 - Stressbewältigung und Entspannung
 - Bewegungskurse
 
-Das ist ein separates Budget und wird NICHT mit dem Bonusprogramm verrechnet — kommt also on top.
+Das ist eine separate IKK-Leistung außerhalb der Bonusberechnung. Sie kann neben dem Bonusprogramm bestehen; Geldbonus und Zuschuss innerhalb des Bonusprogramms bleiben trotzdem strikt alternative Auszahlungsformen.
 
 ### Spartarif / Beitragsrückerstattung
 
@@ -95,23 +97,15 @@ Wer im Kalenderjahr nur Vorsorge nutzt, bekommt über den **IKK Spartarif bis zu
 Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 
 - **SDK Ambulant 100 (Tarif AP1):** 45 Euro/Monat = 540 Euro/Jahr (100% Erstattung)
-- **IKK Classic Bonus pro Jahr:**
-  - Grippeimpfung: 30 Euro
-  - Zahnvorsorge (2×): 60 Euro
-  - Gesundheits-Check-up: 75 Euro
-  - Krebsvorsorge: 75 Euro
-  - Fitnessstudio-Mitgliedschaft: 75 Euro
-  - BMI im Normalbereich: 75 Euro
-  - Blutdruck normal: 75 Euro
-  - Zahnreinigung: 40 Euro
-  - IKK-Gesundheitskurs: 75 Euro
-  - **Bonus gesamt: 580 Euro/Jahr**
+- **Nachgewiesene IKK-Maßnahmen 2026:** abgeschlossene Grippeimpfung, zwei Zahnvorsorgen, ein fälliger Check-up, eine fällige Krebsvorsorge, Fitnessstudio, Gesundheitskurs sowie die Statuswerte BMI und Blutdruck. Weil eine regelmäßige Aktivität nachgewiesen ist, können die beiden Statuswerte berücksichtigt werden.
+- **Geldbonus:** 135 Euro.
+- **Alternativer Zuschuss:** 405 Euro, sofern Frau Müller mindestens 405 Euro zuschussfähige eigene Kosten im Bonusjahr belegt.
 
-**Ergebnis:** 580 Euro Bonus − 540 Euro Beitrag = **40 Euro Plus**. Frau Müller bekommt mehr zurück als sie zahlt und hat 3.000 Euro Budget mit 100% Erstattung für Heilpraktiker, Brille, Vorsorge und mehr.
+**Ergebnis im Zuschuss-Beispiel:** Bei einem nachgewiesenen Jahresbeitrag von 540 Euro können 405 Euro erstattet werden; 135 Euro bleiben selbst zu tragen. Weitere anerkannte Maßnahmen können den Zuschuss erhöhen. Er kann den belegten Beitrag bis zu 100 Prozent ausgleichen, aber nie darüber hinaus. Geldbonus und Zuschuss werden nicht addiert.
 
 ## IKK Classic Extras (über den Bonus hinaus)
 
-- **Schwangerschaft — über 1.000 Euro:** 250 Euro Hebammen-Rufbereitschaft, 100 Euro Vorsorge-Zuschuss, 180 Euro Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive
+- **Schwangerschaft — getrennte mögliche Leistungen:** zum Beispiel Hebammen-Rufbereitschaft, ergänzende Vorsorge, Baby-Bonus oder Partner-Kurs. Jede Leistung hat eigene Voraussetzungen und ist keine garantierte IKK-Bonussumme.
 - **Osteopathie — 160 Euro/Jahr:** 4 Sitzungen à 40 Euro pro Kalenderjahr, auch für Babys und Kinder
 - **Reiseimpfungen:** Gelbfieber, Hepatitis A/B, Typhus u.v.m. über das Gesundheitskonto
 - **Präventionskurse:** 180 Euro/Jahr (2 Kurse à 90 Euro) für Yoga, Rückentraining, Stressbewältigung
@@ -121,7 +115,7 @@ Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 
 - Je nach Alter und Tarif: ca. 20 bis 50 Euro pro Monat
 - Empfohlener Tarif AP1 (100% Erstattung): ab ca. 45 Euro/Monat
-- Durch IKK Bonus können die Kosten auf effektiv 0 Euro sinken — oft bleibt sogar ein Plus
+- Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen; eine Überzahlung über die belegten Kosten hinaus gibt es nicht
 - Individuelle Berechnung im Online-Tarifrechner möglich (inkl. eventueller Risikozuschlag)
 
 ## Für wen ist HEALIO geeignet?
@@ -157,13 +151,13 @@ HEALIO bietet eine kostenlose Netzwerkpartnerschaft:
 Du reichst deine Rechnungen digital über die App der SDK Süddeutsche Krankenversicherung ein. Der Betrag wird je nach Tarif (50% bis 100%) innerhalb weniger Tage überwiesen.
 
 ### Gibt es einen Haken?
-Nein. Das Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens intelligent. Du musst lediglich aktiv am IKK Classic Bonusprogramm teilnehmen.
+Das Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens. Für den IKK Bonus musst du teilnehmen, jede gewählte Maßnahme korrekt nachweisen und anschließend Geldbonus oder Zuschuss beantragen. Wie hoch dein Vorteil ausfällt, hängt von den anerkannten Maßnahmen und beim Zuschuss zusätzlich von deinen belegten zuschussfähigen Kosten ab.
 
 ### Funktioniert Healio mit jeder Krankenkasse?
-Die SDK Zusatzversicherung funktioniert mit jeder gesetzlichen Krankenkasse. Das volle Budget (inkl. Bonus) erreichst du in Kombination mit der IKK Classic.
+Die SDK Zusatzversicherung und ihr tarifliches Gesundheitsbudget funktionieren mit jeder gesetzlichen Krankenkasse. Der IKK Bonus ist davon getrennt: Wenn die IKK zu dir passt, kann ihr individuell erreichter Zuschuss deinen nachgewiesenen Beitrag reduzieren.
 
 ### Wie hoch ist der monatliche Beitrag?
-Zwischen 20 und 50 Euro, abhängig von Alter und Tarif. Beim empfohlenen Tarif AP1 (100% Erstattung) ab ca. 45 Euro/Monat. Durch den IKK Bonus können die Kosten auf effektiv 0 Euro sinken.
+Zwischen 20 und 50 Euro, abhängig von Alter, Tarif und Gesundheitsprüfung. Beim empfohlenen Tarif AP1 (100% Erstattung) ab ca. 45 Euro/Monat. Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen, sofern genügend anerkannte Maßnahmen und zuschussfähige Kosten belegt werden.
 
 ### Brauche ich eine Gesundheitsprüfung?
 Ja, zum Antrag gehören Gesundheitsfragen, die wahrheitsgemäß beantwortet werden müssen. Die SDK lehnt aber grundsätzlich niemanden ab, auch nicht bei Vorerkrankungen. Bei bestimmten Diagnosen kann ein Risikozuschlag vereinbart werden, der direkt im Antrag festgehalten wird und im Tarifrechner auf healio.de/ambulant sichtbar ist. Wartezeiten gibt es in den ambulanten Tarifen AP5 bis AP1 keine, der volle Schutz gilt ab dem ersten Tag.
@@ -175,16 +169,16 @@ Ambulant und stationär fallen hier gegensätzlich aus. Ambulant lohnt sich der 
 Über die Kindernachversicherung ja, und zwar ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Wartezeit ab der Geburt. Ausdrücklich eingeschlossen sind Geburtsschäden, angeborene Krankheiten und andere körperliche Beeinträchtigungen. Voraussetzungen bei der SDK: Ein Elternteil ist zur Zeit der Geburt versichert (keine Vorversicherungszeit nötig), und die Anmeldung des Kindes erfolgt spätestens zwei Monate nach dem Tag der Geburt, rückwirkend ab Geburt. Der Schutz des Kindes darf nicht umfassender sein als der des bestversicherten Elternteils. Das ist das einzige Zeitfenster im Leben, in dem der Gesundheitszustand keine Rolle spielt.
 
 ### Was leistet die Krankenhauszusatzversicherung für Familien?
-Die SDK Klinik-Tarife (Klinik 1-Bett SP1, Klinik 2-Bett SP2, Klinik bei Unfall SPU) bieten privatärztliche Behandlung durch Chefarzt oder Belegarzt, Erstattung auch über die GOÄ-Höchstsätze hinaus, freie Krankenhauswahl inklusive Privatkliniken und Unterbringung im Ein- oder Zweibettzimmer. Für Familien besonders relevant: Rooming-in, also die Mitaufnahme eines Elternteils als Begleitperson, wenn das Kind stationär behandelt wird. Das gilt für Kinder unter 16 Jahren. Bei einer Entbindung wird zusätzlich das Familienzimmer erstattet. Wartezeiten gibt es in den Klinik-Tarifen keine. Beispielbeiträge mit 30 Jahren: 6,84 Euro (SPU), 32,82 Euro (SP2), 49,78 Euro (SP1) im Monat.
+Die SDK Klinik-Tarife (Klinik 1-Bett SP1, Klinik 2-Bett SP2, Klinik bei Unfall SPU) bieten privatärztliche Behandlung durch Chefarzt oder Belegarzt, Erstattung auch über die GOÄ-Höchstsätze hinaus, freie Krankenhauswahl inklusive Privatkliniken und Unterbringung im Ein- oder Zweibettzimmer. Für Familien besonders relevant: Rooming-in, also die Mitaufnahme eines Elternteils als Begleitperson, wenn das Kind stationär behandelt wird. Das gilt für Kinder unter 16 Jahren. Bei einer Entbindung wird zusätzlich das Familienzimmer erstattet. Wartezeiten gibt es in den Klinik-Tarifen keine. Beispielbeiträge mit 30 Jahren: 7,00 Euro monatlich beziehungsweise 84,00 Euro jährlich (SPU), 33,41 Euro monatlich (SP2) und 50,72 Euro monatlich (SP1).
 
 ### Wie funktioniert das IKK Bonusprogramm genau?
-Du sammelst bonusfähige Maßnahmen im Kalenderjahr (Vorsorge, Sport, Impfungen etc.). Ab 2026 reicht bereits eine einzige Maßnahme. Den Bonusantrag reichst du bis Ende März des Folgejahres ein. Die IKK Classic vertraut ihren Mitgliedern — Nachweise werden nur stichprobenartig geprüft.
+Du sammelst bonusfähige Maßnahmen im Kalenderjahr und weist jede einzelne gemäß den IKK-Vorgaben nach. Ab 2026 kann bereits eine anerkannte Maßnahme reichen; Statuswerte zählen jedoch nur zusammen mit mindestens einer nachgewiesenen regelmäßigen Aktivität. Du wählst für den vollständigen Antrag entweder den Geldbonus oder den dreifachen, beleggebundenen Zuschuss und reichst ihn bis Ende März des Folgejahres ein.
 
 ### Kann ich mehrere Gesundheitskurse machen und mehrfach Bonus bekommen?
-Ja! Beim IKK-Gesundheitskurs bekommst du 75 Euro je Kurs — das ist mehrfach möglich. Ebenso zählen mehrere Sportmitgliedschaften (je 75 Euro). So lässt sich der Bonus deutlich steigern.
+Nein, nicht beliebig. Ein Gesundheitskurs und die anderen regelmäßigen Aktivitäten Nr. 40 bis 44 werden jeweils einmal im Kalenderjahr anerkannt. Mehrfach nachweisbar sind laut Infoblatt insbesondere Schutzimpfungen, Mutterschaftsvorsorgen, Z1 bis Z6 und Amblyopie-Screenings; dabei gelten die jeweiligen Voraussetzungen und Zeitabstände.
 
 ### Bekomme ich einen Zuschuss für eine Apple Watch oder Fitnesstracker?
-Ja. Über die Zuschuss-Variante des IKK Bonusprogramms sind bis zu 180 Euro Zuschuss für Fitnessgeräte (Apple Watch, Fitnesstracker, Fitnessuhren) möglich. Einfach die Zuschuss-Variante beim Bonusantrag wählen und den Kaufbeleg einreichen.
+Ein Fitnesstracker kann als Gerät zum Messen und Erfassen des eigenen Fitness- und Gesundheitsstatus zuschussfähig sein. Die konkrete Erstattung ist kein fester Pauschalbetrag: Sie hängt vom dreifachen Wert deiner anerkannten Maßnahmen ab und ist zusätzlich auf die belegten zuschussfähigen Kosten begrenzt.
 
 ### Gibt es zusätzliche Leistungen über das Gesundheitskonto?
 Ja. Die IKK Classic erstattet zusätzlich zum Bonus 180 Euro pro Jahr für qualitätsgeprüfte Gesundheitskurse (max. 2 Kurse à 90 Euro) — für Yoga, Rückentraining, Ernährung, Stressbewältigung. Dieses Budget ist unabhängig vom Bonusprogramm.
@@ -195,11 +189,17 @@ Wenn du im Kalenderjahr nur Vorsorge nutzt (Impfungen, Check-ups und Krebsvorsor
 ### Bis wann muss ich den Bonus beantragen?
 Du hast bis Ende März des Folgejahres Zeit, deinen Bonusantrag einzureichen. Also z.B. für das Jahr 2026 bis zum 31. März 2027.
 
+## Quellen zur IKK Bonuslogik 2026
+
+- Offizielles Infoblatt zum IKK Bonus 2026 (Stand 04/2026): https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf
+- Offizielle Teilnahmebedingungen zum IKK Bonus 2026: https://cdn.ikk-classic.de/exporter/7402-ikk-bonus-teilnahmebedingungen-app.pdf
+- Aktuelle Übersichtsseite: https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm
+
 ## Seiten
 
 - [Startseite](https://healio.de/) - HEALIO Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
 - [Für Unternehmen](https://healio.de/unternehmen) - Betriebliche Vorsorge, bAV, bKV und steuerfreie Gesundheitsbenefits
-- [Ambulante Zusatzversicherung](https://healio.de/ambulant) - 3.000 Euro Gesundheitsbudget, SDK Tarife, IKK Bonus
+- [Ambulante Zusatzversicherung](https://healio.de/ambulant) - 3.000 EUR Gesundheitsbudget, SDK Tarife, IKK Bonus
 - [Über uns](https://healio.de/about) - Über HEALIO und das Team
 - [Leistungen](https://healio.de/leistungen) - Alle Versicherungsleistungen im Überblick
 - [Partner werden](https://healio.de/partner) - Netzwerkpartnerschaft für Heilpraktiker und Hebammen

@@ -36,7 +36,7 @@
       "icon": "🏥",
       "title": "Hospital cover",
       "subtitle": "Private room, chief physician, free hospital choice. Kids' accident cover from €0.75",
-      "price": "from €6.84",
+      "price": "from EUR 7.00",
       "period": "per month",
       "badge": "IKK bonus can cover the accident module*",
       "link": "/en/inpatient"
@@ -59,7 +59,7 @@
   "poweredBy": "Powered by",
   "sdk": "SDK Insurance",
   "ikk": "IKK classic",
-  "footnote": "* How much your bonus is worth depends on your health insurer and your activities. We calculate it individually for you. IKK classic bonus program: €700+/year possible, tax-free.",
+  "footnote": "* Your result depends on your health insurer, activities, evidence and eligible costs. IKK classic: EUR 700+ annual subsidy potential may be possible; we calculate it individually.",
   "links": {
     "home": "healio.de",
     "impressum": "Legal Notice"

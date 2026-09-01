@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "<highlight>Private patient</highlight> in hospital. With the inpatient plan.",
-    "subtitle": "Private room, chief physician treatment and free hospital choice with SDK's hospital plans, with no waiting periods. For a 30-year-old, from 6.84 € per month. Calculate your premium in 2 minutes.",
-    "ikkNote": "<strong>Put health-fund bonuses in context:</strong> KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide which value matters to you.",
+    "subtitle": "Private room, chief physician treatment and free hospital choice with SDK's hospital plans, with no waiting periods. For a 30-year-old, from EUR 7.00 per month. Calculate your premium in 2 minutes.",
+    "ikkNote": "<strong>Refinancing via the IKK classic bonus:</strong> For recognised activities, you choose between a cash bonus and a three-times-higher subsidy for documented eligible costs. Depending on your activities, this can cover a large part of your premium and, for the accident plan, even up to 100%. Calculate yours below.",
     "ctaCalculate": "Calculate premium",
     "ctaBonus": "Secure bonus",
     "heroImageAlt": "Modern hospital private room"
@@ -50,7 +50,7 @@
     "empfehlung": "Recommended",
     "tariffName": "Klinik 1-Bett (plan SP1)",
     "tariffType": "Private room",
-    "tariffPrice": "e.g. 49.78 €/month at age 30 | 69.74 €/month at age 46",
+    "tariffPrice": "e.g. EUR 50.72/month at age 30",
     "tariffDetails": {
       "komfort": {
         "label": "Room comfort",
@@ -98,16 +98,16 @@
       "name": "Klinik 2-Bett (SP2)",
       "zimmer": "Twin room",
       "tagegeld": "Upgrade option to the private-room plan from age 30",
-      "preis": "e.g. 32.82 €/month at age 30"
+      "preis": "e.g. EUR 33.41/month at age 30"
     },
     "top": {
       "name": "Klinik 1-Bett (SP1)",
       "zimmer": "Private or twin room",
       "tagegeld": "Highest plan of the SP line",
-      "preis": "e.g. 49.78 €/month at age 30"
+      "preis": "e.g. EUR 50.72/month at age 30"
     },
-    "ikkComboTitle": "Compare health-fund contributions and bonuses separately",
-    "ikkComboText": "KassenBoost places <strong>contributions, achievable bonuses and benefits</strong> side by side. This shows whether IKK classic or another health fund better fits your priorities.",
+    "ikkComboTitle": "Refinance your premium via the IKK classic bonus",
+    "ikkComboText": "For recognised activities, IKK classic gives you a choice between a <strong>cash bonus and a three-times-higher subsidy</strong> for documented eligible costs: preventive check-ups, vaccinations, sports club, fitness and more. Depending on your activities, the subsidy can cover a large part of your hospital-plan premium and, for the accident plan, even up to 100%. The calculator below shows your result.",
     "examplesEyebrow": "Transparent, not theoretical",
     "examplesTitle": "What optional hospital extras can realistically cost",
     "examplesSubtitle": "Statutory insurance covers medically necessary treatment. These model calculations show optional extras and the statutory co-payment only.",
@@ -266,7 +266,7 @@
     "items": [
       {
         "q": "How much does hospital supplementary insurance cost?",
-        "a": "The premium depends on age and plan. Examples for a 30-year-old: Klinik bei Unfall 6.84 €, Klinik 2-Bett 32.82 €, Klinik 1-Bett 49.78 € per month. At age 46: 10.49 / 44.91 / 69.74 €. The plan calculator shows your personal premium in 2 minutes."
+        "a": "The premium depends on age and plan. Current examples for a 30-year-old: Klinik bei Unfall (SPU) EUR 7.00, Klinik 2-Bett (SP2) EUR 33.41 and Klinik 1-Bett (SP1) EUR 50.72 per month. The plan calculator shows your personal premium in 2 minutes."
       },
       {
         "q": "What is the difference between Klinik 1-Bett and Klinik 2-Bett?",
@@ -274,7 +274,7 @@
       },
       {
         "q": "What is the Klinik bei Unfall plan?",
-        "a": "SPU provides the Klinik 1-Bett benefits – private or twin room, private-doctor treatment and free hospital choice – exclusively for accident-related treatment. It requires no health assessment and costs an illustrative EUR 6.84 per month for a 30-year-old."
+        "a": "SPU provides the Klinik 1-Bett benefits – private or twin room, private-doctor treatment and free hospital choice – exclusively for accident-related treatment. It requires no health assessment and costs an illustrative EUR 7.00 per month for a 30-year-old."
       },
       {
         "q": "Are there waiting periods?",
@@ -286,7 +286,7 @@
       },
       {
         "q": "How does the IKK classic bonus help with financing?",
-        "a": "How much a health-fund bonus reduces your premium depends on your activities and the applicable conditions. KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide what matters most."
+        "a": "For recognised activities, IKK classic gives you a choice between a cash bonus and a three-times-higher subsidy for documented eligible costs. Depending on your activities, the subsidy can cover a large part of the premium and, for the accident plan, even up to 100%. The calculator on this page shows your result."
       },
       {
         "q": "Does the cover also apply to children?",
@@ -324,9 +324,243 @@
     "cta": "Calculate your family's premium"
   },
   "bonusRechner": {
-    "tariffInfo": "Hospital tariff twin room, example premium €32.82 (age 30)",
+    "tariffInfo": "Hospital twin-room plan, illustrative premium EUR 33.41 (age 30)",
     "effectiveLabel": "What you get in the hospital",
     "effectiveValue": "Private patient status",
-    "effectiveNote": "Example calculation: twin-room hospital tariff at €32.82 per month (age 30). Your premium depends on age and tariff, your bonus on your health insurer and the activities you complete."
+    "effectiveNote": "Example calculation: twin-room hospital plan at EUR 33.41 per month (age 30). The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms."
+  },
+  "refresh": {
+    "hero": {
+      "eyebrow": "Hospital supplementary insurance",
+      "title": "More choice in hospital. Exactly as much cover as you need.",
+      "subtitle": "Compare twin-room, private-room and affordable accident-only cover from SDK. First see the differences, then calculate your personal premium.",
+      "cta": "Choose hospital cover",
+      "micro": [
+        "Three plan routes, clearly separated",
+        "No waiting period for new insured events"
+      ],
+      "visualAria": "Healio choice guide for SP2, SP1 and SPU",
+      "visualTitle": "What matters to you in an emergency?",
+      "choices": {
+        "sp2": {
+          "code": "SP2",
+          "label": "Twin room",
+          "note": "Comfort for illness and accidents"
+        },
+        "sp1": {
+          "code": "SP1",
+          "label": "Private room",
+          "note": "More privacy for illness and accidents"
+        },
+        "spu": {
+          "code": "SPU",
+          "label": "Accidents only",
+          "note": "Affordable entry without a health assessment"
+        }
+      }
+    },
+    "selector": {
+      "eyebrow": "Your options at a glance",
+      "title": "Three routes. One fits your sense of security.",
+      "subtitle": "The premium is not the only factor: what matters is when cover should apply. Choose the scope first, then see your personal premium.",
+      "choose": "Choose this cover",
+      "selected": "Selected",
+      "resultEyebrow": "Your chosen direction",
+      "resultNote": "The SDK calculator lets you check the plan and see your age-related premium.",
+      "calculate": "Calculate personal premium",
+      "empty": "Choose one of the three cards. A clear next step then takes you to the premium calculator.",
+      "disclosure": "The SP1 and SP2 applications include health questions. SPU applies only to accident-related treatment and requires no health assessment. Benefits are subject to policy terms; your personal premium mainly depends on your age when joining.",
+      "options": {
+        "sp2": {
+          "code": "SP2",
+          "useCase": "Illness and accidents",
+          "title": "Klinik 2-Bett",
+          "price": "e.g. EUR 33.41/month at age 30",
+          "description": "Balanced cover for greater comfort and private medical treatment in hospital.",
+          "features": [
+            "Twin room",
+            "Private medical treatment",
+            "Free hospital choice subject to policy terms",
+            "Rooming-in for insured children under 16"
+          ],
+          "result": "SP2: comfort for illness and accidents"
+        },
+        "sp1": {
+          "code": "SP1",
+          "useCase": "Illness and accidents",
+          "title": "Klinik 1-Bett",
+          "price": "e.g. EUR 50.72/month at age 30",
+          "description": "The more extensive route when privacy, quiet and additional family benefits matter to you.",
+          "features": [
+            "Private or twin room",
+            "Private medical treatment",
+            "EUR 10 hospital allowance per full inpatient day",
+            "Family room after childbirth within the policy scope"
+          ],
+          "result": "SP1: more privacy for illness and accidents"
+        },
+        "spu": {
+          "code": "SPU",
+          "useCase": "Accidents only",
+          "title": "Klinik bei Unfall",
+          "price": "e.g. EUR 7.00/month at age 30",
+          "description": "An affordable entry to private-patient comfort when inpatient treatment is required due to an accident.",
+          "features": [
+            "Private or twin room after an accident",
+            "Private medical treatment after an accident",
+            "Free hospital choice subject to policy terms",
+            "No health assessment"
+          ],
+          "result": "SPU: private-patient comfort after an accident"
+        }
+      }
+    },
+    "benefits": {
+      "eyebrow": "Benefits before price",
+      "title": "When it matters, what is actually insured counts.",
+      "subtitle": "Statutory insurance covers medically necessary care. Your hospital plan adds the optional services that matter to you personally.",
+      "contextTitle": "Important: the plan determines when cover applies",
+      "contextBody": "SP1 and SP2 apply within the agreed scope for illness and accidents. SPU covers the hospital extras only after an accident.",
+      "cards": {
+        "doctor": {
+          "title": "Private medical treatment",
+          "body": "Treatment by a chief physician or attending specialist; reimbursement in the SDK hospital plans is not capped at the GOÄ maximum rates."
+        },
+        "room": {
+          "title": "More privacy in your room",
+          "body": "SP2 secures a twin room. SP1 offers a private or twin room. SPU covers this benefit only after an accident."
+        },
+        "choice": {
+          "title": "More choice of hospital",
+          "body": "Free hospital choice is insured within the policy scope, including private and specialist hospitals."
+        },
+        "start": {
+          "title": "No policy waiting period",
+          "body": "New insured events are covered from the policy start date. Events that occurred before then are not insured."
+        }
+      }
+    },
+    "family": {
+      "eyebrow": "Family cover, clearly explained",
+      "title": "Expecting parents and children need two different answers.",
+      "subtitle": "Newborn enrolment is not the same as affordable accident cover for a child. See the difference immediately.",
+      "parents": {
+        "label": "For expecting parents",
+        "title": "Plan cover before the birth",
+        "body": "If one parent is insured at the time of birth, the newborn can be admitted without a health assessment when the policy requirements are met.",
+        "items": [
+          "Registration within two months after birth",
+          "Cover backdated to the day of birth",
+          "Rooming-in for the subsequently insured child",
+          "Family room after childbirth in SP1 subject to policy terms"
+        ],
+        "note": "All newborn enrolment requirements must be met. The parent's existing cover, the deadline and the current policy terms are decisive."
+      },
+      "children": {
+        "label": "For children",
+        "title": "Illness cover or accidents only?",
+        "body": "For children, too, the cause matters: SP1 and SP2 cover agreed hospital services for illness and accidents, while SPU only applies after an accident.",
+        "items": [
+          "SP1: private or twin room",
+          "SP2: twin room",
+          "SPU: affordable accident cover without a health assessment",
+          "Rooming-in for insured children under 16"
+        ],
+        "note": "SPU is not general hospital cover for children. It does not pay for inpatient treatment caused by illness."
+      },
+      "cta": "Choose hospital cover"
+    },
+    "bonus": {
+      "eyebrow": "KassenBoost × hospital cover",
+      "title": "Choose the cover first. Then find the health insurer to match.",
+      "lead": "Your bonus can offset up to 100% of your effective plan premium.",
+      "body": "We calculate transparently how much you can personally achieve. KassenBoost compares contribution, achievable bonus and benefits; the best-fitting health insurer follows from your information.",
+      "fullPlansTitle": "SP1 and SP2: your actual remaining premium counts",
+      "fullPlansBody": "After you choose the plan, your achievable bonus is applied to your personal premium. This makes it clear what actually remains after the bonus.",
+      "cta": "Find a health insurer to match the plan",
+      "example": {
+        "eyebrow": "Transparent SPU example",
+        "title": "What 100% premium relief can look like.",
+        "badge": "Model for age 30",
+        "rows": [
+          {
+            "label": "Illustrative monthly SPU premium",
+            "value": "EUR 7.00"
+          },
+          {
+            "label": "Illustrative annual premium",
+            "value": "EUR 84.00"
+          },
+          {
+            "label": "Assumed usable health fund bonus",
+            "value": "at least EUR 84.00"
+          }
+        ],
+        "resultLabel": "Effective remaining premium in this model",
+        "resultText": "If your usable bonus at least matches the annual premium",
+        "resultValue": "EUR 0",
+        "disclosure": "Specific model calculation for SPU using an illustrative premium of EUR 7.00 per month or EUR 84.00 per year at age 30. Your premium depends on age. Bonus and usability depend on your health insurer, activities, proof and bonus terms; reimbursement is limited to the contribution that is actually eligible."
+      }
+    },
+    "video": {
+      "eyebrow": "The concept in under 3 minutes",
+      "title": "How to find hospital cover that fits you.",
+      "body": "If you prefer listening to reading, this video gives you a concise explanation of SP1, SP2 and SPU.",
+      "aria": "Explainer video about the SDK hospital plans"
+    },
+    "trust": {
+      "eyebrow": "Compare digitally, supported personally",
+      "title": "Make an informed decision and never feel left on your own.",
+      "subtitle": "Healio explains benefits and limits before your decision and remains available after you sign up.",
+      "cards": {
+        "broker": {
+          "title": "Registered insurance broker",
+          "body": "Insurance brokerage authorised under Section 34d (1) of the German Trade Regulation Act."
+        },
+        "clarity": {
+          "title": "Understand the terms first",
+          "body": "We separate illness, accidents and family benefits before you calculate the premium."
+        },
+        "support": {
+          "title": "Personal support afterwards",
+          "body": "You can contact Healio personally with questions about the application, contract or a claim."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Quick answers",
+      "title": "The key questions before you choose",
+      "items": [
+        {
+          "q": "What is the difference between SP1, SP2 and SPU?",
+          "a": "SP1 offers a private or twin room and additional benefits such as a EUR 10 hospital allowance. SP2 covers a twin room. Both apply within the agreed scope for illness and accidents. SPU covers hospital extras only after an accident."
+        },
+        {
+          "q": "Is SPU full hospital supplementary insurance?",
+          "a": "SPU provides extensive hospital extras, but only for accident-related treatment. It does not pay for hospital stays caused by illness. In return, the plan requires no health assessment."
+        },
+        {
+          "q": "Are there waiting periods?",
+          "a": "The SDK hospital plans have no policy waiting periods. Cover applies to new insured events from the start date. An insured event that occurred before then is not covered."
+        },
+        {
+          "q": "Do I need to answer health questions?",
+          "a": "The SP1 and SP2 applications include health questions. SPU requires no health assessment, but only pays after an accident. Binding acceptance takes place in the application."
+        },
+        {
+          "q": "Can a health fund bonus offset the entire premium?",
+          "a": "Up to 100% premium relief is possible. This is especially tangible with affordable SPU: if your actually usable bonus at least matches your annual premium, the model can leave no effective remaining premium. Your personal amount depends on your health insurer, activities, proof and bonus terms."
+        },
+        {
+          "q": "How does newborn enrolment work?",
+          "a": "If one parent is insured at the time of birth and the policy requirements are met, the child can be registered within two months without a health assessment, backdated to the day of birth."
+        }
+      ]
+    },
+    "final": {
+      "eyebrow": "Ready to decide?",
+      "title": "Choose the cover first. Calculate the premium next.",
+      "body": "SP2, SP1 or SPU: the comparison takes you directly to the right plan direction."
+    }
   }
 }

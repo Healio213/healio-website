@@ -5,6 +5,7 @@
     "unternehmen": "Für Unternehmen",
     "ambulant": "Ambulante Zusatzversicherung",
     "kassenbonus": "Kassenbonus & GKV-Vergleich",
+    "kassenboost": "KassenBoost",
     "zahn": "Zahnzusatzversicherung",
     "stationaer": "Stationäre Zusatzversicherung",
     "tier": "Tierkrankenversicherung",
@@ -38,6 +39,8 @@
     "unternehmen": "Für Unternehmen",
     "leistungen": "Leistungen",
     "kassenbonus": "Kassenbonus vergleichen",
+    "kassenboost": "KassenBoost verstehen",
+    "tierkrankenversicherung": "Tierkrankenversicherung",
     "partner": "Partner",
     "ratgeber": "Ratgeber",
     "hebammen": "Für Hebammen",
@@ -57,22 +60,23 @@
     "appFeatureBudget": "3.000 EUR Budget",
     "appFeatureReceipts": "Belege im Blick",
     "appFeatureBonus": "IKK Bonus verfolgen",
+    "appCompactTitle": "Healio App herunterladen",
+    "appCompactBody": "Gesundheitsbudget, Verträge und Belege immer dabei.",
+    "appDownloadLabel": "Healio App herunterladen",
+    "appStoreEyebrow": "Laden im",
     "appStore": "App Store",
+    "appStoreAria": "Healio im App Store herunterladen",
+    "playStoreEyebrow": "Jetzt bei",
     "playStore": "Google Play",
+    "playStoreAria": "Healio bei Google Play herunterladen",
     "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
     "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
   },
-  "kassenBoostBridge": {
-    "eyebrow": "Krankenkasse bewusst wählen",
-    "title": "Günstigster Beitrag oder größter persönlicher Vorteil?",
-    "description": "KassenBoost trennt Beitrag, erreichbaren Bonus und Leistungen. So vergleichst du fair und entscheidest selbst, was dir wichtiger ist.",
-    "choices": [
-      {"title": "Beitrag im Fokus", "description": "Wenn du vor allem deine monatlichen Kosten senken möchtest."},
-      {"title": "Vorteil im Fokus", "description": "Wenn Bonus und passende Leistungen für dich mehr zählen."}
-    ],
-    "noteLabel": "Einordnung, keine Vorgabe",
-    "note": "Die IKK classic kann mit 700 EUR+ Bonus pro Jahr eine starke Option sein. Ob sie zu dir passt, hängt von Region, Voraussetzungen und deinen Prioritäten ab.",
-    "cta": "Bei KassenBoost vergleichen"
+  "kassenboostHint": {
+    "iconLabel": "Krankenkassen vergleichen",
+    "title": "Noch nicht sicher, ob IKK classic zu dir passt?",
+    "body": "KassenBoost vergleicht Beitrag, Bonus und besondere Leistungen – damit du die gesetzliche Kasse findest, die zu deinem Alltag passt.",
+    "cta": "Meine Krankenkasse vergleichen"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Eckdaten der betrieblichen Altersvorsorge bei der Lebenshilfe",

@@ -545,6 +545,6 @@
     "tariffInfo": "Dental plan, from around €10 per month at age 30",
     "effectiveLabel": "What you get at the dentist",
     "effectiveValue": "up to 100% reimbursement",
-    "effectiveNote": "Example calculation based on your inputs. Your premium depends on tariff and age, your bonus on your health insurer and the activities you complete."
+    "effectiveNote": "Example calculation based on your inputs. The subsidy is capped at the documented annual premium; premium, bonus and eligibility depend on the applicable terms."
   }
 }

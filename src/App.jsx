@@ -11,7 +11,7 @@ import { ConsentManager } from '@/components/ConsentManager';
 import { NitaConsentWidget } from '@/components/NitaConsentWidget';
 import { useReferrer } from '@/hooks/useReferrer';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
-import { trackPageView } from '@/lib/analytics';
+import { setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -28,6 +28,8 @@ const ErstinformationPage = React.lazy(() => import('@/pages/ErstinformationPage
 const KontoLoeschenPage = React.lazy(() => import('@/pages/KontoLoeschenPage'));
 const VeterinaryHomePage = React.lazy(() => import('@/pages/VeterinaryHomePage'));
 const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
+const EmployerBavCalculatorPage = React.lazy(() => import('@/pages/EmployerBavCalculatorPage'));
+const KassenBoostBridgePage = React.lazy(() => import('@/pages/KassenBoostBridgePage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
@@ -56,6 +58,7 @@ const PageLoader = () => (
 function App() {
   const location = useLocation();
   const lastTrackedPathRef = useRef(null);
+  const isDentalCheckRoute = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -84,8 +87,15 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
+    setAnalyticsRouteBlocked(isDentalCheckRoute).catch(() => {});
+    return () => {
+      if (isDentalCheckRoute) setAnalyticsRouteBlocked(false).catch(() => {});
+    };
+  }, [isDentalCheckRoute]);
+
+  useEffect(() => {
     const trackCurrentPage = (state) => {
-      if (!hasConsent('analytics', state)) {
+      if (isDentalCheckRoute || !hasConsent('analytics', state)) {
         lastTrackedPathRef.current = null;
         return;
       }
@@ -95,7 +105,7 @@ function App() {
 
     trackCurrentPage(getConsentState());
     return subscribeConsent(trackCurrentPage);
-  }, [location.pathname]);
+  }, [isDentalCheckRoute, location.pathname]);
 
   return (
     <>
@@ -112,7 +122,9 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="leistungen" element={<LeistungenPage />} />
+              <Route path="kassenboost" element={<KassenBoostBridgePage />} />
               <Route path="unternehmen" element={<UnternehmenPage />} />
+              <Route path="unternehmen/vorsorge-rechner" element={<EmployerBavCalculatorPage />} />
               <Route path="betriebliche-vorsorge" element={<Navigate to="/unternehmen" replace />} />
               <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
               <Route path="partner" element={<PartnerPage />} />
@@ -148,7 +160,9 @@ function App() {
               <Route index element={<MainHomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="services" element={<LeistungenPage />} />
+              <Route path="kassenboost" element={<KassenBoostBridgePage />} />
               <Route path="companies" element={<UnternehmenPage />} />
+              <Route path="companies/pension-calculator" element={<EmployerBavCalculatorPage />} />
               <Route path="corporate-benefits" element={<Navigate to="/en/companies" replace />} />
               <Route path="partner" element={<PartnerPage />} />
               <Route path="midwives" element={<HebammenPage />} />

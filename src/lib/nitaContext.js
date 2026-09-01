@@ -42,8 +42,8 @@ const EXACT_ROUTE_CONTEXTS = new Map([
   ['/en/confirmation', ['confirmation', 'general']],
   ['/app-bestaetigt', ['account', 'general']],
   ['/reset-password', ['account', 'general']],
-  ['/tierkrankenversicherung', ['pet_insurance', 'general']],
-  ['/en/pet-insurance', ['pet_insurance', 'general']],
+  ['/tierkrankenversicherung', ['pet_insurance', 'pet_insurance']],
+  ['/en/pet-insurance', ['pet_insurance', 'pet_insurance']],
 ]);
 
 const LEGAL_ROUTES = new Set([
@@ -100,7 +100,7 @@ const FIRST_MESSAGES = {
   de: {
     outpatient: {
       global_launcher: 'Hallo, ich bin Nita. Soll ich dir den ambulanten Schutz kurz erklären, die Tarife einordnen oder dich beim Abschluss begleiten?',
-      delayed_prompt: 'Sehr gern. Beim ambulanten Healio-Konzept kombinierst du Zusatzschutz und auf Wunsch den IKK-Bonus. So kann ein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren entstehen. Soll ich dir zuerst die Leistungen erklären oder direkt beim Tarifabschluss helfen?',
+      delayed_prompt: 'Sehr gern. Beim ambulanten Healio-Konzept kombinierst du Zusatzschutz und auf Wunsch einen passenden Kassenbonus. So kann ein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren entstehen. Soll ich dir zuerst die Leistungen erklären oder direkt beim Tarifabschluss helfen?',
     },
     dental: {
       global_launcher: 'Hallo, ich bin Nita. Soll ich dir den Zahn-Check erklären, eine allgemeine Tariffrage beantworten oder dich beim Abschluss begleiten?',
@@ -126,6 +126,10 @@ const FIRST_MESSAGES = {
       global_launcher: 'Hallo, ich bin Nita. Soll ich dir das Vorsorgekonzept für Heilberufe kurz erklären oder dich direkt zum passenden nächsten Schritt führen?',
       delayed_prompt: 'Sehr gern. Ich erkläre dir das Vorsorgekonzept für Heilberufe kurz und verständlich. Geht es dir zuerst um Leistungen, Kosten oder den nächsten Schritt?',
     },
+    pet_insurance: {
+      global_launcher: 'Hallo, ich bin Nita. Soll ich dir den Unterschied zwischen OP- und Krankenvollschutz für Hund, Katze oder Pferd kurz erklären?',
+      delayed_prompt: 'Sehr gern. Ich helfe dir, Tierart, Alter, Leistungsumfang und mögliche Ausschlüsse einzuordnen. Geht es dir zuerst um Hund, Katze oder Pferd?',
+    },
     general: {
       global_launcher: 'Hallo, ich bin Nita. Soll ich dir diese Seite kurz erklären oder dich direkt zum passenden nächsten Schritt führen?',
       delayed_prompt: 'Sehr gern. Ich erkläre dir das Healio-Konzept kurz und verständlich. Was möchtest du zuerst verstehen?',
@@ -134,7 +138,7 @@ const FIRST_MESSAGES = {
   en: {
     outpatient: {
       global_launcher: 'Hi, I’m Nita. Would you like a short explanation of outpatient cover, help comparing plans, or guidance through the online application?',
-      delayed_prompt: 'Of course. Healio combines supplementary outpatient cover with the optional IKK bonus, creating a health budget of up to EUR 3,000 over 2 years. Would you like to understand the benefits first or go straight to the online application?',
+      delayed_prompt: 'Of course. Healio combines supplementary outpatient cover with a suitable statutory-insurer bonus, creating a health budget of up to EUR 3,000 over 2 years. Would you like to understand the benefits first or go straight to the online application?',
     },
     dental: {
       global_launcher: 'Hi, I’m Nita. Would you like me to explain the dental check, answer a general plan question, or guide you through the online application?',
@@ -159,6 +163,10 @@ const FIRST_MESSAGES = {
     healthcare_professionals: {
       global_launcher: 'Hi, I’m Nita. Would you like a short explanation of the protection concept for healthcare professionals or help with the next step?',
       delayed_prompt: 'Of course. I can explain the protection concept for healthcare professionals in a simple way. Would you like to start with benefits, costs, or the next step?',
+    },
+    pet_insurance: {
+      global_launcher: 'Hi, I’m Nita. Would you like a short explanation of surgery-only and comprehensive health cover for dogs, cats or horses?',
+      delayed_prompt: 'Of course. I can help you assess species, age, benefit scope and possible exclusions. Would you like to start with a dog, cat or horse?',
     },
     general: {
       global_launcher: 'Hi, I’m Nita. Would you like a short explanation of this page or help with the next step?',

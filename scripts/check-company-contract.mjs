@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { calculateCohortProjection } from '../src/lib/companyProjection.js';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const readText = (relativePath) => fs.readFileSync(path.join(rootDir, relativePath), 'utf8');
@@ -11,90 +10,157 @@ const readJson = (relativePath) => JSON.parse(readText(relativePath));
 const de = readJson('src/i18n/locales/de/unternehmen.json');
 const en = readJson('src/i18n/locales/en/unternehmen.json');
 const hero = readText('src/components/company/CompanyHero.jsx');
-const calculator = readText('src/components/company/CohortImpactSection.jsx');
 const responsibility = readText('src/components/company/ResponsibilityStory.jsx');
+const solutions = readText('src/components/company/CompanySolutions.jsx');
 const economics = readText('src/components/company/CompanyEconomics.jsx');
 const workforce = readText('src/components/company/CompanyWorkforceConcept.jsx');
+const explainerVideos = readText('src/components/company/CompanyExplainerVideo.jsx');
+assert(
+  fs.existsSync(path.join(rootDir, 'src/components/company/CompanyBavLeverage.jsx')),
+  'Der kompakte bAV-Hebel fehlt.',
+);
+const bavLeverage = readText('src/components/company/CompanyBavLeverage.jsx');
 const page = readText('src/pages/UnternehmenPage.jsx');
 const seoRoutes = readText('scripts/seo-routes.mjs');
 
-assert.equal(de.hero.titleLead, 'Gesundheit fördern. Mitarbeiter binden.');
-assert.equal(de.hero.titleHighlight, 'Vorsorge richtig gestalten.');
+assert.equal(de.hero.titleLead, 'Vorsorge, die Mitarbeiter verstehen.');
+assert.equal(de.hero.titleHighlight, 'Ein System, das Sie steuern.');
 assert.equal(de.hero.analysisCta, 'Vorsorge-Check starten');
-assert.match(de.hero.description, /bAV, bKV, BGM-Koordination/);
-assert.equal(en.hero.titleLead, 'Promote health. Retain employees.');
+assert.match(de.hero.description, /bAV, bKV und Gesundheitsmanagement/);
+assert.equal(en.hero.titleLead, 'Benefits employees understand.');
 assert.match(hero, /healio-hero-markenrelief-v1\.webp/);
 assert.match(hero, /object-\[62%_center\]/);
 assert.doesNotMatch(hero, /healio-wordmark-white/);
 assert.match(hero, /min-h-\[100svh\]/);
-
-assert.match(calculator, /useState\(1000\)/);
-assert.match(calculator, /useState\(100\)/);
-assert.match(calculator, /useState\(150\)/);
-assert.match(calculator, /useState\(30\)/);
-assert.match(calculator, /useState\(1\.5\)/);
-assert.match(calculator, /useState\(7\)/);
-assert.match(de.calculator.description, /einzelnen Mitarbeiter/);
-assert.match(de.calculator.description, /Belegschaft/);
-assert.match(de.calculator.eyebrow, /\{\{endYear\}\}/);
-assert.match(de.calculator.differencePerEmployeeLabel, /\{\{years\}\}/);
-assert.match(de.calculator.scenarioARate, /Bruttorendite/);
-assert.match(de.calculator.scenarioARateHint, /\(bisher\)/);
-assert.match(de.calculator.scenarioBRateHint, /\(neu\)/);
-assert.match(en.calculator.scenarioARateHint, /\(existing\)/);
-assert.match(en.calculator.scenarioBRateHint, /\(new\)/);
-assert.match(de.calculator.scenarioALabel, /bisher/);
-assert.match(de.calculator.scenarioBLabel, /neu/);
-assert.match(de.calculator.disclaimer, /keine Prognose und keine Garantie/);
-assert.match(de.calculator.monthlyContribution, /Modellierter Sparbeitrag/);
-assert.match(de.calculator.decisionPrompt, /Kosten, Renditeannahmen und Risiken/);
-assert.match(calculator, /Math\.min\(5, scenarioBRate - 0\.1\)/);
-assert.match(calculator, /Math\.max\(2, scenarioARate \+ 0\.1\)/);
-assert.match(calculator, /scenarioARateHint/);
-assert.match(calculator, /scenarioBRateHint/);
-
-const projection = calculateCohortProjection({
-  employeeCount: 1000,
-  participationRate: 100,
-  monthlyContribution: 150,
-  years: 30,
-  scenarioARate: 1.5,
-  scenarioBRate: 7,
-});
-
-assert.equal(Math.round(projection.scenarioATotal), 68032919);
-assert.equal(Math.round(projection.scenarioBTotal), 175417890);
-assert.equal(Math.round(projection.differenceTotal), 107384972);
+assert.match(hero, /href="#unternehmen-leistungen"/);
+assert.match(solutions, /id="unternehmen-leistungen"/);
 
 assert.match(responsibility, /dai\.de/);
 assert.match(responsibility, /destatis\.de/);
 assert.match(responsibility, /bmas\.de/);
 assert.deepEqual(de.solutions.items.map((item) => item.key), ['pension', 'health', 'prevention', 'management']);
-assert.equal(de.workforce.budgetAmount, 'bis zu 3.000 EUR');
-assert.equal(de.workforce.employerAmount, '0 EUR');
-assert.match(de.economics.summaryText, /keine vollständige Erstattung/);
+assert.equal(de.workforce.eyebrow, 'KassenBoost für Mitarbeiter');
+assert.equal(en.workforce.eyebrow, 'KassenBoost for employees');
+assert.match(de.workforce.description, /freiwillig und kostenlos/);
+assert.match(de.workforce.points.join(' '), /Ohne Kontaktdaten/);
+assert.match(de.workforce.privacyDescription, /weder an den Arbeitgeber noch an Healio übermittelt/);
+assert.doesNotMatch(JSON.stringify(de.workforce), /3\.000|IKK|Bonus/);
+assert.doesNotMatch(JSON.stringify(en.workforce), /3,000|IKK|bonus/i);
+assert.match(de.economics.summaryText, /keine Erstattung/);
 assert.match(de.economics.disclaimer, /Keine Steuerberatung/);
 assert.match(economics, /gesetze-im-internet\.de\/estg/);
 assert.match(economics, /bundesfinanzhof\.de/);
 assert.match(economics, /bundesgesundheitsministerium\.de/);
 assert.match(workforce, /healio-belegschaft/);
+assert.match(workforce, /https:\/\/kassenboost\.de\/\?utm_source=healio&utm_medium=website&utm_campaign=arbeitgeberzugang/);
+assert.match(workforce, /useLanguage/);
+assert.match(explainerVideos, /lang !== 'de'/);
+assert.match(explainerVideos, /controls/);
+assert.match(explainerVideos, /playsInline/);
+assert.match(explainerVideos, /preload="metadata"/);
+assert.match(explainerVideos, /kind="captions"/);
+assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
+assert.match(explainerVideos, /vorsorgemanagement-a-v3\.mp4/);
+assert.match(explainerVideos, /bav-zahlenbeispiel-b-v3\.mp4/);
+[
+  'public/videos/unternehmen/vorsorgemanagement-a-v3.mp4',
+  'public/videos/unternehmen/vorsorgemanagement-a-v3-poster.webp',
+  'public/videos/unternehmen/vorsorgemanagement-a-v3-de.vtt',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3.mp4',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3-poster.webp',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3-de.vtt',
+].forEach((relativePath) => assert(fs.existsSync(path.join(rootDir, relativePath)), `${relativePath} fehlt.`));
+assert.match(workforce, /getPath\('potenzialanalyse'\)/);
+assert.match(workforce, /\?interest=kassenboost/);
+assert.doesNotMatch(workforce, /to=["']\/potenzialanalyse\?interest=kassenboost/);
+assert.doesNotMatch(workforce, /getPath\('partner'\)|to=["']\/partner/);
+assert.equal(de.bavLeverage.title, 'Rund 75 EUR Nettoeffekt. 676 EUR Vorsorge. 30 Jahre Zeit.');
+assert.equal(
+  [de.bavLeverage.titleLine1, de.bavLeverage.titleLine2, de.bavLeverage.titleLine3].join(' '),
+  de.bavLeverage.title,
+);
+assert.match(bavLeverage, /bavLeverage\.titleLine2/);
+assert.match(de.bavLeverage.netEffectExplanation, /Auszahlungsnetto/);
+assert.match(de.bavLeverage.netEffectExplanation, /rund 75 EUR/);
+assert.match(en.bavLeverage.netEffectExplanation, /take-home pay/i);
+assert.match(bavLeverage, /bavLeverage\.netEffectExplanation/);
+assert.match(bavLeverage, /calculateBavScenarios/);
+assert.match(bavLeverage, /calculateEmployerBavLeverage/);
+assert.match(bavLeverage, /calculateIllustrativeMonthlyWithdrawal/);
+assert.match(bavLeverage, /useState\('capital'\)/);
+assert.match(bavLeverage, /data-bav-flow="true"/);
+assert.match(bavLeverage, /data-payout-mode=\{resultMode\}/);
+assert.match(de.bavLeverage.flow.formula, /8 % Modellrendite/);
+assert.match(de.bavLeverage.flow.contractNote, /Einzahlungen in 30 Jahren/);
+assert.match(de.bavLeverage.flow.monthlyNote, /keine garantierte oder lebenslange Tarif-Rente/i);
+assert.match(de.bavLeverage.payoutModel, /4 %/);
+assert.match(de.bavLeverage.payoutModel, /30 %/);
+assert.match(bavLeverage, /<details/);
+assert.match(solutions, /<details/);
+assert.match(responsibility, /<details/);
+assert.match(economics, /<details/);
+assert.match(workforce, /<details/);
+assert.match(de.bavLeverage.splitFree, /338 EUR/);
+assert.match(de.bavLeverage.splitLiable, /338 EUR/);
+assert.match(de.bavLeverage.employerCost, /rund 747 EUR/);
+assert.equal(de.bavLeverage.standardFormula, '10 % − 2 Prozentpunkte = 8 % Modellrendite');
+assert.match(de.bavLeverage.historicalContext, /Juli 2011 bis Juli 2026/);
+assert.match(de.bavLeverage.historicalContext, /31\.07\.2026/);
+assert.match(de.bavLeverage.historicalContext, /11,10 % p\. a\./);
+assert.match(de.bavLeverage.historicalContext, /9,10 % p\. a\./);
+assert.match(de.bavLeverage.disclaimer, /keine Prognose oder Garantie/);
+assert.doesNotMatch(JSON.stringify(de.bavLeverage), /garantierte Nettorente|garantierter ROI|sichere Rendite/i);
+assert.match(bavLeverage, /getPath\('vorsorgeRechner'\)/);
+assert.match(bavLeverage, /calculator-sources-title/);
+assert.match(de.bavLeverage.legalSource, /Rechtsgrundlagen und Annahmen/);
+assert.match(bavLeverage, /msci-world-index-usd-net\.pdf/);
+assert.doesNotMatch(bavLeverage, /getPath\('partner'\)|to=["']\/partner/);
 assert.match(seoRoutes, /Betriebliches Vorsorgemanagement \| bAV, bKV & BGM \| Healio/);
 assert.match(seoRoutes, /healio-hero-markenrelief-v1\.webp/);
 assert.doesNotMatch(JSON.stringify(de), /Der Staat regelt nichts|garantiert 7|Verlust von 107|Finanzamt zum Sponsor|100 Prozent steuerlich absetzbar/);
+assert.match(de.faq.items[3].answer, /kostenlosen KassenBoost-Vergleich/);
+assert.match(de.faq.items[3].answer, /weder dem Arbeitgeber noch Healio übermittelt/);
+assert.match(de.faq.items[3].answer, /können daraus Kosten entstehen/);
+assert.match(en.faq.items[3].answer, /free KassenBoost comparison/);
+assert.match(en.faq.items[3].answer, /neither the employer nor Healio/);
+assert.match(en.faq.items[3].answer, /may involve costs/);
 
 [
   'CompanyHero',
   'CompanyRealityCheck',
-  'CompanySolutions',
+  'CompanyExplainerVideo',
   'CompanyWorkforceConcept',
+  'CompanySolutions',
+  'CompanyBavLeverage',
+  'ResponsibilityStory',
   'CompanyEconomics',
   'CompanyProcess',
   'CompanyFAQ',
   'CompanyFinalCTA',
 ].forEach((componentName) => assert.match(page, new RegExp(componentName)));
-assert.doesNotMatch(page, /CohortImpactSection|ResponsibilityStory/);
-assert.ok(page.indexOf('<CompanySolutions') < page.indexOf('<CompanyWorkforceConcept'), 'Das Mitarbeiterkonzept muss direkt bei den Lösungen stehen.');
-assert.match(hero, /href="#unternehmen-leistungen"/);
+assert.doesNotMatch(page, /CohortImpactSection/);
+assert(
+  page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanySolutions />'),
+  'Der Reality Check muss vor den Produktbausteinen stehen.',
+);
+assert(
+  page.indexOf('<CompanyRealityCheck />') < page.indexOf('<CompanyExplainerVideo kind="system" />')
+    && page.indexOf('<CompanyExplainerVideo kind="system" />') < page.indexOf('<CompanySolutions />'),
+  'Video A muss zwischen Reality Check und Produktbausteinen stehen.',
+);
+assert(
+  page.indexOf('<CompanyBavLeverage />') < page.indexOf('<CompanyExplainerVideo kind="bav" />'),
+  'Video B muss direkt nach dem bAV-Zahlenbeispiel stehen.',
+);
+assert(
+  page.indexOf('<CompanyProcess />') < page.indexOf('<CompanyWorkforceConcept />'),
+  'Der kostenlose Mitarbeiterzugang soll erst nach dem Hauptprozess erscheinen.',
+);
+assert(
+  page.indexOf('<CompanyWorkforceConcept />') < page.indexOf('<CompanyFAQ />'),
+  'Der Mitarbeiterzugang muss vor den FAQ stehen.',
+);
+assert.doesNotMatch(page, /ProductTicker/);
 assert.doesNotMatch(page, /<main/);
 
 console.log('Company contract passed.');

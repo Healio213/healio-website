@@ -27,7 +27,7 @@ const StickyCalculatorButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300 md:inset-x-auto md:bottom-6 md:right-6">
+    <div className="fixed bottom-6 right-6 z-50 hidden animate-in fade-in slide-in-from-bottom-4 duration-300 md:block">
       <a
         href={sdkUrl}
         target="_blank"

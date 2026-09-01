@@ -30,7 +30,7 @@ const CompanyHero = () => {
 
   return (
     <section
-      className="relative isolate min-h-[780px] w-full overflow-hidden bg-[#06131c] text-white md:min-h-[100svh]"
+      className="relative isolate min-h-[740px] w-full overflow-hidden bg-[#06131c] text-white md:min-h-[100svh]"
       aria-labelledby="company-hero-title"
     >
       <motion.img
@@ -73,7 +73,7 @@ const CompanyHero = () => {
       <div className="absolute inset-0 -z-10 hidden bg-[linear-gradient(180deg,rgba(3,12,21,0.46)_0%,transparent_28%,transparent_68%,#06131c_100%)] md:block" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(6,19,28,0.06)_0%,rgba(6,19,28,0.22)_34%,rgba(6,19,28,0.88)_49%,#06131c_64%)] md:hidden" />
 
-      <div className="mx-auto flex min-h-[780px] w-full max-w-[1280px] items-end px-5 pb-10 pt-[21.5rem] sm:px-8 md:min-h-[100svh] md:items-center md:px-8 md:pb-24 md:pt-36 lg:px-8">
+      <div className="mx-auto flex min-h-[740px] w-full max-w-[1280px] items-end px-5 pb-9 pt-[20rem] sm:px-8 md:min-h-[100svh] md:items-center md:px-8 md:pb-24 md:pt-36 lg:px-8">
         <div className="relative z-10 w-full max-w-[620px] text-left">
           <motion.p
             {...entrance(0.06)}
@@ -85,7 +85,7 @@ const CompanyHero = () => {
           <motion.h1
             {...entrance(0.14)}
             id="company-hero-title"
-            className="mt-4 max-w-[14ch] font-display text-[2.25rem] font-extrabold leading-[1.02] tracking-[-0.052em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.34)] sm:text-5xl md:mt-5 md:text-[clamp(3.25rem,5vw,4.5rem)] md:leading-[0.98]"
+            className="mt-4 max-w-[14ch] font-display text-[2.25rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.34)] sm:text-5xl md:mt-5 md:text-[clamp(3.25rem,5vw,4.5rem)] md:leading-[0.98]"
           >
             <span className="block">{t('hero.titleLead')}</span>
             <span className="mt-2 block md:mt-3">

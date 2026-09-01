@@ -2,18 +2,24 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/sections/Footer';
-import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 
 const Layout = () => {
   const { pathname } = useLocation();
-  const appPromotionRoutes = new Set([
+  const showCta = pathname === '/partner' || pathname === '/en/partner';
+  const hideCta = !showCta;
+  const productSalesRoutes = new Set([
     '/ambulant',
-    '/heilpraktiker-zusatzversicherung',
-    '/kassenbonus',
     '/en/outpatient',
-    '/en/health-insurance-bonus',
+    '/zahn',
+    '/en/dental',
+    '/stationaer',
+    '/en/inpatient',
+    '/kassenboost',
+    '/en/kassenboost',
   ]);
-  const hideAppPromotion = !appPromotionRoutes.has(pathname);
+  const hideAppPromotion = pathname === '/'
+    || pathname === '/en'
+    || productSalesRoutes.has(pathname);
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -21,8 +27,7 @@ const Layout = () => {
       <main className="flex-grow w-full">
         <Outlet />
       </main>
-      <WhatsAppContactButton />
-      <Footer hideCta hideAppPromotion={hideAppPromotion} />
+      <Footer hideCta={hideCta} hideAppPromotion={hideAppPromotion} />
     </div>
   );
 };

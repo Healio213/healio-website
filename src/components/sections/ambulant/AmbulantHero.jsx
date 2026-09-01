@@ -1,19 +1,15 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useReferrer } from '@/hooks/useReferrer';
-import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
-import { Calculator, ArrowDown, CheckCircle, Euro } from 'lucide-react';
+import { ArrowDown, CheckCircle, Euro } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantHero = () => {
   const { t } = useTranslation('ambulant');
-  const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (
-    <section className="relative min-h-[90svh] flex items-center overflow-hidden" aria-labelledby="hero-heading">
+    <section className="relative flex min-h-[82svh] items-center overflow-hidden" aria-labelledby="hero-heading">
       <div className="absolute inset-0 z-0">
         <picture>
           <source srcSet="/images/hero-ambulant.webp?v=2" type="image/webp" />
@@ -24,45 +20,54 @@ const AmbulantHero = () => {
             {...{ fetchpriority: 'high' }}
           />
         </picture>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20 z-10" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#04101b]/95 via-[#06131d]/78 to-[#071722]/38" />
+        <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_30%_45%,rgba(37,201,144,0.12),transparent_38%)]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-20 pb-10 pt-16 md:pb-16 md:pt-20">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl text-left">
+          <motion.p
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="mb-5 font-display text-xs font-extrabold uppercase tracking-[0.24em] text-home-mint-active md:text-sm"
+          >
+            {t('hero.eyebrow')}
+          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className="mb-4 text-4xl font-extrabold leading-tight text-white drop-shadow-lg md:mb-6 md:text-5xl lg:text-7xl"
+            className="mb-5 max-w-4xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-lg sm:text-5xl md:mb-7 lg:text-7xl"
           >
-            <HighlightText text={t('hero.title')} />
+            <HighlightText text={t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto mb-4 max-w-2xl text-lg font-medium leading-relaxed text-gray-100 drop-shadow-md md:mb-6 md:text-xl"
+            className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-100 drop-shadow-md md:mb-8 md:text-xl"
           >
-            <HighlightText text={t('hero.subtitle')} />
+            {t('hero.subtitle')}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-6 flex flex-wrap items-center justify-center gap-2 md:mb-10 md:gap-4"
+            className="mb-8 flex max-w-3xl flex-wrap items-center justify-start gap-2 md:mb-10 md:gap-3"
           >
-            <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2 backdrop-blur-sm sm:flex">
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
               <Euro className="w-4 h-4 text-healio-primary" />
               <span className="text-sm text-white font-medium">{t('hero.badgeEffective')}</span>
             </div>
-            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full border border-white/10">
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
               <CheckCircle className="w-4 h-4 text-healio-primary" />
               <span className="text-sm text-white font-medium">{t('hero.badgeNoWait')}</span>
             </div>
-            <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm py-2 px-4 rounded-full border border-white/10">
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
               <CheckCircle className="w-4 h-4 text-healio-primary" />
               <span className="text-sm text-white font-medium">{t('hero.badgeTestResult')}</span>
             </div>
@@ -72,29 +77,18 @@ const AmbulantHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col justify-center gap-4 pr-14 sm:flex-row sm:pr-0"
+            className="flex flex-col items-start justify-center gap-3"
           >
             <a
-              href={sdkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackSdkClick('ambulant-hero', referrer)}
-              className="inline-flex items-center justify-center bg-healio-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+              href="#budget-kompass"
+              className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none"
             >
-              <Calculator className="w-5 h-5 mr-2" />
+              <ArrowDown className="mr-2 h-5 w-5" />
               {t('hero.ctaCalculate')}
             </a>
-            <a
-              href="#tarif-tabelle"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('tarif-tabelle')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-healio-dark transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >
-              <ArrowDown className="w-5 h-5 mr-2" />
-              {t('hero.ctaCompare')}
-            </a>
+            <p className="max-w-xl text-left text-sm leading-6 text-slate-200">
+              {t('hero.ctaHint')}
+            </p>
           </motion.div>
         </div>
       </div>

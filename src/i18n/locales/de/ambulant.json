@@ -1,13 +1,15 @@
 {
   "hero": {
-    "title": "Dein <highlight>3.000 Euro</highlight> Gesundheits-<highlight>Budget</highlight>. Effektiv ab <highlight>0 Euro</highlight>.",
-    "subtitle": "Warum selbst zahlen, wenn es auch anders geht? Bis zu <highlight>3.000 €</highlight> für Heilpraktiker, Brille & Vorsorge, effektiv ab <highlight>0 €</highlight>. Keine Wartezeiten.",
-    "badgeEffective": "Ab 0 Euro effektiv monatlich dank IKK Bonus",
-    "badgeNoWait": "Garantiert ohne Wartezeit",
-    "badgeTestResult": "Stiftung Warentest: Sehr Gut (0,9)",
-    "ctaCalculate": "Beitrag berechnen",
+    "eyebrow": "Ambulante Zusatzversicherung",
+    "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Effektiv ab <highlight>0 EUR</highlight>.",
+    "subtitle": "Warum weiter selbst zahlen? Sichere dir bis zu 3.000 EUR für Heilpraktiker, Brille und Vorsorge – ohne Wartezeit und in wenigen Minuten berechnet.",
+    "badgeEffective": "Beitrag bis zu 100 % ausgleichbar",
+    "badgeNoWait": "Ohne allgemeine Wartezeit",
+    "badgeTestResult": "Bis zu 100 % Erstattung",
+    "ctaCalculate": "Budget & Beitrag prüfen",
+    "ctaHint": "1 Minute Orientierung · Den persönlichen Beitrag siehst du anschließend im Tarifrechner.",
     "ctaBonus": "Bonus sichern",
-    "heroImageAlt": "Gesunde Menschen in der Natur",
+    "heroImageAlt": "Frau mit Smartphone informiert sich über ihr digitales Gesundheitsbudget",
     "ctaBonusCalc": "Bonus berechnen",
     "ctaCompare": "Tarife vergleichen"
   },
@@ -33,11 +35,11 @@
     "ariaLabel": "Vorteile der ambulanten Zusatzversicherung",
     "budget": "Bis zu 3.000 € Gesundheitsbudget",
     "sdk": "SDK: seit 1926 am Markt",
-    "ikk": "IKK classic: 3 Mio. Versicherte",
+    "ikk": "Kassenbonus passend einordnen",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
     "noWait": "Keine Wartezeit, sofort geschützt",
     "fast": "Beitrag in wenigen Minuten berechnen",
-    "effective": "Effektiv ab 0 € dank IKK Bonus",
+    "effective": "Durch passenden Kassenbonus refinanzierbar",
     "akupunktur": "Akupunktur inklusive",
     "osteopathie": "Osteopathie & Massagen inklusive",
     "video": "Sieh im Video, wie es funktioniert"
@@ -401,69 +403,72 @@
   },
   "bonusCalculator": {
     "title": "Dein persönlicher <highlight>Bonus-Rechner</highlight>",
-    "subtitle": "So funktioniert der IKK classic Bonus: Wähle deine Aktivitäten und sieh sofort, wie viel du rausholst!",
-    "selectActivities": "Wähle deine Aktivitäten:",
-    "exampleNote": "Ein typisches Beispiel ist schon angekreuzt. Passe es einfach an deine Aktivitäten an.",
+    "subtitle": "Wähle, was du ohnehin machst. Du siehst getrennt: Geldbonus oder dreifacher Zuschuss zu nachgewiesenen Kosten.",
+    "selectActivities": "Was trifft auf dich zu?",
+    "exampleNote": "Ein realistisches Beispiel ist vorausgewählt. Passe es an deine tatsächlich nachweisbaren Aktivitäten an.",
     "activities": {
       "impfung": {
         "title": "Schutzimpfung",
-        "desc": "Bis zu 8x pro Jahr",
+        "desc": "Je übernommener, abgeschlossener Immunisierung",
         "unit": "Impfung(en)"
       },
       "zahn": {
         "title": "Zahnvorsorge",
-        "desc": "Bis zu 2x pro Jahr",
+        "desc": "Je Halbjahr eine Kontrolle, ab 6 Jahren",
         "unit": "Besuch(e)"
       },
       "zahnFrueh": {
         "title": "Zahnärztl. Früherkennung Z1–Z6",
-        "desc": "Für Kinder"
+        "desc": "6. bis 72. Lebensmonat, je Termin",
+        "unit": "Termin(e)"
       },
       "hautkrebs": {
         "title": "Hautkrebsvorsorge",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Ab 35 alle 2 Jahre; früher nur bei Risiko"
       },
       "ultraschall": {
         "title": "Ultraschallscreening",
-        "desc": "Bauchaortenaneurysmen"
+        "desc": "Bauchaortenaneurysma, Männer ab 65 einmalig"
       },
       "mammographie": {
         "title": "Mammographie-Screening",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Frauen 50 bis 75, alle 2 Jahre"
       },
       "mutterschaft": {
         "title": "Mutterschaftsvorsorge",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Je gesetzlich vorgesehener Untersuchung",
+        "unit": "Untersuchung(en)"
       },
       "kind": {
         "title": "U-Untersuchungen (U1–U11)",
-        "desc": "30 € je Untersuchung",
+        "desc": "Je nachgewiesener Untersuchung",
         "unit": "Untersuchung(en)"
       },
       "jugend": {
         "title": "Jugenduntersuchungen J1–J2",
-        "desc": "30 € je Untersuchung",
+        "desc": "Je nachgewiesener Untersuchung",
         "unit": "Untersuchung(en)"
       },
       "amblyopie": {
         "title": "Amblyopiescreening Kinder",
-        "desc": "Früherkennungsuntersuchung"
+        "desc": "Zwei vorgesehene Altersfenster, je Screening",
+        "unit": "Screening(s)"
       },
       "lungenkrebs": {
         "title": "Lungenkrebs-Früherkennung",
-        "desc": "Neu ab 04/2026 · 1× pro Jahr"
+        "desc": "Für berechtigte aktive oder ehemalige Rauchende von 50 bis 75, alle 12 Monate"
       },
       "checkup": {
         "title": "Gesundheits-Check-up",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Je nach Alter und vorgesehenem Intervall"
       },
       "krebs": {
         "title": "Krebsfrüherkennung",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Frauen ab 20, Männer ab 45 jährlich"
       },
       "darmkrebs": {
         "title": "Darmkrebsvorsorge",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Ab 50 alle 2 Jahre; früher nur bei Risiko"
       },
       "outdoorSport": {
         "title": "Gemeinschaftssport im Freien",
@@ -487,11 +492,11 @@
       },
       "abzeichen": {
         "title": "Deutsches Sportabzeichen",
-        "desc": "1x pro Kalenderjahr"
+        "desc": "Statuswert, zählt mit regelmäßiger Aktivität"
       },
       "leistungsabzeichen": {
         "title": "Leistungsabzeichen Sportverband",
-        "desc": "Eines deutschen Sportverbandes"
+        "desc": "Statuswert, zählt mit regelmäßiger Aktivität"
       },
       "bmi": {
         "title": "BMI im Normalbereich",
@@ -502,31 +507,42 @@
         "desc": "Statuswert, mit Aktivität kombinieren"
       }
     },
-    "tip": "Tipp",
+    "tip": "Starker Hebel",
     "max": "max.",
-    "trustNote": "Unkompliziert & auf Vertrauensbasis",
-    "trustNoteDesc": "Die IKK classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Du musst also nicht jede Aktivität aufwändig belegen, einfach angeben und Bonus kassieren.",
+    "cashShort": "Geldbonus",
+    "subsidyShort": "Zuschuss",
+    "notCounted": "noch nicht anrechenbar",
+    "statusCondition": "Statuswerte wie BMI, Blutdruck oder Sportabzeichen zählen erst, wenn du im selben Jahr mindestens eine regelmäßige Aktivität nachweist – zum Beispiel Kurs, Fitnessstudio, Sportverein, Outdoor-Gruppensport oder Rückbildung.",
+    "decrease": "Anzahl verringern",
+    "increase": "Anzahl erhöhen",
+    "trustNote": "Nachweise einfach digital einreichen",
+    "trustNoteDesc": "Für Bonusmaßnahmen ist ein von der IKK classic akzeptierter Nachweis nötig – zum Beispiel eine Bestätigung in der App, eine Teilnahmebescheinigung oder ein Stempel. Für den Zuschuss zum Versicherungsbeitrag weist du zusätzlich Versicherungsart, Zeitraum und gezahlten Beitrag nach.",
+    "officialSource": "Offizielles IKK-Infoblatt 2026 (Stand 04/2026)",
     "appleWatchNote": "Bonus für Apple Watch & Fitnessgeräte",
-    "appleWatchNoteDesc": "Du kannst deinen IKK-Bonus auch für eine Apple Watch, einen Fitnesstracker oder andere Fitnessgeräte einsetzen. Einfach beim Bonusprogramm einreichen und den Zuschuss kassieren.",
+    "appleWatchNoteDesc": "Auch ein Zuschuss zu einem Fitnesstracker oder einem anderen Gerät zur Erfassung des Gesundheitsstatus kann möglich sein. Ausgezahlt wird höchstens bis zur Höhe der nachgewiesenen Kosten; maßgeblich sind die aktuellen Bonusbedingungen.",
     "resetSelection": "Auswahl zurücksetzen",
-    "yourBonus": "Dein möglicher Bonus:",
+    "yourBonus": "Möglicher Zuschuss zu deinem Beitrag:",
     "tariffInfo": "Tarif Ambulant 100 (AP1), 100 % Erstattung",
     "yourMonthly": "Dein Monatsbeitrag:",
+    "monthlyInputLabel": "Monatlichen Tarifbeitrag eingeben",
+    "editMonthlyLabel": "Monatlichen Tarifbeitrag von {{amount}} Euro ändern",
     "perMonth": "€/Monat",
     "yearlyContribution": "= Jahresbeitrag:",
-    "yourBonusLabel": "Dein Bonus:",
-    "resultLabel": "Ergebnis:",
-    "resultPlus": "Plus",
+    "subsidyPotentialLabel": "Erreichtes Zuschusspotenzial:",
+    "eligibleSubsidyLabel": "Für diesen Beitrag anrechenbar:",
+    "orCashBonus": "Oder als frei verfügbarer Geldbonus:",
+    "unusedPotential": "{{amount}} € weiteres Zuschusspotenzial wären nur mit zusätzlichen nachgewiesenen zuschussfähigen Kosten nutzbar – es wird nicht als Plus ausgezahlt.",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
-    "bonusPayout": "Dein Bonus wird ausgezahlt oder als Zuschuss für gezahlte Beiträge deiner Zusatzversicherung genutzt. So kann dein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren effektiv deutlich günstiger werden.",
+    "bonusPayout": "Du entscheidest: frei verfügbarer Geldbonus oder der dreifache Zuschuss zu nachgewiesenen Kosten – zum Beispiel zum Jahresbeitrag deiner Zusatzversicherung.",
+    "choiceDisclaimer": "Geldbonus und Zuschuss sind Alternativen und werden nicht addiert. Der Zuschuss ist auf deine nachgewiesenen zuschussfähigen Kosten begrenzt.",
     "ctaCalculate": "Beitrag berechnen",
     "ctaSwitchIKK": "IKK-Bonus sichern",
     "effectiveTitle": "Unterm Strich für dich",
     "effectiveCosts": "Deine effektiven Kosten im Jahr",
-    "effectiveZeroNote": "Dein Bonus deckt den kompletten Jahresbeitrag.",
+    "effectiveZeroNote": "Dein mögliches Zuschusspotenzial erreicht den nachgewiesenen Jahresbeitrag.",
     "effectiveBudget": "Dein Gesundheitsbudget dafür (2 Jahre)",
     "effectiveBudgetValue": "bis zu 3.000 €",
-    "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Wie viel Bonus du wirklich bekommst, hängt von deiner Krankenkasse und den nachgewiesenen Maßnahmen ab."
+    "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Ausgezahlt wird höchstens der nachgewiesene Jahresbeitrag; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen."
   },
   "beispielrechnung": {
     "title": "So <highlight>rechnet sich</highlight> dein Gesundheits-Budget",

@@ -36,7 +36,7 @@
       "icon": "🏥",
       "title": "Krankenhaus-Schutz",
       "subtitle": "Einbettzimmer, Chefarzt, freie Klinikwahl. Kinder-Unfallschutz ab 0,75 €",
-      "price": "ab 6,84 €",
+      "price": "ab 7,00 EUR",
       "period": "pro Monat",
       "badge": "IKK-Bonus kann den Unfall-Baustein decken*",
       "link": "/stationaer"
@@ -59,7 +59,7 @@
   "poweredBy": "Powered by",
   "sdk": "SDK Versicherung",
   "ikk": "IKK classic",
-  "footnote": "* Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus. IKK classic Bonusprogramm: 700 €+/Jahr möglich, steuerfrei.",
+  "footnote": "* Wie viel dein Kassenbonus bringt, hängt von Krankenkasse, Aktivitäten, Nachweisen und anrechenbaren Kosten ab. IKK classic: 700 EUR+ Zuschusspotenzial pro Jahr möglich; wir rechnen es individuell für dich aus.",
   "links": {
     "home": "healio.de",
     "impressum": "Impressum"

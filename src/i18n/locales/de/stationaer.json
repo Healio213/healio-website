@@ -1,8 +1,8 @@
 {
   "hero": {
     "title": "<highlight>Privatpatient</highlight> im Krankenhaus. Mit dem stationären Tarif.",
-    "subtitle": "Einbettzimmer, Chefarztbehandlung und freie Klinikwahl mit den Klinik-Tarifen der SDK, ohne Wartezeiten. Für 30-Jährige zum Beispiel ab 6,84 € im Monat. Beitrag in 2 Minuten berechnen.",
-    "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, welcher Kassenvorteil für dich zählt.",
+    "subtitle": "Einbettzimmer, Chefarztbehandlung und freie Klinikwahl mit den Klinik-Tarifen der SDK, ohne Wartezeiten. Für 30-Jährige zum Beispiel ab 7,00 EUR im Monat. Beitrag in 2 Minuten berechnen.",
+    "ikkNote": "<strong>Refinanzierung über den IKK classic Bonus:</strong> Für anerkannte Aktivitäten wählst du zwischen Geldbonus und dreifach höherem Zuschuss für nachgewiesene zuschussfähige Kosten. Je nach deinen Aktivitäten kann das einen großen Teil deines Beitrags decken, beim Unfall-Tarif sogar bis zu 100 %. Rechne es unten individuell aus.",
     "ctaCalculate": "Tarif berechnen",
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
@@ -50,7 +50,7 @@
     "empfehlung": "Empfehlung",
     "tariffName": "Klinik 1-Bett (Tarif SP1)",
     "tariffType": "Einbettzimmer",
-    "tariffPrice": "z. B. 49,78 €/Monat mit 30 Jahren | 69,74 €/Monat mit 46 Jahren",
+    "tariffPrice": "z. B. 50,72 EUR/Monat mit 30 Jahren",
     "tariffDetails": {
       "komfort": {
         "label": "Komfort-Unterbringung",
@@ -98,16 +98,16 @@
       "name": "Klinik 2-Bett (SP2)",
       "zimmer": "Zweibettzimmer",
       "tagegeld": "Wechseloption in den 1-Bett-Tarif ab 30",
-      "preis": "z. B. 32,82 €/Monat mit 30 Jahren"
+      "preis": "z. B. 33,41 EUR/Monat mit 30 Jahren"
     },
     "top": {
       "name": "Klinik 1-Bett (SP1)",
       "zimmer": "Ein- oder Zweibettzimmer",
       "tagegeld": "Höchster Tarif der SP-Linie",
-      "preis": "z. B. 49,78 €/Monat mit 30 Jahren"
+      "preis": "z. B. 50,72 EUR/Monat mit 30 Jahren"
     },
-    "ikkComboTitle": "Kassenbeitrag und Bonus getrennt vergleichen",
-    "ikkComboText": "KassenBoost stellt <strong>Beitrag, erreichbaren Bonus und Leistungen</strong> nebeneinander. So siehst du, ob die IKK classic oder eine andere Krankenkasse besser zu deinen Prioritäten passt.",
+    "ikkComboTitle": "Beitrag über den IKK classic Bonus refinanzieren",
+    "ikkComboText": "Die IKK classic belohnt anerkannte Aktivitäten <strong>wahlweise mit Geldbonus oder dreifach höherem Zuschuss</strong> für nachgewiesene zuschussfähige Kosten: Vorsorge, Impfungen, Sportverein, Fitness, Sportabzeichen und mehr. Je nach deinen Aktivitäten kann der Zuschuss einen großen Teil deines Klinik-Beitrags decken, beim Unfall-Tarif sogar bis zu 100 %. Wie viel bei dir zusammenkommt, zeigt dir der Bonusrechner weiter unten.",
     "examplesEyebrow": "Transparent statt theoretisch",
     "examplesTitle": "Was freiwillige Krankenhaus-Extras realistisch kosten können",
     "examplesSubtitle": "Die medizinisch notwendige Behandlung übernimmt die GKV. Diese Modellrechnungen zeigen ausschließlich zusätzliche Wunschleistungen und die gesetzliche Zuzahlung.",
@@ -186,7 +186,7 @@
   },
   "benefits": {
     "title": "Stationäre Zusatzversicherung: Privatpatienten-Status. Ohne privat versichert zu sein.",
-    "subtitle": "Wer ins Krankenhaus muss, sollte sich auf die Genesung konzentrieren, nicht auf das Budget. Mit der Krankenhauszusatzversicherung erhalten Sie Zugang zu den besten Ärzten und Kliniken.",
+    "subtitle": "Wer ins Krankenhaus muss, sollte sich auf die Genesung konzentrieren, nicht auf das Budget. Mit der Krankenhauszusatzversicherung erhältst du Zugang zu den besten Ärzten und Kliniken.",
     "detailsShow": "Alle 8 Detailleistungen anzeigen",
     "detailsHide": "Detailleistungen ausblenden",
     "mainBenefits": {
@@ -266,7 +266,7 @@
     "items": [
       {
         "q": "Was kostet die Krankenhauszusatzversicherung?",
-        "a": "Der Beitrag hängt von Alter und Tarif ab. Beispiele für 30-Jährige: Klinik bei Unfall 6,84 Euro, Klinik 2-Bett 32,82 Euro, Klinik 1-Bett 49,78 Euro im Monat. Mit 46 Jahren: 10,49 / 44,91 / 69,74 Euro. Deinen persönlichen Beitrag siehst du in 2 Minuten im Tarifrechner."
+        "a": "Der Beitrag hängt von Alter und Tarif ab. Aktuelle Beispiele für 30-Jährige: Klinik bei Unfall (SPU) 7,00 EUR, Klinik 2-Bett (SP2) 33,41 EUR und Klinik 1-Bett (SP1) 50,72 EUR im Monat. Deinen persönlichen Beitrag siehst du in 2 Minuten im Tarifrechner."
       },
       {
         "q": "Was ist der Unterschied zwischen Klinik 1-Bett und Klinik 2-Bett?",
@@ -274,7 +274,7 @@
       },
       {
         "q": "Was ist der Tarif Klinik bei Unfall?",
-        "a": "Der Tarif SPU bietet die Leistungen des Klinik-1-Bett-Tarifs – Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Klinikwahl – ausschließlich bei unfallbedingten Behandlungen. Er kommt ohne Gesundheitsprüfung aus und kostet für 30-Jährige beispielhaft 6,84 Euro im Monat."
+        "a": "Der Tarif SPU bietet die Leistungen des Klinik-1-Bett-Tarifs – Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Klinikwahl – ausschließlich bei unfallbedingten Behandlungen. Er kommt ohne Gesundheitsprüfung aus und kostet für 30-Jährige beispielhaft 7,00 EUR im Monat."
       },
       {
         "q": "Gibt es Wartezeiten?",
@@ -286,7 +286,7 @@
       },
       {
         "q": "Wie hilft der IKK classic Bonus bei der Finanzierung?",
-        "a": "Wie stark ein Kassenbonus deinen Beitrag entlastet, hängt von deinen Aktivitäten und den jeweiligen Bedingungen ab. Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt und entscheidest selbst, was dir wichtiger ist."
+        "a": "Die IKK classic belohnt anerkannte Aktivitäten wahlweise mit einem Geldbonus oder einem dreifach höheren Zuschuss für nachgewiesene zuschussfähige Kosten. Je nach deinen Aktivitäten kann der Zuschuss einen großen Teil des Beitrags decken, beim Unfall-Tarif sogar bis zu 100 %. Wie viel bei dir zusammenkommt, rechnest du mit dem Bonusrechner auf dieser Seite aus."
       },
       {
         "q": "Gilt der Schutz auch für Kinder?",
@@ -324,9 +324,243 @@
     "cta": "Beitrag für deine Familie berechnen"
   },
   "bonusRechner": {
-    "tariffInfo": "Klinik-Tarif 2-Bett, Beispielbeitrag 32,82 € (30 Jahre)",
+    "tariffInfo": "Klinik-Tarif 2-Bett, Beispielbeitrag 33,41 EUR (30 Jahre)",
     "effectiveLabel": "Dafür bekommst du im Krankenhaus",
     "effectiveValue": "Privatpatienten-Status",
-    "effectiveNote": "Beispielrechnung: Klinik 2-Bett mit 32,82 € im Monat (30 Jahre). Dein Beitrag hängt von Alter und Tarif ab, dein Bonus von deiner Krankenkasse und den nachgewiesenen Maßnahmen."
+    "effectiveNote": "Beispielrechnung: Klinik 2-Bett mit 33,41 EUR im Monat (30 Jahre). Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen."
+  },
+  "refresh": {
+    "hero": {
+      "eyebrow": "Krankenhauszusatzversicherung",
+      "title": "Mehr Wahl im Krankenhaus. Genau so viel Schutz, wie du brauchst.",
+      "subtitle": "Vergleiche Zweibettzimmer, Einbettzimmer und günstigen Unfallschutz der SDK. Du siehst zuerst die Unterschiede und berechnest danach deinen persönlichen Beitrag.",
+      "cta": "Klinikschutz auswählen",
+      "micro": [
+        "Drei Tarifwege klar getrennt",
+        "Keine Wartezeit für neue Versicherungsfälle"
+      ],
+      "visualAria": "Healio Auswahlhilfe für SP2, SP1 und SPU",
+      "visualTitle": "Was ist dir im Ernstfall wichtig?",
+      "choices": {
+        "sp2": {
+          "code": "SP2",
+          "label": "Zweibettzimmer",
+          "note": "Komfort bei Krankheit und Unfall"
+        },
+        "sp1": {
+          "code": "SP1",
+          "label": "Einbettzimmer",
+          "note": "Mehr Ruhe bei Krankheit und Unfall"
+        },
+        "spu": {
+          "code": "SPU",
+          "label": "Nur nach Unfall",
+          "note": "Günstiger Einstieg ohne Gesundheitsprüfung"
+        }
+      }
+    },
+    "selector": {
+      "eyebrow": "Deine Entscheidung in einem Blick",
+      "title": "Drei Wege. Einer passt zu deinem Sicherheitsgefühl.",
+      "subtitle": "Entscheidend ist nicht nur der Preis, sondern wann dein Schutz greifen soll. Wähle zuerst den Leistungsumfang – den persönlichen Beitrag siehst du danach.",
+      "choose": "Diesen Schutz wählen",
+      "selected": "Ausgewählt",
+      "resultEyebrow": "Deine gewählte Richtung",
+      "resultNote": "Im SDK-Rechner kannst du den Tarif prüfen und deinen altersabhängigen Beitrag sehen.",
+      "calculate": "Persönlichen Beitrag berechnen",
+      "empty": "Wähle eine der drei Karten. Danach führt dich ein klarer Schritt in den Beitragsrechner.",
+      "disclosure": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag. SPU gilt ausschließlich für unfallbedingte Behandlungen und kommt ohne Gesundheitsprüfung aus. Leistungen gelten im tariflich vereinbarten Umfang; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab.",
+      "options": {
+        "sp2": {
+          "code": "SP2",
+          "useCase": "Krankheit und Unfall",
+          "title": "Klinik 2-Bett",
+          "price": "z. B. 33,41 EUR/Monat mit 30 Jahren",
+          "description": "Der ausgewogene Schutz für mehr Komfort und privatärztliche Behandlung im Krankenhaus.",
+          "features": [
+            "Zweibettzimmer",
+            "Privatärztliche Behandlung",
+            "Freie Krankenhauswahl nach Tarifbedingungen",
+            "Rooming-in für versicherte Kinder unter 16 Jahren"
+          ],
+          "result": "SP2: Komfort bei Krankheit und Unfall"
+        },
+        "sp1": {
+          "code": "SP1",
+          "useCase": "Krankheit und Unfall",
+          "title": "Klinik 1-Bett",
+          "price": "z. B. 50,72 EUR/Monat mit 30 Jahren",
+          "description": "Der umfassendere Weg, wenn dir Ruhe, Privatsphäre und zusätzliche Familienleistungen wichtig sind.",
+          "features": [
+            "Ein- oder Zweibettzimmer",
+            "Privatärztliche Behandlung",
+            "10 EUR Krankenhaustagegeld pro vollstationärem Tag",
+            "Familienzimmer nach der Entbindung im tariflichen Umfang"
+          ],
+          "result": "SP1: Mehr Ruhe bei Krankheit und Unfall"
+        },
+        "spu": {
+          "code": "SPU",
+          "useCase": "Ausschließlich nach Unfall",
+          "title": "Klinik bei Unfall",
+          "price": "z. B. 7,00 EUR/Monat mit 30 Jahren",
+          "description": "Der günstige Einstieg für Privatpatienten-Komfort, wenn eine stationäre Behandlung durch einen Unfall nötig wird.",
+          "features": [
+            "Ein- oder Zweibettzimmer nach Unfall",
+            "Privatärztliche Behandlung nach Unfall",
+            "Freie Krankenhauswahl nach Tarifbedingungen",
+            "Ohne Gesundheitsprüfung"
+          ],
+          "result": "SPU: Privatpatienten-Komfort nach Unfall"
+        }
+      }
+    },
+    "benefits": {
+      "eyebrow": "Leistung vor Preis",
+      "title": "Im Ernstfall zählt, was wirklich versichert ist.",
+      "subtitle": "Die gesetzliche Krankenkasse übernimmt die medizinisch notwendige Versorgung. Dein Klinik-Tarif ergänzt die Wahlleistungen, die dir persönlich wichtig sind.",
+      "contextTitle": "Wichtig: Der Tarif bestimmt den Anlass",
+      "contextBody": "SP1 und SP2 greifen im vereinbarten Umfang bei Krankheit und Unfall. SPU übernimmt die Klinik-Extras ausschließlich nach einem Unfall.",
+      "cards": {
+        "doctor": {
+          "title": "Privatärztliche Behandlung",
+          "body": "Behandlung durch Chefarzt oder Belegarzt; die Erstattung ist in den SDK Klinik-Tarifen nicht auf die GOÄ-Höchstsätze begrenzt."
+        },
+        "room": {
+          "title": "Mehr Ruhe im Zimmer",
+          "body": "SP2 sichert das Zweibettzimmer. SP1 bietet Ein- oder Zweibettzimmer. SPU übernimmt diese Wahlleistung nur nach einem Unfall."
+        },
+        "choice": {
+          "title": "Mehr Wahl bei der Klinik",
+          "body": "Die freie Krankenhauswahl ist im tariflichen Umfang versichert – auch für Privat- und Spezialkliniken."
+        },
+        "start": {
+          "title": "Keine tarifliche Wartezeit",
+          "body": "Neue Versicherungsfälle sind ab Versicherungsbeginn geschützt. Bereits vorher eingetretene Versicherungsfälle sind nicht versichert."
+        }
+      }
+    },
+    "family": {
+      "eyebrow": "Familie klar eingeordnet",
+      "title": "Werdende Eltern und Kinder brauchen zwei verschiedene Antworten.",
+      "subtitle": "Die Neugeborenennachversicherung ist etwas anderes als ein günstiger Kinder-Unfallschutz. Hier siehst du den Unterschied sofort.",
+      "parents": {
+        "label": "Für werdende Eltern",
+        "title": "Schutz vor der Geburt planen",
+        "body": "Ist ein Elternteil bei der Geburt versichert, kann das Neugeborene unter den tariflichen Voraussetzungen ohne Gesundheitsprüfung aufgenommen werden.",
+        "items": [
+          "Anmeldung innerhalb von zwei Monaten nach der Geburt",
+          "Versicherungsschutz rückwirkend ab dem Tag der Geburt",
+          "Rooming-in für das später versicherte Kind",
+          "Familienzimmer nach der Entbindung im SP1 nach Tarifbedingungen"
+        ],
+        "note": "Die Voraussetzungen der Neugeborenennachversicherung müssen vollständig erfüllt sein. Entscheidend sind der bestehende Schutz eines Elternteils, die Frist und die aktuellen Tarifbedingungen."
+      },
+      "children": {
+        "label": "Für Kinder",
+        "title": "Krankheitsschutz oder nur Unfall?",
+        "body": "Auch bei Kindern entscheidet der Anlass: SP1 und SP2 sichern vereinbarte Klinikleistungen bei Krankheit und Unfall, SPU ausschließlich nach einem Unfall.",
+        "items": [
+          "SP1: Ein- oder Zweibettzimmer",
+          "SP2: Zweibettzimmer",
+          "SPU: günstiger Unfallschutz ohne Gesundheitsprüfung",
+          "Rooming-in für versicherte Kinder unter 16 Jahren"
+        ],
+        "note": "SPU ist kein allgemeiner Kinder-Klinikschutz. Bei einer stationären Behandlung wegen Krankheit leistet dieser Unfalltarif nicht."
+      },
+      "cta": "Klinikschutz auswählen"
+    },
+    "bonus": {
+      "eyebrow": "KassenBoost × Klinikschutz",
+      "title": "Erst den Schutz wählen. Dann die Krankenkasse passend dazu.",
+      "lead": "Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.",
+      "body": "Wie viel du persönlich erreichst, rechnen wir transparent für dich aus. KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen – die passende Krankenkasse ergibt sich aus deinen Angaben.",
+      "fullPlansTitle": "SP1 und SP2: dein tatsächlicher Eigenbeitrag zählt",
+      "fullPlansBody": "Nach der Tarifwahl wird dein erreichbarer Bonus auf deinen persönlichen Beitrag bezogen. So siehst du klar, was dir nach dem Bonus tatsächlich bleibt.",
+      "cta": "Krankenkasse passend zum Tarif finden",
+      "example": {
+        "eyebrow": "Transparentes SPU-Beispiel",
+        "title": "So können 100 % Beitragsentlastung aussehen.",
+        "badge": "Modell für 30-Jährige",
+        "rows": [
+          {
+            "label": "Beispielbeitrag SPU pro Monat",
+            "value": "7,00 EUR"
+          },
+          {
+            "label": "Beispielbeitrag pro Jahr",
+            "value": "84,00 EUR"
+          },
+          {
+            "label": "Angenommener nutzbarer Kassenbonus",
+            "value": "mind. 84,00 EUR"
+          }
+        ],
+        "resultLabel": "Effektiver Restbeitrag im Modell",
+        "resultText": "Wenn dein nutzbarer Bonus mindestens den Jahresbeitrag erreicht",
+        "resultValue": "0 EUR",
+        "disclosure": "Konkrete Modellrechnung für SPU bei einem Beispielbeitrag von 7,00 EUR monatlich beziehungsweise 84,00 EUR jährlich für 30-Jährige. Dein Beitrag ist altersabhängig. Bonus und Verwendbarkeit hängen von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab; eine Erstattung ist auf den tatsächlich anrechenbaren Beitrag begrenzt."
+      }
+    },
+    "video": {
+      "eyebrow": "Das Konzept in knapp 3 Minuten",
+      "title": "So findest du den Klinikschutz, der zu dir passt.",
+      "body": "Wenn du die Unterschiede lieber hörst als liest, bekommst du hier SP1, SP2 und SPU noch einmal kompakt erklärt.",
+      "aria": "Erklärvideo zu den stationären SDK Tarifen"
+    },
+    "trust": {
+      "eyebrow": "Digital vergleichen, persönlich begleitet",
+      "title": "Du entscheidest informiert – und bleibst nicht allein.",
+      "subtitle": "Healio ordnet Leistungen und Grenzen vor deiner Entscheidung ein und bleibt auch nach dem Abschluss erreichbar.",
+      "cards": {
+        "broker": {
+          "title": "Registrierter Makler",
+          "body": "Versicherungsvermittlung mit Erlaubnis nach § 34d Abs. 1 GewO."
+        },
+        "clarity": {
+          "title": "Bedingungen zuerst verstehen",
+          "body": "Wir trennen Krankheit, Unfall und Familienleistungen, bevor du deinen Beitrag berechnest."
+        },
+        "support": {
+          "title": "Danach persönlich erreichbar",
+          "body": "Bei Fragen zum Antrag, Vertrag oder Leistungsfall erreichst du Healio persönlich."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Kurz geklärt",
+      "title": "Die wichtigsten Fragen vor deiner Auswahl",
+      "items": [
+        {
+          "q": "Was ist der Unterschied zwischen SP1, SP2 und SPU?",
+          "a": "SP1 bietet Ein- oder Zweibettzimmer und zusätzliche Leistungen wie 10 EUR Krankenhaustagegeld. SP2 sichert das Zweibettzimmer. Beide Tarife gelten im vereinbarten Umfang bei Krankheit und Unfall. SPU bietet Klinik-Extras ausschließlich nach einem Unfall."
+        },
+        {
+          "q": "Ist SPU eine vollwertige Krankenhauszusatzversicherung?",
+          "a": "SPU bietet umfassende Klinik-Extras, aber nur bei unfallbedingter Behandlung. Für einen Krankenhausaufenthalt wegen Krankheit leistet SPU nicht. Dafür kommt der Tarif ohne Gesundheitsprüfung aus."
+        },
+        {
+          "q": "Gibt es Wartezeiten?",
+          "a": "Die SDK Klinik-Tarife verzichten auf tarifliche Wartezeiten. Schutz besteht für neue Versicherungsfälle ab Versicherungsbeginn. Ein Versicherungsfall, der bereits vorher eingetreten ist, ist nicht versichert."
+        },
+        {
+          "q": "Muss ich Gesundheitsfragen beantworten?",
+          "a": "Bei SP1 und SP2 gehören Gesundheitsfragen zum Antrag. SPU kommt ohne Gesundheitsprüfung aus, leistet dafür aber ausschließlich nach einem Unfall. Die verbindliche Annahme erfolgt erst im Antrag."
+        },
+        {
+          "q": "Kann ein Kassenbonus den ganzen Beitrag ausgleichen?",
+          "a": "Bis zu 100 % Beitragsentlastung sind möglich. Besonders greifbar ist das beim günstigen SPU: Erreicht dein tatsächlich nutzbarer Bonus mindestens deinen Jahresbeitrag, kann im Modell kein effektiver Restbeitrag bleiben. Wie viel du persönlich erreichst, hängt von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab."
+        },
+        {
+          "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",
+          "a": "Ist ein Elternteil bei der Geburt versichert und sind die Tarifvoraussetzungen erfüllt, kann das Kind innerhalb von zwei Monaten ohne Gesundheitsprüfung angemeldet werden – rückwirkend ab dem Tag der Geburt."
+        }
+      ]
+    },
+    "final": {
+      "eyebrow": "Bereit für deine Entscheidung?",
+      "title": "Wähle zuerst den Schutz. Den Beitrag berechnest du danach.",
+      "body": "SP2, SP1 oder SPU: Der Vergleich führt dich ohne Umwege zur passenden Tarifrichtung."
+    }
   }
 }

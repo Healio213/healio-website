@@ -47,7 +47,7 @@ const OptimizedImage = ({
           style={{ aspectRatio: width && height ? `${width}/${height}` : 'auto' }}
           className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
           loading={shouldLazyLoad ? "lazy" : "eager"}
-          fetchPriority={priority ? "high" : "auto"}
+          {...{ fetchpriority: priority ? "high" : "auto" }}
           decoding={priority ? "sync" : "async"}
           onLoad={() => setIsLoaded(true)}
         />
