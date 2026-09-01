@@ -61,14 +61,14 @@ assert.match(explainerVideos, /preload="metadata"/);
 assert.match(explainerVideos, /kind="captions"/);
 assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
 assert.match(explainerVideos, /vorsorgemanagement-a-v3\.mp4/);
-assert.match(explainerVideos, /bav-zahlenbeispiel-b-v3\.mp4/);
+assert.match(explainerVideos, /bav-zahlenbeispiel-b-v4\.mp4/);
 [
   'public/videos/unternehmen/vorsorgemanagement-a-v3.mp4',
   'public/videos/unternehmen/vorsorgemanagement-a-v3-poster.webp',
   'public/videos/unternehmen/vorsorgemanagement-a-v3-de.vtt',
-  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3.mp4',
-  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3-poster.webp',
-  'public/videos/unternehmen/bav-zahlenbeispiel-b-v3-de.vtt',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v4.mp4',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v4-poster.webp',
+  'public/videos/unternehmen/bav-zahlenbeispiel-b-v4-de.vtt',
 ].forEach((relativePath) => assert(fs.existsSync(path.join(rootDir, relativePath)), `${relativePath} fehlt.`));
 assert.match(workforce, /getPath\('potenzialanalyse'\)/);
 assert.match(workforce, /\?interest=kassenboost/);

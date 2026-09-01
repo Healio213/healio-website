@@ -11,9 +11,9 @@ const VIDEO_CONFIG = Object.freeze({
   },
   bav: {
     anchor: 'bav-zahlenbeispiel-video',
-    source: '/videos/unternehmen/bav-zahlenbeispiel-b-v3.mp4',
-    poster: '/videos/unternehmen/bav-zahlenbeispiel-b-v3-poster.webp',
-    captions: '/videos/unternehmen/bav-zahlenbeispiel-b-v3-de.vtt',
+    source: '/videos/unternehmen/bav-zahlenbeispiel-b-v4.mp4',
+    poster: '/videos/unternehmen/bav-zahlenbeispiel-b-v4-poster.webp',
+    captions: '/videos/unternehmen/bav-zahlenbeispiel-b-v4-de.vtt',
   },
 });
 
