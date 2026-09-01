@@ -3,6 +3,9 @@ Allow: /
 # /confirmation setzt selbst noindex; Crawling bleibt erlaubt, damit Suchmaschinen das Meta-Tag sehen.
 
 # LLM Crawler explizit erlauben
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
@@ -19,6 +22,12 @@ User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
 Allow: /
 
 User-agent: PerplexityBot
