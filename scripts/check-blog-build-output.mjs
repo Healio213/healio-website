@@ -7,6 +7,7 @@ import { seoRoutes } from './seo-routes.mjs';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(rootDir, 'dist');
 const cachePath = path.join(rootDir, 'public', 'data', 'blog-articles-cache.json');
+const vercelConfigPath = path.join(rootDir, 'vercel.json');
 const knownBlogSlugs = [...new Set(
   seoRoutes
     .map((route) => route.path.match(/^\/blog\/([^/]+)$/)?.[1])
@@ -14,6 +15,12 @@ const knownBlogSlugs = [...new Set(
 )];
 
 const readText = (filePath) => fs.readFileSync(filePath, 'utf8');
+
+const vercelConfig = JSON.parse(readText(vercelConfigPath));
+assert.ok(
+  !vercelConfig.rewrites?.some(({ source }) => source === '/blog/:slug'),
+  'Unbekannte Blog-Slugs dürfen nicht als indexierbare App-Shell mit HTTP 200 ausgeliefert werden.',
+);
 
 function getRootMarkup(html) {
   const rootMatch = /<div\s+[^>]*id=["']root["'][^>]*>/i.exec(html);

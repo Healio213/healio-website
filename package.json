@@ -40,7 +40,7 @@
     "test:privacy": "node scripts/check-privacy-consent-contract.mjs",
     "test:whatsapp": "node scripts/check-whatsapp-contact-rendered.mjs",
     "test:seo": "node scripts/check-site-seo.mjs",
-    "test:seo:rendered": "node scripts/check-prerender-output.mjs && node scripts/check-schema-index-recovery.mjs",
+    "test:seo:rendered": "node scripts/check-prerender-output.mjs && node scripts/check-blog-build-output.mjs && node scripts/check-schema-index-recovery.mjs",
     "test:about": "node scripts/check-about-contract.mjs",
     "test:nita-knowledge": "node scripts/check-nita-bonus-knowledge-contract.mjs"
   },

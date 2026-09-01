@@ -265,7 +265,7 @@ const PotenzialanalysePage = () => {
             variants={fadeIn}
             className="max-w-[500px] mx-auto"
           >
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-6" noValidate>
               <FormHoneypot />
               <p className="sr-only" role="status" aria-live="polite">{submitStatus}</p>
               <div className="space-y-2">

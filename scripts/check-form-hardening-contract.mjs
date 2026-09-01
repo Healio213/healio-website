@@ -1,16 +1,36 @@
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { parse } from '@babel/parser';
+import traverseModule from '@babel/traverse';
 
 const read = (path) => fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+const traverse = traverseModule.default || traverseModule;
+const projectRoot = fileURLToPath(new URL('..', import.meta.url));
+const sourceRoot = path.join(projectRoot, 'src');
 
-const formFiles = [
-  'src/components/sections/ContactFormSection.jsx',
-  'src/pages/KontaktPage.jsx',
-  'src/components/sections/DentalContactForm.jsx',
-  'src/components/sections/HospitalContactForm.jsx',
-  'src/components/sections/LeistungenContactForm.jsx',
-  'src/components/sections/VeterinaryContactForm.jsx',
-  'src/pages/PotenzialanalysePage.jsx',
-];
+const collectSourceFiles = (directory) => fs.readdirSync(directory, { withFileTypes: true })
+  .flatMap((entry) => {
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return collectSourceFiles(absolutePath);
+    return /\.[jt]sx$/.test(entry.name) ? [absolutePath] : [];
+  });
+
+const formFiles = collectSourceFiles(sourceRoot)
+  .filter((absolutePath) => /<form\b/.test(fs.readFileSync(absolutePath, 'utf8')))
+  .map((absolutePath) => path.relative(projectRoot, absolutePath))
+  .sort();
+
+if (formFiles.length === 0) {
+  throw new Error('Im produktiven Quellcode wurde kein HTML-Formular gefunden.');
+}
+
+const getStringAttribute = (openingElement, attributeName) => {
+  const attribute = openingElement.attributes.find((candidate) => (
+    candidate.type === 'JSXAttribute' && candidate.name.name === attributeName
+  ));
+  return attribute?.value?.type === 'StringLiteral' ? attribute.value.value : null;
+};
 
 const helper = read('src/components/forms/FormHoneypot.jsx');
 
@@ -23,8 +43,53 @@ if (helper.includes('type="hidden"')) throw new Error('Ein type=hidden wird von 
 
 for (const path of formFiles) {
   const source = read(path);
-  if (!source.includes('FormHoneypot')) throw new Error(`${path}: Honeypot-Feld fehlt.`);
+  const ast = parse(source, {
+    sourceType: 'module',
+    plugins: ['jsx'],
+  });
+  const forms = [];
+
+  traverse(ast, {
+    JSXElement(formPath) {
+      if (formPath.node.openingElement.name.type !== 'JSXIdentifier'
+        || formPath.node.openingElement.name.name !== 'form') return;
+
+      let honeypotCount = 0;
+      formPath.traverse({
+        JSXOpeningElement(childPath) {
+          if (childPath.node.name.type === 'JSXIdentifier'
+            && childPath.node.name.name === 'FormHoneypot') honeypotCount += 1;
+        },
+      });
+
+      forms.push({
+        openingElement: formPath.node.openingElement,
+        honeypotCount,
+      });
+    },
+  });
+
+  if (forms.length === 0) throw new Error(`${path}: Form-Erkennung ist inkonsistent.`);
   if (!source.includes('isHoneypotFilled')) throw new Error(`${path}: Honeypot-Abbruch fehlt.`);
+
+  forms.forEach(({ openingElement, honeypotCount }, index) => {
+    const formLabel = forms.length === 1 ? 'Formular' : `Formular ${index + 1}`;
+    if (honeypotCount !== 1) {
+      throw new Error(`${path}: ${formLabel} braucht genau ein Honeypot-Feld.`);
+    }
+    if (getStringAttribute(openingElement, 'method') !== 'post') {
+      throw new Error(`${path}: ${formLabel} muss bei fehlendem JavaScript per POST absenden.`);
+    }
+    if (getStringAttribute(openingElement, 'action') !== '/kontakt') {
+      throw new Error(`${path}: ${formLabel} braucht die sichere Same-Origin-Fallback-Action /kontakt.`);
+    }
+    const hasSubmitHandler = openingElement.attributes.some((attribute) => (
+      attribute.type === 'JSXAttribute' && attribute.name.name === 'onSubmit'
+    ));
+    if (!hasSubmitHandler) {
+      throw new Error(`${path}: ${formLabel} braucht einen JavaScript-Submit-Handler.`);
+    }
+  });
 
   const preventDefaultIndex = source.indexOf('.preventDefault()');
   const honeypotCheckIndex = source.indexOf('isHoneypotFilled(');
@@ -61,6 +126,14 @@ const fieldLimits = [
   ['src/pages/PotenzialanalysePage.jsx', 'id="company"', 160],
   ['src/pages/PotenzialanalysePage.jsx', 'id="email"', 254],
   ['src/pages/PotenzialanalysePage.jsx', 'id="phone"', 40],
+  ['src/components/sections/Contact.jsx', 'name="name"', 100],
+  ['src/components/sections/Contact.jsx', 'name="company"', 160],
+  ['src/components/sections/Contact.jsx', 'name="email"', 254],
+  ['src/components/sections/Contact.jsx', 'name="phone"', 40],
+  ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="name"', 100],
+  ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="email"', 254],
+  ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="animalType"', 120],
+  ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="age"', 40],
 ];
 
 for (const [path, marker, maxLength] of fieldLimits) {

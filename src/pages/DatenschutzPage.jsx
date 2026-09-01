@@ -16,7 +16,12 @@ const DatenschutzPage = () => {
     "@context": "https://schema.org",
     "@graph": [
       createOrganizationSchema(),
-      createWebPageSchema(t('datenschutz.title'), tSeo('datenschutz.description'))
+      createWebPageSchema(
+        t('datenschutz.title'),
+        tSeo('datenschutz.description'),
+        canonicalUrl,
+        lang === 'en' ? 'en-US' : 'de-DE',
+      )
     ]
   };
 
@@ -46,7 +51,7 @@ const DatenschutzPage = () => {
 
             <div className="prose prose-lg prose-gray max-w-none text-gray-700">
               <p className="lead text-xl text-gray-600 mb-8">
-                Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+                {t('datenschutz.intro')}
               </p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section1Title')}</h2>
@@ -55,15 +60,13 @@ const DatenschutzPage = () => {
                 <p className="font-medium text-gray-900">Healio GmbH</p>
                 <p>Arndtstraße 6</p>
                 <p>22085 Hamburg</p>
-                <p className="mt-2">Telefon: +49 40 89755705</p>
-                <p>E-Mail: info@healio.de</p>
+                <p className="mt-2">{t('impressum.phoneLabel')} +49 40 89755705</p>
+                <p>{t('impressum.emailLabel')} info@healio.de</p>
               </div>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section2Title')}</h2>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.serverLogs')}</h3>
-              <p>
-                Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind Browsertyp und Browserversion, verwendetes Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage und IP-Adresse.
-              </p>
+              <p>{t('datenschutz.serverLogsText')}</p>
               
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.contactForm')}</h3>
               <p>{t('datenschutz.contactFormText')}</p>
@@ -80,19 +83,13 @@ const DatenschutzPage = () => {
                 </a>
               </p>
 
-              <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">Eingesetzte Dienste und Drittanbieter</h2>
-              <h3 className="text-xl font-semibold mt-6 mb-3">Hosting und Auslieferung (Vercel, Cloudflare)</h3>
-              <p>
-                Diese Website wird bei Vercel Inc. (USA) gehostet und über das Content-Delivery-Netzwerk von Cloudflare Inc. (USA) ausgeliefert. Dabei werden technisch notwendige Verbindungsdaten (u. a. IP-Adresse) verarbeitet, um die Seite bereitzustellen und vor Angriffen zu schützen. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und performanten Betrieb (Art. 6 Abs. 1 lit. f DSGVO). Mit beiden Anbietern bestehen Auftragsverarbeitungsverträge mit EU-Standardvertragsklauseln.
-              </p>
-              <h3 className="text-xl font-semibold mt-6 mb-3">Google Analytics 4</h3>
-              <p>
-                Wir verwenden Google Analytics 4 (Google Ireland Ltd.), um die Nutzung unserer Website statistisch auszuwerten (z. B. aufgerufene Seiten, Verweildauer). IP-Adressen werden von Google Analytics 4 nicht gespeichert. Die gewonnenen Statistiken helfen uns, unser Angebot zu verbessern. Sie können der Erfassung jederzeit widersprechen, etwa über Browser-Einstellungen, Tracking-Schutz oder Browser-Add-ons zur Deaktivierung von Google Analytics.
-              </p>
-              <h3 className="text-xl font-semibold mt-6 mb-3">Nita, unser KI-Assistent (ElevenLabs)</h3>
-              <p>
-                Auf unseren Seiten kann ein Sprach- bzw. Chat-Assistent ("Nita") eingebunden sein, der über die Plattform ElevenLabs Inc. (USA) betrieben wird. Wenn Sie den Assistenten aktiv nutzen, werden Ihre Eingaben bzw. Ihre Sprache zur Beantwortung an ElevenLabs übertragen. Die Nutzung ist freiwillig; ohne aktive Nutzung werden keine Gesprächsdaten übertragen. Bitte teilen Sie dem Assistenten keine sensiblen Gesundheitsdaten mit, eine persönliche Beratung erfolgt über unsere genannten Kontaktwege.
-              </p>
+              <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.servicesTitle')}</h2>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.hostingTitle')}</h3>
+              <p>{t('datenschutz.hostingText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.analyticsTitle')}</h3>
+              <p>{t('datenschutz.analyticsText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.nitaTitle')}</h3>
+              <p>{t('datenschutz.nitaText')}</p>
               <h3 id="whatsapp-kontakt" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">
                 {lang === 'en' ? 'Contact via WhatsApp' : 'Kontakt über WhatsApp'}
               </h3>
@@ -139,34 +136,24 @@ const DatenschutzPage = () => {
                   </p>
                 </>
               )}
-              <h3 className="text-xl font-semibold mt-6 mb-3">Terminbuchung (Calendly)</h3>
-              <p>
-                Für die Online-Terminbuchung nutzen wir Calendly LLC (USA). Wenn Sie einen Termin buchen, werden die von Ihnen eingegebenen Daten (Name, E-Mail-Adresse, gewählter Termin) an Calendly übertragen und uns bereitgestellt. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).
-              </p>
-              <h3 className="text-xl font-semibold mt-6 mb-3">E-Mail-Kommunikation (Brevo)</h3>
-              <p>
-                Für den Versand von Informations-E-Mails nutzen wir Brevo (Sendinblue GmbH, Deutschland). Ihre E-Mail-Adresse wird dafür nur verwendet, wenn Sie eingewilligt haben oder eine Geschäftsbeziehung besteht; Sie können sich jederzeit über den Abmeldelink austragen.
-              </p>
-              <h3 className="text-xl font-semibold mt-6 mb-3">Externe Abschlussstrecken der Versicherer</h3>
-              <p>
-                Für Beitragsrechner und Online-Abschlüsse verlinken wir auf Strecken der jeweiligen Versicherer (z. B. SDK, die Bayerische, UKV/Versicherungskammer). Dort gelten die Datenschutzerklärungen des jeweiligen Anbieters; die dort eingegebenen Daten verarbeitet der Versicherer als Verantwortlicher.
-              </p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.calendlyTitle')}</h3>
+              <p>{t('datenschutz.calendlyText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.brevoTitle')}</h3>
+              <p>{t('datenschutz.brevoText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>
+              <p>{t('datenschutz.insurerFlowsText')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section3Title')}</h2>
-              <p>
-                Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten.
-              </p>
+              <p>{t('datenschutz.section3Text')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section4Title')}</h2>
-              <p>
-                Die Internetseiten verwenden teilweise so genannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.
-              </p>
+              <p>{t('datenschutz.section4Text')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section5Title')}</h2>
               <p>
-                Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail:
+                {t('datenschutz.section5Text')}
                 <br /><br />
-                <strong>E-Mail:</strong> <a href="mailto:info@healio.de" className="text-healio-primary hover:underline">info@healio.de</a>
+                <strong>{t('datenschutz.emailLabel')}</strong> <a href="mailto:info@healio.de" className="text-healio-primary hover:underline">info@healio.de</a>
               </p>
 
               <p className="mt-12 text-sm text-gray-500 pt-8 border-t border-gray-100">{t('datenschutz.lastUpdated')}</p>

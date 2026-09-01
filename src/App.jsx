@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, Suspense } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from '@/components/ScrollToTop';
 import Layout from '@/components/Layout';
@@ -54,6 +54,18 @@ const PageLoader = () => (
     <div className="w-8 h-8 border-4 border-[#25c990] border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
+
+const EnglishBlogArticleRedirect = () => {
+  const { slug } = useParams();
+  const { search, hash } = useLocation();
+
+  return (
+    <Navigate
+      to={{ pathname: `/blog/${slug}`, search, hash }}
+      replace
+    />
+  );
+};
 
 function App() {
   const location = useLocation();
@@ -180,7 +192,7 @@ function App() {
               <Route path="privacy" element={<DatenschutzPage />} />
               <Route path="initial-information" element={<ErstinformationPage />} />
               <Route path="blog" element={<BlogPage />} />
-              <Route path="blog/:slug" element={<BlogArticlePage />} />
+              <Route path="blog/:slug" element={<EnglishBlogArticleRedirect />} />
             </Route>
 
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}

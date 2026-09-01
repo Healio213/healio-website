@@ -174,11 +174,9 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('partner')} className="hover:text-healio-primary transition-colors">{t('footer.partner')}</Link></li>
               <li><Link to={getPath('hebammen')} className="hover:text-healio-primary transition-colors">{t('footer.hebammen')}</Link></li>
+              <li><Link to={getPath('heilberufeVorsorge')} className="hover:text-healio-primary transition-colors">{t('footer.heilberufe')}</Link></li>
               {lang === 'de' && (
-                <>
-                  <li><Link to="/zahnaerzte" className="hover:text-healio-primary transition-colors">{t('footer.zahnaerzte')}</Link></li>
-                  <li><Link to="/heilberufe-vorsorge" className="hover:text-healio-primary transition-colors">{t('footer.heilberufe')}</Link></li>
-                </>
+                <li><Link to="/zahnaerzte" className="hover:text-healio-primary transition-colors">{t('footer.zahnaerzte')}</Link></li>
               )}
             </ul>
           </div>

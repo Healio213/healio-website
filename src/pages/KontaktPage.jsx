@@ -232,7 +232,7 @@ const KontaktPage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100">
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-6">
                   <FormHoneypot />
                   
                   <div className="space-y-2">

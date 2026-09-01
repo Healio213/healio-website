@@ -165,7 +165,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
               </span>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} className="mt-7 space-y-5">
               <FormHoneypot />
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">

@@ -17,6 +17,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Send, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { emailjsService } from '@/services/emailjsService';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const Contact = () => {
   const { t } = useTranslation('contact');
@@ -49,6 +50,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
 
     if (!formData.employees || !formData.focus) {
       toast({
@@ -160,7 +162,8 @@ const Contact = () => {
             viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-sm p-8 lg:p-10 rounded-2xl shadow-2xl border border-white/10"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-6">
+              <FormHoneypot />
 
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-semibold text-slate-300">Ihr Name</Label>
@@ -168,6 +171,7 @@ const Contact = () => {
                   id="name"
                   name="name"
                   type="text"
+                  maxLength={100}
                   required
                   value={formData.name}
                   onChange={handleChange}
@@ -182,6 +186,7 @@ const Contact = () => {
                   id="company"
                   name="company"
                   type="text"
+                  maxLength={160}
                   required
                   value={formData.company}
                   onChange={handleChange}
@@ -196,6 +201,7 @@ const Contact = () => {
                   id="email"
                   name="email"
                   type="email"
+                  maxLength={254}
                   required
                   value={formData.email}
                   onChange={handleChange}
@@ -210,6 +216,7 @@ const Contact = () => {
                   id="phone"
                   name="phone"
                   type="tel"
+                  maxLength={40}
                   required
                   value={formData.phone}
                   onChange={handleChange}

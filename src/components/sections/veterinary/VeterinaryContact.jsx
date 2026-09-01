@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Calculator, Phone, Mail, CheckCircle, Dog } from 'lucide-react';
+import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
 const VeterinaryContact = () => {
   const { t } = useTranslation('veterinary');
@@ -25,6 +26,7 @@ const VeterinaryContact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isHoneypotFilled(e.currentTarget)) return;
     toast({
       title: t('contact.toastTitle'),
       description: t('contact.toastDesc'),
@@ -86,13 +88,15 @@ const VeterinaryContact = () => {
             className="bg-white p-5 sm:p-8 rounded-2xl shadow-xl border-t-4 border-[#1E3A8A]"
           >
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-5 sm:mb-6">{t('contact.formTitle')}</h3>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <FormHoneypot />
               <div className="space-y-1.5 sm:space-y-2">
                 <label htmlFor="name" className="text-sm font-medium text-slate-700 ml-1">{t('contact.nameLabel')}</label>
                 <input 
                   id="name" 
                   name="name" 
                   type="text" 
+                  maxLength={100}
                   required 
                   value={formData.name} 
                   onChange={handleChange} 
@@ -107,6 +111,7 @@ const VeterinaryContact = () => {
                   id="email" 
                   name="email" 
                   type="email" 
+                  maxLength={254}
                   required 
                   value={formData.email} 
                   onChange={handleChange} 
@@ -122,6 +127,7 @@ const VeterinaryContact = () => {
                     id="animalType" 
                     name="animalType" 
                     type="text" 
+                    maxLength={120}
                     value={formData.animalType} 
                     onChange={handleChange} 
                     className="w-full px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1E3A8A] focus:border-[#1E3A8A] outline-none bg-slate-50 text-slate-900 placeholder:text-gray-400" 
@@ -134,6 +140,7 @@ const VeterinaryContact = () => {
                     id="age" 
                     name="age" 
                     type="text" 
+                    maxLength={40}
                     value={formData.age} 
                     onChange={handleChange} 
                     className="w-full px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#1E3A8A] focus:border-[#1E3A8A] outline-none bg-slate-50 text-slate-900 placeholder:text-gray-400" 

@@ -66,11 +66,37 @@ function findRouteKey(pathname, lang) {
   for (const [key, path] of Object.entries(routes)) {
     if (path === pathname) return key;
   }
-  // Prefix match for dynamic routes (e.g., /blog/slug)
-  for (const [key, path] of Object.entries(routes)) {
-    if (pathname.startsWith(path + '/')) return key;
+  // Längsten Präfix zuerst prüfen, damit z. B. /en/blog/:slug nicht
+  // irrtümlich als Unterpfad der englischen Startseite /en erkannt wird.
+  const routesBySpecificity = Object.entries(routes)
+    .sort(([, pathA], [, pathB]) => pathB.length - pathA.length);
+  for (const [key, path] of routesBySpecificity) {
+    if (key === 'home') continue;
+    if (pathname.startsWith(`${path}/`)) return key;
   }
   return null;
+}
+
+export function getLanguageSwitchTarget(pathname, lang) {
+  const targetLang = lang === 'de' ? 'en' : 'de';
+  const routeKey = findRouteKey(pathname, lang);
+
+  if (!routeKey) return targetLang === 'en' ? '/en' : '/';
+
+  const basePath = routeMap[lang][routeKey];
+  const suffix = pathname.slice(basePath.length);
+
+  // Die Ratgeberartikel sind derzeit ausschließlich deutsch. Ein Wechsel
+  // vom deutschen Artikel führt deshalb zum englischen Hub statt zu einer
+  // vermeintlichen Übersetzung. Historische /en/blog/:slug-Aufrufe werden
+  // dagegen zur deutschen Original-URL zurückgeführt.
+  if (routeKey === 'blog' && suffix) {
+    return lang === 'de'
+      ? routeMap.en.blog
+      : `${routeMap.de.blog}${suffix}`;
+  }
+
+  return `${routeMap[targetLang][routeKey]}${suffix}`;
 }
 
 export function useLanguage() {
@@ -89,18 +115,7 @@ export function useLanguage() {
   const getPath = (routeKey) => routeMap[lang]?.[routeKey] || routeMap.de[routeKey] || '/';
 
   const switchLanguage = () => {
-    const targetLang = lang === 'de' ? 'en' : 'de';
-    const routeKey = findRouteKey(pathname, lang);
-
-    if (routeKey) {
-      const targetPath = routeMap[targetLang][routeKey];
-      // Preserve sub-paths (e.g., /blog/my-article -> /en/blog/my-article)
-      const basePath = routeMap[lang][routeKey];
-      const suffix = pathname.slice(basePath.length);
-      navigate(targetPath + suffix);
-    } else {
-      navigate(targetLang === 'en' ? '/en' : '/');
-    }
+    navigate(getLanguageSwitchTarget(pathname, lang));
   };
 
   return { lang, getPath, switchLanguage };

@@ -113,7 +113,7 @@ const ContactFormSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-10"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-6">
             <FormHoneypot />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">

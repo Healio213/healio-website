@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { seoRoutes } from './seo-routes.mjs';
-import { routeMap } from '../src/hooks/useLanguage.js';
+import { getLanguageSwitchTarget, routeMap } from '../src/hooks/useLanguage.js';
 import { buildNitaContext } from '../src/lib/nitaContext.js';
 
 const read = (relativePath) => fs.readFileSync(new URL(`../${relativePath}`, import.meta.url), 'utf8');
@@ -77,5 +77,108 @@ assert.deepEqual(enHeilberufeSeo?.hreflang, expectedHreflang, 'Englische Heilber
 
 const enLeistungen = readJson('src/i18n/locales/en/leistungen.json');
 assert.equal(enLeistungen.budget.amount, '3,000 EUR', 'Englische Zahlenschreibweise muss ein Komma verwenden.');
+
+const footer = read('src/components/sections/Footer.jsx');
+assert(
+  footer.includes("to={getPath('heilberufeVorsorge')}"),
+  'Der Footer muss die Heilberufe-Vorsorge in beiden Sprachen sprachabhängig intern verlinken.',
+);
+const partnerPage = read('src/pages/PartnerPage.jsx');
+assert(
+  partnerPage.includes("to={getPath('heilberufeVorsorge')}"),
+  'Die Partner-Seite muss sprachabhängig zur Heilberufe-Vorsorge verlinken.',
+);
+
+assert.equal(
+  getLanguageSwitchTarget('/blog/heilpraktiker-kosten-guide-2026', 'de'),
+  '/en/blog',
+  'Ohne englische Artikelübersetzung muss der Sprachwechsel vom deutschen Artikel zum englischen Blog-Hub führen.',
+);
+assert.equal(
+  getLanguageSwitchTarget('/en/blog/heilpraktiker-kosten-guide-2026', 'en'),
+  '/blog/heilpraktiker-kosten-guide-2026',
+  'Ein historischer englischer Artikellink muss clientseitig zur deutschen Original-URL führen.',
+);
+assert.equal(
+  getLanguageSwitchTarget('/en/unbekannter-pfad', 'en'),
+  '/',
+  'Unbekannte englische Pfade dürfen nicht als Unterseite von /en eine doppelte Slash-URL erzeugen.',
+);
+const vercelConfig = readJson('vercel.json');
+assert(
+  vercelConfig.redirects?.some(({ source, destination, permanent }) => (
+    source === '/en/blog/:slug'
+    && destination === '/blog/:slug'
+    && permanent === true
+  )),
+  'Vercel muss englische Artikelpfade permanent zur deutschen Original-URL umleiten.',
+);
+assert(
+  !vercelConfig.rewrites?.some(({ source }) => source === '/en/blog/:slug'),
+  'Der permanente Redirect darf nicht durch einen Rewrite des englischen Artikelpfads unterlaufen werden.',
+);
+assert(
+  app.includes('path="blog/:slug" element={<EnglishBlogArticleRedirect />}'),
+  'Der englische Router muss historische Artikelpfade auch clientseitig zur deutschen URL umleiten.',
+);
+
+for (const key of [
+  'intro',
+  'serverLogsText',
+  'servicesTitle',
+  'hostingTitle',
+  'hostingText',
+  'analyticsTitle',
+  'analyticsText',
+  'nitaTitle',
+  'nitaText',
+  'calendlyTitle',
+  'calendlyText',
+  'brevoTitle',
+  'brevoText',
+  'insurerFlowsTitle',
+  'insurerFlowsText',
+  'section3Text',
+  'section4Text',
+  'section5Text',
+]) {
+  assert.equal(typeof enLegal.datenschutz[key], 'string', `Englischer Datenschutztext fehlt: datenschutz.${key}`);
+  assert(enLegal.datenschutz[key].trim().length >= 12, `Englischer Datenschutztext ist zu kurz: datenschutz.${key}`);
+  if (key === 'intro' || key.endsWith('Text')) {
+    assert.notEqual(
+      enLegal.datenschutz[key],
+      deLegal.datenschutz[key],
+      `Englischer Datenschutztext darf nicht unverändert deutsch bleiben: datenschutz.${key}`,
+    );
+  }
+  assert(
+    datenschutzPage.includes(`t('datenschutz.${key}')`),
+    `Datenschutzseite muss datenschutz.${key} aus der aktiven Sprache rendern.`,
+  );
+}
+assert(
+  impressumPage.includes("t('impressum.disputeText')"),
+  'Das Impressum muss den Schlichtungstext aus der aktiven Sprache rendern.',
+);
+
+for (const [localeName, legal, consentReference, settingsReference] of [
+  ['DE', deLegal, /Art\. 6 Abs\. 1 lit\. a DSGVO/, /Datenschutz-Einstellungen/],
+  ['EN', enLegal, /Article 6\(1\)\(a\) GDPR/, /privacy settings/],
+]) {
+  for (const providerKey of ['analyticsText', 'nitaText', 'calendlyText']) {
+    assert.match(
+      legal.datenschutz[providerKey],
+      consentReference,
+      `${localeName} datenschutz.${providerKey} muss die Einwilligung als Rechtsgrundlage nennen.`,
+    );
+    assert.match(
+      legal.datenschutz[providerKey],
+      settingsReference,
+      `${localeName} datenschutz.${providerKey} muss den Widerruf über die Datenschutz-Einstellungen erklären.`,
+    );
+  }
+}
+assert.match(deLegal.datenschutz.calendlyText, /Art\. 6 Abs\. 1 lit\. b DSGVO/);
+assert.match(enLegal.datenschutz.calendlyText, /Article 6\(1\)\(b\) GDPR/);
 
 console.log('Block-3-Inhaltsvertrag erfüllt.');

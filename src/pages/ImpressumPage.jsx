@@ -14,7 +14,15 @@ const ImpressumPage = () => {
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/legal-notice' : 'https://healio.de/impressum';
   const schemaMarkup = {
     "@context": "https://schema.org",
-    "@graph": [createOrganizationSchema(), createWebPageSchema(t('impressum.title'), tSeo('impressum.description'))]
+    "@graph": [
+      createOrganizationSchema(),
+      createWebPageSchema(
+        t('impressum.title'),
+        tSeo('impressum.description'),
+        canonicalUrl,
+        lang === 'en' ? 'en-US' : 'de-DE',
+      ),
+    ]
   };
 
   return (
@@ -75,12 +83,7 @@ const ImpressumPage = () => {
 
               <section>
                 <h2 className="text-xl font-bold text-healio-slate mb-3">{t('impressum.dispute')}</h2>
-                <p>
-                  Für Beschwerden im Zusammenhang mit Versicherungsvermittlung können Sie sich an die folgenden Schlichtungsstellen wenden:
-                  Versicherungsombudsmann e.V., Postfach 08 06 32, 10006 Berlin (www.versicherungsombudsmann.de) sowie
-                  Ombudsmann Private Kranken- und Pflegeversicherung, Postfach 06 02 22, 10052 Berlin (www.pkv-ombudsmann.de).
-                  {' '}Unsere E-Mail-Adresse finden Sie oben im Impressum.
-                </p>
+                <p>{t('impressum.disputeText')}</p>
               </section>
             </div>
           </div>

@@ -61,7 +61,7 @@ const LeistungenContactForm = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="bg-white p-8 rounded-2xl shadow-md border border-slate-100">
             <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('leistungenForm.title')}</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-4">
               <FormHoneypot />
               <div className="space-y-2">
                 <Label htmlFor="name">{t('form.name')}</Label>

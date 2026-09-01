@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowDown, Shield } from 'lucide-react';
@@ -16,10 +17,12 @@ import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CalendlyEmbed from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const PartnerPage = () => {
   const { t, i18n } = useTranslation('partner');
   const { t: tSeo } = useTranslation('seo');
+  const { getPath } = useLanguage();
   const isEnglish = i18n.language?.startsWith('en');
   const canonicalUrl = isEnglish ? 'https://healio.de/en/partner' : 'https://healio.de/partner';
 
@@ -187,9 +190,9 @@ const PartnerPage = () => {
                   asChild
                   className="bg-white text-[#0b4d4a] hover:bg-white/90 text-base font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
-                  <a href="/heilberufe-vorsorge">
+                  <Link to={getPath('heilberufeVorsorge')}>
                     {t('professionalCover.cta')}
-                  </a>
+                  </Link>
                 </Button>
                 <p className="text-xs text-white/70 text-center">
                   {t('professionalCover.meta')}
