@@ -21,6 +21,10 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isNoindexRoute, validatePrerenderOutput } from './check-prerender-output.mjs';
+import {
+  PRERENDER_BROWSER_RESTART_INTERVAL,
+  shouldAbortPrerenderRequest,
+} from './lib/prerenderResilience.mjs';
 import { seoRoutes } from './seo-routes.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -73,6 +77,12 @@ function serveDist() {
     if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
       filePath = path.join(filePath, 'index.html');
     }
+    if (!fs.existsSync(filePath) && path.extname(urlPath)) {
+      console.error(`[prerender] static asset missing: ${urlPath}`);
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Not found');
+      return;
+    }
     if (!fs.existsSync(filePath)) {
       filePath = path.join(distDir, 'index.html'); // SPA-Fallback
     }
@@ -119,35 +129,49 @@ async function createPage(browser) {
   // keine CDN-Abhängigkeit im Build. Content-API bleibt erlaubt.
   await page.setRequestInterception(true);
   page.on('request', (req) => {
-    const host = new URL(req.url()).hostname;
-    if (host === '127.0.0.1' || host === 'localhost' || ALLOWED_EXTERNAL_HOSTS.has(host)) {
-      req.continue();
-    } else {
+    const requestUrl = new URL(req.url());
+    if (shouldAbortPrerenderRequest({
+      hostname: requestUrl.hostname,
+      pathname: requestUrl.pathname,
+      resourceType: req.resourceType(),
+      allowedExternalHosts: ALLOWED_EXTERNAL_HOSTS,
+    })) {
       req.abort();
+    } else {
+      req.continue();
     }
   });
 
   return page;
 }
 
-async function renderRouteWithRetry(browser, routePath, attempts = 2) {
+async function renderRouteWithRetry({ getBrowser, restartBrowser }, routePath, attempts = 3) {
   let lastError;
 
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
-    const page = await createPage(browser);
+    let page;
     const pageErrors = [];
-    page.on('pageerror', (error) => pageErrors.push(error.message));
+    let restartAfterFailure = false;
 
     try {
+      page = await createPage(getBrowser());
+      page.on('pageerror', (error) => pageErrors.push(error.message));
       return await prerenderRoute(page, routePath);
     } catch (error) {
       const details = pageErrors.length > 0 ? `; Browserfehler: ${pageErrors.join(' | ')}` : '';
       lastError = new Error(`${error.message}${details}`);
+      restartAfterFailure = true;
       if (attempt < attempts) {
-        console.warn(`[prerender] ${routePath}: Versuch ${attempt} fehlgeschlagen, neuer Browser-Tab folgt.`);
+        console.warn(`[prerender] ${routePath}: Versuch ${attempt} fehlgeschlagen, frischer Browser folgt.`);
       }
     } finally {
-      await page.close().catch(() => {});
+      await page?.close().catch(() => {});
+    }
+
+    // Auch nach dem letzten Fehlversuch neu starten: Noindex-Routen dürfen
+    // übersprungen werden, aber keinen defekten Browser an die Folgeroute vererben.
+    if (restartAfterFailure) {
+      await restartBrowser();
     }
   }
 
@@ -169,6 +193,7 @@ async function launchBrowser() {
   try {
     const chromium = (await import('@sparticuz/chromium')).default;
     const puppeteerCore = (await import('puppeteer-core')).default;
+    chromium.setGraphicsMode = false;
     return await puppeteerCore.launch({
       args: [...chromium.args, '--no-sandbox', '--disable-dev-shm-usage'],
       executablePath: await chromium.executablePath(),
@@ -181,10 +206,21 @@ async function launchBrowser() {
 }
 
 async function main() {
-  const browser = await launchBrowser();
+  let browser = await launchBrowser();
   if (!browser) {
     throw new Error('Kein Browser verfügbar; indexierbare Seiten würden Meta-only bleiben.');
   }
+
+  let renderedSinceBrowserRestart = 0;
+  const restartBrowser = async () => {
+    await browser.close().catch(() => {});
+    browser = await launchBrowser();
+    if (!browser) {
+      throw new Error('Browser-Neustart fehlgeschlagen; Prerender wird sicher abgebrochen.');
+    }
+    renderedSinceBrowserRestart = 0;
+  };
+  const getBrowser = () => browser;
 
   const server = await serveDist();
   let ok = 0;
@@ -211,13 +247,17 @@ async function main() {
       }
 
       try {
+        if (renderedSinceBrowserRestart >= PRERENDER_BROWSER_RESTART_INTERVAL) {
+          await restartBrowser();
+        }
         // Eine neue Page pro Route verhindert, dass Router-, Sprach- oder
         // Animationszustand von der vorherigen Route den Snapshot beeinflusst.
-        const inner = await renderRouteWithRetry(browser, route.path);
+        const inner = await renderRouteWithRetry({ getBrowser, restartBrowser }, route.path);
         if (!inner || inner.length < 500) {
           throw new Error(`Inhalt zu kurz (${inner ? inner.length : 0} Zeichen)`);
         }
         fs.writeFileSync(htmlPath, html.replace(marker, `<div id="root">${inner}</div>`));
+        renderedSinceBrowserRestart += 1;
         ok += 1;
         console.log(`[prerender] ok: ${route.path} (${Math.round(inner.length / 1024)} kB)`);
       } catch (err) {
