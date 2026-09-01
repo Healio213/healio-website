@@ -1,7 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sprout } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+
+const impactAreas = [
+  { label: 'Umweltschutz', kind: 'naturopathy', tone: 'mint' },
+  { label: 'Bildung', kind: 'document', tone: 'sky' },
+  { label: 'Gesundheit', kind: 'hospital', tone: 'coral' },
+  { label: 'Soziales', kind: 'support', tone: 'butter' },
+];
 
 const SocialProofSection = () => {
   return (
@@ -13,9 +19,7 @@ const SocialProofSection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
-            <Sprout size={40} className="text-white" />
-          </div>
+          <FriendlyIcon kind="naturopathy" tone="mint" size="lg" className="mx-auto mb-8" />
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 leading-tight">
             Wir spenden <span className="text-white underline decoration-healio-accent decoration-4 underline-offset-4">10% unseres Umsatzes</span> <br/>
@@ -27,24 +31,13 @@ const SocialProofSection = () => {
             sondern auch für die Gesellschaft, in der wir leben.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-90">
-            {/* Placeholders for charity icons - using simple divs with text for now */}
-            <div className="flex flex-col items-center group cursor-pointer">
-               <FriendlyIcon icon="planet-care" tone="mint" className="mb-3" />
-               <span className="text-sm font-medium">Umweltschutz</span>
-            </div>
-            <div className="flex flex-col items-center group cursor-pointer">
-               <FriendlyIcon icon="team-introduction" tone="butter" className="mb-3" />
-               <span className="text-sm font-medium">Bildung</span>
-            </div>
-            <div className="flex flex-col items-center group cursor-pointer">
-               <FriendlyIcon icon="ambulant-care" tone="sky" className="mb-3" />
-               <span className="text-sm font-medium">Gesundheit</span>
-            </div>
-            <div className="flex flex-col items-center group cursor-pointer">
-               <FriendlyIcon icon="ongoing-service" tone="lavender" className="mb-3" />
-               <span className="text-sm font-medium">Soziales</span>
-            </div>
+          <div className="grid grid-cols-2 gap-8 opacity-95 md:grid-cols-4">
+            {impactAreas.map((area) => (
+              <div key={area.label} className="flex flex-col items-center">
+                <FriendlyIcon kind={area.kind} tone={area.tone} size="md" className="mb-3" />
+                <span className="text-sm font-medium">{area.label}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

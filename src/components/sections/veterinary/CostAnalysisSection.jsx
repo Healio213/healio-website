@@ -31,7 +31,7 @@ const CostAnalysisSection = () => {
 
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="p-4 sm:p-5 md:p-6 bg-blue-50 rounded-xl border border-blue-100 flex flex-col items-start">
-                <FriendlyIcon icon="business-expense" tone="sky" size="sm" className="mb-4" />
+                <FriendlyIcon emoji="📈" label={t('costAnalysis.steigendeSaetze')} tone="sky" size="sm" className="mb-4" />
                 <div>
                   <h3 className="font-bold text-slate-900 mb-1 sm:mb-2 text-base sm:text-lg">{t('costAnalysis.steigendeSaetze')}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
@@ -41,7 +41,7 @@ const CostAnalysisSection = () => {
               </div>
               
               <div className="p-4 sm:p-5 md:p-6 bg-blue-50 rounded-xl border border-blue-100 flex flex-col items-start">
-                <FriendlyIcon icon="pet-care" tone="mint" size="sm" className="mb-4" />
+                <FriendlyIcon emoji="🩺" label={t('costAnalysis.spezialisten')} tone="mint" size="sm" className="mb-4" />
                 <div>
                   <h3 className="font-bold text-slate-900 mb-1 sm:mb-2 text-base sm:text-lg">{t('costAnalysis.spezialisten')}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">

@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,13 +13,6 @@ import { emailjsService } from '@/services/emailjsService';
 import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
-import {
-  buildPotentialAnalysisEmailMessage,
-  createPotentialAnalysisDatabaseRecord,
-  getPotentialAnalysisDetailVisibility,
-  normalizePotentialInterest,
-  summarizePotentialAnalysisDelivery,
-} from '@/lib/potentialAnalysisModel';
 import {
   Select,
   SelectContent,
@@ -36,7 +29,6 @@ const PotenzialanalysePage = () => {
   const { t: tSeo } = useTranslation('seo');
   const { lang, getPath } = useLanguage();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/potential-analysis' : 'https://healio.de/potenzialanalyse';
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,14 +43,12 @@ const PotenzialanalysePage = () => {
     email: '',
     phone: '',
     mitarbeiteranzahl: '',
-    anliegen: normalizePotentialInterest(searchParams.get('interest')),
     fokus_bav: '',
     fokus_bkv: ''
   };
   
   const [formData, setFormData] = useState(initialFormState);
   const [errors, setErrors] = useState({});
-  const detailVisibility = getPotentialAnalysisDetailVisibility(formData.anliegen);
 
   const handleSelectChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -87,9 +77,8 @@ const PotenzialanalysePage = () => {
       newErrors.email = t('potenzialanalyse.emailInvalid');
     }
     if (!formData.mitarbeiteranzahl) newErrors.mitarbeiteranzahl = t('potenzialanalyse.employeesRequired');
-    if (!formData.anliegen) newErrors.anliegen = t('potenzialanalyse.concernRequired');
-    if (detailVisibility.bav && !formData.fokus_bav) newErrors.fokus_bav = t('potenzialanalyse.bavRequired');
-    if (detailVisibility.bkv && !formData.fokus_bkv) newErrors.fokus_bkv = t('potenzialanalyse.bkvRequired');
+    if (!formData.fokus_bav) newErrors.fokus_bav = t('potenzialanalyse.bavRequired');
+    if (!formData.fokus_bkv) newErrors.fokus_bkv = t('potenzialanalyse.bkvRequired');
     
     setErrors(newErrors);
     const firstInvalidField = Object.keys(newErrors)[0];
@@ -125,31 +114,37 @@ const PotenzialanalysePage = () => {
     setSubmitStatus(t('potenzialanalyse.submittingStatus'));
 
     try {
-      const emailMessage = buildPotentialAnalysisEmailMessage(formData);
-      const databaseRecord = createPotentialAnalysisDatabaseRecord(formData);
       const emailRequest = Promise.resolve().then(() => emailjsService.sendEmail({
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone,
           company: formData.company,
-          message: emailMessage
+          message: `Mitarbeiteranzahl: ${formData.mitarbeiteranzahl}\nFokus bAV: ${formData.fokus_bav}\nFokus bKV: ${formData.fokus_bkv}`
         }, 'Potenzialanalyse'));
 
       const databaseRequest = Promise.resolve().then(async () => {
-        const { error: dbError } = await supabase
-          .from('potenzialanalyse_anfragen')
-          .insert([databaseRecord]);
+        const { error: dbError } = await supabase.from('potenzialanalyse_anfragen').insert([
+          {
+            name: formData.name,
+            company: formData.company,
+            email: formData.email,
+            phone: formData.phone,
+            mitarbeiteranzahl: formData.mitarbeiteranzahl,
+            fokus_bav: formData.fokus_bav,
+            fokus_bkv: formData.fokus_bkv
+          }
+        ]);
         if (dbError) throw dbError;
       });
 
       const [emailResult, databaseResult] = await Promise.allSettled([emailRequest, databaseRequest]);
-      const {
-        delivery,
-        hasSuccessfulDelivery,
-        isPartialDelivery,
-      } = summarizePotentialAnalysisDelivery({ emailResult, databaseResult });
+      const delivery = {
+        emailjs: emailResult.status,
+        supabase: databaseResult.status,
+      };
+      const successfulChannels = Object.values(delivery).filter((status) => status === 'fulfilled').length;
 
-      if (!hasSuccessfulDelivery) {
+      if (successfulChannels === 0) {
         setSubmitError(t('potenzialanalyse.errorSendDesc'));
         setSubmitStatus(t('potenzialanalyse.errorLiveStatus'));
         toast({
@@ -160,6 +155,7 @@ const PotenzialanalysePage = () => {
         return;
       }
 
+      const isPartialDelivery = successfulChannels === 1;
       const createdAt = Date.now();
       setSubmissionComplete(true);
       setSubmitStatus(isPartialDelivery
@@ -214,9 +210,8 @@ const PotenzialanalysePage = () => {
         schemaMarkup={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": t('potenzialanalyse.schemaName'),
-          "description": t('potenzialanalyse.schemaDescription'),
-          "inLanguage": lang === 'en' ? 'en-US' : 'de-DE',
+          "name": "Kostenlose Potenzialanalyse",
+          "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
           "url": canonicalUrl,
           "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
         }}
@@ -353,55 +348,36 @@ const PotenzialanalysePage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="anliegen" className="text-gray-900 font-medium">{t('potenzialanalyse.concern')}</Label>
-                <Select disabled={isSubmitting || submissionComplete} value={formData.anliegen} onValueChange={(val) => handleSelectChange('anliegen', val)}>
-                  <SelectTrigger id="anliegen" aria-required="true" aria-invalid={Boolean(errors.anliegen)} aria-describedby={errors.anliegen ? 'concern-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.anliegen ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                    <SelectValue placeholder={t('potenzialanalyse.concernPlaceholder')} />
+                <Label htmlFor="fokus_bav" className="text-gray-900 font-medium">{t('potenzialanalyse.bavFocus')}</Label>
+                <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bav} onValueChange={(val) => handleSelectChange('fokus_bav', val)}>
+                  <SelectTrigger id="fokus_bav" aria-invalid={Boolean(errors.fokus_bav)} aria-describedby={errors.fokus_bav ? 'bav-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bav ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                    <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="kassenboost">{t('potenzialanalyse.concernOptions.kassenboost')}</SelectItem>
-                    <SelectItem value="bav">{t('potenzialanalyse.concernOptions.bav')}</SelectItem>
-                    <SelectItem value="bkv">{t('potenzialanalyse.concernOptions.bkv')}</SelectItem>
-                    <SelectItem value="gesamtsystem">{t('potenzialanalyse.concernOptions.gesamtsystem')}</SelectItem>
-                    <SelectItem value="unsicher">{t('potenzialanalyse.concernOptions.unsicher')}</SelectItem>
+                    <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
+                    <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
+                    <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
+                    <SelectItem value="Noch unsicher">{t('potenzialanalyse.unsure')}</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors.anliegen && <p id="concern-error" className="text-sm text-red-600">{errors.anliegen}</p>}
+                {errors.fokus_bav && <p id="bav-error" className="text-sm text-red-600">{errors.fokus_bav}</p>}
               </div>
 
-              {detailVisibility.bav && (
-                <div className="space-y-2">
-                  <Label htmlFor="fokus_bav" className="text-gray-900 font-medium">{t('potenzialanalyse.bavFocus')}</Label>
-                  <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bav} onValueChange={(val) => handleSelectChange('fokus_bav', val)}>
-                    <SelectTrigger id="fokus_bav" aria-required="true" aria-invalid={Boolean(errors.fokus_bav)} aria-describedby={errors.fokus_bav ? 'bav-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bav ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                      <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
-                      <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
-                      <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.fokus_bav && <p id="bav-error" className="text-sm text-red-600">{errors.fokus_bav}</p>}
-                </div>
-              )}
-
-              {detailVisibility.bkv && (
-                <div className="space-y-2">
-                  <Label htmlFor="fokus_bkv" className="text-gray-900 font-medium">{t('potenzialanalyse.bkvFocus')}</Label>
-                  <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bkv} onValueChange={(val) => handleSelectChange('fokus_bkv', val)}>
-                    <SelectTrigger id="fokus_bkv" aria-required="true" aria-invalid={Boolean(errors.fokus_bkv)} aria-describedby={errors.fokus_bkv ? 'bkv-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bkv ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                      <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
-                      <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
-                      <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.fokus_bkv && <p id="bkv-error" className="text-sm text-red-600">{errors.fokus_bkv}</p>}
-                </div>
-              )}
+              <div className="space-y-2">
+                <Label htmlFor="fokus_bkv" className="text-gray-900 font-medium">{t('potenzialanalyse.bkvFocus')}</Label>
+                <Select disabled={isSubmitting || submissionComplete} value={formData.fokus_bkv} onValueChange={(val) => handleSelectChange('fokus_bkv', val)}>
+                  <SelectTrigger id="fokus_bkv" aria-invalid={Boolean(errors.fokus_bkv)} aria-describedby={errors.fokus_bkv ? 'bkv-error' : undefined} className={`w-full py-3 px-4 border-gray-200 focus:ring-gray-300 shadow-sm text-gray-900 ${errors.fokus_bkv ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                    <SelectValue placeholder={t('potenzialanalyse.selectPlaceholder')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Ja">{t('potenzialanalyse.yesStrong')}</SelectItem>
+                    <SelectItem value="Eher Ja">{t('potenzialanalyse.yesRather')}</SelectItem>
+                    <SelectItem value="Nein">{t('potenzialanalyse.noCurrently')}</SelectItem>
+                    <SelectItem value="Noch unsicher">{t('potenzialanalyse.unsure')}</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.fokus_bkv && <p id="bkv-error" className="text-sm text-red-600">{errors.fokus_bkv}</p>}
+              </div>
 
               {submitError && (
                 <div role="alert" aria-live="assertive" className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-800 text-sm">

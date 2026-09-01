@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
-import { ArrowRight, TrendingUp, TrendingDown, Info } from 'lucide-react';
+import { TrendingUp, TrendingDown, Info, ArrowRight } from 'lucide-react';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 
 const CompoundInterestCalculator = () => {
@@ -50,7 +50,7 @@ const CompoundInterestCalculator = () => {
               Berechnen Sie hier, wie sich kleine Unterschiede im Zinssatz über die Jahre auf Ihr Vermögen auswirken.
             </p>
             <div className="flex items-center gap-2 text-lg font-semibold text-slate-800 bg-slate-50 p-4 rounded-xl border border-slate-100 inline-flex">
-              Der Beweis in Zahlen <ArrowRight className="h-5 w-5 text-healio-primary" aria-hidden="true" />
+              Der Beweis in Zahlen: <ArrowRight className="inline h-5 w-5" aria-hidden="true" />
             </div>
           </motion.div>
 

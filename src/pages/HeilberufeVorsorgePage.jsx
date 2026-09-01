@@ -39,40 +39,40 @@ const SectionDivider = ({ variant = 'light' }) => {
 
 const pillarFriendlyIcons = [
   [
-    { icon: 'protection-path', tone: 'mint' },
-    { icon: 'ongoing-service', tone: 'butter' },
-    { icon: 'document-check', tone: 'lavender' },
-    { icon: 'clear-comparison', tone: 'sky' },
+    { emoji: '🛡️', tone: 'mint' },
+    { emoji: '⏱️', tone: 'butter' },
+    { emoji: '🔒', tone: 'lavender' },
+    { emoji: '⚖️', tone: 'sky' },
   ],
   [
-    { icon: 'active-wellbeing', tone: 'sky' },
-    { icon: 'pension-growth', tone: 'butter' },
-    { icon: 'prevention-care', tone: 'coral' },
-    { icon: 'health-budget', tone: 'mint' },
+    { emoji: '🏃', tone: 'sky' },
+    { emoji: '🪙', tone: 'butter' },
+    { emoji: '❤️‍🩹', tone: 'coral' },
+    { emoji: '💚', tone: 'mint' },
   ],
 ];
 
 const mehrwertFriendlyIcons = {
-  TrendingDown: { icon: 'business-expense', tone: 'sky' },
-  Shield: { icon: 'protection-path', tone: 'mint' },
-  Calculator: { icon: 'concept-calculator', tone: 'butter' },
+  TrendingDown: { emoji: '📉', tone: 'sky' },
+  Shield: { emoji: '🛡️', tone: 'mint' },
+  Calculator: { emoji: '🧮', tone: 'butter' },
 };
 
 const exclusivityFriendlyIcons = [
-  { icon: 'ongoing-service', tone: 'mint' },
-  { icon: 'bonus-reward', tone: 'sky' },
-  { icon: 'independent-guidance', tone: 'butter' },
+  { emoji: '🤝', tone: 'mint' },
+  { emoji: '🏅', tone: 'sky' },
+  { emoji: '🔑', tone: 'butter' },
 ];
 
 const problemFriendlyIcons = [
-  { icon: 'business-expense', tone: 'coral' },
-  { icon: 'ongoing-service', tone: 'butter' },
-  { icon: 'document-check', tone: 'lavender' },
+  { emoji: '📉', tone: 'coral' },
+  { emoji: '⏳', tone: 'butter' },
+  { emoji: '🗂️', tone: 'lavender' },
 ];
 
 const ctaFriendlyIcons = [
-  { icon: 'personal-support', tone: 'mint' },
-  { icon: 'ambulant-care', tone: 'sky' },
+  { emoji: '🗓️', tone: 'mint' },
+  { emoji: '🩺', tone: 'sky' },
 ];
 
 const HeilberufeVorsorgePage = () => {
@@ -216,7 +216,7 @@ const HeilberufeVorsorgePage = () => {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
                     <FriendlyIcon
-                      icon={friendlyIcon.icon}
+                      emoji={friendlyIcon.emoji}
                       tone={friendlyIcon.tone}
                       size="sm"
                       className="mb-4"
@@ -270,7 +270,7 @@ const HeilberufeVorsorgePage = () => {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
                     <FriendlyIcon
-                      icon={friendlyIcon.icon}
+                      emoji={friendlyIcon.emoji}
                       tone={friendlyIcon.tone}
                       size="md"
                       className="mb-5 transition-transform group-hover:-translate-y-1 group-hover:scale-105"
@@ -380,7 +380,8 @@ const HeilberufeVorsorgePage = () => {
                             className={`group bg-white rounded-xl p-5 border border-slate-200 transition-all ${colorScheme.cardHover} hover:shadow-md hover:-translate-y-0.5`}
                           >
                             <FriendlyIcon
-                              icon={friendlyIcon.icon}
+                              emoji={friendlyIcon.emoji}
+                              label={block.title}
                               tone={friendlyIcon.tone}
                               size="sm"
                               className="mb-3 transition-transform group-hover:-translate-y-1 group-hover:rotate-2"
@@ -428,7 +429,7 @@ const HeilberufeVorsorgePage = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {mehrwertColumns.map((col, i) => {
-                const friendlyIcon = mehrwertFriendlyIcons[col.icon] || { icon: 'protection-path', tone: 'mint' };
+                const friendlyIcon = mehrwertFriendlyIcons[col.icon] || { emoji: '✅', tone: 'mint' };
                 return (
                   <motion.div
                     key={i}
@@ -439,7 +440,7 @@ const HeilberufeVorsorgePage = () => {
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
                     <div className="flex items-center gap-4 mb-6">
-                      <FriendlyIcon icon={friendlyIcon.icon} tone={friendlyIcon.tone} />
+                      <FriendlyIcon emoji={friendlyIcon.emoji} label={col.title} tone={friendlyIcon.tone} />
                       <div>
                         <p className="text-xs font-semibold uppercase tracking-wider text-white/60">
                           {col.title}
@@ -644,7 +645,7 @@ const HeilberufeVorsorgePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <FriendlyIcon
-                  icon={ctaFriendlyIcons[0].icon}
+                  emoji={ctaFriendlyIcons[0].emoji}
                   tone={ctaFriendlyIcons[0].tone}
                   size="sm"
                   className="mb-5"
@@ -663,7 +664,7 @@ const HeilberufeVorsorgePage = () => {
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <FriendlyIcon
-                  icon={ctaFriendlyIcons[1].icon}
+                  emoji={ctaFriendlyIcons[1].emoji}
                   tone={ctaFriendlyIcons[1].tone}
                   size="sm"
                   className="mb-5"

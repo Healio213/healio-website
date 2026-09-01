@@ -237,19 +237,19 @@ const LebenshilfePage = () => {
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {[
                 {
-                  icon: 'team-introduction',
+                  emoji: '🏢',
                   tone: 'sky',
                   titel: '4,6 % zahlt Ihr Arbeitgeber',
                   text: 'Die Lebenshilfe beteiligt sich mit 4,6 Prozent Ihres Bruttogehalts an Ihrer Altersvorsorge. Dieses Geld kommt zusätzlich zu Ihrem Gehalt, Sie müssen dafür nichts tun.'
                 },
                 {
-                  icon: 'pension-growth',
+                  emoji: '🪙',
                   tone: 'butter',
                   titel: '2,3 % sind Ihr Pflichtanteil',
                   text: 'Als Eigenanteil sind 2,3 Prozent vom Brutto verpflichtend vorgesehen. Er wird direkt aus dem Bruttogehalt bespart und mindert dadurch Ihre Steuer- und Abgabenlast.'
                 },
                 {
-                  icon: 'health-budget',
+                  emoji: '🐷',
                   tone: 'mint',
                   titel: `Ihr Spielraum bis ${SV_FREI_MONAT} €`,
                   text: `Bis zu 4 Prozent der Beitragsbemessungsgrenze (${JAHR}: ${SV_FREI_MONAT} Euro im Monat) bleibt Entgeltumwandlung sozialabgabenfrei, bis ${STEUERFREI_MONAT} Euro sogar steuerfrei. Die Differenz zu Ihrem Pflichtanteil ist Ihre persönliche Lücke.`
@@ -263,7 +263,7 @@ const LebenshilfePage = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <FriendlyIcon icon={karte.icon} tone={karte.tone} size="sm" className="mb-5" />
+                  <FriendlyIcon emoji={karte.emoji} label={karte.titel} tone={karte.tone} size="sm" className="mb-5" />
                   <h3 className="text-xl font-semibold text-slate-900 mb-3">{karte.titel}</h3>
                   <p className="text-slate-600 leading-relaxed">{karte.text}</p>
                 </motion.div>

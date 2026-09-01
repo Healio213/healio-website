@@ -111,12 +111,12 @@ const FIRST_MESSAGES = {
       delayed_prompt: 'Sehr gern. Der Klinikschutz kann dir je nach Tarif Chefarztbehandlung, ein besseres Zimmer und freie Krankenhauswahl bieten. Soll ich dir zuerst die Unterschiede erklären oder direkt beim Abschluss helfen?',
     },
     partner: {
-      global_launcher: 'Hallo, ich bin Nita. Soll ich dir die Healio-Partnerschaft kurz erklären oder dich direkt zum passenden nächsten Schritt führen?',
-      delayed_prompt: 'Sehr gern. Ich erkläre dir kurz, wie die kostenlose Healio-Partnerschaft funktioniert und wie deine Patienten davon profitieren. Womit möchtest du anfangen?',
+      global_launcher: 'Hallo, ich bin Nita, die digitale Healio-Assistentin. Du musst keine Tarife erklären oder empfehlen. Soll ich dir zuerst die drei Rollen oder den Ablauf bis zum Kennenlernen zeigen?',
+      delayed_prompt: 'Sehr gern. Deine Praxis informiert neutral, Patienten entscheiden freiwillig und Healio prüft und berät individuell. Soll ich mit den Rollen oder mit dem Ablauf starten?',
     },
     midwives: {
-      global_launcher: 'Hallo, ich bin Nita. Soll ich dir das Healio-Konzept für Hebammen kurz erklären oder dich direkt zum passenden nächsten Schritt führen?',
-      delayed_prompt: 'Sehr gern. Ich erkläre dir kurz, wie Familien profitieren und wie die Zusammenarbeit für Hebammen funktioniert. Womit möchtest du anfangen?',
+      global_launcher: 'Hallo, ich bin Nita, die digitale Healio-Assistentin. Du musst keine Tarife erklären oder empfehlen. Soll ich dir zuerst zeigen, wie du Familien neutral informierst oder wie Healio die nächsten Schritte übernimmt?',
+      delayed_prompt: 'Sehr gern. Du gibst Familien einen neutralen Hinweis; Healio prüft Voraussetzungen und berät individuell. Soll ich zuerst mögliche Bausteine, die Kindernachversicherung oder die Zusammenarbeit erklären?',
     },
     dentists: {
       global_launcher: 'Hallo, ich bin Nita. Soll ich dir das Healio-Konzept für Zahnarztpraxen kurz erklären oder dich direkt zum passenden nächsten Schritt führen?',
@@ -145,12 +145,12 @@ const FIRST_MESSAGES = {
       delayed_prompt: 'Of course. Depending on the plan, hospital cover can include specialist treatment, an upgraded room, and free choice of hospital. Would you like the differences explained first or help with the application?',
     },
     partner: {
-      global_launcher: 'Hi, I’m Nita. Would you like a short explanation of the Healio partnership or help with the next step?',
-      delayed_prompt: 'Of course. I can briefly explain how the free Healio partnership works and how patients benefit. Where would you like to start?',
+      global_launcher: 'Hi, I’m Nita, Healio’s digital assistant. You do not need to explain or recommend plans. Would you like to start with the three roles or the path to an introductory meeting?',
+      delayed_prompt: 'Of course. Your practice provides neutral information, patients decide freely, and Healio checks eligibility and advises individually. Shall I start with the roles or the process?',
     },
     midwives: {
-      global_launcher: 'Hi, I’m Nita. Would you like a short explanation of the Healio concept for midwives or help with the next step?',
-      delayed_prompt: 'Of course. I can briefly explain how families benefit and how the partnership works for midwives. Where would you like to start?',
+      global_launcher: 'Hi, I’m Nita, Healio’s digital assistant. You do not need to explain or recommend plans. Would you like to see how to provide neutral information to families or how Healio handles the next steps?',
+      delayed_prompt: 'Of course. You give families a neutral pointer; Healio checks eligibility and advises individually. Shall I start with possible components, newborn enrolment, or the partnership process?',
     },
     dentists: {
       global_launcher: 'Hi, I’m Nita. Would you like a short explanation of the Healio concept for dental practices or help with the next step?',

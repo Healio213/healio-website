@@ -9,7 +9,7 @@
     "titleHighlight": "Vorsorge richtig gestalten.",
     "description": "Einzelne Benefits sind schnell gekauft. Healio macht daraus ein betreutes System aus bAV, bKV, BGM-Koordination und verständlicher Mitarbeiterkommunikation.",
     "analysisCta": "Vorsorge-Check starten",
-    "solutionsCta": "30-Jahre-Wirkung ansehen",
+    "solutionsCta": "Lösungen ansehen",
     "proof": ["Unabhängiger Makler", "Bestand einbezogen", "Dauerhaft begleitet"]
   },
   "realityCheck": {
@@ -163,35 +163,18 @@
     ]
   },
   "workforce": {
-    "eyebrow": "KassenBoost für Mitarbeiter",
-    "title": "Ein guter Vergleich braucht keinen Arbeitgeberblick.",
-    "description": "Sie geben Ihren Mitarbeitern einen freiwilligen, kostenlosen Zugang zu KassenBoost. Der Vergleich funktioniert ohne Kontaktdaten und ohne Weitergabe an Healio oder das Unternehmen.",
-    "cardEyebrow": "Privater Mitarbeiterzugang",
-    "cardTitle": "Mitarbeiter vergleichen selbst.",
-    "privacyTitle": "Was privat bleibt",
-    "privacyDescription": "Individuelle Eingaben und Ergebnisse bleiben beim Mitarbeiter. Sie werden weder an den Arbeitgeber noch an Healio übermittelt.",
-    "points": ["Freiwillig und kostenlos", "Ohne Kontaktdaten", "Keine Weitergabe individueller Ergebnisse"],
-    "primaryCta": "KassenBoost öffnen",
-    "secondaryCta": "Zugang für die Belegschaft besprechen",
-    "note": "Die feste Weiterleitung übermittelt keine Mitarbeiterdaten. KassenBoost dient der privaten Orientierung; jede weitere Entscheidung trifft der Mitarbeiter selbst."
-  },
-  "bavLeverage": {
-    "eyebrow": "Arbeitgeberfinanzierte bAV",
-    "title": "676 EUR Vorsorgebeitrag. Rund 75 EUR möglicher Nettoeffekt.*",
-    "netEffectExplanation": "Im Standardbeispiel kann das laufende Auszahlungsnetto durch zusätzliche Sozialabgaben um rund 71 bis 74 EUR sinken – gerundet rund 75 EUR.",
-    "description": "Der Hebel wird sichtbar, wenn Vorsorgebeitrag, Sozialabgaben und langfristige Modellrendite sauber voneinander getrennt werden.",
-    "splitTitle": "Die 676 EUR bestehen im Standardmodell aus zwei Teilen:",
-    "splitFree": "338 EUR steuer- und sozialabgabenfrei",
-    "splitLiable": "338 EUR steuerfrei, grundsätzlich sozialversicherungspflichtig",
-    "legalSource": "Rechtsgrundlagen und Annahmen im Rechner",
-    "employerCostLabel": "Arbeitgeberaufwand vollständig betrachten",
-    "employerCost": "Neben dem Vorsorgebeitrag können Arbeitgeberanteile zur Sozialversicherung auf den grundsätzlich beitragspflichtigen Teil anfallen. Im Standardmodell sind das rund 71 EUR zusätzlich – der Gesamtaufwand liegt damit bei rund 747 EUR monatlich je Teilnehmer.",
-    "returnLabel": "Offensives, belegtes Standardszenario",
-    "standardFormula": "10 % − 2 Prozentpunkte = 8 % Modellrendite",
-    "historicalContext": "Historischer Kontext: MSCI World USD Net Return, Juli 2011 bis Juli 2026, Stichtag 31.07.2026: 11,10 % p. a. Mathematisch nach derselben Kostenannahme 9,10 % p. a.",
-    "source": "MSCI-Factsheet öffnen",
-    "disclaimer": "* Vereinfachtes Standardmodell für 2026. Der mögliche Nettoeffekt und der Arbeitgeberaufwand hängen unter anderem von Gehalt, Beitragsbemessungsgrenzen, Krankenkasse und Pflegeversicherungsstatus ab. Die Renditeangaben sind Modellannahmen beziehungsweise historische Einordnung, keine Prognose oder Garantie. Eine Nettorente wird nicht versprochen.",
-    "cta": "Mit der Belegschaft rechnen"
+    "eyebrow": "Alternative ohne eigenes Benefit-Budget",
+    "title": "Wenn das Arbeitgeberbudget noch nicht bereitsteht, muss Gesundheit nicht warten.",
+    "description": "Das Unternehmen ermöglicht den Zugang und die interne Kommunikation. Die Mitarbeiter entscheiden freiwillig, ob das Healio Konzept zu ihnen passt. So kann Gesundheitszugang bereits entstehen, bevor ein arbeitgeberfinanziertes Budget beschlossen wird.",
+    "cardEyebrow": "Einstieg ohne Leistungsbudget",
+    "employerAmount": "0 EUR",
+    "employerLabel": "Versicherungsbeitrag des Arbeitgebers",
+    "budgetLabel": "Für geeignete Mitarbeiter möglich",
+    "budgetAmount": "bis zu 3.000 EUR",
+    "budgetSuffix": "mögliche Versicherungsleistungen in 2 Jahren. Ein passender Kassenbonus kann den Eigenbeitrag ganz oder teilweise ausgleichen.",
+    "points": ["Kein Arbeitgeberbeitrag zur Versicherung erforderlich", "Freiwillige Entscheidung der Mitarbeiter", "Information und persönliche Begleitung durch Healio"],
+    "cta": "Healio für die Belegschaft prüfen",
+    "note": "Die Versicherung wird von den Mitarbeitern selbst abgeschlossen und finanziert. Der Kassenbonus kann Beiträge ganz oder teilweise ausgleichen; ein vollständiger Ausgleich ist nicht garantiert. Für den passenden Bonus kann ein Krankenkassenwechsel erforderlich sein. Leistungen, Beiträge und Bonus hängen von Tarif, persönlicher Situation und tatsächlicher Bonusnutzung ab."
   },
   "faq": {
     "eyebrow": "Vor der Entscheidung",
@@ -212,7 +195,7 @@
       },
       {
         "question": "Was, wenn heute kein eigenes Benefit-Budget möglich ist?",
-        "answer": "Dann kann das Unternehmen freiwillig auf den kostenlosen KassenBoost-Vergleich hinweisen. Mitarbeiter nutzen ihn privat und ohne Kontaktdaten; individuelle Eingaben und Ergebnisse werden weder dem Arbeitgeber noch Healio übermittelt. Erst wenn sich ein Mitarbeiter später für eine getrennte Beratung oder Lösung entscheidet, können daraus Kosten entstehen."
+        "answer": "Dann kann das Healio Mitarbeiterkonzept als freiwilliger Einstieg ohne arbeitgeberfinanzierten Leistungsbeitrag genutzt werden. Das Unternehmen ermöglicht die interne Information; die Entscheidung und Finanzierung liegen beim Mitarbeiter."
       }
     ]
   },
@@ -224,151 +207,11 @@
     "ongoing": "Einführung ist der Anfang – nicht das Ende",
     "contact": "Healio bleibt zentraler Ansprechpartner"
   },
-  "bavDecisionCalculator": {
-    "seo": {
-      "title": "bAV-Entscheidungsrechner 2026 | Healio",
-      "description": "Arbeitgeberfinanzierte bAV mit 2026er Beitragsgrenzen, Sozialabgaben und Kapitalprojektion transparent modellieren."
-    },
-    "hero": {
-      "eyebrow": "bAV-Entscheidungsrechner 2026",
-      "title": "Was 676 EUR Vorsorge für Ihr Unternehmen wirklich bedeuten.",
-      "description": "Schieben Sie die wichtigsten Stellschrauben selbst. Der Rechner trennt Arbeitgeberaufwand, mögliche Mitarbeiterwirkung und langfristige Kapitalprojektion – ohne eine Nettorente oder Wirkung zu versprechen.",
-      "back": "Zur Unternehmensseite"
-    },
-    "controls": {
-      "title": "Ihr Unternehmensmodell",
-      "description": "Die Werte sind eine Orientierung für das Erstgespräch. Die endgültige Berechnung erfolgt je Mitarbeiter und Abrechnungsmonat.",
-      "employees": {
-        "label": "Beschäftigte",
-        "hint": "Gesamte Belegschaft, nicht nur erwartete Teilnehmer"
-      },
-      "participation": {
-        "label": "Teilnahmequote",
-        "hint": "Anteil der Beschäftigten im Modell"
-      },
-      "salary": {
-        "label": "Durchschnittliches Monatsbrutto",
-        "hint": "Modellkorridor 2.001–6.450 EUR: oberhalb des Übergangsbereichs und bis zur allgemeinen Jahresarbeitsentgeltgrenze 2026"
-      },
-      "contribution": {
-        "label": "Arbeitgeberbeitrag pro Teilnehmer und Monat",
-        "hint": "Vollständig arbeitgeberfinanziert; steuerfreier Höchstrahmen 2026",
-        "splitTitle": "Der 338-EUR-Knick",
-        "splitFree": "Die ersten 338 EUR sind im Modell steuer- und sozialversicherungsfrei.",
-        "splitLiable": "Die weiteren 338 EUR bleiben steuerfrei, sind aber grundsätzlich sozialversicherungspflichtig.",
-        "currentLiable": "Davon im Modell grundsätzlich SV-pflichtig: {{amount}}"
-      },
-      "duration": {
-        "label": "Laufzeit",
-        "hint": "Modelliert mit monatlicher Zahlung am Monatsende",
-        "value": "{{years}} Jahre"
-      },
-      "revenue": {
-        "label": "Jahresumsatz",
-        "hint": "Dient nur zur wirtschaftlichen Einordnung"
-      },
-      "returnRate": {
-        "label": "Marktrendite vor Effektivkosten",
-        "hint": "Offensiv modelliert, historisch eingeordnet – keine Prognose",
-        "standard": "Standardszenario",
-        "historical": "Historischer 15-Jahres-Wert",
-        "lower": "Niedrigeres Szenario",
-        "standardDescription": "10 % Marktszenario vor Produktkosten. Bei {{costs}} Prozentpunkten Effektivkosten ergibt das {{netRate}} % Modellrendite nach Kosten.",
-        "historicalDescription": "Der offizielle MSCI World USD Net Return stieg von Juli 2011 bis Juli 2026 von 100 auf 484,83. Das entspricht {{rate}} % p. a.; rechnerisch {{netRate}} % nach der gewählten Kostenannahme von {{costs}} Prozentpunkten."
-      },
-      "costs": {
-        "label": "Renditeminderung durch Effektivkosten",
-        "hint": "Im Angebot durch die konkrete Effektivkostenangabe ersetzen",
-        "description": "Standardmäßig ziehen wir 2,00 Prozentpunkte pro Jahr ab. Das liegt leicht über dem von der BaFin für 30-jährige fondsgebundene Musterverträge ausgewiesenen gewichteten Mittel.",
-        "formulaExample": "10 % − 2 % = 8 %",
-        "formula": "{{gross}} % − {{costs}} % = {{net}} % Modellrendite",
-        "method": "Rechenweg: Die effektive Jahresrendite wird in die äquivalente Monatsrendite umgerechnet. Die Beiträge fließen nachschüssig am Monatsende."
-      }
-    },
-    "results": {
-      "eyebrow": "Das Ergebnis Ihres Modells",
-      "participants": "{{count}} Teilnehmer",
-      "announcement": "{{count}} Teilnehmer. Modellierter Gesamtaufwand {{annualCost}} pro Jahr. Modelliertes Kapital {{capital}} je Teilnehmer.",
-      "company": {
-        "title": "Unternehmensaufwand",
-        "bav": "bAV-Beiträge pro Jahr",
-        "social": "zusätzliche Arbeitgeber-SV pro Jahr",
-        "total": "modellierter Gesamtaufwand pro Jahr",
-        "payroll": "Anteil an der Brutto-Payroll",
-        "revenue": "Anteil am Jahresumsatz"
-      },
-      "employee": {
-        "title": "Mitarbeiterwirkung",
-        "credit": "bAV-Gutschrift pro Monat",
-        "netImpact": "mögliche zusätzliche SV-Belastung pro Monat",
-        "publicExample": "Im gewählten Modell stehen {{credit}} Vorsorgebeitrag einer möglichen zusätzlichen SV-Belastung von {{impact}} gegenüber.",
-        "headroom": "Die konkrete Belastung sinkt, wenn Beitragsbemessungsgrenzen teilweise oder vollständig erreicht sind."
-      },
-      "capital": {
-        "title": "Kapitalprojektion",
-        "formula": "Gewählte Modellrendite",
-        "contributionsPerPerson": "Einzahlungen je Teilnehmer",
-        "capitalPerPerson": "modelliertes Kapital je Teilnehmer",
-        "capitalGroup": "modelliertes Kapital der Gruppe"
-      }
-    },
-    "sources": {
-      "eyebrow": "Annahmen offenlegen",
-      "title": "Welche Primärquellen hinter dem Modell 2026 stehen.",
-      "msci": {
-        "publisher": "MSCI World · USD Net Return",
-        "description": "Das MSCI-Factsheet per 31. Juli 2026 zeigt für Juli 2011 bis Juli 2026 eine kumulative Entwicklung von 100 auf 484,83. Daraus ergeben sich rechnerisch 11,10 % p. a. in USD; nach pauschal 2 Prozentpunkten Kosten wären es 9,10 %. Net Return bezeichnet bei MSCI eine Indexmethodik unter Berücksichtigung angenommener Quellensteuern auf Dividenden, nicht die Rendite nach individuellen Produktkosten. Historische Einordnung, keine Zukunftsgarantie.",
-        "url": "https://www.msci.com/documents/10199/255599/msci-world-index-usd-net.pdf"
-      },
-      "msciEur": {
-        "publisher": "MSCI · World Index in EUR",
-        "description": "Die offizielle EUR-Net-Return-Reihe zeigt, dass Zeitraum, Währung und Return-Variante das Ergebnis deutlich verändern können.",
-        "url": "https://www.msci.com/resources/factsheets/index_fact_sheet/msci-world-index-eur-net.pdf"
-      },
-      "bafin": {
-        "publisher": "BaFin · Effektivkosten",
-        "description": "Für fondsgebundene Verträge mit 30 Jahren Laufzeit und monatlichem Beitrag lag das gewichtete Mittel der untersuchten meistverkauften Produkte bei 1,90 Prozentpunkten Effektivkosten; der Median lag bei 1,64.",
-        "url": "https://bafin.de/SharedDocs/Veroeffentlichungen/DE/Fachartikel/2022/fa_bj_2203_Effektivkosten_Versicherer.html"
-      },
-      "drv": {
-        "publisher": "Deutsche Rentenversicherung · bAV-Fördergrenzen",
-        "description": "Die Deutsche Rentenversicherung bestätigt für Arbeitgeberbeiträge über Pensionsfonds, Pensionskasse oder Direktversicherung im Jahr 2026: bis 8.112 EUR jährlich steuerfrei, davon bis 4.056 EUR jährlich sozialversicherungsfrei.",
-        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Experten/Arbeitgeber-und-Steuerberater/summa-summarum/Lexikon/B/beitragsfreiheit_von_arbeitgeberbeitraegen_zur_betrieblichen_altersversorgung.html"
-      },
-      "federalGovernment": {
-        "publisher": "Bundesregierung · Rechengrößen 2026",
-        "description": "Die amtlichen Monatswerte 2026 betragen 8.450 EUR für die BBG der Renten- und Arbeitslosenversicherung, 5.812,50 EUR für die BBG der Kranken- und Pflegeversicherung sowie 6.450 EUR für die allgemeine Jahresarbeitsentgeltgrenze.",
-        "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2386514"
-      },
-      "bmgHealth": {
-        "publisher": "Bundesgesundheitsministerium · GKV",
-        "description": "Das BMG weist für 2026 den allgemeinen GKV-Beitragssatz von 14,6 % und den durchschnittlichen Zusatzbeitragssatz von 2,9 % aus; der kassenindividuelle Satz kann abweichen.",
-        "url": "https://www.bundesgesundheitsministerium.de/beitraege/seite"
-      },
-      "bmgCare": {
-        "publisher": "Bundesgesundheitsministerium · Pflegeversicherung",
-        "description": "Das BMG weist für die soziale Pflegeversicherung einen allgemeinen Beitragssatz von 3,6 % aus. Kinderzahl, Alter und Beschäftigungsort können die Aufteilung verändern.",
-        "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/die-pflegeversicherung/finanzierung"
-      },
-      "open": "Primärquelle öffnen"
-    },
-    "disclaimers": {
-      "assumptions": "Standardannahme für die Sozialabgaben: gesetzlich versichert, durchschnittlicher Zusatzbeitrag von 2,9 %, ein Kind und Beschäftigung außerhalb Sachsens.",
-      "legalFramework": "Das Modell setzt für das erste Dienstverhältnis einen nach § 3 Nr. 63 EStG geeigneten Durchführungsweg voraus: Pensionsfonds, Pensionskasse oder Direktversicherung. Es unterstellt, dass die Jahresgrenzen 2026 von 8.112 EUR steuerfrei und 4.056 EUR sozialversicherungsfrei nicht durch andere Beiträge ausgeschöpft sind und zwölf gleich hohe Monatsbeiträge geleistet werden. 676 EUR und 338 EUR sind die daraus abgeleiteten Monatswerte.",
-      "projection": "Vereinfachte Modellrechnung, keine Prognose oder Garantie. Die gewählte vereinfachte Renditeminderung ist berücksichtigt; die konkreten Tarifkosten und ihre tatsächliche Wirkung sind ohne Produktunterlagen nicht vollständig abgebildet. Steuern, Inflation sowie Kranken- und Pflegeversicherungsbeiträge in der Leistungsphase sind nicht eingerechnet. Vergangene Wertentwicklung ist kein verlässlicher Indikator für künftige Ergebnisse.",
-      "payroll": "Das Durchschnittsbrutto ist nur eine Planungsnäherung. Beitragsbemessungsgrenzen, Krankenkasse, Pflegeversicherungsstatus, Beschäftigungsort und weitere Umlagen müssen in der Payroll je Mitarbeiter und Abrechnungsmonat geprüft werden. Keine Steuer- oder Rechtsberatung."
-    },
-    "cta": {
-      "title": "Jetzt das Modell mit der echten Belegschaft prüfen.",
-      "description": "Im Vorsorge-Check ersetzen wir Annahmen durch Mitarbeiterstruktur, Payroll-Daten und konkrete Vertragskosten.",
-      "button": "Vorsorge-Check anfragen"
-    }
-  },
   "cta": {
     "eyebrow": "Jetzt statt irgendwann",
     "title": "30 Jahre lassen sich nicht nachholen.",
     "description": "Im Vorsorge-Check ordnen wir Ihre bestehende Versorgung ein, machen wirtschaftliche Hebel sichtbar und zeigen, welche Entscheidung heute wirklich ansteht.",
     "primary": "Vorsorge-Check starten",
-    "proof": ["45 Minuten", "unverbindlich", "mit erster Bestandsaufnahme"]
+    "proof": ["30 Minuten", "unverbindlich", "mit erster Bestandsaufnahme"]
   }
 }

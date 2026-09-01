@@ -4,6 +4,7 @@
     "title": "So good care does not stop at <highlight>out-of-pocket costs</highlight>.",
     "subtitle": "Depending on their tariff and personal eligibility, your patients may be able to use a health budget of up to <highlight>EUR 3,000 over two years</highlight>. Your practice provides neutral information. Healio checks, advises and supports.",
     "cta": "Book a 30-minute introduction",
+    "secondaryCta": "View the concept with Nita",
     "roleNote": "No insurance advice by the practice is required.",
     "imageAltMobile": "Consultation in a bright healthcare practice",
     "imageAltDesktop": "A confidential conversation between a therapist and patient",
@@ -11,8 +12,42 @@
     "videoPlayLabel": "Play explainer video",
     "videoFallback": "Your browser does not support video."
   },
+  "proof": {
+    "ariaLabel": "Responsibilities in the Healio partner concept",
+    "items": [
+      {
+        "title": "Practice informs",
+        "text": "You provide a neutral pointer without giving insurance advice."
+      },
+      {
+        "title": "Patients decide",
+        "text": "Interested patients choose whether they want to contact Healio."
+      },
+      {
+        "title": "Healio checks",
+        "text": "We clarify eligibility, advise individually and provide support."
+      }
+    ]
+  },
+  "explanationVideo": {
+    "title": "The partner concept at a glance",
+    "subtitle": "The approved Nita video will be added here. You can already clarify your questions directly with Nita.",
+    "status": "Nita video in preparation",
+    "message": "Until the approved video is ready, Nita can guide you through the concept directly.",
+    "points": [
+      "Clear responsibilities for practices, patients and Healio",
+      "Eligibility explained without blanket promises",
+      "Next step: a 30-minute introduction"
+    ],
+    "cta": "Clarify the concept with Nita",
+    "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
+    "fallback": "This video cannot be played in your browser.",
+    "avatarAlt": "Nita, Healio's digital assistant",
+    "assistantName": "Nita · Healio's digital assistant",
+    "error": "The video could not be loaded"
+  },
   "trust": {
-    "budget": "Up to EUR 3,000 health budget",
+    "budget": "Up to EUR 3,000 over two years may be available",
     "information": "Neutral patient information",
     "advice": "Healio advises and brokers",
     "meeting": "30-minute introduction"
@@ -34,10 +69,10 @@
   },
   "budget": {
     "title": "The <highlight>Healio health budget</highlight>",
-    "subtitle": "Depending on their personal situation, patients may be able to combine health insurer bonuses with supplementary insurance benefits. Healio checks eligibility individually and explains which components can actually be used.",
+    "subtitle": "Depending on the tariff and personal eligibility, patients may be able to use up to EUR 3,000 in tariff benefits over two years. The IKK bonus may provide EUR 700+ as a separate component and depends on documented activities.",
     "total": "Total health budget",
     "totalAmount": "up to EUR 3,000",
-    "totalDesc": "over two years from potential health insurer bonuses and tariff benefits",
+    "totalDesc": "potential tariff benefits over two years; the IKK bonus is assessed separately",
     "naturheilkunde": "Naturopathy and alternative medicine",
     "naturheilkundeAmount": "up to EUR 1,000",
     "naturheilkundeDesc": "Tariff benefits for services including naturopathy, osteopathy, TCM and chiropractic care",
@@ -152,9 +187,9 @@
   "miaPrompt": {
     "ariaLabel": "Nita offers help with the Healio partner concept",
     "close": "Close Nita prompt",
-    "eyebrow": "Nita from Healio",
-    "title": "Would you like me to explain the partner concept?",
-    "body": "I can briefly show how your practice provides neutral information while Healio handles advice and support.",
-    "cta": "Yes, explain the partner concept"
+    "eyebrow": "Nita · Healio's digital assistant",
+    "title": "Would you like to help patients without having to advise them yourself?",
+    "body": "I can walk you through the three roles and the next step: your practice provides neutral information, patients decide freely, and Healio checks eligibility and advises individually.",
+    "cta": "Clarify the roles with Nita"
   }
 }

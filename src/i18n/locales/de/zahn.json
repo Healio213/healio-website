@@ -2,7 +2,7 @@
   "hero": {
     "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
     "subtitle": "Zahnzusatzschutz ab wenigen Euro im Monat. Der IKK classic Bonus kann den Beitrag bis zu 100 % refinanzieren, wie viel genau, prüfen wir individuell mit dir.",
-    "ikkNote": "<strong>Dein Beitrag kann sich komplett refinanzieren:</strong> Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Je nach Bonus gleicht das den Beitrag bis zu 100 % aus, rechne es dir unten direkt aus. Und selbst wenn dein Zahnarzt schon eine Behandlung angeraten hat, gibt es über den Sofortschutz-Weg noch eine Lösung.",
+    "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, ob der günstigste Beitrag oder der größte persönliche Vorteil für dich zählt.",
     "ctaCalculate": "Passenden Tarif finden",
     "ctaBenefits": "Leistungen ansehen",
     "heroImageAlt": "Professionelle Zahnarztpraxis"
@@ -56,8 +56,8 @@
     "warningLabel": "Wichtig:",
     "trust": "Deine Antworten werden nicht gespeichert und nicht übertragen. Sie dienen nur der Empfehlung auf dieser Seite.",
     "disclaimer": "Verbindlich geprüft wird die Annahme erst im Antrag des jeweiligen Versicherers. Der Check ersetzt keine individuelle Beratung.",
-    "ikkNote": "Übrigens: Dein Beitrag kann sich über den IKK classic Bonus bis zu 100 % refinanzieren.",
-    "ikkCta": "Bonus berechnen",
+    "ikkNote": "Übrigens: Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt.",
+    "ikkCta": "Kassenvorteil prüfen",
     "questions": {
       "q1": {
         "text": "Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
@@ -341,7 +341,7 @@
       "highlight": {
         "badge": "IKK-Bonus-Hebel",
         "title": "Kleiner Beitrag, große Chance auf volle Refinanzierung",
-        "text": "Je kleiner der Beitrag, desto leichter gleicht ihn der IKK classic Bonus komplett aus. Beim ZahnUpgrade 90+ reicht dafür je nach Bonus schon ein Teil der Maßnahmen. Wie viel bei dir drin ist, rechnest du unten in einer Minute aus."
+        "text": "Je kleiner der Beitrag, desto leichter kann ein erreichbarer Bonus ihn ausgleichen. Wie viel das für dich realistisch ausmacht, prüfst du bei KassenBoost."
       },
       "chooseLabel": "Wähle deinen Zahn-Tarif",
       "cta90": "ZahnUpgrade 90+ ab 13 € (Empfehlung)",
@@ -350,10 +350,10 @@
       "note": "Du wirst zur Online-Antragsstrecke der LKH weitergeleitet. Dein gewählter Tarif ist dort vorausgewählt und lässt sich jederzeit ändern."
     },
     "ikk": {
-      "badge": "bis zu 100 %",
-      "title": "Und der Beitrag? Der kann sich über den IKK Bonus komplett refinanzieren.",
-      "text": "Egal für welchen Weg du dich entscheidest: Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Wie viel du herausholst, ist individuell und lässt sich vorab prüfen. Je nach Bonus ist bis zu 100 % Refinanzierung deines Beitrags möglich. Rechne es dir direkt aus.",
-      "cta": "IKK Bonus jetzt berechnen"
+      "badge": "KassenBoost",
+      "title": "Und der Beitrag? Vergleiche Kosten und möglichen Bonus getrennt.",
+      "text": "KassenBoost zeigt dir Beitrag, erreichbaren Bonus und Leistungen nebeneinander. Ob die IKK classic oder eine andere Krankenkasse besser zu dir passt, entscheidest du nach deinen Prioritäten.",
+      "cta": "Kassenvorteil prüfen"
     },
     "finder": {
       "title": "Noch unsicher? So entscheidest du nach Bedarf",
@@ -474,7 +474,7 @@
       },
       {
         "q": "Wie refinanziert sich der Beitrag über den IKK Bonus?",
-        "a": "Die IKK classic belohnt gesundheitsbewusstes Verhalten mit einem starken Bonusprogramm. Wie viel du herausholst, ist individuell: Je nach deinen Aktivitäten kann der Bonus deinen Beitrag bis zu 100 Prozent komplett finanzieren. Rechne es dir mit dem Bonusrechner auf dieser Seite direkt aus."
+        "a": "Wie stark ein Kassenbonus deinen Beitrag entlastet, hängt von deinen Aktivitäten und den jeweiligen Bedingungen ab. Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt und entscheidest selbst, was dir wichtiger ist."
       },
       {
         "q": "Warum ist der Abschluss vor der Rechnungsstellung so wichtig?",

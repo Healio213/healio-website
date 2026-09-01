@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown, HeartHandshake, Watch } from 'lucide-react';
+import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 // IKK classic Bonustabelle (mit Zusatzversicherung)
 const ACTIVITY_DEFS = [
@@ -308,7 +309,7 @@ const AmbulantBonusCalculator = ({
 
             {/* Vertrauens-Hinweis */}
             <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex gap-3 items-start">
-              <HeartHandshake className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-700" aria-hidden="true" />
+              <FriendlyIcon kind="support" tone="sky" size="sm" />
               <div>
                 <p className="text-sm font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
                 <p className="text-sm text-blue-800 leading-relaxed">
@@ -319,7 +320,7 @@ const AmbulantBonusCalculator = ({
 
             {/* Apple Watch Hinweis */}
             <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
-              <Watch className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-700" aria-hidden="true" />
+              <FriendlyIcon kind="smartwatch" tone="lavender" size="sm" />
               <div>
                 <p className="text-sm font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
                 <p className="text-sm text-purple-800 leading-relaxed">

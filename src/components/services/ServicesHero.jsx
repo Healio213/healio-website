@@ -9,7 +9,7 @@ const ServicesHero = () => {
   const { t } = useTranslation('leistungen');
   const { getPath } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
-  const routes = t('hero.routes', { returnObjects: true });
+  const orientationFacts = t('hero.orientationFacts', { returnObjects: true });
 
   return (
     <section className="relative isolate flex min-h-[820px] w-full items-center overflow-hidden bg-[#07111F] pt-28 text-white sm:min-h-[860px] lg:min-h-screen lg:pt-32">
@@ -78,52 +78,34 @@ const ServicesHero = () => {
           initial={prefersReducedMotion ? false : { opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="relative min-w-0 overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-5 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:p-7 lg:p-8"
+          className="relative min-h-[460px] min-w-0 overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-7 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:min-h-[500px] sm:p-9 lg:p-10"
         >
-          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
-            <div>
-              <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#8EE7CA]">
-                {t('hero.compassEyebrow')}
-              </p>
-              <p className="mt-2 font-display text-lg font-extrabold text-white sm:text-xl">
-                {t('hero.compassTitle')}
-              </p>
-            </div>
-            <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 font-display text-[0.68rem] font-bold uppercase tracking-[0.16em] text-slate-400">
-              01—03
-            </span>
+          <div className="relative z-10 max-w-[25rem]">
+            <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#8EE7CA]">{t('hero.compassEyebrow')}</p>
+            <h2 className="mt-4 font-friendly text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl">{t('hero.compassTitle')}</h2>
+            <p className="mt-5 text-base leading-7 text-slate-300">
+              <span className="font-bold text-white">{t('hero.compassNoteStrong')}</span>{' '}
+              {t('hero.compassNote')}
+            </p>
           </div>
 
-          <div className="relative mt-2">
-            <span className="absolute bottom-6 left-[1.22rem] top-6 w-px bg-gradient-to-b from-[#25C990] via-[#25C990]/35 to-white/10 sm:left-[1.47rem]" aria-hidden="true" />
-            {routes.map((route, index) => (
-              <motion.a
-                key={route.key}
-                href={`#${route.anchor}`}
-                initial={prefersReducedMotion ? false : { opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.55, delay: 0.28 + index * 0.09 }}
-                className="home-focus group relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-white/10 py-6 last:border-b-0 sm:grid-cols-[3rem_1fr_auto] sm:gap-4 sm:py-7"
-              >
-                <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-[#25C990]/35 bg-[#07111F] font-display text-[0.68rem] font-extrabold tracking-[0.12em] text-[#8EE7CA] transition group-hover:border-[#25C990] group-hover:bg-[#25C990] group-hover:text-[#07111F] sm:h-12 sm:w-12">
-                  {route.number}
-                </span>
-                <span>
-                  <span className="block font-display text-2xl font-extrabold tracking-[-0.035em] text-white transition group-hover:text-[#8EE7CA] sm:text-3xl">
-                    {route.label}
-                  </span>
-                  <span className="mt-1 block text-sm leading-6 text-slate-400 sm:text-base">{route.description}</span>
-                </span>
-                <span className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white transition group-hover:border-[#25C990] group-hover:bg-[#25C990] group-hover:text-[#07111F]">
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
-              </motion.a>
+          <div className="absolute -bottom-8 -right-10 w-[285px] sm:-right-2 sm:w-[340px]" aria-hidden="true">
+            <span className="absolute inset-12 rounded-full bg-[#25C990]/15 blur-3xl" />
+            <img
+              src="/images/friendly-icons/decision-thinking.webp"
+              alt=""
+              width="512"
+              height="512"
+              loading="eager"
+              decoding="async"
+              className="relative h-auto w-full object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.3)]"
+            />
+          </div>
+
+          <div className="absolute bottom-7 left-7 z-10 flex max-w-[56%] flex-wrap gap-2 sm:bottom-9 sm:left-9 lg:bottom-10 lg:left-10">
+            {(Array.isArray(orientationFacts) ? orientationFacts : []).map((fact) => (
+              <span key={fact} className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-1.5 text-xs font-bold text-slate-200 backdrop-blur-sm">{fact}</span>
             ))}
-          </div>
-
-          <div className="mt-2 hidden rounded-2xl bg-white/[0.045] px-5 py-4 text-sm leading-6 text-slate-400 sm:block">
-            <span className="font-bold text-white">{t('hero.compassNoteStrong')}</span>{' '}
-            {t('hero.compassNote')}
           </div>
         </motion.div>
       </div>

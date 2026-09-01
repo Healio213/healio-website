@@ -2,44 +2,40 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Shield, TrendingDown, DollarSign, Gift } from 'lucide-react';
 import { TextHighlight, AnimatedCounter } from '@/components/ui/ScrollAnimation';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const BavProviderComparison = () => {
   const { t } = useTranslation('home');
 
   const benefits = [
     {
-      icon: <Shield className="w-8 h-8" />,
+      kind: 'protection',
+      tone: 'sky',
       title: t('bav.legalClaim'),
       description: t('bav.legalClaimDesc'),
-      accent: "text-blue-600",
-      accentBg: "bg-blue-50",
       border: "border-l-blue-500"
     },
     {
-      icon: <TrendingDown className="w-8 h-8" />,
+      kind: 'money',
+      tone: 'coral',
       title: t('bav.pensionGap'),
       description: t('bav.pensionGapDesc'),
-      accent: "text-rose-600",
-      accentBg: "bg-rose-50",
       border: "border-l-rose-500"
     },
     {
-      icon: <DollarSign className="w-8 h-8" />,
+      kind: 'money',
+      tone: 'mint',
       title: t('bav.taxBenefits'),
       description: t('bav.taxBenefitsDesc'),
-      accent: "text-emerald-600",
-      accentBg: "bg-emerald-50",
       border: "border-l-emerald-500"
     },
     {
-      icon: <Gift className="w-8 h-8" />,
+      kind: 'bonus',
+      tone: 'lavender',
       title: t('bav.employerSubsidy'),
       description: t('bav.employerSubsidyDesc'),
-      accent: "text-indigo-600",
-      accentBg: "bg-indigo-50",
       border: "border-l-indigo-500"
     }
   ];
@@ -103,9 +99,7 @@ const BavProviderComparison = () => {
               transition={{ delay: idx * 0.1 }}
               className={`bg-white p-7 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 border-l-4 ${benefit.border} group`}
             >
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${benefit.accentBg} ${benefit.accent}`}>
-                {benefit.icon}
-              </div>
+              <FriendlyIcon kind={benefit.kind} tone={benefit.tone} size="sm" className="mb-6" />
               <h3 className="text-xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
               <p className="text-slate-500 text-sm leading-relaxed">{benefit.description}</p>
             </motion.div>

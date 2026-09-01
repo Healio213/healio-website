@@ -2,44 +2,40 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Stethoscope, TrendingDown, PiggyBank, HeartHandshake } from 'lucide-react';
 import { TextHighlight, AnimatedCounter } from '@/components/ui/ScrollAnimation';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const GesundheitSection = () => {
   const { t } = useTranslation('home');
 
   const hrBenefits = [
     {
-      icon: <Stethoscope className="w-10 h-10" />,
+      kind: 'ambulant',
+      tone: 'mint',
       title: t('gesundheit.fasterAppointments'),
       desc: t('gesundheit.fasterAppointmentsDesc'),
-      accent: "text-emerald-600",
-      accentBg: "bg-emerald-50",
       border: "border-l-emerald-500"
     },
     {
-      icon: <TrendingDown className="w-10 h-10" />,
+      kind: 'money',
+      tone: 'sky',
       title: t('gesundheit.lessSickDays'),
       desc: t('gesundheit.lessSickDaysDesc'),
-      accent: "text-blue-600",
-      accentBg: "bg-blue-50",
       border: "border-l-blue-500"
     },
     {
-      icon: <PiggyBank className="w-10 h-10" />,
+      kind: 'money',
+      tone: 'butter',
       title: t('gesundheit.saveCosts'),
       desc: t('gesundheit.saveCostsDesc'),
-      accent: "text-amber-600",
-      accentBg: "bg-amber-50",
       border: "border-l-amber-500"
     },
     {
-      icon: <HeartHandshake className="w-10 h-10" />,
+      kind: 'support',
+      tone: 'coral',
       title: t('gesundheit.retention'),
       desc: t('gesundheit.retentionDesc'),
-      accent: "text-rose-600",
-      accentBg: "bg-rose-50",
       border: "border-l-rose-500"
     }
   ];
@@ -96,9 +92,7 @@ const GesundheitSection = () => {
               transition={{ delay: idx * 0.1 }}
               className={`bg-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 border-l-4 ${benefit.border} group flex flex-col items-center text-center`}
             >
-              <div className={`p-4 rounded-full ${benefit.accentBg} ${benefit.accent} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                {benefit.icon}
-              </div>
+              <FriendlyIcon kind={benefit.kind} tone={benefit.tone} className="mb-6 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="text-xl font-bold text-slate-900 mb-4">{benefit.title}</h3>
               <p className="text-slate-500 text-sm leading-relaxed">{benefit.desc}</p>
             </motion.div>

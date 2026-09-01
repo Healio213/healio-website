@@ -12,15 +12,11 @@ import Faq from '@/components/sections/Faq';
 import DentalContactForm from '@/components/sections/DentalContactForm';
 import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
 import ProductTicker from '@/components/sections/ProductTicker';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
-import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
-import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
-import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
+import KassenBoostDecisionBridge from '@/components/sections/KassenBoostDecisionBridge';
 import OptimizedImage from '@/components/OptimizedImage';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowDown, CheckCircle } from 'lucide-react';
 import { FadeInUp } from '@/components/ui/ScrollAnimation';
-import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -149,20 +145,7 @@ const ZahnPage = () => {
 
         <FadeInUp><DentalBenefits /></FadeInUp>
 
-        <FadeInUp>
-          <AmbulantBonusCalculator
-            ctaOverride={{ href: '#tarif-weiche', label: t('insurerChoice.bonusCta') }}
-            defaultMonatsbeitrag={10}
-            tariffInfoText={t('bonusRechner.tariffInfo')}
-            effectiveLabel={t('bonusRechner.effectiveLabel')}
-            effectiveValue={t('bonusRechner.effectiveValue')}
-            effectiveNote={t('bonusRechner.effectiveNote')}
-          />
-        </FadeInUp>
-        <FadeInUp><AmbulantIKKWechsel variant="zahn" /></FadeInUp>
-        <FadeInUp><KassenBoostChoiceHint /></FadeInUp>
-        <FadeInUp><AmbulantIKKServices /></FadeInUp>
-        <FadeInUp><AmbulantUmwelt /></FadeInUp>
+        <FadeInUp><KassenBoostDecisionBridge /></FadeInUp>
 
         {lang === 'de' && <FadeInUp><Testimonials headline={t('testimonials.headline')} /></FadeInUp>}
 

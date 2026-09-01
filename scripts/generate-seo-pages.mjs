@@ -36,36 +36,6 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-function mergeStandaloneWebPageSchema(html, schemaMarkup) {
-  if (!schemaMarkup || schemaMarkup['@type'] !== 'WebPage') {
-    return { html, merged: false };
-  }
-
-  const { '@context': _context, ...webPageSchema } = schemaMarkup;
-  let merged = false;
-  const nextHtml = html.replace(
-    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
-    (script, json) => {
-      if (merged) return script;
-
-      try {
-        const parsed = JSON.parse(json);
-        if (!Array.isArray(parsed['@graph'])) return script;
-        const pageIndex = parsed['@graph'].findIndex((entry) => entry?.['@type'] === 'WebPage');
-        if (pageIndex === -1) return script;
-
-        parsed['@graph'][pageIndex] = webPageSchema;
-        merged = true;
-        return `<script type="application/ld+json">${JSON.stringify(parsed)}</script>`;
-      } catch {
-        return script;
-      }
-    }
-  );
-
-  return { html: nextHtml, merged };
-}
-
 function getBlogSlug(routePath) {
   const match = routePath.match(/^\/blog\/([^/]+)$/);
   return match ? match[1] : null;
@@ -312,21 +282,6 @@ function generateHtml(route, article = null) {
       `<meta property="og:image:height" content="${e(String(route.ogImageHeight))}">`
     );
   }
-  if (route.ogImageAlt) {
-    const ogImageAltTag = `<meta property="og:image:alt" content="${e(route.ogImageAlt)}">`;
-    if (/<meta property="og:image:alt" content="[^"]*">/.test(html)) {
-      html = html.replace(/<meta property="og:image:alt" content="[^"]*">/, ogImageAltTag);
-    } else {
-      html = html.replace(/(<meta property="og:image" content="[^"]*">)/, `$1\n    ${ogImageAltTag}`);
-    }
-
-    const twitterImageAltTag = `<meta name="twitter:image:alt" content="${e(route.ogImageAlt)}">`;
-    if (/<meta name="twitter:image:alt" content="[^"]*">/.test(html)) {
-      html = html.replace(/<meta name="twitter:image:alt" content="[^"]*">/, twitterImageAltTag);
-    } else {
-      html = html.replace(/(<meta name="twitter:image" content="[^"]*">)/, `$1\n    ${twitterImageAltTag}`);
-    }
-  }
 
   // Twitter Tags
   html = html.replace(
@@ -366,9 +321,7 @@ function generateHtml(route, article = null) {
 
   // Statisches route-spezifisches JSON-LD für wichtige Landingpages und Blogartikel.
   const schemaMarkup = route.schemaMarkup || (article ? createBlogArticleSchema(article, route) : null);
-  const mergedSchema = mergeStandaloneWebPageSchema(html, schemaMarkup);
-  html = mergedSchema.html;
-  if (schemaMarkup && !mergedSchema.merged) {
+  if (schemaMarkup) {
     html = html.replace(
       '</head>',
       `    <script type="application/ld+json">${JSON.stringify(schemaMarkup)}</script>\n  </head>`

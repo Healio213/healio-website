@@ -3,9 +3,7 @@ import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import CompanyHero from '@/components/company/CompanyHero';
 import CompanyRealityCheck from '@/components/company/CompanyRealityCheck';
-import ResponsibilityStory from '@/components/company/ResponsibilityStory';
 import CompanySolutions from '@/components/company/CompanySolutions';
-import CompanyBavLeverage from '@/components/company/CompanyBavLeverage';
 import CompanyEconomics from '@/components/company/CompanyEconomics';
 import CompanyProcess from '@/components/company/CompanyProcess';
 import CompanyFAQ from '@/components/company/CompanyFAQ';
@@ -67,10 +65,8 @@ const UnternehmenPage = () => {
         <CompanyHero />
         <ProductTicker variant="unternehmen" />
         <CompanyRealityCheck />
-        <CompanyWorkforceConcept />
         <CompanySolutions />
-        <CompanyBavLeverage />
-        <ResponsibilityStory />
+        <CompanyWorkforceConcept />
         <CompanyEconomics />
         <CompanyProcess />
         <CompanyFAQ />

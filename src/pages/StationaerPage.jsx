@@ -11,12 +11,8 @@ import ErklaervideoSection from '@/components/sections/ErklaervideoSection';
 import HospitalContactForm from '@/components/sections/HospitalContactForm';
 import QualityCooperationSection from '@/components/sections/QualityCooperationSection';
 import ProductTicker from '@/components/sections/ProductTicker';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
-import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
-import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
-import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
+import KassenBoostDecisionBridge from '@/components/sections/KassenBoostDecisionBridge';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
-import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import { Button } from '@/components/ui/button';
 import { Calculator, Gift, CheckCircle, ChevronDown } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -179,20 +175,7 @@ const StationaerPage = () => {
         {/* Hinweis für werdende Eltern: Kindernachversicherung ohne Gesundheitsprüfung */}
         <FadeInUp><HospitalNeugeborene /></FadeInUp>
 
-        <FadeInUp>
-          <AmbulantBonusCalculator
-            tarifTypes="Stationär"
-            defaultMonatsbeitrag={32.82}
-            tariffInfoText={t('bonusRechner.tariffInfo')}
-            effectiveLabel={t('bonusRechner.effectiveLabel')}
-            effectiveValue={t('bonusRechner.effectiveValue')}
-            effectiveNote={t('bonusRechner.effectiveNote')}
-          />
-        </FadeInUp>
-        <FadeInUp><AmbulantIKKWechsel variant="stationaer" /></FadeInUp>
-        <FadeInUp><KassenBoostChoiceHint /></FadeInUp>
-        <FadeInUp><AmbulantIKKServices /></FadeInUp>
-        <FadeInUp><AmbulantUmwelt /></FadeInUp>
+        <FadeInUp><KassenBoostDecisionBridge /></FadeInUp>
 
         {/* Testimonials */}
         <FadeInUp>

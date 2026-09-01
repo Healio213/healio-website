@@ -1,26 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, Clock, Shield, Heart } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const BkvEmployerBenefits = () => {
   const benefits = [
     {
-      icon: <DollarSign className="w-12 h-12" />,
+      kind: 'money', tone: 'butter',
       title: "Effizienter als Gehaltserhöhungen",
       desc: "Steuervorteil für Arbeitgeber und Arbeitnehmer"
     },
     {
-      icon: <Clock className="w-12 h-12" />,
+      kind: 'switch', tone: 'sky',
       title: "Weniger Ausfallzeiten",
       desc: "Schnellere Arzttermine und bessere Gesundheitsversorgung"
     },
     {
-      icon: <Shield className="w-12 h-12" />,
+      kind: 'protection', tone: 'mint',
       title: "Keine Gesundheitsprüfung",
       desc: "Einfache Aufnahme aller Mitarbeiter – kein Papierkram"
     },
     {
-      icon: <Heart className="w-12 h-12" />,
+      kind: 'support', tone: 'coral',
       title: "Starke Mitarbeiterbindung",
       desc: "Echter Benefit statt Obstkorb – zeigt echte Wertschätzung"
     }
@@ -39,9 +39,7 @@ const BkvEmployerBenefits = () => {
               transition={{ delay: idx * 0.1 }}
               className="bg-white p-8 rounded-xl shadow-lg border border-gray-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group h-full"
             >
-              <div className="text-healio-primary mb-6 group-hover:scale-110 transition-transform duration-300 inline-block bg-healio-light p-3 rounded-full">
-                {benefit.icon}
-              </div>
+              <FriendlyIcon kind={benefit.kind} tone={benefit.tone} className="mb-6 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="text-xl font-bold text-healio-text mb-3">
                 {benefit.title}
               </h3>

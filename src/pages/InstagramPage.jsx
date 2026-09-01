@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
-import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 /**
  * Instagram Bio-Link Landing Page
@@ -32,7 +31,7 @@ const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass })
 
         <div className="flex justify-between items-start mb-3">
           <div>
-            <FriendlyIcon icon={card.icon} tone="mint" size="sm" className="mb-2" />
+            <span className="text-[28px] block mb-1">{card.icon}</span>
             <h2 className="text-lg font-bold text-white">
               {card.title}
               {card.budgetHighlight && (

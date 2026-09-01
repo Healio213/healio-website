@@ -1,43 +1,43 @@
 {
   "hero": {
-    "badge": "Speziell für Hebammen",
-    "title": "<highlight>Volle Kurse</highlight> für dich und die beste Versorgung für deine Familien.",
-    "subtitle": "Wie deine Schwangeren wichtige Extras nicht mehr aus eigener Tasche zahlen müssen und du deinen Familien echten Mehrwert weitergibst.",
-    "cta": "Jetzt kostenloses Kennenlernen sichern"
+    "badge": "Für Hebammen und Geburtshäuser",
+    "title": "Familien gut informieren. <highlight>In deiner Rolle bleiben.</highlight>",
+    "subtitle": "Healio zeigt Familien, welche Kassenleistungen, Boni und Zusatzversicherungen zu ihrer Situation passen können. Du gibst einen neutralen Hinweis; wir prüfen und beraten individuell.",
+    "cta": "30-minütiges Kennenlernen buchen"
   },
   "problem": {
-    "title": "Wer zahlt eigentlich die ganzen Extras?",
-    "text": "Geburtsvorbereitung, Akupunktur gegen Übelkeit, Yoga oder der wichtige Kurs zur Rückbildung. Du weißt genau, was Mutter und Kind jetzt gut tun würde. Doch diese wichtigen Leistungen gehen schnell ins Geld und die Kasse zahlt oft nur das absolute Minimum. Viele Familien verzichten deshalb aus rein finanziellen Gründen auf deine wertvollen Angebote."
+    "title": "Gute Empfehlungen brauchen auch finanziellen Spielraum.",
+    "text": "Rund um Schwangerschaft, Geburt und Wochenbett entstehen viele zusätzliche Gesundheitsausgaben. Nicht jede Kassenleistung, jeder Bonus oder jeder Zusatztarif passt zu jeder Familie. Ein neutraler Informationsweg hilft, Möglichkeiten frühzeitig und ohne Verkaufsdruck zu prüfen."
   },
   "solution": {
-    "title": "Die Lösung: Das Healio Gesundheitsbudget",
-    "text": "Deine Familien sichern sich ein Budget von bis zu 3.000 Euro in 2 Jahren. Durch die Verrechnung mit dem Bonus der Krankenkasse kann sich dieses Budget im Idealfall komplett von selbst finanzieren. Deine Patientinnen haben den vollen Schutz, und deine Kurse und Behandlungen können je nach Tarif bis zu 100 Prozent erstattet werden.",
-    "amount": "bis zu 3.000 €",
-    "amountLabel": "Gesundheitsbudget"
+    "title": "Ein klarer Informationsweg statt pauschaler Versprechen",
+    "text": "Je nach Tarif und persönlichen Voraussetzungen können Kassenboni und tarifliche Leistungen zusammen einen Rahmen von bis zu 3.000 EUR in zwei Jahren eröffnen. Das ist weder eine garantierte Erstattung noch eine automatische Refinanzierung. Healio prüft vor einer Entscheidung, welche Bausteine im Einzelfall tatsächlich nutzbar sind.",
+    "amount": "bis zu 3.000 EUR",
+    "amountLabel": "in zwei Jahren möglich"
   },
   "leistungen": {
-    "title": "Das Gesundheitsbudget für deine Familien",
-    "subtitle": "Bis zu 3.000 Euro in 2 Jahren, damit medizinische Extras nicht mehr an der eigenen Tasche scheitern. Diese Vorteile kannst du deinen Patientinnen direkt zeigen.",
+    "title": "Welche Bausteine infrage kommen können",
+    "subtitle": "Kassenleistungen, Bonusprogramme und Zusatzschutz sind getrennte Bausteine. Welche Leistungen wirklich nutzbar sind, hängt von Kasse, Tarif, Nachweisen und persönlichen Voraussetzungen ab.",
     "highlights": [
       {
-        "title": "Bis zu 1.000 Euro für Naturheilkunde und Osteopathie",
-        "desc": "Je zwei Kalenderjahre, dazu ein eigener Vorsorge-Topf für zusätzliche Untersuchungen in der Schwangerschaft."
+        "title": "Tarifabhängig bis zu 1.000 EUR für Naturheilverfahren",
+        "desc": "Im leistungsstärksten ambulanten SDK-Tarif innerhalb von zwei Kalenderjahren. Berücksichtigt werden nur tariflich versicherte und korrekt abgerechnete Leistungen."
       },
       {
-        "title": "Frauenarzt Extras mitgedacht",
-        "desc": "Ob zusätzlicher Ultraschall oder weitere Vorsorgeuntersuchungen: Viele IGeL Leistungen können je nach Tarif über den Vorsorge-Topf erstattet werden. Welche im Einzelfall, klärt Healio in der Beratung."
+        "title": "Zusätzliche Vorsorge kann mitversichert sein",
+        "desc": "Je nach Tarif können erstattungsfähige Vorsorgeuntersuchungen berücksichtigt werden. Nicht jede IGeL-Leistung ist automatisch versichert; Healio prüft die Bedingungen."
       },
       {
-        "title": "Sanfte Medizin",
-        "desc": "Akupunktur gegen Schwangerschaftsbeschwerden oder osteopathische Behandlungen für das Neugeborene können je nach Tarif bis zu 100 Prozent erstattet werden."
+        "title": "Akupunktur und Osteopathie individuell prüfen",
+        "desc": "Ob eine Behandlung erstattungsfähig ist, hängt unter anderem von Tarif, Behandlerqualifikation, Abrechnung und medizinischer Einordnung ab."
       },
       {
-        "title": "Arznei und Hilfsmittel",
-        "desc": "Medikamente wie Femibion oder Hilfsmittel, die sonst privat gezahlt werden müssten, können über das Budget abgedeckt werden."
+        "title": "Arznei- und Hilfsmittel nach Tarif",
+        "desc": "Für eine Erstattung können ärztliche Verordnung, Vorleistung der Krankenkasse und weitere Tarifvoraussetzungen erforderlich sein."
       },
       {
-        "title": "Das Baby von Tag eins an mitversichert",
-        "desc": "Gerade für Kinder sind die Beiträge niedrig. So sind Extras wie die Osteopathie für das Neugeborene von Anfang an abgesichert."
+        "title": "Kindernachversicherung frühzeitig prüfen",
+        "desc": "Für Neugeborene kann eine zweimonatige Anmeldefrist gelten. Schutzumfang und mögliche Vorversicherungszeit des Elternteils müssen vorab geprüft werden."
       }
     ],
     "ikkTitle": "IKK classic Leistungen",
@@ -59,23 +59,23 @@
       },
       {
         "name": "Rückbildungsgymnastik",
-        "amount": "75 €",
-        "detail": "Bonus mit Zusatzversicherung"
+        "amount": "Bonus möglich",
+        "detail": "Höhe nach aktuellem Bonusprogramm"
       },
       {
         "name": "Mutterschaftsvorsorge",
-        "amount": "30 €",
-        "detail": "je Vorsorgeuntersuchung, Bonus mit Zusatzversicherung"
+        "amount": "Bonus möglich",
+        "detail": "Höhe nach aktuellem Bonusprogramm"
       },
       {
         "name": "Geburtsvorbereitungskurse",
-        "amount": "kostenlos",
-        "detail": "inkl. Partner Kurs (Keleya)"
+        "amount": "digital enthalten",
+        "detail": "Angebot und Teilnahmebedingungen der IKK classic prüfen"
       },
       {
         "name": "Haus und Geburtshausgeburt",
-        "amount": "kostenlos",
-        "detail": "Hebamme + Betriebskosten Zuschuss"
+        "amount": "nach Satzung",
+        "detail": "Gesetzliche Leistungen und mögliche Zuschüsse individuell klären"
       }
     ],
     "sdkTitle": "SDK Zusatzversicherung",
@@ -83,67 +83,62 @@
       {
         "name": "Schwangerschaftsvorsorge",
         "amount": "500 €",
-        "detail": "Vorsorge-Topf im Top-Tarif, z. B. für zusätzlichen Ultraschall und Tests"
+        "detail": "Maximalbetrag im Top-Tarif innerhalb von zwei Kalenderjahren; Tarifbedingungen gelten"
       },
       {
         "name": "Naturheilverfahren",
         "amount": "1.000 €",
-        "detail": "Akupunktur, Osteopathie, TCM inkl. verordneter Arzneimittel"
+        "detail": "Maximalbetrag im Top-Tarif innerhalb von zwei Kalenderjahren; erstattungsfähige Leistungen"
       },
       {
         "name": "Arznei und Hilfsmittel",
         "amount": "1.000 €",
-        "detail": "Zuzahlungen für Medikamente, Heil und Hilfsmittel"
+        "detail": "Maximalbetrag im Top-Tarif; Verordnung, Vorleistung und Tarifbedingungen beachten"
       }
     ],
-    "totalLabel": "Schwangerschafts Budget gesamt",
-    "totalAmount": "über 1.000 €",
-    "totalNote": "Der Clou: Durch die Kombination mit dem Bonus der gesetzlichen Krankenkasse können sich die Kosten für dieses Paket bis zu 100 Prozent refinanzieren. Für die Schwangere bedeutet das starke Versorgung, deren Beitrag der Bonus im Idealfall komplett mitträgt."
+    "totalLabel": "Möglicher Gesundheitsbudget-Rahmen",
+    "totalAmount": "bis zu 3.000 EUR",
+    "totalNote": "Es besteht kein pauschaler Anspruch. Kassenleistungen, Boni und Tarifleistungen folgen jeweils eigenen Bedingungen und lassen sich nicht automatisch vollständig kombinieren. Healio prüft das individuell."
   },
   "klinik": {
-    "title": "Das Wichtigste kommt zum Schluss: das Neugeborene",
-    "subtitle": "Bis hierhin ging es um die Mutter. Jetzt geht es um das Kind, und das ist der Teil, den fast niemand kennt. Wenn du aus dieser ganzen Seite nur eine Sache mitnimmst, dann bitte diese.",
-    "kernTitle": "Jeder Mensch hat genau ein Zeitfenster, in dem seine Gesundheit keine Rolle spielt. Es dauert zwei Monate und beginnt mit der Geburt.",
-    "kernText": "Eine Zusatzversicherung fragt normalerweise immer nach dem Gesundheitszustand. Wer eine Diagnose hat, zahlt einen Zuschlag oder bekommt für dieses eine Thema keinen Schutz mehr. Für ein Neugeborenes gilt diese Regel nicht. In den Bedingungen der SDK steht wörtlich, dass der Versicherungsschutz ohne Risikozuschläge und ohne Leistungsausschlüsse ab der Geburt beginnt, und zwar ausdrücklich auch für Geburtsschäden, angeborene Krankheiten und andere körperliche Beeinträchtigungen. Keine Gesundheitsprüfung. Keine Wartezeit. Kein Zuschlag. Es wird schlicht nicht gefragt. Dieses Fenster schließt sich zwei Monate nach der Geburt, und danach ist es für dieses Kind für immer zu.",
-    "chanceTitle": "Warum das so viel wert ist, weißt du besser als die meisten",
-    "chanceText": "Du erlebst es regelmäßig: die Neugeborenengelbsucht, die doch unter die Lampe muss. Das Kind, das ein paar Wochen zu früh kommt und auf die Neonatologie verlegt wird. Der Herzfehler, den beim Screening vorher niemand gesehen hat. Die Trinkschwäche, der Infekt, die Anpassungsstörung. In den allermeisten Fällen geht das gut aus, aber es passiert oft genug, und es passiert unangekündigt.\n\nJetzt der Punkt, um den es geht: Ein Kind, bei dem in den ersten Lebenstagen etwas Ernstes festgestellt wird, bekommt später keine private Zusatzversicherung mehr. Nicht mit fünf, nicht mit zwölf, nie. Die Gesundheitsfragen im Antrag sind dann beantwortet, und zwar zu seinen Ungunsten. Wurde das Kind aber vorher über die Kindernachversicherung aufgenommen, ist genau diese Diagnose mitversichert, und der Schutz bleibt ein Leben lang bestehen. Es ist die einzige Chance, die eine Familie dafür hat.",
-    "chanceObenTitle": "Was die Familie davon konkret hat, wenn das Baby liegen muss",
-    "chanceObenText": "Muss das Kind stationär behandelt werden, darf ein Elternteil als Begleitperson mit aufgenommen werden. Unterbringung und Verpflegung werden übernommen, die Familie zahlt sie nicht selbst. Das ist das Rooming-in, und es gilt bis zum 16. Lebensjahr des Kindes, also weit über die Babyzeit hinaus.\n\nDazu kommt die freie Krankenhauswahl. Die Familie kann in die spezialisierte Kinderklinik gehen statt in das Haus, in das eingewiesen wurde, auch wenn es weiter weg ist. Das Kind wird privatärztlich behandelt, also durch den Chefarzt oder einen Spezialisten, und liegt im Ein oder Zweibettzimmer statt im Mehrbettzimmer. Wer schon einmal mit einem schreienden Säugling nachts in einem Vierbettzimmer lag, weiß, was das für eine Mutter im Wochenbett bedeutet.\n\nUnd das alles kostet für ein Kind sehr wenig. Je nach Anbieter und Tarif liegt der Beitrag im Bereich weniger Euro im Monat.",
-    "deadlineTitle": "Was du dafür tun musst, und warum du fast nie zu spät kommst",
-    "deadlineText": "Die Voraussetzung ist einfach: Ein Elternteil muss versichert sein, wenn das Kind zur Welt kommt. Danach bleiben zwei Monate Zeit, das Kind anzumelden, rückwirkend ab dem Tag der Geburt.\n\nDie SDK verlangt dafür keine Vorlaufzeit. Es genügt, dass der Vertrag der Mutter oder des Vaters zum Zeitpunkt der Geburt läuft. Selbst wenn eine Frau erst im achten Monat davon erfährt, ist ihr Baby ab dem ersten Atemzug vollständig geschützt. Dein Hinweis kommt also fast nie zu spät. Und wenn das Kind schon da ist, hast du in der Wochenbettbetreuung immer noch das Zwei-Monats-Fenster, das ist genau deine Zeit im Haus.\n\nZwei Dinge solltest du wissen, damit du niemandem etwas Falsches sagst: Die Bayerische verlangt drei Monate Vorlauf, dort ist im sechsten Schwangerschaftsmonat Schluss. Und das Kind kann nur den Schutz bekommen, den der bestversicherte Elternteil hat. Wer für sein Kind das Einbettzimmer möchte, muss es selbst versichert haben.",
-    "ehrlichTitle": "Und wenn die Schwangerschaft schon läuft? Fast alles geht trotzdem",
-    "ehrlichText": "Diese Frage kommt sofort, wenn du eine Frau im fünften Monat vor dir hast. Die Antwort ist besser, als die meisten denken.\n\nDer ambulante Teil funktioniert vollständig. Die Vorsorge während der Schwangerschaft ist in den Bedingungen ausdrücklich als versicherte Leistung aufgeführt, und Wartezeiten gibt es in den ambulanten Tarifen keine. Der Vorsorge-Topf, der Topf für Naturheilverfahren und der für Arznei- und Hilfsmittel stehen also zur Verfügung, auch wenn die Schwangerschaft längst feststeht. Die Zusatzuntersuchungen beim Frauenarzt sind damit nicht verloren.\n\nDas Kind ist ohnehin versicherbar, wie oben beschrieben, unabhängig davon wie spät der Hinweis kommt.\n\nEhrlich bleibt eine einzige Lücke: die Wahlleistungen bei genau dieser Entbindung, also Familienzimmer und Chefarzt im Kreißsaal. Steht die Schwangerschaft bei Antragstellung ärztlich fest, wird dafür nicht geleistet, und zwar bei keinem Anbieter am Markt. Das ist es aber auch schon. Wer das weiß, verspricht nichts Falsches und nimmt trotzdem alles mit, was möglich ist.\n\nEine Abgrenzung noch für dein Gespräch: Versichert ist die Vorsorge, nicht die Behandlung von Schwangerschaftsbeschwerden. Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten sind dagegen ausdrücklich eingeschlossen.",
-    "roomingTitle": "Und beim nächsten Kind ist dann auch die Geburt dabei",
-    "roomingText": "Die SDK verzichtet in den Klinik-Tarifen vollständig auf Wartezeiten. Wer den Vertrag hat, bevor eine nächste Schwangerschaft ärztlich festgestellt wird, hat auch die Entbindung voll abgesichert: das Familienzimmer, die privatärztliche Behandlung und sogar die gesondert berechenbaren Leistungen von Beleghebammen und Belegentbindungspflegern.\n\nDeshalb ist das Wochenbett der beste Moment für ein Wort dazu. Die Familie sichert jetzt ihr Neugeborenes ab, und für ein weiteres Kind ist dann alles dabei, was diesmal nicht mehr ging.",
-    "compareTitle": "Welcher Tarif für Familien? Unsere ehrliche Einordnung",
-    "compareSubtitle": "Healio ist unabhängig und vergleicht den Markt. Kurz gesagt: Für Frauen mit Kinderwunsch führt kaum ein Weg an der SDK vorbei, weil sie ohne Wartezeit auskommt. Geht es darum, das Kind und die Familie günstig abzusichern, ist die Bayerische meist die bessere Wahl.",
+    "title": "Beim Neugeborenen zählt vor allem der richtige Zeitpunkt",
+    "subtitle": "Die Kindernachversicherung kann wertvoll sein, folgt aber gesetzlichen und tariflichen Voraussetzungen. Hebammen geben nur den Hinweis; Healio prüft den konkreten Fall.",
+    "kernTitle": "Eine Anmeldung innerhalb von zwei Monaten kann rückwirkenden Schutz ab Geburt ermöglichen.",
+    "kernText": "Nach § 198 VVG kann ein Neugeborenes unter bestimmten Voraussetzungen ohne Risikozuschläge und Wartezeiten in den bestehenden Krankenversicherungsschutz eines Elternteils aufgenommen werden. Der beantragte Schutz darf nicht höher oder umfassender sein als der des versicherten Elternteils. Versicherer können außerdem eine Vorversicherungszeit des Elternteils verlangen. Deshalb sollte die Familie den konkreten Tarif möglichst vor der Geburt prüfen lassen.",
+    "chanceTitle": "Warum eine frühe Prüfung sinnvoll ist",
+    "chanceText": "Gesundheitliche Angaben können bei einem späteren Neuabschluss eine Rolle spielen. Eine rechtzeitige Prüfung schafft Klarheit darüber, welche Optionen für Eltern und Kind bestehen. Sie ersetzt keine medizinische Einschätzung und ist keine Zusage, dass jeder gewünschte Schutz verfügbar ist.",
+    "chanceObenTitle": "Welche stationären Leistungen tarifabhängig sein können",
+    "chanceObenText": "Je nach Tarif können Rooming-in, Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Krankenhauswahl vorgesehen sein. Entscheidend sind immer der versicherte Tarif, der konkrete Versicherungsfall und die jeweiligen Bedingungen. Healio ordnet diese Punkte mit der Familie ein.",
+    "deadlineTitle": "Was du als Hebamme sicher sagen kannst",
+    "deadlineText": "Weise Familien frühzeitig auf die mögliche Zwei-Monats-Frist hin und leite sie für die Prüfung direkt an Healio weiter. Du musst weder Anbieter vergleichen noch Gesundheitsfragen oder Fristen im Detail erklären. Vorversicherungszeit und Schutzumfang werden anhand des konkreten Vertrags geprüft.",
+    "ehrlichTitle": "Bei laufender Schwangerschaft genau unterscheiden",
+    "ehrlichText": "Ambulante Vorsorge- oder Naturheilleistungen können je nach Tarif und Voraussetzungen auch während einer bestehenden Schwangerschaft infrage kommen. Für stationäre Wahlleistungen rund um eine bereits festgestellte Schwangerschaft können Ausschlüsse gelten. Ob eine Leistung versichert ist, lässt sich nur anhand von Antrag, Beginn und Tarifbedingungen beurteilen.",
+    "roomingTitle": "Der sichere nächste Schritt",
+    "roomingText": "Interessierte Familien melden sich direkt bei Healio. Wir prüfen bestehenden Schutz, gewünschte Leistungen, Fristen und mögliche Ausschlüsse, bevor eine Empfehlung ausgesprochen oder ein Antrag gestellt wird. Rückwirkende Leistungsversprechen gibt es nicht.",
+    "compareTitle": "Tarife nicht pauschal empfehlen",
+    "compareSubtitle": "Beitrag, Gesundheitsprüfung, Wartezeiten und Leistungsumfang unterscheiden sich. Healio vergleicht die passenden Optionen im Einzelfall; die Hebamme bleibt bei der neutralen Information.",
     "bayerischeName": "Die Bayerische",
-    "bayerischeTag": "Unsere Empfehlung für junge Familien",
+    "bayerischeTag": "Beitragsorientierte Tarifoption – individuell prüfen",
     "bayerischeItems": [
-      "Kind ab rund 4 Euro im Monat im Top-Tarif, Einstiegstarif ab rund 2 Euro",
-      "Rooming-in für Kinder bis 16 Jahre, Familienzimmer im Top-Tarif ohne Begrenzung",
-      "Chefarzt zu 100 Prozent, ohne Begrenzung auf die GOÄ-Höchstsätze",
-      "Privat abrechnende Hebamme im stationären Aufenthalt mitversichert",
-      "Schlanke Annahme mit nur zwei Gesundheitsfragen",
-      "Erwachsene mit 30 ab rund 13 Euro im Monat",
-      "Der Einstiegstarif fürs Kind lässt sich später ohne erneute Gesundheitsprüfung hochstufen"
+      "Mehrere Tarifstufen mit unterschiedlichem Leistungsumfang",
+      "Rooming-in und Unterbringung abhängig vom gewählten Tarif",
+      "Privatärztliche Leistungen und Krankenhauswahl nach Tarifbedingungen",
+      "Beiträge hängen von Alter und Tarif ab und werden individuell berechnet",
+      "Gesundheitsfragen, Wartezeiten und Vorversicherungszeit vor Antrag prüfen"
     ],
-    "bayerischeCaveat": "Ehrlich dazu: Es gilt eine besondere Wartezeit von acht Monaten für die Entbindung, und für das Neugeborene muss ein Elternteil schon drei Monate versichert sein. Die Frist läuft damit im sechsten Schwangerschaftsmonat ab. Außerdem bildet der Tarif keine Alterungsrückstellungen, der Beitrag ist im jungen Alter sehr niedrig und steigt im hohen Alter planmäßig deutlich. Für Kinder und die Familienphase ist genau das der stärkste Hebel, als lebenslange Lösung muss man es wissen.",
+    "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen und die individuelle Risikoprüfung. Aus diesem Beispiel folgt keine pauschale Empfehlung.",
     "sdkName": "Die SDK",
-    "sdkTag": "Die erste Wahl bei Kinderwunsch",
+    "sdkTag": "Tarifoption ohne tarifliche Wartezeit – individuell prüfen",
     "sdkItems": [
-      "Keine Wartezeiten, wörtlich in den Bedingungen. Der Schutz gilt ab dem ersten Tag, auch für eine Entbindung",
-      "Kindernachversicherung ohne Vorversicherungszeit: Es genügt, dass ein Elternteil zur Zeit der Geburt versichert ist",
-      "Familienzimmer bei Entbindung, im Klinik 1-Bett zu 100 Prozent",
-      "Gesondert berechenbare Leistungen von Beleghebammen und Belegentbindungspflegern mitversichert",
-      "Rooming-in: Ein Elternteil bleibt beim Kind, bis zum 16. Lebensjahr",
-      "Erstattung über die GOÄ-Höchstsätze hinaus, freie Klinikwahl inklusive Privatkliniken",
-      "Mit Alterungsrückstellungen kalkuliert, dadurch stabiler über die Jahrzehnte",
-      "Beispielbeiträge mit 30 Jahren: Klinik 2-Bett 32,82 Euro, Klinik 1-Bett 49,78 Euro im Monat"
+      "Nach den aktuellen Bedingungen bestehen keine tariflichen Wartezeiten; bereits eingetretene Versicherungsfälle bleiben ausgeschlossen",
+      "Kindernachversicherung bei fristgerechter Anmeldung und passendem Elternschutz",
+      "Rooming-in für versicherte Kinder unter 16 Jahren nach Tarifbedingungen",
+      "Ein- oder Zweibettzimmer, privatärztliche Behandlung und Klinikwahl je nach Tarif",
+      "Gesundheitsfragen und Ausschlüsse bei bereits festgestellter Schwangerschaft beachten"
     ],
-    "sdkCaveat": "Ehrlich dazu: Für eine junge Familie ist das viel Geld, oft das Drei bis Vierfache der Bayerischen. Auch hier gehören Gesundheitsfragen zum Antrag. Und die Grenze bleibt: Ist die Schwangerschaft bei Antragstellung ärztlich festgestellt, wird für diese Entbindung nicht geleistet.",
-    "bonusNote": "Beides lässt sich mit dem Bonusprogramm der Krankenkasse kombinieren. Die Zusatzversicherung ist dort als Zuschussleistung anerkannt und verdreifacht den Geldbonus, maximal bis zur Höhe der nachgewiesenen Beiträge. Für viele Familien trägt der Bonus damit einen erheblichen Teil des Beitrags mit.",
-    "closingNote": "Welcher Weg im Einzelfall passt, hängt vom Alter, vom Budget und vom Gesundheitszustand ab. Das klärt Healio kostenfrei in der Beratung. Du musst nichts davon erklären und nichts durchrechnen, dein Hinweis zur richtigen Zeit genügt.",
+    "sdkCaveat": "Auch hier entscheiden Antrag, Gesundheitsangaben und Tarifbedingungen. Ein Vertrag muss vor dem maßgeblichen Versicherungsfall wirksam sein.",
+    "bonusNote": "Ein Kassenbonus kann unter seinen eigenen Voraussetzungen einen Teil nachgewiesener Beiträge ausgleichen. Höhe und Kombination werden getrennt geprüft; eine vollständige Refinanzierung ist nicht garantiert.",
+    "closingNote": "Welcher Weg passt, hängt unter anderem von Alter, Budget, Gesundheitsangaben und bestehendem Schutz ab. Das klärt Healio individuell. Du musst weder Tarife erklären noch Beiträge berechnen.",
     "ctaLink": "Alle Details zur Krankenhauszusatzversicherung"
   },
   "benefits": {

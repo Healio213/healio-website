@@ -10,19 +10,19 @@ const mainBenefitKeys = ['spitzenversorgung', 'privatsphaere', 'wartezeiten', 'f
 const featureKeys = ['einbettzimmer', 'chefarzt', 'klinikwahl', 'keineWartezeit', 'tagegeld', 'ambulanteOps', 'familienzimmer', 'vorNachStationaer'];
 
 // Reihenfolge: Spitzenversorgung, Privatsphäre, Einstieg für Aktive, Familie
-const mainBenefitIcons = ['ambulant-care', 'hospital-comfort', 'protection-path', 'family-care'];
+const mainBenefitIcons = ['ambulant', 'hospital', 'protection', 'family'];
 
 // Die Detailleistungen bekommen eigene, leicht erfassbare Motive. Die kleinere
 // Kachelgröße hält die visuelle Hierarchie unterhalb der vier Hauptvorteile.
 const featureIcons = [
-  { icon: 'hospital-comfort', tone: 'lavender' },
-  { icon: 'ambulant-care', tone: 'mint' },
-  { icon: 'hospital-comfort', tone: 'sky' },
-  { icon: 'ongoing-service', tone: 'butter' },
-  { icon: 'health-budget', tone: 'butter' },
-  { icon: 'protection-path', tone: 'coral' },
-  { icon: 'family-care', tone: 'lavender' },
-  { icon: 'ongoing-service', tone: 'sky' },
+  { kind: 'hospital', tone: 'lavender' },
+  { kind: 'ambulant', tone: 'mint' },
+  { kind: 'hospital', tone: 'sky' },
+  { kind: 'switch', tone: 'butter' },
+  { kind: 'money', tone: 'butter' },
+  { kind: 'hospital', tone: 'coral' },
+  { kind: 'family', tone: 'lavender' },
+  { kind: 'hospital', tone: 'sky' },
 ];
 
 const HospitalBenefits = () => {
@@ -56,7 +56,7 @@ const HospitalBenefits = () => {
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {mainBenefitKeys.map((key, idx) => (
               <article key={key} className="bg-[#25c990]/5 p-6 rounded-2xl border border-[#25c990]/20 flex items-start gap-5 text-left">
-                <FriendlyIcon icon={mainBenefitIcons[idx]} tone={idx % 2 ? 'lavender' : 'mint'} size="sm" />
+                <FriendlyIcon kind={mainBenefitIcons[idx]} tone={idx % 2 ? 'lavender' : 'mint'} size="sm" />
                 <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-2">{t(`benefits.mainBenefits.${key}.title`)}</h4>
                 <p className="text-slate-600">{t(`benefits.mainBenefits.${key}.desc`)}</p>
@@ -86,7 +86,7 @@ const HospitalBenefits = () => {
                 className="group/card flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-8 text-center shadow-sm transition-all duration-300 hover:border-[#25c990]/30 hover:shadow-lg"
               >
                 <FriendlyIcon
-                  icon={featureIcons[index].icon}
+                  kind={featureIcons[index].kind}
                   tone={featureIcons[index].tone}
                   size="sm"
                   className="mb-5 transition-transform duration-300 group-hover/card:-translate-y-1 group-hover/card:scale-105"

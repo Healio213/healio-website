@@ -3,8 +3,9 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
-import { CheckCircle2, ExternalLink, Smartphone } from 'lucide-react';
+import { CheckCircle2, ExternalLink, MessageCircle, Smartphone } from 'lucide-react';
 import { openConsentSettings } from '@/lib/consent';
+import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
@@ -84,8 +85,8 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
-          <div>
+        <div className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-[1.25fr_repeat(4,minmax(0,1fr))]">
+          <div className="sm:col-span-2 xl:col-span-1">
             <h3 className="text-2xl font-bold mb-4 text-white">Healio</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
               {t('footer.tagline')}
@@ -93,34 +94,56 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <p className="text-slate-500 text-xs mt-2 leading-relaxed">
               {t('footer.disclaimer')}
             </p>
+            <ul className="mt-5 space-y-3 text-sm text-slate-400">
+              <li><a href="mailto:info@healio.de" className="hover:text-healio-primary transition-colors">info@healio.de</a></li>
+              <li><a href="tel:+494089755705" className="hover:text-healio-primary transition-colors">+49 40 89755705</a></li>
+              <li>
+                <a
+                  href={HEALIO_WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-healio-whatsapp="footer"
+                  className="inline-flex min-h-11 items-center gap-2 text-left transition-colors hover:text-healio-primary focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-healio-primary"
+                  aria-label={lang === 'en' ? 'Open WhatsApp with Healio, external service (new tab)' : 'WhatsApp mit Healio öffnen, externer Dienst (neuer Tab)'}
+                >
+                  <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  {lang === 'en' ? 'Open WhatsApp (external service)' : 'WhatsApp öffnen (externer Dienst)'}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4 text-slate-200">{t('footer.privateCustomers')}</h4>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
+              <li><Link to={getPath('kassenbonus')} className="hover:text-healio-primary transition-colors">{t('footer.kassenbonus')}</Link></li>
+            </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4 text-slate-200">{t('footer.company')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
               <li><Link to={getPath('unternehmen')} className="hover:text-healio-primary transition-colors">{t('footer.unternehmen')}</Link></li>
-              <li><Link to={getPath('leistungen')} className="hover:text-healio-primary transition-colors">{t('footer.leistungen')}</Link></li>
-              <li><Link to={getPath('kassenbonus')} className="hover:text-healio-primary transition-colors">{t('footer.kassenbonus')}</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4 text-slate-200">{t('footer.practices')}</h4>
+            <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('partner')} className="hover:text-healio-primary transition-colors">{t('footer.partner')}</Link></li>
-              {/* Diese Seiten hatten site-weit keinen einzigen internen
-                  Link und waren nur ueber die Sitemap erreichbar. */}
-              <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
               <li><Link to={getPath('hebammen')} className="hover:text-healio-primary transition-colors">{t('footer.hebammen')}</Link></li>
               {lang === 'de' && (
-                <li><Link to="/zahnaerzte" className="hover:text-healio-primary transition-colors">{t('footer.zahnaerzte')}</Link></li>
+                <>
+                  <li><Link to="/zahnaerzte" className="hover:text-healio-primary transition-colors">{t('footer.zahnaerzte')}</Link></li>
+                  <li><Link to="/heilberufe-vorsorge" className="hover:text-healio-primary transition-colors">{t('footer.heilberufe')}</Link></li>
+                </>
               )}
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 text-slate-200">{t('footer.contact')}</h4>
+            <h4 className="font-semibold mb-4 text-slate-200">{t('footer.healioLegal')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><a href="mailto:info@healio.de" className="hover:text-healio-primary transition-colors">info@healio.de</a></li>
-              <li><a href="tel:+494089755705" className="hover:text-healio-primary transition-colors">+49 40 89755705</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4 text-slate-200">{t('footer.legal')}</h4>
-            <ul className="space-y-3 text-sm text-slate-400">
+              <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
+              <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
+              <li><Link to={getPath('kontakt')} className="hover:text-healio-primary transition-colors">{t('footer.contact')}</Link></li>
               <li><Link to={getPath('impressum')} className="hover:text-healio-primary transition-colors">{t('footer.impressum')}</Link></li>
               <li><Link to={getPath('datenschutz')} className="hover:text-healio-primary transition-colors">{t('footer.datenschutz')}</Link></li>
               {!isDentalCheckRoute && (

@@ -2,7 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const processIcons = ['clear-comparison', 'concept-calculator', 'team-introduction', 'ongoing-service'];
+// Bestand verstehen, Konzept rechnen, verständlich einführen, laufend betreuen
+const processIcons = ['🔍', '🧮', '🚀', '🤝'];
 const processTones = ['sky', 'butter', 'mint', 'lavender'];
 
 const CompanyProcess = () => {
@@ -24,7 +25,7 @@ const CompanyProcess = () => {
           {steps.map((step, index) => (
             <li key={step.title} className="bg-[#f5f8f7] p-7 sm:p-8">
               <div className="flex items-center justify-between gap-5">
-                <FriendlyIcon icon={processIcons[index]} tone={processTones[index]} size="sm" />
+                <FriendlyIcon emoji={processIcons[index]} label={step.title} tone={processTones[index]} size="sm" />
                 <span className="font-display text-xs font-extrabold tracking-[0.18em] text-emerald-700">0{index + 1}</span>
               </div>
               <h3 className="mt-7 font-display text-2xl font-extrabold tracking-[-0.025em] text-[#10202a]">{step.title}</h3>

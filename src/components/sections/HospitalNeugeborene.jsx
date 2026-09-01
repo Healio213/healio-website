@@ -18,9 +18,9 @@ const HospitalNeugeborene = () => {
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
 
   const cards = [
-    { icon: 'family-care', tone: 'coral', title: t('neugeborene.card1Title'), text: t('neugeborene.card1Text') },
-    { icon: 'protection-path', tone: 'mint', title: t('neugeborene.card2Title'), text: t('neugeborene.card2Text') },
-    { icon: 'hospital-comfort', tone: 'lavender', title: t('neugeborene.card3Title'), text: t('neugeborene.card3Text') },
+    { emoji: '👶', tone: 'coral', title: t('neugeborene.card1Title'), text: t('neugeborene.card1Text') },
+    { emoji: '🛡️', tone: 'mint', title: t('neugeborene.card2Title'), text: t('neugeborene.card2Text') },
+    { emoji: '🤱', tone: 'lavender', title: t('neugeborene.card3Title'), text: t('neugeborene.card3Text') },
   ];
 
   return (
@@ -48,7 +48,7 @@ const HospitalNeugeborene = () => {
               transition={{ delay: index * 0.08 }}
               className="rounded-2xl border border-rose-100 bg-white p-6 shadow-md"
             >
-              <FriendlyIcon icon={card.icon} tone={card.tone} size="sm" className="mb-4" />
+              <FriendlyIcon emoji={card.emoji} tone={card.tone} size="sm" className="mb-4" />
               <h3 className="mb-2 text-lg font-extrabold text-healio-dark">{card.title}</h3>
               <p className="text-sm leading-relaxed text-gray-600">{card.text}</p>
             </motion.div>

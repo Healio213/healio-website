@@ -48,7 +48,7 @@ const AmbulantIKKServices = () => {
           >
             <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-6">
               <div className="flex items-center gap-3 mb-2">
-                <FriendlyIcon icon="digital-completion" tone="sky" size="sm" />
+                <FriendlyIcon emoji="📱" tone="sky" size="sm" />
                 <div>
                   <h3 className="text-2xl font-bold text-white">{t('ikkServices.teleclinic.title')}</h3>
                   <span className="text-blue-100 text-sm font-medium">{t('ikkServices.teleclinic.badge')}</span>
@@ -93,7 +93,7 @@ const AmbulantIKKServices = () => {
           >
             <div className="bg-gradient-to-r from-purple-600 to-purple-500 p-6">
               <div className="flex items-center gap-3 mb-2">
-                <FriendlyIcon icon="independent-guidance" tone="lavender" size="sm" />
+                <FriendlyIcon emoji="🔎" tone="lavender" size="sm" />
                 <div>
                   <h3 className="text-2xl font-bold text-white">{t('ikkServices.betterdoc.title')}</h3>
                   <span className="text-purple-100 text-sm font-medium">{t('ikkServices.betterdoc.badge')}</span>

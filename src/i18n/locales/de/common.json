@@ -5,7 +5,6 @@
     "unternehmen": "Für Unternehmen",
     "ambulant": "Ambulante Zusatzversicherung",
     "kassenbonus": "Kassenbonus & GKV-Vergleich",
-    "kassenboost": "KassenBoost",
     "zahn": "Zahnzusatzversicherung",
     "stationaer": "Stationäre Zusatzversicherung",
     "tier": "Tierkrankenversicherung",
@@ -16,6 +15,7 @@
     "kontakt": "Kontakt",
     "erstgespraech": "Erstgespräch",
     "schutzWaehlen": "Schutz auswählen",
+    "kassenvorteil": "Kassenvorteil prüfen",
     "beratung": "Beratung starten",
     "potenzialanalyse": "Vorsorge-Check",
     "kennenlernen": "Kennenlernen",
@@ -28,17 +28,21 @@
   "footer": {
     "tagline": "Dein digitaler Versicherungsmakler für smartere Gesundheitsvorsorge.",
     "disclaimer": "Die Healio GmbH ist als Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO tätig.",
-    "company": "Unternehmen",
+    "privateCustomers": "Privatkunden",
+    "company": "Für Unternehmen",
+    "practices": "Praxen & Heilberufe",
+    "healioLegal": "Healio & Rechtliches",
     "contact": "Kontakt",
     "legal": "Rechtliches",
     "aboutUs": "Über uns",
     "unternehmen": "Für Unternehmen",
     "leistungen": "Leistungen",
-    "kassenbonus": "KassenBoost",
+    "kassenbonus": "Kassenbonus vergleichen",
     "partner": "Partner",
     "ratgeber": "Ratgeber",
     "hebammen": "Für Hebammen",
     "zahnaerzte": "Für Zahnärzte",
+    "heilberufe": "Absicherung für Heilberufe",
     "impressum": "Impressum",
     "datenschutz": "Datenschutz",
     "cookieSettings": "Cookie-Einstellungen",
@@ -58,11 +62,17 @@
     "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
     "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
   },
-  "kassenboostHint": {
-    "iconLabel": "Krankenkassen vergleichen",
-    "title": "Noch nicht sicher, ob IKK classic zu dir passt?",
-    "body": "KassenBoost vergleicht Beitrag, Bonus und besondere Leistungen – damit du die gesetzliche Kasse findest, die zu deinem Alltag passt.",
-    "cta": "Meine Krankenkasse vergleichen"
+  "kassenBoostBridge": {
+    "eyebrow": "Krankenkasse bewusst wählen",
+    "title": "Günstigster Beitrag oder größter persönlicher Vorteil?",
+    "description": "KassenBoost trennt Beitrag, erreichbaren Bonus und Leistungen. So vergleichst du fair und entscheidest selbst, was dir wichtiger ist.",
+    "choices": [
+      {"title": "Beitrag im Fokus", "description": "Wenn du vor allem deine monatlichen Kosten senken möchtest."},
+      {"title": "Vorteil im Fokus", "description": "Wenn Bonus und passende Leistungen für dich mehr zählen."}
+    ],
+    "noteLabel": "Einordnung, keine Vorgabe",
+    "note": "Die IKK classic kann mit 700 EUR+ Bonus pro Jahr eine starke Option sein. Ob sie zu dir passt, hängt von Region, Voraussetzungen und deinen Prioritäten ab.",
+    "cta": "Bei KassenBoost vergleichen"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Eckdaten der betrieblichen Altersvorsorge bei der Lebenshilfe",

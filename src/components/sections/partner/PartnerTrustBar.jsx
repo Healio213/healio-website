@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Gift, Shield, Euro } from 'lucide-react';
+import { CalendarCheck, FileText, Shield, Euro } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const PartnerTrustBar = () => {
@@ -9,9 +9,9 @@ const PartnerTrustBar = () => {
 
   const trustItems = [
     { icon: Euro, text: t('trust.budget') },
-    { icon: Gift, text: t('trust.information') },
+    { icon: FileText, text: t('trust.information') },
     { icon: Shield, text: t('trust.advice') },
-    { icon: CheckCircle, text: t('trust.meeting') },
+    { icon: CalendarCheck, text: t('trust.meeting') },
   ];
 
   return (

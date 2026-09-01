@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Calculator, CheckCircle, ChevronDown } from 'lucide-react';
+import { CheckCircle, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const AmbulantBeispielrechnung = () => {
   const { t } = useTranslation('ambulant');
@@ -50,7 +51,7 @@ const AmbulantBeispielrechnung = () => {
           className={`${mobileOpen ? 'block' : 'hidden'} bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-[#10b981] rounded-2xl p-5 md:p-10 shadow-lg`}
         >
           <div className="flex items-center gap-3 mb-6 md:mb-8">
-            <Calculator className="w-7 h-7 md:w-8 md:h-8 text-[#10b981]" />
+            <FriendlyIcon kind="calculator" tone="mint" size="sm" />
             <h3 className="text-xl md:text-2xl font-bold text-gray-900">{t('beispielrechnung.example')}</h3>
           </div>
 

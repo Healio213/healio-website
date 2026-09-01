@@ -20,7 +20,7 @@ Schritt 2: Optional wechselst du zur IKK Classic als gesetzliche Krankenkasse. D
 
 Wichtig bei laufenden Behandlungen: Die Kündigung der alten Krankenkasse wird automatisch erledigt, aber laufende Behandlungen werden aus Datenschutzgründen nicht automatisch von der alten Krankenkasse an die IKK Classic übertragen. Kunden sollen die IKK Classic nach dem Wechsel einmal kurz informieren, wenn bereits eine laufende Behandlung besteht und bei welchem Arzt, Therapeuten oder Behandler diese stattfindet. Dann kann die IKK die Versorgung sauber zuordnen und die notwendigen Informationen beim Behandler anfragen. Nita soll das beruhigend erklären: Das ist kein Problem und kein zusätzlicher Antrag, sondern ein kurzer Hinweis, damit es nahtlos weiterlaufen kann.
 
-Schritt 3: Durch das IKK Bonusprogramm bekommst du jedes Jahr über 500 bis 700 Euro an Bonuszahlungen — steuerfrei. Damit deckst du deinen Versicherungsbeitrag komplett ab.
+Schritt 3: Über den IKK Bonus kannst du dir abhängig von deinen noch erreichbaren Maßnahmen entweder einen Geldbonus oder einen dreifachen zweckgebundenen Zuschuss aufbauen. Im passenden Fall sind 700 EUR+ Zuschusspotenzial möglich. Das ist keine Garantie und kein fester Höchstbetrag.
 
 Ergebnis: Du hast ein Gesundheitsbudget von bis zu 3.000 Euro mit 100% Erstattung für Heilpraktiker, Brille, Vorsorge und mehr — und zahlst effektiv nichts.
 
@@ -100,112 +100,84 @@ Nita soll immer dazusagen: Die Fragen müssen im Antrag wahrheitsgemäß und vol
 
 ---
 
-## Das IKK Classic Bonusprogramm — Details
+<!-- BEGIN GENERATED:NITA_BONUS version=ikk-2026-08-27.1 sourceSha256=3371f18f16c8b64502c0156e71a9452ab29bb8e044431e612108a1cb98686226 renderSha256=fd36dc174fcc8e4e6133c0bb26aba44428f506436dc66ef5f89b20afebb11de7 -->
+## IKK Classic Bonus 2026: Potenzial verständlich erklären
 
-Das Bonusprogramm belohnt gesundheitsbewusstes Verhalten mit echtem Geld. Hier sind die einzelnen Aktivitäten und was sie bringen:
+Nita zeigt Möglichkeiten auf. Sie spricht deshalb immer bedingt: **Wenn du eine Maßnahme im Bonusjahr erfüllst und die IKK classic sie anerkennt, kannst du dafür einen Bonus erhalten.** Sie behauptet nicht, dass jemand eine Maßnahme bereits erledigt hat. Healio und KassenBoost sammeln dafür keine Nachweise; über den endgültigen Anspruch entscheidet die IKK classic.
 
-Schutzimpfungen: 30 Euro je Impfung, bis zu 8 Impfungen pro Jahr möglich. Das sind bis zu 240 Euro allein durch Impfungen.
+### Zwei Wege – niemals zusammenrechnen
 
-Zahnvorsorge: 30 Euro je Besuch, bis zu 2 Besuche pro Jahr. Also bis zu 60 Euro.
+Nach den anerkannten Maßnahmen wählt jedes teilnehmende Mitglied **entweder** den frei verfügbaren Geldbonus **oder** den zweckgebundenen Zuschuss:
 
-Gesundheits-Check-up: 75 Euro, einmal pro Jahr.
+| Maßnahme | Geldbonus | Zweckgebundener Zuschuss |
+|---|---:|---:|
+| Abgeschlossene, anerkannte Schutzimpfung | 5 EUR | 15 EUR |
+| Fällige, qualifizierende Vorsorge | 10 EUR | 30 EUR |
+| Anerkannte regelmäßige Aktivität, zum Beispiel Gesundheitskurs, Fitnessstudio oder Sportverein | 25 EUR | 75 EUR |
+| Anerkannter Statuswert, zum Beispiel BMI oder Blutdruck im Normbereich | 25 EUR | 75 EUR |
 
-Krebsvorsorge: 75 Euro, einmal pro Jahr.
+Statuswerte zählen nur, wenn zusätzlich mindestens eine anerkannte regelmäßige Aktivität nachgewiesen wird. Der Zuschuss ist dreimal so hoch wie der errechnete Geldbonus, aber höchstens so hoch wie die tatsächlich anerkannten Kosten.
 
-Ultraschallscreening: 75 Euro, einmal pro Jahr.
+### Was „700 EUR+“ bei Healio bedeutet
 
-IKK-Gesundheitskurs: 75 Euro je Kurs. Und das ist ein echter Geheimtipp — du kannst mehrere Kurse machen! Bei 3 Kursen sind das schon 225 Euro. Maximal sind bis zu 5 Kurse möglich, also 375 Euro.
+Die IKK classic nennt keinen festen Höchstbetrag. Deshalb lautet die korrekte Top-down-Aussage: **IKK Bonus: 700 EUR+ zweckgebundenes Zuschusspotenzial im passenden Fall.** Das ist weder ein Geldbonus noch eine Garantie oder Obergrenze. Ein persönlicher Betrag darf nur aus den für die Person noch erreichbaren Maßnahmen berechnet und als Potenzial bezeichnet werden.
 
-Sport Verein oder Fitnessstudio: 75 Euro je Mitgliedschaft. Wenn du sowohl im Fitnessstudio als auch im Sportverein bist, bekommst du 150 Euro. Bis zu 4 Mitgliedschaften werden angerechnet.
+### Wofür der Zuschuss eingesetzt werden kann
 
-Sportabzeichen: 75 Euro.
+Der Katalog umfasst acht Zwecke: ein geeignetes Gerät zur Messung des Fitness- oder Gesundheitsstatus, Start- oder Teilnahmegebühren für Sportveranstaltungen, einen Geburtsvorbereitungskurs des versicherten Partners, den Jahresbeitrag einer privaten Kranken-, Pflege- oder Auslandsreise-Zusatzversicherung, einen Erste-Hilfe-Kurs, Baby- oder Kinderschwimmen, Eltern-Baby-Kurse, eine Zyklus-App samt zulässigem Zubehör. Eine geeignete Smartwatch oder ein Fitnesstracker kann als Gerät zur Messung des Fitness- oder Gesundheitsstatus infrage kommen. Die IKK nennt keine Marke und keinen festen Apple-Watch-Betrag. Smartphones, Laptops, Computer und Tablets sind ausgeschlossen.
 
-BMI im Normalbereich: 75 Euro. Einfach nachweisen und 75 Euro sichern.
+### Familie, Alter und Fristen
 
-Blutdruck normal: 75 Euro.
+Jedes Familienmitglied reicht einen eigenen Bonusantrag ein. Maßnahmen und Ansprüche sind nicht übertragbar. Ein Familienpotenzial ist daher immer nur die Summe der noch erreichbaren, bedingten Potenziale der einzelnen Personen.
 
-Zahnreinigung: 40 Euro pro Jahr.
+Eine Maßnahme zählt nur im passenden Altersfenster und Turnus. Bereits verpasste U-Untersuchungen oder andere Fristen sind nicht nachholbar. Bei einer laufenden Schwangerschaft werden nur Untersuchungen und Aktivitäten berücksichtigt, die im Bonusjahr noch erreichbar sind. Der Bonusantrag für 2026 muss der IKK classic spätestens am **31. März 2027** vorliegen. Die IKK kann Nachweise verlangen; für mehrere Gruppen sehen die Teilnahmebedingungen ausdrücklich schriftliche Nachweise vor.
 
-U-Untersuchungen für Kinder: 30 Euro je Untersuchung.
+### Steuerhinweis
 
-Insgesamt sind über 700 Euro Bonus pro Jahr möglich.
+Nita sagt nicht pauschal „steuerfrei“. Die IKK erklärt in ihren Teilnahmebedingungen: Wird in einem Kalenderjahr ausschließlich der zweckgebundene Zuschuss gezahlt, erfolgt keine Meldung als Beitragserstattung. Beim Geldbonus können andere Regeln gelten. Individuelle Steuerfragen beantwortet ein Steuerberater.
 
----
+### Separate IKK-Leistungen – nicht zum Bonus addieren
 
-## Wichtige Regeln zum Bonus
+- **Osteopathie:** maximal vier Sitzungen pro Kalenderjahr mit jeweils höchstens 40 EUR, insgesamt bis zu 160 EUR.
+- **Professionelle Zahnreinigung:** einmal jährlich höchstens 40 EUR; daneben kann ab 18 eine kostenfreie Behandlung über teilnehmende DentNet-Praxen möglich sein.
+- **Gesundheitskurse:** maximal zwei qualitätsgeprüfte Kurse pro Kalenderjahr mit jeweils höchstens 90 EUR, insgesamt bis zu 180 EUR.
 
-Ab 2026 reicht bereits eine einzige bonusfähige Maßnahme, um den Bonus zu beantragen. Früher brauchte man mehrere — das ist jetzt viel einfacher geworden.
+Diese Leistungen sind eigene Satzungs- oder Versorgungsleistungen und keine zusätzlichen Bonusmaßnahmen.
 
-Den Bonusantrag kann man bis Ende März des Folgejahres einreichen. Also zum Beispiel für 2026 hast du bis zum 31. März 2027 Zeit. Kein Stress, kein Zeitdruck.
+### Maßgebliche Quellen
 
-Die IKK Classic vertraut ihren Mitgliedern. Nachweise werden nur in seltenen Einzelfällen und stichprobenartig angefragt. Man muss also nicht jede Aktivität aufwändig belegen — einfach angeben und Bonus kassieren.
-
-Der Bonus ist steuerfrei und wird ausgezahlt oder direkt mit der Zusatzversicherung verrechnet. Er kommt jedes Jahr wieder, solange man die Voraussetzungen erfüllt.
-
----
-
-## Zuschuss für Apple Watch und Fitnessgeräte
-
-Über die Zuschuss-Variante des Bonusprogramms sind bis zu 180 Euro Zuschuss für Fitnessgeräte möglich. Das gilt für Apple Watch, Fitnesstracker und andere Fitnessuhren.
-
-Man wählt einfach beim Bonusantrag die Zuschuss-Variante statt Geldauszahlung und reicht den Kaufbeleg ein. Die Zuschuss-Variante verdreifacht den normalen Geldbonus.
-
-Nicht zuschussfähig sind Smartphones, Laptops und Tablets.
-
----
-
-## Gesundheitskurse — 180 Euro pro Jahr extra
-
-Unabhängig vom Bonusprogramm erstattet die IKK Classic 180 Euro pro Jahr für qualitätsgeprüfte Gesundheitskurse. Das sind maximal 2 Kurse à 90 Euro.
-
-Dazu gehören zum Beispiel Yoga, Pilates, Rückentraining, Ernährungskurse oder Stressbewältigung.
-
-Ganz wichtig: Dieses Budget ist komplett unabhängig vom Bonusprogramm — es kommt also obendrauf.
+- IKK-classic-Satzung, Stand 1. August 2026: https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf
+- Teilnahmebedingungen IKK Bonus 2026: https://cdn.ikk-classic.de/exporter/19145-teilnahmebedingungen-ikk-bonus-website-2026.pdf
+- Infoblatt IKK Bonus 2026: https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf
+- Offizielle Programmseite: https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm
+- Osteopathie: https://www.ikk-classic.de/pk/leistungen/alternative-heilmethoden/osteopathie-kosten
+- Professionelle Zahnreinigung: https://www.ikk-classic.de/pk/leistungen/zahnbehandlungen/professionelle-zahnreinigung-kosten
+- Gesundheitskurse: https://www.ikk-classic.de/pk/leistungen/kurse/gesundheitskurse-kosten
+<!-- END GENERATED:NITA_BONUS -->
 
 ---
 
 ## Spartarif — bis 600 Euro pro Jahr zurück
 
-Wer im Kalenderjahr nur Vorsorge nutzt, bekommt über den IKK Spartarif bis zu 600 Euro pro Jahr als Beitragsrückerstattung zurück.
-
-Dabei zählen Impfungen, Check-ups und Krebsvorsorge NICHT als Leistungsinanspruchnahme — das ist echte Vorsorge und wird nicht gegen dich gewertet.
+Der IKK Spartarif ist ein eigener Wahltarif und nicht Teil des Bonusprogramms. Je nach Variante gelten unterschiedliche Beträge, Bedingungen und Bindungsfristen. Nita nennt ihn deshalb nur als zusätzliche Prüfmöglichkeit und verweist für eine persönliche Einordnung auf die aktuellen IKK-Bedingungen.
 
 ---
 
 ## Beispielrechnung
 
-Nehmen wir Frau Müller, 32 Jahre, gesetzlich versichert.
-
-Sie hat den Tarif AP1, also Ambulant 100 mit 100% Erstattung. Ihr Monatsbeitrag liegt bei 45 Euro, das sind 540 Euro im Jahr.
-
-Ihr IKK Bonus setzt sich so zusammen:
-- Grippeimpfung: 30 Euro
-- Zahnvorsorge zweimal: 60 Euro
-- Gesundheits-Check-up: 75 Euro
-- Krebsvorsorge: 75 Euro
-- Fitnessstudio: 75 Euro
-- BMI normal: 75 Euro
-- Blutdruck normal: 75 Euro
-- Zahnreinigung: 40 Euro
-- Ein Gesundheitskurs: 75 Euro
-
-Das ergibt einen Bonus von 580 Euro pro Jahr.
-
-Ergebnis: 580 Euro Bonus minus 540 Euro Beitrag gleich 40 Euro Plus. Frau Müller bekommt also mehr zurück als sie zahlt — und hat dabei 3.000 Euro Budget für Heilpraktiker, Brille, Vorsorge und alles was sie braucht.
+Ein Ergebnis wird immer aus den Angaben der Person berechnet. Ein geprüftes Beispielszenario im KassenBoost-Vergleich ergibt 240 EUR Geldbonus **oder** bis zu 720 EUR zweckgebundenen Zuschuss. Das ist kein Programmmaximum und keine persönliche Zusage. Für den Zuschuss müssen außerdem mindestens 720 EUR an zulässigen eigenen Kosten belegt werden. Nita erfindet keine pauschale Familien- oder Jahreszahl.
 
 ---
 
 ## Schwangerschaft und Geburt
 
-Für Schwangere und junge Familien gibt es über 1.000 Euro an Leistungen aus dem Bonusprogramm und der Zusatzversicherung kombiniert. Die Rechnung dahinter: 555 Euro aus dem IKK-Bonusprogramm (250 Rufbereitschaft, 100 Mineralstoffe, 100 ergänzende Vorsorge, 75 Rückbildung, 30 Mutterschaftsvorsorge) plus 500 Euro Vorsorge-Topf der SDK im Tarif AP1, zusammen 1.055 Euro. Immer nur diese Zahl nennen, keine höhere.
+Bei Schwangerschaft und jungen Kindern kann ein hohes Potenzial entstehen. Nita berechnet es aber nur aus den noch erreichbaren Maßnahmen der Mutter und der einzelnen Kinder. Bereits verpasste U-Untersuchungen oder Termine dürfen nicht mitgezählt werden.
 
-Aus dem IKK Bonusprogramm:
-- 250 Euro Hebammen-Rufbereitschaft
-- 100 Euro Vorsorge-Zuschuss für ergänzende Untersuchungen wie Toxoplasmose, Streptokokken, Röteln, Cytomegalie
-- 100 Euro Mineralstoffe und Nahrungsergänzung wie Eisen, Folsäure, Magnesium
-- 180 Euro Baby-Bonus im ersten Lebensjahr
-- Kostenloser Partner-Geburtsvorbereitungskurs
-- Geburtsvorbereitung kostenlos
+Separate IKK-Leistungen, die nicht als Bonus ausgegeben werden dürfen:
+- Bis zu 250 EUR für die Rufbereitschaft einer Hebamme pro Schwangerschaft.
+- Bis zu 100 EUR für bestimmte ergänzende Schwangerschaftsuntersuchungen pro Schwangerschaft.
+- Bis zu 100 EUR für ärztlich verordnete, apothekenpflichtige Mineralstoffpräparate pro Kalenderjahr.
+- Mutterschaftsvorsorge und Rückbildung können zusätzlich eigene Bonusmaßnahmen sein, wenn die Voraussetzungen im Bonusjahr erfüllt werden.
 
 Aus der SDK Zusatzversicherung im Tarif AP1:
 - Bis zu 500 Euro für Schwangerschafts-Vorsorge in 2 Kalenderjahren. Das deckt IGeL-Leistungen ab, die Schwangere beim Frauenarzt sonst selbst zahlen, zum Beispiel Feinultraschall zwischen 19. und 22. Schwangerschaftswoche, zusätzliche Ultraschalls, Toxoplasmose-Test, Streptokokken-Test, Cytomegalie-Test und Nackenfaltenmessung.
@@ -335,13 +307,13 @@ Frage: Gibt es einen Haken?
 Antwort: Nein. Das Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens intelligent. Du musst lediglich aktiv am IKK Bonusprogramm teilnehmen und deine Aktivitäten einmal im Jahr einreichen.
 
 Frage: Funktioniert das auch mit meiner jetzigen Krankenkasse?
-Antwort: Die SDK Zusatzversicherung funktioniert mit jeder gesetzlichen Krankenkasse. Das volle Budget mit Bonus erreichst du aber in Kombination mit der IKK Classic.
+Antwort: Die SDK Zusatzversicherung funktioniert mit jeder gesetzlichen Krankenkasse. Mit der IKK Classic kann zusätzlich ein hohes, bedingtes Bonus- oder Zuschusspotenzial entstehen; der konkrete Wert hängt von deinen erreichbaren Maßnahmen und anerkannten Kosten ab.
 
 Frage: Was kostet mich das?
-Antwort: Beim empfohlenen Tarif AP1 mit 100% Erstattung etwa 45 Euro im Monat, je nach Alter. Durch den IKK Bonus können die Kosten auf effektiv 0 Euro sinken — oft bleibt sogar ein Plus.
+Antwort: Beim empfohlenen Tarif AP1 mit 100% Erstattung etwa 45 Euro im Monat, je nach Alter. Wenn dein tatsächlich erreichter und anerkannter Bonus beziehungsweise Zuschuss hoch genug ist, kann er den Beitrag teilweise oder vollständig refinanzieren. Das ist ein Potenzial und keine Zusage.
 
 Frage: Muss ich zur IKK wechseln?
-Antwort: Nein, du musst nicht wechseln. Die SDK Zusatzversicherung funktioniert mit jeder Kasse. Aber das volle Potenzial mit dem Bonusprogramm erreichst du in Kombination mit der IKK Classic.
+Antwort: Nein, du musst nicht wechseln. Die SDK Zusatzversicherung funktioniert mit jeder Kasse. Die IKK Classic ist eine mögliche Kombination, wenn ihr Bonusprofil zu deinen erreichbaren Maßnahmen passt.
 
 Frage: Kann ich meinen genauen Beitrag berechnen?
 Antwort: Ja, auf unserer Website unter healio.de/ambulant gibt es einen digitalen Tarifrechner. Dort kannst du deinen persönlichen Beitrag sofort sehen — inklusive möglichem Risikozuschlag.
@@ -350,7 +322,7 @@ Frage: Wie reiche ich Rechnungen ein?
 Antwort: Digital über die App der SDK Süddeutsche Krankenversicherung. Der Erstattungsbetrag wird innerhalb weniger Tage überwiesen.
 
 Frage: Ist der Bonus wirklich steuerfrei?
-Antwort: Ja, der IKK Bonus ist komplett steuerfrei. Er wird direkt ausgezahlt oder mit deiner Zusatzversicherung verrechnet.
+Antwort: Das darf man nicht pauschal sagen. Die IKK erklärt, dass ein ausschließlich gezahlter zweckgebundener Zuschuss nicht als Beitragserstattung gemeldet wird. Beim Geldbonus können andere steuerliche Regeln gelten. Für die persönliche Einordnung verweist Nita auf einen Steuerberater.
 
 Frage: Ich bin schwanger, lohnt sich das jetzt noch?
 Antwort: Ja, es lohnt sich, und zwar aus zwei Gründen. Erstens ambulant: Die Vorsorge während der Schwangerschaft ist ausdrücklich mitversichert und es gibt keine Wartezeiten. Die Zusatzuntersuchungen beim Frauenarzt, die du sonst selbst zahlst, laufen also über den Vorsorge-Topf, auch wenn die Schwangerschaft schon feststeht. Nur die Behandlung von Beschwerden ist ausgeschlossen, Komplikationen dagegen versichert. Zweitens, und das ist der noch wichtigere Punkt: dein Kind. Ehrlich dazusagen muss ich, dass für die Entbindung im Krankenhaus, also Familienzimmer und Chefarzt, der Zug abgefahren ist. Sobald eine Schwangerschaft ärztlich festgestellt ist, zahlt dafür keine Zusatzversicherung mehr, das ist am ganzen Markt so. Was aber sehr wohl geht, ist dein Kind. Ein Neugeborenes wird aufgenommen, ohne dass jemand nach seiner Gesundheit fragt, ohne Wartezeit und ohne Zuschlag, sogar bei Geburtsschäden oder angeborenen Krankheiten. Voraussetzung ist nur, dass ein Elternteil zum Zeitpunkt der Geburt versichert ist und das Kind innerhalb von zwei Monaten nach der Geburt angemeldet wird. Das ist die einzige Gelegenheit im Leben, zu der der Gesundheitszustand keine Rolle spielt. Und für ein weiteres Kind wärst du dann komplett abgesichert.

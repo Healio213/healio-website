@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { MessageCircle, ShieldCheck, X } from 'lucide-react';
+import { ShieldCheck, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import {
   getConsentState,
@@ -300,7 +300,86 @@ export const NitaConsentWidget = () => {
           right: 0.75rem !important;
           bottom: calc(var(--healio-nita-safe-bottom, 8.5rem) + env(safe-area-inset-bottom)) !important;
         }
-        html.home-hero-active:not(.home-hero-passed) .healio-nita-surface,
+        .healio-nita-quiet-launcher {
+          display: inline-flex;
+          width: 3.65rem;
+          height: 3.65rem;
+          align-items: center;
+          justify-content: center;
+          border: 0;
+          padding: 0;
+          color: white;
+          background: transparent;
+          cursor: pointer;
+        }
+        .healio-nita-orb-shell {
+          position: relative;
+          display: inline-flex;
+          width: 3.65rem;
+          height: 3.65rem;
+          flex: 0 0 3.65rem;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border: 1px solid rgba(201, 255, 251, 0.74);
+          border-radius: 999px;
+          background:
+            radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.96) 0 5%, rgba(255, 255, 255, 0.32) 14%, transparent 29%),
+            radial-gradient(circle at 69% 74%, rgba(94, 238, 230, 0.98) 0 8%, rgba(23, 177, 215, 0.72) 34%, transparent 55%),
+            conic-gradient(from 214deg, #0b3c96, #22b9d5, #b8fff3, #1977c7, #083886, #56e6de, #0b3c96);
+          box-shadow:
+            0 0 0 5px rgba(16, 155, 190, 0.08),
+            0 12px 30px rgba(7, 62, 132, 0.26),
+            inset -8px -10px 18px rgba(5, 42, 111, 0.38),
+            inset 8px 8px 16px rgba(211, 255, 252, 0.4);
+          isolation: isolate;
+          transform: translateZ(0);
+          animation: healio-nita-orb-breathe 4.8s ease-in-out infinite;
+          transition: box-shadow 180ms ease, transform 180ms ease;
+        }
+        .healio-nita-orb-shell::before,
+        .healio-nita-orb-shell::after {
+          content: '';
+          position: absolute;
+          border-radius: inherit;
+          pointer-events: none;
+        }
+        .healio-nita-orb-shell::before {
+          inset: -28%;
+          z-index: 0;
+          background: conic-gradient(from 30deg, transparent 0 16%, rgba(255, 255, 255, 0.68) 24%, transparent 36% 60%, rgba(83, 244, 226, 0.5) 72%, transparent 84%);
+          mix-blend-mode: screen;
+          animation: healio-nita-orb-flow 8s linear infinite;
+        }
+        .healio-nita-orb-shell::after {
+          inset: 0.18rem;
+          z-index: 1;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          box-shadow: inset 0 0 12px rgba(223, 255, 253, 0.36);
+        }
+        .healio-nita-quiet-launcher:hover .healio-nita-orb-shell {
+          box-shadow:
+            0 0 0 6px rgba(16, 155, 190, 0.12),
+            0 14px 34px rgba(7, 62, 132, 0.32),
+            inset -8px -10px 18px rgba(5, 42, 111, 0.38),
+            inset 8px 8px 16px rgba(211, 255, 252, 0.44);
+          transform: translateY(-1px) scale(1.02);
+        }
+        .healio-nita-quiet-launcher:active .healio-nita-orb-shell {
+          transform: translateY(1px) scale(0.99);
+        }
+        .healio-nita-quiet-launcher:focus-visible {
+          outline: 2px solid #1d93c6;
+          outline-offset: 4px;
+          border-radius: 999px;
+        }
+        @keyframes healio-nita-orb-breathe {
+          0%, 100% { filter: saturate(0.98) brightness(1); }
+          50% { filter: saturate(1.1) brightness(1.06); }
+        }
+        @keyframes healio-nita-orb-flow {
+          to { transform: rotate(360deg); }
+        }
         html.healio-consent-ui-active .healio-nita-surface,
         html.healio-nita-teaser-active .healio-nita-surface,
         html.healio-mobile-menu-active .healio-nita-surface {
@@ -312,12 +391,29 @@ export const NitaConsentWidget = () => {
         @media (max-width: 767px) {
           .healio-nita-quiet-launcher,
           .healio-nita-widget {
-            right: 0;
+            right: 0.75rem;
             bottom: calc(var(--healio-nita-mobile-safe-bottom, 10rem) + env(safe-area-inset-bottom));
           }
           .healio-nita-widget elevenlabs-convai {
-            right: 0 !important;
+            right: 0.75rem !important;
             bottom: calc(var(--healio-nita-mobile-safe-bottom, 10rem) + env(safe-area-inset-bottom)) !important;
+          }
+          .healio-nita-quiet-launcher,
+          .healio-nita-orb-shell {
+            width: 3.4rem;
+            height: 3.4rem;
+          }
+          .healio-nita-orb-shell {
+            flex-basis: 3.4rem;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .healio-nita-orb-shell {
+            animation: none;
+            transition: none;
+          }
+          .healio-nita-orb-shell::before {
+            animation: none;
           }
         }
         @media (min-width: 768px) {
@@ -340,14 +436,15 @@ export const NitaConsentWidget = () => {
           ref={launcherRef}
           type="button"
           onClick={handleLauncherClick}
-          className="healio-nita-surface healio-nita-quiet-launcher inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#277fbe] text-white shadow-[0_4px_14px_rgba(15,23,42,0.16)] transition-[background-color,box-shadow,transform] duration-200 ease-out hover:bg-[#1f6fa9] hover:shadow-[0_5px_16px_rgba(15,23,42,0.2)] active:translate-y-px motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#277fbe]"
+          className="healio-nita-surface healio-nita-quiet-launcher"
+          data-healio-nita="launcher"
           aria-label={copy.launcher}
           title={copy.launcher}
           aria-haspopup="dialog"
           aria-expanded={providerAllowed && widgetActivated && loadStatus === 'ready'}
           aria-busy={providerAllowed && widgetActivated && loadStatus === 'loading'}
         >
-          <MessageCircle className="h-[18px] w-[18px]" aria-hidden="true" />
+          <span className="healio-nita-orb-shell" aria-hidden="true" />
         </button>
       )}
 

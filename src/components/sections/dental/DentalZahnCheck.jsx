@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Lock, RotateCcw, Sparkles, AlertTriangle, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { BAYERISCHE_URL, UKV_URL, LKH_URL } from './dentalLinks';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
@@ -92,12 +93,6 @@ const DentalZahnCheck = () => {
   const scrollToContact = (e) => {
     e.preventDefault();
     const element = document.getElementById('dental-contact');
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToBonus = (e) => {
-    e.preventDefault();
-    const element = document.getElementById('bonus-calculator');
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -256,8 +251,9 @@ const DentalZahnCheck = () => {
                     <p className="text-sm text-slate-700">
                       {t('check.ikkNote')}{' '}
                       <a
-                        href="#bonus-calculator"
-                        onClick={scrollToBonus}
+                        href={KASSENBOOST_COMPARE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="font-bold text-yellow-700 underline underline-offset-2 hover:text-yellow-800"
                       >
                         {t('check.ikkCta')}

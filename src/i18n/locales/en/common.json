@@ -5,7 +5,6 @@
     "unternehmen": "For Companies",
     "ambulant": "Outpatient Insurance",
     "kassenbonus": "Health Insurance Bonus",
-    "kassenboost": "KassenBoost",
     "zahn": "Dental Insurance",
     "stationaer": "Hospital Insurance",
     "tier": "Pet Insurance",
@@ -16,6 +15,7 @@
     "kontakt": "Contact",
     "erstgespraech": "Free Consultation",
     "schutzWaehlen": "Choose Cover",
+    "kassenvorteil": "Check insurer value",
     "beratung": "Get Advice",
     "potenzialanalyse": "Benefits Review",
     "kennenlernen": "Meet Healio",
@@ -28,17 +28,21 @@
   "footer": {
     "tagline": "Your digital insurance broker for smarter health coverage.",
     "disclaimer": "Healio GmbH operates as an insurance broker licensed under section 34d (1) of the German Trade Regulation Act (GewO).",
-    "company": "Company",
+    "privateCustomers": "Personal insurance",
+    "company": "For companies",
+    "practices": "Practices & professionals",
+    "healioLegal": "Healio & legal",
     "contact": "Contact",
     "legal": "Legal",
     "aboutUs": "About Us",
     "unternehmen": "For Companies",
     "leistungen": "Services",
-    "kassenbonus": "KassenBoost",
+    "kassenbonus": "Compare Health Insurance",
     "partner": "Partner",
     "ratgeber": "Insights",
     "hebammen": "For Midwives",
     "zahnaerzte": "For Dentists",
+    "heilberufe": "Cover for healthcare professionals",
     "impressum": "Legal Notice",
     "datenschutz": "Privacy Policy",
     "cookieSettings": "Cookie settings",
@@ -58,11 +62,17 @@
     "appScreenshotAlt": "Healio app dashboard showing the available health budget",
     "copyright": "© {{year}} Healio GmbH. All rights reserved."
   },
-  "kassenboostHint": {
-    "iconLabel": "Compare statutory health insurers",
-    "title": "Not sure IKK classic is right for you?",
-    "body": "KassenBoost compares contributions, bonuses and distinctive benefits so you can find the statutory health insurer that suits your everyday life.",
-    "cta": "Compare health insurers"
+  "kassenBoostBridge": {
+    "eyebrow": "Choose your insurer deliberately",
+    "title": "Lowest contribution or greatest personal value?",
+    "description": "KassenBoost separates contributions, achievable bonuses and benefits so you can compare fairly and decide what matters most.",
+    "choices": [
+      {"title": "Contribution first", "description": "For those mainly looking to reduce their monthly cost."},
+      {"title": "Value first", "description": "For those who care more about bonuses and relevant benefits."}
+    ],
+    "noteLabel": "Context, not a recommendation",
+    "note": "IKK classic can be a strong option with a potential bonus of EUR 700+ per year. Whether it fits depends on your region, eligibility and priorities.",
+    "cta": "Compare with KassenBoost"
   },
   "lebenshilfeTicker": {
     "ariaLabel": "Key facts about the Lebenshilfe company pension plan",

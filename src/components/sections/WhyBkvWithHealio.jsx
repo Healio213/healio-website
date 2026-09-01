@@ -1,38 +1,30 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PiggyBank, Clock, Shield, Star } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const WhyBkvWithHealio = () => {
   const cards = [
     {
-      icon: <PiggyBank className="w-12 h-12" />,
+      kind: 'money', tone: 'butter',
       title: "Hören Sie auf, <highlight>Geld zu verschenken</highlight>.",
       text: "Eine Bruttogehaltserhöhung von 50 € kostet Sie ca. 60 €. Beim Mitarbeiter kommen netto 21 € an. Der Rest geht an Steuern und Sozialabgaben. Ein Gesundheitsbudget von 600 € jährlich kostet Sie denselben Betrag, wird aber zu 100 % vom Mitarbeiter als Wertschätzung wahrgenommen.",
-      accent: "text-blue-600",
-      accentBg: "bg-blue-50"
     },
     {
-      icon: <Clock className="w-12 h-12" />,
+      kind: 'switch', tone: 'sky',
       title: "<highlight>Wartezeit</highlight> ist Ihr teuerster Kostenfaktor.",
       text: "Ein kranker Mitarbeiter, der 6 Wochen auf einen Facharzttermin wartet, kostet Lohnfortzahlung ohne Gegenleistung. Healio reduziert diese Wartezeit auf 5 Tage. Ein Krankheitstag kostet im Schnitt 400 €. Berechnen Sie Ihren ROI selbst.",
-      accent: "text-emerald-600",
-      accentBg: "bg-emerald-50"
     },
     {
-      icon: <Shield className="w-12 h-12" />,
+      kind: 'protection', tone: 'mint',
       title: "Zugang für alle. <highlight>Ohne Ausnahme</highlight>.",
       text: "Keine Gesundheitsprüfung. Keine Wartezeiten. Keine Ausschlüsse. Jeder Mitarbeiter im Kollektiv wird sofort aufgenommen, auch solche mit chronischen Vorerkrankungen, die privat sonst abgelehnt würden.",
-      accent: "text-indigo-600",
-      accentBg: "bg-indigo-50"
     },
     {
-      icon: <Star className="w-12 h-12" />,
+      kind: 'bonus', tone: 'coral',
       title: "Fachkräfte erkennen den <highlight>Unterschied</highlight>.",
       text: "Obstkörbe und Tischkicker binden keine Leistungsträger mehr. Ein freies, steueroptimiertes Gesundheitsbudget schon. Es signalisiert echte Wertschätzung und verschafft Ihnen einen klaren Wettbewerbsvorteil auf dem Arbeitsmarkt.",
-      accent: "text-amber-600",
-      accentBg: "bg-amber-50"
     }
   ];
 
@@ -64,9 +56,7 @@ const WhyBkvWithHealio = () => {
               transition={{ delay: idx * 0.1 }}
               className="bg-white p-8 lg:p-10 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 flex flex-col items-start h-full group"
             >
-              <div className={`p-4 rounded-2xl mb-6 ${card.accentBg} ${card.accent} transition-transform duration-300 group-hover:scale-110`}>
-                {card.icon}
-              </div>
+              <FriendlyIcon kind={card.kind} tone={card.tone} className="mb-6 transition-transform duration-300 group-hover:scale-110" />
 
               <h3 className="text-xl font-bold text-slate-900 mb-4">
                 <HighlightText text={card.title} />

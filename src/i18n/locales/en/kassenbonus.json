@@ -35,6 +35,7 @@
     "items": [
       {
         "key": "contribution",
+        "emoji": "💶",
         "tone": "mint",
         "title": "Save on contributions",
         "short": "The direct cost comparison",
@@ -50,6 +51,7 @@
       },
       {
         "key": "bonus",
+        "emoji": "🎁",
         "tone": "butter",
         "title": "Use a bonus",
         "short": "The realistic everyday value",
@@ -65,6 +67,7 @@
       },
       {
         "key": "services",
+        "emoji": "✨",
         "tone": "sky",
         "title": "Find better benefits",
         "short": "The relevant added value",
@@ -116,6 +119,7 @@
     "cards": [
       {
         "routeKey": "ambulant",
+        "emoji": "🩺",
         "tone": "mint",
         "title": "Outpatient",
         "text": "For example for naturopathy, osteopathy, glasses and preventive care.",
@@ -123,6 +127,7 @@
       },
       {
         "routeKey": "zahn",
+        "emoji": "🦷",
         "tone": "butter",
         "title": "Dental",
         "text": "For dental cleaning, dental prostheses and further benefits depending on the policy.",
@@ -130,6 +135,7 @@
       },
       {
         "routeKey": "stationaer",
+        "emoji": "🛏️",
         "tone": "sky",
         "title": "Hospital",
         "text": "For more comfort and choice in hospital, depending on the policy.",

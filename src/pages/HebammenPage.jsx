@@ -1,27 +1,45 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowDown, ArrowRight, ChevronDown, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import ProductTicker from '@/components/sections/ProductTicker';
+import AudienceProofBar from '@/components/sections/AudienceProofBar';
+import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import CalendlyEmbed from '@/components/CalendlyEmbed';
+import { requestNitaConsent } from '@/components/NitaConsentWidget';
 
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
   const { lang } = useLanguage();
+  const reduceMotion = useReducedMotion();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/midwives' : 'https://healio.de/hebammen';
 
   const scrollToCalendly = () => {
-    document.getElementById('calendly-hebammen')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('calendly-hebammen')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   };
+
+  const scrollToVideo = () => {
+    document.getElementById('hebammen-video')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+
+  const proofIcons = [
+    { kind: 'support', tone: 'mint' },
+    { kind: 'protection', tone: 'sky' },
+    { kind: 'calendar', tone: 'butter' },
+  ];
+  const proofItems = t('proof.items', { returnObjects: true }).map((item, index) => ({
+    ...item,
+    ...(proofIcons[index] || proofIcons[0]),
+  }));
 
   const schemaMarkup = createWebPageSchema(
     tSeo('hebammen.title'),
@@ -63,17 +81,51 @@ const HebammenPage = () => {
               <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8">
                 {t('hero.subtitle')}
               </p>
-              <Button
-                onClick={scrollToCalendly}
-                className="bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                {t('hero.cta')}
-              </Button>
+              <div className="flex flex-col items-start gap-3 sm:flex-row">
+                <Button
+                  onClick={scrollToCalendly}
+                  className="bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                >
+                  {t('hero.cta')}
+                </Button>
+                <Button
+                  onClick={scrollToVideo}
+                  variant="outline"
+                  className="border-white/55 bg-white/10 px-8 py-6 text-lg font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900"
+                >
+                  {t('hero.secondaryCta')}
+                  <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Button>
+              </div>
+              <p className="mt-4 flex items-center gap-2 text-sm text-white/80">
+                <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
+                {t('hero.note')}
+              </p>
             </motion.div>
           </div>
         </section>
 
+        <AudienceProofBar items={proofItems} ariaLabel={t('proof.ariaLabel')} />
         <ProductTicker variant="hebammen" />
+
+        <B2BExplainerVideo
+          sectionId="hebammen-video"
+          title={t('explanationVideo.title')}
+          subtitle={t('explanationVideo.subtitle')}
+          statusLabel={t('explanationVideo.status')}
+          message={t('explanationVideo.message')}
+          points={t('explanationVideo.points', { returnObjects: true })}
+          ctaLabel={t('explanationVideo.cta')}
+          onCta={() => requestNitaConsent('delayed_prompt')}
+          trackingLabel="midwives"
+          privacyText={t('explanationVideo.privacy')}
+          videoFallbackText={t('explanationVideo.fallback')}
+          avatarAlt={t('explanationVideo.avatarAlt')}
+          assistantName={t('explanationVideo.assistantName')}
+          errorLabel={t('explanationVideo.error')}
+          captionsLanguage={lang === 'en' ? 'en' : 'de'}
+          captionsLabel={lang === 'en' ? 'English' : 'Deutsch'}
+        />
 
         {/* Qualitätssiegel: SDK + IKK classic */}
         <motion.section className="py-10 sm:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -170,7 +222,12 @@ const HebammenPage = () => {
                 ))}
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <details className="group mb-8 rounded-2xl border border-slate-200 bg-slate-50/70">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+                  <span>{t('leistungen.detailsLabel')}</span>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="grid gap-8 border-t border-slate-200 p-5 md:grid-cols-2 sm:p-7">
                 {/* IKK classic */}
                 <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
                   className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 sm:p-8"
@@ -212,7 +269,8 @@ const HebammenPage = () => {
                     ))}
                   </div>
                 </motion.div>
-              </div>
+                </div>
+              </details>
 
               {/* Total */}
               <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
@@ -250,6 +308,12 @@ const HebammenPage = () => {
                 ))}
               </motion.div>
 
+              <details className="group rounded-2xl border border-slate-200 bg-white">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+                  <span>{t('klinik.detailsLabel')}</span>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="border-t border-slate-200 p-5 sm:p-7">
               <div className="space-y-5 mb-12">
                 {[
                   { key: 'chance', bg: 'bg-rose-50', border: 'border-rose-500' },
@@ -322,6 +386,8 @@ const HebammenPage = () => {
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
+                </div>
+              </details>
             </div>
           </div>
         </section>
@@ -350,14 +416,14 @@ const HebammenPage = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   {/* Option 1: Auszahlung */}
                   <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
-                    <FriendlyIcon icon="health-budget" tone="butter" size="sm" className="mb-4" />
+                    <FriendlyIcon emoji="💶" label={t('benefits.option1Title')} tone="butter" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option1Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option1Desc')}</p>
                   </div>
 
                   {/* Option 2: Spende */}
                   <div className="bg-rose-50 border-2 border-rose-200 rounded-xl p-6">
-                    <FriendlyIcon icon="bonus-reward" tone="coral" size="sm" className="mb-4" />
+                    <FriendlyIcon emoji="💝" label={t('benefits.option2Title')} tone="coral" size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option2Title')}</h3>
                     <p className="text-slate-600 leading-relaxed">{t('benefits.option2Desc')}</p>
                   </div>
@@ -415,16 +481,16 @@ const HebammenPage = () => {
 
               <div className="space-y-8">
                 {[
-                  { icon: 'personal-support', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
-                  { icon: 'document-check', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
-                  { icon: 'digital-completion', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
+                  { emoji: '💬', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
+                  { emoji: '📄', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
+                  { emoji: '📱', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                     className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex items-start gap-5"
                   >
-                    <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" />
+                    <FriendlyIcon emoji={item.emoji} label={t(item.titleKey)} tone={item.tone} size="sm" />
                     <div>
                       <p className="mb-1 text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">0{item.num}</p>
                       <h3 className="text-lg font-semibold text-slate-900 mb-1">{t(item.titleKey)}</h3>

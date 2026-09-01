@@ -7,9 +7,9 @@ import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const pillarIcons = [
-  { icon: 'planet-care', tone: 'mint' },
-  { icon: 'prevention-care', tone: 'sky' },
-  { icon: 'protection-path', tone: 'butter' },
+  { emoji: '🌳', tone: 'mint' },
+  { emoji: '💧', tone: 'sky' },
+  { emoji: '💚', tone: 'butter' },
 ];
 
 const AmbulantUmwelt = () => {
@@ -61,7 +61,7 @@ const AmbulantUmwelt = () => {
           <div className="absolute bottom-0 left-0 w-56 h-56 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
           <div className="relative z-10">
-            <FriendlyIcon icon="planet-care" tone="mint" size="lg" className="mx-auto mb-6" />
+            <FriendlyIcon emoji="🌍" tone="mint" size="lg" className="mx-auto mb-6" />
 
             <p className="text-6xl md:text-7xl font-extrabold mb-4">10 %</p>
             <p className="text-2xl md:text-3xl font-bold mb-6">{t('umwelt.headline')}</p>
@@ -74,7 +74,7 @@ const AmbulantUmwelt = () => {
               {['pillar1', 'pillar2', 'pillar3'].map((key, i) => (
                 <div key={key} className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
                   <FriendlyIcon
-                    icon={pillarIcons[i].icon}
+                    emoji={pillarIcons[i].emoji}
                     tone={pillarIcons[i].tone}
                     size="sm"
                     className="mx-auto mb-3"

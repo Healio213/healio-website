@@ -13,6 +13,7 @@ module.exports = {
 	extend: {
 		fontFamily: {
 			display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
+			friendly: ['Baloo 2', 'Manrope', 'Inter', 'system-ui', 'sans-serif'],
 			sans: ['Inter', 'system-ui', 'sans-serif']
 		},
 		colors: {

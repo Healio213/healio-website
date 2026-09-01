@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldPlus, CheckSquare, Gift } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const steps = [
-  { icon: <ShieldPlus className="w-10 h-10" />, title: "1. Zusatzversicherung wählen", description: "Die Basis für deine Top-Erstattungen bei Heilpraktiker, Brille & Co." },
-  { icon: <CheckSquare className="w-10 h-10" />, title: "2. IKK Bonusprogramm nutzen", description: "Dein Schlüssel, um Prämien zu sammeln und Restkosten zu decken." },
-  { icon: <Gift className="w-10 h-10" />, title: "3. Kostenlos behandelt werden", description: "Die verbleibenden Kosten deckst du einfach mit deinem angesammelten IKK-Bonus." }
+  { kind: 'protection', tone: 'mint', title: "1. Zusatzversicherung wählen", description: "Die Basis für deine Top-Erstattungen bei Heilpraktiker, Brille & Co." },
+  { kind: 'bonus', tone: 'butter', title: "2. IKK Bonusprogramm nutzen", description: "Dein Schlüssel, um Prämien zu sammeln und Restkosten zu decken." },
+  { kind: 'budget', tone: 'sky', title: "3. Kostenlos behandelt werden", description: "Die verbleibenden Kosten deckst du einfach mit deinem angesammelten IKK-Bonus." }
 ];
 
 const HowItWorks = () => {
@@ -37,7 +37,7 @@ const HowItWorks = () => {
               className="relative z-10"
             >
               <div className="healio-benefit-card space-y-4 h-full">
-                <div className="healio-icon-box mx-auto" aria-hidden="true">{step.icon}</div>
+                <FriendlyIcon kind={step.kind} tone={step.tone} className="mx-auto" />
                 <h3 className="text-xl font-bold text-healio-text">{step.title}</h3>
                 <p className="text-healio-text-light">{step.description}</p>
               </div>

@@ -17,7 +17,7 @@ const VeterinaryLayout = () => {
         <Outlet />
       </main>
       
-      <Footer />
+      <Footer hideCta hideAppPromotion />
     </div>
   );
 };

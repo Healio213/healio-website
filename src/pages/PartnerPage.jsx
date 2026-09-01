@@ -1,20 +1,21 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { PlayCircle, Shield } from 'lucide-react';
+import { ArrowDown, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
-import PartnerTrustBar from '@/components/sections/partner/PartnerTrustBar';
 import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
+import AudienceProofBar from '@/components/sections/AudienceProofBar';
+import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import ProductTicker from '@/components/sections/ProductTicker';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CalendlyEmbed from '@/components/CalendlyEmbed';
-import { trackEvent } from '@/lib/analytics';
+import { requestNitaConsent } from '@/components/NitaConsentWidget';
 
 const PartnerPage = () => {
   const { t, i18n } = useTranslation('partner');
@@ -29,36 +30,6 @@ const PartnerPage = () => {
     isEnglish ? 'en-US' : 'de-DE'
   );
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoRef = React.useRef(null);
-  const videoMilestonesRef = React.useRef(new Set());
-
-  const trackVideoEvent = (action, value = 0) => trackEvent(action, {
-    component: 'explanation_video',
-    placement: 'partner',
-    value,
-  });
-
-  const handleVideoPlay = () => {
-    trackVideoEvent('video_play');
-  };
-
-  const handleVideoTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    const pct = Math.floor((video.currentTime / video.duration) * 100);
-    [25, 50, 75, 100].forEach((milestone) => {
-      if (pct >= milestone && !videoMilestonesRef.current.has(milestone)) {
-        videoMilestonesRef.current.add(milestone);
-        trackVideoEvent('video_progress', milestone);
-      }
-    });
-  };
-
-  const handleVideoEnded = () => {
-    trackVideoEvent('video_complete', 100);
-  };
-
   const partnerTypes = [
     { kind: 'naturopathy', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
     { kind: 'naturopathy', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
@@ -67,6 +38,16 @@ const PartnerPage = () => {
     { kind: 'glasses', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
     { kind: 'pregnancy', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
   ];
+
+  const proofIcons = [
+    { kind: 'budget', tone: 'mint' },
+    { kind: 'protection', tone: 'sky' },
+    { kind: 'calendar', tone: 'butter' },
+  ];
+  const proofItems = t('proof.items', { returnObjects: true }).map((item, index) => ({
+    ...item,
+    ...(proofIcons[index] || proofIcons[0]),
+  }));
 
   return (
     <>
@@ -115,13 +96,24 @@ const PartnerPage = () => {
                 <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <Button
-                  size="lg"
-                  className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
-                  onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  {t('hero.cta')}
-                </Button>
+                <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <Button
+                    size="lg"
+                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
+                    onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    {t('hero.cta')}
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg"
+                    onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    {t('hero.secondaryCta')}
+                    <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </div>
                 <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
@@ -131,55 +123,27 @@ const PartnerPage = () => {
           </div>
         </section>
 
+        <AudienceProofBar items={proofItems} ariaLabel={t('proof.ariaLabel')} />
         <ProductTicker variant="partner" />
 
-        {/* VIDEO SECTION */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl relative"
-              >
-                {!isVideoPlaying ? (
-                  <button
-                    type="button"
-                    onClick={() => setIsVideoPlaying(true)}
-                    aria-label={t('hero.videoPlayLabel')}
-                    className="w-full h-full rounded-2xl flex items-center justify-center group cursor-pointer relative overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25c990]/50 focus-visible:ring-offset-4"
-                  >
-                    <img src="/images/video-partner-thumb.jpg" alt={t('hero.videoPreviewAlt')} className="absolute inset-0 w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all" />
-                    <div className="absolute inset-0 flex items-center justify-center z-10">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#25c990] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(37,201,144,0.5)] group-hover:scale-110 transition-transform duration-300">
-                        <PlayCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
-                      </div>
-                    </div>
-                  </button>
-                ) : (
-                  <video
-                    ref={videoRef}
-                    className="w-full h-full rounded-2xl"
-                    controls
-                    autoPlay
-                    playsInline
-                    onPlay={handleVideoPlay}
-                    onTimeUpdate={handleVideoTimeUpdate}
-                    onEnded={handleVideoEnded}
-                  >
-                    <source src="/erklaervideo-partner.mp4" type="video/mp4" />
-                    {t('hero.videoFallback')}
-                  </video>
-                )}
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* TRUST BAR */}
-        <PartnerTrustBar />
+        <B2BExplainerVideo
+          sectionId="partner-video"
+          title={t('explanationVideo.title')}
+          subtitle={t('explanationVideo.subtitle')}
+          statusLabel={t('explanationVideo.status')}
+          message={t('explanationVideo.message')}
+          points={t('explanationVideo.points', { returnObjects: true })}
+          ctaLabel={t('explanationVideo.cta')}
+          onCta={() => requestNitaConsent('delayed_prompt')}
+          trackingLabel="partner"
+          privacyText={t('explanationVideo.privacy')}
+          videoFallbackText={t('explanationVideo.fallback')}
+          avatarAlt={t('explanationVideo.avatarAlt')}
+          assistantName={t('explanationVideo.assistantName')}
+          errorLabel={t('explanationVideo.error')}
+          captionsLanguage={isEnglish ? 'en' : 'de'}
+          captionsLabel={isEnglish ? 'English' : 'Deutsch'}
+        />
 
         {/* QUALITÄTSSIEGEL: SDK + IKK */}
         <section className="py-8 bg-white border-b border-gray-100">
@@ -280,7 +244,7 @@ const PartnerPage = () => {
                 viewport={{ once: true }}
                 className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
               >
-                <FriendlyIcon kind="budget" tone="butter" className="mx-auto mb-4" />
+                <FriendlyIcon kind="budget" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
                 <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
                 <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
@@ -294,7 +258,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon kind="naturopathy" tone="mint" className="mb-4" />
+                <FriendlyIcon kind="naturopathy" label={t('budget.naturheilkunde')} tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
@@ -308,7 +272,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
-                <FriendlyIcon kind="glasses" tone="sky" className="mb-4" />
+                <FriendlyIcon kind="glasses" label={t('budget.sehhilfen')} tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
                 <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
@@ -348,7 +312,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                     className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <FriendlyIcon kind={item.kind} tone={item.tone} className="mb-5" />
+                    <FriendlyIcon kind={item.kind} label={item.title} tone={item.tone} className="mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>
@@ -375,21 +339,21 @@ const PartnerPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
               {[
                 {
-                  icon: 'ongoing-service',
+                  emoji: '🤝',
                   tone: 'mint',
                   title: t('steps.step1Title'),
                   text: t('steps.step1Desc'),
                   step: '1'
                 },
                 {
-                  icon: 'document-check',
+                  emoji: '📦',
                   tone: 'butter',
                   title: t('steps.step2Title'),
                   text: t('steps.step2Desc'),
                   step: '2'
                 },
                 {
-                  icon: 'pension-growth',
+                  emoji: '📈',
                   tone: 'sky',
                   title: t('steps.step3Title'),
                   text: t('steps.step3Desc'),
@@ -408,7 +372,7 @@ const PartnerPage = () => {
                   <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-[#25c990] text-white flex items-center justify-center font-bold text-sm shadow-md">
                     {item.step}
                   </div>
-                  <FriendlyIcon icon={item.icon} tone={item.tone} className="mb-6" />
+                  <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-6" />
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">{item.title}</h3>
                   <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.div>
@@ -418,9 +382,9 @@ const PartnerPage = () => {
             {/* Benefits below steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
               {[
-                { icon: 'personal-support', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
-                { icon: 'pension-growth', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
-                { icon: 'protection-path', tone: 'lavender', title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
+                { emoji: '😊', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
+                { emoji: '🌱', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
+                { emoji: '🛡️', tone: 'lavender', title: t('solution.freeParticipation'), text: t('solution.freeParticipationDesc') },
               ].map((item, index) => {
                 return (
                   <motion.div
@@ -431,7 +395,7 @@ const PartnerPage = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="flex flex-col items-center text-center p-6"
                   >
-                    <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" className="mb-4" />
+                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-4" />
                     <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
                   </motion.div>

@@ -15,16 +15,12 @@ import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import AmbulantBenefits from '@/components/sections/ambulant/AmbulantBenefits';
 import AmbulantBeispielrechnung from '@/components/sections/ambulant/AmbulantBeispielrechnung';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import AmbulantTarifTabelle from '@/components/sections/ambulant/AmbulantTarifTabelle';
 import AmbulantConceptAccordion from '@/components/sections/ambulant/AmbulantConceptAccordion';
-import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
-import AmbulantIKKServices from '@/components/sections/ambulant/AmbulantIKKServices';
-import AmbulantUmwelt from '@/components/sections/ambulant/AmbulantUmwelt';
+import KassenBoostDecisionBridge from '@/components/sections/KassenBoostDecisionBridge';
 import AmbulantTestimonials from '@/components/sections/ambulant/AmbulantTestimonials';
 import AmbulantFAQ from '@/components/sections/ambulant/AmbulantFAQ';
 import AmbulantFinalCTA from '@/components/sections/ambulant/AmbulantFinalCTA';
-import KassenBoostChoiceHint from '@/components/sections/KassenBoostChoiceHint';
 import StickyCalculatorButton from '@/components/sections/ambulant/StickyCalculatorButton';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 
@@ -188,10 +184,8 @@ const AmbulantPage = () => {
           <AmbulantTarifTabelle />
         </FadeInUp>
 
-        {/* Optionaler Bonus-Rechner zur Einordnung der effektiven Kosten */}
-        <FadeInUp>
-          <AmbulantBonusCalculator />
-        </FadeInUp>
+        {/* Krankenkassenwahl neutral vom Zusatzschutz trennen */}
+        <FadeInUp><KassenBoostDecisionBridge /></FadeInUp>
 
         {/* Beispielrechnung — konkrete Einordnung nach dem Bonus-Rechner */}
         <FadeInUp>
@@ -225,25 +219,6 @@ const AmbulantPage = () => {
         {/* Konzept: SDK-Tarif und Healio-System erklären */}
         <FadeInUp>
           <AmbulantConceptAccordion />
-        </FadeInUp>
-
-        {/* IKK classic Wechsel — Bonus als Verstärker und Refinanzierung erklären */}
-        <FadeInUp>
-          <AmbulantIKKWechsel variant="ambulant" />
-        </FadeInUp>
-
-        <FadeInUp>
-          <KassenBoostChoiceHint />
-        </FadeInUp>
-
-        {/* TeleClinic + BetterDoc */}
-        <FadeInUp>
-          <AmbulantIKKServices />
-        </FadeInUp>
-
-        {/* 10 % für die Umwelt */}
-        <FadeInUp>
-          <AmbulantUmwelt />
         </FadeInUp>
 
         {/* Testimonials */}

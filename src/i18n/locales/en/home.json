@@ -1,89 +1,70 @@
 {
   "hero": {
-    "eyebrow": "Independent advice. Personal support.",
-    "title": "Your health insurer pays you for staying healthy. Go get it.",
-    "description": "We get your health insurance bonuses so fit that they can help pay for your supplementary cover. Sports club, gym, preventive care: much of what you already do is worth real money. Free bonus check in 2 minutes.",
-    "disclaimer": "How much your bonus is worth depends on your insurer and your activities. We calculate it for you, free of charge and individually.",
-    "bonusCheckCta": "Start your bonus check",
-    "primaryCta": "Find the right cover",
-    "secondaryCta": "How Healio works",
-    "proof": ["Independent broker", "A real contact", "Digital support"],
-    "sceneLabel": "Three areas of cover. One digital companion.",
-    "sceneCenter": "Your cover",
-    "sceneModules": ["Outpatient", "Dental", "Hospital"]
+    "title": "Strong protection for you. Real value for your team.",
+    "titleLead": "Strong protection for you.",
+    "titleAccent": "Real value for your team.",
+    "description": "Discover intelligent insurance solutions. We support you from personal protection to setting up a sustainable workplace pension – independently, digitally and always personally.",
+    "primaryCta": "Find personal protection",
+    "secondaryCta": "Explore business solutions"
   },
   "seo": {
-    "title": "Supplementary Health Insurance Made Simple | Healio",
-    "description": "Compare outpatient, dental and hospital supplementary insurance with clarity. Healio supports you digitally and personally, from choosing cover to ongoing service.",
-    "ogTitle": "Healio – Supplementary health insurance, made simple",
-    "ogDescription": "Outpatient, dental or hospital cover: find protection that fits your life."
+    "title": "Insurance for Individuals & Companies | Healio",
+    "description": "Connect personal protection and workplace benefits with independent, digital and personal support – from supplementary cover to company pensions.",
+    "ogTitle": "Healio – strong protection and real value for your team",
+    "ogDescription": "Personal protection and workplace benefits, explained clearly and supported digitally and personally."
   },
   "products": {
-    "eyebrow": "Your cover",
-    "title": "Choose what you want to protect better.",
-    "description": "Each area leads directly to the relevant benefits and next steps.",
+    "title": "Which cover do you want to improve?",
+    "description": "Go straight to outpatient, dental or hospital benefits.",
     "items": [
-      {"key":"ambulant","routeKey":"ambulant","label":"Outpatient","title":"More room in your health budget","description":"Naturopathy, osteopathy, vision aids and preventive care, with a health budget of up to EUR 3,000 over 2 years.","detail":"Naturopathy · Vision aids · Prevention","cta":"Explore outpatient cover"},
-      {"key":"dental","routeKey":"zahn","label":"Dental","title":"Strong protection for your smile","description":"Make dental treatment, restorations and preventive care easier to cover.","detail":"Restorations · Treatment · Prevention","cta":"Explore dental cover"},
-      {"key":"hospital","routeKey":"stationaer","label":"Hospital","title":"Better supported in hospital","description":"Private room, specialist treatment and choice of hospital, depending on the selected plan.","detail":"Private room · Specialists · Hospital choice","cta":"Explore hospital cover"}
+      {"key":"ambulant","routeKey":"ambulant","label":"Outpatient","title":"More room in your health budget","description":"Benefits for naturopathy, osteopathy, vision aids and preventive care.","cta":"Explore the health budget"},
+      {"key":"dental","routeKey":"zahn","label":"Dental","title":"Make dental costs predictable","description":"Dental treatment, restorations and preventive care, depending on the plan.","cta":"Explore dental cover"},
+      {"key":"hospital","routeKey":"stationaer","label":"Hospital","title":"More choice in hospital","description":"Private room, specialist treatment and hospital choice, depending on the plan.","cta":"Explore hospital cover"}
     ]
   },
   "process": {
-    "eyebrow": "How Healio works",
-    "title": "Insurance can feel straightforward.",
-    "description": "We translate plans into clear decisions and stay by your side after you sign up.",
+    "title": "The cheapest health insurer does not always win.",
+    "description": "KassenBoost compares contributions, achievable bonuses and benefits separately. You decide what matters to you.",
     "steps": [
-      {"number":"01","title":"Choose your cover","description":"Start with the area you want to protect better."},
-      {"number":"02","title":"Understand the options","description":"We make benefits, limits and costs easier to compare."},
-      {"number":"03","title":"Sign up digitally","description":"Complete the right application in a structured, paperless flow."},
-      {"number":"04","title":"Stay supported","description":"Healio helps with contracts, budgets, receipts and questions."}
-    ],
-    "appEyebrow": "Healio app",
-    "appTitle": "Keep your cover in view.",
-    "appScreenshotAlt": "Healio app dashboard with policy and health budget overview",
-    "appDescription": "Budget, receipts and important policy information in one place, backed by a personal contact.",
-    "appFeatures": ["Track your budget", "Manage receipts", "Personal support"]
+      {"number":"01","title":"Set the context","description":"Your current insurer, contribution, region and daily life form the basis."},
+      {"number":"02","title":"Compare benefits","description":"Contributions, realistic bonuses and relevant benefits stay clearly separated."},
+      {"number":"03","title":"Make your choice","description":"Choose the lower contribution, stronger bonus or benefits that matter more to you."}
+    ]
   },
   "budget": {
-    "eyebrow": "Outpatient highlight",
+    "prefix": "Up to",
     "amount": "EUR 3,000",
     "amountLabel": "health budget over 2 years",
-    "title": "Turn out-of-pocket costs into planned room for health.",
-    "description": "Outpatient supplementary cover can protect services such as naturopathy, osteopathy, vision aids and preventive care. A suitable health-insurance bonus can create additional financial room.",
-    "features": ["Naturopathy and alternative treatment", "Osteopathy and preventive care", "Vision aids and other outpatient benefits"],
-    "note": "Actual benefits and effective contributions depend on the selected plan, your personal situation and the bonus you achieve.",
-    "cta": "Explore the health budget"
+    "title": "Combine plan benefits and an insurer bonus sensibly.",
+    "description": "Outpatient cover can include naturopathy, osteopathy, vision aids and preventive care.",
+    "bonusLabel": "IKK classic bonus",
+    "bonusAmount": "EUR 700+",
+    "bonusNote": "potentially per year",
+    "note": "The plan, eligibility, IKK classic membership and fulfilled bonus conditions determine the result.",
+    "cta": "Explore outpatient cover"
   },
   "trust": {
-    "eyebrow": "Clear advice. Ongoing support.",
-    "title": "More than a quick online sign-up.",
-    "description": "Healio combines digital simplicity with personal responsibility.",
+    "title": "Digital overview. Personal support.",
+    "description": "Keep your budget, receipts and policies organised in the Healio app. Reach us personally whenever you have questions.",
+    "appScreenshotAlt": "Healio app dashboard with policy and health budget overview",
     "items": [
-      {"title":"Independent broker","description":"We advise as an insurance broker and explain what really matters."},
-      {"title":"Understandable comparison","description":"Benefits and limits are clear before you decide."},
-      {"title":"A real contact","description":"When you have questions, you can reach a person rather than only a portal."},
-      {"title":"Service after sign-up","description":"Contracts, budgets and receipts remain part of our support."}
+      {"title":"Registered broker","description":"Insurance broker licensed under section 34d (1) GewO."},
+      {"title":"Understand first","description":"We explain benefits, limits and costs before you decide."},
+      {"title":"Support afterwards","description":"We continue to help with policies, budgets and receipts after sign-up."}
     ]
   },
   "audiences": {
-    "eyebrow": "Healio beyond individual cover",
-    "title": "Looking for Healio for your company or practice?",
-    "description": "The specialist areas lead directly to the information you need.",
+    "title": "Healio for companies and practices.",
+    "description": "Corporate benefits and partner services follow their own dedicated paths.",
     "items": [
-      {"routeKey":"unternehmen","label":"For companies","title":"Decisions that shape the next three decades.","description":"Occupational pensions, health insurance and benefits as one responsible system for your workforce.","cta":"Explore company solutions"},
-      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable for patients.","description":"Healio connects patients with suitable cover and helps improve access to your treatment.","cta":"Explore the partner programme"}
+      {"routeKey":"unternehmen","label":"For companies","title":"Benefits as one coordinated system.","description":"Bring pensions, health cover and employee benefits together clearly.","cta":"Explore company solutions"},
+      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable.","description":"Practices provide neutral information. Healio reviews, advises and arranges cover.","cta":"Explore the partner programme"}
     ]
   },
   "finalCta": {
-    "eyebrow": "Your next step",
-    "title": "Which cover fits you?",
-    "description": "Start with your topic or talk to Healio personally.",
-    "consultation": "Get personal advice",
-    "items": [
-      {"routeKey":"ambulant","label":"Outpatient"},
-      {"routeKey":"zahn","label":"Dental"},
-      {"routeKey":"stationaer","label":"Hospital"}
-    ]
+    "title": "Find out which health insurer really gives you more.",
+    "description": "Start for free. Compare contributions, bonuses and benefits separately.",
+    "cta": "Check insurer value"
   },
   "audience": {
     "eyebrow": "Choose your entry point",
@@ -225,12 +206,15 @@
     "subtitle": "Satisfied users share their experiences with the Healio concept."
   },
   "ticker": {
-    "ariaLabel": "Healio benefits at a glance",
-    "bonusCheck": "Free bonus check in 2 minutes",
-    "threeAreas": "Outpatient, dental or hospital – cover that fits your life",
+    "ariaLabel": "Healio services at a glance",
+    "kassenBoost": "KassenBoost: compare contributions, bonuses and benefits",
+    "privateCover": "Personal cover: outpatient, dental, hospital and pet",
     "healthBudget": "Up to EUR 3,000 in health budget over 2 years",
-    "independent": "Independent advice. Personal support.",
-    "ongoingService": "A real contact – even after sign-up"
+    "bav": "Company pensions: build long-term provision",
+    "bkv": "Company health insurance: benefits for the team",
+    "bgm": "Coordinate workplace wellbeing and prevention",
+    "practiceNetwork": "Partner network for practices and health professionals",
+    "personalService": "Independent, digital and personal support"
   },
   "insurance": {
     "title": "Our Insurance Solutions",

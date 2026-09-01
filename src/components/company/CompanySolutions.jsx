@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const icons = {
-  pension: { icon: 'pension-growth', tone: 'butter' },
-  health: { icon: 'health-budget', tone: 'mint' },
-  prevention: { icon: 'prevention-care', tone: 'sky' },
-  management: { icon: 'ongoing-service', tone: 'lavender' },
+  pension: { emoji: '🪙', tone: 'butter' },
+  health: { emoji: '💚', tone: 'mint' },
+  prevention: { emoji: '🩺', tone: 'sky' },
+  management: { emoji: '⚙️', tone: 'lavender' },
 };
 
 const CompanySolutions = () => {
@@ -36,11 +36,11 @@ const CompanySolutions = () => {
 
         <div className="mt-14 grid overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-200 shadow-[0_22px_70px_rgba(15,34,42,0.06)] md:grid-cols-2">
           {items.map((item, index) => {
-            const icon = icons[item.key] || { icon: 'health-budget', tone: 'mint' };
+            const icon = icons[item.key] || { emoji: '✨', tone: 'mint' };
             return (
               <article key={item.key} className="bg-white p-7 sm:p-9 lg:p-10">
                 <div className="flex items-center justify-between gap-6">
-                  <FriendlyIcon icon={icon.icon} tone={icon.tone} />
+                  <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} />
                   <span className="font-display text-xs font-extrabold tracking-[0.18em] text-slate-400">0{index + 1}</span>
                 </div>
 

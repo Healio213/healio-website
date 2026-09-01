@@ -1,34 +1,30 @@
 {
   "seo": {
-    "title": "Supplementary Health Insurance: Outpatient, Dental & Hospital | Healio",
-    "description": "Find the supplementary cover that fits you: outpatient, dental or hospital. Independent advice, clear benefits and no unnecessary modules.",
-    "ogTitle": "Make a clear supplementary health insurance decision | Healio",
-    "ogDescription": "Outpatient, dental or hospital: the Healio protection compass guides you to the right area.",
-    "ogImageAlt": "Healio protection compass for outpatient, dental and hospital supplementary health insurance",
+    "title": "Insurance: Outpatient, Dental, Hospital & Pet | Healio",
+    "description": "Choose the right area of cover: outpatient, dental, hospital or pet. Healio explains benefits and limits clearly and independently.",
+    "ogTitle": "Choose the right area of cover with clarity | Healio",
+    "ogDescription": "Outpatient, dental, hospital or pet: go directly to the insurance area you need.",
+    "ogImageAlt": "Healio overview for outpatient, dental, hospital and pet health insurance",
     "offerDescription": "Free consultation and guidance on suitable supplementary health insurance"
   },
   "hero": {
-    "eyebrow": "Outpatient. Dental. Hospital.",
+    "eyebrow": "Outpatient. Dental. Hospital. Pet.",
     "titleLine1": "Supplementary health insurance.",
     "titleLine2": "Only where it matters.",
-    "description": "Outpatient, dental or hospital: Healio shows you which supplementary cover fits your life – clearly, independently and without unnecessary modules.",
+    "description": "For you or your pet: Healio guides you directly to the right area of cover – clearly, independently and without unnecessary modules.",
     "primaryCta": "Compare cover areas",
     "secondaryCta": "Get personal advice",
     "proof": ["Independent insurance broker", "Personally available", "Conditions clearly explained"],
-    "compassEyebrow": "Your protection compass",
-    "compassTitle": "Where should your cover be stronger?",
-    "routes": [
-      {"key": "ambulant", "number": "01", "label": "Outpatient", "description": "Health in everyday life", "anchor": "ambulant"},
-      {"key": "dental", "number": "02", "label": "Dental", "description": "Make out-of-pocket costs predictable", "anchor": "zahn"},
-      {"key": "hospital", "number": "03", "label": "Hospital", "description": "More choice in hospital", "anchor": "stationaer"}
-    ],
-    "compassNoteStrong": "You do not need to cover everything.",
-    "compassNote": "You should consciously decide what you are willing to pay yourself."
+    "compassEyebrow": "Understand first, then insure",
+    "compassTitle": "Which costs do you want to carry yourself – and which do you not?",
+    "compassNoteStrong": "Four areas. One deliberate decision.",
+    "compassNote": "Healio shows benefits, limits and the right next step.",
+    "orientationFacts": ["Outpatient", "Dental", "Hospital", "Pet"]
   },
   "paths": {
-    "eyebrow": "Three paths to cover",
+    "eyebrow": "Four paths to cover",
     "title": "Where would you like stronger protection?",
-    "description": "Not everyone needs everything. What matters is which costs you can carry yourself – and where you want more room to choose when it counts.",
+    "description": "For you: outpatient, dental or hospital. For your pet: a dedicated area of cover. Go directly to the topic you need.",
     "items": [
       {
         "key": "ambulant",
@@ -75,19 +71,33 @@
         "features": ["Private medical treatment", "Room comfort and hospital choice"],
         "cta": "Explore hospital cover",
         "schemaName": "Hospital supplementary insurance"
+      },
+      {
+        "key": "pet",
+        "anchor": "tier",
+        "routeKey": "tierkrankenversicherung",
+        "number": "04",
+        "kicker": "For your animal companion",
+        "title": "Protect against veterinary costs before they become a burden.",
+        "description": "Depending on the plan, pet health or surgery insurance can cover high treatment costs after illness or an accident.",
+        "decision": "For owners choosing between comprehensive health cover and focused surgery cover.",
+        "features": ["Comprehensive or surgery cover", "Compare benefits and limits clearly"],
+        "cta": "Explore pet health insurance",
+        "schemaName": "Pet health insurance"
       }
     ]
   },
   "comparison": {
     "eyebrow": "Quick orientation",
     "title": "Not every gap is your gap.",
-    "description": "The right protection starts with your priorities, not with a plan. These three questions create more clarity than any product shelf.",
+    "description": "The right protection starts with your priorities, not with a plan. These four questions create more clarity than any product shelf.",
     "cta": "Clarify my needs",
     "headers": {"area": "Area", "relevant": "Relevant when …", "check": "Key question"},
     "items": [
       {"key": "ambulant", "label": "Outpatient", "relevant": "you regularly use services beyond statutory health insurance.", "check": "Which services are covered – and which budgets, reimbursement rates and exclusions apply?"},
       {"key": "dental", "label": "Dental", "relevant": "you want higher-quality care for dental treatment and prosthetics.", "check": "How much is reimbursed, which limits apply in the first years – and what about treatment already recommended?"},
-      {"key": "hospital", "label": "Hospital", "relevant": "you want more choice of doctor, hospital or room.", "check": "Which optional services and fee limits apply – and which health questions must you answer before taking out cover?"}
+      {"key": "hospital", "label": "Hospital", "relevant": "you want more choice of doctor, hospital or room.", "check": "Which optional services and fee limits apply – and which health questions must you answer before taking out cover?"},
+      {"key": "pet", "label": "Pet", "relevant": "you want to make veterinary or surgery costs for your dog or cat more predictable.", "check": "Do you need comprehensive health cover or focused surgery cover – and which excess suits you?"}
     ]
   },
   "advice": {
@@ -133,7 +143,7 @@
   },
   "ticker": {
     "ariaLabel": "Guidance for choosing supplementary cover",
-    "threeAreas": "Outpatient, dental or hospital – only where it matters",
+    "threeAreas": "Outpatient, dental, hospital or pet – go directly to the right area",
     "notEverything": "Not everyone needs everything",
     "needsFirst": "Needs before product",
     "clearConditions": "Understand benefits, limits and exclusions",

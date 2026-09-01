@@ -1,34 +1,30 @@
 {
   "seo": {
-    "title": "Krankenzusatzversicherung: Ambulant, Zahn & Klinik | Healio",
-    "description": "Finde heraus, welcher Zusatzschutz zu dir passt: ambulant, Zahn oder stationär. Unabhängige Beratung, klare Leistungen und keine unnötigen Bausteine.",
-    "ogTitle": "Krankenzusatzversicherung klar entscheiden | Healio",
-    "ogDescription": "Ambulant, Zahn oder stationär: Der Healio Schutz-Kompass führt dich verständlich zum passenden Bereich.",
-    "ogImageAlt": "Healio Schutz-Kompass für ambulante, Zahn- und stationäre Krankenzusatzversicherung",
+    "title": "Versicherungen: Ambulant, Zahn, Klinik & Tier | Healio",
+    "description": "Wähle den passenden Schutzbereich: ambulant, Zahn, stationär oder Tier. Healio erklärt Leistungen und Grenzen verständlich und unabhängig.",
+    "ogTitle": "Den passenden Schutzbereich klar wählen | Healio",
+    "ogDescription": "Ambulant, Zahn, stationär oder Tier: Finde direkt den Versicherungsbereich, den du suchst.",
+    "ogImageAlt": "Healio Übersicht für ambulante, Zahn-, stationäre und Tierkrankenversicherung",
     "offerDescription": "Kostenlose Beratung und Einordnung passender Krankenzusatzversicherungen"
   },
   "hero": {
-    "eyebrow": "Ambulant. Zahn. Stationär.",
+    "eyebrow": "Ambulant. Zahn. Stationär. Tier.",
     "titleLine1": "Kranken\u00adzusatz\u00adversicherung.",
     "titleLine2": "Nur dort, wo sie zählt.",
-    "description": "Ambulant, Zahn oder stationär: Healio zeigt dir, welcher Zusatzschutz zu deinem Leben passt – verständlich, unabhängig und ohne unnötige Bausteine.",
+    "description": "Für dich oder dein Tier: Healio führt dich direkt zum passenden Schutzbereich – verständlich, unabhängig und ohne unnötige Bausteine.",
     "primaryCta": "Schutzbereiche vergleichen",
     "secondaryCta": "Persönlich beraten lassen",
     "proof": ["Unabhängiger Versicherungsmakler", "Persönlich erreichbar", "Bedingungen klar erklärt"],
-    "compassEyebrow": "Dein Schutz-Kompass",
-    "compassTitle": "Wo soll dein Schutz stärker werden?",
-    "routes": [
-      {"key": "ambulant", "number": "01", "label": "Ambulant", "description": "Gesundheit im Alltag", "anchor": "ambulant"},
-      {"key": "dental", "number": "02", "label": "Zahn", "description": "Eigenanteile planbarer machen", "anchor": "zahn"},
-      {"key": "hospital", "number": "03", "label": "Stationär", "description": "Mehr Wahl im Krankenhaus", "anchor": "stationaer"}
-    ],
-    "compassNoteStrong": "Du musst nicht alles absichern.",
-    "compassNote": "Du solltest nur bewusst entscheiden, was du selbst tragen möchtest."
+    "compassEyebrow": "Erst verstehen, dann absichern",
+    "compassTitle": "Welche Kosten möchtest du selbst tragen – und welche nicht?",
+    "compassNoteStrong": "Vier Bereiche. Eine bewusste Entscheidung.",
+    "compassNote": "Healio zeigt dir Leistungen, Grenzen und den passenden nächsten Schritt.",
+    "orientationFacts": ["Ambulant", "Zahn", "Stationär", "Tier"]
   },
   "paths": {
-    "eyebrow": "Drei Schutzwege",
+    "eyebrow": "Vier Schutzwege",
     "title": "Wo möchtest du besser abgesichert sein?",
-    "description": "Nicht jeder braucht alles. Entscheidend ist, welche Kosten du selbst tragen kannst – und wo du im richtigen Moment mehr Spielraum haben möchtest.",
+    "description": "Für dich: Ambulant, Zahn oder stationär. Für dein Tier: ein eigener Schutzbereich. Wähle direkt das Thema, das du suchst.",
     "items": [
       {
         "key": "ambulant",
@@ -75,13 +71,26 @@
         "features": ["Privatärztliche Behandlung", "Zimmerkomfort und Klinikwahl"],
         "cta": "Stationären Schutz prüfen",
         "schemaName": "Krankenhauszusatzversicherung"
+      },
+      {
+        "key": "pet",
+        "anchor": "tier",
+        "routeKey": "tierkrankenversicherung",
+        "number": "04",
+        "kicker": "Für deinen tierischen Begleiter",
+        "title": "Tierarztkosten absichern, bevor sie zur Belastung werden.",
+        "description": "Je nach Tarif schützt eine Tierkranken- oder OP-Versicherung vor hohen Behandlungskosten bei Krankheit oder Unfall.",
+        "decision": "Für Halter, die zwischen umfassendem Krankenschutz und gezieltem OP-Schutz wählen möchten.",
+        "features": ["Vollschutz oder OP-Schutz", "Leistungen und Grenzen klar vergleichen"],
+        "cta": "Tierkrankenversicherung ansehen",
+        "schemaName": "Tierkrankenversicherung"
       }
     ]
   },
   "comparison": {
     "eyebrow": "Schnell eingeordnet",
     "title": "Nicht jede Lücke ist deine Lücke.",
-    "description": "Der richtige Schutz beginnt nicht beim Tarif, sondern bei deinen Prioritäten. Diese drei Fragen bringen mehr Klarheit als jedes Produktregal.",
+    "description": "Der richtige Schutz beginnt nicht beim Tarif, sondern bei deinen Prioritäten. Diese vier Fragen bringen mehr Klarheit als jedes Produktregal.",
     "cta": "Meinen Bedarf klären",
     "headers": {"area": "Bereich", "relevant": "Relevant, wenn …", "check": "Wichtigste Prüffrage"},
     "items": [
@@ -102,6 +111,12 @@
         "label": "Stationär",
         "relevant": "du im Krankenhaus mehr Wahl bei Arzt, Klinik oder Zimmer möchtest.",
         "check": "Welche Wahlleistungen und Honorargrenzen gelten – und welche Gesundheitsfragen musst du vor Abschluss beantworten?"
+      },
+      {
+        "key": "pet",
+        "label": "Tier",
+        "relevant": "du Tierarzt- oder OP-Kosten für deinen Hund oder deine Katze planbarer machen möchtest.",
+        "check": "Brauchst du umfassenden Krankenschutz oder gezielten OP-Schutz – und welche Selbstbeteiligung passt zu dir?"
       }
     ]
   },
@@ -148,7 +163,7 @@
   },
   "ticker": {
     "ariaLabel": "Orientierung für den passenden Zusatzschutz",
-    "threeAreas": "Ambulant, Zahn oder stationär – nur dort, wo es zählt",
+    "threeAreas": "Ambulant, Zahn, stationär oder Tier – direkt zum passenden Bereich",
     "notEverything": "Nicht jeder braucht alles",
     "needsFirst": "Bedarf vor Produkt",
     "clearConditions": "Leistungen, Grenzen und Ausschlüsse klar verstehen",

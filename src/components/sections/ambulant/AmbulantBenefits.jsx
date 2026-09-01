@@ -7,11 +7,11 @@ import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const CATEGORY_KEYS = [
-  { key: 'heilpraktiker', kind: 'naturopathy', tone: 'butter' },
-  { key: 'sehhilfen', kind: 'glasses', tone: 'sky' },
-  { key: 'vorsorge', kind: 'prevention', tone: 'mint' },
-  { key: 'arzneimittel', kind: 'medication', tone: 'lavender' },
-  { key: 'schwangerschaft', kind: 'pregnancy', tone: 'coral' },
+  { key: 'heilpraktiker', iconSrc: '/images/friendly-icons/naturopathy.webp', tone: 'butter' },
+  { key: 'sehhilfen', iconSrc: '/images/friendly-icons/vision-glasses.webp', tone: 'sky' },
+  { key: 'vorsorge', iconSrc: '/images/friendly-icons/prevention-vaccination.webp', tone: 'mint' },
+  { key: 'arzneimittel', iconSrc: '/images/friendly-icons/medication-copay.webp', tone: 'lavender' },
+  { key: 'schwangerschaft', iconSrc: '/images/friendly-icons/pregnancy.webp', tone: 'coral' },
 ];
 
 const SourceBadge = ({ source }) => {
@@ -64,7 +64,7 @@ const BenefitCard = ({ benefit, index, t }) => {
         className="w-full p-6 flex flex-col items-center text-center cursor-pointer"
       >
         <FriendlyIcon
-          kind={benefit.kind}
+          src={benefit.iconSrc}
           label={t(`benefits.${benefit.key}.title`)}
           tone={benefit.tone}
           size="lg"

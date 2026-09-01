@@ -4,6 +4,7 @@
     "title": "Damit gute Behandlung nicht am <highlight>Eigenanteil</highlight> endet.",
     "subtitle": "Mit Healio können deine Patienten – abhängig von Tarif und persönlichen Voraussetzungen – ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> nutzen. Deine Praxis informiert neutral. Healio prüft, berät und begleitet.",
     "cta": "30-minütiges Kennenlernen buchen",
+    "secondaryCta": "Konzept mit Nita ansehen",
     "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
     "imageAltMobile": "Beratungsgespräch in einer hellen Gesundheitspraxis",
     "imageAltDesktop": "Vertrauensvolles Gespräch zwischen Therapeut und Patient",
@@ -11,8 +12,42 @@
     "videoPlayLabel": "Erklärvideo starten",
     "videoFallback": "Dein Browser unterstützt kein Video."
   },
+  "proof": {
+    "ariaLabel": "Die Rollen im Healio-Partnerkonzept",
+    "items": [
+      {
+        "title": "Praxis informiert",
+        "text": "Du gibst einen neutralen Hinweis – ohne Versicherungsberatung."
+      },
+      {
+        "title": "Patienten entscheiden",
+        "text": "Interessierte Patienten wählen selbst, ob sie Healio kontaktieren."
+      },
+      {
+        "title": "Healio prüft",
+        "text": "Wir klären Voraussetzungen, beraten individuell und begleiten."
+      }
+    ]
+  },
+  "explanationVideo": {
+    "title": "Das Partnerkonzept im Überblick",
+    "subtitle": "Das freigegebene Nita-Video wird hier eingebunden. Deine Fragen kannst du schon jetzt direkt mit Nita klären.",
+    "status": "Nita-Video in Vorbereitung",
+    "message": "Bis das freigegebene Video bereitsteht, führt Nita dich direkt durch das Konzept.",
+    "points": [
+      "Klare Rollen für Praxis, Patienten und Healio",
+      "Voraussetzungen ohne Pauschalversprechen",
+      "Nächster Schritt: 30-minütiges Kennenlernen"
+    ],
+    "cta": "Konzept mit Nita klären",
+    "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
+    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden.",
+    "avatarAlt": "Nita, digitale Assistenz von Healio",
+    "assistantName": "Nita · digitale Healio-Assistentin",
+    "error": "Video konnte nicht geladen werden"
+  },
   "trust": {
-    "budget": "Bis zu 3.000 EUR Gesundheitsbudget",
+    "budget": "Bis zu 3.000 EUR in zwei Jahren möglich",
     "information": "Neutrale Informationen für Patienten",
     "advice": "Healio berät und vermittelt",
     "meeting": "30 Minuten Kennenlernen"
@@ -34,10 +69,10 @@
   },
   "budget": {
     "title": "Das <highlight>Healio Gesundheitsbudget</highlight>",
-    "subtitle": "Je nach persönlicher Situation können Patienten Kassenboni und Leistungen einer Zusatzversicherung kombinieren. Healio prüft die Voraussetzungen individuell und erklärt, welche Bausteine tatsächlich nutzbar sind.",
+    "subtitle": "Je nach Tarif und persönlichen Voraussetzungen können Patienten bis zu 3.000 EUR tarifliche Leistungen in zwei Jahren nutzen. Beim IKK Bonus sind 700 EUR+ möglich; er bleibt ein separater Baustein und hängt von nachgewiesenen Maßnahmen ab.",
     "total": "Gesundheitsbudget gesamt",
     "totalAmount": "bis zu 3.000 EUR",
-    "totalDesc": "in zwei Jahren aus möglichen Kassenboni und tariflichen Leistungen",
+    "totalDesc": "mögliche tarifliche Leistungen in zwei Jahren; der IKK Bonus wird getrennt geprüft",
     "naturheilkunde": "Naturheilkunde und Alternativmedizin",
     "naturheilkundeAmount": "bis zu 1.000 EUR",
     "naturheilkundeDesc": "Tarifliche Leistungen unter anderem für Heilpraktiker, Osteopathie, TCM und Chiropraktik",
@@ -152,9 +187,9 @@
   "miaPrompt": {
     "ariaLabel": "Nita bietet Hilfe zum Healio-Partnerkonzept an",
     "close": "Nita-Hinweis schließen",
-    "eyebrow": "Nita von Healio",
-    "title": "Soll ich dir das Partnerkonzept erklären?",
-    "body": "Ich zeige dir kurz, wie deine Praxis Patienten neutral informiert und Healio die Beratung und Begleitung übernimmt.",
-    "cta": "Ja, Partnerkonzept erklären"
+    "eyebrow": "Nita · digitale Healio-Assistentin",
+    "title": "Du möchtest Patienten helfen, ohne selbst beraten zu müssen?",
+    "body": "Ich zeige dir die drei Rollen und den nächsten Schritt: Du informierst neutral, Patienten entscheiden frei, Healio prüft und berät individuell.",
+    "cta": "Rollen mit Nita klären"
   }
 }

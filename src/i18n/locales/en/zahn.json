@@ -2,7 +2,7 @@
   "hero": {
     "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Your IKK bonus helps pay the premium.",
     "subtitle": "Dental cover from just a few euros per month. The IKK classic bonus can refinance up to 100% of the premium, and we check your individual potential with you.",
-    "ikkNote": "<strong>Your premium can fully refinance itself:</strong> IKK classic rewards health-conscious behaviour with a strong bonus programme. Depending on your bonus, it offsets up to 100% of the premium. Calculate yours below. And even if your dentist has already recommended treatment, the immediate-cover path still has a solution.",
+    "ikkNote": "<strong>Put health-fund bonuses in context:</strong> KassenBoost compares contributions, achievable bonuses and benefits separately. You decide whether the lowest contribution or the greatest personal value matters more.",
     "ctaCalculate": "Find your tariff",
     "ctaBenefits": "View benefits",
     "heroImageAlt": "Professional dental practice"
@@ -56,8 +56,8 @@
     "warningLabel": "Important:",
     "trust": "Your answers are not stored or transmitted. They are only used for the recommendation on this page.",
     "disclaimer": "Acceptance is only checked bindingly in the application of the respective insurer. The check does not replace individual advice.",
-    "ikkNote": "By the way: the IKK classic bonus can refinance up to 100 % of your premium.",
-    "ikkCta": "Calculate your bonus",
+    "ikkNote": "By the way: KassenBoost compares contributions, achievable bonuses and benefits separately.",
+    "ikkCta": "Check insurer value",
     "questions": {
       "q1": {
         "text": "Has your dentist recommended or started a treatment within the last 2 years?",
@@ -341,7 +341,7 @@
       "highlight": {
         "badge": "IKK bonus leverage",
         "title": "Small premium, great chance of full refinancing",
-        "text": "The smaller the premium, the easier the IKK classic bonus offsets it in full. With the ZahnUpgrade 90+, depending on your bonus, part of the activities may already be enough. Work out below in one minute how much is possible for you."
+        "text": "The lower the premium, the more easily an achievable bonus may offset it. Check the realistic effect for your situation with KassenBoost."
       },
       "chooseLabel": "Choose your dental tariff",
       "cta90": "ZahnUpgrade 90+ from €13 (recommended)",
@@ -350,10 +350,10 @@
       "note": "You will be redirected to the LKH online application. Your chosen tariff is preselected there and can be changed at any time."
     },
     "ikk": {
-      "badge": "up to 100 %",
-      "title": "And the premium? The IKK bonus can fully refinance it.",
-      "text": "Whichever path you choose: IKK classic rewards health-conscious behaviour with a strong bonus programme. How much you get back is individual and can be checked in advance. Depending on your bonus, up to 100 % of your premium can be refinanced. Calculate it right away.",
-      "cta": "Calculate your IKK bonus now"
+      "badge": "KassenBoost",
+      "title": "And the premium? Compare costs and potential bonuses separately.",
+      "text": "KassenBoost shows contributions, achievable bonuses and benefits side by side. You decide whether IKK classic or another health fund better fits your priorities.",
+      "cta": "Check insurer value"
     },
     "finder": {
       "title": "Still unsure? Decide by what you need",
@@ -474,7 +474,7 @@
       },
       {
         "q": "How does the IKK bonus refinance the premium?",
-        "a": "IKK classic rewards health-conscious behaviour with a strong bonus programme. How much you get back is individual: depending on your activities, the bonus can fully finance up to 100 percent of your premium. Calculate yours with the bonus calculator on this page."
+        "a": "How much a health-fund bonus reduces your premium depends on your activities and the applicable conditions. KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide what matters most."
       },
       {
         "q": "Why is signing up before the invoice so important?",

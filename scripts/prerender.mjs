@@ -35,6 +35,7 @@ const MIME = {
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
   '.woff2': 'font/woff2', '.ico': 'image/x-icon', '.txt': 'text/plain',
+  '.pdf': 'application/pdf',
 };
 
 // Gegenstueck zum Rewrite in vercel.json: Die Seiten rufen die

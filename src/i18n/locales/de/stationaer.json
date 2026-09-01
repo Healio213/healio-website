@@ -2,7 +2,7 @@
   "hero": {
     "title": "<highlight>Privatpatient</highlight> im Krankenhaus. Mit dem stationären Tarif.",
     "subtitle": "Einbettzimmer, Chefarztbehandlung und freie Klinikwahl mit den Klinik-Tarifen der SDK, ohne Wartezeiten. Für 30-Jährige zum Beispiel ab 6,84 € im Monat. Beitrag in 2 Minuten berechnen.",
-    "ikkNote": "<strong>Refinanzierung über den IKK classic Bonus:</strong> Die IKK classic belohnt gesundes Verhalten mit steuerfreien Boni und Zuschüssen. Je nach deinen Aktivitäten kann das einen großen Teil deines Beitrags decken, beim Unfall-Tarif oft sogar den ganzen. Rechne es unten individuell aus.",
+    "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, welcher Kassenvorteil für dich zählt.",
     "ctaCalculate": "Tarif berechnen",
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Modernes Krankenhaus Einzelzimmer"
@@ -106,8 +106,8 @@
       "tagegeld": "Höchster Tarif der SP-Linie",
       "preis": "z. B. 49,78 €/Monat mit 30 Jahren"
     },
-    "ikkComboTitle": "Beitrag über den IKK classic Bonus refinanzieren",
-    "ikkComboText": "Die IKK classic belohnt gesundheitsbewusstes Verhalten mit <strong>steuerfreien Geldboni und Zuschüssen</strong>: Vorsorge, Impfungen, Sportverein, Fitness, Sportabzeichen und mehr. Je nach deinen Aktivitäten kann der Bonus einen großen Teil deines Klinik-Beitrags decken, beim Unfall-Tarif oft sogar den ganzen. Wie viel bei dir zusammenkommt, zeigt dir der Bonusrechner weiter unten.",
+    "ikkComboTitle": "Kassenbeitrag und Bonus getrennt vergleichen",
+    "ikkComboText": "KassenBoost stellt <strong>Beitrag, erreichbaren Bonus und Leistungen</strong> nebeneinander. So siehst du, ob die IKK classic oder eine andere Krankenkasse besser zu deinen Prioritäten passt.",
     "examplesEyebrow": "Transparent statt theoretisch",
     "examplesTitle": "Was freiwillige Krankenhaus-Extras realistisch kosten können",
     "examplesSubtitle": "Die medizinisch notwendige Behandlung übernimmt die GKV. Diese Modellrechnungen zeigen ausschließlich zusätzliche Wunschleistungen und die gesetzliche Zuzahlung.",
@@ -286,7 +286,7 @@
       },
       {
         "q": "Wie hilft der IKK classic Bonus bei der Finanzierung?",
-        "a": "Die IKK classic belohnt gesundes Verhalten mit steuerfreien Geldboni und Zuschüssen, zum Beispiel für Vorsorge, Impfungen, Sportverein, Fitness oder das Sportabzeichen. Je nach deinen Aktivitäten kann der Bonus einen großen Teil des Beitrags decken, beim Unfall-Tarif oft sogar den ganzen. Wie viel bei dir zusammenkommt, rechnest du mit dem Bonusrechner auf dieser Seite aus."
+        "a": "Wie stark ein Kassenbonus deinen Beitrag entlastet, hängt von deinen Aktivitäten und den jeweiligen Bedingungen ab. Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt und entscheidest selbst, was dir wichtiger ist."
       },
       {
         "q": "Gilt der Schutz auch für Kinder?",

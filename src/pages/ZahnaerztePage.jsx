@@ -48,20 +48,20 @@ const ZahnaerztePage = () => {
     { kind: 'document', tone: 'sky' },
     { kind: 'privacy', tone: 'lavender' },
   ];
-  const insurerIcons = ['ongoing-service', 'dental-protection', 'health-budget', 'clear-comparison'];
+  const insurerIcons = ['⚡', '🪥', '💶', '🧩'];
   const insurerTones = ['butter', 'sky', 'mint', 'lavender'];
-  const bonusFriendlyIcons = ['bonus-reward', 'protection-path', 'document-check'];
+  const bonusFriendlyIcons = ['🪙', '🛡️', '✅'];
   const bonusTones = ['butter', 'mint', 'lavender'];
   const legalFriendlyIcons = [
-    { icon: 'clear-comparison', tone: 'sky' },
-    { icon: 'document-check', tone: 'mint' },
-    { icon: 'personal-support', tone: 'lavender' },
-    { icon: 'protection-path', tone: 'butter' },
+    { emoji: '⚖️', tone: 'sky' },
+    { emoji: '📋', tone: 'mint' },
+    { emoji: '💬', tone: 'lavender' },
+    { emoji: '🔒', tone: 'butter' },
   ];
   const packageFriendlyIcons = [
-    { icon: 'document-check', tone: 'sky' },
-    { icon: 'clear-comparison', tone: 'butter' },
-    { icon: 'digital-completion', tone: 'mint' },
+    { emoji: '📄', tone: 'sky' },
+    { emoji: '🗒️', tone: 'butter' },
+    { emoji: '📲', tone: 'mint' },
   ];
 
   const revealProps = (delay = 0) => ({
@@ -198,7 +198,7 @@ const ZahnaerztePage = () => {
               <motion.article {...revealProps(0.06)} className="relative mt-14 overflow-hidden border border-[#c5e0d8] bg-[#eaf8f3] p-7 sm:p-10 lg:grid lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-14 lg:p-12">
                 <div className="absolute inset-y-0 left-0 w-1.5 bg-[#25c990]" aria-hidden="true" />
                 <div>
-                  <FriendlyIcon icon={insurerIcons[0]} tone={insurerTones[0]} size="lg" />
+                  <FriendlyIcon emoji={insurerIcons[0]} label={insurerHighlights[0].title} tone={insurerTones[0]} size="lg" />
                   <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#d2eee4] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-[#087654]">
                     <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                     {insurerHighlights[0].kicker}
@@ -227,7 +227,8 @@ const ZahnaerztePage = () => {
                 >
                   {item.metric && <div className="absolute inset-x-0 top-0 h-1.5 bg-[#25c990]" aria-hidden="true" />}
                   <FriendlyIcon
-                    icon={insurerIcons[index + 1]}
+                    emoji={insurerIcons[index + 1]}
+                    label={item.title}
                     tone={insurerTones[index + 1]}
                     size="sm"
                   />
@@ -281,7 +282,8 @@ const ZahnaerztePage = () => {
                   <motion.article key={item.title} {...revealProps(index * 0.07)} className="relative bg-white p-7 sm:p-8">
                     <div className="flex items-center justify-between">
                       <FriendlyIcon
-                        icon={bonusFriendlyIcons[index]}
+                        emoji={bonusFriendlyIcons[index]}
+                        label={item.title}
                         tone={bonusTones[index]}
                         size="sm"
                       />
@@ -343,10 +345,10 @@ const ZahnaerztePage = () => {
 
             <div className="mt-14 grid gap-px overflow-hidden border border-[#dbe5e2] bg-[#dbe5e2] md:grid-cols-2">
               {legalItems.map((item, index) => {
-                const icon = legalFriendlyIcons[index] || { icon: 'protection-path', tone: 'mint' };
+                const icon = legalFriendlyIcons[index] || { emoji: '🛡️', tone: 'mint' };
                 return (
                   <motion.article key={item.title} {...revealProps(index * 0.05)} className="bg-[#f8fbfa] p-7 sm:p-8">
-                    <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
+                    <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} size="sm" />
                     <h3 className="mt-6 font-display text-xl font-extrabold tracking-[-0.02em] text-[#07111f]">{item.title}</h3>
                     <p className="mt-3 leading-7 text-[#5b6e75]">{item.text}</p>
                   </motion.article>
@@ -377,10 +379,10 @@ const ZahnaerztePage = () => {
 
             <div className="mt-14 grid gap-6 lg:grid-cols-3">
               {packageItems.map((item, index) => {
-                const icon = packageFriendlyIcons[index] || { icon: 'document-check', tone: 'sky' };
+                const icon = packageFriendlyIcons[index] || { emoji: '📄', tone: 'sky' };
                 return (
                   <motion.article key={item.title} {...revealProps(index * 0.07)} className="border-t-4 border-[#25c990] bg-white p-7 shadow-[0_14px_44px_rgba(7,17,31,0.06)] sm:p-8">
-                    <FriendlyIcon icon={icon.icon} tone={icon.tone} size="sm" />
+                    <FriendlyIcon emoji={icon.emoji} label={item.title} tone={icon.tone} size="sm" />
                     <h3 className="mt-8 font-display text-xl font-extrabold tracking-[-0.02em] text-[#07111f]">{item.title}</h3>
                     <p className="mt-3 leading-7 text-[#5c6f76]">{item.text}</p>
                   </motion.article>

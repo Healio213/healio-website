@@ -5,12 +5,12 @@ import { seoRoutes } from './seo-routes.mjs';
 const SITE_URL = 'https://healio.de';
 
 const publicRouterPaths = [
-  '/', '/about', '/leistungen', '/kassenboost', '/kassenbonus', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/hebammen', '/zahnaerzte',
-  '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant',
+  '/', '/about', '/leistungen', '/unternehmen', '/partner', '/hebammen', '/zahnaerzte',
+  '/zahnaerzte/praxis-checkliste', '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant', '/kassenbonus',
   '/zahn', '/stationaer', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
-  '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/health-insurance-bonus', '/en/companies', '/en/companies/pension-calculator', '/en/partner', '/en/midwives',
-  '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
+  '/en', '/en/about', '/en/services', '/en/companies', '/en/partner', '/en/midwives',
+  '/en/contact', '/en/appointment', '/en/outpatient', '/en/health-insurance-bonus', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',
   '/tiktok', '/en/tiktok', '/instagram', '/en/instagram',
   '/potenzialanalyse', '/en/potential-analysis', '/confirmation', '/en/confirmation',
@@ -18,25 +18,22 @@ const publicRouterPaths = [
 ];
 
 const noindexPaths = new Set([
-  '/lebenshilfe', '/konto-loeschen', '/confirmation', '/en/confirmation',
+  '/lebenshilfe', '/zahnaerzte/praxis-checkliste', '/konto-loeschen', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',
-  '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
 ]);
 
 const bilingualPairs = [
   ['/', '/en'],
   ['/about', '/en/about'],
   ['/leistungen', '/en/services'],
-  ['/kassenboost', '/en/kassenboost'],
-  ['/kassenbonus', '/en/health-insurance-bonus'],
   ['/unternehmen', '/en/companies'],
-  ['/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator'],
   ['/partner', '/en/partner'],
   ['/hebammen', '/en/midwives'],
   ['/kontakt', '/en/contact'],
   ['/terminvereinbarung', '/en/appointment'],
   ['/ambulant', '/en/outpatient'],
+  ['/kassenbonus', '/en/health-insurance-bonus'],
   ['/zahn', '/en/dental'],
   ['/stationaer', '/en/inpatient'],
   ['/impressum', '/en/legal-notice'],

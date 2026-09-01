@@ -8,9 +8,9 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { useReferrer } from '@/hooks/useReferrer';
 
 const nudgeItems = [
-  { key: 'selfPay', icon: 'document-check', tone: 'coral' },
-  { key: 'budget', icon: 'health-budget', tone: 'sky' },
-  { key: 'bonus', icon: 'bonus-reward', tone: 'butter' },
+  { key: 'selfPay', emoji: '🧾', tone: 'coral' },
+  { key: 'budget', emoji: '💳', tone: 'sky' },
+  { key: 'bonus', emoji: '🎁', tone: 'butter' },
 ];
 
 const AmbulantConversionNudge = () => {
@@ -70,7 +70,7 @@ const AmbulantConversionNudge = () => {
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 [&::-webkit-details-marker]:hidden">
                     <span className="flex items-center gap-3">
-                      <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" />
+                      <FriendlyIcon emoji={item.emoji} tone={item.tone} size="sm" />
                       <span className="font-extrabold text-slate-950">
                         {t(`conversionNudge.items.${item.key}.title`)}
                       </span>
@@ -99,7 +99,7 @@ const AmbulantConversionNudge = () => {
                   {index < nudgeItems.length - 1 && (
                     <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 text-emerald-300 md:block" />
                   )}
-                  <FriendlyIcon icon={item.icon} tone={item.tone} size="sm" className="mb-4" />
+                  <FriendlyIcon emoji={item.emoji} tone={item.tone} size="sm" className="mb-4" />
                   <h3 className="mb-2 text-lg font-extrabold text-slate-950">
                     {t(`conversionNudge.items.${item.key}.title`)}
                   </h3>

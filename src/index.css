@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -123,6 +123,12 @@
   .home-motion {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html.healio-consent-ui-active .zahn-checklist-page {
+    padding-top: 13rem;
   }
 }
 

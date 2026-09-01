@@ -2,30 +2,25 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  Building2,
   CheckCircle2,
   ExternalLink,
   FileCheck2,
-  Landmark,
   Mail,
   Phone,
   Printer,
-  Scale,
   ShieldCheck,
-  WalletCards,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const SITE_URL = 'https://healio.de';
 
-const SectionHeading = ({ id, number, icon: Icon, title, children, className = '' }) => (
+const SectionHeading = ({ id, number, iconKind, iconTone = 'mint', title, children, className = '' }) => (
   <section id={id} className={`scroll-mt-28 border-t border-slate-200 py-10 first:border-t-0 first:pt-0 sm:py-12 ${className}`}>
     <div className="grid gap-5 sm:grid-cols-[64px_minmax(0,1fr)] sm:gap-7">
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 text-healio-primary-dark" aria-hidden="true">
-        <Icon className="h-5 w-5" strokeWidth={1.8} />
-      </div>
+      <FriendlyIcon kind={iconKind} tone={iconTone} size="sm" />
       <div className="min-w-0">
         <p className="mb-2 font-display text-xs font-bold uppercase tracking-[0.2em] text-healio-primary-dark">{number}</p>
         <h2 className="break-words font-display text-2xl font-bold tracking-[-0.02em] text-slate-950 [hyphens:auto] [overflow-wrap:anywhere] sm:text-3xl">{title}</h2>
@@ -204,7 +199,7 @@ const ErstinformationPage = () => {
           </aside>
 
           <div className="min-w-0 rounded-[1.75rem] border border-slate-200 bg-white px-4 py-10 shadow-[0_24px_70px_rgba(15,23,42,0.06)] sm:px-9 lg:px-12 lg:py-14 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none">
-            <SectionHeading id="anbieter" number="01" icon={Building2} title={t('erstinformation.provider.title')}>
+            <SectionHeading id="anbieter" number="01" iconKind="protection" title={t('erstinformation.provider.title')}>
               <div className="grid gap-8 md:grid-cols-2">
                 <div className="space-y-1 text-slate-700">
                   <p className="font-bold text-slate-950">Healio GmbH</p>
@@ -222,7 +217,7 @@ const ErstinformationPage = () => {
               </div>
             </SectionHeading>
 
-            <SectionHeading id="status" number="02" icon={Landmark} title={t('erstinformation.status.title')}>
+            <SectionHeading id="status" number="02" iconKind="protection" iconTone="sky" title={t('erstinformation.status.title')}>
               <p className="font-semibold text-slate-950">{t('erstinformation.status.type')}</p>
               <div className="mt-7 grid gap-7 md:grid-cols-2">
                 <div className="legal-print-avoid rounded-xl bg-slate-50 p-5 sm:p-6 print:border print:border-slate-200 print:bg-white">
@@ -255,7 +250,7 @@ const ErstinformationPage = () => {
               </div>
             </SectionHeading>
 
-            <SectionHeading id="beratung" number="03" icon={WalletCards} title={t('erstinformation.advice.title')}>
+            <SectionHeading id="beratung" number="03" iconKind="budget" iconTone="butter" title={t('erstinformation.advice.title')}>
               <div className="space-y-5">
                 <p>{t('erstinformation.advice.offered')}</p>
                 <div className="legal-print-avoid rounded-xl border border-emerald-200 bg-emerald-50/70 p-5 sm:p-6 print:bg-white">
@@ -265,7 +260,7 @@ const ErstinformationPage = () => {
               </div>
             </SectionHeading>
 
-            <SectionHeading id="beteiligungen" number="04" icon={ShieldCheck} title={t('erstinformation.participations.title')}>
+            <SectionHeading id="beteiligungen" number="04" iconKind="protection" iconTone="lavender" title={t('erstinformation.participations.title')}>
               <div className="grid gap-4 md:grid-cols-2">
                 {[t('erstinformation.participations.outbound'), t('erstinformation.participations.inbound')].map((text) => (
                   <div key={text} className="legal-print-avoid flex gap-3 rounded-xl border border-slate-200 p-5 sm:p-6">
@@ -276,7 +271,7 @@ const ErstinformationPage = () => {
               </div>
             </SectionHeading>
 
-            <SectionHeading id="schlichtung" number="05" icon={Scale} title={t('erstinformation.dispute.title')}>
+            <SectionHeading id="schlichtung" number="05" iconKind="comparison" iconTone="sky" title={t('erstinformation.dispute.title')}>
               <p>{t('erstinformation.dispute.intro')}</p>
               <div className="mt-7 grid gap-5 md:grid-cols-2">
                 <article className="legal-print-avoid rounded-xl border border-slate-200 p-5 sm:p-6">
@@ -302,7 +297,7 @@ const ErstinformationPage = () => {
               </div>
             </SectionHeading>
 
-            <SectionHeading id="beratungsgrundlage" number="06 · § 60 VVG" icon={FileCheck2} title={t('erstinformation.advisoryBasis.title')}>
+            <SectionHeading id="beratungsgrundlage" number="06 · § 60 VVG" iconKind="document" title={t('erstinformation.advisoryBasis.title')}>
               <div className="legal-print-avoid rounded-2xl bg-[#061622] p-6 text-slate-300 sm:p-8 print:border print:border-slate-300 print:bg-white print:text-slate-700">
                 <p className="font-display text-xl font-bold leading-8 text-white print:text-slate-950">{t('erstinformation.advisoryBasis.lead')}</p>
                 <p className="mt-4">{t('erstinformation.advisoryBasis.text')}</p>

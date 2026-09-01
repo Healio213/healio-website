@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Send, Loader2 } from 'lucide-react';
+import { Phone, Send, Loader2, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,6 +14,7 @@ import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
 import GoogleMapEmbed from '@/components/GoogleMapEmbed';
+import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 
 const KontaktPage = () => {
   const { t } = useTranslation('contact');
@@ -134,7 +135,7 @@ const KontaktPage = () => {
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon icon="independent-guidance" tone="coral" size="sm" />
+                    <FriendlyIcon emoji="📍" label={t('page.address')} tone="coral" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.address')}</h3>
                       <p className="text-lg text-slate-900 font-medium">
@@ -146,7 +147,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon icon="digital-completion" tone="sky" size="sm" />
+                    <FriendlyIcon emoji="✉️" label={t('page.email')} tone="sky" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
                       <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
@@ -156,7 +157,7 @@ const KontaktPage = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <FriendlyIcon icon="personal-support" tone="mint" size="sm" />
+                    <FriendlyIcon emoji="📞" label={t('page.phone')} tone="mint" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.phone')}</h3>
                       <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
@@ -164,18 +165,60 @@ const KontaktPage = () => {
                       </a>
                     </div>
                   </div>
+
+                  <div className="flex items-start gap-4">
+                    <FriendlyIcon emoji="💬" label="WhatsApp" tone="mint" size="sm" />
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-500 mb-1">WhatsApp</h3>
+                      <a
+                        href={HEALIO_WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center gap-2 text-lg font-medium text-slate-900 transition-colors hover:text-[#075E54] focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#075E54]"
+                        aria-label={lang === 'en' ? 'Open WhatsApp with Healio, external service (new tab)' : 'WhatsApp mit Healio öffnen, externer Dienst (neuer Tab)'}
+                      >
+                        <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                        {lang === 'en' ? 'Open WhatsApp' : 'WhatsApp öffnen'}
+                      </a>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="mt-10 pt-10 border-t border-slate-100">
-                  <Button 
-                    asChild
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white h-14 text-lg font-medium rounded-xl"
-                  >
-                    <a href="tel:+494089755705">
-                      <Phone className="mr-2 w-5 h-5" />
-                      {t('page.startCall')}
-                    </a>
-                  </Button>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <Button
+                      asChild
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white h-14 text-base font-medium rounded-xl"
+                    >
+                      <a href="tel:+494089755705">
+                        <Phone className="mr-2 w-5 h-5" />
+                        {t('page.startCall')}
+                      </a>
+                    </Button>
+                    <Button
+                      asChild
+                      className="w-full bg-[#075E54] hover:bg-[#064E47] text-white h-14 text-base font-medium rounded-xl"
+                    >
+                      <a
+                        href={HEALIO_WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-healio-whatsapp="contact-page"
+                        aria-label={lang === 'en' ? 'Open WhatsApp with Healio, external service (new tab)' : 'WhatsApp mit Healio öffnen, externer Dienst (neuer Tab)'}
+                      >
+                        <MessageCircle className="mr-2 w-5 h-5" aria-hidden="true" />
+                        WhatsApp
+                      </a>
+                    </Button>
+                    <p
+                      data-healio-whatsapp-privacy-note
+                      className="text-xs leading-5 text-slate-500 sm:col-span-2"
+                    >
+                      {lang === 'en'
+                        ? 'WhatsApp is an external service. General text questions may be answered automatically by Nita (AI). Please do not send health data, patient data, insurance numbers, media or documents through WhatsApp.'
+                        : 'WhatsApp ist ein externer Dienst. Allgemeine Textfragen können automatisiert von Nita (KI) beantwortet werden. Bitte sende keine Gesundheitsdaten, Patientendaten, Versicherungsnummern, Medien oder Dokumente über WhatsApp.'}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

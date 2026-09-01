@@ -1,37 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Eye, Stethoscope, Hand, Smile, Gift, Plane, ShieldCheck } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const benefitsData = [{
-  icon: <Leaf className="w-8 h-8" />,
+  kind: 'naturopathy', tone: 'mint',
   title: "Heilpraktiker & Osteopathie",
   description: "100% Erstattung für alternative Heilmethoden (bis 1.000€ in 2 Jahren)."
 }, {
-  icon: <Eye className="w-8 h-8" />,
+  kind: 'glasses', tone: 'sky',
   title: "Sehhilfen bis 500€",
   description: "Großzügiger Zuschuss für deine neue Brille oder Kontaktlinsen."
 }, {
-  icon: <Stethoscope className="w-8 h-8" />,
+  kind: 'ambulant', tone: 'mint',
   title: "Ärztliche Zusatzleistungen",
   description: "Viele Extraleistungen beim Arzt (z.B. Gynäkologie) sind mitversichert."
 }, {
-  icon: <Hand className="w-8 h-8" />,
+  kind: 'ambulant', tone: 'lavender',
   title: "Massagen & Physiotherapie",
   description: "Erstattung für medizinische Massagen und weitere physiotherapeutische Behandlungen."
 }, {
-  icon: <Smile className="w-8 h-8" />,
+  kind: 'dental', tone: 'sky',
   title: "Zahnreinigung & Vorsorge",
   description: "Professionelle Zahnreinigung und Vorsorge werden über den Bonus voll finanziert."
 }, {
-  icon: <Gift className="w-8 h-8" />,
+  kind: 'bonus', tone: 'butter',
   title: "IKK Bonus bis 700€+",
   description: "Sichere dir jährlich einen riesigen Bonus für deine gesunden Aktivitäten."
 }, {
-  icon: <Plane className="w-8 h-8" />,
+  kind: 'protection', tone: 'lavender',
   title: "Auslandsreisen",
   description: "100% Kostenübernahme für die weltweite Reisekrankenversicherung."
 }, {
-  icon: <ShieldCheck className="w-8 h-8" />,
+  kind: 'prevention', tone: 'coral',
   title: "Vorsorge & Impfungen",
   description: "Über das Bonusprogramm werden viele wichtige Vorsorgeleistungen voll finanziert."
 }];
@@ -101,7 +101,7 @@ const Benefits = () => {
               viewport={{ once: true }} 
               className="healio-benefit-card"
             >
-              <div className="healio-icon-box mx-auto" aria-hidden="true">{benefit.icon}</div>
+              <FriendlyIcon kind={benefit.kind} tone={benefit.tone} className="mx-auto" />
               <h3 className="text-xl font-bold text-healio-text">{benefit.title}</h3>
               <p className="text-healio-text-light text-sm">{benefit.description}</p>
             </motion.article>

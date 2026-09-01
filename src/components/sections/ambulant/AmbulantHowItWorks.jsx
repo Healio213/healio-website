@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
-const stepIcons = ['concept-calculator', 'personal-support', 'health-budget'];
+const stepIcons = ['🧮', '💬', '💚'];
 const stepTones = ['butter', 'lavender', 'mint'];
 const stepKeys = ['step1', 'step2', 'step3'];
 
@@ -16,7 +16,7 @@ const AmbulantHowItWorks = () => {
     id: i + 1,
     title: t(`howItWorks.${key}Title`),
     desc: t(`howItWorks.${key}Desc`),
-    icon: stepIcons[i],
+    emoji: stepIcons[i],
     tone: stepTones[i],
   }));
 
@@ -70,7 +70,7 @@ const AmbulantHowItWorks = () => {
                   <div className="absolute -right-6 -top-6 w-24 h-24 bg-healio-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500 ease-in-out" />
 
                   <div className="relative z-10 flex flex-col md:items-center w-full">
-                    <FriendlyIcon icon={step.icon} tone={step.tone} className="mb-6 md:mx-auto" />
+                    <FriendlyIcon emoji={step.emoji} label={step.title} tone={step.tone} className="mb-6 md:mx-auto" />
                     <h3 className="text-2xl font-bold text-healio-dark mb-3">
                       {step.title}
                     </h3>

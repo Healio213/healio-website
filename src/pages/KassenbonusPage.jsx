@@ -189,7 +189,7 @@ const KassenbonusPage = () => {
                         : 'border-slate-200 bg-white hover:-translate-y-1 hover:border-healio-primary/40 hover:shadow-lg motion-reduce:transform-none'}`}
                     >
                       <div className="flex items-start justify-between gap-4">
-                        <FriendlyIcon kind={PATH_ICON_KIND[item.key]} label={item.title} tone={item.tone} size="md" />
+                        <FriendlyIcon kind={PATH_ICON_KIND[item.key]} emoji={item.emoji} label={item.title} tone={item.tone} size="md" />
                         <span className={`grid h-7 w-7 place-items-center rounded-full border transition ${selected ? 'border-healio-primary bg-healio-primary text-white' : 'border-slate-200 text-transparent group-hover:border-healio-primary/50'}`}>
                           <Check className="h-4 w-4" aria-hidden="true" />
                         </span>
@@ -248,7 +248,7 @@ const KassenbonusPage = () => {
             <div className="relative mx-auto grid w-full max-w-[440px] place-items-center rounded-[2.5rem] border border-healio-primary/20 bg-white p-8 shadow-[0_26px_70px_rgba(20,81,62,0.1)] sm:p-10">
               <div className="absolute inset-6 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(37,201,144,0.12),transparent_68%)]" aria-hidden="true" />
               <FriendlyIcon
-                kind="prevention"
+                src="/images/friendly-icons/prevention-vaccination.webp"
                 label={t('everyday.title')}
                 tone="mint"
                 size="lg"
@@ -338,7 +338,7 @@ const KassenbonusPage = () => {
                   to={getPath(card.routeKey)}
                   className="group rounded-[1.75rem] border border-white/12 bg-white/[0.07] p-6 transition hover:-translate-y-1 hover:border-home-mint/50 hover:bg-white/[0.1] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none"
                 >
-                  <FriendlyIcon kind={PROTECTION_ICON_KIND[card.routeKey]} label={card.title} tone={card.tone} size="md" />
+                  <FriendlyIcon kind={PROTECTION_ICON_KIND[card.routeKey]} emoji={card.emoji} label={card.title} tone={card.tone} size="md" />
                   <h3 className="mt-5 font-display text-2xl font-extrabold text-white">{card.title}</h3>
                   <p className="mt-3 min-h-[72px] text-sm leading-6 text-slate-300">{card.text}</p>
                   <span className="mt-5 inline-flex items-center gap-2 font-display text-sm font-extrabold text-home-mint">

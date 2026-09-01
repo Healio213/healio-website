@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, ExternalLink, Calculator, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { BAYERISCHE_URL, UKV_URL, LKH_URLS, trackZahnEvent } from './dental/dentalLinks';
 
 const trackInsurerClick = (insurer) => trackZahnEvent('zahnzusatz_versicherer_click', insurer);
@@ -15,14 +16,6 @@ const DentalInsurerChoice = () => {
   const vorsorgeBullets = t('insurerChoice.vorsorge.bullets', { returnObjects: true }) || [];
   const preisBullets = t('insurerChoice.preis.bullets', { returnObjects: true }) || [];
   const finderItems = t('insurerChoice.finder.items', { returnObjects: true }) || [];
-
-  const scrollToBonusCalculator = (e) => {
-    e.preventDefault();
-    const element = document.getElementById('bonus-calculator');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="tarif-weiche" className="healio-section bg-white py-20" aria-labelledby="dental-insurer-choice-heading">
@@ -72,7 +65,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.sofort.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon icon="ongoing-service" tone="mint" size="sm" />
+                <FriendlyIcon emoji="⚡️" tone="mint" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.sofort.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">
@@ -133,7 +126,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.vorsorge.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon icon="dental-protection" tone="sky" size="sm" />
+                <FriendlyIcon emoji="🛡️" tone="sky" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.vorsorge.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">
@@ -194,7 +187,7 @@ const DentalInsurerChoice = () => {
                 {t('insurerChoice.preis.answer')}
               </div>
               <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon icon="health-budget" tone="mint" size="sm" />
+                <FriendlyIcon emoji="💶" tone="mint" size="sm" />
                 <div>
                   <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.preis.label')}</h3>
                   <p className="text-sm text-slate-500 font-medium">
@@ -318,7 +311,12 @@ const DentalInsurerChoice = () => {
                 <p className="text-slate-700 leading-relaxed">{t('insurerChoice.ikk.text')}</p>
               </div>
               <Button asChild className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-5 h-auto rounded-xl flex-shrink-0 w-full md:w-auto">
-                <a href="#bonus-calculator" onClick={scrollToBonusCalculator}>
+                <a
+                  href={KASSENBOOST_COMPARE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackZahnEvent('zahn_kassenboost_click', 'tarif-weiche')}
+                >
                   <Calculator className="w-4 h-4 mr-2" aria-hidden="true" />
                   {t('insurerChoice.ikk.cta')}
                 </a>

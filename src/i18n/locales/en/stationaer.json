@@ -2,7 +2,7 @@
   "hero": {
     "title": "<highlight>Private patient</highlight> in hospital. With the inpatient plan.",
     "subtitle": "Private room, chief physician treatment and free hospital choice with SDK's hospital plans, with no waiting periods. For a 30-year-old, from 6.84 € per month. Calculate your premium in 2 minutes.",
-    "ikkNote": "<strong>Refinancing via the IKK classic bonus:</strong> IKK classic rewards healthy behaviour with tax-free bonuses and subsidies. Depending on your activities, this can cover a large part of your premium, and for the accident plan often all of it. Calculate yours below.",
+    "ikkNote": "<strong>Put health-fund bonuses in context:</strong> KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide which value matters to you.",
     "ctaCalculate": "Calculate premium",
     "ctaBonus": "Secure bonus",
     "heroImageAlt": "Modern hospital private room"
@@ -106,8 +106,8 @@
       "tagegeld": "Highest plan of the SP line",
       "preis": "e.g. 49.78 €/month at age 30"
     },
-    "ikkComboTitle": "Refinance your premium via the IKK classic bonus",
-    "ikkComboText": "IKK classic rewards health-conscious behaviour with <strong>tax-free cash bonuses and subsidies</strong>: preventive check-ups, vaccinations, sports club, fitness and more. Depending on your activities, the bonus can cover a large part of your hospital plan premium, and for the accident plan often all of it. The bonus calculator below shows what you can collect.",
+    "ikkComboTitle": "Compare health-fund contributions and bonuses separately",
+    "ikkComboText": "KassenBoost places <strong>contributions, achievable bonuses and benefits</strong> side by side. This shows whether IKK classic or another health fund better fits your priorities.",
     "examplesEyebrow": "Transparent, not theoretical",
     "examplesTitle": "What optional hospital extras can realistically cost",
     "examplesSubtitle": "Statutory insurance covers medically necessary treatment. These model calculations show optional extras and the statutory co-payment only.",
@@ -286,7 +286,7 @@
       },
       {
         "q": "How does the IKK classic bonus help with financing?",
-        "a": "IKK classic rewards healthy behaviour with tax-free cash bonuses and subsidies, for example for check-ups, vaccinations, sports club, fitness or the German sports badge. Depending on your activities, the bonus can cover a large part of the premium, and for the accident plan often all of it. The bonus calculator on this page shows what you can collect."
+        "a": "How much a health-fund bonus reduces your premium depends on your activities and the applicable conditions. KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide what matters most."
       },
       {
         "q": "Does the cover also apply to children?",

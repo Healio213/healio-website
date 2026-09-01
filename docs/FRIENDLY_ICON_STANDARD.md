@@ -46,12 +46,8 @@ ersetzt wird.
 ## Technische Quelle
 
 - Komponente: `src/components/ui/FriendlyIcon.jsx`
-- Registry: `src/components/ui/healioSoftClayIcons.js`
 - Assets: `public/images/friendly-icons/`
 
 Neue Inhaltskarten verwenden `kind` an der zentralen Komponente. Ein neues
 Motiv wird erst nach Prüfung auf Eindeutigkeit, Barrierefreiheit und Konsistenz
-in die zentrale Zuordnung aufgenommen. Bestehende `icon`-Aufrufe bleiben als
-rückwärtskompatible API erhalten und werden zentral auf die neue Bildsprache
-abgebildet. Die bisherigen Soft-Clay-Dateien bleiben als geprüfter Fallback im
-Projekt.
+in die zentrale Zuordnung aufgenommen.
