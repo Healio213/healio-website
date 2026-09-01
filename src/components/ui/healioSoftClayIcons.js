@@ -54,6 +54,7 @@ export const friendlyIconAssets = Object.freeze({
   choice: '/images/friendly-icons/decision-choice.webp',
   broker: '/images/friendly-icons/trust-broker.webp',
   advisor: '/images/friendly-icons/trust-advisor.webp',
+  pet: '/images/friendly-icons/pet-care.webp',
 });
 
 // Alte `icon=`-Aufrufe zeigen automatisch den neuen Standard. Wo kein
@@ -79,6 +80,7 @@ export const legacyIconKindAliases = Object.freeze({
   'document-check': 'document',
   'planet-care': 'naturopathy',
   'active-wellbeing': 'fitness',
+  'pet-care': 'pet',
 });
 
 export default healioSoftClayIcons;

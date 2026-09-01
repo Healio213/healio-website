@@ -30,7 +30,7 @@ assert.match(de.paths.items[1].highlight.note, /Versicherungsbedingungen/);
 assert.equal(en.paths.items.length, de.paths.items.length);
 assert.equal(en.comparison.items.length, de.comparison.items.length);
 assert.equal(de.budget.amount, '3.000 EUR');
-assert.equal(en.budget.amount, '3.000 EUR');
+assert.equal(en.budget.amount, '3,000 EUR');
 assert.equal(de.budget.amountPrefix, 'Bis zu');
 assert.match(de.seo.title, /Ambulant, Zahn, Klinik & Tier/);
 assert.match(JSON.stringify(de.paths.items), /tier|Tier/);

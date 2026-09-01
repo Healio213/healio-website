@@ -11,6 +11,8 @@ import deAmbulantFaq from './locales/de/ambulant-faq.json';
 import enAmbulantFaq from './locales/en/ambulant-faq.json';
 import deKassenbonus from './locales/de/kassenbonus.json';
 import enKassenbonus from './locales/en/kassenbonus.json';
+import deKassenBoost from './locales/de/kassenboost.json';
+import enKassenBoost from './locales/en/kassenboost.json';
 import deZahn from './locales/de/zahn.json';
 import enZahn from './locales/en/zahn.json';
 import deStationaer from './locales/de/stationaer.json';
@@ -54,6 +56,7 @@ i18n
         ambulant: deAmbulant,
         'ambulant-faq': deAmbulantFaq,
         kassenbonus: deKassenbonus,
+        kassenboost: deKassenBoost,
         zahn: deZahn,
         stationaer: deStationaer,
         partner: dePartner,
@@ -77,6 +80,7 @@ i18n
         ambulant: enAmbulant,
         'ambulant-faq': enAmbulantFaq,
         kassenbonus: enKassenbonus,
+        kassenboost: enKassenBoost,
         zahn: enZahn,
         stationaer: enStationaer,
         partner: enPartner,

@@ -202,8 +202,8 @@ export const seoRoutes = [
   },
   {
     path: '/leistungen',
-    title: 'Krankenzusatzversicherung: Ambulant, Zahn & Klinik | Healio',
-    description: 'Finde heraus, welcher Zusatzschutz zu dir passt: ambulant, Zahn oder stationär. Unabhängige Beratung, klare Leistungen und keine unnötigen Bausteine.',
+    title: 'Versicherungen: Ambulant, Zahn, Klinik & Tier | Healio',
+    description: 'Wähle den passenden Schutzbereich: ambulant, Zahn, stationär oder Tier. Healio erklärt Leistungen und Grenzen verständlich und unabhängig.',
     canonical: 'https://healio.de/leistungen',
     lang: 'de',
     hreflang: { de: 'https://healio.de/leistungen', en: 'https://healio.de/en/services' },
@@ -509,8 +509,8 @@ export const seoRoutes = [
   },
   {
     path: '/en/services',
-    title: 'Supplementary Health Insurance: Outpatient, Dental & Hospital | Healio',
-    description: 'Find the supplementary cover that fits you: outpatient, dental or hospital. Independent advice, clear benefits and no unnecessary modules.',
+    title: 'Insurance: Outpatient, Dental, Hospital & Pet | Healio',
+    description: 'Choose the right area of cover: outpatient, dental, hospital or pet. Healio explains benefits and limits clearly and independently.',
     canonical: 'https://healio.de/en/services',
     lang: 'en',
     hreflang: { de: 'https://healio.de/leistungen', en: 'https://healio.de/en/services' },

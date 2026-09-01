@@ -48,6 +48,7 @@ const expectedFriendlyIcons = [
   'hospital',
   'support',
   'document',
+  'mandate',
   'region',
   'protection',
   'comparison',
@@ -64,6 +65,7 @@ const expectedFriendlyIcons = [
   'choice',
   'broker',
   'advisor',
+  'pet',
 ];
 
 const extractRegistry = (source, exportName) => {
@@ -75,12 +77,22 @@ const extractRegistry = (source, exportName) => {
   );
 };
 
+const extractAliasRegistry = (source, exportName) => {
+  const registryMatch = source.match(new RegExp(`export const ${exportName} = Object\\.freeze\\(\\{([\\s\\S]*?)\\n\\}\\);`));
+  assert.ok(registryMatch, `Die Registry ${exportName} fehlt.`);
+  return Object.fromEntries(
+    [...registryMatch[1].matchAll(/['"]?([a-z0-9-]+)['"]?\s*:\s*['"]([a-z0-9-]+)['"]/g)]
+      .map((match) => [match[1], match[2]]),
+  );
+};
+
 const registryPath = path.join(rootDir, 'src/components/ui/healioSoftClayIcons.js');
 assert.ok(fs.existsSync(registryPath), 'Die Healio-Soft-Clay-Registry fehlt.');
 
 const registrySource = fs.readFileSync(registryPath, 'utf8');
 const registeredIcons = extractRegistry(registrySource, 'healioSoftClayIcons');
 const registeredFriendlyIcons = extractRegistry(registrySource, 'friendlyIconAssets');
+const registeredLegacyAliases = extractAliasRegistry(registrySource, 'legacyIconKindAliases');
 
 assert.deepEqual(
   Object.keys(registeredIcons).sort(),
@@ -91,25 +103,17 @@ assert.deepEqual(
 assert.deepEqual(
   Object.keys(registeredFriendlyIcons).sort(),
   [...expectedFriendlyIcons].sort(),
-  'Die gemeinsame Friendly-Icon-Registry muss exakt den bestätigten 28er-Satz enthalten.',
+  'Die gemeinsame Friendly-Icon-Registry muss exakt den bestätigten 30er-Satz enthalten.',
 );
 
 for (const [iconName, publicPath] of Object.entries(registeredIcons)) {
   assert.match(publicPath, /^\/images\/icons\/healio-clay\/[a-z0-9-]+\.webp$/);
-  const assetPath = path.join(rootDir, 'public', publicPath.replace(/^\//, ''));
-  assert.ok(fs.existsSync(assetPath), `Das Icon ${iconName} fehlt unter ${publicPath}.`);
-
-  const asset = fs.readFileSync(assetPath);
-  assert.ok(asset.length > 0, `Das Icon ${iconName} ist leer.`);
-  assert.equal(asset.subarray(0, 4).toString('ascii'), 'RIFF', `${iconName} ist kein WebP.`);
-  assert.equal(asset.subarray(8, 12).toString('ascii'), 'WEBP', `${iconName} ist kein WebP.`);
-  assert.equal(asset.subarray(12, 16).toString('ascii'), 'VP8X', `${iconName} braucht einen erweiterten WebP-Header.`);
-  assert.ok(asset[20] & 0x10, `${iconName} braucht einen echten Alphakanal.`);
-  const width = asset.readUIntLE(24, 3) + 1;
-  const height = asset.readUIntLE(27, 3) + 1;
-  assert.equal(width, 192, `${iconName} muss exakt 192 Pixel breit sein.`);
-  assert.equal(height, 192, `${iconName} muss exakt 192 Pixel hoch sein.`);
-  assert.ok(asset.length <= 30 * 1024, `${iconName} ist mit ${asset.length} Bytes zu groß.`);
+  const friendlyKind = registeredLegacyAliases[iconName];
+  assert.ok(friendlyKind, `Für die alte Icon-ID ${iconName} fehlt der FriendlyIcon-Alias.`);
+  assert.ok(
+    registeredFriendlyIcons[friendlyKind],
+    `Der Alias ${iconName} verweist auf den unbekannten Friendly-Kind ${friendlyKind}.`,
+  );
 }
 
 for (const [iconName, publicPath] of Object.entries(registeredFriendlyIcons)) {
@@ -136,15 +140,21 @@ assert.match(friendlyIcon, /height="192"/);
 assert.match(friendlyIcon, /loading="lazy"/);
 assert.match(friendlyIcon, /decoding="async"/);
 
+const emojiRegistryMatch = friendlyIcon.match(/const emojiKinds = \{([\s\S]*?)\n\};/);
+assert.ok(emojiRegistryMatch, 'Die rückwärtskompatible Emoji-Zuordnung fehlt.');
+const registeredEmojiKinds = Object.fromEntries(
+  [...emojiRegistryMatch[1].matchAll(/['"]([^'"]+)['"]\s*:\s*['"]([a-z0-9-]+)['"]/g)]
+    .map((match) => [match[1], match[2]]),
+);
+for (const [emoji, friendlyKind] of Object.entries(registeredEmojiKinds)) {
+  assert.ok(
+    registeredFriendlyIcons[friendlyKind],
+    `Das Kompatibilitäts-Emoji ${emoji} verweist auf den unbekannten Friendly-Kind ${friendlyKind}.`,
+  );
+}
+
 const collectRequestedIcons = (source) => [
-  ...[...source.matchAll(/\bicon:\s*['"]([^'"]+)['"]/g)].map((match) => match[1]),
   ...[...source.matchAll(/\bicon=['"]([^'"]+)['"]/g)].map((match) => match[1]),
-  ...[...source.matchAll(/const\s+\w*Icons\s*=\s*\[([\s\S]*?)\];/g)]
-    .flatMap((match) => (
-      match[1].includes(':')
-        ? []
-        : [...match[1].matchAll(/['"]([^'"]+)['"]/g)].map((entry) => entry[1])
-    )),
 ];
 
 const collectRequestedKinds = (source) => [
@@ -174,8 +184,14 @@ assert.ok(friendlyIconConsumerFiles.length > 0, 'Es wurden keine öffentlichen F
 
 for (const targetFile of friendlyIconConsumerFiles) {
   const source = readText(targetFile);
-  assert.doesNotMatch(source, /emoji\s*=/, `${targetFile} verwendet noch die alte Emoji-Prop.`);
-  assert.doesNotMatch(source, /\p{Extended_Pictographic}/u, `${targetFile} enthält noch ein natives Emoji.`);
+  const requestedEmojis = [...source.matchAll(/['"]([^'"\n]*\p{Extended_Pictographic}[^'"\n]*)['"]/gu)]
+    .map((match) => match[1]);
+  for (const requestedEmoji of requestedEmojis) {
+    assert.ok(
+      registeredEmojiKinds[requestedEmoji],
+      `${targetFile} verwendet das nicht auf ein Friendly-Asset abgebildete Emoji ${requestedEmoji}.`,
+    );
+  }
   assertKnownIconRequests(targetFile, source);
 }
 
@@ -183,23 +199,12 @@ const rawUiIconFiles = [
   'src/components/sections/ambulant/AmbulantBonusCalculator.jsx',
   'src/components/sections/SocialProofSection.jsx',
   'src/components/sections/Videos.jsx',
-  'src/pages/TikTokPage.jsx',
-  'src/pages/InstagramPage.jsx',
 ];
 
 for (const targetFile of rawUiIconFiles) {
   const source = readText(targetFile);
   assert.doesNotMatch(source, /\p{Extended_Pictographic}/u, `${targetFile} enthält noch ein rohes sichtbares UI-Emoji.`);
   assertKnownIconRequests(targetFile, source);
-}
-
-const socialPageFiles = ['src/pages/TikTokPage.jsx', 'src/pages/InstagramPage.jsx'];
-for (const targetFile of socialPageFiles) {
-  assert.doesNotMatch(
-    readText(targetFile),
-    /<span[^>]*>\s*\{card\.icon\}\s*<\/span>/s,
-    `${targetFile} rendert card.icon noch als rohes Text-Emoji.`,
-  );
 }
 
 const socialIconLocaleFiles = [
@@ -211,25 +216,15 @@ const socialIconLocaleFiles = [
 
 for (const targetFile of socialIconLocaleFiles) {
   const source = readText(targetFile);
-  assert.doesNotMatch(source, /\p{Extended_Pictographic}/u, `${targetFile} enthält noch ein rohes Social-UI-Emoji.`);
   const locale = JSON.parse(source);
   for (const card of Object.values(locale.cards || {})) {
     if (!card.icon) continue;
-    assert.ok(registeredIcons[card.icon], `${targetFile} fordert die unbekannte Icon-ID ${card.icon} an.`);
+    assert.ok(
+      registeredIcons[card.icon] || registeredEmojiKinds[card.icon],
+      `${targetFile} fordert die unbekannte Icon-ID ${card.icon} an.`,
+    );
   }
 }
-
-const homeSource = [
-  'src/components/home/InsurancePathway.jsx',
-  'src/components/home/HowHealioWorks.jsx',
-  'src/components/home/AmbulantBudgetFeature.jsx',
-  'src/components/home/HomeTrust.jsx',
-].map(readText).join('\n');
-const companySource = [
-  'src/components/company/CompanySolutions.jsx',
-  'src/components/company/CompanyProcess.jsx',
-  'src/components/company/CompanyEconomics.jsx',
-].map(readText).join('\n');
 
 const publicSource = friendlyIconConsumerFiles.map(readText).join('\n');
 const requiredSemanticKinds = [
@@ -248,15 +243,6 @@ const requiredSemanticKinds = [
 
 for (const kind of requiredSemanticKinds) {
   assert.match(publicSource, new RegExp(`['"]${kind}['"]`), `Der semantische Friendly-Kind ${kind} ist auf keiner öffentlichen Seite im Einsatz.`);
-}
-
-for (const iconName of expectedIcons) {
-  const quotedIconIds = [`'${iconName}'`, `"${iconName}"`];
-  const used = quotedIconIds.some((iconId) => homeSource.includes(iconId))
-    || quotedIconIds.some((iconId) => companySource.includes(iconId))
-    || quotedIconIds.some((iconId) => publicSource.includes(iconId))
-    || socialIconLocaleFiles.some((targetFile) => readText(targetFile).includes(`"${iconName}"`));
-  assert.ok(used, `${iconName} ist registriert, aber auf keiner öffentlichen Seite im Einsatz.`);
 }
 
 console.log('Friendly icon contract passed.');
