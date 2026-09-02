@@ -52,6 +52,7 @@ for (const directive of [
   'https://www.googletagmanager.com',
   'https://www.google-analytics.com',
   'https://app.healio.de',
+  'https://voice-pilot.healio.de',
   'https://*.supabase.co',
   'wss://*.supabase.co',
   'https://api.emailjs.com',

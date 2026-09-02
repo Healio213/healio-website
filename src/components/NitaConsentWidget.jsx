@@ -2,26 +2,36 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Mic, PhoneOff, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { getConsentState, hasConsent, openConsentSettings, subscribeConsent, updateConsentPurpose } from '@/lib/consent';
-import { buildNitaContext, sanitizeNitaEntryPoint } from '@/lib/nitaContext';
 
 export const NITA_CONSENT_REQUEST_EVENT = 'healio:nita-consent-request';
 
 const NITA_SESSION_HARD_STOP_MS = 150_000;
 const NITA_SILENCE_STOP_MS = 30_000;
+const NITA_SESSION_ENDPOINT = 'https://voice-pilot.healio.de/nita/realtime/session';
+const HEALIO_PAGE_ORIGINS = new Set(['https://healio.de', 'https://www.healio.de']);
 
 const getSessionEndpoint = () => {
-  const configuredEndpoint = import.meta.env.VITE_NITA_WEBRTC_SESSION_ENDPOINT;
   if (typeof window === 'undefined') return null;
   try {
-    const hasOverride = typeof configuredEndpoint === 'string' && configuredEndpoint.trim() !== '';
-    const endpoint = new URL(hasOverride ? configuredEndpoint : '/api/nita-session', window.location.origin);
-    if (endpoint.origin !== window.location.origin) return null;
-    if (hasOverride && endpoint.protocol !== 'https:') return null;
+    if (!HEALIO_PAGE_ORIGINS.has(window.location.origin)) return null;
+    const endpoint = new URL(NITA_SESSION_ENDPOINT);
+    if (
+      endpoint.protocol !== 'https:'
+      || endpoint.origin !== 'https://voice-pilot.healio.de'
+      || endpoint.pathname !== '/nita/realtime/session'
+      || endpoint.search
+      || endpoint.hash
+    ) return null;
     return endpoint.toString();
   } catch {
     return null;
   }
 };
+
+const isAudioSdp = (value) => typeof value === 'string'
+  && value.trimStart().startsWith('v=0')
+  && /^m=audio\s+\d+\s+\S+\s+.+\r?$/m.test(value)
+  && /^a=fingerprint:sha-256\s+[A-Fa-f0-9:]{11,}\r?$/m.test(value);
 
 const COPY = {
   de: {
@@ -50,7 +60,7 @@ const COPY = {
 
 export const requestNitaConsent = (entryPoint = 'delayed_prompt') => {
   if (typeof window === 'undefined') return false;
-  window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT, { detail: { entryPoint: sanitizeNitaEntryPoint(entryPoint) } }));
+  window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT, { detail: { entryPoint } }));
   return true;
 };
 
@@ -60,7 +70,6 @@ export const NitaConsentWidget = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState('idle');
   const [connectionEndReason, setConnectionEndReason] = useState(null);
-  const [activeNitaContext, setActiveNitaContext] = useState(() => buildNitaContext(pathname));
   const peerConnectionRef = useRef(null);
   const eventChannelRef = useRef(null);
   const microphoneStreamRef = useRef(null);
@@ -72,8 +81,6 @@ export const NitaConsentWidget = () => {
   const greetingSentRef = useRef(false);
   const closeButtonRef = useRef(null);
   const launcherRef = useRef(null);
-  const lastContextPathRef = useRef(pathname);
-  const pendingContextRef = useRef(activeNitaContext);
   const language = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'de';
   const copy = COPY[language];
   const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
@@ -130,17 +137,7 @@ export const NitaConsentWidget = () => {
   }), [stopConnection]);
   useEffect(() => () => stopConnection(), [stopConnection]);
   useEffect(() => {
-    if (lastContextPathRef.current === pathname) return;
-    lastContextPathRef.current = pathname;
-    const nextContext = buildNitaContext(pathname, 'global_launcher');
-    pendingContextRef.current = nextContext;
-    setActiveNitaContext(nextContext);
-  }, [pathname]);
-  useEffect(() => {
-    const handleNitaRequest = (event) => {
-      const requestedContext = buildNitaContext(pathname, sanitizeNitaEntryPoint(event.detail?.entryPoint));
-      pendingContextRef.current = requestedContext;
-      setActiveNitaContext(requestedContext);
+    const handleNitaRequest = () => {
       setPanelOpen(true);
     };
     window.addEventListener(NITA_CONSENT_REQUEST_EVENT, handleNitaRequest);
@@ -230,20 +227,29 @@ export const NitaConsentWidget = () => {
       if (!isActiveAttempt()) return;
       await peerConnection.setLocalDescription(offer);
       if (!isActiveAttempt()) return;
+      if (!isAudioSdp(offer.sdp)) throw new Error('Nita-Angebot ist ungültig');
       const fetchAbortController = new AbortController();
       fetchAbortControllerRef.current = fetchAbortController;
       const response = await fetch(sessionEndpoint, {
-        method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sdp: offer.sdp, context: pendingContextRef.current }),
+        method: 'POST',
+        credentials: 'omit',
+        cache: 'no-store',
+        mode: 'cors',
+        referrerPolicy: 'no-referrer',
+        headers: { 'Content-Type': 'application/sdp', Accept: 'application/sdp' },
+        body: offer.sdp,
         signal: fetchAbortController.signal,
       });
       fetchAbortControllerRef.current = null;
       if (!isActiveAttempt()) return;
-      if (!response.ok) throw new Error('Nita-Session konnte nicht erstellt werden');
-      const body = await response.json();
+      if (
+        !response.ok
+        || !/^application\/sdp(?:\s*;|$)/i.test(response.headers.get('content-type') || '')
+      ) throw new Error('Nita-Session konnte nicht erstellt werden');
+      const answerSdp = await response.text();
       if (!isActiveAttempt()) return;
-      if (typeof body?.sdp !== 'string' || body.sdp.trim() === '') throw new Error('Nita-Session liefert keine SDP-Antwort');
-      await peerConnection.setRemoteDescription({ type: 'answer', sdp: body.sdp });
+      if (!isAudioSdp(answerSdp)) throw new Error('Nita-Session liefert keine gültige SDP-Antwort');
+      await peerConnection.setRemoteDescription({ type: 'answer', sdp: answerSdp });
     } catch {
       if (isActiveAttempt()) stopConnection('error');
     }
@@ -251,9 +257,6 @@ export const NitaConsentWidget = () => {
 
   const handleLauncherClick = () => {
     if (panelOpen) { closePanel(); return; }
-    const requestedContext = buildNitaContext(pathname, 'global_launcher');
-    pendingContextRef.current = requestedContext;
-    setActiveNitaContext(requestedContext);
     setPanelOpen(true);
   };
 
