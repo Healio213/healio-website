@@ -24,6 +24,7 @@
     "test:dentists": "node scripts/check-dentists-contract.mjs",
     "test:zahn-checklist": "node scripts/check-zahnaerzte-checklist-contract.mjs",
     "test:blog-cta": "node scripts/check-blog-cta-contract.mjs",
+    "test:blog-seo": "node scripts/check-blog-seo-contract.mjs",
     "test:blog-fallback": "node scripts/check-blog-prerender-fallback-rendered.mjs",
     "test:blog-build": "node scripts/check-blog-build-output.mjs",
     "sync:blog-cache": "node scripts/sync-blog-content-cache.mjs",

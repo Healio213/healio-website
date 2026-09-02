@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputPath = path.join(rootDir, 'public', 'data', 'blog-articles-cache.json');
@@ -81,7 +82,15 @@ if (publishedArticles.length === 0) {
   throw new Error('Die Quelle enthält keine veröffentlichten Blogartikel. Der bestehende Cache bleibt unverändert.');
 }
 const normalizedArticles = publishedArticles
+  .map(applyBlogEditorialFixes)
   .map(normalizeArticle)
+  .map((article) => {
+    const published = Date.parse(article.published_at || '');
+    const modified = Date.parse(article.updated_at || '');
+    return Number.isFinite(published) && (!Number.isFinite(modified) || modified < published)
+      ? { ...article, updated_at: article.published_at }
+      : article;
+  })
   .sort((left, right) => String(right.published_at || '').localeCompare(String(left.published_at || '')));
 
 const invalidArticles = normalizedArticles.filter((article) => !isCompleteArticle(article));

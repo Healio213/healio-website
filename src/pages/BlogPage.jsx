@@ -7,6 +7,7 @@ import { Clock, ArrowRight, User, Tag } from 'lucide-react';
 import ProductTicker from '@/components/sections/ProductTicker';
 import { getPrerenderedBlogListHtml } from '@/lib/prerenderedBlogContent';
 import { fetchCachedBlogArticles } from '@/lib/blogContentCache';
+import { applyBlogEditorialFixes } from '@/lib/blogEditorialFixes';
 
 // Leer = same-origin, siehe BlogArticlePage.jsx und vercel.json.
 const API_BASE = import.meta.env.VITE_APP_API_URL || '';
@@ -59,7 +60,7 @@ const BlogPage = () => {
       if (!Array.isArray(data.articles) || data.articles.length === 0) {
         throw new Error('Die Blog-API enthält keine Artikel.');
       }
-      setArticles(data.articles);
+      setArticles(data.articles.map(applyBlogEditorialFixes));
     } catch (err) {
       console.warn('Blog-API nicht verfügbar, geprüfter Cache wird verwendet:', err.message);
       try {

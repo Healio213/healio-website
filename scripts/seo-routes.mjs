@@ -353,22 +353,22 @@ export const seoRoutes = [
   // === BLOG-ARTIKEL (Heilpraktiker-Zielgruppe) ===
   {
     path: '/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget',
-    title: 'Heilpraktiker Kostenübernahme: 3.000 € Budget | Healio',
-    description: 'Patienten brechen Heilpraktiker-Behandlungen oft aus Kostengründen ab. Das Healio Gesundheitsbudget ermöglicht bis zu 3.000 € in 2 Jahren.',
+    title: 'Heilpraktiker-Kostenübernahme: 3.000 EUR Budget | Healio',
+    description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Naturheilverfahren. Ein passender Kassenbonus kann den Beitrag individuell bis zu 100 % reduzieren.',
     canonical: 'https://healio.de/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget',
     lang: 'de',
   },
   {
     path: '/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
     title: 'Heilpraktiker Abrechnung vereinfachen: Digitale Erstattung App | Healio',
-    description: 'Digitale Erstattung per App reduziert Rechnungsdiskussionen. Healio verbindet Zusatzversicherung und Kassenbonus zum 3.000 € Gesundheitsbudget.',
+    description: 'Rechnungen digital einreichen und Erstattungen verfolgen. Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren sind tarifabhängig möglich.',
     canonical: 'https://healio.de/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
     lang: 'de',
   },
   {
     path: '/blog/heilpraktiker-kosten-gkv-erstattung-healio',
     title: 'Heilpraktiker-Kosten GKV: Warum alles selbst zahlen + Lösung | Healio',
-    description: 'GKV zahlt Heilpraktiker-Kosten meist nicht. Erfahre, wie Healio Kassenbonus und Zusatzversicherung zu bis zu 3.000 € Budget kombiniert.',
+    description: 'Was die GKV bei Heilpraktiker-Kosten leistet und wie Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren ermöglichen kann.',
     canonical: 'https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio',
     lang: 'de',
   },

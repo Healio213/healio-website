@@ -15,6 +15,11 @@ import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
 import { serializeJsonLd } from '../src/lib/contentSecurity.js';
 import { sanitizeStaticBlogHtml } from './lib/blogContentSecurity.mjs';
+import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
+import {
+  createBlogArticleSchema as createNormalizedBlogArticleSchema,
+  getBlogRelatedLinks,
+} from '../src/lib/blogSeo.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -197,6 +202,15 @@ function createStaticBlogArticleHtml(article) {
     published,
     article.reading_time_minutes ? `${article.reading_time_minutes} Min. Lesezeit` : '',
   ].filter(Boolean).join(' · ');
+  const relatedLinks = getBlogRelatedLinks(article.slug);
+  const relatedMarkup = relatedLinks.length > 0
+    ? `<aside class="mt-12 rounded-2xl border border-emerald-100 bg-[#f4fbf8] p-6 sm:p-8">
+        <h2 class="text-xl font-bold text-[#464f5d] mb-4">Passend zu diesem Thema</h2>
+        <ul class="grid gap-3 sm:grid-cols-3">
+          ${relatedLinks.map((link) => `<li><a href="${escapeHtml(link.href)}" class="flex h-full items-center rounded-xl border border-emerald-100 bg-white px-4 py-3 text-sm font-semibold text-[#076046]">${escapeHtml(link.label)}</a></li>`).join('\n          ')}
+        </ul>
+      </aside>`
+    : '';
 
   return `
     <article class="pt-32 pb-20" data-static-blog-article>
@@ -207,6 +221,7 @@ function createStaticBlogArticleHtml(article) {
       </header>
       <div class="max-w-3xl mx-auto px-4">
         <div class="prose prose-lg max-w-none">${safeContent}</div>
+        ${relatedMarkup}
       </div>
     </article>
   `;
@@ -252,30 +267,10 @@ function extractFaqSchema(article) {
 }
 
 function createBlogArticleSchema(article, route) {
+  const normalizedArticleSchema = createNormalizedBlogArticleSchema(article, route.canonical);
+  const { '@context': _context, ...articleSchema } = normalizedArticleSchema;
   const graph = [
-    {
-      '@type': 'Article',
-      mainEntityOfPage: {
-        '@id': `${route.canonical}#webpage`,
-      },
-      headline: article.title || route.title,
-      description: article.meta_description || route.description,
-      datePublished: article.published_at,
-      dateModified: article.updated_at || article.published_at,
-      author: {
-        '@type': 'Organization',
-        name: 'Healio GmbH',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Healio GmbH',
-        url: 'https://healio.de',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://healio.de/favicon.png',
-        },
-      },
-    },
+    articleSchema,
   ];
 
   const faqSchema = extractFaqSchema(article);
@@ -330,7 +325,7 @@ function loadCachedBlogArticles() {
     throw new Error(`SEO: Blog-Cache enthält unvollständige Artikel: ${invalidArticles.map((article) => article?.slug || '(ohne Slug)').join(', ')}`);
   }
 
-  return new Map(articles.map((article) => [article.slug, article]));
+  return new Map(articles.map(applyBlogEditorialFixes).map((article) => [article.slug, article]));
 }
 
 async function loadBlogArticles() {
@@ -339,7 +334,7 @@ async function loadBlogArticles() {
   let fallbackCount = 0;
 
   const entries = await Promise.all(slugs.map(async (slug) => {
-    const liveArticle = await fetchArticle(slug);
+    const liveArticle = applyBlogEditorialFixes(await fetchArticle(slug));
     if (isCompleteBlogArticle(liveArticle)) return [slug, liveArticle];
 
     const cachedArticle = cachedArticles.get(slug);

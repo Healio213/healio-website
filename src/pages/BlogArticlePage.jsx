@@ -7,6 +7,12 @@ import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 import { getBlogArticleCta } from '@/lib/blogArticleCta';
 import { getPrerenderedBlogArticleHtml } from '@/lib/prerenderedBlogContent';
 import { fetchCachedBlogArticle } from '@/lib/blogContentCache';
+import { applyBlogEditorialFixes } from '@/lib/blogEditorialFixes';
+import {
+  createBlogArticleSchema,
+  getBlogArticleImage,
+  getBlogRelatedLinks,
+} from '@/lib/blogSeo';
 import DOMPurify from 'dompurify';
 import { sanitizeRichHtml } from '@/lib/contentSecurity';
 
@@ -61,7 +67,7 @@ const BlogArticlePage = () => {
       }
       const data = await res.json();
       if (!data.article) throw new Error('Die Blog-API enthält keinen Artikel.');
-      setArticle(data.article);
+      setArticle(applyBlogEditorialFixes(data.article));
     } catch (err) {
       try {
         const cachedArticle = await fetchCachedBlogArticle(slug);
@@ -152,21 +158,6 @@ const BlogArticlePage = () => {
     );
   }
 
-  const articleSchema = article.structured_data?.article || {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.meta_description,
-    datePublished: article.published_at,
-    author: { '@type': 'Organization', name: 'Healio GmbH' },
-    publisher: { '@type': 'Organization', name: 'Healio GmbH', url: 'https://healio.de' },
-  };
-
-  const faqSchema = article.structured_data?.faq || null;
-
-  const combinedSchema = faqSchema
-    ? [articleSchema, faqSchema]
-    : articleSchema;
   const articleBodyHtml = sanitizeRichHtml(
     stripLeadingArticleHeading(article.content_html),
     DOMPurify,
@@ -174,6 +165,13 @@ const BlogArticlePage = () => {
   const canonicalUrl = lang === 'en'
     ? `https://healio.de/en/blog/${article.slug}`
     : `https://healio.de/blog/${article.slug}`;
+  const articleSchema = createBlogArticleSchema(article, canonicalUrl);
+  const faqSchema = article.structured_data?.faq || null;
+  const combinedSchema = faqSchema
+    ? [articleSchema, faqSchema]
+    : articleSchema;
+  const articleImage = getBlogArticleImage(article, article.structured_data?.article);
+  const relatedLinks = getBlogRelatedLinks(article.slug);
   const articleCta = getBlogArticleCta({
     slug: article.slug,
     targetGroup: article.target_group,
@@ -189,6 +187,7 @@ const BlogArticlePage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={article.title}
         ogDescription={article.meta_description}
+        ogImage={articleImage}
         ogUrl={canonicalUrl}
         ogType="article"
         schemaMarkup={combinedSchema}
@@ -248,6 +247,24 @@ const BlogArticlePage = () => {
               prose-blockquote:border-l-[#25c990] prose-blockquote:bg-[#e8f8f0] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg"
             dangerouslySetInnerHTML={{ __html: articleBodyHtml }}
           />
+
+          {relatedLinks.length > 0 && (
+            <aside className="mt-12 rounded-2xl border border-emerald-100 bg-[#f4fbf8] p-6 sm:p-8">
+              <h2 className="text-xl font-bold text-[#464f5d] mb-4">Passend zu diesem Thema</h2>
+              <ul className="grid gap-3 sm:grid-cols-3">
+                {relatedLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="flex h-full items-center rounded-xl border border-emerald-100 bg-white px-4 py-3 text-sm font-semibold text-[#076046] transition-colors hover:border-[#25c990] hover:text-[#064d39]"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
 
           {/* GEO-Nugget Section */}
           {article.geo_section && (

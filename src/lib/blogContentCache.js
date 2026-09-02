@@ -1,3 +1,5 @@
+import { applyBlogEditorialFixes } from './blogEditorialFixes';
+
 const BLOG_CACHE_URL = '/data/blog-articles-cache.json';
 
 let cachedArticlesPromise;
@@ -22,7 +24,7 @@ export async function fetchCachedBlogArticles() {
       })
       .then((payload) => {
         if (!Array.isArray(payload)) throw new Error('Blog-Cache hat ein ungültiges Format.');
-        const articles = payload.filter(isCompleteArticle);
+        const articles = payload.map(applyBlogEditorialFixes).filter(isCompleteArticle);
         if (articles.length === 0) throw new Error('Blog-Cache enthält keine vollständigen Artikel.');
         return articles;
       })
