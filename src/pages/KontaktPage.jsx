@@ -217,8 +217,8 @@ const KontaktPage = () => {
                       className="text-xs leading-5 text-slate-500 sm:col-span-2"
                     >
                       {lang === 'en'
-                        ? 'WhatsApp is an external service. General text questions may be answered automatically by Nita (AI). Please do not send health data, patient data, insurance numbers, media or documents through WhatsApp.'
-                        : 'WhatsApp ist ein externer Dienst. Allgemeine Textfragen können automatisiert von Nita (KI) beantwortet werden. Bitte sende keine Gesundheitsdaten, Patientendaten, Versicherungsnummern, Medien oder Dokumente über WhatsApp.'}
+                        ? 'WhatsApp is an external service. General text questions may be answered automatically by Nita, Healio’s digital assistant. Please do not send health data, patient data, insurance numbers, media or documents through WhatsApp.'
+                        : 'WhatsApp ist ein externer Dienst. Allgemeine Textfragen können automatisiert durch Nita, die digitale Assistenz von Healio, beantwortet werden. Bitte sende keine Gesundheitsdaten, Patientendaten, Versicherungsnummern, Medien oder Dokumente über WhatsApp.'}
                     </p>
                   </div>
                 </div>

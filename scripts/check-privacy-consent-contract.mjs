@@ -139,34 +139,24 @@ expect(!/(?:gtag|trackEvent|trackZahnEvent|analytics|consent)/i.test(dentalCheck
 expect(!/AmbulantMiaPrompt/.test(dentalPage), 'Die Zahnseite darf keinen verzögerten Nita-Prompt enthalten.');
 expect(!/HIDDEN_ROUTE_PREFIXES[\s\S]*?'\/zahn'/.test(nitaWidget), 'Nita muss auch auf der deutschen Zahn-Seite verfügbar sein.');
 expect(!/HIDDEN_ROUTE_PREFIXES[\s\S]*?'\/en\/dental'/.test(nitaWidget), 'Nita muss auch auf der englischen Zahn-Seite verfügbar sein.');
-expect(/!isDentalCheckRoute\s*&&\s*\([\s\S]*?onClick=\{handleOpenSettings\}/.test(nitaWidget), 'Der auf Zahn-Routen gesperrte allgemeine Einstellungsdialog darf dort nicht als wirkungsloser Nita-Button angeboten werden.');
-expect(/@elevenlabs\/convai-widget-embed@0\.15\.1\/dist\/index\.js/.test(nitaWidget), 'Nita muss die aktuelle fest versionierte ElevenLabs-Einbindung verwenden.');
-expect(/dismissible="true"/.test(nitaWidget), 'Das Nita-Widget muss sich wieder schließen lassen.');
-expect(/text-input="true"/.test(nitaWidget), 'Das Nita-Widget muss neben Sprache auch Chat anbieten.');
-expect(/show-resize-button="true"/.test(nitaWidget), 'Das Nita-Widget muss sich wieder einklappen lassen.');
-expect(/variant="tiny"/.test(nitaWidget), 'Nita muss beim Seitenaufruf als kleiner Punkt starten.');
-expect(/healio-nita-quiet-launcher/.test(nitaWidget), 'Auch vor der ElevenLabs-Freigabe muss Nita als dezenter Punkt erscheinen.');
-expect(/const \[widgetActivated, setWidgetActivated\] = useState\(false\)/.test(nitaWidget), 'Das externe Nita-Widget darf beim Seitenaufruf nicht automatisch aktiviert sein.');
-expect(/providerAllowed && loadStatus === 'ready' && widgetActivated/.test(nitaWidget), 'Das externe Nita-Widget darf erst nach einem bewussten Klick sichtbar werden.');
-expect(/widgetActivated && providerAllowed && loadStatus === 'loading'[\s\S]*?className="sr-only"/.test(nitaWidget), 'Der Nita-Ladevorgang darf erst nach Aktivierung angekündigt und nicht sichtbar eingeblendet werden.');
-expect(/widgetActivated && providerAllowed && loadStatus === 'error'/.test(nitaWidget), 'Ein automatischer Ladefehler darf erst nach einem bewussten Nita-Klick sichtbar werden.');
-expect(/default-expanded="false"/.test(nitaWidget) && /always-expanded="false"/.test(nitaWidget), 'ElevenLabs darf Nita nicht durch eine spätere Dashboard-Änderung automatisch öffnen.');
-expect(/const handleNitaRequest = \(event\) => \{[\s\S]*?setWidgetActivationPending\(true\)/.test(nitaWidget), 'Content-CTAs müssen den kleinen Nita-Punkt bewusst mit dem aktuellen Kontext aktivieren.');
-expect(!/shadowRoot/.test(nitaWidget), 'Nita darf nicht von der internen ElevenLabs-DOM-Struktur abhängen.');
-expect(/const handleOpenSettings = \(\) => \{[\s\S]*?setPromptOpen\(false\);[\s\S]*?openConsentSettings\('elevenlabs'\)/.test(nitaWidget), 'Beim Wechsel in die Datenschutz-Einstellungen muss der Nita-Hinweis vorher schließen.');
-expect(/\.healio-nita-widget elevenlabs-convai \{[\s\S]*?bottom: calc\(var\(--healio-nita-safe-bottom/.test(nitaWidget), 'Die echte ElevenLabs-Fläche muss mobil oberhalb der Daumenzone positioniert werden.');
+expect(/!isDentalCheckRoute && <button[\s\S]*?openConsentSettings\('openai'\)/.test(nitaWidget), 'Der auf Zahn-Routen gesperrte allgemeine Einstellungsdialog darf dort nicht als wirkungsloser Nita-Button angeboten werden.');
+expect(/VITE_NITA_WEBRTC_SESSION_ENDPOINT/.test(nitaWidget), 'Nita muss einen expliziten WebRTC-Session-Endpunkt verlangen.');
+expect(/RTCPeerConnection/.test(nitaWidget), 'Nita muss die direkte OpenAI-WebRTC-Strecke verwenden.');
+expect(!/ElevenLabs|elevenlabs-convai|unpkg\.com/.test(nitaWidget), 'Nita darf keine ElevenLabs-Einbindung mehr laden.');
+expect(/healio-nita-quiet-launcher/.test(nitaWidget), 'Nita muss beim Seitenaufruf als dezenter Kreis erscheinen.');
+expect(/aria-controls="healio-nita-panel"[\s\S]*?aria-expanded=\{panelOpen\}/.test(nitaWidget), 'Der Nita-Kreis muss das Sprachpanel zugänglich öffnen und schließen können.');
+expect(/event\.key === 'Escape'[\s\S]*?closePanel\(\)/.test(nitaWidget), 'Das Sprachpanel muss per Escape wieder schließen.');
+expect(/const handleNitaRequest = \(event\) => \{[\s\S]*?setPanelOpen\(true\)/.test(nitaWidget), 'Content-CTAs müssen das Sprachpanel mit ihrem freigegebenen Kontext öffnen.');
+expect(!/shadowRoot/.test(nitaWidget), 'Nita darf nicht von einer Anbieter-internen DOM-Struktur abhängen.');
+expect(/body: JSON\.stringify\(\{ sdp: offer\.sdp, context: pendingContextRef\.current \}\)/.test(nitaWidget), 'Nita darf nur SDP und den freigegebenen Seitenkontext an den Session-Endpunkt übergeben.');
+expect(/const pendingContextRef = useRef\(activeNitaContext\)[\s\S]*?setActiveNitaContext\(requestedContext\)/.test(nitaWidget), 'Der ausgewählte Nita-Kontext muss vor dem Gespräch stabil aktiviert werden.');
 expect(!/elevenlabs-convai\s*\{\s*display:\s*none\s*!important/.test(companyHero), 'Die Unternehmensseite darf Nita nicht global ausblenden.');
 expect(!/html\.legal-information-active elevenlabs-convai/.test(indexCss), 'Rechtsseiten dürfen das globale Nita-Widget nicht ausblenden.');
 expect(/top-\[5\.25rem\][\s\S]*md:bottom-3[\s\S]*md:top-auto/.test(consentManager), 'Das Erstbesucher-Datenschutzfeld muss mobil kompakt unter dem Header statt in der Daumenzone liegen.');
 expect(!/healio-consent-settings-trigger/.test(consentManager), 'Nach der Auswahl darf kein schwebender Datenschutz-Schalter stehen bleiben.');
 expect(/openConsentSettings\(\)/.test(footer), 'Die Datenschutz-Auswahl muss dezent über den Footer erneut erreichbar bleiben.');
-expect(/text-contents=\{language === 'en'/.test(nitaWidget), 'Nitas Widget-Bedienung muss auf englischen Seiten englisch beschriftet sein.');
+expect(/const language = pathname === '\/en' \|\| pathname\.startsWith\('\/en\/'\) \? 'en' : 'de'/.test(nitaWidget), 'Sprachpanel und Nita-Kontext müssen dieselbe strikte /en-Routengrenze verwenden.');
 expect(/const language = pathname === '\/en' \|\| pathname\.startsWith\('\/en\/'\) \? 'en' : 'de'/.test(nitaWidget), 'Widget-Sprache und Nita-Kontext müssen dieselbe strikte /en-Routengrenze verwenden.');
-expect(/dynamic-variables=\{JSON\.stringify\(activeNitaContext\)\}/.test(nitaWidget), 'Nita muss den freigegebenen Seitenkontext als Dynamic Variables erhalten.');
-expect(/override-first-message=\{buildNitaFirstMessage\(activeNitaContext\)\}/.test(nitaWidget), 'Nita muss nach dem bestehenden Hilfetext mit einer passenden, fest vorgegebenen Begrüßung fortfahren.');
-expect(/const pendingContextRef = useRef\(activeNitaContext\)[\s\S]*?const activateWidgetWithContext = \(context\) => \{[\s\S]*?setActiveNitaContext\(context\)/.test(nitaWidget), 'Der ausgewählte Nita-Kontext muss vor dem Widget-Start stabil aktiviert werden.');
-expect(/const handleAllow = \(\) => \{[\s\S]*?activateWidgetWithContext\(pendingContextRef\.current\)/.test(nitaWidget), 'Nach der ElevenLabs-Freigabe muss Nita mit dem zuvor gewählten Seitenkontext starten.');
-expect(/useLayoutEffect\(\(\) => \{[\s\S]*?if \(!widgetActivationPending\) return;[\s\S]*?setWidgetActivated\(true\)/.test(nitaWidget), 'Nita darf erst nach dem Rendern des aktuellen Kontextes aktiviert werden.');
 expect(/const lastContextPathRef = useRef\(pathname\)[\s\S]*?lastContextPathRef\.current = pathname;[\s\S]*?const nextContext = buildNitaContext\(pathname, 'global_launcher'\);[\s\S]*?setActiveNitaContext\(nextContext\)/.test(nitaWidget), 'Bei einem SPA-Seitenwechsel muss Nita vor dem nächsten Gespräch den neuen Seitenkontext erhalten.');
 expect(/AMBULANT_CTA_DELAY_MS\s*=\s*30_000/.test(header), 'Der mobile Ambulant-CTA muss 30 Sekunden verzögert werden.');
 expect(/isAmbulant\s*&&\s*showSolidHeader\s*&&\s*ambulantCtaReady/.test(header), 'Der mobile Ambulant-CTA darf erst im dunklen Header nach Ablauf der Wartezeit erscheinen.');
@@ -182,7 +172,7 @@ expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler La
 expect(/healio-mobile-menu-active/.test(header), 'Das mobile Menü muss externe Overlays während der Navigation ausblenden.');
 expect(/html\.healio-mobile-menu-active \.healio-nita-surface/.test(nitaWidget), 'Das mobile Menü muss den globalen Nita-Punkt auch visuell und interaktiv ausblenden.');
 
-for (const purpose of ['analytics', 'calendly', 'maps', 'elevenlabs']) {
+for (const purpose of ['analytics', 'calendly', 'maps', 'openai']) {
   expect(consent.includes(`'${purpose}'`), `Consent-Zweck ${purpose} fehlt.`);
 }
 

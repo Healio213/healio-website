@@ -1,5 +1,5 @@
-export const CONSENT_VERSION = 1;
-export const CONSENT_STORAGE_KEY = 'healio:consent:v1';
+export const CONSENT_VERSION = 2;
+export const CONSENT_STORAGE_KEY = 'healio:consent:v2';
 export const CONSENT_CHANGE_EVENT = 'healio:consent-change';
 export const CONSENT_SETTINGS_EVENT = 'healio:consent-settings';
 
@@ -7,7 +7,7 @@ export const CONSENT_PURPOSES = Object.freeze([
   'analytics',
   'calendly',
   'maps',
-  'elevenlabs',
+  'openai',
 ]);
 
 const PURPOSE_SET = new Set(CONSENT_PURPOSES);
@@ -16,7 +16,7 @@ const EMPTY_PREFERENCES = Object.freeze({
   analytics: false,
   calendly: false,
   maps: false,
-  elevenlabs: false,
+  openai: false,
 });
 
 let volatileConsentState = null;

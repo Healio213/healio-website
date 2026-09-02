@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { CheckCircle2 } from 'lucide-react';
 import { openConsentSettings } from '@/lib/consent';
+import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 
 const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
@@ -152,6 +153,7 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <ul className="mt-5 space-y-3 text-sm text-slate-400">
               <li><a href="mailto:info@healio.de" className="hover:text-healio-primary transition-colors">info@healio.de</a></li>
               <li><a href="tel:+494089755705" className="hover:text-healio-primary transition-colors">+49 40 89755705</a></li>
+              <li><a href={HEALIO_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-healio-whatsapp="footer" className="hover:text-healio-primary transition-colors">WhatsApp · {lang === 'en' ? 'external service' : 'externer Dienst'}</a></li>
             </ul>
           </div>
           <div>

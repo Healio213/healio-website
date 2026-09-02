@@ -5,14 +5,14 @@ const baseUrl = process.env.HEALIO_TEST_BASE_URL || 'http://127.0.0.1:4173';
 const baseOrigin = new URL(baseUrl).origin;
 
 const consentState = JSON.stringify({
-  version: 1,
+  version: 2,
   decided: true,
   necessary: true,
   preferences: {
     analytics: false,
     calendly: false,
     maps: false,
-    elevenlabs: false,
+    openai: false,
   },
   source: 'settings',
   updatedAt: '2026-08-27T10:00:00.000Z',
@@ -42,7 +42,7 @@ try {
   });
 
   await page.evaluateOnNewDocument((storedConsent) => {
-    window.localStorage.setItem('healio:consent:v1', storedConsent);
+    window.localStorage.setItem('healio:consent:v2', storedConsent);
   }, consentState);
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
 
@@ -210,7 +210,7 @@ try {
   assert(contactPageLink, 'Die Kontaktseite bietet WhatsApp nicht als sichtbaren Kontaktweg an.');
   const privacyNote = await page.$eval('[data-healio-whatsapp-privacy-note]', (note) => note.textContent.trim());
   assert.match(privacyNote, /keine Gesundheitsdaten/i, 'Die Kontaktseite muss vor sensiblen Angaben über WhatsApp warnen.');
-  assert.match(privacyNote, /Nita \(KI\)/i, 'Die Kontaktseite muss die automatische KI-Antwort transparent kennzeichnen.');
+  assert.match(privacyNote, /digitale Assistenz/i, 'Die Kontaktseite muss die automatische digitale Assistenz transparent kennzeichnen.');
 
   const menuButton = await page.$('button[aria-controls="mobile-navigation"]');
   assert(menuButton, 'Der mobile Menüknopf fehlt in der Testansicht.');

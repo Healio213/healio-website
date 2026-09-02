@@ -33,7 +33,7 @@ const COPY = {
       analytics: ['Analyse', 'Google Analytics hilft uns nach deiner Zustimmung, die Website zu verbessern. Antworten aus unseren Auswahlhilfen werden nicht übertragen.'],
       calendly: ['Terminbuchung', 'Calendly wird nur geladen, wenn du eine eingebettete Terminbuchung öffnest.'],
       maps: ['Karten', 'Externe Karten werden erst nach deiner Freigabe geladen.'],
-      elevenlabs: ['Nita-Assistent', 'ElevenLabs wird erst geladen, wenn du Nita ausdrücklich erlaubst.'],
+      openai: ['Nita, digitale Assistenz', 'OpenAI wird erst für die Sprachverbindung mit Nita geladen, wenn du sie ausdrücklich erlaubst.'],
     },
   },
   en: {
@@ -55,7 +55,7 @@ const COPY = {
       analytics: ['Analytics', 'Google Analytics helps us improve the website after your consent. Answers from our selection tools are never transmitted.'],
       calendly: ['Appointment booking', 'Calendly loads only when you open an embedded appointment booking.'],
       maps: ['Maps', 'External maps load only after you allow them.'],
-      elevenlabs: ['Nita assistant', 'ElevenLabs loads only after you explicitly allow Nita.'],
+      openai: ['Nita, digital assistant', 'OpenAI loads for Nita’s voice connection only after you explicitly allow it.'],
     },
   },
 };

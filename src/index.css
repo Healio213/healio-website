@@ -141,9 +141,6 @@
 @media print {
   header[role="banner"],
   footer,
-  elevenlabs-convai {
-    display: none !important;
-  }
 
   html,
   body {

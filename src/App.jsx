@@ -9,6 +9,7 @@ import VeterinaryLayout from '@/components/sections/veterinary/VeterinaryLayout'
 import PerformanceMetrics from '@/components/PerformanceMetrics';
 import { ConsentManager } from '@/components/ConsentManager';
 import { NitaConsentWidget } from '@/components/NitaConsentWidget';
+import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import { useReferrer } from '@/hooks/useReferrer';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
 import { setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
@@ -125,6 +126,7 @@ function App() {
       <ScrollToTop />
       <ConsentManager />
       <NitaConsentWidget />
+      <WhatsAppContactButton />
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>

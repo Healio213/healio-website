@@ -57,8 +57,6 @@ for (const directive of [
   'https://api.emailjs.com',
   'https://horizons-cdn.hostinger.com',
   'https://www.google.com',
-  'https://*.elevenlabs.io',
-  'wss://*.elevenlabs.io',
   'https://*.vercel-insights.com',
 ]) {
   expect(csp.includes(directive), `CSP Report-Only muss ${directive} erlauben.`);
@@ -80,6 +78,10 @@ expect(
 expect(
   !csp.includes('m1.openfpcdn.io'),
   'Unbelegtes Monitoring von m1.openfpcdn.io darf nicht vorsorglich freigeschaltet werden.',
+);
+expect(
+  !csp.includes('elevenlabs.io'),
+  'Nach dem OpenAI-Cutover darf ElevenLabs nicht mehr als Laufzeitquelle freigeschaltet sein.',
 );
 
 for (const source of ['/hero-bg(-mobile)?\\.(webp|jpg)', '/assets/(.*)']) {
