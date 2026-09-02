@@ -37,7 +37,7 @@ HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, 
 | AP9   | 90%       | 400 Euro  | 900 Euro          | 400 Euro | 900 Euro    | 2.600 Euro |
 | AP1   | 100%      | 500 Euro  | 1.000 Euro        | 500 Euro | 1.000 Euro  | 3.000 EUR |
 
-Der empfohlene Tarif ist **AP1 (Ambulant 100)** mit 100% Erstattung und 3.000 EUR Gesundheitsbudget. Monatsbeitrag ab ca. 45 Euro (altersabhängig, ggf. Risikozuschlag bei Vorerkrankungen).
+**AP1 (Ambulant 100)** ist eine mögliche Tarifwahl für 100% Erstattung innerhalb der Tarifgrenzen und ein Gesundheitsbudget von bis zu 3.000 EUR. Ob AP1 oder eine günstigere Erstattungsstufe passt, hängt unter anderem von Bedarf, Alter, Beitrag und Gesundheitsprüfung ab und wird individuell geprüft. Der Monatsbeitrag ist altersabhängig; bei Vorerkrankungen kann ein Risikozuschlag hinzukommen.
 
 ## IKK Classic Bonusprogramm — Detaillierte Übersicht
 
@@ -114,7 +114,7 @@ Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 ## Monatliche Kosten
 
 - Je nach Alter und Tarif: ca. 20 bis 50 Euro pro Monat
-- Empfohlener Tarif AP1 (100% Erstattung): ab ca. 45 Euro/Monat
+- AP1 als mögliche Tarifwahl: 100% Erstattung innerhalb der Tarifgrenzen; Eignung und persönlicher Beitrag werden individuell geprüft
 - Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen; eine Überzahlung über die belegten Kosten hinaus gibt es nicht
 - Individuelle Berechnung im Online-Tarifrechner möglich (inkl. eventueller Risikozuschlag)
 
@@ -157,7 +157,7 @@ Das Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens. Für den I
 Die SDK Zusatzversicherung und ihr tarifliches Gesundheitsbudget funktionieren mit jeder gesetzlichen Krankenkasse. Der IKK Bonus ist davon getrennt: Wenn die IKK zu dir passt, kann ihr individuell erreichter Zuschuss deinen nachgewiesenen Beitrag reduzieren.
 
 ### Wie hoch ist der monatliche Beitrag?
-Zwischen 20 und 50 Euro, abhängig von Alter, Tarif und Gesundheitsprüfung. Beim empfohlenen Tarif AP1 (100% Erstattung) ab ca. 45 Euro/Monat. Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen, sofern genügend anerkannte Maßnahmen und zuschussfähige Kosten belegt werden.
+Zwischen 20 und 50 Euro, abhängig von Alter, Tarif und Gesundheitsprüfung. Für AP1 mit 100% Erstattung nennt das Rechenbeispiel rund 45 Euro im Monat. Ob diese Tarifstufe zur persönlichen Situation passt, wird individuell geprüft. Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen, sofern genügend anerkannte Maßnahmen und zuschussfähige Kosten belegt werden.
 
 ### Brauche ich eine Gesundheitsprüfung?
 Ja, zum Antrag gehören Gesundheitsfragen, die wahrheitsgemäß beantwortet werden müssen. Die SDK lehnt aber grundsätzlich niemanden ab, auch nicht bei Vorerkrankungen. Bei bestimmten Diagnosen kann ein Risikozuschlag vereinbart werden, der direkt im Antrag festgehalten wird und im Tarifrechner auf healio.de/ambulant sichtbar ist. Wartezeiten gibt es in den ambulanten Tarifen AP5 bis AP1 keine, der volle Schutz gilt ab dem ersten Tag.
@@ -194,6 +194,13 @@ Du hast bis Ende März des Folgejahres Zeit, deinen Bonusantrag einzureichen. Al
 - Offizielles Infoblatt zum IKK Bonus 2026 (Stand 04/2026): https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf
 - Offizielle Teilnahmebedingungen zum IKK Bonus 2026: https://cdn.ikk-classic.de/exporter/7402-ikk-bonus-teilnahmebedingungen-app.pdf
 - Aktuelle Übersichtsseite: https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm
+
+## Ratgeber und vertiefende Einordnung
+
+- [Alle Healio-Ratgeberartikel](https://healio.de/blog) - Redaktionelle Einordnung zu Gesundheitsbudget, Zusatzschutz und Kassenbonus
+- [Was ist ein Gesundheitsbudget?](https://healio.de/blog/gesundheitsbudget-3000-euro) - Aufbau und mögliche Leistungen des Gesundheitsbudgets
+- [Heilpraktiker-Zusatzversicherung im Vergleich](https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026) - Tarifstufen, Grenzen und Auswahlkriterien verständlich erklärt
+- [IKK Classic Bonus 2026](https://healio.de/blog/ikk-classic-bonus-700-euro) - Maßnahmen, Nachweise und Unterschied zwischen Geldbonus und Zuschuss
 
 ## Seiten
 
