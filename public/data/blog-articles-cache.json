@@ -49,6 +49,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/hero-hebammen.webp",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -61,13 +62,16 @@
           "@type": "Organization"
         },
         "description": "Werdende Eltern vertrauen deiner Empfehlung. Das Healio-Konzept bringt Familien bis zu 3.000 € Gesundheitsbudget plus Vorsorge-Topf. Das solltest du kennen.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/healio-konzept-fuer-hebammen"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T14:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/healio-konzept-fuer-hebammen#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T14:00:00+00:00",
-    "updated_at": "2026-07-20T14:00:00+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -121,6 +125,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/video-partner-thumb.jpg",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -133,13 +138,16 @@
           "@type": "Organization"
         },
         "description": "GKV zahlt Akupunktur nur in Ausnahmen. Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Budget für TCM beim Heilpraktiker. So funktioniert es.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/healio-konzept-fuer-tcm-praxen"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T14:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/healio-konzept-fuer-tcm-praxen#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T14:00:00+00:00",
-    "updated_at": "2026-07-20T14:00:00+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -193,6 +201,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/video-partner-thumb.jpg",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -205,13 +214,16 @@
           "@type": "Organization"
         },
         "description": "Kassen streichen Osteopathie-Zuschüsse. Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Budget, IKK-Bonus inklusive. Was deine Praxis davon hat.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/healio-konzept-fuer-osteopathen"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T14:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/healio-konzept-fuer-osteopathen#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T14:00:00+00:00",
-    "updated_at": "2026-07-20T14:00:00+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -265,6 +277,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/video-partner-thumb.jpg",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -277,13 +290,16 @@
           "@type": "Organization"
         },
         "description": "Therapieabbrüche wegen Geld? Das Healio-Konzept gibt deinen Patienten bis zu 3.000 € Gesundheitsbudget für Naturheilkunde. Was das für deine Praxis bedeutet.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/healio-konzept-fuer-heilpraktiker"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T14:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/healio-konzept-fuer-heilpraktiker#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T14:00:00+00:00",
-    "updated_at": "2026-07-20T14:00:00+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -337,6 +353,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/erklaervideo-stationaer-poster.jpg",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -349,13 +366,16 @@
           "@type": "Organization"
         },
         "description": "Fit im Sportverein? Dann bekommst du den Klinik-Tarif leichter und der IKK Bonus (über 700 € möglich) kann den Beitrag bis zu 100 % refinanzieren. So geht es.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/krankenhauszusatzversicherung-sportverein-best-ager"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/krankenhauszusatzversicherung-sportverein-best-ager#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T08:00:00+00:00",
-    "updated_at": "2026-07-20T08:55:16.414794+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -409,6 +429,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/erklaervideo-zahn-poster.jpg",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -421,13 +442,16 @@
           "@type": "Organization"
         },
         "description": "Behandlung schon angeraten? Der Baustein ZAHN Sofort der Bayerischen zahlt bis zu 1.500 € Zuschuss, wenn der Abschluss vor der Rechnung erfolgt. So funktioniert es.",
-        "dateModified": "2026-07-20",
-        "datePublished": "2026-07-20",
-        "mainEntityOfPage": "https://healio.de/blog/zahnzusatzversicherung-trotz-angeratener-behandlung"
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-07-20T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/zahnzusatzversicherung-trotz-angeratener-behandlung#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-07-20T08:00:00+00:00",
-    "updated_at": "2026-07-20T08:55:15.944126+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 7
   },
@@ -473,6 +497,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/hero-ambulant.webp",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -484,14 +509,17 @@
           "name": "Healio GmbH",
           "@type": "Organization"
         },
-        "description": "Worauf Patient:innen beim Vergleich einer Heilpraktiker-Zusatzversicherung achten sollten.",
-        "dateModified": "2026-05-12",
-        "datePublished": "2026-05-12",
-        "mainEntityOfPage": "https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026"
+        "description": "Heilpraktiker Zusatzversicherung 2026: Welche Leistungen wichtig sind, welche Grenzen es gibt und wie du Erstattung mit Kassenbonus planst.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-05-12T10:47:41.683+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-05-12T10:47:41.683+00:00",
-    "updated_at": "2026-05-12T10:47:41.683+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 9
   },
@@ -537,12 +565,13 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/hero-ambulant.webp",
         "author": {
           "name": "Healio",
           "@type": "Organization"
         },
         "@context": "https://schema.org",
-        "headline": "Heilpraktiker-Kosten: GKV, Zusatzschutz und Budget im Vergleich",
+        "headline": "Heilpraktiker-Kosten: GKV, Zusatzschutz und Gesundheitsbudget",
         "keywords": [
           "heilpraktiker kosten",
           "heilpraktiker krankenkasse",
@@ -559,8 +588,8 @@
           "name": "Healio",
           "@type": "Organization"
         },
-        "description": "Erfahren Sie, wie die GKV Heilpraktiker-Kosten einordnet und wie ein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren entstehen kann.",
-        "dateModified": "2026-09-02T00:00:00.000Z",
+        "description": "Was die GKV bei Heilpraktiker-Kosten leistet und wie Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren ermöglichen kann.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
         "datePublished": "2026-04-07T10:21:15+00:00",
         "mainEntityOfPage": {
           "@id": "https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio#webpage",
@@ -640,12 +669,13 @@
             "@type": "Thing"
           }
         ],
+        "image": "https://healio.de/images/video-partner-thumb.jpg",
         "author": {
           "name": "Healio",
           "@type": "Organization"
         },
         "@context": "https://schema.org",
-        "headline": "Heilpraktiker-Kostenübernahme: Gesundheitsbudget sinnvoll einordnen",
+        "headline": "Heilpraktiker-Kostenübernahme: Gesundheitsbudget für Patienten",
         "keywords": [
           "Heilpraktiker Kostenübernahme",
           "Naturheilverfahren Finanzierung",
@@ -661,8 +691,8 @@
           "name": "Healio",
           "@type": "Organization"
         },
-        "description": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren können Heilpraktiker-Kosten planbarer machen. Bonus, Tarifleistung und Eigenanteil werden individuell geprüft.",
-        "dateModified": "2026-09-02T00:00:00.000Z",
+        "description": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Naturheilverfahren. Ein passender Kassenbonus kann den Beitrag individuell bis zu 100 % reduzieren.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
         "datePublished": "2026-04-07T10:21:14+00:00",
         "mainEntityOfPage": {
           "@id": "https://healio.de/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget#webpage",
@@ -730,6 +760,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/healio-app-dashboard-card.webp",
         "author": {
           "name": "Healio",
           "@type": "Organization"
@@ -751,8 +782,8 @@
           "name": "Healio",
           "@type": "Organization"
         },
-        "description": "Wie digitale Rechnungseinreichung den Ablauf übersichtlicher macht und welche Tarifbedingungen für die Erstattung von Heilpraktiker-Kosten gelten.",
-        "dateModified": "2026-09-02T00:00:00.000Z",
+        "description": "Heilpraktiker-Rechnungen digital einreichen und Erstattungen übersichtlich verfolgen. Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren sind tarifabhängig möglich.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
         "datePublished": "2026-04-07T10:21:14+00:00",
         "mainEntityOfPage": {
           "@id": "https://healio.de/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung#webpage",
@@ -820,6 +851,7 @@
       },
       "article": {
         "@type": "Article",
+        "image": "https://healio.de/images/healio-health-pass-hero-v3.webp",
         "author": {
           "name": "Healio GmbH",
           "@type": "Organization"
@@ -831,14 +863,17 @@
           "name": "Healio GmbH",
           "@type": "Organization"
         },
-        "description": "Wie Kassenbonus und Zusatzversicherung ein Gesundheitsbudget von bis zu 3.000 € in 2 Jahren ermöglichen können.",
-        "dateModified": "2026-05-12",
+        "description": "Gesundheitsbudget erklärt: Wie Kassenbonus und Zusatzversicherung bis zu 3.000 € in 2 Jahren ermöglichen – seriös geprüft mit Healio.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
         "datePublished": "2026-04-03T08:00:00+00:00",
-        "mainEntityOfPage": "https://healio.de/blog/gesundheitsbudget-3000-euro"
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/gesundheitsbudget-3000-euro#webpage",
+          "@type": "WebPage"
+        }
       }
     },
     "published_at": "2026-04-03T08:00:00+00:00",
-    "updated_at": "2026-05-12T10:47:42.67461+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 8
   },
@@ -857,6 +892,19 @@
         "name": "Healio GmbH",
         "@type": "Organization"
       },
+      "article": {
+        "@type": "Article",
+        "image": "https://healio.de/images/hero-ambulant.webp",
+        "@context": "https://schema.org",
+        "headline": "Naturheilkunde auf Rezept? Diese Krankenkassen zahlen 2026",
+        "description": "Welche Krankenkasse zahlt Naturheilkunde 2026? Akupunktur, Homöopathie, Phytotherapie – alle Kassenleistungen im Überblick + Spartipps.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-04-03T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/naturheilkunde-krankenkasse-2026#webpage",
+          "@type": "WebPage"
+        }
+      },
       "@context": "https://schema.org",
       "headline": "Naturheilkunde auf Rezept? Diese Krankenkassen zahlen 2026",
       "publisher": {
@@ -869,7 +917,7 @@
       "mainEntityOfPage": "https://www.healio.de/blog/naturheilkunde-krankenkasse-2026"
     },
     "published_at": "2026-04-03T08:00:00+00:00",
-    "updated_at": "2026-07-20T08:42:56.569766+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 7
   },
@@ -888,6 +936,19 @@
         "name": "Healio GmbH",
         "@type": "Organization"
       },
+      "article": {
+        "@type": "Article",
+        "image": "https://healio.de/images/hero-ambulant.webp",
+        "@context": "https://schema.org",
+        "headline": "Osteopathie: Welche Krankenkasse zahlt 2026?",
+        "description": "Osteopathie Kostenübernahme 2026: Welche Krankenkasse zahlt Osteopathie? Vergleich aller Kassen mit Zuschüssen – von 60 bis 360 € pro Jahr.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-04-03T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/osteopathie-krankenkasse-2026#webpage",
+          "@type": "WebPage"
+        }
+      },
       "@context": "https://schema.org",
       "headline": "Osteopathie: Welche Krankenkasse zahlt 2026?",
       "publisher": {
@@ -900,7 +961,7 @@
       "mainEntityOfPage": "https://www.healio.de/blog/osteopathie-krankenkasse-2026"
     },
     "published_at": "2026-04-03T08:00:00+00:00",
-    "updated_at": "2026-07-20T08:47:13.749869+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   },
@@ -919,6 +980,19 @@
         "name": "Healio GmbH",
         "@type": "Organization"
       },
+      "article": {
+        "@type": "Article",
+        "image": "https://healio.de/images/kassenboost-bridge-og.png",
+        "@context": "https://schema.org",
+        "headline": "IKK Classic Bonus: So holst du über 700 € pro Jahr raus",
+        "description": "IKK Classic Bonusprogramm 2026: Bis zu 700 € Bonus pro Jahr für Vorsorge, Sport & Gesundheit. Schritt-für-Schritt-Anleitung zum maximalen Bonus.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-04-03T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/ikk-classic-bonus-700-euro#webpage",
+          "@type": "WebPage"
+        }
+      },
       "@context": "https://schema.org",
       "headline": "IKK Classic Bonus: So holst du über 700 € pro Jahr raus",
       "publisher": {
@@ -931,7 +1005,7 @@
       "mainEntityOfPage": "https://www.healio.de/blog/ikk-classic-bonus-700-euro"
     },
     "published_at": "2026-04-03T08:00:00+00:00",
-    "updated_at": "2026-07-20T08:42:56.981249+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 5
   },
@@ -950,6 +1024,19 @@
         "name": "Healio GmbH",
         "@type": "Organization"
       },
+      "article": {
+        "@type": "Article",
+        "image": "https://healio.de/images/hero-ambulant.webp",
+        "@context": "https://schema.org",
+        "headline": "Heilpraktiker Kosten: Wer zahlt was? Der komplette Guide 2026",
+        "description": "Was kostet ein Heilpraktiker? Erfahre alle Kosten für Osteopathie, Akupunktur & Naturheilkunde – und wie du bis zu 3.000 € erstattet bekommst.",
+        "dateModified": "2026-09-02T21:12:23.029293+00:00",
+        "datePublished": "2026-04-03T08:00:00+00:00",
+        "mainEntityOfPage": {
+          "@id": "https://healio.de/blog/heilpraktiker-kosten-guide-2026#webpage",
+          "@type": "WebPage"
+        }
+      },
       "@context": "https://schema.org",
       "headline": "Heilpraktiker Kosten: Wer zahlt was? Der komplette Guide 2026",
       "publisher": {
@@ -962,7 +1049,7 @@
       "mainEntityOfPage": "https://www.healio.de/blog/heilpraktiker-kosten-guide-2026"
     },
     "published_at": "2026-04-03T08:00:00+00:00",
-    "updated_at": "2026-04-03T11:36:31.35816+00:00",
+    "updated_at": "2026-09-02T21:12:23.029293+00:00",
     "author": "Healio Redaktion",
     "reading_time_minutes": 6
   }
