@@ -24,9 +24,11 @@ const KontoLoeschenPage = () => {
             </h1>
 
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Du kannst dein HEALIO Konto jederzeit löschen. Alle persönlichen Daten,
-              eingereichten Rechnungen, Chat-Verläufe und zugehörigen Informationen
-              werden unwiderruflich entfernt.
+              Du kannst dein HEALIO Konto jederzeit löschen – direkt in der App oder
+              ohne App per E-Mail. Dabei werden dein Konto und die dazugehörigen
+              operativen App-Daten unwiderruflich entfernt. Nur Unterlagen, die wir
+              aufgrund gesetzlicher Pflichten aufbewahren müssen, bleiben für die
+              jeweilige Frist gesperrt gespeichert.
             </p>
 
             <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
@@ -40,7 +42,8 @@ const KontoLoeschenPage = () => {
                 <li>Bestätige die Löschung mit <strong>Konto endgültig löschen</strong></li>
               </ol>
               <p className="text-sm text-gray-600 mt-4">
-                Das Konto und alle Daten werden sofort und vollständig gelöscht.
+                Nach erfolgreicher Bestätigung werden dein Login, deine privaten
+                Dateien und die zugehörigen App-Datensätze serverseitig gelöscht.
               </p>
             </div>
 
@@ -70,13 +73,26 @@ const KontoLoeschenPage = () => {
                 Welche Daten werden gelöscht?
               </h2>
               <ul className="space-y-2 text-gray-700 list-disc pl-5">
-                <li>Dein Nutzerprofil (Name, E-Mail, Adresse, Telefonnummer)</li>
-                <li>Alle eingereichten Rechnungen und dazugehörige Fotos</li>
+                <li>Login und Nutzerprofil, einschließlich Kontaktdaten</li>
+                <li>Eingereichte Rechnungen, Policen und private Dateien</li>
+                <li>Vertrags-, Erstattungs- und Beratungsanfragen in der App</li>
                 <li>Chat-Verlauf mit Nita</li>
-                <li>Empfehlungscode und Lead-Verlauf</li>
-                <li>Auszahlungsanfragen (bereits abgerechnete Zahlungen bleiben aus steuerrechtlichen Gründen gespeichert)</li>
-                <li>Flyer-Bestellungen (aus buchhalterischen Gründen bleiben Rechnungen 10 Jahre gespeichert)</li>
+                <li>Empfehlungs-, Auszahlungs- und Bestelldaten, soweit keine gesetzliche Aufbewahrungspflicht greift</li>
               </ul>
+            </div>
+
+            <div className="border-t border-gray-200 pt-8 mt-8">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Was kann länger aufbewahrt werden?
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                Abrechnungs-, Steuer-, Handels- oder sonstige Nachweisunterlagen, die
+                einer gesetzlichen Aufbewahrungspflicht unterliegen, können getrennt
+                vom gelöschten App-Konto für bis zu 10 Jahre gespeichert bleiben. Sie
+                werden für andere Zwecke gesperrt und nach Ablauf der maßgeblichen
+                Frist gelöscht. Gesetzlich erforderliche Nachweise und Rechte Dritter
+                bleiben unberührt.
+              </p>
             </div>
 
             <div className="border-t border-gray-200 pt-8 mt-8">
