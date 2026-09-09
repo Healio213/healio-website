@@ -11,7 +11,7 @@
     "title": "Dein Kassen-Check ist gemacht. Jetzt hol mehr heraus.",
     "description": "Bei KassenBoost hast du neutral verglichen, was deine Kasse kann: beim Beitrag und beim Bonus. Healio ist das Maklerhaus dahinter. Wenn du willst, übersetzen wir dein Bonuspotenzial in echten Zusatzschutz. Kostenlos und unverbindlich.",
     "cta": "Kostenlosen Termin sichern",
-    "ctaHint": "30 Minuten, Telefon oder Videocall",
+    "ctaHint": "45 Minuten, Google Meet",
     "secondaryCta": "Noch nicht verglichen? Zum KassenBoost-Check",
     "externalNote": "Der Vergleich läuft auf der eigenständigen Website von KassenBoost. Deine Angaben bleiben dort und werden nicht automatisch an Healio übermittelt."
   },
@@ -57,7 +57,7 @@
   "termin": {
     "eyebrow": "Dein nächster Schritt",
     "title": "Sprich mit uns über dein Ergebnis.",
-    "description": "Such dir direkt einen Termin aus: 30 Minuten, Telefon oder Videocall. Bring dein KassenBoost-Ergebnis mit, dann rechnen wir konkret durch, welcher Weg sich für dich lohnt.",
+    "description": "Such dir direkt einen Termin aus: 45 Minuten, Google Meet. Bring dein KassenBoost-Ergebnis mit, dann rechnen wir konkret durch, welcher Weg sich für dich lohnt.",
     "transparency": [
       "Beratung und Vermittlung kosten dich nichts. Bei einem Abschluss erhält Healio eine Vergütung vom Versicherer.",
       "Der KassenBoost-Vergleich bleibt davon getrennt. Kein Ranking dort wird durch Vergütung beeinflusst.",

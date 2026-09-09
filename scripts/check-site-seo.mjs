@@ -7,7 +7,7 @@ const SITE_URL = 'https://healio.de';
 const publicRouterPaths = [
   '/', '/about', '/leistungen', '/kassenboost', '/kassenbonus', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/hebammen', '/zahnaerzte',
   '/zahnaerzte/praxis-checkliste',
-  '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant',
+  '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant', '/schwangerschaft',
   '/zahn', '/stationaer', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
   '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/health-insurance-bonus', '/en/companies', '/en/companies/pension-calculator', '/en/partner', '/en/midwives', '/en/healthcare-professionals-protection',

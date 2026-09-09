@@ -9,9 +9,14 @@ import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sec
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
+  // These codes identify only the entry path, never a completed bonus check
+  // or a verified personal result. No amounts or health details are imported.
+  const originCode = new URLSearchParams(search).get('src');
+  const fromBonusTopic = pathname === '/ambulant'
+    && (originCode === 'reel-f05' || originCode === 'bonus-check');
   const isHeilpraktikerLanding = pathname === '/heilpraktiker-zusatzversicherung';
   const seoTitle = isHeilpraktikerLanding
     ? 'Heilpraktiker Zusatzversicherung mit bis zu 3.000 EUR Budget | Healio'
@@ -23,7 +28,7 @@ const AmbulantPage = () => {
     ? '/heilpraktiker-zusatzversicherung'
     : language === 'en' ? '/en/outpatient' : '/ambulant';
   const canonicalUrl = `https://healio.de${canonicalPath}`;
-  const faqItems = getAmbulantCompactFaqs(language);
+  const faqItems = getAmbulantCompactFaqs(language, fromBonusTopic);
   const schemaMarkup = [
     createWebPageSchema(seoTitle, seoDescription, canonicalUrl, language === 'en' ? 'en-US' : 'de-DE'),
     createServiceSchema({
@@ -35,7 +40,9 @@ const AmbulantPage = () => {
       offers: {
         description: language === 'en'
           ? 'Digital tariff and premium comparison with optional statutory insurer bonus check'
-          : 'Digitaler Tarif- und Beitragsvergleich mit anschließendem Kassenbonus-Check',
+          : fromBonusTopic
+            ? 'Digitaler Tarif- und Beitragsvergleich. Kassenbonus und Zusatzschutz bleiben getrennte Entscheidungen.'
+            : 'Digitaler Tarif- und Beitragsvergleich mit anschließendem Kassenbonus-Check',
       },
     }),
     createFAQSchema(faqItems.map((faq) => ({ question: faq.q, answer: faq.a }))),
@@ -45,8 +52,8 @@ const AmbulantPage = () => {
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
       <div className="min-h-screen bg-white">
-        <AmbulantHero />
-        <AmbulantConversionFlow />
+        <AmbulantHero fromBonusTopic={fromBonusTopic} />
+        <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>
     </>
   );

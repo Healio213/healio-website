@@ -11,11 +11,11 @@ import {
 
 const COPY = {
   de: {
-    calendly: {
+    google_calendar: {
       title: 'Terminbuchung erst nach deiner Freigabe',
-      text: 'Beim Laden werden technische Verbindungsdaten an Calendly übertragen. Der übrige Seiteninhalt bleibt ohne Calendly nutzbar.',
-      load: 'Calendly laden',
-      external: 'Direkt bei Calendly öffnen',
+      text: 'Beim Laden werden technische Verbindungsdaten an Google Kalender übertragen. Der übrige Seiteninhalt bleibt ohne den Kalender nutzbar.',
+      load: 'Google Kalender laden',
+      external: 'Direkt in Google Kalender öffnen',
     },
     maps: {
       title: 'Karte erst nach deiner Freigabe',
@@ -26,11 +26,11 @@ const COPY = {
     settings: 'Datenschutz-Einstellungen',
   },
   en: {
-    calendly: {
+    google_calendar: {
       title: 'Appointment booking after your approval',
-      text: 'Loading transfers technical connection data to Calendly. The rest of this page remains available without Calendly.',
-      load: 'Load Calendly',
-      external: 'Open directly in Calendly',
+      text: 'Loading transfers technical connection data to Google Calendar. The rest of this page remains available without the calendar.',
+      load: 'Load Google Calendar',
+      external: 'Open directly in Google Calendar',
     },
     maps: {
       title: 'Map after your approval',
@@ -47,6 +47,7 @@ const ExternalProviderGate = ({
   externalUrl,
   placeholderClassName = 'min-h-[420px]',
   provider,
+  embedAvailable = true,
 }) => {
   const { pathname } = useLocation();
   const [consent, setConsent] = useState(() => getConsentState());
@@ -57,7 +58,7 @@ const ExternalProviderGate = ({
 
   useEffect(() => subscribeConsent(setConsent), []);
 
-  if (allowed) return children;
+  if (allowed && embedAvailable) return children;
   if (!providerCopy) return null;
 
   return (
@@ -71,13 +72,13 @@ const ExternalProviderGate = ({
         <h3 className="mt-4 text-xl font-extrabold text-slate-950">{providerCopy.title}</h3>
         <p className="mt-3 text-sm leading-6 text-slate-600 sm:text-base">{providerCopy.text}</p>
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <button
+          {embedAvailable && <button
             type="button"
             onClick={() => updateConsentPurpose(provider, true, 'provider')}
             className="min-h-11 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
           >
             {providerCopy.load}
-          </button>
+          </button>}
           <a
             href={externalUrl}
             target="_blank"

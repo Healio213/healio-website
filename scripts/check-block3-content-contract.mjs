@@ -24,8 +24,8 @@ assert(miaKnowledge.includes('Die SDK hat keine tarifliche Wartezeit'), 'Station
 assert(miaKnowledge.includes('bei der Bayerischen gelten für eine Entbindung acht Monate'), 'Stationärer Tarifvergleich muss die achtmonatige Wartezeit der Bayerischen neutral erklären.');
 
 const enHeilberufe = readJson('src/i18n/locales/en/heilberufe.json');
-assert.equal(enHeilberufe.ablauf.steps[1].text, '30 minutes by phone or video call, Germany-wide. No preparation needed.');
-assert.equal(enHeilberufe.cta.primary.description, '30 minutes with Frank Steinfurt personally by phone or video call, Germany-wide.');
+assert.equal(enHeilberufe.ablauf.steps[1].text, '45 minutes via Google Meet, Germany-wide. No preparation needed.');
+assert.equal(enHeilberufe.cta.primary.description, '45 minutes with Frank Steinfurt personally via Google Meet, Germany-wide.');
 
 const deLegal = readJson('src/i18n/locales/de/legal.json');
 const enLegal = readJson('src/i18n/locales/en/legal.json');
@@ -132,8 +132,8 @@ for (const key of [
   'analyticsText',
   'nitaTitle',
   'nitaText',
-  'calendlyTitle',
-  'calendlyText',
+  'calendarTitle',
+  'calendarText',
   'brevoTitle',
   'brevoText',
   'insurerFlowsTitle',
@@ -165,7 +165,7 @@ for (const [localeName, legal, consentReference, settingsReference] of [
   ['DE', deLegal, /Art\. 6 Abs\. 1 lit\. a DSGVO/, /Datenschutz-Einstellungen/],
   ['EN', enLegal, /Article 6\(1\)\(a\) GDPR/, /privacy settings/],
 ]) {
-  for (const providerKey of ['analyticsText', 'nitaText', 'calendlyText']) {
+  for (const providerKey of ['analyticsText', 'nitaText', 'calendarText']) {
     assert.match(
       legal.datenschutz[providerKey],
       consentReference,
@@ -178,7 +178,7 @@ for (const [localeName, legal, consentReference, settingsReference] of [
     );
   }
 }
-assert.match(deLegal.datenschutz.calendlyText, /Art\. 6 Abs\. 1 lit\. b DSGVO/);
-assert.match(enLegal.datenschutz.calendlyText, /Article 6\(1\)\(b\) GDPR/);
+assert.match(deLegal.datenschutz.calendarText, /Art\. 6 Abs\. 1 lit\. b DSGVO/);
+assert.match(enLegal.datenschutz.calendarText, /Article 6\(1\)\(b\) GDPR/);
 
 console.log('Block-3-Inhaltsvertrag erfüllt.');

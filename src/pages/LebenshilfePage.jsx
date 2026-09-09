@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import ProductTicker from '@/components/sections/ProductTicker';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
 
 // Rahmenwerte 2026 (jaehrlich pruefen)
 const AG_SATZ = 0.046; // Arbeitgeberbeitrag der Lebenshilfe: 4,6 % vom Brutto
@@ -556,11 +556,10 @@ const LebenshilfePage = () => {
                 Kein Formular, kein Unterschriftenzettel, keine Umwege: Wählen Sie einfach unten
                 einen freien Termin. Wir schauen gemeinsam auf Ihren Stand: Was läuft bereits, wo
                 liegt Ihr Spielraum, und wo arbeitet Ihr Geld heute? Kostenfrei und unverbindlich,
-                per Telefon oder Videocall.
+                per Google Meet.
               </p>
               <div className="bg-white rounded-2xl overflow-hidden shadow-xl p-1 sm:p-2 mb-8">
-                <CalendlyEmbed
-                  url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&utm_source=lebenshilfe-lp&utm_medium=web&utm_campaign=bav-lebenshilfe"
+                <AppointmentBooking
                   placement="lebenshilfe_page"
                   title="Kalender zur Terminbuchung"
                   className="h-[600px] rounded-xl md:h-[680px]"

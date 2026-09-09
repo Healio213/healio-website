@@ -274,12 +274,43 @@ const TIERS = [
 
 const POT_KEYS = ['vision', 'natural', 'prevention', 'copay'];
 
-export const getAmbulantCompactFaqs = (language = 'de') => COPY[language === 'en' ? 'en' : 'de'].faqs;
+const BONUS_TOPIC_COPY = {
+  ...COPY.de,
+  process: {
+    ...COPY.de.process,
+    steps: [
+      COPY.de.process.steps[0],
+      COPY.de.process.steps[1],
+      { title: 'In Ruhe entscheiden', text: 'Prüfe Leistungen und Bedingungen. Wenn der Schutz passt, kannst du online weitermachen – ohne Pflichttermin.' },
+    ],
+    switchEyebrow: 'Zwei getrennte Entscheidungen',
+    switchTitle: 'Dein Schutz braucht keinen Kassenwechsel.',
+    switchText: 'Du kannst deinen persönlichen Tarifbeitrag direkt prüfen. Ob du zusätzlich Krankenkassen vergleichen möchtest, entscheidest du unabhängig davon.',
+  },
+  finalText: 'Vergleiche Leistungen und deinen persönlichen Beitrag. Du kannst direkt im Tarifrechner weitermachen oder dir auf Wunsch etwas erklären lassen. Ein weiterer Bonuscheck ist dafür nicht nötig.',
+  faqs: COPY.de.faqs.map((faq) => {
+    if (faq.q === 'Kann mein Kassenbonus wirklich 100 % des Beitrags ausgleichen?') {
+      return { ...faq, a: 'Bis zu 100 % können möglich sein. Ein Zuschuss ist jedoch nicht höher als dein tatsächlich gezahlter, anerkannter Beitrag. Bonusbedingungen, nachgewiesene Aktivitäten und die Anerkennung durch deine Krankenkasse entscheiden. Hier wird kein persönlicher Bonus bestätigt; der Tarifbeitrag und das Leistungsbudget werden getrennt dargestellt.' };
+    }
+    if (faq.q === 'Muss ich für den Zusatzschutz die Krankenkasse wechseln?') {
+      return { ...faq, a: 'Nein. Zusatzschutz und gesetzliche Krankenkasse sind getrennte Entscheidungen. Du kannst hier Leistungen und Beitrag vergleichen und direkt im Tarifrechner weitermachen. Dafür brauchst du weder einen weiteren Bonuscheck noch einen Beratungstermin.' };
+    }
+    return faq;
+  }),
+};
 
-const AmbulantConversionFlow = () => {
+const getAmbulantCopy = (language, fromBonusTopic) => (
+  language === 'en' ? COPY.en : fromBonusTopic ? BONUS_TOPIC_COPY : COPY.de
+);
+
+export const getAmbulantCompactFaqs = (language = 'de', fromBonusTopic = false) => (
+  getAmbulantCopy(language, fromBonusTopic).faqs
+);
+
+const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const { lang, getPath } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
-  const copy = COPY[language];
+  const copy = getAmbulantCopy(language, fromBonusTopic);
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
   const [selectedGoal, setSelectedGoal] = useState('natur');
@@ -371,6 +402,13 @@ const AmbulantConversionFlow = () => {
 
       <section id="tarifwahl" className="scroll-mt-20 bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
+          {fromBonusTopic && (
+            <div className="mb-10 rounded-[1.6rem] border border-emerald-900/10 bg-home-ice p-5 sm:p-7" role="note" aria-labelledby="bonus-topic-continuation-heading">
+              <h2 id="bonus-topic-continuation-heading" className="font-display text-xl font-extrabold leading-tight text-home-midnight sm:text-2xl">Jetzt geht es um Leistungen und Beitrag.</h2>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-home-slate">Vergleiche den Schutz, der zu dir passt. Du musst dafür weder die Krankenkasse wechseln noch einen Termin buchen.</p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-home-slate">Ein möglicher Kassenbonus bleibt eine separate Prüfung und ist hier nicht bestätigt. Es werden keine Ergebnisse aus einem Bonuscheck übernommen.</p>
+            </div>
+          )}
           <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(520px,1.1fr)]">
             <div>
               <p className="home-eyebrow">{copy.tiers.eyebrow}</p>
@@ -442,6 +480,8 @@ const AmbulantConversionFlow = () => {
         </div>
       </section>
 
+      {!fromBonusTopic && (
+        <>
       <section className="bg-[#071722] px-4 py-16 text-white sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="relative mx-auto w-full max-w-md">
@@ -504,6 +544,9 @@ const AmbulantConversionFlow = () => {
         </div>
       </section>
 
+        </>
+      )}
+
       <section className="bg-[#fbfaf7] px-4 py-16 sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
@@ -526,15 +569,17 @@ const AmbulantConversionFlow = () => {
                 <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{copy.process.switchEyebrow}</p>
                 <h3 className="mt-3 font-display text-2xl font-extrabold leading-tight text-home-midnight sm:text-3xl">{copy.process.switchTitle}</h3>
                 <p className="mt-4 max-w-3xl text-base leading-7 text-home-slate">{copy.process.switchText}</p>
-                <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-5 inline-flex min-h-11 items-center font-display text-sm font-extrabold text-emerald-800 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-emerald-950">
-                  {copy.process.switchCta}<ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                {!fromBonusTopic && (
+                  <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-5 inline-flex min-h-11 items-center font-display text-sm font-extrabold text-emerald-800 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-emerald-950">
+                    {copy.process.switchCta}<ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                )}
               </div>
               <img src="/images/friendly-icons/decision-choice.webp" alt="" className="mx-auto hidden h-48 w-48 object-contain md:block" aria-hidden="true" />
             </div>
           </div>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.08fr_0.92fr]">
             <div className="rounded-[1.8rem] border border-emerald-900/10 bg-white p-6 sm:p-8">
               <div className="flex items-start gap-4">
                 <FriendlyIcon kind="broker" tone="mint" size="lg" />

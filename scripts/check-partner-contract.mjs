@@ -30,7 +30,7 @@ for (const key of translationKeys) {
   assert.notEqual(get(en, key), undefined, `Missing English partner translation: ${key}`);
 }
 
-assert.match(page, /calendly\.com\/healio-info\/30min/, 'Calendly must remain the 30-minute meeting');
+// Provider and consent are exercised in check-appointment-rendered.mjs.
 assert.match(page, /canonicalUrl,\s*isEnglish \? 'en-US' : 'de-DE'/, 'Partner schema must use the canonical URL and active language');
 assert.match(page, /<PartnerRoleProcess\s*\/>/, 'The verifiable role process must be rendered');
 assert.doesNotMatch(page, /PartnerTestimonials/, 'Unverified testimonials must not be imported or rendered');
@@ -39,14 +39,14 @@ assert.match(roleProcess, /HighlightText[^>]*className="text-\[#75e6bf\]"/, 'Dar
 
 for (const [locale, source] of [['de', deSource], ['en', enSource]]) {
   assert.doesNotMatch(source, /\b600\s*(?:€|EUR)|(?:€|EUR)\s*600\b/i, `${locale}: outdated EUR 600 vision claim`);
-  assert.doesNotMatch(source, /45\s*(?:Minuten|minutes)/i, `${locale}: outdated 45-minute claim`);
+  assert.doesNotMatch(source, /30[\s-]*(?:Minuten|minutes|minute|minütig)/i, `${locale}: appointment duration must match the 45-minute booking page`);
   assert.doesNotMatch(source, /keine Therapieabbrüche|no more therapy dropouts|Null Aufwand|Zero Effort|Null Risiko|Zero Risk|Umsatz steig|increase revenue/i, `${locale}: absolute or unsupported claim`);
 }
 
 assert.equal(de.budget.sehhilfenAmount, 'bis zu 500 EUR');
 assert.match(de.budget.sehhilfenDesc, /frei verwendbarer IKK-Geldbonus/i);
 assert.match(de.faq.items.at(-1).answer, /kein pauschaler Brillenzuschuss/i);
-assert.equal(de.trust.meeting, '30 Minuten Kennenlernen');
+assert.equal(de.trust.meeting, '45 Minuten Kennenlernen');
 assert.match(de.roleProcess.closing, /fachlich unabhängig/i);
 
 console.log(`Partner contract checks passed (${translationKeys.size} translation keys).`);

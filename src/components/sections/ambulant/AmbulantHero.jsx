@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, CheckCircle, Euro } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
-const AmbulantHero = () => {
+const AmbulantHero = ({ fromBonusTopic = false }) => {
   const { t } = useTranslation('ambulant');
 
   return (
@@ -41,7 +41,7 @@ const AmbulantHero = () => {
             id="hero-heading"
             className="mb-5 max-w-4xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-lg sm:text-5xl md:mb-7 lg:text-7xl"
           >
-            <HighlightText text={t('hero.title')} className="text-[#5ee0b1]" />
+            <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>
 
           <motion.p
@@ -50,10 +50,16 @@ const AmbulantHero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-100 drop-shadow-md md:mb-8 md:text-xl"
           >
-            {t('hero.subtitle')}
+            {fromBonusTopic
+              ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt – ohne Kassenwechsel oder Pflichttermin.'
+              : t('hero.subtitle')}
           </motion.p>
 
-          <motion.div
+          {fromBonusTopic ? (
+            <p role="note" className="mb-8 max-w-2xl text-sm leading-6 text-slate-200 md:mb-10">
+              Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
+            </p>
+          ) : <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -71,7 +77,7 @@ const AmbulantHero = () => {
               <CheckCircle className="w-4 h-4 text-healio-primary" />
               <span className="text-sm text-white font-medium">{t('hero.badgeTestResult')}</span>
             </div>
-          </motion.div>
+          </motion.div>}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,14 +86,14 @@ const AmbulantHero = () => {
             className="flex flex-col items-start justify-center gap-3"
           >
             <a
-              href="#budget-kompass"
+              href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none"
             >
               <ArrowDown className="mr-2 h-5 w-5" />
-              {t('hero.ctaCalculate')}
+              {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : t('hero.ctaCalculate')}
             </a>
             <p className="max-w-xl text-left text-sm leading-6 text-slate-200">
-              {t('hero.ctaHint')}
+              {fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}
             </p>
           </motion.div>
         </div>

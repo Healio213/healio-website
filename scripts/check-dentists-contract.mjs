@@ -74,7 +74,7 @@ assert.equal(
 );
 assert.match(page, /useReducedMotion/);
 assert.match(page, /FOUNDER_IMAGE/);
-assert.match(page, /calendly\.com\/healio-info\/30min/);
+// Provider and consent are exercised in check-appointment-rendered.mjs.
 assert.match(page, /loading="lazy"/);
 assert.doesNotMatch(page, /rounded-(?:2xl|3xl)/, 'The editorial dental design should not regress to generic oversized rounded cards');
 assert.match(seoRoutes, /Patientenservice für Zahnarztpraxen \| Healio/);

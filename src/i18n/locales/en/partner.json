@@ -3,7 +3,7 @@
     "badge": "For practices, therapists and opticians",
     "title": "So good care does not stop at <highlight>out-of-pocket costs</highlight>.",
     "subtitle": "Depending on their tariff and personal eligibility, your patients may be able to use a health budget of up to <highlight>EUR 3,000 over two years</highlight>. Your practice provides neutral information. Healio checks, advises and supports.",
-    "cta": "Book a 30-minute introduction",
+    "cta": "Book a 45-minute introduction",
     "secondaryCta": "View the concept with Nita",
     "roleNote": "No insurance advice by the practice is required.",
     "imageAltMobile": "Consultation in a bright healthcare practice",
@@ -37,7 +37,7 @@
     "points": [
       "Clear responsibilities for practices, patients and Healio",
       "Eligibility explained without blanket promises",
-      "Next step: a 30-minute introduction"
+      "Next step: a 45-minute introduction"
     ],
     "cta": "Clarify the concept with Nita",
     "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
@@ -50,7 +50,7 @@
     "budget": "Up to EUR 3,000 over two years may be available",
     "information": "Neutral patient information",
     "advice": "Healio advises and brokers",
-    "meeting": "30-minute introduction"
+    "meeting": "45-minute introduction"
   },
   "quality": {
     "label": "Awards and tests for selected providers in the Healio concept"
@@ -107,7 +107,7 @@
     "freeParticipationDesc": "Partner practices pay no participation fee. Healio provides information materials free of charge."
   },
   "steps": {
-    "step1Title": "30-minute introduction",
+    "step1Title": "45-minute introduction",
     "step1Desc": "We explain the concept, responsibilities and process. You then decide at your leisure whether Healio fits your practice.",
     "step2Title": "Provide information",
     "step2Desc": "You receive neutral cards, flyers or a QR code and decide for yourself where you want to refer to them.",
@@ -167,13 +167,13 @@
   },
   "cta": {
     "title": "Is Healio right for <highlight>your practice</highlight>?",
-    "subtitle": "In 30 minutes, we clarify the concept, responsibilities and process. You then decide whether you want to offer this information path to your patients.",
+    "subtitle": "In 45 minutes, we clarify the concept, responsibilities and process. You then decide whether you want to offer this information path to your patients.",
     "calendarError": "Calendar could not be loaded",
     "calendarErrorDesc": "Please check your internet connection or disable any active content blocker."
   },
   "footer": {
     "title": "Good care needs <highlight>clear paths</highlight>.",
-    "subtitle": "30 minutes. Clear roles. An honest decision.",
+    "subtitle": "45 minutes. Clear roles. An honest decision.",
     "cta": "Book an introduction"
   },
   "ticker": {

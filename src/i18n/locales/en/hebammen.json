@@ -32,7 +32,7 @@
     "points": [
       "Clear responsibilities for midwives, families and Healio",
       "Health fund benefits, bonuses and supplementary cover without blanket promises",
-      "Next step: a 30-minute introduction"
+      "Next step: a 45-minute introduction"
     ],
     "cta": "Clarify the concept with Nita",
     "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
@@ -204,7 +204,7 @@
   "steps": {
     "title": "This is how easy it works for you.",
     "step1Title": "Quick Introduction",
-    "step1Desc": "30 minutes is enough. We explain the concept and you decide at your own pace whether it suits you.",
+    "step1Desc": "45 minutes is enough. We explain the concept and you decide at your own pace whether it suits you.",
     "step2Title": "Receive Materials",
     "step2Desc": "You receive high-quality and unobtrusive information flyers for your home visits or practice rooms. Completely free.",
     "step3Title": "Families Benefit",
@@ -219,7 +219,7 @@
   },
   "cta": {
     "title": "Ready for a quick introduction?",
-    "subtitle": "30 minutes. No sales pitch. Just clear facts for your work.",
+    "subtitle": "45 minutes. No sales pitch. Just clear facts for your work.",
     "button": "Book strategy session"
   },
   "ticker": {

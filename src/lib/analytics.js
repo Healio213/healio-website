@@ -9,7 +9,8 @@ export const GA4_MEASUREMENT_ID = 'G-VSN76YW5SC';
 const GA4_SCRIPT_URL = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
 const GA4_DISABLE_KEY = `ga-disable-${GA4_MEASUREMENT_ID}`;
 const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
-const ANALYTICS_EXCLUDED_PATHS = new Set(['/zahn', '/en/dental']);
+const ANALYTICS_EXCLUDED_PATHS = new Set(['/zahn', '/en/dental', '/schwangerschaft']);
+const PRIVATE_FUNNEL_SOURCES = new Set(['reel-f05', 'bonus-check']);
 const SAFE_EVENT_NAME = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_PARAM_KEY = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_TOKEN_VALUE = /^[a-z0-9][a-z0-9._-]{0,63}$/i;
@@ -58,9 +59,17 @@ let analyticsConsumerCount = 0;
 let analyticsRouteBlocked = false;
 
 const isBrowser = () => typeof window !== 'undefined' && typeof document !== 'undefined';
-const isAnalyticsExcludedRoute = () => (
-  isBrowser() && ANALYTICS_EXCLUDED_PATHS.has(window.location.pathname)
-);
+export const isAnalyticsExcludedRoute = (location = isBrowser() ? window.location : null) => {
+  if (!location) return false;
+  const pathname = (location.pathname || '/').replace(/\/+$/, '').toLowerCase() || '/';
+  if (ANALYTICS_EXCLUDED_PATHS.has(pathname)) return true;
+
+  // Neutral campaign codes are functional navigation only, not consent to send
+  // the health-related funnel or its answers to an analytics provider.
+  return (pathname === '/ambulant' || pathname === '/en/outpatient')
+    && new URLSearchParams(location.search || '').getAll('src')
+      .some((source) => PRIVATE_FUNNEL_SOURCES.has(source));
+};
 const isAnalyticsBlocked = () => analyticsRouteBlocked || isAnalyticsExcludedRoute();
 
 const ensureDataLayer = () => {

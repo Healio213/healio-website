@@ -1,63 +1,45 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import ExternalProviderGate from '@/components/ExternalProviderGate';
-import { trackEvent } from '@/lib/analytics';
+import { APPOINTMENT_BOOKING, getSafeAppointmentEmbedUrl } from '@/lib/appointmentBooking';
 
-const CALENDLY_ORIGIN = 'https://calendly.com';
-const CALENDLY_PATH = '/healio-info/30min';
-
-const getSafeCalendlyUrl = (value) => {
-  try {
-    const url = new URL(value);
-    if (url.origin !== CALENDLY_ORIGIN || url.pathname !== CALENDLY_PATH) return null;
-    url.hash = '';
-    return url.toString();
-  } catch {
-    return null;
-  }
-};
-
-const CalendlyEmbed = ({
+// Keep this file as a compatibility entry point; booking configuration is provider-neutral.
+const AppointmentBooking = ({
   className = 'h-[600px] md:h-[700px]',
-  placement = 'appointment_page',
-  title = 'Calendly Terminvereinbarung',
-  url,
+  title,
 }) => {
-  const safeUrl = useMemo(() => getSafeCalendlyUrl(url), [url]);
-
-  useEffect(() => {
-    if (!safeUrl) return undefined;
-
-    const handleCalendlyMessage = (event) => {
-      if (event.origin !== CALENDLY_ORIGIN) return;
-      if (event.data?.event !== 'calendly.event_scheduled') return;
-      trackEvent('appointment_booked', {
-        component: 'calendly',
-        placement,
-      });
-    };
-
-    window.addEventListener('message', handleCalendlyMessage);
-    return () => window.removeEventListener('message', handleCalendlyMessage);
-  }, [placement, safeUrl]);
-
-  if (!safeUrl) return null;
+  const { pathname } = useLocation();
+  const english = pathname === '/en' || pathname.startsWith('/en/');
+  const frameTitle = title || (english ? 'Google Calendar appointment booking' : 'Google Kalender zur Terminvereinbarung');
+  const safeUrl = getSafeAppointmentEmbedUrl(APPOINTMENT_BOOKING.embedUrl);
 
   return (
     <ExternalProviderGate
-      provider="calendly"
-      externalUrl={safeUrl}
+      provider={APPOINTMENT_BOOKING.provider}
+      externalUrl={APPOINTMENT_BOOKING.url}
       placeholderClassName={className}
+      embedAvailable={Boolean(safeUrl)}
     >
-      <iframe
-        src={safeUrl}
-        title={title}
-        aria-label={title}
-        className={`w-full border-0 ${className}`}
-        loading="lazy"
-        referrerPolicy="strict-origin-when-cross-origin"
-      />
+      {safeUrl && <div className={`flex w-full flex-col ${className}`}>
+        <iframe
+          src={safeUrl}
+          title={frameTitle}
+          aria-label={frameTitle}
+          className="min-h-0 w-full flex-1 border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer"
+        />
+        <a
+          href={APPOINTMENT_BOOKING.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 px-4 py-3 text-center text-sm font-semibold text-slate-700 underline underline-offset-2"
+        >
+          {english ? 'Calendar not loading? Open directly in Google Calendar.' : 'Kalender lädt nicht? Direkt in Google Kalender öffnen.'}
+        </a>
+      </div>}
     </ExternalProviderGate>
   );
 };
 
-export default CalendlyEmbed;
+export default AppointmentBooking;

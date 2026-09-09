@@ -136,8 +136,9 @@ const DatenschutzPage = () => {
                   </p>
                 </>
               )}
-              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.calendlyTitle')}</h3>
-              <p>{t('datenschutz.calendlyText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.calendarTitle')}</h3>
+              <p>{t('datenschutz.calendarText')}</p>
+              <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">Google: Privacy Policy / Datenschutzerklärung</a></p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.brevoTitle')}</h3>
               <p>{t('datenschutz.brevoText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>

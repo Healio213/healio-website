@@ -28,6 +28,7 @@ const Header = () => {
   const isHome = location.pathname === '/' || location.pathname === '/en';
   const isServices = location.pathname === '/leistungen' || location.pathname === '/en/services';
   const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
+  const isPregnancy = location.pathname === '/schwangerschaft';
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
     || location.pathname === '/unternehmen/vorsorge-rechner'
@@ -42,6 +43,7 @@ const Header = () => {
     '/erstinformation', '/en/initial-information',
     '/zahnaerzte/praxis-checkliste',
     '/konto-loeschen',
+    '/schwangerschaft',
     '/blog', '/en/blog',
     '/potenzialanalyse', '/en/potential-analysis',
     '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
@@ -130,21 +132,25 @@ const Header = () => {
     { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
   ];
 
-  const ctaLabel = isHome
-    ? t('nav.kassenvorteil')
-    : isServices
-      ? t('nav.schutzWaehlen')
-      : isCompany
-        ? t('nav.potenzialanalyse')
-        : isPartner
-          ? t('nav.kennenlernen')
-          : t('nav.beratung');
+  const ctaLabel = isPregnancy
+    ? 'Zusatzschutz ansehen'
+    : isHome
+      ? t('nav.kassenvorteil')
+      : isServices
+        ? t('nav.schutzWaehlen')
+        : isCompany
+          ? t('nav.potenzialanalyse')
+          : isPartner
+            ? t('nav.kennenlernen')
+            : t('nav.beratung');
 
-  const ctaPath = isServices
-    ? `${getPath('leistungen')}#schutz-kompass`
-    : isCompany
-      ? getPath('potenzialanalyse')
-      : getPath('terminvereinbarung');
+  const ctaPath = isPregnancy
+    ? { pathname: '/schwangerschaft', search: location.search, hash: '#zusatzschutz' }
+    : isServices
+      ? `${getPath('leistungen')}#schutz-kompass`
+      : isCompany
+        ? getPath('potenzialanalyse')
+        : getPath('terminvereinbarung');
   const ambulantSdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
 
   return (

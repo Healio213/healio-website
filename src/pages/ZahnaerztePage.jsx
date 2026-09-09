@@ -13,7 +13,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
@@ -431,8 +431,7 @@ const ZahnaerztePage = () => {
 
             <motion.div {...revealProps(0.08)} className="mt-10 bg-white p-3 shadow-[0_28px_80px_rgba(7,17,31,0.18)] sm:p-5">
               <div id="calendly-zahnaerzte" className="scroll-mt-24 overflow-hidden">
-                <CalendlyEmbed
-                  url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990&utm_source=website&utm_campaign=zahnaerzte"
+                <AppointmentBooking
                   placement="dentists_page"
                   title={t('cta.calendarTitle')}
                   className="h-[700px]"

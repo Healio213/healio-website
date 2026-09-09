@@ -1,0 +1,10 @@
+node_modules
+dist
+tmp
+.git
+.vercel
+.env*
+.claude
+.impeccable
+docs
+TECHNICAL_DOCUMENTATION.md

@@ -13,7 +13,7 @@ import AudienceProofBar from '@/components/sections/AudienceProofBar';
 import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 
 const HebammenPage = () => {
@@ -531,8 +531,7 @@ const HebammenPage = () => {
                 className="bg-white rounded-2xl shadow-xl p-4 sm:p-6"
               >
                 <div id="calendly-hebammen">
-                  <CalendlyEmbed
-                    url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
+                  <AppointmentBooking
                     placement="midwives_page"
                     title={lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
                     className="h-[700px]"

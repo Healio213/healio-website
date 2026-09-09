@@ -48,7 +48,7 @@ for (const directive of [
   'https://unpkg.com',
   'https://cdn.jsdelivr.net',
   'https://storage.googleapis.com',
-  'https://calendly.com',
+  'https://calendar.google.com',
   'https://www.googletagmanager.com',
   'https://www.google-analytics.com',
   'https://app.healio.de',

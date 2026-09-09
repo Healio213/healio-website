@@ -15,7 +15,7 @@ import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import ProductTicker from '@/components/sections/ProductTicker';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -460,8 +460,7 @@ const PartnerPage = () => {
                 className="bg-white p-2 sm:p-4 md:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col items-center w-full"
               >
                 <div id="calendly-embed" className="w-full">
-                  <CalendlyEmbed
-                    url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990"
+                  <AppointmentBooking
                     placement="partner_page"
                     title={t('cta.title')}
                     className="h-[700px]"

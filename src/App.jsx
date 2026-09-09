@@ -12,7 +12,7 @@ import { NitaConsentWidget } from '@/components/NitaConsentWidget';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import { useReferrer } from '@/hooks/useReferrer';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
-import { setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
+import { isAnalyticsExcludedRoute, setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -20,6 +20,7 @@ const AboutPage = React.lazy(() => import('@/pages/AboutPage'));
 const LeistungenPage = React.lazy(() => import('@/pages/LeistungenPage'));
 const AmbulantPage = React.lazy(() => import('@/pages/AmbulantPage'));
 const KassenbonusPage = React.lazy(() => import('@/pages/KassenbonusPage'));
+const SchwangerschaftPage = React.lazy(() => import('@/pages/SchwangerschaftPage'));
 const StationaerPage = React.lazy(() => import('@/pages/StationaerPage'));
 const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
@@ -71,7 +72,8 @@ const EnglishBlogArticleRedirect = () => {
 function App() {
   const location = useLocation();
   const lastTrackedPathRef = useRef(null);
-  const isDentalCheckRoute = location.pathname === '/zahn' || location.pathname === '/en/dental';
+  const isPrivateCheckRoute = isAnalyticsExcludedRoute(location);
+  const isPregnancy = location.pathname === '/schwangerschaft';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -100,15 +102,15 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    setAnalyticsRouteBlocked(isDentalCheckRoute).catch(() => {});
+    setAnalyticsRouteBlocked(isPrivateCheckRoute).catch(() => {});
     return () => {
-      if (isDentalCheckRoute) setAnalyticsRouteBlocked(false).catch(() => {});
+      if (isPrivateCheckRoute) setAnalyticsRouteBlocked(false).catch(() => {});
     };
-  }, [isDentalCheckRoute]);
+  }, [isPrivateCheckRoute]);
 
   useEffect(() => {
     const trackCurrentPage = (state) => {
-      if (isDentalCheckRoute || !hasConsent('analytics', state)) {
+      if (isPrivateCheckRoute || !hasConsent('analytics', state)) {
         lastTrackedPathRef.current = null;
         return;
       }
@@ -118,15 +120,15 @@ function App() {
 
     trackCurrentPage(getConsentState());
     return subscribeConsent(trackCurrentPage);
-  }, [isDentalCheckRoute, location.pathname]);
+  }, [isPrivateCheckRoute, location.pathname]);
 
   return (
     <>
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
-      <NitaConsentWidget />
-      <WhatsAppContactButton />
+      {!isPregnancy && <NitaConsentWidget />}
+      {!isPregnancy && <WhatsAppContactButton />}
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>
@@ -154,6 +156,7 @@ function App() {
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
               <Route path="ambulant" element={<AmbulantPage />} />
               <Route path="kassenbonus" element={<KassenbonusPage />} />
+              <Route path="schwangerschaft" element={<SchwangerschaftPage />} />
               <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />

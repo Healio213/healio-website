@@ -3,7 +3,7 @@
     "badge": "Für Hebammen und Geburtshäuser",
     "title": "Familien gut informieren. <highlight>In deiner Rolle bleiben.</highlight>",
     "subtitle": "Healio zeigt Familien, welche Kassenleistungen, Boni und Zusatzversicherungen zu ihrer Situation passen können. Du gibst einen neutralen Hinweis; wir prüfen und beraten individuell.",
-    "cta": "30-minütiges Kennenlernen buchen",
+    "cta": "45-minütiges Kennenlernen buchen",
     "secondaryCta": "Konzept mit Nita ansehen",
     "note": "Keine Versicherungsberatung durch die Hebamme erforderlich."
   },
@@ -32,7 +32,7 @@
     "points": [
       "Klar getrennte Rollen für Hebamme, Familien und Healio",
       "Kassenleistungen, Boni und Zusatzschutz ohne Pauschalversprechen",
-      "Nächster Schritt: 30-minütiges Kennenlernen"
+      "Nächster Schritt: 45-minütiges Kennenlernen"
     ],
     "cta": "Konzept mit Nita klären",
     "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
@@ -199,7 +199,7 @@
   "steps": {
     "title": "So einfach funktioniert es für dich.",
     "step1Title": "Kurzes Kennenlernen",
-    "step1Desc": "30 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
+    "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
     "step2Title": "Materialien erhalten",
     "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche und deine Kurse. Völlig kostenlos.",
     "step3Title": "Familien profitieren",
@@ -214,7 +214,7 @@
   },
   "cta": {
     "title": "Bereit für ein kurzes Kennenlernen?",
-    "subtitle": "30 Minuten. Keine Verkaufspräsentation. Nur klare Fakten für deine Arbeit.",
+    "subtitle": "45 Minuten. Keine Verkaufspräsentation. Nur klare Fakten für deine Arbeit.",
     "button": "Strategiegespräch sichern"
   },
   "ticker": {

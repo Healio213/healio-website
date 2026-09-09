@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
+import { APPOINTMENT_BOOKING } from '@/lib/appointmentBooking';
 
 const CONFIRMATION_STORAGE_KEY = 'healio:potential-analysis-confirmation:v1';
 
@@ -48,7 +49,7 @@ const ConfirmationPage = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
-  const calendarUrl = "https://calendar.app.google/N1VP48fSdkHzjwQZ6";
+  const calendarUrl = APPOINTMENT_BOOKING.url;
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col items-center py-20 px-6">
@@ -146,8 +147,7 @@ const ConfirmationPage = () => {
           </div>
           
           <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-2 sm:p-4 overflow-hidden h-[700px] w-full max-w-4xl mx-auto">
-            <CalendlyEmbed
-              url="https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+            <AppointmentBooking
               placement="potential_confirmation"
               title={lang === 'en' ? 'Appointment calendar' : 'Kalender zur Terminvereinbarung'}
               className="h-full min-h-[660px] rounded-xl"

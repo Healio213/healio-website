@@ -5,7 +5,7 @@ export const CONSENT_SETTINGS_EVENT = 'healio:consent-settings';
 
 export const CONSENT_PURPOSES = Object.freeze([
   'analytics',
-  'calendly',
+  'google_calendar',
   'maps',
   'openai',
 ]);
@@ -14,7 +14,7 @@ const PURPOSE_SET = new Set(CONSENT_PURPOSES);
 const SOURCE_SET = new Set(['banner', 'settings', 'provider', 'external', 'unknown']);
 const EMPTY_PREFERENCES = Object.freeze({
   analytics: false,
-  calendly: false,
+  google_calendar: false,
   maps: false,
   openai: false,
 });

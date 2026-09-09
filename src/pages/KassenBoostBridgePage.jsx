@@ -3,12 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import CalendlyEmbed from '@/components/CalendlyEmbed';
+import AppointmentBooking from '@/components/CalendlyEmbed';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const KASSENBOOST_URL = 'https://kassenboost.de/?utm_source=healio&utm_medium=bridge&utm_campaign=kassenboost';
-const CALENDLY_URL = 'https://calendly.com/healio-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=25c990&utm_source=healio&utm_medium=kassenboost-bruecke&utm_campaign=termin';
 
 const KassenBoostBridgePage = () => {
   const { t } = useTranslation('kassenboost');
@@ -189,7 +188,7 @@ const KassenBoostBridgePage = () => {
               ))}
             </ul>
             <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-[#cceadf] bg-white">
-              <CalendlyEmbed url={CALENDLY_URL} placement="kassenboost_bridge" />
+              <AppointmentBooking placement="kassenboost_bridge" />
             </div>
           </div>
         </section>

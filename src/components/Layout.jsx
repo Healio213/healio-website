@@ -16,6 +16,7 @@ const Layout = () => {
     '/en/inpatient',
     '/kassenboost',
     '/en/kassenboost',
+    '/schwangerschaft',
   ]);
   const hideAppPromotion = pathname === '/'
     || pathname === '/en'
