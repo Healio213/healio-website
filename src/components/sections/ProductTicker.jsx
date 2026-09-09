@@ -31,16 +31,6 @@ const tickerSets = {
     { icon: HeartPulse, key: 'ticker.osteopathie' },
     { icon: PlayCircle, key: 'ticker.video' },
   ],
-  home: [
-    { icon: Zap, key: 'ticker.kassenBoost' },
-    { icon: ShieldCheck, key: 'ticker.privateCover' },
-    { icon: WalletCards, key: 'ticker.healthBudget' },
-    { icon: WalletCards, key: 'ticker.bav' },
-    { icon: HeartPulse, key: 'ticker.bkv' },
-    { icon: Users, key: 'ticker.bgm' },
-    { icon: Stethoscope, key: 'ticker.practiceNetwork' },
-    { icon: MessageCircle, key: 'ticker.personalService' },
-  ],
   leistungen: [
     { icon: ShieldCheck, key: 'ticker.threeAreas' },
     { icon: CheckCircle2, key: 'ticker.notEverything' },

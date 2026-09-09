@@ -20,9 +20,23 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Starker Schutz für Sie. Echter Mehrwert für Ihr Team.');
-assert.equal(en.hero.title, 'Strong protection for you. Real value for your team.');
-assert.equal(de.hero.titleAccent, 'Echter Mehrwert für Ihr Team.');
+assert.equal(de.hero.title, 'Gesundheit clever absichern. Privat und im Unternehmen.');
+assert.equal(en.hero.title, 'Smart health cover. Personal and at work.');
+assert.equal(de.hero.titleAccent, 'Privat und im Unternehmen.');
+assert.match(de.hero.description, /Krankenkassenbonus/);
+assert.equal(de.hero.switch.length, 3, 'Die Weiche im Hero hat genau drei Einstiege.');
+assert.deepEqual(
+  de.hero.switch.map((item) => item.routeKey),
+  ['leistungen', 'unternehmen', 'partner']
+);
+assert.deepEqual(en.hero.switch.map((item) => item.routeKey), de.hero.switch.map((item) => item.routeKey));
+assert.ok(de.hero.switch.every((item) => item.key && item.title && item.description && item.cta));
+assert.match(de.hero.switch[0].example, /3\.000 EUR/);
+assert.ok(de.hero.switch.slice(1).every((item) => !item.example), 'Die 3.000 EUR stehen nur als Beispiel in der Privat-Kachel.');
+assert.equal(de.ticker, undefined, 'Der Ticker ist von der Startseite entfernt.');
+assert.match(de.process.title, /Zuerst die richtige Kasse/);
+assert.match(de.process.detailsCta, /KassenBoost/);
+assert.doesNotMatch(JSON.stringify(de.hero) + JSON.stringify(de.process), /[\u2013\u2014]/, 'Keine Gedankenstriche in Hero und KassenBoost-Block.');
 assert.equal(de.products.items.length, 3);
 assert.deepEqual(
   de.products.items.map((item) => item.routeKey),
@@ -71,9 +85,11 @@ assert.match(homeHero, /object-\[72%_center\]/);
 assert.match(homeHero, /useScroll/);
 assert.match(homeHero, /useTransform/);
 assert.match(homeHero, /useReducedMotion/);
-assert.match(homeHero, /getPath\('leistungen'\)/);
-assert.match(homeHero, /getPath\('unternehmen'\)/);
-assert.match(homeHero, /hero\.secondaryCta/);
+assert.match(homeHero, /getPath\(item\.routeKey\)/);
+assert.match(homeHero, /hero\.switch/);
+assert.match(homeHero, /hero\.switchLabel/);
+assert.match(homeHero, /<motion\.nav/);
+assert.doesNotMatch(homeHero, /hero\.primaryCta|hero\.secondaryCta/);
 assert.doesNotMatch(homeHero, /hero\.bonusCheckCta|HighlightText/);
 assert.doesNotMatch(homeHero, /HealthPassHeroVisual|conceptOptions|HomeProtectionScene|HomeProtectionFallback|QuietProtectionHeroVisual/);
 assert.doesNotMatch(homeHero, /PrivateProtectionHeroVisual/);
@@ -84,7 +100,7 @@ assert.match(homeHero, /hero\.titleLead/);
 assert.match(homeHero, /hero\.titleAccent/);
 assert.match(homeHero, /radial-gradient\(ellipse_at_center/);
 assert.doesNotMatch(homeHero, /hero\.proof|proofIcons/);
-assert.match(productTicker, /home:[\s\S]*?ticker\.kassenBoost[\s\S]*?ticker\.bav[\s\S]*?ticker\.bkv/);
+assert.doesNotMatch(productTicker, /home: \[/);
 assert.doesNotMatch(homeHero, /\[overflow-wrap:anywhere\]/);
 assert.match(indexCss, /#root[\s\S]{0,160}width: 100%/);
 assert.match(indexCss, /overflow-x: clip/);
@@ -102,6 +118,9 @@ assert.doesNotMatch(insurancePathway, /iconMap|cardStyles/);
 assert.match(insurancePathway, /\{item\.cta\}/);
 assert.doesNotMatch(insurancePathway, /item\.detail/);
 assert.match(howHealioWorks, /id="so-funktioniert"/);
+assert.match(howHealioWorks, /getPath\('kassenboost'\)/);
+assert.match(howHealioWorks, /process\.detailsCta/);
+assert.doesNotMatch(howHealioWorks, /KASSENBOOST_COMPARE_URL/);
 assert.doesNotMatch(howHealioWorks, /healio-app-dashboard-card|appFeatures/);
 assert.match(footer, /\/images\/healio-app-dashboard-card\.webp/);
 assert.match(footer, /width="720"/);
@@ -149,7 +168,6 @@ const schemaMarkup = readText('src/lib/createSchemaMarkup.js');
 
 [
   'HomeHero',
-  'ProductTicker',
   'InsurancePathway',
   'HowHealioWorks',
   'HomeTrust',
@@ -159,7 +177,6 @@ const schemaMarkup = readText('src/lib/createSchemaMarkup.js');
 
 const funnelOrder = [
   '<HomeHero',
-  '<ProductTicker variant="home"',
   '<HowHealioWorks',
   '<InsurancePathway',
   '<HomeTrust',
@@ -172,7 +189,7 @@ funnelOrder.slice(1).forEach((component, index) => {
     `${funnelOrder[index]} muss vor ${component} stehen`
   );
 });
-assert.match(mainHomePage, /<ProductTicker variant="home"/);
+assert.doesNotMatch(mainHomePage, /ProductTicker/);
 assert.doesNotMatch(mainHomePage, /AmbulantBudgetFeature/);
 
 assert.doesNotMatch(

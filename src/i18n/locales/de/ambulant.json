@@ -3,9 +3,12 @@
     "eyebrow": "Ambulante Zusatzversicherung",
     "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Effektiv ab <highlight>0 EUR</highlight>.",
     "subtitle": "Warum weiter selbst zahlen? Sichere dir bis zu 3.000 EUR für Heilpraktiker, Brille und Vorsorge – ohne Wartezeit und in wenigen Minuten berechnet.",
-    "badgeEffective": "Beitrag bis zu 100 % ausgleichbar",
-    "badgeNoWait": "Ohne allgemeine Wartezeit",
-    "badgeTestResult": "Bis zu 100 % Erstattung",
+    "factsLabel": "Kurz erklärt",
+    "facts": [
+      "Erstattung versicherter Rechnungen, mit festen Grenzen je Leistungsbereich.",
+      "Bis zu 3.000 EUR insgesamt in zwei Jahren.",
+      "Du zahlst einen Versicherungsbeitrag. Ein möglicher Kassenbonus kann deine Belastung nachträglich senken."
+    ],
     "ctaCalculate": "Budget & Beitrag prüfen",
     "ctaHint": "1 Minute Orientierung · Den persönlichen Beitrag siehst du anschließend im Tarifrechner.",
     "ctaBonus": "Bonus sichern",

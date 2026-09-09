@@ -1,35 +1,92 @@
 {
   "hero": {
-    "title": "Strong protection for you. Real value for your team.",
-    "titleLead": "Strong protection for you.",
-    "titleAccent": "Real value for your team.",
-    "description": "Discover intelligent insurance solutions. We support you from personal protection to setting up a sustainable workplace pension – independently, digitally and always personally.",
-    "primaryCta": "Find personal protection",
-    "secondaryCta": "Explore business solutions"
+    "title": "Smart health cover. Personal and at work.",
+    "titleLead": "Smart health cover.",
+    "titleAccent": "Personal and at work.",
+    "description": "Healio helps you secure the right supplementary benefits and check whether your health fund bonus can finance part of the premium. Independent, digital and personal.",
+    "switchLabel": "Choose your path",
+    "switch": [
+      {
+        "key": "private",
+        "routeKey": "leistungen",
+        "title": "I'm an individual",
+        "description": "Outpatient, dental and hospital: more benefits than your fund pays.",
+        "example": "Example: up to EUR 3,000 in health budget over 2 years.",
+        "cta": "Choose cover"
+      },
+      {
+        "key": "employer",
+        "routeKey": "unternehmen",
+        "title": "I'm an employer",
+        "description": "Company pensions and health cover as a team benefit.",
+        "cta": "Explore company solutions"
+      },
+      {
+        "key": "practice",
+        "routeKey": "partner",
+        "title": "I run a practice",
+        "description": "Make treatment affordable for your patients.",
+        "cta": "Explore the partner programme"
+      }
+    ]
   },
   "seo": {
     "title": "Insurance for Individuals & Companies | Healio",
     "description": "Connect personal protection and workplace benefits with independent, digital and personal support – from supplementary cover to company pensions.",
-    "ogTitle": "Healio – strong protection and real value for your team",
-    "ogDescription": "Personal protection and workplace benefits, explained clearly and supported digitally and personally."
+    "ogTitle": "Healio: smart health cover, personal and at work",
+    "ogDescription": "Supplementary cover, health fund bonuses and workplace benefits, explained clearly and supported independently."
   },
   "products": {
     "title": "Which cover do you want to improve?",
     "description": "Go straight to outpatient, dental or hospital benefits.",
     "items": [
-      {"key":"ambulant","routeKey":"ambulant","label":"Outpatient","title":"More room in your health budget","description":"Benefits for naturopathy, osteopathy, vision aids and preventive care.","cta":"Explore the health budget"},
-      {"key":"dental","routeKey":"zahn","label":"Dental","title":"Make dental costs predictable","description":"Dental treatment, restorations and preventive care, depending on the plan.","cta":"Explore dental cover"},
-      {"key":"hospital","routeKey":"stationaer","label":"Hospital","title":"More choice in hospital","description":"Private room, specialist treatment and hospital choice, depending on the plan.","cta":"Explore hospital cover"}
+      {
+        "key": "ambulant",
+        "routeKey": "ambulant",
+        "label": "Outpatient",
+        "title": "More room in your health budget",
+        "description": "Benefits for naturopathy, osteopathy, vision aids and preventive care.",
+        "cta": "Explore the health budget"
+      },
+      {
+        "key": "dental",
+        "routeKey": "zahn",
+        "label": "Dental",
+        "title": "Make dental costs predictable",
+        "description": "Dental treatment, restorations and preventive care, depending on the plan.",
+        "cta": "Explore dental cover"
+      },
+      {
+        "key": "hospital",
+        "routeKey": "stationaer",
+        "label": "Hospital",
+        "title": "More choice in hospital",
+        "description": "Private room, specialist treatment and hospital choice, depending on the plan.",
+        "cta": "Explore hospital cover"
+      }
     ]
   },
   "process": {
-    "title": "The cheapest health insurer does not always win.",
-    "description": "KassenBoost compares contributions, achievable bonuses and benefits separately. You decide what matters to you.",
+    "title": "First the right health fund, then the right extra cover.",
+    "description": "KassenBoost compares contributions, bonuses and benefits of health funds, free and without contact details. Healio then checks which supplementary cover suits you and whether your fund bonus can offset part of the premium.",
     "steps": [
-      {"number":"01","title":"Set the context","description":"Your current insurer, contribution, region and daily life form the basis."},
-      {"number":"02","title":"Compare benefits","description":"Contributions, realistic bonuses and relevant benefits stay clearly separated."},
-      {"number":"03","title":"Make your choice","description":"Choose the lower contribution, stronger bonus or benefits that matter more to you."}
-    ]
+      {
+        "number": "01",
+        "title": "Compare funds",
+        "description": "KassenBoost shows contributions, achievable bonuses and benefits separately. You decide whether switching pays off."
+      },
+      {
+        "number": "02",
+        "title": "Choose cover",
+        "description": "Outpatient, dental or hospital: Healio explains benefits, limits and costs before you decide."
+      },
+      {
+        "number": "03",
+        "title": "Use your bonus",
+        "description": "You pay the premium yourself. If you meet your fund's bonus conditions, the bonus can offset part of it."
+      }
+    ],
+    "detailsCta": "How KassenBoost works"
   },
   "budget": {
     "prefix": "Up to",
@@ -48,17 +105,38 @@
     "description": "Keep your budget, receipts and policies organised in the Healio app. Reach us personally whenever you have questions.",
     "appScreenshotAlt": "Healio app dashboard with policy and health budget overview",
     "items": [
-      {"title":"Registered broker","description":"Insurance broker licensed under section 34d (1) GewO."},
-      {"title":"Understand first","description":"We explain benefits, limits and costs before you decide."},
-      {"title":"Support afterwards","description":"We continue to help with policies, budgets and receipts after sign-up."}
+      {
+        "title": "Registered broker",
+        "description": "Insurance broker licensed under section 34d (1) GewO."
+      },
+      {
+        "title": "Understand first",
+        "description": "We explain benefits, limits and costs before you decide."
+      },
+      {
+        "title": "Support afterwards",
+        "description": "We continue to help with policies, budgets and receipts after sign-up."
+      }
     ]
   },
   "audiences": {
     "title": "Healio for companies and practices.",
     "description": "Corporate benefits and partner services follow their own dedicated paths.",
     "items": [
-      {"routeKey":"unternehmen","label":"For companies","title":"Benefits as one coordinated system.","description":"Bring pensions, health cover and employee benefits together clearly.","cta":"Explore company solutions"},
-      {"routeKey":"partner","label":"For practices","title":"Help make treatment more affordable.","description":"Practices provide neutral information. Healio reviews, advises and arranges cover.","cta":"Explore the partner programme"}
+      {
+        "routeKey": "unternehmen",
+        "label": "For companies",
+        "title": "Benefits as one coordinated system.",
+        "description": "Bring pensions, health cover and employee benefits together clearly.",
+        "cta": "Explore company solutions"
+      },
+      {
+        "routeKey": "partner",
+        "label": "For practices",
+        "title": "Help make treatment more affordable.",
+        "description": "Practices provide neutral information. Healio reviews, advises and arranges cover.",
+        "cta": "Explore the partner programme"
+      }
     ]
   },
   "finalCta": {
@@ -205,17 +283,6 @@
   "testimonials": {
     "title": "Real Customers, Real Savings",
     "subtitle": "Satisfied users share their experiences with the Healio concept."
-  },
-  "ticker": {
-    "ariaLabel": "Healio services at a glance",
-    "kassenBoost": "KassenBoost: compare contributions, bonuses and benefits",
-    "privateCover": "Personal cover: outpatient, dental, hospital and pet",
-    "healthBudget": "Up to EUR 3,000 in health budget over 2 years",
-    "bav": "Company pensions: build long-term provision",
-    "bkv": "Company health insurance: benefits for the team",
-    "bgm": "Coordinate workplace wellbeing and prevention",
-    "practiceNetwork": "Partner network for practices and health professionals",
-    "personalService": "Independent, digital and personal support"
   },
   "insurance": {
     "title": "Our Insurance Solutions",

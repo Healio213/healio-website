@@ -31,11 +31,11 @@ assert.match(i18n, /kassenboost: enKassenBoost/);
 
 assert.equal(
   de.privacy.confirmation,
-  'Aus deinem KassenBoost-Vergleich wurde nichts an Healio übertragen. Was du im Gespräch teilst, entscheidest du.',
+  'Keine automatische Datenübertragung an Healio. Du entscheidest, was du für eine Beratung teilst.',
 );
 assert.equal(
   en.privacy.confirmation,
-  'Nothing from your KassenBoost comparison was transferred to Healio. You decide what to share in a call.',
+  'No automatic data transfer to Healio. You decide what to share for advice.',
 );
 assert.equal(de.seo.ogImageAlt, 'KassenBoost und Healio: vergleichen, Bonus nutzen, absichern');
 assert.equal(en.seo.ogImageAlt, 'KassenBoost and Healio: compare, use your bonus, get covered');
@@ -49,10 +49,11 @@ assert.match(page, /ogImage="https:\/\/healio\.de\/images\/kassenboost-bridge-og
 assert.equal((page.match(/kassenboost\.de/gi) || []).length, 1, 'Die Brückenseite darf genau einen externen KassenBoost-Vergleichs-CTA enthalten.');
 assert.match(page, /getPath\('leistungen'\)/);
 assert.match(page, /employer\.ctaHref/);
-const deWithoutLabelledExample = JSON.stringify(de).replace(de.bonus.exampleLabel, '');
-const enWithoutLabelledExample = JSON.stringify(en).replace(en.bonus.exampleLabel, '');
+const deWithoutLabelledExample = JSON.stringify(de).replace(de.bonus.exampleLabel, '').replace(de.bonus.sourceLabel, '');
+const enWithoutLabelledExample = JSON.stringify(en).replace(en.bonus.exampleLabel, '').replace(en.bonus.sourceLabel, '');
+const pageWithoutSource = page.replace('https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm', '');
 assert.doesNotMatch(
-  `${page}\n${deWithoutLabelledExample}\n${enWithoutLabelledExample}`,
+  `${pageWithoutSource}\n${deWithoutLabelledExample}\n${enWithoutLabelledExample}`,
   /IKK(?:\s|\u00a0|-)?classic|IKK Bonus|700\s*EUR/i,
 );
 

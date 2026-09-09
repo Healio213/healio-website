@@ -3,9 +3,12 @@
     "eyebrow": "Outpatient supplementary insurance",
     "title": "Up to <highlight>EUR 3,000</highlight> for what keeps you well.",
     "subtitle": "Alternative medicine, osteopathy, glasses and preventive care: find the cover that turns out-of-pocket costs into a real health budget.",
-    "badgeEffective": "Up to 100% of the premium may be offset",
-    "badgeNoWait": "No general waiting period",
-    "badgeTestResult": "Up to 100% reimbursement",
+    "factsLabel": "In short",
+    "facts": [
+      "Reimbursement of insured invoices, with fixed limits per benefit area.",
+      "Up to EUR 3,000 in total over two years.",
+      "You pay an insurance premium. A possible health fund bonus can lower your net cost afterwards."
+    ],
     "ctaCalculate": "Check budget & premium",
     "ctaHint": "One-minute orientation · see your personal premium in the tariff calculator afterwards. German form.",
     "ctaBonus": "Claim your bonus",

@@ -2,11 +2,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowDown, CheckCircle, Euro } from 'lucide-react';
+import { ArrowDown, CheckCircle } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 
 const AmbulantHero = ({ fromBonusTopic = false }) => {
   const { t } = useTranslation('ambulant');
+  const facts = t('hero.facts', { returnObjects: true });
+  const factList = Array.isArray(facts) ? facts : [];
 
   return (
     <section className="relative flex min-h-[82svh] items-center overflow-hidden" aria-labelledby="hero-heading">
@@ -59,25 +61,27 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             <p role="note" className="mb-8 max-w-2xl text-sm leading-6 text-slate-200 md:mb-10">
               Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
             </p>
-          ) : <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-8 flex max-w-3xl flex-wrap items-center justify-start gap-2 md:mb-10 md:gap-3"
-          >
-            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
-              <Euro className="w-4 h-4 text-healio-primary" />
-              <span className="text-sm text-white font-medium">{t('hero.badgeEffective')}</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
-              <CheckCircle className="w-4 h-4 text-healio-primary" />
-              <span className="text-sm text-white font-medium">{t('hero.badgeNoWait')}</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-home-midnight/75 px-4 py-2 backdrop-blur-md">
-              <CheckCircle className="w-4 h-4 text-healio-primary" />
-              <span className="text-sm text-white font-medium">{t('hero.badgeTestResult')}</span>
-            </div>
-          </motion.div>}
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mb-8 max-w-2xl rounded-2xl border border-white/15 bg-home-midnight/75 p-4 backdrop-blur-md md:mb-10 md:p-5"
+              data-healio-ambulant="hero-facts"
+            >
+              <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint-active">
+                {t('hero.factsLabel')}
+              </p>
+              <ul className="mt-3 grid gap-2.5">
+                {factList.map((fact) => (
+                  <li key={fact} className="flex items-start gap-2.5 text-sm leading-6 text-white md:text-[15px]">
+                    <CheckCircle className="mt-1 h-4 w-4 shrink-0 text-healio-primary" aria-hidden="true" />
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

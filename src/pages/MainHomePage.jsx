@@ -7,7 +7,6 @@ import HowHealioWorks from '@/components/home/HowHealioWorks';
 import HomeTrust from '@/components/home/HomeTrust';
 import AudienceLinks from '@/components/home/AudienceLinks';
 import HomeFinalCTA from '@/components/home/HomeFinalCTA';
-import ProductTicker from '@/components/sections/ProductTicker';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
 
@@ -50,7 +49,6 @@ const MainHomePage = () => {
       />
       <article className="w-full overflow-hidden bg-white">
         <HomeHero />
-        <ProductTicker variant="home" />
         <HowHealioWorks />
         <InsurancePathway />
         <HomeTrust />

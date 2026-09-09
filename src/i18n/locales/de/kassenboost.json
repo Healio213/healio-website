@@ -1,63 +1,105 @@
 {
   "seo": {
-    "title": "Kassenbonus nutzen: Von KassenBoost zu Healio",
-    "description": "Du hast bei KassenBoost verglichen? Healio zeigt dir, wie du deinen Kassenbonus als Geld auszahlen lässt oder verdreifacht in Zusatzschutz übersetzt. Kostenlos, unabhängig, ohne Datenübergabe.",
-    "ogTitle": "Dein Kassen-Check ist gemacht. Jetzt hol mehr heraus.",
-    "ogDescription": "Geldbonus oder dreifacher Zuschuss für deine Zusatzversicherung: Healio rechnet mit dir durch, was dein Bonus wirklich kann.",
+    "title": "Kassenbonus für deinen Zusatzschutz nutzen | Healio",
+    "description": "Wähle ambulanten, Zahn- oder Klinikschutz. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Auf Wunsch berät dich Healio kostenlos.",
+    "ogTitle": "Dein Bonus. Dein passender Zusatzschutz.",
+    "ogDescription": "Zusatzschutz selbst entdecken und verstehen, wie dein Kassenbonus beim Beitrag helfen kann.",
     "ogImageAlt": "KassenBoost und Healio: vergleichen, Bonus nutzen, absichern"
   },
   "hero": {
     "eyebrow": "KassenBoost × Healio",
-    "title": "Dein Kassen-Check ist gemacht. Jetzt hol mehr heraus.",
-    "description": "Bei KassenBoost hast du neutral verglichen, was deine Kasse kann: beim Beitrag und beim Bonus. Healio ist das Maklerhaus dahinter. Wenn du willst, übersetzen wir dein Bonuspotenzial in echten Zusatzschutz. Kostenlos und unverbindlich.",
-    "cta": "Kostenlosen Termin sichern",
-    "ctaHint": "45 Minuten, Google Meet",
-    "secondaryCta": "Noch nicht verglichen? Zum KassenBoost-Check",
-    "externalNote": "Der Vergleich läuft auf der eigenständigen Website von KassenBoost. Deine Angaben bleiben dort und werden nicht automatisch an Healio übermittelt."
+    "title": "Dein Bonus kann mehr für deine Gesundheit tun.",
+    "description": "Ob mit oder ohne KassenBoost-Check: Finde hier deinen passenden Zusatzschutz. Der Bonus deiner Krankenkasse kann dessen Beitrag ganz oder teilweise ausgleichen. Bis zu 100 % sind möglich, wenn Bonus und Tarif zusammenpassen.",
+    "cta": "Passenden Schutz wählen",
+    "ctaHint": "Selbst informieren · Beratung auf Wunsch"
+  },
+  "explainer": {
+    "title": "In drei Sätzen",
+    "items": [
+      {
+        "label": "Was bringt KassenBoost?",
+        "text": "KassenBoost zeigt dir kostenlos und ohne Kontaktdaten, welche Krankenkasse dir bei Beitrag, Bonus und Leistungen mehr bringt."
+      },
+      {
+        "label": "Was übernimmt Healio?",
+        "text": "Healio berät dich zum passenden Zusatzschutz für ambulant, Zahn oder Klinik und prüft, ob dein Kassenbonus einen Teil des Beitrags ausgleichen kann."
+      },
+      {
+        "label": "Was zahle und erledige ich selbst?",
+        "text": "Den Versicherungsbeitrag zahlst du selbst. Bonus oder Zuschuss beantragst du mit deinen Nachweisen bei deiner Krankenkasse."
+      }
+    ]
+  },
+  "paths": {
+    "eyebrow": "Dein nächster Schritt",
+    "title": "Wie möchtest du weitermachen?",
+    "description": "Beides ist kostenlos. Du kannst auch erst vergleichen und dich später beraten lassen.",
+    "compare": {
+      "title": "Selbst vergleichen",
+      "description": "Krankenkasse bei KassenBoost vergleichen: Beitrag, Bonus und Leistungen getrennt, ohne Kontaktdaten.",
+      "cta": "Zum KassenBoost-Vergleich",
+      "note": "Externe Website. Vergleichsdaten werden nicht an Healio übertragen."
+    },
+    "advice": {
+      "title": "Persönlich beraten lassen",
+      "description": "45 Minuten per Google Meet. Wir rechnen mit dir nach, welcher Zusatzschutz passt und was dein Bonus davon ausgleichen kann.",
+      "cta": "Termin auswählen"
+    }
   },
   "privacy": {
     "eyebrow": "Dein Vergleich bleibt privat",
-    "title": "Keine versteckte Datenbrücke.",
-    "confirmation": "Aus deinem KassenBoost-Vergleich wurde nichts an Healio übertragen. Was du im Gespräch teilst, entscheidest du.",
+    "title": "Deine Vergleichsdaten bleiben bei KassenBoost.",
+    "confirmation": "Keine automatische Datenübertragung an Healio. Du entscheidest, was du für eine Beratung teilst.",
     "listLabel": "Nicht an Healio übertragene Angaben",
     "details": [
       "Keine Krankenkasse und kein Vergleichsergebnis",
       "Keine Region, kein Einkommen und keine persönlichen Präferenzen",
       "Keine Gesundheitsangaben und keine Entscheidung für oder gegen ein Angebot"
-    ]
+    ],
+    "summary": "Welche Daten bleiben getrennt?"
   },
   "bonus": {
     "eyebrow": "So arbeitet dein Kassenbonus",
-    "title": "Geld auszahlen lassen. Oder verdreifacht absichern.",
-    "description": "Viele Kassen belohnen Vorsorge und Sport doppelt: Du kannst deinen Bonus als Geld nehmen oder als zweckgebundenen Zuschuss in dreifacher Höhe, zum Beispiel für den Jahresbeitrag einer privaten Zusatzversicherung. Genau hier setzt Healio an.",
+    "title": "So kann dein Bonus den Beitrag ausgleichen.",
+    "description": "Du zahlst den Versicherungsbeitrag selbst. Deine Krankenkasse zahlt den erreichten Geldbonus oder erstattet einen zweckgebundenen Zuschuss nach ihren Bedingungen. Es gibt keine automatische Verrechnung mit der Versicherung.",
     "exampleLabel": "Belegtes Beispiel, IKK classic, Bonusjahr 2026",
-    "example": "Jede regelmäßige Aktivität wie Fitnessstudio oder Sportverein bringt dort 25 EUR Geldbonus oder zählt als Zuschuss dreifach mit 75 EUR. Private Zusatzversicherungen stehen ausdrücklich in der Liste der Zuschussleistungen, und die Teilnahmebedingungen halten fest: einen Maximalbetrag gibt es nicht.",
-    "note": "Beträge und Bedingungen gelten je Kasse und Bonusjahr. Ausgezahlt wird beim Zuschuss höchstens die Höhe deiner nachgewiesenen Kosten. Was bei deiner Kasse gilt, prüfen wir gemeinsam im Gespräch."
+    "example": "Angenommen, du erreichst 100 EUR Geldbonus oder alternativ 300 EUR zweckgebundenen Zuschuss. Bei angenommenen 25 EUR Monatsbeitrag kostet dein Zusatzschutz 300 EUR im Jahr. Der Geldbonus gleicht davon 100 EUR aus; 200 EUR zahlst du selbst. Der Zuschuss kann die 300 EUR vollständig ausgleichen, wenn dein Beitrag förderfähig ist und du die Kosten nachweist.",
+    "note": "Rechenbeispiel, kein Tarifangebot und kein garantierter Bonus. Geldbonus und Zuschuss sind Alternativen, werden also nicht addiert. Aktivitäten, förderfähige Kosten und Bedingungen unterscheiden sich je Kasse und Bonusjahr; erstattet wird höchstens der nachgewiesene Aufwand.",
+    "sourceLabel": "Bedingungen im IKK-classic-Bonusprogramm"
   },
   "protection": {
     "eyebrow": "Wofür sich der Bonus lohnt",
-    "title": "Zusatzschutz, der zu dir passt.",
-    "description": "Zusammen mit dem Kassenbonus kann so Schritt für Schritt ein Gesundheitsbudget von bis zu 3.000 EUR in 2 Jahren entstehen. Abhängig von Kasse, Tarif und den Leistungen, die du wirklich nutzt. Healio ordnet drei Schutzbereiche unabhängig ein.",
+    "title": "Was möchtest du absichern?",
+    "description": "Wähle den Bereich, der dir wichtig ist. Du kannst Leistungen und Tarife direkt ansehen – ein Termin ist dafür nicht nötig.",
     "items": [
       {
         "title": "Ambulant",
-        "description": "Mehr Spielraum etwa für Naturheilkunde, Osteopathie, Sehhilfen oder zusätzliche Vorsorge, abhängig vom gewählten Tarif."
+        "description": "Naturheilkunde, Osteopathie, Sehhilfen und Vorsorge. Bis zu 3.000 EUR Tarifleistungen in 2 Jahren sind im passenden ambulanten Tarif möglich; Umfang und Erstattung richten sich nach dessen Bedingungen.",
+        "routeKey": "ambulant",
+        "image": "/images/friendly-icons/medical-stethoscope.webp",
+        "cta": "Ambulanten Schutz ansehen"
       },
       {
         "title": "Zahn",
-        "description": "Eigenanteile bei Behandlung und Zahnersatz planbarer machen und Bedingungen vor dem Abschluss klar verstehen."
+        "description": "Eigenanteile bei Behandlung und Zahnersatz planbarer machen und Bedingungen vor dem Abschluss klar verstehen.",
+        "routeKey": "zahn",
+        "image": "/images/friendly-icons/dental-shield.webp",
+        "cta": "Zahnschutz ansehen"
       },
       {
         "title": "Stationär",
-        "description": "Mehr Wahl bei Arzt, Klinik und Unterbringung, wenn dir dieser Freiraum im Krankenhaus wichtig ist."
+        "description": "Mehr Wahl bei Arzt, Klinik und Unterbringung, wenn dir dieser Freiraum im Krankenhaus wichtig ist.",
+        "routeKey": "stationaer",
+        "image": "/images/friendly-icons/hospital-room.webp",
+        "cta": "Klinikschutz ansehen"
       }
     ],
     "cta": "Zusatzschutz bei Healio verstehen"
   },
   "termin": {
-    "eyebrow": "Dein nächster Schritt",
-    "title": "Sprich mit uns über dein Ergebnis.",
-    "description": "Such dir direkt einen Termin aus: 45 Minuten, Google Meet. Bring dein KassenBoost-Ergebnis mit, dann rechnen wir konkret durch, welcher Weg sich für dich lohnt.",
+    "eyebrow": "Beratung auf Wunsch",
+    "title": "Noch unsicher? Wir rechnen mit dir nach.",
+    "description": "Wenn du Unterstützung möchtest: 45 Minuten, Google Meet, kostenlos und unverbindlich. Ein KassenBoost-Ergebnis kannst du mitbringen – ein vorheriger Check ist nicht nötig.",
     "transparency": [
       "Beratung und Vermittlung kosten dich nichts. Bei einem Abschluss erhält Healio eine Vergütung vom Versicherer.",
       "Der KassenBoost-Vergleich bleibt davon getrennt. Kein Ranking dort wird durch Vergütung beeinflusst.",
@@ -70,5 +112,26 @@
     "description": "Arbeitgeber können KassenBoost freiwillig als Orientierung anbieten. Individuelle Angaben, Ergebnisse und Entscheidungen bleiben privat. Betriebliche Vorsorge gestaltet Healio getrennt davon.",
     "cta": "Zum Arbeitgeberkonzept",
     "ctaHref": "/unternehmen#healio-belegschaft"
+  },
+  "faq": {
+    "title": "Häufige Fragen vor deiner Entscheidung",
+    "items": [
+      {
+        "question": "Muss ich dafür meine Krankenkasse wechseln?",
+        "answer": "Nein. Du kannst Zusatzschutz auch bei deiner bisherigen Krankenkasse wählen. Ob und in welcher Höhe sie einen Bonus oder Zuschuss zahlt, hängt von ihrem Bonusprogramm und deinen nachgewiesenen Aktivitäten ab."
+      },
+      {
+        "question": "Was passiert, wenn mein Bonus kleiner ist als der Beitrag?",
+        "answer": "Den verbleibenden Beitrag zahlst du selbst. Du schuldest der Versicherung den vollen Beitrag unabhängig vom Bonus. Ein Bonus ist nicht garantiert und wird nicht automatisch mit deinem Versicherungsbeitrag verrechnet."
+      },
+      {
+        "question": "Wer macht was – KassenBoost oder Healio?",
+        "answer": "KassenBoost bietet den Krankenkassenvergleich. Healio ist das Maklerhaus dahinter und berät sowie vermittelt Zusatzversicherungen. Beratung und Vermittlung kosten dich nichts; bei einem Abschluss erhält Healio eine Vergütung vom Versicherer. Der Vergleich und sein Ranking bleiben davon getrennt."
+      },
+      {
+        "question": "Erhält Healio meine Angaben aus dem Vergleich?",
+        "answer": "Nein, Angaben aus dem KassenBoost-Vergleich werden nicht automatisch an Healio übertragen. Für eine Beratung entscheidest du selbst, was du mitteilst. Ein Arbeitgeber erhält keine individuellen Vergleichsangaben, Ergebnisse oder Entscheidungen."
+      }
+    ]
   }
 }

@@ -1,5 +1,8 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 const stepVisuals = [
@@ -10,6 +13,7 @@ const stepVisuals = [
 
 const HowHealioWorks = () => {
   const { t } = useTranslation('home');
+  const { getPath } = useLanguage();
   const steps = t('process.steps', { returnObjects: true });
 
   return (
@@ -50,6 +54,16 @@ const HowHealioWorks = () => {
             );
           })}
         </ol>
+
+        <div className="relative mt-8">
+          <Link
+            to={getPath('kassenboost')}
+            className="home-focus inline-flex items-center gap-1.5 font-display text-sm font-extrabold text-emerald-800 underline decoration-emerald-800/30 decoration-2 underline-offset-4 transition hover:text-[#0C2A21]"
+          >
+            {t('process.detailsCta')}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </section>
   );
