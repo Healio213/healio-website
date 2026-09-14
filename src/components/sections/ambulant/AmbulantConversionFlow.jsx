@@ -17,6 +17,7 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
+import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 
 const COPY = {
   de: {
@@ -65,8 +66,12 @@ const COPY = {
       ledgerHint: 'Vier klar getrennte Leistungstöpfe · jeweils innerhalb der Tarifbedingungen',
       examplePrice: 'Veröffentlichter SDK-Orientierungswert',
       perMonth: '/ Monat',
+      overviewTitle: 'Alle vier Stufen auf einen Blick',
+      overviewTier: 'Stufe',
+      overviewBudget: 'Budget in 2 Jahren',
+      overviewPrice: 'Orientierungsbeitrag',
       calculatorPrice: 'Persönlichen Beitrag im Rechner sehen',
-      calculatorHandoff: 'Deine Auswahl: Ambulant {{level}} ({{code}}). Wähle diese Stufe im SDK-Rechner erneut. Dort siehst du deinen persönlichen Beitrag.',
+      calculatorHandoff: 'Im Rechner wählst du dieselbe Stufe: Ambulant {{level}} ({{code}}). Dann siehst du deinen persönlichen Beitrag.',
       priceNote: 'Die veröffentlichten Orientierungswerte ersetzen kein persönliches Angebot. Dein Beitrag hängt insbesondere von Eintrittsalter, Gesundheitsangaben und Tarifstufe ab.',
       pots: {
         vision: { label: 'Sehhilfen', detail: 'Brille & Kontaktlinsen' },
@@ -190,8 +195,12 @@ const COPY = {
       ledgerHint: 'Four separate benefit pots · each subject to the policy terms',
       examplePrice: 'Published SDK orientation value',
       perMonth: '/ month',
+      overviewTitle: 'All four tiers at a glance',
+      overviewTier: 'Tier',
+      overviewBudget: 'Budget over 2 years',
+      overviewPrice: 'Orientation premium',
       calculatorPrice: 'See your personal premium in the calculator',
-      calculatorHandoff: 'Your selection: Ambulant {{level}} ({{code}}). Select this tier again in the SDK calculator to see your personal premium. The calculator is in German.',
+      calculatorHandoff: 'In the calculator you pick the same tier: Ambulant {{level}} ({{code}}). Then you see your personal premium. The calculator is in German.',
       priceNote: 'Published orientation values do not replace a personal quote. Your premium depends in particular on entry age, health information and the selected tariff.',
       pots: {
         vision: { label: 'Vision aids', detail: 'Glasses & contact lenses' },
@@ -482,6 +491,46 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               </div>
             </div>
           </div>
+
+          <div className="mt-6 overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white">
+            <p className="border-b border-slate-200 bg-slate-50 px-5 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
+              {copy.tiers.overviewTitle}
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[34rem] border-collapse text-left">
+                <caption className="sr-only">{copy.tiers.overviewTitle}</caption>
+                <thead>
+                  <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
+                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.refund}</th>
+                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
+                    <th scope="col" className="px-5 py-3 text-right sm:px-6">{copy.tiers.overviewPrice}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {TIERS.map((item) => (
+                    <tr
+                      key={item.code}
+                      aria-current={item.id === tier.id ? 'true' : undefined}
+                      className={`border-b border-slate-100 text-sm last:border-b-0 ${item.id === tier.id ? 'bg-emerald-50/70' : ''}`}
+                    >
+                      <th scope="row" className="px-5 py-3.5 font-display text-base font-extrabold text-home-midnight sm:px-6">
+                        Ambulant {item.id} · {item.code}
+                      </th>
+                      <td className="px-5 py-3.5 text-home-slate sm:px-6">{item.refund}</td>
+                      <td className="px-5 py-3.5 text-home-slate sm:px-6">{euro.format(item.budget)}</td>
+                      <td className="whitespace-nowrap px-5 py-3.5 text-right font-display font-extrabold text-home-midnight sm:px-6">
+                        {monthlyEuro.format(item.price)} <span className="text-xs font-semibold text-slate-500">{copy.tiers.perMonth}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="border-t border-slate-100 px-5 py-3 text-xs leading-5 text-slate-500 sm:px-6">{copy.tiers.priceNote}</p>
+          </div>
+
+          <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-6 rounded-[1.6rem] border border-slate-200 bg-white" />
         </div>
       </section>
 

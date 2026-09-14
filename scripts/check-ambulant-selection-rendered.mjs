@@ -68,7 +68,7 @@ try {
     assert.equal(current.annual, annual);
     assert(current.budget.includes(budget), `${code}: benefit budget must follow the selection.`);
     assert.equal(current.potential, initial.potential, 'Changing tariff must preserve the activity selection.');
-    assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('erneut')), 'Every provider CTA must explain which tier to choose again.');
+    assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every provider CTA must explain which tier to choose again.');
     assert.equal(current.tariffsParam, '', 'Do not invent undocumented provider tariff identifiers.');
   }
 
@@ -91,7 +91,7 @@ try {
   await choose('AP7');
   const english = await page.$eval('#bonus-calculator', (node) => node.textContent);
   assert(english.includes('AP7') && english.includes('23.10') && english.includes('2,000'));
-  assert(english.includes('Select this tier again') && english.includes('German'));
+  assert(english.includes('pick the same tier') && english.includes('German'));
 
   for (const width of [390, 320]) {
     await page.setViewport({ width, height: 740 });
