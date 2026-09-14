@@ -127,7 +127,7 @@ try {
     amount: '1.155 EUR',
     cta: 'Zahn-Check starten',
   });
-  assert.match(germanDentalBonus.cardText, /Aktiv \+ Schwangerschaft · passende Nachweise · anerkannte Eigenkosten/);
+  assert.match(germanDentalBonus.cardText, /Belegter Höchstwert 2026 · passende Nachweise · anerkannte Eigenkosten/);
   assert.match(germanDentalBonus.cardText, /tatsächlich erreichbare.*hängt von den aktuellen Bonusbedingungen ab/i);
   assert.equal(germanDentalBonus.ctaHref, '#zahn-check', 'The German dental bonus CTA must keep opening the dental check.');
 
@@ -136,7 +136,7 @@ try {
     amount: '€1,155',
     cta: 'Start the dental check',
   });
-  assert.match(englishDentalBonus.cardText, /Active \+ pregnancy · suitable evidence · recognised out-of-pocket costs/);
+  assert.match(englishDentalBonus.cardText, /Documented 2026 maximum · suitable evidence · recognised out-of-pocket costs/);
   assert.match(englishDentalBonus.cardText, /actually available depends on the current bonus terms/i);
   assert.equal(englishDentalBonus.ctaHref, '#zahn-check', 'The English dental bonus CTA must keep opening the dental check.');
 

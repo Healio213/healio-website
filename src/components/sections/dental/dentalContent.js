@@ -281,7 +281,7 @@ const de = {
     stamp: 'Dieser Zuschuss ist möglich',
     amount: '1.155 EUR',
     question: 'Wie viel davon holst du raus?',
-    stampLabel: 'Aktiv + Schwangerschaft · passende Nachweise · anerkannte Eigenkosten',
+    stampLabel: 'Belegter Höchstwert 2026 · passende Nachweise · anerkannte Eigenkosten',
     condition: 'Beispielwert. Der tatsächlich erreichbare Zuschuss hängt von den aktuellen Bonusbedingungen ab.',
   },
   process: {
@@ -592,7 +592,7 @@ const en = {
     stamp: 'This subsidy is possible',
     amount: '€1,155',
     question: 'How much of it can you unlock?',
-    stampLabel: 'Active + pregnancy · suitable evidence · recognised out-of-pocket costs',
+    stampLabel: 'Documented 2026 maximum · suitable evidence · recognised out-of-pocket costs',
     condition: 'Illustrative example. The subsidy actually available depends on the current bonus terms.',
   },
   process: {
