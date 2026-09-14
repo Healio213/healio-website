@@ -41,7 +41,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className="mb-5 max-w-4xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-lg sm:text-5xl md:mb-7 lg:text-7xl"
+            className={`mb-5 max-w-4xl font-display ${fromBonusTopic ? 'text-4xl' : 'text-[clamp(1.75rem,9vw,2.25rem)]'} font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-lg sm:text-5xl md:mb-7 lg:text-7xl`}
           >
             <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>
@@ -57,30 +57,10 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
               : t('hero.subtitle')}
           </motion.p>
 
-          {fromBonusTopic ? (
+          {fromBonusTopic && (
             <p role="note" className="mb-8 max-w-2xl text-sm leading-6 text-slate-200 md:mb-10">
               Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
             </p>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mb-8 max-w-2xl rounded-2xl border border-white/15 bg-home-midnight/75 p-4 backdrop-blur-md md:mb-10 md:p-5"
-              data-healio-ambulant="hero-facts"
-            >
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint-active">
-                {t('hero.factsLabel')}
-              </p>
-              <ul className="mt-3 grid gap-2.5">
-                {factList.map((fact) => (
-                  <li key={fact} className="flex items-start gap-2.5 text-sm leading-6 text-white md:text-[15px]">
-                    <CheckCircle className="mt-1 h-4 w-4 shrink-0 text-healio-primary" aria-hidden="true" />
-                    <span>{fact}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
           )}
 
           <motion.div
@@ -100,6 +80,28 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
               {fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}
             </p>
           </motion.div>
+
+          {!fromBonusTopic && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-6 max-w-2xl rounded-2xl border border-white/15 bg-home-midnight/75 p-4 backdrop-blur-md md:mt-8 md:p-5"
+              data-healio-ambulant="hero-facts"
+            >
+              <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint-active">
+                {t('hero.factsLabel')}
+              </p>
+              <ul className="mt-3 grid gap-2.5">
+                {factList.map((fact) => (
+                  <li key={fact} className="flex items-start gap-2.5 text-sm leading-6 text-white md:text-[15px]">
+                    <CheckCircle className="mt-1 h-4 w-4 shrink-0 text-healio-primary" aria-hidden="true" />
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

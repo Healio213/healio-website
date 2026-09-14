@@ -88,7 +88,7 @@ try {
   assert.equal(ordinary.calculatorControls, 1, 'Der normale Bonusrechner muss erhalten bleiben.');
   assert(ordinary.bonusLinks > 0, 'Der normale KassenBoost-Anschluss muss erhalten bleiben.');
   assert.equal(ordinary.heroTitle, 'Dein 3.000 EUR Gesundheitsbudget. Effektiv ab 0 EUR.', 'Der allgemeine Hero darf durch den Herkunftszweig nicht neu getextet werden.');
-  assert.match(ordinary.heroText, /Warum weiter selbst zahlen\? Sichere dir bis zu 3\.000 EUR für Heilpraktiker, Brille und Vorsorge – ohne Wartezeit und in wenigen Minuten berechnet\./);
+  assert.match(ordinary.heroText, /Heilpraktiker, Brille und Vorsorge absichern\. 0 EUR effektiv sind möglich, wenn dein anerkannter Kassenbonus den selbst gezahlten Beitrag vollständig ausgleicht\./);
   assert.deepEqual(ordinary.heroTargets, ['#budget-kompass']);
   assert.equal(ordinary.heroNote, '');
 

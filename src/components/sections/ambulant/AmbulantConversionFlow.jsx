@@ -66,6 +66,7 @@ const COPY = {
       examplePrice: 'Veröffentlichter SDK-Orientierungswert',
       perMonth: '/ Monat',
       calculatorPrice: 'Persönlichen Beitrag im Rechner sehen',
+      calculatorHandoff: 'Deine Auswahl: Ambulant {{level}} ({{code}}). Wähle diese Stufe im SDK-Rechner erneut. Dort siehst du deinen persönlichen Beitrag.',
       priceNote: 'Die veröffentlichten Orientierungswerte ersetzen kein persönliches Angebot. Dein Beitrag hängt insbesondere von Eintrittsalter, Gesundheitsangaben und Tarifstufe ab.',
       pots: {
         vision: { label: 'Sehhilfen', detail: 'Brille & Kontaktlinsen' },
@@ -190,6 +191,7 @@ const COPY = {
       examplePrice: 'Published SDK orientation value',
       perMonth: '/ month',
       calculatorPrice: 'See your personal premium in the calculator',
+      calculatorHandoff: 'Your selection: Ambulant {{level}} ({{code}}). Select this tier again in the SDK calculator to see your personal premium. The calculator is in German.',
       priceNote: 'Published orientation values do not replace a personal quote. Your premium depends in particular on entry age, health information and the selected tariff.',
       pots: {
         vision: { label: 'Vision aids', detail: 'Glasses & contact lenses' },
@@ -328,6 +330,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }), [language]);
+  const calculatorHint = copy.tiers.calculatorHandoff
+    .replace('{{level}}', tier.id)
+    .replace('{{code}}', tier.code);
 
   return (
     <>
@@ -471,7 +476,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
                 </a>
-                <p className="mt-4 text-sm font-semibold text-home-slate">{copy.tiers.calculatorPrice}</p>
+                <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-home-slate" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
                 <p className="mt-2 max-w-2xl text-xs leading-5 text-slate-500">{copy.tiers.priceNote}</p>
                 <p className="mt-5 max-w-2xl text-xs leading-5 text-slate-500">{copy.tiers.disclosure}</p>
               </div>
@@ -531,8 +536,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{copy.calculator.disclosure}</p>
               <AmbulantBonusCalculator
                 embedded
-                defaultMonatsbeitrag={44.13}
-                tariffInfoText={language === 'de' ? 'Tarif Ambulant 100 (AP1) · veröffentlichter SDK-Orientierungswert 44,13 EUR/Monat' : 'Ambulant 100 (AP1) · published SDK orientation value EUR 44.13/month'}
+                defaultMonatsbeitrag={tier.price}
+                tariffInfoText={language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · SDK-Orientierungswert ${monthlyEuro.format(tier.price)}/Monat` : `Ambulant ${tier.id} (${tier.code}) · SDK orientation value ${monthlyEuro.format(tier.price)}/month`}
+                effectiveValue={language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`}
+                calculatorHint={calculatorHint}
                 effectiveNote={language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.'}
                 secondaryCtaOverride={{
                   href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
@@ -630,6 +637,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">{copy.finalEyebrow}</p>
             <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] sm:text-4xl lg:text-5xl">{copy.finalTitle}</h2>
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
+            <p className="relative mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-200" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}

@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Ambulante Zusatzversicherung",
     "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Effektiv ab <highlight>0 EUR</highlight>.",
-    "subtitle": "Warum weiter selbst zahlen? Sichere dir bis zu 3.000 EUR für Heilpraktiker, Brille und Vorsorge – ohne Wartezeit und in wenigen Minuten berechnet.",
+    "subtitle": "Heilpraktiker, Brille und Vorsorge absichern. 0 EUR effektiv sind möglich, wenn dein anerkannter Kassenbonus den selbst gezahlten Beitrag vollständig ausgleicht.",
     "factsLabel": "Kurz erklärt",
     "facts": [
       "Erstattung versicherter Rechnungen, mit festen Grenzen je Leistungsbereich.",
@@ -536,6 +536,7 @@
     "orCashBonus": "Oder als frei verfügbarer Geldbonus:",
     "unusedPotential": "{{amount}} € weiteres Zuschusspotenzial wären nur mit zusätzlichen nachgewiesenen zuschussfähigen Kosten nutzbar – es wird nicht als Plus ausgezahlt.",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
+    "customPremiumNote": "Dein eingegebener Beitrag bleibt erhalten. Prüfe ihn erneut, wenn du eine andere Tarifstufe auswählst.",
     "bonusPayout": "Du entscheidest: frei verfügbarer Geldbonus oder der dreifache Zuschuss zu nachgewiesenen Kosten – zum Beispiel zum Jahresbeitrag deiner Zusatzversicherung.",
     "choiceDisclaimer": "Geldbonus und Zuschuss sind Alternativen und werden nicht addiert. Der Zuschuss ist auf deine nachgewiesenen zuschussfähigen Kosten begrenzt.",
     "ctaCalculate": "Beitrag berechnen",

@@ -61,6 +61,7 @@ const AmbulantBonusCalculator = ({
   effectiveValue,
   effectiveNote,
   bonusPayoutText,
+  calculatorHint,
   embedded = false,
 }) => {
   const { t, i18n } = useTranslation('ambulant');
@@ -104,7 +105,10 @@ const AmbulantBonusCalculator = ({
   };
 
   const [selectedActivities, setSelectedActivities] = useState(EXAMPLE_SELECTION);
-  const [monatsbeitrag, setMonatsbeitrag] = useState(DEFAULT_MONATSBEITRAG);
+  // Follow the selected tariff's example until the visitor enters a personal
+  // premium. Changing tariff must preserve their activities and own input.
+  const [customMonatsbeitrag, setMonatsbeitrag] = useState(null);
+  const monatsbeitrag = customMonatsbeitrag ?? DEFAULT_MONATSBEITRAG;
   const [beitragEditing, setBeitragEditing] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const beitragInputRef = useRef(null);
@@ -128,18 +132,22 @@ const AmbulantBonusCalculator = ({
 
   const handleReset = () => {
     setSelectedActivities({});
-    setMonatsbeitrag(DEFAULT_MONATSBEITRAG);
+    setMonatsbeitrag(null);
   };
 
   const handleBeitragChange = (e) => {
     const val = e.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
-    setMonatsbeitrag(val === '' ? '' : Number(val));
+    // Keep a trailing decimal separator while typing, otherwise "30,50"
+    // becomes "3050" when React renders the intermediate number 30 again.
+    setMonatsbeitrag(val);
   };
 
   const handleBeitragBlur = () => {
     setBeitragEditing(false);
-    if (monatsbeitrag === '' || isNaN(monatsbeitrag) || monatsbeitrag < 0) {
-      setMonatsbeitrag(DEFAULT_MONATSBEITRAG);
+    if (monatsbeitrag === '' || !Number.isFinite(Number(monatsbeitrag)) || monatsbeitrag < 0) {
+      setMonatsbeitrag(null);
+    } else if (customMonatsbeitrag !== null) {
+      setMonatsbeitrag(Number(monatsbeitrag));
     }
   };
 
@@ -302,7 +310,7 @@ const AmbulantBonusCalculator = ({
                         />
                       </div>
                     )}
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 hyphens-auto [overflow-wrap:anywhere]" lang={i18n.language?.startsWith('en') ? 'en' : 'de'}>
                       <div className="font-bold text-healio-dark leading-tight mb-1">
                         {activity.title}
                         {def.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">{t('bonusCalculator.tip')}</span>}
@@ -484,7 +492,7 @@ const AmbulantBonusCalculator = ({
                   )}
 
                   <p className="mt-2 text-xs text-white/80">
-                    {t('bonusCalculator.editHint')}
+                    {t(customMonatsbeitrag === null ? 'bonusCalculator.editHint' : 'bonusCalculator.customPremiumNote')}
                   </p>
                 </div>
 
@@ -527,6 +535,7 @@ const AmbulantBonusCalculator = ({
                   <span className="mt-2 block text-xs text-white/80">{t('bonusCalculator.choiceDisclaimer')}</span>
                 </p>
 
+                {calculatorHint && <p className="mb-4 text-left text-sm leading-6 text-white/90" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>}
                 <div className="flex flex-col gap-4">
                   {ctaOverride ? (
                     <a

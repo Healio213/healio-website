@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Outpatient supplementary insurance",
     "title": "Up to <highlight>EUR 3,000</highlight> for what keeps you well.",
-    "subtitle": "Alternative medicine, osteopathy, glasses and preventive care: find the cover that turns out-of-pocket costs into a real health budget.",
+    "subtitle": "Cover alternative medicine, glasses and preventive care. You pay the premium yourself; an eligible health fund bonus may offset it afterwards.",
     "factsLabel": "In short",
     "facts": [
       "Reimbursement of insured invoices, with fixed limits per benefit area.",
@@ -488,6 +488,7 @@
     "orCashBonus": "Or as a freely usable cash bonus:",
     "unusedPotential": "A further €{{amount}} of subsidy potential would require additional documented eligible costs; it is not paid out as a surplus.",
     "editHint": "Click on the premium to enter your individual amount (incl. risk surcharge).",
+    "customPremiumNote": "Your entered premium is kept. Check it again if you select a different tier.",
     "bonusPayout": "You choose: a freely usable cash bonus or the threefold subsidy for documented eligible costs, such as the annual premium for supplementary insurance.",
     "choiceDisclaimer": "Cash bonus and subsidy are alternatives and are not added together. The subsidy is capped at your documented eligible costs.",
     "ctaCalculate": "Get quote – German form",
