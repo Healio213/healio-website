@@ -12,6 +12,7 @@ import DentalVideoSection from '@/components/sections/dental/DentalVideoSection'
 import { getDentalContent, LKH_GUIDELINE_URL } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
+import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -68,7 +69,13 @@ const ZahnPage = () => {
           className="relative isolate overflow-hidden bg-[#f4faf7] px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44"
           aria-labelledby="zahn-hero-heading"
         >
-          <div className="absolute inset-x-0 top-0 z-0 h-28 bg-gradient-to-b from-[#07111f] via-[#13283a] to-transparent sm:h-32" aria-hidden="true" />
+          <div
+            className="absolute inset-x-0 top-0 z-0 h-40 sm:h-48"
+            style={{
+              backgroundImage: 'linear-gradient(to bottom, rgba(7,17,31,0.92) 0%, rgba(13,29,44,0.74) 16%, rgba(19,40,58,0.42) 32%, rgba(19,40,58,0.18) 48%, rgba(19,40,58,0.06) 66%, rgba(19,40,58,0) 100%)',
+            }}
+            aria-hidden="true"
+          />
           <div
             className="absolute inset-0 -z-20 opacity-70"
             style={{
@@ -204,12 +211,9 @@ const ZahnPage = () => {
                     <span className="absolute -right-14 -top-16 h-40 w-40 rounded-full border border-current/10" aria-hidden="true" />
                     <div className="flex items-start justify-between gap-5">
                       <FriendlyIcon kind={visual.kind} tone={visual.tone} size="md" className="-rotate-2" />
-                      <span className="rounded-full border border-current/20 bg-white/50 px-3 py-1.5 font-display text-[0.68rem] font-extrabold uppercase tracking-[0.12em]">
-                        {card.label}
-                      </span>
                     </div>
-                    <p className="mt-8 font-display text-xs font-extrabold uppercase tracking-[0.16em] opacity-75">{card.product}</p>
-                    <h3 className="mt-2 font-display text-2xl font-extrabold tracking-[-0.035em]">{card.title}</h3>
+                    <h3 className="mt-8 font-display text-2xl font-extrabold tracking-[-0.035em]">{card.label}</h3>
+                    <p className="mt-2 font-display text-xs font-extrabold uppercase tracking-[0.16em] opacity-75">{card.title} · {card.product}</p>
                     <p className="mt-4 max-w-xl leading-7 text-slate-600">{card.text}</p>
                     {card.sourceLabel && (
                       <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-extrabold underline underline-offset-4">
@@ -222,6 +226,7 @@ const ZahnPage = () => {
               </div>
             </div>
             <p className="mt-6 text-sm leading-6 text-slate-500">{content.paths.footer}</p>
+            <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-8 rounded-[1.6rem] border border-[#dfe8e3] bg-white" />
           </div>
         </section>
 
