@@ -7,6 +7,7 @@ import HowHealioWorks from '@/components/home/HowHealioWorks';
 import HomeTrust from '@/components/home/HomeTrust';
 import AudienceLinks from '@/components/home/AudienceLinks';
 import HomeFinalCTA from '@/components/home/HomeFinalCTA';
+import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOrganizationSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
 
@@ -49,6 +50,7 @@ const MainHomePage = () => {
       />
       <article className="w-full overflow-hidden bg-white">
         <HomeHero />
+        <HealioAwardsRow compact tone="ice" bordered={false} />
         <HowHealioWorks />
         <InsurancePathway />
         <HomeTrust />

@@ -70,7 +70,9 @@
     "playStore": "Google Play",
     "playStoreAria": "Healio bei Google Play herunterladen",
     "appScreenshotAlt": "Healio App Dashboard mit verfügbarem Gesundheitsbudget",
-    "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten."
+    "copyright": "© {{year}} Healio GmbH. Alle Rechte vorbehalten.",
+    "potenzialanalyse": "Vorsorge-Check",
+    "vorsorgeRechner": "bAV-Rechner"
   },
   "kassenboostHint": {
     "iconLabel": "Krankenkassen vergleichen",
@@ -86,5 +88,8 @@
     "taxFree": "2026 bis 676 EUR monatlich steuerfrei",
     "freeAnalysis": "Erstgespräch und Ist-Analyse kostenfrei und unverbindlich"
   },
-  "langSwitch": "EN"
+  "langSwitch": "EN",
+  "awards": {
+    "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept"
+  }
 }

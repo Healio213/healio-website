@@ -38,7 +38,7 @@ const InsurancePathway = () => {
     <section id="schutz" className="home-section relative z-10 scroll-mt-20 overflow-hidden bg-white" aria-labelledby="insurance-pathway-title">
       <div className="healio-container">
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <h2 id="insurance-pathway-title" className="max-w-[15ch] font-friendly text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
+          <h2 id="insurance-pathway-title" className="max-w-[15ch] font-display text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
             {t('products.title')}
           </h2>
           <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">
@@ -66,13 +66,15 @@ const InsurancePathway = () => {
                 <span className={`relative mt-7 text-xs font-extrabold uppercase tracking-[0.18em] ${visual.label}`}>
                   {item.label}
                 </span>
-                <h3 className="relative mt-3 max-w-[17ch] font-friendly text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
+                <h3 className="relative mt-3 max-w-[17ch] font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
                   {item.title}
                 </h3>
                 <p className="relative mt-4 text-sm leading-6 text-slate-600">{item.description}</p>
-                <span className="relative mt-auto inline-flex items-center gap-2 pt-7 font-display text-sm font-extrabold text-home-midnight">
-                  {item.cta}
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                <span className="relative mt-auto pt-7">
+                  <span className="inline-flex min-h-11 items-center gap-2 rounded-full bg-home-midnight px-5 py-2.5 font-display text-sm font-extrabold text-white shadow-[0_10px_26px_rgba(7,17,31,0.16)] transition group-hover:bg-[#12243a]">
+                    {item.cta}
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
                 </span>
               </Link>
             );

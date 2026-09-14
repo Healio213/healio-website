@@ -70,7 +70,9 @@
     "playStore": "Google Play",
     "playStoreAria": "Get Healio on Google Play",
     "appScreenshotAlt": "Healio app dashboard showing the available health budget",
-    "copyright": "© {{year}} Healio GmbH. All rights reserved."
+    "copyright": "© {{year}} Healio GmbH. All rights reserved.",
+    "potenzialanalyse": "Benefits Review",
+    "vorsorgeRechner": "Pension calculator"
   },
   "kassenboostHint": {
     "iconLabel": "Compare statutory health insurers",
@@ -86,5 +88,8 @@
     "taxFree": "In 2026, up to EUR 676 per month is tax-free",
     "freeAnalysis": "Initial consultation and current-state analysis are free and non-binding"
   },
-  "langSwitch": "DE"
+  "langSwitch": "DE",
+  "awards": {
+    "label": "Awards and tests for selected providers in the Healio concept"
+  }
 }

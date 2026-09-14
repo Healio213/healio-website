@@ -169,6 +169,8 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <h4 className="font-semibold mb-4 text-slate-200">{t('footer.company')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('unternehmen')} className="hover:text-healio-primary transition-colors">{t('footer.unternehmen')}</Link></li>
+              <li><Link to={getPath('vorsorgeRechner')} className="hover:text-healio-primary transition-colors">{t('footer.vorsorgeRechner')}</Link></li>
+              <li><Link to={getPath('potenzialanalyse')} className="hover:text-healio-primary transition-colors">{t('footer.potenzialanalyse')}</Link></li>
             </ul>
           </div>
           <div>

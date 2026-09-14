@@ -16,7 +16,7 @@ const AudienceLinks = () => {
     <section className="home-section bg-[#F5EFE3] text-home-midnight" aria-labelledby="audience-links-title">
       <div className="healio-container">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <h2 id="audience-links-title" className="max-w-[18ch] font-friendly text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
+          <h2 id="audience-links-title" className="max-w-[18ch] font-display text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
             {t('audiences.title')}
           </h2>
           <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">{t('audiences.description')}</p>
@@ -43,7 +43,7 @@ const AudienceLinks = () => {
                   <FriendlyIcon kind="protection" tone="mint" size="sm" />
                   <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint">{company.label}</p>
                 </div>
-                <h3 className="mt-6 max-w-[16ch] font-friendly text-3xl font-bold leading-[1.06] tracking-[-0.02em] sm:text-4xl">
+                <h3 className="mt-6 max-w-[16ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em] sm:text-4xl">
                   {company.title}
                 </h3>
                 {company.description && <p className="mt-5 max-w-md text-base leading-7 text-slate-200">{company.description}</p>}
@@ -78,7 +78,7 @@ const AudienceLinks = () => {
                 <span className="h-2.5 w-2.5 rounded-full bg-home-mint shadow-[0_0_14px_3px_rgba(37,201,144,0.3)]" aria-hidden="true" />
                 <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-emerald-800">{practice.label}</p>
               </div>
-              <h3 className="relative z-10 mt-6 max-w-[13ch] font-friendly text-3xl font-bold leading-[1.06] tracking-[-0.02em]">
+              <h3 className="relative z-10 mt-6 max-w-[13ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em]">
                 {practice.title}
               </h3>
               {practice.description && <p className="relative z-10 mt-5 max-w-[20ch] text-base leading-7 text-home-slate">{practice.description}</p>}

@@ -13,6 +13,7 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 import AudienceProofBar from '@/components/sections/AudienceProofBar';
 import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import ProductTicker from '@/components/sections/ProductTicker';
+import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AppointmentBooking from '@/components/CalendlyEmbed';
@@ -149,18 +150,7 @@ const PartnerPage = () => {
         />
 
         {/* QUALITÄTSSIEGEL: SDK + IKK */}
-        <section className="py-8 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-4">
-            <p className="text-center text-xs text-slate-400 mb-5 font-medium uppercase tracking-wider">{t('quality.label')}</p>
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-6xl mx-auto">
-              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern Note 1,7 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien Note 1,6 Gut" className="h-16 md:h-20 w-auto" loading="lazy" />
-            </div>
-          </div>
-        </section>
+        <HealioAwardsRow label={t('quality.label')} />
 
         {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
         <section className="relative py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">

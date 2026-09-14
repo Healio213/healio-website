@@ -15,9 +15,9 @@ const HomeFinalCTA = () => {
       <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[2.25rem] border border-white/10 bg-home-midnight px-6 py-10 text-white shadow-[0_24px_70px_rgba(7,17,31,0.2)] sm:px-10 sm:py-12 lg:px-14">
         <div className="absolute -right-10 -top-24 h-72 w-72 rounded-full border border-home-mint/15" aria-hidden="true" />
         <div className="relative grid items-center gap-7 text-center lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:text-left">
-          <FriendlyIcon kind="weighing" tone="mint" size="xl" className="mx-auto -rotate-2 lg:mx-0" />
+          <FriendlyIcon kind="calculator" tone="mint" size="xl" className="mx-auto -rotate-2 lg:mx-0" />
           <div>
-            <h2 id="home-final-cta-title" className="mx-auto max-w-[23ch] font-friendly text-3xl font-bold leading-[1.06] tracking-[-0.025em] lg:mx-0 sm:text-4xl">
+            <h2 id="home-final-cta-title" className="mx-auto max-w-[23ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.025em] lg:mx-0 sm:text-4xl">
               {t('finalCta.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate-300 lg:mx-0">{t('finalCta.description')}</p>

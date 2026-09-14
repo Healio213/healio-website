@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
+// Thematische Sach-Icons im Stil der Sparten-Karten. Die 3D-Figur bleibt
+// bewusst nur der Praxis-Karte im Abschnitt AudienceLinks vorbehalten.
 const stepVisuals = [
-  { kind: 'thinking', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
-  { kind: 'weighing', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
-  { kind: 'choice', tone: 'sky', surface: 'bg-[#EAF2FF]', border: 'border-[#D6E1F1]' },
+  { kind: 'comparison', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
+  { kind: 'protection', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
+  { kind: 'bonus', tone: 'sky', surface: 'bg-[#EAF2FF]', border: 'border-[#D6E1F1]' },
 ];
 
 const HowHealioWorks = () => {
@@ -26,7 +28,7 @@ const HowHealioWorks = () => {
             <span className="inline-flex rounded-full border border-emerald-900/10 bg-white px-3 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_22px_rgba(12,42,33,0.06)]">
               KassenBoost × Healio
             </span>
-            <h2 id="how-healio-title" className="mt-5 max-w-[17ch] font-friendly text-4xl font-bold leading-[1.02] tracking-[-0.025em] text-[#0C2A21] sm:text-5xl">
+            <h2 id="how-healio-title" className="mt-5 max-w-[17ch] font-display text-4xl font-bold leading-[1.02] tracking-[-0.025em] text-[#0C2A21] sm:text-5xl">
               {t('process.title')}
             </h2>
           </div>
@@ -48,7 +50,7 @@ const HowHealioWorks = () => {
                     {step.number}
                   </span>
                 </div>
-                <h3 className="relative mt-7 font-friendly text-2xl font-bold leading-tight text-[#0C2A21]">{step.title}</h3>
+                <h3 className="relative mt-7 font-display text-2xl font-bold leading-tight text-[#0C2A21]">{step.title}</h3>
                 <p className="relative mt-3 text-sm leading-6 text-slate-600">{step.description}</p>
               </li>
             );

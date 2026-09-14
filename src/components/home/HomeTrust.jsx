@@ -2,10 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
+// Thematische Sach-Icons statt der wiederholten 3D-Figur.
 const visuals = [
-  { kind: 'broker', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
-  { kind: 'thinking', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
-  { kind: 'advisor', tone: 'lavender', surface: 'bg-[#F2ECFB]', border: 'border-[#DED3EF]' },
+  { kind: 'document', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
+  { kind: 'comparison', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
+  { kind: 'calendar', tone: 'lavender', surface: 'bg-[#F2ECFB]', border: 'border-[#DED3EF]' },
 ];
 
 const HomeTrust = () => {
@@ -17,7 +18,7 @@ const HomeTrust = () => {
       <div className="healio-container">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center xl:gap-20">
           <div>
-            <h2 id="home-trust-title" className="max-w-[17ch] font-friendly text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
+            <h2 id="home-trust-title" className="max-w-[17ch] font-display text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
               {t('trust.title')}
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{t('trust.description')}</p>
@@ -29,7 +30,7 @@ const HomeTrust = () => {
                   <li key={item.title} className={`grid grid-cols-[auto_1fr] gap-4 rounded-2xl border p-4 sm:p-5 ${visual.surface} ${visual.border}`}>
                     <FriendlyIcon kind={visual.kind} tone={visual.tone} size="md" />
                     <div>
-                      <h3 className="font-friendly text-xl font-bold leading-tight text-home-midnight">{item.title}</h3>
+                      <h3 className="font-display text-xl font-bold leading-tight text-home-midnight">{item.title}</h3>
                       <p className="mt-1 text-sm leading-6 text-slate-600">{item.description}</p>
                     </div>
                   </li>
