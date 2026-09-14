@@ -3,7 +3,7 @@
     "badge": "Für Praxen, Therapeuten und Optiker",
     "title": "Damit gute Behandlung nicht am <highlight>Eigenanteil</highlight> endet.",
     "subtitle": "Mit Healio können deine Patienten – abhängig von Tarif und persönlichen Voraussetzungen – ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> nutzen. Deine Praxis informiert neutral. Healio prüft, berät und begleitet.",
-    "cta": "45-minütiges Kennenlernen buchen",
+    "cta": "30-minütiges Kennenlernen buchen",
     "secondaryCta": "Konzept mit Nita ansehen",
     "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
     "imageAltMobile": "Beratungsgespräch in einer hellen Gesundheitspraxis",
@@ -31,26 +31,21 @@
   },
   "explanationVideo": {
     "title": "Das Partnerkonzept im Überblick",
-    "subtitle": "Das freigegebene Nita-Video wird hier eingebunden. Deine Fragen kannst du schon jetzt direkt mit Nita klären.",
-    "status": "Nita-Video in Vorbereitung",
-    "message": "Bis das freigegebene Video bereitsteht, führt Nita dich direkt durch das Konzept.",
+    "subtitle": "Die wichtigsten Punkte im Überblick. Deine Fragen kannst du direkt mit Nita klären.",
     "points": [
       "Klare Rollen für Praxis, Patienten und Healio",
       "Voraussetzungen ohne Pauschalversprechen",
-      "Nächster Schritt: 45-minütiges Kennenlernen"
+      "Nächster Schritt: 30-minütiges Kennenlernen"
     ],
     "cta": "Konzept mit Nita klären",
     "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
-    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden.",
-    "avatarAlt": "Nita, digitale Assistenz von Healio",
-    "assistantName": "Nita · digitale Healio-Assistentin",
-    "error": "Video konnte nicht geladen werden"
+    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden."
   },
   "trust": {
     "budget": "Bis zu 3.000 EUR in zwei Jahren möglich",
     "information": "Neutrale Informationen für Patienten",
     "advice": "Healio berät und vermittelt",
-    "meeting": "45 Minuten Kennenlernen"
+    "meeting": "30 Minuten Kennenlernen"
   },
   "quality": {
     "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept"
@@ -107,7 +102,7 @@
     "freeParticipationDesc": "Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien stellt Healio kostenfrei zur Verfügung."
   },
   "steps": {
-    "step1Title": "45-Minuten-Kennenlernen",
+    "step1Title": "30-Minuten-Kennenlernen",
     "step1Desc": "Wir erklären Konzept, Rollen und Ablauf. Danach entscheidest du in Ruhe, ob Healio zu deiner Praxis passt.",
     "step2Title": "Information bereitstellen",
     "step2Desc": "Du erhältst neutrale Karten, Flyer oder einen QR-Code und entscheidest selbst, wo du darauf hinweisen möchtest.",
@@ -167,13 +162,13 @@
   },
   "cta": {
     "title": "Passt Healio zu <highlight>deiner Praxis</highlight>?",
-    "subtitle": "In 45 Minuten klären wir Konzept, Rollen und Ablauf. Danach entscheidest du, ob du deinen Patienten den Informationsweg anbieten möchtest.",
+    "subtitle": "In 30 Minuten klären wir Konzept, Rollen und Ablauf. Danach entscheidest du, ob du deinen Patienten den Informationsweg anbieten möchtest.",
     "calendarError": "Kalender konnte nicht geladen werden",
     "calendarErrorDesc": "Bitte überprüfe deine Internetverbindung oder deaktiviere einen möglicherweise aktiven Inhaltsblocker."
   },
   "footer": {
     "title": "Gute Versorgung braucht <highlight>klare Wege</highlight>.",
-    "subtitle": "45 Minuten. Klare Rollen. Eine ehrliche Entscheidung.",
+    "subtitle": "30 Minuten. Klare Rollen. Eine ehrliche Entscheidung.",
     "cta": "Kennenlernen buchen"
   },
   "ticker": {

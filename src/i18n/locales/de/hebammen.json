@@ -26,9 +26,7 @@
   },
   "explanationVideo": {
     "title": "Das Hebammenkonzept im Überblick",
-    "subtitle": "Das freigegebene Nita-Video wird hier eingebunden. Deine Fragen kannst du schon jetzt direkt mit Nita klären.",
-    "status": "Nita-Video in Vorbereitung",
-    "message": "Bis das freigegebene Video bereitsteht, führt Nita dich direkt durch das Konzept.",
+    "subtitle": "Die wichtigsten Punkte im Überblick. Deine Fragen kannst du direkt mit Nita klären.",
     "points": [
       "Klar getrennte Rollen für Hebamme, Familien und Healio",
       "Kassenleistungen, Boni und Zusatzschutz ohne Pauschalversprechen",
@@ -36,10 +34,7 @@
     ],
     "cta": "Konzept mit Nita klären",
     "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
-    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden.",
-    "avatarAlt": "Nita, digitale Assistenz von Healio",
-    "assistantName": "Nita, digitale Healio-Assistentin",
-    "error": "Video konnte nicht geladen werden"
+    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden."
   },
   "problem": {
     "title": "Gute Empfehlungen brauchen auch finanziellen Spielraum.",

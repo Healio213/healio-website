@@ -112,17 +112,13 @@ const HebammenPage = () => {
           sectionId="hebammen-video"
           title={t('explanationVideo.title')}
           subtitle={t('explanationVideo.subtitle')}
-          statusLabel={t('explanationVideo.status')}
-          message={t('explanationVideo.message')}
           points={t('explanationVideo.points', { returnObjects: true })}
+          showStatusPanel={false}
           ctaLabel={t('explanationVideo.cta')}
           onCta={() => requestNitaConsent('delayed_prompt')}
           trackingLabel="midwives"
           privacyText={t('explanationVideo.privacy')}
           videoFallbackText={t('explanationVideo.fallback')}
-          avatarAlt={t('explanationVideo.avatarAlt')}
-          assistantName={t('explanationVideo.assistantName')}
-          errorLabel={t('explanationVideo.error')}
           captionsLanguage={lang === 'en' ? 'en' : 'de'}
           captionsLabel={lang === 'en' ? 'English' : 'Deutsch'}
         />

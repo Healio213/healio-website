@@ -23,6 +23,7 @@ const B2BExplainerVideo = ({
   avatarAlt,
   assistantName,
   errorLabel,
+  showStatusPanel = true,
 }) => {
   const [playing, setPlaying] = useState(false);
   const [mediaError, setMediaError] = useState(false);
@@ -110,6 +111,20 @@ const B2BExplainerVideo = ({
                 </span>
               </motion.button>
             )
+          ) : !showStatusPanel ? (
+            <ul className="grid gap-4 sm:grid-cols-3">
+              {points.map((point) => (
+                <li
+                  key={point}
+                  className="rounded-2xl border border-[#d8e8e2] bg-white p-6 shadow-[0_14px_36px_rgba(7,17,31,0.06)]"
+                >
+                  <span className="inline-grid h-10 w-10 place-items-center rounded-xl bg-[#e4f6ee]">
+                    <Check className="h-5 w-5 text-[#087654]" aria-hidden="true" />
+                  </span>
+                  <p className="mt-4 text-base font-bold leading-7 text-[#07111f]">{point}</p>
+                </li>
+              ))}
+            </ul>
           ) : (
             <div className="grid min-h-[26rem] overflow-hidden rounded-2xl bg-[#07111f] text-white shadow-[0_24px_70px_rgba(7,17,31,0.2)] sm:grid-cols-[0.82fr_1.18fr]">
               <div className="relative min-h-[19rem] overflow-hidden bg-[#dcefe8] sm:min-h-full">

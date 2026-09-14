@@ -34,19 +34,30 @@ for (const key of translationKeys) {
 assert.match(page, /canonicalUrl,\s*isEnglish \? 'en-US' : 'de-DE'/, 'Partner schema must use the canonical URL and active language');
 assert.match(page, /<PartnerRoleProcess\s*\/>/, 'The verifiable role process must be rendered');
 assert.doesNotMatch(page, /PartnerTestimonials/, 'Unverified testimonials must not be imported or rendered');
+assert.match(page, /showStatusPanel=\{false\}/, 'The partner concept block must not promise a video that cannot be played');
+for (const [locale, translations] of [['de', de], ['en', en]]) {
+  for (const key of ['status', 'message', 'avatarAlt', 'assistantName', 'error']) {
+    assert.equal(translations.explanationVideo[key], undefined, `${locale}: explanationVideo.${key} belongs to the removed video placeholder`);
+  }
+  assert.doesNotMatch(
+    JSON.stringify(translations.explanationVideo),
+    /Video wird hier eingebunden|video will be added|in Vorbereitung|in preparation/i,
+    `${locale}: the concept block must not announce an unavailable video`
+  );
+}
 assert.match(faq, /returnObjects:\s*true/, 'FAQ content must come from the active locale');
 assert.match(roleProcess, /HighlightText[^>]*className="text-\[#75e6bf\]"/, 'Dark role section needs a high-contrast highlight');
 
 for (const [locale, source] of [['de', deSource], ['en', enSource]]) {
   assert.doesNotMatch(source, /\b600\s*(?:€|EUR)|(?:€|EUR)\s*600\b/i, `${locale}: outdated EUR 600 vision claim`);
-  assert.doesNotMatch(source, /30[\s-]*(?:Minuten|minutes|minute|minütig)/i, `${locale}: appointment duration must match the 45-minute booking page`);
+  assert.doesNotMatch(source, /45[\s-]*(?:Minuten|minutes|minute|minütig)/i, `${locale}: Frank blocks 45 minutes internally but communicates 30 minutes on /partner`);
   assert.doesNotMatch(source, /keine Therapieabbrüche|no more therapy dropouts|Null Aufwand|Zero Effort|Null Risiko|Zero Risk|Umsatz steig|increase revenue/i, `${locale}: absolute or unsupported claim`);
 }
 
 assert.equal(de.budget.sehhilfenAmount, 'bis zu 500 EUR');
 assert.match(de.budget.sehhilfenDesc, /frei verwendbarer IKK-Geldbonus/i);
 assert.match(de.faq.items.at(-1).answer, /kein pauschaler Brillenzuschuss/i);
-assert.equal(de.trust.meeting, '45 Minuten Kennenlernen');
+assert.equal(de.trust.meeting, '30 Minuten Kennenlernen');
 assert.match(de.roleProcess.closing, /fachlich unabhängig/i);
 
 console.log(`Partner contract checks passed (${translationKeys.size} translation keys).`);
