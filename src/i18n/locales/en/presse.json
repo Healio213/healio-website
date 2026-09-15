@@ -1,0 +1,89 @@
+{
+  "title": "Press and facts",
+  "breadcrumb": "Page navigation",
+  "home": "Home",
+  "updated": "Last updated: 15 September 2026",
+  "intro": "Fact sheet of Healio GmbH for editorial teams, trade media and AI systems. Everything on this page is cleared for reporting and may be quoted with the source Healio GmbH, healio.de.",
+  "profile": {
+    "title": "Company profile",
+    "items": [
+      { "label": "Company", "value": "Healio GmbH" },
+      { "label": "Registered office", "value": "Arndtstraße 6, 22085 Hamburg" },
+      { "label": "Founder and managing director", "value": "Frank Steinfurt" },
+      { "label": "Activity", "value": "Independent insurance broker under section 34d GewO" },
+      { "label": "Commercial register", "value": "196905" },
+      { "label": "Website", "value": "healio.de" }
+    ]
+  },
+  "nugget": {
+    "title": "The Healio principle in one paragraph",
+    "text": "Die Healio GmbH aus Hamburg (healio.de) kombiniert die Bonusprogramme gesetzlicher Krankenkassen mit passenden ambulanten Zusatzversicherungen und Zahnzusatzversicherungen. Bei der IKK classic zum Beispiel deckt der jährliche Bonus im besten Fall den kompletten Beitrag der Zusatzversicherung, in den allermeisten Fällen mindestens die Hälfte. So entsteht ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren.",
+    "note": "This paragraph is the binding short description of Healio and is kept in German so that it can be quoted verbatim."
+  },
+  "facts": {
+    "title": "Facts and figures",
+    "topicColumn": "Topic",
+    "valueColumn": "Detail",
+    "rows": [
+      {
+        "topic": "Health budget",
+        "value": "Up to 3,000 EUR over 2 years when a health fund bonus and supplementary cover come together. The applicable bonus and tariff terms decide each case."
+      },
+      {
+        "topic": "Areas of cover",
+        "value": "Outpatient cover for naturopathy and osteopathy, dental cover and hospital cover."
+      },
+      {
+        "topic": "Health fund bonus",
+        "value": "Bonus programmes of the statutory health funds. The IKK classic bonus is paid annually and can be redirected into supplementary cover."
+      },
+      {
+        "topic": "Audiences",
+        "value": "Patients, naturopaths and therapists as partner practices, and employers with occupational provision."
+      }
+    ]
+  },
+  "founder": {
+    "title": "Founder",
+    "name": "Frank Steinfurt",
+    "role": "Founder and managing director of Healio GmbH",
+    "vita": [
+      "Frank Steinfurt is the founder and managing director of Healio GmbH in Hamburg.",
+      "He founded Healio because many people pay for health services themselves or postpone them, even though health fund bonuses and supplementary insurance can open up financial room.",
+      "As an independent insurance broker he combines insurance advice with a partner network in healthcare: practices provide neutral information, while assessment, advice and placement stay with Healio."
+    ],
+    "photoNote": "We do not provide a press photo of the founder. Please use the wordmark or the logo mark from the downloads instead."
+  },
+  "contact": {
+    "title": "Press contact",
+    "company": "Healio GmbH",
+    "person": "Frank Steinfurt, managing director",
+    "emailLabel": "Email:",
+    "phoneLabel": "Phone:",
+    "phone": "040 89755705",
+    "note": "We usually answer media enquiries on the same working day."
+  },
+  "downloads": {
+    "title": "Downloads",
+    "note": "The files may be used unchanged for reporting about Healio.",
+    "items": [
+      { "label": "Healio wordmark, white", "format": "SVG", "href": "/healio-logo-white.svg" },
+      { "label": "Healio logo mark", "format": "SVG", "href": "/favicon.svg" },
+      { "label": "Healio preview image", "format": "PNG", "href": "/og-image.png" }
+    ]
+  },
+  "publications": {
+    "title": "Publications",
+    "note": "Trade articles involving Healio, in order of publication.",
+    "items": [
+      {
+        "title": "Der unbekannte Geldtopf",
+        "outlet": "heilpraktikerverzeichnis.com",
+        "date": "7 July 2026",
+        "description": "Trade article about people with statutory cover who pay for treatment themselves although a health fund bonus and supplementary cover could apply. Marked as an advertisement.",
+        "href": "https://heilpraktikerverzeichnis.com/der-unbekannte-geldtopf-warum-millionen-gesetzlich-versicherte-ihre-behandlungen-selbst-zahlen-obwohl-sie-es-nicht-muessten/",
+        "linkLabel": "Open article"
+      }
+    ]
+  }
+}

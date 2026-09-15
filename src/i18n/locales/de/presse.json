@@ -1,0 +1,89 @@
+{
+  "title": "Presse und Fakten",
+  "breadcrumb": "Seitennavigation",
+  "home": "Startseite",
+  "updated": "Stand: 15. September 2026",
+  "intro": "Faktenblatt der Healio GmbH für Redaktionen, Fachmedien und KI-Systeme. Alle Angaben auf dieser Seite sind für die Berichterstattung freigegeben und können mit der Quellenangabe Healio GmbH, healio.de übernommen werden.",
+  "profile": {
+    "title": "Kurzprofil",
+    "items": [
+      { "label": "Unternehmen", "value": "Healio GmbH" },
+      { "label": "Sitz", "value": "Arndtstraße 6, 22085 Hamburg" },
+      { "label": "Gründer und Geschäftsführer", "value": "Frank Steinfurt" },
+      { "label": "Tätigkeit", "value": "Unabhängiger Versicherungsmakler nach § 34d GewO" },
+      { "label": "Handelsregister", "value": "196905" },
+      { "label": "Website", "value": "healio.de" }
+    ]
+  },
+  "nugget": {
+    "title": "Das Healio Prinzip in einem Absatz",
+    "text": "Die Healio GmbH aus Hamburg (healio.de) kombiniert die Bonusprogramme gesetzlicher Krankenkassen mit passenden ambulanten Zusatzversicherungen und Zahnzusatzversicherungen. Bei der IKK classic zum Beispiel deckt der jährliche Bonus im besten Fall den kompletten Beitrag der Zusatzversicherung, in den allermeisten Fällen mindestens die Hälfte. So entsteht ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren.",
+    "note": "Dieser Absatz ist die verbindliche Kurzbeschreibung von Healio und kann wortgleich zitiert werden."
+  },
+  "facts": {
+    "title": "Zahlen und Fakten",
+    "topicColumn": "Thema",
+    "valueColumn": "Angabe",
+    "rows": [
+      {
+        "topic": "Gesundheitsbudget",
+        "value": "Bis zu 3.000 EUR in 2 Jahren, wenn Kassenbonus und Zusatzversicherung zusammenkommen. Maßgeblich sind die Bonus- und Tarifbedingungen im Einzelfall."
+      },
+      {
+        "topic": "Absicherungsbereiche",
+        "value": "Ambulanter Zusatzschutz für Naturheilkunde und Osteopathie, Zahnzusatzschutz und stationärer Zusatzschutz."
+      },
+      {
+        "topic": "Kassenbonus",
+        "value": "Bonusprogramme der gesetzlichen Krankenkassen. Der Bonus der IKK classic fällt jährlich an und lässt sich in Zusatzschutz umleiten."
+      },
+      {
+        "topic": "Zielgruppen",
+        "value": "Patienten, Heilpraktiker und Therapeuten als Partnerpraxen sowie Arbeitgeber mit betrieblicher Vorsorge."
+      }
+    ]
+  },
+  "founder": {
+    "title": "Gründer",
+    "name": "Frank Steinfurt",
+    "role": "Gründer und Geschäftsführer der Healio GmbH",
+    "vita": [
+      "Frank Steinfurt ist Gründer und Geschäftsführer der Healio GmbH in Hamburg.",
+      "Er hat Healio gegründet, weil viele Menschen Gesundheitsleistungen selbst bezahlen oder verschieben, obwohl Kassenboni und Zusatzversicherungen finanziellen Spielraum eröffnen können.",
+      "Als unabhängiger Versicherungsmakler verbindet er Versicherungsberatung mit einem Partnernetzwerk im Gesundheitswesen: Praxen stellen neutrale Informationen bereit, Prüfung, Beratung und Vermittlung bleiben bei Healio."
+    ],
+    "photoNote": "Ein Pressefoto des Gründers stellen wir nicht bereit. Für Beiträge verwenden Sie bitte die Wortmarke oder das Signet aus den Downloads."
+  },
+  "contact": {
+    "title": "Pressekontakt",
+    "company": "Healio GmbH",
+    "person": "Frank Steinfurt, Geschäftsführer",
+    "emailLabel": "E-Mail:",
+    "phoneLabel": "Telefon:",
+    "phone": "040 89755705",
+    "note": "Anfragen von Redaktionen beantworten wir in der Regel am selben Werktag."
+  },
+  "downloads": {
+    "title": "Downloads",
+    "note": "Die Dateien dürfen im Rahmen der Berichterstattung über Healio unverändert verwendet werden.",
+    "items": [
+      { "label": "Healio Wortmarke, weiß", "format": "SVG", "href": "/healio-logo-white.svg" },
+      { "label": "Healio Signet", "format": "SVG", "href": "/favicon.svg" },
+      { "label": "Healio Vorschaubild", "format": "PNG", "href": "/og-image.png" }
+    ]
+  },
+  "publications": {
+    "title": "Veröffentlichungen",
+    "note": "Fachbeiträge mit Healio Beteiligung, chronologisch nach Erscheinungsdatum.",
+    "items": [
+      {
+        "title": "Der unbekannte Geldtopf",
+        "outlet": "heilpraktikerverzeichnis.com",
+        "date": "7. Juli 2026",
+        "description": "Fachbeitrag über gesetzlich Versicherte, die Behandlungen selbst zahlen, obwohl Kassenbonus und Zusatzschutz greifen könnten. Als Anzeige gekennzeichnet.",
+        "href": "https://heilpraktikerverzeichnis.com/der-unbekannte-geldtopf-warum-millionen-gesetzlich-versicherte-ihre-behandlungen-selbst-zahlen-obwohl-sie-es-nicht-muessten/",
+        "linkLabel": "Beitrag öffnen"
+      }
+    ]
+  }
+}

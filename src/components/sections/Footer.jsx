@@ -190,6 +190,9 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
               <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
               <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
               <li><Link to={getPath('kontakt')} className="hover:text-healio-primary transition-colors">{t('footer.contact')}</Link></li>
+              {lang === 'de' && (
+                <li><Link to="/presse" className="hover:text-healio-primary transition-colors">{t('footer.presse')}</Link></li>
+              )}
               <li><Link to={getPath('impressum')} className="hover:text-healio-primary transition-colors">{t('footer.impressum')}</Link></li>
               <li><Link to={getPath('datenschutz')} className="hover:text-healio-primary transition-colors">{t('footer.datenschutz')}</Link></li>
               {!isDentalCheckRoute && (

@@ -24,6 +24,7 @@ const SchwangerschaftPage = React.lazy(() => import('@/pages/SchwangerschaftPage
 const StationaerPage = React.lazy(() => import('@/pages/StationaerPage'));
 const ZahnPage = React.lazy(() => import('@/pages/ZahnPage'));
 const ImpressumPage = React.lazy(() => import('@/pages/ImpressumPage'));
+const PressePage = React.lazy(() => import('@/pages/PressePage'));
 const AgbPage = React.lazy(() => import('@/pages/AgbPage'));
 const DatenschutzPage = React.lazy(() => import('@/pages/DatenschutzPage'));
 const ErstinformationPage = React.lazy(() => import('@/pages/ErstinformationPage'));
@@ -163,6 +164,7 @@ function App() {
               <Route path="healio-zahnzusatz" element={<Navigate to="/zahn" replace />} />
               <Route path="stationaer" element={<StationaerPage />} />
               <Route path="klinik-upgrade" element={<Navigate to="/stationaer" replace />} />
+              <Route path="presse" element={<PressePage />} />
               <Route path="impressum" element={<ImpressumPage />} />
               <Route path="agb" element={<AgbPage />} />
               <Route path="datenschutz" element={<DatenschutzPage />} />

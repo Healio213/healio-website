@@ -162,6 +162,18 @@ export const seoRoutes = [
     keywords: 'Healio Partner, Heilpraktiker Partnerprogramm, Patienten Finanzierung Heilpraktiker, Kostenübernahme Naturheilkunde',
     lang: 'de',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Was genau ist das Healio Gesundheitsbudget?', acceptedAnswer: { '@type': 'Answer', text: 'Je nach persönlicher Situation können Patienten mögliche Kassenboni mit tariflichen Leistungen einer Zusatzversicherung kombinieren. So sind bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich. Healio prüft im Einzelfall, welche Voraussetzungen erfüllt sind.' } },
+        { '@type': 'Question', name: 'Kostet mich die Partnerschaft etwas?', acceptedAnswer: { '@type': 'Answer', text: 'Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien und Aufsteller stellt Healio kostenfrei zur Verfügung. Nach dem Kennenlernen entscheidest du selbst, ob und wo du die Informationen einsetzen möchtest.' } },
+        { '@type': 'Question', name: 'Muss ich Versicherungen erklären oder empfehlen?', acceptedAnswer: { '@type': 'Answer', text: 'Nein. Deine Aufgabe ist ausschließlich die neutrale Information. Die individuelle Prüfung, Versicherungsberatung, Vermittlung und Antragsbegleitung übernimmt Healio direkt mit dem interessierten Patienten.' } },
+        { '@type': 'Question', name: 'Welche Leistungen können erstattet werden?', acceptedAnswer: { '@type': 'Answer', text: 'Je nach Tarif können unter anderem Naturheilkunde, Osteopathie, TCM, Chiropraktik, Sehhilfen und Zahnleistungen berücksichtigt werden. Umfang, Wartezeiten und Erstattungsvoraussetzungen richten sich immer nach dem gewählten Tarif.' } },
+        { '@type': 'Question', name: 'Muss ich mein Praxiskonzept ändern?', acceptedAnswer: { '@type': 'Answer', text: 'Nein. Behandlung, Preisgestaltung und fachliche Entscheidungen bleiben vollständig bei dir. Healio ergänzt lediglich einen neutralen Informationsweg für Patienten, die ihre Finanzierungsmöglichkeiten prüfen möchten.' } },
+        { '@type': 'Question', name: 'Wie setzen sich die Leistungen für Sehhilfen zusammen?', acceptedAnswer: { '@type': 'Answer', text: 'Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Separat kann durch nachgewiesene Maßnahmen ein frei verwendbarer IKK-Geldbonus entstehen, der den Eigenanteil zusätzlich reduzieren kann. Er ist kein pauschaler Brillenzuschuss.' } }
+      ]
+    },
   },
   {
     path: '/hebammen',
@@ -194,6 +206,22 @@ export const seoRoutes = [
     keywords: 'Zahnzusatzversicherung, Zahnersatz Erstattung, Implantate Versicherung, Zahnversicherung Vergleich',
     lang: 'de',
     hreflang: { de: 'https://healio.de/zahn', en: 'https://healio.de/en/dental' },
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'Es wurde schon eine Behandlung angeraten. Ist es zu spät?', acceptedAnswer: { '@type': 'Answer', text: 'Nicht unbedingt. Mit ZAHN Sofort können bis zu 1.500 EUR Zuschuss möglich sein. Der Abschluss muss vor der Rechnung erfolgen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein ist nur bei einem Neuabschluss wählbar.' } },
+        { '@type': 'Question', name: 'Kann ich mich mit fehlenden Zähnen noch versichern?', acceptedAnswer: { '@type': 'Answer', text: 'Bei der LKH ist ZahnUpgrade 70+ oder 90+ mit bis zu 3 fehlenden, noch nicht ersetzten Zähnen grundsätzlich prüfbar. Laut Annahmerichtlinie gelten 5 EUR Zuschlag je fehlendem Zahn. Bereits angeratene, beabsichtigte oder begonnene Behandlungen sind ausgeschlossen. Verbindlich entscheidet der Antrag.' } },
+        { '@type': 'Question', name: 'Wie funktioniert der Sofortschutz bei einer laufenden Behandlung?', acceptedAnswer: { '@type': 'Answer', text: 'ZAHN Sofort ist ein Zusatzbaustein zu einem neuen Zahntarif. Bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Der Abschluss muss vor der Rechnung erfolgen; eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter.' } },
+        { '@type': 'Question', name: 'Was kostet eine Zahnzusatzversicherung?', acceptedAnswer: { '@type': 'Answer', text: 'Der Beitrag hängt unter anderem von Alter, Tarif und Leistungsstufe ab. Deshalb nennen wir keinen pauschalen Lockpreis. Im jeweiligen Tarifrechner siehst du deinen konkreten Beitrag, bevor du den Antrag abschickst.' } },
+        { '@type': 'Question', name: 'Welche Gesundheitsfragen muss ich beantworten?', acceptedAnswer: { '@type': 'Answer', text: 'Das unterscheidet sich je nach Versicherer und Tarif. Häufig geht es um fehlende Zähne, laufende oder angeratene Behandlungen und bestimmte Vorerkrankungen. Antworte vollständig und wahrheitsgemäß; die exakten Fragen stehen in der jeweiligen Antragsstrecke.' } },
+        { '@type': 'Question', name: 'Gibt es Wartezeiten?', acceptedAnswer: { '@type': 'Answer', text: 'Das hängt vom Tarif ab. Auch ohne klassische Wartezeit können Leistungsstaffeln, Höchstgrenzen und Ausschlüsse gelten. Entscheidend sind immer die Tarifbedingungen und der Versicherungsbeginn; bereits bestehende Behandlungen sind dadurch nicht automatisch versichert.' } },
+        { '@type': 'Question', name: 'Zahlt mein Kassenbonus den ganzen Beitrag?', acceptedAnswer: { '@type': 'Answer', text: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen. Wir vergleichen Beitrag, realistisch erreichbaren Bonus und Leistungen. So siehst du transparent, welche Krankenkasse am besten zu deinem Tarif passt.' } },
+        { '@type': 'Question', name: 'Wie läuft der Abschluss nach dem Zahn-Check ab?', acceptedAnswer: { '@type': 'Answer', text: 'Der Check zeigt dir zunächst den sinnvollen Prüfweg. Danach öffnest du den passenden Tarifrechner, siehst Beitrag und Bedingungen und beantwortest die Gesundheitsfragen. Erst der Versicherer entscheidet im Antrag verbindlich über Annahme und Leistung.' } },
+        { '@type': 'Question', name: 'Kann ich den Vertrag später wieder kündigen?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, innerhalb der vertraglichen Regeln. Mindestlaufzeit und Kündigungsfrist können je nach Tarif unterschiedlich sein. Du findest sie vor dem Abschluss in den Versicherungs- und Verbraucherinformationen des Anbieters.' } },
+        { '@type': 'Question', name: 'Warum kann ich der Empfehlung von Healio vertrauen?', acceptedAnswer: { '@type': 'Answer', text: 'Healio ist als Versicherungsmakler registriert. Wir trennen Orientierung, Tarifberechnung und verbindliche Annahme, zeigen Bedingungen in Sichtnähe und bleiben bei Fragen persönlich erreichbar. Der Zahn-Check speichert oder überträgt deine Antworten nicht. Verbindlich entscheidet erst der Versicherer im Antrag.' } }
+      ]
+    },
   },
   {
     path: '/stationaer',
@@ -335,6 +363,25 @@ export const seoRoutes = [
     canonical: 'https://healio.de/tierkrankenversicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/tierkrankenversicherung', en: 'https://healio.de/en/pet-insurance' },
+  },
+  {
+    path: '/presse',
+    title: 'Presse und Fakten zur Healio GmbH | Healio',
+    description: 'Faktenblatt der Healio GmbH für Redaktionen: Kurzprofil, Zahlen und Fakten zum Gesundheitsbudget, Gründerprofil, Pressekontakt und Logodateien zum Download.',
+    canonical: 'https://healio.de/presse',
+    keywords: 'Healio Presse, Healio Pressekontakt, Healio Faktenblatt, Healio GmbH Hamburg, Gesundheitsbudget Fakten',
+    lang: 'de',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://healio.de/presse#webpage',
+      url: 'https://healio.de/presse',
+      name: 'Presse und Fakten zur Healio GmbH | Healio',
+      description: 'Faktenblatt der Healio GmbH für Redaktionen: Kurzprofil, Zahlen und Fakten zum Gesundheitsbudget, Gründerprofil, Pressekontakt und Logodateien zum Download.',
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': 'https://healio.de/#website' },
+      about: { '@id': 'https://healio.de/#organization' },
+    },
   },
   {
     path: '/impressum',

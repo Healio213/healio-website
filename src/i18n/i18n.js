@@ -45,6 +45,8 @@ import deInstagram from './locales/de/instagram.json';
 import enInstagram from './locales/en/instagram.json';
 import deBlog from './locales/de/blog.json';
 import enBlog from './locales/en/blog.json';
+import dePresse from './locales/de/presse.json';
+import enPresse from './locales/en/presse.json';
 
 i18n
   .use(initReactI18next)
@@ -73,6 +75,7 @@ i18n
         tiktok: deTiktok,
         instagram: deInstagram,
         blog: deBlog,
+        presse: dePresse,
       },
       en: {
         common: enCommon,
@@ -97,6 +100,7 @@ i18n
         tiktok: enTiktok,
         instagram: enInstagram,
         blog: enBlog,
+        presse: enPresse,
       },
     },
     lng: 'de',
