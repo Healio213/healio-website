@@ -7,6 +7,7 @@ import { seoRoutes } from './seo-routes.mjs';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WEBSITE_ID = 'https://healio.de/#website';
 const ORGANIZATION_ID = 'https://healio.de/#organization';
+const FOUNDER_ID = 'https://healio.de/#frank_steinfurt';
 
 function typesOf(value) {
   if (!value || typeof value !== 'object') return [];
@@ -45,8 +46,16 @@ const healio = organizations.find((entry) => entry['@id'] === ORGANIZATION_ID);
 assert(healio, 'Healio-Organisation fehlt im Basis-Schema.');
 assert.deepEqual(
   healio.sameAs,
-  ['https://www.tiktok.com/@healio.de'],
-  'sameAs darf weder KassenBoost noch die fremde US-LinkedIn-Seite als Healio-Identität ausweisen.',
+  ['https://www.tiktok.com/@healio.de', 'https://www.instagram.com/healio.de'],
+  'sameAs darf nur die verifizierten Healio-Profile (TikTok, Instagram) nennen: weder KassenBoost noch die fremde US-LinkedIn-Seite dürfen als Healio-Identität erscheinen.',
+);
+
+const founder = collectTyped(sourceSchemas, 'Person').find((entry) => entry['@id'] === FOUNDER_ID);
+assert(founder, 'Person Frank Steinfurt fehlt im Basis-Schema.');
+assert.deepEqual(
+  founder.sameAs,
+  ['https://de.linkedin.com/in/frank-steinfurt-882b35411'],
+  'Die Person Frank Steinfurt muss genau auf ihr echtes LinkedIn-Profil verweisen, nicht auf die fremde US-LinkedIn-Firmenseite.',
 );
 
 for (const route of seoRoutes) {

@@ -30,7 +30,8 @@ export const createOrganizationSchema = () => {
     },
     "foundingDate": "2021",
     "sameAs": [
-      "https://www.tiktok.com/@healio.de"
+      "https://www.tiktok.com/@healio.de",
+      "https://www.instagram.com/healio.de"
     ]
   };
 };
