@@ -271,6 +271,11 @@ const de = {
     ],
     aria: 'Healio Erklärvideo zur Zahnzusatzversicherung',
   },
+  holisticNote: {
+    eyebrow: 'So denken wir Zusatzschutz',
+    title: 'Ganzheitlich statt Einzeltarif.',
+    text: 'Ein Zahntarif allein ist nur die halbe Rechnung. Wir beziehen deine gesetzliche Krankenkasse mit ein: Beitrag sparen oder den besten Bonus nutzen. So finanziert dein Bonus den Zahnschutz mit, statt dass du alles allein trägst.',
+  },
   bonus: {
     eyebrow: 'KassenBoost nach der Tarifwahl',
     title: 'Finde die Krankenkasse, die am besten zu deinem Tarif passt.',
@@ -580,6 +585,12 @@ const en = {
       'What is only decided bindingly in the application',
     ],
     aria: 'Healio explainer video about supplementary dental insurance',
+  },
+  holisticNote: {
+    ...de.holisticNote,
+    eyebrow: 'How we think about supplementary cover',
+    title: 'Holistic instead of a single tariff.',
+    text: 'A dental tariff alone is only half the answer. We factor in your statutory health fund: save on contributions or get the best bonus. That way your bonus helps finance your dental cover, instead of you carrying it all yourself.',
   },
   bonus: {
     ...de.bonus,

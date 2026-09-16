@@ -470,6 +470,11 @@
       },
       "cta": "Klinikschutz auswählen"
     },
+    "holisticNote": {
+      "eyebrow": "So denken wir Zusatzschutz",
+      "title": "Ganzheitlich statt Einzeltarif.",
+      "text": "Ein Klinikschutz allein ist nur die halbe Rechnung. Wir beziehen deine gesetzliche Krankenkasse mit ein: Beitrag sparen oder den besten Bonus nutzen. So finanziert dein Bonus den Klinikschutz mit, statt dass du alles allein trägst."
+    },
     "bonus": {
       "eyebrow": "KassenBoost × Klinikschutz",
       "title": "Erst den Schutz wählen. Dann die Krankenkasse passend dazu.",

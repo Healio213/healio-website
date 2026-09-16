@@ -67,8 +67,9 @@
     ]
   },
   "process": {
+    "badge": "Ganzheitlich statt Einzeltarif",
     "title": "Zuerst die richtige Kasse, dann der richtige Zusatzschutz.",
-    "description": "KassenBoost vergleicht Beitrag, Bonus und Leistungen der Krankenkassen, kostenlos und ohne Kontaktdaten. Healio prüft danach, welcher Zusatzschutz zu dir passt und ob dein Kassenbonus einen Teil des Beitrags ausgleichen kann.",
+    "description": "Wir vergleichen nicht nur eine Zusatzversicherung. Zuerst schauen wir auf deine gesetzliche Krankenkasse: Beitrag sparen oder den besten Bonus holen. Danach wählst du den Zusatzschutz, den dein Bonus mitfinanziert.",
     "steps": [
       {
         "number": "01",

@@ -26,7 +26,7 @@ const HowHealioWorks = () => {
         <div className="relative grid gap-7 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
           <div>
             <span className="inline-flex rounded-full border border-emerald-900/10 bg-white px-3 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_22px_rgba(12,42,33,0.06)]">
-              KassenBoost × Healio
+              {t('process.badge')}
             </span>
             <h2 id="how-healio-title" className="mt-5 max-w-[17ch] font-display text-4xl font-bold leading-[1.02] tracking-[-0.025em] text-[#0C2A21] sm:text-5xl">
               {t('process.title')}

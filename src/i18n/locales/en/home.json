@@ -67,8 +67,9 @@
     ]
   },
   "process": {
+    "badge": "Holistic instead of a single tariff",
     "title": "First the right health fund, then the right extra cover.",
-    "description": "KassenBoost compares contributions, bonuses and benefits of health funds, free and without contact details. Healio then checks which supplementary cover suits you and whether your fund bonus can offset part of the premium.",
+    "description": "We don't just compare one supplementary policy. First we look at your statutory health fund: save on contributions or get the best bonus. Then you choose the extra cover that your bonus helps finance.",
     "steps": [
       {
         "number": "01",

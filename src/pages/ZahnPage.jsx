@@ -12,6 +12,7 @@ import DentalVideoSection from '@/components/sections/dental/DentalVideoSection'
 import { getDentalContent, LKH_GUIDELINE_URL } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
+import HolisticNote from '@/components/sections/shared/HolisticNote';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
@@ -229,6 +230,13 @@ const ZahnPage = () => {
             <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-8 rounded-[1.6rem] border border-[#dfe8e3] bg-white" />
           </div>
         </section>
+
+        <HolisticNote
+          id="zahn-holistic-heading"
+          eyebrow={content.holisticNote.eyebrow}
+          title={content.holisticNote.title}
+          text={content.holisticNote.text}
+        />
 
         <section id="kassenbonus" className="bg-[#f8faf9] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="zahn-bonus-heading">
           <div className="healio-container relative isolate grid items-center gap-10 overflow-hidden rounded-[2.75rem] bg-[#07111f] p-7 text-white shadow-[0_30px_80px_rgba(7,17,31,0.18)] sm:p-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:p-14">

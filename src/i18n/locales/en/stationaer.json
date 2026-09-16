@@ -470,6 +470,11 @@
       },
       "cta": "Choose hospital cover"
     },
+    "holisticNote": {
+      "eyebrow": "How we think about supplementary cover",
+      "title": "Holistic instead of a single tariff.",
+      "text": "Hospital cover alone is only half the answer. We factor in your statutory health fund: save on contributions or get the best bonus. That way your bonus helps finance your hospital cover, instead of you carrying it all yourself."
+    },
     "bonus": {
       "eyebrow": "KassenBoost × hospital cover",
       "title": "Choose the cover first. Then find the health insurer to match.",

@@ -18,6 +18,7 @@ import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import HolisticNote from '@/components/sections/shared/HolisticNote';
 
 const COPY = {
   de: {
@@ -81,6 +82,11 @@ const COPY = {
       },
       cta: 'Budget & Beitrag berechnen',
       disclosure: 'Die Werte zeigen die tariflichen Höchstbeträge über zwei Jahre. Maßgeblich sind Versicherungsbeginn, versicherte Leistungen, Erstattungsgrenzen und die jeweils geltenden Tarifbedingungen.',
+    },
+    holisticNote: {
+      eyebrow: 'So denken wir Zusatzschutz',
+      title: 'Ganzheitlich statt Einzeltarif.',
+      text: 'Ein Gesundheitsbudget allein ist nur die halbe Rechnung. Wir beziehen deine gesetzliche Krankenkasse mit ein: Beitrag sparen oder den besten Bonus nutzen. So finanziert dein Bonus den Zusatzschutz mit, statt dass du alles allein trägst.',
     },
     bonus: {
       eyebrow: 'Danach kommt KassenBoost',
@@ -210,6 +216,11 @@ const COPY = {
       },
       cta: 'Calculate budget & premium',
       disclosure: 'The values are tariff maximums over two years. Policy start, insured benefits, reimbursement limits and current terms apply.',
+    },
+    holisticNote: {
+      eyebrow: 'How we think about supplementary cover',
+      title: 'Holistic instead of a single tariff.',
+      text: 'A health budget alone is only half the answer. We factor in your statutory health fund: save on contributions or get the best bonus. That way your bonus helps finance your supplementary cover, instead of you carrying it all yourself.',
     },
     bonus: {
       eyebrow: 'Then comes KassenBoost',
@@ -536,6 +547,12 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
       {!fromBonusTopic && (
         <>
+      <HolisticNote
+        id="ambulant-holistic-heading"
+        eyebrow={copy.holisticNote.eyebrow}
+        title={copy.holisticNote.title}
+        text={copy.holisticNote.text}
+      />
       <section className="bg-[#071722] px-4 py-16 text-white sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="relative mx-auto w-full max-w-md">

@@ -12,6 +12,7 @@ import StationaerTrustFaq from '@/components/sections/stationaer/StationaerTrust
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
+import HolisticNote from '@/components/sections/shared/HolisticNote';
 
 const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
@@ -53,6 +54,12 @@ const StationaerPage = () => {
         <StationaerTariffSelector />
         <StationaerBenefits />
         <StationaerFamily />
+        <HolisticNote
+          id="stationaer-holistic-heading"
+          eyebrow={t('refresh.holisticNote.eyebrow')}
+          title={t('refresh.holisticNote.title')}
+          text={t('refresh.holisticNote.text')}
+        />
         <StationaerBonusBridge />
         <CompactBonusFeature
           className="bg-[#fbfaf7]"
