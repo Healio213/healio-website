@@ -1,3 +1,4 @@
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Check, Play } from 'lucide-react';
@@ -164,7 +165,7 @@ const B2BExplainerVideo = ({
             </div>
           )}
 
-          <div className="mt-7 text-center">
+          {HEALIO_VOICE_CONTACT_ENABLED && <div className="mt-7 text-center">
             <button
               type="button"
               onClick={() => {
@@ -178,7 +179,7 @@ const B2BExplainerVideo = ({
             <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-[#60747c]">
               {privacyText}
             </p>
-          </div>
+          </div>}
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -635,7 +636,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+          <div className={`mt-6 grid grid-cols-1 gap-6 ${HEALIO_VOICE_CONTACT_ENABLED ? 'lg:grid-cols-[1.08fr_0.92fr]' : ''}`}>
             <div className="rounded-[1.8rem] border border-emerald-900/10 bg-white p-6 sm:p-8">
               <div className="flex items-start gap-4">
                 <FriendlyIcon kind="broker" tone="mint" size="lg" />
@@ -649,7 +650,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 </div>
               </div>
             </div>
-            <div className="grid gap-4">
+            {HEALIO_VOICE_CONTACT_ENABLED && <div className="grid gap-4">
               <div className="flex items-center gap-4 rounded-[1.8rem] border border-violet-200 bg-[#f6f1ff] p-5 sm:p-6">
                 <img src="/images/friendly-icons/personal-support.webp" alt="" className="h-20 w-20 shrink-0 object-contain drop-shadow-[0_10px_18px_rgba(82,53,122,0.18)]" aria-hidden="true" />
                 <div className="min-w-0">
@@ -661,7 +662,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React from 'react';
 import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
@@ -103,4 +104,6 @@ const SalesAiAssist = ({ className = '', variant = 'default' }) => {
   );
 };
 
-export default SalesAiAssist;
+export default function AvailableSalesAiAssist(props) {
+  return HEALIO_VOICE_CONTACT_ENABLED ? <SalesAiAssist {...props} /> : null;
+}

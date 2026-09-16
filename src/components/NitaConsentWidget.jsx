@@ -1,3 +1,4 @@
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Mic, PhoneOff, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -59,12 +60,12 @@ const COPY = {
 };
 
 export const requestNitaConsent = (entryPoint = 'delayed_prompt') => {
-  if (typeof window === 'undefined') return false;
+  if (!HEALIO_VOICE_CONTACT_ENABLED || typeof window === 'undefined') return false;
   window.dispatchEvent(new CustomEvent(NITA_CONSENT_REQUEST_EVENT, { detail: { entryPoint } }));
   return true;
 };
 
-export const NitaConsentWidget = () => {
+const ActiveNitaConsentWidget = () => {
   const { pathname } = useLocation();
   const [consent, setConsent] = useState(() => getConsentState());
   const [panelOpen, setPanelOpen] = useState(false);
@@ -293,4 +294,5 @@ export const NitaConsentWidget = () => {
   );
 };
 
+export const NitaConsentWidget = () => HEALIO_VOICE_CONTACT_ENABLED ? <ActiveNitaConsentWidget /> : null;
 export default NitaConsentWidget;

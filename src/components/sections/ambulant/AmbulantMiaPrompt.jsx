@@ -1,3 +1,4 @@
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -150,4 +151,6 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
   );
 };
 
-export default AmbulantMiaPrompt;
+export default function AvailableAmbulantMiaPrompt(props) {
+  return HEALIO_VOICE_CONTACT_ENABLED ? <AmbulantMiaPrompt {...props} /> : null;
+}
