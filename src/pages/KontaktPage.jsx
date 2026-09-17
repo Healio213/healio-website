@@ -97,6 +97,10 @@ const KontaktPage = () => {
         title={tSeo('kontakt.title')}
         description={tSeo('kontakt.description')}
         canonicalUrl={canonicalUrl}
+        ogImage="https://healio.de/images/healio-app-icon.png"
+        ogImageAlt="Healio – Figur mit Blatt"
+        ogImageWidth={1024}
+        ogImageHeight={1024}
         schemaMarkup={schemaMarkup}
       />
 
