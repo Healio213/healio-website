@@ -3,7 +3,7 @@
     "title": "Smart health cover. Personal and at work.",
     "titleLead": "Smart health cover.",
     "titleAccent": "Personal and at work.",
-    "description": "Healio helps you secure the right supplementary benefits and check whether your health fund bonus can finance part of the premium. Independent, digital and personal.",
+    "description": "We start with your statutory health fund, because that is where most can be gained. Then we clarify how extra cover can be financed, for example through your health fund bonus, and only then which cover really fits. For individuals, employers and practices.",
     "switchLabel": "Choose your path",
     "switch": [
       {
@@ -68,7 +68,7 @@
   },
   "process": {
     "title": "First the right health fund, then the right extra cover.",
-    "description": "We look at your health cover as a whole. It starts with your statutory health fund: KassenBoost shows, free and without contact details, what you can get out of it in contributions and bonuses. On that basis Healio finds the best possible supplementary cover for you and checks whether your fund bonus can offset part of the premium.",
+    "description": "We do not pit insurer A against insurer B. We start with your statutory health fund, because that is where the biggest lever sits: KassenBoost shows you free of charge what contribution and bonus are possible for you. Only then do we clarify how your supplementary cover can be financed and which one fits you.",
     "steps": [
       {
         "number": "01",

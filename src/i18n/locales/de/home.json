@@ -3,7 +3,7 @@
     "title": "Gesundheit clever absichern. Privat und im Unternehmen.",
     "titleLead": "Gesundheit clever absichern.",
     "titleAccent": "Privat und im Unternehmen.",
-    "description": "Healio hilft dir, passende Zusatzleistungen abzusichern und zu prüfen, ob dein Krankenkassenbonus den Beitrag teilweise finanzieren kann. Unabhängig, digital und persönlich.",
+    "description": "Wir schauen zuerst auf deine gesetzliche Krankenkasse, denn dort lässt sich am meisten herausholen. Danach klären wir, wie sich zusätzlicher Schutz finanzieren lässt, zum Beispiel über deinen Krankenkassenbonus, und erst dann, welcher Schutz wirklich passt. Für Privatpersonen, Unternehmen und Praxen.",
     "switchLabel": "Wähle deinen Einstieg",
     "switch": [
       {
@@ -68,7 +68,7 @@
   },
   "process": {
     "title": "Zuerst die richtige Kasse, dann der richtige Zusatzschutz.",
-    "description": "Wir betrachten deine Gesundheitsversorgung ganzheitlich. Das beginnt bei deiner gesetzlichen Krankenkasse: KassenBoost zeigt kostenlos und ohne Kontaktdaten, was du dort an Beitrag und Bonus herausholen kannst. Auf dieser Basis findet Healio den bestmöglichen Zusatzschutz für dich und prüft, ob dein Kassenbonus einen Teil des Beitrags ausgleichen kann.",
+    "description": "Wir stellen nicht Versicherung A gegen Versicherung B. Wir starten bei deiner gesetzlichen Krankenkasse, denn dort liegt der größte Hebel: KassenBoost zeigt dir kostenlos, was Beitrag und Bonus bei dir möglich machen. Erst danach klären wir, wie sich dein Zusatzschutz finanzieren lässt und welcher zu dir passt.",
     "steps": [
       {
         "number": "01",
