@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { trackEvent } from '@/lib/analytics';
 
 const entranceEase = [0.16, 1, 0.3, 1];
 
@@ -118,6 +119,7 @@ const HomeHero = () => {
                   <li key={item.key} className="flex">
                     <Link
                       to={getPath(item.routeKey)}
+                      onClick={() => trackEvent('home_switch_click', { component: item.key })}
                       className="home-focus group flex w-full flex-col rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-home-mint/60 hover:bg-white/[0.14] focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:p-5"
                     >
                       <div className="flex items-center gap-3">
