@@ -23,7 +23,7 @@ const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'),
 assert.equal(de.hero.title, 'Gesundheit clever absichern. Privat und im Unternehmen.');
 assert.equal(en.hero.title, 'Smart health cover. Personal and at work.');
 assert.equal(de.hero.titleAccent, 'Privat und im Unternehmen.');
-assert.match(de.hero.description, /Krankenkassenbonus/);
+assert.match(de.hero.description, /Geld zurück/);
 assert.equal(de.hero.switch.length, 3, 'Die Weiche im Hero hat genau drei Einstiege.');
 assert.deepEqual(
   de.hero.switch.map((item) => item.routeKey),
