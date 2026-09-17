@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Ambulante Zusatzversicherung",
-    "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Effektiv ab <highlight>0 EUR</highlight>.",
-    "subtitle": "Heilpraktiker, Brille und Vorsorge absichern. 0 EUR effektiv sind möglich, wenn dein anerkannter Kassenbonus den selbst gezahlten Beitrag vollständig ausgleicht.",
+    "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Den Beitrag kann dein <highlight>Kassenbonus</highlight> ausgleichen.",
+    "subtitle": "Heilpraktiker, Brille und Vorsorge absichern. Du zahlst zuerst einen Beitrag. Wie viel dein anerkannter Kassenbonus davon zurückholt, rechnen wir mit dir aus, bis hin zum vollen Ausgleich.",
     "factsLabel": "Kurz erklärt",
     "facts": [
       "Erstattung versicherter Rechnungen, mit festen Grenzen je Leistungsbereich.",
@@ -572,7 +572,7 @@
   },
   "howItWorks": {
     "title": "So <highlight>einfach</highlight> funktioniert's",
-    "subtitle": "In 3 klaren Schritten zu deiner <highlight>perfekten Absicherung</highlight>.",
+    "subtitle": "Wir vergleichen nicht Tarif A mit Tarif B. Wir schauen zuerst, wie sich dein Schutz finanzieren lässt, beginnend bei deiner Kasse. Dann finden wir den Schutz, der zu dir passt. In 3 klaren Schritten zu deiner <highlight>perfekten Absicherung</highlight>.",
     "step1Title": "Tarif berechnen",
     "step1Desc": "Nutze unseren kostenlosen Tarifrechner oder kontaktiere uns direkt für dein individuelles Angebot.",
     "step2Title": "Beratung erhalten",

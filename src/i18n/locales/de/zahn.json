@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
-    "subtitle": "Zahnzusatzschutz ab wenigen Euro im Monat. Der IKK classic Bonus kann den Beitrag bis zu 100 % refinanzieren, wie viel genau, prüfen wir individuell mit dir.",
+    "subtitle": "Zahnzusatzschutz mit 30 Jahren ab rund 10 EUR im Monat. Der IKK classic Bonus kann den Beitrag bis zu 100 % refinanzieren, wie viel genau, prüfen wir individuell mit dir.",
     "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, ob der günstigste Beitrag oder der größte persönliche Vorteil für dich zählt.",
     "ctaCalculate": "Passenden Tarif finden",
     "ctaBenefits": "Leistungen ansehen",
@@ -48,7 +48,7 @@
   "check": {
     "badge": "Der Healio Zahn-Check",
     "title": "In 1 Minute zu deiner klaren Empfehlung",
-    "subtitle": "Beantworte bis zu 4 kurze Fragen. Wir kennen die Annahmeregeln der Versicherer im Detail und führen dich direkt zu dem Tarif, der dich wirklich annimmt.",
+    "subtitle": "Wir vergleichen nicht Tarif A mit Tarif B. Wir schauen zuerst, wie sich dein Schutz finanzieren lässt, beginnend bei deiner Kasse. Dann finden wir den Schutz, der zu dir passt. Beantworte bis zu 4 kurze Fragen. Wir kennen die Annahmeregeln der Versicherer im Detail und führen dich direkt zu dem Tarif, der dich wirklich annimmt.",
     "progress": "Frage {{current}}",
     "back": "Zurück",
     "restart": "Check neu starten",

@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Outpatient supplementary insurance",
-    "title": "Up to <highlight>EUR 3,000</highlight> for what keeps you well.",
-    "subtitle": "Cover alternative medicine, glasses and preventive care. You pay the premium yourself; an eligible health fund bonus may offset it afterwards.",
+    "title": "Your <highlight>3,000 EUR</highlight> health budget. Your <highlight>fund bonus</highlight> can offset the premium.",
+    "subtitle": "Cover naturopathy, glasses and prevention. You pay a premium first. We work out with you how much of it your recognised fund bonus brings back, up to a full offset.",
     "factsLabel": "In short",
     "facts": [
       "Reimbursement of insured invoices, with fixed limits per benefit area.",
@@ -524,7 +524,7 @@
   },
   "howItWorks": {
     "title": "How It Works",
-    "subtitle": "In 3 clear steps to your perfect coverage.",
+    "subtitle": "We do not compare plan A with plan B. We first look at how your cover can be financed, starting with your health fund. Then we find the cover that fits you. In 3 clear steps to your perfect coverage.",
     "step1Title": "Calculate your plan",
     "step1Desc": "Use our free plan calculator or contact us directly for your individual quote.",
     "step2Title": "Get advice",
