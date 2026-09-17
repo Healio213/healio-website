@@ -18,14 +18,14 @@
         "key": "employer",
         "routeKey": "unternehmen",
         "title": "I'm an employer",
-        "description": "Company pensions and health cover as a team benefit.",
+        "description": "Company pension and company health insurance as a team benefit. Tax-advantaged, no extra work for HR.",
         "cta": "Explore company solutions"
       },
       {
         "key": "practice",
         "routeKey": "partner",
         "title": "I run a practice",
-        "description": "Make treatment affordable for your patients.",
+        "description": "Make treatments affordable for your patients. Free for your practice, you only inform.",
         "cta": "Explore the partner programme"
       }
     ]

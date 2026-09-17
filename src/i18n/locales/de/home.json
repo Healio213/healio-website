@@ -18,14 +18,14 @@
         "key": "employer",
         "routeKey": "unternehmen",
         "title": "Ich bin Arbeitgeber",
-        "description": "bAV und bKV als Benefit fürs Team.",
+        "description": "bAV und bKV als Benefit fürs Team. Steuerlich gefördert, ohne Mehraufwand für HR.",
         "cta": "Unternehmenslösungen ansehen"
       },
       {
         "key": "practice",
         "routeKey": "partner",
         "title": "Ich habe eine Praxis",
-        "description": "Behandlungen für deine Patienten finanzierbar machen.",
+        "description": "Behandlungen für deine Patienten finanzierbar machen. Für deine Praxis kostenlos, du informierst nur.",
         "cta": "Partnerprogramm ansehen"
       }
     ]
