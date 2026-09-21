@@ -17,6 +17,7 @@ import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTranslation } from 'react-i18next';
+import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 
 const pathVisuals = {
   bayerische: { kind: 'dental', tone: 'mint' },
@@ -40,6 +41,9 @@ const trustVisuals = [
 
 const scrollToCheck = (event, reduceMotion) => {
   event?.preventDefault();
+  // Meta: nur der Klick auf den primaeren Rechner-CTA. Der Zahn-Check selbst
+  // bleibt frei von Messung, seine Antworten verlassen das Geraet nie.
+  trackMetaRechnerStart();
   document.getElementById('zahn-check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 };
 

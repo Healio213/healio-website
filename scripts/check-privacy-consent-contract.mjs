@@ -31,6 +31,12 @@ const footer = read('src/components/sections/Footer.jsx');
 const header = read('src/components/Header.jsx');
 const consent = read('src/lib/consent.js');
 const analytics = read('src/lib/analytics.js');
+const metaPixel = read('src/lib/meta-pixel.js');
+const metaCapi = read('api/meta-events.js');
+const envExample = read('.env.example');
+const vercelConfig = read('vercel.json');
+const metaSourceFiles = collectSourceFiles(path.join(root, 'src'))
+  .map((file) => [path.relative(root, file), fs.readFileSync(file, 'utf8')]);
 const privacyPage = read('src/pages/DatenschutzPage.jsx');
 const veterinaryForm = read('src/components/sections/VeterinaryContactForm.jsx');
 const legalDe = JSON.parse(read('src/i18n/locales/de/legal.json'));
@@ -172,7 +178,7 @@ expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler La
 expect(/healio-mobile-menu-active/.test(header), 'Das mobile Menü muss externe Overlays während der Navigation ausblenden.');
 expect(/html\.healio-mobile-menu-active \.healio-nita-surface/.test(nitaWidget), 'Das mobile Menü muss den globalen Nita-Punkt auch visuell und interaktiv ausblenden.');
 
-for (const purpose of ['analytics', 'google_calendar', 'maps', 'openai']) {
+for (const purpose of ['analytics', 'marketing', 'google_calendar', 'maps', 'openai']) {
   expect(consent.includes(`'${purpose}'`), `Consent-Zweck ${purpose} fehlt.`);
 }
 
@@ -182,10 +188,179 @@ for (const [file, source] of sourceFiles) {
   expect(!/assets\.calendly\.com\/assets\/external\/widget\.js/i.test(source), `${file} lädt das Calendly-Script noch direkt.`);
 }
 
+
+// ---------------------------------------------------------------------------
+// Meta-Funnel-Tracking: Pixel und Conversions API
+// ---------------------------------------------------------------------------
+
+// Der Zweck "marketing" muss ueberall vorhanden und standardmaessig aus sein.
+expect(/marketing: false/.test(consent), 'Der Consent-Zweck marketing muss standardmaessig aus sein.');
+expect(
+  /marketing: \['Marketing \(Meta\)'[\s\S]{0,400}?Meta-Pixel[\s\S]{0,400}?Antworten aus Rechnern und Auswahlhilfen werden nie übertragen\./.test(consentManager),
+  'Der deutsche Consent-Text fuer Meta muss Zweck und Antwort-Ausschluss benennen.',
+);
+expect(
+  /marketing: \['Marketing \(Meta\)'[\s\S]{0,400}?Meta pixel[\s\S]{0,400}?never transmitted\./.test(consentManager),
+  'Der englische Consent-Text fuer Meta muss Zweck und Antwort-Ausschluss benennen.',
+);
+
+// Kein Meta-Skript und kein fbq-Aufruf ausserhalb des consent-gesteuerten Moduls.
+expect(!/connect\.facebook\.net|fbevents\.js|fbq\(/i.test(indexHtml), 'Das Meta-Pixel darf nicht statisch aus index.html geladen werden.');
+for (const [file, source] of metaSourceFiles) {
+  if (file === path.join('src', 'lib', 'meta-pixel.js')) continue;
+  expect(!/connect\.facebook\.net|fbevents\.js/i.test(source), `${file} darf das Meta-Skript nicht selbst laden.`);
+  expect(!/\bfbq\s*\(/.test(source), `${file} darf fbq nicht direkt aufrufen.`);
+}
+
+// Jeder Ladeweg im Modul haengt an Zustimmung UND Pixel-ID.
+expect(
+  /const loadMetaPixel = \(\) => \{\s*\n\s*if \(!isBrowser\(\) \|\| !isMetaConfigured\(\) \|\| !hasConsent\('marketing'\)\) return false;/.test(metaPixel),
+  'Das Meta-Skript darf nur nach Zustimmung marketing und mit gesetzter Pixel-ID geladen werden.',
+);
+expect(
+  /const emitMetaEvent = \(eventName, params = \{\}\) => \{\s*\n\s*if \(!isBrowser\(\) \|\| !isMetaConfigured\(\)\) return false;[\s\S]{0,200}?if \(!hasConsent\('marketing'\)\) return false;\s*\n\s*if \(isMetaExcludedRoute\(\)\) return false;/.test(metaPixel),
+  'Kein Meta-Ereignis darf ohne Zustimmung marketing oder auf gesperrten Routen feuern.',
+);
+expect(
+  /const sendMetaCapiEvent = \(payload\) => \{\s*\n\s*if \(!isBrowser\(\) \|\| !isMetaConfigured\(\) \|\| !hasConsent\('marketing'\)\) return false;/.test(metaPixel),
+  'Die CAPI-Strecke darf nur nach Zustimmung marketing aufgerufen werden.',
+);
+expect(
+  /const META_ENV = \(typeof import\.meta !== 'undefined' && import\.meta\.env\) \|\| \{\};/.test(metaPixel)
+    && /const rawPixelId = typeof META_ENV\.VITE_META_PIXEL_ID === 'string'/.test(metaPixel)
+    && /export const isMetaConfigured = \(\) => META_PIXEL_ID !== '';/.test(metaPixel),
+  'Ohne VITE_META_PIXEL_ID muss der gesamte Meta-Pfad inaktiv bleiben.',
+);
+expect(
+  /fbq\('consent', 'revoke'\)/.test(metaPixel)
+    && /const META_COOKIE = \/\^_fb\[pc\]\$\//.test(metaPixel)
+    && /const clearMetaCookies = \(\)/.test(metaPixel),
+  'Ein Widerruf muss das Pixel abschalten und _fbp/_fbc loeschen.',
+);
+expect(
+  /fbq\('set', 'autoConfig', false, META_PIXEL_ID\)/.test(metaPixel),
+  'Automatische Button- und Formularerfassung von Meta muss abgeschaltet bleiben.',
+);
+expect(
+  /crypto\?\.randomUUID/.test(metaPixel) && /eventID: eventId/.test(metaPixel) && /event_id: eventId/.test(metaPixel),
+  'Pixel und CAPI muessen dieselbe event_id fuer die Deduplizierung verwenden.',
+);
+
+// /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
+expect(
+  /const META_EXCLUDED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(metaPixel),
+  'Die Schwangerschafts-Route muss in der Meta-Sperrliste stehen.',
+);
+expect(
+  /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(metaPixel),
+  'Private Kampagnenquellen muessen auch fuer Meta gesperrt bleiben.',
+);
+expect(
+  /const BLOCKED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(metaCapi),
+  'Auch die CAPI-Funktion muss die Schwangerschafts-Route abweisen.',
+);
+expect(
+  /if \(isMetaExcludedRoute\(\) \|\| !hasConsent\('marketing', state\)\)/.test(app),
+  'Der SPA-Tracker muss Meta auf gesperrten Routen und ohne Zustimmung ueberspringen.',
+);
+
+// Nur die vier freigegebenen Ereignisse, nur ein wertbeschraenkter Parameter.
+const metaEventList = metaPixel.match(/export const META_EVENTS = Object\.freeze\(\[([^\]]*)\]\)/)?.[1] ?? '';
+const metaEventNames = [...metaEventList.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+expect(
+  JSON.stringify(metaEventNames) === JSON.stringify(['PageView', 'ViewContent', 'RechnerStart', 'Lead']),
+  'Die Meta-Ereignisliste muss genau PageView, ViewContent, RechnerStart und Lead enthalten.',
+);
+for (const eventName of metaEventNames) {
+  expect(metaCapi.includes(`'${eventName}'`), `Die CAPI-Whitelist muss ${eventName} kennen.`);
+}
+expect(
+  /const ALLOWED_EVENT_NAMES = new Set\(\['PageView', 'ViewContent', 'RechnerStart', 'Lead'\]\)/.test(metaCapi),
+  'Die CAPI-Funktion darf nur die vier freigegebenen Ereignisnamen annehmen.',
+);
+
+const sensitiveParamKeySource = analytics.match(/const SENSITIVE_PARAM_KEY = \/(.+)\/i;/)?.[1];
+expect(Boolean(sensitiveParamKeySource), 'Der SENSITIVE_PARAM_KEY-Filter muss in analytics.js auffindbar bleiben.');
+if (sensitiveParamKeySource) {
+  const sensitiveParamKey = new RegExp(sensitiveParamKeySource, 'i');
+  const metaParamList = metaPixel.match(/export const META_ALLOWED_PARAM_KEYS = Object\.freeze\(new Set\(\[([^\]]*)\]\)\)/)?.[1] ?? '';
+  const metaParamKeys = [...metaParamList.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+  expect(metaParamKeys.length > 0, 'Die Meta-Parameter-Whitelist muss auffindbar bleiben.');
+
+  // Dokumentierte, enge Ausnahme: content_name ist ein festes Schlüsselwort
+  // aus dem Meta-Schema und enthält selbst keine Nutzerdaten. Der Teilstring
+  // "name" im GA4-Filter zielt auf Personennamen. Deshalb wird für diesen
+  // einen Schlüssel der Schema-Präfix abgeschnitten, bevor geprüft wird -
+  // und der Wertebereich ist zusätzlich auf drei feste Seitenschlüssel
+  // geschlossen (Prüfung direkt darunter).
+  const META_SCHEMA_KEYS = new Set(['content_name']);
+  for (const key of metaParamKeys) {
+    const testedKey = META_SCHEMA_KEYS.has(key) ? key.replace(/^content_/, '') : key;
+    const allowed = META_SCHEMA_KEYS.has(key)
+      ? testedKey === 'name'
+      : !sensitiveParamKey.test(key);
+    expect(allowed, `Der Meta-Parameter ${key} faellt unter den SENSITIVE_PARAM_KEY-Filter.`);
+  }
+  expect(
+    /if \(typeof value !== 'string' \|\| !META_PAGE_KEYS\.has\(value\)\)/.test(metaPixel)
+      || /key === 'content_name' && typeof value === 'string' && META_PAGE_KEYS\.has\(value\)/.test(metaPixel),
+    'content_name darf ausschliesslich einen der festen Seitenschluessel als Wert annehmen.',
+  );
+
+  const metaPageKeyList = metaPixel.match(/export const META_PAGE_KEYS = Object\.freeze\(new Set\(\[([^\]]*)\]\)\)/)?.[1] ?? '';
+  const metaPageKeys = [...metaPageKeyList.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+  expect(
+    JSON.stringify(metaPageKeys) === JSON.stringify(['zahn', 'ambulant', 'partner']),
+    'ViewContent darf nur die drei neutralen Seitenschluessel senden.',
+  );
+  for (const key of metaPageKeys) {
+    expect(!sensitiveParamKey.test(key), `Der Seitenschluessel ${key} faellt unter den SENSITIVE_PARAM_KEY-Filter.`);
+  }
+}
+
+// Die an Meta gehende URL kennt nur utm_* und fbclid.
+expect(
+  /const META_QUERY_ALLOWLIST = \/\^\(\?:utm_\[a-z_\]\{1,30\}\|fbclid\)\$\/i;/.test(metaPixel)
+    && /const QUERY_ALLOWLIST = \/\^\(\?:utm_\[a-z_\]\{1,30\}\|fbclid\)\$\/i;/.test(metaCapi),
+  'event_source_url muss auf beiden Seiten auf utm_* und fbclid reduziert werden.',
+);
+
+// Der Zahn-Check selbst bleibt unberuehrt.
+expect(!/meta|fbq|pixel/i.test(dentalCheck), 'Der Zahn-Check muss auch ohne Meta-Logik bleiben.');
+
+// Secrets bleiben auf dem Server und werden nie geloggt.
+expect(
+  !/VITE_META_CAPI_ACCESS_TOKEN|VITE_META_TEST_EVENT_CODE/.test(completeSource + envExample),
+  'CAPI-Token und Testcode duerfen niemals als VITE_-Variable im Client landen.',
+);
+expect(
+  !/META_CAPI_ACCESS_TOKEN/.test(completeSource),
+  'Das CAPI-Token darf im Client-Quelltext nicht vorkommen.',
+);
+expect(
+  !/console\.(?:log|error|warn|info)/.test(metaCapi),
+  'Die CAPI-Funktion darf nichts loggen, was das Token spiegeln koennte.',
+);
+expect(
+  /if \(!PIXEL_ID_PATTERN\.test\(pixelId\) \|\| accessToken === ''\) \{\s*\n\s*res\.status\(204\)\.end\(\);/.test(metaCapi),
+  'Ohne gesetzte Server-Variablen muss die CAPI-Funktion 204 antworten und nichts tun.',
+);
+expect(
+  /VITE_META_PIXEL_ID=\s*$/m.test(envExample)
+    && /META_CAPI_ACCESS_TOKEN/.test(envExample)
+    && /META_TEST_EVENT_CODE/.test(envExample),
+  '.env.example muss die Meta-Variablen ohne echte Werte dokumentieren.',
+);
+
+// CSP muss die Meta-Hosts kennen, sonst blockt der Report-Only-Bericht dauerhaft.
+expect(/script-src[^"]*https:\/\/connect\.facebook\.net/.test(vercelConfig), 'Die CSP muss connect.facebook.net als Skriptquelle erlauben.');
+expect(/connect-src[^"]*https:\/\/www\.facebook\.com https:\/\/connect\.facebook\.net/.test(vercelConfig), 'Die CSP muss die Meta-Endpunkte als Verbindungsziel erlauben.');
+expect(/img-src[^"]*https:\/\/www\.facebook\.com/.test(vercelConfig), 'Die CSP muss www.facebook.com als Bildquelle erlauben.');
+
 if (failures.length > 0) {
   console.error(`Privacy-Consent-Contract fehlgeschlagen (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log('Privacy-Consent-Contract erfüllt: Zahn-Check lokal, externe Dienste consent-gesteuert.');
+console.log('Privacy-Consent-Contract erfüllt: Zahn-Check lokal, externe Dienste consent-gesteuert, Meta-Funnel nur nach Opt-in.');

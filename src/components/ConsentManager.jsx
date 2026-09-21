@@ -31,6 +31,7 @@ const COPY = {
     close: 'Einstellungen schließen',
     purposes: {
       analytics: ['Analyse', 'Google Analytics hilft uns nach deiner Zustimmung, die Website zu verbessern. Antworten aus unseren Auswahlhilfen werden nicht übertragen.'],
+      marketing: ['Marketing (Meta)', 'Nur nach deiner Zustimmung misst ein Meta-Pixel, ob unsere Anzeigen zu Seitenaufrufen und Anfragen führen. Antworten aus Rechnern und Auswahlhilfen werden nie übertragen.'],
       google_calendar: ['Terminbuchung', 'Google Kalender wird nur nach deiner gesonderten Freigabe für die eingebettete Terminbuchung geladen.'],
       maps: ['Karten', 'Externe Karten werden erst nach deiner Freigabe geladen.'],
       openai: ['Nita, digitale Assistenz', 'OpenAI wird erst für die Sprachverbindung mit Nita geladen, wenn du sie ausdrücklich erlaubst.'],
@@ -53,6 +54,7 @@ const COPY = {
     close: 'Close settings',
     purposes: {
       analytics: ['Analytics', 'Google Analytics helps us improve the website after your consent. Answers from our selection tools are never transmitted.'],
+      marketing: ['Marketing (Meta)', 'Only after your consent does a Meta pixel measure whether our ads lead to page views and enquiries. Answers from calculators and selection tools are never transmitted.'],
       google_calendar: ['Appointment booking', 'Google Calendar loads only after your separate approval for embedded appointment booking.'],
       maps: ['Maps', 'External maps load only after you allow them.'],
       openai: ['Nita, digital assistant', 'OpenAI loads for Nita’s voice connection only after you explicitly allow it.'],

@@ -10,7 +10,7 @@ const GA4_SCRIPT_URL = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUR
 const GA4_DISABLE_KEY = `ga-disable-${GA4_MEASUREMENT_ID}`;
 const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
 const ANALYTICS_EXCLUDED_PATHS = new Set(['/zahn', '/en/dental', '/schwangerschaft']);
-const PRIVATE_FUNNEL_SOURCES = new Set(['reel-f05', 'bonus-check']);
+export const PRIVATE_FUNNEL_SOURCES = new Set(['reel-f05', 'bonus-check']);
 const SAFE_EVENT_NAME = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_PARAM_KEY = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_TOKEN_VALUE = /^[a-z0-9][a-z0-9._-]{0,63}$/i;

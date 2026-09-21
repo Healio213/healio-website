@@ -5,6 +5,7 @@ export const CONSENT_SETTINGS_EVENT = 'healio:consent-settings';
 
 export const CONSENT_PURPOSES = Object.freeze([
   'analytics',
+  'marketing',
   'google_calendar',
   'maps',
   'openai',
@@ -12,8 +13,11 @@ export const CONSENT_PURPOSES = Object.freeze([
 
 const PURPOSE_SET = new Set(CONSENT_PURPOSES);
 const SOURCE_SET = new Set(['banner', 'settings', 'provider', 'external', 'unknown']);
+// Fehlende Zwecke in gespeicherten v2-Entscheidungen gelten immer als false.
+// clonePreferences erzwingt das fuer jeden neu hinzugekommenen Zweck.
 const EMPTY_PREFERENCES = Object.freeze({
   analytics: false,
+  marketing: false,
   google_calendar: false,
   maps: false,
   openai: false,
