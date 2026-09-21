@@ -40,7 +40,7 @@ const de = {
     trust: 'Deine Antworten werden weder gespeichert noch übertragen.',
     disclaimer: 'Der Check ist eine erste Orientierung. Verbindlich entscheidet der jeweilige Versicherer nach den Angaben im Antrag.',
     bonusLead: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.',
-    bonusDetail: 'Wir vergleichen Beitrag, realistisch erreichbaren Bonus und Leistungen. So findest du die Krankenkasse, die am besten zu deinem Tarif passt.',
+    bonusDetail: 'Beitrag, realistisch erreichbarer Bonus und Leistungen stehen getrennt nebeneinander. So findest du die Krankenkasse, die am besten zu deinem Tarif passt.',
     bonusCta: 'Krankenkasse passend zum Tarif finden',
     questions: {
       q1: {
@@ -61,7 +61,7 @@ const de = {
         },
       },
       q3: {
-        text: 'Gibt es eine Zahn-Vorgeschichte, die wir beachten sollten?',
+        text: 'Gibt es bei dir eine Zahn-Vorgeschichte, die zu beachten ist?',
         hint: 'Zum Beispiel Parodontitis, eine Prothese oder älteren Zahnersatz.',
         options: {
           ja: { label: 'Ja, mindestens einer dieser Punkte trifft zu' },
@@ -190,11 +190,11 @@ const de = {
       sonderKomplex: {
         tone: 'neutral',
         insurer: 'Persönliche Einordnung durch Healio',
-        title: 'Hier sollten wir erst gemeinsam hinschauen',
+        title: 'Deine Kombination braucht erst einen gemeinsamen Blick',
         text: 'Wenn Behandlung, fehlende Zähne oder Vorgeschichte zusammenkommen, wäre eine automatische Empfehlung zu grob.',
         reasons: [
-          'Wir trennen bestehende Behandlung und künftigen Schutz',
-          'Wir erklären offen, welche Wege noch prüfbar sind',
+          'Bestehende Behandlung und künftiger Schutz bleiben getrennt',
+          'Du erfährst offen, welche Wege noch prüfbar sind',
           'Du entscheidest erst, wenn die Bedingungen klar sind',
         ],
         warning: 'Eine Annahme oder Leistung lässt sich in dieser Kombination nicht pauschal versprechen.',
@@ -206,7 +206,7 @@ const de = {
         tone: 'neutral',
         insurer: 'Persönliche Einordnung durch Healio',
         title: 'Mehr als 3 fehlende Zähne brauchen einen anderen Weg',
-        text: 'Die Standardwege dieser Seite passen dann nicht zuverlässig. Wir prüfen mit dir, welche Alternativen am Markt noch sinnvoll sein können.',
+        text: 'Die Standardwege dieser Seite passen dann nicht zuverlässig. Welche Alternativen am Markt noch sinnvoll sein können, prüfst du gemeinsam mit uns.',
         reasons: [
           'Keine automatische Produktempfehlung',
           'Ehrliche Einordnung von Leistung und Grenzen',
@@ -221,7 +221,7 @@ const de = {
   },
   paths: {
     eyebrow: 'Vier Wege. Sauber getrennt.',
-    title: 'Deine Zahnsituation entscheidet. Wir zeigen dir den Weg, der heute wirklich offen ist.',
+    title: 'Deine Zahnsituation entscheidet. Du siehst den Weg, der heute wirklich offen ist.',
     text: 'Der Zahn-Check ordnet zuerst deine Situation ein. Erst danach geht es um Beitrag und Abschluss.',
     cards: [
       {
@@ -275,7 +275,7 @@ const de = {
     eyebrow: 'KassenBoost nach der Tarifwahl',
     title: 'Finde die Krankenkasse, die am besten zu deinem Tarif passt.',
     text: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.',
-    detail: 'Wir vergleichen Beitrag, realistisch erreichbaren Bonus und Leistungen und rechnen deine persönliche Höhe transparent aus.',
+    detail: 'Beitrag, realistisch erreichbaren Bonus und Leistungen siehst du getrennt, deine persönliche Höhe wird transparent ausgerechnet.',
     cta: 'Zahn-Check starten',
     link: 'Krankenkasse passend zum Tarif finden',
     stamp: 'Dieser Zuschuss ist möglich',
@@ -287,14 +287,14 @@ const de = {
   process: {
     eyebrow: 'Einfach erklärt',
     title: 'Erst verstehen. Dann passend absichern.',
-    text: 'Healio verbindet digitale Tarifwege mit persönlicher Einordnung. Du behältst die Entscheidung.',
+    text: 'Du rechnest deinen Tarif online und besprichst offene Punkte am Telefon. Die Entscheidung bleibt bei dir.',
     steps: [
       { title: 'Situation klären', text: 'Der Zahn-Check trennt Behandlung, fehlende Zähne und deinen Leistungswunsch.' },
       { title: 'Tarifweg vergleichen', text: 'Du siehst nur den Weg, der zu deinen Antworten passen kann.' },
       { title: 'Verbindlich prüfen', text: 'Beitrag, Gesundheitsfragen und Annahme siehst du im Antrag des Versicherers.' },
     ],
     trustTitle: 'Nachvollziehbar statt schön gerechnet.',
-    trustText: 'Wir zeigen Bedingungen in Sichtnähe und trennen Orientierung, Tarifberechnung und verbindliche Annahme.',
+    trustText: 'Bedingungen stehen in Sichtnähe, und Orientierung, Tarifberechnung und verbindliche Annahme bleiben getrennt.',
     sealNote: 'Auszeichnungen beziehen sich auf die jeweils genannten Tarife und Testjahrgänge.',
   },
   faq: {
@@ -316,7 +316,7 @@ const de = {
       },
       {
         q: 'Was kostet eine Zahnzusatzversicherung?',
-        a: 'Der Beitrag hängt unter anderem von Alter, Tarif und Leistungsstufe ab. Deshalb nennen wir keinen pauschalen Lockpreis. Im jeweiligen Tarifrechner siehst du deinen konkreten Beitrag, bevor du den Antrag abschickst.',
+        a: 'Der Beitrag hängt unter anderem von Alter, Tarif und Leistungsstufe ab. Deshalb steht hier kein pauschaler Lockpreis. Im jeweiligen Tarifrechner siehst du deinen konkreten Beitrag, bevor du den Antrag abschickst.',
       },
       {
         q: 'Welche Gesundheitsfragen muss ich beantworten?',
@@ -328,7 +328,7 @@ const de = {
       },
       {
         q: 'Zahlt mein Kassenbonus den ganzen Beitrag?',
-        a: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen. Wir vergleichen Beitrag, realistisch erreichbaren Bonus und Leistungen. So siehst du transparent, welche Krankenkasse am besten zu deinem Tarif passt.',
+        a: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen. Beitrag, realistisch erreichbarer Bonus und Leistungen stehen getrennt nebeneinander. So siehst du transparent, welche Krankenkasse am besten zu deinem Tarif passt.',
       },
       {
         q: 'Wie läuft der Abschluss nach dem Zahn-Check ab?',

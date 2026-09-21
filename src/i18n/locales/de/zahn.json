@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
-    "subtitle": "Zahnzusatzschutz mit 30 Jahren ab rund 10 EUR im Monat. Erst die richtige Kasse, dann der Bonus: Der IKK classic Bonus kann den Beitrag bis zu 100 % zurückholen, wie viel genau, prüfen wir mit dir.",
+    "subtitle": "Zahnzusatzschutz mit 30 Jahren ab rund 10 EUR im Monat. Erst die richtige Kasse, dann der Bonus: Der IKK classic Bonus kann den Beitrag bis zu 100 % zurückholen, wie viel genau, hängt von den Bonusmaßnahmen ab, die du erfüllst.",
     "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, ob der günstigste Beitrag oder der größte persönliche Vorteil für dich zählt.",
     "ctaCalculate": "Passenden Tarif finden",
     "ctaBenefits": "Leistungen ansehen",
@@ -22,8 +22,8 @@
   "siegel": {
     "eyebrow": "Vertrauen auf einen Blick",
     "title": "Ausgezeichnete Zahn-Tarife. Starke Kooperation.",
-    "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt, und greifen für deinen Schutz sinnvoll ineinander.",
-    "partnersLabel": "Unsere Partner: die Bayerische, UKV, LKH & IKK classic",
+    "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt und greifen für deinen Schutz sinnvoll ineinander.",
+    "partnersLabel": "Hinter deinem Schutz stehen: die Bayerische, UKV, LKH & IKK classic",
     "awardsLabel": "Aktuelle Auszeichnungen der Zahn-Tarife",
     "cooperationLabel": "In Kooperation mit",
     "cooperationText": "Das IKK classic Bonusprogramm kann den Beitrag deiner Zahnzusatzversicherung je nach erfüllten Bonusmaßnahmen teilweise oder vollständig ausgleichen.",
@@ -48,14 +48,14 @@
   "check": {
     "badge": "Der Healio Zahn-Check",
     "title": "In 1 Minute zu deiner klaren Empfehlung",
-    "subtitle": "Wir vergleichen nicht Tarif A mit Tarif B. Wir schauen zuerst, wie sich dein Schutz finanzieren lässt, beginnend bei deiner Kasse. Dann finden wir den Schutz, der zu dir passt. Beantworte bis zu 4 kurze Fragen. Wir kennen die Annahmeregeln der Versicherer im Detail und führen dich direkt zu dem Tarif, der dich wirklich annimmt.",
+    "subtitle": "Hier vergleichst du nicht Tarif A mit Tarif B. Du siehst zuerst, wie sich dein Schutz finanzieren lässt, beginnend bei deiner Kasse. Danach kommt der Schutz, der zu dir passt. Beantworte bis zu 4 kurze Fragen. Die Annahmeregeln der Versicherer sind hier im Detail hinterlegt, damit du direkt bei dem Tarif landest, der dich wirklich annimmt.",
     "progress": "Frage {{current}}",
     "back": "Zurück",
     "restart": "Check neu starten",
     "resultKicker": "Deine Empfehlung",
     "warningLabel": "Wichtig:",
-    "trust": "Deine Antworten werden nicht gespeichert und nicht übertragen. Sie dienen nur der Empfehlung auf dieser Seite.",
-    "disclaimer": "Verbindlich geprüft wird die Annahme erst im Antrag des jeweiligen Versicherers. Der Check ersetzt keine individuelle Beratung.",
+    "trust": "Deine Antworten werden nicht gespeichert und nicht übertragen und dienen nur der Empfehlung auf dieser Seite.",
+    "disclaimer": "Verbindlich geprüft wird die Annahme erst im Antrag des jeweiligen Versicherers. Der Check ersetzt keine persönliche Beratung.",
     "ikkNote": "Übrigens: Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt.",
     "ikkCta": "Kassenvorteil prüfen",
     "questions": {
@@ -173,7 +173,7 @@
       "ukvFamilie": {
         "insurer": "UKV (Union Krankenversicherung)",
         "title": "ZahnPRIVAT 90 oder 100 für deine Familie",
-        "text": "Für Familien ist die UKV die klare Nummer eins: Kein anderer unserer Wege bietet so viel Kieferorthopädie-Budget für Kinder.",
+        "text": "Für Familien ist die UKV die klare Nummer eins: Mehr Kieferorthopädie-Budget für deine Kinder bekommst du auf keinem der anderen Wege hier.",
         "reasons": [
           "Kieferorthopädie für Kinder bis 5.000 EUR, in allen KIG-Stufen 1 bis 5, auch transparente Aligner",
           "Professionelle Zahnreinigung ohne Jahreslimit in den Top-Stufen",
@@ -220,7 +220,7 @@
       "preis": {
         "insurer": "LKH (Landeskrankenhilfe)",
         "title": "ZahnUpgrade 90+: starke Leistung zum kleinen Beitrag",
-        "text": "Bei gesunden Zähnen und Preis-Fokus ist der LKH ZahnUpgrade 90+ unser Preis-Leistungs-Tipp: Stiftung Warentest bewertet ihn mit SEHR GUT (0,8) und führt ihn als Testsieger der Kategorie Gut und günstig (Finanztest 07/2025).",
+        "text": "Bei gesunden Zähnen und Preis-Fokus bekommst du mit dem LKH ZahnUpgrade 90+ den Preis-Leistungs-Tipp dieser Seite: Stiftung Warentest bewertet ihn mit SEHR GUT (0,8) und führt ihn als Testsieger der Kategorie Gut und günstig (Finanztest 07/2025).",
         "reasons": [
           "90 % für Zahnersatz und Zahnbehandlung, mit gepflegtem Bonusheft steigend auf bis zu 100 %",
           "Mit 30 Jahren zum Beispiel 13,50 EUR im Monat, da refinanziert der IKK Bonus besonders leicht",
@@ -236,9 +236,9 @@
       "sonderLuecke": {
         "insurer": "Dein Sonderweg bei Healio",
         "title": "Für dich gibt es einen Sonderweg, den kaum jemand kennt",
-        "text": "Ehrliche Ansage: Für die Kombination aus angeratener Behandlung und fehlenden Zähnen passt keine unserer beiden Online-Strecken, dort würdest du abgelehnt oder zurückgestellt. Es gibt am Markt aber Sofort-Tarife ohne Gesundheitsfragen, die genau deinen Fall mitversichern. Wir nennen dir kostenlos den passenden.",
+        "text": "Ehrliche Ansage: Für die Kombination aus angeratener Behandlung und fehlenden Zähnen passt keine der beiden Online-Strecken hier, dort würdest du abgelehnt oder zurückgestellt. Es gibt am Markt aber Sofort-Tarife ohne Gesundheitsfragen, die genau deinen Fall mitversichern. Welcher davon passt, erfährst du bei uns kostenlos.",
         "reasons": [
-          "Wir sagen dir konkret, welcher Sofort-Tarif deinen Fall annimmt, kostenlos und unverbindlich",
+          "Du erfährst konkret, welcher Sofort-Tarif deinen Fall annimmt, kostenlos und unverbindlich",
           "Ein kurzes Telefonat reicht, danach kannst du direkt online abschließen",
           "Wichtig: Die Behandlung darf noch nicht abgeschlossen sein, warte also nicht zu lange"
         ],
@@ -248,10 +248,10 @@
       },
       "sonderVorgeschichte": {
         "insurer": "Dein Sonderweg bei Healio",
-        "title": "Eine Frage entscheidet deinen Weg, wir klären sie in 2 Minuten",
-        "text": "Bei angeratener Behandlung plus Vorgeschichte hängt der richtige Tarif davon ab, ob bei dir Zahnersatz (Krone, Brücke, Prothese) oder eine Zahnbehandlung (Füllung, Wurzel- oder Parodontitis-Behandlung) ansteht. Für beide Fälle gibt es am Markt eine Sofort-Lösung ohne Gesundheitsfragen, aber jeweils eine andere. Wir nennen dir kostenlos die richtige.",
+        "title": "Eine Frage entscheidet deinen Weg, in 2 Minuten hast du sie geklärt",
+        "text": "Bei angeratener Behandlung plus Vorgeschichte hängt der richtige Tarif davon ab, ob bei dir Zahnersatz (Krone, Brücke, Prothese) oder eine Zahnbehandlung (Füllung, Wurzel- oder Parodontitis-Behandlung) ansteht. Für beide Fälle gibt es am Markt eine Sofort-Lösung ohne Gesundheitsfragen, aber jeweils eine andere. Welche für dich gilt, erfährst du bei uns kostenlos.",
         "reasons": [
-          "Wir klären am Telefon in 2 Minuten, welcher Sofort-Tarif zu deiner Behandlung passt",
+          "Am Telefon klärst du in 2 Minuten, welcher Sofort-Tarif zu deiner Behandlung passt",
           "Kostenlos und unverbindlich, danach schließt du direkt online ab",
           "Wichtig: Die Behandlung darf noch nicht abgeschlossen sein, warte also nicht zu lange"
         ],
@@ -262,9 +262,9 @@
       "sonderViele": {
         "insurer": "Dein Sonderweg bei Healio",
         "title": "Auch mit vielen fehlenden Zähnen gibt es einen Weg",
-        "text": "Ab 4 fehlenden Zähnen nehmen unsere beiden Partner-Versicherer nicht an, und die meisten Zahntarife am Markt auch nicht. Es gibt aber eine Sofort-Lösung ohne Gesundheitsfragen, die auch viele fehlende Zähne mitversichert. Wir nennen sie dir kostenlos und sagen dir ehrlich, was sie leistet und was nicht.",
+        "text": "Ab 4 fehlenden Zähnen nehmen die beiden Partner-Versicherer hier nicht an, und die meisten Zahntarife am Markt auch nicht. Es gibt aber eine Sofort-Lösung ohne Gesundheitsfragen, die auch viele fehlende Zähne mitversichert. Du erfährst sie bei uns kostenlos, mit ehrlicher Ansage, was sie leistet und was nicht.",
         "reasons": [
-          "Wir nennen dir den Tarif, der deine Situation wirklich mitversichert, kostenlos und unverbindlich",
+          "Du erfährst den Tarif, der deine Situation wirklich mitversichert, kostenlos und unverbindlich",
           "Ehrliche Einordnung dazu: was bezahlt wird, wo die Grenzen liegen und wie du die Versorgung klug planst",
           "Ein kurzes Telefonat reicht, danach kannst du direkt online abschließen"
         ],
@@ -277,7 +277,7 @@
   "insurerChoice": {
     "badge": "Sofortschutz, Vorsorge und Preis-Tipp",
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
-    "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für jede Situation eine klare, sachliche Einordnung: Sofortschutz, starke Vorsorge oder unseren Preis-Leistungs-Tipp.",
+    "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für jede Situation eine klare, sachliche Einordnung: Sofortschutz, starke Vorsorge oder den Preis-Leistungs-Tipp.",
     "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
     "details": {
       "show": "Leistungen und Besonderheiten anzeigen",
@@ -360,7 +360,7 @@
       "subtitle": "Acht typische Situationen, eine klare Empfehlung.",
       "show": "Bedarfsfinder öffnen",
       "hide": "Bedarfsfinder schließen",
-      "recommendation": "Unsere Empfehlung",
+      "recommendation": "Empfehlung für dich",
       "items": [
         {
           "situation": "Eine Behandlung ist angeraten oder läuft schon",
@@ -394,7 +394,7 @@
         },
         {
           "situation": "Mehr als 3 fehlende Zähne",
-          "empfehlung": "Sonderweg: Unsere beiden Partner nehmen ab 4 fehlenden Zähnen nicht an. Es gibt am Markt aber eine Sofort-Lösung ohne Gesundheitsfragen, die auch das mitversichert. Wir nennen sie dir kostenlos: 040 89755705.",
+          "empfehlung": "Sonderweg: Die beiden Partner hier nehmen ab 4 fehlenden Zähnen nicht an. Es gibt am Markt aber eine Sofort-Lösung ohne Gesundheitsfragen, die auch das mitversichert. Du erfährst sie bei uns kostenlos: 040 89755705.",
           "weg": "beide"
         },
         {
@@ -450,11 +450,11 @@
     "items": [
       {
         "q": "Mein Zahnarzt hat schon eine Behandlung angeraten. Kann ich noch abschließen?",
-        "a": "Ja, genau dafür gibt es unseren Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt."
+        "a": "Ja, genau dafür gibt es den Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt."
       },
       {
         "q": "Welcher Weg passt zu mir: die Bayerische, die UKV oder die LKH?",
-        "a": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen? Wenn ja, ist die Bayerische mit dem Baustein ZAHN Sofort dein Weg. Wenn nein, sicherst du dir mit der UKV ZahnPRIVAT starke Vorsorge in drei Tarifstufen, besonders für Familien. Und wenn dir bei gesunden Zähnen vor allem ein kleiner Beitrag wichtig ist, ist der LKH ZahnUpgrade 90+ unser Preis-Leistungs-Tipp (Stiftung Warentest SEHR GUT 0,8, Finanztest 07/2025). Der Zahn-Check oben auf dieser Seite führt dich direkt zum passenden Abschluss."
+        "a": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen? Wenn ja, ist die Bayerische mit dem Baustein ZAHN Sofort dein Weg. Wenn nein, sicherst du dir mit der UKV ZahnPRIVAT starke Vorsorge in drei Tarifstufen, besonders für Familien. Und wenn dir bei gesunden Zähnen vor allem ein kleiner Beitrag wichtig ist, ist der LKH ZahnUpgrade 90+ der Preis-Leistungs-Tipp (Stiftung Warentest SEHR GUT 0,8, Finanztest 07/2025). Der Zahn-Check oben auf dieser Seite führt dich direkt zum passenden Abschluss."
       },
       {
         "q": "Was kostet die Zahnzusatzversicherung monatlich?",
@@ -462,7 +462,7 @@
       },
       {
         "q": "Kann ich mit fehlenden Zähnen abschließen?",
-        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Wichtig ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt den Ersatz für die Lücke anrät. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, wir nennen sie dir kostenlos am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
+        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Wichtig ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt den Ersatz für die Lücke anrät. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, du erfährst sie kostenlos am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
       },
       {
         "q": "Ich hatte vor Kurzem Parodontitis. Geht trotzdem etwas?",
@@ -488,8 +488,8 @@
   },
   "zahnzusatz": {
     "hero": {
-      "title": "Schluss mit hohen Zahnarzt-Rechnungen. <highlight>Sichern Sie sich Privatpatienten-Status</highlight> beim Zahnarzt.",
-      "subtitle": "Egal ob Implantate, Kronen oder professionelle Zahnreinigung: Wir übernehmen die Kosten, die Ihre Krankenkasse nicht zahlt.",
+      "title": "Schluss mit hohen Zahnarzt-Rechnungen. <highlight>Sichere dir Privatpatienten-Status</highlight> beim Zahnarzt.",
+      "subtitle": "Egal ob Implantate, Kronen oder professionelle Zahnreinigung: Die Kosten, die deine Krankenkasse nicht zahlt, übernimmt deine Zusatzversicherung.",
       "cta": "Jetzt Tarif berechnen",
       "imageAlt": "Strahlendes Lächeln"
     },
@@ -497,27 +497,27 @@
       "badge": "Die Kostenfalle",
       "title": "Das Problem: Gesetzliche Krankenversicherung deckt fast nichts ab",
       "text1": "Wenn es beim Zahnarzt ernst wird, wird es teuer. Die gesetzlichen Kassen zahlen bei Zahnersatz nur einen geringen Festzuschuss, oft weniger als 50% der einfachsten Versorgung.",
-      "text2": "Hochwertige Implantate, Keramikkronen oder Inlays müssen Sie fast komplett selbst bezahlen. Eine einzelne Rechnung kann schnell <strong>mehrere tausend Euro</strong> betragen. Ohne Zusatzversicherung bleiben Sie auf diesen Kosten sitzen."
+      "text2": "Hochwertige Implantate, Keramikkronen oder Inlays bezahlst du fast komplett selbst. Eine einzelne Rechnung kann schnell <strong>mehrere tausend Euro</strong> betragen. Ohne Zusatzversicherung bleibst du auf diesen Kosten sitzen."
     },
     "solution": {
       "badge": "Die Lösung",
-      "title": "Rundum-Schutz für Ihre Zähne",
+      "title": "Rundum-Schutz für deine Zähne",
       "erstattung": {
         "title": "100% Erstattung",
-        "desc": "Wir übernehmen bis zu 100% der Kosten für hochwertigen Zahnersatz, Inlays und Implantate. Keine Kompromisse mehr bei der Qualität."
+        "desc": "Bis zu 100% der Kosten für hochwertigen Zahnersatz, Inlays und Implantate bekommst du erstattet. Keine Kompromisse mehr bei der Qualität."
       },
       "zahnreinigung": {
         "title": "Zahnreinigung inklusive",
-        "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe, für ein strahlendes Lächeln."
+        "desc": "Professionelle Zahnreinigung so oft du willst. Die Kosten für deine Prophylaxe bekommst du erstattet, für ein strahlendes Lächeln."
       },
       "sofortschutz": {
         "title": "Sofort-Schutz",
-        "desc": "Keine Wartezeiten. Ihr Versicherungsschutz beginnt sofort ab dem ersten Tag. Reichen Sie Rechnungen direkt ein."
+        "desc": "Keine Wartezeiten. Dein Versicherungsschutz beginnt sofort ab dem ersten Tag. Rechnungen reichst du direkt ein."
       }
     },
     "tariffFinder": {
-      "title": "Finden Sie den Tarif, der Sie garantiert annimmt.",
-      "subtitle": "Wählen Sie Ihren aktuellen Zahnstatus für ein maßgeschneidertes Angebot.",
+      "title": "Finde den Tarif, der dich mit deiner Zahnsituation annehmen kann.",
+      "subtitle": "Wähle deinen aktuellen Zahnstatus, dann siehst du das passende Angebot.",
       "optionHealthy": {
         "title": "Alles gesund & vollzählig",
         "desc": "Ich habe keine fehlenden Zähne und keine laufenden Behandlungen."
