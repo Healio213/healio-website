@@ -63,7 +63,7 @@ assert.equal(deCommon.nav.kassenvorteil, 'Kassenvorteil prüfen');
 assert.equal(enCommon.nav.versicherungen, 'Insurance');
 assert.equal(enCommon.nav.kontakt, 'Contact');
 assert.equal(enCommon.nav.kassenvorteil, 'Check insurer value');
-assert.match(indexCss, /family=Manrope/);
+assert.match(indexCss, /font-family: 'Manrope'/);
 assert.match(tailwindConfig, /'home-midnight': '#07111F'/);
 
 const homeHero = readText('src/components/home/HomeHero.jsx');

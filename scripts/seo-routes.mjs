@@ -620,6 +620,7 @@ export const seoRoutes = [
     canonical: 'https://healio.de/en/blog',
     lang: 'en',
     hreflang: { de: 'https://healio.de/blog', en: 'https://healio.de/en/blog' },
+    robots: 'noindex, nofollow',
   },
   {
     path: '/en/midwives',

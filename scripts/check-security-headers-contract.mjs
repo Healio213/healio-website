@@ -43,8 +43,6 @@ for (const directive of [
   "default-src 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
-  'https://fonts.googleapis.com',
-  'https://fonts.gstatic.com',
   'https://unpkg.com',
   'https://cdn.jsdelivr.net',
   'https://storage.googleapis.com',

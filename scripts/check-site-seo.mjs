@@ -23,6 +23,7 @@ const noindexPaths = new Set([
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',
   '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
+  '/en/blog',
 ]);
 
 const bilingualPairs = [

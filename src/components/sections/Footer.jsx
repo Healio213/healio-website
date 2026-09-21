@@ -27,15 +27,18 @@ const PlayStoreMark = () => (
 
 const AppIconTile = () => (
   <span className="h-[4.35rem] w-[4.35rem] shrink-0" aria-hidden="true">
-    <img
-      src="/images/healio-app-icon.png"
-      alt=""
-      width="1024"
-      height="1024"
-      loading="lazy"
-      decoding="async"
-      className="h-full w-full rounded-[1.35rem] object-cover shadow-[0_14px_30px_rgba(0,0,0,0.38)]"
-    />
+    <picture>
+      <source srcSet="/images/healio-app-icon.webp" type="image/webp" />
+      <img
+        src="/images/healio-app-icon.png"
+        alt=""
+        width="140"
+        height="140"
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full rounded-[1.35rem] object-cover shadow-[0_14px_30px_rgba(0,0,0,0.38)]"
+      />
+    </picture>
   </span>
 );
 
@@ -188,7 +191,9 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
             <h4 className="font-semibold mb-4 text-slate-200">{t('footer.healioLegal')}</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li><Link to={getPath('about')} className="hover:text-healio-primary transition-colors">{t('footer.aboutUs')}</Link></li>
-              <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
+              {lang === 'de' && (
+                <li><Link to={getPath('blog')} className="hover:text-healio-primary transition-colors">{t('footer.ratgeber')}</Link></li>
+              )}
               <li><Link to={getPath('kontakt')} className="hover:text-healio-primary transition-colors">{t('footer.contact')}</Link></li>
               {lang === 'de' && (
                 <li><Link to="/presse" className="hover:text-healio-primary transition-colors">{t('footer.presse')}</Link></li>

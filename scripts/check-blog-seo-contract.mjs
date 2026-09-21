@@ -108,7 +108,12 @@ for (const article of articles) {
   );
 }
 assert.match(sitemapEntry('https://healio.de/'), /<lastmod>2026-08-30<\/lastmod>/);
-assert.match(sitemapEntry('https://healio.de/en/blog'), /<lastmod>2026-08-30<\/lastmod>/);
+// /en/blog wurde auf noindex gesetzt (zeigt deutsche Artikel in der englischen Sprachvariante)
+// und ist daher bewusst nicht mehr Teil der Sitemap, siehe check-site-seo.mjs noindexPaths.
+assert.ok(
+  !sitemap.includes('<loc>https://healio.de/en/blog</loc>'),
+  '/en/blog ist noindex und darf nicht in der Sitemap stehen.',
+);
 
 for (const slug of BLOG_EDITORIAL_FIX_SLUGS) {
   const article = articleBySlug.get(slug);
