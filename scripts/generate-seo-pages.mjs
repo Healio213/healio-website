@@ -365,24 +365,29 @@ function generateHtml(route, article = null) {
   );
 
   // Meta Description
+  // Trägt data-react-helmet="true", damit react-helmet dieses vorbefüllte
+  // Tag beim Hydrieren als "eigenes" erkennt und ersetzt statt ein zweites
+  // anzuhängen (gleiches Prinzip wie beim Canonical-Link unten).
   html = html.replace(
-    /<meta name="description" content="[^"]*">/,
-    `<meta name="description" content="${e(route.description)}">`
+    /<meta name="description" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta name="description" content="${e(route.description)}" data-react-helmet="true">`
   );
 
   // Robots
-  const robotsTag = `<meta name="robots" content="${e(route.robots || 'index, follow')}">`;
-  if (/<meta name="robots" content="[^"]*">/.test(html)) {
-    html = html.replace(/<meta name="robots" content="[^"]*">/, robotsTag);
+  const robotsTag = `<meta name="robots" content="${e(route.robots || 'index, follow')}" data-react-helmet="true">`;
+  if (/<meta name="robots" content="[^"]*"(?: data-react-helmet="true")?>/.test(html)) {
+    html = html.replace(/<meta name="robots" content="[^"]*"(?: data-react-helmet="true")?>/, robotsTag);
   } else {
     html = html.replace(
-      /(<meta name="description" content="[^"]*">)/,
+      /(<meta name="description" content="[^"]*"(?: data-react-helmet="true")?>)/,
       `$1\n    ${robotsTag}`
     );
   }
 
   // Keywords: Google ignoriert dieses Tag, aber wenn es vorhanden ist,
   // darf es keine seitenfremden Root-Keywords auf Unterseiten vererben.
+  // Wird von SEOHead/Helmet nicht gerendert, braucht also kein
+  // data-react-helmet-Attribut.
   const keywordsRegex = /<meta name="keywords" content="[^"]*">\n?/;
   if (route.keywords) {
     const keywordsTag = `<meta name="keywords" content="${e(route.keywords)}">`;
@@ -390,7 +395,7 @@ function generateHtml(route, article = null) {
       html = html.replace(keywordsRegex, `${keywordsTag}\n`);
     } else {
       html = html.replace(
-        /(<meta name="robots" content="[^"]*">)/,
+        /(<meta name="robots" content="[^"]*"(?: data-react-helmet="true")?>)/,
         `$1\n    ${keywordsTag}`
       );
     }
@@ -405,68 +410,71 @@ function generateHtml(route, article = null) {
   );
 
   // Open Graph Tags
+  // Alle hier ersetzten/eingefügten Tags tragen data-react-helmet="true",
+  // damit SEOHead (react-helmet) sie beim Hydrieren übernimmt statt ein
+  // zweites, dupliziertes Tag anzuhängen.
   html = html.replace(
-    /<meta property="og:title" content="[^"]*">/,
-    `<meta property="og:title" content="${e(route.title)}">`
+    /<meta property="og:title" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta property="og:title" content="${e(route.title)}" data-react-helmet="true">`
   );
   html = html.replace(
-    /<meta property="og:description" content="[^"]*">/,
-    `<meta property="og:description" content="${e(route.description)}">`
+    /<meta property="og:description" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta property="og:description" content="${e(route.description)}" data-react-helmet="true">`
   );
   html = html.replace(
-    /<meta property="og:url" content="[^"]*">/,
-    `<meta property="og:url" content="${e(route.canonical)}">`
+    /<meta property="og:url" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta property="og:url" content="${e(route.canonical)}" data-react-helmet="true">`
   );
   html = html.replace(
-    /<meta property="og:locale" content="[^"]*">/,
-    `<meta property="og:locale" content="${route.lang === 'de' ? 'de_DE' : 'en_US'}">`
+    /<meta property="og:locale" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta property="og:locale" content="${route.lang === 'de' ? 'de_DE' : 'en_US'}" data-react-helmet="true">`
   );
   if (route.ogImage) {
     html = html.replace(
-      /<meta property="og:image" content="[^"]*">/,
-      `<meta property="og:image" content="${e(route.ogImage)}">`
+      /<meta property="og:image" content="[^"]*"(?: data-react-helmet="true")?>/,
+      `<meta property="og:image" content="${e(route.ogImage)}" data-react-helmet="true">`
     );
     html = html.replace(
-      /<meta name="twitter:image" content="[^"]*">/,
-      `<meta name="twitter:image" content="${e(route.ogImage)}">`
+      /<meta name="twitter:image" content="[^"]*"(?: data-react-helmet="true")?>/,
+      `<meta name="twitter:image" content="${e(route.ogImage)}" data-react-helmet="true">`
     );
   }
   if (route.ogImageWidth) {
     html = html.replace(
-      /<meta property="og:image:width" content="[^"]*">/,
-      `<meta property="og:image:width" content="${e(String(route.ogImageWidth))}">`
+      /<meta property="og:image:width" content="[^"]*"(?: data-react-helmet="true")?>/,
+      `<meta property="og:image:width" content="${e(String(route.ogImageWidth))}" data-react-helmet="true">`
     );
   }
   if (route.ogImageHeight) {
     html = html.replace(
-      /<meta property="og:image:height" content="[^"]*">/,
-      `<meta property="og:image:height" content="${e(String(route.ogImageHeight))}">`
+      /<meta property="og:image:height" content="[^"]*"(?: data-react-helmet="true")?>/,
+      `<meta property="og:image:height" content="${e(String(route.ogImageHeight))}" data-react-helmet="true">`
     );
   }
   if (route.ogImageAlt) {
-    const ogImageAltTag = `<meta property="og:image:alt" content="${e(route.ogImageAlt)}">`;
-    if (/<meta property="og:image:alt" content="[^"]*">/.test(html)) {
-      html = html.replace(/<meta property="og:image:alt" content="[^"]*">/, ogImageAltTag);
+    const ogImageAltTag = `<meta property="og:image:alt" content="${e(route.ogImageAlt)}" data-react-helmet="true">`;
+    if (/<meta property="og:image:alt" content="[^"]*"(?: data-react-helmet="true")?>/.test(html)) {
+      html = html.replace(/<meta property="og:image:alt" content="[^"]*"(?: data-react-helmet="true")?>/, ogImageAltTag);
     } else {
-      html = html.replace(/(<meta property="og:image" content="[^"]*">)/, `$1\n    ${ogImageAltTag}`);
+      html = html.replace(/(<meta property="og:image" content="[^"]*"(?: data-react-helmet="true")?>)/, `$1\n    ${ogImageAltTag}`);
     }
 
-    const twitterImageAltTag = `<meta name="twitter:image:alt" content="${e(route.ogImageAlt)}">`;
-    if (/<meta name="twitter:image:alt" content="[^"]*">/.test(html)) {
-      html = html.replace(/<meta name="twitter:image:alt" content="[^"]*">/, twitterImageAltTag);
+    const twitterImageAltTag = `<meta name="twitter:image:alt" content="${e(route.ogImageAlt)}" data-react-helmet="true">`;
+    if (/<meta name="twitter:image:alt" content="[^"]*"(?: data-react-helmet="true")?>/.test(html)) {
+      html = html.replace(/<meta name="twitter:image:alt" content="[^"]*"(?: data-react-helmet="true")?>/, twitterImageAltTag);
     } else {
-      html = html.replace(/(<meta name="twitter:image" content="[^"]*">)/, `$1\n    ${twitterImageAltTag}`);
+      html = html.replace(/(<meta name="twitter:image" content="[^"]*"(?: data-react-helmet="true")?>)/, `$1\n    ${twitterImageAltTag}`);
     }
   }
 
   // Twitter Tags
   html = html.replace(
-    /<meta name="twitter:title" content="[^"]*">/,
-    `<meta name="twitter:title" content="${e(route.title)}">`
+    /<meta name="twitter:title" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta name="twitter:title" content="${e(route.title)}" data-react-helmet="true">`
   );
   html = html.replace(
-    /<meta name="twitter:description" content="[^"]*">/,
-    `<meta name="twitter:description" content="${e(route.description)}">`
+    /<meta name="twitter:description" content="[^"]*"(?: data-react-helmet="true")?>/,
+    `<meta name="twitter:description" content="${e(route.description)}" data-react-helmet="true">`
   );
 
   // HTML lang Attribut
@@ -476,11 +484,14 @@ function generateHtml(route, article = null) {
   );
 
   // hreflang Tags einfügen (vor </head>)
+  // SEOHead rendert dieselben hreflang-Links zur Laufzeit über react-helmet;
+  // data-react-helmet="true" verhindert, dass beim Hydrieren ein zweiter
+  // Satz angehängt wird (gleiches Prinzip wie beim Canonical-Link).
   if (route.hreflang) {
     const hreflangTags = Object.entries(route.hreflang)
-      .map(([lang, url]) => `    <link rel="alternate" hreflang="${lang}" href="${e(url)}" />`)
+      .map(([lang, url]) => `    <link rel="alternate" hreflang="${lang}" href="${e(url)}" data-react-helmet="true" />`)
       .join('\n');
-    const xDefault = `    <link rel="alternate" hreflang="x-default" href="${e(route.hreflang.de || route.canonical)}" />`;
+    const xDefault = `    <link rel="alternate" hreflang="x-default" href="${e(route.hreflang.de || route.canonical)}" data-react-helmet="true" />`;
 
     html = html.replace(
       '</head>',
@@ -543,21 +554,21 @@ for (const route of seoRoutes) {
     '<title>Seite nicht gefunden | Healio</title>'
   );
   notFound = notFound.replace(
-    /<meta name="description" content="[^"]*">/,
-    '<meta name="description" content="Diese Seite existiert nicht oder wurde verschoben.">'
+    /<meta name="description" content="[^"]*"(?: data-react-helmet="true")?>/,
+    '<meta name="description" content="Diese Seite existiert nicht oder wurde verschoben." data-react-helmet="true">'
   );
-  const robotsTag = '<meta name="robots" content="noindex, follow">';
-  if (/<meta name="robots" content="[^"]*">/.test(notFound)) {
-    notFound = notFound.replace(/<meta name="robots" content="[^"]*">/, robotsTag);
+  const robotsTag = '<meta name="robots" content="noindex, follow" data-react-helmet="true">';
+  if (/<meta name="robots" content="[^"]*"(?: data-react-helmet="true")?>/.test(notFound)) {
+    notFound = notFound.replace(/<meta name="robots" content="[^"]*"(?: data-react-helmet="true")?>/, robotsTag);
   } else {
     notFound = notFound.replace(
-      /(<meta name="description" content="[^"]*">)/,
+      /(<meta name="description" content="[^"]*"(?: data-react-helmet="true")?>)/,
       `$1\n    ${robotsTag}`
     );
   }
   // Canonical und hreflang entfernen: eine 404-Seite darf auf nichts zeigen.
   notFound = notFound.replace(/\s*<link rel="canonical" href="[^"]*"(?: data-react-helmet="true")?>/g, '');
-  notFound = notFound.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*"\s*\/?>/g, '');
+  notFound = notFound.replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*"(?: data-react-helmet="true")?\s*\/?>/g, '');
   notFound = notFound.replace(/<meta name="keywords" content="[^"]*">\n?/, '');
   fs.writeFileSync(path.join(distDir, '404.html'), notFound);
 }

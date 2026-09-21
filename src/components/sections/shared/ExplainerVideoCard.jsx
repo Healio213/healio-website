@@ -24,7 +24,7 @@ const ExplainerVideoCard = ({
           <video
             className="aspect-video w-full rounded-[0.95rem] bg-black object-cover sm:rounded-[1.15rem]"
             controls
-            preload="metadata"
+            preload="none"
             playsInline
             poster={poster}
             aria-label={ariaLabel}

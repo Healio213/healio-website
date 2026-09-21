@@ -82,6 +82,7 @@ const AmbulantVideoSection = () => {
                 controls
                 autoPlay
                 playsInline
+                preload="none"
                 poster={posterUrl}
                 onTimeUpdate={handleVideoTimeUpdate}
                 onEnded={handleVideoEnded}

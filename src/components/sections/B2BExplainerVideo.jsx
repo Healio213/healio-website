@@ -72,7 +72,7 @@ const B2BExplainerVideo = ({
                   controls
                   autoPlay
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   poster={posterSrc}
                   onPlay={() => {
                     if (!playTracked.current) {

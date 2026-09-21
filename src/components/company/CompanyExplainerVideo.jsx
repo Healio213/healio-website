@@ -60,7 +60,7 @@ const CompanyExplainerVideo = ({ kind = 'system' }) => {
                 className="aspect-video h-auto w-full bg-[#07161f]"
                 controls
                 playsInline
-                preload="metadata"
+                preload="none"
                 poster={video.poster}
                 aria-label={content.videoLabel}
               >

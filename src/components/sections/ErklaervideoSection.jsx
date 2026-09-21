@@ -89,6 +89,7 @@ const ErklaervideoSection = ({
                 controls
                 autoPlay
                 playsInline
+                preload="none"
                 poster={poster}
                 onTimeUpdate={fortschritt}
                 onEnded={() => track('video_complete', 100)}
