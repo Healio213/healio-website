@@ -9,7 +9,10 @@
  * Abweichungen von der Quelle, alle bewusst:
  *   - Anrede durchgehend klein (du, dir, dein), die Quelle schreibt Du gross.
  *   - Zuschussleistung Nr. 67 steht neutral als "Zyklus-App samt Zubehoer".
- *     Der Kinderwunsch ist als Argument im Healio-Content gesperrt.
+ *     Der Kinderwunsch ist als Argument im Healio-Content gesperrt. Die
+ *     Zweckbindung der Satzung bleibt bestehen und wird hier nur nicht
+ *     ausformuliert; in der Spalte "Besonderheit" steht deshalb der Hinweis
+ *     auf den Anwendungsfall, den die Satzung nennt.
  *   - Der "Geheimtipp fuer Schwangere" ist ein eigener H2-Abschnitt, weil
  *     die Artikelvorlage nur H2 kennt.
  *
@@ -35,9 +38,9 @@ export const article = {
     'Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.',
 
   headline:
-    'IKK classic Bonusprogramm 2026: alle Positionen, Nachweise und wie der Bonus eine Zusatzversicherung bezahlt',
+    'IKK classic Bonusprogramm 2026: alle Positionen, Nachweise und wie der Bonus den Beitrag einer Zusatzversicherung senken kann',
   lead:
-    'Die IKK classic zahlt für Vorsorge, Impfungen und Sport einen Geldbonus schon ab der ersten anerkannten Maßnahme, und wer stattdessen den zweckgebundenen Zuschuss wählt, bekommt den dreifachen Betrag, höchstens aber die selbst nachgewiesenen Kosten. Weil der Jahresbeitrag einer privaten Krankenzusatzversicherung ausdrücklich zu den zuschussfähigen Leistungen gehört, kann der Bonus diesen Beitrag ganz oder zu einem großen Teil tragen.',
+    'Die IKK classic zahlt für Vorsorge, Impfungen und Sport einen Geldbonus schon ab der ersten anerkannten Maßnahme, und wer stattdessen den zweckgebundenen Zuschuss wählt, bekommt den dreifachen Betrag, höchstens aber die selbst nachgewiesenen Kosten. Weil der Jahresbeitrag einer privaten Krankenzusatzversicherung ausdrücklich zu den zuschussfähigen Leistungen gehört, kann der Bonus diesen Beitrag je nach nachgewiesenen Maßnahmen und eigenen Kosten ganz oder teilweise tragen. Ausgezahlt wird nie mehr, als du selbst bezahlt hast.',
 
   sections: [
     {
@@ -61,7 +64,7 @@ export const article = {
             },
             {
               lead: 'Laut Satzung sind bis zu 1.155 EUR Zuschusswert im Jahr möglich, ein theoretischer Wert.',
-              text: 'In der breiten Masse kommen 400 bis 700 EUR zusammen; wer alle Standardpositionen ohne Schwangerschaftsvorsorge nutzt, liegt bei 810 EUR. Einen Maximalbetrag nennen die Teilnahmebedingungen ausdrücklich nicht.',
+              text: 'Nach unserer Einschätzung aus der Beratung, ausdrücklich keine Belegzahl, kommen in der breiten Masse 400 bis 700 EUR zusammen; belegt durchgerechnet sind 105, 405 und 810 EUR. Wer als Modellfall wirklich jede für ihn geltende Vorsorge in einem Jahr mitnimmt und dazu vier Aktivitäten plus zwei Abzeichen nachweist, kommt auf 810 EUR. Einen Maximalbetrag nennen die Teilnahmebedingungen ausdrücklich nicht.',
             },
             {
               lead: 'Frist 31.03.2027,',
@@ -132,10 +135,10 @@ export const article = {
             ['61', 'Sportveranstaltungen, Start- und Teilnahmegebühren', 'nicht, wenn schon als Bonusmaßnahme eingetragen'],
             ['62', 'Geburtsvorbereitungskurs für IKK-versicherte Partner', 'nur bei eigener Versicherung und eigenem Antrag'],
             ['63', 'Jahresbeitrag Krankenzusatz-, Pflegezusatz- und Auslandsreisekrankenversicherung', 'Berufsunfähigkeit und Unfall ab 2026 nicht mehr zuschussfähig'],
-            ['64', 'Erste-Hilfe-Kurs', 'ohne weitere Einschränkung'],
+            ['64', 'Erste-Hilfe-Kurs', ''],
             ['65', 'Baby- oder Kinderschwimmen', 'nur auf den Bonus des Kindes'],
             ['66', 'Eltern-Baby-Kurse', 'Kind oder Elternteil, nicht beides'],
-            ['67', 'Zyklus-App samt Zubehör', 'ohne weitere Einschränkung'],
+            ['67', 'Zyklus-App samt Zubehör', 'nur im Anwendungsfall, den die Satzung nennt'],
           ],
         },
         {
@@ -150,7 +153,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Belegbar sind vier Stufen aus einer eigenen Durchrechnung entlang der Satzung:',
+          text: 'Belegbar sind drei durchgerechnete Stufen. Die vierte Zeile ist keine Erfahrung, sondern die rechnerische Obergrenze aus der Satzung:',
         },
         {
           type: 'table',
@@ -159,8 +162,8 @@ export const article = {
           rows: [
             ['Vorsorge-Minimum: Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung', '35 EUR', '105 EUR'],
             ['Sportlich: dazu Studio, Verein, BMI, Blutdruck', '135 EUR', '405 EUR'],
-            ['Alles ausgeschöpft ohne Schwangerschaftsvorsorge', '270 EUR', '810 EUR'],
-            ['Satzungs-Top-Szenario mit Schwangerschaftsvorsorge (theoretisch)', '385 EUR', '1.155 EUR'],
+            ['Modellfall, alle Positionen in einem Jahr, ohne Schwangerschaftsvorsorge (Frau, 50 Jahre, rauchend)', '270 EUR', '810 EUR'],
+            ['Satzungs-Top-Szenario mit Schwangerschaftsvorsorge (rechnerische Obergrenze, nicht belegt)', '385 EUR', '1.155 EUR'],
           ],
         },
         {
@@ -171,17 +174,17 @@ export const article = {
     },
     {
       id: 'schwangerschaft',
-      heading: 'Warum der Bonus in der Schwangerschaft am höchsten ist',
+      heading: 'Warum in der Schwangerschaft besonders viele Positionen zusammenkommen',
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die 1.155 EUR sind vor allem in einem Fall realistisch: in der Schwangerschaft. Jede Mutterschaftsvorsorge zählt bei der IKK classic als eigene bonusfähige Vorsorgeuntersuchung, und davon gibt es in einer Schwangerschaft viele. Wer schwanger ist, ohnehin zu jeder Vorsorge geht und die übrigen Positionen mitnimmt, Zahnarzt, Impfschutz, Sport und Statuswerte, kommt dem Satzungsmaximum so nah wie sonst niemand.',
+          text: 'In der Schwangerschaft kommen mehr bonusfähige Positionen zusammen als sonst, weil jede Mutterschaftsvorsorge bei der IKK classic einzeln zählt. Wie viele davon anerkannt werden, nennt die IKK classic in keinem öffentlichen Dokument; der Satzungswert von 1.155 EUR bleibt deshalb auch hier ein theoretischer Rechenwert. Wer schwanger ist, ohnehin zu jeder Vorsorge geht und Zahnarzt, Impfschutz, Sport und Statuswerte mitnimmt, kommt dem Wert näher als andere.',
         },
         {
           type: 'segments',
           segments: [
             {
-              text: 'Der Zuschuss fließt dann in die Zusatzversicherung, die während der Schwangerschaft am meisten bringt: den ambulanten Tarif mit Vorsorge-Topf für Feinultraschall, zusätzliche Ultraschalls und Labortests, die die Kasse nicht zahlt. Was in der Schwangerschaft versichert ist und was nicht, steht im Ratgeber ',
+              text: 'Der Zuschuss fließt dann in die Zusatzversicherung, die während der Schwangerschaft am meisten bringt: den ambulanten Tarif mit Vorsorge-Topf, aus dem je nach Tarifstufe ein Teil von Feinultraschall, zusätzlichen Ultraschalls und Labortests erstattet wird, die die Kasse nicht zahlt. Nicht versichert ist die Entbindung der Mutter; das Kind kommt über die Nachversicherung in den Schutz. Was in der Schwangerschaft versichert ist und was nicht, steht im Ratgeber ',
             },
             { text: 'Schwanger: welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
             { text: '.' },
@@ -250,7 +253,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich; im besten Fall deckt er den Beitrag ganz, in den meisten Fällen zum großen Teil. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich und fließt als zweckgebundener Zuschuss in den Zusatzschutz; je nach nachgewiesenen Maßnahmen und eigenen Kosten deckt der Zuschuss den Jahresbeitrag ganz oder teilweise, mehr als die nachgewiesenen Kosten wird nie ausgezahlt. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {

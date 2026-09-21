@@ -35,7 +35,7 @@ export const article = {
 
   headline: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
   lead:
-    'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase ist der Kassenbonus dafür so hoch wie sonst nie, weil jede Mutterschaftsvorsorge einzeln zählt.',
+    'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nach den Bedingungen, die wir geprüft haben, nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
 
   sections: [
     {
@@ -47,15 +47,15 @@ export const article = {
           items: [
             {
               lead: 'Ambulant geht noch etwas.',
-              text: 'Der Vorsorge-Topf der SDK AP-Tarife zahlt die Untersuchungen, die die Kasse nicht übernimmt, und er greift auch dann, wenn die Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es nicht.',
+              text: 'Der Vorsorge-Topf der SDK AP-Tarife zahlt die Untersuchungen, die die Kasse nicht übernimmt, und er greift auch dann, wenn die Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in den AP-Tarifen nicht. Die Schwangerschaft gehört trotzdem in den Antrag, der Versicherer prüft sie.',
             },
             {
               lead: 'Die Geburt ist stationär zu spät.',
               text: 'Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung und das Familienzimmer bei dieser Geburt nicht. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis zu laufenden Behandlungen.',
             },
             {
-              lead: 'Wofür der Stationärtarif trotzdem zählt:',
-              text: 'für die Zeit danach. Rooming-in als Begleitperson ist eine Leistung im Kindertarif, bei einem Kind bis 16 Jahren zu 100 Prozent und bei jedem späteren Klinikaufenthalt deines Kindes.',
+              lead: 'Wofür dein Stationärtarif trotzdem zählt:',
+              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann, und Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes, bis 16 Jahre zu 100 Prozent und bei jedem Klinikaufenthalt.',
             },
             {
               lead: 'Fürs Kind ist die Nachversicherung der Weg.',
@@ -63,7 +63,7 @@ export const article = {
             },
             {
               lead: 'Der Bonus ist jetzt am höchsten.',
-              text: 'Laut Satzung der IKK classic sind bis zu 1.155 EUR Zuschusswert möglich, ein theoretischer Wert, der vor allem in der Schwangerschaft erreichbar wird. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab und wird individuell gerechnet.',
+              text: 'Laut Satzung der IKK classic sind bis zu 1.155 EUR Zuschusswert möglich, ein rechnerischer Höchstwert, den niemand einfach so abruft. Ausgezahlt wird höchstens so viel, wie du an eigenen Kosten nachweist, zum Beispiel über den Jahresbeitrag deiner Zusatzversicherung. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab, wir rechnen es individuell für dich aus.',
             },
           ],
         },
@@ -79,11 +79,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant ist der Abschluss möglich. Die SDK AP-Tarife haben keine Wartezeiten, der Schutz greift ab Versicherungsbeginn. Der Vorsorge-Topf nennt "die Vorsorge während der Schwangerschaft" ausdrücklich als versicherte Leistung, ohne die Einschränkung, dass die Schwangerschaft erst später eintreten müsste.',
+          text: 'Ambulant ist der Abschluss möglich. Die SDK AP-Tarife haben keine Wartezeiten, der Schutz greift ab Versicherungsbeginn. Der Vorsorge-Topf nennt "die Vorsorge während der Schwangerschaft" ausdrücklich als versicherte Leistung, ohne die Einschränkung, dass die Schwangerschaft erst später eintreten müsste. Die bestehende Schwangerschaft gehört in die Gesundheitsfragen des Antrags. Der Versicherer prüft sie, und was am Ende in deinem Vertrag steht, siehst du in der Police.',
         },
         {
           type: 'paragraph',
-          text: 'Stationär sieht es anders aus. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Dazu kommt eine besondere Wartezeit von 8 Monaten für die Entbindung. Einen stationären Sofort-Baustein gibt es nicht, und zwar bei keinem Anbieter am Markt.',
+          text: 'Stationär sieht es anders aus. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Dazu kommt eine besondere Wartezeit von 8 Monaten für die Entbindung. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft haben wir bei den Anbietern, deren Bedingungen wir geprüft haben, nicht gefunden: die Bayerische schließt ihn im Antrag ausdrücklich aus, die SDK in den SP-Tarifen ebenso.',
         },
       ],
     },
@@ -126,14 +126,14 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Der Stationärtarif sichert also nicht diese Geburt, sondern die Zeit danach. Konkret sind das drei Dinge:',
+          text: 'Der Stationärtarif sichert also nicht diese Geburt. Er sichert die Zeit danach, teils über deinen eigenen Vertrag, teils als Grundlage für den Vertrag deines Kindes:',
         },
         {
           type: 'list',
           items: [
             {
               lead: 'Rooming-in als Begleitperson,',
-              text: '100 Prozent, eine Leistung im Kindertarif, solange dein Kind unter 16 ist. Das gilt bei jedem Klinikaufenthalt des Kindes, nicht nur rund um die Geburt.',
+              text: '100 Prozent bis 16 Jahre, bei jedem Klinikaufenthalt deines Kindes. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
             },
             {
               lead: 'Deine eigene Versorgung',
@@ -147,7 +147,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wenn dir jemand einen Stationärtarif mit dem Argument verkauft, du könntest damit bei dieser Geburt im Familienzimmer bleiben, stimmt das nicht.',
+          text: 'Wenn dir jemand einen Stationärtarif mit dem Argument verkauft, du könntest damit bei dieser Geburt im Familienzimmer bleiben, dann lass dir die Stelle in den Bedingungen zeigen. Nach den Bedingungen, die wir geprüft haben, stimmt das nicht.',
         },
       ],
     },
@@ -161,11 +161,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Zu prüfen ist die Bedingung dahinter, und die ist entscheidend: Üblich ist, dass ein Elternteil zum Zeitpunkt der Geburt bereits mindestens drei Monate versichert sein muss, so die Grundregel des § 198 VVG. Ob und in welcher Form dein Versicherer das verlangt und ob der Elternvertrag dafür stationär sein muss oder ambulant genügt, ist nicht für jeden Tarif abschließend geklärt. Das gehört vor Abschluss geklärt, nicht danach.',
+          text: 'Zu prüfen ist die Bedingung dahinter, und die ist entscheidend: Üblich ist, dass ein Elternteil zum Zeitpunkt der Geburt bereits mindestens drei Monate versichert sein muss, so die Grundregel des § 198 VVG. Ob und in welcher Form dein Versicherer das verlangt, steht in den Bedingungen des jeweiligen Tarifs. Für die Tarifart gilt die gesetzliche Grenze: Der Schutz des Kindes darf nach § 198 VVG nicht umfassender sein als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind. Wir prüfen das für deinen Tarif vor Abschluss, nicht danach.',
         },
         {
           type: 'paragraph',
-          text: 'Praktische Folge: Wer in der Schwangerschaft an das Thema denkt, hat die drei Monate meist noch vor sich, wer erst im Kreißsaal daran denkt, nicht mehr. Der eigentliche Hebel ist also der frühe Abschluss der Elternpolice.',
+          text: 'Praktische Folge: Wo ein Versicherer eine Vorversicherungszeit verlangt, ist sie in der Schwangerschaft meist noch zu schaffen, kurz vor der Geburt nicht mehr. Manche Versicherer verzichten darauf und stellen nur darauf ab, dass ein Elternteil am Tag der Geburt versichert ist. Das gehört vor Abschluss für deinen Tarif geklärt.',
         },
       ],
     },
@@ -179,11 +179,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Nur vier Positionen sind überhaupt mehrfach anrechenbar, und Nummer 09 ist eine davon. Deshalb kommt in der Schwangerschaft eine Summe zusammen, die sonst niemand erreicht. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich. Das ist ein theoretischer Höchstwert, der voraussetzt, dass wirklich jede Position zusammenkommt. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr.',
+          text: 'Nur vier Positionen sind überhaupt mehrfach anrechenbar, und Nummer 09 ist eine davon. Deshalb kommt in der Schwangerschaft mehr zusammen als in einem Jahr ohne sie. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich, ohne Schwangerschaftsvorsorge bis zu 810 EUR. Das sind rechnerische Höchstwerte aus einem Korb, in dem alles gleichzeitig zutrifft, keine Beträge, die die IKK classic irgendwo nennt. Einen Maximalbetrag gibt es laut Teilnahmebedingungen ohnehin nicht. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr.',
         },
         {
           type: 'paragraph',
-          text: 'Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist als Zuschussleistung Nummer 63 anrechenbar. Rechnerisch 405 EUR Zuschuss bei 240 EUR Jahresbeitrag ergeben also 240 EUR, nie mehr. Wichtig für den Nachweis: Für Mutterschaftsvorsorgen ist ein schriftlicher Nachweis Pflicht, der Mutterpass genügt, und es gibt je Untersuchung ein eigenes Antragsfeld.',
+          text: 'Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist als Zuschussleistung Nummer 63 anrechenbar. Rechnerisch 405 EUR Zuschuss bei 240 EUR Jahresbeitrag ergeben also 240 EUR, nie mehr. Wichtig für den Nachweis: Für Mutterschaftsvorsorgen ist ein schriftlicher Nachweis Pflicht, der Mutterpass genügt, und es gibt je Untersuchung ein eigenes Antragsfeld. Für das Bonusjahr 2026 muss der vollständige Antrag bis zum 31.03.2027 bei der IKK classic sein. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
         },
       ],
     },
@@ -212,8 +212,8 @@ export const article = {
               'Welche Kasse in deinem Fall den höchsten Bonus zahlt und ob der Zusatzbeitrag das aufzehrt',
             ],
             [
-              'Rooming-in als Begleitperson, 100 Prozent, im Kindertarif bis 16 Jahre',
-              'Kein stationärer Sofortschutz für bereits Angeratenes, bei keinem Anbieter',
+              'Rooming-in als Begleitperson, 100 Prozent bis 16 Jahre, aus dem Tarif des nachversicherten Kindes',
+              'Kein stationärer Sofortschutz für bereits Angeratenes bei den von uns geprüften Anbietern (SDK, die Bayerische)',
               'Anzahl der bonusfähigen Mutterschaftsvorsorgen, von der IKK classic nicht öffentlich beziffert',
             ],
           ],
@@ -223,7 +223,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich; im besten Fall deckt er den Beitrag ganz, in den meisten Fällen zum großen Teil. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich und wird als zweckgebundener Zuschuss auf den Jahresbeitrag der Zusatzversicherung angerechnet, höchstens bis zur Höhe des tatsächlich gezahlten Beitrags. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab, wir rechnen es individuell für dich aus. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -244,12 +244,12 @@ export const article = {
     {
       question: 'Kann ich den Stationärtarif später upgraden?',
       answer:
-        'Beim Smart-Tarif der Bayerischen gibt es ein Optionsrecht: Wer vor dem 40. Lebensjahr abschließt, kann zum Ende des dritten oder sechsten Versicherungsjahres ohne neue Gesundheitsprüfung und ohne Wartezeiten in Komfort oder Prestige wechseln.',
+        'Beim Smart-Tarif der Bayerischen gibt es nach den Tarifbedingungen, Stand 24.04.2025, ein Optionsrecht: Wer vor dem 40. Lebensjahr abschließt, kann danach zum Ende des dritten oder sechsten Versicherungsjahres in der Regel ohne neue Gesundheitsprüfung in Komfort oder Prestige wechseln. Maßgeblich sind die Tarifbedingungen, die bei deinem Abschluss gelten. Lass dir die Klausel vor der Unterschrift zeigen.',
     },
     {
       question: 'Muss ich für den Bonus jede Vorsorge einzeln einreichen?',
       answer:
-        'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen.',
+        'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss der vollständige Antrag bis zum 31.03.2027 bei der IKK classic sein, danach verfällt der Anspruch.',
     },
   ],
 

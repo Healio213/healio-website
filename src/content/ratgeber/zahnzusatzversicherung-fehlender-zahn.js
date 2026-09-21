@@ -53,7 +53,7 @@ export const article = {
               text: 'Die Annahmerichtlinien mit Stand 11.2025 bieten dafür ausdrücklich weder Zuschläge noch Leistungsausschlüsse an.',
             },
             {
-              lead: 'Weisheitszähne zählen nie als fehlender Zahn.',
+              lead: 'Weisheitszähne zählen bei UKV und der Bayerischen nicht als fehlender Zahn.',
               text: 'Ein vollständiger Lückenschluss und eine zahnärztlich bestätigte Freiendsituation ebenfalls nicht.',
             },
             {
@@ -62,7 +62,7 @@ export const article = {
             },
             {
               lead: 'Der Baustein ZAHN Sofort der Bayerischen',
-              text: 'leistet für angeratene und begonnene Behandlungen 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, kostet 29,90 EUR im Monat zusätzlich zum Trägertarif und endet nach 24 Monaten.',
+              text: 'leistet für angeratene und begonnene Behandlungen höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, kostet 29,90 EUR im Monat zusätzlich zum Trägertarif und endet nach 24 Monaten.',
             },
           ],
         },
@@ -74,11 +74,11 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Ja, wenn du beim passenden Versicherer landest und die Lücke noch nicht in Behandlung oder angeraten ist. Der UKV-Antrag stellt die Frage schlicht: "Fehlen Zähne, die noch nicht ersetzt sind?" Bei einem Ja trägst du die Anzahl ein. Bis zu drei Zähne führen zu einem Zuschlag, ab dem vierten steht im Antrag: "Eine Aufnahme ist nicht möglich."',
+          text: 'Ja, das ist möglich, wenn du beim passenden Versicherer landest, die Lücke noch nicht in Behandlung oder angeraten ist und auch die übrigen Gesundheitsfragen des Antrags passen. Der UKV-Antrag stellt die Frage schlicht: "Fehlen Zähne, die noch nicht ersetzt sind?" Bei einem Ja trägst du die Anzahl ein. Bis zu drei Zähne führen zu einem Zuschlag, ab dem vierten steht im Antrag: "Eine Aufnahme ist nicht möglich."',
         },
         {
           type: 'paragraph',
-          text: 'Wichtig ist, was der Zuschlag bedeutet. Der zuständige Betreuer der UKV hat am 31.07.2026 schriftlich bestätigt, dass die bezuschlagten Zähne voll mitversichert sind und die Zahnstaffel ungekürzt bleibt. Das ist nicht selbstverständlich: Andere Anbieter versichern eine Lücke formal mit, schließen sie aber über die Bedingungen wieder aus.',
+          text: 'Wichtig ist, was der Zuschlag bedeutet. Nach Auskunft des zuständigen Maklerbetreuers der UKV vom 31.07.2026 sind die bezuschlagten Zähne mitversichert und die Zahnstaffel bleibt ungekürzt. Maßgeblich bleiben die Versicherungsbedingungen, die dir vor Antragstellung vorliegen; lass dir den Punkt vor dem Antrag bestätigen. Das ist nicht selbstverständlich: Andere Anbieter versichern eine Lücke formal mit, schließen sie aber über die Bedingungen wieder aus.',
         },
         {
           type: 'paragraph',
@@ -92,19 +92,19 @@ export const article = {
       blocks: [
         {
           type: 'table',
-          caption: 'Zuschläge und Grenzen bei fehlenden Zähnen',
+          caption: 'Zuschläge und Grenzen bei fehlenden Zähnen, Stand der Antrags- und Annahmeunterlagen August 2026',
           head: ['Anbieter', 'Fehlende Zähne', 'Zuschlag je Zahn und Monat', 'Grenze'],
           rows: [
             ['UKV ZahnPRIVAT 75', 'bis 3', '6,10 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['UKV ZahnPRIVAT 90', 'bis 3', '9,00 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['UKV ZahnPRIVAT 100', 'bis 3', '10,90 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['die Bayerische ZAHN', 'ab 1', 'kein Zuschlag vorgesehen', 'Antrag nicht möglich'],
-            ['LKH ZahnUpgrade', 'bis 3', 'rund 5 EUR (Portalangabe, nicht bestätigt)', 'ab dem 4. Zahn Ablehnung'],
+            ['LKH ZahnUpgrade', 'bis 3', 'Zuschlag beim Versicherer zu erfragen', 'ab dem 4. Zahn Ablehnung'],
           ],
         },
         {
           type: 'paragraph',
-          text: 'Drei fehlende Zähne im UKV-Tarif 100 bedeuten also 32,70 EUR Zuschlag im Monat, zusätzlich zum regulären Beitrag. Die LKH-Angabe von rund 5 EUR je Zahn stammt aus Vergleichsportalen und ist uns nicht über Annahmerichtlinien bestätigt worden. Ob dort bezuschlagte Zähne ebenfalls voll mitversichert sind, ist offen.',
+          text: 'Drei fehlende Zähne im UKV-Tarif 100 bedeuten also 32,70 EUR Zuschlag im Monat, zusätzlich zum regulären Beitrag. Für die LKH liegt uns keine Zuschlagshöhe aus den Annahmerichtlinien vor, und ob dort bezuschlagte Zähne voll mitversichert sind, ist ebenfalls offen. Die Zuschläge geben den Stand der uns vorliegenden Antrags- und Annahmeunterlagen von August 2026 wieder, aktuelle Beiträge erhältst du vor Antragstellung.',
         },
       ],
     },
@@ -122,11 +122,11 @@ export const article = {
           items: [
             {
               lead: 'Weisheitszähne.',
-              text: 'Fehlende Achter zählen bei beiden Versicherern nicht als fehlender Zahn. Auch Milchzähne bleiben im UKV-Antrag außen vor.',
+              text: 'Fehlende Achter zählen bei der UKV und bei der Bayerischen nicht als fehlender Zahn. Auch Milchzähne bleiben im UKV-Antrag außen vor. Für die LKH liegt uns dazu keine Regelung vor, frage dort vor dem Antrag nach.',
             },
             {
               lead: 'Lückenschluss.',
-              text: 'Ist die Lücke zugewandert, zählt sie nicht mit. Bei der Bayerischen gilt das ausdrücklich auch für einen unvollständigen Lückenschluss, sofern kein Zahnersatz mehr in die Restlücke passt. Dein Zahnarzt muss das bestätigen.',
+              text: 'Ist die Lücke vollständig zugewandert, zählt sie nicht mit. Bei der Bayerischen gilt das ausdrücklich auch für einen unvollständigen Lückenschluss, sofern kein Zahnersatz mehr in die Restlücke passt; die UKV nennt dagegen nur den vollständigen Lückenschluss. Dein Zahnarzt muss das bestätigen.',
             },
             {
               lead: 'Freiendsituation.',
@@ -158,7 +158,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ein dritter Weg ist die LKH. Die LKH fragt angeratenen Zahnersatz nicht ab, der Vertrag kommt also zustande, der laufende Fall bleibt aber über die Bedingungen ausgeschlossen. Du bist damit sofort für alles Künftige versichert, die angeratene Behandlung zahlt aber niemand. Das muss dir vorher klar sein.',
+          text: 'Ein dritter Weg ist die LKH. Die LKH fragt angeratenen Zahnersatz nicht ab, allein daran scheitert ein Antrag dort also nicht. Die übrigen Annahmefragen gelten weiter, etwa zur Anzahl fehlender Zähne und zu laufender oder angeratener Parodontitis- und Kieferorthopädiebehandlung. Kommt der Vertrag zustande, bleibt der laufende Fall über die Bedingungen ausgeschlossen: Künftige Behandlungen sind ab Vertragsbeginn eingeschlossen, im Rahmen der Tarifleistungen und der Zahnstaffel, die bereits angeratene Behandlung zahlt aber niemand. Das muss dir vorher klar sein.',
         },
       ],
     },
@@ -195,7 +195,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen, bei der LKH ebenfalls nicht. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis gibt es nicht. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
+          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen, bei der LKH ebenfalls nicht. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
         },
       ],
     },
@@ -205,7 +205,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Viele gesetzliche Krankenkassen zahlen einen Bonus für Vorsorge, Impfungen und Sport. Bei der IKK classic kannst du diesen Bonus statt als Geld auch als zweckgebundenen Zuschuss in dreifacher Höhe wählen, und der Jahresbeitrag einer privaten Krankenzusatzversicherung gehört dort zu den zuschussfähigen Leistungen. Ausgezahlt wird höchstens so viel, wie du an eigenen Kosten nachweist, ein Plus entsteht also nie.',
+          text: 'Viele gesetzliche Krankenkassen zahlen einen Bonus für Vorsorge, Impfungen und Sport. Bei der IKK classic kannst du diesen Bonus statt als Geld auch als zweckgebundenen Zuschuss in dreifacher Höhe wählen, und der Jahresbeitrag einer privaten Krankenzusatzversicherung gehört dort zu den zuschussfähigen Leistungen. Ausgezahlt wird höchstens so viel, wie du an eigenen Kosten nachweist, ein Plus entsteht also nie. Beantragen musst du den Bonus für 2026 bis zum 31.03.2027, danach verfällt der Anspruch; jedes Familienmitglied stellt einen eigenen Antrag mit eigenem Kostendeckel.',
         },
         {
           type: 'paragraph',
@@ -216,7 +216,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich; im besten Fall deckt er den Beitrag ganz, in den meisten Fällen zum großen Teil. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Bonus wird jährlich beantragt und fließt als zweckgebundener Zuschuss in den Zusatzschutz. Bei der IKK classic sind laut Satzung bis zu 1.155 EUR Zuschusswert im Jahr möglich, das ist ein theoretischer Höchstwert; in der breiten Masse kommen 400 bis 700 EUR zusammen, abhängig von Kasse, nachgewiesenen Maßnahmen und tatsächlichen eigenen Kosten. Ausgezahlt wird höchstens in Höhe der nachgewiesenen Kosten, gegenzurechnen ist der Zusatzbeitrag der Kasse. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -227,17 +227,17 @@ export const article = {
     {
       question: 'Zählt ein fehlender Weisheitszahn?',
       answer:
-        'Nein. Fehlende Weisheitszähne zählen bei beiden Versicherern nicht als fehlender Zahn, bei der UKV ebenso wenig Milchzähne.',
+        'Bei der UKV und bei der Bayerischen nein, dort zählen fehlende Weisheitszähne nicht als fehlender Zahn, bei der UKV ebenso wenig Milchzähne. Für andere Anbieter musst du die jeweiligen Annahmerichtlinien prüfen.',
     },
     {
       question: 'Ist der bezuschlagte Zahn auch wirklich mitversichert?',
       answer:
-        'Bei der UKV ja, nach schriftlicher Bestätigung des Betreuers vom 31.07.2026, und die Zahnstaffel bleibt ungekürzt. Für die LKH liegt uns dazu keine Bestätigung des Versicherers vor.',
+        'Nach Auskunft des zuständigen Maklerbetreuers der UKV vom 31.07.2026 ja, und die Zahnstaffel bleibt ungekürzt. Voraussetzung bleibt, dass der Ersatz für die Lücke noch nicht angeraten ist; maßgeblich sind die Bedingungen. Für die LKH ist dieser Punkt bei uns noch offen.',
     },
     {
       question: 'Zahlt eine Zusatzversicherung den bereits angeratenen Zahnersatz?',
       answer:
-        'In der Regel nicht. Nur der Baustein ZAHN Sofort leistet dafür, begrenzt auf 750 EUR je Kalenderjahr und 1.500 EUR insgesamt, und nur solange keine Rechnung gestellt wurde. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
+        'In der Regel nicht. Im Healio-Sortiment leistet dafür allein der Baustein ZAHN Sofort der Bayerischen, begrenzt auf höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, und nur solange für die Behandlung noch keine Rechnung gestellt wurde. Am Markt gibt es vergleichbare Sofortbausteine auch bei anderen Anbietern. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
     },
     {
       question: 'Was passiert nach den 24 Monaten Sofortschutz?',
@@ -253,7 +253,7 @@ export const article = {
         text: 'Welcher Weg bei deiner konkreten Lücke offensteht, klärt sich am schnellsten mit einer Annahmeprüfung vor dem Antrag. Die Tarifweiche dafür findest du auf ',
       },
       { text: 'healio.de/zahn', to: '/zahn' },
-      { text: ', wie der Kassenbonus den Beitrag mitträgt, steht im ' },
+      { text: ', ob dein Kassenbonus den Beitrag mitträgt, rechnest du im ' },
       { text: 'Ratgeber zum IKK-Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
       { text: ', und welche Kasse in deinem Fall am meisten zahlt, vergleichst du quellenbelegt auf ' },
       { text: 'kassenboost.de', href: 'https://kassenboost.de/' },

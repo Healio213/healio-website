@@ -68,7 +68,7 @@ export const article = {
             },
             {
               lead: 'Der Kassenbonus ist jetzt am höchsten.',
-              text: 'Bei der IKK classic zählt jede gesetzliche Mutterschaftsvorsorge einzeln als bonusfähige Maßnahme. Das schafft in keiner anderen Lebensphase jemand.',
+              text: 'Bei der IKK classic zählt jede gesetzliche Mutterschaftsvorsorge einzeln als bonusfähige Maßnahme. Das ist in kaum einer anderen Lebensphase so.',
             },
             {
               lead: 'Beim Zusatzschutz gibt es eine harte Trennlinie.',
@@ -88,7 +88,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Organisatorisch passieren drei Dinge: Die Praxis stellt den Mutterpass aus, die Vorsorge beginnt, und du entscheidest, wann du im Umfeld und im Job Bescheid sagst. Für den Job gibt es keine Frist, und eine Mitteilungspflicht besteht nicht. Praktisch umsetzen kann dein Arbeitgeber den Mutterschutz aber erst, wenn er Bescheid weiß. Was ebenfalls in diese Wochen gehört und fast immer zu spät passiert: der Blick auf Krankenkasse und Versicherungsschutz.',
+          text: 'Organisatorisch passieren drei Dinge: Die Praxis stellt den Mutterpass aus, die Vorsorge beginnt, und du entscheidest, wann du im Umfeld und im Job Bescheid sagst. Für den Job gibt es keine starre Frist. Das Gesetz sagt, du sollst deinen Arbeitgeber informieren, sobald du von der Schwangerschaft weißt (§ 15 Abs. 1 MuSchG); eine Sanktion knüpft daran nicht an. Umsetzen kann dein Arbeitgeber den Mutterschutz aber erst, wenn er Bescheid weiß. Was ebenfalls in diese Wochen gehört und fast immer zu spät passiert: der Blick auf Krankenkasse und Versicherungsschutz.',
         },
       ],
     },
@@ -110,7 +110,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ein Punkt, der in Ernährungsratgebern nie auftaucht, aber Geld bedeutet: Gesundheitskurse und Sportverein sind bei vielen Kassen bonusfähig. Wer Schwangerschaftsyoga oder Wassergymnastik macht, sollte sich die Teilnahme bescheinigen lassen.',
+          text: 'Ein Punkt, der in Ernährungsratgebern nie auftaucht, aber Geld bedeutet: Gesundheitskurse und Sportverein sind bei vielen Kassen bonusfähig. Wer Schwangerschaftsyoga oder Wassergymnastik macht, fragt am besten vorher, ob der Kurs qualitätsgeprüft ist (bei der IKK classic Nr. 40) oder über Verein oder Studio läuft (Nr. 41 und 42), und lässt sich die Teilnahme bescheinigen.',
         },
       ],
     },
@@ -174,7 +174,7 @@ export const article = {
               '1. Drittel (bis ca. 13. Woche)',
               'Mutterpass, erste Vorsorgen, Hebammensuche, Arbeitgeber informieren',
               'gesetzliche Vorsorge, Standard-Ultraschall, Basislabor',
-              'jede Mutterschaftsvorsorge zählt einzeln (IKK classic Nr. 09), je 10 EUR oder 30 EUR Zuschusswert',
+              'jede Mutterschaftsvorsorge zählt einzeln (IKK classic Nr. 09), je 10 EUR Geldbonus oder alternativ 30 EUR Zuschusswert',
             ],
             [
               '2. Drittel (ca. 14. bis 27. Woche)',
@@ -186,7 +186,7 @@ export const article = {
               '3. Drittel (ab ca. 28. Woche)',
               'engere Intervalle, Klinikanmeldung, Mutterschutzfrist, Anträge vorbereiten',
               'gesetzliche Vorsorge, Standard-Ultraschall, Hebammenbetreuung',
-              'Vorsorgen zählen weiter, danach Rückbildungsgymnastik (Nr. 44), 25 EUR oder 75 EUR Zuschusswert',
+              'Vorsorgen zählen weiter, danach Rückbildungsgymnastik (Nr. 44), 25 EUR Geldbonus oder alternativ 75 EUR Zuschusswert',
             ],
           ],
         },
@@ -202,7 +202,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Deshalb kommt in der Schwangerschaft eine Summe zusammen, die sonst niemand erreicht. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich, ein theoretischer Höchstwert, der voraussetzt, dass wirklich jede Position zusammenkommt. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr. Drei Regeln gehören dazu, damit die Zahl nicht größer klingt, als sie ist:',
+          text: 'Deshalb kommt in der Schwangerschaft eine Summe zusammen, die in anderen Lebensphasen selten erreicht wird. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich, ein theoretischer Höchstwert, der voraussetzt, dass wirklich jede Position zusammenkommt. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr. Drei Regeln gehören dazu, damit die Zahl nicht größer klingt, als sie ist:',
         },
         {
           type: 'list',
@@ -247,7 +247,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant geht noch etwas. Der Vorsorge-Topf der SDK AP-Tarife zahlt genau die Untersuchungen, die die Kasse nicht übernimmt. Er greift ohne Wartezeit und auch dann, wenn die Schwangerschaft bereits festgestellt ist. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Komplikationen, Frühgeburten bis zur 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch sind ausdrücklich versichert.',
+          text: 'Ambulant geht noch etwas. Vor dem Abschluss stehen Gesundheitsfragen, die wahrheitsgemäß zu beantworten sind; je nach Vorgeschichte kann ein Risikozuschlag dazukommen. Der Vorsorge-Topf der SDK AP-Tarife zahlt genau die Untersuchungen, die die Kasse nicht übernimmt. Er greift ohne Wartezeit und auch dann, wenn die Schwangerschaft bereits festgestellt ist. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Komplikationen, Frühgeburten bis zur 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch sind ausdrücklich versichert.',
         },
         {
           type: 'paragraph',
@@ -275,7 +275,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Die Bedingung dahinter ist der entscheidende Punkt: Üblich ist, dass ein Elternteil zum Zeitpunkt der Geburt bereits mindestens drei Monate versichert sein muss, so die Grundregel des § 198 VVG. Ob dein Versicherer das verlangt und ob der Elternvertrag stationär sein muss oder ambulant genügt, gehört vor Abschluss geklärt. Das ist nicht für jeden Tarif abschließend geprüft, deshalb steht hier "in der Regel" und kein Anspruch.',
+          text: 'Die Bedingung dahinter ist der entscheidende Punkt: Nach § 198 VVG greift die Nachversicherung nur, wenn die Versicherung des Elternteils am Tag der Geburt schon mindestens drei Monate besteht. Ob der Elternvertrag stationär sein muss oder ambulant genügt, ist nicht für jeden Tarif abschließend geprüft und gehört vor Abschluss geklärt. Deshalb steht hier "in der Regel" und kein Anspruch.',
         },
         {
           type: 'paragraph',
@@ -297,11 +297,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Die Schutzfrist beginnt üblicherweise 6 Wochen vor dem errechneten Termin und endet 8 Wochen nach der Geburt; bei Früh- und Mehrlingsgeburten verlängert sie sich auf zwölf Wochen. In dieser Zeit bekommst du Mutterschaftsgeld, bei eigener Mitgliedschaft in der gesetzlichen Krankenkasse von der Kasse, sonst vom Bundesamt für Soziale Sicherung, und in der Regel einen Zuschuss vom Arbeitgeber. Diese Eckwerte ändern sich gelegentlich, den aktuellen Stand und die Antragswege findest du beim Familienportal des Bundes.',
+          text: 'Die Schutzfrist beginnt üblicherweise 6 Wochen vor dem errechneten Termin und endet 8 Wochen nach der Geburt; bei Früh- und Mehrlingsgeburten verlängert sie sich, bei einer Frühgeburt zusätzlich um die Tage, die vor der Geburt nicht in Anspruch genommen werden konnten. Die genauen Fristen stehen im Mutterschutzgesetz. In dieser Zeit bekommst du Mutterschaftsgeld: bei eigener Mitgliedschaft in der gesetzlichen Krankenkasse von deiner Kasse, sonst in deutlich geringerer Höhe über das Bundesamt für Soziale Sicherung. Dazu kommt in der Regel ein Zuschuss vom Arbeitgeber. Die genauen Beträge, den aktuellen Stand und die Antragswege findest du beim Familienportal des Bundes.',
         },
         {
           type: 'paragraph',
-          text: 'Elterngeld und Elternzeit sind zwei getrennte Dinge. Die Elternzeit meldest du beim Arbeitgeber an, dafür gilt eine gesetzliche Ankündigungsfrist von sieben Wochen vor Beginn, bei Zeiten zwischen dem dritten und achten Geburtstag von 13 Wochen. Das Elterngeld beantragst du schriftlich bei der Elterngeldstelle, praktisch erst nach der Geburt, weil die Geburtsurkunde dazugehört. Warte damit nicht zu lange: Rückwirkend wird Elterngeld nur für die letzten drei Lebensmonate vor dem Monat gezahlt, in dem dein Antrag eingeht, so § 7 Abs. 1 BEEG.',
+          text: 'Elterngeld und Elternzeit sind zwei getrennte Dinge. Die Elternzeit meldest du beim Arbeitgeber an, dafür gilt eine gesetzliche Ankündigungsfrist von sieben Wochen vor Beginn, bei Zeiten zwischen dem dritten und achten Geburtstag von 13 Wochen. Das Elterngeld beantragst du bei der Elterngeldstelle, in vielen Bundesländern auch online, praktisch erst nach der Geburt, weil die Geburtsurkunde dazugehört. Warte damit nicht zu lange: Rückwirkend wird Elterngeld nur für die letzten drei Lebensmonate vor dem Monat gezahlt, in dem dein Antrag eingeht, so § 7 Abs. 1 BEEG.',
         },
       ],
     },
@@ -351,7 +351,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich; im besten Fall deckt er den Beitrag ganz, in den meisten Fällen zum großen Teil. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich und kann den Beitrag je nach anerkannten Maßnahmen und tatsächlichen Kosten ganz oder teilweise mitfinanzieren; der Zuschuss fließt in den Zusatzschutz und ist immer auf deine tatsächlichen Aufwendungen gedeckelt. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -367,7 +367,7 @@ export const article = {
     {
       question: 'Kann ich in der Schwangerschaft noch eine Zusatzversicherung abschließen?',
       answer:
-        'Ambulant ja, der Vorsorge-Topf greift ohne Wartezeit und auch bei bereits festgestellter Schwangerschaft. Stationär bekommst du diese Entbindung nicht mehr versichert.',
+        'Ambulant ist ein Abschluss in der Regel noch möglich. Über den Antrag entscheidet der Versicherer nach den Gesundheitsfragen, eine Aufnahme ist auch mit Vorerkrankungen möglich, teils mit Risikozuschlag. Der Vorsorge-Topf greift dann ohne Wartezeit und auch bei bereits festgestellter Schwangerschaft. Stationär bekommst du diese Entbindung nicht mehr versichert.',
     },
     {
       question: 'Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?',
