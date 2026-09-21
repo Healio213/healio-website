@@ -175,6 +175,20 @@ for (const [label, source] of [['Vorlage', layout], ['Uebersicht', overview]]) {
   expect(!/[–—]/.test(visible), `${label} darf keine Gedankenstriche enthalten.`);
 }
 
+// --- 6b. Keine schwebende Chat-Blase im Ratgeber --------------------------
+
+// Der Ratgeber ist bezahlter Einstieg. Neben den drei KassenBoost-Buttons
+// darf dort kein zweiter, schwebender Gespraechsweg auftauchen.
+const nitaWidget = read('src/components/NitaConsentWidget.jsx');
+expect(
+  /const NITA_HIDDEN_ROUTE_PREFIXES = Object\.freeze\(\['\/ratgeber'\]\)/.test(nitaWidget),
+  'Der Ratgeber muss in der Sperrliste des Nita-Widgets stehen.',
+);
+expect(
+  /if \(!HEALIO_VOICE_CONTACT_ENABLED \|\| isNitaHiddenRoute\(pathname\)\) return null;/.test(nitaWidget),
+  'Das Nita-Widget muss auf gesperrten Routen ungerendert bleiben, nicht nur unsichtbar.',
+);
+
 // --- 7. Falls schon gebaut wurde: das ausgelieferte HTML gegenpruefen ------
 
 const builtAdvertorial = path.join(root, 'dist', 'ratgeber', ADVERTORIAL_SLUG, 'index.html');
@@ -187,6 +201,10 @@ if (fs.existsSync(builtAdvertorial)) {
   for (const link of ['/impressum', '/datenschutz', '/erstinformation']) {
     expect(html.includes(`href="${link}"`), `Pflichtlink fehlt im gebauten Advertorial: ${link}`);
   }
+  expect(
+    !html.includes('data-healio-nita=') && !html.includes('healio-nita-quiet-launcher'),
+    'Das gebaute Advertorial darf keine Nita-Chat-Blase ausliefern.',
+  );
 }
 
 if (failures.length > 0) {

@@ -294,5 +294,22 @@ const ActiveNitaConsentWidget = () => {
   );
 };
 
-export const NitaConsentWidget = () => HEALIO_VOICE_CONTACT_ENABLED ? <ActiveNitaConsentWidget /> : null;
+// Der Ratgeber ist bezahlter Einstieg und fuehrt ausschliesslich zum
+// KassenBoost-Check. Eine schwebende Chat-Blase wuerde dort vom einzigen
+// gewollten Weg ablenken, deshalb bleibt Nita auf /ratgeber und allen
+// Unterseiten komplett ungerendert.
+const NITA_HIDDEN_ROUTE_PREFIXES = Object.freeze(['/ratgeber']);
+
+export const isNitaHiddenRoute = (pathname = '/') => {
+  const normalized = (pathname || '/').replace(/\/+$/, '').toLowerCase() || '/';
+  return NITA_HIDDEN_ROUTE_PREFIXES.some(
+    (prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`),
+  );
+};
+
+export const NitaConsentWidget = () => {
+  const { pathname } = useLocation();
+  if (!HEALIO_VOICE_CONTACT_ENABLED || isNitaHiddenRoute(pathname)) return null;
+  return <ActiveNitaConsentWidget />;
+};
 export default NitaConsentWidget;
