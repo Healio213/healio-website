@@ -107,7 +107,7 @@ Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 
 - **Schwangerschaft — getrennte mögliche Leistungen:** zum Beispiel Hebammen-Rufbereitschaft, ergänzende Vorsorge, Baby-Bonus oder Partner-Kurs. Jede Leistung hat eigene Voraussetzungen und ist keine garantierte IKK-Bonussumme.
 - **Osteopathie — 160 Euro/Jahr:** 4 Sitzungen à 40 Euro pro Kalenderjahr, auch für Babys und Kinder
-- **Reiseimpfungen:** Gelbfieber, Hepatitis A/B, Typhus u.v.m. über das Gesundheitskonto
+- **Reiseimpfungen:** Gelbfieber, Hepatitis A/B, Typhus u.v.m. mit Zuschuss der IKK classic
 - **Präventionskurse:** 180 Euro/Jahr (2 Kurse à 90 Euro) für Yoga, Rückentraining, Stressbewältigung
 - **10% für die Umwelt:** Healio spendet 10% an Umweltverbände
 
@@ -180,7 +180,7 @@ Nein, nicht beliebig. Ein Gesundheitskurs und die anderen regelmäßigen Aktivit
 ### Bekomme ich einen Zuschuss für eine Apple Watch oder Fitnesstracker?
 Ein Fitnesstracker kann als Gerät zum Messen und Erfassen des eigenen Fitness- und Gesundheitsstatus zuschussfähig sein. Die konkrete Erstattung ist kein fester Pauschalbetrag: Sie hängt vom dreifachen Wert deiner anerkannten Maßnahmen ab und ist zusätzlich auf die belegten zuschussfähigen Kosten begrenzt.
 
-### Gibt es zusätzliche Leistungen über das Gesundheitskonto?
+### Gibt es zusätzliche Leistungen neben dem Bonusprogramm?
 Ja. Die IKK Classic erstattet zusätzlich zum Bonus 180 Euro pro Jahr für qualitätsgeprüfte Gesundheitskurse (max. 2 Kurse à 90 Euro) — für Yoga, Rückentraining, Ernährung, Stressbewältigung. Dieses Budget ist unabhängig vom Bonusprogramm.
 
 ### Was ist der IKK Spartarif?

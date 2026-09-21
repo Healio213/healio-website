@@ -570,7 +570,7 @@
         "name": "Example: family",
         "tag": "Family",
         "highlight": "Budgets per person",
-        "text": "Glasses for the child, osteopathy after pregnancy, dental cleaning via the IKK health account and the sports club bonus: every insured family member has their own budgets, and IKK bonuses apply per person."
+        "text": "Glasses for the child, osteopathy after pregnancy, dental cleaning subsidised by IKK classic and the sports club bonus: every insured family member has their own budgets, and IKK bonuses apply per person."
       },
       "max": {
         "name": "Example: student life",
@@ -588,7 +588,7 @@
         "name": "Example: varifocal glasses",
         "tag": "Glasses",
         "highlight": "up to 500 € / 2 years",
-        "text": "For varifocal glasses costing 680 euros, the Ambulant 100 plan covers up to 500 euros. Professional dental cleaning can additionally be subsidised via the IKK health account."
+        "text": "For varifocal glasses costing 680 euros, the Ambulant 100 plan covers up to 500 euros. Professional dental cleaning is additionally subsidised by IKK classic as a benefit of its own."
       },
       "lisa": {
         "name": "Example: young family",
@@ -722,7 +722,7 @@
       },
       "reiseimpfungen": {
         "title": "Travel vaccinations",
-        "desc": "Yellow fever, Hepatitis A/B, typhoid and more, subsidized via the IKK classic health account."
+        "desc": "Yellow fever, Hepatitis A/B, typhoid and more, subsidized by IKK classic."
       },
       "gesundheitskurse": {
         "title": "Health courses, €180/year extra",
