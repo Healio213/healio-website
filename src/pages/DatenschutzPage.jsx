@@ -88,6 +88,10 @@ const DatenschutzPage = () => {
               <p>{t('datenschutz.hostingText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.analyticsTitle')}</h3>
               <p>{t('datenschutz.analyticsText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.googleAdsTitle')}</h3>
+              <p>{t('datenschutz.googleAdsText')}</p>
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.metaTitle')}</h3>
+              <p>{t('datenschutz.metaText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.nitaTitle')}</h3>
               <p>{t('datenschutz.nitaText')}</p>
               <h3 id="whatsapp-kontakt" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">
