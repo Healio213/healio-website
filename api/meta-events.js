@@ -19,7 +19,7 @@
 const GRAPH_API_VERSION = 'v21.0';
 
 const ALLOWED_EVENT_NAMES = new Set(['PageView', 'ViewContent', 'RechnerStart', 'Lead']);
-const ALLOWED_CONTENT_NAMES = new Set(['zahn', 'ambulant', 'partner']);
+const ALLOWED_CONTENT_NAMES = new Set(['zahn', 'ambulant', 'partner', 'ratgeber']);
 const ALLOWED_ORIGINS = new Set(['https://healio.de', 'https://www.healio.de']);
 const VERCEL_PREVIEW_ORIGIN = /^https:\/\/[a-z0-9][a-z0-9-]{0,200}\.vercel\.app$/;
 

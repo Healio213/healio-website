@@ -32,7 +32,7 @@ const META_EVENT_SET = new Set(META_EVENTS);
 // Einziger erlaubter Parameterschluessel. Er darf niemals auf den
 // SENSITIVE_PARAM_KEY-Filter aus analytics.js passen.
 export const META_ALLOWED_PARAM_KEYS = Object.freeze(new Set(['content_name']));
-export const META_PAGE_KEYS = Object.freeze(new Set(['zahn', 'ambulant', 'partner']));
+export const META_PAGE_KEYS = Object.freeze(new Set(['zahn', 'ambulant', 'partner', 'ratgeber']));
 
 // Seitenschluessel fuer ViewContent. Alles andere bleibt ohne ViewContent.
 const META_PAGE_KEY_BY_PATH = Object.freeze({
@@ -42,6 +42,14 @@ const META_PAGE_KEY_BY_PATH = Object.freeze({
   '/en/outpatient': 'ambulant',
   '/partner': 'partner',
   '/en/partner': 'partner',
+  '/ratgeber': 'ratgeber',
+});
+
+// Der Ratgeber hat Unterseiten (Advertorials, spaeter organische Artikel).
+// Sie alle zaehlen als ein einziger, neutraler Seitenschluessel. Der Slug
+// selbst geht nie an Meta.
+const META_PAGE_KEY_BY_PREFIX = Object.freeze({
+  '/ratgeber/': 'ratgeber',
 });
 
 // Auf diesen Routen darf Meta niemals messen. /zahn und /ambulant sind
@@ -94,7 +102,10 @@ export const isMetaExcludedRoute = (location = isBrowser() ? window.location : n
 
 export const getMetaPageKey = (location = isBrowser() ? window.location : null) => {
   if (!location) return null;
-  const key = META_PAGE_KEY_BY_PATH[normalizePath(location.pathname)];
+  const pathname = normalizePath(location.pathname);
+  const key = META_PAGE_KEY_BY_PATH[pathname]
+    || Object.entries(META_PAGE_KEY_BY_PREFIX)
+      .find(([prefix]) => pathname.startsWith(prefix))?.[1];
   return key && META_PAGE_KEYS.has(key) ? key : null;
 };
 

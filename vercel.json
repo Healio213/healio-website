@@ -49,7 +49,6 @@
     }
   ],
   "redirects": [
-    { "source": "/ratgeber", "destination": "/blog", "permanent": true },
     {
       "source": "/termin",
       "destination": "/partner?utm_source=kurzlink&utm_medium=nachricht&utm_campaign=termin",
