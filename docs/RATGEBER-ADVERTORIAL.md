@@ -15,6 +15,10 @@ Indexierung.
 | Adresse | Art | Suchmaschine |
 |---|---|---|
 | `/ratgeber` | Übersicht, schlichte Liste plus Verweis auf `/blog` | indexiert, in der Sitemap |
+| `/ratgeber/ikk-classic-bonusprogramm-2026` | Ratgeber, zugleich Landingpage der Google-Anzeigengruppe G1-A | indexiert, in der Sitemap |
+| `/ratgeber/zahnzusatzversicherung-fehlender-zahn` | Ratgeber | indexiert, in der Sitemap |
+| `/ratgeber/schwanger-zusatzversicherung` | Ratgeber | indexiert, in der Sitemap |
+| `/ratgeber/schwangerschaft-worauf-achten` | Ratgeber | indexiert, in der Sitemap |
 | `/ratgeber/krankenkassen-bonus-zusatzversicherung` | Advertorial 1 | `noindex, nofollow`, nicht in der Sitemap |
 
 Nur im deutschen Routenbaum. Im englischen Baum gibt es bewusst keine Route.
@@ -44,10 +48,17 @@ Seitenleiste, keine Bilder, kein zusätzliches Skript. Oben steht der Hinweis
 das Feld `kind`. Die Fußzeile des Artikels verlinkt sichtbar Impressum,
 Datenschutzerklärung und Erstinformation nach § 15 VersVermV.
 
-Der Button erscheint dreimal: nach dem im Inhalt markierten Abschnitt
-(`ctaAfterSectionId`), am Ende des Textes und unter `md` als feste Leiste am
-unteren Rand. Die Leiste blendet sich aus, sobald die Artikelfußzeile
-sichtbar wird, damit sie nie über den Pflichtangaben liegt.
+Beim Advertorial erscheint der Button dreimal: nach dem im Inhalt markierten
+Abschnitt (`ctaAfterSectionId`), am Ende des Textes und unter `md` als feste
+Leiste am unteren Rand. Die Leiste blendet sich aus, sobald die
+Artikelfußzeile sichtbar wird, damit sie nie über den Pflichtangaben liegt.
+
+**Bei `kind: 'ratgeber'` gibt es keinen dreifachen Button und keine feste
+Leiste.** Ein organischer Artikel trägt höchstens einen einzigen internen
+Button aus dem Feld `internalCta` und am Ende den Absatz „So gehst du weiter
+vor“ mit Links. Aktuell hat nur die IKK-Bonus-Landingpage einen solchen
+Button; `test:ratgeber` verhindert, dass sich ein zweiter Artikel
+unbemerkt einen anhängt.
 
 ---
 
@@ -96,6 +107,70 @@ Ratgeberartikel bekommen kein `robots`-Feld und dafür einen Eintrag in
 `publicRouterPaths` aufnehmen (Advertorials zusätzlich in `noindexPaths`).
 
 Danach `npm run test:ratgeber && npm run test:seo && npm run build`.
+
+### Zusatzfelder für organische Ratgeberartikel
+
+`kind: 'ratgeber'` kennt über das Muster hinaus diese Felder. Muster dafür
+ist `ikk-classic-bonusprogramm-2026.js`.
+
+| Feld | Wirkung |
+|---|---|
+| `publishedAt`, `publishedAtLabel` | Stand in der Fußzeile und `datePublished` im Article-Schema |
+| `readingTimeMinutes` | Lesezeit unter der Überschrift und in der Übersicht |
+| `factNugget` | eigener Block `<section data-geo="fact-nugget">` für Antwortmaschinen |
+| `faqs` | Liste `Frage`/`Antwort`, wird zusätzlich als FAQPage ausgezeichnet |
+| `onward` | Abschnitt „So gehst du weiter vor“, ein Satz aus `segments` (`text`, dazu `to` für interne und `href` für externe Links) |
+| `internalCta` | ein einzelner interner Button mit `heading`, `blocks`, `label` und `to` |
+
+Neue Blockarten in `sections[].blocks`:
+
+- `{ type: 'table', caption, head: [...], rows: [[...]], note }`. Ab vier
+  Spalten schaltet die Vorlage auf gleich breite Spalten um, darunter bleibt
+  es bei automatischer Breite. Breite Tabellen wachsen ab `md` etwas aus der
+  Textspalte heraus, auf dem Handy trägt der Rahmen den waagerechten Bildlauf.
+- `{ type: 'segments', segments: [...] }` für einen Absatz mit Links.
+- `list`-Einträge dürfen statt eines Strings auch `{ lead, text }` sein, der
+  `lead` wird fett gesetzt. `ordered: true` macht eine nummerierte Liste.
+
+### Auszeichnung für Suchmaschinen
+
+Ein organischer Artikel liefert Article- und FAQPage-Auszeichnung auf zwei
+Wegen, beides aus derselben Inhaltsdatei:
+
+1. **Statisch**, über `schemaMarkup: ratgeberSchema('<slug>')` in
+   `scripts/seo-routes.mjs`. Die Helferfunktion dort liest den Artikel aus
+   dem Inhaltsregister, es wird nichts abgeschrieben. Nur so steht die
+   Auszeichnung im ausgelieferten HTML, unabhängig von JavaScript. Der
+   Prerender füllt nur `#root`, nicht den Kopfbereich.
+2. **Zur Laufzeit**, über `SEOHead` in der Artikelvorlage, damit die
+   Auszeichnung auch bei einem Wechsel innerhalb der Anwendung stimmt.
+   Derselbe Doppelweg wie bei den Blogartikeln.
+
+### Der interne Button der IKK-Bonus-Landingpage
+
+`src/lib/ratgeber-cta.js` trägt neben `buildKassenboostUrl` jetzt auch
+`buildInternalRatgeberUrl(pfad, search)`. Gleiche Prüfregel für die Werte,
+gleiche Durchreichung von `utm_source`, `utm_medium`, `utm_campaign` und
+`utm_content`, nur bleibt das Ziel auf healio.de. Standardwerte ohne UTM in
+der aufrufenden Adresse: `utm_source=healio`, `utm_medium=ratgeber`,
+`utm_campaign=ikk-bonus-landingpage`. `utm_content` wird nie erfunden.
+
+Ergebnis ohne UTM: `/ambulant?utm_source=healio&utm_medium=ratgeber&utm_campaign=ikk-bonus-landingpage`
+
+### Interne Links von den Produktseiten
+
+| Seite | Stelle | Ziel |
+|---|---|---|
+| `/zahn` | unter den Wege-Karten, nur im deutschen Baum | `/ratgeber/zahnzusatzversicherung-fehlender-zahn` |
+| `/schwangerschaft` | unter dem Abschluss des FAQ-Blocks | beide Schwangerschaftsartikel |
+| `/ambulant` | unter dem Hinweis im Bonusabschnitt, nur im deutschen Baum | `/ratgeber/ikk-classic-bonusprogramm-2026` |
+
+### Was nicht auf die Seite kommt
+
+Die Markdown-Quellen unter `Healio/Ratgeber/` tragen am Ende die Abschnitte
+„Belege“ und „Offen“. Beide bleiben Arbeitsunterlage und werden nicht
+veröffentlicht. Bewusste Abweichungen vom Quelltext stehen als Kommentar im
+Kopf der jeweiligen Inhaltsdatei.
 
 ### Anrede zurück auf Sie stellen
 
@@ -181,7 +256,22 @@ npm run lint
 npm run build
 ```
 
-`scripts/check-ratgeber-contract.mjs` prüft: beide Routen im Router und keine
+`scripts/check-ratgeber-contract.mjs` prüft zusätzlich für die vier
+organischen Artikel: alle Slugs im Inhaltsregister, kein `noindex`, Eintrag
+in der Sitemap, `publishedAt` und `readingTimeMinutes`, Vorspann, „Kurz
+gesagt“ als erster Abschnitt, mindestens eine Tabelle, Fact Nugget, FAQ mit
+Schema, ein Weg am Ende mit mindestens einem Link, kein toter Verweis auf
+einen anderen Ratgeberartikel, genau ein interner Button und nur auf der
+IKK-Landingpage, dessen UTM-Durchreichung, und im gebauten HTML zusätzlich
+`data-geo`, Article- und FAQPage-Auszeichnung sowie das Fehlen jedes
+KassenBoost-Buttons.
+
+Die Umlautprüfung lief früher gegen `/(?:ae|oe|ue|ss)\b/` und schlug damit
+bei jedem regulären Wort auf `ss` an („Mutterpass“, „muss“) und bei jedem
+auf `ue` („neue“). Sie prüft jetzt eine Liste typischer Ersatzschreibungen,
+dafür im gesamten veröffentlichten Text statt nur in der Überschrift.
+
+Darüber hinaus prüft das Skript wie bisher: beide Routen im Router und keine
 englische Route, Advertorial auf `noindex, nofollow` und nicht in der
 Sitemap, Übersicht indexiert und in der Sitemap, drei Buttons mit
 KassenBoost-Ziel und `#vergleich`, UTM-Durchreichung und Standardwerte, den
@@ -194,7 +284,9 @@ Einen projektweiten Sammel-Test gibt es in `package.json` nicht;
 `check-*`-Verträgen.
 
 Bekannt rot, schon vor diesem Branch und hier nicht angefasst:
-`test:security`, `test:form-hardening`, `test:pregnancy`, `test:whatsapp`.
+`test:kassenboost-rendered`, `test:bav-calculator-rendered`,
+`test:pregnancy` (scheitert an der Zusicherung „The normal site must retain
+its voice launcher“ auf `/leistungen`, nicht am Ratgeber), `test:whatsapp`.
 
 ---
 

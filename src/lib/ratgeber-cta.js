@@ -46,3 +46,39 @@ export const buildKassenboostUrl = (search = '') => {
 };
 
 export default buildKassenboostUrl;
+
+/**
+ * Ziel eines internen Ratgeber-Buttons, zum Beispiel "Bonus und Beitrag
+ * pruefen" auf der IKK-Bonus-Landingpage.
+ *
+ * Gleiche Mechanik wie buildKassenboostUrl, nur bleibt das Ziel auf
+ * healio.de: Die UTM-Parameter der aufrufenden Adresse werden durchgereicht,
+ * damit eine Google-Anzeige bis zur Tarifseite nachvollziehbar bleibt. Fehlt
+ * ein Wert, greift der Standard. utm_content wird nie erfunden.
+ */
+export const RATGEBER_INTERNAL_UTM_DEFAULTS = Object.freeze({
+  utm_source: 'healio',
+  utm_medium: 'ratgeber',
+  utm_campaign: 'ikk-bonus-landingpage',
+});
+
+export const buildInternalRatgeberUrl = (targetPath, search = '') => {
+  if (typeof targetPath !== 'string' || !targetPath.startsWith('/')) {
+    throw new TypeError('Das interne Ziel muss ein Pfad auf healio.de sein.');
+  }
+
+  const incoming = new URLSearchParams(typeof search === 'string' ? search : '');
+  const params = new URLSearchParams();
+
+  RATGEBER_UTM_KEYS.forEach((key) => {
+    const candidate = incoming.get(key);
+    const value = typeof candidate === 'string' && SAFE_UTM_VALUE.test(candidate)
+      ? candidate
+      : RATGEBER_INTERNAL_UTM_DEFAULTS[key];
+
+    if (value) params.set(key, value);
+  });
+
+  const query = params.toString();
+  return query ? `${targetPath}?${query}` : targetPath;
+};

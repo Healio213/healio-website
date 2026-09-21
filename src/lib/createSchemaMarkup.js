@@ -127,3 +127,48 @@ export const createFAQSchema = (faqs) => {
     }))
   };
 };
+
+/**
+ * Article-Auszeichnung fuer die organischen Ratgeberartikel unter /ratgeber.
+ *
+ * Bewusst schlank gehalten: Die Ratgeberartikel liegen als strukturierte
+ * Inhaltsdateien im Repo, nicht in der Blog-Datenbank. Deshalb kommen
+ * Ueberschrift, Beschreibung und Datum direkt aus der Inhaltsdatei und nicht
+ * aus einem gespeicherten structured_data-Feld wie beim Blog.
+ */
+export const createArticleSchema = ({
+  headline,
+  description,
+  url,
+  datePublished = null,
+  dateModified = null,
+  inLanguage = "de-DE",
+  image = `${SITE_URL}/og-image.png`
+}) => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": headline,
+    "description": description,
+    "url": url,
+    "mainEntityOfPage": { "@id": `${url}#webpage` },
+    "image": image,
+    "inLanguage": inLanguage,
+    ...(datePublished ? { datePublished } : {}),
+    ...(dateModified ? { dateModified } : {}),
+    "author": {
+      "@type": "Organization",
+      "name": "Healio GmbH",
+      "url": SITE_URL
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Healio GmbH",
+      "url": SITE_URL,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/favicon.png`
+      }
+    }
+  };
+};

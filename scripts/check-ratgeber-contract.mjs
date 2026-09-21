@@ -17,7 +17,9 @@ import { seoRoutes } from './seo-routes.mjs';
 import { ratgeberArticles, getRatgeberArticle } from '../src/content/ratgeber/index.js';
 import {
   KASSENBOOST_ANCHOR,
+  RATGEBER_INTERNAL_UTM_DEFAULTS,
   RATGEBER_UTM_DEFAULTS,
+  buildInternalRatgeberUrl,
   buildKassenboostUrl,
 } from '../src/lib/ratgeber-cta.js';
 
@@ -31,6 +33,18 @@ const expect = (condition, message) => {
 
 const ADVERTORIAL_SLUG = 'krankenkassen-bonus-zusatzversicherung';
 const ADVERTORIAL_PATH = `/ratgeber/${ADVERTORIAL_SLUG}`;
+
+// Die vier organischen Ratgeberartikel. Sie muessen vorhanden, indexierbar
+// und in der Sitemap sein. ikk-classic-bonusprogramm-2026 ist zugleich die
+// Landingpage der Google-Anzeigengruppe G1-A und traegt als einziger einen
+// internen Button auf /ambulant.
+const RATGEBER_SLUGS = [
+  'ikk-classic-bonusprogramm-2026',
+  'zahnzusatzversicherung-fehlender-zahn',
+  'schwanger-zusatzversicherung',
+  'schwangerschaft-worauf-achten',
+];
+const IKK_LANDING_SLUG = 'ikk-classic-bonusprogramm-2026';
 
 const app = read('src/App.jsx');
 const layout = read('src/components/ratgeber/RatgeberArticleLayout.jsx');
@@ -75,10 +89,132 @@ for (const article of ratgeberArticles) {
       !sitemap.includes(`<loc>https://healio.de${articlePath}</loc>`),
       `Advertorial darf nicht in der Sitemap stehen: ${articlePath}`,
     );
+  } else {
+    // Organische Ratgeberartikel sind der Gegenfall: kein robots-Feld mit
+    // noindex und dafuer ein Sitemap-Eintrag.
+    expect(
+      !/noindex/i.test(route.robots || ''),
+      `Ratgeberartikel muss indexierbar bleiben: ${articlePath}`,
+    );
+    expect(
+      sitemap.includes(`<loc>https://healio.de${articlePath}</loc>`),
+      `Indexierbarer Ratgeberartikel fehlt in der Sitemap: ${articlePath}`,
+    );
   }
 }
 
 expect(Boolean(getRatgeberArticle(ADVERTORIAL_SLUG)), 'Advertorial 1 fehlt im Inhaltsregister.');
+
+// --- 2b. Die vier organischen Ratgeberartikel -----------------------------
+
+for (const slug of RATGEBER_SLUGS) {
+  const article = getRatgeberArticle(slug);
+  expect(Boolean(article), `Ratgeberartikel fehlt im Inhaltsregister: ${slug}`);
+  if (!article) continue;
+
+  expect(article.kind === 'ratgeber', `Dieser Artikel muss kind "ratgeber" tragen: ${slug}`);
+  expect(
+    typeof article.publishedAt === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(article.publishedAt),
+    `publishedAt fehlt oder ist kein ISO-Datum: ${slug}`,
+  );
+  expect(
+    Number.isInteger(article.readingTimeMinutes) && article.readingTimeMinutes > 0,
+    `readingTimeMinutes fehlt: ${slug}`,
+  );
+
+  // Vorspann, "Kurz gesagt", H2-Abschnitte.
+  expect((article.lead || '').trim().length >= 80, `Vorspann fehlt oder ist zu kurz: ${slug}`);
+  expect(
+    article.sections[0]?.id === 'kurz-gesagt' && article.sections[0]?.heading === 'Kurz gesagt',
+    `Der erste Abschnitt muss "Kurz gesagt" sein: ${slug}`,
+  );
+  expect(article.sections.length >= 5, `Zu wenige H2-Abschnitte: ${slug}`);
+
+  // Mindestens eine Tabelle je Artikel.
+  expect(
+    article.sections.some((section) => section.blocks.some((block) => block.type === 'table')),
+    `Mindestens eine Tabelle fehlt: ${slug}`,
+  );
+
+  // Fact Nugget und FAQ.
+  expect((article.factNugget || '').trim().length >= 80, `Fact Nugget fehlt: ${slug}`);
+  expect(Array.isArray(article.faqs) && article.faqs.length >= 3, `FAQ fehlt oder ist zu kurz: ${slug}`);
+  for (const faq of article.faqs || []) {
+    expect(Boolean(faq.question?.trim() && faq.answer?.trim()), `Unvollstaendige FAQ-Frage: ${slug}`);
+  }
+
+  // Interner Weg am Ende, als Satz mit mindestens einem Link.
+  expect(Boolean(article.onward?.segments?.length), `Der interne Weg am Ende fehlt: ${slug}`);
+  expect(
+    (article.onward?.segments || []).some((segment) => segment.to || segment.href),
+    `Der interne Weg am Ende braucht mindestens einen Link: ${slug}`,
+  );
+}
+
+// Fact-Nugget-Block und FAQ-Schema muessen in der Vorlage verdrahtet sein.
+expect(/data-geo="fact-nugget"/.test(layout), 'Der Fact-Nugget-Block braucht die Auszeichnung data-geo.');
+expect(/createFAQSchema\(article\.faqs\)/.test(layout), 'Die FAQ muessen als FAQPage ausgezeichnet werden.');
+expect(/createArticleSchema\(/.test(layout), 'Ratgeberartikel brauchen eine Article-Auszeichnung.');
+expect(
+  /robots=\{isAdvertorial \? 'noindex, nofollow' : 'index, follow'\}/.test(layout),
+  'Nur Advertorials duerfen auf noindex stehen.',
+);
+
+// --- 2c. Die IKK-Bonus-Landingpage ----------------------------------------
+
+const ikkLanding = getRatgeberArticle(IKK_LANDING_SLUG);
+expect(Boolean(ikkLanding), 'Die IKK-Bonus-Landingpage fehlt im Inhaltsregister.');
+if (ikkLanding) {
+  expect(ikkLanding.internalCta?.to === '/ambulant', 'Der Button der IKK-Landingpage muss auf /ambulant zeigen.');
+  expect(
+    ikkLanding.internalCta?.label === 'Bonus und Beitrag prüfen',
+    'Der Button der IKK-Landingpage heisst "Bonus und Beitrag pruefen".',
+  );
+  expect(
+    ikkLanding.internalCta?.heading === 'Bonus in Zusatzschutz umwandeln',
+    'Der Abschnitt der IKK-Landingpage heisst "Bonus in Zusatzschutz umwandeln".',
+  );
+}
+
+// Kein zweiter Artikel darf sich einen internen Button anhaengen, ohne dass
+// er hier bewusst eingetragen wird.
+for (const article of ratgeberArticles) {
+  if (article.slug === IKK_LANDING_SLUG) continue;
+  expect(!article.internalCta, `Unerwarteter interner Button: ${article.slug}`);
+}
+
+const internalDefault = buildInternalRatgeberUrl('/ambulant', '');
+expect(internalDefault.startsWith('/ambulant?'), 'Das interne Button-Ziel muss ein Pfad auf healio.de sein.');
+expect(!internalDefault.includes('kassenboost.de'), 'Das interne Button-Ziel darf nicht auf kassenboost.de zeigen.');
+for (const [key, value] of Object.entries(RATGEBER_INTERNAL_UTM_DEFAULTS)) {
+  expect(internalDefault.includes(`${key}=${value}`), `Standardwert ${key}=${value} fehlt im internen Button-Ziel.`);
+}
+expect(!internalDefault.includes('utm_content='), 'utm_content darf auch intern nicht erfunden werden.');
+
+const internalPassed = buildInternalRatgeberUrl(
+  '/ambulant',
+  '?utm_source=google&utm_medium=cpc&utm_campaign=g1-a&utm_content=ikk-bonus',
+);
+const internalParams = new URL(internalPassed, 'https://healio.de').searchParams;
+expect(internalParams.get('utm_source') === 'google', 'utm_source muss intern durchgereicht werden.');
+expect(internalParams.get('utm_medium') === 'cpc', 'utm_medium muss intern durchgereicht werden.');
+expect(internalParams.get('utm_campaign') === 'g1-a', 'utm_campaign muss intern durchgereicht werden.');
+expect(internalParams.get('utm_content') === 'ikk-bonus', 'utm_content muss intern durchgereicht werden.');
+
+// --- 2d. Kein dreifacher Button und keine feste Leiste im Ratgeber --------
+
+expect(
+  /\{isAdvertorial && section\.id === article\.ctaAfterSectionId/.test(layout),
+  'Der Button im Text gehoert allein zum Advertorial.',
+);
+expect(
+  /\{isAdvertorial && \(\s*<div className="mt-14">/.test(layout),
+  'Der Button am Ende gehoert allein zum Advertorial.',
+);
+expect(
+  /\{isAdvertorial && \(\s*<div\s+className=\{`fixed inset-x-0 bottom-0/.test(layout),
+  'Die feste Leiste am unteren Rand gehoert allein zum Advertorial.',
+);
 
 // --- 3. Die drei Buttons ---------------------------------------------------
 
@@ -132,14 +268,42 @@ expect(/§ 15 VersVermV/.test(layout), 'Die Erstinformation muss als Erstinforma
 
 // --- 6. Schreibregeln im veroeffentlichten Text ----------------------------
 
+const UMLAUT_ERSATZ = /\b(?:fuer|ueber|koenn\w*|moegl\w*|muess\w*|waehrend|naechst\w*|zurueck|haeufig\w*|aehnlich\w*|ueblich\w*|urspruenglich|beruecksichtig\w*|zusaetzlich\w*|gemaess|regelmaessig\w*|erhoeh\w*|hoech\w*|verfuegbar|gross|groess\w*|strasse\w*|fuess\w*|massnahm\w*|schliesslich)\b/i;
+
+const renderBlocks = (blocks, parts) => {
+  for (const block of blocks) {
+    if (block.type === 'list') {
+      for (const item of block.items) {
+        if (typeof item === 'string') parts.push(item);
+        else parts.push(item.lead, item.text);
+      }
+    } else if (block.type === 'table') {
+      parts.push(block.caption, block.note, ...block.head);
+      for (const row of block.rows) parts.push(...row);
+    } else if (block.type === 'segments') {
+      for (const segment of block.segments) parts.push(segment.text);
+    } else {
+      parts.push(block.text);
+    }
+  }
+};
+
+// Alles, was wirklich auf der Seite landet, einschliesslich Tabellen,
+// Fact Nugget, FAQ, internem Button und dem Weg am Ende.
 const renderArticleText = (article) => {
-  const parts = [article.headline, article.lead, article.ctaLabel, article.footnote, article.listTitle, article.listTeaser, article.metaTitle, article.metaDescription];
+  const parts = [article.headline, article.lead, article.ctaLabel, article.footnote, article.listTitle, article.listTeaser, article.metaTitle, article.metaDescription, article.factNugget];
   for (const section of article.sections) {
     parts.push(section.heading);
-    for (const block of section.blocks) {
-      if (block.type === 'list') parts.push(...block.items);
-      else parts.push(block.text);
-    }
+    renderBlocks(section.blocks, parts);
+  }
+  for (const faq of article.faqs || []) parts.push(faq.question, faq.answer);
+  if (article.internalCta) {
+    parts.push(article.internalCta.heading, article.internalCta.label);
+    renderBlocks(article.internalCta.blocks, parts);
+  }
+  if (article.onward) {
+    parts.push(article.onward.heading);
+    for (const segment of article.onward.segments) parts.push(segment.text);
   }
   return parts.filter(Boolean).join('\n');
 };
@@ -152,12 +316,27 @@ for (const article of ratgeberArticles) {
   expect(!/[–—]/.test(text), `Gedankenstriche sind im Ratgebertext nicht erlaubt: ${article.slug}`);
   expect(!/\bSie\b/.test(text), `Die Anrede muss Du sein, kein "Sie": ${article.slug}`);
   expect(!/\bIhre?[nmrs]?\b/.test(text), `Die Anrede muss Du sein, kein "Ihr/Ihre": ${article.slug}`);
-  expect(!/(?:ae|oe|ue|ss)\b/.test(article.headline), `Umlaut-Ersatzschreibung in der Headline: ${article.slug}`);
+  // Frueher wurde hier auf /(?:ae|oe|ue|ss)\b/ geprueft. Das schlug bei
+  // jedem regulaeren Wort auf ss an ("Mutterpass", "muss") und bei jedem auf
+  // ue ("neue", "blaue"). Geprueft wird deshalb jetzt eine Liste typischer
+  // Ersatzschreibungen, dafuer im gesamten veroeffentlichten Text.
+  expect(!UMLAUT_ERSATZ.test(text), `Umlaut-Ersatzschreibung statt echtem Umlaut: ${article.slug}`);
   expect(['advertorial', 'ratgeber'].includes(article.kind), `Unbekannte Artikelart: ${article.slug}`);
-  expect(
-    article.sections.some((section) => section.id === article.ctaAfterSectionId),
-    `ctaAfterSectionId zeigt auf keinen Abschnitt: ${article.slug}`,
-  );
+  if (article.ctaAfterSectionId) {
+    expect(
+      article.sections.some((section) => section.id === article.ctaAfterSectionId),
+      `ctaAfterSectionId zeigt auf keinen Abschnitt: ${article.slug}`,
+    );
+  }
+  // Der Verweis auf einen anderen Ratgeberartikel muss ins Register passen.
+  for (const segment of article.onward?.segments || []) {
+    if (!segment.to?.startsWith('/ratgeber/')) continue;
+    const targetSlug = segment.to.slice('/ratgeber/'.length);
+    expect(
+      Boolean(getRatgeberArticle(targetSlug)),
+      `Interner Ratgeber-Link zeigt ins Leere: ${article.slug} -> ${segment.to}`,
+    );
+  }
 }
 
 // Kommentare erklaeren die Regel und duerfen sie deshalb zitieren. Geprueft
@@ -207,6 +386,33 @@ if (fs.existsSync(builtAdvertorial)) {
   );
 }
 
+for (const slug of RATGEBER_SLUGS) {
+  const builtArticle = path.join(root, 'dist', 'ratgeber', slug, 'index.html');
+  if (!fs.existsSync(builtArticle)) continue;
+
+  const html = fs.readFileSync(builtArticle, 'utf8');
+  expect(!/<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html), `Der gebaute Ratgeberartikel darf nicht auf noindex stehen: ${slug}`);
+  expect(html.includes('Ratgeber von Healio'), `Der gebaute Ratgeberartikel muss den Hinweis "Ratgeber von Healio" zeigen: ${slug}`);
+  expect(!html.includes('>Anzeige'), `Ein organischer Ratgeberartikel darf nicht als Anzeige ausgewiesen werden: ${slug}`);
+  expect(html.includes('data-geo="fact-nugget"'), `Der Fact-Nugget-Block fehlt im gebauten HTML: ${slug}`);
+  expect(html.includes('"@type":"FAQPage"'), `Das FAQ-Schema fehlt im gebauten HTML: ${slug}`);
+  expect(html.includes('"@type":"Article"'), `Das Article-Schema fehlt im gebauten HTML: ${slug}`);
+  expect(!html.includes('data-ratgeber-cta='), `Ein organischer Ratgeberartikel darf keinen KassenBoost-Button tragen: ${slug}`);
+  for (const link of ['/impressum', '/datenschutz', '/erstinformation']) {
+    expect(html.includes(`href="${link}"`), `Pflichtlink fehlt im gebauten Ratgeberartikel: ${slug} ${link}`);
+  }
+  expect(
+    !html.includes('data-healio-nita=') && !html.includes('healio-nita-quiet-launcher'),
+    `Der gebaute Ratgeberartikel darf keine Nita-Chat-Blase ausliefern: ${slug}`,
+  );
+
+  if (slug === IKK_LANDING_SLUG) {
+    expect(html.includes('data-ratgeber-internal-cta='), 'Der interne Button fehlt im gebauten HTML der IKK-Landingpage.');
+    expect((html.match(/data-ratgeber-internal-cta=/g) || []).length === 1, 'Die IKK-Landingpage traegt genau einen Button.');
+    expect(html.includes('href="/ambulant?'), 'Der Button der IKK-Landingpage muss mit UTM auf /ambulant zeigen.');
+  }
+}
+
 if (failures.length > 0) {
   console.error(`Ratgeber-Vertrag verletzt (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
@@ -214,5 +420,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel, 3 Buttons auf ${ADVERTORIAL_PATH}, Pflichtlinks und Schreibregeln geprüft.`,
+  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, 1 interner Button auf /ratgeber/${IKK_LANDING_SLUG}, Fact Nugget, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
 );
