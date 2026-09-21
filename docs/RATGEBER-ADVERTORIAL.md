@@ -202,16 +202,18 @@ Bekannt rot, schon vor diesem Branch und hier nicht angefasst:
 
 Aus Briefing Abschnitt 7:
 
-- [ ] Bonuszahlen (350 bis 500 Euro, 1.155 Euro) gegen die aktuelle Satzung
+- [ ] Bonuszahlen (400 bis 700 Euro, 1.155 Euro) gegen die aktuelle Satzung
       der IKK Classic prüfen und im Text mit Jahreszahl versehen. Die Quellen
       stehen im Briefing, Abschnitt 9.
-- [ ] Tritt Frank persönlich im Text auf? Der Satz „Ich selbst komme auf rund
-      600 Euro im Jahr.“ liegt als auskommentierter Block in
-      `src/content/ratgeber/krankenkassen-bonus-zusatzversicherung.js` und
-      wird nicht gerendert. Zum Aktivieren einkommentieren.
-- [ ] Die Zahl „93 gesetzliche Krankenkassen“ ist wortgleich aus dem Briefing
-      übernommen und **nicht belegt**. Entweder mit Quelle und Stichtag
-      versehen oder allgemeiner formulieren.
+- [x] Tritt Frank persönlich im Text auf? Nein, entschieden am 21.09.2026:
+      keine persönliche Bonuszahl. Statt des Platzhalters steht jetzt der
+      Satzungs-Höchstwert (1.155 Euro, theoretisch) neben der Spanne, die in
+      der breiten Masse zusammenkommt (400 bis 700 Euro). Der
+      600-Euro-Platzhalter ist ersatzlos gestrichen und wird von
+      `test:ratgeber` auch als Kommentar ausgeschlossen.
+- [x] Die Zahl „93 gesetzliche Krankenkassen“ steht jetzt mit Stichtag im
+      Text: „93 gesetzliche Krankenkassen in Deutschland (Stand Anfang
+      2026)“.
 - [ ] Wohin gehen die E-Mail-Adressen aus dem Check, und welches Werkzeug
       verschickt die vier Nachfass-Nachrichten? Siehe Phase 2.
 - [x] Soll das Advertorial auf noindex stehen? Ja, entschieden: `noindex,

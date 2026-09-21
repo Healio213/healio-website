@@ -147,6 +147,8 @@ const renderArticleText = (article) => {
 for (const article of ratgeberArticles) {
   const text = renderArticleText(article);
   expect(!/[[\]]/.test(text), `Platzhalter in eckigen Klammern duerfen nicht veroeffentlicht werden: ${article.slug}`);
+  expect(!/350\s*bis\s*500/.test(text), `Veraltete Bonusspanne "350 bis 500 Euro": ${article.slug}`);
+  expect(!/Ich selbst komme auf/.test(text), `Frank 21.09.: keine persoenliche Bonuszahl im Text: ${article.slug}`);
   expect(!/[–—]/.test(text), `Gedankenstriche sind im Ratgebertext nicht erlaubt: ${article.slug}`);
   expect(!/\bSie\b/.test(text), `Die Anrede muss Du sein, kein "Sie": ${article.slug}`);
   expect(!/\bIhre?[nmrs]?\b/.test(text), `Die Anrede muss Du sein, kein "Ihr/Ihre": ${article.slug}`);
@@ -163,6 +165,9 @@ for (const article of ratgeberArticles) {
 const stripComments = (source) => source
   .replace(/\/\*[\s\S]*?\*\//g, ' ')
   .replace(/(^|\s)\/\/[^\n]*/g, '$1');
+
+const advertorialSource = fs.readFileSync(path.join(root, 'src', 'content', 'ratgeber', `${ADVERTORIAL_SLUG}.js`), 'utf8');
+expect(!/rund 600 Euro/.test(advertorialSource), 'Frank 21.09.: der 600-Euro-Platzhalter ist ersatzlos gestrichen, auch als Kommentar.');
 
 for (const [label, source] of [['Vorlage', layout], ['Uebersicht', overview]]) {
   const visible = stripComments(source);

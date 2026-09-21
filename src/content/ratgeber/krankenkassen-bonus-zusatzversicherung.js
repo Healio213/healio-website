@@ -78,15 +78,8 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wer regelmäßig Sport macht, zur Vorsorge geht und ordentliche Werte hat, landet damit schnell im Bereich von 350 bis 500 Euro im Jahr. Rechnerisch möglich sind bei voller Ausschöpfung sogar bis zu 1.155 Euro, das erreicht allerdings kaum jemand, weil dafür wirklich jede einzelne Maßnahme zusammenkommen müsste.',
+          text: 'Wer regelmäßig Sport macht, zur Vorsorge geht und ordentliche Werte hat, kommt damit schnell auf einen ordentlichen Betrag. Laut Satzung sind bis zu 1.155 Euro im Jahr möglich, ein theoretischer Wert. In der breiten Masse kommen 400 bis 700 Euro zusammen.',
         },
-        // Platzhalter aus Briefing Abschnitt 5, bewusst NICHT veroeffentlicht.
-        // Frank entscheidet, ob er persoenlich im Text auftritt. Zum
-        // Aktivieren diesen Block einkommentieren:
-        // {
-        //   type: 'paragraph',
-        //   text: 'Ich selbst komme auf rund 600 Euro im Jahr.',
-        // },
       ],
     },
     {
@@ -95,7 +88,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Nehmen wir die untere Kante, 350 Euro im Jahr. Nicht den Bestwert, sondern das, was realistisch drin ist.',
+          text: 'Nehmen wir die untere Kante, 400 Euro im Jahr. Nicht den Bestwert, sondern das, was realistisch drin ist.',
         },
         {
           type: 'paragraph',
@@ -117,7 +110,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Erstens: Die Bonusprogramme unterscheiden sich stark. Es gibt rund 93 gesetzliche Krankenkassen in Deutschland, und zwischen der besten und der schwächsten liegen mehrere hundert Euro im Jahr. Bei der eigenen Kasse nachzusehen lohnt sich also doppelt.',
+          text: 'Erstens: Die Bonusprogramme unterscheiden sich stark. Es gibt 93 gesetzliche Krankenkassen in Deutschland (Stand Anfang 2026), und zwischen der besten und der schwächsten liegen mehrere hundert Euro im Jahr. Bei der eigenen Kasse nachzusehen lohnt sich also doppelt.',
         },
         {
           type: 'paragraph',
