@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ExternalProviderGate from '@/components/ExternalProviderGate';
 import { APPOINTMENT_BOOKING, getSafeAppointmentEmbedUrl } from '@/lib/appointmentBooking';
+import { trackMetaLead } from '@/lib/meta-pixel';
 
 // Keep this file as a compatibility entry point; booking configuration is provider-neutral.
 const AppointmentBooking = ({
@@ -33,6 +34,7 @@ const AppointmentBooking = ({
           href={APPOINTMENT_BOOKING.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackMetaLead()}
           className="shrink-0 px-4 py-3 text-center text-sm font-semibold text-slate-700 underline underline-offset-2"
         >
           {english ? 'Calendar not loading? Open directly in Google Calendar.' : 'Kalender lädt nicht? Direkt in Google Kalender öffnen.'}

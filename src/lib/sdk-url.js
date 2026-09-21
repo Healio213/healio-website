@@ -1,4 +1,5 @@
 import { trackEvent } from '@/lib/analytics';
+import { trackMetaLead, trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { readStoredReferrer, sanitizeReferrer } from '@/lib/referrer';
 
 /**
@@ -64,6 +65,10 @@ export function buildSdkUrl({ tarifTypes, ref } = {}) {
  * @param {string|null} referrer - Referrer-Code
  */
 export function trackSdkClick(page) {
+  // Meta: Start des Beitragsrechners, ohne jeden Eingabewert. Der Aufruf
+  // filtert selbst auf /ambulant und /zahn.
+  trackMetaRechnerStart();
+
   return trackEvent('tariff_calculator_click', {
     component: 'sdk',
     destination: 'levelnine',
@@ -78,6 +83,9 @@ export function trackSdkClick(page) {
  * @param {string} placement - z.B. "bonusrechner", "ikk-wechsel", "stationaer"
  */
 export function trackIkkClick(placement) {
+  // "Bonus sichern" gilt als abgeschickte Anfrage, ohne Personenbezug.
+  trackMetaLead();
+
   return trackEvent('ikk_bonus_click', {
     component: 'ikk',
     destination: 'ikk_classic',

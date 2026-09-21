@@ -13,6 +13,12 @@ import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import { useReferrer } from '@/hooks/useReferrer';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
 import { isAnalyticsExcludedRoute, setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
+import {
+  initializeMetaPixel,
+  isMetaExcludedRoute,
+  trackMetaPageView,
+  trackMetaViewContent,
+} from '@/lib/meta-pixel';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -73,6 +79,7 @@ const EnglishBlogArticleRedirect = () => {
 function App() {
   const location = useLocation();
   const lastTrackedPathRef = useRef(null);
+  const lastMetaPathRef = useRef(null);
   const isPrivateCheckRoute = isAnalyticsExcludedRoute(location);
   const isPregnancy = location.pathname === '/schwangerschaft';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
@@ -122,6 +129,27 @@ function App() {
     trackCurrentPage(getConsentState());
     return subscribeConsent(trackCurrentPage);
   }, [isPrivateCheckRoute, location.pathname]);
+
+  // Meta-Funnel: eigener Pfad, eigene Zustimmung. /zahn und /ambulant sind
+  // hier bewusst erlaubt, /schwangerschaft und private Kampagnenquellen nicht.
+  useEffect(() => initializeMetaPixel(), []);
+
+  useEffect(() => {
+    const trackMetaCurrentPage = (state) => {
+      if (isMetaExcludedRoute() || !hasConsent('marketing', state)) {
+        lastMetaPathRef.current = null;
+        return;
+      }
+      if (lastMetaPathRef.current === location.pathname) return;
+      if (trackMetaPageView()) {
+        lastMetaPathRef.current = location.pathname;
+        trackMetaViewContent();
+      }
+    };
+
+    trackMetaCurrentPage(getConsentState());
+    return subscribeConsent(trackMetaCurrentPage);
+  }, [location.pathname]);
 
   return (
     <>

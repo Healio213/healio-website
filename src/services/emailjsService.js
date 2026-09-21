@@ -2,6 +2,7 @@
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '@/config/emailjs';
 import { trackEvent } from '@/lib/analytics';
+import { trackMetaLead } from '@/lib/meta-pixel';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
@@ -42,6 +43,8 @@ export const emailjsService = {
         component: 'contact_form',
         placement: toPlacementToken(pageSource),
       });
+      // Meta erfaehrt nur, DASS eine Anfrage abgeschickt wurde.
+      trackMetaLead();
       return { success: true, response };
     } catch (error) {
       console.error('EmailJS Error:', error);

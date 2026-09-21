@@ -8,6 +8,7 @@ import {
   subscribeConsent,
   updateConsentPurpose,
 } from '@/lib/consent';
+import { trackMetaLead } from '@/lib/meta-pixel';
 
 const COPY = {
   de: {
@@ -83,6 +84,7 @@ const ExternalProviderGate = ({
             href={externalUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => { if (provider === 'google_calendar') trackMetaLead(); }}
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-bold text-slate-800 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
           >
             {providerCopy.external}
