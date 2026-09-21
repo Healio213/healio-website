@@ -57,7 +57,7 @@ assert.match(workforce, /useLanguage/);
 assert.match(explainerVideos, /lang !== 'de'/);
 assert.match(explainerVideos, /controls/);
 assert.match(explainerVideos, /playsInline/);
-assert.match(explainerVideos, /preload="metadata"/);
+assert.match(explainerVideos, /preload="none"/);
 assert.match(explainerVideos, /kind="captions"/);
 assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
 assert.match(explainerVideos, /vorsorgemanagement-a-v3\.mp4/);
