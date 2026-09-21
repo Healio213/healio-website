@@ -1,9 +1,9 @@
 {
   "hero": {
     "eyebrow": "Tierkrankenversicherung für Hund, Katze & Pferd",
-    "title": "Damit im Ernstfall die Medizin entscheidet –",
+    "title": "Damit im Ernstfall die Medizin entscheidet:",
     "titleHighlight": "nicht dein Kontostand.",
-    "subtitle": "Wähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung – persönlich, verständlich und je nach Tarif.",
+    "subtitle": "Wähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung, persönlich, verständlich und je nach Tarif.",
     "cta": "Schutz für mein Tier prüfen",
     "microcopy": "Unverbindlich · persönliche Rückmeldung · keine automatische Tarifzusage",
     "heroImageAlt": "Frau mit ihrem Golden Retriever"
@@ -39,12 +39,12 @@
       "full": {
         "title": "Vollschutz",
         "code": "VOLL",
-        "description": "Behandlungen, Diagnostik und Operationen – Leistungsumfang je nach Tarif."
+        "description": "Behandlungen, Diagnostik und Operationen, Leistungsumfang je nach Tarif."
       },
       "surgery": {
         "title": "OP-Schutz",
         "code": "OP",
-        "description": "Fokus auf hohe Operationskosten und Nachsorge – je nach Tarif."
+        "description": "Fokus auf hohe Operationskosten und Nachsorge, je nach Tarif."
       },
       "unsure": {
         "title": "Noch unsicher",
@@ -53,10 +53,10 @@
     },
     "coverageHorse": {
       "full": {
-        "description": "Kranken- beziehungsweise Vollschutz für Behandlungen und Operationen – je nach Pferdetarif."
+        "description": "Kranken- beziehungsweise Vollschutz für Behandlungen und Operationen, je nach Pferdetarif."
       },
       "surgery": {
-        "description": "Schutz vor hohen OP-Kosten und möglicher Nachbehandlung – je nach Tarif."
+        "description": "Schutz vor hohen OP-Kosten und möglicher Nachbehandlung, je nach Tarif."
       },
       "unsure": {
         "description": "Wir betrachten Haltung, Nutzung und Budget, bevor wir eine Richtung empfehlen."
@@ -133,7 +133,7 @@
       "title": "Kein Blindflug. Eine klare Rückmeldung.",
       "text": "Wir prüfen deine Angaben persönlich und erklären dir, welche Tarifmerkmale für dein Tier entscheidend sind.",
       "steps": {
-        "profile": "Wir ergänzen Alter, Rasse und – beim Pferd – Haltung und Nutzung.",
+        "profile": "Wir ergänzen Alter, Rasse und, beim Pferd, Haltung und Nutzung.",
         "comparison": "Wir prüfen passende OP- oder Vollschutzwege und deren Bedingungen.",
         "reply": "Du erhältst eine persönliche Rückmeldung, bevor du über einen Antrag entscheidest."
       },
@@ -176,7 +176,7 @@
     "items": {
       "difference": {
         "question": "Was ist der Unterschied zwischen OP- und Vollschutz?",
-        "answer": "OP-Schutz konzentriert sich auf versicherte Operationen und – je nach Tarif – Diagnostik sowie Nachbehandlung. Vollschutz kann darüber hinaus ambulante Behandlungen, Medikamente und Vorsorge einschließen. Der genaue Umfang steht immer in den Tarifbedingungen."
+        "answer": "OP-Schutz konzentriert sich auf versicherte Operationen und, je nach Tarif, Diagnostik sowie Nachbehandlung. Vollschutz kann darüber hinaus ambulante Behandlungen, Medikamente und Vorsorge einschließen. Der genaue Umfang steht immer in den Tarifbedingungen."
       },
       "preExisting": {
         "question": "Was gilt bei Vorerkrankungen?",
@@ -196,6 +196,6 @@
       }
     },
     "ctaTitle": "Dein Tier. Dein Bedarf. Jetzt sauber prüfen.",
-    "ctaText": "Wähle Tier und Schutz – den Rest ordnen wir gemeinsam ein."
+    "ctaText": "Wähle Tier und Schutz. Den Rest ordnen wir gemeinsam ein."
   }
 }

@@ -50,7 +50,7 @@
       {
         "key": "needs",
         "title": "Bedarf vor Tarif",
-        "text": "Wir beginnen bei Lebenssituation, gewünschten Leistungen und finanziellem Rahmen – nicht bei einem Produkt."
+        "text": "Wir beginnen bei Lebenssituation, gewünschten Leistungen und finanziellem Rahmen, nicht bei einem Produkt."
       },
       {
         "key": "independent",
@@ -72,7 +72,7 @@
   "impact": {
     "eyebrow": "Unsere Mission",
     "title": "Mindestens einen Schutzbereich über den GKV-Bonus finanzierbar machen.",
-    "description": "Wir helfen Menschen dabei, die Beiträge für mindestens einen Bereich – Ambulant, Zahn oder Stationär – möglichst über den Bonus ihrer gesetzlichen Krankenkasse zu finanzieren. Welcher Schutz wirklich passt, prüfen wir individuell.",
+    "description": "Wir helfen Menschen dabei, die Beiträge für mindestens einen Bereich, Ambulant, Zahn oder Stationär, möglichst über den Bonus ihrer gesetzlichen Krankenkasse zu finanzieren. Welcher Schutz wirklich passt, prüfen wir individuell.",
     "items": [
       {
         "category": "Ambulant",

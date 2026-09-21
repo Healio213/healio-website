@@ -70,7 +70,7 @@
   "protection": {
     "eyebrow": "Wofür sich der Bonus lohnt",
     "title": "Was möchtest du absichern?",
-    "description": "Wähle den Bereich, der dir wichtig ist. Du kannst Leistungen und Tarife direkt ansehen – ein Termin ist dafür nicht nötig.",
+    "description": "Wähle den Bereich, der dir wichtig ist. Du kannst Leistungen und Tarife direkt ansehen. Ein Termin ist dafür nicht nötig.",
     "items": [
       {
         "title": "Ambulant",
@@ -99,7 +99,7 @@
   "termin": {
     "eyebrow": "Beratung auf Wunsch",
     "title": "Noch unsicher? Wir rechnen mit dir nach.",
-    "description": "Wenn du Unterstützung möchtest: 45 Minuten, Google Meet, kostenlos und unverbindlich. Ein KassenBoost-Ergebnis kannst du mitbringen – ein vorheriger Check ist nicht nötig.",
+    "description": "Wenn du Unterstützung möchtest: 45 Minuten, Google Meet, kostenlos und unverbindlich. Ein KassenBoost-Ergebnis kannst du mitbringen. Ein vorheriger Check ist nicht nötig.",
     "transparency": [
       "Beratung und Vermittlung kosten dich nichts. Bei einem Abschluss erhält Healio eine Vergütung vom Versicherer.",
       "Der KassenBoost-Vergleich bleibt davon getrennt. Kein Ranking dort wird durch Vergütung beeinflusst.",
@@ -125,7 +125,7 @@
         "answer": "Den verbleibenden Beitrag zahlst du selbst. Du schuldest der Versicherung den vollen Beitrag unabhängig vom Bonus. Ein Bonus ist nicht garantiert und wird nicht automatisch mit deinem Versicherungsbeitrag verrechnet."
       },
       {
-        "question": "Wer macht was – KassenBoost oder Healio?",
+        "question": "Wer macht was: KassenBoost oder Healio?",
         "answer": "KassenBoost bietet den Krankenkassenvergleich. Healio ist das Maklerhaus dahinter und berät sowie vermittelt Zusatzversicherungen. Beratung und Vermittlung kosten dich nichts; bei einem Abschluss erhält Healio eine Vergütung vom Versicherer. Der Vergleich und sein Ranking bleiben davon getrennt."
       },
       {

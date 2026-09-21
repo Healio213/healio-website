@@ -16,7 +16,7 @@
     "secondaryCta": "Persönlich beraten lassen",
     "proof": ["Unabhängiger Versicherungsmakler", "Persönlich erreichbar", "Bedingungen klar erklärt"],
     "compassEyebrow": "Erst verstehen, dann absichern",
-    "compassTitle": "Welche Kosten möchtest du selbst tragen – und welche nicht?",
+    "compassTitle": "Welche Kosten möchtest du selbst tragen, und welche nicht?",
     "compassNoteStrong": "Vier Bereiche. Eine bewusste Entscheidung.",
     "compassNote": "Healio zeigt dir Leistungen, Grenzen und den passenden nächsten Schritt.",
     "orientationFacts": ["Ambulant", "Zahn", "Stationär", "Tier"]
@@ -34,7 +34,7 @@
         "kicker": "Gesundheit im Alltag",
         "title": "Mehr Spielraum für Behandlungen, die dir wichtig sind.",
         "description": "Je nach Tarif lassen sich etwa Heilpraktiker, Osteopathie, zusätzliche Vorsorge, Sehhilfen und weitere ambulante Leistungen absichern.",
-        "decision": "Für alle, die Heilpraktiker, Osteopathie, Sehhilfen oder Vorsorge nutzen – und diese Kosten nicht vollständig selbst tragen möchten.",
+        "decision": "Für alle, die Heilpraktiker, Osteopathie, Sehhilfen oder Vorsorge nutzen, und diese Kosten nicht vollständig selbst tragen möchten.",
         "features": ["Naturheilkunde und Osteopathie", "Sehhilfen und zusätzliche Vorsorge"],
         "cta": "Ambulanten Schutz prüfen",
         "schemaName": "Ambulante Zusatzversicherung"
@@ -45,13 +45,13 @@
         "routeKey": "zahn",
         "number": "02",
         "kicker": "Eigenanteile begrenzen",
-        "title": "Beim Zahnarzt nach Qualität entscheiden – nicht nur nach dem Preis.",
+        "title": "Beim Zahnarzt nach Qualität entscheiden, nicht nur nach dem Preis.",
         "description": "Eine Zahnzusatzversicherung kann Eigenanteile für Zahnersatz, Behandlung und Prophylaxe planbarer machen. Entscheidend sind Erstattung, Grenzen und Bedingungen.",
         "decision": "Für alle, die höherwertige Zahnversorgung nicht vom Kontostand abhängig machen möchten.",
         "features": ["Zahnersatz und Implantate", "Behandlung und Prophylaxe"],
         "highlight": {
           "label": "Highlight · die Bayerische",
-          "title": "ZAHN Sofort – auch wenn die Behandlung schon angeraten ist.",
+          "title": "ZAHN Sofort, auch wenn die Behandlung schon angeraten ist.",
           "description": "Der optionale Baustein kann bereits angeratene oder begonnene Behandlungen ohne Wartezeit absichern.",
           "facts": ["Bis zu 1.500 EUR Leistung", "Max. 750 EUR je Kalenderjahr", "Endet automatisch nach 2 Jahren"],
           "note": "Der Baustein kostet aktuell 29,90 EUR im Monat. Bereits abgeschlossene und in Rechnung gestellte Behandlungen sind nicht versichert. Maßgeblich sind die Versicherungsbedingungen."
@@ -98,25 +98,25 @@
         "key": "ambulant",
         "label": "Ambulant",
         "relevant": "du regelmäßig Leistungen außerhalb der Kassenversorgung nutzen möchtest.",
-        "check": "Welche Leistungen sind versichert – und welche Budgets, Erstattungssätze und Ausschlüsse gelten?"
+        "check": "Welche Leistungen sind versichert, und welche Budgets, Erstattungssätze und Ausschlüsse gelten?"
       },
       {
         "key": "dental",
         "label": "Zahn",
         "relevant": "du bei Zahnersatz und Behandlung eine höherwertige Versorgung möchtest.",
-        "check": "Wie hoch ist die Erstattung, welche Grenzen gelten in den ersten Jahren – und was gilt bei bereits angeratenen Behandlungen?"
+        "check": "Wie hoch ist die Erstattung, welche Grenzen gelten in den ersten Jahren, und was gilt bei bereits angeratenen Behandlungen?"
       },
       {
         "key": "hospital",
         "label": "Stationär",
         "relevant": "du im Krankenhaus mehr Wahl bei Arzt, Klinik oder Zimmer möchtest.",
-        "check": "Welche Wahlleistungen und Honorargrenzen gelten – und welche Gesundheitsfragen musst du vor Abschluss beantworten?"
+        "check": "Welche Wahlleistungen und Honorargrenzen gelten, und welche Gesundheitsfragen musst du vor Abschluss beantworten?"
       },
       {
         "key": "pet",
         "label": "Tier",
         "relevant": "du Tierarzt- oder OP-Kosten für deinen Hund oder deine Katze planbarer machen möchtest.",
-        "check": "Brauchst du umfassenden Krankenschutz oder gezielten OP-Schutz – und welche Selbstbeteiligung passt zu dir?"
+        "check": "Brauchst du umfassenden Krankenschutz oder gezielten OP-Schutz, und welche Selbstbeteiligung passt zu dir?"
       }
     ]
   },
@@ -129,7 +129,7 @@
     "rightLabel": "Die entscheidende Frage",
     "rightQuestion": "Welche Kosten willst du im Ernstfall selbst tragen?",
     "criteria": [
-      {"title": "Leistung vor Werbeversprechen", "description": "Entscheidend ist, was der Tarif unter den vereinbarten Bedingungen leistet – nicht, wie groß eine Prozentzahl in der Werbung wirkt."},
+      {"title": "Leistung vor Werbeversprechen", "description": "Entscheidend ist, was der Tarif unter den vereinbarten Bedingungen leistet, nicht, wie groß eine Prozentzahl in der Werbung wirkt."},
       {"title": "Grenzen sichtbar machen", "description": "Wartezeiten, Leistungsstaffeln, Höchstbeträge und Ausschlüsse gehören vor die Entscheidung, nicht danach."},
       {"title": "Bedarf vor Produkt", "description": "Ein guter Tarif ist nur dann gut, wenn seine Stärken zu deinen echten Prioritäten passen."}
     ]
@@ -153,27 +153,27 @@
     "steps": [
       {"number": "01", "title": "Prioritäten klären", "description": "Wir starten mit deinem Alltag, deinen Wünschen und den Kosten, die du nicht selbst tragen möchtest."},
       {"number": "02", "title": "Bedingungen verstehen", "description": "Leistungen, Grenzen und relevante Unterschiede werden verständlich eingeordnet."},
-      {"number": "03", "title": "Bewusst entscheiden", "description": "Du wählst den Schutz, der zu dir passt – und hast auch danach einen persönlichen Ansprechpartner."}
+      {"number": "03", "title": "Bewusst entscheiden", "description": "Du wählst den Schutz, der zu dir passt, und hast auch danach einen persönlichen Ansprechpartner."}
     ]
   },
   "pet": {
     "eyebrow": "Separater Schutzbereich",
     "title": "Du suchst eine Krankenversicherung für dein Tier?",
-    "description": "Dafür gibt es bei Healio einen eigenen Bereich – klar getrennt von deiner Krankenzusatzversicherung.",
+    "description": "Dafür gibt es bei Healio einen eigenen Bereich, klar getrennt von deiner Krankenzusatzversicherung.",
     "cta": "Zur Tierkrankenversicherung"
   },
   "ticker": {
     "ariaLabel": "Orientierung für den passenden Zusatzschutz",
-    "threeAreas": "Ambulant, Zahn, stationär oder Tier – direkt zum passenden Bereich",
+    "threeAreas": "Ambulant, Zahn, stationär oder Tier, direkt zum passenden Bereich",
     "notEverything": "Nicht jeder braucht alles",
     "needsFirst": "Bedarf vor Produkt",
     "clearConditions": "Leistungen, Grenzen und Ausschlüsse klar verstehen",
-    "personalSupport": "Persönlicher Ansprechpartner – auch nach dem Abschluss"
+    "personalSupport": "Persönlicher Ansprechpartner, auch nach dem Abschluss"
   },
   "finalCta": {
     "eyebrow": "Dein nächster Schritt",
     "title": "Du musst heute nicht alles versichern. Aber du solltest wissen, was du offenlässt.",
-    "description": "Wir ordnen deinen Bedarf ein und zeigen dir die passenden nächsten Schritte – verständlich, persönlich und ohne Verkaufsdruck.",
+    "description": "Wir ordnen deinen Bedarf ein und zeigen dir die passenden nächsten Schritte, verständlich, persönlich und ohne Verkaufsdruck.",
     "cta": "Passenden Schutz finden"
   }
 }

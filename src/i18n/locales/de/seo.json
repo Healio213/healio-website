@@ -1,14 +1,14 @@
 {
   "home": {
-    "title": "Healio B2B – Betriebliche Vorsorge neu gedacht | bAV & bKV",
+    "title": "Healio B2B: Betriebliche Vorsorge neu gedacht | bAV & bKV",
     "description": "Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen."
   },
   "ambulant": {
-    "title": "Ambulante Zusatzversicherung – Dein 3.000 € Gesundheitsbudget | Healio",
-    "description": "Heilpraktiker, Osteopathie, Massagen, Sehhilfen – alles was die GKV nicht abdeckt. Mit Healio ambulant genießt du Privatpatienten-Leistungen effektiv für 0€."
+    "title": "Ambulante Zusatzversicherung: Dein 3.000 EUR Gesundheitsbudget | Healio",
+    "description": "Dein 3.000 EUR Gesundheitsbudget für Heilpraktiker, Brille und Vorsorge. Du zahlst einen Monatsbeitrag, und dein Kassenbonus holt ihn dir ganz oder teilweise zurück."
   },
   "zahn": {
-    "title": "Zahnzusatzversicherung – Bis zu 100% Erstattung | Healio",
+    "title": "Zahnzusatzversicherung: Bis zu 100% Erstattung | Healio",
     "description": "Bis zu 100 % Erstattung für Zahnersatz. Bis zu 3 fehlende Zähne mitversicherbar. Ohne Wartezeiten."
   },
   "stationaer": {
@@ -16,7 +16,7 @@
     "description": "Krankenhauszusatzversicherung: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. SDK Klinik-Tarife z. B. ab 7,00 EUR/Monat (SPU, 30 Jahre). Jetzt berechnen."
   },
   "partner": {
-    "title": "Für Praxen – Gesundheitsbudget verständlich erklären | Healio",
+    "title": "Für Praxen: Gesundheitsbudget verständlich erklären | Healio",
     "description": "Kostenfreie Zusammenarbeit für Heilpraktiker, Osteopathen und Hebammen: Die Praxis informiert, Healio prüft und berät Patienten unabhängig."
   },
   "hebammen": {
@@ -32,8 +32,8 @@
     "description": "Gebündelte Absicherung für deine Praxis und dein Leben: Berufshaftpflicht, Praxisausfall, Cyber, Berufsunfähigkeit und Rürup. Mit Sonderkonditionen für Heilpraktiker und Osteopathen."
   },
   "about": {
-    "title": "Über Healio – Versicherung verständlich begleitet",
-    "description": "Die Healio GmbH verbindet unabhängige Versicherungsberatung mit einem Partnernetzwerk für Praxen und Unternehmen – verständlich, persönlich und digital begleitet."
+    "title": "Über Healio: Versicherung verständlich begleitet",
+    "description": "Die Healio GmbH verbindet unabhängige Versicherungsberatung mit einem Partnernetzwerk für Praxen und Unternehmen, verständlich, persönlich und digital begleitet."
   },
   "leistungen": {
     "title": "Krankenzusatzversicherung: Ambulant, Zahn & Klinik | Healio",
@@ -68,7 +68,7 @@
     "description": "Erstinformation der Healio GmbH gemäß §§ 15 und 16 VersVermV mit Vermittlerstatus, Vergütung, Registerangaben, Schlichtungsstellen und Beratungsgrundlage nach § 60 VVG."
   },
   "blog": {
-    "title": "Healio Ratgeber – Gesundheitsbudget, Zusatzversicherung & Benefits",
+    "title": "Healio Ratgeber: Gesundheitsbudget, Zusatzversicherung & Benefits",
     "description": "Expertenwissen für Kassenpatienten, Heilpraktiker, Hebammen und Arbeitgeber."
   },
   "veterinary": {

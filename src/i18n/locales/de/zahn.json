@@ -22,7 +22,7 @@
   "siegel": {
     "eyebrow": "Vertrauen auf einen Blick",
     "title": "Ausgezeichnete Zahn-Tarife. Starke Kooperation.",
-    "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt – und greifen für deinen Schutz sinnvoll ineinander.",
+    "subtitle": "Unabhängige Tarifbewertungen und das IKK classic Bonusprogramm sind klar voneinander getrennt, und greifen für deinen Schutz sinnvoll ineinander.",
     "partnersLabel": "Unsere Partner: die Bayerische, UKV, LKH & IKK classic",
     "awardsLabel": "Aktuelle Auszeichnungen der Zahn-Tarife",
     "cooperationLabel": "In Kooperation mit",
@@ -496,7 +496,7 @@
     "problem": {
       "badge": "Die Kostenfalle",
       "title": "Das Problem: Gesetzliche Krankenversicherung deckt fast nichts ab",
-      "text1": "Wenn es beim Zahnarzt ernst wird, wird es teuer. Die gesetzlichen Kassen zahlen bei Zahnersatz nur einen geringen Festzuschuss – oft weniger als 50% der einfachsten Versorgung.",
+      "text1": "Wenn es beim Zahnarzt ernst wird, wird es teuer. Die gesetzlichen Kassen zahlen bei Zahnersatz nur einen geringen Festzuschuss, oft weniger als 50% der einfachsten Versorgung.",
       "text2": "Hochwertige Implantate, Keramikkronen oder Inlays müssen Sie fast komplett selbst bezahlen. Eine einzelne Rechnung kann schnell <strong>mehrere tausend Euro</strong> betragen. Ohne Zusatzversicherung bleiben Sie auf diesen Kosten sitzen."
     },
     "solution": {
@@ -508,7 +508,7 @@
       },
       "zahnreinigung": {
         "title": "Zahnreinigung inklusive",
-        "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe – für ein strahlendes Lächeln."
+        "desc": "Professionelle Zahnreinigung so oft Sie wollen. Wir erstatten die Kosten für Ihre Prophylaxe, für ein strahlendes Lächeln."
       },
       "sofortschutz": {
         "title": "Sofort-Schutz",
@@ -538,7 +538,7 @@
     "close": "Nita-Hinweis schließen",
     "eyebrow": "Nita von Healio",
     "title": "Soll ich dir das Zahn-Konzept erklären?",
-    "body": "Ich erkläre dir kurz, welcher Weg zu deiner Situation passt – auch bei angeratener Behandlung oder fehlenden Zähnen.",
+    "body": "Ich erkläre dir kurz, welcher Weg zu deiner Situation passt, auch bei angeratener Behandlung oder fehlenden Zähnen.",
     "cta": "Ja, Zahn-Konzept erklären"
   },
   "bonusRechner": {

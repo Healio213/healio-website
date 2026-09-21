@@ -94,7 +94,7 @@ assert.equal(en.results.employee.title, 'Employee impact');
 assert.equal(en.results.capital.title, 'Capital projection');
 assert.equal(de.results.company.total, 'modellierter Gesamtaufwand pro Jahr');
 assert.equal(en.results.company.total, 'modelled total annual employer cost');
-assert.match(de.controls.salary.hint, /2\.001–6\.450 EUR/);
+assert.match(de.controls.salary.hint, /2\.001-6\.450 EUR/);
 assert.match(de.controls.salary.hint, /Übergangsbereich/);
 assert.match(de.controls.salary.hint, /Jahresarbeitsentgeltgrenze/);
 assert.match(en.controls.salary.hint, /EUR 2,001–6,450/);

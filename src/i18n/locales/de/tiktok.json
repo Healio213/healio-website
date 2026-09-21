@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Healio, Dein Gesundheits-Upgrade",
-    "description": "Privatpatient ohne privat versichert zu sein. Brille, Heilpraktiker, Zahn, Krankenhaus. Bis zu 3.000 € Gesundheitsbudget, effektiv ab 0 € möglich dank Kassenbonus."
+    "description": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren. Deinen Beitrag kann dein Kassenbonus ganz oder teilweise ausgleichen."
   },
   "header": {
     "logo": "Healio",
@@ -16,10 +16,10 @@
     "ambulant": {
       "icon": "🩺",
       "title": "Ambulant",
-      "budgetHighlight": "3.000 € Budget",
+      "budgetHighlight": "3.000 EUR",
       "subtitle": "Brille, Heilpraktiker, Vorsorge, Osteopathie, Schwangerschaft",
-      "price": "ab 0 €*",
-      "period": "effektiv/Monat",
+      "price": "Beitrag vom Kassenbonus ausgleichbar",
+      "period": "pro Monat",
       "badge": "IKK-Bonus kann den Beitrag komplett decken*",
       "link": "/ambulant"
     },
@@ -44,7 +44,7 @@
   },
   "stats": {
     "budget": {
-      "value": "3.000 €",
+      "value": "Bis zu 3.000 EUR Gesundheitsbudget",
       "label": "Ambulant-Budget"
     },
     "dental": {

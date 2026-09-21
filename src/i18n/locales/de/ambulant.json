@@ -14,7 +14,7 @@
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Frau mit Smartphone informiert sich über ihr digitales Gesundheitsbudget",
     "ctaBonusCalc": "Bonus berechnen",
-    "ctaCompare": "Tarife vergleichen"
+    "ctaCompare": "Budget prüfen"
   },
   "trust": {
     "partners": "Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic",
@@ -36,7 +36,7 @@
   },
   "ticker": {
     "ariaLabel": "Vorteile der ambulanten Zusatzversicherung",
-    "budget": "Bis zu 3.000 € Gesundheitsbudget",
+    "budget": "Bis zu 3.000 EUR Gesundheitsbudget",
     "sdk": "SDK: seit 1926 am Markt",
     "ikk": "Kassenbonus passend einordnen",
     "heilpraktiker": "Heilpraktiker zu 100% abgedeckt",
@@ -169,7 +169,7 @@
       "details": {
         "arzneimittel": {
           "name": "Arzneimittel-Zuzahlungen",
-          "info": "Erstattung der gesetzlichen Zuzahlung (5–10 € pro Medikament)",
+          "info": "Erstattung der gesetzlichen Zuzahlung (5-10 € pro Medikament)",
           "source": "sdk"
         },
         "heilmittel": {
@@ -360,7 +360,7 @@
       },
       "step2": {
         "title": "Ambulanten Tarif abschließen",
-        "desc": "Du beantwortest die Gesundheitsfragen wahrheitsgemäß und sendest den Antrag ab. Nach Annahme startet der Schutz zum bestätigten Versicherungsbeginn – ohne Wartezeit."
+        "desc": "Du beantwortest die Gesundheitsfragen wahrheitsgemäß und sendest den Antrag ab. Nach Annahme startet der Schutz zum bestätigten Versicherungsbeginn, ohne Wartezeit."
       },
       "step3": {
         "title": "Gesundheit nutzen",
@@ -421,7 +421,7 @@
         "unit": "Besuch(e)"
       },
       "zahnFrueh": {
-        "title": "Zahnärztl. Früherkennung Z1–Z6",
+        "title": "Zahnärztl. Früherkennung Z1-Z6",
         "desc": "6. bis 72. Lebensmonat, je Termin",
         "unit": "Termin(e)"
       },
@@ -443,12 +443,12 @@
         "unit": "Untersuchung(en)"
       },
       "kind": {
-        "title": "U-Untersuchungen (U1–U11)",
+        "title": "U-Untersuchungen (U1-U11)",
         "desc": "Je nachgewiesener Untersuchung",
         "unit": "Untersuchung(en)"
       },
       "jugend": {
-        "title": "Jugenduntersuchungen J1–J2",
+        "title": "Jugenduntersuchungen J1-J2",
         "desc": "Je nachgewiesener Untersuchung",
         "unit": "Untersuchung(en)"
       },
@@ -515,11 +515,11 @@
     "cashShort": "Geldbonus",
     "subsidyShort": "Zuschuss",
     "notCounted": "noch nicht anrechenbar",
-    "statusCondition": "Statuswerte wie BMI, Blutdruck oder Sportabzeichen zählen erst, wenn du im selben Jahr mindestens eine regelmäßige Aktivität nachweist – zum Beispiel Kurs, Fitnessstudio, Sportverein, Outdoor-Gruppensport oder Rückbildung.",
+    "statusCondition": "Statuswerte wie BMI, Blutdruck oder Sportabzeichen zählen erst, wenn du im selben Jahr mindestens eine regelmäßige Aktivität nachweist, zum Beispiel Kurs, Fitnessstudio, Sportverein, Outdoor-Gruppensport oder Rückbildung.",
     "decrease": "Anzahl verringern",
     "increase": "Anzahl erhöhen",
     "trustNote": "Nachweise einfach digital einreichen",
-    "trustNoteDesc": "Für Bonusmaßnahmen ist ein von der IKK classic akzeptierter Nachweis nötig – zum Beispiel eine Bestätigung in der App, eine Teilnahmebescheinigung oder ein Stempel. Für den Zuschuss zum Versicherungsbeitrag weist du zusätzlich Versicherungsart, Zeitraum und gezahlten Beitrag nach.",
+    "trustNoteDesc": "Für Bonusmaßnahmen ist ein von der IKK classic akzeptierter Nachweis nötig, zum Beispiel eine Bestätigung in der App, eine Teilnahmebescheinigung oder ein Stempel. Für den Zuschuss zum Versicherungsbeitrag weist du zusätzlich Versicherungsart, Zeitraum und gezahlten Beitrag nach.",
     "officialSource": "Offizielles IKK-Infoblatt 2026 (Stand 04/2026)",
     "appleWatchNote": "Bonus für Apple Watch & Fitnessgeräte",
     "appleWatchNoteDesc": "Auch ein Zuschuss zu einem Fitnesstracker oder einem anderen Gerät zur Erfassung des Gesundheitsstatus kann möglich sein. Ausgezahlt wird höchstens bis zur Höhe der nachgewiesenen Kosten; maßgeblich sind die aktuellen Bonusbedingungen.",
@@ -534,10 +534,10 @@
     "subsidyPotentialLabel": "Erreichtes Zuschusspotenzial:",
     "eligibleSubsidyLabel": "Für diesen Beitrag anrechenbar:",
     "orCashBonus": "Oder als frei verfügbarer Geldbonus:",
-    "unusedPotential": "{{amount}} € weiteres Zuschusspotenzial wären nur mit zusätzlichen nachgewiesenen zuschussfähigen Kosten nutzbar – es wird nicht als Plus ausgezahlt.",
+    "unusedPotential": "{{amount}} € weiteres Zuschusspotenzial wären nur mit zusätzlichen nachgewiesenen zuschussfähigen Kosten nutzbar. Es wird nicht als Plus ausgezahlt.",
     "editHint": "Klicke auf den Beitrag, um deinen individuellen Betrag einzugeben (inkl. Risikozuschlag).",
     "customPremiumNote": "Dein eingegebener Beitrag bleibt erhalten. Prüfe ihn erneut, wenn du eine andere Tarifstufe auswählst.",
-    "bonusPayout": "Du entscheidest: frei verfügbarer Geldbonus oder der dreifache Zuschuss zu nachgewiesenen Kosten – zum Beispiel zum Jahresbeitrag deiner Zusatzversicherung.",
+    "bonusPayout": "Du entscheidest: frei verfügbarer Geldbonus oder der dreifache Zuschuss zu nachgewiesenen Kosten, zum Beispiel zum Jahresbeitrag deiner Zusatzversicherung.",
     "choiceDisclaimer": "Geldbonus und Zuschuss sind Alternativen und werden nicht addiert. Der Zuschuss ist auf deine nachgewiesenen zuschussfähigen Kosten begrenzt.",
     "ctaCalculate": "Beitrag berechnen",
     "ctaSwitchIKK": "IKK-Bonus sichern",
@@ -545,7 +545,7 @@
     "effectiveCosts": "Deine effektiven Kosten im Jahr",
     "effectiveZeroNote": "Dein mögliches Zuschusspotenzial erreicht den nachgewiesenen Jahresbeitrag.",
     "effectiveBudget": "Dein Gesundheitsbudget dafür (2 Jahre)",
-    "effectiveBudgetValue": "bis zu 3.000 €",
+    "effectiveBudgetValue": "bis zu 3.000 EUR",
     "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Ausgezahlt wird höchstens der nachgewiesene Jahresbeitrag; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen."
   },
   "beispielrechnung": {
@@ -567,8 +567,8 @@
     "bonusTotalValue": "435 €/Jahr",
     "resultTitle": "Ergebnis:",
     "resultValue": "435 € Bonus decken den Jahresbeitrag von 380 € komplett",
-    "resultMonthly": "Effektiv 0 € im Monat.",
-    "resultDesc": "Frau Müller zahlt effektiv 0 € im Monat, ihr Bonus deckt den kompletten Jahresbeitrag. Dafür hat sie 3.000 € Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
+    "resultMonthly": "Beitrag vom Bonus ausgeglichen.",
+    "resultDesc": "Frau Müller zahlt effektiv 0 € im Monat, ihr Bonus deckt den kompletten Jahresbeitrag. Dafür hat sie 3.000 EUR Budget mit 100 % Erstattung für Heilpraktiker, Brille, Vorsorge und mehr. Mit weiteren Aktivitäten (z. B. Sportverein, Sportabzeichen) lässt sich der Bonus noch weiter steigern."
   },
   "howItWorks": {
     "title": "So <highlight>einfach</highlight> funktioniert's",
@@ -582,7 +582,7 @@
   },
   "video": {
     "title": "Jetzt Vorteile im <highlight>Video</highlight> entdecken",
-    "subtitle": "In nur 90 Sekunden erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>effektiv ab 0 €</highlight> bekommst.",
+    "subtitle": "In nur 90 Sekunden erfährst du, wie du mit dem IKK-Wechsel-Bonus deine Zusatzversicherung <highlight>Beitrag vom Kassenbonus ausgleichbar</highlight> bekommst.",
     "imageAlt": "Osteopathin behandelt Patientin, Szene aus dem Healio Erklärvideo",
     "videoFallback": "Ihr Browser unterstützt kein Video."
   },
@@ -599,11 +599,11 @@
         "label": "3 Mio. Versicherte"
       },
       "budget": {
-        "value": "3.000 €",
+        "value": "3.000 EUR",
         "label": "Budget in 2 Jahren"
       },
       "cost": {
-        "value": "ab 0 €",
+        "value": "Bonus gleicht aus",
         "label": "effektive Kosten möglich"
       }
     },
@@ -921,7 +921,7 @@
         "desc": "BetterDoc übernimmt auf Wunsch die Terminvereinbarung beim Spezialisten"
       },
       "priceTag": "Kostenlos & unverbindlich",
-      "priceNote": "Hotline: 0800 444 6 999 (Mo–Fr, 9–17 Uhr)",
+      "priceNote": "Hotline: 0800 444 6 999 (Mo-Fr, 9-17 Uhr)",
       "videoTitle": "So funktioniert BetterDoc, in 2 Minuten erklärt"
     },
     "bottomCta": {

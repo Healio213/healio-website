@@ -29,14 +29,14 @@
   "paths": {
     "eyebrow": "Was zählt für dich?",
     "title": "Die günstigste Kasse ist nicht automatisch die beste für dich.",
-    "description": "Wähle deinen Startpunkt. KassenBoost zeigt dir Beitrag, erreichbaren Bonus und passende Leistungen trotzdem gemeinsam – klar voneinander getrennt.",
+    "description": "Wähle deinen Startpunkt. KassenBoost zeigt dir Beitrag, erreichbaren Bonus und passende Leistungen trotzdem gemeinsam, klar voneinander getrennt.",
     "triggerKicker": "Mögliches IKK-Bonus-Rechenbeispiel",
     "triggerQuestion": "Wie viel davon erreichst du?",
     "triggerAmount": "1.155 EUR",
     "triggerScenario": "Belegter Höchstwert 2026",
     "triggerTerms": "Zweckgebunden · bei anerkannten eigenen Kosten",
     "triggerCta": "Meinen Kassenvorteil prüfen",
-    "triggerNote": "385 EUR Geldbonus × 3 – unter anderem mit 12 anerkannten Mutterschaftsvorsorgen und weiteren Maßnahmen im selben Bonusjahr. Kein typischer Wert; Geldbonus oder Zuschuss, nicht beides. Zuschuss höchstens bis zu den anerkannten eigenen Kosten.",
+    "triggerNote": "385 EUR Geldbonus × 3, unter anderem mit 12 anerkannten Mutterschaftsvorsorgen und weiteren Maßnahmen im selben Bonusjahr. Kein typischer Wert; Geldbonus oder Zuschuss, nicht beides. Zuschuss höchstens bis zu den anerkannten eigenen Kosten.",
     "selectLabel": "Vergleichsziel auswählen",
     "resultLabel": "Darauf kommt es an",
     "items": [
@@ -107,7 +107,7 @@
   },
   "bridge": {
     "eyebrow": "Deinen Vorteil weiterdenken",
-    "title": "Behalten – oder gezielt in besseren Schutz stecken.",
+    "title": "Behalten, oder gezielt in besseren Schutz stecken.",
     "description": "Deine Ersparnis und dein Bonus gehören zuerst dir. Wenn du möchtest, können sie den Beitrag für passenden Zusatzschutz ganz oder teilweise ausgleichen.",
     "cards": [
       {
@@ -128,7 +128,7 @@
         "title": "Zahn",
         "badge": "ZAHN Sofort",
         "highlight": "Bis zu 1.500 EUR Sofortzuschuss möglich",
-        "text": "Kann bei passenden Voraussetzungen auch bei angeratener oder begonnener Behandlung greifen – solange sie noch nicht abgeschlossen oder abgerechnet ist.",
+        "text": "Kann bei passenden Voraussetzungen auch bei angeratener oder begonnener Behandlung greifen, solange sie noch nicht abgeschlossen oder abgerechnet ist.",
         "note": "Bis 750 EUR je Kalenderjahr, maximal 24 Monate; nur beim Neuabschluss mitwählbar.",
         "cta": "Zahnschutz ansehen"
       },

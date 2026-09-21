@@ -14,7 +14,7 @@
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Woman using her smartphone to learn about her digital health budget",
     "ctaBonusCalc": "Calculate bonus",
-    "ctaCompare": "Compare plans"
+    "ctaCompare": "Check budget"
   },
   "trust": {
     "partners": "Our partners: SDK Süddeutsche Krankenversicherung & IKK classic",
@@ -519,7 +519,7 @@
     "bonusTotalValue": "€435/year",
     "resultTitle": "Result:",
     "resultValue": "€435 bonus fully covers the €380 annual premium",
-    "resultMonthly": "Effectively €0 per month.",
+    "resultMonthly": "Premium offset by bonus.",
     "resultDesc": "Ms. Müller effectively pays €0 per month, her bonus covers the entire annual premium. In return she has a €3,000 budget with 100% reimbursement for naturopaths, glasses, preventive care and more. With additional activities (e.g. sports club, sports badge) the bonus can grow even further."
   },
   "howItWorks": {
@@ -534,7 +534,7 @@
   },
   "video": {
     "title": "Discover the Benefits in the Video",
-    "subtitle": "In just 90 seconds, learn how the IKK switch bonus lets you get your supplementary insurance effectively from €0.",
+    "subtitle": "In just 90 seconds, learn how the IKK switch bonus can offset the premium of your supplementary insurance.",
     "imageAlt": "Osteopath treating a patient, scene from the Healio explainer video",
     "videoFallback": "Your browser does not support video."
   },
@@ -555,7 +555,7 @@
         "label": "budget over 2 years"
       },
       "cost": {
-        "value": "from 0 €",
+        "value": "Bonus offsets it",
         "label": "effective costs possible"
       }
     },

@@ -151,7 +151,7 @@
     "compareTitle": "Tarife nicht pauschal empfehlen",
     "compareSubtitle": "Beitrag, Gesundheitsprüfung, Wartezeiten und Leistungsumfang unterscheiden sich. Healio vergleicht die passenden Optionen im Einzelfall; die Hebamme bleibt bei der neutralen Information.",
     "bayerischeName": "Die Bayerische",
-    "bayerischeTag": "Beitragsorientierte Tarifoption – individuell prüfen",
+    "bayerischeTag": "Beitragsorientierte Tarifoption, individuell prüfen",
     "bayerischeItems": [
       "Mehrere Tarifstufen mit unterschiedlichem Leistungsumfang",
       "Rooming-in und Unterbringung abhängig vom gewählten Tarif",
@@ -161,7 +161,7 @@
     ],
     "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen und die individuelle Risikoprüfung. Aus diesem Beispiel folgt keine pauschale Empfehlung.",
     "sdkName": "Die SDK",
-    "sdkTag": "Tarifoption ohne tarifliche Wartezeit – individuell prüfen",
+    "sdkTag": "Tarifoption ohne tarifliche Wartezeit, individuell prüfen",
     "sdkItems": [
       "Nach den aktuellen Bedingungen bestehen keine tariflichen Wartezeiten; bereits eingetretene Versicherungsfälle bleiben ausgeschlossen",
       "Kindernachversicherung bei fristgerechter Anmeldung und passendem Elternschutz",
@@ -218,7 +218,7 @@
     "naturopathy": "Tarifabhängig bis zu 1.000 EUR für Naturheilkunde und Osteopathie",
     "onCall": "IKK: bis zu 250 EUR für Hebammen-Rufbereitschaft",
     "newbornCover": "Zwei-Monats-Frist für die Kindernachversicherung prüfen",
-    "clearRoles": "Hebamme informiert – Healio prüft und berät"
+    "clearRoles": "Hebamme informiert, Healio prüft und berät"
   },
   "miaPrompt": {
     "ariaLabel": "Nita bietet Hilfe zum Healio-Konzept für Hebammen an",

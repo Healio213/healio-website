@@ -161,8 +161,8 @@ const COPY = {
         a: 'Dafür gibt es je Tarifstufe einen eigenen Sehhilfen-Topf von 200 bis 500 EUR über zwei Jahre. Erstattet werden versicherte Leistungen im Rahmen des gewählten Tarifs.',
       },
       {
-        q: 'Was bedeutet „effektiv ab 0 EUR“?',
-        a: 'Das ist kein garantierter Tarifpreis. Wenn dein persönlich erreichbarer Kassenbonus mindestens so hoch ist wie dein anrechenbarer Jahresbeitrag, kann deine effektive Belastung bis auf 0 EUR sinken. Kasse, Aktivitäten, Tarif und Bonusbedingungen bestimmen das Ergebnis.',
+        q: 'Kann mein Kassenbonus den Beitrag komplett ausgleichen?',
+        a: 'Das ist kein garantierter Tarifpreis. Ja, wenn dein anerkannter Kassenbonus mindestens so hoch ist wie dein Jahresbeitrag. Dann bleibt dir vom Beitrag nichts übrig. Kasse, Aktivitäten, Tarif und Bonusbedingungen bestimmen das Ergebnis.',
       },
     ],
   },

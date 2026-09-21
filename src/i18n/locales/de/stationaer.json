@@ -9,9 +9,9 @@
   },
   "ticker": {
     "ariaLabel": "Aktuelle Highlights der Krankenhauszusatzversicherung",
-    "privateRoom": "Ein- oder Zweibettzimmer – je nach Klinik-Tarif",
+    "privateRoom": "Ein- oder Zweibettzimmer, je nach Klinik-Tarif",
     "privateDoctor": "Privatärztliche Behandlung durch Chefarzt oder Belegarzt",
-    "clinicChoice": "Freie Krankenhauswahl – auch Privat- und Spezialkliniken",
+    "clinicChoice": "Freie Krankenhauswahl, auch Privat- und Spezialkliniken",
     "noWait": "Keine Wartezeit für neue Versicherungsfälle ab Versicherungsbeginn",
     "roomingIn": "SDK Rooming-in für Kinder unter 16 Jahren",
     "accidentCover": "SDK Unfalltarif ohne Gesundheitsprüfung",
@@ -21,7 +21,7 @@
   "siegel": {
     "eyebrow": "Vertrauen im Ernstfall",
     "title": "Ausgezeichneter Klinikschutz. Starke Kooperation.",
-    "subtitle": "Die Auszeichnungen des aktuellen Klinikpartners und die IKK classic Kooperation werden getrennt gezeigt – damit jederzeit klar bleibt, wofür jedes Siegel steht.",
+    "subtitle": "Die Auszeichnungen des aktuellen Klinikpartners und die IKK classic Kooperation werden getrennt gezeigt, damit jederzeit klar bleibt, wofür jedes Siegel steht.",
     "partnersLabel": "Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic",
     "awardsLabel": "Auszeichnungen der SDK",
     "cooperationLabel": "In Kooperation mit",
@@ -200,7 +200,7 @@
       },
       "wartezeiten": {
         "title": "Unfallschutz ohne Gesundheitsprüfung",
-        "desc": "Der SPU bietet die Leistungen des 1-Bett-Tarifs bei unfallbedingter Behandlung – günstig und ohne Gesundheitsprüfung."
+        "desc": "Der SPU bietet die Leistungen des 1-Bett-Tarifs bei unfallbedingter Behandlung, günstig und ohne Gesundheitsprüfung."
       },
       "familienfreundlich": {
         "title": "Familienfreundlich",
@@ -274,7 +274,7 @@
       },
       {
         "q": "Was ist der Tarif Klinik bei Unfall?",
-        "a": "Der Tarif SPU bietet die Leistungen des Klinik-1-Bett-Tarifs – Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Klinikwahl – ausschließlich bei unfallbedingten Behandlungen. Er kommt ohne Gesundheitsprüfung aus und kostet für 30-Jährige beispielhaft 7,00 EUR im Monat."
+        "a": "Der Tarif SPU bietet die Leistungen des Klinik-1-Bett-Tarifs, Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Klinikwahl, ausschließlich bei unfallbedingten Behandlungen. Er kommt ohne Gesundheitsprüfung aus und kostet für 30-Jährige beispielhaft 7,00 EUR im Monat."
       },
       {
         "q": "Gibt es Wartezeiten?",
@@ -362,7 +362,7 @@
     "selector": {
       "eyebrow": "Deine Entscheidung in einem Blick",
       "title": "Drei Wege. Einer passt zu deinem Sicherheitsgefühl.",
-      "subtitle": "Entscheidend ist nicht nur der Preis, sondern wann dein Schutz greifen soll. Wähle zuerst den Leistungsumfang – den persönlichen Beitrag siehst du danach.",
+      "subtitle": "Entscheidend ist nicht nur der Preis, sondern wann dein Schutz greifen soll. Wähle zuerst den Leistungsumfang. Den persönlichen Beitrag siehst du danach.",
       "choose": "Diesen Schutz wählen",
       "selected": "Ausgewählt",
       "resultEyebrow": "Deine gewählte Richtung",
@@ -432,7 +432,7 @@
         },
         "choice": {
           "title": "Mehr Wahl bei der Klinik",
-          "body": "Die freie Krankenhauswahl ist im tariflichen Umfang versichert – auch für Privat- und Spezialkliniken."
+          "body": "Die freie Krankenhauswahl ist im tariflichen Umfang versichert, auch für Privat- und Spezialkliniken."
         },
         "start": {
           "title": "Keine tarifliche Wartezeit",
@@ -474,7 +474,7 @@
       "eyebrow": "KassenBoost × Klinikschutz",
       "title": "Erst den Schutz wählen. Dann die Krankenkasse passend dazu.",
       "lead": "Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.",
-      "body": "Wie viel du persönlich erreichst, rechnen wir transparent für dich aus. KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen – die passende Krankenkasse ergibt sich aus deinen Angaben.",
+      "body": "Wie viel du persönlich erreichst, rechnen wir transparent für dich aus. KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen. Die passende Krankenkasse ergibt sich aus deinen Angaben.",
       "fullPlansTitle": "SP1 und SP2: dein tatsächlicher Eigenbeitrag zählt",
       "fullPlansBody": "Nach der Tarifwahl wird dein erreichbarer Bonus auf deinen persönlichen Beitrag bezogen. So siehst du klar, was dir nach dem Bonus tatsächlich bleibt.",
       "cta": "Krankenkasse passend zum Tarif finden",
@@ -510,7 +510,7 @@
     },
     "trust": {
       "eyebrow": "Digital vergleichen, persönlich begleitet",
-      "title": "Du entscheidest informiert – und bleibst nicht allein.",
+      "title": "Du entscheidest informiert, und bleibst nicht allein.",
       "subtitle": "Healio ordnet Leistungen und Grenzen vor deiner Entscheidung ein und bleibt auch nach dem Abschluss erreichbar.",
       "cards": {
         "broker": {
@@ -553,7 +553,7 @@
         },
         {
           "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",
-          "a": "Ist ein Elternteil bei der Geburt versichert und sind die Tarifvoraussetzungen erfüllt, kann das Kind innerhalb von zwei Monaten ohne Gesundheitsprüfung angemeldet werden – rückwirkend ab dem Tag der Geburt."
+          "a": "Ist ein Elternteil bei der Geburt versichert und sind die Tarifvoraussetzungen erfüllt, kann das Kind innerhalb von zwei Monaten ohne Gesundheitsprüfung angemeldet werden, rückwirkend ab dem Tag der Geburt."
         }
       ]
     },

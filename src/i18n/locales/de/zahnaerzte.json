@@ -189,14 +189,14 @@
     "cleaning": "Ausgewählte Tarife: Zahnreinigung ohne Jahreslimit",
     "reimbursement": "Leistungsstarke Tarife: bis zu 100 % der erstattungsfähigen Kosten",
     "missingTeeth": "Bis zu drei fehlende Zähne gegen Zuschlag mitversicherbar",
-    "clearRoles": "Praxis informiert – Healio prüft und berät"
+    "clearRoles": "Praxis informiert, Healio prüft und berät"
   },
   "miaPrompt": {
     "ariaLabel": "Nita bietet Hilfe zum Healio-Konzept für Zahnarztpraxen an",
     "close": "Nita-Hinweis schließen",
     "eyebrow": "Nita von Healio",
     "title": "Soll ich dir das Praxiskonzept erklären?",
-    "body": "Ich zeige dir kurz, wie du Patienten informierst, ohne selbst Versicherung zu beraten – und wie Healio den Rest übernimmt.",
+    "body": "Ich zeige dir kurz, wie du Patienten informierst, ohne selbst Versicherung zu beraten, und wie Healio den Rest übernimmt.",
     "cta": "Ja, Praxiskonzept erklären"
   }
 }

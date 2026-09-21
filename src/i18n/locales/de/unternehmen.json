@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Betriebliches Vorsorgemanagement | bAV, bKV & BGM | Healio",
-    "description": "Healio bündelt bAV, bKV, BGM-Koordination und Mitarbeiterkommunikation zu einem betrieblichen Vorsorgesystem – transparent, wirtschaftlich und dauerhaft begleitet."
+    "description": "Healio bündelt bAV, bKV, BGM-Koordination und Mitarbeiterkommunikation zu einem betrieblichen Vorsorgesystem, transparent, wirtschaftlich und dauerhaft begleitet."
   },
   "hero": {
     "eyebrow": "Betriebliche Vorsorge für Unternehmen",
@@ -16,11 +16,11 @@
     "eyebrow": "60-Sekunden-Realitätscheck",
     "title": "Wo steht Ihre Versorgung heute?",
     "questions": [
-      "Was kostet Ihre bestehende Versorgung – inklusive Produktkosten?",
+      "Was kostet Ihre bestehende Versorgung, inklusive Produktkosten?",
       "Welcher Anteil Ihrer Belegschaft versteht und nutzt sie?",
       "Wer prüft regelmäßig Anbieter, Zuschüsse und Kommunikation?"
     ],
-    "conclusion": "Eine Antwort fehlt? Dann lohnt sich eine ehrliche Bestandsaufnahme – ohne Wechselpflicht.",
+    "conclusion": "Eine Antwort fehlt? Dann lohnt sich eine ehrliche Bestandsaufnahme, ohne Wechselpflicht.",
     "cta": "Vorsorge-Check starten"
   },
   "explainerVideos": {
@@ -44,7 +44,7 @@
     }
   },
   "calculator": {
-    "eyebrow": "Kohortenrechnung {{startYear}}–{{endYear}}",
+    "eyebrow": "Kohortenrechnung {{startYear}}-{{endYear}}",
     "title": "Der Einzelfall wird zur Verantwortung.",
     "description": "Zuerst zeigt die Rechnung die Wirkung über {{years}} Jahre für einen einzelnen Mitarbeiter. Danach wird derselbe Unterschied auf alle Teilnehmer der Belegschaft hochgerechnet.",
     "controlsTitle": "Annahmen verändern",
@@ -82,7 +82,7 @@
     "eyebrow": "Verantwortung mit langem Horizont",
     "title": "Die Entscheidung endet nicht mit dem Vertragsabschluss.",
     "lead": "Langfristige Vorsorge braucht verständliche Entscheidungen und dauerhafte Begleitung.",
-    "description": "Für Unternehmensleitungen ist bAV deshalb mehr als Verwaltung. Produktkosten, Renditeannahmen, Teilnahme und Kommunikation wirken zusammen – und bestimmen mit, was in 30 Jahren bei der Belegschaft ankommt.",
+    "description": "Für Unternehmensleitungen ist bAV deshalb mehr als Verwaltung. Produktkosten, Renditeannahmen, Teilnahme und Kommunikation wirken zusammen, und bestimmen mit, was in 30 Jahren bei der Belegschaft ankommt.",
     "position": "Healio macht die Wirkung sichtbar, ohne Renditen zu versprechen. Wir prüfen Bestand und Annahmen und übersetzen langfristige Folgen in belastbare Entscheidungen.",
     "detailsShow": "Einordnung & Quellen",
     "detailsHide": "Einordnung schließen",
@@ -115,7 +115,7 @@
         "key": "pension",
         "horizon": "Morgen · bAV",
         "title": "bAV, die nachvollziehbar wirkt.",
-        "description": "Wir prüfen Bestand, Kosten, Zuschüsse und Annahmen – verständlich bis auf Mitarbeiterebene.",
+        "description": "Wir prüfen Bestand, Kosten, Zuschüsse und Annahmen, verständlich bis auf Mitarbeiterebene.",
         "points": ["Bestand und Kosten transparent prüfen", "Geeignete Durchführungswege einordnen", "Versorgung je Mitarbeiter verständlich erklären"]
       },
       {
@@ -180,7 +180,7 @@
   "process": {
     "eyebrow": "Vom Produkt zum Management",
     "title": "Prüfen. Rechnen. Einführen. Begleiten.",
-    "description": "Ein klarer Prozess für Mitarbeiter und Personalbereich – vom Bestand bis zur laufenden Betreuung.",
+    "description": "Ein klarer Prozess für Mitarbeiter und Personalbereich, vom Bestand bis zur laufenden Betreuung.",
     "steps": [
       {"title": "Bestand verstehen", "description": "Wir prüfen Verträge, Kosten, Zuschüsse, Teilnahme und die bisherige Kommunikation."},
       {"title": "Konzept rechnen", "description": "Sie sehen nachvollziehbar, welche bAV-, bKV- und Gesundheitsstruktur zu Unternehmen und Budget passt."},
@@ -210,7 +210,7 @@
     "titleLine2": "676 EUR Vorsorge.",
     "titleLine3": "30 Jahre Zeit.",
     "netEffectExplanation": "Die rund 75 EUR sind kein Eigenbeitrag. Sie zeigen die mögliche Minderung des Auszahlungsnettos durch zusätzliche Sozialabgaben im Standardbeispiel.",
-    "description": "Der Arbeitgeber füllt den Vertrag. Der Mitarbeiter spürt im Standardbeispiel rund 75 EUR weniger Auszahlungsnetto – und baut mit 676 EUR im Monat einen substanziellen Vorsorgetopf auf.",
+    "description": "Der Arbeitgeber füllt den Vertrag. Der Mitarbeiter spürt im Standardbeispiel rund 75 EUR weniger Auszahlungsnetto, und baut mit 676 EUR im Monat einen substanziellen Vorsorgetopf auf.",
     "detailsIntro": "Offensiv gerechnet. Vollständig offengelegt.",
     "detailsShow": "Rechenweg, Annahmen & Quellen",
     "detailsHide": "Details schließen",
@@ -220,7 +220,7 @@
       "formula": "30 Jahre · 10 % Marktannahme − 2 Prozentpunkte Kosten = 8 % Modellrendite",
       "employeeStage": "Beim Mitarbeiter heute",
       "employeeCaption": "mögliche Minderung des Auszahlungsnettos",
-      "employeeNote": "im Standardbeispiel – nicht 676 EUR Eigenbeitrag",
+      "employeeNote": "im Standardbeispiel, nicht 676 EUR Eigenbeitrag",
       "firstConnector": "Arbeitgeber finanziert",
       "contractStage": "Jeden Monat im Vertrag",
       "contractCaption": "voller arbeitgeberfinanzierter Vorsorgebeitrag",
@@ -241,7 +241,7 @@
     "splitLiable": "338 EUR steuerfrei, grundsätzlich sozialversicherungspflichtig",
     "legalSource": "Rechtsgrundlagen und Annahmen im Rechner",
     "employerCostLabel": "Arbeitgeberaufwand vollständig betrachten",
-    "employerCost": "Neben dem Vorsorgebeitrag können Arbeitgeberanteile zur Sozialversicherung auf den grundsätzlich beitragspflichtigen Teil anfallen. Im Standardmodell sind das rund 71 EUR zusätzlich – der Gesamtaufwand liegt damit bei rund 747 EUR monatlich je Teilnehmer.",
+    "employerCost": "Neben dem Vorsorgebeitrag können Arbeitgeberanteile zur Sozialversicherung auf den grundsätzlich beitragspflichtigen Teil anfallen. Im Standardmodell sind das rund 71 EUR zusätzlich. Der Gesamtaufwand liegt damit bei rund 747 EUR monatlich je Teilnehmer.",
     "returnLabel": "Offensives, belegtes Standardszenario",
     "standardFormula": "10 % − 2 Prozentpunkte = 8 % Modellrendite",
     "historicalContext": "Historischer Kontext: MSCI World USD Net Return, Juli 2011 bis Juli 2026, Stichtag 31.07.2026: 11,10 % p. a. Mathematisch nach derselben Kostenannahme 9,10 % p. a.",
@@ -254,7 +254,7 @@
   "faq": {
     "eyebrow": "Vor der Entscheidung",
     "title": "Was Unternehmen vorher wissen wollen.",
-    "description": "Die wichtigsten Antworten – klar, ergebnisoffen und ohne Kleingedrucktes zu verstecken.",
+    "description": "Die wichtigsten Antworten, klar, ergebnisoffen und ohne Kleingedrucktes zu verstecken.",
     "items": [
       {
         "question": "Müssen bestehende Verträge ersetzt werden?",
@@ -279,7 +279,7 @@
     "oneSystem": "bAV, bKV, Prävention und Steuerung als ein System",
     "existingSolutions": "Bestehende Lösungen werden einbezogen",
     "openReview": "Der Vorsorge-Check startet ergebnisoffen",
-    "ongoing": "Einführung ist der Anfang – nicht das Ende",
+    "ongoing": "Einführung ist der Anfang, nicht das Ende",
     "contact": "Healio bleibt zentraler Ansprechpartner"
   },
   "bavDecisionCalculator": {
@@ -290,7 +290,7 @@
     "hero": {
       "eyebrow": "bAV-Entscheidungsrechner 2026",
       "title": "Was 676 EUR Vorsorge für Ihr Unternehmen wirklich bedeuten.",
-      "description": "Schieben Sie die wichtigsten Stellschrauben selbst. Der Rechner trennt Arbeitgeberaufwand, mögliche Mitarbeiterwirkung und langfristige Kapitalprojektion – ohne eine Nettorente oder Wirkung zu versprechen.",
+      "description": "Schieben Sie die wichtigsten Stellschrauben selbst. Der Rechner trennt Arbeitgeberaufwand, mögliche Mitarbeiterwirkung und langfristige Kapitalprojektion, ohne eine Nettorente oder Wirkung zu versprechen.",
       "back": "Zur Unternehmensseite"
     },
     "controls": {
@@ -306,7 +306,7 @@
       },
       "salary": {
         "label": "Durchschnittliches Monatsbrutto",
-        "hint": "Modellkorridor 2.001–6.450 EUR: oberhalb des Übergangsbereichs und bis zur allgemeinen Jahresarbeitsentgeltgrenze 2026"
+        "hint": "Modellkorridor 2.001-6.450 EUR: oberhalb des Übergangsbereichs und bis zur allgemeinen Jahresarbeitsentgeltgrenze 2026"
       },
       "contribution": {
         "label": "Arbeitgeberbeitrag pro Teilnehmer und Monat",
@@ -327,7 +327,7 @@
       },
       "returnRate": {
         "label": "Marktrendite vor Effektivkosten",
-        "hint": "Offensiv modelliert, historisch eingeordnet – keine Prognose",
+        "hint": "Offensiv modelliert, historisch eingeordnet, keine Prognose",
         "standard": "Standardszenario",
         "historical": "Historischer 15-Jahres-Wert",
         "lower": "Niedrigeres Szenario",
@@ -369,7 +369,7 @@
         "capitalPerPerson": "modelliertes Kapital je Teilnehmer",
         "monthlyGross": "monatliche 4-%-Modellauszahlung vor Abgaben",
         "monthlyAfter": "nach pauschalem {{deduction}}-%-Modellabzug",
-        "monthlyNote": "Orientierung aus dem Kapitalmodell – keine garantierte oder lebenslange Tarif-Rente.",
+        "monthlyNote": "Orientierung aus dem Kapitalmodell, keine garantierte oder lebenslange Tarif-Rente.",
         "capitalGroup": "modelliertes Kapital der Gruppe"
       }
     },

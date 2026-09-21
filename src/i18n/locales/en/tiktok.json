@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Healio, Your Health Upgrade",
-    "description": "Private patient benefits without private insurance. Glasses, alternative medicine, dental, hospital. Up to €3,000 health budget, effectively from €0 with your health insurer's bonus."
+    "description": "Up to €3,000 health budget over 2 years. Your health insurer's bonus can offset your premium in full or in part."
   },
   "header": {
     "logo": "Healio",
@@ -16,10 +16,10 @@
     "ambulant": {
       "icon": "🩺",
       "title": "Outpatient",
-      "budgetHighlight": "€3,000 Budget",
+      "budgetHighlight": "€3,000",
       "subtitle": "Glasses, alternative medicine, preventive care, osteopathy, pregnancy",
-      "price": "from €0*",
-      "period": "effective/month",
+      "price": "Premium offsettable by insurer bonus",
+      "period": "per month",
       "badge": "IKK bonus can fully cover the premium*",
       "link": "/en/outpatient"
     },
@@ -44,7 +44,7 @@
   },
   "stats": {
     "budget": {
-      "value": "€3,000",
+      "value": "Up to €3,000 health budget",
       "label": "Outpatient budget"
     },
     "dental": {

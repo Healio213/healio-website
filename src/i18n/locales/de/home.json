@@ -32,7 +32,7 @@
   },
   "seo": {
     "title": "Versicherungen für Privatkunden & Unternehmen | Healio",
-    "description": "Private Absicherung und betriebliche Vorsorge verständlich verbinden. Healio begleitet unabhängig, digital und persönlich – von Zusatzschutz bis bAV.",
+    "description": "Private Absicherung und betriebliche Vorsorge verständlich verbinden. Healio begleitet unabhängig, digital und persönlich, von Zusatzschutz bis bAV.",
     "ogTitle": "Healio: Gesundheit clever absichern. Privat und im Unternehmen.",
     "ogDescription": "Zusatzschutz, Kassenbonus und betriebliche Vorsorge, verständlich erklärt und unabhängig begleitet."
   },
@@ -53,7 +53,7 @@
         "routeKey": "zahn",
         "label": "Zahn",
         "title": "Zahnkosten planbar absichern",
-        "description": "Zahnbehandlung, Zahnersatz und Prophylaxe – je nach Tarif.",
+        "description": "Zahnbehandlung, Zahnersatz und Prophylaxe, je nach Tarif.",
         "cta": "Zahnschutz ansehen"
       },
       {
@@ -61,7 +61,7 @@
         "routeKey": "stationaer",
         "label": "Stationär",
         "title": "Mehr Wahl im Krankenhaus",
-        "description": "Einbettzimmer, Spezialisten und Klinikwahl – je nach Tarif.",
+        "description": "Einbettzimmer, Spezialisten und Klinikwahl, je nach Tarif.",
         "cta": "Klinikschutz ansehen"
       }
     ]
@@ -165,7 +165,7 @@
     "patients": {
       "signal": "Gesundheitsbudget",
       "title": "Für Patient:innen",
-      "description": "Bis zu 3.000 € Gesundheitsbudget in 2 Jahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und mehr.",
+      "description": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und mehr.",
       "cta": "Gesundheitsbudget entdecken"
     }
   },
@@ -233,7 +233,7 @@
   "gesundheit": {
     "title": "Was eine bKV wirklich <highlight>kostet</highlight>, und was sie <highlight>bringt</highlight>.",
     "fasterAppointments": "Schnellere Facharzttermine",
-    "fasterAppointmentsDesc": "5–10 Tage statt 6–8 Wochen Wartezeit beim Facharzt.",
+    "fasterAppointmentsDesc": "5-10 Tage statt 6-8 Wochen Wartezeit beim Facharzt.",
     "lessSickDays": "Kranktage senken",
     "lessSickDaysDesc": "Bis zu 30 % weniger Ausfallzeiten durch bessere Gesundheitsversorgung.",
     "saveCosts": "Kosten sparen",
@@ -242,7 +242,7 @@
     "retentionDesc": "Gesundheit ist das persönlichste Thema. Wer hier investiert, bindet.",
     "lessAbsence": "Weniger Ausfallzeiten",
     "costPerDay": "Kosten pro Krankheitstag",
-    "insteadOfWeeks": "Statt 6–8 Wochen Wartezeit"
+    "insteadOfWeeks": "Statt 6-8 Wochen Wartezeit"
   },
   "zeitfalle": {
     "title": "Der <highlight>Zeitfaktor</highlight>",
