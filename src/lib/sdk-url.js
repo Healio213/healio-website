@@ -1,5 +1,6 @@
 import { trackEvent } from '@/lib/analytics';
 import { trackMetaLead, trackMetaRechnerStart } from '@/lib/meta-pixel';
+import { trackGoogleAdsLead, trackGoogleAdsRechnerStart } from '@/lib/google-ads';
 import { readStoredReferrer, sanitizeReferrer } from '@/lib/referrer';
 
 /**
@@ -68,6 +69,8 @@ export function trackSdkClick(page) {
   // Meta: Start des Beitragsrechners, ohne jeden Eingabewert. Der Aufruf
   // filtert selbst auf /ambulant und /zahn.
   trackMetaRechnerStart();
+  // Google Ads: derselbe Auslöser, nur Konto-ID und Conversion-Label.
+  trackGoogleAdsRechnerStart();
 
   return trackEvent('tariff_calculator_click', {
     component: 'sdk',
@@ -85,6 +88,7 @@ export function trackSdkClick(page) {
 export function trackIkkClick(placement) {
   // "Bonus sichern" gilt als abgeschickte Anfrage, ohne Personenbezug.
   trackMetaLead();
+  trackGoogleAdsLead();
 
   return trackEvent('ikk_bonus_click', {
     component: 'ikk',

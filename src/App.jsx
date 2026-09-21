@@ -19,6 +19,7 @@ import {
   trackMetaPageView,
   trackMetaViewContent,
 } from '@/lib/meta-pixel';
+import { initializeGoogleAds, syncGoogleAdsConsent } from '@/lib/google-ads';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -151,6 +152,15 @@ function App() {
 
     trackMetaCurrentPage(getConsentState());
     return subscribeConsent(trackMetaCurrentPage);
+  }, [location.pathname]);
+
+  // Google Ads: eigener Pfad, dieselbe Zustimmung wie Meta. Ohne gesetzte
+  // Konto-ID passiert hier gar nichts. Seitenaufrufe werden bewusst nicht
+  // gemeldet, nur Rechnerstart und Anfrage.
+  useEffect(() => initializeGoogleAds(), []);
+
+  useEffect(() => {
+    syncGoogleAdsConsent();
   }, [location.pathname]);
 
   return (

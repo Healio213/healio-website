@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { trackMetaLead } from '@/lib/meta-pixel';
+import { trackGoogleAdsLead } from '@/lib/google-ads';
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -35,6 +36,7 @@ const RatgeberCtaButton = ({ href, label, placement, className = '' }) => {
     // Ein Lead-Ereignis pro Klick, an Pixel und CAPI mit derselben event_id.
     // Ohne Zustimmung "marketing" passiert im Modul nichts.
     trackMetaLead();
+    trackGoogleAdsLead();
   }, []);
 
   return (
