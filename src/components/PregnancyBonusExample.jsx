@@ -66,7 +66,7 @@ export default function PregnancyBonusExample() {
             </summary>
             <div className="border-t border-home-slate/15 px-6 pb-6 sm:px-8 sm:pb-8">
               <p className="mt-5 text-sm text-home-slate">Wir rechnen beispielhaft für eine Person im Bonusjahr 2026 nach dem IKK-classic-Modell. Deine Auswahl bleibt nur in diesem Browser und wird nicht an Healio übermittelt.</p>
-          <form className="mt-6 grid gap-8 lg:grid-cols-[3fr_2fr]" onSubmit={(e) => e.preventDefault()}>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[3fr_2fr]" role="group" aria-label="Bonusbeispiel Schwangerschaft">
             <div>
               <label htmlFor="checkups" className="block font-semibold">Schwangerschaftsvorsorgen</label>
               <p id="checkups-hint" className="text-sm text-home-slate">Wie viele gesetzliche Vorsorgeuntersuchungen möchtest du im Beispiel berücksichtigen?</p>
@@ -116,7 +116,7 @@ export default function PregnancyBonusExample() {
               )}
               <p className="mt-5 text-sm text-home-slate">Unverbindliches Rechenbeispiel. Die Auszahlung richtet sich nach den Voraussetzungen und der Anerkennung durch die IKK classic. Tarifleistungen sind hier nicht enthalten.</p>
             </div>
-          </form>
+          </div>
               <details id="bonus-conditions" className="mt-6 border-t border-home-slate/20 pt-5">
                 <summary className={`cursor-pointer font-semibold ${focus}`}>Gut zu wissen</summary>
                 <ul className="mt-4 max-w-prose list-disc space-y-3 pl-5 text-sm text-home-slate">
