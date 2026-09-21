@@ -284,6 +284,24 @@ export const seoRoutes = [
     hreflang: { de: 'https://healio.de/blog', en: 'https://healio.de/en/blog' },
   },
   {
+    path: '/ratgeber',
+    title: 'Ratgeber zu Krankenkasse, Bonus und Zusatzschutz | Healio',
+    description: 'Verständliche Ratgeber von Healio zu Kassenbonus, ambulanter Zusatzversicherung und Zahnschutz. Erst prüfen, was die eigene Kasse zahlt, dann entscheiden.',
+    canonical: 'https://healio.de/ratgeber',
+    lang: 'de',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://healio.de/ratgeber#webpage',
+      url: 'https://healio.de/ratgeber',
+      name: 'Ratgeber zu Krankenkasse, Bonus und Zusatzschutz | Healio',
+      description: 'Verständliche Ratgeber von Healio zu Kassenbonus, ambulanter Zusatzversicherung und Zahnschutz.',
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': 'https://healio.de/#website' },
+      about: { '@id': 'https://healio.de/#organization' },
+    },
+  },
+  {
     path: '/blog/heilpraktiker-kosten-guide-2026',
     title: 'Heilpraktiker Kosten 2026: Preise, Erstattung & Budget | Healio',
     description: 'Was kostet ein Heilpraktiker 2026? Preise, Beispiele und Wege zur Erstattung durch Zusatzversicherung und Gesundheitsbudget.',
@@ -748,6 +766,17 @@ export const seoRoutes = [
       isPartOf: { '@id': 'https://healio.de/#website' },
       about: { '@id': 'https://healio.de/#organization' },
     },
+  },
+  {
+    // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:
+    // die Seite ist Werbung, nicht organische Sichtbarkeit. Die Uebersicht
+    // /ratgeber und spaetere organische Ratgeberartikel bleiben indexiert.
+    path: '/ratgeber/krankenkassen-bonus-zusatzversicherung',
+    title: 'Krankenkassen-Bonus nutzen und Zusatzschutz finanzieren | Healio',
+    description: 'Wie das Bonusprogramm der eigenen gesetzlichen Krankenkasse den größten Teil einer ambulanten Zusatzversicherung trägt. Erst prüfen, dann entscheiden.',
+    canonical: 'https://healio.de/ratgeber/krankenkassen-bonus-zusatzversicherung',
+    lang: 'de',
+    robots: 'noindex, nofollow',
   },
   {
     path: '/zahnaerzte/praxis-checkliste',

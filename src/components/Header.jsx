@@ -45,6 +45,7 @@ const Header = () => {
     '/konto-loeschen',
     '/schwangerschaft',
     '/blog', '/en/blog',
+    '/ratgeber',
     '/potenzialanalyse', '/en/potential-analysis',
     '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
   ];

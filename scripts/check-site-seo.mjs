@@ -10,6 +10,7 @@ const publicRouterPaths = [
   '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant', '/schwangerschaft',
   '/zahn', '/stationaer', '/presse', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
+  '/ratgeber', '/ratgeber/krankenkassen-bonus-zusatzversicherung',
   '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/health-insurance-bonus', '/en/companies', '/en/companies/pension-calculator', '/en/partner', '/en/midwives', '/en/healthcare-professionals-protection',
   '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',
@@ -24,6 +25,7 @@ const noindexPaths = new Set([
   '/instagram', '/en/instagram',
   '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',
   '/en/blog',
+  '/ratgeber/krankenkassen-bonus-zusatzversicherung',
 ]);
 
 const bilingualPairs = [

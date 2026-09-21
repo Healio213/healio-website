@@ -54,6 +54,8 @@ const AppPasswordResetPage = React.lazy(() => import('@/pages/AppPasswordResetPa
 const TerminvereinbarungPage = React.lazy(() => import('@/pages/TerminvereinbarungPage'));
 const BlogPage = React.lazy(() => import('@/pages/BlogPage'));
 const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
+const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
+const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
 const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 
@@ -200,6 +202,9 @@ function App() {
               <Route path="konto-loeschen" element={<KontoLoeschenPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogArticlePage />} />
+              {/* Ratgeber und Advertorials: nur im deutschen Baum. */}
+              <Route path="ratgeber" element={<RatgeberPage />} />
+              <Route path="ratgeber/:slug" element={<RatgeberArtikelPage />} />
             </Route>
 
             {/* English routes */}
