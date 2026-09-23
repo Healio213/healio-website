@@ -55,6 +55,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://healio.de/partner/leitfaden</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://healio.de/hebammen</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -337,6 +343,55 @@
   <url>
     <loc>https://healio.de/blog/healio-konzept-fuer-hebammen</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog-Artikel: neue Serie 2026-09-23 -->
+  <url>
+    <loc>https://healio.de/blog/kassenbonus-was-ist-drin</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/krankenkasse-wechseln-laufende-behandlung</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/heilpraktiker-kosten-bonus-finanziert</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/zahnersatz-beitrag-vom-bonus</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/ikk-classic-bonus-schritt-fuer-schritt</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/bkv-und-kassenbonus-fuer-arbeitgeber</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/kassenbonus-schwangerschaft-vorsorge</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/blog/hebammen-gesundheitsbudget-erklaeren</loc>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

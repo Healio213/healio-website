@@ -5,7 +5,7 @@ import { seoRoutes } from './seo-routes.mjs';
 const SITE_URL = 'https://healio.de';
 
 const publicRouterPaths = [
-  '/', '/about', '/leistungen', '/kassenboost', '/kassenbonus', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/hebammen', '/zahnaerzte',
+  '/', '/about', '/leistungen', '/kassenboost', '/kassenbonus', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/partner/leitfaden', '/partner/leitfaden/danke', '/hebammen', '/zahnaerzte',
   '/zahnaerzte/praxis-checkliste',
   '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant', '/schwangerschaft',
   '/zahn', '/stationaer', '/presse', '/impressum', '/agb', '/datenschutz', '/erstinformation',
@@ -22,6 +22,7 @@ const publicRouterPaths = [
 ];
 
 const noindexPaths = new Set([
+  '/partner/leitfaden/danke',
   '/lebenshilfe', '/zahnaerzte/praxis-checkliste', '/konto-loeschen', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',

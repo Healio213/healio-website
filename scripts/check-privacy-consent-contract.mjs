@@ -291,7 +291,7 @@ if (sensitiveParamKeySource) {
   // aus dem Meta-Schema und enthält selbst keine Nutzerdaten. Der Teilstring
   // "name" im GA4-Filter zielt auf Personennamen. Deshalb wird für diesen
   // einen Schlüssel der Schema-Präfix abgeschnitten, bevor geprüft wird -
-  // und der Wertebereich ist zusätzlich auf vier feste Seitenschlüssel
+  // und der Wertebereich ist zusätzlich auf fünf feste Seitenschlüssel
   // geschlossen (Prüfung direkt darunter).
   const META_SCHEMA_KEYS = new Set(['content_name']);
   for (const key of metaParamKeys) {
@@ -310,8 +310,8 @@ if (sensitiveParamKeySource) {
   const metaPageKeyList = metaPixel.match(/export const META_PAGE_KEYS = Object\.freeze\(new Set\(\[([^\]]*)\]\)\)/)?.[1] ?? '';
   const metaPageKeys = [...metaPageKeyList.matchAll(/'([^']+)'/g)].map((match) => match[1]);
   expect(
-    JSON.stringify(metaPageKeys) === JSON.stringify(['zahn', 'ambulant', 'partner', 'ratgeber']),
-    'ViewContent darf nur die vier neutralen Seitenschluessel senden.',
+    JSON.stringify(metaPageKeys) === JSON.stringify(['zahn', 'ambulant', 'partner', 'ratgeber', 'praxis-leitfaden']),
+    'ViewContent darf nur die fuenf neutralen Seitenschluessel senden.',
   );
   for (const key of metaPageKeys) {
     expect(!sensitiveParamKey.test(key), `Der Seitenschluessel ${key} faellt unter den SENSITIVE_PARAM_KEY-Filter.`);

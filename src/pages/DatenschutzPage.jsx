@@ -71,6 +71,9 @@ const DatenschutzPage = () => {
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.contactForm')}</h3>
               <p>{t('datenschutz.contactFormText')}</p>
 
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.ebookRequest')}</h3>
+              <p>{t('datenschutz.ebookRequestText')}</p>
+
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.emailJsTitle')}</h3>
               <p>{t('datenschutz.emailJsText')}</p>
               <p className="mt-3">
@@ -82,6 +85,9 @@ const DatenschutzPage = () => {
                   {t('datenschutz.emailJsDpaLink')}
                 </a>
               </p>
+
+              <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.leitfadenTitle')}</h3>
+              <p>{t('datenschutz.leitfadenText')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.servicesTitle')}</h2>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.hostingTitle')}</h3>
