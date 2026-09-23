@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -20,7 +20,19 @@ import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import { useLanguage } from '@/hooks/useLanguage';
 
+// Sprungmarke zur Google-Terminplanung (Google Meet). Alte Links mit
+// #calendly-embed werden beim Laden auf diese Marke umgelenkt.
+const GOOGLE_TERMIN_ANCHOR = 'google-termin';
+const LEGACY_TERMIN_ANCHORS = ['calendly-embed'];
+
 const PartnerPage = () => {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const hash = window.location.hash.replace(/^#/, '');
+    if (!LEGACY_TERMIN_ANCHORS.includes(hash)) return;
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${GOOGLE_TERMIN_ANCHOR}`);
+    document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
   const { t, i18n } = useTranslation('partner');
   const { t: tSeo } = useTranslation('seo');
   const { getPath } = useLanguage();
@@ -104,7 +116,7 @@ const PartnerPage = () => {
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
-                    onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {t('hero.cta')}
                   </Button>
@@ -455,7 +467,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white p-2 sm:p-4 md:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col items-center w-full"
               >
-                <div id="calendly-embed" className="w-full">
+                <div id={GOOGLE_TERMIN_ANCHOR} className="w-full">
                   <AppointmentBooking
                     placement="partner_page"
                     title={t('cta.title')}
@@ -484,7 +496,7 @@ const PartnerPage = () => {
               <Button
                 size="lg"
                 className="bg-white text-[#25c990] hover:bg-slate-100 font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
-                onClick={() => document.getElementById('calendly-embed')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
               >
                 {t('footer.cta')}
               </Button>
