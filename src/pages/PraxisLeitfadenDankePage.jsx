@@ -10,7 +10,7 @@ export const LEITFADEN_DOWNLOAD_PATH = '/downloads/healio-leitfaden-therapieabbr
 
 // Der Termin fuehrt auf dieselbe Buchung wie /partner. Die Kampagnenmerkmale
 // bleiben an der internen Adresse, weil der Google-Kalender sie nicht liest.
-const TERMIN_PATH = '/partner?utm_source=leitfaden&utm_medium=danke&utm_campaign=therapieabbruch-stopper#calendly-embed';
+const TERMIN_PATH = '/partner?utm_source=leitfaden&utm_medium=danke&utm_campaign=therapieabbruch-stopper#google-termin';
 
 const praxisCheck = [
   {
