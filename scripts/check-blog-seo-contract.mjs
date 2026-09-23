@@ -24,7 +24,17 @@ const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 const articleBySlug = new Map(articles.map((article) => [article.slug, article]));
 const routePaths = new Set(seoRoutes.map((route) => route.path));
 
-assert.equal(articles.length, 15, 'Der geprüfte Blog-Cache muss 15 Artikel enthalten.');
+assert.equal(articles.length, 23, 'Der geprüfte Blog-Cache muss 23 Artikel enthalten.');
+const NEW_SERIES_SLUGS_2026_09_23 = new Set([
+  'kassenbonus-was-ist-drin',
+  'krankenkasse-wechseln-laufende-behandlung',
+  'heilpraktiker-kosten-bonus-finanziert',
+  'zahnersatz-beitrag-vom-bonus',
+  'ikk-classic-bonus-schritt-fuer-schritt',
+  'bkv-und-kassenbonus-fuer-arbeitgeber',
+  'kassenbonus-schwangerschaft-vorsorge',
+  'hebammen-gesundheitsbudget-erklaeren',
+]);
 assert.equal(BLOG_RELATED_LINK_SLUGS.length, articles.length, 'Für jeden Artikel muss eine Linkgruppe gepflegt sein.');
 assert.doesNotMatch(
   JSON.stringify(rawArticles),
@@ -101,9 +111,10 @@ assert.match(sitemapEntry('https://healio.de/unternehmen'), /<lastmod>2026-09-01
 assert.match(sitemapEntry('https://healio.de/blog'), /<lastmod>2026-09-02<\/lastmod>/);
 assert.match(sitemapEntry('https://healio.de/blog'), /<changefreq>weekly<\/changefreq>/);
 for (const article of articles) {
+  const expectedLastmod = NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
   assert.match(
     sitemapEntry(`https://healio.de/blog/${article.slug}`),
-    /<lastmod>2026-09-02<\/lastmod>/,
+    new RegExp(`<lastmod>${expectedLastmod}</lastmod>`),
     `${article.slug}: tatsächliche SEO-Änderung fehlt im statischen lastmod.`,
   );
 }

@@ -502,6 +502,62 @@ export const seoRoutes = [
     canonical: 'https://healio.de/blog/healio-konzept-fuer-hebammen',
     lang: 'de',
   },
+  {
+    path: '/blog/kassenbonus-was-ist-drin',
+    title: 'Kassenbonus: Was ist das, und wie viel ist wirklich drin? | Healio',
+    description: 'Kassenbonus einfach erklärt: Definition, IKK-Beispiel bis zu 1.155 EUR und wie dein Bonus zum Zuschuss für deinen Zusatzschutz wird.',
+    canonical: 'https://healio.de/blog/kassenbonus-was-ist-drin',
+    lang: 'de',
+  },
+  {
+    path: '/blog/krankenkasse-wechseln-laufende-behandlung',
+    title: 'Krankenkasse wechseln: Was passiert mit laufenden Behandlungen? | Healio',
+    description: 'Krankenkasse wechseln und trotzdem Leistungen, Genehmigungen und Hilfsmittel behalten: Was du vorher klären solltest.',
+    canonical: 'https://healio.de/blog/krankenkasse-wechseln-laufende-behandlung',
+    lang: 'de',
+  },
+  {
+    path: '/blog/heilpraktiker-kosten-bonus-finanziert',
+    title: 'Heilpraktiker-Kosten: Kassenbonus finanziert Zusatzversicherung | Healio',
+    description: 'Heilpraktiker sind Selbstzahlerleistung. So finanziert eine ambulante Zusatzversicherung den Beitrag, und dein Kassenbonus kann ihn zurückholen.',
+    canonical: 'https://healio.de/blog/heilpraktiker-kosten-bonus-finanziert',
+    lang: 'de',
+  },
+  {
+    path: '/blog/zahnersatz-beitrag-vom-bonus',
+    title: 'Zahnersatz: Beitrag der Zahnzusatzversicherung vom Bonus tragen | Healio',
+    description: 'Zahnersatz kostet mehr, als die Kasse zahlt. Zahnzusatz ab rund 10 EUR im Monat, und dein Kassenbonus kann den Beitrag ausgleichen.',
+    canonical: 'https://healio.de/blog/zahnersatz-beitrag-vom-bonus',
+    lang: 'de',
+  },
+  {
+    path: '/blog/ikk-classic-bonus-schritt-fuer-schritt',
+    title: 'IKK classic Bonus Schritt für Schritt | Healio',
+    description: 'So holst du den IKK-classic-Bonus konkret ab: passende Aktivitäten, nötige Nachweise, Einreichfrist und wie du die Verwendung wählst.',
+    canonical: 'https://healio.de/blog/ikk-classic-bonus-schritt-fuer-schritt',
+    lang: 'de',
+  },
+  {
+    path: '/blog/bkv-und-kassenbonus-fuer-arbeitgeber',
+    title: 'Für Arbeitgeber: bKV und Kassenbonus als Paket | Healio',
+    description: 'bKV als Sachbezug und der private Kassenbonus der Mitarbeiter ergänzen sich. So erklären Sie das Paket verständlich, ohne Mehraufwand für HR.',
+    canonical: 'https://healio.de/blog/bkv-und-kassenbonus-fuer-arbeitgeber',
+    lang: 'de',
+  },
+  {
+    path: '/blog/kassenbonus-schwangerschaft-vorsorge',
+    title: 'Kassenbonus in der Schwangerschaft: Mutterschaftsvorsorge | Healio',
+    description: 'Warum Schwangere mehr Kassenbonus bekommen, welche IKK-Positionen zählen und wie der Zuschuss deinen Zusatzschutz mitfinanziert.',
+    canonical: 'https://healio.de/blog/kassenbonus-schwangerschaft-vorsorge',
+    lang: 'de',
+  },
+  {
+    path: '/blog/hebammen-gesundheitsbudget-erklaeren',
+    title: 'Für Hebammen: Gesundheitsbudget werdenden Eltern erklären | Healio',
+    description: 'Was du als Hebamme zum Gesundheitsbudget sagen darfst, ohne zu beraten: bar bezahlte Leistungen, das Zeitfenster fürs Kind, dein Nutzen.',
+    canonical: 'https://healio.de/blog/hebammen-gesundheitsbudget-erklaeren',
+    lang: 'de',
+  },
 
   // === ENGLISCH ===
   {
