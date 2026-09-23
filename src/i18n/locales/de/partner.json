@@ -12,6 +12,10 @@
     "videoPlayLabel": "Erklärvideo starten",
     "videoFallback": "Dein Browser unterstützt kein Video."
   },
+  "leitfadenHint": {
+    "lead": "Erst lesen?",
+    "cta": "Hol dir den Leitfaden."
+  },
   "proof": {
     "ariaLabel": "Die Rollen im Healio-Partnerkonzept",
     "items": [

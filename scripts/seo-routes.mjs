@@ -502,6 +502,62 @@ export const seoRoutes = [
     canonical: 'https://healio.de/blog/healio-konzept-fuer-hebammen',
     lang: 'de',
   },
+  {
+    path: '/blog/kassenbonus-was-ist-drin',
+    title: 'Kassenbonus: Was ist das, und wie viel ist wirklich drin? | Healio',
+    description: 'Kassenbonus einfach erklärt: Definition, IKK-Beispiel bis zu 1.155 EUR und wie dein Bonus zum Zuschuss für deinen Zusatzschutz wird.',
+    canonical: 'https://healio.de/blog/kassenbonus-was-ist-drin',
+    lang: 'de',
+  },
+  {
+    path: '/blog/krankenkasse-wechseln-laufende-behandlung',
+    title: 'Krankenkasse wechseln: Was passiert mit laufenden Behandlungen? | Healio',
+    description: 'Krankenkasse wechseln und trotzdem Leistungen, Genehmigungen und Hilfsmittel behalten: Was du vorher klären solltest.',
+    canonical: 'https://healio.de/blog/krankenkasse-wechseln-laufende-behandlung',
+    lang: 'de',
+  },
+  {
+    path: '/blog/heilpraktiker-kosten-bonus-finanziert',
+    title: 'Heilpraktiker-Kosten: Kassenbonus finanziert Zusatzversicherung | Healio',
+    description: 'Heilpraktiker sind Selbstzahlerleistung. So finanziert eine ambulante Zusatzversicherung den Beitrag, und dein Kassenbonus kann ihn zurückholen.',
+    canonical: 'https://healio.de/blog/heilpraktiker-kosten-bonus-finanziert',
+    lang: 'de',
+  },
+  {
+    path: '/blog/zahnersatz-beitrag-vom-bonus',
+    title: 'Zahnersatz: Beitrag der Zahnzusatzversicherung vom Bonus tragen | Healio',
+    description: 'Zahnersatz kostet mehr, als die Kasse zahlt. Zahnzusatz ab rund 10 EUR im Monat, und dein Kassenbonus kann den Beitrag ausgleichen.',
+    canonical: 'https://healio.de/blog/zahnersatz-beitrag-vom-bonus',
+    lang: 'de',
+  },
+  {
+    path: '/blog/ikk-classic-bonus-schritt-fuer-schritt',
+    title: 'IKK classic Bonus Schritt für Schritt | Healio',
+    description: 'So holst du den IKK-classic-Bonus konkret ab: passende Aktivitäten, nötige Nachweise, Einreichfrist und wie du die Verwendung wählst.',
+    canonical: 'https://healio.de/blog/ikk-classic-bonus-schritt-fuer-schritt',
+    lang: 'de',
+  },
+  {
+    path: '/blog/bkv-und-kassenbonus-fuer-arbeitgeber',
+    title: 'Für Arbeitgeber: bKV und Kassenbonus als Paket | Healio',
+    description: 'bKV als Sachbezug und der private Kassenbonus der Mitarbeiter ergänzen sich. So erklären Sie das Paket verständlich, ohne Mehraufwand für HR.',
+    canonical: 'https://healio.de/blog/bkv-und-kassenbonus-fuer-arbeitgeber',
+    lang: 'de',
+  },
+  {
+    path: '/blog/kassenbonus-schwangerschaft-vorsorge',
+    title: 'Kassenbonus in der Schwangerschaft: Mutterschaftsvorsorge | Healio',
+    description: 'Warum Schwangere mehr Kassenbonus bekommen, welche IKK-Positionen zählen und wie der Zuschuss deinen Zusatzschutz mitfinanziert.',
+    canonical: 'https://healio.de/blog/kassenbonus-schwangerschaft-vorsorge',
+    lang: 'de',
+  },
+  {
+    path: '/blog/hebammen-gesundheitsbudget-erklaeren',
+    title: 'Für Hebammen: Gesundheitsbudget werdenden Eltern erklären | Healio',
+    description: 'Was du als Hebamme zum Gesundheitsbudget sagen darfst, ohne zu beraten: bar bezahlte Leistungen, das Zeitfenster fürs Kind, dein Nutzen.',
+    canonical: 'https://healio.de/blog/hebammen-gesundheitsbudget-erklaeren',
+    lang: 'de',
+  },
 
   // === ENGLISCH ===
   {
@@ -708,11 +764,39 @@ export const seoRoutes = [
     hreflang: { de: 'https://healio.de/datenschutz', en: 'https://healio.de/en/privacy' },
   },
 
+  {
+    path: '/partner/leitfaden',
+    title: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen | Healio',
+    description: 'Kostenloser Leitfaden für Naturheilpraxen: wie aus Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren werden und wie der Ablauf in fünf Schritten aussieht.',
+    canonical: 'https://healio.de/partner/leitfaden',
+    keywords: 'Leitfaden Naturheilpraxis, Gesundheitsbudget Praxis, Therapieabbruch verhindern, Selbstzahler Heilpraktiker, Kassenbonus Zusatzversicherung',
+    lang: 'de',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://healio.de/partner/leitfaden#webpage',
+      url: 'https://healio.de/partner/leitfaden',
+      name: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen',
+      description: 'Kostenloser Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus Kassenbonus und Zusatzschutz.',
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': 'https://healio.de/#website' },
+      about: { '@id': 'https://healio.de/#organization' },
+    },
+  },
+
   // === FUNKTIONS- UND KAMPAGNENSEITEN (nicht für den Index bestimmt) ===
   // Diese Routen existieren im Router, sollen aber nicht in die Google-Suche.
   // Ohne eigenen Eintrag liefert der Vercel-Catch-all sonst die Startseite
   // samt Startseiten-Canonical aus -> Search Console meldet
   // "Alternative Seite mit richtigem kanonischen Tag".
+  {
+    path: '/partner/leitfaden/danke',
+    title: 'Dein Leitfaden ist da | Healio',
+    description: 'Bestätigungsseite nach der Anforderung des Praxis-Leitfadens. Download des PDF und Terminwahl für den Praxis-Check.',
+    canonical: 'https://healio.de/partner/leitfaden/danke',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
   {
     path: '/lebenshilfe',
     title: 'Betriebliche Vorsorge für die Lebenshilfe | Healio',
@@ -783,6 +867,30 @@ export const seoRoutes = [
     title: 'Praxis-Checkliste für Zahnarztpraxen | Healio',
     description: 'B2B-Arbeitsunterlage mit fünf Konzeptgrenzen für sachliche Patienteninformation in Zahnarztpraxen.',
     canonical: 'https://healio.de/zahnaerzte/praxis-checkliste',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    path: '/unternehmen/team-vorteil',
+    title: 'Das Geschenk an Ihre Belegschaft, das Sie nichts kostet | Healio',
+    description: 'Kostenloses E-Book für Arbeitgeber: Was in der gesetzlichen Krankenkasse Ihrer Mitarbeitenden bereitliegt und wie Sie es ihnen zugänglich machen, ohne Budget einzusetzen.',
+    canonical: 'https://healio.de/unternehmen/team-vorteil',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    path: '/heilberufe-vorsorge/praxis-material',
+    title: 'Wenn Patienten an den Kosten scheitern | Material für Praxen | Healio',
+    description: 'Kostenloses E-Book für Praxen in Heilberufen: Was Sie zur Finanzierungsfrage sagen dürfen, ohne zu beraten, und wie Sie Therapieabbrüche aus Kostengründen seltener machen.',
+    canonical: 'https://healio.de/heilberufe-vorsorge/praxis-material',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    path: '/zahnaerzte/praxis-material',
+    title: 'Nach dem Heil- und Kostenplan wird es still | Material für Zahnarztpraxen | Healio',
+    description: 'Kostenloses E-Book für Zahnarztpraxen zur wirtschaftlichen Aufklärung beim Eigenanteil, mit klarer Rollentrennung zwischen Praxis und Versicherungsberatung.',
+    canonical: 'https://healio.de/zahnaerzte/praxis-material',
     lang: 'de',
     robots: 'noindex, nofollow',
   },

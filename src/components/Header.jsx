@@ -42,6 +42,7 @@ const Header = () => {
     '/datenschutz', '/en/privacy',
     '/erstinformation', '/en/initial-information',
     '/zahnaerzte/praxis-checkliste',
+    '/partner/leitfaden',
     '/konto-loeschen',
     '/schwangerschaft',
     '/blog', '/en/blog',

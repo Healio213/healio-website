@@ -134,6 +134,9 @@ const fieldLimits = [
   ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="email"', 254],
   ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="animalType"', 120],
   ['src/components/sections/veterinary/VeterinaryContact.jsx', 'name="age"', 40],
+  ['src/components/sections/partner/PraxisLeitfadenForm.jsx', 'name="firstName"', 80],
+  ['src/components/sections/partner/PraxisLeitfadenForm.jsx', 'name="email"', 254],
+  ['src/components/sections/partner/PraxisLeitfadenForm.jsx', 'name="phone"', 40],
 ];
 
 for (const [path, marker, maxLength] of fieldLimits) {

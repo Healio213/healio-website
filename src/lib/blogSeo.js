@@ -16,6 +16,14 @@ export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'osteopathie-krankenkasse-2026': 'https://healio.de/images/hero-ambulant.webp',
   'ikk-classic-bonus-700-euro': 'https://healio.de/images/kassenboost-bridge-og.png',
   'heilpraktiker-kosten-guide-2026': 'https://healio.de/images/hero-ambulant.webp',
+  'kassenbonus-was-ist-drin': 'https://healio.de/images/kassenboost-bridge-og.png',
+  'krankenkasse-wechseln-laufende-behandlung': 'https://healio.de/images/hero-ambulant.webp',
+  'heilpraktiker-kosten-bonus-finanziert': 'https://healio.de/images/video-partner-thumb.jpg',
+  'zahnersatz-beitrag-vom-bonus': 'https://healio.de/images/erklaervideo-zahn-poster.jpg',
+  'ikk-classic-bonus-schritt-fuer-schritt': 'https://healio.de/images/kassenboost-bridge-og.png',
+  'bkv-und-kassenbonus-fuer-arbeitgeber': 'https://healio.de/images/hero-unternehmen-b2b.png',
+  'kassenbonus-schwangerschaft-vorsorge': 'https://healio.de/images/hero-hebammen.webp',
+  'hebammen-gesundheitsbudget-erklaeren': 'https://healio.de/images/hero-hebammen.webp',
 });
 
 const RELATED_LINKS = {
@@ -93,6 +101,46 @@ const RELATED_LINKS = {
     { href: '/ambulant', label: 'Ambulanten Zusatzschutz vergleichen' },
     { href: '/blog/gesundheitsbudget-3000-euro', label: 'Bis zu 3.000 EUR Gesundheitsbudget verstehen' },
     { href: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026', label: 'Tarife für Heilpraktiker-Leistungen vergleichen' },
+  ],
+  'kassenbonus-was-ist-drin': [
+    { href: '/kassenbonus', label: 'Kassenbonus auf der Healio-Seite verstehen' },
+    { href: '/blog/ikk-classic-bonus-schritt-fuer-schritt', label: 'IKK-Bonus Schritt für Schritt beantragen' },
+    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Gesundheitsbudget von bis zu 3.000 EUR verstehen' },
+  ],
+  'krankenkasse-wechseln-laufende-behandlung': [
+    { href: '/kassenbonus', label: 'Kassenbonus realistisch einordnen lassen' },
+    { href: '/ambulant', label: 'Ambulanten Zusatzschutz vor dem Wechsel prüfen' },
+    { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus: Was wirklich drin ist' },
+  ],
+  'heilpraktiker-kosten-bonus-finanziert': [
+    { href: '/ambulant', label: 'Ambulanten Zusatzschutz für Heilpraktiker ansehen' },
+    { href: '/blog/heilpraktiker-kosten-guide-2026', label: 'Typische Heilpraktiker-Kosten vergleichen' },
+    { href: '/blog/ikk-classic-bonus-schritt-fuer-schritt', label: 'IKK-Bonus Schritt für Schritt beantragen' },
+  ],
+  'zahnersatz-beitrag-vom-bonus': [
+    { href: '/zahn', label: 'Zahnzusatzversicherung nach Ausgangslage prüfen' },
+    { href: '/blog/zahnzusatzversicherung-trotz-angeratener-behandlung', label: 'Sofortschutz bei angeratener Behandlung verstehen' },
+    { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus als Zuschuss zum Beitrag nutzen' },
+  ],
+  'ikk-classic-bonus-schritt-fuer-schritt': [
+    { href: '/kassenbonus', label: 'Kassenbonus auf der Healio-Seite einordnen' },
+    { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus: Was ist wirklich drin?' },
+    { href: '/ambulant', label: 'Zuschuss für ambulanten Zusatzschutz nutzen' },
+  ],
+  'bkv-und-kassenbonus-fuer-arbeitgeber': [
+    { href: '/unternehmen', label: 'Healio-Vorsorge-Check für Unternehmen ansehen' },
+    { href: '/kassenbonus', label: 'Kassenbonus für Mitarbeiter erklärt finden' },
+    { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus einfach erklärt für Mitarbeiter' },
+  ],
+  'kassenbonus-schwangerschaft-vorsorge': [
+    { href: '/schwangerschaft', label: 'Healio-Seite zur Schwangerschaft ansehen' },
+    { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus: Was wirklich drin ist' },
+    { href: '/blog/ikk-classic-bonus-schritt-fuer-schritt', label: 'IKK-Bonus Schritt für Schritt beantragen' },
+  ],
+  'hebammen-gesundheitsbudget-erklaeren': [
+    { href: '/hebammen', label: 'Healio-Konzept für Hebammen ansehen' },
+    { href: '/blog/healio-konzept-fuer-hebammen', label: 'Das Healio-Konzept für Hebammen lesen' },
+    { href: '/blog/kassenbonus-schwangerschaft-vorsorge', label: 'Kassenbonus in der Schwangerschaft verstehen' },
   ],
 };
 
