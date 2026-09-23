@@ -557,6 +557,16 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               {copy.bonus.mini.map((item) => <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-sm text-slate-200">{item}</span>)}
             </div>
             <p className="mt-6 max-w-2xl border-l-2 border-home-mint/50 pl-4 text-sm leading-6 text-slate-400">{copy.bonus.disclosure}</p>
+            {language !== 'en' && (
+              /* Ein Satz mit Link auf die IKK-Bonus-Landingpage, damit die
+                 Positionen und Nachweise nachlesbar sind. Kein zweiter Button. */
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-400">
+                Alle bonusfähigen Positionen der IKK classic mit Beträgen, Nachweisen und Fristen stehen im{' '}
+                <Link to="/ratgeber/ikk-classic-bonusprogramm-2026" className="font-bold text-white underline underline-offset-4 hover:text-home-mint-active">
+                  Ratgeber zum Bonusprogramm 2026
+                </Link>.
+              </p>
+            )}
             <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">
               {copy.bonus.cta}
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />

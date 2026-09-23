@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowRight,
@@ -232,6 +233,16 @@ const ZahnPage = () => {
               </div>
             </div>
             <p className="mt-6 text-sm leading-6 text-slate-500">{content.paths.footer}</p>
+            {lang === 'de' && (
+              /* Vertiefung zum Thema Zahnluecke. Bewusst nur ein Satz mit
+                 einem Link, kein zweiter Button neben der Tarifweiche. */
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                Eine nicht ersetzte Zahnlücke schließt nicht jeden Weg: Welcher Versicherer bis zu drei fehlende Zähne annimmt und warum angeratener Ersatz eine andere Frage ist, steht im Ratgeber{' '}
+                <Link to="/ratgeber/zahnzusatzversicherung-fehlender-zahn" className="font-bold underline underline-offset-4 hover:text-[#07111f]">
+                  Zahnzusatzversicherung bei fehlendem Zahn
+                </Link>.
+              </p>
+            )}
             <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-8 rounded-[1.6rem] border border-[#dfe8e3] bg-white" />
           </div>
         </section>

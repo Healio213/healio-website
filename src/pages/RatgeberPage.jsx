@@ -34,7 +34,16 @@ const RatgeberPage = () => (
         <ul className="mt-14 space-y-10">
           {ratgeberArticles.map((entry) => (
             <li key={entry.slug} className="border-t border-slate-200 pt-8">
-              <h2 className="font-display text-xl font-extrabold leading-snug text-[#07111f] sm:text-2xl">
+              {/* Das Advertorial bleibt in der Liste, muss aber als Anzeige
+                  erkennbar sein. Organische Artikel zeigen die Lesezeit. */}
+              <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+                {entry.kind === 'advertorial'
+                  ? 'Anzeige'
+                  : entry.readingTimeMinutes
+                    ? `Ratgeber · Lesezeit etwa ${entry.readingTimeMinutes} Minuten`
+                    : 'Ratgeber'}
+              </p>
+              <h2 className="mt-3 font-display text-xl font-extrabold leading-snug text-[#07111f] sm:text-2xl">
                 <Link to={getRatgeberPath(entry.slug)} className="hover:text-[#25c990]">
                   {entry.listTitle}
                 </Link>

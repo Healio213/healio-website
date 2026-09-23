@@ -4,6 +4,38 @@
  * korrekten Meta-Tags pro Seite zu generieren.
  */
 
+import { getRatgeberArticle } from '../src/content/ratgeber/index.js';
+import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
+
+/**
+ * Article- und FAQPage-Auszeichnung eines organischen Ratgeberartikels.
+ *
+ * Die Angaben kommen aus der Inhaltsdatei unter src/content/ratgeber/ und
+ * werden hier nicht noch einmal abgeschrieben. Der Artikel liefert damit
+ * schon im statisch ausgelieferten HTML seine Auszeichnung, unabhängig
+ * davon, ob eine Suchmaschine JavaScript ausführt. Nur Build-Skripte lesen
+ * diese Datei, der Browser-Bundle nicht.
+ */
+const ratgeberSchema = (slug) => {
+  const article = getRatgeberArticle(slug);
+  if (!article) throw new Error(`SEO: Ratgeberartikel fehlt im Inhaltsregister: ${slug}`);
+
+  const url = `https://healio.de/ratgeber/${slug}`;
+  const graph = [
+    createArticleSchema({
+      headline: article.headline,
+      description: article.metaDescription,
+      url,
+      datePublished: article.publishedAt || null,
+      dateModified: article.updatedAt || article.publishedAt || null,
+    }),
+  ];
+
+  if (article.faqs?.length) graph.push(createFAQSchema(article.faqs));
+
+  return graph;
+};
+
 export const seoRoutes = [
   // === DEUTSCH ===
   {
@@ -850,6 +882,41 @@ export const seoRoutes = [
       isPartOf: { '@id': 'https://healio.de/#website' },
       about: { '@id': 'https://healio.de/#organization' },
     },
+  },
+  {
+    // Organische, indexierte Ratgeberartikel. Titel und Beschreibung sind
+    // wortgleich mit metaTitle und metaDescription der jeweiligen
+    // Inhaltsdatei unter src/content/ratgeber/; test:ratgeber prueft das.
+    path: '/ratgeber/ikk-classic-bonusprogramm-2026',
+    title: 'IKK classic Bonusprogramm 2026: alle Positionen | Healio',
+    description: 'IKK classic Bonus 2026: alle Positionen mit Beträgen, Nachweisen und Fristen, plus die Rechnung, wie der dreifache Zuschuss den Beitrag senkt.',
+    canonical: 'https://healio.de/ratgeber/ikk-classic-bonusprogramm-2026',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('ikk-classic-bonusprogramm-2026'),
+  },
+  {
+    path: '/ratgeber/zahnzusatzversicherung-fehlender-zahn',
+    title: 'Zahnzusatzversicherung bei fehlendem Zahn | Healio',
+    description: 'Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.',
+    canonical: 'https://healio.de/ratgeber/zahnzusatzversicherung-fehlender-zahn',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('zahnzusatzversicherung-fehlender-zahn'),
+  },
+  {
+    path: '/ratgeber/schwanger-zusatzversicherung',
+    title: 'Schwanger: welcher Zusatzschutz jetzt noch geht | Healio',
+    description: 'Schwanger ohne Zusatzschutz? Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
+    canonical: 'https://healio.de/ratgeber/schwanger-zusatzversicherung',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('schwanger-zusatzversicherung'),
+  },
+  {
+    path: '/ratgeber/schwangerschaft-worauf-achten',
+    title: 'Schwanger: worauf du jetzt achten solltest | Healio',
+    description: 'Vorsorge, Mutterpass, Mutterschutz und das Geld: was die Kasse zahlt, was du selbst trägst und warum der Kassenbonus jetzt am höchsten ist.',
+    canonical: 'https://healio.de/ratgeber/schwangerschaft-worauf-achten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('schwangerschaft-worauf-achten'),
   },
   {
     // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:

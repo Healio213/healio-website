@@ -149,6 +149,7 @@ export default function BenefitFunnelPage() {
             <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
             <p className="mt-3 text-sm text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin.</p>
             <p className="mt-3 text-sm text-home-slate">Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
+            <p className="mt-3 text-sm text-home-slate">Zum Nachlesen: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
           </div>
         </section>
       </div>

@@ -14,10 +14,21 @@
  */
 
 import { article as krankenkassenBonusZusatzversicherung } from './krankenkassen-bonus-zusatzversicherung.js';
+import { article as ikkClassicBonusprogramm2026 } from './ikk-classic-bonusprogramm-2026.js';
+import { article as zahnzusatzversicherungFehlenderZahn } from './zahnzusatzversicherung-fehlender-zahn.js';
+import { article as schwangerZusatzversicherung } from './schwanger-zusatzversicherung.js';
+import { article as schwangerschaftWoraufAchten } from './schwangerschaft-worauf-achten.js';
 
 export const RATGEBER_BASE_PATH = '/ratgeber';
 
+// Reihenfolge im Array ist die Reihenfolge in der Uebersicht /ratgeber.
+// Die organischen Ratgeberartikel stehen vorn, das Advertorial bleibt in
+// der Liste, wird dort aber als Anzeige gekennzeichnet.
 export const ratgeberArticles = [
+  ikkClassicBonusprogramm2026,
+  zahnzusatzversicherungFehlenderZahn,
+  schwangerZusatzversicherung,
+  schwangerschaftWoraufAchten,
   krankenkassenBonusZusatzversicherung,
 ];
 
