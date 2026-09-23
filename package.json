@@ -41,6 +41,7 @@
     "test:appointment": "node --test scripts/check-appointment-booking.mjs && node scripts/check-appointment-rendered.mjs",
     "test:pregnancy": "node --test scripts/check-pregnancy-bonus-model.mjs && node scripts/check-pregnancy-integration.mjs && node scripts/check-pregnancy-bonus-rendered.mjs && node scripts/check-bruno-ambulant-rendered.mjs && node scripts/check-bruno-final-flow.mjs",
     "test:privacy": "node scripts/check-privacy-consent-contract.mjs",
+    "test:leitfaden": "node scripts/check-praxis-leitfaden-contract.mjs",
     "test:ratgeber": "node scripts/check-ratgeber-contract.mjs",
     "test:whatsapp": "node scripts/check-whatsapp-contact-rendered.mjs",
     "test:contact-ui": "node scripts/check-contact-ui-contract.mjs",

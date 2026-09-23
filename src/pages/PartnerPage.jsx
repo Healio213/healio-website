@@ -122,6 +122,15 @@ const PartnerPage = () => {
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
+                <p className="mt-3 text-xs sm:text-sm text-white/75">
+                  {t('leitfadenHint.lead')}{' '}
+                  <Link
+                    to="/partner/leitfaden"
+                    className="font-semibold text-[#75e6bf] underline underline-offset-4"
+                  >
+                    {t('leitfadenHint.cta')}
+                  </Link>
+                </p>
               </motion.div>
             </div>
           </div>

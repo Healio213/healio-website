@@ -71,6 +71,8 @@ doppelte Conversions werden.
 | `src/lib/sdk-url.js` | RechnerStart (Beitragsrechner), Lead (Bonus sichern) |
 | `src/pages/ZahnPage.jsx` | RechnerStart auf /zahn |
 | `src/services/emailjsService.js` | Lead bei abgeschicktem Kontaktformular |
+| `src/components/sections/partner/PraxisLeitfadenForm.jsx` | Lead bei angefordertem Praxis-Leitfaden |
+| `api/partner-lead.js` | Speichert die Leitfaden-Anfrage, sendet nichts an Meta |
 | `src/components/CalendlyEmbed.jsx`, `src/components/ExternalProviderGate.jsx` | Lead beim Terminlink |
 | `scripts/check-privacy-consent-contract.mjs` | Vertragstest, `npm run test:privacy` |
 | `vercel.json` | CSP (Report-Only) um die Meta-Hosts erweitert |
@@ -86,9 +88,10 @@ Serverfunktion an.
 | Ereignis | Typ | Wann | Parameter | Auslöser im Code |
 |---|---|---|---|---|
 | `PageView` | Standard | Bei jedem Routenwechsel | keine | `src/App.jsx` |
-| `ViewContent` | Standard | Auf /zahn, /ambulant, /partner (inkl. /en-Pendants) | `content_name` = `zahn` \| `ambulant` \| `partner` | `src/App.jsx` |
+| `ViewContent` | Standard | Auf /zahn, /ambulant, /partner, /ratgeber, /partner/leitfaden (inkl. /en-Pendants) | `content_name` = `zahn` \| `ambulant` \| `partner` \| `ratgeber` \| `praxis-leitfaden` | `src/App.jsx` |
 | `RechnerStart` | Custom | Klick auf den primären Rechner-CTA auf /ambulant und /zahn | keine | `trackSdkClick()`, `scrollToCheck()` in `ZahnPage.jsx` |
 | `Lead` | Standard | Kontaktformular abgeschickt, Terminlink geklickt, „Bonus sichern“ geklickt | keine | `emailjsService`, `trackIkkClick()`, `CalendlyEmbed`, `ExternalProviderGate` |
+| `Lead` | Standard | Praxis-Leitfaden auf /partner/leitfaden angefordert | `content_name` = `praxis-leitfaden` | `PraxisLeitfadenForm.jsx` |
 
 ### Was NICHT übertragen wird
 
@@ -150,7 +153,7 @@ Für Meta gilt eine andere Abwägung, weil drei Bedingungen zusammenkommen:
 1. **Nur Ereignisnamen, keine Inhalte.** Übertragen wird „jemand hat /zahn
    aufgerufen“ bzw. „jemand hat den Rechner gestartet“. Die Antworten des
    Zahn-Checks verlassen das Gerät nie. Technisch abgesichert: der einzige
-   erlaubte Parameter ist `content_name` mit einem von drei festen Werten,
+   erlaubte Parameter ist `content_name` mit einem von fünf festen Werten,
    und `DentalZahnCheck.jsx` hat keinerlei Verbindung zu diesem Modul.
 2. **Ausdrückliche, getrennte Einwilligung.** Der Zweck `marketing` ist ein
    eigener Haken mit eigenem Text, der genau das zusagt: „Antworten aus
@@ -272,6 +275,7 @@ Nach den ersten Tagen mit Daten anzulegen unter Ads Manager → Zielgruppen →
 | **Zahn-Besucher** | `ViewContent` mit `content_name` = `zahn`, alternativ URL enthält `/zahn` | 30 Tage | Zahnzusatz-Anzeigen an Leute, die die Seite schon kennen |
 | **Ambulant-Besucher** | `ViewContent` mit `content_name` = `ambulant`, alternativ URL enthält `/ambulant` | 30 Tage | Gesundheitsbudget-Story vertiefen |
 | **RechnerStart ohne Lead** | Einschließen: `RechnerStart`. Ausschließen: `Lead` | 14 Tage Einschluss, 14 Tage Ausschluss | Die wertvollste Gruppe: hat gerechnet, aber nicht angefragt. Kurzes Fenster, weil die Kaufabsicht schnell abkühlt |
+| **Leitfaden angefordert, kein Termin** | Einschließen: `Lead` mit `content_name` = `praxis-leitfaden`, alternativ URL enthält `/partner/leitfaden/danke`. Ausschließen: `Lead` ohne `content_name`, also Terminlink und Kontaktformular | 30 Tage Einschluss, 30 Tage Ausschluss | Praxen, die den Leitfaden angefordert, aber noch keinen Praxis-Check gebucht haben. Die Anzeige knüpft an den Leitfaden an und lädt zum 30-Minuten-Gespräch |
 | **Video-Zuschauer 50 %** | Zielgruppentyp „Video“ → „Personen, die mindestens 50 % des Videos angesehen haben“ | 30 Tage | Aus Reichweitenvideos eine warme Gruppe bilden |
 
 Hinweise:
@@ -289,7 +293,8 @@ Hinweise:
 ## 6. Tests
 
 ```bash
-npm run test:privacy   # Vertragstest inkl. aller Meta-Regeln
+npm run test:privacy    # Vertragstest inkl. aller Meta-Regeln
+npm run test:leitfaden  # Vertragstest des Leitfaden-Funnels
 npm run lint
 npm run build
 ```
@@ -312,5 +317,5 @@ würde damit formal auf `SENSITIVE_PARAM_KEY` passen. Der Filter zielt jedoch
 auf Personennamen. `content_name` ist ein festes Schlüsselwort aus dem
 Meta-Schema und trägt keine Nutzerdaten. Der Test schneidet deshalb für genau
 diesen einen Schlüssel den Schema-Präfix `content_` ab und prüft zusätzlich,
-dass der Wertebereich auf die drei festen Seitenschlüssel geschlossen ist.
+dass der Wertebereich auf die fünf festen Seitenschlüssel geschlossen ist.
 Jeder andere Parameter wird ungefiltert gegen `SENSITIVE_PARAM_KEY` geprüft.

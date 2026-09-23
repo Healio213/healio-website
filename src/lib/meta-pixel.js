@@ -32,7 +32,12 @@ const META_EVENT_SET = new Set(META_EVENTS);
 // Einziger erlaubter Parameterschluessel. Er darf niemals auf den
 // SENSITIVE_PARAM_KEY-Filter aus analytics.js passen.
 export const META_ALLOWED_PARAM_KEYS = Object.freeze(new Set(['content_name']));
-export const META_PAGE_KEYS = Object.freeze(new Set(['zahn', 'ambulant', 'partner', 'ratgeber']));
+export const META_PAGE_KEYS = Object.freeze(new Set(['zahn', 'ambulant', 'partner', 'ratgeber', 'praxis-leitfaden']));
+
+// Seitenschluessel der Leitfaden-Strecke. Er beschreibt nur, dass jemand die
+// Optin-Seite gesehen oder den Leitfaden angefordert hat, nichts darueber
+// hinaus.
+export const META_LEITFADEN_KEY = 'praxis-leitfaden';
 
 // Seitenschluessel fuer ViewContent. Alles andere bleibt ohne ViewContent.
 const META_PAGE_KEY_BY_PATH = Object.freeze({
@@ -43,6 +48,7 @@ const META_PAGE_KEY_BY_PATH = Object.freeze({
   '/partner': 'partner',
   '/en/partner': 'partner',
   '/ratgeber': 'ratgeber',
+  '/partner/leitfaden': 'praxis-leitfaden',
 });
 
 // Der Ratgeber hat Unterseiten (Advertorials, spaeter organische Artikel).
@@ -349,8 +355,13 @@ export const trackMetaRechnerStart = () => {
   return emitMetaEvent('RechnerStart');
 };
 
-/** Abgeschickte Anfrage: Kontaktformular, Terminlink, "Bonus sichern". */
-export const trackMetaLead = () => emitMetaEvent('Lead');
+/**
+ * Abgeschickte Anfrage: Kontaktformular, Terminlink, "Bonus sichern",
+ * angeforderter Praxis-Leitfaden. Der optionale Parameter durchlaeuft
+ * dieselbe Wertpruefung wie jeder andere: nur content_name, nur ein fester
+ * Seitenschluessel.
+ */
+export const trackMetaLead = (params = {}) => emitMetaEvent('Lead', params);
 
 export const syncMetaConsent = (state = getConsentState()) => {
   if (!isBrowser() || !isMetaConfigured()) return false;

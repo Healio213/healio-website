@@ -708,11 +708,39 @@ export const seoRoutes = [
     hreflang: { de: 'https://healio.de/datenschutz', en: 'https://healio.de/en/privacy' },
   },
 
+  {
+    path: '/partner/leitfaden',
+    title: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen | Healio',
+    description: 'Kostenloser Leitfaden für Naturheilpraxen: wie aus Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren werden und wie der Ablauf in fünf Schritten aussieht.',
+    canonical: 'https://healio.de/partner/leitfaden',
+    keywords: 'Leitfaden Naturheilpraxis, Gesundheitsbudget Praxis, Therapieabbruch verhindern, Selbstzahler Heilpraktiker, Kassenbonus Zusatzversicherung',
+    lang: 'de',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://healio.de/partner/leitfaden#webpage',
+      url: 'https://healio.de/partner/leitfaden',
+      name: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen',
+      description: 'Kostenloser Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus Kassenbonus und Zusatzschutz.',
+      inLanguage: 'de-DE',
+      isPartOf: { '@id': 'https://healio.de/#website' },
+      about: { '@id': 'https://healio.de/#organization' },
+    },
+  },
+
   // === FUNKTIONS- UND KAMPAGNENSEITEN (nicht für den Index bestimmt) ===
   // Diese Routen existieren im Router, sollen aber nicht in die Google-Suche.
   // Ohne eigenen Eintrag liefert der Vercel-Catch-all sonst die Startseite
   // samt Startseiten-Canonical aus -> Search Console meldet
   // "Alternative Seite mit richtigem kanonischen Tag".
+  {
+    path: '/partner/leitfaden/danke',
+    title: 'Dein Leitfaden ist da | Healio',
+    description: 'Bestätigungsseite nach der Anforderung des Praxis-Leitfadens. Download des PDF und Terminwahl für den Praxis-Check.',
+    canonical: 'https://healio.de/partner/leitfaden/danke',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
   {
     path: '/lebenshilfe',
     title: 'Betriebliche Vorsorge für die Lebenshilfe | Healio',
