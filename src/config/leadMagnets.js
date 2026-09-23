@@ -33,7 +33,7 @@ export const LEAD_MAGNETS = {
     ebookFacts: 'PDF · kostenlos · kein Newsletter-Abo',
     problemTitle: 'Warum das jedes Jahr still verfällt',
     problemBody:
-      'Auf dem Kontoauszug fehlt nichts, was nie da war. Genau deshalb faellt es niemandem auf. Der Haken ist nicht die Bürokratie, der Haken ist, dass es niemand sagt.',
+      'Auf dem Kontoauszug fehlt nichts, was nie da war. Genau deshalb fällt es niemandem auf. Der Haken ist nicht die Bürokratie, der Haken ist, dass es niemand sagt.',
     contents: [
       'Hebel eins, der Beitrag: Der gesetzliche Leistungskatalog ist weitgehend derselbe, der Zusatzbeitrag nicht. Was das im Monat ausmacht und wie jeder es selbst nachsieht.',
       'Hebel zwei, das Bonusprogramm: Was dort anerkannt wird, steht in der Satzung der jeweiligen Kasse. Welche Nachweise zählen und welche nicht.',
@@ -50,7 +50,7 @@ export const LEAD_MAGNETS = {
     honesty: [
       'Was bei einer einzelnen Person ankommt, hängt von ihrer Kasse und ihren eigenen Aktivitäten ab. Pauschale Beträge nennt das E-Book deshalb nicht.',
       'Beitragsersparnis und Bonus sind zwei getrennte Dinge. Sie werden im E-Book nirgends zusammengerechnet.',
-      'Ob jemand die Kasse wechselt, entscheidet er selbst. Der Vergleich zeigt nur, welche Kasse für die eigene Situation am meisten hergibt. Wir fangen bei der größeren Betrachtung an, der Zusatzschutz kommt danach.',
+      'Das ist keine Aufforderung an Ihre Mitarbeitenden, die Kasse zu wechseln. Der Vergleich zeigt nur, welche Kasse für die eigene Situation am meisten hergibt, entscheiden tut jeder selbst. Wir fangen bei der größeren Betrachtung an, der Zusatzschutz kommt danach.',
     ],
     formTitle: 'E-Book anfordern',
     formNote: 'Sie bekommen den Link sofort auf dieser Seite. Wir melden uns nur, wenn Sie es wollen.',
@@ -76,7 +76,7 @@ export const LEAD_MAGNETS = {
       'Kostenloses E-Book für Praxen in Heilberufen: Was Sie zur Finanzierungsfrage sagen dürfen, ohne zu beraten, und wie Sie Therapieabbrüche aus Kostengründen seltener machen.',
     headline: 'Die Lücke in Ihrem Terminkalender hat selten mit Ihnen zu tun.',
     subline:
-      'Der Termin wird verschoben. Beim zweiten Mal kommt gar keine neue Anfrage mehr. Offen sagt das am Empfang niemand. Da heißt es „ich melde mich wieder“, und gemeint ist meistens „ich kann das gerade nicht mehr bezahlen“.',
+      'Der Termin wird verschoben. Beim zweiten Mal kommt gar keine neue Anfrage mehr. Offen sagt das am Empfang niemand. Da heißt es „ich melde mich wieder“, und gemeint ist oft „ich kann das gerade nicht mehr bezahlen“.',
     ebookTitle: 'Die Kostenfrage in der Praxis',
     ebookSubtitle: 'Was Sie sagen dürfen, ohne zu beraten, und wo Ihre Rolle endet',
     ebookFacts: 'PDF · kostenlos · kein Newsletter-Abo',
@@ -98,8 +98,8 @@ export const LEAD_MAGNETS = {
       'Hebammen, die ihre Familien außerhalb eines Wartezimmers begleiten',
     ],
     honesty: [
-      'Das E-Book macht Ihre Praxis nicht zur Beratungsstelle. Es zeigt, was Sie ohne Scheu sagen dürfen, und wo die Vertragsdetails beim Patienten und seinem Anbieter liegen. Ob er den Weg nutzt, entscheidet er. Ihn zu verschweigen, ist unsere gemeinsame Verantwortung.',
-      'Ein Zusatzschutz ist ein Vertrag mit monatlichem Beitrag und greift ab Vertragsbeginn, ohne Wartezeit. Eine danach neu begonnene Behandlung ist vom ersten Tag an mitversichert. Was vorher angefangen hat, wird nicht nacherstattet.',
+      'Das E-Book macht Ihre Praxis nicht zur Beratungsstelle. Es zeigt, was Sie ohne Scheu sagen dürfen, und wo die Vertragsdetails beim Patienten und seinem Anbieter liegen. Ob er den Weg nutzt, entscheidet er. Ihn zu verschweigen, wäre ein Versäumnis, für das wir gemeinsam geradestehen.',
+      'Ein Zusatzschutz ist ein Vertrag mit monatlichem Beitrag und greift ab Vertragsbeginn, ohne Wartezeit. Eine danach neu begonnene Behandlung ist im Rahmen des gewählten Tarifs vom ersten Tag an mitversichert. Gesundheitsfragen sind möglich. Was vorher angefangen hat, wird nicht nacherstattet.',
       'Was am Ende bei einem Patienten ankommt, hängt von seiner Kasse, seinem Tarif und seinen persönlichen Voraussetzungen ab.',
     ],
     formTitle: 'E-Book anfordern',

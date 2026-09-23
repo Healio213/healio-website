@@ -11,6 +11,9 @@ import { emailjsService } from '@/services/emailjsService';
  * Der Lead geht ueber die bestehende EmailJS-Strecke an info@healio.de.
  * Bewusst keine Brevo-Liste, damit keine gestoppte Automatisierung anspringt.
  */
+const CONSENT_TEXT =
+  'Ich möchte das E-Book erhalten und bin damit einverstanden, dass Healio mich dazu kontaktieren darf.';
+
 const LeadMagnetLanding = ({ config }) => {
   const [form, setForm] = useState({ name: '', email: '', company: '', consent: false });
   const [status, setStatus] = useState('idle');
@@ -33,6 +36,10 @@ const LeadMagnetLanding = ({ config }) => {
       setError('Bitte Name und E-Mail-Adresse angeben.');
       return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) {
+      setError('Bitte eine gültige E-Mail-Adresse angeben.');
+      return;
+    }
     if (!form.consent) {
       setError('Bitte bestätigen Sie die Einwilligung, damit wir Ihnen antworten dürfen.');
       return;
@@ -45,7 +52,7 @@ const LeadMagnetLanding = ({ config }) => {
           from_name: form.name,
           from_email: form.email,
           company: form.company,
-          message: `E-Book angefordert: ${config.ebookTitle}`,
+          message: `E-Book angefordert: ${config.ebookTitle}. Einwilligung erteilt am ${new Date().toLocaleString('de-DE')} (Text: "${CONSENT_TEXT}").`,
         },
         config.pageSource,
       );
@@ -55,8 +62,6 @@ const LeadMagnetLanding = ({ config }) => {
       setError('Das hat gerade nicht geklappt. Schreiben Sie uns bitte kurz an info@healio.de.');
     }
   };
-
-  const isGated = config.status === 'gesperrt';
 
   return (
     <>
@@ -85,13 +90,6 @@ const LeadMagnetLanding = ({ config }) => {
                 {config.headline}
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 sm:text-xl">{config.subline}</p>
-
-              {isGated && (
-                <p className="mt-7 max-w-2xl rounded-xl border border-amber-200/40 bg-amber-100/10 p-4 text-sm leading-6 text-amber-100">
-                  <strong>Fachlicher Arbeitsstand, noch keine berufsrechtliche Freigabe.</strong>{' '}
-                  {config.gateNote}
-                </p>
-              )}
 
               <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-7">
                 <h2 className="font-display text-xl font-extrabold tracking-tight text-white">
@@ -148,6 +146,9 @@ const LeadMagnetLanding = ({ config }) => {
                       <input
                         id="funnel-name"
                         type="text"
+                        required
+                        aria-invalid={Boolean(error) && !form.name.trim()}
+                        aria-describedby={error ? 'funnel-error' : undefined}
                         autoComplete="name"
                         value={form.name}
                         onChange={update('name')}
@@ -163,6 +164,9 @@ const LeadMagnetLanding = ({ config }) => {
                       <input
                         id="funnel-email"
                         type="email"
+                        required
+                        aria-invalid={Boolean(error) && !form.email.trim()}
+                        aria-describedby={error ? 'funnel-error' : undefined}
                         autoComplete="email"
                         value={form.email}
                         onChange={update('email')}
@@ -190,6 +194,8 @@ const LeadMagnetLanding = ({ config }) => {
                       <input
                         id="funnel-consent"
                         type="checkbox"
+                        required
+                        aria-describedby={error ? 'funnel-error' : undefined}
                         checked={form.consent}
                         onChange={update('consent')}
                         className="mt-1 h-5 w-5 shrink-0 rounded border-white/30 bg-white/10 text-[#25c990] focus:ring-[#25c990]"
@@ -205,7 +211,7 @@ const LeadMagnetLanding = ({ config }) => {
                     </label>
 
                     {error && (
-                      <p role="alert" className="rounded-xl border border-red-300/30 bg-red-500/10 p-3 text-sm leading-6 text-red-200">
+                      <p id="funnel-error" role="alert" className="rounded-xl border border-red-300/30 bg-red-500/10 p-3 text-sm leading-6 text-red-200">
                         {error}
                       </p>
                     )}
