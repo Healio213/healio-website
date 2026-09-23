@@ -40,6 +40,8 @@ const UnternehmenPage = React.lazy(() => import('@/pages/UnternehmenPage'));
 const EmployerBavCalculatorPage = React.lazy(() => import('@/pages/EmployerBavCalculatorPage'));
 const KassenBoostBridgePage = React.lazy(() => import('@/pages/KassenBoostBridgePage'));
 const PartnerPage = React.lazy(() => import('@/pages/PartnerPage'));
+const PraxisLeitfadenPage = React.lazy(() => import('@/pages/PraxisLeitfadenPage'));
+const PraxisLeitfadenDankePage = React.lazy(() => import('@/pages/PraxisLeitfadenDankePage'));
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
 const ZahnaerztePraxisChecklistePage = React.lazy(() => import('@/pages/ZahnaerztePraxisChecklistePage'));
@@ -175,6 +177,8 @@ function App() {
               <Route path="betriebliche-vorsorge" element={<Navigate to="/unternehmen" replace />} />
               <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
               <Route path="partner" element={<PartnerPage />} />
+              <Route path="partner/leitfaden" element={<PraxisLeitfadenPage />} />
+              <Route path="partner/leitfaden/danke" element={<PraxisLeitfadenDankePage />} />
               <Route path="hebammen" element={<HebammenPage />} />
               <Route path="zahnaerzte" element={<ZahnaerztePage />} />
               <Route path="zahnaerzte/praxis-checkliste" element={<ZahnaerztePraxisChecklistePage />} />

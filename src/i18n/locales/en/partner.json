@@ -12,6 +12,10 @@
     "videoPlayLabel": "Play explainer video",
     "videoFallback": "Your browser does not support video."
   },
+  "leitfadenHint": {
+    "lead": "Prefer to read first?",
+    "cta": "Get the guide (in German)."
+  },
   "proof": {
     "ariaLabel": "Responsibilities in the Healio partner concept",
     "items": [
