@@ -53,7 +53,7 @@ export default function PregnancyBonusExample() {
   const needPremium = 'Trage einen Beitrag im Beispiel ein, um den möglichen Ausgleich zu sehen.';
   const outputs = [
     ['Zuschusspotenzial', result.potential, 'Für anerkannte eigene Kosten, zum Beispiel den Beitrag für passenden Zusatzschutz.'],
-    ['Geldbonus', result.cash, 'Wahlweise statt des Zuschusses – nicht zusätzlich.'],
+    ['Geldbonus', result.cash, 'Wahlweise statt des Zuschusses, nicht zusätzlich.'],
     ['Anrechenbarer Zuschuss', result.applied, parsed.value === undefined ? needPremium : 'Höchstens so viel wie der zuschussfähige Beitrag im Beispiel.'],
     ['Verbleibender Eigenanteil', result.remaining, parsed.value === undefined ? needPremium : 'Dieser Teil des Beispielbeitrags bleibt nach dem Zuschuss übrig.'],
   ];
@@ -87,7 +87,7 @@ export default function PregnancyBonusExample() {
 
               <div className="mt-6">
                 <label htmlFor="eligiblePaidPremium" className="block font-semibold">Beitrag im Beispiel (optional, in EUR)</label>
-                <p id="premium-hint" className="text-sm text-home-slate">Zuschussfähiger Beitrag, der im selben Kalenderjahr tatsächlich gezahlt wird – bei einem späteren Start nur für die verbleibenden Monate.</p>
+                <p id="premium-hint" className="text-sm text-home-slate">Zuschussfähiger Beitrag, der im selben Kalenderjahr tatsächlich gezahlt wird, bei einem späteren Start nur für die verbleibenden Monate.</p>
                 <input id="eligiblePaidPremium" name="eligiblePaidPremium" type="text" inputMode="decimal" autoComplete="off" value={premium} onChange={(e) => setPremium(e.target.value)} aria-invalid={parsed.error ? 'true' : undefined} aria-describedby={parsed.error ? 'premium-hint premium-error' : 'premium-hint'} className={`${field} max-w-[12rem]`} />
                 {parsed.error && <p id="premium-error" className="mt-1 text-sm font-medium text-home-midnight">{parsed.error}</p>}
               </div>

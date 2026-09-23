@@ -11,8 +11,13 @@ const wrap = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
 
 const TOPICS = {
   pregnancy: {
-    path: '/schwangerschaft', title: 'Gut versorgt. Für dich und dein Baby.',
-    intro: 'In der Schwangerschaft möchtest du wissen, welche Versorgung zu dir passt. Wir helfen dir, zusätzliche Leistungen und passenden Zusatzschutz einzuordnen.',
+    path: '/schwangerschaft',
+    // Kopfzeile nach Eisert: Ergebnis, Bedingung, Einwand gleich vorweg.
+    title: 'Schwanger? Der Vorsorge-Topf greift jetzt noch.',
+    lead: 'Feinultraschall, Labortests wie Toxoplasmose oder Streptokokken, die Nackenfaltenmessung: Diese Selbstzahlerleistungen laufen über den ambulanten Vorsorge-Topf, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es in diesen Tarifen keine.',
+    leadSecondary: 'Den Beitrag kann dein Kassenbonus mittragen, weil bei der IKK classic jede Mutterschaftsvorsorge einzeln zählt. Wo es nicht mehr geht, sagen wir dir das weiter unten genauso deutlich.',
+    seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
+    seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     image: 'pregnancy', benefitTitle: 'Was ist dir jetzt wichtig?',
     benefits: [
       ['Zusätzliche Vorsorge verstehen', 'Ein Toxoplasmose-Test beim Frauenarzt? Kläre zuerst, ob deine Kasse die Untersuchung in deinem Fall übernimmt. Für mögliche Eigenkosten lohnt sich ein genauer Blick auf den Zusatzschutz.', 'prevention-vaccination'],
@@ -25,6 +30,37 @@ const TOPICS = {
   },
 
 };
+
+// Drei getrennte Wege, damit Anzeigen direkt auf den passenden Abschnitt zeigen können.
+const paths = [
+  {
+    id: 'ambulant', kicker: 'Ambulant, jetzt',
+    title: 'Vorsorge, die du gerade brauchst',
+    body: [
+      'Der Vorsorge-Topf der SDK AP-Tarife greift auch dann, wenn deine Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in diesen Tarifen nicht. Je nach Stufe werden 50 bis 100 Prozent erstattet, bei AP1 bis zu 500 EUR je zwei Kalenderjahre.',
+      'Bezahlt werden damit die Untersuchungen, die dir deine Praxis als Selbstzahlerleistung anbietet: Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken, Cytomegalie und die Nackenfaltenmessung.',
+      'Nicht dabei sind die Entbindung, Beschwerden wegen der Schwangerschaft und gendiagnostische Tests wie NIPT. Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten sind ausdrücklich versichert. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
+    ],
+  },
+  {
+    id: 'stationaer', kicker: 'Stationär, für die Zeit danach',
+    title: 'Diese Geburt ist zu spät',
+    body: [
+      'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
+      'Wofür der Tarif trotzdem zählt: für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann.',
+      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung, nach Ablauf der Wartezeit.',
+    ],
+  },
+  {
+    id: 'kind', kicker: 'Dein Kind',
+    title: 'Nachversicherung statt neuer Prüfung',
+    body: [
+      'Innerhalb von zwei Monaten nach der Geburt kann ein Neugeborenes in der Regel ohne erneute Gesundheitsprüfung in den Tarif aufgenommen werden, rückwirkend zum Tag der Geburt (§ 198 VVG). Voraussetzung ist ein bestehender Elternvertrag. Üblich ist, dass ein Elternteil bei der Geburt schon mindestens drei Monate versichert ist.',
+      'Nach § 198 VVG darf der Schutz des Kindes nicht weiter reichen als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind.',
+      'Rooming-in als Begleitperson steckt im Tarif deines Kindes, bis 16 Jahre zu 100 Prozent und bei jedem Klinikaufenthalt. Was dein Versicherer im Einzelnen verlangt, steht in den Bedingungen. Wir prüfen das vor dem Abschluss, nicht danach.',
+    ],
+  },
+];
 
 const commonFaq = [
   ['Habe ich hier schon etwas beantragt?', 'Nein. Diese Seite hilft dir bei der Orientierung. Einen Versicherungsantrag stellst du erst in der ausdrücklich gekennzeichneten Antragsstrecke. Deinen Kassenbonus beantragst du getrennt bei deiner Krankenkasse.'],
@@ -40,25 +76,71 @@ export default function BenefitFunnelPage() {
   const productPath = getPregnancyOnwardPath(location.search);
   const faq = [
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
+    ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
+    ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'Ambulant sind Komplikationen, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten ausdrücklich als Ausnahme vom Behandlungsausschluss versichert. Die Behandlung wegen der Schwangerschaft selbst und die Entbindung sind es nicht.'],
+    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenleistung rechnet deine Krankenkasse ab. Eine privat abrechnende Hebamme ist ein stationäres Thema und bei der Bayerischen in den Varianten Komfort und Prestige enthalten. Für diese Entbindung greift das wegen der besonderen Wartezeit nicht.'],
+    ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ...commonFaq,
   ];
   return (
     <>
-      <SEOHead title={`${config.title} | Healio`} description={config.intro}
+      <SEOHead title={config.seoTitle} description={config.seoDescription}
         canonicalUrl={`https://healio.de${config.path}`} robots="index, follow"
         schemaMarkup={createFAQSchema(faq.map(([question, answer]) => ({ question, answer })))} />
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
         <section className="overflow-hidden bg-home-ice pb-12 pt-28 md:pb-20 md:pt-36">
           <div className={`${wrap} grid items-center gap-6 md:grid-cols-[1.2fr_1fr] md:gap-12`}>
             <div>
-              <h1 className="max-w-[15ch] font-friendly text-[2.7rem] leading-[1.05] sm:text-6xl lg:text-7xl">{config.title}</h1>
-              <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-home-slate">{config.intro}</p>
-              <a href="#zusatzschutz" className={`mt-7 ${primary}`}>Passenden Zusatzschutz ansehen</a>
+              <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-6xl">{config.title}</h1>
+              <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-home-slate">{config.lead}</p>
+              <p className="mt-3 max-w-[52ch] leading-relaxed text-home-slate">{config.leadSecondary}</p>
+              <a href="#bonus-check" className={`mt-7 ${primary}`}>Bonus und Beitrag prüfen</a>
               <p className="mt-3 text-sm text-home-slate">Erst verstehen. Dann entscheiden. Ohne Terminpflicht.</p>
             </div>
             <img src={`/images/friendly-icons/${config.image}.webp`} alt="" width="420" height="420"
               className="mx-auto w-full max-w-[220px] object-contain md:max-w-[400px]" fetchPriority="high" />
+          </div>
+        </section>
+
+        <section id="geheimtipp" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
+          <h2 className="max-w-[24ch] font-friendly text-3xl md:text-4xl">Der Geheimtipp: jede Vorsorge zählt einzeln</h2>
+          <div className="mt-6 grid gap-8 md:grid-cols-[1.25fr_1fr] md:gap-14">
+            <div className="max-w-prose space-y-4 leading-relaxed text-home-slate">
+              <p>Im Bonusprogramm der IKK classic steht die Mutterschaftsvorsorge unter Nummer 09. Anders als fast alle anderen Positionen ist sie mehrfach im selben Jahr nachweisbar. Jede gesetzliche Untersuchung zählt als eigene Position, je 10 EUR Geldbonus oder 30 EUR Zuschusswert. Als Nachweis genügt dein Mutterpass, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen.</p>
+              <p>Nach der Geburt kommt die Rückbildungsgymnastik unter Nummer 44 dazu, mit 25 EUR Geldbonus oder 75 EUR Zuschusswert. Nur vier Positionen im ganzen Programm sind mehrfach anrechenbar, und Nummer 09 ist eine davon.</p>
+              <p>Genau deshalb liegt das Satzungsmaximum von bis zu 1.155 EUR vor allem in der Schwangerschaft in Reichweite. Das ist ein rechnerischer Höchstwert aus der Satzung, in dem alles gleichzeitig zutrifft, und keine Summe, die die IKK classic irgendwo zusagt. In der breiten Masse landen aktive Versicherte bei 400 bis 700 EUR im Jahr.</p>
+              <p>Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist dafür anrechenbar. Aus rechnerisch 405 EUR Zuschuss werden bei 240 EUR Jahresbeitrag also 240 EUR, nie mehr.</p>
+              <a href="#bonus-check" className={`mt-2 ${primary}`}>Bonus und Beitrag prüfen</a>
+            </div>
+            <div className="self-start rounded-2xl bg-home-ice p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold">Was du dafür brauchst</h3>
+              <ul className="mt-4 list-disc space-y-3 pl-5 leading-relaxed text-home-slate">
+                <li>Einen schriftlichen Nachweis je Untersuchung, der Mutterpass reicht aus</li>
+                <li>Ein eigenes Antragsfeld je Vorsorge, alle Maßnahmen im selben Kalenderjahr</li>
+                <li>Für das Bonusjahr 2026 den vollständigen Antrag bis zum 31.03.2027</li>
+              </ul>
+              <p className="mt-5 text-sm leading-relaxed text-home-slate">Wie viel bei dir zusammenkommt, hängt von deiner Krankenkasse ab und davon, was du tatsächlich nachweist. Die IKK classic prüft und erkennt an, nicht wir.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="drei-wege" className="scroll-mt-28 bg-home-ice py-12 md:py-20">
+          <div className={wrap}>
+            <h2 className="max-w-[26ch] font-friendly text-3xl md:text-4xl">Drei Wege, die du nicht verwechseln solltest</h2>
+            <p className="mt-4 max-w-prose leading-relaxed text-home-slate">Ambulant, stationär und der Schutz deines Kindes folgen jeweils eigenen Regeln. Wer das zusammenwirft, verkauft dir etwas, das bei dieser Geburt nicht leistet.</p>
+            <div className="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
+              {paths.map((item) => (
+                <div key={item.id} id={item.id} className="scroll-mt-28 rounded-2xl bg-white p-6 sm:p-8">
+                  <p className="font-semibold text-[#076046]">{item.kicker}</p>
+                  <h3 className="mt-2 font-display text-xl font-bold">{item.title}</h3>
+                  <div className="mt-3 space-y-3 leading-relaxed text-home-slate">
+                    {item.body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-7 max-w-prose leading-relaxed text-home-slate">Die vollständige Abgrenzung mit Tarifstufen und Belegen liest du im Ratgeber <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>. Wenn du gerade erst anfängst, hilft dir <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> mit Mutterpass, Hebammensuche und Fristen.</p>
           </div>
         </section>
 
