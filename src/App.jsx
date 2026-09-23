@@ -45,6 +45,9 @@ const PraxisLeitfadenDankePage = React.lazy(() => import('@/pages/PraxisLeitfade
 const HebammenPage = React.lazy(() => import('@/pages/HebammenPage'));
 const ZahnaerztePage = React.lazy(() => import('@/pages/ZahnaerztePage'));
 const ZahnaerztePraxisChecklistePage = React.lazy(() => import('@/pages/ZahnaerztePraxisChecklistePage'));
+const UnternehmenTeamVorteilPage = React.lazy(() => import('@/pages/UnternehmenTeamVorteilPage'));
+const HeilberufePraxisMaterialPage = React.lazy(() => import('@/pages/HeilberufePraxisMaterialPage'));
+const ZahnaerztePraxisMaterialPage = React.lazy(() => import('@/pages/ZahnaerztePraxisMaterialPage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
 const LebenshilfePage = React.lazy(() => import('@/pages/LebenshilfePage'));
 const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage'));
@@ -174,6 +177,7 @@ function App() {
               <Route path="kassenboost" element={<KassenBoostBridgePage />} />
               <Route path="unternehmen" element={<UnternehmenPage />} />
               <Route path="unternehmen/vorsorge-rechner" element={<EmployerBavCalculatorPage />} />
+              <Route path="unternehmen/team-vorteil" element={<UnternehmenTeamVorteilPage />} />
               <Route path="betriebliche-vorsorge" element={<Navigate to="/unternehmen" replace />} />
               <Route path="bav-bkv" element={<Navigate to="/unternehmen" replace />} />
               <Route path="partner" element={<PartnerPage />} />
@@ -182,7 +186,9 @@ function App() {
               <Route path="hebammen" element={<HebammenPage />} />
               <Route path="zahnaerzte" element={<ZahnaerztePage />} />
               <Route path="zahnaerzte/praxis-checkliste" element={<ZahnaerztePraxisChecklistePage />} />
+              <Route path="zahnaerzte/praxis-material" element={<ZahnaerztePraxisMaterialPage />} />
               <Route path="heilberufe-vorsorge" element={<HeilberufeVorsorgePage />} />
+              <Route path="heilberufe-vorsorge/praxis-material" element={<HeilberufePraxisMaterialPage />} />
               <Route path="lebenshilfe" element={<LebenshilfePage />} />
               <Route path="heilpraktiker-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="osteopathen-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />

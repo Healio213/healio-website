@@ -73,7 +73,9 @@
     "section5Title": "5. Contact for privacy questions",
     "section5Text": "If you have any questions about data protection, please send us an email:",
     "emailLabel": "Email:",
-    "lastUpdated": "Last updated: August 2026"
+    "lastUpdated": "Last updated: August 2026",
+    "ebookRequest": "E-book request",
+    "ebookRequestText": "On some pages you can request free materials (e-books). For this we collect your name, e-mail address and, optionally, the name of your practice or company. The details are transmitted to us via our e-mail service provider so that we can assign your request and contact you personally if you wish. The download is available immediately after submission. The legal basis is your consent under Art. 6(1)(a) GDPR, which you can withdraw at any time with effect for the future, for example by e-mail to info@healio.de. You will not be added to a newsletter list. The data is deleted as soon as it is no longer required for processing and no statutory retention obligations apply."
   },
   "erstinformation": {
     "shortTitle": "Initial information",
