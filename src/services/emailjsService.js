@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '@/config/emailjs';
 import { trackEvent } from '@/lib/analytics';
 import { trackMetaLead } from '@/lib/meta-pixel';
+import { readGoogleClickId, trackGoogleAdsLead } from '@/lib/google-ads';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
@@ -31,11 +32,18 @@ export const emailjsService = {
   sendEmail: async (formData, pageSource) => {
     try {
       const normalizedParams = emailjsService.normalizeData(formData, pageSource);
+      // Klick-Kennung der Google-Anzeige, damit Frank einen spaeteren
+      // Abschluss der richtigen Kampagne zuordnen kann. Sie wird nur
+      // mitgeschickt, wenn sie in der Adresszeile steht UND "marketing"
+      // erlaubt ist; ohne beides bleibt das Feld leer. Damit sie in der
+      // Mail sichtbar wird, muss die EmailJS-Vorlage {{gclid}} enthalten.
+      const gclid = readGoogleClickId();
       const response = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
         {
           ...normalizedParams,
+          gclid,
           to_email: 'info@healio.de',
         }
       );
@@ -45,6 +53,8 @@ export const emailjsService = {
       });
       // Meta erfaehrt nur, DASS eine Anfrage abgeschickt wurde.
       trackMetaLead();
+      // Google Ads ebenso: ein Conversion-Ereignis, sonst nichts.
+      trackGoogleAdsLead();
       return { success: true, response };
     } catch (error) {
       console.error('EmailJS Error:', error);

@@ -73,7 +73,7 @@
         },
         "osteopathie": {
           "name": "Osteopathie",
-          "info": "Bis zu 160 €/Jahr (4 Sitzungen à 40 €) über IKK Gesundheitskonto + SDK Zusatzbudget",
+          "info": "Bis zu 160 €/Jahr (4 Sitzungen à 40 €) als Zuschuss der IKK classic + SDK Zusatzbudget",
           "source": "both"
         },
         "akupunktur": {
@@ -152,7 +152,7 @@
         },
         "reiseimpfungen": {
           "name": "Reiseimpfungen",
-          "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus, Zuschuss über IKK Gesundheitskonto",
+          "info": "z. B. Gelbfieber, Hepatitis A/B, Typhus, Zuschuss der IKK classic",
           "source": "ikk"
         },
         "praeventionskurse": {
@@ -519,7 +519,7 @@
     "decrease": "Anzahl verringern",
     "increase": "Anzahl erhöhen",
     "trustNote": "Nachweise einfach digital einreichen",
-    "trustNoteDesc": "Für Bonusmaßnahmen ist ein von der IKK classic akzeptierter Nachweis nötig, zum Beispiel eine Bestätigung in der App, eine Teilnahmebescheinigung oder ein Stempel. Für den Zuschuss zum Versicherungsbeitrag weist du zusätzlich Versicherungsart, Zeitraum und gezahlten Beitrag nach.",
+    "trustNoteDesc": "Für Vorsorge und Zahnvorsorge genügt in der Regel der Eintrag im Antrag, also Praxis und Datum in der App oder ein Stempel auf dem Papierantrag. Für Sport, Kurse, Statuswerte wie BMI und Blutdruck, Schutzimpfungen und Mutterschaftsvorsorgen verlangt die IKK classic einen schriftlichen Nachweis, zum Beispiel eine Teilnahmebescheinigung, den Impfausweis oder den Mutterpass. Die Belege lohnen sich, denn jeder anerkannte Nachweis erhöht deinen Bonus. Für den Zuschuss zum Versicherungsbeitrag weist du zusätzlich Versicherungsart, Zeitraum und gezahlten Beitrag nach.",
     "officialSource": "Offizielles IKK-Infoblatt 2026 (Stand 04/2026)",
     "appleWatchNote": "Bonus für Apple Watch & Fitnessgeräte",
     "appleWatchNoteDesc": "Auch ein Zuschuss zu einem Fitnesstracker oder einem anderen Gerät zur Erfassung des Gesundheitsstatus kann möglich sein. Ausgezahlt wird höchstens bis zur Höhe der nachgewiesenen Kosten; maßgeblich sind die aktuellen Bonusbedingungen.",
@@ -618,7 +618,7 @@
         "name": "Beispiel: Familie",
         "tag": "Familie",
         "highlight": "Budgets pro Person",
-        "text": "Brille fürs Kind, Osteopathie nach der Schwangerschaft, Zahnreinigung über das IKK Gesundheitskonto und der Bonus für den Sportverein: Jedes versicherte Familienmitglied hat eigene Budgets, und die IKK-Boni gibt es pro Person."
+        "text": "Brille fürs Kind, Osteopathie nach der Schwangerschaft, Zahnreinigung mit Zuschuss der IKK classic und der Bonus für den Sportverein: Jedes versicherte Familienmitglied hat eigene Budgets, und die IKK-Boni gibt es pro Person."
       },
       "max": {
         "name": "Beispiel: Studium",
@@ -636,7 +636,7 @@
         "name": "Beispiel: Gleitsichtbrille",
         "tag": "Sehhilfen",
         "highlight": "bis 500 € / 2 Jahre",
-        "text": "Bei einer Gleitsichtbrille für 680 Euro übernimmt der Tarif Ambulant 100 bis zu 500 Euro. Die professionelle Zahnreinigung lässt sich zusätzlich über das IKK Gesundheitskonto bezuschussen."
+        "text": "Bei einer Gleitsichtbrille für 680 Euro übernimmt der Tarif Ambulant 100 bis zu 500 Euro. Die professionelle Zahnreinigung bezuschusst die IKK classic zusätzlich als eigene Leistung."
       },
       "lisa": {
         "name": "Beispiel: Junge Familie",
@@ -770,7 +770,7 @@
       },
       "reiseimpfungen": {
         "title": "Reiseimpfungen",
-        "desc": "Gelbfieber, Hepatitis A/B, Typhus u. v. m., Zuschuss über das Gesundheitskonto der IKK classic."
+        "desc": "Gelbfieber, Hepatitis A/B, Typhus u. v. m., Zuschuss der IKK classic."
       },
       "gesundheitskurse": {
         "title": "Gesundheitskurse, 180 €/Jahr extra",

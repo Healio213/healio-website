@@ -30,7 +30,9 @@ const SAFE_ANALYTICS_PARAM_KEYS = new Set([
 const SENSITIVE_PARAM_KEY = /(answer|condition|diagnos|email|health|history|message|name|phone|query|result|search|tooth|user)/i;
 const ANALYTICS_COOKIE = /^_(?:ga|gid|gat|gac_)/;
 
-const CONSENT_DENIED = Object.freeze({
+// Ausgangszustand fuer den Consent Mode. Alles, was speichert oder Werbung
+// misst, steht auf denied, bis eine Entscheidung vorliegt.
+const CONSENT_DEFAULT_DENIED = Object.freeze({
   ad_personalization: 'denied',
   ad_storage: 'denied',
   ad_user_data: 'denied',
@@ -41,15 +43,12 @@ const CONSENT_DENIED = Object.freeze({
   wait_for_update: 500,
 });
 
-const CONSENT_GRANTED = Object.freeze({
-  ad_personalization: 'denied',
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  analytics_storage: 'granted',
-  functionality_storage: 'granted',
-  personalization_storage: 'denied',
-  security_storage: 'granted',
-});
+// gtag mischt Teilobjekte in den bestehenden Consent-Zustand. Dieses Modul
+// besitzt ausschliesslich die Analyse-Achse. Die Werbe-Achse (ad_storage,
+// ad_user_data) gehoert src/lib/google-ads.js und haengt dort am Zweck
+// "marketing". So kann eine Achse die andere nie ueberschreiben.
+const ANALYTICS_STORAGE_GRANTED = Object.freeze({ analytics_storage: 'granted' });
+const ANALYTICS_STORAGE_DENIED = Object.freeze({ analytics_storage: 'denied' });
 
 let consentDefaultQueued = false;
 let gaConfigured = false;
@@ -78,14 +77,14 @@ const ensureDataLayer = () => {
   return window.dataLayer;
 };
 
-function queueGtagCommand() {
+export function queueGtagCommand() {
   const dataLayer = ensureDataLayer();
   if (dataLayer) dataLayer.push(arguments);
 }
 
-const queueConsentDefault = () => {
+export const queueConsentDefault = () => {
   if (!isBrowser() || consentDefaultQueued) return;
-  queueGtagCommand('consent', 'default', CONSENT_DENIED);
+  queueGtagCommand('consent', 'default', CONSENT_DEFAULT_DENIED);
   consentDefaultQueued = true;
 };
 
@@ -234,7 +233,7 @@ const grantAnalyticsConsent = () => {
   queueConsentDefault();
   if (!isBrowser() || isAnalyticsBlocked()) return denyAnalyticsConsent();
 
-  queueGtagCommand('consent', 'update', CONSENT_GRANTED);
+  queueGtagCommand('consent', 'update', ANALYTICS_STORAGE_GRANTED);
 
   if (!gaConfigured) {
     queueGtagCommand('js', new Date());
@@ -252,7 +251,7 @@ const grantAnalyticsConsent = () => {
 
 const denyAnalyticsConsent = () => {
   queueConsentDefault();
-  if (isBrowser()) queueGtagCommand('consent', 'update', CONSENT_DENIED);
+  if (isBrowser()) queueGtagCommand('consent', 'update', ANALYTICS_STORAGE_DENIED);
   clearAnalyticsCookies();
   return Promise.resolve(false);
 };
