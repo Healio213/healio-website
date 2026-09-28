@@ -1,7 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
+import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
+import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
+import { useReferrer } from '@/hooks/useReferrer';
 import { getPregnancyOnwardPath } from '@/lib/pregnancyBonus';
+import { buildSdkUrl } from '@/lib/sdk-url';
 import { createFAQSchema } from '@/lib/createSchemaMarkup';
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-midnight';
@@ -18,14 +22,10 @@ const TOPICS = {
     leadSecondary: 'Den Beitrag kann dein Kassenbonus mittragen, weil bei der IKK classic jede Mutterschaftsvorsorge einzeln zählt. Wo es nicht mehr geht, sagen wir dir das weiter unten genauso deutlich.',
     seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
-    image: 'pregnancy', benefitTitle: 'Was ist dir jetzt wichtig?',
-    benefits: [
-      ['Zusätzliche Vorsorge verstehen', 'Ein Toxoplasmose-Test beim Frauenarzt? Kläre zuerst, ob deine Kasse die Untersuchung in deinem Fall übernimmt. Für mögliche Eigenkosten lohnt sich ein genauer Blick auf den Zusatzschutz.', 'prevention-vaccination'],
-      ['Auch an dich denken', 'Du interessierst dich für Osteopathie? Ob eine Behandlung sinnvoll ist und wer die Kosten übernimmt, klärst du vorab mit deinem Behandler und dem Versicherer.', 'naturopathy'],
-    ],
-    protectionTitle: 'Zusatzschutz, der zu deiner Situation passt.',
-    protectionText: 'Ambulante Tarife können Leistungen für Vorsorge, Naturheilverfahren und Sehhilfen enthalten. Entscheidend ist, welche Leistungen du brauchst und was der konkrete Tarif dafür vorsieht.',
-    caution: 'Du bist bereits schwanger? Lass vor dem Abschluss klären, welche Leistungen möglich sind. Bereits angeratene oder begonnene Behandlungen sind nicht automatisch mitversichert.',
+    image: 'pregnancy',
+    protectionTitle: 'Dein ambulanter Tarif für die Vorsorge jetzt',
+    protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
+    caution: 'Du bist schon schwanger? Das gibst du im Antrag bei den Gesundheitsfragen an, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
 
@@ -74,6 +74,10 @@ export default function BenefitFunnelPage() {
   const location = useLocation();
   // No answers, health information or arbitrary query strings cross into a product page.
   const productPath = getPregnancyOnwardPath(location.search);
+  const helpVisible = useWhatsAppHelp();
+  const referrer = useReferrer();
+  // Dieselbe SDK-Klinikstrecke wie auf /stationaer, Ref-Code wie dort.
+  const sdkHospitalUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
   const faq = [
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
@@ -81,6 +85,7 @@ export default function BenefitFunnelPage() {
     ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenhilfe rechnet deine Krankenkasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 die gesondert berechneten Leistungen einer Beleghebamme während des Klinikaufenthalts, Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt beides nicht.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
+    ['Wie läuft der Antrag ab?', 'Du wählst auf der nächsten Seite deine Stufe und öffnest den Rechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein und siehst deinen Beitrag. Danach folgen deine Antragsdaten mit den Gesundheitsfragen und eine Zusammenfassung, bevor du den Antrag abschickst. Einen Termin brauchst du nicht.'],
     ...commonFaq,
   ];
   return (
@@ -95,8 +100,8 @@ export default function BenefitFunnelPage() {
               <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-6xl">{config.title}</h1>
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-home-slate">{config.lead}</p>
               <p className="mt-3 max-w-[52ch] leading-relaxed text-home-slate">{config.leadSecondary}</p>
-              <a href="#bonus-check" className={`mt-7 ${primary}`}>Bonus und Beitrag prüfen</a>
-              <p className="mt-3 text-sm text-home-slate">Erst verstehen. Dann entscheiden. Ohne Terminpflicht.</p>
+              <a href="#zusatzschutz" className={`mt-7 ${primary}`}>Zusatzschutz und Beitrag ansehen</a>
+              <p className="mt-3 text-sm text-home-slate">Erst verstehen, dann selbst online abschließen. Ohne Termin.</p>
             </div>
             <img src={`/images/friendly-icons/${config.image}.webp`} alt="" width="420" height="420"
               className="mx-auto w-full max-w-[220px] object-contain md:max-w-[400px]" fetchPriority="high" />
@@ -111,7 +116,7 @@ export default function BenefitFunnelPage() {
               <p>Nach der Geburt kommt die Rückbildungsgymnastik unter Nummer 44 dazu, mit 25 EUR Geldbonus oder 75 EUR Zuschusswert. Nur vier Positionen im ganzen Programm sind mehrfach anrechenbar, und Nummer 09 ist eine davon.</p>
               <p>Genau deshalb liegt das Satzungsmaximum von bis zu 1.155 EUR vor allem in der Schwangerschaft in Reichweite. Das ist ein rechnerischer Höchstwert aus der Satzung, in dem alles gleichzeitig zutrifft, und keine Summe, die die IKK classic irgendwo zusagt. In der breiten Masse landen aktive Versicherte bei 400 bis 700 EUR im Jahr.</p>
               <p>Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist dafür anrechenbar. Aus rechnerisch 405 EUR Zuschuss werden bei 240 EUR Jahresbeitrag also 240 EUR, nie mehr.</p>
-              <a href="#bonus-check" className={`mt-2 ${primary}`}>Bonus und Beitrag prüfen</a>
+              <a href="#bonus-check" className={`mt-2 ${primary}`}>Dein Bonus-Beispiel ansehen</a>
             </div>
             <div className="self-start rounded-2xl bg-home-ice p-6 sm:p-8">
               <h3 className="font-display text-xl font-bold">Was du dafür brauchst</h3>
@@ -137,22 +142,36 @@ export default function BenefitFunnelPage() {
                   <div className="mt-3 space-y-3 leading-relaxed text-home-slate">
                     {item.body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
                   </div>
+                  {item.id === 'ambulant' && <a href="#zusatzschutz" className={`mt-6 ${primary}`}>Ambulanten Tarif ansehen</a>}
                 </div>
               ))}
             </div>
-            <p className="mt-7 max-w-prose leading-relaxed text-home-slate">Die vollständige Abgrenzung mit Tarifstufen und Belegen liest du im Ratgeber <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>. Wenn du gerade erst anfängst, hilft dir <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> mit Mutterpass, Hebammensuche und Fristen.</p>
-          </div>
-        </section>
-
-        <section className={`${wrap} py-12 md:py-20`}>
-          <h2 className="font-friendly text-3xl md:text-4xl">{config.benefitTitle}</h2>
-          <div className="mt-7 grid gap-9 md:grid-cols-2 md:gap-16">
-            {config.benefits.map(([title, description, icon]) => (
-              <div key={title} className="flex items-start gap-4">
-                <img src={`/images/friendly-icons/${icon}.webp`} alt="" width="72" height="72" className="h-16 w-16 shrink-0" loading="lazy" />
-                <div><h3 className="font-display text-xl font-bold">{title}</h3><p className="mt-2 max-w-prose leading-relaxed text-home-slate">{description}</p></div>
+            <div id="klinikschutz" className="mt-6 scroll-mt-28 rounded-2xl bg-white p-6 sm:p-8">
+              <h3 className="font-display text-xl font-bold">Klinikschutz für dich und dein Kind</h3>
+              <p className="mt-3 max-w-prose leading-relaxed text-home-slate">Die Geburt, die jetzt ansteht, zahlt kein Klinik-Tarif mehr. Dein eigener Klinik-Tarif ist aber die Grundlage, damit dein Kind nach der Geburt ohne Gesundheitsprüfung aufgenommen wird.</p>
+              <div className="mt-6 grid gap-5 md:grid-cols-2 md:gap-10">
+                <div className="border-l-4 border-home-mint pl-5">
+                  <p className="font-semibold">Bis zur Geburt sind es weniger als drei Monate?</p>
+                  <p className="mt-2 leading-relaxed text-home-slate">Dann passt die SDK: Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
+                </div>
+                <div className="border-l-4 border-home-mint pl-5">
+                  <p className="font-semibold">Bis zur Geburt sind es mehr als drei Monate?</p>
+                  <p className="mt-2 leading-relaxed text-home-slate">Dann hast du die Wahl: Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                </div>
               </div>
-            ))}
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a href={sdkHospitalUrl} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der SDK berechnen (neuer Tab)" className={primary}>Klinik-Tarif der SDK berechnen</a>
+                <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der Bayerischen berechnen (neuer Tab)" className={primary}>Klinik-Tarif der Bayerischen berechnen</a>
+              </div>
+              <p className="mt-4 max-w-prose text-sm leading-relaxed text-home-slate">Dein Kind meldest du nach der Geburt innerhalb von zwei Monaten beim selben Versicherer an. Beide Rechner öffnen sich in einem neuen Tab.</p>
+            </div>
+            <WhatsAppHelpHint
+              placement="schwangerschaft-wege"
+              title="Welcher Weg passt zu dir?"
+              text={`Zögere nicht und frag uns. ${whatsAppHelpReply('Vorsorge, Klinikschutz und der Nachversicherung deines Kindes')}`}
+              className="mt-6"
+            />
+            <p className="mt-7 max-w-prose leading-relaxed text-home-slate">Die vollständige Abgrenzung mit Tarifstufen und Belegen liest du im Ratgeber <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>. Wenn du gerade erst anfängst, hilft dir <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> mit Mutterpass, Hebammensuche und Fristen.</p>
           </div>
         </section>
 
@@ -162,7 +181,8 @@ export default function BenefitFunnelPage() {
               <h2 className="max-w-[22ch] font-friendly text-3xl md:text-4xl">{config.protectionTitle}</h2>
               <p className="mt-4 max-w-prose leading-relaxed text-home-slate">{config.protectionText}</p>
               <Link data-product-link to={productPath} className={`mt-6 ${primary}`}>{config.productLabel}</Link>
-              <p className="mt-3 text-sm text-home-slate">Du siehst zuerst die Tarifinformationen. Noch kein Abschluss.</p>
+              <p className="mt-3 text-sm text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
+              <WhatsAppHelpHint placement="schwangerschaft-tarif" variant="line" text="Unsicher, welche Stufe zu dir passt? Zögere nicht und frag uns." className="mt-5" />
             </div>
             <div className="border-l-4 border-home-mint pl-6">
               <h3 className="font-display text-xl font-bold">Darauf kommt es an</h3>
@@ -187,7 +207,7 @@ export default function BenefitFunnelPage() {
           </div>
           <div className="mt-8">
               <div className="rounded-2xl bg-home-ice p-6 sm:p-8">
-                <h3 className="font-display text-xl font-bold">Die 630 EUR aus dem Video</h3>
+                <h3 className="font-display text-xl font-bold">Das Rechenbeispiel mit 630 EUR</h3>
                 <p className="mt-3 max-w-prose text-home-slate">Ein Beispiel für eine Person im Bonusjahr 2026: 630 EUR zweckgebundener Zuschuss oder alternativ 210 EUR Geldbonus. Kein garantierter Betrag und kein Höchstbonus.</p>
                 <details className="mt-4">
                   <summary className={`cursor-pointer font-semibold ${focus}`}>Wie setzt sich das Beispiel zusammen?</summary>
@@ -209,8 +229,8 @@ export default function BenefitFunnelPage() {
             <h2 className="font-friendly text-3xl md:text-4xl">Ein klarer Weg. Du entscheidest.</h2>
             <ol className="mt-7 grid gap-7 md:grid-cols-3 md:gap-12">
               {[
-                ['Bei Healio verstehen', 'Leistungen und Beiträge ansehen. Fragen klären, wenn du Unterstützung möchtest.'],
-                ['Zusatzschutz beantragen', 'Nur wenn er passt: den gewünschten Tarif in der Antragsstrecke beantragen. Der Versicherer prüft deinen Antrag.'],
+                ['Bei Healio verstehen', helpVisible ? 'Leistungen und Beiträge ansehen. Deine Fragen stellst du uns jederzeit per WhatsApp.' : 'Leistungen und Beiträge in Ruhe ansehen.'],
+                ['Zusatzschutz beantragen', 'Passt der Schutz, beantragst du ihn selbst online beim Versicherer. Bei der SDK gibst du dafür Versicherungsbeginn, Geburtsdatum und Geschlecht ein, siehst deinen Beitrag und beantwortest danach die Gesundheitsfragen. Der Versicherer prüft deinen Antrag.'],
                 ['Bonus bei deiner Kasse nutzen', 'Bonusfähige Aktivitäten nachweisen und den Bonus dort separat beantragen. Healio reicht hier keinen Antrag für dich ein.'],
               ].map(([title, description], i) => (
                 <li key={title}><span className="font-friendly text-3xl text-[#076046]" aria-hidden="true">{i + 1}.</span><h3 className="mt-2 font-display text-lg font-bold">{title}</h3><p className="mt-2 leading-relaxed text-home-slate">{description}</p></li>
@@ -222,7 +242,15 @@ export default function BenefitFunnelPage() {
 
         <section id="fragen" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
           <div className="grid gap-8 md:grid-cols-[1fr_1.5fr] md:gap-16">
-            <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`mt-5 inline-block ${textLink}`}>Frage an Healio stellen</Link></div>
+            {helpVisible ? (
+              <div>
+                <h2 className="font-friendly text-3xl md:text-4xl">{WHATSAPP_HELP_TITLE}</h2>
+                <WhatsAppHelpHint placement="schwangerschaft-fragen" surface="bg-home-ice" className="mt-5" />
+                <p className="mt-5 text-sm text-home-slate">Lieber per E-Mail? <Link to="/kontakt" className={textLink}>Zur Kontaktseite</Link></p>
+              </div>
+            ) : (
+              <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`mt-5 inline-block ${textLink}`}>Frage an Healio stellen</Link></div>
+            )}
             <div className="divide-y divide-home-slate/20">{faq.map(([q, a]) => (
               <details key={q} className="py-5 first:pt-0"><summary className={`cursor-pointer font-semibold ${focus}`}>{q}</summary><p className="mt-3 max-w-prose leading-relaxed text-home-slate">{a}</p></details>
             ))}</div>
@@ -230,6 +258,7 @@ export default function BenefitFunnelPage() {
           <div className="mt-8 border-t border-home-slate/20 pt-7">
             <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
             <p className="mt-3 text-sm text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin.</p>
+            <WhatsAppHelpHint placement="schwangerschaft-abschluss" variant="line" text="Auf der nächsten Seite wählst du deine Stufe. Kommst du nicht weiter, frag uns per WhatsApp." className="mt-4" />
             <p className="mt-3 text-sm text-home-slate">Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
             <p className="mt-3 text-sm text-home-slate">Zum Nachlesen: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
           </div>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import WhatsAppHelpHint, { useWhatsAppHelp } from '@/components/sections/shared/WhatsAppHelpHint';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 
@@ -17,6 +18,37 @@ const StationaerTariffSelector = () => {
   const [selected, setSelected] = useState('');
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
+  const helpVisible = useWhatsAppHelp();
+  const scrollToResult = useRef(false);
+
+  // Mobil liegt der Rechner-Button unter allen drei Karten. Nach einer Auswahl
+  // holen wir das Ergebnis in den Blick, sobald es gerendert ist.
+  const resultRef = useCallback((node) => {
+    if (!node || !scrollToResult.current) return;
+    scrollToResult.current = false;
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    window.requestAnimationFrame(() => {
+      node.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }, []);
+
+  const choose = (key) => {
+    if (key !== selected) scrollToResult.current = true;
+    setSelected(key);
+  };
+
+  const calculateLink = selected ? (
+    <a
+      href={sdkUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => trackSdkClick(`stationaer-selector-${selected}`, referrer)}
+      className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3 text-sm font-extrabold text-[#071726] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1] sm:w-auto"
+    >
+      {t('refresh.selector.calculate')}
+      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+    </a>
+  ) : null;
 
   return (
     <section id="tarife" className="scroll-mt-24 bg-[#f5faf8] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-tariffs-heading">
@@ -83,7 +115,7 @@ const StationaerTariffSelector = () => {
                   <button
                     type="button"
                     aria-pressed={isSelected}
-                    onClick={() => setSelected(option.key)}
+                    onClick={() => choose(option.key)}
                     className="flex min-h-12 w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-extrabold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3"
                     style={{
                       borderColor: isSelected ? option.accent : '#dbe4e8',
@@ -105,10 +137,12 @@ const StationaerTariffSelector = () => {
           {selected ? (
             <motion.div
               key={selected}
+              ref={resultRef}
+              id="stationaer-selector-result"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="mx-auto mt-8 flex max-w-4xl flex-col items-center justify-between gap-5 rounded-[1.6rem] bg-[#071726] px-6 py-6 text-white shadow-[0_20px_55px_rgba(7,23,38,0.18)] sm:flex-row sm:px-8"
+              className="mx-auto mt-8 flex max-w-4xl scroll-mb-24 flex-col items-center justify-between gap-5 rounded-[1.6rem] bg-[#071726] px-6 py-6 text-white shadow-[0_20px_55px_rgba(7,23,38,0.18)] sm:flex-row sm:px-8"
               aria-live="polite"
             >
               <div>
@@ -122,16 +156,12 @@ const StationaerTariffSelector = () => {
                   {t('refresh.selector.resultNote')}
                 </p>
               </div>
-              <a
-                href={sdkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackSdkClick(`stationaer-selector-${selected}`, referrer)}
-                className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3 text-sm font-extrabold text-[#071726] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1] sm:w-auto"
-              >
-                {t('refresh.selector.calculate')}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              {helpVisible ? (
+                <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:w-auto sm:max-w-xs sm:items-stretch">
+                  {calculateLink}
+                  <WhatsAppHelpHint placement="stationaer-rechner" variant="line" tone="dark" text={t('refresh.help.result')} />
+                </div>
+              ) : calculateLink}
             </motion.div>
           ) : (
             <motion.p
@@ -145,6 +175,8 @@ const StationaerTariffSelector = () => {
             </motion.p>
           )}
         </AnimatePresence>
+
+        <WhatsAppHelpHint placement="stationaer-tarifwahl" variant="line" text={t('refresh.help.selector')} className="mx-auto mt-6 max-w-2xl text-center" />
 
         <p className="mx-auto mt-6 max-w-4xl text-center text-xs leading-relaxed text-slate-500">
           {t('refresh.selector.disclosure')}

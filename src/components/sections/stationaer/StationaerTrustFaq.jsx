@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import WhatsAppHelpHint, { useWhatsAppHelp, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 
 const trustCards = [
   { key: 'broker', kind: 'broker', tone: 'mint' },
@@ -20,6 +21,7 @@ const StationaerTrustFaq = () => {
   const [openFaq, setOpenFaq] = useState(0);
   const faqItems = t('refresh.faq.items', { returnObjects: true });
   const faqs = Array.isArray(faqItems) ? faqItems : [];
+  const helpVisible = useWhatsAppHelp();
 
   return (
     <section className="bg-[#f5faf8] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-trust-heading">
@@ -43,8 +45,17 @@ const StationaerTrustFaq = () => {
               className="rounded-[1.5rem] border border-white bg-white p-5 shadow-[0_14px_35px_rgba(31,57,66,0.06)]"
             >
               <FriendlyIcon kind={card.kind} src={card.src} tone={card.tone} size="sm" />
-              <h3 className="mt-4 font-display text-lg font-extrabold text-[#071726]">{t(`refresh.trust.cards.${card.key}.title`)}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{t(`refresh.trust.cards.${card.key}.body`)}</p>
+              {card.key === 'support' && helpVisible ? (
+                <>
+                  <h3 className="mt-4 font-display text-lg font-extrabold text-[#071726]">{t('refresh.help.supportTitle')}</h3>
+                  <WhatsAppHelpHint placement="stationaer-vertrauen" variant="line" text={t('refresh.help.supportBody')} className="mt-2" />
+                </>
+              ) : (
+                <>
+                  <h3 className="mt-4 font-display text-lg font-extrabold text-[#071726]">{t(`refresh.trust.cards.${card.key}.title`)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{t(`refresh.trust.cards.${card.key}.body`)}</p>
+                </>
+              )}
             </article>
           ))}
         </div>
@@ -92,6 +103,8 @@ const StationaerTrustFaq = () => {
               );
             })}
           </div>
+
+          <WhatsAppHelpHint placement="stationaer-fragen" title={WHATSAPP_HELP_TITLE} className="mt-10 shadow-[0_14px_35px_rgba(31,57,66,0.06)]" />
         </div>
 
         <div className="mx-auto mt-16 flex max-w-5xl flex-col items-center justify-between gap-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#0a6c50] to-[#063e35] px-6 py-9 text-center text-white shadow-[0_24px_60px_rgba(6,62,53,0.18)] sm:px-9 md:flex-row md:text-left">

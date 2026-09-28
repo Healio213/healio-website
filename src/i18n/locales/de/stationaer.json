@@ -341,6 +341,7 @@
       ],
       "visualAria": "Healio Auswahlhilfe für SP2, SP1 und SPU",
       "visualTitle": "Was ist dir im Ernstfall wichtig?",
+      "choiceAria": "{{code}} {{label}} ansehen",
       "choices": {
         "sp2": {
           "code": "SP2",
@@ -366,9 +367,9 @@
       "choose": "Diesen Schutz wählen",
       "selected": "Ausgewählt",
       "resultEyebrow": "Deine gewählte Richtung",
-      "resultNote": "Im SDK-Rechner kannst du den Tarif prüfen und deinen altersabhängigen Beitrag sehen.",
+      "resultNote": "Im Rechner gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein. Danach wählst du dort denselben Tarif und siehst deinen persönlichen Beitrag.",
       "calculate": "Persönlichen Beitrag berechnen",
-      "empty": "Wähle eine der drei Karten. Danach führt dich ein klarer Schritt in den Beitragsrechner.",
+      "empty": "Wähle eine der drei Karten. Der Button zum Beitragsrechner erscheint danach unter den Karten.",
       "disclosure": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag. SPU gilt ausschließlich für unfallbedingte Behandlungen und kommt ohne Gesundheitsprüfung aus. Leistungen gelten im tariflich vereinbarten Umfang; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab.",
       "options": {
         "sp2": {
@@ -548,6 +549,10 @@
           "a": "Bei SP1 und SP2 gehören Gesundheitsfragen zum Antrag. SPU kommt ohne Gesundheitsprüfung aus, leistet dafür aber ausschließlich nach einem Unfall. Die verbindliche Annahme erfolgt erst im Antrag."
         },
         {
+          "q": "Wie schließe ich den Klinikschutz ab?",
+          "a": "Du wählst oben SP2, SP1 oder SPU und öffnest den Beitragsrechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein, wählst denselben Tarif und siehst deinen Beitrag. Danach folgen deine Antragsdaten, bei SP1 und SP2 mit Gesundheitsfragen, und eine Zusammenfassung. Einen Termin brauchst du nicht."
+        },
+        {
           "q": "Kann ein Kassenbonus den ganzen Beitrag ausgleichen?",
           "a": "Bis zu 100 % Beitragsentlastung sind möglich. Besonders greifbar ist das beim günstigen SPU: Erreicht dein tatsächlich nutzbarer Bonus mindestens deinen Jahresbeitrag, kann im Modell kein effektiver Restbeitrag bleiben. Wie viel du persönlich erreichst, hängt von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab."
         },
@@ -557,10 +562,16 @@
         }
       ]
     },
+    "help": {
+      "selector": "Unsicher, ob SP2, SP1 oder SPU zu dir passt? Zögere nicht und frag uns.",
+      "result": "Der Rechner öffnet sich in einem neuen Tab. Hängst du dort irgendwo? Frag uns per WhatsApp.",
+      "supportTitle": "Fragen? Frag uns einfach",
+      "supportBody": "Vor dem Antrag, beim Antrag oder im Leistungsfall: Zögere nicht und frag uns."
+    },
     "final": {
       "eyebrow": "Bereit für deine Entscheidung?",
       "title": "Wähle zuerst den Schutz. Den Beitrag berechnest du danach.",
-      "body": "SP2, SP1 oder SPU: Der Vergleich führt dich ohne Umwege zur passenden Tarifrichtung."
+      "body": "Du wählst oben deinen Tarif und schließt ihn selbst online bei der SDK ab. Ohne Termin."
     }
   }
 }

@@ -104,7 +104,7 @@ const InstagramPage = () => {
             className="text-center mb-9"
           >
             <img
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png"
+              src="/healio-logo-white.svg"
               alt="Healio Logo"
               className="h-10 w-auto mx-auto brightness-0 invert"
             />

@@ -29,6 +29,7 @@ const Header = () => {
   const isServices = location.pathname === '/leistungen' || location.pathname === '/en/services';
   const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
   const isPregnancy = location.pathname === '/schwangerschaft';
+  const isInpatient = location.pathname === '/stationaer' || location.pathname === '/en/inpatient';
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
     || location.pathname === '/unternehmen/vorsorge-rechner'
@@ -136,6 +137,8 @@ const Header = () => {
 
   const ctaLabel = isPregnancy
     ? 'Zusatzschutz ansehen'
+    : isInpatient
+      ? (lang === 'de' ? 'Klinikschutz auswählen' : 'Choose hospital cover')
     : isHome
       ? t('nav.kassenvorteil')
       : isServices
@@ -148,6 +151,8 @@ const Header = () => {
 
   const ctaPath = isPregnancy
     ? { pathname: '/schwangerschaft', search: location.search, hash: '#zusatzschutz' }
+    : isInpatient
+      ? { pathname: getPath('stationaer'), search: location.search, hash: '#tarife' }
     : isServices
       ? `${getPath('leistungen')}#schutz-kompass`
       : isCompany
@@ -165,7 +170,7 @@ const Header = () => {
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
         <Link to={getPath('home')} className="flex items-center z-50 group">
           <motion.img
-            src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/899be0558bfa4782d893bf77fe1fc5f1.png"
+            src="/healio-logo-white.svg"
             alt="Healio Logo"
             className={cn(
               "w-auto transition-all duration-500",

@@ -82,9 +82,14 @@ const StationaerHero = () => {
                   {t('refresh.hero.visualTitle')}
                 </p>
                 {choiceKeys.map((key, index) => (
-                  <div
+                  <a
                     key={key}
-                    className={`rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(39,63,72,0.10)] sm:p-4 ${
+                    href="#tarife"
+                    aria-label={t('refresh.hero.choiceAria', {
+                      code: t(`refresh.hero.choices.${key}.code`),
+                      label: t(`refresh.hero.choices.${key}.label`),
+                    })}
+                    className={`block rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(39,63,72,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(39,63,72,0.16)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b6048] motion-reduce:transform-none motion-reduce:transition-none sm:p-4 ${
                       index === 0 ? 'border-[#b9e6d6]' : index === 1 ? 'border-[#d7d3ee]' : 'border-[#ead8a7]'
                     }`}
                   >
@@ -100,7 +105,7 @@ const StationaerHero = () => {
                     <p className="mt-1 text-[0.7rem] font-medium leading-snug text-slate-500 sm:text-xs">
                       {t(`refresh.hero.choices.${key}.note`)}
                     </p>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

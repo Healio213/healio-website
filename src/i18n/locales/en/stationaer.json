@@ -341,6 +341,7 @@
       ],
       "visualAria": "Healio choice guide for SP2, SP1 and SPU",
       "visualTitle": "What matters to you in an emergency?",
+      "choiceAria": "View {{code}} {{label}}",
       "choices": {
         "sp2": {
           "code": "SP2",
@@ -546,6 +547,10 @@
         {
           "q": "Do I need to answer health questions?",
           "a": "The SP1 and SP2 applications include health questions. SPU requires no health assessment, but only pays after an accident. Binding acceptance takes place in the application."
+        },
+        {
+          "q": "How do I take out hospital cover?",
+          "a": "Choose SP2, SP1 or SPU above and open the SDK premium calculator in a new tab (German form). There you enter the start date, your date of birth and gender, choose the same plan and see your premium. Your application details follow, with health questions for SP1 and SP2, and then a summary. You do not need an appointment."
         },
         {
           "q": "Can a health fund bonus offset the entire premium?",
