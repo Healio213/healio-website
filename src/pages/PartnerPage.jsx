@@ -78,26 +78,24 @@ const PartnerPage = () => {
 
         {/* SECTION 1: HERO */}
         <section className="relative min-h-[100svh] flex items-center pt-28 pb-16 lg:pt-20 lg:pb-0">
-          <div className="absolute inset-0 z-0">
-            {/* Mobile Image */}
+          <div className="absolute inset-0 z-0 bg-slate-900">
+            {/* Vorschaubild des Partner-Videos (public/images/video-partner-thumb.jpg), für Mobil und Desktop */}
             <img
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/4f016c2da039efb25e0e023c7adf970d.png"
-              alt={t('hero.imageAltMobile')}
-              className="w-full h-full object-cover object-center md:hidden"
+              src="/images/partner-hero.webp"
+              alt={t('hero.imageAlt')}
+              width="1280"
+              height="720"
+              fetchPriority="high"
+              className="h-full w-full object-cover object-[46%_22%] xl:absolute xl:inset-y-0 xl:right-0 xl:w-[64%] xl:object-[34%_center]"
             />
-            {/* Desktop Image */}
-            <img
-              src="https://horizons-cdn.hostinger.com/a1cb5eb5-2a0a-4a64-9318-bf32833dca0d/66ea53b24c418ef3f92004d9368a889c.png"
-              alt={t('hero.imageAltDesktop')}
-              className="w-full h-full object-cover object-center hidden md:block"
-            />
-            {/* Lighter Overlay for desktop, stronger for mobile to ensure text readability */}
-            <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent z-10" />
+            {/* Lighter Overlay for desktop, stronger for mobile to ensure text readability.
+                Ab xl steht die Beraterin rechts neben dem Text, links bleibt die Fläche dunkel. */}
+            <div className="absolute inset-0 bg-black/50 md:bg-black/25 xl:bg-black/10 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent xl:from-slate-900 xl:from-[36%] xl:via-slate-900/50 xl:via-[50%] xl:to-transparent xl:to-[64%] z-10" />
           </div>
 
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center xl:mx-0 xl:max-w-[38rem] xl:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -109,13 +107,13 @@ const PartnerPage = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
+                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto xl:mx-0">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <div className="flex flex-col items-center justify-center gap-3 sm:flex-row xl:flex-wrap xl:justify-start">
                   <Button
                     size="lg"
-                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
+                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg xl:shrink-0 xl:whitespace-nowrap"
                     onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {t('hero.cta')}
@@ -123,14 +121,14 @@ const PartnerPage = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg"
+                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg xl:shrink-0 xl:whitespace-nowrap"
                     onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {t('hero.secondaryCta')}
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80">
+                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80 xl:justify-start">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>

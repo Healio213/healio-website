@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { Check } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
@@ -10,6 +11,7 @@ import { createFAQSchema } from '@/lib/createSchemaMarkup';
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-midnight';
 const primary = `inline-flex min-h-[48px] items-center justify-center rounded-full bg-home-mint px-7 py-3 text-center font-semibold text-home-midnight hover:bg-home-mint-active ${focus}`;
+const secondary = `inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-home-midnight px-7 py-3 text-center font-semibold text-home-midnight hover:bg-white ${focus}`;
 const textLink = `underline decoration-home-slate/40 underline-offset-4 hover:decoration-home-midnight ${focus}`;
 const wrap = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
 
@@ -47,19 +49,28 @@ const paths = [
     title: 'Diese Geburt ist zu spät',
     body: [
       'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
-      'Wofür der Tarif trotzdem zählt: für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann.',
-      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung: bei der SDK im SP1 ohne Wartezeit, bei der Bayerischen nach acht Monaten Wartezeit, in Komfort bis zur Höhe des Zweibettzimmers und in Prestige ohne Begrenzung.',
+      'Für die Zeit danach zählt der Tarif trotzdem, für dich und für dein Kind.',
     ],
   },
   {
-    id: 'kind', kicker: 'Dein Kind',
+    // #kind gehört der Anzeigengruppe S3 und liegt deshalb auf dem Klinikschutz oben.
+    id: 'nachversicherung', kicker: 'Dein Kind',
     title: 'Nachversicherung statt neuer Prüfung',
     body: [
-      'Innerhalb von zwei Monaten nach der Geburt nimmt die Bayerische dein Kind ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag auf, rückwirkend zum Tag der Geburt. Voraussetzung ist, dass ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Schließ deshalb jetzt ab und nicht erst kurz vor dem Termin. Die SDK verlangt diese drei Monate nicht.',
+      'Die Anmeldung wirkt rückwirkend zum Tag der Geburt, ohne Wartezeit und ohne Zuschlag.',
       'Nach § 198 VVG darf der Schutz des Kindes nicht weiter reichen als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind.',
-      'Rooming-in steckt im Tarif deines Kindes. Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei jedem medizinisch notwendigen Klinikaufenthalt, bei der SDK in SP1 und SP2, bei der Bayerischen in Komfort und Prestige.',
     ],
   },
+];
+
+// Nur belegte Punkte aus den AVB-Prüfungen der Bayerischen und der SDK (Healio/Vertraege, 09/2026).
+const hospitalArguments = [
+  'Dein Kind wird nach der Geburt ohne Gesundheitsprüfung aufgenommen, auch bei Geburtsschäden und angeborenen Krankheiten. Du meldest es innerhalb von zwei Monaten an.',
+  'Muss dein Kind ins Krankenhaus, zahlt sein Tarif Unterkunft und Verpflegung für dich als Begleitperson, solange es jünger als 16 ist und soweit die Krankenkasse sie nicht trägt.',
+  'Dein Kind bekommt im Krankenhaus Chefarzt und Ein- oder Zweibettzimmer, je nach Tarif.',
+  'Du selbst bist bei jedem medizinisch notwendigen Klinikaufenthalt versichert, der nichts mit dieser Schwangerschaft zu tun hat: bei der SDK ab Versicherungsbeginn, bei der Bayerischen nach drei Monaten Wartezeit, nach einem Unfall sofort.',
+  'Bei einer späteren Geburt: Familienzimmer bei der SDK im SP1, bei der Bayerischen nach acht Monaten Wartezeit im Prestige und im Komfort bis zur Höhe des Zweibettzimmers.',
+  'Für dein Kind ab 3,20 EUR im Monat (Bayerische Komfort) oder 3,37 EUR (SDK SP2). Den Beitrag kann dein Kassenbonus mittragen.',
 ];
 
 const commonFaq = [
@@ -68,6 +79,16 @@ const commonFaq = [
   ['Muss ich die Krankenkasse wechseln?', 'Nein. Passenden Zusatzschutz kannst du unabhängig von einem Kassenwechsel prüfen. Welche Bonusmöglichkeiten du hast, hängt von deiner Krankenkasse und ihren Teilnahmebedingungen ab.'],
 ];
 const film = [['10 gesetzliche Schwangerschaftsvorsorgen', '300 EUR'], ['Ein anerkannter Kurs und aktive Studio-Mitgliedschaft', '150 EUR'], ['Anerkannter BMI und Blutdruck, mit erforderlicher Aktivität', '150 EUR'], ['Zahnvorsorge in beiden Halbjahren', '30 EUR']];
+
+// Beide Klinik-Rechner, bewusst ohne data-product-link und ohne Tracking.
+function HospitalCalculatorLinks({ sdkUrl, className = '' }) {
+  return (
+    <div className={`flex flex-col gap-3 sm:flex-row sm:flex-wrap ${className}`}>
+      <a href={sdkUrl} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der SDK berechnen (neuer Tab)" className={primary}>Klinik-Tarif der SDK berechnen</a>
+      <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der Bayerischen berechnen (neuer Tab)" className={primary}>Klinik-Tarif der Bayerischen berechnen</a>
+    </div>
+  );
+}
 
 export default function BenefitFunnelPage() {
   const config = TOPICS.pregnancy;
@@ -100,7 +121,10 @@ export default function BenefitFunnelPage() {
               <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-6xl">{config.title}</h1>
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-home-slate">{config.lead}</p>
               <p className="mt-3 max-w-[52ch] leading-relaxed text-home-slate">{config.leadSecondary}</p>
-              <a href="#zusatzschutz" className={`mt-7 ${primary}`}>Zusatzschutz und Beitrag ansehen</a>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
+                <a href="#klinikschutz" className={secondary}>Klinikschutz für dein Kind</a>
+              </div>
               <p className="mt-3 text-sm text-home-slate">Erst verstehen, dann selbst online abschließen. Ohne Termin.</p>
             </div>
             <img src={`/images/friendly-icons/${config.image}.webp`} alt="" width="420" height="420"
@@ -108,7 +132,49 @@ export default function BenefitFunnelPage() {
           </div>
         </section>
 
-        <section id="geheimtipp" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
+        {/* Klinikschutz direkt nach dem Hero: Anzeigen für Schwangere werben stationär.
+            #kind (Anzeigengruppe S3) zeigt auf Mobil Kind-Argument und beide Rechner im ersten Bildschirm. */}
+        <section id="klinikschutz" aria-labelledby="klinikschutz-heading" className="scroll-mt-28 py-12 md:py-20">
+          <div className={`${wrap} grid gap-8 md:grid-cols-[1fr_1.15fr] md:gap-14`}>
+            <div id="kind" className="scroll-mt-28 md:sticky md:top-28 md:self-start">
+              <p className="font-semibold text-[#076046]">Stationär, für dein Kind und dich</p>
+              <h2 id="klinikschutz-heading" className="mt-2 max-w-[20ch] font-friendly text-3xl md:text-4xl">Klinikschutz für dich und dein Kind</h2>
+              <p className="mt-4 max-w-prose text-lg leading-relaxed text-home-slate">Dein eigener Klinik-Tarif ist die Grundlage, damit dein Kind nach der Geburt ohne Gesundheitsprüfung aufgenommen wird.</p>
+              <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} className="mt-6 md:flex-col lg:flex-row" />
+              <p className="mt-3 text-sm leading-relaxed text-home-slate">Beide Rechner öffnen sich in einem neuen Tab. Welcher Versicherer zu dir passt, zeigt dir die <a href="#klinik-wahl" className={textLink}>Entscheidungshilfe</a>.</p>
+            </div>
+            <div className="rounded-2xl bg-home-ice p-6 sm:p-8">
+              <p className="font-semibold">Die Geburt, die jetzt ansteht, zahlt kein Klinik-Tarif mehr.</p>
+              <p className="mt-1 leading-relaxed text-home-slate">Was er dir und deinem Kind trotzdem bringt:</p>
+              <ul className="mt-5 space-y-4 leading-relaxed text-home-slate">
+                {hospitalArguments.map((argument) => (
+                  <li key={argument.slice(0, 40)} className="flex gap-3">
+                    <Check aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-[#076046]" strokeWidth={2.5} />
+                    <span>{argument}</span>
+                  </li>
+                ))}
+              </ul>
+              <div id="klinik-wahl" className="mt-8 scroll-mt-28 border-t border-home-slate/20 pt-7">
+                <h3 className="font-display text-xl font-bold">Welcher Versicherer passt zu dir?</h3>
+                <div className="mt-5 space-y-5">
+                  <div className="border-l-4 border-home-mint pl-5">
+                    <p className="font-semibold">Bis zur Geburt sind es weniger als drei Monate?</p>
+                    <p className="mt-2 leading-relaxed text-home-slate">Dann passt die SDK: Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
+                  </div>
+                  <div className="border-l-4 border-home-mint pl-5">
+                    <p className="font-semibold">Bis zur Geburt sind es mehr als drei Monate?</p>
+                    <p className="mt-2 leading-relaxed text-home-slate">Dann hast du die Wahl: Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                  </div>
+                </div>
+                <p className="mt-5 text-sm leading-relaxed text-home-slate">Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
+                {/* Auf Mobil liegen die Rechner oben weit weg, deshalb hier noch einmal. */}
+                <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} className="mt-6 md:hidden" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="geheimtipp" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
           <h2 className="max-w-[24ch] font-friendly text-3xl md:text-4xl">Der Geheimtipp: jede Vorsorge zählt einzeln</h2>
           <div className="mt-6 grid gap-8 md:grid-cols-[1.25fr_1fr] md:gap-14">
             <div className="max-w-prose space-y-4 leading-relaxed text-home-slate">
@@ -143,27 +209,9 @@ export default function BenefitFunnelPage() {
                     {item.body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
                   </div>
                   {item.id === 'ambulant' && <a href="#zusatzschutz" className={`mt-6 ${primary}`}>Ambulanten Tarif ansehen</a>}
+                  {item.id === 'stationaer' && <a href="#klinikschutz" className={`mt-6 ${secondary}`}>Zum Klinikschutz</a>}
                 </div>
               ))}
-            </div>
-            <div id="klinikschutz" className="mt-6 scroll-mt-28 rounded-2xl bg-white p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold">Klinikschutz für dich und dein Kind</h3>
-              <p className="mt-3 max-w-prose leading-relaxed text-home-slate">Die Geburt, die jetzt ansteht, zahlt kein Klinik-Tarif mehr. Dein eigener Klinik-Tarif ist aber die Grundlage, damit dein Kind nach der Geburt ohne Gesundheitsprüfung aufgenommen wird.</p>
-              <div className="mt-6 grid gap-5 md:grid-cols-2 md:gap-10">
-                <div className="border-l-4 border-home-mint pl-5">
-                  <p className="font-semibold">Bis zur Geburt sind es weniger als drei Monate?</p>
-                  <p className="mt-2 leading-relaxed text-home-slate">Dann passt die SDK: Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
-                </div>
-                <div className="border-l-4 border-home-mint pl-5">
-                  <p className="font-semibold">Bis zur Geburt sind es mehr als drei Monate?</p>
-                  <p className="mt-2 leading-relaxed text-home-slate">Dann hast du die Wahl: Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
-                </div>
-              </div>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href={sdkHospitalUrl} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der SDK berechnen (neuer Tab)" className={primary}>Klinik-Tarif der SDK berechnen</a>
-                <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der Bayerischen berechnen (neuer Tab)" className={primary}>Klinik-Tarif der Bayerischen berechnen</a>
-              </div>
-              <p className="mt-4 max-w-prose text-sm leading-relaxed text-home-slate">Dein Kind meldest du nach der Geburt innerhalb von zwei Monaten beim selben Versicherer an. Beide Rechner öffnen sich in einem neuen Tab.</p>
             </div>
             <WhatsAppHelpHint
               placement="schwangerschaft-wege"
