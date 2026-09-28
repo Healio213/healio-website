@@ -10,9 +10,7 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess';
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
-import AudienceProofBar from '@/components/sections/AudienceProofBar';
 import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
-import ProductTicker from '@/components/sections/ProductTicker';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
@@ -24,6 +22,11 @@ import { useLanguage } from '@/hooks/useLanguage';
 // #calendly-embed werden beim Laden auf diese Marke umgelenkt.
 const GOOGLE_TERMIN_ANCHOR = 'google-termin';
 const LEGACY_TERMIN_ANCHORS = ['calendly-embed'];
+
+// Freigegebene Webfassung des Partner-Erklärvideos (V2.15, 1600x900, faststart).
+// Master und QA: Healio/video-studio/output/website-explainers/FINAL-PRODUCTION/
+const PARTNER_VIDEO_SRC = '/erklaervideo-partner-v2-15.mp4';
+const PARTNER_VIDEO_POSTER = '/images/erklaervideo-partner-poster.jpg';
 
 const PartnerPage = () => {
   useEffect(() => {
@@ -54,16 +57,6 @@ const PartnerPage = () => {
     { kind: 'glasses', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
     { kind: 'pregnancy', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
   ];
-
-  const proofIcons = [
-    { kind: 'budget', tone: 'mint' },
-    { kind: 'protection', tone: 'sky' },
-    { kind: 'calendar', tone: 'butter' },
-  ];
-  const proofItems = t('proof.items', { returnObjects: true }).map((item, index) => ({
-    ...item,
-    ...(proofIcons[index] || proofIcons[0]),
-  }));
 
   return (
     <>
@@ -110,7 +103,7 @@ const PartnerPage = () => {
                 <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto xl:mx-0">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="flex flex-col items-center justify-center gap-3 sm:flex-row xl:flex-wrap xl:justify-start">
+                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center xl:grid xl:w-fit xl:grid-cols-1 xl:items-stretch">
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg xl:shrink-0 xl:whitespace-nowrap"
@@ -146,15 +139,23 @@ const PartnerPage = () => {
           </div>
         </section>
 
-        <AudienceProofBar items={proofItems} ariaLabel={t('proof.ariaLabel')} />
-        <ProductTicker variant="partner" />
+        {/* QUALITÄTSSIEGEL: SDK + IKK, groß direkt unter dem Hero */}
+        <HealioAwardsRow label={t('quality.label')} size="large" />
 
+        {/* Partner-Erklärvideo V2.15 mit Nita (nur Deutsch, Untertitel im Bild).
+            Ohne Video (EN oder Ladefehler) bleiben die drei Kernpunkte stehen. */}
         <B2BExplainerVideo
           sectionId="partner-video"
           title={t('explanationVideo.title')}
           subtitle={t('explanationVideo.subtitle')}
           points={t('explanationVideo.points', { returnObjects: true })}
           showStatusPanel={false}
+          videoSrc={isEnglish ? undefined : PARTNER_VIDEO_SRC}
+          posterSrc={isEnglish ? undefined : PARTNER_VIDEO_POSTER}
+          bookingCtaLabel={t('explanationVideo.bookingCta')}
+          onBookingCta={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+          videoHint={t('explanationVideo.hint')}
+          videoNote={t('explanationVideo.aiNote')}
           ctaLabel={t('explanationVideo.cta')}
           onCta={() => requestNitaConsent('delayed_prompt')}
           trackingLabel="partner"
@@ -163,9 +164,6 @@ const PartnerPage = () => {
           captionsLanguage={isEnglish ? 'en' : 'de'}
           captionsLabel={isEnglish ? 'English' : 'Deutsch'}
         />
-
-        {/* QUALITÄTSSIEGEL: SDK + IKK */}
-        <HealioAwardsRow label={t('quality.label')} />
 
         {/* SECTION 2: PROBLEM AWARENESS */}
         <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
@@ -379,45 +377,6 @@ const PartnerPage = () => {
         {/* FAQ */}
         <PartnerFAQ />
 
-        {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
-        <section className="relative py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
-          </div>
-          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
-            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
-                  <Shield className="w-3.5 h-3.5" />
-                  {t('professionalCover.badge')}
-                </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                  {t('professionalCover.title')}
-                </h2>
-                <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-2">
-                  {t('professionalCover.text')}
-                </p>
-                <p className="text-sm text-white/75">
-                  {t('professionalCover.note')}
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <Button
-                  asChild
-                  className="bg-white text-[#0b4d4a] hover:bg-white/90 text-base font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-                >
-                  <Link to={getPath('heilberufeVorsorge')}>
-                    {t('professionalCover.cta')}
-                  </Link>
-                </Button>
-                <p className="text-xs text-white/70 text-center">
-                  {t('professionalCover.meta')}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
 
         {/* SECTION: BOOKING */}
@@ -465,7 +424,7 @@ const PartnerPage = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white p-2 sm:p-4 md:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col items-center w-full"
               >
-                <div id={GOOGLE_TERMIN_ANCHOR} className="w-full">
+                <div id={GOOGLE_TERMIN_ANCHOR} className="w-full scroll-mt-28">
                   <AppointmentBooking
                     placement="partner_page"
                     title={t('cta.title')}
@@ -473,6 +432,46 @@ const PartnerPage = () => {
                   />
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
+        <section className="relative py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+          </div>
+          <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
+                  <Shield className="w-3.5 h-3.5" />
+                  {t('professionalCover.badge')}
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                  {t('professionalCover.title')}
+                </h2>
+                <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-2">
+                  {t('professionalCover.text')}
+                </p>
+                <p className="text-sm text-white/75">
+                  {t('professionalCover.note')}
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Button
+                  asChild
+                  className="bg-white text-[#0b4d4a] hover:bg-white/90 text-base font-semibold px-6 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                >
+                  <Link to={getPath('heilberufeVorsorge')}>
+                    {t('professionalCover.cta')}
+                  </Link>
+                </Button>
+                <p className="text-xs text-white/70 text-center">
+                  {t('professionalCover.meta')}
+                </p>
+              </div>
             </div>
           </div>
         </section>

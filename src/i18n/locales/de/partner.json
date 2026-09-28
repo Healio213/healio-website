@@ -4,7 +4,7 @@
     "title": "Damit gute Behandlung nicht am <highlight>Eigenanteil</highlight> endet.",
     "subtitle": "Deine Patienten können, abhängig von Tarif und persönlichen Voraussetzungen, empfohlene Behandlungen über ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> finanzieren. Du informierst nur, beraten und abgewickelt wird alles von Healio. Für deine Praxis kostenlos.",
     "cta": "30-minütiges Kennenlernen buchen",
-    "secondaryCta": "Konzept mit Nita ansehen",
+    "secondaryCta": "Erklärvideo ansehen (3 Min.)",
     "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
     "imageAlt": "Beraterin in einer hellen Gesundheitspraxis",
     "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
@@ -33,13 +33,16 @@
     ]
   },
   "explanationVideo": {
-    "title": "Das Partnerkonzept im Überblick",
-    "subtitle": "Die wichtigsten Punkte im Überblick. Deine Fragen kannst du direkt mit Nita klären.",
+    "title": "Das Partnerkonzept in gut drei Minuten",
+    "subtitle": "Nita zeigt dir, wie das Gesundheitsbudget funktioniert und was es für deine Praxis bedeutet.",
     "points": [
       "Klare Rollen für Praxis, Patienten und Healio",
       "Voraussetzungen ohne Pauschalversprechen",
       "Nächster Schritt: 30-minütiges Kennenlernen"
     ],
+    "bookingCta": "30-minütiges Kennenlernen buchen",
+    "hint": "Wichtig für deine Patienten: Der Tarif muss vor der nächsten Behandlung abgeschlossen sein.",
+    "aiNote": "Hinweis: Die digitale Sprecherin Nita und ihre Stimme wurden mit KI erstellt.",
     "cta": "Konzept mit Nita klären",
     "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
     "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden."

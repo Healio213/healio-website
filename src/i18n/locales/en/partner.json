@@ -40,6 +40,9 @@
       "Eligibility explained without blanket promises",
       "Next step: a 30-minute introduction"
     ],
+    "bookingCta": "Book a 30-minute intro call",
+    "hint": "Important for your patients: the plan must be in place before the next treatment.",
+    "aiNote": "Note: The digital presenter Nita and her voice were created with AI.",
     "cta": "Clarify the concept with Nita",
     "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
     "fallback": "This video cannot be played in your browser."

@@ -25,6 +25,10 @@ const B2BExplainerVideo = ({
   assistantName,
   errorLabel,
   showStatusPanel = true,
+  bookingCtaLabel,
+  onBookingCta,
+  videoHint,
+  videoNote,
 }) => {
   const [playing, setPlaying] = useState(false);
   const [mediaError, setMediaError] = useState(false);
@@ -56,7 +60,7 @@ const B2BExplainerVideo = ({
     <section id={sectionId} className="scroll-mt-24 bg-[#f4faf7] px-4 py-20 sm:px-6 md:px-8 lg:py-24">
       <div className="container mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-[#07111f] sm:text-4xl lg:text-5xl">
+          <h2 className="text-balance font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-[#07111f] sm:text-4xl lg:text-5xl">
             {title}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#52666d]">{subtitle}</p>
@@ -162,6 +166,31 @@ const B2BExplainerVideo = ({
                   ))}
                 </ul>
               </div>
+            </div>
+          )}
+
+          {/* KI-Hinweis direkt am Player (Art. 50 KI-VO), danach Pflichthinweis und nächster Schritt */}
+          {hasApprovedVideo && videoNote && (
+            <p className="mt-3 text-center text-xs leading-5 text-[#60747c]">{videoNote}</p>
+          )}
+
+          {hasApprovedVideo && (videoHint || bookingCtaLabel) && (
+            <div className="mt-7 flex flex-col items-center gap-4 text-center">
+              {videoHint && (
+                <p className="max-w-2xl text-sm font-semibold leading-6 text-[#07111f] sm:text-base">{videoHint}</p>
+              )}
+              {bookingCtaLabel && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    track('video_booking_click');
+                    onBookingCta?.();
+                  }}
+                  className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#25c990] px-8 py-3 text-base font-bold text-white shadow-[0_12px_30px_rgba(7,96,70,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1fb37f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-2 motion-reduce:transform-none"
+                >
+                  {bookingCtaLabel}
+                </button>
+              )}
             </div>
           )}
 
