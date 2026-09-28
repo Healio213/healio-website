@@ -32,6 +32,11 @@
  *   - Kinderschutz hoechstens wie der des Elternteils, Klinik-Tarif fuers Kind
  *     braucht Klinik-Tarif eines Elternteils.
  *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
+ *
+ * Korrektur 28.09.2026 nach SDK-Bedingungspruefung
+ * (Healio/Vertraege/SDK-Klinik-Bedingungen-2026-09/):
+ *   - SDK SP1/SP2 Ziff. 10 statt Wartezeit als Grund fuer den Ausschluss.
+ *   - Komplikationen ambulant nur auf Auslandsreisen (AP 1.753a Ziff. 7).
  */
 
 export const article = {
@@ -256,17 +261,17 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant geht noch etwas. Vor dem Abschluss stehen Gesundheitsfragen, die wahrheitsgemäß zu beantworten sind; je nach Vorgeschichte kann ein Risikozuschlag dazukommen. Der Vorsorge-Topf der SDK AP-Tarife zahlt genau die Untersuchungen, die die Kasse nicht übernimmt. Er greift ohne Wartezeit und auch dann, wenn die Schwangerschaft bereits festgestellt ist. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Komplikationen, Frühgeburten bis zur 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch sind ausdrücklich versichert.',
+          text: 'Ambulant geht noch etwas. Vor dem Abschluss stehen Gesundheitsfragen, die wahrheitsgemäß zu beantworten sind; je nach Vorgeschichte kann ein Risikozuschlag dazukommen. Der Vorsorge-Topf der SDK AP-Tarife zahlt genau die Untersuchungen, die die Kasse nicht übernimmt. Er greift ohne Wartezeit und auch dann, wenn die Schwangerschaft bereits festgestellt ist. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Nur auf Auslandsreisen sind auch Komplikationen, Frühgeburten bis zum Ende der 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch versichert.',
         },
         {
           type: 'paragraph',
-          text: 'Stationär ist die Geburt zu spät. Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung nicht, weder Chefarztbehandlung noch Familienzimmer. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es weder bei der Bayerischen noch bei der SDK. Wer dir einen Stationärtarif mit dem Versprechen verkauft, du kämst damit bei dieser Geburt ins Familienzimmer, liegt falsch.',
+          text: 'Stationär ist die Geburt zu spät. Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung nicht, weder Chefarztbehandlung noch Familienzimmer. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es weder bei der Bayerischen noch bei der SDK. Wer dir einen Stationärtarif mit dem Versprechen verkauft, du kämst damit bei dieser Geburt ins Familienzimmer, liegt falsch.',
         },
         {
           type: 'segments',
           segments: [
             {
-              text: 'Wofür der Stationärtarif trotzdem zählt, ist die Zeit danach: Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Im Kindertarif ist Rooming-in enthalten. Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt deines Kindes. Die ausführliche Fassung mit allen Tarifstufen steht im Ratgeber ',
+              text: 'Wofür der Stationärtarif trotzdem zählt, ist die Zeit danach: Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Im Kindertarif ist Rooming-in enthalten. Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei jedem medizinisch notwendigen Klinikaufenthalt deines Kindes, in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen. Die ausführliche Fassung mit allen Tarifstufen steht im Ratgeber ',
             },
             { text: 'Schwanger: welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
             { text: '.' },

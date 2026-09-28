@@ -39,16 +39,16 @@ const paths = [
     body: [
       'Der Vorsorge-Topf der SDK AP-Tarife greift auch dann, wenn deine Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in diesen Tarifen nicht. Je nach Stufe werden 50 bis 100 Prozent erstattet, bei AP1 bis zu 500 EUR je zwei Kalenderjahre.',
       'Bezahlt werden damit die Untersuchungen, die dir deine Praxis als Selbstzahlerleistung anbietet: Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken, Cytomegalie und die Nackenfaltenmessung.',
-      'Nicht dabei sind die Entbindung, Beschwerden wegen der Schwangerschaft und gendiagnostische Tests wie NIPT. Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten sind ausdrücklich versichert. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
+      'Nicht dabei sind die Entbindung, die Behandlung von Beschwerden und Komplikationen wegen der Schwangerschaft und gendiagnostische Tests wie NIPT. Nur auf Auslandsreisen zahlt der Tarif auch bei Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
     ],
   },
   {
     id: 'stationaer', kicker: 'Stationär, für die Zeit danach',
     title: 'Diese Geburt ist zu spät',
     body: [
-      'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
+      'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
       'Wofür der Tarif trotzdem zählt: für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann.',
-      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung nach Ablauf der Wartezeit, bei der Bayerischen in Komfort bis zur Höhe des Zweibettzimmers und in Prestige ohne Begrenzung.',
+      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung: bei der SDK im SP1 ohne Wartezeit, bei der Bayerischen nach acht Monaten Wartezeit, in Komfort bis zur Höhe des Zweibettzimmers und in Prestige ohne Begrenzung.',
     ],
   },
   {
@@ -57,7 +57,7 @@ const paths = [
     body: [
       'Innerhalb von zwei Monaten nach der Geburt nimmt die Bayerische dein Kind ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag auf, rückwirkend zum Tag der Geburt. Voraussetzung ist, dass ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Schließ deshalb jetzt ab und nicht erst kurz vor dem Termin. Die SDK verlangt diese drei Monate nicht.',
       'Nach § 198 VVG darf der Schutz des Kindes nicht weiter reichen als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind.',
-      'Rooming-in steckt im Tarif deines Kindes. Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt. In Komfort und Prestige gilt das bei jedem medizinisch notwendigen Klinikaufenthalt.',
+      'Rooming-in steckt im Tarif deines Kindes. Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei jedem medizinisch notwendigen Klinikaufenthalt, bei der SDK in SP1 und SP2, bei der Bayerischen in Komfort und Prestige.',
     ],
   },
 ];
@@ -77,8 +77,8 @@ export default function BenefitFunnelPage() {
   const faq = [
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
-    ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'Ambulant sind Komplikationen, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten ausdrücklich als Ausnahme vom Behandlungsausschluss versichert. Die Behandlung wegen der Schwangerschaft selbst und die Entbindung sind es nicht.'],
-    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenhilfe rechnet deine Krankenkasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt das nicht.'],
+    ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten dagegen versichert.'],
+    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenhilfe rechnet deine Krankenkasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 die gesondert berechneten Leistungen einer Beleghebamme während des Klinikaufenthalts, Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt beides nicht.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ...commonFaq,

@@ -26,6 +26,14 @@
  * Harte Grenzen: Die Entbindung der Mutter ist bei bereits festgestellter
  * Schwangerschaft nicht versichert. Kein Kinderwunsch als Argument. Keine
  * Tarifbeitraege, keine Zusagen.
+ *
+ * Korrektur 28.09.2026 nach SDK-Bedingungspruefung
+ * (Healio/Vertraege/SDK-Klinik-Bedingungen-2026-09/):
+ *   - SDK SP1/SP2 Ziff. 10: Entbindung nicht versichert, wenn die Schwangerschaft
+ *     beim Antrag aerztlich festgestellt war; SDK ohne Wartezeiten.
+ *   - Beleghebamme in SP1/SP2 nur waehrend des Klinikaufenthalts.
+ *   - AP 1.753a: Komplikationen, Fruehgeburten, Fehlgeburten nur in der
+ *     Auslandsreiseversicherung (Ziff. 7) versichert.
  */
 
 export const article = {
@@ -62,11 +70,11 @@ export const article = {
             },
             {
               lead: 'Die Geburt ist stationär zu spät.',
-              text: 'Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung und das Familienzimmer bei dieser Geburt nicht. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis zu laufenden Behandlungen.',
+              text: 'Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung und das Familienzimmer bei dieser Geburt nicht. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen kommt eine Wartezeit von acht Monaten für die Entbindung dazu, die SDK hat keine Wartezeit.',
             },
             {
               lead: 'Wofür dein Stationärtarif trotzdem zählt:',
-              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes: Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt.',
+              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes: Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei jedem medizinisch notwendigen Klinikaufenthalt in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen.',
             },
             {
               lead: 'Fürs Kind ist die Nachversicherung der Weg.',
@@ -94,7 +102,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Stationär sieht es anders aus. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Dazu kommt eine besondere Wartezeit von 8 Monaten für die Entbindung. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es weder bei der Bayerischen noch bei der SDK. Die Bayerische schließt ihn im Antrag ausdrücklich aus, die SDK in den SP-Tarifen ebenso.',
+          text: 'Stationär sieht es anders aus. In den Bedingungen der SDK für SP1 und SP2 steht, dass sie für diese Entbindung nicht leistet, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Bei der Bayerischen kommt eine besondere Wartezeit von 8 Monaten für die Entbindung dazu, die SDK hat keine Wartezeit. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es deshalb weder bei der SDK noch bei der Bayerischen.',
         },
       ],
     },
@@ -123,7 +131,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ebenfalls nicht versichert ist die Behandlung wegen der Schwangerschaft selbst, also Schwangerschaftsbeschwerden, Wassereinlagerungen, Übelkeit und die Entbindung. Eine wichtige Ausnahme gibt es: Komplikationen, Frühgeburten bis zur 36. Schwangerschaftswoche, Fehlgeburten und ein medizinisch indizierter Abbruch sind versichert.',
+          text: 'Ebenfalls nicht versichert ist die Behandlung wegen der Schwangerschaft selbst, also Schwangerschaftsbeschwerden, Wassereinlagerungen, Übelkeit, Komplikationen und die Entbindung. Eine Ausnahme gilt nur auf Auslandsreisen: Dort zahlt der Tarif auch bei Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche, Fehlgeburten und einem medizinisch indizierten Abbruch.',
         },
       ],
     },
@@ -133,7 +141,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Diese Geburt nicht. Das ist der Punkt, an dem viele Beratungen unsauber werden, deshalb hier deutlich: Schließt du den Krankenhauszusatz während der laufenden Schwangerschaft ab, bekommst du für diese Entbindung weder die Chefarztbehandlung noch das Familienzimmer. Die 8 Monate besondere Wartezeit laufen an, und der Antragshinweis schließt das bereits Bekannte ohnehin aus.',
+          text: 'Diese Geburt nicht. Das ist der Punkt, an dem viele Beratungen unsauber werden, deshalb hier deutlich: Schließt du den Krankenhauszusatz während der laufenden Schwangerschaft ab, bekommst du für diese Entbindung weder die Chefarztbehandlung noch das Familienzimmer. Bei der SDK greift der Ausschluss für eine beim Antrag festgestellte Schwangerschaft, bei der Bayerischen zusätzlich die Wartezeit von acht Monaten.',
         },
         {
           type: 'paragraph',
@@ -144,15 +152,15 @@ export const article = {
           items: [
             {
               lead: 'Rooming-in als Begleitperson,',
-              text: 'bis zum 16. Geburtstag deines Kindes. Der Tarif übernimmt Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
+              text: 'wenn dein Kind zu Beginn der Behandlung jünger als 16 ist. Der Tarif übernimmt Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt, bei jedem medizinisch notwendigen Klinikaufenthalt in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
             },
             {
               lead: 'Deine eigene Versorgung',
-              text: 'bei jedem medizinisch notwendigen Krankenhausaufenthalt, der nichts mit dieser Schwangerschaft zu tun hat, bei der Bayerischen nach drei Monaten Wartezeit, nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
+              text: 'bei jedem medizinisch notwendigen Krankenhausaufenthalt, der nichts mit dieser Schwangerschaft zu tun hat, bei der SDK ab Versicherungsbeginn, bei der Bayerischen nach drei Monaten Wartezeit und nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
             },
             {
               lead: 'Das Familienzimmer bei einer späteren Entbindung,',
-              text: 'nach Ablauf der Wartezeit. Beim Komfort-Tarif bis Zweibettzimmer-Niveau, beim Prestige ohne Begrenzung, beim Smart gar nicht.',
+              text: 'bei der SDK im SP1 ohne Wartezeit, wenn die nächste Schwangerschaft erst nach dem Antrag festgestellt wird. Bei der Bayerischen nach der Wartezeit von acht Monaten, im Komfort bis Zweibettzimmer-Niveau, im Prestige ohne Begrenzung, im Smart gar nicht.',
             },
           ],
         },
@@ -218,12 +226,12 @@ export const article = {
               'Klinik-Tarif für einen Elternteil, wenn dein Kind einen Klinik-Tarif bekommen soll',
             ],
             [
-              'Komplikationen, Frühgeburten bis 36. SSW, Fehlgeburten, medizinisch indizierter Abbruch',
+              'Auf Auslandsreisen auch Komplikationen, Frühgeburten bis Ende der 36. SSW, Fehlgeburten, medizinisch indizierter Abbruch',
               'Chefarzt und Familienzimmer bei dieser Entbindung, wenn der Stationärtarif erst jetzt abgeschlossen wird',
               'Welche Kasse in deinem Fall den höchsten Bonus zahlt und ob der Zusatzbeitrag das aufzehrt',
             ],
             [
-              'Rooming-in als Begleitperson bis zum 16. Geburtstag, 100 Prozent aus dem Tarif des nachversicherten Kindes, soweit die Krankenkasse nicht zahlt',
+              'Rooming-in als Begleitperson für Kinder unter 16, aus dem Tarif des nachversicherten Kindes',
               'Stationärer Sofortschutz für bereits Angeratenes, weder bei der SDK noch bei der Bayerischen',
               'Anzahl der bonusfähigen Mutterschaftsvorsorgen, von der IKK classic nicht öffentlich beziffert',
             ],
@@ -245,12 +253,12 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die reguläre Hebammenhilfe rechnet die Kasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt das nicht.',
+        'Die reguläre Hebammenhilfe rechnet die Kasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 die gesondert berechneten Leistungen einer Beleghebamme während des Klinikaufenthalts, Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt beides nicht.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',
       answer:
-        'Ambulant sind Komplikationen, Frühgeburten bis zur 36. Woche und Fehlgeburten ausdrücklich als Ausnahme vom Behandlungsausschluss versichert.',
+        'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten dagegen versichert.',
     },
     {
       question: 'Kann ich den Stationärtarif später upgraden?',

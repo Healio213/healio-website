@@ -394,8 +394,8 @@
           "features": [
             "Ein- oder Zweibettzimmer",
             "Privatärztliche Behandlung",
-            "10 EUR Krankenhaustagegeld pro vollstationärem Tag",
-            "Familienzimmer nach der Entbindung im tariflichen Umfang"
+            "Gesetzliche Zuzahlung von 10 EUR je Kliniktag, an Tagen ohne Zuzahlung 10 EUR Krankenhaustagegeld",
+            "Familienzimmer bei der Entbindung"
           ],
           "result": "SP1: Mehr Ruhe bei Krankheit und Unfall"
         },
@@ -432,7 +432,7 @@
         },
         "choice": {
           "title": "Mehr Wahl bei der Klinik",
-          "body": "Die freie Krankenhauswahl ist im tariflichen Umfang versichert, auch für Privat- und Spezialkliniken."
+          "body": "Du wählst die Klinik frei, auch eine Fachklinik. In einer Privatklinik zahlt der Tarif die Kosten über dem Satz eines zugelassenen Krankenhauses, wenn deine Krankenkasse diesen Satz übernimmt. Übernimmt deine Kasse diesen Satz nicht, trägst du die allgemeinen Krankenhauskosten selbst."
         },
         "start": {
           "title": "Keine tarifliche Wartezeit",
@@ -447,14 +447,14 @@
       "parents": {
         "label": "Für werdende Eltern",
         "title": "Schutz vor der Geburt planen",
-        "body": "Ist ein Elternteil bei der Geburt versichert, kann das Neugeborene unter den tariflichen Voraussetzungen ohne Gesundheitsprüfung aufgenommen werden.",
+        "body": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, nimmt die SDK dein Kind ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Leistungsausschluss auf, auch bei Geburtsschäden oder angeborenen Krankheiten. Eine Vorversicherungszeit gibt es nicht.",
         "items": [
           "Anmeldung innerhalb von zwei Monaten nach der Geburt",
           "Versicherungsschutz rückwirkend ab dem Tag der Geburt",
           "Rooming-in für das später versicherte Kind",
-          "Familienzimmer nach der Entbindung im SP1 nach Tarifbedingungen"
+          "Familienzimmer bei der Entbindung im SP1"
         ],
-        "note": "Die Voraussetzungen der Neugeborenennachversicherung müssen vollständig erfüllt sein. Entscheidend sind der bestehende Schutz eines Elternteils, die Frist und die aktuellen Tarifbedingungen."
+        "note": "Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, leistet der Tarif für diese Entbindung nicht. Der Schutz deines Kindes reicht so weit wie der Klinik-Tarif des besser versicherten Elternteils, für ein Einbettzimmer braucht ein Elternteil selbst SP1."
       },
       "children": {
         "label": "Für Kinder",
@@ -533,7 +533,7 @@
       "items": [
         {
           "q": "Was ist der Unterschied zwischen SP1, SP2 und SPU?",
-          "a": "SP1 bietet Ein- oder Zweibettzimmer und zusätzliche Leistungen wie 10 EUR Krankenhaustagegeld. SP2 sichert das Zweibettzimmer. Beide Tarife gelten im vereinbarten Umfang bei Krankheit und Unfall. SPU bietet Klinik-Extras ausschließlich nach einem Unfall."
+          "a": "SP1 bietet Ein- oder Zweibettzimmer und übernimmt die gesetzliche Zuzahlung von 10 EUR je Kliniktag, an Tagen ohne Zuzahlung zahlt er 10 EUR Krankenhaustagegeld. SP2 sichert das Zweibettzimmer. Beide Tarife gelten im vereinbarten Umfang bei Krankheit und Unfall. SPU bietet Klinik-Extras ausschließlich nach einem Unfall."
         },
         {
           "q": "Ist SPU eine vollwertige Krankenhauszusatzversicherung?",
@@ -553,7 +553,7 @@
         },
         {
           "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",
-          "a": "Ist ein Elternteil bei der Geburt versichert und sind die Tarifvoraussetzungen erfüllt, kann das Kind innerhalb von zwei Monaten ohne Gesundheitsprüfung angemeldet werden, rückwirkend ab dem Tag der Geburt."
+          "a": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, meldest du dein Kind innerhalb von zwei Monaten an. Es ist dann rückwirkend ab Geburt versichert, ohne Gesundheitsprüfung und ohne Vorversicherungszeit, höchstens im Umfang des Elternteils."
         }
       ]
     },

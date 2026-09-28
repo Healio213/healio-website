@@ -394,8 +394,8 @@
           "features": [
             "Private or twin room",
             "Private medical treatment",
-            "EUR 10 hospital allowance per full inpatient day",
-            "Family room after childbirth within the policy scope"
+            "Statutory co-payment of EUR 10 per hospital day covered, EUR 10 daily allowance on days without a co-payment",
+            "Family room at childbirth"
           ],
           "result": "SP1: more privacy for illness and accidents"
         },
@@ -432,7 +432,7 @@
         },
         "choice": {
           "title": "More choice of hospital",
-          "body": "Free hospital choice is insured within the policy scope, including private and specialist hospitals."
+          "body": "You choose the hospital freely, including a specialist hospital. In a private clinic the plan pays the costs above the rate of a contracted hospital, provided your statutory insurer pays that rate. If your insurer does not pay that rate, you bear the general hospital costs yourself."
         },
         "start": {
           "title": "No policy waiting period",
@@ -447,14 +447,14 @@
       "parents": {
         "label": "For expecting parents",
         "title": "Plan cover before the birth",
-        "body": "If one parent is insured at the time of birth, the newborn can be admitted without a health assessment when the policy requirements are met.",
+        "body": "If one parent is insured with SDK on the day of birth, SDK accepts your child without a health assessment, surcharge or benefit exclusion, including birth injuries and congenital conditions. There is no prior insurance period.",
         "items": [
           "Registration within two months after birth",
           "Cover backdated to the day of birth",
           "Rooming-in for the subsequently insured child",
-          "Family room after childbirth in SP1 subject to policy terms"
+          "Family room at childbirth in SP1"
         ],
-        "note": "All newborn enrolment requirements must be met. The parent's existing cover, the deadline and the current policy terms are decisive."
+        "note": "If the pregnancy was already medically confirmed when the application was made, the plan does not pay for that birth. Your child's cover can reach as far as the hospital plan of the better insured parent; for a private room one parent needs SP1."
       },
       "children": {
         "label": "For children",
@@ -533,7 +533,7 @@
       "items": [
         {
           "q": "What is the difference between SP1, SP2 and SPU?",
-          "a": "SP1 offers a private or twin room and additional benefits such as a EUR 10 hospital allowance. SP2 covers a twin room. Both apply within the agreed scope for illness and accidents. SPU covers hospital extras only after an accident."
+          "a": "SP1 offers a private or twin room and covers the statutory co-payment of EUR 10 per hospital day, paying a EUR 10 daily allowance on days without a co-payment. SP2 covers a twin room. Both apply within the agreed scope for illness and accidents. SPU covers hospital extras only after an accident."
         },
         {
           "q": "Is SPU full hospital supplementary insurance?",
@@ -553,7 +553,7 @@
         },
         {
           "q": "How does newborn enrolment work?",
-          "a": "If one parent is insured at the time of birth and the policy requirements are met, the child can be registered within two months without a health assessment, backdated to the day of birth."
+          "a": "If one parent is insured with SDK on the day of birth, register your child within two months. Cover then applies backdated to the day of birth, without a health assessment and without a prior insurance period, at most to the extent of the parent's cover."
         }
       ]
     },

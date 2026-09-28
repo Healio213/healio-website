@@ -69,7 +69,7 @@
       },
       {
         "title": "Kindernachversicherung frühzeitig prüfen",
-        "desc": "Neugeborene werden innerhalb von zwei Monaten nach der Geburt ohne Gesundheitsprüfung aufgenommen. Bei der Bayerischen muss ein Elternteil dafür seit mindestens drei Monaten versichert sein."
+        "desc": "Neugeborene werden innerhalb von zwei Monaten nach der Geburt ohne Gesundheitsprüfung aufgenommen. Bei der Bayerischen muss ein Elternteil dafür seit mindestens drei Monaten versichert sein, die SDK verlangt keine Vorversicherungszeit."
       }
     ],
     "ikkTitle": "IKK classic Leistungen",
@@ -140,12 +140,12 @@
     "kernText": "Nach § 198 VVG wird ein Neugeborenes ohne Risikozuschläge und Wartezeiten in den bestehenden Krankenversicherungsschutz eines Elternteils aufgenommen, wenn die Anmeldung spätestens zwei Monate nach der Geburt rückwirkend erfolgt. Der beantragte Schutz darf nicht höher oder umfassender sein als der des versicherten Elternteils. Versicherer dürfen außerdem eine Vorversicherungszeit des Elternteils von höchstens drei Monaten vereinbaren. Die Bayerische verlangt drei Monate, die SDK keine. Deshalb sollte der Vertrag der Eltern rechtzeitig vor der Geburt stehen.",
     "chanceTitle": "Warum eine frühe Prüfung sinnvoll ist",
     "chanceText": "Gesundheitliche Angaben können bei einem späteren Neuabschluss eine Rolle spielen. Eine rechtzeitige Prüfung schafft Klarheit darüber, welche Optionen für Eltern und Kind bestehen. Sie ersetzt keine medizinische Einschätzung und ist keine Zusage, dass jeder gewünschte Schutz verfügbar ist.",
-    "chanceObenTitle": "Welche stationären Leistungen tarifabhängig sein können",
-    "chanceObenText": "Je nach Tarif können Rooming-in, Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Krankenhauswahl vorgesehen sein. Entscheidend sind immer der versicherte Tarif, der konkrete Versicherungsfall und die jeweiligen Bedingungen. Healio ordnet diese Punkte mit der Familie ein.",
+    "chanceObenTitle": "Welche stationären Leistungen der Klinik-Tarif enthält",
+    "chanceObenText": "Die Klinik-Tarife SP1 und SP2 der SDK enthalten Rooming-in für Kinder unter 16, das Ein- oder Zweibettzimmer je nach Tarif, privatärztliche Behandlung und freie Krankenhauswahl. Healio ordnet diese Punkte mit der Familie ein.",
     "deadlineTitle": "Was du als Hebamme sicher sagen kannst",
     "deadlineText": "Weise Familien frühzeitig auf die Zwei-Monats-Frist hin und leite sie für die Prüfung direkt an Healio weiter. Du musst weder Anbieter vergleichen noch Gesundheitsfragen oder Fristen im Detail erklären. Vorversicherungszeit und Schutzumfang werden anhand des konkreten Vertrags geprüft.",
     "ehrlichTitle": "Bei laufender Schwangerschaft genau unterscheiden",
-    "ehrlichText": "Ambulante Vorsorge- oder Naturheilleistungen können je nach Tarif und Voraussetzungen auch während einer bestehenden Schwangerschaft infrage kommen. Ist die Schwangerschaft schon festgestellt, lässt sich diese Entbindung stationär nicht mehr versichern. Bei der Bayerischen gilt für eine Entbindung außerdem eine Wartezeit von acht Monaten.",
+    "ehrlichText": "Ambulant greift der Vorsorge-Topf der SDK auch während einer bestehenden Schwangerschaft. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, ist diese Entbindung bei der SDK und bei der Bayerischen nicht versichert. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit.",
     "roomingTitle": "Der sichere nächste Schritt",
     "roomingText": "Interessierte Familien melden sich direkt bei Healio. Wir prüfen bestehenden Schutz, gewünschte Leistungen, Fristen und mögliche Ausschlüsse, bevor eine Empfehlung ausgesprochen oder ein Antrag gestellt wird. Rückwirkende Leistungsversprechen gibt es nicht.",
     "compareTitle": "Tarife nicht pauschal empfehlen",
@@ -163,11 +163,12 @@
     ],
     "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen. Welche Variante zur Familie passt, klärt Healio im Gespräch.",
     "sdkName": "Die SDK",
-    "sdkTag": "Tarifoption ohne tarifliche Wartezeit",
+    "sdkTag": "Ohne Wartezeit, auch für die Entbindung",
     "sdkItems": [
       "Nach den aktuellen Bedingungen bestehen keine tariflichen Wartezeiten; bereits eingetretene Versicherungsfälle bleiben ausgeschlossen",
-      "Kindernachversicherung bei fristgerechter Anmeldung und passendem Elternschutz",
-      "Rooming-in für versicherte Kinder unter 16 Jahren nach Tarifbedingungen",
+      "Kindernachversicherung ohne Gesundheitsprüfung und ohne Vorversicherungszeit, Anmeldung bis zwei Monate nach der Geburt",
+      "Rooming-in für versicherte Kinder unter 16 Jahren",
+      "Beleghebamme bei der Klinikgeburt in SP1 und SP2, Familienzimmer bei der Entbindung im SP1",
       "Ein- oder Zweibettzimmer, privatärztliche Behandlung und Klinikwahl je nach Tarif",
       "Gesundheitsfragen und Ausschlüsse bei bereits festgestellter Schwangerschaft beachten"
     ],
