@@ -4,13 +4,13 @@
 
 ## Anlass
 
-Die Datenschutzerklärung auf healio.de erwähnt die App Healio Tree bisher nicht. Der neue Abschnitt „Anfragen zu Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner“ (eingebaut, `src/i18n/locales/de/legal.json`, Schlüssel `anlage*`) nennt die App nur als Beispiel für den Anfrageweg.
+Die Datenschutzerklärung auf healio.de erwähnt die App Healio Tree bisher nicht. Der neue Abschnitt „Anfragen zu Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner“ (eingebaut, `src/i18n/locales/de/legal.json`, Schlüssel `anlage*`) nennt die App nur als Weg, über den die E-Mail vorbereitet wird. Seit der Überarbeitung vom 28.09.2026 steht er als eigener Abschnitt nach „Eingesetzte Dienste und Drittanbieter“, weil es nicht um Daten der Website geht. Voraussetzung für die Veröffentlichung: Der Anfrageweg Geldanlage in der App bietet kein WhatsApp mehr an (siehe `Steuerlogik-App/33_Datenschutz_healio_de_Entwurf.md`).
 
-## Vorgeschlagener Text (Sie-Form, Platz: direkt vor dem Abschnitt zu Geldanlage und Kapitalanlage)
+## Vorgeschlagener Text (Sie-Form, Platz: eigener Abschnitt direkt vor „Anfragen zu Geldanlage und Kapitalanlage“, also nach den eingesetzten Diensten)
 
 **App Healio Tree**
 
-Die App Healio Tree rechnet auf Ihrem Gerät. Ihre Angaben, Szenarien und Einstellungen bleiben dort und werden nicht an Healio übertragen. Eine Anfrage erreicht uns erst, wenn Sie sie selbst absenden, derzeit per E-Mail oder WhatsApp aus der App heraus. Welche Angaben eine Anfrage zu Geldanlage oder Kapitalanlage enthält und wie wir sie verarbeiten, steht im folgenden Abschnitt.
+Die App Healio Tree rechnet auf Ihrem Gerät. Ihre Angaben, Szenarien und Einstellungen bleiben dort und werden nicht an Healio übertragen. Eine Anfrage erreicht uns erst, wenn Sie sie selbst absenden, derzeit per E-Mail oder WhatsApp aus der App heraus, Anfragen zu Geldanlage und Kapitalanlage nur per E-Mail. Welche Angaben eine solche Anfrage enthält und wie wir sie verarbeiten, steht im Abschnitt „Anfragen zu Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner“.
 
 ## Grundlage und Grenzen
 

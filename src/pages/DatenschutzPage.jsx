@@ -89,13 +89,6 @@ const DatenschutzPage = () => {
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.leitfadenTitle')}</h3>
               <p>{t('datenschutz.leitfadenText')}</p>
 
-              <h3 id="anfragen-geldanlage" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.anlageTitle')}</h3>
-              <p>{t('datenschutz.anlageText')}</p>
-              <p>{t('datenschutz.anlageLegalBasis')}</p>
-              <p>{t('datenschutz.anlageRecipients')}</p>
-              <p>{t('datenschutz.anlageStorage')}</p>
-              <p>{t('datenschutz.anlageRevocation')}</p>
-
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.servicesTitle')}</h2>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.hostingTitle')}</h3>
               <p>{t('datenschutz.hostingText')}</p>
@@ -160,6 +153,15 @@ const DatenschutzPage = () => {
               <p>{t('datenschutz.brevoText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>
               <p>{t('datenschutz.insurerFlowsText')}</p>
+
+              <h2 id="anfragen-geldanlage" className="scroll-mt-28 text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.anlageTitle')}</h2>
+              <p>{t('datenschutz.anlageText')}</p>
+              <p>{t('datenschutz.anlageContact')}</p>
+              <p>{t('datenschutz.anlageLegalBasis')}</p>
+              <p>{t('datenschutz.anlageRecipients')}</p>
+              <p>{t('datenschutz.anlageProcessors')}</p>
+              <p>{t('datenschutz.anlageStorage')}</p>
+              <p>{t('datenschutz.anlageRevocation')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section3Title')}</h2>
               <p>{t('datenschutz.section3Text')}</p>
