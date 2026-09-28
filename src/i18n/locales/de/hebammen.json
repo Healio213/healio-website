@@ -69,7 +69,7 @@
       },
       {
         "title": "Kindernachversicherung frühzeitig prüfen",
-        "desc": "Für Neugeborene kann eine zweimonatige Anmeldefrist gelten. Schutzumfang und mögliche Vorversicherungszeit des Elternteils müssen vorab geprüft werden."
+        "desc": "Neugeborene werden innerhalb von zwei Monaten nach der Geburt ohne Gesundheitsprüfung aufgenommen. Bei der Bayerischen muss ein Elternteil dafür seit mindestens drei Monaten versichert sein."
       }
     ],
     "ikkTitle": "IKK classic Leistungen",
@@ -137,31 +137,33 @@
     "subtitle": "Die Kindernachversicherung kann wertvoll sein, folgt aber gesetzlichen und tariflichen Voraussetzungen. Hebammen geben nur den Hinweis; Healio prüft den konkreten Fall.",
     "detailsLabel": "Details zur Kindernachversicherung und zum Klinikschutz ansehen",
     "kernTitle": "Eine Anmeldung innerhalb von zwei Monaten kann rückwirkenden Schutz ab Geburt ermöglichen.",
-    "kernText": "Nach § 198 VVG kann ein Neugeborenes unter bestimmten Voraussetzungen ohne Risikozuschläge und Wartezeiten in den bestehenden Krankenversicherungsschutz eines Elternteils aufgenommen werden. Der beantragte Schutz darf nicht höher oder umfassender sein als der des versicherten Elternteils. Versicherer können außerdem eine Vorversicherungszeit des Elternteils verlangen. Deshalb sollte die Familie den konkreten Tarif möglichst vor der Geburt prüfen lassen.",
+    "kernText": "Nach § 198 VVG wird ein Neugeborenes ohne Risikozuschläge und Wartezeiten in den bestehenden Krankenversicherungsschutz eines Elternteils aufgenommen, wenn die Anmeldung spätestens zwei Monate nach der Geburt rückwirkend erfolgt. Der beantragte Schutz darf nicht höher oder umfassender sein als der des versicherten Elternteils. Versicherer dürfen außerdem eine Vorversicherungszeit des Elternteils von höchstens drei Monaten vereinbaren. Die Bayerische verlangt drei Monate, die SDK keine. Deshalb sollte der Vertrag der Eltern rechtzeitig vor der Geburt stehen.",
     "chanceTitle": "Warum eine frühe Prüfung sinnvoll ist",
     "chanceText": "Gesundheitliche Angaben können bei einem späteren Neuabschluss eine Rolle spielen. Eine rechtzeitige Prüfung schafft Klarheit darüber, welche Optionen für Eltern und Kind bestehen. Sie ersetzt keine medizinische Einschätzung und ist keine Zusage, dass jeder gewünschte Schutz verfügbar ist.",
     "chanceObenTitle": "Welche stationären Leistungen tarifabhängig sein können",
     "chanceObenText": "Je nach Tarif können Rooming-in, Ein- oder Zweibettzimmer, privatärztliche Behandlung und freie Krankenhauswahl vorgesehen sein. Entscheidend sind immer der versicherte Tarif, der konkrete Versicherungsfall und die jeweiligen Bedingungen. Healio ordnet diese Punkte mit der Familie ein.",
     "deadlineTitle": "Was du als Hebamme sicher sagen kannst",
-    "deadlineText": "Weise Familien frühzeitig auf die mögliche Zwei-Monats-Frist hin und leite sie für die Prüfung direkt an Healio weiter. Du musst weder Anbieter vergleichen noch Gesundheitsfragen oder Fristen im Detail erklären. Vorversicherungszeit und Schutzumfang werden anhand des konkreten Vertrags geprüft.",
+    "deadlineText": "Weise Familien frühzeitig auf die Zwei-Monats-Frist hin und leite sie für die Prüfung direkt an Healio weiter. Du musst weder Anbieter vergleichen noch Gesundheitsfragen oder Fristen im Detail erklären. Vorversicherungszeit und Schutzumfang werden anhand des konkreten Vertrags geprüft.",
     "ehrlichTitle": "Bei laufender Schwangerschaft genau unterscheiden",
-    "ehrlichText": "Ambulante Vorsorge- oder Naturheilleistungen können je nach Tarif und Voraussetzungen auch während einer bestehenden Schwangerschaft infrage kommen. Für stationäre Wahlleistungen rund um eine bereits festgestellte Schwangerschaft können Ausschlüsse gelten. Ob eine Leistung versichert ist, lässt sich nur anhand von Antrag, Beginn und Tarifbedingungen beurteilen.",
+    "ehrlichText": "Ambulante Vorsorge- oder Naturheilleistungen können je nach Tarif und Voraussetzungen auch während einer bestehenden Schwangerschaft infrage kommen. Ist die Schwangerschaft schon festgestellt, lässt sich diese Entbindung stationär nicht mehr versichern. Bei der Bayerischen gilt für eine Entbindung außerdem eine Wartezeit von acht Monaten.",
     "roomingTitle": "Der sichere nächste Schritt",
     "roomingText": "Interessierte Familien melden sich direkt bei Healio. Wir prüfen bestehenden Schutz, gewünschte Leistungen, Fristen und mögliche Ausschlüsse, bevor eine Empfehlung ausgesprochen oder ein Antrag gestellt wird. Rückwirkende Leistungsversprechen gibt es nicht.",
     "compareTitle": "Tarife nicht pauschal empfehlen",
     "compareSubtitle": "Beitrag, Gesundheitsprüfung, Wartezeiten und Leistungsumfang unterscheiden sich. Healio vergleicht die passenden Optionen im Einzelfall; die Hebamme bleibt bei der neutralen Information.",
     "bayerischeName": "Die Bayerische",
-    "bayerischeTag": "Beitragsorientierte Tarifoption, individuell prüfen",
+    "bayerischeTag": "Starker Klinikschutz für Kinder und Familien",
     "bayerischeItems": [
       "Mehrere Tarifstufen mit unterschiedlichem Leistungsumfang",
-      "Rooming-in und Unterbringung abhängig vom gewählten Tarif",
+      "Rooming-in für Kinder unter 16 Jahren in allen drei Varianten, Zimmer je nach Variante",
       "Privatärztliche Leistungen und Krankenhauswahl nach Tarifbedingungen",
       "Beiträge hängen von Alter und Tarif ab und werden individuell berechnet",
-      "Gesundheitsfragen, Wartezeiten und Vorversicherungszeit vor Antrag prüfen"
+      "Nur zwei Gesundheitsfragen",
+      "Entbindung in Komfort und Prestige nach acht Monaten Wartezeit versichert",
+      "Neugeborene ohne Gesundheitsprüfung, wenn ein Elternteil seit drei Monaten versichert ist"
     ],
-    "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen und die individuelle Risikoprüfung. Aus diesem Beispiel folgt keine pauschale Empfehlung.",
+    "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen. Welche Variante zur Familie passt, klärt Healio im Gespräch.",
     "sdkName": "Die SDK",
-    "sdkTag": "Tarifoption ohne tarifliche Wartezeit, individuell prüfen",
+    "sdkTag": "Tarifoption ohne tarifliche Wartezeit",
     "sdkItems": [
       "Nach den aktuellen Bedingungen bestehen keine tariflichen Wartezeiten; bereits eingetretene Versicherungsfälle bleiben ausgeschlossen",
       "Kindernachversicherung bei fristgerechter Anmeldung und passendem Elternschutz",

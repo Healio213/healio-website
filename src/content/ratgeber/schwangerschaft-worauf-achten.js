@@ -23,6 +23,15 @@
  * Weitere bewusste Abweichungen:
  *   - Anrede durchgehend klein, die Quelle mischt an drei Stellen du und Du.
  *   - Ueberschrift ohne "ohne Gesundheitsfragen" als Versprechen.
+ *
+ * Korrektur 28.09.2026 nach AVB-Pruefung der Bayerischen
+ * (Healio/Vertraege/Bayerische-Direktanbindung-2026-09/
+ * AVB-PRUEFUNG-HEBAMME-STATIONAER-WEBSITE-ABGLEICH.md, Abschnitt 4a):
+ *   - Drei Monate Elternversicherung verlangt die Bayerische (AVB § 2 Abs. 2),
+ *     die SDK nicht. § 198 VVG erlaubt die Mindestzeit nur als Vereinbarung.
+ *   - Kinderschutz hoechstens wie der des Elternteils, Klinik-Tarif fuers Kind
+ *     braucht Klinik-Tarif eines Elternteils.
+ *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
  */
 
 export const article = {
@@ -33,8 +42,8 @@ export const article = {
   metaDescription:
     'Vorsorge, Mutterpass, Mutterschutz und das Geld: was die Kasse zahlt, was du selbst trägst und warum der Kassenbonus jetzt am höchsten ist.',
 
-  publishedAt: '2026-09-22',
-  publishedAtLabel: '22. September 2026',
+  publishedAt: '2026-09-28',
+  publishedAtLabel: '28. September 2026',
   readingTimeMinutes: 8,
 
   listTitle: 'Schwanger: worauf du jetzt achten solltest',
@@ -251,13 +260,13 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Stationär ist die Geburt zu spät. Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung nicht, weder Chefarztbehandlung noch Familienzimmer. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft haben wir bei keinem Anbieter gefunden. Wer dir einen Stationärtarif mit dem Versprechen verkauft, du kämst damit bei dieser Geburt ins Familienzimmer, liegt falsch.',
+          text: 'Stationär ist die Geburt zu spät. Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung nicht, weder Chefarztbehandlung noch Familienzimmer. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es weder bei der Bayerischen noch bei der SDK. Wer dir einen Stationärtarif mit dem Versprechen verkauft, du kämst damit bei dieser Geburt ins Familienzimmer, liegt falsch.',
         },
         {
           type: 'segments',
           segments: [
             {
-              text: 'Wofür der Stationärtarif trotzdem zählt, ist die Zeit danach: Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Im Kindertarif ist Rooming-in für eine Begleitperson bei einem Kind bis 16 Jahren zu 100 Prozent enthalten, also bei jedem späteren Klinikaufenthalt deines Kindes. Die ausführliche Fassung mit allen Tarifstufen steht im Ratgeber ',
+              text: 'Wofür der Stationärtarif trotzdem zählt, ist die Zeit danach: Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Im Kindertarif ist Rooming-in enthalten. Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt deines Kindes. Die ausführliche Fassung mit allen Tarifstufen steht im Ratgeber ',
             },
             { text: 'Schwanger: welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
             { text: '.' },
@@ -271,15 +280,15 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Über die Nachversicherung. In der Regel kann ein Neugeborenes innerhalb von zwei Monaten nach der Geburt ohne erneute Gesundheitsprüfung aufgenommen werden, rückwirkend zum Tag der Geburt.',
+          text: 'Über die Nachversicherung. Meldest du dein Kind spätestens zwei Monate nach der Geburt an, wird es rückwirkend zum Tag der Geburt aufgenommen, ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag.',
         },
         {
           type: 'paragraph',
-          text: 'Die Bedingung dahinter ist der entscheidende Punkt: Nach § 198 VVG greift die Nachversicherung nur, wenn die Versicherung des Elternteils am Tag der Geburt schon mindestens drei Monate besteht. Ob der Elternvertrag stationär sein muss oder ambulant genügt, ist nicht für jeden Tarif abschließend geprüft und gehört vor Abschluss geklärt. Deshalb steht hier "in der Regel" und kein Anspruch.',
+          text: 'Die Bedingung dahinter ist der entscheidende Punkt. Bei der Bayerischen muss ein Elternteil am Tag der Geburt seit mindestens drei Monaten versichert sein. Das Gesetz erlaubt diese Mindestzeit von höchstens drei Monaten (§ 198 VVG), die SDK verlangt keine. Der Schutz deines Kindes reicht so weit wie der Tarif des versicherten Elternteils. Für einen Klinik-Tarif deines Kindes braucht ein Elternteil deshalb selbst einen Klinik-Tarif beim selben Versicherer.',
         },
         {
           type: 'paragraph',
-          text: 'Praktisch heißt das: Wer in der Schwangerschaft daran denkt, hat die drei Monate meist noch vor sich, wer erst im Kreißsaal daran denkt, nicht mehr.',
+          text: 'Praktisch heißt das: Wer spätestens drei Monate vor der Geburt versichert ist, erfüllt die Frist der Bayerischen. Am sichersten ist der Abschluss direkt nach der Feststellung der Schwangerschaft.',
         },
       ],
     },

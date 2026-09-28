@@ -153,13 +153,13 @@
     "bayerischeName": "Die Bayerische",
     "bayerischeTag": "Our recommendation for young families",
     "bayerischeItems": [
-      "Child from around 4 euros per month in the top tariff, entry tariff from around 2 euros",
-      "Rooming-in for children up to 16, family room without limit in the top tariff",
+      "Child from EUR 4.10 per month in Prestige, the entry tariff Smart (serious illness and accidents only) from EUR 2.10",
+      "Rooming-in for children under 16, family room at childbirth without limit in Prestige and up to the twin-room rate in Komfort",
       "Head physician at 100 per cent, with no cap at the maximum GOÄ rates",
-      "Privately invoiced midwife covered during an inpatient stay",
+      "Midwife costs above the statutory rate in Komfort and Prestige, for antenatal care, birth assistance, postnatal home visits and postnatal recovery classes",
       "Streamlined acceptance with only two health questions",
-      "Adults aged 30 from around 13 euros per month",
-      "The child's entry tariff can be upgraded later without a further health assessment"
+      "Adults aged 21 to 30: Komfort EUR 10.20, Prestige EUR 13.40 per month",
+      "The child's Smart tariff can be switched to Komfort or Prestige without a new health check or waiting period, at the end of the third or sixth insurance year counted from the year the child turns 21"
     ],
     "bayerischeCaveat": "To be honest about it: a special waiting period of eight months applies to childbirth, and for the newborn a parent must already have been insured for three months. The deadline therefore falls in the sixth month of pregnancy. The tariff also builds no ageing provisions, so the premium is very low at a young age and rises considerably by design in old age. For children and the family years that is exactly the strongest lever, but as a lifelong solution you need to know it.",
     "sdkName": "SDK",
@@ -223,7 +223,7 @@
     "naturopathy": "Depending on the plan, up to EUR 1,000 for naturopathy and osteopathy",
     "onCall": "IKK: up to EUR 250 for midwife on-call services",
     "newbornCover": "Check the two-month window for newborn enrolment",
-    "clearRoles": "The midwife informs – Healio checks and advises"
+    "clearRoles": "The midwife informs, Healio checks and advises"
   },
   "miaPrompt": {
     "ariaLabel": "Nita offers help with the Healio concept for midwives",

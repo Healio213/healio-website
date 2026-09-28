@@ -48,16 +48,16 @@ const paths = [
     body: [
       'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Dafür sorgen die besondere Wartezeit von 8 Monaten und der Antragshinweis, dass laufende oder angeratene Behandlungen im Zusammenhang mit Schwangerschaft und Entbindung nicht mitversichert sind. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
       'Wofür der Tarif trotzdem zählt: für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann.',
-      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung, nach Ablauf der Wartezeit.',
+      'Dazu kommt deine eigene Versorgung bei Klinikaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, und das Familienzimmer bei einer späteren Entbindung nach Ablauf der Wartezeit, bei der Bayerischen in Komfort bis zur Höhe des Zweibettzimmers und in Prestige ohne Begrenzung.',
     ],
   },
   {
     id: 'kind', kicker: 'Dein Kind',
     title: 'Nachversicherung statt neuer Prüfung',
     body: [
-      'Innerhalb von zwei Monaten nach der Geburt kann ein Neugeborenes in der Regel ohne erneute Gesundheitsprüfung in den Tarif aufgenommen werden, rückwirkend zum Tag der Geburt (§ 198 VVG). Voraussetzung ist ein bestehender Elternvertrag. Üblich ist, dass ein Elternteil bei der Geburt schon mindestens drei Monate versichert ist.',
+      'Innerhalb von zwei Monaten nach der Geburt nimmt die Bayerische dein Kind ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag auf, rückwirkend zum Tag der Geburt. Voraussetzung ist, dass ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Schließ deshalb jetzt ab und nicht erst kurz vor dem Termin. Die SDK verlangt diese drei Monate nicht.',
       'Nach § 198 VVG darf der Schutz des Kindes nicht weiter reichen als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind.',
-      'Rooming-in als Begleitperson steckt im Tarif deines Kindes, bis 16 Jahre zu 100 Prozent und bei jedem Klinikaufenthalt. Was dein Versicherer im Einzelnen verlangt, steht in den Bedingungen. Wir prüfen das vor dem Abschluss, nicht danach.',
+      'Rooming-in steckt im Tarif deines Kindes. Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt. In Komfort und Prestige gilt das bei jedem medizinisch notwendigen Klinikaufenthalt.',
     ],
   },
 ];
@@ -78,7 +78,7 @@ export default function BenefitFunnelPage() {
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
     ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'Ambulant sind Komplikationen, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten ausdrücklich als Ausnahme vom Behandlungsausschluss versichert. Die Behandlung wegen der Schwangerschaft selbst und die Entbindung sind es nicht.'],
-    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenleistung rechnet deine Krankenkasse ab. Eine privat abrechnende Hebamme ist ein stationäres Thema und bei der Bayerischen in den Varianten Komfort und Prestige enthalten. Für diese Entbindung greift das wegen der besonderen Wartezeit nicht.'],
+    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenhilfe rechnet deine Krankenkasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt das nicht.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ...commonFaq,

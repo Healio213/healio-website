@@ -213,7 +213,7 @@ Schritt 3, was die Familie davon hat: Muss das Kind stationär behandelt werden,
 
 Schritt 4, die nächste Schwangerschaft: Die SDK verzichtet in den Klinik-Tarifen vollständig auf Wartezeiten, wörtlich "Es bestehen keine Wartezeiten". Wer den Vertrag hat, bevor eine nächste Schwangerschaft ärztlich festgestellt wird, hat auch die Entbindung voll abgesichert. Dann sind das Familienzimmer bei der Entbindung und die gesondert berechenbaren Leistungen von Beleghebammen und Belegentbindungspflegern eingeschlossen. Deshalb ist das Wochenbett ein sehr guter Zeitpunkt für den Abschluss.
 
-Für die Einordnung sind die Wartezeiten entscheidend: Die SDK hat keine tarifliche Wartezeit; bei der Bayerischen gelten für eine Entbindung acht Monate. Bedingungen der Kindernachversicherung werden vor Antrag individuell geprüft.
+Für die Einordnung sind die Wartezeiten entscheidend: Die SDK hat keine tarifliche Wartezeit; bei der Bayerischen gelten für eine Entbindung acht Monate. Bei der Bayerischen muss ein Elternteil am Tag der Geburt seit mindestens drei Monaten versichert sein; die SDK verlangt keine Vorversicherungszeit.
 
 Beitragsbeispiele SDK mit 30 Jahren: Klinik bei Unfall 6,84 Euro, Klinik 2-Bett 32,82 Euro, Klinik 1-Bett 49,78 Euro im Monat.
 
@@ -334,7 +334,7 @@ Frage: Was ist Rooming-in?
 Antwort: Wenn dein Kind ins Krankenhaus muss, darf ein Elternteil mit aufgenommen werden und bei ihm bleiben. Unterbringung und Verpflegung der Begleitperson werden übernommen, ihr zahlt sie also nicht selbst. Das gilt für Kinder unter 16 Jahren. Dazu kommt die freie Klinikwahl, also auch eine spezialisierte Kinderklinik statt des nächstgelegenen Krankenhauses.
 
 Frage: Ist mein Baby automatisch mitversichert?
-Antwort: Nicht automatisch, es muss angemeldet werden. Aber unter sehr guten Bedingungen: Ist ein Elternteil zum Zeitpunkt der Geburt versichert und wird das Kind innerhalb von zwei Monaten angemeldet, gilt der Schutz rückwirkend ab Geburt, ohne Gesundheitsprüfung und ohne Wartezeit. Wichtig ist nur: Das Kind kann nur so viel Schutz bekommen, wie der bestversicherte Elternteil hat.
+Antwort: Nicht automatisch, es muss angemeldet werden. Aber unter sehr guten Bedingungen: Ist ein Elternteil zum Zeitpunkt der Geburt versichert und wird das Kind innerhalb von zwei Monaten angemeldet, gilt der Schutz rückwirkend ab Geburt, ohne Gesundheitsprüfung und ohne Wartezeit. Bei der Bayerischen muss der Elternteil dafür seit mindestens drei Monaten versichert sein. Wichtig ist außerdem: Das Kind kann nur so viel Schutz bekommen, wie der bestversicherte Elternteil hat.
 
 Frage: Brauche ich eine Gesundheitsprüfung?
 Antwort: Ja, im Antragsformular gibt es Gesundheitsfragen, die du wahrheitsgemäß beantworten musst. Die gute Nachricht: Die SDK lehnt grundsätzlich niemanden ab. Auch mit Vorerkrankungen kommst du rein. Bei manchen Diagnosen kann ein Risikozuschlag dazukommen. Wartezeiten gibt es keine, der Schutz beginnt ab Tag eins.

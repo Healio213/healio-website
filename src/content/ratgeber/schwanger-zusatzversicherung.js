@@ -9,8 +9,19 @@
  *   - Die Ueberschrift "Wie kommt mein Kind ohne Gesundheitsfragen in den
  *     Tarif?" wurde zu "Wie wird mein Kind nachversichert?". "Ohne
  *     Gesundheitsfragen" darf nicht als Versprechen in einer Ueberschrift
- *     stehen; im Text bleibt es bei "in der Regel" mit Verweis auf § 198 VVG.
+ *     stehen.
  *   - Rooming-in ist ausdruecklich als Leistung im Kindertarif benannt.
+ *
+ * Korrektur 28.09.2026 nach AVB-Pruefung der Bayerischen
+ * (Healio/Vertraege/Bayerische-Direktanbindung-2026-09/
+ * AVB-PRUEFUNG-HEBAMME-STATIONAER-WEBSITE-ABGLEICH.md, Abschnitt 4a):
+ *   - Kindernachversicherung: Bayerische verlangt drei Monate Elternversicherung
+ *     (AVB § 2 Abs. 2), SDK keine. § 198 VVG erlaubt diese Mindestzeit nur als
+ *     Vereinbarung, sie ist keine gesetzliche Grundregel.
+ *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
+ *   - Hebamme nach Produktsteckbrief B 275010, ohne Euro-Betraege je Besuch.
+ *   - Smart-Optionsrecht nach TB-S § 5, Stand 11/2024.
+ *   - Allgemeine Wartezeit drei Monate, bei Unfall sofort (AVB § 3 Abs. 2).
  *
  * Harte Grenzen: Die Entbindung der Mutter ist bei bereits festgestellter
  * Schwangerschaft nicht versichert. Kein Kinderwunsch als Argument. Keine
@@ -25,8 +36,8 @@ export const article = {
   metaDescription:
     'Schwanger ohne Zusatzschutz? Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
 
-  publishedAt: '2026-09-22',
-  publishedAtLabel: '22. September 2026',
+  publishedAt: '2026-09-28',
+  publishedAtLabel: '28. September 2026',
   readingTimeMinutes: 6,
 
   listTitle: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
@@ -35,7 +46,7 @@ export const article = {
 
   headline: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
   lead:
-    'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nach den Bedingungen, die wir geprüft haben, nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
+    'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
 
   sections: [
     {
@@ -55,11 +66,11 @@ export const article = {
             },
             {
               lead: 'Wofür dein Stationärtarif trotzdem zählt:',
-              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann, und Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes, bis 16 Jahre zu 100 Prozent und bei jedem Klinikaufenthalt.',
+              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes: Bis zum 16. Geburtstag übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt.',
             },
             {
               lead: 'Fürs Kind ist die Nachversicherung der Weg.',
-              text: 'In der Regel kann ein Neugeborenes innerhalb von zwei Monaten nach der Geburt ohne erneute Gesundheitsprüfung aufgenommen werden. Ob dafür ein Elternvertrag mit Mindestlaufzeit nötig ist, gehört vorher geprüft.',
+              text: 'Innerhalb von zwei Monaten nach der Geburt nimmt die Bayerische dein Kind ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag auf, rückwirkend zum Tag der Geburt. Voraussetzung ist, dass ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Die SDK verlangt diese drei Monate nicht.',
             },
             {
               lead: 'Der Bonus ist jetzt am höchsten.',
@@ -83,7 +94,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Stationär sieht es anders aus. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Dazu kommt eine besondere Wartezeit von 8 Monaten für die Entbindung. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft haben wir bei den Anbietern, deren Bedingungen wir geprüft haben, nicht gefunden: die Bayerische schließt ihn im Antrag ausdrücklich aus, die SDK in den SP-Tarifen ebenso.',
+          text: 'Stationär sieht es anders aus. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Dazu kommt eine besondere Wartezeit von 8 Monaten für die Entbindung. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es weder bei der Bayerischen noch bei der SDK. Die Bayerische schließt ihn im Antrag ausdrücklich aus, die SDK in den SP-Tarifen ebenso.',
         },
       ],
     },
@@ -133,11 +144,11 @@ export const article = {
           items: [
             {
               lead: 'Rooming-in als Begleitperson,',
-              text: '100 Prozent bis 16 Jahre, bei jedem Klinikaufenthalt deines Kindes. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
+              text: 'bis zum 16. Geburtstag deines Kindes. Der Tarif übernimmt Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, soweit die Krankenkasse sie nicht trägt, bei der Bayerischen in Komfort und Prestige bei jedem medizinisch notwendigen Klinikaufenthalt. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
             },
             {
               lead: 'Deine eigene Versorgung',
-              text: 'bei jedem medizinisch notwendigen Krankenhausaufenthalt, der nichts mit dieser Schwangerschaft zu tun hat: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
+              text: 'bei jedem medizinisch notwendigen Krankenhausaufenthalt, der nichts mit dieser Schwangerschaft zu tun hat, bei der Bayerischen nach drei Monaten Wartezeit, nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
             },
             {
               lead: 'Das Familienzimmer bei einer späteren Entbindung,',
@@ -147,7 +158,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wenn dir jemand einen Stationärtarif mit dem Argument verkauft, du könntest damit bei dieser Geburt im Familienzimmer bleiben, dann lass dir die Stelle in den Bedingungen zeigen. Nach den Bedingungen, die wir geprüft haben, stimmt das nicht.',
+          text: 'Wenn dir jemand einen Stationärtarif mit dem Argument verkauft, du könntest damit bei dieser Geburt im Familienzimmer bleiben, dann lass dir die Stelle in den Bedingungen zeigen. Das stimmt nicht: Bei einer bestehenden Schwangerschaft ist diese Entbindung nicht versichert.',
         },
       ],
     },
@@ -157,15 +168,15 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Über die Nachversicherung. In der Regel kann ein Neugeborenes innerhalb von zwei Monaten nach der Geburt ohne erneute Gesundheitsprüfung in den Tarif aufgenommen werden. Der Antrag muss rückwirkend zum Tag der Geburt gestellt werden.',
+          text: 'Über die Nachversicherung. Meldest du dein Kind spätestens zwei Monate nach der Geburt an, wird es rückwirkend zum Tag der Geburt aufgenommen, ohne Gesundheitsprüfung, ohne Wartezeit und ohne Zuschlag. Das gilt auch für Geburtsschäden, angeborene Krankheiten und Anomalien.',
         },
         {
           type: 'paragraph',
-          text: 'Zu prüfen ist die Bedingung dahinter, und die ist entscheidend: Üblich ist, dass ein Elternteil zum Zeitpunkt der Geburt bereits mindestens drei Monate versichert sein muss, so die Grundregel des § 198 VVG. Ob und in welcher Form dein Versicherer das verlangt, steht in den Bedingungen des jeweiligen Tarifs. Für die Tarifart gilt die gesetzliche Grenze: Der Schutz des Kindes darf nach § 198 VVG nicht umfassender sein als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind. Wir prüfen das für deinen Tarif vor Abschluss, nicht danach.',
+          text: 'Entscheidend ist die Bedingung dahinter. Bei der Bayerischen muss ein Elternteil am Tag der Geburt seit mindestens drei Monaten versichert sein. Das Gesetz erlaubt diese Mindestzeit von höchstens drei Monaten (§ 198 VVG), die SDK verlangt keine. Der Schutz deines Kindes reicht so weit wie dein eigener Tarif: Nach § 198 VVG darf er nicht höher oder umfassender sein als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind. Für einen Klinik-Tarif deines Kindes braucht ein Elternteil selbst einen Klinik-Tarif.',
         },
         {
           type: 'paragraph',
-          text: 'Praktische Folge: Wo ein Versicherer eine Vorversicherungszeit verlangt, ist sie in der Schwangerschaft meist noch zu schaffen, kurz vor der Geburt nicht mehr. Manche Versicherer verzichten darauf und stellen nur darauf ab, dass ein Elternteil am Tag der Geburt versichert ist. Das gehört vor Abschluss für deinen Tarif geklärt.',
+          text: 'Praktische Folge: Bei der Bayerischen muss dein Vertrag spätestens drei Monate vor der Geburt beginnen. Schließ deshalb jetzt ab und nicht erst kurz vor dem Termin. Bei der SDK genügt es, dass ein Elternteil am Tag der Geburt versichert ist.',
         },
       ],
     },
@@ -193,18 +204,18 @@ export const article = {
       blocks: [
         {
           type: 'table',
-          caption: 'Überblick über versicherte und offene Punkte',
+          caption: 'Überblick über versicherte, nicht versicherte und vorab zu klärende Punkte',
           head: ['Versichert', 'Nicht versichert', 'Zu prüfen'],
           rows: [
             [
               'Vorsorge während der Schwangerschaft, ambulant im Vorsorge-Topf, auch bei bestehender Schwangerschaft',
               'Behandlung wegen Schwangerschaft, Schwangerschaftsbeschwerden, Entbindung',
-              'Mindestlaufzeit des Elternvertrags vor der Geburt (übliche 3-Monats-Regel, § 198 VVG)',
+              'Vorversicherungszeit des Elternteils vor der Geburt: bei der Bayerischen drei Monate, bei der SDK keine',
             ],
             [
               'Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken, Cytomegalie, Nackenfaltenmessung',
               'NIPT und alle gendiagnostischen Untersuchungen',
-              'Welche Tarifart der Elternvertrag für die Nachversicherung haben muss, ambulant oder stationär',
+              'Klinik-Tarif für einen Elternteil, wenn dein Kind einen Klinik-Tarif bekommen soll',
             ],
             [
               'Komplikationen, Frühgeburten bis 36. SSW, Fehlgeburten, medizinisch indizierter Abbruch',
@@ -212,8 +223,8 @@ export const article = {
               'Welche Kasse in deinem Fall den höchsten Bonus zahlt und ob der Zusatzbeitrag das aufzehrt',
             ],
             [
-              'Rooming-in als Begleitperson, 100 Prozent bis 16 Jahre, aus dem Tarif des nachversicherten Kindes',
-              'Kein stationärer Sofortschutz für bereits Angeratenes bei den von uns geprüften Anbietern (SDK, die Bayerische)',
+              'Rooming-in als Begleitperson bis zum 16. Geburtstag, 100 Prozent aus dem Tarif des nachversicherten Kindes, soweit die Krankenkasse nicht zahlt',
+              'Stationärer Sofortschutz für bereits Angeratenes, weder bei der SDK noch bei der Bayerischen',
               'Anzahl der bonusfähigen Mutterschaftsvorsorgen, von der IKK classic nicht öffentlich beziffert',
             ],
           ],
@@ -234,7 +245,7 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die reguläre Hebammenleistung rechnet die Kasse ab. Privat abrechnende Hebammen sind ein stationäres Thema, bei der Bayerischen in Komfort und Prestige enthalten. Für diese Entbindung greift das wegen der Wartezeit nicht.',
+        'Die reguläre Hebammenhilfe rechnet die Kasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt das nicht.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',
@@ -244,7 +255,7 @@ export const article = {
     {
       question: 'Kann ich den Stationärtarif später upgraden?',
       answer:
-        'Beim Smart-Tarif der Bayerischen gibt es nach den Tarifbedingungen, Stand 24.04.2025, ein Optionsrecht: Wer vor dem 40. Lebensjahr abschließt, kann danach zum Ende des dritten oder sechsten Versicherungsjahres in der Regel ohne neue Gesundheitsprüfung in Komfort oder Prestige wechseln. Maßgeblich sind die Tarifbedingungen, die bei deinem Abschluss gelten. Lass dir die Klausel vor der Unterschrift zeigen.',
+        'Ja, beim Smart-Tarif der Bayerischen hast du ein Optionsrecht. Wer beim ersten Abschluss jünger als 40 ist, wechselt zum Ende des dritten oder sechsten Versicherungsjahres ohne neue Gesundheitsprüfung und ohne Wartezeit in Komfort oder Prestige. Bei Kindern zählen die Versicherungsjahre ab dem Jahr, in dem sie 21 werden.',
     },
     {
       question: 'Muss ich für den Bonus jede Vorsorge einzeln einreichen?',
