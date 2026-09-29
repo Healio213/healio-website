@@ -22,19 +22,19 @@ const COPY = {
     facts: [
       {
         label: 'Wartezeit',
-        text: 'Bei der SDK gibt es keine Wartezeiten. Bei der Bayerischen gilt eine Wartezeit von drei Monaten, nach einem Unfall bist du sofort versichert.',
+        text: 'Bei der SDK gibt es keine Wartezeiten. Bei der Bayerischen gelten drei Monate, für Entbindung und Psychotherapie acht Monate. Nach einem Unfall bist du sofort versichert.',
       },
       {
         label: 'Chefarzt',
-        text: 'Im Komfort und im Prestige zahlt die Bayerische privatärztliche Rechnungen auch über den Höchstsätzen der Gebührenordnung für Ärzte.',
+        text: 'Im Komfort und im Prestige zahlt die Bayerische im Krankenhaus die Rechnungen von Chef- und Privatärzten auch über den Höchstsätzen der Gebührenordnung für Ärzte.',
       },
       {
         label: 'Beitrag',
-        text: 'Mit 21 bis 30 Jahren zahlst du im Komfort 10,20\u00a0EUR und im Prestige 13,40\u00a0EUR im Monat. Der Beitrag richtet sich nach deiner Altersgruppe.',
+        text: 'Mit 21 bis 30 Jahren zahlst du im Komfort 10,20\u00a0EUR und im Prestige 13,40\u00a0EUR im Monat (Stand 08/2025). Der Beitrag steigt, wenn du in die nächste Altersgruppe kommst.',
       },
       {
-        label: 'Schwanger oder Kinderwunsch',
-        text: 'Für die Entbindung und dein Kind gelten bei der Bayerischen Fristen ab Versicherungsbeginn.',
+        label: 'Schwangerschaft und Geburt',
+        text: 'Bist du beim Antrag schon schwanger, zahlen beide Versicherer diese Entbindung nicht. Bei der Bayerischen gelten zusätzlich Fristen für Entbindung und Neugeborene.',
         link: { href: '#familie', label: 'Wann SDK, wann Bayerische?' },
       },
     ],
@@ -51,19 +51,19 @@ const COPY = {
     facts: [
       {
         label: 'Waiting period',
-        text: 'SDK has no waiting periods. Die Bayerische has a three-month waiting period; after an accident, you are covered straight away.',
+        text: 'SDK has no waiting periods. Die Bayerische has three months, and eight months for childbirth and psychotherapy. After an accident, you are covered straight away.',
       },
       {
         label: 'Head physician',
-        text: 'In Komfort and Prestige, die Bayerische pays private medical bills even above the maximum rates of the German medical fee schedule (GOÄ).',
+        text: 'In Komfort and Prestige, die Bayerische pays head and private physician bills in hospital even above the maximum rates of the German medical fee schedule (GOÄ).',
       },
       {
         label: 'Premium',
-        text: 'At 21 to 30, you pay EUR\u00a010.20 a month in Komfort and EUR\u00a013.40 in Prestige. The premium depends on your age group.',
+        text: 'At 21 to 30, you pay EUR\u00a010.20 a month in Komfort and EUR\u00a013.40 in Prestige (as of 08/2025). The premium rises when you move into the next age group.',
       },
       {
-        label: 'Pregnancy or planning a family',
-        text: 'For the birth and your child, die Bayerische has waiting periods counted from the start of cover.',
+        label: 'Pregnancy and birth',
+        text: 'If you are already pregnant when you apply, neither insurer pays for that birth. Die Bayerische also has time limits for childbirth and newborn cover.',
         link: { href: '#familie', label: 'When SDK, when die Bayerische?' },
       },
     ],

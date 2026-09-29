@@ -72,11 +72,11 @@ export const article = {
             },
             {
               lead: 'Die Geburt ist stationär zu spät.',
-              text: 'Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung und das Familienzimmer bei dieser Geburt nicht. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen kommt eine Wartezeit von acht Monaten für die Entbindung dazu, die SDK hat keine Wartezeit.',
+              text: 'Ein jetzt abgeschlossener Krankenhauszusatz deckt diese Entbindung und das Familienzimmer bei dieser Geburt nicht. Bei der SDK ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen ist eine Entbindung erst nach acht Monaten Wartezeit versichert, laufende oder angeratene Untersuchungen zur Schwangerschaft sind dort nicht mitversichert.',
             },
             {
               lead: 'Wofür dein Stationärtarif trotzdem zählt:',
-              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes: Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei jedem medizinisch notwendigen Klinikaufenthalt in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen.',
+              text: 'für die Zeit danach. Er ist die Grundlage dafür, dass dein Kind nachversichert werden kann. Rooming-in als Begleitperson ist dann eine Leistung im Tarif deines Kindes: Ist dein Kind zu Beginn der Behandlung jünger als 16, übernimmt der Tarif Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt. Das gilt bei medizinisch notwendigen Klinikaufenthalten in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen.',
             },
             {
               lead: 'Fürs Kind ist die Nachversicherung der Weg.',
@@ -154,11 +154,11 @@ export const article = {
           items: [
             {
               lead: 'Rooming-in als Begleitperson,',
-              text: 'wenn dein Kind zu Beginn der Behandlung jünger als 16 ist. Der Tarif übernimmt Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt, bei jedem medizinisch notwendigen Klinikaufenthalt in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
+              text: 'wenn dein Kind zu Beginn der Behandlung jünger als 16 ist. Der Tarif übernimmt Unterkunft und Verpflegung eines Elternteils, soweit die Krankenkasse sie nicht trägt, bei medizinisch notwendigen Klinikaufenthalten in SP1 und SP2 der SDK und in Komfort und Prestige der Bayerischen. Diese Leistung steckt im Tarif des Kindes, dein eigener Vertrag ist die Voraussetzung dafür, dass dein Kind überhaupt nachversichert werden kann.',
             },
             {
               lead: 'Deine eigene Versorgung',
-              text: 'bei jedem medizinisch notwendigen Krankenhausaufenthalt, der nichts mit dieser Schwangerschaft zu tun hat, bei der SDK ab Versicherungsbeginn, bei der Bayerischen nach drei Monaten Wartezeit und nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
+              text: 'bei neu auftretenden, medizinisch notwendigen Krankenhausaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, bei der SDK ab Versicherungsbeginn, bei der Bayerischen im Komfort und im Prestige nach drei Monaten Wartezeit (stationäre Psychotherapie nach acht Monaten) und nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
             },
             {
               lead: 'Das Familienzimmer bei einer späteren Entbindung,',
@@ -255,7 +255,7 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechneten Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon ärztlich festgestellt ist, gilt das nicht.',
+        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause vor und nach der Geburt gehört dort nicht dazu. Für eine Schwangerschaft, die beim Antrag schon ärztlich festgestellt ist, gilt das nicht.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',

@@ -27,7 +27,7 @@ const TOPICS = {
     image: 'pregnancy',
     protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
-    caution: 'Du bist schon schwanger? Das gibst du im Antrag bei den Gesundheitsfragen an, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
+    caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
 
@@ -57,7 +57,7 @@ const paths = [
     id: 'nachversicherung', kicker: 'Dein Kind',
     title: 'Nachversicherung statt neuer Prüfung',
     body: [
-      'Die Anmeldung wirkt rückwirkend zum Tag der Geburt, ohne Wartezeit und ohne Zuschlag.',
+      'Ist ein Elternteil am Tag der Geburt im Klinik-Tarif versichert (bei der Bayerischen seit mindestens drei Monaten) und geht die Anmeldung spätestens zwei Monate nach der Geburt beim Versicherer ein, wirkt sie rückwirkend zum Tag der Geburt, ohne Wartezeit und ohne Zuschlag.',
       'Nach § 198 VVG darf der Schutz des Kindes nicht weiter reichen als der des versicherten Elternteils. Ein rein ambulanter Elternvertrag trägt also keinen stationären Schutz fürs Kind.',
     ],
   },
@@ -65,10 +65,10 @@ const paths = [
 
 // Nur belegte Punkte aus den AVB-Prüfungen der Bayerischen und der SDK (Healio/Vertraege, 09/2026).
 const hospitalArguments = [
-  'Dein Kind wird nach der Geburt ohne Gesundheitsprüfung aufgenommen, auch bei Geburtsschäden und angeborenen Krankheiten. Du meldest es innerhalb von zwei Monaten an.',
-  'Muss dein Kind ins Krankenhaus, zahlt sein Tarif Unterkunft und Verpflegung für dich als Begleitperson, solange es jünger als 16 ist und soweit die Krankenkasse sie nicht trägt.',
+  'Ist ein Elternteil am Tag der Geburt im Klinik-Tarif versichert (bei der Bayerischen seit mindestens drei Monaten), wird dein Kind ohne Gesundheitsprüfung aufgenommen, auch bei Geburtsschäden und angeborenen Krankheiten. Die Anmeldung muss spätestens zwei Monate nach der Geburt beim Versicherer eingehen.',
+  'Muss dein Kind ins Krankenhaus, zahlt sein Klinik-Tarif Unterkunft und Verpflegung für dich als Begleitperson, wenn es zu Beginn der Behandlung jünger als 16 ist und soweit die Krankenkasse sie nicht trägt.',
   'Dein Kind bekommt im Krankenhaus Chefarzt und Ein- oder Zweibettzimmer, je nach Tarif.',
-  'Du selbst bist bei jedem medizinisch notwendigen Klinikaufenthalt versichert, der nichts mit dieser Schwangerschaft zu tun hat: bei der SDK ab Versicherungsbeginn, bei der Bayerischen nach drei Monaten Wartezeit, nach einem Unfall sofort.',
+  'Du selbst bist bei neu auftretenden, medizinisch notwendigen Klinikaufenthalten versichert, die nichts mit dieser Schwangerschaft zu tun haben: bei der SDK ab Versicherungsbeginn, bei der Bayerischen im Komfort und im Prestige nach drei Monaten Wartezeit (stationäre Psychotherapie nach acht Monaten), nach einem Unfall sofort.',
   'Bei einer späteren Geburt: Familienzimmer bei der SDK im SP1, bei der Bayerischen nach acht Monaten Wartezeit im Prestige, im Komfort bis zur Höhe des Zweibettzimmers.',
   'Für dein Kind bis 15 Jahre ab 3,20 EUR im Monat (Bayerische Komfort) oder 3,37 EUR (SDK SP2). Den Beitrag kann dein Kassenbonus mittragen.',
 ];
@@ -85,11 +85,11 @@ const film = [['10 gesetzliche Schwangerschaftsvorsorgen', '300 EUR'], ['Ein ane
 const ambulantPoints = [
   { text: 'Feinultraschall, Toxoplasmose, Streptokokken, Nackenfaltenmessung: Diese Selbstzahlerleistungen zahlt der Vorsorge-Topf, auch wenn du schon schwanger bist.' },
   { text: 'Keine Wartezeit, je nach Stufe 50 bis 100 Prozent Erstattung.' },
-  { text: 'Nicht dabei sind Entbindung und Komplikationen. Deine Schwangerschaft gibst du bei den Gesundheitsfragen an.', limit: true },
+  { text: 'Nicht dabei sind Entbindung und Komplikationen. Beantworte die Gesundheitsfragen im Antrag vollständig.', limit: true },
 ];
 const hospitalPoints = [
   { text: 'Diese Geburt zahlt kein Klinik-Tarif mehr. Für die Zeit danach zählt er trotzdem, für dich und dein Kind.', limit: true },
-  { text: 'Dein Kind wird nach der Geburt ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.' },
+  { text: 'Ist ein Elternteil am Tag der Geburt im Klinik-Tarif versichert (bei der Bayerischen seit mindestens drei Monaten) und meldest du dein Kind rechtzeitig an, wird es ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.' },
   { text: 'Für dein Kind bis 15 Jahre ab 3,20 EUR im Monat. Den Beitrag kann dein Kassenbonus mittragen.' },
 ];
 
@@ -136,7 +136,7 @@ export default function BenefitFunnelPage() {
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
     ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten dagegen versichert.'],
-    ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechneten Leistungen einer Beleghebamme bei der Geburt im Krankenhaus, ohne Wartezeit. Hausbesuche, Wochenbett, Hausgeburt und Geburtshaus gehören dort nicht dazu. Für eine Schwangerschaft, die beim Antrag schon ärztlich festgestellt ist, gilt das nicht.'],
+    ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus, ohne Wartezeit. Die Betreuung zu Hause, Hausgeburt und Geburtshaus gehören dort nicht dazu. Für eine Schwangerschaft, die beim Antrag schon ärztlich festgestellt ist, gilt das nicht.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ['Wie läuft der Antrag ab?', 'Du wählst auf der nächsten Seite deine Stufe und öffnest den Rechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein und siehst deinen Beitrag. Danach folgen deine Antragsdaten mit den Gesundheitsfragen und eine Zusammenfassung, bevor du den Antrag abschickst. Einen Termin brauchst du nicht.'],
@@ -215,8 +215,8 @@ export default function BenefitFunnelPage() {
                 <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
                   <summary className={`cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
                   <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
-                    <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
-                    <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                    <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass ein Elternteil am Tag der Geburt versichert ist.</p>
+                    <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, schließt aber eine beim Antrag schon festgestellte Schwangerschaft aus. Dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
                     <p>Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
                     <ul className="list-disc space-y-2 pl-5">
                       {hospitalArguments.map((argument) => <li key={argument.slice(0, 40)}>{argument}</li>)}

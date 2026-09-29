@@ -444,30 +444,29 @@
     "family": {
       "eyebrow": "Familie klar eingeordnet",
       "title": "Werdende Eltern und Kinder: drei klare Antworten.",
-      "subtitle": "Bleibt bis zur Geburt wenig Zeit, sichert die SDK dein Kind trotzdem ab. Planst du früh, ist die Bayerische günstiger. Und bei Kindern entscheidet, ob auch Krankheit versichert sein soll.",
+      "subtitle": "Bleibt bis zur Geburt wenig Zeit, sichert die SDK dein Kind trotzdem ab. Planst du früh, ist die Bayerische für Erwachsene günstiger. Und bei Kindern entscheidet, ob auch Krankheit versichert sein soll.",
       "parents": {
         "label": "Werdende Eltern · SDK",
         "title": "Ohne Vorlauf",
-        "body": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, nimmt die SDK dein Kind ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Leistungsausschluss auf, auch bei Geburtsschäden oder angeborenen Krankheiten. Eine Vorversicherungszeit gibt es nicht.",
+        "body": "Ist ein Elternteil am Tag der Geburt bei der SDK im Klinik-Tarif versichert, nimmt die SDK dein Kind ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Leistungsausschluss auf, auch bei Geburtsschäden oder angeborenen Krankheiten. Eine Vorversicherungszeit gibt es nicht.",
         "items": [
-          "Anmeldung innerhalb von zwei Monaten nach der Geburt, Schutz rückwirkend ab dem Tag der Geburt",
-          "Beleghebamme bei der Klinikgeburt in SP1 und SP2, ohne Wartezeit",
-          "Familienzimmer bei der Entbindung im SP1",
-          "Rooming-in für das später versicherte Kind"
+          "Es reicht, wenn einer von euch beiden bei der SDK im Klinik-Tarif versichert ist",
+          "Deine Anmeldung muss spätestens zwei Monate nach der Geburt bei der SDK eingehen, dann gilt der Schutz rückwirkend ab dem Tag der Geburt",
+          "Bei einer späteren Geburt: Beleghebamme in SP1 und SP2, Familienzimmer im SP1, ohne Wartezeit"
         ],
-        "note": "Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, leistet der Tarif für diese Entbindung nicht. Der Schutz deines Kindes reicht so weit wie der Klinik-Tarif des besser versicherten Elternteils, für ein Einbettzimmer braucht ein Elternteil selbst SP1."
+        "note": "Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, zahlt der Tarif weder diese Entbindung noch Komplikationen dabei. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der besser versicherte Elternteil. Soll es so SP1 bekommen, braucht ein Elternteil selbst SP1."
       },
       "bayerische": {
         "label": "Werdende Eltern · Bayerische",
         "title": "Mit Vorlauf günstiger",
-        "body": "Planst du früh, zahlst du bei der Bayerischen deutlich weniger. Dein Kind nimmt sie ohne Gesundheitsprüfung auf, wenn ein Elternteil am Tag der Geburt schon mindestens drei Monate versichert ist. Die Entbindung selbst ist im Komfort und im Prestige nach acht Monaten Wartezeit versichert.",
+        "body": "Planst du früh, zahlst du als Erwachsener bei der Bayerischen deutlich weniger. Dein Kind nimmt sie ohne Gesundheitsprüfung auf, wenn ein Elternteil am Tag der Geburt schon mindestens drei Monate bei der Bayerischen versichert ist. Die Entbindung selbst ist im Komfort und im Prestige nach acht Monaten Wartezeit ab Versicherungsbeginn versichert.",
         "items": [
-          "Prestige für dich: 13,40 EUR im Monat mit 21 bis 30 Jahren, 17,60 EUR mit 31 bis 45",
-          "Für dein Kind bis 15 Jahre: Komfort 3,20 EUR, Prestige 4,10 EUR im Monat",
-          "Familienzimmer bei der Entbindung im Prestige, im Komfort bis zur Höhe des Zweibettzimmers",
-          "Anmeldung innerhalb von zwei Monaten nach der Geburt, Schutz rückwirkend"
+          "Prestige für dich: 13,40 EUR im Monat mit 21 bis 30 Jahren, 17,60 EUR mit 31 bis 45 (Stand 08/2025)",
+          "Für dein Kind in der Altersgruppe bis 15 Jahre: Komfort 3,20 EUR, Prestige 4,10 EUR im Monat",
+          "Familienzimmer bei einer späteren Entbindung: im Prestige wählbar, im Komfort bis zur Höhe des Zweibettzimmers",
+          "Anmeldung spätestens zwei Monate nach der Geburt, Schutz rückwirkend"
         ],
-        "note": "Die Fristen zählen ab Versicherungsbeginn. Kommt dein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif diese Entbindung nicht. Dein Kind kann höchstens so versichert werden wie der versicherte Elternteil."
+        "note": "Bist du beim Antrag schon schwanger, zahlt der Tarif diese Entbindung nicht. Auch später gilt: Kommt ein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif die Entbindung nicht. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der Elternteil."
       },
       "children": {
         "label": "Für Kinder · SDK",
@@ -484,7 +483,7 @@
       "midwife": {
         "eyebrow": "Hebamme und Geburt",
         "title": "Deine Hebamme: Wer zahlt was?",
-        "lead": "Die meiste Hebammenhilfe zahlt deine Krankenkasse. Entscheidest du dich für eine Beleghebamme, kommt der Klinik-Tarif dazu. Eine Beleghebamme suchst du dir selbst aus, sie arbeitet freiberuflich und begleitet dich zur Geburt in die Klinik.",
+        "lead": "Die meiste Hebammenhilfe zahlt deine Krankenkasse. Bei einer Geburt mit Beleghebamme kommen SDK SP1 und SP2 dazu. Beleghebammen arbeiten freiberuflich im Kreißsaal. Eine Beleghebamme kannst du dir auch selbst aussuchen, sie begleitet dich dann zur Geburt in die Klinik.",
         "rows": [
           {
             "who": "Deine Krankenkasse",
@@ -494,13 +493,13 @@
           {
             "who": "SDK SP1 und SP2",
             "tone": "sdk",
-            "text": "Bringst du dein Kind mit einer Beleghebamme im Krankenhaus zur Welt und berechnet sie ihre Leistungen gesondert, zahlen SP1 und SP2 diese zu 100 Prozent. Eine Wartezeit gibt es nicht.",
-            "condition": "Voraussetzung: Deine Krankenkasse übernimmt die Klinikgeburt, und die Schwangerschaft war beim Antrag noch nicht ärztlich festgestellt."
+            "text": "Bringst du dein Kind mit einer Beleghebamme im Krankenhaus zur Welt, zahlen SP1 und SP2 die Leistungen, die sie gesondert berechnen darf, zu 100 Prozent. Eine Wartezeit gibt es nicht.",
+            "condition": "Das gilt nicht, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt war. Und deine Krankenkasse muss die Klinikgeburt übernehmen."
           },
           {
             "who": "Nicht im Klinik-Tarif",
             "tone": "nicht",
-            "text": "Hausgeburt, Geburtshaus und die Betreuung zu Hause vor und nach der Geburt zahlen SP1 und SP2 nicht. Dafür ist deine Krankenkasse da."
+            "text": "Hausgeburt, Geburtshaus und die Betreuung zu Hause vor und nach der Geburt zahlen SP1 und SP2 nicht. Die Hebammenhilfe dafür zahlt deine Krankenkasse."
           }
         ]
       },
