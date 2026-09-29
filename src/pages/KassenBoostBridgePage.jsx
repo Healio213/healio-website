@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, CalendarCheck, Scale, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CalendarCheck, HeartPulse, PiggyBank, Scale, ShieldCheck } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -19,6 +19,8 @@ const KassenBoostBridgePage = () => {
   const protectionAreas = t('protection.items', { returnObjects: true });
   const transparencyItems = t('termin.transparency', { returnObjects: true });
   const explainerItems = t('explainer.items', { returnObjects: true });
+  const twoWayItems = t('twoWays.items', { returnObjects: true });
+  const twoWayIcons = [PiggyBank, HeartPulse];
 
   const faqItems = t('faq.items', { returnObjects: true });
   const webPageSchema = createWebPageSchema(
@@ -82,6 +84,44 @@ const KassenBoostBridgePage = () => {
                 ))}
               </ol>
             </div>
+          </div>
+        </section>
+
+        {/* Zwei Wege (Auftrag Frank, 29.09.2026): Gutverdiener holen das Geld
+            für den Zusatzschutz über den Beitrag, Aktive mit kleinerem
+            Einkommen über den Bonus. Ohne Kassennamen, siehe Brückenvertrag. */}
+        <section className="px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8" aria-labelledby="kassenboost-two-ways-heading">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#0c7a5a] sm:text-sm">
+                {t('twoWays.eyebrow')}
+              </p>
+              <h2 id="kassenboost-two-ways-heading" className="mt-5 max-w-[18ch] font-display text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+                {t('twoWays.title')}
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-[#55616e] sm:text-lg sm:leading-8">
+                {t('twoWays.description')}
+              </p>
+            </div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {Array.isArray(twoWayItems) && twoWayItems.map((item, index) => {
+                const Icon = twoWayIcons[index] ?? Scale;
+                return (
+                  <article key={item.label} className={`flex flex-col rounded-[1.75rem] border p-6 sm:p-8 ${index === 0 ? 'border-[#cceadf] bg-[#f4faf7]' : 'border-[#f0dfb8] bg-[#fffaf0]'}`}>
+                    <div className="flex items-center gap-3">
+                      <Icon className="h-7 w-7 shrink-0 text-[#0c7a5a]" aria-hidden="true" />
+                      <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-[#0c6f53]">{item.label}</p>
+                    </div>
+                    <h3 className="mt-4 font-display text-2xl font-bold tracking-[-0.035em] text-[#102333]">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-[#46515e] sm:text-base sm:leading-7">{item.text}</p>
+                    <p className="mt-5 border-t border-dashed border-[#102333]/15 pt-4 text-sm leading-6 text-[#5a6571]">{item.example}</p>
+                  </article>
+                );
+              })}
+            </div>
+            <p className="mt-6 max-w-3xl text-base font-semibold leading-7 text-[#102333]">
+              {t('twoWays.note')}
+            </p>
           </div>
         </section>
 

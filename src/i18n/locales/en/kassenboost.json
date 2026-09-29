@@ -30,6 +30,26 @@
       }
     ]
   },
+  "twoWays": {
+    "eyebrow": "See the whole picture first",
+    "title": "Two ways to fund your supplementary cover",
+    "description": "We start with your whole situation: health insurance fund, bonus and supplementary cover. Then one simple question remains: do you get the money for your cover through a lower contribution or through the bonus? The answer depends mainly on your income.",
+    "items": [
+      {
+        "label": "Way 1 · Save on contributions",
+        "title": "You earn well",
+        "text": "Your contribution depends on your gross pay. If you earn around 5,000 to 6,000 EUR a month, a fund with a low additional contribution brings you much more than on a small income. With the money you save, you pay for one part of your supplementary cover: outpatient, dental or hospital.",
+        "example": "Example for an employee: 1 percentage point less additional contribution is worth 330 EUR a year at 5,500 EUR gross, but only 150 EUR at 2,500 EUR gross. How much it is for you depends on how expensive your current fund is."
+      },
+      {
+        "label": "Way 2 · Use your bonus",
+        "title": "You stay active",
+        "text": "You earn around 2,500 EUR gross but take care of yourself: sport, check-ups, dental check-ups, a healthy weight, good blood pressure? Then a strong bonus programme often brings you more than a lower contribution. The bonus pays for all or part of your supplementary cover.",
+        "example": "With some funds, the bonus is even higher if you use it for supplementary insurance. The worked example further down shows what that looks like."
+      }
+    ],
+    "note": "You earn well and stay active? Then a strong bonus can pay off for you too. KassenBoost calculates both ways separately, free of charge and without contact details."
+  },
   "paths": {
     "eyebrow": "Your next step",
     "title": "How would you like to continue?",
