@@ -443,22 +443,34 @@
     },
     "family": {
       "eyebrow": "Family cover, clearly explained",
-      "title": "Expecting parents and children need two different answers.",
-      "subtitle": "Newborn enrolment is not the same as affordable accident cover for a child. See the difference immediately.",
+      "title": "Expecting parents and children: three clear answers.",
+      "subtitle": "If there is little time left before the birth, SDK still covers your child. If you plan early, die Bayerische costs less. And for children, it depends on whether illness should be covered too.",
       "parents": {
-        "label": "For expecting parents",
-        "title": "Plan cover before the birth",
+        "label": "Expecting parents · SDK",
+        "title": "No lead time needed",
         "body": "If one parent is insured with SDK on the day of birth, SDK accepts your child without a health assessment, surcharge or benefit exclusion, including birth injuries and congenital conditions. There is no prior insurance period.",
         "items": [
-          "Registration within two months after birth",
-          "Cover backdated to the day of birth",
-          "Rooming-in for the subsequently insured child",
-          "Family room at childbirth in SP1"
+          "Registration within two months after birth, cover backdated to the day of birth",
+          "Attending midwife at a hospital birth in SP1 and SP2, no waiting period",
+          "Family room at childbirth in SP1",
+          "Rooming-in for the subsequently insured child"
         ],
         "note": "If the pregnancy was already medically confirmed when the application was made, the plan does not pay for that birth. Your child's cover can reach as far as the hospital plan of the better insured parent; for a private room one parent needs SP1."
       },
+      "bayerische": {
+        "label": "Expecting parents · Bayerische",
+        "title": "Cheaper with lead time",
+        "body": "If you plan early, die Bayerische costs considerably less. It accepts your child without a health assessment if one parent has already been insured for at least three months on the day of birth. In Komfort and Prestige, the birth itself is covered after an eight-month waiting period.",
+        "items": [
+          "Prestige for you: EUR 13.40 a month at 21 to 30, EUR 17.60 at 31 to 45",
+          "For your child up to 15: Komfort EUR 3.20, Prestige EUR 4.10 a month",
+          "Family room at childbirth in Prestige, in Komfort up to the cost of a twin room",
+          "Registration within two months after birth, cover backdated"
+        ],
+        "note": "The periods count from the start of cover. If your child is born before the eight months have passed, including a premature birth, the plan does not pay for that birth. Your child can be insured at most as fully as the insured parent."
+      },
       "children": {
-        "label": "For children",
+        "label": "For children · SDK",
         "title": "Illness cover or accidents only?",
         "body": "For children, too, the cause matters: SP1 and SP2 cover agreed hospital services for illness and accidents, while SPU only applies after an accident.",
         "items": [
@@ -468,6 +480,29 @@
           "Rooming-in for insured children under 16"
         ],
         "note": "SPU is not general hospital cover for children. It does not pay for inpatient treatment caused by illness."
+      },
+      "midwife": {
+        "eyebrow": "Midwife and birth",
+        "title": "Your midwife: who pays for what?",
+        "lead": "Most midwife care is paid by your statutory health insurer. If you choose an attending midwife (Beleghebamme), the hospital plan adds to it. You choose an attending midwife yourself; she works freelance and accompanies you to the birth in hospital.",
+        "rows": [
+          {
+            "who": "Your health insurer",
+            "tone": "kasse",
+            "text": "Antenatal care, help during the birth, home visits after the birth and the postnatal recovery course are part of the midwife care paid by statutory health insurance."
+          },
+          {
+            "who": "SDK SP1 and SP2",
+            "tone": "sdk",
+            "text": "If you give birth in hospital with an attending midwife and she bills her services separately, SP1 and SP2 pay 100 per cent. There is no waiting period.",
+            "condition": "Condition: your health insurer covers the hospital birth, and the pregnancy had not yet been medically confirmed when you applied."
+          },
+          {
+            "who": "Not in the hospital plan",
+            "tone": "nicht",
+            "text": "Home births, birth centres and care at home before and after the birth are not paid by SP1 and SP2. Your health insurer covers those."
+          }
+        ]
       },
       "cta": "Choose hospital cover"
     },

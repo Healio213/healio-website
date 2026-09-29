@@ -19,7 +19,9 @@
  *     (AVB § 2 Abs. 2), SDK keine. § 198 VVG erlaubt diese Mindestzeit nur als
  *     Vereinbarung, sie ist keine gesetzliche Grundregel.
  *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
- *   - Hebamme nach Produktsteckbrief B 275010, ohne Euro-Betraege je Besuch.
+ *   - Hebamme: steht bei der Bayerischen nur im Werbeblatt/Steckbrief, in den
+ *     Bedingungen nur bei Mehrkosten anderer Klinikwahl (TB 2.7). Deshalb seit
+ *     29.09.2026 keine Hebammen-Aussage zur Bayerischen mehr.
  *   - Smart-Optionsrecht nach TB-S § 5, Stand 11/2024.
  *   - Allgemeine Wartezeit drei Monate, bei Unfall sofort (AVB § 3 Abs. 2).
  *
@@ -253,7 +255,7 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die reguläre Hebammenhilfe rechnet die Kasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 die gesondert berechneten Leistungen einer Beleghebamme während des Klinikaufenthalts, Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt beides nicht.',
+        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechneten Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon ärztlich festgestellt ist, gilt das nicht.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',

@@ -48,7 +48,7 @@ const paths = [
     id: 'stationaer', kicker: 'Stationär, für die Zeit danach',
     title: 'Diese Geburt ist zu spät',
     body: [
-      'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Bei der SDK und bei der Bayerischen ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
+      'Ein Krankenhauszusatz, den du jetzt abschließt, deckt diese Entbindung nicht. Bei der SDK ist eine Entbindung nicht versichert, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen ist eine Entbindung erst versichert, wenn seit Versicherungsbeginn acht Monate vergangen sind. Chefarzt und Familienzimmer bei dieser Geburt bekommst du damit nicht.',
       'Für die Zeit danach zählt der Tarif trotzdem, für dich und für dein Kind.',
     ],
   },
@@ -69,8 +69,8 @@ const hospitalArguments = [
   'Muss dein Kind ins Krankenhaus, zahlt sein Tarif Unterkunft und Verpflegung für dich als Begleitperson, solange es jünger als 16 ist und soweit die Krankenkasse sie nicht trägt.',
   'Dein Kind bekommt im Krankenhaus Chefarzt und Ein- oder Zweibettzimmer, je nach Tarif.',
   'Du selbst bist bei jedem medizinisch notwendigen Klinikaufenthalt versichert, der nichts mit dieser Schwangerschaft zu tun hat: bei der SDK ab Versicherungsbeginn, bei der Bayerischen nach drei Monaten Wartezeit, nach einem Unfall sofort.',
-  'Bei einer späteren Geburt: Familienzimmer bei der SDK im SP1, bei der Bayerischen nach acht Monaten Wartezeit im Prestige und im Komfort bis zur Höhe des Zweibettzimmers.',
-  'Für dein Kind ab 3,20 EUR im Monat (Bayerische Komfort) oder 3,37 EUR (SDK SP2). Den Beitrag kann dein Kassenbonus mittragen.',
+  'Bei einer späteren Geburt: Familienzimmer bei der SDK im SP1, bei der Bayerischen nach acht Monaten Wartezeit im Prestige, im Komfort bis zur Höhe des Zweibettzimmers.',
+  'Für dein Kind bis 15 Jahre ab 3,20 EUR im Monat (Bayerische Komfort) oder 3,37 EUR (SDK SP2). Den Beitrag kann dein Kassenbonus mittragen.',
 ];
 
 const commonFaq = [
@@ -90,7 +90,7 @@ const ambulantPoints = [
 const hospitalPoints = [
   { text: 'Diese Geburt zahlt kein Klinik-Tarif mehr. Für die Zeit danach zählt er trotzdem, für dich und dein Kind.', limit: true },
   { text: 'Dein Kind wird nach der Geburt ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.' },
-  { text: 'Für dein Kind ab 3,20 EUR im Monat. Den Beitrag kann dein Kassenbonus mittragen.' },
+  { text: 'Für dein Kind bis 15 Jahre ab 3,20 EUR im Monat. Den Beitrag kann dein Kassenbonus mittragen.' },
 ];
 
 function PointList({ points }) {
@@ -136,7 +136,7 @@ export default function BenefitFunnelPage() {
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
     ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten dagegen versichert.'],
-    ['Zahlt der ambulante Tarif meine Hebamme?', 'Die reguläre Hebammenhilfe rechnet deine Krankenkasse ab. Bei der Bayerischen ergänzt der Krankenhauszusatz in Komfort und Prestige diese Leistung, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 die gesondert berechneten Leistungen einer Beleghebamme während des Klinikaufenthalts, Hausbesuche und Wochenbett gehören dort nicht dazu. Für eine Schwangerschaft, die beim Abschluss schon besteht, gilt beides nicht.'],
+    ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechneten Leistungen einer Beleghebamme bei der Geburt im Krankenhaus, ohne Wartezeit. Hausbesuche, Wochenbett, Hausgeburt und Geburtshaus gehören dort nicht dazu. Für eine Schwangerschaft, die beim Antrag schon ärztlich festgestellt ist, gilt das nicht.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ['Wie läuft der Antrag ab?', 'Du wählst auf der nächsten Seite deine Stufe und öffnest den Rechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein und siehst deinen Beitrag. Danach folgen deine Antragsdaten mit den Gesundheitsfragen und eine Zusammenfassung, bevor du den Antrag abschickst. Einen Termin brauchst du nicht.'],
@@ -215,8 +215,8 @@ export default function BenefitFunnelPage() {
                 <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
                   <summary className={`cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
                   <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
-                    <p><strong>Bis zur Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
-                    <p><strong>Mehr als drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                    <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
+                    <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
                     <p>Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
                     <ul className="list-disc space-y-2 pl-5">
                       {hospitalArguments.map((argument) => <li key={argument.slice(0, 40)}>{argument}</li>)}

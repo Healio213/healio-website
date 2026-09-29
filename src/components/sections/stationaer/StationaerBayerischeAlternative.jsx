@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_STATIONAER_URL, trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
 
 // Die Bayerische als zweiter Klinik-Versicherer auf /stationaer (bis 29.08.
-// über HospitalConcept eingebunden). Nur belegte Punkte aus den AVB-Prüfungen
-// der Bayerischen und der SDK, wortgleich mit BenefitFunnelPage.jsx:
-// Wartezeiten, Familienzimmer bei späterer Geburt, Kinderbeiträge und
-// Hebammenleistungen. Keine weiteren Zahlen, keine Tarifbeschreibung für Smart.
+// über HospitalConcept eingebunden). Nur belegte Punkte aus AVB B 333500 und
+// den Tarifbedingungen Komfort/Prestige (11/2024). Schwangerschaft, Kinder und
+// Familienzimmer stehen seit 29.09. in der dritten Familienkarte (#familie).
+// Die Hebamme steht bei der Bayerischen nur bei den Mehrkosten einer anderen
+// Klinikwahl (TB 2.7), deshalb hier keine Hebammen-Aussage.
 const TARIFFS = ['Prestige', 'Komfort', 'Smart'];
 
 const COPY = {
@@ -24,16 +25,17 @@ const COPY = {
         text: 'Bei der SDK gibt es keine Wartezeiten. Bei der Bayerischen gilt eine Wartezeit von drei Monaten, nach einem Unfall bist du sofort versichert.',
       },
       {
-        label: 'Bei einer späteren Geburt',
-        text: 'Das Familienzimmer gibt es bei der Bayerischen nach acht Monaten Wartezeit, im Prestige und im Komfort bis zur Höhe des Zweibettzimmers.',
+        label: 'Chefarzt',
+        text: 'Im Komfort und im Prestige zahlt die Bayerische privatärztliche Rechnungen auch über den Höchstsätzen der Gebührenordnung für Ärzte.',
       },
       {
-        label: 'Für dein Kind',
-        text: 'Bei der Bayerischen kostet dein Kind im Komfort 3,20\u00a0EUR und im Prestige 4,10\u00a0EUR im Monat.',
+        label: 'Beitrag',
+        text: 'Mit 21 bis 30 Jahren zahlst du im Komfort 10,20\u00a0EUR und im Prestige 13,40\u00a0EUR im Monat. Der Beitrag richtet sich nach deiner Altersgruppe.',
       },
       {
-        label: 'Hebammenleistungen',
-        text: 'Im Komfort und im Prestige ergänzt der Tarif die Hebammenhilfe deiner Krankenkasse, bei Vorsorge, Geburtshilfe, Nachsorge mit Wochenbettbesuchen und Rückbildung. Rechnet deine Hebamme privat ab und liegt ihre Rechnung über dem Kassensatz, trägt der Tarif den Teil darüber.',
+        label: 'Schwanger oder Kinderwunsch',
+        text: 'Für die Entbindung und dein Kind gelten bei der Bayerischen Fristen ab Versicherungsbeginn.',
+        link: { href: '#familie', label: 'Wann SDK, wann Bayerische?' },
       },
     ],
     cta: 'Klinik-Tarif der Bayerischen berechnen',
@@ -52,16 +54,17 @@ const COPY = {
         text: 'SDK has no waiting periods. Die Bayerische has a three-month waiting period; after an accident, you are covered straight away.',
       },
       {
-        label: 'For a later birth',
-        text: 'With die Bayerische, the family room is covered after an eight-month waiting period, in Prestige and Komfort up to the cost of a twin room.',
+        label: 'Head physician',
+        text: 'In Komfort and Prestige, die Bayerische pays private medical bills even above the maximum rates of the German medical fee schedule (GOÄ).',
       },
       {
-        label: 'For your child',
-        text: 'With die Bayerische, cover for your child costs EUR\u00a03.20 a month in Komfort and EUR\u00a04.10 a month in Prestige.',
+        label: 'Premium',
+        text: 'At 21 to 30, you pay EUR\u00a010.20 a month in Komfort and EUR\u00a013.40 in Prestige. The premium depends on your age group.',
       },
       {
-        label: 'Midwife services',
-        text: 'In Komfort and Prestige, the plan supplements the midwife care paid by your statutory health insurer, for antenatal care, birth assistance, postnatal care with home visits after the birth, and postnatal recovery. If your midwife bills privately and the invoice is above the statutory rate, the plan covers the difference.',
+        label: 'Pregnancy or planning a family',
+        text: 'For the birth and your child, die Bayerische has waiting periods counted from the start of cover.',
+        link: { href: '#familie', label: 'When SDK, when die Bayerische?' },
       },
     ],
     cta: 'Calculate the Bayerische hospital plan',
@@ -148,6 +151,18 @@ const StationaerBayerischeAlternative = () => {
                 </dt>
                 <dd className="mt-2 text-sm leading-relaxed text-slate-700 sm:text-base">
                   {fact.text}
+                  {fact.link && (
+                    <>
+                      {' '}
+                      <a
+                        href={fact.link.href}
+                        className="font-bold text-[#075f46] underline decoration-[#9fd8c2] underline-offset-4 transition hover:decoration-[#075f46] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#075f46]"
+                      >
+                        {fact.link.label}
+                        <ArrowDown className="ml-1 inline h-3.5 w-3.5 align-[-0.125em]" aria-hidden="true" />
+                      </a>
+                    </>
+                  )}
                 </dd>
               </div>
             ))}
