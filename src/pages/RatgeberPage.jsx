@@ -1,13 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { getRatgeberPath, ratgeberArticles } from '@/content/ratgeber';
+import { fetchCachedBlogArticles } from '@/lib/blogContentCache';
+import { applyBlogEditorialFixes } from '@/lib/blogEditorialFixes';
+
+const API_BASE = import.meta.env.VITE_APP_API_URL || '';
+
+// Alle Blogartikel auf derselben Seite (Frank 29.09.2026: ein Menüpunkt
+// Ratgeber, dort alle Artikel). Gleiche Quelle wie /blog: erst die API,
+// sonst der geprüfte Cache. Scheitert beides, bleibt der Link zum Blog.
+function useBlogArticles() {
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/content/articles`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!Array.isArray(data.articles) || data.articles.length === 0) throw new Error('leer');
+        if (active) setArticles(data.articles.map(applyBlogEditorialFixes));
+      } catch {
+        try {
+          const cached = await fetchCachedBlogArticles();
+          if (active) setArticles(cached);
+        } catch {
+          if (active) setArticles([]);
+        }
+      }
+    })();
+    return () => { active = false; };
+  }, []);
+  return articles;
+}
 
 /**
  * Uebersicht /ratgeber. Schlichte Liste aus dem zentralen Inhaltsregister
  * src/content/ratgeber/index.js, dazu der Verweis auf den Blog.
  */
-const RatgeberPage = () => (
+const RatgeberPage = () => {
+  const blogArticles = useBlogArticles();
+  return (
   <>
     <SEOHead
       title="Ratgeber zu Krankenkasse, Bonus und Zusatzschutz | Healio"
@@ -61,14 +95,32 @@ const RatgeberPage = () => (
           ))}
         </ul>
 
-        <p className="mt-14 border-t border-slate-200 pt-8 text-base leading-7 text-slate-600">
+        <h2 className="mt-16 border-t border-slate-200 pt-10 font-display text-2xl font-extrabold text-[#07111f]">
+          Alle Artikel aus dem Blog
+        </h2>
+        {blogArticles.length > 0 ? (
+          <ul className="mt-6 divide-y divide-slate-200" data-healio-ratgeber="blog-list">
+            {blogArticles.map((article) => (
+              <li key={article.slug} className="py-5">
+                <Link to={`/blog/${article.slug}`} className="font-display text-lg font-bold leading-snug text-[#07111f] hover:text-[#25c990]">
+                  {article.title}
+                </Link>
+                {(article.excerpt || article.meta_description) && (
+                  <p className="mt-1.5 line-clamp-2 text-base leading-7 text-slate-600">{article.excerpt || article.meta_description}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        <p className="mt-8 text-base leading-7 text-slate-600">
           <Link to="/blog" className="underline underline-offset-4 hover:text-[#07111f]">
-            Weitere Ratgeber im Blog
+            Zum Blog mit Filter nach Thema
           </Link>
         </p>
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default RatgeberPage;

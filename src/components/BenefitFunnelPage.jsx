@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import { Check, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
@@ -19,13 +19,13 @@ const TOPICS = {
   pregnancy: {
     path: '/schwangerschaft',
     // Kopfzeile nach Eisert: Ergebnis, Bedingung, Einwand gleich vorweg.
-    title: 'Schwanger? Der Vorsorge-Topf greift jetzt noch.',
-    lead: 'Feinultraschall, Labortests wie Toxoplasmose oder Streptokokken, die Nackenfaltenmessung: Diese Selbstzahlerleistungen laufen über den ambulanten Vorsorge-Topf, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es in diesen Tarifen keine.',
-    leadSecondary: 'Den Beitrag kann dein Kassenbonus mittragen, weil bei der IKK classic jede Mutterschaftsvorsorge einzeln zählt. Wo es nicht mehr geht, sagen wir dir das weiter unten genauso deutlich.',
+    title: 'Schwanger? Laut Satzung sind bis zu 1.155\u00a0EUR für dich drin.',
+    lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz das Geld und hol dir den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
+    leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
     seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     image: 'pregnancy',
-    protectionTitle: 'Dein ambulanter Tarif für die Vorsorge jetzt',
+    protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
     caution: 'Du bist schon schwanger? Das gibst du im Antrag bei den Gesundheitsfragen an, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
@@ -80,6 +80,39 @@ const commonFaq = [
 ];
 const film = [['10 gesetzliche Schwangerschaftsvorsorgen', '300 EUR'], ['Ein anerkannter Kurs und aktive Studio-Mitgliedschaft', '150 EUR'], ['Anerkannter BMI und Blutdruck, mit erforderlicher Aktivität', '150 EUR'], ['Zahnvorsorge in beiden Halbjahren', '30 EUR']];
 
+// Kurzfassung für die Karten; die vollständigen Texte stehen im Aufklapper.
+// Einschränkungen (limit: true) stehen mit Hinweis-Symbol, nie mit Haken.
+const ambulantPoints = [
+  { text: 'Feinultraschall, Toxoplasmose, Streptokokken, Nackenfaltenmessung: Diese Selbstzahlerleistungen zahlt der Vorsorge-Topf, auch wenn du schon schwanger bist.' },
+  { text: 'Keine Wartezeit, je nach Stufe 50 bis 100 Prozent Erstattung.' },
+  { text: 'Nicht dabei sind Entbindung und Komplikationen. Deine Schwangerschaft gibst du bei den Gesundheitsfragen an.', limit: true },
+];
+const hospitalPoints = [
+  { text: 'Diese Geburt zahlt kein Klinik-Tarif mehr. Für die Zeit danach zählt er trotzdem, für dich und dein Kind.', limit: true },
+  { text: 'Dein Kind wird nach der Geburt ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.' },
+  { text: 'Für dein Kind ab 3,20 EUR im Monat. Den Beitrag kann dein Kassenbonus mittragen.' },
+];
+
+function PointList({ points }) {
+  return (
+    <ul className="mt-5 space-y-3 leading-relaxed text-home-slate">
+      {points.map(({ text, limit }) => (
+        <li key={text.slice(0, 40)} className="flex gap-3">
+          {limit
+            ? <Info aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-home-slate" strokeWidth={2.25} />
+            : <Check aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-[#076046]" strokeWidth={2.5} />}
+          <span className={limit ? 'text-home-midnight' : undefined}>{text}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+const steps = [
+  ['Vorsorge nachweisen', 'Jede Mutterschaftsvorsorge zählt bei der IKK classic einzeln. Der Mutterpass reicht als Nachweis.'],
+  ['Schutz wählen', 'Ambulant für die Vorsorge jetzt, stationär für dich und dein Kind nach der Geburt.'],
+  ['Bonus einsetzen', 'Der Zuschuss bezahlt deinen Beitrag ganz oder zum Teil. Den Antrag stellst du selbst bei deiner Kasse.'],
+];
+
 // Beide Klinik-Rechner, bewusst ohne data-product-link und ohne Tracking.
 function HospitalCalculatorLinks({ sdkUrl, className = '' }) {
   return (
@@ -114,181 +147,123 @@ export default function BenefitFunnelPage() {
       <SEOHead title={config.seoTitle} description={config.seoDescription}
         canonicalUrl={`https://healio.de${config.path}`} robots="index, follow"
         schemaMarkup={createFAQSchema(faq.map(([question, answer]) => ({ question, answer })))} />
+      {/* Kurzfassung (Frank 29.09.2026): Erst die Zahl, dann drei Schritte,
+          dann zwei Wege. Alle Einschränkungen bleiben vollständig, stehen aber
+          in Aufklappern statt als Textwand. Sprungmarken der Anzeigen bleiben. */}
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
         <section className="overflow-hidden bg-home-ice pb-12 pt-28 md:pb-20 md:pt-36">
           <div className={`${wrap} grid items-center gap-6 md:grid-cols-[1.2fr_1fr] md:gap-12`}>
             <div>
-              <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-6xl">{config.title}</h1>
-              <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-home-slate">{config.lead}</p>
-              <p className="mt-3 max-w-[52ch] leading-relaxed text-home-slate">{config.leadSecondary}</p>
+              <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] [text-wrap:balance] sm:text-5xl lg:text-6xl">{config.title}</h1>
+              <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:text-xl">{config.lead}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
                 <a href="#klinikschutz" className={secondary}>Klinikschutz für dein Kind</a>
               </div>
-              <p className="mt-3 text-sm text-home-slate">Erst verstehen, dann selbst online abschließen. Ohne Termin.</p>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
             <img src={`/images/friendly-icons/${config.image}.webp`} alt="" width="420" height="420"
               className="mx-auto w-full max-w-[220px] object-contain md:max-w-[400px]" fetchPriority="high" />
           </div>
         </section>
 
-        {/* Klinikschutz direkt nach dem Hero: Anzeigen für Schwangere werben stationär.
-            #kind (Anzeigengruppe S3) zeigt auf Mobil Kind-Argument und beide Rechner im ersten Bildschirm. */}
-        <section id="klinikschutz" aria-labelledby="klinikschutz-heading" className="scroll-mt-28 py-12 md:py-20">
-          <div className={`${wrap} grid gap-8 md:grid-cols-[1fr_1.15fr] md:gap-14`}>
-            <div id="kind" className="scroll-mt-28 md:sticky md:top-28 md:self-start">
-              <p className="font-semibold text-[#076046]">Stationär, für dein Kind und dich</p>
-              <h2 id="klinikschutz-heading" className="mt-2 max-w-[20ch] font-friendly text-3xl md:text-4xl">Klinikschutz für dich und dein Kind</h2>
-              <p className="mt-4 max-w-prose text-lg leading-relaxed text-home-slate">Dein eigener Klinik-Tarif ist die Grundlage, damit dein Kind nach der Geburt ohne Gesundheitsprüfung aufgenommen wird.</p>
-              <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} className="mt-6 md:flex-col lg:flex-row" />
-              <p className="mt-3 text-sm leading-relaxed text-home-slate">Beide Rechner öffnen sich in einem neuen Tab. Welcher Versicherer zu dir passt, zeigt dir die <a href="#klinik-wahl" className={textLink}>Entscheidungshilfe</a>.</p>
-            </div>
-            <div className="rounded-2xl bg-home-ice p-6 sm:p-8">
-              <p className="font-semibold">Die Geburt, die jetzt ansteht, zahlt kein Klinik-Tarif mehr.</p>
-              <p className="mt-1 leading-relaxed text-home-slate">Was er dir und deinem Kind trotzdem bringt:</p>
-              <ul className="mt-5 space-y-4 leading-relaxed text-home-slate">
-                {hospitalArguments.map((argument) => (
-                  <li key={argument.slice(0, 40)} className="flex gap-3">
-                    <Check aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-[#076046]" strokeWidth={2.5} />
-                    <span>{argument}</span>
-                  </li>
-                ))}
-              </ul>
-              <div id="klinik-wahl" className="mt-8 scroll-mt-28 border-t border-home-slate/20 pt-7">
-                <h3 className="font-display text-xl font-bold">Welcher Versicherer passt zu dir?</h3>
-                <div className="mt-5 space-y-5">
-                  <div className="border-l-4 border-home-mint pl-5">
-                    <p className="font-semibold">Bis zur Geburt sind es weniger als drei Monate?</p>
-                    <p className="mt-2 leading-relaxed text-home-slate">Dann passt die SDK: Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
-                  </div>
-                  <div className="border-l-4 border-home-mint pl-5">
-                    <p className="font-semibold">Bis zur Geburt sind es mehr als drei Monate?</p>
-                    <p className="mt-2 leading-relaxed text-home-slate">Dann hast du die Wahl: Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
-                  </div>
-                </div>
-                <p className="mt-5 text-sm leading-relaxed text-home-slate">Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
-                {/* Auf Mobil liegen die Rechner oben weit weg, deshalb hier noch einmal. */}
-                <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} className="mt-6 md:hidden" />
-              </div>
-            </div>
-          </div>
+        <section id="so-gehts" aria-labelledby="so-gehts-heading" className={`${wrap} scroll-mt-28 py-12 md:py-16`}>
+          <h2 id="so-gehts-heading" className="font-friendly text-3xl md:text-4xl">So einfach geht es</h2>
+          <ol className="mt-7 grid gap-7 md:grid-cols-3 md:gap-10">
+            {steps.map(([title, description], i) => (
+              <li key={title}>
+                <span className="font-friendly text-3xl text-[#076046]" aria-hidden="true">{i + 1}.</span>
+                <h3 className="mt-1 font-display text-lg font-bold">{title}</h3>
+                <p className="mt-2 leading-relaxed text-home-slate">{description}</p>
+              </li>
+            ))}
+          </ol>
         </section>
 
-        <section id="geheimtipp" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
-          <h2 className="max-w-[24ch] font-friendly text-3xl md:text-4xl">Der Geheimtipp: jede Vorsorge zählt einzeln</h2>
-          <div className="mt-6 grid gap-8 md:grid-cols-[1.25fr_1fr] md:gap-14">
-            <div className="max-w-prose space-y-4 leading-relaxed text-home-slate">
-              <p>Im Bonusprogramm der IKK classic steht die Mutterschaftsvorsorge unter Nummer 09. Anders als fast alle anderen Positionen ist sie mehrfach im selben Jahr nachweisbar. Jede gesetzliche Untersuchung zählt als eigene Position, je 10 EUR Geldbonus oder 30 EUR Zuschusswert. Als Nachweis genügt dein Mutterpass, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen.</p>
-              <p>Nach der Geburt kommt die Rückbildungsgymnastik unter Nummer 44 dazu, mit 25 EUR Geldbonus oder 75 EUR Zuschusswert. Nur vier Positionen im ganzen Programm sind mehrfach anrechenbar, und Nummer 09 ist eine davon.</p>
-              <p>Genau deshalb liegt das Satzungsmaximum von bis zu 1.155 EUR vor allem in der Schwangerschaft in Reichweite. Das ist ein rechnerischer Höchstwert aus der Satzung, in dem alles gleichzeitig zutrifft, und keine Summe, die die IKK classic irgendwo zusagt. In der breiten Masse landen aktive Versicherte bei 400 bis 700 EUR im Jahr.</p>
-              <p>Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist dafür anrechenbar. Aus rechnerisch 405 EUR Zuschuss werden bei 240 EUR Jahresbeitrag also 240 EUR, nie mehr.</p>
-              <a href="#bonus-check" className={`mt-2 ${primary}`}>Dein Bonus-Beispiel ansehen</a>
-            </div>
-            <div className="self-start rounded-2xl bg-home-ice p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold">Was du dafür brauchst</h3>
-              <ul className="mt-4 list-disc space-y-3 pl-5 leading-relaxed text-home-slate">
-                <li>Einen schriftlichen Nachweis je Untersuchung, der Mutterpass reicht aus</li>
-                <li>Ein eigenes Antragsfeld je Vorsorge, alle Maßnahmen im selben Kalenderjahr</li>
-                <li>Für das Bonusjahr 2026 den vollständigen Antrag bis zum 31.03.2027</li>
-              </ul>
-              <p className="mt-5 text-sm leading-relaxed text-home-slate">Wie viel bei dir zusammenkommt, hängt von deiner Krankenkasse ab und davon, was du tatsächlich nachweist. Die IKK classic prüft und erkennt an, nicht wir.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="drei-wege" className="scroll-mt-28 bg-home-ice py-12 md:py-20">
+        <section id="drei-wege" aria-labelledby="drei-wege-heading" className="scroll-mt-28 bg-home-ice py-12 md:py-20">
           <div className={wrap}>
-            <h2 className="max-w-[26ch] font-friendly text-3xl md:text-4xl">Drei Wege, die du nicht verwechseln solltest</h2>
-            <p className="mt-4 max-w-prose leading-relaxed text-home-slate">Ambulant, stationär und der Schutz deines Kindes folgen jeweils eigenen Regeln. Wer das zusammenwirft, verkauft dir etwas, das bei dieser Geburt nicht leistet.</p>
-            <div className="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
-              {paths.map((item) => (
-                <div key={item.id} id={item.id} className="scroll-mt-28 rounded-2xl bg-white p-6 sm:p-8">
-                  <p className="font-semibold text-[#076046]">{item.kicker}</p>
-                  <h3 className="mt-2 font-display text-xl font-bold">{item.title}</h3>
-                  <div className="mt-3 space-y-3 leading-relaxed text-home-slate">
-                    {item.body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
-                  </div>
-                  {item.id === 'ambulant' && <a href="#zusatzschutz" className={`mt-6 ${primary}`}>Ambulanten Tarif ansehen</a>}
-                  {item.id === 'stationaer' && <a href="#klinikschutz" className={`mt-6 ${secondary}`}>Zum Klinikschutz</a>}
+            <h2 id="drei-wege-heading" className="font-friendly text-3xl md:text-4xl">Was jetzt noch geht</h2>
+            <div className="mt-8 grid gap-6 md:grid-cols-2 md:gap-8">
+              <article id="zusatzschutz" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-6 sm:p-8">
+                <span id="ambulant" className="scroll-mt-28" aria-hidden="true" />
+                <p className="font-semibold text-[#076046]">Ambulant, jetzt</p>
+                <h3 className="mt-2 font-display text-2xl font-bold">{config.protectionTitle}</h3>
+                <PointList points={ambulantPoints} />
+                <div className="mt-auto pt-7">
+                  <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
+                  <p className="mt-3 text-sm text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
                 </div>
-              ))}
+                <details className="mt-5 border-t border-home-slate/15 pt-4">
+                  <summary className={`cursor-pointer font-semibold ${focus}`}>Genauer nachlesen</summary>
+                  <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
+                    {paths[0].body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
+                    <p>{config.caution}</p>
+                  </div>
+                </details>
+              </article>
+
+              <article id="klinikschutz" aria-labelledby="klinikschutz-heading" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-6 sm:p-8">
+                <span id="kind" className="scroll-mt-28" aria-hidden="true" />
+                <span id="stationaer" className="scroll-mt-28" aria-hidden="true" />
+                <p className="font-semibold text-[#076046]">Stationär, für die Zeit danach</p>
+                <h3 id="klinikschutz-heading" className="mt-2 font-display text-2xl font-bold">Klinikschutz für dich und dein Kind</h3>
+                <PointList points={hospitalPoints} />
+                <div className="mt-auto pt-7">
+                  <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} />
+                  <p className="mt-3 text-sm text-home-slate">Beide Rechner öffnen sich in einem neuen Tab.</p>
+                </div>
+                <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
+                  <summary className={`cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
+                  <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
+                    <p><strong>Bis zur Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass du am Tag der Geburt versichert bist.</p>
+                    <p><strong>Mehr als drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die SDK hat keine Wartezeiten, dort kostet dein Kind im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                    <p>Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
+                    <ul className="list-disc space-y-2 pl-5">
+                      {hospitalArguments.map((argument) => <li key={argument.slice(0, 40)}>{argument}</li>)}
+                    </ul>
+                    {paths[1].body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
+                    <p id="nachversicherung" className="scroll-mt-28"><strong>{paths[2].title}:</strong> {paths[2].body.join(' ')}</p>
+                  </div>
+                </details>
+              </article>
             </div>
-            <WhatsAppHelpHint
-              placement="schwangerschaft-wege"
-              title="Welcher Weg passt zu dir?"
-              text={`Zögere nicht und frag uns. ${whatsAppHelpReply('Vorsorge, Klinikschutz und der Nachversicherung deines Kindes')}`}
-              className="mt-6"
-            />
-            <p className="mt-7 max-w-prose leading-relaxed text-home-slate">Die vollständige Abgrenzung mit Tarifstufen und Belegen liest du im Ratgeber <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>. Wenn du gerade erst anfängst, hilft dir <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> mit Mutterpass, Hebammensuche und Fristen.</p>
+            <p className="mt-7 max-w-prose text-sm leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
           </div>
         </section>
 
-        <section id="zusatzschutz" className="scroll-mt-28 bg-home-ice py-12 md:py-16">
-          <div className={`${wrap} grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-16`}>
+        <section id="bonus-check" aria-labelledby="bonus-heading" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
+          <span id="geheimtipp" className="scroll-mt-28" aria-hidden="true" />
+          <div className="grid items-center gap-6 md:grid-cols-[200px_1fr] md:gap-12">
+            <img src="/images/friendly-icons/bonus-you-mascot.webp" alt="" width="240" height="240" className="mx-auto w-32 md:w-48" loading="lazy" />
             <div>
-              <h2 className="max-w-[22ch] font-friendly text-3xl md:text-4xl">{config.protectionTitle}</h2>
-              <p className="mt-4 max-w-prose leading-relaxed text-home-slate">{config.protectionText}</p>
-              <Link data-product-link to={productPath} className={`mt-6 ${primary}`}>{config.productLabel}</Link>
-              <p className="mt-3 text-sm text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
-              <WhatsAppHelpHint placement="schwangerschaft-tarif" variant="line" text="Unsicher, welche Stufe zu dir passt? Zögere nicht und frag uns." className="mt-5" />
-            </div>
-            <div className="border-l-4 border-home-mint pl-6">
-              <h3 className="font-display text-xl font-bold">Darauf kommt es an</h3>
-              <ul className="mt-4 list-disc space-y-3 pl-5 text-home-slate">
-                <li>Leistungen, die zu deinen Wünschen passen</li>
-                <li>Ein Beitrag, den du auch ohne Bonus tragen kannst</li>
-                <li>Klare Grenzen und Voraussetzungen vor dem Abschluss</li>
-              </ul>
-              <p className="mt-5 text-sm leading-relaxed text-home-slate">{config.caution}</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="bonus-check" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
-          <div className="grid items-center gap-6 md:grid-cols-[240px_1fr] md:gap-14">
-            <img src="/images/friendly-icons/bonus-you-mascot.webp" alt="" width="240" height="240" className="mx-auto w-36 md:w-60" loading="lazy" />
-            <div>
-              <h2 className="font-friendly text-3xl md:text-4xl">Dein Kassenbonus. Was ist bei dir drin?</h2>
-              <p className="mt-4 max-w-[60ch] leading-relaxed text-home-slate">Vorsorge, Sport oder ein Gesundheitskurs können sich auch finanziell lohnen. Dein Kassenbonus kann helfen, passenden Zusatzschutz mitzufinanzieren.</p>
-              <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-home-slate">Wie viel möglich ist, hängt von deiner Krankenkasse, deinen nachgewiesenen Aktivitäten und den anerkannten Kosten ab. Der Bonus ist eine mögliche Hilfe, keine Voraussetzung für deinen Zusatzschutz.</p>
+              <h2 id="bonus-heading" className="font-friendly text-3xl md:text-4xl">Dein Bonus: jede Vorsorge zählt einzeln</h2>
+              <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-home-slate">Bei der IKK classic bringt jede Mutterschaftsvorsorge 10 EUR Geldbonus oder 30 EUR Zuschuss, die Rückbildung später 25 oder 75 EUR. Der Zuschuss bezahlt deinen Versicherungsbeitrag, höchstens bis zu deinen tatsächlichen Kosten.</p>
             </div>
           </div>
           <div className="mt-8">
-              <div className="rounded-2xl bg-home-ice p-6 sm:p-8">
-                <h3 className="font-display text-xl font-bold">Das Rechenbeispiel mit 630 EUR</h3>
-                <p className="mt-3 max-w-prose text-home-slate">Ein Beispiel für eine Person im Bonusjahr 2026: 630 EUR zweckgebundener Zuschuss oder alternativ 210 EUR Geldbonus. Kein garantierter Betrag und kein Höchstbonus.</p>
-                <details className="mt-4">
-                  <summary className={`cursor-pointer font-semibold ${focus}`}>Wie setzt sich das Beispiel zusammen?</summary>
-                  <dl className="mt-4 max-w-2xl divide-y divide-home-slate/20">{film.map(([label, amount]) => (
-                    <div key={label} className="flex justify-between gap-5 py-3"><dt>{label}</dt><dd className="shrink-0 font-semibold">{amount}</dd></div>
-                  ))}</dl>
-                </details>
-                <p className="mt-4 max-w-prose text-sm text-home-slate">Die IKK classic prüft die Voraussetzungen und Nachweise. Der Zuschuss ist auf tatsächlich gezahlte, zuschussfähige Kosten begrenzt. Die Versicherungsleistungen werden davon getrennt nach Tarif geprüft.</p>
+            <PregnancyBonusExample />
+            <details className="mt-4 rounded-2xl bg-home-ice p-6 sm:p-8">
+              <summary className={`cursor-pointer font-semibold ${focus}`}>Was du dafür brauchst und wie gerechnet wird</summary>
+              <div className="mt-4 max-w-prose space-y-3 text-sm leading-relaxed text-home-slate">
+                <ul className="list-disc space-y-2 pl-5">
+                  <li>Einen schriftlichen Nachweis je Untersuchung, der Mutterpass reicht aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen</li>
+                  <li>Ein eigenes Antragsfeld je Vorsorge, alle Maßnahmen im selben Kalenderjahr</li>
+                  <li>Für das Bonusjahr 2026 den vollständigen Antrag bis zum 31.03.2027</li>
+                </ul>
+                <p>Die bis zu 1.155 EUR sind ein rechnerischer Höchstwert aus der Satzung, in dem alles gleichzeitig zutrifft, und keine Summe, die die IKK classic irgendwo zusagt. In der breiten Masse landen aktive Versicherte bei 400 bis 700 EUR im Jahr.</p>
+                <p>Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Aus rechnerisch 405 EUR Zuschuss werden bei 240 EUR Jahresbeitrag also 240 EUR, nie mehr.</p>
+                <p className="font-semibold text-home-midnight">Rechenbeispiel für eine Person im Bonusjahr 2026: 630 EUR Zuschuss oder alternativ 210 EUR Geldbonus</p>
+                <dl className="divide-y divide-home-slate/20">{film.map(([label, amount]) => (
+                  <div key={label} className="flex justify-between gap-5 py-2"><dt>{label}</dt><dd className="shrink-0 font-semibold">{amount}</dd></div>
+                ))}</dl>
+                <p>Die IKK classic prüft die Voraussetzungen und Nachweise, nicht wir. Deinen Bonus beantragst du später direkt bei deiner Krankenkasse, zum Beispiel in der IKK-classic-App. Bonusregeln: <a href="https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm" className={textLink}>IKK classic</a> und <a href="https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf" className={textLink}>Infoblatt 2026</a>.</p>
               </div>
-              <PregnancyBonusExample />
+            </details>
           </div>
-          <p className="mt-6 max-w-prose text-sm leading-relaxed text-home-slate"><strong>Hier ist noch nichts beantragt.</strong> Deinen Bonus beantragst du später direkt bei deiner Krankenkasse, zum Beispiel in der IKK-classic-App. Eine Auswahl auf Healio ersetzt keine Nachweise.</p>
-          <p className="mt-3 text-sm text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
-          <p className="mt-3 text-sm text-home-slate">Bonusregeln: <a href="https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm" className={textLink}>IKK classic</a> und <a href="https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf" className={textLink}>Infoblatt 2026</a>.</p>
+          <p className="mt-6 text-sm text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
         </section>
 
-        <section className="bg-home-ice py-12 md:py-16">
-          <div className={wrap}>
-            <h2 className="font-friendly text-3xl md:text-4xl">Ein klarer Weg. Du entscheidest.</h2>
-            <ol className="mt-7 grid gap-7 md:grid-cols-3 md:gap-12">
-              {[
-                ['Bei Healio verstehen', helpVisible ? 'Leistungen und Beiträge ansehen. Deine Fragen stellst du uns jederzeit per WhatsApp.' : 'Leistungen und Beiträge in Ruhe ansehen.'],
-                ['Zusatzschutz beantragen', 'Passt der Schutz, beantragst du ihn selbst online beim Versicherer. Bei der SDK gibst du dafür Versicherungsbeginn, Geburtsdatum und Geschlecht ein, siehst deinen Beitrag und beantwortest danach die Gesundheitsfragen. Der Versicherer prüft deinen Antrag.'],
-                ['Bonus bei deiner Kasse nutzen', 'Bonusfähige Aktivitäten nachweisen und den Bonus dort separat beantragen. Healio reicht hier keinen Antrag für dich ein.'],
-              ].map(([title, description], i) => (
-                <li key={title}><span className="font-friendly text-3xl text-[#076046]" aria-hidden="true">{i + 1}.</span><h3 className="mt-2 font-display text-lg font-bold">{title}</h3><p className="mt-2 leading-relaxed text-home-slate">{description}</p></li>
-              ))}
-            </ol>
-            <p className="mt-6 text-sm text-home-slate">Ein Bonus ist auch ohne neuen Zusatzschutz möglich. Beide Entscheidungen bleiben getrennt.</p>
-          </div>
-        </section>
-
-        <section id="fragen" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
+        <section id="fragen" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
           <div className="grid gap-8 md:grid-cols-[1fr_1.5fr] md:gap-16">
             {helpVisible ? (
               <div>
@@ -305,10 +280,8 @@ export default function BenefitFunnelPage() {
           </div>
           <div className="mt-8 border-t border-home-slate/20 pt-7">
             <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
-            <p className="mt-3 text-sm text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin.</p>
+            <p className="mt-3 text-sm text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin. Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
             <WhatsAppHelpHint placement="schwangerschaft-abschluss" variant="line" text="Auf der nächsten Seite wählst du deine Stufe. Kommst du nicht weiter, frag uns per WhatsApp." className="mt-4" />
-            <p className="mt-3 text-sm text-home-slate">Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
-            <p className="mt-3 text-sm text-home-slate">Zum Nachlesen: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
           </div>
         </section>
       </div>
