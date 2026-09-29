@@ -41,7 +41,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className={`mb-5 max-w-[18ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(2.1rem,4.6vw,4.25rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white drop-shadow-lg [text-wrap:balance] md:mb-7`}
+            className={`mb-5 max-w-[18ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.6vw,4.25rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white drop-shadow-lg [text-wrap:balance] md:mb-7`}
           >
             <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>

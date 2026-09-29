@@ -809,7 +809,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           <div className="relative mt-14 overflow-hidden rounded-[2.2rem] bg-home-midnight px-6 py-10 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14">
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-home-mint/15" />
             <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">{copy.finalEyebrow}</p>
-            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] sm:text-4xl lg:text-5xl">{copy.finalTitle}</h2>
+            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{copy.finalTitle}</h2>
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
             <p className="relative mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-200" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">

@@ -27,7 +27,7 @@ const StationaerHero = () => {
           transition={{ duration: 0.65 }}
           className="min-w-0 w-full max-w-3xl"
         >
-          <p className="font-display text-xs font-bold uppercase tracking-[0.23em] text-[#5ee0b1] sm:text-sm">
+          <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-[#5ee0b1] [overflow-wrap:anywhere] sm:text-sm sm:tracking-[0.23em]">
             {t('refresh.hero.eyebrow')}
           </p>
           <h1
