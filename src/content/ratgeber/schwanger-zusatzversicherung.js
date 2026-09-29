@@ -19,9 +19,10 @@
  *     (AVB § 2 Abs. 2), SDK keine. § 198 VVG erlaubt diese Mindestzeit nur als
  *     Vereinbarung, sie ist keine gesetzliche Grundregel.
  *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
- *   - Hebamme: steht bei der Bayerischen nur im Werbeblatt/Steckbrief, in den
- *     Bedingungen nur bei Mehrkosten anderer Klinikwahl (TB 2.7). Deshalb seit
- *     29.09.2026 keine Hebammen-Aussage zur Bayerischen mehr.
+ *   - Hebamme Bayerische: laut Produktsteckbrief B 275010 und Highlightblatt
+ *     275008 (Kosten über GKV-Leistung, privat abrechnende Hebammen, Komfort und
+ *     Prestige). Von Frank am 29.09.2026 als Grundlage freigegeben. Die mündlich
+ *     genannten 90 EUR je Hausbesuch bleiben draußen.
  *   - Smart-Optionsrecht nach TB-S § 5, Stand 11/2024.
  *   - Allgemeine Wartezeit drei Monate, bei Unfall sofort (AVB § 3 Abs. 2).
  *
@@ -255,7 +256,7 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause vor und nach der Geburt gehört dort nicht dazu. Für eine Schwangerschaft, die beim Antrag schon ärztlich festgestellt ist, gilt das nicht.',
+        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause vor und nach der Geburt gehört dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Dort gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',

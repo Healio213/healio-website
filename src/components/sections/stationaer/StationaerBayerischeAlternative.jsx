@@ -9,8 +9,8 @@ import { BAYERISCHE_STATIONAER_URL, trackStationaerBayerischeClick } from '@/com
 // über HospitalConcept eingebunden). Nur belegte Punkte aus AVB B 333500 und
 // den Tarifbedingungen Komfort/Prestige (11/2024). Schwangerschaft, Kinder und
 // Familienzimmer stehen seit 29.09. in der dritten Familienkarte (#familie).
-// Die Hebamme steht bei der Bayerischen nur bei den Mehrkosten einer anderen
-// Klinikwahl (TB 2.7), deshalb hier keine Hebammen-Aussage.
+// Die Hebamme der Bayerischen (laut Produktsteckbrief, Freigabe Frank 29.09.)
+// steht im Hebammen-Block der Familien-Sektion (#hebamme).
 const TARIFFS = ['Prestige', 'Komfort', 'Smart'];
 
 const COPY = {

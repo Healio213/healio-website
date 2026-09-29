@@ -6,7 +6,8 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 // Drei Antworten für Familien (Frank 29.09.2026): SDK ohne Vorlauf, die
 // Bayerische mit Vorlauf, dazu die Kindertarife. Nur belegte Punkte aus den
 // AVB der SDK (SP1/SP2 08/2025) und der Bayerischen (AVB B 333500, TB 11/2024).
-// Hebammenleistungen stehen nur für die SDK in den Bedingungen.
+// Hebamme: SDK laut Bedingungen (SP1/SP2), Bayerische laut Produktsteckbrief
+// B 275010 und Highlightblatt 275008 (von Frank am 29.09.2026 freigegeben).
 const CARDS = [
   { key: 'parents', icon: 'pregnancy', tone: 'coral', border: 'border-[#f0cfc0]', accent: 'text-[#b75f42]', noteBg: 'bg-[#fff4ef]' },
   { key: 'bayerische', icon: 'calendar', tone: 'sky', border: 'border-[#cfe0f0]', accent: 'text-[#2b6497]', noteBg: 'bg-[#f1f7fd]' },
@@ -16,6 +17,7 @@ const CARDS = [
 const MIDWIFE_TONES = {
   kasse: 'bg-[#eefaf5] text-[#075f46]',
   sdk: 'bg-[#fff4ef] text-[#a4523a]',
+  bay: 'bg-[#f1f7fd] text-[#1f4f7a]',
   nicht: 'bg-slate-100 text-slate-600',
 };
 

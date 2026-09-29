@@ -158,7 +158,8 @@
       "Head physician at 100 per cent, with no cap at the maximum GOÄ rates",
       "Streamlined acceptance with only two health questions",
       "Adults aged 21 to 30: Komfort EUR 10.20, Prestige EUR 13.40 per month",
-      "The child's Smart tariff can be switched to Komfort or Prestige without a new health check or waiting period, at the end of the third or sixth insurance year counted from the year the child turns 21"
+      "The child's Smart tariff can be switched to Komfort or Prestige without a new health check or waiting period, at the end of the third or sixth insurance year counted from the year the child turns 21",
+      "Midwife costs beyond what statutory health insurance pays, in Komfort and Prestige, including midwives who bill privately. This does not apply to a pregnancy that already exists when the application is made"
     ],
     "bayerischeCaveat": "To be honest about it: a special waiting period of eight months applies to childbirth, and for the newborn a parent must already have been insured for three months. The deadline therefore falls in the sixth month of pregnancy. The tariff also builds no ageing provisions, so the premium is very low at a young age and rises considerably by design in old age. For children and the family years that is exactly the strongest lever, but as a lifelong solution you need to know it.",
     "sdkName": "SDK",

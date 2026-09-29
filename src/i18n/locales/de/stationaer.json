@@ -464,9 +464,10 @@
           "Prestige für dich: 13,40 EUR im Monat mit 21 bis 30 Jahren, 17,60 EUR mit 31 bis 45 (Stand 09/2026)",
           "Für dein Kind in der Altersgruppe bis 15 Jahre: Komfort 3,20 EUR, Prestige 4,10 EUR im Monat",
           "Familienzimmer bei einer späteren Entbindung: im Prestige wählbar, im Komfort bis zur Höhe des Zweibettzimmers",
-          "Anmeldung spätestens zwei Monate nach der Geburt, Schutz rückwirkend"
+          "Anmeldung spätestens zwei Monate nach der Geburt, Schutz rückwirkend",
+          "Bei einer späteren Schwangerschaft: Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, im Komfort und im Prestige"
         ],
-        "note": "Bist du beim Antrag schon schwanger, zahlt der Tarif diese Entbindung nicht. Auch später gilt: Kommt ein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif die Entbindung nicht. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der Elternteil."
+        "note": "Bist du beim Antrag schon schwanger, zahlt der Tarif weder diese Entbindung noch Hebammenkosten für diese Schwangerschaft. Auch später gilt: Kommt ein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif die Entbindung nicht. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der Elternteil."
       },
       "children": {
         "label": "Für Kinder · SDK",
@@ -483,7 +484,7 @@
       "midwife": {
         "eyebrow": "Hebamme und Geburt",
         "title": "Deine Hebamme: Wer zahlt was?",
-        "lead": "Die meiste Hebammenhilfe zahlt deine Krankenkasse. Bei einer Geburt mit Beleghebamme kommen SDK SP1 und SP2 dazu. Beleghebammen arbeiten freiberuflich im Kreißsaal. Eine Beleghebamme kannst du dir auch selbst aussuchen, sie begleitet dich dann zur Geburt in die Klinik.",
+        "lead": "Die meiste Hebammenhilfe zahlt deine Krankenkasse. Was die Klinik-Tarife von SDK und Bayerischer zusätzlich übernehmen, siehst du hier im Überblick. Beleghebammen arbeiten freiberuflich im Kreißsaal. Eine Beleghebamme kannst du dir auch selbst aussuchen, sie begleitet dich dann zur Geburt in die Klinik.",
         "rows": [
           {
             "who": "Deine Krankenkasse",
@@ -497,9 +498,15 @@
             "condition": "Das gilt nicht, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt war. Und deine Krankenkasse muss die Klinikgeburt übernehmen."
           },
           {
-            "who": "Nicht im Klinik-Tarif",
+            "who": "Nicht in SP1 und SP2",
             "tone": "nicht",
             "text": "Hausgeburt, Geburtshaus und die Betreuung zu Hause vor und nach der Geburt zahlen SP1 und SP2 nicht. Die Hebammenhilfe dafür zahlt deine Krankenkasse."
+          },
+          {
+            "who": "Bayerische Komfort und Prestige",
+            "tone": "bay",
+            "text": "Laut Produktunterlagen der Bayerischen erstatten Komfort und Prestige Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, auch für privat abrechnende Hebammen.",
+            "condition": "Bist du beim Antrag schon schwanger, gilt das für diese Schwangerschaft und Geburt nicht. Es gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten."
           }
         ]
       },
