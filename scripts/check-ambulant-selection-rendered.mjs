@@ -57,10 +57,10 @@ try {
   await page.click('#bonus-calculator button[aria-label^="Monatlichen Tarifbeitrag"]');
   await page.keyboard.press('Enter');
   for (const [code, monthly, annual, budget] of [
-    ['AP5', '14,14', '169,68 €', '1.400'],
-    ['AP7', '23,10', '277,20 €', '2.000'],
-    ['AP9', '37,95', '455,40 €', '2.600'],
-    ['AP1', '44,13', '529,56 €', '3.000'],
+    ['AP5', '10,36', '124,32 €', '1.400'],
+    ['AP7', '15,82', '189,84 €', '2.000'],
+    ['AP9', '27,44', '329,28 €', '2.600'],
+    ['AP1', '31,64', '379,68 €', '3.000'],
   ]) {
     await choose(code);
     const current = await read();
@@ -83,14 +83,27 @@ try {
   assert.equal(custom.potential, initial.potential);
   await page.evaluate(() => [...document.querySelectorAll('#bonus-calculator button')].find((button) => button.textContent.trim() === 'Auswahl zurücksetzen').click());
   const reset = await read();
-  assert(reset.monthly.includes('14,14'), 'Reset must restore the currently selected tariff example.');
+  assert(reset.monthly.includes('10,36'), 'Reset must restore the currently selected tariff example.');
+
+  // Ohne Geburtsjahr nie ein Pauschalbetrag: Spanne über alle Altersgruppen.
+  // Mit Geburtsjahr zählt das erreichte Alter (Kalenderjahr minus Geburtsjahr).
+  const agePrice = () => page.$eval('[data-healio-ambulant="age-price"]', (node) => node.textContent);
+  assert((await agePrice()).includes('bis'), 'Without a year of birth the tariff card must show a price range.');
+  const year = new Date().getFullYear();
+  await page.type('#ambulant-geburtsjahr', String(year - 43));
+  await page.waitForFunction(() => document.querySelector('[data-healio-ambulant="age-price"]').textContent.includes('6,79') === false);
+  assert((await agePrice()).includes('14,14'), 'AP5 at reached age 43 must show the 41 to 50 group premium.');
+  await choose('AP1');
+  assert((await agePrice()).includes('44,13'), 'AP1 at reached age 43 must show 44,13.');
+  const calcWithAge = await read();
+  assert(calcWithAge.monthly.includes('44,13'), 'The bonus calculator must follow the age group premium.');
   assert.equal(reset.potential, '0 €');
   assert.equal(reset.eligible, '0 €');
 
   await open('/en/outpatient');
   await choose('AP7');
   const english = await page.$eval('#bonus-calculator', (node) => node.textContent);
-  assert(english.includes('AP7') && english.includes('23.10') && english.includes('2,000'));
+  assert(english.includes('AP7') && english.includes('15.82') && english.includes('2,000'));
   assert(english.includes('pick the same tier') && english.includes('German'));
 
   for (const width of [390, 320]) {

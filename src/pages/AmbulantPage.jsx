@@ -6,6 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
+import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -53,6 +54,8 @@ const AmbulantPage = () => {
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
       <div className="min-h-screen bg-white">
         <AmbulantHero fromBonusTopic={fromBonusTopic} />
+        {/* Siegel direkt unter dem Hero, wie auf /partner. */}
+        <HealioAwardsRow size="large" />
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>
     </>

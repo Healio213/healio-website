@@ -2,10 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 /**
- * Gemeinsame Siegelzeile für Startseite, /ambulant, /zahn und /partner.
+ * Gemeinsame Siegelzeile für Startseite, /ambulant, /zahn, /stationaer und
+ * /partner.
  *
  * Die Zeile zeigt ausschliesslich bereits freigegebene Siegel der
  * Produktpartner. Kein neuer Anspruch, keine neue Zahl, keine neue Quelle.
+ * Für /zahn und /stationaer gelten die produktpassenden Sätze aus der
+ * früheren Qualitätssektion (Alt-Texte aus deren i18n-Schlüsseln), damit auf
+ * der Zahnseite keine Siegel fremder Produkte stehen.
  */
 export const HEALIO_AWARDS = [
   { src: '/siegel/sdk/stiftung-warentest.png', alt: 'Stiftung Warentest SEHR GUT (0,9)' },
@@ -14,6 +18,23 @@ export const HEALIO_AWARDS = [
   { src: '/siegel/ikk/schwangere-test.webp', alt: 'Krankenkassentest für Schwangere und junge Eltern Note 1,7 Gut' },
   { src: '/siegel/ikk/familien-test.webp', alt: 'Krankenkassentest für Familien Note 1,6 Gut' },
 ];
+
+const PRODUCT_AWARD_SETS = {
+  zahn: [
+    { src: '/siegel/bayerische/warentest-zahn-prestige-2025.jpg', altKey: 'siegel.awards.warentest' },
+    { src: '/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg', altKey: 'siegel.awards.frankeBornberg' },
+    { src: '/siegel/lkh/lkh-stiftung-warentest.png', altKey: 'siegel.awards.lkhWarentest' },
+    { src: '/siegel/ikk/krankenkasseninfo-leistungen.png', altKey: 'siegel.ikkAwards.performance' },
+    { src: '/siegel/ikk/familien-test.webp', altKey: 'siegel.ikkAwards.family' },
+  ],
+  stationaer: [
+    { src: '/siegel/sdk/stiftung-warentest.png', altKey: 'siegel.awards.warentest' },
+    { src: '/siegel/sdk/fairnesspreis.png', altKey: 'siegel.awards.fairness' },
+    { src: '/siegel/sdk/morgen-morgen.png', altKey: 'siegel.awards.morgenMorgen' },
+    { src: '/siegel/ikk/familien-test.webp', altKey: 'siegel.ikkAwards.family' },
+    { src: '/siegel/ikk/schwangere-test.webp', altKey: 'siegel.ikkAwards.parents' },
+  ],
+};
 
 const toneClasses = {
   light: 'bg-white border-gray-100',
@@ -36,9 +57,14 @@ const HealioAwardsRow = ({
   tone = 'light',
   bordered = true,
   className = '',
+  productSet,
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'zahn', 'stationaer']);
   const caption = label || t('awards.label');
+  const productAwards = PRODUCT_AWARD_SETS[productSet];
+  const awards = productAwards
+    ? productAwards.map((award) => ({ src: award.src, alt: t(award.altKey, { ns: productSet }) }))
+    : HEALIO_AWARDS;
   const styles = sizeClasses[size] || (compact ? sizeClasses.compact : sizeClasses.regular);
 
   return (
@@ -51,7 +77,7 @@ const HealioAwardsRow = ({
         <div
           className={`mx-auto mt-4 flex max-w-6xl flex-wrap items-center justify-center ${styles.gap}`}
         >
-          {HEALIO_AWARDS.map((award) => (
+          {awards.map((award) => (
             <img
               key={award.src}
               src={award.src}

@@ -10,6 +10,7 @@ import { TextHighlight } from '@/components/ui/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
 import { calculateIkkBonus, capActivityCount } from '@/lib/ikkBonusCalculator';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { BEISPIEL_GRUPPE } from '@/data/sdkAmbulantBeitraege';
 
 // IKK classic Bonustabelle 2026. Geldbonus und Zuschuss sind Alternativen;
 // der Zuschuss beträgt das Dreifache des Geldbonus und ist auf die
@@ -55,7 +56,7 @@ const AmbulantBonusCalculator = ({
   ctaOverride,
   secondaryCtaOverride,
   tarifTypes = 'Ambulant',
-  defaultMonatsbeitrag = 44.13,
+  defaultMonatsbeitrag = BEISPIEL_GRUPPE.AP1,
   tariffInfoText,
   effectiveLabel,
   effectiveValue,

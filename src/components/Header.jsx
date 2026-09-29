@@ -126,6 +126,9 @@ const Header = () => {
         { to: getPath('ambulant'), label: t('nav.ambulant') },
         { to: getPath('zahn'), label: t('nav.zahn') },
         { to: getPath('stationaer'), label: t('nav.stationaer') },
+        // Schwangerschaft gibt es nur auf Deutsch; sie wird gezielt beworben
+        // und soll auch ohne Kampagnenlink über das Menü erreichbar sein.
+        ...(lang === 'en' ? [] : [{ to: '/schwangerschaft', label: t('nav.schwangerschaft') }]),
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
     },

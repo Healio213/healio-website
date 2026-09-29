@@ -18,7 +18,9 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
-import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
+import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
+import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 
 const COPY = {
   de: {
@@ -59,21 +61,35 @@ const COPY = {
     },
     tiers: {
       eyebrow: 'Dein Schutz, deine Höhe',
-      title: 'Nicht jeder braucht 100 %. Aber jeder sollte den Unterschied sehen.',
+      title: 'Nicht jeder braucht 100\u00a0%. Aber jeder sollte den Unterschied sehen.',
       subtitle: 'Vergleiche nicht nur die Gesamtsumme. Hier siehst du, wie viel in jedem der vier Leistungstöpfe steckt.',
       refund: 'Erstattung',
       budget: 'Gesundheitsbudget in 2 Jahren',
       ledgerTitle: 'So verteilt sich dein Budget',
       ledgerHint: 'Vier klar getrennte Leistungstöpfe · jeweils innerhalb der Tarifbedingungen',
-      examplePrice: 'Veröffentlichter SDK-Orientierungswert',
       perMonth: '/ Monat',
+      tierGroupLabel: 'Tarifstufe wählen',
+      ageLabel: 'Dein Geburtsjahr',
+      agePlaceholder: 'z. B. 1985',
+      ageInvalid: 'Bitte ein Geburtsjahr wie 1985 eingeben.',
+      groupRange: '{{from}} bis {{to}} Jahre',
+      groupOpen: 'ab {{from}} Jahren',
+      priceForGroup: 'Dein Monatsbeitrag · {{group}}',
+      priceRangeLabel: 'Monatsbeitrag je nach Alter',
+      priceRangeJoin: 'bis',
+      priceRangeHint: 'Gib oben dein Geburtsjahr ein, dann siehst du deinen Beitrag.',
+      groupRule: 'Der Beitrag richtet sich nach deiner Altersgruppe. In dem Jahr, in dem du 21, 31, 41, 51, 61 oder 71 wirst, gilt der Beitrag der nächsten Gruppe.',
+      priceSource: 'Beiträge der SDK-Tarife, Stand {{stand}}',
       overviewTitle: 'Alle vier Stufen auf einen Blick',
       overviewTier: 'Stufe',
       overviewBudget: 'Budget in 2 Jahren',
-      overviewPrice: 'Orientierungsbeitrag',
+      overviewPriceGroup: 'Dein Beitrag ({{group}})',
+      overviewPriceRange: 'Monatsbeitrag je nach Alter',
+      groupsTitle: 'Alle Beiträge nach Altersgruppe',
+      groupsAge: 'Alter',
       calculatorPrice: 'Persönlichen Beitrag im Rechner sehen',
       calculatorHandoff: 'Im Rechner wählst du dieselbe Stufe: Ambulant {{level}} ({{code}}). Dann siehst du deinen persönlichen Beitrag.',
-      priceNote: 'Die veröffentlichten Orientierungswerte ersetzen kein persönliches Angebot. Dein Beitrag hängt insbesondere von Eintrittsalter, Gesundheitsangaben und Tarifstufe ab.',
+      priceNote: 'Die Beiträge ersetzen kein persönliches Angebot. Deinen verbindlichen Beitrag siehst du vor dem Antrag im Tarifrechner.',
       pots: {
         vision: { label: 'Sehhilfen', detail: 'Brille & Kontaktlinsen' },
         natural: { label: 'Naturheilverfahren', detail: 'Heilpraktiker & Osteopathie' },
@@ -194,15 +210,29 @@ const COPY = {
       budget: 'Health budget over 2 years',
       ledgerTitle: 'How your budget is allocated',
       ledgerHint: 'Four separate benefit pots · each subject to the policy terms',
-      examplePrice: 'Published SDK orientation value',
       perMonth: '/ month',
+      tierGroupLabel: 'Choose a tier',
+      ageLabel: 'Your year of birth',
+      agePlaceholder: 'e.g. 1985',
+      ageInvalid: 'Please enter a year of birth such as 1985.',
+      groupRange: 'age {{from}} to {{to}}',
+      groupOpen: 'age {{from}} and over',
+      priceForGroup: 'Your monthly premium · {{group}}',
+      priceRangeLabel: 'Monthly premium by age',
+      priceRangeJoin: 'to',
+      priceRangeHint: 'Enter your year of birth above to see your premium.',
+      groupRule: 'The premium follows your age group. In the year you turn 21, 31, 41, 51, 61 or 71, the next group\'s premium applies.',
+      priceSource: 'SDK tariff premiums, as of {{stand}}',
       overviewTitle: 'All four tiers at a glance',
       overviewTier: 'Tier',
       overviewBudget: 'Budget over 2 years',
-      overviewPrice: 'Orientation premium',
+      overviewPriceGroup: 'Your premium ({{group}})',
+      overviewPriceRange: 'Monthly premium by age',
+      groupsTitle: 'All premiums by age group',
+      groupsAge: 'Age',
       calculatorPrice: 'See your personal premium in the calculator',
       calculatorHandoff: 'In the calculator you pick the same tier: Ambulant {{level}} ({{code}}). Then you see your personal premium. The calculator is in German.',
-      priceNote: 'Published orientation values do not replace a personal quote. Your premium depends in particular on entry age, health information and the selected tariff.',
+      priceNote: 'These premiums do not replace a personal quote. You see your binding premium in the calculator before you apply.',
       pots: {
         vision: { label: 'Vision aids', detail: 'Glasses & contact lenses' },
         natural: { label: 'Natural therapies', detail: 'Alternative medicine & osteopathy' },
@@ -278,10 +308,10 @@ const GOALS = [
 ];
 
 const TIERS = [
-  { id: 50, code: 'AP5', refund: '50 %', budget: 1400, price: 14.14, pots: { vision: 200, natural: 500, prevention: 200, copay: 500 } },
-  { id: 70, code: 'AP7', refund: '70 %', budget: 2000, price: 23.10, pots: { vision: 300, natural: 700, prevention: 300, copay: 700 } },
-  { id: 90, code: 'AP9', refund: '90 %', budget: 2600, price: 37.95, pots: { vision: 400, natural: 900, prevention: 400, copay: 900 } },
-  { id: 100, code: 'AP1', refund: '100 %', budget: 3000, price: 44.13, pots: { vision: 500, natural: 1000, prevention: 500, copay: 1000 } },
+  { id: 50, code: 'AP5', refund: '50 %', budget: 1400, pots: { vision: 200, natural: 500, prevention: 200, copay: 500 } },
+  { id: 70, code: 'AP7', refund: '70 %', budget: 2000, pots: { vision: 300, natural: 700, prevention: 300, copay: 700 } },
+  { id: 90, code: 'AP9', refund: '90 %', budget: 2600, pots: { vision: 400, natural: 900, prevention: 400, copay: 900 } },
+  { id: 100, code: 'AP1', refund: '100 %', budget: 3000, pots: { vision: 500, natural: 1000, prevention: 500, copay: 1000 } },
 ];
 
 const POT_KEYS = ['vision', 'natural', 'prevention', 'copay'];
@@ -327,8 +357,27 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
   const [selectedGoal, setSelectedGoal] = useState('natur');
   const [selectedTier, setSelectedTier] = useState(100);
+  const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
   const goal = copy.compass.goals[selectedGoal];
   const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
+  // Beiträge nie pauschal: ohne Geburtsjahr zeigt die Seite die Spanne über
+  // alle Altersgruppen, mit Geburtsjahr den Beitrag der eigenen Gruppe.
+  const geburtsjahr = parseGeburtsjahr(geburtsjahrEingabe);
+  const geburtsjahrUngueltig = geburtsjahrEingabe.length === 4 && geburtsjahr === null;
+  const altersgruppe = findeAltersgruppe(geburtsjahr);
+  const gruppenName = (gruppe) => (gruppe.bis === null ? copy.tiers.groupOpen : copy.tiers.groupRange)
+    .replace('{{from}}', gruppe.von)
+    .replace('{{to}}', gruppe.bis);
+  const beitragFuer = (item) => beitragInGruppe(altersgruppe, item.code);
+  const spanneText = (item) => {
+    const { min, max } = beitragsSpanne(item.code);
+    return `${monthlyEuro.format(min)} ${copy.tiers.priceRangeJoin} ${monthlyEuro.format(max)}`;
+  };
+  const tierBeitrag = beitragFuer(tier);
+  // Der Bonusrechner braucht immer einen belegten Betrag: eigene Gruppe, sonst
+  // die Beispielgruppe. Die Gruppe steht jeweils in der Tarifzeile dabei.
+  const rechnerGruppe = altersgruppe ?? BEISPIEL_GRUPPE;
+  const rechnerBeitrag = beitragInGruppe(rechnerGruppe, tier.code);
   const euro = useMemo(() => new Intl.NumberFormat(language === 'en' ? 'en-GB' : 'de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -424,36 +473,66 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               <p className="mt-2 max-w-3xl text-sm leading-6 text-home-slate">Ein möglicher Kassenbonus bleibt eine separate Prüfung und ist hier nicht bestätigt. Es werden keine Ergebnisse aus einem Bonuscheck übernommen.</p>
             </div>
           )}
-          <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(520px,1.1fr)]">
-            <div>
-              <p className="home-eyebrow">{copy.tiers.eyebrow}</p>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.tiers.title}</h2>
-              <p className="mt-5 max-w-xl text-base leading-7 text-home-slate sm:text-lg">{copy.tiers.subtitle}</p>
-            </div>
-            <div className="grid grid-cols-4 gap-2 rounded-[1.4rem] bg-slate-100 p-2" aria-label={copy.tiers.title}>
+          <div className="max-w-4xl">
+            <p className="home-eyebrow">{copy.tiers.eyebrow}</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight [text-wrap:balance] sm:text-4xl lg:text-5xl">{copy.tiers.title}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-home-slate sm:text-lg">{copy.tiers.subtitle}</p>
+          </div>
+
+          <div className="mt-9 grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(15rem,18rem)]">
+            <div className="grid grid-cols-4 gap-2 rounded-[1.4rem] bg-slate-100 p-2" role="group" aria-label={copy.tiers.tierGroupLabel}>
               {TIERS.map((item) => (
                 <button key={item.id} type="button" onClick={() => setSelectedTier(item.id)} aria-pressed={selectedTier === item.id} className={`home-focus rounded-[1rem] px-2 py-3 font-display text-sm font-extrabold transition sm:text-base ${selectedTier === item.id ? 'bg-home-midnight text-white shadow-lg' : 'text-home-slate hover:bg-white'}`}>
                   <span className="block text-[10px] uppercase tracking-[0.14em] opacity-65 sm:text-xs">{item.code}</span>
-                  <span className="mt-0.5 block">{item.id} %</span>
+                  <span className="mt-0.5 block">{item.id}{'\u00a0'}%</span>
                 </button>
               ))}
+            </div>
+            <div className={`flex flex-col justify-center rounded-[1.4rem] border-2 bg-white px-5 py-3 transition focus-within:border-home-mint ${geburtsjahrUngueltig ? 'border-rose-300' : 'border-slate-200'}`}>
+              <label htmlFor="ambulant-geburtsjahr" className="font-display text-xs font-extrabold uppercase tracking-[0.14em] text-home-slate">{copy.tiers.ageLabel}</label>
+              <input
+                id="ambulant-geburtsjahr"
+                type="text"
+                inputMode="numeric"
+                autoComplete="off"
+                maxLength={4}
+                value={geburtsjahrEingabe}
+                onChange={(event) => setGeburtsjahrEingabe(event.target.value.replace(/\D/g, '').slice(0, 4))}
+                placeholder={copy.tiers.agePlaceholder}
+                aria-invalid={geburtsjahrUngueltig || undefined}
+                aria-describedby={geburtsjahrUngueltig ? 'ambulant-geburtsjahr-fehler' : undefined}
+                className="mt-1 w-full min-w-0 bg-transparent font-display text-2xl font-extrabold text-home-midnight placeholder:text-base placeholder:font-semibold placeholder:text-slate-400 focus:outline-none"
+              />
+              {geburtsjahrUngueltig && <p id="ambulant-geburtsjahr-fehler" className="mt-1 text-xs font-semibold text-rose-600">{copy.tiers.ageInvalid}</p>}
             </div>
           </div>
 
           <div className="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white via-white to-emerald-50 shadow-[0_24px_70px_rgba(7,17,31,0.10)]">
             <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-              <div className="relative overflow-hidden bg-home-midnight p-7 text-white sm:p-9">
+              <div className="relative flex flex-col overflow-hidden bg-home-midnight p-7 text-white sm:p-9">
                 <div className="absolute -bottom-16 -left-12 h-52 w-52 rounded-full bg-home-mint/10 blur-2xl" />
                 <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.2em] text-home-mint-active">Ambulant {tier.id} · {tier.code}</p>
                 <p className="relative mt-4 font-display text-5xl font-extrabold tracking-[-0.05em] sm:text-6xl">{euro.format(tier.budget)}</p>
                 <p className="relative mt-2 text-sm text-slate-300">{copy.tiers.budget}</p>
-                <div className="relative mt-8 inline-flex items-baseline gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3">
+                <div className="relative mt-8 inline-flex self-start items-baseline gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3">
                   <strong className="font-display text-2xl text-home-mint-active">{tier.refund}</strong>
                   <span className="text-sm text-slate-300">{copy.tiers.refund}</span>
                 </div>
-                <div className="relative mt-8 border-t border-white/10 pt-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">{copy.tiers.examplePrice}</p>
-                  <p className="mt-2 font-display text-2xl font-extrabold text-white">{monthlyEuro.format(tier.price)} <span className="text-sm font-semibold text-slate-300">{copy.tiers.perMonth}</span></p>
+                <div className="relative mt-8 border-t border-white/10 pt-6 lg:mt-auto" aria-live="polite">
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                    {altersgruppe ? copy.tiers.priceForGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.priceRangeLabel}
+                  </p>
+                  {tierBeitrag !== null ? (
+                    <p className="mt-2 font-display text-4xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl" data-healio-ambulant="age-price">
+                      {monthlyEuro.format(tierBeitrag)} <span className="text-base font-semibold tracking-normal text-slate-300">{copy.tiers.perMonth}</span>
+                    </p>
+                  ) : (
+                    <p className="mt-2 font-display text-2xl font-extrabold text-white sm:text-3xl" data-healio-ambulant="age-price">
+                      {spanneText(tier)} <span className="text-sm font-semibold text-slate-300">{copy.tiers.perMonth}</span>
+                    </p>
+                  )}
+                  <p className="mt-3 text-sm leading-6 text-slate-300">{altersgruppe ? copy.tiers.groupRule : copy.tiers.priceRangeHint}</p>
+                  <p className="mt-3 text-xs text-slate-400">{copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}</p>
                 </div>
               </div>
               <div className="p-7 sm:p-9">
@@ -505,7 +584,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                     <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
                     <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.refund}</th>
                     <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
-                    <th scope="col" className="px-5 py-3 text-right sm:px-6">{copy.tiers.overviewPrice}</th>
+                    <th scope="col" className="px-5 py-3 text-right sm:px-6">{altersgruppe ? copy.tiers.overviewPriceGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.overviewPriceRange}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -521,22 +600,53 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       <td className="px-5 py-3.5 text-home-slate sm:px-6">{item.refund}</td>
                       <td className="px-5 py-3.5 text-home-slate sm:px-6">{euro.format(item.budget)}</td>
                       <td className="whitespace-nowrap px-5 py-3.5 text-right font-display font-extrabold text-home-midnight sm:px-6">
-                        {monthlyEuro.format(item.price)} <span className="text-xs font-semibold text-slate-500">{copy.tiers.perMonth}</span>
+                        {beitragFuer(item) !== null
+                          ? monthlyEuro.format(beitragFuer(item))
+                          : <span className="font-semibold">{spanneText(item)}</span>} <span className="text-xs font-semibold text-slate-500">{copy.tiers.perMonth}</span>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="border-t border-slate-100 px-5 py-3 text-xs leading-5 text-slate-500 sm:px-6">{copy.tiers.priceNote}</p>
+            <details className="group border-t border-slate-200" data-healio-ambulant="age-groups">
+              <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3.5 font-display text-sm font-extrabold text-home-midnight sm:px-6 [&::-webkit-details-marker]:hidden">
+                {copy.tiers.groupsTitle}
+                <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <div className="overflow-x-auto border-t border-slate-100">
+                <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+                  <caption className="sr-only">{copy.tiers.groupsTitle}</caption>
+                  <thead>
+                    <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                      <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.groupsAge}</th>
+                      {TIERS.map((item) => (
+                        <th key={item.code} scope="col" className="px-3 py-3 text-right sm:px-6">{item.code}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SDK_AMBULANT_BEITRAEGE.gruppen.map((gruppe) => (
+                      <tr key={gruppe.von} aria-current={gruppe === altersgruppe ? 'true' : undefined} className={`border-b border-slate-100 last:border-b-0 ${gruppe === altersgruppe ? 'bg-emerald-50/70' : ''}`}>
+                        <th scope="row" className="whitespace-nowrap px-5 py-3 font-semibold text-home-midnight sm:px-6">{gruppenName(gruppe)}</th>
+                        {TIERS.map((item) => (
+                          <td key={item.code} className={`whitespace-nowrap px-3 py-3 text-right sm:px-6 ${item.id === tier.id ? 'font-extrabold text-home-midnight' : 'text-home-slate'}`}>{monthlyEuro.format(gruppe[item.code])}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p className="border-t border-slate-100 px-5 py-3 text-xs leading-5 text-slate-500 sm:px-6">{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
-
-          <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-6 rounded-[1.6rem] border border-slate-200 bg-white" />
         </div>
       </section>
 
       {!fromBonusTopic && (
         <>
+      <ZweiWegeFinanzierung produkt="ambulant" className="bg-home-ice" />
+
       <section className="bg-[#071722] px-4 py-16 text-white sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="relative mx-auto w-full max-w-md">
@@ -596,8 +706,8 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{copy.calculator.disclosure}</p>
               <AmbulantBonusCalculator
                 embedded
-                defaultMonatsbeitrag={tier.price}
-                tariffInfoText={language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · SDK-Orientierungswert ${monthlyEuro.format(tier.price)}/Monat` : `Ambulant ${tier.id} (${tier.code}) · SDK orientation value ${monthlyEuro.format(tier.price)}/month`}
+                defaultMonatsbeitrag={rechnerBeitrag}
+                tariffInfoText={language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName(rechnerGruppe)}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName(rechnerGruppe)}`}
                 effectiveValue={language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`}
                 calculatorHint={calculatorHint}
                 effectiveNote={language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.'}
@@ -610,6 +720,11 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           </details>
         </div>
       </section>
+
+      {/* Die IKK-Wechsel-Strecke mit der Brücke (bis 29.08. auf allen drei
+          Produktseiten, auf Franks Wunsch zurück). Sie ersetzt hier die kleine
+          Wechsel-Karte im Ablauf-Abschnitt. */}
+      <AmbulantIKKWechsel variant="ambulant" />
 
         </>
       )}
@@ -630,7 +745,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             ))}
           </div>
 
-          <div className="relative mt-8 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#eaf8f2] via-[#f4fbf8] to-[#fff8e5] p-6 sm:p-8">
+          {fromBonusTopic && <div className="relative mt-8 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#eaf8f2] via-[#f4fbf8] to-[#fff8e5] p-6 sm:p-8">
             <div className="grid min-w-0 items-center gap-6 md:grid-cols-[minmax(0,1fr)_220px]">
               <div className="min-w-0">
                 <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{copy.process.switchEyebrow}</p>
@@ -644,7 +759,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               </div>
               <img src="/images/friendly-icons/decision-choice.webp" alt="" className="mx-auto hidden h-48 w-48 object-contain md:block" aria-hidden="true" />
             </div>
-          </div>
+          </div>}
 
           <div className={`mt-6 grid grid-cols-1 gap-6 ${HEALIO_VOICE_CONTACT_ENABLED ? 'lg:grid-cols-[1.08fr_0.92fr]' : ''}`}>
             <div className="rounded-[1.8rem] border border-emerald-900/10 bg-white p-6 sm:p-8">

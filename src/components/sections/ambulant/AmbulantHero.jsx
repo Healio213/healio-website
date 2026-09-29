@@ -26,7 +26,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
         <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_30%_45%,rgba(37,201,144,0.12),transparent_38%)]" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-20 pb-10 pt-16 md:pb-16 md:pt-20">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
         <div className="max-w-4xl text-left">
           <motion.p
             initial={{ opacity: 0, y: -12 }}
