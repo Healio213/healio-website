@@ -38,7 +38,7 @@ const COPY = {
       resultHint: 'Du legst dich hier noch nicht fest. Im Rechner kannst du alle Tarifstufen und deinen persönlichen Beitrag vergleichen.',
       goals: {
         natur: {
-          title: 'Heilpraktiker & Osteopathie',
+          title: 'Heilpraktiker &\u00a0Osteopathie',
           short: 'Behandlungen nicht länger komplett selbst zahlen.',
           focus: ['Erstattung für Naturheilverfahren', 'Höhe des verfügbaren Teilbudgets', 'Abrechnung nach den Tarifbedingungen'],
         },
@@ -323,7 +323,7 @@ const BONUS_TOPIC_COPY = {
     steps: [
       COPY.de.process.steps[0],
       COPY.de.process.steps[1],
-      { title: 'In Ruhe entscheiden', text: 'Prüfe Leistungen und Bedingungen. Wenn der Schutz passt, kannst du online weitermachen – ohne Pflichttermin.' },
+      { title: 'In Ruhe entscheiden', text: 'Prüfe Leistungen und Bedingungen. Wenn der Schutz passt, kannst du online weitermachen. Ein Pflichttermin ist nicht nötig.' },
     ],
     switchEyebrow: 'Zwei getrennte Entscheidungen',
     switchTitle: 'Dein Schutz braucht keinen Kassenwechsel.',
@@ -415,7 +415,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-home-slate sm:text-lg">{copy.compass.subtitle}</p>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
             <div className="grid gap-3 sm:grid-cols-2">
               {GOALS.map((item) => {
                 const itemCopy = copy.compass.goals[item.id];
@@ -566,7 +566,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   {copy.tiers.cta}
                 </a>
                 <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-home-slate" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-                <p className="mt-2 max-w-2xl text-xs leading-5 text-slate-500">{copy.tiers.priceNote}</p>
                 <p className="mt-5 max-w-2xl text-xs leading-5 text-slate-500">{copy.tiers.disclosure}</p>
               </div>
             </div>
@@ -577,12 +576,12 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               {copy.tiers.overviewTitle}
             </p>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[34rem] border-collapse text-left">
+              <table className="w-full border-collapse text-left sm:min-w-[34rem]">
                 <caption className="sr-only">{copy.tiers.overviewTitle}</caption>
                 <thead>
                   <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
                     <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
-                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.refund}</th>
+                    <th scope="col" className="hidden px-5 py-3 sm:table-cell sm:px-6">{copy.tiers.refund}</th>
                     <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
                     <th scope="col" className="px-5 py-3 text-right sm:px-6">{altersgruppe ? copy.tiers.overviewPriceGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.overviewPriceRange}</th>
                   </tr>
@@ -597,7 +596,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       <th scope="row" className="px-5 py-3.5 font-display text-base font-extrabold text-home-midnight sm:px-6">
                         Ambulant {item.id} · {item.code}
                       </th>
-                      <td className="px-5 py-3.5 text-home-slate sm:px-6">{item.refund}</td>
+                      <td className="hidden px-5 py-3.5 text-home-slate sm:table-cell sm:px-6">{item.refund}</td>
                       <td className="px-5 py-3.5 text-home-slate sm:px-6">{euro.format(item.budget)}</td>
                       <td className="whitespace-nowrap px-5 py-3.5 text-right font-display font-extrabold text-home-midnight sm:px-6">
                         {beitragFuer(item) !== null
@@ -615,22 +614,22 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
               </summary>
               <div className="overflow-x-auto border-t border-slate-100">
-                <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
+                <table className="w-full border-collapse text-left text-xs sm:min-w-[34rem] sm:text-sm">
                   <caption className="sr-only">{copy.tiers.groupsTitle}</caption>
                   <thead>
                     <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                      <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.groupsAge}</th>
+                      <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.groupsAge}</th>
                       {TIERS.map((item) => (
-                        <th key={item.code} scope="col" className="px-3 py-3 text-right sm:px-6">{item.code}</th>
+                        <th key={item.code} scope="col" className="px-2 py-3 text-right sm:px-6">{item.code}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {SDK_AMBULANT_BEITRAEGE.gruppen.map((gruppe) => (
                       <tr key={gruppe.von} aria-current={gruppe === altersgruppe ? 'true' : undefined} className={`border-b border-slate-100 last:border-b-0 ${gruppe === altersgruppe ? 'bg-emerald-50/70' : ''}`}>
-                        <th scope="row" className="whitespace-nowrap px-5 py-3 font-semibold text-home-midnight sm:px-6">{gruppenName(gruppe)}</th>
+                        <th scope="row" className="px-3 py-3 font-semibold text-home-midnight sm:whitespace-nowrap sm:px-6">{gruppenName(gruppe)}</th>
                         {TIERS.map((item) => (
-                          <td key={item.code} className={`whitespace-nowrap px-3 py-3 text-right sm:px-6 ${item.id === tier.id ? 'font-extrabold text-home-midnight' : 'text-home-slate'}`}>{monthlyEuro.format(gruppe[item.code])}</td>
+                          <td key={item.code} className={`whitespace-nowrap px-2 py-3 text-right sm:px-6 ${item.id === tier.id ? 'font-extrabold text-home-midnight' : 'text-home-slate'}`}>{monthlyEuro.format(gruppe[item.code])}</td>
                         ))}
                       </tr>
                     ))}
@@ -685,7 +684,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section className="bg-home-ice px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+      <section className="bg-home-ice px-4 py-10 sm:px-6 md:py-14 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <details className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-white shadow-[0_20px_60px_rgba(7,17,31,0.08)]">
             <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-6 sm:px-8 sm:py-7 [&::-webkit-details-marker]:hidden">
@@ -810,7 +809,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           <div className="relative mt-14 overflow-hidden rounded-[2.2rem] bg-home-midnight px-6 py-10 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14">
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-home-mint/15" />
             <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">{copy.finalEyebrow}</p>
-            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] sm:text-4xl lg:text-5xl">{copy.finalTitle}</h2>
+            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] sm:text-4xl lg:text-5xl">{copy.finalTitle}</h2>
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
             <p className="relative mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-200" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">

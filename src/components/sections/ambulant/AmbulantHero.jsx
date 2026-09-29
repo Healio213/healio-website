@@ -53,7 +53,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-100 drop-shadow-md md:mb-8 md:text-xl"
           >
             {fromBonusTopic
-              ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt – ohne Kassenwechsel oder Pflichttermin.'
+              ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.'
               : t('hero.subtitle')}
           </motion.p>
 

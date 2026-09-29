@@ -340,7 +340,7 @@ const AmbulantBonusCalculator = ({
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="text-xs text-gray-400 ml-1">
+                          <span className="ml-1 shrink-0 whitespace-nowrap text-xs text-gray-400">
                             {def.max ? `${t('bonusCalculator.max')} ${def.max}` : activity.unit}
                           </span>
                         </div>
