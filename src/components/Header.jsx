@@ -187,8 +187,8 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
-          <ul className="flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-8">
+          <ul className="flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => (
               <li
                 key={link.label}
@@ -202,7 +202,7 @@ const Header = () => {
                     <Link
                       to={link.to}
                       className={cn(
-                        "flex items-center gap-1 text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+                        "flex items-center gap-1 whitespace-nowrap text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
                         (location.pathname.includes('/kassenbonus') || location.pathname.includes('/health-insurance-bonus') ||
                          location.pathname.includes('/ambulant') || location.pathname.includes('/outpatient') ||
                          location.pathname.includes('/zahn') || location.pathname.includes('/dental') ||
@@ -260,7 +260,7 @@ const Header = () => {
                   <Link
                     to={link.to}
                     className={cn(
-                      "text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+                      "whitespace-nowrap text-sm font-medium transition-colors hover:text-healio-mint relative group text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
                       location.pathname === link.to && "text-healio-mint font-bold"
                     )}
                   >
@@ -272,7 +272,7 @@ const Header = () => {
                 ) : (
                   <a
                     href={link.to}
-                    className="text-sm font-medium transition-colors hover:text-healio-mint text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                    className="whitespace-nowrap text-sm font-medium transition-colors hover:text-healio-mint text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
                   >
                     {link.label}
                   </a>
@@ -300,7 +300,7 @@ const Header = () => {
                   exit={{ opacity: 0, y: -6, scale: 0.96 }}
                   transition={{ duration: 0.24, ease: 'easeOut' }}
                   data-ambulant-header-cta="desktop"
-                  className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#10B981] px-6 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-colors hover:bg-[#059669] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-[#10B981] px-5 xl:px-6 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-colors hover:bg-[#059669] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   <Calculator className="mr-2 h-4 w-4" aria-hidden="true" />
                   {lang === 'de' ? 'Beitrag berechnen' : 'Quote (German form)'}
@@ -310,7 +310,7 @@ const Header = () => {
           ) : (
             <Button
               asChild
-              className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
+              className="whitespace-nowrap bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-5 xl:px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
             >
               {isHome ? (
                 <a href={KASSENBOOST_COMPARE_URL} target="_blank" rel="noopener noreferrer">
