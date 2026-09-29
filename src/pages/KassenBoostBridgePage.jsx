@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, CalendarCheck, HeartPulse, PiggyBank, Scale, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CalendarCheck, Scale, ShieldCheck } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import SEOHead from '@/components/SEOHead';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -20,7 +21,7 @@ const KassenBoostBridgePage = () => {
   const transparencyItems = t('termin.transparency', { returnObjects: true });
   const explainerItems = t('explainer.items', { returnObjects: true });
   const twoWayItems = t('twoWays.items', { returnObjects: true });
-  const twoWayIcons = [PiggyBank, HeartPulse];
+  const twoWayIcons = [{ kind: 'money', tone: 'mint' }, { kind: 'bonus', tone: 'butter' }];
 
   const faqItems = t('faq.items', { returnObjects: true });
   const webPageSchema = createWebPageSchema(
@@ -105,11 +106,11 @@ const KassenBoostBridgePage = () => {
             </div>
             <div className="mt-10 grid gap-4 md:grid-cols-2">
               {Array.isArray(twoWayItems) && twoWayItems.map((item, index) => {
-                const Icon = twoWayIcons[index] ?? Scale;
+                const icon = twoWayIcons[index] ?? twoWayIcons[0];
                 return (
                   <article key={item.label} className={`flex flex-col rounded-[1.75rem] border p-6 sm:p-8 ${index === 0 ? 'border-[#cceadf] bg-[#f4faf7]' : 'border-[#f0dfb8] bg-[#fffaf0]'}`}>
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-7 w-7 shrink-0 text-[#0c7a5a]" aria-hidden="true" />
+                    <div className="flex items-center gap-4">
+                      <FriendlyIcon kind={icon.kind} tone={icon.tone} size="md" />
                       <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-[#0c6f53]">{item.label}</p>
                     </div>
                     <h3 className="mt-4 font-display text-2xl font-bold tracking-[-0.035em] text-[#102333]">{item.title}</h3>

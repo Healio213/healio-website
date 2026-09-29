@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, HeartPulse, PiggyBank } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
 
 // Zwei Wege, den Zusatzschutz zu bezahlen (Auftrag Frank, 29.09.2026):
@@ -58,7 +59,8 @@ const COPY = {
   },
 };
 
-const ICONS = [PiggyBank, HeartPulse];
+// Dieselben plastischen Healio-Icons wie im Rest der Seite (Frank 29.09.).
+const ICONS = [{ kind: 'money', tone: 'mint' }, { kind: 'bonus', tone: 'butter' }];
 
 const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white' }) => {
   const { lang } = useLanguage();
@@ -77,11 +79,11 @@ const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white' }) 
         </div>
         <div className="mt-9 grid gap-4 md:grid-cols-2">
           {copy.ways.map((way, index) => {
-            const Icon = ICONS[index];
+            const icon = ICONS[index];
             return (
               <article key={way.label} className={`flex flex-col rounded-[1.75rem] border p-6 sm:p-8 ${index === 0 ? 'border-emerald-900/10 bg-home-ice' : 'border-[#f0dfb8] bg-[#fffaf0]'}`}>
-                <div className="flex items-center gap-3">
-                  <Icon className="h-7 w-7 shrink-0 text-emerald-700" aria-hidden="true" />
+                <div className="flex items-center gap-4">
+                  <FriendlyIcon kind={icon.kind} tone={icon.tone} size="md" />
                   <p className="font-display text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-800">{way.label}</p>
                 </div>
                 <h3 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-home-midnight">{way.title}</h3>

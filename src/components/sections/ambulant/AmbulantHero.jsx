@@ -26,7 +26,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
         <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_30%_45%,rgba(37,201,144,0.12),transparent_38%)]" />
       </div>
 
-      <div className="relative z-20 mx-auto w-full max-w-[84rem] px-4 pb-12 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
+      <div className="relative z-20 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
         <div className="max-w-4xl text-left">
           <motion.p
             initial={{ opacity: 0, y: -12 }}
@@ -41,7 +41,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className={`mb-5 max-w-[18ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.6vw,4.25rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white drop-shadow-lg [text-wrap:balance] md:mb-7`}
+            className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.6vw,4.25rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white drop-shadow-lg [text-wrap:balance] md:mb-7`}
           >
             <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>

@@ -17,10 +17,10 @@ const StationaerHero = () => {
       <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
       <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-      {/* Inhalt auf derselben Kante wie Header und Abschnitte: 84rem mit
-          px-4/6/8 ergibt die 80rem-Inhaltsbreite; Oberkante pt-28/md:pt-32
-          unter dem festen Header. */}
-      <div className="relative mx-auto grid w-full max-w-[84rem] items-center gap-12 px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:gap-12 lg:px-8 lg:pb-24">
+      {/* Inhalt bündig zum Logo im Header (max-w-7xl mit px-4/6/8, wie
+          Startseite und /unternehmen); Oberkante pt-28/md:pt-32 unter dem
+          festen Header. */}
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:gap-12 lg:px-8 lg:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

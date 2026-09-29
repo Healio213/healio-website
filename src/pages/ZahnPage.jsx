@@ -99,7 +99,7 @@ const ZahnPage = () => {
           />
           <div className="absolute -left-20 top-40 -z-10 h-72 w-72 rounded-full bg-[#25c990]/15 blur-3xl" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto w-full max-w-[84rem] px-4 pb-10 pt-28 sm:px-6 md:pb-12 md:pt-32 lg:px-8">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-12 md:pt-32 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
