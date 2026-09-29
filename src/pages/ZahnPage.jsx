@@ -74,82 +74,61 @@ const ZahnPage = () => {
       />
 
       <article className="overflow-hidden bg-white text-[#07111f]">
-        {/* Hero nach der gemeinsamen Produktseiten-Vorgabe (Frank 29.09.2026):
-            Inhalt im Header-Raster, ruhige Überschrift, keine gedrehten Karten
-            und keine schwebenden Deko-Icons. */}
+        {/* Hero ruhig und dunkel wie auf /stationaer (Frank 29.09.2026: zu
+            bunt, soll mehr Wirkung haben): Nachtblau, weiße Überschrift, nur
+            Mint als Akzent, eine weiße Karte. Die Ja/Nein-Wahl führt jetzt
+            wirklich zum Zahn-Check, statt nur wie ein Knopf auszusehen. */}
         <section
-          className="relative isolate overflow-hidden bg-[#f4faf7]"
+          className="relative isolate overflow-hidden bg-home-midnight text-white"
           aria-labelledby="zahn-hero-heading"
         >
-          <div
-            className="absolute inset-x-0 top-0 z-0 h-40 sm:h-48"
-            style={{
-              backgroundImage: 'linear-gradient(to bottom, rgba(7,17,31,0.92) 0%, rgba(13,29,44,0.74) 16%, rgba(19,40,58,0.42) 32%, rgba(19,40,58,0.18) 48%, rgba(19,40,58,0.06) 66%, rgba(19,40,58,0) 100%)',
-            }}
-            aria-hidden="true"
-          />
-          <div
-            className="absolute inset-0 -z-20 opacity-70"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 12% 18%, rgba(37,201,144,0.18), transparent 28%), radial-gradient(circle at 90% 16%, rgba(255,216,120,0.25), transparent 25%), linear-gradient(rgba(7,17,31,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(7,17,31,0.035) 1px, transparent 1px)',
-              backgroundSize: 'auto, auto, 48px 48px, 48px 48px',
-            }}
-            aria-hidden="true"
-          />
-          <div className="absolute -left-20 top-40 -z-10 h-72 w-72 rounded-full bg-[#25c990]/15 blur-3xl" aria-hidden="true" />
+          <div className="absolute -left-24 top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-home-mint/[0.07] blur-3xl" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-12 md:pt-32 lg:px-8">
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
               <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.55 }}
+                transition={{ duration: reduceMotion ? 0 : 0.5 }}
               >
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">
                   {content.hero.eyebrow}
                 </p>
                 <h1
                   id="zahn-hero-heading"
-                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-[#07111f] [text-wrap:balance]"
+                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance]"
                 >
                   <span className="block">{content.hero.titleLead}</span>
-                  {/* Markierung als Zeilenhintergrund, damit sie bei jedem
-                      Umbruch unter dem Text bleibt statt unter der Box. */}
-                  <span className="block text-[#087654]">
-                    <span className="bg-[linear-gradient(transparent_66%,rgba(255,217,120,0.72)_66%,rgba(255,217,120,0.72)_92%,transparent_92%)] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
-                      {content.hero.titleAccent}
-                    </span>
-                  </span>
+                  <span className="block text-home-mint-active">{content.hero.titleAccent}</span>
                 </h1>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
                   {content.hero.text}
                 </p>
 
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
-                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#07111f] px-7 font-display text-base font-extrabold text-white shadow-[0_18px_44px_rgba(7,17,31,0.2)] transition hover:-translate-y-0.5 hover:bg-[#143528] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4 motion-reduce:transform-none sm:w-auto"
+                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_40px_rgba(37,201,144,0.25)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:w-auto"
                 >
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
 
-                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-500">
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-300">
                   {content.hero.micro.map((item) => (
                     <li key={item} className="inline-flex items-center gap-2">
-                      <Check className="h-4 w-4 text-[#0b8b63]" aria-hidden="true" />{item}
+                      <Check className="h-4 w-4 text-home-mint" aria-hidden="true" />{item}
                     </li>
                   ))}
                 </ul>
               </motion.div>
 
               <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.1 }}
+                transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.08 }}
                 className="mx-auto w-full max-w-[28rem] lg:mx-0 lg:max-w-none"
               >
-                <div className="rounded-[2rem] border border-[#dbcda5] bg-[#fff9e8] p-6 shadow-[0_24px_60px_rgba(74,58,20,0.14)] sm:p-8">
+                <div className="rounded-[2rem] bg-white p-6 text-home-midnight shadow-[0_28px_70px_rgba(0,0,0,0.35)] sm:p-8">
                   <div className="flex items-center gap-4">
                     <FriendlyIcon
                       kind="dental"
@@ -158,7 +137,7 @@ const ZahnPage = () => {
                       decorative={false}
                       label={content.hero.iconAlt}
                     />
-                    <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#7a5911]">
+                    <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
                       {content.hero.ticketEyebrow}
                     </p>
                   </div>
@@ -167,19 +146,27 @@ const ZahnPage = () => {
                   </h2>
 
                   <div className="mt-6 grid gap-3">
-                    <div className="rounded-2xl border border-[#ffc3b7] bg-[#fff0ec] p-4 font-display font-extrabold text-[#8e4134]">
-                      {content.hero.ticketYes}
-                    </div>
-                    <div className="rounded-2xl border border-[#a9e7d1] bg-[#edf9f4] p-4 font-display font-extrabold text-[#075f46]">
-                      {content.hero.ticketNo}
-                    </div>
+                    {[content.hero.ticketYes, content.hero.ticketNo].map((label, index) => (
+                      <a
+                        key={label}
+                        href="#zahn-check"
+                        onClick={(event) => scrollToCheck(event, reduceMotion)}
+                        className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 p-4 font-display font-extrabold transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
+                      >
+                        <span className="flex items-center gap-3">
+                          <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${index === 0 ? 'bg-[#e0735d]' : 'bg-home-mint'}`} aria-hidden="true" />
+                          {label}
+                        </span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-home-midnight motion-reduce:transform-none" aria-hidden="true" />
+                      </a>
+                    ))}
                   </div>
 
-                  <div className="my-6 border-t-2 border-dashed border-[#d9cda9]" aria-hidden="true" />
-                  <p className="font-display text-lg font-extrabold text-[#4f3c0b]">{content.hero.ticketFooter}</p>
+                  <div className="my-6 border-t border-slate-100" aria-hidden="true" />
+                  <p className="font-display text-lg font-extrabold">{content.hero.ticketFooter}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {content.hero.routes.map((route) => (
-                      <span key={route} className="rounded-full border border-[#e3d6b3] bg-white/80 px-3 py-1.5 text-xs font-bold text-slate-600">
+                      <span key={route} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600">
                         {route}
                       </span>
                     ))}
@@ -188,9 +175,9 @@ const ZahnPage = () => {
               </motion.div>
             </div>
 
-            <div className="mt-12 grid gap-4 border-t border-[#dbe8e1] pt-6 sm:grid-cols-3">
+            <div className="mt-12 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
-                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-slate-600">
+                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-slate-300">
                   <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
                   <span>{item}</span>
                 </div>
