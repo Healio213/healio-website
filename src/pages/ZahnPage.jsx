@@ -14,6 +14,8 @@ import { getDentalContent, LKH_GUIDELINE_URL } from '@/components/sections/denta
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
+import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -72,8 +74,11 @@ const ZahnPage = () => {
       />
 
       <article className="overflow-hidden bg-white text-[#07111f]">
+        {/* Hero nach der gemeinsamen Produktseiten-Vorgabe (Frank 29.09.2026):
+            Inhalt im Header-Raster, ruhige Überschrift, keine gedrehten Karten
+            und keine schwebenden Deko-Icons. */}
         <section
-          className="relative isolate overflow-hidden bg-[#f4faf7] px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44"
+          className="relative isolate overflow-hidden bg-[#f4faf7]"
           aria-labelledby="zahn-hero-heading"
         >
           <div
@@ -94,103 +99,108 @@ const ZahnPage = () => {
           />
           <div className="absolute -left-20 top-40 -z-10 h-72 w-72 rounded-full bg-[#25c990]/15 blur-3xl" aria-hidden="true" />
 
-          <div className="healio-container grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.82fr)] lg:gap-20">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.55 }}
-            >
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">
-                {content.hero.eyebrow}
-              </p>
-              <h1
-                id="zahn-hero-heading"
-                className="mt-5 max-w-[15ch] text-[clamp(2.65rem,6.4vw,5.7rem)] font-extrabold leading-[0.94] tracking-[-0.06em] text-[#07111f] [text-wrap:balance]"
+          <div className="relative z-10 mx-auto w-full max-w-[84rem] px-4 pb-10 pt-28 sm:px-6 md:pb-12 md:pt-32 lg:px-8">
+            <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.55 }}
               >
-                <span className="block font-display">{content.hero.titleLead}</span>
-                <span className="relative isolate mt-3 block w-fit max-w-full font-friendly text-[#087654]">
-                  <span className="relative z-10">{content.hero.titleAccent}</span>
-                  <span className="absolute -bottom-1 left-0 z-0 h-3 w-[88%] -rotate-1 rounded-full bg-[#ffd978]/75 blur-[0.5px]" aria-hidden="true" />
-                </span>
-              </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-                {content.hero.text}
-              </p>
-
-              <a
-                href="#zahn-check"
-                onClick={(event) => scrollToCheck(event, reduceMotion)}
-                className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#07111f] px-7 font-display text-base font-extrabold text-white shadow-[0_18px_44px_rgba(7,17,31,0.2)] transition hover:-translate-y-0.5 hover:bg-[#143528] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4 motion-reduce:transform-none sm:w-auto"
-              >
-                {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </a>
-
-              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-500">
-                {content.hero.micro.map((item) => (
-                  <li key={item} className="inline-flex items-center gap-2">
-                    <Check className="h-4 w-4 text-[#0b8b63]" aria-hidden="true" />{item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, rotate: 2, y: 26 }}
-              animate={{ opacity: 1, rotate: -1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.62, delay: reduceMotion ? 0 : 0.1 }}
-              className="relative mx-auto w-full max-w-[31rem]"
-            >
-              <FriendlyIcon
-                kind="dental"
-                tone="mint"
-                size="xl"
-                decorative={false}
-                label={content.hero.iconAlt}
-                className="absolute -left-4 -top-7 z-20 h-28 w-28 -rotate-6 ring-[6px] ring-[#f4faf7] shadow-[0_22px_55px_rgba(27,83,64,0.2)] sm:-left-8 sm:h-32 sm:w-32"
-              />
-
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-[#dbcda5] bg-[#fff9e8] p-7 pt-20 shadow-[0_30px_80px_rgba(74,58,20,0.18)] sm:p-10 sm:pt-24">
-                <span className="absolute -left-5 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full bg-[#f4faf7]" aria-hidden="true" />
-                <span className="absolute -right-5 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full bg-[#f4faf7]" aria-hidden="true" />
-
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#7a5911]">
-                  {content.hero.ticketEyebrow}
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">
+                  {content.hero.eyebrow}
                 </p>
-                <h2 className="mt-4 max-w-[14ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-4xl">
-                  {content.hero.ticketTitle}
-                </h2>
-
-                <div className="mt-7 grid gap-3">
-                  <div className="rounded-2xl border border-[#ffc3b7] bg-[#fff0ec] p-4 font-display font-extrabold text-[#8e4134]">
-                    {content.hero.ticketYes}
-                  </div>
-                  <div className="rounded-2xl border border-[#a9e7d1] bg-[#edf9f4] p-4 font-display font-extrabold text-[#075f46]">
-                    {content.hero.ticketNo}
-                  </div>
-                </div>
-
-                <div className="my-7 border-t-2 border-dashed border-[#d9cda9]" aria-hidden="true" />
-                <p className="font-friendly text-xl font-bold text-[#4f3c0b]">{content.hero.ticketFooter}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {content.hero.routes.map((route) => (
-                    <span key={route} className="rounded-full border border-[#e3d6b3] bg-white/80 px-3 py-1.5 text-xs font-bold text-slate-600">
-                      {route}
+                <h1
+                  id="zahn-hero-heading"
+                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-[#07111f] [text-wrap:balance]"
+                >
+                  <span className="block">{content.hero.titleLead}</span>
+                  {/* Markierung als Zeilenhintergrund, damit sie bei jedem
+                      Umbruch unter dem Text bleibt statt unter der Box. */}
+                  <span className="block text-[#087654]">
+                    <span className="bg-[linear-gradient(transparent_66%,rgba(255,217,120,0.72)_66%,rgba(255,217,120,0.72)_92%,transparent_92%)] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+                      {content.hero.titleAccent}
                     </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
+                  </span>
+                </h1>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+                  {content.hero.text}
+                </p>
 
-          <div className="healio-container mt-14 grid gap-4 border-t border-[#dbe8e1] pt-7 sm:grid-cols-3">
-            {content.hero.trust.map((item, index) => (
-              <div key={item} className="flex items-center justify-center gap-3 text-center text-sm font-bold text-slate-600 sm:justify-start sm:text-left">
-                <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
-                <span>{item}</span>
-              </div>
-            ))}
+                <a
+                  href="#zahn-check"
+                  onClick={(event) => scrollToCheck(event, reduceMotion)}
+                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#07111f] px-7 font-display text-base font-extrabold text-white shadow-[0_18px_44px_rgba(7,17,31,0.2)] transition hover:-translate-y-0.5 hover:bg-[#143528] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-4 motion-reduce:transform-none sm:w-auto"
+                >
+                  {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </a>
+
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-500">
+                  {content.hero.micro.map((item) => (
+                    <li key={item} className="inline-flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#0b8b63]" aria-hidden="true" />{item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.1 }}
+                className="mx-auto w-full max-w-[28rem] lg:mx-0 lg:max-w-none"
+              >
+                <div className="rounded-[2rem] border border-[#dbcda5] bg-[#fff9e8] p-6 shadow-[0_24px_60px_rgba(74,58,20,0.14)] sm:p-8">
+                  <div className="flex items-center gap-4">
+                    <FriendlyIcon
+                      kind="dental"
+                      tone="mint"
+                      size="md"
+                      decorative={false}
+                      label={content.hero.iconAlt}
+                    />
+                    <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#7a5911]">
+                      {content.hero.ticketEyebrow}
+                    </p>
+                  </div>
+                  <h2 className="mt-5 font-display text-2xl font-extrabold leading-[1.1] tracking-[-0.03em] sm:text-3xl">
+                    {content.hero.ticketTitle}
+                  </h2>
+
+                  <div className="mt-6 grid gap-3">
+                    <div className="rounded-2xl border border-[#ffc3b7] bg-[#fff0ec] p-4 font-display font-extrabold text-[#8e4134]">
+                      {content.hero.ticketYes}
+                    </div>
+                    <div className="rounded-2xl border border-[#a9e7d1] bg-[#edf9f4] p-4 font-display font-extrabold text-[#075f46]">
+                      {content.hero.ticketNo}
+                    </div>
+                  </div>
+
+                  <div className="my-6 border-t-2 border-dashed border-[#d9cda9]" aria-hidden="true" />
+                  <p className="font-display text-lg font-extrabold text-[#4f3c0b]">{content.hero.ticketFooter}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {content.hero.routes.map((route) => (
+                      <span key={route} className="rounded-full border border-[#e3d6b3] bg-white/80 px-3 py-1.5 text-xs font-bold text-slate-600">
+                        {route}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="mt-12 grid gap-4 border-t border-[#dbe8e1] pt-6 sm:grid-cols-3">
+              {content.hero.trust.map((item, index) => (
+                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-slate-600">
+                  <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
+
+        {/* Produktpassende Siegel direkt unter dem Hero, wie auf /ambulant. */}
+        <HealioAwardsRow size="large" productSet="zahn" />
 
         {lang === 'de' && <DentalVideoSection />}
 
@@ -200,7 +210,7 @@ const ZahnPage = () => {
           <div className="healio-container">
             <div className="max-w-5xl">
               <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">{content.paths.eyebrow}</p>
-              <h2 id="zahn-paths-heading" className="mt-4 max-w-[28ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+              <h2 id="zahn-paths-heading" className="mt-4 max-w-[28ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance] sm:text-4xl lg:text-5xl">
                 {content.paths.title}
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{content.paths.text}</p>
@@ -243,26 +253,29 @@ const ZahnPage = () => {
                 </Link>.
               </p>
             )}
-            <HealioAwardsRow compact tone="transparent" bordered={false} className="mt-8 rounded-[1.6rem] border border-[#dfe8e3] bg-white" />
           </div>
         </section>
 
-        <section id="kassenbonus" className="bg-[#f8faf9] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="zahn-bonus-heading">
+        {/* Zwei-Wege-Botschaft direkt vor dem Kassenbonus, im selben hellen
+            Band wie Bonusbrücke und Bonusrechner. */}
+        <ZweiWegeFinanzierung produkt="zahn" className="bg-[#f8faf9]" />
+
+        <section id="kassenbonus" className="scroll-mt-28 bg-[#f8faf9] px-4 pb-20 pt-2 sm:px-6 md:pb-24 md:pt-4 lg:px-8" aria-labelledby="zahn-bonus-heading">
           <div className="healio-container relative isolate grid items-center gap-10 overflow-hidden rounded-[2.75rem] bg-[#07111f] p-7 text-white shadow-[0_30px_80px_rgba(7,17,31,0.18)] sm:p-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:p-14">
             <div className="absolute -right-16 -top-20 -z-10 h-80 w-80 rounded-full border border-[#25c990]/15" aria-hidden="true" />
             <div>
               <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">{content.bonus.eyebrow}</p>
-              <h2 id="zahn-bonus-heading" className="mt-5 max-w-[16ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
+              <h2 id="zahn-bonus-heading" className="mt-5 max-w-[16ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] [text-wrap:balance] sm:text-4xl lg:text-5xl">
                 {content.bonus.title}
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{content.bonus.text}</p>
               <p className="mt-3 max-w-2xl font-display text-base font-extrabold text-[#5ee0b1]">{content.bonus.detail}</p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
-                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f]"
+                  className="inline-flex min-h-14 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f]"
                 >
                   {content.bonus.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
@@ -272,7 +285,7 @@ const ZahnPage = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto min-h-[25rem] w-full max-w-[26rem] rotate-1 overflow-hidden rounded-[2.25rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-6 text-[#07111f] shadow-2xl sm:p-7">
+            <div className="relative mx-auto min-h-[25rem] w-full max-w-[26rem] overflow-hidden rounded-[2.25rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-6 text-[#07111f] shadow-2xl sm:p-7">
               <span className="absolute left-1/2 top-0 h-4 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d4a0] bg-white/80" aria-hidden="true" />
               <p className="relative z-10 max-w-[14rem] font-display text-[0.68rem] font-extrabold uppercase tracking-[0.13em] text-[#77570c]">
                 {content.bonus.stamp}
@@ -320,6 +333,10 @@ const ZahnPage = () => {
             },
           }}
         />
+
+        {/* Brücken-Strecke zur IKK classic nach dem Bonusrechner, wie auf
+            /ambulant (Frank 29.09.2026: auf allen drei Produktseiten zurück). */}
+        <AmbulantIKKWechsel variant="zahn" />
 
         <section className="bg-white px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
           <div className="healio-container grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">

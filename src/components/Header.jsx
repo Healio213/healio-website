@@ -170,7 +170,7 @@ const Header = () => {
         ? "bg-slate-900/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)] py-3"
         : "bg-transparent py-5"
     )} role="banner">
-      <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
+      <nav className="mx-auto flex w-full max-w-[84rem] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to={getPath('home')} className="flex items-center z-50 group">
           <motion.img
             src="/healio-logo-white.svg"

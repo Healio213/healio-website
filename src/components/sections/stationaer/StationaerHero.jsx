@@ -10,14 +10,17 @@ const StationaerHero = () => {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#071726] px-4 pb-16 pt-32 text-white sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-40"
+      className="relative isolate overflow-hidden bg-[#071726] text-white"
       aria-labelledby="stationaer-hero-heading"
     >
       <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
       <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
       <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-      <div className="healio-container relative grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+      {/* Inhalt auf derselben Kante wie Header und Abschnitte: 84rem mit
+          px-4/6/8 ergibt die 80rem-Inhaltsbreite; Oberkante pt-28/md:pt-32
+          unter dem festen Header. */}
+      <div className="relative mx-auto grid w-full max-w-[84rem] items-center gap-12 px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:gap-12 lg:px-8 lg:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -29,7 +32,7 @@ const StationaerHero = () => {
           </p>
           <h1
             id="stationaer-hero-heading"
-            className="mt-5 max-w-[13ch] font-display text-[clamp(2.65rem,6.5vw,5.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] [text-wrap:balance]"
+            className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
           >
             {t('refresh.hero.title')}
           </h1>
@@ -63,7 +66,6 @@ const StationaerHero = () => {
           aria-label={t('refresh.hero.visualAria')}
         >
           <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
-            <div className="absolute right-0 top-0 h-44 w-44 rounded-full border border-[#25c990]/15" aria-hidden="true" />
             <div className="relative grid min-h-[25rem] grid-cols-[0.9fr_1.1fr] items-end sm:min-h-[29rem]">
               <div className="relative z-10 min-w-0 self-end">
                 <img

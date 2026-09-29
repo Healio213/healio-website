@@ -13,14 +13,14 @@ const StationaerBenefits = () => {
   const { t } = useTranslation('stationaer');
 
   return (
-    <section className="bg-white px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-benefits-heading">
-      <div className="healio-container">
+    <section className="bg-white py-20 md:py-24" aria-labelledby="stationaer-benefits-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-14">
           <div className="lg:sticky lg:top-28">
             <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#087454]">
               {t('refresh.benefits.eyebrow')}
             </p>
-            <h2 id="stationaer-benefits-heading" className="mt-4 max-w-[12ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] text-[#071726] sm:text-4xl lg:text-5xl">
+            <h2 id="stationaer-benefits-heading" className="mt-4 max-w-[12ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
               {t('refresh.benefits.title')}
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">

@@ -61,7 +61,10 @@ expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'D
 expect(/5 EUR Risikozuschlag je fehlendem Zahn/.test(dentalContent), 'Der LKH-Weg muss den verifizierten Zuschlag nennen.');
 expect(/Keine Annahmegarantie/.test(dentalContent) && /LKH_GUIDELINE_URL/.test(dentalCheck), 'LKH braucht Quelle und sichtbaren Annahmehinweis.');
 expect(/getPath\('kassenboost'\)/.test(dentalPage), 'Die Zahn-Bonusbrücke muss in KassenBoost statt in einen direkten Kassenwechsel führen.');
-expect(!/AmbulantIKKWechsel|KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine alte IKK-, Hinweis- oder Testimonials-Doppelstrecke rendern.');
+expect(!/KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine alte Hinweis- oder Testimonials-Doppelstrecke rendern.');
+// Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Zahn-Variante und erst nach Bonusbrücke und Bonusrechner.
+expect((dentalPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="zahn"\s*\/>/.test(dentalPage), 'Zahn zeigt die Brücken-Strecke genau einmal als Zahn-Variante.');
+expect(dentalPage.indexOf('<CompactBonusFeature') < dentalPage.indexOf('<AmbulantIKKWechsel') && dentalPage.indexOf('id="kassenbonus"') < dentalPage.indexOf('<AmbulantIKKWechsel'), 'Die Zahn-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
 
 // Stationär: SP2, SP1 und SPU werden getrennt; nur SPU trägt die konkrete Null-Euro-Rechnung.
 expect(inpatientPage.indexOf('<ExplainerVideoCard') < inpatientPage.indexOf('<StationaerTariffSelector />'), 'Stationär muss das Erklärvideo vor der Tarifwahl zeigen.');
@@ -74,7 +77,10 @@ expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe) && /0\s
 expect(/33,41\s*EUR/.test(inpatientDe) && /50,72\s*EUR/.test(inpatientDe), 'Stationär muss die aktuellen SDK-Beispielbeiträge für SP2 und SP1 bei Eintrittsalter 30 nennen.');
 expect(!/6,84|82,08|32,82|49,78|10,49|44,91|69,74/.test(inpatientDe), 'Stationär darf keine veralteten oder unbelegten Preisbeispiele enthalten.');
 expect(/getPath\('kassenboost'\)/.test(inpatientBonus), 'Die Stationär-Bonusbrücke muss in KassenBoost führen.');
-expect(!/AmbulantIKKWechsel|AmbulantBonusCalculator|KassenBoostChoiceHint/.test(inpatientPage), 'Stationär darf keine ambulante oder direkte IKK-Nachlaufstrecke rendern.');
+expect(!/AmbulantBonusCalculator|KassenBoostChoiceHint/.test(inpatientPage), 'Stationär darf keinen ambulanten Doppelrechner und keinen alten KassenBoost-Hinweis rendern.');
+// Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Stationär-Variante und erst nach Bonusbrücke und Bonusrechner.
+expect((inpatientPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="stationaer"\s*\/>/.test(inpatientPage), 'Stationär zeigt die Brücken-Strecke genau einmal als Stationär-Variante.');
+expect(inpatientPage.indexOf('<StationaerBonusBridge') < inpatientPage.indexOf('<AmbulantIKKWechsel') && inpatientPage.indexOf('<CompactBonusFeature') < inpatientPage.indexOf('<AmbulantIKKWechsel'), 'Die Stationär-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
 
 // Tier: Hund, Katze und Pferd mit wahrheitsgemäßer Tarifprüfung statt Pseudorechner.
 expect(/animalType:\s*''/.test(veterinaryPage) && /coverage:\s*''/.test(veterinaryPage), 'Die Tierseite muss das gewählte Profil bis zum Formular halten.');

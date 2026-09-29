@@ -23,7 +23,8 @@ const PRODUCT_AWARD_SETS = {
   zahn: [
     { src: '/siegel/bayerische/warentest-zahn-prestige-2025.jpg', altKey: 'siegel.awards.warentest' },
     { src: '/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg', altKey: 'siegel.awards.frankeBornberg' },
-    { src: '/siegel/lkh/lkh-stiftung-warentest.png', altKey: 'siegel.awards.lkhWarentest' },
+    // LKH-Warentest-Siegel vorerst nicht: Die Bilddatei ist abgeschnitten
+    // (nur ein Rest links sichtbar). Ersatz braucht Franks Freigabe der Ausgabe.
     { src: '/siegel/ikk/krankenkasseninfo-leistungen.png', altKey: 'siegel.ikkAwards.performance' },
     { src: '/siegel/ikk/familien-test.webp', altKey: 'siegel.ikkAwards.family' },
   ],

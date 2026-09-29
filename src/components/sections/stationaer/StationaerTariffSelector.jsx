@@ -51,16 +51,16 @@ const StationaerTariffSelector = () => {
   ) : null;
 
   return (
-    <section id="tarife" className="scroll-mt-24 bg-[#f5faf8] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-tariffs-heading">
-      <div className="healio-container">
+    <section id="tarife" className="scroll-mt-24 bg-[#f5faf8] py-20 md:py-24" aria-labelledby="stationaer-tariffs-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#087454]">
             {t('refresh.selector.eyebrow')}
           </p>
-          <h2 id="stationaer-tariffs-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] text-[#071726] sm:text-4xl lg:text-5xl">
+          <h2 id="stationaer-tariffs-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.selector.title')}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">
             {t('refresh.selector.subtitle')}
           </p>
         </div>

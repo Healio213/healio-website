@@ -9,17 +9,17 @@ const StationaerFamily = () => {
   const childItems = t('refresh.family.children.items', { returnObjects: true });
 
   return (
-    <section className="relative overflow-hidden bg-[#fff8e9] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-family-heading">
+    <section className="relative overflow-hidden bg-[#fff8e9] py-20 md:py-24" aria-labelledby="stationaer-family-heading">
       <div className="absolute -right-24 top-0 h-80 w-80 rounded-full bg-[#25c990]/10 blur-3xl" aria-hidden="true" />
-      <div className="healio-container relative">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#9a6713]">
             {t('refresh.family.eyebrow')}
           </p>
-          <h2 id="stationaer-family-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] text-[#071726] sm:text-4xl lg:text-5xl">
+          <h2 id="stationaer-family-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.family.title')}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">
             {t('refresh.family.subtitle')}
           </p>
         </div>

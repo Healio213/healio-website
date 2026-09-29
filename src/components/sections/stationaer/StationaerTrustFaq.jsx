@@ -24,13 +24,13 @@ const StationaerTrustFaq = () => {
   const helpVisible = useWhatsAppHelp();
 
   return (
-    <section className="bg-[#f5faf8] px-4 py-20 sm:px-6 md:py-24 lg:px-8" aria-labelledby="stationaer-trust-heading">
-      <div className="healio-container">
+    <section className="bg-[#f5faf8] py-20 md:py-24" aria-labelledby="stationaer-trust-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#087454]">
             {t('refresh.trust.eyebrow')}
           </p>
-          <h2 id="stationaer-trust-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] text-[#071726] sm:text-4xl lg:text-5xl">
+          <h2 id="stationaer-trust-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.trust.title')}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -110,7 +110,7 @@ const StationaerTrustFaq = () => {
         <div className="mx-auto mt-16 flex max-w-5xl flex-col items-center justify-between gap-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#0a6c50] to-[#063e35] px-6 py-9 text-center text-white shadow-[0_24px_60px_rgba(6,62,53,0.18)] sm:px-9 md:flex-row md:text-left">
           <div>
             <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#9af0d1]">{t('refresh.final.eyebrow')}</p>
-            <h2 className="mt-2 max-w-[20ch] font-display text-2xl font-extrabold leading-tight sm:text-3xl">{t('refresh.final.title')}</h2>
+            <h2 className="mt-2 max-w-[20ch] font-display text-2xl font-extrabold leading-tight [text-wrap:pretty] sm:text-3xl">{t('refresh.final.title')}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-emerald-50/85 sm:text-base">{t('refresh.final.body')}</p>
           </div>
           <a
