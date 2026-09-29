@@ -33,22 +33,22 @@
   "twoWays": {
     "eyebrow": "Erst das Ganze sehen",
     "title": "Zwei Wege zu deinem Zusatzschutz",
-    "description": "Wir schauen zuerst auf deine ganze Lage: Krankenkasse, Bonus und Zusatzschutz. Dann bleibt eine einfache Frage: Holst du das Geld für deinen Schutz über einen günstigeren Beitrag oder über den Bonus? Die Antwort hängt vor allem an deinem Einkommen.",
+    "description": "Wir schauen zuerst auf deine ganze Lage: Krankenkasse, Bonus und Zusatzschutz. Dann bleibt eine einfache Frage: Holst du das Geld für deinen Schutz über einen günstigeren Beitrag oder über den Bonus? Oft geht sogar beides.",
     "items": [
       {
         "label": "Weg 1 · Beitrag sparen",
-        "title": "Du verdienst gut",
-        "text": "Dein Beitrag hängt an deinem Brutto. Verdienst du zum Beispiel 5.000 bis 6.000 EUR im Monat, bringt dir eine Kasse mit niedrigem Zusatzbeitrag deutlich mehr als bei kleinem Einkommen. Mit dem gesparten Geld bezahlst du einen Baustein deines Zusatzschutzes: ambulant, Zahn oder Krankenhaus.",
+        "title": "Günstigere Krankenkasse",
+        "text": "Dein Kassenbeitrag hängt an deinem Brutto. Mit einer Kasse mit niedrigem Zusatzbeitrag bleibt dir mehr, und je höher dein Gehalt, desto mehr macht das aus. Mit dem gesparten Geld bezahlst du einen Baustein deines Zusatzschutzes: ambulant, Zahn oder Krankenhaus.",
         "example": "Rechenbeispiel als Arbeitnehmer: 1 Prozentpunkt weniger Zusatzbeitrag sind bei 5.500 EUR brutto 330 EUR im Jahr, bei 2.500 EUR brutto nur 150 EUR. Wie viel es bei dir ist, hängt davon ab, wie teuer deine jetzige Kasse ist."
       },
       {
         "label": "Weg 2 · Bonus nutzen",
-        "title": "Du bist aktiv",
-        "text": "Du verdienst eher um die 2.500 EUR brutto, achtest aber auf dich: Sport, Vorsorge, Zahnkontrolle, gesundes Gewicht, guter Blutdruck? Dann bringt dir ein starkes Bonusprogramm oft mehr als ein günstigerer Beitrag. Mit dem Bonus finanzierst du deinen Zusatzschutz ganz oder zum Teil.",
+        "title": "Bonus deiner Krankenkasse",
+        "text": "Sport, Vorsorge, Zahnkontrolle, gesundes Gewicht, guter Blutdruck: Dafür zahlt deine Kasse einen Bonus, unabhängig vom Einkommen. Fällt der Beitragsvorteil klein aus, bringt ein starkes Bonusprogramm oft mehr. Mit dem Bonus finanzierst du deinen Zusatzschutz ganz oder zum Teil.",
         "example": "Bei manchen Kassen wird der Bonus sogar höher, wenn du ihn für eine Zusatzversicherung einsetzt. Wie das konkret aussieht, zeigt das Rechenbeispiel weiter unten."
       }
     ],
-    "note": "Du verdienst gut und bist aktiv? Dann kann sich auch für dich ein starker Bonus lohnen. KassenBoost rechnet dir beide Wege getrennt aus, kostenlos und ohne Kontaktdaten."
+    "note": "Beides passt zu dir? Dann kann sich auch ein starker Bonus lohnen. KassenBoost rechnet dir beide Wege getrennt aus, kostenlos und ohne Kontaktdaten."
   },
   "paths": {
     "eyebrow": "Dein nächster Schritt",
