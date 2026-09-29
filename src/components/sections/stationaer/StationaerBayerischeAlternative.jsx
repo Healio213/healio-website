@@ -30,7 +30,7 @@ const COPY = {
       },
       {
         label: 'Beitrag',
-        text: 'Mit 21 bis 30 Jahren zahlst du im Komfort 10,20\u00a0EUR und im Prestige 13,40\u00a0EUR im Monat (Stand 08/2025). Der Beitrag steigt, wenn du in die nächste Altersgruppe kommst.',
+        text: 'Mit 21 bis 30 Jahren zahlst du im Komfort 10,20\u00a0EUR und im Prestige 13,40\u00a0EUR im Monat (Stand 09/2026). Der Beitrag steigt, wenn du in die nächste Altersgruppe kommst.',
       },
       {
         label: 'Schwangerschaft und Geburt',
@@ -59,7 +59,7 @@ const COPY = {
       },
       {
         label: 'Premium',
-        text: 'At 21 to 30, you pay EUR\u00a010.20 a month in Komfort and EUR\u00a013.40 in Prestige (as of 08/2025). The premium rises when you move into the next age group.',
+        text: 'At 21 to 30, you pay EUR\u00a010.20 a month in Komfort and EUR\u00a013.40 in Prestige (as of 09/2026). The premium rises when you move into the next age group.',
       },
       {
         label: 'Pregnancy and birth',
