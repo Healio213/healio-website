@@ -46,6 +46,7 @@ const Header = () => {
     '/partner/leitfaden',
     '/konto-loeschen',
     '/schwangerschaft',
+    '/zahn', '/en/dental',
     '/blog', '/en/blog',
     '/ratgeber',
     '/potenzialanalyse', '/en/potential-analysis',

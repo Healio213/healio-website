@@ -74,15 +74,15 @@ const ZahnPage = () => {
       />
 
       <article className="overflow-hidden bg-white text-[#07111f]">
-        {/* Hero ruhig und dunkel wie auf /stationaer (Frank 29.09.2026: zu
-            bunt, soll mehr Wirkung haben): Nachtblau, weiße Überschrift, nur
-            Mint als Akzent, eine weiße Karte. Die Ja/Nein-Wahl führt jetzt
-            wirklich zum Zahn-Check, statt nur wie ein Knopf auszusehen. */}
+        {/* Hero ruhig und hell (Frank 29.09.2026: zu bunt, soll mehr Wirkung
+            haben, die Leute sollen sich wohlfühlen): warmes Papier, dunkle
+            Überschrift, Grün als einziger Akzent, eine weiße Karte, fester
+            Header. Die Ja/Nein-Wahl führt wirklich zum Zahn-Check. */}
         <section
-          className="relative isolate overflow-hidden bg-home-midnight text-white"
+          className="relative isolate overflow-hidden bg-[#f7f5f0] text-home-midnight"
           aria-labelledby="zahn-hero-heading"
         >
-          <div className="absolute -left-24 top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-home-mint/[0.07] blur-3xl" aria-hidden="true" />
+          <div className="absolute -left-24 top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-home-mint/[0.12] blur-3xl" aria-hidden="true" />
 
           <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
@@ -91,32 +91,32 @@ const ZahnPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.5 }}
               >
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-emerald-700">
                   {content.hero.eyebrow}
                 </p>
                 <h1
                   id="zahn-hero-heading"
-                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance]"
+                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-home-midnight [text-wrap:balance]"
                 >
                   <span className="block">{content.hero.titleLead}</span>
-                  <span className="block text-home-mint-active">{content.hero.titleAccent}</span>
+                  <span className="block text-[#087654]">{content.hero.titleAccent}</span>
                 </h1>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
                   {content.hero.text}
                 </p>
 
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
-                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_40px_rgba(37,201,144,0.25)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:w-auto"
+                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-midnight px-7 font-display text-base font-extrabold text-white shadow-[0_16px_40px_rgba(7,17,31,0.18)] transition hover:-translate-y-0.5 hover:bg-[#143528] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 motion-reduce:transform-none sm:w-auto"
                 >
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
 
-                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-300">
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-600">
                   {content.hero.micro.map((item) => (
                     <li key={item} className="inline-flex items-center gap-2">
-                      <Check className="h-4 w-4 text-home-mint" aria-hidden="true" />{item}
+                      <Check className="h-4 w-4 text-emerald-600" aria-hidden="true" />{item}
                     </li>
                   ))}
                 </ul>
@@ -128,7 +128,7 @@ const ZahnPage = () => {
                 transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.08 }}
                 className="mx-auto w-full max-w-[28rem] lg:mx-0 lg:max-w-none"
               >
-                <div className="rounded-[2rem] bg-white p-6 text-home-midnight shadow-[0_28px_70px_rgba(0,0,0,0.35)] sm:p-8">
+                <div className="rounded-[2rem] border border-slate-100 bg-white p-6 text-home-midnight shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8">
                   <div className="flex items-center gap-4">
                     <FriendlyIcon
                       kind="dental"
@@ -175,9 +175,9 @@ const ZahnPage = () => {
               </motion.div>
             </div>
 
-            <div className="mt-12 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
+            <div className="mt-12 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
-                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-slate-300">
+                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-slate-600">
                   <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
                   <span>{item}</span>
                 </div>
