@@ -199,7 +199,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                     </span>
                     <div>
                       <h4 className="mb-1 font-bold text-[#2e274d]">{t(`ikkWechsel.reassuranceItems.${key}.title`)}</h4>
-                      <p className="text-sm leading-relaxed text-[#66647d]">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
+                      <p className="text-base leading-relaxed text-[#5d5b76]">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
                     </div>
                   </div>
                 ))}
@@ -226,11 +226,11 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
             {Array.isArray(identicalItems) && identicalItems.map((item, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                <span className="text-gray-700 text-sm">{item}</span>
+                <span className="text-gray-700 text-base">{item}</span>
               </div>
             ))}
           </div>
-          <p className="text-gray-500 text-sm mt-6">
+          <p className="text-gray-600 text-base leading-relaxed mt-6">
             {t('ikkWechsel.identicalNote')}
           </p>
         </motion.div>
@@ -243,7 +243,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                 {t('ikkWechsel.extrasTitle')}
               </h3>
-              <p className="mt-1 text-sm md:text-base leading-relaxed text-gray-500">
+              <p className="mt-1 text-base leading-relaxed text-gray-600">
                 {t('ikkWechsel.extrasSubtitle')}
               </p>
             </div>
@@ -259,7 +259,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                   <FriendlyIcon kind={extra.kind} tone={extra.tone} size="sm" />
                   <h4 className="font-bold text-gray-900">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
                 </div>
-                <p className="text-sm leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
+                <p className="text-base leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
               </div>
             ))}
           </div>
@@ -290,7 +290,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                     {t('ikkWechsel.stepLabel', { number: idx + 1 })}
                   </div>
                   <h4 className="font-bold text-gray-900 mb-2">{t(`ikkWechsel.switchSteps.${key}.title`)}</h4>
-                  <p className="text-gray-600 text-sm">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
+                  <p className="text-gray-600 text-base leading-relaxed">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
                 </div>
               );
             })}
@@ -314,7 +314,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               <h3 className="text-xl font-extrabold text-gray-900">
                 {t('ikkWechsel.timelineTitle')}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              <p className="mt-2 text-base leading-relaxed text-gray-600">
                 {t('ikkWechsel.timelineSubtitle')}
               </p>
             </div>
@@ -350,7 +350,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                       <h4 className="font-bold text-gray-900 text-base md:text-lg mb-2">
                         {timelineText(key, 'title')}
                       </h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">
+                      <p className="text-base text-gray-600 leading-relaxed">
                         {timelineText(key, 'desc')}
                       </p>
                     </div>
@@ -367,7 +367,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                 <h4 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
                   {t('ikkWechsel.timelineFinanceTitle')}
                 </h4>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   {t('ikkWechsel.timelineFinanceDesc')}
                 </p>
               </div>
@@ -381,7 +381,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               </div>
             </div>
 
-            <p className="text-xs text-gray-500 leading-relaxed mt-5">
+            <p className="text-sm text-gray-600 leading-relaxed mt-5">
               {t('ikkWechsel.timelineNote')}
             </p>
           </div>
@@ -417,7 +417,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 text-gray-600 pl-13 text-sm leading-relaxed">{t(`ikkWechsel.fears.${key}.a`)}</p>
+                      <p className="px-5 pb-5 text-gray-600 pl-13 text-base leading-relaxed">{t(`ikkWechsel.fears.${key}.a`)}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

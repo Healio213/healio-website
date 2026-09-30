@@ -166,7 +166,7 @@ export default function BenefitFunnelPage() {
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
                 <a href="#klinikschutz" className={secondary}>Klinikschutz für dein Kind</a>
               </div>
-              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-home-slate">{config.leadSecondary}</p>
+              <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
             <div className="mx-auto w-full max-w-[24rem] overflow-hidden rounded-[2rem] bg-[#ece6da] shadow-[0_24px_60px_rgba(7,17,31,0.12)] md:max-w-[27rem]">
               <img
@@ -207,11 +207,11 @@ export default function BenefitFunnelPage() {
                 <PointList points={ambulantPoints} />
                 <div className="mt-auto pt-7">
                   <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
-                  <p className="mt-3 text-sm text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
+                  <p className="mt-3 text-base leading-relaxed text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
                 </div>
                 <details className="mt-5 border-t border-home-slate/15 pt-4">
                   <summary className={`cursor-pointer font-semibold ${focus}`}>Genauer nachlesen</summary>
-                  <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
+                  <div className="mt-3 space-y-3 text-base leading-relaxed text-home-slate">
                     {paths[0].body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
                     <p>{config.caution}</p>
                   </div>
@@ -226,11 +226,11 @@ export default function BenefitFunnelPage() {
                 <PointList points={hospitalPoints} />
                 <div className="mt-auto pt-7">
                   <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} />
-                  <p className="mt-3 text-sm text-home-slate">Beide Rechner öffnen sich in einem neuen Tab.</p>
+                  <p className="mt-3 text-base leading-relaxed text-home-slate">Beide Rechner öffnen sich in einem neuen Tab.</p>
                 </div>
                 <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
                   <summary className={`cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
-                  <div className="mt-3 space-y-3 text-sm leading-relaxed text-home-slate">
+                  <div className="mt-3 space-y-3 text-base leading-relaxed text-home-slate">
                     <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass ein Elternteil am Tag der Geburt versichert ist.</p>
                     <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, schließt aber eine beim Antrag schon festgestellte Schwangerschaft aus. Dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
                     <p>Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
@@ -243,7 +243,7 @@ export default function BenefitFunnelPage() {
                 </details>
               </article>
             </div>
-            <p className="mt-7 max-w-prose text-sm leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
+            <p className="mt-7 max-w-prose text-base leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
           </div>
         </section>
 
@@ -260,7 +260,7 @@ export default function BenefitFunnelPage() {
             <PregnancyBonusExample />
             <details className="mt-4 rounded-2xl bg-home-ice p-6 sm:p-8">
               <summary className={`cursor-pointer font-semibold ${focus}`}>Was du dafür brauchst und wie gerechnet wird</summary>
-              <div className="mt-4 max-w-prose space-y-3 text-sm leading-relaxed text-home-slate">
+              <div className="mt-4 max-w-prose space-y-3 text-base leading-relaxed text-home-slate">
                 <ul className="list-disc space-y-2 pl-5">
                   <li>Einen schriftlichen Nachweis je Untersuchung, der Mutterpass reicht aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen</li>
                   <li>Ein eigenes Antragsfeld je Vorsorge, alle Maßnahmen im selben Kalenderjahr</li>
@@ -269,14 +269,14 @@ export default function BenefitFunnelPage() {
                 <p>Die bis zu 1.155 EUR sind ein rechnerischer Höchstwert aus der Satzung, in dem alles gleichzeitig zutrifft, und keine Summe, die die IKK classic irgendwo zusagt. In der breiten Masse landen aktive Versicherte bei 400 bis 700 EUR im Jahr.</p>
                 <p>Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Aus rechnerisch 405 EUR Zuschuss werden bei 240 EUR Jahresbeitrag also 240 EUR, nie mehr.</p>
                 <p className="font-semibold text-home-midnight">Rechenbeispiel für eine Person im Bonusjahr 2026: 630 EUR Zuschuss oder alternativ 210 EUR Geldbonus</p>
-                <dl className="divide-y divide-home-slate/20">{film.map(([label, amount]) => (
-                  <div key={label} className="flex justify-between gap-5 py-2"><dt>{label}</dt><dd className="shrink-0 font-semibold">{amount}</dd></div>
+                <dl className="divide-y divide-home-slate/20 hyphens-auto [hyphenate-limit-chars:10_4_4]">{film.map(([label, amount]) => (
+                  <div key={label} className="flex justify-between gap-5 py-2"><dt className="min-w-0">{label}</dt><dd className="shrink-0 font-semibold">{amount}</dd></div>
                 ))}</dl>
                 <p>Die IKK classic prüft die Voraussetzungen und Nachweise, nicht wir. Deinen Bonus beantragst du später direkt bei deiner Krankenkasse, zum Beispiel in der IKK-classic-App. Bonusregeln: <a href="https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm" className={textLink}>IKK classic</a> und <a href="https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf" className={textLink}>Infoblatt 2026</a>.</p>
               </div>
             </details>
           </div>
-          <p className="mt-6 text-sm text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
+          <p className="mt-6 text-base leading-relaxed text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
         </section>
 
         <section id="fragen" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
@@ -285,7 +285,7 @@ export default function BenefitFunnelPage() {
               <div>
                 <h2 className="font-friendly text-3xl md:text-4xl">{WHATSAPP_HELP_TITLE}</h2>
                 <WhatsAppHelpHint placement="schwangerschaft-fragen" surface="bg-home-ice" className="mt-5" />
-                <p className="mt-5 text-sm text-home-slate">Lieber per E-Mail? <Link to="/kontakt" className={textLink}>Zur Kontaktseite</Link></p>
+                <p className="mt-5 text-base text-home-slate">Lieber per E-Mail? <Link to="/kontakt" className={textLink}>Zur Kontaktseite</Link></p>
               </div>
             ) : (
               <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`mt-5 inline-block ${textLink}`}>Frage an Healio stellen</Link></div>
@@ -296,7 +296,7 @@ export default function BenefitFunnelPage() {
           </div>
           <div className="mt-8 border-t border-home-slate/20 pt-7">
             <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
-            <p className="mt-3 text-sm text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin. Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
+            <p className="mt-3 text-base leading-relaxed text-home-slate">Direkt zur Tarifauswahl. Ohne erneuten Bonus-Check oder Pflichttermin. Leistungsübersicht: <a href="https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf" className={textLink}>SDK Ambulant, Tarifübersicht (PDF)</a>.</p>
             <WhatsAppHelpHint placement="schwangerschaft-abschluss" variant="line" text="Auf der nächsten Seite wählst du deine Stufe. Kommst du nicht weiter, frag uns per WhatsApp." className="mt-4" />
           </div>
         </section>

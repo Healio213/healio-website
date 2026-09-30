@@ -30,7 +30,7 @@ const VeterinaryFaq = () => {
                     <span>{t(`faq.items.${key}.question`)}</span>
                     <ChevronDown className="h-5 w-5 shrink-0 text-[#76e2bd] transition-transform group-open:rotate-180" />
                   </summary>
-                  <p className="max-w-3xl pb-6 pl-[36px] pr-6 text-sm leading-relaxed text-slate-300 sm:pl-[50px] sm:text-base">{t(`faq.items.${key}.answer`)}</p>
+                  <p className="max-w-3xl pb-6 pl-[36px] pr-6 text-base leading-relaxed text-slate-300 sm:pl-[50px] sm:text-[1.0625rem]">{t(`faq.items.${key}.answer`)}</p>
                 </details>
               ))}
             </div>
@@ -38,12 +38,12 @@ const VeterinaryFaq = () => {
             <div className="mt-10 flex flex-col gap-6 bg-[#f8efdc] p-6 text-[#10272d] shadow-[0_24px_60px_rgba(0,0,0,0.25)] sm:p-8 md:flex-row md:items-center md:justify-between">
               <div>
                 <h3 className="font-friendly text-2xl font-bold leading-tight sm:text-3xl">{t('faq.ctaTitle')}</h3>
-                <p className="mt-2 max-w-lg text-sm leading-relaxed text-[#61706d]">{t('faq.ctaText')}</p>
+                <p className="mt-2 max-w-lg text-base leading-relaxed text-[#56625f]">{t('faq.ctaText')}</p>
               </div>
               <Button
                 type="button"
                 onClick={() => document.getElementById('tier-check')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                className="h-auto w-full shrink-0 rounded-full bg-[#25c990] px-6 py-4 font-display font-extrabold text-[#062319] hover:bg-[#5ee0b1] md:w-auto"
+                className="h-auto w-full shrink-0 rounded-full bg-[#25c990] px-6 py-4 font-display text-base font-extrabold text-[#062319] hover:bg-[#5ee0b1] md:w-auto"
               >
                 {t('hero.cta')}
                 <ArrowRight className="ml-2 h-4 w-4" />

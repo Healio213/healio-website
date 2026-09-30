@@ -35,7 +35,7 @@ const VeterinaryTrustStrip = () => {
                   §34d
                 </span>
               )}
-              <span className="font-display text-sm font-extrabold leading-snug text-[#173338] sm:text-[0.95rem]">
+              <span className="min-w-0 font-display text-base font-extrabold leading-snug text-[#173338] hyphens-auto [hyphenate-limit-chars:10_4_4]">
                 {t(`trust.${item.key}`)}
               </span>
             </li>

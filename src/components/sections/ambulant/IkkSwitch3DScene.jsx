@@ -311,14 +311,14 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
         }
 
         .ikk-clay-journey__continuity strong {
-          font-size: clamp(.72rem, 1.25vw, .9rem);
+          font-size: clamp(.8rem, 1.25vw, .95rem);
           font-weight: 900;
         }
 
         .ikk-clay-journey__continuity small {
           margin-top: .18rem;
-          color: #6d6883;
-          font-size: clamp(.58rem, .95vw, .7rem);
+          color: #625d78;
+          font-size: clamp(.75rem, .95vw, .8rem);
           font-weight: 700;
         }
 
@@ -359,8 +359,8 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
         }
 
         .ikk-clay-journey__fund small {
-          color: #756d8d;
-          font-size: clamp(.55rem, 1vw, .7rem);
+          color: #6a6283;
+          font-size: clamp(.75rem, 1vw, .8rem);
           font-weight: 800;
           letter-spacing: .09em;
           text-transform: uppercase;
@@ -374,8 +374,8 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
 
         .ikk-clay-journey__fund span {
           margin-top: .28rem;
-          color: #347a59;
-          font-size: clamp(.62rem, 1.1vw, .78rem);
+          color: #2f6f51;
+          font-size: clamp(.75rem, 1.1vw, .85rem);
           font-weight: 900;
         }
 
@@ -521,8 +521,8 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
         }
 
         .ikk-clay-journey__outcome-copy small {
-          color: #347a59;
-          font-size: clamp(.52rem, .95vw, .66rem);
+          color: #2f6f51;
+          font-size: clamp(.75rem, .95vw, .8rem);
           font-weight: 900;
           letter-spacing: .04em;
           text-transform: uppercase;
@@ -531,7 +531,7 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
         .ikk-clay-journey__outcome-copy strong {
           margin-top: .22rem;
           color: #211a3e;
-          font-size: clamp(.72rem, 1.3vw, .95rem);
+          font-size: clamp(.8rem, 1.3vw, .95rem);
           font-weight: 900;
         }
 
@@ -544,35 +544,58 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
 
         .ikk-clay-journey__outcome-copy p {
           margin-top: .2rem;
-          color: #6b6680;
-          font-size: clamp(.58rem, 1.05vw, .72rem);
+          color: #5f5a75;
+          font-size: clamp(.75rem, 1.05vw, .85rem);
           font-weight: 700;
         }
 
-        /* --- Mobil ------------------------------------------------------- */
+        /* --- Mobil und Tablet ---------------------------------------------- */
 
-        @media (max-width: 639px) {
+        /* Unter 1024 px stehen die Karten über und unter dem Film statt auf
+           ihm (Frank 30.09.2026: Schrift zu klein). So bleiben alle
+           Beschriftungen mindestens 12 px groß, und keine Karte verdeckt die
+           Figur. Die Ebene mit den Karten löst sich dafür ins Raster auf. */
+        @media (max-width: 1023px) {
           .ikk-clay-journey {
-            aspect-ratio: 4 / 5;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-areas:
+              "continuity continuity"
+              "source destination"
+              "film film"
+              "outcome outcome";
+            gap: .6rem;
+            padding: .7rem;
+            aspect-ratio: auto;
             border-radius: 1.55rem;
           }
 
-          /* Der komplette 16:9-Film bleibt sichtbar. Die Textkarten nutzen die
-             ruhigen Flaechen darueber und darunter, statt die Figur seitlich
-             aus dem Film zu schneiden. */
+          .ikk-clay-journey__overlay {
+            display: contents;
+          }
+
           .ikk-clay-journey__film {
-            inset: 27% 0 auto;
-            height: 45%;
+            position: relative;
+            inset: auto;
+            grid-area: film;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: contain;
-            object-position: center;
+            border-radius: 1rem;
+          }
+
+          .ikk-clay-journey__continuity,
+          .ikk-clay-journey__fund,
+          .ikk-clay-journey__outcome {
+            position: relative;
+            inset: auto;
+            width: auto;
+            min-width: 0;
           }
 
           .ikk-clay-journey__continuity {
-            top: 2.5%;
-            right: auto;
-            left: 4%;
-            width: 92%;
-            padding: .55rem .7rem;
+            grid-area: continuity;
+            padding: .6rem .75rem;
           }
 
           .ikk-clay-journey__continuity-icon {
@@ -580,40 +603,50 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
             height: 2rem;
           }
 
+          .ikk-clay-journey__continuity strong { font-size: .9rem; }
+          .ikk-clay-journey__continuity small { font-size: .8rem; }
+
           .ikk-clay-journey__fund {
-            min-width: 40%;
-            padding: .52rem .62rem;
+            padding: .6rem .7rem;
             border-radius: .85rem;
           }
 
-          .ikk-clay-journey__fund--source {
-            top: 15%;
-            bottom: auto;
-            left: 4%;
-            text-align: left;
-          }
+          .ikk-clay-journey__fund--source { grid-area: source; }
+          .ikk-clay-journey__fund--destination { grid-area: destination; }
 
-          .ikk-clay-journey__fund--destination {
-            top: 15%;
-            bottom: auto;
-            right: 4%;
-            text-align: right;
+          .ikk-clay-journey__fund small {
+            font-size: .75rem;
+            letter-spacing: .06em;
+          }
+          .ikk-clay-journey__fund strong { font-size: .95rem; }
+          .ikk-clay-journey__fund span { font-size: .8rem; }
+
+          .ikk-clay-journey__continuity strong,
+          .ikk-clay-journey__continuity small,
+          .ikk-clay-journey__fund small,
+          .ikk-clay-journey__fund strong,
+          .ikk-clay-journey__fund span {
+            overflow-wrap: anywhere;
+            hyphens: auto;
           }
 
           .ikk-clay-journey__outcome {
-            top: auto;
-            left: 4%;
-            bottom: 3%;
-            width: 92%;
-            grid-template-columns: minmax(62px, 22%) 1fr;
-            gap: .58rem;
-            padding: .62rem .68rem;
+            grid-area: outcome;
+            grid-template-columns: minmax(56px, 20%) 1fr;
+            gap: .6rem;
+            padding: .65rem .75rem;
             border-radius: 1.05rem;
           }
 
+          .ikk-clay-journey__outcome-copy small { font-size: .75rem; }
+          .ikk-clay-journey__outcome-copy strong { font-size: .95rem; }
+          .ikk-clay-journey__outcome-copy span { font-size: clamp(1rem, 4vw, 1.15rem); }
+          .ikk-clay-journey__outcome-copy p { font-size: .8rem; }
+
+          /* Die Belohnung sitzt im Filmfeld an der Faust der Figur. */
           .ikk-clay-journey__reward {
-            left: 78.5%;
-            top: 34.5%;
+            grid-area: film;
+            z-index: 2;
           }
 
           .ikk-clay-journey__reward-halo { width: 88px; }
@@ -629,25 +662,28 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
             62%  { opacity: 1; transform: translate(calc(var(--bx) * .58), calc(var(--by) * .58)) scale(.84) rotate(110deg); }
             100% { opacity: .34; transform: translate(calc(var(--bx) * .58), calc(var(--by) * .58)) scale(.64) rotate(175deg); }
           }
-
-          .ikk-clay-journey__outcome-copy small { font-size: .56rem; }
-          .ikk-clay-journey__outcome-copy strong { font-size: .82rem; }
-          .ikk-clay-journey__outcome-copy span { font-size: clamp(.9rem, 4vw, 1.05rem); }
-          .ikk-clay-journey__outcome-copy p { font-size: .65rem; }
         }
 
         @media (max-width: 374px) {
-          .ikk-clay-journey__film {
-            inset: 34% 0 auto;
-            height: 40%;
+          /* Auf sehr schmalen Handys stehen Start- und Zielkasse untereinander. */
+          .ikk-clay-journey {
+            grid-template-areas:
+              "continuity continuity"
+              "source source"
+              "destination destination"
+              "film film"
+              "outcome outcome";
+            gap: .45rem;
+            padding: .5rem;
+          }
+
+          .ikk-clay-journey__fund--destination {
+            text-align: left;
           }
 
           .ikk-clay-journey__continuity {
-            top: 2%;
-            left: 2%;
-            width: 96%;
-            gap: .38rem;
-            padding: .4rem .48rem;
+            gap: .4rem;
+            padding: .5rem .55rem;
           }
 
           .ikk-clay-journey__continuity-icon {
@@ -660,45 +696,14 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
             height: 1rem;
           }
 
-          .ikk-clay-journey__continuity strong { font-size: .6rem; }
-          .ikk-clay-journey__continuity small { font-size: .5rem; }
-
           .ikk-clay-journey__fund {
-            top: 19%;
-            min-width: 42%;
-            max-width: 44%;
-            padding: .4rem .44rem;
+            padding: .5rem .55rem;
           }
-
-          .ikk-clay-journey__fund--source { left: 2%; }
-          .ikk-clay-journey__fund--destination {
-            right: 2%;
-            max-width: 46%;
-          }
-          .ikk-clay-journey__fund small {
-            font-size: .42rem;
-            letter-spacing: .04em;
-          }
-          .ikk-clay-journey__fund strong { font-size: .66rem; }
-          .ikk-clay-journey__fund span { font-size: .48rem; }
 
           .ikk-clay-journey__outcome {
-            left: 2%;
-            bottom: 2%;
-            width: 96%;
-            grid-template-columns: minmax(42px, 19%) 1fr;
-            gap: .38rem;
-            padding: .48rem .52rem;
-          }
-
-          .ikk-clay-journey__outcome-copy small { font-size: .48rem; }
-          .ikk-clay-journey__outcome-copy strong { font-size: .68rem; }
-          .ikk-clay-journey__outcome-copy span { font-size: .78rem; }
-          .ikk-clay-journey__outcome-copy p { font-size: .55rem; }
-
-          .ikk-clay-journey__reward {
-            left: 78.5%;
-            top: 40.5%;
+            grid-template-columns: minmax(44px, 19%) 1fr;
+            gap: .45rem;
+            padding: .5rem .55rem;
           }
         }
       `}</style>

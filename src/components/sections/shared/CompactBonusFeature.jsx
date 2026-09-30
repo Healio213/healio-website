@@ -51,7 +51,7 @@ const CompactBonusFeature = ({
             <div>
               <span className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{copy.eyebrow}</span>
               <h2 id="compact-bonus-title" className="mt-2 block font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl lg:text-4xl">{copy.title}</h2>
-              <span className="mt-2 block max-w-3xl text-sm leading-6 text-home-slate sm:text-base">{copy.text}</span>
+              <span className="mt-2 block max-w-3xl text-base leading-7 text-home-slate">{copy.text}</span>
               <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 text-xs font-bold text-emerald-900">
                 <ShieldCheck className="h-4 w-4 text-home-mint" aria-hidden="true" />
                 {copy.badge}
@@ -59,7 +59,7 @@ const CompactBonusFeature = ({
             </div>
           </div>
 
-          <span className="inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-5 font-display text-sm font-extrabold text-white shadow-lg transition group-open:bg-home-mint group-open:text-home-midnight sm:min-w-[235px]">
+          <span className="inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-5 font-display text-base font-extrabold text-white shadow-lg transition group-open:bg-home-mint group-open:text-home-midnight sm:min-w-[235px]">
             <span className="group-open:hidden">{copy.open}</span>
             <span className="hidden group-open:inline">{copy.close}</span>
             <ChevronDown className="ml-2 h-5 w-5 transition-transform group-open:rotate-180" aria-hidden="true" />
@@ -76,7 +76,7 @@ const CompactBonusFeature = ({
               ...calculatorProps.secondaryCtaOverride,
             }}
           />
-          <p className="mx-auto mt-6 max-w-4xl text-center text-xs leading-5 text-slate-500">{copy.disclosure}</p>
+          <p className="mx-auto mt-6 max-w-4xl text-center text-base leading-7 text-slate-600">{copy.disclosure}</p>
         </div>
       </details>
     </section>

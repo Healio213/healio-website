@@ -50,7 +50,7 @@ const AnimalPortrait = ({ animal, active, title, description, onClick }) => (
       <span className="flex items-end justify-between gap-2">
         <span>
           <span className="block font-friendly text-xl font-bold leading-none sm:text-3xl">{title}</span>
-          <span className="mt-1.5 hidden max-w-[18ch] text-xs leading-snug text-white/75 sm:block">{description}</span>
+          <span className="mt-1.5 hidden max-w-[18ch] text-base leading-snug text-white/80 sm:block">{description}</span>
         </span>
         <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition ${active ? 'border-[#76e2bd] bg-[#25c990] text-[#062319]' : 'border-white/45 bg-black/10 text-transparent backdrop-blur-sm'}`}>
           <Check className="h-4 w-4" />
@@ -79,7 +79,7 @@ const ProtectionChoice = ({ active, code, title, description, onClick }) => (
         <Check className="h-4 w-4" />
       </span>
       <span className="mt-auto block font-friendly text-3xl font-bold leading-none sm:text-4xl">{title}</span>
-      <span className={`mt-3 block max-w-[30ch] text-sm leading-relaxed ${active ? 'text-slate-600' : 'text-slate-300'}`}>{description}</span>
+      <span className={`mt-3 block max-w-[30ch] text-base leading-relaxed ${active ? 'text-slate-600' : 'text-slate-300'}`}>{description}</span>
     </span>
   </button>
 );
@@ -169,7 +169,7 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
               >
                 <span>
                   <span className="block font-display text-base font-extrabold">{t('finder.coverage.unsure.title')}</span>
-                  <span className={`mt-0.5 block text-xs sm:text-sm ${selection.coverage === 'unsure' ? 'text-[#124b3a]' : 'text-slate-400'}`}>{t(`finder.${coverageNamespace}.unsure.description`)}</span>
+                  <span className={`mt-0.5 block text-base ${selection.coverage === 'unsure' ? 'text-[#124b3a]' : 'text-slate-400'}`}>{t(`finder.${coverageNamespace}.unsure.description`)}</span>
                 </span>
                 <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border ${selection.coverage === 'unsure' ? 'border-[#062319]/25 bg-[#062319] text-[#7be4be]' : 'border-white/25 text-transparent'}`}>
                   <Check className="h-4 w-4" />
@@ -190,13 +190,13 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
                   <Check className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
-                  <p className={`font-display text-[0.68rem] font-extrabold uppercase tracking-[0.16em] ${ready ? 'text-[#8ee7ca]' : 'text-[#71817d]'}`}>
+                  <p className={`font-display text-xs font-extrabold uppercase tracking-[0.16em] ${ready ? 'text-[#8ee7ca]' : 'text-[#5f6965]'}`}>
                     {ready ? t('finder.review.readyLabel') : t('finder.review.openLabel')}
                   </p>
                   <p className="mt-1 font-friendly text-2xl font-bold leading-tight">
                     {ready ? `${animalLabel} · ${coverageLabel}` : t('finder.review.openTitle')}
                   </p>
-                  <p className={`mt-1.5 max-w-2xl text-sm leading-relaxed ${ready ? 'text-slate-300' : 'text-[#5d6b6d]'}`}>
+                  <p className={`mt-1.5 max-w-2xl text-base leading-relaxed ${ready ? 'text-slate-300' : 'text-[#5d6b6d]'}`}>
                     {ready ? t('finder.review.readyText') : t('finder.review.openText')}
                   </p>
                 </div>
@@ -206,14 +206,14 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
                 type="button"
                 disabled={!ready}
                 onClick={() => document.getElementById('vet-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                className="h-auto shrink-0 rounded-full bg-[#25c990] px-6 py-3.5 font-display font-extrabold text-[#062319] shadow-[0_12px_26px_rgba(37,201,144,0.2)] hover:bg-[#5ee0b1] disabled:cursor-not-allowed disabled:bg-[#d8d0bf] disabled:text-[#857f72]"
+                className="h-auto shrink-0 rounded-full bg-[#25c990] px-6 py-3.5 font-display text-base font-extrabold text-[#062319] shadow-[0_12px_26px_rgba(37,201,144,0.2)] hover:bg-[#5ee0b1] disabled:cursor-not-allowed disabled:bg-[#d8d0bf] disabled:text-[#857f72]"
               >
                 {ready ? t('finder.ctaReady') : t('finder.ctaIncomplete')}
                 <ArrowDown className="ml-2 h-4 w-4" />
               </Button>
             </div>
 
-            <p className="mt-3 text-center text-xs leading-relaxed text-[#6f7772]">{t('finder.disclaimer')}</p>
+            <p className="mt-3 text-center text-base leading-relaxed text-[#5f6965]">{t('finder.disclaimer')}</p>
           </div>
         </div>
       </div>

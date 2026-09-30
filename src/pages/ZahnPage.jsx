@@ -137,14 +137,14 @@ const ZahnPage = () => {
                 {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
               </a>
 
-              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-white/80">
+              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
                 {content.hero.micro.map((item) => (
                   <li key={item} className="inline-flex items-center gap-2">
                     <Check className="h-4 w-4 text-home-mint" aria-hidden="true" />{item}
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 max-w-xl border-t border-white/15 pt-5 text-sm leading-6 text-white/70">
+              <p className="mt-6 max-w-xl border-t border-white/15 pt-5 text-base leading-7 text-white/75">
                 <span className="font-bold text-white">{content.hero.ticketFooter}</span>{' '}
                 {content.hero.routes.join(' · ')}
               </p>
@@ -152,7 +152,7 @@ const ZahnPage = () => {
 
             <div className="mt-12 grid gap-4 border-t border-white/15 pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
-                <div key={item} className="flex items-center gap-3 text-left text-sm font-bold text-white/85">
+                <div key={item} className="flex items-center gap-3 text-left text-base font-bold text-white/85">
                   <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
                   <span>{item}</span>
                 </div>
@@ -192,10 +192,10 @@ const ZahnPage = () => {
                       <FriendlyIcon kind={visual.kind} tone={visual.tone} size="md" className="-rotate-2" />
                     </div>
                     <h3 className="mt-8 font-display text-2xl font-extrabold tracking-[-0.035em]">{card.label}</h3>
-                    <p className="mt-2 font-display text-xs font-extrabold uppercase tracking-[0.16em] opacity-75">{card.title} · {card.product}</p>
+                    <p className="mt-2 font-display text-sm font-extrabold uppercase tracking-[0.14em] opacity-80">{card.title} · {card.product}</p>
                     <p className="mt-4 max-w-xl leading-7 text-slate-600">{card.text}</p>
                     {card.sourceLabel && (
-                      <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-extrabold underline underline-offset-4">
+                      <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center gap-1 text-base font-extrabold underline underline-offset-4">
                         {card.sourceLabel}<ExternalLink className="h-4 w-4" aria-hidden="true" />
                       </a>
                     )}
@@ -204,11 +204,11 @@ const ZahnPage = () => {
               })}
               </div>
             </div>
-            <p className="mt-6 text-sm leading-6 text-slate-500">{content.paths.footer}</p>
+            <p className="mt-6 text-base leading-7 text-slate-600">{content.paths.footer}</p>
             {lang === 'de' && (
               /* Vertiefung zum Thema Zahnluecke. Bewusst nur ein Satz mit
                  einem Link, kein zweiter Button neben der Tarifweiche. */
-              <p className="mt-3 text-sm leading-6 text-slate-500">
+              <p className="mt-3 text-base leading-7 text-slate-600">
                 Eine nicht ersetzte Zahnlücke schließt nicht jeden Weg: Welcher Versicherer bis zu drei fehlende Zähne annimmt und warum angeratener Ersatz eine andere Frage ist, steht im Ratgeber{' '}
                 <Link to="/ratgeber/zahnzusatzversicherung-fehlender-zahn" className="font-bold underline underline-offset-4 hover:text-[#07111f]">
                   Zahnzusatzversicherung bei fehlendem Zahn
@@ -237,11 +237,11 @@ const ZahnPage = () => {
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
-                  className="inline-flex min-h-14 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f]"
+                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 text-center font-display text-base font-extrabold sm:whitespace-nowrap text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f]"
                 >
                   {content.bonus.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
-                <a href={getPath('kassenboost')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-4 font-display text-sm font-extrabold text-white underline decoration-[#25c990] decoration-2 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]">
+                <a href={getPath('kassenboost')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-4 font-display text-base font-extrabold text-white underline decoration-[#25c990] decoration-2 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]">
                   {content.bonus.link}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
@@ -249,7 +249,7 @@ const ZahnPage = () => {
 
             <div className="relative mx-auto min-h-[25rem] w-full max-w-[26rem] overflow-hidden rounded-[2.25rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-6 text-[#07111f] shadow-2xl sm:p-7">
               <span className="absolute left-1/2 top-0 h-4 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d4a0] bg-white/80" aria-hidden="true" />
-              <p className="relative z-10 max-w-[14rem] font-display text-[0.68rem] font-extrabold uppercase tracking-[0.13em] text-[#77570c]">
+              <p className="relative z-10 max-w-[14rem] font-display text-xs font-extrabold uppercase tracking-[0.13em] text-[#77570c]">
                 {content.bonus.stamp}
               </p>
               <h3 className="relative z-10 mt-4 max-w-[10ch] font-friendly text-3xl font-bold leading-[0.98] tracking-[-0.035em] text-[#103c30] sm:text-4xl">
@@ -267,10 +267,10 @@ const ZahnPage = () => {
               <strong className="relative z-10 mt-16 block font-display text-[3.35rem] font-extrabold leading-none tracking-[-0.065em] text-[#087654] sm:mt-20 sm:text-[4.1rem]">
                 {content.bonus.amount}
               </strong>
-              <span className="relative z-10 mt-3 block max-w-[19rem] font-display text-sm font-extrabold leading-5 text-[#5c4510]">
+              <span className="relative z-10 mt-3 block max-w-[19rem] font-display text-base font-extrabold leading-6 text-[#5c4510]">
                 {content.bonus.stampLabel}
               </span>
-              <p className="relative z-10 mt-5 border-t border-[#d9c07f] pt-4 text-[0.68rem] font-semibold leading-5 text-[#6e6250]">
+              <p className="relative z-10 mt-5 border-t border-[#d9c07f] pt-4 text-sm font-semibold leading-6 text-[#5f543f] hyphens-auto [hyphenate-limit-chars:10_4_4]">
                 {content.bonus.condition}
               </p>
             </div>
@@ -315,7 +315,7 @@ const ZahnPage = () => {
                     <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border-4 border-white bg-[#07111f] font-display text-xs font-extrabold text-[#5ee0b1] shadow-[0_8px_20px_rgba(7,17,31,0.14)]">0{index + 1}</span>
                     <div className="pt-1">
                       <h3 className="font-display text-lg font-extrabold tracking-[-0.02em]">{step.title}</h3>
-                      <p className="mt-1 text-sm leading-6 text-slate-600">{step.text}</p>
+                      <p className="mt-1 text-base leading-7 text-slate-600">{step.text}</p>
                     </div>
                   </li>
                 ))}
@@ -335,7 +335,7 @@ const ZahnPage = () => {
                   <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke und Bornberg Auszeichnung für UKV ZahnPRIVAT 100, 2025" className="max-h-20 w-auto object-contain" />
                 </div>
               </div>
-              <p className="mt-4 text-xs leading-5 text-slate-500">{content.process.sealNote}</p>
+              <p className="mt-4 text-sm leading-6 text-slate-600">{content.process.sealNote}</p>
             </aside>
           </div>
         </section>
@@ -361,7 +361,7 @@ const ZahnPage = () => {
                     {item.q}
                     <ChevronDown className="h-5 w-5 flex-none text-[#087654] transition-transform group-open:rotate-180" aria-hidden="true" />
                   </summary>
-                  <div className="max-w-3xl pb-6 pr-8 text-sm leading-7 text-slate-600 sm:text-base">
+                  <div className="max-w-3xl pb-6 pr-8 text-base leading-7 text-slate-600 sm:text-[1.0625rem]">
                     <p>{item.a}</p>
                     {item.sourceLabel && (
                       <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-1 font-bold text-[#087654] underline underline-offset-4">

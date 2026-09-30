@@ -13,8 +13,8 @@ import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot'
 
 const NEXT_STEP_KEYS = ['profile', 'comparison', 'reply'];
 const REVIEW_ORDER_VERSION = 'tier-pruefauftrag-v1-2026-08-30';
-const FIELD_CLASS = 'h-12 rounded-xl border-[#cabfa9] bg-white/75 text-[#10272d] shadow-none focus-visible:border-[#25c990] focus-visible:ring-[#25c990]/25';
-const SELECT_CLASS = 'h-12 w-full rounded-xl border border-[#cabfa9] bg-white/75 px-3 text-sm text-[#10272d] outline-none transition focus:border-[#25c990] focus:ring-2 focus:ring-[#25c990]/25';
+const FIELD_CLASS = 'h-12 rounded-xl border-[#cabfa9] bg-white/75 text-base text-[#10272d] shadow-none md:text-base focus-visible:border-[#25c990] focus-visible:ring-[#25c990]/25';
+const SELECT_CLASS = 'h-12 w-full rounded-xl border border-[#cabfa9] bg-white/75 px-3 text-base text-[#10272d] outline-none transition focus:border-[#25c990] focus:ring-2 focus:ring-[#25c990]/25';
 
 const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
   const { t } = useTranslation('veterinary');
@@ -137,17 +137,17 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
             <div className="max-w-[440px] lg:pt-2">
               <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#76e2bd]">{t('form.next.eyebrow')}</p>
               <h3 className="mt-3 font-friendly text-3xl font-bold leading-tight text-white">{t('form.next.title')}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">{t('form.next.text')}</p>
+              <p className="mt-3 text-base leading-relaxed text-slate-400">{t('form.next.text')}</p>
               <ol className="mt-7 border-t border-white/15">
                 {NEXT_STEP_KEYS.map((key, index) => (
-                  <li key={key} className="grid grid-cols-[38px_1fr] gap-2 border-b border-white/15 py-4 text-sm leading-relaxed text-slate-200">
+                  <li key={key} className="grid grid-cols-[38px_1fr] gap-2 border-b border-white/15 py-4 text-base leading-relaxed text-slate-200">
                     <span className="font-display text-xs font-extrabold text-[#76e2bd]">{String(index + 1).padStart(2, '0')}</span>
                     <span>{t(`form.next.steps.${key}`)}</span>
                   </li>
                 ))}
               </ol>
 
-              <div className="mt-7 flex flex-col items-start gap-4 rounded-2xl bg-white/[0.06] px-5 py-4 text-sm leading-relaxed text-slate-300 sm:flex-row">
+              <div className="mt-7 flex flex-col items-start gap-4 rounded-2xl bg-white/[0.06] px-5 py-4 text-base leading-relaxed text-slate-300 sm:flex-row">
                 <FriendlyIcon kind="comparison" tone="butter" size="sm" className="mt-0.5" />
                 <p>{t('form.next.orderBoundary')}</p>
               </div>
@@ -157,7 +157,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
           <div className="order-1 rounded-[2rem] bg-[#f8efdc] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.32)] sm:p-8 lg:order-2 lg:p-10">
             <div className="flex items-center justify-between gap-5 border-b border-[#8f7e5d]/20 pb-5">
               <div>
-                <p className="font-display text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-[#087451]">{t('form.profileLabel')}</p>
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#087451]">{t('form.profileLabel')}</p>
                 <p className="mt-1 font-friendly text-xl font-bold text-[#10272d]">{animalSummary} · {coverageSummary}</p>
               </div>
               <span className="hidden h-11 w-11 rotate-6 items-center justify-center rounded-full border-2 border-[#25a77d]/25 font-friendly text-sm font-bold text-[#087451] sm:flex" aria-label={profileReady ? t('finder.profile.statusReady') : t('finder.profile.statusOpen')}>
@@ -169,18 +169,18 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
               <FormHoneypot />
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="vet-name" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.name')}</Label>
+                  <Label htmlFor="vet-name" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.name')}</Label>
                   <Input id="vet-name" name="name" maxLength={100} autoComplete="name" required value={formData.name} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="vet-email" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.email')}</Label>
+                  <Label htmlFor="vet-email" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.email')}</Label>
                   <Input id="vet-email" name="email" type="email" maxLength={254} autoComplete="email" required value={formData.email} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="animal_type" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.animal')}</Label>
+                  <Label htmlFor="animal_type" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.animal')}</Label>
                   <select id="animal_type" name="animal_type" required value={formData.animal_type} onChange={handleChange} className={SELECT_CLASS}>
                     <option value="">{t('form.fields.select')}</option>
                     <option value="dog">{t('finder.animals.dog.title')}</option>
@@ -189,7 +189,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="coverage" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.coverage')}</Label>
+                  <Label htmlFor="coverage" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.coverage')}</Label>
                   <select id="coverage" name="coverage" required value={formData.coverage} onChange={handleChange} className={SELECT_CLASS}>
                     <option value="">{t('form.fields.select')}</option>
                     <option value="full">{t('finder.coverage.full.title')}</option>
@@ -201,20 +201,20 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="vet-age" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.age')}</Label>
+                  <Label htmlFor="vet-age" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.age')}</Label>
                   <Input id="vet-age" name="age" type="number" min="0" max="60" required value={formData.age} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="vet-breed" className="font-display text-xs font-bold text-[#334a4e]">{t('form.fields.breed')}</Label>
+                  <Label htmlFor="vet-breed" className="font-display text-sm font-bold text-[#334a4e]">{t('form.fields.breed')}</Label>
                   <Input id="vet-breed" name="breed" maxLength={120} value={formData.breed} onChange={handleChange} className={FIELD_CLASS} />
                 </div>
               </div>
 
               {formData.animal_type === 'horse' && (
                 <div className="border-y border-[#a97a2f]/25 bg-[#f3e5c7] px-1 py-5">
-                  <Label htmlFor="vet-usage" className="font-display text-xs font-bold text-[#665128]">{t('form.fields.usage')}</Label>
+                  <Label htmlFor="vet-usage" className="font-display text-sm font-bold text-[#665128]">{t('form.fields.usage')}</Label>
                   <Input id="vet-usage" name="usage" maxLength={200} required value={formData.usage} onChange={handleChange} placeholder={t('form.fields.usagePlaceholder')} className={`${FIELD_CLASS} mt-2 border-[#c6aa73]`} />
-                  <p className="mt-2 text-xs leading-relaxed text-[#766a4d]">{t('form.fields.usageNote')}</p>
+                  <p className="mt-2 text-base leading-relaxed text-[#6b5f44]">{t('form.fields.usageNote')}</p>
                 </div>
               )}
 
@@ -229,7 +229,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                   />
                   <div>
                     <h3 className="font-friendly text-xl font-bold">{t('form.order.title')}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-300">{t('form.order.lead')}</p>
+                    <p className="mt-1 text-base leading-relaxed text-slate-300">{t('form.order.lead')}</p>
                   </div>
                 </div>
 
@@ -241,13 +241,13 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                     required
                     checked={formData.reviewOrderAccepted}
                     onChange={handleChange}
-                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/40 bg-transparent text-[#25c990] focus:ring-[#76e2bd]"
+                    className="mt-1 h-4 w-4 shrink-0 rounded border-white/40 bg-transparent text-[#25c990] focus:ring-[#76e2bd]"
                   />
-                  <div className="min-w-0 text-sm leading-relaxed text-slate-100">
+                  <div className="min-w-0 text-base leading-relaxed text-slate-100">
                     <label htmlFor="vet-review-order" className="cursor-pointer font-medium">
                       {t('form.order.consent')}
                     </label>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
                       {t('form.order.documents')}{' '}
                       <Link to={getPath('erstinformation')} target="_blank" rel="noopener noreferrer" className="font-bold text-[#8ee7ca] underline decoration-[#25c990]/60 underline-offset-2 hover:text-white">
                         {t('form.order.initialInformation')}
@@ -260,17 +260,17 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                   </div>
                 </div>
 
-                <p className="mt-3 text-xs leading-relaxed text-[#9fb8b2]">{t('form.order.limit')}</p>
+                <p className="mt-3 text-base leading-relaxed text-[#9fb8b2]">{t('form.order.limit')}</p>
               </div>
 
-              <label className="flex cursor-pointer items-start gap-3 border-t border-[#8f7e5d]/20 pt-5 text-xs leading-relaxed text-[#5f6965]">
+              <label className="flex cursor-pointer items-start gap-3 border-t border-[#8f7e5d]/20 pt-5 text-base leading-relaxed text-[#5f6965]">
                 <input
                   type="checkbox"
                   name="privacyAccepted"
                   required
                   checked={formData.privacyAccepted}
                   onChange={handleChange}
-                  className="mt-0.5 h-4 w-4 rounded border-[#a89b82] text-[#087451] focus:ring-[#25c990]"
+                  className="mt-1 h-4 w-4 shrink-0 rounded border-[#a89b82] text-[#087451] focus:ring-[#25c990]"
                 />
                 <span>
                   {t('form.privacyPrefix')}{' '}
@@ -288,7 +288,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
                 )}
               </Button>
 
-              <p className="flex items-start justify-center gap-2 text-center text-xs leading-relaxed text-[#6a736e]">
+              <p className="flex items-start justify-center gap-2 text-center text-sm leading-relaxed text-[#5f6965]">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#087451]" />
                 {t('form.responseNote')}
               </p>

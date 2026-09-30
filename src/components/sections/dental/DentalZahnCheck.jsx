@@ -148,13 +148,13 @@ const DentalZahnCheck = () => {
           <div className="mt-8 inline-flex max-w-full items-center gap-3 rounded-[1.65rem] border border-[#efd99b]/70 bg-[#fff8df] p-2 pr-5 text-[#07111f] shadow-[0_18px_46px_rgba(0,0,0,0.22)] sm:gap-4 sm:pr-6">
             <FriendlyIcon kind="choice" tone="butter" size="lg" className="-rotate-3" />
             <div className="min-w-0 py-1">
-              <p className="font-display text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-[#77570c] sm:text-[0.68rem]">
+              <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-[#77570c]">
                 {content.stampEyebrow}
               </p>
               <strong className="mt-0.5 block font-friendly text-xl font-bold leading-none text-[#075f46] sm:text-2xl">
                 {content.stampTime}
               </strong>
-              <span className="mt-1 block text-[0.68rem] font-semibold leading-4 text-slate-600 sm:text-xs">
+              <span className="mt-1 block text-sm font-semibold leading-5 text-slate-600">
                 {content.stampText}
               </span>
             </div>
@@ -208,7 +208,7 @@ const DentalZahnCheck = () => {
                   <h3 className="mt-7 max-w-[24ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">
                     {question.text}
                   </h3>
-                  {question.hint && <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">{question.hint}</p>}
+                  {question.hint && <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">{question.hint}</p>}
 
                   <div className="mt-8 grid gap-3">
                     {options.map(([value, option]) => (
@@ -216,13 +216,13 @@ const DentalZahnCheck = () => {
                         key={value}
                         type="button"
                         onClick={() => answer(currentQuestionId, value)}
-                        className="group flex min-h-[4.75rem] w-full items-center justify-between gap-5 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-left shadow-[0_7px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-[#25c990] hover:bg-[#f0fbf6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-2 motion-reduce:transform-none"
+                        className="group flex min-h-[4.75rem] w-full items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-left sm:gap-5 sm:px-5 shadow-[0_7px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-[#25c990] hover:bg-[#f0fbf6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-offset-2 motion-reduce:transform-none"
                       >
                         <span>
                           <span className="block font-display text-base font-extrabold text-slate-950 sm:text-lg">
                             {option.label}
                           </span>
-                          {option.sub && <span className="mt-1 block text-sm text-slate-500">{option.sub}</span>}
+                          {option.sub && <span className="mt-1 block text-base text-slate-600">{option.sub}</span>}
                         </span>
                         <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-slate-100 text-slate-400 transition group-hover:bg-[#25c990] group-hover:text-[#07111f]">
                           <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -246,7 +246,7 @@ const DentalZahnCheck = () => {
                     {content.resultEyebrow}
                   </div>
 
-                  <p className="mt-7 font-display text-xs font-extrabold uppercase tracking-[0.16em] text-[#087654]">
+                  <p className="mt-7 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-[#087654]">
                     {result.insurer}
                   </p>
                   <h3 className="mt-3 max-w-[22ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">
@@ -254,10 +254,10 @@ const DentalZahnCheck = () => {
                   </h3>
                   <p className="mt-4 max-w-2xl leading-7 text-slate-600">{result.text}</p>
 
-                  <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                  <ul className="mt-6 grid gap-3 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                     {result.reasons.map((reason) => (
-                      <li key={reason} className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-700">
-                        <Check className="mb-3 h-5 w-5 text-[#0b8b63]" aria-hidden="true" />
+                      <li key={reason} className="rounded-2xl bg-slate-50 p-4 text-base leading-7 text-slate-700 lg:flex lg:gap-3 xl:block">
+                        <Check className="mb-3 h-5 w-5 shrink-0 text-[#0b8b63] lg:mb-0 lg:mt-1 xl:mb-3 xl:mt-0" aria-hidden="true" />
                         {reason}
                       </li>
                     ))}
@@ -265,7 +265,7 @@ const DentalZahnCheck = () => {
 
                   <div className="mt-6 flex items-start gap-3 rounded-2xl border border-[#f2d794] bg-[#fff8df] p-4">
                     <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-[#9a6d00]" aria-hidden="true" />
-                    <p className="text-sm leading-6 text-slate-700">
+                    <p className="text-base leading-7 text-slate-700">
                       <strong className="text-slate-950">{content.warningLabel}</strong> {result.warning}
                     </p>
                   </div>
@@ -310,20 +310,20 @@ const DentalZahnCheck = () => {
                       href={LKH_GUIDELINE_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#087654] underline underline-offset-4"
+                      className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#087654] underline underline-offset-4"
                     >
                       {result.sourceLabel}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                     </a>
                   )}
-                  <p className="mt-3 text-xs leading-5 text-slate-400">{result.note}</p>
+                  <p className="mt-3 text-base leading-7 text-slate-600">{result.note}</p>
 
                   <div className="mt-7 rounded-2xl border border-[#a6e9d2] bg-[#effbf6] p-5">
-                    <p className="font-display text-sm font-extrabold leading-6 text-[#075c43]">{content.bonusLead}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">{content.bonusDetail}</p>
+                    <p className="font-display text-base font-extrabold leading-7 text-[#075c43]">{content.bonusLead}</p>
+                    <p className="mt-1 text-base leading-7 text-slate-600">{content.bonusDetail}</p>
                     <a
                       href="#kassenbonus"
                       onClick={scrollToBonus}
-                      className="mt-3 inline-flex min-h-11 items-center gap-2 font-display text-sm font-extrabold text-[#075c43] underline decoration-[#25c990] decoration-2 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]"
+                      className="mt-3 inline-flex min-h-11 items-center gap-2 font-display text-base font-extrabold text-[#075c43] underline decoration-[#25c990] decoration-2 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]"
                     >
                       {content.bonusCta}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -333,10 +333,10 @@ const DentalZahnCheck = () => {
             </AnimatePresence>
           </div>
 
-          <div className="mt-5 flex flex-col items-center justify-center gap-2 text-center text-xs leading-5 text-slate-400 sm:flex-row sm:gap-5">
-            <span className="inline-flex items-center gap-2"><Lock className="h-4 w-4" aria-hidden="true" />{content.trust}</span>
-            <span className="hidden h-1 w-1 rounded-full bg-slate-600 sm:block" aria-hidden="true" />
-            <span>{content.disclaimer}</span>
+          {/* Beide Hinweise untereinander: in 16 px passen sie nicht mehr sauber nebeneinander. */}
+          <div className="mt-5 flex flex-col items-center justify-center gap-1 text-center text-base leading-7 text-slate-300">
+            <span><Lock className="mr-2 inline-block h-4 w-4 align-[-0.15em]" aria-hidden="true" />{content.trust}</span>
+            <span className="max-w-2xl">{content.disclaimer}</span>
           </div>
         </div>
       </div>

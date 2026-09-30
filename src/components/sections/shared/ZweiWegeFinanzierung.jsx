@@ -63,18 +63,18 @@ const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white' }) 
           <div>
             <h2 id={`zwei-wege-${produkt}-heading`} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight [text-wrap:balance] sm:text-3xl">{fill(copy.title)}</h2>
             <p className="mt-2 text-base leading-7 text-home-slate">{copy.lead}</p>
-            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-4 inline-flex items-center font-display text-sm font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950">
+            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-4 inline-flex items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950">
               {copy.cta}
               <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
             {copy.ways.map((way, index) => (
               <article key={way.title} className="flex gap-4">
                 <FriendlyIcon kind={ICONS[index].kind} tone={ICONS[index].tone} size="sm" />
                 <div className="min-w-0">
                   <h3 className="font-display text-lg font-extrabold leading-snug text-home-midnight">{way.title}</h3>
-                  <p className="mt-1.5 text-sm leading-6 text-home-slate">{fill(way.text)}</p>
+                  <p className="mt-1.5 text-base leading-7 text-home-slate">{fill(way.text)}</p>
                 </div>
               </article>
             ))}

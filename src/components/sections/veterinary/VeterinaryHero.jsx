@@ -37,7 +37,7 @@ const VeterinaryHero = () => {
         >
           <div className="mb-6 flex items-center gap-4">
             <span className="h-px w-10 bg-[#76e2bd] sm:w-16" aria-hidden="true" />
-            <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.25em] text-[#8ee7ca] sm:text-xs">
+            <p className="font-display text-xs font-extrabold uppercase tracking-[0.25em] text-[#8ee7ca]">
               {t('hero.eyebrow')}
             </p>
           </div>
@@ -64,7 +64,7 @@ const VeterinaryHero = () => {
               {t('hero.cta')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <p className="max-w-[330px] border-l border-white/20 pl-4 text-xs leading-relaxed text-slate-300 sm:text-sm">
+            <p className="max-w-[330px] border-l border-white/20 pl-4 text-base leading-relaxed text-slate-300">
               {t('hero.microcopy')}
             </p>
           </div>

@@ -226,7 +226,7 @@ const AmbulantBonusCalculator = ({
                   : <React.Fragment key={i}>{part}</React.Fragment>
               )}
             </h2>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-gray-600">
+            <p className="mt-2 text-base font-medium leading-relaxed text-gray-600">
               {t('bonusCalculator.subtitle')}
             </p>
           </div>
@@ -263,9 +263,9 @@ const AmbulantBonusCalculator = ({
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
             <h3 className="text-2xl font-bold text-healio-dark mb-2">{t('bonusCalculator.selectActivities')}</h3>
-            <p className="mb-6 text-sm font-medium text-gray-500">{t('bonusCalculator.exampleNote')}</p>
+            <p className="mb-6 text-base font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
               {ACTIVITIES.map((activity, index) => {
                 const def = ACTIVITY_DEFS[index];
                 const isMulti = !!def.countable;
@@ -311,16 +311,16 @@ const AmbulantBonusCalculator = ({
                         />
                       </div>
                     )}
-                    <div className="flex-1 min-w-0 hyphens-auto [overflow-wrap:anywhere]" lang={i18n.language?.startsWith('en') ? 'en' : 'de'}>
+                    <div className="flex-1 min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4] [overflow-wrap:anywhere]" lang={i18n.language?.startsWith('en') ? 'en' : 'de'}>
                       <div className="font-bold text-healio-dark leading-tight mb-1">
                         {activity.title}
-                        {def.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-700 text-[10px] uppercase font-bold px-1.5 py-0.5 rounded">{t('bonusCalculator.tip')}</span>}
+                        {def.tip && <span className="ml-2 inline-block bg-amber-100 text-amber-800 text-xs uppercase font-bold px-1.5 py-0.5 rounded">{t('bonusCalculator.tip')}</span>}
                       </div>
-                      <div className={`text-sm leading-snug ${def.tip ? 'text-amber-600 font-medium' : 'text-gray-500'}`}>
+                      <div className={`text-base leading-snug ${def.tip ? 'text-amber-700 font-medium' : 'text-gray-600'}`}>
                         {activity.desc}
                       </div>
                       {isMulti && (
-                        <div className="flex items-center gap-2 mt-2">
+                        <div className="flex flex-wrap items-center gap-2 mt-2">
                           <button
                             type="button"
                             onClick={() => handleCount(def.id, -1, def.max)}
@@ -340,19 +340,22 @@ const AmbulantBonusCalculator = ({
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="ml-1 shrink-0 whitespace-nowrap text-xs text-gray-400">
+                          <span className="ml-1 shrink-0 whitespace-nowrap text-sm text-gray-500">
                             {def.max ? `${t('bonusCalculator.max')} ${def.max}` : activity.unit}
                           </span>
                         </div>
                       )}
-                    </div>
-                    <div className={`whitespace-nowrap flex-shrink-0 text-right ${statusBlocked ? 'text-amber-700' : 'text-healio-primary'}`}>
-                      {isMulti && count > 1 && (
-                        <span className="block text-[11px] font-normal text-gray-400">{count}×</span>
-                      )}
-                      <span className="block text-xs font-bold">{displayCash} € {t('bonusCalculator.cashShort')}</span>
-                      <span className="block text-sm font-extrabold">{displaySubsidy} € {t('bonusCalculator.subsidyShort')}</span>
-                      {statusBlocked && <span className="block text-[10px] font-bold">{t('bonusCalculator.notCounted')}</span>}
+                      {/* Beträge unter dem Text statt in einer eigenen rechten Spalte:
+                          So bleibt für Titel und Beschreibung in 16 px genug Breite
+                          (Frank 30.09.2026: Schrift zu klein). */}
+                      <div className={`mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 whitespace-nowrap ${statusBlocked ? 'text-amber-700' : 'text-[#0b7a57]'}`}>
+                        {isMulti && count > 1 && (
+                          <span className="text-sm font-normal text-gray-500">{count}×</span>
+                        )}
+                        <span className="text-sm font-bold">{displayCash} € {t('bonusCalculator.cashShort')}</span>
+                        <span className="text-base font-extrabold">{displaySubsidy} € {t('bonusCalculator.subsidyShort')}</span>
+                        {statusBlocked && <span className="text-sm font-bold">{t('bonusCalculator.notCounted')}</span>}
+                      </div>
                     </div>
                   </motion.div>
                 );
@@ -360,7 +363,7 @@ const AmbulantBonusCalculator = ({
             </div>
 
             {hasBlockedStatusValue && (
-              <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium leading-relaxed text-amber-900" role="status">
+              <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-base font-medium leading-relaxed text-amber-900" role="status">
                 {t('bonusCalculator.statusCondition')}
               </div>
             )}
@@ -368,16 +371,16 @@ const AmbulantBonusCalculator = ({
             {/* Vertrauens-Hinweis */}
             <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex gap-3 items-start">
               <HeartHandshake className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-700" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
-                <p className="text-sm text-blue-800 leading-relaxed">
+              <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
+                <p className="text-base font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
+                <p className="text-base text-blue-800 leading-relaxed">
                   {t('bonusCalculator.trustNoteDesc')}
                 </p>
                 <a
                   href={IKK_BONUS_2026_INFO}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex text-xs font-bold text-blue-900 underline decoration-blue-400 underline-offset-2 hover:text-blue-700"
+                  className="mt-2 inline-flex text-sm font-bold text-blue-900 underline decoration-blue-400 underline-offset-2 hover:text-blue-700"
                 >
                   {t('bonusCalculator.officialSource')}
                 </a>
@@ -387,9 +390,9 @@ const AmbulantBonusCalculator = ({
             {/* Apple Watch Hinweis */}
             <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
               <Watch className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-700" aria-hidden="true" />
-              <div>
-                <p className="text-sm font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
-                <p className="text-sm text-purple-800 leading-relaxed">
+              <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
+                <p className="text-base font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
+                <p className="text-base text-purple-800 leading-relaxed">
                   {t('bonusCalculator.appleWatchNoteDesc')}
                 </p>
               </div>
@@ -398,7 +401,7 @@ const AmbulantBonusCalculator = ({
             <div className="mt-4 text-center md:text-left">
               <button
                 onClick={handleReset}
-                className="text-gray-400 hover:text-healio-dark underline text-sm font-medium transition-colors"
+                className="text-gray-500 hover:text-healio-dark underline text-base font-medium transition-colors"
               >
                 {t('bonusCalculator.resetSelection')}
               </button>
@@ -411,7 +414,7 @@ const AmbulantBonusCalculator = ({
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-8 shadow-xl lg:p-10"
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-6 shadow-xl sm:p-8 xl:p-10"
             >
               <div className="relative z-10 text-center">
                 <h3 className="text-xl lg:text-2xl font-semibold text-white mb-4">
@@ -435,13 +438,13 @@ const AmbulantBonusCalculator = ({
 
                 {/* Netto-Vergleich mit editierbarem Beitrag */}
                 <div className="bg-white/15 rounded-xl p-4 mb-6 backdrop-blur-sm">
-                  <p className="text-white/80 text-sm font-medium mb-3">{tariffInfoText || t('bonusCalculator.tariffInfo')}</p>
+                  <p className="text-white/85 text-base font-medium mb-3">{tariffInfoText || t('bonusCalculator.tariffInfo')}</p>
 
                   {/* Editierbarer Monatsbeitrag */}
-                  <div className="flex justify-between items-center text-white text-sm mb-2">
+                  <div className="flex flex-wrap justify-between items-center gap-x-3 gap-y-1 text-left text-white text-base mb-2">
                     <span>{t('bonusCalculator.yourMonthly')}</span>
                     {beitragEditing ? (
-                      <div className="flex items-center gap-1">
+                      <div className="ml-auto flex shrink-0 items-center gap-1">
                         <input
                           ref={beitragInputRef}
                           type="text"
@@ -451,7 +454,7 @@ const AmbulantBonusCalculator = ({
                           onChange={handleBeitragChange}
                           onBlur={handleBeitragBlur}
                           onKeyDown={(e) => e.key === 'Enter' && handleBeitragBlur()}
-                          className="w-16 bg-white/20 border border-white/40 rounded px-2 py-0.5 text-white text-right font-bold text-sm focus:outline-none focus:border-white"
+                          className="w-20 bg-white/20 border border-white/40 rounded px-2 py-0.5 text-white text-right font-bold text-base focus:outline-none focus:border-white"
                         />
                         <span className="font-bold">€</span>
                       </div>
@@ -460,7 +463,7 @@ const AmbulantBonusCalculator = ({
                         type="button"
                         onClick={() => setBeitragEditing(true)}
                         aria-label={t('bonusCalculator.editMonthlyLabel', { amount: formatEuro(monatsbeitrag) })}
-                        className="flex items-center gap-1.5 font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
+                        className="ml-auto flex shrink-0 items-center gap-1.5 whitespace-nowrap font-bold hover:bg-white/10 rounded px-2 py-0.5 transition-colors group"
                       >
                         <span>{formatEuro(monatsbeitrag)} {t('bonusCalculator.perMonth')}</span>
                         <Pencil className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -468,31 +471,31 @@ const AmbulantBonusCalculator = ({
                     )}
                   </div>
 
-                  <div className="flex justify-between text-white text-sm mb-1">
+                  <div className="flex flex-wrap justify-between gap-x-3 text-left text-white text-base mb-1">
                     <span>{t('bonusCalculator.yearlyContribution')}</span>
-                    <span className="font-bold">{formatEuro(jahresbeitrag)} €</span>
+                    <span className="ml-auto shrink-0 whitespace-nowrap font-bold">{formatEuro(jahresbeitrag)} €</span>
                   </div>
-                  <div className="flex justify-between text-white text-sm mb-1">
+                  <div className="flex flex-wrap justify-between gap-x-3 text-left text-white text-base mb-1">
                     <span>{t('bonusCalculator.subsidyPotentialLabel')}</span>
-                    <span className="font-bold">{formatEuro(totalSubsidyPotential)} €</span>
+                    <span className="ml-auto shrink-0 whitespace-nowrap font-bold">{formatEuro(totalSubsidyPotential)} €</span>
                   </div>
-                  <div className="flex justify-between text-sm pt-2 border-t border-white/30 font-extrabold text-green-100">
+                  <div className="flex flex-wrap justify-between gap-x-3 text-left text-base pt-2 border-t border-white/30 font-extrabold text-green-100">
                     <span>{t('bonusCalculator.eligibleSubsidyLabel')}</span>
-                    <span>{formatEuro(anrechenbarerZuschuss)} €</span>
+                    <span className="ml-auto shrink-0 whitespace-nowrap">{formatEuro(anrechenbarerZuschuss)} €</span>
                   </div>
 
-                  <div className="mt-3 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-left text-sm text-white">
+                  <div className="mt-3 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-left text-base text-white">
                     <span className="font-semibold">{t('bonusCalculator.orCashBonus')}</span>{' '}
-                    <span className="font-extrabold">{formatEuro(totalCashBonus)} €</span>
+                    <span className="whitespace-nowrap font-extrabold">{formatEuro(totalCashBonus)} €</span>
                   </div>
 
                   {ungenutztesZuschusspotenzial > 0 && (
-                    <p className="mt-3 text-left text-xs leading-relaxed text-white/85">
+                    <p className="mt-3 text-left text-base leading-relaxed text-white/85">
                       {t('bonusCalculator.unusedPotential', { amount: formatEuro(ungenutztesZuschusspotenzial) })}
                     </p>
                   )}
 
-                  <p className="mt-2 text-xs text-white/80">
+                  <p className="mt-2 text-base leading-relaxed text-white/85">
                     {t(customMonatsbeitrag === null ? 'bonusCalculator.editHint' : 'bonusCalculator.customPremiumNote')}
                   </p>
                 </div>
@@ -503,7 +506,7 @@ const AmbulantBonusCalculator = ({
                     {t('bonusCalculator.effectiveTitle')}
                   </p>
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-gray-600 text-sm font-medium">{t('bonusCalculator.effectiveCosts')}</span>
+                    <span className="text-gray-600 text-base font-medium">{t('bonusCalculator.effectiveCosts')}</span>
                     <AnimatePresence mode="popLayout">
                       <motion.span
                         key={effektivKosten}
@@ -517,26 +520,26 @@ const AmbulantBonusCalculator = ({
                     </AnimatePresence>
                   </div>
                   {effektivKosten === 0 && totalSubsidyPotential > 0 && (
-                    <p className="text-healio-primary text-xs font-bold mt-1">
+                    <p className="text-[#0b7a57] text-sm font-bold mt-1">
                       {t('bonusCalculator.effectiveZeroNote')}
                     </p>
                   )}
                   <div className="my-3 border-t border-gray-100" />
                   <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-                    <span className="text-gray-600 text-sm font-medium">{effectiveLabel || t('bonusCalculator.effectiveBudget')}</span>
-                    <span className="text-2xl font-extrabold text-healio-dark">{effectiveValue || t('bonusCalculator.effectiveBudgetValue')}</span>
+                    <span className="text-gray-600 text-base font-medium">{effectiveLabel || t('bonusCalculator.effectiveBudget')}</span>
+                    <span className="min-w-0 text-2xl font-extrabold text-healio-dark hyphens-auto [hyphenate-limit-chars:10_4_4]">{effectiveValue || t('bonusCalculator.effectiveBudgetValue')}</span>
                   </div>
-                  <p className="text-gray-400 text-xs mt-3 leading-relaxed">
+                  <p className="text-gray-600 text-base mt-3 leading-relaxed">
                     {effectiveNote || t('bonusCalculator.effectiveNote')}
                   </p>
                 </div>
 
-                <p className="text-white/90 text-sm leading-relaxed mb-8 max-w-sm mx-auto font-medium">
+                <p className="text-white/90 text-base leading-relaxed mb-8 max-w-sm mx-auto font-medium">
                   {bonusPayoutText || t('bonusCalculator.bonusPayout')}
-                  <span className="mt-2 block text-xs text-white/80">{t('bonusCalculator.choiceDisclaimer')}</span>
+                  <span className="mt-2 block text-base text-white/85">{t('bonusCalculator.choiceDisclaimer')}</span>
                 </p>
 
-                {calculatorHint && <p className="mb-4 text-left text-sm leading-6 text-white/90" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>}
+                {calculatorHint && <p className="mb-4 text-left text-base leading-7 text-white/90" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>}
                 <div className="flex flex-col gap-4">
                   {ctaOverride ? (
                     <a

@@ -38,8 +38,8 @@ const ExplainerVideoCard = ({
             <Play className="h-3.5 w-3.5 fill-current" />
           </span>
           <div className="min-w-0">
-            <p className="font-display text-[0.62rem] font-extrabold uppercase tracking-[0.2em] text-emerald-700 sm:text-[0.68rem]">{eyebrow}</p>
-            <h2 id={headingId} className="mt-0.5 font-display text-sm font-extrabold leading-snug text-home-midnight sm:text-base">{title}</h2>
+            <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{eyebrow}</p>
+            <h2 id={headingId} className="mt-0.5 font-display text-base font-extrabold leading-snug text-home-midnight sm:text-lg">{title}</h2>
           </div>
         </div>
       </div>
