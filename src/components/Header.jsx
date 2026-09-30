@@ -133,13 +133,13 @@ const Header = () => {
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
     },
-    // Ratgeber-Hub mit allen Artikeln (Frank 29.09.2026). Den Hub gibt es nur
-    // auf Deutsch; auf Englisch entfällt der Punkt. Bewusst nicht auf die
-    // reine Blogliste (Prüfvertrag vom 17.07.).
-    ...(lang === 'en' ? [] : [{ to: '/ratgeber', label: t('nav.ratgeber'), type: 'link' }]),
     { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
+    // Ratgeber-Hub mit allen Artikeln (Frank 29.09.2026), seit 30.09. zwischen
+    // Über Healio und Kontakt. Den Hub gibt es nur auf Deutsch; auf Englisch
+    // entfällt der Punkt. Bewusst nicht auf die reine Blogliste (Prüfvertrag vom 17.07.).
+    ...(lang === 'en' ? [] : [{ to: '/ratgeber', label: t('nav.ratgeber'), type: 'link' }]),
     { to: getPath('kontakt'), label: t('nav.kontakt'), type: 'link' },
   ];
 
