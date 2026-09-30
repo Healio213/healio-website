@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Check, Info } from 'lucide-react';
+import { Check, Heart, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
@@ -25,13 +25,26 @@ const TOPICS = {
     leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
     seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
-    imageAlt: 'Schwangere Frau sitzt lächelnd auf dem Sofa',
     protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
     caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
 
+};
+
+// Drei Angebote im Hero (Frank 30.09.2026: Aufbau wie /stationaer, dazu eine
+// Wohlfühl-Atmosphäre). Aussagen aus Titel, Bonus-Abschnitt, paths[0] und
+// hospitalArguments[0]; jede Karte springt zu ihrem Abschnitt.
+const heroOffers = [
+  { href: '#bonus-check', code: 'Kassenbonus', label: 'Bis zu 1.155\u00a0EUR laut Satzung', note: 'IKK classic, jede Vorsorge zählt einzeln', tone: 'rose' },
+  { href: '#zusatzschutz', code: 'Ambulant, jetzt', label: 'Vorsorge ohne Wartezeit', note: 'Auch wenn deine Schwangerschaft schon festgestellt ist', tone: 'mint' },
+  { href: '#klinikschutz', code: 'Dein Kind', label: 'Ohne Gesundheitsprüfung versichert', note: 'Wenn ein Elternteil am Tag der Geburt im Klinik-Tarif versichert ist', tone: 'butter' },
+];
+const offerTone = {
+  rose: { border: 'border-[#f2c9d4]', dot: 'bg-[#e27d9b]' },
+  mint: { border: 'border-[#b9e6d6]', dot: 'bg-[#25c990]' },
+  butter: { border: 'border-[#ead8a7]', dot: 'bg-[#e6b946]' },
 };
 
 // Drei getrennte Wege, damit Anzeigen direkt auf den passenden Abschnitt zeigen können.
@@ -152,33 +165,69 @@ export default function BenefitFunnelPage() {
           dann zwei Wege. Alle Einschränkungen bleiben vollständig, stehen aber
           in Aufklappern statt als Textwand. Sprungmarken der Anzeigen bleiben. */}
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
-        {/* Hero mit Foto statt vergrößerter Figur (Frank 30.09.2026: Hero muss
-            besser werden). Überschrift kräftig, die Zahl in Grün. */}
-        <section className="relative isolate overflow-hidden bg-home-ice pb-12 pt-28 md:pb-20 md:pt-36">
-          <div className="absolute -right-24 top-24 -z-10 h-[26rem] w-[26rem] rounded-full bg-home-mint/[0.16] blur-3xl" aria-hidden="true" />
-          <div className={`${wrap} grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12`}>
-            <div>
-              <h1 className="max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[3.6rem]">
+        {/* Hero mit Wohlfühl-Atmosphäre (Frank 30.09.2026: Aufbau wie /stationaer,
+            "süß", die Schwangeren sollen sich wohlfühlen): warme Creme- und
+            Rosétöne, weiche Lichtflecken, die Schwangeren-Figur groß in der
+            Karte und daneben die drei Angebote. */}
+        <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#fff8f3] via-[#fdf0f2] to-[#f1f8f4] pb-14 pt-28 md:pb-20 md:pt-32">
+          <div className="absolute -left-24 top-20 -z-10 h-80 w-80 rounded-full bg-[#f7c9d4]/40 blur-3xl" aria-hidden="true" />
+          <div className="absolute -right-16 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#bfe9d8]/40 blur-3xl" aria-hidden="true" />
+          <div className="absolute left-1/2 top-8 -z-10 h-64 w-64 rounded-full bg-[#ffe3c2]/45 blur-3xl" aria-hidden="true" />
+          <div className="absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle_at_center,#f3c6d0_1px,transparent_1px)] [background-size:26px_26px]" aria-hidden="true" />
+          <div className={`${wrap} grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12`}>
+            <div className="min-w-0">
+              <p className="inline-flex items-center gap-2 rounded-full bg-white/75 px-4 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-[#b0476a] shadow-[0_6px_18px_rgba(176,71,106,0.10)]">
+                <Heart className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                Für dich und dein Baby
+              </p>
+              <h1 className="mt-5 max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[3.4rem]">
                 <HighlightText text={config.title} className="text-[#087654]" />
               </h1>
               <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:text-xl">{config.lead}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
-                <a href="#klinikschutz" className={secondary}>Klinikschutz für dein Kind</a>
+                <a href="#klinikschutz" className={`${secondary} bg-white/60`}>Klinikschutz für dein Kind</a>
               </div>
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
-            <div className="mx-auto w-full max-w-[24rem] overflow-hidden rounded-[2rem] bg-[#ece6da] shadow-[0_24px_60px_rgba(7,17,31,0.12)] md:max-w-[27rem]">
-              <img
-                src="/images/schwangerschaft-hero-684.webp"
-                srcSet="/images/schwangerschaft-hero-480.webp 480w, /images/schwangerschaft-hero-684.webp 684w"
-                sizes="(min-width: 768px) 432px, 384px"
-                alt={config.imageAlt}
-                width="684"
-                height="855"
-                {...{ fetchpriority: 'high' }}
-                className="aspect-[4/5] h-auto w-full object-cover"
-              />
+
+            <div className="relative mx-auto min-w-0 w-full max-w-[35rem]" aria-label="Was jetzt für dich drin ist">
+              <Heart className="absolute -left-3 top-6 z-30 h-7 w-7 -rotate-12 fill-[#f5b8c6] text-[#f5b8c6]" aria-hidden="true" />
+              <Heart className="absolute -right-2 -top-3 z-30 h-5 w-5 rotate-12 fill-[#f7cdd6] text-[#f7cdd6]" aria-hidden="true" />
+              <Heart className="absolute -bottom-3 right-16 z-30 h-4 w-4 rotate-6 fill-[#bfe9d8] text-[#bfe9d8]" aria-hidden="true" />
+              <div className="relative overflow-hidden rounded-[2.2rem] border border-[#f3d6de] bg-gradient-to-br from-[#fff6f8] via-white to-[#fff8ec] p-5 shadow-[0_30px_80px_rgba(176,71,106,0.16)] sm:p-7">
+                <div className="relative grid grid-cols-1 items-end gap-2 sm:min-h-[27rem] sm:grid-cols-[0.85fr_1.15fr]">
+                  <div className="relative z-10 mx-auto min-w-0 self-end sm:mx-0">
+                    <img
+                      src="/images/friendly-icons/pregnancy.webp"
+                      alt=""
+                      width="512"
+                      height="512"
+                      loading="eager"
+                      decoding="async"
+                      {...{ fetchpriority: 'high' }}
+                      className="w-[10rem] max-w-none sm:-ml-6 sm:w-[17rem]"
+                    />
+                  </div>
+                  <div className="relative z-20 flex min-w-0 flex-col gap-3 self-center py-4">
+                    <p className="mb-1 font-display text-base font-extrabold leading-tight text-[#b0476a] sm:text-lg">Was jetzt für dich drin ist</p>
+                    {heroOffers.map((offer) => (
+                      <a
+                        key={offer.href}
+                        href={offer.href}
+                        className={`block rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(176,71,106,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(176,71,106,0.14)] motion-reduce:transform-none ${focus} ${offerTone[offer.tone].border}`}
+                      >
+                        <span className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">{offer.code}</span>
+                          <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${offerTone[offer.tone].dot}`} aria-hidden="true" />
+                        </span>
+                        <span className="mt-1 block font-display text-base font-extrabold leading-tight text-home-midnight sm:text-lg">{offer.label}</span>
+                        <span className="mt-1 block text-[0.95rem] leading-snug text-home-slate sm:text-base">{offer.note}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
