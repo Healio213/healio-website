@@ -176,7 +176,7 @@ export default function BenefitFunnelPage() {
                 alt={config.imageAlt}
                 width="684"
                 height="855"
-                fetchpriority="high"
+                {...{ fetchpriority: 'high' }}
                 className="aspect-[4/5] h-auto w-full object-cover"
               />
             </div>

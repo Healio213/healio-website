@@ -99,7 +99,7 @@ const ZahnPage = () => {
                 alt={content.hero.photoAlt}
                 width="1200"
                 height="1005"
-                fetchpriority="high"
+                {...{ fetchpriority: 'high' }}
                 className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%] lg:h-full lg:max-h-none lg:object-[center_35%]"
               />
             </picture>
