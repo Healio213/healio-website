@@ -1,19 +1,21 @@
-# Vorschlag: Abschnitt zur App Healio Tree in der Datenschutzerklärung
+# Abschnitt zur App Healio Tree in der Datenschutzerklärung
 
-**Status: VORSCHLAG, NICHT EINGEBAUT.** Stand 28.09.2026. Frank entscheidet, ob und wann dieser Abschnitt auf healio.de/datenschutz erscheint.
+**Status: EINGEBAUT im Zweig `release/datenschutz-healio-tree`, nicht veröffentlicht.** Stand 30.09.2026. Veröffentlicht wird nur über `main` (DEPLOY.md), und nur mit Franks Freigabe.
 
-## Anlass
+## Was eingebaut ist
 
-Die Datenschutzerklärung auf healio.de erwähnt die App Healio Tree bisher nicht. Der neue Abschnitt „Anfragen zu Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner“ (eingebaut, `src/i18n/locales/de/legal.json`, Schlüssel `anlage*`) nennt die App nur als Weg, über den die E-Mail vorbereitet wird. Seit der Überarbeitung vom 28.09.2026 steht er als eigener Abschnitt nach „Eingesetzte Dienste und Drittanbieter“, weil es nicht um Daten der Website geht. Voraussetzung für die Veröffentlichung: Der Anfrageweg Geldanlage in der App bietet kein WhatsApp mehr an (siehe `Steuerlogik-App/33_Datenschutz_healio_de_Entwurf.md`).
+Neuer Abschnitt „App Healio Tree“ (Anker `#healio-tree`) nach „Eingesetzte Dienste und Drittanbieter“ und vor „3. Benutzerrechte“, Texte in `src/i18n/locales/de/legal.json` und `en/legal.json` (Schlüssel `app*`, `anlage*`, `kanzlei*`, `mailboxTitle`), Aufbau in `src/pages/DatenschutzPage.jsx`:
 
-## Vorgeschlagener Text (Sie-Form, Platz: eigener Abschnitt direkt vor „Anfragen zu Geldanlage und Kapitalanlage“, also nach den eingesetzten Diensten)
-
-**App Healio Tree**
-
-Die App Healio Tree rechnet auf Ihrem Gerät. Ihre Angaben, Szenarien und Einstellungen bleiben dort und werden nicht an Healio übertragen. Eine Anfrage erreicht uns erst, wenn Sie sie selbst absenden, derzeit per E-Mail oder WhatsApp aus der App heraus, Anfragen zu Geldanlage und Kapitalanlage nur per E-Mail. Welche Angaben eine solche Anfrage enthält und wie wir sie verarbeiten, steht im Abschnitt „Anfragen zu Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner“.
+- App: rechnet und speichert nur auf dem Gerät, kein Server, kein Konto, kein Tracking, Chat aus, App-Stores, Links.
+- `#anfragen-app`: Anfragen nur als E-Mail an info@healio.de, die die Person selbst abschickt, nicht über WhatsApp.
+- `#anfragen-versicherung`: Healios eigene Themen (Fassung `anfrage-2026-09-29`).
+- `#anfragen-geldanlage`: Geldanlage und Kapitalanlage, Weitergabe an Kooperationspartner nur nach Zustimmung (Fassung `anlage-2026-09-29`).
+- `#anfragen-kanzlei`: „Steuerberater gesucht“ (Fassung `kanzlei-2026-09-30`).
+- `#aufbewahrung-anfragen`: Postfach bei Google Workspace, Anfrage bis erledigt und höchstens 180 Tage, Nachweis fünf Jahre (Label `Healio Tree/Anfragen` und `Healio Tree/Nachweise`).
+- `#widerruf-app`: Widerruf per E-Mail und über die vorbereitete E-Mail in der App.
 
 ## Grundlage und Grenzen
 
-- Quelle: `Steuerlogik-App/server/DATENSCHUTZ.md` Abschnitt 1 („Was bleibt auf deinem Gerät?“), `app/src/healio/anfrage.ts` (Anfrage wird lokal gespeichert, Versand per WhatsApp oder E-Mail mit vorausgefülltem Text), `app/src/inhalt/themenTexte.ts` („Das Absenden direkt aus der App kommt später.“).
-- Der Satz „bleiben dort“ gilt nur, solange der Erklär-Chat im Beispielmodus läuft (Fassung `chat-2026-09-25` nicht freigegeben) und die App nicht selbst an den Server sendet. Sobald Chat oder Direktversand live gehen, braucht die Erklärung eigene Abschnitte dafür (Entwurf in `server/DATENSCHUTZ.md`: Supabase Frankfurt, Anthropic USA, Tageszähler, Protokolle).
-- Allgemeine Anfragen aus der App zu Vorsorge und Absicherung (Einwilligung `anfrage-2026-09-25`) deckt die Erklärung noch nicht eigens ab.
+- Quellen: `Steuerlogik-App/33_Datenschutz_healio_de_Entwurf.md`, `Steuerlogik-App/app/src/online/einwilligungen.json`, `Steuerlogik-App/app/src/healio/anfrage.ts` und `anfrageMail.ts`, `Steuerlogik-App/server/DATENSCHUTZ.md`, `Steuerlogik-App/recht/EINWILLIGUNGEN_UND_NACHWEISE.md` Abschnitt 2 und 3.
+- Die Sätze „speichert nur auf Ihrem Gerät“ und „mit keinem Server verbunden“ gelten, solange `extra.online.basisUrl` in `app.json` leer und `extra.funktionen.chat` aus ist. Gehen Chat oder Direktversand über den Server live, braucht die Erklärung vorher eigene Abschnitte (Entwurf in `server/DATENSCHUTZ.md`: Supabase Frankfurt, Anthropic USA, Tageszähler, Protokolle).
+- Nicht geprüft: ob der Workspace-Tarif Google Vault hat und wo Google speichert. Die Erklärung sagt deshalb nicht „in Deutschland“.

@@ -53,6 +53,10 @@ const DatenschutzPage = () => {
               <p className="lead text-xl text-gray-600 mb-8">
                 {t('datenschutz.intro')}
               </p>
+              <p>
+                {t('datenschutz.appPointer')}{' '}
+                <a href="#healio-tree" className="text-healio-primary hover:underline">{t('datenschutz.appPointerLink')}</a>.
+              </p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section1Title')}</h2>
               <div className="bg-gray-50 p-6 rounded-xl mb-8">
@@ -154,7 +158,22 @@ const DatenschutzPage = () => {
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>
               <p>{t('datenschutz.insurerFlowsText')}</p>
 
-              <h2 id="anfragen-geldanlage" className="scroll-mt-28 text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.anlageTitle')}</h2>
+              <h2 id="healio-tree" className="scroll-mt-28 text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.appTitle')}</h2>
+              <p>{t('datenschutz.appIntro')}</p>
+              <p>{t('datenschutz.appNoTracking')}</p>
+              <p>{t('datenschutz.appStores')}</p>
+              <p>{t('datenschutz.appLinks')}</p>
+
+              <h3 id="anfragen-app" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.appRequestTitle')}</h3>
+              <p>{t('datenschutz.appRequestText')}</p>
+              <p>{t('datenschutz.appRequestChannel')}</p>
+              <p>{t('datenschutz.appRequestHealth')}</p>
+
+              <h3 id="anfragen-versicherung" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.appHealioTitle')}</h3>
+              <p>{t('datenschutz.appHealioText')}</p>
+              <p>{t('datenschutz.appHealioPurpose')}</p>
+
+              <h3 id="anfragen-geldanlage" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.anlageTitle')}</h3>
               <p>{t('datenschutz.anlageText')}</p>
               <p>{t('datenschutz.anlageContact')}</p>
               <p>{t('datenschutz.anlageLegalBasis')}</p>
@@ -162,6 +181,20 @@ const DatenschutzPage = () => {
               <p>{t('datenschutz.anlageProcessors')}</p>
               <p>{t('datenschutz.anlageStorage')}</p>
               <p>{t('datenschutz.anlageRevocation')}</p>
+
+              <h3 id="anfragen-kanzlei" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.kanzleiTitle')}</h3>
+              <p>{t('datenschutz.kanzleiText')}</p>
+              <p>{t('datenschutz.kanzleiPurpose')}</p>
+              <p>{t('datenschutz.kanzleiRecipients')}</p>
+              <p>{t('datenschutz.kanzleiStorage')}</p>
+
+              <h3 id="aufbewahrung-anfragen" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.mailboxTitle')}</h3>
+              <p>{t('datenschutz.appMailbox')}</p>
+              <p>{t('datenschutz.appStorage')}</p>
+              <p>{t('datenschutz.appProof')}</p>
+
+              <h3 id="widerruf-app" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.appRevocationTitle')}</h3>
+              <p>{t('datenschutz.appRevocation')}</p>
 
               <h2 className="text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.section3Title')}</h2>
               <p>{t('datenschutz.section3Text')}</p>
