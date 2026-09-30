@@ -70,25 +70,37 @@ const PartnerPage = () => {
       <main className="bg-white overflow-hidden w-full">
 
         {/* SECTION 1: HERO */}
-        <section className="relative min-h-[100svh] flex items-center pt-28 pb-16 lg:pt-20 lg:pb-0">
-          <div className="absolute inset-0 z-0 bg-slate-900">
-            {/* Vorschaubild des Partner-Videos (public/images/video-partner-thumb.jpg), für Mobil und Desktop */}
-            <img
-              src="/images/partner-hero.webp"
-              alt={t('hero.imageAlt')}
-              width="1280"
-              height="720"
-              fetchPriority="high"
-              className="h-full w-full object-cover object-[46%_22%] xl:absolute xl:inset-y-0 xl:right-0 xl:w-[64%] xl:object-[34%_center]"
-            />
-            {/* Lighter Overlay for desktop, stronger for mobile to ensure text readability.
-                Ab xl steht die Beraterin rechts neben dem Text, links bleibt die Fläche dunkel. */}
-            <div className="absolute inset-0 bg-black/50 md:bg-black/25 xl:bg-black/10 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent xl:from-slate-900 xl:from-[36%] xl:via-slate-900/50 xl:via-[50%] xl:to-transparent xl:to-[64%] z-10" />
+        <section className="relative bg-slate-900 pt-20 pb-14 lg:min-h-[100svh] lg:flex lg:items-center lg:pb-0">
+          {/* Therapeutin im Sessel mit Patientin (partner-hero-*.webp, Quelle partner-hero-neu.png).
+              Unter lg steht ein Querausschnitt mit beiden Frauen über dem Text, ab lg füllt das Bild den Hero. */}
+          <div className="relative z-0 lg:absolute lg:inset-0">
+            <picture>
+              <source
+                media="(min-width: 1024px)"
+                srcSet="/images/partner-hero-1280.webp 1280w, /images/partner-hero-1920.webp 1920w, /images/partner-hero-2560.webp 2560w"
+                sizes="100vw"
+                width="2560"
+                height="1440"
+              />
+              <img
+                src="/images/partner-hero-mobil-800.webp"
+                srcSet="/images/partner-hero-mobil-480.webp 480w, /images/partner-hero-mobil-800.webp 800w, /images/partner-hero-mobil-1200.webp 1200w"
+                sizes="100vw"
+                alt={t('hero.imageAlt')}
+                width="1200"
+                height="847"
+                fetchPriority="high"
+                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%] lg:h-full lg:max-h-none lg:object-center"
+              />
+            </picture>
+            {/* Unter lg läuft das Bild unten ins Dunkle aus, der Text steht darunter.
+                Ab lg wie bisher: leichte Abdunklung plus Verlauf von links für den Hero-Text. */}
+            <div className="absolute inset-0 bg-black/10 lg:bg-black/25 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:bg-gradient-to-r lg:from-slate-900/80 lg:via-slate-900/40 lg:to-transparent z-10" />
           </div>
 
-          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
-            <div className="max-w-4xl mx-auto text-center xl:mx-0 xl:max-w-[38rem] xl:text-left">
+          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20 lg:mt-0">
+            <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -100,13 +112,13 @@ const PartnerPage = () => {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto xl:mx-0">
+                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center xl:grid xl:w-fit xl:grid-cols-1 xl:items-stretch">
+                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
                     size="lg"
-                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg xl:shrink-0 xl:whitespace-nowrap"
+                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
                     onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {t('hero.cta')}
@@ -114,14 +126,14 @@ const PartnerPage = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg xl:shrink-0 xl:whitespace-nowrap"
+                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg"
                     onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {t('hero.secondaryCta')}
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80 xl:justify-start">
+                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
