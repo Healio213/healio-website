@@ -644,6 +644,12 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
       {!fromBonusTopic && (
         <>
+      {/* Die IKK-Wechsel-Strecke mit der Brücke (bis 29.08. auf allen drei
+          Produktseiten, auf Franks Wunsch zurück). Seit 30.09. direkt nach der
+          Tarifwahl als erster Teil der Kassen-Geschichte (Frank: die Szene soll
+          im Fokus stehen); die Regel „erst Tarif, dann Kasse“ bleibt. */}
+      <AmbulantIKKWechsel variant="ambulant" />
+
       <ZweiWegeFinanzierung produkt="ambulant" className="bg-home-ice" />
 
       <section className="bg-[#071722] px-4 py-16 text-white sm:px-6 md:py-24 lg:px-8">
@@ -719,11 +725,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           </details>
         </div>
       </section>
-
-      {/* Die IKK-Wechsel-Strecke mit der Brücke (bis 29.08. auf allen drei
-          Produktseiten, auf Franks Wunsch zurück). Sie ersetzt hier die kleine
-          Wechsel-Karte im Ablauf-Abschnitt. */}
-      <AmbulantIKKWechsel variant="ambulant" />
 
         </>
       )}
