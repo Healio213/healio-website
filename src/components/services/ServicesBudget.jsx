@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -31,23 +31,13 @@ const ServicesBudget = () => {
             {t('budget.title')}
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700">{t('budget.description')}</p>
-          <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-            {t('budget.features', { returnObjects: true }).map((feature) => (
-              <li key={feature} className="flex items-start gap-3 text-sm font-semibold leading-6 text-[#10202A] sm:text-base">
-                <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#25C990] text-[#07111F]">
-                  <Check className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" />
-                </span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-2xl text-xs leading-5 text-slate-600">{t('budget.note')}</p>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">{t('budget.note')}</p>
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
-            <Link to={getPath('ambulant')} className="home-focus inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
+            <Link to={getPath('ambulant')} className="home-focus inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-base font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
               {t('budget.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link to={getPath('kassenboost')} className="home-focus inline-block font-display text-sm font-extrabold leading-6 text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
+            <Link to={getPath('kassenboost')} className="home-focus inline-block font-display text-base font-extrabold leading-7 text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
               {t('budget.kassenboostCta')}
               <ArrowUpRight className="ml-2 inline-block h-4 w-4 align-[-0.2em]" aria-hidden="true" />
             </Link>

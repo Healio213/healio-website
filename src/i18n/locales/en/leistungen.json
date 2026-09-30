@@ -11,31 +11,24 @@
     "eyebrow": "Outpatient. Dental. Hospital. Pet.",
     "titleLine1": "Supplementary health insurance.",
     "titleLine2": "Only where it matters.",
-    "description": "For you or your pet: we first clarify how cover can be financed, for example through the bonus from your statutory health fund. Then we guide you to the right area of cover, clearly and independently.",
+    "description": "For you or your pet: we first clarify how cover can be financed, for example through the bonus from your statutory health fund.",
     "primaryCta": "Compare cover areas",
     "secondaryCta": "Get personal advice",
     "proof": ["Independent insurance broker", "Personally available", "Conditions clearly explained"],
-    "compassEyebrow": "Understand first, then insure",
     "compassTitle": "Which costs do you want to carry yourself – and which do you not?",
     "compassNoteStrong": "Four areas. One deliberate decision.",
-    "compassNote": "Healio shows benefits, limits and the right next step.",
     "orientationFacts": ["Outpatient", "Dental", "Hospital", "Pet"]
   },
   "paths": {
     "eyebrow": "Four paths to cover",
     "title": "Where would you like stronger protection?",
-    "description": "For you: outpatient, dental or hospital. For your pet: a dedicated area of cover. Go directly to the topic you need.",
     "items": [
       {
         "key": "ambulant",
         "anchor": "ambulant",
         "routeKey": "ambulant",
-        "number": "01",
-        "kicker": "Everyday health",
         "title": "More freedom for treatments that matter to you.",
         "description": "Depending on the plan, cover can include alternative practitioners, osteopathy, additional preventive care, glasses and other outpatient services.",
-        "decision": "For people who use alternative practitioners, osteopathy, glasses or preventive care – and do not want to carry all of these costs themselves.",
-        "features": ["Alternative medicine and osteopathy", "Glasses and additional preventive care"],
         "cta": "Explore outpatient cover",
         "schemaName": "Outpatient supplementary insurance"
       },
@@ -43,12 +36,8 @@
         "key": "dental",
         "anchor": "zahn",
         "routeKey": "zahn",
-        "number": "02",
-        "kicker": "Limit out-of-pocket costs",
         "title": "Choose dental quality – not just the lowest price.",
-        "description": "Dental supplementary insurance can make out-of-pocket costs for prosthetics, treatment and preventive care more predictable. Reimbursement, limits and conditions matter.",
-        "decision": "For people who do not want higher-quality dental care to depend on their bank balance.",
-        "features": ["Dental prosthetics and implants", "Treatment and preventive care"],
+        "description": "Dental supplementary insurance can make out-of-pocket costs for prosthetics, treatment and preventive care more predictable.",
         "highlight": {
           "label": "Highlight · die Bayerische",
           "title": "ZAHN Sofort – even when treatment has already been recommended.",
@@ -63,12 +52,8 @@
         "key": "hospital",
         "anchor": "stationaer",
         "routeKey": "stationaer",
-        "number": "03",
-        "kicker": "More choice in hospital",
         "title": "Important decisions are better made before admission.",
         "description": "Depending on the plan, private medical treatment, a private or semi-private room and additional costs related to a wider hospital choice may be covered.",
-        "decision": "For people who want more say over treatment and accommodation in hospital.",
-        "features": ["Private medical treatment", "Room comfort and hospital choice"],
         "cta": "Explore hospital cover",
         "schemaName": "Hospital supplementary insurance"
       },
@@ -76,12 +61,8 @@
         "key": "pet",
         "anchor": "tier",
         "routeKey": "tierkrankenversicherung",
-        "number": "04",
-        "kicker": "For your animal companion",
         "title": "Protect against veterinary costs before they become a burden.",
         "description": "Depending on the plan, pet health or surgery insurance can cover high treatment costs after illness or an accident.",
-        "decision": "For owners choosing between comprehensive health cover and focused surgery cover.",
-        "features": ["Comprehensive or surgery cover", "Compare benefits and limits clearly"],
         "cta": "Explore pet health insurance",
         "schemaName": "Pet health insurance"
       }
@@ -90,28 +71,27 @@
   "comparison": {
     "eyebrow": "Quick orientation",
     "title": "Not every gap is your gap.",
-    "description": "The right protection starts with your priorities, not with a plan. These four questions create more clarity than any product shelf.",
     "cta": "Clarify my needs",
-    "headers": {"area": "Area", "relevant": "Relevant when …", "check": "Key question"},
+    "headers": {"area": "Area", "check": "Key question"},
     "items": [
-      {"key": "ambulant", "label": "Outpatient", "relevant": "you regularly use services beyond statutory health insurance.", "check": "Which services are covered – and which budgets, reimbursement rates and exclusions apply?"},
-      {"key": "dental", "label": "Dental", "relevant": "you want higher-quality care for dental treatment and prosthetics.", "check": "How much is reimbursed, which limits apply in the first years – and what about treatment already recommended?"},
-      {"key": "hospital", "label": "Hospital", "relevant": "you want more choice of doctor, hospital or room.", "check": "Which optional services and fee limits apply – and which health questions must you answer before taking out cover?"},
-      {"key": "pet", "label": "Pet", "relevant": "you want to make veterinary or surgery costs for your dog or cat more predictable.", "check": "Do you need comprehensive health cover or focused surgery cover – and which excess suits you?"}
+      {"key": "ambulant", "label": "Outpatient", "check": "Which services are covered – and which budgets, reimbursement rates and exclusions apply?"},
+      {"key": "dental", "label": "Dental", "check": "How much is reimbursed, which limits apply in the first years – and what about treatment already recommended?"},
+      {"key": "hospital", "label": "Hospital", "check": "Which optional services and fee limits apply – and which health questions must you answer before taking out cover?"},
+      {"key": "pet", "label": "Pet", "check": "Do you need comprehensive health cover or focused surgery cover – and which excess suits you?"}
     ]
   },
   "advice": {
     "eyebrow": "Honest advice",
     "title": "More modules do not automatically mean better protection.",
-    "description": "We do not recommend as much as possible. We recommend what fits your priorities, budget and situation. Sometimes that means several modules. Sometimes one is enough.",
+    "description": "We do not recommend as much as possible. We recommend what fits your priorities, budget and situation.",
     "wrongLabel": "The question that falls short",
     "wrongQuestion": "Which plan is the cheapest?",
     "rightLabel": "The deciding question",
     "rightQuestion": "Which costs are you willing to carry when it matters?",
     "criteria": [
-      {"title": "Benefits before promises", "description": "What matters is what the plan provides under the agreed conditions – not how impressive an advertising percentage looks."},
-      {"title": "Make limits visible", "description": "Waiting periods, initial limits, maximum amounts and exclusions belong before the decision, not after it."},
-      {"title": "Needs before product", "description": "A strong plan is only strong when its benefits match your real priorities."}
+      {"title": "Benefits before promises"},
+      {"title": "Make limits visible"},
+      {"title": "Needs before product"}
     ]
   },
   "budget": {
@@ -120,8 +100,7 @@
     "amount": "3,000 EUR",
     "amountLabel": "health budget over 2 years",
     "title": "When the elements work together, real room for health is created.",
-    "description": "With the outpatient Healio concept, a suitable health fund bonus and supplementary insurance can work together. We clearly explain the requirements and show what the calculation looks like for you.",
-    "features": ["Alternative practitioners and natural medicine", "Osteopathy and preventive care", "Glasses and other services", "Consider bonus and plan together"],
+    "description": "With the outpatient Healio concept, a suitable health fund bonus and supplementary insurance can work together.",
     "note": "Actual benefits and your effective contribution depend on the selected plan, your personal situation and the health fund bonus you achieve.",
     "cta": "Understand the Healio concept",
     "kassenboostCta": "Compare health insurers with KassenBoost"
@@ -129,11 +108,10 @@
   "process": {
     "eyebrow": "How Healio works",
     "title": "A good decision does not require insurance language.",
-    "description": "We translate conditions into clear consequences and remain personally available after the policy begins.",
     "steps": [
-      {"number": "01", "title": "Clarify priorities", "description": "We start with your daily life, your preferences and the costs you do not want to carry yourself."},
-      {"number": "02", "title": "Understand conditions", "description": "Benefits, limits and relevant differences are explained in clear language."},
-      {"number": "03", "title": "Decide consciously", "description": "You choose the cover that fits – and continue to have a personal contact afterwards."}
+      {"number": "01", "title": "Clarify priorities"},
+      {"number": "02", "title": "Understand conditions"},
+      {"number": "03", "title": "Decide consciously"}
     ]
   },
   "pet": {
@@ -144,7 +122,7 @@
   },
   "ticker": {
     "ariaLabel": "Guidance for choosing supplementary cover",
-    "threeAreas": "Outpatient, dental, hospital or pet – go directly to the right area",
+    "threeAreas": "Outpatient, dental, hospital or pet",
     "notEverything": "Not everyone needs everything",
     "needsFirst": "Needs before product",
     "clearConditions": "Understand benefits, limits and exclusions",

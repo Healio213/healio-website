@@ -19,7 +19,7 @@ const ServicesFinalCTA = () => {
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t('finalCta.description')}</p>
           </div>
-          <Link to={getPath('terminvereinbarung')} className="home-focus inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#25C990] px-7 py-4 font-display text-sm font-extrabold text-[#07111F] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#10202A] motion-reduce:transform-none">
+          <Link to={getPath('terminvereinbarung')} className="home-focus inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#25C990] px-7 py-4 font-display text-base font-extrabold text-[#07111F] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#10202A] motion-reduce:transform-none">
             {t('finalCta.cta')}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

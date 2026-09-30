@@ -62,7 +62,7 @@ const LeistungenPage = () => {
       />
       <article className="w-full overflow-hidden bg-white">
         <ServicesHero />
-        <ProductTicker variant="leistungen" />
+        <ProductTicker variant="leistungen" textSize="base" />
         <ProtectionNavigator />
         <CoverageComparison />
         <HonestAdvice />

@@ -33,10 +33,8 @@ const HonestAdvice = () => {
 
         <div className="mt-14 grid border-y border-white/10 sm:grid-cols-3">
           {criteria.map((item, index) => (
-            <article key={item.title} className={`py-7 sm:px-7 sm:py-9 ${index > 0 ? 'border-t border-white/10 sm:border-l sm:border-t-0' : ''}`}>
-              <span className="font-display text-[0.68rem] font-extrabold tracking-[0.18em] text-[#8EE7CA]">0{index + 1}</span>
-              <h3 className="mt-5 font-display text-xl font-extrabold tracking-[-0.025em] text-white">{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{item.description}</p>
+            <article key={item.title} className={`py-6 sm:px-7 sm:py-8 ${index > 0 ? 'border-t border-white/10 sm:border-l sm:border-t-0' : ''}`}>
+              <h3 className="font-display text-xl font-extrabold leading-snug tracking-[-0.025em] text-white [text-wrap:balance] sm:text-2xl">{item.title}</h3>
             </article>
           ))}
         </div>

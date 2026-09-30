@@ -149,12 +149,14 @@ const ariaKeyByVariant = {
   lebenshilfe: 'lebenshilfeTicker.ariaLabel',
 };
 
-const ProductTicker = ({ variant }) => {
+const ProductTicker = ({ variant, textSize = 'sm' }) => {
   const selectedVariant = tickerSets[variant] ? variant : 'stationaer';
   const namespace = namespaceByVariant[selectedVariant] || selectedVariant;
   const { t } = useTranslation(namespace);
   const tickerItems = tickerSets[selectedVariant];
   const ariaKey = ariaKeyByVariant[selectedVariant] || 'ticker.ariaLabel';
+  // Standard bleibt text-sm; einzelne Seiten können größere Schrift anfordern.
+  const textClassName = textSize === 'base' ? 'text-base' : 'text-sm';
 
   return (
     <div
@@ -174,7 +176,7 @@ const ProductTicker = ({ variant }) => {
               aria-hidden={index >= tickerItems.length ? 'true' : undefined}
             >
               <Icon className="h-4 w-4 flex-shrink-0 text-healio-primary" aria-hidden="true" />
-              <span className="text-sm font-medium text-gray-200">{t(item.key)}</span>
+              <span className={`${textClassName} font-medium text-gray-200`}>{t(item.key)}</span>
               <span className="mx-2 text-healio-primary/40" aria-hidden="true">•</span>
             </div>
           );

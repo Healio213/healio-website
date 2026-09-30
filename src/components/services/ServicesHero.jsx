@@ -47,17 +47,17 @@ const ServicesHero = () => {
             {t('hero.description')}
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href="#schutz-kompass"
-              className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25C990] px-7 py-4 font-display text-sm font-extrabold text-[#07111F] shadow-[0_16px_44px_rgba(37,201,144,0.22)] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#07111F] motion-reduce:transform-none"
+              className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25C990] px-7 py-4 font-display text-base font-extrabold text-[#07111F] shadow-[0_16px_44px_rgba(37,201,144,0.22)] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#07111F] motion-reduce:transform-none"
             >
               {t('hero.primaryCta')}
               <ArrowDown className="h-4 w-4" aria-hidden="true" />
             </a>
             <Link
               to={getPath('terminvereinbarung')}
-              className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.055] px-7 py-4 font-display text-sm font-bold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.1] focus-visible:ring-offset-[#07111F]"
+              className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.055] px-7 py-4 font-display text-base font-bold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.1] focus-visible:ring-offset-[#07111F]"
             >
               {t('hero.secondaryCta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -78,15 +78,11 @@ const ServicesHero = () => {
           initial={prefersReducedMotion ? false : { opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex min-h-[460px] min-w-0 flex-col overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-7 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:min-h-[500px] sm:p-9 lg:p-10"
+          className="relative flex min-w-0 flex-col overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-7 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:min-h-[500px] sm:p-9 lg:p-10"
         >
           <div className="relative z-10 max-w-[25rem]">
-            <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#8EE7CA]">{t('hero.compassEyebrow')}</p>
-            <h2 className="mt-4 font-friendly text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl">{t('hero.compassTitle')}</h2>
-            <p className="mt-5 text-base leading-7 text-slate-300">
-              <span className="font-bold text-white">{t('hero.compassNoteStrong')}</span>{' '}
-              {t('hero.compassNote')}
-            </p>
+            <h2 className="font-friendly text-3xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-4xl">{t('hero.compassTitle')}</h2>
+            <p className="mt-5 text-base font-bold leading-7 text-white sm:text-lg">{t('hero.compassNoteStrong')}</p>
           </div>
 
           {/* Figur und Bereiche liegen in einer eigenen Zeile unter dem Text, damit sich nichts überlagert. */}
