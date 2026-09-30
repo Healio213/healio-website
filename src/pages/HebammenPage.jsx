@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, ArrowDown, ArrowRight, ChevronDown, Shield } from 'lucide-react';
+import { Check, ArrowDown, ArrowRight, ChevronDown, Info, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -15,6 +15,12 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
+
+// Zwei Tarifarten für Familien, Texte unter tarife.* in den Sprachdateien.
+const TARIFF_CARDS = [
+  { key: 'ambulant', kind: 'pregnancy', tone: 'coral' },
+  { key: 'stationaer', kind: 'hospital', tone: 'sky' },
+];
 
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
@@ -388,45 +394,93 @@ const HebammenPage = () => {
           </div>
         </section>
 
-        {/* VORTEILE & PRÄMIE */}
-        <section className="py-16 sm:py-20 bg-white">
+        {/* WAS DU FAMILIEN SAGEN KANNST (Frank 30.09.2026): ersetzt vorerst den
+            Prämien-Abschnitt. Versicherungsaussagen nur aus geprüften Quellen,
+            /schwangerschaft (BenefitFunnelPage) und /stationaer (StationaerFamily,
+            StationaerBayerischeAlternative). Hebammenkosten der Bayerischen stehen
+            immer zusammen mit Wartezeiten und dem Ausschluss einer beim Antrag
+            schon bestehenden Schwangerschaft. */}
+        <section
+          id="hebammen-tarife"
+          className="scroll-mt-24 bg-white py-16 sm:py-20"
+          aria-labelledby="hebammen-tarife-heading"
+          data-healio-midwife="tarife"
+        >
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                  {t('benefits.title')}
+            <div className="mx-auto max-w-5xl">
+              <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-2xl text-center">
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
+                  {t('tarife.eyebrow')}
+                </p>
+                <h2 id="hebammen-tarife-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight [text-wrap:balance] sm:text-4xl">
+                  {t('tarife.title')}
                 </h2>
-                <p className="text-lg text-slate-600 leading-relaxed">
-                  {t('benefits.text')}
+                <p className="mt-4 text-lg leading-relaxed text-slate-600 [text-wrap:pretty]">
+                  {t('tarife.lead')}
                 </p>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-8"
+              <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
+                {TARIFF_CARDS.map((card, i) => (
+                  <motion.article
+                    key={card.key}
+                    initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                    className="flex flex-col rounded-[2rem] border border-slate-100 bg-white p-6 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8"
+                    data-healio-midwife-card={card.key}
+                  >
+                    <FriendlyIcon kind={card.kind} tone={card.tone} size="md" />
+                    <p className="mt-6 font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
+                      {t(`tarife.${card.key}.label`)}
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance]">
+                      {t(`tarife.${card.key}.title`)}
+                    </h3>
+                    <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
+                      {t(`tarife.${card.key}.text`)}
+                    </p>
+                    <div className="mt-auto pt-6">
+                      <p className="flex gap-2.5 border-t border-slate-100 pt-5 text-sm leading-relaxed text-slate-600 sm:text-[0.9375rem]">
+                        <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+                        <span>{t(`tarife.${card.key}.condition`)}</span>
+                      </p>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="mt-6 flex items-start gap-4 rounded-2xl border border-emerald-100 bg-[#F4FAF7] p-5 sm:items-center sm:p-6 md:mt-8"
               >
-                <p className="text-lg text-slate-700 leading-relaxed mb-4 font-medium">
-                  {t('benefits.premiumText')}
+                <FriendlyIcon kind="family" tone="mint" size="sm" />
+                <p className="text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
+                  {t('tarife.both')}
                 </p>
-                <p className="text-slate-600 mb-6">{t('benefits.controlText')}</p>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {/* Option 1: Auszahlung */}
-                  <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6">
-                    <FriendlyIcon emoji="💶" label={t('benefits.option1Title')} tone="butter" size="sm" className="mb-4" />
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option1Title')}</h3>
-                    <p className="text-slate-600 leading-relaxed">{t('benefits.option1Desc')}</p>
-                  </div>
-
-                  {/* Option 2: Spende */}
-                  <div className="bg-rose-50 border-2 border-rose-200 rounded-xl p-6">
-                    <FriendlyIcon emoji="💝" label={t('benefits.option2Title')} tone="coral" size="sm" className="mb-4" />
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{t('benefits.option2Title')}</h3>
-                    <p className="text-slate-600 leading-relaxed">{t('benefits.option2Desc')}</p>
-                  </div>
-                </div>
-
-                <p className="text-center text-slate-500 mt-6 italic">{t('benefits.flexNote')}</p>
               </motion.div>
+
+              <motion.article
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="mt-10 grid gap-6 rounded-[2rem] border border-emerald-200 bg-[#F4FAF7] p-6 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8 md:grid-cols-[auto_minmax(0,1fr)] md:gap-8 lg:p-10"
+                aria-labelledby="hebammen-bayerische-heading"
+                data-healio-midwife-card="bayerische"
+              >
+                <FriendlyIcon kind="calendar" tone="sky" size="lg" />
+                <div className="min-w-0">
+                  <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
+                    {t('tarife.bayerische.label')}
+                  </p>
+                  <h3 id="hebammen-bayerische-heading" className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:text-3xl">
+                    {t('tarife.bayerische.title')}
+                  </h3>
+                  <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
+                    {t('tarife.bayerische.text')}
+                  </p>
+                  <p className="mt-5 flex max-w-3xl gap-2.5 rounded-2xl border border-emerald-100 bg-white p-4 text-sm leading-relaxed text-slate-700 sm:text-[0.9375rem]">
+                    <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+                    <span>{t('tarife.bayerische.condition')}</span>
+                  </p>
+                </div>
+              </motion.article>
             </div>
           </div>
         </section>

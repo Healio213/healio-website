@@ -178,16 +178,29 @@
     "closingNote": "Welcher Weg passt, hängt unter anderem von Alter, Budget, Gesundheitsangaben und bestehendem Schutz ab. Das klärt Healio individuell. Du musst weder Tarife erklären noch Beiträge berechnen.",
     "ctaLink": "Alle Details zur Krankenhauszusatzversicherung"
   },
-  "benefits": {
-    "title": "Das perfekte Win Win für deine Arbeit",
-    "text": "Wenn Geld keine Rolle mehr spielt, buchen die Familien genau die Kurse, die sie wirklich brauchen. Dein Terminkalender ist voll und die Mütter sind optimal versorgt.",
-    "premiumText": "Zusätzlich möchten wir uns für dein Vertrauen bedanken. Für jede erfolgreiche Empfehlung unseres Budgets erhältst du eine Prämie von 50 Euro.",
-    "controlText": "Du hast dabei immer die volle Kontrolle:",
-    "option1Title": "Die Auszahlung an dich",
-    "option1Desc": "Du erhältst die 50 Euro als klassische Tippgeber Prämie direkt und unkompliziert ausgezahlt.",
-    "option2Title": "Die Healio Spende",
-    "option2Desc": "Du verzichtest auf die Prämie und wir spenden die 50 Euro in deinem Namen an eine renommierte Stiftung für Kindergesundheit.",
-    "flexNote": "Du entscheidest bei jeder Familie ganz flexibel neu."
+  "tarife": {
+    "eyebrow": "Ambulant und stationär",
+    "title": "Was du Familien sagen kannst",
+    "lead": "Ambulant geht es um die Vorsorge in der Schwangerschaft, stationär um das Krankenhaus und um das Kind.",
+    "ambulant": {
+      "label": "Ambulant",
+      "title": "Vorsorge in der Schwangerschaft",
+      "text": "Der Vorsorge-Topf der SDK zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn die Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht.",
+      "condition": "Nicht dabei sind Entbindung und Komplikationen. Die Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag."
+    },
+    "stationaer": {
+      "label": "Stationär",
+      "title": "Klinik und Schutz fürs Kind",
+      "text": "Wer einen Klinik-Tarif hat, bekommt im Krankenhaus Chefarzt und Ein- oder Zweibettzimmer, je nach Tarif. Ist ein Elternteil am Tag der Geburt im Klinik-Tarif versichert (bei der Bayerischen seit mindestens drei Monaten), wird das Kind ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.",
+      "condition": "Die Anmeldung muss spätestens zwei Monate nach der Geburt beim Versicherer eingehen, dann gilt der Schutz rückwirkend ab dem Tag der Geburt. Ist die Frau beim Antrag schon schwanger, zahlen die SDK und die Bayerische diese Entbindung nicht."
+    },
+    "both": "Eine Familie kann beides haben, einen ambulanten und einen stationären Tarif. Ein rein ambulanter Elternvertrag trägt keinen stationären Schutz fürs Kind. Welche Tarife passen, klärt Healio im Gespräch.",
+    "bayerische": {
+      "label": "Gut zu wissen",
+      "title": "Die Bayerische und deine Hebammenleistungen",
+      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Für dich ist das ein guter Grund, das Thema anzusprechen. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
+      "condition": "Es gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten. Eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert."
+    }
   },
   "legal": {
     "title": "Deine Neutralität. Zu 100 Prozent geschützt.",
