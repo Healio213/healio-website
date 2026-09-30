@@ -17,7 +17,13 @@ const de = {
     ticketFooter: '4 Wege. 1 klare Empfehlung.',
     routes: ['Bayerische', 'UKV', 'LKH', 'Sofortschutz'],
     iconAlt: 'Freundliches Symbol für Zahnschutz',
-    photoAlt: 'Patientin im Gespräch am hellen Empfang einer Praxis',
+    offersAria: 'Die vier Zahn-Wege im Überblick',
+    offers: [
+      { code: 'ZAHN Prestige', label: 'Maximaler Zahnschutz', note: 'Bis zu 100 % für Zahnersatz und Zahnbehandlung im Tarif' },
+      { code: 'ZAHN Sofort', label: 'Behandlung schon angeraten', note: 'Zuschuss bis zu 1.500 EUR möglich, Abschluss vor der Rechnung' },
+      { code: 'LKH ZahnUpgrade', label: 'Zähne fehlen schon', note: 'Bei 1 bis 3 fehlenden Zähnen grundsätzlich möglich' },
+      { code: 'UKV ZahnPRIVAT', label: 'Familie und Vorsorge', note: 'Kieferorthopädie und Zahnreinigung je nach Stufe' },
+    ],
     trust: [
       'Registrierter Versicherungsmakler',
       'Antworten bleiben auf dieser Seite',
@@ -368,7 +374,13 @@ const en = {
     ticketNo: 'No: choose cover, family or price',
     ticketFooter: '4 routes. 1 clear recommendation.',
     iconAlt: 'Friendly dental protection icon',
-    photoAlt: 'Patient talking at the bright reception desk of a practice',
+    offersAria: 'The four dental routes at a glance',
+    offers: [
+      { code: 'ZAHN Prestige', label: 'Maximum dental cover', note: 'Up to 100 % for dentures and dental treatment within the plan' },
+      { code: 'ZAHN Sofort', label: 'Treatment already recommended', note: 'Subsidy of up to €1,500 possible, sign up before the invoice' },
+      { code: 'LKH ZahnUpgrade', label: 'Teeth already missing', note: 'Generally possible with 1 to 3 missing teeth' },
+      { code: 'UKV ZahnPRIVAT', label: 'Family and prevention', note: 'Orthodontics and teeth cleaning depending on the level' },
+    ],
     trust: ['Registered insurance broker', 'Answers stay on this page', 'Personally available'],
   },
   check: {

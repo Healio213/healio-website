@@ -37,6 +37,10 @@ const pathStyles = {
   coral: 'bg-[#fff1ed] text-[#934638]',
 };
 
+// Rahmen- und Punktfarben der vier Zahn-Wege im Hero (wie die Auswahl auf /stationaer).
+const offerBorders = ['border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]', 'border-[#c9dcef]'];
+const offerDots = ['bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]', 'bg-[#5b8fd1]'];
+
 const trustVisuals = [
   { kind: 'broker', tone: 'mint' },
   { kind: 'privacy', tone: 'sky' },
@@ -74,81 +78,99 @@ const ZahnPage = () => {
       />
 
       <article className="overflow-hidden bg-white text-[#07111f]">
-        {/* Hero mit Foto über die ganze Breite wie auf /ambulant und /partner
-            (Frank 30.09.2026: kleines Foto doof, seriös und ruhig). Ab lg liegt
-            das Empfangsfoto hinter dem Text, links abgedunkelt; darunter steht
-            ein eigener Ausschnitt mit der Patientin über dem Text. Die Ja/Nein-
-            Frage ist der erste Schritt im Zahn-Check. */}
+        {/* Hero wie auf /stationaer (Frank 30.09.2026: Foto am Tresen "geht gar
+            nicht", lieber gleich zeigen, was man bekommt). Links der Text, rechts
+            die vier Zahn-Wege mit je einer geprüften Aussage aus den Ergebnissen
+            des Zahn-Checks; jede Zeile führt in den Check. */}
         <section
-          className="relative isolate overflow-hidden bg-home-midnight text-white lg:flex lg:min-h-[82svh] lg:items-center"
+          className="relative isolate overflow-hidden bg-[#071726] text-white"
           aria-labelledby="zahn-hero-heading"
         >
-          <div className="relative z-0 pt-20 lg:absolute lg:inset-0 lg:pt-0">
-            <picture>
-              <source
-                media="(min-width: 1024px)"
-                srcSet="/images/zahn-hero-empfang-1280.webp 1280w, /images/zahn-hero-empfang-1920.webp 1920w, /images/zahn-hero-empfang-2752.webp 2752w"
-                sizes="100vw"
-                width="2752"
-                height="1536"
-              />
-              <img
-                src="/images/zahn-hero-empfang-mobil-800.webp"
-                srcSet="/images/zahn-hero-empfang-mobil-480.webp 480w, /images/zahn-hero-empfang-mobil-800.webp 800w, /images/zahn-hero-empfang-mobil-1200.webp 1200w"
-                sizes="100vw"
-                alt={content.hero.photoAlt}
-                width="1200"
-                height="1005"
-                {...{ fetchpriority: 'high' }}
-                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%] lg:h-full lg:max-h-none lg:object-[center_35%]"
-              />
-            </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-home-midnight via-home-midnight/10 to-transparent lg:bg-gradient-to-r lg:from-[#04101b]/95 lg:from-25% lg:via-[#06131d]/70 lg:via-45% lg:to-[#071722]/10" aria-hidden="true" />
-            {/* Links im Bild steht die Empfangskraft genau hinter der Überschrift; dort gezielt dunkler. */}
-            <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_30%_48%_at_29%_45%,rgba(4,16,27,0.7),transparent_75%)] lg:block" aria-hidden="true" />
-          </div>
+          <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
+          <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
+          <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-          <div className="relative z-10 mx-auto -mt-12 w-full max-w-7xl px-4 pb-14 sm:-mt-20 sm:px-6 md:pb-16 lg:mt-0 lg:px-8 lg:pb-14 lg:pt-32">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.5 }}
-              className="max-w-2xl"
-            >
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">
-                {content.hero.eyebrow}
-              </p>
-              <h1
-                id="zahn-hero-heading"
-                className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance] drop-shadow-[0_4px_18px_rgba(0,0,0,0.35)]"
+          <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.5 }}
+                className="min-w-0 max-w-2xl"
               >
-                <span className="block">{content.hero.titleLead}</span>
-                <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-100 sm:text-xl">
-                {content.hero.text}
-              </p>
+                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1] sm:text-sm">
+                  {content.hero.eyebrow}
+                </p>
+                <h1
+                  id="zahn-hero-heading"
+                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance]"
+                >
+                  <span className="block">{content.hero.titleLead}</span>
+                  <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
+                </h1>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  {content.hero.text}
+                </p>
 
-              <a
-                href="#zahn-check"
-                onClick={(event) => scrollToCheck(event, reduceMotion)}
-                className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:w-auto"
+                <a
+                  href="#zahn-check"
+                  onClick={(event) => scrollToCheck(event, reduceMotion)}
+                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none sm:w-auto"
+                >
+                  {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </a>
+
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
+                  {content.hero.micro.map((item) => (
+                    <li key={item} className="inline-flex items-center gap-2">
+                      <Check className="h-4 w-4 text-[#5ee0b1]" aria-hidden="true" />{item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, scale: 0.97, y: 16 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.1 }}
+                className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
+                aria-label={content.hero.offersAria}
               >
-                {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </a>
-
-              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
-                {content.hero.micro.map((item) => (
-                  <li key={item} className="inline-flex items-center gap-2">
-                    <Check className="h-4 w-4 text-home-mint" aria-hidden="true" />{item}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 max-w-xl border-t border-white/15 pt-5 text-base leading-7 text-white/75">
-                <span className="font-bold text-white">{content.hero.ticketFooter}</span>{' '}
-                {content.hero.routes.join(' · ')}
-              </p>
-            </motion.div>
+                <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src="/images/friendly-icons/dental-shield.webp"
+                      alt=""
+                      width="311"
+                      height="315"
+                      loading="eager"
+                      decoding="async"
+                      className="w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
+                    />
+                    <p className="font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl">
+                      {content.hero.ticketFooter}
+                    </p>
+                  </div>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {content.hero.offers.map((offer, index) => (
+                      <a
+                        key={offer.code}
+                        href="#zahn-check"
+                        onClick={(event) => scrollToCheck(event, reduceMotion)}
+                        className={`group block rounded-2xl border bg-white/95 p-4 shadow-[0_12px_30px_rgba(39,63,72,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${offerBorders[index % offerBorders.length]}`}
+                      >
+                        <span className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">{offer.code}</span>
+                          <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${offerDots[index % offerDots.length]}`} aria-hidden="true" />
+                        </span>
+                        <span className="mt-1.5 block font-display text-lg font-extrabold leading-tight text-[#071726]">{offer.label}</span>
+                        <span className="mt-1.5 block text-base leading-snug text-slate-600">{offer.note}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
 
             <div className="mt-12 grid gap-4 border-t border-white/15 pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
