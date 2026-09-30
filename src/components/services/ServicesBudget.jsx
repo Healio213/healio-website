@@ -26,7 +26,8 @@ const ServicesBudget = () => {
 
         <div className="min-w-0">
           <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-emerald-800">{t('budget.eyebrow')}</p>
-          <h2 id="services-budget-title" className="mt-4 max-w-[15ch] break-words [hyphens:auto] [overflow-wrap:anywhere] font-display text-4xl font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] sm:text-5xl">
+          {/* Schriftgröße folgt der Bildschirmbreite, damit „Gesundheitsspielraum.“ ohne Trennung passt; Silbentrennung nur als Notnetz unter 320 px. */}
+          <h2 id="services-budget-title" className="mt-4 max-w-[20ch] break-words font-display text-[clamp(1.375rem,calc((100vw_-_4rem)/11.5),2.25rem)] font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] [text-wrap:balance] max-[319px]:[hyphens:auto] sm:text-5xl lg:text-[clamp(2.5rem,3.9vw,3rem)]">
             {t('budget.title')}
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700">{t('budget.description')}</p>
@@ -46,9 +47,9 @@ const ServicesBudget = () => {
               {t('budget.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link to={getPath('kassenboost')} className="home-focus inline-flex items-center gap-2 font-display text-sm font-extrabold text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
+            <Link to={getPath('kassenboost')} className="home-focus inline-block font-display text-sm font-extrabold leading-6 text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
               {t('budget.kassenboostCta')}
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              <ArrowUpRight className="ml-2 inline-block h-4 w-4 align-[-0.2em]" aria-hidden="true" />
             </Link>
           </div>
         </div>

@@ -36,7 +36,7 @@ const ServicesHero = () => {
           <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA]">
             {t('hero.eyebrow')}
           </p>
-          <h1 className="mt-6 max-w-[12ch] [hyphens:manual] font-display text-[2.65rem] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.8rem,5.3vw,5rem)]">
+          <h1 className="mt-6 max-w-[12ch] [hyphens:manual] font-display text-[clamp(2.25rem,12.3vw,2.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
             <span className="block">{t('hero.titleLine1')}</span>
             {' '}
             <span className="mt-2 block bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-[#77BDFB] bg-clip-text text-transparent">
@@ -78,7 +78,7 @@ const ServicesHero = () => {
           initial={prefersReducedMotion ? false : { opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="relative min-h-[460px] min-w-0 overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-7 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:min-h-[500px] sm:p-9 lg:p-10"
+          className="relative flex min-h-[460px] min-w-0 flex-col overflow-hidden rounded-[2.25rem] border border-white/10 bg-[#0B1B27]/85 p-7 shadow-[0_35px_110px_rgba(0,0,0,0.34)] backdrop-blur sm:min-h-[500px] sm:p-9 lg:p-10"
         >
           <div className="relative z-10 max-w-[25rem]">
             <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#8EE7CA]">{t('hero.compassEyebrow')}</p>
@@ -89,23 +89,26 @@ const ServicesHero = () => {
             </p>
           </div>
 
-          <div className="absolute -bottom-8 -right-10 w-[285px] sm:-right-2 sm:w-[340px]" aria-hidden="true">
-            <span className="absolute inset-12 rounded-full bg-[#25C990]/15 blur-3xl" />
-            <img
-              src="/images/friendly-icons/decision-thinking.webp"
-              alt=""
-              width="512"
-              height="512"
-              loading="eager"
-              decoding="async"
-              className="relative h-auto w-full object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.3)]"
-            />
-          </div>
+          {/* Figur und Bereiche liegen in einer eigenen Zeile unter dem Text, damit sich nichts überlagert. */}
+          <div className="relative mt-auto flex items-end justify-between gap-3 pt-8">
+            <div className="relative z-10 flex min-w-0 flex-1 flex-wrap gap-2">
+              {(Array.isArray(orientationFacts) ? orientationFacts : []).map((fact) => (
+                <span key={fact} className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-1.5 text-xs font-bold text-slate-200 backdrop-blur-sm">{fact}</span>
+              ))}
+            </div>
 
-          <div className="absolute bottom-7 left-7 z-10 flex max-w-[56%] flex-wrap gap-2 sm:bottom-9 sm:left-9 lg:bottom-10 lg:left-10">
-            {(Array.isArray(orientationFacts) ? orientationFacts : []).map((fact) => (
-              <span key={fact} className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-1.5 text-xs font-bold text-slate-200 backdrop-blur-sm">{fact}</span>
-            ))}
+            <div className="relative -mb-[3.25rem] -mr-12 w-[176px] shrink-0 sm:-mb-[4.25rem] sm:-mr-11 sm:w-[270px] lg:-mb-[4.5rem] lg:-mr-12" aria-hidden="true">
+              <span className="absolute inset-12 rounded-full bg-[#25C990]/15 blur-3xl" />
+              <img
+                src="/images/friendly-icons/decision-thinking.webp"
+                alt=""
+                width="512"
+                height="512"
+                loading="eager"
+                decoding="async"
+                className="relative h-auto w-full object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.3)]"
+              />
+            </div>
           </div>
         </motion.div>
       </div>

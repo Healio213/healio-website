@@ -14,7 +14,7 @@ const ServicesFinalCTA = () => {
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA]">{t('finalCta.eyebrow')}</p>
-            <h2 id="services-final-cta-title" className="mt-4 max-w-[14ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+            <h2 id="services-final-cta-title" className="mt-4 max-w-[20ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.045em] [text-wrap:balance] sm:text-5xl lg:text-6xl">
               {t('finalCta.title')}
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t('finalCta.description')}</p>

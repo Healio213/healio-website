@@ -26,7 +26,8 @@ const CoverageComparison = () => {
 
         <div role="table" aria-labelledby="coverage-comparison-title" className="overflow-hidden rounded-[2rem] border border-slate-200 bg-[#F7F9F8]">
           <div role="rowgroup">
-            <div role="row" className="sr-only grid-cols-[0.58fr_1fr_1fr] gap-5 border-b border-slate-200 bg-[#10202A] px-7 py-5 font-display text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#8EE7CA] lg:not-sr-only lg:grid">
+            {/* not-sr-only setzt das Padding auf 0, deshalb wird es für große Bildschirme ausdrücklich gesetzt. */}
+            <div role="row" className="sr-only grid-cols-[0.58fr_1fr_1fr] gap-5 border-b border-slate-200 bg-[#10202A] px-7 py-5 font-display text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#8EE7CA] lg:not-sr-only lg:grid lg:px-7 lg:py-5">
               <span role="columnheader">{t('comparison.headers.area')}</span>
               <span role="columnheader">{t('comparison.headers.relevant')}</span>
               <span role="columnheader">{t('comparison.headers.check')}</span>
