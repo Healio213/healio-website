@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Check, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import HighlightText from '@/components/ui/HighlightText';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
@@ -19,12 +20,12 @@ const TOPICS = {
   pregnancy: {
     path: '/schwangerschaft',
     // Kopfzeile nach Eisert: Ergebnis, Bedingung, Einwand gleich vorweg.
-    title: 'Schwanger? Laut Satzung sind bis zu 1.155\u00a0EUR für dich drin.',
+    title: 'Schwanger? Laut Satzung sind <highlight>bis zu 1.155\u00a0EUR</highlight> für dich drin.',
     lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz das Geld und hol dir den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
     leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
     seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
-    image: 'pregnancy',
+    imageAlt: 'Schwangere Frau sitzt lächelnd auf dem Sofa',
     protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
     caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
@@ -151,10 +152,15 @@ export default function BenefitFunnelPage() {
           dann zwei Wege. Alle Einschränkungen bleiben vollständig, stehen aber
           in Aufklappern statt als Textwand. Sprungmarken der Anzeigen bleiben. */}
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
-        <section className="overflow-hidden bg-home-ice pb-12 pt-28 md:pb-20 md:pt-36">
-          <div className={`${wrap} grid items-center gap-6 md:grid-cols-[1.2fr_1fr] md:gap-12`}>
+        {/* Hero mit Foto statt vergrößerter Figur (Frank 30.09.2026: Hero muss
+            besser werden). Überschrift kräftig, die Zahl in Grün. */}
+        <section className="relative isolate overflow-hidden bg-home-ice pb-12 pt-28 md:pb-20 md:pt-36">
+          <div className="absolute -right-24 top-24 -z-10 h-[26rem] w-[26rem] rounded-full bg-home-mint/[0.16] blur-3xl" aria-hidden="true" />
+          <div className={`${wrap} grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-12`}>
             <div>
-              <h1 className="max-w-[18ch] font-friendly text-[2.1rem] leading-[1.08] [text-wrap:balance] sm:text-5xl lg:text-6xl">{config.title}</h1>
+              <h1 className="max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[3.6rem]">
+                <HighlightText text={config.title} className="text-[#087654]" />
+              </h1>
               <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:text-xl">{config.lead}</p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
@@ -162,8 +168,18 @@ export default function BenefitFunnelPage() {
               </div>
               <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
-            <img src={`/images/friendly-icons/${config.image}.webp`} alt="" width="420" height="420"
-              className="mx-auto w-full max-w-[220px] object-contain md:max-w-[400px]" fetchPriority="high" />
+            <div className="mx-auto w-full max-w-[24rem] overflow-hidden rounded-[2rem] bg-[#ece6da] shadow-[0_24px_60px_rgba(7,17,31,0.12)] md:max-w-[27rem]">
+              <img
+                src="/images/schwangerschaft-hero-684.webp"
+                srcSet="/images/schwangerschaft-hero-480.webp 480w, /images/schwangerschaft-hero-684.webp 684w"
+                sizes="(min-width: 768px) 432px, 384px"
+                alt={config.imageAlt}
+                width="684"
+                height="855"
+                fetchPriority="high"
+                className="aspect-[4/5] h-auto w-full object-cover"
+              />
+            </div>
           </div>
         </section>
 
