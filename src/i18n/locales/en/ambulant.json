@@ -14,7 +14,11 @@
     "ctaBonus": "Claim your bonus",
     "heroImageAlt": "Woman using her smartphone to learn about her digital health budget",
     "ctaBonusCalc": "Calculate bonus",
-    "ctaCompare": "Check budget"
+    "ctaCompare": "Check budget",
+    "offerAria": "Your health budget at a glance",
+    "offerTitle": "Up to {{amount}} over two years",
+    "offerTier": "Level Ambulant 100 ({{code}}), {{refund}} reimbursement",
+    "offerUpTo": "up to {{amount}}"
   },
   "trust": {
     "partners": "Our partners: SDK Süddeutsche Krankenversicherung & IKK classic",

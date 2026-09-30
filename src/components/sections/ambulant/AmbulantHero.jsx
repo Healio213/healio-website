@@ -1,38 +1,42 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowDown, CheckCircle } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import { useLanguage } from '@/hooks/useLanguage';
+import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
 
+// Rahmen- und Punktfarben der vier Töpfe (wie die Auswahl auf /stationaer).
+const potBorders = ['border-[#c9dcef]', 'border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]'];
+const potDots = ['bg-[#5b8fd1]', 'bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]'];
+
+// Hero wie auf /stationaer (Frank 30.09.2026): dunkler Grund, links Text und
+// Budget-Button, rechts die Karte mit dem Budget der höchsten Stufe und ihren
+// vier Töpfen. Beträge kommen aus denselben Tarifdaten wie die Tarifwahl.
 const AmbulantHero = ({ fromBonusTopic = false }) => {
   const { t } = useTranslation('ambulant');
-  const facts = t('hero.facts', { returnObjects: true });
-  const factList = Array.isArray(facts) ? facts : [];
+  const { lang } = useLanguage();
+  const language = lang === 'en' ? 'en' : 'de';
+  const budget = getAmbulantHeroBudget(language);
+  const euro = new Intl.NumberFormat(language === 'en' ? 'en-GB' : 'de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+    maximumFractionDigits: 0,
+  });
 
   return (
-    <section className="relative flex min-h-[82svh] items-center overflow-hidden" aria-labelledby="hero-heading">
-      <div className="absolute inset-0 z-0">
-        <picture>
-          <source srcSet="/images/hero-ambulant.webp?v=2" type="image/webp" />
-          <img
-            src="/images/hero-ambulant.png?v=2"
-            alt={t('hero.heroImageAlt')}
-            className="w-full h-full object-cover object-top absolute inset-0"
-            {...{ fetchpriority: 'high' }}
-          />
-        </picture>
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#04101b]/95 via-[#06131d]/78 to-[#071722]/38" />
-        <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_30%_45%,rgba(37,201,144,0.12),transparent_38%)]" />
-      </div>
+    <section className="relative isolate overflow-hidden bg-[#071726] text-white" aria-labelledby="hero-heading">
+      <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
+      <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
+      <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-      <div className="relative z-20 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
-        <div className="max-w-4xl text-left">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 lg:px-8">
+        <div className="min-w-0 max-w-3xl">
           <motion.p
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mb-5 font-display text-xs font-extrabold uppercase tracking-[0.24em] text-home-mint-active md:text-sm"
+            className="mb-5 font-display text-xs font-extrabold uppercase tracking-[0.24em] text-[#5ee0b1] md:text-sm"
           >
             {t('hero.eyebrow')}
           </motion.p>
@@ -41,68 +45,92 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.6vw,4.25rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white drop-shadow-lg [text-wrap:balance] md:mb-7`}
+            className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.2vw,3.75rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance] md:mb-7`}
           >
             <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
           </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-100 drop-shadow-md md:mb-8 md:text-xl"
+            className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-200 md:mb-8 md:text-xl"
           >
             {fromBonusTopic
               ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.'
               : t('hero.subtitle')}
           </motion.p>
-
           {fromBonusTopic && (
-            <p role="note" className="mb-8 max-w-2xl text-sm leading-6 text-slate-200 md:mb-10">
+            <p role="note" className="mb-8 max-w-2xl text-base leading-7 text-slate-200 md:mb-10">
               Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
             </p>
           )}
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col items-start justify-center gap-3"
           >
             <a
               href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
-              className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-home-midnight motion-reduce:transform-none"
+              className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none"
             >
               <ArrowDown className="mr-2 h-5 w-5" />
               {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : t('hero.ctaCalculate')}
             </a>
-            <p className="max-w-xl text-left text-sm leading-6 text-slate-200">
+            <p className="max-w-xl text-left text-base leading-7 text-slate-300">
               {fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}
             </p>
           </motion.div>
-
-          {!fromBonusTopic && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-6 max-w-2xl rounded-2xl border border-white/15 bg-home-midnight/75 p-4 backdrop-blur-md md:mt-8 md:p-5"
-              data-healio-ambulant="hero-facts"
-            >
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint-active">
-                {t('hero.factsLabel')}
-              </p>
-              <ul className="mt-3 grid gap-2.5">
-                {factList.map((fact) => (
-                  <li key={fact} className="flex items-start gap-2.5 text-sm leading-6 text-white md:text-[15px]">
-                    <CheckCircle className="mt-1 h-4 w-4 shrink-0 text-healio-primary" aria-hidden="true" />
-                    <span>{fact}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.12 }}
+          className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
+          aria-label={t('hero.offerAria')}
+        >
+          <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
+            <div className="flex items-center gap-4">
+              <img
+                src="/images/friendly-icons/health-wallet.webp"
+                alt=""
+                width="311"
+                height="315"
+                loading="eager"
+                decoding="async"
+                className="w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
+              />
+              <div className="min-w-0">
+                <p className="font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl">
+                  {t('hero.offerTitle', { amount: euro.format(budget.budget) })}
+                </p>
+                <p className="mt-1 text-sm font-semibold text-slate-600 sm:text-base">
+                  {t('hero.offerTier', { code: budget.code, refund: budget.refund })}
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {budget.pots.map((pot, index) => (
+                <a
+                  key={pot.key}
+                  href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
+                  className={`group block rounded-2xl border bg-white/95 p-4 shadow-[0_12px_30px_rgba(39,63,72,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${potBorders[index % potBorders.length]}`}
+                >
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="font-display text-lg font-extrabold leading-tight text-[#071726]">{pot.label}</span>
+                    <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${potDots[index % potDots.length]}`} aria-hidden="true" />
+                  </span>
+                  <span className="mt-1 block font-display text-base font-extrabold text-[#0b6048]">
+                    {t('hero.offerUpTo', { amount: euro.format(pot.amount) })}
+                  </span>
+                  <span className="mt-1 block text-base leading-snug text-slate-600">{pot.detail}</span>
+                </a>
+              ))}
+            </div>
+            <p className="mt-4 text-sm leading-6 text-slate-500">{budget.disclosure}</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

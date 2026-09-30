@@ -349,6 +349,20 @@ export const getAmbulantCompactFaqs = (language = 'de', fromBonusTopic = false) 
   getAmbulantCopy(language, fromBonusTopic).faqs
 );
 
+// Angebotskarte im Ambulant-Hero (Frank 30.09.2026, Vorbild /stationaer):
+// höchste Stufe mit ihren vier Töpfen aus denselben Daten wie die Tarifwahl.
+export const getAmbulantHeroBudget = (language = 'de') => {
+  const top = TIERS[TIERS.length - 1];
+  const copy = getAmbulantCopy(language, false);
+  return {
+    code: top.code,
+    refund: top.refund,
+    budget: top.budget,
+    pots: POT_KEYS.map((key) => ({ key, amount: top.pots[key], ...copy.tiers.pots[key] })),
+    disclosure: copy.tiers.disclosure,
+  };
+};
+
 const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const { lang, getPath } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';

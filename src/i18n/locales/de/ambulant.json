@@ -14,7 +14,11 @@
     "ctaBonus": "Bonus sichern",
     "heroImageAlt": "Frau mit Smartphone informiert sich über ihr digitales Gesundheitsbudget",
     "ctaBonusCalc": "Bonus berechnen",
-    "ctaCompare": "Budget prüfen"
+    "ctaCompare": "Budget prüfen",
+    "offerAria": "Dein Gesundheitsbudget im Überblick",
+    "offerTitle": "Bis zu {{amount}} in zwei Jahren",
+    "offerTier": "Stufe Ambulant 100 ({{code}}), {{refund}} Erstattung",
+    "offerUpTo": "bis {{amount}}"
   },
   "trust": {
     "partners": "Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic",
