@@ -180,7 +180,7 @@
   },
   "tarife": {
     "eyebrow": "Ambulant und stationär",
-    "title": "Was du Familien sagen kannst",
+    "title": "Was Healio mit deinen Familien klärt",
     "lead": "Ambulant geht es um die Vorsorge in der Schwangerschaft, stationär um das Krankenhaus und um das Kind.",
     "ambulant": {
       "label": "Ambulant",
@@ -198,7 +198,7 @@
     "bayerische": {
       "label": "Gut zu wissen",
       "title": "Die Bayerische und deine Hebammenleistungen",
-      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Für dich ist das ein guter Grund, das Thema anzusprechen. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
+      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
       "condition": "Es gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten. Eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert."
     }
   },

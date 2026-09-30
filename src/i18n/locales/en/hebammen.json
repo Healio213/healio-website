@@ -2,7 +2,7 @@
   "hero": {
     "badge": "Especially for Midwives",
     "title": "<highlight>Full courses</highlight> for you and the best care for your families.",
-    "subtitle": "How your expectant mothers effectively pay zero euros for important extras starting today and you get fairly rewarded for your work.",
+    "subtitle": "Healio shows families which statutory benefits, bonuses and supplementary insurance may fit their situation. You give a neutral hint; we check and advise individually.",
     "cta": "Book your free introduction now",
     "secondaryCta": "View the concept with Nita",
     "note": "No insurance advice by the midwife is required."
@@ -181,7 +181,7 @@
   },
   "tarife": {
     "eyebrow": "Outpatient and inpatient",
-    "title": "What you can tell families",
+    "title": "What Healio clarifies with your families",
     "lead": "Outpatient cover is about antenatal care during pregnancy; inpatient cover is about the hospital and the child.",
     "ambulant": {
       "label": "Outpatient",
@@ -199,7 +199,7 @@
     "bayerische": {
       "label": "Good to know",
       "title": "Die Bayerische and your midwifery services",
-      "text": "According to die Bayerische's product documents, the hospital plans Komfort and Prestige reimburse midwife costs that go beyond what statutory health insurance pays, including for midwives who bill privately. That is a good reason for you to raise the topic. Families take out the policy because they want to be well insured.",
+      "text": "According to die Bayerische's product documents, the hospital plans Komfort and Prestige reimburse midwife costs that go beyond what statutory health insurance pays, including for midwives who bill privately. Families take out the policy because they want to be well insured.",
       "condition": "There is a waiting period of three months, and of eight months for childbirth. A pregnancy that already exists when the application is made is not covered."
     }
   },
