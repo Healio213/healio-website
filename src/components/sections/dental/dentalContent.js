@@ -17,6 +17,7 @@ const de = {
     ticketFooter: '4 Wege. 1 klare Empfehlung.',
     routes: ['Bayerische', 'UKV', 'LKH', 'Sofortschutz'],
     iconAlt: 'Freundliches Symbol für Zahnschutz',
+    photoAlt: 'Patientin im Gespräch am hellen Empfang einer Praxis',
     trust: [
       'Registrierter Versicherungsmakler',
       'Antworten bleiben auf dieser Seite',
@@ -367,6 +368,7 @@ const en = {
     ticketNo: 'No: choose cover, family or price',
     ticketFooter: '4 routes. 1 clear recommendation.',
     iconAlt: 'Friendly dental protection icon',
+    photoAlt: 'Patient talking at the bright reception desk of a practice',
     trust: ['Registered insurance broker', 'Answers stay on this page', 'Personally available'],
   },
   check: {
