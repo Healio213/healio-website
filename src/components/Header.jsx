@@ -191,7 +191,7 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-5 xl:gap-8">
+        <div className="hidden xl:flex items-center gap-5 xl:gap-8">
           <ul className="flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => (
               <li
@@ -343,7 +343,7 @@ const Header = () => {
               exit={{ opacity: 0, y: -6, scale: 0.96 }}
               transition={{ duration: 0.24, ease: 'easeOut' }}
               data-ambulant-header-cta="mobile"
-              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
               aria-label={lang === 'de' ? 'Beitrag berechnen' : 'Get quote – German form'}
             >
               <Calculator className="h-4 w-4" aria-hidden="true" />
@@ -356,7 +356,7 @@ const Header = () => {
         <button
           ref={mobileMenuButtonRef}
           onClick={() => setMobileMenuOpen((open) => !open)}
-          className="lg:hidden inline-flex h-11 w-11 items-center justify-center z-50 transition-colors text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint"
+          className="xl:hidden inline-flex h-11 w-11 items-center justify-center z-50 transition-colors text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-healio-mint"
           aria-label={mobileMenuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-navigation"
@@ -372,7 +372,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-[#1a1a2e]/95 backdrop-blur-md z-40 pt-28 px-6 lg:hidden flex flex-col items-center gap-6 h-screen overflow-y-auto pb-20"
+              className="fixed inset-0 bg-[#1a1a2e]/95 backdrop-blur-md z-40 pt-28 px-6 xl:hidden flex flex-col items-center gap-6 h-screen overflow-y-auto pb-20"
             >
               <ul className="flex flex-col items-center gap-6 text-xl w-full">
                 {navLinks.map((link) => (
