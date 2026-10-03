@@ -66,14 +66,16 @@ expect(!/KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine 
 expect((dentalPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="zahn"\s*\/>/.test(dentalPage), 'Zahn zeigt die Brücken-Strecke genau einmal als Zahn-Variante.');
 expect(dentalPage.indexOf('<CompactBonusFeature') < dentalPage.indexOf('<AmbulantIKKWechsel') && dentalPage.indexOf('id="kassenbonus"') < dentalPage.indexOf('<AmbulantIKKWechsel'), 'Die Zahn-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
 
-// Stationär: SP2, SP1 und SPU werden getrennt; nur SPU trägt die konkrete Null-Euro-Rechnung.
+// Stationär: SP2, SP1 und SPU werden getrennt; SPU trägt die konkrete Modellrechnung, ohne 0-EUR-Versprechen (Frank 03.10.2026).
 expect(inpatientPage.indexOf('<ExplainerVideoCard') < inpatientPage.indexOf('<StationaerTariffSelector />'), 'Stationär muss das Erklärvideo vor der Tarifwahl zeigen.');
 expect(/lang === 'de'\s*&&\s*\(\s*<ExplainerVideoCard/.test(inpatientPage), 'Das deutsche Stationär-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(/<StationaerTariffSelector\s*\/>[\s\S]*?<StationaerBonusBridge\s*\/>/.test(inpatientPage), 'Stationär muss die Tarifwahl vor der Bonusbrücke zeigen.');
 expect(!/erklaervideo-stationaer\.mp4/.test(inpatientBonus), 'Das Stationär-Video darf im Bonusblock nicht doppelt erscheinen.');
 expect(/SP2/.test(inpatientDe) && /SP1/.test(inpatientDe) && /SPU/.test(inpatientDe), 'Stationär muss SP2, SP1 und SPU sichtbar unterscheiden.');
 expect(/Nur nach Unfall|Unfallschutz/i.test(inpatientDe), 'SPU muss sichtbar als Unfallschutz gekennzeichnet sein.');
-expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe) && /0\s*EUR/.test(inpatientDe), 'Die konkrete 100-Prozent-Rechnung muss das aktuelle SPU-Beispiel transparent abbilden.');
+expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe), 'Die konkrete Modellrechnung muss das aktuelle SPU-Beispiel transparent abbilden.');
+expect(!/"0 EUR"|Effektiver Restbeitrag|kein effektiver Restbeitrag/.test(inpatientDe), 'Stationär darf keinen effektiven Restbeitrag von 0 EUR versprechen.');
+expect(/nach dem Bonusjahr/.test(inpatientDe) && /nachgewiesenen Jahresbeitrags/.test(inpatientDe), 'Das SPU-Beispiel braucht Kostendeckel und Zeitversatz in Sichtnähe.');
 expect(/33,41\s*EUR/.test(inpatientDe) && /50,72\s*EUR/.test(inpatientDe), 'Stationär muss die aktuellen SDK-Beispielbeiträge für SP2 und SP1 bei Eintrittsalter 30 nennen.');
 expect(!/6,84|82,08|32,82|49,78|10,49|44,91|69,74/.test(inpatientDe), 'Stationär darf keine veralteten oder unbelegten Preisbeispiele enthalten.');
 expect(/getPath\('kassenboost'\)/.test(inpatientBonus), 'Die Stationär-Bonusbrücke muss in KassenBoost führen.');

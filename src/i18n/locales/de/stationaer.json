@@ -522,7 +522,7 @@
       "cta": "Krankenkasse passend zum Tarif finden",
       "example": {
         "eyebrow": "Transparentes SPU-Beispiel",
-        "title": "So können 100 % Beitragsentlastung aussehen.",
+        "title": "So kann dein Bonus den Klinikschutz mittragen.",
         "badge": "Modell für 30-Jährige",
         "rows": [
           {
@@ -534,14 +534,14 @@
             "value": "84,00 EUR"
           },
           {
-            "label": "Angenommener nutzbarer Kassenbonus",
-            "value": "mind. 84,00 EUR"
+            "label": "Realistischer Bonus-Zuschuss pro Jahr bei der IKK classic",
+            "value": "400 bis 700 EUR"
           }
         ],
-        "resultLabel": "Effektiver Restbeitrag im Modell",
-        "resultText": "Wenn dein nutzbarer Bonus mindestens den Jahresbeitrag erreicht",
-        "resultValue": "0 EUR",
-        "disclosure": "Konkrete Modellrechnung für SPU bei einem Beispielbeitrag von 7,00 EUR monatlich beziehungsweise 84,00 EUR jährlich für 30-Jährige. Dein Beitrag ist altersabhängig. Bonus und Verwendbarkeit hängen von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab; eine Erstattung ist auf den tatsächlich anrechenbaren Beitrag begrenzt."
+        "resultLabel": "Maximale Erstattung im Modell",
+        "resultText": "Bis zur Höhe deines nachgewiesenen Jahresbeitrags, ausgezahlt nach dem Bonusjahr",
+        "resultValue": "84,00 EUR",
+        "disclosure": "Konkrete Modellrechnung für SPU bei einem Beispielbeitrag von 7,00 EUR monatlich beziehungsweise 84,00 EUR jährlich für 30-Jährige. Dein Beitrag ist altersabhängig. Bonus und Verwendbarkeit hängen von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab; eine Erstattung ist auf den tatsächlich anrechenbaren Beitrag begrenzt. Deinen Beitrag zahlst du ganz normal jeden Monat. Den Zuschuss beantragst du nach Ende des Bonusjahres bei deiner Krankenkasse. Beginnt dein Vertrag erst im Herbst, fällt der Zuschuss für das erste Jahr entsprechend kleiner aus."
       }
     },
     "video": {
@@ -595,7 +595,7 @@
         },
         {
           "q": "Kann ein Kassenbonus den ganzen Beitrag ausgleichen?",
-          "a": "Bis zu 100 % Beitragsentlastung sind möglich. Besonders greifbar ist das beim günstigen SPU: Erreicht dein tatsächlich nutzbarer Bonus mindestens deinen Jahresbeitrag, kann im Modell kein effektiver Restbeitrag bleiben. Wie viel du persönlich erreichst, hängt von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab."
+          "a": "Bis zu 100 % Beitragsentlastung sind möglich. Besonders greifbar ist das beim günstigen SPU: Ein aktiver Kassenbonus kann den SPU-Jahresbeitrag ganz ausgleichen. Gezahlt wird höchstens bis zur Höhe deines nachgewiesenen Beitrags und erst nach dem Bonusjahr. Wie viel du persönlich erreichst, hängt von Krankenkasse, Aktivitäten, Nachweisen und Bonusbedingungen ab."
         },
         {
           "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",

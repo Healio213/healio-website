@@ -25,6 +25,7 @@ const TARIFF_CARDS = [
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
+  const { t: tCommon } = useTranslation('common');
   const { lang } = useLanguage();
   const reduceMotion = useReducedMotion();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/midwives' : 'https://healio.de/hebammen';
@@ -129,17 +130,18 @@ const HebammenPage = () => {
           captionsLabel={lang === 'en' ? 'English' : 'Deutsch'}
         />
 
-        {/* Qualitätssiegel: SDK + IKK classic */}
+        {/* Qualitätssiegel: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
+            SDK-Vollversicherung (Warentest 0,9, Morgen & Morgen) sind entfernt,
+            die IKK-Siegel durch die Fassung 09/2026 ersetzt (IKK-Mail 01.10.2026). */}
         <motion.section className="py-10 sm:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="container mx-auto px-4">
-            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic</p>
+            <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">{lang === 'en' ? 'Our partners: SDK Süddeutsche Krankenversicherung & IKK classic' : 'Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic'}</p>
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-6xl mx-auto">
-              <img src="/siegel/sdk/stiftung-warentest.png" alt="Stiftung Warentest SEHR GUT (0,9)" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/fairnesspreis.png" alt="Deutscher Fairnesspreis 2025" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/sdk/morgen-morgen.png" alt="Morgen und Morgen Ausgezeichnet" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/schwangere-test.webp" alt="Krankenkassentest für Schwangere und junge Eltern, Note 1,7 Gut" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/familien-test.webp" alt="Krankenkassentest für Familien, Note 1,6 Gut" className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp" alt={tCommon('awards.items.ikkParents')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+              <img src="/siegel/ikk/krankenkasseninfo-familien-2026-09.webp" alt={tCommon('awards.items.ikkFamily')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
             </div>
+            <p className="mx-auto mt-5 max-w-xl text-center text-xs leading-relaxed text-slate-500">{tCommon('awards.groups.ikkNote')}</p>
           </div>
         </motion.section>
 

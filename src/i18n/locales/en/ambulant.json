@@ -709,16 +709,16 @@
     "extrasSubtitle": "Where health insurance funds differ, IKK classic offers more",
     "extras": {
       "schwangerschaft": {
-        "title": "Pregnancy, over €1,000",
-        "desc": "€250 midwife on-call, €100 prenatal care subsidy, €180 baby bonus, free partner course, minerals included."
+        "title": "Pregnancy, up to €450 extra",
+        "desc": "Up to €250 for your midwife's on-call service, up to €100 for additional prenatal check-ups and up to €100 for iron, folic acid or magnesium on a private prescription. If your partner is insured with IKK classic as well, they can choose a subsidy for their own birth preparation course instead of the cash bonus, at most up to the course costs."
       },
       "osteopathie": {
         "title": "Osteopathy, €160/year",
         "desc": "4 sessions at €40 per calendar year, also for babies and children, no age limit."
       },
       "bonus": {
-        "title": "Bonus program, over €700 possible",
-        "desc": "For preventive care, sports and vaccinations. The subsidy option triples your cash bonus, with no cap."
+        "title": "Bonus programme: cash bonus or triple subsidy",
+        "desc": "You earn a cash bonus for check-ups, sport and vaccinations. Instead of the cash bonus you can choose three times the amount as a subsidy, for example towards your supplementary insurance premium. It pays out at most up to your documented costs."
       },
       "spartarif": {
         "title": "Savings plan, up to €600/year back",

@@ -757,16 +757,16 @@
     "extrasSubtitle": "Dort, wo sich Krankenkassen unterscheiden, bietet die IKK classic mehr",
     "extras": {
       "schwangerschaft": {
-        "title": "Schwangerschaft, über 1.000 €",
-        "desc": "250 € Hebammen-Rufbereitschaft, 100 € Vorsorge-Zuschuss, 180 € Baby-Bonus, kostenloser Partner-Kurs, Mineralstoffe inklusive."
+        "title": "Schwangerschaft, bis zu 450 € extra",
+        "desc": "Bis zu 250 € für die Rufbereitschaft deiner Hebamme, bis zu 100 € für zusätzliche Vorsorgeuntersuchungen und bis zu 100 € für Eisen, Folsäure oder Magnesium auf Privatrezept. Ist dein Partner oder deine Partnerin selbst bei der IKK classic versichert, kann er oder sie statt des Geldbonus einen Zuschuss für den eigenen Geburtsvorbereitungskurs wählen, höchstens bis zu den Kurskosten."
       },
       "osteopathie": {
         "title": "Osteopathie, 160 €/Jahr",
         "desc": "4 Sitzungen à 40 € pro Kalenderjahr, auch für Babys und Kinder, ohne Altersbegrenzung."
       },
       "bonus": {
-        "title": "Bonusprogramm, über 700 € möglich",
-        "desc": "Für Vorsorge, Sport und Impfungen. Die Zuschuss-Option verdreifacht deinen Geldbonus, ohne Obergrenze."
+        "title": "Bonusprogramm: Geldbonus oder dreifacher Zuschuss",
+        "desc": "Für Vorsorge, Sport und Impfungen gibt es einen Geldbonus. Statt des Geldbonus kannst du das Dreifache als Zuschuss wählen, zum Beispiel für den Beitrag deiner Zusatzversicherung. Gezahlt wird höchstens bis zur Höhe deiner nachgewiesenen Kosten."
       },
       "spartarif": {
         "title": "Spartarif, bis 600 €/Jahr zurück",

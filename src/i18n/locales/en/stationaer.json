@@ -522,7 +522,7 @@
       "cta": "Find a health insurer to match the plan",
       "example": {
         "eyebrow": "Transparent SPU example",
-        "title": "What 100% premium relief can look like.",
+        "title": "How your bonus can help pay for hospital cover.",
         "badge": "Model for age 30",
         "rows": [
           {
@@ -534,14 +534,14 @@
             "value": "EUR 84.00"
           },
           {
-            "label": "Assumed usable health fund bonus",
-            "value": "at least EUR 84.00"
+            "label": "Realistic bonus subsidy per year with IKK classic",
+            "value": "EUR 400 to 700"
           }
         ],
-        "resultLabel": "Effective remaining premium in this model",
-        "resultText": "If your usable bonus at least matches the annual premium",
-        "resultValue": "EUR 0",
-        "disclosure": "Specific model calculation for SPU using an illustrative premium of EUR 7.00 per month or EUR 84.00 per year at age 30. Your premium depends on age. Bonus and usability depend on your health insurer, activities, proof and bonus terms; reimbursement is limited to the contribution that is actually eligible."
+        "resultLabel": "Maximum reimbursement in this model",
+        "resultText": "Up to your documented annual premium, paid after the bonus year",
+        "resultValue": "EUR 84.00",
+        "disclosure": "Specific model calculation for SPU using an illustrative premium of EUR 7.00 per month or EUR 84.00 per year at age 30. Your premium depends on age. Bonus and usability depend on your health insurer, activities, proof and bonus terms; reimbursement is limited to the contribution that is actually eligible. You pay your premium as usual every month. You apply for the subsidy with your health insurer after the bonus year ends. If your contract only starts in autumn, the subsidy for the first year is correspondingly smaller."
       }
     },
     "video": {
@@ -595,7 +595,7 @@
         },
         {
           "q": "Can a health fund bonus offset the entire premium?",
-          "a": "Up to 100% premium relief is possible. This is especially tangible with affordable SPU: if your actually usable bonus at least matches your annual premium, the model can leave no effective remaining premium. Your personal amount depends on your health insurer, activities, proof and bonus terms."
+          "a": "Up to 100% premium relief is possible. This is especially tangible with affordable SPU: an active health fund bonus can offset the full SPU annual premium. It pays out at most up to your documented premium and only after the bonus year. Your personal amount depends on your health insurer, activities, proof and bonus terms."
         },
         {
           "q": "How does newborn enrolment work?",

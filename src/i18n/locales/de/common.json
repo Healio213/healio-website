@@ -92,6 +92,22 @@
   },
   "langSwitch": "EN",
   "awards": {
-    "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept"
+    "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept",
+    "groups": {
+      "sdk": "Unser Produktpartner SDK",
+      "zahn": "Zahn-Tarife unserer Produktpartner",
+      "ikk": "Die Krankenkasse IKK classic im Test",
+      "ikkNote": "krankenkasseninfo.de, Stand 09/2026, 72 gesetzliche Krankenkassen im Test. Bewertet wird die Krankenkasse IKK classic, nicht die Zusatzversicherung."
+    },
+    "items": {
+      "fairness": "ntv Deutscher Fairness-Preis 2025 für die SDK: Gesamtsieger Private Krankenversicherer, Kundenurteil zu 24 Anbietern, Deutsches Institut für Service-Qualität",
+      "ikkParents": "krankenkasseninfo.de Krankenkassentest für Schwangere und junge Eltern: IKK classic Testnote 1,7 (Gut), Stand 09/2026, 72 gesetzliche Krankenkassen im Test",
+      "ikkFamily": "krankenkasseninfo.de Krankenkassentest für Familien: IKK classic Testnote 1,6 (Gut), Stand 09/2026, 72 gesetzliche Krankenkassen im Test",
+      "warentestSp1": {
+        "source": "Stiftung Warentest",
+        "result": "SDK Klinik 1-Bett (SP1): sehr gut (1,1)",
+        "detail": "Finanzen 04/2026, 72 Krankenhauszusatztarife im Test, bestes Ergebnis 1,0"
+      }
+    }
   }
 }
