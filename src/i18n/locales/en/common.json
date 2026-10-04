@@ -96,18 +96,13 @@
     "groups": {
       "sdk": "Our product partner SDK",
       "zahn": "Dental plans from our product partners",
-      "ikk": "The health fund IKK classic in independent tests",
+      "ikk": "Test results for the health fund IKK classic",
       "ikkNote": "krankenkasseninfo.de, as of 09/2026, 72 statutory health funds tested. The rating covers the health fund IKK classic, not the supplementary insurance."
     },
     "items": {
       "fairness": "ntv German Fairness Award 2025 for SDK: overall winner among private health insurers, customer survey of 24 providers, German Institute for Service Quality",
       "ikkParents": "krankenkasseninfo.de health fund test for expectant and new parents: IKK classic grade 1.7 (good), as of 09/2026, 72 statutory health funds tested",
-      "ikkFamily": "krankenkasseninfo.de health fund test for families: IKK classic grade 1.6 (good), as of 09/2026, 72 statutory health funds tested",
-      "warentestSp1": {
-        "source": "Stiftung Warentest",
-        "result": "SDK Klinik 1-Bett (SP1): “sehr gut” (very good, 1.1)",
-        "detail": "Finanzen 04/2026, 72 hospital supplementary plans tested, best result 1.0"
-      }
+      "ikkFamily": "krankenkasseninfo.de health fund test for families: IKK classic grade 1.6 (good), as of 09/2026, 72 statutory health funds tested"
     }
   }
 }

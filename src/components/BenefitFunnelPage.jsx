@@ -3,6 +3,7 @@ import { Check, Heart, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
+import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
 import { useReferrer } from '@/hooks/useReferrer';
@@ -303,6 +304,9 @@ export default function BenefitFunnelPage() {
             <div>
               <h2 id="bonus-heading" className="font-friendly text-3xl md:text-4xl">Dein Bonus: jede Vorsorge zählt einzeln</h2>
               <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-home-slate">Bei der IKK classic bringt jede Mutterschaftsvorsorge 10 EUR Geldbonus oder 30 EUR Zuschuss, die Rückbildung später 25 oder 75 EUR. Der Zuschuss bezahlt deinen Versicherungsbeitrag, höchstens bis zu deinen tatsächlichen Kosten.</p>
+              {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), nur
+                  eigene Bilddateien, nichts von Dritten (Messsperre auf dieser Seite). */}
+              <IkkKassenSiegel order="parents" align="start" className="mt-6" />
             </div>
           </div>
           <div className="mt-8">

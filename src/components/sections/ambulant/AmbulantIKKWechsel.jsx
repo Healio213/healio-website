@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Shield, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
 import { IKK_LINK, trackIkkClick } from '@/lib/sdk-url';
 
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
@@ -95,6 +96,10 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               />
             </button>
           </div>
+
+          {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
+              03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile. */}
+          <IkkKassenSiegel className="mx-auto mt-8" />
         </div>
 
         {/* Die Brücken-Szene steht wieder offen sichtbar (Frank 29.09.2026);

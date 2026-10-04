@@ -14,6 +14,7 @@ import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import AppointmentBooking from '@/components/CalendlyEmbed';
+import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 
 // Zwei Tarifarten für Familien, Texte unter tarife.* in den Sprachdateien.
@@ -132,16 +133,19 @@ const HebammenPage = () => {
 
         {/* Qualitätssiegel: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
             SDK-Vollversicherung (Warentest 0,9, Morgen & Morgen) sind entfernt,
-            die IKK-Siegel durch die Fassung 09/2026 ersetzt (IKK-Mail 01.10.2026). */}
+            die IKK-Siegel durch die Fassung 09/2026 ersetzt (IKK-Mail 01.10.2026).
+            Beide Partner stehen als eigene Gruppe, damit klar bleibt, dass die
+            IKK-Siegel die Krankenkasse bewerten und nicht die Zusatzversicherung. */}
         <motion.section className="py-10 sm:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="container mx-auto px-4">
             <p className="text-center text-xs text-slate-400 mb-6 font-medium uppercase tracking-wider">{lang === 'en' ? 'Our partners: SDK Süddeutsche Krankenversicherung & IKK classic' : 'Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic'}</p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 max-w-6xl mx-auto">
-              <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp" alt={tCommon('awards.items.ikkParents')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
-              <img src="/siegel/ikk/krankenkasseninfo-familien-2026-09.webp" alt={tCommon('awards.items.ikkFamily')} className="h-20 sm:h-24 md:h-28 w-auto" loading="lazy" />
+            <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 md:flex-row md:flex-wrap md:items-start md:justify-center md:gap-x-14">
+              <div className="flex flex-col items-center">
+                <p className="text-center text-sm font-semibold text-slate-600">{tCommon('awards.groups.sdk')}</p>
+                <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} width="240" height="240" className="mt-3 h-20 sm:h-24 md:h-28 w-auto" loading="lazy" decoding="async" />
+              </div>
+              <IkkKassenSiegel order="parents" size="large" />
             </div>
-            <p className="mx-auto mt-5 max-w-xl text-center text-xs leading-relaxed text-slate-500">{tCommon('awards.groups.ikkNote')}</p>
           </div>
         </motion.section>
 
