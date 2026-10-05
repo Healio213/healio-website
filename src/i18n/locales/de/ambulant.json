@@ -967,5 +967,77 @@
     "noWait": "Ohne Wartezeit",
     "cta": "Beitrag berechnen & Antrag starten",
     "footnote": "Alle Beiträge sind altersabhängig. Beispielbeiträge für den Tarif Ambulant 100, Stand 2026. Die Budgets gelten je 2 Jahre laut SDK-Tarifbedingungen; deinen exakten Beitrag zeigt dir die SDK-Rechenstrecke vor dem Abschluss."
+  },
+  "vorsorgeBaustein": {
+    "eyebrow": "Zusatzoption · UKV VorsorgePRIVAT",
+    "title": "Nur Vorsorge wichtig? Der kleine Vorsorge-Baustein.",
+    "lead": "Laut UKV zahlt der Vorsorgetarif ärztliche Vorsorge auch dann, wenn deine Krankenkasse sie in deinem Alter oder in diesem Abstand nicht übernimmt.",
+    "preventionLabel": "Ärztliche Vorsorge zu 100 %",
+    "preventionValue": "bis 500 EUR pro Jahr",
+    "preventionStart": "Im 1. Kalenderjahr bis 200 EUR",
+    "priceLabel": "Monatsbeitrag ab 20 Jahren",
+    "priceValue": "13,45 €",
+    "perMonth": "/ Monat",
+    "priceChildLabel": "Bis 19 Jahre",
+    "priceChildValue": "8,80 €",
+    "priceGlassesShort": "Mit Brille oder Kontaktlinsen 4 € mehr.",
+    "examplesTitle": "Zum Beispiel",
+    "examplesShort": [
+      "Hautkrebs-Screening",
+      "Krebsvorsorge wie Darmspiegelung",
+      "Großes Blutbild mit Vitamin D"
+    ],
+    "facts": [
+      "Keine Wartezeit",
+      "Keine Fragen zu Vorerkrankungen"
+    ],
+    "cta": "Vorsorge-Baustein anfragen",
+    "ctaHint": "Wir melden uns persönlich und klären den Antrag mit dir.",
+    "ctaLink": "Vorsorge-Baustein berechnen",
+    "ctaLinkHint": "Der Rechner zeigt dir direkt den Vorsorge-Baustein.",
+    "sdkTitle": "Mehr als Vorsorge? Das SDK-Gesundheitsbudget mit bis zu 3.000 EUR in zwei Jahren.",
+    "detailsTitle": "Alle Details",
+    "detailsHint": "Bedingungen, Immer mit drin, Kündigung",
+    "preventionStaffel": "Im 1. Kalenderjahr bis 200 EUR, in den ersten beiden Kalenderjahren zusammen bis 500 EUR.",
+    "examples": [
+      "Hautkrebs-Screening mit Auflichtmikroskopie",
+      "Krebsvorsorge wie Darmspiegelung, Mammografie, Ultraschall der Brust, PSA- oder HPV-Test",
+      "Allgemeiner Check-up",
+      "Großes Blutbild mit Vitamin D und Schilddrüsenwert (TSH)",
+      "Für Kinder: U10, U11, J2 sowie Augen- und Hör-Check"
+    ],
+    "preventionRule": "Erstattet wird die Untersuchung beim Arzt mit Rechnung nach GOÄ. Rechnungen vom Heilpraktiker, Pauschalrechnungen und Quittungen zählen hier nicht. Bei begründetem Krankheitsverdacht ist es Behandlung und keine Vorsorge.",
+    "includedTitle": "Immer mit drin",
+    "included": [
+      {
+        "label": "Impfungen",
+        "text": "auch Reiseimpfungen und Malariaprophylaxe, 100 % bis 300 EUR in zwei Kalenderjahren"
+      },
+      {
+        "label": "Brille und Kontaktlinsen",
+        "text": "ohne Verordnung, 80 % von bis zu 500 EUR, also bis 400 EUR in zwei Kalenderjahren"
+      },
+      {
+        "label": "Augenlasern",
+        "text": "100 % bis 1.500 EUR in der gesamten Vertragslaufzeit, im 1. Kalenderjahr bis 200 EUR, in den ersten beiden zusammen bis 500 EUR"
+      },
+      {
+        "label": "Hörgeräte",
+        "text": "ärztlich verordnet, nach dem Anteil deiner Krankenkasse 80 % von bis zu 1.000 EUR, also bis 800 EUR in fünf Kalenderjahren"
+      }
+    ],
+    "applicationTitle": "Antrag",
+    "questionsNote": "Kein Höchstaufnahmealter. Der Antrag fragt nur nach einer Sehhilfe (dann 4 € Zuschlag) und nach Schwerhörigkeit oder Gehörlosigkeit (dann sind Hörgeräte nicht versichert).",
+    "fitTitle": "Passt gut für",
+    "fit": [
+      "Vorsorge ohne Heilpraktiker",
+      "Kinder",
+      "Fernreisen mit Impfungen",
+      "Mehr Vorsorge, als dein SDK-Topf abdeckt"
+    ],
+    "sdkText": "Jede SDK-Stufe hat schon einen Topf für Vorsorge und einen für Brille und Kontaktlinsen, je nach Stufe jeweils 200 bis 500 EUR in zwei Jahren. Der Vorsorge-Baustein passt, wenn du nur Vorsorge willst oder dir mehr Vorsorge wichtig ist, als dein SDK-Topf abdeckt.",
+    "priceGlasses": "Wer eine Brille oder Kontaktlinsen trägt oder braucht, zahlt 4 € mehr: 17,45 € für Erwachsene, 12,80 € für Kinder.",
+    "priceAgeRule": "Der Erwachsenenbeitrag gilt ab Januar des Jahres, in dem du 20 wirst. Danach gibt es keine weitere Altersstufe, Beitragsanpassungen bleiben möglich.",
+    "disclosure": "Beiträge der UKV gültig ab 01.05.2026. Zusammen mit Krankenkasse und anderen Versicherungen wird nie mehr als der Rechnungsbetrag erstattet. Der Vorsorge-Baustein läuft mindestens bis zum Ende des folgenden Kalenderjahres und ist danach jährlich mit drei Monaten Frist zum Jahresende kündbar. Maßgeblich sind die Tarifbedingungen der UKV."
   }
 }

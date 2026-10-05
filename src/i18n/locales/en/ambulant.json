@@ -919,5 +919,77 @@
     "noWait": "No waiting period",
     "cta": "Get quote – German form",
     "footnote": "All premiums depend on age. Example premiums shown for the Ambulant 100 tariff, as of 2026. Budgets apply per 2-year period according to the SDK tariff terms; the SDK application route shows your exact premium before you sign up."
+  },
+  "vorsorgeBaustein": {
+    "eyebrow": "Add-on option · UKV VorsorgePRIVAT",
+    "title": "Mostly about check-ups? The small prevention add-on.",
+    "lead": "According to UKV, the prevention plan pays for preventive care by doctors even when your statutory insurer does not cover it at your age or at that interval.",
+    "preventionLabel": "Preventive care by doctors at 100%",
+    "preventionValue": "up to EUR 500 a year",
+    "preventionStart": "Up to EUR 200 in the first calendar year",
+    "priceLabel": "Monthly premium from age 20",
+    "priceValue": "€13.45",
+    "perMonth": "/ month",
+    "priceChildLabel": "Up to age 19",
+    "priceChildValue": "€8.80",
+    "priceGlassesShort": "€4 more with glasses or contact lenses.",
+    "examplesTitle": "For example",
+    "examplesShort": [
+      "Skin cancer screening",
+      "Cancer screening such as colonoscopy",
+      "Full blood count with vitamin D"
+    ],
+    "facts": [
+      "No waiting period",
+      "No questions about pre-existing conditions"
+    ],
+    "cta": "Ask about the prevention add-on",
+    "ctaHint": "We get back to you personally and go through the application with you.",
+    "ctaLink": "Calculate the prevention add-on",
+    "ctaLinkHint": "The calculator shows you the prevention add-on directly. The form is in German.",
+    "sdkTitle": "More than prevention? The SDK health budget with up to EUR 3,000 in two years.",
+    "detailsTitle": "All details",
+    "detailsHint": "Conditions, always included, cancellation",
+    "preventionStaffel": "Up to EUR 200 in the first calendar year and up to EUR 500 in the first two calendar years combined.",
+    "examples": [
+      "Skin cancer screening with dermatoscopy",
+      "Cancer screening such as colonoscopy, mammography, breast ultrasound, PSA or HPV test",
+      "General health check-up",
+      "Full blood count with vitamin D and thyroid value (TSH)",
+      "For children: U10, U11, J2 plus eye and hearing checks"
+    ],
+    "preventionRule": "Reimbursed for examinations by a doctor invoiced under the German medical fee scale (GOÄ). Invoices from alternative practitioners, flat-rate invoices and receipts do not count here. If there is a justified suspicion of illness, it counts as treatment, not prevention.",
+    "includedTitle": "Always included",
+    "included": [
+      {
+        "label": "Vaccinations",
+        "text": "including travel vaccines and malaria prophylaxis, 100% up to EUR 300 in two calendar years"
+      },
+      {
+        "label": "Glasses and contact lenses",
+        "text": "no prescription needed, 80% of up to EUR 500, so up to EUR 400 in two calendar years"
+      },
+      {
+        "label": "Laser eye surgery",
+        "text": "100% up to EUR 1,500 over the whole contract term, up to EUR 200 in the first calendar year and up to EUR 500 in the first two combined"
+      },
+      {
+        "label": "Hearing aids",
+        "text": "prescribed by a doctor, after your statutory insurer's share 80% of up to EUR 1,000, so up to EUR 800 in five calendar years"
+      }
+    ],
+    "applicationTitle": "Application",
+    "questionsNote": "No maximum entry age. The application only asks about a vision aid (then a €4 surcharge) and about hearing loss or deafness (then hearing aids are not covered).",
+    "fitTitle": "A good fit for",
+    "fit": [
+      "Prevention without an alternative practitioner",
+      "Children",
+      "Long-haul travel with vaccinations",
+      "More prevention than your SDK pot covers"
+    ],
+    "sdkText": "Every SDK level already has one pot for prevention and one for glasses and contact lenses, EUR 200 to 500 each in two years depending on the level. The prevention add-on fits if you only want prevention or if more prevention matters to you than your SDK pot covers.",
+    "priceGlasses": "If you wear or need glasses or contact lenses, you pay €4 more: €17.45 for adults, €12.80 for children.",
+    "priceAgeRule": "The adult premium applies from January of the year you turn 20. There is no further age step after that, premium adjustments remain possible.",
+    "disclosure": "UKV premiums valid from 1 May 2026. Together with your statutory insurer and other policies, reimbursement never exceeds the invoice amount. The prevention add-on runs at least until the end of the following calendar year and can then be cancelled annually with three months' notice to the end of the year. The UKV policy terms apply."
   }
 }

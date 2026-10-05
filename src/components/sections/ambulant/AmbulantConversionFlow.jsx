@@ -1,7 +1,7 @@
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ArrowRight,
   BadgeCheck,
@@ -20,6 +20,7 @@ import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonu
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
+import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
 import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 
 const COPY = {
@@ -365,6 +366,12 @@ export const getAmbulantHeroBudget = (language = 'de') => {
 
 const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const { lang, getPath } = useLanguage();
+  const { pathname } = useLocation();
+  // UKV-Vorsorge-Baustein nur auf /ambulant und /en/outpatient, nie auf der
+  // Heilpraktiker-Adresse und nie auf dem neutralen Themen-Anschluss.
+  const vorsorgePath = pathname.replace(/\/+$/, '');
+  const showVorsorgeBaustein = !fromBonusTopic
+    && (vorsorgePath === '/ambulant' || vorsorgePath === '/en/outpatient');
   const language = lang === 'en' ? 'en' : 'de';
   const copy = getAmbulantCopy(language, fromBonusTopic);
   const referrer = useReferrer();
@@ -653,6 +660,14 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             </details>
             <p className="border-t border-slate-100 px-5 py-3 text-xs leading-5 text-slate-500 sm:px-6">{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
+
+          {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
+              unter der SDK-Tarifwahl, bewusst innerhalb dieses Abschnitts, damit
+              die IKK-Wechsel-Strecke direkt nach der Tarifwahl bleibt. Auf dem
+              neutralen Themen-Anschluss (src=reel-f05/bonus-check) und nicht auf
+              der Heilpraktiker-Adresse; showVorsorgeBaustein gilt nur für
+              /ambulant und /en/outpatient. */}
+          {showVorsorgeBaustein && <AmbulantVorsorgeBaustein />}
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 
 // Prüft die echten Module (sdk-url, google-ads, meta-pixel, analytics,
-// dentalLinks, hospitalLinks) in einer nachgebauten Browserumgebung. Nur Fenster, Speicher,
+// dentalLinks, hospitalLinks, ukvAmbulantLinks) in einer nachgebauten Browserumgebung. Nur Fenster, Speicher,
 // fbq und fetch sind Attrappen.
 //
 // Festgeschrieben wird:
@@ -12,6 +12,8 @@ import { fileURLToPath } from 'node:url';
 //   das GA4-Ereignis bleibt reine Statistik und geht nur an GA4.
 // - "Antrag geöffnet" zählt auch auf /stationaer und /en/inpatient, dort
 //   auch beim Bayerische-Klinik-Link (hospitalLinks).
+// - Der UKV-Vorsorge-Baustein auf /ambulant zählt nur mit gesetztem Link als
+//   "Antrag geöffnet", ohne Daten; der Link muss ein sauberer https-Link sein.
 // - Gesperrte Seiten (/schwangerschaft, private src-Codes) bleiben gesperrt.
 // - Konto-ID und Labels wirken auch ohne Vercel-Variable über die Konstante.
 
@@ -36,6 +38,7 @@ export {
 export { GA4_MEASUREMENT_ID } from '@/lib/analytics';
 export { trackZahnEvent } from '@/components/sections/dental/dentalLinks';
 export { trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
+export { getUkvAmbulantUrl, sanitizeUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections/ambulant/ukvAmbulantLinks';
 `;
 
 // config === null: echte Datei src/lib/google-ads-config.js verwenden.
@@ -188,6 +191,48 @@ try {
     const mod = await load(configured);
     mod.trackStationaerBayerischeClick('stationaer-alternative');
     assert.equal(conversions().length, 0, 'Ohne Zustimmung marketing zählt der Bayerische-Klinik-Link nicht.');
+  }
+
+  // 3c. UKV-Vorsorge-Baustein auf /ambulant: zählt als "Antrag geöffnet",
+  //     nur mit send_to und ohne Daten. Gesperrte Seiten und fehlende
+  //     Zustimmung bleiben still. Der Link selbst muss ein sauberer https-Link
+  //     sein, sonst bleibt der Knopf beim Kontaktweg.
+  for (const path of ['/ambulant', '/en/outpatient']) {
+    browserAt(path, ALL_ON);
+    const mod = await load(configured);
+    mod.trackUkvAmbulantAntrag();
+    assert.deepEqual(
+      conversions().map(([, , params]) => params),
+      [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }],
+      `Der UKV-Vorsorge-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to.`,
+    );
+    assert.equal(metaTracks().length, 0, `Der UKV-Vorsorge-Link darf kein Meta-Ereignis senden (${path}).`);
+  }
+  for (const path of ['/ambulant?src=bonus-check', '/ambulant?src=reel-f05', '/schwangerschaft', '/heilpraktiker-zusatzversicherung']) {
+    browserAt(path, ALL_ON);
+    const mod = await load(configured);
+    mod.trackUkvAmbulantAntrag();
+    assert.equal(conversions().length, 0, `Der UKV-Vorsorge-Link darf auf ${path} keine Conversion senden.`);
+  }
+  browserAt('/ambulant', consentWith({ analytics: true }));
+  {
+    const mod = await load(configured);
+    mod.trackUkvAmbulantAntrag();
+    assert.equal(conversions().length, 0, 'Ohne Zustimmung marketing zählt der UKV-Vorsorge-Link nicht.');
+    const ukvUrl = mod.getUkvAmbulantUrl();
+    assert(ukvUrl === null || ukvUrl.startsWith('https://'), 'UKV_AMBULANT_URL ist leer oder ein https-Link.');
+    assert.equal(mod.sanitizeUkvAmbulantUrl(''), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('   '), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('http://insurances-online.levelnine.biz/?mandant=vmk'), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('javascript:alert(1)'), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('https://user:pw@insurances-online.levelnine.biz/'), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('https://insurances-online.levelnine.biz:8443/'), null);
+    assert.equal(mod.sanitizeUkvAmbulantUrl('https://insurances-online.levelnine.biz/#x'), null);
+    assert.equal(
+      mod.sanitizeUkvAmbulantUrl('https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Ambulant'),
+      'https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Ambulant',
+      'Ein gelieferter https-Link muss unverändert durchgehen.',
+    );
   }
 
   // 4. "Anfrage" bleibt wie bisher und nutzt das Lead-Label.

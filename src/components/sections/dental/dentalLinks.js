@@ -7,6 +7,41 @@ import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 const BAYERISCHE_RAW_URL = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
 const UKV_RAW_URL = 'https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Zahn&agentId1=180188803&agentId2=226487&insurers=37&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJVS1YiLCJsYXN0TmFtZSI6IlVuaW9uIEtyYW5rZW52ZXJzaWNoZXJ1bmcgQUciLCJjb21wYW55IjoiIiwic3RyZWV0IjoiUGV0ZXItWmltbWVyLVN0ci4gMiIsInppcGNvZGUiOiI2NjEyMyIsImNpdHkiOiJTYWFyYnL8Y2tlbiIsIm1vYmlsZSI6IiIsImVtYWlsIjoia3JhbmtlbkBmb25kc2ZpbmFuei5kZSJ9&remarks=IiI=&defaultContact=false';
 
+// UKV-Vorsorge-Baustein auf /ambulant (Frank 05.10.2026): derselbe von der UKV
+// gelieferte Gesamtlink, nur tarifftypes von "Zahn" auf "Ambulant" und der
+// leere Parameter tariffs auf die Tarif-ID "UKVVorsorgePRIVAT@" gesetzt (das @
+// steht in der Strecke für #). Geprüft 05.10.2026: Die Strecke zeigt dann
+// ausschließlich VorsorgePRIVAT 13,45 EUR, schon ausgewählt. Agent-Nummern,
+// insurers und alle anderen Parameter bleiben Zeichen für Zeichen gleich.
+const UKV_AMBULANT_RAW_URL = UKV_RAW_URL
+  .replace('&tarifftypes=Zahn&', '&tarifftypes=Ambulant&')
+  .replace('&tariffs=&', '&tariffs=UKVVorsorgePRIVAT@&');
+
+const UKV_RULES = Object.freeze({
+  hostname: 'insurances-online.levelnine.biz',
+  pathname: '/',
+  allowedSearchParams: Object.freeze([
+    'mandant',
+    'tarifftypes',
+    'agentId1',
+    'agentId2',
+    'insurers',
+    'tariffs',
+    'customValues',
+    'contactInformation',
+    'remarks',
+    'defaultContact',
+  ]),
+  requiredSearchParams: Object.freeze({
+    mandant: 'vmk',
+    tarifftypes: 'Zahn',
+    agentId1: '180188803',
+    agentId2: '226487',
+    insurers: '37',
+    defaultContact: 'false',
+  }),
+});
+
 const PROVIDER_RULES = Object.freeze({
   bayerische: Object.freeze({
     hostname: 'www.diebayerische.de',
@@ -14,28 +49,15 @@ const PROVIDER_RULES = Object.freeze({
     allowedSearchParams: Object.freeze(['m', 'um']),
     requiredSearchParams: Object.freeze({ m: '002637', um: 'MAK226487' }),
   }),
-  ukv: Object.freeze({
-    hostname: 'insurances-online.levelnine.biz',
-    pathname: '/',
-    allowedSearchParams: Object.freeze([
-      'mandant',
-      'tarifftypes',
-      'agentId1',
-      'agentId2',
-      'insurers',
-      'tariffs',
-      'customValues',
-      'contactInformation',
-      'remarks',
-      'defaultContact',
-    ]),
+  ukv: UKV_RULES,
+  // Wie der Zahn-Link, nur mit tarifftypes "Ambulant" und fest gewähltem
+  // Tarif VorsorgePRIVAT.
+  ukvAmbulant: Object.freeze({
+    ...UKV_RULES,
     requiredSearchParams: Object.freeze({
-      mandant: 'vmk',
-      tarifftypes: 'Zahn',
-      agentId1: '180188803',
-      agentId2: '226487',
-      insurers: '37',
-      defaultContact: 'false',
+      ...UKV_RULES.requiredSearchParams,
+      tarifftypes: 'Ambulant',
+      tariffs: 'UKVVorsorgePRIVAT@',
     }),
   }),
 });
@@ -83,6 +105,7 @@ const requireSafeProviderUrl = (rawUrl, rules, provider) => {
 // über agentId2=226487 bleibt unverändert). URL-Parameter niemals manuell ändern.
 export const BAYERISCHE_URL = requireSafeProviderUrl(BAYERISCHE_RAW_URL, PROVIDER_RULES.bayerische, 'die Bayerische');
 export const UKV_URL = requireSafeProviderUrl(UKV_RAW_URL, PROVIDER_RULES.ukv, 'UKV');
+export const UKV_AMBULANT_URL = requireSafeProviderUrl(UKV_AMBULANT_RAW_URL, PROVIDER_RULES.ukvAmbulant, 'UKV Vorsorge-Baustein');
 
 // Vorbereitet, aktuell BEWUSST NICHT verlinkt (Franks Ansage 02.08.2026:
 // Fremdanbieter noch nicht öffentlich benennen, Strecke bleibt Bayerische/UKV).
