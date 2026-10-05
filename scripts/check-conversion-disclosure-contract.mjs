@@ -52,14 +52,18 @@ expect(/Math\.min\(totalSubsidyPotential,\s*jahresbeitrag\)/.test(bonusCalculato
 expect(!/nettoErgebnis|resultPlus/.test(bonusCalculator), 'Ein nicht auszahlbarer Zuschussüberschuss darf nicht als Plus erscheinen.');
 expect(/Geldbonus und Zuschuss sind Alternativen/.test(bonusCalculatorDe), 'Die Entweder-oder-Logik muss direkt am Rechner erklärt werden.');
 
-// Zahn: ein lokaler Check, vier strategische Wege inklusive verifizierter LKH-Lücke.
+// Zahn: ein lokaler Check, zwei Wege (Franks Entscheidung 05.10.2026): UKV ZahnPRIVAT
+// für alle Situationen ohne angeratene Behandlung, auch 1 bis 3 fehlende Zähne mit
+// Zuschlag je Zahn, und die Bayerische nur mit ZAHN Sofort für den Sofortschutz.
 expect(dentalPage.indexOf('<DentalVideoSection />') < dentalPage.indexOf('<DentalZahnCheck />'), 'Zahn muss das Erklärvideo vor dem Zahn-Check zeigen.');
 expect(/lang === 'de'\s*&&\s*<DentalVideoSection\s*\/>/.test(dentalPage), 'Das deutsche Zahn-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(dentalPage.indexOf('<DentalZahnCheck />') < dentalPage.indexOf('id="kassenbonus"'), 'Der Zahn-Check muss vor der Bonusbrücke stehen.');
-expect(/routes:\s*\['Bayerische', 'UKV', 'LKH', 'Sofortschutz'\]/.test(dentalContent), 'Der Zahn-Check muss alle vier strategischen Wege enthalten.');
-expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der LKH-Weg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
-expect(/5 EUR Risikozuschlag je fehlendem Zahn/.test(dentalContent), 'Der LKH-Weg muss den verifizierten Zuschlag nennen.');
-expect(/Keine Annahmegarantie/.test(dentalContent) && /LKH_GUIDELINE_URL/.test(dentalCheck), 'LKH braucht Quelle und sichtbaren Annahmehinweis.');
+expect(/routes:\s*\['UKV ZahnPRIVAT', 'Bayerische mit ZAHN Sofort'\]/.test(dentalContent), 'Der Zahn-Check muss genau die zwei Wege UKV ZahnPRIVAT und Bayerische mit ZAHN Sofort enthalten.');
+expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der UKV-Lückenweg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
+expect(/6,10 EUR[^']*9,00 EUR[^']*10,90 EUR/.test(dentalContent), 'Der UKV-Lückenweg muss die geprüften Zuschläge je Zahn nennen.');
+expect(/sprich vor dem Antrag mit uns/.test(dentalContent) && /result\.contactLabel/.test(dentalCheck) && /getPath\('kontakt'\)/.test(dentalCheck), 'Bei geplanter Versorgung einer Lücke braucht der UKV-Weg den Hinweis auf das Gespräch vorher.');
+expect(!/lkh|landeskrankenhilfe|zahnupgrade/i.test(`${dentalContent}\n${dentalCheck}\n${dentalPage}`), 'Die LKH darf auf der Zahnseite nicht mehr angeboten werden.');
+expect(!/ZAHN Prestige/.test(`${dentalContent}\n${dentalPage}`), 'ZAHN Prestige ist kein eigener Zahn-Weg mehr; die Bayerische bleibt nur für den Sofortschutz.');
 expect(/getPath\('kassenboost'\)/.test(dentalPage), 'Die Zahn-Bonusbrücke muss in KassenBoost statt in einen direkten Kassenwechsel führen.');
 expect(!/KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine alte Hinweis- oder Testimonials-Doppelstrecke rendern.');
 // Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Zahn-Variante und erst nach Bonusbrücke und Bonusrechner.

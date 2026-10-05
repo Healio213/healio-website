@@ -13,14 +13,19 @@ import {
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
-import { BAYERISCHE_URL, LKH_URL, LKH_URLS, UKV_URL } from './dentalLinks';
-import { getDentalContent, LKH_GUIDELINE_URL } from './dentalContent';
+import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
+import { getDentalContent } from './dentalContent';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
 const needsQ4 = (answers) =>
   answers.q1 === 'nein' && answers.q2 === 'keine' && answers.q3 === 'nein';
 
+// Franks Entscheidung vom 05.10.2026: Beim Zahn gibt es nur noch zwei Wege.
+// Die Bayerische (Zahntarif plus Baustein ZAHN Sofort) nur, wenn eine
+// Behandlung angeraten oder begonnen ist und weder Zähne fehlen noch eine
+// Vorgeschichte besteht. Alle anderen Situationen führen zur UKV ZahnPRIVAT,
+// auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn).
 const computeResult = (answers) => {
   if (answers.q2 === 'viele') return 'sonderViele';
 
@@ -29,7 +34,7 @@ const computeResult = (answers) => {
     return 'sofort';
   }
 
-  if (answers.q2 === 'wenige') return 'lkhLuecke';
+  if (answers.q2 === 'wenige') return 'ukvLuecke';
   if (answers.q3 === 'ja') return 'ukvVorgeschichte';
 
   switch (answers.q4) {
@@ -38,16 +43,15 @@ const computeResult = (answers) => {
     case 'pzr':
       return 'ukvPzr';
     case 'preis':
-      return 'preis';
+      return 'ukvPreis';
     default:
-      return 'prestige';
+      return 'ukvLeistung';
   }
 };
 
 const CTA_HREFS = {
   bayerische: BAYERISCHE_URL,
   ukv: UKV_URL,
-  lkh: LKH_URL,
 };
 
 const toneClasses = {
@@ -275,19 +279,6 @@ const DentalZahnCheck = () => {
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <a href={getPath('kontakt')}>{result.cta}<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" /></a>
                       </Button>
-                    ) : result.ctaType === 'lkh' && result.cta70 ? (
-                      <div className="flex flex-col gap-3 sm:flex-row">
-                        <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                          <a href={LKH_URLS.zu90} target="_blank" rel="noopener noreferrer">
-                            {result.cta90}<ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
-                          </a>
-                        </Button>
-                        <Button asChild variant="outline" className="min-h-14 rounded-full border-slate-300 bg-white px-6 font-display text-base font-extrabold text-[#07111f] hover:bg-slate-50">
-                          <a href={LKH_URLS.zu70} target="_blank" rel="noopener noreferrer">
-                            {result.cta70}<ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
-                          </a>
-                        </Button>
-                      </div>
                     ) : (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <a href={CTA_HREFS[result.ctaType]} target="_blank" rel="noopener noreferrer">
@@ -305,14 +296,15 @@ const DentalZahnCheck = () => {
                     </button>
                   </div>
 
-                  {result.sourceLabel && (
+                  {/* Zweiter, interner Weg zum Gespräch, etwa wenn die Versorgung einer
+                      Lücke schon geplant oder empfohlen ist. Es werden keine Antworten
+                      aus dem Check übergeben, der Link führt nur auf die Kontaktseite. */}
+                  {result.contactLabel && (
                     <a
-                      href={LKH_GUIDELINE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#087654] underline underline-offset-4"
+                      href={getPath('kontakt')}
+                      className="mt-4 inline-flex min-h-11 items-center gap-1 text-base font-bold text-[#087654] underline underline-offset-4"
                     >
-                      {result.sourceLabel}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                      {result.contactLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
                   )}
                   <p className="mt-3 text-base leading-7 text-slate-600">{result.note}</p>

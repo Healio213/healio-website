@@ -7,10 +7,14 @@
  *
  * Abweichungen von der Quelle, alle bewusst:
  *   - Anrede durchgehend klein (du, dir, dein), die Quelle schreibt Du gross.
- *   - "Sie fragt angeratenen Zahnersatz nicht ab" wurde zu "Die LKH fragt
- *     ...", weil im Ratgeber kein "Sie" stehen darf (Anredeverwechslung).
  *   - "in unserer Belegkette" wurde zu einer Formulierung ohne internes
  *     Vokabular.
+ *   - Stand 05.10.2026 (Franks Entscheidung): Der frühere dritte Zahn-Weg ist
+ *     entfernt. Lücken laufen über die UKV mit Zuschlag je Zahn, die Bayerische
+ *     bleibt nur für den Sofortschutz. UKV-Fakten geprüft am 05.10.2026 (Antrag
+ *     FNR342759, Ausgabe 06.2026; Tarif Teil II, Stand 01.08.2024). Zur
+ *     Behandlungsfrage im Antrag steht bewusst keine Aussage, was die UKV dann
+ *     entscheidet, sondern nur der Hinweis, vorher mit uns zu sprechen.
  *
  * Inhaltliche Grenzen: keine Garantien, keine erfundenen Beitraege, keine
  * persoenliche Bonuszahl. Tarifbeitraege stehen bewusst nicht im Text.
@@ -26,6 +30,7 @@ export const article = {
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
+  updatedAt: '2026-10-05',
   readingTimeMinutes: 6,
 
   listTitle: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
@@ -46,7 +51,7 @@ export const article = {
           items: [
             {
               lead: 'UKV ZahnPRIVAT nimmt bis zu drei fehlende Zähne an,',
-              text: 'gegen einen monatlichen Zuschlag je Zahn: 6,10 EUR im 75er, 9,00 EUR im 90er, 10,90 EUR im 100er. Ab dem vierten fehlenden Zahn ist eine Aufnahme nicht möglich.',
+              text: 'gegen einen monatlichen Zuschlag je Zahn: 6,10 EUR im 75er, 9,00 EUR im 90er, 10,90 EUR im 100er. Danach sind die Lückenzähne mitversichert, es gilt die normale Zahnstaffel. Ab dem vierten fehlenden Zahn ist eine Aufnahme nicht möglich.',
             },
             {
               lead: 'Bei der Bayerischen beendet schon ein fehlender Zahn den Antrag.',
@@ -58,7 +63,7 @@ export const article = {
             },
             {
               lead: 'Fehlender Zahn und angeratener Ersatz sind zwei verschiedene Fragen.',
-              text: 'Ist die Versorgung der Lücke bereits empfohlen, greift bei der UKV die separate Behandlungsfrage, und der Abschluss kommt nicht zustande.',
+              text: 'Ist die Versorgung der Lücke schon geplant oder empfohlen, fragt der UKV-Antrag das gesondert ab. Sprich in diesem Fall vor dem Antrag mit uns.',
             },
             {
               lead: 'Der Baustein ZAHN Sofort der Bayerischen',
@@ -74,11 +79,11 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Ja, das ist möglich, wenn du beim passenden Versicherer landest, die Lücke noch nicht in Behandlung oder angeraten ist und auch die übrigen Gesundheitsfragen des Antrags passen. Der UKV-Antrag stellt die Frage schlicht: "Fehlen Zähne, die noch nicht ersetzt sind?" Bei einem Ja trägst du die Anzahl ein. Bis zu drei Zähne führen zu einem Zuschlag, ab dem vierten steht im Antrag: "Eine Aufnahme ist nicht möglich."',
+          text: 'Ja, das ist möglich, wenn du beim passenden Versicherer landest und die Gesundheitsfragen des Antrags passen. Der UKV-Antrag stellt die Frage schlicht: "Fehlen Zähne, die noch nicht ersetzt sind?" Bei einem Ja trägst du die Anzahl ein. Bis zu drei Zähne führen zu einem Zuschlag, ab dem vierten steht im Antrag: "Eine Aufnahme ist nicht möglich."',
         },
         {
           type: 'paragraph',
-          text: 'Wichtig ist, was der Zuschlag bedeutet. Nach Auskunft des zuständigen Maklerbetreuers der UKV vom 31.07.2026 sind die bezuschlagten Zähne mitversichert und die Zahnstaffel bleibt ungekürzt. Maßgeblich bleiben die Versicherungsbedingungen, die dir vor Antragstellung vorliegen; lass dir den Punkt vor dem Antrag bestätigen. Das ist nicht selbstverständlich: Andere Anbieter versichern eine Lücke formal mit, schließen sie aber über die Bedingungen wieder aus.',
+          text: 'Wichtig ist, was der Zuschlag bedeutet. Nach Auskunft des zuständigen Maklerbetreuers der UKV sind die bezuschlagten Zähne danach mitversichert. Es gilt die normale Zahnstaffel, ein eigener Deckel für die Lücke ist nicht vorgesehen. Maßgeblich bleiben die Versicherungsbedingungen, die dir vor Antragstellung vorliegen. Das ist nicht selbstverständlich: Andere Anbieter versichern eine Lücke formal mit, schließen sie aber über die Bedingungen wieder aus.',
         },
         {
           type: 'paragraph',
@@ -92,19 +97,18 @@ export const article = {
       blocks: [
         {
           type: 'table',
-          caption: 'Zuschläge und Grenzen bei fehlenden Zähnen, Stand der Antrags- und Annahmeunterlagen August 2026',
+          caption: 'Zuschläge und Grenzen bei fehlenden Zähnen, UKV-Antrag Ausgabe 06.2026, Annahmerichtlinien der Bayerischen Stand 11.2025',
           head: ['Anbieter', 'Fehlende Zähne', 'Zuschlag je Zahn und Monat', 'Grenze'],
           rows: [
             ['UKV ZahnPRIVAT 75', 'bis 3', '6,10 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['UKV ZahnPRIVAT 90', 'bis 3', '9,00 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['UKV ZahnPRIVAT 100', 'bis 3', '10,90 EUR', 'ab dem 4. Zahn keine Aufnahme'],
             ['die Bayerische ZAHN', 'ab 1', 'kein Zuschlag vorgesehen', 'Antrag nicht möglich'],
-            ['LKH ZahnUpgrade', 'bis 3', 'Zuschlag beim Versicherer zu erfragen', 'ab dem 4. Zahn Ablehnung'],
           ],
         },
         {
           type: 'paragraph',
-          text: 'Drei fehlende Zähne im UKV-Tarif 100 bedeuten also 32,70 EUR Zuschlag im Monat, zusätzlich zum regulären Beitrag. Für die LKH liegt uns keine Zuschlagshöhe aus den Annahmerichtlinien vor, und ob dort bezuschlagte Zähne voll mitversichert sind, ist ebenfalls offen. Die Zuschläge geben den Stand der uns vorliegenden Antrags- und Annahmeunterlagen von August 2026 wieder, aktuelle Beiträge erhältst du vor Antragstellung.',
+          text: 'Drei fehlende Zähne im UKV-Tarif 100 bedeuten also 32,70 EUR Zuschlag im Monat, zusätzlich zum regulären Beitrag. Die Zuschläge stammen aus dem UKV-Antrag in der Ausgabe 06.2026, deinen aktuellen Beitrag erhältst du vor Antragstellung.',
         },
       ],
     },
@@ -122,7 +126,7 @@ export const article = {
           items: [
             {
               lead: 'Weisheitszähne.',
-              text: 'Fehlende Achter zählen bei der UKV und bei der Bayerischen nicht als fehlender Zahn. Auch Milchzähne bleiben im UKV-Antrag außen vor. Für die LKH liegt uns dazu keine Regelung vor, frage dort vor dem Antrag nach.',
+              text: 'Fehlende Achter zählen bei der UKV und bei der Bayerischen nicht als fehlender Zahn. Auch Milchzähne bleiben im UKV-Antrag außen vor.',
             },
             {
               lead: 'Lückenschluss.',
@@ -146,19 +150,15 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Das ist der Punkt, an dem die meisten Anträge scheitern. "Fehlender Zahn versicherbar" bedeutet nicht "geplanter Zahnersatz wird bezahlt".',
+          text: 'Das ist der Punkt, den viele übersehen. "Fehlender Zahn versicherbar" bedeutet nicht "geplanter Zahnersatz wird bezahlt".',
         },
         {
           type: 'paragraph',
-          text: 'Bei der UKV gibt es neben der Lückenfrage eine zweite, breitere Frage: ob aktuell eine Zahnersatz- oder Zahnbehandlung läuft, beabsichtigt ist oder in den letzten zwei Jahren zahnärztlich empfohlen wurde. Ein Ja dort führt nicht zu einem Zuschlag, sondern zu keinem Abschluss. Die unversorgte Lücke ist also versicherbar, solange der Ersatz für sie noch nicht angeraten ist.',
+          text: 'Bei der UKV gibt es neben der Lückenfrage eine zweite, breitere Frage: ob aktuell eine Zahnersatz- oder Zahnbehandlung läuft, beabsichtigt ist oder in den letzten zwei Jahren zahnärztlich empfohlen wurde. Ist die Versorgung deiner Lücke schon geplant oder empfohlen, sprich deshalb vor dem Antrag mit uns, damit wir deine Situation gemeinsam einordnen.',
         },
         {
           type: 'paragraph',
           text: 'Bei der Bayerischen gilt für Anratungen ein Zwei-Jahres-Fenster: Angeraten ist eine Behandlung, wenn der Behandler konkreten Handlungsbedarf angemeldet hat. Ältere Anratungen zählen nicht mehr. Gefragt wird im Antrag nur nach angeratenen Extraktionen; ohne den Sofort-Baustein ist die laufende Baustelle über die Bedingungen ausgeschlossen.',
-        },
-        {
-          type: 'paragraph',
-          text: 'Ein dritter Weg ist die LKH. Die LKH fragt angeratenen Zahnersatz nicht ab, allein daran scheitert ein Antrag dort also nicht. Die übrigen Annahmefragen gelten weiter, etwa zur Anzahl fehlender Zähne und zu laufender oder angeratener Parodontitis- und Kieferorthopädiebehandlung. Kommt der Vertrag zustande, bleibt der laufende Fall über die Bedingungen ausgeschlossen: Künftige Behandlungen sind ab Vertragsbeginn eingeschlossen, im Rahmen der Tarifleistungen und der Zahnstaffel, die bereits angeratene Behandlung zahlt aber niemand. Das muss dir vorher klar sein.',
         },
       ],
     },
@@ -185,7 +185,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Und hier schließt sich der Kreis zum fehlenden Zahn: Der Sofortschutz löst das Lückenproblem nicht. Er gehört zur Bayerischen, und die lehnt bei einer unversorgten Lücke ab. Wer eine Lücke und eine angeratene Versorgung gleichzeitig hat, findet in diesem Sortiment derzeit keinen Weg, der beides abdeckt.',
+          text: 'Und hier schließt sich der Kreis zum fehlenden Zahn: Der Sofortschutz löst das Lückenproblem nicht. Er gehört zur Bayerischen, und die lehnt bei einer unversorgten Lücke ab. Wer eine Lücke und eine angeratene Versorgung gleichzeitig hat, sollte deshalb vor einem Antrag mit uns sprechen.',
         },
       ],
     },
@@ -195,7 +195,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen, bei der LKH ebenfalls nicht. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
+          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen. In den ersten drei Kalenderjahren begrenzt dort eine Zahnstaffel die Erstattung: in ZahnPRIVAT 90 und 100 bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, in ZahnPRIVAT 75 entsprechend bis 1.000, 2.000 und 3.000 EUR. Danach ist die Erstattung unbegrenzt, bei Unfall gilt keine Staffel. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
         },
       ],
     },
@@ -232,7 +232,7 @@ export const article = {
     {
       question: 'Ist der bezuschlagte Zahn auch wirklich mitversichert?',
       answer:
-        'Nach Auskunft des zuständigen Maklerbetreuers der UKV vom 31.07.2026 ja, und die Zahnstaffel bleibt ungekürzt. Voraussetzung bleibt, dass der Ersatz für die Lücke noch nicht angeraten ist; maßgeblich sind die Bedingungen. Für die LKH ist dieser Punkt bei uns noch offen.',
+        'Ja. Nach Auskunft des zuständigen Maklerbetreuers der UKV sind die bezuschlagten Zähne mitversichert, es gilt die normale Zahnstaffel ohne eigenen Deckel für die Lücke. Ist der Ersatz für die Lücke schon geplant oder empfohlen, sprich vor dem Antrag mit uns. Maßgeblich sind die Versicherungsbedingungen.',
     },
     {
       question: 'Zahlt eine Zusatzversicherung den bereits angeratenen Zahnersatz?',
@@ -253,7 +253,9 @@ export const article = {
         text: 'Welcher Weg bei deiner konkreten Lücke offensteht, klärt sich am schnellsten mit einer Annahmeprüfung vor dem Antrag. Die Tarifweiche dafür findest du auf ',
       },
       { text: 'healio.de/zahn', to: '/zahn' },
-      { text: ', ob dein Kassenbonus den Beitrag mitträgt, rechnest du im ' },
+      { text: '. Ist die Versorgung deiner Lücke schon geplant, sprich vorher über die ' },
+      { text: 'Kontaktseite', to: '/kontakt' },
+      { text: ' mit uns. Ob dein Kassenbonus den Beitrag mitträgt, rechnest du im ' },
       { text: 'Ratgeber zum IKK-Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
       { text: ', und welche Kasse in deinem Fall am meisten zahlt, vergleichst du quellenbelegt auf ' },
       { text: 'kassenboost.de', href: 'https://kassenboost.de/' },

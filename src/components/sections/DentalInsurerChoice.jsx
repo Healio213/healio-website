@@ -5,7 +5,7 @@ import { Check, ExternalLink, Calculator, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
-import { BAYERISCHE_URL, UKV_URL, LKH_URLS, trackZahnEvent } from './dental/dentalLinks';
+import { BAYERISCHE_URL, UKV_URL, trackZahnEvent } from './dental/dentalLinks';
 
 const trackInsurerClick = (insurer) => trackZahnEvent('zahnzusatz_versicherer_click', insurer);
 
@@ -14,7 +14,6 @@ const DentalInsurerChoice = () => {
 
   const sofortBullets = t('insurerChoice.sofort.bullets', { returnObjects: true }) || [];
   const vorsorgeBullets = t('insurerChoice.vorsorge.bullets', { returnObjects: true }) || [];
-  const preisBullets = t('insurerChoice.preis.bullets', { returnObjects: true }) || [];
   const finderItems = t('insurerChoice.finder.items', { returnObjects: true }) || [];
 
   return (
@@ -51,8 +50,8 @@ const DentalInsurerChoice = () => {
             <p className="text-lg md:text-xl font-bold">{t('insurerChoice.question')}</p>
           </motion.div>
 
-          {/* Drei Wege */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {/* Zwei Wege: Sofortschutz der Bayerischen oder UKV ZahnPRIVAT (seit 05.10.2026) */}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
             {/* Weg A: Bayerische ZAHN Sofort */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -172,92 +171,6 @@ const DentalInsurerChoice = () => {
                   </a>
                 </Button>
                 <p className="text-xs text-slate-400 mt-3 text-center">{t('insurerChoice.vorsorge.note')}</p>
-              </div>
-            </motion.div>
-
-            {/* Weg C: LKH ZahnUpgrade 90+ (Preis-Leistung) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 ring-1 ring-slate-200 flex flex-col relative md:col-span-2 lg:col-span-1"
-            >
-              <div className="absolute -top-3 left-1/2 w-max max-w-[calc(100%-1rem)] -translate-x-1/2 rounded-full bg-teal-700 px-4 py-1 text-center text-xs font-bold leading-tight text-white">
-                {t('insurerChoice.preis.answer')}
-              </div>
-              <div className="flex items-center gap-3 mt-3 mb-4">
-                <FriendlyIcon emoji="💶" tone="mint" size="sm" />
-                <div>
-                  <h3 className="text-xl font-extrabold text-slate-900">{t('insurerChoice.preis.label')}</h3>
-                  <p className="text-sm text-slate-500 font-medium">
-                    {t('insurerChoice.preis.insurer')} · {t('insurerChoice.preis.tariff')}
-                  </p>
-                </div>
-              </div>
-              <p className="text-slate-600 leading-relaxed mb-6">{t('insurerChoice.preis.text')}</p>
-              <details className="group mb-8 rounded-xl border border-teal-200 bg-teal-50/50">
-                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-4 py-3 text-left text-sm font-bold text-teal-950 transition-colors hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
-                  <span className="group-open:hidden">{t('insurerChoice.details.show')}</span>
-                  <span className="hidden group-open:inline">{t('insurerChoice.details.hide')}</span>
-                  <ChevronDown className="h-5 w-5 flex-shrink-0 text-teal-600 transition-transform group-open:rotate-180" aria-hidden="true" />
-                </summary>
-                <div className="border-t border-teal-200 px-4 pb-4 pt-4">
-                  <ul className="space-y-3">
-                    {preisBullets.map((bullet, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-teal-950">
-                        <Check className="w-5 h-5 text-healio-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-5 rounded-xl bg-teal-50 p-4 sm:p-5">
-                    <span className="inline-block bg-teal-600 text-white text-xs font-bold uppercase tracking-wide rounded-full px-3 py-1 mb-2">
-                      {t('insurerChoice.preis.highlight.badge')}
-                    </span>
-                    <p className="font-extrabold text-teal-950 mb-1">{t('insurerChoice.preis.highlight.title')}</p>
-                    <p className="text-sm text-teal-950 leading-relaxed">{t('insurerChoice.preis.highlight.text')}</p>
-                  </div>
-                </div>
-              </details>
-              <div className="mt-auto">
-                <p className="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2 text-center">
-                  {t('insurerChoice.preis.chooseLabel')}
-                </p>
-                <Button asChild className="w-full bg-teal-600 hover:bg-teal-700 text-white text-base px-6 py-6 h-auto rounded-xl transition-all duration-300">
-                  <a
-                    href={LKH_URLS.zu90}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackInsurerClick('lkh_zahnupgrade_90')}
-                  >
-                    {t('insurerChoice.preis.cta90')}
-                    <ExternalLink className="w-4 h-4 ml-2" aria-hidden="true" />
-                  </a>
-                </Button>
-                <div className="grid grid-cols-2 gap-2 mt-2">
-                  <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-teal-600 hover:text-teal-700 text-slate-900 text-sm px-3 py-3 h-auto rounded-xl transition-all duration-300">
-                    <a
-                      href={LKH_URLS.zu70}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackInsurerClick('lkh_zahnupgrade_70')}
-                    >
-                      {t('insurerChoice.preis.cta70')}
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="w-full border-2 border-slate-300 hover:border-teal-600 hover:text-teal-700 text-slate-900 text-sm px-3 py-3 h-auto rounded-xl transition-all duration-300">
-                    <a
-                      href={LKH_URLS.zu50}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackInsurerClick('lkh_zahnupgrade_50')}
-                    >
-                      {t('insurerChoice.preis.cta50')}
-                    </a>
-                  </Button>
-                </div>
-                <p className="text-xs text-slate-400 mt-3 text-center">{t('insurerChoice.preis.note')}</p>
               </div>
             </motion.div>
           </div>
