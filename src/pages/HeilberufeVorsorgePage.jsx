@@ -7,7 +7,6 @@ import {
   Stethoscope,
   CheckCircle2,
   Sparkles,
-  Users,
   ChevronDown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -104,7 +103,6 @@ const HeilberufeVorsorgePage = () => {
   const problemCards = t('problem.cards', { returnObjects: true });
   const mehrwertColumns = t('mehrwert.columns', { returnObjects: true });
   const ablaufSteps = t('ablauf.steps', { returnObjects: true });
-  const testimonials = t('socialProof.testimonials', { returnObjects: true });
   const faqItems = t('faq.items', { returnObjects: true });
   const trustPoints = t('hero.trust', { returnObjects: true });
 
@@ -536,56 +534,12 @@ const HeilberufeVorsorgePage = () => {
           </div>
         </motion.section>
 
-        {/* SOCIAL PROOF */}
-        <motion.section
-          className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50"
-          initial={{ opacity: 1, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <SectionEyebrow>{t('socialProof.eyebrow')}</SectionEyebrow>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-                {t('socialProof.title')}
-              </h2>
-              <SectionDivider />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {testimonials.map((testimonial, i) => (
-                <motion.div
-                  key={i}
-                  className="relative bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all"
-                  initial={{ opacity: 1, y: 0 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                >
-                  <div className="absolute -top-4 left-8 w-10 h-10 rounded-full bg-gradient-to-br from-[#25c990] to-[#1fb37f] flex items-center justify-center shadow-lg shadow-[#25c990]/30">
-                    <span className="text-white text-2xl leading-none font-serif">„</span>
-                  </div>
-                  <blockquote className="text-slate-700 leading-relaxed mb-5 italic mt-4">
-                    {testimonial.quote}
-                  </blockquote>
-                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-100 to-[#25c990]/20 flex items-center justify-center">
-                      <Users className="w-5 h-5 text-[#1fb37f]" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-slate-900 text-sm">{testimonial.name}</div>
-                      <div className="text-slate-500 text-xs">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
+        {/* Erfundene Praxisstimmen am 05.10.2026 entfernt (Abmahnrisiko).
+            Stimmen nur mit echter, schriftlich freigegebener Quelle wieder einbauen. */}
 
-        {/* FAQ */}
+        {/* FAQ: folgt direkt auf das weiße ABLAUF, daher wenig Abstand oben */}
         <motion.section
-          className="py-24 bg-white"
+          className="pt-8 pb-24 bg-white"
           initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}

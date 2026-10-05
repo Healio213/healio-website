@@ -170,27 +170,6 @@
       }
     ]
   },
-  "socialProof": {
-    "eyebrow": "Stimmen aus der Branche",
-    "title": "Was Kolleginnen und Kollegen sagen",
-    "testimonials": [
-      {
-        "name": "Maria K.",
-        "role": "Heilpraktikerin, Hamburg",
-        "quote": "Ich hatte fünf Verträge bei vier Gesellschaften. Healio hat das in zwei Wochen auf ein Paket reduziert. Ich zahle 22 Prozent weniger."
-      },
-      {
-        "name": "Thomas R.",
-        "role": "Osteopath, München",
-        "quote": "Endlich verstehe ich, wofür ich jeden Monat bezahle. Und die Rürup-Ersparnis macht den Unterschied zu meiner alten Strategie."
-      },
-      {
-        "name": "Sabine M.",
-        "role": "Heilpraktikerin, Bremen",
-        "quote": "Die Beratung war die erste, die mir wirklich geholfen hat. Nicht Versicherungsjargon, sondern Klartext."
-      }
-    ]
-  },
   "faq": {
     "eyebrow": "Häufige Fragen",
     "title": "Alles, was du wissen willst",

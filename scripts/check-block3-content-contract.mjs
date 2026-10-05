@@ -66,6 +66,11 @@ assert.match(
 for (const routeKey of ['partner', 'terminvereinbarung', 'kontakt']) {
   assert(heilberufePage.includes(`to={getPath('${routeKey}')}`), `Heilberufe-Seite muss ${routeKey} sprachabhängig verlinken.`);
 }
+assert(!/socialProof|testimonial/i.test(heilberufePage), 'Heilberufe-Seite darf keine unbelegten Praxisstimmen rendern (Abmahnrisiko, entfernt 05.10.2026).');
+for (const lang of ['de', 'en']) {
+  const heilberufeTexts = read(`src/i18n/locales/${lang}/heilberufe.json`);
+  assert(!/socialProof|testimonial|Maria K\.|Thomas R\.|Sabine M\./.test(heilberufeTexts), `Heilberufe-Texte (${lang}) dürfen keine erfundenen Praxisstimmen enthalten.`);
+}
 const deHeilberufeSeo = seoRoutes.find(({ path }) => path === '/heilberufe-vorsorge');
 const enHeilberufeSeo = seoRoutes.find(({ path }) => path === '/en/healthcare-professionals-protection');
 const expectedHreflang = {

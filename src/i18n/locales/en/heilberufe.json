@@ -170,27 +170,6 @@
       }
     ]
   },
-  "socialProof": {
-    "eyebrow": "Voices from the field",
-    "title": "What colleagues say",
-    "testimonials": [
-      {
-        "name": "Maria K.",
-        "role": "Naturopath, Hamburg",
-        "quote": "I had five contracts with four companies. Healio consolidated everything into one bundle in two weeks. I pay 22 percent less."
-      },
-      {
-        "name": "Thomas R.",
-        "role": "Osteopath, Munich",
-        "quote": "Finally I understand what I pay for every month. And the Rürup savings make a real difference."
-      },
-      {
-        "name": "Sabine M.",
-        "role": "Naturopath, Bremen",
-        "quote": "This was the first advice that really helped me. No insurance jargon, just plain language."
-      }
-    ]
-  },
   "faq": {
     "eyebrow": "Frequent questions",
     "title": "Everything you want to know",
