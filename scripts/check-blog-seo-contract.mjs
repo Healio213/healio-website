@@ -35,6 +35,29 @@ const NEW_SERIES_SLUGS_2026_09_23 = new Set([
   'kassenbonus-schwangerschaft-vorsorge',
   'hebammen-gesundheitsbudget-erklaeren',
 ]);
+// Blog-Sammelkorrektur 06.10.2026 (Bonus 810/1.155, kostenlos, Zahn zwei Wege): neues lastmod.
+const BLOG_CORRECTION_SLUGS_2026_10_06 = new Set([
+  'bkv-und-kassenbonus-fuer-arbeitgeber',
+  'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
+  'gesundheitsbudget-3000-euro',
+  'healio-konzept-fuer-hebammen',
+  'healio-konzept-fuer-heilpraktiker',
+  'healio-konzept-fuer-osteopathen',
+  'healio-konzept-fuer-tcm-praxen',
+  'heilpraktiker-kosten-bonus-finanziert',
+  'heilpraktiker-kosten-gkv-erstattung-healio',
+  'heilpraktiker-kosten-guide-2026',
+  'heilpraktiker-patienten-finanzierung-gesundheitsbudget',
+  'ikk-classic-bonus-700-euro',
+  'ikk-classic-bonus-schritt-fuer-schritt',
+  'kassenbonus-schwangerschaft-vorsorge',
+  'kassenbonus-was-ist-drin',
+  'krankenhauszusatzversicherung-sportverein-best-ager',
+  'krankenkasse-wechseln-laufende-behandlung',
+  'naturheilkunde-krankenkasse-2026',
+  'zahnersatz-beitrag-vom-bonus',
+  'zahnzusatzversicherung-trotz-angeratener-behandlung',
+]);
 assert.equal(BLOG_RELATED_LINK_SLUGS.length, articles.length, 'Für jeden Artikel muss eine Linkgruppe gepflegt sein.');
 assert.doesNotMatch(
   JSON.stringify(rawArticles),
@@ -111,7 +134,9 @@ assert.match(sitemapEntry('https://healio.de/unternehmen'), /<lastmod>2026-09-01
 assert.match(sitemapEntry('https://healio.de/blog'), /<lastmod>2026-09-02<\/lastmod>/);
 assert.match(sitemapEntry('https://healio.de/blog'), /<changefreq>weekly<\/changefreq>/);
 for (const article of articles) {
-  const expectedLastmod = NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
+  const expectedLastmod = BLOG_CORRECTION_SLUGS_2026_10_06.has(article.slug)
+    ? '2026-10-06'
+    : NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
   assert.match(
     sitemapEntry(`https://healio.de/blog/${article.slug}`),
     new RegExp(`<lastmod>${expectedLastmod}</lastmod>`),
