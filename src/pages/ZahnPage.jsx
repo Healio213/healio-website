@@ -20,7 +20,6 @@ import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
-import { trackGoogleAdsRechnerStart } from '@/lib/google-ads';
 
 // Zwei Zahn-Wege seit Franks Entscheidung vom 05.10.2026: UKV ZahnPRIVAT für
 // alle Situationen ohne angeratene Behandlung (auch 1 bis 3 fehlende Zähne),
@@ -49,10 +48,12 @@ const trustVisuals = [
 
 const scrollToCheck = (event, reduceMotion) => {
   event?.preventDefault();
-  // Meta: nur der Klick auf den primaeren Rechner-CTA. Der Zahn-Check selbst
-  // bleibt frei von Messung, seine Antworten verlassen das Geraet nie.
+  // Meta: nur der Klick auf den primären Rechner-CTA. Die Antworten im
+  // Zahn-Check bleiben frei von Messung und verlassen das Gerät nie. Für
+  // Google Ads ist der reine Sprung zum Check kein Erfolg; gezählt wird nur
+  // der Klick auf einen Versicherer-Link im Ergebnis des Checks, ohne Inhalt
+  // (keine Antworten, kein Versicherer, siehe DentalZahnCheck.jsx).
   trackMetaRechnerStart();
-  trackGoogleAdsRechnerStart();
   document.getElementById('zahn-check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 };
 
@@ -309,8 +310,8 @@ const ZahnPage = () => {
             effectiveValue: tZahn('bonusRechner.effectiveValue'),
             effectiveNote: tZahn('bonusRechner.effectiveNote'),
             bonusPayoutText: lang === 'en'
-              ? 'Your statutory-insurer bonus may offset part or up to 100% of the eligible dental-plan premium. The applicable bonus and tariff terms determine the result.'
-              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Zahnschutzes teilweise oder bis zu 100 % ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
+              ? 'Your statutory-insurer bonus may offset all or part of the eligible dental-plan premium. The applicable bonus and tariff terms determine the result.'
+              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Zahnschutzes ganz oder teilweise ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
             ctaOverride: {
               href: '#zahn-check',
               label: lang === 'en' ? 'Open dental check' : 'Zahnweg prüfen',

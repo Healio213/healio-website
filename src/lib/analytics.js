@@ -294,7 +294,7 @@ export const trackPageView = (pageUrl) => {
   if (!isBrowser() || isAnalyticsBlocked() || !hasConsent('analytics')) return false;
 
   loadGoogleAnalytics().catch(() => {});
-  queueGtagCommand('event', 'page_view', getSafePageContext(pageUrl));
+  queueGtagCommand('event', 'page_view', { ...getSafePageContext(pageUrl), send_to: GA4_MEASUREMENT_ID });
   return true;
 };
 
@@ -305,9 +305,13 @@ export const trackEvent = (eventName, params = {}) => {
   if (!safeEventName) return false;
 
   loadGoogleAnalytics().catch(() => {});
+  // send_to hält jedes Statistik-Ereignis bei GA4. Ohne send_to ginge es an
+  // jedes konfigurierte Ziel, nach Marketing-Zustimmung also auch an das
+  // Google-Ads-Konto. Erfolge für Google Ads sendet nur src/lib/google-ads.js.
   queueGtagCommand('event', safeEventName, {
     ...sanitizeAnalyticsParams(params),
     ...getSafePageContext(),
+    send_to: GA4_MEASUREMENT_ID,
   });
   return true;
 };

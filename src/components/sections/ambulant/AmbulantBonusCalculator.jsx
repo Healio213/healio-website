@@ -179,6 +179,11 @@ const AmbulantBonusCalculator = ({
   const anrechenbarerZuschuss = Math.min(totalSubsidyPotential, jahresbeitrag);
   const effektivKosten = Math.max(0, Math.round((jahresbeitrag - anrechenbarerZuschuss) * 100) / 100);
   const ungenutztesZuschusspotenzial = Math.max(0, Math.round((totalSubsidyPotential - anrechenbarerZuschuss) * 100) / 100);
+  // Deckt der Zuschuss im Beispiel den Jahresbeitrag, zeigt der Rechner keine
+  // "0 €" als effektive Kosten, sondern einen bedingten Satz. "Effektiv 0 €"
+  // hat Frank auf /zahn im Juli gestrichen; die Rote Linie verbietet pauschale
+  // 0-EUR-Aussagen (Healio/CONTENT-ROTE-LINIE-B2C.md).
+  const bonusDecktBeispiel = effektivKosten === 0 && anrechenbarerZuschuss > 0;
 
   const trackUsage = useCallback(() => {
     if (totalSubsidyPotential === 0 || usageTracked.current) return;
@@ -507,20 +512,22 @@ const AmbulantBonusCalculator = ({
                   </p>
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-gray-600 text-base font-medium">{t('bonusCalculator.effectiveCosts')}</span>
-                    <AnimatePresence mode="popLayout">
-                      <motion.span
-                        key={effektivKosten}
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 1.1, opacity: 0 }}
-                        className={`text-3xl font-extrabold whitespace-nowrap ${effektivKosten === 0 ? 'text-healio-primary' : 'text-healio-dark'}`}
-                      >
-                        {formatEuro(effektivKosten)} €
-                      </motion.span>
-                    </AnimatePresence>
+                    {!bonusDecktBeispiel && (
+                      <AnimatePresence mode="popLayout">
+                        <motion.span
+                          key={effektivKosten}
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 1.1, opacity: 0 }}
+                          className="text-3xl font-extrabold whitespace-nowrap text-healio-dark"
+                        >
+                          {formatEuro(effektivKosten)} €
+                        </motion.span>
+                      </AnimatePresence>
+                    )}
                   </div>
-                  {effektivKosten === 0 && totalSubsidyPotential > 0 && (
-                    <p className="text-[#0b7a57] text-sm font-bold mt-1">
+                  {bonusDecktBeispiel && (
+                    <p className="mt-1 text-base font-bold leading-relaxed text-[#0b7a57]" data-healio-calculator="bonus-deckt-beispiel">
                       {t('bonusCalculator.effectiveZeroNote')}
                     </p>
                   )}

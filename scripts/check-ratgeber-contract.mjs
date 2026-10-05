@@ -227,7 +227,7 @@ for (const placement of ['inline', 'end', 'mobile']) {
 expect(/data-ratgeber-cta=\{placement\}/.test(layout), 'Die Button-Position muss im Markup kenntlich bleiben.');
 expect(/target="_blank"/.test(layout) && /rel="noopener"/.test(layout), 'Der Button muss ein externer Link mit rel="noopener" sein.');
 expect(/md:hidden/.test(layout), 'Die feste Leiste darf nur unter md erscheinen.');
-expect(/trackMetaLead\(\)/.test(layout), 'Jeder Button-Klick muss ein Lead-Ereignis ausloesen.');
+expect(!/trackMetaLead|trackGoogleAds/.test(layout), 'KassenBoost- und Weiter-Knoepfe sind kein Erfolg: kein Meta-Lead, keine Google-Ads-Conversion.');
 
 // --- 4. Ziel und UTM-Durchreichung ----------------------------------------
 

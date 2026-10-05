@@ -48,7 +48,7 @@ const de = {
     warningLabel: 'Darauf kommt es an:',
     trust: 'Deine Antworten werden weder gespeichert noch übertragen.',
     disclaimer: 'Der Check ist eine erste Orientierung. Verbindlich entscheidet der jeweilige Versicherer nach den Angaben im Antrag.',
-    bonusLead: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.',
+    bonusLead: 'Dein Bonus kann deinen Tarifbeitrag ganz oder teilweise ausgleichen. Die Höhe hängt von deiner Krankenkasse und deinen Aktivitäten ab.',
     bonusDetail: 'Beitrag, realistisch erreichbarer Bonus und Leistungen stehen getrennt nebeneinander. So findest du die Krankenkasse, die am besten zu deinem Tarif passt.',
     bonusCta: 'Krankenkasse passend zum Tarif finden',
     questions: {
@@ -264,7 +264,7 @@ const de = {
   bonus: {
     eyebrow: 'KassenBoost nach der Tarifwahl',
     title: 'Finde die Krankenkasse, die am besten zu deinem Tarif passt.',
-    text: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen.',
+    text: 'Dein Bonus kann deinen Tarifbeitrag ganz oder teilweise ausgleichen. Die Höhe hängt von deiner Krankenkasse und deinen Aktivitäten ab.',
     detail: 'Beitrag, realistisch erreichbaren Bonus und Leistungen siehst du getrennt, deine persönliche Höhe wird transparent ausgerechnet.',
     cta: 'Zahn-Check starten',
     link: 'Krankenkasse passend zum Tarif finden',
@@ -317,7 +317,7 @@ const de = {
       },
       {
         q: 'Zahlt mein Kassenbonus den ganzen Beitrag?',
-        a: 'Dein Bonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen. Beitrag, realistisch erreichbarer Bonus und Leistungen stehen getrennt nebeneinander. So siehst du transparent, welche Krankenkasse am besten zu deinem Tarif passt.',
+        a: 'Ganz oder teilweise, je nach Krankenkasse und deinen Aktivitäten. Wir rechnen es individuell für dich aus. Beitrag, realistisch erreichbarer Bonus und Leistungen stehen getrennt nebeneinander. So siehst du transparent, welche Krankenkasse am besten zu deinem Tarif passt.',
       },
       {
         q: 'Wie läuft der Abschluss nach dem Zahn-Check ab?',
@@ -383,7 +383,7 @@ const en = {
     warningLabel: 'What matters:',
     trust: 'Your answers are neither stored nor transmitted.',
     disclaimer: 'The check is initial guidance. The insurer makes the binding decision from the information in the application.',
-    bonusLead: 'Your bonus can offset up to 100% of your effective tariff premium.',
+    bonusLead: 'Your bonus can offset all or part of your tariff premium. How much depends on your health fund and your activities.',
     bonusDetail: 'We compare premium, realistically achievable bonus and benefits to find the health fund that best fits your tariff.',
     bonusCta: 'Find the health fund for your tariff',
     questions: {
@@ -578,7 +578,7 @@ const en = {
     ...de.bonus,
     eyebrow: 'KassenBoost after your tariff choice',
     title: 'Find the health fund that best fits your tariff.',
-    text: 'Your bonus can offset up to 100% of your effective tariff premium.',
+    text: 'Your bonus can offset all or part of your tariff premium. How much depends on your health fund and your activities.',
     detail: 'We compare premium, realistically achievable bonus and benefits and calculate your personal amount transparently.',
     cta: 'Start the dental check',
     link: 'Find the health fund for your tariff',
@@ -633,7 +633,7 @@ const en = {
       },
       {
         q: 'Can my health fund bonus cover the entire premium?',
-        a: 'Your bonus can offset up to 100% of your effective tariff premium. We compare premium, realistically achievable bonus and benefits so you can see which health fund best fits your tariff.',
+        a: 'All or part of it, depending on your health fund and your activities. We calculate it individually for you. We compare premium, realistically achievable bonus and benefits so you can see which health fund best fits your tariff.',
       },
       {
         q: 'What happens after the dental check?',

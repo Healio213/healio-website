@@ -1,10 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
-import { trackMetaLead } from '@/lib/meta-pixel';
-import { trackGoogleAdsLead } from '@/lib/google-ads';
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -39,53 +37,38 @@ const CTA_BASE_CLASS = 'inline-flex min-h-14 w-full items-center justify-center 
 
 const PARAGRAPH_CLASS = 'mt-6 text-lg leading-8 text-slate-700 sm:text-[1.15rem] sm:leading-9';
 
-const RatgeberCtaButton = ({ href, label, placement, className = '' }) => {
-  const handleClick = useCallback(() => {
-    // Ein Lead-Ereignis pro Klick, an Pixel und CAPI mit derselben event_id.
-    // Ohne Zustimmung "marketing" passiert im Modul nichts.
-    trackMetaLead();
-    trackGoogleAdsLead();
-  }, []);
-
-  return (
-    // Bewusst nur noopener, kein noreferrer: kassenboost.de soll healio.de
-    // als Herkunft sehen, damit die Kampagnenkette bis zum Check haelt.
-    // eslint-disable-next-line react/jsx-no-target-blank
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener"
-      data-ratgeber-cta={placement}
-      onClick={handleClick}
-      className={`${CTA_BASE_CLASS} ${className}`.trim()}
-    >
-      {label}
-    </a>
-  );
-};
+// Der KassenBoost-Button ist bewusst KEIN Erfolg für Google Ads oder Meta:
+// Ein Kassenvergleich ist kein Versicherungsabschluss.
+const RatgeberCtaButton = ({ href, label, placement, className = '' }) => (
+  // Bewusst nur noopener, kein noreferrer: kassenboost.de soll healio.de
+  // als Herkunft sehen, damit die Kampagnenkette bis zum Check haelt.
+  // eslint-disable-next-line react/jsx-no-target-blank
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener"
+    data-ratgeber-cta={placement}
+    className={`${CTA_BASE_CLASS} ${className}`.trim()}
+  >
+    {label}
+  </a>
+);
 
 /**
  * Interner Button eines Ratgeberartikels. Kein neuer Tab, kein externes
  * Ziel, aber dieselbe UTM-Durchreichung wie beim Advertorial, damit eine
- * Anzeigengruppe bis zur Tarifseite messbar bleibt.
+ * Anzeigengruppe bis zur Tarifseite messbar bleibt. Der Klick selbst ist
+ * kein Erfolg für Google Ads oder Meta, gezählt wird erst auf der Zielseite.
  */
-const RatgeberInternalCtaButton = ({ to, label }) => {
-  const handleClick = useCallback(() => {
-    trackMetaLead();
-    trackGoogleAdsLead();
-  }, []);
-
-  return (
-    <Link
-      to={to}
-      data-ratgeber-internal-cta="end"
-      onClick={handleClick}
-      className={CTA_BASE_CLASS}
-    >
-      {label}
-    </Link>
-  );
-};
+const RatgeberInternalCtaButton = ({ to, label }) => (
+  <Link
+    to={to}
+    data-ratgeber-internal-cta="end"
+    className={CTA_BASE_CLASS}
+  >
+    {label}
+  </Link>
+);
 
 const RatgeberSegments = ({ segments }) => (
   <>

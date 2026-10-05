@@ -1,4 +1,5 @@
 import { trackEvent } from '@/lib/analytics';
+import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 
 // Persönliche Abschluss-Links (Vermittler-Zuordnung über MAK-Nummer in der URL).
 // Die URL-Parameter werden statisch validiert. Seitenparameter, Referrer-Codes oder
@@ -98,6 +99,9 @@ const SAFE_INSURER_DESTINATIONS = new Set([
 export const trackZahnEvent = (action, destination) => {
   if (action !== 'zahnzusatz_versicherer_click') return false;
   if (!SAFE_INSURER_DESTINATIONS.has(destination)) return false;
+
+  // Google Ads: Erfolg „Antrag geöffnet“, ohne Versicherer und ohne Antworten.
+  trackGoogleAdsAntrag();
 
   return trackEvent('zahnzusatz_versicherer_click', {
     component: 'dental_insurer_choice',
