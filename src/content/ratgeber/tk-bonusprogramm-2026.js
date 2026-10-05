@@ -277,7 +277,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Ja, das sieht die Satzung vor. Anlage 4 nennt private Kranken- und Pflegezusatzversicherungen ausdrücklich als zuschussfähig, mit Verweis auf § 194 Abs. 1a SGB V und § 47 Abs. 2 SGB XI. Dieser Paragraf beschreibt Zusatzversicherungen, die eine Kasse auch selbst vermitteln darf. Ob die TK jeden privaten Tarif anerkennt oder nur Verträge, die sie vermittelt, steht dort nicht eindeutig. Frag das vor dem Abschluss kurz bei der TK nach. Den Beitrag belegst du wie jede andere Ausgabe aus dem Katalog.',
+          text: 'Ja, das sieht die Satzung vor. Anlage 4 nennt private Kranken- und Pflegezusatzversicherungen ausdrücklich als zuschussfähig, mit Verweis auf § 194 Abs. 1a SGB V und § 47 Abs. 2 SGB XI. Gemeint sind Zusatzversicherungen, die deinen gesetzlichen Schutz ergänzen, zum Beispiel für Krankenhaus, Zahn oder Pflege. Einen bestimmten Versicherer nennt die Satzung nicht: Bis Mitte 2023 galt der Posten nur für Verträge über den Kooperationspartner der TK, diese Bindung hat die TK zum 1. Juli 2023 gestrichen. Den Beitrag belegst du wie jede andere Ausgabe aus dem Katalog.',
         },
         {
           type: 'paragraph',
@@ -369,7 +369,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Dagegen steht der Zusatzbeitrag: 3,85 Prozent bei der IKK classic, 2,69 Prozent bei der TK (Stand 05.10.2026), also 1,16 Prozentpunkte mehr, bei 4.000 EUR Bruttogehalt im Monat rund 278 EUR Arbeitnehmeranteil im Jahr; diesen Mehrbeitrag musst du gegen den Zuschuss rechnen. Fair gerechnet spricht für die TK nicht nur der niedrigere Zusatzbeitrag: Die Gesundheitsdividende der TK zählt doppelt und kann wegen höherer Grundbeträge je Maßnahme gleich viel oder mehr Euro ergeben als der dreifache Zuschuss der IKK classic.',
+          text: 'Dagegen steht der Zusatzbeitrag: 3,85 Prozent bei der IKK classic, 2,69 Prozent bei der TK (Stand 05.10.2026), also 1,16 Prozentpunkte mehr, bei 4.000 EUR Bruttogehalt im Monat rund 278 EUR Arbeitnehmeranteil im Jahr; diesen Mehrbeitrag musst du gegen den Zuschuss rechnen. Fair gerechnet spricht für die TK nicht nur der niedrigere Zusatzbeitrag: Bei Zahnvorsorge und Impfungen bringt die Gesundheitsdividende der TK je Maßnahme sogar etwas mehr als die IKK classic (20 statt 15 EUR), bei Vorsorgeuntersuchungen (20 statt 30 EUR) und bei Sport (20 statt 75 EUR) liegt die IKK classic vorn.',
         },
         {
           type: 'segments',
@@ -443,7 +443,7 @@ export const article = {
     {
       question: 'Zahlt die TK-Gesundheitsdividende meine Zusatzversicherung?',
       answer:
-        'Die Dividende kann den Beitrag ganz oder teilweise tragen, denn private Kranken- und Pflegezusatzversicherungen stehen ausdrücklich im Katalog der Satzung. Wie viel das ist, hängt von deinen Punkten ab, und erstattet wird höchstens der Beitrag, den du nachweist. Ob die TK dafür jeden privaten Tarif anerkennt, klärst du vor dem Abschluss kurz mit der TK.',
+        'Die Dividende kann den Beitrag ganz oder teilweise tragen, denn private Kranken- und Pflegezusatzversicherungen stehen ausdrücklich im Katalog der Satzung. Wie viel das ist, hängt von deinen Punkten ab, und erstattet wird höchstens der Beitrag, den du nachweist. Einen bestimmten Versicherer schreibt die Satzung seit Juli 2023 nicht mehr vor.',
     },
     {
       question: 'Kann ich beim TK Bonusprogramm rückwirkend einreichen?',
