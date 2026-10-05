@@ -37,6 +37,18 @@
  *   - Beleghebamme in SP1/SP2 nur waehrend des Klinikaufenthalts.
  *   - AP 1.753a: Komplikationen, Fruehgeburten, Fehlgeburten nur in der
  *     Auslandsreiseversicherung (Ziff. 7) versichert.
+ *
+ * Korrektur 05.10.2026 (Gegenpruefung der Demand-Gen-Anzeige):
+ *   - Neuer interner Button zur SDK (internalCta) und klare Aussage im Weg am
+ *     Ende: Fuer eine bestehende Schwangerschaft gilt der Vorsorge-Topf der
+ *     SDK, nicht der UKV-Vorsorge-Baustein, der seit 05.10. auf /ambulant steht.
+ *   - "Kurz gesagt": der realistische Bonuswert 400 bis 700 EUR steht jetzt
+ *     direkt neben dem rechnerischen Hoechstwert.
+ *   - Gegenpruefung Website am Abend: Der Button-Absatz verspricht nicht mehr
+ *     alle Selbstzahlerleistungen, sondern die Vorsorge-Untersuchungen aus der
+ *     Tabelle und sagt, dass Gentests wie NIPT nicht dazugehoeren. Der Satz
+ *     "Einen Maximalbetrag gibt es ... nicht" ist gestrichen (Sperrliste
+ *     "ohne Obergrenze"). Button-Ziel jetzt /ambulant#tarifwahl.
  */
 
 export const article = {
@@ -49,6 +61,8 @@ export const article = {
 
   publishedAt: '2026-09-28',
   publishedAtLabel: '28. September 2026',
+  updatedAt: '2026-10-05',
+  updatedAtLabel: '5. Oktober 2026',
   readingTimeMinutes: 6,
 
   listTitle: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
@@ -85,7 +99,7 @@ export const article = {
             },
             {
               lead: 'Der Bonus ist jetzt am höchsten.',
-              text: 'Laut Satzung der IKK classic sind bis zu 1.155 EUR Zuschusswert möglich, ein rechnerischer Höchstwert, den niemand einfach so abruft. Ausgezahlt wird höchstens so viel, wie du an eigenen Kosten nachweist, zum Beispiel über den Jahresbeitrag deiner Zusatzversicherung. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab, wir rechnen es individuell für dich aus.',
+              text: 'Laut Satzung der IKK classic sind in der Schwangerschaft bis zu 1.155 EUR Zuschusswert möglich, ein rechnerischer Höchstwert, den niemand einfach so abruft. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr. Ausgezahlt wird höchstens so viel, wie du an eigenen Kosten nachweist, zum Beispiel über den Jahresbeitrag deiner Zusatzversicherung. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab, wir rechnen es individuell für dich aus.',
             },
           ],
         },
@@ -201,7 +215,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Nur vier Positionen sind überhaupt mehrfach anrechenbar, und Nummer 09 ist eine davon. Deshalb kommt in der Schwangerschaft mehr zusammen als in einem Jahr ohne sie. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich, ohne Schwangerschaftsvorsorge bis zu 810 EUR. Das sind rechnerische Höchstwerte aus einem Korb, in dem alles gleichzeitig zutrifft, keine Beträge, die die IKK classic irgendwo nennt. Einen Maximalbetrag gibt es laut Teilnahmebedingungen ohnehin nicht. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr.',
+          text: 'Nur vier Positionen sind überhaupt mehrfach anrechenbar, und Nummer 09 ist eine davon. Deshalb kommt in der Schwangerschaft mehr zusammen als in einem Jahr ohne sie. Laut Satzung sind bis zu 1.155 EUR Zuschusswert möglich, ohne Schwangerschaftsvorsorge bis zu 810 EUR. Das sind rechnerische Höchstwerte aus einem Korb, in dem alles gleichzeitig zutrifft, keine Beträge, die die IKK classic irgendwo nennt. In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr.',
         },
         {
           type: 'paragraph',
@@ -275,13 +289,35 @@ export const article = {
     },
   ],
 
+  // Einziger Button dieses Artikels, Ziel /ambulant. Der Weg führt bewusst
+  // zur SDK: Auf /ambulant steht seit 05.10.2026 auch der UKV-Vorsorge-Baustein.
+  // Der ist laut interner UKV-Prüfung für eine schon bestehende Schwangerschaft
+  // nicht gedacht, deshalb sagt der Absatz ausdrücklich, welchen Tarif
+  // Schwangere dort wählen. Der Anker #tarifwahl führt direkt zur
+  // SDK-Tarifwahl; buildInternalRatgeberUrl setzt ihn hinter die UTM-Query.
+  // Der Kampagnen-Standard ist bewusst neutral, damit kein "schwanger" in die
+  // Adresse von /ambulant wandert.
+  internalCta: {
+    id: 'sdk-vorsorge',
+    heading: 'Vorsorge in der Schwangerschaft: der Topf der SDK',
+    to: '/ambulant#tarifwahl',
+    label: 'SDK-Tarife ansehen',
+    utmCampaign: 'ratgeber-a3',
+    blocks: [
+      {
+        type: 'paragraph',
+        text: 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg. Er gilt ohne Wartezeit und erstattet Feinultraschall, Toxoplasmose und die übrigen Vorsorge-Untersuchungen aus der Tabelle oben je nach Stufe zu 50 bis 100 Prozent, mit 200 bis 500 EUR in zwei Kalenderjahren. Gentests wie NIPT gehören nicht dazu. Der kleine Vorsorge-Baustein der UKV auf derselben Seite ist für eine bestehende Schwangerschaft nicht gedacht. Wähle dort deshalb eine SDK-Stufe.',
+      },
+    ],
+  },
+
   onward: {
     heading: 'So gehst du weiter vor',
     segments: [
       { text: 'Auf ' },
       { text: 'healio.de/ambulant', to: '/ambulant' },
       {
-        text: ' siehst du, was der Vorsorge-Topf je Tarifstufe erstattet und was nach Anrechnung des Bonus an Beitrag übrig bleibt, auf ',
+        text: ' siehst du, was der Vorsorge-Topf der SDK je Tarifstufe erstattet und was nach Anrechnung des Bonus an Beitrag übrig bleibt. Für eine bestehende Schwangerschaft wählst du dort eine SDK-Stufe, nicht den UKV-Vorsorge-Baustein. Auf ',
       },
       { text: 'healio.de/stationaer', to: '/stationaer' },
       {

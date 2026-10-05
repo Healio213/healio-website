@@ -5,11 +5,11 @@ import { ChevronDown } from 'lucide-react';
 const awardSets = {
   zahn: [
     {
-      src: '/siegel/bayerische/warentest-zahn-prestige-2025.jpg',
+      src: '/siegel/bayerische/warentest-zahn-prestige-2026-09.jpg',
       altKey: 'siegel.awards.warentest',
     },
     {
-      src: '/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg',
+      src: '/siegel/ukv/franke-bornberg-zahnprivat100-2026.svg',
       altKey: 'siegel.awards.frankeBornberg',
     },
   ],

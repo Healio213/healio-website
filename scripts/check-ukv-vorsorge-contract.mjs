@@ -124,7 +124,7 @@ assert(detailsStart > -1 && detailsEnd > detailsStart, 'Der Baustein braucht den
 assert.equal((component.match(/<details/g) || []).length, 1, 'Es gibt genau einen gemeinsamen Aufklapper.');
 const visiblePart = component.slice(0, detailsStart);
 const detailsPart = component.slice(detailsStart, detailsEnd);
-for (const key of ['lead', 'preventionValue', 'preventionStart', 'priceValue', 'priceGlassesShort', 'ctaLink', 'sdkTitle']) {
+for (const key of ['lead', 'preventionValue', 'preventionStart', 'priceValue', 'priceGlassesShort', 'ctaLink', 'sdkTitle', 'pregnancyNote']) {
   assert(visiblePart.includes(`'${key}'`), `${key} gehört in den sichtbaren Teil.`);
 }
 assert(/list\('examplesShort'\)/.test(visiblePart) && /list\('facts'\)/.test(visiblePart), 'Kurzbeispiele und Pflichtangaben stehen sichtbar.');
@@ -173,8 +173,22 @@ for (const [file, source] of Object.entries(naturSources)) {
   assert(!naturPattern.test(source), `${file} darf den UKV-Naturheiltarif nicht nennen (nur Vorsorge-Baustein, Frank 05.10.2026).`);
 }
 
+// 5d. Schwangere gehören in den SDK-Vorsorge-Topf (Gegenprüfung 05.10.2026):
+//     Eine schon bestehende Schwangerschaft gilt bei der UKV wahrscheinlich als
+//     Versicherungsfall vor Beginn. Der Satz steht deshalb sichtbar im Baustein,
+//     vor dem Antragslink, nicht im Aufklapper. Er ist die einzige Stelle, an der
+//     „Schwangerschaft“ im Baustein vorkommen darf.
+const pregnancyNoteDe = 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.';
+const pregnancyNoteEn = 'For a pregnancy that has already been confirmed, the SDK prevention pot is the right route.';
+assert.equal(de.pregnancyNote, pregnancyNoteDe, 'DE braucht den Hinweis auf den SDK-Vorsorge-Topf für eine festgestellte Schwangerschaft.');
+assert.equal(en.pregnancyNote, pregnancyNoteEn, 'EN braucht den Hinweis auf den SDK-Vorsorge-Topf für eine festgestellte Schwangerschaft.');
+assert(visiblePart.indexOf("text('pregnancyNote')") > visiblePart.indexOf("list('facts')") && visiblePart.indexOf("text('pregnancyNote')") < visiblePart.indexOf("data-healio-ambulant=\"vorsorge-cta\""), 'Der Schwangerschafts-Hinweis steht sichtbar zwischen den Pflichtangaben und dem Antragslink.');
+assert(!/<details[\s\S]*pregnancyNote/.test(component.slice(detailsStart, detailsEnd)), 'Der Schwangerschafts-Hinweis darf nicht im Aufklapper versteckt sein.');
+
 // 6. Sperrliste aus der Recherche und Rote Linie, für UI-Texte in DE und EN.
-const uiText = `${deText}\n${enText}`;
+//    Der Schwangerschafts-Hinweis aus 5d ist die einzige erlaubte Ausnahme.
+const uiText = `${deText}\n${enText}`.split(pregnancyNoteDe).join('').split(pregnancyNoteEn).join('').replace(/"pregnancyNote":"",?/g, '');
+assert.equal(uiText.length < `${deText}\n${enText}`.length, true, 'Der Schwangerschafts-Hinweis wurde aus der Sperrlistenprüfung herausgenommen.');
 const forbidden = [
   [/13 Euro in jedem Alter|13 EUR in jedem Alter/i, '„13 Euro in jedem Alter“'],
   [/konstant|constant|bleibt gleich|stays the same/i, 'konstanter Beitrag'],

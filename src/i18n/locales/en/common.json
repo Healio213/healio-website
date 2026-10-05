@@ -96,8 +96,13 @@
     "groups": {
       "sdk": "Our product partner SDK",
       "zahn": "Dental plans from our product partners",
+      "ukvZahn": "UKV, plan ZahnPRIVAT 100",
+      "bayerischeZahn": "die Bayerische, plan ZAHN Prestige, can be combined with ZAHN Sofort",
       "ikk": "Test results for the health fund IKK classic",
       "ikkNote": "krankenkasseninfo.de, as of 09/2026, 72 statutory health funds tested. The rating covers the health fund IKK classic, not the supplementary insurance."
+    },
+    "notes": {
+      "zahn": "Each seal applies only to the plan named, not to ZahnPRIVAT 75 and 90 and not to the ZAHN Sofort module."
     },
     "items": {
       "fairness": "ntv German Fairness Award 2025 for SDK: overall winner among private health insurers, customer survey of 24 providers, German Institute for Service Quality",

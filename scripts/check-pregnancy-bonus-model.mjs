@@ -35,4 +35,15 @@ test('unconfirmed bonus year and malformed counts cannot create an entitlement',
 test('only the neutral known source survives the onward link, never input data', () => {
   assert.equal(model.getPregnancyOnwardPath('?src=reel-f05&checkups=10&email=private'), '/ambulant?src=reel-f05#tarifwahl');
   assert.equal(model.getPregnancyOnwardPath('?src=schwanger&bonus=630'), '/ambulant?src=bonus-check#tarifwahl');
+  // Nur eine gültige Klick-Kennung der Anzeige darf mit (Frank 05.10.2026),
+  // nie Kampagnencodes, Herkunftscodes oder Antworten.
+  assert.equal(
+    model.getPregnancyOnwardPath('?gclid=TestKlick_1234567890&utm_campaign=GOOG_Search_Schwanger_2026-09&ref=gads-s1&checkups=8'),
+    '/ambulant?src=bonus-check&gclid=TestKlick_1234567890#tarifwahl',
+  );
+  assert.equal(
+    model.getPregnancyOnwardPath('?src=reel-f05&gbraid=TestBraid_1234567890&wbraid=TestWbraid_123456789'),
+    '/ambulant?src=reel-f05&gbraid=TestBraid_1234567890&wbraid=TestWbraid_123456789#tarifwahl',
+  );
+  assert.equal(model.getPregnancyOnwardPath('?gclid=x%22%3E%3Cscript'), '/ambulant?src=bonus-check#tarifwahl');
 });

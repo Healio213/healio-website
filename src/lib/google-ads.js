@@ -4,7 +4,6 @@ import {
   subscribeConsent,
 } from '@/lib/consent';
 import {
-  PRIVATE_FUNNEL_SOURCES,
   queueConsentDefault,
   queueGtagCommand,
 } from '@/lib/analytics';
@@ -31,13 +30,21 @@ import {
  *    Kompatibilität weiter VITE_GOOGLE_ADS_RECHNER_LABEL). Ohne gültiges
  *    Label bleibt das jeweilige Ereignis still. Klicks auf "IKK-Bonus
  *    sichern", KassenBoost und interne Weiter-Knöpfe sind kein Erfolg.
- * 4. Es geht genau ein Parameter raus: send_to mit Konto-ID und Label.
- *    Keine Rechnerinhalte, keine Antworten, keine Namen, keine Adressen,
- *    kein Wert, keine Transaktions-ID.
+ * 4. Es gehen nur send_to (Konto-ID und Label) sowie eine neutrale
+ *    Seitenadresse, Herkunft und der feste Titel "Healio" raus (nie der
+ *    Dokumenttitel): Ursprung plus Pfad, an Abfrage-
+ *    parametern nur die Klick-Kennung der Anzeige (gclid, gbraid, wbraid).
+ *    Keine Kampagnen- oder Einstiegscodes, keine Rechnerinhalte, keine
+ *    Antworten, keine Namen, keine Adressen, kein Wert, keine Transaktions-ID.
  * 5. ad_personalization bleibt dauerhaft denied. Zugestimmt wird nur der
  *    Messung, nicht der Profilbildung fuer personalisierte Werbung.
- * 6. Gesperrte Routen sind dieselben wie bei Meta: /schwangerschaft sowie
- *    die neutralen Kampagnencodes src=bonus-check und src=reel-f05.
+ * 6. Gesperrt sind /schwangerschaft und die Schwangerschafts-Ratgeber: dort
+ *    lädt Google Ads nie. Wer über eine Anzeige kommt und weitergeht, nimmt
+ *    nur die Klick-Kennung mit (getPregnancyOnwardPath, Ratgeber-Button).
+ *    Die Einstiegscodes src=bonus-check und src=reel-f05 sperren Google Ads
+ *    nicht mehr, gehen aber nie an Google: Punkt 4 entfernt sie aus der
+ *    gemeldeten Adresse. Meta und GA4 bleiben auf diesen Codes gesperrt.
+ *    (Franks Entscheidung 05.10.2026: messen, soweit erlaubt.)
  */
 
 const GOOGLE_ADS_ID_PATTERN = /^AW-\d{6,20}$/;
@@ -49,10 +56,21 @@ const GOOGLE_ADS_COOKIE = /^_gcl_/;
 // Klick-Kennung aus der Anzeige. Sie ist ein Google-eigener Zaehlwert und
 // enthaelt keine Eingaben aus Rechnern oder Formularen.
 const GCLID_PATTERN = /^[A-Za-z0-9_-]{10,200}$/;
+const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 
 // Auf diesen Routen darf Google Ads niemals messen. /zahn und /ambulant sind
-// bewusst NICHT gesperrt: dorthin soll geworben werden.
-const GOOGLE_ADS_EXCLUDED_PATHS = new Set(['/schwangerschaft']);
+// bewusst NICHT gesperrt: dorthin soll geworben werden. Gesperrt sind
+// /schwangerschaft und die Schwangerschafts-Ratgeber, weil schon der Besuch
+// etwas über die Gesundheit verraten kann (Art. 9 DSGVO). Eine bezahlte
+// Anzeige auf diese Seiten wird trotzdem gemessen: Seite und Artikel-Button
+// reichen nur die Klick-Kennung an /ambulant weiter, dort zählt "Antrag
+// geöffnet" mit neutraler Adresse.
+const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
+  '/schwangerschaft',
+  '/ratgeber/schwanger-zusatzversicherung',
+  '/ratgeber/schwangerschaft-worauf-achten',
+  '/blog/kassenbonus-schwangerschaft-vorsorge',
+]);
 
 // "Antrag geöffnet" zählt nur auf den beworbenen Produktseiten, auf denen
 // Abschluss- und Rechnerlinks der Versicherer stehen.
@@ -112,15 +130,56 @@ const normalizePath = (pathname) => (pathname || '/').replace(/\/+$/, '').toLowe
 
 export const isGoogleAdsExcludedRoute = (location = isBrowser() ? window.location : null) => {
   if (!location) return true;
-  const pathname = normalizePath(location.pathname);
-  if (GOOGLE_ADS_EXCLUDED_PATHS.has(pathname)) return true;
-
-  // Neutrale Kampagnencodes fuehren in private Gesundheitsstrecken. Auch
-  // Google darf dort nichts sehen, selbst wenn "marketing" erlaubt wurde.
-  return new URLSearchParams(location.search || '')
-    .getAll('src')
-    .some((source) => PRIVATE_FUNNEL_SOURCES.has(source));
+  return GOOGLE_ADS_EXCLUDED_PATHS.has(normalizePath(location.pathname));
 };
+
+/**
+ * Die Adresse, die Google zu einem Ereignis erfährt: Ursprung plus Pfad,
+ * dazu höchstens die gültige Klick-Kennung der Anzeige. Einstiegs- und
+ * Kampagnencodes (src, utm_*, ref) und Sprungmarken bleiben immer weg, denn
+ * sie können verraten, über welche Gesundheitsseite jemand kam.
+ */
+export const getNeutralPageLocation = (location = isBrowser() ? window.location : null) => {
+  if (!location) return '';
+  try {
+    const url = new URL(location.href || String(location));
+    const neutral = new URL(`${url.origin}${url.pathname}`);
+    CLICK_ID_PARAMS.forEach((key) => {
+      const value = url.searchParams.get(key) || '';
+      if (GCLID_PATTERN.test(value)) neutral.searchParams.set(key, value);
+    });
+    return neutral.toString();
+  } catch {
+    return '';
+  }
+};
+
+/**
+ * Herkunft ohne Pfad: Bei einem Sprung innerhalb von healio.de nur die
+ * Startadresse, sonst nur der Ursprung der fremden Seite. So erfährt Google
+ * nie, von welcher Unterseite (etwa /schwangerschaft) jemand kam.
+ */
+export const getNeutralPageReferrer = (location = isBrowser() ? window.location : null) => {
+  if (!location || !isBrowser() || !document.referrer) return '';
+  try {
+    const ref = new URL(document.referrer);
+    const own = new URL(location.href || String(location));
+    return ref.origin === own.origin ? `${own.origin}/` : `${ref.origin}/`;
+  } catch {
+    return '';
+  }
+};
+
+// Fester Titel statt document.title: Beim Seitenwechsel innerhalb der
+// Anwendung steht kurz noch der Titel der vorigen Seite im Dokument, etwa
+// "Zusatzversicherung in der Schwangerschaft" (Befund live 05.10.2026).
+export const NEUTRAL_PAGE_TITLE = 'Healio';
+
+const neutralPageContext = () => ({
+  page_location: getNeutralPageLocation(),
+  page_referrer: getNeutralPageReferrer(),
+  page_title: NEUTRAL_PAGE_TITLE,
+});
 
 export const isGoogleAdsAntragRoute = (location = isBrowser() ? window.location : null) => (
   Boolean(location) && GOOGLE_ADS_ANTRAG_PATHS.has(normalizePath(location.pathname))
@@ -203,6 +262,7 @@ const loadGoogleAdsTag = () => {
   queueGtagCommand('config', GOOGLE_ADS_ID, {
     allow_ad_personalization_signals: false,
     send_page_view: false,
+    ...neutralPageContext(),
   });
 
   tagConfigured = true;
@@ -219,7 +279,10 @@ const emitGoogleAdsConversion = (label) => {
   if (isGoogleAdsExcludedRoute()) return false;
   if (!loadGoogleAdsTag()) return false;
 
-  queueGtagCommand('event', 'conversion', { send_to: `${GOOGLE_ADS_ID}/${label}` });
+  queueGtagCommand('event', 'conversion', {
+    send_to: `${GOOGLE_ADS_ID}/${label}`,
+    ...neutralPageContext(),
+  });
   return true;
 };
 

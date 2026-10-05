@@ -943,6 +943,7 @@
       "No waiting period",
       "No questions about pre-existing conditions"
     ],
+    "pregnancyNote": "For a pregnancy that has already been confirmed, the SDK prevention pot is the right route.",
     "cta": "Ask about the prevention add-on",
     "ctaHint": "We get back to you personally and go through the application with you.",
     "ctaLink": "Calculate the prevention add-on",

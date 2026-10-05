@@ -19,6 +19,11 @@
  * Zahlenregel (Frank, 21.09.2026): "bis zu 1.155 EUR laut Satzung" ist ein
  * theoretischer Hoechstwert, "400 bis 700 EUR in der breiten Masse" eine
  * gekennzeichnete Einschaetzung. Keine persoenliche Bonuszahl.
+ *
+ * Korrektur 05.10.2026: Die Saetze "Einen Maximalbetrag gibt es nicht" bzw.
+ * "nennen die Teilnahmebedingungen ausdruecklich nicht" sind gestrichen. Sie
+ * lasen sich wie "ohne Obergrenze" (Sperrliste) und hoben das "bis zu 810 /
+ * 1.155 EUR" daneben wieder auf.
  */
 
 export const article = {
@@ -31,6 +36,8 @@ export const article = {
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
+  updatedAt: '2026-10-05',
+  updatedAtLabel: '5. Oktober 2026',
   readingTimeMinutes: 7,
 
   listTitle: 'IKK classic Bonusprogramm 2026: alle Positionen, Nachweise und Fristen',
@@ -63,8 +70,8 @@ export const article = {
               text: 'Ein rechnerischer Zuschuss von 405 EUR bei 240 EUR Jahresbeitrag ergibt 240 EUR. Ein Plus entsteht nie.',
             },
             {
-              lead: 'Laut Satzung sind bis zu 1.155 EUR Zuschusswert im Jahr möglich, ein theoretischer Wert.',
-              text: 'Nach unserer Einschätzung aus der Beratung, ausdrücklich keine Belegzahl, kommen in der breiten Masse 400 bis 700 EUR zusammen; belegt durchgerechnet sind 105, 405 und 810 EUR. Wer als Modellfall wirklich jede für ihn geltende Vorsorge in einem Jahr mitnimmt und dazu vier Aktivitäten plus zwei Abzeichen nachweist, kommt auf 810 EUR. Einen Maximalbetrag nennen die Teilnahmebedingungen ausdrücklich nicht.',
+              lead: 'Laut Satzung sind bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR, beides theoretische Werte.',
+              text: 'Nach unserer Einschätzung aus der Beratung, ausdrücklich keine Belegzahl, kommen in der breiten Masse 400 bis 700 EUR zusammen; belegt durchgerechnet sind 105, 405 und 810 EUR. Wer als Modellfall wirklich jede für ihn geltende Vorsorge in einem Jahr mitnimmt und dazu vier Aktivitäten plus zwei Abzeichen nachweist, kommt auf 810 EUR.',
             },
             {
               lead: 'Frist 31.03.2027,',
@@ -168,7 +175,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Das Satzungs-Top-Szenario von bis zu 1.155 EUR setzt voraus, dass wirklich jede Position zusammenkommt, einschließlich der Schwangerschaftsvorsorgen. Das erreicht kaum jemand, deshalb ist es ein theoretischer Wert. Unsere Einschätzung aus der Beratung, ausdrücklich keine Belegzahl: In der breiten Masse landen aktive Versicherte beim Zuschusswert zwischen 400 und 700 EUR im Jahr, also zwischen dem sportlichen und dem voll ausgeschöpften Szenario. Einen Maximalbetrag gibt es nicht, das sagen die Teilnahmebedingungen wörtlich.',
+          text: 'Das Satzungs-Top-Szenario von bis zu 1.155 EUR setzt voraus, dass wirklich jede Position zusammenkommt, einschließlich der Schwangerschaftsvorsorgen. Das erreicht kaum jemand, deshalb ist es ein theoretischer Wert. Unsere Einschätzung aus der Beratung, ausdrücklich keine Belegzahl: In der breiten Masse landen aktive Versicherte beim Zuschusswert zwischen 400 und 700 EUR im Jahr, also zwischen dem sportlichen und dem voll ausgeschöpften Szenario.',
         },
       ],
     },

@@ -96,8 +96,13 @@
     "groups": {
       "sdk": "Unser Produktpartner SDK",
       "zahn": "Zahn-Tarife unserer Produktpartner",
+      "ukvZahn": "UKV, Tarif ZahnPRIVAT 100",
+      "bayerischeZahn": "die Bayerische, Tarif ZAHN Prestige, mit ZAHN Sofort kombinierbar",
       "ikk": "Die Krankenkasse IKK classic im Test",
       "ikkNote": "krankenkasseninfo.de, Stand 09/2026, 72 gesetzliche Krankenkassen im Test. Bewertet wird die Krankenkasse IKK classic, nicht die Zusatzversicherung."
+    },
+    "notes": {
+      "zahn": "Jedes Siegel gilt nur für den genannten Tarif, nicht für ZahnPRIVAT 75 und 90 und nicht für den Baustein ZAHN Sofort."
     },
     "items": {
       "fairness": "ntv Deutscher Fairness-Preis 2025 für die SDK: Gesamtsieger Private Krankenversicherer, Kundenurteil zu 24 Anbietern, Deutsches Institut für Service-Qualität",

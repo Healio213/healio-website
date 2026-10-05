@@ -124,19 +124,19 @@ try {
 
   const germanDentalBonus = await readDentalBonusCard({
     route: '/zahn',
-    amount: '1.155 EUR',
+    amount: '810 EUR',
     cta: 'Zahn-Check starten',
   });
-  assert.match(germanDentalBonus.cardText, /Belegter Höchstwert 2026 · passende Nachweise · anerkannte Eigenkosten/);
+  assert.match(germanDentalBonus.cardText, /Höchstwert laut Satzung 2026 · passende Nachweise · anerkannte Eigenkosten/);
   assert.match(germanDentalBonus.cardText, /tatsächlich erreichbare.*hängt von den aktuellen Bonusbedingungen ab/i);
   assert.equal(germanDentalBonus.ctaHref, '#zahn-check', 'The German dental bonus CTA must keep opening the dental check.');
 
   const englishDentalBonus = await readDentalBonusCard({
     route: '/en/dental',
-    amount: '€1,155',
+    amount: '€810',
     cta: 'Start the dental check',
   });
-  assert.match(englishDentalBonus.cardText, /Documented 2026 maximum · suitable evidence · recognised out-of-pocket costs/);
+  assert.match(englishDentalBonus.cardText, /Maximum under the 2026 statutes · suitable evidence · recognised out-of-pocket costs/);
   assert.match(englishDentalBonus.cardText, /actually available depends on the current bonus terms/i);
   assert.equal(englishDentalBonus.ctaHref, '#zahn-check', 'The English dental bonus CTA must keep opening the dental check.');
 

@@ -268,8 +268,8 @@ expect(
 
 // /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
 expect(
-  /const META_EXCLUDED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(metaPixel),
-  'Die Schwangerschafts-Route muss in der Meta-Sperrliste stehen.',
+  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaPixel),
+  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Meta-Sperrliste stehen.',
 );
 expect(
   /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(metaPixel),
@@ -504,10 +504,15 @@ expect(
   'Ein Widerruf muss die Werbe-Achse schliessen und die _gcl_-Cookies loeschen.',
 );
 
-// Es geht genau ein Parameter raus: send_to mit Konto-ID und Label.
+// Es gehen nur send_to und die neutrale Adresse raus (Ursprung plus Pfad,
+// höchstens die Klick-Kennung), nie Einstiegs- oder Kampagnencodes.
 expect(
-  /queueGtagCommand\('event', 'conversion', \{ send_to: `\$\{GOOGLE_ADS_ID\}\/\$\{label\}` \}\);/.test(googleAds),
-  'Eine Google-Ads-Conversion darf ausser send_to keinen Parameter enthalten.',
+  /queueGtagCommand\('event', 'conversion', \{\s*\n\s*send_to: `\$\{GOOGLE_ADS_ID\}\/\$\{label\}`,\s*\n\s*\.\.\.neutralPageContext\(\),\s*\n\s*\}\);/.test(googleAds)
+    && /const neutralPageContext = \(\) => \(\{\s*\n\s*page_location: getNeutralPageLocation\(\),\s*\n\s*page_referrer: getNeutralPageReferrer\(\),\s*\n\s*page_title: NEUTRAL_PAGE_TITLE,\s*\n\s*\}\);/.test(googleAds)
+    && /export const NEUTRAL_PAGE_TITLE = 'Healio';/.test(googleAds)
+    && /send_page_view: false,\s*\n\s*\.\.\.neutralPageContext\(\),/.test(googleAds)
+    && /const CLICK_ID_PARAMS = Object\.freeze\(\['gclid', 'gbraid', 'wbraid'\]\);/.test(googleAds),
+  'Eine Google-Ads-Conversion darf ausser send_to nur die neutrale Adresse und Herkunft enthalten, auch in der Tag-Konfiguration.',
 );
 expect(
   /const GOOGLE_ADS_LABEL_PATTERN = \/\^\[A-Za-z0-9_-\]\{5,40\}\$\/;/.test(googleAds)
@@ -522,12 +527,15 @@ expect(
 
 // Dieselben Sperrrouten wie bei Meta.
 expect(
-  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(googleAds),
-  'Die Schwangerschafts-Route muss in der Google-Ads-Sperrliste stehen.',
+  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(googleAds),
+  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
 );
+// Einstiegscodes sperren Google Ads nicht mehr, gehen aber nie an Google
+// (Frank 05.10.2026). Meta und GA4 bleiben auf diesen Codes gesperrt.
 expect(
-  /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(googleAds),
-  'Private Kampagnenquellen muessen auch fuer Google Ads gesperrt bleiben.',
+  !/PRIVATE_FUNNEL_SOURCES/.test(googleAds)
+    && /export const isGoogleAdsExcludedRoute = \(location = isBrowser\(\) \? window\.location : null\) => \{\s*\n\s*if \(!location\) return true;\s*\n\s*return GOOGLE_ADS_EXCLUDED_PATHS\.has\(normalizePath\(location\.pathname\)\);\s*\n\};/.test(googleAds),
+  'Google Ads darf Einstiegscodes nicht mehr als Sperre auswerten, sondern muss sie aus der gemeldeten Adresse entfernen.',
 );
 
 // Die Klick-Kennung haengt an Zustimmung und Format, sonst bleibt sie leer.

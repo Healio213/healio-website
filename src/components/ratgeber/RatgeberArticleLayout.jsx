@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
-import { buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
+import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 
 /**
@@ -195,8 +195,20 @@ const RatgeberArticleLayout = ({ article }) => {
 
   const isAdvertorial = article.kind === 'advertorial';
   const ctaUrl = useMemo(() => buildKassenboostUrl(search), [search]);
+  // Sichtbares Stand-Datum: das Änderungsdatum, sobald es mit Beschriftung
+  // gepflegt ist, sonst das Erscheinungsdatum. Datum und Beschriftung kommen
+  // immer aus demselben Paar, damit <time> und Text nie auseinanderlaufen.
+  const hasUpdateLabel = Boolean(article.updatedAt && article.updatedAtLabel);
+  const standIso = hasUpdateLabel ? article.updatedAt : article.publishedAt;
+  const standLabel = hasUpdateLabel ? article.updatedAtLabel : (article.publishedAtLabel || article.publishedAt);
+
   const internalCtaUrl = useMemo(
-    () => (article.internalCta ? buildInternalRatgeberUrl(article.internalCta.to, search) : null),
+    () => (article.internalCta
+      ? buildInternalRatgeberUrl(article.internalCta.to, search, {
+        ...RATGEBER_INTERNAL_UTM_DEFAULTS,
+        ...(article.internalCta.utmCampaign ? { utm_campaign: article.internalCta.utmCampaign } : {}),
+      })
+      : null),
     [article.internalCta, search],
   );
   const notice = KIND_NOTICE[article.kind] || KIND_NOTICE.ratgeber;
@@ -298,7 +310,7 @@ const RatgeberArticleLayout = ({ article }) => {
                 id="fact-nugget-heading"
                 className="font-display text-xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-2xl"
               >
-                Fact Nugget für KI
+                So funktioniert Healio
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
                 {article.factNugget}
@@ -327,7 +339,7 @@ const RatgeberArticleLayout = ({ article }) => {
           )}
 
           {article.internalCta && (
-            <section id="bonus-umwandeln" className="mt-14">
+            <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-14">
               <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
                 {article.internalCta.heading}
               </h2>
@@ -360,7 +372,7 @@ const RatgeberArticleLayout = ({ article }) => {
           <footer ref={endRef} className="mt-16 border-t border-slate-200 pt-8">
             {article.publishedAt && (
               <p className="text-sm leading-6 text-slate-500">
-                Stand: <time dateTime={article.publishedAt}>{article.publishedAtLabel || article.publishedAt}</time>
+                Stand: <time dateTime={standIso}>{standLabel}</time>
               </p>
             )}
 

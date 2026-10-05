@@ -62,23 +62,59 @@ export const RATGEBER_INTERNAL_UTM_DEFAULTS = Object.freeze({
   utm_campaign: 'ikk-bonus-landingpage',
 });
 
-export const buildInternalRatgeberUrl = (targetPath, search = '') => {
+// Neben den UTM-Parametern wandern nur diese Kennungen mit, und nur, wenn sie
+// in der aufrufenden Adresse stehen: der Empfehlungscode (ref, wie in
+// src/lib/referrer.js) und die Google-Klick-Kennungen. So bleibt der Code auch
+// erhalten, wenn jemand den Button in einem neuen Tab öffnet (sessionStorage
+// wird dort nicht mitgenommen), und die Klick-Kennung steht noch in der
+// Adresse, falls die Zustimmung erst auf der Zielseite kommt. Gespeichert wird
+// dabei nichts, gelesen wird die Klick-Kennung weiter nur mit Zustimmung
+// (readGoogleClickId in src/lib/google-ads.js).
+const RATGEBER_PASS_THROUGH = Object.freeze({
+  ref: /^[A-Za-z0-9_-]{1,64}$/,
+  gclid: /^[A-Za-z0-9_-]{10,200}$/,
+  gbraid: /^[A-Za-z0-9_-]{10,200}$/,
+  wbraid: /^[A-Za-z0-9_-]{10,200}$/,
+});
+
+// defaults: Standardwerte je Artikel. Ohne Angabe gelten die Werte der
+// IKK-Bonus-Landingpage; andere Artikel setzen ihre eigene utm_campaign
+// (internalCta.utmCampaign), damit organische Leser nicht in der falschen
+// Kampagne landen.
+export const buildInternalRatgeberUrl = (targetPath, search = '', defaults = RATGEBER_INTERNAL_UTM_DEFAULTS) => {
   if (typeof targetPath !== 'string' || !targetPath.startsWith('/')) {
     throw new TypeError('Das interne Ziel muss ein Pfad auf healio.de sein.');
   }
 
+  // Ein Anker im Ziel (zum Beispiel /zahn#zahn-check) bleibt erhalten und
+  // steht immer HINTER der Query. Steht er davor, landen die Parameter im
+  // Anker und gehen verloren: der Browser liest alles nach # nicht als Query.
+  const hashIndex = targetPath.indexOf('#');
+  const hash = hashIndex === -1 || hashIndex === targetPath.length - 1
+    ? ''
+    : targetPath.slice(hashIndex);
+  const pathAndQuery = hashIndex === -1 ? targetPath : targetPath.slice(0, hashIndex);
+  const queryIndex = pathAndQuery.indexOf('?');
+  const basePath = queryIndex === -1 ? pathAndQuery : pathAndQuery.slice(0, queryIndex);
+  const ownQuery = queryIndex === -1 ? '' : pathAndQuery.slice(queryIndex + 1);
+
   const incoming = new URLSearchParams(typeof search === 'string' ? search : '');
-  const params = new URLSearchParams();
+  const params = new URLSearchParams(ownQuery);
 
   RATGEBER_UTM_KEYS.forEach((key) => {
     const candidate = incoming.get(key);
     const value = typeof candidate === 'string' && SAFE_UTM_VALUE.test(candidate)
       ? candidate
-      : RATGEBER_INTERNAL_UTM_DEFAULTS[key];
+      : defaults[key];
 
     if (value) params.set(key, value);
   });
 
+  Object.entries(RATGEBER_PASS_THROUGH).forEach(([key, pattern]) => {
+    const candidate = incoming.get(key);
+    if (typeof candidate === 'string' && pattern.test(candidate)) params.set(key, candidate);
+  });
+
   const query = params.toString();
-  return query ? `${targetPath}?${query}` : targetPath;
+  return `${basePath}${query ? `?${query}` : ''}${hash}`;
 };

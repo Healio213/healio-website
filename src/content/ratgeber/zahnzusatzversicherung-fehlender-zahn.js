@@ -18,6 +18,13 @@
  *     Kostenplan oder Anratung in den letzten zwei Jahren schließt genau diese
  *     Behandlung aus, liegt das länger zurück, ist sie wieder versichert. Der frühere
  *     Satz "sprich vorher mit uns" ist nicht mehr die einzige Aussage.
+ *   - Stand 05.10.2026 (Gegenpruefung der Demand-Gen-Anzeigen): Der Faktenkasten
+ *     nennt 1.155 EUR nur noch mit Schwangerschaftsbezug, allgemein gilt bis zu
+ *     810 EUR. Neuer interner Button zum Zahn-Check auf /zahn.
+ *   - Stand 05.10.2026 abends (Gegenpruefung Website): Der Button-Absatz
+ *     beschreibt die Wege so, wie der Zahn-Check sie bei einer Luecke wirklich
+ *     zeigt (UKV mit Zuschlag oder persoenliches Gespraech, nie die
+ *     Bayerische). "Danach ist die Erstattung unbegrenzt" ersetzt (Sperrliste).
  *
  * Inhaltliche Grenzen: keine Garantien, keine erfundenen Beitraege, keine
  * persoenliche Bonuszahl. Tarifbeitraege stehen bewusst nicht im Text.
@@ -34,6 +41,7 @@ export const article = {
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
   updatedAt: '2026-10-05',
+  updatedAtLabel: '5. Oktober 2026',
   readingTimeMinutes: 6,
 
   listTitle: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
@@ -202,7 +210,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen. In den ersten drei Kalenderjahren begrenzt dort eine Zahnstaffel die Erstattung: in ZahnPRIVAT 90 und 100 bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, in ZahnPRIVAT 75 entsprechend bis 1.000, 2.000 und 3.000 EUR. Danach ist die Erstattung unbegrenzt, bei Unfall gilt keine Staffel. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
+          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen. In den ersten drei Kalenderjahren begrenzt dort eine Zahnstaffel die Erstattung: in ZahnPRIVAT 90 und 100 bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, in ZahnPRIVAT 75 entsprechend bis 1.000, 2.000 und 3.000 EUR. Danach endet die Staffel und es gelten allein die Erstattungssätze des Tarifs, bei Unfall gilt keine Staffel. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
         },
       ],
     },
@@ -223,7 +231,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Bonus wird jährlich beantragt und fließt als zweckgebundener Zuschuss in den Zusatzschutz. Bei der IKK classic sind laut Satzung bis zu 1.155 EUR Zuschusswert im Jahr möglich, das ist ein theoretischer Höchstwert; in der breiten Masse kommen 400 bis 700 EUR zusammen, abhängig von Kasse, nachgewiesenen Maßnahmen und tatsächlichen eigenen Kosten. Ausgezahlt wird höchstens in Höhe der nachgewiesenen Kosten, gegenzurechnen ist der Zusatzbeitrag der Kasse. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Bonus wird jährlich beantragt und fließt als zweckgebundener Zuschuss in den Zusatzschutz. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR; das sind theoretische Höchstwerte. In der breiten Masse kommen 400 bis 700 EUR zusammen, abhängig von Kasse, nachgewiesenen Maßnahmen und tatsächlichen eigenen Kosten. Ausgezahlt wird höchstens in Höhe der nachgewiesenen Kosten, gegenzurechnen ist der Zusatzbeitrag der Kasse. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -257,6 +265,26 @@ export const article = {
         'Der Baustein endet automatisch und sein Beitrag von 29,90 EUR entfällt. Der Trägertarif läuft normal weiter.',
     },
   ],
+
+  // Einziger Button dieses Artikels, Ziel ist der Zahn-Check auf /zahn. Der
+  // Anker steht im Ziel, buildInternalRatgeberUrl setzt ihn hinter die UTM-Query.
+  // Der Check hat zwei bis vier Fragen (die vierte nur, wenn nichts angeraten
+  // ist und keine Lücke besteht) und speichert nichts: Antworten bleiben im
+  // lokalen Zustand der Seite (DentalZahnCheck.jsx).
+  internalCta: {
+    id: 'zahn-check-weg',
+    heading: 'Welcher Weg passt zu deiner Lücke?',
+    to: '/zahn#zahn-check',
+    label: 'Zahn-Check starten',
+    // Eigener, neutraler Kampagnen-Standard für Leser ohne eingehende UTM.
+    utmCampaign: 'ratgeber-a1',
+    blocks: [
+      {
+        type: 'paragraph',
+        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Weg. Bei ein bis drei fehlenden Zähnen ohne angeratene Behandlung ist das UKV ZahnPRIVAT mit Zuschlag je Zahn, mit direktem Link zum Antrag. Fehlen mehr als drei Zähne oder kommt zur Lücke eine angeratene oder begonnene Behandlung, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
+      },
+    ],
+  },
 
   onward: {
     heading: 'So gehst du weiter vor',

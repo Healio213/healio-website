@@ -30,8 +30,8 @@
     "moreAwardsLabel": "More IKK classic awards",
     "ikkLogoAlt": "IKK classic logo",
     "awards": {
-      "warentest": "Stiftung Warentest VERY GOOD (0.5), ZAHN Prestige by die Bayerische, 07/2025 issue",
-      "frankeBornberg": "Franke & Bornberg FFF+ excellent (0.5), UKV ZahnPRIVAT 100, 2025 rating"
+      "warentest": "Stiftung Warentest VERY GOOD (0.5), ZAHN Prestige by die Bayerische, 278 supplementary dental plans tested, 09/2026 issue",
+      "frankeBornberg": "Franke & Bornberg FFF+ excellent (0.5), supplementary dental insurance, UKV ZahnPRIVAT 100, product 12/2024, rating 08/2026"
     },
     "ikkAwards": {
       "performance": "Health fund benefits test, IKK classic rated Very Good (1.5), 03/2026",
@@ -204,7 +204,7 @@
         "title": "ZAHN Prestige: the test winner",
         "text": "With healthy teeth you get the maximum here: top grade at Stiftung Warentest and 100 % reimbursement for dentures and dental treatment.",
         "reasons": [
-          "Stiftung Warentest VERY GOOD (0.5), Finanztest 07/2025, repeat test winner",
+          "Stiftung Warentest VERY GOOD (0.5), 09/2026 issue, 278 supplementary dental plans tested",
           "100 % for dentures, implants, inlays and dental treatment, without waiting periods",
           "Bleaching up to €200 per year included"
         ],
@@ -405,7 +405,7 @@
     },
     "unfall": {
       "title": "Award-winning benefits route",
-      "desc": "UKV ZahnPRIVAT 100 with Franke & Bornberg FFF+ excellent (0.5), rating 2025."
+      "desc": "UKV ZahnPRIVAT 100 with Franke & Bornberg FFF+ excellent (0.5), rating 08/2026."
     },
     "gesundheitsfragen": {
       "title": "Fair acceptance",

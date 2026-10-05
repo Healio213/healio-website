@@ -44,8 +44,21 @@ export function calculatePregnancyBonus(selection = {}, eligiblePaidPremium) {
   };
 }
 
+const CLICK_ID_PARAMS = ['gclid', 'gbraid', 'wbraid'];
+const CLICK_ID_PATTERN = /^[A-Za-z0-9_-]{10,200}$/;
+
 // Never forward arbitrary query parameters, calculated amounts or answers.
+// The only exception is a valid ad click ID (Frank 05.10.2026): it lets
+// /ambulant attribute an opened application to the ad without this page
+// ever loading Google Ads. Campaign codes (utm_*) stay behind, because the
+// campaign name can name the pregnancy topic.
 export function getPregnancyOnwardPath(search = '') {
-  const source = new URLSearchParams(search).get('src') === 'reel-f05' ? 'reel-f05' : 'bonus-check';
-  return `/ambulant?src=${source}#tarifwahl`;
+  const params = new URLSearchParams(search);
+  const source = params.get('src') === 'reel-f05' ? 'reel-f05' : 'bonus-check';
+  const onward = new URLSearchParams({ src: source });
+  CLICK_ID_PARAMS.forEach((key) => {
+    const value = params.get(key) || '';
+    if (CLICK_ID_PATTERN.test(value)) onward.set(key, value);
+  });
+  return `/ambulant?${onward.toString()}#tarifwahl`;
 }
