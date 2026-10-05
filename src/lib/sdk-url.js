@@ -1,6 +1,6 @@
 import { trackEvent } from '@/lib/analytics';
-import { trackMetaLead, trackMetaRechnerStart } from '@/lib/meta-pixel';
-import { trackGoogleAdsLead, trackGoogleAdsRechnerStart } from '@/lib/google-ads';
+import { trackMetaRechnerStart } from '@/lib/meta-pixel';
+import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 import { readStoredReferrer, sanitizeReferrer } from '@/lib/referrer';
 
 /**
@@ -69,8 +69,9 @@ export function trackSdkClick(page) {
   // Meta: Start des Beitragsrechners, ohne jeden Eingabewert. Der Aufruf
   // filtert selbst auf /ambulant und /zahn.
   trackMetaRechnerStart();
-  // Google Ads: derselbe Auslöser, nur Konto-ID und Conversion-Label.
-  trackGoogleAdsRechnerStart();
+  // Google Ads: Erfolg "Antrag geöffnet", nur Konto-ID und Conversion-Label.
+  // Zählt auf /ambulant, /stationaer und /zahn samt englischer Fassung.
+  trackGoogleAdsAntrag();
 
   return trackEvent('tariff_calculator_click', {
     component: 'sdk',
@@ -86,10 +87,9 @@ export function trackSdkClick(page) {
  * @param {string} placement - z.B. "bonusrechner", "ikk-wechsel", "stationaer"
  */
 export function trackIkkClick(placement) {
-  // "Bonus sichern" gilt als abgeschickte Anfrage, ohne Personenbezug.
-  trackMetaLead();
-  trackGoogleAdsLead();
-
+  // Reine Statistik (GA4). Bewusst KEIN Erfolg für Google Ads oder Meta:
+  // Ein Kassenwechsel ist kein Versicherungsabschluss, sonst würden die
+  // Anzeigen gezielt Bonussammler suchen.
   return trackEvent('ikk_bonus_click', {
     component: 'ikk',
     destination: 'ikk_classic',

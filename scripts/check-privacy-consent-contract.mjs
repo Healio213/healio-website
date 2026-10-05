@@ -196,12 +196,18 @@ for (const [file, source] of sourceFiles) {
 // Der Zweck "marketing" muss ueberall vorhanden und standardmaessig aus sein.
 expect(/marketing: false/.test(consent), 'Der Consent-Zweck marketing muss standardmaessig aus sein.');
 expect(
-  /marketing: \['Marketing \(Meta\)'[\s\S]{0,400}?Meta-Pixel[\s\S]{0,400}?Antworten aus Rechnern und Auswahlhilfen werden nie übertragen\./.test(consentManager),
-  'Der deutsche Consent-Text fuer Meta muss Zweck und Antwort-Ausschluss benennen.',
+  /marketing: \['Marketing \(Google Ads und Meta\)'[\s\S]{0,400}?Google Ads und ein Meta-Pixel[\s\S]{0,400}?Anfragen und geöffneten Anträgen[\s\S]{0,400}?Antworten aus Rechnern und Auswahlhilfen werden nie übertragen\./.test(consentManager),
+  'Der deutsche Consent-Text muss Google Ads und Meta, beide Erfolge und den Antwort-Ausschluss benennen.',
 );
 expect(
-  /marketing: \['Marketing \(Meta\)'[\s\S]{0,400}?Meta pixel[\s\S]{0,400}?never transmitted\./.test(consentManager),
-  'Der englische Consent-Text fuer Meta muss Zweck und Antwort-Ausschluss benennen.',
+  /marketing: \['Marketing \(Google Ads and Meta\)'[\s\S]{0,400}?Google Ads and a Meta pixel[\s\S]{0,400}?enquiries and opened applications[\s\S]{0,400}?never transmitted\./.test(consentManager),
+  'Der englische Consent-Text muss Google Ads und Meta, beide Erfolge und den Antwort-Ausschluss benennen.',
+);
+expect(
+  !/Marketing \(Meta\)/.test(consentManager)
+    && !/Marketing \(Meta\)/.test(`${legalDe.datenschutz.metaText || ''} ${legalDe.datenschutz.googleAdsText || ''}`)
+    && !/Marketing \(Meta\)/.test(`${legalEn.datenschutz.metaText || ''} ${legalEn.datenschutz.googleAdsText || ''}`),
+  'Der alte Zweckname "Marketing (Meta)" darf weder im Banner noch in der Datenschutzerklaerung stehen.',
 );
 
 // Kein Meta-Skript und kein fbq-Aufruf ausserhalb des consent-gesteuerten Moduls.
@@ -374,12 +380,70 @@ for (const [file, source] of metaSourceFiles) {
   );
 }
 
-// Ohne VITE_GOOGLE_ADS_ID bleibt der gesamte Pfad inaktiv.
+// Ohne Konto-ID (Umgebungsvariable oder feste Konstante) bleibt der gesamte
+// Pfad inaktiv. Beide Wege laufen durch dieselbe Formatpruefung.
+const googleAdsConfig = read('src/lib/google-ads-config.js');
 expect(
   /const GOOGLE_ADS_ENV = \(typeof import\.meta !== 'undefined' && import\.meta\.env\) \|\| \{\};/.test(googleAds)
-    && /export const GOOGLE_ADS_ID = readEnv\('VITE_GOOGLE_ADS_ID', GOOGLE_ADS_ID_PATTERN\);/.test(googleAds)
+    && /export const GOOGLE_ADS_ID = readConfig\('VITE_GOOGLE_ADS_ID', GOOGLE_ADS_ID_PATTERN, CONFIG_GOOGLE_ADS_ID\);/.test(googleAds)
+    && /export const GOOGLE_ADS_LEAD_LABEL = readConfig\('VITE_GOOGLE_ADS_LEAD_LABEL', GOOGLE_ADS_LABEL_PATTERN, CONFIG_LEAD_LABEL\);/.test(googleAds)
+    && /export const GOOGLE_ADS_ANTRAG_LABEL = readConfig\('VITE_GOOGLE_ADS_RECHNER_LABEL', GOOGLE_ADS_LABEL_PATTERN, CONFIG_ANTRAG_LABEL\);/.test(googleAds)
+    && /if \(pattern\.test\(raw\)\) return raw;\s*\n\s*const fixed = typeof fallback === 'string' \? fallback\.trim\(\) : '';\s*\n\s*return pattern\.test\(fixed\) \? fixed : '';/.test(googleAds)
     && /export const isGoogleAdsConfigured = \(\) => GOOGLE_ADS_ID !== '';/.test(googleAds),
-  'Ohne VITE_GOOGLE_ADS_ID muss der gesamte Google-Ads-Pfad inaktiv bleiben.',
+  'Konto-ID und Labels muessen aus Variable oder Konstante kommen und beide durch die Formatpruefung laufen.',
+);
+{
+  const configValue = (name) => googleAdsConfig.match(new RegExp(`export const ${name} = '([^']*)';`))?.[1];
+  const id = configValue('GOOGLE_ADS_ID');
+  const lead = configValue('LEAD_LABEL');
+  const antrag = configValue('ANTRAG_LABEL');
+  expect(
+    id !== undefined && lead !== undefined && antrag !== undefined,
+    'src/lib/google-ads-config.js muss GOOGLE_ADS_ID, LEAD_LABEL und ANTRAG_LABEL als einfache Zeichenketten enthalten.',
+  );
+  expect(id === '' || /^AW-\d{6,20}$/.test(id || ''), 'GOOGLE_ADS_ID muss leer sein oder das Format AW-<Ziffern> haben.');
+  expect(lead === '' || /^[A-Za-z0-9_-]{5,40}$/.test(lead || ''), 'LEAD_LABEL muss leer oder ein gueltiges Conversion-Label sein.');
+  expect(antrag === '' || /^[A-Za-z0-9_-]{5,40}$/.test(antrag || ''), 'ANTRAG_LABEL muss leer oder ein gueltiges Conversion-Label sein.');
+}
+
+// Genau zwei Erfolge: Anfrage und Antrag geoeffnet. IKK, KassenBoost und
+// interne Weiter-Knoepfe sind weder bei Google Ads noch bei Meta ein Erfolg.
+const sdkUrl = read('src/lib/sdk-url.js');
+const ikkFunction = sdkUrl.match(/export function trackIkkClick\([^)]*\) \{[\s\S]*?\n\}/)?.[0] ?? '';
+expect(Boolean(ikkFunction), 'trackIkkClick muss in src/lib/sdk-url.js auffindbar bleiben.');
+expect(
+  !/trackMeta|trackGoogleAds|fbq|conversion/.test(ikkFunction) && /trackEvent\('ikk_bonus_click'/.test(ikkFunction),
+  'trackIkkClick darf nur noch das GA4-Ereignis senden, keine Google- oder Meta-Conversion.',
+);
+expect(
+  /export function trackSdkClick[\s\S]*?trackGoogleAdsAntrag\(\);/.test(sdkUrl),
+  'Der Klick auf den SDK-Antrag muss als "Antrag geoeffnet" zaehlen.',
+);
+expect(
+  /const GOOGLE_ADS_ANTRAG_PATHS = new Set\(\[[\s\S]*?'\/ambulant'[\s\S]*?'\/en\/outpatient'[\s\S]*?'\/stationaer'[\s\S]*?'\/en\/inpatient'[\s\S]*?'\/zahn'[\s\S]*?'\/en\/dental'[\s\S]*?\]\);/.test(googleAds),
+  '"Antrag geoeffnet" muss auf /ambulant, /stationaer und /zahn samt englischer Fassung zaehlen.',
+);
+const ratgeberLayout = read('src/components/ratgeber/RatgeberArticleLayout.jsx');
+expect(
+  !/trackMeta|trackGoogleAds/.test(ratgeberLayout),
+  'KassenBoost- und Weiter-Knoepfe im Ratgeber duerfen keinen Google- oder Meta-Erfolg ausloesen.',
+);
+expect(
+  !/trackGoogleAds/.test(dentalPage),
+  'Der reine Sprung zum Zahn-Check ist kein Google-Ads-Erfolg.',
+);
+{
+  const adsCalls = dentalCheck.match(/trackGoogleAds\w*\([^)]*\)/g) || [];
+  expect(
+    adsCalls.length > 0 && adsCalls.every((call) => call === 'trackGoogleAdsAntrag()')
+      && /import \{ trackGoogleAdsAntrag \} from '@\/lib\/google-ads';/.test(dentalCheck),
+    'Im Zahn-Check darf nur der Antragslink zaehlen, als trackGoogleAdsAntrag() ohne jedes Argument.',
+  );
+}
+const analyticsEventCalls = analytics.match(/queueGtagCommand\('event',[\s\S]*?\);/g) || [];
+expect(
+  analyticsEventCalls.length > 0 && analyticsEventCalls.every((call) => /send_to: GA4_MEASUREMENT_ID/.test(call)),
+  'GA4-Ereignisse muessen per send_to bei GA4 bleiben und duerfen nicht an das Google-Ads-Konto gehen.',
 );
 expect(
   /const GOOGLE_ADS_ID_PATTERN = \/\^AW-\\d\{6,20\}\$\/;/.test(googleAds),

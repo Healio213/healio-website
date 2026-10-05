@@ -21,7 +21,6 @@ import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
-import { trackGoogleAdsRechnerStart } from '@/lib/google-ads';
 
 const pathVisuals = {
   bayerische: { kind: 'dental', tone: 'mint' },
@@ -49,10 +48,11 @@ const trustVisuals = [
 
 const scrollToCheck = (event, reduceMotion) => {
   event?.preventDefault();
-  // Meta: nur der Klick auf den primaeren Rechner-CTA. Der Zahn-Check selbst
-  // bleibt frei von Messung, seine Antworten verlassen das Geraet nie.
+  // Meta: nur der Klick auf den primaeren Rechner-CTA. Die Antworten im
+  // Zahn-Check verlassen das Geraet nie. Für Google Ads ist der reine Sprung
+  // zum Check kein Erfolg mehr; gezählt wird erst der Klick auf den
+  // Antragslink eines Versicherers (ohne Antworten, ohne Versicherer).
   trackMetaRechnerStart();
-  trackGoogleAdsRechnerStart();
   document.getElementById('zahn-check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 };
 

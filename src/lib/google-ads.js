@@ -8,6 +8,11 @@ import {
   queueConsentDefault,
   queueGtagCommand,
 } from '@/lib/analytics';
+import {
+  ANTRAG_LABEL as CONFIG_ANTRAG_LABEL,
+  GOOGLE_ADS_ID as CONFIG_GOOGLE_ADS_ID,
+  LEAD_LABEL as CONFIG_LEAD_LABEL,
+} from '@/lib/google-ads-config';
 
 /**
  * Google-Ads-Conversion-Messung fuer healio.de.
@@ -17,10 +22,15 @@ import {
  * 1. Ohne Zustimmung fuer den Zweck "marketing" wird kein Google-Ads-Tag
  *    geladen, kein Conversion-Ereignis gesendet und die Werbe-Achse des
  *    Consent Mode bleibt auf denied.
- * 2. Ohne gesetzte Konto-ID (VITE_GOOGLE_ADS_ID) ist das Modul vollstaendig
- *    inaktiv. Solange Frank in Vercel nichts setzt, passiert nichts.
- * 3. Ohne Conversion-Label (VITE_GOOGLE_ADS_LEAD_LABEL bzw.
- *    VITE_GOOGLE_ADS_RECHNER_LABEL) bleibt das jeweilige Ereignis still.
+ * 2. Ohne Konto-ID ist das Modul vollständig inaktiv. Sie kommt aus
+ *    VITE_GOOGLE_ADS_ID oder, wenn die Variable fehlt, aus der festen
+ *    Konstante in src/lib/google-ads-config.js. Beide Wege laufen durch
+ *    dieselbe Formatprüfung. Solange beide leer sind, passiert nichts.
+ * 3. Es gibt genau zwei Erfolge: "Anfrage" (Lead-Label) und
+ *    "Antrag geöffnet" (Antrag-Label, Umgebungsvariable heißt aus
+ *    Kompatibilität weiter VITE_GOOGLE_ADS_RECHNER_LABEL). Ohne gültiges
+ *    Label bleibt das jeweilige Ereignis still. Klicks auf "IKK-Bonus
+ *    sichern", KassenBoost und interne Weiter-Knöpfe sind kein Erfolg.
  * 4. Es geht genau ein Parameter raus: send_to mit Konto-ID und Label.
  *    Keine Rechnerinhalte, keine Antworten, keine Namen, keine Adressen,
  *    kein Wert, keine Transaktions-ID.
@@ -44,8 +54,16 @@ const GCLID_PATTERN = /^[A-Za-z0-9_-]{10,200}$/;
 // bewusst NICHT gesperrt: dorthin soll geworben werden.
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set(['/schwangerschaft']);
 
-// Conversion-Ereignisse nur dort, wo der Rechner wirklich startet.
-const GOOGLE_ADS_CALCULATOR_PATHS = new Set(['/ambulant', '/en/outpatient', '/zahn', '/en/dental']);
+// "Antrag geöffnet" zählt nur auf den beworbenen Produktseiten, auf denen
+// Abschluss- und Rechnerlinks der Versicherer stehen.
+const GOOGLE_ADS_ANTRAG_PATHS = new Set([
+  '/ambulant',
+  '/en/outpatient',
+  '/stationaer',
+  '/en/inpatient',
+  '/zahn',
+  '/en/dental',
+]);
 
 // Werbe-Achse des Consent Mode. ad_personalization bleibt in beiden
 // Richtungen denied, es wird also nie ein Werbeprofil freigegeben.
@@ -65,14 +83,20 @@ const AD_CONSENT_DENIED = Object.freeze({
 // fehlen. Ohne lesbare Konto-ID bleibt der gesamte Google-Ads-Pfad inaktiv.
 const GOOGLE_ADS_ENV = (typeof import.meta !== 'undefined' && import.meta.env) || {};
 
-const readEnv = (key, pattern) => {
+// Zuerst die Umgebungsvariable, sonst die feste Konstante. Beide Werte
+// durchlaufen dieselbe Formatprüfung, ungültige Werte bleiben leer.
+const readConfig = (key, pattern, fallback) => {
   const raw = typeof GOOGLE_ADS_ENV[key] === 'string' ? GOOGLE_ADS_ENV[key].trim() : '';
-  return pattern.test(raw) ? raw : '';
+  if (pattern.test(raw)) return raw;
+  const fixed = typeof fallback === 'string' ? fallback.trim() : '';
+  return pattern.test(fixed) ? fixed : '';
 };
 
-export const GOOGLE_ADS_ID = readEnv('VITE_GOOGLE_ADS_ID', GOOGLE_ADS_ID_PATTERN);
-export const GOOGLE_ADS_LEAD_LABEL = readEnv('VITE_GOOGLE_ADS_LEAD_LABEL', GOOGLE_ADS_LABEL_PATTERN);
-export const GOOGLE_ADS_RECHNER_LABEL = readEnv('VITE_GOOGLE_ADS_RECHNER_LABEL', GOOGLE_ADS_LABEL_PATTERN);
+export const GOOGLE_ADS_ID = readConfig('VITE_GOOGLE_ADS_ID', GOOGLE_ADS_ID_PATTERN, CONFIG_GOOGLE_ADS_ID);
+export const GOOGLE_ADS_LEAD_LABEL = readConfig('VITE_GOOGLE_ADS_LEAD_LABEL', GOOGLE_ADS_LABEL_PATTERN, CONFIG_LEAD_LABEL);
+export const GOOGLE_ADS_ANTRAG_LABEL = readConfig('VITE_GOOGLE_ADS_RECHNER_LABEL', GOOGLE_ADS_LABEL_PATTERN, CONFIG_ANTRAG_LABEL);
+/** Alter Name, bleibt als Alias. */
+export const GOOGLE_ADS_RECHNER_LABEL = GOOGLE_ADS_ANTRAG_LABEL;
 
 let tagConfigured = false;
 let adConsentGranted = false;
@@ -98,8 +122,8 @@ export const isGoogleAdsExcludedRoute = (location = isBrowser() ? window.locatio
     .some((source) => PRIVATE_FUNNEL_SOURCES.has(source));
 };
 
-export const isGoogleAdsCalculatorRoute = (location = isBrowser() ? window.location : null) => (
-  Boolean(location) && GOOGLE_ADS_CALCULATOR_PATHS.has(normalizePath(location.pathname))
+export const isGoogleAdsAntragRoute = (location = isBrowser() ? window.location : null) => (
+  Boolean(location) && GOOGLE_ADS_ANTRAG_PATHS.has(normalizePath(location.pathname))
 );
 
 /**
@@ -199,13 +223,24 @@ const emitGoogleAdsConversion = (label) => {
   return true;
 };
 
-/** Klick auf den primaeren Rechner-CTA auf /ambulant und /zahn. */
-export const trackGoogleAdsRechnerStart = () => {
-  if (!isGoogleAdsCalculatorRoute()) return false;
-  return emitGoogleAdsConversion(GOOGLE_ADS_RECHNER_LABEL);
+/**
+ * Erfolg "Antrag geöffnet": Klick auf den Abschluss- oder Rechnerlink eines
+ * Versicherers (SDK über Level Nine, UKV, LKH, die Bayerische) auf
+ * /ambulant, /stationaer und /zahn samt englischer Fassung. Bewusst ohne
+ * Parameter: welcher Versicherer und welche Antworten, erfährt Google nie.
+ */
+export const trackGoogleAdsAntrag = () => {
+  if (!isGoogleAdsAntragRoute()) return false;
+  return emitGoogleAdsConversion(GOOGLE_ADS_ANTRAG_LABEL);
 };
 
-/** Abgeschickte Anfrage: Kontaktformular, Terminlink, "Bonus sichern". */
+/** Alter Name, bleibt als Alias. */
+export const trackGoogleAdsRechnerStart = trackGoogleAdsAntrag;
+
+/**
+ * Erfolg "Anfrage": abgeschicktes Kontaktformular, Klick auf die
+ * Calendly-Buchung, Buchung über den Google Kalender. Sonst nichts.
+ */
 export const trackGoogleAdsLead = () => emitGoogleAdsConversion(GOOGLE_ADS_LEAD_LABEL);
 
 const revokeGoogleAds = () => {
