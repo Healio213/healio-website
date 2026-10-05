@@ -4,7 +4,7 @@
  * Von Claude nach Anlage im Konto 442-477-8921 eintragen:
  * - GOOGLE_ADS_ID: Konto-ID des Google-Tags im Format AW-<Ziffern>
  * - LEAD_LABEL: Conversion-Label der Aktion „Anfrage“
- *   (Kontaktformular abgeschickt, Calendly- oder Google-Kalender-Buchung)
+ *   (Kontaktformular abgeschickt oder Klick auf „Direkt in Google Kalender öffnen“)
  * - ANTRAG_LABEL: Conversion-Label der Aktion „Antrag geöffnet“
  *   (Klick auf den Abschluss- oder Rechnerlink eines Versicherers)
  *

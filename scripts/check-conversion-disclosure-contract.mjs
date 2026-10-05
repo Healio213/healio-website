@@ -84,7 +84,7 @@ expect(/Nur nach Unfall|Unfallschutz/i.test(inpatientDe), 'SPU muss sichtbar als
 expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe), 'Die konkrete Modellrechnung muss das aktuelle SPU-Beispiel transparent abbilden.');
 expect(!/"0 EUR"|Effektiver Restbeitrag|kein effektiver Restbeitrag/.test(inpatientDe), 'Stationär darf keinen effektiven Restbeitrag von 0 EUR versprechen.');
 // Rote Linie: bei SP1/SP2 gleicht der Bonus „teilweise“ aus, ganz nur beim SPU.
-expect(/"lead": "Bei SP1 und SP2 kann dein Bonus den Beitrag teilweise ausgleichen, beim günstigen SPU auch ganz\."/.test(inpatientDe), 'Die Stationär-Bonusbrücke nennt für SP1/SP2 „teilweise“, ganz nur beim SPU.');
+expect(/"lead": "Bei SP1 und SP2 gleicht dein Bonus den Beitrag meist teilweise aus, beim günstigen SPU oft ganz\./.test(inpatientDe), 'Die Stationär-Bonusbrücke nennt für SP1/SP2 „teilweise“, ganz nur beim SPU.');
 expect(!/effektiven Tarifbeitrag bis zu 100 %|Bis zu 100 % Beitragsentlastung/.test(inpatientDe) && !/teilweise oder bis zu 100 %/.test(inpatientPage), 'Stationär darf die Beitragsentlastung nicht pauschal mit bis zu 100 Prozent bewerben.');
 expect(/nach dem Bonusjahr/.test(inpatientDe) && /nachgewiesenen Jahresbeitrags/.test(inpatientDe), 'Das SPU-Beispiel braucht Kostendeckel und Zeitversatz in Sichtnähe.');
 expect(/33,41\s*EUR/.test(inpatientDe) && /50,72\s*EUR/.test(inpatientDe), 'Stationär muss die aktuellen SDK-Beispielbeiträge für SP2 und SP1 bei Eintrittsalter 30 nennen.');

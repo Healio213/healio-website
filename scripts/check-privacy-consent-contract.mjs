@@ -211,8 +211,8 @@ expect(
 );
 // Der Banner sagt, was Healio tut, nicht was Google tut.
 expect(
-  /Wir geben die Messung nicht für personalisierte Werbung frei\./.test(consentManager)
-    && /We do not release the measurement for personalised advertising\./.test(consentManager)
+  /Für Google Ads geben wir die Messung nicht für personalisierte Werbung frei\./.test(consentManager)
+    && /For Google Ads, we do not release the measurement for personalised advertising\./.test(consentManager)
     && !/Google nutzt die Messung|Google does not use the measurement/.test(consentManager),
   'Der Banner darf keine Aussage ueber Googles Nutzung machen, sondern nur ueber Healios Freigabe.',
 );
