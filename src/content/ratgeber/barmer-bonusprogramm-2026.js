@@ -74,6 +74,11 @@
  * umgestellt, Logikfehler "davon nur der Zuschuss aus § 37" behoben,
  * Kombinationsbeispiel um den halben Geldwert der Restpunkte ergänzt,
  * Budgetsatz auf die Vorlagenformulierung zurückgeführt.
+ *
+ * 05.10.2026: Abschnitt tipp-ikk-classic (Unser Tipp mit Gegenrechnung des
+ * Zusatzbeitrags) vor den Fristen. Beleg: KassenBoost-Prüfung IKK classic gegen
+ * den Markt, Zusatzbeiträge aus website/app/funds.ts, Stand 05.10.2026. Frank
+ * 05.10.2026: kein Hinweis auf eine Zusammenarbeit mit der IKK classic.
  */
 
 export const article = {
@@ -342,6 +347,30 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Auch die Wahltarife der BARMER, etwa Selbstbehalt- oder Prämientarife, gehören nicht zum Bonus. Das sind eigene Tarife mit Bindungsfristen. Bei Tarifen nach § 23 der Satzung beträgt die Bindung drei Jahre, und die Kasse kannst du erst zum Ende dieser Frist kündigen.',
+        },
+      ],
+    },
+    {
+      id: 'tipp-ikk-classic',
+      heading: 'Unser Tipp: Die IKK classic gegen die BARMER rechnen',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Unsere Einschätzung bei Healio: Wenn du Bonus und Zusatzschutz verbinden willst, ist die IKK classic für uns ein besonders starker Weg. Unter den von kassenboost.de geprüften Satzungen ist sie die einzige Kasse, die ihren gesamten Bonus wahlweise in dreifacher Höhe und ohne Höchstbetrag als Zuschuss zahlt, auch für den Jahresbeitrag einer privaten Zusatzversicherung; ausgezahlt wird dabei höchstens der Beitrag, den du tatsächlich gezahlt hast.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Dagegen steht der Zusatzbeitrag: 3,85 Prozent bei der IKK classic, 3,29 Prozent bei der BARMER (Stand 05.10.2026), also 0,56 Prozentpunkte mehr, und diesen Mehrbeitrag musst du gegen den Zuschuss rechnen. Rechne dabei in Euro, nicht nur im Faktor: Die BARMER verdoppelt den Bonus als Zuschuss, höchstens aber mit 200 EUR im Jahr, und ein höherer Faktor ist nicht dasselbe wie ein höherer Euro-Betrag.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Die Rechnung steht im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: ', den Vergleich der Satzungen findest du auf ' },
+            { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
+            { text: ', und du kannst genauso bei der BARMER bleiben, denn ein Wechsel lohnt sich nicht für jeden.' },
+          ],
         },
       ],
     },

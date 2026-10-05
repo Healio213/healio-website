@@ -64,6 +64,11 @@
  *     alle elf Kassen in den Belegketten und sind deshalb weggelassen.
  *   - Brücke zu Kassen mit zweckgebundenem Zuschuss über den Ratgeber IKK
  *     classic (dreifacher Zuschuss, Vorlage) und kassenboost.de.
+ *
+ * 05.10.2026: Abschnitt tipp-ikk-classic (Unser Tipp mit Gegenrechnung des
+ * Zusatzbeitrags) vor den Fristen. Beleg: KassenBoost-Prüfung IKK classic gegen
+ * den Markt, Zusatzbeiträge aus website/app/funds.ts, Stand 05.10.2026. Frank
+ * 05.10.2026: kein Hinweis auf eine Zusammenarbeit mit der IKK classic.
  */
 
 export const article = {
@@ -599,6 +604,30 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Bei Hessen, Nordost, Rheinland-Pfalz/Saarland und Sachsen-Anhalt stehen die Beträge je Maßnahme nicht in der Satzung selbst, sondern in Unterlagen der Kasse wie Ausführungsbestimmungen, Teilnahmebedingungen, Infoblatt oder Produktseite. Prüfe deshalb vor dem Einreichen die aktuelle Fassung.',
+        },
+      ],
+    },
+    {
+      id: 'tipp-ikk-classic',
+      heading: 'Unser Tipp: Die IKK classic gegen deine AOK rechnen',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Unsere Einschätzung bei Healio: Wenn du Bonus und Zusatzschutz verbinden willst, ist die IKK classic für uns ein besonders starker Weg. Unter den von kassenboost.de geprüften Satzungen ist sie die einzige Kasse, die ihren gesamten Bonus wahlweise in dreifacher Höhe und ohne Höchstbetrag als Zuschuss zahlt, auch für den Jahresbeitrag einer privaten Zusatzversicherung; ausgezahlt wird dabei höchstens der Beitrag, den du tatsächlich gezahlt hast.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Dagegen steht der Zusatzbeitrag: 3,85 Prozent bei der IKK classic, bei den AOKs zwischen 2,47 Prozent (AOK Rheinland-Pfalz/Saarland) und 3,50 Prozent (AOK Nordost), Stand 05.10.2026. Wechselst du, zahlst du je nach AOK 0,35 bis 1,38 Prozentpunkte mehr, und diesen Mehrbeitrag musst du gegen den Zuschuss rechnen.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Die Rechnung steht im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: ', den Vergleich der Satzungen findest du auf ' },
+            { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
+            { text: ', und du kannst genauso bei deiner AOK bleiben, denn ein Wechsel lohnt sich nicht für jeden.' },
+          ],
         },
       ],
     },

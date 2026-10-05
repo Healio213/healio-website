@@ -87,6 +87,11 @@
  *   tk bonusprogramm zahnreinigung 90, tk bonusprogramm sportverein nachweis
  *   70, tk bonusprogramm 5.000 punkte 70, techniker krankenkasse u heft
  *   bonus 40, tk gesundheitsdividende apple watch 30.
+ *
+ * 05.10.2026: Abschnitt tipp-ikk-classic (Unser Tipp mit Gegenrechnung des
+ * Zusatzbeitrags) vor den Fristen. Beleg: KassenBoost-Prüfung IKK classic gegen
+ * den Markt, Zusatzbeiträge aus website/app/funds.ts, Stand 05.10.2026. Frank
+ * 05.10.2026: kein Hinweis auf eine Zusammenarbeit mit der IKK classic.
  */
 
 export const article = {
@@ -350,6 +355,30 @@ export const article = {
             { text: 'Was in der Schwangerschaft an Zusatzschutz noch geht und was nicht, steht im Ratgeber ' },
             { text: 'Schwanger: welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
             { text: '.' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'tipp-ikk-classic',
+      heading: 'Unser Tipp: Die IKK classic gegen die TK rechnen',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Unsere Einschätzung bei Healio: Wenn du Bonus und Zusatzschutz verbinden willst, ist die IKK classic für uns ein besonders starker Weg. Unter den von kassenboost.de geprüften Satzungen ist sie die einzige Kasse, die ihren gesamten Bonus wahlweise in dreifacher Höhe und ohne Höchstbetrag als Zuschuss zahlt, auch für den Jahresbeitrag einer privaten Zusatzversicherung; ausgezahlt wird dabei höchstens der Beitrag, den du tatsächlich gezahlt hast.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Dagegen steht der Zusatzbeitrag: 3,85 Prozent bei der IKK classic, 2,69 Prozent bei der TK (Stand 05.10.2026), also 1,16 Prozentpunkte mehr, bei 4.000 EUR Bruttogehalt im Monat rund 278 EUR Arbeitnehmeranteil im Jahr; diesen Mehrbeitrag musst du gegen den Zuschuss rechnen. Fair gerechnet spricht für die TK nicht nur der niedrigere Zusatzbeitrag: Die Gesundheitsdividende der TK zählt doppelt und kann wegen höherer Grundbeträge je Maßnahme gleich viel oder mehr Euro ergeben als der dreifache Zuschuss der IKK classic.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Die Rechnung steht im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: ', den Vergleich der Satzungen findest du auf ' },
+            { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
+            { text: ', und du kannst deshalb genauso bei der TK bleiben, denn ein Wechsel lohnt sich nicht für jeden.' },
           ],
         },
       ],
