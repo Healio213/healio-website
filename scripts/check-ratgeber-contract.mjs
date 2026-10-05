@@ -339,6 +339,24 @@ for (const article of ratgeberArticles) {
   }
 }
 
+// --- 6a. Fehlender Zahn: UKV-Zwei-Jahres-Regel klar erklaert -------------
+
+// Vom UKV-Maklerbetreuer am 05.10.2026 bestaetigt: Heil- und Kostenplan oder
+// Anratung in den letzten zwei Jahren schliesst genau diese Behandlung aus,
+// liegt das laenger zurueck, ist sie wieder versichert. Der Kontakt darf
+// bleiben, aber nicht als einzige Aussage. Interne Verguetung nie im Text.
+const fehlenderZahn = getRatgeberArticle('zahnzusatzversicherung-fehlender-zahn');
+if (fehlenderZahn) {
+  const text = renderArticleText(fehlenderZahn);
+  const rule = /Gab es (?:für die Lücke )?in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde (?:die Versorgung der Lücke|ihre Versorgung|die Behandlung) angeraten, ist genau diese Behandlung nicht versichert[.;] (?:L|l)iegt das länger als zwei Jahre zurück, ist sie wieder versichert\./g;
+  expect((text.match(rule) || []).length >= 3, 'Der Ratgeber fehlender Zahn muss die UKV-Zwei-Jahres-Regel in Kurz gesagt, im Abschnitt und in der FAQ klar nennen.');
+  expect(/Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis/.test(text), 'Der Ratgeber fehlender Zahn muss sagen, dass der bloße Wunsch nach einem Lückenschluss kein Hindernis ist.');
+  expect(fehlenderZahn.faqs.some((faq) => /in den letzten zwei Jahren einen Heil- und Kostenplan/.test(faq.answer) && /wieder versichert/.test(faq.answer) && /angesprochen/.test(faq.question)), 'Die FAQ braucht die Frage zur früher angesprochenen Lücke mit der Zwei-Jahres-Regel.');
+  expect(!/schon geplant oder empfohlen|sprich deshalb vor dem Antrag|Ist die Versorgung deiner Lücke schon geplant/.test(text), 'Der Ratgeber fehlender Zahn darf bei geplanter Versorgung nicht mehr nur auf das Gespräch verweisen.');
+  expect(!/verprovision|Provision|Courtage/i.test(text), 'Der Ratgeber fehlender Zahn darf keine Vergütung oder Courtage nennen.');
+  expect(fehlenderZahn.updatedAt === '2026-10-05', 'Der Ratgeber fehlender Zahn trägt das Änderungsdatum 2026-10-05.');
+}
+
 // Kommentare erklaeren die Regel und duerfen sie deshalb zitieren. Geprueft
 // wird nur, was tatsaechlich auf die Seite kommt.
 const stripComments = (source) => source

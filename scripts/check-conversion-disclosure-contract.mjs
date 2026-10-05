@@ -68,7 +68,35 @@ expect(dentalPage.indexOf('<DentalZahnCheck />') < dentalPage.indexOf('id="kasse
 expect(/routes:\s*\['UKV ZahnPRIVAT', 'Bayerische mit ZAHN Sofort'\]/.test(dentalContent), 'Der Zahn-Check muss genau die zwei Wege UKV ZahnPRIVAT und Bayerische mit ZAHN Sofort enthalten.');
 expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der UKV-Lückenweg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
 expect(/6,10 EUR[^']*9,00 EUR[^']*10,90 EUR/.test(dentalContent), 'Der UKV-Lückenweg muss die geprüften Zuschläge je Zahn nennen.');
-expect(/sprich vor dem Antrag mit uns/.test(dentalContent) && /result\.contactLabel/.test(dentalCheck) && /getPath\('kontakt'\)/.test(dentalCheck), 'Bei geplanter Versorgung einer Lücke braucht der UKV-Weg den Hinweis auf das Gespräch vorher.');
+// UKV-Lückenregel (Maklerbetreuer, 05.10.2026): Heil- und Kostenplan oder Anratung in den
+// letzten 2 Jahren schließt genau diese Behandlung aus, liegt das länger zurück, ist sie
+// wieder versichert. Der bloße Wunsch, eine Lücke zu schließen, ist kein Hindernis. Der
+// Kontakt bleibt nur als Ergänzung, nie als einzige Aussage.
+const zahnDe = read('src/i18n/locales/de/zahn.json');
+const zahnEn = read('src/i18n/locales/en/zahn.json');
+const seoRoutesSource = read('scripts/seo-routes.mjs');
+const nitaKnowledge = read('public/mia-knowledge-base.txt');
+const fehlenderZahnRatgeber = read('src/content/ratgeber/zahnzusatzversicherung-fehlender-zahn.js');
+expect(/warning: 'Ab 4 fehlenden Zähnen ist keine Aufnahme möglich\. Gab es für deine Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\.'/.test(dentalContent), 'Das UKV-Lückenergebnis muss die 2-Jahres-Regel zu Heil- und Kostenplan und Anratung klar erklären.');
+expect(/exactly that treatment is not covered\. If that was more than 2 years ago, it is covered again\./.test(dentalContent), 'Das englische UKV-Lückenergebnis braucht dieselbe 2-Jahres-Regel.');
+expect(/Dass du die Lücke irgendwann schließen lassen möchtest, ist kein Hindernis\./.test(dentalContent) && /Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis\./.test(dentalContent), 'Der UKV-Lückenweg muss sagen, dass der bloße Wunsch nach einem Lückenschluss kein Hindernis ist.');
+expect(/contactLabel: 'Fragen zu deiner Lücke\? Sprich vorher mit uns'/.test(dentalContent) && /result\.contactLabel/.test(dentalCheck) && /getPath\('kontakt'\)/.test(dentalCheck), 'Der UKV-Lückenweg behält den Kontakt als Ergänzung zur Regel.');
+const oldGapContactOnly = /(?:schon geplant oder (?:wurde sie dir )?empfohlen, sprich vor dem Antrag mit uns|schon geplant\? Sprich vorher mit uns|already planned or (?:has been )?recommended, talk to us before applying|already planned\? Talk to us first)/i;
+for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent, 'de/zahn.json': zahnDe, 'en/zahn.json': zahnEn, 'seo-routes.mjs': seoRoutesSource, 'mia-knowledge-base.txt': nitaKnowledge, 'Ratgeber fehlender Zahn': fehlenderZahnRatgeber })) {
+  expect(!oldGapContactOnly.test(source), `${file} darf bei geplanter Lückenversorgung nicht mehr nur auf das Gespräch verweisen, die 2-Jahres-Regel gehört dazu.`);
+}
+const gapFaqAnswer = dentalContent.match(/q: 'Kann ich mich mit fehlenden Zähnen noch versichern\?',\s*a: '([^']+)'/)?.[1];
+expect(Boolean(gapFaqAnswer) && /ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\./.test(gapFaqAnswer), 'Die Zahn-FAQ zu fehlenden Zähnen muss die 2-Jahres-Regel enthalten.');
+expect(Boolean(gapFaqAnswer) && seoRoutesSource.includes(`name: 'Kann ich mich mit fehlenden Zähnen noch versichern?', acceptedAnswer: { '@type': 'Answer', text: '${gapFaqAnswer}' }`), 'Das FAQ-Schema auf /zahn muss die Lücken-Antwort wortgleich zur sichtbaren FAQ tragen.');
+expect(/ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\./.test(zahnDe) && /exactly that treatment is not covered\. If that was more than 2 years ago, it is covered again\./.test(zahnEn), 'Die Startseiten-FAQ aus zahn.json braucht die 2-Jahres-Regel in DE und EN.');
+const nitaZahn = nitaKnowledge.slice(nitaKnowledge.indexOf('## Zahnzusatzversicherung'), nitaKnowledge.indexOf('## Für wen ist HEALIO geeignet?'));
+expect(/Gab es in den letzten 2 Jahren einen Heil- und Kostenplan, also einen Kostenvoranschlag, oder hat der Zahnarzt eine Behandlung angeraten, ist genau diese Behandlung nicht versichert\. Liegt der Heil- und Kostenplan oder die Anratung länger als 2 Jahre zurück, ist das Thema wieder versichert\./.test(nitaZahn), 'Nita muss die UKV-2-Jahres-Regel im Zahnabschnitt klar erklären.');
+expect(/Der bloße Wunsch, eine Lücke irgendwann schließen zu lassen, ist kein Hindernis/.test(nitaZahn), 'Nita muss sagen, dass der bloße Wunsch nach einem Lückenschluss kein Hindernis ist.');
+expect(!/sagt Nita nicht, wie die UKV dann entscheidet/.test(nitaKnowledge), 'Nita darf die 2-Jahres-Regel nicht mehr verschweigen.');
+// Interna bleiben intern: Zuschlag und Vergütung gehören nie in öffentliche Zahntexte.
+for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent, 'de/zahn.json': zahnDe, 'en/zahn.json': zahnEn, 'mia-knowledge-base.txt': nitaKnowledge, 'Ratgeber fehlender Zahn': fehlenderZahnRatgeber })) {
+  expect(!/verprovision|Provision|Courtage|commission/i.test(source), `${file} darf keine Vergütung oder Courtage nennen.`);
+}
 expect(!/lkh|landeskrankenhilfe|zahnupgrade/i.test(`${dentalContent}\n${dentalCheck}\n${dentalPage}`), 'Die LKH darf auf der Zahnseite nicht mehr angeboten werden.');
 expect(!/ZAHN Prestige/.test(`${dentalContent}\n${dentalPage}`), 'ZAHN Prestige ist kein eigener Zahn-Weg mehr; die Bayerische bleibt nur für den Sofortschutz.');
 expect(/getPath\('kassenboost'\)/.test(dentalPage), 'Die Zahn-Bonusbrücke muss in KassenBoost statt in einen direkten Kassenwechsel führen.');

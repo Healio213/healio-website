@@ -304,9 +304,11 @@ const DentalZahnCheck = () => {
                     </button>
                   </div>
 
-                  {/* Zweiter, interner Weg zum Gespräch, etwa wenn die Versorgung einer
-                      Lücke schon geplant oder empfohlen ist. Es werden keine Antworten
-                      aus dem Check übergeben, der Link führt nur auf die Kontaktseite. */}
+                  {/* Zweiter, interner Weg zum Gespräch, etwa bei Fragen zur Lücke. Die
+                      2-Jahres-Regel zu Heil- und Kostenplan und Anratung steht schon im
+                      Hinweis des Ergebnisses; der Kontakt ergänzt sie nur. Es werden keine
+                      Antworten aus dem Check übergeben, der Link führt nur auf die
+                      Kontaktseite. */}
                   {result.contactLabel && (
                     <a
                       href={getPath('kontakt')}

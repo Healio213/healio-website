@@ -60,7 +60,11 @@ assert.match(de.insurerHighlights.highlights[1].title, /Zahnreinigung ohne Jahre
 assert.match(de.insurerHighlights.highlights[1].text, /ZahnPRIVAT 90 und 100/);
 assert.match(de.insurerHighlights.highlights[3].title, /3 fehlende Zähne/);
 assert.match(de.insurerHighlights.highlights[3].text, /Zahnersatz zum Schließen dieser Lücken/);
-assert.match(de.insurerHighlights.highlights[3].text, /noch nicht angeraten/);
+// UKV-Lückenregel (Maklerbetreuer, 05.10.2026): Heil- und Kostenplan oder Anratung in den
+// letzten 2 Jahren schließt genau diese Behandlung aus, ältere sind wieder versichert.
+assert.match(de.insurerHighlights.highlights[3].text, /in den letzten 2 Jahren vor Abschluss einen Heil- und Kostenplan oder eine Anratung, ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\./);
+assert.doesNotMatch(de.insurerHighlights.highlights[3].text, /noch nicht angeraten/);
+assert.match(en.insurerHighlights.highlights[3].text, /exactly that treatment is not covered\. If that was more than 2 years ago, it is covered again\./);
 assert.match(de.insurerHighlights.practiceNote, /keine Tarifempfehlung/);
 assert.match(de.insurerHighlights.sourceNote, /Versicherungsbedingungen/);
 

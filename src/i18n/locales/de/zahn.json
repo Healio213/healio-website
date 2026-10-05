@@ -146,7 +146,7 @@
           "Deine Erstattungs-Staffel bleibt dabei ungekürzt",
           "Die Gesundheitsfragen schauen nur 2 Jahre zurück"
         ],
-        "warning": "Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Ist die Versorgung deiner Lücke schon geplant oder wurde sie dir empfohlen, sprich vor dem Antrag mit uns.",
+        "warning": "Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Gab es für deine Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert.",
         "cta": "Tarife ansehen und online abschließen",
         "ctaType": "ukv",
         "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Gib dort die Anzahl der fehlenden Zähne an.",
@@ -360,7 +360,7 @@
         },
         {
           "situation": "Dir fehlen 1 bis 3 Zähne, die noch nicht ersetzt sind",
-          "empfehlung": "UKV ZahnPRIVAT: Aufnahme mit Zuschlag je fehlendem Zahn, danach sind die Lücken mitversichert und es gilt die normale Zahnstaffel. Ist der Ersatz schon geplant oder empfohlen, sprich vor dem Antrag mit uns. Die Bayerische nimmt bei fehlenden Zähnen nicht an.",
+          "empfehlung": "UKV ZahnPRIVAT: Aufnahme mit Zuschlag je fehlendem Zahn, danach sind die Lücken mitversichert und es gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Die Bayerische nimmt bei fehlenden Zähnen nicht an.",
           "weg": "ukv"
         },
         {
@@ -401,7 +401,7 @@
     },
     "fehlend": {
       "title": "Fehlende Zähne versicherbar",
-      "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn mitversicherbar, danach gilt die normale Zahnstaffel. Ist der Ersatz schon geplant oder empfohlen, sprich vor dem Antrag mit uns."
+      "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn mitversicherbar, danach gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert."
     },
     "unfall": {
       "title": "Ausgezeichneter Leistungsweg",
@@ -433,7 +433,7 @@
       },
       {
         "q": "Kann ich mit fehlenden Zähnen abschließen?",
-        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Ist die Versorgung der Lücke schon geplant oder empfohlen, sprich vor dem Antrag mit uns. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, du erfährst sie am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
+        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, du erfährst sie am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
       },
       {
         "q": "Ich hatte vor Kurzem Parodontitis. Geht trotzdem etwas?",
