@@ -1,7 +1,8 @@
 /**
  * Feste Google-Ads-Kennung für healio.de.
  *
- * Von Claude nach Anlage im Konto 442-477-8921 eintragen:
+ * Angelegt am 05.10.2026 im Konto 442-477-8921 (Aktionen „Healio Anfrage“ und
+ * „Healio Antrag geöffnet“):
  * - GOOGLE_ADS_ID: Konto-ID des Google-Tags im Format AW-<Ziffern>
  * - LEAD_LABEL: Conversion-Label der Aktion „Anfrage“
  *   (Kontaktformular abgeschickt oder Klick auf „Direkt in Google Kalender öffnen“)
@@ -13,6 +14,6 @@
  * Eine gesetzte Umgebungsvariable (VITE_GOOGLE_ADS_*) hat Vorrang.
  * Solange die Werte leer sind, bleibt die Google-Ads-Messung vollständig still.
  */
-export const GOOGLE_ADS_ID = '';
-export const LEAD_LABEL = '';
-export const ANTRAG_LABEL = '';
+export const GOOGLE_ADS_ID = 'AW-18466451887';
+export const LEAD_LABEL = '27UQCIu4iZIdEK_jvuVE';
+export const ANTRAG_LABEL = 'AshWCI64iZIdEK_jvuVE';
