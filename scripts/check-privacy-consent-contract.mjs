@@ -508,7 +508,8 @@ expect(
 // höchstens die Klick-Kennung), nie Einstiegs- oder Kampagnencodes.
 expect(
   /queueGtagCommand\('event', 'conversion', \{\s*\n\s*send_to: `\$\{GOOGLE_ADS_ID\}\/\$\{label\}`,\s*\n\s*\.\.\.neutralPageContext\(\),\s*\n\s*\}\);/.test(googleAds)
-    && /const neutralPageContext = \(\) => \(\{\s*\n\s*page_location: getNeutralPageLocation\(\),\s*\n\s*page_referrer: getNeutralPageReferrer\(\),\s*\n\s*\}\);/.test(googleAds)
+    && /const neutralPageContext = \(\) => \(\{\s*\n\s*page_location: getNeutralPageLocation\(\),\s*\n\s*page_referrer: getNeutralPageReferrer\(\),\s*\n\s*page_title: NEUTRAL_PAGE_TITLE,\s*\n\s*\}\);/.test(googleAds)
+    && /export const NEUTRAL_PAGE_TITLE = 'Healio';/.test(googleAds)
     && /send_page_view: false,\s*\n\s*\.\.\.neutralPageContext\(\),/.test(googleAds)
     && /const CLICK_ID_PARAMS = Object\.freeze\(\['gclid', 'gbraid', 'wbraid'\]\);/.test(googleAds),
   'Eine Google-Ads-Conversion darf ausser send_to nur die neutrale Adresse und Herkunft enthalten, auch in der Tag-Konfiguration.',

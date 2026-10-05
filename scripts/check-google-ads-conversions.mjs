@@ -126,7 +126,7 @@ const expectedParams = (label, path, pageReferrer = '') => {
     const value = url.searchParams.get(key) || '';
     if (/^[A-Za-z0-9_-]{10,200}$/.test(value)) neutral.searchParams.set(key, value);
   });
-  return { send_to: `${ADS_ID}/${label}`, page_location: neutral.toString(), page_referrer: pageReferrer };
+  return { send_to: `${ADS_ID}/${label}`, page_location: neutral.toString(), page_referrer: pageReferrer, page_title: 'Healio' };
 };
 
 const ALL_ON = consentWith({ analytics: true, marketing: true });

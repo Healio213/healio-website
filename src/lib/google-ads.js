@@ -31,7 +31,8 @@ import {
  *    Label bleibt das jeweilige Ereignis still. Klicks auf "IKK-Bonus
  *    sichern", KassenBoost und interne Weiter-Knöpfe sind kein Erfolg.
  * 4. Es gehen nur send_to (Konto-ID und Label) sowie eine neutrale
- *    Seitenadresse und Herkunft raus: Ursprung plus Pfad, an Abfrage-
+ *    Seitenadresse, Herkunft und der feste Titel "Healio" raus (nie der
+ *    Dokumenttitel): Ursprung plus Pfad, an Abfrage-
  *    parametern nur die Klick-Kennung der Anzeige (gclid, gbraid, wbraid).
  *    Keine Kampagnen- oder Einstiegscodes, keine Rechnerinhalte, keine
  *    Antworten, keine Namen, keine Adressen, kein Wert, keine Transaktions-ID.
@@ -169,9 +170,15 @@ export const getNeutralPageReferrer = (location = isBrowser() ? window.location 
   }
 };
 
+// Fester Titel statt document.title: Beim Seitenwechsel innerhalb der
+// Anwendung steht kurz noch der Titel der vorigen Seite im Dokument, etwa
+// "Zusatzversicherung in der Schwangerschaft" (Befund live 05.10.2026).
+export const NEUTRAL_PAGE_TITLE = 'Healio';
+
 const neutralPageContext = () => ({
   page_location: getNeutralPageLocation(),
   page_referrer: getNeutralPageReferrer(),
+  page_title: NEUTRAL_PAGE_TITLE,
 });
 
 export const isGoogleAdsAntragRoute = (location = isBrowser() ? window.location : null) => (
