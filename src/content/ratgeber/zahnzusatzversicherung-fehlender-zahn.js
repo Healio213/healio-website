@@ -30,6 +30,7 @@ export const article = {
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
+  updatedAt: '2026-10-05',
   readingTimeMinutes: 6,
 
   listTitle: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
