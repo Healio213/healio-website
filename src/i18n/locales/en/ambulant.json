@@ -499,7 +499,7 @@
     "ctaSwitchIKK": "Secure your IKK bonus",
     "effectiveTitle": "Your bottom line",
     "effectiveCosts": "Your effective yearly cost",
-    "effectiveZeroNote": "Your potential subsidy reaches the documented annual premium.",
+    "effectiveZeroNote": "In this example your bonus can offset the premium; the amount depends on your activities.",
     "effectiveBudget": "Your health budget in return (2 years)",
     "effectiveBudgetValue": "up to €3,000",
     "effectiveNote": "Example calculation based on your inputs and the Ambulant 100 tariff. Payment is capped at the documented annual premium and subject to current bonus and tariff terms."
@@ -669,7 +669,7 @@
         "zahn": {
           "product": "Dental supplementary cover",
           "resultValue": "Dentures covered",
-          "resultLabel": "With immediate cover and no waiting period on a first policy",
+          "resultLabel": "For new treatments from the policy start, depending on the plan",
           "ariaLabel": "Animation: a person walks from left to right across a bridge from their previous statutory health fund to IKK classic and cheers on arrival. Cover stays uninterrupted and the possible bonus supports the dental supplementary premium with dentures covered.",
           "timeline": {
             "label": "first",

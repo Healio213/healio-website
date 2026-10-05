@@ -31,7 +31,7 @@ const COPY = {
     close: 'Einstellungen schließen',
     purposes: {
       analytics: ['Analyse', 'Google Analytics hilft uns nach deiner Zustimmung, die Website zu verbessern. Antworten aus unseren Auswahlhilfen werden nicht übertragen.'],
-      marketing: ['Marketing (Google Ads und Meta)', 'Nur nach deiner Zustimmung messen Google Ads und ein Meta-Pixel, ob unsere Anzeigen zu Seitenaufrufen, Anfragen und geöffneten Anträgen führen. Antworten aus Rechnern und Auswahlhilfen werden nie übertragen. Google nutzt die Messung nicht für personalisierte Werbung.'],
+      marketing: ['Marketing (Google Ads und Meta)', 'Nur nach deiner Zustimmung messen Google Ads und ein Meta-Pixel, ob unsere Anzeigen zu Seitenaufrufen, Anfragen und geöffneten Anträgen führen. Antworten aus Rechnern und Auswahlhilfen werden nie übertragen. Wir geben die Messung nicht für personalisierte Werbung frei.'],
       google_calendar: ['Terminbuchung', 'Google Kalender wird nur nach deiner gesonderten Freigabe für die eingebettete Terminbuchung geladen.'],
       maps: ['Karten', 'Externe Karten werden erst nach deiner Freigabe geladen.'],
       openai: ['Nita, digitale Assistenz', 'OpenAI wird erst für die Sprachverbindung mit Nita geladen, wenn du sie ausdrücklich erlaubst.'],
@@ -54,7 +54,7 @@ const COPY = {
     close: 'Close settings',
     purposes: {
       analytics: ['Analytics', 'Google Analytics helps us improve the website after your consent. Answers from our selection tools are never transmitted.'],
-      marketing: ['Marketing (Google Ads and Meta)', 'Only after your consent do Google Ads and a Meta pixel measure whether our ads lead to page views, enquiries and opened applications. Answers from calculators and selection tools are never transmitted. Google does not use the measurement for personalised advertising.'],
+      marketing: ['Marketing (Google Ads and Meta)', 'Only after your consent do Google Ads and a Meta pixel measure whether our ads lead to page views, enquiries and opened applications. Answers from calculators and selection tools are never transmitted. We do not release the measurement for personalised advertising.'],
       google_calendar: ['Appointment booking', 'Google Calendar loads only after your separate approval for embedded appointment booking.'],
       maps: ['Maps', 'External maps load only after you allow them.'],
       openai: ['Nita, digital assistant', 'OpenAI loads for Nita’s voice connection only after you explicitly allow it.'],

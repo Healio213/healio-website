@@ -40,8 +40,12 @@ expect(/language === 'de'\s*&&\s*\(\s*<ExplainerVideoCard/.test(ambulantFlow), '
 expect(ambulantFlow.indexOf('id="budget-kompass"') < ambulantFlow.indexOf('id="tarifwahl"'), 'Auf Ambulant muss die Bedarfseinordnung vor der Tarifwahl stehen.');
 expect(ambulantFlow.indexOf('id="tarifwahl"') < ambulantFlow.indexOf('<section className="bg-[#071722]'), 'KassenBoost darf erst nach der Tarifwahl erklärt werden.');
 expect(/Krankenkasse passend zum Tarif finden/.test(ambulantFlow) && /\/kassenboost/.test(ambulantFlow), 'Die Ambulant-Bonusbrücke muss in KassenBoost führen.');
-expect(/bis zu 100 % ausgleichen/i.test(ambulantFlow), 'Ambulant muss die mögliche Beitragsentlastung bis zu 100 Prozent klar nennen.');
-expect(/hängt von deiner Krankenkasse, deinen Aktivitäten, dem gewählten Tarif und den anrechenbaren Kosten ab/i.test(ambulantFlow), 'Der 100-Prozent-Hinweis braucht die persönliche Berechnungsgrundlage in Sichtnähe.');
+// Rote Linie (Healio/CONTENT-ROTE-LINIE-B2C.md): Der Bonus kann den Beitrag
+// „ganz oder teilweise“ ausgleichen, nie pauschal „bis zu 100 %“ oder
+// „Hol dir deinen Beitrag zurück“.
+expect(/ganz oder teilweise ausgleichen/i.test(ambulantFlow), 'Ambulant muss die mögliche Beitragsentlastung als „ganz oder teilweise“ nennen.');
+expect(!/bis zu 100 %[^'\n]{0,40}ausgleich|Bis zu 100 % können möglich|Ja, bis zu 100 %|Hol dir deinen Beitrag zurück|up to 100%[^'\n]{0,40}(?:offset|premium)/i.test(ambulantFlow), 'Ambulant darf die Beitragsentlastung nicht pauschal mit bis zu 100 Prozent bewerben.');
+expect(/hängt von deiner Krankenkasse, deinen Aktivitäten, dem gewählten Tarif und den anrechenbaren Kosten ab/i.test(ambulantFlow), 'Der Bonus-Hinweis braucht die persönliche Berechnungsgrundlage in Sichtnähe.');
 expect(!/AmbulantIKKWechsel|KassenBoostChoiceHint|AmbulantBonusCalculator/.test(ambulantPage), 'Ambulant darf keine alte IKK- oder Doppelrechner-Strecke mehr rendern.');
 
 // Gemeinsamer Bonusrechner: 2026-Logik trennt Geldbonus und Zuschuss fachlich sauber.
@@ -51,6 +55,9 @@ expect(/category:\s*'status'/.test(bonusCalculator) && /!hasRegularActivity/.tes
 expect(/Math\.min\(totalSubsidyPotential,\s*jahresbeitrag\)/.test(bonusCalculator), 'Der Versicherungszuschuss muss auf den nachgewiesenen Jahresbeitrag gedeckelt sein.');
 expect(!/nettoErgebnis|resultPlus/.test(bonusCalculator), 'Ein nicht auszahlbarer Zuschussüberschuss darf nicht als Plus erscheinen.');
 expect(/Geldbonus und Zuschuss sind Alternativen/.test(bonusCalculatorDe), 'Die Entweder-oder-Logik muss direkt am Rechner erklärt werden.');
+// Deckt der Zuschuss den Beitrag, zeigt der Rechner einen bedingten Satz statt „0 €“ als effektive Kosten.
+expect(/const bonusDecktBeispiel = effektivKosten === 0 && anrechenbarerZuschuss > 0;/.test(bonusCalculator) && /\{!bonusDecktBeispiel && \(/.test(bonusCalculator), 'Der Bonusrechner darf bei gedecktem Beitrag keine „0 €“ als effektive Kosten zeigen.');
+expect(/"effectiveZeroNote": "Dein Bonus kann den Beitrag in diesem Beispiel ausgleichen, die Höhe hängt von deinen Aktivitäten ab\."/.test(bonusCalculatorDe), 'Statt „0 €“ braucht der Rechner den bedingten Satz mit Abhängigkeit von den Aktivitäten.');
 
 // Zahn: ein lokaler Check, vier strategische Wege inklusive verifizierter LKH-Lücke.
 expect(dentalPage.indexOf('<DentalVideoSection />') < dentalPage.indexOf('<DentalZahnCheck />'), 'Zahn muss das Erklärvideo vor dem Zahn-Check zeigen.');
@@ -61,6 +68,7 @@ expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'D
 expect(/5 EUR Risikozuschlag je fehlendem Zahn/.test(dentalContent), 'Der LKH-Weg muss den verifizierten Zuschlag nennen.');
 expect(/Keine Annahmegarantie/.test(dentalContent) && /LKH_GUIDELINE_URL/.test(dentalCheck), 'LKH braucht Quelle und sichtbaren Annahmehinweis.');
 expect(/getPath\('kassenboost'\)/.test(dentalPage), 'Die Zahn-Bonusbrücke muss in KassenBoost statt in einen direkten Kassenwechsel führen.');
+expect(!/bis zu 100 %[^'\n]{0,40}ausgleich|up to 100%[^'\n]{0,40}(?:offset|premium)/i.test(`${dentalContent}\n${dentalPage}`), 'Zahn darf die Beitragsentlastung nur als „ganz oder teilweise“ nennen, nie pauschal bis zu 100 Prozent.');
 expect(!/KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine alte Hinweis- oder Testimonials-Doppelstrecke rendern.');
 // Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Zahn-Variante und erst nach Bonusbrücke und Bonusrechner.
 expect((dentalPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="zahn"\s*\/>/.test(dentalPage), 'Zahn zeigt die Brücken-Strecke genau einmal als Zahn-Variante.');
@@ -75,6 +83,9 @@ expect(/SP2/.test(inpatientDe) && /SP1/.test(inpatientDe) && /SPU/.test(inpatien
 expect(/Nur nach Unfall|Unfallschutz/i.test(inpatientDe), 'SPU muss sichtbar als Unfallschutz gekennzeichnet sein.');
 expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe), 'Die konkrete Modellrechnung muss das aktuelle SPU-Beispiel transparent abbilden.');
 expect(!/"0 EUR"|Effektiver Restbeitrag|kein effektiver Restbeitrag/.test(inpatientDe), 'Stationär darf keinen effektiven Restbeitrag von 0 EUR versprechen.');
+// Rote Linie: bei SP1/SP2 gleicht der Bonus „teilweise“ aus, ganz nur beim SPU.
+expect(/"lead": "Bei SP1 und SP2 kann dein Bonus den Beitrag teilweise ausgleichen, beim günstigen SPU auch ganz\."/.test(inpatientDe), 'Die Stationär-Bonusbrücke nennt für SP1/SP2 „teilweise“, ganz nur beim SPU.');
+expect(!/effektiven Tarifbeitrag bis zu 100 %|Bis zu 100 % Beitragsentlastung/.test(inpatientDe) && !/teilweise oder bis zu 100 %/.test(inpatientPage), 'Stationär darf die Beitragsentlastung nicht pauschal mit bis zu 100 Prozent bewerben.');
 expect(/nach dem Bonusjahr/.test(inpatientDe) && /nachgewiesenen Jahresbeitrags/.test(inpatientDe), 'Das SPU-Beispiel braucht Kostendeckel und Zeitversatz in Sichtnähe.');
 expect(/33,41\s*EUR/.test(inpatientDe) && /50,72\s*EUR/.test(inpatientDe), 'Stationär muss die aktuellen SDK-Beispielbeiträge für SP2 und SP1 bei Eintrittsalter 30 nennen.');
 expect(!/6,84|82,08|32,82|49,78|10,49|44,91|69,74/.test(inpatientDe), 'Stationär darf keine veralteten oder unbelegten Preisbeispiele enthalten.');

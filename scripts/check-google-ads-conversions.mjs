@@ -3,14 +3,15 @@ import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 
 // Prüft die echten Module (sdk-url, google-ads, meta-pixel, analytics,
-// dentalLinks) in einer nachgebauten Browserumgebung. Nur Fenster, Speicher,
+// dentalLinks, hospitalLinks) in einer nachgebauten Browserumgebung. Nur Fenster, Speicher,
 // fbq und fetch sind Attrappen.
 //
 // Festgeschrieben wird:
 // - Es gibt genau zwei Google-Ads-Erfolge: "Anfrage" und "Antrag geöffnet".
 // - trackIkkClick löst weder bei Google Ads noch bei Meta einen Erfolg aus,
 //   das GA4-Ereignis bleibt reine Statistik und geht nur an GA4.
-// - "Antrag geöffnet" zählt auch auf /stationaer und /en/inpatient.
+// - "Antrag geöffnet" zählt auch auf /stationaer und /en/inpatient, dort
+//   auch beim Bayerische-Klinik-Link (hospitalLinks).
 // - Gesperrte Seiten (/schwangerschaft, private src-Codes) bleiben gesperrt.
 // - Konto-ID und Labels wirken auch ohne Vercel-Variable über die Konstante.
 
@@ -34,6 +35,7 @@ export {
 } from '@/lib/google-ads';
 export { GA4_MEASUREMENT_ID } from '@/lib/analytics';
 export { trackZahnEvent } from '@/components/sections/dental/dentalLinks';
+export { trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
 `;
 
 // config === null: echte Datei src/lib/google-ads-config.js verwenden.
@@ -157,6 +159,35 @@ try {
     assert.deepEqual(conversions().map(([, , params]) => params), [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }]);
     mod.trackZahnEvent('zahn_kassenboost_click', 'tarif-weiche');
     assert.equal(conversions().length, 1, 'Der KassenBoost-Klick auf /zahn darf keine Conversion senden.');
+  }
+
+  // 3b. Bayerische-Klinik-Link auf /stationaer zählt ebenso, ohne Versicherer
+  //     und ohne Platzierung. Das GA4-Ereignis bleibt Statistik und geht nur
+  //     an GA4. Gesperrte Seiten und fehlende Zustimmung bleiben still.
+  for (const path of ['/stationaer', '/en/inpatient']) {
+    browserAt(path, ALL_ON);
+    const mod = await load(configured);
+    mod.trackStationaerBayerischeClick('stationaer-alternative');
+    assert.deepEqual(
+      conversions().map(([, , params]) => params),
+      [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }],
+      `Der Bayerische-Klinik-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to.`,
+    );
+    const ga4Events = gtagCommands().filter(([kind, name]) => kind === 'event' && name === 'tariff_calculator_click');
+    assert.equal(ga4Events.length, 1, `Das GA4-Ereignis zum Bayerische-Klick muss bleiben (${path}).`);
+    assert.equal(ga4Events[0][2].send_to, mod.GA4_MEASUREMENT_ID, `Das GA4-Ereignis zum Bayerische-Klick darf nur an GA4 gehen (${path}).`);
+  }
+  for (const path of ['/schwangerschaft', '/stationaer?src=reel-f05', '/leistungen']) {
+    browserAt(path, ALL_ON);
+    const mod = await load(configured);
+    mod.trackStationaerBayerischeClick('stationaer-alternative');
+    assert.equal(conversions().length, 0, `Der Bayerische-Klinik-Link darf auf ${path} keine Conversion senden.`);
+  }
+  browserAt('/stationaer', consentWith({ analytics: true }));
+  {
+    const mod = await load(configured);
+    mod.trackStationaerBayerischeClick('stationaer-alternative');
+    assert.equal(conversions().length, 0, 'Ohne Zustimmung marketing zählt der Bayerische-Klinik-Link nicht.');
   }
 
   // 4. "Anfrage" bleibt wie bisher und nutzt das Lead-Label.

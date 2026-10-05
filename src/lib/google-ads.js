@@ -238,8 +238,13 @@ export const trackGoogleAdsAntrag = () => {
 export const trackGoogleAdsRechnerStart = trackGoogleAdsAntrag;
 
 /**
- * Erfolg "Anfrage": abgeschicktes Kontaktformular, Klick auf die
- * Calendly-Buchung, Buchung über den Google Kalender. Sonst nichts.
+ * Erfolg "Anfrage": abgeschicktes Kontaktformular (emailjsService) oder Klick
+ * auf den externen Terminlink "Direkt in Google Kalender öffnen"
+ * (ExternalProviderGate.jsx) bzw. "Kalender lädt nicht? Direkt in Google
+ * Kalender öffnen" (CalendlyEmbed.jsx, lädt nur noch Google Kalender; Calendly
+ * gibt es nicht mehr). Gezählt wird der Klick, keine Buchung: Was im
+ * eingebetteten oder geöffneten Google Kalender passiert, sieht diese Seite
+ * nicht. Sonst nichts.
  */
 export const trackGoogleAdsLead = () => emitGoogleAdsConversion(GOOGLE_ADS_LEAD_LABEL);
 

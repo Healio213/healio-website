@@ -74,8 +74,8 @@ const StationaerPage = () => {
             effectiveValue: t('bonusRechner.effectiveValue'),
             effectiveNote: t('bonusRechner.effectiveNote'),
             bonusPayoutText: lang === 'en'
-              ? 'Your statutory-insurer bonus may offset part or up to 100% of the eligible hospital-plan premium. The applicable bonus and tariff terms determine the result.'
-              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Klinikschutzes teilweise oder bis zu 100 % ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
+              ? 'With SP1 and SP2 your statutory-insurer bonus may offset part of the eligible hospital-plan premium, with the affordable SPU even all of it. The applicable bonus and tariff terms determine the result.'
+              : 'Bei SP1 und SP2 kann dein Kassenbonus den anrechenbaren Beitrag deines Klinikschutzes teilweise ausgleichen, beim günstigen SPU auch ganz. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
           }}
         />
         {/* Brücken-Strecke nach dem Bonusrechner, wie auf /ambulant. */}

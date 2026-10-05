@@ -209,6 +209,20 @@ expect(
     && !/Marketing \(Meta\)/.test(`${legalEn.datenschutz.metaText || ''} ${legalEn.datenschutz.googleAdsText || ''}`),
   'Der alte Zweckname "Marketing (Meta)" darf weder im Banner noch in der Datenschutzerklaerung stehen.',
 );
+// Der Banner sagt, was Healio tut, nicht was Google tut.
+expect(
+  /Wir geben die Messung nicht für personalisierte Werbung frei\./.test(consentManager)
+    && /We do not release the measurement for personalised advertising\./.test(consentManager)
+    && !/Google nutzt die Messung|Google does not use the measurement/.test(consentManager),
+  'Der Banner darf keine Aussage ueber Googles Nutzung machen, sondern nur ueber Healios Freigabe.',
+);
+// Als Anfrage zaehlt der Klick auf den Google-Kalender-Link, keine Buchung.
+expect(
+  /Klick auf den Link, der unseren Terminkalender direkt bei Google Kalender öffnet; ob Sie dort einen Termin buchen, wird nicht gemessen\./.test(legalDe.datenschutz.googleAdsText || '')
+    && /click on the link that opens our appointment calendar directly in Google Calendar; whether you then book an appointment there is not measured\./.test(legalEn.datenschutz.googleAdsText || '')
+    && !/Calendly/i.test(`${legalDe.datenschutz.googleAdsText || ''} ${legalEn.datenschutz.googleAdsText || ''}`),
+  'Die Datenschutzerklaerung muss den Kalenderlink-Klick als Anfrage beschreiben, nicht eine Buchung.',
+);
 
 // Kein Meta-Skript und kein fbq-Aufruf ausserhalb des consent-gesteuerten Moduls.
 expect(!/connect\.facebook\.net|fbevents\.js|fbq\(/i.test(indexHtml), 'Das Meta-Pixel darf nicht statisch aus index.html geladen werden.');

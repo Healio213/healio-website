@@ -547,7 +547,7 @@
     "ctaSwitchIKK": "IKK-Bonus sichern",
     "effectiveTitle": "Unterm Strich für dich",
     "effectiveCosts": "Deine effektiven Kosten im Jahr",
-    "effectiveZeroNote": "Dein mögliches Zuschusspotenzial erreicht den nachgewiesenen Jahresbeitrag.",
+    "effectiveZeroNote": "Dein Bonus kann den Beitrag in diesem Beispiel ausgleichen, die Höhe hängt von deinen Aktivitäten ab.",
     "effectiveBudget": "Dein Gesundheitsbudget dafür (2 Jahre)",
     "effectiveBudgetValue": "bis zu 3.000 EUR",
     "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Ausgezahlt wird höchstens der nachgewiesene Jahresbeitrag; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen."
@@ -717,7 +717,7 @@
         "zahn": {
           "product": "Zahnzusatzversicherung",
           "resultValue": "Zahnersatz abgesichert",
-          "resultLabel": "Beim Erstabschluss sogar mit Sofortschutz ohne Wartezeit",
+          "resultLabel": "Für neue Behandlungen ab Versicherungsbeginn, je nach Tarif",
           "ariaLabel": "Animation: Eine Person geht von links nach rechts über eine Brücke von ihrer bisherigen gesetzlichen Krankenkasse zur IKK classic und jubelt am Ziel. Der Versicherungsschutz bleibt lückenlos und der mögliche Bonus unterstützt den Beitrag zur Zahnzusatzversicherung mit abgesichertem Zahnersatz.",
           "timeline": {
             "label": "zuerst",

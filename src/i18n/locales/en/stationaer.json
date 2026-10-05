@@ -515,7 +515,7 @@
     "bonus": {
       "eyebrow": "KassenBoost × hospital cover",
       "title": "Choose the cover first. Then find the health insurer to match.",
-      "lead": "Your bonus can offset up to 100% of your effective plan premium.",
+      "lead": "With SP1 and SP2 your bonus can offset part of the premium, with the affordable SPU even all of it.",
       "body": "We calculate transparently how much you can personally achieve. KassenBoost compares contribution, achievable bonus and benefits; the best-fitting health insurer follows from your information.",
       "fullPlansTitle": "SP1 and SP2: your actual remaining premium counts",
       "fullPlansBody": "After you choose the plan, your achievable bonus is applied to your personal premium. This makes it clear what actually remains after the bonus.",
@@ -595,7 +595,7 @@
         },
         {
           "q": "Can a health fund bonus offset the entire premium?",
-          "a": "Up to 100% premium relief is possible. This is especially tangible with affordable SPU: an active health fund bonus can offset the full SPU annual premium. It pays out at most up to your documented premium and only after the bonus year. Your personal amount depends on your health insurer, activities, proof and bonus terms."
+          "a": "With the affordable SPU, yes: an active health fund bonus can offset the full SPU annual premium. With SP1 and SP2 it can offset part of the premium. It pays out at most up to your documented premium and only after the bonus year. Your personal amount depends on your health insurer, activities, proof and bonus terms."
         },
         {
           "q": "How does newborn enrolment work?",

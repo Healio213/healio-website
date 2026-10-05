@@ -101,10 +101,10 @@ const COPY = {
     },
     bonus: {
       eyebrow: 'Danach kommt KassenBoost',
-      title: 'Hol dir deinen Beitrag zurück.',
-      value: 'Bis zu 100 %',
-      valueLabel: 'deines Beitrags sind ausgleichbar.',
-      body: 'Dein Kassenbonus kann deinen effektiven Tarifbeitrag bis zu 100 % ausgleichen. KassenBoost vergleicht dafür Beitrag, erreichbaren Bonus und Leistungen getrennt.',
+      title: 'Lass deinen Kassenbonus mitzahlen.',
+      value: 'Ganz oder teilweise',
+      valueLabel: 'kann dein Bonus den Beitrag ausgleichen.',
+      body: 'Dein Kassenbonus kann deinen Tarifbeitrag je nach Aktivitäten ganz oder teilweise ausgleichen. KassenBoost vergleicht dafür Beitrag, erreichbaren Bonus und Leistungen getrennt.',
       disclosure: 'Wie viel du persönlich erreichst, hängt von deiner Krankenkasse, deinen Aktivitäten, dem gewählten Tarif und den anrechenbaren Kosten ab. Wir rechnen es transparent für dich aus.',
       cta: 'Krankenkasse passend zum Tarif finden',
       mini: ['Beitrag vergleichen', 'Bonus realistisch rechnen', 'Leistungen getrennt sehen'],
@@ -140,7 +140,7 @@ const COPY = {
     faqTitle: 'Die wichtigsten Fragen vor deiner Entscheidung.',
     finalEyebrow: 'Dein nächster Schritt',
     finalTitle: 'Mach aus Selbstzahlerkosten dein Gesundheitsbudget.',
-    finalText: 'Vergleiche Budget und Beitrag. Danach siehst du mit KassenBoost, ob dein Bonus den Beitrag teilweise oder bis zu 100 % ausgleichen kann.',
+    finalText: 'Vergleiche Budget und Beitrag. Danach siehst du mit KassenBoost, ob dein Bonus den Beitrag ganz oder teilweise ausgleichen kann.',
     finalCta: 'Budget & Beitrag berechnen',
     finalHelp: 'Noch unsicher? Persönlich einordnen lassen',
     faqs: [
@@ -149,8 +149,8 @@ const COPY = {
         a: 'Die 3.000 EUR bezeichnen das mögliche Gesundheitsbudget des leistungsstärksten ambulanten Tarifs über zwei Jahre. Wie viel tatsächlich erstattet wird, hängt vom gewählten Tarif, den eingereichten Rechnungen und den Tarifbedingungen ab.',
       },
       {
-        q: 'Kann mein Kassenbonus wirklich 100 % des Beitrags ausgleichen?',
-        a: 'Ja, bis zu 100 % sind möglich. Entscheidend sind deine Krankenkasse, deine nachgewiesenen Aktivitäten, der gewählte Tarif und die anrechenbaren Kosten. KassenBoost berechnet deshalb deinen realistisch erreichbaren Bonus und stellt ihn dem Beitrag gegenüber.',
+        q: 'Wie viel vom Beitrag kann mein Kassenbonus ausgleichen?',
+        a: 'Ganz oder teilweise. Entscheidend sind deine Krankenkasse, deine nachgewiesenen Aktivitäten, der gewählte Tarif und die anrechenbaren Kosten. KassenBoost berechnet deshalb deinen realistisch erreichbaren Bonus und stellt ihn dem Beitrag gegenüber.',
       },
       {
         q: 'Muss ich für den Zusatzschutz die Krankenkasse wechseln?',
@@ -244,10 +244,10 @@ const COPY = {
     },
     bonus: {
       eyebrow: 'Then comes KassenBoost',
-      title: 'Get your premium back.',
-      value: 'Up to 100%',
-      valueLabel: 'of the premium may be offset.',
-      body: 'Your statutory insurer bonus may offset up to 100% of your effective premium. KassenBoost compares contribution, achievable bonus and benefits separately.',
+      title: 'Let your insurer bonus help pay.',
+      value: 'All or part',
+      valueLabel: 'of the premium may be offset by your bonus.',
+      body: 'Depending on your activities, your statutory insurer bonus may offset all or part of your plan premium. KassenBoost compares contribution, achievable bonus and benefits separately.',
       disclosure: 'Your personal result depends on your insurer, activities, selected tariff and eligible costs. We calculate it transparently.',
       cta: 'Find the insurer that fits the tariff',
       mini: ['Compare contribution', 'Calculate a realistic bonus', 'See benefits separately'],
@@ -283,19 +283,19 @@ const COPY = {
     faqTitle: 'The key questions before you decide.',
     finalEyebrow: 'Your next step',
     finalTitle: 'Turn out-of-pocket costs into a health budget.',
-    finalText: 'Compare budget and premium, then use KassenBoost to see whether your bonus may offset part or up to 100% of the premium.',
+    finalText: 'Compare budget and premium, then use KassenBoost to see whether your bonus may offset all or part of the premium.',
     finalCta: 'Calculate budget & premium',
     finalHelp: 'Not sure yet? Get personal guidance',
     faqs: [
       { q: 'What is behind the EUR 3,000?', a: 'EUR 3,000 is the potential two-year health budget in the strongest outpatient tier. Actual reimbursement depends on the chosen plan, eligible invoices and policy terms.' },
-      { q: 'Can my insurer bonus really offset 100% of the premium?', a: 'Yes, up to 100% may be possible. Your insurer, verified activities, selected plan and eligible costs determine the result. KassenBoost compares your realistically achievable bonus with the premium.' },
+      { q: 'How much of the premium can my insurer bonus offset?', a: 'All or part of it. Your insurer, verified activities, selected plan and eligible costs determine the result. KassenBoost compares your realistically achievable bonus with the premium.' },
       { q: 'Do I have to switch statutory insurer?', a: 'No. Supplementary cover and statutory insurance are separate decisions. Choose cover first, then use KassenBoost to check whether another insurer is a better financial match.' },
       { q: 'Is there a waiting period?', a: 'The displayed outpatient plans have no general waiting period. Cover applies to new insured events from the agreed start under the applicable terms.' },
       { q: 'What happens after I open the calculator?', a: 'You continue to the digital calculator of our product partner, enter your age, compare the tiers and see your personal premium before applying. The calculator is in German.' },
       { q: 'How is the budget divided?', a: 'Each tariff has four separate maximums for vision aids, natural therapies, prevention and statutory co-payments. The ledger shows the exact split; the policy terms remain decisive.' },
       { q: 'Are alternative practitioners and osteopathy covered?', a: 'Both are considered under the natural-therapies pot. Eligible treatments and invoice amounts depend on the selected tariff and policy terms.' },
       { q: 'What applies to glasses and contact lenses?', a: 'Each tariff has a separate vision-aid pot of EUR 200 to EUR 500 over two years. Insured services are reimbursed under the selected tariff.' },
-      { q: 'What does “effectively from EUR 0” mean?', a: 'It is not a guaranteed tariff price. If your achievable statutory-insurer bonus reaches the eligible annual premium, your effective cost may fall to EUR 0. Insurer, activities, tariff and bonus terms determine the result.' },
+      { q: 'Can my insurer bonus offset the premium completely?', a: 'This is not a guaranteed tariff price. Yes, if your recognised insurer bonus is at least as high as your annual premium. Then none of the premium is left for you to pay. Insurer, activities, tariff and bonus terms determine the result.' },
     ],
   },
 };
@@ -331,8 +331,8 @@ const BONUS_TOPIC_COPY = {
   },
   finalText: 'Vergleiche Leistungen und deinen persönlichen Beitrag. Du kannst direkt im Tarifrechner weitermachen oder dir auf Wunsch etwas erklären lassen. Ein weiterer Bonuscheck ist dafür nicht nötig.',
   faqs: COPY.de.faqs.map((faq) => {
-    if (faq.q === 'Kann mein Kassenbonus wirklich 100 % des Beitrags ausgleichen?') {
-      return { ...faq, a: 'Bis zu 100 % können möglich sein. Ein Zuschuss ist jedoch nicht höher als dein tatsächlich gezahlter, anerkannter Beitrag. Bonusbedingungen, nachgewiesene Aktivitäten und die Anerkennung durch deine Krankenkasse entscheiden. Hier wird kein persönlicher Bonus bestätigt; der Tarifbeitrag und das Leistungsbudget werden getrennt dargestellt.' };
+    if (faq.q === 'Wie viel vom Beitrag kann mein Kassenbonus ausgleichen?') {
+      return { ...faq, a: 'Ganz oder teilweise, je nach Einzelfall. Ein Zuschuss ist jedoch nicht höher als dein tatsächlich gezahlter, anerkannter Beitrag. Bonusbedingungen, nachgewiesene Aktivitäten und die Anerkennung durch deine Krankenkasse entscheiden. Hier wird kein persönlicher Bonus bestätigt; der Tarifbeitrag und das Leistungsbudget werden getrennt dargestellt.' };
     }
     if (faq.q === 'Muss ich für den Zusatzschutz die Krankenkasse wechseln?') {
       return { ...faq, a: 'Nein. Zusatzschutz und gesetzliche Krankenkasse sind getrennte Entscheidungen. Du kannst hier Leistungen und Beitrag vergleichen und direkt im Tarifrechner weitermachen. Dafür brauchst du weder einen weiteren Bonuscheck noch einen Beratungstermin.' };

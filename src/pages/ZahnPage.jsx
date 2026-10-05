@@ -48,10 +48,11 @@ const trustVisuals = [
 
 const scrollToCheck = (event, reduceMotion) => {
   event?.preventDefault();
-  // Meta: nur der Klick auf den primaeren Rechner-CTA. Die Antworten im
-  // Zahn-Check verlassen das Geraet nie. Für Google Ads ist der reine Sprung
-  // zum Check kein Erfolg mehr; gezählt wird erst der Klick auf den
-  // Antragslink eines Versicherers (ohne Antworten, ohne Versicherer).
+  // Meta: nur der Klick auf den primären Rechner-CTA. Die Antworten im
+  // Zahn-Check bleiben frei von Messung und verlassen das Gerät nie. Für
+  // Google Ads ist der reine Sprung zum Check kein Erfolg; gezählt wird nur
+  // der Klick auf einen Versicherer-Link im Ergebnis des Checks, ohne Inhalt
+  // (keine Antworten, kein Versicherer, siehe DentalZahnCheck.jsx).
   trackMetaRechnerStart();
   document.getElementById('zahn-check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 };
@@ -309,8 +310,8 @@ const ZahnPage = () => {
             effectiveValue: tZahn('bonusRechner.effectiveValue'),
             effectiveNote: tZahn('bonusRechner.effectiveNote'),
             bonusPayoutText: lang === 'en'
-              ? 'Your statutory-insurer bonus may offset part or up to 100% of the eligible dental-plan premium. The applicable bonus and tariff terms determine the result.'
-              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Zahnschutzes teilweise oder bis zu 100 % ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
+              ? 'Your statutory-insurer bonus may offset all or part of the eligible dental-plan premium. The applicable bonus and tariff terms determine the result.'
+              : 'Dein Kassenbonus kann den anrechenbaren Beitrag deines Zahnschutzes ganz oder teilweise ausgleichen. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
             ctaOverride: {
               href: '#zahn-check',
               label: lang === 'en' ? 'Open dental check' : 'Zahnweg prüfen',
