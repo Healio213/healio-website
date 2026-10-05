@@ -15,7 +15,7 @@
  *   aok-ni-bonus-2026.server.ts                (Satzung 142. Änderung, Anhang zu § 13 AOK Aktiv-Bonus)
  *   aok-nordost-bonus-2026.server.ts           (Satzung 52. Nachtrag ab 01.07.2026, Teilnahmebedingungen ab 01.07.2024)
  *   aok-nw-bonus-2026.server.ts                (Satzung 41. Nachtrag, Anhang 3 ab 01.01.2026)
- *   aok-plus-bonus-2026.server.ts              (Satzung Stand 01.02.2025, Teilnahmebedingungen Juni 2026)
+ *   aok-plus-bonus-2026.server.ts              (Satzung Stand 17.09.2026, §§ 7 und 19a unverändert laut Nachprüfung 06.10.2026, Teilnahmebedingungen Juni 2026)
  *   aok-rh-bonus-2026.server.ts                (Satzung 18. Nachtrag ab 01.07.2026, Anhang 3)
  *   aok-rps-bonus-2026.server.ts               (Satzung ab 01.07.2026, Infoblatt, Foto-Coupon 2026)
  *   aok-sachsen-anhalt-bonus-2026.server.ts    (Satzung 52. Änderung, Tarifbedingungen, Produktseite)
