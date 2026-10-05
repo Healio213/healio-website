@@ -350,12 +350,12 @@ const ZahnPage = () => {
               <h3 className="mt-7 font-display text-2xl font-extrabold leading-tight tracking-[-0.03em]">{content.process.trustTitle}</h3>
               <p className="mt-4 leading-7 text-slate-600">{content.process.trustText}</p>
 
-              {/* Nur das Siegel des Leistungswegs UKV ZahnPRIVAT. Das Warentest-Siegel
-                  des Leistungstarifs der Bayerischen steht hier nicht mehr, weil die
-                  Bayerische seit 05.10.2026 nur noch für den Sofortschutz-Weg
-                  angeboten wird. */}
+              {/* Nur das Siegel des Leistungswegs UKV ZahnPRIVAT 100 (Franke & Bornberg,
+                  Rating 08|2026, Stand 05.10.2026; Quelle und Hinweise im Kopf von
+                  HealioAwardsRow). Das Warentest-Siegel der Bayerischen steht in der
+                  Siegelzeile unter dem Hero, mit Gruppenbeschriftung. */}
               <div className="mt-8 grid min-h-28 place-items-center rounded-2xl bg-white p-3">
-                <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke und Bornberg Auszeichnung für UKV ZahnPRIVAT 100, 2025" className="max-h-20 w-auto object-contain" />
+                <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2026.svg" alt={tZahn('siegel.awards.frankeBornberg')} className="max-h-20 w-auto object-contain" />
               </div>
               <p className="mt-4 text-sm leading-6 text-slate-600">{content.process.sealNote}</p>
             </aside>

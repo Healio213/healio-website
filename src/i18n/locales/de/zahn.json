@@ -30,8 +30,8 @@
     "moreAwardsLabel": "Weitere IKK classic Auszeichnungen",
     "ikkLogoAlt": "Logo der IKK classic",
     "awards": {
-      "warentest": "Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, Ausgabe 07/2025",
-      "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), UKV ZahnPRIVAT 100, Rating 2025"
+      "warentest": "Stiftung Warentest SEHR GUT (0,5), ZAHN Prestige der Bayerischen, 278 Zahnzusatztarife im Test, Ausgabe 09/2026",
+      "frankeBornberg": "Franke & Bornberg FFF+ hervorragend (0,5), Krankenzusatz Zahn, UKV ZahnPRIVAT 100, Produkt 12/2024, Rating 08/2026"
     },
     "ikkAwards": {
       "performance": "Krankenkassentest für Leistung, IKK classic Note 1,5 Sehr Gut, Stand 03/2026",
@@ -204,7 +204,7 @@
         "title": "ZAHN Prestige: der Testsieger",
         "text": "Bei gesunden Zähnen bekommst du hier das Maximum: Bestnote bei Stiftung Warentest und 100 % Erstattung für Zahnersatz und Zahnbehandlung.",
         "reasons": [
-          "Stiftung Warentest SEHR GUT (0,5), Finanztest 07/2025, zum wiederholten Mal Testsieger",
+          "Stiftung Warentest SEHR GUT (0,5), Ausgabe 09/2026, 278 Zahnzusatztarife im Test",
           "100 % für Zahnersatz, Implantate, Inlays und Zahnbehandlung, ohne Wartezeiten",
           "Bleaching bis 200 EUR jährlich inklusive"
         ],
@@ -405,7 +405,7 @@
     },
     "unfall": {
       "title": "Ausgezeichneter Leistungsweg",
-      "desc": "UKV ZahnPRIVAT 100 mit Franke & Bornberg FFF+ hervorragend (0,5), Rating 2025."
+      "desc": "UKV ZahnPRIVAT 100 mit Franke & Bornberg FFF+ hervorragend (0,5), Rating 08/2026."
     },
     "gesundheitsfragen": {
       "title": "Faire Annahme",
