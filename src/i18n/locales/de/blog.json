@@ -10,8 +10,6 @@
   "readMore": "Weiterlesen",
   "backToGuide": "Zurück zum Ratgeber",
   "readTime": "Min. Lesezeit",
-  "calculateBudget": "Ihr persönliches Gesundheitsbudget berechnen",
-  "calculateBudgetDesc": "Erfahren Sie in 2 Minuten, wie viel Budget Ihnen zusteht, kostenlos und unverbindlich.",
   "calculateNow": "Jetzt berechnen",
   "bookConsultation": "Beratungstermin buchen",
   "atAGlance": "Auf einen Blick",
@@ -53,13 +51,13 @@
       "button": "Stationäre Zusatzversicherung ansehen"
     },
     "partner": {
-      "title": "Healio Partnerkonzept für Ihre Praxis",
-      "description": "Erfahren Sie, wie Healio Patienten bei der Finanzierung unterstützt und Ihre Praxis im Alltag entlastet.",
+      "title": "Healio Partnerkonzept für deine Praxis",
+      "description": "Erfahre, wie Healio Patienten bei der Finanzierung unterstützt und deine Praxis im Alltag entlastet.",
       "button": "Partnerkonzept kennenlernen"
     },
     "midwives": {
       "title": "Healio für Hebammen kennenlernen",
-      "description": "Entdecken Sie das auf Hebammen zugeschnittene Konzept für Patientenbudget, Vorsorge und Zusammenarbeit.",
+      "description": "Entdecke das auf Hebammen zugeschnittene Konzept für Patientenbudget, Vorsorge und Zusammenarbeit.",
       "button": "Zur Fachseite für Hebammen"
     },
     "employer": {
@@ -69,7 +67,7 @@
     },
     "services": {
       "title": "Passende Healio Lösung finden",
-      "description": "Verschaffen Sie sich einen Überblick über Versicherungen, Gesundheitsbudgets und Angebote für Unternehmen und Praxen.",
+      "description": "Verschaff dir einen Überblick über Versicherungen, Gesundheitsbudgets und Angebote für Unternehmen und Praxen.",
       "button": "Healio Leistungen ansehen"
     }
   },

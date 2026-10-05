@@ -537,7 +537,7 @@ export const seoRoutes = [
   {
     path: '/blog/kassenbonus-was-ist-drin',
     title: 'Kassenbonus: Was ist das, und wie viel ist wirklich drin? | Healio',
-    description: 'Kassenbonus einfach erklärt: Definition, IKK-Beispiel bis zu 1.155 EUR und wie dein Bonus zum Zuschuss für deinen Zusatzschutz wird.',
+    description: 'Kassenbonus einfach erklärt: Definition, IKK-Beispiel laut Satzung bis zu 810 EUR und wie dein Bonus zum Zuschuss für deinen Zusatzschutz wird.',
     canonical: 'https://healio.de/blog/kassenbonus-was-ist-drin',
     lang: 'de',
   },

@@ -62,7 +62,26 @@ export const RATGEBER_INTERNAL_UTM_DEFAULTS = Object.freeze({
   utm_campaign: 'ikk-bonus-landingpage',
 });
 
-export const buildInternalRatgeberUrl = (targetPath, search = '') => {
+// Neben den UTM-Parametern wandern nur diese Kennungen mit, und nur, wenn sie
+// in der aufrufenden Adresse stehen: der Empfehlungscode (ref, wie in
+// src/lib/referrer.js) und die Google-Klick-Kennungen. So bleibt der Code auch
+// erhalten, wenn jemand den Button in einem neuen Tab öffnet (sessionStorage
+// wird dort nicht mitgenommen), und die Klick-Kennung steht noch in der
+// Adresse, falls die Zustimmung erst auf der Zielseite kommt. Gespeichert wird
+// dabei nichts, gelesen wird die Klick-Kennung weiter nur mit Zustimmung
+// (readGoogleClickId in src/lib/google-ads.js).
+const RATGEBER_PASS_THROUGH = Object.freeze({
+  ref: /^[A-Za-z0-9_-]{1,64}$/,
+  gclid: /^[A-Za-z0-9_-]{10,200}$/,
+  gbraid: /^[A-Za-z0-9_-]{10,200}$/,
+  wbraid: /^[A-Za-z0-9_-]{10,200}$/,
+});
+
+// defaults: Standardwerte je Artikel. Ohne Angabe gelten die Werte der
+// IKK-Bonus-Landingpage; andere Artikel setzen ihre eigene utm_campaign
+// (internalCta.utmCampaign), damit organische Leser nicht in der falschen
+// Kampagne landen.
+export const buildInternalRatgeberUrl = (targetPath, search = '', defaults = RATGEBER_INTERNAL_UTM_DEFAULTS) => {
   if (typeof targetPath !== 'string' || !targetPath.startsWith('/')) {
     throw new TypeError('Das interne Ziel muss ein Pfad auf healio.de sein.');
   }
@@ -86,9 +105,14 @@ export const buildInternalRatgeberUrl = (targetPath, search = '') => {
     const candidate = incoming.get(key);
     const value = typeof candidate === 'string' && SAFE_UTM_VALUE.test(candidate)
       ? candidate
-      : RATGEBER_INTERNAL_UTM_DEFAULTS[key];
+      : defaults[key];
 
     if (value) params.set(key, value);
+  });
+
+  Object.entries(RATGEBER_PASS_THROUGH).forEach(([key, pattern]) => {
+    const candidate = incoming.get(key);
+    if (typeof candidate === 'string' && pattern.test(candidate)) params.set(key, candidate);
   });
 
   const query = params.toString();

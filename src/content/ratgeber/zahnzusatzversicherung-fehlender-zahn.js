@@ -21,6 +21,10 @@
  *   - Stand 05.10.2026 (Gegenpruefung der Demand-Gen-Anzeigen): Der Faktenkasten
  *     nennt 1.155 EUR nur noch mit Schwangerschaftsbezug, allgemein gilt bis zu
  *     810 EUR. Neuer interner Button zum Zahn-Check auf /zahn.
+ *   - Stand 05.10.2026 abends (Gegenpruefung Website): Der Button-Absatz
+ *     beschreibt die Wege so, wie der Zahn-Check sie bei einer Luecke wirklich
+ *     zeigt (UKV mit Zuschlag oder persoenliches Gespraech, nie die
+ *     Bayerische). "Danach ist die Erstattung unbegrenzt" ersetzt (Sperrliste).
  *
  * Inhaltliche Grenzen: keine Garantien, keine erfundenen Beitraege, keine
  * persoenliche Bonuszahl. Tarifbeitraege stehen bewusst nicht im Text.
@@ -37,6 +41,7 @@ export const article = {
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
   updatedAt: '2026-10-05',
+  updatedAtLabel: '5. Oktober 2026',
   readingTimeMinutes: 6,
 
   listTitle: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
@@ -205,7 +210,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen. In den ersten drei Kalenderjahren begrenzt dort eine Zahnstaffel die Erstattung: in ZahnPRIVAT 90 und 100 bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, in ZahnPRIVAT 75 entsprechend bis 1.000, 2.000 und 3.000 EUR. Danach ist die Erstattung unbegrenzt, bei Unfall gilt keine Staffel. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
+          text: 'Bei der UKV sind über alle drei Tarifstufen keine Wartezeiten vorgesehen. In den ersten drei Kalenderjahren begrenzt dort eine Zahnstaffel die Erstattung: in ZahnPRIVAT 90 und 100 bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, in ZahnPRIVAT 75 entsprechend bis 1.000, 2.000 und 3.000 EUR. Danach endet die Staffel und es gelten allein die Erstattungssätze des Tarifs, bei Unfall gilt keine Staffel. Bei der Bayerischen nennen die Annahmerichtlinien für Smart und Komfort sechs Monate für Zahnbehandlung, Zahnersatz und Kieferorthopädie, mit der Möglichkeit eines Verzichts per Hinweis im Antrag und Versicherungsschein; Prestige ist ohne Wartezeit geführt. Einen Wartezeiterlass gegen ärztliches Zeugnis sieht die Bayerische nicht vor, die Wartezeiten sind dort an den Tarif gebunden. Prüfe deshalb, was in deinem konkreten Versicherungsschein steht.',
         },
       ],
     },
@@ -271,10 +276,12 @@ export const article = {
     heading: 'Welcher Weg passt zu deiner Lücke?',
     to: '/zahn#zahn-check',
     label: 'Zahn-Check starten',
+    // Eigener, neutraler Kampagnen-Standard für Leser ohne eingehende UTM.
+    utmCampaign: 'ratgeber-a1',
     blocks: [
       {
         type: 'paragraph',
-        text: 'Bis zu vier kurze Fragen, danach siehst du, ob UKV ZahnPRIVAT oder der Sofortschutz der Bayerischen zu dir passt, mit direktem Link zum Antrag. Deine Antworten werden nicht gespeichert.',
+        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Weg. Bei ein bis drei fehlenden Zähnen ohne angeratene Behandlung ist das UKV ZahnPRIVAT mit Zuschlag je Zahn, mit direktem Link zum Antrag. Fehlen mehr als drei Zähne oder kommt zur Lücke eine angeratene oder begonnene Behandlung, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
       },
     ],
   },

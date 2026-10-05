@@ -205,8 +205,10 @@ for (const locale of ['de', 'en']) {
 }
 
 // Die Kästen unter Endkunden-Artikeln sprechen Du (wie /ambulant, /zahn und die
-// Ratgeberartikel), nicht Sie. Arbeitgeber, Partner, Hebammen und der allgemeine
-// Auffangkasten bleiben davon unberührt (eigene Entscheidung, siehe Dokumentation).
+// Ratgeberartikel), nicht Sie. Seit 05.10.2026 gilt das auch für Partner,
+// Hebammen und den allgemeinen Auffangkasten (services), weil /partner und
+// /hebammen ebenfalls Du sprechen. Nur der Arbeitgeber-Kasten bleibt bei Sie,
+// wie seine Zielseite /unternehmen.
 const consumerCopyKeys = new Set([
   ...knownGermanArticles
     .filter((article) => article.targetGroup === 'endkunden')
@@ -217,7 +219,8 @@ const consumerCopyKeys = new Set([
 ]);
 const germanMessages = JSON.parse(readFileSync(new URL('../src/i18n/locales/de/blog.json', import.meta.url), 'utf8'));
 const sieForm = /\bSie\b|\bIhr(?:e|en|em|er|es)?\b/;
-for (const copyKey of consumerCopyKeys) {
+const duCopyKeys = new Set([...consumerCopyKeys, 'partner', 'midwives', 'services']);
+for (const copyKey of duCopyKeys) {
   const copy = germanMessages.articleCta[copyKey];
   for (const field of ['title', 'description', 'button']) {
     assert.ok(!sieForm.test(copy[field]), `Der Endkunden-Kasten articleCta.${copyKey}.${field} muss Du statt Sie sagen: "${copy[field]}"`);
@@ -231,6 +234,10 @@ assert.deepEqual(
 // Das Verbum ist Imperativ Du, kein Infinitiv mit Sie.
 assert.match(germanMessages.articleCta.dental.description, /^Starte den kurzen Zahn-Check und finde heraus, welcher nächste Schritt zu deiner Situation passt\.$/);
 assert.match(germanMessages.articleCta.healthBudget.title, /^Dein Gesundheitsbudget/);
+assert.equal(germanMessages.articleCta.partner.title, 'Healio Partnerkonzept für deine Praxis');
+assert.match(germanMessages.articleCta.services.description, /^Verschaff dir einen Überblick/);
+// Ungenutzte alte Schlüssel mit Sie-Form und Sperrwort sind entfernt.
+assert.ok(!('calculateBudget' in germanMessages) && !('calculateBudgetDesc' in germanMessages), 'calculateBudget und calculateBudgetDesc sind entfernt.');
 
 const scrollToTopSource = readFileSync(new URL('../src/components/ScrollToTop.jsx', import.meta.url), 'utf8');
 assert.match(scrollToTopSource, /MutationObserver/, 'Lazy geladene CTA-Anker brauchen einen DOM-Retry.');

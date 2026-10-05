@@ -116,11 +116,12 @@ ist `ikk-classic-bonusprogramm-2026.js`.
 | Feld | Wirkung |
 |---|---|
 | `publishedAt`, `publishedAtLabel` | Stand in der Fußzeile und `datePublished` im Article-Schema |
+| `updatedAt`, `updatedAtLabel` | optional: `dateModified` im Article-Schema; sind beide gesetzt, zeigt die Fußzeile dieses Datum als Stand |
 | `readingTimeMinutes` | Lesezeit unter der Überschrift und in der Übersicht |
 | `factNugget` | eigener Block `<section data-geo="fact-nugget">` für Antwortmaschinen, sichtbare Überschrift „So funktioniert Healio“ (früher „Fact Nugget für KI“, für Leser einer bezahlten Anzeige ein interner SEO-Kniff). `id` und `data-geo` bleiben |
 | `faqs` | Liste `Frage`/`Antwort`, wird zusätzlich als FAQPage ausgezeichnet |
 | `onward` | Abschnitt „So gehst du weiter vor“, ein Satz aus `segments` (`text`, dazu `to` für interne und `href` für externe Links) |
-| `internalCta` | ein einzelner interner Button mit `heading`, `blocks`, `label` und `to`, optional `id` für den Abschnitt (Standard `bonus-umwandeln`). `to` darf einen Anker tragen |
+| `internalCta` | ein einzelner interner Button mit `heading`, `blocks`, `label` und `to`, optional `id` für den Abschnitt (Standard `bonus-umwandeln`) und `utmCampaign` als eigener Kampagnen-Standard. `to` darf einen Anker tragen |
 
 Neue Blockarten in `sections[].blocks`:
 
@@ -149,11 +150,16 @@ Wegen, beides aus derselben Inhaltsdatei:
 ### Die internen Buttons
 
 `src/lib/ratgeber-cta.js` trägt neben `buildKassenboostUrl` jetzt auch
-`buildInternalRatgeberUrl(pfad, search)`. Gleiche Prüfregel für die Werte,
+`buildInternalRatgeberUrl(pfad, search, defaults)`. Gleiche Prüfregel für die Werte,
 gleiche Durchreichung von `utm_source`, `utm_medium`, `utm_campaign` und
 `utm_content`, nur bleibt das Ziel auf healio.de. Standardwerte ohne UTM in
 der aufrufenden Adresse: `utm_source=healio`, `utm_medium=ratgeber`,
-`utm_campaign=ikk-bonus-landingpage`. `utm_content` wird nie erfunden.
+`utm_campaign=ikk-bonus-landingpage`. Ein Artikel kann über
+`internalCta.utmCampaign` eine eigene, neutrale `utm_campaign` als Standard
+setzen (Schwangerschaft `ratgeber-a3`, fehlender Zahn `ratgeber-a1`), damit
+organische Leser nicht unter der IKK-Landingpage gezählt werden und kein
+„schwanger“ in die Adresse von `/ambulant` wandert. `utm_content` wird nie
+erfunden.
 
 Ergebnis ohne UTM: `/ambulant?utm_source=healio&utm_medium=ratgeber&utm_campaign=ikk-bonus-landingpage`
 
@@ -161,15 +167,19 @@ Ergebnis ohne UTM: `/ambulant?utm_source=healio&utm_medium=ratgeber&utm_campaign
 erhalten und steht immer hinter der Query:
 `/zahn?utm_source=…&utm_medium=…&utm_campaign=…#zahn-check`. Würde der Anker
 vor der Query stehen, läse der Browser die Parameter als Teil des Ankers, und
-sie gingen verloren. Fremde Parameter (zum Beispiel `ref`) reicht der Button
-nicht weiter, den `ref`-Code speichert `useReferrer` schon beim Einstieg.
+sie gingen verloren. Neben den UTM-Parametern reicht der Button nur `ref`,
+`gclid`, `gbraid` und `wbraid` weiter, und nur wenn sie gültig in der Adresse
+stehen. So bleibt der `ref`-Code auch in einem neuen Tab erhalten (dort fehlt
+der `sessionStorage` von `useReferrer`), und die Klick-Kennung steht noch in der
+Adresse, falls die Zustimmung erst auf der Zielseite kommt. Gespeichert wird
+nichts, gelesen wird die Klick-Kennung weiter nur mit Zustimmung.
 
 Die drei Artikel mit Button (Stand 05.10.2026):
 
 | Artikel | Abschnittsüberschrift | Button | Ziel |
 |---|---|---|---|
 | `ikk-classic-bonusprogramm-2026` | Bonus in Zusatzschutz umwandeln | Bonus und Beitrag prüfen | `/ambulant` |
-| `schwanger-zusatzversicherung` | Vorsorge in der Schwangerschaft: der Topf der SDK | SDK-Tarife ansehen | `/ambulant` |
+| `schwanger-zusatzversicherung` | Vorsorge in der Schwangerschaft: der Topf der SDK | SDK-Tarife ansehen | `/ambulant#tarifwahl` |
 | `zahnzusatzversicherung-fehlender-zahn` | Welcher Weg passt zu deiner Lücke? | Zahn-Check starten | `/zahn#zahn-check` |
 
 Warum der Schwangerschaftsartikel zur SDK führt: Auf `/ambulant` steht seit
@@ -310,9 +320,11 @@ Vorsorge-Baustein auf `/ambulant`.
 `scripts/check-blog-cta-contract.mjs` prüft zusätzlich, dass die sieben
 Endkunden-Kästen unter den Blogartikeln (`articleCta.outpatient`,
 `outpatientComparison`, `healthBudget`, `bonus`, `healthFund`, `dental`,
-`inpatient` in `de/blog.json`) Du sagen. Die Kästen für Partner, Hebammen,
-Arbeitgeber und der allgemeine Auffangkasten (`services`) stehen weiter in
-Sie-Form und sind bewusst nicht Teil dieser Prüfung.
+`inpatient` in `de/blog.json`) Du sagen. Seit 05.10.2026 gilt das auch für
+die Kästen für Partner, Hebammen und den allgemeinen Auffangkasten
+(`services`), weil `/partner` und `/hebammen` ebenfalls Du sprechen. Nur der
+Arbeitgeber-Kasten bleibt bei Sie, wie seine Zielseite `/unternehmen`. Die
+ungenutzten Schlüssel `calculateBudget` und `calculateBudgetDesc` sind entfernt.
 
 Die Umlautprüfung lief früher gegen `/(?:ae|oe|ue|ss)\b/` und schlug damit
 bei jedem regulären Wort auf `ss` an („Mutterpass“, „muss“) und bei jedem

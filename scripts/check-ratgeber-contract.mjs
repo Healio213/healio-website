@@ -63,10 +63,12 @@ const INTERNAL_BUTTONS = {
     builtHrefStart: '/ambulant?',
   },
   [SCHWANGER_SLUG]: {
-    to: '/ambulant',
+    to: '/ambulant#tarifwahl',
     label: 'SDK-Tarife ansehen',
     heading: 'Vorsorge in der Schwangerschaft: der Topf der SDK',
     builtHrefStart: '/ambulant?',
+    builtHrefEnd: '#tarifwahl',
+    utmCampaign: 'ratgeber-a3',
   },
   [ZAHN_SLUG]: {
     to: '/zahn#zahn-check',
@@ -74,6 +76,7 @@ const INTERNAL_BUTTONS = {
     heading: 'Welcher Weg passt zu deiner Lücke?',
     builtHrefStart: '/zahn?',
     builtHrefEnd: '#zahn-check',
+    utmCampaign: 'ratgeber-a1',
   },
 };
 
@@ -214,6 +217,26 @@ for (const [slug, expected] of Object.entries(INTERNAL_BUTTONS)) {
     Array.isArray(article.internalCta?.blocks) && article.internalCta.blocks.length >= 1,
     `Der Button-Abschnitt von ${slug} traegt mindestens einen Absatz.`,
   );
+  // Eigener, neutraler Kampagnen-Standard je Artikel (ohne "schwanger" o. ae.).
+  expect(
+    (article.internalCta?.utmCampaign || null) === (expected.utmCampaign || null),
+    `Der Kampagnen-Standard des Buttons von ${slug} muss ${expected.utmCampaign || 'leer (IKK-Standard)'} sein.`,
+  );
+  // Sichtbares Stand-Datum: Wer ein Aenderungsdatum traegt, traegt auch die Beschriftung.
+  expect(!article.updatedAt || Boolean(article.updatedAtLabel), `${slug} hat updatedAt, aber kein updatedAtLabel fuer die sichtbare Stand-Zeile.`);
+  expect(article.updatedAt === '2026-10-05' && article.updatedAtLabel === '5. Oktober 2026', `${slug} traegt Stand 2026-10-05 / 5. Oktober 2026.`);
+  expect(
+    new RegExp(`<loc>https://healio\\.de/ratgeber/${slug}</loc>\\s*<lastmod>2026-10-05</lastmod>`).test(sitemap),
+    `Die Sitemap nennt fuer ${slug} lastmod 2026-10-05.`,
+  );
+}
+expect(/Stand: <time dateTime=\{standIso\}>\{standLabel\}<\/time>/.test(layout), 'Die Fusszeile zeigt das Aenderungsdatum, sobald es gepflegt ist.');
+
+// Sperrliste auf den Anzeigen-Zielseiten: kein "Maximalbetrag gibt es nicht"
+// (sinngemaess "ohne Obergrenze") und kein "unbegrenzt".
+for (const slug of [IKK_LANDING_SLUG, SCHWANGER_SLUG, ZAHN_SLUG]) {
+  const corpus = JSON.stringify(getRatgeberArticle(slug) || {});
+  expect(!/Maximalbetrag|unbegrenzt|ohne Obergrenze/i.test(corpus), `${slug}: Sperrwort (Maximalbetrag/unbegrenzt/ohne Obergrenze) auf einer Anzeigen-Zielseite.`);
 }
 
 // Kein weiterer Artikel darf sich einen internen Button anhaengen, ohne dass
@@ -313,7 +336,12 @@ expect(anchorUrl.searchParams.get('utm_source') === 'google', 'utm_source muss m
 expect(anchorUrl.searchParams.get('utm_medium') === 'demandgen', 'utm_medium muss mit Anker im Ziel durchgereicht werden.');
 expect(anchorUrl.searchParams.get('utm_campaign') === 'ratgeber_2026-10', 'utm_campaign muss mit Anker im Ziel durchgereicht werden.');
 expect(anchorUrl.searchParams.get('utm_content') === 'fehlender-zahn', 'utm_content muss mit Anker im Ziel durchgereicht werden.');
-expect(!anchorUrl.searchParams.has('ref'), 'Fremde Parameter wie ref werden nicht durch den Button gereicht.');
+expect(anchorUrl.searchParams.get('ref') === 'gads-dg1', 'Der Empfehlungscode ref muss durch den Button gereicht werden (neuer Tab ohne sessionStorage).');
+const foreign = new URL(buildInternalRatgeberUrl('/ambulant', '?ref=<x>&gclid=Cj0Kabc123XYZ&foo=bar&email=a@b.de'), 'https://healio.de').searchParams;
+expect(!foreign.has('ref') && !foreign.has('foo') && !foreign.has('email'), 'Ungültige oder fremde Parameter wandern nie mit.');
+expect(foreign.get('gclid') === 'Cj0Kabc123XYZ', 'Die Google-Klick-Kennung wandert mit, wenn sie gültig ist.');
+const ownDefault = new URL(buildInternalRatgeberUrl('/zahn#zahn-check', '', { ...RATGEBER_INTERNAL_UTM_DEFAULTS, utm_campaign: 'ratgeber-a1' }), 'https://healio.de').searchParams;
+expect(ownDefault.get('utm_campaign') === 'ratgeber-a1', 'Ein eigener Standard je Artikel ersetzt ikk-bonus-landingpage.');
 expect(!anchorUrl.hash.includes('utm_'), 'Kein Parameter darf im Anker landen.');
 expect(buildInternalRatgeberUrl('/ambulant#tarif-tabelle', '').endsWith('#tarif-tabelle'), 'Auch ein anderer Anker bleibt am Ende stehen.');
 expect(!buildInternalRatgeberUrl('/ambulant#', '').includes('#'), 'Ein leerer Anker faellt weg.');
@@ -610,6 +638,8 @@ for (const slug of RATGEBER_SLUGS) {
       expect(hrefValue.indexOf('?') > -1 && hrefValue.indexOf('?') < hrefValue.indexOf('#'), `Die Query muss im gebauten Button von ${slug} vor dem Anker stehen.`);
     }
     expect(html.includes(`>${expectedButton.heading}</h2>`), `Die Überschrift des Button-Abschnitts fehlt im gebauten HTML: ${slug}`);
+    const builtCampaign = expectedButton.utmCampaign || RATGEBER_INTERNAL_UTM_DEFAULTS.utm_campaign;
+    expect(hrefValue.includes(`utm_campaign=${builtCampaign}`), `Der gebaute Button von ${slug} traegt ohne eingehende UTM utm_campaign=${builtCampaign} (gefunden "${hrefValue}").`);
   } else {
     expect(internalCtaCount === 0, `Ein Artikel ohne vorgesehenen Button darf keinen internen Button tragen: ${slug}`);
   }
