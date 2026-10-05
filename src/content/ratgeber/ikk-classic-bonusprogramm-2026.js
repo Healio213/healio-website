@@ -28,7 +28,9 @@
  * bonusprogramm" (1.000) und "bonusprogramm ikk classic" (880). Neuer
  * Abschnitt "bonusheft-antrag" und vier FAQ dazu. Am Ende des Abschnitts
  * auf Franks Wunsch ein kurzer Hinweis auf Healios Angebot (Zuschuss traegt
- * den Beitrag), als Textlink, kein zweiter Button. Belege: KassenBoost-Profil
+ * den Beitrag) mit drei Textlinks ambulant, Zahn, Krankenhaus (Frank: alle
+ * Versicherungsbereiche zeigen; /leistungen enthaelt auch Tier, das zaehlt
+ * nicht als Zuschussleistung Nr. 63), kein zweiter Button. Belege: KassenBoost-Profil
  * GKV-Vergleichskampagne/profile/ikk-classic.md (R-04, R-12, R-13, R-17,
  * R-19) und Bonusseite der IKK classic (kein gedrucktes Bonusheft genannt,
  * keine Bearbeitungszeit genannt, abgerufen 05.10.2026). Steuer-FAQ auf den
@@ -147,10 +149,14 @@ export const article = {
           type: 'segments',
           segments: [
             {
-              text: 'Bevor du den Antrag abschickst, entscheidest du zwischen Geldbonus und Zuschuss. Für genau diesen Moment haben wir bei Healio ein Angebot zusammengestellt: Wählst du den Zuschuss, kann er den Jahresbeitrag einer Zusatzversicherung für Heilpraktiker, Osteopathie, Brille und Vorsorge ganz oder teilweise tragen. Zusammen mit den Leistungen des Tarifs entsteht so ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren. Wie viel dein Bonus beiträgt, hängt von deiner Kasse, deinen Maßnahmen und deinen eigenen Kosten ab; das rechnest du individuell durch, ',
+              text: 'Bevor du den Antrag abschickst, entscheidest du zwischen Geldbonus und Zuschuss. Für genau diesen Moment haben wir bei Healio ein Angebot zusammengestellt: Wählst du den Zuschuss, kann er den Jahresbeitrag einer Zusatzversicherung ganz oder teilweise tragen, ob ',
             },
-            { text: 'auf unserer Tarifseite', to: '/ambulant' },
-            { text: '.' },
+            { text: 'ambulant für Heilpraktiker, Osteopathie, Brille und Vorsorge', to: '/ambulant' },
+            { text: ', ' },
+            { text: 'für die Zähne', to: '/zahn' },
+            { text: ' oder ' },
+            { text: 'fürs Krankenhaus', to: '/stationaer' },
+            { text: '. Der ambulante Tarif selbst bietet ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren, der Zuschuss hilft beim Beitrag. Wie viel dein Bonus beiträgt, hängt von deiner Kasse, deinen Maßnahmen und deinen eigenen Kosten ab; das rechnest du auf der jeweiligen Seite individuell durch.' },
           ],
         },
       ],
@@ -320,7 +326,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich und fließt als zweckgebundener Zuschuss in den Zusatzschutz; je nach nachgewiesenen Maßnahmen und eigenen Kosten deckt der Zuschuss den Jahresbeitrag ganz oder teilweise, mehr als die nachgewiesenen Kosten wird nie ausgezahlt. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio verbindet Kassenbonusprogramme mit Zusatzversicherungen: Der ambulante Tarif bietet ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren, der Kassenbonus kann je nach Kasse beim Beitrag helfen. Der Kassenbonus ist jährlich und fließt als zweckgebundener Zuschuss in den Zusatzschutz; je nach nachgewiesenen Maßnahmen und eigenen Kosten deckt der Zuschuss den Jahresbeitrag ganz oder teilweise, mehr als die nachgewiesenen Kosten wird nie ausgezahlt. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {

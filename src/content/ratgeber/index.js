@@ -15,6 +15,10 @@
 
 import { article as krankenkassenBonusZusatzversicherung } from './krankenkassen-bonus-zusatzversicherung.js';
 import { article as ikkClassicBonusprogramm2026 } from './ikk-classic-bonusprogramm-2026.js';
+import { article as mkkBonusprogramm2026 } from './mkk-bonusprogramm-2026.js';
+import { article as aokBonusprogramm2026 } from './aok-bonusprogramm-2026.js';
+import { article as tkBonusprogramm2026 } from './tk-bonusprogramm-2026.js';
+import { article as barmerBonusprogramm2026 } from './barmer-bonusprogramm-2026.js';
 import { article as zahnzusatzversicherungFehlenderZahn } from './zahnzusatzversicherung-fehlender-zahn.js';
 import { article as schwangerZusatzversicherung } from './schwanger-zusatzversicherung.js';
 import { article as schwangerschaftWoraufAchten } from './schwangerschaft-worauf-achten.js';
@@ -26,6 +30,10 @@ export const RATGEBER_BASE_PATH = '/ratgeber';
 // der Liste, wird dort aber als Anzeige gekennzeichnet.
 export const ratgeberArticles = [
   ikkClassicBonusprogramm2026,
+  mkkBonusprogramm2026,
+  aokBonusprogramm2026,
+  tkBonusprogramm2026,
+  barmerBonusprogramm2026,
   zahnzusatzversicherungFehlenderZahn,
   schwangerZusatzversicherung,
   schwangerschaftWoraufAchten,

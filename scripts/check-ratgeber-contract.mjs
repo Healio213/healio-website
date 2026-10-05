@@ -34,13 +34,18 @@ const expect = (condition, message) => {
 const ADVERTORIAL_SLUG = 'krankenkassen-bonus-zusatzversicherung';
 const ADVERTORIAL_PATH = `/ratgeber/${ADVERTORIAL_SLUG}`;
 
-// Die vier organischen Ratgeberartikel. Sie muessen vorhanden, indexierbar
+// Die organischen Ratgeberartikel (seit 05.10.2026 auch mkk, AOK, TK und
+// BARMER, alle ohne internen Button). Sie muessen vorhanden, indexierbar
 // und in der Sitemap sein. ikk-classic-bonusprogramm-2026 ist zugleich die
 // Landingpage der Google-Anzeigengruppe G1-A. Seit 05.10.2026 tragen genau
 // drei Artikel einen internen Button (Tabelle INTERNAL_BUTTONS), alle anderen
 // bleiben ohne.
 const RATGEBER_SLUGS = [
   'ikk-classic-bonusprogramm-2026',
+  'mkk-bonusprogramm-2026',
+  'aok-bonusprogramm-2026',
+  'tk-bonusprogramm-2026',
+  'barmer-bonusprogramm-2026',
   'zahnzusatzversicherung-fehlender-zahn',
   'schwanger-zusatzversicherung',
   'schwangerschaft-worauf-achten',
