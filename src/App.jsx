@@ -90,6 +90,8 @@ function App() {
   const lastMetaPathRef = useRef(null);
   const isPrivateCheckRoute = isAnalyticsExcludedRoute(location);
   const isPregnancy = location.pathname === '/schwangerschaft';
+  // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
+  const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -174,7 +176,7 @@ function App() {
       <ScrollToTop />
       <ConsentManager />
       {!isPregnancy && <NitaConsentWidget />}
-      {!isPregnancy && <WhatsAppContactButton />}
+      {!isPregnancy && !isDentalPage && <WhatsAppContactButton />}
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>

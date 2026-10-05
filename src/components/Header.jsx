@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight, Calculator, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, Calculator, ChevronDown, ClipboardCheck } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
@@ -29,6 +29,7 @@ const Header = () => {
   const isServices = location.pathname === '/leistungen' || location.pathname === '/en/services';
   const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
   const isPregnancy = location.pathname === '/schwangerschaft';
+  const isDental = location.pathname === '/zahn' || location.pathname === '/en/dental';
   const isInpatient = location.pathname === '/stationaer' || location.pathname === '/en/inpatient';
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
@@ -144,6 +145,8 @@ const Header = () => {
 
   const ctaLabel = isPregnancy
     ? 'Zusatzschutz ansehen'
+    : isDental
+      ? (lang === 'de' ? 'Zahn-Check starten' : 'Start dental check')
     : isInpatient
       ? (lang === 'de' ? 'Klinikschutz auswählen' : 'Choose hospital cover')
     : isHome
@@ -158,6 +161,8 @@ const Header = () => {
 
   const ctaPath = isPregnancy
     ? { pathname: '/schwangerschaft', search: location.search, hash: '#zusatzschutz' }
+    : isDental
+      ? { pathname: getPath('zahn'), search: location.search, hash: '#zahn-check' }
     : isInpatient
       ? { pathname: getPath('stationaer'), search: location.search, hash: '#tarife' }
     : isServices
@@ -330,6 +335,29 @@ const Header = () => {
             </Button>
           )}
         </div>
+
+        {/* Experiment 05.10.2026: wie der dauerhafte Konfigurieren-Knopf auf
+            mercedes-benz.de bleibt der Zahn-Check beim Scrollen oben greifbar. */}
+        <AnimatePresence initial={false}>
+          {isDental && showSolidHeader && (
+            <motion.a
+              href="#zahn-check"
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById('zahn-check')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              initial={{ opacity: 0, y: -6, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.96 }}
+              transition={{ duration: 0.24, ease: 'easeOut' }}
+              data-zahn-header-cta="mobile"
+              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-4 text-sm font-extrabold text-home-midnight shadow-[0_4px_14px_rgba(37,201,144,0.3)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
+            >
+              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
+              {lang === 'de' ? 'Zahn-Check' : 'Dental check'}
+            </motion.a>
+          )}
+        </AnimatePresence>
 
         <AnimatePresence initial={false}>
           {isAmbulant && showSolidHeader && ambulantCtaReady && (

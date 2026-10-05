@@ -9,6 +9,9 @@ import {
 import SEOHead from '@/components/SEOHead';
 import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
 import DentalVideoSection from '@/components/sections/dental/DentalVideoSection';
+import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCards';
+import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
+import NitaQuickPill from '@/components/sections/shared/NitaQuickPill';
 import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
@@ -187,6 +190,10 @@ const ZahnPage = () => {
 
         {/* Produktpassende Siegel direkt unter dem Hero, wie auf /ambulant. */}
         <HealioAwardsRow size="large" productSet="zahn" />
+
+        {/* Experiment 05.10.2026: Highlight-Karten nach dem Vorbild von
+            mercedes-benz.de, nur auf diesem Zweig, nicht live. */}
+        <DentalHighlightCards />
 
         {lang === 'de' && <DentalVideoSection />}
 
@@ -409,7 +416,11 @@ const ZahnPage = () => {
             </div>
           </div>
         </section>
+
+        {lang === 'de' && <DentalCallbackForm />}
       </article>
+
+      <NitaQuickPill hideNearIds={['zahn-check', 'zahn-kontakt']} />
     </>
   );
 };
