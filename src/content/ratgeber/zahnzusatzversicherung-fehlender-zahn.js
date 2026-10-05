@@ -16,8 +16,7 @@
  *   - Stand 05.10.2026: Zur Behandlungsfrage im UKV-Antrag hat der zuständige
  *     Maklerbetreuer telefonisch eine einfache Regel bestätigt: Heil- und
  *     Kostenplan oder Anratung in den letzten zwei Jahren schließt genau diese
- *     Behandlung aus, liegt das länger zurück, ist sie wieder versichert. Der
- *     bloße Wunsch, eine Lücke zu schließen, ist kein Hindernis. Der frühere
+ *     Behandlung aus, liegt das länger zurück, ist sie wieder versichert. Der frühere
  *     Satz "sprich vorher mit uns" ist nicht mehr die einzige Aussage.
  *
  * Inhaltliche Grenzen: keine Garantien, keine erfundenen Beitraege, keine
@@ -162,7 +161,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ein Beispiel: Hat dein Zahnarzt vor einem Jahr ein Implantat für die Lücke angeraten, ist genau dieses Implantat nicht versichert. Liegt die Anratung drei Jahre zurück und kam seitdem nichts Neues dazu, ist es wieder versichert. Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis, solange es dafür in den letzten zwei Jahren weder einen Heil- und Kostenplan noch eine Anratung gab.',
+          text: 'Ein Beispiel: Hat dein Zahnarzt vor einem Jahr ein Implantat für die Lücke angeraten, ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke. Liegt die Anratung drei Jahre zurück und kam seitdem nichts Neues dazu, ist sie wieder versichert.',
         },
         {
           type: 'paragraph',
@@ -245,7 +244,7 @@ export const article = {
     {
       question: 'Mein Zahnarzt hat die Lücke schon einmal angesprochen. Ist sie dann ausgeschlossen?',
       answer:
-        'Das hängt vom Zeitpunkt ab. Bei der UKV gilt: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als zwei Jahre zurück, ist sie wieder versichert. Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis.',
+        'Das hängt vom Zeitpunkt ab. Bei der UKV gilt: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als zwei Jahre zurück, ist sie wieder versichert.',
     },
     {
       question: 'Zahlt eine Zusatzversicherung den bereits angeratenen Zahnersatz?',

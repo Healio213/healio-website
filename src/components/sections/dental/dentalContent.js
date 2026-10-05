@@ -6,7 +6,7 @@
 // 2-Jahres-Regel zur Behandlungsfrage laut UKV-Maklerbetreuer (05.10.2026): Gab
 // es in den letzten 2 Jahren einen Heil- und Kostenplan oder eine Anratung, ist
 // genau diese Behandlung ausgeschlossen; liegt das länger zurück, ist sie wieder
-// versichert. Der bloße Wunsch, eine Lücke zu schließen, ist kein Hindernis.
+// versichert.
 const de = {
   hero: {
     eyebrow: 'Zahnzusatzversicherung',
@@ -111,7 +111,7 @@ const de = {
         tone: 'butter',
         insurer: 'UKV · ZahnPRIVAT 75, 90 oder 100',
         title: 'Deine Lücke kann mitversichert werden',
-        text: 'Bei 1 bis 3 fehlenden, noch nicht ersetzten Zähnen sieht der UKV-Antrag eine Aufnahme mit Risikozuschlag je Zahn vor. Danach sind die Lückenzähne mitversichert, es gilt die normale Zahnstaffel. Dass du die Lücke irgendwann schließen lassen möchtest, ist kein Hindernis.',
+        text: 'Bei 1 bis 3 fehlenden, noch nicht ersetzten Zähnen sieht der UKV-Antrag eine Aufnahme mit Risikozuschlag je Zahn vor. Danach sind die Lückenzähne mitversichert, es gilt die normale Zahnstaffel. Wurde die Versorgung der Lücke in den letzten 2 Jahren angeraten oder geplant, ist genau diese Behandlung nicht versichert.',
         reasons: [
           'Zuschlag je fehlendem Zahn und Monat: 6,10 EUR in Stufe 75, 9,00 EUR in 90, 10,90 EUR in 100',
           'Kein eigener Deckel für die Lücke, keine Wartezeiten',
@@ -301,7 +301,7 @@ const de = {
       },
       {
         q: 'Kann ich mich mit fehlenden Zähnen noch versichern?',
-        a: 'Ja, bei der UKV ZahnPRIVAT, wenn 1 bis 3 Zähne fehlen und noch nicht ersetzt sind. Je fehlendem Zahn kommt ein monatlicher Risikozuschlag dazu: 6,10 EUR in ZahnPRIVAT 75, 9,00 EUR in 90 und 10,90 EUR in 100. Danach sind die Lückenzähne mitversichert, es gilt die normale Zahnstaffel. Milch- und Weisheitszähne sowie ein vollständiger Lückenschluss zählen nicht. Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis.',
+        a: 'Ja, bei der UKV ZahnPRIVAT, wenn 1 bis 3 Zähne fehlen und noch nicht ersetzt sind. Je fehlendem Zahn kommt ein monatlicher Risikozuschlag dazu: 6,10 EUR in ZahnPRIVAT 75, 9,00 EUR in 90 und 10,90 EUR in 100. Danach sind die Lückenzähne mitversichert, es gilt die normale Zahnstaffel. Milch- und Weisheitszähne sowie ein vollständiger Lückenschluss zählen nicht. Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert.',
       },
       {
         q: 'Wie funktioniert der Sofortschutz bei einer laufenden Behandlung?',
@@ -445,7 +445,7 @@ const en = {
         ...de.check.results.ukvLuecke,
         insurer: 'UKV · ZahnPRIVAT 75, 90 or 100',
         title: 'Your gap can be covered',
-        text: 'With 1 to 3 missing, unreplaced teeth, the UKV application provides for acceptance with a risk surcharge per tooth. The gap teeth are then covered and the normal dental benefit scale applies. Wanting to have the gap closed at some point is no obstacle.',
+        text: 'With 1 to 3 missing, unreplaced teeth, the UKV application provides for acceptance with a risk surcharge per tooth. The gap teeth are then covered and the normal dental benefit scale applies. If restoring the gap was recommended or planned in the last 2 years, exactly that treatment is not covered.',
         reasons: [
           'Surcharge per missing tooth per month: €6.10 in level 75, €9.00 in 90, €10.90 in 100',
           'No separate cap for the gap, no waiting periods',
@@ -617,7 +617,7 @@ const en = {
       },
       {
         q: 'Can I still get cover with missing teeth?',
-        a: 'Yes, with UKV ZahnPRIVAT if 1 to 3 teeth are missing and not yet replaced. A monthly risk surcharge applies per missing tooth: €6.10 in ZahnPRIVAT 75, €9.00 in 90 and €10.90 in 100. The gap teeth are then covered and the normal dental benefit scale applies. Baby teeth, wisdom teeth and a complete gap closure do not count. With 4 or more missing teeth, acceptance is not possible. If there was a treatment and cost plan (Heil- und Kostenplan) for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again. Simply wanting to have the gap closed at some point is no obstacle.',
+        a: 'Yes, with UKV ZahnPRIVAT if 1 to 3 teeth are missing and not yet replaced. A monthly risk surcharge applies per missing tooth: €6.10 in ZahnPRIVAT 75, €9.00 in 90 and €10.90 in 100. The gap teeth are then covered and the normal dental benefit scale applies. Baby teeth, wisdom teeth and a complete gap closure do not count. With 4 or more missing teeth, acceptance is not possible. If there was a treatment and cost plan (Heil- und Kostenplan) for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again.',
       },
       {
         q: 'How does immediate cover work when treatment is underway?',

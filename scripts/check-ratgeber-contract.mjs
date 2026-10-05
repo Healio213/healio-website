@@ -350,7 +350,8 @@ if (fehlenderZahn) {
   const text = renderArticleText(fehlenderZahn);
   const rule = /Gab es (?:für die Lücke )?in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde (?:die Versorgung der Lücke|ihre Versorgung|die Behandlung) angeraten, ist genau diese Behandlung nicht versichert[.;] (?:L|l)iegt das länger als zwei Jahre zurück, ist sie wieder versichert\./g;
   expect((text.match(rule) || []).length >= 3, 'Der Ratgeber fehlender Zahn muss die UKV-Zwei-Jahres-Regel in Kurz gesagt, im Abschnitt und in der FAQ klar nennen.');
-  expect(/Der bloße Wunsch, die Lücke irgendwann schließen zu lassen, ist kein Hindernis/.test(text), 'Der Ratgeber fehlender Zahn muss sagen, dass der bloße Wunsch nach einem Lückenschluss kein Hindernis ist.');
+  expect(!/bloße Wunsch|ist kein Hindernis|genau dieses Implantat/.test(text), 'Der Ratgeber fehlender Zahn darf keine unbestätigte Aussage zum Wunsch nach Lückenschluss enthalten.');
+  expect(/ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke/.test(text), 'Das Beispiel im Ratgeber fehlender Zahn muss die ganze Lückenversorgung meinen.');
   expect(fehlenderZahn.faqs.some((faq) => /in den letzten zwei Jahren einen Heil- und Kostenplan/.test(faq.answer) && /wieder versichert/.test(faq.answer) && /angesprochen/.test(faq.question)), 'Die FAQ braucht die Frage zur früher angesprochenen Lücke mit der Zwei-Jahres-Regel.');
   expect(!/schon geplant oder empfohlen|sprich deshalb vor dem Antrag|Ist die Versorgung deiner Lücke schon geplant/.test(text), 'Der Ratgeber fehlender Zahn darf bei geplanter Versorgung nicht mehr nur auf das Gespräch verweisen.');
   expect(!/verprovision|Provision|Courtage/i.test(text), 'Der Ratgeber fehlender Zahn darf keine Vergütung oder Courtage nennen.');
