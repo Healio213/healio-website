@@ -14,7 +14,10 @@ import { fileURLToPath } from 'node:url';
 //   auch beim Bayerische-Klinik-Link (hospitalLinks).
 // - Der UKV-Vorsorge-Baustein auf /ambulant zählt nur mit gesetztem Link als
 //   "Antrag geöffnet", ohne Daten; der Link muss ein sauberer https-Link sein.
-// - Gesperrte Seiten (/schwangerschaft, private src-Codes) bleiben gesperrt.
+// - Gesperrte Seiten (/schwangerschaft, Schwangerschafts-Ratgeber) bleiben
+//   gesperrt. Einstiegscodes (src=bonus-check, src=reel-f05) sperren nicht
+//   mehr, gehen aber nie an Google: gemeldet wird nur Ursprung plus Pfad und
+//   höchstens die Klick-Kennung (Frank 05.10.2026).
 // - Konto-ID und Labels wirken auch ohne Vercel-Variable über die Konstante.
 
 const SRC = fileURLToPath(new URL('../src', import.meta.url));
@@ -84,7 +87,7 @@ let fbqCalls = [];
 let fetchCalls = [];
 const realFetch = globalThis.fetch;
 
-function browserAt(path, consent) {
+function browserAt(path, consent, referrer = '') {
   fbqCalls = [];
   fetchCalls = [];
   const fbq = (...args) => { fbqCalls.push(args); };
@@ -98,6 +101,7 @@ function browserAt(path, consent) {
   };
   globalThis.document = {
     cookie: '',
+    referrer,
     querySelector: () => null,
     createElement: () => ({ dataset: {}, addEventListener() {}, remove() {} }),
     head: { appendChild() {} },
@@ -112,6 +116,18 @@ const gtagCommands = () => (globalThis.window.dataLayer || []).map((command) => 
 const conversions = () => gtagCommands().filter(([kind, name]) => kind === 'event' && name === 'conversion');
 const metaTracks = () => fbqCalls.filter(([method]) => method === 'track' || method === 'trackCustom');
 const metaLeads = () => metaTracks().filter(([, eventName]) => eventName === 'Lead');
+
+// Erwartete Conversion-Parameter: send_to plus neutrale Adresse (Ursprung und
+// Pfad, höchstens die Klick-Kennung) und neutrale Herkunft.
+const expectedParams = (label, path, pageReferrer = '') => {
+  const url = new URL(path, 'https://healio.de');
+  const neutral = new URL(`${url.origin}${url.pathname}`);
+  ['gclid', 'gbraid', 'wbraid'].forEach((key) => {
+    const value = url.searchParams.get(key) || '';
+    if (/^[A-Za-z0-9_-]{10,200}$/.test(value)) neutral.searchParams.set(key, value);
+  });
+  return { send_to: `${ADS_ID}/${label}`, page_location: neutral.toString(), page_referrer: pageReferrer };
+};
 
 const ALL_ON = consentWith({ analytics: true, marketing: true });
 const ENV = {
@@ -151,7 +167,7 @@ try {
     mod.trackSdkClick('test');
     const sent = conversions();
     assert.equal(sent.length, 1, `trackSdkClick muss auf ${path} genau eine Conversion senden.`);
-    assert.deepEqual(sent[0][2], { send_to: `${ADS_ID}/${ANTRAG_LABEL}` }, `Die Antrag-Conversion darf nur send_to enthalten (${path}).`);
+    assert.deepEqual(sent[0][2], expectedParams(ANTRAG_LABEL, path), `Die Antrag-Conversion darf nur send_to und die neutrale Adresse enthalten (${path}).`);
   }
 
   // 3. Versicherer-Klick aus dentalLinks (UKV, Bayerische) zählt ebenso.
@@ -159,7 +175,7 @@ try {
   {
     const mod = await load(configured);
     mod.trackZahnEvent('zahnzusatz_versicherer_click', 'ukv_zahnprivat');
-    assert.deepEqual(conversions().map(([, , params]) => params), [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }]);
+    assert.deepEqual(conversions().map(([, , params]) => params), [expectedParams(ANTRAG_LABEL, '/zahn')]);
     mod.trackZahnEvent('zahn_kassenboost_click', 'tarif-weiche');
     assert.equal(conversions().length, 1, 'Der KassenBoost-Klick auf /zahn darf keine Conversion senden.');
   }
@@ -173,14 +189,14 @@ try {
     mod.trackStationaerBayerischeClick('stationaer-alternative');
     assert.deepEqual(
       conversions().map(([, , params]) => params),
-      [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }],
-      `Der Bayerische-Klinik-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to.`,
+      [expectedParams(ANTRAG_LABEL, path)],
+      `Der Bayerische-Klinik-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to und neutraler Adresse.`,
     );
     const ga4Events = gtagCommands().filter(([kind, name]) => kind === 'event' && name === 'tariff_calculator_click');
     assert.equal(ga4Events.length, 1, `Das GA4-Ereignis zum Bayerische-Klick muss bleiben (${path}).`);
     assert.equal(ga4Events[0][2].send_to, mod.GA4_MEASUREMENT_ID, `Das GA4-Ereignis zum Bayerische-Klick darf nur an GA4 gehen (${path}).`);
   }
-  for (const path of ['/schwangerschaft', '/stationaer?src=reel-f05', '/leistungen']) {
+  for (const path of ['/schwangerschaft', '/leistungen']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackStationaerBayerischeClick('stationaer-alternative');
@@ -203,12 +219,12 @@ try {
     mod.trackUkvAmbulantAntrag();
     assert.deepEqual(
       conversions().map(([, , params]) => params),
-      [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }],
-      `Der UKV-Vorsorge-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to.`,
+      [expectedParams(ANTRAG_LABEL, path)],
+      `Der UKV-Vorsorge-Link muss auf ${path} genau einmal "Antrag geöffnet" senden, nur mit send_to und neutraler Adresse.`,
     );
     assert.equal(metaTracks().length, 0, `Der UKV-Vorsorge-Link darf kein Meta-Ereignis senden (${path}).`);
   }
-  for (const path of ['/ambulant?src=bonus-check', '/ambulant?src=reel-f05', '/schwangerschaft', '/heilpraktiker-zusatzversicherung']) {
+  for (const path of ['/schwangerschaft', '/heilpraktiker-zusatzversicherung']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackUkvAmbulantAntrag();
@@ -240,7 +256,7 @@ try {
   {
     const mod = await load(configured);
     assert.equal(mod.trackGoogleAdsLead(), true);
-    assert.deepEqual(conversions().map(([, , params]) => params), [{ send_to: `${ADS_ID}/${LEAD_LABEL}` }]);
+    assert.deepEqual(conversions().map(([, , params]) => params), [expectedParams(LEAD_LABEL, '/kontakt')]);
   }
 
   // 5. Außerhalb der Produktseiten ist ein SDK-Klick kein Antrag-Erfolg.
@@ -252,7 +268,7 @@ try {
   }
 
   // 6. Gesperrte Seiten bleiben gesperrt, auch mit voller Zustimmung.
-  for (const path of ['/schwangerschaft', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/blog/kassenbonus-schwangerschaft-vorsorge', '/ambulant?src=bonus-check', '/stationaer?src=reel-f05', '/zahn?src=bonus-check']) {
+  for (const path of ['/schwangerschaft', '/schwangerschaft?gclid=TestKlick_1234567890', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/blog/kassenbonus-schwangerschaft-vorsorge']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackSdkClick('test');
@@ -260,6 +276,33 @@ try {
     mod.trackGoogleAdsAntrag();
     assert.equal(conversions().length, 0, `Auf ${path} darf Google Ads nichts messen.`);
   }
+
+  // 6b. Einstiegscodes aus der Schwangerschaftsstrecke: Der Antrag zählt, aber
+  //     Google erfährt weder den Code noch die Kampagne noch die Herkunftsseite.
+  //     Meta bleibt auf diesen Codes still.
+  const privateCases = [
+    ['/ambulant?src=bonus-check&gclid=TestKlick_1234567890&utm_campaign=GOOG_Search_Schwanger_2026-09&ref=gads-s1#tarifwahl', 'https://healio.de/schwangerschaft?src=bonus-check'],
+    ['/ambulant?src=reel-f05', 'https://www.google.com/search?q=schwanger+zusatzversicherung'],
+    ['/stationaer?src=reel-f05&gbraid=TestBraid_1234567890', ''],
+    ['/zahn?src=bonus-check&gclid=x', ''],
+  ];
+  for (const [path, referrer] of privateCases) {
+    browserAt(path, ALL_ON, referrer);
+    const mod = await load(configured);
+    mod.trackSdkClick('test');
+    const expectedReferrer = referrer ? `${new URL(referrer).origin}/` : '';
+    assert.deepEqual(
+      conversions().map(([, , params]) => params),
+      [expectedParams(ANTRAG_LABEL, path, expectedReferrer)],
+      `Auf ${path} muss der Antrag mit neutraler Adresse zählen.`,
+    );
+    const everything = JSON.stringify(gtagCommands().filter(([kind, target]) => kind === 'config' ? target === ADS_ID : kind === 'event' && target === 'conversion'));
+    for (const secret of ['bonus-check', 'reel-f05', 'schwanger', 'Schwanger', 'utm_', 'ref=', 'gads-', '#', 'search?q']) {
+      assert(!everything.includes(secret), `Google darf "${secret}" nie erfahren (${path}).`);
+    }
+    assert.equal(metaTracks().length, 0, `Meta bleibt auf Einstiegscodes still (${path}).`);
+  }
+  assert.equal(expectedParams(ANTRAG_LABEL, '/zahn?src=bonus-check&gclid=x').page_location, 'https://healio.de/zahn', 'Eine ungültige Klick-Kennung fällt weg.');
 
   // 7. Ohne Zustimmung "marketing" passiert nichts.
   browserAt('/stationaer', consentWith({ analytics: true }));
@@ -281,7 +324,7 @@ try {
     const mod = await load(fromConstants);
     assert.equal(mod.GOOGLE_ADS_ID, ADS_ID);
     mod.trackSdkClick('test');
-    assert.deepEqual(conversions().map(([, , params]) => params), [{ send_to: `${ADS_ID}/${ANTRAG_LABEL}` }]);
+    assert.deepEqual(conversions().map(([, , params]) => params), [expectedParams(ANTRAG_LABEL, '/stationaer')]);
   }
 
   // 9. Ungültige Konstanten bleiben wirkungslos.
