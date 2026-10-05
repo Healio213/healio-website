@@ -8,7 +8,6 @@
     "ctaPrimary": "Start your coverage check",
     "ctaSecondary": "Become a partner",
     "trust": [
-      "Over 1,000 naturopaths and osteopaths in the network",
       "Licensed insurance broker under §34d GewO",
       "Based in Hamburg"
     ]
@@ -196,7 +195,7 @@
       },
       {
         "q": "Who is Healio?",
-        "a": "Hamburg-based insurance broker under §34d GewO, specialized in healthcare professions, already active in a network of over 1,000 practices."
+        "a": "Hamburg-based insurance broker under §34d GewO, specialized in healthcare professions."
       }
     ]
   },

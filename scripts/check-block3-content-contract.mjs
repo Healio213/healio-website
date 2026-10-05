@@ -70,6 +70,7 @@ assert(!/socialProof|testimonial/i.test(heilberufePage), 'Heilberufe-Seite darf 
 for (const lang of ['de', 'en']) {
   const heilberufeTexts = read(`src/i18n/locales/${lang}/heilberufe.json`);
   assert(!/socialProof|testimonial|Maria K\.|Thomas R\.|Sabine M\./.test(heilberufeTexts), `Heilberufe-Texte (${lang}) dürfen keine erfundenen Praxisstimmen enthalten.`);
+  assert(!/1[.,]000\s+(?:Heilpraktiker|Praxen|naturopaths|practices)/i.test(heilberufeTexts), `Heilberufe-Texte (${lang}) dürfen keine unbelegte Netzwerkzahl nennen (Frank 05.10.2026: Zahl ganz raus).`);
 }
 const deHeilberufeSeo = seoRoutes.find(({ path }) => path === '/heilberufe-vorsorge');
 const enHeilberufeSeo = seoRoutes.find(({ path }) => path === '/en/healthcare-professionals-protection');

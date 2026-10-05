@@ -8,7 +8,6 @@
     "ctaPrimary": "Vorsorge-Check starten",
     "ctaSecondary": "Empfehlungspartner werden",
     "trust": [
-      "Über 1.000 Heilpraktiker und Osteopathen im Netzwerk",
       "Makler nach §34d GewO",
       "Hamburg"
     ]
@@ -196,7 +195,7 @@
       },
       {
         "q": "Wer ist Healio?",
-        "a": "Hamburger Versicherungsmakler nach §34d GewO, spezialisiert auf Heilberufe, im Netzwerk bereits mit über 1.000 Praxen aktiv."
+        "a": "Hamburger Versicherungsmakler nach §34d GewO, spezialisiert auf Heilberufe."
       }
     ]
   },
