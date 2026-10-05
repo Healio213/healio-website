@@ -1,6 +1,6 @@
 # Ratgeber und Advertorials auf healio.de
 
-Stand: 21.09.2026 · Branch `feature/ratgeber-advertorial` (setzt auf
+Stand: 21.09.2026, ergänzt 05.10.2026 · Branch `feature/ratgeber-advertorial` (setzt auf
 `feature/meta-funnel-tracking` auf) · noch nicht in `main`
 
 Der Bereich `/ratgeber` trägt zwei Arten von Seiten: Advertorials für
@@ -56,9 +56,9 @@ Artikelfußzeile sichtbar wird, damit sie nie über den Pflichtangaben liegt.
 **Bei `kind: 'ratgeber'` gibt es keinen dreifachen Button und keine feste
 Leiste.** Ein organischer Artikel trägt höchstens einen einzigen internen
 Button aus dem Feld `internalCta` und am Ende den Absatz „So gehst du weiter
-vor“ mit Links. Aktuell hat nur die IKK-Bonus-Landingpage einen solchen
-Button; `test:ratgeber` verhindert, dass sich ein zweiter Artikel
-unbemerkt einen anhängt.
+vor“ mit Links. Seit 05.10.2026 haben genau drei Artikel einen solchen
+Button (Tabelle im Abschnitt „Die internen Buttons“); `test:ratgeber`
+verhindert, dass sich ein weiterer Artikel unbemerkt einen anhängt.
 
 ---
 
@@ -117,10 +117,10 @@ ist `ikk-classic-bonusprogramm-2026.js`.
 |---|---|
 | `publishedAt`, `publishedAtLabel` | Stand in der Fußzeile und `datePublished` im Article-Schema |
 | `readingTimeMinutes` | Lesezeit unter der Überschrift und in der Übersicht |
-| `factNugget` | eigener Block `<section data-geo="fact-nugget">` für Antwortmaschinen |
+| `factNugget` | eigener Block `<section data-geo="fact-nugget">` für Antwortmaschinen, sichtbare Überschrift „So funktioniert Healio“ (früher „Fact Nugget für KI“, für Leser einer bezahlten Anzeige ein interner SEO-Kniff). `id` und `data-geo` bleiben |
 | `faqs` | Liste `Frage`/`Antwort`, wird zusätzlich als FAQPage ausgezeichnet |
 | `onward` | Abschnitt „So gehst du weiter vor“, ein Satz aus `segments` (`text`, dazu `to` für interne und `href` für externe Links) |
-| `internalCta` | ein einzelner interner Button mit `heading`, `blocks`, `label` und `to` |
+| `internalCta` | ein einzelner interner Button mit `heading`, `blocks`, `label` und `to`, optional `id` für den Abschnitt (Standard `bonus-umwandeln`). `to` darf einen Anker tragen |
 
 Neue Blockarten in `sections[].blocks`:
 
@@ -146,7 +146,7 @@ Wegen, beides aus derselben Inhaltsdatei:
    Auszeichnung auch bei einem Wechsel innerhalb der Anwendung stimmt.
    Derselbe Doppelweg wie bei den Blogartikeln.
 
-### Der interne Button der IKK-Bonus-Landingpage
+### Die internen Buttons
 
 `src/lib/ratgeber-cta.js` trägt neben `buildKassenboostUrl` jetzt auch
 `buildInternalRatgeberUrl(pfad, search)`. Gleiche Prüfregel für die Werte,
@@ -156,6 +156,38 @@ der aufrufenden Adresse: `utm_source=healio`, `utm_medium=ratgeber`,
 `utm_campaign=ikk-bonus-landingpage`. `utm_content` wird nie erfunden.
 
 Ergebnis ohne UTM: `/ambulant?utm_source=healio&utm_medium=ratgeber&utm_campaign=ikk-bonus-landingpage`
+
+**Anker im Ziel.** Trägt `to` einen Anker (`/zahn#zahn-check`), bleibt er
+erhalten und steht immer hinter der Query:
+`/zahn?utm_source=…&utm_medium=…&utm_campaign=…#zahn-check`. Würde der Anker
+vor der Query stehen, läse der Browser die Parameter als Teil des Ankers, und
+sie gingen verloren. Fremde Parameter (zum Beispiel `ref`) reicht der Button
+nicht weiter, den `ref`-Code speichert `useReferrer` schon beim Einstieg.
+
+Die drei Artikel mit Button (Stand 05.10.2026):
+
+| Artikel | Abschnittsüberschrift | Button | Ziel |
+|---|---|---|---|
+| `ikk-classic-bonusprogramm-2026` | Bonus in Zusatzschutz umwandeln | Bonus und Beitrag prüfen | `/ambulant` |
+| `schwanger-zusatzversicherung` | Vorsorge in der Schwangerschaft: der Topf der SDK | SDK-Tarife ansehen | `/ambulant` |
+| `zahnzusatzversicherung-fehlender-zahn` | Welcher Weg passt zu deiner Lücke? | Zahn-Check starten | `/zahn#zahn-check` |
+
+Warum der Schwangerschaftsartikel zur SDK führt: Auf `/ambulant` steht seit
+05.10.2026 unter der SDK-Tarifwahl auch der kleine UKV-Vorsorge-Baustein. Eine
+schon bestehende Schwangerschaft gilt bei der UKV wahrscheinlich als
+Versicherungsfall vor Beginn und ist nicht gedeckt. Der Artikel sagt deshalb im
+Button-Abschnitt und im Weg am Ende, dass dort eine SDK-Stufe zu wählen ist,
+und der Baustein selbst trägt auf `/ambulant` (DE und EN, ohne Aufklappen
+sichtbar, Schlüssel `ambulant.vorsorgeBaustein.pregnancyNote`) denselben
+Hinweis. Der Zahn-Check hat zwei bis vier Fragen (die vierte nur, wenn nichts
+angeraten ist und keine Lücke besteht) und speichert nichts, deshalb heißt es
+im Absatz „Bis zu vier kurze Fragen“.
+
+**Zahlenregel 1.155 EUR.** Bei der IKK classic gilt laut Satzung bis zu
+810 EUR, nur in der Schwangerschaft bis zu 1.155 EUR, beides theoretische
+Werte; in der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR.
+`test:ratgeber` prüft je Textstück, dass 1.155 nie ohne Schwangerschaftsbezug
+steht.
 
 ### Interne Links von den Produktseiten
 
@@ -261,10 +293,26 @@ organischen Artikel: alle Slugs im Inhaltsregister, kein `noindex`, Eintrag
 in der Sitemap, `publishedAt` und `readingTimeMinutes`, Vorspann, „Kurz
 gesagt“ als erster Abschnitt, mindestens eine Tabelle, Fact Nugget, FAQ mit
 Schema, ein Weg am Ende mit mindestens einem Link, kein toter Verweis auf
-einen anderen Ratgeberartikel, genau ein interner Button und nur auf der
-IKK-Landingpage, dessen UTM-Durchreichung, und im gebauten HTML zusätzlich
-`data-geo`, Article- und FAQPage-Auszeichnung sowie das Fehlen jedes
+einen anderen Ratgeberartikel, genau die drei oben genannten internen Buttons
+mit festgeschriebenem Ziel, Beschriftung und Überschrift (alle anderen Artikel
+ohne Button), deren UTM-Durchreichung samt Anker hinter der Query, und im
+gebauten HTML zusätzlich `data-geo`, Article- und FAQPage-Auszeichnung, genau
+einen Button pro Button-Artikel mit richtigem `href` sowie das Fehlen jedes
 KassenBoost-Buttons.
+
+Neu seit 05.10.2026: keine sichtbare Überschrift „Fact Nugget für KI“ (statt
+dessen „So funktioniert Healio“, auch im gebauten HTML), 1.155 EUR nur mit
+Schwangerschaftsbezug, die Zahlen im Schwangerschafts-Button gegen die
+Tabelle des Artikels, der Weg am Ende mit „SDK-Stufe, nicht den
+UKV-Vorsorge-Baustein“ und der sichtbare Schwangerschafts-Hinweis im
+Vorsorge-Baustein auf `/ambulant`.
+
+`scripts/check-blog-cta-contract.mjs` prüft zusätzlich, dass die sieben
+Endkunden-Kästen unter den Blogartikeln (`articleCta.outpatient`,
+`outpatientComparison`, `healthBudget`, `bonus`, `healthFund`, `dental`,
+`inpatient` in `de/blog.json`) Du sagen. Die Kästen für Partner, Hebammen,
+Arbeitgeber und der allgemeine Auffangkasten (`services`) stehen weiter in
+Sie-Form und sind bewusst nicht Teil dieser Prüfung.
 
 Die Umlautprüfung lief früher gegen `/(?:ae|oe|ue|ss)\b/` und schlug damit
 bei jedem regulären Wort auf `ss` an („Mutterpass“, „muss“) und bei jedem
@@ -299,10 +347,11 @@ Aus Briefing Abschnitt 7:
       stehen im Briefing, Abschnitt 9.
 - [x] Tritt Frank persönlich im Text auf? Nein, entschieden am 21.09.2026:
       keine persönliche Bonuszahl. Statt des Platzhalters steht jetzt der
-      Satzungs-Höchstwert (1.155 Euro, theoretisch) neben der Spanne, die in
-      der breiten Masse zusammenkommt (400 bis 700 Euro). Der
-      600-Euro-Platzhalter ist ersatzlos gestrichen und wird von
-      `test:ratgeber` auch als Kommentar ausgeschlossen.
+      Satzungs-Höchstwert neben der Spanne, die in der breiten Masse
+      zusammenkommt (400 bis 700 Euro). Seit 05.10.2026 gilt allgemein bis zu
+      810 Euro, nur in der Schwangerschaft bis zu 1.155 Euro (beides
+      theoretisch). Der 600-Euro-Platzhalter ist ersatzlos gestrichen und
+      wird von `test:ratgeber` auch als Kommentar ausgeschlossen.
 - [x] Die Zahl „93 gesetzliche Krankenkassen“ steht jetzt mit Stichtag im
       Text: „93 gesetzliche Krankenkassen in Deutschland (Stand Anfang
       2026)“.

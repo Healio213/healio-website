@@ -67,8 +67,20 @@ export const buildInternalRatgeberUrl = (targetPath, search = '') => {
     throw new TypeError('Das interne Ziel muss ein Pfad auf healio.de sein.');
   }
 
+  // Ein Anker im Ziel (zum Beispiel /zahn#zahn-check) bleibt erhalten und
+  // steht immer HINTER der Query. Steht er davor, landen die Parameter im
+  // Anker und gehen verloren: der Browser liest alles nach # nicht als Query.
+  const hashIndex = targetPath.indexOf('#');
+  const hash = hashIndex === -1 || hashIndex === targetPath.length - 1
+    ? ''
+    : targetPath.slice(hashIndex);
+  const pathAndQuery = hashIndex === -1 ? targetPath : targetPath.slice(0, hashIndex);
+  const queryIndex = pathAndQuery.indexOf('?');
+  const basePath = queryIndex === -1 ? pathAndQuery : pathAndQuery.slice(0, queryIndex);
+  const ownQuery = queryIndex === -1 ? '' : pathAndQuery.slice(queryIndex + 1);
+
   const incoming = new URLSearchParams(typeof search === 'string' ? search : '');
-  const params = new URLSearchParams();
+  const params = new URLSearchParams(ownQuery);
 
   RATGEBER_UTM_KEYS.forEach((key) => {
     const candidate = incoming.get(key);
@@ -80,5 +92,5 @@ export const buildInternalRatgeberUrl = (targetPath, search = '') => {
   });
 
   const query = params.toString();
-  return query ? `${targetPath}?${query}` : targetPath;
+  return `${basePath}${query ? `?${query}` : ''}${hash}`;
 };

@@ -19,37 +19,37 @@
   "articleCta": {
     "outpatient": {
       "title": "Ambulante Gesundheitsleistungen absichern",
-      "description": "Prüfen Sie den Schutz für Heilpraktiker, Osteopathie, Vorsorge und weitere ambulante Leistungen.",
+      "description": "Prüfe den Schutz für Heilpraktiker, Osteopathie, Vorsorge und weitere ambulante Leistungen.",
       "button": "Ambulante Absicherung ansehen"
     },
     "outpatientComparison": {
       "title": "Ambulante Zusatzversicherung vergleichen",
-      "description": "Vergleichen Sie die Leistungen der verfügbaren Tarife für Naturheilkunde, Osteopathie und Vorsorge.",
+      "description": "Vergleiche die Leistungen der verfügbaren Tarife für Naturheilkunde, Osteopathie und Vorsorge.",
       "button": "Ambulante Tarife vergleichen"
     },
     "healthBudget": {
-      "title": "Ihr Gesundheitsbudget konkret berechnen",
-      "description": "Berechnen Sie, wie Kassenbonus und ambulante Absicherung zu Ihrem persönlichen Gesundheitsbudget beitragen.",
+      "title": "Dein Gesundheitsbudget konkret berechnen",
+      "description": "Berechne, wie Kassenbonus und ambulante Absicherung zu deinem persönlichen Gesundheitsbudget beitragen.",
       "button": "Gesundheitsbudget berechnen"
     },
     "bonus": {
       "title": "IKK classic Bonus berechnen",
-      "description": "Prüfen Sie direkt, welchen Bonus Ihre Aktivitäten ergeben und wie er Ihre Gesundheitskosten entlasten kann.",
+      "description": "Prüfe direkt, welchen Bonus deine Aktivitäten ergeben und wie er deine Gesundheitskosten entlasten kann.",
       "button": "Zum Bonusrechner"
     },
     "healthFund": {
       "title": "Krankenkassenbonus und Wechsel prüfen",
-      "description": "Sehen Sie, wie der IKK classic Bonus funktioniert und welche Schritte für einen Wechsel nötig sind.",
+      "description": "Sieh, wie der IKK classic Bonus funktioniert und welche Schritte für einen Wechsel nötig sind.",
       "button": "IKK-Wechselmöglichkeiten ansehen"
     },
     "dental": {
       "title": "Passenden Zahnschutz prüfen",
-      "description": "Starten Sie den kurzen Zahn-Check und finden Sie heraus, welcher nächste Schritt zu Ihrer Situation passt.",
+      "description": "Starte den kurzen Zahn-Check und finde heraus, welcher nächste Schritt zu deiner Situation passt.",
       "button": "Zum Zahn-Check"
     },
     "inpatient": {
       "title": "Stationären Schutz gezielt verbessern",
-      "description": "Sehen Sie, welche Krankenhausleistungen eine stationäre Zusatzversicherung ergänzen kann.",
+      "description": "Sieh, welche Krankenhausleistungen eine stationäre Zusatzversicherung ergänzen kann.",
       "button": "Stationäre Zusatzversicherung ansehen"
     },
     "partner": {

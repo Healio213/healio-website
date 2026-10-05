@@ -63,7 +63,7 @@ export const article = {
               text: 'Ein rechnerischer Zuschuss von 405 EUR bei 240 EUR Jahresbeitrag ergibt 240 EUR. Ein Plus entsteht nie.',
             },
             {
-              lead: 'Laut Satzung sind bis zu 1.155 EUR Zuschusswert im Jahr möglich, ein theoretischer Wert.',
+              lead: 'Laut Satzung sind bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR, beides theoretische Werte.',
               text: 'Nach unserer Einschätzung aus der Beratung, ausdrücklich keine Belegzahl, kommen in der breiten Masse 400 bis 700 EUR zusammen; belegt durchgerechnet sind 105, 405 und 810 EUR. Wer als Modellfall wirklich jede für ihn geltende Vorsorge in einem Jahr mitnimmt und dazu vier Aktivitäten plus zwei Abzeichen nachweist, kommt auf 810 EUR. Einen Maximalbetrag nennen die Teilnahmebedingungen ausdrücklich nicht.',
             },
             {

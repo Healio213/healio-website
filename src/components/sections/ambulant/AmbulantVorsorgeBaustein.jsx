@@ -82,6 +82,13 @@ const AmbulantVorsorgeBaustein = () => {
           ))}
         </ul>
 
+        {/* Schwangere gehören in den SDK-Vorsorge-Topf, nicht in diesen Baustein
+            (Gegenprüfung 05.10.2026). Bewusst sichtbar, nicht im Aufklapper,
+            und direkt vor dem Antragslink, damit er vor dem Klick gelesen wird. */}
+        <p className="mt-3 max-w-3xl text-sm font-semibold leading-6 text-home-midnight" data-healio-ambulant="vorsorge-pregnancy">
+          {text('pregnancyNote')}
+        </p>
+
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
           {ukvUrl ? (
             <a

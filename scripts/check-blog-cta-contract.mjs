@@ -204,6 +204,34 @@ for (const locale of ['de', 'en']) {
   }
 }
 
+// Die Kästen unter Endkunden-Artikeln sprechen Du (wie /ambulant, /zahn und die
+// Ratgeberartikel), nicht Sie. Arbeitgeber, Partner, Hebammen und der allgemeine
+// Auffangkasten bleiben davon unberührt (eigene Entscheidung, siehe Dokumentation).
+const consumerCopyKeys = new Set([
+  ...knownGermanArticles
+    .filter((article) => article.targetGroup === 'endkunden')
+    .map((article) => article.expected.copyKey),
+  ...fallbackContracts
+    .filter((contract) => contract.input.targetGroup === 'endkunden' && contract.input.lang === 'de')
+    .map((contract) => contract.expected.copyKey),
+]);
+const germanMessages = JSON.parse(readFileSync(new URL('../src/i18n/locales/de/blog.json', import.meta.url), 'utf8'));
+const sieForm = /\bSie\b|\bIhr(?:e|en|em|er|es)?\b/;
+for (const copyKey of consumerCopyKeys) {
+  const copy = germanMessages.articleCta[copyKey];
+  for (const field of ['title', 'description', 'button']) {
+    assert.ok(!sieForm.test(copy[field]), `Der Endkunden-Kasten articleCta.${copyKey}.${field} muss Du statt Sie sagen: "${copy[field]}"`);
+  }
+}
+assert.deepEqual(
+  [...consumerCopyKeys].sort(),
+  ['bonus', 'dental', 'healthBudget', 'healthFund', 'inpatient', 'outpatient', 'outpatientComparison'],
+  'Die Endkunden-Kästen sind genau diese sieben.',
+);
+// Das Verbum ist Imperativ Du, kein Infinitiv mit Sie.
+assert.match(germanMessages.articleCta.dental.description, /^Starte den kurzen Zahn-Check und finde heraus, welcher nächste Schritt zu deiner Situation passt\.$/);
+assert.match(germanMessages.articleCta.healthBudget.title, /^Dein Gesundheitsbudget/);
+
 const scrollToTopSource = readFileSync(new URL('../src/components/ScrollToTop.jsx', import.meta.url), 'utf8');
 assert.match(scrollToTopSource, /MutationObserver/, 'Lazy geladene CTA-Anker brauchen einen DOM-Retry.');
 assert.match(scrollToTopSource, /scrollIntoView/, 'CTA-Anker müssen ihr Ziel sichtbar machen.');

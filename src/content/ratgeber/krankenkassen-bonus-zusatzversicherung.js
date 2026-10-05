@@ -78,7 +78,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wer regelmäßig Sport macht, zur Vorsorge geht und ordentliche Werte hat, kommt damit schnell auf einen ordentlichen Betrag. Laut Satzung sind bis zu 1.155 Euro im Jahr möglich, ein theoretischer Wert. In der breiten Masse kommen 400 bis 700 Euro zusammen.',
+          text: 'Wer regelmäßig Sport macht, zur Vorsorge geht und ordentliche Werte hat, kommt damit schnell auf einen ordentlichen Betrag. Laut Satzung sind bis zu 810 Euro im Jahr möglich, in der Schwangerschaft bis zu 1.155 Euro, beides theoretische Werte. In der breiten Masse kommen 400 bis 700 Euro zusammen.',
         },
       ],
     },

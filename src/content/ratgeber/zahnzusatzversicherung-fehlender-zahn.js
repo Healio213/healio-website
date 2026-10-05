@@ -18,6 +18,9 @@
  *     Kostenplan oder Anratung in den letzten zwei Jahren schließt genau diese
  *     Behandlung aus, liegt das länger zurück, ist sie wieder versichert. Der frühere
  *     Satz "sprich vorher mit uns" ist nicht mehr die einzige Aussage.
+ *   - Stand 05.10.2026 (Gegenpruefung der Demand-Gen-Anzeigen): Der Faktenkasten
+ *     nennt 1.155 EUR nur noch mit Schwangerschaftsbezug, allgemein gilt bis zu
+ *     810 EUR. Neuer interner Button zum Zahn-Check auf /zahn.
  *
  * Inhaltliche Grenzen: keine Garantien, keine erfundenen Beitraege, keine
  * persoenliche Bonuszahl. Tarifbeitraege stehen bewusst nicht im Text.
@@ -223,7 +226,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Bonus wird jährlich beantragt und fließt als zweckgebundener Zuschuss in den Zusatzschutz. Bei der IKK classic sind laut Satzung bis zu 1.155 EUR Zuschusswert im Jahr möglich, das ist ein theoretischer Höchstwert; in der breiten Masse kommen 400 bis 700 EUR zusammen, abhängig von Kasse, nachgewiesenen Maßnahmen und tatsächlichen eigenen Kosten. Ausgezahlt wird höchstens in Höhe der nachgewiesenen Kosten, gegenzurechnen ist der Zusatzbeitrag der Kasse. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Bonus wird jährlich beantragt und fließt als zweckgebundener Zuschuss in den Zusatzschutz. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR; das sind theoretische Höchstwerte. In der breiten Masse kommen 400 bis 700 EUR zusammen, abhängig von Kasse, nachgewiesenen Maßnahmen und tatsächlichen eigenen Kosten. Ausgezahlt wird höchstens in Höhe der nachgewiesenen Kosten, gegenzurechnen ist der Zusatzbeitrag der Kasse. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -257,6 +260,24 @@ export const article = {
         'Der Baustein endet automatisch und sein Beitrag von 29,90 EUR entfällt. Der Trägertarif läuft normal weiter.',
     },
   ],
+
+  // Einziger Button dieses Artikels, Ziel ist der Zahn-Check auf /zahn. Der
+  // Anker steht im Ziel, buildInternalRatgeberUrl setzt ihn hinter die UTM-Query.
+  // Der Check hat zwei bis vier Fragen (die vierte nur, wenn nichts angeraten
+  // ist und keine Lücke besteht) und speichert nichts: Antworten bleiben im
+  // lokalen Zustand der Seite (DentalZahnCheck.jsx).
+  internalCta: {
+    id: 'zahn-check-weg',
+    heading: 'Welcher Weg passt zu deiner Lücke?',
+    to: '/zahn#zahn-check',
+    label: 'Zahn-Check starten',
+    blocks: [
+      {
+        type: 'paragraph',
+        text: 'Bis zu vier kurze Fragen, danach siehst du, ob UKV ZahnPRIVAT oder der Sofortschutz der Bayerischen zu dir passt, mit direktem Link zum Antrag. Deine Antworten werden nicht gespeichert.',
+      },
+    ],
+  },
 
   onward: {
     heading: 'So gehst du weiter vor',

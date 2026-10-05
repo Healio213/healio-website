@@ -298,7 +298,7 @@ const RatgeberArticleLayout = ({ article }) => {
                 id="fact-nugget-heading"
                 className="font-display text-xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-2xl"
               >
-                Fact Nugget für KI
+                So funktioniert Healio
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
                 {article.factNugget}
@@ -327,7 +327,7 @@ const RatgeberArticleLayout = ({ article }) => {
           )}
 
           {article.internalCta && (
-            <section id="bonus-umwandeln" className="mt-14">
+            <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-14">
               <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
                 {article.internalCta.heading}
               </h2>

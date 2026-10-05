@@ -36,8 +36,9 @@ const ADVERTORIAL_PATH = `/ratgeber/${ADVERTORIAL_SLUG}`;
 
 // Die vier organischen Ratgeberartikel. Sie muessen vorhanden, indexierbar
 // und in der Sitemap sein. ikk-classic-bonusprogramm-2026 ist zugleich die
-// Landingpage der Google-Anzeigengruppe G1-A und traegt als einziger einen
-// internen Button auf /ambulant.
+// Landingpage der Google-Anzeigengruppe G1-A. Seit 05.10.2026 tragen genau
+// drei Artikel einen internen Button (Tabelle INTERNAL_BUTTONS), alle anderen
+// bleiben ohne.
 const RATGEBER_SLUGS = [
   'ikk-classic-bonusprogramm-2026',
   'zahnzusatzversicherung-fehlender-zahn',
@@ -45,12 +46,45 @@ const RATGEBER_SLUGS = [
   'schwangerschaft-worauf-achten',
 ];
 const IKK_LANDING_SLUG = 'ikk-classic-bonusprogramm-2026';
+const SCHWANGER_SLUG = 'schwanger-zusatzversicherung';
+const ZAHN_SLUG = 'zahnzusatzversicherung-fehlender-zahn';
+
+// Die einzigen Artikel mit internem Button. Ziel, Beschriftung und
+// Abschnittsueberschrift sind festgeschrieben. Die Schwangerschaftsseite
+// fuehrt bewusst zur SDK auf /ambulant (dort steht seit 05.10. auch der
+// UKV-Vorsorge-Baustein, der fuer eine bestehende Schwangerschaft nicht
+// gedacht ist), die Zahnseite zum Zahn-Check auf /zahn. Der Anker bleibt
+// im Ziel stehen, die UTM-Parameter kommen davor.
+const INTERNAL_BUTTONS = {
+  [IKK_LANDING_SLUG]: {
+    to: '/ambulant',
+    label: 'Bonus und Beitrag prüfen',
+    heading: 'Bonus in Zusatzschutz umwandeln',
+    builtHrefStart: '/ambulant?',
+  },
+  [SCHWANGER_SLUG]: {
+    to: '/ambulant',
+    label: 'SDK-Tarife ansehen',
+    heading: 'Vorsorge in der Schwangerschaft: der Topf der SDK',
+    builtHrefStart: '/ambulant?',
+  },
+  [ZAHN_SLUG]: {
+    to: '/zahn#zahn-check',
+    label: 'Zahn-Check starten',
+    heading: 'Welcher Weg passt zu deiner Lücke?',
+    builtHrefStart: '/zahn?',
+    builtHrefEnd: '#zahn-check',
+  },
+};
 
 const app = read('src/App.jsx');
 const layout = read('src/components/ratgeber/RatgeberArticleLayout.jsx');
 const overview = read('src/pages/RatgeberPage.jsx');
 const sitemap = read('public/sitemap.xml');
 const routeByPath = new Map(seoRoutes.map((route) => [route.path, route]));
+const stripLayoutComments = (source) => source
+  .replace(/\/\*[\s\S]*?\*\//g, ' ')
+  .replace(/(^|\s)\/\/[^\n]*/g, '$1');
 
 // --- 1. Routen -------------------------------------------------------------
 
@@ -153,6 +187,12 @@ for (const slug of RATGEBER_SLUGS) {
 
 // Fact-Nugget-Block und FAQ-Schema muessen in der Vorlage verdrahtet sein.
 expect(/data-geo="fact-nugget"/.test(layout), 'Der Fact-Nugget-Block braucht die Auszeichnung data-geo.');
+expect(/id="fact-nugget"/.test(layout), 'Der Fact-Nugget-Block behaelt seine id.');
+// Fuer Leser einer bezahlten Anzeige klingt "Fact Nugget fuer KI" wie ein
+// interner SEO-Kniff. Sichtbar steht "So funktioniert Healio", id und data-geo
+// bleiben fuer die GEO-Markierung.
+expect(!/Fact Nugget/.test(stripLayoutComments(layout)), 'Die sichtbare Überschrift "Fact Nugget für KI" darf nicht mehr in der Vorlage stehen.');
+expect(/>\s*So funktioniert Healio\s*</.test(layout), 'Der Fact-Nugget-Block heißt sichtbar "So funktioniert Healio".');
 expect(/createFAQSchema\(article\.faqs\)/.test(layout), 'Die FAQ muessen als FAQPage ausgezeichnet werden.');
 expect(/createArticleSchema\(/.test(layout), 'Ratgeberartikel brauchen eine Article-Auszeichnung.');
 expect(
@@ -160,28 +200,80 @@ expect(
   'Nur Advertorials duerfen auf noindex stehen.',
 );
 
-// --- 2c. Die IKK-Bonus-Landingpage ----------------------------------------
+// --- 2c. Die internen Buttons ----------------------------------------------
 
-const ikkLanding = getRatgeberArticle(IKK_LANDING_SLUG);
-expect(Boolean(ikkLanding), 'Die IKK-Bonus-Landingpage fehlt im Inhaltsregister.');
-if (ikkLanding) {
-  expect(ikkLanding.internalCta?.to === '/ambulant', 'Der Button der IKK-Landingpage muss auf /ambulant zeigen.');
+for (const [slug, expected] of Object.entries(INTERNAL_BUTTONS)) {
+  const article = getRatgeberArticle(slug);
+  expect(Boolean(article), `Artikel mit internem Button fehlt im Inhaltsregister: ${slug}`);
+  if (!article) continue;
+
+  expect(article.internalCta?.to === expected.to, `Der Button von ${slug} muss auf ${expected.to} zeigen.`);
+  expect(article.internalCta?.label === expected.label, `Der Button von ${slug} heisst "${expected.label}".`);
+  expect(article.internalCta?.heading === expected.heading, `Der Abschnitt des Buttons von ${slug} heisst "${expected.heading}".`);
   expect(
-    ikkLanding.internalCta?.label === 'Bonus und Beitrag prüfen',
-    'Der Button der IKK-Landingpage heisst "Bonus und Beitrag pruefen".',
-  );
-  expect(
-    ikkLanding.internalCta?.heading === 'Bonus in Zusatzschutz umwandeln',
-    'Der Abschnitt der IKK-Landingpage heisst "Bonus in Zusatzschutz umwandeln".',
+    Array.isArray(article.internalCta?.blocks) && article.internalCta.blocks.length >= 1,
+    `Der Button-Abschnitt von ${slug} traegt mindestens einen Absatz.`,
   );
 }
 
-// Kein zweiter Artikel darf sich einen internen Button anhaengen, ohne dass
-// er hier bewusst eingetragen wird.
+// Kein weiterer Artikel darf sich einen internen Button anhaengen, ohne dass
+// er hier bewusst eingetragen wird. Das gilt auch fuer das Advertorial.
 for (const article of ratgeberArticles) {
-  if (article.slug === IKK_LANDING_SLUG) continue;
+  if (INTERNAL_BUTTONS[article.slug]) continue;
   expect(!article.internalCta, `Unerwarteter interner Button: ${article.slug}`);
 }
+
+// Schwangerschaft: Der Button fuehrt zur SDK, nie zum UKV-Vorsorge-Baustein
+// als Empfehlung. Der Absatz benennt beide Produkte und sagt, was gilt.
+const schwanger = getRatgeberArticle(SCHWANGER_SLUG);
+if (schwanger) {
+  const ctaText = (schwanger.internalCta?.blocks || []).map((block) => block.text).join(' ');
+  expect(/Vorsorge-Topf der SDK/.test(ctaText) && /Wähle dort deshalb eine SDK-Stufe\./.test(ctaText), 'Der Schwangerschafts-Button muss den Vorsorge-Topf der SDK und die Wahl einer SDK-Stufe nennen.');
+  expect(/Vorsorge-Baustein der UKV/.test(ctaText) && /für eine bestehende Schwangerschaft nicht gedacht/.test(ctaText), 'Der Schwangerschafts-Button muss sagen, dass der UKV-Vorsorge-Baustein für eine bestehende Schwangerschaft nicht gedacht ist.');
+  expect(/50 bis 100 Prozent/.test(ctaText) && /200 bis 500 EUR in zwei Kalenderjahren/.test(ctaText), 'Die Zahlen im Schwangerschafts-Button gehören zur Tabelle (50 bis 100 Prozent, 200 bis 500 EUR in zwei Kalenderjahren).');
+  // Zahlen gegen die Tabelle des Artikels: kleinste und groesste Erstattung und Hoechstbetrag.
+  const tarifTable = schwanger.sections.flatMap((section) => section.blocks).find((block) => block.type === 'table' && /Vorsorge-Topf je Tarifstufe/.test(block.caption || ''));
+  expect(Boolean(tarifTable), 'Die Tabelle "Vorsorge-Topf je Tarifstufe" fehlt im Schwangerschaftsartikel.');
+  if (tarifTable) {
+    const percents = tarifTable.rows.map((row) => Number.parseInt(row[1], 10));
+    const euros = tarifTable.rows.map((row) => Number.parseInt(row[2], 10));
+    expect(Math.min(...percents) === 50 && Math.max(...percents) === 100, 'Der Button nennt 50 bis 100 Prozent, die Tabelle muss dazu passen.');
+    expect(Math.min(...euros) === 200 && Math.max(...euros) === 500, 'Der Button nennt 200 bis 500 EUR, die Tabelle muss dazu passen.');
+  }
+
+  // Weg am Ende: Healio-Produktseiten vor kassenboost.de, SDK statt Baustein.
+  const onwardText = (schwanger.onward?.segments || []).map((segment) => segment.text).join('');
+  expect(/Vorsorge-Topf der SDK je Tarifstufe/.test(onwardText), 'Der Weg am Ende muss den Vorsorge-Topf der SDK nennen.');
+  expect(/Für eine bestehende Schwangerschaft wählst du dort eine SDK-Stufe, nicht den UKV-Vorsorge-Baustein\./.test(onwardText), 'Der Weg am Ende muss sagen: SDK-Stufe wählen, nicht den UKV-Vorsorge-Baustein.');
+  const onwardSegments = schwanger.onward?.segments || [];
+  const idxAmbulant = onwardSegments.findIndex((segment) => segment.to === '/ambulant');
+  const idxKassenboost = onwardSegments.findIndex((segment) => /kassenboost\.de/.test(segment.href || ''));
+  expect(idxAmbulant > -1 && idxKassenboost > idxAmbulant, 'Im Weg am Ende stehen die Healio-Produktseiten vor kassenboost.de.');
+
+  // "Kurz gesagt": der rechnerische Hoechstwert steht nie ohne die breite Masse.
+  const kurz = schwanger.sections[0].blocks.flatMap((block) => (block.items || []).map((item) => (typeof item === 'string' ? item : `${item.lead} ${item.text}`)));
+  const bonusPoint = kurz.find((item) => /1\.155 EUR/.test(item));
+  expect(Boolean(bonusPoint) && /In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr\./.test(bonusPoint), '"Kurz gesagt" nennt neben 1.155 EUR die breite Masse mit 400 bis 700 EUR im Jahr.');
+  expect(schwanger.updatedAt === '2026-10-05', 'Der Schwangerschaftsartikel traegt das Aenderungsdatum 2026-10-05.');
+}
+
+// /ambulant: Der UKV-Vorsorge-Baustein sagt sichtbar, dass eine festgestellte
+// Schwangerschaft zum SDK-Vorsorge-Topf gehoert. Der Satz steht in DE und EN,
+// nicht im Aufklapper, und wird von check-ukv-vorsorge-contract.mjs als einzige
+// Stelle mit dem Wort Schwangerschaft im Baustein zugelassen.
+const ambulantDe = JSON.parse(read('src/i18n/locales/de/ambulant.json')).vorsorgeBaustein;
+const ambulantEn = JSON.parse(read('src/i18n/locales/en/ambulant.json')).vorsorgeBaustein;
+expect(
+  ambulantDe?.pregnancyNote === 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.',
+  'ambulant.json (DE) braucht im Vorsorge-Baustein den Hinweis auf den Vorsorge-Topf der SDK bei festgestellter Schwangerschaft.',
+);
+expect(
+  /pregnancy/i.test(ambulantEn?.pregnancyNote || '') && /SDK/.test(ambulantEn?.pregnancyNote || ''),
+  'ambulant.json (EN) braucht im Vorsorge-Baustein den Hinweis auf den SDK-Vorsorge-Topf bei festgestellter Schwangerschaft.',
+);
+const vorsorgeComponent = read('src/components/sections/ambulant/AmbulantVorsorgeBaustein.jsx');
+const vorsorgeVisible = vorsorgeComponent.slice(0, vorsorgeComponent.indexOf('<details'));
+expect(/text\('pregnancyNote'\)/.test(vorsorgeVisible), 'Der Schwangerschafts-Hinweis muss im Baustein ohne Aufklappen sichtbar sein.');
 
 const internalDefault = buildInternalRatgeberUrl('/ambulant', '');
 expect(internalDefault.startsWith('/ambulant?'), 'Das interne Button-Ziel muss ein Pfad auf healio.de sein.');
@@ -200,6 +292,32 @@ expect(internalParams.get('utm_source') === 'google', 'utm_source muss intern du
 expect(internalParams.get('utm_medium') === 'cpc', 'utm_medium muss intern durchgereicht werden.');
 expect(internalParams.get('utm_campaign') === 'g1-a', 'utm_campaign muss intern durchgereicht werden.');
 expect(internalParams.get('utm_content') === 'ikk-bonus', 'utm_content muss intern durchgereicht werden.');
+
+// Anker im Ziel (/zahn#zahn-check): bleibt erhalten und steht HINTER der Query.
+// Steht er davor, landen die Parameter im Anker und gehen verloren.
+const anchorDefault = buildInternalRatgeberUrl('/zahn#zahn-check', '');
+expect(anchorDefault.startsWith('/zahn?'), 'Mit Anker im Ziel muss der Pfad vor der Query stehen.');
+expect(anchorDefault.endsWith('#zahn-check'), 'Der Anker #zahn-check muss am Ende der Adresse erhalten bleiben.');
+expect((anchorDefault.match(/#/g) || []).length === 1, 'Die Adresse darf genau einen Anker tragen.');
+expect(anchorDefault.indexOf('?') < anchorDefault.indexOf('#'), 'Die Query muss vor dem Anker stehen.');
+for (const [key, value] of Object.entries(RATGEBER_INTERNAL_UTM_DEFAULTS)) {
+  expect(anchorDefault.includes(`${key}=${value}`), `Standardwert ${key}=${value} fehlt im Ziel mit Anker.`);
+}
+const anchorPassed = buildInternalRatgeberUrl(
+  '/zahn#zahn-check',
+  '?utm_source=google&utm_medium=demandgen&utm_campaign=ratgeber_2026-10&utm_content=fehlender-zahn&ref=gads-dg1',
+);
+const anchorUrl = new URL(anchorPassed, 'https://healio.de');
+expect(anchorUrl.pathname === '/zahn' && anchorUrl.hash === '#zahn-check', 'Pfad und Anker des Ziels muessen /zahn und #zahn-check bleiben.');
+expect(anchorUrl.searchParams.get('utm_source') === 'google', 'utm_source muss mit Anker im Ziel durchgereicht werden.');
+expect(anchorUrl.searchParams.get('utm_medium') === 'demandgen', 'utm_medium muss mit Anker im Ziel durchgereicht werden.');
+expect(anchorUrl.searchParams.get('utm_campaign') === 'ratgeber_2026-10', 'utm_campaign muss mit Anker im Ziel durchgereicht werden.');
+expect(anchorUrl.searchParams.get('utm_content') === 'fehlender-zahn', 'utm_content muss mit Anker im Ziel durchgereicht werden.');
+expect(!anchorUrl.searchParams.has('ref'), 'Fremde Parameter wie ref werden nicht durch den Button gereicht.');
+expect(!anchorUrl.hash.includes('utm_'), 'Kein Parameter darf im Anker landen.');
+expect(buildInternalRatgeberUrl('/ambulant#tarif-tabelle', '').endsWith('#tarif-tabelle'), 'Auch ein anderer Anker bleibt am Ende stehen.');
+expect(!buildInternalRatgeberUrl('/ambulant#', '').includes('#'), 'Ein leerer Anker faellt weg.');
+expect(buildInternalRatgeberUrl('/ambulant', '') === internalDefault, 'Ohne Anker aendert sich das Ziel nicht.');
 
 // --- 2d. Kein dreifacher Button und keine feste Leiste im Ratgeber --------
 
@@ -339,6 +457,57 @@ for (const article of ratgeberArticles) {
   }
 }
 
+// --- 6a0. 1.155 EUR nur mit Schwangerschaftsbezug --------------------------
+
+// Frank (Satzungsregel): Bei der IKK classic gilt laut Satzung bis zu 810 EUR,
+// nur in der Schwangerschaft bis zu 1.155 EUR, beides theoretische Werte. Die
+// Zahl 1.155 darf nie als allgemeine IKK-Zahl stehen. Geprueft wird je
+// Textstueck (Absatz, Listenpunkt, Faktenkasten, FAQ-Antwort, Tabellenzeile):
+// Wo 1.155 steht, muss im selben Stueck die Schwangerschaft stehen.
+const textUnits = (article) => {
+  const units = [article.lead, article.factNugget, article.metaDescription, article.listTeaser];
+  const collect = (blocks) => {
+    for (const block of blocks) {
+      if (block.type === 'list') {
+        for (const item of block.items) units.push(typeof item === 'string' ? item : `${item.lead} ${item.text || ''}`);
+      } else if (block.type === 'table') {
+        units.push(block.caption, block.note);
+        for (const row of block.rows) units.push(row.join(' | '));
+      } else if (block.type === 'segments') {
+        units.push(block.segments.map((segment) => segment.text).join(''));
+      } else {
+        units.push(block.text);
+      }
+    }
+  };
+  for (const section of article.sections) collect(section.blocks);
+  for (const faq of article.faqs || []) units.push(faq.answer);
+  if (article.internalCta) collect(article.internalCta.blocks);
+  if (article.onward) units.push(article.onward.segments.map((segment) => segment.text).join(''));
+  return units.filter(Boolean);
+};
+
+for (const article of ratgeberArticles) {
+  for (const unit of textUnits(article)) {
+    if (!/1\.155/.test(unit)) continue;
+    expect(
+      /Schwanger/i.test(unit),
+      `1.155 EUR darf nur mit Schwangerschaftsbezug stehen (allgemein gilt bis zu 810 EUR): ${article.slug}: ${unit.slice(0, 90)}`,
+    );
+  }
+}
+
+const zahnArtikel = getRatgeberArticle(ZAHN_SLUG);
+if (zahnArtikel) {
+  expect(/laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1\.155 EUR/.test(zahnArtikel.factNugget), 'Der Faktenkasten im Zahn-Ratgeber nennt 810 EUR allgemein und 1.155 EUR nur in der Schwangerschaft.');
+  expect(/400 bis 700 EUR/.test(zahnArtikel.factNugget), 'Der Faktenkasten im Zahn-Ratgeber nennt die breite Masse mit 400 bis 700 EUR.');
+}
+
+// Keine Ratgeberseite darf "Fact Nugget" sichtbar tragen, auch nicht im Text.
+for (const article of ratgeberArticles) {
+  expect(!/Fact Nugget/i.test(renderArticleText(article)), `"Fact Nugget" darf nicht im sichtbaren Text stehen: ${article.slug}`);
+}
+
 // --- 6a. Fehlender Zahn: UKV-Zwei-Jahres-Regel klar erklaert -------------
 
 // Vom UKV-Maklerbetreuer am 05.10.2026 bestaetigt: Heil- und Kostenplan oder
@@ -414,6 +583,9 @@ for (const slug of RATGEBER_SLUGS) {
   expect(html.includes('Ratgeber von Healio'), `Der gebaute Ratgeberartikel muss den Hinweis "Ratgeber von Healio" zeigen: ${slug}`);
   expect(!html.includes('>Anzeige'), `Ein organischer Ratgeberartikel darf nicht als Anzeige ausgewiesen werden: ${slug}`);
   expect(html.includes('data-geo="fact-nugget"'), `Der Fact-Nugget-Block fehlt im gebauten HTML: ${slug}`);
+  expect(html.includes('id="fact-nugget"'), `Die id des Fact-Nugget-Blocks fehlt im gebauten HTML: ${slug}`);
+  expect(!html.includes('Fact Nugget für KI'), `Die Überschrift "Fact Nugget für KI" ist im gebauten HTML sichtbar: ${slug}`);
+  expect(html.includes('So funktioniert Healio'), `Die Überschrift "So funktioniert Healio" fehlt im gebauten HTML: ${slug}`);
   expect(html.includes('"@type":"FAQPage"'), `Das FAQ-Schema fehlt im gebauten HTML: ${slug}`);
   expect(html.includes('"@type":"Article"'), `Das Article-Schema fehlt im gebauten HTML: ${slug}`);
   expect(!html.includes('data-ratgeber-cta='), `Ein organischer Ratgeberartikel darf keinen KassenBoost-Button tragen: ${slug}`);
@@ -425,10 +597,32 @@ for (const slug of RATGEBER_SLUGS) {
     `Der gebaute Ratgeberartikel darf keine Nita-Chat-Blase ausliefern: ${slug}`,
   );
 
-  if (slug === IKK_LANDING_SLUG) {
-    expect(html.includes('data-ratgeber-internal-cta='), 'Der interne Button fehlt im gebauten HTML der IKK-Landingpage.');
-    expect((html.match(/data-ratgeber-internal-cta=/g) || []).length === 1, 'Die IKK-Landingpage traegt genau einen Button.');
-    expect(html.includes('href="/ambulant?'), 'Der Button der IKK-Landingpage muss mit UTM auf /ambulant zeigen.');
+  const internalCtaCount = (html.match(/data-ratgeber-internal-cta=/g) || []).length;
+  const expectedButton = INTERNAL_BUTTONS[slug];
+  if (expectedButton) {
+    expect(internalCtaCount === 1, `Der gebaute Artikel traegt genau einen internen Button (gefunden ${internalCtaCount}): ${slug}`);
+    const anchorTag = (html.match(/<a\b[^>]*data-ratgeber-internal-cta="end"[^>]*>[^<]*<\/a>/) || [''])[0];
+    const hrefValue = ((anchorTag.match(/href="([^"]*)"/) || [])[1] || '').replace(/&amp;/g, '&');
+    expect(anchorTag.includes(`>${expectedButton.label}</a>`), `Der gebaute Button von ${slug} heisst "${expectedButton.label}".`);
+    expect(hrefValue.startsWith(expectedButton.builtHrefStart), `Der gebaute Button von ${slug} muss mit UTM auf ${expectedButton.builtHrefStart} zeigen (gefunden "${hrefValue}").`);
+    if (expectedButton.builtHrefEnd) {
+      expect(hrefValue.endsWith(expectedButton.builtHrefEnd), `Der Anker ${expectedButton.builtHrefEnd} muss im gebauten Button von ${slug} hinter der Query stehen (gefunden "${hrefValue}").`);
+      expect(hrefValue.indexOf('?') > -1 && hrefValue.indexOf('?') < hrefValue.indexOf('#'), `Die Query muss im gebauten Button von ${slug} vor dem Anker stehen.`);
+    }
+    expect(html.includes(`>${expectedButton.heading}</h2>`), `Die Überschrift des Button-Abschnitts fehlt im gebauten HTML: ${slug}`);
+  } else {
+    expect(internalCtaCount === 0, `Ein Artikel ohne vorgesehenen Button darf keinen internen Button tragen: ${slug}`);
+  }
+}
+
+// Das Schwangerschafts-Ziel /ambulant liefert den Hinweis zum Vorsorge-Baustein
+// im ausgelieferten HTML. Prerender fuellt den Baustein nur, wenn die Route
+// vorgerendert ist; fehlt die Datei, bleibt es bei der Pruefung der Quelle oben.
+const builtAmbulant = path.join(root, 'dist', 'ambulant', 'index.html');
+if (fs.existsSync(builtAmbulant)) {
+  const html = fs.readFileSync(builtAmbulant, 'utf8');
+  if (html.includes('data-healio-ambulant="vorsorge-baustein"')) {
+    expect(html.includes('Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.'), 'Der gebaute Vorsorge-Baustein auf /ambulant muss den Hinweis auf den SDK-Vorsorge-Topf zeigen.');
   }
 }
 
@@ -439,5 +633,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, 1 interner Button auf /ratgeber/${IKK_LANDING_SLUG}, Fact Nugget, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
+  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, ${Object.keys(INTERNAL_BUTTONS).length} Artikel mit je einem internen Button (IKK-Landingpage und Schwangerschaft auf /ambulant, fehlender Zahn auf /zahn#zahn-check), 1.155 EUR nur mit Schwangerschaftsbezug, Schwangerschafts-Hinweis im Vorsorge-Baustein, Fact Nugget unter neuer Überschrift, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
 );
