@@ -26,33 +26,61 @@ const COPY = {
   },
 };
 
+// Klassen für die kompakte Handy-Anordnung (mobileSwipe) und den bisherigen
+// Stand. Die Karte ist schon eine Ausklapp-Karte; mobil werden nur Abstände,
+// Schatten und Zeilenhöhe enger, Kleingedrucktes steigt auf 14 px. Ab md
+// (768 px) sind beide Sätze identisch; ohne mobileSwipe bleibt jede Seite
+// wie zuvor.
+const LAYOUT = {
+  standard: {
+    section: 'py-10',
+    card: 'shadow-[0_24px_70px_rgba(7,17,31,0.10)]',
+    summary: 'gap-5 px-6 py-7',
+    eyebrow: 'text-xs',
+    text: 'leading-7',
+    badge: 'mt-4 text-xs',
+  },
+  kompakt: {
+    section: 'py-6',
+    card: 'shadow-[0_12px_32px_rgba(7,17,31,0.08)] md:shadow-[0_24px_70px_rgba(7,17,31,0.10)]',
+    summary: 'gap-4 px-5 py-5',
+    eyebrow: 'text-sm md:text-xs',
+    text: 'leading-6 md:leading-7',
+    badge: 'mt-3 text-sm md:mt-4 md:text-xs',
+  },
+};
+
+// mobileSwipe (Standard false): nur die Zahnseite schaltet die kompakte
+// Handy-Anordnung ein (Experiment 05.10.2026).
 const CompactBonusFeature = ({
   className = '',
   calculatorProps = {},
   defaultOpen = false,
+  mobileSwipe = false,
 }) => {
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
   const copy = COPY[language];
   const kassenboostPath = language === 'en' ? '/en/kassenboost' : '/kassenboost';
+  const ui = mobileSwipe ? LAYOUT.kompakt : LAYOUT.standard;
 
   return (
-    <section className={`px-4 py-10 sm:px-6 md:py-14 lg:px-8 ${className}`} aria-labelledby="compact-bonus-title">
+    <section className={`px-4 sm:px-6 md:py-14 lg:px-8 ${ui.section} ${className}`} aria-labelledby="compact-bonus-title">
       <details
-        className="group mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-amber-200/70 bg-gradient-to-br from-[#fffdf8] via-white to-emerald-50 shadow-[0_24px_70px_rgba(7,17,31,0.10)]"
+        className={`group mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-amber-200/70 bg-gradient-to-br from-[#fffdf8] via-white to-emerald-50 ${ui.card}`}
         open={defaultOpen || undefined}
       >
-        <summary className="home-focus grid cursor-pointer list-none items-center gap-5 px-6 py-7 sm:px-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:py-9 lg:px-12 [&::-webkit-details-marker]:hidden">
+        <summary className={`home-focus grid cursor-pointer list-none items-center sm:px-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:py-9 lg:px-12 [&::-webkit-details-marker]:hidden ${ui.summary}`}>
           <div className="flex min-w-0 items-start gap-4 sm:gap-5">
             <span className="relative hidden h-16 w-16 shrink-0 place-items-center rounded-[1.35rem] border border-amber-200 bg-amber-50 text-amber-700 shadow-[0_10px_24px_rgba(180,123,31,0.12)] sm:grid">
               <Calculator className="h-7 w-7" aria-hidden="true" />
               <MousePointerClick className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-home-mint p-1.5 text-home-midnight shadow-md" aria-hidden="true" />
             </span>
             <div>
-              <span className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{copy.eyebrow}</span>
+              <span className={`font-display font-extrabold uppercase tracking-[0.2em] text-emerald-700 ${ui.eyebrow}`}>{copy.eyebrow}</span>
               <h2 id="compact-bonus-title" className="mt-2 block font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl lg:text-4xl">{copy.title}</h2>
-              <span className="mt-2 block max-w-3xl text-base leading-7 text-home-slate">{copy.text}</span>
-              <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 text-xs font-bold text-emerald-900">
+              <span className={`mt-2 block max-w-3xl text-base text-home-slate ${ui.text}`}>{copy.text}</span>
+              <span className={`inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 font-bold text-emerald-900 ${ui.badge}`}>
                 <ShieldCheck className="h-4 w-4 text-home-mint" aria-hidden="true" />
                 {copy.badge}
               </span>

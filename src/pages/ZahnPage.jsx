@@ -14,6 +14,7 @@ import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm'
 import NitaQuickPill from '@/components/sections/shared/NitaQuickPill';
 import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
@@ -95,15 +96,15 @@ const ZahnPage = () => {
           <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
           <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-          <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
+          <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
+            <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.5 }}
                 className="min-w-0 max-w-2xl"
               >
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1] sm:text-sm">
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">
                   {content.hero.eyebrow}
                 </p>
                 <h1
@@ -113,14 +114,14 @@ const ZahnPage = () => {
                   <span className="block">{content.hero.titleLead}</span>
                   <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
                 </h1>
-                <p className="mt-6 max-w-xl text-lg leading-8 text-slate-200 sm:text-xl">
+                <p className="mt-4 max-w-xl text-lg leading-7 text-slate-200 md:mt-6 sm:text-xl">
                   {content.hero.text}
                 </p>
 
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
-                  className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none sm:w-auto"
+                  className="mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-home-mint px-7 md:mt-8 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none sm:w-auto"
                 >
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
@@ -141,7 +142,7 @@ const ZahnPage = () => {
                 className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
                 aria-label={content.hero.offersAria}
               >
-                <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
+                <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:rounded-[2.2rem] sm:p-7">
                   <div className="flex items-center gap-4">
                     <img
                       src="/images/friendly-icons/dental-shield.webp"
@@ -150,37 +151,46 @@ const ZahnPage = () => {
                       height="315"
                       loading="eager"
                       decoding="async"
-                      className="w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
+                      className="w-14 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
                     />
                     <p className="font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl">
                       {content.hero.ticketFooter}
                     </p>
                   </div>
-                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {/* Experiment 05.10.2026: mobil eine Wischreihe statt vier
+                      gestapelter Zeilen, ab md das bisherige Zwei-Spalten-Raster.
+                      Jede Zeile führt weiterhin in den Zahn-Check. */}
+                  <MobileSwipeRow
+                    label={content.hero.offersAria}
+                    className="mt-4 md:mt-5"
+                    desktopClassName="-mx-4 scroll-pl-4 px-4 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:gap-3"
+                    mobileItemWidth="w-[74%]"
+                    bleed={false}
+                  >
                     {content.hero.offers.map((offer, index) => (
                       <a
                         key={offer.code}
                         href="#zahn-check"
                         onClick={(event) => scrollToCheck(event, reduceMotion)}
-                        className={`group block rounded-2xl border bg-white/95 p-4 shadow-[0_12px_30px_rgba(39,63,72,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${offerBorders[index % offerBorders.length]}`}
+                        className={`group block h-full rounded-2xl border bg-white/95 p-4 shadow-[0_2px_6px_rgba(39,63,72,0.08)] transition md:shadow-[0_12px_30px_rgba(39,63,72,0.10)] md:hover:-translate-y-0.5 md:hover:bg-white md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${offerBorders[index % offerBorders.length]}`}
                       >
                         <span className="flex items-center justify-between gap-2">
-                          <span className="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">{offer.code}</span>
+                          <span className="text-sm font-extrabold uppercase tracking-[0.12em] text-slate-500 md:text-xs">{offer.code}</span>
                           <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${offerDots[index % offerDots.length]}`} aria-hidden="true" />
                         </span>
                         <span className="mt-1.5 block font-display text-lg font-extrabold leading-tight text-[#071726]">{offer.label}</span>
                         <span className="mt-1.5 block text-base leading-snug text-slate-600">{offer.note}</span>
                       </a>
                     ))}
-                  </div>
+                  </MobileSwipeRow>
                 </div>
               </motion.div>
             </div>
 
-            <div className="mt-12 grid gap-4 border-t border-white/15 pt-6 sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 border-t border-white/15 pt-5 md:mt-12 md:gap-4 md:pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
                 <div key={item} className="flex items-center gap-3 text-left text-base font-bold text-white/85">
-                  <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" />
+                  <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" className="!h-10 !w-10 sm:!h-12 sm:!w-12" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -199,17 +209,17 @@ const ZahnPage = () => {
 
         <DentalZahnCheck />
 
-        <section className="bg-white px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-paths-heading">
+        <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-paths-heading">
           <div className="healio-container">
             <div className="max-w-5xl">
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">{content.paths.eyebrow}</p>
+              <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#087654]">{content.paths.eyebrow}</p>
               <h2 id="zahn-paths-heading" className="mt-4 max-w-[28ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance] sm:text-4xl lg:text-5xl">
                 {content.paths.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{content.paths.text}</p>
+              <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.paths.text}</p>
             </div>
 
-            <div className="mt-12 overflow-hidden rounded-[2.75rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)]">
+            <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)] md:mt-12 md:rounded-[2.75rem]">
               <div className="grid md:grid-cols-2">
               {content.paths.cards.map((card, index, cards) => {
                 const visual = pathVisuals[card.key] || pathVisuals.ukv;
@@ -220,21 +230,23 @@ const ZahnPage = () => {
                 return (
                   <article
                     key={card.key}
-                    className={`relative min-h-full p-7 sm:p-9 ${pathStyles[card.tone]} ${mobileDivider} ${desktopDivider} ${index % 2 === 0 && index < cards.length - 1 ? 'md:border-r md:border-[#dfe8e3]' : ''}`}
+                    className={`relative grid min-h-full grid-cols-[auto_minmax(0,1fr)] gap-x-4 p-5 sm:p-9 md:block ${pathStyles[card.tone]} ${mobileDivider} ${desktopDivider} ${index % 2 === 0 && index < cards.length - 1 ? 'md:border-r md:border-[#dfe8e3]' : ''}`}
                   >
-                    <span className="absolute -right-14 -top-16 h-40 w-40 rounded-full border border-current/10" aria-hidden="true" />
-                    <div className="flex items-start justify-between gap-5">
+                    {/* Zierkreis nur ab md; mobil entfällt er (kompakte Karte). */}
+                    <span className="absolute -right-14 -top-16 hidden h-40 w-40 rounded-full border border-current/10 md:block" aria-hidden="true" />
+                    {/* Mobil steht das Symbol links neben Titel und Produkt, ab md wie bisher über dem Titel. */}
+                    <div className="row-span-2 flex items-start justify-between gap-5 self-start">
                       <FriendlyIcon kind={visual.kind} tone={visual.tone} size="md" className="-rotate-2" />
                     </div>
-                    <h3 className="mt-8 font-display text-2xl font-extrabold tracking-[-0.035em]">{card.label}</h3>
-                    <p className="mt-2 font-display text-sm font-extrabold uppercase tracking-[0.14em] opacity-80">{card.title} · {card.product}</p>
-                    <p className="mt-4 max-w-xl leading-7 text-slate-600">{card.text}</p>
+                    <h3 className="font-display text-xl font-extrabold tracking-[-0.035em] md:mt-8 md:text-2xl">{card.label}</h3>
+                    <p className="mt-1 font-display text-sm font-extrabold uppercase tracking-[0.14em] opacity-80 md:mt-2">{card.title} · {card.product}</p>
+                    <p className="col-span-2 mt-4 max-w-xl leading-6 text-slate-600 sm:leading-7">{card.text}</p>
                   </article>
                 );
               })}
               </div>
             </div>
-            <p className="mt-6 text-base leading-7 text-slate-600">{content.paths.footer}</p>
+            <p className="mt-4 text-base leading-7 text-slate-600 md:mt-6">{content.paths.footer}</p>
             {lang === 'de' && (
               /* Vertiefung zum Thema Zahnluecke. Bewusst nur ein Satz mit
                  einem Link, kein zweiter Button neben der Tarifweiche. */
@@ -250,20 +262,20 @@ const ZahnPage = () => {
 
         {/* Zwei-Wege-Botschaft direkt vor dem Kassenbonus, im selben hellen
             Band wie Bonusbrücke und Bonusrechner. */}
-        <ZweiWegeFinanzierung produkt="zahn" className="bg-[#f8faf9]" />
+        <ZweiWegeFinanzierung produkt="zahn" className="bg-[#f8faf9]" mobileSwipe />
 
-        <section id="kassenbonus" className="scroll-mt-28 bg-[#f8faf9] px-4 pb-20 pt-2 sm:px-6 md:pb-24 md:pt-4 lg:px-8" aria-labelledby="zahn-bonus-heading">
-          <div className="healio-container relative isolate grid items-center gap-10 overflow-hidden rounded-[2.75rem] bg-[#07111f] p-7 text-white shadow-[0_30px_80px_rgba(7,17,31,0.18)] sm:p-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:p-14">
+        <section id="kassenbonus" className="scroll-mt-28 bg-[#f8faf9] px-4 pb-10 pt-2 sm:px-6 md:pb-24 md:pt-4 lg:px-8" aria-labelledby="zahn-bonus-heading">
+          <div className="healio-container relative isolate grid items-center gap-6 overflow-hidden rounded-[2rem] bg-[#07111f] p-5 text-white shadow-[0_30px_80px_rgba(7,17,31,0.18)] sm:p-10 md:gap-10 md:rounded-[2.75rem] lg:grid-cols-[minmax(0,1fr)_420px] lg:p-14">
             <div className="absolute -right-16 -top-20 -z-10 h-80 w-80 rounded-full border border-[#25c990]/15" aria-hidden="true" />
             <div>
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">{content.bonus.eyebrow}</p>
-              <h2 id="zahn-bonus-heading" className="mt-5 max-w-[16ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] [text-wrap:balance] sm:text-4xl lg:text-5xl">
+              <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#5ee0b1]">{content.bonus.eyebrow}</p>
+              <h2 id="zahn-bonus-heading" className="mt-4 max-w-[16ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] [text-wrap:balance] sm:text-4xl md:mt-5 lg:text-5xl">
                 {content.bonus.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{content.bonus.text}</p>
+              <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-200 sm:leading-8 md:mt-5">{content.bonus.text}</p>
               <p className="mt-3 max-w-2xl font-display text-base font-extrabold text-[#5ee0b1]">{content.bonus.detail}</p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-8">
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
@@ -277,9 +289,9 @@ const ZahnPage = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto min-h-[25rem] w-full max-w-[26rem] overflow-hidden rounded-[2.25rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-6 text-[#07111f] shadow-2xl sm:p-7">
+            <div className="relative mx-auto w-full max-w-[26rem] overflow-hidden rounded-[1.75rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-5 text-[#07111f] shadow-2xl sm:p-7 md:min-h-[25rem] md:rounded-[2.25rem]">
               <span className="absolute left-1/2 top-0 h-4 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d4a0] bg-white/80" aria-hidden="true" />
-              <p className="relative z-10 max-w-[14rem] font-display text-xs font-extrabold uppercase tracking-[0.13em] text-[#77570c]">
+              <p className="relative z-10 max-w-[14rem] font-display text-sm font-extrabold uppercase tracking-[0.13em] text-[#77570c] md:text-xs">
                 {content.bonus.stamp}
               </p>
               <h3 className="relative z-10 mt-4 max-w-[10ch] font-friendly text-3xl font-bold leading-[0.98] tracking-[-0.035em] text-[#103c30] sm:text-4xl">
@@ -291,16 +303,16 @@ const ZahnPage = () => {
                 aria-hidden="true"
                 width="512"
                 height="512"
-                className="absolute -right-8 top-4 w-[58%] max-w-[15.5rem] object-contain drop-shadow-[0_18px_22px_rgba(66,48,15,0.18)]"
+                className="absolute -right-6 top-3 w-[42%] max-w-[15.5rem] object-contain drop-shadow-[0_18px_22px_rgba(66,48,15,0.18)] sm:-right-8 sm:top-4 sm:w-[58%]"
               />
 
-              <strong className="relative z-10 mt-16 block font-display text-[3.35rem] font-extrabold leading-none tracking-[-0.065em] text-[#087654] sm:mt-20 sm:text-[4.1rem]">
+              <strong className="relative z-10 mt-8 block font-display text-[3.35rem] font-extrabold leading-none tracking-[-0.065em] text-[#087654] sm:mt-20 sm:text-[4.1rem]">
                 {content.bonus.amount}
               </strong>
               <span className="relative z-10 mt-3 block max-w-[19rem] font-display text-base font-extrabold leading-6 text-[#5c4510]">
                 {content.bonus.stampLabel}
               </span>
-              <p className="relative z-10 mt-5 border-t border-[#d9c07f] pt-4 text-sm font-semibold leading-6 text-[#5f543f] hyphens-auto [hyphenate-limit-chars:10_4_4]">
+              <p className="relative z-10 mt-4 border-t border-[#d9c07f] pt-3 text-sm font-semibold leading-6 text-[#5f543f] hyphens-auto [hyphenate-limit-chars:10_4_4] md:mt-5 md:pt-4">
                 {content.bonus.condition}
               </p>
             </div>
@@ -309,6 +321,7 @@ const ZahnPage = () => {
 
         <CompactBonusFeature
           className="bg-[#f8faf9]"
+          mobileSwipe
           calculatorProps={{
             tarifTypes: 'Zahn',
             defaultMonatsbeitrag: 10,
@@ -328,69 +341,82 @@ const ZahnPage = () => {
 
         {/* Brücken-Strecke zur IKK classic nach dem Bonusrechner, wie auf
             /ambulant (Frank 29.09.2026: auf allen drei Produktseiten zurück). */}
-        <AmbulantIKKWechsel variant="zahn" />
+        <AmbulantIKKWechsel variant="zahn" mobileSwipe />
 
-        <section className="bg-white px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
-          <div className="healio-container grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">
-            <div>
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">{content.process.eyebrow}</p>
+        <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
+          <div className="healio-container grid gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">
+            <div className="min-w-0">
+              <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#087654]">{content.process.eyebrow}</p>
               <h2 id="zahn-process-heading" className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
                 {content.process.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{content.process.text}</p>
+              <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.process.text}</p>
 
-              <ol className="relative mt-10 grid gap-8 before:absolute before:bottom-5 before:left-[1.35rem] before:top-5 before:w-px before:bg-[#b7dfd1]">
+              {/* Experiment 05.10.2026: die drei Schritte sind eine Reihenfolge und
+                  wischen mobil als Karten nebeneinander; ab md bleibt die
+                  senkrechte Linie mit den Nummern wie bisher. */}
+              <MobileSwipeRow
+                as="ol"
+                label={content.process.title}
+                className="mt-6 md:mt-10"
+                desktopClassName="-mx-8 scroll-pl-8 px-8 sm:-mx-10 sm:scroll-pl-10 sm:px-10 md:mx-0 md:px-0 md:grid md:gap-8 md:before:absolute md:before:bottom-5 md:before:left-[1.35rem] md:before:top-5 md:before:w-px md:before:bg-[#b7dfd1]"
+                mobileItemWidth="w-[78vw] max-w-[22rem]"
+                bleed={false}
+              >
                 {content.process.steps.map((step, index) => (
-                  <li key={step.title} className="relative grid grid-cols-[3.25rem_1fr] gap-4">
-                    <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border-4 border-white bg-[#07111f] font-display text-xs font-extrabold text-[#5ee0b1] shadow-[0_8px_20px_rgba(7,17,31,0.14)]">0{index + 1}</span>
+                  <div
+                    key={step.title}
+                    className="relative grid h-full grid-cols-[3.25rem_1fr] gap-4 rounded-2xl border border-[#dfe8e3] bg-[#f8faf9] p-4 md:h-auto md:rounded-none md:border-0 md:bg-transparent md:p-0"
+                  >
+                    <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border-4 border-white bg-[#07111f] font-display text-sm font-extrabold text-[#5ee0b1] shadow-[0_8px_20px_rgba(7,17,31,0.14)] md:text-xs">0{index + 1}</span>
                     <div className="pt-1">
                       <h3 className="font-display text-lg font-extrabold tracking-[-0.02em]">{step.title}</h3>
-                      <p className="mt-1 text-base leading-7 text-slate-600">{step.text}</p>
+                      <p className="mt-1 text-base leading-6 text-slate-600 md:leading-7">{step.text}</p>
                     </div>
-                  </li>
+                  </div>
                 ))}
-              </ol>
+              </MobileSwipeRow>
             </div>
 
-            <aside className="self-start rounded-[2rem] border border-[#b6e8d5] bg-[#effbf6] p-7 sm:p-9">
+            <aside className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 self-start rounded-[1.75rem] border border-[#b6e8d5] bg-[#effbf6] p-5 sm:p-9 md:block md:rounded-[2rem]">
               <FriendlyIcon kind="advisor" tone="lavender" size="lg" className="-rotate-2" />
-              <h3 className="mt-7 font-display text-2xl font-extrabold leading-tight tracking-[-0.03em]">{content.process.trustTitle}</h3>
-              <p className="mt-4 leading-7 text-slate-600">{content.process.trustText}</p>
+              <h3 className="font-display text-xl font-extrabold leading-tight tracking-[-0.03em] md:mt-7 md:text-2xl md:leading-tight">{content.process.trustTitle}</h3>
+              <p className="col-span-2 mt-4 leading-6 text-slate-600 sm:leading-7">{content.process.trustText}</p>
 
               {/* Nur das Siegel des Leistungswegs UKV ZahnPRIVAT. Das Warentest-Siegel
                   des Leistungstarifs der Bayerischen steht hier nicht mehr, weil die
                   Bayerische seit 05.10.2026 nur noch für den Sofortschutz-Weg
                   angeboten wird. */}
-              <div className="mt-8 grid min-h-28 place-items-center rounded-2xl bg-white p-3">
+              <div className="col-span-2 mt-5 grid min-h-24 place-items-center rounded-2xl bg-white p-3 md:mt-8 md:min-h-28">
                 <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke und Bornberg Auszeichnung für UKV ZahnPRIVAT 100, 2025" className="max-h-20 w-auto object-contain" />
               </div>
-              <p className="mt-4 text-sm leading-6 text-slate-600">{content.process.sealNote}</p>
+              <p className="col-span-2 mt-3 text-sm leading-6 text-slate-600 md:mt-4">{content.process.sealNote}</p>
             </aside>
           </div>
         </section>
 
         <SalesAiAssist className="bg-white" />
 
-        <section className="bg-[#f4faf7] px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
+        <section className="bg-[#f4faf7] px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
           <div className="healio-container">
             <div className="flex max-w-4xl items-start gap-5 sm:items-center">
               <FriendlyIcon kind="thinking" tone="mint" size="md" className="hidden -rotate-3 sm:inline-grid" />
               <div>
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#087654]">{content.faq.eyebrow}</p>
+              <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#087654]">{content.faq.eyebrow}</p>
               <h2 id="zahn-faq-heading" className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
                 {content.faq.title}
               </h2>
               </div>
             </div>
 
-            <div className="mt-12 grid border-b border-slate-200 lg:grid-cols-2 lg:gap-x-12">
+            <div className="mt-6 grid border-b border-slate-200 md:mt-12 lg:grid-cols-2 lg:gap-x-12">
               {content.faq.items.map((item) => (
                 <details key={item.q} className="group border-t border-slate-200 py-1">
-                  <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 font-display text-base font-extrabold text-[#07111f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] sm:text-lg [&::-webkit-details-marker]:hidden">
+                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-display text-base font-extrabold text-[#07111f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] sm:text-lg md:min-h-16 md:gap-5 md:py-4 [&::-webkit-details-marker]:hidden">
                     {item.q}
                     <ChevronDown className="h-5 w-5 flex-none text-[#087654] transition-transform group-open:rotate-180" aria-hidden="true" />
                   </summary>
-                  <div className="max-w-3xl pb-6 pr-8 text-base leading-7 text-slate-600 sm:text-[1.0625rem]">
+                  <div className="max-w-3xl pb-4 pr-2 text-base leading-7 text-slate-600 sm:pr-8 md:pb-6 sm:text-[1.0625rem]">
                     <p>{item.a}</p>
                   </div>
                 </details>
@@ -398,18 +424,18 @@ const ZahnPage = () => {
             </div>
           </div>
 
-          <div className="healio-container mt-16">
-            <div className="relative isolate overflow-hidden rounded-[2.5rem] bg-[#07111f] p-7 text-white sm:p-10 lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-14">
+          <div className="healio-container mt-10 md:mt-16">
+            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#07111f] p-5 text-white sm:p-10 md:rounded-[2.5rem] lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-14">
               <div className="absolute -right-20 -top-20 -z-10 h-72 w-72 rounded-full bg-[#25c990]/10" aria-hidden="true" />
               <div>
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">{content.faq.finalEyebrow}</p>
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#5ee0b1]">{content.faq.finalEyebrow}</p>
                 <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{content.faq.finalTitle}</h2>
-                <p className="mt-4 max-w-2xl leading-7 text-slate-300">{content.faq.finalText}</p>
+                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{content.faq.finalText}</p>
               </div>
               <a
                 href="#zahn-check"
                 onClick={(event) => scrollToCheck(event, reduceMotion)}
-                className="mt-8 inline-flex min-h-14 w-full flex-none items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] lg:mt-0 lg:w-auto"
+                className="mt-6 inline-flex min-h-14 w-full flex-none items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] md:mt-8 lg:mt-0 lg:w-auto"
               >
                 {content.faq.finalCta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
               </a>

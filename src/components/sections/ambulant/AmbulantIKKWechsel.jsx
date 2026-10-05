@@ -6,6 +6,7 @@ import { ChevronDown, Shield, ArrowRight, CheckCircle, HelpCircle } from 'lucide
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { IKK_LINK, trackIkkClick } from '@/lib/sdk-url';
 
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
@@ -40,7 +41,17 @@ const timelineIcons = {
   bonus: { kind: 'bonus', tone: 'butter' },
 };
 
-const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
+// Kleiner Helfer für Klassenlisten mit optionalen Teilen.
+const cx = (...parts) => parts.filter(Boolean).join(' ');
+
+
+// Kartenbreite der Wischreihen: Prozent der Reihe statt vw, weil die Reihe hier in einer
+// Karte sitzt (356 px bei 390 px Bildschirm); mit 78vw blieben nur 24 px Nachbarkarte sichtbar.
+
+// mobileSwipe (Experiment 05.10.2026, nur Zahnseite): Unterhalb von md (768 px)
+// stehen gleichartige Karten in Wischreihen und die Abstände sind kompakter.
+// Ab md bleibt alles wie zuvor; ohne die Prop ändert sich nirgends etwas.
+const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
   const { t } = useTranslation('ambulant');
   const [openIndex, setOpenIndex] = useState(null);
   const [mobileTimelineOpen, setMobileTimelineOpen] = useState(false);
@@ -54,13 +65,86 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
       : t(`ikkWechsel.timelineSteps.${key}.${field}`)
   );
 
+  const reassuranceCards = reassuranceKeys.map((key) => (
+    <div key={key} className={cx('flex gap-3 rounded-2xl border border-white/90 bg-white/65 p-4 shadow-[0_10px_28px_rgba(74,58,110,0.07)] backdrop-blur-sm', mobileSwipe && 'h-full')}>
+      <span className="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[#ece6ff] text-violet-700 ring-1 ring-[#d5caef]">
+        <CheckCircle className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <div>
+        <h4 className="mb-1 font-bold text-[#2e274d]">{t(`ikkWechsel.reassuranceItems.${key}.title`)}</h4>
+        <p className="text-base leading-relaxed text-[#5d5b76]">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
+      </div>
+    </div>
+  ));
+
+  const extraCards = extraDefs.map((extra) => (
+    <div
+      key={extra.key}
+      className={cx('rounded-xl border border-gray-100 bg-emerald-50/30 p-4 md:p-5', mobileSwipe && 'h-full')}
+    >
+      <div className="mb-2 flex items-center gap-3">
+        <FriendlyIcon kind={extra.kind} tone={extra.tone} size="sm" />
+        <h4 className="font-bold text-gray-900">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
+      </div>
+      <p className="text-base leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
+    </div>
+  ));
+
+  const switchStepCards = switchStepKeys.map((key, idx) => {
+    const icon = switchStepIcons[idx];
+    return (
+      <div
+        key={idx}
+        className={cx(
+          'text-center',
+          mobileSwipe && 'h-full rounded-xl border border-emerald-100 bg-emerald-50/30 p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0'
+        )}
+      >
+        <FriendlyIcon
+          kind={icon.kind}
+          tone={icon.tone}
+          size="md"
+          className="mx-auto mb-4"
+        />
+        <div className="text-sm font-bold text-emerald-600 mb-1">
+          {t('ikkWechsel.stepLabel', { number: idx + 1 })}
+        </div>
+        <h4 className="font-bold text-gray-900 mb-2">{t(`ikkWechsel.switchSteps.${key}.title`)}</h4>
+        <p className="text-gray-600 text-base leading-relaxed">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
+      </div>
+    );
+  });
+
+  const timelineCards = timelineStepKeys.map((key) => {
+    const icon = key === 'product' ? timelineIcons[activeVariant] : timelineIcons[key];
+    return (
+      <div
+        key={key}
+        className={cx('bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-4 md:p-5 shadow-sm', mobileSwipe && 'h-full')}
+      >
+        <div className="flex items-center gap-3 mb-3 md:mb-4 lg:flex-col lg:items-start">
+          <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" />
+          <div className={cx('font-extrabold uppercase tracking-[0.16em] text-emerald-700', mobileSwipe ? 'text-sm md:text-xs' : 'text-xs')}>
+            {timelineText(key, 'label')}
+          </div>
+        </div>
+        <h4 className="font-bold text-gray-900 text-base md:text-lg mb-2">
+          {timelineText(key, 'title')}
+        </h4>
+        <p className="text-base text-gray-600 leading-relaxed">
+          {timelineText(key, 'desc')}
+        </p>
+      </div>
+    );
+  });
+
   return (
-    <section id="ikk-wechsel" className="scroll-mt-24 py-12 md:py-20 bg-gradient-to-b from-white to-emerald-50/30">
+    <section id="ikk-wechsel" className={cx('scroll-mt-24', mobileSwipe ? 'py-8' : 'py-12', 'md:py-20 bg-gradient-to-b from-white to-emerald-50/30')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-8 md:mb-10">
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+        <div className={cx('text-center md:mb-10', mobileSwipe ? 'mb-6' : 'mb-8')}>
+          <div className={cx('inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full', mobileSwipe ? 'mb-4 md:mb-6' : 'mb-6')}>
             <Shield className="w-4 h-4" />
             {t('ikkWechsel.badge')}
           </div>
@@ -71,7 +155,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
             <HighlightText text={t('ikkWechsel.subtitle')} />
           </p>
 
-          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className={cx('flex flex-col justify-center gap-3 sm:flex-row', mobileSwipe ? 'mt-6 md:mt-7' : 'mt-7')}>
             <a
               href={IKK_LINK}
               target="_blank"
@@ -99,12 +183,12 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
 
           {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
               03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile. */}
-          <IkkKassenSiegel className="mx-auto mt-8" />
+          <IkkKassenSiegel className={cx('mx-auto', mobileSwipe ? 'mt-6 md:mt-8 [&>p:last-child]:text-sm' : 'mt-8')} />
         </div>
 
         {/* Die Brücken-Szene steht wieder offen sichtbar (Frank 29.09.2026);
             nur die weiteren Details bleiben aufklappbar. */}
-        <div className="relative mb-12 overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] p-4 shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8">
+        <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? cx('p-2 md:mb-12', detailsOpen ? 'mb-6' : 'mb-0') : 'mb-12 p-4')}>
           <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
             <IkkSwitch3DScene variant={activeVariant} />
           </Suspense>
@@ -119,17 +203,17 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 overflow-hidden rounded-[2rem] border border-[#d8d3ec] bg-[linear-gradient(135deg,#f6f2ff_0%,#fffbe8_48%,#edf9f4_100%)] shadow-[0_24px_70px_rgba(49,42,84,0.10)] md:rounded-[2.75rem]"
+          className={cx('overflow-hidden rounded-[2rem] border border-[#d8d3ec] bg-[linear-gradient(135deg,#f6f2ff_0%,#fffbe8_48%,#edf9f4_100%)] shadow-[0_24px_70px_rgba(49,42,84,0.10)] md:rounded-[2.75rem]', mobileSwipe ? 'mb-8 md:mb-12' : 'mb-12')}
         >
           <div className="grid items-center gap-4 lg:grid-cols-[0.78fr_1.22fr]">
-            <div className="p-7 sm:p-10 lg:py-12 lg:pl-12 lg:pr-4">
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-violet-700">
+            <div className={cx(mobileSwipe ? 'p-5' : 'p-7', 'sm:p-10 lg:py-12 lg:pl-12 lg:pr-4')}>
+              <p className={cx('font-display font-extrabold uppercase tracking-[0.2em] text-violet-700', mobileSwipe ? 'text-sm md:text-xs' : 'text-xs')}>
                 {t('ikkWechsel.advantagesEyebrow')}
               </p>
               <h3 className="mt-4 max-w-[14ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#1b1637] sm:text-4xl">
                 {t('ikkWechsel.advantagesTitle')}
               </h3>
-              <ul className="mt-7 space-y-4">
+              <ul className={cx(mobileSwipe ? 'mt-5 space-y-3 md:mt-7 md:space-y-4' : 'mt-7 space-y-4')}>
                 {t('ikkWechsel.advantagesItems', { returnObjects: true }).map((item) => (
                   <li key={item} className="flex items-center gap-3 text-base font-semibold leading-7 text-[#4d5274]">
                     <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/80 text-violet-700 shadow-sm ring-1 ring-violet-200">
@@ -141,7 +225,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               </ul>
             </div>
 
-            <div className="relative min-h-[280px] self-stretch sm:min-h-[360px] lg:min-h-[430px]">
+            <div className={cx('relative self-stretch sm:min-h-[360px] lg:min-h-[430px]', mobileSwipe ? 'min-h-[220px]' : 'min-h-[280px]')}>
               <img
                 src="/images/healio-vorteile-illustration-v1.webp"
                 alt={t('ikkWechsel.advantagesImageAlt')}
@@ -160,12 +244,12 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative mb-12 overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] p-4 text-[#211a3e] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-10"
+          className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] p-4 text-[#211a3e] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-10', mobileSwipe ? 'mb-8 md:mb-12' : 'mb-12')}
         >
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-200/30 to-transparent" />
           <div className="relative z-10 space-y-8">
 
-            <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
+            <div className={cx('grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 items-start', mobileSwipe ? 'gap-6 md:gap-8' : 'gap-8')}>
               <div>
                 <p className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-violet-700">
                   {t('ikkWechsel.reassuranceKicker')}
@@ -173,7 +257,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                 <h3 className="mb-4 text-2xl font-extrabold leading-tight text-[#211a3e] md:text-4xl">
                   {t('ikkWechsel.reassuranceTitle')}
                 </h3>
-                <p className="mb-6 text-lg leading-relaxed text-[#5d5b76]">
+                <p className={cx('leading-relaxed text-[#5d5b76]', mobileSwipe ? 'mb-5 text-base md:mb-6 md:text-lg md:leading-relaxed' : 'mb-6 text-lg')}>
                   {t('ikkWechsel.reassuranceText')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -196,19 +280,21 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
                 </div>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                {reassuranceKeys.map((key) => (
-                  <div key={key} className="flex gap-3 rounded-2xl border border-white/90 bg-white/65 p-4 shadow-[0_10px_28px_rgba(74,58,110,0.07)] backdrop-blur-sm">
-                    <span className="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[#ece6ff] text-violet-700 ring-1 ring-[#d5caef]">
-                      <CheckCircle className="h-4 w-4" aria-hidden="true" />
-                    </span>
-                    <div>
-                      <h4 className="mb-1 font-bold text-[#2e274d]">{t(`ikkWechsel.reassuranceItems.${key}.title`)}</h4>
-                      <p className="text-base leading-relaxed text-[#5d5b76]">{t(`ikkWechsel.reassuranceItems.${key}.desc`)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {mobileSwipe ? (
+                <MobileSwipeRow
+                  label={t('ikkWechsel.reassuranceTitle')}
+                  // min-w-0: Die Reihe ist hier ein Rasterkind; ohne das weitet ihre Kartenbreite die ganze Spalte.
+                  className="min-w-0"
+                  desktopClassName="md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-1"
+                  mobileItemWidth="w-[85%] max-w-[21rem]"
+                >
+                  {reassuranceCards}
+                </MobileSwipeRow>
+              ) : (
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                  {reassuranceCards}
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
@@ -218,16 +304,16 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-lg border-2 border-emerald-200 p-8 mb-12"
+          className={cx('bg-white rounded-2xl shadow-lg border-2 border-emerald-200', mobileSwipe ? 'p-5 mb-8 md:p-8 md:mb-12' : 'p-8 mb-12')}
         >
-          <div className="flex flex-col md:flex-row items-center gap-6 mb-6">
+          <div className={cx('flex flex-col md:flex-row items-center', mobileSwipe ? 'gap-2 mb-4 md:gap-6 md:mb-6' : 'gap-6 mb-6')}>
             <div className="text-5xl md:text-6xl font-black text-emerald-600 flex-shrink-0">{t('ikkWechsel.identicalPercent')}</div>
             <div>
               <p className="text-xl font-bold text-gray-900">{t('ikkWechsel.identicalTitle')}</p>
               <p className="text-gray-500">{t('ikkWechsel.identicalSubtitle')}</p>
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className={cx('grid sm:grid-cols-2 lg:grid-cols-3', mobileSwipe ? 'gap-2.5 md:gap-3' : 'gap-3')}>
             {Array.isArray(identicalItems) && identicalItems.map((item, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
@@ -235,14 +321,14 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
               </div>
             ))}
           </div>
-          <p className="text-gray-600 text-base leading-relaxed mt-6">
+          <p className={cx('text-gray-600 text-base leading-relaxed', mobileSwipe ? 'mt-4 md:mt-6' : 'mt-6')}>
             {t('ikkWechsel.identicalNote')}
           </p>
         </motion.div>
 
         {/* IKK Extras: auf allen Viewports eingeklappt (Frank 06.08.),
             der Rechner belegt den Bonus bereits konkret in Euro */}
-        <details className="group mb-12 rounded-2xl border border-emerald-100 bg-white shadow-lg">
+        <details className={cx('group rounded-2xl border border-emerald-100 bg-white shadow-lg', mobileSwipe ? 'mb-8 md:mb-12' : 'mb-12')}>
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 md:px-6 md:py-6 [&::-webkit-details-marker]:hidden">
             <div>
               <h3 className="text-xl md:text-2xl font-bold text-gray-900">
@@ -254,20 +340,21 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
             </div>
             <ChevronDown className="h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform group-open:rotate-180" />
           </summary>
-          <div className="grid gap-3 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:px-6 md:pb-6">
-            {extraDefs.map((extra) => (
-              <div
-                key={extra.key}
-                className="rounded-xl border border-gray-100 bg-emerald-50/30 p-4 md:p-5"
+          {mobileSwipe ? (
+            <div className="px-4 pb-4 sm:px-6 md:pb-6">
+              <MobileSwipeRow
+                label={t('ikkWechsel.extrasTitle')}
+                                desktopClassName="md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3"
+                mobileItemWidth="w-[85%] max-w-[21rem]"
               >
-                <div className="mb-2 flex items-center gap-3">
-                  <FriendlyIcon kind={extra.kind} tone={extra.tone} size="sm" />
-                  <h4 className="font-bold text-gray-900">{t(`ikkWechsel.extras.${extra.key}.title`)}</h4>
-                </div>
-                <p className="text-base leading-relaxed text-gray-600">{t(`ikkWechsel.extras.${extra.key}.desc`)}</p>
-              </div>
-            ))}
-          </div>
+                {extraCards}
+              </MobileSwipeRow>
+            </div>
+          ) : (
+            <div className="grid gap-3 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:px-6 md:pb-6">
+              {extraCards}
+            </div>
+          )}
         </details>
 
         {/* So funktioniert der Wechsel */}
@@ -275,31 +362,25 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-12"
+          className={cx('bg-white rounded-2xl shadow-lg border border-gray-100', mobileSwipe ? 'p-4 mb-8 sm:p-6 md:p-8 md:mb-12' : 'p-8 mb-12')}
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+          <h3 className={cx('text-2xl font-bold text-gray-900 text-center', mobileSwipe ? 'mb-5 md:mb-8' : 'mb-8')}>
             {t('ikkWechsel.switchTitle')}
           </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {switchStepKeys.map((key, idx) => {
-              const icon = switchStepIcons[idx];
-              return (
-                <div key={idx} className="text-center">
-                  <FriendlyIcon
-                    kind={icon.kind}
-                    tone={icon.tone}
-                    size="md"
-                    className="mx-auto mb-4"
-                  />
-                  <div className="text-sm font-bold text-emerald-600 mb-1">
-                    {t('ikkWechsel.stepLabel', { number: idx + 1 })}
-                  </div>
-                  <h4 className="font-bold text-gray-900 mb-2">{t(`ikkWechsel.switchSteps.${key}.title`)}</h4>
-                  <p className="text-gray-600 text-base leading-relaxed">{t(`ikkWechsel.switchSteps.${key}.desc`)}</p>
-                </div>
-              );
-            })}
-          </div>
+          {mobileSwipe ? (
+            <MobileSwipeRow
+              as="ol"
+              label={t('ikkWechsel.switchTitle')}
+                            desktopClassName="md:grid md:grid-cols-3 md:gap-6"
+              mobileItemWidth="w-[85%] max-w-[21rem]"
+            >
+              {switchStepCards}
+            </MobileSwipeRow>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-6">
+              {switchStepCards}
+            </div>
+          )}
         </motion.div>
 
         {/* Konkrete Wechselstrecke */}
@@ -308,7 +389,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           id="wechselstrecke"
-          className="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 md:p-8 mb-12 overflow-hidden"
+          className={cx('bg-white rounded-2xl shadow-lg border border-emerald-100 md:p-8 overflow-hidden', mobileSwipe ? 'p-4 mb-8 sm:p-6 md:mb-12' : 'p-5 mb-12')}
         >
           <button
             type="button"
@@ -338,35 +419,25 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
           <div className={`${mobileTimelineOpen ? 'block' : 'hidden'} md:block`}>
             <div className="relative mt-6 md:mt-0">
               <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
-              <div className="grid gap-4 lg:grid-cols-4 lg:gap-5 relative z-10">
-                {timelineStepKeys.map((key, idx) => {
-                  const icon = key === 'product' ? timelineIcons[activeVariant] : timelineIcons[key];
-                  return (
-                    <div
-                      key={key}
-                      className="bg-gradient-to-b from-white to-emerald-50/60 border border-emerald-100 rounded-xl p-4 md:p-5 shadow-sm"
-                    >
-                      <div className="flex items-center gap-3 mb-3 md:mb-4 lg:flex-col lg:items-start">
-                        <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" />
-                        <div className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">
-                          {timelineText(key, 'label')}
-                        </div>
-                      </div>
-                      <h4 className="font-bold text-gray-900 text-base md:text-lg mb-2">
-                        {timelineText(key, 'title')}
-                      </h4>
-                      <p className="text-base text-gray-600 leading-relaxed">
-                        {timelineText(key, 'desc')}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
+              {mobileSwipe ? (
+                <MobileSwipeRow
+                  as="ol"
+                  label={t('ikkWechsel.timelineTitle')}
+                                    desktopClassName="md:grid md:gap-4 lg:grid-cols-4 lg:gap-5 z-10"
+                  mobileItemWidth="w-[85%] max-w-[21rem]"
+                >
+                  {timelineCards}
+                </MobileSwipeRow>
+              ) : (
+                <div className="grid gap-4 lg:grid-cols-4 lg:gap-5 relative z-10">
+                  {timelineCards}
+                </div>
+              )}
             </div>
 
             <div className="mt-6 md:mt-8 grid md:grid-cols-[1.4fr_0.8fr] gap-4 md:gap-5 items-stretch">
               <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 md:p-6">
-                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700 mb-2">
+                <p className={cx('font-extrabold uppercase tracking-[0.16em] text-emerald-700 mb-2', mobileSwipe ? 'text-sm md:text-xs' : 'text-xs')}>
                   {t('ikkWechsel.timelineFinanceLabel')}
                 </p>
                 <h4 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
@@ -394,7 +465,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant' }) => {
 
         {/* Häufige Bedenken */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+          <h3 className={cx('text-2xl font-bold text-gray-900 text-center', mobileSwipe ? 'mb-5 md:mb-8' : 'mb-8')}>
             {t('ikkWechsel.fearsTitle')}
           </h3>
           <div className="space-y-3 max-w-3xl mx-auto">

@@ -149,18 +149,35 @@ const DentalHighlightCards = () => {
     setActiveIndex(Math.max(0, Math.min(cards.length - 1, nextIndex)));
   }, [cards.length]);
 
+  // Tastaturfokus auf eine halb verdeckte Karte: nur die Reihe weiterschieben,
+  // damit die fokussierte Karte ganz zu sehen ist (wie in MobileSwipeRow).
+  const revealFocusedCard = useCallback((event) => {
+    const track = trackRef.current;
+    const item = event.target.closest?.('[data-highlight-card]');
+    if (!track || !item || track.scrollWidth <= track.clientWidth + 1) return;
+    const padding = parseFloat(getComputedStyle(track).paddingLeft || '0');
+    const visibleLeft = track.scrollLeft + padding;
+    const visibleRight = track.scrollLeft + track.clientWidth;
+    if (item.offsetLeft >= visibleLeft && item.offsetLeft + item.offsetWidth <= visibleRight) return;
+    track.scrollTo({ left: item.offsetLeft - padding, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }, [reduceMotion]);
+
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return undefined;
     track.addEventListener('scroll', updateActiveIndex, { passive: true });
-    return () => track.removeEventListener('scroll', updateActiveIndex);
-  }, [updateActiveIndex]);
+    track.addEventListener('focusin', revealFocusedCard);
+    return () => {
+      track.removeEventListener('scroll', updateActiveIndex);
+      track.removeEventListener('focusin', revealFocusedCard);
+    };
+  }, [updateActiveIndex, revealFocusedCard]);
 
   const scrollToCard = (index) => {
     const track = trackRef.current;
     const target = track?.querySelectorAll('[data-highlight-card]')[index];
     if (!track || !target) return;
-    track.scrollTo({ left: target.offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: reduceMotion ? 'auto' : 'smooth' });
+    track.scrollTo({ left: target.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   const handleOpenChange = (nextOpen) => {

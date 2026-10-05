@@ -26,18 +26,18 @@ const TIMES = [
 
 const INITIAL = { vorname: '', telefon: '', email: '', thema: '', zeit: 'egal', nachricht: '' };
 
-const inputClass = 'block min-h-14 w-full rounded-2xl border border-slate-300 bg-white px-4 text-base text-[#07111f] placeholder:text-slate-400 transition focus:border-home-mint focus:outline-none focus:ring-4 focus:ring-home-mint/20 aria-[invalid=true]:border-[#c2412d]';
+const inputClass = 'block min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 text-base text-[#07111f] placeholder:text-slate-400 transition focus:border-home-mint focus:outline-none focus:ring-4 focus:ring-home-mint/20 aria-[invalid=true]:border-[#c2412d] md:min-h-14';
 
 const ChoiceGroup = ({ legend, name, options, value, onChange }) => (
   <fieldset>
     <legend className="text-base font-bold text-[#07111f]">{legend}</legend>
-    <div className="mt-3 flex flex-wrap gap-2">
+    <div className="mt-2 flex flex-wrap gap-2 md:mt-3">
       {options.map((option) => {
         const checked = value === option.value;
         return (
           <label
             key={option.value}
-            className={`inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-full border px-4 text-base font-semibold transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-home-mint has-[:focus-visible]:ring-offset-2 ${checked ? 'border-home-midnight bg-home-midnight text-white' : 'border-slate-300 bg-white text-[#07111f] hover:border-[#07111f]'}`}
+            className={`inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-3 text-base font-semibold transition md:min-h-12 md:px-4 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-home-mint has-[:focus-visible]:ring-offset-2 ${checked ? 'border-home-midnight bg-home-midnight text-white' : 'border-slate-300 bg-white text-[#07111f] hover:border-[#07111f]'}`}
           >
             <input
               type="radio"
@@ -104,17 +104,17 @@ const DentalCallbackForm = () => {
   };
 
   return (
-    <section id="zahn-kontakt" className="scroll-mt-28 bg-white px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-kontakt-heading">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+    <section id="zahn-kontakt" className="scroll-mt-28 bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-kontakt-heading">
+      <div className="mx-auto grid max-w-7xl gap-6 md:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
         <div>
           <p className="font-display text-base font-bold text-[#0b7a5a]">Rückruf</p>
-          <h2 id="zahn-kontakt-heading" className="mt-3 max-w-[14ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#07111f] [text-wrap:balance] sm:text-4xl lg:text-5xl">
+          <h2 id="zahn-kontakt-heading" className="mt-3 max-w-none font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#07111f] [text-wrap:balance] sm:text-4xl md:max-w-[14ch] lg:text-5xl">
             Lieber kurz sprechen?
           </h2>
-          <p className="mt-5 max-w-md text-lg leading-8 text-slate-600">
+          <p className="mt-3 max-w-md text-base leading-7 text-slate-600 md:mt-5 md:text-lg md:leading-8">
             Hinterlass deinen Namen und deine Nummer. Wir rufen dich zurück und gehen deine Zahn-Situation in Ruhe mit dir durch.
           </p>
-          <ul className="mt-7 space-y-3">
+          <ul className="mt-5 space-y-2 md:mt-7 md:space-y-3">
             {['Registrierter Versicherungsmakler', 'Deine Angaben nutzen wir nur für den Rückruf', 'Die Entscheidung bleibt bei dir'].map((point) => (
               <li key={point} className="flex items-center gap-3 text-base font-semibold text-[#07111f]">
                 <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e7f8f0] text-[#0b7a5a]" aria-hidden="true">
@@ -126,16 +126,16 @@ const DentalCallbackForm = () => {
           </ul>
           <a
             href={HEALIO_PHONE_TEL}
-            className="home-focus mt-8 inline-flex items-center gap-3 rounded-full border border-slate-300 px-5 py-3 text-base font-bold text-[#07111f] transition hover:border-[#07111f]"
+            className="home-focus mt-5 inline-flex items-center gap-3 md:mt-8 rounded-full border border-slate-300 px-5 py-3 text-base font-bold text-[#07111f] transition hover:border-[#07111f]"
           >
             <Phone className="h-5 w-5 text-[#0b7a5a]" aria-hidden="true" />
             <span>Oder direkt mit Nita sprechen: <span className="whitespace-nowrap">{HEALIO_PHONE_DISPLAY}</span></span>
           </a>
         </div>
 
-        <div className="rounded-[1.75rem] border border-slate-200 bg-[#f8faf9] p-6 sm:p-8">
+        <div className="rounded-[1.75rem] border border-slate-200 bg-[#f8faf9] p-4 sm:p-8">
           {status === 'sent' ? (
-            <div role="status" className="flex min-h-[22rem] flex-col items-start justify-center">
+            <div role="status" className="flex min-h-[16rem] flex-col items-start justify-center md:min-h-[22rem]">
               <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-home-mint text-home-midnight" aria-hidden="true">
                 <Check className="h-7 w-7" />
               </span>
@@ -145,9 +145,9 @@ const DentalCallbackForm = () => {
               </p>
             </div>
           ) : (
-            <form method="post" onSubmit={handleSubmit} noValidate className="space-y-6">
+            <form method="post" onSubmit={handleSubmit} noValidate className="space-y-4 md:space-y-6">
               <FormHoneypot />
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 md:gap-5">
                 <div>
                   <label htmlFor="zahn-rueckruf-vorname" className="text-base font-bold text-[#07111f]">Vorname</label>
                   <input
@@ -211,7 +211,7 @@ const DentalCallbackForm = () => {
                   rows={3}
                   value={form.nachricht}
                   onChange={(event) => setField('nachricht', event.target.value)}
-                  className={`mt-2 py-3 ${inputClass}`}
+                  className={`mt-2 h-20 py-3 md:h-auto ${inputClass}`}
                 />
               </div>
 

@@ -14,6 +14,8 @@ import { useReducedMotion } from 'framer-motion';
 // - Jedes Kind wird ein <li>; die Kinder selbst bleiben, wie sie sind.
 // - bleed (Standard true) zieht die Reihe mobil bis an den Bildschirmrand und
 //   setzt voraus, dass der Elternbereich px-4 sm:px-6 hat. Sonst bleed={false}.
+// - Die Punkte sind 44 px hohe Tippflächen; Tastaturfokus schiebt die Karte
+//   selbst ins Bild. Nutzer brauchen dafür nichts Eigenes.
 const DEFAULT_ITEM_WIDTH = 'w-[82vw] max-w-[22rem]';
 
 const MobileSwipeRow = ({
@@ -51,19 +53,39 @@ const MobileSwipeRow = ({
     setActiveIndex(nearest);
   }, []);
 
+  // Tastaturfokus auf eine halb verdeckte Karte: nur die Reihe selbst
+  // weiterschieben (track.scrollTo). scrollIntoView würde auch Vorfahren mit
+  // overflow-hidden seitlich verschieben, z. B. den Hero.
+  const revealFocusedItem = useCallback((event) => {
+    const track = trackRef.current;
+    if (!track || track.scrollWidth <= track.clientWidth + 1) return;
+    const item = event.target.closest?.('li');
+    if (!item || item.parentElement !== track) return;
+    const padding = parseFloat(getComputedStyle(track).paddingLeft || '0');
+    const visibleLeft = track.scrollLeft + padding;
+    const visibleRight = track.scrollLeft + track.clientWidth;
+    if (item.offsetLeft >= visibleLeft && item.offsetLeft + item.offsetWidth <= visibleRight) return;
+    track.scrollTo({ left: item.offsetLeft - padding, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }, [reduceMotion]);
+
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return undefined;
     track.addEventListener('scroll', updateActiveIndex, { passive: true });
-    return () => track.removeEventListener('scroll', updateActiveIndex);
-  }, [updateActiveIndex]);
+    track.addEventListener('focusin', revealFocusedItem);
+    return () => {
+      track.removeEventListener('scroll', updateActiveIndex);
+      track.removeEventListener('focusin', revealFocusedItem);
+    };
+  }, [updateActiveIndex, revealFocusedItem]);
 
   const scrollToItem = (index) => {
     const track = trackRef.current;
     const target = track?.querySelectorAll(':scope > li')[index];
     if (!track || !target) return;
     const padding = parseFloat(getComputedStyle(track).paddingLeft || '0');
-    track.scrollTo({ left: target.offsetLeft - track.offsetLeft - padding, behavior: reduceMotion ? 'auto' : 'smooth' });
+    // li und ul sind relative: offsetLeft bezieht sich schon auf die Reihe.
+    track.scrollTo({ left: target.offsetLeft - padding, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   const dotActive = dotsTone === 'dark' ? 'bg-white' : 'bg-[#07111f]';
@@ -87,7 +109,7 @@ const MobileSwipeRow = ({
       </ListTag>
 
       {items.length > 1 ? (
-        <div role="group" className="mt-4 flex items-center gap-2 md:hidden" aria-label={dotsLabel || label}>
+        <div role="group" className="mt-1 flex items-center gap-2 md:hidden" aria-label={dotsLabel || label}>
           {items.map((child, index) => (
             <button
               key={child.key ?? index}
@@ -95,7 +117,7 @@ const MobileSwipeRow = ({
               onClick={() => scrollToItem(index)}
               aria-label={`Karte ${index + 1} von ${items.length}`}
               aria-current={index === activeIndex ? 'true' : undefined}
-              className="flex h-8 min-w-6 items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
+              className="flex h-11 min-w-6 items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
             >
               <span className={`block h-1.5 rounded-full transition-all duration-300 motion-reduce:transition-none ${index === activeIndex ? `w-8 ${dotActive}` : `w-3 ${dotIdle}`}`} />
             </button>
