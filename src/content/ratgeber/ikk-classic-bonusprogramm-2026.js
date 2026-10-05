@@ -1,6 +1,8 @@
 /**
- * Ratgeberartikel 2 und zugleich die IKK-Bonus-Landingpage fuer die
- * Google-Anzeigengruppe G1-A.
+ * Ratgeberartikel 2. Organischer Ratgeber, wird NICHT bezahlt beworben:
+ * Die IKK-Kampagne K4 ist aus und der Artikel ist von der Artikel-Werbung
+ * ausgeschlossen (Frank 03.10.2026: Bonus-Suchende wollen meist keinen
+ * Schutz). Frueher Landingpage der Anzeigengruppe G1-A.
  *
  * Quelle: Healio/Ratgeber/artikel-ratgeber-02-ikk-bonusprogramm-2026.md,
  * Stand 21.09.2026. Die Abschnitte "Belege" und "Offen" der Markdown-Quelle
@@ -20,6 +22,19 @@
  * theoretischer Hoechstwert, "400 bis 700 EUR in der breiten Masse" eine
  * gekennzeichnete Einschaetzung. Keine persoenliche Bonuszahl.
  *
+ * Ausbau 05.10.2026 (Marktanalyse, Semrush DE): Die meisten Suchen zur
+ * IKK classic betreffen das Bonusheft (PDF, Formular, anfordern,
+ * ausdrucken, zusammen rund 1.200 im Monat) neben "ikk classic
+ * bonusprogramm" (1.000) und "bonusprogramm ikk classic" (880). Neuer
+ * Abschnitt "bonusheft-antrag" und vier FAQ dazu. Am Ende des Abschnitts
+ * auf Franks Wunsch ein kurzer Hinweis auf Healios Angebot (Zuschuss traegt
+ * den Beitrag), als Textlink, kein zweiter Button. Belege: KassenBoost-Profil
+ * GKV-Vergleichskampagne/profile/ikk-classic.md (R-04, R-12, R-13, R-17,
+ * R-19) und Bonusseite der IKK classic (kein gedrucktes Bonusheft genannt,
+ * keine Bearbeitungszeit genannt, abgerufen 05.10.2026). Steuer-FAQ auf den
+ * unstrittigen Teil gekuerzt (Profil L-07: Freigrenze 150 EUR ist in der
+ * Quelle widerspruechlich).
+ *
  * Korrektur 05.10.2026: Die Saetze "Einen Maximalbetrag gibt es nicht" bzw.
  * "nennen die Teilnahmebedingungen ausdruecklich nicht" sind gestrichen. Sie
  * lasen sich wie "ohne Obergrenze" (Sperrliste) und hoben das "bis zu 810 /
@@ -30,17 +45,17 @@ export const article = {
   slug: 'ikk-classic-bonusprogramm-2026',
   kind: 'ratgeber',
 
-  metaTitle: 'IKK classic Bonusprogramm 2026: alle Positionen | Healio',
+  metaTitle: 'IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio',
   metaDescription:
-    'IKK classic Bonus 2026: alle Positionen mit Beträgen, Nachweisen und Fristen, plus die Rechnung, wie der dreifache Zuschuss den Beitrag senkt.',
+    'IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.',
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
   updatedAt: '2026-10-05',
   updatedAtLabel: '5. Oktober 2026',
-  readingTimeMinutes: 7,
+  readingTimeMinutes: 8,
 
-  listTitle: 'IKK classic Bonusprogramm 2026: alle Positionen, Nachweise und Fristen',
+  listTitle: 'IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen',
   listTeaser:
     'Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.',
 
@@ -92,6 +107,51 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Beim Antrag entscheidest du dich für genau eine von zwei Auszahlungsarten, den Geldbonus aufs Konto oder den zweckgebundenen Zuschuss in dreifacher Höhe. Beides zusammen geht nicht. Jede Maßnahme muss zwischen dem 01.01.2026 und dem 31.12.2026 stattfinden, der vollständige Antrag muss bis zum 31.03.2027 vorliegen, per App, Onlinefiliale, Post oder persönlich.',
+        },
+      ],
+    },
+    {
+      id: 'bonusheft-antrag',
+      heading: 'IKK classic Bonusheft: Wo bekomme ich den Antrag und wie reiche ich ihn ein?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Ein gedrucktes Bonusheft nennt die IKK classic auf ihrer Bonusseite nicht. Was viele als Bonusheft suchen, ist der Bonusantrag. Den stellst du auf einem von zwei Wegen:',
+        },
+        {
+          type: 'list',
+          items: [
+            {
+              lead: 'In der IKK classic-App.',
+              text: 'Du trägst jede Maßnahme ein und lädst die Nachweise als Foto hoch. Für die Maßnahmen ohne Nachweispflicht genügen dort Praxisname und Datum.',
+            },
+            {
+              lead: 'Mit dem Papierantrag.',
+              text: 'Du reichst ihn persönlich, per Post, per E-Mail oder als Upload in der Onlinefiliale ein. Auf Papier brauchst du für die Maßnahmen ohne Nachweispflicht Stempel und Unterschrift der Praxis.',
+            },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Das Infoblatt und die Teilnahmebedingungen zum Bonusjahr 2026 stellt die IKK classic als PDF auf ihrer ' },
+            { text: 'Bonusseite', href: 'https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm' },
+            { text: ' bereit, dazu ein Merkblatt zum Fotonachweis in der App.' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          text: 'Für Familien gilt: Jedes Familienmitglied stellt einen eigenen Antrag. Familienversicherte Kinder bis 17 Jahre kannst du über deinen eigenen Zugang in der App anlegen, selbst versicherte Kinder brauchen einen eigenen Zugang. Ausgezahlt wird einmal pro Kalenderjahr und nur auf Antrag; eine feste Bearbeitungszeit nennt die IKK classic nicht.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            {
+              text: 'Bevor du den Antrag abschickst, entscheidest du zwischen Geldbonus und Zuschuss. Für genau diesen Moment haben wir bei Healio ein Angebot zusammengestellt: Wählst du den Zuschuss, kann er den Jahresbeitrag einer Zusatzversicherung für Heilpraktiker, Osteopathie, Brille und Vorsorge ganz oder teilweise tragen. Zusammen mit den Leistungen des Tarifs entsteht so ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren. Wie viel dein Bonus beiträgt, hängt von deiner Kasse, deinen Maßnahmen und deinen eigenen Kosten ab; das rechnest du individuell durch, ',
+            },
+            { text: 'auf unserer Tarifseite', to: '/ambulant' },
+            { text: '.' },
+          ],
         },
       ],
     },
@@ -264,9 +324,19 @@ export const article = {
 
   faqs: [
     {
-      question: 'Bis wann muss der Bonusantrag 2026 gestellt sein?',
+      question: 'Bis wann muss ich das Bonusheft 2026 abgeben?',
       answer:
-        'Bis zum 31.03.2027, vollständig. Jede Maßnahme und jede Ausgabe muss ins Kalenderjahr 2026 fallen.',
+        'Der vollständige Bonusantrag für 2026 muss bis zum 31.03.2027 bei der IKK classic sein. Jede Maßnahme und jede Ausgabe muss ins Kalenderjahr 2026 fallen.',
+    },
+    {
+      question: 'Gibt es das IKK classic Bonusheft als PDF?',
+      answer:
+        'Ein gedrucktes Bonusheft nennt die IKK classic auf ihrer Bonusseite nicht. Als PDF stehen dort das Infoblatt und die Teilnahmebedingungen 2026. Den Antrag stellst du in der IKK classic-App oder auf dem Papierantrag, den du persönlich, per Post, per E-Mail oder in der Onlinefiliale einreichst.',
+    },
+    {
+      question: 'Wie oft zahlt die IKK classic den Bonus aus?',
+      answer:
+        'Einmal pro Kalenderjahr und nur auf Antrag. Eine feste Bearbeitungszeit nennt die IKK classic nicht.',
     },
     {
       question: 'Kann ich Geldbonus und Zuschuss kombinieren?',
@@ -281,12 +351,17 @@ export const article = {
     {
       question: 'Ist der Bonus steuerpflichtig?',
       answer:
-        'Bei ausschließlich gezahltem Zuschuss meldet die IKK classic nichts an die Finanzverwaltung. Der Geldbonus wird oberhalb einer Freigrenze von 150 EUR pro Steuerjahr gemeldet.',
+        'Bei ausschließlich gezahltem Zuschuss meldet die IKK classic laut ihren Teilnahmebedingungen nichts an die Finanzverwaltung. Wie ein Geldbonus steuerlich zu behandeln ist, klärst du im Einzelfall mit deiner Steuerberatung.',
     },
     {
       question: 'Zählen BMI und Blutdruck allein?',
       answer:
         'Nein. Statuswerte werden nur mit mindestens einer Aktivität aus Nr. 40 bis 44 anerkannt.',
+    },
+    {
+      question: 'Gilt das auch für IKK gesund plus, IKK Südwest oder die IKK Innovationskasse?',
+      answer:
+        'Nein. Jede IKK hat ein eigenes Bonusprogramm mit eigenen Beträgen und Regeln. Dieser Ratgeber gilt nur für die IKK classic; andere Kassen vergleichst du auf kassenboost.de.',
     },
   ],
 

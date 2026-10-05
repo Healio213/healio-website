@@ -888,8 +888,8 @@ export const seoRoutes = [
     // wortgleich mit metaTitle und metaDescription der jeweiligen
     // Inhaltsdatei unter src/content/ratgeber/; test:ratgeber prueft das.
     path: '/ratgeber/ikk-classic-bonusprogramm-2026',
-    title: 'IKK classic Bonusprogramm 2026: alle Positionen | Healio',
-    description: 'IKK classic Bonus 2026: alle Positionen mit Beträgen, Nachweisen und Fristen, plus die Rechnung, wie der dreifache Zuschuss den Beitrag senkt.',
+    title: 'IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio',
+    description: 'IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.',
     canonical: 'https://healio.de/ratgeber/ikk-classic-bonusprogramm-2026',
     lang: 'de',
     schemaMarkup: ratgeberSchema('ikk-classic-bonusprogramm-2026'),
