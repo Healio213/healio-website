@@ -27,11 +27,12 @@ const AWARD_SETS = {
     {
       id: 'zahn',
       labelKey: 'awards.groups.zahn',
+      // Seit 05.10.2026 gibt es beim Zahn nur UKV ZahnPRIVAT und, nur für den
+      // Sofortschutz, die Bayerische mit ZAHN Sofort. Das Warentest-Siegel für
+      // ZAHN Prestige gehört nicht zum Sofortschutz-Weg und steht deshalb hier
+      // nicht mehr; es bleibt nur das Siegel des Leistungswegs.
       items: [
-        { src: '/siegel/bayerische/warentest-zahn-prestige-2025.jpg', altKey: 'siegel.awards.warentest', ns: 'zahn' },
         { src: '/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg', altKey: 'siegel.awards.frankeBornberg', ns: 'zahn' },
-        // LKH-Warentest-Siegel vorerst nicht: Die Bilddatei ist abgeschnitten
-        // (nur ein Rest links sichtbar). Ersatz braucht Franks Freigabe der Ausgabe.
       ],
     },
     // Das IKK-Leistungssiegel (Stand 03/2026, Note 1,5) ist abgelaufen:

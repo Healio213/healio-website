@@ -5,12 +5,11 @@ import {
   ArrowRight,
   Check,
   ChevronDown,
-  ExternalLink,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
 import DentalVideoSection from '@/components/sections/dental/DentalVideoSection';
-import { getDentalContent, LKH_GUIDELINE_URL } from '@/components/sections/dental/dentalContent';
+import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
@@ -23,10 +22,11 @@ import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { trackGoogleAdsRechnerStart } from '@/lib/google-ads';
 
+// Zwei Zahn-Wege seit Franks Entscheidung vom 05.10.2026: UKV ZahnPRIVAT für
+// alle Situationen ohne angeratene Behandlung (auch 1 bis 3 fehlende Zähne),
+// die Bayerische nur mit ZAHN Sofort für den Sofortschutz.
 const pathVisuals = {
-  bayerische: { kind: 'dental', tone: 'mint' },
-  ukv: { kind: 'family', tone: 'sky' },
-  lkh: { kind: 'weighing', tone: 'butter' },
+  ukv: { kind: 'dental', tone: 'mint' },
   sofort: { kind: 'calendar', tone: 'coral' },
 };
 
@@ -37,7 +37,7 @@ const pathStyles = {
   coral: 'bg-[#fff1ed] text-[#934638]',
 };
 
-// Rahmen- und Punktfarben der vier Zahn-Wege im Hero (wie die Auswahl auf /stationaer).
+// Rahmen- und Punktfarben der vier Zahn-Situationen im Hero (wie die Auswahl auf /stationaer).
 const offerBorders = ['border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]', 'border-[#c9dcef]'];
 const offerDots = ['bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]', 'bg-[#5b8fd1]'];
 
@@ -80,8 +80,9 @@ const ZahnPage = () => {
       <article className="overflow-hidden bg-white text-[#07111f]">
         {/* Hero wie auf /stationaer (Frank 30.09.2026: Foto am Tresen "geht gar
             nicht", lieber gleich zeigen, was man bekommt). Links der Text, rechts
-            die vier Zahn-Wege mit je einer geprüften Aussage aus den Ergebnissen
-            des Zahn-Checks; jede Zeile führt in den Check. */}
+            vier typische Zahn-Situationen mit je einer geprüften Aussage aus den
+            Ergebnissen des Zahn-Checks; sie führen zu den zwei Wegen UKV
+            ZahnPRIVAT und Bayerische mit ZAHN Sofort. Jede Zeile führt in den Check. */}
         <section
           className="relative isolate overflow-hidden bg-[#071726] text-white"
           aria-labelledby="zahn-hero-heading"
@@ -202,12 +203,16 @@ const ZahnPage = () => {
 
             <div className="mt-12 overflow-hidden rounded-[2.75rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)]">
               <div className="grid md:grid-cols-2">
-              {content.paths.cards.map((card, index) => {
-                const visual = pathVisuals[card.key] || pathVisuals.bayerische;
+              {content.paths.cards.map((card, index, cards) => {
+                const visual = pathVisuals[card.key] || pathVisuals.ukv;
+                // Trennlinien nur zwischen Karten: mobil untereinander, ab md zweispaltig.
+                const lastRowStart = cards.length - (cards.length % 2 === 0 ? 2 : 1);
+                const mobileDivider = index < cards.length - 1 ? 'border-b border-[#dfe8e3]' : '';
+                const desktopDivider = index >= lastRowStart ? 'md:border-b-0' : '';
                 return (
                   <article
                     key={card.key}
-                    className={`relative min-h-full p-7 sm:p-9 ${pathStyles[card.tone]} ${index < 3 ? 'border-b border-[#dfe8e3]' : ''} ${index === 2 ? 'md:border-b-0' : ''} ${index % 2 === 0 ? 'md:border-r md:border-[#dfe8e3]' : ''}`}
+                    className={`relative min-h-full p-7 sm:p-9 ${pathStyles[card.tone]} ${mobileDivider} ${desktopDivider} ${index % 2 === 0 && index < cards.length - 1 ? 'md:border-r md:border-[#dfe8e3]' : ''}`}
                   >
                     <span className="absolute -right-14 -top-16 h-40 w-40 rounded-full border border-current/10" aria-hidden="true" />
                     <div className="flex items-start justify-between gap-5">
@@ -216,11 +221,6 @@ const ZahnPage = () => {
                     <h3 className="mt-8 font-display text-2xl font-extrabold tracking-[-0.035em]">{card.label}</h3>
                     <p className="mt-2 font-display text-sm font-extrabold uppercase tracking-[0.14em] opacity-80">{card.title} · {card.product}</p>
                     <p className="mt-4 max-w-xl leading-7 text-slate-600">{card.text}</p>
-                    {card.sourceLabel && (
-                      <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center gap-1 text-base font-extrabold underline underline-offset-4">
-                        {card.sourceLabel}<ExternalLink className="h-4 w-4" aria-hidden="true" />
-                      </a>
-                    )}
                   </article>
                 );
               })}
@@ -349,13 +349,12 @@ const ZahnPage = () => {
               <h3 className="mt-7 font-display text-2xl font-extrabold leading-tight tracking-[-0.03em]">{content.process.trustTitle}</h3>
               <p className="mt-4 leading-7 text-slate-600">{content.process.trustText}</p>
 
-              <div className="mt-8 grid grid-cols-2 gap-3">
-                <div className="grid min-h-28 place-items-center rounded-2xl bg-white p-3">
-                  <img src="/siegel/bayerische/warentest-zahn-prestige-2025.jpg" alt="Stiftung Warentest Auszeichnung für ZAHN Prestige, 2025" className="max-h-20 w-auto object-contain" />
-                </div>
-                <div className="grid min-h-28 place-items-center rounded-2xl bg-white p-3">
-                  <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke und Bornberg Auszeichnung für UKV ZahnPRIVAT 100, 2025" className="max-h-20 w-auto object-contain" />
-                </div>
+              {/* Nur das Siegel des Leistungswegs UKV ZahnPRIVAT. Das Warentest-Siegel
+                  des Leistungstarifs der Bayerischen steht hier nicht mehr, weil die
+                  Bayerische seit 05.10.2026 nur noch für den Sofortschutz-Weg
+                  angeboten wird. */}
+              <div className="mt-8 grid min-h-28 place-items-center rounded-2xl bg-white p-3">
+                <img src="/siegel/ukv/franke-bornberg-zahnprivat100-2025.svg" alt="Franke und Bornberg Auszeichnung für UKV ZahnPRIVAT 100, 2025" className="max-h-20 w-auto object-contain" />
               </div>
               <p className="mt-4 text-sm leading-6 text-slate-600">{content.process.sealNote}</p>
             </aside>
@@ -385,11 +384,6 @@ const ZahnPage = () => {
                   </summary>
                   <div className="max-w-3xl pb-6 pr-8 text-base leading-7 text-slate-600 sm:text-[1.0625rem]">
                     <p>{item.a}</p>
-                    {item.sourceLabel && (
-                      <a href={LKH_GUIDELINE_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-1 font-bold text-[#087654] underline underline-offset-4">
-                        {item.sourceLabel}<ExternalLink className="h-4 w-4" aria-hidden="true" />
-                      </a>
-                    )}
                   </div>
                 </details>
               ))}
