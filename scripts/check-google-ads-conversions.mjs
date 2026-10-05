@@ -252,7 +252,7 @@ try {
   }
 
   // 6. Gesperrte Seiten bleiben gesperrt, auch mit voller Zustimmung.
-  for (const path of ['/schwangerschaft', '/ambulant?src=bonus-check', '/stationaer?src=reel-f05', '/zahn?src=bonus-check']) {
+  for (const path of ['/schwangerschaft', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/blog/kassenbonus-schwangerschaft-vorsorge', '/ambulant?src=bonus-check', '/stationaer?src=reel-f05', '/zahn?src=bonus-check']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackSdkClick('test');

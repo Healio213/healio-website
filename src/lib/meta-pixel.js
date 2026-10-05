@@ -61,7 +61,13 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Auf diesen Routen darf Meta niemals messen. /zahn und /ambulant sind
 // bewusst NICHT gesperrt: dorthin soll geworben werden, es gehen aber nur
 // Ereignisnamen und der Seitenschluessel raus, nie Antworten.
-const META_EXCLUDED_PATHS = new Set(['/schwangerschaft']);
+// Gleiche Sperrliste wie bei Google Ads (src/lib/google-ads.js).
+const META_EXCLUDED_PATHS = new Set([
+  '/schwangerschaft',
+  '/ratgeber/schwanger-zusatzversicherung',
+  '/ratgeber/schwangerschaft-worauf-achten',
+  '/blog/kassenbonus-schwangerschaft-vorsorge',
+]);
 
 // RechnerStart gilt nur fuer die Rechner- und Auswahlhilfe-Einstiege.
 const META_CALCULATOR_PATHS = new Set(['/ambulant', '/en/outpatient', '/zahn', '/en/dental']);

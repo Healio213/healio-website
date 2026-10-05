@@ -51,8 +51,17 @@ const GOOGLE_ADS_COOKIE = /^_gcl_/;
 const GCLID_PATTERN = /^[A-Za-z0-9_-]{10,200}$/;
 
 // Auf diesen Routen darf Google Ads niemals messen. /zahn und /ambulant sind
-// bewusst NICHT gesperrt: dorthin soll geworben werden.
-const GOOGLE_ADS_EXCLUDED_PATHS = new Set(['/schwangerschaft']);
+// bewusst NICHT gesperrt: dorthin soll geworben werden. Gesperrt sind
+// /schwangerschaft und die Schwangerschafts-Ratgeber, weil schon der Besuch
+// etwas über die Gesundheit verraten kann. Eine bezahlte Anzeige auf einen
+// dieser Artikel wird trotzdem gemessen: Der Artikel-Button reicht die
+// Klick-Kennung an /ambulant weiter, dort zählt "Antrag geöffnet".
+const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
+  '/schwangerschaft',
+  '/ratgeber/schwanger-zusatzversicherung',
+  '/ratgeber/schwangerschaft-worauf-achten',
+  '/blog/kassenbonus-schwangerschaft-vorsorge',
+]);
 
 // "Antrag geöffnet" zählt nur auf den beworbenen Produktseiten, auf denen
 // Abschluss- und Rechnerlinks der Versicherer stehen.

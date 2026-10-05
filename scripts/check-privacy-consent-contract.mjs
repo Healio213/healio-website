@@ -268,8 +268,8 @@ expect(
 
 // /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
 expect(
-  /const META_EXCLUDED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(metaPixel),
-  'Die Schwangerschafts-Route muss in der Meta-Sperrliste stehen.',
+  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaPixel),
+  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Meta-Sperrliste stehen.',
 );
 expect(
   /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(metaPixel),
@@ -522,8 +522,8 @@ expect(
 
 // Dieselben Sperrrouten wie bei Meta.
 expect(
-  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(googleAds),
-  'Die Schwangerschafts-Route muss in der Google-Ads-Sperrliste stehen.',
+  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(googleAds),
+  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
 );
 expect(
   /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(googleAds),
