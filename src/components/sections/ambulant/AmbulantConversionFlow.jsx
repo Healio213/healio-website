@@ -22,7 +22,9 @@ import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard'
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
+import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
+import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
 
 const COPY = {
   de: {
@@ -66,6 +68,8 @@ const COPY = {
       title: 'Nicht jeder braucht 100\u00a0%. Aber jeder sollte den Unterschied sehen.',
       subtitle: 'Vergleiche nicht nur die Gesamtsumme. Hier siehst du, wie viel in jedem der vier Leistungstöpfe steckt.',
       refund: 'Erstattung',
+      // AVB 1.753a: Sehhilfen in allen vier Stufen zu 100 % bis zum Höchstbetrag.
+      visionNote: 'Sehhilfen erstattet jede Stufe zu 100 %, bis der Topf ausgeschöpft ist.',
       budget: 'Gesundheitsbudget in 2 Jahren',
       ledgerTitle: 'So verteilt sich dein Budget',
       ledgerHint: 'Vier klar getrennte Leistungstöpfe · jeweils innerhalb der Tarifbedingungen',
@@ -145,44 +149,9 @@ const COPY = {
     finalText: 'Vergleiche Budget und Beitrag. Danach siehst du mit KassenBoost, ob dein Bonus den Beitrag ganz oder teilweise ausgleichen kann.',
     finalCta: 'Budget & Beitrag berechnen',
     finalHelp: 'Noch unsicher? Persönlich einordnen lassen',
-    faqs: [
-      {
-        q: 'Was steckt hinter den 3.000 EUR?',
-        a: 'Die 3.000 EUR bezeichnen das mögliche Gesundheitsbudget des leistungsstärksten ambulanten Tarifs über zwei Jahre. Wie viel tatsächlich erstattet wird, hängt vom gewählten Tarif, den eingereichten Rechnungen und den Tarifbedingungen ab.',
-      },
-      {
-        q: 'Wie viel vom Beitrag kann mein Kassenbonus ausgleichen?',
-        a: 'Ganz oder teilweise. Entscheidend sind deine Krankenkasse, deine nachgewiesenen Aktivitäten, der gewählte Tarif und die anrechenbaren Kosten. KassenBoost berechnet deshalb deinen realistisch erreichbaren Bonus und stellt ihn dem Beitrag gegenüber.',
-      },
-      {
-        q: 'Muss ich für den Zusatzschutz die Krankenkasse wechseln?',
-        a: 'Nein. Zusatzversicherung und gesetzliche Krankenkasse sind zwei getrennte Entscheidungen. Du kannst zuerst den Schutz wählen und danach mit KassenBoost prüfen, ob eine andere Krankenkasse finanziell besser dazu passt.',
-      },
-      {
-        q: 'Gibt es eine Wartezeit?',
-        a: 'Die dargestellten ambulanten Tarife haben keine allgemeine Wartezeit. Versicherungsschutz besteht für neue Versicherungsfälle ab dem vereinbarten Beginn im Rahmen der Tarifbedingungen.',
-      },
-      {
-        q: 'Was passiert nach dem Klick auf den Rechner?',
-        a: 'Du wechselst in den digitalen Tarifrechner unseres Produktpartners. Dort gibst du dein Alter ein, vergleichst die Tarifstufen und siehst den persönlichen Beitrag, bevor du einen Antrag stellst.',
-      },
-      {
-        q: 'Wie verteilen sich die Budgets auf die Leistungen?',
-        a: 'Jede Tarifstufe hat vier eigene Höchstbeträge für Sehhilfen, Naturheilverfahren, Vorsorge und gesetzliche Zuzahlungen. Die genaue Aufteilung siehst du direkt in unserem Budget-Ledger; maßgeblich bleiben die Tarifbedingungen.',
-      },
-      {
-        q: 'Sind Heilpraktiker und Osteopathie mitversichert?',
-        a: 'Beide Bereiche werden über den Topf für Naturheilverfahren berücksichtigt. Welche Behandlung und welcher Rechnungsbetrag erstattungsfähig sind, richtet sich nach der gewählten Tarifstufe und den Tarifbedingungen.',
-      },
-      {
-        q: 'Was gilt für Brille und Kontaktlinsen?',
-        a: 'Dafür gibt es je Tarifstufe einen eigenen Sehhilfen-Topf von 200 bis 500 EUR über zwei Jahre. Erstattet werden versicherte Leistungen im Rahmen des gewählten Tarifs.',
-      },
-      {
-        q: 'Kann mein Kassenbonus den Beitrag komplett ausgleichen?',
-        a: 'Das ist kein garantierter Tarifpreis. Ja, wenn dein anerkannter Kassenbonus mindestens so hoch ist wie dein Jahresbeitrag. Dann bleibt dir vom Beitrag nichts übrig. Kasse, Aktivitäten, Tarif und Bonusbedingungen bestimmen das Ergebnis.',
-      },
-    ],
+    // Fragen und Antworten liegen in ambulantFaqs.js, weil das vorgerenderte
+    // FAQ-Schema (scripts/seo-routes.mjs) dieselbe Quelle nutzt.
+    faqs: AMBULANT_FAQS.de,
   },
   en: {
     video: {
@@ -209,6 +178,7 @@ const COPY = {
       title: 'Not everyone needs 100%. Everyone should see the difference.',
       subtitle: 'Compare more than the total. See how each tier divides its budget across four benefit pots.',
       refund: 'Reimbursement',
+      visionNote: 'Vision aids are reimbursed at 100% in every tier until the pot is used up.',
       budget: 'Health budget over 2 years',
       ledgerTitle: 'How your budget is allocated',
       ledgerHint: 'Four separate benefit pots · each subject to the policy terms',
@@ -288,17 +258,7 @@ const COPY = {
     finalText: 'Compare budget and premium, then use KassenBoost to see whether your bonus may offset all or part of the premium.',
     finalCta: 'Calculate budget & premium',
     finalHelp: 'Not sure yet? Get personal guidance',
-    faqs: [
-      { q: 'What is behind the EUR 3,000?', a: 'EUR 3,000 is the potential two-year health budget in the strongest outpatient tier. Actual reimbursement depends on the chosen plan, eligible invoices and policy terms.' },
-      { q: 'How much of the premium can my insurer bonus offset?', a: 'All or part of it. Your insurer, verified activities, selected plan and eligible costs determine the result. KassenBoost compares your realistically achievable bonus with the premium.' },
-      { q: 'Do I have to switch statutory insurer?', a: 'No. Supplementary cover and statutory insurance are separate decisions. Choose cover first, then use KassenBoost to check whether another insurer is a better financial match.' },
-      { q: 'Is there a waiting period?', a: 'The displayed outpatient plans have no general waiting period. Cover applies to new insured events from the agreed start under the applicable terms.' },
-      { q: 'What happens after I open the calculator?', a: 'You continue to the digital calculator of our product partner, enter your age, compare the tiers and see your personal premium before applying. The calculator is in German.' },
-      { q: 'How is the budget divided?', a: 'Each tariff has four separate maximums for vision aids, natural therapies, prevention and statutory co-payments. The ledger shows the exact split; the policy terms remain decisive.' },
-      { q: 'Are alternative practitioners and osteopathy covered?', a: 'Both are considered under the natural-therapies pot. Eligible treatments and invoice amounts depend on the selected tariff and policy terms.' },
-      { q: 'What applies to glasses and contact lenses?', a: 'Each tariff has a separate vision-aid pot of EUR 200 to EUR 500 over two years. Insured services are reimbursed under the selected tariff.' },
-      { q: 'Can my insurer bonus offset the premium completely?', a: 'This is not a guaranteed tariff price. Yes, if your recognised insurer bonus is at least as high as your annual premium. Then none of the premium is left for you to pay. Insurer, activities, tariff and bonus terms determine the result.' },
-    ],
+    faqs: AMBULANT_FAQS.en,
   },
 };
 
@@ -548,6 +508,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   <strong className="font-display text-2xl text-home-mint-active">{tier.refund}</strong>
                   <span className="text-sm text-slate-300">{copy.tiers.refund}</span>
                 </div>
+                <p className="relative mt-3 max-w-xs text-sm leading-6 text-slate-300" data-healio-ambulant="vision-note">{copy.tiers.visionNote}</p>
                 <div className="relative mt-5 border-t border-white/10 pt-4 md:mt-8 md:pt-6 lg:mt-auto" aria-live="polite">
                   <p className="text-sm font-bold uppercase tracking-[0.06em] text-slate-400 md:text-xs md:tracking-[0.12em]">
                     {altersgruppe ? copy.tiers.priceForGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.priceRangeLabel}
@@ -678,7 +639,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 </table>
               </div>
             </details>
-            <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5">{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
+            <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5">{copy.tiers.visionNote} {copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
 
           {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
@@ -857,6 +818,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           </div>
         </div>
       </section>
+
+      {/* Gleicher Kontaktblock wie auf /zahn und /stationaer (Marktanalyse W6).
+          Nicht auf dem neutralen Themen-Anschluss, der ohne Termin auskommt. */}
+      {!fromBonusTopic && <ZielseitenKontakt placement="ambulant" className="order-11 bg-[#fbfaf7] md:order-none" />}
 
       <section className="order-11 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8" itemScope itemType="https://schema.org/FAQPage">
         <div className="mx-auto max-w-4xl">

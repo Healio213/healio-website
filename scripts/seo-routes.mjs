@@ -4,8 +4,33 @@
  * korrekten Meta-Tags pro Seite zu generieren.
  */
 
+import { readFileSync } from 'node:fs';
 import { getRatgeberArticle } from '../src/content/ratgeber/index.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
+import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
+
+/**
+ * FAQ-Schema aus genau den Fragen, die die Seite sichtbar zeigt.
+ *
+ * Google erwartet, dass FAQ-Auszeichnung und sichtbarer Text übereinstimmen,
+ * und KI-Antworten übernehmen die Sätze daraus. Abgeschriebene Fassungen sind
+ * auseinandergelaufen (Gegenprüfung der Marktanalyse 05.10.2026: /stationaer
+ * „Gesundheitsprüfung: Ja“ ohne SPU, /ambulant „Gibt es einen Haken? Nein.“
+ * und „15 bis 50 Euro“). Deshalb lesen /ambulant, /stationaer und /partner ihre
+ * Fragen aus derselben Quelle wie die Seite.
+ */
+const readLocale = (lang, namespace) => JSON.parse(
+  readFileSync(new URL(`../src/i18n/locales/${lang}/${namespace}.json`, import.meta.url), 'utf8'),
+);
+const visibleFaqSchema = (items, questionKey, answerKey) => createFAQSchema(
+  items.map((item) => ({ question: item[questionKey], answer: item[answerKey] })),
+);
+const ambulantFaqSchema = () => {
+  const { '@context': _context, ...faqPage } = visibleFaqSchema(AMBULANT_FAQS.de, 'q', 'a');
+  return faqPage;
+};
+const stationaerFaqSchema = () => visibleFaqSchema(readLocale('de', 'stationaer').refresh.faq.items, 'q', 'a');
+const partnerFaqSchema = () => visibleFaqSchema(readLocale('de', 'partner').faq.items, 'question', 'answer');
 
 /**
  * Article- und FAQPage-Auszeichnung eines organischen Ratgeberartikels.
@@ -114,7 +139,7 @@ export const seoRoutes = [
   {
     path: '/ambulant',
     title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
-    description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie & Naturheilkunde. Kassenboni + Zusatzversicherung clever kombiniert. Jetzt berechnen!',
+    description: 'Bis zu 3.000 € Gesundheitsbudget in zwei Jahren für Heilpraktiker, Osteopathie und Naturheilkunde. Dein Kassenbonus kann beim Beitrag helfen. Jetzt berechnen!',
     canonical: 'https://healio.de/ambulant',
     keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, Kassenbonus Zusatzversicherung',
     lang: 'de',
@@ -127,7 +152,7 @@ export const seoRoutes = [
           name: 'Healio Gesundheitsbudget für Heilpraktiker, Osteopathie und Naturheilkunde',
           serviceType: 'Ambulante Zusatzversicherung und Gesundheitsbudget',
           url: 'https://healio.de/ambulant',
-          description: 'Bis zu 3.000 € Gesundheitsbudget für Heilpraktiker, Osteopathie und Naturheilkunde durch die Kombination aus Kassenbonus und ambulanter Zusatzversicherung.',
+          description: 'Bis zu 3.000 € Gesundheitsbudget in zwei Jahren aus einer ambulanten Zusatzversicherung für Heilpraktiker, Osteopathie, Naturheilkunde, Sehhilfen und Vorsorge. Ein Kassenbonus kommt nicht obendrauf, er kann je nach Krankenkasse und Aktivitäten beim Beitrag helfen.',
           provider: {
             '@type': 'Organization',
             name: 'Healio GmbH',
@@ -143,69 +168,22 @@ export const seoRoutes = [
             '@type': 'Offer',
             availability: 'https://schema.org/InStock',
             priceCurrency: 'EUR',
-            description: 'Kostenlose Beratung und Berechnung des möglichen Gesundheitsbudgets'
+            description: 'Unverbindliche Beratung und Berechnung des möglichen Gesundheitsbudgets'
           }
         },
-        {
-          '@type': 'FAQPage',
-          mainEntity: [
-            {
-              '@type': 'Question',
-              name: 'Gibt es einen Haken? Klingt zu gut um wahr zu sein.',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Nein. Das Healio Konzept nutzt bestehende Systeme des deutschen Gesundheitswesens: Kassenboni und passende ambulante Zusatzversicherungen. Voraussetzung ist, dass Versicherte aktiv am Bonusprogramm teilnehmen und die Tarifbedingungen erfüllen.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Was kostet eine ambulante Zusatzversicherung monatlich?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Die monatlichen Beiträge liegen je nach Alter und Tarif typischerweise zwischen 15 und 50 Euro. Durch ein starkes Kassenbonusprogramm kann der Bonus die Beiträge in vielen Fällen teilweise oder vollständig ausgleichen.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Übernimmt die Krankenkasse Heilpraktiker-Kosten?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Die gesetzliche Krankenversicherung übernimmt Heilpraktiker-Kosten in der Regel nicht. Mit einer passenden ambulanten Zusatzversicherung werden Heilpraktiker-Behandlungen je nach Tarif anteilig bis vollständig erstattet.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Werden Osteopathie-Behandlungen erstattet?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Ja. Osteopathie kann über eine passende Zusatzversicherung und je nach Krankenkasse zusätzlich über Kassenleistungen oder Bonusprogramme abgedeckt werden, sofern die jeweiligen Tarif- und Bonusbedingungen erfüllt sind.'
-              }
-            }
-          ]
-        }
+        ambulantFaqSchema(),
       ]
     },
   },
   {
     path: '/partner',
     title: 'Für Praxen – Gesundheitsbudget verständlich erklären | Healio',
-    description: 'Kostenfreie Zusammenarbeit für Heilpraktiker, Osteopathen und Hebammen: Die Praxis informiert, Healio prüft und berät Patienten unabhängig.',
+    description: 'Unverbindliche Zusammenarbeit für Heilpraktiker, Osteopathen und Hebammen: Die Praxis informiert, Healio prüft und berät Patienten unabhängig.',
     canonical: 'https://healio.de/partner',
     keywords: 'Healio Partner, Heilpraktiker Partnerprogramm, Patienten Finanzierung Heilpraktiker, Kostenübernahme Naturheilkunde',
     lang: 'de',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
-    schemaMarkup: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Was genau ist das Healio Gesundheitsbudget?', acceptedAnswer: { '@type': 'Answer', text: 'Je nach persönlicher Situation können Patienten mögliche Kassenboni mit tariflichen Leistungen einer Zusatzversicherung kombinieren. So sind bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich. Healio prüft im Einzelfall, welche Voraussetzungen erfüllt sind.' } },
-        { '@type': 'Question', name: 'Kostet mich die Partnerschaft etwas?', acceptedAnswer: { '@type': 'Answer', text: 'Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien und Aufsteller stellt Healio kostenfrei zur Verfügung. Nach dem Kennenlernen entscheidest du selbst, ob und wo du die Informationen einsetzen möchtest.' } },
-        { '@type': 'Question', name: 'Muss ich Versicherungen erklären oder empfehlen?', acceptedAnswer: { '@type': 'Answer', text: 'Nein. Deine Aufgabe ist ausschließlich die neutrale Information. Die individuelle Prüfung, Versicherungsberatung, Vermittlung und Antragsbegleitung übernimmt Healio direkt mit dem interessierten Patienten.' } },
-        { '@type': 'Question', name: 'Welche Leistungen können erstattet werden?', acceptedAnswer: { '@type': 'Answer', text: 'Je nach Tarif können unter anderem Naturheilkunde, Osteopathie, TCM, Chiropraktik, Sehhilfen und Zahnleistungen berücksichtigt werden. Umfang, Wartezeiten und Erstattungsvoraussetzungen richten sich immer nach dem gewählten Tarif.' } },
-        { '@type': 'Question', name: 'Muss ich mein Praxiskonzept ändern?', acceptedAnswer: { '@type': 'Answer', text: 'Nein. Behandlung, Preisgestaltung und fachliche Entscheidungen bleiben vollständig bei dir. Healio ergänzt lediglich einen neutralen Informationsweg für Patienten, die ihre Finanzierungsmöglichkeiten prüfen möchten.' } },
-        { '@type': 'Question', name: 'Wie setzen sich die Leistungen für Sehhilfen zusammen?', acceptedAnswer: { '@type': 'Answer', text: 'Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Separat kann durch nachgewiesene Maßnahmen ein frei verwendbarer IKK-Geldbonus entstehen, der den Eigenanteil zusätzlich reduzieren kann. Er ist kein pauschaler Brillenzuschuss.' } }
-      ]
-    },
+    schemaMarkup: partnerFaqSchema(),
   },
   {
     path: '/hebammen',
@@ -264,21 +242,7 @@ export const seoRoutes = [
     keywords: 'Krankenhauszusatzversicherung, stationäre Zusatzversicherung, Krankenhaus Zusatzversicherung, Chefarztbehandlung, Einbettzimmer Versicherung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/stationaer', en: 'https://healio.de/en/inpatient' },
-    schemaMarkup: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'Was kostet die Krankenhauszusatzversicherung?', acceptedAnswer: { '@type': 'Answer', text: 'Der Beitrag hängt von Alter und Tarif ab. Aktuelle Beispiele für 30-Jährige: Klinik bei Unfall (SPU) 7,00 EUR, Klinik 2-Bett (SP2) 33,41 EUR und Klinik 1-Bett (SP1) 50,72 EUR im Monat. Den persönlichen Beitrag zeigt der Tarifrechner in 2 Minuten.' } },
-        { '@type': 'Question', name: 'Was ist der Unterschied zwischen Klinik 1-Bett und Klinik 2-Bett?', acceptedAnswer: { '@type': 'Answer', text: 'Klinik 1-Bett (SP1) bietet die Unterbringung im Ein- oder Zweibettzimmer und übernimmt die gesetzliche Zuzahlung von 10 Euro je Kliniktag, an Tagen ohne Zuzahlung zahlt er 10 Euro Krankenhaustagegeld. Klinik 2-Bett (SP2) bietet das Zweibettzimmer und eine Wechseloption in den 1-Bett-Tarif ab dem 30. Geburtstag, alle 5 Jahre bis 65. Beide Tarife enthalten Chefarztbehandlung ohne GOÄ-Begrenzung, freie Krankenhauswahl und Rooming-in.' } },
-        { '@type': 'Question', name: 'Was ist der Tarif Klinik bei Unfall?', acceptedAnswer: { '@type': 'Answer', text: 'Der Tarif SPU leistet alle Klinik-Leistungen (Ein- oder Zweibettzimmer, Chefarztbehandlung, freie Klinikwahl), allerdings nur bei unfallbedingten Behandlungen. Dafür ist er besonders günstig: für 30-Jährige 7,00 EUR im Monat. Ideal für Sportler und Aktive.' } },
-        { '@type': 'Question', name: 'Gibt es Wartezeiten?', acceptedAnswer: { '@type': 'Answer', text: 'Die SDK verzichtet in den Klinik-Tarifen auf Wartezeiten, der volle Schutz gilt ab Versicherungsbeginn. Bei der Bayerischen gibt es keine allgemeine Wartezeit, für Entbindung und Psychotherapie gelten acht Monate, nach einem Unfall entfallen sie. Der Vertrag muss allerdings vor der Behandlung stehen, für Versicherungsfälle vor Versicherungsbeginn wird nicht geleistet.' } },
-        { '@type': 'Question', name: 'Werden auch privatärztliche Leistungen über dem Höchstsatz erstattet?', acceptedAnswer: { '@type': 'Answer', text: 'Ja. Die Erstattung ist nicht auf die Höchstsätze der Gebührenordnung für Ärzte (GOÄ) begrenzt. Auch darüber hinausgehende Honorare werden erstattet.' } },
-        { '@type': 'Question', name: 'Wie hilft der IKK classic Bonus bei der Finanzierung?', acceptedAnswer: { '@type': 'Answer', text: 'Die IKK classic belohnt anerkannte Aktivitäten wahlweise mit einem Geldbonus oder einem dreifach höheren Zuschuss für nachgewiesene zuschussfähige Kosten. Je nach Aktivitäten und anrechenbaren Kosten kann der Zuschuss einen großen Teil des Beitrags decken, beim Unfall-Tarif sogar bis zu 100 Prozent.' } },
-        { '@type': 'Question', name: 'Gilt der Schutz auch für Kinder?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, die Klinik-Tarife gibt es für alle gesetzlich Versicherten, auch für Kinder. Rooming-in gehört zu den Leistungen: Ein Elternteil bleibt beim Kind im Krankenhaus.' } },
-        { '@type': 'Question', name: 'Gibt es eine Gesundheitsprüfung?', acceptedAnswer: { '@type': 'Answer', text: 'Ja, wie bei stationären Zusatztarifen üblich gehören Gesundheitsfragen zum Antrag. Der beste Zeitpunkt für den Abschluss ist deshalb, solange man gesund und aktiv ist.' } },
-        { '@type': 'Question', name: 'Für wen lohnt sich die Krankenhauszusatzversicherung besonders?', acceptedAnswer: { '@type': 'Answer', text: 'Für alle, die im Ernstfall Wahlfreiheit wollen: Sportler und Aktive (auch über den günstigen Unfall-Tarif), Selbstständige und Familien, die beim Kind bleiben wollen. Voraussetzung ist eine gesetzliche Krankenversicherung.' } }
-      ]
-    },
+    schemaMarkup: stationaerFaqSchema(),
   },
   {
     path: '/leistungen',
@@ -397,8 +361,8 @@ export const seoRoutes = [
   },
   {
     path: '/terminvereinbarung',
-    title: 'Termin vereinbaren – Kostenlose Beratung | Healio',
-    description: 'Vereinbaren Sie jetzt einen kostenlosen Beratungstermin bei Healio. Persönliche Beratung zu Gesundheitsbudget und Zusatzversicherungen.',
+    title: 'Termin vereinbaren: unverbindliches Erstgespräch | Healio',
+    description: 'Buch dir einen Termin für ein unverbindliches Erstgespräch bei Healio. Persönliche Beratung zu Gesundheitsbudget, Kassenbonus und Zusatzversicherungen.',
     canonical: 'https://healio.de/terminvereinbarung',
     lang: 'de',
     hreflang: { de: 'https://healio.de/terminvereinbarung', en: 'https://healio.de/en/appointment' },
@@ -647,7 +611,7 @@ export const seoRoutes = [
   {
     path: '/en/outpatient',
     title: 'Outpatient Supplementary Insurance – Up to 3,000 € Health Budget | Healio',
-    description: 'Up to 3,000 € health budget for naturopathy, osteopathy & alternative medicine. Smart combination of health insurance bonuses.',
+    description: 'Up to 3,000 € health budget in two years for naturopathy, osteopathy and alternative medicine. Your health insurance bonus can help with the premium.',
     canonical: 'https://healio.de/en/outpatient',
     lang: 'en',
     hreflang: { de: 'https://healio.de/ambulant', en: 'https://healio.de/en/outpatient' },
@@ -655,7 +619,7 @@ export const seoRoutes = [
   {
     path: '/en/partner',
     title: 'For Practices – Explain Health Budgets Clearly | Healio',
-    description: 'A free partnership for naturopaths, osteopaths and midwives: The practice provides information while Healio independently reviews and advises patients.',
+    description: 'A non-binding partnership for naturopaths, osteopaths and midwives: The practice provides information while Healio independently reviews and advises patients.',
     canonical: 'https://healio.de/en/partner',
     lang: 'en',
     hreflang: { de: 'https://healio.de/partner', en: 'https://healio.de/en/partner' },
@@ -800,7 +764,7 @@ export const seoRoutes = [
   {
     path: '/partner/leitfaden',
     title: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen | Healio',
-    description: 'Kostenloser Leitfaden für Naturheilpraxen: wie aus Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren werden und wie der Ablauf in fünf Schritten aussieht.',
+    description: 'Leitfaden für Naturheilpraxen: wie Zusatzschutz mit bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren funktioniert, wie der Kassenbonus beim Beitrag hilft und wie der Ablauf in fünf Schritten aussieht.',
     canonical: 'https://healio.de/partner/leitfaden',
     keywords: 'Leitfaden Naturheilpraxis, Gesundheitsbudget Praxis, Therapieabbruch verhindern, Selbstzahler Heilpraktiker, Kassenbonus Zusatzversicherung',
     lang: 'de',
@@ -810,7 +774,7 @@ export const seoRoutes = [
       '@id': 'https://healio.de/partner/leitfaden#webpage',
       url: 'https://healio.de/partner/leitfaden',
       name: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen',
-      description: 'Kostenloser Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus Kassenbonus und Zusatzschutz.',
+      description: 'Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus dem Zusatzschutz und zum Kassenbonus, der beim Beitrag hilft.',
       inLanguage: 'de-DE',
       isPartOf: { '@id': 'https://healio.de/#website' },
       about: { '@id': 'https://healio.de/#organization' },

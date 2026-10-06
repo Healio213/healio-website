@@ -61,7 +61,6 @@ const tickerSets = {
   ],
   terminvereinbarung: [
     { icon: CheckCircle2, key: 'appointmentTicker.chooseTime' },
-    { icon: BadgeCheck, key: 'appointmentTicker.free' },
     { icon: ShieldCheck, key: 'appointmentTicker.nonBinding' },
     { icon: MessageCircle, key: 'appointmentTicker.personal' },
     { icon: Zap, key: 'appointmentTicker.confirmation' },

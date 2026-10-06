@@ -15,6 +15,7 @@ import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
+import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 
 // Mobile Reihenfolge (unter md): Die Abschnitte stehen als Geschwister in einem
@@ -116,6 +117,10 @@ const StationaerPage = () => {
         </Slot>
         <Slot order="order-12">
           <SalesAiAssist className="bg-[#fbfaf7]" />
+        </Slot>
+        {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6). */}
+        <Slot order="order-13">
+          <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
         </Slot>
         <Slot order="order-last">
           <StationaerTrustFaq />

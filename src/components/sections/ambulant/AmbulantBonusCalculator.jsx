@@ -95,12 +95,15 @@ const AmbulantBonusCalculator = ({
   // begrüßte Besucher vorher mit 0 EUR Bonus und negativem Ergebnis in Warngelb,
   // das exakte Gegenteil des Hero-Versprechens. Das UI kennzeichnet die
   // Vorauswahl ausdrücklich als anpassbares Beispiel.
+  // Altersgerecht (Marktanalyse W5, 06.10.2026): Die Beispielbeiträge gelten
+  // für 30-Jährige (/stationaer, /ambulant 21 bis 30). Die Hautkrebsvorsorge
+  // zählt erst ab 35 und ist deshalb nicht vorausgewählt; sonst wirkte SP2 im
+  // Beispiel fast voll gedeckt. 120 EUR Geldbonus, also 360 EUR Zuschuss.
   const EXAMPLE_SELECTION = {
     kurs: true,
     fitness: true,
     checkup: true,
     zahn: 2,
-    hautkrebs: true,
     blutdruck: true,
     bmi: true,
   };

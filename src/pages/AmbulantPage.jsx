@@ -7,6 +7,7 @@ import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -62,6 +63,10 @@ const AmbulantPage = () => {
         {/* Siegel direkt unter dem Hero, wie auf /partner. */}
         <div className="order-2 md:contents">
           <HealioAwardsRow size="large" />
+        </div>
+        {/* Vier belegte Fakten vor dem Vergleich (Marktanalyse W4, 06.10.2026); mobil direkt nach dem Erklärvideo. */}
+        <div className="order-4 md:contents">
+          <AmbulantAufEinenBlick />
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>

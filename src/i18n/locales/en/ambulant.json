@@ -1,7 +1,7 @@
 {
   "hero": {
     "eyebrow": "Outpatient supplementary insurance",
-    "title": "Your <highlight>3,000 EUR</highlight> health budget. Your <highlight>fund bonus</highlight> can offset the premium.",
+    "title": "Up to <highlight>3,000 EUR</highlight> health budget in two years. Your <highlight>fund bonus</highlight> can offset the premium.",
     "subtitle": "Cover naturopathy, glasses and prevention. You pay a monthly premium, and your recognised fund bonus brings it back to you in full or in part. We work out exactly how much with you.",
     "factsLabel": "In short",
     "facts": [
@@ -941,7 +941,7 @@
     ],
     "facts": [
       "No waiting period",
-      "No questions about pre-existing conditions"
+      "Application only asks about vision aids and hearing"
     ],
     "pregnancyNote": "For a pregnancy that has already been confirmed, the SDK prevention pot is the right route.",
     "cta": "Ask about the prevention add-on",

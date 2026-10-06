@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
+import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WEBSITE_ID = 'https://healio.de/#website';
@@ -102,5 +103,22 @@ assert.equal(collectTyped(ambulantSchemas, 'FAQPage').length, 1, 'Ambulant-FAQ-S
 
 const stationaerSchemas = readSchemas(htmlPath('/stationaer'));
 assert.equal(collectTyped(stationaerSchemas, 'FAQPage').length, 1, 'Stationär-FAQ-Schema fehlt oder ist doppelt.');
+
+// Marktanalyse 06.10.2026: Das FAQ-Schema im ausgelieferten HTML entspricht
+// Wort für Wort den sichtbaren Fragen und Antworten derselben Seite.
+const readLocale = (lang, namespace) => JSON.parse(fs.readFileSync(path.join(rootDir, 'src/i18n/locales', lang, `${namespace}.json`), 'utf8'));
+const faqPairs = (schemas) => collectTyped(schemas, 'FAQPage')
+  .flatMap((faq) => faq.mainEntity)
+  .map((question) => ({ question: question.name, answer: question.acceptedAnswer.text }));
+const visibleFaqs = {
+  '/ambulant': AMBULANT_FAQS.de.map(({ q, a }) => ({ question: q, answer: a })),
+  '/stationaer': readLocale('de', 'stationaer').refresh.faq.items.map(({ q, a }) => ({ question: q, answer: a })),
+  '/partner': readLocale('de', 'partner').faq.items.map(({ question, answer }) => ({ question, answer })),
+};
+for (const [routePath, expected] of Object.entries(visibleFaqs)) {
+  assert.deepEqual(faqPairs(readSchemas(htmlPath(routePath))), expected, `${routePath}: FAQ-Schema und sichtbare FAQ müssen übereinstimmen.`);
+}
+const ambulantSchemaText = JSON.stringify(ambulantSchemas);
+assert.doesNotMatch(ambulantSchemaText, /Gibt es einen Haken|15 und 50 Euro|Kostenlose Beratung|Kombination aus Kassenbonus/, 'Ambulant-Schema enthält eine überholte Aussage.');
 
 console.log(`Schema-Indexierungsvertrag erfüllt: ${seoRoutes.length} Routen geprüft.`);

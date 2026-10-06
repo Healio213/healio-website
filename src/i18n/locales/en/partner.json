@@ -2,7 +2,7 @@
   "hero": {
     "badge": "For practices, therapists and opticians",
     "title": "So good care does not stop at <highlight>out-of-pocket costs</highlight>.",
-    "subtitle": "Depending on plan and personal requirements, your patients can finance recommended treatments through a health budget of up to <highlight>3,000 EUR in two years</highlight>. You only inform; Healio advises and handles everything. Free for your practice.",
+    "subtitle": "Depending on plan and personal requirements, your patients can finance recommended treatments through a health budget of up to <highlight>3,000 EUR in two years</highlight>. You only inform; Healio advises and handles everything. No obligation for your practice.",
     "cta": "Book a 30-minute introduction",
     "secondaryCta": "View the concept with Nita",
     "roleNote": "No insurance advice by the practice is required.",
@@ -70,7 +70,7 @@
   },
   "budget": {
     "title": "The <highlight>Healio health budget</highlight>",
-    "subtitle": "Depending on the tariff and personal eligibility, patients may be able to use up to EUR 3,000 in tariff benefits over two years. The IKK bonus may provide EUR 700+ as a separate component and depends on documented activities.",
+    "subtitle": "Depending on the tariff and personal eligibility, patients may be able to use up to EUR 3,000 in tariff benefits over two years. The IKK bonus does not come on top. It can help with the premium for the supplementary cover, up to EUR 810 a year under the statutes, depending on documented activities.",
     "total": "Total health budget",
     "totalAmount": "up to EUR 3,000",
     "totalDesc": "potential tariff benefits over two years; the IKK bonus is assessed separately",
@@ -79,7 +79,7 @@
     "naturheilkundeDesc": "Tariff benefits for services including naturopathy, osteopathy, TCM and chiropractic care",
     "sehhilfen": "Vision aids",
     "sehhilfenAmount": "up to EUR 500",
-    "sehhilfenDesc": "SDK tariff benefit for vision aids. A potential freely usable IKK cash bonus may further reduce the patient's contribution.",
+    "sehhilfenDesc": "SDK tariff benefit for vision aids, reimbursed at 100% in every tier up to the pot limit. A potential IKK bonus can help carry the premium for it.",
     "footnote": "The actual amount and availability depend, among other things, on the selected tariff, its conditions and documented bonus activities."
   },
   "partners": {
@@ -94,7 +94,7 @@
     "chiropraktiker": "Chiropractors",
     "chiropraktikerDesc": "Healio checks whether and to what extent chiropractic services are covered by the patient's individual tariff.",
     "brillenladen": "Optical shops and opticians",
-    "brillenladenDesc": "The SDK tariff provides up to EUR 500 for vision aids. A potential IKK cash bonus may be used freely in addition.",
+    "brillenladenDesc": "The SDK tariff provides up to EUR 500 for vision aids. A potential IKK bonus can help fund the monthly premium for this cover.",
     "hebamme": "Midwives",
     "hebammeDesc": "You can neutrally point families to the information. Healio handles the individual check, advice and brokerage."
   },
@@ -104,8 +104,8 @@
     "manageableEffortDesc": "You provide neutral information or a QR code. Insurance advice and application support remain with Healio.",
     "financialRoom": "More financial room",
     "financialRoomDesc": "A suitable health budget may reduce patient contributions. Patients decide for themselves whether and how to use benefits.",
-    "freeParticipation": "Participate free of charge",
-    "freeParticipationDesc": "Partner practices pay no participation fee. Healio provides information materials free of charge."
+    "freeParticipation": "Take part without obligation",
+    "freeParticipationDesc": "You make no commitment. You receive information materials and displays from Healio."
   },
   "steps": {
     "step1Title": "30-minute introduction",
@@ -136,11 +136,11 @@
     "items": [
       {
         "question": "What exactly is the Healio health budget?",
-        "answer": "Depending on their personal situation, patients may be able to combine potential health insurer bonuses with supplementary insurance tariff benefits. This can result in a health budget of up to EUR 3,000 over two years. Healio checks individual eligibility."
+        "answer": "It means the tariff benefits of an outpatient supplementary insurance. In the strongest tariff that is up to EUR 3,000 over two years, split into four benefit pots. A health insurer bonus is not included. It is checked separately and, depending on the insurer and activities, can help with the premium. Healio checks individual eligibility."
       },
       {
-        "question": "Does the partnership cost my practice anything?",
-        "answer": "Partner practices pay no participation fee. Healio provides information materials and displays free of charge. After the introductory meeting, you decide for yourself whether and where to use the information."
+        "question": "Do I commit to anything with the partnership?",
+        "answer": "No. Healio provides information materials and displays. Whether and where you use them is up to you after the introductory meeting."
       },
       {
         "question": "Do I have to explain or recommend insurance?",
@@ -156,7 +156,7 @@
       },
       {
         "question": "How are the vision aid benefits structured?",
-        "answer": "The SDK tariff provides up to EUR 500 for vision aids. Separately, documented activities may generate a freely usable IKK cash bonus that can further reduce the patient's contribution. It is not a flat-rate glasses subsidy."
+        "answer": "The SDK reimburses vision aids at 100% in every tier, up to EUR 500 over two calendar years in the strongest tariff. Separately, an IKK bonus from documented activities can lower the premium for the supplementary cover. It is not a flat-rate glasses subsidy."
       }
     ]
   },
@@ -182,7 +182,7 @@
     "healthBudget": "Up to EUR 3,000 health budget over two years may be available",
     "neutralInformation": "The practice provides neutral information – without insurance advice",
     "healioAdvice": "Healio assesses, advises and supports each patient individually",
-    "freeParticipation": "Free participation for partner practices",
+    "freeParticipation": "Non-binding participation for partner practices",
     "directContact": "Patients contact Healio directly"
   },
   "miaPrompt": {

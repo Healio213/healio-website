@@ -235,7 +235,7 @@ const PraxisLeitfadenForm = () => {
           </>
         ) : (
           <>
-            Leitfaden kostenlos anfordern
+            Leitfaden anfordern
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </>
         )}

@@ -1,6 +1,6 @@
 {
   "page": {
-    "title": "Hier erreichen Sie uns",
+    "title": "Hier erreichst du uns",
     "office": "Zentrale Hamburg",
     "address": "Adresse",
     "addressValue": "Healio GmbH\nArndtstr. 6\n22085 Hamburg",
@@ -10,23 +10,23 @@
   },
   "form": {
     "name": "Name *",
-    "namePlaceholder": "Ihr vollständiger Name",
+    "namePlaceholder": "Dein vollständiger Name",
     "email": "E-Mail Adresse *",
     "emailPlaceholder": "name@beispiel.de",
     "company": "Unternehmen (optional)",
-    "companyPlaceholder": "Ihr Unternehmen",
+    "companyPlaceholder": "Dein Unternehmen",
     "phone": "Telefon (optional)",
-    "phonePlaceholder": "Ihre Telefonnummer",
-    "message": "Ihre Nachricht *",
-    "messagePlaceholder": "Wie können wir Ihnen helfen?",
+    "phonePlaceholder": "Deine Telefonnummer",
+    "message": "Deine Nachricht *",
+    "messagePlaceholder": "Wie können wir dir helfen?",
     "submit": "Nachricht senden",
     "sending": "Wird gesendet...",
     "missingFields": "Fehlende Angaben",
-    "missingFieldsDesc": "Bitte füllen Sie alle erforderlichen Felder aus.",
-    "success": "Ihre Anfrage wurde erfolgreich gesendet.",
-    "successDesc": "Wir melden uns in Kürze bei Ihnen.",
+    "missingFieldsDesc": "Bitte füll alle erforderlichen Felder aus.",
+    "success": "Deine Anfrage wurde gesendet.",
+    "successDesc": "Wir melden uns in Kürze bei dir.",
     "error": "Fehler",
-    "errorDesc": "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns unter info@healio.de"
+    "errorDesc": "Leider konnte deine Anfrage nicht gesendet werden. Bitte versuch es noch einmal oder schreib uns an info@healio.de."
   },
   "contactForm": {
     "title": "Jetzt unverbindlich beraten lassen",
@@ -50,8 +50,8 @@
   },
   "termin": {
     "title": "Termin vereinbaren",
-    "subtitle": "Sichern Sie sich jetzt direkt Ihren Wunschtermin für ein kostenloses und unverbindliches Erstgespräch.",
-    "confirmation": "Sie erhalten nach der Buchung automatisch eine Bestätigung per E-Mail."
+    "subtitle": "Wähl dir direkt deinen Wunschtermin für ein unverbindliches Erstgespräch.",
+    "confirmation": "Nach der Buchung bekommst du automatisch eine Bestätigung per E-Mail."
   },
   "dental": {
     "title": "Jetzt Angebot anfordern",
@@ -122,12 +122,11 @@
     "hamburg": "Healio GmbH in Hamburg",
     "channels": "Kontakt per Telefon oder E-Mail",
     "form": "Nachricht direkt über das Kontaktformular senden",
-    "response": "Wir melden uns nach Ihrer Anfrage in Kürze"
+    "response": "Wir melden uns nach deiner Anfrage in Kürze"
   },
   "appointmentTicker": {
     "ariaLabel": "Vorteile der Online-Terminvereinbarung",
     "chooseTime": "Passenden Termin direkt online wählen",
-    "free": "Kostenloses Erstgespräch",
     "nonBinding": "Unverbindliches Erstgespräch",
     "personal": "Persönliches Beratungsgespräch",
     "confirmation": "Bestätigung automatisch per E-Mail"

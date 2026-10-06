@@ -1,7 +1,7 @@
 {
   "hero": {
     "eyebrow": "Ambulante Zusatzversicherung",
-    "title": "Dein <highlight>3.000 EUR</highlight> Gesundheitsbudget. Den Beitrag kann dein <highlight>Kassenbonus</highlight> ausgleichen.",
+    "title": "Bis zu <highlight>3.000 EUR</highlight> Gesundheitsbudget in zwei Jahren. Den Beitrag kann dein <highlight>Kassenbonus</highlight> ausgleichen.",
     "subtitle": "Heilpraktiker, Brille und Vorsorge absichern. Du zahlst einen Monatsbeitrag, und dein anerkannter Kassenbonus holt ihn dir ganz oder teilweise zurück. Wie viel genau, rechnen wir mit dir aus.",
     "factsLabel": "Kurz erklärt",
     "facts": [
@@ -989,7 +989,7 @@
     ],
     "facts": [
       "Keine Wartezeit",
-      "Keine Fragen zu Vorerkrankungen"
+      "Im Antrag nur Fragen zu Sehhilfe und Gehör"
     ],
     "pregnancyNote": "Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.",
     "cta": "Vorsorge-Baustein anfragen",

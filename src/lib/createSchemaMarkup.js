@@ -61,7 +61,7 @@ export const createServiceSchema = (overrides = {}) => {
       "@type": "Offer",
       "availability": "https://schema.org/InStock",
       "priceCurrency": "EUR",
-      "description": "Kostenlose Beratung und Tarifberechnung"
+      "description": "Unverbindliche Beratung und Tarifberechnung"
     }
   };
 

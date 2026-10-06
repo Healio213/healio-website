@@ -4,8 +4,8 @@
     "description": "Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen."
   },
   "ambulant": {
-    "title": "Ambulante Zusatzversicherung: Dein 3.000 EUR Gesundheitsbudget | Healio",
-    "description": "Dein 3.000 EUR Gesundheitsbudget für Heilpraktiker, Brille und Vorsorge. Du zahlst einen Monatsbeitrag, und dein Kassenbonus holt ihn dir ganz oder teilweise zurück."
+    "title": "Ambulante Zusatzversicherung: Bis zu 3.000 EUR Gesundheitsbudget | Healio",
+    "description": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren für Heilpraktiker, Brille und Vorsorge. Je nach Kasse und Aktivitäten kann dein Kassenbonus den Monatsbeitrag ganz oder teilweise ausgleichen."
   },
   "zahn": {
     "title": "Zahnzusatzversicherung: Bis zu 100% Erstattung | Healio",
@@ -45,7 +45,7 @@
   },
   "termin": {
     "title": "Termin vereinbaren | Healio",
-    "description": "Wählen Sie einen passenden Termin für Ihr persönliches Beratungsgespräch."
+    "description": "Wähl einen passenden Termin für dein persönliches, unverbindliches Erstgespräch."
   },
   "impressum": {
     "title": "Impressum - Healio",
