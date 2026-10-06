@@ -45,6 +45,7 @@ const ARTICLE_FIGURES = {
   'zahnzusatzversicherung-fehlender-zahn': friendlyIconAssets.dental,
   'schwanger-zusatzversicherung': friendlyIconAssets.pregnancy,
   'schwangerschaft-worauf-achten': friendlyIconAssets.document,
+  'hebamme-kosten-krankenkasse': friendlyIconAssets.family,
   'krankenkassen-bonus-zusatzversicherung': friendlyIconAssets.budget,
 };
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;

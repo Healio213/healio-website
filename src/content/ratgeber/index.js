@@ -23,6 +23,7 @@ import { article as zahnzusatzversicherungFehlenderZahn } from './zahnzusatzvers
 import { article as schwangerZusatzversicherung } from './schwanger-zusatzversicherung.js';
 import { article as schwangerschaftWoraufAchten } from './schwangerschaft-worauf-achten.js';
 import { article as schwangerschaftWasStehtMirZu } from './schwangerschaft-was-steht-mir-zu.js';
+import { article as hebammeKostenKrankenkasse } from './hebamme-kosten-krankenkasse.js';
 
 export const RATGEBER_BASE_PATH = '/ratgeber';
 
@@ -39,6 +40,7 @@ export const ratgeberArticles = [
   schwangerZusatzversicherung,
   schwangerschaftWoraufAchten,
   schwangerschaftWasStehtMirZu,
+  hebammeKostenKrankenkasse,
   krankenkassenBonusZusatzversicherung,
 ];
 
