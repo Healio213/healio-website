@@ -8,6 +8,7 @@ import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
+import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -67,6 +68,8 @@ const AmbulantPage = () => {
         {/* Vier belegte Fakten vor dem Vergleich (Marktanalyse W4, 06.10.2026); mobil direkt nach dem Erklärvideo. */}
         <div className="order-4 md:contents">
           <AmbulantAufEinenBlick />
+          {/* Experiment: Brillen-Karte nur mobil, Wortlaut aus der FAQ. */}
+          <AmbulantBrilleKarte />
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>
