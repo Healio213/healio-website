@@ -555,9 +555,16 @@ if (wasSteht) {
   );
   expect(!/NIPT|Ersttrimester|Nackenfalt|Kinderwunsch|\bERGO\b|DA Direkt|\bLKH\b/i.test(text), `${WAS_STEHT_SLUG}: gesperrtes Thema oder gesperrter Anbietername.`);
   expect(
-    !/kostenlos|kostenfrei|gratis|umsonst|garantiert|unbegrenzt|ohne Obergrenze|Maximalbetrag|absicher|(?<![\d.,])0 EUR|(?:keine|ohne) Gesundheits(?:fragen|prüfung)/i.test(text),
+    !/kostenlos|kostenfrei|gratis|umsonst|garantiert|unbegrenzt|ohne Obergrenze|Maximalbetrag|absicher|(?<![\d.,])0 EUR|(?:keine|ohne) Gesundheitsfragen|keine Gesundheitsprüfung/i.test(text),
     `${WAS_STEHT_SLUG}: Sperrwort (kostenlos, gratis, 0 EUR, garantiert, unbegrenzt, absichern, keine/ohne Gesundheitsfragen).`,
   );
+  // "ohne Gesundheitsprüfung" ist nur bei der Kindernachversicherung richtig
+  // (§ 198 VVG: keine Prüfung, also auch kein Risikozuschlag). Für Anträge von
+  // Erwachsenen bleibt die Formel gesperrt.
+  for (const match of text.matchAll(/ohne Gesundheitsprüfung/gi)) {
+    const context = text.slice(Math.max(0, match.index - 220), match.index);
+    expect(/Kind|Baby|Neugeboren|Geburt/.test(context), `${WAS_STEHT_SLUG}: "ohne Gesundheitsprüfung" nur bei der Kindernachversicherung.`);
+  }
   expect(!/(?<!Soziale )\bsicher/i.test(text), `${WAS_STEHT_SLUG}: Wortstamm "sicher" nicht als Versprechen.`);
   expect(!/Geldbonus|Bargeld/.test(text), `${WAS_STEHT_SLUG}: Bonus nur als Zuschuss, nie als Bargeld.`);
   expect(!/3\.000/.test(text), `${WAS_STEHT_SLUG}: Die 3.000 EUR bleiben aus diesem Ratgeber draussen.`);

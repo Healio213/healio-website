@@ -560,7 +560,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Für dein Baby zählt der Tag der Geburt. Ist ein Elternteil an diesem Tag versichert und meldest du dein Kind spätestens zwei Monate danach an, nimmt der Versicherer es rückwirkend ab Geburt auf, ohne Risikozuschlag und ohne Wartezeit. Das Kind bekommt dabei höchstens den Schutz des Elternteils: Ist kein Elternteil beim selben Versicherer im Klinik-Tarif versichert, kommt das Baby nicht ohne Prüfung in einen Klinik-Tarif.',
+          text: 'Für dein Baby zählt der Tag der Geburt. Ist ein Elternteil an diesem Tag versichert und meldest du dein Kind spätestens zwei Monate danach an, nimmt der Versicherer es rückwirkend ab Geburt auf, ohne Gesundheitsprüfung und ohne Wartezeit. Das Kind bekommt dabei höchstens den Schutz des Elternteils: Ist kein Elternteil beim selben Versicherer im Klinik-Tarif versichert, kommt das Baby nicht ohne Prüfung in einen Klinik-Tarif.',
         },
         {
           type: 'paragraph',
@@ -590,7 +590,7 @@ export const article = {
             ['Spätestens 7 Wochen vor Beginn', 'Elternzeit beim Arbeitgeber in Textform verlangen', '§ 16 BEEG'],
             ['Innerhalb einer Woche nach der Geburt', 'Geburt beim Standesamt anzeigen, meist über die Klinik', '§ 18 PStG'],
             ['Möglichst bald nach der Geburt', 'Kind bei deiner Krankenkasse zur Familienversicherung anmelden', '§ 10 SGB V'],
-            ['Spätestens 2 Monate nach der Geburt', 'Kind beim privaten Zusatzversicherer eines Elternteils anmelden. Ist der Elternteil am Tag der Geburt dort versichert, wird es rückwirkend ab Geburt ohne Risikozuschläge und Wartezeiten aufgenommen. Manche Versicherer verlangen, dass der Elternteil schon eine Weile versichert ist, laut Gesetz höchstens drei Monate, bei der Bayerischen drei Monate', '§ 198 VVG'],
+            ['Spätestens 2 Monate nach der Geburt', 'Kind beim privaten Zusatzversicherer eines Elternteils anmelden. Ist der Elternteil am Tag der Geburt dort versichert, wird es rückwirkend ab Geburt ohne Gesundheitsprüfung und ohne Wartezeit aufgenommen. Manche Versicherer verlangen, dass der Elternteil schon eine Weile versichert ist, laut Gesetz höchstens drei Monate, bei der Bayerischen drei Monate', '§ 198 VVG'],
             ['In den ersten 3 Lebensmonaten', 'Elterngeld beantragen, rückwirkend wird es nur für drei Lebensmonate gezahlt', '§ 7 BEEG'],
             ['In den ersten 6 Monaten', 'Kindergeld beantragen, rückwirkend wird es nur für sechs Monate gezahlt', '§ 70 EStG'],
             ['Bis 12 Wochen nach der Geburt', 'Hebammenhilfe im Wochenbett nutzen; danach bis zu acht Kontakte bei Still- oder Ernährungsproblemen, alles Weitere auf ärztliche Anordnung', '§ 24d SGB V, Hebammenhilfevertrag'],
