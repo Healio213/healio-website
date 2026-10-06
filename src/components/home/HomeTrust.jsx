@@ -46,7 +46,7 @@ const HomeTrust = () => {
             </MobileSwipeRow>
           </div>
 
-          <div className="relative h-[380px] overflow-hidden rounded-[2rem] border border-[#CCE8DA] bg-[linear-gradient(145deg,#E7F7EF_0%,#DDF4EA_52%,#FFF6DF_100%)] px-5 pb-0 pt-6 shadow-[0_24px_70px_rgba(12,42,33,0.13)] sm:h-auto sm:min-h-[580px] sm:p-10">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[#CCE8DA] bg-[linear-gradient(145deg,#E7F7EF_0%,#DDF4EA_52%,#FFF6DF_100%)] px-5 pb-6 pt-6 shadow-[0_24px_70px_rgba(12,42,33,0.13)] sm:h-auto sm:min-h-[580px] sm:p-10">
             <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full border border-emerald-900/10" aria-hidden="true" />
             <div className="absolute -left-8 bottom-10 h-44 w-44 rounded-full bg-white/50 blur-2xl" aria-hidden="true" />
             <div className="relative mx-auto w-[210px] rotate-2 rounded-[2rem] border border-white/15 bg-slate-950 p-2.5 shadow-[0_28px_60px_rgba(7,17,31,0.24)] sm:w-[245px]">

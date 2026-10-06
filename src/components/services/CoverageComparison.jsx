@@ -11,7 +11,7 @@ const CoverageComparison = () => {
   const items = t('comparison.items', { returnObjects: true });
 
   return (
-    <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="coverage-comparison-title">
+    <section className="hidden bg-white px-4 py-12 sm:px-6 md:block md:py-24 lg:px-8 lg:py-28" aria-labelledby="coverage-comparison-title">
       <div className="healio-container grid gap-6 max-md:px-0 md:gap-12 xl:grid-cols-[0.72fr_1.28fr] xl:gap-16">
         <div className="min-w-0 xl:sticky xl:top-28 xl:self-start">
           <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700 md:text-xs">{t('comparison.eyebrow')}</p>

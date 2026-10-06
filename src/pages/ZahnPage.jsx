@@ -17,6 +17,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
@@ -83,7 +84,7 @@ const ZahnPage = () => {
         schemaMarkup={createServiceSchema()}
       />
 
-      {/* Handy-Reihenfolge nach Franks Vorgabe (06.10.2026): Einstieg, Siegel,
+      {/* Handy-Reihenfolge nach Vorgabe (06.10.2026): Einstieg, Siegel,
           Erklärvideo, dann der Ablauf. Nur unter md per CSS-Reihenfolge, am
           Desktop bleibt die bisherige Abfolge. */}
       <article className="flex flex-col overflow-hidden bg-white text-[#07111f] md:block">
@@ -297,33 +298,7 @@ const ZahnPage = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[26rem] overflow-hidden rounded-[1.75rem] border border-[#efda9b] bg-gradient-to-br from-[#fffaf0] to-[#ffe9b7] p-5 text-[#07111f] shadow-2xl sm:p-7 md:min-h-[25rem] md:rounded-[2.25rem]">
-              <span className="absolute left-1/2 top-0 h-4 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#e7d4a0] bg-white/80" aria-hidden="true" />
-              <p className="relative z-10 max-w-[14rem] font-display text-sm font-extrabold uppercase tracking-[0.13em] text-[#77570c] md:text-xs">
-                {content.bonus.stamp}
-              </p>
-              <h3 className="relative z-10 mt-4 max-w-[10ch] font-friendly text-3xl font-bold leading-[0.98] tracking-[-0.035em] text-[#103c30] sm:text-4xl">
-                {content.bonus.question}
-              </h3>
-              <img
-                src="/images/friendly-icons/bonus-you-mascot.webp"
-                alt=""
-                aria-hidden="true"
-                width="512"
-                height="512"
-                className="absolute -right-6 top-3 w-[42%] max-w-[15.5rem] object-contain drop-shadow-[0_18px_22px_rgba(66,48,15,0.18)] sm:-right-8 sm:top-4 sm:w-[58%]"
-              />
-
-              <strong className="relative z-10 mt-8 block font-display text-[3.35rem] font-extrabold leading-none tracking-[-0.065em] text-[#087654] sm:mt-20 sm:text-[4.1rem]">
-                {content.bonus.amount}
-              </strong>
-              <span className="relative z-10 mt-3 block max-w-[19rem] font-display text-base font-extrabold leading-6 text-[#5c4510]">
-                {content.bonus.stampLabel}
-              </span>
-              <p className="relative z-10 mt-4 border-t border-[#d9c07f] pt-3 text-sm font-semibold leading-6 text-[#5f543f] hyphens-auto [hyphenate-limit-chars:10_4_4] md:mt-5 md:pt-4">
-                {content.bonus.condition}
-              </p>
-            </div>
+            <BonusStempelKarte content={content.bonus} />
           </div>
         </section>
 
@@ -386,7 +361,7 @@ const ZahnPage = () => {
               </MobileSwipeRow>
             </div>
 
-            <aside className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 self-start rounded-[1.75rem] border border-[#b6e8d5] bg-[#effbf6] p-5 sm:p-9 md:block md:rounded-[2rem]">
+            <aside className="hidden min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 self-start rounded-[1.75rem] border border-[#b6e8d5] bg-[#effbf6] p-5 sm:p-9 md:block md:rounded-[2rem]">
               <FriendlyIcon kind="advisor" tone="lavender" size="lg" className="-rotate-2" />
               <h3 className="font-display text-xl font-extrabold leading-tight tracking-[-0.03em] md:mt-7 md:text-2xl md:leading-tight">{content.process.trustTitle}</h3>
               <p className="col-span-2 mt-4 leading-6 text-slate-600 sm:leading-7">{content.process.trustText}</p>
@@ -453,7 +428,11 @@ const ZahnPage = () => {
           </div>
         </section>
 
-        {lang === 'de' && <DentalCallbackForm />}
+        {lang === 'de' && (
+          <div className="hidden md:block">
+            <DentalCallbackForm />
+          </div>
+        )}
       </article>
 
       <NitaQuickPill hideNearIds={['zahn-check', 'zahn-kontakt']} />

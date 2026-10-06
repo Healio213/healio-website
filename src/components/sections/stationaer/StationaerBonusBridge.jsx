@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 
 const StationaerBonusBridge = () => {
   const { t } = useTranslation('stationaer');
@@ -16,6 +17,10 @@ const StationaerBonusBridge = () => {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-[minmax(0,1fr)] gap-8 md:gap-10 lg:grid-cols-[0.93fr_1.07fr] lg:items-center lg:gap-14">
+          {/* Nur mobil: der Bonus-Stempel als Einstieg in den Abschnitt. */}
+          <div className="md:hidden">
+            <BonusStempelKarte />
+          </div>
           <div>
             <div className="flex items-end gap-2 sm:gap-4">
               <img

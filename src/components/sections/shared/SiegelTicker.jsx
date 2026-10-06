@@ -1,12 +1,14 @@
 import React from 'react';
 
 /**
- * Siegel-Ticker für das Handy (Experiment 06.10.2026, Franks Wunsch).
+ * Siegel-Ticker für das Handy (Experiment 06.10.2026, Vorgabe).
  *
  * Statt einer hohen Siegelzeile läuft ein ruhiges, schmales Band mit den
- * Siegeln durch. Jedes Siegel trägt unter dem Logo eine kurze Beschriftung,
- * damit klar bleibt, welchem Versicherer bzw. Tarif es gehört. Die
- * Pflichthinweise stehen dauerhaft als ruhender Text darunter, nicht im Band.
+ * Siegelbildern durch. Vorgabe (06.10.2026): am Handy KEINE Überschrift,
+ * KEINE Beschriftung unter den Siegeln und KEINE sichtbaren Hinweise, nur die
+ * durchlaufenden Bilder. Die Bilder nennen Versicherer bzw. Tarif selbst; die
+ * Alt-Texte bleiben vollständig, und die Pflichthinweise stehen als
+ * Screenreader-Text (sr-only) weiter im Dokument, ohne sichtbar zu sein.
  *
  * Nur für unter md (768 px) gedacht: Der Aufrufer rendert den Ticker in einem
  * Wrapper mit "md:hidden"; ab md bleibt die bisherige Siegelzeile.
@@ -20,33 +22,38 @@ import React from 'react';
  *   Reihe, die Doppelung fällt weg.
  * - Weniger als drei Siegel: kein Lauf, die Siegel stehen ruhig nebeneinander.
  *
- * items: [{ id, src, alt, caption, width, height }]
- * notes: Pflichthinweise (Text), mindestens 14 px.
+ * items: [{ id, src, alt, width, height }]
+ * notes: Pflichthinweise (Text), nur für Screenreader.
+ * size: 'regular' (56 px hoch) oder 'large' (72 px hoch, z. B. /schwangerschaft).
  */
-const SiegelTicker = ({ items = [], ariaLabel, notes = [], className = '' }) => {
+const IMAGE_CLASS = { regular: 'h-14 w-auto', large: 'h-[4.5rem] w-auto' };
+const GAP_CLASS = { regular: 'gap-x-9 pr-9', large: 'gap-x-12 pr-12' };
+
+const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', className = '' }) => {
   if (!items.length) return null;
+  const imageClass = IMAGE_CLASS[size] || IMAGE_CLASS.regular;
+  const gapClass = GAP_CLASS[size] || GAP_CLASS.regular;
   const running = items.length >= 3;
   // Eine volle Runde dauert je Siegel etwa neun Sekunden: ruhig, nicht hektisch.
   const duration = `${Math.max(24, items.length * 9)}s`;
 
   const renderList = (hidden, suffix) => (
     <ul
-      className={`siegel-ticker__list flex shrink-0 items-start gap-x-9 pr-9 ${hidden ? 'siegel-ticker__dup' : ''}`}
+      className={`siegel-ticker__list flex shrink-0 items-center ${gapClass} ${hidden ? 'siegel-ticker__dup' : ''}`}
       aria-hidden={hidden ? 'true' : undefined}
     >
       {items.map((item) => (
-        <li key={`${item.id}${suffix}`} className="flex shrink-0 flex-col items-center gap-1.5 text-center">
+        <li key={`${item.id}${suffix}`} className="flex shrink-0 items-center">
           <img
             src={item.src}
             alt={hidden ? '' : item.alt}
             width={item.width}
             height={item.height}
-            className="h-12 w-auto"
+            className={imageClass}
             loading="lazy"
             decoding="async"
             draggable="false"
           />
-          <span className="whitespace-nowrap text-[0.8125rem] font-semibold leading-4 text-slate-600">{item.caption}</span>
         </li>
       ))}
     </ul>
@@ -62,26 +69,25 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], className = '' }) => 
           </div>
         </div>
       ) : (
-        <ul role="group" aria-label={ariaLabel} className="flex flex-wrap items-start justify-center gap-x-9 gap-y-3 py-1">
+        <ul role="group" aria-label={ariaLabel} className="flex flex-wrap items-center justify-center gap-x-9 gap-y-3 py-1">
           {items.map((item) => (
-            <li key={item.id} className="flex shrink-0 flex-col items-center gap-1.5 text-center">
+            <li key={item.id} className="flex shrink-0 items-center">
               <img
                 src={item.src}
                 alt={item.alt}
                 width={item.width}
                 height={item.height}
-                className="h-12 w-auto"
+                className={imageClass}
                 loading="lazy"
                 decoding="async"
               />
-              <span className="text-[0.8125rem] font-semibold leading-4 text-slate-600">{item.caption}</span>
             </li>
           ))}
         </ul>
       )}
 
       {notes.length > 0 && (
-        <div className="mx-auto mt-3 max-w-xl space-y-2 text-center text-sm leading-5 text-slate-500">
+        <div className="sr-only">
           {notes.map((note) => (
             <p key={note}>{note}</p>
           ))}

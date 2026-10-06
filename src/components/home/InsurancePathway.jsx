@@ -64,15 +64,17 @@ const InsurancePathway = () => {
                 className={`home-focus group relative flex w-full flex-col overflow-hidden rounded-3xl border p-5 shadow-[0_2px_10px_rgba(12,42,33,0.07)] transition md:shadow-[0_16px_40px_rgba(12,42,33,0.07)] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(12,42,33,0.12)] motion-reduce:transform-none md:min-h-[350px] md:p-7 ${visual.surface} ${visual.border}`}
               >
                 <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border border-current opacity-[0.06]" aria-hidden="true" />
+                <div className="relative flex items-center gap-4 md:contents">
                 <FriendlyIcon
                   kind={visual.kind}
                   tone={visual.tone}
                   size="lg"
                   className="transition-transform duration-200 group-hover:-rotate-2 group-hover:scale-[1.04] motion-reduce:transform-none"
                 />
-                <span className={`relative mt-5 text-sm font-extrabold uppercase tracking-[0.18em] md:mt-7 md:text-xs ${visual.label}`}>
+                <span className={`relative text-sm font-extrabold uppercase tracking-[0.18em] md:mt-7 md:text-xs ${visual.label}`}>
                   {item.label}
                 </span>
+                </div>
                 <h3 className="relative mt-3 max-w-[17ch] font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
                   {item.title}
                 </h3>

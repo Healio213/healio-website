@@ -19,6 +19,7 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
+import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
@@ -655,7 +656,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
       {!fromBonusTopic && (
         <>
       {/* Die IKK-Wechsel-Strecke mit der Brücke (bis 29.08. auf allen drei
-          Produktseiten, auf Franks Wunsch zurück). Seit 30.09. direkt nach der
+          Produktseiten, auf Vorgabe zurück). Seit 30.09. direkt nach der
           Tarifwahl als erster Teil der Kassen-Geschichte (Frank: die Szene soll
           im Fokus stehen); die Regel „erst Tarif, dann Kasse“ bleibt. */}
       {/* Mobile Reihenfolge (Experiment 06.10.2026): erst die kurze Übersicht der
@@ -670,7 +671,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
       <section className="order-8 bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-6 md:gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-          <div className="relative mx-auto w-full max-w-md">
+          {/* Mobil ersetzt die Stempel-Karte die Bild-Karte (Aussage steht im Text darunter). */}
+          <BonusStempelKarte className="md:hidden" headingLevel="p" />
+          <div className="relative mx-auto hidden w-full max-w-md md:block">
             <div className="absolute inset-8 rounded-full bg-home-mint/20 blur-3xl" />
             {/* Mobil Bild und Aussage nebeneinander statt untereinander (spart rund 250 px). */}
             <div className="relative flex items-center gap-3 overflow-hidden rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#123241] to-home-midnight p-4 shadow-2xl md:block md:p-6">

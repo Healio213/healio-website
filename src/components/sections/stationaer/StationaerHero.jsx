@@ -33,17 +33,17 @@ const StationaerHero = () => {
           </p>
           <h1
             id="stationaer-hero-heading"
-            className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
+            className="mt-4 max-w-[17ch] font-display text-[2.15rem] md:mt-5 md:text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
           >
             {t('refresh.hero.title')}
           </h1>
-          <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-slate-200 sm:text-lg lg:text-xl">
+          <p className="mt-4 max-w-2xl text-base font-medium md:mt-6 leading-relaxed text-slate-200 sm:text-lg lg:text-xl">
             {t('refresh.hero.subtitle')}
           </p>
 
           <a
             href="#tarife"
-            className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
+            className="mt-6 inline-flex min-h-12 md:mt-8 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
           >
             {t('refresh.hero.cta')}
             <ArrowDown className="h-4 w-4" aria-hidden="true" />

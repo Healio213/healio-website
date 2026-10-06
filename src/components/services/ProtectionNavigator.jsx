@@ -15,6 +15,14 @@ const pathVisuals = {
   pet: { kind: 'pet', tone: 'lavender' },
 };
 
+// Kopfband der Karte nur mobil: Farbe je Bereich, damit sofort klar ist, worum es geht.
+const headerTones = {
+  ambulant: { band: 'bg-[#E4F6EE] border-[#CBEBDC]', label: 'text-[#0B6B4B]' },
+  dental: { band: 'bg-[#FFF3D6] border-[#F5E2AE]', label: 'text-[#7A5600]' },
+  hospital: { band: 'bg-[#E3F0FB] border-[#CFE0F0]', label: 'text-[#2B6497]' },
+  pet: { band: 'bg-[#EFEAFB] border-[#DDD5F3]', label: 'text-[#5B3FA8]' },
+};
+
 // Das letzte Wort bleibt mit dem Pfeil zusammen, damit der Pfeil nie allein in einer Zeile steht.
 const LinkLabel = ({ text }) => {
   const words = String(text).split(' ');
@@ -88,11 +96,15 @@ const ProtectionNavigator = () => {
   const prefersReducedMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
   const items = t('paths.items', { returnObjects: true });
+  const checks = t('comparison.items', { returnObjects: true });
+  const checkLabel = t('comparison.headers.check');
   const highlightIndex = items.findIndex((item) => item.highlight);
   const extraCardPosition = highlightIndex >= 0 ? highlightIndex + 2 : null;
 
   const cards = items.flatMap((item, index) => {
     const visual = pathVisuals[item.key] || pathVisuals.ambulant;
+    const header = headerTones[item.key] || headerTones.ambulant;
+    const check = Array.isArray(checks) ? checks.find((entry) => entry.key === item.key) : null;
     const card = (
       <motion.article
         id={item.anchor}
@@ -101,21 +113,33 @@ const ProtectionNavigator = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.18 }}
         transition={{ duration: 0.55, delay: index * 0.06 }}
-        className="group flex h-full w-full scroll-mt-24 flex-col rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_2px_10px_rgba(7,17,31,0.08)] sm:p-9 md:shadow-[0_24px_60px_rgba(7,17,31,0.10)] md:block lg:p-11"
+        className="group flex h-full w-full scroll-mt-24 flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white p-0 shadow-[0_2px_10px_rgba(7,17,31,0.08)] md:block md:overflow-visible md:p-9 md:shadow-[0_24px_60px_rgba(7,17,31,0.10)] lg:p-11"
       >
-        <div className="flex flex-1 flex-col gap-4 md:grid md:gap-7 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
+        {check && (
+          <div className={`flex items-center gap-3 border-b px-5 py-4 md:hidden ${header.band}`}>
+            <FriendlyIcon kind={visual.kind} tone={visual.tone} size="md" />
+            <p className={`font-display text-sm font-extrabold uppercase tracking-[0.16em] ${header.label}`}>{check.label}</p>
+          </div>
+        )}
+        <div className="flex flex-1 flex-col gap-4 p-5 md:grid md:p-0 md:gap-7 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
           <div className="min-w-0">
-            <FriendlyIcon kind={visual.kind} tone={visual.tone} size="xl" />
-            <h3 className="mt-4 max-w-[18ch] font-display text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#10202A] [text-wrap:balance] sm:text-4xl md:mt-6">
+            <FriendlyIcon kind={visual.kind} tone={visual.tone} size="xl" className="max-md:hidden" />
+            <h3 className="max-w-[18ch] font-display text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#10202A] [text-wrap:balance] sm:text-4xl md:mt-6">
               {item.title}
             </h3>
           </div>
           <div className="flex min-w-0 flex-1 flex-col md:block lg:self-end">
-            <p className="mb-5 max-w-2xl text-[1.0625rem] leading-7 text-slate-600 sm:text-lg sm:leading-8 md:mb-0">{item.description}</p>
+            <p className="mb-4 max-w-2xl text-[1.0625rem] leading-7 text-slate-600 sm:text-lg sm:leading-8 md:mb-0">{item.description}</p>
+            {check && (
+              <div className="mb-5 rounded-2xl border border-slate-200 bg-[#F7F9F8] p-4 md:hidden">
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-slate-600">{checkLabel}</p>
+                <p className="mt-2 text-base font-semibold leading-7 text-[#10202A]">{check.check}</p>
+              </div>
+            )}
             {item.highlight && <HighlightBox highlight={item.highlight} className="mt-7 hidden rounded-2xl md:block" />}
             <Link
               to={getPath(item.routeKey)}
-              className="home-focus mt-auto inline-block self-start py-2 font-display text-base font-extrabold leading-7 text-emerald-700 transition hover:text-emerald-900 md:mt-6 md:py-0"
+              className="home-focus mt-4 inline-block min-h-[48px] rounded-full bg-[#10202A] px-5 py-3 text-center font-display text-base font-extrabold leading-6 text-white transition hover:bg-[#18333C] max-md:w-full md:mt-6 md:min-h-0 md:self-start md:rounded-none md:bg-transparent md:p-0 md:text-left md:leading-7 md:text-emerald-700 md:hover:bg-transparent md:hover:text-emerald-900"
             >
               <LinkLabel text={item.cta} />
             </Link>

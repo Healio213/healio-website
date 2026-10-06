@@ -5,6 +5,7 @@ import HighlightText from '@/components/ui/HighlightText';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
+import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
 import { useReferrer } from '@/hooks/useReferrer';
@@ -252,7 +253,7 @@ export default function BenefitFunnelPage() {
             wie bisher im Bonus-Abschnitt; die Hälfte hier ist dort ausgeblendet und
             umgekehrt, es steht also nie dasselbe Siegel zweimal sichtbar auf der Seite. */}
         <div className="bg-white px-5 pb-2 pt-6 md:hidden">
-          <IkkKassenSiegel order="parents" />
+          <HealioSiegelBand productSet="schwangerschaft" />
         </div>
 
         <section id="so-gehts" aria-labelledby="so-gehts-heading" className={`${wrap} scroll-mt-28 py-12 md:py-16`}>

@@ -7,7 +7,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { getUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections/ambulant/ukvAmbulantLinks';
 
 // Vorsorge-Baustein (UKV VorsorgePRIVAT) als klar abgegrenzte Zusatzoption
-// unter der SDK-Tarifwahl (Franks Wunsch 05.10.2026). Das SDK-Gesundheitsbudget
+// unter der SDK-Tarifwahl (Vorgabe 05.10.2026). Das SDK-Gesundheitsbudget
 // bleibt das Kernprodukt: kein zweiter Hauptknopf, keine Abfrage zum
 // Gesundheitszustand. Alle Zahlen stammen aus den freigegebenen UKV-Fakten
 // (Beiträge gültig ab 01.05.2026) in ambulant.json.
@@ -38,14 +38,14 @@ const AmbulantVorsorgeBaustein = () => {
       id="vorsorge-baustein"
       aria-labelledby="vorsorge-baustein-title"
       data-healio-ambulant="vorsorge-baustein"
-      className="mt-8 scroll-mt-20 overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-home-ice md:mt-14"
+      className="mt-8 scroll-mt-20 overflow-hidden rounded-[2rem] border-2 border-emerald-600/40 bg-emerald-50 shadow-lg shadow-emerald-900/10 md:mt-14 md:border md:border-emerald-900/10 md:bg-home-ice md:shadow-none"
     >
       <div className="p-5 sm:p-8 lg:p-10">
         <div className="flex items-center gap-3 sm:items-start sm:gap-4">
           <span className="hidden shrink-0 sm:block"><FriendlyIcon kind="prevention" tone="mint" size="md" /></span>
           <div className="min-w-0">
-            <p className="font-display text-sm font-extrabold uppercase tracking-[0.08em] text-emerald-700 md:text-xs md:tracking-[0.18em]">{text('eyebrow')}</p>
-            <h3 id="vorsorge-baustein-title" className="mt-1 font-display text-xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:mt-2 sm:text-3xl">{text('title')}</h3>
+            <p className="inline-block rounded-full bg-emerald-700 px-3 py-1 font-display text-sm font-extrabold uppercase tracking-[0.08em] text-white md:bg-transparent md:p-0 md:text-xs md:tracking-[0.18em] md:text-emerald-700">{text('eyebrow')}</p>
+            <h3 id="vorsorge-baustein-title" className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:text-3xl">{text('title')}</h3>
           </div>
         </div>
         <p className="mt-4 max-w-3xl text-base leading-6 text-home-slate sm:leading-7">{text('lead')}</p>

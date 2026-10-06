@@ -51,6 +51,21 @@ const cx = (...parts) => parts.filter(Boolean).join(' ');
 // mobileSwipe (Experiment 05.10.2026, nur Zahnseite): Unterhalb von md (768 px)
 // stehen gleichartige Karten in Wischreihen und die Abstände sind kompakter.
 // Ab md bleibt alles wie zuvor; ohne die Prop ändert sich nirgends etwas.
+//
+// Stand 06.10.2026 (Handy-Rückmeldung, nur unter md und nur mit
+// mobileSwipe):
+// - "Kassenwechsel im Detail" funktionierte am Handy scheinbar nicht: Die Details
+//   standen NACH der hohen Brücken-Szene (rund 590 px), also weit unter dem Knopf
+//   und außerhalb des Bildschirms. Der Knopf hat geschaltet, sichtbar passierte
+//   nichts. Jetzt öffnen die Details direkt unter den Knöpfen (die Szene rückt
+//   darunter), ab md bleibt die Reihenfolge Szene, dann Details. Dazu: Region
+//   mit Beschriftung, aria-expanded und aria-controls am echten Button.
+// - Die IKK-Siegel dieses Abschnitts entfallen unter md (sie laufen oben im
+//   Siegelband der Seite), ebenso das Etikett über der Überschrift, die
+//   Deko-Illustration in den Vorteilen, der zweite Rahmen um die Szene (die
+//   Szene hat ihren eigenen Rahmen) und der zweite "IKK-Bonus sichern"-Knopf
+//   in den Details (derselbe Link steht direkt darüber). Der Abschnitt ist dadurch deutlich
+//   schlanker; kein Wortlaut und keine Versicherungsaussage ist gekürzt.
 const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
   const { t } = useTranslation('ambulant');
   const [openIndex, setOpenIndex] = useState(null);
@@ -144,7 +159,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
 
         {/* Header */}
         <div className={cx('text-center md:mb-10', mobileSwipe ? 'mb-6' : 'mb-8')}>
-          <div className={cx('inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full', mobileSwipe ? 'mb-4 md:mb-6' : 'mb-6')}>
+          <div className={cx('inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full', mobileSwipe ? 'max-md:hidden md:mb-6' : 'mb-6')}>
             <Shield className="w-4 h-4" />
             {t('ikkWechsel.badge')}
           </div>
@@ -168,6 +183,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
             </a>
             <button
               type="button"
+              id="ikk-wechsel-details-toggle"
               onClick={() => setDetailsOpen((value) => !value)}
               aria-expanded={detailsOpen}
               aria-controls="ikk-wechsel-details"
@@ -182,13 +198,22 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
           </div>
 
           {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
-              03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile. */}
-          <IkkKassenSiegel className={cx('mx-auto', mobileSwipe ? 'mt-6 md:mt-8 [&>p:last-child]:text-sm' : 'mt-8')} />
+              03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile.
+              Unter md (mit mobileSwipe) entfallen sie hier: Sie laufen oben im
+              Siegelband der Seite (Vorgabe 06.10.2026). */}
+          <div className={cx(mobileSwipe && 'max-md:hidden')}>
+            <IkkKassenSiegel className="mx-auto mt-8" />
+          </div>
         </div>
 
+        {/* Szene und Details stehen in einem Wrapper: Unter md (mit mobileSwipe)
+            ist er eine Spalte, in der die aufgeklappten Details per order VOR
+            der Szene stehen, direkt unter den Knöpfen. Ab md ist er ein Block
+            in der Reihenfolge des Quelltexts wie bisher. */}
+        <div className={cx(mobileSwipe && 'flex flex-col md:block')}>
         {/* Die Brücken-Szene steht wieder offen sichtbar (Frank 29.09.2026);
             nur die weiteren Details bleiben aufklappbar. */}
-        <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? cx('p-2 md:mb-12', detailsOpen ? 'mb-6' : 'mb-0') : 'mb-12 p-4')}>
+        <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? 'order-2 max-md:rounded-none max-md:border-0 max-md:bg-none max-md:!p-0 max-md:shadow-none md:order-none md:mb-12' : 'mb-12 p-4')}>
           <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
             <IkkSwitch3DScene variant={activeVariant} />
           </Suspense>
@@ -196,7 +221,9 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
 
         <div
           id="ikk-wechsel-details"
-          className={detailsOpen ? 'block' : 'hidden'}
+          role="region"
+          aria-labelledby="ikk-wechsel-details-toggle"
+          className={cx(detailsOpen ? 'block' : 'hidden', mobileSwipe && 'order-1 mb-8 md:order-none md:mb-0')}
           aria-hidden={!detailsOpen}
         >
         <motion.article
@@ -225,7 +252,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
               </ul>
             </div>
 
-            <div className={cx('relative self-stretch sm:min-h-[360px] lg:min-h-[430px]', mobileSwipe ? 'min-h-[220px]' : 'min-h-[280px]')}>
+            <div className={cx('relative self-stretch sm:min-h-[360px] lg:min-h-[430px]', mobileSwipe ? 'min-h-[220px] max-md:hidden' : 'min-h-[280px]')}>
               <img
                 src="/images/healio-vorteile-illustration-v1.webp"
                 alt={t('ikkWechsel.advantagesImageAlt')}
@@ -266,7 +293,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackIkkClick('ikk-wechsel-detail')}
-                    className="inline-flex items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c]"
+                    className={cx('inline-flex items-center justify-center rounded-xl bg-[#55bd8b] px-6 py-3 font-bold text-white shadow-[0_12px_26px_rgba(69,158,116,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#48aa7c]', mobileSwipe && 'max-md:hidden')}
                   >
                     {t('ikkWechsel.ctaBonus')}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -394,6 +421,8 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
           <button
             type="button"
             onClick={() => setMobileTimelineOpen((value) => !value)}
+            aria-expanded={mobileTimelineOpen}
+            aria-controls="wechselstrecke-inhalt"
             className="flex w-full items-center justify-between gap-4 text-left md:hidden"
           >
             <div>
@@ -416,7 +445,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
             </p>
           </div>
 
-          <div className={`${mobileTimelineOpen ? 'block' : 'hidden'} md:block`}>
+          <div id="wechselstrecke-inhalt" className={`${mobileTimelineOpen ? 'block' : 'hidden'} md:block`}>
             <div className="relative mt-6 md:mt-0">
               <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
               {mobileSwipe ? (
@@ -475,7 +504,9 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                 className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-emerald-200 transition-colors"
               >
                 <button
+                  type="button"
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                  aria-expanded={openIndex === idx}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
                   <div className="flex items-center gap-3">
@@ -500,6 +531,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
               </div>
             ))}
           </div>
+        </div>
         </div>
         </div>
 
