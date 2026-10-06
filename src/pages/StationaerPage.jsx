@@ -119,7 +119,7 @@ const StationaerPage = () => {
           <SalesAiAssist className="bg-[#fbfaf7]" />
         </Slot>
         {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6). */}
-        <Slot order="order-13">
+        <Slot order="order-[13]">
           <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
         </Slot>
         <Slot order="order-last">
