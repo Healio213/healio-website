@@ -293,7 +293,7 @@ export default function BenefitFunnelPage() {
                 </details>
               </article>
             </div>
-            <p className="mt-7 max-w-prose text-base leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link> und <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link>.</p>
+            <p className="mt-7 max-w-prose text-base leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>, <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> und <Link to="/ratgeber/hebamme-kosten-krankenkasse" className={textLink}>was die Hebamme kostet und was die Kasse zahlt</Link>.</p>
           </div>
         </section>
 

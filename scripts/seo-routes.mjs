@@ -919,6 +919,14 @@ export const seoRoutes = [
     schemaMarkup: ratgeberSchema('schwangerschaft-worauf-achten'),
   },
   {
+    path: '/ratgeber/hebamme-kosten-krankenkasse',
+    title: 'Hebamme Kosten: was die Krankenkasse zahlt | Healio',
+    description: 'Vorsorge, Wochenbett, Rückbildung: was die Hebamme macht, was die Krankenkasse zahlt und wo du selbst zahlst, etwa bei der Rufbereitschaft. Mit Rechnung.',
+    canonical: 'https://healio.de/ratgeber/hebamme-kosten-krankenkasse',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('hebamme-kosten-krankenkasse'),
+  },
+  {
     // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:
     // die Seite ist Werbung, nicht organische Sichtbarkeit. Die Uebersicht
     // /ratgeber und spaetere organische Ratgeberartikel bleiben indexiert.

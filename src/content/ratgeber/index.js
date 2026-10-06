@@ -18,6 +18,7 @@ import { article as ikkClassicBonusprogramm2026 } from './ikk-classic-bonusprogr
 import { article as zahnzusatzversicherungFehlenderZahn } from './zahnzusatzversicherung-fehlender-zahn.js';
 import { article as schwangerZusatzversicherung } from './schwanger-zusatzversicherung.js';
 import { article as schwangerschaftWoraufAchten } from './schwangerschaft-worauf-achten.js';
+import { article as hebammeKostenKrankenkasse } from './hebamme-kosten-krankenkasse.js';
 
 export const RATGEBER_BASE_PATH = '/ratgeber';
 
@@ -29,6 +30,7 @@ export const ratgeberArticles = [
   zahnzusatzversicherungFehlenderZahn,
   schwangerZusatzversicherung,
   schwangerschaftWoraufAchten,
+  hebammeKostenKrankenkasse,
   krankenkassenBonusZusatzversicherung,
 ];
 

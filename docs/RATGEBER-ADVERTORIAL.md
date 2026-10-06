@@ -19,6 +19,7 @@ Indexierung.
 | `/ratgeber/zahnzusatzversicherung-fehlender-zahn` | Ratgeber | indexiert, in der Sitemap |
 | `/ratgeber/schwanger-zusatzversicherung` | Ratgeber | indexiert, in der Sitemap |
 | `/ratgeber/schwangerschaft-worauf-achten` | Ratgeber | indexiert, in der Sitemap |
+| `/ratgeber/hebamme-kosten-krankenkasse` | Ratgeber (05.10.2026), wie die beiden Schwangerschaftsartikel für Google Ads und Meta gesperrt | indexiert, in der Sitemap |
 | `/ratgeber/krankenkassen-bonus-zusatzversicherung` | Advertorial 1 | `noindex, nofollow`, nicht in der Sitemap |
 
 Nur im deutschen Routenbaum. Im englischen Baum gibt es bewusst keine Route.
@@ -204,7 +205,7 @@ steht.
 | Seite | Stelle | Ziel |
 |---|---|---|
 | `/zahn` | unter den Wege-Karten, nur im deutschen Baum | `/ratgeber/zahnzusatzversicherung-fehlender-zahn` |
-| `/schwangerschaft` | unter dem Abschluss des FAQ-Blocks | beide Schwangerschaftsartikel |
+| `/schwangerschaft` | unter dem Abschluss des FAQ-Blocks | beide Schwangerschaftsartikel und der Hebammen-Artikel |
 | `/ambulant` | unter dem Hinweis im Bonusabschnitt, nur im deutschen Baum | `/ratgeber/ikk-classic-bonusprogramm-2026` |
 
 ### Was nicht auf die Seite kommt
