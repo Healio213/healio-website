@@ -317,6 +317,14 @@ export const article = {
           type: 'paragraph',
           text: 'Elterngeld und Elternzeit sind zwei getrennte Dinge. Die Elternzeit meldest du beim Arbeitgeber an, dafür gilt eine gesetzliche Ankündigungsfrist von sieben Wochen vor Beginn, bei Zeiten zwischen dem dritten und achten Geburtstag von 13 Wochen. Das Elterngeld beantragst du bei der Elterngeldstelle, in vielen Bundesländern auch online, praktisch erst nach der Geburt, weil die Geburtsurkunde dazugehört. Warte damit nicht zu lange: Rückwirkend wird Elterngeld nur für die letzten drei Lebensmonate vor dem Monat gezahlt, in dem dein Antrag eingeht, so § 7 Abs. 1 BEEG.',
         },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Alle Ansprüche und Fristen auf einen Blick, mit den Extras der großen Kassen, findest du im Ratgeber ' },
+            { text: 'Was dir in der Schwangerschaft zusteht', to: '/ratgeber/schwangerschaft-was-steht-mir-zu' },
+            { text: '.' },
+          ],
+        },
       ],
     },
     {

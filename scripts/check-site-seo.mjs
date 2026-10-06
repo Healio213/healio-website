@@ -15,6 +15,7 @@ const publicRouterPaths = [
   '/ratgeber/tk-bonusprogramm-2026', '/ratgeber/barmer-bonusprogramm-2026',
   '/ratgeber/zahnzusatzversicherung-fehlender-zahn',
   '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten',
+  '/ratgeber/schwangerschaft-was-steht-mir-zu',
   '/en', '/en/about', '/en/services', '/en/kassenboost', '/en/health-insurance-bonus', '/en/companies', '/en/companies/pension-calculator', '/en/partner', '/en/midwives', '/en/healthcare-professionals-protection',
   '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',

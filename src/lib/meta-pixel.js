@@ -66,6 +66,7 @@ const META_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
+  '/ratgeber/schwangerschaft-was-steht-mir-zu',
   '/blog/kassenbonus-schwangerschaft-vorsorge',
 ]);
 

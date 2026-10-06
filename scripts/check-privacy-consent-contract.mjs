@@ -268,7 +268,7 @@ expect(
 
 // /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
 expect(
-  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaPixel),
+  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaPixel),
   'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Meta-Sperrliste stehen.',
 );
 expect(
@@ -276,8 +276,8 @@ expect(
   'Private Kampagnenquellen muessen auch fuer Meta gesperrt bleiben.',
 );
 expect(
-  /const BLOCKED_PATHS = new Set\(\['\/schwangerschaft'\]\)/.test(metaCapi),
-  'Auch die CAPI-Funktion muss die Schwangerschafts-Route abweisen.',
+  /const BLOCKED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaCapi),
+  'Auch die CAPI-Funktion muss die Schwangerschafts-Route und die Schwangerschafts-Ratgeber abweisen.',
 );
 expect(
   /if \(isMetaExcludedRoute\(\) \|\| !hasConsent\('marketing', state\)\)/.test(app),
@@ -527,7 +527,7 @@ expect(
 
 // Dieselben Sperrrouten wie bei Meta.
 expect(
-  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(googleAds),
+  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(googleAds),
   'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
 );
 // Einstiegscodes sperren Google Ads nicht mehr, gehen aber nie an Google

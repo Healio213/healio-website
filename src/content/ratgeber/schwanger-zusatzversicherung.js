@@ -221,6 +221,14 @@ export const article = {
           type: 'paragraph',
           text: 'Der Zuschuss beträgt das Dreifache des Geldbonus, wird aber höchstens in Höhe deiner tatsächlichen Kosten ausgezahlt. Der Jahresbeitrag einer Krankenzusatzversicherung ist als Zuschussleistung Nummer 63 anrechenbar. Rechnerisch 405 EUR Zuschuss bei 240 EUR Jahresbeitrag ergeben also 240 EUR, nie mehr. Wichtig für den Nachweis: Für Mutterschaftsvorsorgen ist ein schriftlicher Nachweis Pflicht, der Mutterpass genügt, und es gibt je Untersuchung ein eigenes Antragsfeld. Für das Bonusjahr 2026 muss der vollständige Antrag bis zum 31.03.2027 bei der IKK classic sein. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
         },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Welche Extras andere Kassen in der Schwangerschaft zahlen und welche Fristen gelten, steht im Ratgeber ' },
+            { text: 'Was dir in der Schwangerschaft zusteht', to: '/ratgeber/schwangerschaft-was-steht-mir-zu' },
+            { text: '.' },
+          ],
+        },
       ],
     },
     {

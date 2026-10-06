@@ -163,6 +163,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://healio.de/ratgeber/schwangerschaft-was-steht-mir-zu</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://healio.de/blog</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>

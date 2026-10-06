@@ -49,6 +49,7 @@ const RATGEBER_SLUGS = [
   'zahnzusatzversicherung-fehlender-zahn',
   'schwanger-zusatzversicherung',
   'schwangerschaft-worauf-achten',
+  'schwangerschaft-was-steht-mir-zu',
 ];
 const IKK_LANDING_SLUG = 'ikk-classic-bonusprogramm-2026';
 const SCHWANGER_SLUG = 'schwanger-zusatzversicherung';
@@ -534,6 +535,76 @@ const zahnArtikel = getRatgeberArticle(ZAHN_SLUG);
 if (zahnArtikel) {
   expect(/laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1\.155 EUR/.test(zahnArtikel.factNugget), 'Der Faktenkasten im Zahn-Ratgeber nennt 810 EUR allgemein und 1.155 EUR nur in der Schwangerschaft.');
   expect(/400 bis 700 EUR/.test(zahnArtikel.factNugget), 'Der Faktenkasten im Zahn-Ratgeber nennt die breite Masse mit 400 bis 700 EUR.');
+}
+
+// --- 6a1. Was steht mir in der Schwangerschaft zu (seit 06.10.2026) -------
+
+// Quelle: Healio/Marktanalyse-2026-10/schwangere-suchabsicht.md, Abschnitt 4.
+// Gesperrte Themen und Woerter, Pflichtsaetze der Healio-Bruecken, der
+// Vorsorge-Topf gegen /ambulant und die beiden eingehenden Links.
+const WAS_STEHT_SLUG = 'schwangerschaft-was-steht-mir-zu';
+const WAS_STEHT_PATH = `/ratgeber/${WAS_STEHT_SLUG}`;
+const wasSteht = getRatgeberArticle(WAS_STEHT_SLUG);
+expect(Boolean(wasSteht), `Ratgeberartikel fehlt im Inhaltsregister: ${WAS_STEHT_SLUG}`);
+if (wasSteht) {
+  const text = renderArticleText(wasSteht);
+  expect(wasSteht.publishedAt === '2026-10-06', `${WAS_STEHT_SLUG} traegt publishedAt 2026-10-06.`);
+  expect(
+    new RegExp(`<loc>https://healio\\.de${WAS_STEHT_PATH}</loc>\\s*<lastmod>2026-10-06</lastmod>`).test(sitemap),
+    `Die Sitemap nennt fuer ${WAS_STEHT_SLUG} lastmod 2026-10-06.`,
+  );
+  expect(!/NIPT|Ersttrimester|Nackenfalt|Kinderwunsch|\bERGO\b|DA Direkt|\bLKH\b/i.test(text), `${WAS_STEHT_SLUG}: gesperrtes Thema oder gesperrter Anbietername.`);
+  expect(
+    !/kostenlos|kostenfrei|gratis|umsonst|garantiert|unbegrenzt|ohne Obergrenze|Maximalbetrag|absicher|(?<![\d.,])0 EUR|(?:keine|ohne) Gesundheits(?:fragen|prüfung)/i.test(text),
+    `${WAS_STEHT_SLUG}: Sperrwort (kostenlos, gratis, 0 EUR, garantiert, unbegrenzt, absichern, keine/ohne Gesundheitsfragen).`,
+  );
+  expect(!/(?<!Soziale )\bsicher/i.test(text), `${WAS_STEHT_SLUG}: Wortstamm "sicher" nicht als Versprechen.`);
+  expect(!/Geldbonus|Bargeld/.test(text), `${WAS_STEHT_SLUG}: Bonus nur als Zuschuss, nie als Bargeld.`);
+  expect(!/3\.000/.test(text), `${WAS_STEHT_SLUG}: Die 3.000 EUR bleiben aus diesem Ratgeber draussen.`);
+  expect(/Die Entbindung selbst ist bei bestehender Schwangerschaft nicht mehr versicherbar/.test(text), `${WAS_STEHT_SLUG}: Der Vorsorge-Topf-Absatz muss sagen, dass die Entbindung nicht versicherbar ist.`);
+  // Pruefrunde 06.10.2026: Fuer IKK-classic-Wechsel ist eine Verguetung ueber
+  // Makleraktiv vorgesehen, dazu der IKK-Werbezuschuss. Der Satz, Healio
+  // verdiene am Wechsel nichts, darf deshalb nicht auf die Seite; ob und wie
+  // offengelegt wird, entscheidet Frank.
+  expect(!/verdient (?:an einem|am) Kassenwechsel nichts|An einem Kassenwechsel verdient/i.test(text), `${WAS_STEHT_SLUG}: Kein Satz, Healio verdiene am Kassenwechsel nichts (Verguetung ueber Makleraktiv vorgesehen).`);
+  expect(/Ob sich ein Wechsel für dich lohnt, hängt auch am Zusatzbeitrag der neuen Kasse\./.test(text), `${WAS_STEHT_SLUG}: Der Kassenwechsel-Abschnitt nennt den Zusatzbeitrag der neuen Kasse.`);
+  expect(!/210 bis 240 EUR|sieben bis acht Vorsorgetermine/.test(text), `${WAS_STEHT_SLUG}: Die Wechsel-Rechnung nennt keine Euro-Spanne und keine Terminzahl, solange die IKK-Zahl bonusfaehiger Vorsorgen [Annahme] ist.`);
+  expect(!/im AOK-Ratgeber/.test(text), `${WAS_STEHT_SLUG}: Die Bonus-Spalte verweist nicht auf AOK-Werte, die der AOK-Ratgeber nicht nennt.`);
+  expect(/höchstens bis zur Höhe deines Beitrags/.test(text), `${WAS_STEHT_SLUG}: Die Wechsel-Rechnung nennt den Zuschuss nur bis zur Beitragshöhe.`);
+  expect(/80 Prozent bis 500 EUR je Kalenderjahr/.test(text), `${WAS_STEHT_SLUG}: AOK NordWest ist ein Jahresbudget, kein Betrag je Schwangerschaft.`);
+  const pflichtZusatz = (text.match(/Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab/g) || []).length;
+  expect(pflichtZusatz >= 2, `${WAS_STEHT_SLUG}: Bonus-Bruecke und Wechsel-Rechnung tragen je den Pflicht-Zusatz.`);
+
+  // Der Vorsorge-Topf im Text muss zu /ambulant passen (AP1, Ambulant 100).
+  const conversionFlow = read('src/components/sections/ambulant/AmbulantConversionFlow.jsx');
+  const ap1Prevention = Number((conversionFlow.match(/code: 'AP1'[^}]*prevention: (\d+)/) || [])[1]);
+  expect(ap1Prevention === 500 && /Im Tarif Ambulant 100 stehen dafür bis zu 500 EUR je zwei Kalenderjahre bereit\./.test(text), `${WAS_STEHT_SLUG}: Der Vorsorge-Topf im Text (500 EUR) muss zum AP1-Topf auf /ambulant passen (gefunden ${ap1Prevention}).`);
+
+  // Auch Links innerhalb der Abschnitte duerfen nicht ins Leere zeigen.
+  for (const section of wasSteht.sections) {
+    for (const block of section.blocks) {
+      if (block.type !== 'segments') continue;
+      for (const segment of block.segments) {
+        if (!segment.to?.startsWith('/ratgeber/')) continue;
+        const targetSlug = segment.to.slice('/ratgeber/'.length).split('#')[0];
+        expect(Boolean(getRatgeberArticle(targetSlug)), `Interner Ratgeber-Link zeigt ins Leere: ${WAS_STEHT_SLUG} -> ${segment.to}`);
+      }
+    }
+  }
+
+  // Genau ein eingehender Link aus jedem der beiden aelteren Schwangerschafts-Ratgeber.
+  for (const sourceSlug of [SCHWANGER_SLUG, 'schwangerschaft-worauf-achten']) {
+    const source = getRatgeberArticle(sourceSlug);
+    const inbound = (source?.sections || [])
+      .flatMap((section) => section.blocks)
+      .filter((block) => block.type === 'segments')
+      .flatMap((block) => block.segments)
+      .filter((segment) => segment.to === WAS_STEHT_PATH);
+    expect(
+      inbound.length === 1 && inbound[0].text === 'Was dir in der Schwangerschaft zusteht',
+      `${sourceSlug} braucht genau einen Link "Was dir in der Schwangerschaft zusteht" auf ${WAS_STEHT_PATH} (gefunden ${inbound.length}).`,
+    );
+  }
 }
 
 // Keine Ratgeberseite darf "Fact Nugget" sichtbar tragen, auch nicht im Text.

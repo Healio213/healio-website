@@ -951,6 +951,14 @@ export const seoRoutes = [
     schemaMarkup: ratgeberSchema('schwangerschaft-worauf-achten'),
   },
   {
+    path: '/ratgeber/schwangerschaft-was-steht-mir-zu',
+    title: 'Was steht mir in der Schwangerschaft zu? Leistungen | Healio',
+    description: 'Was steht dir in der Schwangerschaft zu? Kassenleistungen, Extras von AOK, TK, Barmer, IKK classic und mkk, dazu die Fristen.',
+    canonical: 'https://healio.de/ratgeber/schwangerschaft-was-steht-mir-zu',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('schwangerschaft-was-steht-mir-zu'),
+  },
+  {
     // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:
     // die Seite ist Werbung, nicht organische Sichtbarkeit. Die Uebersicht
     // /ratgeber und spaetere organische Ratgeberartikel bleiben indexiert.
