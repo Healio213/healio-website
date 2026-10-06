@@ -50,7 +50,7 @@
   },
   "termin": {
     "title": "Book an Appointment",
-    "subtitle": "Secure your preferred slot for a free and non-binding initial consultation.",
+    "subtitle": "Choose your preferred slot for a non-binding initial consultation.",
     "confirmation": "You will automatically receive a confirmation by email after booking."
   },
   "dental": {
@@ -127,7 +127,6 @@
   "appointmentTicker": {
     "ariaLabel": "Benefits of online appointment booking",
     "chooseTime": "Choose a suitable time online",
-    "free": "Free initial consultation",
     "nonBinding": "Non-binding initial consultation",
     "personal": "Personal consultation",
     "confirmation": "Automatic confirmation by email"

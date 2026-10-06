@@ -55,7 +55,19 @@ for (const [locale, source] of [['de', deSource], ['en', enSource]]) {
 }
 
 assert.equal(de.budget.sehhilfenAmount, 'bis zu 500 EUR');
-assert.match(de.budget.sehhilfenDesc, /frei verwendbarer IKK-Geldbonus/i);
+// Marktanalyse 06.10.2026: Der IKK Bonus erscheint nie als frei verwendbares
+// Geld, sondern als Hilfe beim Beitrag des Zusatzschutzes. Auf /partner steht
+// weder „kostenlos“ noch „kostenfrei“; die 3.000 EUR sind Tarifleistung und
+// keine Summe aus Bonus und Tarif.
+assert.match(de.budget.sehhilfenDesc, /Beitrag dafür kann ein möglicher IKK Bonus/i);
+assert.match(de.partners.brillenladenDesc, /Monatsbeitrag/i);
+assert.match(de.budget.subtitle, /kommt nicht obendrauf/i);
+assert.match(de.faq.items[0].answer, /nicht enthalten/i);
+assert.doesNotMatch(de.faq.items[0].answer, /kombinieren/i, 'Die 3.000 EUR entstehen nicht aus Kassenbonus plus Tarif.');
+for (const [locale, source] of [['de', deSource], ['en', enSource]]) {
+  assert.doesNotMatch(source, /frei verwendbar|frei eingesetzt|Geldbonus|freely usable|used freely|cash bonus/i, `${locale}: IKK bonus must not read as freely usable cash`);
+  assert.doesNotMatch(source, /kostenlos|kostenfrei|gratis|free of charge|free for|free participation|a free partnership/i, `${locale}: no "free" wording on /partner`);
+}
 assert.match(de.faq.items.at(-1).answer, /kein pauschaler Brillenzuschuss/i);
 assert.equal(de.trust.meeting, '30 Minuten Kennenlernen');
 assert.match(de.roleProcess.closing, /fachlich unabhängig/i);

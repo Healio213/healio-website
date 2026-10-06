@@ -31,7 +31,7 @@ const PraxisLeitfadenPage = () => (
   <>
     <SEOHead
       title="Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen | Healio"
-      description="Kostenloser Leitfaden für Naturheilpraxen: wie aus Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren werden und wie der Ablauf in fünf Schritten aussieht."
+      description="Leitfaden für Naturheilpraxen: wie Zusatzschutz mit bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren funktioniert, wie der Kassenbonus beim Beitrag hilft und wie der Ablauf in fünf Schritten aussieht."
       canonicalUrl={CANONICAL_URL}
       ogImageAlt="Healio Leitfaden für Naturheilpraxen"
       schemaMarkup={{
@@ -40,7 +40,7 @@ const PraxisLeitfadenPage = () => (
         '@id': `${CANONICAL_URL}#webpage`,
         url: CANONICAL_URL,
         name: 'Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen',
-        description: 'Kostenloser Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus Kassenbonus und Zusatzschutz.',
+        description: 'Leitfaden für Naturheilpraxen zum Gesundheitsbudget aus dem Zusatzschutz und zum Kassenbonus, der beim Beitrag hilft.',
         inLanguage: 'de-DE',
         isPartOf: { '@id': 'https://healio.de/#website' },
         about: { '@id': 'https://healio.de/#organization' },
@@ -52,14 +52,14 @@ const PraxisLeitfadenPage = () => (
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.85fr)] lg:items-start">
           <div className="max-w-2xl">
             <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-[#0b4d4a]">
-              Kostenloser Leitfaden für Praxen
+              Leitfaden für Praxen
             </p>
             <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.03em] text-slate-950 sm:text-4xl lg:text-5xl">
               Der Therapieabbruch-Stopper: So machen deine Selbstzahler die Behandlungsserie zu Ende
             </h1>
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren aus Kassenbonus und Zusatzschutz.
-              Der Ablauf für Naturheilpraxen in fünf Schritten. Kostenlos als PDF.
+              Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren aus dem Zusatzschutz, der Kassenbonus hilft beim Beitrag.
+              Der Ablauf für Naturheilpraxen in fünf Schritten, als PDF.
             </p>
 
             <ul className="mt-10 space-y-6">

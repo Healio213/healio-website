@@ -13,6 +13,7 @@ import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
+import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
@@ -363,6 +364,8 @@ const ZahnPage = () => {
         </section>
 
         <SalesAiAssist className="bg-white" />
+        {/* Gleicher Kontaktblock wie auf /ambulant und /stationaer (Marktanalyse W6). */}
+        <ZielseitenKontakt placement="zahn" className="bg-white" />
 
         <section className="bg-[#f4faf7] px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
           <div className="healio-container">

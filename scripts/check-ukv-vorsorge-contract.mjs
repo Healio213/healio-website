@@ -136,13 +136,17 @@ for (const key of ['examples', 'included', 'fit']) {
   assert(detailsPart.includes(`list('${key}')`) && !visiblePart.includes(`list('${key}')`), `${key} gehört in „Alle Details“.`);
 }
 assert.equal(de.examplesShort.length, 3, 'Sichtbar sind genau drei kurze Beispiele.');
-assert.deepEqual(de.facts, ['Keine Wartezeit', 'Keine Fragen zu Vorerkrankungen'], 'Sichtbare Pflichtangaben in einer Zeile.');
+// Marktanalyse 06.10.2026: „Keine Fragen zu Vorerkrankungen“ lag zu nah am
+// verbotenen „keine Gesundheitsfragen“; sichtbar steht jetzt, wonach der
+// Antrag tatsächlich fragt.
+assert.deepEqual(de.facts, ['Keine Wartezeit', 'Im Antrag nur Fragen zu Sehhilfe und Gehör'], 'Sichtbare Pflichtangaben in einer Zeile.');
+assert(!/Keine Fragen zu Vorerkrankungen|No questions about pre-existing conditions/i.test(JSON.stringify(de) + JSON.stringify(en)), 'Der Baustein sagt nicht „keine Fragen zu Vorerkrankungen“.');
 assert.equal(de.detailsTitle, 'Alle Details');
 
 // 5. Belegte Zahlen sind vollständig und korrekt gestaffelt.
 const deText = JSON.stringify(de);
 const enText = JSON.stringify(en);
-for (const fact of ['Laut UKV', '13,45 €', '8,80 €', '4 € mehr', '17,45 €', '12,80 €', 'bis 500 EUR pro Jahr', 'Im 1. Kalenderjahr bis 200 EUR', 'GOÄ', 'Keine Wartezeit', 'Kein Höchstaufnahmealter', 'Keine Fragen zu Vorerkrankungen', 'Sehhilfe', 'Schwerhörigkeit', '300 EUR in zwei Kalenderjahren', 'bis 400 EUR in zwei Kalenderjahren', '1.500 EUR', 'bis 800 EUR in fünf Kalenderjahren', 'bis zu 3.000 EUR in zwei Jahren', '01.05.2026', 'Danach gibt es keine weitere Altersstufe, Beitragsanpassungen bleiben möglich.']) {
+for (const fact of ['Laut UKV', '13,45 €', '8,80 €', '4 € mehr', '17,45 €', '12,80 €', 'bis 500 EUR pro Jahr', 'Im 1. Kalenderjahr bis 200 EUR', 'GOÄ', 'Keine Wartezeit', 'Kein Höchstaufnahmealter', 'Im Antrag nur Fragen zu Sehhilfe und Gehör', 'Sehhilfe', 'Schwerhörigkeit', '300 EUR in zwei Kalenderjahren', 'bis 400 EUR in zwei Kalenderjahren', '1.500 EUR', 'bis 800 EUR in fünf Kalenderjahren', 'bis zu 3.000 EUR in zwei Jahren', '01.05.2026', 'Danach gibt es keine weitere Altersstufe, Beitragsanpassungen bleiben möglich.']) {
   assert(deText.includes(fact), `DE fehlt die belegte Angabe „${fact}“.`);
 }
 for (const fact of ['According to UKV', '€13.45', '€8.80', '€4 more', '€17.45', '€12.80', 'EUR 500 a year', 'EUR 200 in the first calendar year', 'GOÄ', 'No waiting period', 'No maximum entry age', 'EUR 3,000 in two years', 'The form is in German', 'premium adjustments remain possible']) {

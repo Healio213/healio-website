@@ -15,6 +15,7 @@ import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
+import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 
 const StationaerPage = () => {
@@ -81,6 +82,8 @@ const StationaerPage = () => {
         {/* Brücken-Strecke nach dem Bonusrechner, wie auf /ambulant. */}
         <AmbulantIKKWechsel variant="stationaer" />
         <SalesAiAssist className="bg-[#fbfaf7]" />
+        {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6). */}
+        <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
         <StationaerTrustFaq />
       </article>
     </>

@@ -2,7 +2,7 @@
   "hero": {
     "badge": "Für Praxen, Therapeuten und Optiker",
     "title": "Damit gute Behandlung nicht am <highlight>Eigenanteil</highlight> endet.",
-    "subtitle": "Deine Patienten können, abhängig von Tarif und persönlichen Voraussetzungen, empfohlene Behandlungen über ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> finanzieren. Du informierst nur, beraten und abgewickelt wird alles von Healio. Für deine Praxis kostenlos.",
+    "subtitle": "Deine Patienten können, abhängig von Tarif und persönlichen Voraussetzungen, empfohlene Behandlungen über ein Gesundheitsbudget von bis zu <highlight>3.000 EUR in zwei Jahren</highlight> finanzieren. Du informierst nur, beraten und abgewickelt wird alles von Healio. Für deine Praxis unverbindlich.",
     "cta": "30-minütiges Kennenlernen buchen",
     "secondaryCta": "Erklärvideo ansehen (3 Min.)",
     "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
@@ -62,7 +62,7 @@
     "text": "Berufshaftpflicht, Praxisausfall, Berufsunfähigkeit und Rürup, fachlich gebündelt, digital organisiert und persönlich begleitet.",
     "note": "Welche Lösung passt, hängt von Beruf, Absicherungsbedarf und bestehendem Schutz ab.",
     "cta": "Zur Heilberufe-Vorsorge",
-    "meta": "Kurzer Check, kostenlos und unverbindlich"
+    "meta": "Kurzer Check, unverbindlich"
   },
   "problem": {
     "title": "Der Behandlungsplan steht. <highlight>Das Budget nicht immer.</highlight>",
@@ -70,7 +70,7 @@
   },
   "budget": {
     "title": "Das <highlight>Healio Gesundheitsbudget</highlight>",
-    "subtitle": "Je nach Tarif und persönlichen Voraussetzungen können Patienten bis zu 3.000 EUR tarifliche Leistungen in zwei Jahren nutzen. Beim IKK Bonus sind 700 EUR+ möglich; er bleibt ein separater Baustein und hängt von nachgewiesenen Maßnahmen ab.",
+    "subtitle": "Je nach Tarif und persönlichen Voraussetzungen können Patienten bis zu 3.000 EUR tarifliche Leistungen in zwei Jahren nutzen. Der IKK Bonus kommt nicht obendrauf. Er kann beim Beitrag für den Zusatzschutz helfen, laut Satzung bis zu 810 EUR im Jahr, je nach nachgewiesenen Maßnahmen.",
     "total": "Gesundheitsbudget gesamt",
     "totalAmount": "bis zu 3.000 EUR",
     "totalDesc": "mögliche tarifliche Leistungen in zwei Jahren; der IKK Bonus wird getrennt geprüft",
@@ -79,7 +79,7 @@
     "naturheilkundeDesc": "Tarifliche Leistungen unter anderem für Heilpraktiker, Osteopathie, TCM und Chiropraktik",
     "sehhilfen": "Sehhilfen",
     "sehhilfenAmount": "bis zu 500 EUR",
-    "sehhilfenDesc": "Tarifliche Sehhilfenleistung der SDK. Ein möglicher, frei verwendbarer IKK-Geldbonus kann den Eigenanteil zusätzlich reduzieren.",
+    "sehhilfenDesc": "Tarifliche Sehhilfenleistung der SDK, in jeder Tarifstufe zu 100 % bis zur Grenze des Topfs. Den Beitrag dafür kann ein möglicher IKK Bonus mittragen.",
     "footnote": "Die konkrete Höhe und Verfügbarkeit hängen unter anderem vom gewählten Tarif, den tariflichen Voraussetzungen sowie den nachgewiesenen Bonusmaßnahmen ab."
   },
   "partners": {
@@ -94,7 +94,7 @@
     "chiropraktiker": "Chiropraktiker",
     "chiropraktikerDesc": "Healio prüft, ob und in welchem Umfang chiropraktische Leistungen im individuellen Tarif berücksichtigt werden.",
     "brillenladen": "Brillengeschäfte und Optiker",
-    "brillenladenDesc": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Ein möglicher IKK-Geldbonus kann zusätzlich frei eingesetzt werden.",
+    "brillenladenDesc": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Den Monatsbeitrag für diesen Zusatzschutz kann ein möglicher IKK Bonus mitfinanzieren.",
     "hebamme": "Hebammen",
     "hebammeDesc": "Du kannst Familien neutral auf die Informationen hinweisen. Die individuelle Prüfung, Beratung und Vermittlung übernimmt Healio."
   },
@@ -104,8 +104,8 @@
     "manageableEffortDesc": "Du stellst neutrale Informationen oder einen QR-Code bereit. Versicherungsberatung und Antragsbegleitung bleiben bei Healio.",
     "financialRoom": "Mehr finanzieller Spielraum",
     "financialRoomDesc": "Ein passendes Gesundheitsbudget kann Eigenanteile reduzieren. Ob und wie Leistungen genutzt werden, entscheiden Patienten selbst.",
-    "freeParticipation": "Kostenfrei teilnehmen",
-    "freeParticipationDesc": "Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien stellt Healio kostenfrei zur Verfügung."
+    "freeParticipation": "Unverbindlich teilnehmen",
+    "freeParticipationDesc": "Du gehst keine Verpflichtung ein. Informationsmaterial und Aufsteller bekommst du von Healio."
   },
   "steps": {
     "step1Title": "30-Minuten-Kennenlernen",
@@ -136,11 +136,11 @@
     "items": [
       {
         "question": "Was genau ist das Healio Gesundheitsbudget?",
-        "answer": "Je nach persönlicher Situation können Patienten mögliche Kassenboni mit tariflichen Leistungen einer Zusatzversicherung kombinieren. So sind bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich. Healio prüft im Einzelfall, welche Voraussetzungen erfüllt sind."
+        "answer": "Gemeint sind die tariflichen Leistungen einer ambulanten Zusatzversicherung. Im stärksten Tarif sind das bis zu 3.000 EUR in zwei Jahren, verteilt auf vier Leistungstöpfe. Ein Kassenbonus ist darin nicht enthalten. Er wird getrennt geprüft und kann je nach Krankenkasse und Aktivitäten beim Beitrag helfen. Healio prüft im Einzelfall, welche Voraussetzungen erfüllt sind."
       },
       {
-        "question": "Kostet mich die Partnerschaft etwas?",
-        "answer": "Für die Partnerpraxis fällt keine Teilnahmegebühr an. Informationsmaterialien und Aufsteller stellt Healio kostenfrei zur Verfügung. Nach dem Kennenlernen entscheidest du selbst, ob und wo du die Informationen einsetzen möchtest."
+        "question": "Gehe ich mit der Partnerschaft eine Verpflichtung ein?",
+        "answer": "Nein. Informationsmaterial und Aufsteller stellt Healio bereit. Ob und wo du die Informationen einsetzt, entscheidest du nach dem Kennenlernen selbst."
       },
       {
         "question": "Muss ich Versicherungen erklären oder empfehlen?",
@@ -156,7 +156,7 @@
       },
       {
         "question": "Wie setzen sich die Leistungen für Sehhilfen zusammen?",
-        "answer": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Separat kann durch nachgewiesene Maßnahmen ein frei verwendbarer IKK-Geldbonus entstehen, der den Eigenanteil zusätzlich reduzieren kann. Er ist kein pauschaler Brillenzuschuss."
+        "answer": "Die SDK erstattet Sehhilfen in jeder Tarifstufe zu 100 %, im stärksten Tarif bis zu 500 EUR in zwei Kalenderjahren. Getrennt davon kann ein IKK Bonus aus nachgewiesenen Maßnahmen den Beitrag für den Zusatzschutz senken. Er ist kein pauschaler Brillenzuschuss."
       }
     ]
   },
@@ -182,7 +182,7 @@
     "healthBudget": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren möglich",
     "neutralInformation": "Praxis informiert neutral, ohne Versicherungsberatung",
     "healioAdvice": "Healio prüft, berät und begleitet individuell",
-    "freeParticipation": "Kostenfreie Teilnahme für Partnerpraxen",
+    "freeParticipation": "Unverbindliche Teilnahme für Partnerpraxen",
     "directContact": "Patienten kontaktieren Healio direkt"
   },
   "miaPrompt": {
