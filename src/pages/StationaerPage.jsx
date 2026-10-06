@@ -17,6 +17,15 @@ import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeatur
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 
+// Mobile Reihenfolge (unter md): Die Abschnitte stehen als Geschwister in einem
+// Flex-Container und bekommen über "order" ihren Platz im Besucher-Ablauf:
+// Einstieg, Siegel, Erklärvideo, verstehen, Tarif wählen, zweiter Versicherer,
+// Familie, Finanzierung und Bonus, Fragen und Kontakt. Ab md (768 px) gilt
+// "md:order-none", der Container ist wieder ein Block und alles steht in der
+// Reihenfolge des Quelltexts wie bisher. Der Umhüllende ist ein normales
+// Block-Element ohne eigenes Aussehen.
+const Slot = ({ order, children }) => <div className={`${order} md:order-none`}>{children}</div>;
+
 const StationaerPage = () => {
   const { t } = useTranslation('stationaer');
   const { t: tSeo } = useTranslation('seo');
@@ -41,47 +50,76 @@ const StationaerPage = () => {
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
-      <article>
-        <StationaerHero />
+      <article className="flex flex-col md:block">
+        <Slot order="order-1">
+          <StationaerHero />
+        </Slot>
         {/* Siegel direkt unter dem Hero, wie auf /ambulant und /partner. */}
-        <HealioAwardsRow size="large" productSet="stationaer" />
+        <Slot order="order-2">
+          <HealioAwardsRow size="large" productSet="stationaer" />
+        </Slot>
         {lang === 'de' && (
-          <ExplainerVideoCard
-            id="stationaer-erklaervideo"
-            videoSrc="/erklaervideo-stationaer.mp4"
-            poster="/images/erklaervideo-stationaer-poster.jpg"
-            eyebrow={t('refresh.video.eyebrow')}
-            title={t('refresh.video.title')}
-            ariaLabel={t('refresh.video.aria')}
-            className="bg-[#f4f8f6]"
-          />
+          <Slot order="order-3">
+            <ExplainerVideoCard
+              id="stationaer-erklaervideo"
+              videoSrc="/erklaervideo-stationaer.mp4"
+              poster="/images/erklaervideo-stationaer-poster.jpg"
+              eyebrow={t('refresh.video.eyebrow')}
+              title={t('refresh.video.title')}
+              ariaLabel={t('refresh.video.aria')}
+              className="bg-[#f4f8f6]"
+            />
+          </Slot>
         )}
-        <StationaerTariffSelector />
+        <Slot order="order-5">
+          <StationaerTariffSelector />
+        </Slot>
         {/* Zweiter Klinik-Versicherer direkt nach der SDK-Tarifwahl. */}
-        <StationaerBayerischeAlternative />
-        <StationaerBenefits />
-        <StationaerFamily />
+        <Slot order="order-6">
+          <StationaerBayerischeAlternative />
+        </Slot>
+        {/* Mobil steht "Im Ernstfall zählt, was wirklich versichert ist" vor der
+            Tarifwahl: erst verstehen, dann wählen (order-4 vor order-5). */}
+        <Slot order="order-4">
+          <StationaerBenefits />
+        </Slot>
+        <Slot order="order-7">
+          <StationaerFamily />
+        </Slot>
         {/* Zwei-Wege-Botschaft direkt vor dem KassenBoost-Abschnitt. */}
-        <ZweiWegeFinanzierung produkt="stationaer" />
-        <StationaerBonusBridge />
-        <CompactBonusFeature
-          className="bg-[#fbfaf7]"
-          calculatorProps={{
-            tarifTypes: 'Stationär',
-            defaultMonatsbeitrag: 33.41,
-            tariffInfoText: t('bonusRechner.tariffInfo'),
-            effectiveLabel: t('bonusRechner.effectiveLabel'),
-            effectiveValue: t('bonusRechner.effectiveValue'),
-            effectiveNote: t('bonusRechner.effectiveNote'),
-            bonusPayoutText: lang === 'en'
-              ? 'With SP1 and SP2 your statutory-insurer bonus usually offsets part of the eligible hospital-plan premium, with the affordable SPU often all of it. The applicable bonus and tariff terms determine the result.'
-              : 'Bei SP1 und SP2 gleicht dein Kassenbonus den anrechenbaren Beitrag deines Klinikschutzes meist teilweise aus, beim günstigen SPU oft ganz. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
-          }}
-        />
+        <Slot order="order-8">
+          <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe />
+        </Slot>
+        <Slot order="order-9">
+          <StationaerBonusBridge />
+        </Slot>
+        <Slot order="order-10">
+          <CompactBonusFeature
+            className="bg-[#fbfaf7]"
+            mobileSwipe
+            calculatorProps={{
+              tarifTypes: 'Stationär',
+              defaultMonatsbeitrag: 33.41,
+              tariffInfoText: t('bonusRechner.tariffInfo'),
+              effectiveLabel: t('bonusRechner.effectiveLabel'),
+              effectiveValue: t('bonusRechner.effectiveValue'),
+              effectiveNote: t('bonusRechner.effectiveNote'),
+              bonusPayoutText: lang === 'en'
+                ? 'With SP1 and SP2 your statutory-insurer bonus usually offsets part of the eligible hospital-plan premium, with the affordable SPU often all of it. The applicable bonus and tariff terms determine the result.'
+                : 'Bei SP1 und SP2 gleicht dein Kassenbonus den anrechenbaren Beitrag deines Klinikschutzes meist teilweise aus, beim günstigen SPU oft ganz. Maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.',
+            }}
+          />
+        </Slot>
         {/* Brücken-Strecke nach dem Bonusrechner, wie auf /ambulant. */}
-        <AmbulantIKKWechsel variant="stationaer" />
-        <SalesAiAssist className="bg-[#fbfaf7]" />
-        <StationaerTrustFaq />
+        <Slot order="order-11">
+          <AmbulantIKKWechsel variant="stationaer" mobileSwipe />
+        </Slot>
+        <Slot order="order-12">
+          <SalesAiAssist className="bg-[#fbfaf7]" />
+        </Slot>
+        <Slot order="order-last">
+          <StationaerTrustFaq />
+        </Slot>
       </article>
     </>
   );

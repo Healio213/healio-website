@@ -12,7 +12,7 @@ const HomeFinalCTA = () => {
 
   return (
     <section className="bg-[#FDFAF6] px-4 pb-8 sm:px-6 sm:pb-10" aria-labelledby="home-final-cta-title">
-      <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[2.25rem] border border-white/10 bg-home-midnight px-6 py-10 text-white shadow-[0_24px_70px_rgba(7,17,31,0.2)] sm:px-10 sm:py-12 lg:px-14">
+      <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[2.25rem] border border-white/10 bg-home-midnight px-6 py-8 text-white shadow-[0_24px_70px_rgba(7,17,31,0.2)] sm:px-10 sm:py-12 lg:px-14">
         <div className="absolute -right-10 -top-24 h-72 w-72 rounded-full border border-home-mint/15" aria-hidden="true" />
         <div className="relative grid items-center gap-7 text-center lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:text-left">
           <FriendlyIcon kind="calculator" tone="mint" size="xl" className="mx-auto -rotate-2 lg:mx-0" />
@@ -23,7 +23,7 @@ const HomeFinalCTA = () => {
             <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate-300 lg:mx-0">{t('finalCta.description')}</p>
             <Link
               to={getPath('kassenboost')}
-              className="home-focus mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-home-mint underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
+              className="home-focus mt-1 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-home-mint md:mt-3 md:min-h-0 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
             >
               {t('finalCta.detailsCta')}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { Check, Loader2, Send } from 'lucide-react';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -119,35 +120,44 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
   const profileReady = Boolean(formData.animal_type && formData.coverage);
 
   return (
-    <section id="vet-contact" className="relative scroll-mt-20 overflow-hidden bg-[#071827] py-20 sm:py-24 lg:py-28" aria-labelledby="vet-form-title">
+    <section id="vet-contact" className="relative scroll-mt-20 overflow-hidden bg-[#071827] py-12 sm:py-24 lg:py-28" aria-labelledby="vet-form-title">
       <div className="absolute -left-48 top-0 h-[34rem] w-[34rem] rounded-full bg-[#25c990]/10 blur-[120px]" aria-hidden="true" />
       <div className="absolute -right-40 bottom-0 h-[30rem] w-[30rem] rounded-full border border-white/[0.05]" aria-hidden="true" />
 
       <div className="healio-container relative px-4 sm:px-6 md:px-8">
-        <div className="mb-12 max-w-4xl sm:mb-16">
-          <p className="font-display text-xs font-extrabold uppercase tracking-[0.23em] text-[#76e2bd]">{t('form.eyebrow')}</p>
-          <h2 id="vet-form-title" className="mt-4 max-w-[18ch] font-display text-[clamp(2.45rem,5vw,4.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#fffdf8] [text-wrap:balance]">
+        <div className="mb-8 max-w-4xl sm:mb-16">
+          <p className="font-display text-sm font-extrabold uppercase tracking-[0.23em] text-[#76e2bd] md:text-xs">{t('form.eyebrow')}</p>
+          <h2 id="vet-form-title" className="mt-3 max-w-[18ch] sm:mt-4 font-display text-[clamp(2.45rem,5vw,4.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#fffdf8] [text-wrap:balance]">
             {t('form.title')}
           </h2>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">{t('form.subtitle')}</p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:mt-5 sm:text-lg">{t('form.subtitle')}</p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-16">
+        <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-16">
           <div className="order-2 lg:order-1">
             <div className="max-w-[440px] lg:pt-2">
-              <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#76e2bd]">{t('form.next.eyebrow')}</p>
+              <p className="font-display text-sm font-extrabold uppercase tracking-[0.2em] text-[#76e2bd] md:text-xs">{t('form.next.eyebrow')}</p>
               <h3 className="mt-3 font-friendly text-3xl font-bold leading-tight text-white">{t('form.next.title')}</h3>
               <p className="mt-3 text-base leading-relaxed text-slate-400">{t('form.next.text')}</p>
-              <ol className="mt-7 border-t border-white/15">
+              {/* Experiment 06.10.2026: die drei Schritte wischen mobil als Karten
+                  nebeneinander, ab md bleibt die nummerierte Liste mit Trennlinien. */}
+              <MobileSwipeRow
+                as="ol"
+                label={t('form.next.title')}
+                className="mt-5 md:mt-7"
+                desktopClassName="md:block md:border-t md:border-white/15"
+                mobileItemWidth="w-[72vw] max-w-[18rem]"
+                dotsTone="dark"
+              >
                 {NEXT_STEP_KEYS.map((key, index) => (
-                  <li key={key} className="grid grid-cols-[38px_1fr] gap-2 border-b border-white/15 py-4 text-base leading-relaxed text-slate-200">
-                    <span className="font-display text-xs font-extrabold text-[#76e2bd]">{String(index + 1).padStart(2, '0')}</span>
+                  <div key={key} className="grid h-full grid-cols-[38px_1fr] gap-2 rounded-2xl border border-white/15 bg-white/[0.05] p-4 text-base leading-relaxed text-slate-200 md:h-auto md:rounded-none md:border-0 md:border-b md:bg-transparent md:px-0">
+                    <span className="font-display text-sm font-extrabold text-[#76e2bd] md:text-xs">{String(index + 1).padStart(2, '0')}</span>
                     <span>{t(`form.next.steps.${key}`)}</span>
-                  </li>
+                  </div>
                 ))}
-              </ol>
+              </MobileSwipeRow>
 
-              <div className="mt-7 flex flex-col items-start gap-4 rounded-2xl bg-white/[0.06] px-5 py-4 text-base leading-relaxed text-slate-300 sm:flex-row">
+              <div className="mt-4 flex flex-col items-start gap-4 rounded-2xl bg-white/[0.06] px-5 py-4 text-base leading-relaxed text-slate-300 sm:mt-7 sm:flex-row">
                 <FriendlyIcon kind="comparison" tone="butter" size="sm" className="mt-0.5" />
                 <p>{t('form.next.orderBoundary')}</p>
               </div>
@@ -157,7 +167,7 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
           <div className="order-1 rounded-[2rem] bg-[#f8efdc] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.32)] sm:p-8 lg:order-2 lg:p-10">
             <div className="flex items-center justify-between gap-5 border-b border-[#8f7e5d]/20 pb-5">
               <div>
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-[#087451]">{t('form.profileLabel')}</p>
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.2em] text-[#087451] md:text-xs">{t('form.profileLabel')}</p>
                 <p className="mt-1 font-friendly text-xl font-bold text-[#10272d]">{animalSummary} · {coverageSummary}</p>
               </div>
               <span className="hidden h-11 w-11 rotate-6 items-center justify-center rounded-full border-2 border-[#25a77d]/25 font-friendly text-sm font-bold text-[#087451] sm:flex" aria-label={profileReady ? t('finder.profile.statusReady') : t('finder.profile.statusOpen')}>
@@ -219,12 +229,12 @@ const VeterinaryContactForm = ({ selection, onSelectionChange }) => {
               )}
 
               <div className="rounded-2xl bg-[#0d332e] p-5 text-white sm:p-6">
-                <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
+                <div className="flex items-center gap-4 sm:gap-5">
                   <FriendlyIcon
                     kind="mandate"
                     tone="mint"
                     size="xl"
-                    className="-rotate-2 shadow-[0_16px_34px_rgba(0,0,0,0.2)]"
+                    className="-rotate-2 shadow-[0_16px_34px_rgba(0,0,0,0.2)] !h-14 !w-14 sm:!h-24 sm:!w-24"
                     imageClassName="scale-[1.08]"
                   />
                   <div>

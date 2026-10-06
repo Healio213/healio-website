@@ -52,10 +52,17 @@ const AmbulantPage = () => {
   return (
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
-      <div className="min-h-screen bg-white">
-        <AmbulantHero fromBonusTopic={fromBonusTopic} />
+      {/* Experiment 06.10.2026: mobil stehen die Abschnitte als Geschwister in
+          einer Spalte und folgen der Reihenfolge, wie ein Besucher denkt (Hero,
+          Siegel, Erklärvideo, Situation, Tarif, Finanzierung und Bonus, Ablauf,
+          Fragen). Die Nummern stehen an den Abschnitten (order-N md:order-none);
+          ab md bleibt es ein normaler Block mit der bisherigen Reihenfolge. */}
+      <div className="flex min-h-screen flex-col bg-white md:block">
+        <AmbulantHero fromBonusTopic={fromBonusTopic} className="order-1 md:order-none" />
         {/* Siegel direkt unter dem Hero, wie auf /partner. */}
-        <HealioAwardsRow size="large" />
+        <div className="order-2 md:contents">
+          <HealioAwardsRow size="large" />
+        </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>
     </>

@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Check, Play } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 
 const B2BExplainerVideo = ({
   sectionId,
@@ -57,16 +58,19 @@ const B2BExplainerVideo = ({
   };
 
   return (
-    <section id={sectionId} className="scroll-mt-24 bg-[#f4faf7] px-4 py-20 sm:px-6 md:px-8 lg:py-24">
-      <div className="container mx-auto max-w-6xl">
+    <section id={sectionId} className="scroll-mt-24 bg-[#f4faf7] px-4 py-8 sm:px-6 sm:py-12 md:px-8 md:py-20 lg:py-24">
+      {/* Handy (06.10.2026): Der Tailwind-container bringt 2 rem Innenabstand
+          mit; unter md entfällt er, damit Video und Karten die volle Breite
+          des Abschnitts nutzen. Ab md bleibt er wie bisher. */}
+      <div className="container mx-auto max-w-6xl px-0 md:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-balance font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-[#07111f] sm:text-4xl lg:text-5xl">
+          <h2 className="text-balance font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#07111f] sm:text-4xl lg:text-5xl">
             {title}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#52666d]">{subtitle}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-[#52666d] md:mt-5 md:text-lg md:leading-8">{subtitle}</p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-4xl">
+        <div className="mx-auto mt-6 max-w-4xl md:mt-10">
           {hasApprovedVideo ? (
             playing ? (
               <div className="aspect-video overflow-hidden rounded-2xl bg-black shadow-[0_24px_70px_rgba(7,17,31,0.2)]">
@@ -110,26 +114,49 @@ const B2BExplainerVideo = ({
               >
                 <img src={posterSrc} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <span className="absolute inset-0 flex items-center justify-center bg-[#07111f]/30 transition-colors group-hover:bg-[#07111f]/40">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[#25c990] shadow-[0_12px_30px_rgba(7,96,70,0.3)]">
-                    <Play className="ml-1 h-9 w-9 text-white" aria-hidden="true" />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25c990] shadow-[0_12px_30px_rgba(7,96,70,0.3)] md:h-20 md:w-20">
+                    <Play className="ml-1 h-7 w-7 text-white md:h-9 md:w-9" aria-hidden="true" />
                   </span>
                 </span>
               </motion.button>
             )
           ) : !showStatusPanel ? (
-            <ul className="grid gap-4 sm:grid-cols-3">
-              {points.map((point) => (
-                <li
-                  key={point}
-                  className="rounded-2xl border border-[#d8e8e2] bg-white p-6 shadow-[0_14px_36px_rgba(7,17,31,0.06)]"
-                >
-                  <span className="inline-grid h-10 w-10 place-items-center rounded-xl bg-[#e4f6ee]">
-                    <Check className="h-5 w-5 text-[#087654]" aria-hidden="true" />
-                  </span>
-                  <p className="mt-4 text-base font-bold leading-7 text-[#07111f]">{point}</p>
-                </li>
-              ))}
-            </ul>
+            /* Drei Kernpunkte: mobil als Wischreihe (bei weniger als drei
+               kompakt untereinander), ab md das bisherige Raster. */
+            points.length >= 3 ? (
+              <MobileSwipeRow
+                label={title}
+                desktopClassName="md:grid md:grid-cols-3 md:gap-4"
+                mobileItemWidth="w-[78vw] max-w-[20rem]"
+                itemClassName="md:h-auto"
+              >
+                {points.map((point) => (
+                  <div
+                    key={point}
+                    className="flex h-full items-start gap-3 rounded-2xl border border-[#d8e8e2] bg-white p-4 shadow-[0_14px_36px_rgba(7,17,31,0.06)] md:block md:p-6"
+                  >
+                    <span className="inline-grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#e4f6ee]">
+                      <Check className="h-5 w-5 text-[#087654]" aria-hidden="true" />
+                    </span>
+                    <p className="text-base font-bold leading-6 text-[#07111f] md:mt-4 md:leading-7">{point}</p>
+                  </div>
+                ))}
+              </MobileSwipeRow>
+            ) : (
+              <ul className="grid gap-3 sm:grid-cols-3 md:gap-4">
+                {points.map((point) => (
+                  <li
+                    key={point}
+                    className="flex items-start gap-3 rounded-2xl border border-[#d8e8e2] bg-white p-4 shadow-[0_14px_36px_rgba(7,17,31,0.06)] md:block md:p-6"
+                  >
+                    <span className="inline-grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#e4f6ee]">
+                      <Check className="h-5 w-5 text-[#087654]" aria-hidden="true" />
+                    </span>
+                    <p className="text-base font-bold leading-6 text-[#07111f] md:mt-4 md:leading-7">{point}</p>
+                  </li>
+                ))}
+              </ul>
+            )
           ) : (
             <div className="grid min-h-[26rem] overflow-hidden rounded-2xl bg-[#07111f] text-white shadow-[0_24px_70px_rgba(7,17,31,0.2)] sm:grid-cols-[0.82fr_1.18fr]">
               <div className="relative min-h-[19rem] overflow-hidden bg-[#dcefe8] sm:min-h-full">
@@ -171,11 +198,11 @@ const B2BExplainerVideo = ({
 
           {/* KI-Hinweis direkt am Player (Art. 50 KI-VO), danach Pflichthinweis und nächster Schritt */}
           {hasApprovedVideo && videoNote && (
-            <p className="mt-3 text-center text-xs leading-5 text-[#60747c]">{videoNote}</p>
+            <p className="mt-3 text-center text-sm leading-5 text-[#60747c] md:text-xs md:leading-5">{videoNote}</p>
           )}
 
           {hasApprovedVideo && (videoHint || bookingCtaLabel) && (
-            <div className="mt-7 flex flex-col items-center gap-4 text-center">
+            <div className="mt-5 flex flex-col items-center gap-3 text-center md:mt-7 md:gap-4">
               {videoHint && (
                 <p className="max-w-2xl text-sm font-semibold leading-6 text-[#07111f] sm:text-base">{videoHint}</p>
               )}
@@ -194,7 +221,7 @@ const B2BExplainerVideo = ({
             </div>
           )}
 
-          {HEALIO_VOICE_CONTACT_ENABLED && <div className="mt-7 text-center">
+          {HEALIO_VOICE_CONTACT_ENABLED && <div className="mt-5 text-center md:mt-7">
             <button
               type="button"
               onClick={() => {
@@ -205,7 +232,7 @@ const B2BExplainerVideo = ({
             >
               {ctaLabel}
             </button>
-            <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-[#60747c]">
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-5 text-[#60747c] md:text-xs md:leading-5">
               {privacyText}
             </p>
           </div>}

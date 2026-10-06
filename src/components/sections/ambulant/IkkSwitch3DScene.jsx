@@ -664,6 +664,19 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
           }
         }
 
+        /* Nur Handy (Experiment 06.10.2026): Beschriftungen mindestens 14 px,
+           Kartentitel 16 px. Von 768 px an bleibt alles wie bisher. */
+        @media (max-width: 767px) {
+          .ikk-clay-journey__continuity strong { font-size: 1rem; }
+          .ikk-clay-journey__continuity small,
+          .ikk-clay-journey__fund small,
+          .ikk-clay-journey__fund span,
+          .ikk-clay-journey__outcome-copy small,
+          .ikk-clay-journey__outcome-copy p { font-size: .875rem; }
+          .ikk-clay-journey__fund strong,
+          .ikk-clay-journey__outcome-copy strong { font-size: 1rem; }
+        }
+
         @media (max-width: 374px) {
           /* Auf sehr schmalen Handys stehen Start- und Zielkasse untereinander. */
           .ikk-clay-journey {

@@ -74,13 +74,13 @@ export default function PregnancyBonusExample() {
 
   return (
           <details id="bonus-example" open={exampleOpen} onToggle={(e) => setExampleOpen(e.currentTarget.open)} className="group/example mt-6 overflow-hidden rounded-3xl border border-home-slate/20 bg-white">
-            <summary className={`flex cursor-pointer list-none items-center justify-between gap-4 p-6 sm:p-8 [&::-webkit-details-marker]:hidden ${focus}`}>
+            <summary className={`flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-8 [&::-webkit-details-marker]:hidden ${focus}`}>
               <span><span className="block font-friendly text-2xl">Beispiel ausprobieren</span><span className="mt-1 block text-base text-home-slate">Auswählen und den Unterschied direkt sehen.</span></span>
               <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-home-ice text-2xl text-home-midnight"><span className="group-open/example:hidden">+</span><span className="hidden group-open/example:inline">−</span></span>
             </summary>
-            <div className="border-t border-home-slate/15 px-6 pb-6 sm:px-8 sm:pb-8">
+            <div className="border-t border-home-slate/15 px-5 pb-5 sm:px-8 sm:pb-8">
               <p className="mt-5 text-base leading-relaxed text-home-slate">Wir rechnen beispielhaft für eine Person im Bonusjahr 2026 nach dem IKK-classic-Modell. Deine Auswahl bleibt nur in diesem Browser und wird nicht an Healio übermittelt.</p>
-          <div className="mt-6 grid gap-8 lg:grid-cols-[3fr_2fr]" role="group" aria-label="Bonusbeispiel Schwangerschaft">
+          <div className="mt-5 grid gap-6 sm:mt-6 sm:gap-8 lg:grid-cols-[3fr_2fr]" role="group" aria-label="Bonusbeispiel Schwangerschaft">
             <div>
               <label htmlFor="checkups" className="block font-semibold">Schwangerschaftsvorsorgen</label>
               <p id="checkups-hint" className="text-base leading-relaxed text-home-slate">Wie viele gesetzliche Vorsorgeuntersuchungen möchtest du im Beispiel berücksichtigen?</p>
@@ -135,7 +135,7 @@ export default function PregnancyBonusExample() {
             </div>
           </div>
               <details id="bonus-conditions" className="mt-6 border-t border-home-slate/20 pt-5">
-                <summary className={`cursor-pointer font-semibold ${focus}`}>Gut zu wissen</summary>
+                <summary className={`-my-2.5 cursor-pointer py-2.5 font-semibold md:my-0 md:py-0 ${focus}`}>Gut zu wissen</summary>
                 <ul className="mt-4 max-w-prose list-disc space-y-3 pl-5 text-base leading-relaxed text-home-slate hyphens-auto [hyphenate-limit-chars:10_4_4]">
                   <li>Dieses Beispiel zeigt die Maßnahmen aus dem Reel für eine Person im Bonusjahr 2026, nicht das gesamte Bonusprogramm. Es ist kein Antrag und prüft keinen persönlichen Anspruch.</li>
                   <li>In der Schwangerschaft wird ärztlich beurteilt, welcher BMI angemessen ist. BMI und Blutdruck zählen nur zusammen mit einer regelmäßigen bonusfähigen Aktivität. Hier im Rechner sind das Kurs oder Studio. Die Seite gibt keine Empfehlungen, wie du bestimmte Werte erreichst.</li>

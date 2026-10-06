@@ -82,14 +82,17 @@ const ZahnPage = () => {
         schemaMarkup={createServiceSchema()}
       />
 
-      <article className="overflow-hidden bg-white text-[#07111f]">
+      {/* Handy-Reihenfolge nach Franks Vorgabe (06.10.2026): Einstieg, Siegel,
+          Erklärvideo, dann der Ablauf. Nur unter md per CSS-Reihenfolge, am
+          Desktop bleibt die bisherige Abfolge. */}
+      <article className="flex flex-col overflow-hidden bg-white text-[#07111f] md:block">
         {/* Hero wie auf /stationaer (Frank 30.09.2026: Foto am Tresen "geht gar
             nicht", lieber gleich zeigen, was man bekommt). Links der Text, rechts
             vier typische Zahn-Situationen mit je einer geprüften Aussage aus den
             Ergebnissen des Zahn-Checks; sie führen zu den zwei Wegen UKV
             ZahnPRIVAT und Bayerische mit ZAHN Sofort. Jede Zeile führt in den Check. */}
         <section
-          className="relative isolate overflow-hidden bg-[#071726] text-white"
+          className="relative isolate order-[-3] overflow-hidden bg-[#071726] text-white md:order-none"
           aria-labelledby="zahn-hero-heading"
         >
           <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
@@ -199,13 +202,17 @@ const ZahnPage = () => {
         </section>
 
         {/* Produktpassende Siegel direkt unter dem Hero, wie auf /ambulant. */}
-        <HealioAwardsRow size="large" productSet="zahn" />
+        <HealioAwardsRow size="large" productSet="zahn" className="order-[-2] md:order-none" />
 
         {/* Experiment 05.10.2026: Highlight-Karten nach dem Vorbild von
             mercedes-benz.de, nur auf diesem Zweig, nicht live. */}
         <DentalHighlightCards />
 
-        {lang === 'de' && <DentalVideoSection />}
+        {lang === 'de' && (
+          <div className="order-[-1] md:order-none">
+            <DentalVideoSection />
+          </div>
+        )}
 
         <DentalZahnCheck />
 

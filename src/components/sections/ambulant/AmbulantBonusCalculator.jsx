@@ -266,11 +266,11 @@ const AmbulantBonusCalculator = ({
         <div id="bonus-calculator-content" className={`${embedded || mobileOpen ? 'flex' : 'hidden'} md:flex flex-col lg:flex-row gap-6 lg:gap-12 items-start relative`}>
 
           {/* Left Column: Checkboxes (60%) */}
-          <div className="w-full lg:w-[60%] bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100">
+          <div className="w-full lg:w-[60%] bg-white rounded-2xl p-3 sm:p-6 lg:p-8 shadow-lg border border-gray-100">
             <h3 className="text-2xl font-bold text-healio-dark mb-2">{t('bonusCalculator.selectActivities')}</h3>
-            <p className="mb-6 text-base font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>
+            <p className="mb-4 text-base md:mb-6 font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-4 lg:grid-cols-1 xl:grid-cols-2">
               {ACTIVITIES.map((activity, index) => {
                 const def = ACTIVITY_DEFS[index];
                 const isMulti = !!def.countable;
@@ -288,7 +288,7 @@ const AmbulantBonusCalculator = ({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className={`flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-300 select-none
+                    className={`flex items-start gap-3 p-3 md:p-4 rounded-xl border-2 transition-all duration-300 select-none
                       ${isActive
                         ? 'border-healio-primary bg-healio-light'
                         : 'border-gray-100 hover:border-gray-200 bg-white hover:shadow-md'
@@ -353,7 +353,7 @@ const AmbulantBonusCalculator = ({
                       {/* Beträge unter dem Text statt in einer eigenen rechten Spalte:
                           So bleibt für Titel und Beschreibung in 16 px genug Breite
                           (Frank 30.09.2026: Schrift zu klein). */}
-                      <div className={`mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 whitespace-nowrap ${statusBlocked ? 'text-amber-700' : 'text-[#0b7a57]'}`}>
+                      <div className={`mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 whitespace-nowrap md:mt-2 ${statusBlocked ? 'text-amber-700' : 'text-[#0b7a57]'}`}>
                         {isMulti && count > 1 && (
                           <span className="text-sm font-normal text-gray-500">{count}×</span>
                         )}
@@ -374,7 +374,7 @@ const AmbulantBonusCalculator = ({
             )}
 
             {/* Vertrauens-Hinweis */}
-            <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4 flex gap-3 items-start">
+            <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-3 md:mt-6 md:p-4 flex gap-3 items-start">
               <HeartHandshake className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-700" aria-hidden="true" />
               <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
                 <p className="text-base font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
@@ -393,7 +393,7 @@ const AmbulantBonusCalculator = ({
             </div>
 
             {/* Apple Watch Hinweis */}
-            <div className="mt-4 bg-purple-50 border border-purple-200 rounded-xl p-4 flex gap-3 items-start">
+            <div className="mt-3 bg-purple-50 border border-purple-200 rounded-xl p-3 md:mt-4 md:p-4 flex gap-3 items-start">
               <Watch className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-700" aria-hidden="true" />
               <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
                 <p className="text-base font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
@@ -419,14 +419,14 @@ const AmbulantBonusCalculator = ({
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-6 shadow-xl sm:p-8 xl:p-10"
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-4 shadow-xl sm:p-8 xl:p-10"
             >
               <div className="relative z-10 text-center">
-                <h3 className="text-xl lg:text-2xl font-semibold text-white mb-4">
+                <h3 className="text-xl lg:text-2xl font-semibold text-white mb-2 md:mb-4">
                   {t('bonusCalculator.yourBonus')}
                 </h3>
 
-                <div className="flex justify-center items-center h-32 mb-6" aria-live="polite" aria-atomic="true">
+                <div className="flex justify-center items-center h-20 mb-3 md:h-32 md:mb-6" aria-live="polite" aria-atomic="true">
                   <AnimatePresence mode="popLayout">
                     <motion.div
                       key={anrechenbarerZuschuss}
@@ -434,7 +434,7 @@ const AmbulantBonusCalculator = ({
                       animate={{ scale: 1, opacity: 1, y: 0 }}
                       exit={{ scale: 1.2, opacity: 0, y: -20 }}
                       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className="text-6xl lg:text-7xl font-extrabold tracking-tighter text-white"
+                      className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white"
                     >
                       {formatEuro(anrechenbarerZuschuss)} €
                     </motion.div>
@@ -442,7 +442,7 @@ const AmbulantBonusCalculator = ({
                 </div>
 
                 {/* Netto-Vergleich mit editierbarem Beitrag */}
-                <div className="bg-white/15 rounded-xl p-4 mb-6 backdrop-blur-sm">
+                <div className="bg-white/15 rounded-xl p-3 mb-4 md:p-4 md:mb-6 backdrop-blur-sm">
                   <p className="text-white/85 text-base font-medium mb-3">{tariffInfoText || t('bonusCalculator.tariffInfo')}</p>
 
                   {/* Editierbarer Monatsbeitrag */}
@@ -506,7 +506,7 @@ const AmbulantBonusCalculator = ({
                 </div>
 
                 {/* Der Tausch unterm Strich: effektive Kosten gegen 3.000-EUR-Budget */}
-                <div className="bg-white rounded-xl p-5 mb-6 text-left shadow-lg">
+                <div className="bg-white rounded-xl p-4 mb-4 md:p-5 md:mb-6 text-left shadow-lg">
                   <p className="text-healio-dark text-sm font-extrabold uppercase tracking-wide mb-3">
                     {t('bonusCalculator.effectiveTitle')}
                   </p>
@@ -541,13 +541,13 @@ const AmbulantBonusCalculator = ({
                   </p>
                 </div>
 
-                <p className="text-white/90 text-base leading-relaxed mb-8 max-w-sm mx-auto font-medium">
+                <p className="text-white/90 text-base leading-relaxed mb-5 md:mb-8 max-w-sm mx-auto font-medium">
                   {bonusPayoutText || t('bonusCalculator.bonusPayout')}
                   <span className="mt-2 block text-base text-white/85">{t('bonusCalculator.choiceDisclaimer')}</span>
                 </p>
 
                 {calculatorHint && <p className="mb-4 text-left text-base leading-7 text-white/90" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3 md:gap-4">
                   {ctaOverride ? (
                     <a
                       href={ctaOverride.href}

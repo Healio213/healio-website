@@ -34,23 +34,23 @@ const CompanyEconomics = () => {
   const facts = t('economics.facts', { returnObjects: true });
 
   return (
-    <section className="bg-[#07161f] py-14 text-white lg:py-20" aria-labelledby="company-economics-title">
+    <section className="bg-[#07161f] py-10 text-white md:py-14 lg:py-20" aria-labelledby="company-economics-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-6 md:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8ee7ca]">{t('economics.eyebrow')}</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#8ee7ca] md:text-xs">{t('economics.eyebrow')}</p>
             <h2
               id="company-economics-title"
-              className="mt-4 max-w-[13ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl"
+              className="mt-4 max-w-[13ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl"
             >
               {t('economics.title')}
             </h2>
           </div>
           <div className="max-w-2xl lg:justify-self-end">
-            <p className="text-lg leading-8 text-slate-300">{t('economics.description')}</p>
+            <p className="text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{t('economics.description')}</p>
             <Link
               to={getPath('potenzialanalyse')}
-              className="mt-7 inline-flex items-center gap-2 font-display text-sm font-extrabold text-[#8ee7ca] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07161f]"
+              className="mt-4 inline-flex min-h-11 items-center gap-2 font-display text-sm font-extrabold text-[#8ee7ca] transition md:mt-7 md:min-h-0 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07161f]"
             >
               {t('economics.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -58,13 +58,13 @@ const CompanyEconomics = () => {
           </div>
         </div>
 
-        <div className="mt-10 rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 sm:p-8 lg:p-10">
+        <div className="mt-8 rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-5 sm:p-8 md:mt-10 lg:p-10">
           <div className="max-w-3xl">
             <p className="font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-3xl">{t('economics.summaryTitle')}</p>
-            <p className="mt-4 text-base leading-7 text-slate-300">{t('economics.summaryText')}</p>
+            <p className="mt-3 text-base leading-7 text-slate-300 md:mt-4">{t('economics.summaryText')}</p>
           </div>
 
-          <details className="group mt-7 overflow-hidden rounded-2xl border border-white/10 bg-[#0b202a]">
+          <details className="group mt-6 overflow-hidden rounded-2xl border border-white/10 bg-[#0b202a] md:mt-7">
             <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 font-display text-sm font-extrabold text-[#8ee7ca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-inset sm:px-6 [&::-webkit-details-marker]:hidden">
               <span>
                 <span className="group-open:hidden">{t('economics.detailsShow')}</span>
@@ -82,12 +82,12 @@ const CompanyEconomics = () => {
                       <FriendlyIcon kind={meta.kind} tone={meta.tone} size="sm" />
                       <div>
                         <h3 className="font-display text-lg font-extrabold tracking-[-0.02em] text-white">{fact.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">{fact.description}</p>
+                        <p className="mt-2 text-base leading-6 text-slate-300 md:text-sm md:leading-6">{fact.description}</p>
                         <a
                           href={meta.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#8ee7ca] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca]"
+                          className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-[#8ee7ca] md:text-xs transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca]"
                         >
                           {t('economics.sourceLabel')}
                           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
@@ -99,7 +99,7 @@ const CompanyEconomics = () => {
               })}
             </div>
 
-            <p className="border-t border-white/10 px-5 py-5 text-xs leading-5 text-slate-400 sm:px-6">{t('economics.disclaimer')}</p>
+            <p className="border-t border-white/10 px-5 py-5 text-sm leading-5 text-slate-400 sm:px-6 md:text-xs md:leading-5">{t('economics.disclaimer')}</p>
           </details>
         </div>
       </div>

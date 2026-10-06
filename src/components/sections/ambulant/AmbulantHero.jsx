@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
 
@@ -13,7 +14,7 @@ const potDots = ['bg-[#5b8fd1]', 'bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]']
 // Hero wie auf /stationaer (Frank 30.09.2026): dunkler Grund, links Text und
 // Budget-Button, rechts die Karte mit dem Budget der höchsten Stufe und ihren
 // vier Töpfen. Beträge kommen aus denselben Tarifdaten wie die Tarifwahl.
-const AmbulantHero = ({ fromBonusTopic = false }) => {
+const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
   const { t } = useTranslation('ambulant');
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
@@ -25,18 +26,18 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
   });
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#071726] text-white" aria-labelledby="hero-heading">
+    <section className={`relative isolate overflow-hidden bg-[#071726] text-white ${className}`} aria-labelledby="hero-heading">
       <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
       <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
       <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-16 pt-28 sm:px-6 sm:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 lg:px-8">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-10 pt-28 sm:px-6 sm:pb-12 md:gap-12 md:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 lg:px-8">
         <div className="min-w-0 max-w-3xl">
           <motion.p
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mb-5 font-display text-xs font-extrabold uppercase tracking-[0.24em] text-[#5ee0b1] md:text-sm"
+            className="mb-4 font-display text-sm font-extrabold uppercase tracking-[0.16em] text-[#5ee0b1] md:mb-5 md:tracking-[0.24em]"
           >
             {t('hero.eyebrow')}
           </motion.p>
@@ -53,7 +54,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-200 md:mb-8 md:text-xl"
+            className="mb-5 max-w-2xl text-lg font-medium leading-relaxed text-slate-200 md:mb-8 md:text-xl"
           >
             {fromBonusTopic
               ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.'
@@ -90,7 +91,7 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
           className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
           aria-label={t('hero.offerAria')}
         >
-          <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:rounded-[2.2rem] sm:p-7">
             <div className="flex items-center gap-4">
               <img
                 src="/images/friendly-icons/health-wallet.webp"
@@ -105,17 +106,26 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
                 <p className="font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl">
                   {t('hero.offerTitle', { amount: euro.format(budget.budget) })}
                 </p>
-                <p className="mt-1 text-sm font-semibold text-slate-600 sm:text-base">
+                <p className="mt-1 text-base font-semibold text-slate-600">
                   {t('hero.offerTier', { code: budget.code, refund: budget.refund })}
                 </p>
               </div>
             </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {/* Experiment 06.10.2026: mobil eine Wischreihe statt vier gestapelter
+                Karten, ab md das bisherige Zwei-Spalten-Raster. Jede Karte führt
+                weiterhin in den Budget-Kompass bzw. die Tarifwahl. */}
+            <MobileSwipeRow
+              label={t('hero.offerAria')}
+              className="mt-4 md:mt-5"
+              desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:gap-3"
+              mobileItemWidth="w-[74%]"
+              bleed={false}
+            >
               {budget.pots.map((pot, index) => (
                 <a
                   key={pot.key}
                   href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
-                  className={`group block rounded-2xl border bg-white/95 p-4 shadow-[0_12px_30px_rgba(39,63,72,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${potBorders[index % potBorders.length]}`}
+                  className={`group block h-full rounded-2xl border bg-white/95 p-4 shadow-[0_2px_6px_rgba(39,63,72,0.08)] transition md:shadow-[0_12px_30px_rgba(39,63,72,0.10)] md:hover:-translate-y-0.5 md:hover:bg-white md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${potBorders[index % potBorders.length]}`}
                 >
                   <span className="flex items-center justify-between gap-2">
                     <span className="font-display text-lg font-extrabold leading-tight text-[#071726]">{pot.label}</span>
@@ -127,8 +137,8 @@ const AmbulantHero = ({ fromBonusTopic = false }) => {
                   <span className="mt-1 block text-base leading-snug text-slate-600">{pot.detail}</span>
                 </a>
               ))}
-            </div>
-            <p className="mt-4 text-sm leading-6 text-slate-500">{budget.disclosure}</p>
+            </MobileSwipeRow>
+            <p className="mt-3 text-sm leading-6 text-slate-500 md:mt-4">{budget.disclosure}</p>
           </div>
         </motion.div>
       </div>

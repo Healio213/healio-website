@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight, Calculator, ChevronDown, ClipboardCheck } from 'lucide-react';
+import { Menu, X, ArrowRight, Calculator, ChevronDown, ClipboardCheck, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
@@ -171,6 +171,40 @@ const Header = () => {
         ? getPath('potenzialanalyse')
         : getPath('terminvereinbarung');
   const ambulantSdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  // Mobiler Hauptknopf neben dem Menü: nur auf Seiten mit einem Anker als
+  // Hauptziel. Das Ziel kommt aus ctaPath, die Beschriftung ist die kurze Form
+  // von ctaLabel (der volle Text passt neben Logo und Menü nicht).
+  const anchorOf = (path) => (typeof path === 'object' && path?.hash ? path.hash.slice(1) : null);
+  let mobileAnchorCta = null;
+  if (isDental) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: lang === 'de' ? 'Zahn-Check' : 'Dental check',
+      Icon: ClipboardCheck,
+      visible: showSolidHeader,
+      hideFrom: 'xl:hidden',
+      dataAttr: { 'data-zahn-header-cta': 'mobile' },
+    };
+  } else if (isInpatient) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: lang === 'de' ? 'Klinikschutz' : 'Hospital cover',
+      Icon: ShieldCheck,
+      visible: scrolled,
+      hideFrom: 'md:hidden',
+      dataAttr: { 'data-stationaer-header-cta': 'mobile' },
+    };
+  } else if (isPregnancy) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: 'Zusatzschutz',
+      Icon: ShieldCheck,
+      visible: scrolled,
+      hideFrom: 'md:hidden',
+      dataAttr: { 'data-schwangerschaft-header-cta': 'mobile' },
+    };
+  }
+  if (mobileAnchorCta && !mobileAnchorCta.target) mobileAnchorCta = null;
 
   return (
     <header className={cn(
@@ -337,24 +371,30 @@ const Header = () => {
         </div>
 
         {/* Experiment 05.10.2026: wie der dauerhafte Konfigurieren-Knopf auf
-            mercedes-benz.de bleibt der Zahn-Check beim Scrollen oben greifbar. */}
+            mercedes-benz.de bleibt der Hauptknopf der Seite beim Scrollen oben
+            greifbar. Zahn-Check auf /zahn (seit 05.10.), Klinikschutz auf
+            /stationaer und Zusatzschutz auf /schwangerschaft (06.10.): gleiches
+            Muster, Ziel jeweils der Anker aus ctaPath. Auf /stationaer und
+            /schwangerschaft erscheint er erst nach dem Scrollen (scrolled) und
+            nur unter md (768 px), damit der Desktop dort unverändert bleibt. */}
         <AnimatePresence initial={false}>
-          {isDental && showSolidHeader && (
+          {mobileAnchorCta && mobileAnchorCta.visible && (
             <motion.a
-              href="#zahn-check"
+              key={mobileAnchorCta.target}
+              href={`#${mobileAnchorCta.target}`}
               onClick={(event) => {
                 event.preventDefault();
-                document.getElementById('zahn-check')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById(mobileAnchorCta.target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
               initial={{ opacity: 0, y: -6, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -6, scale: 0.96 }}
               transition={{ duration: 0.24, ease: 'easeOut' }}
-              data-zahn-header-cta="mobile"
-              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-4 text-sm font-extrabold text-home-midnight shadow-[0_4px_14px_rgba(37,201,144,0.3)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
+              {...mobileAnchorCta.dataAttr}
+              className={`absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-4 text-sm font-extrabold text-home-midnight shadow-[0_4px_14px_rgba(37,201,144,0.3)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${mobileAnchorCta.hideFrom}`}
             >
-              <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
-              {lang === 'de' ? 'Zahn-Check' : 'Dental check'}
+              <mobileAnchorCta.Icon className="h-4 w-4" aria-hidden="true" />
+              {mobileAnchorCta.label}
             </motion.a>
           )}
         </AnimatePresence>

@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import {
   calculateBavScenarios,
   calculateEmployerBavLeverage,
@@ -55,21 +56,21 @@ const CompanyBavLeverage = () => {
   const afterModelDeductionMonthly = roundTo(payout.afterModelDeductionMonthly, 10);
 
   return (
-    <section className="bg-white py-14 lg:py-20" aria-labelledby="company-bav-leverage-title">
+    <section className="bg-white py-10 md:py-14 lg:py-20" aria-labelledby="company-bav-leverage-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#07161f] text-white shadow-[0_30px_90px_rgba(7,22,31,0.16)]">
           <div className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full border border-[#25c990]/20" aria-hidden="true" />
           <div className="pointer-events-none absolute -right-12 -top-10 h-40 w-40 rounded-full bg-[#25c990]/10 blur-3xl" aria-hidden="true" />
 
-          <div className="relative p-6 sm:p-9 lg:p-11">
+          <div className="relative p-5 sm:p-9 lg:p-11">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-end">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8ee7ca]">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#8ee7ca] md:text-xs">
                   {t('bavLeverage.eyebrow')}
                 </p>
                 <h2
                   id="company-bav-leverage-title"
-                  className="mt-4 max-w-[16ch] font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-6xl"
+                  className="mt-4 max-w-[16ch] font-display text-3xl font-extrabold leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-6xl"
                 >
                   <span className="block">{t('bavLeverage.titleLine1')}</span>
                   <span className="block text-[#8ee7ca]">{t('bavLeverage.titleLine2')}</span>
@@ -80,151 +81,175 @@ const CompanyBavLeverage = () => {
                 <p className="max-w-xl text-base leading-7 text-slate-300">
                   {t('bavLeverage.description')}
                 </p>
-                <p className="mt-4 inline-flex rounded-full border border-[#25c990]/35 bg-[#25c990]/10 px-4 py-2 text-xs font-bold leading-5 text-[#8ee7ca]">
+                <p className="mt-4 inline-flex rounded-full border border-[#25c990]/35 bg-[#25c990]/10 px-4 py-2 text-sm font-bold leading-5 text-[#8ee7ca] md:text-xs md:leading-5">
                   {t('bavLeverage.flow.formula')}
                 </p>
               </div>
             </div>
 
+            {/* Mobil Wischreihe (drei Stufen mit Punkten), ab md das bisherige Raster mit den Verbindern.
+                Die Hüllen der Stufen lösen sich ab md mit contents auf, Verbinder und Karten sind dort
+                wieder direkte Rasterzellen. Mobil steht die Verbinder-Zeile als Kopfzeile in der Karte. */}
             <div
               data-bav-flow="true"
               role="group"
               aria-label={t('bavLeverage.flow.ariaLabel')}
-              className="mt-9 grid gap-3 lg:grid-cols-[minmax(0,0.86fr)_auto_minmax(0,0.86fr)_auto_minmax(0,1.28fr)] lg:items-stretch"
+              className="mt-7 md:mt-9"
             >
-              <article className="flex min-h-[13rem] flex-col rounded-[1.5rem] border border-white/[0.12] bg-white/[0.055] p-5 sm:p-6">
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.17em] text-slate-400">
-                  {t('bavLeverage.flow.employeeStage')}
-                </p>
-                <p className="mt-auto pt-8 font-display text-[clamp(2.45rem,7vw,4.4rem)] font-extrabold leading-none tracking-[-0.055em] text-white tabular-nums">
-                  {formatEur(employeeNetEffect)}
-                </p>
-                <p className="mt-4 max-w-[24ch] text-sm font-bold leading-5 text-white">
-                  {t('bavLeverage.flow.employeeCaption')}
-                </p>
-                <p className="mt-2 text-xs leading-5 text-slate-400">
-                  {t('bavLeverage.flow.employeeNote')}
-                </p>
-              </article>
-
-              <div className="flex items-center justify-center gap-3 py-1 text-[#8ee7ca] lg:w-14 lg:flex-col lg:gap-2 lg:py-0" aria-hidden="true">
-                <span className="text-[0.62rem] font-bold uppercase tracking-[0.13em] lg:text-center">
-                  {t('bavLeverage.flow.firstConnector')}
-                </span>
-                <ArrowDown className="h-5 w-5 lg:hidden" />
-                <ArrowRight className="hidden h-5 w-5 lg:block" />
-              </div>
-
-              <article className="flex min-h-[13rem] flex-col rounded-[1.5rem] border border-[#25c990]/40 bg-[#0c2b2d] p-5 sm:p-6">
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.17em] text-[#8ee7ca]">
-                  {t('bavLeverage.flow.contractStage')}
-                </p>
-                <p className="mt-auto pt-8 font-display text-[clamp(2.45rem,7vw,4.4rem)] font-extrabold leading-none tracking-[-0.055em] text-white tabular-nums">
-                  {formatEur(PUBLIC_MODEL.monthlyContribution)}
-                </p>
-                <p className="mt-4 max-w-[24ch] text-sm font-bold leading-5 text-white">
-                  {t('bavLeverage.flow.contractCaption')}
-                </p>
-                <p className="mt-2 text-xs leading-5 text-[#8ee7ca]">
-                  {t('bavLeverage.flow.contractNote', {
-                    contributions: formatEur(scenario.contributionTotal),
-                  })}
-                </p>
-              </article>
-
-              <div className="flex items-center justify-center gap-3 py-1 text-[#8ee7ca] lg:w-14 lg:flex-col lg:gap-2 lg:py-0" aria-hidden="true">
-                <span className="text-[0.62rem] font-bold uppercase tracking-[0.13em] lg:text-center">
-                  {t('bavLeverage.flow.secondConnector')}
-                </span>
-                <ArrowDown className="h-5 w-5 lg:hidden" />
-                <ArrowRight className="hidden h-5 w-5 lg:block" />
-              </div>
-
-              <article className="flex min-h-[13rem] flex-col rounded-[1.5rem] bg-[#dff8ee] p-5 text-[#07161f] shadow-[0_18px_45px_rgba(0,0,0,0.14)] sm:p-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <p className="text-[0.68rem] font-bold uppercase tracking-[0.17em] text-[#087052]">
-                    {t('bavLeverage.flow.futureStage')}
+              <MobileSwipeRow
+                label={t('bavLeverage.flow.ariaLabel')}
+                dotsTone="dark"
+                bleed={false}
+                mobileItemWidth="w-[72vw] max-w-[22rem]"
+                desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-9 sm:scroll-pl-9 sm:px-9 md:mx-0 md:grid md:gap-3 md:px-0 lg:grid-cols-[minmax(0,0.86fr)_auto_minmax(0,0.86fr)_auto_minmax(0,1.28fr)] lg:items-stretch"
+                itemClassName="flex md:contents"
+              >
+                <article className="flex min-h-[13rem] w-full flex-col rounded-[1.5rem] border border-white/[0.12] bg-white/[0.055] p-5 sm:p-6">
+                  <p className="text-sm font-bold uppercase tracking-[0.1em] text-slate-400 md:text-[0.68rem] md:leading-[inherit] md:tracking-[0.17em]">
+                    {t('bavLeverage.flow.employeeStage')}
                   </p>
-                  <fieldset>
-                    <legend className="sr-only">{t('bavLeverage.flow.modeLabel')}</legend>
-                    <div className="inline-flex rounded-full bg-white/80 p-1 shadow-sm">
-                      {['capital', 'monthly'].map((mode) => (
-                        <button
-                          key={mode}
-                          type="button"
-                          aria-pressed={resultMode === mode}
-                          onClick={() => setResultMode(mode)}
-                          className={`min-h-9 rounded-full px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087052] ${
-                            resultMode === mode
-                              ? 'bg-[#07161f] text-white'
-                              : 'text-[#07563f] hover:bg-[#effaf6]'
-                          }`}
-                        >
-                          {t(`bavLeverage.flow.${mode}Tab`)}
-                        </button>
-                      ))}
-                    </div>
-                  </fieldset>
-                </div>
+                  <p className="mt-auto pt-6 font-display text-[clamp(2.45rem,7vw,4.4rem)] font-extrabold leading-none tracking-[-0.055em] text-white tabular-nums md:pt-8">
+                    {formatEur(employeeNetEffect)}
+                  </p>
+                  <p className="mt-4 max-w-[24ch] text-base font-bold leading-6 text-white md:text-sm md:leading-5">
+                    {t('bavLeverage.flow.employeeCaption')}
+                  </p>
+                  <p className="mt-2 text-sm leading-5 text-slate-400 md:text-xs md:leading-5">
+                    {t('bavLeverage.flow.employeeNote')}
+                  </p>
+                </article>
 
-                <div data-payout-mode={resultMode} aria-live="polite" className="mt-auto pt-7">
-                  {resultMode === 'capital' ? (
-                    <>
-                      <p className="font-display text-[clamp(2.35rem,6vw,4.2rem)] font-extrabold leading-none tracking-[-0.055em] tabular-nums">
-                        {formatEur(projectedCapital)}
+                <>
+                  <div className="hidden items-center justify-center gap-3 py-1 text-[#8ee7ca] md:flex lg:w-14 lg:flex-col lg:gap-2 lg:py-0" aria-hidden="true">
+                    <span className="text-[0.62rem] font-bold uppercase tracking-[0.13em] lg:text-center">
+                      {t('bavLeverage.flow.firstConnector')}
+                    </span>
+                    <ArrowDown className="h-5 w-5 lg:hidden" />
+                    <ArrowRight className="hidden h-5 w-5 lg:block" />
+                  </div>
+
+                  <article className="flex min-h-[13rem] w-full flex-col rounded-[1.5rem] border border-[#25c990]/40 bg-[#0c2b2d] p-5 sm:p-6">
+                    <p className="mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-[#8ee7ca] md:hidden" aria-hidden="true">
+                      <ArrowRight className="h-4 w-4 shrink-0" />
+                      {t('bavLeverage.flow.firstConnector')}
+                    </p>
+                    <p className="text-sm font-bold uppercase tracking-[0.1em] text-[#8ee7ca] md:text-[0.68rem] md:leading-[inherit] md:tracking-[0.17em]">
+                      {t('bavLeverage.flow.contractStage')}
+                    </p>
+                    <p className="mt-auto pt-6 font-display text-[clamp(2.45rem,7vw,4.4rem)] font-extrabold leading-none tracking-[-0.055em] text-white tabular-nums md:pt-8">
+                      {formatEur(PUBLIC_MODEL.monthlyContribution)}
+                    </p>
+                    <p className="mt-4 max-w-[24ch] text-base font-bold leading-6 text-white md:text-sm md:leading-5">
+                      {t('bavLeverage.flow.contractCaption')}
+                    </p>
+                    <p className="mt-2 text-sm leading-5 text-[#8ee7ca] md:text-xs md:leading-5">
+                      {t('bavLeverage.flow.contractNote', {
+                        contributions: formatEur(scenario.contributionTotal),
+                      })}
+                    </p>
+                  </article>
+                </>
+
+                <>
+                  <div className="hidden items-center justify-center gap-3 py-1 text-[#8ee7ca] md:flex lg:w-14 lg:flex-col lg:gap-2 lg:py-0" aria-hidden="true">
+                    <span className="text-[0.62rem] font-bold uppercase tracking-[0.13em] lg:text-center">
+                      {t('bavLeverage.flow.secondConnector')}
+                    </span>
+                    <ArrowDown className="h-5 w-5 lg:hidden" />
+                    <ArrowRight className="hidden h-5 w-5 lg:block" />
+                  </div>
+
+                  <article className="flex min-h-[13rem] w-full flex-col rounded-[1.5rem] bg-[#dff8ee] p-5 text-[#07161f] shadow-[0_18px_45px_rgba(0,0,0,0.14)] sm:p-6">
+                    <p className="mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-[#087052] md:hidden" aria-hidden="true">
+                      <ArrowRight className="h-4 w-4 shrink-0" />
+                      {t('bavLeverage.flow.secondConnector')}
+                    </p>
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <p className="text-sm font-bold uppercase tracking-[0.1em] text-[#087052] md:text-[0.68rem] md:leading-[inherit] md:tracking-[0.17em]">
+                        {t('bavLeverage.flow.futureStage')}
                       </p>
-                      <p className="mt-4 text-sm font-extrabold leading-5">
-                        {t('bavLeverage.flow.capitalCaption')}
-                      </p>
-                      <p className="mt-2 text-xs leading-5 text-[#256451]">
-                        {t('bavLeverage.flow.capitalNote', {
-                          contributions: formatEur(scenario.contributionTotal),
-                        })}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        <div>
-                          <p className="font-display text-4xl font-extrabold leading-none tracking-[-0.045em] tabular-nums">
-                            {formatEur(grossMonthlyWithdrawal)}
-                          </p>
-                          <p className="mt-3 text-xs font-bold leading-5 text-[#256451]">
-                            {t('bavLeverage.flow.monthlyGrossCaption')}
-                          </p>
+                      <fieldset>
+                        <legend className="sr-only">{t('bavLeverage.flow.modeLabel')}</legend>
+                        <div className="inline-flex rounded-full bg-white/80 p-1 shadow-sm">
+                          {['capital', 'monthly'].map((mode) => (
+                            <button
+                              key={mode}
+                              type="button"
+                              aria-pressed={resultMode === mode}
+                              onClick={() => setResultMode(mode)}
+                              className={`min-h-11 rounded-full px-3.5 py-1.5 text-sm font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087052] md:min-h-9 md:text-xs ${
+                                resultMode === mode
+                                  ? 'bg-[#07161f] text-white'
+                                  : 'text-[#07563f] hover:bg-[#effaf6]'
+                              }`}
+                            >
+                              {t(`bavLeverage.flow.${mode}Tab`)}
+                            </button>
+                          ))}
                         </div>
-                        <div className="rounded-2xl bg-white/75 p-4">
-                          <p className="font-display text-3xl font-extrabold leading-none tracking-[-0.04em] tabular-nums">
-                            {formatEur(afterModelDeductionMonthly)}
+                      </fieldset>
+                    </div>
+
+                    <div data-payout-mode={resultMode} aria-live="polite" className="mt-auto pt-6 md:pt-7">
+                      {resultMode === 'capital' ? (
+                        <>
+                          <p className="font-display text-[clamp(2.35rem,6vw,4.2rem)] font-extrabold leading-none tracking-[-0.055em] tabular-nums">
+                            {formatEur(projectedCapital)}
                           </p>
-                          <p className="mt-3 text-xs font-bold leading-5 text-[#256451]">
-                            {t('bavLeverage.flow.monthlyAfterCaption', {
-                              deduction: payout.modelDeductionRate,
+                          <p className="mt-4 text-base font-extrabold leading-6 md:text-sm md:leading-5">
+                            {t('bavLeverage.flow.capitalCaption')}
+                          </p>
+                          <p className="mt-2 text-sm leading-5 text-[#256451] md:text-xs md:leading-5">
+                            {t('bavLeverage.flow.capitalNote', {
+                              contributions: formatEur(scenario.contributionTotal),
                             })}
                           </p>
-                        </div>
-                      </div>
-                      <p className="mt-4 text-[0.7rem] leading-5 text-[#256451]">
-                        {t('bavLeverage.flow.monthlyNote')}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </article>
+                        </>
+                      ) : (
+                        <>
+                          <div className="grid gap-4 sm:grid-cols-2">
+                            <div>
+                              <p className="font-display text-4xl font-extrabold leading-none tracking-[-0.045em] tabular-nums">
+                                {formatEur(grossMonthlyWithdrawal)}
+                              </p>
+                              <p className="mt-3 text-sm font-bold leading-5 text-[#256451] md:text-xs md:leading-5">
+                                {t('bavLeverage.flow.monthlyGrossCaption')}
+                              </p>
+                            </div>
+                            <div className="rounded-2xl bg-white/75 p-4">
+                              <p className="font-display text-3xl font-extrabold leading-none tracking-[-0.04em] tabular-nums">
+                                {formatEur(afterModelDeductionMonthly)}
+                              </p>
+                              <p className="mt-3 text-sm font-bold leading-5 text-[#256451] md:text-xs md:leading-5">
+                                {t('bavLeverage.flow.monthlyAfterCaption', {
+                                  deduction: payout.modelDeductionRate,
+                                })}
+                              </p>
+                            </div>
+                          </div>
+                          <p className="mt-4 text-sm leading-5 text-[#256451] md:text-[0.7rem]">
+                            {t('bavLeverage.flow.monthlyNote')}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  </article>
+                </>
+              </MobileSwipeRow>
             </div>
 
-            <div className="mt-7 grid gap-5 border-t border-white/10 pt-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+            <div className="mt-6 grid gap-5 border-t border-white/10 pt-6 md:mt-7 md:pt-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
               <div>
-                <p className="max-w-3xl text-sm font-semibold leading-6 text-[#8ee7ca]">
+                <p className="max-w-3xl text-base font-semibold leading-7 text-[#8ee7ca] md:text-sm md:leading-6">
                   {t('bavLeverage.netEffectExplanation')}
                 </p>
-                <p className="mt-2 max-w-3xl text-xs leading-5 text-slate-400">
+                <p className="mt-2 max-w-3xl text-sm leading-5 text-slate-400 md:text-xs md:leading-5">
                   {t('bavLeverage.shortDisclaimer')}
                 </p>
               </div>
               <Link
                 to={getPath('vorsorgeRechner')}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25c990] px-5 py-3 font-display text-[0.82rem] font-extrabold text-[#07161f] transition hover:bg-[#5edcaf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f] sm:px-7 sm:text-sm"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#25c990] px-5 py-3 font-display text-sm font-extrabold text-[#07161f] transition hover:bg-[#5edcaf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f] sm:px-7 sm:text-sm"
               >
                 {t('bavLeverage.cta')}
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -241,63 +266,63 @@ const CompanyBavLeverage = () => {
                 </summary>
 
                 <div className="border-t border-white/10 px-5 pb-6 pt-5 sm:px-6">
-                  <p className="font-display text-sm font-extrabold text-white">
+                  <p className="font-display text-base font-extrabold text-white md:text-sm">
                     {t('bavLeverage.splitTitle')}
                   </p>
                   <div className="mt-4 grid overflow-hidden rounded-xl sm:grid-cols-2">
-                    <p className="bg-[#dff8ee] p-4 text-sm font-bold leading-6 text-[#07563f]">
+                    <p className="bg-[#dff8ee] p-4 text-base font-bold leading-6 text-[#07563f] md:text-sm md:leading-6">
                       {t('bavLeverage.splitFree')}
                     </p>
-                    <p className="border-t border-white/40 bg-[#fff2d5] p-4 text-sm font-bold leading-6 text-[#7a5110] sm:border-l sm:border-t-0">
+                    <p className="border-t border-white/40 bg-[#fff2d5] p-4 text-base font-bold leading-6 text-[#7a5110] md:text-sm md:leading-6 sm:border-l sm:border-t-0">
                       {t('bavLeverage.splitLiable')}
                     </p>
                   </div>
                   <Link
                     to={`${getPath('vorsorgeRechner')}#calculator-sources-title`}
-                    className="mt-3 inline-flex min-h-11 items-center text-xs font-bold text-[#8ee7ca] underline decoration-[#25c990] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f]"
+                    className="mt-3 inline-flex min-h-11 items-center text-sm font-bold md:text-xs text-[#8ee7ca] underline decoration-[#25c990] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f]"
                   >
                     {t('bavLeverage.legalSource')}
                   </Link>
 
                   <div className="mt-6 border-l-2 border-[#25c990] pl-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8ee7ca]">
+                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#8ee7ca] md:text-xs">
                       {t('bavLeverage.employerCostLabel')}
                     </p>
-                    <p className="mt-3 text-sm leading-6 text-slate-300">
+                    <p className="mt-3 text-base leading-6 text-slate-300 md:text-sm md:leading-6">
                       {t('bavLeverage.employerCost')}
                     </p>
                   </div>
 
                   <div className="mt-7 border-t border-white/10 pt-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-400 md:text-xs">
                       {t('bavLeverage.returnLabel')}
                     </p>
                     <p className="mt-3 font-display text-xl font-extrabold text-[#8ee7ca]">
                       {t('bavLeverage.standardFormula')}
                     </p>
-                    <p className="mt-3 text-xs leading-5 text-slate-300">
+                    <p className="mt-3 text-sm leading-5 text-slate-300 md:text-xs md:leading-5">
                       {t('bavLeverage.historicalContext')}
                     </p>
                     <a
                       href={MSCI_WORLD_USD_NET_FACTSHEET}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex min-h-11 items-center text-xs font-bold text-[#8ee7ca] underline decoration-[#25c990] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f]"
+                      className="mt-3 inline-flex min-h-11 items-center text-sm font-bold md:text-xs text-[#8ee7ca] underline decoration-[#25c990] decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07161f]"
                     >
                       {t('bavLeverage.source')}
                     </a>
                   </div>
 
                   <div className="mt-7 border-t border-white/10 pt-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-slate-400 md:text-xs">
                       {t('bavLeverage.payoutModelTitle')}
                     </p>
-                    <p className="mt-3 text-sm leading-6 text-slate-300">
+                    <p className="mt-3 text-base leading-6 text-slate-300 md:text-sm md:leading-6">
                       {t('bavLeverage.payoutModel')}
                     </p>
                   </div>
 
-                  <p className="mt-6 border-t border-white/10 pt-5 text-xs leading-5 text-slate-400">
+                  <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-5 text-slate-400 md:text-xs md:leading-5">
                     {t('bavLeverage.disclaimer')}
                   </p>
                 </div>

@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
@@ -424,20 +425,28 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           eyebrow={copy.video.eyebrow}
           title={copy.video.title}
           ariaLabel={copy.video.label}
-          className="bg-home-ice"
+          className="order-3 bg-home-ice md:order-none"
         />
       )}
 
-      <section id="budget-kompass" className="scroll-mt-20 bg-home-ice px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <section id="budget-kompass" className="order-4 scroll-mt-20 bg-home-ice px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="home-eyebrow">{copy.compass.eyebrow}</p>
+          <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
+            <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.compass.eyebrow}</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.compass.title}</h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-home-slate sm:text-lg">{copy.compass.subtitle}</p>
           </div>
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
-            <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
+            {/* Experiment 06.10.2026: die vier Bereiche wischen mobil als Karten
+                nebeneinander, ab md bleibt das bisherige Zwei-Spalten-Raster.
+                Die Auswahl und das Ergebnis darunter funktionieren wie zuvor. */}
+            <MobileSwipeRow
+              label={copy.compass.title}
+              className="min-w-0 md:flex md:flex-col"
+              desktopClassName="md:grid md:flex-1 md:grid-cols-2 md:gap-3"
+              mobileItemWidth="w-[80vw] max-w-[20rem]"
+            >
               {GOALS.map((item) => {
                 const itemCopy = copy.compass.goals[item.id];
                 const active = selectedGoal === item.id;
@@ -447,37 +456,37 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedGoal(item.id)}
-                    className={`home-focus group flex min-h-[150px] items-start gap-4 rounded-[1.6rem] border p-5 text-left transition duration-300 motion-reduce:transform-none ${active ? 'border-home-mint bg-white shadow-[0_20px_55px_rgba(7,17,31,0.10)] -translate-y-0.5' : 'border-emerald-950/10 bg-white/70 hover:border-home-mint/50 hover:bg-white'}`}
+                    className={`home-focus group flex h-full min-h-0 w-full items-start gap-3 rounded-[1.6rem] border p-4 text-left transition duration-300 motion-reduce:transform-none md:min-h-[150px] md:gap-4 md:p-5 ${active ? 'border-home-mint bg-white shadow-[0_2px_8px_rgba(7,17,31,0.12)] md:relative md:z-[1] md:-translate-y-0.5 md:shadow-[0_20px_55px_rgba(7,17,31,0.10)]' : 'border-emerald-950/10 bg-white/70 hover:border-home-mint/50 hover:bg-white'}`}
                   >
-                    <FriendlyIcon kind={item.kind} tone={item.tone} size="md" />
+                    <FriendlyIcon kind={item.kind} tone={item.tone} size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
                     <span>
                       <span className="block font-display text-lg font-extrabold leading-tight text-home-midnight">{itemCopy.title}</span>
-                      <span className="mt-2 block text-sm leading-6 text-home-slate">{itemCopy.short}</span>
+                      <span className="mt-1.5 block text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{itemCopy.short}</span>
                     </span>
                   </button>
                 );
               })}
-            </div>
+            </MobileSwipeRow>
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-home-midnight p-6 text-white shadow-[0_24px_70px_rgba(7,17,31,0.18)] sm:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] bg-home-midnight p-5 text-white shadow-[0_24px_70px_rgba(7,17,31,0.18)] sm:p-8 md:z-[2]">
               <div className="absolute -right-10 -top-12 h-48 w-48 rounded-full border border-home-mint/15" />
-              <img src="/images/friendly-icons/decision-thinking.webp" alt="" className="absolute right-3 top-3 h-28 w-28 object-contain opacity-95 sm:h-32 sm:w-32" aria-hidden="true" />
+              <img src="/images/friendly-icons/decision-thinking.webp" alt="" className="absolute right-3 top-3 h-20 w-20 object-contain opacity-95 sm:h-32 sm:w-32" aria-hidden="true" />
               <div className="relative max-w-[72%] sm:max-w-[68%]">
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-home-mint-active">{copy.compass.resultEyebrow}</p>
-                <h3 className="mt-3 font-display text-2xl font-extrabold leading-tight">{goal.title}</h3>
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-home-mint-active md:text-xs md:tracking-[0.2em]">{copy.compass.resultEyebrow}</p>
+                <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight md:mt-3">{goal.title}</h3>
               </div>
               <AnimatePresence mode="wait">
-                <motion.div key={selectedGoal} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="relative mt-10">
+                <motion.div key={selectedGoal} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="relative mt-5 md:mt-10">
                   <p className="text-lg font-bold text-white">{copy.compass.resultTitle}</p>
-                  <ul className="mt-5 space-y-3">
+                  <ul className="mt-3 space-y-2 md:mt-5 md:space-y-3">
                     {goal.focus.map((item) => (
-                      <li key={item} className="flex gap-3 text-sm leading-6 text-slate-200">
+                      <li key={item} className="flex gap-3 text-base leading-6 text-slate-200 md:text-sm md:leading-6">
                         <Check className="mt-1 h-4 w-4 shrink-0 text-home-mint" aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 border-t border-white/10 pt-5 text-xs leading-5 text-slate-400">{copy.compass.resultHint}</p>
+                  <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-5 text-slate-400 md:mt-6 md:pt-5 md:text-xs md:leading-5">{copy.compass.resultHint}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -485,32 +494,32 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section id="tarifwahl" className="scroll-mt-20 bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <section id="tarifwahl" className="order-5 scroll-mt-20 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {fromBonusTopic && (
-            <div className="mb-10 rounded-[1.6rem] border border-emerald-900/10 bg-home-ice p-5 sm:p-7" role="note" aria-labelledby="bonus-topic-continuation-heading">
+            <div className="mb-8 rounded-[1.6rem] border border-emerald-900/10 bg-home-ice p-5 sm:p-7 md:mb-10" role="note" aria-labelledby="bonus-topic-continuation-heading">
               <h2 id="bonus-topic-continuation-heading" className="font-display text-xl font-extrabold leading-tight text-home-midnight sm:text-2xl">Jetzt geht es um Leistungen und Beitrag.</h2>
               <p className="mt-3 max-w-3xl text-base leading-7 text-home-slate">Vergleiche den Schutz, der zu dir passt. Du musst dafür weder die Krankenkasse wechseln noch einen Termin buchen.</p>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-home-slate">Ein möglicher Kassenbonus bleibt eine separate Prüfung und ist hier nicht bestätigt. Es werden keine Ergebnisse aus einem Bonuscheck übernommen.</p>
+              <p className="mt-2 max-w-3xl text-base leading-6 text-home-slate md:text-sm md:leading-6">Ein möglicher Kassenbonus bleibt eine separate Prüfung und ist hier nicht bestätigt. Es werden keine Ergebnisse aus einem Bonuscheck übernommen.</p>
             </div>
           )}
           <div className="max-w-4xl">
-            <p className="home-eyebrow">{copy.tiers.eyebrow}</p>
+            <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.tiers.eyebrow}</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight [text-wrap:balance] sm:text-4xl lg:text-5xl">{copy.tiers.title}</h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-home-slate sm:text-lg">{copy.tiers.subtitle}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-home-slate sm:text-lg md:mt-5">{copy.tiers.subtitle}</p>
           </div>
 
-          <div className="mt-9 grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(15rem,18rem)]">
+          <div className="mt-6 grid gap-3 md:mt-9 md:grid-cols-[minmax(0,1fr)_minmax(15rem,18rem)]">
             <div className="grid grid-cols-4 gap-2 rounded-[1.4rem] bg-slate-100 p-2" role="group" aria-label={copy.tiers.tierGroupLabel}>
               {TIERS.map((item) => (
                 <button key={item.id} type="button" onClick={() => setSelectedTier(item.id)} aria-pressed={selectedTier === item.id} className={`home-focus rounded-[1rem] px-2 py-3 font-display text-sm font-extrabold transition sm:text-base ${selectedTier === item.id ? 'bg-home-midnight text-white shadow-lg' : 'text-home-slate hover:bg-white'}`}>
-                  <span className="block text-[10px] uppercase tracking-[0.14em] opacity-65 sm:text-xs">{item.code}</span>
+                  <span className="block text-sm uppercase tracking-[0.08em] opacity-65 md:text-xs md:tracking-[0.14em]">{item.code}</span>
                   <span className="mt-0.5 block">{item.id}{'\u00a0'}%</span>
                 </button>
               ))}
             </div>
-            <div className={`flex flex-col justify-center rounded-[1.4rem] border-2 bg-white px-5 py-3 transition focus-within:border-home-mint ${geburtsjahrUngueltig ? 'border-rose-300' : 'border-slate-200'}`}>
-              <label htmlFor="ambulant-geburtsjahr" className="font-display text-xs font-extrabold uppercase tracking-[0.14em] text-home-slate">{copy.tiers.ageLabel}</label>
+            <div className={`flex flex-col justify-center rounded-[1.4rem] border-2 bg-white px-5 py-2 transition focus-within:border-home-mint md:py-3 ${geburtsjahrUngueltig ? 'border-rose-300' : 'border-slate-200'}`}>
+              <label htmlFor="ambulant-geburtsjahr" className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-home-slate md:text-xs md:tracking-[0.14em]">{copy.tiers.ageLabel}</label>
               <input
                 id="ambulant-geburtsjahr"
                 type="text"
@@ -522,25 +531,25 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 placeholder={copy.tiers.agePlaceholder}
                 aria-invalid={geburtsjahrUngueltig || undefined}
                 aria-describedby={geburtsjahrUngueltig ? 'ambulant-geburtsjahr-fehler' : undefined}
-                className="mt-1 w-full min-w-0 bg-transparent font-display text-2xl font-extrabold text-home-midnight placeholder:text-base placeholder:font-semibold placeholder:text-slate-400 focus:outline-none"
+                className="mt-1 min-h-11 w-full min-w-0 bg-transparent md:min-h-0 font-display text-2xl font-extrabold text-home-midnight placeholder:text-base placeholder:font-semibold placeholder:text-slate-400 focus:outline-none"
               />
-              {geburtsjahrUngueltig && <p id="ambulant-geburtsjahr-fehler" className="mt-1 text-xs font-semibold text-rose-600">{copy.tiers.ageInvalid}</p>}
+              {geburtsjahrUngueltig && <p id="ambulant-geburtsjahr-fehler" className="mt-1 text-sm font-semibold text-rose-600 md:text-xs">{copy.tiers.ageInvalid}</p>}
             </div>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white via-white to-emerald-50 shadow-[0_24px_70px_rgba(7,17,31,0.10)]">
-            <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-              <div className="relative flex flex-col overflow-hidden bg-home-midnight p-7 text-white sm:p-9">
+          <div className="mt-6 overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white via-white to-emerald-50 shadow-[0_24px_70px_rgba(7,17,31,0.10)] md:mt-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.78fr_1.22fr]">
+              <div className="relative flex flex-col overflow-hidden bg-home-midnight p-5 text-white sm:p-9">
                 <div className="absolute -bottom-16 -left-12 h-52 w-52 rounded-full bg-home-mint/10 blur-2xl" />
-                <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.2em] text-home-mint-active">Ambulant {tier.id} · {tier.code}</p>
-                <p className="relative mt-4 font-display text-5xl font-extrabold tracking-[-0.05em] sm:text-6xl">{euro.format(tier.budget)}</p>
-                <p className="relative mt-2 text-sm text-slate-300">{copy.tiers.budget}</p>
-                <div className="relative mt-8 inline-flex self-start items-baseline gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3">
+                <p className="relative font-display text-sm font-extrabold uppercase tracking-[0.12em] text-home-mint-active md:text-xs md:tracking-[0.2em]">Ambulant {tier.id} · {tier.code}</p>
+                <p className="relative mt-3 font-display text-5xl font-extrabold tracking-[-0.05em] sm:text-6xl md:mt-4">{euro.format(tier.budget)}</p>
+                <p className="relative mt-1 text-sm text-slate-300 md:mt-2">{copy.tiers.budget}</p>
+                <div className="relative mt-4 inline-flex self-start items-baseline gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-2 md:mt-8 md:py-3">
                   <strong className="font-display text-2xl text-home-mint-active">{tier.refund}</strong>
                   <span className="text-sm text-slate-300">{copy.tiers.refund}</span>
                 </div>
-                <div className="relative mt-8 border-t border-white/10 pt-6 lg:mt-auto" aria-live="polite">
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                <div className="relative mt-5 border-t border-white/10 pt-4 md:mt-8 md:pt-6 lg:mt-auto" aria-live="polite">
+                  <p className="text-sm font-bold uppercase tracking-[0.06em] text-slate-400 md:text-xs md:tracking-[0.12em]">
                     {altersgruppe ? copy.tiers.priceForGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.priceRangeLabel}
                   </p>
                   {tierBeitrag !== null ? (
@@ -552,59 +561,70 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       {spanneText(tier)} <span className="text-sm font-semibold text-slate-300">{copy.tiers.perMonth}</span>
                     </p>
                   )}
-                  <p className="mt-3 text-sm leading-6 text-slate-300">{altersgruppe ? copy.tiers.groupRule : copy.tiers.priceRangeHint}</p>
-                  <p className="mt-3 text-xs text-slate-400">{copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}</p>
+                  <p className="mt-2 text-base leading-6 text-slate-300 md:mt-3 md:text-sm md:leading-6">{altersgruppe ? copy.tiers.groupRule : copy.tiers.priceRangeHint}</p>
+                  {/* Mobil ausgeblendet: derselbe Satz „Beiträge der SDK-Tarife, Stand …“ steht
+                      wortgleich unter der Stufenübersicht weiter unten. */}
+                  <p className="mt-3 hidden text-xs text-slate-400 md:block">{copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}</p>
                 </div>
               </div>
-              <div className="p-7 sm:p-9">
+              <div className="p-5 sm:p-9">
                 <p className="font-display text-xl font-extrabold text-home-midnight">{copy.tiers.ledgerTitle}</p>
-                <p className="mt-2 text-sm leading-6 text-home-slate">{copy.tiers.ledgerHint}</p>
+                <p className="mt-1 text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{copy.tiers.ledgerHint}</p>
                 <AnimatePresence mode="wait">
-                  <motion.div key={tier.code} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="mt-6 divide-y divide-slate-200 border-y border-slate-200">
-                    {POT_KEYS.map((potKey, index) => {
-                      const pot = copy.tiers.pots[potKey];
-                      const amount = tier.pots[potKey];
-                      return (
-                        <div key={potKey} className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-4">
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
+                  <motion.div key={tier.code} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="mt-4 md:mt-6">
+                    {/* Experiment 06.10.2026: die vier Leistungstöpfe wischen mobil als
+                        Karten nebeneinander, ab md bleibt die Liste mit Trennlinien. */}
+                    <MobileSwipeRow
+                      label={copy.tiers.ledgerTitle}
+                      desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-9 sm:scroll-pl-9 sm:px-9 md:mx-0 md:px-0 md:block md:gap-0 md:divide-y md:divide-slate-200 md:border-y md:border-slate-200"
+                      mobileItemWidth="w-[78%]"
+                      bleed={false}
+                    >
+                      {POT_KEYS.map((potKey, index) => {
+                        const pot = copy.tiers.pots[potKey];
+                        const amount = tier.pots[potKey];
+                        return (
+                          /* Mobil steht der Betrag unter der Beschreibung (schmale Karte),
+                             ab md wie bisher rechts neben Name, Beschreibung und Balken. */
+                          <div key={potKey} className="grid h-full min-w-0 grid-cols-1 content-start gap-x-4 rounded-2xl border border-slate-200 bg-white p-3.5 md:h-auto md:grid-cols-[minmax(0,1fr)_auto] md:content-normal md:rounded-none md:border-0 md:bg-transparent md:p-0 md:py-4">
+                            <div className="order-1 flex min-w-0 items-center gap-2 md:order-none md:col-start-1 md:row-start-1">
                               <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${['bg-[#61cfa5]', 'bg-[#eab95f]', 'bg-[#92bfe4]', 'bg-[#b3a1df]'][index]}`} aria-hidden="true" />
-                              <p className="truncate font-display text-base font-extrabold text-home-midnight">{pot.label}</p>
+                              <p className="font-display text-base font-extrabold text-home-midnight md:truncate">{pot.label}</p>
                             </div>
-                            <p className="mt-1 truncate pl-[18px] text-xs text-home-slate sm:text-sm">{pot.detail}</p>
-                            <div className="ml-[18px] mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                            <p className="order-2 mt-0.5 min-w-0 pl-[18px] text-sm text-home-slate md:order-none md:col-start-1 md:row-start-2 md:mt-1 md:truncate">{pot.detail}</p>
+                            <strong className="order-3 mt-1 whitespace-nowrap font-display text-xl font-extrabold text-home-midnight md:order-none md:col-start-2 md:row-span-3 md:row-start-1 md:mt-0 md:self-center">{euro.format(amount)}</strong>
+                            <div className="order-4 ml-[18px] mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100 md:order-none md:col-start-1 md:row-start-3">
                               <div className="h-full rounded-full bg-home-mint transition-[width] duration-500" style={{ width: `${Math.max(20, amount / 10)}%` }} />
                             </div>
                           </div>
-                          <strong className="whitespace-nowrap font-display text-xl font-extrabold text-home-midnight">{euro.format(amount)}</strong>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </MobileSwipeRow>
                   </motion.div>
                 </AnimatePresence>
-                <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-7 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">
+                <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
                 </a>
-                <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-home-slate" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-                <p className="mt-5 max-w-2xl text-xs leading-5 text-slate-500">{copy.tiers.disclosure}</p>
+                <p className="mt-3 max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
+                <p className="mt-4 max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
               </div>
             </div>
           </div>
 
-          <div className="mt-6 overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white">
-            <p className="border-b border-slate-200 bg-slate-50 px-5 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
+          <div className="mt-4 overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white md:mt-6">
+            <p className="border-b border-slate-200 bg-slate-50 px-4 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
               {copy.tiers.overviewTitle}
             </p>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-left sm:min-w-[34rem]">
                 <caption className="sr-only">{copy.tiers.overviewTitle}</caption>
                 <thead>
-                  <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
-                    <th scope="col" className="hidden px-5 py-3 sm:table-cell sm:px-6">{copy.tiers.refund}</th>
-                    <th scope="col" className="px-5 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
-                    <th scope="col" className="px-5 py-3 text-right sm:px-6">{altersgruppe ? copy.tiers.overviewPriceGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.overviewPriceRange}</th>
+                  <tr className="border-b border-slate-200 text-sm font-bold normal-case tracking-normal text-slate-500 md:text-xs md:uppercase md:tracking-[0.12em]">
+                    <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
+                    <th scope="col" className="hidden px-3 py-3 sm:table-cell sm:px-6">{copy.tiers.refund}</th>
+                    <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
+                    <th scope="col" className="px-3 py-3 text-right sm:px-6">{altersgruppe ? copy.tiers.overviewPriceGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.overviewPriceRange}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -614,15 +634,15 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       aria-current={item.id === tier.id ? 'true' : undefined}
                       className={`border-b border-slate-100 text-sm last:border-b-0 ${item.id === tier.id ? 'bg-emerald-50/70' : ''}`}
                     >
-                      <th scope="row" className="px-5 py-3.5 font-display text-base font-extrabold text-home-midnight sm:px-6">
+                      <th scope="row" className="px-3 py-3 font-display text-base font-extrabold text-home-midnight sm:px-6 sm:py-3.5">
                         Ambulant {item.id} · {item.code}
                       </th>
-                      <td className="hidden px-5 py-3.5 text-home-slate sm:table-cell sm:px-6">{item.refund}</td>
-                      <td className="px-5 py-3.5 text-home-slate sm:px-6">{euro.format(item.budget)}</td>
-                      <td className="whitespace-nowrap px-5 py-3.5 text-right font-display font-extrabold text-home-midnight sm:px-6">
+                      <td className="hidden px-3 py-3 text-home-slate sm:table-cell sm:px-6 sm:py-3.5">{item.refund}</td>
+                      <td className="px-3 py-3 text-home-slate sm:px-6 sm:py-3.5">{euro.format(item.budget)}</td>
+                      <td className="px-3 py-3 text-right font-display font-extrabold text-home-midnight sm:whitespace-nowrap sm:px-6 sm:py-3.5">
                         {beitragFuer(item) !== null
                           ? monthlyEuro.format(beitragFuer(item))
-                          : <span className="font-semibold">{spanneText(item)}</span>} <span className="text-xs font-semibold text-slate-500">{copy.tiers.perMonth}</span>
+                          : <span className="font-semibold">{spanneText(item)}</span>} <span className="text-sm font-semibold text-slate-500 md:text-xs">{copy.tiers.perMonth}</span>
                       </td>
                     </tr>
                   ))}
@@ -630,18 +650,18 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               </table>
             </div>
             <details className="group border-t border-slate-200" data-healio-ambulant="age-groups">
-              <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3.5 font-display text-sm font-extrabold text-home-midnight sm:px-6 [&::-webkit-details-marker]:hidden">
+              <summary className="home-focus flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6 md:min-h-0 md:py-3.5 [&::-webkit-details-marker]:hidden">
                 {copy.tiers.groupsTitle}
                 <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
               </summary>
               <div className="overflow-x-auto border-t border-slate-100">
-                <table className="w-full border-collapse text-left text-xs sm:min-w-[34rem] sm:text-sm">
+                <table className="w-full border-collapse text-left text-sm sm:min-w-[34rem]">
                   <caption className="sr-only">{copy.tiers.groupsTitle}</caption>
                   <thead>
-                    <tr className="border-b border-slate-200 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                    <tr className="border-b border-slate-200 text-sm font-bold uppercase tracking-[0.04em] text-slate-500 md:text-xs md:tracking-[0.12em]">
                       <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.groupsAge}</th>
                       {TIERS.map((item) => (
-                        <th key={item.code} scope="col" className="px-2 py-3 text-right sm:px-6">{item.code}</th>
+                        <th key={item.code} scope="col" className="px-1.5 py-3 text-right sm:px-6">{item.code}</th>
                       ))}
                     </tr>
                   </thead>
@@ -650,7 +670,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       <tr key={gruppe.von} aria-current={gruppe === altersgruppe ? 'true' : undefined} className={`border-b border-slate-100 last:border-b-0 ${gruppe === altersgruppe ? 'bg-emerald-50/70' : ''}`}>
                         <th scope="row" className="px-3 py-3 font-semibold text-home-midnight sm:whitespace-nowrap sm:px-6">{gruppenName(gruppe)}</th>
                         {TIERS.map((item) => (
-                          <td key={item.code} className={`whitespace-nowrap px-2 py-3 text-right sm:px-6 ${item.id === tier.id ? 'font-extrabold text-home-midnight' : 'text-home-slate'}`}>{monthlyEuro.format(gruppe[item.code])}</td>
+                          <td key={item.code} className={`whitespace-nowrap px-1.5 py-3 text-right sm:px-6 ${item.id === tier.id ? 'font-extrabold text-home-midnight' : 'text-home-slate'}`}>{monthlyEuro.format(gruppe[item.code])}</td>
                         ))}
                       </tr>
                     ))}
@@ -658,7 +678,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 </table>
               </div>
             </details>
-            <p className="border-t border-slate-100 px-5 py-3 text-xs leading-5 text-slate-500 sm:px-6">{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
+            <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5">{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
 
           {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
@@ -677,41 +697,48 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           Produktseiten, auf Franks Wunsch zurück). Seit 30.09. direkt nach der
           Tarifwahl als erster Teil der Kassen-Geschichte (Frank: die Szene soll
           im Fokus stehen); die Regel „erst Tarif, dann Kasse“ bleibt. */}
-      <AmbulantIKKWechsel variant="ambulant" />
+      {/* Mobile Reihenfolge (Experiment 06.10.2026): erst die kurze Übersicht der
+          zwei Finanzierungswege, dann die Kassenwechsel-Strecke im Detail, dann
+          der Bonus. Ab md bleibt die bisherige Reihenfolge (display: contents
+          bzw. order-none verändern das Desktop-Layout nicht). */}
+      <div className="order-7 md:contents">
+        <AmbulantIKKWechsel variant="ambulant" mobileSwipe />
+      </div>
 
-      <ZweiWegeFinanzierung produkt="ambulant" className="bg-home-ice" />
+      <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe />
 
-      <section className="bg-[#071722] px-4 py-16 text-white sm:px-6 md:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+      <section className="order-8 bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:py-24 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-6 md:gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="relative mx-auto w-full max-w-md">
             <div className="absolute inset-8 rounded-full bg-home-mint/20 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#123241] to-home-midnight p-6 shadow-2xl">
-              <img src="/images/friendly-icons/decision-weighing.webp" alt="" className="mx-auto h-56 w-56 object-contain sm:h-64 sm:w-64" aria-hidden="true" />
-              <div className="rounded-2xl border border-home-mint/25 bg-home-mint/10 px-5 py-4 text-center">
-                <p className="font-display text-4xl font-extrabold tracking-[-0.04em] text-home-mint-active">{copy.bonus.value}</p>
+            {/* Mobil Bild und Aussage nebeneinander statt untereinander (spart rund 250 px). */}
+            <div className="relative flex items-center gap-3 overflow-hidden rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#123241] to-home-midnight p-4 shadow-2xl md:block md:p-6">
+              <img src="/images/friendly-icons/decision-weighing.webp" alt="" className="h-24 w-24 shrink-0 object-contain md:mx-auto md:h-64 md:w-64" aria-hidden="true" />
+              <div className="min-w-0 flex-1 rounded-2xl border border-home-mint/25 bg-home-mint/10 px-4 py-3 text-center md:flex-none md:px-5 md:py-4">
+                <p className="font-display text-3xl font-extrabold tracking-[-0.04em] text-home-mint-active md:text-4xl">{copy.bonus.value}</p>
                 <p className="mt-1 text-sm font-semibold text-slate-200">{copy.bonus.valueLabel}</p>
               </div>
             </div>
           </div>
           <div>
-            <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">{copy.bonus.eyebrow}</p>
-            <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">{copy.bonus.title}</h2>
-            <p className="mt-6 max-w-2xl text-lg font-semibold leading-8 text-white">{copy.bonus.body}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <p className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.bonus.eyebrow}</p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-4xl md:mt-4 md:text-5xl lg:text-6xl">{copy.bonus.title}</h2>
+            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-white md:mt-6">{copy.bonus.body}</p>
+            <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
               {copy.bonus.mini.map((item) => <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-sm text-slate-200">{item}</span>)}
             </div>
-            <p className="mt-6 max-w-2xl border-l-2 border-home-mint/50 pl-4 text-sm leading-6 text-slate-400">{copy.bonus.disclosure}</p>
+            <p className="mt-5 max-w-2xl border-l-2 border-home-mint/50 pl-4 text-sm leading-6 text-slate-400 md:mt-6">{copy.bonus.disclosure}</p>
             {language !== 'en' && (
               /* Ein Satz mit Link auf die IKK-Bonus-Landingpage, damit die
                  Positionen und Nachweise nachlesbar sind. Kein zweiter Button. */
-              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-400">
+              <p className="mt-4 max-w-2xl text-base leading-6 text-slate-400 md:text-sm md:leading-6">
                 Alle bonusfähigen Positionen der IKK classic mit Beträgen, Nachweisen und Fristen stehen im{' '}
                 <Link to="/ratgeber/ikk-classic-bonusprogramm-2026" className="font-bold text-white underline underline-offset-4 hover:text-home-mint-active">
                   Ratgeber zum Bonusprogramm 2026
                 </Link>.
               </p>
             )}
-            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">
+            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               {copy.bonus.cta}
               <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </Link>
@@ -719,14 +746,14 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section className="bg-home-ice px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+      <section className="order-9 bg-home-ice px-4 py-8 sm:px-6 md:order-none md:py-14 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <details className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-white shadow-[0_20px_60px_rgba(7,17,31,0.08)]">
             <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-6 sm:px-8 sm:py-7 [&::-webkit-details-marker]:hidden">
               <span className="flex min-w-0 items-center gap-4">
                 <FriendlyIcon kind="calculator" tone="butter" size="md" />
                 <span className="min-w-0">
-                  <span className="block font-display text-[10px] font-extrabold uppercase tracking-[0.2em] text-emerald-700 sm:text-xs">{copy.calculator.eyebrow}</span>
+                  <span className="block font-display text-sm font-extrabold uppercase tracking-[0.1em] text-emerald-700 md:text-xs md:tracking-[0.2em]">{copy.calculator.eyebrow}</span>
                   <span className="mt-1 block font-display text-xl font-extrabold leading-tight text-home-midnight sm:text-2xl">{copy.calculator.title}</span>
                   <span className="mt-1 hidden text-sm leading-6 text-home-slate sm:block">{copy.calculator.summary}</span>
                 </span>
@@ -758,26 +785,34 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </>
       )}
 
-      <section className="bg-[#fbfaf7] px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="home-eyebrow">{copy.process.eyebrow}</p>
+            <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.process.eyebrow}</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.process.title}</h2>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {/* Experiment 06.10.2026: die drei Schritte wischen mobil als Karten
+              nebeneinander, ab md bleiben es drei Spalten wie bisher. */}
+          <MobileSwipeRow
+            as="ol"
+            label={copy.process.title}
+            className="mt-6 md:mt-12"
+            desktopClassName="md:grid md:grid-cols-3 md:gap-5"
+            mobileItemWidth="w-[78vw] max-w-[22rem]"
+          >
             {copy.process.steps.map((step, index) => (
-              <article key={step.title} className="rounded-[1.6rem] border border-slate-200 bg-white p-6 shadow-[0_14px_40px_rgba(7,17,31,0.06)]">
+              <article key={step.title} className="grid h-full grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 rounded-[1.6rem] border border-slate-200 bg-white p-5 shadow-[0_2px_6px_rgba(7,17,31,0.06)] md:block md:p-6 md:shadow-[0_14px_40px_rgba(7,17,31,0.06)]">
                 <span className="inline-grid h-10 w-10 place-items-center rounded-full bg-home-midnight font-display text-sm font-extrabold text-home-mint-active">{index + 1}</span>
-                <h3 className="mt-5 font-display text-xl font-extrabold text-home-midnight">{step.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-home-slate">{step.text}</p>
+                <h3 className="font-display text-xl font-extrabold text-home-midnight md:mt-5">{step.title}</h3>
+                <p className="col-span-2 text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{step.text}</p>
               </article>
             ))}
-          </div>
+          </MobileSwipeRow>
 
-          {fromBonusTopic && <div className="relative mt-8 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#eaf8f2] via-[#f4fbf8] to-[#fff8e5] p-6 sm:p-8">
+          {fromBonusTopic && <div className="relative mt-6 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#eaf8f2] via-[#f4fbf8] to-[#fff8e5] p-5 sm:p-8 md:mt-8">
             <div className="grid min-w-0 items-center gap-6 md:grid-cols-[minmax(0,1fr)_220px]">
               <div className="min-w-0">
-                <p className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">{copy.process.switchEyebrow}</p>
+                <p className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-emerald-700 md:text-xs md:tracking-[0.2em]">{copy.process.switchEyebrow}</p>
                 <h3 className="mt-3 font-display text-2xl font-extrabold leading-tight text-home-midnight sm:text-3xl">{copy.process.switchTitle}</h3>
                 <p className="mt-4 max-w-3xl text-base leading-7 text-home-slate">{copy.process.switchText}</p>
                 {!fromBonusTopic && (
@@ -790,16 +825,18 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             </div>
           </div>}
 
-          <div className={`mt-6 grid grid-cols-1 gap-6 ${HEALIO_VOICE_CONTACT_ENABLED ? 'lg:grid-cols-[1.08fr_0.92fr]' : ''}`}>
-            <div className="rounded-[1.8rem] border border-emerald-900/10 bg-white p-6 sm:p-8">
-              <div className="flex items-start gap-4">
-                <FriendlyIcon kind="broker" tone="mint" size="lg" />
-                <div>
+          <div className={`mt-4 grid grid-cols-1 gap-6 md:mt-6 ${HEALIO_VOICE_CONTACT_ENABLED ? 'lg:grid-cols-[1.08fr_0.92fr]' : ''}`}>
+            <div className="rounded-[1.8rem] border border-emerald-900/10 bg-white p-5 sm:p-8">
+              {/* Mobil stehen Icon und Überschrift in einer Zeile, Text und
+                  Siegel darunter über die ganze Breite (display: contents). */}
+              <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 md:flex md:items-start md:gap-4">
+                <FriendlyIcon kind="broker" tone="mint" size="lg" className="!h-14 !w-14 md:!h-20 md:!w-20" />
+                <div className="contents md:block">
                   <h3 className="font-display text-2xl font-extrabold text-home-midnight">{copy.process.trustTitle}</h3>
-                  <p className="mt-3 text-base leading-7 text-home-slate">{copy.process.trustText}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-home-ice px-3 py-2 text-xs font-bold text-emerald-900"><BadgeCheck className="h-4 w-4 text-home-mint" /> § 34d GewO</span>
-                    <span className="inline-flex items-center gap-2 rounded-full bg-home-ice px-3 py-2 text-xs font-bold text-emerald-900"><ShieldCheck className="h-4 w-4 text-home-mint" /> SDK Produktpartner</span>
+                  <p className="col-span-2 text-base leading-7 text-home-slate md:mt-3">{copy.process.trustText}</p>
+                  <div className="col-span-2 flex flex-wrap gap-2 md:mt-5">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-home-ice px-3 py-2 text-sm font-bold text-emerald-900 md:text-xs"><BadgeCheck className="h-4 w-4 text-home-mint" /> § 34d GewO</span>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-home-ice px-3 py-2 text-sm font-bold text-emerald-900 md:text-xs"><ShieldCheck className="h-4 w-4 text-home-mint" /> SDK Produktpartner</span>
                   </div>
                 </div>
               </div>
@@ -808,9 +845,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               <div className="flex items-center gap-4 rounded-[1.8rem] border border-violet-200 bg-[#f6f1ff] p-5 sm:p-6">
                 <img src="/images/friendly-icons/personal-support.webp" alt="" className="h-20 w-20 shrink-0 object-contain drop-shadow-[0_10px_18px_rgba(82,53,122,0.18)]" aria-hidden="true" />
                 <div className="min-w-0">
-                  <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.18em] text-violet-700">{copy.process.assistantEyebrow}</p>
+                  <p className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-violet-700 md:text-[10px] md:tracking-[0.18em]">{copy.process.assistantEyebrow}</p>
                   <h3 className="mt-1 font-display text-xl font-extrabold text-home-midnight">{copy.process.assistantTitle}</h3>
-                  <p className="mt-2 text-sm leading-6 text-home-slate">{copy.process.assistantText}</p>
+                  <p className="mt-2 text-base leading-6 text-home-slate md:text-sm md:leading-6">{copy.process.assistantText}</p>
                   <button type="button" onClick={() => requestNitaConsent('global_launcher')} className="home-focus mt-4 inline-flex min-h-11 items-center rounded-full bg-home-midnight px-5 font-display text-sm font-extrabold text-white transition hover:bg-[#143247]">
                     <Bot className="mr-2 h-4 w-4 text-home-mint-active" />{copy.process.assistantCta}
                   </button>
@@ -821,33 +858,33 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8" itemScope itemType="https://schema.org/FAQPage">
+      <section className="order-11 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8" itemScope itemType="https://schema.org/FAQPage">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-center font-display text-3xl font-extrabold tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.faqTitle}</h2>
-          <div className="mt-10 space-y-3">
+          <div className="mt-6 space-y-2 md:mt-10 md:space-y-3">
             {copy.faqs.map((faq) => (
               <details key={faq.q} className="group rounded-2xl border border-slate-200 bg-[#fbfcfc] px-5 py-1" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-base font-extrabold text-home-midnight sm:text-lg [&::-webkit-details-marker]:hidden">
+                <summary className="home-focus flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-display text-base font-extrabold text-home-midnight sm:text-lg md:min-h-0 md:py-5 [&::-webkit-details-marker]:hidden">
                   <span itemProp="name">{faq.q}</span>
                   <ChevronDown className="h-5 w-5 shrink-0 text-home-mint transition group-open:rotate-180" />
                 </summary>
-                <div className="pb-5 pr-8 text-sm leading-7 text-home-slate sm:text-base" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"><span itemProp="text">{faq.a}</span></div>
+                <div className="pb-5 pr-8 text-base leading-7 text-home-slate sm:leading-6" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"><span itemProp="text">{faq.a}</span></div>
               </details>
             ))}
           </div>
 
-          <div className="relative mt-14 overflow-hidden rounded-[2.2rem] bg-home-midnight px-6 py-10 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14">
+          <div className="relative mt-10 overflow-hidden rounded-[2.2rem] bg-home-midnight px-5 py-8 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14 md:mt-14">
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-home-mint/15" />
-            <p className="relative font-display text-xs font-extrabold uppercase tracking-[0.22em] text-home-mint-active">{copy.finalEyebrow}</p>
+            <p className="relative font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.finalEyebrow}</p>
             <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{copy.finalTitle}</h2>
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
-            <p className="relative mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-200" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-            <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none">
+            <p className="relative mx-auto mt-4 max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
+            <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
             </a>
-            <div className="relative mt-5">
-              <Link to={getPath('kontakt')} className="text-sm font-semibold text-slate-300 underline decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
+            <div className="relative mt-3 md:mt-5">
+              <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
             </div>
           </div>
         </div>
