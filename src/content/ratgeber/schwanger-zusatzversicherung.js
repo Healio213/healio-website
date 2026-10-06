@@ -19,12 +19,16 @@
  *     (AVB § 2 Abs. 2), SDK keine. § 198 VVG erlaubt diese Mindestzeit nur als
  *     Vereinbarung, sie ist keine gesetzliche Grundregel.
  *   - Rooming-in unter 16 (TB 2.3), soweit nicht die Krankenkasse traegt.
- *   - Hebamme Bayerische: laut Produktsteckbrief B 275010 und Highlightblatt
- *     275008 (Kosten über GKV-Leistung, privat abrechnende Hebammen, Komfort und
- *     Prestige). Von Frank am 29.09.2026 als Grundlage freigegeben. Die mündlich
+ *   - Hebamme Bayerische: Hebammen-Aussage der Bayerischen laut Produktunterlagen
+ *     (Highlightblatt B 275008, Produktsteckbrief B 275010), Freigabe Frank
+ *     29.09.2026, bestätigt 06.10.2026; nicht in den Tarifbedingungen,
+ *     schriftliche Bestätigung beim Versicherer angefragt. Die mündlich
  *     genannten 90 EUR je Hausbesuch bleiben draußen.
  *   - Smart-Optionsrecht nach TB-S § 5, Stand 11/2024.
- *   - Allgemeine Wartezeit drei Monate, bei Unfall sofort (AVB § 3 Abs. 2).
+ *   - Wartezeit Bayerische (Korrektur 05.10.2026): keine allgemeine Wartezeit,
+ *     acht Monate für Entbindung und Psychotherapie, bei Unfall keine
+ *     (AVB B 275000 Stand 11/2024 § 3, Annahmerichtlinien B 275012, Auskunft der Bayerischen). Die frühere Angabe stammte aus der alten AVB 333500.
+ *   - Familienzimmer Bayerische nur über den Vertrag der Mutter (Auskunft der Bayerischen).
  *
  * Harte Grenzen: Die Entbindung der Mutter ist bei bereits festgestellter
  * Schwangerschaft nicht versichert. Kein Kinderwunsch als Argument. Keine
@@ -173,11 +177,11 @@ export const article = {
             },
             {
               lead: 'Deine eigene Versorgung',
-              text: 'bei neu auftretenden, medizinisch notwendigen Krankenhausaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, bei der SDK ab Versicherungsbeginn, bei der Bayerischen im Komfort und im Prestige nach drei Monaten Wartezeit (stationäre Psychotherapie nach acht Monaten) und nach einem Unfall sofort: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
+              text: 'bei neu auftretenden, medizinisch notwendigen Krankenhausaufenthalten, die nichts mit dieser Schwangerschaft zu tun haben, bei der SDK und bei der Bayerischen im Komfort und im Prestige ab Versicherungsbeginn (bei der Bayerischen stationäre Psychotherapie erst nach acht Monaten), nach einem Unfall ohne Wartezeit: Chefarzt, Zweibettzimmer, freie Krankenhauswahl.',
             },
             {
               lead: 'Das Familienzimmer bei einer späteren Entbindung,',
-              text: 'bei der SDK im SP1 ohne Wartezeit, wenn die nächste Schwangerschaft erst nach dem Antrag festgestellt wird. Bei der Bayerischen nach der Wartezeit von acht Monaten, im Komfort bis Zweibettzimmer-Niveau, im Prestige ohne Begrenzung, im Smart gar nicht.',
+              text: 'bei der SDK im SP1 ohne Wartezeit, wenn die nächste Schwangerschaft erst nach dem Antrag festgestellt wird. Bei der Bayerischen nach der Wartezeit von acht Monaten und nur über den Vertrag der Mutter, im Komfort bis Zweibettzimmer-Niveau, im Prestige ohne Begrenzung, im Smart gar nicht.',
             },
           ],
         },
@@ -278,7 +282,7 @@ export const article = {
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
       answer:
-        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause vor und nach der Geburt gehört dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Dort gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.',
+        'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett rechnet deine Krankenkasse ab, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause vor und nach der Geburt gehört dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Dort gibt es keine allgemeine Wartezeit, für die Entbindung gilt eine Wartezeit von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.',
     },
     {
       question: 'Was ist mit Komplikationen, wenn ich jetzt abschließe?',

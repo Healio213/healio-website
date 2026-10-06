@@ -403,9 +403,15 @@ const HebammenPage = () => {
         {/* WAS DU FAMILIEN SAGEN KANNST (Frank 30.09.2026): ersetzt vorerst den
             Prämien-Abschnitt. Versicherungsaussagen nur aus geprüften Quellen,
             /schwangerschaft (BenefitFunnelPage) und /stationaer (StationaerFamily,
-            StationaerBayerischeAlternative). Hebammenkosten der Bayerischen stehen
-            immer zusammen mit Wartezeiten und dem Ausschluss einer beim Antrag
-            schon bestehenden Schwangerschaft. */}
+            StationaerBayerischeAlternative). Die Bayerische-Karte nennt seit
+            05.10.2026 die korrigierten Familienpunkte (Familienzimmer über den
+            Vertrag der Mutter, acht Monate Entbindung, Kindernachversicherung).
+            Hebammen-Aussage der Bayerischen laut Produktunterlagen (Highlightblatt
+            B 275008, Produktsteckbrief B 275010), Freigabe Frank 29.09.2026,
+            bestätigt 06.10.2026; nicht in den Tarifbedingungen, schriftliche
+            Bestätigung beim Versicherer angefragt. Hebammenkosten der Bayerischen
+            stehen immer zusammen mit Wartezeiten und dem Ausschluss einer beim
+            Antrag schon bestehenden Schwangerschaft. */}
         <section
           id="hebammen-tarife"
           className="scroll-mt-24 bg-white py-16 sm:py-20"

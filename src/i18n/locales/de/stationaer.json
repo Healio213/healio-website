@@ -463,8 +463,9 @@
         "items": [
           "Prestige für dich: 13,40 EUR im Monat mit 21 bis 30 Jahren, 17,60 EUR mit 31 bis 45 (Stand 09/2026)",
           "Für dein Kind in der Altersgruppe bis 15 Jahre: Komfort 3,20 EUR, Prestige 4,10 EUR im Monat",
-          "Familienzimmer bei einer späteren Entbindung: im Prestige wählbar, im Komfort bis zur Höhe des Zweibettzimmers",
+          "Familienzimmer bei einer späteren Entbindung: im Prestige ohne Begrenzung, im Komfort bis zur Höhe des Zweibettzimmers, über den Vertrag der Mutter",
           "Anmeldung spätestens zwei Monate nach der Geburt, Schutz rückwirkend",
+          "Muss dein Kind unter 16 ins Krankenhaus, zahlt sein Komfort- oder Prestige-Tarif Unterkunft und Verpflegung für dich als Begleitperson zu 100 Prozent, soweit die Kasse sie nicht trägt",
           "Bei einer späteren Schwangerschaft: Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, im Komfort und im Prestige"
         ],
         "note": "Bist du beim Antrag schon schwanger, zahlt der Tarif weder diese Entbindung noch Hebammenkosten für diese Schwangerschaft. Auch später gilt: Kommt ein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif die Entbindung nicht. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der Elternteil."
@@ -506,7 +507,7 @@
             "who": "Bayerische Komfort und Prestige",
             "tone": "bay",
             "text": "Laut Produktunterlagen der Bayerischen erstatten Komfort und Prestige Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, auch für privat abrechnende Hebammen.",
-            "condition": "Bist du beim Antrag schon schwanger, gilt das für diese Schwangerschaft und Geburt nicht. Es gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten."
+            "condition": "Bist du beim Antrag schon schwanger, gilt das für diese Schwangerschaft und Geburt nicht. Eine allgemeine Wartezeit gibt es nicht, für die Entbindung gelten acht Monate."
           }
         ]
       },
@@ -583,7 +584,7 @@
         },
         {
           "q": "Gibt es Wartezeiten?",
-          "a": "Die SDK Klinik-Tarife verzichten auf tarifliche Wartezeiten. Schutz besteht für neue Versicherungsfälle ab Versicherungsbeginn. Ein Versicherungsfall, der bereits vorher eingetreten ist, ist nicht versichert."
+          "a": "Die SDK Klinik-Tarife verzichten auf tarifliche Wartezeiten. Schutz besteht für neue Versicherungsfälle ab Versicherungsbeginn. Ein Versicherungsfall, der bereits vorher eingetreten ist, ist nicht versichert. Bei der Bayerischen gibt es keine allgemeine Wartezeit, für Entbindung und Psychotherapie gelten acht Monate, nach einem Unfall entfallen sie."
         },
         {
           "q": "Muss ich Gesundheitsfragen beantworten?",
@@ -599,7 +600,7 @@
         },
         {
           "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",
-          "a": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, meldest du dein Kind innerhalb von zwei Monaten an. Es ist dann rückwirkend ab Geburt versichert, ohne Gesundheitsprüfung und ohne Vorversicherungszeit, höchstens im Umfang des Elternteils."
+          "a": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, meldest du dein Kind innerhalb von zwei Monaten an. Es ist dann rückwirkend ab Geburt versichert, ohne Gesundheitsprüfung und ohne Vorversicherungszeit, höchstens im Umfang des Elternteils. Bei der Bayerischen muss ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei ihr versichert sein."
         }
       ]
     },

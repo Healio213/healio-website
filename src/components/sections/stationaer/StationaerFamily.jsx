@@ -5,9 +5,15 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 // Drei Antworten für Familien (Frank 29.09.2026): SDK ohne Vorlauf, die
 // Bayerische mit Vorlauf, dazu die Kindertarife. Nur belegte Punkte aus den
-// AVB der SDK (SP1/SP2 08/2025) und der Bayerischen (AVB B 333500, TB 11/2024).
-// Hebamme: SDK laut Bedingungen (SP1/SP2), Bayerische laut Produktsteckbrief
-// B 275010 und Highlightblatt 275008 (von Frank am 29.09.2026 freigegeben).
+// AVB der SDK (SP1/SP2 08/2025) und der Bayerischen (AVB B 275000 Stand
+// 11/2024, TB 11/2024). Bayerische-Karte seit 05.10.2026: Familienzimmer
+// Prestige ohne Begrenzung, Komfort bis Zweibettzimmer (TB 2.1, Highlightblatt
+// B 275008), nur über den Vertrag der Mutter (Auskunft der Bayerischen
+// 05.10.2026), Begleitperson 100 Prozent unter 16 (TB 2.3).
+// Hebamme: SDK laut Bedingungen (SP1/SP2). Hebammen-Aussage der Bayerischen
+// laut Produktunterlagen (Highlightblatt B 275008, Produktsteckbrief B 275010),
+// Freigabe Frank 29.09.2026, bestätigt 06.10.2026; nicht in den
+// Tarifbedingungen, schriftliche Bestätigung beim Versicherer angefragt.
 const CARDS = [
   { key: 'parents', icon: 'pregnancy', tone: 'coral', border: 'border-[#f0cfc0]', accent: 'text-[#b75f42]', noteBg: 'bg-[#fff4ef]' },
   { key: 'bayerische', icon: 'calendar', tone: 'sky', border: 'border-[#cfe0f0]', accent: 'text-[#2b6497]', noteBg: 'bg-[#f1f7fd]' },
@@ -62,7 +68,7 @@ const StationaerFamily = () => {
                   </li>
                 ))}
               </ul>
-              <p className={`mt-auto rounded-2xl ${card.noteBg} p-4 text-xs font-medium leading-relaxed text-slate-600`}>
+              <p className={`mt-auto rounded-2xl ${card.noteBg} p-4 text-sm font-medium leading-relaxed text-slate-600`}>
                 {t(`refresh.family.${card.key}.note`)}
               </p>
             </article>

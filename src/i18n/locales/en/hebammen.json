@@ -154,7 +154,7 @@
     "bayerischeTag": "Our recommendation for young families",
     "bayerischeItems": [
       "Child from EUR 4.10 per month in Prestige, the entry tariff Smart (serious illness and accidents only) from EUR 2.10",
-      "Rooming-in for children under 16, family room at childbirth without limit in Prestige and up to the twin-room rate in Komfort",
+      "Rooming-in for children under 16, family room at childbirth without limit in Prestige and up to the twin-room rate in Komfort, through the mother's policy",
       "Head physician at 100 per cent, with no cap at the maximum GOÄ rates",
       "Streamlined acceptance with only two health questions",
       "Adults aged 21 to 30: Komfort EUR 10.20, Prestige EUR 13.40 per month",
@@ -199,8 +199,8 @@
     "bayerische": {
       "label": "Good to know",
       "title": "Die Bayerische and your midwifery services",
-      "text": "According to die Bayerische's product documents, the hospital plans Komfort and Prestige reimburse midwife costs that go beyond what statutory health insurance pays, including for midwives who bill privately. Families take out the policy because they want to be well insured.",
-      "condition": "There is a waiting period of three months, and of eight months for childbirth. A pregnancy that already exists when the application is made is not covered."
+      "text": "According to die Bayerische's product documents, the hospital plans Komfort and Prestige reimburse midwife costs that go beyond what statutory health insurance pays, including for midwives who bill privately. In Prestige there is a family room at childbirth without a limit, in Komfort up to the cost of a twin room, in each case through the mother's policy. The child is accepted from birth if one parent has been insured with die Bayerische for at least three months at the time of birth. Families take out the policy because they want to be well insured.",
+      "condition": "There is no general waiting period; a waiting period of eight months applies to childbirth. A pregnancy that already exists when the application is made is not covered."
     }
   },
   "legal": {

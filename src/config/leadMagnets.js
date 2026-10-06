@@ -99,7 +99,7 @@ export const LEAD_MAGNETS = {
     ],
     honesty: [
       'Das E-Book macht Ihre Praxis nicht zur Beratungsstelle. Es zeigt, was Sie ohne Scheu sagen dürfen, und wo die Vertragsdetails beim Patienten und seinem Anbieter liegen. Ob er den Weg nutzt, entscheidet er. Ihn zu verschweigen, wäre ein Versäumnis, für das wir gemeinsam geradestehen.',
-      'Ein Zusatzschutz ist ein Vertrag mit monatlichem Beitrag und greift ab Vertragsbeginn, ohne Wartezeit. Eine danach neu begonnene Behandlung ist im Rahmen des gewählten Tarifs vom ersten Tag an mitversichert. Gesundheitsfragen sind möglich. Was vorher angefangen hat, wird nicht nacherstattet.',
+      'Der ambulante Zusatzschutz ist ein Vertrag mit monatlichem Beitrag und greift ab Vertragsbeginn, ohne Wartezeit. Eine danach neu begonnene Behandlung ist im Rahmen des gewählten Tarifs vom ersten Tag an mitversichert. Gesundheitsfragen sind möglich. Was vorher angefangen hat, wird nicht nacherstattet.',
       'Was am Ende bei einem Patienten ankommt, hängt von seiner Kasse, seinem Tarif und seinen persönlichen Voraussetzungen ab.',
     ],
     formTitle: 'E-Book anfordern',

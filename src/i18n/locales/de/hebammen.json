@@ -160,6 +160,7 @@
       "Nur zwei Gesundheitsfragen",
       "Entbindung in Komfort und Prestige nach acht Monaten Wartezeit versichert",
       "Neugeborene ohne Gesundheitsprüfung, wenn ein Elternteil seit drei Monaten versichert ist",
+      "Familienzimmer bei der Entbindung im Prestige ohne Begrenzung, im Komfort bis Zweibettzimmer, über den Vertrag der Mutter",
       "Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, in Komfort und Prestige, auch für privat abrechnende Hebammen. Für eine Schwangerschaft, die beim Antrag schon besteht, gilt das nicht"
     ],
     "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen. Welche Variante zur Familie passt, klärt Healio im Gespräch.",
@@ -198,8 +199,8 @@
     "bayerische": {
       "label": "Gut zu wissen",
       "title": "Die Bayerische und deine Hebammenleistungen",
-      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
-      "condition": "Es gilt eine Wartezeit von drei Monaten, für die Entbindung von acht Monaten. Eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert."
+      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Im Prestige gibt es bei der Entbindung ein Familienzimmer ohne Begrenzung, im Komfort bis zur Höhe des Zweibettzimmers, jeweils über den Vertrag der Mutter. Das Kind wird ab der Geburt aufgenommen, wenn ein Elternteil zur Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
+      "condition": "Eine allgemeine Wartezeit gibt es nicht, für die Entbindung gilt eine Wartezeit von acht Monaten. Eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert."
     }
   },
   "legal": {
