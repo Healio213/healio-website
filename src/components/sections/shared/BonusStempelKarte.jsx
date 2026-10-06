@@ -37,6 +37,8 @@ const BonusStempelKarte = ({ content, headingLevel: Heading = 'h3', className = 
       <img
         src="/images/friendly-icons/bonus-you-mascot.webp"
         alt=""
+        loading="lazy"
+        decoding="async"
         aria-hidden="true"
         width="512"
         height="512"
