@@ -221,6 +221,21 @@ const DentalZahnCheck = () => {
                     {question.text}
                   </h3>
                   {question.hint && <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">{question.hint}</p>}
+                  {/* Zeitraum-Regel direkt unter Frage 1 (Frank 05.10.2026): was älter
+                      als 2 Jahre ist, zählt nicht mehr. Das Gegenstück (in den letzten
+                      2 Jahren oder läuft schon, dann Sofortschutz) steht in der Unterzeile
+                      der Ja-Antwort. Kompakt gehalten, damit die Antwortknöpfe am Handy
+                      nah an der Frage bleiben. Reine Anzeige, die Weiche bleibt computeResult. */}
+                  {question.rules && (
+                    <ul className="mt-3 grid max-w-2xl gap-2">
+                      {question.rules.map((rule) => (
+                        <li key={rule.title} className={`rounded-2xl border px-3 py-2 text-base leading-6 ${toneClasses[rule.tone] || toneClasses.neutral}`}>
+                          <strong className="font-display font-extrabold">{rule.title}</strong>{' '}
+                          <span className="text-slate-700">{rule.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
                   <div className="mt-8 grid gap-3">
                     {options.map(([value, option]) => (

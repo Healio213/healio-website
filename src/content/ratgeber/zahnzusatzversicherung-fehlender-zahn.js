@@ -257,7 +257,7 @@ export const article = {
     {
       question: 'Zahlt eine Zusatzversicherung den bereits angeratenen Zahnersatz?',
       answer:
-        'In der Regel nicht. Im Healio-Sortiment leistet dafür allein der Baustein ZAHN Sofort der Bayerischen, begrenzt auf höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, und nur solange für die Behandlung noch keine Rechnung gestellt wurde. Am Markt gibt es vergleichbare Sofortbausteine auch bei anderen Anbietern. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
+        'Wurde er in den letzten zwei Jahren angeraten oder geplant, oder läuft die Behandlung schon? Dann in der Regel nicht. Liegt die Anratung länger als zwei Jahre zurück und ist seitdem nichts passiert, ist er bei der UKV wieder versichert. Für die Fälle der letzten zwei Jahre leistet im Healio-Sortiment allein der Baustein ZAHN Sofort der Bayerischen, begrenzt auf höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, und nur solange für die Behandlung noch keine Rechnung gestellt wurde. Am Markt gibt es vergleichbare Sofortbausteine auch bei anderen Anbietern. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
     },
     {
       question: 'Was passiert nach den 24 Monaten Sofortschutz?',
@@ -281,7 +281,7 @@ export const article = {
     blocks: [
       {
         type: 'paragraph',
-        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Weg. Bei ein bis drei fehlenden Zähnen ohne angeratene Behandlung ist das UKV ZahnPRIVAT mit Zuschlag je Zahn, mit direktem Link zum Antrag. Fehlen mehr als drei Zähne oder kommt zur Lücke eine angeratene oder begonnene Behandlung, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
+        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Weg. Bei ein bis drei fehlenden Zähnen ohne Behandlung, die in den letzten zwei Jahren angeraten wurde oder schon läuft, ist das UKV ZahnPRIVAT mit Zuschlag je Zahn, mit direktem Link zum Antrag. Ältere Empfehlungen zählen nicht mehr. Fehlen mehr als drei Zähne oder kommt zur Lücke eine Behandlung, die in den letzten zwei Jahren angeraten wurde oder schon läuft, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
       },
     ],
   },
