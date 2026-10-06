@@ -44,6 +44,36 @@ export const ratgeberArticles = [
   krankenkassenBonusZusatzversicherung,
 ];
 
+// Themengruppen der Übersicht /ratgeber. Artikel einer Gruppe erscheinen dort
+// in einem eigenen Abschnitt, alle übrigen wie bisher oben in der Liste. Die
+// Reihenfolge hier ist die Reihenfolge in der Gruppe; Slugs, die (noch) nicht
+// im Register stehen, fallen still weg.
+export const RATGEBER_GROUPS = [
+  {
+    id: 'zaehne',
+    title: 'Zähne',
+    intro: 'Was die Kasse beim Zahnarzt zahlt, was an dir hängen bleibt und wann eine Zahnzusatzversicherung hilft. Mit Kosten, Quellen und den Grenzen.',
+    icon: 'dental',
+    slugs: [
+      'zahnersatz-kosten',
+      'professionelle-zahnreinigung-kosten',
+      'zahnimplantat-kosten',
+      'wurzelbehandlung-kosten',
+      'zahnkrone-kosten',
+      'bonusheft-zahnarzt',
+      'zahnzusatzversicherung-ohne-wartezeit',
+      'zahnzusatzversicherung-fehlender-zahn',
+    ],
+  },
+];
+
+export const getRatgeberGroupArticles = (group) => group.slugs
+  .map((slug) => ratgeberArticles.find((entry) => entry.slug === slug))
+  .filter(Boolean);
+
+const GROUPED_SLUGS = new Set(RATGEBER_GROUPS.flatMap((group) => group.slugs));
+export const ungroupedRatgeberArticles = () => ratgeberArticles.filter((entry) => !GROUPED_SLUGS.has(entry.slug));
+
 export const getRatgeberArticle = (slug) => (
   ratgeberArticles.find((entry) => entry.slug === slug) || null
 );

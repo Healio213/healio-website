@@ -4,7 +4,7 @@ import { ArrowDown, ArrowRight, Clock } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { friendlyIconAssets } from '@/components/ui/healioSoftClayIcons';
-import { getRatgeberPath, ratgeberArticles } from '@/content/ratgeber';
+import { RATGEBER_GROUPS, getRatgeberGroupArticles, getRatgeberPath, ratgeberArticles, ungroupedRatgeberArticles } from '@/content/ratgeber';
 import { fetchCachedBlogArticles } from '@/lib/blogContentCache';
 import { applyBlogEditorialFixes } from '@/lib/blogEditorialFixes';
 
@@ -43,6 +43,13 @@ function useBlogArticles() {
 const ARTICLE_FIGURES = {
   'ikk-classic-bonusprogramm-2026': friendlyIconAssets.bonus,
   'zahnzusatzversicherung-fehlender-zahn': friendlyIconAssets.dental,
+  'zahnersatz-kosten': friendlyIconAssets.dental,
+  'professionelle-zahnreinigung-kosten': friendlyIconAssets.prevention,
+  'zahnimplantat-kosten': friendlyIconAssets.calculator,
+  'wurzelbehandlung-kosten': friendlyIconAssets.document,
+  'zahnkrone-kosten': friendlyIconAssets.money,
+  'bonusheft-zahnarzt': friendlyIconAssets.bonus,
+  'zahnzusatzversicherung-ohne-wartezeit': friendlyIconAssets.calendar,
   'schwanger-zusatzversicherung': friendlyIconAssets.pregnancy,
   'schwangerschaft-worauf-achten': friendlyIconAssets.document,
   'hebamme-kosten-krankenkasse': friendlyIconAssets.family,
@@ -50,11 +57,12 @@ const ARTICLE_FIGURES = {
 };
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;
 
-// Themen-Sprungmarken im Hero. Jede Marke springt zur Karte ihres Artikels;
-// fehlt der Artikel im Register, fällt die Marke weg.
+// Themen-Sprungmarken im Hero. Jede Marke springt zur Karte ihres Artikels
+// oder, mit group, zum Abschnitt ihrer Themengruppe; fehlt der Artikel im
+// Register, fällt die Marke weg.
 const TOPICS = [
   { slug: 'ikk-classic-bonusprogramm-2026', label: 'Kassenbonus', kind: 'bonus', tone: 'butter' },
-  { slug: 'zahnzusatzversicherung-fehlender-zahn', label: 'Zähne', kind: 'dental', tone: 'mint' },
+  { slug: 'zahnzusatzversicherung-fehlender-zahn', group: 'zaehne', label: 'Zähne', kind: 'dental', tone: 'mint' },
   { slug: 'schwanger-zusatzversicherung', label: 'Schwangerschaft', kind: 'pregnancy', tone: 'coral' },
 ];
 
@@ -242,7 +250,10 @@ const BlogGroup = ({ group }) => (
  */
 const RatgeberPage = () => {
   const blogArticles = useBlogArticles();
-  const [leadArticle, ...moreArticles] = ratgeberArticles;
+  const [leadArticle, ...moreArticles] = ungroupedRatgeberArticles();
+  const groups = RATGEBER_GROUPS
+    .map((group) => ({ ...group, articles: getRatgeberGroupArticles(group) }))
+    .filter((group) => group.articles.length > 0);
   const topics = TOPICS.filter((topic) => ratgeberArticles.some((entry) => entry.slug === topic.slug));
   const hasBlog = blogArticles.length > 0;
 
@@ -304,7 +315,7 @@ const RatgeberPage = () => {
                   {topics.map((topic) => (
                     <li key={topic.slug}>
                       <a
-                        href={`#artikel-${topic.slug}`}
+                        href={topic.group ? `#ratgeber-${topic.group}` : `#artikel-${topic.slug}`}
                         className="group flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 py-2 pl-2 pr-4 font-display text-lg font-extrabold transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
                       >
                         <FriendlyIcon kind={topic.kind} tone={topic.tone} size="sm" />
@@ -353,6 +364,32 @@ const RatgeberPage = () => {
                 ))}
               </ul>
             )}
+
+            {groups.map((group) => (
+              <section
+                key={group.id}
+                id={`ratgeber-${group.id}`}
+                aria-labelledby={`ratgeber-${group.id}-heading`}
+                className="mt-16 scroll-mt-28 md:mt-20"
+              >
+                <div className="flex items-center gap-4">
+                  <FriendlyIcon kind={group.icon} tone="mint" size="md" />
+                  <div>
+                    <h3 id={`ratgeber-${group.id}-heading`} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl">
+                      {group.title}
+                    </h3>
+                    {group.intro && <p className="mt-1 max-w-2xl text-base leading-7 text-slate-600">{group.intro}</p>}
+                  </div>
+                </div>
+                <ul className="mt-8 grid gap-6 md:grid-cols-2">
+                  {group.articles.map((entry) => (
+                    <li key={entry.slug}>
+                      <ArticleCard entry={entry} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
           </div>
         </section>
       )}

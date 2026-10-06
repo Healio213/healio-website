@@ -143,7 +143,10 @@ export const createArticleSchema = ({
   datePublished = null,
   dateModified = null,
   inLanguage = "de-DE",
-  image = `${SITE_URL}/og-image.png`
+  image = `${SITE_URL}/og-image.png`,
+  // Optional: eine Person (authorSchemaFor in src/content/ratgeber/authors.js).
+  // Ohne Angabe bleibt die Healio GmbH Autorin, wie bei allen älteren Artikeln.
+  author = null
 }) => {
   return {
     "@context": "https://schema.org",
@@ -156,7 +159,7 @@ export const createArticleSchema = ({
     "inLanguage": inLanguage,
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
-    "author": {
+    "author": author || {
       "@type": "Organization",
       "name": "Healio GmbH",
       "url": SITE_URL

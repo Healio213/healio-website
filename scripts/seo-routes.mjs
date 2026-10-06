@@ -6,6 +6,7 @@
 
 import { readFileSync } from 'node:fs';
 import { getRatgeberArticle } from '../src/content/ratgeber/index.js';
+import { authorSchemaFor } from '../src/content/ratgeber/authors.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
@@ -53,6 +54,8 @@ const ratgeberSchema = (slug) => {
       url,
       datePublished: article.publishedAt || null,
       dateModified: article.updatedAt || article.publishedAt || null,
+      // Autor als Person, wenn der Artikel einen trägt (Zahn-Vorlage 06.10.2026).
+      author: authorSchemaFor(article.author),
     }),
   ];
 

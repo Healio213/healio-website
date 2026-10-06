@@ -15,6 +15,8 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
 import { ratgeberArticles, getRatgeberArticle } from '../src/content/ratgeber/index.js';
+import { collectBlockText, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
+import { AUTHORS } from '../src/content/ratgeber/authors.js';
 import {
   KASSENBOOST_ANCHOR,
   RATGEBER_INTERNAL_UTM_DEFAULTS,
@@ -423,43 +425,10 @@ expect(/§ 15 VersVermV/.test(layout), 'Die Erstinformation muss als Erstinforma
 
 const UMLAUT_ERSATZ = /\b(?:fuer|ueber|koenn\w*|moegl\w*|muess\w*|waehrend|naechst\w*|zurueck|haeufig\w*|aehnlich\w*|ueblich\w*|urspruenglich|beruecksichtig\w*|zusaetzlich\w*|gemaess|regelmaessig\w*|erhoeh\w*|hoech\w*|verfuegbar|gross|groess\w*|strasse\w*|fuess\w*|massnahm\w*|schliesslich)\b/i;
 
-const renderBlocks = (blocks, parts) => {
-  for (const block of blocks) {
-    if (block.type === 'list') {
-      for (const item of block.items) {
-        if (typeof item === 'string') parts.push(item);
-        else parts.push(item.lead, item.text);
-      }
-    } else if (block.type === 'table') {
-      parts.push(block.caption, block.note, ...block.head);
-      for (const row of block.rows) parts.push(...row);
-    } else if (block.type === 'segments') {
-      for (const segment of block.segments) parts.push(segment.text);
-    } else {
-      parts.push(block.text);
-    }
-  }
-};
-
 // Alles, was wirklich auf der Seite landet, einschliesslich Tabellen,
-// Fact Nugget, FAQ, internem Button und dem Weg am Ende.
-const renderArticleText = (article) => {
-  const parts = [article.headline, article.lead, article.ctaLabel, article.footnote, article.listTitle, article.listTeaser, article.metaTitle, article.metaDescription, article.factNugget];
-  for (const section of article.sections) {
-    parts.push(section.heading);
-    renderBlocks(section.blocks, parts);
-  }
-  for (const faq of article.faqs || []) parts.push(faq.question, faq.answer);
-  if (article.internalCta) {
-    parts.push(article.internalCta.heading, article.internalCta.label);
-    renderBlocks(article.internalCta.blocks, parts);
-  }
-  if (article.onward) {
-    parts.push(article.onward.heading);
-    for (const segment of article.onward.segments) parts.push(segment.text);
-  }
-  return parts.filter(Boolean).join('\n');
-};
+// Fact Nugget, FAQ, internem Button, dem Weg am Ende und den optionalen
+// Bausteinen der Zahn-Vorlage. Gemeinsame Quelle mit der Vorlage.
+const renderArticleText = (article) => renderSharedArticleText(article);
 
 for (const article of ratgeberArticles) {
   const text = renderArticleText(article);
@@ -510,8 +479,10 @@ const textUnits = (article) => {
         for (const row of block.rows) units.push(row.join(' | '));
       } else if (block.type === 'segments') {
         units.push(block.segments.map((segment) => segment.text).join(''));
-      } else {
+      } else if (block.type === 'paragraph' || !block.type) {
         units.push(block.text);
+      } else {
+        units.push(collectBlockText([block], []).filter(Boolean).join(' '));
       }
     }
   };
@@ -739,6 +710,56 @@ if (fs.existsSync(builtAmbulant)) {
     expect(html.includes('Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.'), 'Der gebaute Vorsorge-Baustein auf /ambulant muss den Hinweis auf den SDK-Vorsorge-Topf zeigen.');
   }
 }
+
+// --- 8. Optionale Bausteine der Vorlage (seit 06.10.2026) ---
+
+// Autor, Kurzantwort, Quellenblock, Inhaltsverzeichnis, FAQ zum Aufklappen,
+// Kostenkarte, Schritt-Leiste, "Ehrlich gesagt", Wischkarten, Weg-Karten und
+// der Zahnkosten-Rechner (src/components/ratgeber/RatgeberBausteine.jsx) sind
+// Opt-in. Wer sie nutzt, steht in OPT_IN_SLUGS; alle anderen Artikel bleiben
+// unverändert. Sperrwörter nach Franks Regeln (Marktanalyse 06.10.2026).
+const RATGEBER_SPERRWORTE = /kostenlos|kostenfrei|gratis|umsonst|(?<![\d.,])0(?:,00)? ?(?:EUR|Euro|€)|ohne Obergrenze|unbegrenzt|Maximalbetrag|garantiert|absicher|(?:keine|ohne) Gesundheits(?:fragen|prüfung)|Testsieger|\bSiegel|\bERGO\b|DA Direkt|\bLKH\b|Courtage|Provision|Geldbonus|Bargeld|in bar\b|Antragsfrage/i;
+const OPT_IN_SLUGS = [];
+
+// Nur echte Abschnitts-Anker im Inhaltsverzeichnis: ids eindeutig.
+for (const article of ratgeberArticles) {
+  const ids = (article.sections || []).map((section) => section.id);
+  expect(new Set(ids).size === ids.length, `Doppelte Abschnitts-id in ${article.slug}.`);
+}
+
+// Ein Autor muss im Autorenregister stehen (src/content/ratgeber/authors.js).
+for (const article of ratgeberArticles) {
+  if (!article.author) continue;
+  expect(Boolean(AUTHORS[article.author]), `Unbekannter Autor in ${article.slug}: ${article.author}`);
+}
+
+// Ältere Artikel ohne Opt-in bleiben unverändert: keine neuen Felder.
+for (const article of ratgeberArticles) {
+  if (OPT_IN_SLUGS.includes(article.slug)) continue;
+  expect(!article.quickAnswer && !article.sources && !article.author && !article.faqStyle && !shouldShowToc(article), `Opt-in-Baustein in einem älteren Artikel ohne Auftrag: ${article.slug}`);
+}
+
+// Zahnkosten-Rechner: nur lokaler Zustand, keine Messung, kein Formular,
+// keine Sperrwörter in seinen Texten.
+const rechnerUi = stripLayoutComments(read('src/components/ratgeber/ZahnkostenRechner.jsx'));
+const rechnerLazy = stripLayoutComments(read('src/components/ratgeber/LazyZahnkostenRechner.jsx'));
+const rechnerModel = read('src/lib/zahnkostenRechner.js');
+for (const [name, source] of [['ZahnkostenRechner.jsx', rechnerUi], ['LazyZahnkostenRechner.jsx', rechnerLazy], ['zahnkostenRechner.js', stripLayoutComments(rechnerModel)]]) {
+  expect(!/fetch\(|XMLHttpRequest|sendBeacon|dataLayer|gtag|fbq|track[A-Z]\w*\(|localStorage|sessionStorage|document\.cookie|<form/.test(source), `${name}: Der Rechner darf nichts senden, speichern oder messen.`);
+  expect(!/@\/lib\/(?:analytics|google-ads|meta-pixel|consent)/.test(source), `${name}: keine Mess-Module im Rechner.`);
+}
+const rechnerTexte = rechnerModel.match(/'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`/g).join('\n');
+expect(!RATGEBER_SPERRWORTE.test(rechnerTexte), `zahnkostenRechner.js: Sperrwort in den Rechnertexten: "${rechnerTexte.match(RATGEBER_SPERRWORTE)?.[0]}".`);
+expect(!/[–—]/.test(rechnerTexte), 'zahnkostenRechner.js: keine Gedankenstriche in den Rechnertexten.');
+expect(!/\bSie\b|\bIhre?[nmrs]?\b/.test(rechnerTexte), 'zahnkostenRechner.js: Du-Form in den Rechnertexten.');
+
+for (const slug of RATGEBER_SLUGS) {
+  const builtArticle = path.join(root, 'dist', 'ratgeber', slug, 'index.html');
+  if (!fs.existsSync(builtArticle)) continue;
+  const html = fs.readFileSync(builtArticle, 'utf8');
+  expect(!/data-ratgeber-(?:quick|sources|author|toc|costcard)/.test(html) && !/"author":\{"@type":"Person"/.test(html), `Gebaut ${slug}: ältere Artikel bleiben ohne die neuen Bausteine.`);
+}
+
 
 if (failures.length > 0) {
   console.error(`Ratgeber-Vertrag verletzt (${failures.length}):`);

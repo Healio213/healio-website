@@ -3,6 +3,23 @@ import { Link, useLocation } from 'react-router-dom';
 import SEOHead from '@/components/SEOHead';
 import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
+import { authorSchemaFor, getAuthor } from '@/content/ratgeber/authors';
+import { shouldShowToc } from '@/content/ratgeber/articleText';
+import {
+  ArticleByline,
+  AuthorBox,
+  CostCard,
+  FaqAccordion,
+  HonestBox,
+  PathLink,
+  QuickAnswerCard,
+  ResponsiveTable,
+  SourcesBlock,
+  StepTrack,
+  SwipeCards,
+  TableOfContents,
+} from '@/components/ratgeber/RatgeberBausteine';
+import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -134,6 +151,15 @@ const RatgeberBlock = ({ block }) => {
     );
   }
 
+  // Optionale Bausteine der Zahn-Vorlage (06.10.2026), siehe RatgeberBausteine.jsx.
+  if (block.type === 'costCard') return <CostCard block={block} />;
+  if (block.type === 'steps') return <StepTrack block={block} />;
+  if (block.type === 'honest') return <HonestBox block={block} />;
+  if (block.type === 'cards') return <SwipeCards block={block} />;
+  if (block.type === 'path') return <PathLink block={block} />;
+  if (block.type === 'calculator') return <LazyZahnkostenRechner block={block} />;
+  if (block.type === 'table' && block.mobile === 'cards') return <ResponsiveTable block={block} />;
+
   if (block.type === 'table') {
     // Breite Vergleichstabellen duerfen ab md etwas aus der Textspalte
     // herauswachsen, damit die letzte Spalte nicht abgeschnitten wird.
@@ -212,6 +238,8 @@ const RatgeberArticleLayout = ({ article }) => {
     [article.internalCta, search],
   );
   const notice = KIND_NOTICE[article.kind] || KIND_NOTICE.ratgeber;
+  const author = getAuthor(article.author);
+  const showToc = useMemo(() => shouldShowToc(article), [article]);
   const canonicalUrl = `https://healio.de/ratgeber/${article.slug}`;
 
   const schemaMarkup = useMemo(() => {
@@ -224,6 +252,7 @@ const RatgeberArticleLayout = ({ article }) => {
         url: canonicalUrl,
         datePublished: article.publishedAt || null,
         dateModified: article.updatedAt || article.publishedAt || null,
+        author: authorSchemaFor(article.author),
       }),
     ];
 
@@ -268,18 +297,37 @@ const RatgeberArticleLayout = ({ article }) => {
             {article.headline}
           </h1>
 
-          {article.readingTimeMinutes && (
+          {author ? (
+            <ArticleByline
+              author={author}
+              standIso={standIso}
+              standLabel={standLabel}
+              readingTimeMinutes={article.readingTimeMinutes}
+            />
+          ) : article.readingTimeMinutes && (
             <p className="mt-4 text-sm leading-6 text-slate-500">
               Lesezeit etwa {article.readingTimeMinutes} Minuten
             </p>
           )}
 
+          {article.quickAnswer && <QuickAnswerCard quick={article.quickAnswer} />}
+
           <p className="mt-6 text-xl leading-9 text-slate-600 sm:text-[1.3rem] sm:leading-10">
             {article.lead}
           </p>
 
+          {showToc && (
+            <TableOfContents
+              sections={article.sections}
+              extraItems={[
+                ...(article.faqs?.length ? [{ id: 'haeufige-fragen', label: 'Häufige Fragen' }] : []),
+                ...(article.sources ? [{ id: 'quellen', label: 'Quellen und Stand' }] : []),
+              ]}
+            />
+          )}
+
           {article.sections.map((section) => (
-            <section key={section.id} id={section.id} className="mt-14">
+            <section key={section.id} id={section.id} className="mt-14 scroll-mt-28">
               <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
                 {section.heading}
               </h2>
@@ -319,10 +367,11 @@ const RatgeberArticleLayout = ({ article }) => {
           )}
 
           {article.faqs?.length > 0 && (
-            <section id="haeufige-fragen" className="mt-14">
+            <section id="haeufige-fragen" className="mt-14 scroll-mt-28">
               <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
                 Häufige Fragen
               </h2>
+              {article.faqStyle === 'accordion' ? <FaqAccordion faqs={article.faqs} /> : (
               <dl className="mt-6 divide-y divide-slate-200 border-t border-slate-200">
                 {article.faqs.map((faq) => (
                   <div key={faq.question} className="py-6">
@@ -335,6 +384,7 @@ const RatgeberArticleLayout = ({ article }) => {
                   </div>
                 ))}
               </dl>
+              )}
             </section>
           )}
 
@@ -362,6 +412,10 @@ const RatgeberArticleLayout = ({ article }) => {
               </p>
             </section>
           )}
+
+          {article.sources && <SourcesBlock sources={article.sources} />}
+
+          {author && <AuthorBox author={author} />}
 
           {isAdvertorial && (
             <div className="mt-14">
