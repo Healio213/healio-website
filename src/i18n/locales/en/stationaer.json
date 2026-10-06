@@ -463,8 +463,9 @@
         "items": [
           "Prestige for you: EUR 13.40 a month at 21 to 30, EUR 17.60 at 31 to 45 (as of 09/2026)",
           "For your child in the age group up to 15: Komfort EUR 3.20, Prestige EUR 4.10 a month",
-          "Family room at a later birth: available in Prestige, in Komfort up to the cost of a twin room",
+          "Family room at a later birth: in Prestige without a limit, in Komfort up to the cost of a twin room, through the mother's policy",
           "Registration no later than two months after birth, cover backdated",
+          "If your child under 16 has to go into hospital, their Komfort or Prestige plan pays 100 per cent of your accommodation and meals as an accompanying parent, where your health insurer does not",
           "For a later pregnancy: midwife costs beyond what your health insurer pays, in Komfort and Prestige"
         ],
         "note": "If you are already pregnant when you apply, the plan pays neither for that birth nor for midwife costs in that pregnancy. Later on too: if a child is born before the eight months have passed, including a premature birth, the plan does not pay for the birth. Through newborn enrolment, your child can be insured at most as fully as the parent."
@@ -506,7 +507,7 @@
             "who": "Bayerische Komfort and Prestige",
             "tone": "bay",
             "text": "According to die Bayerische's product documents, Komfort and Prestige reimburse midwife costs that go beyond what your statutory health insurer pays, including for midwives who bill privately.",
-            "condition": "If you are already pregnant when you apply, this does not apply to that pregnancy and birth. There is a waiting period of three months, and of eight months for childbirth."
+            "condition": "If you are already pregnant when you apply, this does not apply to that pregnancy and birth. Die Bayerische has no general waiting period; eight months apply to childbirth."
           }
         ]
       },
@@ -583,7 +584,7 @@
         },
         {
           "q": "Are there waiting periods?",
-          "a": "The SDK hospital plans have no policy waiting periods. Cover applies to new insured events from the start date. An insured event that occurred before then is not covered."
+          "a": "The SDK hospital plans have no policy waiting periods. Cover applies to new insured events from the start date. An insured event that occurred before then is not covered. Die Bayerische has no general waiting period; eight months apply to childbirth and psychotherapy, and these fall away after an accident."
         },
         {
           "q": "Do I need to answer health questions?",
@@ -599,7 +600,7 @@
         },
         {
           "q": "How does newborn enrolment work?",
-          "a": "If one parent is insured with SDK on the day of birth, register your child within two months. Cover then applies backdated to the day of birth, without a health assessment and without a prior insurance period, at most to the extent of the parent's cover."
+          "a": "If one parent is insured with SDK on the day of birth, register your child within two months. Cover then applies backdated to the day of birth, without a health assessment and without a prior insurance period, at most to the extent of the parent's cover. With die Bayerische, one parent must have been insured with it for at least three months on the day of birth."
         }
       ]
     },

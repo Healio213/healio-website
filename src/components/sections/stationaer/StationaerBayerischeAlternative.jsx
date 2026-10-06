@@ -6,11 +6,18 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_STATIONAER_URL, trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
 
 // Die Bayerische als zweiter Klinik-Versicherer auf /stationaer (bis 29.08.
-// über HospitalConcept eingebunden). Nur belegte Punkte aus AVB B 333500 und
-// den Tarifbedingungen Komfort/Prestige (11/2024). Schwangerschaft, Kinder und
-// Familienzimmer stehen seit 29.09. in der dritten Familienkarte (#familie).
-// Die Hebamme der Bayerischen (laut Produktsteckbrief, Freigabe Frank 29.09.)
-// steht im Hebammen-Block der Familien-Sektion (#hebamme).
+// über HospitalConcept eingebunden). Nur belegte Punkte aus AVB B 275000
+// (Stand 11/2024) und den Tarifbedingungen Komfort/Prestige (11/2024).
+// Wartezeit (05.10.2026): keine allgemeine Wartezeit, nur besondere acht Monate
+// für Entbindung und Psychotherapie, bei Unfall keine (AVB B 275000 § 3,
+// Annahmerichtlinien B 275012 Stand 12/2024, Auskunft der Bayerischen vom 05.10.2026).
+// Die drei Monate aus der alten AVB 333500 gelten für die KH-Tarife 2025 nicht.
+// Schwangerschaft, Kinder und Familienzimmer stehen in der Familienkarte
+// (#familie). Hebammen-Aussage der Bayerischen laut Produktunterlagen
+// (Highlightblatt B 275008, Produktsteckbrief B 275010), Freigabe Frank
+// 29.09.2026, bestätigt 06.10.2026; nicht in den Tarifbedingungen, schriftliche
+// Bestätigung beim Versicherer angefragt. Sie steht im Hebammen-Block der
+// Familien-Sektion (#hebamme).
 const TARIFFS = ['Prestige', 'Komfort', 'Smart'];
 
 const COPY = {
@@ -22,7 +29,7 @@ const COPY = {
     facts: [
       {
         label: 'Wartezeit',
-        text: 'Bei der SDK gibt es keine Wartezeiten. Bei der Bayerischen gelten drei Monate, für Entbindung und Psychotherapie acht Monate. Nach einem Unfall bist du sofort versichert.',
+        text: 'Bei der SDK gibt es keine Wartezeiten. Bei der Bayerischen gibt es keine allgemeine Wartezeit, nur für Entbindung und Psychotherapie acht Monate. Nach einem Unfall entfallen auch diese.',
       },
       {
         label: 'Chefarzt',
@@ -51,7 +58,7 @@ const COPY = {
     facts: [
       {
         label: 'Waiting period',
-        text: 'SDK has no waiting periods. Die Bayerische has three months, and eight months for childbirth and psychotherapy. After an accident, you are covered straight away.',
+        text: 'SDK has no waiting periods. Die Bayerische has no general waiting period, only eight months for childbirth and psychotherapy. After an accident, these fall away too.',
       },
       {
         label: 'Head physician',

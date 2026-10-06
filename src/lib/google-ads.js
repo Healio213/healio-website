@@ -69,6 +69,7 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
+  '/ratgeber/schwangerschaft-was-steht-mir-zu',
   '/ratgeber/hebamme-kosten-krankenkasse',
   '/blog/kassenbonus-schwangerschaft-vorsorge',
 ]);

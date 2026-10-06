@@ -150,7 +150,7 @@ const RatgeberBlock = ({ block }) => {
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">
               {block.head.map((cell) => (
-                <th key={cell} scope="col" className="break-words px-3 py-3 align-bottom sm:px-4">{cell}</th>
+                <th key={cell} scope="col" className="break-words hyphens-auto px-3 py-3 align-bottom sm:px-4">{cell}</th>
               ))}
             </tr>
           </thead>
@@ -160,12 +160,12 @@ const RatgeberBlock = ({ block }) => {
                 {row.map((cell, cellIndex) => (
                   cellIndex === 0
                     ? (
-                      <th key={cell} scope="row" className="break-words px-3 py-3 text-left align-top font-display font-bold text-[#07111f] sm:px-4">
+                      <th key={cell} scope="row" className="break-words hyphens-auto px-3 py-3 text-left align-top font-display font-bold text-[#07111f] sm:px-4">
                         {cell}
                       </th>
                     )
                     : (
-                      <td key={`${cell}-${cellIndex}`} className="break-words px-3 py-3 align-top sm:px-4">{cell}</td>
+                      <td key={`${cell}-${cellIndex}`} className="break-words hyphens-auto px-3 py-3 align-top sm:px-4">{cell}</td>
                     )
                 ))}
               </tr>

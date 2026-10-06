@@ -7,6 +7,15 @@
 // es in den letzten 2 Jahren einen Heil- und Kostenplan oder eine Anratung, ist
 // genau diese Behandlung ausgeschlossen; liegt das länger zurück, ist sie wieder
 // versichert.
+// Zeitraum in Frage 1 (Franks Vorgabe 05.10.2026): „empfohlen oder geplant“
+// zählt nur in den letzten 2 Jahren (UKV-Antrag 4.2, Annahmerichtlinien der
+// Bayerischen 11.2025), „läuft schon“ zählt immer (UKV AVB Teil I § 3 Abs. 1).
+// Die positive Aussage „ganz normal mitversichert“ steht nur für die UKV; für
+// Kieferorthopädie (UKV-Antrag 4.4) gilt die 2-Jahres-Grenze nicht, darum steht
+// die Ausnahme Zahnspange überall dort, wo ältere Empfehlungen als versichert
+// gelten, und im Familien-Ergebnis. Schon abgerechnete Behandlungen aus den
+// letzten 2 Jahren: Ob UKV-Antrag 4.2 sie erfasst, ist offen (Belege 03.10.,
+// beim Versicherer angefragt), darum sagt die Seite dazu nichts.
 const de = {
   hero: {
     eyebrow: 'Zahnzusatzversicherung',
@@ -17,7 +26,7 @@ const de = {
     cta: 'Zahn-Check starten',
     micro: ['1 Minute', 'ohne Kontaktdaten', 'Annahme erst im Antrag'],
     ticketEyebrow: 'Dein Startpunkt',
-    ticketTitle: 'Ist schon etwas angeraten?',
+    ticketTitle: 'Wurde in den letzten 2 Jahren etwas empfohlen?',
     ticketYes: 'Ja: Sofortschutz prüfen',
     ticketNo: 'Nein: Leistung, Familie oder Preis wählen',
     ticketFooter: '2 Wege. 1 klare Empfehlung.',
@@ -26,7 +35,7 @@ const de = {
     offersAria: 'Zahn-Situationen und ihr Weg im Überblick',
     offers: [
       { code: 'UKV ZahnPRIVAT 100', label: 'Maximaler Zahnschutz', note: '100 % der erstattungsfähigen Kosten nach Kassenleistung, ohne Wartezeit' },
-      { code: 'ZAHN Sofort', label: 'Behandlung schon angeraten', note: 'Zuschuss bis zu 1.500 EUR möglich, Abschluss vor der Rechnung' },
+      { code: 'ZAHN Sofort', label: 'Behandlung steht an', note: 'In den letzten 2 Jahren empfohlen oder schon begonnen: bis zu 1.500 EUR Zuschuss möglich, Abschluss vor der Rechnung' },
       { code: 'UKV mit Zuschlag', label: 'Zähne fehlen schon', note: 'Bei 1 bis 3 fehlenden Zähnen Aufnahme mit Zuschlag je Zahn' },
       { code: 'UKV ZahnPRIVAT', label: 'Familie und Vorsorge', note: 'Kieferorthopädie und Zahnreinigung je nach Stufe' },
     ],
@@ -57,11 +66,18 @@ const de = {
     bonusCta: 'Krankenkasse passend zum Tarif finden',
     questions: {
       q1: {
-        text: 'Hat dein Zahnarzt eine Behandlung angeraten oder schon begonnen?',
-        hint: 'Zum Beispiel eine Krone, Füllung, Wurzelbehandlung, ein Implantat oder einen Heil- und Kostenplan.',
+        text: 'Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung empfohlen oder geplant? Oder läuft sie schon?',
+        hint: 'Etwa Krone, Füllung oder Implantat. Geplant heißt: Du hast vom Zahnarzt einen Heil- und Kostenplan bekommen, also einen Kostenvoranschlag.',
+        rules: [
+          {
+            tone: 'mint',
+            title: 'Vor mehr als 2 Jahren empfohlen?',
+            text: 'Zählt nicht mehr, solange seitdem nichts geplant ist und nichts läuft. Dann wähle Nein. Bei der UKV ist die Behandlung später ganz normal mitversichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.',
+          },
+        ],
         options: {
-          ja: { label: 'Ja, etwas steht an oder läuft schon', sub: 'Auch ein dokumentierter Befund kann zählen' },
-          nein: { label: 'Nein, aktuell ist nichts angeraten', sub: 'Kontrollen ohne Befund zählen nicht' },
+          ja: { label: 'Ja, etwas steht an oder läuft schon', sub: 'Das zahlt ein normaler Zahntarif nicht, dafür gibt es den Sofortschutz. Auch ein Eintrag in deiner Zahnarzt-Akte aus den letzten 2 Jahren kann zählen.' },
+          nein: { label: 'Nein, nichts davon', sub: 'Empfehlungen von vor über 2 Jahren ohne neuen Plan und Kontrollen ohne Befund zählen hier nicht' },
         },
       },
       q2: {
@@ -75,7 +91,7 @@ const de = {
       },
       q3: {
         text: 'Gibt es bei dir eine Zahn-Vorgeschichte, die zu beachten ist?',
-        hint: 'Zum Beispiel Parodontitis, eine Prothese oder älteren Zahnersatz.',
+        hint: 'Zum Beispiel Parodontitis in den letzten 3 Jahren, eine herausnehmbare Prothese oder Zahnersatz, der älter als 10 Jahre ist.',
         options: {
           ja: { label: 'Ja, mindestens einer dieser Punkte trifft zu' },
           nein: { label: 'Nein, nichts davon' },
@@ -148,7 +164,7 @@ const de = {
           'Professionelle Zahnreinigung in den Top-Stufen',
           'Leistung und Beitrag lassen sich passend abstufen',
         ],
-        warning: 'Schutz sollte bestehen, bevor eine Behandlung angeraten wird. Die verbindliche Annahme erfolgt im Antrag.',
+        warning: 'Wurde für dein Kind schon eine Zahnspange empfohlen, oder läuft sie schon? Dann ist Kieferorthopädie nicht versichert, auch wenn die Empfehlung älter als 2 Jahre ist. Die verbindliche Annahme erfolgt im Antrag.',
         cta: 'UKV-Tarife berechnen',
         ctaType: 'ukv',
         note: 'Du wirst zur ZahnPRIVAT-Abschlussstrecke der UKV weitergeleitet.',
@@ -172,7 +188,7 @@ const de = {
         tone: 'mint',
         insurer: 'UKV · ZahnPRIVAT 100',
         title: 'Maximalen Zahnschutz prüfen',
-        text: 'Wenn aktuell nichts angeraten ist und du hohen Schutz suchst, ist ZahnPRIVAT 100 der klare Leistungsweg.',
+        text: 'Wenn in den letzten 2 Jahren nichts empfohlen wurde, nichts läuft und du hohen Schutz suchst, ist ZahnPRIVAT 100 der klare Leistungsweg.',
         reasons: [
           '100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet',
           'Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig',
@@ -187,7 +203,7 @@ const de = {
         tone: 'butter',
         insurer: 'UKV · ZahnPRIVAT 75',
         title: 'Leistung und Beitrag bewusst abwägen',
-        text: 'Wenn aktuell nichts angeraten ist und du einen kleineren Beitrag suchst, ist ZahnPRIVAT 75 die Einstiegsstufe der UKV.',
+        text: 'Wenn in den letzten 2 Jahren nichts empfohlen wurde, nichts läuft und du einen kleineren Beitrag suchst, ist ZahnPRIVAT 75 die Einstiegsstufe der UKV.',
         reasons: [
           '75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet',
           'Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig',
@@ -240,15 +256,15 @@ const de = {
         label: 'Leistung, Familie und Zahnlücken',
         title: 'UKV',
         product: 'ZahnPRIVAT 75, 90 oder 100',
-        text: 'Für alle, bei denen aktuell nichts angeraten ist: drei Leistungsstufen ohne Wartezeiten. Bei 1 bis 3 fehlenden Zähnen ist die Aufnahme mit Zuschlag je Zahn vorgesehen.',
+        text: 'Für alle, bei denen in den letzten 2 Jahren nichts empfohlen wurde und nichts läuft. Ältere Empfehlungen zählen nicht mehr (außer bei Zahnspangen). Drei Leistungsstufen ohne Wartezeiten. Bei 1 bis 3 fehlenden Zähnen ist die Aufnahme mit Zuschlag je Zahn vorgesehen.',
         tone: 'mint',
       },
       {
         key: 'sofort',
-        label: 'Schon etwas angeraten',
+        label: 'Behandlung steht an',
         title: 'die Bayerische',
         product: 'ZAHN Sofort',
-        text: 'Bis zu 1.500 EUR können möglich sein, wenn Abschluss und Rechnung zeitlich richtig liegen. Voraussetzung: Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte.',
+        text: 'Für Behandlungen, die in den letzten 2 Jahren empfohlen oder geplant wurden oder schon laufen. Bis zu 1.500 EUR können möglich sein, wenn Abschluss und Rechnung zeitlich richtig liegen. Voraussetzung: Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
         tone: 'coral',
       },
     ],
@@ -297,7 +313,11 @@ const de = {
     items: [
       {
         q: 'Es wurde schon eine Behandlung angeraten. Ist es zu spät?',
-        a: 'Nicht unbedingt. Mit ZAHN Sofort können bis zu 1.500 EUR Zuschuss möglich sein. Der Abschluss muss vor der Rechnung erfolgen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein ist nur bei einem Neuabschluss wählbar.',
+        a: 'Nicht unbedingt. Es kommt darauf an, wann. Liegt die Empfehlung mehr als 2 Jahre zurück und ist seitdem nichts passiert? Dann ist die Behandlung bei der UKV ganz normal mitversichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Wurde sie in den letzten 2 Jahren empfohlen oder geplant, oder läuft sie schon? Dann zahlt ein normaler Zahntarif sie nicht. Mit ZAHN Sofort können aber bis zu 1.500 EUR Zuschuss möglich sein. Der Abschluss muss vor der Rechnung erfolgen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein ist nur bei einem Neuabschluss wählbar.',
+      },
+      {
+        q: 'Mein Zahnarzt hat vor mehr als 2 Jahren etwas empfohlen. Bin ich trotzdem versichert?',
+        a: 'Ja, bei der UKV ZahnPRIVAT. Was dein Zahnarzt vor mehr als 2 Jahren empfohlen oder geplant hat, zählt nicht mehr. Beispiel: Er hat dir im Herbst 2023 eine Krone empfohlen, und du schließt heute ab. Dann ist die Krone ganz normal mitversichert. Es zählt die letzte Empfehlung. Die Behandlung darf außerdem noch nicht laufen oder geplant sein. Anders ist es bei allem, was in den letzten 2 Jahren empfohlen oder geplant wurde: Das zahlt ein normaler Zahntarif nicht, dafür gibt es den Sofortschutz. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Nach fehlenden Zähnen und Parodontitis fragt der Antrag trotzdem. Verbindlich entscheidet die UKV im Antrag.',
       },
       {
         q: 'Kann ich mich mit fehlenden Zähnen noch versichern?',
@@ -355,7 +375,7 @@ const en = {
     cta: 'Start the dental check',
     micro: ['1 minute', 'no contact details', 'acceptance only in the application'],
     ticketEyebrow: 'Your starting point',
-    ticketTitle: 'Has treatment already been recommended?',
+    ticketTitle: 'Has treatment been recommended in the last 2 years?',
     ticketYes: 'Yes: check immediate cover',
     ticketNo: 'No: choose cover, family or price',
     ticketFooter: '2 routes. 1 clear recommendation.',
@@ -364,7 +384,7 @@ const en = {
     offersAria: 'Dental situations and their route at a glance',
     offers: [
       { code: 'UKV ZahnPRIVAT 100', label: 'Maximum dental cover', note: '100% of eligible costs after the health fund share, no waiting period' },
-      { code: 'ZAHN Sofort', label: 'Treatment already recommended', note: 'Subsidy of up to €1,500 possible, sign up before the invoice' },
+      { code: 'ZAHN Sofort', label: 'Treatment coming up', note: 'Recommended in the last 2 years or already started: subsidy of up to €1,500 possible, sign up before the invoice' },
       { code: 'UKV with surcharge', label: 'Teeth already missing', note: 'With 1 to 3 missing teeth, acceptance with a surcharge per tooth' },
       { code: 'UKV ZahnPRIVAT', label: 'Family and prevention', note: 'Orthodontics and teeth cleaning depending on the level' },
     ],
@@ -392,11 +412,18 @@ const en = {
     bonusCta: 'Find the health fund for your tariff',
     questions: {
       q1: {
-        text: 'Has your dentist recommended or started treatment?',
-        hint: 'For example a crown, filling, root canal, implant or treatment and cost plan.',
+        text: 'Has your dentist recommended or planned treatment in the last 2 years? Or is it already underway?',
+        hint: 'For example a crown, filling or implant. Planned means: your dentist gave you a treatment and cost plan (Heil- und Kostenplan), in other words a cost estimate.',
+        rules: [
+          {
+            tone: 'mint',
+            title: 'Recommended more than 2 years ago?',
+            text: 'No longer counts as long as nothing has been planned since and nothing is underway. Then choose No. UKV will then cover the treatment as normal. Exception: for braces, an older recommendation still counts.',
+          },
+        ],
         options: {
-          ja: { label: 'Yes, something is due or already underway', sub: 'A documented finding may also count' },
-          nein: { label: 'No, nothing is currently recommended', sub: 'Routine checks without findings do not count' },
+          ja: { label: 'Yes, something is due or already underway', sub: 'A normal dental tariff does not pay for that. That is what immediate cover is for. An entry in your dental records from the last 2 years may also count.' },
+          nein: { label: 'No, none of these', sub: 'Recommendations from more than 2 years ago without a new plan, and check-ups without findings, do not count here' },
         },
       },
       q2: {
@@ -410,7 +437,7 @@ const en = {
       },
       q3: {
         text: 'Is there dental history we should take into account?',
-        hint: 'For example periodontitis, dentures or older dental prosthetics.',
+        hint: 'For example periodontitis in the last 3 years, removable dentures or dental prosthetics older than 10 years.',
         options: {
           ja: { label: 'Yes, at least one applies' },
           nein: { label: 'No, none of these' },
@@ -480,7 +507,7 @@ const en = {
           'Professional teeth cleaning in the top tiers',
           'Benefits and premium can be tiered to fit',
         ],
-        warning: 'Cover should be in place before treatment is recommended. Acceptance is binding only in the application.',
+        warning: 'Have braces already been recommended for your child, or are they underway? Then orthodontics is not covered, even if the recommendation is more than 2 years old. Acceptance is binding only in the application.',
         cta: 'Calculate UKV tariffs',
         note: 'You will be redirected to the UKV ZahnPRIVAT application.',
       },
@@ -502,7 +529,7 @@ const en = {
         ...de.check.results.ukvLeistung,
         insurer: 'UKV · ZahnPRIVAT 100',
         title: 'Check maximum dental cover',
-        text: 'If nothing is currently recommended and you want high protection, ZahnPRIVAT 100 is the clear performance route.',
+        text: 'If nothing has been recommended in the last 2 years, nothing is underway and you want high protection, ZahnPRIVAT 100 is the clear performance route.',
         reasons: [
           '100% of eligible costs after deducting the health fund share, even if the fund pays nothing first',
           'Implants including bone augmentation, bridges and dentures are eligible',
@@ -516,7 +543,7 @@ const en = {
         ...de.check.results.ukvPreis,
         insurer: 'UKV · ZahnPRIVAT 75',
         title: 'Balance benefits and premium consciously',
-        text: 'If nothing is currently recommended and you want a smaller premium, ZahnPRIVAT 75 is the UKV entry level.',
+        text: 'If nothing has been recommended in the last 2 years, nothing is underway and you want a smaller premium, ZahnPRIVAT 75 is the UKV entry level.',
         reasons: [
           '75% of eligible costs after deducting the health fund share, even if the fund pays nothing first',
           'No waiting periods, implants, bridges and dentures are eligible',
@@ -562,8 +589,8 @@ const en = {
     title: 'Your dental situation decides. We show you which route is genuinely open today.',
     text: 'The dental check first classifies your situation. Only then do premium and application follow.',
     cards: [
-      { ...de.paths.cards[0], label: 'Benefits, family and dental gaps', product: 'ZahnPRIVAT 75, 90 or 100', text: 'For everyone with nothing currently recommended: three benefit levels without waiting periods. With 1 to 3 missing teeth, acceptance with a surcharge per tooth is provided for.' },
-      { ...de.paths.cards[1], label: 'Treatment already recommended', text: 'Up to €1,500 may be possible when sign-up and invoice timing meet the conditions. Requirement: no missing teeth and no dental history.' },
+      { ...de.paths.cards[0], label: 'Benefits, family and dental gaps', product: 'ZahnPRIVAT 75, 90 or 100', text: 'For everyone with nothing recommended in the last 2 years and nothing underway. Older recommendations no longer count (except for braces). Three benefit levels without waiting periods. With 1 to 3 missing teeth, acceptance with a surcharge per tooth is provided for.' },
+      { ...de.paths.cards[1], label: 'Treatment coming up', text: 'For treatment recommended or planned in the last 2 years, or already underway. Up to €1,500 may be possible when sign-up and invoice timing meet the conditions. Requirement: no missing teeth and no dental history, for example no periodontitis in the last 3 years and no removable dentures.' },
     ],
     footer: 'Acceptance and exact benefits are only checked bindingly in the application.',
   },
@@ -613,7 +640,11 @@ const en = {
     items: [
       {
         q: 'Treatment has already been recommended. Is it too late?',
-        a: 'Not necessarily. ZAHN Sofort may provide a subsidy of up to €1,500. You must sign up before the invoice, treatment must not yet be completed or invoiced, and the module is only available with a new contract.',
+        a: 'Not necessarily. It depends on when. Was it recommended more than 2 years ago and nothing has happened since? Then UKV covers the treatment as normal. Exception: for braces, an older recommendation still counts. Was it recommended or planned in the last 2 years, or is it already underway? Then a normal dental tariff does not pay for it. ZAHN Sofort may still provide a subsidy of up to €1,500. You must sign up before the invoice, treatment must not yet be completed or invoiced, and the module is only available with a new contract.',
+      },
+      {
+        q: 'My dentist recommended something more than 2 years ago. Am I still covered?',
+        a: 'Yes, with UKV ZahnPRIVAT. Anything your dentist recommended or planned more than 2 years ago no longer counts. Example: your dentist recommended a crown in autumn 2023 and you sign up today. The crown is then covered as normal. What counts is the most recent recommendation. The treatment must also not be underway or planned yet. Anything recommended or planned in the last 2 years is different: a normal dental tariff does not pay for it, which is what immediate cover is for. Exception: for braces, an older recommendation still counts. The application still asks about missing teeth and periodontitis. UKV makes the binding decision in the application.',
       },
       {
         q: 'Can I still get cover with missing teeth?',

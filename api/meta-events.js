@@ -27,8 +27,15 @@ const ALLOWED_HOSTS = new Set(['healio.de', 'www.healio.de']);
 const VERCEL_PREVIEW_HOST = /^[a-z0-9][a-z0-9-]{0,200}\.vercel\.app$/;
 
 // Diese Routen duerfen Meta nie erreichen, auch nicht ueber einen
-// manipulierten Client-Aufruf.
-const BLOCKED_PATHS = new Set(['/schwangerschaft']);
+// manipulierten Client-Aufruf. Gleiche Liste wie META_EXCLUDED_PATHS in
+// src/lib/meta-pixel.js.
+const BLOCKED_PATHS = new Set([
+  '/schwangerschaft',
+  '/ratgeber/schwanger-zusatzversicherung',
+  '/ratgeber/schwangerschaft-worauf-achten',
+  '/ratgeber/schwangerschaft-was-steht-mir-zu',
+  '/blog/kassenbonus-schwangerschaft-vorsorge',
+]);
 const QUERY_ALLOWLIST = /^(?:utm_[a-z_]{1,30}|fbclid)$/i;
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

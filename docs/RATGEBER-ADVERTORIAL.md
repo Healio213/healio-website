@@ -19,6 +19,7 @@ Indexierung.
 | `/ratgeber/zahnzusatzversicherung-fehlender-zahn` | Ratgeber | indexiert, in der Sitemap |
 | `/ratgeber/schwanger-zusatzversicherung` | Ratgeber | indexiert, in der Sitemap |
 | `/ratgeber/schwangerschaft-worauf-achten` | Ratgeber | indexiert, in der Sitemap |
+| `/ratgeber/schwangerschaft-was-steht-mir-zu` | Ratgeber (seit 06.10.2026), wie die anderen Schwangerschafts-Ratgeber in den Sperrlisten von Meta und Google Ads | indexiert, in der Sitemap |
 | `/ratgeber/hebamme-kosten-krankenkasse` | Ratgeber (05.10.2026), wie die beiden Schwangerschaftsartikel für Google Ads und Meta gesperrt | indexiert, in der Sitemap |
 | `/ratgeber/krankenkassen-bonus-zusatzversicherung` | Advertorial 1 | `noindex, nofollow`, nicht in der Sitemap |
 
