@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
@@ -7,38 +7,18 @@ import { trackEvent } from '@/lib/analytics';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 import { useLanguage } from '@/hooks/useLanguage';
-import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { getDesktopLeadContent } from './desktopLeadContent';
+import SceneHero, { sceneAccentClass, sceneBelow, scenePrimaryButtonClass } from './SceneHero';
 
 const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', stationaer: '#tarife' };
 
-// Vollbild-Foto statt hellem Kasten (Frank 07.10.2026: „überall schöne Bilder“).
-// Personen stehen im Bild rechts, links liegt der Text auf einem dunklen Verlauf.
-const heroImages = {
-  home: { src: '/hero-bg.webp', position: '72% 50%' },
-  ambulant: { src: '/images/hero-desktop/ambulant.webp', position: '70% 50%', cartoon: '/images/hero-desktop/ambulant-cartoon.webp' },
-  zahn: { src: '/images/hero-desktop/zahn.webp', position: '68% 35%' },
-  stationaer: { src: '/images/hero-desktop/stationaer.webp', position: '72% 50%', cartoon: '/images/hero-desktop/stationaer-cartoon.webp' },
-};
-
-// Nur für die Vorschau: ?hero=split zeigt die Variante mit Foto in der rechten Hälfte.
-// ?bild=cartoon tauscht das Foto gegen die 3D-Szene im Healio-Figurenstil.
-const usePreviewVariant = () => {
-  const [variant, setVariant] = useState({ layout: 'full', look: 'foto' });
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setVariant({ layout: params.get('hero') === 'split' ? 'split' : 'full', look: params.get('bild') === 'cartoon' ? 'cartoon' : 'foto' });
-  }, []);
-  return variant;
-};
-
-// Das Angebot unter dem Foto, ohne Kasten: dieselben Inhalte wie vorher.
+// Das Angebot unter der Szene, ohne Kasten: dieselben Inhalte wie vorher.
 const OfferList = ({ copy, surface }) => (
   <div className="min-w-0">
-    <h2 className="font-display text-2xl font-bold leading-8 tracking-[-0.01em] text-white">{copy.panelTitle}</h2>
-    <p className="mt-1 text-base leading-7 text-[#c9d8de]">{copy.panelText}</p>
+    <h2 className={sceneBelow.listTitle}>{copy.panelTitle}</h2>
+    <p className={sceneBelow.listIntro}>{copy.panelText}</p>
     {copy.calculation ? (
-      <ol className="mt-5 divide-y divide-white/15 border-y border-white/15">
+      <ol className={sceneBelow.list}>
         {copy.calculation.map((row) => (
           <li key={row.label} className="grid grid-cols-[1.5rem_1fr] gap-3 py-4">
             <span className="font-display text-2xl font-bold leading-6 text-[#5ee0b1]" aria-hidden="true">{row.sign}</span>
@@ -50,7 +30,7 @@ const OfferList = ({ copy, surface }) => (
         ))}
       </ol>
     ) : (
-      <dl className="mt-5 divide-y divide-white/15 border-y border-white/15">
+      <dl className={sceneBelow.list}>
         {copy.benefits.map((benefit) => (
           <div key={benefit.label} className="py-3.5">
             <div className={`flex justify-between gap-6 ${surface === 'zahn' ? 'flex-col gap-1' : 'items-baseline'}`}>
@@ -70,7 +50,6 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const copy = getDesktopLeadContent(surface, language, fromBonusTopic);
   const { getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
-  const Heading = useDesktopLayout() ? 'h1' : 'h2';
   const isHome = surface === 'home';
   const headingId = `desktop-${surface}-heading`;
   const action = isHome ? KASSENBOOST_COMPARE_URL : fromBonusTopic && surface === 'ambulant' ? '#tarifwahl' : destinations[surface];
@@ -84,80 +63,55 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
     }
   };
 
-  const variant = usePreviewVariant();
-  const baseImage = heroImages[surface] || heroImages.home;
-  const image = variant.look === 'cartoon' && baseImage.cartoon ? { src: baseImage.cartoon, position: '80% 50%' } : baseImage;
-  const split = variant.layout === 'split';
-
-  // Frank 07.10.2026: im Foto nur Überschrift und Knopf. Erklärung, Angebot und
+  // Frank 07.10.2026: im Bild nur Überschrift und Knopf. Erklärung, Angebot und
   // Hinweise stehen direkt darunter, damit die Ecke nicht voll Text ist.
   return (
-    <section
-      data-desktop-lead={surface}
-      className="hidden w-full bg-[#071726] text-white lg:block"
-      aria-labelledby={headingId}
+    <SceneHero
+      surface={surface}
+      headingId={headingId}
+      dataAttributes={{ 'data-desktop-lead': surface }}
+      heading={(
+        <>
+          <span className="block">{copy.titleLead}</span>
+          <span className={sceneAccentClass}>{copy.titleAccent}</span>
+        </>
+      )}
+      actions={(
+        <>
+          <a
+            data-desktop-primary
+            href={action}
+            {...(isHome ? { target: '_blank', rel: 'noopener noreferrer', 'aria-describedby': `desktop-${surface}-external` } : {})}
+            onClick={handleAction}
+            className={scenePrimaryButtonClass}
+          >
+            {copy.cta}
+            {isHome ? <ArrowUpRight className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
+          </a>
+          {isHome && <span id={`desktop-${surface}-external`} className="sr-only">{copy.externalHint}</span>}
+        </>
+      )}
     >
-      <div className="relative isolate overflow-hidden">
-        {split ? (
-          <div className="absolute inset-y-0 right-0 -z-10 w-[50%]" aria-hidden="true">
-            <img src={image.src} alt="" fetchPriority="high" decoding="async" className="h-full w-full object-cover" style={{ objectPosition: image.position }} />
-            <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#071726] to-transparent" />
-            <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#071726]/80 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#071726] to-transparent" />
-          </div>
-        ) : (
-          <>
-            {/* Das Bild beginnt erst nach dem ersten Siebtel, damit die Personen rechts neben der Überschrift stehen. */}
-            <img src={image.src} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-y-0 right-0 -z-20 h-full w-[86%] object-cover" style={{ objectPosition: image.position }} />
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#071726_0%,#071726_14%,rgba(7,23,38,0.78)_30%,rgba(7,23,38,0.32)_52%,rgba(7,23,38,0)_74%)]" aria-hidden="true" />
-            <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#071726]/75 to-transparent" aria-hidden="true" />
-            <div className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-gradient-to-t from-[#071726] to-transparent" aria-hidden="true" />
-          </>
-        )}
-
-        <div className="mx-auto flex min-h-[min(100svh,54rem)] w-full max-w-7xl flex-col justify-end px-8 pb-20 pt-36">
-          <div className={split ? 'max-w-[36rem]' : 'max-w-[44rem]'}>
-            <Heading id={headingId} className="font-display text-[clamp(2.6rem,3.7vw,3.9rem)] font-extrabold leading-[1.06] tracking-[-0.03em] [text-wrap:balance] [text-shadow:0_2px_28px_rgba(7,23,38,0.45)]">
-              <span className="block">{copy.titleLead}</span>
-              <span className="mt-1 block text-[#5ee0b1]">{copy.titleAccent}</span>
-            </Heading>
-            <a
-              data-desktop-primary
-              href={action}
-              {...(isHome ? { target: '_blank', rel: 'noopener noreferrer', 'aria-describedby': `desktop-${surface}-external` } : {})}
-              onClick={handleAction}
-              className="mt-9 inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#25c990] px-8 py-4 font-display text-base font-extrabold text-[#071726] transition-colors hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            >
-              {copy.cta}
-              {isHome ? <ArrowUpRight className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
-            </a>
-            {isHome && <span id={`desktop-${surface}-external`} className="sr-only">{copy.externalHint}</span>}
-          </div>
+      <div className={sceneBelow.grid}>
+        <div className="min-w-0">
+          <p className={sceneBelow.lead}>{copy.description}</p>
+          <p className={sceneBelow.note}>{copy.condition}</p>
+          <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>
         </div>
+        <OfferList copy={copy} surface={surface} />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-8 pb-10 pt-8">
-        <div className="grid grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] items-start gap-16 xl:gap-20">
-          <div className="min-w-0">
-            <p className="max-w-[56ch] text-xl leading-8 text-[#e1ebef]">{copy.description}</p>
-            <p className="mt-4 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.condition}</p>
-            <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>
-          </div>
-          <OfferList copy={copy} surface={surface} />
-        </div>
-
-        <ul className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#425c6c] pt-5 text-sm text-[#d4e1e5]">
-          {copy.trust.map((item, index) => (
-            <li key={item} className="inline-flex items-center gap-2">
-              <Check className="h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
-              {index === 0 ? (
-                <Link to={getPath('erstinformation')} title={copy.registration} className="inline-flex min-h-11 items-center rounded-sm underline decoration-[#799d91] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{item}</Link>
-              ) : item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+      <ul className={sceneBelow.trust}>
+        {copy.trust.map((item, index) => (
+          <li key={item} className="inline-flex items-center gap-2">
+            <Check className="h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+            {index === 0 ? (
+              <Link to={getPath('erstinformation')} title={copy.registration} className="inline-flex min-h-11 items-center rounded-sm underline decoration-[#799d91] underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{item}</Link>
+            ) : item}
+          </li>
+        ))}
+      </ul>
+    </SceneHero>
   );
 };
 
