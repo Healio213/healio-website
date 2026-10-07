@@ -21,7 +21,10 @@ import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard'
 // Mobile Reihenfolge (unter md): Die Abschnitte stehen als Geschwister in einem
 // Flex-Container und bekommen über "order" ihren Platz im Besucher-Ablauf:
 // Einstieg, Siegel, Erklärvideo, verstehen, Tarif wählen, zweiter Versicherer,
-// Familie, Finanzierung und Bonus, Fragen und Kontakt. Ab md (768 px) gilt
+// Kontakt für Rückfragen, Finanzierung und Bonus, Familie, Fragen. Familie
+// steht mobil hinter dem Bonus, damit die Finanzierung früher kommt und der
+// Kontaktblock nicht erst nach rund 14 Bildschirmen auftaucht (Experiment
+// Handy-Conversion 10/2026). Ab md (768 px) gilt
 // "md:order-none", der Container ist wieder ein Block und alles steht in der
 // Reihenfolge des Quelltexts wie bisher. Der Umhüllende ist ein normales
 // Block-Element ohne eigenes Aussehen.
@@ -84,12 +87,18 @@ const StationaerPage = () => {
         <Slot order="order-4">
           <StationaerBenefits />
         </Slot>
-        <Slot order="order-7">
+        {/* Familie, Kinder und Hebamme: mobil hinter Finanzierung und Bonus
+            (order-12, Experiment Handy-Conversion 10/2026). Der Anker #familie
+            bleibt erreichbar, ab md ändert sich die Reihenfolge nicht. */}
+        <Slot order="order-12">
           <StationaerFamily />
         </Slot>
-        {/* Zwei-Wege-Botschaft direkt vor dem KassenBoost-Abschnitt. */}
+        {/* Zwei-Wege-Botschaft direkt vor dem KassenBoost-Abschnitt. Der Link zu
+            /kassenboost steht mobil gleich darunter in der Bonus-Brücke noch
+            einmal; die Option blendet ihn hier unter md aus (Experiment
+            Handy-Conversion 10/2026, wirkt sobald der Baustein sie kennt). */}
         <Slot order="order-8">
-          <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe />
+          <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe hideLinkOnMobile />
         </Slot>
         <Slot order="order-9">
           <StationaerBonusBridge />
@@ -115,11 +124,14 @@ const StationaerPage = () => {
         <Slot order="order-11">
           <AmbulantIKKWechsel variant="stationaer" mobileSwipe />
         </Slot>
-        <Slot order="order-12">
+        <Slot order="order-[13]">
           <SalesAiAssist className="bg-[#fbfaf7]" />
         </Slot>
-        {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6). */}
-        <Slot order="order-[13]">
+        {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6).
+            Mobil direkt hinter Tarifwahl und zweitem Versicherer (order-7),
+            damit eine Rückfrage früh möglich ist (Experiment Handy-Conversion
+            10/2026); ab md bleibt er am Ende vor den Fragen. */}
+        <Slot order="order-7">
           <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
         </Slot>
         <Slot order="order-last">

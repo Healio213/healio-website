@@ -65,11 +65,14 @@ const AmbulantPage = () => {
         <div className="order-2 md:contents">
           <HealioAwardsRow size="large" />
         </div>
-        {/* Vier belegte Fakten vor dem Vergleich (Marktanalyse W4, 06.10.2026); mobil direkt nach dem Erklärvideo. */}
+        {/* Mobil direkt nach dem Erklärvideo (Experiment Handy-Conversion 10/2026):
+            erst die Brillen-Karte (nur mobil, Wortlaut aus der FAQ), weil die
+            Brillen-Anzeige ohne Anker hierher führt, dann die vier belegten Fakten
+            vor dem Vergleich (Marktanalyse W4, 06.10.2026). Ab md ist die Karte
+            ausgeblendet, die Reihenfolge am Desktop bleibt dadurch unverändert. */}
         <div className="order-4 md:contents">
-          <AmbulantAufEinenBlick />
-          {/* Experiment: Brillen-Karte nur mobil, Wortlaut aus der FAQ. */}
           <AmbulantBrilleKarte />
+          <AmbulantAufEinenBlick />
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>

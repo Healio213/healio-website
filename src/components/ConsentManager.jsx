@@ -200,9 +200,13 @@ export const ConsentManager = () => {
         }
       `}</style>
 
+      {/* Experiment Handy-Conversion 10/2026: Unter md sitzt der Hinweis unten statt
+          oben, damit er beim ersten Laden nicht die Hauptüberschrift verdeckt. Die
+          Nita-Leiste und der WhatsApp-Knopf blenden sich aus, solange er offen ist
+          (Klasse healio-consent-ui-active). Ab md bleibt alles wie zuvor. */}
       {showBanner && !settingsOpen && !isDentalCheckRoute && (
         <section
-          className="healio-consent-surface fixed inset-x-3 top-[5.25rem] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
+          className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >

@@ -208,7 +208,11 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
             <div className="max-w-2xl">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-healio-primary/25 bg-healio-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-healio-primary md:mb-4">
-                <img src="/images/healio-app-icon.png" alt="" width="1024" height="1024" loading="lazy" decoding="async" className="h-4 w-4 rounded-[0.3rem]" />
+                {/* Experiment Handy-Conversion 10/2026: kleine WebP-Fassung (2 KB) statt des 1024-px-PNG (155 KB) für ein 16-px-Symbol. */}
+                <picture className="flex shrink-0">
+                  <source srcSet="/images/healio-app-icon.webp" type="image/webp" />
+                  <img src="/images/healio-app-icon.png" alt="" width="140" height="140" loading="lazy" decoding="async" className="h-4 w-4 rounded-[0.3rem]" />
+                </picture>
                 {t('footer.appLabel')}
               </div>
               <h3 className="text-2xl font-bold leading-tight text-white md:text-3xl">

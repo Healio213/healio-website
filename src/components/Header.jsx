@@ -12,6 +12,13 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 
 const AMBULANT_CTA_DELAY_MS = 30_000;
+// Experiment Handy-Conversion 10/2026: Unter md (768 px) erscheint der Knopf
+// „Beitrag berechnen“ auf /ambulant nicht erst nach 30 Sekunden, sondern sobald
+// die Brillen-Karte (#ambulant-brille) in die untere Bildhälfte kommt. Fehlt sie,
+// gilt eine Wischtiefe von eineinhalb Bildschirmen. Ab md bleibt es bei der Zeit.
+const AMBULANT_CTA_ANCHOR_ID = 'ambulant-brille';
+const AMBULANT_CTA_FALLBACK_SCREENS = 1.5;
+const PHONE_MAX_WIDTH = 767;
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -74,7 +81,27 @@ const Header = () => {
       setAmbulantCtaReady(true);
     }, AMBULANT_CTA_DELAY_MS);
 
-    return () => window.clearTimeout(timer);
+    // Wischtiefe statt Wartezeit, nur unter md.
+    let frame = 0;
+    const checkDepth = () => {
+      frame = 0;
+      if (window.innerWidth > PHONE_MAX_WIDTH) return;
+      const anchor = document.getElementById(AMBULANT_CTA_ANCHOR_ID);
+      const reached = anchor && anchor.getBoundingClientRect().height > 0
+        ? anchor.getBoundingClientRect().top < window.innerHeight * 0.5
+        : window.scrollY > window.innerHeight * AMBULANT_CTA_FALLBACK_SCREENS;
+      if (reached) setAmbulantCtaReady(true);
+    };
+    const scheduleCheck = () => {
+      if (!frame) frame = window.requestAnimationFrame(checkDepth);
+    };
+    window.addEventListener('scroll', scheduleCheck, { passive: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', scheduleCheck);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [isAmbulant, location.pathname]);
 
   useEffect(() => {
@@ -216,8 +243,10 @@ const Header = () => {
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
         <Link to={getPath('home')} className="flex items-center z-50 group">
           <motion.img
-            src="/healio-logo-white.svg"
+            src="/healio-logo-white-web.svg"
             alt="Healio Logo"
+            width="250"
+            height="100"
             className={cn(
               "w-auto transition-all duration-500",
               showSolidHeader ? "h-8 md:h-10" : "h-10 md:h-12",

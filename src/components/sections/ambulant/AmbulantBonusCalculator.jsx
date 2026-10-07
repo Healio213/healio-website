@@ -333,6 +333,7 @@ const AmbulantBonusCalculator = ({
                             type="button"
                             onClick={() => handleCount(def.id, -1, def.max)}
                             aria-label={`${activity.title}: ${t('bonusCalculator.decrease')}`}
+                            data-healio-nita-avoid
                             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-colors hover:border-healio-primary hover:bg-gray-100 hover:text-healio-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 disabled:opacity-30"
                             disabled={count === 0}
                           >
@@ -343,6 +344,7 @@ const AmbulantBonusCalculator = ({
                             type="button"
                             onClick={() => handleCount(def.id, 1, def.max)}
                             aria-label={`${activity.title}: ${t('bonusCalculator.increase')}`}
+                            data-healio-nita-avoid
                             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-500 transition-colors hover:border-healio-primary hover:bg-gray-100 hover:text-healio-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-healio-primary focus-visible:ring-offset-2 disabled:opacity-30"
                             disabled={count >= def.max}
                           >

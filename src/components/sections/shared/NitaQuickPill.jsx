@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MessageCircle, Sparkles, X } from 'lucide-react';
 import {
@@ -21,7 +21,7 @@ import { trackEvent } from '@/lib/analytics';
 // erscheint über der Leiste eine kleine, wegklickbare Sprechblase „Soll Nita dir
 // das Konzept erklären oder dich beraten?“ mit zwei Knöpfen.
 // - Solange die Sprach-KI aus ist: „Konzept erklären“ springt zum Erklärvideo
-//   der Seite (sonst zum Anfang des Hauptinhalts), „Beraten lassen“ ruft die
+//   der Seite (sonst zu einem Ersatzabschnitt, siehe unten), „Beraten lassen“ ruft die
 //   Nita-Sprachlinie an. Ist sie an, öffnen beide Knöpfe Nita.
 // - Auf /schwangerschaft läuft das Nita-Panel nicht (kein NitaConsentWidget,
 //   Messsperre), dort gilt immer der Telefonweg.
@@ -31,6 +31,16 @@ import { trackEvent } from '@/lib/analytics';
 //   Fokus hat. prefers-reduced-motion: keine Bewegung.
 // - mobileOnly: Leiste und Blase nur unter md (768 px). So bleibt der Desktop
 //   dort wie live, wo die Leiste vorher nicht stand (/ambulant, /stationaer).
+//
+// Experiment Handy-Conversion 10/2026:
+// - „Konzept erklären“ springt ohne Video der Seite zu einem Ersatzziel:
+//   erst Abschnitt mit data-nita-explain-target, dann #so-gehts. Gibt es weder
+//   Video noch Ersatzziel, entfällt der Knopf (statt zum Seitenanfang zu führen).
+// - Unter md weichen Leiste und Blase antippbaren Elementen aus, die mit
+//   data-healio-nita-avoid markiert sind (Zählknöpfe des Bonus-Rechners, Link
+//   zu KassenBoost in „Zwei Wege“): Liegt so ein Element unter der Leiste,
+//   verschwindet die Leiste, liegt es unter der Blase, verschwindet die Blase.
+//   Ab md ändert sich nichts.
 const COPY = {
   de: {
     title: 'Frag Nita',
@@ -65,10 +75,18 @@ const COPY = {
 const SHOW_AFTER_PX = 520;
 const BUBBLE_DELAY_MS = 30_000;
 const DISMISS_KEY = 'healio-nita-bubble-dismissed';
-// Erklärvideo der Seite (Ambulant, Stationär, Zahn). Fehlt es, geht es zum
-// Anfang des Hauptinhalts.
+// Erklärvideo der Seite (Ambulant, Stationär, Zahn). Fehlt es, gilt das
+// Ersatzziel (siehe unten); gibt es auch das nicht, entfällt der Knopf.
 const EXPLAINER_IDS = ['erklaervideo', 'stationaer-erklaervideo', 'zahn-erklaervideo'];
+// Ersatzziel für Seiten ohne Erklärvideo (z. B. /schwangerschaft): ein Abschnitt
+// mit diesem Attribut, sonst der Abschnitt „So geht es“ (#so-gehts).
+const EXPLAIN_FALLBACK_SELECTOR = '[data-nita-explain-target]';
+const EXPLAIN_FALLBACK_IDS = ['so-gehts'];
 const CONTACT_BLOCK_SELECTOR = '[data-healio-contact-block]';
+// Antippbare Elemente, die Leiste und Blase unter md nicht überdecken sollen.
+const AVOID_SELECTOR = '[data-healio-nita-avoid]';
+const AVOID_PAD_PX = 12;
+const PHONE_MAX_WIDTH = 767;
 const FIELD_SELECTOR = [
   'input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"])',
   'textarea',
@@ -98,6 +116,42 @@ const prefersReducedMotion = () => (
   && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 );
 
+const findExplainTarget = () => (
+  EXPLAINER_IDS.map((id) => document.getElementById(id)).find(Boolean)
+  || document.querySelector(EXPLAIN_FALLBACK_SELECTOR)
+  || EXPLAIN_FALLBACK_IDS.map((id) => document.getElementById(id)).find(Boolean)
+  || null
+);
+
+// Überlappen sich zwei Rechtecke (mit etwas Luft rundherum)?
+const rectsOverlap = (a, b, pad = 0) => (
+  a.bottom > b.top - pad && a.top < b.bottom + pad && a.right > b.left - pad && a.left < b.right + pad
+);
+
+// Rechteck der Leiste bzw. Blase in der sichtbaren Ruhelage. Zum Ausblenden
+// rutscht das Element per transform nach unten (Leiste 0,75 rem, Blase 0,5 rem).
+// Würde man am aktuellen Rechteck messen, verschwände die Überlappung durch das
+// Ausblenden selbst, das Element käme zurück, überlappte wieder und flackerte im
+// Sekundentakt (Experiment Handy-Conversion 10/2026). Darum wird der aktuelle
+// Versatz (auch mitten in der Bewegung) wieder abgezogen.
+const restingRect = (element) => {
+  const rect = element.getBoundingClientRect();
+  let shiftY = 0;
+  try {
+    shiftY = new DOMMatrixReadOnly(window.getComputedStyle(element).transform).m42 || 0;
+  } catch {
+    shiftY = 0;
+  }
+  return {
+    top: rect.top - shiftY,
+    bottom: rect.bottom - shiftY,
+    left: rect.left,
+    right: rect.right,
+    width: rect.width,
+    height: rect.height,
+  };
+};
+
 const isOnScreen = (element, bottomShare = 1) => {
   const rect = element.getBoundingClientRect();
   if (!rect.width && !rect.height) return false;
@@ -111,6 +165,10 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
   const [scrolledEnough, setScrolledEnough] = useState(false);
   const [blockedByTarget, setBlockedByTarget] = useState(false);
   const [fieldInView, setFieldInView] = useState(false);
+  const [explainAvailable, setExplainAvailable] = useState(true);
+  const [bubbleAvoided, setBubbleAvoided] = useState(false);
+  const pillRef = useRef(null);
+  const bubbleRef = useRef(null);
   const [bubbleDue, setBubbleDue] = useState(false);
   const [bubbleDismissed, setBubbleDismissed] = useState(readDismissed);
   const hideKey = hideNearIds.join('|');
@@ -129,7 +187,23 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
         document.querySelector('footer'),
         ...document.querySelectorAll(CONTACT_BLOCK_SELECTOR),
       ].filter(Boolean);
-      setBlockedByTarget(targets.some((target) => isOnScreen(target, 0.9)));
+      // Unter md: antippbaren Elementen ausweichen (nur wenn sie wirklich unter
+      // Leiste oder Blase liegen, nicht schon, wenn sie irgendwo im Bild sind).
+      let avoidPill = false;
+      let avoidBubble = false;
+      if (window.innerWidth <= PHONE_MAX_WIDTH) {
+        const pillRect = pillRef.current ? restingRect(pillRef.current) : null;
+        const bubbleRect = bubbleRef.current ? restingRect(bubbleRef.current) : null;
+        document.querySelectorAll(AVOID_SELECTOR).forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          if (!rect.width && !rect.height) return;
+          if (pillRect && rectsOverlap(rect, pillRect, AVOID_PAD_PX)) avoidPill = true;
+          if (bubbleRect && rectsOverlap(rect, bubbleRect, AVOID_PAD_PX)) avoidBubble = true;
+        });
+      }
+      setBubbleAvoided(avoidBubble);
+      setBlockedByTarget(avoidPill || targets.some((target) => isOnScreen(target, 0.9)));
+      setExplainAvailable(Boolean(findExplainTarget()));
       const focused = document.activeElement;
       setFieldInView(
         Boolean(focused && focused.matches && focused.matches(FIELD_SELECTOR))
@@ -170,7 +244,10 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
   }, []);
 
   const isShown = scrolledEnough && !blockedByTarget;
-  const bubbleShown = isShown && bubbleDue && !bubbleDismissed && !fieldInView;
+  const bubbleShown = isShown && bubbleDue && !bubbleDismissed && !fieldInView && !bubbleAvoided;
+  // „Konzept erklären“ braucht ein Ziel: Nita selbst (Sprach-KI an) oder ein
+  // Erklärvideo bzw. Ersatzabschnitt auf der Seite.
+  const showExplain = webAvailable || explainAvailable;
 
   const handleExplain = () => {
     trackEvent('nita_blase_geklickt', { aktion: 'konzept' });
@@ -179,17 +256,14 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
       requestNitaConsent('quick_pill_bubble_concept');
       return;
     }
-    const target = EXPLAINER_IDS.map((id) => document.getElementById(id)).find(Boolean)
-      || document.querySelector('main');
+    const target = findExplainTarget();
     if (!target) return;
     target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-    if (target.tagName !== 'MAIN') {
-      // Fokus mitnehmen, damit die Tastatur dort weitermacht, wo der Inhalt jetzt steht.
-      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-      // Der Abschnitt ist nicht bedienbar; ein Fokusrahmen wäre dort nur Rauschen.
-      target.style.outline = 'none';
-      target.focus({ preventScroll: true });
-    }
+    // Fokus mitnehmen, damit die Tastatur dort weitermacht, wo der Inhalt jetzt steht.
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    // Der Abschnitt ist nicht bedienbar; ein Fokusrahmen wäre dort nur Rauschen.
+    target.style.outline = 'none';
+    target.focus({ preventScroll: true });
   };
 
   const handleAdviseWeb = () => {
@@ -266,6 +340,7 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
 
       {bubbleDue && !bubbleDismissed && (
         <div
+          ref={bubbleRef}
           role="group"
           aria-label={copy.bubbleLabel}
           data-shown={bubbleShown ? 'true' : 'false'}
@@ -274,14 +349,16 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
         >
           <p className="pr-9 font-display text-base font-extrabold leading-snug">{copy.bubbleText}</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={handleExplain}
-              tabIndex={bubbleShown ? undefined : -1}
-              className={`${bubbleButton} bg-home-mint text-home-midnight hover:bg-home-mint-active`}
-            >
-              {copy.explain}
-            </button>
+            {showExplain && (
+              <button
+                type="button"
+                onClick={handleExplain}
+                tabIndex={bubbleShown ? undefined : -1}
+                className={`${bubbleButton} bg-home-mint text-home-midnight hover:bg-home-mint-active`}
+              >
+                {copy.explain}
+              </button>
+            )}
             {webAvailable ? (
               <button
                 type="button"
@@ -327,6 +404,7 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
       )}
 
       <div
+        ref={pillRef}
         className={`healio-nita-pill ${mobileOnly ? 'healio-nita-pill--mobile-only' : ''} flex w-max items-center whitespace-nowrap gap-1 rounded-full border border-home-mint/60 bg-home-midnight p-1 shadow-[0_0_0_4px_rgba(37,201,144,0.12),0_18px_40px_rgba(7,17,31,0.35)]`}
         data-shown={isShown ? 'true' : 'false'}
         aria-hidden={isShown ? undefined : 'true'}

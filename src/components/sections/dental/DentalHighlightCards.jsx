@@ -5,6 +5,7 @@ import { AlertCircle, ArrowRight, Check, ChevronLeft, ChevronRight, Plus, X } fr
 import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import { useLanguage } from '@/hooks/useLanguage';
 import { trackEvent } from '@/lib/analytics';
+import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 
 // Experiment 05.10.2026 nach dem Vorbild der Highlight-Karten auf
 // mercedes-benz.de: wischbare Karten mit großem Bildteil und dunklem
@@ -99,7 +100,22 @@ const COPY = {
 const GAP_PX = 12;
 
 const scrollToId = (id, reduceMotion) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  // Experiment Handy-Conversion 10/2026: Der Check springt am Handy zur Fragekarte.
+  if (id === 'zahn-check') {
+    scrollToZahnCheck(reduceMotion);
+    return;
+  }
+  const target = document.getElementById(id);
+  // Das Rückruf-Formular ist am Handy ausgeblendet, dort gilt der Kontaktblock
+  // (Telefon, WhatsApp, Termin). Abstand nach oben für die feste Kopfleiste.
+  if (target && !target.getClientRects().length) {
+    const contact = document.querySelector('[data-healio-contact-block]');
+    if (contact) {
+      window.scrollTo({ top: contact.getBoundingClientRect().top + window.scrollY - 96, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    return;
+  }
+  target?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
 };
 
 const buildCardContent = (card, content, language) => {
@@ -206,7 +222,7 @@ const DentalHighlightCards = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-24" aria-labelledby="zahn-highlights-heading">
+    <section id="zahn-highlights" className="relative overflow-hidden bg-white py-16 md:py-24" aria-labelledby="zahn-highlights-heading">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-6">
           <div className="max-w-2xl">
@@ -249,7 +265,9 @@ const DentalHighlightCards = () => {
             const tone = TONES[card.tone];
             const isDark = card.tone === 'mintDeep';
             return (
-              <li key={card.key} data-highlight-card className="relative w-[84vw] max-w-[23.5rem] shrink-0 snap-start sm:w-[22.5rem]">
+              // Experiment Handy-Conversion 10/2026: "Beitrag finanzieren" wiederholt am Handy
+              // den KassenBoost-Abschnitt weiter unten und entfällt dort; ab md unverändert.
+              <li key={card.key} data-highlight-card className={`relative w-[84vw] max-w-[23.5rem] shrink-0 snap-start sm:w-[22.5rem] ${card.key === 'bonus' ? 'hidden md:list-item' : ''}`}>
                 <button
                     type="button"
                     onClick={(event) => {
@@ -313,7 +331,7 @@ const DentalHighlightCards = () => {
               onClick={() => scrollToCard(index)}
               aria-label={copy.goTo.replace('{{n}}', String(index + 1))}
               aria-current={index === activeIndex ? 'true' : undefined}
-              className="home-focus flex h-6 items-center"
+              className={`home-focus h-6 items-center ${card.key === 'bonus' ? 'hidden md:flex' : 'flex'}`}
             >
               <span className={`block h-1.5 rounded-full transition-all duration-300 motion-reduce:transition-none ${index === activeIndex ? 'w-8 bg-[#07111f]' : 'w-3 bg-slate-300'}`} />
             </button>

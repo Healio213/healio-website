@@ -11,6 +11,24 @@ import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantCo
 const potBorders = ['border-[#c9dcef]', 'border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]'];
 const potDots = ['bg-[#5b8fd1]', 'bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]'];
 
+// Experiment Handy-Conversion 10/2026: mobil ist der Budget-Kompass ohne Höhe
+// (er wiederholt die vier Themen dieser Kacheln und nennt keine Beträge). Der
+// href bleibt überall '#budget-kompass'; mobil liegt dieser Anker direkt vor der
+// Tarifwahl und funktioniert auch vor dem Laden des Skripts. Nur die
+// Sehhilfen-Kachel springt unter md zusätzlich zur Brillen-Karte. Die Abfrage
+// läuft erst beim Klick, das gerenderte HTML ist am Handy und am Desktop gleich.
+const MOBILE_QUERY = '(max-width: 767px)';
+const jumpOnMobile = (targetId) => (event) => {
+  if (!window.matchMedia(MOBILE_QUERY).matches) return;
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  event.preventDefault();
+  target.scrollIntoView({
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    block: 'start',
+  });
+};
+
 // Hero wie auf /stationaer (Frank 30.09.2026): dunkler Grund, links Text und
 // Budget-Button, rechts die Karte mit dem Budget der höchsten Stufe und ihren
 // vier Töpfen. Beträge kommen aus denselben Tarifdaten wie die Tarifwahl.
@@ -125,6 +143,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 <a
                   key={pot.key}
                   href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
+                  onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')}
                   className={`group block h-full rounded-2xl border bg-white/95 p-4 shadow-[0_2px_6px_rgba(39,63,72,0.08)] transition md:shadow-[0_12px_30px_rgba(39,63,72,0.10)] md:hover:-translate-y-0.5 md:hover:bg-white md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${potBorders[index % potBorders.length]}`}
                 >
                   <span className="flex items-center justify-between gap-2">

@@ -42,6 +42,10 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
   const [runKey, setRunKey] = useState(0);
   const [staticView, setStaticView] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  // Experiment Handy-Conversion 10/2026: Film und Startbild laden erst, wenn die
+  // Szene in die Nähe des Bildschirms kommt (rund 800 px davor), nicht schon
+  // beim Seitenaufruf. Das Aussehen ändert sich nicht.
+  const [nearScene, setNearScene] = useState(false);
   const activeVariant = VALID_VARIANTS.has(variant) ? variant : 'ambulant';
   const variantKey = `ikkWechsel.threeD.variants.${activeVariant}`;
 
@@ -49,10 +53,34 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
     const scene = sceneRef.current;
     const video = videoRef.current;
     if (!scene || !video) return undefined;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Film erst jetzt laden. Hat ein Abspielbefehl das Laden schon angestoßen,
+    // läuft es einfach weiter.
+    const loadFilm = () => {
+      if (video.preload === 'auto') return;
+      video.preload = 'auto';
+      if (video.readyState === 0 && video.networkState !== 2) video.load();
+    };
+    const nearObserver = typeof IntersectionObserver === 'function'
+      ? new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNearScene(true);
+        if (!reduceMotion) loadFilm();
+        nearObserver.disconnect();
+      }, { rootMargin: '800px 0px' })
+      : null;
+    if (nearObserver) nearObserver.observe(scene);
+    else {
+      // Ohne IntersectionObserver gleich laden wie bisher.
+      setNearScene(true);
+      if (!reduceMotion) loadFilm();
+    }
+
+    if (reduceMotion) {
       setStaticView(true);
       setIsInView(true);
-      return undefined;
+      return () => nearObserver?.disconnect();
     }
 
     // Film und HTML-Einblendungen pausieren gemeinsam ausserhalb des
@@ -114,6 +142,7 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
 
     return () => {
       clearRestartTimer();
+      nearObserver?.disconnect();
       observer.disconnect();
       video.removeEventListener('play', onPlay);
       video.removeEventListener('timeupdate', onTimeUpdate);
@@ -132,10 +161,10 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
       <video
         ref={videoRef}
         className="ikk-clay-journey__film"
-        poster={staticView ? '/videos/ikk-bridge-walk-poster.jpg?v=dreamina-1' : '/videos/ikk-bridge-walk-start-poster.jpg?v=dreamina-1'}
+        poster={nearScene ? (staticView ? '/videos/ikk-bridge-walk-poster.jpg?v=dreamina-1' : '/videos/ikk-bridge-walk-start-poster.jpg?v=dreamina-1') : undefined}
         muted
         playsInline
-        preload="auto"
+        preload="none"
         aria-hidden="true"
         tabIndex={-1}
       >
@@ -667,6 +696,21 @@ const IkkSwitch3DScene = ({ variant = 'ambulant' }) => {
         /* Nur Handy (Experiment 06.10.2026): Beschriftungen mindestens 14 px,
            Kartentitel 16 px. Von 768 px an bleibt alles wie bisher. */
         @media (max-width: 767px) {
+          /* Experiment Handy-Conversion 10/2026: Am Handy stehen die Karten über und
+             unter dem Film und halten ihren Platz ohnehin frei. Sie sind deshalb
+             von Anfang an sichtbar (wie in der ruhigen Ansicht), statt erst nach
+             bis zu 9 Sekunden aufzutauchen; sonst sähe die Szene zuerst fast leer
+             aus. Der Film läuft daneben weiter, die Zielkarte pulsiert wie bisher
+             bei der Ankunft. */
+          .ikk-clay-journey__continuity,
+          .ikk-clay-journey__fund,
+          .ikk-clay-journey__outcome {
+            opacity: 1;
+            animation: none;
+          }
+          .ikk-clay-journey__fund--destination {
+            animation: ikk-fund-glow 1.95s ease-out 8.02s 3;
+          }
           .ikk-clay-journey__continuity strong { font-size: 1rem; }
           .ikk-clay-journey__continuity small,
           .ikk-clay-journey__fund small,

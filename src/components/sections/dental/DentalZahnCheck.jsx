@@ -16,6 +16,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 import { getDentalContent } from './dentalContent';
+import { ZAHN_CHECK_CARD_ID } from './zahnCheckScroll';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
@@ -188,7 +189,10 @@ const DentalZahnCheck = () => {
             {content.subtitle}
           </p>
 
-          <div className="mt-5 inline-flex max-w-full items-center gap-3 rounded-[1.65rem] border border-[#efd99b]/70 bg-[#fff8df] p-2 pr-5 text-[#07111f] shadow-[0_18px_46px_rgba(0,0,0,0.22)] sm:gap-4 sm:pr-6 md:mt-8">
+          {/* Experiment Handy-Conversion 10/2026: Stempel und Fortschrittspunkte nur ab md.
+              Am Handy stehen "1 Minute. Keine Kontaktdaten." und "Frage 1 von höchstens 4"
+              schon darüber und in der Karte, so rückt die erste Antwort nach dem Sprung ins erste Bild. */}
+          <div className="mt-5 hidden max-w-full items-center gap-3 rounded-[1.65rem] border border-[#efd99b]/70 bg-[#fff8df] p-2 pr-5 text-[#07111f] shadow-[0_18px_46px_rgba(0,0,0,0.22)] sm:gap-4 sm:pr-6 md:mt-8 md:inline-flex">
             <FriendlyIcon kind="choice" tone="butter" size="sm" className="-rotate-3 md:h-20 md:w-20 md:rounded-[1.55rem] md:text-[2.75rem]" />
             <div className="min-w-0 md:py-1">
               <p className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-[#77570c] md:text-xs md:tracking-[0.18em]">
@@ -203,7 +207,7 @@ const DentalZahnCheck = () => {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center gap-2 md:mt-8" aria-label={fillTemplate(content.progress, { current: progress })}>
+          <div className="mt-4 hidden items-center gap-2 md:mt-8 md:flex" aria-label={fillTemplate(content.progress, { current: progress })}>
             {QUESTION_ORDER.map((id, index) => {
               const active = index < progress;
               return (
@@ -223,7 +227,7 @@ const DentalZahnCheck = () => {
 
         <div className="relative">
           <span className="absolute left-1/2 top-0 z-20 h-3 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8c89d] bg-[#fff5d5] shadow-sm" aria-hidden="true" />
-          <div ref={cardRef} className="min-h-[26rem] scroll-mt-20 overflow-hidden rounded-[2rem] border border-[#e8dcc0] bg-[#fffdf8] p-5 text-[#07111f] shadow-[0_32px_90px_rgba(0,0,0,0.32)] sm:p-10 md:min-h-[31rem] md:scroll-mt-0 md:rounded-[2.5rem]">
+          <div ref={cardRef} id={ZAHN_CHECK_CARD_ID} className="min-h-[26rem] scroll-mt-20 overflow-hidden rounded-[2rem] border border-[#e8dcc0] bg-[#fffdf8] p-5 text-[#07111f] shadow-[0_32px_90px_rgba(0,0,0,0.32)] sm:p-10 md:min-h-[31rem] md:scroll-mt-0 md:rounded-[2.5rem]">
             <AnimatePresence mode="wait">
               {!result && question && (
                 <motion.div

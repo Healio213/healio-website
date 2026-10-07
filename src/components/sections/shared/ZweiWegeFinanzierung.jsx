@@ -85,7 +85,16 @@ const LAYOUT = {
 
 // mobileSwipe (Standard false): nur die Zahnseite schaltet die kompakte
 // Handy-Anordnung ein (Experiment 05.10.2026).
-const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white', mobileSwipe = false }) => {
+// hideLinkOnMobile (Standard false, Experiment Handy-Conversion 10/2026): blendet
+// den Verweis zu KassenBoost unter md (768 px) aus, wenn derselbe Verweis in
+// einem Bonus-Abschnitt der Seite sichtbar bleibt (nur ein Verweis pro Strecke
+// am Handy). Ab md steht er weiterhin immer da.
+const ZweiWegeFinanzierung = ({
+  produkt = 'ambulant',
+  className = 'bg-white',
+  mobileSwipe = false,
+  hideLinkOnMobile = false,
+}) => {
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
   const copy = COPY[language];
@@ -100,7 +109,11 @@ const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white', mo
           <div>
             <h2 id={`zwei-wege-${produkt}-heading`} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight [text-wrap:balance] sm:text-3xl">{fill(copy.title)}</h2>
             <p className={ui.lead}>{copy.lead}</p>
-            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className={`home-focus inline-flex items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950 ${ui.cta}`}>
+            <Link
+              to={language === 'en' ? '/en/kassenboost' : '/kassenboost'}
+              data-healio-nita-avoid
+              className={`home-focus inline-flex items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950 ${hideLinkOnMobile ? 'max-md:hidden' : ''} ${ui.cta}`}
+            >
               {copy.cta}
               <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>

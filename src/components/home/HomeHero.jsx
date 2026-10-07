@@ -56,10 +56,12 @@ const HomeHero = () => {
     },
   });
 
+  // Experiment Handy-Conversion 10/2026: Unter sm etwas dichter (Kopfabstand, Zeilenhöhe, Abstände der Einstiegskarte),
+  // damit der Knopf der ersten Karte auch bei 360 x 740 im ersten Bild liegt. Ab sm unverändert.
   return (
     <section
       ref={heroRef}
-      className="relative isolate flex min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-28 text-white sm:min-h-[860px] lg:min-h-screen lg:pt-32"
+      className="relative isolate flex min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
       aria-labelledby="home-hero-heading"
     >
       <picture className="absolute inset-0 -z-30 overflow-hidden">
@@ -107,12 +109,12 @@ const HomeHero = () => {
             </span>
           </motion.h1>
 
-          <motion.p {...entrance(0.17)} className="mt-5 max-w-2xl text-base font-medium leading-7 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
+          <motion.p {...entrance(0.17)} className="mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
             {t('hero.description')}
           </motion.p>
 
-          <motion.nav {...entrance(0.24)} className="mt-7 sm:mt-9" aria-label={t('hero.switchLabel')}>
-            <p className="home-eyebrow mb-3 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
+          <motion.nav {...entrance(0.24)} className="mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
+            <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
             {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
             <MobileSwipeRow
               label={t('hero.switchLabel')}
@@ -133,11 +135,11 @@ const HomeHero = () => {
                       <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
                       <span className="font-display text-lg font-extrabold leading-tight text-white">{item.title}</span>
                     </div>
-                    <p className="mt-3 text-base leading-6 text-white/85 md:text-sm md:leading-6">{item.description}</p>
+                    <p className="mt-2 text-base leading-6 text-white/85 sm:mt-3 md:text-sm md:leading-6">{item.description}</p>
                     {item.example && (
                       <p className="mt-1.5 text-sm leading-5 text-home-mint-active md:text-xs md:leading-5">{item.example}</p>
                     )}
-                    <span className="mt-auto pt-5">
+                    <span className="mt-auto pt-3 sm:pt-5">
                       <span className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-5 py-2.5 font-display text-sm font-extrabold text-home-midnight shadow-[0_10px_26px_rgba(37,201,144,0.22)] transition group-hover:bg-home-mint-active">
                         {item.cta}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />

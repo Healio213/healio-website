@@ -50,8 +50,11 @@ const StationaerHero = () => {
           </a>
 
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-slate-300 md:text-sm">
-            {t('refresh.hero.micro', { returnObjects: true }).map((item) => (
-              <span key={item} className="inline-flex items-center gap-2">
+            {/* Mobil nur der Wartezeit-Hinweis (Eintrag 1): "Drei Tarifwege klar
+                getrennt" (Eintrag 0) wiederholt die Auswahlkarte direkt darunter
+                (Experiment Handy-Conversion 10/2026). Ab md bleiben beide. */}
+            {t('refresh.hero.micro', { returnObjects: true }).map((item, index) => (
+              <span key={item} className={`inline-flex items-center gap-2${index === 0 ? ' max-md:hidden' : ''}`}>
                 <Check className="h-4 w-4 text-[#5ee0b1]" aria-hidden="true" />
                 {item}
               </span>

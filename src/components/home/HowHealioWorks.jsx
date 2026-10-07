@@ -34,7 +34,8 @@ const HowHealioWorks = () => {
               {t('process.title')}
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:justify-self-end">{t('process.description')}</p>
+          {/* Experiment Handy-Conversion 10/2026: Einleitung wiederholt Überschrift und Karten; am Handy ausgeblendet, ab md unverändert. */}
+          <p className="hidden max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 md:block lg:justify-self-end">{t('process.description')}</p>
         </div>
 
         {/* Mobil Wischreihe (drei Schritte), ab md das bisherige Dreier-Raster. */}

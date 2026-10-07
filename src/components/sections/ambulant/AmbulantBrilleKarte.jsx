@@ -2,19 +2,20 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
 import { useLanguage } from '@/hooks/useLanguage';
+import { BRILLE_QUESTION } from '@/components/sections/ambulant/ambulantBrilleFrage';
 
-// Experiment 06.10.2026 (Franks Wunsch zur Brillen-Kampagne, die ohne Anker auf
+// Experiment 06.10.2026 (Brillen-Kampagne, die ohne Anker auf
 // /ambulant führt): mobil eine eigene Karte für Brille und Kontaktlinsen direkt
-// unter „Auf einen Blick“. Frage und Antwort kommen wortgleich aus der
+// unter dem Erklärvideo (Experiment Handy-Conversion 10/2026: vor „Auf einen
+// Blick“). Frage und Antwort kommen wortgleich aus der
 // geprüften FAQ (ambulantFaqs.js), damit es keine zweite Fassung gibt. Ab md
 // ausgeblendet; dort steht dieselbe Antwort in der FAQ.
-const QUESTION = { de: 'Was gilt für Brille und Kontaktlinsen?', en: 'What applies to glasses and contact lenses?' };
 const CTA = { de: 'Tarif wählen', en: 'Choose your plan' };
 
 const AmbulantBrilleKarte = () => {
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
-  const faq = AMBULANT_FAQS[language].find((item) => item.q === QUESTION[language]);
+  const faq = AMBULANT_FAQS[language].find((item) => item.q === BRILLE_QUESTION[language]);
   if (!faq) return null;
 
   const goToTariffs = (event) => {
@@ -25,7 +26,9 @@ const AmbulantBrilleKarte = () => {
   };
 
   return (
-    <section className="bg-white px-4 pb-8 pt-2 md:hidden" aria-labelledby="ambulant-brille-titel">
+    // Experiment Handy-Conversion 10/2026: die Karte steht mobil direkt unter dem
+    // Erklärvideo (Anker für die Sehhilfen-Kachel im Einstieg), daher mehr Luft oben.
+    <section id="ambulant-brille" className="scroll-mt-20 bg-white px-4 pb-8 pt-8 md:hidden" aria-labelledby="ambulant-brille-titel">
       <div className="relative overflow-hidden rounded-[1.75rem] border border-emerald-900/10 bg-home-ice p-5">
         <div className="flex items-center gap-4">
           <img

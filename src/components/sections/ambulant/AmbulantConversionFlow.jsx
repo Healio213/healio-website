@@ -26,6 +26,7 @@ import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVor
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
+import { BRILLE_QUESTION } from '@/components/sections/ambulant/ambulantBrilleFrage';
 
 const COPY = {
   de: {
@@ -390,7 +391,13 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         />
       )}
 
-      <section id="budget-kompass" className="order-4 scroll-mt-20 bg-home-ice px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
+      {/* Experiment Handy-Conversion 10/2026: mobil unsichtbar und ohne Höhe. Die vier
+          Themen stehen schon in den Kacheln im Einstieg, der Kompass nennt keine
+          Beträge und führte Brillen-Besucher in eine Sackgasse. Der Abschnitt bleibt
+          als Sprungziel erhalten: die Einstiegs-Knöpfe (href '#budget-kompass')
+          landen mobil direkt vor der Tarifwahl, auch bevor das Skript geladen ist.
+          Ab md sind Höhe, Sichtbarkeit und Abstände wie zuvor. */}
+      <section id="budget-kompass" className="invisible order-4 h-0 scroll-mt-20 overflow-hidden bg-home-ice px-4 py-0 sm:px-6 md:visible md:order-none md:h-auto md:overflow-visible md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
             <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.compass.eyebrow}</p>
@@ -431,7 +438,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
             <div className="relative overflow-hidden rounded-[2rem] bg-home-midnight p-5 text-white shadow-[0_24px_70px_rgba(7,17,31,0.18)] sm:p-8 md:z-[2]">
               <div className="absolute -right-10 -top-12 h-48 w-48 rounded-full border border-home-mint/15" />
-              <img src="/images/friendly-icons/decision-thinking.webp" alt="" className="absolute right-3 top-3 h-20 w-20 object-contain opacity-95 sm:h-32 sm:w-32" aria-hidden="true" />
+              <img src="/images/friendly-icons/decision-thinking.webp" alt="" loading="lazy" decoding="async" className="absolute right-3 top-3 h-20 w-20 object-contain opacity-95 sm:h-32 sm:w-32" aria-hidden="true" />
               <div className="relative max-w-[72%] sm:max-w-[68%]">
                 <p className="font-display text-sm font-extrabold uppercase tracking-[0.1em] text-home-mint-active md:text-xs md:tracking-[0.2em]">{copy.compass.resultEyebrow}</p>
                 <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight md:mt-3">{goal.title}</h3>
@@ -583,9 +590,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 <caption className="sr-only">{copy.tiers.overviewTitle}</caption>
                 <thead>
                   <tr className="border-b border-slate-200 text-sm font-bold normal-case tracking-normal text-slate-500 md:text-xs md:uppercase md:tracking-[0.12em]">
-                    <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.overviewTier}</th>
+                    <th scope="col" className="py-3 pl-3 pr-1 sm:px-6">{copy.tiers.overviewTier}</th>
                     <th scope="col" className="hidden px-3 py-3 sm:table-cell sm:px-6">{copy.tiers.refund}</th>
-                    <th scope="col" className="px-3 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
+                    <th scope="col" className="px-2 py-3 sm:px-6">{copy.tiers.overviewBudget}</th>
                     <th scope="col" className="px-3 py-3 text-right sm:px-6">{altersgruppe ? copy.tiers.overviewPriceGroup.replace('{{group}}', gruppenName(altersgruppe)) : copy.tiers.overviewPriceRange}</th>
                   </tr>
                 </thead>
@@ -596,11 +603,14 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       aria-current={item.id === tier.id ? 'true' : undefined}
                       className={`border-b border-slate-100 text-sm last:border-b-0 ${item.id === tier.id ? 'bg-emerald-50/70' : ''}`}
                     >
-                      <th scope="row" className="px-3 py-3 font-display text-base font-extrabold text-home-midnight sm:px-6 sm:py-3.5">
+                      <th scope="row" className="py-3 pl-3 pr-1 font-display text-base font-extrabold text-home-midnight sm:px-6 sm:py-3.5">
                         Ambulant {item.id} · {item.code}
+                        {/* Experiment Handy-Conversion 10/2026: Sehhilfen-Betrag je Stufe unter dem Stufennamen,
+                            nur mobil (vorhandene Bezeichnung und Werte, keine zusätzliche Spalte). */}
+                        <span className="mt-0.5 block whitespace-nowrap font-sans text-xs font-semibold leading-5 text-home-slate md:hidden">{copy.tiers.pots.vision.label} {euro.format(item.pots.vision)}</span>
                       </th>
                       <td className="hidden px-3 py-3 text-home-slate sm:table-cell sm:px-6 sm:py-3.5">{item.refund}</td>
-                      <td className="px-3 py-3 text-home-slate sm:px-6 sm:py-3.5">{euro.format(item.budget)}</td>
+                      <td className="px-2 py-3 text-home-slate sm:px-6 sm:py-3.5">{euro.format(item.budget)}</td>
                       <td className="px-3 py-3 text-right font-display font-extrabold text-home-midnight sm:whitespace-nowrap sm:px-6 sm:py-3.5">
                         {beitragFuer(item) !== null
                           ? monthlyEuro.format(beitragFuer(item))
@@ -640,7 +650,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 </table>
               </div>
             </details>
-            <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5">{copy.tiers.visionNote} {copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
+            <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5"><span className="hidden md:inline">{copy.tiers.visionNote} </span>{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
 
           {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
@@ -667,7 +677,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         <AmbulantIKKWechsel variant="ambulant" mobileSwipe />
       </div>
 
-      <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe />
+      <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe hideLinkOnMobile />
 
       <section className="order-8 bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-6 md:gap-10 lg:grid-cols-[0.82fr_1.18fr]">
@@ -677,7 +687,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <div className="absolute inset-8 rounded-full bg-home-mint/20 blur-3xl" />
             {/* Mobil Bild und Aussage nebeneinander statt untereinander (spart rund 250 px). */}
             <div className="relative flex items-center gap-3 overflow-hidden rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#123241] to-home-midnight p-4 shadow-2xl md:block md:p-6">
-              <img src="/images/friendly-icons/decision-weighing.webp" alt="" className="h-24 w-24 shrink-0 object-contain md:mx-auto md:h-64 md:w-64" aria-hidden="true" />
+              <img src="/images/friendly-icons/decision-weighing.webp" alt="" loading="lazy" decoding="async" className="h-24 w-24 shrink-0 object-contain md:mx-auto md:h-64 md:w-64" aria-hidden="true" />
               <div className="min-w-0 flex-1 rounded-2xl border border-home-mint/25 bg-home-mint/10 px-4 py-3 text-center md:flex-none md:px-5 md:py-4">
                 <p className="font-display text-3xl font-extrabold tracking-[-0.04em] text-home-mint-active md:text-4xl">{copy.bonus.value}</p>
                 <p className="mt-1 text-sm font-semibold text-slate-200">{copy.bonus.valueLabel}</p>
@@ -785,7 +795,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   </Link>
                 )}
               </div>
-              <img src="/images/friendly-icons/decision-choice.webp" alt="" className="mx-auto hidden h-48 w-48 object-contain md:block" aria-hidden="true" />
+              <img src="/images/friendly-icons/decision-choice.webp" alt="" loading="lazy" decoding="async" className="mx-auto hidden h-48 w-48 object-contain md:block" aria-hidden="true" />
             </div>
           </div>}
 
@@ -830,8 +840,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         <div className="mx-auto max-w-4xl">
           <h2 className="text-center font-display text-3xl font-extrabold tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.faqTitle}</h2>
           <div className="mt-6 space-y-2 md:mt-10 md:space-y-3">
+            {/* Experiment Handy-Conversion 10/2026: die Brillen-Frage steht mobil schon als Karte
+                unter dem Erklärvideo; die Antwort im FAQ-Schema bleibt unverändert. */}
             {copy.faqs.map((faq) => (
-              <details key={faq.q} className="group rounded-2xl border border-slate-200 bg-[#fbfcfc] px-5 py-1" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+              <details key={faq.q} className={`group rounded-2xl border border-slate-200 bg-[#fbfcfc] px-5 py-1${faq.q === BRILLE_QUESTION[language] ? ' hidden md:block' : ''}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <summary className="home-focus flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-display text-base font-extrabold text-home-midnight sm:text-lg md:min-h-0 md:py-5 [&::-webkit-details-marker]:hidden">
                   <span itemProp="name">{faq.q}</span>
                   <ChevronDown className="h-5 w-5 shrink-0 text-home-mint transition group-open:rotate-180" />
@@ -846,7 +858,8 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <p className="relative font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.finalEyebrow}</p>
             <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{copy.finalTitle}</h2>
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
-            <p className="relative mx-auto mt-4 max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
+            {/* Mobil ausgeblendet (Experiment Handy-Conversion 10/2026): derselbe Hinweis steht unter dem Knopf der Tarifwahl. */}
+            <p className="relative mx-auto mt-4 hidden max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}

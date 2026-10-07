@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
@@ -13,6 +13,7 @@ import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCa
 import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
 import NitaQuickPill from '@/components/sections/shared/NitaQuickPill';
 import { getDentalContent } from '@/components/sections/dental/dentalContent';
+import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
@@ -60,7 +61,26 @@ const scrollToCheck = (event, reduceMotion) => {
   // der Klick auf einen Versicherer-Link im Ergebnis des Checks, ohne Inhalt
   // (keine Antworten, kein Versicherer, siehe DentalZahnCheck.jsx).
   trackMetaRechnerStart();
-  document.getElementById('zahn-check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  // Experiment Handy-Conversion 10/2026: am Handy direkt zur Fragekarte, ab md zum Abschnitt.
+  scrollToZahnCheck(reduceMotion);
+};
+
+// Experiment Handy-Conversion 10/2026: Nur am Handy (unter md) zieht sich die
+// Nita-Leiste auch vom Karten-Abschnitt zurück, weil sie dort nach 30 Sekunden
+// Titel und Knöpfe der Karte "Behandlung schon angeraten" verdeckt. Ab md bleibt
+// die Leiste wie bisher. Die Liste wird erst im Browser gesetzt; die Leiste selbst
+// erscheint ohnehin erst nach dem Scrollen, das vorgerenderte HTML bleibt gleich.
+const ZahnNitaPill = () => {
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return undefined;
+    const query = window.matchMedia('(max-width: 767px)');
+    const update = () => setPhone(query.matches);
+    update();
+    query.addEventListener?.('change', update);
+    return () => query.removeEventListener?.('change', update);
+  }, []);
+  return <NitaQuickPill hideNearIds={phone ? ['zahn-highlights', 'zahn-check', 'zahn-kontakt'] : ['zahn-check', 'zahn-kontakt']} />;
 };
 
 const ZahnPage = () => {
@@ -140,11 +160,14 @@ const ZahnPage = () => {
                 </ul>
               </motion.div>
 
+              {/* Experiment Handy-Conversion 10/2026: Der Angebotskasten steht nur ab md im
+                  Hero. Am Handy zeigen "Auf einen Blick" dieselben Situationen kurz darunter;
+                  so steht jede nur einmal da und der Hero schrumpft auf etwa einen Bildschirm. */}
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, scale: 0.97, y: 16 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.1 }}
-                className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
+                className="relative mx-auto hidden min-w-0 w-full max-w-[35rem] md:block lg:mx-0"
                 aria-label={content.hero.offersAria}
               >
                 <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:rounded-[2.2rem] sm:p-7">
@@ -220,7 +243,10 @@ const ZahnPage = () => {
 
         <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-paths-heading">
           <div className="healio-container">
-            <div className="max-w-5xl">
+            {/* Experiment Handy-Conversion 10/2026: Kopf und Einleitung (wiederholen den Zahn-Check
+                direkt davor) nur ab md. Die Wege-Karten mit den Voraussetzungen und der Hinweis
+                zur Annahme bleiben am Handy sichtbar. */}
+            <div className="hidden max-w-5xl md:block">
               <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#087654]">{content.paths.eyebrow}</p>
               <h2 id="zahn-paths-heading" className="mt-4 max-w-[28ch] font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance] sm:text-4xl lg:text-5xl">
                 {content.paths.title}
@@ -228,7 +254,7 @@ const ZahnPage = () => {
               <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.paths.text}</p>
             </div>
 
-            <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)] md:mt-12 md:rounded-[2.75rem]">
+            <div className="mt-0 overflow-hidden rounded-[2rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)] md:mt-12 md:rounded-[2.75rem]">
               <div className="grid md:grid-cols-2">
               {content.paths.cards.map((card, index, cards) => {
                 const visual = pathVisuals[card.key] || pathVisuals.ukv;
@@ -271,9 +297,9 @@ const ZahnPage = () => {
 
         {/* Zwei-Wege-Botschaft direkt vor dem Kassenbonus, im selben hellen
             Band wie Bonusbrücke und Bonusrechner. */}
-        <ZweiWegeFinanzierung produkt="zahn" className="bg-[#f8faf9]" mobileSwipe />
+        <ZweiWegeFinanzierung produkt="zahn" className="order-1 bg-[#f8faf9] md:order-none" mobileSwipe hideLinkOnMobile />
 
-        <section id="kassenbonus" className="scroll-mt-28 bg-[#f8faf9] px-4 pb-10 pt-2 sm:px-6 md:pb-24 md:pt-4 lg:px-8" aria-labelledby="zahn-bonus-heading">
+        <section id="kassenbonus" className="order-1 scroll-mt-28 bg-[#f8faf9] md:order-none px-4 pb-10 pt-2 sm:px-6 md:pb-24 md:pt-4 lg:px-8" aria-labelledby="zahn-bonus-heading">
           <div className="healio-container relative isolate grid items-center gap-6 overflow-hidden rounded-[2rem] bg-[#07111f] p-5 text-white shadow-[0_30px_80px_rgba(7,17,31,0.18)] sm:p-10 md:gap-10 md:rounded-[2.75rem] lg:grid-cols-[minmax(0,1fr)_420px] lg:p-14">
             <div className="absolute -right-16 -top-20 -z-10 h-80 w-80 rounded-full border border-[#25c990]/15" aria-hidden="true" />
             <div>
@@ -282,7 +308,7 @@ const ZahnPage = () => {
                 {content.bonus.title}
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-200 sm:leading-8 md:mt-5">{content.bonus.text}</p>
-              <p className="mt-3 max-w-2xl font-display text-base font-extrabold text-[#5ee0b1]">{content.bonus.detail}</p>
+              <p className="mt-3 hidden max-w-2xl font-display text-base font-extrabold text-[#5ee0b1] md:block">{content.bonus.detail}</p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-8">
                 <a
@@ -303,7 +329,7 @@ const ZahnPage = () => {
         </section>
 
         <CompactBonusFeature
-          className="bg-[#f8faf9]"
+          className="order-1 bg-[#f8faf9] md:order-none"
           mobileSwipe
           calculatorProps={{
             tarifTypes: 'Zahn',
@@ -324,8 +350,13 @@ const ZahnPage = () => {
 
         {/* Brücken-Strecke zur IKK classic nach dem Bonusrechner, wie auf
             /ambulant (Frank 29.09.2026: auf allen drei Produktseiten zurück). */}
-        <AmbulantIKKWechsel variant="zahn" mobileSwipe />
+        <div className="order-1 md:order-none">
+          <AmbulantIKKWechsel variant="zahn" mobileSwipe />
+        </div>
 
+        {/* Experiment Handy-Conversion 10/2026: Am Handy steht der Ablauf direkt nach den zwei
+            Wegen (Reihenfolge 0), die Kassen-Abschnitte (1) sowie Beratung, Kontakt und
+            Fragen (2) folgen danach. Ab md bleibt die bisherige Abfolge. */}
         <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
           <div className="healio-container grid gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">
             <div className="min-w-0">
@@ -378,11 +409,11 @@ const ZahnPage = () => {
           </div>
         </section>
 
-        <SalesAiAssist className="bg-white" />
+        <SalesAiAssist className="order-2 bg-white md:order-none" />
         {/* Gleicher Kontaktblock wie auf /ambulant und /stationaer (Marktanalyse W6). */}
-        <ZielseitenKontakt placement="zahn" className="bg-white" />
+        <ZielseitenKontakt placement="zahn" className="order-2 bg-white md:order-none" />
 
-        <section className="bg-[#f4faf7] px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
+        <section className="order-2 bg-[#f4faf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
           <div className="healio-container">
             <div className="flex max-w-4xl items-start gap-5 sm:items-center">
               <FriendlyIcon kind="thinking" tone="mint" size="md" className="hidden -rotate-3 sm:inline-grid" />
@@ -435,7 +466,7 @@ const ZahnPage = () => {
         )}
       </article>
 
-      <NitaQuickPill hideNearIds={['zahn-check', 'zahn-kontakt']} />
+      <ZahnNitaPill />
     </>
   );
 };

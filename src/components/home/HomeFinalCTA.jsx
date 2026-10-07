@@ -21,9 +21,10 @@ const HomeFinalCTA = () => {
               {t('finalCta.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate-300 lg:mx-0">{t('finalCta.description')}</p>
+            {/* Experiment Handy-Conversion 10/2026: Derselbe Link steht schon am Ende von „So funktioniert“; am Handy nur dort. */}
             <Link
               to={getPath('kassenboost')}
-              className="home-focus mt-1 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-home-mint md:mt-3 md:min-h-0 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
+              className="home-focus mt-1 hidden min-h-11 items-center gap-1.5 text-sm font-bold text-home-mint md:mt-3 md:inline-flex md:min-h-0 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
             >
               {t('finalCta.detailsCta')}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />

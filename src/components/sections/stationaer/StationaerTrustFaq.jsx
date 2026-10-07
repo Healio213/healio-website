@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,19 @@ const trustCards = [
 
 const StationaerTrustFaq = () => {
   const { t } = useTranslation('stationaer');
+  // Die erste Frage ist ab md (768 px) wie bisher offen. Mobil startet die Liste
+  // zugeklappt, weil die erste Antwort die Kartentexte weiter oben fast wörtlich
+  // wiederholt (Experiment Handy-Conversion 10/2026). Die Abfrage steht bewusst
+  // erst im Effekt nach dem ersten Aufbau: Der Abschnitt liegt weit unter dem
+  // Einstieg, das vorgerenderte HTML bleibt wie bisher.
   const [openFaq, setOpenFaq] = useState(0);
+  useEffect(() => {
+    try {
+      if (window.matchMedia('(max-width: 767px)').matches) setOpenFaq(null);
+    } catch {
+      // Ohne matchMedia bleibt die erste Frage offen.
+    }
+  }, []);
   const faqItems = t('refresh.faq.items', { returnObjects: true });
   const faqs = Array.isArray(faqItems) ? faqItems : [];
   const helpVisible = useWhatsAppHelp();

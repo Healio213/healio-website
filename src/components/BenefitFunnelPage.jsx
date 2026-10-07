@@ -5,6 +5,7 @@ import HighlightText from '@/components/ui/HighlightText';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
+import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
@@ -128,6 +129,13 @@ function PointList({ points }) {
     </ul>
   );
 }
+// Experiment Handy-Conversion 10/2026: Der Kassenvergleich-Hinweis steht mobil direkt unter dem
+// Bonus-Absatz, ab md wie bisher am Ende des Abschnitts (je Größe nur eine Fassung sichtbar).
+const kasseVergleichen = (
+  <>Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</>
+);
+// Die Frage für Versicherte anderer Kassen steht mobil als erste Frage der Liste.
+const mobileFirstQuestion = commonFaq[2][0];
 const steps = [
   ['Vorsorge nachweisen', 'Jede Mutterschaftsvorsorge zählt bei der IKK classic einzeln. Der Mutterpass reicht als Nachweis.'],
   ['Schutz wählen', 'Ambulant für die Vorsorge jetzt, stationär für dich und dein Kind nach der Geburt.'],
@@ -198,23 +206,32 @@ export default function BenefitFunnelPage() {
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
 
-            <div className="relative mx-auto min-w-0 w-full max-w-[35rem]" aria-label="Was jetzt für dich drin ist">
+            {/* Experiment Handy-Conversion 10/2026: mobil ausgeblendet. Die drei Karten
+                wiederholten nur Überschrift und beide Knöpfe und schoben Siegelband und
+                Ablauf rund 470 px nach unten. Ab md unverändert. */}
+            <div className="relative mx-auto hidden min-w-0 w-full max-w-[35rem] md:block" aria-label="Was jetzt für dich drin ist">
               <Heart className="absolute -left-3 top-6 z-30 h-7 w-7 -rotate-12 fill-[#f5b8c6] text-[#f5b8c6]" aria-hidden="true" />
               <Heart className="absolute -right-2 -top-3 z-30 h-5 w-5 rotate-12 fill-[#f7cdd6] text-[#f7cdd6]" aria-hidden="true" />
               <Heart className="absolute -bottom-3 right-16 z-30 h-4 w-4 rotate-6 fill-[#bfe9d8] text-[#bfe9d8]" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-[2.2rem] border border-[#f3d6de] bg-gradient-to-br from-[#fff6f8] via-white to-[#fff8ec] p-5 shadow-[0_30px_80px_rgba(176,71,106,0.16)] sm:p-7">
                 <div className="relative grid grid-cols-1 items-end gap-2 md:min-h-[27rem] md:grid-cols-[0.85fr_1.15fr]">
                   <div className="relative z-10 mx-auto min-w-0 self-end md:mx-0">
-                    <img
-                      src="/images/friendly-icons/pregnancy.webp"
-                      alt=""
-                      width="512"
-                      height="512"
-                      loading="eager"
-                      decoding="async"
-                      {...{ fetchpriority: 'high' }}
-                      className="w-[8.5rem] max-w-none md:-ml-6 md:w-[17rem]"
-                    />
+                    {/* Experiment Handy-Conversion 10/2026: Die Figur gibt es nur ab md. Mobil
+                        greift die Ersatzquelle (1 Pixel), damit das ausgeblendete Bild dort
+                        nichts lädt und nicht mit dem Text um die Ladereihenfolge konkurriert. */}
+                    <picture className="block">
+                      <source media="(min-width: 768px)" srcSet="/images/friendly-icons/pregnancy.webp" type="image/webp" />
+                      <img
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        alt=""
+                        width="512"
+                        height="512"
+                        loading="eager"
+                        decoding="async"
+                        {...{ fetchpriority: 'high' }}
+                        className="w-[8.5rem] max-w-none md:-ml-6 md:w-[17rem]"
+                      />
+                    </picture>
                   </div>
                   <div className="relative z-20 flex min-w-0 flex-col gap-3 self-center py-2 md:py-4">
                     <p className="mb-1 font-display text-base font-extrabold leading-tight text-[#b0476a] sm:text-lg">Was jetzt für dich drin ist</p>
@@ -343,6 +360,14 @@ export default function BenefitFunnelPage() {
               </div>
             </div>
           </div>
+          {/* Experiment Handy-Conversion 10/2026: Die Seite erklärt den Zuschuss der IKK classic.
+              Wer bei einer anderen Kasse ist, sieht mobil direkt danach die zwei allgemeinen Wege
+              (günstigere Kasse, Kassenbonus), wiederverwendet aus den Produktseiten. Der Verweis zu
+              KassenBoost steht darunter nur einmal. Ab md ausgeblendet, dort bleibt alles wie bisher. */}
+          <div className="-mx-4 mt-2 md:hidden">
+            <ZweiWegeFinanzierung produkt="ambulant" mobileSwipe hideLinkOnMobile />
+            <p className="px-4 pb-2 text-base leading-relaxed text-home-slate">{kasseVergleichen}</p>
+          </div>
           <div className="mt-6 sm:mt-8">
             <PregnancyBonusExample />
             <details className="mt-4 rounded-2xl bg-home-ice p-5 sm:p-8">
@@ -363,7 +388,7 @@ export default function BenefitFunnelPage() {
               </div>
             </details>
           </div>
-          <p className="mt-6 text-base leading-relaxed text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
+          <p className="mt-6 hidden text-base leading-relaxed text-home-slate md:block">{kasseVergleichen}</p>
         </section>
 
         <section id="fragen" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
@@ -377,8 +402,11 @@ export default function BenefitFunnelPage() {
             ) : (
               <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`-mb-2.5 mt-2.5 inline-block py-2.5 md:mb-0 md:mt-5 md:py-0 ${textLink}`}>Frage an Healio stellen</Link></div>
             )}
-            <div className="divide-y divide-home-slate/20">{faq.map(([q, a]) => (
-              <details key={q} className="py-4 first:pt-0 md:py-5"><summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>{q}</summary><p className="mt-3 max-w-prose leading-relaxed text-home-slate">{a}</p></details>
+            {/* Experiment Handy-Conversion 10/2026: mobil steht die Frage zur eigenen Krankenkasse
+                zuerst. Die Trennlinien setzt dort jeder Eintrag selbst (die Linien der Liste
+                folgen sonst der Quellreihenfolge). Ab md gilt wieder die Liste wie bisher. */}
+            <div className="flex flex-col md:block md:divide-y md:divide-home-slate/20">{faq.map(([q, a]) => (
+              <details key={q} className={q === mobileFirstQuestion ? 'order-first pb-4 md:order-none md:py-5' : 'border-t border-home-slate/20 py-4 md:border-t-0 md:py-5 md:first:pt-0'}><summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>{q}</summary><p className="mt-3 max-w-prose leading-relaxed text-home-slate">{a}</p></details>
             ))}</div>
           </div>
           <div className="mt-8 border-t border-home-slate/20 pt-7">

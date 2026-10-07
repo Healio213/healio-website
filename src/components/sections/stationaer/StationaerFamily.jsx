@@ -35,8 +35,12 @@ const StationaerFamily = () => {
   const { t } = useTranslation('stationaer');
   const midwifeRows = asList(t('refresh.family.midwife.rows', { returnObjects: true }));
   const reduceMotion = useReducedMotion();
-  // Nur mobil (unter md): die drei langen Antworten stehen als Akkordeon, eine
-  // offen. Ab md sind alle drei Karten wie bisher dauerhaft offen.
+  // Nur mobil (unter md): die drei langen Antworten stehen als Akkordeon. Die
+  // erste Karte (werdende Eltern) startet offen, weil dort die Bedingungen der
+  // Neugeborenen-Nachversicherung stehen (Frist, Ausschluss bei festgestellter
+  // Schwangerschaft) und die Zusage im Untertitel sonst ohne sie dasteht. Die
+  // anderen beiden starten zugeklappt (Experiment Handy-Conversion 10/2026).
+  // Ab md sind alle drei Karten wie bisher dauerhaft offen.
   const [openCard, setOpenCard] = useState(CARDS[0].key);
 
   const toggleCard = useCallback((key, event) => {
