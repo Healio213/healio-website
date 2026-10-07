@@ -30,6 +30,10 @@ const Layout = () => {
     '/kassenboost',
     '/en/kassenboost',
     '/schwangerschaft',
+    // Hebammenseite (08.10.2026): gleicher schmaler App-Hinweis im Fuß wie auf
+    // den Produktseiten statt des großen Patienten-Banners.
+    '/hebammen',
+    '/en/midwives',
   ]);
   const hideAppPromotion = pathname === '/'
     || pathname === '/en'

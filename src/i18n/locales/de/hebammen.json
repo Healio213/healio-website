@@ -26,6 +26,8 @@
   },
   "explanationVideo": {
     "title": "Das Hebammenkonzept im Überblick",
+    "eyebrow": "Erklärvideo",
+    "aria": "Erklärvideo: Das Hebammenkonzept im Überblick",
     "subtitle": "Die wichtigsten Punkte im Überblick. Deine Fragen kannst du direkt mit Nita klären.",
     "points": [
       "Klar getrennte Rollen für Hebamme, Familien und Healio",
@@ -47,6 +49,7 @@
     "amountLabel": "Tarifleistung in zwei Jahren"
   },
   "leistungen": {
+    "eyebrow": "Kasse, Bonus und Zusatzschutz",
     "title": "Welche Bausteine infrage kommen können",
     "subtitle": "Kassenleistungen, Bonusprogramme und Zusatzschutz sind getrennte Bausteine. Welche Leistungen wirklich nutzbar sind, hängt von Kasse, Tarif, Nachweisen und persönlichen Voraussetzungen ab.",
     "detailsLabel": "Details zu Kassenleistungen und Zusatzschutz ansehen",
@@ -133,6 +136,7 @@
     "totalNote": "Die 3.000 EUR sind tarifliche Höchstleistungen, kein ausgezahlter Kassenbonus. Kassenleistungen, Bonus und Versicherungsleistungen werden getrennt geprüft."
   },
   "klinik": {
+    "eyebrow": "Kindernachversicherung",
     "title": "Beim Neugeborenen zählt vor allem der richtige Zeitpunkt",
     "subtitle": "Die Kindernachversicherung kann wertvoll sein, folgt aber gesetzlichen und tariflichen Voraussetzungen. Hebammen geben nur den Hinweis; Healio prüft den konkreten Fall.",
     "detailsLabel": "Details zur Kindernachversicherung und zum Klinikschutz ansehen",
@@ -201,12 +205,14 @@
     }
   },
   "legal": {
+    "eyebrow": "Zuständigkeiten",
     "title": "Drei Rollen. Eine klare Zuständigkeit.",
     "subtitle": "Abrechnung und Versicherungsleistung sind getrennte Entscheidungen.",
     "text": "Die Hebamme klärt die zulässige Leistung und Vergütung. Healio prüft den Schutz. Der Versicherer bestätigt, welche Erstattung im konkreten Fall möglich ist.",
     "summary": "Die Hebamme gibt keine Versicherungs- oder Erstattungszusage. Individuelle Abrechnung und Vereinbarungen müssen zu den geltenden Kassen- und Gebührenregeln passen."
   },
   "steps": {
+    "eyebrow": "So läuft es ab",
     "title": "So einfach funktioniert es für dich.",
     "step1Title": "Kurzes Kennenlernen",
     "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
@@ -244,6 +250,7 @@
     "cta": "Ja, Konzept erklären"
   },
   "examples": {
+    "eyebrow": "Aus der Praxis",
     "title": "Zwei Fälle aus dem Hebammenalltag",
     "lead": "Restkosten sichtbar machen. Abrechnung und Versicherungsschutz zuerst klären.",
     "onCall": {
@@ -279,8 +286,8 @@
     }
   },
   "downloads": {
-    "waitTitle": "Frühzeitig vor einer Schwangerschaft prüfen – acht Monate Wartezeit",
-    "waitText": "Bei der Bayerischen laufen acht Monate Wartezeit ab Versicherungsbeginn – für Entbindung und nach aktuell bestätigter Leistungspraxis auch für die genannten ambulanten Schwangerschafts- und Wochenbettleistungen. Bereits laufende oder angeratene Untersuchungen und Behandlungen sind laut Produktsteckbrief ausgeschlossen. Auch nach der Wartezeit besteht keine automatische Erstattungszusage: Die ambulante Leistungspraxis ist keine eigenständige ausdrückliche Tarifzusage. Lass den konkreten Fall vorab schriftlich klären.",
+    "waitTitle": "Frühzeitig vor einer Schwangerschaft prüfen: acht Monate Wartezeit",
+    "waitText": "Bei der Bayerischen laufen acht Monate Wartezeit ab Versicherungsbeginn, für Entbindung und nach aktuell bestätigter Leistungspraxis auch für die genannten ambulanten Schwangerschafts- und Wochenbettleistungen. Bereits laufende oder angeratene Untersuchungen und Behandlungen sind laut Produktsteckbrief ausgeschlossen. Auch nach der Wartezeit besteht keine automatische Erstattungszusage: Die ambulante Leistungspraxis ist keine eigenständige ausdrückliche Tarifzusage. Lass den konkreten Fall vorab schriftlich klären.",
     "title": "Muster und Checklisten für den nächsten Schritt",
     "lead": "Ohne Kontaktdaten herunterladen. Individuell ergänzen und vor der Verwendung prüfen.",
     "practice": {
@@ -313,6 +320,7 @@
     }
   ],
   "faq": {
+    "eyebrow": "Kurz geklärt",
     "title": "Die wichtigen Fragen vor der Entscheidung",
     "items": [
       {

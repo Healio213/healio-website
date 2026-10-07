@@ -2,22 +2,38 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, ArrowDown, ArrowRight, ChevronDown, Download, Info, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowDown, ArrowRight, Check, ChevronDown, Download, Info, Shield } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
-import ProductTicker from '@/components/sections/ProductTicker';
-import AudienceProofBar from '@/components/sections/AudienceProofBar';
-import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
-import SiegelTicker from '@/components/sections/shared/SiegelTicker';
-import { requestNitaConsent } from '@/components/NitaConsentWidget';
+import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
+import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
+import SceneHero, {
+  sceneAccentClass,
+  sceneBelow,
+  scenePrimaryButtonClass,
+  sceneSecondaryButtonClass,
+} from '@/components/desktop/SceneHero';
+
+// Look wie /ambulant, /stationaer und /zahn (Frank 08.10.2026): Szene als
+// Kopfbereich am Rechner, dunkler Einstieg mit Kartenreihe am Handy, Siegel als
+// Laufband, danach helle Abschnitte im Wechsel Weiß und Eisgrün mit runden
+// Karten. Texte inhaltlich unverändert aus hebammen.json.
+
+// Erklärvideo für /hebammen folgt. Sobald Video und Vorschaubild unter public/
+// liegen, hier eintragen (wie auf /stationaer, z. B. '/erklaervideo-hebammen.mp4'
+// und '/images/erklaervideo-hebammen-poster.jpg'). Ohne Videoquelle wird der
+// Abschnitt nicht gerendert und der zweite Knopf im Kopfbereich bleibt aus.
+const HEBAMMEN_VIDEO = { src: '', poster: '' };
+const VIDEO_ID = 'hebammen-video';
+const BOOKING_ID = 'calendly-hebammen';
 
 // Zwei Tarifarten für Familien, Texte unter tarife.* in den Sprachdateien.
 const TARIFF_CARDS = [
@@ -34,42 +50,71 @@ const DOWNLOAD_GROUPS = [
   ] },
 ];
 
+// Rollen im Konzept (proof.items): je Karte eigene Figur und warmer Farbton,
+// wie die Wischkarten im Einstieg von /stationaer.
+const PROOF_STYLES = [
+  { kind: 'pregnancy', tone: 'coral', card: 'from-[#fff6f2] to-[#ffe8de] ring-[#f3d3c6]' },
+  { kind: 'family', tone: 'butter', card: 'from-[#fffcf2] to-[#fcf0cf] ring-[#efe0b2]' },
+  { kind: 'support', tone: 'mint', card: 'from-[#f4fbf7] to-[#e2f4eb] ring-[#cde8dc]' },
+];
+const HIGHLIGHT_ICONS = [
+  { kind: 'naturopathy', tone: 'mint' },
+  { kind: 'prevention', tone: 'lavender' },
+  { kind: 'ambulant', tone: 'sky' },
+  { kind: 'medication', tone: 'butter' },
+  { kind: 'family', tone: 'coral' },
+];
+const STEP_ICONS = [
+  { kind: 'support', tone: 'lavender' },
+  { kind: 'document', tone: 'sky' },
+  { kind: 'family', tone: 'coral' },
+];
+const KLINIK_BLOCKS = [
+  { key: 'chance', tone: 'bg-[#fff6f2] ring-[#f3d3c6]' },
+  { key: 'chanceOben', tone: 'bg-[#f1f8ff] ring-[#d3e3f2]' },
+  { key: 'deadline', tone: 'bg-[#fffaf0] ring-[#efe0b2]' },
+  { key: 'ehrlich', tone: 'bg-slate-50 ring-slate-200' },
+  { key: 'rooming', tone: 'bg-home-ice ring-[#cde8dc]' },
+];
+
+// Gemeinsame Stile der Produktseiten (StationaerTrustFaq, StationaerFamily).
+const wrap = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8';
+const sectionPad = 'py-12 md:py-24';
+const eyebrowClass = 'font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:text-xs md:tracking-[0.22em]';
+const h2Class = 'font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]';
+const cardClass = 'h-full rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-[0_2px_8px_rgba(31,57,66,0.07)] sm:p-7 md:border-white md:shadow-[0_14px_35px_rgba(31,57,66,0.06)]';
+const accordionClass = 'group overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm';
+const summaryClass = 'flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 text-left font-extrabold text-[#071726] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#25c990] sm:px-6 [&::-webkit-details-marker]:hidden';
+const chevronClass = 'h-5 w-5 shrink-0 text-[#087454] transition-transform group-open:rotate-180 motion-reduce:transition-none';
+
+const SectionHead = ({ eyebrow, title, subtitle, id, className = '' }) => (
+  <div className={`mx-auto max-w-3xl text-center ${className}`}>
+    {eyebrow && <p className={eyebrowClass}>{eyebrow}</p>}
+    <h2 id={id} className={`${eyebrow ? 'mt-4' : ''} ${h2Class}`}>{title}</h2>
+    {subtitle && <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">{subtitle}</p>}
+  </div>
+);
+
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
   const { t: tCommon } = useTranslation('common');
   const { lang } = useLanguage();
   const reduceMotion = useReducedMotion();
+  // Ab lg trägt SceneHero die h1; der Handy-Einstieg nutzt dort h2.
+  const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/midwives' : 'https://healio.de/hebammen';
+  const showVideo = lang === 'de' && Boolean(HEBAMMEN_VIDEO.src);
+  const reveal = reduceMotion ? {} : { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
-  const scrollToCalendly = () => {
-    document.getElementById('calendly-hebammen')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  const scrollTo = (id) => () => {
+    document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
-  const scrollToVideo = () => {
-    document.getElementById('hebammen-video')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-  };
-
-  const proofIcons = [
-    { kind: 'support', tone: 'mint' },
-    { kind: 'protection', tone: 'sky' },
-    { kind: 'calendar', tone: 'butter' },
-  ];
   const proofItems = t('proof.items', { returnObjects: true }).map((item, index) => ({
     ...item,
-    ...(proofIcons[index] || proofIcons[0]),
+    ...(PROOF_STYLES[index] || PROOF_STYLES[0]),
   }));
-
-  // Handy-Band unter dem Hero: dieselben drei Siegel wie die Zeile ab md, jedes
-  // mit kurzer Beschriftung des Versicherers bzw. der Krankenkasse.
-  const sealCaptions = lang === 'en'
-    ? { sdk: 'SDK Fairness Award 2025', ikk: 'IKK classic, health fund' }
-    : { sdk: 'SDK Fairness-Preis 2025', ikk: 'IKK classic, Krankenkasse' };
-  const sealItems = [
-    { id: 'sdk', src: '/siegel/sdk/fairnesspreis.png', alt: tCommon('awards.items.fairness'), caption: sealCaptions.sdk, width: 240, height: 240 },
-    { id: 'ikk-parents', src: '/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp', alt: tCommon('awards.items.ikkParents'), caption: sealCaptions.ikk, width: 500, height: 403 },
-    { id: 'ikk-family', src: '/siegel/ikk/krankenkasseninfo-familien-2026-09.webp', alt: tCommon('awards.items.ikkFamily'), caption: sealCaptions.ikk, width: 500, height: 403 },
-  ];
 
   const schemaMarkup = createWebPageSchema(
     tSeo('hebammen.title'),
@@ -85,406 +130,413 @@ const HebammenPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Mobil (unter md) ordnet "order-N" die Abschnitte in der Reihenfolge, in der
-          Besucher denken: Einstieg, Siegel, Erklärvideo, Rollen, dann der Rest wie am
-          Desktop. Ab md gilt "md:block" und die bisherige Reihenfolge im Code. */}
-      <main className="flex flex-col bg-white overflow-hidden w-full md:block">
+      {/* Eine Reihenfolge für Handy und Rechner: Einstieg, Siegel, Erklärvideo,
+          dann Fälle, Bausteine, Kind, Tarife, Rollen, Ablauf und Termin. */}
+      <article className="w-full overflow-hidden bg-white text-[#071726]">
 
-        {/* HERO */}
-        <section className="relative order-1 flex items-center pt-28 pb-14 md:order-none md:min-h-[100svh] md:pb-16 lg:pt-20 lg:pb-0">
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/images/hero-hebammen.webp"
-              alt="Hebamme im Gespräch mit schwangerer Patientin"
-              className="w-full h-full object-cover object-center"
-              fetchPriority="high"
-            />
-            <div className="absolute inset-0 bg-black/50 md:bg-black/25 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent md:bg-gradient-to-r md:from-slate-900/80 md:via-slate-900/40 md:to-transparent z-10" />
+        {/* EINSTIEG AM RECHNER (ab lg): Szene mit Überschrift und Knopf, darunter
+            Erklärung und die drei Rollen ohne Kasten. */}
+        <SceneHero
+          surface="hebammen"
+          headingId="desktop-hebammen-heading"
+          dataAttributes={{ 'data-desktop-lead': 'hebammen' }}
+          heading={<HighlightText text={t('hero.title')} className={sceneAccentClass} />}
+          actions={(
+            <>
+              <button type="button" data-desktop-primary className={scenePrimaryButtonClass} onClick={scrollTo(BOOKING_ID)}>
+                {t('hero.cta')}
+                <ArrowDown className="h-5 w-5" aria-hidden="true" />
+              </button>
+              {showVideo && (
+                <button type="button" className={sceneSecondaryButtonClass} onClick={scrollTo(VIDEO_ID)}>
+                  {t('hero.secondaryCta')}
+                  <ArrowDown className="h-5 w-5" aria-hidden="true" />
+                </button>
+              )}
+            </>
+          )}
+        >
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className="mb-4 text-sm font-semibold leading-6 text-[#bfced6]">{t('hero.badge')}</p>
+              <p className={sceneBelow.lead}>{t('hero.subtitle')}</p>
+              <p className={`flex items-start gap-2 ${sceneBelow.note}`}>
+                <Shield className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                {t('hero.note')}
+              </p>
+            </div>
+            <div className="min-w-0">
+              <h2 className={sceneBelow.listTitle}>{t('proof.ariaLabel')}</h2>
+              <dl className={sceneBelow.list}>
+                {proofItems.map((item) => (
+                  <div key={item.title} className="py-3.5">
+                    <dt className="font-display text-base font-bold leading-6 text-white">{item.title}</dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-[#c9d8de]">{item.text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
+        </SceneHero>
 
-          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
-            <motion.div className="max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="inline-block bg-rose-100 text-rose-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+        {/* EINSTIEG AM HANDY UND TABLET (unter lg): dunkler Grund wie /stationaer,
+            darunter die drei Rollen als Wischkarten in der hellen Karte. */}
+        <section className="relative isolate overflow-hidden bg-[#071726] text-white lg:hidden" aria-labelledby="hebammen-hero-heading">
+          <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
+          <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#f2b8a6]/14 blur-3xl" aria-hidden="true" />
+          <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
+
+          <div className={`relative grid items-center gap-8 pb-10 pt-28 sm:pb-16 md:gap-12 md:pt-32 ${wrap}`}>
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65 }}
+              className="min-w-0 w-full max-w-3xl"
+            >
+              <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] sm:tracking-[0.23em]">
                 {t('hero.badge')}
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-                <HighlightText text={t('hero.title')} className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent" />
-              </h1>
-              <p className="text-base sm:text-xl text-white/90 leading-relaxed mb-6 sm:mb-8">
+              </p>
+              <HeroHeading
+                id="hebammen-hero-heading"
+                className="mt-4 max-w-[18ch] font-display text-[2.15rem] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance] md:mt-5 md:text-[clamp(2.4rem,4.6vw,4.25rem)]"
+              >
+                <HighlightText text={t('hero.title')} className="text-[#5ee0b1]" />
+              </HeroHeading>
+              <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-slate-200 sm:text-lg md:mt-6">
                 {t('hero.subtitle')}
               </p>
-              <div className="flex flex-col items-start gap-3 sm:flex-row">
-                <Button
-                  onClick={scrollToCalendly}
-                  className="h-auto min-h-14 bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-5 py-3 md:h-10 md:min-h-0 md:px-8 md:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-                >
-                  {t('hero.cta')}
-                </Button>
-                <Button
-                  onClick={scrollToVideo}
-                  variant="outline"
-                  className="h-auto min-h-14 border-white/55 bg-white/10 px-5 py-3 text-lg font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 md:h-10 md:min-h-0 md:px-8 md:py-6"
-                >
-                  {t('hero.secondaryCta')}
-                  <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
-                </Button>
-              </div>
-              <p className="mt-4 flex items-center gap-2 text-sm text-white/80">
-                <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
+              <button
+                type="button"
+                onClick={scrollTo(BOOKING_ID)}
+                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-display font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1] motion-reduce:transform-none md:mt-8"
+              >
+                {t('hero.cta')}
+                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              </button>
+              <p className="mt-5 flex items-start gap-2 text-base font-semibold text-slate-300 md:text-sm">
+                <Shield className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
                 {t('hero.note')}
               </p>
             </motion.div>
+
+            <div className="relative mx-auto min-w-0 w-full max-w-[35rem] md:max-w-none">
+              <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
+                <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3">
+                  <img
+                    src="/images/friendly-icons/pregnancy.webp"
+                    alt=""
+                    width="512"
+                    height="512"
+                    className="w-20 max-w-none sm:w-24"
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <p className="font-display text-base font-extrabold leading-tight text-[#0b6048]">{t('proof.ariaLabel')}</p>
+                </div>
+                <MobileSwipeRow
+                  label={t('proof.ariaLabel')}
+                  className="mt-3 min-w-0"
+                  desktopClassName="-mx-4 scroll-pl-4 px-4 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:grid md:grid-cols-3 md:gap-3 md:px-0"
+                  mobileItemWidth="w-[78%]"
+                  bleed={false}
+                >
+                  {proofItems.map((item) => (
+                    <div key={item.title} className={`h-full rounded-[1.4rem] bg-gradient-to-br p-4 ring-1 ${item.card}`}>
+                      <div className="flex items-center gap-3">
+                        <FriendlyIcon kind={item.kind} tone={item.tone} size="sm" />
+                        <p className="min-w-0 font-display text-base font-extrabold leading-tight text-[#071726]">{item.title}</p>
+                      </div>
+                      <p className="mt-3 text-base font-medium leading-snug text-slate-600 md:text-sm">{item.text}</p>
+                    </div>
+                  ))}
+                </MobileSwipeRow>
+              </div>
+            </div>
           </div>
         </section>
 
-        <AudienceProofBar items={proofItems} ariaLabel={t('proof.ariaLabel')} className="order-5 md:order-none" />
-        <div className="order-4 md:order-none md:contents">
-          <ProductTicker variant="hebammen" />
-        </div>
-
-        <div className="order-3 md:order-none md:contents">
-        <B2BExplainerVideo
-          sectionId="hebammen-video"
-          title={t('explanationVideo.title')}
-          subtitle={t('explanationVideo.subtitle')}
-          points={t('explanationVideo.points', { returnObjects: true })}
-          showStatusPanel={false}
-          ctaLabel={t('explanationVideo.cta')}
-          onCta={() => requestNitaConsent('delayed_prompt')}
-          trackingLabel="midwives"
-          privacyText={t('explanationVideo.privacy')}
-          videoFallbackText={t('explanationVideo.fallback')}
-          captionsLanguage={lang === 'en' ? 'en' : 'de'}
-          captionsLabel={lang === 'en' ? 'English' : 'Deutsch'}
-        />
-        </div>
-
-        {/* Qualitätssiegel: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
+        {/* SIEGEL: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
             SDK-Vollversicherung (Warentest 0,9, Morgen & Morgen) sind entfernt,
             die IKK-Siegel durch die Fassung 09/2026 ersetzt (IKK-Mail 01.10.2026).
             Beide Partner stehen als eigene Gruppe, damit klar bleibt, dass die
-            IKK-Siegel die Krankenkasse bewerten und nicht die Zusatzversicherung. */}
-        <motion.section className="order-2 md:order-none py-5 md:py-12 bg-white border-b border-gray-100" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            IKK-Siegel die Krankenkasse bewerten und nicht die Zusatzversicherung.
+            Handy: nur das laufende Band ohne Überschrift (Hinweise als sr-only). */}
+        <section className="border-b border-gray-100 bg-white py-3 md:py-12" aria-label={tCommon('awards.label')}>
           <div className="container mx-auto px-4">
-            <p className="text-center text-sm md:text-xs text-slate-400 mb-3 md:mb-6 font-medium uppercase tracking-wider">{lang === 'en' ? 'Our partners: SDK Süddeutsche Krankenversicherung & IKK classic' : 'Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic'}</p>
-            {/* Mobil ein ruhiges Laufband mit den drei Siegeln (je mit Beschriftung),
-                der Pflichthinweis zur Krankenkasse steht darunter. */}
-            <SiegelTicker
-              className="md:hidden"
-              items={sealItems}
-              ariaLabel={tCommon('awards.label')}
-              notes={[tCommon('awards.groups.ikkNote')]}
-            />
-            <div className="mx-auto hidden max-w-6xl md:flex md:flex-row md:flex-wrap md:items-start md:justify-center md:gap-8 md:gap-x-14">
-              <div className="flex flex-col items-center">
-                <p className="text-center text-sm font-semibold text-slate-600">{tCommon('awards.groups.sdk')}</p>
-                <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} width="240" height="240" className="mt-3 h-20 sm:h-24 md:h-28 w-auto" loading="lazy" decoding="async" />
+            <HealioSiegelBand className="mx-auto max-w-6xl md:hidden" withIkk ikkOrder="parents" size="large" />
+            <div className="hidden md:block">
+              <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-500">
+                {lang === 'en' ? 'Our partners: SDK Süddeutsche Krankenversicherung & IKK classic' : 'Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic'}
+              </p>
+              <div className="mx-auto mt-5 flex max-w-6xl flex-row flex-wrap items-start justify-center gap-8 gap-x-14">
+                <div className="flex flex-col items-center">
+                  <p className="text-center text-sm font-semibold text-slate-600">{tCommon('awards.groups.sdk')}</p>
+                  <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} width="240" height="240" className="mt-3 h-24 w-auto lg:h-28" loading="lazy" decoding="async" />
+                </div>
+                <IkkKassenSiegel order="parents" size="large" />
               </div>
-              <IkkKassenSiegel order="parents" size="large" />
             </div>
           </div>
-        </motion.section>
+        </section>
+
+        {/* ERKLÄRVIDEO: vorbereitet, erscheint erst mit Videoquelle (siehe oben). */}
+        {showVideo && (
+          <ExplainerVideoCard
+            id={VIDEO_ID}
+            videoSrc={HEBAMMEN_VIDEO.src}
+            poster={HEBAMMEN_VIDEO.poster || undefined}
+            eyebrow={t('explanationVideo.eyebrow')}
+            title={t('explanationVideo.title')}
+            ariaLabel={t('explanationVideo.aria')}
+            className="bg-[#f4f8f6]"
+          />
+        )}
 
         {/* PROBLEM & LÖSUNG */}
-        <section className="order-6 md:order-none py-10 sm:py-20 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
-                {/* Problem */}
-                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-5">
-                    {t('problem.title')}
-                  </h2>
-                  <p className="text-slate-600 leading-relaxed">
-                    {t('problem.text')}
-                  </p>
-                </motion.div>
-
-                {/* Lösung */}
-                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                  <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5 sm:p-8 h-full">
-                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4">
-                      {t('solution.title')}
-                    </h3>
-                    <p className="text-3xl sm:text-4xl font-bold text-[#25c990] mb-3">{t('solution.amount')}</p>
-                    <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 mb-3 sm:mb-4">{t('solution.amountLabel')}</p>
-                    <p className="text-slate-600 leading-relaxed">
-                      {t('solution.text')}
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Konkrete Kostenfälle und Arbeitshilfen statt der früheren Moralfläche.
-            Bestehende Wischreihen und die mobile Abschnittsreihenfolge bleiben erhalten. */}
-        <section id="hebammen-beispiele" className="order-7 scroll-mt-24 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900" aria-labelledby="hebammen-beispiele-heading">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-5xl mx-auto">
-              <h2 id="hebammen-beispiele-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{t('examples.title')}</h2>
-              <p className="mt-3 max-w-3xl text-base sm:text-lg leading-relaxed text-white/85">{t('examples.lead')}</p>
-              <MobileSwipeRow label={t('examples.title')} className="mt-6" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
-                <article className="h-full rounded-2xl bg-white p-5 text-slate-900 sm:p-7" data-hebammen-case="rufbereitschaft">
-                  <FriendlyIcon kind="calendar" tone="mint" size="sm" />
-                  <p className="mt-4 text-sm font-bold uppercase tracking-wider text-emerald-700">{t('examples.onCall.eyebrow')}</p>
-                  <h3 className="mt-2 text-xl font-bold">{t('examples.onCall.title')}</h3>
-                  <dl className="mt-5 grid grid-cols-3 gap-2">
-                    {t('examples.onCall.amounts', { returnObjects: true }).map((item) => (
-                      <div key={item.label} className="min-w-0 rounded-xl bg-emerald-50 px-2 py-3">
-                        <dt className="text-xs leading-5 text-slate-600">{item.label}</dt>
-                        <dd className="mt-1 text-lg font-extrabold text-emerald-900">{item.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                  <p className="mt-4 text-base leading-relaxed">{t('examples.onCall.text')}</p>
-                  <p className="mt-4 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600">{t('examples.onCall.note')}</p>
-                </article>
-                <article className="h-full rounded-2xl bg-white p-5 text-slate-900 sm:p-7" data-hebammen-case="hausbesuch">
-                  <FriendlyIcon kind="support" tone="sky" size="sm" />
-                  <p className="mt-4 text-sm font-bold uppercase tracking-wider text-sky-700">{t('examples.homeVisit.eyebrow')}</p>
-                  <h3 className="mt-2 text-xl font-bold">{t('examples.homeVisit.title')}</h3>
-                  <p className="mt-4 text-base leading-relaxed">{t('examples.homeVisit.text')}</p>
-                  <ol className="mt-4 space-y-3">
-                    {t('examples.homeVisit.steps', { returnObjects: true }).map((item, index) => (
-                      <li key={item} className="flex gap-3 text-base leading-relaxed">
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-50 text-sm font-bold text-sky-800">{index + 1}</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ol>
-                  <p className="mt-4 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600">{t('examples.homeVisit.note')}</p>
-                </article>
-              </MobileSwipeRow>
-
-              <aside className="mt-6 rounded-2xl border border-amber-200/50 bg-amber-50 p-5 text-slate-900 sm:p-6" aria-labelledby="hebammen-fruehzeitig-heading">
-                <h3 id="hebammen-fruehzeitig-heading" className="flex items-start gap-3 text-lg font-bold"><Info className="mt-1 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />{t('downloads.waitTitle')}</h3>
-                <p className="mt-3 text-base leading-relaxed">{t('downloads.waitText')}</p>
-              </aside>
-              <div id="hebammen-materialien" className="mt-8 scroll-mt-24" aria-labelledby="hebammen-materialien-heading">
-                <h3 id="hebammen-materialien-heading" className="text-2xl font-bold text-white">{t('downloads.title')}</h3>
-                <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/85">{t('downloads.lead')}</p>
-                <MobileSwipeRow label={t('downloads.title')} className="mt-5" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
-                  {DOWNLOAD_GROUPS.map((group) => (
-                    <article key={group.key} className="h-full rounded-2xl border border-white/20 bg-white/10 p-5 text-white sm:p-7">
-                      <FriendlyIcon kind={group.kind} tone="mint" size="sm" />
-                      <h4 className="mt-4 text-xl font-bold">{t(`downloads.${group.key}.title`)}</h4>
-                      <p className="mt-3 text-base leading-relaxed text-white/85">{t(`downloads.${group.key}.text`)}</p>
-                      <div className="mt-5 space-y-3">
-                        {group.documents.map((document) => (
-                          <a key={document.key} href={document.href} download className="inline-flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-white/30 px-4 py-3 text-left text-base font-semibold transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300" data-hebammen-download={document.key}>
-                            <span>{t(`downloads.documents.${document.key}`)}</span><Download className="h-5 w-5 shrink-0" aria-hidden="true" />
-                          </a>
-                        ))}
-                      </div>
-                    </article>
-                  ))}
-                </MobileSwipeRow>
-                <p className="mt-4 text-sm leading-relaxed text-white/75">{t('downloads.note')}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* LEISTUNGEN FÜR SCHWANGERE */}
-        <section className="order-8 md:order-none py-10 sm:py-20 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-4xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6 sm:mb-12">
-                <FriendlyIcon kind="pregnancy" tone="coral" className="mx-auto mb-3 sm:mb-6 !h-12 !w-12 sm:!h-16 sm:!w-16" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">
-                  {t('leistungen.title')}
-                </h2>
-                <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                  {t('leistungen.subtitle')}
-                </p>
+        <section className={`bg-white ${sectionPad}`} aria-labelledby="hebammen-problem-heading">
+          <div className={wrap}>
+            <div className="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:gap-12">
+              <motion.div {...reveal} className="min-w-0">
+                <h2 id="hebammen-problem-heading" className={h2Class}>{t('problem.title')}</h2>
+                <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">{t('problem.text')}</p>
               </motion.div>
+              <motion.div {...reveal} className="min-w-0 rounded-[2rem] border border-emerald-900/10 bg-home-ice p-6 shadow-[0_24px_60px_rgba(7,17,31,0.08)] sm:p-8">
+                <FriendlyIcon kind="budget" tone="mint" size="md" className="!h-12 !w-12 sm:!h-16 sm:!w-16" />
+                <h3 className="mt-4 font-display text-xl font-extrabold leading-tight text-[#071726] sm:mt-5 sm:text-2xl">{t('solution.title')}</h3>
+                <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.03em] text-[#087454]">{t('solution.amount')}</p>
+                <p className={`mt-2 ${eyebrowClass}`}>{t('solution.amountLabel')}</p>
+                <p className="mt-4 text-base leading-relaxed text-slate-700">{t('solution.text')}</p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-              {/* Highlight Bullets: mobil als Wischreihe, ab md das bisherige Raster */}
-              <MobileSwipeRow
-                label={t('leistungen.title')}
-                className="mb-3 sm:mb-12"
-                desktopClassName="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5"
-                mobileItemWidth="w-[84vw] max-w-[22rem]"
-              >
-                {t('leistungen.highlights', { returnObjects: true }).map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                    className="h-full bg-rose-50 border border-rose-200 rounded-xl p-5"
-                  >
-                    <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                    <p className="text-base text-slate-600 leading-relaxed">{item.desc}</p>
-                  </motion.div>
+        {/* ZWEI FÄLLE + ARBEITSHILFEN. Konkrete Kostenfälle und Vorlagen. */}
+        <section id="hebammen-beispiele" className={`scroll-mt-24 bg-[#f5faf8] ${sectionPad}`} aria-labelledby="hebammen-beispiele-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-beispiele-heading" eyebrow={t('examples.eyebrow')} title={t('examples.title')} subtitle={t('examples.lead')} />
+
+            <MobileSwipeRow label={t('examples.title')} className="mx-auto mt-8 max-w-5xl md:mt-12" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
+              <article className={cardClass} data-hebammen-case="rufbereitschaft">
+                <FriendlyIcon kind="calendar" tone="mint" size="sm" />
+                <p className={`mt-4 ${eyebrowClass}`}>{t('examples.onCall.eyebrow')}</p>
+                <h3 className="mt-2 font-display text-xl font-extrabold leading-tight text-[#071726] sm:text-2xl">{t('examples.onCall.title')}</h3>
+                <dl className="mt-5 grid grid-cols-3 gap-2">
+                  {t('examples.onCall.amounts', { returnObjects: true }).map((item, index, all) => (
+                    <div key={item.label} className={`min-w-0 rounded-2xl px-2.5 py-3 ${index === all.length - 1 ? 'bg-[#071726] text-white' : 'bg-home-ice'}`}>
+                      <dt className={`text-sm leading-5 ${index === all.length - 1 ? 'text-[#c9d8de]' : 'text-slate-600'}`}>{item.label}</dt>
+                      <dd className={`mt-1 font-display text-base font-extrabold sm:text-lg ${index === all.length - 1 ? 'text-[#5ee0b1]' : 'text-[#071726]'}`}>{item.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="mt-5 text-base leading-relaxed text-slate-700">{t('examples.onCall.text')}</p>
+                <p className="mt-4 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-500">{t('examples.onCall.note')}</p>
+              </article>
+              <article className={cardClass} data-hebammen-case="hausbesuch">
+                <FriendlyIcon kind="support" tone="sky" size="sm" />
+                <p className="mt-4 font-display text-sm font-bold uppercase tracking-[0.14em] text-[#1f5f8b] md:text-xs md:tracking-[0.22em]">{t('examples.homeVisit.eyebrow')}</p>
+                <h3 className="mt-2 font-display text-xl font-extrabold leading-tight text-[#071726] sm:text-2xl">{t('examples.homeVisit.title')}</h3>
+                <p className="mt-4 text-base leading-relaxed text-slate-700">{t('examples.homeVisit.text')}</p>
+                <ol className="mt-4 space-y-3">
+                  {t('examples.homeVisit.steps', { returnObjects: true }).map((item, index) => (
+                    <li key={item} className="flex gap-3 text-base leading-relaxed text-slate-700">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e4f2ff] font-display text-sm font-extrabold text-[#1f5f8b]">{index + 1}</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-4 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-500">{t('examples.homeVisit.note')}</p>
+              </article>
+            </MobileSwipeRow>
+
+            <aside className="mx-auto mt-6 max-w-5xl rounded-[1.5rem] border border-[#efe0b2] bg-[#fffaf0] p-5 sm:p-6" aria-labelledby="hebammen-fruehzeitig-heading">
+              <h3 id="hebammen-fruehzeitig-heading" className="flex items-start gap-3 font-display text-lg font-extrabold text-[#071726]">
+                <Info className="mt-1 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+                {t('downloads.waitTitle')}
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-slate-700">{t('downloads.waitText')}</p>
+            </aside>
+
+            <div id="hebammen-materialien" className="mx-auto mt-12 max-w-5xl scroll-mt-24 md:mt-16" aria-labelledby="hebammen-materialien-heading">
+              <h3 id="hebammen-materialien-heading" className="font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-[#071726] sm:text-3xl">{t('downloads.title')}</h3>
+              <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">{t('downloads.lead')}</p>
+              <MobileSwipeRow label={t('downloads.title')} className="mt-6" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
+                {DOWNLOAD_GROUPS.map((group) => (
+                  <article key={group.key} className={cardClass}>
+                    <FriendlyIcon kind={group.kind} tone="mint" size="sm" />
+                    <h4 className="mt-4 font-display text-xl font-extrabold leading-tight text-[#071726]">{t(`downloads.${group.key}.title`)}</h4>
+                    <p className="mt-3 text-base leading-relaxed text-slate-600">{t(`downloads.${group.key}.text`)}</p>
+                    <div className="mt-5 space-y-3">
+                      {group.documents.map((document) => (
+                        <a
+                          key={document.key}
+                          href={document.href}
+                          download
+                          className="flex min-h-12 w-full items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-base font-bold text-[#071726] transition hover:border-[#25c990] hover:bg-home-ice focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25c990]"
+                          data-hebammen-download={document.key}
+                        >
+                          <span>{t(`downloads.documents.${document.key}`)}</span>
+                          <Download className="h-5 w-5 shrink-0 text-[#087454]" aria-hidden="true" />
+                        </a>
+                      ))}
+                    </div>
+                  </article>
                 ))}
               </MobileSwipeRow>
+              <p className="mt-4 text-sm leading-relaxed text-slate-500">{t('downloads.note')}</p>
+            </div>
+          </div>
+        </section>
 
-              <details className="group mb-5 sm:mb-8 rounded-2xl border border-slate-200 bg-slate-50/70">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+        {/* BAUSTEINE: Kassenleistungen, Bonus und Zusatzschutz */}
+        <section className={`bg-white ${sectionPad}`} aria-labelledby="hebammen-leistungen-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-leistungen-heading" eyebrow={t('leistungen.eyebrow')} title={t('leistungen.title')} subtitle={t('leistungen.subtitle')} />
+
+            {/* Mobil Wischreihe, ab md das Raster. */}
+            <MobileSwipeRow
+              label={t('leistungen.title')}
+              className="mx-auto mt-8 max-w-6xl md:mt-12"
+              desktopClassName="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5"
+              mobileItemWidth="w-[84vw] max-w-[22rem]"
+            >
+              {t('leistungen.highlights', { returnObjects: true }).map((item, index) => {
+                const icon = HIGHLIGHT_ICONS[index] || HIGHLIGHT_ICONS[0];
+                return (
+                  <motion.div key={item.title} {...reveal} transition={{ delay: index * 0.06 }} className={cardClass}>
+                    <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" />
+                    <h3 className="mt-4 font-display text-lg font-extrabold leading-snug text-[#071726]">{item.title}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-slate-600">{item.desc}</p>
+                  </motion.div>
+                );
+              })}
+            </MobileSwipeRow>
+
+            <div className="mx-auto mt-6 max-w-6xl space-y-4 md:mt-10">
+              <details className={accordionClass}>
+                <summary className={summaryClass}>
                   <span>{t('leistungen.detailsLabel')}</span>
-                  <ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
+                  <ChevronDown className={chevronClass} aria-hidden="true" />
                 </summary>
-                <div className="grid grid-cols-1 gap-8 border-t border-slate-200 p-5 md:grid-cols-2 sm:p-7">
-                {/* IKK classic */}
-                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                  className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 sm:p-8"
-                >
-                  <h3 className="text-xl font-bold text-blue-900 mb-6">{t('leistungen.ikkTitle')}</h3>
-                  <div className="space-y-4">
-                    {t('leistungen.ikkItems', { returnObjects: true }).map((item, i) => (
-                      <div key={i} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 md:flex-nowrap">
-                        <div className="flex items-start gap-3 flex-1">
-                          <Check className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-medium text-slate-900 text-base">{item.name}</p>
-                            <p className="text-sm text-slate-500">{item.detail}</p>
+                <div className="grid grid-cols-1 gap-5 border-t border-slate-100 p-5 sm:p-7 md:grid-cols-2 md:gap-6">
+                  {/* IKK classic */}
+                  <div className="rounded-[1.5rem] bg-[#f1f8ff] p-5 ring-1 ring-[#d3e3f2] sm:p-7">
+                    <h3 className="font-display text-xl font-extrabold text-[#1f4f7a]">{t('leistungen.ikkTitle')}</h3>
+                    <div className="mt-5 space-y-4">
+                      {t('leistungen.ikkItems', { returnObjects: true }).map((item) => (
+                        <div key={item.name} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 md:flex-nowrap">
+                          <div className="flex flex-1 items-start gap-3">
+                            <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#2f7fbf]" aria-hidden="true" />
+                            <div>
+                              <p className="text-base font-semibold text-[#071726]">{item.name}</p>
+                              <p className="text-sm text-slate-500">{item.detail}</p>
+                            </div>
                           </div>
+                          <span className="whitespace-nowrap pl-8 font-display text-base font-extrabold text-[#1f4f7a] md:pl-0">{item.amount}</span>
                         </div>
-                        <span className="pl-8 text-base font-bold text-blue-700 whitespace-nowrap md:pl-0">{item.amount}</span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
 
-                {/* SDK Zusatzversicherung */}
-                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                  className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-6 sm:p-8"
-                >
-                  <h3 className="text-xl font-bold text-emerald-900 mb-6">{t('leistungen.sdkTitle')}</h3>
-                  <div className="space-y-4">
-                    {t('leistungen.sdkItems', { returnObjects: true }).map((item, i) => (
-                      <div key={i} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 md:flex-nowrap">
-                        <div className="flex items-start gap-3 flex-1">
-                          <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-medium text-slate-900 text-base">{item.name}</p>
-                            <p className="text-sm text-slate-500">{item.detail}</p>
+                  {/* SDK Zusatzversicherung */}
+                  <div className="rounded-[1.5rem] bg-home-ice p-5 ring-1 ring-[#cde8dc] sm:p-7">
+                    <h3 className="font-display text-xl font-extrabold text-[#087454]">{t('leistungen.sdkTitle')}</h3>
+                    <div className="mt-5 space-y-4">
+                      {t('leistungen.sdkItems', { returnObjects: true }).map((item) => (
+                        <div key={item.name} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 md:flex-nowrap">
+                          <div className="flex flex-1 items-start gap-3">
+                            <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#25c990]" aria-hidden="true" />
+                            <div>
+                              <p className="text-base font-semibold text-[#071726]">{item.name}</p>
+                              <p className="text-sm text-slate-500">{item.detail}</p>
+                            </div>
                           </div>
+                          <span className="whitespace-nowrap pl-8 font-display text-base font-extrabold text-[#087454] md:pl-0">{item.amount}</span>
                         </div>
-                        <span className="pl-8 text-base font-bold text-emerald-700 whitespace-nowrap md:pl-0">{item.amount}</span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
                 </div>
               </details>
 
-              {/* Total */}
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
-                className="bg-gradient-to-r from-rose-50 to-amber-50 border-2 border-rose-200 rounded-2xl p-5 sm:p-8 text-center"
-              >
-                <p className="text-sm font-semibold uppercase tracking-wider text-rose-600 mb-2">{t('leistungen.totalLabel')}</p>
-                <p className="text-4xl sm:text-5xl font-bold text-slate-900 mb-3">{t('leistungen.totalAmount')}</p>
-                <p className="text-slate-600 leading-relaxed max-w-lg mx-auto">{t('leistungen.totalNote')}</p>
+              {/* Gesamtbudget als ruhige Leiste, die Bedingungen stehen daneben. */}
+              <motion.div {...reveal} className="grid gap-3 rounded-[2rem] bg-[#071726] p-6 text-white shadow-[0_24px_60px_rgba(7,17,31,0.16)] sm:p-8 md:grid-cols-[auto_minmax(0,1fr)] md:items-center md:gap-10">
+                <div>
+                  <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] md:text-xs md:tracking-[0.22em]">{t('leistungen.totalLabel')}</p>
+                  <p className="mt-2 font-display text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">{t('leistungen.totalAmount')}</p>
+                </div>
+                <p className="text-base leading-relaxed text-slate-200">{t('leistungen.totalNote')}</p>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* KRANKENHAUS / STATIONÄR */}
-        <section className="order-9 md:order-none py-10 sm:py-20 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-4xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6 sm:mb-12">
-                <FriendlyIcon kind="hospital" tone="sky" className="mx-auto mb-3 sm:mb-6 !h-12 !w-12 sm:!h-16 sm:!w-16" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">
-                  {t('klinik.title')}
-                </h2>
-                <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                  {t('klinik.subtitle')}
-                </p>
-              </motion.div>
+        {/* NEUGEBORENES / KLINIK */}
+        <section className={`bg-[#f5faf8] ${sectionPad}`} aria-labelledby="hebammen-klinik-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-klinik-heading" eyebrow={t('klinik.eyebrow')} title={t('klinik.title')} subtitle={t('klinik.subtitle')} />
 
+            <div className="mx-auto mt-8 max-w-5xl space-y-4 md:mt-12">
               {/* Kernbotschaft, hervorgehoben */}
-              <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
-                className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-5 sm:p-10 mb-5 sm:mb-8 text-white shadow-lg"
-              >
-                <h3 className="text-xl sm:text-2xl font-bold mb-4 leading-snug">{t('klinik.kernTitle')}</h3>
-                {t('klinik.kernText').split('\n\n').map((abs, i) => (
-                  <p key={i} className="text-base sm:text-lg text-emerald-50 leading-relaxed sm:leading-relaxed mb-3 sm:mb-4 last:mb-0">{abs}</p>
+              <motion.div {...reveal} className="rounded-[2rem] bg-gradient-to-br from-[#0a6c50] to-[#063e35] p-6 text-white shadow-[0_24px_60px_rgba(6,62,53,0.18)] sm:p-10">
+                <FriendlyIcon kind="hospital" tone="mint" size="sm" />
+                <h3 className="mt-4 font-display text-xl font-extrabold leading-snug [text-wrap:balance] sm:text-2xl">{t('klinik.kernTitle')}</h3>
+                {t('klinik.kernText').split('\n\n').map((abs) => (
+                  <p key={abs.slice(0, 32)} className="mt-3 text-base leading-relaxed text-emerald-50/90 sm:mt-4 sm:text-lg">{abs}</p>
                 ))}
               </motion.div>
 
-              <details className="group rounded-2xl border border-slate-200 bg-white">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+              <details className={accordionClass}>
+                <summary className={summaryClass}>
                   <span>{t('klinik.detailsLabel')}</span>
-                  <ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
+                  <ChevronDown className={chevronClass} aria-hidden="true" />
                 </summary>
-                <div className="border-t border-slate-200 p-5 sm:p-7">
-              <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-12">
-                {[
-                  { key: 'chance', bg: 'bg-rose-50', border: 'border-rose-500' },
-                  { key: 'chanceOben', bg: 'bg-sky-50', border: 'border-sky-500' },
-                  { key: 'deadline', bg: 'bg-amber-50', border: 'border-amber-500' },
-                  { key: 'ehrlich', bg: 'bg-slate-100', border: 'border-slate-400' },
-                  { key: 'rooming', bg: 'bg-emerald-50', border: 'border-emerald-500' },
-                ].map((block, i) => (
-                  <motion.div
-                    key={block.key}
-                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                    className={`${block.bg} border-l-4 ${block.border} rounded-r-xl p-5 sm:p-7`}
-                  >
-                    <h4 className="font-bold text-slate-900 mb-3 text-lg sm:text-xl">{t(`klinik.${block.key}Title`)}</h4>
-                    {t(`klinik.${block.key}Text`).split('\n\n').map((abs, j) => (
-                      <p key={j} className="text-base sm:text-lg text-slate-700 leading-relaxed sm:leading-relaxed mb-3 sm:mb-4 last:mb-0">{abs}</p>
-                    ))}
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">{t('klinik.compareTitle')}</h3>
-                <p className="text-slate-600 max-w-2xl mx-auto">{t('klinik.compareSubtitle')}</p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 mb-5 sm:mb-8">
-                {/* Die Bayerische */}
-                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                  className="bg-white border-2 border-sky-200 rounded-2xl p-5 sm:p-8 flex flex-col"
-                >
-                  <h3 className="text-xl font-bold text-sky-900">{t('klinik.bayerischeName')}</h3>
-                  <p className="text-base font-semibold text-sky-600 mb-6">{t('klinik.bayerischeTag')}</p>
-                  <div className="space-y-3 flex-1">
-                    {t('klinik.bayerischeItems', { returnObjects: true }).map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-base text-slate-700 leading-relaxed">{item}</p>
+                <div className="border-t border-slate-100 p-5 sm:p-7">
+                  <div className="space-y-4">
+                    {KLINIK_BLOCKS.map((block) => (
+                      <div key={block.key} className={`rounded-[1.25rem] p-5 ring-1 sm:p-6 ${block.tone}`}>
+                        <h4 className="font-display text-lg font-extrabold text-[#071726] sm:text-xl">{t(`klinik.${block.key}Title`)}</h4>
+                        {t(`klinik.${block.key}Text`).split('\n\n').map((abs) => (
+                          <p key={abs.slice(0, 32)} className="mt-3 text-base leading-relaxed text-slate-700">{abs}</p>
+                        ))}
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.bayerischeCaveat')}</p>
-                </motion.div>
 
-                {/* SDK */}
-                <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                  className="bg-white border-2 border-emerald-200 rounded-2xl p-5 sm:p-8 flex flex-col"
-                >
-                  <h3 className="text-xl font-bold text-emerald-900">{t('klinik.sdkName')}</h3>
-                  <p className="text-base font-semibold text-emerald-600 mb-6">{t('klinik.sdkTag')}</p>
-                  <div className="space-y-3 flex-1">
-                    {t('klinik.sdkItems', { returnObjects: true }).map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-base text-slate-700 leading-relaxed">{item}</p>
+                  <div className="mt-10 text-center">
+                    <h3 className="font-display text-2xl font-extrabold text-[#071726]">{t('klinik.compareTitle')}</h3>
+                    <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-slate-600">{t('klinik.compareSubtitle')}</p>
+                  </div>
+
+                  <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+                    {[
+                      { key: 'bayerische', accent: 'text-[#1f4f7a]', check: 'text-[#2f7fbf]' },
+                      { key: 'sdk', accent: 'text-[#087454]', check: 'text-[#25c990]' },
+                    ].map((insurer) => (
+                      <div key={insurer.key} className="flex flex-col rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-[0_14px_35px_rgba(31,57,66,0.06)] sm:p-7">
+                        <h3 className="font-display text-xl font-extrabold text-[#071726]">{t(`klinik.${insurer.key}Name`)}</h3>
+                        <p className={`mt-1 text-base font-semibold ${insurer.accent}`}>{t(`klinik.${insurer.key}Tag`)}</p>
+                        <div className="mt-5 flex-1 space-y-3">
+                          {t(`klinik.${insurer.key}Items`, { returnObjects: true }).map((item) => (
+                            <div key={item} className="flex items-start gap-3">
+                              <Check className={`mt-0.5 h-5 w-5 shrink-0 ${insurer.check}`} aria-hidden="true" />
+                              <p className="text-base leading-relaxed text-slate-700">{item}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="mt-6 border-t border-slate-100 pt-5 text-sm leading-relaxed text-slate-500">{t(`klinik.${insurer.key}Caveat`)}</p>
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-slate-500 leading-relaxed mt-6 pt-6 border-t border-slate-200">{t('klinik.sdkCaveat')}</p>
-                </motion.div>
-              </div>
 
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="bg-blue-50 border border-blue-200 rounded-2xl p-5 sm:p-8"
-              >
-                <p className="text-slate-700 leading-relaxed mb-4">{t('klinik.bonusNote')}</p>
-                <p className="text-slate-700 leading-relaxed mb-6">{t('klinik.closingNote')}</p>
-                <Link to="/stationaer" className="inline-flex items-center gap-2 text-base font-semibold text-blue-700 hover:text-blue-900 transition-colors">
-                  {t('klinik.ctaLink')}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
+                  <div className="mt-6 rounded-[1.5rem] bg-home-ice p-5 ring-1 ring-[#cde8dc] sm:p-7">
+                    <p className="text-base leading-relaxed text-slate-700">{t('klinik.bonusNote')}</p>
+                    <p className="mt-4 text-base leading-relaxed text-slate-700">{t('klinik.closingNote')}</p>
+                    <Link to="/stationaer" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-sm font-bold text-[#087454] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25c990]">
+                      {t('klinik.ctaLink')}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </div>
                 </div>
               </details>
             </div>
@@ -505,219 +557,166 @@ const HebammenPage = () => {
             Antrag schon bestehenden Schwangerschaft. */}
         <section
           id="hebammen-tarife"
-          className="order-10 md:order-none scroll-mt-24 bg-white py-10 sm:py-20"
+          className={`scroll-mt-24 bg-white ${sectionPad}`}
           aria-labelledby="hebammen-tarife-heading"
           data-healio-midwife="tarife"
         >
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="mx-auto max-w-5xl">
-              <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-2xl text-center">
-                <p className="font-display text-sm sm:text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
-                  {t('tarife.eyebrow')}
-                </p>
-                <h2 id="hebammen-tarife-heading" className="mt-3 sm:mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight [text-wrap:balance] sm:text-4xl">
-                  {t('tarife.title')}
-                </h2>
-                <p className="mt-3 sm:mt-4 text-lg leading-relaxed text-slate-600 [text-wrap:pretty]">
-                  {t('tarife.lead')}
-                </p>
-              </motion.div>
+          <div className={wrap}>
+            <SectionHead id="hebammen-tarife-heading" eyebrow={t('tarife.eyebrow')} title={t('tarife.title')} subtitle={t('tarife.lead')} />
 
-              {/* Mobil wischen die zwei Tarifarten und der Hinweis "beides möglich" als
-                  Karten nebeneinander; ab md liegen die zwei Karten im Raster und der
-                  Hinweis darunter über die ganze Breite, wie bisher. */}
-              <MobileSwipeRow
-                label={t('tarife.title')}
-                className="mt-6 sm:mt-10"
-                desktopClassName="md:grid md:grid-cols-2 md:gap-8 md:[&>li:nth-child(3)]:col-span-2"
-                mobileItemWidth="w-[86vw] max-w-[24rem]"
-              >
-                {TARIFF_CARDS.map((card, i) => (
-                  <motion.article
-                    key={card.key}
-                    initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                    className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8"
-                    data-healio-midwife-card={card.key}
-                  >
-                    <FriendlyIcon kind={card.kind} tone={card.tone} size="md" className="!h-12 !w-12 sm:!h-16 sm:!w-16" />
-                    <p className="mt-4 sm:mt-6 font-display text-sm sm:text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
-                      {t(`tarife.${card.key}.label`)}
-                    </p>
-                    <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance]">
-                      {t(`tarife.${card.key}.title`)}
-                    </h3>
-                    <p className="mt-3 sm:mt-4 text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
-                      {t(`tarife.${card.key}.text`)}
-                    </p>
-                    <div className="mt-auto pt-4 sm:pt-6">
-                      <p className="flex gap-2.5 border-t border-slate-100 pt-4 sm:pt-5 text-sm leading-relaxed text-slate-600 sm:text-[0.9375rem]">
-                        <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
-                        <span>{t(`tarife.${card.key}.condition`)}</span>
-                      </p>
-                    </div>
-                  </motion.article>
-                ))}
-
-                <motion.div
-                  initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  className="flex h-full flex-col items-start justify-center gap-4 rounded-2xl border border-emerald-100 bg-[#F4FAF7] p-5 sm:flex-row sm:items-center sm:justify-start sm:p-6"
+            {/* Mobil wischen die zwei Tarifarten und der Hinweis "beides möglich" als
+                Karten nebeneinander; ab md liegen die zwei Karten im Raster und der
+                Hinweis darunter über die ganze Breite. */}
+            <MobileSwipeRow
+              label={t('tarife.title')}
+              className="mx-auto mt-8 max-w-5xl md:mt-12"
+              desktopClassName="md:grid md:grid-cols-2 md:gap-6 md:[&>li:nth-child(3)]:col-span-2"
+              mobileItemWidth="w-[86vw] max-w-[24rem]"
+            >
+              {TARIFF_CARDS.map((card, index) => (
+                <motion.article
+                  key={card.key}
+                  {...reveal}
+                  transition={{ delay: index * 0.08 }}
+                  className="flex h-full flex-col rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8"
+                  data-healio-midwife-card={card.key}
                 >
-                  <FriendlyIcon kind="family" tone="mint" size="sm" />
-                  <p className="text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
-                    {t('tarife.both')}
-                  </p>
-                </motion.div>
-              </MobileSwipeRow>
-
-              <motion.article
-                initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="mt-4 grid gap-4 rounded-[2rem] border border-emerald-200 bg-[#F4FAF7] p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:mt-10 sm:gap-6 sm:p-8 md:grid-cols-[auto_minmax(0,1fr)] md:gap-8 lg:p-10"
-                aria-labelledby="hebammen-bayerische-heading"
-                data-healio-midwife-card="bayerische"
-              >
-                <FriendlyIcon kind="calendar" tone="sky" size="lg" className="!h-14 !w-14 sm:!h-20 sm:!w-20" />
-                <div className="min-w-0">
-                  <p className="font-display text-sm sm:text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-700">
-                    {t('tarife.bayerische.label')}
-                  </p>
-                  <h3 id="hebammen-bayerische-heading" className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:text-3xl">
-                    {t('tarife.bayerische.title')}
+                  <FriendlyIcon kind={card.kind} tone={card.tone} size="md" className="!h-12 !w-12 sm:!h-16 sm:!w-16" />
+                  <p className={`mt-4 sm:mt-6 ${eyebrowClass}`}>{t(`tarife.${card.key}.label`)}</p>
+                  <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-[#071726] [text-wrap:balance]">
+                    {t(`tarife.${card.key}.title`)}
                   </h3>
-                  <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">
-                    {t('tarife.bayerische.text')}
-                  </p>
-                  <p className="mt-4 sm:mt-5 flex max-w-3xl gap-2.5 rounded-2xl border border-emerald-100 bg-white p-4 text-sm leading-relaxed text-slate-700 sm:text-[0.9375rem]">
-                    <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
-                    <span>{t('tarife.bayerische.condition')}</span>
-                  </p>
-                </div>
-              </motion.article>
-            </div>
+                  <p className="mt-3 text-base leading-relaxed text-slate-700 sm:mt-4 sm:text-[1.0625rem]">{t(`tarife.${card.key}.text`)}</p>
+                  <div className="mt-auto pt-4 sm:pt-6">
+                    <p className="flex gap-2.5 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-600 sm:pt-5 sm:text-[0.9375rem]">
+                      <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+                      <span>{t(`tarife.${card.key}.condition`)}</span>
+                    </p>
+                  </div>
+                </motion.article>
+              ))}
+
+              <motion.div
+                {...reveal}
+                className="flex h-full flex-col items-start justify-center gap-4 rounded-[1.5rem] border border-emerald-100 bg-home-ice p-5 sm:flex-row sm:items-center sm:justify-start sm:p-6"
+              >
+                <FriendlyIcon kind="family" tone="mint" size="sm" />
+                <p className="text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">{t('tarife.both')}</p>
+              </motion.div>
+            </MobileSwipeRow>
+
+            <motion.article
+              {...reveal}
+              className="mx-auto mt-4 grid max-w-5xl gap-4 rounded-[2rem] border border-emerald-200 bg-home-ice p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:mt-8 sm:gap-6 sm:p-8 md:grid-cols-[auto_minmax(0,1fr)] md:gap-8 lg:p-10"
+              aria-labelledby="hebammen-bayerische-heading"
+              data-healio-midwife-card="bayerische"
+            >
+              <FriendlyIcon kind="calendar" tone="sky" size="lg" className="!h-14 !w-14 sm:!h-20 sm:!w-20" />
+              <div className="min-w-0">
+                <p className={eyebrowClass}>{t('tarife.bayerische.label')}</p>
+                <h3 id="hebammen-bayerische-heading" className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-[#071726] [text-wrap:balance] sm:text-3xl">
+                  {t('tarife.bayerische.title')}
+                </h3>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">{t('tarife.bayerische.text')}</p>
+                <p className="mt-4 flex max-w-3xl gap-2.5 rounded-2xl border border-emerald-100 bg-white p-4 text-sm leading-relaxed text-slate-700 sm:mt-5 sm:text-[0.9375rem]">
+                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#087454]" aria-hidden="true" />
+                  <span>{t('tarife.bayerische.condition')}</span>
+                </p>
+              </div>
+            </motion.article>
           </div>
         </section>
 
-        {/* Klare Zuständigkeiten; keine pauschale Rechts- oder Leistungszusage. */}
-        <section className="order-11 md:order-none py-10 sm:py-20 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6 sm:mb-10">
-                <FriendlyIcon kind="protection" tone="mint" className="mx-auto mb-3 sm:mb-6 !h-12 !w-12 sm:!h-16 sm:!w-16" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">
-                  {t('legal.title')}
-                </h2>
-                <p className="text-lg text-slate-600 leading-relaxed">
-                  {t('legal.subtitle')}
-                </p>
-              </motion.div>
+        {/* ROLLEN + FRAGEN. Klare Zuständigkeiten; keine pauschale Rechts- oder
+            Leistungszusage. Fragen im Stil von /stationaer, Antworten bleiben im
+            HTML (details), damit sie auch ohne Skript lesbar sind. */}
+        <section className={`bg-[#f5faf8] ${sectionPad}`} aria-labelledby="hebammen-rollen-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-rollen-heading" eyebrow={t('legal.eyebrow')} title={t('legal.title')} subtitle={t('legal.subtitle')} />
 
-              <MobileSwipeRow label={t('legal.title')} desktopClassName="md:grid md:grid-cols-3 md:gap-4" mobileItemWidth="w-[84vw] max-w-[22rem]">
-                {t('roles', { returnObjects: true }).map((role, index) => (
-                  <article key={role.title} className="h-full rounded-xl border border-emerald-100 bg-white p-5">
-                    <p className="text-sm font-bold text-emerald-700">0{index + 1}</p>
-                    <h3 className="mt-2 text-lg font-bold text-slate-900">{role.title}</h3>
-                    <p className="mt-3 text-base leading-relaxed text-slate-700">{role.text}</p>
-                  </article>
+            <MobileSwipeRow label={t('legal.title')} className="mx-auto mt-8 max-w-5xl md:mt-10" desktopClassName="md:grid md:grid-cols-3 md:gap-4" mobileItemWidth="w-[84vw] max-w-[22rem]">
+              {t('roles', { returnObjects: true }).map((role, index) => (
+                <article key={role.title} className={cardClass}>
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#25c990] font-display text-sm font-extrabold text-[#071726]">{index + 1}</span>
+                  <h3 className="mt-4 font-display text-lg font-extrabold leading-snug text-[#071726]">{role.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-slate-600">{role.text}</p>
+                </article>
+              ))}
+            </MobileSwipeRow>
+            <p className="mx-auto mt-5 max-w-5xl text-sm leading-relaxed text-slate-500">{t('legal.summary')}</p>
+
+            <div className="mx-auto mt-12 max-w-4xl md:mt-16" aria-labelledby="hebammen-faq-heading">
+              <div className="text-center">
+                <p className={eyebrowClass}>{t('faq.eyebrow')}</p>
+                <h2 id="hebammen-faq-heading" className="mt-3 font-display text-3xl font-extrabold tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl">{t('faq.title')}</h2>
+              </div>
+              <div className="mt-6 space-y-3 md:mt-8">
+                {t('faq.items', { returnObjects: true }).map((item) => (
+                  <details key={item.question} className={accordionClass}>
+                    <summary className={summaryClass}>
+                      <span>{item.question}</span>
+                      <ChevronDown className={chevronClass} aria-hidden="true" />
+                    </summary>
+                    <p className="border-t border-slate-100 px-5 pb-5 pt-4 text-base leading-relaxed text-slate-600 sm:px-6">{item.answer}</p>
+                  </details>
                 ))}
-              </MobileSwipeRow>
-              <p className="mt-5 text-sm leading-relaxed text-slate-600">{t('legal.summary')}</p>
-              <div className="mt-8" aria-labelledby="hebammen-faq-heading">
-                <h3 id="hebammen-faq-heading" className="text-2xl font-bold text-slate-900">{t('faq.title')}</h3>
-                <div className="mt-4 space-y-3">
-                  {t('faq.items', { returnObjects: true }).map((item) => (
-                    <details key={item.question} className="group rounded-xl border border-slate-200 bg-white">
-                      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-4 text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600 [&::-webkit-details-marker]:hidden">
-                        <span>{item.question}</span><ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
-                      </summary>
-                      <p className="border-t border-slate-100 p-4 text-base leading-relaxed text-slate-700">{item.answer}</p>
-                    </details>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ABLAUF — 3 SCHRITTE */}
-        <section className="order-12 md:order-none py-10 sm:py-20 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6 sm:mb-12"
-              >
-                {t('steps.title')}
-              </motion.h2>
+        {/* ABLAUF IN DREI SCHRITTEN */}
+        <section className={`bg-white ${sectionPad}`} aria-labelledby="hebammen-ablauf-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-ablauf-heading" eyebrow={t('steps.eyebrow')} title={t('steps.title')} />
 
-              {/* Mobil wischen die drei Schritte als Karten; ab md untereinander wie bisher. */}
-              <MobileSwipeRow
-                as="ol"
-                label={t('steps.title')}
-                desktopClassName="md:block md:space-y-8"
-                mobileItemWidth="w-[84vw] max-w-[22rem]"
-              >
-                {[
-                  { emoji: '💬', tone: 'lavender', num: '1', titleKey: 'steps.step1Title', descKey: 'steps.step1Desc' },
-                  { emoji: '📄', tone: 'sky', num: '2', titleKey: 'steps.step2Title', descKey: 'steps.step2Desc' },
-                  { emoji: '📱', tone: 'coral', num: '3', titleKey: 'steps.step3Title', descKey: 'steps.step3Desc' },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="h-full bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-gray-100 flex flex-col items-start gap-3 sm:flex-row sm:gap-5"
-                  >
-                    <FriendlyIcon emoji={item.emoji} label={t(item.titleKey)} tone={item.tone} size="sm" />
-                    <div>
-                      <p className="mb-1 text-sm sm:text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-700">0{item.num}</p>
-                      <h3 className="text-lg font-semibold text-slate-900 mb-1">{t(item.titleKey)}</h3>
-                      <p className="text-slate-600 leading-relaxed">{t(item.descKey)}</p>
+            {/* Mobil wischen die drei Schritte als Karten; ab md drei Spalten. */}
+            <MobileSwipeRow
+              as="ol"
+              label={t('steps.title')}
+              className="mx-auto mt-8 max-w-5xl md:mt-12"
+              desktopClassName="md:grid md:grid-cols-3 md:gap-6"
+              mobileItemWidth="w-[84vw] max-w-[22rem]"
+            >
+              {[1, 2, 3].map((num, index) => {
+                const icon = STEP_ICONS[index];
+                return (
+                  <motion.div key={num} {...reveal} transition={{ delay: index * 0.08 }} className={cardClass}>
+                    <div className="flex items-center gap-3">
+                      <FriendlyIcon kind={icon.kind} tone={icon.tone} size="sm" />
+                      <span className="font-display text-sm font-extrabold uppercase tracking-[0.16em] text-[#087454]">0{num}</span>
                     </div>
+                    <h3 className="mt-4 font-display text-xl font-extrabold leading-snug text-[#071726]">{t(`steps.step${num}Title`)}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-slate-600">{t(`steps.step${num}Desc`)}</p>
                   </motion.div>
-                ))}
-              </MobileSwipeRow>
+                );
+              })}
+            </MobileSwipeRow>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="mt-3 sm:mt-10 bg-emerald-50 border border-emerald-200 rounded-xl p-5 sm:p-6 flex items-start gap-4"
-              >
-                <FriendlyIcon kind="support" tone="mint" size="sm" className="mt-0.5" />
-                <p className="text-slate-700 leading-relaxed font-medium">
-                  {t('steps.easeNote')}
-                </p>
-              </motion.div>
-            </div>
+            <motion.div {...reveal} className="mx-auto mt-4 flex max-w-5xl items-start gap-4 rounded-[1.5rem] border border-emerald-100 bg-home-ice p-5 sm:p-6 md:mt-8">
+              <FriendlyIcon kind="support" tone="mint" size="sm" />
+              <p className="self-center text-base font-medium leading-relaxed text-slate-700">{t('steps.easeNote')}</p>
+            </motion.div>
           </div>
         </section>
 
-        {/* CTA + CALENDLY */}
-        <section className="order-last md:order-none py-10 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                  {t('cta.title')}
-                </h2>
-                <p className="text-lg text-white/90 mb-6 sm:mb-10">
-                  {t('cta.subtitle')}
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-xl p-4 sm:p-6"
-              >
-                <div id="calendly-hebammen">
-                  <AppointmentBooking
-                    placement="midwives_page"
-                    title={lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                    className="h-[600px] md:h-[700px]"
-                  />
-                </div>
-              </motion.div>
-            </div>
+        {/* TERMIN: 45-Minuten-Kennenlernen */}
+        <section className={`bg-home-ice ${sectionPad}`} aria-labelledby="hebammen-termin-heading">
+          <div className={wrap}>
+            <SectionHead id="hebammen-termin-heading" title={t('cta.title')} subtitle={t('cta.subtitle')} />
+            <motion.div {...reveal} className="mx-auto mt-8 max-w-4xl rounded-[2rem] border border-emerald-900/10 bg-white p-3 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-6 md:mt-10">
+              <div id={BOOKING_ID} className="scroll-mt-28">
+                <AppointmentBooking
+                  placement="midwives_page"
+                  title={lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                  className="h-[600px] md:h-[700px]"
+                />
+              </div>
+            </motion.div>
           </div>
         </section>
 
-      </main>
+      </article>
       <AmbulantMiaPrompt variant="hebammen" />
     </>
   );

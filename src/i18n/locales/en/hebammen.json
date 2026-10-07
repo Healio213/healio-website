@@ -26,6 +26,8 @@
   },
   "explanationVideo": {
     "title": "The midwife concept at a glance",
+    "eyebrow": "Explainer video",
+    "aria": "Explainer video: the midwife concept at a glance",
     "subtitle": "The key points at a glance. You can clarify your questions directly with Nita.",
     "points": [
       "Clear responsibilities for midwives, families and Healio",
@@ -47,6 +49,7 @@
     "amountLabel": "Plan benefits over two years"
   },
   "leistungen": {
+    "eyebrow": "Health fund, bonus and supplementary cover",
     "title": "Which benefits may be relevant",
     "subtitle": "Statutory benefits, bonuses and supplementary cover are separate. Eligibility depends on the health fund, plan, evidence and personal circumstances.",
     "detailsLabel": "View details on health fund benefits and supplementary cover",
@@ -133,6 +136,7 @@
     "totalNote": "EUR 3,000 represents maximum plan benefits, not a cash bonus from a health fund. Statutory benefits, bonuses and insurance benefits are reviewed separately."
   },
   "klinik": {
+    "eyebrow": "Newborn cover",
     "title": "For newborn cover, timing matters",
     "subtitle": "Newborn enrolment depends on legal and policy requirements. Midwives give a pointer; Healio reviews the individual case.",
     "detailsLabel": "View details on newborn enrolment and hospital cover",
@@ -201,12 +205,14 @@
     }
   },
   "legal": {
+    "eyebrow": "Responsibilities",
     "title": "Three roles. Clear responsibilities.",
     "subtitle": "Billing and insurance benefits are separate decisions.",
     "text": "The midwife clarifies the permitted service and fee. Healio reviews cover. The insurer confirms which reimbursement is possible in the individual case.",
     "summary": "The midwife does not promise insurance cover or reimbursement. Individual billing and agreements must follow the applicable statutory and fee rules."
   },
   "steps": {
+    "eyebrow": "How it works",
     "title": "This is how easy it works for you.",
     "step1Title": "Quick Introduction",
     "step1Desc": "Allow 45 minutes. We explain the concept and you decide whether it fits your work.",
@@ -244,6 +250,7 @@
     "cta": "Yes, explain the concept"
   },
   "examples": {
+    "eyebrow": "From practice",
     "title": "Two examples from midwifery practice",
     "lead": "Make remaining costs visible. Clarify billing and insurance cover first.",
     "onCall": {
@@ -279,7 +286,7 @@
     }
   },
   "downloads": {
-    "waitTitle": "Review before a pregnancy – eight months of waiting",
+    "waitTitle": "Review before a pregnancy: eight months of waiting",
     "waitText": "With die Bayerische, eight months of waiting run from the start of insurance for childbirth and, under confirmed current claims practice, also for the named outpatient pregnancy and postnatal services. The product summary excludes ongoing or recommended examinations and treatment. Completing the waiting period does not guarantee reimbursement: outpatient claims practice is not a separate explicit plan promise. Request a written review of the specific case beforehand.",
     "title": "Templates and checklists for the next step",
     "lead": "Download without contact details. Complete individually and review before use. The PDFs are in German.",
@@ -313,6 +320,7 @@
     }
   ],
   "faq": {
+    "eyebrow": "Quick answers",
     "title": "Key questions before deciding",
     "items": [
       {

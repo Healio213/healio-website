@@ -14,6 +14,10 @@ export const sceneHeroImages = {
   zahn: '/images/hero-desktop/zahn.webp',
   stationaer: '/images/hero-desktop/stationaer.webp',
   schwangerschaft: '/images/hero-desktop/schwangerschaft.webp',
+  // /hebammen (08.10.2026): vorerst dieselbe Szene wie /schwangerschaft, die
+  // Hausbesuch-Situation (Hebamme mit Notizbuch bei der Schwangeren zu Hause)
+  // passt auch hier. Eine eigene Szene kann diese Zeile später ersetzen.
+  hebammen: '/images/hero-desktop/schwangerschaft.webp',
   leistungen: '/images/hero-desktop/leistungen.webp',
   partner: '/images/hero-desktop/partner.webp',
   about: '/images/hero-desktop/about.webp',
