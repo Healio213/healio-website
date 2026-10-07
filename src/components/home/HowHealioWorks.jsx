@@ -3,16 +3,15 @@ import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
-import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { trackEvent } from '@/lib/analytics';
 
-// Thematische Sach-Icons im Stil der Sparten-Karten. Die 3D-Figur bleibt
-// bewusst nur der Praxis-Karte im Abschnitt AudienceLinks vorbehalten.
+// Frank 07.10.2026: Karten liebevoller gestalten. Jeder Schritt zeigt oben
+// eine kleine Cartoon-Szene im Stil der Kopfbereiche (ohne Geld, ohne Schrift).
 const stepVisuals = [
-  { kind: 'comparison', tone: 'mint', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
-  { kind: 'protection', tone: 'butter', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
-  { kind: 'bonus', tone: 'sky', surface: 'bg-[#EAF2FF]', border: 'border-[#D6E1F1]' },
+  { scene: '/images/home-cards/schritt1-kasse.webp', surface: 'bg-[#E7F7EF]', border: 'border-[#CCE8DA]' },
+  { scene: '/images/home-cards/schritt2-schutz.webp', surface: 'bg-[#FFF1D6]', border: 'border-[#EBDCBF]' },
+  { scene: '/images/home-cards/schritt3-bonus.webp', surface: 'bg-[#EAF2FF]', border: 'border-[#D6E1F1]' },
 ];
 
 const HowHealioWorks = () => {
@@ -52,17 +51,27 @@ const HowHealioWorks = () => {
             return (
               <div
                 key={step.number}
-                className={`group relative w-full overflow-hidden rounded-3xl border p-5 shadow-[0_2px_10px_rgba(7,17,31,0.07)] transition md:shadow-[0_18px_44px_rgba(7,17,31,0.07)] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(7,17,31,0.11)] motion-reduce:transform-none md:min-h-[315px] md:p-7 ${visual.surface} ${visual.border}`}
+                className={`group relative flex w-full flex-col overflow-hidden rounded-3xl border shadow-[0_2px_10px_rgba(7,17,31,0.07)] transition md:shadow-[0_18px_44px_rgba(7,17,31,0.07)] duration-200 hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(7,17,31,0.11)] motion-reduce:transform-none ${visual.surface} ${visual.border}`}
               >
-                <div className="absolute -right-14 -top-14 h-44 w-44 rounded-full border border-current opacity-[0.06]" aria-hidden="true" />
-                <div className="relative flex items-start justify-between gap-4">
-                  <FriendlyIcon kind={visual.kind} label={step.title} tone={visual.tone} size="xl" className="transition-transform duration-200 group-hover:rotate-2 group-hover:scale-[1.03] motion-reduce:transform-none" />
-                  <span className="grid h-9 w-9 place-items-center rounded-full border border-emerald-900/10 bg-white/70 font-display text-sm font-extrabold tracking-[0.12em] text-emerald-800 md:text-xs">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
+                  <img
+                    src={visual.scene}
+                    alt=""
+                    aria-hidden="true"
+                    width="720"
+                    height="540"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+                  />
+                  <span className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/90 font-display text-sm font-extrabold tracking-[0.08em] text-emerald-800 shadow-[0_4px_12px_rgba(7,17,31,0.18)] md:text-xs">
                     {step.number}
                   </span>
                 </div>
-                <h3 className="relative mt-5 font-display text-2xl font-bold leading-tight text-[#0C2A21] md:mt-7">{step.title}</h3>
-                <p className="relative mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{step.description}</p>
+                <div className="p-5 md:p-7">
+                  <h3 className="font-display text-2xl font-bold leading-tight text-[#0C2A21]">{step.title}</h3>
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{step.description}</p>
+                </div>
               </div>
             );
           })}
