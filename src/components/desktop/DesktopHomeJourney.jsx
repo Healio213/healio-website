@@ -8,14 +8,9 @@ import { useLanguage } from '@/hooks/useLanguage';
 const stepScenes = ['/images/home-cards/schritt1-kasse.webp', '/images/home-cards/schritt2-schutz.webp', '/images/home-cards/schritt3-bonus.webp'];
 const productScenes = { ambulant: '/images/home-cards/ambulant.webp', zahn: '/images/home-cards/zahn.webp', stationaer: '/images/home-cards/stationaer.webp' };
 
-const SceneImage = ({ src, badge }) => (
+const SceneImage = ({ src }) => (
   <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
     <img src={src} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none" />
-    {badge && (
-      <span className="absolute left-5 top-5 grid h-10 min-w-10 place-items-center rounded-full bg-white/90 px-3 font-display text-sm font-extrabold tabular-nums text-[#0b6048] shadow-[0_4px_12px_rgba(7,17,31,0.18)]" aria-hidden="true">
-        {badge}
-      </span>
-    )}
   </div>
 );
 
@@ -167,9 +162,12 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
           <ol className="mt-14 grid grid-cols-3 gap-6 xl:gap-8">
             {copy.steps.map((step, index) => (
               <li key={step.title} className="group min-w-0 overflow-hidden rounded-3xl border border-[#d5e6dd] bg-white shadow-[0_18px_44px_rgba(7,17,31,0.07)]">
-                <SceneImage src={stepScenes[index]} badge={String(index + 1).padStart(2, '0')} />
+                <SceneImage src={stepScenes[index]} />
                 <div className="p-7">
-                  <h3 className="font-display text-xl font-extrabold leading-7 text-home-midnight xl:text-2xl">
+                  <h3 className="flex items-center gap-3 font-display text-xl font-extrabold leading-7 text-home-midnight xl:text-2xl">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#eef6f2] font-display text-sm font-extrabold tabular-nums text-[#0b6048]" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                     {step.title}
                   </h3>
                   <p className="mt-3 text-base leading-7 text-[#334f46]">{step.text}</p>

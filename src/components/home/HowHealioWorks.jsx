@@ -64,12 +64,12 @@ const HowHealioWorks = () => {
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
                   />
-                  <span className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/90 font-display text-sm font-extrabold tracking-[0.08em] text-emerald-800 shadow-[0_4px_12px_rgba(7,17,31,0.18)] md:text-xs">
-                    {step.number}
-                  </span>
                 </div>
                 <div className="p-5 md:p-7">
-                  <h3 className="font-display text-2xl font-bold leading-tight text-[#0C2A21]">{step.title}</h3>
+                  <h3 className="flex items-center gap-3 font-display text-2xl font-bold leading-tight text-[#0C2A21]">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white font-display text-sm font-extrabold tracking-[0.08em] text-emerald-800 ring-1 ring-emerald-900/10 md:text-xs" aria-hidden="true">{step.number}</span>
+                    {step.title}
+                  </h3>
                   <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{step.description}</p>
                 </div>
               </div>

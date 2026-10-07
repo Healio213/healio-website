@@ -2,16 +2,18 @@ import React, { useCallback, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import WhatsAppHelpHint, { useWhatsAppHelp } from '@/components/sections/shared/WhatsAppHelpHint';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 
+// Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte zeigt oben eine
+// Cartoon-Szene, darunter ein weicher Pastellton statt Weiß (wie bei den
+// Zahn-Karten).
 const tariffOptions = [
-  { key: 'sp2', tone: 'mint', kind: 'hospital', accent: '#25c990', surface: '#eefaf5' },
-  { key: 'sp1', tone: 'lavender', kind: 'hospital', accent: '#8176bf', surface: '#f4f1fb' },
-  { key: 'spu', tone: 'butter', kind: 'protection', accent: '#c99422', surface: '#fff8e4' },
+  { key: 'sp2', scene: '/images/card-scenes/stationaer-sp2.webp', body: 'bg-[#f4fbf7]', accent: '#25c990', surface: '#eefaf5' },
+  { key: 'sp1', scene: '/images/card-scenes/stationaer-sp1.webp', body: 'bg-[#f9f7ff]', accent: '#8176bf', surface: '#f4f1fb' },
+  { key: 'spu', scene: '/images/card-scenes/stationaer-spu.webp', body: 'bg-[#fffcf2]', accent: '#c99422', surface: '#fff8e4' },
 ];
 
 const StationaerTariffSelector = () => {
@@ -80,60 +82,73 @@ const StationaerTariffSelector = () => {
             return (
               <article
                 key={option.key}
-                className={`relative flex h-full flex-col overflow-hidden rounded-[1.8rem] border-2 bg-white p-5 shadow-[0_2px_8px_rgba(29,53,63,0.08)] transition duration-300 sm:p-7 md:shadow-[0_18px_45px_rgba(29,53,63,0.07)] ${
-                  isSelected ? 'border-current md:-translate-y-1 md:shadow-[0_24px_55px_rgba(29,53,63,0.13)]' : 'border-slate-100 md:border-white md:hover:-translate-y-1 md:hover:border-slate-200'
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border-2 shadow-[0_2px_8px_rgba(7,17,31,0.08)] transition duration-300 md:shadow-[0_18px_44px_rgba(7,17,31,0.08)] ${option.body} ${
+                  isSelected ? 'border-current md:-translate-y-1 md:shadow-[0_24px_55px_rgba(7,17,31,0.14)]' : 'border-[#07111f]/[0.06] md:hover:-translate-y-1 md:hover:border-[#07111f]/[0.12]'
                 }`}
                 style={{ color: isSelected ? option.accent : undefined }}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <FriendlyIcon kind={option.kind} tone={option.tone} size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
-                  <span
-                    className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-extrabold md:text-xs"
-                    style={{ backgroundColor: option.surface, color: option.accent }}
-                  >
-                    {isSelected ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Circle className="h-3.5 w-3.5" aria-hidden="true" />}
-                    {t(`refresh.selector.options.${option.key}.code`)}
-                  </span>
+                <div className="relative overflow-hidden bg-[#071726]">
+                  <img
+                    src={option.scene}
+                    alt=""
+                    aria-hidden="true"
+                    width="720"
+                    height="480"
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[3/2] w-full object-cover transition duration-500 md:group-hover:scale-[1.04] motion-reduce:transition-none"
+                  />
                 </div>
 
-                <p className="mt-4 text-sm font-extrabold uppercase tracking-[0.12em] md:mt-6 md:text-xs md:tracking-[0.16em]" style={{ color: option.accent }}>
-                  {t(`refresh.selector.options.${option.key}.useCase`)}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.025em] text-[#071726]">
-                  {t(`refresh.selector.options.${option.key}.title`)}
-                </h3>
-                <p className="mt-2 text-base font-extrabold md:text-sm" style={{ color: option.accent }}>
-                  {t(`refresh.selector.options.${option.key}.price`)}
-                </p>
-                <p className="mt-3 text-base leading-relaxed text-slate-600 md:min-h-[3.25rem] md:text-sm md:leading-relaxed">
-                  {t(`refresh.selector.options.${option.key}.description`)}
-                </p>
+                <div className="flex flex-1 flex-col p-5 sm:p-7">
+                  {/* Frank 07.10.2026: keine Beschriftung auf dem Bild, Tarifcode steht hier unten. */}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-sm font-bold text-[#07111f] ring-1 ring-[#07111f]/10">
+                      {isSelected
+                        ? <Check className="h-3.5 w-3.5" style={{ color: option.accent }} aria-hidden="true" />
+                        : <Circle className="h-3.5 w-3.5" style={{ color: option.accent }} aria-hidden="true" />}
+                      {t(`refresh.selector.options.${option.key}.code`)}
+                    </span>
+                    <p className="text-sm font-extrabold uppercase tracking-[0.12em] md:text-xs md:tracking-[0.16em]" style={{ color: option.accent }}>
+                      {t(`refresh.selector.options.${option.key}.useCase`)}
+                    </p>
+                  </div>
+                  <h3 className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.025em] text-[#071726]">
+                    {t(`refresh.selector.options.${option.key}.title`)}
+                  </h3>
+                  <p className="mt-2 text-base font-extrabold md:text-sm" style={{ color: option.accent }}>
+                    {t(`refresh.selector.options.${option.key}.price`)}
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600 md:min-h-[3.25rem] md:text-sm md:leading-relaxed">
+                    {t(`refresh.selector.options.${option.key}.description`)}
+                  </p>
 
-                <ul className="mt-5 space-y-3 text-base text-slate-700 md:mt-6 md:text-sm">
-                  {(Array.isArray(features) ? features : []).map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: option.accent }} aria-hidden="true" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="mt-5 space-y-3 text-base text-slate-700 md:mt-6 md:text-sm">
+                    {(Array.isArray(features) ? features : []).map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: option.accent }} aria-hidden="true" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="mt-auto pt-6 md:pt-7">
-                  <button
-                    type="button"
-                    aria-pressed={isSelected}
-                    onClick={() => choose(option.key)}
-                    className="flex min-h-12 w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-extrabold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3"
-                    style={{
-                      borderColor: isSelected ? option.accent : '#dbe4e8',
-                      backgroundColor: isSelected ? option.surface : '#ffffff',
-                      color: isSelected ? option.accent : '#223044',
-                      outlineColor: option.accent,
-                    }}
-                  >
-                    {isSelected ? t('refresh.selector.selected') : t('refresh.selector.choose')}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </button>
+                  <div className="mt-auto pt-6 md:pt-7">
+                    <button
+                      type="button"
+                      aria-pressed={isSelected}
+                      onClick={() => choose(option.key)}
+                      className="flex min-h-12 w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-extrabold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3"
+                      style={{
+                        borderColor: isSelected ? option.accent : '#dbe4e8',
+                        backgroundColor: isSelected ? option.surface : '#ffffff',
+                        color: isSelected ? option.accent : '#223044',
+                        outlineColor: option.accent,
+                      }}
+                    >
+                      {isSelected ? t('refresh.selector.selected') : t('refresh.selector.choose')}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  </div>
                 </div>
               </article>
             );

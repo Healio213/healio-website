@@ -264,11 +264,21 @@ const COPY = {
   },
 };
 
+// Frank 07.10.2026: Karten liebevoller gestalten. Jede Kompass-Kachel zeigt
+// oben eine Cartoon-Szene, darunter einen hellen Textteil in sanftem Pastell.
 const GOALS = [
-  { id: 'natur', kind: 'naturopathy', tone: 'butter' },
-  { id: 'sehen', kind: 'glasses', tone: 'sky' },
-  { id: 'vorsorge', kind: 'prevention', tone: 'mint' },
-  { id: 'alles', kind: 'budget', tone: 'lavender' },
+  { id: 'natur', scene: '/images/card-scenes/ambulant-heilpraktiker.webp', surface: 'bg-[#f4fbf7]' },
+  { id: 'sehen', scene: '/images/card-scenes/ambulant-brille.webp', surface: 'bg-[#f5faff]' },
+  { id: 'vorsorge', scene: '/images/card-scenes/ambulant-vorsorge.webp', surface: 'bg-[#f9f7ff]' },
+  { id: 'alles', scene: '/images/card-scenes/ambulant-budget.webp', surface: 'bg-[#fffcf2]' },
+];
+
+// Die drei Schritte zeigen oben dieselben Szenen wie die Schritt-Karten auf der
+// Startseite (Reihenfolge: Bedarf = Schutz, Tarif = Kasse, Bonus = Bonus).
+const PROCESS_VISUALS = [
+  { scene: '/images/home-cards/schritt2-schutz.webp', surface: 'bg-[#f4fbf7]' },
+  { scene: '/images/home-cards/schritt1-kasse.webp', surface: 'bg-[#f5faff]' },
+  { scene: '/images/home-cards/schritt3-bonus.webp', surface: 'bg-[#fffcf2]' },
 ];
 
 const TIERS = [
@@ -424,13 +434,33 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                     type="button"
                     aria-pressed={active}
                     onClick={() => setSelectedGoal(item.id)}
-                    className={`home-focus group flex h-full min-h-0 w-full items-start gap-3 rounded-[1.6rem] border p-4 text-left transition duration-300 motion-reduce:transform-none md:min-h-[150px] md:gap-4 md:p-5 ${active ? 'border-home-mint bg-white shadow-[0_2px_8px_rgba(7,17,31,0.12)] md:relative md:z-[1] md:-translate-y-0.5 md:shadow-[0_20px_55px_rgba(7,17,31,0.10)]' : 'border-emerald-950/10 bg-white/70 hover:border-home-mint/50 hover:bg-white'}`}
+                    className={`home-focus group relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[1.4rem] text-left transition duration-300 motion-reduce:transform-none ${item.surface} ${active ? 'shadow-[0_2px_8px_rgba(7,17,31,0.12)] md:z-[1] md:-translate-y-0.5 md:shadow-[0_20px_55px_rgba(7,17,31,0.14)]' : 'shadow-[0_2px_8px_rgba(7,17,31,0.06)] hover:shadow-[0_10px_28px_rgba(7,17,31,0.10)]'}`}
                   >
-                    <FriendlyIcon kind={item.kind} tone={item.tone} size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
-                    <span>
-                      <span className="block font-display text-lg font-extrabold leading-tight text-home-midnight">{itemCopy.title}</span>
+                    <span className="relative block aspect-[16/10] w-full overflow-hidden bg-[#071726]">
+                      <img
+                        src={item.scene}
+                        alt=""
+                        aria-hidden="true"
+                        width="720"
+                        height="480"
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
+                      />
+                    </span>
+                    <span className="block p-4 md:p-5">
+                      <span className="flex items-start justify-between gap-2">
+                        <span className="block font-display text-lg font-extrabold leading-tight text-home-midnight">{itemCopy.title}</span>
+                        {active && (
+                          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#25c990] text-home-midnight" aria-hidden="true">
+                            <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                          </span>
+                        )}
+                      </span>
                       <span className="mt-1.5 block text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{itemCopy.short}</span>
                     </span>
+                    {/* Rahmen als Überlage innen, damit der Auswahlrahmen auch in der Wischreihe nicht abgeschnitten wird. */}
+                    <span className={`pointer-events-none absolute inset-0 rounded-[1.4rem] ring-inset transition-shadow duration-300 ${active ? 'ring-[3px] ring-[#25c990]' : 'ring-1 ring-[#07111f]/[0.07] group-hover:ring-[#25c990]/50'}`} aria-hidden="true" />
                   </button>
                 );
               })}
@@ -774,13 +804,32 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             desktopClassName="md:grid md:grid-cols-3 md:gap-5"
             mobileItemWidth="w-[78vw] max-w-[22rem]"
           >
-            {copy.process.steps.map((step, index) => (
-              <article key={step.title} className="grid h-full grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 rounded-[1.6rem] border border-slate-200 bg-white p-5 shadow-[0_2px_6px_rgba(7,17,31,0.06)] md:block md:p-6 md:shadow-[0_14px_40px_rgba(7,17,31,0.06)]">
-                <span className="inline-grid h-10 w-10 place-items-center rounded-full bg-home-midnight font-display text-sm font-extrabold text-home-mint-active">{index + 1}</span>
-                <h3 className="font-display text-xl font-extrabold text-home-midnight md:mt-5">{step.title}</h3>
-                <p className="col-span-2 text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{step.text}</p>
-              </article>
-            ))}
+            {copy.process.steps.map((step, index) => {
+              const visual = PROCESS_VISUALS[index];
+              return (
+                <article key={step.title} className={`group flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-[#07111f]/[0.07] shadow-[0_2px_6px_rgba(7,17,31,0.06)] md:shadow-[0_14px_40px_rgba(7,17,31,0.06)] ${visual.surface}`}>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
+                    <img
+                      src={visual.scene}
+                      alt=""
+                      aria-hidden="true"
+                      width="720"
+                      height="540"
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+                    />
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <h3 className="flex items-center gap-3 font-display text-xl font-extrabold text-home-midnight">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white font-display text-sm font-extrabold text-emerald-800 ring-1 ring-[#07111f]/10" aria-hidden="true">{index + 1}</span>
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-base leading-6 text-home-slate md:text-sm md:leading-6">{step.text}</p>
+                  </div>
+                </article>
+              );
+            })}
           </MobileSwipeRow>
 
           {fromBonusTopic && <div className="relative mt-6 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#eaf8f2] via-[#f4fbf8] to-[#fff8e5] p-5 sm:p-8 md:mt-8">

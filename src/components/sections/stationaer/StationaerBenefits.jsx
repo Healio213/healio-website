@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 
+// Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte bekommt einen
+// weichen Pastellton mit passendem Rand und ein größeres, freundliches Icon.
 const benefitCards = [
-  { key: 'doctor', kind: 'ambulant', tone: 'mint' },
-  { key: 'room', kind: 'hospital', tone: 'lavender' },
-  { key: 'choice', kind: 'comparison', tone: 'sky' },
-  { key: 'start', kind: 'calendar', tone: 'butter' },
+  { key: 'doctor', kind: 'ambulant', tone: 'mint', surface: 'bg-[#f4fbf7] border-[#d3ebe0]' },
+  { key: 'room', kind: 'hospital', tone: 'lavender', surface: 'bg-[#f9f7ff] border-[#e3dcf5]' },
+  { key: 'choice', kind: 'comparison', tone: 'sky', surface: 'bg-[#f5faff] border-[#d6e7f4]' },
+  { key: 'start', kind: 'calendar', tone: 'butter', surface: 'bg-[#fffcf2] border-[#f0e6bd]' },
 ];
 
 const StationaerBenefits = () => {
@@ -42,13 +44,16 @@ const StationaerBenefits = () => {
             {benefitCards.map((card) => (
               <article
                 key={card.key}
-                className="h-full rounded-[1.65rem] border border-slate-100 bg-[#fbfdfc] p-5 shadow-[0_2px_8px_rgba(28,52,62,0.07)] sm:p-7 md:shadow-[0_14px_38px_rgba(28,52,62,0.06)]"
+                className={`h-full rounded-[1.4rem] border p-5 shadow-[0_2px_8px_rgba(28,52,62,0.07)] sm:p-7 md:shadow-[0_14px_38px_rgba(28,52,62,0.06)] ${card.surface}`}
               >
-                <FriendlyIcon kind={card.kind} tone={card.tone} size="sm" className="!h-10 !w-10 md:!h-12 md:!w-12" />
-                <h3 className="mt-4 font-display text-xl font-extrabold text-[#071726] md:mt-5">
-                  {t(`refresh.benefits.cards.${card.key}.title`)}
-                </h3>
-                <p className="mt-2 text-base leading-relaxed text-slate-600 md:text-sm md:leading-relaxed">
+                {/* Mobil Icon und Titel nebeneinander, damit die Karte nicht höher wird; ab md Icon über dem Titel. */}
+                <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-0">
+                  <FriendlyIcon kind={card.kind} tone={card.tone} size="lg" className="!h-16 !w-16 md:!h-20 md:!w-20" />
+                  <h3 className="min-w-0 font-display text-xl font-extrabold text-[#071726] md:mt-5">
+                    {t(`refresh.benefits.cards.${card.key}.title`)}
+                  </h3>
+                </div>
+                <p className="mt-3 text-base leading-relaxed text-slate-600 md:mt-2 md:text-sm md:leading-relaxed">
                   {t(`refresh.benefits.cards.${card.key}.body`)}
                 </p>
               </article>

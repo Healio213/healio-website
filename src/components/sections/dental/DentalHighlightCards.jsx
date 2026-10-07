@@ -304,11 +304,10 @@ const DentalHighlightCards = () => {
                         decoding="async"
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
                       />
-                      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#07111f] shadow-[0_4px_12px_rgba(7,17,31,0.18)]">
-                        {card.label[language]}
-                      </span>
                     </span>
                     <span className="flex flex-1 flex-col p-6">
+                      {/* Frank 07.10.2026: keine Beschriftung auf dem Bild, die Situation steht hier unten. */}
+                      <span className={`mb-2 block text-sm font-bold ${BODY_INK[card.tone]}`}>{card.label[language]}</span>
                       {card.figure ? (
                         <span className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
                           <span className={`whitespace-nowrap font-display text-[2rem] font-extrabold leading-none tracking-[-0.03em] ${BODY_INK[card.tone]}`}>

@@ -72,12 +72,10 @@ const InsurancePathway = () => {
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
                   />
-                  <span className={`absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-extrabold uppercase tracking-[0.14em] shadow-[0_4px_12px_rgba(7,17,31,0.18)] md:text-xs ${visual.label}`}>
-                    {item.label}
-                  </span>
                 </span>
                 <span className="flex flex-1 flex-col p-5 md:p-7">
-                  <h3 className="max-w-[17ch] font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
+                  <span className={`text-sm font-extrabold uppercase tracking-[0.14em] md:text-xs ${visual.label}`}>{item.label}</span>
+                  <h3 className="mt-2 max-w-[17ch] font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{item.description}</p>
