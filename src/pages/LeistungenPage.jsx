@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
-import ServicesHero from '@/components/services/ServicesHero';
+import ServicesHero, { ServicesDesktopHero } from '@/components/services/ServicesHero';
 import ProtectionNavigator from '@/components/services/ProtectionNavigator';
 import CoverageComparison from '@/components/services/CoverageComparison';
 import HonestAdvice from '@/components/services/HonestAdvice';
@@ -68,7 +68,9 @@ const LeistungenPage = () => {
           Block mit der bisherigen Reihenfolge. Das Textband entfällt mobil, weil
           es nur wiederholt, was die Seite ohnehin sagt. */}
       <article className="flex w-full flex-col overflow-hidden bg-white md:block">
-        <div className="order-1 md:contents"><ServicesHero /></div>
+        <ServicesDesktopHero />
+        {/* Ab lg übernimmt der Szenen-Kopfbereich, die bisherige Fassung bleibt für Handy und Tablet. */}
+        <div className="order-1 md:contents lg:hidden"><ServicesHero /></div>
         <div className="hidden md:block"><ProductTicker variant="leistungen" textSize="base" /></div>
         <div className="order-2 md:contents"><ProtectionNavigator /></div>
         <CoverageComparison />

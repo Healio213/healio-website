@@ -10,6 +10,8 @@ import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
 import { useReferrer } from '@/hooks/useReferrer';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
+import SceneHero, { sceneBelow, scenePrimaryButtonClass, sceneSecondaryButtonClass } from '@/components/desktop/SceneHero';
 import { getPregnancyOnwardPath } from '@/lib/pregnancyBonus';
 import { buildSdkUrl } from '@/lib/sdk-url';
 import { createFAQSchema } from '@/lib/createSchemaMarkup';
@@ -155,6 +157,8 @@ function HospitalCalculatorLinks({ sdkUrl, className = '' }) {
 export default function BenefitFunnelPage() {
   const config = TOPICS.pregnancy;
   const location = useLocation();
+  // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
+  const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   // No answers, health information or arbitrary query strings cross into a product page.
   const productPath = getPregnancyOnwardPath(location.search);
   const helpVisible = useWhatsAppHelp();
@@ -180,11 +184,50 @@ export default function BenefitFunnelPage() {
           dann zwei Wege. Alle Einschränkungen bleiben vollständig, stehen aber
           in Aufklappern statt als Textwand. Sprungmarken der Anzeigen bleiben. */}
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
+        {/* Desktop (ab lg, Frank 07.10.2026): 3D-Szene mit Überschrift und Knöpfen im
+            Bild, darunter Erklärung und die drei Angebote als ruhige Liste. Die
+            Wortlaute sind die der Handy-Fassung; sie wird ab lg ausgeblendet. */}
+        <SceneHero
+          surface="schwangerschaft"
+          headingId="desktop-schwangerschaft-heading"
+          dataAttributes={{ 'data-desktop-lead': 'schwangerschaft' }}
+          heading={<HighlightText text={config.title} className="text-[#5ee0b1]" />}
+          actions={(
+            <>
+              <a data-desktop-primary href="#zusatzschutz" className={scenePrimaryButtonClass}>Zusatzschutz und Beitrag ansehen</a>
+              <a href="#klinikschutz" className={sceneSecondaryButtonClass}>Klinikschutz für dein Kind</a>
+            </>
+          )}
+        >
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className={sceneBelow.lead}>{config.lead}</p>
+              <p className={sceneBelow.note}>{config.leadSecondary}</p>
+            </div>
+            <div className="min-w-0">
+              <h2 className={sceneBelow.listTitle}>Was jetzt für dich drin ist</h2>
+              <ul className={sceneBelow.list}>
+                {heroOffers.map((offer) => (
+                  <li key={offer.href}>
+                    <a href={offer.href} className="group block rounded-sm py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                      <span className="flex items-baseline justify-between gap-6">
+                        <span className="font-display text-base font-bold leading-6 text-white">{offer.code}</span>
+                        <span className="text-right font-display text-lg font-extrabold leading-6 text-[#5ee0b1] group-hover:underline group-hover:underline-offset-4">{offer.label}</span>
+                      </span>
+                      <span className="mt-1.5 block text-sm leading-6 text-[#c9d8de]">{offer.note}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </SceneHero>
+
         {/* Hero mit Wohlfühl-Atmosphäre (Frank 30.09.2026: Aufbau wie /stationaer,
             "süß", die Schwangeren sollen sich wohlfühlen): warme Creme- und
             Rosétöne, weiche Lichtflecken, die Schwangeren-Figur groß in der
             Karte und daneben die drei Angebote. */}
-        <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#fff8f3] via-[#fdf0f2] to-[#f1f8f4] pb-10 pt-24 md:pb-20 md:pt-32">
+        <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#fff8f3] via-[#fdf0f2] to-[#f1f8f4] pb-10 pt-24 md:pb-20 md:pt-32 lg:hidden">
           <div className="absolute -left-24 top-20 -z-10 h-80 w-80 rounded-full bg-[#f7c9d4]/40 blur-3xl" aria-hidden="true" />
           <div className="absolute -right-16 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#bfe9d8]/40 blur-3xl" aria-hidden="true" />
           <div className="absolute left-1/2 top-8 -z-10 h-64 w-64 rounded-full bg-[#ffe3c2]/45 blur-3xl" aria-hidden="true" />
@@ -195,9 +238,9 @@ export default function BenefitFunnelPage() {
                 <Heart className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
                 Für dich und dein Baby
               </p>
-              <h1 className="mt-4 max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:mt-5 sm:text-5xl lg:text-[3.4rem]">
+              <HeroHeading className="mt-4 max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:mt-5 sm:text-5xl lg:text-[3.4rem]">
                 <HighlightText text={config.title} className="text-[#087654]" />
-              </h1>
+              </HeroHeading>
               <p className="mt-4 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:mt-5 sm:text-xl">{config.lead}</p>
               <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
@@ -218,9 +261,10 @@ export default function BenefitFunnelPage() {
                   <div className="relative z-10 mx-auto min-w-0 self-end md:mx-0">
                     {/* Experiment Handy-Conversion 10/2026: Die Figur gibt es nur ab md. Mobil
                         greift die Ersatzquelle (1 Pixel), damit das ausgeblendete Bild dort
-                        nichts lädt und nicht mit dem Text um die Ladereihenfolge konkurriert. */}
+                        nichts lädt und nicht mit dem Text um die Ladereihenfolge konkurriert. Ab lg ist
+                        diese Fassung ausgeblendet, dort lädt die Figur ebenfalls nicht. */}
                     <picture className="block">
-                      <source media="(min-width: 768px)" srcSet="/images/friendly-icons/pregnancy.webp" type="image/webp" />
+                      <source media="(min-width: 768px) and (max-width: 1023px)" srcSet="/images/friendly-icons/pregnancy.webp" type="image/webp" />
                       <img
                         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                         alt=""

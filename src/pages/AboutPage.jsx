@@ -5,14 +5,21 @@ import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowDown,
   ArrowRight,
+  Check,
   CheckCircle2,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import ProductTicker from '@/components/sections/ProductTicker';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import SceneHero, {
+  sceneBelow,
+  scenePrimaryButtonClass,
+  sceneSecondaryButtonClass,
+} from '@/components/desktop/SceneHero';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
@@ -40,6 +47,8 @@ const AboutPage = () => {
   const { t: tSeo } = useTranslation('seo');
   const { lang, getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
+  // Ab lg trägt die Szene die h1, der bisherige Kopfbereich (nur Handy/Tablet) nutzt dort h2.
+  const Heading = useDesktopLayout() ? 'h2' : 'h1';
 
   const audiences = t('hero.audiences', { returnObjects: true });
   const storyParagraphs = t('story.paragraphs', { returnObjects: true });
@@ -80,125 +89,183 @@ const AboutPage = () => {
       />
 
       <main className="w-full overflow-hidden bg-white text-[#07111f] selection:bg-[#25c990] selection:text-[#07111f]">
-        <section
-          className="relative flex min-h-[70svh] w-full items-center overflow-hidden bg-[#07111f] px-4 pb-12 pt-28 text-white sm:px-6 sm:pb-24 sm:pt-36 md:min-h-[92svh] lg:px-8 lg:pb-28 lg:pt-40"
-          aria-labelledby="about-hero-heading"
+        {/* Frank 07.10.2026: ab lg Vollbild-Szene, darunter Beschreibung, Healio-Prinzip
+            und Hinweise. Der bisherige Kopfbereich bleibt für Handy und Tablet. */}
+        <SceneHero
+          surface="about"
+          headingId="desktop-about-heading"
+          heading={t('hero.title')}
+          actions={(
+            <>
+              <a href="#arbeitsweise" className={scenePrimaryButtonClass}>
+                {t('hero.primaryCta')}
+                <ArrowDown className="h-5 w-5" aria-hidden="true" />
+              </a>
+              <Link to={getPath('kontakt')} className={sceneSecondaryButtonClass}>
+                {t('hero.secondaryCta')}
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
+            </>
+          )}
         >
-          <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-            <div className="absolute -right-[16rem] top-[5%] h-[42rem] w-[42rem] rounded-full border border-white/[0.045]" />
-            <div className="absolute -right-[8rem] top-[15%] h-[30rem] w-[30rem] rounded-full border border-[#25c990]/10" />
-            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-            <div className="absolute bottom-[7%] left-[3%] font-display text-[clamp(5rem,18vw,18rem)] font-extrabold leading-none tracking-[-0.08em] text-white/[0.018]">
-              HEALIO
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className={sceneBelow.lead}>{t('hero.description')}</p>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-[#5ee0b1]">{t('hero.networkEyebrow')}</p>
+              <h2 className={`mt-1 ${sceneBelow.listTitle}`}>{t('hero.networkTitle')}</h2>
+              <p className={sceneBelow.listIntro}>{t('hero.networkDescription')}</p>
+              <ul className={sceneBelow.list}>
+                {Array.isArray(audiences) && audiences.map((audience) => {
+                  const icon = audienceIcons[audience.key] || { emoji: '✨', tone: 'mint' };
+                  return (
+                    <li key={audience.key} className="grid grid-cols-[2.5rem_1fr] items-start gap-4 py-4">
+                      <FriendlyIcon emoji={icon.emoji} label={audience.label} tone={icon.tone} size="sm" className="!h-10 !w-10" />
+                      <div>
+                        <h3 className="font-display text-lg font-bold leading-6 text-white">{audience.label}</h3>
+                        <p className="mt-1 text-sm leading-6 text-[#c9d8de]">{audience.text}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
 
-          <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-3xl"
-            >
-              <p className="font-display text-sm font-bold uppercase tracking-[0.24em] text-[#5ee0b1]">
-                {t('hero.eyebrow')}
-              </p>
-              <h1
-                id="about-hero-heading"
-                className="mt-4 max-w-[12ch] font-display text-[clamp(2.1rem,7vw,6.4rem)] font-extrabold leading-[0.96] tracking-[-0.055em] [text-wrap:balance] sm:mt-6 sm:text-[clamp(2.8rem,7vw,6.4rem)]"
+          <ul className={sceneBelow.trust}>
+            <li className="inline-flex items-center gap-2">
+              <Check className="h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+              {t('hero.brokerProof')}
+            </li>
+            <li className="inline-flex items-center gap-2">
+              <Check className="h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+              {t('hero.locationProof')}
+            </li>
+          </ul>
+        </SceneHero>
+
+        <div className="lg:hidden">
+          <section
+            className="relative flex min-h-[70svh] w-full items-center overflow-hidden bg-[#07111f] px-4 pb-12 pt-28 text-white sm:px-6 sm:pb-24 sm:pt-36 md:min-h-[92svh] lg:px-8 lg:pb-28 lg:pt-40"
+            aria-labelledby="about-hero-heading"
+          >
+            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+              <div className="absolute -right-[16rem] top-[5%] h-[42rem] w-[42rem] rounded-full border border-white/[0.045]" />
+              <div className="absolute -right-[8rem] top-[15%] h-[30rem] w-[30rem] rounded-full border border-[#25c990]/10" />
+              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+              <div className="absolute bottom-[7%] left-[3%] font-display text-[clamp(5rem,18vw,18rem)] font-extrabold leading-none tracking-[-0.08em] text-white/[0.018]">
+                HEALIO
+              </div>
+            </div>
+
+            <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-3xl"
               >
-                {t('hero.title')}
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:mt-7 sm:text-lg sm:leading-8 lg:text-xl">
-                {t('hero.description')}
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row">
-                <a
-                  href="#arbeitsweise"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3.5 text-sm font-bold text-[#07111f] transition-colors hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+                <p className="font-display text-sm font-bold uppercase tracking-[0.24em] text-[#5ee0b1]">
+                  {t('hero.eyebrow')}
+                </p>
+                <Heading
+                  id="about-hero-heading"
+                  className="mt-4 max-w-[12ch] font-display text-[clamp(2.1rem,7vw,6.4rem)] font-extrabold leading-[0.96] tracking-[-0.055em] [text-wrap:balance] sm:mt-6 sm:text-[clamp(2.8rem,7vw,6.4rem)]"
                 >
-                  {t('hero.primaryCta')}
-                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <Link
-                  to={getPath('kontakt')}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:border-white/40 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
-                >
-                  {t('hero.secondaryCta')}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="mt-6 grid max-w-2xl gap-3 border-t border-white/10 pt-4 text-sm text-slate-300 sm:mt-9 sm:grid-cols-2 sm:pt-6">
-                <p className="flex items-start gap-2.5">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
-                  <span>{t('hero.brokerProof')}</span>
-                </p>
-                <p className="flex items-start gap-2.5">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
-                  <span>{t('hero.locationProof')}</span>
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, x: 26 }}
-              animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="relative mx-auto w-full max-w-xl"
-            >
-              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-7">
-                <div className="flex items-start justify-between gap-5 border-b border-white/10 pb-4 sm:pb-6">
-                  <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#5ee0b1] md:text-[0.68rem] md:leading-[inherit]">
-                      {t('hero.networkEyebrow')}
-                    </p>
-                    <h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.035em] sm:text-3xl">
-                      {t('hero.networkTitle')}
-                    </h2>
-                  </div>
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#25c990]/35 bg-[#25c990]/10">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#5ee0b1] shadow-[0_0_20px_rgba(94,224,177,0.75)]" />
-                  </div>
-                </div>
-
-                <p className="mt-4 max-w-md text-base leading-6 text-slate-400 sm:mt-5">
-                  {t('hero.networkDescription')}
+                  {t('hero.title')}
+                </Heading>
+                <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:mt-7 sm:text-lg sm:leading-8 lg:text-xl">
+                  {t('hero.description')}
                 </p>
 
-                <div className="relative mt-5 sm:mt-6">
-                  <div className="absolute bottom-7 left-[1.35rem] top-7 hidden w-px md:block bg-gradient-to-b from-[#5ee0b1]/70 via-white/20 to-[#5ee0b1]/70 sm:left-[1.6rem]" aria-hidden="true" />
-                  {/* Experiment 06.10.2026: die drei Zielgruppen wischen mobil als Karten
-                      nebeneinander, ab md stehen sie wie bisher untereinander. */}
-                  <MobileSwipeRow
-                    label={t('hero.networkTitle')}
-                    desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:scroll-pl-0 md:block md:space-y-3"
-                    mobileItemWidth="w-[78vw] max-w-[19rem]"
-                    dotsTone="dark"
-                    bleed={false}
+                <div className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+                  <a
+                    href="#arbeitsweise"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-3.5 text-sm font-bold text-[#07111f] transition-colors hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
                   >
-                    {Array.isArray(audiences) && audiences.map((audience) => {
-                      const icon = audienceIcons[audience.key] || { emoji: '✨', tone: 'mint' };
-                      return (
-                        <div
-                          key={audience.key}
-                          className="relative grid h-full grid-cols-[2.75rem_1fr] gap-4 rounded-2xl border border-white/[0.08] bg-[#0b1928]/90 p-4 sm:grid-cols-[3.25rem_1fr] sm:p-5 md:h-auto"
-                        >
-                          <FriendlyIcon emoji={icon.emoji} label={audience.label} tone={icon.tone} size="sm" className="relative z-10" />
-                          <span>
-                            <span className="block font-display text-base font-bold text-white">{audience.label}</span>
-                            <span className="mt-1 block text-sm leading-5 text-slate-400 sm:leading-6">{audience.text}</span>
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </MobileSwipeRow>
+                    {t('hero.primaryCta')}
+                    <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <Link
+                    to={getPath('kontakt')}
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:border-white/40 hover:bg-white/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] sm:text-base"
+                  >
+                    {t('hero.secondaryCta')}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+
+                <div className="mt-6 grid max-w-2xl gap-3 border-t border-white/10 pt-4 text-sm text-slate-300 sm:mt-9 sm:grid-cols-2 sm:pt-6">
+                  <p className="flex items-start gap-2.5">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                    <span>{t('hero.brokerProof')}</span>
+                  </p>
+                  <p className="flex items-start gap-2.5">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                    <span>{t('hero.locationProof')}</span>
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, x: 26 }}
+                animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="relative mx-auto w-full max-w-xl"
+              >
+                <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-7">
+                  <div className="flex items-start justify-between gap-5 border-b border-white/10 pb-4 sm:pb-6">
+                    <div>
+                      <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#5ee0b1] md:text-[0.68rem] md:leading-[inherit]">
+                        {t('hero.networkEyebrow')}
+                      </p>
+                      <h2 className="mt-2 font-display text-2xl font-bold tracking-[-0.035em] sm:text-3xl">
+                        {t('hero.networkTitle')}
+                      </h2>
+                    </div>
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#25c990]/35 bg-[#25c990]/10">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#5ee0b1] shadow-[0_0_20px_rgba(94,224,177,0.75)]" />
+                    </div>
+                  </div>
+
+                  <p className="mt-4 max-w-md text-base leading-6 text-slate-400 sm:mt-5">
+                    {t('hero.networkDescription')}
+                  </p>
+
+                  <div className="relative mt-5 sm:mt-6">
+                    <div className="absolute bottom-7 left-[1.35rem] top-7 hidden w-px md:block bg-gradient-to-b from-[#5ee0b1]/70 via-white/20 to-[#5ee0b1]/70 sm:left-[1.6rem]" aria-hidden="true" />
+                    {/* Experiment 06.10.2026: die drei Zielgruppen wischen mobil als Karten
+                        nebeneinander, ab md stehen sie wie bisher untereinander. */}
+                    <MobileSwipeRow
+                      label={t('hero.networkTitle')}
+                      desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:scroll-pl-0 md:block md:space-y-3"
+                      mobileItemWidth="w-[78vw] max-w-[19rem]"
+                      dotsTone="dark"
+                      bleed={false}
+                    >
+                      {Array.isArray(audiences) && audiences.map((audience) => {
+                        const icon = audienceIcons[audience.key] || { emoji: '✨', tone: 'mint' };
+                        return (
+                          <div
+                            key={audience.key}
+                            className="relative grid h-full grid-cols-[2.75rem_1fr] gap-4 rounded-2xl border border-white/[0.08] bg-[#0b1928]/90 p-4 sm:grid-cols-[3.25rem_1fr] sm:p-5 md:h-auto"
+                          >
+                            <FriendlyIcon emoji={icon.emoji} label={audience.label} tone={icon.tone} size="sm" className="relative z-10" />
+                            <span>
+                              <span className="block font-display text-base font-bold text-white">{audience.label}</span>
+                              <span className="mt-1 block text-sm leading-5 text-slate-400 sm:leading-6">{audience.text}</span>
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </MobileSwipeRow>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </div>
 
         <ProductTicker variant="about" />
 

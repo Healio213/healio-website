@@ -1,14 +1,83 @@
 import React from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, Check } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
+import SceneHero, {
+  sceneAccentClass,
+  sceneBelow,
+  scenePrimaryButtonClass,
+  sceneSecondaryButtonClass,
+} from '@/components/desktop/SceneHero';
+
+// Desktop-Kopfbereich (ab lg, Frank 07.10.2026): Szene mit Überschrift und beiden Knöpfen,
+// darunter Beschreibung, Kompass-Frage mit den vier Bereichen und die Belegzeile ohne Kasten.
+// Die Texte stammen aus denselben Schlüsseln wie die Handy-Fassung unten.
+export const ServicesDesktopHero = () => {
+  const { t } = useTranslation('leistungen');
+  const { getPath } = useLanguage();
+  const orientationFacts = t('hero.orientationFacts', { returnObjects: true });
+  const proof = t('hero.proof', { returnObjects: true });
+
+  return (
+    <SceneHero
+      surface="leistungen"
+      headingId="desktop-leistungen-heading"
+      dataAttributes={{ 'data-desktop-lead': 'leistungen' }}
+      heading={(
+        <>
+          <span className="block [hyphens:manual]">{t('hero.titleLine1')}</span>
+          <span className={sceneAccentClass}>{t('hero.titleLine2')}</span>
+        </>
+      )}
+      actions={(
+        <>
+          <a data-desktop-primary href="#schutz-kompass" className={scenePrimaryButtonClass}>
+            {t('hero.primaryCta')}
+            <ArrowDown className="h-5 w-5" aria-hidden="true" />
+          </a>
+          <Link to={getPath('terminvereinbarung')} className={sceneSecondaryButtonClass}>
+            {t('hero.secondaryCta')}
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          </Link>
+        </>
+      )}
+    >
+      <div className={sceneBelow.grid}>
+        <div className="min-w-0">
+          <p className={sceneBelow.lead}>{t('hero.description')}</p>
+        </div>
+        <div className="min-w-0">
+          <h2 className={sceneBelow.listTitle}>{t('hero.compassTitle')}</h2>
+          <p className={sceneBelow.listIntro}>{t('hero.compassNoteStrong')}</p>
+          <ul className={sceneBelow.list}>
+            {(Array.isArray(orientationFacts) ? orientationFacts : []).map((fact) => (
+              <li key={fact} className="py-3.5 font-display text-base font-bold leading-6 text-white">{fact}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <ul className={sceneBelow.trust}>
+        {(Array.isArray(proof) ? proof : []).map((item) => (
+          <li key={item} className="inline-flex items-center gap-2">
+            <Check className="h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </SceneHero>
+  );
+};
 
 const ServicesHero = () => {
   const { t } = useTranslation('leistungen');
   const { getPath } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
+  // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
+  const Heading = useDesktopLayout() ? 'h2' : 'h1';
   const orientationFacts = t('hero.orientationFacts', { returnObjects: true });
 
   // Experiment Handy-Conversion 10/2026: Unter md keine feste Mindesthöhe, damit der Schutz-Kompass früher im Bild steht. Ab md unverändert.
@@ -36,13 +105,13 @@ const ServicesHero = () => {
           <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:text-xs">
             {t('hero.eyebrow')}
           </p>
-          <h1 className="mt-4 sm:mt-6 max-w-[12ch] [hyphens:manual] font-display text-[clamp(2.25rem,12.3vw,2.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
+          <Heading className="mt-4 sm:mt-6 max-w-[12ch] [hyphens:manual] font-display text-[clamp(2.25rem,12.3vw,2.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
             <span className="block">{t('hero.titleLine1')}</span>
             {' '}
             <span className="mt-2 block bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-[#77BDFB] bg-clip-text text-transparent">
               {t('hero.titleLine2')}
             </span>
-          </h1>
+          </Heading>
           {/* Experiment Handy-Conversion 10/2026: Unter md ist dieser Absatz das größte Textstück im
               ersten Bildschirm. Wird er mit der Ersatzschrift gemalt und tauscht die Schrift danach
               (andere Zeilenzahl), merkt sich der Browser die kleinere Größe und wertet erst die neu

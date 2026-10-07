@@ -18,6 +18,13 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
+import SceneHero, {
+  sceneAccentClass,
+  sceneBelow,
+  scenePrimaryButtonClass,
+  sceneSecondaryButtonClass,
+} from '@/components/desktop/SceneHero';
 
 // Sprungmarke zur Google-Terminplanung (Google Meet). Alte Links mit
 // #calendly-embed werden beim Laden auf diese Marke umgelenkt.
@@ -44,6 +51,9 @@ const PartnerPage = () => {
   const { t: tSeo } = useTranslation('seo');
   const { getPath } = useLanguage();
   const isEnglish = i18n.language?.startsWith('en');
+  // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
+  const isDesktop = useDesktopLayout();
+  const Heading = isDesktop ? 'h2' : 'h1';
   const canonicalUrl = isEnglish ? 'https://healio.de/en/partner' : 'https://healio.de/partner';
 
   const schemaMarkup = createWebPageSchema(
@@ -75,19 +85,66 @@ const PartnerPage = () => {
             ab md bleibt es der bisherige Blocksatz in Quellreihenfolge. */}
       <main className="bg-white overflow-hidden w-full flex flex-col md:block">
 
-        {/* SECTION 1: HERO */}
-        <section className="relative order-1 md:order-none bg-slate-900 pt-20 pb-10 md:pb-14 lg:min-h-[100svh] lg:flex lg:items-center lg:pb-0">
+        {/* SECTION 1: HERO.
+            Ab lg (Frank 07.10.2026): Szene mit Überschrift und beiden Knöpfen, darunter alle weiteren Angaben ohne Kasten.
+            Dieselben Texte wie in der Handy-Fassung darunter, die ab lg ausgeblendet ist. */}
+        <SceneHero
+          surface="partner"
+          headingId="desktop-partner-heading"
+          dataAttributes={{ 'data-desktop-lead': 'partner' }}
+          heading={<HighlightText text={t('hero.title')} className={sceneAccentClass} />}
+          actions={(
+            <>
+              <button
+                type="button"
+                data-desktop-primary
+                className={scenePrimaryButtonClass}
+                onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('hero.cta')}
+              </button>
+              <button
+                type="button"
+                className={sceneSecondaryButtonClass}
+                onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('hero.secondaryCta')}
+                <ArrowDown className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </>
+          )}
+        >
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className="mb-4 text-sm font-semibold leading-6 text-[#bfced6]">{t('hero.badge')}</p>
+              <p className={sceneBelow.lead}>
+                <HighlightText text={t('hero.subtitle')} className="text-[#5ee0b1]" />
+              </p>
+            </div>
+            <ul className={`min-w-0 ${sceneBelow.list}`}>
+              <li className="flex items-start gap-3 py-4 text-base leading-7 text-[#e1ebef]">
+                <Shield className="mt-1 h-5 w-5 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                {t('hero.roleNote')}
+              </li>
+              <li className="py-4 pl-8 text-base leading-7 text-[#e1ebef]">
+                {t('leitfadenHint.lead')}{' '}
+                <Link
+                  to="/partner/leitfaden"
+                  className="rounded-sm font-semibold text-[#5ee0b1] underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  {t('leitfadenHint.cta')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </SceneHero>
+
+        <div className="order-1 md:order-none lg:hidden">
+        <section className="relative bg-slate-900 pt-20 pb-10 md:pb-14">
           {/* Therapeutin im Sessel mit Patientin (partner-hero-*.webp, Quelle partner-hero-neu.png).
-              Unter lg steht ein Querausschnitt mit beiden Frauen über dem Text, ab lg füllt das Bild den Hero. */}
-          <div className="relative z-0 lg:absolute lg:inset-0">
+              Ein Querausschnitt mit beiden Frauen steht über dem Text. */}
+          <div className="relative z-0">
             <picture>
-              <source
-                media="(min-width: 1024px)"
-                srcSet="/images/partner-hero-1280.webp 1280w, /images/partner-hero-1920.webp 1920w, /images/partner-hero-2560.webp 2560w"
-                sizes="100vw"
-                width="2560"
-                height="1440"
-              />
               <img
                 src="/images/partner-hero-mobil-800.webp"
                 srcSet="/images/partner-hero-mobil-480.webp 480w, /images/partner-hero-mobil-800.webp 800w, /images/partner-hero-mobil-1200.webp 1200w"
@@ -95,34 +152,33 @@ const PartnerPage = () => {
                 alt={t('hero.imageAlt')}
                 width="1200"
                 height="847"
-                {...{ fetchpriority: 'high' }}
-                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%] lg:h-full lg:max-h-none lg:object-center"
+                {...{ fetchpriority: isDesktop ? 'low' : 'high' }}
+                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%]"
               />
             </picture>
-            {/* Unter lg läuft das Bild unten ins Dunkle aus, der Text steht darunter.
-                Ab lg wie bisher: leichte Abdunklung plus Verlauf von links für den Hero-Text. */}
-            <div className="absolute inset-0 bg-black/10 lg:bg-black/25 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:bg-gradient-to-r lg:from-slate-900/80 lg:via-slate-900/40 lg:to-transparent z-10" />
+            {/* Das Bild läuft unten ins Dunkle aus, der Text steht darunter. */}
+            <div className="absolute inset-0 bg-black/10 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10" />
           </div>
 
-          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20 lg:mt-0">
+          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="flex flex-col lg:block"
+                className="flex flex-col"
               >
                 <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
                   {t('hero.badge')}
                 </p>
-                <h1 className="order-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] lg:order-none">
+                <Heading className="order-1 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
-                </h1>
-                <p className="order-3 mt-6 text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto lg:order-none lg:mt-0">
+                </Heading>
+                <p className="order-3 mt-6 text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="order-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:order-none">
+                <div className="order-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
@@ -140,11 +196,11 @@ const PartnerPage = () => {
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-                <p className="order-4 mt-4 flex items-center justify-center gap-2 text-sm text-white/80 lg:order-none">
+                <p className="order-4 mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
-                <p className="order-5 mt-3 text-sm text-white/75 lg:order-none">
+                <p className="order-5 mt-3 text-sm text-white/75">
                   {t('leitfadenHint.lead')}{' '}
                   <Link
                     to="/partner/leitfaden"
@@ -157,6 +213,7 @@ const PartnerPage = () => {
             </div>
           </div>
         </section>
+        </div>
 
         {/* QUALITÄTSSIEGEL: SDK + IKK, groß direkt unter dem Hero */}
         <div className="order-2 md:contents">
