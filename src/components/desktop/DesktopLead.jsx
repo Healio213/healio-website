@@ -16,16 +16,18 @@ const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', station
 // Personen stehen im Bild rechts, links liegt der Text auf einem dunklen Verlauf.
 const heroImages = {
   home: { src: '/hero-bg.webp', position: '72% 50%' },
-  ambulant: { src: '/images/hero-desktop/ambulant.webp', position: '70% 50%' },
+  ambulant: { src: '/images/hero-desktop/ambulant.webp', position: '70% 50%', cartoon: '/images/hero-desktop/ambulant-cartoon.webp' },
   zahn: { src: '/images/hero-desktop/zahn.webp', position: '68% 35%' },
-  stationaer: { src: '/images/hero-desktop/stationaer.webp', position: '72% 50%' },
+  stationaer: { src: '/images/hero-desktop/stationaer.webp', position: '72% 50%', cartoon: '/images/hero-desktop/stationaer-cartoon.webp' },
 };
 
 // Nur für die Vorschau: ?hero=split zeigt die Variante mit Foto in der rechten Hälfte.
+// ?bild=cartoon tauscht das Foto gegen die 3D-Szene im Healio-Figurenstil.
 const usePreviewVariant = () => {
-  const [variant, setVariant] = useState('full');
+  const [variant, setVariant] = useState({ layout: 'full', look: 'foto' });
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('hero') === 'split') setVariant('split');
+    const params = new URLSearchParams(window.location.search);
+    setVariant({ layout: params.get('hero') === 'split' ? 'split' : 'full', look: params.get('bild') === 'cartoon' ? 'cartoon' : 'foto' });
   }, []);
   return variant;
 };
@@ -83,8 +85,9 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   };
 
   const variant = usePreviewVariant();
-  const image = heroImages[surface] || heroImages.home;
-  const split = variant === 'split';
+  const baseImage = heroImages[surface] || heroImages.home;
+  const image = variant.look === 'cartoon' && baseImage.cartoon ? { src: baseImage.cartoon, position: '80% 50%' } : baseImage;
+  const split = variant.layout === 'split';
 
   // Frank 07.10.2026: im Foto nur Überschrift und Knopf. Erklärung, Angebot und
   // Hinweise stehen direkt darunter, damit die Ecke nicht voll Text ist.
@@ -104,8 +107,9 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           </div>
         ) : (
           <>
-            <img src={image.src} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 h-full w-full object-cover" style={{ objectPosition: image.position }} />
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,23,38,0.9)_0%,rgba(7,23,38,0.74)_30%,rgba(7,23,38,0.3)_55%,rgba(7,23,38,0)_78%)]" aria-hidden="true" />
+            {/* Das Bild beginnt erst nach dem ersten Siebtel, damit die Personen rechts neben der Überschrift stehen. */}
+            <img src={image.src} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-y-0 right-0 -z-20 h-full w-[86%] object-cover" style={{ objectPosition: image.position }} />
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#071726_0%,#071726_14%,rgba(7,23,38,0.78)_30%,rgba(7,23,38,0.32)_52%,rgba(7,23,38,0)_74%)]" aria-hidden="true" />
             <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#071726]/75 to-transparent" aria-hidden="true" />
             <div className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-gradient-to-t from-[#071726] to-transparent" aria-hidden="true" />
           </>
