@@ -1,6 +1,5 @@
 """Build the three blank, fillable practice handouts; never process patient data."""
 from pathlib import Path
-import re
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor, white
@@ -14,8 +13,10 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "downloads"
 FONT = Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pdfjs-dist/standard_fonts"
-pdfmetrics.registerFont(TTFont("Healio", str(FONT / "LiberationSans-Regular.ttf")))
-pdfmetrics.registerFont(TTFont("HealioBold", str(FONT / "LiberationSans-Bold.ttf")))
+pdfmetrics.registerFont(TTFont("TemplateSans", str(FONT / "LiberationSans-Regular.ttf")))
+pdfmetrics.registerFont(TTFont("TemplateSansBold", str(FONT / "LiberationSans-Bold.ttf")))
+pdfmetrics.registerFontFamily("TemplateSans", normal="TemplateSans", bold="TemplateSansBold",
+                            italic="TemplateSans", boldItalic="TemplateSansBold")
 W, H = A4
 NAVY = HexColor("#10363D")
 MINT = HexColor("#D5F2E7")
@@ -28,7 +29,7 @@ EXPECTED = {}
 
 
 def paragraph(c, text, y, size=10, bold=False, x=LEFT, width=CONTENT, color=INK):
-    style = ParagraphStyle("body", fontName="HealioBold" if bold else "Healio",
+    style = ParagraphStyle("body", fontName="TemplateSansBold" if bold else "TemplateSans",
                            fontSize=size, leading=size * 1.4, textColor=color)
     p = Paragraph(text, style)
     _, height = p.wrap(width, H)
@@ -40,14 +41,20 @@ def start(filename, title, subtitle):
     OUT.mkdir(parents=True, exist_ok=True)
     c = canvas.Canvas(str(OUT / filename), pagesize=A4)
     c.setTitle(title)
-    c.setAuthor("Healio GmbH")
+    c.setAuthor("")
     c.setSubject("Ausfüllbare Arbeitsvorlage ohne Patientendaten. Stand 07.10.2026")
     c.setFillColor(NAVY)
     c.rect(0, H - 116, W, 116, stroke=0, fill=1)
     c.setFillColor(MINT)
-    c.setFont("HealioBold", 16)
-    c.drawString(LEFT, H - 31, "healio")
-    c.setFont("Healio", 9)
+    c.setFont("TemplateSans", 8)
+    c.drawString(LEFT, H - 14, "Praxis / Hebamme")
+    c.acroForm.textfield(name="praxis_kopf", tooltip="Eigene Praxis / Hebamme",
+                        x=LEFT, y=H - 37, width=256, height=18,
+                        fontName="Helvetica", fontSize=10, borderWidth=.6,
+                        borderStyle="solid", borderColor=LINE, fillColor=white,
+                        textColor=INK, value="", forceBorder=True)
+    c.setFillColor(MINT)
+    c.setFont("TemplateSans", 9)
     c.drawRightString(RIGHT, H - 30, "HEBAMMENPRAXIS · 07.10.2026")
     y = paragraph(c, title, H - 49, size=21, bold=True, color=white)
     paragraph(c, subtitle, y - 6, size=9, color=MINT)
@@ -55,7 +62,7 @@ def start(filename, title, subtitle):
 
 
 def box(c, text, y, size=9.5):
-    style = ParagraphStyle("box", fontName="Healio", fontSize=size, leading=size * 1.4, textColor=INK)
+    style = ParagraphStyle("box", fontName="TemplateSans", fontSize=size, leading=size * 1.4, textColor=INK)
     p = Paragraph(text, style)
     _, height = p.wrap(CONTENT - 24, H)
     c.setFillColor(MINT)
@@ -66,7 +73,7 @@ def box(c, text, y, size=9.5):
 
 def field(c, name, label, y, height=21, x=LEFT, width=CONTENT, multiline=False):
     c.setFillColor(GREY)
-    c.setFont("Healio", 8)
+    c.setFont("TemplateSans", 8)
     c.drawString(x, y, label)
     c.acroForm.textfield(name=name, tooltip=label, x=x, y=y - height - 5,
                         width=width, height=height, fontName="Helvetica", fontSize=10,
@@ -86,8 +93,8 @@ def finish(c, filename, note):
     c.setStrokeColor(LINE)
     c.line(LEFT, 49, RIGHT, 49)
     paragraph(c, note, 41, size=7.5, color=GREY)
-    c.setFont("Healio", 8)
-    c.drawRightString(RIGHT, 17, "healio.de/hebammen · 1 / 1")
+    c.setFont("TemplateSans", 8)
+    c.drawRightString(RIGHT, 17, "1 / 1")
     c.save()
     reader = PdfReader(OUT / filename)
     fields = reader.get_fields() or {}
@@ -169,7 +176,7 @@ def family():
              ("kosten", "Kostenschätzung / GKV-Zuschuss (EUR)"), y)
     y = pair(c, ("beginn", "Versicherungsbeginn / Tarif"),
              ("bestätigung", "Deckungsbestätigung / Datum / offene Fragen"), y)
-    y = paragraph(c, "<b>Was Healio klärt:</b> Vertrag, Annahme, Wartezeiten und konkrete Erstattungsmöglichkeit. Die Hebamme beschreibt und berechnet ihre Leistung. Der Versicherer entscheidet über die Deckung.", y, size=9.5) - 10
+    y = paragraph(c, "<b>Vor einer Kostenzusage klären:</b> Vertrag, Annahme, Wartezeiten und konkrete Erstattungsmöglichkeit. Die Hebamme beschreibt und berechnet ihre Leistung. Der Versicherer entscheidet über die Deckung.", y, size=9.5) - 10
     y = paragraph(c, "Komfort und Prestige berücksichtigen ambulante Hebammenleistungen nach aktueller Bayerische-Leistungspraxis. Diese ist kein eigenständiger Leistungsanspruch in den Tarifbedingungen. Auch nach Ablauf der Wartezeit ist die konkrete Leistung individuell zu prüfen.", y, size=9)
     assert y > 65, y
     finish(c, filename, "Stand 07.10.2026 · Fachauskünfte der Bayerischen vom 05./06.10.2026; AVB B 275000 und Tarifbedingungen B 275005 / B 275006, Stand 11/2024.")
