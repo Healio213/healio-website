@@ -268,7 +268,7 @@ try {
   }
 
   // 6. Gesperrte Seiten bleiben gesperrt, auch mit voller Zustimmung.
-  for (const path of ['/schwangerschaft', '/schwangerschaft?gclid=TestKlick_1234567890', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/ratgeber/schwangerschaft-was-steht-mir-zu', '/ratgeber/hebamme-kosten-krankenkasse', '/blog/kassenbonus-schwangerschaft-vorsorge']) {
+  for (const path of ['/schwangerschaft', '/schwangerschaft?gclid=TestKlick_1234567890', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/ratgeber/schwangerschaft-was-steht-mir-zu', '/ratgeber/hebamme-kosten-krankenkasse', '/blog/kassenbonus-schwangerschaft-vorsorge', '/ratgeber/babybonus-krankenkasse', '/ratgeber/baby-geplant-zusatzversicherung', '/ratgeber/baby-geplant-zusatzversicherung?ref=gads-familie-geplant&gclid=TestKlick_1234567890', '/ratgeber/familienzimmer-krankenhaus', '/ratgeber/neugeborenes-versichern', '/ratgeber/vorsorgeuntersuchung', '/ratgeber/hautkrebsscreening', '/ratgeber/vorsorgeuntersuchung-frauen', '/ratgeber/vorsorgeuntersuchung-maenner']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackSdkClick('test');

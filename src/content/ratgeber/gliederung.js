@@ -53,10 +53,11 @@ export const RATGEBER_EINZELARTIKEL = [
   'aok-bonusprogramm-2026',
   'tk-bonusprogramm-2026',
   'barmer-bonusprogramm-2026',
-  'schwanger-zusatzversicherung',
+  // schwanger-zusatzversicherung, schwangerschaft-was-steht-mir-zu und
+  // hebamme-kosten-krankenkasse stehen seit Stapel 2 (07.10.2026) in der
+  // Gruppe familie, weil die Bereichsseite zusatzversicherung-kinder sie in
+  // Karten führt und babybonus-krankenkasse sie als Nachbarn braucht.
   'schwangerschaft-worauf-achten',
-  'schwangerschaft-was-steht-mir-zu',
-  'hebamme-kosten-krankenkasse',
   'krankenkassen-bonus-zusatzversicherung',
 ];
 
@@ -87,6 +88,91 @@ export const RATGEBER_GROUPS = [
       'bayerische-zahnzusatzversicherung',
       'aok-zahnzusatzversicherung',
       'dak-zahnreinigung',
+      // Serie Stapel 2, Zahnkosten (07.10.2026): erst die Versorgungen, dann
+      // Überblick und Härtefall. Wieder hinten angehängt.
+      'zahnbruecke-kosten',
+      'zahnprothese-kosten',
+      'zahnfuellung-kosten',
+      'parodontitis-behandlung-kosten',
+      'zahnersatz-moeglichkeiten',
+      'zahnersatz-haertefall',
+    ],
+  },
+  // Serie Stapel 2 (07.10.2026): fünf neue Gruppen mit eigener Bereichsseite.
+  {
+    id: 'ambulant',
+    title: 'Heilpraktiker und Naturheilkunde',
+    intro: 'Was Heilpraktiker, Osteopathie, Akupunktur und Physiotherapie kosten, was die Kasse dazugibt und wann ein ambulanter Tarif hilft. Mit Kosten, Quellen und den Grenzen.',
+    icon: 'naturopathy',
+    hubSlug: 'heilpraktiker-kosten',
+    slugs: [
+      'heilpraktiker-kosten',
+      'heilpraktiker-zusatzversicherung',
+      'ambulante-zusatzversicherung',
+      'akupunktur-kosten',
+      'tk-osteopathie',
+      'chiropraktiker-kosten',
+      'physiotherapie-zuzahlung',
+      'gebuehrenordnung-heilpraktiker',
+    ],
+  },
+  {
+    id: 'krankenhaus',
+    title: 'Krankenhaus',
+    intro: 'Was die Kasse im Krankenhaus zahlt, was Zuzahlung, Einbettzimmer und Reha kosten und wann eine stationäre Zusatzversicherung hilft. Mit Quellen und den Grenzen.',
+    icon: 'hospital',
+    hubSlug: 'stationaere-zusatzversicherung',
+    slugs: [
+      'stationaere-zusatzversicherung',
+      'einzelzimmer-krankenhaus-kosten',
+      'zusatzversicherung-einzelzimmer',
+      'krankenhaustagegeld',
+      'reha-zuzahlung',
+    ],
+  },
+  {
+    id: 'familie',
+    title: 'Schwangerschaft und Familie',
+    intro: 'Was Kasse und Zusatzschutz rund um Schwangerschaft, Baby und Kinder leisten, wie ein Babybonus funktioniert und worauf es beim Nachversichern ankommt.',
+    icon: 'family',
+    hubSlug: 'zusatzversicherung-kinder',
+    slugs: [
+      'zusatzversicherung-kinder',
+      // Stapel familienplanung (07.10.2026), Ziel des Werbetests, daher vorn.
+      'baby-geplant-zusatzversicherung',
+      'neugeborenes-versichern',
+      'familienzimmer-krankenhaus',
+      'babybonus-krankenkasse',
+      // Ältere Artikel ohne Vorlage (AELTERE_GRUPPENARTIKEL im Vertragstest).
+      'schwanger-zusatzversicherung',
+      'schwangerschaft-was-steht-mir-zu',
+      'hebamme-kosten-krankenkasse',
+    ],
+  },
+  {
+    id: 'vorsorge',
+    title: 'Vorsorge',
+    intro: 'Welche Vorsorgeuntersuchungen die Kasse in welchem Alter zahlt, was privat bleibt und wann Satzungsleistungen oder ein ambulanter Tarif helfen. Mit Quellen und Stand.',
+    icon: 'prevention',
+    hubSlug: 'vorsorgeuntersuchung',
+    slugs: [
+      'vorsorgeuntersuchung',
+      'vorsorgeuntersuchung-frauen',
+      'vorsorgeuntersuchung-maenner',
+      'hautkrebsscreening',
+      'tk-reiseimpfung',
+    ],
+  },
+  {
+    id: 'brille',
+    title: 'Brille',
+    intro: 'Wann die Kasse bei der Brille zahlt, was Gläser und Gleitsicht kosten und wann sich ein Tarif für Sehhilfen lohnt. Mit Rechenbeispielen und Quellen.',
+    icon: 'glasses',
+    hubSlug: 'brille-krankenkasse',
+    slugs: [
+      'brille-krankenkasse',
+      'brillenversicherung',
+      'gleitsichtbrille-kosten',
     ],
   },
 ];

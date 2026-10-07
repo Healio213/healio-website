@@ -55,6 +55,12 @@ const ARTICLE_FIGURES = {
   'schwangerschaft-worauf-achten': friendlyIconAssets.document,
   'hebamme-kosten-krankenkasse': friendlyIconAssets.family,
   'krankenkassen-bonus-zusatzversicherung': friendlyIconAssets.budget,
+  // Bereichsseiten der Gruppen aus Stapel 2 (07.10.2026).
+  'heilpraktiker-kosten': friendlyIconAssets.naturopathy,
+  'stationaere-zusatzversicherung': friendlyIconAssets.hospital,
+  'zusatzversicherung-kinder': friendlyIconAssets.family,
+  'vorsorgeuntersuchung': friendlyIconAssets.prevention,
+  'brille-krankenkasse': friendlyIconAssets.glasses,
 };
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;
 
@@ -64,7 +70,8 @@ const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document
 const TOPICS = [
   { slug: 'ikk-classic-bonusprogramm-2026', label: 'Kassenbonus', kind: 'bonus', tone: 'butter' },
   { slug: 'zahnzusatzversicherung-fehlender-zahn', group: 'zaehne', label: 'Zähne', kind: 'dental', tone: 'mint' },
-  { slug: 'schwanger-zusatzversicherung', label: 'Schwangerschaft', kind: 'pregnancy', tone: 'coral' },
+  // Seit Stapel 2 (07.10.2026) stehen die Schwangerschafts-Ratgeber in der Gruppe familie.
+  { slug: 'schwanger-zusatzversicherung', group: 'familie', label: 'Schwangerschaft und Familie', kind: 'pregnancy', tone: 'coral' },
 ];
 
 // Blogartikel nach Leserkreis. Unbekannte oder fehlende target_group landet
@@ -221,15 +228,17 @@ const BlogGroup = ({ group }) => (
         {group.title}
       </h3>
     </div>
+    {/* min-w-0 und Trennung: lange Blogtitel (Krankenhauszusatzversicherung)
+        verbreiterten die Übersicht bei 320 px. */}
     <ul className="mt-6 grid gap-x-10 md:grid-cols-2">
       {group.articles.map((article) => (
         <li
           key={article.slug}
-          className="group relative border-t border-slate-300/70 py-5 has-[:focus-visible]:rounded-md has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-home-mint"
+          className="group relative min-w-0 border-t border-slate-300/70 py-5 has-[:focus-visible]:rounded-md has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-home-mint"
         >
           <Link
             to={`/blog/${article.slug}`}
-            className="font-display text-lg font-bold leading-snug text-home-midnight transition-colors after:absolute after:inset-0 group-hover:text-[#087654] focus:outline-none"
+            className="break-words font-display text-lg font-bold leading-snug hyphens-auto sm:hyphens-manual text-home-midnight transition-colors after:absolute after:inset-0 group-hover:text-[#087654] focus:outline-none"
           >
             {article.title}
           </Link>

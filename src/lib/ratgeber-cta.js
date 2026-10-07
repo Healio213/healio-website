@@ -118,3 +118,36 @@ export const buildInternalRatgeberUrl = (targetPath, search = '', defaults = RAT
   const query = params.toString();
   return `${basePath}${query ? `?${query}` : ''}${hash}`;
 };
+
+/**
+ * Weg-Links im Ratgeber (Kurzantwort und Weg-Karten) auf eine Produktseite.
+ *
+ * Kommt jemand über eine Google-Anzeige auf einen Ratgeber, steht die
+ * Klick-Kennung in der Adresse. Auf gesperrten Seiten (GOOGLE_ADS_EXCLUDED_PATHS,
+ * etwa Schwangerschaft, Baby, Vorsorge) lädt kein Google-Ads-Tag, die Kennung
+ * würde beim Weiterklicken also verloren gehen. Wie auf /schwangerschaft
+ * (getPregnancyOnwardPath in src/lib/pregnancyBonus.js) wandert deshalb nur
+ * eine gültige Klick-Kennung mit, sonst nichts: keine UTM-Parameter, keine
+ * Eingaben. Die Produktseite liest sie nur mit Zustimmung (readGoogleClickId).
+ * Ein Anker im Ziel bleibt hinter der Query stehen.
+ */
+const AD_CLICK_ID_KEYS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
+const AD_CLICK_ID_PATTERN = /^[A-Za-z0-9_-]{10,200}$/;
+
+export const withAdClickIds = (targetPath, search = '') => {
+  if (typeof targetPath !== 'string' || !targetPath.startsWith('/')) return targetPath;
+  const incoming = new URLSearchParams(typeof search === 'string' ? search : '');
+  const clickIds = AD_CLICK_ID_KEYS
+    .map((key) => [key, incoming.get(key) || ''])
+    .filter(([, value]) => AD_CLICK_ID_PATTERN.test(value));
+  if (clickIds.length === 0) return targetPath;
+
+  const hashIndex = targetPath.indexOf('#');
+  const hash = hashIndex === -1 ? '' : targetPath.slice(hashIndex);
+  const pathAndQuery = hashIndex === -1 ? targetPath : targetPath.slice(0, hashIndex);
+  const queryIndex = pathAndQuery.indexOf('?');
+  const basePath = queryIndex === -1 ? pathAndQuery : pathAndQuery.slice(0, queryIndex);
+  const params = new URLSearchParams(queryIndex === -1 ? '' : pathAndQuery.slice(queryIndex + 1));
+  clickIds.forEach(([key, value]) => params.set(key, value));
+  return `${basePath}?${params.toString()}${hash}`;
+};

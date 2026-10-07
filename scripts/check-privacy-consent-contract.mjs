@@ -171,7 +171,8 @@ expect(/fixed bottom-6 right-6[\s\S]*hidden[\s\S]*md:block/.test(stickyCalculato
 expect(/showBanner && !settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Das initiale Consent-Banner darf im Zahn-Check nicht erscheinen.');
 expect(/!isDentalCheckRoute && \(/.test(footer), 'Auch der Footer-Link zu Cookie-Einstellungen muss im Zahn-Check ausgeblendet bleiben.');
 expect(/settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Auch der Einstellungsdialog muss im Zahn-Check ausgeblendet bleiben.');
-expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\['\/zahn', '\/en\/dental', '\/schwangerschaft'\]\)/.test(analytics), 'Zahn-Check- und Schwangerschafts-Routen müssen in der Analytics-Sperrliste stehen.');
+// Seit Stapel 2 der Ratgeber-Serie (07.10.2026) zusätzlich die vier Krebsvorsorge-Ratgeber.
+expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\[\s*'\/zahn',\s*'\/en\/dental',\s*'\/schwangerschaft',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(analytics), 'Zahn-Check- und Schwangerschafts-Routen und die Krebsvorsorge-Ratgeber müssen in der Analytics-Sperrliste stehen.');
 expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sperre muss das GA4-Deaktivierungsflag setzen.');
 expect(/requestNitaConsent\('delayed_prompt'\)/.test(miaPrompt), 'Der bestehende Nita-Prompt muss seinen freigegebenen Einstieg an Nita weitergeben.');
 expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler Launcher müssen sich gegenseitig ausschließen.');
@@ -527,8 +528,8 @@ expect(
 
 // Dieselben Sperrrouten wie bei Meta.
 expect(
-  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(googleAds),
-  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
+  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(googleAds),
+  'Die Schwangerschafts-Route, die Schwangerschafts-Ratgeber, der Babybonus-Ratgeber, die Familienplanungs-Ratgeber und die Krebsvorsorge-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
 );
 // Einstiegscodes sperren Google Ads nicht mehr, gehen aber nie an Google
 // (Frank 05.10.2026). Meta und GA4 bleiben auf diesen Codes gesperrt.

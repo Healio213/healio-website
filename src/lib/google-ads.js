@@ -65,6 +65,14 @@ const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 // Anzeige auf diese Seiten wird trotzdem gemessen: Seite und Artikel-Button
 // reichen nur die Klick-Kennung an /ambulant weiter, dort zählt "Antrag
 // geöffnet" mit neutraler Adresse.
+// Seit Stapel 2 der Ratgeber-Serie (07.10.2026) zusätzlich gesperrt: der
+// Babybonus-Ratgeber und die drei Familienplanungs-Ratgeber (Schwangerschaft,
+// Geburt und Baby) sowie die Krebsvorsorge-Ratgeber (Bereichsseite Vorsorge,
+// Hautkrebs, Vorsorge für Frauen und Männer). Die vier Vorsorge-Pfade stehen
+// auch in der Analytics-Sperrliste (src/lib/analytics.js). Die drei
+// Familienplanungs-Ratgeber sind Ziel bezahlter Anzeigen: Ihre Weg-Links
+// reichen nur die Klick-Kennung an /stationaer weiter (withAdClickIds in
+// src/lib/ratgeber-cta.js), gemessen wird dort.
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
   '/ratgeber/schwanger-zusatzversicherung',
@@ -72,6 +80,14 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
   '/ratgeber/hebamme-kosten-krankenkasse',
   '/blog/kassenbonus-schwangerschaft-vorsorge',
+  '/ratgeber/babybonus-krankenkasse',
+  '/ratgeber/baby-geplant-zusatzversicherung',
+  '/ratgeber/familienzimmer-krankenhaus',
+  '/ratgeber/neugeborenes-versichern',
+  '/ratgeber/vorsorgeuntersuchung',
+  '/ratgeber/hautkrebsscreening',
+  '/ratgeber/vorsorgeuntersuchung-frauen',
+  '/ratgeber/vorsorgeuntersuchung-maenner',
 ]);
 
 // "Antrag geöffnet" zählt nur auf den beworbenen Produktseiten, auf denen

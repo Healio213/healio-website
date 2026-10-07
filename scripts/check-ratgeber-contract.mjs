@@ -745,6 +745,45 @@ const OPT_IN_SLUGS = [
   'bayerische-zahnzusatzversicherung',
   'aok-zahnzusatzversicherung',
   'dak-zahnreinigung',
+  // Serie Stapel 2, Zahnkosten (07.10.2026)
+  'zahnbruecke-kosten',
+  'zahnprothese-kosten',
+  'zahnfuellung-kosten',
+  'parodontitis-behandlung-kosten',
+  'zahnersatz-moeglichkeiten',
+  'zahnersatz-haertefall',
+  // Serie Stapel 2, Heilpraktiker und Naturheilkunde (07.10.2026)
+  'heilpraktiker-kosten',
+  'heilpraktiker-zusatzversicherung',
+  'ambulante-zusatzversicherung',
+  'akupunktur-kosten',
+  'tk-osteopathie',
+  'chiropraktiker-kosten',
+  'physiotherapie-zuzahlung',
+  'gebuehrenordnung-heilpraktiker',
+  // Serie Stapel 2, Krankenhaus (07.10.2026)
+  'stationaere-zusatzversicherung',
+  'einzelzimmer-krankenhaus-kosten',
+  'zusatzversicherung-einzelzimmer',
+  'krankenhaustagegeld',
+  'reha-zuzahlung',
+  // Serie Stapel 2, Schwangerschaft und Familie (07.10.2026)
+  'zusatzversicherung-kinder',
+  'babybonus-krankenkasse',
+  // Serie Stapel 2, familienplanung (07.10.2026)
+  'baby-geplant-zusatzversicherung',
+  'neugeborenes-versichern',
+  'familienzimmer-krankenhaus',
+  // Serie Stapel 2, Vorsorge (07.10.2026)
+  'vorsorgeuntersuchung',
+  'vorsorgeuntersuchung-frauen',
+  'vorsorgeuntersuchung-maenner',
+  'hautkrebsscreening',
+  'tk-reiseimpfung',
+  // Serie Stapel 2, Brille (07.10.2026)
+  'brille-krankenkasse',
+  'brillenversicherung',
+  'gleitsichtbrille-kosten',
 ];
 
 // Nur echte Abschnitts-Anker im Inhaltsverzeichnis: ids eindeutig.
@@ -828,12 +867,65 @@ const SERIEN_ZIELBEGRIFFE = {
   'bayerische-zahnzusatzversicherung': /bayerische zahnzusatzversicherung/i,
   'aok-zahnzusatzversicherung': /aok zahnzusatzversicherung/i,
   'dak-zahnreinigung': /zahnreinigung dak/i,
+  // Serie Stapel 2, Zahnkosten (07.10.2026)
+  'zahnbruecke-kosten': /zahnbrücke:? kosten/i,
+  'zahnprothese-kosten': /zahnprothese:? (?:arten, )?kosten/i,
+  'zahnfuellung-kosten': /zahnfüllung:? kosten/i,
+  'parodontitis-behandlung-kosten': /parodontitis[- ]behandlung/i,
+  'zahnersatz-moeglichkeiten': /zahnersatz möglichkeiten/i,
+  'zahnersatz-haertefall': /härtefall (?:beim )?zahnersatz/i,
+  // Serie Stapel 2, Heilpraktiker und Naturheilkunde (07.10.2026)
+  'heilpraktiker-kosten': /heilpraktiker kosten/i,
+  'heilpraktiker-zusatzversicherung': /heilpraktiker zusatzversicherung/i,
+  'ambulante-zusatzversicherung': /ambulante zusatzversicherung/i,
+  'akupunktur-kosten': /akupunktur kosten/i,
+  'tk-osteopathie': /techniker krankenkasse osteopathie/i,
+  'chiropraktiker-kosten': /chiropraktiker kosten/i,
+  'physiotherapie-zuzahlung': /zuzahlung physiotherapie/i,
+  'gebuehrenordnung-heilpraktiker': /gebührenordnung heilpraktiker/i,
+  // Serie Stapel 2, Krankenhaus (07.10.2026)
+  'stationaere-zusatzversicherung': /stationäre zusatzversicherung/i,
+  'einzelzimmer-krankenhaus-kosten': /einzelzimmer (?:im )?krankenhaus/i,
+  'zusatzversicherung-einzelzimmer': /zusatzversicherung krankenhaus einzelzimmer/i,
+  'krankenhaustagegeld': /krankenhaustagegeld/i,
+  'reha-zuzahlung': /zuzahlung reha/i,
+  // Serie Stapel 2, Schwangerschaft und Familie (07.10.2026)
+  'zusatzversicherung-kinder': /zusatzversicherung kinder/i,
+  'babybonus-krankenkasse': /babybonus krankenkasse/i,
+  // Serie Stapel 2, familienplanung (07.10.2026)
+  'baby-geplant-zusatzversicherung': /zusatzversicherung vor der schwangerschaft/i,
+  'neugeborenes-versichern': /neugeborenes versichern/i,
+  'familienzimmer-krankenhaus': /familienzimmer (?:im )?krankenhaus/i,
+  // Serie Stapel 2, Vorsorge (07.10.2026)
+  'vorsorgeuntersuchung': /vorsorgeuntersuchung/i,
+  'vorsorgeuntersuchung-frauen': /vorsorgeuntersuchung(?:en)? frauen/i,
+  'vorsorgeuntersuchung-maenner': /vorsorgeuntersuchung(?:en)? männer/i,
+  'hautkrebsscreening': /hautkrebsscreening/i,
+  'tk-reiseimpfung': /tk reiseimpfung/i,
+  // Serie Stapel 2, Brille (07.10.2026)
+  'brille-krankenkasse': /zahlt die krankenkasse eine brille/i,
+  'brillenversicherung': /brillenversicherung/i,
+  'gleitsichtbrille-kosten': /gleitsichtbrille kosten/i,
 };
 
 // Ältere Artikel in einer Feld-Gruppe, die vor der Vorlage entstanden sind
 // und eigene Prüfungen haben (Abschnitte 2b, 2c, 6a). Sie zählen als
 // Gruppenartikel (Bereichsseite, Nachbarn), aber nicht als Serienseite.
-const AELTERE_GRUPPENARTIKEL = ['zahnzusatzversicherung-fehlender-zahn'];
+const AELTERE_GRUPPENARTIKEL = [
+  'zahnzusatzversicherung-fehlender-zahn',
+  // Gruppe familie seit Stapel 2 (07.10.2026)
+  'schwanger-zusatzversicherung',
+  'schwangerschaft-was-steht-mir-zu',
+  'hebamme-kosten-krankenkasse',
+];
+
+// Befristete Ausnahme bei der Mindestzahl der Nachbarn, bis Einbau Codex-Welle B:
+// Die Gruppe brille hat mit Stapel 2 erst drei Seiten (Bereichsseite plus zwei),
+// jede Einzelseite kann also nur einen Nachbarn der eigenen Gruppe verlinken.
+// Mit augenlasern-kosten, brillenversicherung-kinder, tk-brille und aok-brille
+// (Welle B) entfällt die Ausnahme; dann diesen Eintrag löschen. Alle anderen
+// Prüfungen (Bereichsseite, Höchstzahl 4, Angebotsweg) gelten unverändert.
+const NACHBARN_MINDESTZAHL_AUSNAHME = { brille: 1 };
 
 // Die Zahn-Welle 1 steht zusätzlich im Weiterlesen-Block auf /zahn (unten).
 const ZAHN_WELLE1 = [
@@ -845,6 +937,23 @@ const ZAHN_WELLE1 = [
   'bonusheft-zahnarzt',
   'zahnzusatzversicherung-ohne-wartezeit',
 ];
+
+// Sperrwörter der Serienseiten: wie RATGEBER_SPERRWORTE, nur "ohne
+// Gesundheitsprüfung" prüft die Schleife unten mit Kontext (Kindernachversicherung).
+const SERIEN_SPERRWORTE = new RegExp(
+  RATGEBER_SPERRWORTE.source.replace('(?:keine|ohne) Gesundheits(?:fragen|prüfung)', '(?:keine|ohne) Gesundheitsfragen|keine Gesundheitsprüfung'),
+  'i',
+);
+expect(SERIEN_SPERRWORTE.source !== RATGEBER_SPERRWORTE.source && SERIEN_SPERRWORTE.test('keine Gesundheitsprüfung') && SERIEN_SPERRWORTE.test('ohne Gesundheitsfragen') && !SERIEN_SPERRWORTE.test('ohne Gesundheitsprüfung'), 'SERIEN_SPERRWORTE: Ausnahme für "ohne Gesundheitsprüfung" nicht sauber abgeleitet.');
+// Der Satz rund um eine Fundstelle: bis zum vorigen und nächsten Satzende
+// (Punkt, Frage- oder Ausrufezeichen vor Großbuchstabe) oder Zeilenwechsel.
+const satzUm = (text, index) => {
+  const before = text.slice(0, index);
+  const starts = [...before.matchAll(/[.!?]\s+(?=[A-ZÄÖÜ])|\n/g)];
+  const start = starts.length ? starts[starts.length - 1].index + starts[starts.length - 1][0].length : 0;
+  const after = text.slice(index).search(/[.!?](?=\s+[A-ZÄÖÜ])|\n/);
+  return text.slice(start, after === -1 ? text.length : index + after + 1);
+};
 
 const SERIEN_ALL = Object.keys(SERIEN_ZIELBEGRIFFE);
 // SERIE_ONLY=slug1,slug2 (früher ZAHN_ONLY) prüft beim Schreiben nur die
@@ -1004,12 +1113,28 @@ for (const slug of SERIEN_SLUGS) {
     // Gruppen oder auf Einzelartikel zählen nicht mit.
     const ownPaths = groupPaths(group);
     const neighbours = ratgeberTargets.filter((target) => target !== hubPath && target !== `/ratgeber/${slug}` && ownPaths.has(target));
-    expect(neighbours.length >= 2 && neighbours.length <= 4, `${label}: zwei bis vier Nachbarn der eigenen Gruppe verlinken (gefunden ${neighbours.length}).`);
+    const minNeighbours = NACHBARN_MINDESTZAHL_AUSNAHME[group.id] ?? 2;
+    expect(neighbours.length >= minNeighbours && neighbours.length <= 4, `${label}: zwei bis vier Nachbarn der eigenen Gruppe verlinken (gefunden ${neighbours.length}).`);
   }
 
   // Wortregeln (zusätzlich zu Abschnitt 6) und Pflichtgrenzen.
-  const sperr = text.match(RATGEBER_SPERRWORTE);
+  // "ohne Gesundheitsprüfung" ist nur bei der Kindernachversicherung richtig
+  // (§ 198 VVG), Regel wie in Commit 5bf4c8c: in den 220 Zeichen davor steht
+  // Kind, Baby, Neugeborenes oder Geburt. Zusätzlich (Stapel familienplanung,
+  // 07.10.2026) stehen die Voraussetzungen im selben Satz: ein versicherter
+  // Elternteil und die Anmeldefrist von zwei Monaten. Für Anträge von
+  // Erwachsenen bleibt die Formel gesperrt, "keine Gesundheitsprüfung" und
+  // "keine/ohne Gesundheitsfragen" bleiben es überall.
+  const sperr = text.match(SERIEN_SPERRWORTE);
   expect(!sperr, `${label}: Sperrwort im Text: "${sperr?.[0]}".`);
+  for (const match of text.matchAll(/ohne Gesundheitsprüfung/gi)) {
+    const context = text.slice(Math.max(0, match.index - 220), match.index);
+    const sentence = satzUm(text, match.index);
+    expect(
+      /Kind|Baby|Neugeboren|Geburt/.test(context) && /Elternteil/.test(sentence) && /(?:zwei|2) Monat/.test(sentence),
+      `${label}: "ohne Gesundheitsprüfung" nur bei der Kindernachversicherung, mit Elternteil und Zwei-Monats-Frist im selben Satz: ${sentence.slice(0, 90)}`,
+    );
+  }
   expect(!/(?<!Soziale )\bsicher/i.test(text), `${label}: Wortstamm "sicher" nicht als Versprechen.`);
   expect(!/verdient (?:an einem|am) Kassenwechsel|An einem Kassenwechsel verdient/i.test(text), `${label}: nie schreiben, ob Healio am Kassenwechsel verdient.`);
   expect(!/Zahnärzt\w* (?:erhalten|bekommen) (?:eine )?(?:Vergütung|Prämie)/i.test(text), `${label}: keine Vergütung für Zahnärzte.`);

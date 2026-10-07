@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, ChevronDown, Plus } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { withAdClickIds } from '@/lib/ratgeber-cta';
 
 /**
  * Optionale Bausteine der Ratgeber-Vorlage (Zahn-Ratgeber, 06.10.2026).
@@ -67,6 +68,7 @@ export const ArticleByline = ({ author, standIso, standLabel, readingTimeMinutes
  * ---------------------------------------------------------------------- */
 
 export const QuickAnswerCard = ({ quick }) => {
+  const { search } = useLocation();
   const facts = (quick.facts || []).slice(0, 3);
   return (
     <section
@@ -102,7 +104,7 @@ export const QuickAnswerCard = ({ quick }) => {
 
       {quick.path && (
         <Link
-          to={quick.path.to}
+          to={withAdClickIds(quick.path.to, search)}
           data-ratgeber-path="kurzantwort"
           className={`group mt-4 flex min-h-[3.25rem] items-center gap-3 rounded-2xl border border-[#25c990]/50 bg-white px-4 py-3 transition hover:border-[#25c990] hover:bg-[#effdf4] sm:mt-5 ${FOCUS_RING}`}
         >
@@ -262,7 +264,9 @@ export const StepTrack = ({ block }) => (
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25c990]/15 font-display text-base font-extrabold text-[#087654]" aria-hidden="true">
             {index + 1}
           </span>
-          <span>
+          {/* min-w-0 und Trennung: lange Komposita (Mindestversicherungsdauer)
+              dürfen die Schrittkarte bei 320 px nicht verbreitern. */}
+          <span className="min-w-0 break-words hyphens-auto sm:hyphens-manual">
             <span className="block font-display text-base font-extrabold leading-6 text-[#07111f] sm:text-lg">{step.title}</span>
             {step.text && <span className="mt-1 block text-base leading-7 text-slate-600">{step.text}</span>}
           </span>
@@ -349,9 +353,11 @@ export const SwipeCards = ({ block }) => (
  * Weg-Karte: der passende Zahn-Weg, passend zum Abschnitt
  * ---------------------------------------------------------------------- */
 
-export const PathLink = ({ block }) => (
+export const PathLink = ({ block }) => {
+  const { search } = useLocation();
+  return (
   <Link
-    to={block.to}
+    to={withAdClickIds(block.to, search)}
     data-ratgeber-path={block.placement || 'abschnitt'}
     className={`group mt-8 flex min-h-[3.25rem] items-center gap-4 rounded-[1.5rem] border border-[#25c990]/40 bg-[#f4faf7] p-4 transition hover:border-[#25c990] hover:bg-[#effdf4] sm:p-5 ${FOCUS_RING}`}
   >
@@ -362,7 +368,8 @@ export const PathLink = ({ block }) => (
     </span>
     <ArrowRight className="h-5 w-5 shrink-0 text-[#087654] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true" />
   </Link>
-);
+  );
+};
 
 /* -------------------------------------------------------------------------
  * Häufige Fragen zum Aufklappen (faqStyle: 'accordion')
@@ -373,12 +380,14 @@ export const FaqAccordion = ({ faqs }) => (
     {faqs.map((faq) => (
       <details key={faq.question} className="group">
         <summary className={`flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-display text-lg font-extrabold leading-7 text-[#07111f] [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}>
-          <span>{faq.question}</span>
+          {/* Trennung unter sm: lange Fragen mit Komposita
+              (Krankenhauszusatzversicherung) sprengten sonst 320 px. */}
+          <span className="min-w-0 break-words hyphens-auto sm:hyphens-manual">{faq.question}</span>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#f4faf7] text-[#087654] transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none" aria-hidden="true">
             <Plus className="h-5 w-5" />
           </span>
         </summary>
-        <p className="pb-6 pr-2 text-lg leading-8 text-slate-700 sm:text-[1.1rem] sm:leading-9">{faq.answer}</p>
+        <p className="break-words pb-6 pr-2 text-lg leading-8 text-slate-700 hyphens-auto sm:text-[1.1rem] sm:leading-9 sm:hyphens-manual">{faq.answer}</p>
       </details>
     ))}
   </div>

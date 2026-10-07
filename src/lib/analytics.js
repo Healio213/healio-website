@@ -9,7 +9,17 @@ export const GA4_MEASUREMENT_ID = 'G-VSN76YW5SC';
 const GA4_SCRIPT_URL = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
 const GA4_DISABLE_KEY = `ga-disable-${GA4_MEASUREMENT_ID}`;
 const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
-const ANALYTICS_EXCLUDED_PATHS = new Set(['/zahn', '/en/dental', '/schwangerschaft']);
+// Seit Stapel 2 der Ratgeber-Serie (07.10.2026) auch die Krebsvorsorge-Ratgeber:
+// schon der Besuch kann etwas über die Gesundheit verraten (Art. 9 DSGVO).
+const ANALYTICS_EXCLUDED_PATHS = new Set([
+  '/zahn',
+  '/en/dental',
+  '/schwangerschaft',
+  '/ratgeber/vorsorgeuntersuchung',
+  '/ratgeber/hautkrebsscreening',
+  '/ratgeber/vorsorgeuntersuchung-frauen',
+  '/ratgeber/vorsorgeuntersuchung-maenner',
+]);
 export const PRIVATE_FUNNEL_SOURCES = new Set(['reel-f05', 'bonus-check']);
 const SAFE_EVENT_NAME = /^[a-z][a-z0-9_]{0,39}$/;
 const SAFE_PARAM_KEY = /^[a-z][a-z0-9_]{0,39}$/;
