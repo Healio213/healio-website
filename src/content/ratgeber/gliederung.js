@@ -12,6 +12,11 @@
  *      oder, ohne Gruppe, in RATGEBER_EINZELARTIKEL. Die Stelle bestimmt die
  *      Reihenfolge in der Übersicht.
  *
+ * Von Hand dazu (Abschnitt 10 in Healio/Marktanalyse-2026-10/
+ * PRODUKTION-RATGEBER.md): Karte auf der Bereichsseite der Gruppe, Zielbegriff
+ * in SERIEN_ZIELBEGRIFFE und Slug in OPT_IN_SLUGS des Vertragstests
+ * (scripts/check-ratgeber-contract.mjs), Eintrag in public/llms.txt.
+ *
  * Alles Weitere leitet scripts/build-ratgeber-registry.mjs aus den
  * Inhaltsdateien ab. Es läuft automatisch vor npm run build und npm run dev,
  * von Hand mit npm run ratgeber:register, und schreibt:
@@ -74,6 +79,14 @@ export const RATGEBER_GROUPS = [
       'bonusheft-zahnarzt',
       'zahnzusatzversicherung-ohne-wartezeit',
       'zahnzusatzversicherung-fehlender-zahn',
+      // Serie Stapel 1 (07.10.2026): erst die Grundsatzfrage, dann die
+      // beiden Tarife, dann die Kassen. Hinten angehängt, damit die Übersicht
+      // (Bereichsseite plus sechs Karten) gleich bleibt.
+      'zahnzusatzversicherung-lohnt-sich',
+      'ukv-zahnzusatzversicherung',
+      'bayerische-zahnzusatzversicherung',
+      'aok-zahnzusatzversicherung',
+      'dak-zahnreinigung',
     ],
   },
 ];

@@ -208,7 +208,7 @@ export const ResponsiveTable = ({ block, highlightLast = false, dataAttr }) => {
                     <td
                       key={`${cell}-${cellIndex}`}
                       data-label={block.head[cellIndex]}
-                      className={`flex items-baseline justify-between gap-4 border-t border-slate-100 py-2 text-right before:shrink-0 before:text-left before:text-[0.95rem] before:font-semibold before:text-slate-500 before:content-[attr(data-label)] sm:table-cell sm:border-0 sm:px-4 sm:py-3 sm:text-left sm:align-top sm:before:content-none ${highlightLast && cellIndex === lastIndex ? 'font-semibold text-[#087654] sm:bg-[#f1fbf6]' : ''}`}
+                      className={`flex items-baseline justify-between gap-4 border-t border-slate-100 py-2 text-right before:shrink before:text-left before:text-[0.95rem] before:font-semibold before:text-slate-500 before:content-[attr(data-label)] sm:table-cell sm:border-0 sm:px-4 sm:py-3 sm:text-left sm:align-top sm:before:content-none ${highlightLast && cellIndex === lastIndex ? 'font-semibold text-[#087654] sm:bg-[#f1fbf6]' : ''}`}
                     >
                       <span className="break-words hyphens-auto">{cell}</span>
                     </td>
@@ -309,7 +309,7 @@ const SwipeCardBody = ({ card }) => (
       {card.icon && <FriendlyIcon kind={card.icon} tone={card.tone || 'mint'} size="sm" />}
       {card.eyebrow && <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{card.eyebrow}</span>}
     </span>
-    <span className="mt-4 block font-display text-lg font-extrabold leading-snug text-[#07111f]">{card.title}</span>
+    <span className="mt-4 block break-words font-display text-lg font-extrabold leading-snug text-[#07111f] hyphens-auto">{card.title}</span>
     {card.text && <span className="mt-2 block text-base leading-7 text-slate-600">{card.text}</span>}
     {card.linkLabel && (
       <span className="mt-auto flex items-center gap-2 pt-4 font-display text-base font-extrabold text-[#07111f]">

@@ -293,7 +293,7 @@ const RatgeberArticleLayout = ({ article }) => {
             {notice}
           </p>
 
-          <h1 className="mt-6 font-display text-3xl font-extrabold leading-[1.15] tracking-[-0.03em] text-[#07111f] sm:text-4xl">
+          <h1 className="mt-6 break-words font-display text-3xl font-extrabold leading-[1.15] tracking-[-0.03em] text-[#07111f] hyphens-auto sm:text-4xl sm:hyphens-manual">
             {article.headline}
           </h1>
 
@@ -328,7 +328,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
           {article.sections.map((section) => (
             <section key={section.id} id={section.id} className="mt-14 scroll-mt-28">
-              <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
+              <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {section.heading}
               </h2>
 
@@ -368,7 +368,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
           {article.faqs?.length > 0 && (
             <section id="haeufige-fragen" className="mt-14 scroll-mt-28">
-              <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
+              <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 Häufige Fragen
               </h2>
               {article.faqStyle === 'accordion' ? <FaqAccordion faqs={article.faqs} /> : (
@@ -390,7 +390,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
           {article.internalCta && (
             <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-14">
-              <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
+              <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {article.internalCta.heading}
               </h2>
               {article.internalCta.blocks.map((block, index) => (
@@ -404,7 +404,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
           {article.onward && (
             <section id="naechster-schritt" className="mt-14">
-              <h2 className="font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-3xl">
+              <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {article.onward.heading}
               </h2>
               <p className={PARAGRAPH_CLASS}>

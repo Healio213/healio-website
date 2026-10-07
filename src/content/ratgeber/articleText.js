@@ -30,8 +30,15 @@ export const collectBlockText = (blocks, parts) => {
         for (const segment of block.segments || []) parts.push(segment.text);
         break;
       case 'costCard':
-        parts.push(block.caption, block.title, block.tariffLabel, block.note, block.bonusNote);
-        for (const row of block.rows || []) parts.push(row.label, row.kasse, row.ohne, row.mit, row.note);
+        // Die Vorlage (CostCard in RatgeberBausteine.jsx) zeigt Kopfzeile und
+        // Zeilen als Listen, genau wie bei table. Die frühere Objektform
+        // ({ label, kasse, ohne, mit, note }) wird weiter gelesen, damit kein
+        // Zellentext an Sperrwort-, Zahlen- und Wortzahlprüfung vorbeigeht.
+        parts.push(block.caption, block.title, block.tariffLabel, ...(block.head || []), block.note, block.bonusNote);
+        for (const row of block.rows || []) {
+          if (Array.isArray(row)) parts.push(...row);
+          else if (row) parts.push(row.label, row.kasse, row.ohne, row.mit, row.note);
+        }
         break;
       case 'steps':
         parts.push(block.heading);

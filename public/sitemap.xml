@@ -171,7 +171,7 @@
   </url>
   <url>
     <loc>https://healio.de/ratgeber/zahnersatz-kosten</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -214,6 +214,36 @@
   <url>
     <loc>https://healio.de/ratgeber/zahnzusatzversicherung-fehlender-zahn</loc>
     <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/zahnzusatzversicherung-lohnt-sich</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/ukv-zahnzusatzversicherung</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/bayerische-zahnzusatzversicherung</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/aok-zahnzusatzversicherung</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/dak-zahnreinigung</loc>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

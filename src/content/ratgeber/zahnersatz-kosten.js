@@ -17,6 +17,9 @@
  * und sagt das), kein BSG-Urteil, keine Behandlungsempfehlung.
  *
  * Faktenprüfung 06.10.2026: Healio/Ratgeber/zahn-ratgeber-belege/PRUEFBERICHT-WELLE1.md
+ * Einbau Serie Stapel 1 (07.10.2026): Härtefallgrenze auf den Wert 2026 korrigiert
+ * (1.582,00 EUR, Verbraucherzentrale 27.01.2026 und KZBV, vorher 1.498 EUR = 2025),
+ * Wegweiser um die Serienseiten der Gruppe Zähne ergänzt (Bereichsseite listet alle).
  */
 export const article = {
   slug: 'zahnersatz-kosten',
@@ -28,6 +31,8 @@ export const article = {
 
   publishedAt: '2026-10-06',
   publishedAtLabel: '6. Oktober 2026',
+  updatedAt: '2026-10-07',
+  updatedAtLabel: '7. Oktober 2026',
   readingTimeMinutes: 13,
 
   listTitle: 'Zahnersatz Kosten: was die Kasse zahlt und was du selbst zahlst',
@@ -97,7 +102,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Bei unzumutbarer Belastung zahlt die Kasse zusätzlich 40 Prozent der Regelversorgung, höchstens die tatsächlichen Kosten. Zusammen sind das 100 Prozent, bei einer Krone nach Befund 1.1 also 398,39 EUR und bei einer Brücke nach Befund 2.1 921,60 EUR. Ob dieser Härtefall für dich gilt, hängt vom Einkommen ab. Die Verbraucherzentrale nennt für Alleinstehende 2026 bis zu 1.498 EUR Bruttoeinnahmen im Monat, außerdem zählt etwa der Bezug von Bürgergeld.',
+          text: 'Bei unzumutbarer Belastung zahlt die Kasse zusätzlich 40 Prozent der Regelversorgung, höchstens die tatsächlichen Kosten. Zusammen sind das 100 Prozent, bei einer Krone nach Befund 1.1 also 398,39 EUR und bei einer Brücke nach Befund 2.1 921,60 EUR. Ob dieser Härtefall für dich gilt, hängt vom Einkommen ab. 2026 liegt die Grenze für Alleinstehende bei 1.582,00 EUR Bruttoeinnahmen im Monat, mit einem Angehörigen bei 2.175,25 EUR und für jeden weiteren Angehörigen 395,50 EUR höher. Das sind 40 Prozent der Bezugsgröße von 3.955 EUR (§ 55 Abs. 2 SGB V). Außerdem zählt etwa der Bezug von Bürgergeld.',
         },
       ],
     },
@@ -346,6 +351,7 @@ export const article = {
       blocks: [
         {
           type: 'cards',
+          heading: 'Kosten beim Zahnarzt',
           hint: 'Zum Weiterblättern seitlich wischen',
           items: [
             {
@@ -354,6 +360,14 @@ export const article = {
               title: 'Zahnreinigung Kosten',
               text: 'Was eine professionelle Zahnreinigung kostet und welche Kasse etwas dazugibt.',
               to: '/ratgeber/professionelle-zahnreinigung-kosten',
+              linkLabel: 'Lesen',
+            },
+            {
+              icon: 'prevention',
+              tone: 'sky',
+              title: 'Zahnreinigung bei der DAK',
+              text: 'Bis zu 60 EUR im Kalenderjahr laut Satzung, die Frist und der Bonus als Zuschuss.',
+              to: '/ratgeber/dak-zahnreinigung',
               linkLabel: 'Lesen',
             },
             {
@@ -388,6 +402,21 @@ export const article = {
               to: '/ratgeber/bonusheft-zahnarzt',
               linkLabel: 'Lesen',
             },
+          ],
+        },
+        {
+          type: 'cards',
+          heading: 'Zahnzusatzversicherung, Tarife und Kasse',
+          hint: 'Zum Weiterblättern seitlich wischen',
+          items: [
+            {
+              icon: 'calculator',
+              tone: 'butter',
+              title: 'Lohnt sich eine Zahnzusatzversicherung?',
+              text: 'Krone, Brücke und Implantat durchgerechnet, mit Prüfpunkten und Grenzen.',
+              to: '/ratgeber/zahnzusatzversicherung-lohnt-sich',
+              linkLabel: 'Lesen',
+            },
             {
               icon: 'calendar',
               tone: 'mint',
@@ -402,6 +431,30 @@ export const article = {
               title: 'Fehlender Zahn und Zusatzversicherung',
               text: 'Was bei einer Zahnlücke noch geht und was nicht.',
               to: '/ratgeber/zahnzusatzversicherung-fehlender-zahn',
+              linkLabel: 'Lesen',
+            },
+            {
+              icon: 'dental',
+              tone: 'sky',
+              title: 'UKV ZahnPRIVAT im Überblick',
+              text: 'Drei Stufen ohne Wartezeit, die Zahnstaffel und was nicht versichert ist.',
+              to: '/ratgeber/ukv-zahnzusatzversicherung',
+              linkLabel: 'Lesen',
+            },
+            {
+              icon: 'switch',
+              tone: 'coral',
+              title: 'Bayerische mit ZAHN Sofort',
+              text: 'Für schon empfohlene oder begonnene Behandlungen, die weder abgeschlossen noch abgerechnet sind.',
+              to: '/ratgeber/bayerische-zahnzusatzversicherung',
+              linkLabel: 'Lesen',
+            },
+            {
+              icon: 'region',
+              tone: 'butter',
+              title: 'AOK und Zähne',
+              text: 'Was die elf AOKs beim Zahnersatz und bei der Zahnreinigung zahlen.',
+              to: '/ratgeber/aok-zahnzusatzversicherung',
               linkLabel: 'Lesen',
             },
           ],
@@ -538,12 +591,20 @@ export const article = {
         accessedAt: '06.10.2026',
       },
       {
-        label: 'Krone, Brücke oder Implantat? Hohe Kosten beim Zahnersatz vermeiden',
+        label: 'Härtefallregelung beim Zahnersatz: Wer hat Anspruch?',
         publisher: 'Verbraucherzentrale',
-        href: 'https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/aerztinnen-und-kliniken/krone-bruecke-oder-implantat-hohe-kosten-beim-zahnersatz-vermeiden-53147',
-        stand: '13.04.2026',
-        accessedAt: '06.10.2026',
-        note: 'Einkommensgrenze für den Härtefall 2026',
+        href: 'https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/aerztinnen-und-kliniken/haertefallregelung-beim-zahnersatz-wer-hat-anspruch-12887',
+        stand: '27.01.2026',
+        accessedAt: '07.10.2026',
+        note: 'Einkommensgrenzen für den Härtefall 2026',
+      },
+      {
+        label: 'Festzuschuss und Eigenanteil (Patienteninformation)',
+        publisher: 'Kassenzahnärztliche Bundesvereinigung (KZBV)',
+        href: 'https://www.kzbv.de/patienten/patient-und-krankenkasse/zahnersatz/festzuschuesse-zum-zahnersatz/',
+        stand: '01.01.2026',
+        accessedAt: '07.10.2026',
+        note: 'Einkommensgrenzen für den Härtefall 2026',
       },
       {
         label: 'Bundesmantelvertrag Zahnärzte, Anlage 2 (Heil- und Kostenplan) und SGB V § 87 Abs. 1a',

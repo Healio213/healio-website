@@ -88,7 +88,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was die Kasse beim Zahnarzt zahlt, was an dir hängen bleibt und wann eine Zahnzusatzversicherung hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "dental",
       "hubSlug": "zahnersatz-kosten",
-      "total": 8,
+      "total": 13,
       "entries": [
         {
           "slug": "zahnersatz-kosten",

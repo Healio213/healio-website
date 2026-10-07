@@ -19,7 +19,7 @@
 // Prozentsätzen und sagt das in den Annahmen.
 export const FESTZUSCHUSS_STAND = Object.freeze({
   quelle: 'Festzuschuss-Richtlinie des G-BA, Beträge gültig ab 1. Januar 2026 (BAnz AT 04.02.2026 B3)',
-  url: 'https://www.g-ba.de/richtlinien/29/',
+  url: 'https://www.g-ba.de/richtlinien/27/',
 });
 
 // regelversorgung100: zahnärztlicher plus zahntechnischer Betrag der

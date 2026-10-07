@@ -127,7 +127,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 13,
     "metaTitle": "Zahnersatz Kosten: was die Kasse zahlt, was du zahlst | Healio",
     "metaDescription": "Zahnersatz, Krone, Implantat, Zahnreinigung: was die Krankenkasse 2026 zahlt, was ab 2027 gilt, wie das Bonusheft hilft und wo dein Eigenanteil bleibt.",
-    "publishedAt": "2026-10-06"
+    "publishedAt": "2026-10-06",
+    "updatedAt": "2026-10-07"
   },
   {
     "slug": "professionelle-zahnreinigung-kosten",
@@ -206,6 +207,61 @@ export const RATGEBER_ENTRIES = [
     "metaDescription": "Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.",
     "publishedAt": "2026-09-22",
     "updatedAt": "2026-10-05"
+  },
+  {
+    "slug": "zahnzusatzversicherung-lohnt-sich",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Lohnt sich eine Zahnzusatzversicherung? Rechnung statt Bauchgefühl",
+    "listTeaser": "Wann sie sich rechnet und wann nicht, mit Beispielen zu Krone, Brücke und Implantat, den Prüfpunkten der Verbraucherzentrale und den Grenzen.",
+    "readingTimeMinutes": 11,
+    "metaTitle": "Lohnt sich eine Zahnzusatzversicherung? Die Rechnung | Healio",
+    "metaDescription": "Lohnt sich eine Zahnzusatzversicherung? Rechenbeispiele zu Krone, Brücke und Implantat, Prüfpunkte, Zahnstaffel, Zwei-Jahres-Regel und die zwei Wege bei Healio.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "ukv-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "UKV ZahnPRIVAT im Überblick: Stufen, Leistungen, Grenzen",
+    "listTeaser": "Drei Stufen ohne Wartezeit, die Zahnstaffel in den ersten Jahren, Aufnahme mit Zuschlag bei fehlenden Zähnen und was nicht versichert ist.",
+    "readingTimeMinutes": 10,
+    "metaTitle": "UKV Zahnzusatzversicherung: ZahnPRIVAT im Überblick | Healio",
+    "metaDescription": "UKV Zahnzusatzversicherung: ZahnPRIVAT 75, 90 und 100 ohne Wartezeit, mit Zahnstaffel, Zuschlag bei 1 bis 3 fehlenden Zähnen und klaren Grenzen bei Angeratenem.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "bayerische-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Bayerische Zahnzusatzversicherung mit ZAHN Sofort im Überblick",
+    "listTeaser": "Für Behandlungen, die schon empfohlen oder begonnen sind: wie ZAHN Sofort funktioniert, wann er wählbar ist und wo er endet.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Bayerische Zahnzusatzversicherung mit ZAHN Sofort | Healio",
+    "metaDescription": "Bayerische Zahnzusatzversicherung: ZAHN Sofort für schon empfohlene oder begonnene Behandlungen, bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "AOK und Zähne: was die AOK beim Zahnersatz zahlt und welche Zusatzversicherung passt",
+    "listTeaser": "Festzuschuss, Zahnreinigung und Bonusheft bei den elf AOKs, und welche AOK den Bonus als Zuschuss für eine Zahnzusatzversicherung vorsieht.",
+    "readingTimeMinutes": 13,
+    "metaTitle": "AOK Zahnzusatzversicherung: was die AOK beim Zahn zahlt | Healio",
+    "metaDescription": "AOK Zahnzusatzversicherung: Was die AOK beim Zahnersatz zahlt, welche Zuschüsse es zur Zahnreinigung gibt und welche AOK den Bonus für einen Zahntarif nutzt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "dak-zahnreinigung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "DAK und Zahnreinigung: was die DAK erstattet",
+    "listTeaser": "Bis zu 60 EUR im Jahr laut Satzung, Rechnung bis 31. März des Folgejahres, dazu der Bonus als Zuschuss und was ein Zahntarif übernimmt.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Zahnreinigung DAK: bis zu 60 EUR im Jahr | Healio",
+    "metaDescription": "Zahnreinigung DAK: Die DAK-Gesundheit gibt laut Satzung bis zu 60 EUR im Kalenderjahr dazu. Mit Frist, Bonus-Zuschuss und dem, was ein Zahntarif übernimmt.",
+    "publishedAt": "2026-10-07"
   }
 ];
 

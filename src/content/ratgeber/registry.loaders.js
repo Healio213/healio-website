@@ -27,4 +27,9 @@ export const RATGEBER_LOADERS = new Map([
   ['bonusheft-zahnarzt', () => import('./bonusheft-zahnarzt.js')],
   ['zahnzusatzversicherung-ohne-wartezeit', () => import('./zahnzusatzversicherung-ohne-wartezeit.js')],
   ['zahnzusatzversicherung-fehlender-zahn', () => import('./zahnzusatzversicherung-fehlender-zahn.js')],
+  ['zahnzusatzversicherung-lohnt-sich', () => import('./zahnzusatzversicherung-lohnt-sich.js')],
+  ['ukv-zahnzusatzversicherung', () => import('./ukv-zahnzusatzversicherung.js')],
+  ['bayerische-zahnzusatzversicherung', () => import('./bayerische-zahnzusatzversicherung.js')],
+  ['aok-zahnzusatzversicherung', () => import('./aok-zahnzusatzversicherung.js')],
+  ['dak-zahnreinigung', () => import('./dak-zahnreinigung.js')],
 ]);
