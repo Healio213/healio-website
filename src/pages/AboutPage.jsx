@@ -282,15 +282,14 @@ const AboutPage = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#07111f]/95 via-[#07111f]/50 to-transparent px-6 pb-6 pt-24 text-white sm:px-8 sm:pb-8">
-                    <figcaption>
-                      <span className="block font-display text-xl font-bold">{t('story.founder')}</span>
-                      <span className="mt-1 block text-sm text-slate-300">{t('story.founderRole')}</span>
-                      <span className="mt-3 block text-sm font-semibold uppercase tracking-[0.16em] text-[#5ee0b1] md:text-xs">{t('story.founderLocation')}</span>
-                    </figcaption>
-                  </div>
                 </div>
               </div>
+              {/* Frank 07.10.2026: nichts auf dem Bild, Name und Rolle stehen darunter. */}
+              <figcaption className="mt-8 pl-1">
+                <span className="block font-display text-xl font-bold text-home-midnight">{t('story.founder')}</span>
+                <span className="mt-1 block text-base text-slate-600">{t('story.founderRole')}</span>
+                <span className="mt-2 block text-sm font-semibold uppercase tracking-[0.16em] text-[#0b6048] md:text-xs">{t('story.founderLocation')}</span>
+              </figcaption>
             </motion.figure>
 
             <motion.div {...reveal(0.08)} className="order-1 lg:order-2">
