@@ -339,16 +339,16 @@ expect(
 
 // /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
 expect(
-  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaPixel),
-  'Die Schwangerschafts-Route und die Schwangerschafts-Ratgeber muessen in der Meta-Sperrliste stehen.',
+  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(metaPixel),
+  'Die Schwangerschafts-Route, die Schwangerschafts-, Familienplanungs- und Krebsvorsorge-Ratgeber muessen in der Meta-Sperrliste stehen.',
 );
 expect(
   /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(metaPixel),
   'Private Kampagnenquellen muessen auch fuer Meta gesperrt bleiben.',
 );
 expect(
-  /const BLOCKED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*\]\)/.test(metaCapi),
-  'Auch die CAPI-Funktion muss die Schwangerschafts-Route und die Schwangerschafts-Ratgeber abweisen.',
+  /const BLOCKED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(metaCapi),
+  'Auch die CAPI-Funktion muss dieselben Routen abweisen wie die Meta-Sperrliste.',
 );
 expect(
   /if \(isMetaExcludedRoute\(\) \|\| !hasConsent\('marketing', state\)\)/.test(app),

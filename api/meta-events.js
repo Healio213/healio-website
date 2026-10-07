@@ -28,13 +28,22 @@ const VERCEL_PREVIEW_HOST = /^[a-z0-9][a-z0-9-]{0,200}\.vercel\.app$/;
 
 // Diese Routen duerfen Meta nie erreichen, auch nicht ueber einen
 // manipulierten Client-Aufruf. Gleiche Liste wie META_EXCLUDED_PATHS in
-// src/lib/meta-pixel.js.
+// src/lib/meta-pixel.js (der Hebammen-Ratgeber fehlte hier bis 07.10.2026).
 const BLOCKED_PATHS = new Set([
   '/schwangerschaft',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
+  '/ratgeber/hebamme-kosten-krankenkasse',
   '/blog/kassenbonus-schwangerschaft-vorsorge',
+  '/ratgeber/babybonus-krankenkasse',
+  '/ratgeber/baby-geplant-zusatzversicherung',
+  '/ratgeber/familienzimmer-krankenhaus',
+  '/ratgeber/neugeborenes-versichern',
+  '/ratgeber/vorsorgeuntersuchung',
+  '/ratgeber/hautkrebsscreening',
+  '/ratgeber/vorsorgeuntersuchung-frauen',
+  '/ratgeber/vorsorgeuntersuchung-maenner',
 ]);
 const QUERY_ALLOWLIST = /^(?:utm_[a-z_]{1,30}|fbclid)$/i;
 

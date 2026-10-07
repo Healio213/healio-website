@@ -61,7 +61,9 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Auf diesen Routen darf Meta niemals messen. /zahn und /ambulant sind
 // bewusst NICHT gesperrt: dorthin soll geworben werden, es gehen aber nur
 // Ereignisnamen und der Seitenschluessel raus, nie Antworten.
-// Gleiche Sperrliste wie bei Google Ads (src/lib/google-ads.js).
+// Gleiche Sperrliste wie bei Google Ads (src/lib/google-ads.js), seit dem
+// Zusammenführen der Ratgeber-Serie (07.10.2026) also auch Babybonus, die drei
+// Familienplanungs-Ratgeber und die vier Krebsvorsorge-Ratgeber.
 const META_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
   '/ratgeber/schwanger-zusatzversicherung',
@@ -69,6 +71,14 @@ const META_EXCLUDED_PATHS = new Set([
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
   '/ratgeber/hebamme-kosten-krankenkasse',
   '/blog/kassenbonus-schwangerschaft-vorsorge',
+  '/ratgeber/babybonus-krankenkasse',
+  '/ratgeber/baby-geplant-zusatzversicherung',
+  '/ratgeber/familienzimmer-krankenhaus',
+  '/ratgeber/neugeborenes-versichern',
+  '/ratgeber/vorsorgeuntersuchung',
+  '/ratgeber/hautkrebsscreening',
+  '/ratgeber/vorsorgeuntersuchung-frauen',
+  '/ratgeber/vorsorgeuntersuchung-maenner',
 ]);
 
 // RechnerStart gilt nur fuer die Rechner- und Auswahlhilfe-Einstiege.
