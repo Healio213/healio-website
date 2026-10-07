@@ -9,8 +9,8 @@ const ServicesBudget = () => {
   const { getPath } = useLanguage();
 
   return (
-    <section className="overflow-hidden bg-[#DDEFE8] px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="services-budget-title">
-      <div className="healio-container grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
+    <section className="overflow-hidden bg-[#DDEFE8] px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="services-budget-title">
+      <div className="healio-container grid gap-8 max-md:px-0 md:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
         <div className="relative min-w-0">
           <div className="absolute -left-10 -top-10 h-36 w-36 rounded-full border border-emerald-900/10" aria-hidden="true" />
           <p className="relative mb-5 font-display text-sm font-extrabold uppercase tracking-[0.18em] text-emerald-800 sm:text-base">
@@ -19,20 +19,20 @@ const ServicesBudget = () => {
           <p className="relative whitespace-nowrap font-display text-[3.6rem] font-extrabold leading-[0.78] tracking-[-0.075em] text-[#10202A] sm:text-[clamp(4.2rem,9vw,7.5rem)]">
             {t('budget.amount')}
           </p>
-          <p className="relative mt-7 max-w-xs font-display text-sm font-extrabold uppercase tracking-[0.18em] text-emerald-800">
+          <p className="relative mt-5 max-w-xs font-display text-sm font-extrabold uppercase tracking-[0.18em] text-emerald-800 md:mt-7">
             {t('budget.amountLabel')}
           </p>
         </div>
 
         <div className="min-w-0">
-          <p className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-emerald-800">{t('budget.eyebrow')}</p>
+          <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-800 md:text-xs">{t('budget.eyebrow')}</p>
           {/* Schriftgröße folgt der Bildschirmbreite, damit „Gesundheitsspielraum.“ ohne Trennung passt; Silbentrennung nur als Notnetz unter 320 px. */}
           <h2 id="services-budget-title" className="mt-4 max-w-[20ch] break-words font-display text-[clamp(1.375rem,calc((100vw_-_4rem)/11.5),2.25rem)] font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] [text-wrap:balance] max-[319px]:[hyphens:auto] sm:text-5xl lg:text-[clamp(2.5rem,3.9vw,3rem)]">
             {t('budget.title')}
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700">{t('budget.description')}</p>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">{t('budget.note')}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 sm:mt-6 sm:text-lg sm:leading-8">{t('budget.description')}</p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:mt-5">{t('budget.note')}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-8">
             <Link to={getPath('ambulant')} className="home-focus inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-base font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
               {t('budget.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

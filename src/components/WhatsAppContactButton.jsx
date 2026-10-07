@@ -16,10 +16,13 @@ const WhatsAppContactButton = () => {
   return (
     <>
       <style>{`
+        /* Experiment Handy-Conversion 10/2026: Unter md etwas kleiner (48 px statt
+           56 px) und näher an der Ecke, damit er weniger Text und Kartenränder
+           überdeckt. Ab md (768 px) bleiben Größe und Lage wie zuvor. */
         .healio-whatsapp-floating {
           position: fixed;
-          right: max(0.75rem, env(safe-area-inset-right));
-          bottom: calc(1rem + env(safe-area-inset-bottom));
+          right: max(0.5rem, env(safe-area-inset-right));
+          bottom: calc(0.75rem + env(safe-area-inset-bottom));
           z-index: 80;
           transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
         }
@@ -62,7 +65,7 @@ const WhatsAppContactButton = () => {
           destination: 'whatsapp',
           placement: 'floating',
         })}
-        className={`healio-whatsapp-floating ${isAmbulant ? 'healio-whatsapp-floating--ambulant' : ''} group inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#075E54] p-0 text-white shadow-[0_10px_30px_rgba(2,44,39,0.28)] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#064E47] hover:shadow-[0_12px_34px_rgba(2,44,39,0.34)] active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075E54] motion-reduce:transform-none motion-reduce:transition-none`}
+        className={`healio-whatsapp-floating ${isAmbulant ? 'healio-whatsapp-floating--ambulant' : ''} group inline-flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-white/20 bg-[#075E54] p-0 text-white shadow-[0_10px_30px_rgba(2,44,39,0.28)] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#064E47] hover:shadow-[0_12px_34px_rgba(2,44,39,0.34)] active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075E54] motion-reduce:transform-none motion-reduce:transition-none`}
         aria-label={ariaLabel}
         title={ariaLabel}
       >

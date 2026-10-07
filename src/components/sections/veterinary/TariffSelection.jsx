@@ -65,7 +65,7 @@ const ProtectionChoice = ({ active, code, title, description, onClick }) => (
     type="button"
     aria-pressed={active}
     onClick={onClick}
-    className={`group relative min-h-[220px] overflow-hidden rounded-[1.6rem] p-6 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25c990]/35 sm:min-h-[250px] sm:p-8 ${
+    className={`group relative min-h-[170px] overflow-hidden rounded-[1.6rem] p-5 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25c990]/35 sm:min-h-[250px] sm:p-8 ${
       active
         ? 'bg-[#f8efdc] text-[#10272d] shadow-[0_18px_40px_rgba(0,0,0,0.2)]'
         : 'bg-white/[0.055] text-white hover:bg-white/[0.09]'
@@ -75,7 +75,7 @@ const ProtectionChoice = ({ active, code, title, description, onClick }) => (
       {code}
     </span>
     <span className="relative flex h-full flex-col">
-      <span className={`mb-7 inline-flex h-8 w-8 items-center justify-center self-end rounded-full border ${active ? 'border-[#25c990] bg-[#25c990] text-[#062319]' : 'border-white/30 text-transparent'}`}>
+      <span className={`mb-3 inline-flex h-8 w-8 items-center justify-center self-end sm:mb-7 rounded-full border ${active ? 'border-[#25c990] bg-[#25c990] text-[#062319]' : 'border-white/30 text-transparent'}`}>
         <Check className="h-4 w-4" />
       </span>
       <span className="mt-auto block font-friendly text-3xl font-bold leading-none sm:text-4xl">{title}</span>
@@ -103,29 +103,29 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
   return (
     <section
       id="tier-check"
-      className="relative scroll-mt-20 overflow-hidden bg-[#f5f0e7] py-20 sm:py-24 lg:py-28"
+      className="relative scroll-mt-20 overflow-hidden bg-[#f5f0e7] py-12 sm:py-24 lg:py-28"
       aria-labelledby="tier-check-title"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(37,201,144,0.12),transparent_28%),radial-gradient(circle_at_90%_72%,rgba(218,169,92,0.14),transparent_27%)]" aria-hidden="true" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0d4e40]/20 to-transparent" aria-hidden="true" />
 
       <div className="healio-container relative px-4 sm:px-6 md:px-8">
-        <div className="mb-12 max-w-4xl sm:mb-16">
-          <p className="font-display text-xs font-extrabold uppercase tracking-[0.24em] text-[#087451]">{t('finder.eyebrow')}</p>
-          <h2 id="tier-check-title" className="mt-4 max-w-[18ch] font-display text-[clamp(2.45rem,5vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#10272d] [text-wrap:balance]">
+        <div className="mb-8 max-w-4xl sm:mb-16">
+          <p className="font-display text-sm font-extrabold uppercase tracking-[0.24em] text-[#087451] md:text-xs">{t('finder.eyebrow')}</p>
+          <h2 id="tier-check-title" className="mt-3 max-w-[18ch] sm:mt-4 font-display text-[clamp(2.45rem,5vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-[#10272d] [text-wrap:balance]">
             {t('finder.title')}
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#53666a] sm:text-lg">{t('finder.subtitle')}</p>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#53666a] sm:mt-5 sm:text-lg">{t('finder.subtitle')}</p>
         </div>
 
         <div className="mx-auto max-w-5xl">
           <div>
-            <div className="flex items-baseline gap-4 border-b border-[#163d37]/15 pb-5">
+            <div className="flex items-baseline gap-4 border-b border-[#163d37]/15 pb-4 sm:pb-5">
               <span className="font-display text-4xl font-black tracking-[-0.07em] text-[#25c990]">01</span>
               <h3 className="font-friendly text-2xl font-bold text-[#10272d] sm:text-3xl">{t('finder.animalQuestion')}</h3>
             </div>
 
-            <div className="mt-7 grid grid-cols-3 gap-2.5 sm:gap-5">
+            <div className="mt-5 grid grid-cols-3 gap-2.5 sm:mt-7 sm:gap-5">
               {ANIMALS.map((animal) => (
                 <AnimalPortrait
                   key={animal.value}
@@ -138,12 +138,12 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
               ))}
             </div>
 
-            <div className="mt-14 flex items-baseline gap-4 border-b border-[#163d37]/15 pb-5">
+            <div className="mt-10 flex items-baseline gap-4 border-b border-[#163d37]/15 pb-4 sm:mt-14 sm:pb-5">
               <span className="font-display text-4xl font-black tracking-[-0.07em] text-[#25c990]">02</span>
               <h3 className="font-friendly text-2xl font-bold text-[#10272d] sm:text-3xl">{t('finder.coverageQuestion')}</h3>
             </div>
 
-            <div className="mt-7 overflow-hidden rounded-[2rem] bg-[#071827] p-2 shadow-[0_28px_65px_rgba(7,24,39,0.22)] sm:p-3">
+            <div className="mt-5 overflow-hidden rounded-[2rem] bg-[#071827] p-2 shadow-[0_28px_65px_rgba(7,24,39,0.22)] sm:mt-7 sm:p-3">
               <div className="grid gap-2 sm:grid-cols-2 sm:gap-3">
                 {['full', 'surgery'].map((value) => (
                   <ProtectionChoice
@@ -178,7 +178,7 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
             </div>
 
             <div
-              className={`mt-8 flex flex-col gap-5 rounded-2xl px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 ${
+              className={`mt-6 flex flex-col gap-4 rounded-2xl px-5 py-5 sm:mt-8 sm:flex-row sm:gap-5 sm:items-center sm:justify-between sm:px-6 ${
                 ready
                   ? 'bg-[#0d332e] text-white shadow-[0_18px_42px_rgba(7,24,39,0.18)]'
                   : 'border border-[#173b36]/15 bg-white/55 text-[#10272d]'
@@ -190,7 +190,7 @@ const TariffSelection = ({ selection, onSelectionChange }) => {
                   <Check className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
-                  <p className={`font-display text-xs font-extrabold uppercase tracking-[0.16em] ${ready ? 'text-[#8ee7ca]' : 'text-[#5f6965]'}`}>
+                  <p className={`font-display text-sm font-extrabold uppercase tracking-[0.16em] md:text-xs ${ready ? 'text-[#8ee7ca]' : 'text-[#5f6965]'}`}>
                     {ready ? t('finder.review.readyLabel') : t('finder.review.openLabel')}
                   </p>
                   <p className="mt-1 font-friendly text-2xl font-bold leading-tight">

@@ -10,16 +10,16 @@ const CompanyFinalCTA = () => {
   const proof = t('cta.proof', { returnObjects: true });
 
   return (
-    <section className="w-full bg-[#07141d] py-14 text-white lg:py-20" aria-labelledby="company-final-cta-title">
+    <section className="w-full bg-[#07141d] py-10 text-white md:py-14 lg:py-20" aria-labelledby="company-final-cta-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-8 md:gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#8ee7ca]">{t('cta.eyebrow')}</p>
-            <h2 id="company-final-cta-title" className="mt-4 max-w-[15ch] font-display text-4xl font-extrabold leading-tight tracking-[-0.04em] sm:text-6xl">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#8ee7ca] md:text-xs">{t('cta.eyebrow')}</p>
+            <h2 id="company-final-cta-title" className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-6xl">
               {t('cta.title')}
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t('cta.description')}</p>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300">
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">{t('cta.description')}</p>
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300 md:mt-8">
               {proof.map((item) => (
                 <span key={item} className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#8ee7ca]" aria-hidden="true" />

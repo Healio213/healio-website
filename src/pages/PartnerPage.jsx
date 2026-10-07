@@ -13,10 +13,18 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import HighlightText from '@/components/ui/HighlightText';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
+import SceneHero, {
+  sceneAccentClass,
+  sceneBelow,
+  scenePrimaryButtonClass,
+  sceneSecondaryButtonClass,
+} from '@/components/desktop/SceneHero';
 
 // Sprungmarke zur Google-Terminplanung (Google Meet). Alte Links mit
 // #calendly-embed werden beim Laden auf diese Marke umgelenkt.
@@ -27,6 +35,9 @@ const LEGACY_TERMIN_ANCHORS = ['calendly-embed'];
 // Master und QA: Healio/video-studio/output/website-explainers/FINAL-PRODUCTION/
 const PARTNER_VIDEO_SRC = '/erklaervideo-partner-v2-15.mp4';
 const PARTNER_VIDEO_POSTER = '/images/erklaervideo-partner-poster.jpg';
+
+// Für Beschriftungen (aria-label) ohne die <highlight>-Auszeichnung der Überschriften.
+const plain = (text) => String(text || '').replace(/<\/?highlight>/g, '');
 
 const PartnerPage = () => {
   useEffect(() => {
@@ -40,6 +51,9 @@ const PartnerPage = () => {
   const { t: tSeo } = useTranslation('seo');
   const { getPath } = useLanguage();
   const isEnglish = i18n.language?.startsWith('en');
+  // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
+  const isDesktop = useDesktopLayout();
+  const Heading = isDesktop ? 'h2' : 'h1';
   const canonicalUrl = isEnglish ? 'https://healio.de/en/partner' : 'https://healio.de/partner';
 
   const schemaMarkup = createWebPageSchema(
@@ -67,21 +81,70 @@ const PartnerPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      <main className="bg-white overflow-hidden w-full">
+      {/* Mobil bestimmt order die Reihenfolge der Abschnitte (Einstieg, Siegel, Video, dann der Weg vom Verstehen bis zum Termin),
+            ab md bleibt es der bisherige Blocksatz in Quellreihenfolge. */}
+      <main className="bg-white overflow-hidden w-full flex flex-col md:block">
 
-        {/* SECTION 1: HERO */}
-        <section className="relative bg-slate-900 pt-20 pb-14 lg:min-h-[100svh] lg:flex lg:items-center lg:pb-0">
+        {/* SECTION 1: HERO.
+            Ab lg (Frank 07.10.2026): Szene mit Überschrift und beiden Knöpfen, darunter alle weiteren Angaben ohne Kasten.
+            Dieselben Texte wie in der Handy-Fassung darunter, die ab lg ausgeblendet ist. */}
+        <SceneHero
+          surface="partner"
+          headingId="desktop-partner-heading"
+          dataAttributes={{ 'data-desktop-lead': 'partner' }}
+          heading={<HighlightText text={t('hero.title')} className={sceneAccentClass} />}
+          actions={(
+            <>
+              <button
+                type="button"
+                data-desktop-primary
+                className={scenePrimaryButtonClass}
+                onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('hero.cta')}
+              </button>
+              <button
+                type="button"
+                className={sceneSecondaryButtonClass}
+                onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {t('hero.secondaryCta')}
+                <ArrowDown className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </>
+          )}
+        >
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className="mb-4 text-sm font-semibold leading-6 text-[#bfced6]">{t('hero.badge')}</p>
+              <p className={sceneBelow.lead}>
+                <HighlightText text={t('hero.subtitle')} className="text-[#5ee0b1]" />
+              </p>
+            </div>
+            <ul className={`min-w-0 ${sceneBelow.list}`}>
+              <li className="flex items-start gap-3 py-4 text-base leading-7 text-[#e1ebef]">
+                <Shield className="mt-1 h-5 w-5 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                {t('hero.roleNote')}
+              </li>
+              <li className="py-4 pl-8 text-base leading-7 text-[#e1ebef]">
+                {t('leitfadenHint.lead')}{' '}
+                <Link
+                  to="/partner/leitfaden"
+                  className="rounded-sm font-semibold text-[#5ee0b1] underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  {t('leitfadenHint.cta')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </SceneHero>
+
+        <div className="order-1 md:order-none lg:hidden">
+        <section className="relative bg-slate-900 pt-20 pb-10 md:pb-14">
           {/* Therapeutin im Sessel mit Patientin (partner-hero-*.webp, Quelle partner-hero-neu.png).
-              Unter lg steht ein Querausschnitt mit beiden Frauen über dem Text, ab lg füllt das Bild den Hero. */}
-          <div className="relative z-0 lg:absolute lg:inset-0">
+              Ein Querausschnitt mit beiden Frauen steht über dem Text. */}
+          <div className="relative z-0">
             <picture>
-              <source
-                media="(min-width: 1024px)"
-                srcSet="/images/partner-hero-1280.webp 1280w, /images/partner-hero-1920.webp 1920w, /images/partner-hero-2560.webp 2560w"
-                sizes="100vw"
-                width="2560"
-                height="1440"
-              />
               <img
                 src="/images/partner-hero-mobil-800.webp"
                 srcSet="/images/partner-hero-mobil-480.webp 480w, /images/partner-hero-mobil-800.webp 800w, /images/partner-hero-mobil-1200.webp 1200w"
@@ -89,33 +152,33 @@ const PartnerPage = () => {
                 alt={t('hero.imageAlt')}
                 width="1200"
                 height="847"
-                {...{ fetchpriority: 'high' }}
-                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%] lg:h-full lg:max-h-none lg:object-center"
+                {...{ fetchpriority: isDesktop ? 'low' : 'high' }}
+                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%]"
               />
             </picture>
-            {/* Unter lg läuft das Bild unten ins Dunkle aus, der Text steht darunter.
-                Ab lg wie bisher: leichte Abdunklung plus Verlauf von links für den Hero-Text. */}
-            <div className="absolute inset-0 bg-black/10 lg:bg-black/25 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:bg-gradient-to-r lg:from-slate-900/80 lg:via-slate-900/40 lg:to-transparent z-10" />
+            {/* Das Bild läuft unten ins Dunkle aus, der Text steht darunter. */}
+            <div className="absolute inset-0 bg-black/10 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10" />
           </div>
 
-          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20 lg:mt-0">
+          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
+                className="flex flex-col"
               >
-                <p className="inline-flex mb-5 rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
+                <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
                   {t('hero.badge')}
                 </p>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                <Heading className="order-1 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
+                </Heading>
+                <p className="order-3 mt-6 text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+                <div className="order-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
@@ -133,15 +196,15 @@ const PartnerPage = () => {
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-                <p className="mt-4 flex items-center justify-center gap-2 text-xs sm:text-sm text-white/80">
+                <p className="order-4 mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
-                <p className="mt-3 text-xs sm:text-sm text-white/75">
+                <p className="order-5 mt-3 text-sm text-white/75">
                   {t('leitfadenHint.lead')}{' '}
                   <Link
                     to="/partner/leitfaden"
-                    className="font-semibold text-[#75e6bf] underline underline-offset-4"
+                    className="py-3.5 font-semibold text-[#75e6bf] underline underline-offset-4 sm:py-0"
                   >
                     {t('leitfadenHint.cta')}
                   </Link>
@@ -150,12 +213,16 @@ const PartnerPage = () => {
             </div>
           </div>
         </section>
+        </div>
 
         {/* QUALITÄTSSIEGEL: SDK + IKK, groß direkt unter dem Hero */}
-        <HealioAwardsRow label={t('quality.label')} size="large" />
+        <div className="order-2 md:contents">
+          <HealioAwardsRow label={t('quality.label')} size="large" />
+        </div>
 
         {/* Partner-Erklärvideo V2.15 mit Nita (nur Deutsch, Untertitel im Bild).
             Ohne Video (EN oder Ladefehler) bleiben die drei Kernpunkte stehen. */}
+        <div className="order-3 md:contents">
         <B2BExplainerVideo
           sectionId="partner-video"
           title={t('explanationVideo.title')}
@@ -176,9 +243,10 @@ const PartnerPage = () => {
           captionsLanguage={isEnglish ? 'en' : 'de'}
           captionsLabel={isEnglish ? 'English' : 'Deutsch'}
         />
+        </div>
 
         {/* SECTION 2: PROBLEM AWARENESS */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
+        <section className="order-4 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -187,7 +255,7 @@ const PartnerPage = () => {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-8">
                 <HighlightText text={t('problem.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed">
@@ -198,13 +266,13 @@ const PartnerPage = () => {
         </section>
 
         {/* SECTION 3: BUDGET OVERVIEW */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <section className="order-5 md:order-none py-10 sm:py-20 lg:py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
+              className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
                 <HighlightText text={t('budget.title')} />
@@ -214,13 +282,21 @@ const PartnerPage = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Mobil wischen die drei Beträge als Karten nebeneinander,
+                ab md bleibt das Raster mit der breiten Gesamtkarte oben. */}
+            <MobileSwipeRow
+              label={plain(t('budget.title'))}
+              className="mx-auto max-w-4xl"
+              desktopClassName="md:grid md:grid-cols-2 md:gap-6"
+              itemClassName="md:first:col-span-2"
+              mobileItemWidth="w-[80vw] max-w-[20rem]"
+            >
               {/* Total Budget - Featured */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="md:col-span-2 bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl"
+                className="h-full bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-6 sm:p-8 text-white text-center shadow-md md:shadow-xl"
               >
                 <FriendlyIcon kind="budget" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
@@ -234,12 +310,12 @@ const PartnerPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
+                className="h-full bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 md:hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
                 <FriendlyIcon kind="naturopathy" label={t('budget.naturheilkunde')} tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
-                <p className="text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
+                <p className="text-base sm:text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
               </motion.div>
 
               {/* Sehhilfen */}
@@ -248,28 +324,28 @@ const PartnerPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
+                className="h-full bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 md:hover:shadow-xl hover:border-[#25c990]/30 transition-all duration-300"
               >
                 <FriendlyIcon kind="glasses" label={t('budget.sehhilfen')} tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
-                <p className="text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
+                <p className="text-base sm:text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
               </motion.div>
-            </div>
-            <p className="mx-auto mt-7 max-w-4xl text-center text-xs leading-relaxed text-slate-500 sm:text-sm">
+            </MobileSwipeRow>
+            <p className="mx-auto mt-4 sm:mt-7 max-w-4xl text-center text-sm leading-relaxed text-slate-500 sm:leading-5">
               {t('budget.footnote')}
             </p>
           </div>
         </section>
 
         {/* SECTION 4: FÜR WEN? (Partner Types) */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
+        <section className="order-6 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
+              className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
                 <HighlightText text={t('partners.title')} />
@@ -279,7 +355,13 @@ const PartnerPage = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+            {/* Mobil eine Wischreihe mit allen sechs Berufsgruppen, ab md das bisherige Raster. */}
+            <MobileSwipeRow
+              label={plain(t('partners.title'))}
+              className="mx-auto max-w-6xl"
+              desktopClassName="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8"
+              mobileItemWidth="w-[80vw] max-w-[20rem]"
+            >
               {partnerTypes.map((item, index) => {
                 return (
                   <motion.div
@@ -288,33 +370,42 @@ const PartnerPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.08 }}
-                    className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                    className="h-full bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300"
                   >
-                    <FriendlyIcon kind={item.kind} label={item.title} tone={item.tone} className="mb-5" />
+                    <FriendlyIcon kind={item.kind} label={item.title} tone={item.tone} className="mb-4 sm:mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.text}</p>
+                    <p className="text-base text-slate-600 leading-relaxed sm:leading-6">{item.text}</p>
                   </motion.div>
                 );
               })}
-            </div>
+            </MobileSwipeRow>
           </div>
         </section>
 
         {/* SECTION 5: SO EINFACH FUNKTIONIERT ES (Benefits + Steps) */}
-        <section className="py-16 sm:py-20 lg:py-24 pb-24 lg:pb-32 bg-white">
+        <section className="order-7 md:order-none py-10 sm:py-20 lg:py-24 pb-12 sm:pb-20 lg:pb-32 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12 sm:mb-16"
+              className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800">
                 <HighlightText text={t('solution.title')} />
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 max-w-5xl mx-auto">
+            {/* Mobil wischen die drei Schritte und danach die drei Vorteile als Karten, ab md das bisherige Raster.
+                Die Nummernmarke ragt über die Karte, deshalb hat die Reihe oben vier Einheiten Luft. */}
+            <MobileSwipeRow
+              as="ol"
+              label={plain(t('solution.title'))}
+              className="mx-auto max-w-5xl"
+              desktopClassName="md:grid md:grid-cols-3 md:gap-8 lg:gap-12"
+              itemClassName="pt-4 md:pt-0"
+              mobileItemWidth="w-[80vw] max-w-[20rem]"
+            >
               {[
                 {
                   emoji: '🤝',
@@ -345,20 +436,26 @@ const PartnerPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center relative"
+                  className="h-full bg-white rounded-xl p-6 sm:p-8 shadow-md border border-slate-100 md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center relative"
                 >
                   <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-[#25c990] text-white flex items-center justify-center font-bold text-sm shadow-md">
                     {item.step}
                   </div>
-                  <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-6" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 sm:mb-4">{item.title}</h3>
-                  <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
+                  <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-4 sm:mb-6" />
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2 sm:mb-4">{item.title}</h3>
+                  <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
                 </motion.div>
               )})}
-            </div>
+            </MobileSwipeRow>
 
             {/* Benefits below steps */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto mt-12">
+            <MobileSwipeRow
+              as="ul"
+              label={plain(t('solution.title'))}
+              className="mx-auto mt-4 max-w-5xl md:mt-12"
+              desktopClassName="md:grid md:grid-cols-3 md:gap-8"
+              mobileItemWidth="w-[80vw] max-w-[20rem]"
+            >
               {[
                 { emoji: '😊', tone: 'butter', title: t('solution.manageableEffort'), text: t('solution.manageableEffortDesc') },
                 { emoji: '🌱', tone: 'mint', title: t('solution.financialRoom'), text: t('solution.financialRoomDesc') },
@@ -371,56 +468,60 @@ const PartnerPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex flex-col items-center text-center p-6"
+                    className="flex h-full flex-col items-center rounded-xl border border-slate-100 bg-slate-50 p-6 text-center md:border-0 md:bg-transparent"
                   >
-                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-4" />
+                    <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-3 sm:mb-4" />
                     <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{item.text}</p>
+                    <p className="text-base sm:text-sm text-slate-600 leading-relaxed sm:leading-relaxed">{item.text}</p>
                   </motion.div>
                 );
               })}
-            </div>
+            </MobileSwipeRow>
           </div>
         </section>
 
         {/* KLARE ROLLEN STATT UNBELEGTER TESTIMONIALS */}
-        <PartnerRoleProcess />
+        <div className="order-8 md:contents">
+          <PartnerRoleProcess />
+        </div>
 
-        {/* FAQ */}
-        <PartnerFAQ />
+        {/* FAQ: mobil nach dem Appell und direkt vor dem Termin */}
+        <div className="order-10 md:contents">
+          <PartnerFAQ />
+        </div>
 
 
 
         {/* SECTION: BOOKING */}
         {/* MORAL */}
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+        <section className="order-9 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-8">
                 {t('moral.title')}
               </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-white/85 leading-relaxed mb-6">
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
                 {t('moral.text1')}
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-white/85 leading-relaxed mb-6">
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
                 {t('moral.text2')}
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-lg font-semibold text-emerald-300 leading-relaxed">
+              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-base sm:text-lg font-semibold text-emerald-300 leading-relaxed sm:leading-relaxed">
                 {t('moral.text3')}
               </motion.p>
             </div>
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
+        <section className="order-11 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-8 sm:mb-12"
+              className="text-center mb-5 sm:mb-12"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-3 sm:mb-6">
                 <HighlightText text={t('cta.title')} />
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
@@ -449,15 +550,15 @@ const PartnerPage = () => {
         </section>
 
         {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
-        <section className="relative py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
+        <section className="relative order-12 md:order-none py-10 sm:py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
           </div>
           <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
-            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12 items-center">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/95 text-sm sm:text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
                   <Shield className="w-3.5 h-3.5" />
                   {t('professionalCover.badge')}
                 </div>
@@ -480,7 +581,7 @@ const PartnerPage = () => {
                     {t('professionalCover.cta')}
                   </Link>
                 </Button>
-                <p className="text-xs text-white/70 text-center">
+                <p className="text-sm sm:text-xs text-white/70 text-center">
                   {t('professionalCover.meta')}
                 </p>
               </div>
@@ -489,7 +590,7 @@ const PartnerPage = () => {
         </section>
 
         {/* FOOTER BANNER */}
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
+        <section className="order-last md:order-none py-10 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -499,7 +600,7 @@ const PartnerPage = () => {
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
                 <HighlightText text={t('footer.title')} className="text-white underline decoration-white/70 decoration-4 underline-offset-4" />
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8">
                 {t('footer.subtitle')}
               </p>
               <Button

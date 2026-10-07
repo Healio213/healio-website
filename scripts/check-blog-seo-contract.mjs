@@ -55,6 +55,7 @@ const BLOG_CORRECTION_SLUGS_2026_10_06 = new Set([
   'krankenhauszusatzversicherung-sportverein-best-ager',
   'krankenkasse-wechseln-laufende-behandlung',
   'naturheilkunde-krankenkasse-2026',
+  'osteopathie-krankenkasse-2026',
   'zahnersatz-beitrag-vom-bonus',
   'zahnzusatzversicherung-trotz-angeratener-behandlung',
 ]);

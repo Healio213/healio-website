@@ -5,9 +5,11 @@ import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
+import DesktopLead from '@/components/desktop/DesktopLead';
 import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
+import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -53,12 +55,29 @@ const AmbulantPage = () => {
   return (
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
-      <div className="min-h-screen bg-white">
-        <AmbulantHero fromBonusTopic={fromBonusTopic} />
+      {/* Experiment 06.10.2026: mobil stehen die Abschnitte als Geschwister in
+          einer Spalte und folgen der Reihenfolge, wie ein Besucher denkt (Hero,
+          Siegel, Erklärvideo, Situation, Tarif, Finanzierung und Bonus, Ablauf,
+          Fragen). Die Nummern stehen an den Abschnitten (order-N md:order-none);
+          ab md bleibt es ein normaler Block mit der bisherigen Reihenfolge. */}
+      <div className="flex min-h-screen flex-col bg-white md:block">
+        <DesktopLead surface="ambulant" language={lang} fromBonusTopic={fromBonusTopic} />
+        <div className="order-1 md:order-none lg:hidden">
+          <AmbulantHero fromBonusTopic={fromBonusTopic} />
+        </div>
         {/* Siegel direkt unter dem Hero, wie auf /partner. */}
-        <HealioAwardsRow size="large" />
-        {/* Vier belegte Fakten vor dem Vergleich (Marktanalyse W4, 06.10.2026). */}
-        <AmbulantAufEinenBlick />
+        <div className="order-2 md:contents">
+          <HealioAwardsRow size="large" />
+        </div>
+        {/* Mobil direkt nach dem Erklärvideo (Experiment Handy-Conversion 10/2026):
+            erst die Brillen-Karte (nur mobil, Wortlaut aus der FAQ), weil die
+            Brillen-Anzeige ohne Anker hierher führt, dann die vier belegten Fakten
+            vor dem Vergleich (Marktanalyse W4, 06.10.2026). Ab md ist die Karte
+            ausgeblendet, die Reihenfolge am Desktop bleibt dadurch unverändert. */}
+        <div className="order-4 md:contents">
+          <AmbulantBrilleKarte />
+          <AmbulantAufEinenBlick />
+        </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>
     </>

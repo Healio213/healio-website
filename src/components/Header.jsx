@@ -5,13 +5,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ArrowRight, Calculator, ChevronDown } from 'lucide-react';
+import { Menu, X, ArrowRight, Calculator, ChevronDown, ClipboardCheck, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 
 const AMBULANT_CTA_DELAY_MS = 30_000;
+// Experiment Handy-Conversion 10/2026: Unter md (768 px) erscheint der Knopf
+// „Beitrag berechnen“ auf /ambulant nicht erst nach 30 Sekunden, sondern sobald
+// die Brillen-Karte (#ambulant-brille) in die untere Bildhälfte kommt. Fehlt sie,
+// gilt eine Wischtiefe von eineinhalb Bildschirmen. Ab md bleibt es bei der Zeit.
+const AMBULANT_CTA_ANCHOR_ID = 'ambulant-brille';
+const AMBULANT_CTA_FALLBACK_SCREENS = 1.5;
+const PHONE_MAX_WIDTH = 767;
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -29,6 +36,7 @@ const Header = () => {
   const isServices = location.pathname === '/leistungen' || location.pathname === '/en/services';
   const isAmbulant = location.pathname === '/ambulant' || location.pathname === '/en/outpatient';
   const isPregnancy = location.pathname === '/schwangerschaft';
+  const isDental = location.pathname === '/zahn' || location.pathname === '/en/dental';
   const isInpatient = location.pathname === '/stationaer' || location.pathname === '/en/inpatient';
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
@@ -73,7 +81,27 @@ const Header = () => {
       setAmbulantCtaReady(true);
     }, AMBULANT_CTA_DELAY_MS);
 
-    return () => window.clearTimeout(timer);
+    // Wischtiefe statt Wartezeit, nur unter md.
+    let frame = 0;
+    const checkDepth = () => {
+      frame = 0;
+      if (window.innerWidth > PHONE_MAX_WIDTH) return;
+      const anchor = document.getElementById(AMBULANT_CTA_ANCHOR_ID);
+      const reached = anchor && anchor.getBoundingClientRect().height > 0
+        ? anchor.getBoundingClientRect().top < window.innerHeight * 0.5
+        : window.scrollY > window.innerHeight * AMBULANT_CTA_FALLBACK_SCREENS;
+      if (reached) setAmbulantCtaReady(true);
+    };
+    const scheduleCheck = () => {
+      if (!frame) frame = window.requestAnimationFrame(checkDepth);
+    };
+    window.addEventListener('scroll', scheduleCheck, { passive: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', scheduleCheck);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [isAmbulant, location.pathname]);
 
   useEffect(() => {
@@ -144,6 +172,8 @@ const Header = () => {
 
   const ctaLabel = isPregnancy
     ? 'Zusatzschutz ansehen'
+    : isDental
+      ? (lang === 'de' ? 'Zahn-Check starten' : 'Start dental check')
     : isInpatient
       ? (lang === 'de' ? 'Klinikschutz auswählen' : 'Choose hospital cover')
     : isHome
@@ -158,6 +188,8 @@ const Header = () => {
 
   const ctaPath = isPregnancy
     ? { pathname: '/schwangerschaft', search: location.search, hash: '#zusatzschutz' }
+    : isDental
+      ? { pathname: getPath('zahn'), search: location.search, hash: '#zahn-check' }
     : isInpatient
       ? { pathname: getPath('stationaer'), search: location.search, hash: '#tarife' }
     : isServices
@@ -166,6 +198,40 @@ const Header = () => {
         ? getPath('potenzialanalyse')
         : getPath('terminvereinbarung');
   const ambulantSdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  // Mobiler Hauptknopf neben dem Menü: nur auf Seiten mit einem Anker als
+  // Hauptziel. Das Ziel kommt aus ctaPath, die Beschriftung ist die kurze Form
+  // von ctaLabel (der volle Text passt neben Logo und Menü nicht).
+  const anchorOf = (path) => (typeof path === 'object' && path?.hash ? path.hash.slice(1) : null);
+  let mobileAnchorCta = null;
+  if (isDental) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: lang === 'de' ? 'Zahn-Check' : 'Dental check',
+      Icon: ClipboardCheck,
+      visible: showSolidHeader,
+      hideFrom: 'xl:hidden',
+      dataAttr: { 'data-zahn-header-cta': 'mobile' },
+    };
+  } else if (isInpatient) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: lang === 'de' ? 'Klinikschutz' : 'Hospital cover',
+      Icon: ShieldCheck,
+      visible: scrolled,
+      hideFrom: 'md:hidden',
+      dataAttr: { 'data-stationaer-header-cta': 'mobile' },
+    };
+  } else if (isPregnancy) {
+    mobileAnchorCta = {
+      target: anchorOf(ctaPath),
+      label: 'Zusatzschutz',
+      Icon: ShieldCheck,
+      visible: scrolled,
+      hideFrom: 'md:hidden',
+      dataAttr: { 'data-schwangerschaft-header-cta': 'mobile' },
+    };
+  }
+  if (mobileAnchorCta && !mobileAnchorCta.target) mobileAnchorCta = null;
 
   return (
     <header className={cn(
@@ -177,8 +243,10 @@ const Header = () => {
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
         <Link to={getPath('home')} className="flex items-center z-50 group">
           <motion.img
-            src="/healio-logo-white.svg"
+            src="/healio-logo-white-web.svg"
             alt="Healio Logo"
+            width="250"
+            height="100"
             className={cn(
               "w-auto transition-all duration-500",
               showSolidHeader ? "h-8 md:h-10" : "h-10 md:h-12",
@@ -330,6 +398,35 @@ const Header = () => {
             </Button>
           )}
         </div>
+
+        {/* Experiment 05.10.2026: wie der dauerhafte Konfigurieren-Knopf auf
+            mercedes-benz.de bleibt der Hauptknopf der Seite beim Scrollen oben
+            greifbar. Zahn-Check auf /zahn (seit 05.10.), Klinikschutz auf
+            /stationaer und Zusatzschutz auf /schwangerschaft (06.10.): gleiches
+            Muster, Ziel jeweils der Anker aus ctaPath. Auf /stationaer und
+            /schwangerschaft erscheint er erst nach dem Scrollen (scrolled) und
+            nur unter md (768 px), damit der Desktop dort unverändert bleibt. */}
+        <AnimatePresence initial={false}>
+          {mobileAnchorCta && mobileAnchorCta.visible && (
+            <motion.a
+              key={mobileAnchorCta.target}
+              href={`#${mobileAnchorCta.target}`}
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById(mobileAnchorCta.target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              initial={{ opacity: 0, y: -6, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.96 }}
+              transition={{ duration: 0.24, ease: 'easeOut' }}
+              {...mobileAnchorCta.dataAttr}
+              className={`absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-4 text-sm font-extrabold text-home-midnight shadow-[0_4px_14px_rgba(37,201,144,0.3)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${mobileAnchorCta.hideFrom}`}
+            >
+              <mobileAnchorCta.Icon className="h-4 w-4" aria-hidden="true" />
+              {mobileAnchorCta.label}
+            </motion.a>
+          )}
+        </AnimatePresence>
 
         <AnimatePresence initial={false}>
           {isAmbulant && showSolidHeader && ambulantCtaReady && (

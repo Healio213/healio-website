@@ -328,7 +328,7 @@ export const SwipeCards = ({ block }) => (
   <div className="mt-8" data-ratgeber-cards="">
     {block.heading && <p className="font-display text-lg font-extrabold text-[#07111f]">{block.heading}</p>}
     {block.hint && <p className="mt-1 text-sm leading-6 text-slate-500 sm:hidden">{block.hint}</p>}
-    <ul className="-mx-5 mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:thin] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0">
+    <ul className="-mx-4 mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-3 [scrollbar-width:thin] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0">
       {block.items.map((card) => {
         const cardClass = `group flex h-full min-h-[11rem] flex-col rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-[0_10px_28px_rgba(7,17,31,0.06)] transition hover:border-[#25c990]/60 hover:shadow-[0_16px_36px_rgba(7,17,31,0.10)] ${FOCUS_RING}`;
         return (

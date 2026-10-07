@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { runInNewContext } from 'node:vm';
+import { parse } from '@babel/parser';
+import traverseModule from '@babel/traverse';
 import { sanitizeReferrer } from '../src/lib/referrer.js';
 
 const root = process.cwd();
@@ -10,6 +13,30 @@ const expect = (condition, message) => {
     console.error(`Conversion-Disclosure-Contract verletzt: ${message}`);
     process.exit(1);
   }
+};
+const traverse = traverseModule.default || traverseModule;
+const jsxAttribute = (node, name) => node.attributes.find((item) => item.type === 'JSXAttribute' && item.name.name === name)?.value;
+const componentNodes = (source, name) => {
+  const nodes = [];
+  traverse(parse(source, { sourceType: 'module', plugins: ['jsx'] }), {
+    JSXOpeningElement(elementPath) {
+      if (elementPath.node.name.type === 'JSXIdentifier' && elementPath.node.name.name === name) nodes.push(elementPath);
+    },
+  });
+  return nodes;
+};
+const germanOnlyComponent = (source, name) => {
+  const nodes = componentNodes(source, name);
+  return nodes.length === 1 && nodes.every((elementPath) => Boolean(elementPath.findParent((parent) => {
+    if (!parent.isLogicalExpression({ operator: '&&' }) || elementPath.node.start < parent.node.right.start) return false;
+    const test = source.slice(parent.node.left.start, parent.node.left.end);
+    return runInNewContext(test, { lang: 'de', language: 'de' }, { timeout: 1000 }) === true
+      && runInNewContext(test, { lang: 'en', language: 'en' }, { timeout: 1000 }) === false;
+  })));
+};
+const hasSingleVariant = (source, name, variant) => {
+  const nodes = componentNodes(source, name);
+  return nodes.length === 1 && jsxAttribute(nodes[0].node, 'variant')?.value === variant;
 };
 
 const ambulantPage = read('src/pages/AmbulantPage.jsx');
@@ -36,9 +63,31 @@ const sdkUrl = read('src/lib/sdk-url.js');
 expect(/href=\{fromBonusTopic \? '#tarifwahl' : '#budget-kompass'\}/.test(ambulantHero), 'Der normale Ambulant-Hero führt in den Budget-Kompass, der Themenanschluss direkt zur Tarifwahl.');
 expect(/<AmbulantHero\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>[\s\S]*?<AmbulantConversionFlow\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>/.test(ambulantPage), 'Ambulant braucht einen durchgängig optionalen Themenanschluss in Hero und Funnel.');
 expect(ambulantFlow.indexOf('<ExplainerVideoCard') < ambulantFlow.indexOf('id="budget-kompass"'), 'Ambulant muss das Erklärvideo vor dem Budget-Kompass zeigen.');
-expect(/language === 'de'\s*&&\s*\(\s*<ExplainerVideoCard/.test(ambulantFlow), 'Das deutsche Ambulant-Video darf auf der englischen Route keinen Abschnitt rendern.');
+expect(germanOnlyComponent(ambulantFlow, 'ExplainerVideoCard'), 'Das deutsche Ambulant-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(ambulantFlow.indexOf('id="budget-kompass"') < ambulantFlow.indexOf('id="tarifwahl"'), 'Auf Ambulant muss die Bedarfseinordnung vor der Tarifwahl stehen.');
-expect(ambulantFlow.indexOf('id="tarifwahl"') < ambulantFlow.indexOf('<section className="bg-[#071722]'), 'KassenBoost darf erst nach der Tarifwahl erklärt werden.');
+const ambulantSections = [];
+traverse(parse(ambulantFlow, { sourceType: 'module', plugins: ['jsx'] }), {
+  JSXOpeningElement({ node }) {
+    if (node.name.type !== 'JSXIdentifier' || node.name.name !== 'section') return;
+    const attr = (name) => node.attributes.find((item) => item.type === 'JSXAttribute' && item.name.name === name)?.value;
+    const classValue = attr('className');
+    ambulantSections.push({
+      start: node.start, id: attr('id')?.value,
+      classes: classValue?.type === 'StringLiteral' ? classValue.value.split(/\s+/) : [],
+    });
+  },
+});
+const tariffSections = ambulantSections.filter((section) => section.id === 'tarifwahl');
+const bonusSections = ambulantSections.filter((section) => section.classes.includes('bg-[#071722]'));
+expect(tariffSections.length === 1 && bonusSections.length === 1, 'Tarifwahl und KassenBoost müssen als eindeutige Abschnitte vorhanden sein.');
+const mobileOrder = (section) => {
+  const token = section.classes.find((item) => /^order-(?:\d+|\[\d+\])$/.test(item));
+  return token ? Number(token.match(/\d+/)[0]) : null;
+};
+expect(tariffSections[0].start < bonusSections[0].start
+  && mobileOrder(tariffSections[0]) !== null && mobileOrder(bonusSections[0]) !== null
+  && mobileOrder(tariffSections[0]) < mobileOrder(bonusSections[0]),
+'KassenBoost darf sowohl im Quelltext als auch in der mobilen CSS-Reihenfolge erst nach der Tarifwahl erklärt werden.');
 expect(/Krankenkasse passend zum Tarif finden/.test(ambulantFlow) && /\/kassenboost/.test(ambulantFlow), 'Die Ambulant-Bonusbrücke muss in KassenBoost führen.');
 // Rote Linie (Healio/CONTENT-ROTE-LINIE-B2C.md): Der Bonus kann den Beitrag
 // „ganz oder teilweise“ ausgleichen, nie pauschal „bis zu 100 %“ oder
@@ -63,7 +112,7 @@ expect(/"effectiveZeroNote": "Dein Bonus kann den Beitrag in diesem Beispiel aus
 // für alle Situationen ohne angeratene Behandlung, auch 1 bis 3 fehlende Zähne mit
 // Zuschlag je Zahn, und die Bayerische nur mit ZAHN Sofort für den Sofortschutz.
 expect(dentalPage.indexOf('<DentalVideoSection />') < dentalPage.indexOf('<DentalZahnCheck />'), 'Zahn muss das Erklärvideo vor dem Zahn-Check zeigen.');
-expect(/lang === 'de'\s*&&\s*<DentalVideoSection\s*\/>/.test(dentalPage), 'Das deutsche Zahn-Video darf auf der englischen Route keinen Abschnitt rendern.');
+expect(germanOnlyComponent(dentalPage, 'DentalVideoSection'), 'Das deutsche Zahn-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(dentalPage.indexOf('<DentalZahnCheck />') < dentalPage.indexOf('id="kassenbonus"'), 'Der Zahn-Check muss vor der Bonusbrücke stehen.');
 expect(/routes:\s*\['UKV ZahnPRIVAT', 'Bayerische mit ZAHN Sofort'\]/.test(dentalContent), 'Der Zahn-Check muss genau die zwei Wege UKV ZahnPRIVAT und Bayerische mit ZAHN Sofort enthalten.');
 expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der UKV-Lückenweg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
@@ -122,12 +171,12 @@ expect(/getPath\('kassenboost'\)/.test(dentalPage), 'Die Zahn-Bonusbrücke muss 
 expect(!/bis zu 100 %[^'\n]{0,40}ausgleich|up to 100%[^'\n]{0,40}(?:offset|premium)/i.test(`${dentalContent}\n${dentalPage}`), 'Zahn darf die Beitragsentlastung nur als „ganz oder teilweise“ nennen, nie pauschal bis zu 100 Prozent.');
 expect(!/KassenBoostChoiceHint|Testimonials/.test(dentalPage), 'Zahn darf keine alte Hinweis- oder Testimonials-Doppelstrecke rendern.');
 // Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Zahn-Variante und erst nach Bonusbrücke und Bonusrechner.
-expect((dentalPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="zahn"\s*\/>/.test(dentalPage), 'Zahn zeigt die Brücken-Strecke genau einmal als Zahn-Variante.');
+expect(hasSingleVariant(dentalPage, 'AmbulantIKKWechsel', 'zahn'), 'Zahn zeigt die Brücken-Strecke genau einmal als Zahn-Variante.');
 expect(dentalPage.indexOf('<CompactBonusFeature') < dentalPage.indexOf('<AmbulantIKKWechsel') && dentalPage.indexOf('id="kassenbonus"') < dentalPage.indexOf('<AmbulantIKKWechsel'), 'Die Zahn-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
 
 // Stationär: SP2, SP1 und SPU werden getrennt; SPU trägt die konkrete Modellrechnung, ohne 0-EUR-Versprechen (Frank 03.10.2026).
 expect(inpatientPage.indexOf('<ExplainerVideoCard') < inpatientPage.indexOf('<StationaerTariffSelector />'), 'Stationär muss das Erklärvideo vor der Tarifwahl zeigen.');
-expect(/lang === 'de'\s*&&\s*\(\s*<ExplainerVideoCard/.test(inpatientPage), 'Das deutsche Stationär-Video darf auf der englischen Route keinen Abschnitt rendern.');
+expect(germanOnlyComponent(inpatientPage, 'ExplainerVideoCard'), 'Das deutsche Stationär-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(/<StationaerTariffSelector\s*\/>[\s\S]*?<StationaerBonusBridge\s*\/>/.test(inpatientPage), 'Stationär muss die Tarifwahl vor der Bonusbrücke zeigen.');
 expect(!/erklaervideo-stationaer\.mp4/.test(inpatientBonus), 'Das Stationär-Video darf im Bonusblock nicht doppelt erscheinen.');
 expect(/SP2/.test(inpatientDe) && /SP1/.test(inpatientDe) && /SPU/.test(inpatientDe), 'Stationär muss SP2, SP1 und SPU sichtbar unterscheiden.');
@@ -143,7 +192,7 @@ expect(!/6,84|82,08|32,82|49,78|10,49|44,91|69,74/.test(inpatientDe), 'Stationä
 expect(/getPath\('kassenboost'\)/.test(inpatientBonus), 'Die Stationär-Bonusbrücke muss in KassenBoost führen.');
 expect(!/AmbulantBonusCalculator|KassenBoostChoiceHint/.test(inpatientPage), 'Stationär darf keinen ambulanten Doppelrechner und keinen alten KassenBoost-Hinweis rendern.');
 // Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Stationär-Variante und erst nach Bonusbrücke und Bonusrechner.
-expect((inpatientPage.match(/<AmbulantIKKWechsel\b/g) || []).length === 1 && /<AmbulantIKKWechsel\s+variant="stationaer"\s*\/>/.test(inpatientPage), 'Stationär zeigt die Brücken-Strecke genau einmal als Stationär-Variante.');
+expect(hasSingleVariant(inpatientPage, 'AmbulantIKKWechsel', 'stationaer'), 'Stationär zeigt die Brücken-Strecke genau einmal als Stationär-Variante.');
 expect(inpatientPage.indexOf('<StationaerBonusBridge') < inpatientPage.indexOf('<AmbulantIKKWechsel') && inpatientPage.indexOf('<CompactBonusFeature') < inpatientPage.indexOf('<AmbulantIKKWechsel'), 'Die Stationär-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
 
 // Tier: Hund, Katze und Pferd mit wahrheitsgemäßer Tarifprüfung statt Pseudorechner.

@@ -222,3 +222,14 @@
     page-break-after: avoid;
   }
 }
+
+/* Blog-Tabellen aus Supabase sind breiter als ein Handy; unter md scrollt die
+   Tabelle in sich, statt die ganze Seite zu verbreitern. Desktop unverändert. */
+@media (max-width: 767px) {
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

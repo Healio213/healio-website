@@ -31,13 +31,13 @@ const CompanyExplainerVideo = ({ kind = 'system' }) => {
     <section
       id={video.anchor}
       data-company-explainer={kind}
-      className={isBav ? 'bg-[#eef8f4] py-14 lg:py-20' : 'bg-white py-14 lg:py-20'}
+      className={isBav ? 'bg-[#eef8f4] py-10 md:py-14 lg:py-20' : 'bg-white py-10 md:py-14 lg:py-20'}
       aria-labelledby={`${video.anchor}-title`}
     >
       <div className="healio-container px-4 sm:px-6 lg:px-8">
-        <div className={`grid gap-8 lg:items-center lg:gap-12 ${isBav ? 'lg:grid-cols-[minmax(0,1.32fr)_minmax(16rem,0.68fr)]' : 'lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)]'}`}>
+        <div className={`grid gap-6 md:gap-8 lg:items-center lg:gap-12 ${isBav ? 'lg:grid-cols-[minmax(0,1.32fr)_minmax(16rem,0.68fr)]' : 'lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)]'}`}>
           <div className={isBav ? 'lg:order-2' : ''}>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#087052]">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#087052] md:text-xs">
               {content.eyebrow}
             </p>
             <h2
@@ -46,10 +46,10 @@ const CompanyExplainerVideo = ({ kind = 'system' }) => {
             >
               {content.title}
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
+            <p className="mt-4 max-w-xl text-base leading-7 text-slate-600 md:mt-5">
               {content.description}
             </p>
-            <p className="mt-5 border-l-2 border-[#25c990] pl-4 text-sm font-semibold leading-6 text-[#07563f]">
+            <p className="mt-4 border-l-2 border-[#25c990] pl-4 text-base font-semibold leading-6 text-[#07563f] md:mt-5 md:text-sm md:leading-6">
               {content.note}
             </p>
           </div>
@@ -74,7 +74,7 @@ const CompanyExplainerVideo = ({ kind = 'system' }) => {
                 {content.fallback}
               </video>
             </div>
-            <p className="mt-3 text-xs leading-5 text-slate-500">
+            <p className="mt-3 text-sm leading-5 text-slate-500 md:text-xs md:leading-5">
               {content.captionHint}
             </p>
           </div>

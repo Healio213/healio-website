@@ -2,6 +2,19 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/sections/Footer';
+import NitaQuickPill from '@/components/sections/shared/NitaQuickPill';
+
+// Seiten, auf denen die Nita-Leiste (mit Sprechblase nach 30 Sekunden) vom
+// Layout aus mitläuft, am Handy statt des schwebenden WhatsApp-Knopfs (Vorgabe
+// Wunsch 06.10.2026). /zahn bindet die Leiste selbst ein (mit eigenen
+// Sprungmarken), dort bitte nicht doppelt.
+const NITA_PILL_ROUTES = new Set([
+  '/ambulant',
+  '/en/outpatient',
+  '/stationaer',
+  '/en/inpatient',
+  '/schwangerschaft',
+]);
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -29,6 +42,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer hideCta={hideCta} hideAppPromotion={hideAppPromotion} />
+      {NITA_PILL_ROUTES.has(pathname) && <NitaQuickPill key={pathname} mobileOnly />}
     </div>
   );
 };

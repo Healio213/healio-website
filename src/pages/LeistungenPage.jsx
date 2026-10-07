@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
-import ServicesHero from '@/components/services/ServicesHero';
+import ServicesHero, { ServicesDesktopHero } from '@/components/services/ServicesHero';
 import ProtectionNavigator from '@/components/services/ProtectionNavigator';
 import CoverageComparison from '@/components/services/CoverageComparison';
 import HonestAdvice from '@/components/services/HonestAdvice';
@@ -60,15 +60,24 @@ const LeistungenPage = () => {
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />
-      <article className="w-full overflow-hidden bg-white">
-        <ServicesHero />
-        <ProductTicker variant="leistungen" textSize="base" />
-        <ProtectionNavigator />
+      {/* Experiment Handy-Conversion 10/2026: Mobil stehen die Abschnitte als
+          Geschwister in einer Spalte und folgen der Reihenfolge, wie ein
+          Besucher denkt (Hero, Schutz-Kompass, Budget und Finanzierung, ehrlich
+          beraten, Ablauf, nächster Schritt). Die Nummern stehen an den
+          Abschnitten (order-N md:order-none); ab md bleibt es ein normaler
+          Block mit der bisherigen Reihenfolge. Das Textband entfällt mobil, weil
+          es nur wiederholt, was die Seite ohnehin sagt. */}
+      <article className="flex w-full flex-col overflow-hidden bg-white md:block">
+        <ServicesDesktopHero />
+        {/* Ab lg übernimmt der Szenen-Kopfbereich, die bisherige Fassung bleibt für Handy und Tablet. */}
+        <div className="order-1 md:contents lg:hidden"><ServicesHero /></div>
+        <div className="hidden md:block"><ProductTicker variant="leistungen" textSize="base" /></div>
+        <div className="order-2 md:contents"><ProtectionNavigator /></div>
         <CoverageComparison />
-        <HonestAdvice />
-        <ServicesBudget />
-        <ServicesProcess />
-        <ServicesFinalCTA />
+        <div className="order-4 md:contents"><HonestAdvice /></div>
+        <div className="order-3 md:contents"><ServicesBudget /></div>
+        <div className="order-5 md:contents"><ServicesProcess /></div>
+        <div className="order-6 md:contents"><ServicesFinalCTA /></div>
       </article>
     </>
   );

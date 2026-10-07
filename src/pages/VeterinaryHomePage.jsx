@@ -30,14 +30,18 @@ const VeterinaryHomePage = () => {
         ogTitle="Tierkrankenversicherung für Hund, Katze und Pferd | Healio"
         ogDescription="OP- oder Vollschutz passend zu Tierart, Alter, Rasse beziehungsweise Nutzung persönlich prüfen lassen."
       />
-      <div className="veterinary-page-content overflow-x-clip bg-[#f5f0e7] text-[#11262a]">
-        <VeterinaryHero />
-        <VeterinaryTrustStrip />
-        <TariffSelection selection={selection} onSelectionChange={setSelection} />
-        <CostAnalysisSection />
-        <SalesAiAssist className="bg-[#f5f0e7]" variant="pet" />
-        <VeterinaryContactForm selection={selection} onSelectionChange={setSelection} />
-        <VeterinaryFaq />
+      {/* Experiment 06.10.2026: mobile Reihenfolge, wie ein Besucher denkt: Einstieg,
+          Vertrauen, verstehen (Kosten), Nita-Hilfe, Tier und Schutz wählen, Auftrag
+          (Schritt 03 direkt nach der Auswahl, die ihn vorbefüllt), Fragen. Ab md
+          bleibt die bisherige Reihenfolge (md:block, order-none). */}
+      <div className="veterinary-page-content flex flex-col overflow-x-clip bg-[#f5f0e7] text-[#11262a] md:block">
+        <div className="order-1 md:order-none"><VeterinaryHero /></div>
+        <div className="order-2 md:order-none"><VeterinaryTrustStrip /></div>
+        <div className="order-5 md:order-none"><TariffSelection selection={selection} onSelectionChange={setSelection} /></div>
+        <div className="order-3 md:order-none"><CostAnalysisSection /></div>
+        <div className="order-4 md:order-none"><SalesAiAssist className="bg-[#f5f0e7]" variant="pet" /></div>
+        <div className="order-6 md:order-none"><VeterinaryContactForm selection={selection} onSelectionChange={setSelection} /></div>
+        <div className="order-7 md:order-none"><VeterinaryFaq /></div>
       </div>
     </>
   );

@@ -15,7 +15,7 @@ const ExplainerVideoCard = ({
   return (
     <section
       id={id}
-      className={`relative scroll-mt-20 overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8 ${className}`}
+      className={`relative scroll-mt-20 overflow-hidden px-4 py-6 sm:px-6 sm:py-10 md:py-16 lg:px-8 ${className}`}
       aria-labelledby={headingId}
     >
       <div className="absolute left-1/2 top-1/2 h-[30rem] w-[54rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-home-mint/[0.08] blur-3xl" aria-hidden="true" />

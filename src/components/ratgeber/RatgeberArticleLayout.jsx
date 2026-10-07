@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import useIsDesktop from '@/components/ratgeber/useIsDesktop';
 import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import { authorSchemaFor, getAuthor } from '@/content/ratgeber/authors';
@@ -52,7 +54,23 @@ const LEGAL_LINKS = [
 
 const CTA_BASE_CLASS = 'inline-flex min-h-14 w-full items-center justify-center rounded-full bg-[#25c990] px-7 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_16px_42px_rgba(37,201,144,0.24)] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#07111f] focus-visible:ring-offset-2 motion-reduce:transform-none';
 
-const PARAGRAPH_CLASS = 'mt-6 text-lg leading-8 text-slate-700 sm:text-[1.15rem] sm:leading-9';
+// Handy (unter 640 px): 17 px Schrift mit engerem Abstand, damit der Artikel
+// nicht endlos wirkt; ab sm gelten die bisherigen Werte. break-words: sehr
+// lange Komposita (Auslandsreisekrankenversicherung) verbreiterten die Seite
+// bei 320 px; umbrochen wird nur ein Wort, das sonst nicht passt.
+const PARAGRAPH_CLASS = 'mt-4 break-words text-[1.0625rem] leading-[1.65] text-slate-700 sm:mt-6 sm:text-[1.15rem] sm:leading-9';
+
+// Wischschatten für breite Tabellen auf dem Handy: weiße Abdeckungen laufen
+// mit dem Inhalt, die grauen Schatten bleiben am Rand und zeigen, dass links
+// oder rechts noch etwas liegt.
+const TABLE_SCROLL_SHADOWS = {
+  background: [
+    'linear-gradient(to right, #fff 30%, rgba(255,255,255,0)) 0 0 / 2rem 100% no-repeat local',
+    'linear-gradient(to left, #fff 30%, rgba(255,255,255,0)) 100% 0 / 2rem 100% no-repeat local',
+    'radial-gradient(farthest-side at 0 50%, rgba(7,17,31,0.18), rgba(7,17,31,0)) 0 0 / 0.9rem 100% no-repeat scroll',
+    'radial-gradient(farthest-side at 100% 50%, rgba(7,17,31,0.18), rgba(7,17,31,0)) 100% 0 / 0.9rem 100% no-repeat scroll',
+  ].join(', '),
+};
 
 // Der KassenBoost-Button ist bewusst KEIN Erfolg für Google Ads oder Meta:
 // Ein Kassenvergleich ist kein Versicherungsabschluss.
@@ -132,13 +150,72 @@ const RatgeberListItem = ({ item }) => {
   );
 };
 
+const RatgeberTable = ({ block }) => {
+  const isDesktop = useIsDesktop();
+  // Breite Vergleichstabellen duerfen ab md etwas aus der Textspalte
+  // herauswachsen, damit die letzte Spalte nicht abgeschnitten wird.
+  // Darunter traegt der Rahmen den waagerechten Bildlauf.
+  // Ab vier Spalten waechst die natuerliche Breite ueber jede Textspalte
+  // hinaus. Dann bekommen alle Spalten dieselbe Breite und der Text bricht
+  // um, statt dass die letzte Spalte aus dem Rahmen faellt.
+  const wide = block.head.length >= 4;
+  // Handy: Der Rahmen ist ein fokussierbarer Bildlaufbereich, die erste
+  // Spalte bleibt beim Wischen stehen, Randschatten zeigen weiteren Inhalt.
+  const stickyFirst = 'sticky left-0 z-[1] shadow-[1px_0_0_#e2e8f0] md:static md:z-auto md:shadow-none';
+
+  return (
+    <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 sm:mt-8 md:-mx-10 lg:-mx-20">
+      <div
+        className="overflow-x-auto overscroll-x-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#25c990]"
+        style={isDesktop ? undefined : TABLE_SCROLL_SHADOWS}
+        {...(block.caption ? { role: 'region', 'aria-label': block.caption, tabIndex: 0 } : {})}
+      >
+        <table className={`w-full border-collapse text-left text-sm leading-6 text-slate-700 sm:text-[0.95rem] sm:leading-7 ${wide ? 'table-fixed min-w-[40rem]' : 'min-w-[30rem]'}`}>
+          {block.caption && <caption className="sr-only">{block.caption}</caption>}
+          <thead>
+            <tr className="border-b border-slate-200 bg-slate-50 text-sm font-bold uppercase tracking-[0.04em] text-slate-500 md:text-xs md:tracking-[0.08em]">
+              {block.head.map((cell, cellIndex) => (
+                <th
+                  key={cell}
+                  scope="col"
+                  className={`break-words hyphens-none px-3 py-3 align-bottom sm:px-4 md:hyphens-auto ${cellIndex === 0 ? `${stickyFirst} bg-slate-50 md:bg-transparent` : ''}`}
+                >
+                  {cell}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((row) => (
+              <tr key={row.join('|')} className="border-b border-slate-100 last:border-b-0">
+                {row.map((cell, cellIndex) => (
+                  cellIndex === 0
+                    ? (
+                      <th key={cell} scope="row" className={`break-words hyphens-auto bg-white px-3 py-3 text-left align-top font-display font-bold text-[#07111f] sm:px-4 md:bg-transparent ${stickyFirst}`}>
+                        {cell}
+                      </th>
+                    )
+                    : (
+                      <td key={`${cell}-${cellIndex}`} className="break-words hyphens-auto px-3 py-3 align-top sm:px-4">{cell}</td>
+                    )
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {block.note && <p className="border-t border-slate-100 px-3 py-3 text-sm leading-6 text-slate-500 sm:px-4">{block.note}</p>}
+    </div>
+  );
+};
+
 const RatgeberBlock = ({ block }) => {
   if (block.type === 'list') {
     const ListTag = block.ordered ? 'ol' : 'ul';
     const markerClass = block.ordered ? 'list-decimal' : 'list-disc';
 
     return (
-      <ListTag className="mt-6 space-y-3 pl-5 text-lg leading-8 text-slate-700 sm:text-[1.15rem] sm:leading-9">
+      <ListTag className="mt-4 space-y-2 break-words pl-5 text-[1.0625rem] leading-[1.65] text-slate-700 sm:mt-6 sm:space-y-3 sm:text-[1.15rem] sm:leading-9">
         {block.items.map((item, index) => (
           <li
             key={typeof item === 'string' ? item : `${item.lead}-${index}`}
@@ -160,48 +237,9 @@ const RatgeberBlock = ({ block }) => {
   if (block.type === 'calculator') return <LazyZahnkostenRechner block={block} />;
   if (block.type === 'table' && block.mobile === 'cards') return <ResponsiveTable block={block} />;
 
-  if (block.type === 'table') {
-    // Breite Vergleichstabellen duerfen ab md etwas aus der Textspalte
-    // herauswachsen, damit die letzte Spalte nicht abgeschnitten wird.
-    // Darunter traegt der Rahmen den waagerechten Bildlauf.
-    // Ab vier Spalten waechst die natuerliche Breite ueber jede Textspalte
-    // hinaus. Dann bekommen alle Spalten dieselbe Breite und der Text bricht
-    // um, statt dass die letzte Spalte aus dem Rahmen faellt.
-    const wide = block.head.length >= 4;
-
-    return (
-      <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-200 md:-mx-10 lg:-mx-20">
-        <table className={`w-full border-collapse text-left text-sm leading-6 text-slate-700 sm:text-[0.95rem] sm:leading-7 ${wide ? 'table-fixed min-w-[40rem]' : 'min-w-[30rem]'}`}>
-          {block.caption && <caption className="sr-only">{block.caption}</caption>}
-          <thead>
-            <tr className="border-b border-slate-200 bg-slate-50 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">
-              {block.head.map((cell) => (
-                <th key={cell} scope="col" className="break-words hyphens-auto px-3 py-3 align-bottom sm:px-4">{cell}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {block.rows.map((row) => (
-              <tr key={row.join('|')} className="border-b border-slate-100 last:border-b-0">
-                {row.map((cell, cellIndex) => (
-                  cellIndex === 0
-                    ? (
-                      <th key={cell} scope="row" className="break-words hyphens-auto px-3 py-3 text-left align-top font-display font-bold text-[#07111f] sm:px-4">
-                        {cell}
-                      </th>
-                    )
-                    : (
-                      <td key={`${cell}-${cellIndex}`} className="break-words hyphens-auto px-3 py-3 align-top sm:px-4">{cell}</td>
-                    )
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {block.note && <p className="border-t border-slate-100 px-3 py-3 text-sm leading-6 text-slate-500 sm:px-4">{block.note}</p>}
-      </div>
-    );
-  }
+  // Ältere Tabellen ohne Kartenfassung: Wischrahmen mit stehender erster
+  // Spalte auf dem Handy (Handy-Runde auf main).
+  if (block.type === 'table') return <RatgeberTable block={block} />;
 
   if (block.type === 'segments') {
     return (
@@ -212,6 +250,45 @@ const RatgeberBlock = ({ block }) => {
   }
 
   return <p className={PARAGRAPH_CLASS}>{block.text}</p>;
+};
+
+// Häufige Fragen: ab md die offene Liste wie bisher, auf dem Handy ein
+// Akkordeon mit geöffneter erster Frage (alle Antworten bleiben im Dokument).
+const RatgeberFaqList = ({ faqs }) => {
+  const isDesktop = useIsDesktop();
+
+  if (isDesktop) {
+    return (
+      <dl className="mt-6 divide-y divide-slate-200 border-t border-slate-200">
+        {faqs.map((faq) => (
+          <div key={faq.question} className="py-6">
+            <dt className="font-display text-lg font-extrabold leading-7 text-[#07111f]">
+              {faq.question}
+            </dt>
+            <dd className="mt-3 text-lg leading-8 text-slate-700 sm:text-[1.15rem] sm:leading-9">
+              {faq.answer}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+
+  return (
+    <div className="mt-5 divide-y divide-slate-200 border-y border-slate-200">
+      {faqs.map((faq, index) => (
+        <details key={faq.question} open={index === 0} className="group">
+          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-display text-lg font-extrabold leading-7 text-[#07111f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] [&::-webkit-details-marker]:hidden">
+            <span>{faq.question}</span>
+            <ChevronDown className="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+          </summary>
+          <p className="pb-5 text-[1.0625rem] leading-[1.65] text-slate-700 sm:text-[1.15rem] sm:leading-9">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  );
 };
 
 const RatgeberArticleLayout = ({ article }) => {
@@ -287,13 +364,13 @@ const RatgeberArticleLayout = ({ article }) => {
         schemaMarkup={schemaMarkup}
       />
 
-      <article className={`bg-white pt-24 text-slate-700 sm:pt-28 ${isAdvertorial ? 'pb-28 md:pb-20' : 'pb-20'}`}>
-        <div className="mx-auto w-full max-w-[68ch] px-5 sm:px-6">
-          <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
+      <article className={`bg-white pt-24 text-slate-700 sm:pt-28 ${isAdvertorial ? 'pb-28 md:pb-20' : 'pb-12 md:pb-20'}`}>
+        <div className="mx-auto w-full max-w-[68ch] px-4 sm:px-6">
+          <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-slate-400 md:text-xs md:tracking-[0.18em]">
             {notice}
           </p>
 
-          <h1 className="mt-6 break-words font-display text-3xl font-extrabold leading-[1.15] tracking-[-0.03em] text-[#07111f] hyphens-auto sm:text-4xl sm:hyphens-manual">
+          <h1 className="mt-4 break-words font-display text-[clamp(1.5rem,7.4vw,1.875rem)] font-extrabold leading-[1.15] tracking-[-0.03em] text-[#07111f] hyphens-auto sm:mt-6 sm:text-4xl sm:hyphens-manual">
             {article.headline}
           </h1>
 
@@ -312,7 +389,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
           {article.quickAnswer && <QuickAnswerCard quick={article.quickAnswer} />}
 
-          <p className="mt-6 text-xl leading-9 text-slate-600 sm:text-[1.3rem] sm:leading-10">
+          <p className="mt-4 text-lg leading-[1.7] text-slate-600 sm:mt-6 sm:text-[1.3rem] sm:leading-10">
             {article.lead}
           </p>
 
@@ -327,7 +404,7 @@ const RatgeberArticleLayout = ({ article }) => {
           )}
 
           {article.sections.map((section) => (
-            <section key={section.id} id={section.id} className="mt-14 scroll-mt-28">
+            <section key={section.id} id={section.id} className="mt-10 scroll-mt-28 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {section.heading}
               </h2>
@@ -337,7 +414,7 @@ const RatgeberArticleLayout = ({ article }) => {
               ))}
 
               {isAdvertorial && section.id === article.ctaAfterSectionId && (
-                <div className="mt-10">
+                <div className="mt-8 sm:mt-10">
                   <RatgeberCtaButton href={ctaUrl} label={article.ctaLabel} placement="inline" />
                 </div>
               )}
@@ -352,7 +429,7 @@ const RatgeberArticleLayout = ({ article }) => {
               data-geo="fact-nugget"
               id="fact-nugget"
               aria-labelledby="fact-nugget-heading"
-              className="mt-14 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8"
+              className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:mt-14 sm:p-8"
             >
               <h2
                 id="fact-nugget-heading"
@@ -367,43 +444,32 @@ const RatgeberArticleLayout = ({ article }) => {
           )}
 
           {article.faqs?.length > 0 && (
-            <section id="haeufige-fragen" className="mt-14 scroll-mt-28">
+            <section id="haeufige-fragen" className="mt-10 scroll-mt-28 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 Häufige Fragen
               </h2>
-              {article.faqStyle === 'accordion' ? <FaqAccordion faqs={article.faqs} /> : (
-              <dl className="mt-6 divide-y divide-slate-200 border-t border-slate-200">
-                {article.faqs.map((faq) => (
-                  <div key={faq.question} className="py-6">
-                    <dt className="font-display text-lg font-extrabold leading-7 text-[#07111f]">
-                      {faq.question}
-                    </dt>
-                    <dd className="mt-3 text-lg leading-8 text-slate-700 sm:text-[1.15rem] sm:leading-9">
-                      {faq.answer}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              )}
+              {article.faqStyle === 'accordion'
+                ? <FaqAccordion faqs={article.faqs} />
+                : <RatgeberFaqList faqs={article.faqs} />}
             </section>
           )}
 
           {article.internalCta && (
-            <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-14">
+            <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-10 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {article.internalCta.heading}
               </h2>
               {article.internalCta.blocks.map((block, index) => (
                 <RatgeberBlock key={`internal-cta-${index}`} block={block} />
               ))}
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <RatgeberInternalCtaButton to={internalCtaUrl} label={article.internalCta.label} />
               </div>
             </section>
           )}
 
           {article.onward && (
-            <section id="naechster-schritt" className="mt-14">
+            <section id="naechster-schritt" className="mt-10 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {article.onward.heading}
               </h2>
@@ -418,12 +484,12 @@ const RatgeberArticleLayout = ({ article }) => {
           {author && <AuthorBox author={author} />}
 
           {isAdvertorial && (
-            <div className="mt-14">
+            <div className="mt-10 sm:mt-14">
               <RatgeberCtaButton href={ctaUrl} label={article.ctaLabel} placement="end" />
             </div>
           )}
 
-          <footer ref={endRef} className="mt-16 border-t border-slate-200 pt-8">
+          <footer ref={endRef} className="mt-12 border-t border-slate-200 pt-6 sm:mt-16 sm:pt-8">
             {article.publishedAt && (
               <p className="text-sm leading-6 text-slate-500">
                 Stand: <time dateTime={standIso}>{standLabel}</time>
@@ -434,10 +500,10 @@ const RatgeberArticleLayout = ({ article }) => {
               <p className="mt-3 text-sm italic leading-6 text-slate-500">{article.footnote}</p>
             )}
 
-            <ul className="mt-6 flex flex-col gap-3 text-sm leading-6 text-slate-600 sm:flex-row sm:flex-wrap sm:gap-x-8">
+            <ul className="mt-4 flex flex-col text-sm leading-6 text-slate-600 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3 sm:gap-x-8">
               {LEGAL_LINKS.map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="underline underline-offset-4 hover:text-[#07111f]">
+                  <Link to={link.to} className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-[#07111f] sm:inline sm:min-h-0">
                     {link.label}
                   </Link>
                 </li>
@@ -449,7 +515,7 @@ const RatgeberArticleLayout = ({ article }) => {
 
       {isAdvertorial && (
         <div
-          className={`fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-5 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-8px_24px_rgba(7,17,31,0.08)] backdrop-blur md:hidden ${mobileBarVisible ? '' : 'hidden'}`}
+          className={`fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 sm:px-6 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-[0_-8px_24px_rgba(7,17,31,0.08)] backdrop-blur md:hidden ${mobileBarVisible ? '' : 'hidden'}`}
         >
           <RatgeberCtaButton href={ctaUrl} label={article.ctaLabel} placement="mobile" />
         </div>

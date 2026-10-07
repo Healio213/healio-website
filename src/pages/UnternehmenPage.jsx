@@ -63,19 +63,23 @@ const UnternehmenPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      <article className="w-full overflow-hidden bg-white">
-        <CompanyHero />
-        <CompanyRealityCheck />
-        <CompanyExplainerVideo kind="system" />
-        <CompanySolutions />
-        <CompanyBavLeverage />
-        <CompanyExplainerVideo kind="bav" />
-        <ResponsibilityStory />
-        <CompanyEconomics />
-        <CompanyProcess />
-        <CompanyWorkforceConcept />
-        <CompanyFAQ />
-        <CompanyFinalCTA />
+      {/* Mobil als Spalte in Besucherreihenfolge: Einstieg, Erklärvideo zum Antippen, dann
+          Lage prüfen, Bausteine wählen, rechnen, Ablauf, Fragen, Kontakt. Die Reihenfolge im
+          Quelltext bleibt die bisherige. Ab md ist es wieder der normale Block, die Hüllen
+          lösen sich dort mit contents auf. */}
+      <article className="flex w-full flex-col overflow-hidden bg-white md:block">
+        <div className="order-1 md:contents"><CompanyHero /></div>
+        <div className="order-3 md:contents"><CompanyRealityCheck /></div>
+        <div className="order-2 md:contents"><CompanyExplainerVideo kind="system" /></div>
+        <div className="order-4 md:contents"><CompanySolutions /></div>
+        <div className="order-5 md:contents"><CompanyBavLeverage /></div>
+        <div className="order-6 md:contents"><CompanyExplainerVideo kind="bav" /></div>
+        <div className="order-7 md:contents"><ResponsibilityStory /></div>
+        <div className="order-8 md:contents"><CompanyEconomics /></div>
+        <div className="order-9 md:contents"><CompanyProcess /></div>
+        <div className="order-10 md:contents"><CompanyWorkforceConcept /></div>
+        <div className="order-11 md:contents"><CompanyFAQ /></div>
+        <div className="order-12 md:contents"><CompanyFinalCTA /></div>
       </article>
     </>
   );

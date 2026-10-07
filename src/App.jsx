@@ -90,6 +90,13 @@ function App() {
   const lastMetaPathRef = useRef(null);
   const isPrivateCheckRoute = isAnalyticsExcludedRoute(location);
   const isPregnancy = location.pathname === '/schwangerschaft';
+  // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
+  const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
+  // Experiment 06.10.2026: auch auf /ambulant und /stationaer sitzt WhatsApp am
+  // Handy in der Nita-Leiste (vom Layout eingebunden, nur unter md). Der
+  // schwebende Knopf entfällt dort unter 768 px; ab md bleibt er wie live.
+  // /schwangerschaft hat den schwebenden Knopf ohnehin nie (isPregnancy).
+  const isLeisteMobilePage = ['/ambulant', '/en/outpatient', '/stationaer', '/en/inpatient'].includes(location.pathname);
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -174,7 +181,11 @@ function App() {
       <ScrollToTop />
       <ConsentManager />
       {!isPregnancy && <NitaConsentWidget />}
-      {!isPregnancy && <WhatsAppContactButton />}
+      {!isPregnancy && !isDentalPage && (
+        isLeisteMobilePage
+          ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
+          : <WhatsAppContactButton />
+      )}
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>

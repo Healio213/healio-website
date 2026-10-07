@@ -49,32 +49,82 @@ const COPY = {
 // Dieselben plastischen Healio-Icons wie im Rest der Seite.
 const ICONS = [{ kind: 'money', tone: 'mint' }, { kind: 'bonus', tone: 'butter' }];
 
-const ZweiWegeFinanzierung = ({ produkt = 'ambulant', className = 'bg-white' }) => {
+// Klassen für die kompakte Handy-Anordnung (mobileSwipe) und den bisherigen
+// Stand. Es gibt nur zwei Wege, daher kein Wischen, sondern kompakt
+// untereinander: engere Abstände, Icon klein neben der Überschrift und der
+// Text über die volle Breite darunter. Ab md (768 px) sind beide Sätze
+// identisch; ohne mobileSwipe bleibt jede Seite wie zuvor.
+const LAYOUT = {
+  standard: {
+    section: 'px-4 py-10 sm:px-6 md:py-12 lg:px-8',
+    card: 'p-6 sm:p-8',
+    grid: 'gap-6',
+    lead: 'mt-2 text-base leading-7 text-home-slate',
+    cta: 'mt-4',
+    ways: 'gap-5',
+    way: 'flex gap-4',
+    icon: '',
+    wayBody: 'min-w-0',
+    wayText: 'mt-1.5 text-base leading-7 text-home-slate',
+  },
+  kompakt: {
+    section: 'px-4 py-6 sm:px-6 md:py-12 lg:px-8',
+    card: 'p-5 sm:p-8',
+    grid: 'gap-4 md:gap-6',
+    lead: 'mt-2 text-base leading-6 text-home-slate md:leading-7',
+    cta: 'mt-3 min-h-11 md:mt-4 md:min-h-0',
+    ways: 'gap-4 md:gap-5',
+    // Mobil: Icon und Überschrift in einer Zeile, der Text (display: contents am
+    // Wrapper) spannt darunter über beide Spalten. Ab md wieder Flex wie zuvor.
+    way: 'grid grid-cols-[auto_minmax(0,1fr)] content-start items-center gap-x-3 gap-y-2 md:flex md:items-stretch md:gap-4',
+    icon: '!h-10 !w-10 md:!h-12 md:!w-12',
+    wayBody: 'contents md:block md:min-w-0',
+    wayText: 'col-span-2 text-base leading-6 text-home-slate md:col-span-1 md:mt-1.5 md:leading-7',
+  },
+};
+
+// mobileSwipe (Standard false): nur die Zahnseite schaltet die kompakte
+// Handy-Anordnung ein (Experiment 05.10.2026).
+// hideLinkOnMobile (Standard false, Experiment Handy-Conversion 10/2026): blendet
+// den Verweis zu KassenBoost unter md (768 px) aus, wenn derselbe Verweis in
+// einem Bonus-Abschnitt der Seite sichtbar bleibt (nur ein Verweis pro Strecke
+// am Handy). Ab md steht er weiterhin immer da.
+const ZweiWegeFinanzierung = ({
+  produkt = 'ambulant',
+  className = 'bg-white',
+  mobileSwipe = false,
+  hideLinkOnMobile = false,
+}) => {
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
   const copy = COPY[language];
   const schutz = SCHUTZ[language][produkt] || SCHUTZ[language].ambulant;
   const fill = (text) => text.replace('{{schutz}}', schutz);
+  const ui = mobileSwipe ? LAYOUT.kompakt : LAYOUT.standard;
 
   return (
-    <section className={`px-4 py-10 sm:px-6 md:py-12 lg:px-8 ${className}`} aria-labelledby={`zwei-wege-${produkt}-heading`} data-healio-zwei-wege={produkt}>
-      <div className="mx-auto max-w-7xl rounded-[1.75rem] border border-emerald-900/10 bg-white p-6 shadow-[0_12px_32px_rgba(7,17,31,0.05)] sm:p-8">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10">
+    <section className={`${ui.section} ${className}`} aria-labelledby={`zwei-wege-${produkt}-heading`} data-healio-zwei-wege={produkt}>
+      <div className={`mx-auto max-w-7xl rounded-[1.75rem] border border-emerald-900/10 bg-white shadow-[0_12px_32px_rgba(7,17,31,0.05)] ${ui.card}`}>
+        <div className={`grid lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10 ${ui.grid}`}>
           <div>
             <h2 id={`zwei-wege-${produkt}-heading`} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight [text-wrap:balance] sm:text-3xl">{fill(copy.title)}</h2>
-            <p className="mt-2 text-base leading-7 text-home-slate">{copy.lead}</p>
-            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-4 inline-flex items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950">
+            <p className={ui.lead}>{copy.lead}</p>
+            <Link
+              to={language === 'en' ? '/en/kassenboost' : '/kassenboost'}
+              data-healio-nita-avoid
+              className={`home-focus inline-flex items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950 ${hideLinkOnMobile ? 'max-md:hidden' : ''} ${ui.cta}`}
+            >
               {copy.cta}
               <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 ${ui.ways}`}>
             {copy.ways.map((way, index) => (
-              <article key={way.title} className="flex gap-4">
-                <FriendlyIcon kind={ICONS[index].kind} tone={ICONS[index].tone} size="sm" />
-                <div className="min-w-0">
+              <article key={way.title} className={ui.way}>
+                <FriendlyIcon kind={ICONS[index].kind} tone={ICONS[index].tone} size="sm" className={ui.icon} />
+                <div className={ui.wayBody}>
                   <h3 className="font-display text-lg font-extrabold leading-snug text-home-midnight">{way.title}</h3>
-                  <p className="mt-1.5 text-base leading-7 text-home-slate">{fill(way.text)}</p>
+                  <p className={ui.wayText}>{fill(way.text)}</p>
                 </div>
               </article>
             ))}

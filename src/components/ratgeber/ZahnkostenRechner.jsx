@@ -17,7 +17,8 @@ import {
  * Datenschutz (Franks Vorgabe 06.10.2026): Die Auswahl lebt nur im lokalen
  * Zustand dieser Komponente. Kein Formular, kein Speicher, kein fetch, kein
  * dataLayer, kein Aufruf von Google Ads, Meta oder Analytics. Bewusst ohne
- * <form>, damit auch automatische Formular-Messungen nichts sehen.
+ * form-Element, damit auch automatische Formular-Messungen nichts sehen
+ * (und check-form-hardening-contract den Rechner nicht als Formular liest).
  * Geprüft wird das per Netzwerkmitschnitt (siehe Abschlussbericht).
  */
 

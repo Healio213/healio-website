@@ -1,11 +1,11 @@
 {
   "hero": {
     "badge": "Für Hebammen und Geburtshäuser",
-    "title": "Familien gut informieren. <highlight>In deiner Rolle bleiben.</highlight>",
-    "subtitle": "Healio zeigt Familien, welche Kassenleistungen, Boni und Zusatzversicherungen zu ihrer Situation passen können. Du gibst einen neutralen Hinweis; wir prüfen und beraten individuell.",
-    "cta": "45-minütiges Kennenlernen buchen",
+    "title": "Gute Betreuung braucht Zeit. <highlight>Klär die Kosten frühzeitig.</highlight>",
+    "subtitle": "Plane Zusatzleistungen vor einer Schwangerschaft. Du klärst die Abrechnung; Healio prüft Schutz und Erstattung.",
+    "cta": "45-Minuten-Termin buchen",
     "secondaryCta": "Konzept mit Nita ansehen",
-    "note": "Keine Versicherungsberatung durch die Hebamme erforderlich."
+    "note": "Vor einer Schwangerschaft prüfen. Keine Sofortzusage für laufende Fälle."
   },
   "proof": {
     "ariaLabel": "Die Rollen im Healio-Konzept für Hebammen",
@@ -37,14 +37,14 @@
     "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden."
   },
   "problem": {
-    "title": "Gute Empfehlungen brauchen auch finanziellen Spielraum.",
-    "text": "Rund um Schwangerschaft, Geburt und Wochenbett entstehen viele zusätzliche Gesundheitsausgaben. Nicht jede Kassenleistung, jeder Bonus oder jeder Zusatztarif passt zu jeder Familie. Ein neutraler Informationsweg hilft, Möglichkeiten frühzeitig und ohne Verkaufsdruck zu prüfen."
+    "title": "Betreuung leisten. Kosten klar vereinbaren.",
+    "text": "Rufbereitschaft und zusätzliche Betreuung können eigene Kosten auslösen. Ein längerer Hausbesuch ist aber nicht automatisch eine Privatleistung. Welche Abrechnung zulässig ist und welche Erstattung infrage kommt, sind zwei getrennte Prüfungen."
   },
   "solution": {
-    "title": "Ein klarer Informationsweg statt pauschaler Versprechen",
-    "text": "Je nach Tarif und persönlichen Voraussetzungen können Kassenboni und tarifliche Leistungen zusammen einen Rahmen von bis zu 3.000 EUR in zwei Jahren eröffnen. Das ist weder eine garantierte Erstattung noch eine automatische Refinanzierung. Healio prüft vor einer Entscheidung, welche Bausteine im Einzelfall tatsächlich nutzbar sind.",
+    "title": "Früh planen und Leistungen getrennt prüfen",
+    "text": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren sind eine Leistung eines passenden ambulanten Tarifs unter dessen Bedingungen. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Hebammenkosten und Klinikleistungen brauchen eine eigene Prüfung; sie kommen nicht automatisch zum Budget hinzu.",
     "amount": "bis zu 3.000 EUR",
-    "amountLabel": "in zwei Jahren möglich"
+    "amountLabel": "Tarifleistung in zwei Jahren"
   },
   "leistungen": {
     "title": "Welche Bausteine infrage kommen können",
@@ -76,8 +76,8 @@
     "ikkItems": [
       {
         "name": "Hebammen Rufbereitschaft",
-        "amount": "250 €",
-        "detail": "je Schwangerschaft"
+        "amount": "bis zu 250 EUR",
+        "detail": "je Schwangerschaft, Voraussetzungen prüfen"
       },
       {
         "name": "Mineralstoffe",
@@ -128,9 +128,9 @@
         "detail": "Maximalbetrag im Top-Tarif; Verordnung, Vorleistung und Tarifbedingungen beachten"
       }
     ],
-    "totalLabel": "Möglicher Gesundheitsbudget-Rahmen",
+    "totalLabel": "Ambulantes Gesundheitsbudget nach Tarif",
     "totalAmount": "bis zu 3.000 EUR",
-    "totalNote": "Es besteht kein pauschaler Anspruch. Kassenleistungen, Boni und Tarifleistungen folgen jeweils eigenen Bedingungen und lassen sich nicht automatisch vollständig kombinieren. Healio prüft das individuell."
+    "totalNote": "Die 3.000 EUR sind tarifliche Höchstleistungen, kein ausgezahlter Kassenbonus. Kassenleistungen, Bonus und Versicherungsleistungen werden getrennt geprüft."
   },
   "klinik": {
     "title": "Beim Neugeborenen zählt vor allem der richtige Zeitpunkt",
@@ -145,7 +145,7 @@
     "deadlineTitle": "Was du als Hebamme sicher sagen kannst",
     "deadlineText": "Weise Familien frühzeitig auf die Zwei-Monats-Frist hin und leite sie für die Prüfung direkt an Healio weiter. Du musst weder Anbieter vergleichen noch Gesundheitsfragen oder Fristen im Detail erklären. Vorversicherungszeit und Schutzumfang werden anhand des konkreten Vertrags geprüft.",
     "ehrlichTitle": "Bei laufender Schwangerschaft genau unterscheiden",
-    "ehrlichText": "Ambulant greift der Vorsorge-Topf der SDK auch während einer bestehenden Schwangerschaft. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, ist diese Entbindung bei der SDK und bei der Bayerischen nicht versichert. Bei der Bayerischen gilt für die Entbindung zusätzlich eine Wartezeit von acht Monaten, bei der SDK gibt es keine Wartezeit.",
+    "ehrlichText": "Bei der Bayerischen ist eine beim Antrag bereits festgestellte Schwangerschaft nicht mitversichert. Acht Monate Wartezeit gelten für die Entbindung und nach schriftlich bestätigter aktueller Leistungspraxis auch für die genannten ambulanten Leistungen rund um Schwangerschaft und Wochenbett. Einzelne ambulante SDK-Vorsorgeleistungen werden gesondert geprüft; daraus folgt keine Zusage für die Entbindung.",
     "roomingTitle": "Der sichere nächste Schritt",
     "roomingText": "Interessierte Familien melden sich direkt bei Healio. Wir prüfen bestehenden Schutz, gewünschte Leistungen, Fristen und mögliche Ausschlüsse, bevor eine Empfehlung ausgesprochen oder ein Antrag gestellt wird. Rückwirkende Leistungsversprechen gibt es nicht.",
     "compareTitle": "Tarife nicht pauschal empfehlen",
@@ -153,17 +153,14 @@
     "bayerischeName": "Die Bayerische",
     "bayerischeTag": "Starker Klinikschutz für Kinder und Familien",
     "bayerischeItems": [
-      "Mehrere Tarifstufen mit unterschiedlichem Leistungsumfang",
-      "Rooming-in für Kinder unter 16 Jahren in allen drei Varianten, Zimmer je nach Variante",
-      "Privatärztliche Leistungen und Krankenhauswahl nach Tarifbedingungen",
-      "Beiträge hängen von Alter und Tarif ab und werden individuell berechnet",
-      "Nur zwei Gesundheitsfragen",
-      "Entbindung in Komfort und Prestige nach acht Monaten Wartezeit versichert",
-      "Neugeborene ohne Gesundheitsprüfung, wenn ein Elternteil seit drei Monaten versichert ist",
-      "Familienzimmer bei der Entbindung im Prestige ohne Begrenzung, im Komfort bis Zweibettzimmer, über den Vertrag der Mutter",
-      "Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, in Komfort und Prestige, auch für privat abrechnende Hebammen. Für eine Schwangerschaft, die beim Antrag schon besteht, gilt das nicht"
+      "Komfort und Prestige: Klinikleistungen nach dem jeweiligen Tarif",
+      "Familienzimmer bei Entbindung über den Vertrag der Mutter: Prestige ohne tarifliche Betragsgrenze, Komfort bis zur Zweibettzimmerleistung",
+      "Für Entbindung gilt eine Wartezeit von acht Monaten; eine bereits festgestellte Schwangerschaft ist nicht mitversichert",
+      "Kindernachversicherung: ein Elternteil seit mindestens drei Monaten versichert, Anmeldung innerhalb von zwei Monaten nach Geburt",
+      "Für die genannten ambulanten Hebammenleistungen besteht eine aktuelle Leistungspraxis, keine eigenständige ausdrückliche Tarifzusage",
+      "Auch hierfür wurden acht Monate Wartezeit bestätigt; Einzelfall und Erstattung vorab schriftlich klären"
     ],
-    "bayerischeCaveat": "Maßgeblich sind die aktuellen Tarifbedingungen. Welche Variante zur Familie passt, klärt Healio im Gespräch.",
+    "bayerischeCaveat": "Die aktuelle ambulante Leistungspraxis ersetzt keinen eigenen Tarifanspruch. Healio klärt den Fall mit dem Versicherer; die Hebamme gibt keine Erstattungszusage.",
     "sdkName": "Die SDK",
     "sdkTag": "Ohne Wartezeit, auch für die Entbindung",
     "sdkItems": [
@@ -186,38 +183,38 @@
     "ambulant": {
       "label": "Ambulant",
       "title": "Vorsorge in der Schwangerschaft",
-      "text": "Der Vorsorge-Topf der SDK zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn die Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht.",
-      "condition": "Nicht dabei sind Entbindung und Komplikationen. Die Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag."
+      "text": "Ein passender ambulanter Tarif kann zusätzliche Vorsorge wie Feinultraschall, Toxoplasmose oder Nackenfaltenmessung berücksichtigen. Auch bei bestehender Schwangerschaft können einzelne Leistungen infrage kommen; Healio prüft sie gesondert.",
+      "condition": "Gesundheitsangaben, Annahme und Tarifbedingungen entscheiden. Ein Vorsorgebudget ist keine Zusage für Entbindung oder Komplikationen."
     },
     "stationaer": {
       "label": "Stationär",
       "title": "Klinik und Schutz fürs Kind",
-      "text": "Wer einen Klinik-Tarif hat, bekommt im Krankenhaus Chefarzt und Ein- oder Zweibettzimmer, je nach Tarif. Ist ein Elternteil am Tag der Geburt im Klinik-Tarif versichert (bei der Bayerischen seit mindestens drei Monaten), wird das Kind ohne Gesundheitsprüfung aufgenommen, auch bei angeborenen Krankheiten.",
-      "condition": "Die Anmeldung muss spätestens zwei Monate nach der Geburt beim Versicherer eingehen, dann gilt der Schutz rückwirkend ab dem Tag der Geburt. Ist die Frau beim Antrag schon schwanger, zahlen die SDK und die Bayerische diese Entbindung nicht."
+      "text": "Ein passender stationärer Tarif kann Wahlarztbehandlung und ein Ein- oder Zweibettzimmer vorsehen. Für die Kindernachversicherung müssen Elternschutz, Fristen und weitere Voraussetzungen stimmen. Der Schutz des Kindes darf nicht höher oder umfassender sein als der des versicherten Elternteils.",
+      "condition": "Anmeldung spätestens zwei Monate nach Geburt; bei der Bayerischen mindestens drei Monate Vorversicherung eines Elternteils, bei SDK keine Vorversicherungszeit. Gesundheitsprüfung und rückwirkender Beginn ab Geburt richten sich nach den Voraussetzungen. Bei bestehender Schwangerschaft sind Versicherungsbeginn, Wartezeiten und Ausschlüsse für bereits laufende oder angeratene Untersuchungen und Behandlungen gesondert zu prüfen."
     },
     "both": "Eine Familie kann beides haben, einen ambulanten und einen stationären Tarif. Ein rein ambulanter Elternvertrag trägt keinen stationären Schutz fürs Kind. Welche Tarife passen, klärt Healio im Gespräch.",
     "bayerische": {
       "label": "Gut zu wissen",
       "title": "Die Bayerische und deine Hebammenleistungen",
-      "text": "Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Im Prestige gibt es bei der Entbindung ein Familienzimmer ohne Begrenzung, im Komfort bis zur Höhe des Zweibettzimmers, jeweils über den Vertrag der Mutter. Das Kind wird ab der Geburt aufgenommen, wenn ein Elternteil zur Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist. Den Vertrag schließen Familien ab, weil sie gut versichert sein wollen.",
-      "condition": "Eine allgemeine Wartezeit gibt es nicht, für die Entbindung gilt eine Wartezeit von acht Monaten. Eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert."
+      "text": "Komfort und Prestige sehen Klinikleistungen nach Tarif vor. Ambulante Hebammenleistungen werden nach einer aktuell bestätigten Leistungspraxis geprüft; eine eigenständige ausdrückliche Tarifzusage steht dafür nicht in den Bedingungen. Familienzimmer bei Entbindung laufen über den Vertrag der Mutter: Prestige ohne tarifliche Betragsgrenze, Komfort bis zur Zweibettzimmerleistung.",
+      "condition": "Acht Monate Wartezeit gelten für Entbindung und nach bestätigter Leistungspraxis auch für die genannten ambulanten Schwangerschafts- und Wochenbettleistungen. Bereits laufende oder angeratene Untersuchungen und Behandlungen sind ausgeschlossen. Den konkreten Fall vorab schriftlich prüfen lassen."
     }
   },
   "legal": {
-    "title": "Deine Neutralität. Zu 100 Prozent geschützt.",
-    "subtitle": "Als Hebamme bist du dem Wohl deiner Patientinnen und der strikten Neutralität verpflichtet. Genau so haben wir unser Konzept für dich aufgebaut.",
-    "text": "Das Modell ist rechtlich sauber aufgebaut. Du trittst niemals als Berater auf und empfiehlst keine bestimmten Tarife. Du gibst lediglich eine Information weiter, wie Familien die von dir ohnehin empfohlenen Leistungen finanziell smart abdecken können. Die komplette und marktunabhängige Beratung übernehmen wir bei Healio.",
-    "summary": "Du agierst als reiner Tippgeber. Damit ist deine Unabhängigkeit jederzeit gewahrt und du bleibst im perfekten Einklang mit deiner strengen Berufsordnung."
+    "title": "Drei Rollen. Eine klare Zuständigkeit.",
+    "subtitle": "Abrechnung und Versicherungsleistung sind getrennte Entscheidungen.",
+    "text": "Die Hebamme klärt die zulässige Leistung und Vergütung. Healio prüft den Schutz. Der Versicherer bestätigt, welche Erstattung im konkreten Fall möglich ist.",
+    "summary": "Die Hebamme gibt keine Versicherungs- oder Erstattungszusage. Individuelle Abrechnung und Vereinbarungen müssen zu den geltenden Kassen- und Gebührenregeln passen."
   },
   "steps": {
     "title": "So einfach funktioniert es für dich.",
     "step1Title": "Kurzes Kennenlernen",
     "step1Desc": "45 Minuten reichen. Wir erklären das Konzept und du entscheidest in Ruhe, ob es zu dir passt.",
     "step2Title": "Materialien erhalten",
-    "step2Desc": "Du bekommst hochwertige und unaufdringliche Informationsflyer für deine Hausbesuche und deine Kurse. Völlig kostenlos.",
+    "step2Desc": "Du bekommst die Muster und Checklisten für deine Praxis und Familien. Individuell ausfüllen und die Voraussetzungen prüfen.",
     "step3Title": "Familien profitieren",
-    "step3Desc": "Deine Patientinnen scannen den QR Code auf dem Flyer, sichern sich ihr Budget in wenigen Minuten online und können deine Leistungen entspannt buchen. Wir übernehmen den gesamten administrativen Prozess.",
-    "easeNote": "Wir möchten dir den Alltag in jeder Hinsicht erleichtern. Sprich uns hierzu gerne nochmal an!"
+    "step3Desc": "Interessierte Familien wenden sich direkt an Healio. Wir klären Bedarf, Gesundheitsangaben, Fristen und Bedingungen; der Versicherer entscheidet über Annahme und Leistungen.",
+    "easeNote": "Du begleitest die Familie fachlich. Finanzielle Optionen und Versicherungsschutz werden separat geklärt."
   },
   "moral": {
     "title": "Gute Information gibt Familien mehr Spielraum.",
@@ -245,5 +242,103 @@
     "title": "Soll ich dir das Hebammen-Konzept erklären?",
     "body": "Ich erkläre dir kurz, wie du Familien auf bis zu 3.000 EUR Gesundheitsbudget hinweist und Healio die Beratung übernimmt.",
     "cta": "Ja, Konzept erklären"
+  },
+  "examples": {
+    "title": "Zwei Fälle aus dem Hebammenalltag",
+    "lead": "Restkosten sichtbar machen. Abrechnung und Versicherungsschutz zuerst klären.",
+    "onCall": {
+      "eyebrow": "Fiktives Rechenbeispiel",
+      "title": "Rufbereitschaft: Was bleibt offen?",
+      "amounts": [
+        {
+          "label": "Kosten",
+          "value": "800 EUR"
+        },
+        {
+          "label": "Zuschuss",
+          "value": "250 EUR"
+        },
+        {
+          "label": "Rest",
+          "value": "550 EUR"
+        }
+      ],
+      "text": "Angenommen, die Pauschale beträgt 800 EUR und die Kasse bewilligt 250 EUR. Dann bleiben rechnerisch 550 EUR für die Familie offen.",
+      "note": "Das ist keine Erstattungszusage. Tatsächlicher Zuschuss, Vereinbarung und eine mögliche Versicherungsleistung müssen im Einzelfall geklärt werden."
+    },
+    "homeVisit": {
+      "eyebrow": "Längere Betreuung",
+      "title": "60 oder 75 Minuten Hausbesuch",
+      "text": "Mehr Zeit bedeutet nicht automatisch mehr privat abrechenbares Honorar. Entscheidend ist die tatsächlich erbrachte Leistung.",
+      "steps": [
+        "GKV-Position, Zeit- und Kontingentgrenzen sowie eine mögliche ärztliche Anordnung prüfen.",
+        "Nur gesondert zulässige Privatleistungen vorab konkret und schriftlich vereinbaren; keine Doppelabrechnung.",
+        "Danach die mögliche Versicherungsleistung schriftlich prüfen lassen."
+      ],
+      "note": "Kein pauschaler Mehrzeit-Aufschlag und kein fester Betrag je Besuch. Leistung, Gebührenregel und Rechnung müssen zusammenpassen."
+    }
+  },
+  "downloads": {
+    "waitTitle": "Frühzeitig vor einer Schwangerschaft prüfen – acht Monate Wartezeit",
+    "waitText": "Bei der Bayerischen laufen acht Monate Wartezeit ab Versicherungsbeginn – für Entbindung und nach aktuell bestätigter Leistungspraxis auch für die genannten ambulanten Schwangerschafts- und Wochenbettleistungen. Bereits laufende oder angeratene Untersuchungen und Behandlungen sind laut Produktsteckbrief ausgeschlossen. Auch nach der Wartezeit besteht keine automatische Erstattungszusage: Die ambulante Leistungspraxis ist keine eigenständige ausdrückliche Tarifzusage. Lass den konkreten Fall vorab schriftlich klären.",
+    "title": "Muster und Checklisten für den nächsten Schritt",
+    "lead": "Ohne Kontaktdaten herunterladen. Individuell ergänzen und vor der Verwendung prüfen.",
+    "practice": {
+      "title": "Für deine Hebammenpraxis",
+      "text": "Leistungen, Vereinbarung und Kassenanteile nachvollziehbar trennen. Die Vorlagen erlauben keinen pauschalen Aufschlag."
+    },
+    "family": {
+      "title": "Für Familien",
+      "text": "Kassenbescheid, bestehender Vertrag und Leistungsdaten für die konkrete Deckungsprüfung zusammenstellen."
+    },
+    "documents": {
+      "invoice": "Rechnungsmuster · PDF",
+      "agreement": "Muster Leistungs- und Honorarvereinbarung · PDF",
+      "checklist": "Familien-Checkliste · PDF"
+    },
+    "note": "Arbeitshilfen zum individuellen Ausfüllen, keine fertig geprüften Verträge und keine Erstattungsbestätigung. Die Entscheidung trifft der Versicherer."
+  },
+  "roles": [
+    {
+      "title": "Hebamme: Leistung und Abrechnung",
+      "text": "Du klärst die zulässige Privatleistung, Gebührengrundlage und vorherige schriftliche Vereinbarung. Kassenleistungen werden nicht doppelt berechnet."
+    },
+    {
+      "title": "Healio: Schutz prüfen",
+      "text": "Wir prüfen Vertrag, Gesundheitsangaben, Fristen und die mögliche Leistung im konkreten Fall."
+    },
+    {
+      "title": "Versicherer: Erstattung bestätigen",
+      "text": "Die verbindliche Annahme- und Leistungsentscheidung liegt beim Versicherer. Die Familie reicht die erforderlichen Belege ein."
+    }
+  ],
+  "faq": {
+    "title": "Die wichtigen Fragen vor der Entscheidung",
+    "items": [
+      {
+        "question": "Erstattet die Bayerische ambulante Hebammenkosten automatisch?",
+        "answer": "Nein. Für die genannten ambulanten Leistungen besteht eine aktuell bestätigte Leistungspraxis, keine eigenständige ausdrückliche Tarifzusage. Healio lässt Voraussetzungen, Belege und den konkreten Fall vorab schriftlich klären."
+      },
+      {
+        "question": "Gelten die acht Monate auch für ambulante Leistungen?",
+        "answer": "Die Bayerische hat acht Monate ab Versicherungsbeginn auch für die genannten ambulanten Schwangerschafts- und Wochenbettleistungen bestätigt. Für Entbindung gelten ebenfalls acht Monate. Der Ablauf allein garantiert keine Erstattung. Deshalb frühzeitig vor einer Schwangerschaft prüfen und den konkreten Fall schriftlich klären."
+      },
+      {
+        "question": "Was gilt, wenn die Schwangerschaft schon festgestellt ist?",
+        "answer": "Bei der Bayerischen sind bereits laufende oder angeratene Untersuchungen und Behandlungen laut Produktsteckbrief ausgeschlossen. Ob spätere ambulante Hebammenleistungen nach Ablauf der Wartezeit berücksichtigt werden können, muss im konkreten Fall schriftlich geklärt werden. Einzelne ambulante SDK-Vorsorgeleistungen sind gesondert zu prüfen; daraus folgt keine Sofortzusage für die Entbindung oder laufende Behandlungen."
+      },
+      {
+        "question": "Darf ein längerer Besuch einfach privat aufgeschlagen werden?",
+        "answer": "Nein. Zuerst sind GKV-Leistung, Zeit- und Kontingentgrenzen sowie eine mögliche ärztliche Anordnung zu prüfen. Gesondert zulässige Privatleistungen müssen vor Leistungserbringung konkret und schriftlich vereinbart werden. Ein pauschaler 50-EUR-Betrag oder eine Doppelabrechnung ist daraus nicht ableitbar."
+      },
+      {
+        "question": "Über welchen Vertrag läuft das Familienzimmer?",
+        "answer": "Bei der Bayerischen über den Vertrag der Mutter: Prestige ohne tarifliche Betragsgrenze, Komfort bis zur Zweibettzimmerleistung. Tarifvoraussetzungen, acht Monate Wartezeit und der rechtzeitige Versicherungsbeginn bleiben entscheidend."
+      },
+      {
+        "question": "Kann ich die Vorlagen unverändert als geprüften Vertrag verwenden?",
+        "answer": "Nein. Die Downloads sind Arbeitshilfen. Leistung, Gebührengrundlage, Kassenregelung und individuelle Vereinbarung müssen vor der Verwendung geprüft und ergänzt werden. Eine Erstattungszusage ersetzen sie nicht."
+      }
+    ]
   }
 }

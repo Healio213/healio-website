@@ -2,11 +2,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { Check, Heart, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
+import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
+import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
 import WhatsAppHelpHint, { useWhatsAppHelp, whatsAppHelpReply, WHATSAPP_HELP_TITLE } from '@/components/sections/shared/WhatsAppHelpHint';
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
 import { useReferrer } from '@/hooks/useReferrer';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
+import SceneHero, { sceneBelow, scenePrimaryButtonClass, sceneSecondaryButtonClass } from '@/components/desktop/SceneHero';
 import { getPregnancyOnwardPath } from '@/lib/pregnancyBonus';
 import { buildSdkUrl } from '@/lib/sdk-url';
 import { createFAQSchema } from '@/lib/createSchemaMarkup';
@@ -16,6 +21,8 @@ const primary = `inline-flex min-h-[48px] items-center justify-center rounded-fu
 const secondary = `inline-flex min-h-[48px] items-center justify-center rounded-full border-2 border-home-midnight px-7 py-3 text-center font-semibold text-home-midnight hover:bg-white ${focus}`;
 const textLink = `underline decoration-home-slate/40 underline-offset-4 hover:decoration-home-midnight ${focus}`;
 const wrap = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
+// Tippfläche mobil mindestens 44 px hoch, ohne den Abstand der Seite zu ändern (Polster innen, gleicher Abzug außen).
+const summaryTap = '-my-2.5 py-2.5 md:my-0 md:py-0';
 
 const TOPICS = {
   pregnancy: {
@@ -124,6 +131,13 @@ function PointList({ points }) {
     </ul>
   );
 }
+// Experiment Handy-Conversion 10/2026: Der Kassenvergleich-Hinweis steht mobil direkt unter dem
+// Bonus-Absatz, ab md wie bisher am Ende des Abschnitts (je Größe nur eine Fassung sichtbar).
+const kasseVergleichen = (
+  <>Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</>
+);
+// Die Frage für Versicherte anderer Kassen steht mobil als erste Frage der Liste.
+const mobileFirstQuestion = commonFaq[2][0];
 const steps = [
   ['Vorsorge nachweisen', 'Jede Mutterschaftsvorsorge zählt bei der IKK classic einzeln. Der Mutterpass reicht als Nachweis.'],
   ['Schutz wählen', 'Ambulant für die Vorsorge jetzt, stationär für dich und dein Kind nach der Geburt.'],
@@ -143,6 +157,8 @@ function HospitalCalculatorLinks({ sdkUrl, className = '' }) {
 export default function BenefitFunnelPage() {
   const config = TOPICS.pregnancy;
   const location = useLocation();
+  // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
+  const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   // No answers, health information or arbitrary query strings cross into a product page.
   const productPath = getPregnancyOnwardPath(location.search);
   const helpVisible = useWhatsAppHelp();
@@ -168,66 +184,124 @@ export default function BenefitFunnelPage() {
           dann zwei Wege. Alle Einschränkungen bleiben vollständig, stehen aber
           in Aufklappern statt als Textwand. Sprungmarken der Anzeigen bleiben. */}
       <div className="bg-white text-home-midnight" data-funnel-topic="pregnancy">
+        {/* Desktop (ab lg, Frank 07.10.2026): 3D-Szene mit Überschrift und Knöpfen im
+            Bild, darunter Erklärung und die drei Angebote als ruhige Liste. Die
+            Wortlaute sind die der Handy-Fassung; sie wird ab lg ausgeblendet. */}
+        <SceneHero
+          surface="schwangerschaft"
+          headingId="desktop-schwangerschaft-heading"
+          dataAttributes={{ 'data-desktop-lead': 'schwangerschaft' }}
+          heading={<HighlightText text={config.title} className="text-[#5ee0b1]" />}
+          actions={(
+            <>
+              <a data-desktop-primary href="#zusatzschutz" className={scenePrimaryButtonClass}>Zusatzschutz und Beitrag ansehen</a>
+              <a href="#klinikschutz" className={sceneSecondaryButtonClass}>Klinikschutz für dein Kind</a>
+            </>
+          )}
+        >
+          <div className={sceneBelow.grid}>
+            <div className="min-w-0">
+              <p className={sceneBelow.lead}>{config.lead}</p>
+              <p className={sceneBelow.note}>{config.leadSecondary}</p>
+            </div>
+            <div className="min-w-0">
+              <h2 className={sceneBelow.listTitle}>Was jetzt für dich drin ist</h2>
+              <ul className={sceneBelow.list}>
+                {heroOffers.map((offer) => (
+                  <li key={offer.href}>
+                    <a href={offer.href} className="group block rounded-sm py-3.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                      <span className="flex items-baseline justify-between gap-6">
+                        <span className="font-display text-base font-bold leading-6 text-white">{offer.code}</span>
+                        <span className="text-right font-display text-lg font-extrabold leading-6 text-[#5ee0b1] group-hover:underline group-hover:underline-offset-4">{offer.label}</span>
+                      </span>
+                      <span className="mt-1.5 block text-sm leading-6 text-[#c9d8de]">{offer.note}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </SceneHero>
+
         {/* Hero mit Wohlfühl-Atmosphäre (Frank 30.09.2026: Aufbau wie /stationaer,
             "süß", die Schwangeren sollen sich wohlfühlen): warme Creme- und
             Rosétöne, weiche Lichtflecken, die Schwangeren-Figur groß in der
             Karte und daneben die drei Angebote. */}
-        <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#fff8f3] via-[#fdf0f2] to-[#f1f8f4] pb-14 pt-28 md:pb-20 md:pt-32">
+        <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#fff8f3] via-[#fdf0f2] to-[#f1f8f4] pb-10 pt-24 md:pb-20 md:pt-32 lg:hidden">
           <div className="absolute -left-24 top-20 -z-10 h-80 w-80 rounded-full bg-[#f7c9d4]/40 blur-3xl" aria-hidden="true" />
           <div className="absolute -right-16 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#bfe9d8]/40 blur-3xl" aria-hidden="true" />
           <div className="absolute left-1/2 top-8 -z-10 h-64 w-64 rounded-full bg-[#ffe3c2]/45 blur-3xl" aria-hidden="true" />
           <div className="absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle_at_center,#f3c6d0_1px,transparent_1px)] [background-size:26px_26px]" aria-hidden="true" />
-          <div className={`${wrap} grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12`}>
+          <div className={`${wrap} grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12`}>
             <div className="min-w-0">
-              <p className="inline-flex items-center gap-2 rounded-full bg-white/75 px-4 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-[#b0476a] shadow-[0_6px_18px_rgba(176,71,106,0.10)]">
+              <p className="inline-flex items-center gap-2 rounded-full bg-white/75 px-4 py-1.5 font-display text-sm font-extrabold uppercase tracking-[0.18em] text-[#b0476a] md:text-xs shadow-[0_6px_18px_rgba(176,71,106,0.10)]">
                 <Heart className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
                 Für dich und dein Baby
               </p>
-              <h1 className="mt-5 max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[3.4rem]">
+              <HeroHeading className="mt-4 max-w-[16ch] font-friendly text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:mt-5 sm:text-5xl lg:text-[3.4rem]">
                 <HighlightText text={config.title} className="text-[#087654]" />
-              </h1>
-              <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:text-xl">{config.lead}</p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              </HeroHeading>
+              <p className="mt-4 max-w-[48ch] text-lg leading-relaxed text-home-slate sm:mt-5 sm:text-xl">{config.lead}</p>
+              <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap">
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
                 <a href="#klinikschutz" className={`${secondary} bg-white/60`}>Klinikschutz für dein Kind</a>
               </div>
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
 
-            <div className="relative mx-auto min-w-0 w-full max-w-[35rem]" aria-label="Was jetzt für dich drin ist">
+            {/* Experiment Handy-Conversion 10/2026: mobil ausgeblendet. Die drei Karten
+                wiederholten nur Überschrift und beide Knöpfe und schoben Siegelband und
+                Ablauf rund 470 px nach unten. Ab md unverändert. */}
+            <div className="relative mx-auto hidden min-w-0 w-full max-w-[35rem] md:block" aria-label="Was jetzt für dich drin ist">
               <Heart className="absolute -left-3 top-6 z-30 h-7 w-7 -rotate-12 fill-[#f5b8c6] text-[#f5b8c6]" aria-hidden="true" />
               <Heart className="absolute -right-2 -top-3 z-30 h-5 w-5 rotate-12 fill-[#f7cdd6] text-[#f7cdd6]" aria-hidden="true" />
               <Heart className="absolute -bottom-3 right-16 z-30 h-4 w-4 rotate-6 fill-[#bfe9d8] text-[#bfe9d8]" aria-hidden="true" />
               <div className="relative overflow-hidden rounded-[2.2rem] border border-[#f3d6de] bg-gradient-to-br from-[#fff6f8] via-white to-[#fff8ec] p-5 shadow-[0_30px_80px_rgba(176,71,106,0.16)] sm:p-7">
-                <div className="relative grid grid-cols-1 items-end gap-2 sm:min-h-[27rem] sm:grid-cols-[0.85fr_1.15fr]">
-                  <div className="relative z-10 mx-auto min-w-0 self-end sm:mx-0">
-                    <img
-                      src="/images/friendly-icons/pregnancy.webp"
-                      alt=""
-                      width="512"
-                      height="512"
-                      loading="eager"
-                      decoding="async"
-                      {...{ fetchpriority: 'high' }}
-                      className="w-[10rem] max-w-none sm:-ml-6 sm:w-[17rem]"
-                    />
+                <div className="relative grid grid-cols-1 items-end gap-2 md:min-h-[27rem] md:grid-cols-[0.85fr_1.15fr]">
+                  <div className="relative z-10 mx-auto min-w-0 self-end md:mx-0">
+                    {/* Experiment Handy-Conversion 10/2026: Die Figur gibt es nur ab md. Mobil
+                        greift die Ersatzquelle (1 Pixel), damit das ausgeblendete Bild dort
+                        nichts lädt und nicht mit dem Text um die Ladereihenfolge konkurriert. Ab lg ist
+                        diese Fassung ausgeblendet, dort lädt die Figur ebenfalls nicht. */}
+                    <picture className="block">
+                      <source media="(min-width: 768px) and (max-width: 1023px)" srcSet="/images/friendly-icons/pregnancy.webp" type="image/webp" />
+                      <img
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        alt=""
+                        width="512"
+                        height="512"
+                        loading="eager"
+                        decoding="async"
+                        {...{ fetchpriority: 'high' }}
+                        className="w-[8.5rem] max-w-none md:-ml-6 md:w-[17rem]"
+                      />
+                    </picture>
                   </div>
-                  <div className="relative z-20 flex min-w-0 flex-col gap-3 self-center py-4">
+                  <div className="relative z-20 flex min-w-0 flex-col gap-3 self-center py-2 md:py-4">
                     <p className="mb-1 font-display text-base font-extrabold leading-tight text-[#b0476a] sm:text-lg">Was jetzt für dich drin ist</p>
-                    {heroOffers.map((offer) => (
-                      <a
-                        key={offer.href}
-                        href={offer.href}
-                        className={`block rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(176,71,106,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(176,71,106,0.14)] motion-reduce:transform-none ${focus} ${offerTone[offer.tone].border}`}
-                      >
-                        <span className="flex items-center justify-between gap-2">
-                          <span className="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">{offer.code}</span>
-                          <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${offerTone[offer.tone].dot}`} aria-hidden="true" />
-                        </span>
-                        <span className="mt-1 block font-display text-base font-extrabold leading-tight text-home-midnight sm:text-lg">{offer.label}</span>
-                        <span className="mt-1 block text-[0.95rem] leading-snug text-home-slate sm:text-base">{offer.note}</span>
-                      </a>
-                    ))}
+                    {/* Experiment 06.10.2026: die drei Angebote wischen mobil
+                        nebeneinander, ab md stehen sie wie bisher untereinander. */}
+                    <MobileSwipeRow
+                      label="Was jetzt für dich drin ist"
+                      desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:scroll-pl-0 md:flex md:flex-col md:gap-3"
+                      mobileItemWidth="w-[76vw] max-w-[19rem]"
+                      bleed={false}
+                    >
+                      {heroOffers.map((offer) => (
+                        <a
+                          key={offer.href}
+                          href={offer.href}
+                          className={`block h-full rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(176,71,106,0.10)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_36px_rgba(176,71,106,0.14)] motion-reduce:transform-none ${focus} ${offerTone[offer.tone].border}`}
+                        >
+                          <span className="flex items-center justify-between gap-2">
+                            <span className="text-sm font-extrabold uppercase tracking-[0.12em] text-slate-500 md:text-xs">{offer.code}</span>
+                            <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${offerTone[offer.tone].dot}`} aria-hidden="true" />
+                          </span>
+                          <span className="mt-1 block font-display text-base font-extrabold leading-tight text-home-midnight sm:text-lg">{offer.label}</span>
+                          <span className="mt-1 block text-base leading-snug text-home-slate sm:text-base">{offer.note}</span>
+                        </a>
+                      ))}
+                    </MobileSwipeRow>
                   </div>
                 </div>
               </div>
@@ -235,34 +309,51 @@ export default function BenefitFunnelPage() {
           </div>
         </section>
 
+        {/* Experiment 06.10.2026: mobil stehen die Testsiegel direkt unter dem Einstieg
+            (Reihenfolge: Einstieg, Siegel, Ablauf, Wege, Bonus, Fragen). Ab md bleiben sie
+            wie bisher im Bonus-Abschnitt; die Hälfte hier ist dort ausgeblendet und
+            umgekehrt, es steht also nie dasselbe Siegel zweimal sichtbar auf der Seite. */}
+        <div className="bg-white px-5 pb-2 pt-6 md:hidden">
+          <HealioSiegelBand productSet="schwangerschaft" />
+        </div>
+
         <section id="so-gehts" aria-labelledby="so-gehts-heading" className={`${wrap} scroll-mt-28 py-12 md:py-16`}>
           <h2 id="so-gehts-heading" className="font-friendly text-3xl md:text-4xl">So einfach geht es</h2>
-          <ol className="mt-7 grid gap-7 md:grid-cols-3 md:gap-10">
+          {/* Experiment 06.10.2026: die drei Schritte wischen mobil als Karten
+              nebeneinander, ab md bleiben sie wie bisher in drei Spalten. */}
+          <MobileSwipeRow
+            as="ol"
+            label="So einfach geht es"
+            className="mt-5 md:mt-7"
+            desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-8 sm:scroll-pl-8 sm:px-8 md:mx-0 md:px-0 md:scroll-pl-0 md:grid md:grid-cols-3 md:gap-10"
+            mobileItemWidth="w-[78vw] max-w-[20rem]"
+            bleed={false}
+          >
             {steps.map(([title, description], i) => (
-              <li key={title}>
+              <div key={title} className="h-full rounded-2xl border border-home-slate/15 bg-home-ice p-5 md:h-auto md:rounded-none md:border-0 md:bg-transparent md:p-0">
                 <span className="font-friendly text-3xl text-[#076046]" aria-hidden="true">{i + 1}.</span>
                 <h3 className="mt-1 font-display text-lg font-bold">{title}</h3>
                 <p className="mt-2 leading-relaxed text-home-slate">{description}</p>
-              </li>
+              </div>
             ))}
-          </ol>
+          </MobileSwipeRow>
         </section>
 
         <section id="drei-wege" aria-labelledby="drei-wege-heading" className="scroll-mt-28 bg-home-ice py-12 md:py-20">
           <div className={wrap}>
             <h2 id="drei-wege-heading" className="font-friendly text-3xl md:text-4xl">Was jetzt noch geht</h2>
-            <div className="mt-8 grid gap-6 md:grid-cols-2 md:gap-8">
-              <article id="zusatzschutz" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-6 sm:p-8">
+            <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-2 md:gap-8">
+              <article id="zusatzschutz" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-5 sm:p-8">
                 <span id="ambulant" className="scroll-mt-28" aria-hidden="true" />
                 <p className="font-semibold text-[#076046]">Ambulant, jetzt</p>
                 <h3 className="mt-2 font-display text-2xl font-bold">{config.protectionTitle}</h3>
                 <PointList points={ambulantPoints} />
-                <div className="mt-auto pt-7">
+                <div className="mt-auto pt-5 sm:pt-7">
                   <Link data-product-link to={productPath} className={primary}>{config.productLabel}</Link>
                   <p className="mt-3 text-base leading-relaxed text-home-slate">Du siehst zuerst die vier Stufen mit Beitrag. Den Antrag startest du danach selbst online.</p>
                 </div>
                 <details className="mt-5 border-t border-home-slate/15 pt-4">
-                  <summary className={`cursor-pointer font-semibold ${focus}`}>Genauer nachlesen</summary>
+                  <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>Genauer nachlesen</summary>
                   <div className="mt-3 space-y-3 text-base leading-relaxed text-home-slate">
                     {paths[0].body.map((paragraph) => <p key={paragraph.slice(0, 40)}>{paragraph}</p>)}
                     <p>{config.caution}</p>
@@ -270,18 +361,18 @@ export default function BenefitFunnelPage() {
                 </details>
               </article>
 
-              <article id="klinikschutz" aria-labelledby="klinikschutz-heading" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-6 sm:p-8">
+              <article id="klinikschutz" aria-labelledby="klinikschutz-heading" className="flex scroll-mt-28 flex-col rounded-2xl bg-white p-5 sm:p-8">
                 <span id="kind" className="scroll-mt-28" aria-hidden="true" />
                 <span id="stationaer" className="scroll-mt-28" aria-hidden="true" />
                 <p className="font-semibold text-[#076046]">Stationär, für die Zeit danach</p>
                 <h3 id="klinikschutz-heading" className="mt-2 font-display text-2xl font-bold">Klinikschutz für dich und dein Kind</h3>
                 <PointList points={hospitalPoints} />
-                <div className="mt-auto pt-7">
+                <div className="mt-auto pt-5 sm:pt-7">
                   <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} />
                   <p className="mt-3 text-base leading-relaxed text-home-slate">Beide Rechner öffnen sich in einem neuen Tab.</p>
                 </div>
                 <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
-                  <summary className={`cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
+                  <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
                   <div className="mt-3 space-y-3 text-base leading-relaxed text-home-slate">
                     <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass ein Elternteil am Tag der Geburt versichert ist.</p>
                     <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, schließt aber eine beim Antrag schon festgestellte Schwangerschaft aus. Dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
@@ -295,26 +386,36 @@ export default function BenefitFunnelPage() {
                 </details>
               </article>
             </div>
-            <p className="mt-7 max-w-prose text-base leading-relaxed text-home-slate">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>, <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> und <Link to="/ratgeber/hebamme-kosten-krankenkasse" className={textLink}>was die Hebamme kostet und was die Kasse zahlt</Link>.</p>
+            <p className="mt-5 max-w-prose text-base leading-relaxed text-home-slate sm:mt-7">Alles ausführlich im Ratgeber: <Link to="/ratgeber/schwanger-zusatzversicherung" className={textLink}>welcher Zusatzschutz jetzt noch geht</Link>, <Link to="/ratgeber/schwangerschaft-worauf-achten" className={textLink}>worauf du in der Schwangerschaft achten solltest</Link> und <Link to="/ratgeber/hebamme-kosten-krankenkasse" className={textLink}>was die Hebamme kostet und was die Kasse zahlt</Link>.</p>
           </div>
         </section>
 
         <section id="bonus-check" aria-labelledby="bonus-heading" className={`${wrap} scroll-mt-28 py-12 md:py-20`}>
           <span id="geheimtipp" className="scroll-mt-28" aria-hidden="true" />
-          <div className="grid items-center gap-6 md:grid-cols-[200px_1fr] md:gap-12">
-            <img src="/images/friendly-icons/bonus-you-mascot.webp" alt="" width="240" height="240" className="mx-auto w-32 md:w-48" loading="lazy" />
+          <div className="grid items-center gap-4 sm:gap-6 md:grid-cols-[200px_1fr] md:gap-12">
+            <img src="/images/friendly-icons/bonus-you-mascot.webp" alt="" width="240" height="240" className="mx-auto w-20 md:w-48" loading="lazy" />
             <div>
               <h2 id="bonus-heading" className="font-friendly text-3xl md:text-4xl">Dein Bonus: jede Vorsorge zählt einzeln</h2>
               <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-home-slate">Bei der IKK classic bringt jede Mutterschaftsvorsorge 10 EUR Geldbonus oder 30 EUR Zuschuss, die Rückbildung später 25 oder 75 EUR. Der Zuschuss bezahlt deinen Versicherungsbeitrag, höchstens bis zu deinen tatsächlichen Kosten.</p>
               {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), nur
                   eigene Bilddateien, nichts von Dritten (Messsperre auf dieser Seite). */}
-              <IkkKassenSiegel order="parents" align="start" className="mt-6" />
+              <div className="mt-6 hidden md:block">
+                <IkkKassenSiegel order="parents" align="start" />
+              </div>
             </div>
           </div>
-          <div className="mt-8">
+          {/* Experiment Handy-Conversion 10/2026: Die Seite erklärt den Zuschuss der IKK classic.
+              Wer bei einer anderen Kasse ist, sieht mobil direkt danach die zwei allgemeinen Wege
+              (günstigere Kasse, Kassenbonus), wiederverwendet aus den Produktseiten. Der Verweis zu
+              KassenBoost steht darunter nur einmal. Ab md ausgeblendet, dort bleibt alles wie bisher. */}
+          <div className="-mx-4 mt-2 md:hidden">
+            <ZweiWegeFinanzierung produkt="ambulant" mobileSwipe hideLinkOnMobile />
+            <p className="px-4 pb-2 text-base leading-relaxed text-home-slate">{kasseVergleichen}</p>
+          </div>
+          <div className="mt-6 sm:mt-8">
             <PregnancyBonusExample />
-            <details className="mt-4 rounded-2xl bg-home-ice p-6 sm:p-8">
-              <summary className={`cursor-pointer font-semibold ${focus}`}>Was du dafür brauchst und wie gerechnet wird</summary>
+            <details className="mt-4 rounded-2xl bg-home-ice p-5 sm:p-8">
+              <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>Was du dafür brauchst und wie gerechnet wird</summary>
               <div className="mt-4 max-w-prose space-y-3 text-base leading-relaxed text-home-slate">
                 <ul className="list-disc space-y-2 pl-5">
                   <li>Einen schriftlichen Nachweis je Untersuchung, der Mutterpass reicht aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen</li>
@@ -331,7 +432,7 @@ export default function BenefitFunnelPage() {
               </div>
             </details>
           </div>
-          <p className="mt-6 text-base leading-relaxed text-home-slate">Du möchtest deine Kasse vergleichen? <Link to="/kassenboost" className={textLink}>KassenBoost kennenlernen</Link>. Das ist freiwillig.</p>
+          <p className="mt-6 hidden text-base leading-relaxed text-home-slate md:block">{kasseVergleichen}</p>
         </section>
 
         <section id="fragen" className={`${wrap} scroll-mt-28 border-t border-home-slate/15 py-12 md:py-20`}>
@@ -343,10 +444,13 @@ export default function BenefitFunnelPage() {
                 <p className="mt-5 text-base text-home-slate">Lieber per E-Mail? <Link to="/kontakt" className={textLink}>Zur Kontaktseite</Link></p>
               </div>
             ) : (
-              <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`mt-5 inline-block ${textLink}`}>Frage an Healio stellen</Link></div>
+              <div><h2 className="font-friendly text-3xl md:text-4xl">Noch eine Frage?</h2><p className="mt-3 text-home-slate">Du musst dich nicht durch alles allein klicken.</p><Link to="/kontakt" className={`-mb-2.5 mt-2.5 inline-block py-2.5 md:mb-0 md:mt-5 md:py-0 ${textLink}`}>Frage an Healio stellen</Link></div>
             )}
-            <div className="divide-y divide-home-slate/20">{faq.map(([q, a]) => (
-              <details key={q} className="py-5 first:pt-0"><summary className={`cursor-pointer font-semibold ${focus}`}>{q}</summary><p className="mt-3 max-w-prose leading-relaxed text-home-slate">{a}</p></details>
+            {/* Experiment Handy-Conversion 10/2026: mobil steht die Frage zur eigenen Krankenkasse
+                zuerst. Die Trennlinien setzt dort jeder Eintrag selbst (die Linien der Liste
+                folgen sonst der Quellreihenfolge). Ab md gilt wieder die Liste wie bisher. */}
+            <div className="flex flex-col md:block md:divide-y md:divide-home-slate/20">{faq.map(([q, a]) => (
+              <details key={q} className={q === mobileFirstQuestion ? 'order-first pb-4 md:order-none md:py-5' : 'border-t border-home-slate/20 py-4 md:border-t-0 md:py-5 md:first:pt-0'}><summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>{q}</summary><p className="mt-3 max-w-prose leading-relaxed text-home-slate">{a}</p></details>
             ))}</div>
           </div>
           <div className="mt-8 border-t border-home-slate/20 pt-7">

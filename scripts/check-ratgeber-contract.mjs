@@ -374,8 +374,9 @@ expect(
   /\{isAdvertorial && section\.id === article\.ctaAfterSectionId/.test(layout),
   'Der Button im Text gehoert allein zum Advertorial.',
 );
+// Seit der Handy-Runde auf main (d105da5) mit engerem Abstand unter sm.
 expect(
-  /\{isAdvertorial && \(\s*<div className="mt-14">/.test(layout),
+  /\{isAdvertorial && \(\s*<div className="mt-10 sm:mt-14">/.test(layout),
   'Der Button am Ende gehoert allein zum Advertorial.',
 );
 expect(

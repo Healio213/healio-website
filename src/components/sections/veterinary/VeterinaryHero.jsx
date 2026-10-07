@@ -8,7 +8,7 @@ const VeterinaryHero = () => {
   const { t } = useTranslation('veterinary');
 
   return (
-    <section className="relative flex min-h-[92svh] w-full items-center overflow-hidden bg-[#071827]" aria-labelledby="vet-hero-heading">
+    <section className="relative flex min-h-[68svh] w-full items-center overflow-hidden bg-[#071827] md:min-h-[92svh]" aria-labelledby="vet-hero-heading">
       <div className="absolute inset-0">
         <img
           src="/images/veterinary/hero-family-1536.webp"
@@ -28,16 +28,16 @@ const VeterinaryHero = () => {
         <div className="absolute -left-20 top-[24%] h-80 w-80 rounded-full bg-[#25c990]/10 blur-[100px]" aria-hidden="true" />
       </div>
 
-      <div className="healio-container relative z-10 w-full px-4 pb-28 pt-36 sm:px-6 sm:pb-32 sm:pt-44 md:px-8">
+      <div className="healio-container relative z-10 w-full px-4 pb-20 pt-28 sm:px-6 sm:pb-32 sm:pt-44 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
           className="max-w-[820px]"
         >
-          <div className="mb-6 flex items-center gap-4">
+          <div className="mb-4 flex items-center gap-4 sm:mb-6">
             <span className="h-px w-10 bg-[#76e2bd] sm:w-16" aria-hidden="true" />
-            <p className="font-display text-xs font-extrabold uppercase tracking-[0.25em] text-[#8ee7ca]">
+            <p className="font-display text-sm font-extrabold uppercase tracking-[0.25em] text-[#8ee7ca] md:text-xs">
               {t('hero.eyebrow')}
             </p>
           </div>
@@ -52,7 +52,7 @@ const VeterinaryHero = () => {
             </span>
           </h1>
 
-          <p className="mt-7 max-w-[660px] text-base font-medium leading-relaxed text-slate-200 sm:text-lg md:text-xl">
+          <p className="mt-5 max-w-[660px] text-base font-medium leading-relaxed text-slate-200 sm:mt-7 sm:text-lg md:text-xl">
             {t('hero.subtitle')}
           </p>
 

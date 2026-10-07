@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, Clock } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import useIsDesktop from '@/components/ratgeber/useIsDesktop';
 import { friendlyIconAssets } from '@/components/ui/healioSoftClayIcons';
 import { getRatgeberPath } from '@/content/ratgeber/paths';
 import { RATGEBER_OVERVIEW } from '@/content/ratgeber/registry.overview';
@@ -126,7 +128,7 @@ const ReadingTime = ({ minutes, className = '' }) => {
 
 // Pflichtkennzeichnung für das Advertorial, gut sichtbar oben in der Karte.
 const AdLabel = () => (
-  <span className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 font-display text-xs font-extrabold uppercase tracking-[0.14em] text-slate-700">
+  <span className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 font-display text-sm font-extrabold uppercase tracking-[0.1em] text-slate-700 md:text-xs md:tracking-[0.14em]">
     Anzeige
   </span>
 );
@@ -155,20 +157,20 @@ const LeadArticleCard = ({ entry }) => {
   return (
     <article
       id={`artikel-${entry.slug}`}
-      className={`group relative grid scroll-mt-28 gap-6 rounded-[2rem] border border-slate-100 bg-white p-6 shadow-[0_24px_60px_rgba(7,17,31,0.10)] transition-shadow duration-500 hover:shadow-[0_30px_72px_rgba(7,17,31,0.14)] sm:p-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-12 lg:p-12 ${CARD_FOCUS}`}
+      className={`group relative grid scroll-mt-28 gap-4 rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] transition-shadow duration-500 hover:shadow-[0_30px_72px_rgba(7,17,31,0.14)] sm:gap-6 sm:p-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-12 lg:p-12 ${CARD_FOCUS}`}
     >
       <div className="min-w-0">
         {/* Das Advertorial bleibt als Anzeige erkennbar, auch als Leitartikel. */}
         {isAdvertorial && <div className="mb-5"><AdLabel /></div>}
-        <h3 className="max-w-[28ch] font-display text-[clamp(1.65rem,2.7vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-home-midnight [text-wrap:balance]">
+        <h3 className="max-w-[28ch] font-display text-[1.5rem] font-extrabold md:text-[clamp(1.65rem,2.7vw,2.5rem)] leading-[1.08] tracking-[-0.035em] text-home-midnight [text-wrap:balance]">
           <Link to={getRatgeberPath(entry.slug)} className={STRETCHED_LINK}>
             {entry.listTitle}
           </Link>
         </h3>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+        <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
           {entry.listTeaser}
         </p>
-        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-8 sm:gap-y-4">
           <span
             className="inline-flex min-h-12 items-center gap-2 rounded-full bg-home-midnight px-6 font-display text-base font-extrabold text-white shadow-[0_16px_40px_rgba(7,17,31,0.18)] transition-colors group-hover:bg-[#143528]"
             aria-hidden="true"
@@ -181,8 +183,8 @@ const LeadArticleCard = ({ entry }) => {
       </div>
       <ArticleFigure
         slug={entry.slug}
-        className="order-first h-32 w-32 md:order-none md:h-52 md:w-52"
-        imageClassName="h-24 w-24 md:h-[9.25rem] md:w-[9.25rem]"
+        className="order-first h-20 w-20 sm:h-32 sm:w-32 md:order-none md:h-52 md:w-52"
+        imageClassName="h-16 w-16 sm:h-24 sm:w-24 md:h-[9.25rem] md:w-[9.25rem]"
       />
     </article>
   );
@@ -193,14 +195,14 @@ const ArticleCard = ({ entry }) => {
   return (
     <article
       id={`artikel-${entry.slug}`}
-      className={`group relative flex h-full scroll-mt-28 flex-col rounded-[2rem] border border-slate-100 bg-white p-6 shadow-[0_18px_44px_rgba(7,17,31,0.08)] transition-shadow duration-500 hover:shadow-[0_26px_60px_rgba(7,17,31,0.13)] sm:p-8 ${CARD_FOCUS}`}
+      className={`group relative flex h-full scroll-mt-28 flex-col rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_18px_44px_rgba(7,17,31,0.08)] transition-shadow duration-500 hover:shadow-[0_26px_60px_rgba(7,17,31,0.13)] sm:p-8 ${CARD_FOCUS}`}
     >
       <div className="flex items-start justify-between gap-4">
-        <ArticleFigure slug={entry.slug} className="h-24 w-24 sm:h-28 sm:w-28" imageClassName="h-20 w-20 sm:h-24 sm:w-24" />
+        <ArticleFigure slug={entry.slug} className="h-20 w-20 sm:h-28 sm:w-28" imageClassName="h-16 w-16 sm:h-24 sm:w-24" />
         {/* Advertorial als Anzeige, organische Artikel mit Lesezeit. */}
         {isAdvertorial ? <AdLabel /> : <ReadingTime minutes={entry.readingTimeMinutes} className="mt-1" />}
       </div>
-      <h3 className="mt-6 font-display text-xl font-extrabold leading-[1.2] tracking-[-0.025em] text-home-midnight [text-wrap:balance] sm:text-2xl">
+      <h3 className="mt-4 font-display text-xl font-extrabold leading-[1.2] tracking-[-0.025em] text-home-midnight [text-wrap:balance] sm:mt-6 sm:text-2xl">
         <Link to={getRatgeberPath(entry.slug)} className={STRETCHED_LINK}>
           {entry.listTitle}
         </Link>
@@ -208,7 +210,7 @@ const ArticleCard = ({ entry }) => {
       <p className="mt-3 text-base leading-7 text-slate-600">
         {entry.listTeaser}
       </p>
-      <span className="mt-auto inline-flex items-center gap-2 self-start pt-6 font-display text-sm font-extrabold text-home-midnight" aria-hidden="true">
+      <span className="mt-auto inline-flex items-center gap-2 self-start pt-4 font-display text-sm font-extrabold text-home-midnight sm:pt-6" aria-hidden="true">
         Artikel lesen
         <ArrowRight className={`h-4 w-4 text-[#087654] transition-transform duration-500 ${EASE_OUT} group-hover:translate-x-1 motion-reduce:transform-none`} aria-hidden="true" />
       </span>
@@ -216,41 +218,94 @@ const ArticleCard = ({ entry }) => {
   );
 };
 
-const BlogGroup = ({ group }) => (
-  <section
-    id={group.id}
-    aria-labelledby={`${group.id}-heading`}
-    className="scroll-mt-28 rounded-[2rem] bg-[#f7f5f0] p-5 sm:p-8 lg:p-10"
+const blogExcerpt = (article) => article.excerpt || article.meta_description;
+
+// Bisherige Listenzeile (Desktop und Gruppen mit höchstens zwei Artikeln).
+// min-w-0 und Trennung: lange Blogtitel (Krankenhauszusatzversicherung)
+// verbreiterten die Übersicht bei 320 px.
+const BlogListItem = ({ article }) => (
+  <li
+    className="group relative min-w-0 border-t border-slate-300/70 py-5 has-[:focus-visible]:rounded-md has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-home-mint"
   >
-    <div className="flex items-center gap-4">
-      <FriendlyIcon kind={group.kind} tone={group.tone} size="sm" />
-      <h3 id={`${group.id}-heading`} className="font-display text-xl font-extrabold leading-tight tracking-[-0.025em] text-home-midnight sm:text-2xl">
-        {group.title}
-      </h3>
-    </div>
-    {/* min-w-0 und Trennung: lange Blogtitel (Krankenhauszusatzversicherung)
-        verbreiterten die Übersicht bei 320 px. */}
-    <ul className="mt-6 grid gap-x-10 md:grid-cols-2">
-      {group.articles.map((article) => (
-        <li
-          key={article.slug}
-          className="group relative min-w-0 border-t border-slate-300/70 py-5 has-[:focus-visible]:rounded-md has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-home-mint"
-        >
-          <Link
-            to={`/blog/${article.slug}`}
-            className="break-words font-display text-lg font-bold leading-snug hyphens-auto sm:hyphens-manual text-home-midnight transition-colors after:absolute after:inset-0 group-hover:text-[#087654] focus:outline-none"
-          >
-            {article.title}
-          </Link>
-          {(article.excerpt || article.meta_description) && (
-            <p className="mt-1.5 line-clamp-2 text-base leading-7 text-slate-600">{article.excerpt || article.meta_description}</p>
-          )}
-          <ReadingTime minutes={article.reading_time_minutes} className="mt-3" />
-        </li>
-      ))}
-    </ul>
-  </section>
+    <Link
+      to={`/blog/${article.slug}`}
+      className="break-words font-display text-lg font-bold leading-snug hyphens-auto sm:hyphens-manual text-home-midnight transition-colors after:absolute after:inset-0 group-hover:text-[#087654] focus:outline-none"
+    >
+      {article.title}
+    </Link>
+    {blogExcerpt(article) && (
+      <p className="mt-1.5 line-clamp-2 text-base leading-7 text-slate-600">{blogExcerpt(article)}</p>
+    )}
+    <ReadingTime minutes={article.reading_time_minutes} className="mt-3" />
+  </li>
 );
+
+// Handy: je zwei Artikel stehen übereinander auf einer weißen Karte; die
+// Gruppe wird zur Wischreihe, damit die Blogliste nicht endlos lang wird.
+const BlogPairItem = ({ article }) => (
+  <li
+    className="group relative min-w-0 py-4 has-[:focus-visible]:rounded-md has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-home-mint"
+  >
+    <Link
+      to={`/blog/${article.slug}`}
+      className="break-words hyphens-auto font-display text-lg font-bold leading-snug text-home-midnight transition-colors after:absolute after:inset-0 group-hover:text-[#087654] focus:outline-none"
+    >
+      {article.title}
+    </Link>
+    {blogExcerpt(article) && (
+      <p className="mt-1.5 line-clamp-2 text-base leading-7 text-slate-600">{blogExcerpt(article)}</p>
+    )}
+    <ReadingTime minutes={article.reading_time_minutes} className="mt-2" />
+  </li>
+);
+
+const chunkPairs = (items) => {
+  const pairs = [];
+  for (let index = 0; index < items.length; index += 2) pairs.push(items.slice(index, index + 2));
+  return pairs;
+};
+
+const BlogGroup = ({ group }) => {
+  const isDesktop = useIsDesktop();
+  const swipe = !isDesktop && group.articles.length > 2;
+
+  return (
+    <section
+      id={group.id}
+      aria-labelledby={`${group.id}-heading`}
+      className="min-w-0 scroll-mt-28 rounded-[2rem] bg-[#f7f5f0] p-5 sm:p-8 lg:p-10"
+    >
+      <div className="flex items-center gap-4">
+        <FriendlyIcon kind={group.kind} tone={group.tone} size="sm" />
+        <h3 id={`${group.id}-heading`} className="font-display text-xl font-extrabold leading-tight tracking-[-0.025em] text-home-midnight sm:text-2xl">
+          {group.title}
+        </h3>
+      </div>
+      {swipe ? (
+        <MobileSwipeRow
+          label={group.title}
+          bleed={false}
+          className="mt-5"
+          desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-8 sm:scroll-pl-8 sm:px-8"
+          mobileItemWidth="w-[76vw] max-w-[22rem]"
+        >
+          {chunkPairs(group.articles).map((pair) => (
+            <ul
+              key={pair[0].slug}
+              className="h-full divide-y divide-slate-200 rounded-2xl bg-white px-4 ring-1 ring-slate-200/70"
+            >
+              {pair.map((article) => <BlogPairItem key={article.slug} article={article} />)}
+            </ul>
+          ))}
+        </MobileSwipeRow>
+      ) : (
+        <ul className="mt-6 grid gap-x-10 md:grid-cols-2">
+          {group.articles.map((article) => <BlogListItem key={article.slug} article={article} />)}
+        </ul>
+      )}
+    </section>
+  );
+};
 
 /**
  * Übersicht /ratgeber. Heller Hero auf Papier mit Themen-Sprungmarken, die
@@ -302,17 +357,17 @@ const RatgeberPage = () => {
       <section className="relative isolate overflow-hidden" aria-labelledby="ratgeber-heading">
         <div className="absolute -left-24 top-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-home-mint/[0.12] blur-3xl" aria-hidden="true" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-14 pt-28 sm:px-6 md:pb-20 md:pt-32 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-20 md:pt-32 lg:px-8">
+          <div className="grid items-center gap-7 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(340px,26rem)] lg:gap-14 xl:gap-20">
             <div>
               <h1
                 id="ratgeber-heading"
-                className="max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-home-midnight [text-wrap:balance]"
+                className="max-w-[17ch] font-display text-[clamp(1.75rem,9vw,2.15rem)] font-extrabold sm:text-[clamp(2.4rem,4.6vw,4.25rem)] leading-[1.04] tracking-[-0.035em] text-home-midnight [text-wrap:balance]"
               >
                 <span className="block">Ratgeber zu Krankenkasse,</span>{' '}
                 <span className="block text-[#087654]">Bonus und Zusatzschutz</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
+              <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:mt-6 sm:text-xl sm:leading-9">
                 Hier sammeln wir Texte, die eine Sache in Ruhe erklären: was die gesetzliche
                 Krankenkasse an Bonus zahlt, wo im Alltag Eigenanteile entstehen und wie sich
                 beides sinnvoll verbinden lässt. Ohne Fachsprache, ohne Versprechen.
@@ -321,18 +376,18 @@ const RatgeberPage = () => {
 
             <nav
               aria-labelledby="ratgeber-themen-heading"
-              className="mx-auto w-full max-w-[28rem] rounded-[2rem] border border-slate-100 bg-white p-6 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8 lg:mx-0 lg:max-w-none"
+              className="mx-auto w-full max-w-[28rem] rounded-[2rem] border border-slate-100 bg-white p-5 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-8 lg:mx-0 lg:max-w-none"
             >
               <h2 id="ratgeber-themen-heading" className="font-display text-2xl font-extrabold leading-[1.1] tracking-[-0.03em] sm:text-3xl">
                 Worum geht es dir?
               </h2>
               {topics.length > 0 && (
-                <ul className="mt-6 grid gap-3">
+                <ul className="mt-4 grid gap-2 sm:mt-6 sm:gap-3">
                   {topics.map((topic) => (
                     <li key={topic.slug}>
                       <a
                         href={topic.group ? `#ratgeber-${topic.group}` : `#artikel-${topic.slug}`}
-                        className="group flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 py-2 pl-2 pr-4 font-display text-lg font-extrabold transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
+                        className="group flex min-h-14 items-center gap-4 rounded-2xl border border-slate-200 py-2 pl-2 pr-4 font-display text-lg font-extrabold sm:min-h-16 transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
                       >
                         <FriendlyIcon kind={topic.kind} tone={topic.tone} size="sm" />
                         <span className="flex-1">{topic.label}</span>
@@ -343,14 +398,14 @@ const RatgeberPage = () => {
                 </ul>
               )}
 
-              <div className="my-6 border-t border-slate-100" aria-hidden="true" />
+              <div className="my-5 border-t border-slate-100 sm:my-6" aria-hidden="true" />
               <p className="font-display text-base font-extrabold">Außerdem im Blog</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="mt-2 flex flex-wrap gap-2 sm:mt-3">
                 {blogJumps.map((jump) => (
                   <li key={jump.label}>
                     <a
                       href={jump.href}
-                      className="inline-flex min-h-10 items-center rounded-full bg-slate-100 px-4 text-sm font-bold text-slate-700 transition hover:bg-home-ice hover:text-home-midnight focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
+                      className="inline-flex min-h-11 items-center rounded-full bg-slate-100 px-4 text-sm font-bold md:min-h-10 text-slate-700 transition hover:bg-home-ice hover:text-home-midnight focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint"
                     >
                       {jump.label}
                     </a>
@@ -363,22 +418,24 @@ const RatgeberPage = () => {
       </section>
 
       {leadArticle && (
-        <section id="ratgeber-artikel" aria-labelledby="ratgeber-artikel-heading" className="scroll-mt-24 pb-20 md:pb-28">
+        <section id="ratgeber-artikel" aria-labelledby="ratgeber-artikel-heading" className="scroll-mt-24 overflow-x-clip pb-12 md:overflow-visible md:pb-28">
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 id="ratgeber-artikel-heading" className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.04em] text-home-midnight sm:text-4xl">
               Unsere Ratgeber
             </h2>
-            <div className="mt-8">
+            <div className="mt-5 sm:mt-8">
               <LeadArticleCard entry={leadArticle} />
             </div>
             {moreArticles.length > 0 && (
-              <ul className="mt-6 grid gap-6 md:grid-cols-2">
+              <MobileSwipeRow
+                label="Weitere Ratgeber"
+                className="mt-4 sm:mt-6"
+                desktopClassName="md:grid md:grid-cols-2 md:gap-6"
+              >
                 {moreArticles.map((entry) => (
-                  <li key={entry.slug}>
-                    <ArticleCard entry={entry} />
-                  </li>
+                  <ArticleCard key={entry.slug} entry={entry} />
                 ))}
-              </ul>
+              </MobileSwipeRow>
             )}
 
             {groups.map((group) => (
@@ -386,27 +443,30 @@ const RatgeberPage = () => {
                 key={group.id}
                 id={`ratgeber-${group.id}`}
                 aria-labelledby={`ratgeber-${group.id}-heading`}
-                className="mt-16 scroll-mt-28 md:mt-20"
+                className="mt-10 scroll-mt-28 sm:mt-16 md:mt-20"
               >
                 <div className="flex items-center gap-4">
                   <FriendlyIcon kind={group.icon} tone="mint" size="md" />
-                  <div>
-                    <h3 id={`ratgeber-${group.id}-heading`} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl">
+                  <div className="min-w-0">
+                    <h3 id={`ratgeber-${group.id}-heading`} className="break-words font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight hyphens-auto sm:text-3xl sm:hyphens-manual">
                       {group.title}
                     </h3>
                     {group.intro && <p className="mt-1 max-w-2xl text-base leading-7 text-slate-600">{group.intro}</p>}
                   </div>
                 </div>
-                <ul className="mt-8 grid gap-6 md:grid-cols-2">
+                {/* Handy: Wischreihe wie „Weitere Ratgeber“, ab md das Raster. */}
+                <MobileSwipeRow
+                  label={group.title}
+                  className="mt-5 sm:mt-8"
+                  desktopClassName="md:grid md:grid-cols-2 md:gap-6"
+                >
                   {group.entries.map((entry) => (
-                    <li key={entry.slug}>
-                      <ArticleCard entry={entry} />
-                    </li>
+                    <ArticleCard key={entry.slug} entry={entry} />
                   ))}
-                </ul>
+                </MobileSwipeRow>
                 {/* Mehr Artikel als Karten: der Rest steht auf der Bereichsseite. */}
                 {group.total > group.entries.length && (
-                  <p className="mt-8">
+                  <p className="mt-5 sm:mt-8">
                     <Link
                       to={getRatgeberPath(group.hubSlug)}
                       data-ratgeber-group-all={group.id}
@@ -425,19 +485,19 @@ const RatgeberPage = () => {
       )}
     </div>
 
-    <section id="blog" aria-labelledby="blog-heading" className="scroll-mt-24 bg-white py-20 text-home-midnight md:py-28">
+    <section id="blog" aria-labelledby="blog-heading" className="scroll-mt-24 bg-white py-12 text-home-midnight md:py-28">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 id="blog-heading" className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.04em] sm:text-4xl">
           Alle Artikel aus dem Blog
         </h2>
         {hasBlog ? (
-          <div className="mt-8 grid gap-6" data-healio-ratgeber="blog-list">
+          <div className="mt-5 grid gap-4 sm:mt-8 sm:gap-6" data-healio-ratgeber="blog-list">
             {blogGroups
               .filter((group) => group.articles.length > 0)
               .map((group) => <BlogGroup key={group.id} group={group} />)}
           </div>
         ) : null}
-        <p className="mt-10">
+        <p className="mt-6 sm:mt-10">
           <Link
             to="/blog"
             className="inline-flex min-h-12 items-center gap-2 rounded-full border border-slate-300 px-6 font-display text-base font-extrabold text-home-midnight transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-2"

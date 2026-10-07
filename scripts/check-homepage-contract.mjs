@@ -20,10 +20,12 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Gesundheit clever absichern. Privat und im Unternehmen.');
-assert.equal(en.hero.title, 'Smart health cover. Personal and at work.');
-assert.equal(de.hero.titleAccent, 'Privat und im Unternehmen.');
-assert.match(de.hero.description, /Geld zurück/);
+assert.equal(de.hero.title, 'Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.');
+assert.equal(en.hero.title, 'Your health fund bonus is too valuable to leave unused.');
+assert.equal(`${de.hero.titleLead} ${de.hero.titleAccent}`, de.hero.title);
+assert.equal(`${en.hero.titleLead} ${en.hero.titleAccent}`, en.hero.title);
+assert.match(de.hero.description, /3\.000 EUR/);
+assert.match(de.hero.description, /kann[\s\S]*Beitrag|Beitrag[\s\S]*ausgleichen/);
 assert.equal(de.hero.switch.length, 3, 'Die Weiche im Hero hat genau drei Einstiege.');
 assert.deepEqual(
   de.hero.switch.map((item) => item.routeKey),

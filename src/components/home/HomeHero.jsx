@@ -5,6 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import DesktopLead from '@/components/desktop/DesktopLead';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
 
 const entranceEase = [0.16, 1, 0.3, 1];
@@ -17,8 +20,9 @@ const switchVisuals = {
 
 const HomeHero = () => {
   const { t, i18n } = useTranslation('home');
-  const { getPath } = useLanguage();
+  const { lang, getPath } = useLanguage();
   const reducedMotion = useReducedMotion();
+  const HeroHeading = useDesktopLayout() ? motion.h2 : motion.h1;
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 900], [0, 72]);
@@ -55,10 +59,13 @@ const HomeHero = () => {
     },
   });
 
+  // Experiment Handy-Conversion 10/2026: Unter sm etwas dichter (Kopfabstand, Zeilenhöhe, Abstände der Einstiegskarte),
+  // damit der Knopf der ersten Karte auch bei 360 x 740 im ersten Bild liegt. Ab sm unverändert.
   return (
-    <section
-      ref={heroRef}
-      className="relative isolate flex min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-28 text-white sm:min-h-[860px] lg:min-h-screen lg:pt-32"
+    <div ref={heroRef}>
+      <DesktopLead surface="home" language={lang} />
+      <section
+      className="relative isolate flex lg:hidden min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
       aria-labelledby="home-hero-heading"
     >
       <picture className="absolute inset-0 -z-30 overflow-hidden">
@@ -87,9 +94,9 @@ const HomeHero = () => {
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(3,12,20,0.62)_0%,rgba(3,12,20,0.48)_30%,rgba(3,12,20,0.72)_76%,rgba(3,12,20,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(3,12,20,0.9)_0%,rgba(3,12,20,0.77)_43%,rgba(3,12,20,0.28)_73%,rgba(3,12,20,0.5)_100%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(31,72,121,0.22),transparent_44%)]" />
 
-      <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-14 sm:px-6 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
-        <div className="relative z-20 w-full max-w-[1060px]">
-          <motion.h1
+      <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-6 sm:px-6 md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
+        <div className="relative z-20 flex w-full max-w-[1060px] flex-col">
+          <HeroHeading
             {...entrance(0.08)}
             id="home-hero-heading"
             lang={i18n.resolvedLanguage || i18n.language}
@@ -104,47 +111,53 @@ const HomeHero = () => {
                 <path d="M8 17 C 118 7, 224 23, 336 13 S 455 8, 512 12" fill="none" stroke="#25C990" strokeWidth="5.5" strokeLinecap="round" />
               </svg>
             </span>
-          </motion.h1>
+          </HeroHeading>
 
-          <motion.p {...entrance(0.17)} className="mt-5 max-w-2xl text-base font-medium leading-7 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
+          <motion.p {...entrance(0.17)} className="order-2 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8 md:order-1">
             {t('hero.description')}
           </motion.p>
 
-          <motion.nav {...entrance(0.24)} className="mt-7 sm:mt-9" aria-label={t('hero.switchLabel')}>
-            <p className="home-eyebrow mb-3 text-home-mint-active sm:mb-4">{t('hero.switchLabel')}</p>
-            <ul className="grid gap-3 sm:grid-cols-3 sm:gap-4">
+          <motion.nav {...entrance(0.24)} className="order-1 mt-5 sm:mt-9 md:order-2" aria-label={t('hero.switchLabel')}>
+            <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
+            {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
+            <MobileSwipeRow
+              label={t('hero.switchLabel')}
+              dotsTone="dark"
+              desktopClassName="md:grid md:grid-cols-3 md:gap-4"
+              itemClassName="flex"
+            >
               {switchList.map((item) => {
                 const visual = switchVisuals[item.key] || switchVisuals.private;
                 return (
-                  <li key={item.key} className="flex">
-                    <Link
-                      to={getPath(item.routeKey)}
-                      onClick={() => trackEvent('home_switch_click', { component: item.key })}
-                      className="home-focus group flex w-full flex-col rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-home-mint/60 hover:bg-white/[0.14] focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:p-5"
-                    >
-                      <div className="flex items-center gap-3">
-                        <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
-                        <span className="font-display text-lg font-extrabold leading-tight text-white">{item.title}</span>
-                      </div>
-                      <p className="mt-3 text-sm leading-6 text-white/85">{item.description}</p>
-                      {item.example && (
-                        <p className="mt-1.5 text-xs leading-5 text-home-mint-active">{item.example}</p>
-                      )}
-                      <span className="mt-auto pt-5">
-                        <span className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-5 py-2.5 font-display text-sm font-extrabold text-home-midnight shadow-[0_10px_26px_rgba(37,201,144,0.22)] transition group-hover:bg-home-mint-active">
-                          {item.cta}
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
-                        </span>
+                  <Link
+                    key={item.key}
+                    to={getPath(item.routeKey)}
+                    onClick={() => trackEvent('home_switch_click', { component: item.key })}
+                    className="home-focus group flex w-full flex-col rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-home-mint/60 hover:bg-white/[0.14] focus-visible:ring-offset-home-midnight motion-reduce:transform-none sm:p-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
+                      <span className="font-display text-lg font-extrabold leading-tight text-white">{item.title}</span>
+                    </div>
+                    <p className="mt-2 text-base leading-6 text-white/85 sm:mt-3 md:text-sm md:leading-6">{item.description}</p>
+                    {item.example && (
+                      <p className="mt-1.5 text-sm leading-5 text-home-mint-active md:text-xs md:leading-5">{item.example}</p>
+                    )}
+                    <span className="mt-auto pt-3 sm:pt-5">
+                      <span className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-5 py-2.5 font-display text-sm font-extrabold text-home-midnight shadow-[0_10px_26px_rgba(37,201,144,0.22)] transition group-hover:bg-home-mint-active">
+                        {item.cta}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
                       </span>
-                    </Link>
-                  </li>
+                    </span>
+                  </Link>
                 );
               })}
-            </ul>
+            </MobileSwipeRow>
           </motion.nav>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

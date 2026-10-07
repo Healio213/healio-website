@@ -77,7 +77,7 @@ const CompanyHero = () => {
         <div className="relative z-10 w-full max-w-[620px] text-left">
           <motion.p
             {...entrance(0.06)}
-            className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#8ee7ca] sm:text-sm"
+            className="text-sm font-extrabold uppercase tracking-[0.22em] text-[#8ee7ca]"
           >
             {t('hero.eyebrow')}
           </motion.p>
@@ -122,7 +122,7 @@ const CompanyHero = () => {
 
           <motion.div
             {...entrance(0.4)}
-            className="mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/15 pt-5 text-xs font-semibold text-white/[0.68] sm:mt-9 sm:text-sm"
+            className="mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/15 pt-5 text-sm font-semibold text-white/[0.68] sm:mt-9"
           >
             {proof.map((item) => (
               <span key={item}>{item}</span>

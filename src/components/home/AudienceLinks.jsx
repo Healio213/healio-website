@@ -13,20 +13,20 @@ const AudienceLinks = () => {
   const practice = items.find((item) => item.routeKey === 'partner');
 
   return (
-    <section className="home-section bg-[#F5EFE3] text-home-midnight" aria-labelledby="audience-links-title">
-      <div className="healio-container">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <h2 id="audience-links-title" className="max-w-[18ch] font-display text-4xl font-bold leading-[1.04] tracking-[-0.025em] text-home-midnight sm:text-5xl">
+    <section className="home-section bg-[#F5EFE3] py-12 text-home-midnight md:py-24 lg:py-28" aria-labelledby="audience-links-title">
+      <div className="healio-container max-md:px-0">
+        <div className="grid gap-4 md:gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <h2 id="audience-links-title" className="max-w-[18ch] font-display text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-home-midnight sm:text-5xl sm:leading-none">
             {t('audiences.title')}
           </h2>
-          <p className="max-w-xl text-lg leading-8 text-slate-600 lg:justify-self-end">{t('audiences.description')}</p>
+          <p className="max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:justify-self-end">{t('audiences.description')}</p>
         </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-[1.45fr_0.75fr]">
+        <div className="mt-8 grid gap-4 md:mt-12 md:gap-5 lg:grid-cols-[1.45fr_0.75fr]">
           {company && (
             <Link
               to={getPath(company.routeKey)}
-              className="home-focus group relative isolate flex min-h-[380px] overflow-hidden rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_24px_65px_rgba(12,42,33,0.16)] sm:p-11"
+              className="home-focus group relative isolate flex min-h-[300px] overflow-hidden rounded-[2rem] bg-slate-950 p-6 text-white shadow-[0_24px_65px_rgba(12,42,33,0.16)] sm:p-11 md:min-h-[380px]"
             >
               <img
                 src="/images/healio-hero-markenrelief-v1.webp"
@@ -41,13 +41,13 @@ const AudienceLinks = () => {
               <div className="relative flex max-w-[520px] flex-col">
                 <div className="flex items-center gap-3">
                   <FriendlyIcon kind="protection" tone="mint" size="sm" />
-                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-home-mint">{company.label}</p>
+                  <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-home-mint md:text-xs">{company.label}</p>
                 </div>
-                <h3 className="mt-6 max-w-[16ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em] sm:text-4xl">
+                <h3 className="mt-4 max-w-[16ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em] sm:text-4xl md:mt-6">
                   {company.title}
                 </h3>
-                {company.description && <p className="mt-5 max-w-md text-base leading-7 text-slate-200">{company.description}</p>}
-                <span className="mt-auto inline-flex items-center gap-2 pt-9 font-display text-sm font-extrabold">
+                {company.description && <p className="mt-3 max-w-md text-base leading-7 text-slate-200 md:mt-5">{company.description}</p>}
+                <span className="mt-auto inline-flex items-center gap-2 pt-6 font-display text-sm font-extrabold md:pt-9">
                   {company.cta}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </span>
@@ -58,7 +58,7 @@ const AudienceLinks = () => {
           {practice && (
             <Link
               to={getPath(practice.routeKey)}
-              className="home-focus group relative isolate flex min-h-[380px] flex-col overflow-hidden rounded-[2rem] border border-[#CCE8DA] bg-[#E7F7EF] p-8 text-home-midnight shadow-[0_18px_48px_rgba(12,42,33,0.08)] transition duration-200 hover:-translate-y-1 hover:bg-[#DDF3E9] hover:shadow-[0_22px_54px_rgba(12,42,33,0.12)] motion-reduce:transform-none sm:p-10"
+              className="home-focus group relative isolate flex min-h-[300px] flex-col overflow-hidden rounded-[2rem] border border-[#CCE8DA] bg-[#E7F7EF] p-6 text-home-midnight shadow-[0_18px_48px_rgba(12,42,33,0.08)] transition duration-200 hover:-translate-y-1 hover:bg-[#DDF3E9] hover:shadow-[0_22px_54px_rgba(12,42,33,0.12)] motion-reduce:transform-none sm:p-10 md:min-h-[380px]"
             >
               <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border border-emerald-900/10" aria-hidden="true" />
               <div className="absolute -right-8 top-16 h-48 w-48 rounded-full border border-emerald-900/10" aria-hidden="true" />
@@ -76,12 +76,12 @@ const AudienceLinks = () => {
               <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(231,247,239,0.98)_0%,rgba(231,247,239,0.92)_50%,rgba(231,247,239,0.12)_82%)] transition-colors duration-200 group-hover:from-[#DDF3E9]" aria-hidden="true" />
               <div className="relative z-10 flex items-center gap-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-home-mint shadow-[0_0_14px_3px_rgba(37,201,144,0.3)]" aria-hidden="true" />
-                <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-emerald-800">{practice.label}</p>
+                <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-emerald-800 md:text-xs">{practice.label}</p>
               </div>
-              <h3 className="relative z-10 mt-6 max-w-[13ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em]">
+              <h3 className="relative z-10 mt-4 max-w-[13ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.02em] md:mt-6">
                 {practice.title}
               </h3>
-              {practice.description && <p className="relative z-10 mt-5 max-w-[20ch] text-base leading-7 text-home-slate">{practice.description}</p>}
+              {practice.description && <p className="relative z-10 mt-3 max-w-[20ch] text-base leading-7 text-home-slate md:mt-5">{practice.description}</p>}
               <span className="relative z-10 mt-auto inline-flex items-center gap-2 self-start rounded-full bg-white/80 px-4 py-2.5 font-display text-sm font-extrabold shadow-sm backdrop-blur-sm">
                 {practice.cta}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
