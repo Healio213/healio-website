@@ -302,7 +302,7 @@ const DentalHighlightCards = () => {
                         height="480"
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
+                        className="h-full w-full object-cover object-[50%_20%] transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
                       />
                     </span>
                     <span className="flex flex-1 flex-col p-6">

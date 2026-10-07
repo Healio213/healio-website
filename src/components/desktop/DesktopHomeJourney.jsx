@@ -10,7 +10,7 @@ const productScenes = { ambulant: '/images/home-cards/ambulant.webp', zahn: '/im
 
 const SceneImage = ({ src }) => (
   <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
-    <img src={src} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none" />
+    <img src={src} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none" />
   </div>
 );
 

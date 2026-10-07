@@ -445,7 +445,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                         height="480"
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
+                        className="h-full w-full object-cover object-[50%_20%] transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
                       />
                     </span>
                     <span className="block p-4 md:p-5">
@@ -817,7 +817,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       height="540"
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+                      className="h-full w-full object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
                     />
                   </div>
                   <div className="p-5 md:p-6">

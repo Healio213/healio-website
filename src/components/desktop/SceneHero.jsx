@@ -5,7 +5,9 @@ import useDesktopLayout from '@/hooks/useDesktopLayout';
 // Healio-Figurenstil füllt die Bühne, im Bild stehen nur Überschrift und Knopf.
 // Erklärung, Angebot und Hinweise kommen als `children` direkt darunter.
 // Die Szenen sind links dunkel (#071726), deshalb beginnt das Bild erst nach
-// dem ersten Siebtel und läuft über einen Verlauf in den Grund.
+// dem ersten Siebtel und läuft über einen Verlauf in den Grund. Oben beginnt
+// es unter der Navigation und ist nach oben ausgerichtet, damit auf großen
+// Bildschirmen keine Köpfe abgeschnitten werden (Frank 07.10.2026).
 export const sceneHeroImages = {
   home: '/images/hero-desktop/start.webp',
   ambulant: '/images/hero-desktop/ambulant.webp',
@@ -54,13 +56,13 @@ const SceneHero = ({ surface, image, headingId, heading, actions, children, clas
           aria-hidden="true"
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-y-0 right-0 -z-20 h-full w-[86%] object-cover object-[80%_50%]"
+          className="absolute bottom-0 right-0 top-20 -z-20 h-[calc(100%-5rem)] w-[86%] object-cover object-[80%_22%]"
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#071726_0%,#071726_14%,rgba(7,23,38,0.78)_30%,rgba(7,23,38,0.32)_52%,rgba(7,23,38,0)_74%)]" aria-hidden="true" />
-        <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#071726]/75 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-20 -z-10 h-28 bg-gradient-to-b from-[#071726] to-transparent" aria-hidden="true" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-gradient-to-t from-[#071726] to-transparent" aria-hidden="true" />
 
-        <div className="mx-auto flex min-h-[min(100svh,54rem)] w-full max-w-7xl flex-col justify-end px-8 pb-20 pt-36">
+        <div className="mx-auto flex min-h-[min(100svh,54rem)] w-full max-w-7xl flex-col justify-end px-8 pb-20 pt-36 2xl:min-h-[min(100svh,62rem)]">
           <div className="max-w-[44rem]">
             <Heading
               id={headingId}
