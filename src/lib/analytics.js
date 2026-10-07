@@ -71,6 +71,47 @@ export const isAnalyticsExcludedRoute = (location = isBrowser() ? window.locatio
 };
 const isAnalyticsBlocked = () => analyticsRouteBlocked || isAnalyticsExcludedRoute();
 
+// Herkunft der Einstiegsseite: Ohne sie zaehlt GA4 Werbung und Suche als
+// "direkt". Weitergegeben werden nur die eigenen Kampagnen-Kennzeichen (utm_*)
+// im sicheren Format und vom Verweis nur die fremde Domain. Klick-Kennungen
+// wie gclid gehen nie an GA4, die gibt nur src/lib/google-ads.js mit
+// Marketing-Zustimmung weiter.
+const CAMPAIGN_PARAM_KEYS = Object.freeze(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']);
+const SAFE_CAMPAIGN_VALUE = /^[a-z0-9][a-z0-9_.-]{0,99}$/i;
+
+const readLandingCampaign = () => {
+  if (!isBrowser()) return '';
+  try {
+    const source = new URLSearchParams(window.location.search || '');
+    const safe = new URLSearchParams();
+    CAMPAIGN_PARAM_KEYS.forEach((key) => {
+      const value = (source.get(key) || '').trim();
+      if (SAFE_CAMPAIGN_VALUE.test(value) && !SENSITIVE_PATH_VALUE.test(value)) safe.set(key, value);
+    });
+    return safe.toString();
+  } catch {
+    return '';
+  }
+};
+
+const readExternalReferrerOrigin = () => {
+  if (!isBrowser() || !document.referrer) return '';
+  try {
+    const referrer = new URL(document.referrer);
+    if (referrer.protocol !== 'https:' && referrer.protocol !== 'http:') return '';
+    if (referrer.origin === window.location.origin) return '';
+    return `${referrer.origin}/`;
+  } catch {
+    return '';
+  }
+};
+
+// Beim Laden der App festhalten, bevor Navigation die Adresse aendert.
+const landingContext = isBrowser()
+  ? Object.freeze({ query: readLandingCampaign(), referrer: readExternalReferrerOrigin() })
+  : Object.freeze({ query: '', referrer: '' });
+let landingAttributionSent = false;
+
 const ensureDataLayer = () => {
   if (!isBrowser()) return null;
   window.dataLayer = Array.isArray(window.dataLayer) ? window.dataLayer : [];
@@ -185,11 +226,19 @@ export const sanitizeAnalyticsParams = (params = {}) => {
   }, {});
 };
 
-const getSafePageContext = (pageUrl) => ({
-  page_location: sanitizePageUrl(pageUrl),
-  page_path: sanitizePagePath(pageUrl),
-  page_referrer: '',
-});
+const getSafePageContext = (pageUrl, { landing = false } = {}) => {
+  const context = {
+    page_location: sanitizePageUrl(pageUrl),
+    page_path: sanitizePagePath(pageUrl),
+    page_referrer: '',
+  };
+  // Nur der erste Seitenaufruf traegt die Herkunft, danach bleibt sie leer.
+  if (landing && context.page_location) {
+    if (landingContext.query) context.page_location = `${context.page_location}?${landingContext.query}`;
+    context.page_referrer = landingContext.referrer;
+  }
+  return context;
+};
 
 export const loadGoogleAnalytics = () => {
   if (!isBrowser() || isAnalyticsBlocked() || !hasConsent('analytics')) return Promise.resolve(false);
@@ -238,7 +287,7 @@ const grantAnalyticsConsent = () => {
   if (!gaConfigured) {
     queueGtagCommand('js', new Date());
     queueGtagCommand('config', GA4_MEASUREMENT_ID, {
-      ...getSafePageContext(),
+      ...getSafePageContext(undefined, { landing: !landingAttributionSent }),
       allow_ad_personalization_signals: false,
       allow_google_signals: false,
       send_page_view: false,
@@ -294,7 +343,11 @@ export const trackPageView = (pageUrl) => {
   if (!isBrowser() || isAnalyticsBlocked() || !hasConsent('analytics')) return false;
 
   loadGoogleAnalytics().catch(() => {});
-  queueGtagCommand('event', 'page_view', { ...getSafePageContext(pageUrl), send_to: GA4_MEASUREMENT_ID });
+  queueGtagCommand('event', 'page_view', {
+    ...getSafePageContext(pageUrl, { landing: !landingAttributionSent }),
+    send_to: GA4_MEASUREMENT_ID,
+  });
+  landingAttributionSent = true;
   return true;
 };
 

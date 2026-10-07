@@ -233,6 +233,16 @@ expect(cookieRenderer?.type === 'ConditionalExpression'
 expect(/settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Auch der Einstellungsdialog muss im Zahn-Check ausgeblendet bleiben.');
 expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\['\/zahn', '\/en\/dental', '\/schwangerschaft'\]\)/.test(analytics), 'Zahn-Check- und Schwangerschafts-Routen müssen in der Analytics-Sperrliste stehen.');
 expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sperre muss das GA4-Deaktivierungsflag setzen.');
+// GA4 erhaelt von der Einstiegsadresse nur utm_* und vom Verweis nur die fremde Domain.
+expect(
+  /const CAMPAIGN_PARAM_KEYS = Object\.freeze\(\['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'\]\);/.test(analytics)
+    && /SAFE_CAMPAIGN_VALUE\.test\(value\) && !SENSITIVE_PATH_VALUE\.test\(value\)/.test(analytics)
+    && /return `\$\{referrer\.origin\}\/`;/.test(analytics)
+    && /referrer\.origin === window\.location\.origin\) return '';/.test(analytics),
+  'GA4 darf von der Einstiegsadresse nur utm_* im sicheren Format und vom Verweis nur die fremde Domain bekommen.',
+);
+expect(!/gclid|gbraid|wbraid|fbclid/.test(analytics.replace(/\/\/[^\n]*/g, '')), 'Klick-Kennungen dürfen nie an GA4 gehen.');
+expect(/landing: !landingAttributionSent/.test(analytics) && /landingAttributionSent = true;/.test(analytics), 'Die Herkunft darf nur am ersten Seitenaufruf hängen.');
 expect(/requestNitaConsent\('delayed_prompt'\)/.test(miaPrompt), 'Der bestehende Nita-Prompt muss seinen freigegebenen Einstieg an Nita weitergeben.');
 expect(/healio-nita-teaser-active/.test(miaPrompt), 'Nita-Teaser und globaler Launcher müssen sich gegenseitig ausschließen.');
 expect(/healio-mobile-menu-active/.test(header), 'Das mobile Menü muss externe Overlays während der Navigation ausblenden.');
