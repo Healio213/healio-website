@@ -31,7 +31,7 @@ import { BRILLE_QUESTION } from '@/components/sections/ambulant/ambulantBrilleFr
 const COPY = {
   de: {
     video: {
-      eyebrow: 'Das Konzept in 3 Minuten',
+      eyebrow: 'Das Konzept in gut einer Minute',
       title: 'So funktioniert dein Gesundheitsbudget.',
       label: 'Gesundheitsbudget einfach erklärt',
     },
@@ -135,7 +135,7 @@ const COPY = {
       ],
       trustTitle: 'Du entscheidest. Wir erklären.',
       trustText: 'Healio ist registrierter Versicherungsmakler. Wir zeigen Leistungen, Grenzen und Kosten vor deiner Entscheidung und bleiben danach erreichbar.',
-      videoLabel: 'In 3 Minuten ansehen, wie das Gesundheitsbudget funktioniert',
+      videoLabel: 'In gut einer Minute ansehen, wie das Gesundheitsbudget funktioniert',
       switchEyebrow: 'Kassenwechsel ohne Umwege',
       switchTitle: 'Der Wechsel ist einfacher, als du denkst.',
       switchText: 'Zusatzschutz und Krankenkasse bleiben zwei getrennte Entscheidungen. KassenBoost zeigt zuerst, ob sich ein Wechsel bei Beitrag, erreichbarem Bonus und Leistungen für dich wirklich lohnt.',
@@ -392,8 +392,8 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
       {language === 'de' && (
         <ExplainerVideoCard
           id="erklaervideo"
-          videoSrc="/erklaervideo-ambulant.mp4"
-          poster="/images/erklaervideo-ambulant-poster.jpg"
+          videoSrc="/erklaervideo-ambulant-v6.mp4"
+          poster="/images/erklaervideo-ambulant-v6-poster.jpg"
           eyebrow={copy.video.eyebrow}
           title={copy.video.title}
           ariaLabel={copy.video.label}
