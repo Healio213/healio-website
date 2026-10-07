@@ -3,16 +3,19 @@ const content = {
     home: {
       titleLead: 'Dein Kassenbonus',
       titleAccent: 'ist zu wertvoll, um ihn ungenutzt zu lassen.',
-      description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Osteopathie, Brille und Vorsorge. Dein Kassenbonus kann den Beitrag für ambulanten Zusatzschutz teilweise oder vollständig ausgleichen.',
+      description: 'Dein Kassenbonus kann den Beitrag für deinen Zusatzschutz ganz oder teilweise ausgleichen, ob stationär, Zahn oder ambulant. Ambulant sind bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren möglich, für Heilpraktiker, Osteopathie, Brille und Vorsorge.',
       condition: 'Dein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.',
       cta: 'KassenBoost Potenzial prüfen',
       hint: 'Beitrag, Bonus und Leistungen getrennt vergleichen. Ein Kassenwechsel bleibt deine Entscheidung.',
       panelTitle: 'Die Rechnung beginnt bei deiner Kasse.',
-      panelText: 'Was dein Zusatzschutz nach Bonusausgleich tatsächlich kostet.',
+      panelText: 'Beispielrechnung: was dein Zusatzschutz nach Bonusausgleich tatsächlich kostet.',
+      // Beitrag: SDK Ambulant 100 (AP1), Altersgruppe 31 bis 40, 39,19 EUR im Monat
+      // (src/data/sdkAmbulantBeitraege.js). Bonus: unterer Wert der üblichen
+      // 400 bis 700 EUR bei der IKK classic, laut Satzung bis zu 810 EUR.
       calculation: [
-        { sign: '', label: 'Jahresbeitrag des Zusatzschutzes', detail: 'Den Beitrag zahlst du zunächst selbst.' },
-        { sign: '−', label: 'Erreichbarer Kassenbonus', detail: 'Bei erfüllten Bedingungen und anerkannten Nachweisen.' },
-        { sign: '=', label: 'Dein verbleibender Jahresbeitrag', detail: 'Der Ausgleich erfolgt nachträglich, bis zur Höhe der anrechenbaren Kosten.' },
+        { sign: '', label: 'Jahresbeitrag Zusatzversicherung', value: '470,28 EUR', detail: 'Beispiel: 35 Jahre, SDK Ambulant 100 (AP1) mit 39,19 EUR im Monat. Den Beitrag zahlst du zunächst selbst.' },
+        { sign: '−', label: 'Erreichter Kassenbonus', value: '400,00 EUR', detail: 'Beispielwert IKK classic. Üblich sind 400 bis 700 EUR im Jahr, laut Satzung bis zu 810 EUR, bei erfüllten Bedingungen und anerkannten Nachweisen.' },
+        { sign: '=', label: 'Dein verbleibender Jahresbeitrag', value: '70,28 EUR', detail: 'Rund 5,86 EUR im Monat. Der Ausgleich erfolgt nachträglich, bis zur Höhe der anrechenbaren Kosten.' },
       ],
       panelNote: 'Tarifbudget für versicherte Leistungen. Kassenbonus zum Beitragsausgleich. Maßgeblich sind die jeweiligen Tarif- und Bonusbedingungen.',
     },
@@ -79,16 +82,16 @@ const content = {
     home: {
       titleLead: 'Your health fund bonus',
       titleAccent: 'is too valuable to leave unused.',
-      description: 'Up to EUR 3,000 in health benefits over 2 years for alternative practitioners, osteopathy, glasses and preventive care. Your statutory health fund’s bonus may offset some or all of the eligible outpatient premium.',
+      description: 'Your statutory health fund’s bonus may offset some or all of the premium for your supplementary cover, whether inpatient, dental or outpatient. Outpatient cover offers up to EUR 3,000 in health benefits over 2 years for alternative practitioners, osteopathy, glasses and preventive care.',
       condition: 'Your fund, activities, plan and eligible expenses determine the result. EUR 3,000 is the sum of separate plan limits, not a cash balance.',
       cta: 'Check your KassenBoost potential',
       hint: 'Compare contributions, bonuses and benefits separately. Changing health funds remains your decision.',
       panelTitle: 'Start the calculation with your health fund.',
-      panelText: 'What your supplementary cover actually costs after the bonus offset.',
+      panelText: 'Example: what your supplementary cover actually costs after the bonus offset.',
       calculation: [
-        { sign: '', label: 'Annual supplementary premium', detail: 'You pay the premium first.' },
-        { sign: '−', label: 'Bonus you can qualify for', detail: 'Subject to the conditions and accepted evidence.' },
-        { sign: '=', label: 'Your remaining annual premium', detail: 'The offset is paid later, up to the eligible expenses.' },
+        { sign: '', label: 'Annual supplementary premium', value: 'EUR 470.28', detail: 'Example: age 35, SDK Ambulant 100 (AP1) at EUR 39.19 per month. You pay the premium first.' },
+        { sign: '−', label: 'Bonus achieved', value: 'EUR 400.00', detail: 'Example value IKK classic. 400 to 700 EUR per year is typical, up to EUR 810 under the fund’s statutes, subject to the conditions and accepted evidence.' },
+        { sign: '=', label: 'Your remaining annual premium', value: 'EUR 70.28', detail: 'About EUR 5.86 per month. The offset is paid later, up to the eligible expenses.' },
       ],
       panelNote: 'Plan benefits reimburse insured services. The statutory bonus may offset your premium. The respective plan and bonus conditions apply.',
     },

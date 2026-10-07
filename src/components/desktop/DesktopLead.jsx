@@ -23,7 +23,12 @@ const OfferList = ({ copy, surface }) => (
           <li key={row.label} className="grid grid-cols-[1.5rem_1fr] gap-3 py-4">
             <span className="font-display text-2xl font-bold leading-6 text-[#5ee0b1]" aria-hidden="true">{row.sign}</span>
             <div>
-              <h3 className="font-display text-lg font-bold leading-6">{row.label}</h3>
+              <div className="flex items-baseline justify-between gap-6">
+                <h3 className="font-display text-lg font-bold leading-6">{row.label}</h3>
+                {row.value && (
+                  <span className={`shrink-0 font-display font-extrabold tabular-nums ${row.sign === '=' ? 'text-2xl text-[#5ee0b1]' : 'text-lg text-white'}`}>{row.value}</span>
+                )}
+              </div>
               <p className="mt-1 text-sm leading-6 text-[#c9d8de]">{row.detail}</p>
             </div>
           </li>
