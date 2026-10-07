@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, ArrowDown, ArrowRight, ChevronDown, Info, Shield } from 'lucide-react';
+import { Check, ArrowDown, ArrowRight, ChevronDown, Download, Info, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -23,6 +23,15 @@ import { requestNitaConsent } from '@/components/NitaConsentWidget';
 const TARIFF_CARDS = [
   { key: 'ambulant', kind: 'pregnancy', tone: 'coral' },
   { key: 'stationaer', kind: 'hospital', tone: 'sky' },
+];
+const DOWNLOAD_GROUPS = [
+  { key: 'practice', kind: 'broker', documents: [
+    { key: 'invoice', href: '/downloads/hebammen-rechnungsmuster.pdf' },
+    { key: 'agreement', href: '/downloads/hebammen-leistungs-und-honorarvereinbarung.pdf' },
+  ] },
+  { key: 'family', kind: 'family', documents: [
+    { key: 'checklist', href: '/downloads/hebammen-familien-checkliste.pdf' },
+  ] },
 ];
 
 const HebammenPage = () => {
@@ -102,7 +111,7 @@ const HebammenPage = () => {
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
                 <HighlightText text={t('hero.title')} className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent" />
               </h1>
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8">
+              <p className="text-base sm:text-xl text-white/90 leading-relaxed mb-6 sm:mb-8">
                 {t('hero.subtitle')}
               </p>
               <div className="flex flex-col items-start gap-3 sm:flex-row">
@@ -210,22 +219,71 @@ const HebammenPage = () => {
           </div>
         </section>
 
-        {/* MORAL */}
-        <section className="order-7 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+        {/* Konkrete Kostenfälle und Arbeitshilfen statt der früheren Moralfläche.
+            Bestehende Wischreihen und die mobile Abschnittsreihenfolge bleiben erhalten. */}
+        <section id="hebammen-beispiele" className="order-7 scroll-mt-24 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900" aria-labelledby="hebammen-beispiele-heading">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-8">
-                {t('moral.title')}
-              </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
-                {t('moral.text1')}
-              </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
-                {t('moral.text2')}
-              </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-base sm:text-lg font-semibold text-emerald-300 leading-relaxed sm:leading-relaxed">
-                {t('moral.text3')}
-              </motion.p>
+            <div className="max-w-5xl mx-auto">
+              <h2 id="hebammen-beispiele-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{t('examples.title')}</h2>
+              <p className="mt-3 max-w-3xl text-base sm:text-lg leading-relaxed text-white/85">{t('examples.lead')}</p>
+              <MobileSwipeRow label={t('examples.title')} className="mt-6" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
+                <article className="h-full rounded-2xl bg-white p-5 text-slate-900 sm:p-7" data-hebammen-case="rufbereitschaft">
+                  <FriendlyIcon kind="calendar" tone="mint" size="sm" />
+                  <p className="mt-4 text-sm font-bold uppercase tracking-wider text-emerald-700">{t('examples.onCall.eyebrow')}</p>
+                  <h3 className="mt-2 text-xl font-bold">{t('examples.onCall.title')}</h3>
+                  <dl className="mt-5 grid grid-cols-3 gap-2">
+                    {t('examples.onCall.amounts', { returnObjects: true }).map((item) => (
+                      <div key={item.label} className="min-w-0 rounded-xl bg-emerald-50 px-2 py-3">
+                        <dt className="text-xs leading-5 text-slate-600">{item.label}</dt>
+                        <dd className="mt-1 text-lg font-extrabold text-emerald-900">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="mt-4 text-base leading-relaxed">{t('examples.onCall.text')}</p>
+                  <p className="mt-4 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600">{t('examples.onCall.note')}</p>
+                </article>
+                <article className="h-full rounded-2xl bg-white p-5 text-slate-900 sm:p-7" data-hebammen-case="hausbesuch">
+                  <FriendlyIcon kind="support" tone="sky" size="sm" />
+                  <p className="mt-4 text-sm font-bold uppercase tracking-wider text-sky-700">{t('examples.homeVisit.eyebrow')}</p>
+                  <h3 className="mt-2 text-xl font-bold">{t('examples.homeVisit.title')}</h3>
+                  <p className="mt-4 text-base leading-relaxed">{t('examples.homeVisit.text')}</p>
+                  <ol className="mt-4 space-y-3">
+                    {t('examples.homeVisit.steps', { returnObjects: true }).map((item, index) => (
+                      <li key={item} className="flex gap-3 text-base leading-relaxed">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-50 text-sm font-bold text-sky-800">{index + 1}</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="mt-4 border-t border-slate-200 pt-4 text-sm leading-relaxed text-slate-600">{t('examples.homeVisit.note')}</p>
+                </article>
+              </MobileSwipeRow>
+
+              <aside className="mt-6 rounded-2xl border border-amber-200/50 bg-amber-50 p-5 text-slate-900 sm:p-6" aria-labelledby="hebammen-fruehzeitig-heading">
+                <h3 id="hebammen-fruehzeitig-heading" className="flex items-start gap-3 text-lg font-bold"><Info className="mt-1 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />{t('downloads.waitTitle')}</h3>
+                <p className="mt-3 text-base leading-relaxed">{t('downloads.waitText')}</p>
+              </aside>
+              <div id="hebammen-materialien" className="mt-8 scroll-mt-24" aria-labelledby="hebammen-materialien-heading">
+                <h3 id="hebammen-materialien-heading" className="text-2xl font-bold text-white">{t('downloads.title')}</h3>
+                <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/85">{t('downloads.lead')}</p>
+                <MobileSwipeRow label={t('downloads.title')} className="mt-5" desktopClassName="md:grid md:grid-cols-2 md:gap-6" mobileItemWidth="w-[84vw] max-w-[22rem]">
+                  {DOWNLOAD_GROUPS.map((group) => (
+                    <article key={group.key} className="h-full rounded-2xl border border-white/20 bg-white/10 p-5 text-white sm:p-7">
+                      <FriendlyIcon kind={group.kind} tone="mint" size="sm" />
+                      <h4 className="mt-4 text-xl font-bold">{t(`downloads.${group.key}.title`)}</h4>
+                      <p className="mt-3 text-base leading-relaxed text-white/85">{t(`downloads.${group.key}.text`)}</p>
+                      <div className="mt-5 space-y-3">
+                        {group.documents.map((document) => (
+                          <a key={document.key} href={document.href} download className="inline-flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-white/30 px-4 py-3 text-left text-base font-semibold transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300" data-hebammen-download={document.key}>
+                            <span>{t(`downloads.documents.${document.key}`)}</span><Download className="h-5 w-5 shrink-0" aria-hidden="true" />
+                          </a>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </MobileSwipeRow>
+                <p className="mt-4 text-sm leading-relaxed text-white/75">{t('downloads.note')}</p>
+              </div>
             </div>
           </div>
         </section>
@@ -538,7 +596,7 @@ const HebammenPage = () => {
           </div>
         </section>
 
-        {/* RECHTLICHE SICHERHEIT */}
+        {/* Klare Zuständigkeiten; keine pauschale Rechts- oder Leistungszusage. */}
         <section className="order-11 md:order-none py-10 sm:py-20 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
@@ -552,21 +610,29 @@ const HebammenPage = () => {
                 </p>
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="bg-slate-50 rounded-2xl p-5 sm:p-8 border border-gray-100 mb-4 sm:mb-6"
-              >
-                <p className="text-slate-700 leading-relaxed text-base sm:text-lg sm:leading-relaxed">
-                  {t('legal.text')}
-                </p>
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 sm:p-6 text-center"
-              >
-                <p className="text-slate-700 leading-relaxed font-medium">
-                  {t('legal.summary')}
-                </p>
-              </motion.div>
+              <MobileSwipeRow label={t('legal.title')} desktopClassName="md:grid md:grid-cols-3 md:gap-4" mobileItemWidth="w-[84vw] max-w-[22rem]">
+                {t('roles', { returnObjects: true }).map((role, index) => (
+                  <article key={role.title} className="h-full rounded-xl border border-emerald-100 bg-white p-5">
+                    <p className="text-sm font-bold text-emerald-700">0{index + 1}</p>
+                    <h3 className="mt-2 text-lg font-bold text-slate-900">{role.title}</h3>
+                    <p className="mt-3 text-base leading-relaxed text-slate-700">{role.text}</p>
+                  </article>
+                ))}
+              </MobileSwipeRow>
+              <p className="mt-5 text-sm leading-relaxed text-slate-600">{t('legal.summary')}</p>
+              <div className="mt-8" aria-labelledby="hebammen-faq-heading">
+                <h3 id="hebammen-faq-heading" className="text-2xl font-bold text-slate-900">{t('faq.title')}</h3>
+                <div className="mt-4 space-y-3">
+                  {t('faq.items', { returnObjects: true }).map((item) => (
+                    <details key={item.question} className="group rounded-xl border border-slate-200 bg-white">
+                      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-4 text-base font-bold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600 [&::-webkit-details-marker]:hidden">
+                        <span>{item.question}</span><ChevronDown className="h-5 w-5 shrink-0 text-emerald-700 transition-transform group-open:rotate-180" aria-hidden="true" />
+                      </summary>
+                      <p className="border-t border-slate-100 p-4 text-base leading-relaxed text-slate-700">{item.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

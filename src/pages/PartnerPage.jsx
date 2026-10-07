@@ -111,17 +111,18 @@ const PartnerPage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
+                className="flex flex-col lg:block"
               >
-                <p className="inline-flex mb-5 rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
+                <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
                   {t('hero.badge')}
                 </p>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                <h1 className="order-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] lg:order-none">
                   <HighlightText text={t('hero.title')} />
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
+                <p className="order-3 mt-6 text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto lg:order-none lg:mt-0">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+                <div className="order-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:order-none">
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
@@ -139,11 +140,11 @@ const PartnerPage = () => {
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-                <p className="mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
+                <p className="order-4 mt-4 flex items-center justify-center gap-2 text-sm text-white/80 lg:order-none">
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
-                <p className="mt-3 text-sm text-white/75">
+                <p className="order-5 mt-3 text-sm text-white/75 lg:order-none">
                   {t('leitfadenHint.lead')}{' '}
                   <Link
                     to="/partner/leitfaden"

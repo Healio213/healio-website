@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import DesktopLead from '@/components/desktop/DesktopLead';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
 
 const entranceEase = [0.16, 1, 0.3, 1];
@@ -18,8 +20,9 @@ const switchVisuals = {
 
 const HomeHero = () => {
   const { t, i18n } = useTranslation('home');
-  const { getPath } = useLanguage();
+  const { lang, getPath } = useLanguage();
   const reducedMotion = useReducedMotion();
+  const HeroHeading = useDesktopLayout() ? motion.h2 : motion.h1;
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 900], [0, 72]);
@@ -59,9 +62,10 @@ const HomeHero = () => {
   // Experiment Handy-Conversion 10/2026: Unter sm etwas dichter (Kopfabstand, Zeilenhöhe, Abstände der Einstiegskarte),
   // damit der Knopf der ersten Karte auch bei 360 x 740 im ersten Bild liegt. Ab sm unverändert.
   return (
-    <section
-      ref={heroRef}
-      className="relative isolate flex min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
+    <div ref={heroRef}>
+      <DesktopLead surface="home" language={lang} />
+      <section
+      className="relative isolate flex lg:hidden min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
       aria-labelledby="home-hero-heading"
     >
       <picture className="absolute inset-0 -z-30 overflow-hidden">
@@ -91,8 +95,8 @@ const HomeHero = () => {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(31,72,121,0.22),transparent_44%)]" />
 
       <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-6 sm:px-6 md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
-        <div className="relative z-20 w-full max-w-[1060px]">
-          <motion.h1
+        <div className="relative z-20 flex w-full max-w-[1060px] flex-col">
+          <HeroHeading
             {...entrance(0.08)}
             id="home-hero-heading"
             lang={i18n.resolvedLanguage || i18n.language}
@@ -107,13 +111,13 @@ const HomeHero = () => {
                 <path d="M8 17 C 118 7, 224 23, 336 13 S 455 8, 512 12" fill="none" stroke="#25C990" strokeWidth="5.5" strokeLinecap="round" />
               </svg>
             </span>
-          </motion.h1>
+          </HeroHeading>
 
-          <motion.p {...entrance(0.17)} className="mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
+          <motion.p {...entrance(0.17)} className="order-2 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8 md:order-1">
             {t('hero.description')}
           </motion.p>
 
-          <motion.nav {...entrance(0.24)} className="mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
+          <motion.nav {...entrance(0.24)} className="order-1 mt-5 sm:mt-9 md:order-2" aria-label={t('hero.switchLabel')}>
             <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
             {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
             <MobileSwipeRow
@@ -152,7 +156,8 @@ const HomeHero = () => {
           </motion.nav>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

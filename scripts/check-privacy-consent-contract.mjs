@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { runInNewContext } from 'node:vm';
+import { parse } from '@babel/parser';
+import traverseModule from '@babel/traverse';
 import { buildNitaContext, buildNitaFirstMessage, sanitizeNitaEntryPoint } from '../src/lib/nitaContext.js';
 
 const root = process.cwd();
@@ -159,7 +162,22 @@ expect(/credentials:\s*'omit'[\s\S]*?referrerPolicy:\s*'no-referrer'[\s\S]*?body
 expect(!/body:\s*JSON\.stringify\(\{\s*sdp:/.test(nitaWidget), 'Nita darf keine Zusatzdaten oder Browseranweisungen an den Broker senden.');
 expect(!/elevenlabs-convai\s*\{\s*display:\s*none\s*!important/.test(companyHero), 'Die Unternehmensseite darf Nita nicht global ausblenden.');
 expect(!/html\.legal-information-active elevenlabs-convai/.test(indexCss), 'Rechtsseiten dürfen das globale Nita-Widget nicht ausblenden.');
-expect(/top-\[5\.25rem\][\s\S]*md:bottom-3[\s\S]*md:top-auto/.test(consentManager), 'Das Erstbesucher-Datenschutzfeld muss mobil kompakt unter dem Header statt in der Daumenzone liegen.');
+const traverse = traverseModule.default || traverseModule;
+const consentBannerClasses = [];
+traverse(parse(consentManager, { sourceType: 'module', plugins: ['jsx'] }), {
+  JSXOpeningElement({ node }) {
+    if (node.name.type === 'JSXIdentifier' && node.name.name === 'section') {
+      const className = node.attributes.find((attr) => attr.type === 'JSXAttribute' && attr.name.name === 'className')?.value;
+      const classes = new Set(className?.type === 'StringLiteral' ? className.value.split(/\s+/) : []);
+      if (classes.has('healio-consent-surface')) consentBannerClasses.push(classes);
+    }
+  },
+});
+expect(consentBannerClasses.length === 1 && [
+  'fixed', 'inset-x-3', 'bottom-[max(0.75rem,env(safe-area-inset-bottom))]', 'md:bottom-3', 'md:top-auto',
+].every((token) => consentBannerClasses[0]?.has(token))
+  && ![...(consentBannerClasses[0] || [])].some((token) => token.startsWith('top-')),
+'Das Erstbesucher-Datenschutzfeld muss mobil kompakt unten mit Safe-Area-Abstand liegen; ab md bleibt die bisherige Position erhalten.');
 expect(!/healio-consent-settings-trigger/.test(consentManager), 'Nach der Auswahl darf kein schwebender Datenschutz-Schalter stehen bleiben.');
 expect(/openConsentSettings\(\)/.test(footer), 'Die Datenschutz-Auswahl muss dezent über den Footer erneut erreichbar bleiben.');
 expect(/const language = pathname === '\/en' \|\| pathname\.startsWith\('\/en\/'\) \? 'en' : 'de'/.test(nitaWidget), 'Sprachpanel und Nita-Kontext müssen dieselbe strikte /en-Routengrenze verwenden.');
@@ -169,7 +187,49 @@ expect(/isAmbulant\s*&&\s*showSolidHeader\s*&&\s*ambulantCtaReady/.test(header),
 expect(/ambulant-header-mobile/.test(header), 'Die Ambulant-Seite braucht mobil einen Tarif-CTA im Header.');
 expect(/fixed bottom-6 right-6[\s\S]*hidden[\s\S]*md:block/.test(stickyCalculator), 'Der schwebende Tarif-CTA darf mobil nicht mehr in der Daumenzone liegen.');
 expect(/showBanner && !settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Das initiale Consent-Banner darf im Zahn-Check nicht erscheinen.');
-expect(/!isDentalCheckRoute && \(/.test(footer), 'Auch der Footer-Link zu Cookie-Einstellungen muss im Zahn-Check ausgeblendet bleiben.');
+// Werte die tatsächlichen Footer-Listen für beide Sprachen und Routen aus.
+// Die Ausblendung darf weder von JSX-Schreibweise noch von Klassenreihenfolge abhängen.
+const footerBindings = new Map();
+const footerConsentCalls = [];
+traverse(parse(footer, { sourceType: 'module', plugins: ['jsx'] }), {
+  VariableDeclarator({ node }) {
+    if (node.id.type === 'Identifier') footerBindings.set(node.id.name, node.init);
+  },
+  CallExpression({ node }) {
+    if (node.callee.type === 'Identifier' && node.callee.name === 'openConsentSettings') footerConsentCalls.push(node);
+  },
+});
+const footerDataNames = ['isDentalCheckRoute', 'groups', 'pflichtItems', 'mobileGroups'];
+const footerDataReady = footerDataNames.every((name) => footerBindings.has(name));
+expect(footerDataReady, 'Der Footer muss seine Desktop- und Mobil-Links aus denselben gefilterten Daten ableiten.');
+if (footerDataReady) {
+  const footerDataCode = footerDataNames.map((name) => {
+    const node = footerBindings.get(name);
+    return `const ${name} = (${footer.slice(node.start, node.end)});`;
+  }).join('\n');
+  for (const pathname of ['/zahn', '/en/dental', '/', '/en', '/ambulant', '/en/outpatient']) {
+    const data = runInNewContext(`${footerDataCode}\n({
+      desktop: mobileGroups.flatMap((group) => group.items),
+      mobile: [...mobileGroups.flatMap((group) => group.mobileItems), ...pflichtItems],
+    })`, {
+      pathname, lang: pathname.startsWith('/en') ? 'en' : 'de',
+      t: (key) => key, getPath: (key) => `/${key}`,
+    }, { timeout: 1000 });
+    for (const [layout, items] of Object.entries(data)) {
+      const expectedCookies = pathname === '/zahn' || pathname === '/en/dental' ? 0 : 1;
+      expect(items.filter((item) => item.type === 'cookie').length === expectedCookies,
+        `${pathname} (${layout}): Cookie-Einstellungen müssen im Zahn-Check fehlen und auf anderen Routen erreichbar bleiben.`);
+    }
+  }
+}
+const cookieRenderer = footerBindings.get('renderItem')?.body;
+expect(cookieRenderer?.type === 'ConditionalExpression'
+  && runInNewContext(footer.slice(cookieRenderer.test.start, cookieRenderer.test.end), { item: { type: 'cookie' } }) === true
+  && runInNewContext(footer.slice(cookieRenderer.test.start, cookieRenderer.test.end), { item: { type: 'link' } }) === false
+  && footerConsentCalls.length === 1
+  && footerConsentCalls[0].start >= cookieRenderer.consequent.start
+  && footerConsentCalls[0].end <= cookieRenderer.consequent.end,
+'Die Cookie-Einstellungen dürfen nur vom gefilterten Cookie-Dateneintrag aus aufrufbar sein.');
 expect(/settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Auch der Einstellungsdialog muss im Zahn-Check ausgeblendet bleiben.');
 expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\['\/zahn', '\/en\/dental', '\/schwangerschaft'\]\)/.test(analytics), 'Zahn-Check- und Schwangerschafts-Routen müssen in der Analytics-Sperrliste stehen.');
 expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sperre muss das GA4-Deaktivierungsflag setzen.');

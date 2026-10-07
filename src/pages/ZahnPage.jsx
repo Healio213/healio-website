@@ -7,6 +7,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import DesktopLead from '@/components/desktop/DesktopLead';
 import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
 import DentalVideoSection from '@/components/sections/dental/DentalVideoSection';
 import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCards';
@@ -25,6 +26,7 @@ import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechse
 import SalesAiAssist from '@/components/sections/shared/SalesAiAssist';
 import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 
@@ -84,6 +86,7 @@ const ZahnNitaPill = () => {
 };
 
 const ZahnPage = () => {
+  const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   const { lang, getPath } = useLanguage();
   const { t: tSeo } = useTranslation('seo');
   const { t: tZahn } = useTranslation('zahn');
@@ -108,13 +111,14 @@ const ZahnPage = () => {
           Erklärvideo, dann der Ablauf. Nur unter md per CSS-Reihenfolge, am
           Desktop bleibt die bisherige Abfolge. */}
       <article className="flex flex-col overflow-hidden bg-white text-[#07111f] md:block">
+        <DesktopLead surface="zahn" language={lang} />
         {/* Hero wie auf /stationaer (Frank 30.09.2026: Foto am Tresen "geht gar
             nicht", lieber gleich zeigen, was man bekommt). Links der Text, rechts
             vier typische Zahn-Situationen mit je einer geprüften Aussage aus den
             Ergebnissen des Zahn-Checks; sie führen zu den zwei Wegen UKV
             ZahnPRIVAT und Bayerische mit ZAHN Sofort. Jede Zeile führt in den Check. */}
         <section
-          className="relative isolate order-[-3] overflow-hidden bg-[#071726] text-white md:order-none"
+          className="relative isolate order-[-3] overflow-hidden bg-[#071726] text-white md:order-none lg:hidden"
           aria-labelledby="zahn-hero-heading"
         >
           <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
@@ -132,13 +136,13 @@ const ZahnPage = () => {
                 <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">
                   {content.hero.eyebrow}
                 </p>
-                <h1
+                <HeroHeading
                   id="zahn-hero-heading"
-                  className="mt-5 max-w-[17ch] font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance]"
+                  className="mt-5 max-w-[17ch] font-display text-[clamp(1.9rem,9vw,2.4rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-[clamp(2.4rem,4.6vw,4.25rem)] [text-wrap:balance]"
                 >
                   <span className="block">{content.hero.titleLead}</span>
                   <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
-                </h1>
+                </HeroHeading>
                 <p className="mt-4 max-w-xl text-lg leading-7 text-slate-200 md:mt-6 sm:text-xl">
                   {content.hero.text}
                 </p>

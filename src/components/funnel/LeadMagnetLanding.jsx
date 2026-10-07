@@ -136,7 +136,7 @@ const LeadMagnetLanding = ({ config }) => {
                     </div>
                   </div>
                 ) : (
-                  <form className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
+                  <form method="post" action="/kontakt" className="mt-6 space-y-4" onSubmit={handleSubmit} noValidate>
                     <FormHoneypot />
 
                     <div>

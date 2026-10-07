@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 
 const choiceKeys = ['sp2', 'sp1', 'spu'];
 
 const StationaerHero = () => {
+  const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   const { t } = useTranslation('stationaer');
 
   return (
@@ -31,12 +33,12 @@ const StationaerHero = () => {
           <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] [overflow-wrap:anywhere] sm:tracking-[0.23em]">
             {t('refresh.hero.eyebrow')}
           </p>
-          <h1
+          <HeroHeading
             id="stationaer-hero-heading"
             className="mt-4 max-w-[17ch] font-display text-[2.15rem] md:mt-5 md:text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
           >
             {t('refresh.hero.title')}
-          </h1>
+          </HeroHeading>
           <p className="mt-4 max-w-2xl text-base font-medium md:mt-6 leading-relaxed text-slate-200 sm:text-lg lg:text-xl">
             {t('refresh.hero.subtitle')}
           </p>

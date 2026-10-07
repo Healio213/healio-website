@@ -4,6 +4,7 @@ import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import StationaerHero from '@/components/sections/stationaer/StationaerHero';
+import DesktopLead from '@/components/desktop/DesktopLead';
 import StationaerTariffSelector from '@/components/sections/stationaer/StationaerTariffSelector';
 import StationaerBenefits from '@/components/sections/stationaer/StationaerBenefits';
 import StationaerFamily from '@/components/sections/stationaer/StationaerFamily';
@@ -56,7 +57,10 @@ const StationaerPage = () => {
       />
       <article className="flex flex-col md:block">
         <Slot order="order-1">
-          <StationaerHero />
+          <DesktopLead surface="stationaer" language={lang} />
+          <div className="lg:hidden">
+            <StationaerHero />
+          </div>
         </Slot>
         {/* Siegel direkt unter dem Hero, wie auf /ambulant und /partner. */}
         <Slot order="order-2">

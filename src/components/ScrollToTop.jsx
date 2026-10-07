@@ -19,7 +19,15 @@ const ScrollToTop = () => {
       let timeout;
       const scrollToTarget = () => {
         if (stopped) return false;
-        const target = document.getElementById(targetId);
+        const homeDesktopTargets = {
+          'so-funktioniert': 'desktop-home-process',
+          schutz: 'desktop-home-products',
+        };
+        const resolvedId = (pathname === '/' || pathname === '/en')
+          && window.matchMedia('(min-width: 1024px)').matches
+          ? homeDesktopTargets[targetId] || targetId
+          : targetId;
+        const target = document.getElementById(resolvedId);
         if (!target) return false;
         window.requestAnimationFrame(() => {
           if (!stopped && document.contains(target)) target.scrollIntoView({ block: 'start' });

@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Gesundheit clever absichern. Privat und im Unternehmen.",
-    "titleLead": "Gesundheit clever absichern.",
-    "titleAccent": "Privat und im Unternehmen.",
-    "description": "Wir schauen zuerst auf deine gesetzliche Krankenkasse, denn viele Kassen zahlen dir Geld zurück, wenn du zum Zahnarzt gehst, Sport machst oder Vorsorge nutzt. Mit diesem Geld finanzieren wir deinen zusätzlichen Schutz, und erst dann suchen wir aus, welcher passt.",
+    "title": "Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.",
+    "titleLead": "Dein Kassenbonus ist zu wertvoll,",
+    "titleAccent": "um ihn ungenutzt zu lassen.",
+    "description": "Setze deinen Kassenbonus gezielt für Zusatzschutz ein: Er kann den Beitrag ganz oder teilweise ausgleichen. Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren sind tarifliche Leistungen. Gesundheitsangaben, versicherte Behandlungen und Leistungsgrenzen entscheiden.",
     "switchLabel": "Wähle deinen Einstieg",
     "switch": [
       {

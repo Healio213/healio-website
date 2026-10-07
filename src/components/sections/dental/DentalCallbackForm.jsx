@@ -145,7 +145,7 @@ const DentalCallbackForm = () => {
               </p>
             </div>
           ) : (
-            <form method="post" onSubmit={handleSubmit} noValidate className="space-y-4 md:space-y-6">
+            <form method="post" action="/kontakt" onSubmit={handleSubmit} noValidate className="space-y-4 md:space-y-6">
               <FormHoneypot />
               <div className="grid gap-4 sm:grid-cols-2 md:gap-5">
                 <div>

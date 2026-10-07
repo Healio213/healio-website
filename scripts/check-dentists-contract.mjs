@@ -69,7 +69,10 @@ assert.match(de.insurerHighlights.practiceNote, /keine Tarifempfehlung/);
 assert.match(de.insurerHighlights.sourceNote, /Versicherungsbedingungen/);
 
 assert.match(page, /min-h-\[92svh\]/);
-assert.match(page, /w-full overflow-hidden/);
+const dentistMainClassName = page.match(/<main\b[^>]*\bclassName="([^"]+)"/)?.[1];
+assert.ok(dentistMainClassName, 'The dentist page must have a main container with explicit layout classes');
+const dentistMainClasses = new Set(dentistMainClassName.split(/\s+/));
+assert.ok(dentistMainClasses.has('w-full') && dentistMainClasses.has('overflow-hidden'), 'The dentist main container must fill the width and prevent horizontal overflow');
 assert.match(page, /zahnaerzte-hero-beratung-v2\.webp/);
 assert.equal(
   fs.existsSync(path.join(root, 'public/images/zahnaerzte-hero-beratung-v2.webp')),

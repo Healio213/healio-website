@@ -5,6 +5,7 @@ import { ArrowDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
+import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
 
 // Rahmen- und Punktfarben der vier Töpfe (wie die Auswahl auf /stationaer).
@@ -33,6 +34,7 @@ const jumpOnMobile = (targetId) => (event) => {
 // Budget-Button, rechts die Karte mit dem Budget der höchsten Stufe und ihren
 // vier Töpfen. Beträge kommen aus denselben Tarifdaten wie die Tarifwahl.
 const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
+  const HeroHeading = useDesktopLayout() ? motion.h2 : motion.h1;
   const { t } = useTranslation('ambulant');
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
@@ -59,7 +61,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
           >
             {t('hero.eyebrow')}
           </motion.p>
-          <motion.h1
+          <HeroHeading
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -67,12 +69,12 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.2vw,3.75rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance] md:mb-7`}
           >
             <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
-          </motion.h1>
+          </HeroHeading>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-5 max-w-2xl text-lg font-medium leading-relaxed text-slate-200 md:mb-8 md:text-xl"
+            className="mb-5 max-w-2xl text-base font-medium leading-7 text-slate-200 sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl"
           >
             {fromBonusTopic
               ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.'

@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Smart health cover. Personal and at work.",
-    "titleLead": "Smart health cover.",
-    "titleAccent": "Personal and at work.",
-    "description": "We start with your statutory health fund, because many funds pay you money back when you see the dentist, do sport or use preventive care. We use that money to finance your extra cover, and only then choose which cover fits.",
+    "title": "Your health fund bonus is too valuable to leave unused.",
+    "titleLead": "Your health fund bonus is too valuable",
+    "titleAccent": "to leave unused.",
+    "description": "Put your health fund bonus towards supplementary cover: it may offset all or part of the premium. Up to EUR 3,000 in health budget over two years comes from plan benefits. Health declarations, insured treatments and benefit limits determine cover.",
     "switchLabel": "Choose your path",
     "switch": [
       {

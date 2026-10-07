@@ -1,11 +1,11 @@
 {
   "hero": {
-    "badge": "Especially for Midwives",
-    "title": "<highlight>Full courses</highlight> for you and the best care for your families.",
-    "subtitle": "Healio shows families which statutory benefits, bonuses and supplementary insurance may fit their situation. You give a neutral hint; we check and advise individually.",
-    "cta": "Book your free introduction now",
+    "badge": "For midwives and birth centres",
+    "title": "Good care takes time. <highlight>Clarify the costs early.</highlight>",
+    "subtitle": "Plan private extras before a pregnancy. You clarify the billing; Healio reviews cover and reimbursement.",
+    "cta": "Book a 45-minute call",
     "secondaryCta": "View the concept with Nita",
-    "note": "No insurance advice by the midwife is required."
+    "note": "Review before a pregnancy. No immediate cover promise for ongoing cases."
   },
   "proof": {
     "ariaLabel": "Responsibilities in the Healio concept for midwives",
@@ -37,146 +37,143 @@
     "fallback": "This video cannot be played in your browser."
   },
   "problem": {
-    "title": "Who actually pays for all the extras?",
-    "text": "Birth preparation, acupuncture for nausea, yoga or the important postnatal recovery course. You know exactly what would be good for mother and child right now. But these important services add up quickly and health insurance often only covers the bare minimum. Many families forgo your valuable offerings for purely financial reasons."
+    "title": "Provide care. Agree the costs clearly.",
+    "text": "On-call services and additional care can create separate costs. A longer home visit is not automatically a private service. Whether billing is permitted and whether reimbursement is available are two separate reviews."
   },
   "solution": {
-    "title": "The Solution: The Healio Health Budget",
-    "text": "Your families secure a budget of up to 3,000 euros. Through smart offsetting with the health insurance bonus, this budget ideally finances itself completely. Your patients have full coverage and effectively pay zero euros for your courses and treatments.",
-    "amount": "up to €3,000",
-    "amountLabel": "Health Budget"
+    "title": "Plan early and review benefits separately",
+    "text": "Up to EUR 3,000 in health budget over two years comes from a suitable outpatient plan under its terms. A health fund bonus may offset all or part of the premium. Midwifery costs and hospital benefits require their own review; they are not automatically added to the budget.",
+    "amount": "up to EUR 3,000",
+    "amountLabel": "Plan benefits over two years"
   },
   "leistungen": {
-    "title": "The €1,000 budget for your families",
-    "subtitle": "So your patients know exactly what to expect, you can show them these benefits directly. The budget ensures that medical extras no longer have to be paid out of pocket.",
+    "title": "Which benefits may be relevant",
+    "subtitle": "Statutory benefits, bonuses and supplementary cover are separate. Eligibility depends on the health fund, plan, evidence and personal circumstances.",
     "detailsLabel": "View details on health fund benefits and supplementary cover",
     "highlights": [
       {
-        "title": "€1,000 for your health",
-        "desc": "This budget is exclusively available for natural medicine, osteopathy and important prenatal care during pregnancy."
+        "title": "Depending on the plan, up to EUR 1,000 for natural medicine",
+        "desc": "In the highest SDK outpatient level over two calendar years. Only insured services that are correctly billed count."
       },
       {
-        "title": "Gynaecologist extras included",
-        "desc": "Whether additional ultrasound or important tests like nuchal translucency measurement. The budget covers these IGeL services."
+        "title": "Additional screening may be insured",
+        "desc": "Depending on the plan, eligible preventive tests may count. Not every self-pay service is automatically insured; Healio reviews the terms."
       },
       {
-        "title": "Gentle medicine",
-        "desc": "Acupuncture for pregnancy complaints or osteopathic treatments for the newborn are fully reimbursed."
+        "title": "Review acupuncture and osteopathy individually",
+        "desc": "Eligibility depends on the plan, practitioner qualifications, billing and medical circumstances."
       },
       {
-        "title": "Medication and aids",
-        "desc": "Medications like Femibion or aids that would otherwise be paid privately are covered by the budget."
+        "title": "Medication and aids under the plan terms",
+        "desc": "A prescription, a statutory insurer contribution and other conditions may be required."
       },
       {
-        "title": "Private patient status for the baby",
-        "desc": "Your child enjoys access to the best medicine from day one without you having to worry about costs."
+        "title": "Check newborn enrolment early",
+        "desc": "Newborn enrolment without health questions requires registration within two months of birth and suitable parental cover. Die Bayerische requires three months of prior insurance; SDK does not."
       }
     ],
     "ikkTitle": "IKK classic Benefits",
     "ikkItems": [
       {
         "name": "Midwife on-call service",
-        "amount": "€250",
-        "detail": "per pregnancy"
+        "amount": "up to EUR 250",
+        "detail": "per pregnancy, check eligibility"
       },
       {
         "name": "Minerals",
-        "amount": "€100",
-        "detail": "Iron, folic acid & magnesium per year"
+        "amount": "EUR 100",
+        "detail": "Iron, folic acid and magnesium, subject to the health fund terms"
       },
       {
-        "name": "Supplementary screening",
-        "amount": "€100",
-        "detail": "Toxoplasmosis, Streptococcus, Rubella, Cytomegalovirus"
+        "name": "Additional screening",
+        "amount": "EUR 100",
+        "detail": "Toxoplasmosis, streptococcus, parvovirus and cytomegalovirus"
       },
       {
         "name": "Postnatal recovery",
-        "amount": "€75",
-        "detail": "Bonus with supplementary insurance"
+        "amount": "Bonus may apply",
+        "detail": "Amount follows the current bonus programme"
       },
       {
-        "name": "Maternity care",
-        "amount": "€30",
-        "detail": "per check-up"
+        "name": "Maternity screening",
+        "amount": "Bonus may apply",
+        "detail": "Amount follows the current bonus programme"
       },
       {
         "name": "Birth preparation courses",
-        "amount": "free",
-        "detail": "incl. partner course (Keleya)"
+        "amount": "Digital offer included",
+        "detail": "Check IKK classic participation terms"
       },
       {
-        "name": "Home and birth center birth",
-        "amount": "free",
-        "detail": "Midwife + operating cost subsidy"
+        "name": "Home or birth-centre birth",
+        "amount": "Under health fund terms",
+        "detail": "Clarify statutory benefits and possible subsidies individually"
       }
     ],
     "sdkTitle": "SDK Supplementary Insurance",
     "sdkItems": [
       {
-        "name": "Pregnancy care",
-        "amount": "€500",
-        "detail": "IGeL like nuchal scan, extra ultrasound, tests"
+        "name": "Pregnancy screening",
+        "amount": "EUR 500",
+        "detail": "Maximum in the highest level over two calendar years; policy terms apply"
       },
       {
-        "name": "Natural healing",
-        "amount": "€1,000",
-        "detail": "Acupuncture, osteopathy, TCM incl. prescribed medication"
+        "name": "Natural medicine",
+        "amount": "EUR 1,000",
+        "detail": "Maximum in the highest level over two calendar years; eligible services only"
       },
       {
         "name": "Medication and aids",
-        "amount": "€1,000",
-        "detail": "Co-payments for medication, remedies and aids"
+        "amount": "EUR 1,000",
+        "detail": "Maximum in the highest level; prescription, statutory contribution and policy terms apply"
       }
     ],
-    "totalLabel": "Total Pregnancy Budget",
-    "totalAmount": "over €1,000",
-    "totalNote": "The best part: Through the smart combination with the statutory health insurance bonus, the costs for this package pay for themselves completely. For the expectant mother, this means the best care at effectively zero euros."
+    "totalLabel": "Outpatient health budget under the plan",
+    "totalAmount": "up to EUR 3,000",
+    "totalNote": "EUR 3,000 represents maximum plan benefits, not a cash bonus from a health fund. Statutory benefits, bonuses and insurance benefits are reviewed separately."
   },
   "klinik": {
-    "title": "The most important part comes last: the newborn",
-    "subtitle": "Everything so far was about the mother. Now it is about the child, and this is the part almost nobody knows. If you take away only one thing from this page, please let it be this one.",
+    "title": "For newborn cover, timing matters",
+    "subtitle": "Newborn enrolment depends on legal and policy requirements. Midwives give a pointer; Healio reviews the individual case.",
     "detailsLabel": "View details on newborn enrolment and hospital cover",
-    "kernTitle": "Every person has exactly one window in which their state of health does not matter. It lasts two months and begins at birth.",
-    "kernText": "A supplementary insurance normally always asks about your state of health. Anyone with a diagnosis pays a surcharge or loses cover for that particular condition. For a newborn, this rule does not apply. SDK's terms state literally that cover begins at birth without risk surcharges and without benefit exclusions, and expressly including birth injuries, congenital conditions and other physical impairments. No health assessment. No waiting period. No surcharge. The question is simply not asked. This window closes two months after birth, and for that child it is then closed for good.",
-    "chanceTitle": "You know better than most why this matters so much",
-    "chanceText": "You see it regularly: the newborn jaundice that does need phototherapy after all. The baby arriving a few weeks early and being moved to the neonatal unit. The heart defect that no screening picked up beforehand. Feeding difficulties, an infection, an adaptation disorder. In the vast majority of cases it turns out fine, but it happens often enough, and it happens without warning.\n\nHere is the point. A child diagnosed with something serious in its first days of life will not be accepted into private supplementary insurance later on. Not at five, not at twelve, never. The health questions on the application have then been answered, and not in their favour. If the child was taken on beforehand through newborn enrolment, that very diagnosis is covered, and the protection stays in place for life. It is the only chance a family gets.",
-    "chanceObenTitle": "What this means for the family when the baby has to stay in hospital",
-    "chanceObenText": "If the child needs inpatient treatment, one parent may be admitted alongside them. Accommodation and meals are covered, so the family does not pay for them. This is rooming-in, and it applies up to the child's 16th birthday, so well beyond the baby years.\n\nOn top of that comes free choice of hospital. The family can go to a specialised children's hospital rather than the one they were referred to, even if it is further away. The child is treated privately, meaning by the head physician or a specialist, and stays in a single or twin room instead of a shared ward. Anyone who has spent a night in a four-bed room with a crying newborn knows what that means for a mother recovering from birth.\n\nAnd for a child all of this costs very little. Depending on the insurer and tariff, the premium is in the range of a few euros per month.",
-    "deadlineTitle": "What you need to do, and why you are almost never too late",
-    "deadlineText": "The requirement is simple: one parent must be insured when the child is born. After that there are two months to enrol the child, backdated to the day of birth.\n\nSDK asks for no prior insurance period. It is enough that the mother's or father's policy is running at the time of birth. Even if a woman only hears about it in her eighth month, her baby is fully covered from its first breath. So your pointer is almost never too late. And once the child has arrived, you still have that two-month window during postnatal care, which is exactly when you are in the house anyway.\n\nTwo things to know so you never tell anyone something wrong: Die Bayerische requires three months of prior insurance, so there the deadline falls in the sixth month of pregnancy. And a child can only receive the level of cover held by the best-insured parent. If you want a single room for your child, you need to hold it yourself.",
-    "ehrlichTitle": "What honestly no longer works: the current birth",
-    "ehrlichText": "So that you never promise something that does not hold: once a pregnancy has been medically confirmed, it counts as an event already under way. No supplementary insurance will pay for that particular birth, with any provider. If a woman comes to you in her fifth month, she can no longer insure a family room or head physician treatment for the birth itself. That is not the weakness of one tariff, it is the same everywhere.\n\nNone of this changes anything about the points above. In insurance terms the child is a separate person with a separate contract. For the baby it is not too late, even when it is too late for the birth. Almost nobody understands that distinction, which is exactly why your pointer is worth so much.",
-    "roomingTitle": "And with the next child the birth is included too",
-    "roomingText": "SDK waives waiting periods entirely in its hospital tariffs. Anyone who holds the policy before a next pregnancy is medically confirmed has the birth fully covered as well: the family room in SP1, private medical treatment and the separately invoiced services of an attending midwife (Beleghebamme) during the hospital birth.\n\nThat is why the postnatal period is the best moment to mention it. The family secures cover for its newborn now, and for a further child everything is included that was not possible this time.",
-    "compareTitle": "Which tariff for families? Our honest assessment",
-    "compareSubtitle": "Healio is independent and compares the market. In short: for women planning a pregnancy there is hardly a way past SDK, because it works without waiting periods. If the goal is to insure the child and the family affordably, Die Bayerische is usually the better choice.",
+    "kernTitle": "Registration within two months may allow cover from birth.",
+    "kernText": "Under section 198 of the German Insurance Contract Act, newborn enrolment can provide cover without risk surcharges or waiting periods, backdated to birth. The requested cover must not be higher or broader than the insured parent’s cover. Die Bayerische requires three months of parental prior insurance; SDK does not. The parent’s policy must be in place in time.",
+    "chanceTitle": "Why an early review is useful",
+    "chanceText": "Health declarations can affect a later application. An early review clarifies the options for parents and child. It is neither a medical assessment nor a promise that every desired plan is available.",
+    "chanceObenTitle": "What the hospital plan provides",
+    "chanceObenText": "SDK SP1 and SP2 include rooming-in for insured children under 16, single or twin rooms depending on the plan, private medical treatment and hospital choice. Healio explains the terms with the family.",
+    "deadlineTitle": "What you can tell families",
+    "deadlineText": "Point families to the two-month newborn registration deadline and refer them to Healio for an individual review. You do not need to compare insurers or assess health declarations. Prior insurance periods and the level of cover are checked against the actual policy.",
+    "ehrlichTitle": "Distinguish an ongoing pregnancy from future cover",
+    "ehrlichText": "With die Bayerische, a pregnancy already medically confirmed when applying is not covered. Eight months of waiting apply to childbirth and, according to the confirmed current claims practice, also to the named outpatient services during pregnancy and postnatal care. Individual SDK outpatient screening benefits are reviewed separately; they do not imply cover for childbirth.",
+    "roomingTitle": "The next step",
+    "roomingText": "Interested families contact Healio directly. We review existing cover, desired benefits, deadlines and exclusions before recommending a plan or submitting an application. No retrospective cover is promised.",
+    "compareTitle": "Review each plan individually",
+    "compareSubtitle": "Premiums, health questions, waiting periods and benefits differ. Healio compares suitable options; the midwife remains an information provider.",
     "bayerischeName": "Die Bayerische",
-    "bayerischeTag": "Our recommendation for young families",
+    "bayerischeTag": "Hospital cover under the plan terms",
     "bayerischeItems": [
-      "Child from EUR 4.10 per month in Prestige, the entry tariff Smart (serious illness and accidents only) from EUR 2.10",
-      "Rooming-in for children under 16, family room at childbirth without limit in Prestige and up to the twin-room rate in Komfort, through the mother's policy",
-      "Head physician at 100 per cent, with no cap at the maximum GOÄ rates",
-      "Streamlined acceptance with only two health questions",
-      "Adults aged 21 to 30: Komfort EUR 10.20, Prestige EUR 13.40 per month",
-      "The child's Smart tariff can be switched to Komfort or Prestige without a new health check or waiting period, at the end of the third or sixth insurance year counted from the year the child turns 21",
-      "Midwife costs beyond what statutory health insurance pays, in Komfort and Prestige, including midwives who bill privately. This does not apply to a pregnancy that already exists when the application is made"
+      "Komfort and Prestige: hospital benefits under the respective plan",
+      "Family room at childbirth through the mother’s policy: Prestige without a plan-specific monetary cap, Komfort up to the twin-room benefit",
+      "Eight months of waiting for childbirth; an already confirmed pregnancy is not covered",
+      "Newborn enrolment: one parent insured for at least three months, registration within two months of birth",
+      "The named outpatient midwifery services are part of current claims practice, not a separate explicit plan promise",
+      "Eight months of waiting have also been confirmed for these services; clarify eligibility and reimbursement in writing beforehand"
     ],
-    "bayerischeCaveat": "To be honest about it: a special waiting period of eight months applies to childbirth, and for the newborn a parent must already have been insured for three months. The deadline therefore falls in the sixth month of pregnancy. The tariff also builds no ageing provisions, so the premium is very low at a young age and rises considerably by design in old age. For children and the family years that is exactly the strongest lever, but as a lifelong solution you need to know it.",
+    "bayerischeCaveat": "Current outpatient claims practice does not replace a separate entitlement under the plan. Healio clarifies the case with the insurer; the midwife does not promise reimbursement.",
     "sdkName": "SDK",
-    "sdkTag": "The first choice when planning a pregnancy",
+    "sdkTag": "No policy waiting period; exclusions still apply",
     "sdkItems": [
-      "No waiting periods, stated literally in the terms. Cover applies from day one, including for childbirth",
-      "Newborn enrolment with no prior insurance period: it is enough that one parent is insured at the time of birth",
-      "Family room for childbirth, covered at 100 per cent in the single-room tariff",
-      "Separately invoiced services of an attending midwife (Beleghebamme) during a hospital birth, in SP1 and SP2",
-      "Rooming-in: one parent stays with the child if the child is under 16 when treatment starts",
-      "Reimbursement beyond the maximum GOÄ rates and free choice of hospital; in a private clinic the plan pays the costs above the rate of a contracted hospital once your statutory insurer pays that rate",
-      "Calculated with ageing provisions, therefore more stable across the decades",
-      "Example premiums at age 30: hospital twin room EUR 33.41, hospital single room EUR 50.72 per month"
+      "No policy waiting periods under current terms; events already underway remain excluded",
+      "Newborn enrolment without health questions or a parental prior insurance period; register within two months of birth",
+      "Rooming-in for insured children under 16",
+      "Attending midwife during hospital childbirth in SP1 and SP2; family room at childbirth in SP1",
+      "Single or twin rooms, private medical treatment and hospital choice depending on the plan",
+      "Health declarations and exclusions for an already confirmed pregnancy still apply"
     ],
-    "sdkCaveat": "To be honest about it: for a young family that is a lot of money, often three to four times Die Bayerische, although a child alone costs only EUR 3.37 (SP2) or EUR 5.60 (SP1) a month. Health questions are part of the application here too. And the limit remains: if the pregnancy has been medically confirmed at the time of application, no benefits are paid for that birth.",
-    "bonusNote": "Both can be combined with the statutory health fund's bonus programme. The supplementary insurance is recognised there as a subsidised benefit and triples the cash bonus, capped at the premiums actually paid. For many families the bonus therefore covers a substantial share of the premium.",
-    "closingNote": "Which route fits in an individual case depends on age, budget and state of health. Healio clarifies that free of charge in a consultation. You do not have to explain any of it or work anything out, a pointer at the right moment is enough.",
+    "sdkCaveat": "The application, health declarations and policy terms determine cover. The policy must be effective before the relevant insured event.",
+    "bonusNote": "A health fund bonus may offset all or part of eligible, evidenced premiums under its own rules. The amount and any combination are checked separately; full funding is not guaranteed.",
+    "closingNote": "The appropriate route depends on age, budget, health declarations and existing cover. Healio reviews this individually. You do not need to explain plans or calculate premiums.",
     "ctaLink": "All the details on hospital supplementary insurance"
   },
   "tarife": {
@@ -186,38 +183,38 @@
     "ambulant": {
       "label": "Outpatient",
       "title": "Antenatal care during pregnancy",
-      "text": "SDK's preventive care budget pays for self-pay services such as a detailed ultrasound scan, toxoplasmosis testing or the nuchal translucency scan, even if the pregnancy has already been confirmed. There are no waiting periods.",
-      "condition": "Childbirth and complications are not included. The pregnancy has to be stated in the health questions, and the insurer reviews the application."
+      "text": "A suitable outpatient plan may include additional screening such as detailed ultrasound, toxoplasmosis tests or a nuchal translucency scan. Individual benefits may be relevant during an existing pregnancy; Healio reviews them separately.",
+      "condition": "Health declarations, acceptance and policy terms determine cover. A screening budget does not promise cover for childbirth or complications."
     },
     "stationaer": {
       "label": "Inpatient",
       "title": "Hospital care and cover for the child",
-      "text": "Anyone with a hospital plan gets the head physician and a single or twin room in hospital, depending on the plan. If one parent has hospital cover on the day of birth (with die Bayerische for at least three months), the child is accepted without a health assessment, including congenital conditions.",
-      "condition": "The registration must reach the insurer no later than two months after the birth; cover then applies from the day of birth. If the woman is already pregnant when applying, neither SDK nor die Bayerische pays for that birth."
+      "text": "A suitable hospital plan may provide private medical treatment and a single or twin room. Newborn enrolment requires suitable parental cover, timely registration and the other applicable conditions. The child’s cover must not be higher or broader than the insured parent’s cover.",
+      "condition": "Register within two months of birth. Die Bayerische requires at least three months of parental prior insurance; SDK requires no prior insurance period. Enrolment without health questions and backdated cover from birth depend on the applicable requirements. For an existing pregnancy, review the start of cover, waiting periods and exclusions for ongoing or recommended examinations and treatment separately."
     },
     "both": "A family can have both an outpatient and an inpatient plan. An outpatient-only policy for the parents gives the child no inpatient cover. In a consultation, Healio clarifies which plans fit.",
     "bayerische": {
       "label": "Good to know",
       "title": "Die Bayerische and your midwifery services",
-      "text": "According to die Bayerische's product documents, the hospital plans Komfort and Prestige reimburse midwife costs that go beyond what statutory health insurance pays, including for midwives who bill privately. In Prestige there is a family room at childbirth without a limit, in Komfort up to the cost of a twin room, in each case through the mother's policy. The child is accepted from birth if one parent has been insured with die Bayerische for at least three months at the time of birth. Families take out the policy because they want to be well insured.",
-      "condition": "There is no general waiting period; a waiting period of eight months applies to childbirth. A pregnancy that already exists when the application is made is not covered."
+      "text": "Komfort and Prestige provide hospital benefits under the respective plan. Outpatient midwifery services are reviewed under confirmed current claims practice; the terms contain no separate explicit promise for them. A family room at childbirth follows the mother’s policy: Prestige without a plan-specific monetary cap, Komfort up to the twin-room benefit.",
+      "condition": "Eight months of waiting apply to childbirth and, under confirmed claims practice, also to the named outpatient pregnancy and postnatal services. Ongoing or recommended examinations and treatment are excluded. Request a written review of the specific case beforehand."
     }
   },
   "legal": {
-    "title": "Your Neutrality. 100 Percent Protected.",
-    "subtitle": "As a midwife, you are committed to the well-being of your patients and strict neutrality. That's exactly how we built our concept for you.",
-    "text": "The model is legally completely safe. You never act as an advisor and don't recommend specific tariffs. You simply pass on information about how families can smartly cover the services you recommend anyway. The complete and market-independent consultation is handled by us at Healio.",
-    "summary": "You act as a pure referrer. Your independence is always maintained and you remain in perfect alignment with your strict professional code."
+    "title": "Three roles. Clear responsibilities.",
+    "subtitle": "Billing and insurance benefits are separate decisions.",
+    "text": "The midwife clarifies the permitted service and fee. Healio reviews cover. The insurer confirms which reimbursement is possible in the individual case.",
+    "summary": "The midwife does not promise insurance cover or reimbursement. Individual billing and agreements must follow the applicable statutory and fee rules."
   },
   "steps": {
     "title": "This is how easy it works for you.",
     "step1Title": "Quick Introduction",
-    "step1Desc": "45 minutes is enough. We explain the concept and you decide at your own pace whether it suits you.",
+    "step1Desc": "Allow 45 minutes. We explain the concept and you decide whether it fits your work.",
     "step2Title": "Receive Materials",
-    "step2Desc": "You receive high-quality and unobtrusive information flyers for your home visits or practice rooms. Completely free.",
+    "step2Desc": "Use the templates and checklists for your practice and families. Complete them individually and check the requirements.",
     "step3Title": "Families Benefit",
-    "step3Desc": "Your patients scan the QR code on the flyer, secure their budget online in minutes and can book your services with ease. We handle the entire administrative process.",
-    "easeNote": "We want to make your everyday life easier in every way. Feel free to talk to us about this!"
+    "step3Desc": "Interested families contact Healio directly. We review needs, health declarations, deadlines and terms; the insurer decides on acceptance and benefits.",
+    "easeNote": "You provide professional care. Financial options and insurance cover are clarified separately."
   },
   "moral": {
     "title": "Good information gives families more room to choose.",
@@ -245,5 +242,103 @@
     "title": "Would you like me to explain the midwife concept?",
     "body": "I can briefly explain how you can point families to up to EUR 3,000 in health budget while Healio handles the advice.",
     "cta": "Yes, explain the concept"
+  },
+  "examples": {
+    "title": "Two examples from midwifery practice",
+    "lead": "Make remaining costs visible. Clarify billing and insurance cover first.",
+    "onCall": {
+      "eyebrow": "Hypothetical calculation",
+      "title": "On-call service: what remains?",
+      "amounts": [
+        {
+          "label": "Fee",
+          "value": "EUR 800"
+        },
+        {
+          "label": "Subsidy",
+          "value": "EUR 250"
+        },
+        {
+          "label": "Balance",
+          "value": "EUR 550"
+        }
+      ],
+      "text": "Assume a fee of EUR 800 and an approved health fund subsidy of EUR 250. The family’s remaining cost is EUR 550.",
+      "note": "This is not a reimbursement promise. The actual subsidy, agreement and any insurance benefit must be reviewed individually."
+    },
+    "homeVisit": {
+      "eyebrow": "Longer care",
+      "title": "A 60- or 75-minute home visit",
+      "text": "More time does not automatically mean more privately billable fees. The service actually provided is what matters.",
+      "steps": [
+        "Check the statutory billing position, time and contact limits, and any medical order.",
+        "Agree only separately permitted private services specifically and in writing beforehand; no double billing.",
+        "Then request a written review of possible insurance benefits."
+      ],
+      "note": "No flat extra-time charge or fixed amount per visit. The service, fee rules and invoice must match."
+    }
+  },
+  "downloads": {
+    "waitTitle": "Review before a pregnancy – eight months of waiting",
+    "waitText": "With die Bayerische, eight months of waiting run from the start of insurance for childbirth and, under confirmed current claims practice, also for the named outpatient pregnancy and postnatal services. The product summary excludes ongoing or recommended examinations and treatment. Completing the waiting period does not guarantee reimbursement: outpatient claims practice is not a separate explicit plan promise. Request a written review of the specific case beforehand.",
+    "title": "Templates and checklists for the next step",
+    "lead": "Download without contact details. Complete individually and review before use. The PDFs are in German.",
+    "practice": {
+      "title": "For your midwifery practice",
+      "text": "Separate services, agreements and statutory contributions clearly. The templates do not authorise a flat surcharge."
+    },
+    "family": {
+      "title": "For families",
+      "text": "Collect the health fund decision, existing policy and service details for an individual cover review."
+    },
+    "documents": {
+      "invoice": "Invoice template · German PDF",
+      "agreement": "Service and fee agreement template · German PDF",
+      "checklist": "Family checklist · German PDF"
+    },
+    "note": "Working templates to complete individually, not validated contracts or reimbursement confirmations. The insurer makes the decision."
+  },
+  "roles": [
+    {
+      "title": "Midwife: service and billing",
+      "text": "You clarify the permitted private service, fee basis and prior written agreement. Statutory services are not billed twice."
+    },
+    {
+      "title": "Healio: review cover",
+      "text": "We review the policy, health declarations, deadlines and potential benefit for the specific case."
+    },
+    {
+      "title": "Insurer: confirm reimbursement",
+      "text": "The insurer makes the binding acceptance and benefit decisions. The family supplies the required evidence."
+    }
+  ],
+  "faq": {
+    "title": "Key questions before deciding",
+    "items": [
+      {
+        "question": "Does die Bayerische automatically reimburse outpatient midwifery costs?",
+        "answer": "No. The named outpatient services are subject to confirmed current claims practice, not a separate explicit plan promise. Healio requests a written review of requirements, evidence and the specific case beforehand."
+      },
+      {
+        "question": "Do the eight months also apply to outpatient services?",
+        "answer": "Die Bayerische has confirmed eight months from the start of insurance for the named outpatient pregnancy and postnatal services. Childbirth has eight months of waiting too. Completing that period alone does not guarantee reimbursement. Review the options before a pregnancy and clarify the specific case in writing."
+      },
+      {
+        "question": "What if the pregnancy has already been confirmed?",
+        "answer": "Die Bayerische’s product summary excludes ongoing or recommended examinations and treatment. Whether later outpatient midwifery services can be considered after the waiting period requires a written review of the specific case. Review individual SDK outpatient screening benefits separately; these do not promise immediate cover for childbirth or ongoing treatment."
+      },
+      {
+        "question": "Can a longer visit simply be charged as a private extra?",
+        "answer": "No. Check statutory benefits, time and contact limits, and any medical order first. Separately permitted private services must be agreed specifically and in writing before the service is provided. This does not justify a flat EUR 50 charge or double billing."
+      },
+      {
+        "question": "Which policy provides the family room?",
+        "answer": "With die Bayerische, it follows the mother’s policy: Prestige without a plan-specific monetary cap, Komfort up to the twin-room benefit. Policy requirements, eight months of waiting and timely cover remain essential."
+      },
+      {
+        "question": "Can I use the templates unchanged as a validated contract?",
+        "answer": "No. The downloads are working aids. Review and complete the service, fee basis, statutory billing rules and individual agreement before use. They do not replace a reimbursement confirmation."
+      }
+    ]
   }
 }
