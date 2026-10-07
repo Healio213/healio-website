@@ -4,6 +4,21 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { useLanguage } from '@/hooks/useLanguage';
 
+// Frank 07.10.2026: dieselben Cartoon-Karten wie am Handy auch am Rechner.
+const stepScenes = ['/images/home-cards/schritt1-kasse.webp', '/images/home-cards/schritt2-schutz.webp', '/images/home-cards/schritt3-bonus.webp'];
+const productScenes = { ambulant: '/images/home-cards/ambulant.webp', zahn: '/images/home-cards/zahn.webp', stationaer: '/images/home-cards/stationaer.webp' };
+
+const SceneImage = ({ src, badge }) => (
+  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
+    <img src={src} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none" />
+    {badge && (
+      <span className="absolute left-5 top-5 grid h-10 min-w-10 place-items-center rounded-full bg-white/90 px-3 font-display text-sm font-extrabold tabular-nums text-[#0b6048] shadow-[0_4px_12px_rgba(7,17,31,0.18)]" aria-hidden="true">
+        {badge}
+      </span>
+    )}
+  </div>
+);
+
 const content = {
   de: {
     processTitle: 'Deine Kasse kann mehr. Dein Zusatzschutz auch.',
@@ -149,16 +164,16 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
             </p>
           </div>
 
-          <ol className="mt-14 grid grid-cols-3 border-t border-[#aec8bc]">
+          <ol className="mt-14 grid grid-cols-3 gap-6 xl:gap-8">
             {copy.steps.map((step, index) => (
-              <li key={step.title} className={`min-w-0 pt-7 ${index > 0 ? 'pl-8 xl:pl-10' : ''} ${index < copy.steps.length - 1 ? 'pr-8 xl:pr-10' : ''}`}>
-                <span className="font-display text-2xl font-bold tabular-nums text-[#0b6048]" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-4 font-display text-xl font-extrabold leading-7 text-home-midnight xl:text-2xl">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-base leading-7 text-[#334f46]">{step.text}</p>
+              <li key={step.title} className="group min-w-0 overflow-hidden rounded-3xl border border-[#d5e6dd] bg-white shadow-[0_18px_44px_rgba(7,17,31,0.07)]">
+                <SceneImage src={stepScenes[index]} badge={String(index + 1).padStart(2, '0')} />
+                <div className="p-7">
+                  <h3 className="font-display text-xl font-extrabold leading-7 text-home-midnight xl:text-2xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-7 text-[#334f46]">{step.text}</p>
+                </div>
               </li>
             ))}
           </ol>
@@ -181,20 +196,23 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
             {copy.productsText}
           </p>
 
-          <div className="mt-12 grid grid-cols-3">
-            {copy.products.map((product, index) => (
-              <article key={product.routeKey} className={`flex min-w-0 flex-col ${index > 0 ? 'border-l border-[#d5e0db] pl-8 xl:pl-10' : ''} ${index < copy.products.length - 1 ? 'pr-8 xl:pr-10' : ''}`}>
-                <h3 className="max-w-[22ch] font-display text-2xl font-extrabold leading-8 tracking-[-0.015em] text-home-midnight [text-wrap:balance]">
-                  {product.title}
-                </h3>
-                <p className="mb-6 mt-4 text-base leading-7 text-[#435767]">{product.text}</p>
-                <Link
-                  to={getPath(product.routeKey)}
-                  className="mt-auto inline-flex min-h-12 items-center gap-2 self-start rounded-sm py-3 font-display text-base font-bold text-[#075f46] underline decoration-[#aec8bc] underline-offset-4 transition-colors hover:text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46]"
-                >
-                  {product.link}
-                  <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                </Link>
+          <div className="mt-12 grid grid-cols-3 gap-6 xl:gap-8">
+            {copy.products.map((product) => (
+              <article key={product.routeKey} className="group flex min-w-0 flex-col overflow-hidden rounded-3xl border border-[#d5e0db] bg-white shadow-[0_18px_44px_rgba(7,17,31,0.07)]">
+                <SceneImage src={productScenes[product.routeKey]} />
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="max-w-[22ch] font-display text-2xl font-extrabold leading-8 tracking-[-0.015em] text-home-midnight [text-wrap:balance]">
+                    {product.title}
+                  </h3>
+                  <p className="mb-6 mt-4 text-base leading-7 text-[#435767]">{product.text}</p>
+                  <Link
+                    to={getPath(product.routeKey)}
+                    className="mt-auto inline-flex min-h-12 items-center gap-2 self-start rounded-sm py-3 font-display text-base font-bold text-[#075f46] underline decoration-[#aec8bc] underline-offset-4 transition-colors hover:text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46]"
+                  >
+                    {product.link}
+                    <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
