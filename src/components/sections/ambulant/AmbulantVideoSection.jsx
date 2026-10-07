@@ -11,7 +11,7 @@ const AmbulantVideoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
   const videoMilestonesRef = useRef(new Set());
-  const posterUrl = "/images/erklaervideo-ambulant-poster.jpg";
+  const posterUrl = "/images/erklaervideo-ambulant-v6-poster.jpg";
 
   const trackVideoEvent = (action, value = 0) => trackEvent(action, {
     component: 'explanation_video',

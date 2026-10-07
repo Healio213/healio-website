@@ -70,7 +70,7 @@ const InsurancePathway = () => {
                     height="540"
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+                    className="h-full w-full object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
                   />
                 </span>
                 <span className="flex flex-1 flex-col p-5 md:p-7">
