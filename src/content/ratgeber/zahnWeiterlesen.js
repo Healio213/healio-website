@@ -1,8 +1,8 @@
 /**
  * Weiterlesen-Block auf /zahn (Zahn-Ratgeber Welle 1, 06.10.2026).
  *
- * Bewusst eine kleine eigene Liste statt eines Imports aus index.js: Das
- * Register zieht alle Artikeltexte mit, /zahn soll schlank bleiben. Der
+ * Bewusst eine kleine eigene Liste statt eines Imports aus dem Register:
+ * /zahn soll schlank bleiben und nicht mit jedem neuen Ratgeber wachsen. Der
  * Vertragstest (check-ratgeber-contract.mjs) prüft, dass jeder Slug hier im
  * Register steht und der Titel dem listTitle entspricht.
  */

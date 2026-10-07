@@ -14,7 +14,18 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
-import { RATGEBER_GROUPS, ratgeberArticles, getRatgeberArticle } from '../src/content/ratgeber/index.js';
+// Node lädt alle Artikel vollständig; die Website lädt sie je Slug (Abschnitt 10).
+import {
+  RATGEBER_EINZELARTIKEL,
+  RATGEBER_GROUPS,
+  RATGEBER_OVERVIEW_PER_GROUP,
+  RATGEBER_DIR,
+  findArticleFiles,
+  getRatgeberArticle,
+  ratgeberArticles,
+  validateRatgeberSources,
+} from './lib/ratgeber-articles.mjs';
+import { buildOverviewData, registryEntryFor, staleRatgeberRegistryFiles } from './lib/ratgeber-registry.mjs';
 import { collectBlockText, countArticleWords, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
 import { AUTHORS } from '../src/content/ratgeber/authors.js';
 import { ZAHN_WEITERLESEN } from '../src/content/ratgeber/zahnWeiterlesen.js';
@@ -914,7 +925,7 @@ expect(Boolean(zahnGroup) && zahnGroup.title === 'Zähne', 'Die Übersicht /ratg
 for (const slug of [...ZAHN_ALL, 'zahnzusatzversicherung-fehlender-zahn']) {
   expect(zahnGroup?.slugs.includes(slug), `Gruppe Zähne ohne ${slug}.`);
 }
-expect(/RATGEBER_GROUPS/.test(overview) && /ratgeber-\$\{group\.id\}/.test(overview), 'Die Übersicht rendert die Themengruppen mit eigener Sprungmarke.');
+expect(/RATGEBER_OVERVIEW\.groups/.test(overview) && /ratgeber-\$\{group\.id\}/.test(overview), 'Die Übersicht rendert die Themengruppen mit eigener Sprungmarke.');
 
 // Weiterlesen-Block auf /zahn: Slugs im Register, Titel gleich listTitle.
 const zahnPage = read('src/pages/ZahnPage.jsx');
@@ -949,6 +960,110 @@ for (const slug of ZAHN_SLUGS) {
   expect(!/<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html), `Gebaut ${slug}: darf nicht auf noindex stehen.`);
 }
 
+// --- 10. Register, Übersicht und Ladeweg (seit 07.10.2026) ---
+
+// Hunderte Ratgeber dürfen weder die Übersicht noch eine Artikelseite
+// schwerer machen. Deshalb lädt die Website Artikeltext nur über
+// registry.loaders.js (je Slug ein eigener Chunk) und die Übersicht nur
+// registry.overview.js. Beide und registry.js sind aus den Inhaltsdateien und
+// gliederung.js erzeugt (scripts/build-ratgeber-registry.mjs) und müssen zu
+// ihnen passen. Ablauf für neue Artikel: Kopfkommentar in gliederung.js.
+
+for (const error of await validateRatgeberSources()) expect(false, `Register: ${error}`);
+
+const staleRegistryFiles = staleRatgeberRegistryFiles();
+expect(
+  staleRegistryFiles.length === 0,
+  `Erzeugte Ratgeber-Dateien passen nicht zu Inhaltsdateien und Gliederung: ${staleRegistryFiles.join(', ')}. npm run ratgeber:register ausführen.`,
+);
+
+const articleFiles = await findArticleFiles();
+expect(
+  articleFiles.length === ratgeberArticles.length,
+  `Inhaltsdateien (${articleFiles.length}) und Register (${ratgeberArticles.length}) zählen verschieden viele Artikel.`,
+);
+
+const { RATGEBER_ENTRIES } = await import('../src/content/ratgeber/registry.js');
+const { RATGEBER_OVERVIEW } = await import('../src/content/ratgeber/registry.overview.js');
+const { RATGEBER_LOADERS } = await import('../src/content/ratgeber/registry.loaders.js');
+
+expect(
+  JSON.stringify(RATGEBER_ENTRIES.map((entry) => entry.slug)) === JSON.stringify(ratgeberArticles.map((article) => article.slug)),
+  'registry.js nennt andere Artikel oder eine andere Reihenfolge als gliederung.js.',
+);
+for (const article of ratgeberArticles) {
+  const entry = RATGEBER_ENTRIES.find((candidate) => candidate.slug === article.slug);
+  expect(JSON.stringify(entry) === JSON.stringify(registryEntryFor(article)), `registry.js weicht von der Inhaltsdatei ab: ${article.slug}`);
+}
+
+// Schlank heißt: kein Artikeltext im Register und in der Übersicht.
+const ARTICLE_BODY_FIELDS = ['headline', 'lead', 'sections', 'faqs', 'factNugget', 'quickAnswer', 'sources', 'onward', 'internalCta'];
+const overviewCards = [...RATGEBER_OVERVIEW.single, ...RATGEBER_OVERVIEW.groups.flatMap((group) => group.entries)];
+for (const entry of [...RATGEBER_ENTRIES, ...overviewCards]) {
+  expect(ARTICLE_BODY_FIELDS.every((field) => !(field in entry)), `Artikeltext im Register oder in der Übersicht: ${entry.slug}`);
+}
+
+// Übersicht: alle Einzelartikel, je Gruppe die Bereichsseite zuerst und
+// höchstens RATGEBER_OVERVIEW_PER_GROUP weitere Artikel.
+expect(JSON.stringify(RATGEBER_OVERVIEW) === JSON.stringify(buildOverviewData()), 'registry.overview.js passt nicht zur Gliederung.');
+expect(
+  JSON.stringify(RATGEBER_OVERVIEW.single.map((entry) => entry.slug)) === JSON.stringify(RATGEBER_EINZELARTIKEL),
+  'Die Übersicht zeigt nicht alle Einzelartikel in der Reihenfolge der Gliederung.',
+);
+for (const group of RATGEBER_OVERVIEW.groups) {
+  const source = RATGEBER_GROUPS.find((candidate) => candidate.id === group.id);
+  expect(group.entries[0]?.slug === source?.hubSlug, `Gruppe ${group.id}: Die Bereichsseite steht in der Übersicht nicht zuerst.`);
+  expect(group.entries.length <= RATGEBER_OVERVIEW_PER_GROUP + 1, `Gruppe ${group.id}: mehr Karten als Bereichsseite plus ${RATGEBER_OVERVIEW_PER_GROUP}.`);
+  expect(group.total === source?.slugs.length, `Gruppe ${group.id}: total stimmt nicht.`);
+}
+expect(
+  /group\.total > group\.entries\.length/.test(overview)
+    && /getRatgeberPath\(group\.hubSlug\)/.test(overview)
+    && /data-ratgeber-group-all=\{group\.id\}/.test(overview)
+    && />\s*Alle anzeigen\s*</.test(overview),
+  'Die Übersicht braucht je Gruppe den Link „Alle anzeigen“ zur Bereichsseite, sobald die Gruppe mehr Artikel hat als Karten.',
+);
+
+// Ladeweg: je Slug genau ein dynamischer Import, der den richtigen Artikel liefert.
+expect(
+  JSON.stringify([...RATGEBER_LOADERS.keys()]) === JSON.stringify(ratgeberArticles.map((article) => article.slug)),
+  'registry.loaders.js nennt andere Artikel als gliederung.js.',
+);
+for (const [slug, load] of RATGEBER_LOADERS) {
+  const { article } = await load();
+  expect(article?.slug === slug, `registry.loaders.js lädt für ${slug} nicht den passenden Artikel.`);
+}
+const loadersSource = read('src/content/ratgeber/registry.loaders.js');
+expect(!/^\s*import\s/m.test(loadersSource) && !/^\s*export\s.*\sfrom\s/m.test(loadersSource), 'registry.loaders.js darf Artikel nur dynamisch laden (import()), nie statisch.');
+
+// Kein Website-Modul lädt Artikeltext oder Artikellisten statisch. Erlaubt
+// sind registry.loaders.js (dynamisch) und Node-Skripte unter scripts/.
+const articleSlugPattern = articleFiles.map(({ slug }) => slug.replace(/[-]/g, '\\-')).join('|');
+const staticArticleImport = new RegExp(`(?:from\\s*|import\\s*)['"](?:@/content/ratgeber/|\\./|(?:\\.\\./)+content/ratgeber/)(?:${articleSlugPattern})(?:\\.js)?['"]`);
+const srcFiles = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+  const full = path.join(dir, entry.name);
+  if (entry.isDirectory()) return srcFiles(full);
+  return /\.(?:js|jsx)$/.test(entry.name) ? [full] : [];
+});
+for (const file of srcFiles(path.join(root, 'src'))) {
+  const relative = path.relative(root, file);
+  const source = fs.readFileSync(file, 'utf8');
+  expect(!/scripts\/lib\/ratgeber-/.test(source), `${relative}: Website-Code darf die Node-Ladehilfe nicht importieren.`);
+  if (relative === path.join('src', 'content', 'ratgeber', 'registry.loaders.js')) continue;
+  expect(!staticArticleImport.test(source), `${relative}: Artikeltext darf nur über registry.loaders.js geladen werden.`);
+}
+const articlePage = read('src/pages/RatgeberArtikelPage.jsx');
+expect(/from '@\/content\/ratgeber\/registry\.loaders'/.test(articlePage), 'Die Artikelseite lädt ihren Artikel über registry.loaders.js.');
+expect(/<Suspense\b/.test(articlePage) && /React\.lazy\(/.test(articlePage), 'Die Artikelseite lädt den Artikel-Chunk über React.lazy mit eigenem Suspense.');
+for (const [label, source] of [['Übersicht', overview], ['Artikelseite', articlePage], ['Vorlage', layout], ['/zahn', read('src/pages/ZahnPage.jsx')]]) {
+  expect(
+    !/@\/content\/ratgeber\/(?:registry|gliederung)['"]|@\/content\/ratgeber['"]/.test(source),
+    `${label}: keine vollständige Artikelliste importieren (registry.js, gliederung.js), sie wächst mit jedem Artikel.`,
+  );
+}
+expect(!/registry\.loaders/.test(overview), 'Die Übersicht lädt keine Artikel-Chunks.');
+expect(fs.existsSync(RATGEBER_DIR) && !fs.existsSync(path.join(RATGEBER_DIR, 'index.js')), 'src/content/ratgeber/index.js gibt es nicht mehr; Einstieg ist gliederung.js.');
+
 if (failures.length > 0) {
   console.error(`Ratgeber-Vertrag verletzt (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
@@ -957,6 +1072,9 @@ if (failures.length > 0) {
 
 console.log(
   `Zahn-Ratgeber: ${ZAHN_SLUGS.length} Seiten mit Autor, Kurzantwort, Quellen, Kostenkarte und Rechner-Datenschutz geprüft.`,
+);
+console.log(
+  `Register: ${ratgeberArticles.length} Artikel, erzeugte Dateien aktuell, Übersicht mit ${RATGEBER_OVERVIEW.single.length} Einzelartikeln und ${RATGEBER_OVERVIEW.groups.length} Gruppe(n), Artikeltext nur über registry.loaders.js.`,
 );
 console.log(
   `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, ${Object.keys(INTERNAL_BUTTONS).length} Artikel mit je einem internen Button (IKK-Landingpage und Schwangerschaft auf /ambulant, fehlender Zahn auf /zahn#zahn-check), 1.155 EUR nur mit Schwangerschaftsbezug, Schwangerschafts-Hinweis im Vorsorge-Baustein, Fact Nugget unter neuer Überschrift, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,

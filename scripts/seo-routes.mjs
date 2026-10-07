@@ -5,7 +5,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { getRatgeberArticle } from '../src/content/ratgeber/index.js';
+import { ratgeberArticles } from './lib/ratgeber-articles.mjs';
 import { authorSchemaFor } from '../src/content/ratgeber/authors.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
@@ -42,11 +42,8 @@ const partnerFaqSchema = () => visibleFaqSchema(readLocale('de', 'partner').faq.
  * davon, ob eine Suchmaschine JavaScript ausführt. Nur Build-Skripte lesen
  * diese Datei, der Browser-Bundle nicht.
  */
-const ratgeberSchema = (slug) => {
-  const article = getRatgeberArticle(slug);
-  if (!article) throw new Error(`SEO: Ratgeberartikel fehlt im Inhaltsregister: ${slug}`);
-
-  const url = `https://healio.de/ratgeber/${slug}`;
+const ratgeberSchema = (article) => {
+  const url = `https://healio.de/ratgeber/${article.slug}`;
   const graph = [
     createArticleSchema({
       headline: article.headline,
@@ -63,6 +60,30 @@ const ratgeberSchema = (slug) => {
 
   return graph;
 };
+
+/**
+ * Eine Route je veröffentlichtem Ratgeberartikel, abgeleitet aus der
+ * Inhaltsdatei (Reihenfolge und Auswahl: src/content/ratgeber/gliederung.js).
+ * Titel und Beschreibung sind metaTitle und metaDescription der Datei, ein
+ * neuer Artikel braucht hier deshalb keinen eigenen Eintrag.
+ *
+ * - kind 'ratgeber': organisch und indexiert, mit Article- und FAQ-Auszeichnung.
+ * - kind 'advertorial': Werbung für bezahlte Besucher, bewusst nicht im Index
+ *   und ohne Article-Auszeichnung. Die Übersicht /ratgeber und die
+ *   organischen Ratgeberartikel bleiben indexiert.
+ */
+const ratgeberRoutes = () => ratgeberArticles.map((article) => {
+  const path = `/ratgeber/${article.slug}`;
+  const route = {
+    path,
+    title: article.metaTitle,
+    description: article.metaDescription,
+    canonical: `https://healio.de${path}`,
+    lang: 'de',
+  };
+  if (article.kind === 'advertorial') return { ...route, robots: 'noindex, nofollow' };
+  return { ...route, schemaMarkup: ratgeberSchema(article) };
+});
 
 export const seoRoutes = [
   // === DEUTSCH ===
@@ -851,157 +872,8 @@ export const seoRoutes = [
       about: { '@id': 'https://healio.de/#organization' },
     },
   },
-  {
-    // Organische, indexierte Ratgeberartikel. Titel und Beschreibung sind
-    // wortgleich mit metaTitle und metaDescription der jeweiligen
-    // Inhaltsdatei unter src/content/ratgeber/; test:ratgeber prueft das.
-    path: '/ratgeber/ikk-classic-bonusprogramm-2026',
-    title: 'IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio',
-    description: 'IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.',
-    canonical: 'https://healio.de/ratgeber/ikk-classic-bonusprogramm-2026',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('ikk-classic-bonusprogramm-2026'),
-  },
-  {
-    path: '/ratgeber/mkk-bonusprogramm-2026',
-    title: 'mkk Bonusprogramm 2026: Beträge, Zuschuss, Formulare | Healio',
-    description: 'mkk Bonus 2026 laut Satzung: 5 EUR je Vorsorge, 70 EUR Geld oder bis zu 100 EUR Zuschuss zur Zusatzversicherung, Nachweise und Frist 30.04.2027.',
-    canonical: 'https://healio.de/ratgeber/mkk-bonusprogramm-2026',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('mkk-bonusprogramm-2026'),
-  },
-  {
-    path: '/ratgeber/aok-bonusprogramm-2026',
-    title: 'AOK Bonusprogramm 2026: alle 11 AOKs im Vergleich | Healio',
-    description: 'AOK Bonus 2026: Jede der elf AOKs hat ein eigenes Programm. Beträge, Bonusheft, Fristen und wo der Bonus eine Zusatzversicherung mitfinanzieren kann.',
-    canonical: 'https://healio.de/ratgeber/aok-bonusprogramm-2026',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('aok-bonusprogramm-2026'),
-  },
-  {
-    path: '/ratgeber/tk-bonusprogramm-2026',
-    title: 'TK Bonusprogramm 2026: Punkte, Gesundheitsdividende | Healio',
-    description: 'TK Bonus 2026 laut Satzung: 100 Punkte sind 1 EUR, die Gesundheitsdividende doppelt so viel. Wofür du sie einlöst, Fristen und der Weg zur Zusatzversicherung.',
-    canonical: 'https://healio.de/ratgeber/tk-bonusprogramm-2026',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('tk-bonusprogramm-2026'),
-  },
-  {
-    path: '/ratgeber/barmer-bonusprogramm-2026',
-    title: 'BARMER Bonusprogramm 2026: Punkte, Maßnahmen, Frist | Healio',
-    description: 'BARMER Bonus 2026 laut Satzung: Punkte je Maßnahme, je nach Aktivität bis zu 100 EUR Geld oder 200 EUR Zuschuss, auch für die Zusatzversicherung, Fristen.',
-    canonical: 'https://healio.de/ratgeber/barmer-bonusprogramm-2026',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('barmer-bonusprogramm-2026'),
-  },
-  {
-    path: '/ratgeber/zahnzusatzversicherung-fehlender-zahn',
-    title: 'Zahnzusatzversicherung bei fehlendem Zahn | Healio',
-    description: 'Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.',
-    canonical: 'https://healio.de/ratgeber/zahnzusatzversicherung-fehlender-zahn',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('zahnzusatzversicherung-fehlender-zahn'),
-  },
-  {
-    path: '/ratgeber/schwanger-zusatzversicherung',
-    title: 'Schwanger: welcher Zusatzschutz jetzt noch geht | Healio',
-    description: 'Schwanger ohne Zusatzschutz? Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
-    canonical: 'https://healio.de/ratgeber/schwanger-zusatzversicherung',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('schwanger-zusatzversicherung'),
-  },
-  {
-    path: '/ratgeber/schwangerschaft-worauf-achten',
-    title: 'Schwanger: worauf du jetzt achten solltest | Healio',
-    description: 'Vorsorge, Mutterpass, Mutterschutz und das Geld: was die Kasse zahlt, was du selbst trägst und warum der Kassenbonus jetzt am höchsten ist.',
-    canonical: 'https://healio.de/ratgeber/schwangerschaft-worauf-achten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('schwangerschaft-worauf-achten'),
-  },
-  {
-    path: '/ratgeber/schwangerschaft-was-steht-mir-zu',
-    title: 'Was steht mir in der Schwangerschaft zu? Leistungen | Healio',
-    description: 'Was steht dir in der Schwangerschaft zu? Kassenleistungen, Extras von AOK, TK, Barmer, IKK classic und mkk, dazu die Fristen.',
-    canonical: 'https://healio.de/ratgeber/schwangerschaft-was-steht-mir-zu',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('schwangerschaft-was-steht-mir-zu'),
-  },
-  {
-    path: '/ratgeber/hebamme-kosten-krankenkasse',
-    title: 'Hebamme Kosten: was die Krankenkasse zahlt | Healio',
-    description: 'Vorsorge, Wochenbett, Rückbildung: was die Hebamme macht, was die Krankenkasse zahlt und wo du selbst zahlst, etwa bei der Rufbereitschaft. Mit Rechnung.',
-    canonical: 'https://healio.de/ratgeber/hebamme-kosten-krankenkasse',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('hebamme-kosten-krankenkasse'),
-  },
-  // Zahn-Ratgeber Welle 1 (06.10.2026), Bereichsseite zuerst.
-  {
-    path: '/ratgeber/zahnersatz-kosten',
-    title: 'Zahnersatz Kosten: was die Kasse zahlt, was du zahlst | Healio',
-    description: 'Zahnersatz, Krone, Implantat, Zahnreinigung: was die Krankenkasse 2026 zahlt, was ab 2027 gilt, wie das Bonusheft hilft und wo dein Eigenanteil bleibt.',
-    canonical: 'https://healio.de/ratgeber/zahnersatz-kosten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('zahnersatz-kosten'),
-  },
-  {
-    path: '/ratgeber/professionelle-zahnreinigung-kosten',
-    title: 'Professionelle Zahnreinigung: Kosten und Kassenzuschuss | Healio',
-    description: 'Was eine professionelle Zahnreinigung kostet und welche Krankenkasse wie viel dazugibt: AOK, TK, BARMER, DAK, IKK classic und weitere, mit Satzungsfundstelle.',
-    canonical: 'https://healio.de/ratgeber/professionelle-zahnreinigung-kosten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('professionelle-zahnreinigung-kosten'),
-  },
-  {
-    path: '/ratgeber/zahnimplantat-kosten',
-    title: 'Zahnimplantat Kosten: Kassenanteil und Eigenanteil | Healio',
-    description: 'Was ein Zahnimplantat kostet, welchen Festzuschuss die Kasse zahlt, was mit Bonusheft gilt und was eine Zahnzusatzversicherung im ersten Jahr erstattet.',
-    canonical: 'https://healio.de/ratgeber/zahnimplantat-kosten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('zahnimplantat-kosten'),
-  },
-  {
-    path: '/ratgeber/wurzelbehandlung-kosten',
-    title: 'Wurzelbehandlung Kosten: wann die Kasse zahlt | Healio',
-    description: 'Wurzelbehandlung beim Zahnarzt: wann sie Kassenleistung ist, welche Zusatzleistungen privat kosten und was eine Zahnzusatzversicherung davon erstattet.',
-    canonical: 'https://healio.de/ratgeber/wurzelbehandlung-kosten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('wurzelbehandlung-kosten'),
-  },
-  {
-    path: '/ratgeber/zahnkrone-kosten',
-    title: 'Zahnkrone Kosten: Arten, Festzuschuss, Eigenanteil | Healio',
-    description: 'Metall, verblendet oder Vollkeramik: was eine Zahnkrone kostet, welchen Festzuschuss die Kasse 2026 und ab 2027 zahlt und was am Ende für dich bleibt.',
-    canonical: 'https://healio.de/ratgeber/zahnkrone-kosten',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('zahnkrone-kosten'),
-  },
-  {
-    path: '/ratgeber/bonusheft-zahnarzt',
-    title: 'Bonusheft beim Zahnarzt: so viel mehr zahlt die Kasse | Healio',
-    description: 'Bonusheft beim Zahnarzt: 70 oder 75 statt 60 Prozent Festzuschuss, ab 2027 60 oder 65 statt 50. Regeln, verlorenes Heft und der Unterschied zum Kassenbonus.',
-    canonical: 'https://healio.de/ratgeber/bonusheft-zahnarzt',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('bonusheft-zahnarzt'),
-  },
-  {
-    path: '/ratgeber/zahnzusatzversicherung-ohne-wartezeit',
-    title: 'Zahnzusatzversicherung ohne Wartezeit: was gilt | Healio',
-    description: 'Zahnzusatzversicherung ohne Wartezeit: was ab dem ersten Tag versichert ist, wo die Zahnstaffel greift und warum Angeratenes nur ein Sofortbaustein abdeckt.',
-    canonical: 'https://healio.de/ratgeber/zahnzusatzversicherung-ohne-wartezeit',
-    lang: 'de',
-    schemaMarkup: ratgeberSchema('zahnzusatzversicherung-ohne-wartezeit'),
-  },
-  {
-    // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:
-    // die Seite ist Werbung, nicht organische Sichtbarkeit. Die Uebersicht
-    // /ratgeber und spaetere organische Ratgeberartikel bleiben indexiert.
-    path: '/ratgeber/krankenkassen-bonus-zusatzversicherung',
-    title: 'Krankenkassen-Bonus nutzen und Zusatzschutz finanzieren | Healio',
-    description: 'Wie das Bonusprogramm der eigenen gesetzlichen Krankenkasse den größten Teil einer ambulanten Zusatzversicherung trägt. Erst prüfen, dann entscheiden.',
-    canonical: 'https://healio.de/ratgeber/krankenkassen-bonus-zusatzversicherung',
-    lang: 'de',
-    robots: 'noindex, nofollow',
-  },
+  // Ratgeberartikel: eine Route je Inhaltsdatei, siehe ratgeberRoutes oben.
+  ...ratgeberRoutes(),
   {
     path: '/zahnaerzte/praxis-checkliste',
     title: 'Praxis-Checkliste für Zahnarztpraxen | Healio',

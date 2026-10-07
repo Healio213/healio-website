@@ -4,7 +4,8 @@ import { ArrowDown, ArrowRight, Clock } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { friendlyIconAssets } from '@/components/ui/healioSoftClayIcons';
-import { RATGEBER_GROUPS, getRatgeberGroupArticles, getRatgeberPath, ratgeberArticles, ungroupedRatgeberArticles } from '@/content/ratgeber';
+import { getRatgeberPath } from '@/content/ratgeber/paths';
+import { RATGEBER_OVERVIEW } from '@/content/ratgeber/registry.overview';
 import { fetchCachedBlogArticles } from '@/lib/blogContentCache';
 import { applyBlogEditorialFixes } from '@/lib/blogEditorialFixes';
 
@@ -58,8 +59,8 @@ const ARTICLE_FIGURES = {
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;
 
 // Themen-Sprungmarken im Hero. Jede Marke springt zur Karte ihres Artikels
-// oder, mit group, zum Abschnitt ihrer Themengruppe; fehlt der Artikel im
-// Register, fällt die Marke weg.
+// oder, mit group, zum Abschnitt ihrer Themengruppe; fehlt Artikel oder
+// Gruppe in der Übersicht, fällt die Marke weg.
 const TOPICS = [
   { slug: 'ikk-classic-bonusprogramm-2026', label: 'Kassenbonus', kind: 'bonus', tone: 'butter' },
   { slug: 'zahnzusatzversicherung-fehlender-zahn', group: 'zaehne', label: 'Zähne', kind: 'dental', tone: 'mint' },
@@ -244,17 +245,23 @@ const BlogGroup = ({ group }) => (
 
 /**
  * Übersicht /ratgeber. Heller Hero auf Papier mit Themen-Sprungmarken, die
- * kuratierten Ratgeber aus src/content/ratgeber/index.js als Karten (der
- * erste Eintrag als Leitartikel, Reihenfolge wie im Register), danach alle
- * Blogartikel nach Leserkreis und der Verweis auf den Blog.
+ * kuratierten Ratgeber als Karten, danach alle Blogartikel nach Leserkreis
+ * und der Verweis auf den Blog.
+ *
+ * Die Karten kommen aus src/content/ratgeber/registry.overview.js (erzeugt
+ * aus gliederung.js): alle Einzelartikel (der erste als Leitartikel) und je
+ * Themengruppe die Bereichsseite plus die ersten Artikel der Gruppe, bei
+ * mehr Artikeln mit „Alle anzeigen“ zur Bereichsseite. Kein Artikeltext und
+ * keine vollständige Artikelliste, damit die Übersicht mit neuen Ratgebern
+ * nicht schwerer wird.
  */
 const RatgeberPage = () => {
   const blogArticles = useBlogArticles();
-  const [leadArticle, ...moreArticles] = ungroupedRatgeberArticles();
-  const groups = RATGEBER_GROUPS
-    .map((group) => ({ ...group, articles: getRatgeberGroupArticles(group) }))
-    .filter((group) => group.articles.length > 0);
-  const topics = TOPICS.filter((topic) => ratgeberArticles.some((entry) => entry.slug === topic.slug));
+  const [leadArticle, ...moreArticles] = RATGEBER_OVERVIEW.single;
+  const groups = RATGEBER_OVERVIEW.groups.filter((group) => group.entries.length > 0);
+  const topics = TOPICS.filter((topic) => (topic.group
+    ? groups.some((group) => group.id === topic.group)
+    : RATGEBER_OVERVIEW.single.some((entry) => entry.slug === topic.slug)));
   const hasBlog = blogArticles.length > 0;
 
   const blogGroups = useMemo(() => BLOG_GROUPS.map((group) => ({
@@ -382,12 +389,26 @@ const RatgeberPage = () => {
                   </div>
                 </div>
                 <ul className="mt-8 grid gap-6 md:grid-cols-2">
-                  {group.articles.map((entry) => (
+                  {group.entries.map((entry) => (
                     <li key={entry.slug}>
                       <ArticleCard entry={entry} />
                     </li>
                   ))}
                 </ul>
+                {/* Mehr Artikel als Karten: der Rest steht auf der Bereichsseite. */}
+                {group.total > group.entries.length && (
+                  <p className="mt-8">
+                    <Link
+                      to={getRatgeberPath(group.hubSlug)}
+                      data-ratgeber-group-all={group.id}
+                      className="inline-flex min-h-12 items-center gap-2 rounded-full border border-slate-300 px-6 font-display text-base font-extrabold text-home-midnight transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-2"
+                    >
+                      Alle anzeigen
+                      <span className="sr-only">: {group.title}</span>
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </p>
+                )}
               </section>
             ))}
           </div>
