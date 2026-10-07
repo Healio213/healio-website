@@ -3,14 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
 
-// Rahmen- und Punktfarben der vier Töpfe (wie die Auswahl auf /stationaer).
-const potBorders = ['border-[#c9dcef]', 'border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]'];
-const potDots = ['bg-[#5b8fd1]', 'bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]'];
+// Jede Topf-Karte bekommt ihre eigene Figur und einen warmen Farbton
+// (Frank 07.10.2026: „liebevoller und sympathischer“ statt Farbpunkt).
+const potStyles = {
+  vision: { icon: '/images/friendly-icons/vision-glasses.webp', tone: 'sky', card: 'from-[#f5faff] to-[#e6f1fb] ring-[#d3e3f2]' },
+  natural: { icon: '/images/friendly-icons/naturopathy.webp', tone: 'mint', card: 'from-[#f4fbf7] to-[#e2f4eb] ring-[#cde8dc]' },
+  prevention: { icon: '/images/friendly-icons/prevention-vaccination.webp', tone: 'lavender', card: 'from-[#f9f7ff] to-[#ece8fb] ring-[#dcd6f1]' },
+  copay: { icon: '/images/friendly-icons/medication-copay.webp', tone: 'butter', card: 'from-[#fffcf2] to-[#fcf0cf] ring-[#efe0b2]' },
+};
 
 // Experiment Handy-Conversion 10/2026: mobil ist der Budget-Kompass ohne Höhe
 // (er wiederholt die vier Themen dieser Kacheln und nennt keine Beträge). Der
@@ -141,23 +147,28 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
               mobileItemWidth="w-[74%]"
               bleed={false}
             >
-              {budget.pots.map((pot, index) => (
-                <a
-                  key={pot.key}
-                  href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
-                  onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')}
-                  className={`group block h-full rounded-2xl border bg-white/95 p-4 shadow-[0_2px_6px_rgba(39,63,72,0.08)] transition md:shadow-[0_12px_30px_rgba(39,63,72,0.10)] md:hover:-translate-y-0.5 md:hover:bg-white md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${potBorders[index % potBorders.length]}`}
-                >
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="font-display text-lg font-extrabold leading-tight text-[#071726]">{pot.label}</span>
-                    <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${potDots[index % potDots.length]}`} aria-hidden="true" />
-                  </span>
-                  <span className="mt-1 block font-display text-base font-extrabold text-[#0b6048]">
-                    {t('hero.offerUpTo', { amount: euro.format(pot.amount) })}
-                  </span>
-                  <span className="mt-1 block text-base leading-snug text-slate-600">{pot.detail}</span>
-                </a>
-              ))}
+              {budget.pots.map((pot) => {
+                const style = potStyles[pot.key] || potStyles.natural;
+                return (
+                  <a
+                    key={pot.key}
+                    href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
+                    onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')}
+                    className={`group block h-full rounded-[1.4rem] bg-gradient-to-br p-4 ring-1 transition md:hover:-translate-y-0.5 md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${style.card}`}
+                  >
+                    <span className="flex items-center gap-3">
+                      <FriendlyIcon src={style.icon} tone={style.tone} size="sm" />
+                      <span className="min-w-0">
+                        <span className="block font-display text-lg font-extrabold leading-tight text-[#071726]">{pot.label}</span>
+                        <span className="mt-1 inline-flex rounded-full bg-white/85 px-2.5 py-0.5 font-display text-base font-extrabold text-[#0b6048] shadow-[0_1px_2px_rgba(39,63,72,0.08)]">
+                          {t('hero.offerUpTo', { amount: euro.format(pot.amount) })}
+                        </span>
+                      </span>
+                    </span>
+                    <span className="mt-3 block text-base leading-snug text-slate-600">{pot.detail}</span>
+                  </a>
+                );
+              })}
             </MobileSwipeRow>
             <p className="mt-3 text-sm leading-6 text-slate-500 md:mt-4">{budget.disclosure}</p>
           </div>

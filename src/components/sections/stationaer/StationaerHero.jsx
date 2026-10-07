@@ -3,9 +3,18 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 
 const choiceKeys = ['sp2', 'sp1', 'spu'];
+
+// Jede Tarif-Karte bekommt ihre eigene Figur und einen warmen Farbton
+// (Frank 07.10.2026: „liebevoller und sympathischer“ statt Farbpunkt).
+const choiceStyles = {
+  sp2: { icon: '/images/friendly-icons/hospital-room.webp', tone: 'mint', card: 'from-[#f4fbf7] to-[#e2f4eb] ring-[#cde8dc]' },
+  sp1: { icon: '/images/friendly-icons/medical-stethoscope.webp', tone: 'lavender', card: 'from-[#f9f7ff] to-[#ece8fb] ring-[#dcd6f1]' },
+  spu: { icon: '/images/friendly-icons/protection-shield.webp', tone: 'butter', card: 'from-[#fffcf2] to-[#fcf0cf] ring-[#efe0b2]' },
+};
 
 const StationaerHero = () => {
   const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
@@ -99,7 +108,7 @@ const StationaerHero = () => {
                   mobileItemWidth="w-[78%]"
                   bleed={false}
                 >
-                  {choiceKeys.map((key, index) => (
+                  {choiceKeys.map((key) => (
                     <a
                       key={key}
                       href="#tarife"
@@ -107,20 +116,20 @@ const StationaerHero = () => {
                         code: t(`refresh.hero.choices.${key}.code`),
                         label: t(`refresh.hero.choices.${key}.label`),
                       })}
-                      className={`block h-full rounded-2xl border bg-white/95 p-3.5 shadow-[0_2px_6px_rgba(39,63,72,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b6048] motion-reduce:transform-none motion-reduce:transition-none sm:p-4 md:shadow-[0_12px_30px_rgba(39,63,72,0.10)] md:hover:-translate-y-0.5 md:hover:bg-white md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.16)] ${
-                        index === 0 ? 'border-[#b9e6d6]' : index === 1 ? 'border-[#d7d3ee]' : 'border-[#ead8a7]'
-                      }`}
+                      className={`block h-full rounded-[1.4rem] bg-gradient-to-br p-4 ring-1 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b6048] motion-reduce:transform-none motion-reduce:transition-none md:hover:-translate-y-0.5 md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.14)] ${choiceStyles[key].card}`}
                     >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-sm font-extrabold uppercase tracking-[0.12em] text-slate-500 md:text-xs">
-                          {t(`refresh.hero.choices.${key}.code`)}
-                        </span>
-                        <span className={`h-2.5 w-2.5 rounded-full ${index === 0 ? 'bg-[#25c990]' : index === 1 ? 'bg-[#8a80c9]' : 'bg-[#e6b946]'}`} />
+                      <div className="flex items-center gap-3">
+                        <FriendlyIcon src={choiceStyles[key].icon} tone={choiceStyles[key].tone} size="sm" />
+                        <div className="min-w-0">
+                          <span className="inline-flex rounded-full bg-white/85 px-2.5 py-0.5 text-sm font-extrabold uppercase tracking-[0.1em] text-[#0b6048] shadow-[0_1px_2px_rgba(39,63,72,0.08)] md:text-xs">
+                            {t(`refresh.hero.choices.${key}.code`)}
+                          </span>
+                          <p className="mt-1 text-base font-extrabold leading-tight text-[#071726] md:leading-6">
+                            {t(`refresh.hero.choices.${key}.label`)}
+                          </p>
+                        </div>
                       </div>
-                      <p className="mt-1 text-base font-extrabold leading-tight text-[#071726] md:leading-6">
-                        {t(`refresh.hero.choices.${key}.label`)}
-                      </p>
-                      <p className="mt-1 text-base font-medium leading-snug text-slate-500 md:text-xs">
+                      <p className="mt-3 text-base font-medium leading-snug text-slate-600 md:text-sm">
                         {t(`refresh.hero.choices.${key}.note`)}
                       </p>
                     </a>
