@@ -21,6 +21,7 @@ import { createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
+import { ZAHN_WEITERLESEN } from '@/content/ratgeber/zahnWeiterlesen';
 
 // Zwei Zahn-Wege seit Franks Entscheidung vom 05.10.2026: UKV ZahnPRIVAT für
 // alle Situationen ohne angeratene Behandlung (auch 1 bis 3 fehlende Zähne),
@@ -412,6 +413,34 @@ const ZahnPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Weiterlesen im Zahn-Ratgeber (Welle 1, 06.10.2026): eine ruhige
+            Linkliste, nur auf Deutsch, die Ratgeber gibt es nur dort. */}
+        {lang !== 'en' && (
+          <section className="bg-white px-4 py-14 sm:px-6 md:py-16 lg:px-8" aria-labelledby="zahn-weiterlesen-heading" data-zahn-weiterlesen="">
+            <div className="healio-container">
+              <div className="flex items-center gap-4">
+                <FriendlyIcon kind="document" tone="mint" size="sm" />
+                <h2 id="zahn-weiterlesen-heading" className="font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#07111f] sm:text-3xl">
+                  Weiterlesen im Zahn-Ratgeber
+                </h2>
+              </div>
+              <ul className="mt-6 grid gap-x-8 md:grid-cols-2">
+                {ZAHN_WEITERLESEN.map((entry) => (
+                  <li key={entry.slug} className="border-t border-slate-200">
+                    <Link
+                      to={`/ratgeber/${entry.slug}`}
+                      className="group flex min-h-12 items-center justify-between gap-4 py-3 font-display text-base font-bold leading-6 text-[#07111f] transition-colors hover:text-[#087654] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]"
+                    >
+                      {entry.title}
+                      <ArrowRight className="h-4 w-4 shrink-0 text-[#087654] transition-transform group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
       </article>
     </>
   );

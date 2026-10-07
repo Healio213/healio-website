@@ -24,6 +24,13 @@ import { article as schwangerZusatzversicherung } from './schwanger-zusatzversic
 import { article as schwangerschaftWoraufAchten } from './schwangerschaft-worauf-achten.js';
 import { article as schwangerschaftWasStehtMirZu } from './schwangerschaft-was-steht-mir-zu.js';
 import { article as hebammeKostenKrankenkasse } from './hebamme-kosten-krankenkasse.js';
+import { article as zahnersatzKosten } from './zahnersatz-kosten.js';
+import { article as professionelleZahnreinigungKosten } from './professionelle-zahnreinigung-kosten.js';
+import { article as zahnimplantatKosten } from './zahnimplantat-kosten.js';
+import { article as wurzelbehandlungKosten } from './wurzelbehandlung-kosten.js';
+import { article as zahnkroneKosten } from './zahnkrone-kosten.js';
+import { article as bonusheftZahnarzt } from './bonusheft-zahnarzt.js';
+import { article as zahnzusatzversicherungOhneWartezeit } from './zahnzusatzversicherung-ohne-wartezeit.js';
 
 export const RATGEBER_BASE_PATH = '/ratgeber';
 
@@ -41,6 +48,13 @@ export const ratgeberArticles = [
   schwangerschaftWoraufAchten,
   schwangerschaftWasStehtMirZu,
   hebammeKostenKrankenkasse,
+  zahnersatzKosten,
+  professionelleZahnreinigungKosten,
+  zahnimplantatKosten,
+  wurzelbehandlungKosten,
+  zahnkroneKosten,
+  bonusheftZahnarzt,
+  zahnzusatzversicherungOhneWartezeit,
   krankenkassenBonusZusatzversicherung,
 ];
 

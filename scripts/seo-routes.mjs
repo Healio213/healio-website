@@ -934,6 +934,63 @@ export const seoRoutes = [
     lang: 'de',
     schemaMarkup: ratgeberSchema('hebamme-kosten-krankenkasse'),
   },
+  // Zahn-Ratgeber Welle 1 (06.10.2026), Bereichsseite zuerst.
+  {
+    path: '/ratgeber/zahnersatz-kosten',
+    title: 'Zahnersatz Kosten: was die Kasse zahlt, was du zahlst | Healio',
+    description: 'Zahnersatz, Krone, Implantat, Zahnreinigung: was die Krankenkasse 2026 zahlt, was ab 2027 gilt, wie das Bonusheft hilft und wo dein Eigenanteil bleibt.',
+    canonical: 'https://healio.de/ratgeber/zahnersatz-kosten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('zahnersatz-kosten'),
+  },
+  {
+    path: '/ratgeber/professionelle-zahnreinigung-kosten',
+    title: 'Professionelle Zahnreinigung: Kosten und Kassenzuschuss | Healio',
+    description: 'Was eine professionelle Zahnreinigung kostet und welche Krankenkasse wie viel dazugibt: AOK, TK, BARMER, DAK, IKK classic und weitere, mit Satzungsfundstelle.',
+    canonical: 'https://healio.de/ratgeber/professionelle-zahnreinigung-kosten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('professionelle-zahnreinigung-kosten'),
+  },
+  {
+    path: '/ratgeber/zahnimplantat-kosten',
+    title: 'Zahnimplantat Kosten: Kassenanteil und Eigenanteil | Healio',
+    description: 'Was ein Zahnimplantat kostet, welchen Festzuschuss die Kasse zahlt, was mit Bonusheft gilt und was eine Zahnzusatzversicherung im ersten Jahr erstattet.',
+    canonical: 'https://healio.de/ratgeber/zahnimplantat-kosten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('zahnimplantat-kosten'),
+  },
+  {
+    path: '/ratgeber/wurzelbehandlung-kosten',
+    title: 'Wurzelbehandlung Kosten: wann die Kasse zahlt | Healio',
+    description: 'Wurzelbehandlung beim Zahnarzt: wann sie Kassenleistung ist, welche Zusatzleistungen privat kosten und was eine Zahnzusatzversicherung davon erstattet.',
+    canonical: 'https://healio.de/ratgeber/wurzelbehandlung-kosten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('wurzelbehandlung-kosten'),
+  },
+  {
+    path: '/ratgeber/zahnkrone-kosten',
+    title: 'Zahnkrone Kosten: Arten, Festzuschuss, Eigenanteil | Healio',
+    description: 'Metall, verblendet oder Vollkeramik: was eine Zahnkrone kostet, welchen Festzuschuss die Kasse 2026 und ab 2027 zahlt und was am Ende für dich bleibt.',
+    canonical: 'https://healio.de/ratgeber/zahnkrone-kosten',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('zahnkrone-kosten'),
+  },
+  {
+    path: '/ratgeber/bonusheft-zahnarzt',
+    title: 'Bonusheft beim Zahnarzt: so viel mehr zahlt die Kasse | Healio',
+    description: 'Bonusheft beim Zahnarzt: 70 oder 75 statt 60 Prozent Festzuschuss, ab 2027 60 oder 65 statt 50. Regeln, verlorenes Heft und der Unterschied zum Kassenbonus.',
+    canonical: 'https://healio.de/ratgeber/bonusheft-zahnarzt',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('bonusheft-zahnarzt'),
+  },
+  {
+    path: '/ratgeber/zahnzusatzversicherung-ohne-wartezeit',
+    title: 'Zahnzusatzversicherung ohne Wartezeit: was gilt | Healio',
+    description: 'Zahnzusatzversicherung ohne Wartezeit: was ab dem ersten Tag versichert ist, wo die Zahnstaffel greift und warum Angeratenes nur ein Sofortbaustein abdeckt.',
+    canonical: 'https://healio.de/ratgeber/zahnzusatzversicherung-ohne-wartezeit',
+    lang: 'de',
+    schemaMarkup: ratgeberSchema('zahnzusatzversicherung-ohne-wartezeit'),
+  },
   {
     // Advertorial fuer bezahlte Meta-Besucher. Bewusst nicht im Index:
     // die Seite ist Werbung, nicht organische Sichtbarkeit. Die Uebersicht

@@ -14,9 +14,10 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { seoRoutes } from './seo-routes.mjs';
-import { ratgeberArticles, getRatgeberArticle } from '../src/content/ratgeber/index.js';
-import { collectBlockText, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
+import { RATGEBER_GROUPS, ratgeberArticles, getRatgeberArticle } from '../src/content/ratgeber/index.js';
+import { collectBlockText, countArticleWords, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
 import { AUTHORS } from '../src/content/ratgeber/authors.js';
+import { ZAHN_WEITERLESEN } from '../src/content/ratgeber/zahnWeiterlesen.js';
 import {
   KASSENBOOST_ANCHOR,
   RATGEBER_INTERNAL_UTM_DEFAULTS,
@@ -719,7 +720,15 @@ if (fs.existsSync(builtAmbulant)) {
 // Opt-in. Wer sie nutzt, steht in OPT_IN_SLUGS; alle anderen Artikel bleiben
 // unverändert. Sperrwörter nach Franks Regeln (Marktanalyse 06.10.2026).
 const RATGEBER_SPERRWORTE = /kostenlos|kostenfrei|gratis|umsonst|(?<![\d.,])0(?:,00)? ?(?:EUR|Euro|€)|ohne Obergrenze|unbegrenzt|Maximalbetrag|garantiert|absicher|(?:keine|ohne) Gesundheits(?:fragen|prüfung)|Testsieger|\bSiegel|\bERGO\b|DA Direkt|\bLKH\b|Courtage|Provision|Geldbonus|Bargeld|in bar\b|Antragsfrage/i;
-const OPT_IN_SLUGS = [];
+const OPT_IN_SLUGS = [
+  'zahnersatz-kosten',
+  'professionelle-zahnreinigung-kosten',
+  'zahnimplantat-kosten',
+  'wurzelbehandlung-kosten',
+  'zahnkrone-kosten',
+  'bonusheft-zahnarzt',
+  'zahnzusatzversicherung-ohne-wartezeit',
+];
 
 // Nur echte Abschnitts-Anker im Inhaltsverzeichnis: ids eindeutig.
 for (const article of ratgeberArticles) {
@@ -761,12 +770,194 @@ for (const slug of RATGEBER_SLUGS) {
 }
 
 
+// --- 9. Zahn-Ratgeber Welle 1 (seit 06.10.2026) ---
+
+// Quelle: Healio/Marktanalyse-2026-10/ZAHN-RATGEBER-PLAN.md (Abschnitte 4
+// und 5) und die Mobil-Prüfung vom 06.10.2026. Jede Seite trägt Autor,
+// Kurzantwort mit Angebotsweg, Quellenblock mit Prüfdatum, Kostenkarte,
+// Kasten "Ehrlich gesagt", FAQ zum Aufklappen und die Pflichtlinks.
+const ZAHN_HUB_SLUG = 'zahnersatz-kosten';
+const ZAHN_HUB_PATH = `/ratgeber/${ZAHN_HUB_SLUG}`;
+const ZAHN_WELLE1 = {
+  [ZAHN_HUB_SLUG]: /zahnersatz kosten/i,
+  'professionelle-zahnreinigung-kosten': /professionelle zahnreinigung/i,
+  'zahnimplantat-kosten': /zahnimplantat/i,
+  'wurzelbehandlung-kosten': /wurzelbehandlung/i,
+  'zahnkrone-kosten': /zahnkrone/i,
+  'bonusheft-zahnarzt': /bonusheft beim zahnarzt/i,
+  'zahnzusatzversicherung-ohne-wartezeit': /zahnzusatzversicherung ohne wartezeit/i,
+};
+const ZAHN_ALL = Object.keys(ZAHN_WELLE1);
+// ZAHN_ONLY=slug1,slug2 prüft beim Schreiben nur die genannten Seiten im Detail.
+const ZAHN_ONLY = (process.env.ZAHN_ONLY || '').split(',').map((entry) => entry.trim()).filter(Boolean);
+const ZAHN_SLUGS = ZAHN_ONLY.length ? ZAHN_ALL.filter((slug) => ZAHN_ONLY.includes(slug)) : ZAHN_ALL;
+
+expect(ZAHN_ALL.every((slug) => OPT_IN_SLUGS.includes(slug)), 'Jeder Zahn-Ratgeber steht in OPT_IN_SLUGS.');
+
+const internalTargets = (article) => {
+  const targets = [];
+  const fromBlocks = (blocks) => {
+    for (const block of blocks || []) {
+      if (block.type === 'segments') block.segments.forEach((segment) => segment.to && targets.push(segment.to));
+      if (block.type === 'path' && block.to) targets.push(block.to);
+      if (block.type === 'cards') (block.items || []).forEach((card) => card.to && targets.push(card.to));
+    }
+  };
+  for (const section of article.sections || []) fromBlocks(section.blocks);
+  if (article.quickAnswer?.path?.to) targets.push(article.quickAnswer.path.to);
+  for (const segment of article.onward?.segments || []) if (segment.to) targets.push(segment.to);
+  return targets.map((to) => to.split('#')[0].split('?')[0]);
+};
+
+for (const slug of ZAHN_SLUGS) {
+  const article = getRatgeberArticle(slug);
+  expect(Boolean(article), `Zahn-Ratgeber fehlt im Inhaltsregister: ${slug}`);
+  if (!article) continue;
+  const text = renderArticleText(article);
+  const label = `Zahn-Ratgeber ${slug}`;
+
+  expect(article.kind === 'ratgeber', `${label}: kind muss "ratgeber" sein.`);
+  expect(/^\d{4}-\d{2}-\d{2}$/.test(article.publishedAt || '') && Boolean(article.publishedAtLabel), `${label}: publishedAt und publishedAtLabel fehlen.`);
+  expect(new RegExp(`<loc>https://healio\\.de/ratgeber/${slug}</loc>\\s*<lastmod>${article.updatedAt || article.publishedAt}</lastmod>`).test(sitemap), `${label}: Sitemap-Eintrag mit lastmod ${article.updatedAt || article.publishedAt} fehlt.`);
+  expect(Number.isInteger(article.readingTimeMinutes) && article.readingTimeMinutes > 0, `${label}: readingTimeMinutes fehlt.`);
+
+  // Zielbegriff in Titel und H1, Kurzantwort zuerst, Fragen als Überschriften.
+  expect(ZAHN_WELLE1[slug].test(article.headline) && ZAHN_WELLE1[slug].test(article.metaTitle), `${label}: Zielbegriff fehlt in H1 oder Seitentitel.`);
+  expect((article.metaTitle || '').length <= 65, `${label}: Seitentitel länger als 65 Zeichen.`);
+  expect((article.metaDescription || '').length >= 110 && (article.metaDescription || '').length <= 165, `${label}: Beschreibung sollte 110 bis 165 Zeichen haben.`);
+  const questionHeadings = (article.sections || []).filter((section) => /\?$/.test(section.heading));
+  expect(questionHeadings.length >= 4, `${label}: mindestens vier Zwischenüberschriften als Frage.`);
+
+  // Autor, Kurzantwort, Quellen, Inhaltsverzeichnis, FAQ zum Aufklappen.
+  expect(article.author === 'frank-steinfurt' && Boolean(AUTHORS[article.author]), `${label}: Autor Frank Steinfurt fehlt.`);
+  const quick = article.quickAnswer;
+  expect(Boolean(quick?.title) && Array.isArray(quick?.facts) && quick.facts.length >= 1 && quick.facts.length <= 3, `${label}: Kurzantwort-Karte mit ein bis drei Zahlen fehlt.`);
+  expect((quick?.facts || []).every((fact) => fact.value && fact.label), `${label}: jede Zahl der Kurzantwort braucht Wert und Beschriftung.`);
+  // Mobil zuerst: kurze Beschriftungen, damit der Weg im ersten Bildschirm liegt.
+  expect((quick?.facts || []).every((fact) => fact.value.length <= 24 && fact.label.length <= 70), `${label}: Kurzantwort-Zahlen höchstens 24, Beschriftungen höchstens 70 Zeichen.`);
+  expect((quick?.path?.text || '').length <= 60, `${label}: Der Satz am Angebotsweg der Kurzantwort hat höchstens 60 Zeichen.`);
+  expect(/^\/zahn(?:#|$)/.test(quick?.path?.to || '') && Boolean(quick?.path?.label), `${label}: Die Kurzantwort zeigt den Angebotsweg auf /zahn im ersten Bildschirm.`);
+  const sources = article.sources;
+  expect(/^\d{4}-\d{2}-\d{2}$/.test(sources?.checkedAt || '') && Boolean(sources?.checkedAtLabel), `${label}: Quellenblock braucht ein sichtbares Prüfdatum.`);
+  expect(Array.isArray(sources?.items) && sources.items.length >= 3, `${label}: Quellenblock braucht mindestens drei Quellen.`);
+  for (const source of sources?.items || []) {
+    expect(Boolean(source.label && source.publisher), `${label}: Quelle ohne Titel oder Herausgeber.`);
+    expect(!source.href || /^https:\/\//.test(source.href), `${label}: Quellen-Link muss https sein: ${source.href}`);
+    expect(!source.href || Boolean(source.accessedAt), `${label}: Verlinkte Quelle ohne Abrufdatum: ${source.label}`);
+  }
+  expect(article.toc === 'auto', `${label}: toc: 'auto' setzen (Inhaltsverzeichnis ab rund 1.500 Wörtern).`);
+  expect(article.faqStyle === 'accordion', `${label}: FAQ zum Aufklappen (faqStyle: 'accordion').`);
+  expect(Array.isArray(article.faqs) && article.faqs.length >= 4, `${label}: mindestens vier FAQ.`);
+  expect((article.factNugget || '').trim().length >= 80, `${label}: Faktenkasten fehlt.`);
+  expect(!article.internalCta, `${label}: kein interner Button, der Angebotsweg läuft über Kurzantwort, Weg-Karten und den Schluss.`);
+
+  // Bausteine im Text.
+  const blocks = (article.sections || []).flatMap((section) => section.blocks);
+  const costCards = blocks.filter((block) => block.type === 'costCard');
+  expect(costCards.length >= 1, `${label}: Kostenkarte (costCard) fehlt.`);
+  for (const card of costCards) {
+    expect(card.head?.length === 4 && /Kasse/.test(card.head[1]) && /ohne Tarif/.test(card.head[2]) && /mit Tarif/.test(card.head[3]), `${label}: Kostenkarte braucht die Spalten Kasse zahlt, ohne Tarif, mit Tarif.`);
+    expect(card.rows.every((row) => row.length === 4), `${label}: Jede Zeile der Kostenkarte hat vier Zellen.`);
+    expect(Boolean(card.note), `${label}: Kostenkarte braucht eine Quellen- und Annahmenzeile (note).`);
+  }
+  expect(blocks.some((block) => block.type === 'honest' && block.heading === 'Ehrlich gesagt'), `${label}: Kasten "Ehrlich gesagt" fehlt.`);
+  for (const table of blocks.filter((block) => block.type === 'table')) {
+    expect(table.mobile === 'cards', `${label}: Tabellen in Zahn-Ratgebern werden auf dem Handy zu Karten (mobile: 'cards').`);
+  }
+  expect(blocks.filter((block) => block.type === 'path').length >= 1, `${label}: mindestens eine Weg-Karte zum passenden Zahn-Weg im Text.`);
+
+  // Verlinkung: Bereichsseite, zwei bis vier Nachbarn, /zahn.
+  const targets = internalTargets(article);
+  const ratgeberTargets = [...new Set(targets.filter((to) => to.startsWith('/ratgeber/')))];
+  for (const target of ratgeberTargets) {
+    expect(Boolean(getRatgeberArticle(target.slice('/ratgeber/'.length))), `${label}: Interner Ratgeber-Link zeigt ins Leere: ${target}`);
+  }
+  expect(targets.includes('/zahn'), `${label}: Link auf /zahn fehlt.`);
+  if (slug === ZAHN_HUB_SLUG) {
+    for (const other of ZAHN_ALL.filter((entry) => entry !== ZAHN_HUB_SLUG)) {
+      expect(ratgeberTargets.includes(`/ratgeber/${other}`), `Bereichsseite verlinkt nicht auf ${other}.`);
+    }
+    expect(ratgeberTargets.includes('/ratgeber/zahnzusatzversicherung-fehlender-zahn'), 'Bereichsseite verlinkt nicht auf den Ratgeber fehlender Zahn.');
+  } else {
+    expect(ratgeberTargets.includes(ZAHN_HUB_PATH), `${label}: Link auf die Bereichsseite fehlt.`);
+    // Nachbarn sind die übrigen Zahn-Ratgeber; Links auf Kassen-Ratgeber
+    // (etwa vom Bonusheft zu den Bonusprogrammen) zählen nicht mit.
+    const zahnPaths = new Set((RATGEBER_GROUPS.find((group) => group.id === 'zaehne')?.slugs || []).map((entry) => `/ratgeber/${entry}`));
+    const neighbours = ratgeberTargets.filter((target) => target !== ZAHN_HUB_PATH && zahnPaths.has(target));
+    expect(neighbours.length >= 2 && neighbours.length <= 4, `${label}: zwei bis vier Zahn-Nachbarn verlinken (gefunden ${neighbours.length}).`);
+  }
+
+  // Wortregeln (zusätzlich zu Abschnitt 6) und Pflichtgrenzen.
+  const sperr = text.match(RATGEBER_SPERRWORTE);
+  expect(!sperr, `${label}: Sperrwort im Text: "${sperr?.[0]}".`);
+  expect(!/(?<!Soziale )\bsicher/i.test(text), `${label}: Wortstamm "sicher" nicht als Versprechen.`);
+  expect(!/verdient (?:an einem|am) Kassenwechsel|An einem Kassenwechsel verdient/i.test(text), `${label}: nie schreiben, ob Healio am Kassenwechsel verdient.`);
+  expect(!/Zahnärzt\w* (?:erhalten|bekommen) (?:eine )?(?:Vergütung|Prämie)/i.test(text), `${label}: keine Vergütung für Zahnärzte.`);
+  for (const unit of text.split('\n')) {
+    if (/810 EUR/.test(unit)) {
+      expect(/bis zu 810 EUR/.test(unit) && /laut Satzung/.test(unit) && /400 bis 700 EUR/.test(unit), `${label}: 810 EUR nur als "laut Satzung bis zu" und mit der breiten Masse 400 bis 700 EUR: ${unit.slice(0, 90)}`);
+      expect(/Zusatzbeitrag/.test(unit), `${label}: Der IKK-Tipp braucht die Gegenrechnung mit dem Zusatzbeitrag: ${unit.slice(0, 90)}`);
+    }
+    if (/ZAHN Sofort/.test(unit) && /EUR/.test(unit) && /750|1\.500/.test(unit)) {
+      expect(/750 EUR je Kalenderjahr/.test(unit) && /1\.500 EUR/.test(unit), `${label}: ZAHN Sofort nur wortgleich mit /zahn (750 EUR je Kalenderjahr, insgesamt 1.500 EUR): ${unit.slice(0, 90)}`);
+    }
+    if (/Zahnstaffel/.test(unit) && /6\.000/.test(unit)) {
+      expect(/bis 1\.000 EUR im ersten (?:Kalender)?[Jj]ahr, zusammen bis 3\.000 EUR in den ersten zwei und bis 6\.000 EUR in den ersten drei (?:Kalender)?[Jj]ahren/.test(unit), `${label}: Zahnstaffel 90/100 wortgleich mit /zahn: ${unit.slice(0, 90)}`);
+    }
+  }
+  expect(countArticleWords(article) >= 900, `${label}: unter 900 Wörtern, zu dünn für den Zielbegriff (gefunden ${countArticleWords(article)}).`);
+}
+
+// Übersicht: Gruppe Zähne mit allen Zahn-Ratgebern und dem fehlenden Zahn.
+const zahnGroup = RATGEBER_GROUPS.find((group) => group.id === 'zaehne');
+expect(Boolean(zahnGroup) && zahnGroup.title === 'Zähne', 'Die Übersicht /ratgeber braucht die Gruppe "Zähne".');
+for (const slug of [...ZAHN_ALL, 'zahnzusatzversicherung-fehlender-zahn']) {
+  expect(zahnGroup?.slugs.includes(slug), `Gruppe Zähne ohne ${slug}.`);
+}
+expect(/RATGEBER_GROUPS/.test(overview) && /ratgeber-\$\{group\.id\}/.test(overview), 'Die Übersicht rendert die Themengruppen mit eigener Sprungmarke.');
+
+// Weiterlesen-Block auf /zahn: Slugs im Register, Titel gleich listTitle.
+const zahnPage = read('src/pages/ZahnPage.jsx');
+expect(/ZAHN_WEITERLESEN/.test(zahnPage) && /data-zahn-weiterlesen/.test(zahnPage), '/zahn braucht den Weiterlesen-Block.');
+for (const entry of ZAHN_WEITERLESEN) {
+  const target = getRatgeberArticle(entry.slug);
+  expect(Boolean(target), `/zahn Weiterlesen zeigt ins Leere: ${entry.slug}`);
+  expect(!target || target.listTitle === entry.title, `/zahn Weiterlesen: Titel weicht von listTitle ab: ${entry.slug}`);
+}
+for (const slug of ZAHN_ALL) {
+  expect(ZAHN_WEITERLESEN.some((entry) => entry.slug === slug), `/zahn Weiterlesen ohne ${slug}.`);
+}
+
+// llms.txt nennt jede neue Seite.
+const llms = read('public/llms.txt');
+for (const slug of ZAHN_ALL) {
+  expect(llms.includes(`https://healio.de/ratgeber/${slug})`), `public/llms.txt ohne ${slug}.`);
+}
+
+// Gebaute Zahn-Seiten: Person, Bausteine, keine Nita-Blase; ältere ohne Bausteine.
+for (const slug of ZAHN_SLUGS) {
+  const builtArticle = path.join(root, 'dist', 'ratgeber', slug, 'index.html');
+  if (!fs.existsSync(builtArticle)) continue;
+  const html = fs.readFileSync(builtArticle, 'utf8');
+  expect(/"author":\{"@type":"Person","@id":"https:\/\/healio\.de\/#frank_steinfurt","name":"Frank Steinfurt"/.test(html), `Gebaut ${slug}: Autor als Person in den strukturierten Daten fehlt.`);
+  expect(html.includes('"@type":"FAQPage"') && html.includes('"@type":"Article"'), `Gebaut ${slug}: Article- oder FAQ-Schema fehlt.`);
+  for (const marker of ['data-ratgeber-quick', 'data-ratgeber-sources', 'data-ratgeber-author="frank-steinfurt"', 'data-ratgeber-costcard', 'data-ratgeber-honest', 'Quellen und Stand']) {
+    expect(html.includes(marker), `Gebaut ${slug}: ${marker} fehlt im HTML.`);
+  }
+  expect(!html.includes('data-ratgeber-cta=') && !html.includes('data-ratgeber-internal-cta='), `Gebaut ${slug}: kein Werbe- oder interner Button.`);
+  expect(!html.includes('data-healio-nita=') && !html.includes('healio-nita-quiet-launcher'), `Gebaut ${slug}: keine Nita-Blase.`);
+  expect(!/<meta[^>]+name=["']robots["'][^>]*noindex/i.test(html), `Gebaut ${slug}: darf nicht auf noindex stehen.`);
+}
+
 if (failures.length > 0) {
   console.error(`Ratgeber-Vertrag verletzt (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
+console.log(
+  `Zahn-Ratgeber: ${ZAHN_SLUGS.length} Seiten mit Autor, Kurzantwort, Quellen, Kostenkarte und Rechner-Datenschutz geprüft.`,
+);
 console.log(
   `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, ${Object.keys(INTERNAL_BUTTONS).length} Artikel mit je einem internen Button (IKK-Landingpage und Schwangerschaft auf /ambulant, fehlender Zahn auf /zahn#zahn-check), 1.155 EUR nur mit Schwangerschaftsbezug, Schwangerschafts-Hinweis im Vorsorge-Baustein, Fact Nugget unter neuer Überschrift, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
 );

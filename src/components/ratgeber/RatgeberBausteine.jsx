@@ -56,7 +56,7 @@ export const ArticleByline = ({ author, standIso, standLabel, readingTimeMinutes
       </Link>
       <span className="block">
         Stand <time dateTime={standIso}>{standLabel}</time>
-        {readingTimeMinutes ? ` · Lesezeit etwa ${readingTimeMinutes} Minuten` : null}
+        {readingTimeMinutes ? ` · ${readingTimeMinutes} Min. Lesezeit` : null}
       </span>
     </p>
   </div>
@@ -72,7 +72,7 @@ export const QuickAnswerCard = ({ quick }) => {
     <section
       aria-labelledby="kurzantwort-heading"
       data-ratgeber-quick=""
-      className="mt-7 rounded-[1.75rem] border border-[#cfeee0] bg-[#f4faf7] p-5 shadow-[0_18px_44px_rgba(7,17,31,0.06)] sm:p-7"
+      className="mt-6 rounded-[1.75rem] border border-[#cfeee0] bg-[#f4faf7] p-4 shadow-[0_18px_44px_rgba(7,17,31,0.06)] sm:mt-7 sm:p-7"
     >
       <div className="flex items-center justify-between gap-4">
         <h2 id="kurzantwort-heading" className="font-display text-lg font-extrabold leading-snug tracking-[-0.01em] text-[#07111f] sm:text-xl">
@@ -81,25 +81,24 @@ export const QuickAnswerCard = ({ quick }) => {
         {quick.icon && <FriendlyIcon kind={quick.icon} tone={quick.tone || 'mint'} size="sm" />}
       </div>
 
-      <dl className="mt-4 grid gap-2.5 sm:mt-5 sm:grid-cols-3 sm:gap-3">
+      {/* Mobil zuerst: Zahl über der Beschriftung, kurze Beschriftungen, der
+          Weg direkt darunter, damit er auf dem Handy im ersten Bildschirm liegt
+          (Mobil-Prüfung 06.10.2026). Der erklärende Satz folgt danach. */}
+      <dl className="mt-3 grid gap-2 sm:mt-5 sm:grid-cols-3 sm:gap-3">
         {facts.map((fact) => (
           <div
             key={`${fact.value}-${fact.label}`}
-            className="flex items-baseline gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_6px_18px_rgba(7,17,31,0.05)] sm:flex-col sm:items-start sm:gap-1 sm:p-4"
+            className="flex min-w-0 flex-col rounded-2xl bg-white px-4 py-2.5 shadow-[0_6px_18px_rgba(7,17,31,0.05)] sm:gap-1 sm:p-4"
           >
-            <dd className="order-1 shrink-0 font-display text-xl font-extrabold leading-tight tracking-[-0.02em] text-[#087654] sm:text-2xl">
+            <dd className="order-1 break-words font-display text-xl font-extrabold leading-tight tracking-[-0.02em] text-[#087654] sm:text-2xl">
               {fact.value}
             </dd>
-            <dt className="order-2 text-base leading-6 text-slate-700 sm:text-[0.95rem]">
+            <dt className="order-2 break-words text-[0.95rem] leading-6 text-slate-700">
               {fact.label}
             </dt>
           </div>
         ))}
       </dl>
-
-      {quick.text && (
-        <p className="mt-4 text-base leading-7 text-slate-700">{quick.text}</p>
-      )}
 
       {quick.path && (
         <Link
@@ -115,6 +114,10 @@ export const QuickAnswerCard = ({ quick }) => {
             <ArrowRight className="h-4 w-4" />
           </span>
         </Link>
+      )}
+
+      {quick.text && (
+        <p className="mt-4 text-base leading-7 text-slate-700">{quick.text}</p>
       )}
     </section>
   );
