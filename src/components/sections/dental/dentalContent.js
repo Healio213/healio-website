@@ -19,9 +19,9 @@
 const de = {
   hero: {
     eyebrow: 'Zahnzusatzversicherung',
-    title: 'Was deine Kasse offenlässt, muss nicht an dir hängen bleiben.',
-    titleLead: 'Was deine Kasse offenlässt,',
-    titleAccent: 'muss nicht an dir hängen bleiben.',
+    title: 'Bei Zahnersatz zahlt die Kasse nur einen Festzuschuss. Den Rest zahlst du, wenn du nicht vorsorgst.',
+    titleLead: 'Bei Zahnersatz zahlt die Kasse nur einen Festzuschuss.',
+    titleAccent: 'Den Rest zahlst du, wenn du nicht vorsorgst.',
     text: 'Ob Zahnersatz, Vorsorge oder bereits angeratene Behandlung: In einer Minute siehst du, welcher Weg zu deiner Situation passen kann.',
     cta: 'Zahn-Check starten',
     micro: ['1 Minute', 'ohne Kontaktdaten', 'Annahme erst im Antrag'],
@@ -368,9 +368,9 @@ const en = {
   hero: {
     ...de.hero,
     eyebrow: 'Supplementary dental insurance',
-    title: 'What your health fund leaves open does not have to become your bill.',
-    titleLead: 'What your health fund leaves open',
-    titleAccent: 'does not have to become your bill.',
+    title: 'For dentures, your health fund only pays a fixed subsidy. You pay the rest unless you plan ahead.',
+    titleLead: 'For dentures, your health fund only pays a fixed subsidy.',
+    titleAccent: 'You pay the rest unless you plan ahead.',
     text: 'Dentures, prevention or treatment already recommended: in one minute you can see which route may fit your situation.',
     cta: 'Start the dental check',
     micro: ['1 minute', 'no contact details', 'acceptance only in the application'],
