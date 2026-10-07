@@ -15,6 +15,7 @@ import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll'
 const CARDS = [
   {
     key: 'sofort',
+    scene: '/images/zahn-cards/sofort.webp',
     tone: 'coral',
     icon: 'verified-calendar',
     label: { de: 'Behandlung schon angeraten', en: 'Treatment already advised' },
@@ -23,6 +24,7 @@ const CARDS = [
   },
   {
     key: 'ukvLeistung',
+    scene: '/images/zahn-cards/leistung.webp',
     tone: 'mint',
     icon: 'dental-shield',
     label: { de: 'Maximaler Zahnschutz', en: 'Maximum dental cover' },
@@ -31,6 +33,7 @@ const CARDS = [
   },
   {
     key: 'ukvLuecke',
+    scene: '/images/zahn-cards/luecke.webp',
     tone: 'butter',
     icon: 'document-check',
     label: { de: 'Zähne fehlen schon', en: 'Teeth already missing' },
@@ -39,12 +42,14 @@ const CARDS = [
   },
   {
     key: 'ukvFamilie',
+    scene: '/images/zahn-cards/familie.webp',
     tone: 'sky',
     icon: 'family',
     label: { de: 'Familie und Kinder', en: 'Family and children' },
   },
   {
     key: 'ukvPreis',
+    scene: '/images/zahn-cards/preis.webp',
     tone: 'lavender',
     icon: 'calculator',
     label: { de: 'Günstiger Einstieg', en: 'Affordable start' },
@@ -53,11 +58,23 @@ const CARDS = [
   },
   {
     key: 'bonus',
+    scene: '/images/zahn-cards/bonus.webp',
     tone: 'mintDeep',
     icon: 'bonus-medal',
     label: { de: 'Beitrag finanzieren', en: 'Fund your premium' },
   },
 ];
+
+// Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte zeigt oben eine
+// Cartoon-Szene zu ihrer Situation, darunter ein heller Textteil statt Schwarz.
+const BODY_INK = {
+  coral: 'text-[#934638]',
+  mint: 'text-[#075f46]',
+  butter: 'text-[#70520b]',
+  sky: 'text-[#245f83]',
+  lavender: 'text-[#4b4485]',
+  mintDeep: 'text-[#075f46]',
+};
 
 const TONES = {
   coral: { panel: 'bg-[#fff1ed]', ink: 'text-[#934638]', glow: 'bg-[#ffb59f]/45', soft: 'bg-[#fff1ed]' },
@@ -263,7 +280,6 @@ const DentalHighlightCards = () => {
         >
           {cards.map((card, index) => {
             const tone = TONES[card.tone];
-            const isDark = card.tone === 'mintDeep';
             return (
               // Experiment Handy-Conversion 10/2026: "Beitrag finanzieren" wiederholt am Handy
               // den KassenBoost-Abschnitt weiter unten und entfällt dort; ab md unverändert.
@@ -276,43 +292,38 @@ const DentalHighlightCards = () => {
                       trackEvent('zahn_karte_geoeffnet', { karte: card.key });
                     }}
                     aria-label={`${card.label[language]}: ${card.body.title}. ${copy.more} (${index + 1}/${cards.length})`}
-                    className="group flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] bg-home-midnight text-left shadow-[0_18px_44px_rgba(7,17,31,0.12)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4"
+                    className={`group flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-[#07111f]/[0.06] text-left shadow-[0_18px_44px_rgba(7,17,31,0.10)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 ${tone.soft}`}
                   >
-                    <span className={`relative block h-[15.5rem] overflow-hidden ${tone.panel}`}>
-                      <span className={`absolute -bottom-10 -right-8 block h-56 w-56 rounded-full blur-2xl ${tone.glow}`} aria-hidden="true" />
-                      <span className="relative block p-6">
-                        <span className={`block text-base font-semibold ${isDark ? 'text-slate-200' : 'text-[#07111f]/75'}`}>
-                          {card.label[language]}
-                        </span>
-                        {card.figure ? (
-                          <>
-                            <span className={`mt-2 block font-display text-[3.4rem] font-extrabold leading-none tracking-[-0.05em] ${tone.ink}`}>
-                              {card.figure[language]}
-                            </span>
-                            <span className={`mt-2 block max-w-[11rem] text-sm leading-5 ${isDark ? 'text-slate-300' : 'text-[#07111f]/70'}`}>
-                              {card.figureNote[language]}
-                            </span>
-                          </>
-                        ) : null}
-                      </span>
+                    <span className="relative block aspect-[3/2] w-full overflow-hidden bg-[#071726]">
                       <img
-                        src={`/images/friendly-icons/${card.icon}.webp`}
+                        src={card.scene}
                         alt=""
-                        width="320"
-                        height="320"
+                        width="720"
+                        height="480"
                         loading="lazy"
                         decoding="async"
-                        className={`absolute bottom-2 right-2 object-contain drop-shadow-[0_16px_18px_rgba(7,17,31,0.18)] transition duration-300 group-hover:scale-[1.04] motion-reduce:transition-none ${card.figure ? 'h-32 w-32' : 'h-44 w-44'}`}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
                       />
+                      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#07111f] shadow-[0_4px_12px_rgba(7,17,31,0.18)]">
+                        {card.label[language]}
+                      </span>
                     </span>
                     <span className="flex flex-1 flex-col p-6">
-                      <span className="block font-display text-xl font-extrabold leading-snug text-white [text-wrap:balance]">
+                      {card.figure ? (
+                        <span className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                          <span className={`whitespace-nowrap font-display text-[2rem] font-extrabold leading-none tracking-[-0.03em] ${BODY_INK[card.tone]}`}>
+                            {card.figure[language]}
+                          </span>
+                          <span className="min-w-[9rem] flex-1 text-sm leading-5 text-[#07111f]/70">{card.figureNote[language]}</span>
+                        </span>
+                      ) : null}
+                      <span className={`block font-display text-xl font-extrabold leading-snug text-[#07111f] [text-wrap:balance] ${card.figure ? 'mt-3' : ''}`}>
                         {card.body.title}
                       </span>
-                      <span className="mt-2 line-clamp-2 text-base leading-6 text-slate-300">{card.body.text}</span>
+                      <span className="mt-2 line-clamp-3 text-base leading-6 text-slate-600">{card.body.text}</span>
                       <span className="mt-auto flex items-center justify-between gap-3 pt-5">
-                        <span className="text-sm font-semibold text-home-mint-active">{card.body.insurer}</span>
-                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition group-hover:bg-home-mint group-hover:text-home-midnight" aria-hidden="true">
+                        <span className={`text-sm font-bold ${BODY_INK[card.tone]}`}>{card.body.insurer}</span>
+                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#07111f] text-white transition group-hover:bg-home-mint group-hover:text-home-midnight" aria-hidden="true">
                           <Plus className="h-5 w-5" />
                         </span>
                       </span>
