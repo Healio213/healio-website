@@ -256,6 +256,15 @@ export const article = {
             },
           ],
         },
+        {
+          // Externer Hilfslink auf Franks Wunsch (07.10.2026), keine Vergütung.
+          type: 'segments',
+          segments: [
+            { text: 'Nach der Geburt steht auch der Elterngeldantrag an. Wie viel ungefähr kommt und wie du die Monate aufteilst, kannst du vorab durchspielen: ' },
+            { text: 'Elterngeld berechnen und planen', href: 'https://elterngeldguide.dein-navi.de' },
+            { text: '. Verbindlich ist erst der Bescheid deiner Elterngeldstelle.' },
+          ],
+        },
       ],
     },
     {

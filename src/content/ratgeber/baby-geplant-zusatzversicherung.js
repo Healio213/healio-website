@@ -216,6 +216,15 @@ export const article = {
           ],
         },
         {
+          // Externer Hilfslink auf Franks Wunsch (07.10.2026), keine Vergütung.
+          type: 'segments',
+          segments: [
+            { text: 'Für die Zeit nach der Geburt kannst du schon jetzt durchspielen, wie viel Elterngeld ungefähr kommt und wie du die Monate aufteilst: ' },
+            { text: 'Elterngeld berechnen und planen', href: 'https://elterngeldguide.dein-navi.de' },
+            { text: '. Verbindlich ist erst der Bescheid deiner Elterngeldstelle.' },
+          ],
+        },
+        {
           type: 'paragraph',
           text: 'Damit du die Fristen nicht suchen musst, speichere dir diese Seite als Lesezeichen oder schick sie an die Person, mit der du das Baby planst.',
         },
