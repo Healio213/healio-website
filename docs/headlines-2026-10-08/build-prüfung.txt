@@ -1,0 +1,9 @@
+[prerender] ok: /en/tiktok (12 kB)
+[prerender] ok: /instagram (12 kB)
+[prerender] ok: /en/instagram (12 kB)
+[prerender] fertig: 218 Seiten gerendert, 0 fehlgeschlagen.
+[prerender-check] ok: 222 indexierbare und 19 noindex-Routen geprüft.
+[prerender-check] ok: 222 indexierbare und 19 noindex-Routen geprüft.
+[ratgeber-build] ok: 154 vorgerenderte Ratgeberseiten mit Titel, Beschreibung, Auszeichnung, H1, Vorspann, letztem Abschnitt und FAQ geprüft.
+Blog build output contract passed (23 Artikel, 2 Hubs).
+Schema-Indexierungsvertrag erfüllt: 241 Routen geprüft.

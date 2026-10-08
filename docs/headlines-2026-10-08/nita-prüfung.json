@@ -1,0 +1,107 @@
+{
+  "testedAt": "2026-10-08T21:00:41.552Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "routes": [
+    {
+      "route": "/en/dental/",
+      "initial": {
+        "pathname": "/en/dental",
+        "timers": [
+          {
+            "delay": 35000,
+            "scheduledAt": 399.20000000298023,
+            "firedAfterMs": null
+          },
+          {
+            "delay": 35000,
+            "scheduledAt": 400,
+            "firedAfterMs": null
+          }
+        ],
+        "pillShown": "true",
+        "bubblePresent": false
+      },
+      "pageErrors": [],
+      "beforeDue": {
+        "sampleCount": 135,
+        "latestSampleMs": 34807,
+        "bubbleAbsentInAllSamples": true
+      },
+      "afterDue": {
+        "timers": [
+          {
+            "delay": 35000,
+            "scheduledAt": 399.20000000298023,
+            "firedAfterMs": null
+          },
+          {
+            "delay": 35000,
+            "scheduledAt": 400,
+            "firedAfterMs": 35001.10000000149
+          }
+        ],
+        "bubbleShown": "true"
+      },
+      "checkProtection": {
+        "checkInView": true,
+        "pillShown": "false",
+        "bubbleShown": "false",
+        "pillAriaHidden": "true",
+        "bubbleAriaHidden": "true"
+      }
+    },
+    {
+      "route": "/zahn/",
+      "initial": {
+        "pathname": "/zahn",
+        "timers": [
+          {
+            "delay": 35000,
+            "scheduledAt": 630.5,
+            "firedAfterMs": null
+          },
+          {
+            "delay": 35000,
+            "scheduledAt": 631.5,
+            "firedAfterMs": null
+          }
+        ],
+        "pillShown": "false",
+        "bubblePresent": false
+      },
+      "pageErrors": [],
+      "beforeDue": {
+        "sampleCount": 136,
+        "latestSampleMs": 34821,
+        "bubbleAbsentInAllSamples": true
+      },
+      "afterDue": {
+        "timers": [
+          {
+            "delay": 35000,
+            "scheduledAt": 630.5,
+            "firedAfterMs": null
+          },
+          {
+            "delay": 35000,
+            "scheduledAt": 631.5,
+            "firedAfterMs": 35001.59999999404
+          }
+        ],
+        "bubbleShown": "true"
+      },
+      "checkProtection": {
+        "checkInView": true,
+        "pillShown": "false",
+        "bubbleShown": "false",
+        "pillAriaHidden": "true",
+        "bubbleAriaHidden": "true"
+      }
+    }
+  ],
+  "externalRequestsBlocked": true,
+  "passed": true
+}

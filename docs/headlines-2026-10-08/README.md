@@ -39,7 +39,8 @@ Die deutschen Headlines bleiben eng an Franks Vorlage. Neue Inhalte und Zuständ
 - Gezielt ESLint und `git diff --check` bestanden.
 - Neun deutsche Seiten bei 320, 390 und 1440 Pixeln: 27 Ansichten ohne seitlichen Überlauf oder JS-Seitenfehler, jeweils genau eine sichtbare H1. [Messdaten](ui-messungen.json), [Screenshots](screenshots/).
 - Zahn-Button nach Kürzung der Nutzen-Subline: ungefähr 587 px Unterkante bei 390 px Breite und 844 px Höhe, statt ungefähr 831 px. Bedingungen bleiben direkt darunter lesbar.
-- Vollständiger finaler Produktionsbuild: läuft; Ergebnis wird nach Abschluss ergänzt.
+- Nita in zwei echten 35-Sekunden-Läufen auf `/zahn/` und `/en/dental/`: vor Ablauf keine Hinweisblase, danach sichtbar; im Zahn-Check werden Blase und Auslöser ausgeblendet. Keine JS-Seitenfehler. [Messdaten](nita-prüfung.json).
+- Vollständiger finaler Produktionsbuild `npm run build` bestanden (Exit 0): 218 Seiten gerendert, 0 fehlgeschlagen; 222 indexierbare und 19 `noindex`-Routen sowie 154 Ratgeber, 23 Blogartikel und zwei Blog-Hubs geprüft. Schema-Prüfung für alle 241 Routen bestanden. [Build-Abschluss](build-prüfung.txt).
 
 ## Weitergabe
 
@@ -50,4 +51,6 @@ Auf Franks ausdrücklichen Auftrag wurden zwei Nachrichten gesendet:
 
 ## Veröffentlichungsstand
 
-Lokal umgesetzt und geprüft. Noch kein Push auf `main` und keine Veröffentlichung auf healio.de. Eine Vorschau wird separat vorbereitet; sie ist keine Produktionsfreigabe.
+Lokal umgesetzt und geprüft. Als [Entwurfs-PR #12](https://github.com/Healio213/healio-website/pull/12) auf einem eigenen Branch gesichert. Noch kein Push auf `main` und keine Veröffentlichung auf healio.de.
+
+Die [Vercel-Vorschau](https://healio-website-git-codex-heal-f45edc-frsteinfurt-8047s-projects.vercel.app) verlangt derzeit eine Vercel-Anmeldung und ist deshalb kein frei weiterleitbarer Kundenlink. Die lokale Vorschau ist zusätzlich unter `http://127.0.0.1:3188/` in Chrome geöffnet.
