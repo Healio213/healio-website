@@ -36,6 +36,8 @@
  */
 
 export const article = {
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   slug: 'brille-krankenkasse',
   kind: 'ratgeber',
   group: 'brille',
@@ -279,29 +281,101 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Brillen-Ratgeber hilft dir weiter?',
       blocks: [
-        {
-          type: 'cards',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'comparison',
-              tone: 'mint',
-              title: 'Brillenversicherung: lohnt sie sich?',
-              text: 'Drei Arten von Policen, Beitrag und Erstattung gegen Selbstzahlen gerechnet.',
-              to: '/ratgeber/brillenversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'glasses',
-              tone: 'sky',
-              title: 'Gleitsichtbrille: Kosten und Erstattung',
-              text: 'Wovon der Preis abhängt und was die Kasse nie zahlt.',
-              to: '/ratgeber/gleitsichtbrille-kosten',
-              linkLabel: 'Ratgeber lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "cards",
+    "heading": "Ergänzungsweg und Vertragsgrenzen und Sehhilfen, Kosten und Kassenleistungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "comparison",
+        "tone": "mint",
+        "title": "Brillenversicherung: lohnt sie sich?",
+        "text": "Drei Arten von Policen, Beitrag und Erstattung gegen Selbstzahlen gerechnet.",
+        "to": "/ratgeber/brillenversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Kinderbrille: Kassenleistung und Zusatzversicherung",
+        "text": "Kinderbrille: Kassenleistung, Gestell und Mehrkosten unterscheiden. Erfahre, wann ein Zusatzvertrag hilft und welche Grenzen wichtig sind.",
+        "to": "/ratgeber/brillenversicherung-kinder",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Brille verloren oder kaputt: Erstattung prüfen",
+        "text": "Bei einer verlorenen oder kaputten Brille hängt die Erstattung vom Schadenhergang und den bestehenden Ansprüchen ab. Prüfe einen möglichen Haftpflichtschaden, ein versichertes Hausratereignis, deinen besonderen Brillenvertrag und die gesetzlichen Sehhilfenvoraussetzungen getrennt.",
+        "to": "/ratgeber/brille-verloren-versicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Zahn- und Brillenversicherung",
+        "text": "Zwei Leistungswege vergleichen und den gemeinsamen Beitrag aus echten Angeboten berechnen.",
+        "to": "/ratgeber/zahn-und-brillenversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "sky",
+        "title": "Gleitsichtbrille: Kosten und Erstattung",
+        "text": "Wovon der Preis abhängt und was die Kasse nie zahlt.",
+        "to": "/ratgeber/gleitsichtbrille-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Augenlasern: Kosten und wer sie zahlt",
+        "text": "Welche Kosten du pro Auge klären solltest, wie du Angebote vergleichst und warum eine Operation am Grauen Star einen anderen Kostenweg hat.",
+        "to": "/ratgeber/augenlasern-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "TK und Brille: Was zahlt die Techniker?",
+        "text": "Kassenanteil, eigene Brillenkosten und TK-Gesundheitsdividende getrennt prüfen.",
+        "to": "/ratgeber/tk-brille",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "AOK und Brille: Zuschuss und Kassenleistung",
+        "text": "Die AOK übernimmt medizinisch notwendige Brillengläser im gesetzlichen Leistungsumfang, wenn du die Voraussetzungen für Sehhilfen erfüllst. Zusätzliche Zuschüsse richten sich nach der Satzung deiner regionalen AOK und können besondere Bedingungen haben. Entscheidend sind dein Alter, der ärztlich bestimmte Bedarf und der vorgesehene Kostenweg. Hier erfährst du, welche Kosten du vor der Bestellung getrennt prüfen solltest.",
+        "to": "/ratgeber/aok-brille",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Sehhilfen, Kosten und Kassenleistungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Kontaktlinsen und Krankenkasse: Anspruch und Kosten",
+        "text": "Sehhilfenanspruch, besondere Kontaktlinsenindikation und privaten Tarifumfang getrennt prüfen.",
+        "to": "/ratgeber/kontaktlinsen-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "mint",
+        "title": "Brillenkosten: Angebot und Eigenanteil verstehen",
+        "text": "Was deine Brille kostet, ergibt sich aus dem konkreten Angebot für Gläser, Fassung und gewählte Ausführung; einen pauschalen Marktpreis kannst du daraus nicht ableiten. Deinen Eigenanteil kennst du erst, wenn eine mögliche Kassenbeteiligung und eine bestehende private Erstattung für dieses Angebot geklärt sind.",
+        "to": "/ratgeber/brillenkosten",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  }
+],
     },
   ],
 

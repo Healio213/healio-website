@@ -39,6 +39,8 @@
  */
 
 export const article = {
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   slug: 'vorsorgeuntersuchung',
   kind: 'ratgeber',
   group: 'vorsorge',
@@ -307,45 +309,101 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Vorsorge-Ratgeber hilft dir weiter?',
       blocks: [
-        {
-          type: 'cards',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'advisor',
-              tone: 'sky',
-              title: 'Vorsorgeuntersuchungen für Männer',
-              text: 'Was ab 35, 45 und 50 zusteht, der PSA-Test und der Darm.',
-              to: '/ratgeber/vorsorgeuntersuchung-maenner',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'protection',
-              tone: 'coral',
-              title: 'Vorsorgeuntersuchung für Frauen',
-              text: 'Was ab 20, 30 und 50 zusteht, Mammographie und Abstrich.',
-              to: '/ratgeber/vorsorgeuntersuchung-frauen',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'prevention',
-              tone: 'mint',
-              title: 'Hautkrebsscreening',
-              text: 'Ab 35 alle zwei Jahre, mit Dermatoskop, und was unter 35 anfällt.',
-              to: '/ratgeber/hautkrebsscreening',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'document',
-              tone: 'butter',
-              title: 'TK Reiseimpfungen',
-              text: 'Was die Techniker erstattet und wie du die Rechnung einreichst.',
-              to: '/ratgeber/tk-reiseimpfung',
-              linkLabel: 'Ratgeber lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "cards",
+    "heading": "Vorsorge nach Alter und Anlass und Impfungen und Reisekosten",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "protection",
+        "tone": "coral",
+        "title": "Vorsorgeuntersuchung für Frauen",
+        "text": "Was ab 20, 30 und 50 zusteht, Mammographie und Abstrich.",
+        "to": "/ratgeber/vorsorgeuntersuchung-frauen",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "advisor",
+        "tone": "sky",
+        "title": "Vorsorgeuntersuchungen für Männer",
+        "text": "Was ab 35, 45 und 50 zusteht, der PSA-Test und der Darm.",
+        "to": "/ratgeber/vorsorgeuntersuchung-maenner",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Hautkrebsscreening",
+        "text": "Ab 35 alle zwei Jahre, mit Dermatoskop, und was unter 35 anfällt.",
+        "to": "/ratgeber/hautkrebsscreening",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Check-up 35: Was untersucht wird und wie oft die Kasse zahlt",
+        "text": "Die Kassenuntersuchung, ihre Blutwerte und mögliche private Extras verständlich auseinanderhalten.",
+        "to": "/ratgeber/check-up-35",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "TK-Hautkrebsscreening: Alter, Kosten und Erstattung",
+        "text": "TK-Hautkrebsscreening: Altersgrenzen, Vertragsprogramme und Rechnungserstattung unterscheiden. So prüfst du Kassenleistung und private Kosten.",
+        "to": "/ratgeber/tk-hautkrebsscreening",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Vorsorgeuntersuchungen bei Kindern: Termine und Kassenleistung",
+        "text": "Die gesetzliche Krankenkasse trägt die Früherkennungsuntersuchungen U1 bis U9 einschließlich U7a und die Jugenduntersuchung J1 nach den geltenden Richtlinien. Zusätzliche U10, U11 und J2 hängen am 7. Oktober 2026 von der jeweiligen Kasse, ihrer Satzung und dem vorgesehenen Vertrags- oder Erstattungsweg ab.",
+        "to": "/ratgeber/vorsorgeuntersuchungen-kinder",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "butter",
+        "title": "TK Reiseimpfungen",
+        "text": "Was die Techniker erstattet und wie du die Rechnung einreichst.",
+        "to": "/ratgeber/tk-reiseimpfung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Reiseimpfungen: Welche Krankenkasse zahlt?",
+        "text": "Satzungsleistungen, eigene Kosten und Abrechnung vor deiner Reise klären.",
+        "to": "/ratgeber/reiseimpfung-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Impfungen und Reisekosten und Angebotsweg",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "AOK-Reiseimpfungen: regionale Kostenübernahme prüfen",
+        "text": "Bayern, Baden-Württemberg und PLUS unterscheiden sich bei Erstattung und Abrechnung. Prüfe den passenden Weg vor dem Termin.",
+        "to": "/ratgeber/aok-reiseimpfung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "lavender",
+        "title": "Passenden Angebotsweg ansehen",
+        "text": "Voraussetzungen und Grenzen auf der Produktseite prüfen.",
+        "to": "/ambulant",
+        "linkLabel": "Angebotsweg ansehen"
+      }
+    ]
+  }
+],
     },
   ],
 

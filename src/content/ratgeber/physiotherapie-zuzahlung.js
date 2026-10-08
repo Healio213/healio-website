@@ -31,6 +31,8 @@
  */
 
 export const article = {
+  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-08",
   slug: 'physiotherapie-zuzahlung',
   kind: 'ratgeber',
   group: 'ambulant',
@@ -123,9 +125,20 @@ export const article = {
           text: 'Wenn du die Belastungsgrenze erreichst. Nach § 62 SGB V musst du in einem Kalenderjahr nur Zuzahlungen bis zu dieser Grenze leisten. Die Grenze beträgt 2 Prozent der jährlichen Bruttoeinnahmen zum Lebensunterhalt, für chronisch Kranke in Dauerbehandlung wegen derselben schwerwiegenden Krankheit in der Regel 1 Prozent. Hast du die Grenze erreicht, stellt dir die Kasse eine Bescheinigung aus, dass du für den Rest des Jahres nichts mehr zuzahlen musst.',
         },
         {
-          type: 'paragraph',
-          text: 'Zuzahlungen und Einnahmen von Ehegatten, Lebenspartnern und Kindern im gemeinsamen Haushalt werden zusammengerechnet. Dabei mindern Freibeträge die Einnahmen. Das Beispiel hier lässt sie weg, damit du das Prinzip siehst.',
-        },
+  "type": "segments",
+  "segments": [
+    {
+      "text": "Zuzahlungen und Einnahmen von Ehegatten, Lebenspartnern und Kindern im gemeinsamen Haushalt werden zusammengerechnet. Dabei mindern Freibeträge die Einnahmen. Das Beispiel hier lässt sie weg, damit du das Prinzip siehst. Die Einzelheiten stehen im Ratgeber zur "
+    },
+    {
+      "text": "Zuzahlungsbefreiung",
+      "to": "/ratgeber/zuzahlungsbefreiung"
+    },
+    {
+      "text": "."
+    }
+  ]
+},
         {
           type: 'table',
           mobile: 'cards',
@@ -217,31 +230,39 @@ export const article = {
           heading: 'Das passt dazu',
           hint: 'Zum Weiterblättern seitlich wischen',
           items: [
-            {
-              icon: 'naturopathy',
-              tone: 'mint',
-              title: 'Heilpraktiker Kosten: wer zahlt was',
-              text: 'Alle Bereiche der Naturheilkunde auf einer Seite.',
-              to: '/ratgeber/heilpraktiker-kosten',
-              linkLabel: 'Zur Übersicht',
-            },
-            {
-              icon: 'ambulant',
-              tone: 'butter',
-              title: 'Ambulante Zusatzversicherung',
-              text: 'Die vier Töpfe, Beiträge nach Alter und für wen sie passen.',
-              to: '/ratgeber/ambulante-zusatzversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'protection',
-              tone: 'sky',
-              title: 'Heilpraktiker-Zusatzversicherung',
-              text: 'Kriterien statt Rangliste, Gesundheitsfragen und Grenzen.',
-              to: '/ratgeber/heilpraktiker-zusatzversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-          ],
+  {
+    "icon": "naturopathy",
+    "tone": "mint",
+    "title": "Heilpraktiker Kosten: wer zahlt was",
+    "text": "Alle Bereiche der Naturheilkunde auf einer Seite.",
+    "to": "/ratgeber/heilpraktiker-kosten",
+    "linkLabel": "Zur Übersicht"
+  },
+  {
+    "icon": "ambulant",
+    "tone": "butter",
+    "title": "Ambulante Zusatzversicherung",
+    "text": "Die vier Töpfe, Beiträge nach Alter und für wen sie passen.",
+    "to": "/ratgeber/ambulante-zusatzversicherung",
+    "linkLabel": "Ratgeber lesen"
+  },
+  {
+    "icon": "protection",
+    "tone": "sky",
+    "title": "Heilpraktiker-Zusatzversicherung",
+    "text": "Kriterien statt Rangliste, Gesundheitsfragen und Grenzen.",
+    "to": "/ratgeber/heilpraktiker-zusatzversicherung",
+    "linkLabel": "Ratgeber lesen"
+  },
+  {
+    "icon": "document",
+    "tone": "mint",
+    "title": "Zuzahlungsbefreiung",
+    "text": "Belastungsgrenze, Belege und Antrag bei der Kasse.",
+    "to": "/ratgeber/zuzahlungsbefreiung",
+    "linkLabel": "Ratgeber lesen"
+  }
+],
         },
       ],
     },
@@ -286,14 +307,38 @@ export const article = {
   onward: {
     heading: 'So gehst du weiter vor',
     segments: [
-      { text: 'Heb alle Verordnungen und Zuzahlungsbelege auf und rechne nach, wie viel du im Jahr zuzahlst. Was ein Tarif dafür erstattet, siehst du auf ' },
-      { text: 'healio.de/ambulant', to: '/ambulant' },
-      { text: '. Wann du ganz befreit bist, steht oben im Abschnitt zur Belastungsgrenze, und alle vier Töpfe erklärt der Ratgeber ' },
-      { text: 'Ambulante Zusatzversicherung', to: '/ratgeber/ambulante-zusatzversicherung' },
-      { text: '. Welche Kasse zu dir passt, vergleichst du auf ' },
-      { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
-      { text: '.' },
-    ],
+  {
+    "text": "Heb alle Verordnungen und Zuzahlungsbelege auf und rechne nach, wie viel du im Jahr zuzahlst. Was ein Tarif dafür erstattet, siehst du auf "
+  },
+  {
+    "text": "healio.de/ambulant",
+    "to": "/ambulant"
+  },
+  {
+    "text": ". Wann du ganz befreit bist, steht im Ratgeber "
+  },
+  {
+    "text": "Zuzahlungsbefreiung",
+    "to": "/ratgeber/zuzahlungsbefreiung"
+  },
+  {
+    "text": ", und alle vier Töpfe erklärt der Ratgeber "
+  },
+  {
+    "text": "Ambulante Zusatzversicherung",
+    "to": "/ratgeber/ambulante-zusatzversicherung"
+  },
+  {
+    "text": ". Welche Kasse zu dir passt, vergleichst du auf "
+  },
+  {
+    "text": "kassenboost.de",
+    "href": "https://kassenboost.de/"
+  },
+  {
+    "text": "."
+  }
+],
   },
 
   sources: {

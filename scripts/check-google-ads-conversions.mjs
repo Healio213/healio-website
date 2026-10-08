@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
+import { EXPECTED_GOOGLE_META_EXCLUDED_PATHS } from './lib/ratgeber-sensitive-paths.mjs';
 
 // Prüft die echten Module (sdk-url, google-ads, meta-pixel, analytics,
 // dentalLinks, hospitalLinks, ukvAmbulantLinks) in einer nachgebauten Browserumgebung. Nur Fenster, Speicher,
@@ -268,7 +269,7 @@ try {
   }
 
   // 6. Gesperrte Seiten bleiben gesperrt, auch mit voller Zustimmung.
-  for (const path of ['/schwangerschaft', '/schwangerschaft?gclid=TestKlick_1234567890', '/ratgeber/schwanger-zusatzversicherung', '/ratgeber/schwangerschaft-worauf-achten', '/ratgeber/schwangerschaft-was-steht-mir-zu', '/ratgeber/hebamme-kosten-krankenkasse', '/blog/kassenbonus-schwangerschaft-vorsorge', '/ratgeber/babybonus-krankenkasse', '/ratgeber/baby-geplant-zusatzversicherung', '/ratgeber/baby-geplant-zusatzversicherung?ref=gads-familie-geplant&gclid=TestKlick_1234567890', '/ratgeber/familienzimmer-krankenhaus', '/ratgeber/neugeborenes-versichern', '/ratgeber/hebamme-rufbereitschaft', '/ratgeber/vorsorgeuntersuchung', '/ratgeber/hautkrebsscreening', '/ratgeber/vorsorgeuntersuchung-frauen', '/ratgeber/vorsorgeuntersuchung-maenner']) {
+  for (const path of [...EXPECTED_GOOGLE_META_EXCLUDED_PATHS, '/schwangerschaft?gclid=TestKlick_1234567890', '/ratgeber/baby-geplant-zusatzversicherung?ref=gads-familie-geplant&gclid=TestKlick_1234567890']) {
     browserAt(path, ALL_ON);
     const mod = await load(configured);
     mod.trackSdkClick('test');

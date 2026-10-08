@@ -15,61 +15,6 @@ export { RATGEBER_BASE_PATH, getRatgeberPath } from './paths.js';
 
 export const RATGEBER_ENTRIES = [
   {
-    "slug": "ikk-classic-bonusprogramm-2026",
-    "kind": "ratgeber",
-    "listTitle": "IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen",
-    "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
-    "readingTimeMinutes": 8,
-    "metaTitle": "IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio",
-    "metaDescription": "IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.",
-    "publishedAt": "2026-09-22",
-    "updatedAt": "2026-10-05"
-  },
-  {
-    "slug": "mkk-bonusprogramm-2026",
-    "kind": "ratgeber",
-    "listTitle": "mkk Bonusprogramm 2026: alle Maßnahmen, Zuschuss zur Zusatzversicherung und Fristen",
-    "listTeaser": "Was die mkk laut Satzung je Maßnahme zahlt, wann der Vollständigkeitsbonus greift und wie bis zu 100 EUR Zuschuss in eine Zusatzversicherung fließen können.",
-    "readingTimeMinutes": 8,
-    "metaTitle": "mkk Bonusprogramm 2026: Beträge, Zuschuss, Formulare | Healio",
-    "metaDescription": "mkk Bonus 2026 laut Satzung: 5 EUR je Vorsorge, 70 EUR Geld oder bis zu 100 EUR Zuschuss zur Zusatzversicherung, Nachweise und Frist 30.04.2027.",
-    "publishedAt": "2026-10-05",
-    "updatedAt": "2026-10-05"
-  },
-  {
-    "slug": "aok-bonusprogramm-2026",
-    "kind": "ratgeber",
-    "listTitle": "AOK Bonusprogramm 2026: alle elf AOKs mit Beträgen, Bonusheft und Fristen",
-    "listTeaser": "Welche AOK für dich zuständig ist, was sie je Maßnahme zahlt, bis wann du einreichst und wo der Bonus als Zuschuss in eine Zusatzversicherung fließen kann.",
-    "readingTimeMinutes": 18,
-    "metaTitle": "AOK Bonusprogramm 2026: alle 11 AOKs im Vergleich | Healio",
-    "metaDescription": "AOK Bonus 2026: Jede der elf AOKs hat ein eigenes Programm. Beträge, Bonusheft, Fristen und wo der Bonus eine Zusatzversicherung mitfinanzieren kann.",
-    "publishedAt": "2026-10-05",
-    "updatedAt": "2026-10-05"
-  },
-  {
-    "slug": "tk-bonusprogramm-2026",
-    "kind": "ratgeber",
-    "listTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende, Nachweise und Fristen",
-    "listTeaser": "Was jede Maßnahme laut Satzung an Punkten bringt, wofür du die doppelte Gesundheitsdividende einlösen kannst und wie sie den Beitrag einer Zusatzversicherung mittragen kann.",
-    "readingTimeMinutes": 9,
-    "metaTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende | Healio",
-    "metaDescription": "TK Bonus 2026 laut Satzung: 100 Punkte sind 1 EUR, die Gesundheitsdividende doppelt so viel. Wofür du sie einlöst, Fristen und der Weg zur Zusatzversicherung.",
-    "publishedAt": "2026-10-05",
-    "updatedAt": "2026-10-05"
-  },
-  {
-    "slug": "barmer-bonusprogramm-2026",
-    "kind": "ratgeber",
-    "listTitle": "BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen",
-    "listTeaser": "Was die BARMER laut Satzung je Maßnahme an Punkten gibt, wie der doppelte Zuschuss funktioniert und wie er den Beitrag einer Zusatzversicherung mitfinanzieren kann.",
-    "readingTimeMinutes": 10,
-    "metaTitle": "BARMER Bonusprogramm 2026: Punkte, Maßnahmen, Frist | Healio",
-    "metaDescription": "BARMER Bonus 2026 laut Satzung: Punkte je Maßnahme, je nach Aktivität bis zu 100 EUR Geld oder 200 EUR Zuschuss, auch für die Zusatzversicherung, Fristen.",
-    "publishedAt": "2026-10-05",
-    "updatedAt": "2026-10-05"
-  },
-  {
     "slug": "schwangerschaft-worauf-achten",
     "kind": "ratgeber",
     "listTitle": "Schwanger: worauf du jetzt achten solltest",
@@ -80,12 +25,414 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-09-28"
   },
   {
+    "slug": "bonusprogramm-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse und Bonus: Bonusprogramme und Zuschüsse im Überblick",
+    "listTeaser": "Was ein Bonusprogramm ist, wie die Kassen auszahlen, wann der Bonus als Zuschuss den Beitrag einer Zusatzversicherung mitträgt und welcher Ratgeber zu deiner Kasse passt.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Krankenkasse Bonusprogramm: Überblick und Zuschuss | Healio",
+    "metaDescription": "Bonusprogramm der Krankenkasse: Maßnahmen, Nachweise und Fristen vergleichen. Welche zweckgebundenen Zuschüsse deinen Zusatzschutz mittragen können.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "ikk-classic-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen",
+    "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio",
+    "metaDescription": "IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.",
+    "publishedAt": "2026-09-22",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "mkk-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "mkk Bonusprogramm 2026: alle Maßnahmen, Zuschuss zur Zusatzversicherung und Fristen",
+    "listTeaser": "Was die mkk laut Satzung je Maßnahme zahlt, wann der Vollständigkeitsbonus greift und wie bis zu 100 EUR Zuschuss in eine Zusatzversicherung fließen können.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "mkk Bonusprogramm 2026: Beträge, Zuschuss, Formulare | Healio",
+    "metaDescription": "mkk Bonus 2026 laut Satzung: 5 EUR je Vorsorge, 70 EUR Geld oder bis zu 100 EUR Zuschuss zur Zusatzversicherung, Nachweise und Frist 30.04.2027.",
+    "publishedAt": "2026-10-05",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "aok-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "AOK Bonusprogramm 2026: alle elf AOKs mit Beträgen, Bonusheft und Fristen",
+    "listTeaser": "Welche AOK für dich zuständig ist, was sie je Maßnahme zahlt, bis wann du einreichst und wo der Bonus als Zuschuss in eine Zusatzversicherung fließen kann.",
+    "readingTimeMinutes": 18,
+    "metaTitle": "AOK Bonusprogramm 2026: alle 11 AOKs im Vergleich | Healio",
+    "metaDescription": "AOK Bonus 2026: Jede der elf AOKs hat ein eigenes Programm. Beträge, Bonusheft, Fristen und wo der Bonus eine Zusatzversicherung mitfinanzieren kann.",
+    "publishedAt": "2026-10-05",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende, Nachweise und Fristen",
+    "listTeaser": "Was jede Maßnahme laut Satzung an Punkten bringt, wofür du die doppelte Gesundheitsdividende einlösen kannst und wie sie den Beitrag einer Zusatzversicherung mittragen kann.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende | Healio",
+    "metaDescription": "TK Bonus 2026 laut Satzung: 100 Punkte sind 1 EUR, die Gesundheitsdividende doppelt so viel. Wofür du sie einlöst, Fristen und der Weg zur Zusatzversicherung.",
+    "publishedAt": "2026-10-05",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "barmer-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen",
+    "listTeaser": "Was die BARMER laut Satzung je Maßnahme an Punkten gibt, wie der doppelte Zuschuss funktioniert und wie er den Beitrag einer Zusatzversicherung mitfinanzieren kann.",
+    "readingTimeMinutes": 10,
+    "metaTitle": "BARMER Bonusprogramm 2026: Punkte, Maßnahmen, Frist | Healio",
+    "metaDescription": "BARMER Bonus 2026 laut Satzung: Punkte je Maßnahme, je nach Aktivität bis zu 100 EUR Geld oder 200 EUR Zuschuss, auch für die Zusatzversicherung, Fristen.",
+    "publishedAt": "2026-10-05",
+    "updatedAt": "2026-10-08"
+  },
+  {
     "slug": "krankenkassen-bonus-zusatzversicherung",
     "kind": "advertorial",
+    "group": "kasse-bonus",
     "listTitle": "Krankenkassen-Bonus: das Geld, mit dem sich Zusatzschutz finanzieren lässt",
     "listTeaser": "Warum ein Blick in die Satzung der eigenen Krankenkasse oft mehr bringt als jeder Tarifwechsel.",
     "metaTitle": "Krankenkassen-Bonus nutzen und Zusatzschutz finanzieren | Healio",
-    "metaDescription": "Wie das Bonusprogramm der eigenen gesetzlichen Krankenkasse den größten Teil einer ambulanten Zusatzversicherung trägt. Erst prüfen, dann entscheiden."
+    "metaDescription": "Wie das Bonusprogramm der eigenen gesetzlichen Krankenkasse den größten Teil einer ambulanten Zusatzversicherung trägt. Erst prüfen, dann entscheiden.",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zusatzbeitrag-krankenkasse-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zusatzbeitrag der Krankenkasse 2026: Was zahlst du selbst?",
+    "listTeaser": "Der Zusatzbeitrag kommt zum allgemeinen Krankenversicherungsbeitrag hinzu und ist je Krankenkasse unterschiedlich. Arbeitnehmer und Arbeitgeber teilen ihn bei einer üblichen versicherungspflichtigen Beschäftigung zur Hälfte.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zusatzbeitrag Krankenkasse 2026: Höhe und Vergleich | Healio",
+    "metaDescription": "Zusatzbeitrag 2026: aktuelle Kassensätze, dein eigener Anteil und ein Rechenbeispiel. So vergleichst du Beiträge, Wechselrecht und Leistungen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "krankenkasse-wechseln",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse wechseln: Welche Frist gilt und wie geht es?",
+    "listTeaser": "Zum Wechsel zwischen gesetzlichen Krankenkassen wählst du die neue Kasse, die die Abmeldung bei der bisherigen übernimmt. Regulär gelten zwölf Monate Bindung und ein Ende der Mitgliedschaft nach den zwei folgenden vollen Kalendermonaten.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkasse wechseln: Frist und Ablauf 2026 | Healio",
+    "metaDescription": "Krankenkasse wechseln: zwölf Monate Bindung, zwei volle Monate Frist und Sonderkündigungsrecht. Was du bei Arbeitgeber und Wahltarif beachtest.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "aok-zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zuzahlungsbefreiung AOK: Wie stellst du den richtigen Antrag?",
+    "listTeaser": "Die AOK befreit dich auf Antrag von weiteren gesetzlichen Zuzahlungen, sobald deine jährliche Belastungsgrenze erreicht ist. Diese liegt grundsätzlich bei zwei Prozent der Bruttoeinnahmen zum Lebensunterhalt, bei anerkannter schwerwiegender chronischer Erkrankung unter den gesetzlichen Voraussetzungen bei einem Prozent.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zuzahlungsbefreiung AOK: Antrag und Grenze 2026 | Healio",
+    "metaDescription": "AOK-Zuzahlungsbefreiung: So findest du den regionalen Antrag, prüfst die Belastungsgrenze 2026 und reichst Einkommen und Zuzahlungsbelege ein.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zusatzbeitrag-rentner",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkassen-Zusatzbeitrag für Rentner 2026: Wer zahlt was?",
+    "listTeaser": "Den Zusatzbeitrag aus einer gesetzlichen Rente tragen pflichtversicherte Rentner und die Rentenversicherung jeweils zur Hälfte. Änderungen des Zusatzbeitragssatzes wirken für diese Rentenbeiträge gesetzlich erst vom ersten Tag des zweiten folgenden Kalendermonats an.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkassen Zusatzbeitrag Rentner 2026: Anteil | Healio",
+    "metaDescription": "Zusatzbeitrag für Rentner 2026: Anteil der Rentenversicherung, Wirkung ab März und eigene Beispiele. Gesetzliche Rente und weitere Einnahmen trennen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "praeventionskurs-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Präventionskurse: Was zahlt die Krankenkasse und wie findest du sie?",
+    "listTeaser": "Die Krankenkasse kann zertifizierte Präventionskurse nach § 20 SGB V bezuschussen, die Höhe und Bedingungen regelt ihre Satzung. Die IKK classic erstattet im üblichen Kursangebot laut aktueller Satzung höchstens zwei Maßnahmen im Kalenderjahr mit jeweils bis zu 90 EUR.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Präventionskurse: Zuschuss der Krankenkasse | Healio",
+    "metaDescription": "Präventionskurse nach § 20 SGB V: anerkannte Kurse finden, Zuschuss prüfen und Teilnahme belegen. IKK-Beispiel mit Satzung und klaren Grenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "guenstigste-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Günstigste Krankenkasse 2026: Welche passt zu dir?",
+    "listTeaser": "Günstigste Krankenkasse 2026 finden: Zusatzbeitrag, eigene Beitragsersparnis, nutzbare Zuschüsse und Service vergleichen. Mit Rechnung und klaren Grenzen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Günstigste Krankenkasse 2026: richtig vergleichen | Healio",
+    "metaDescription": "Günstigste Krankenkasse 2026 finden: Zusatzbeitrag, eigene Beitragsersparnis, nutzbare Zuschüsse und Service vergleichen. Mit Rechnung und klaren Grenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "mindestbeitrag-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse Mindestbeitrag 2026: Was zahlst du ohne Einkommen?",
+    "listTeaser": "Krankenkasse Mindestbeitrag 2026: Bemessungsgrundlage, Zusatzbeitrag und Pflegebeitrag verstehen. Was ohne Einkommen gilt und welche Nachweise du brauchst.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkasse Mindestbeitrag 2026: ohne Einkommen | Healio",
+    "metaDescription": "Krankenkasse Mindestbeitrag 2026: Bemessungsgrundlage, Zusatzbeitrag und Pflegebeitrag verstehen. Was ohne Einkommen gilt und welche Nachweise du brauchst.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "dak-zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "DAK Zuzahlungsbefreiung: Wie beantragst du sie?",
+    "listTeaser": "DAK Zuzahlungsbefreiung beantragen: offizieller Onlineweg und PDF, benötigte Nachweise, Belastungsgrenze und Vorauszahlung verständlich erklärt.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "DAK Zuzahlungsbefreiung: Antrag und Formular | Healio",
+    "metaDescription": "DAK Zuzahlungsbefreiung beantragen: offizieller Onlineweg und PDF, benötigte Nachweise, Belastungsgrenze und Vorauszahlung verständlich erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenkasse-studenten",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse für Studenten: Was zählt bei der Wahl?",
+    "listTeaser": "Welche Krankenkasse passt zu Studenten? Beiträge 2026 mit Pflegeversicherung, Familienversicherung und wichtige Grenzen des Studierendenbeitrags.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkasse für Studenten: Beiträge 2026 | Healio",
+    "metaDescription": "Welche Krankenkasse passt zu Studenten? Beiträge 2026 mit Pflegeversicherung, Familienversicherung und wichtige Grenzen des Studierendenbeitrags.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "dak-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "DAK Bonusprogramm 2026: Wie nutzt du die Punkte?",
+    "listTeaser": "DAK Bonusprogramm 2026 erklärt: Punkte sammeln, Zuschüsse zu Gesundheitsleistungen nutzen, Nachweise beachten und die jährliche Grenze verstehen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "DAK Bonusprogramm 2026: Punkte und Zuschüsse | Healio",
+    "metaDescription": "DAK Bonusprogramm 2026 erklärt: Punkte sammeln, Zuschüsse zu Gesundheitsleistungen nutzen, Nachweise beachten und die jährliche Grenze verstehen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenkasse-zuschuss-fitnessstudio",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse Zuschuss Fitnessstudio: was zählt und was nicht",
+    "listTeaser": "Die Mitgliedschaft und ein zertifizierter Gesundheitskurs sind verschiedene Leistungen. Bei der TK kann die Gesundheitsdividende helfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkasse Zuschuss Fitnessstudio: Regeln | Healio",
+    "metaDescription": "Ein Zuschuss zum Fitnessstudio läuft häufig über den Kassenbonus. So unterscheidest du Mitgliedschaft, Präventionskurs, Fitnesstracker und Sportausrüstung.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zuzahlungsbefreiung-chronisch-krank",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Barmer Zuzahlungsbefreiung chronisch krank: Formular und Regeln",
+    "listTeaser": "Die reduzierte Belastungsgrenze gilt für schwerwiegende chronische Krankheiten. Ärztliche Bescheinigung und Kassenantrag erfüllen verschiedene Aufgaben.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Barmer Zuzahlungsbefreiung chronisch krank: Formular | Healio",
+    "metaDescription": "Chronisch krank: Wann die Zuzahlungsgrenze auf ein Prozent sinkt, welches Formular die Barmer verlangt und wie du Nachweise und Antrag vorbereitest.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "ikk-zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zuzahlungsbefreiung IKK: Formular finden und Antrag vorbereiten",
+    "listTeaser": "Für IKK-classic-Mitglieder: der aktuelle Antragsweg und was bei Quittungen, Einkommen und Vorauszahlung zählt.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zuzahlungsbefreiung IKK: Formular und Antrag | Healio",
+    "metaDescription": "Zuzahlungsbefreiung bei der IKK classic: der offizielle Antrag, nötige Nachweise, jährliche Belastungsgrenze und die Alternative zur Belegsammlung.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zuzahlung-medikamente",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zuzahlung von Medikamenten: was du zahlst und zurückbekommen kannst",
+    "listTeaser": "Die gesetzliche Zuzahlung, private Aufzahlungen und die Belastungsgrenze sind verschiedene Beträge. So liest du deine Apothekenquittung.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zuzahlung Medikamente 2026 und 2027: Regeln | Healio",
+    "metaDescription": "Medikamenten-Zuzahlung 2026 und ab 2027: gesetzliche Grenzen, Ausnahmen und Jahresbefreiung. So trennst du Zuzahlungen von privaten Mehrkosten.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenkasse-wechseln-nachteile",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse wechseln Nachteile: was du vorher prüfen solltest",
+    "listTeaser": "Ein niedrigerer Beitrag ist nur ein Teil der Entscheidung. Prüfe Extra-Leistungen, offene Nachweise, Bindungen und geplante Versorgung.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenkasse wechseln Nachteile: was zählt | Healio",
+    "metaDescription": "Krankenkasse wechseln: Welche Nachteile bei Bonus, Extras, Wahltarifen und Hilfsmitteln möglich sind und was bei Krankheit oder Beitragsschulden gilt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zuzahlungsbefreiung-schwerbehinderung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Schwerbehinderung: Zuzahlungsgrenze richtig prüfen",
+    "listTeaser": "GdB, Pflegegrad, Dauerbehandlung und Einkommensberechnung unterscheiden. So prüfst du deinen Antrag auf Zuzahlungsbefreiung.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Zuzahlungsbefreiung bei Schwerbehinderung | Healio",
+    "metaDescription": "Zuzahlungsbefreiung bei Schwerbehinderung: Warum GdB 50 allein nicht genügt, wann die 1-Prozent-Grenze gilt und welche Belege du brauchst.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "wechselpraemie-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Wechselprämie: Welche Leistung steckt dahinter?",
+    "listTeaser": "Gesundheitsbonus, Mitgliederwerbung und Wahltarif sind verschiedene Wege. Prüfe Voraussetzungen und Beitragskosten vor dem Wechsel.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Krankenkasse wechseln: Prämie und Bonus prüfen | Healio",
+    "metaDescription": "Krankenkasse wechseln mit Prämie? Erfahre, wie sich Wechselversprechen, Gesundheitsbonus, Werberentschädigung und Wahltarif unterscheiden.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "hkk-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "HKK-Bonusprogramm: Was zählt für deinen Gesundheitszuschuss?",
+    "listTeaser": "Aktivitäten, Fristen und anerkannte Ausgaben nach der aktuellen Satzungsanlage prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "HKK-Bonusprogramm 2026: Zuschuss und Fristen | Healio",
+    "metaDescription": "HKK-Bonusprogramm 2026: Aktivitäten, Gesundheitszuschuss und Tracker-Regeln nach Satzung. Nachweise, Fristen und Rechnungsgrenzen klar erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "hek-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "HEK-Bonusprogramm: Welche Zuschussstufe passt zu dir?",
+    "listTeaser": "Vorsorge, Sport und anerkannte Ausgaben nach dem aktuellen 117. Nachtrag prüfen.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "HEK-Bonusprogramm 2026: Zuschüsse und Nachweise | Healio",
+    "metaDescription": "HEK-Bonusprogramm 2026: Vorsorge- und Gesundheitszuschuss nach aktueller Satzung. Stufen, zwölfmonatiger Zeitraum und anerkannte Ausgaben erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "abnehmen-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Abnehmen mit der Krankenkasse: Kurse, Programme und Zuschüsse",
+    "listTeaser": "Den anerkannten Kurs, eine Therapie und den passenden Kostenweg vor der Anmeldung auseinanderhalten.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Abnehmen mit der Krankenkasse: Kurse und Zuschüsse | Healio",
+    "metaDescription": "Welche Hilfe zahlt die Krankenkasse beim Abnehmen? Prüfe zertifizierte Kurse, Ernährungstherapie, den TK-Zuschuss und zweckgebundene Bonusleistungen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "beitragserhoehung-krankenkasse",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Beitragserhöhung: Sonderkündigung und Wechsel prüfen",
+    "listTeaser": "Erhöhungsmonat, Kündigungsfrist und tatsächlichen Wechselbeginn auseinanderhalten. So prüfst du Beitrag und passende Kassenextras.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Krankenkasse: Erhöhung des Zusatzbeitrags | Healio",
+    "metaDescription": "Krankenkasse erhöht den Zusatzbeitrag? Prüfe Sonderkündigung, Monatsfrist und Wechselbeginn. Die persönliche Informationspflicht ist entfallen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "mobil-krankenkasse-bonusprogramm",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Mobil Krankenkasse Bonusprogramm: Aktivitäten und Einreichen",
+    "listTeaser": "Im Mobil-Bonusprogramm kannst du mit dem Aktiv-Konto zweckgebundene Zuschüsse für anerkannte eigene Kosten nutzen; die maßgeblichen Bonuswerte werden dafür verdoppelt. Du brauchst sowohl passende Aktivitätsnachweise als auch Rechnungen, und für das Bonusjahr 2026 endet die Nachreichfrist am 31. März 2027.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Mobil-Bonusprogramm: Aktiv-Konto und Nachweise | Healio",
+    "metaDescription": "Mobil-Bonusprogramm: So prüfst du Aktivitäten, Aktiv-Konto und zweckgebundene Zuschüsse. Mit Nachweisen, Kostenbeispiel und Frist für 2026.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zuzahlungsbefreiung: Belastungsgrenze, Belege und Antrag",
+    "listTeaser": "Wie hoch deine Belastungsgrenze ist, was als Zuzahlung zählt, wie du den Antrag stellst und was sich 2027 ändert, mit Rechenbeispielen und den Regeln im Gesetzestext.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Zuzahlungsbefreiung Krankenkasse: Grenze und Antrag | Healio",
+    "metaDescription": "Zuzahlungsbefreiung: 2- oder 1-Prozent-Grenze, Freibeträge 2026, Antrag und Beispiele. Welche Zuzahlungen ab 2027 steigen und was der Tarif trägt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenversicherung-beitrag-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkassenbeitrag 2026: Beitragssatz, Zusatzbeitrag und Rechenbeispiel",
+    "listTeaser": "Aus welchen Teilen dein Beitrag besteht, was die Kassen als Zusatzbeitrag verlangen, bis zu welchem Einkommen du zahlst und wie du den Unterschied in Euro ausrechnest.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Krankenversicherung Beitrag 2026: Satz und Zusatzbeitrag | Healio",
+    "metaDescription": "Krankenversicherung Beitrag 2026: 14,6 Prozent plus Zusatzbeitrag, Beitragsbemessungsgrenze und Rechenbeispiele für deinen Anteil.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "TK Zuzahlungsbefreiung: Antrag, Belege und Belastungsgrenze",
+    "listTeaser": "Wie du bei der Techniker Krankenkasse die Zuzahlungsbefreiung bekommst, warum es kein einheitliches Formular gibt und was Vorauszahlung und Belege bedeuten.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "TK Zuzahlungsbefreiung: Antrag, Grenze und Ablauf | Healio",
+    "metaDescription": "TK Zuzahlungsbefreiung: passenden Antrag anfordern, Belege einreichen oder vorauszahlen. Freibeträge 2026 und Beispiele für die Belastungsgrenze.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "barmer-zuzahlungsbefreiung",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Barmer Zuzahlungsbefreiung: Antrag, Formular und Belege",
+    "listTeaser": "Wie du bei der Barmer die Zuzahlungsbefreiung online beantragst, welche Formulare es gibt und worauf du bei Vorauszahlung und Belegen achtest.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Barmer Zuzahlungsbefreiung: Antrag online und Formular | Healio",
+    "metaDescription": "Barmer Zuzahlungsbefreiung 2026: Antrag online in Meine Barmer, die PDF-Formulare, Vorauszahlung, Belege, Freibeträge und Beispiele zur Belastungsgrenze.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zuzahlungsbefreiung-rentner",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Zuzahlungsbefreiung für Rentner: Einnahmen, Ehepaare und Antrag",
+    "listTeaser": "Welche Rente, Betriebsrente und Zinsen zählen, wie Ehepaare rechnen, was bei Grundsicherung im Alter gilt und wo du den Antrag stellst.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Zuzahlungsbefreiung Rentner: Einkommen, Ehepaare, Antrag | Healio",
+    "metaDescription": "Zuzahlungsbefreiung für Rentner: Welche Einnahmen zählen, was bei Ehepaaren gilt, wie hoch die Grenze ist und wie der Antrag bei TK, Barmer und AOK läuft.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "bkk-firmus-bonusprogramm-2026",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "BKK firmus Bonusprogramm 2026: Beträge, Bonusheft und Fristen",
+    "listTeaser": "Was die BKK firmus laut Satzung zahlt, wie das Bonusheft funktioniert und was ein günstiger Zusatzbeitrag im Vergleich ausmacht.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "BKK firmus Bonusprogramm 2026: Beträge, Bonusheft, Frist | Healio",
+    "metaDescription": "BKK firmus Bonusprogramm 2026: 30 EUR für Verhalten, 5 EUR je Vorsorge, Familienbonus und Fristen. Mit Nachweisen und einer ehrlichen Gegenrechnung.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "krankenkasse-wechseln-rentner",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse wechseln als Rentner: so geht es und was sich ändert",
+    "listTeaser": "Wer als Rentner die Kasse wechseln darf, wie lange die Bindung und die Frist dauern, ob die KVdR bleibt und was ein anderer Zusatzbeitrag in der Rente ausmacht.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Krankenkasse wechseln als Rentner: Regeln und Frist | Healio",
+    "metaDescription": "Krankenkasse wechseln als Rentner: Bindung, Kündigungsfrist, KVdR und Zusatzbeitrag verständlich erklärt. Mit Rechenbeispielen für deine Rente.",
+    "publishedAt": "2026-10-07"
   },
   {
     "slug": "zahnersatz-kosten",
@@ -97,7 +444,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Zahnersatz Kosten: was die Kasse zahlt, was du zahlst | Healio",
     "metaDescription": "Zahnersatz, Krone, Implantat, Zahnreinigung: was die Krankenkasse 2026 zahlt, was ab 2027 gilt, wie das Bonusheft hilft und wo dein Eigenanteil bleibt.",
     "publishedAt": "2026-10-06",
-    "updatedAt": "2026-10-07"
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "professionelle-zahnreinigung-kosten",
@@ -299,6 +646,313 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "zahnzusatzversicherung-vergleich",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung im Vergleich: Was zählt für dich?",
+    "listTeaser": "Eine Zahnzusatzversicherung vergleichst du vor allem nach Erstattungsbasis, Leistungsgrenzen und Annahmebedingungen. Der Monatsbeitrag wird erst aussagekräftig, wenn du weißt, welche Rechnungen der Tarif unter welchen Bedingungen übernimmt.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnzusatzversicherung: Vergleich der Kriterien | Healio",
+    "metaDescription": "Zahnzusatzversicherung vergleichen: Erstattungsbasis, Zahnstaffel, Wartezeit und Beitrag verstehen. Mit Checkliste für deinen Tarifvergleich.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "aok-zahnreinigung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "AOK Zahnreinigung: Welche regionale AOK zahlt wie viel?",
+    "listTeaser": "Der Zuschuss zur AOK-Zahnreinigung hängt von deiner regionalen AOK und ihrer Satzung ab. Es gibt keine einheitliche Leistung für alle AOK-Versicherten; die Tabelle zeigt Beträge, Altersgrenzen und gemeinsame Budgets mit Stand 7. Oktober 2026.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "AOK Zahnreinigung: Zuschüsse aller elf AOKs | Healio",
+    "metaDescription": "AOK Zahnreinigung: Zuschüsse, Altersgrenzen und geteilte Budgets aller elf AOKs. Mit Satzungsfundstellen und Hinweisen zur Erstattung.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-zahnreinigung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "TK Zahnreinigung: So bekommst du den Zuschuss",
+    "listTeaser": "Die TK bezuschusst eine professionelle Zahnreinigung ab 18 Jahren mit bis zu 40 EUR im Kalenderjahr. Du reichst die Rechnung ein; maßgeblich sind die nachgewiesenen Kosten und § 27o der TK-Satzung.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "TK Zahnreinigung: Zuschuss und Erstattung | Healio",
+    "metaDescription": "TK Zahnreinigung: bis zu 40 EUR im Kalenderjahr ab 18 Jahren. So reichst du die Rechnung ein und ordnest Bonus und Zusatzversicherung ein.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "barmer-zahnreinigung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Barmer Zahnreinigung: Wie funktioniert die Erstattung?",
+    "listTeaser": "Die Barmer hat keinen allgemeinen PZR-Satzungszuschuss für Erwachsene außerhalb der Schwangerschaft. Du kannst einen Zuschuss über das Bonusprogramm nutzen; für Schwangere gibt es eine eigene zusätzliche Leistung mit besonderen Voraussetzungen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Barmer Zahnreinigung: Bonus und Erstattung | Healio",
+    "metaDescription": "Barmer Zahnreinigung: Zuschuss über Bonusnachweise, Sonderregel für Schwangere und private Ergänzung. Mit Satzungsgrenzen und Antragswegen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "TK und Zahnzusatzversicherung: Was gehört zu welchem Vertrag?",
+    "listTeaser": "So trennst du TK-Festzuschuss, Gesundheitsdividende und private Tarifleistung, bevor du einen Eigenanteil planst.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "TK Zahnzusatzversicherung: Zahnersatz richtig einordnen | Healio",
+    "metaDescription": "TK Zahnzusatzversicherung erklärt: Festzuschuss für Zahnersatz, Bonusheft, Gesundheitsdividende und die Grenzen eines privaten Zusatzvertrags.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnzusatzversicherung-kosten",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung: Welche Kosten kommen auf dich zu?",
+    "listTeaser": "Was kostet eine Zahnzusatzversicherung? Prüfe persönlichen Beitrag, Leistungsstaffel, später mögliche Anpassungen und einen belegten Kassenbonus.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnzusatzversicherung: Kosten und Beiträge | Healio",
+    "metaDescription": "Was kostet eine Zahnzusatzversicherung? Prüfe persönlichen Beitrag, Leistungsstaffel, später mögliche Anpassungen und einen belegten Kassenbonus.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnzusatzversicherung-laufende-behandlung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
+    "listTeaser": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnzusatzversicherung bei laufender Behandlung | Healio",
+    "metaDescription": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "professionelle-zahnreinigung-sinnvoll",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Professionelle Zahnreinigung: Wie sinnvoll ist sie?",
+    "listTeaser": "Ist professionelle Zahnreinigung sinnvoll? Was zum Nutzen bekannt ist, wo die Studien Grenzen haben und welche Kosten und Kassenleistungen zählen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Professionelle Zahnreinigung: Ist sie sinnvoll? | Healio",
+    "metaDescription": "Ist professionelle Zahnreinigung sinnvoll? Was zum Nutzen bekannt ist, wo die Studien Grenzen haben und welche Kosten und Kassenleistungen zählen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnreinigung-wie-oft",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnreinigung: Wie oft ist der richtige Abstand?",
+    "listTeaser": "Wie oft zur professionellen Zahnreinigung? Befund, Kontrolltermin und Kassenleistung unterscheiden und Kosten für den gewählten Abstand prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnreinigung: Wie oft ist sie sinnvoll? | Healio",
+    "metaDescription": "Wie oft zur professionellen Zahnreinigung? Befund, Kontrolltermin und Kassenleistung unterscheiden und Kosten für den gewählten Abstand prüfen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "weisheitszaehne-ziehen-kosten",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Weisheitszähne ziehen: Welche Kosten können entstehen?",
+    "listTeaser": "Welche Kosten beim Ziehen der Weisheitszähne entstehen, wann die Kasse zahlt und wie du eine private Vollnarkose vor der Behandlung prüfen kannst.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Weisheitszähne ziehen: Kosten und Vollnarkose | Healio",
+    "metaDescription": "Welche Kosten beim Ziehen der Weisheitszähne entstehen, wann die Kasse zahlt und wie du eine private Vollnarkose vor der Behandlung prüfen kannst.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "vollnarkose-zahnarzt-kosten",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Vollnarkose beim Zahnarzt: Welche Kosten trägt die Kasse?",
+    "listTeaser": "Die Kosten einer Vollnarkose beim Zahnarzt übernimmt die gesetzliche Kasse bei medizinischer Notwendigkeit, wenn eine einfachere Schmerzausschaltung nicht möglich ist. Für eine gewünschte Privatnarkose brauchst du einen individuellen Kostenvoranschlag; einen allgemein gültigen Europreis gibt es hier nicht.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Vollnarkose Zahnarzt: Kosten und Kassenleistung | Healio",
+    "metaDescription": "Was kostet Vollnarkose beim Zahnarzt? Wann die Kasse zahlt, was bei Dämmerschlaf und Lachgas gilt und welche Angaben du vorab brauchst.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "barmer-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Barmer Zahnzusatzversicherung: Was zahlt die Kasse, was ein Tarif?",
+    "listTeaser": "Eine Barmer Zahnzusatzversicherung ist privater Zusatzschutz und gehört nicht automatisch zu deiner gesetzlichen Mitgliedschaft. Bei Zahnersatz zahlt die Barmer 2026 den gesetzlichen Festzuschuss zur Regelversorgung; zusätzliche Tarifleistungen ergeben sich aus einem gesonderten Vertrag.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Barmer Zahnzusatzversicherung: Kasse und Tarif | Healio",
+    "metaDescription": "Barmer Zahnzusatzversicherung: Was die gesetzliche Kasse bei Zahnersatz und Füllungen zahlt und welche Tarifbedingungen du separat prüfst.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnkrone-rausgefallen",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnkrone rausgefallen: Wer klärt die Ursache und wer zahlt?",
+    "listTeaser": "Ist deine Zahnkrone rausgefallen oder deine Brücke locker, muss die Zahnarztpraxis den Befund und die weitere Versorgung klären. Wer die Kosten trägt, hängt unter anderem von Gewährleistung, notwendiger Wiederherstellung und einem vorhandenen Zusatzvertrag ab.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Zahnkrone rausgefallen: Klärung und Kosten | Healio",
+    "metaDescription": "Zahnkrone rausgefallen? Wer die Ursache klärt, wann Gewährleistung gilt und wie du Reparatur, neuen Zahnersatz und Kostenerstattung trennst.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "dak-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "DAK Zahnzusatzversicherung: Was übernimmt welcher Vertrag?",
+    "listTeaser": "Eine DAK Zahnzusatzversicherung ist ein privater Vertrag, der deine gesetzliche Mitgliedschaft ergänzen kann. Die DAK zahlt bei notwendigem Zahnersatz den gesetzlichen Festzuschuss; ob eine Zusatzversicherung weitere Kosten übernimmt, hängt von ihrem eigenen Leistungsumfang ab.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "DAK Zahnzusatzversicherung: Kosten richtig trennen | Healio",
+    "metaDescription": "DAK Zahnzusatzversicherung: Gesetzlichen Festzuschuss, Kostenplan und privaten Vertrag getrennt prüfen. Mit Beispielrechnung für deinen Eigenanteil.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "ikk-zahnreinigung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "IKK Zahnreinigung: Wie viel übernimmt die IKK classic?",
+    "listTeaser": "Die IKK classic erstattet für professionelle Zahnreinigung nach ihrer aktuellen Satzung die tatsächlichen Kosten bis zu 40 EUR je Versicherten und Kalenderjahr. Voraussetzung sind eine berechtigte Zahnarztpraxis und die eingereichte Rechnung; ein DentNet-Angebot ist ein gesonderter Leistungsweg.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "IKK Zahnreinigung: Zuschuss und Kosten 2026 | Healio",
+    "metaDescription": "IKK Zahnreinigung: Bis zu 40 EUR Zuschuss nach Satzung, DentNet als eigener Weg und die Gegenrechnung mit Zusatzbeitrag und privaten Tarifleistungen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnersatz-guenstig",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnersatz günstig: Wie senkst du deinen Eigenanteil?",
+    "listTeaser": "Günstiger Zahnersatz beginnt mit einer nachvollziehbaren Planung der Regelversorgung und der vollständigen Prüfung deines Kassenzuschusses. Bonusheft und Härtefallregelung können deinen Eigenanteil senken; den tatsächlichen Praxispreis erfährst du aus dem Heil- und Kostenplan.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnersatz günstig: Zuschüsse und Eigenanteil | Healio",
+    "metaDescription": "Günstigen Zahnersatz planen: Regelversorgung, Bonusheft und Härtefall 2026 prüfen. Mit Festzuschussbeispiel und Hinweisen zum Auslandszahnersatz.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "heil-und-kostenplan",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Heil- und Kostenplan: Wie liest du ihn richtig?",
+    "listTeaser": "Der Heil- und Kostenplan zeigt deinen Zahnbefund, die gesetzliche Regelversorgung, die tatsächlich geplante Behandlung und die voraussichtlichen Kosten. Die Krankenkasse prüft ihn vor der Versorgung und bewilligt den Festzuschuss; deinen eigenen Anteil und private Leistungen solltest du davor mit der Praxis klären.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Heil- und Kostenplan: Kosten, Kürzel, Fristen | Healio",
+    "metaDescription": "Heil- und Kostenplan für Zahnersatz verstehen: Befund, Honorar, Labor, Eigenanteil und Genehmigung. Mit Fristen und Checkliste vor der Behandlung.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnzusatzversicherung-senioren",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung für Senioren: Was zählt ab 50 und 60?",
+    "listTeaser": "Gewünschten Zahnersatz, bestehenden Vertrag und persönliche Annahme prüfen. So vergleichst du Leistungen und langfristig tragbare Kosten.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Beste Zahnzusatzversicherung ab 50: Kriterien | Healio",
+    "metaDescription": "Zahnzusatzversicherung für Senioren: Prüfe ab 50 oder 60 Bedarf, Annahme, bestehende Behandlungen und persönlichen Beitrag. Keine pauschale Tarifwahl.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "implantat-oder-bruecke",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Implantat oder Brücke: Kosten, Kassenanteil und Haltbarkeit",
+    "listTeaser": "Beide Lösungen ersetzen einen Zahn. Nachbarzähne, Eingriff und Eigenanteil unterscheiden sich.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Implantat oder Brücke: Kosten und Kassenanteil | Healio",
+    "metaDescription": "Implantat oder Brücke? Vergleiche Aufbau, Risiken, belegte Kosten und den Festzuschuss 2026. Zwei Beispiele helfen dir, den Eigenanteil einzuordnen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "ikk-zahnzusatzversicherung",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "IKK classic und Zähne: Kassenleistung, Bonus und Zahnvertrag",
+    "listTeaser": "Die IKK classic übernimmt gesetzliche Zahnleistungen und kann nach ihrer Satzung einen zweckgebundenen Bonuszuschuss zu Beiträgen einer privaten Zahnzusatzversicherung gewähren. Der private Zahnvertrag bleibt eigenständig: Sein Leistungsumfang folgt dem Tarif, nicht der IKK-Mitgliedschaft oder deinem Bonus.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "IKK Zahnzusatzversicherung: Leistung und Bonus | Healio",
+    "metaDescription": "IKK classic und Zahnzusatzversicherung: Festzuschuss, zweckgebundenen Bonus und privaten Tarif trennen. Mit Beitragsgegenrechnung und Fristen 2026.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnzusatzversicherung-kinder",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung für Kinder: was die Kasse zahlt und wann ein Tarif passt",
+    "listTeaser": "Was die Kasse bei Kindern zahlt, wo Kosten bleiben und warum bei der Zahnspange der Zeitpunkt des Abschlusses entscheidet.",
+    "readingTimeMinutes": 11,
+    "metaTitle": "Zahnzusatzversicherung Kinder: Kasse, Zahnspange, Tarif | Healio",
+    "metaDescription": "Zahnzusatzversicherung für Kinder: was die Kasse bei Vorsorge, Füllung und Zahnspange zahlt, wo Kosten bleiben und wann ein Tarif in Frage kommt.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "zahnspange-kosten",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnspange für Kinder: Kosten, KIG-Stufen und Eigenanteil",
+    "listTeaser": "Wann die Kasse die Zahnspange zahlt, wie der Eigenanteil von 20 Prozent zurückkommt und was Extras kosten, mit den Zahlen aus Gesetz, Richtlinie und hkk-Studie.",
+    "readingTimeMinutes": 12,
+    "metaTitle": "Zahnspange Kosten: Kinder, KIG und Eigenanteil | Healio",
+    "metaDescription": "Was eine Zahnspange kostet: Kassenleistung bei Beginn vor 18 ab KIG 3, 20 Prozent Eigenanteil mit Rückzahlung, Extras und mögliche Kassenzuschüsse.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zahnspange-erwachsene",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnspange für Erwachsene: Kosten und wann die Kasse zahlt",
+    "listTeaser": "Warum die Kasse ab 18 selten zahlt, was die Ausnahme schwere Kieferanomalie bedeutet und woraus sich die private Rechnung nach GOZ zusammensetzt.",
+    "readingTimeMinutes": 10,
+    "metaTitle": "Zahnspange Erwachsene: Kosten und wann die Kasse zahlt | Healio",
+    "metaDescription": "Zahnspange für Erwachsene: GOZ-Bausteine und Aligner-Kosten laut TK, wann die Kasse bei schweren Kieferanomalien zahlt und welche Tarifgrenzen gelten.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "unsichtbare-zahnspange-kosten",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Unsichtbare Zahnspange: Kosten, Aligner und wer zahlt",
+    "listTeaser": "Was Aligner kosten, warum die Kasse sie nicht übernimmt und was bei Keramik- und Lingualbrackets gilt, mit getrennten, datierten Preisangaben und Quellen.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Unsichtbare Zahnspange: Kosten, Aligner und wer zahlt | Healio",
+    "metaDescription": "Unsichtbare Zahnspange: was Aligner laut TK und Verbraucherzentrale kosten, warum die Kasse sie nicht zahlt und was bei Keramik gilt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zahnzusatzversicherung-kieferorthopaedie",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung mit Kieferorthopädie: was sie bei der Zahnspange zahlt",
+    "listTeaser": "Was ein Zahntarif bei der Zahnspange übernehmen kann, warum der Zeitpunkt entscheidet und was die Kasse bei Kindern ohnehin zahlt.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Zahnzusatzversicherung Kieferorthopädie: was sie zahlt | Healio",
+    "metaDescription": "Zahnzusatzversicherung mit Kieferorthopädie: was die UKV ZahnPRIVAT je Stufe leistet, warum der Abschluss vor der Empfehlung kommen muss.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zahnzusatzversicherung-familie",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung für die Familie: Eltern und Kinder gemeinsam gerechnet",
+    "listTeaser": "Was die Kasse in der Familie zahlt, wie der Eigenanteil bei zwei Kindern in der Zahnspange wirkt und wie du Beiträge und mögliche Kosten gegenüberstellst.",
+    "readingTimeMinutes": 10,
+    "metaTitle": "Zahnzusatzversicherung Familie: Eltern und Kinder | Healio",
+    "metaDescription": "Zahnzusatzversicherung für die Familie: Kassenleistung, Geschwisteranteil und Beiträge für Eltern und Kinder vergleichen. Mit Rechenweg und Grenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
     "slug": "heilpraktiker-kosten",
     "kind": "ratgeber",
     "group": "ambulant",
@@ -307,7 +961,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 9,
     "metaTitle": "Heilpraktiker Kosten: wer zahlt was, Übersicht | Healio",
     "metaDescription": "Heilpraktiker Kosten im Überblick: Honorar, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie, was die Kasse zahlt und was ein Zusatztarif erstattet.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "heilpraktiker-zusatzversicherung",
@@ -373,7 +1028,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 8,
     "metaTitle": "Zuzahlung Physiotherapie 2026: Tabelle, Rechenbeispiel | Healio",
     "metaDescription": "Zuzahlung bei Physiotherapie: 10 Prozent der Kosten plus 10 EUR je Verordnung, Tabelle mit Rechenbeispielen, Belastungsgrenze und was ein ambulanter Tarif erstattet.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "gebuehrenordnung-heilpraktiker",
@@ -387,6 +1043,149 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "osteopathie-kosten",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Osteopathie: Was kostet eine Behandlung und wer zahlt?",
+    "listTeaser": "Die Kosten deiner Osteopathie-Behandlung hängen von der vereinbarten Leistung und der Vergütung deiner Praxis ab. Dein Eigenanteil ergibt sich aus der tatsächlichen Rechnung abzüglich der Erstattung, die deine Krankenkasse oder dein privater Tarif unter den jeweiligen Voraussetzungen anerkennt.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Osteopathie: Kosten, Zuschuss und Eigenanteil | Healio",
+    "metaDescription": "Osteopathie-Kosten einordnen: Praxisrechnung, Kassenzuschuss und eigener Anteil. Mit Rechnungstabelle und Tarifgrenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "naturheilkunde",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Naturheilkunde: Verfahren, Behandler und Kosten",
+    "listTeaser": "Naturheilkunde verständlich erklärt: Arzt und Heilpraktiker unterscheiden, Kosten klären und Kassenleistungen sowie Tarifgrenzen prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Naturheilkunde: Verfahren, Behandler und Kosten | Healio",
+    "metaDescription": "Naturheilkunde verständlich erklärt: Arzt und Heilpraktiker unterscheiden, Kosten klären und Kassenleistungen sowie Tarifgrenzen prüfen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "osteopathie-krankenkasse",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
+    "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
+    "readingTimeMinutes": 16,
+    "metaTitle": "Welche Krankenkasse zahlt Osteopathie? | Healio",
+    "metaDescription": "Osteopathie bei 39 Kassen: Zuschüsse, ärztliche Nachweise, Qualifikation und gemeinsame Budgets. Mit aktuellen Satzungsfundstellen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "physiotherapie-kosten",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Physiotherapie: Kosten mit und ohne Rezept",
+    "listTeaser": "Was du mit Kassenrezept selbst zahlst, welche Behandlungspreise 2026 gelten und was du bei einer Privatbehandlung vorher klären solltest.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Physiotherapie: Kosten mit und ohne Rezept | Healio",
+    "metaDescription": "Physiotherapiekosten 2026: belegte Kassenpreise für Krankengymnastik, manuelle Therapie und Lymphdrainage. Zuzahlung und Privatkosten unterscheiden.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "akupunktur-krankenkasse",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Akupunktur auf Krankenkasse: wann die Kasse zahlt",
+    "listTeaser": "Die gesetzliche Krankenkasse übernimmt Körperakupunktur bei chronischen Schmerzen der Lendenwirbelsäule oder bei chronischen Kniegelenkschmerzen durch Gonarthrose, wenn die Beschwerden seit mindestens sechs Monaten bestehen. Dafür muss ein entsprechend qualifizierter Vertragsarzt behandeln; außerdem gelten Grenzen für Sitzungen und Behandlungszeiträume. Bei anderen Beschwerden oder einer Heilpraktikerrechnung brauchst du einen gesondert bestätigten Zuschuss oder eine passende private Vertragsleistung. Hier erfährst du, welche Voraussetzungen du vor dem Termin prüfen solltest.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Akupunktur auf Krankenkasse: wann zahlt die Kasse? | Healio",
+    "metaDescription": "Wann Akupunktur Kassenleistung ist: passende Diagnosen, Sitzungsgrenzen und Arztqualifikation. Mit TK-Bonusweg und Prüfung privater Kosten.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-osteopathie",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "AOK und Osteopathie: regionale Zuschüsse prüfen",
+    "listTeaser": "Die AOK-Erstattung für Osteopathie hängt von deiner regionalen AOK und ihren konkreten Satzungsbedingungen ab. Kläre vor dem Termin Betrag, ärztlichen Nachweis, Behandlerqualifikation und ein möglicherweise bereits genutztes gemeinsames Budget.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "AOK und Osteopathie: regionale Erstattung | Healio",
+    "metaDescription": "AOK-Osteopathie nach regionaler Satzung prüfen: fünf Beispiele mit Sitzungsgrenzen, Arztbescheinigung, Qualifikation, gemeinsamen Budgets und Fristen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "tcm-krankenkasse",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "TCM: Ärzte, Kliniken und Krankenkasse",
+    "listTeaser": "Welche Behandlung über die Kasse laufen kann und was die Zulassung einer TCM-Praxis oder Klinik tatsächlich bedeutet.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "TCM Kliniken mit Kassenzulassung: Kosten | Healio",
+    "metaDescription": "TCM auf Krankenkasse: Kassenzulassung bei Ärzten und Kliniken, Akupunkturregeln und private Kosten unterscheiden. Mit Tarifgrenzen und FAQ.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-heilpraktiker",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "AOK und Heilpraktiker: Leistungen richtig prüfen",
+    "listTeaser": "Regionale Kassenextras, private Ergänzungsverträge und konkrete Rechnungen auseinanderhalten.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "AOK-Heilpraktiker-Zusatzversicherung: Leistungen | Healio",
+    "metaDescription": "Was zahlt die AOK beim Heilpraktiker? Regionale Satzung, Osteopathiezuschuss und private Zusatzversicherung unterscheiden. Mit Kostenwegen und FAQ.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zusatzversicherung-osteopathie",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Zusatzversicherung für Osteopathie prüfen",
+    "listTeaser": "Eine Zusatzversicherung für Osteopathie kann versicherte Behandlungskosten nach den Bedingungen des gewählten Tarifs ergänzen. Prüfe zuerst den Zuschuss deiner gesetzlichen Kasse und vergleiche danach Behandleranforderungen, Erstattungsumfang und verfügbares Teilbudget des privaten Vertrags.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zusatzversicherung für Osteopathie: Leistungen | Healio",
+    "metaDescription": "Zusatzversicherung für Osteopathie prüfen: Kassenzuschuss, Naturheilverfahren-Topf, Behandler, Rechnung und Tarifgrenzen verständlich vergleichen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "heilpraktiker-zusatzversicherung-ohne-wartezeit",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Heilpraktiker-Zusatzversicherung ohne Wartezeit",
+    "listTeaser": "Was ab Vertragsbeginn möglich ist und warum vorherige Fälle eine eigene Prüfung brauchen.",
+    "readingTimeMinutes": 5,
+    "metaTitle": "Heilpraktiker-Zusatz ohne Wartezeit: Beginn | Healio",
+    "metaDescription": "Heilpraktiker-Zusatz ohne Wartezeit: Was neue Versicherungsfälle, Vertragsbeginn und Leistungsgrenzen bedeuten. Prüfe Beitrag und Kosten vor dem Termin.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "barmer-osteopathie",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Barmer und Osteopathie: passende Erstattungswege",
+    "listTeaser": "Die Barmer-Satzung sieht besondere Osteopathiewege für Säuglinge und während der Schwangerschaft vor; einen pauschalen Zuschuss für sämtliche Erwachsenen belegen diese Regeln nicht. Daneben kannst du einen zweckgebundenen Bonuszuschuss prüfen, für den eigene Teilnahme-, Nachweis- und Kostenbedingungen gelten.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Barmer und Osteopathie: Erstattung prüfen | Healio",
+    "metaDescription": "Barmer-Osteopathie prüfen: Satzungswege für Säuglinge und Schwangere, gemeinsamer Rahmen, Behandlernachweise, Fristen und zweckgebundener Bonuszuschuss.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "tk-heilpraktiker",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "TK und Heilpraktiker: Kostenübernahme getrennt prüfen",
+    "listTeaser": "Die TK übernimmt Heilpraktikerkosten nicht pauschal; du musst die konkrete Behandlung mit einer Satzungsleistung oder dem zweckgebundenen Bonuskatalog abgleichen. Für weitere versicherte Naturheilverfahren kommt ein eigenständiger privater Zusatzvertrag infrage, dessen Leistungen und Behandleranforderungen du gesondert prüfst.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "TK und Heilpraktiker: Was wird bezahlt? | Healio",
+    "metaDescription": "TK und Heilpraktiker: Arzneimittel, Osteopathie, Gesundheitsdividende und private Zusatzversicherung anhand der aktuellen Leistungsregeln prüfen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "mobil-krankenkasse-osteopathie",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Mobil Krankenkasse und Osteopathie",
+    "listTeaser": "Sitzungsgrenze, gemeinsamer Topf und benötigte Nachweise vor dem Termin prüfen.",
+    "readingTimeMinutes": 5,
+    "metaTitle": "Mobil Krankenkasse: Osteopathie und Zuschuss | Healio",
+    "metaDescription": "Mobil erstattet Osteopathie unter Satzungsbedingungen: drei Sitzungen bis 60 EUR im gemeinsamen Jahrestopf. Prüfe Verordnung, Qualifikation und Frist.",
+    "publishedAt": "2026-10-07"
+  },
+  {
     "slug": "stationaere-zusatzversicherung",
     "kind": "ratgeber",
     "group": "krankenhaus",
@@ -395,7 +1194,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 10,
     "metaTitle": "Stationäre Zusatzversicherung: Krankenhaus-Ratgeber | Healio",
     "metaDescription": "Was die Kasse im Krankenhaus zahlt, was Wahlleistungen kosten und was eine stationäre Zusatzversicherung ergänzt, mit Wegweiser zu allen Krankenhaus-Ratgebern.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "einzelzimmer-krankenhaus-kosten",
@@ -439,6 +1239,116 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 9,
     "metaTitle": "Zuzahlung Reha: 10 Euro am Tag, Befreiung und Dauer | Healio",
     "metaDescription": "Zuzahlung bei der Reha: 10 EUR je Tag, wie lange du zahlst, wann sie entfällt und was bei Rentenversicherung und Krankenkasse unterschiedlich gilt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-vergleich",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung vergleichen: Was zählt für dich?",
+    "listTeaser": "Beim Vergleich einer Krankenhauszusatzversicherung zählen Versicherungsanlass, Zimmer, Arztwahl und Erstattungsgrenzen vor dem Beitrag. Ein Unfalltarif ist keine Ergänzung für krankheitsbedingte Aufenthalte; ein gewünschtes Einzelzimmer oder eine Wahlarztbehandlung sagt allein nichts über die medizinische Qualität aus.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Krankenhauszusatzversicherung vergleichen | Healio",
+    "metaDescription": "Krankenhauszusatzversicherung im Vergleich: Anlass, Zimmer, Arztwahl und Kosten prüfen. Mit klarer Trennung von Krankheit und Unfall.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "chefarztbehandlung",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Chefarztbehandlung: Was zahlst du als Kassenpatient?",
+    "listTeaser": "Chefarztbehandlung als zusätzliche Wahlarztleistung kannst du auch als Kassenpatient vereinbaren; die Kosten werden nach ärztlichen Einzelleistungen abgerechnet. Deine Krankenkasse übernimmt die medizinisch notwendige Versorgung, während eine private Zusatzversicherung die gewünschte Wahlleistung nur nach ihren vereinbarten Bedingungen erstattet.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Chefarztbehandlung: Kosten und Erstattung | Healio",
+    "metaDescription": "Chefarztbehandlung als Kassenpatient: Wahlarztvertrag, GOÄ-Abrechnung und Zusatzversicherung verstehen. Mit Kostenübersicht und Grenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-kosten",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung: Was kostet sie?",
+    "listTeaser": "Was kostet eine Krankenhauszusatzversicherung? SDK-Beispiele für 30-Jährige, Jahreskosten und Unterschiede zwischen Krankheitsschutz und Unfalltarif.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenhauszusatzversicherung: Kosten und Nutzen | Healio",
+    "metaDescription": "Was kostet eine Krankenhauszusatzversicherung? SDK-Beispiele für 30-Jährige, Jahreskosten und Unterschiede zwischen Krankheitsschutz und Unfalltarif.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-ohne-wartezeit",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung ohne Wartezeit: Ab wann gilt sie?",
+    "listTeaser": "Ohne Wartezeit heißt nicht rückwirkend versichert: Beginn, geplante OP und neue Versicherungsfälle bei den SDK-Kliniktarifen verständlich prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Krankenhauszusatzversicherung ohne Wartezeit | Healio",
+    "metaDescription": "Ohne Wartezeit heißt nicht rückwirkend versichert: Beginn, geplante OP und neue Versicherungsfälle bei den SDK-Kliniktarifen verständlich prüfen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "begleitperson-krankenhaus",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Begleitperson im Krankenhaus: Wann übernimmt die Kasse die Kosten?",
+    "listTeaser": "Die gesetzliche Kasse übernimmt eine Begleitperson im Krankenhaus, wenn die Mitaufnahme medizinisch notwendig ist; bei versicherten Kindern unter neun Jahren vermutet das Gesetz diese Notwendigkeit. Unterkunft und Verpflegung sind dabei von einem möglichen Anspruch auf Kinderkrankengeld oder Krankengeld wegen Verdienstausfalls zu unterscheiden.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Begleitperson im Krankenhaus: Wer zahlt? | Healio",
+    "metaDescription": "Begleitperson im Krankenhaus: Mitaufnahme, Kinderkrankengeld und Verdienstausfall getrennt verstehen. Regeln für Kinder, Erwachsene und Rooming-in.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-krankenhauszusatzversicherung",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "AOK und Krankenhaus: Was kostet das Einzelzimmer?",
+    "listTeaser": "AOK, Einzelzimmer und Krankenhauszuzahlung: Was die Kasse trägt, welche Kosten privat entstehen und wie du den passenden Klinikschutz prüfst.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "AOK: Einzelzimmer und Krankenhauszusatzversicherung | Healio",
+    "metaDescription": "AOK, Einzelzimmer und Krankenhauszuzahlung: Was die Kasse trägt, welche Kosten privat entstehen und wie du den passenden Klinikschutz prüfst.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "tk-krankenhauszusatzversicherung",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "TK und Krankenhaus: Welche private Ergänzung passt?",
+    "listTeaser": "Als TK-Mitglied erhältst du die gesetzlich vorgesehene Krankenhausversorgung; eine Krankenhauszusatzversicherung kann privat vereinbarte Wahlleistungen ergänzen. Welcher Vertrag passt, hängt von deinem Wunsch nach Zimmer und Wahlarzt, den versicherten Anlässen, deinem Beitrag und den Annahmebedingungen ab.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "TK und Krankenhauszusatzversicherung: Was passt? | Healio",
+    "metaDescription": "TK-Kassenleistung und Krankenhauszusatzversicherung unterscheiden: Zimmer, Wahlarzt, Privatklinik, Zuzahlung 2026 und Vertragsprüfung verständlich erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-vorerkrankung",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung mit Vorerkrankung",
+    "listTeaser": "Gesundheitsfragen, mögliche Vertragsgrenzen und Kosten vor dem Antrag einordnen.",
+    "readingTimeMinutes": 5,
+    "metaTitle": "Krankenhauszusatz mit Vorerkrankung: Antrag | Healio",
+    "metaDescription": "Krankenhauszusatz trotz Vorerkrankung? Erfahre, was Gesundheitsfragen, Vertragsbeginn und Kosten bedeuten und welche Grenzen du vor dem Antrag prüfst.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-kinder",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung für Kinder und Familien",
+    "listTeaser": "Eine Krankenhauszusatzversicherung für Kinder kann vereinbarte Klinik-Wahlleistungen und Rooming-in ergänzen, wenn das Kind selbst im passenden Tarif versichert ist. Die gesetzliche Kasse trägt bereits die notwendige Krankenhausversorgung und unter bestimmten Voraussetzungen die Mitaufnahme einer Begleitperson; diese Ansprüche solltest du zuerst klären.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Krankenhauszusatzversicherung für Kinder | Healio",
+    "metaDescription": "Krankenhauszusatzversicherung für Kinder: gesetzliche Mitaufnahme, privates Rooming-in, Unfalltarif und Neugeborenennachversicherung getrennt prüfen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "krankenhauszusatzversicherung-senioren",
+    "kind": "ratgeber",
+    "group": "krankenhaus",
+    "listTitle": "Krankenhauszusatzversicherung ab 65 und 70 prüfen",
+    "listTeaser": "Ob du eine Krankenhauszusatzversicherung ab 65 oder 70 Jahren abschließen kannst, hängt von den Altersgrenzen und Annahmebedingungen des konkreten Tarifs ab. Prüfe zuerst die gewünschten Wahlleistungen und danach Gesundheitsangaben, persönlichen Beitrag und Vertragsbeginn.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Krankenhauszusatzversicherung ab 65 und 70 | Healio",
+    "metaDescription": "Krankenhauszusatzversicherung für Senioren prüfen: Altersgrenzen, Gesundheitsfragen, Zimmer, Wahlarzt und persönliche Kosten ab 65 oder 70 Jahren.",
     "publishedAt": "2026-10-07"
   },
   {
@@ -543,6 +1453,73 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-05"
   },
   {
+    "slug": "geburtsvorbereitungskurs",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "Geburtsvorbereitungskurs: Beginn und Kosten klären",
+    "listTeaser": "Geburtsvorbereitungskurs: früh anmelden, Kassenleistung und Partnergebühr trennen. Erfahre, was bei Präsenz, Live-Onlinekurs und Videos gilt.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Geburtsvorbereitungskurs: Kosten, Kasse und Beginn | Healio",
+    "metaDescription": "Geburtsvorbereitungskurs: früh anmelden, Kassenleistung und Partnergebühr trennen. Erfahre, was bei Präsenz, Live-Onlinekurs und Videos gilt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "familienversicherung-krankenkasse",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "Familienversicherung 2026: Wer kann mitversichert sein?",
+    "listTeaser": "Einkommensgrenzen, Kinder und Antrag bei der Krankenkasse verständlich prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Familienversicherung 2026: Einkommen und Antrag | Healio",
+    "metaDescription": "Familienversicherung 2026: Einkommensgrenzen, Altersregeln für Kinder und Antrag bei der Krankenkasse. Voraussetzungen und Beiträge klar erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-babybonus",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "AOK-Babybonus: regionale Zuschüsse richtig einordnen",
+    "listTeaser": "Einen einheitlichen AOK-Babybonus gibt es nicht: Die regionalen AOKs regeln Programme und zusätzliche Leistungen in ihren eigenen Satzungen. Die AOK Hessen erstattet beispielsweise ausgewählte Baby-Kurse bis 150 EUR, während Rheinland/Hamburg einen gemeinsamen Kostenrahmen von 250 EUR für bestimmte Schwangerschafts- und Babyleistungen vorsieht.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "AOK-Babybonus: Zuschüsse und regionale Regeln | Healio",
+    "metaDescription": "AOK-Babybonus einordnen: Hessen, Rheinland/Hamburg, Bayern, Baden-Württemberg, Niedersachsen und PLUS, mit Kostenwegen, Nachweisen und Grenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "geburtsvorbereitungskurs-partner",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "Geburtsvorbereitung mit Partner: Was erstattet die Kasse?",
+    "listTeaser": "Die TK erstattet einen Teil der Partnergebühr. Andere Kassen haben eigene Regeln zu Mitgliedschaft, Nachweisen und gemeinsam genutzten Zuschüssen.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "TK-Geburtsvorbereitungskurs für Partner: Kosten | Healio",
+    "metaDescription": "Geburtsvorbereitungskurs für Partner: TK-Zuschuss und Regeln von Barmer, firmus, DAK und IKK classic prüfen. Mit Gebühren, Grenzen und Nachweisen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "schwangerschaft-krankenkasse-melden",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "Schwangerschaft der Krankenkasse melden",
+    "listTeaser": "Mitteilung, Leistungsantrag und Arbeitgeberinformation als eigene Schritte planen.",
+    "readingTimeMinutes": 5,
+    "metaTitle": "Schwangerschaft der Krankenkasse melden: Ablauf | Healio",
+    "metaDescription": "Schwangerschaft der Krankenkasse melden: Zeitpunkt, Bescheinigung und Mutterschaftsgeld verständlich erklärt. Kläre Anträge und private Kosten früh.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-schwangerschaft",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "TK und Schwangerschaft: Leistungen und Extras",
+    "listTeaser": "Bei der TK bekommst du die gesetzliche Schwangerschaftsvorsorge und Hebammenhilfe sowie bestimmte Extras nach ihrer Satzung. Dazu zählen unter Voraussetzungen Rufbereitschaft bis 250 EUR je Schwangerschaft, bestimmte verordnete Arzneimittel und ein Zuschuss zum Partnerkurs.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "TK und Schwangerschaft: Leistungen und Extras | Healio",
+    "metaDescription": "Was die TK in der Schwangerschaft zahlt: Vorsorge, Hebammenhilfe, Rufbereitschaft, bestimmte Arzneimittel und Partnerkurs mit Voraussetzungen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
     "slug": "vorsorgeuntersuchung",
     "kind": "ratgeber",
     "group": "vorsorge",
@@ -551,7 +1528,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 12,
     "metaTitle": "Vorsorgeuntersuchung: Alter, Abstand, Kassenleistung | Healio",
     "metaDescription": "Vorsorgeuntersuchung: Alle Untersuchungen für Kinder, Frauen und Männer mit Alter, Abstand und Quelle. Dazu, was privat bleibt und wie Vorsorge im Bonus zählt.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "vorsorgeuntersuchung-frauen",
@@ -598,6 +1576,61 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "check-up-35",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "Check-up 35: Was untersucht wird und wie oft die Kasse zahlt",
+    "listTeaser": "Die Kassenuntersuchung, ihre Blutwerte und mögliche private Extras verständlich auseinanderhalten.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Check-up 35: Untersuchungen, Abstand und Kosten | Healio",
+    "metaDescription": "Was umfasst der Check-up beim Hausarzt? Erfahre, wie oft die Kasse zahlt, welche Blutwerte dazugehören und wie du private Zusatzuntersuchungen prüfst.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "reiseimpfung-krankenkasse",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "Reiseimpfungen: Welche Krankenkasse zahlt?",
+    "listTeaser": "Satzungsleistungen, eigene Kosten und Abrechnung vor deiner Reise klären.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Reiseimpfungen: Krankenkasse, Kosten und Belege | Healio",
+    "metaDescription": "Reiseimpfungen und Krankenkasse: Satzungsregeln von TK, BARMER und DAK, Kostenpositionen und Belege vor dem Termin verständlich prüfen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "tk-hautkrebsscreening",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "TK-Hautkrebsscreening: Alter, Kosten und Erstattung",
+    "listTeaser": "TK-Hautkrebsscreening: Altersgrenzen, Vertragsprogramme und Rechnungserstattung unterscheiden. So prüfst du Kassenleistung und private Kosten.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "TK-Hautkrebsscreening: Alter und Kosten | Healio",
+    "metaDescription": "TK-Hautkrebsscreening: Altersgrenzen, Vertragsprogramme und Rechnungserstattung unterscheiden. So prüfst du Kassenleistung und private Kosten.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "vorsorgeuntersuchungen-kinder",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "Vorsorgeuntersuchungen bei Kindern: Termine und Kassenleistung",
+    "listTeaser": "Die gesetzliche Krankenkasse trägt die Früherkennungsuntersuchungen U1 bis U9 einschließlich U7a und die Jugenduntersuchung J1 nach den geltenden Richtlinien. Zusätzliche U10, U11 und J2 hängen am 7. Oktober 2026 von der jeweiligen Kasse, ihrer Satzung und dem vorgesehenen Vertrags- oder Erstattungsweg ab.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Vorsorgeuntersuchungen Kinder: U1 bis J2 | Healio",
+    "metaDescription": "Vorsorgeuntersuchungen für Kinder: Termine von U1 bis J1, zusätzliche U10, U11 und J2, Kassenbedingungen und den neuen U10-Beschluss verstehen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-reiseimpfung",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "AOK-Reiseimpfungen: regionale Kostenübernahme prüfen",
+    "listTeaser": "Bayern, Baden-Württemberg und PLUS unterscheiden sich bei Erstattung und Abrechnung. Prüfe den passenden Weg vor dem Termin.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "AOK-Reiseimpfung: Kosten und regionale Regeln | Healio",
+    "metaDescription": "AOK-Reiseimpfungen: Kostenübernahme in Bayern, Baden-Württemberg und bei PLUS prüfen. Mit Satzungsgrenzen, Unterlagen und Kostenwegen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
     "slug": "brille-krankenkasse",
     "kind": "ratgeber",
     "group": "brille",
@@ -606,7 +1639,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 10,
     "metaTitle": "Zahlt die Krankenkasse eine Brille? Dioptrien und Kinder | Healio",
     "metaDescription": "Zahlt die Krankenkasse eine Brille? Bei Kindern meist ja, bei Erwachsenen nur ab 6,25 Dioptrien. Mit Richtlinie, Kinderbrille, Gestell und Satzungsbeispielen.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "brillenversicherung",
@@ -617,7 +1651,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 7,
     "metaTitle": "Brillenversicherung: lohnt sie sich? Rechenbeispiel | Healio",
     "metaDescription": "Brillenversicherung vom Optiker, Zuschuss-Police oder ambulanter Tarif: was sie erstatten, was sie im Monat kosten und wann Selbstzahlen günstiger ist.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "gleitsichtbrille-kosten",
@@ -628,6 +1663,96 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 8,
     "metaTitle": "Gleitsichtbrille Kosten: Preis, Kassenanteil, Erstattung | Healio",
     "metaDescription": "Gleitsichtbrille Kosten: wovon der Preis abhängt, was die Krankenkasse bei Gleitsichtgläsern zahlt und was ein ambulanter Tarif mit Sehhilfen-Topf erstattet.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "augenlasern-kosten",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Augenlasern: Kosten und wer sie zahlt",
+    "listTeaser": "Welche Kosten du pro Auge klären solltest, wie du Angebote vergleichst und warum eine Operation am Grauen Star einen anderen Kostenweg hat.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Augenlasern: Kosten und wer sie zahlt | Healio",
+    "metaDescription": "Augenlasern kostet je nach Verfahren und Umfang unterschiedlich. Erfahre, was ins Kostenangebot gehört und wann die Krankenkasse eine Augen-OP zahlt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "brillenversicherung-kinder",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Kinderbrille: Kassenleistung und Zusatzversicherung",
+    "listTeaser": "Kinderbrille: Kassenleistung, Gestell und Mehrkosten unterscheiden. Erfahre, wann ein Zusatzvertrag hilft und welche Grenzen wichtig sind.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Brillenversicherung für Kinder: Kasse und Grenzen | Healio",
+    "metaDescription": "Kinderbrille: Kassenleistung, Gestell und Mehrkosten unterscheiden. Erfahre, wann ein Zusatzvertrag hilft und welche Grenzen wichtig sind.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
+  },
+  {
+    "slug": "tk-brille",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "TK und Brille: Was zahlt die Techniker?",
+    "listTeaser": "Kassenanteil, eigene Brillenkosten und TK-Gesundheitsdividende getrennt prüfen.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "TK und Brille: Zuschuss, Bonus und Eigenanteil | Healio",
+    "metaDescription": "Was die TK für Brillengläser übernimmt: Voraussetzungen, Vertragsoptiker, eigene Kosten und Gesundheitsdividende verständlich erklärt.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "aok-brille",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "AOK und Brille: Zuschuss und Kassenleistung",
+    "listTeaser": "Die AOK übernimmt medizinisch notwendige Brillengläser im gesetzlichen Leistungsumfang, wenn du die Voraussetzungen für Sehhilfen erfüllst. Zusätzliche Zuschüsse richten sich nach der Satzung deiner regionalen AOK und können besondere Bedingungen haben. Entscheidend sind dein Alter, der ärztlich bestimmte Bedarf und der vorgesehene Kostenweg. Hier erfährst du, welche Kosten du vor der Bestellung getrennt prüfen solltest.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "AOK und Brille: Zuschuss und Kassenleistung | Healio",
+    "metaDescription": "Was die AOK für Brillengläser zahlt: Voraussetzungen für Kinder und Erwachsene, regionale Zuschüsse, Zuzahlung und Kosten vor dem Kauf.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "kontaktlinsen-krankenkasse",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Kontaktlinsen und Krankenkasse: Anspruch und Kosten",
+    "listTeaser": "Sehhilfenanspruch, besondere Kontaktlinsenindikation und privaten Tarifumfang getrennt prüfen.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Kontaktlinsen: Was zahlt die Krankenkasse? | Healio",
+    "metaDescription": "Kontaktlinsen und Krankenkasse: Dioptrien, medizinische Voraussetzungen, Rezept und Zuschuss unterscheiden. Mit Kostenwegen und Tarifgrenzen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "brille-verloren-versicherung",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Brille verloren oder kaputt: Erstattung prüfen",
+    "listTeaser": "Bei einer verlorenen oder kaputten Brille hängt die Erstattung vom Schadenhergang und den bestehenden Ansprüchen ab. Prüfe einen möglichen Haftpflichtschaden, ein versichertes Hausratereignis, deinen besonderen Brillenvertrag und die gesetzlichen Sehhilfenvoraussetzungen getrennt.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Brille verloren oder kaputt: Welche Versicherung? | Healio",
+    "metaDescription": "Brille verloren oder kaputt: Haftpflicht, Hausrat, Krankenkasse und privaten Vertrag getrennt prüfen. Ersatzregeln und Sehhilfenbudget klar einordnen.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "brillenkosten",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Brillenkosten: Angebot und Eigenanteil verstehen",
+    "listTeaser": "Was deine Brille kostet, ergibt sich aus dem konkreten Angebot für Gläser, Fassung und gewählte Ausführung; einen pauschalen Marktpreis kannst du daraus nicht ableiten. Deinen Eigenanteil kennst du erst, wenn eine mögliche Kassenbeteiligung und eine bestehende private Erstattung für dieses Angebot geklärt sind.",
+    "readingTimeMinutes": 6,
+    "metaTitle": "Brillenkosten: Gläser, Fassung und Erstattung | Healio",
+    "metaDescription": "Brillenkosten einordnen: Gläser und Fassung getrennt prüfen, Kassenvertrag, Zuzahlung, Neuverglasung und private Erstattung vor dem Kauf klären.",
+    "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zahn-und-brillenversicherung",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Zahn- und Brillenversicherung",
+    "listTeaser": "Zwei Leistungswege vergleichen und den gemeinsamen Beitrag aus echten Angeboten berechnen.",
+    "readingTimeMinutes": 5,
+    "metaTitle": "Zahn- und Brillenversicherung zusammen prüfen | Healio",
+    "metaDescription": "Zahn und Brille gemeinsam planen: Vergleiche zwei Leistungswege, Beiträge und Grenzen. Erfahre, was Kasse und private Ergänzung jeweils übernehmen.",
     "publishedAt": "2026-10-07"
   }
 ];

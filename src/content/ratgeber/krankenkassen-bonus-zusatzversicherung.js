@@ -13,6 +13,9 @@
  */
 
 export const article = {
+  rechner: false,
+  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-08",
   slug: 'krankenkassen-bonus-zusatzversicherung',
   kind: 'advertorial',
 
@@ -132,7 +135,28 @@ export const article = {
         },
       ],
     },
-  ],
+
+{
+  "id": "ratgeber-weiterlesen",
+  "heading": "Welche Ratgeber helfen dir weiter?",
+  "blocks": [
+    {
+      "type": "cards",
+      "heading": "Zum Weiterlesen",
+      "items": [
+        {
+          "icon": "bonus",
+          "tone": "mint",
+          "title": "Krankenkasse und Bonus: Bonusprogramme und Zuschüsse im Überblick",
+          "text": "Was ein Bonusprogramm ist, wie die Kassen auszahlen, wann der Bonus als Zuschuss den Beitrag einer Zusatzversicherung mitträgt und welcher Ratgeber zu deiner Kasse passt.",
+          "to": "/ratgeber/bonusprogramm-krankenkasse",
+          "linkLabel": "Ratgeber lesen"
+        }
+      ]
+    }
+  ]
+},
+],
 
   // Beschriftung und Positionen des Buttons. Der dritte Auftritt ist die
   // feste Leiste auf dem Handy, die die Vorlage unter md einblendet.

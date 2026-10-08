@@ -34,6 +34,8 @@
  */
 
 export const article = {
+  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-08",
   slug: 'brillenversicherung',
   kind: 'ratgeber',
   group: 'brille',
@@ -251,7 +253,28 @@ export const article = {
         },
       ],
     },
-  ],
+
+{
+  "id": "ratgeber-weiterlesen",
+  "heading": "Welche Ratgeber helfen dir weiter?",
+  "blocks": [
+    {
+      "type": "cards",
+      "heading": "Zum Weiterlesen",
+      "items": [
+        {
+          "icon": "document",
+          "tone": "mint",
+          "title": "TK und Brille: Was zahlt die Techniker?",
+          "text": "Kassenanteil, eigene Brillenkosten und TK-Gesundheitsdividende getrennt prüfen.",
+          "to": "/ratgeber/tk-brille",
+          "linkLabel": "Ratgeber lesen"
+        }
+      ]
+    }
+  ]
+},
+],
 
   factNugget:
     'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Für Brille, Heilpraktiker und Vorsorge zeigt Healio den ambulanten Tarif der SDK und als kleine Zusatzoption den Vorsorge-Baustein der UKV. Der Kassenbonus kann je nach Kasse als zweckgebundener Zuschuss beim Beitrag helfen; mehr als die nachgewiesenen eigenen Kosten wird nie erstattet. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',

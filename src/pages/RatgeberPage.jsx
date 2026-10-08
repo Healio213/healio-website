@@ -63,6 +63,7 @@ const ARTICLE_FIGURES = {
   'zusatzversicherung-kinder': friendlyIconAssets.family,
   'vorsorgeuntersuchung': friendlyIconAssets.prevention,
   'brille-krankenkasse': friendlyIconAssets.glasses,
+  'bonusprogramm-krankenkasse': friendlyIconAssets.bonus,
 };
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;
 
@@ -70,7 +71,7 @@ const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document
 // oder, mit group, zum Abschnitt ihrer Themengruppe; fehlt Artikel oder
 // Gruppe in der Übersicht, fällt die Marke weg.
 const TOPICS = [
-  { slug: 'ikk-classic-bonusprogramm-2026', label: 'Kassenbonus', kind: 'bonus', tone: 'butter' },
+  { slug: 'bonusprogramm-krankenkasse', group: 'kasse-bonus', label: 'Kassenbonus', kind: 'bonus', tone: 'butter' },
   { slug: 'zahnzusatzversicherung-fehlender-zahn', group: 'zaehne', label: 'Zähne', kind: 'dental', tone: 'mint' },
   // Seit Stapel 2 (07.10.2026) stehen die Schwangerschafts-Ratgeber in der Gruppe familie.
   { slug: 'schwanger-zusatzversicherung', group: 'familie', label: 'Schwangerschaft und Familie', kind: 'pregnancy', tone: 'coral' },

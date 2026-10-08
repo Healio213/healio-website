@@ -150,7 +150,7 @@ export const TableOfContents = ({ sections, extraItems = [] }) => {
                 className={`flex min-h-11 items-baseline gap-3 py-2.5 text-base leading-6 text-slate-700 hover:text-[#07111f] ${FOCUS_RING}`}
               >
                 <span className="w-6 shrink-0 font-display text-sm font-bold text-[#087654]">{index + 1}</span>
-                <span>{item.label}</span>
+                <span className="min-w-0 break-words hyphens-auto">{item.label}</span>
               </a>
             </li>
           ))}
@@ -174,7 +174,7 @@ export const ResponsiveTable = ({ block, highlightLast = false, dataAttr }) => {
       className={`mt-8 sm:overflow-x-auto sm:rounded-2xl sm:border sm:border-slate-200 ${highlightLast ? '' : 'md:-mx-10 lg:-mx-20'}`}
       {...(dataAttr ? { [dataAttr]: '' } : {})}
     >
-      <table className="w-full border-collapse text-left text-base leading-7 text-slate-700 sm:table-fixed sm:text-[0.95rem] sm:leading-7">
+      <table className="block w-full border-collapse text-left text-base leading-7 text-slate-700 sm:table sm:table-fixed sm:text-[0.95rem] sm:leading-7">
         {block.caption && <caption className="sr-only">{block.caption}</caption>}
         <thead className="sr-only sm:not-sr-only">
           <tr className="border-b border-slate-200 bg-slate-50 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">
@@ -210,9 +210,9 @@ export const ResponsiveTable = ({ block, highlightLast = false, dataAttr }) => {
                     <td
                       key={`${cell}-${cellIndex}`}
                       data-label={block.head[cellIndex]}
-                      className={`flex items-baseline justify-between gap-4 border-t border-slate-100 py-2 text-right before:shrink before:text-left before:text-[0.95rem] before:font-semibold before:text-slate-500 before:content-[attr(data-label)] sm:table-cell sm:border-0 sm:px-4 sm:py-3 sm:text-left sm:align-top sm:before:content-none ${highlightLast && cellIndex === lastIndex ? 'font-semibold text-[#087654] sm:bg-[#f1fbf6]' : ''}`}
+                      className={`flex min-w-0 items-baseline justify-between gap-4 border-t border-slate-100 py-2 text-right before:min-w-0 before:shrink before:break-words before:hyphens-auto before:text-left before:text-[0.95rem] before:font-semibold before:text-slate-500 before:content-[attr(data-label)] sm:table-cell sm:border-0 sm:px-4 sm:py-3 sm:text-left sm:align-top sm:before:content-none ${highlightLast && cellIndex === lastIndex ? 'font-semibold text-[#087654] sm:bg-[#f1fbf6]' : ''}`}
                     >
-                      <span className="break-words hyphens-auto">{cell}</span>
+                      <span className="min-w-0 break-words hyphens-auto">{cell}</span>
                     </td>
                   )
               ))}
@@ -245,7 +245,7 @@ export const CostCard = ({ block }) => (
     {block.bonusNote && (
       <p className="mt-4 flex items-start gap-3 rounded-2xl bg-white p-4 text-base leading-7 text-slate-700">
         <FriendlyIcon kind="bonus" tone="butter" size="sm" />
-        <span>{block.bonusNote}</span>
+        <span className="min-w-0 break-words hyphens-auto">{block.bonusNote}</span>
       </p>
     )}
   </figure>
@@ -362,7 +362,7 @@ export const PathLink = ({ block }) => {
     className={`group mt-8 flex min-h-[3.25rem] items-center gap-4 rounded-[1.5rem] border border-[#25c990]/40 bg-[#f4faf7] p-4 transition hover:border-[#25c990] hover:bg-[#effdf4] sm:p-5 ${FOCUS_RING}`}
   >
     <FriendlyIcon kind={block.icon || 'dental'} tone="mint" size="sm" />
-    <span className="flex-1">
+    <span className="min-w-0 flex-1 break-words hyphens-auto">
       {block.text && <span className="block text-base leading-6 text-slate-700">{block.text}</span>}
       <span className="mt-0.5 block font-display text-base font-extrabold leading-6 text-[#07111f]">{block.label}</span>
     </span>

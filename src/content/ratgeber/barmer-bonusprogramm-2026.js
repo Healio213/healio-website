@@ -91,8 +91,8 @@ export const article = {
 
   publishedAt: '2026-10-05',
   publishedAtLabel: '5. Oktober 2026',
-  updatedAt: '2026-10-05',
-  updatedAtLabel: '5. Oktober 2026',
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   readingTimeMinutes: 10,
 
   listTitle: 'BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen',
@@ -405,7 +405,28 @@ export const article = {
         },
       ],
     },
-  ],
+
+{
+  "id": "ratgeber-weiterlesen",
+  "heading": "Welche Ratgeber helfen dir weiter?",
+  "blocks": [
+    {
+      "type": "cards",
+      "heading": "Zum Weiterlesen",
+      "items": [
+        {
+          "icon": "bonus",
+          "tone": "mint",
+          "title": "Krankenkasse und Bonus: Bonusprogramme und Zuschüsse im Überblick",
+          "text": "Was ein Bonusprogramm ist, wie die Kassen auszahlen, wann der Bonus als Zuschuss den Beitrag einer Zusatzversicherung mitträgt und welcher Ratgeber zu deiner Kasse passt.",
+          "to": "/ratgeber/bonusprogramm-krankenkasse",
+          "linkLabel": "Ratgeber lesen"
+        }
+      ]
+    }
+  ]
+},
+],
 
   factNugget:
     'Healio verbindet Kassenbonusprogramme mit Zusatzversicherungen: Der ambulante Tarif bietet ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren, der Kassenbonus kann je nach Kasse beim Beitrag helfen. Bei der BARMER kann der zweckgebundene Zuschuss aus dem Bonusprogramm, laut Satzung höchstens 200 EUR im Jahr, in den Beitrag einer privaten Krankenzusatzversicherung fließen; je nach nachgewiesenen Maßnahmen und eigenen Kosten trägt er den Beitrag ganz oder teilweise, mehr als die nachgewiesenen Kosten zahlt die BARMER nie. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',

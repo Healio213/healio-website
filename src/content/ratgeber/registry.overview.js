@@ -12,62 +12,79 @@
 export const RATGEBER_OVERVIEW = {
   "single": [
     {
-      "slug": "ikk-classic-bonusprogramm-2026",
-      "kind": "ratgeber",
-      "listTitle": "IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen",
-      "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
-      "readingTimeMinutes": 8
-    },
-    {
-      "slug": "mkk-bonusprogramm-2026",
-      "kind": "ratgeber",
-      "listTitle": "mkk Bonusprogramm 2026: alle Maßnahmen, Zuschuss zur Zusatzversicherung und Fristen",
-      "listTeaser": "Was die mkk laut Satzung je Maßnahme zahlt, wann der Vollständigkeitsbonus greift und wie bis zu 100 EUR Zuschuss in eine Zusatzversicherung fließen können.",
-      "readingTimeMinutes": 8
-    },
-    {
-      "slug": "aok-bonusprogramm-2026",
-      "kind": "ratgeber",
-      "listTitle": "AOK Bonusprogramm 2026: alle elf AOKs mit Beträgen, Bonusheft und Fristen",
-      "listTeaser": "Welche AOK für dich zuständig ist, was sie je Maßnahme zahlt, bis wann du einreichst und wo der Bonus als Zuschuss in eine Zusatzversicherung fließen kann.",
-      "readingTimeMinutes": 18
-    },
-    {
-      "slug": "tk-bonusprogramm-2026",
-      "kind": "ratgeber",
-      "listTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende, Nachweise und Fristen",
-      "listTeaser": "Was jede Maßnahme laut Satzung an Punkten bringt, wofür du die doppelte Gesundheitsdividende einlösen kannst und wie sie den Beitrag einer Zusatzversicherung mittragen kann.",
-      "readingTimeMinutes": 9
-    },
-    {
-      "slug": "barmer-bonusprogramm-2026",
-      "kind": "ratgeber",
-      "listTitle": "BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen",
-      "listTeaser": "Was die BARMER laut Satzung je Maßnahme an Punkten gibt, wie der doppelte Zuschuss funktioniert und wie er den Beitrag einer Zusatzversicherung mitfinanzieren kann.",
-      "readingTimeMinutes": 10
-    },
-    {
       "slug": "schwangerschaft-worauf-achten",
       "kind": "ratgeber",
       "listTitle": "Schwanger: worauf du jetzt achten solltest",
       "listTeaser": "Der Alltag und das Geld in einem Text: Mutterpass, Hebamme, Selbstzahlerleistungen, Mutterschutz, Anträge und der Bonus, der jetzt am höchsten ist.",
       "readingTimeMinutes": 8
-    },
-    {
-      "slug": "krankenkassen-bonus-zusatzversicherung",
-      "kind": "advertorial",
-      "listTitle": "Krankenkassen-Bonus: das Geld, mit dem sich Zusatzschutz finanzieren lässt",
-      "listTeaser": "Warum ein Blick in die Satzung der eigenen Krankenkasse oft mehr bringt als jeder Tarifwechsel."
     }
   ],
   "groups": [
+    {
+      "id": "kasse-bonus",
+      "title": "Krankenkasse und Bonus",
+      "intro": "Wie Kassenbonus, Beiträge, Zuzahlung und Wechsel zusammenhängen. Mit Voraussetzungen, Quellen und den Grenzen der Zuschusswege.",
+      "icon": "bonus",
+      "hubSlug": "bonusprogramm-krankenkasse",
+      "total": 36,
+      "entries": [
+        {
+          "slug": "bonusprogramm-krankenkasse",
+          "kind": "ratgeber",
+          "listTitle": "Krankenkasse und Bonus: Bonusprogramme und Zuschüsse im Überblick",
+          "listTeaser": "Was ein Bonusprogramm ist, wie die Kassen auszahlen, wann der Bonus als Zuschuss den Beitrag einer Zusatzversicherung mitträgt und welcher Ratgeber zu deiner Kasse passt.",
+          "readingTimeMinutes": 9
+        },
+        {
+          "slug": "ikk-classic-bonusprogramm-2026",
+          "kind": "ratgeber",
+          "listTitle": "IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen",
+          "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
+          "readingTimeMinutes": 8
+        },
+        {
+          "slug": "mkk-bonusprogramm-2026",
+          "kind": "ratgeber",
+          "listTitle": "mkk Bonusprogramm 2026: alle Maßnahmen, Zuschuss zur Zusatzversicherung und Fristen",
+          "listTeaser": "Was die mkk laut Satzung je Maßnahme zahlt, wann der Vollständigkeitsbonus greift und wie bis zu 100 EUR Zuschuss in eine Zusatzversicherung fließen können.",
+          "readingTimeMinutes": 8
+        },
+        {
+          "slug": "aok-bonusprogramm-2026",
+          "kind": "ratgeber",
+          "listTitle": "AOK Bonusprogramm 2026: alle elf AOKs mit Beträgen, Bonusheft und Fristen",
+          "listTeaser": "Welche AOK für dich zuständig ist, was sie je Maßnahme zahlt, bis wann du einreichst und wo der Bonus als Zuschuss in eine Zusatzversicherung fließen kann.",
+          "readingTimeMinutes": 18
+        },
+        {
+          "slug": "tk-bonusprogramm-2026",
+          "kind": "ratgeber",
+          "listTitle": "TK Bonusprogramm 2026: Punkte, Gesundheitsdividende, Nachweise und Fristen",
+          "listTeaser": "Was jede Maßnahme laut Satzung an Punkten bringt, wofür du die doppelte Gesundheitsdividende einlösen kannst und wie sie den Beitrag einer Zusatzversicherung mittragen kann.",
+          "readingTimeMinutes": 9
+        },
+        {
+          "slug": "barmer-bonusprogramm-2026",
+          "kind": "ratgeber",
+          "listTitle": "BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen",
+          "listTeaser": "Was die BARMER laut Satzung je Maßnahme an Punkten gibt, wie der doppelte Zuschuss funktioniert und wie er den Beitrag einer Zusatzversicherung mitfinanzieren kann.",
+          "readingTimeMinutes": 10
+        },
+        {
+          "slug": "krankenkassen-bonus-zusatzversicherung",
+          "kind": "advertorial",
+          "listTitle": "Krankenkassen-Bonus: das Geld, mit dem sich Zusatzschutz finanzieren lässt",
+          "listTeaser": "Warum ein Blick in die Satzung der eigenen Krankenkasse oft mehr bringt als jeder Tarifwechsel."
+        }
+      ]
+    },
     {
       "id": "zaehne",
       "title": "Zähne",
       "intro": "Was die Kasse beim Zahnarzt zahlt, was an dir hängen bleibt und wann eine Zahnzusatzversicherung hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "dental",
       "hubSlug": "zahnersatz-kosten",
-      "total": 19,
+      "total": 45,
       "entries": [
         {
           "slug": "zahnersatz-kosten",
@@ -126,7 +143,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was Heilpraktiker, Osteopathie, Akupunktur und Physiotherapie kosten, was die Kasse dazugibt und wann ein ambulanter Tarif hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "naturopathy",
       "hubSlug": "heilpraktiker-kosten",
-      "total": 8,
+      "total": 21,
       "entries": [
         {
           "slug": "heilpraktiker-kosten",
@@ -185,7 +202,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was die Kasse im Krankenhaus zahlt, was Zuzahlung, Einbettzimmer und Reha kosten und wann eine stationäre Zusatzversicherung hilft. Mit Quellen und den Grenzen.",
       "icon": "hospital",
       "hubSlug": "stationaere-zusatzversicherung",
-      "total": 5,
+      "total": 15,
       "entries": [
         {
           "slug": "stationaere-zusatzversicherung",
@@ -221,6 +238,20 @@ export const RATGEBER_OVERVIEW = {
           "listTitle": "Zuzahlung Reha: 10 Euro am Tag, Befreiung und Höchstdauer",
           "listTeaser": "Was du bei der Reha zuzahlst, getrennt nach Rentenversicherung und Krankenkasse, wann die Zuzahlung entfällt und wie die Belastungsgrenze wirkt.",
           "readingTimeMinutes": 9
+        },
+        {
+          "slug": "krankenhauszusatzversicherung-vergleich",
+          "kind": "ratgeber",
+          "listTitle": "Krankenhauszusatzversicherung vergleichen: Was zählt für dich?",
+          "listTeaser": "Beim Vergleich einer Krankenhauszusatzversicherung zählen Versicherungsanlass, Zimmer, Arztwahl und Erstattungsgrenzen vor dem Beitrag. Ein Unfalltarif ist keine Ergänzung für krankheitsbedingte Aufenthalte; ein gewünschtes Einzelzimmer oder eine Wahlarztbehandlung sagt allein nichts über die medizinische Qualität aus.",
+          "readingTimeMinutes": 6
+        },
+        {
+          "slug": "chefarztbehandlung",
+          "kind": "ratgeber",
+          "listTitle": "Chefarztbehandlung: Was zahlst du als Kassenpatient?",
+          "listTeaser": "Chefarztbehandlung als zusätzliche Wahlarztleistung kannst du auch als Kassenpatient vereinbaren; die Kosten werden nach ärztlichen Einzelleistungen abgerechnet. Deine Krankenkasse übernimmt die medizinisch notwendige Versorgung, während eine private Zusatzversicherung die gewünschte Wahlleistung nur nach ihren vereinbarten Bedingungen erstattet.",
+          "readingTimeMinutes": 6
         }
       ]
     },
@@ -230,7 +261,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was Kasse und Zusatzschutz rund um Schwangerschaft, Baby und Kinder leisten, wie ein Babybonus funktioniert und worauf es beim Nachversichern ankommt.",
       "icon": "family",
       "hubSlug": "zusatzversicherung-kinder",
-      "total": 9,
+      "total": 15,
       "entries": [
         {
           "slug": "zusatzversicherung-kinder",
@@ -289,7 +320,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Welche Vorsorgeuntersuchungen die Kasse in welchem Alter zahlt, was privat bleibt und wann Satzungsleistungen oder ein ambulanter Tarif helfen. Mit Quellen und Stand.",
       "icon": "prevention",
       "hubSlug": "vorsorgeuntersuchung",
-      "total": 5,
+      "total": 10,
       "entries": [
         {
           "slug": "vorsorgeuntersuchung",
@@ -325,6 +356,20 @@ export const RATGEBER_OVERVIEW = {
           "listTitle": "TK und Reiseimpfungen: Kostenerstattung und Einreichen",
           "listTeaser": "Welche Reiseimpfungen die Techniker erstattet, was du zuzahlst und welche Unterlagen du einreichst, mit Fundstelle in der Satzung.",
           "readingTimeMinutes": 8
+        },
+        {
+          "slug": "check-up-35",
+          "kind": "ratgeber",
+          "listTitle": "Check-up 35: Was untersucht wird und wie oft die Kasse zahlt",
+          "listTeaser": "Die Kassenuntersuchung, ihre Blutwerte und mögliche private Extras verständlich auseinanderhalten.",
+          "readingTimeMinutes": 7
+        },
+        {
+          "slug": "reiseimpfung-krankenkasse",
+          "kind": "ratgeber",
+          "listTitle": "Reiseimpfungen: Welche Krankenkasse zahlt?",
+          "listTeaser": "Satzungsleistungen, eigene Kosten und Abrechnung vor deiner Reise klären.",
+          "readingTimeMinutes": 7
         }
       ]
     },
@@ -334,7 +379,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Wann die Kasse bei der Brille zahlt, was Gläser und Gleitsicht kosten und wann sich ein Tarif für Sehhilfen lohnt. Mit Rechenbeispielen und Quellen.",
       "icon": "glasses",
       "hubSlug": "brille-krankenkasse",
-      "total": 3,
+      "total": 11,
       "entries": [
         {
           "slug": "brille-krankenkasse",
@@ -356,6 +401,34 @@ export const RATGEBER_OVERVIEW = {
           "listTitle": "Gleitsichtbrille: Kosten, Kassenanteil und Erstattung",
           "listTeaser": "Wovon der Preis einer Gleitsichtbrille abhängt, was die Kasse nie zahlt und wie ein Beispiel mit 680 EUR mit und ohne Tarif ausgeht.",
           "readingTimeMinutes": 8
+        },
+        {
+          "slug": "augenlasern-kosten",
+          "kind": "ratgeber",
+          "listTitle": "Augenlasern: Kosten und wer sie zahlt",
+          "listTeaser": "Welche Kosten du pro Auge klären solltest, wie du Angebote vergleichst und warum eine Operation am Grauen Star einen anderen Kostenweg hat.",
+          "readingTimeMinutes": 8
+        },
+        {
+          "slug": "brillenversicherung-kinder",
+          "kind": "ratgeber",
+          "listTitle": "Kinderbrille: Kassenleistung und Zusatzversicherung",
+          "listTeaser": "Kinderbrille: Kassenleistung, Gestell und Mehrkosten unterscheiden. Erfahre, wann ein Zusatzvertrag hilft und welche Grenzen wichtig sind.",
+          "readingTimeMinutes": 8
+        },
+        {
+          "slug": "tk-brille",
+          "kind": "ratgeber",
+          "listTitle": "TK und Brille: Was zahlt die Techniker?",
+          "listTeaser": "Kassenanteil, eigene Brillenkosten und TK-Gesundheitsdividende getrennt prüfen.",
+          "readingTimeMinutes": 7
+        },
+        {
+          "slug": "aok-brille",
+          "kind": "ratgeber",
+          "listTitle": "AOK und Brille: Zuschuss und Kassenleistung",
+          "listTeaser": "Die AOK übernimmt medizinisch notwendige Brillengläser im gesetzlichen Leistungsumfang, wenn du die Voraussetzungen für Sehhilfen erfüllst. Zusätzliche Zuschüsse richten sich nach der Satzung deiner regionalen AOK und können besondere Bedingungen haben. Entscheidend sind dein Alter, der ärztlich bestimmte Bedarf und der vorgesehene Kostenweg. Hier erfährst du, welche Kosten du vor der Bestellung getrennt prüfen solltest.",
+          "readingTimeMinutes": 9
         }
       ]
     }

@@ -33,6 +33,8 @@
  */
 
 export const article = {
+  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-08",
   slug: 'gleitsichtbrille-kosten',
   kind: 'ratgeber',
   group: 'brille',
@@ -257,7 +259,28 @@ export const article = {
         },
       ],
     },
-  ],
+
+{
+  "id": "ratgeber-weiterlesen",
+  "heading": "Welche Ratgeber helfen dir weiter?",
+  "blocks": [
+    {
+      "type": "cards",
+      "heading": "Zum Weiterlesen",
+      "items": [
+        {
+          "icon": "document",
+          "tone": "mint",
+          "title": "Brillenkosten: Angebot und Eigenanteil verstehen",
+          "text": "Was deine Brille kostet, ergibt sich aus dem konkreten Angebot für Gläser, Fassung und gewählte Ausführung; einen pauschalen Marktpreis kannst du daraus nicht ableiten. Deinen Eigenanteil kennst du erst, wenn eine mögliche Kassenbeteiligung und eine bestehende private Erstattung für dieses Angebot geklärt sind.",
+          "to": "/ratgeber/brillenkosten",
+          "linkLabel": "Ratgeber lesen"
+        }
+      ]
+    }
+  ]
+},
+],
 
   factNugget:
     'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Für Brille, Heilpraktiker und Vorsorge zeigt Healio den ambulanten Tarif der SDK. Der Kassenbonus kann je nach Kasse als zweckgebundener Zuschuss beim Beitrag helfen; mehr als die nachgewiesenen eigenen Kosten wird nie erstattet. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',

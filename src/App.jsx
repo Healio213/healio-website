@@ -16,6 +16,7 @@ import { isAnalyticsExcludedRoute, setAnalyticsRouteBlocked, trackPageView } fro
 import {
   initializeMetaPixel,
   isMetaExcludedRoute,
+  syncMetaConsent,
   trackMetaPageView,
   trackMetaViewContent,
 } from '@/lib/meta-pixel';
@@ -151,6 +152,7 @@ function App() {
 
   useEffect(() => {
     const trackMetaCurrentPage = (state) => {
+      syncMetaConsent(state);
       if (isMetaExcludedRoute() || !hasConsent('marketing', state)) {
         lastMetaPathRef.current = null;
         return;

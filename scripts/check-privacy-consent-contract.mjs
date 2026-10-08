@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 import { parse } from '@babel/parser';
 import traverseModule from '@babel/traverse';
 import { buildNitaContext, buildNitaFirstMessage, sanitizeNitaEntryPoint } from '../src/lib/nitaContext.js';
+import { EXPECTED_GOOGLE_META_EXCLUDED_PATHS, EXPECTED_ANALYTICS_EXCLUDED_PATHS } from './lib/ratgeber-sensitive-paths.mjs';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -13,6 +14,26 @@ const failures = [];
 const expect = (condition, message) => {
   if (!condition) failures.push(message);
 };
+
+// Vergleicht die vollständigen Literal-Sperrlisten mit einer unabhängigen Soll-Liste.
+// AST statt Textregex: Kommentare sind zulässig, fehlende/zusätzliche Pfade nicht.
+const expectExcludedPaths = (source, name, expected) => {
+  const ast = parse(source, { sourceType: 'module' });
+  const binding = ast.program.body
+    .filter((node) => node.type === 'VariableDeclaration')
+    .flatMap((node) => node.declarations)
+    .find((node) => node.id.type === 'Identifier' && node.id.name === name);
+  const init = binding?.init;
+  const entries = init?.type === 'NewExpression' && init.callee.type === 'Identifier'
+    && init.callee.name === 'Set' && init.arguments.length === 1
+    && init.arguments[0].type === 'ArrayExpression' ? init.arguments[0].elements : null;
+  expect(Boolean(entries) && entries.every((entry) => entry?.type === 'StringLiteral'), `${name}: vollständige Literal-Sperrliste fehlt.`);
+  if (!entries || entries.some((entry) => entry?.type !== 'StringLiteral')) return;
+  const actual = entries.map((entry) => entry.value);
+  expect(new Set(actual).size === actual.length, `${name}: doppelte Sperrpfade.`);
+  expect(JSON.stringify([...actual].sort()) === JSON.stringify([...expected].sort()), `${name}: muss genau alle bisherigen und neu freigegebenen sensiblen Pfade sperren.`);
+};
+
 
 const collectSourceFiles = (directory) => fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
   const entryPath = path.join(directory, entry.name);
@@ -232,7 +253,7 @@ expect(cookieRenderer?.type === 'ConditionalExpression'
 'Die Cookie-Einstellungen dürfen nur vom gefilterten Cookie-Dateneintrag aus aufrufbar sein.');
 expect(/settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Auch der Einstellungsdialog muss im Zahn-Check ausgeblendet bleiben.');
 // Seit Stapel 2 der Ratgeber-Serie (07.10.2026) zusätzlich die vier Krebsvorsorge-Ratgeber.
-expect(/ANALYTICS_EXCLUDED_PATHS = new Set\(\[\s*'\/zahn',\s*'\/en\/dental',\s*'\/schwangerschaft',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(analytics), 'Zahn-Check- und Schwangerschafts-Routen und die Krebsvorsorge-Ratgeber müssen in der Analytics-Sperrliste stehen.');
+expectExcludedPaths(analytics, 'ANALYTICS_EXCLUDED_PATHS', EXPECTED_ANALYTICS_EXCLUDED_PATHS);
 expect(/ga-disable-\$\{GA4_MEASUREMENT_ID\}/.test(analytics), 'Die Zahn-Check-Sperre muss das GA4-Deaktivierungsflag setzen.');
 // GA4 erhaelt von der Einstiegsadresse nur utm_* und vom Verweis nur die fremde Domain.
 expect(
@@ -338,17 +359,21 @@ expect(
 );
 
 // /schwangerschaft und private Kampagnenquellen bleiben auch fuer Meta gesperrt.
-expect(
-  /const META_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/hebamme-rufbereitschaft',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(metaPixel),
-  'Die Schwangerschafts-Route, die Schwangerschafts-, Familienplanungs- und Krebsvorsorge-Ratgeber muessen in der Meta-Sperrliste stehen.',
-);
+expectExcludedPaths(metaPixel, 'META_EXCLUDED_PATHS', EXPECTED_GOOGLE_META_EXCLUDED_PATHS);
 expect(
   /PRIVATE_FUNNEL_SOURCES\.has\(source\)/.test(metaPixel),
   'Private Kampagnenquellen muessen auch fuer Meta gesperrt bleiben.',
 );
+expectExcludedPaths(metaCapi, 'BLOCKED_PATHS', EXPECTED_GOOGLE_META_EXCLUDED_PATHS);
 expect(
-  /const BLOCKED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/hebamme-rufbereitschaft',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(metaCapi),
-  'Auch die CAPI-Funktion muss dieselben Routen abweisen wie die Meta-Sperrliste.',
+  /const loadMetaPixel = \(\) => \{[\s\S]{0,200}?if \(isMetaExcludedRoute\(\)\) return false;/.test(metaPixel)
+    && /const sendMetaCapiEvent = \(payload\) => \{[\s\S]{0,200}?if \(isMetaExcludedRoute\(\)\) return false;/.test(metaPixel)
+    && /if \(!hasConsent\('marketing', state\) \|\| isMetaExcludedRoute\(\)\) return revokeMetaPixel\(\);/.test(metaPixel),
+  'Meta muss gesperrte Routen auch beim Laden, im CAPI-Ausgang und bei der Consent-Synchronisierung sperren.',
+);
+expect(
+  /const trackMetaCurrentPage = \(state\) => \{\s*syncMetaConsent\(state\);\s*if \(isMetaExcludedRoute\(\) \|\| !hasConsent\('marketing', state\)\)/.test(app),
+  'Die SPA muss Meta vor jeder Routen-/Zustimmungsprüfung synchronisieren und auf Sperrseiten widerrufen.',
 );
 expect(
   /if \(isMetaExcludedRoute\(\) \|\| !hasConsent\('marketing', state\)\)/.test(app),
@@ -597,10 +622,7 @@ expect(
 );
 
 // Dieselben Sperrrouten wie bei Meta.
-expect(
-  /const GOOGLE_ADS_EXCLUDED_PATHS = new Set\(\[\s*'\/schwangerschaft',\s*'\/ratgeber\/schwanger-zusatzversicherung',\s*'\/ratgeber\/schwangerschaft-worauf-achten',\s*'\/ratgeber\/schwangerschaft-was-steht-mir-zu',\s*'\/ratgeber\/hebamme-kosten-krankenkasse',\s*'\/blog\/kassenbonus-schwangerschaft-vorsorge',\s*'\/ratgeber\/babybonus-krankenkasse',\s*'\/ratgeber\/baby-geplant-zusatzversicherung',\s*'\/ratgeber\/familienzimmer-krankenhaus',\s*'\/ratgeber\/neugeborenes-versichern',\s*'\/ratgeber\/hebamme-rufbereitschaft',\s*'\/ratgeber\/vorsorgeuntersuchung',\s*'\/ratgeber\/hautkrebsscreening',\s*'\/ratgeber\/vorsorgeuntersuchung-frauen',\s*'\/ratgeber\/vorsorgeuntersuchung-maenner',\s*\]\)/.test(googleAds),
-  'Die Schwangerschafts-Route, die Schwangerschafts-Ratgeber, der Babybonus-Ratgeber, die Familienplanungs-Ratgeber und die Krebsvorsorge-Ratgeber muessen in der Google-Ads-Sperrliste stehen.',
-);
+expectExcludedPaths(googleAds, 'GOOGLE_ADS_EXCLUDED_PATHS', EXPECTED_GOOGLE_META_EXCLUDED_PATHS);
 // Einstiegscodes sperren Google Ads nicht mehr, gehen aber nie an Google
 // (Frank 05.10.2026). Meta und GA4 bleiben auf diesen Codes gesperrt.
 expect(

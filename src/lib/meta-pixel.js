@@ -80,6 +80,68 @@ const META_EXCLUDED_PATHS = new Set([
   '/ratgeber/hautkrebsscreening',
   '/ratgeber/vorsorgeuntersuchung-frauen',
   '/ratgeber/vorsorgeuntersuchung-maenner',
+  // Medizinische und Familien-Ratgeber der Freigabe vom 08.10.2026.
+  '/ratgeber/abnehmen-krankenkasse',
+  '/ratgeber/akupunktur-krankenkasse',
+  '/ratgeber/aok-babybonus',
+  '/ratgeber/aok-brille',
+  '/ratgeber/aok-heilpraktiker',
+  '/ratgeber/aok-krankenhauszusatzversicherung',
+  '/ratgeber/aok-osteopathie',
+  '/ratgeber/aok-reiseimpfung',
+  '/ratgeber/aok-zuzahlungsbefreiung',
+  '/ratgeber/augenlasern-kosten',
+  '/ratgeber/barmer-osteopathie',
+  '/ratgeber/barmer-zahnreinigung',
+  '/ratgeber/barmer-zuzahlungsbefreiung',
+  '/ratgeber/begleitperson-krankenhaus',
+  '/ratgeber/bkk-firmus-bonusprogramm-2026',
+  '/ratgeber/brille-verloren-versicherung',
+  '/ratgeber/brillenkosten',
+  '/ratgeber/brillenversicherung-kinder',
+  '/ratgeber/check-up-35',
+  '/ratgeber/dak-zuzahlungsbefreiung',
+  '/ratgeber/familienversicherung-krankenkasse',
+  '/ratgeber/geburtsvorbereitungskurs',
+  '/ratgeber/geburtsvorbereitungskurs-partner',
+  '/ratgeber/ikk-zuzahlungsbefreiung',
+  '/ratgeber/implantat-oder-bruecke',
+  '/ratgeber/kontaktlinsen-krankenkasse',
+  '/ratgeber/krankenhauszusatzversicherung-kinder',
+  '/ratgeber/krankenhauszusatzversicherung-kosten',
+  '/ratgeber/krankenhauszusatzversicherung-ohne-wartezeit',
+  '/ratgeber/krankenhauszusatzversicherung-senioren',
+  '/ratgeber/krankenhauszusatzversicherung-vorerkrankung',
+  '/ratgeber/mobil-krankenkasse-osteopathie',
+  '/ratgeber/naturheilkunde',
+  '/ratgeber/osteopathie-krankenkasse',
+  '/ratgeber/physiotherapie-kosten',
+  '/ratgeber/professionelle-zahnreinigung-sinnvoll',
+  '/ratgeber/schwangerschaft-krankenkasse-melden',
+  '/ratgeber/tcm-krankenkasse',
+  '/ratgeber/tk-brille',
+  '/ratgeber/tk-hautkrebsscreening',
+  '/ratgeber/tk-heilpraktiker',
+  '/ratgeber/tk-krankenhauszusatzversicherung',
+  '/ratgeber/tk-schwangerschaft',
+  '/ratgeber/tk-zuzahlungsbefreiung',
+  '/ratgeber/unsichtbare-zahnspange-kosten',
+  '/ratgeber/vollnarkose-zahnarzt-kosten',
+  '/ratgeber/vorsorgeuntersuchungen-kinder',
+  '/ratgeber/weisheitszaehne-ziehen-kosten',
+  '/ratgeber/zahnkrone-rausgefallen',
+  '/ratgeber/zahnreinigung-wie-oft',
+  '/ratgeber/zahnspange-erwachsene',
+  '/ratgeber/zahnspange-kosten',
+  '/ratgeber/zahnzusatzversicherung-familie',
+  '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
+  '/ratgeber/zahnzusatzversicherung-kinder',
+  '/ratgeber/zusatzversicherung-osteopathie',
+  '/ratgeber/zuzahlung-medikamente',
+  '/ratgeber/zuzahlungsbefreiung',
+  '/ratgeber/zuzahlungsbefreiung-chronisch-krank',
+  '/ratgeber/zuzahlungsbefreiung-rentner',
+  '/ratgeber/zuzahlungsbefreiung-schwerbehinderung',
 ]);
 
 // RechnerStart gilt nur fuer die Rechner- und Auswahlhilfe-Einstiege.
@@ -248,6 +310,7 @@ const ensureFbqStub = () => {
  */
 const loadMetaPixel = () => {
   if (!isBrowser() || !isMetaConfigured() || !hasConsent('marketing')) return false;
+  if (isMetaExcludedRoute()) return false;
 
   if (pixelLoaded) {
     // Nach einem Widerruf bleibt das Skript im Dokument. Erst eine erneute
@@ -295,6 +358,7 @@ const revokeMetaPixel = () => {
 
 const sendMetaCapiEvent = (payload) => {
   if (!isBrowser() || !isMetaConfigured() || !hasConsent('marketing')) return false;
+  if (isMetaExcludedRoute()) return false;
 
   const fbp = readCookie('_fbp');
   const fbc = readCookie('_fbc');
@@ -384,8 +448,8 @@ export const trackMetaLead = (params = {}) => emitMetaEvent('Lead', params);
 
 export const syncMetaConsent = (state = getConsentState()) => {
   if (!isBrowser() || !isMetaConfigured()) return false;
-  if (!hasConsent('marketing', state)) return revokeMetaPixel();
-  return pixelLoaded ? (pixelActive = true) : true;
+  if (!hasConsent('marketing', state) || isMetaExcludedRoute()) return revokeMetaPixel();
+  return pixelLoaded ? loadMetaPixel() : true;
 };
 
 export const initializeMetaPixel = () => {

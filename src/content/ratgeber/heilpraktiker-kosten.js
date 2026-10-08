@@ -30,6 +30,8 @@
  */
 
 export const article = {
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   slug: 'heilpraktiker-kosten',
   kind: 'ratgeber',
   group: 'ambulant',
@@ -216,93 +218,210 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Ratgeber hilft dir bei deiner Frage weiter?',
       blocks: [
-        {
-          type: 'cards',
-          heading: 'Alle Ratgeber dieses Bereichs',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'protection',
-              tone: 'mint',
-              title: 'Heilpraktiker-Zusatzversicherung',
-              text: 'Kriterien statt Rangliste, Gesundheitsfragen im Antrag und bestehende Beschwerden.',
-              to: '/ratgeber/heilpraktiker-zusatzversicherung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'ambulant',
-              tone: 'sky',
-              title: 'Ambulante Zusatzversicherung',
-              text: 'Vier Töpfe, Beiträge nach Alter und die Frage nach dem Privatpatienten.',
-              to: '/ratgeber/ambulante-zusatzversicherung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'document',
-              tone: 'butter',
-              title: 'Gebührenordnung für Heilpraktiker',
-              text: 'Warum das GebüH nur eine Berechnungshilfe ist und was auf der Rechnung steht.',
-              to: '/ratgeber/gebuehrenordnung-heilpraktiker',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'weighing',
-              tone: 'lavender',
-              title: 'Chiropraktiker Kosten',
-              text: 'Arzt oder Heilpraktiker: wer behandelt und wer zahlt.',
-              to: '/ratgeber/chiropraktiker-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'comparison',
-              tone: 'coral',
-              title: 'TK und Osteopathie',
-              text: '40 EUR je Sitzung, ärztliche Bescheinigung vorher, Rechnung einreichen.',
-              to: '/ratgeber/tk-osteopathie',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'medication',
-              tone: 'mint',
-              title: 'Zuzahlung Physiotherapie',
-              text: '10 Prozent plus 10 EUR je Verordnung, Belastungsgrenze und Erstattung.',
-              to: '/ratgeber/physiotherapie-zuzahlung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'naturopathy',
-              tone: 'sky',
-              title: 'Akupunktur Kosten',
-              text: 'Wann die Kasse zahlt und was die Sitzung privat kostet.',
-              to: '/ratgeber/akupunktur-kosten',
-              linkLabel: 'Lesen',
-            },
-          ],
-        },
-        {
-          type: 'cards',
-          heading: 'Weiterlesen im Healio-Blog',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'calculator',
-              tone: 'butter',
-              title: 'Heilpraktiker Kosten: wer zahlt was, der Guide 2026',
-              text: 'Der ausführliche Blogartikel zu Kosten, Kasse und Zusatzschutz.',
-              to: '/blog/heilpraktiker-kosten-guide-2026',
-              linkLabel: 'Artikel lesen',
-            },
-            {
-              icon: 'comparison',
-              tone: 'lavender',
-              title: 'Osteopathie: welche Krankenkasse zahlt 2026',
-              text: 'Welche Kassen Osteopathie bezuschussen, im Überblick.',
-              to: '/blog/osteopathie-krankenkasse-2026',
-              linkLabel: 'Artikel lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "cards",
+    "heading": "Ambulanter Ergänzungsweg und Behandlungen, Kosten und Kassenleistungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "protection",
+        "tone": "mint",
+        "title": "Heilpraktiker-Zusatzversicherung",
+        "text": "Kriterien statt Rangliste, Gesundheitsfragen im Antrag und bestehende Beschwerden.",
+        "to": "/ratgeber/heilpraktiker-zusatzversicherung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "ambulant",
+        "tone": "sky",
+        "title": "Ambulante Zusatzversicherung",
+        "text": "Vier Töpfe, Beiträge nach Alter und die Frage nach dem Privatpatienten.",
+        "to": "/ratgeber/ambulante-zusatzversicherung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Heilpraktiker-Zusatzversicherung ohne Wartezeit",
+        "text": "Was ab Vertragsbeginn möglich ist und warum vorherige Fälle eine eigene Prüfung brauchen.",
+        "to": "/ratgeber/heilpraktiker-zusatzversicherung-ohne-wartezeit",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "sky",
+        "title": "Akupunktur Kosten",
+        "text": "Wann die Kasse zahlt und was die Sitzung privat kostet.",
+        "to": "/ratgeber/akupunktur-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "weighing",
+        "tone": "lavender",
+        "title": "Chiropraktiker Kosten",
+        "text": "Arzt oder Heilpraktiker: wer behandelt und wer zahlt.",
+        "to": "/ratgeber/chiropraktiker-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "medication",
+        "tone": "mint",
+        "title": "Zuzahlung Physiotherapie",
+        "text": "10 Prozent plus 10 EUR je Verordnung, Belastungsgrenze und Erstattung.",
+        "to": "/ratgeber/physiotherapie-zuzahlung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "butter",
+        "title": "Gebührenordnung für Heilpraktiker",
+        "text": "Warum das GebüH nur eine Berechnungshilfe ist und was auf der Rechnung steht.",
+        "to": "/ratgeber/gebuehrenordnung-heilpraktiker",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Naturheilkunde: Verfahren, Behandler und Kosten",
+        "text": "Naturheilkunde verständlich erklärt: Arzt und Heilpraktiker unterscheiden, Kosten klären und Kassenleistungen sowie Tarifgrenzen prüfen.",
+        "to": "/ratgeber/naturheilkunde",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Behandlungen, Kosten und Kassenleistungen und Osteopathie und Kassenbedingungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Physiotherapie: Kosten mit und ohne Rezept",
+        "text": "Was du mit Kassenrezept selbst zahlst, welche Behandlungspreise 2026 gelten und was du bei einer Privatbehandlung vorher klären solltest.",
+        "to": "/ratgeber/physiotherapie-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Akupunktur auf Krankenkasse: wann die Kasse zahlt",
+        "text": "Die gesetzliche Krankenkasse übernimmt Körperakupunktur bei chronischen Schmerzen der Lendenwirbelsäule oder bei chronischen Kniegelenkschmerzen durch Gonarthrose, wenn die Beschwerden seit mindestens sechs Monaten bestehen. Dafür muss ein entsprechend qualifizierter Vertragsarzt behandeln; außerdem gelten Grenzen für Sitzungen und Behandlungszeiträume. Bei anderen Beschwerden oder einer Heilpraktikerrechnung brauchst du einen gesondert bestätigten Zuschuss oder eine passende private Vertragsleistung. Hier erfährst du, welche Voraussetzungen du vor dem Termin prüfen solltest.",
+        "to": "/ratgeber/akupunktur-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "TCM: Ärzte, Kliniken und Krankenkasse",
+        "text": "Welche Behandlung über die Kasse laufen kann und was die Zulassung einer TCM-Praxis oder Klinik tatsächlich bedeutet.",
+        "to": "/ratgeber/tcm-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "AOK und Heilpraktiker: Leistungen richtig prüfen",
+        "text": "Regionale Kassenextras, private Ergänzungsverträge und konkrete Rechnungen auseinanderhalten.",
+        "to": "/ratgeber/aok-heilpraktiker",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "TK und Heilpraktiker: Kostenübernahme getrennt prüfen",
+        "text": "Die TK übernimmt Heilpraktikerkosten nicht pauschal; du musst die konkrete Behandlung mit einer Satzungsleistung oder dem zweckgebundenen Bonuskatalog abgleichen. Für weitere versicherte Naturheilverfahren kommt ein eigenständiger privater Zusatzvertrag infrage, dessen Leistungen und Behandleranforderungen du gesondert prüfst.",
+        "to": "/ratgeber/tk-heilpraktiker",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "comparison",
+        "tone": "coral",
+        "title": "TK und Osteopathie",
+        "text": "40 EUR je Sitzung, ärztliche Bescheinigung vorher, Rechnung einreichen.",
+        "to": "/ratgeber/tk-osteopathie",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Osteopathie: Was kostet eine Behandlung und wer zahlt?",
+        "text": "Die Kosten deiner Osteopathie-Behandlung hängen von der vereinbarten Leistung und der Vergütung deiner Praxis ab. Dein Eigenanteil ergibt sich aus der tatsächlichen Rechnung abzüglich der Erstattung, die deine Krankenkasse oder dein privater Tarif unter den jeweiligen Voraussetzungen anerkennt.",
+        "to": "/ratgeber/osteopathie-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
+        "text": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
+        "to": "/ratgeber/osteopathie-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Osteopathie und Kassenbedingungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "AOK und Osteopathie: regionale Zuschüsse prüfen",
+        "text": "Die AOK-Erstattung für Osteopathie hängt von deiner regionalen AOK und ihren konkreten Satzungsbedingungen ab. Kläre vor dem Termin Betrag, ärztlichen Nachweis, Behandlerqualifikation und ein möglicherweise bereits genutztes gemeinsames Budget.",
+        "to": "/ratgeber/aok-osteopathie",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Zusatzversicherung für Osteopathie prüfen",
+        "text": "Eine Zusatzversicherung für Osteopathie kann versicherte Behandlungskosten nach den Bedingungen des gewählten Tarifs ergänzen. Prüfe zuerst den Zuschuss deiner gesetzlichen Kasse und vergleiche danach Behandleranforderungen, Erstattungsumfang und verfügbares Teilbudget des privaten Vertrags.",
+        "to": "/ratgeber/zusatzversicherung-osteopathie",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Barmer und Osteopathie: passende Erstattungswege",
+        "text": "Die Barmer-Satzung sieht besondere Osteopathiewege für Säuglinge und während der Schwangerschaft vor; einen pauschalen Zuschuss für sämtliche Erwachsenen belegen diese Regeln nicht. Daneben kannst du einen zweckgebundenen Bonuszuschuss prüfen, für den eigene Teilnahme-, Nachweis- und Kostenbedingungen gelten.",
+        "to": "/ratgeber/barmer-osteopathie",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
+        "title": "Mobil Krankenkasse und Osteopathie",
+        "text": "Sitzungsgrenze, gemeinsamer Topf und benötigte Nachweise vor dem Termin prüfen.",
+        "to": "/ratgeber/mobil-krankenkasse-osteopathie",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Weitere passende Themen",
+    "items": [
+      {
+        "icon": "calculator",
+        "tone": "butter",
+        "title": "Heilpraktiker Kosten: wer zahlt was, der Guide 2026",
+        "text": "Der ausführliche Blogartikel zu Kosten, Kasse und Zusatzschutz.",
+        "to": "/blog/heilpraktiker-kosten-guide-2026",
+        "linkLabel": "Artikel lesen"
+      },
+      {
+        "icon": "comparison",
+        "tone": "lavender",
+        "title": "Osteopathie: welche Krankenkasse zahlt 2026",
+        "text": "Welche Kassen Osteopathie bezuschussen, im Überblick.",
+        "to": "/blog/osteopathie-krankenkasse-2026",
+        "linkLabel": "Artikel lesen"
+      }
+    ]
+  }
+],
     },
   ],
 

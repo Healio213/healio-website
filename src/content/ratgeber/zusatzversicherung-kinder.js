@@ -55,8 +55,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  updatedAt: '2026-10-08',
-  updatedAtLabel: '8. Oktober 2026',
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   readingTimeMinutes: 11,
 
   listTitle: 'Zusatzversicherung für Kinder: was die Kasse zahlt und welcher Zusatzschutz passt',
@@ -190,115 +190,185 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Familien-Ratgeber hilft dir weiter?',
       blocks: [
-        {
-          type: 'paragraph',
-          text: 'Je nach Thema führt dich einer dieser Ratgeber weiter.',
-        },
-        {
-          type: 'cards',
-          heading: 'Vor der Schwangerschaft und rund um die Geburt',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'pregnancy',
-              tone: 'mint',
-              eyebrow: 'Baby geplant',
-              title: 'Klinikschutz vor der Schwangerschaft',
-              text: 'Warum der Zeitpunkt zählt, welche Wartezeit gilt und wie dein Baby später mitversichert wird.',
-              to: '/ratgeber/baby-geplant-zusatzversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'family',
-              tone: 'sky',
-              eyebrow: 'Neugeborenes',
-              title: 'Neugeborenes versichern',
-              text: 'Familienversicherung bei der Kasse und die Frist für die Zusatzversicherung als Checkliste.',
-              to: '/ratgeber/neugeborenes-versichern',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'hospital',
-              tone: 'butter',
-              eyebrow: 'Geburt',
-              title: 'Familienzimmer im Krankenhaus',
-              text: 'Was ein Familienzimmer kostet, wer es zahlt und welche Bedingungen ein Klinikschutz stellt.',
-              to: '/ratgeber/familienzimmer-krankenhaus',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'hospital',
-              tone: 'sky',
-              eyebrow: 'Krankenhaus',
-              title: 'Krankenhaus-Ratgeber im Überblick',
-              text: 'Was die Kasse im Krankenhaus zahlt, Zuzahlung, Wahlleistungen und Klinik-Tarife.',
-              to: '/ratgeber/stationaere-zusatzversicherung',
-              linkLabel: 'Zur Übersicht',
-            },
-          ],
-        },
-        {
-          type: 'cards',
-          heading: 'Schwangerschaft, Bonus und Kinder',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'bonus',
-              tone: 'lavender',
-              eyebrow: 'Baby',
-              title: 'Babybonus Krankenkasse 2026',
-              text: 'Wer wie viel zahlt, mit Fundstelle in der Satzung.',
-              to: '/ratgeber/babybonus-krankenkasse',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'pregnancy',
-              tone: 'coral',
-              eyebrow: 'Schwanger',
-              title: 'Schwanger: welcher Zusatzschutz noch geht',
-              text: 'Was bei bestehender Schwangerschaft noch möglich ist und was zu spät kommt.',
-              to: '/ratgeber/schwanger-zusatzversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'support',
-              tone: 'mint',
-              eyebrow: 'Hebamme',
-              title: 'Hebamme: was die Krankenkasse zahlt',
-              text: 'Hebammenhilfe, Rufbereitschaft und was du selbst zahlst.',
-              to: '/ratgeber/hebamme-kosten-krankenkasse',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'calendar',
-              tone: 'coral',
-              eyebrow: 'Hebamme',
-              title: 'Rufbereitschaft der Hebamme',
-              text: 'Was die Pauschale ist und welche Kassen laut Satzung etwas erstatten.',
-              to: '/ratgeber/hebamme-rufbereitschaft',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'document',
-              tone: 'sky',
-              eyebrow: 'Vor der Geburt',
-              title: 'Was steht mir in der Schwangerschaft zu?',
-              text: 'Kassenleistungen, Extras und Fristen im Überblick.',
-              to: '/ratgeber/schwangerschaft-was-steht-mir-zu',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'glasses',
-              tone: 'butter',
-              eyebrow: 'Brille',
-              title: 'Brille und Krankenkasse',
-              text: 'Wann die Kasse zahlt und wie viel, auch für Kinder.',
-              to: '/ratgeber/brille-krankenkasse',
-              linkLabel: 'Ratgeber lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "paragraph",
+    "text": "Je nach Thema führt dich einer dieser Ratgeber weiter."
+  },
+  {
+    "type": "cards",
+    "heading": "Familienplanung und Geburt",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "pregnancy",
+        "tone": "mint",
+        "eyebrow": "Baby geplant",
+        "title": "Klinikschutz vor der Schwangerschaft",
+        "text": "Warum der Zeitpunkt zählt, welche Wartezeit gilt und wie dein Baby später mitversichert wird.",
+        "to": "/ratgeber/baby-geplant-zusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "sky",
+        "eyebrow": "Neugeborenes",
+        "title": "Neugeborenes versichern",
+        "text": "Familienversicherung bei der Kasse und die Frist für die Zusatzversicherung als Checkliste.",
+        "to": "/ratgeber/neugeborenes-versichern",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "butter",
+        "eyebrow": "Geburt",
+        "title": "Familienzimmer im Krankenhaus",
+        "text": "Was ein Familienzimmer kostet, wer es zahlt und welche Bedingungen ein Klinikschutz stellt.",
+        "to": "/ratgeber/familienzimmer-krankenhaus",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "pregnancy",
+        "tone": "coral",
+        "eyebrow": "Schwanger",
+        "title": "Schwanger: welcher Zusatzschutz noch geht",
+        "text": "Was bei bestehender Schwangerschaft noch möglich ist und was zu spät kommt.",
+        "to": "/ratgeber/schwanger-zusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "sky",
+        "eyebrow": "Vor der Geburt",
+        "title": "Was steht mir in der Schwangerschaft zu?",
+        "text": "Kassenleistungen, Extras und Fristen im Überblick.",
+        "to": "/ratgeber/schwangerschaft-was-steht-mir-zu",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "support",
+        "tone": "mint",
+        "eyebrow": "Hebamme",
+        "title": "Hebamme: was die Krankenkasse zahlt",
+        "text": "Hebammenhilfe, Rufbereitschaft und was du selbst zahlst.",
+        "to": "/ratgeber/hebamme-kosten-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "bonus",
+        "tone": "lavender",
+        "eyebrow": "Baby",
+        "title": "Babybonus Krankenkasse 2026",
+        "text": "Wer wie viel zahlt, mit Fundstelle in der Satzung.",
+        "to": "/ratgeber/babybonus-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "Geburtsvorbereitungskurs: Beginn und Kosten klären",
+        "text": "Geburtsvorbereitungskurs: früh anmelden, Kassenleistung und Partnergebühr trennen. Erfahre, was bei Präsenz, Live-Onlinekurs und Videos gilt.",
+        "to": "/ratgeber/geburtsvorbereitungskurs",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Kasse, Bonus und Vorsorge",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "Familienversicherung 2026: Wer kann mitversichert sein?",
+        "text": "Einkommensgrenzen, Kinder und Antrag bei der Krankenkasse verständlich prüfen.",
+        "to": "/ratgeber/familienversicherung-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "AOK-Babybonus: regionale Zuschüsse richtig einordnen",
+        "text": "Einen einheitlichen AOK-Babybonus gibt es nicht: Die regionalen AOKs regeln Programme und zusätzliche Leistungen in ihren eigenen Satzungen. Die AOK Hessen erstattet beispielsweise ausgewählte Baby-Kurse bis 150 EUR, während Rheinland/Hamburg einen gemeinsamen Kostenrahmen von 250 EUR für bestimmte Schwangerschafts- und Babyleistungen vorsieht.",
+        "to": "/ratgeber/aok-babybonus",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "Geburtsvorbereitung mit Partner: Was erstattet die Kasse?",
+        "text": "Die TK erstattet einen Teil der Partnergebühr. Andere Kassen haben eigene Regeln zu Mitgliedschaft, Nachweisen und gemeinsam genutzten Zuschüssen.",
+        "to": "/ratgeber/geburtsvorbereitungskurs-partner",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "Schwangerschaft der Krankenkasse melden",
+        "text": "Mitteilung, Leistungsantrag und Arbeitgeberinformation als eigene Schritte planen.",
+        "to": "/ratgeber/schwangerschaft-krankenkasse-melden",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "title": "TK und Schwangerschaft: Leistungen und Extras",
+        "text": "Bei der TK bekommst du die gesetzliche Schwangerschaftsvorsorge und Hebammenhilfe sowie bestimmte Extras nach ihrer Satzung. Dazu zählen unter Voraussetzungen Rufbereitschaft bis 250 EUR je Schwangerschaft, bestimmte verordnete Arzneimittel und ein Zuschuss zum Partnerkurs.",
+        "to": "/ratgeber/tk-schwangerschaft",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "calendar",
+        "tone": "coral",
+        "eyebrow": "Hebamme",
+        "title": "Rufbereitschaft der Hebamme",
+        "text": "Was die Pauschale ist und welche Kassen laut Satzung etwas erstatten.",
+        "to": "/ratgeber/hebamme-rufbereitschaft",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Weitere passende Themen",
+    "items": [
+  {
+    "icon": "dental",
+    "tone": "mint",
+    "title": "Zahnzusatzversicherung für Kinder",
+    "text": "Ab wann, was sie zahlt und worauf du achtest.",
+    "to": "/ratgeber/zahnzusatzversicherung-kinder",
+    "linkLabel": "Ratgeber lesen"
+  },
+  {
+    "icon": "hospital",
+    "tone": "sky",
+    "eyebrow": "Krankenhaus",
+    "title": "Krankenhaus-Ratgeber im Überblick",
+    "text": "Was die Kasse im Krankenhaus zahlt, Zuzahlung, Wahlleistungen und Klinik-Tarife.",
+    "to": "/ratgeber/stationaere-zusatzversicherung",
+    "linkLabel": "Zur Übersicht"
+  },
+  {
+    "icon": "glasses",
+    "tone": "butter",
+    "eyebrow": "Brille",
+    "title": "Brille und Krankenkasse",
+    "text": "Wann die Kasse zahlt und wie viel, auch für Kinder.",
+    "to": "/ratgeber/brille-krankenkasse",
+    "linkLabel": "Ratgeber lesen"
+  },
+  {
+    "icon": "dental",
+    "tone": "lavender",
+    "title": "Zahn-Check ansehen",
+    "text": "Die Zahnsituation einordnen und die Vertragsbedingungen prüfen.",
+    "to": "/zahn",
+    "linkLabel": "Zahnweg ansehen"
+  }
+]
+  }
+],
     },
     {
       id: 'zeitpunkt',

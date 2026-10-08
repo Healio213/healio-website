@@ -31,8 +31,8 @@ export const article = {
 
   publishedAt: '2026-10-06',
   publishedAtLabel: '6. Oktober 2026',
-  updatedAt: '2026-10-07',
-  updatedAtLabel: '7. Oktober 2026',
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   readingTimeMinutes: 13,
 
   listTitle: 'Zahnersatz Kosten: was die Kasse zahlt und was du selbst zahlst',
@@ -349,172 +349,401 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Zahn-Ratgeber hilft dir weiter?',
       blocks: [
-        {
-          type: 'cards',
-          heading: 'Kosten beim Zahnarzt',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'prevention',
-              tone: 'mint',
-              title: 'Zahnreinigung Kosten',
-              text: 'Was eine professionelle Zahnreinigung kostet und welche Kasse etwas dazugibt.',
-              to: '/ratgeber/professionelle-zahnreinigung-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'prevention',
-              tone: 'sky',
-              title: 'Zahnreinigung bei der DAK',
-              text: 'Bis zu 60 EUR im Kalenderjahr laut Satzung, die Frist und der Bonus als Zuschuss.',
-              to: '/ratgeber/dak-zahnreinigung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'dental',
-              tone: 'lavender',
-              title: 'Zahnimplantat Kosten',
-              text: 'Warum die Kasse nur einen Festzuschuss zahlt und was für dich übrig bleibt.',
-              to: '/ratgeber/zahnimplantat-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'hospital',
-              tone: 'sky',
-              title: 'Wurzelbehandlung Kosten',
-              text: 'Was die Kasse zahlt, was privat berechnet wird und wo die Grenzen liegen.',
-              to: '/ratgeber/wurzelbehandlung-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'protection',
-              tone: 'butter',
-              title: 'Zahnkrone Kosten',
-              text: 'Metall, verblendet oder Vollkeramik: Festzuschuss und Eigenanteil.',
-              to: '/ratgeber/zahnkrone-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'document',
-              tone: 'coral',
-              title: 'Bonusheft beim Zahnarzt',
-              text: 'Fünf oder zehn Jahre lückenlos: so viel mehr zahlt die Kasse.',
-              to: '/ratgeber/bonusheft-zahnarzt',
-              linkLabel: 'Lesen',
-            },
-          ],
-        },
-        {
-          type: 'cards',
-          heading: 'Zahnzusatzversicherung, Tarife und Kasse',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'calculator',
-              tone: 'butter',
-              title: 'Lohnt sich eine Zahnzusatzversicherung?',
-              text: 'Krone, Brücke und Implantat durchgerechnet, mit Prüfpunkten und Grenzen.',
-              to: '/ratgeber/zahnzusatzversicherung-lohnt-sich',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'calendar',
-              tone: 'mint',
-              title: 'Zahnzusatz ohne Wartezeit',
-              text: 'Was ab Tag eins gilt und was trotzdem nicht versichert ist.',
-              to: '/ratgeber/zahnzusatzversicherung-ohne-wartezeit',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'weighing',
-              tone: 'lavender',
-              title: 'Fehlender Zahn und Zusatzversicherung',
-              text: 'Was bei einer Zahnlücke noch geht und was nicht.',
-              to: '/ratgeber/zahnzusatzversicherung-fehlender-zahn',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'dental',
-              tone: 'sky',
-              title: 'UKV ZahnPRIVAT im Überblick',
-              text: 'Drei Stufen ohne Wartezeit, die Zahnstaffel und was nicht versichert ist.',
-              to: '/ratgeber/ukv-zahnzusatzversicherung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'switch',
-              tone: 'coral',
-              title: 'Bayerische mit ZAHN Sofort',
-              text: 'Für schon empfohlene oder begonnene Behandlungen, die weder abgeschlossen noch abgerechnet sind.',
-              to: '/ratgeber/bayerische-zahnzusatzversicherung',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'region',
-              tone: 'butter',
-              title: 'AOK und Zähne',
-              text: 'Was die elf AOKs beim Zahnersatz und bei der Zahnreinigung zahlen.',
-              to: '/ratgeber/aok-zahnzusatzversicherung',
-              linkLabel: 'Lesen',
-            },
-          ],
-        },
-        {
-          type: 'cards',
-          heading: 'Zahnersatz, Füllung und Zahnfleisch',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'comparison',
-              tone: 'lavender',
-              title: 'Zahnersatz Möglichkeiten',
-              text: 'Krone, Brücke, Implantat und Prothese im Vergleich, mit Festzuschuss und Eigenanteil.',
-              to: '/ratgeber/zahnersatz-moeglichkeiten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'dental',
-              tone: 'mint',
-              title: 'Zahnbrücke Kosten',
-              text: 'Welche Brücke die Kasse bezuschusst und was nach dem Festzuschuss an dir hängen bleibt.',
-              to: '/ratgeber/zahnbruecke-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'dental',
-              tone: 'sky',
-              title: 'Zahnprothese Kosten',
-              text: 'Teilprothese, Vollprothese und Teleskopprothese: was die Kasse zahlt und was privat bleibt.',
-              to: '/ratgeber/zahnprothese-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'document',
-              tone: 'butter',
-              title: 'Härtefall beim Zahnersatz',
-              text: 'Wann die Kasse mehr übernimmt, wie die Einkommensgrenze aussieht und wie der Antrag läuft.',
-              to: '/ratgeber/zahnersatz-haertefall',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'dental',
-              tone: 'coral',
-              title: 'Zahnfüllung Kosten',
-              text: 'Was die Kasse seit dem Amalgamverbot zahlt und was ein Inlay darüber hinaus kostet.',
-              to: '/ratgeber/zahnfuellung-kosten',
-              linkLabel: 'Lesen',
-            },
-            {
-              icon: 'prevention',
-              tone: 'mint',
-              title: 'Parodontitis-Behandlung Kosten',
-              text: 'Wie die Behandlung bei der Kasse abläuft und welche Leistungen privat bleiben.',
-              to: '/ratgeber/parodontitis-behandlung-kosten',
-              linkLabel: 'Lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "cards",
+    "heading": "Zahnreinigung und Vorsorge",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Zahnreinigung Kosten",
+        "text": "Was eine professionelle Zahnreinigung kostet und welche Kasse etwas dazugibt.",
+        "to": "/ratgeber/professionelle-zahnreinigung-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "coral",
+        "title": "Bonusheft beim Zahnarzt",
+        "text": "Fünf oder zehn Jahre lückenlos: so viel mehr zahlt die Kasse.",
+        "to": "/ratgeber/bonusheft-zahnarzt",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "sky",
+        "title": "Zahnreinigung bei der DAK",
+        "text": "Bis zu 60 EUR im Kalenderjahr laut Satzung, die Frist und der Bonus als Zuschuss.",
+        "to": "/ratgeber/dak-zahnreinigung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "AOK Zahnreinigung: Welche regionale AOK zahlt wie viel?",
+        "text": "Der Zuschuss zur AOK-Zahnreinigung hängt von deiner regionalen AOK und ihrer Satzung ab. Es gibt keine einheitliche Leistung für alle AOK-Versicherten; die Tabelle zeigt Beträge, Altersgrenzen und gemeinsame Budgets mit Stand 7. Oktober 2026.",
+        "to": "/ratgeber/aok-zahnreinigung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "TK Zahnreinigung: So bekommst du den Zuschuss",
+        "text": "Die TK bezuschusst eine professionelle Zahnreinigung ab 18 Jahren mit bis zu 40 EUR im Kalenderjahr. Du reichst die Rechnung ein; maßgeblich sind die nachgewiesenen Kosten und § 27o der TK-Satzung.",
+        "to": "/ratgeber/tk-zahnreinigung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Barmer Zahnreinigung: Wie funktioniert die Erstattung?",
+        "text": "Die Barmer hat keinen allgemeinen PZR-Satzungszuschuss für Erwachsene außerhalb der Schwangerschaft. Du kannst einen Zuschuss über das Bonusprogramm nutzen; für Schwangere gibt es eine eigene zusätzliche Leistung mit besonderen Voraussetzungen.",
+        "to": "/ratgeber/barmer-zahnreinigung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Professionelle Zahnreinigung: Wie sinnvoll ist sie?",
+        "text": "Ist professionelle Zahnreinigung sinnvoll? Was zum Nutzen bekannt ist, wo die Studien Grenzen haben und welche Kosten und Kassenleistungen zählen.",
+        "to": "/ratgeber/professionelle-zahnreinigung-sinnvoll",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnreinigung: Wie oft ist der richtige Abstand?",
+        "text": "Wie oft zur professionellen Zahnreinigung? Befund, Kontrolltermin und Kassenleistung unterscheiden und Kosten für den gewählten Abstand prüfen.",
+        "to": "/ratgeber/zahnreinigung-wie-oft",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Zahnreinigung und Vorsorge und Zahnbehandlung und Zahnersatz",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "IKK Zahnreinigung: Wie viel übernimmt die IKK classic?",
+        "text": "Die IKK classic erstattet für professionelle Zahnreinigung nach ihrer aktuellen Satzung die tatsächlichen Kosten bis zu 40 EUR je Versicherten und Kalenderjahr. Voraussetzung sind eine berechtigte Zahnarztpraxis und die eingereichte Rechnung; ein DentNet-Angebot ist ein gesonderter Leistungsweg.",
+        "to": "/ratgeber/ikk-zahnreinigung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "lavender",
+        "title": "Zahnimplantat Kosten",
+        "text": "Warum die Kasse nur einen Festzuschuss zahlt und was für dich übrig bleibt.",
+        "to": "/ratgeber/zahnimplantat-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "sky",
+        "title": "Wurzelbehandlung Kosten",
+        "text": "Was die Kasse zahlt, was privat berechnet wird und wo die Grenzen liegen.",
+        "to": "/ratgeber/wurzelbehandlung-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "protection",
+        "tone": "butter",
+        "title": "Zahnkrone Kosten",
+        "text": "Metall, verblendet oder Vollkeramik: Festzuschuss und Eigenanteil.",
+        "to": "/ratgeber/zahnkrone-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnbrücke Kosten",
+        "text": "Welche Brücke die Kasse bezuschusst und was nach dem Festzuschuss an dir hängen bleibt.",
+        "to": "/ratgeber/zahnbruecke-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "sky",
+        "title": "Zahnprothese Kosten",
+        "text": "Teilprothese, Vollprothese und Teleskopprothese: was die Kasse zahlt und was privat bleibt.",
+        "to": "/ratgeber/zahnprothese-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "coral",
+        "title": "Zahnfüllung Kosten",
+        "text": "Was die Kasse seit dem Amalgamverbot zahlt und was ein Inlay darüber hinaus kostet.",
+        "to": "/ratgeber/zahnfuellung-kosten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "prevention",
+        "tone": "mint",
+        "title": "Parodontitis-Behandlung Kosten",
+        "text": "Wie die Behandlung bei der Kasse abläuft und welche Leistungen privat bleiben.",
+        "to": "/ratgeber/parodontitis-behandlung-kosten",
+        "linkLabel": "Lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Zahnbehandlung und Zahnersatz",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "comparison",
+        "tone": "lavender",
+        "title": "Zahnersatz Möglichkeiten",
+        "text": "Krone, Brücke, Implantat und Prothese im Vergleich, mit Festzuschuss und Eigenanteil.",
+        "to": "/ratgeber/zahnersatz-moeglichkeiten",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "butter",
+        "title": "Härtefall beim Zahnersatz",
+        "text": "Wann die Kasse mehr übernimmt, wie die Einkommensgrenze aussieht und wie der Antrag läuft.",
+        "to": "/ratgeber/zahnersatz-haertefall",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Weisheitszähne ziehen: Welche Kosten können entstehen?",
+        "text": "Welche Kosten beim Ziehen der Weisheitszähne entstehen, wann die Kasse zahlt und wie du eine private Vollnarkose vor der Behandlung prüfen kannst.",
+        "to": "/ratgeber/weisheitszaehne-ziehen-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Vollnarkose beim Zahnarzt: Welche Kosten trägt die Kasse?",
+        "text": "Die Kosten einer Vollnarkose beim Zahnarzt übernimmt die gesetzliche Kasse bei medizinischer Notwendigkeit, wenn eine einfachere Schmerzausschaltung nicht möglich ist. Für eine gewünschte Privatnarkose brauchst du einen individuellen Kostenvoranschlag; einen allgemein gültigen Europreis gibt es hier nicht.",
+        "to": "/ratgeber/vollnarkose-zahnarzt-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnkrone rausgefallen: Wer klärt die Ursache und wer zahlt?",
+        "text": "Ist deine Zahnkrone rausgefallen oder deine Brücke locker, muss die Zahnarztpraxis den Befund und die weitere Versorgung klären. Wer die Kosten trägt, hängt unter anderem von Gewährleistung, notwendiger Wiederherstellung und einem vorhandenen Zusatzvertrag ab.",
+        "to": "/ratgeber/zahnkrone-rausgefallen",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnersatz günstig: Wie senkst du deinen Eigenanteil?",
+        "text": "Günstiger Zahnersatz beginnt mit einer nachvollziehbaren Planung der Regelversorgung und der vollständigen Prüfung deines Kassenzuschusses. Bonusheft und Härtefallregelung können deinen Eigenanteil senken; den tatsächlichen Praxispreis erfährst du aus dem Heil- und Kostenplan.",
+        "to": "/ratgeber/zahnersatz-guenstig",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Heil- und Kostenplan: Wie liest du ihn richtig?",
+        "text": "Der Heil- und Kostenplan zeigt deinen Zahnbefund, die gesetzliche Regelversorgung, die tatsächlich geplante Behandlung und die voraussichtlichen Kosten. Die Krankenkasse prüft ihn vor der Versorgung und bewilligt den Festzuschuss; deinen eigenen Anteil und private Leistungen solltest du davor mit der Praxis klären.",
+        "to": "/ratgeber/heil-und-kostenplan",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Implantat oder Brücke: Kosten, Kassenanteil und Haltbarkeit",
+        "text": "Beide Lösungen ersetzen einen Zahn. Nachbarzähne, Eingriff und Eigenanteil unterscheiden sich.",
+        "to": "/ratgeber/implantat-oder-bruecke",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Zahnzusatzversicherung und Vertragsbedingungen",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "calendar",
+        "tone": "mint",
+        "title": "Zahnzusatz ohne Wartezeit",
+        "text": "Was ab Tag eins gilt und was trotzdem nicht versichert ist.",
+        "to": "/ratgeber/zahnzusatzversicherung-ohne-wartezeit",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "weighing",
+        "tone": "lavender",
+        "title": "Fehlender Zahn und Zusatzversicherung",
+        "text": "Was bei einer Zahnlücke noch geht und was nicht.",
+        "to": "/ratgeber/zahnzusatzversicherung-fehlender-zahn",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "calculator",
+        "tone": "butter",
+        "title": "Lohnt sich eine Zahnzusatzversicherung?",
+        "text": "Krone, Brücke und Implantat durchgerechnet, mit Prüfpunkten und Grenzen.",
+        "to": "/ratgeber/zahnzusatzversicherung-lohnt-sich",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "sky",
+        "title": "UKV ZahnPRIVAT im Überblick",
+        "text": "Drei Stufen ohne Wartezeit, die Zahnstaffel und was nicht versichert ist.",
+        "to": "/ratgeber/ukv-zahnzusatzversicherung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "switch",
+        "tone": "coral",
+        "title": "Bayerische mit ZAHN Sofort",
+        "text": "Für schon empfohlene oder begonnene Behandlungen, die weder abgeschlossen noch abgerechnet sind.",
+        "to": "/ratgeber/bayerische-zahnzusatzversicherung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "region",
+        "tone": "butter",
+        "title": "AOK und Zähne",
+        "text": "Was die elf AOKs beim Zahnersatz und bei der Zahnreinigung zahlen.",
+        "to": "/ratgeber/aok-zahnzusatzversicherung",
+        "linkLabel": "Lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung im Vergleich: Was zählt für dich?",
+        "text": "Eine Zahnzusatzversicherung vergleichst du vor allem nach Erstattungsbasis, Leistungsgrenzen und Annahmebedingungen. Der Monatsbeitrag wird erst aussagekräftig, wenn du weißt, welche Rechnungen der Tarif unter welchen Bedingungen übernimmt.",
+        "to": "/ratgeber/zahnzusatzversicherung-vergleich",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "TK und Zahnzusatzversicherung: Was gehört zu welchem Vertrag?",
+        "text": "So trennst du TK-Festzuschuss, Gesundheitsdividende und private Tarifleistung, bevor du einen Eigenanteil planst.",
+        "to": "/ratgeber/tk-zahnzusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Zahnzusatzversicherung und Vertragsbedingungen und Kinder und Kieferorthopädie",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung: Welche Kosten kommen auf dich zu?",
+        "text": "Was kostet eine Zahnzusatzversicherung? Prüfe persönlichen Beitrag, Leistungsstaffel, später mögliche Anpassungen und einen belegten Kassenbonus.",
+        "to": "/ratgeber/zahnzusatzversicherung-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
+        "text": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+        "to": "/ratgeber/zahnzusatzversicherung-laufende-behandlung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Barmer Zahnzusatzversicherung: Was zahlt die Kasse, was ein Tarif?",
+        "text": "Eine Barmer Zahnzusatzversicherung ist privater Zusatzschutz und gehört nicht automatisch zu deiner gesetzlichen Mitgliedschaft. Bei Zahnersatz zahlt die Barmer 2026 den gesetzlichen Festzuschuss zur Regelversorgung; zusätzliche Tarifleistungen ergeben sich aus einem gesonderten Vertrag.",
+        "to": "/ratgeber/barmer-zahnzusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "DAK Zahnzusatzversicherung: Was übernimmt welcher Vertrag?",
+        "text": "Eine DAK Zahnzusatzversicherung ist ein privater Vertrag, der deine gesetzliche Mitgliedschaft ergänzen kann. Die DAK zahlt bei notwendigem Zahnersatz den gesetzlichen Festzuschuss; ob eine Zusatzversicherung weitere Kosten übernimmt, hängt von ihrem eigenen Leistungsumfang ab.",
+        "to": "/ratgeber/dak-zahnzusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung für Senioren: Was zählt ab 50 und 60?",
+        "text": "Gewünschten Zahnersatz, bestehenden Vertrag und persönliche Annahme prüfen. So vergleichst du Leistungen und langfristig tragbare Kosten.",
+        "to": "/ratgeber/zahnzusatzversicherung-senioren",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "IKK classic und Zähne: Kassenleistung, Bonus und Zahnvertrag",
+        "text": "Die IKK classic übernimmt gesetzliche Zahnleistungen und kann nach ihrer Satzung einen zweckgebundenen Bonuszuschuss zu Beiträgen einer privaten Zahnzusatzversicherung gewähren. Der private Zahnvertrag bleibt eigenständig: Sein Leistungsumfang folgt dem Tarif, nicht der IKK-Mitgliedschaft oder deinem Bonus.",
+        "to": "/ratgeber/ikk-zahnzusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung für Kinder: was die Kasse zahlt und wann ein Tarif passt",
+        "text": "Was die Kasse bei Kindern zahlt, wo Kosten bleiben und warum bei der Zahnspange der Zeitpunkt des Abschlusses entscheidet.",
+        "to": "/ratgeber/zahnzusatzversicherung-kinder",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnspange für Kinder: Kosten, KIG-Stufen und Eigenanteil",
+        "text": "Wann die Kasse die Zahnspange zahlt, wie der Eigenanteil von 20 Prozent zurückkommt und was Extras kosten, mit den Zahlen aus Gesetz, Richtlinie und hkk-Studie.",
+        "to": "/ratgeber/zahnspange-kosten",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Kinder und Kieferorthopädie",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnspange für Erwachsene: Kosten und wann die Kasse zahlt",
+        "text": "Warum die Kasse ab 18 selten zahlt, was die Ausnahme schwere Kieferanomalie bedeutet und woraus sich die private Rechnung nach GOZ zusammensetzt.",
+        "to": "/ratgeber/zahnspange-erwachsene",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Unsichtbare Zahnspange: Kosten, Aligner und wer zahlt",
+        "text": "Was Aligner kosten, warum die Kasse sie nicht übernimmt und was bei Keramik- und Lingualbrackets gilt, mit getrennten, datierten Preisangaben und Quellen.",
+        "to": "/ratgeber/unsichtbare-zahnspange-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung mit Kieferorthopädie: was sie bei der Zahnspange zahlt",
+        "text": "Was ein Zahntarif bei der Zahnspange übernehmen kann, warum der Zeitpunkt entscheidet und was die Kasse bei Kindern ohnehin zahlt.",
+        "to": "/ratgeber/zahnzusatzversicherung-kieferorthopaedie",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung für die Familie: Eltern und Kinder gemeinsam gerechnet",
+        "text": "Was die Kasse in der Familie zahlt, wie der Eigenanteil bei zwei Kindern in der Zahnspange wirkt und wie du Beiträge und mögliche Kosten gegenüberstellst.",
+        "to": "/ratgeber/zahnzusatzversicherung-familie",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  }
+],
     },
   ],
 

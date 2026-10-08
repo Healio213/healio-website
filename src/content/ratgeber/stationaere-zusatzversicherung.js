@@ -27,6 +27,8 @@
  */
 
 export const article = {
+  updatedAt: "2026-10-08",
+  updatedAtLabel: "8. Oktober 2026",
   slug: 'stationaere-zusatzversicherung',
   kind: 'ratgeber',
   group: 'krankenhaus',
@@ -163,71 +165,165 @@ export const article = {
       id: 'wegweiser',
       heading: 'Welcher Krankenhaus-Ratgeber hilft dir weiter?',
       blocks: [
-        {
-          type: 'paragraph',
-          text: 'Je nach Frage führt dich einer dieser Ratgeber weiter.',
-        },
-        {
-          type: 'cards',
-          hint: 'Zum Weiterblättern seitlich wischen',
-          items: [
-            {
-              icon: 'protection',
-              tone: 'lavender',
-              eyebrow: 'Dir ist das Zimmer wichtig',
-              title: 'Einzelzimmer-Zusatzversicherung',
-              text: 'Was sie leistet, was sie im Monat kostet und wo ihre Grenzen liegen.',
-              to: '/ratgeber/zusatzversicherung-einzelzimmer',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'money',
-              tone: 'butter',
-              eyebrow: 'Du fragst nach dem Preis',
-              title: 'Einzelzimmer im Krankenhaus: Kosten',
-              text: 'Preise pro Tag aus sechs Preislisten und wer das Zimmer zahlt.',
-              to: '/ratgeber/einzelzimmer-krankenhaus-kosten',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'hospital',
-              tone: 'mint',
-              eyebrow: 'Tagegeld',
-              title: 'Krankenhaustagegeld',
-              text: 'Wie hoch, wie lange und was bei Reha gilt.',
-              to: '/ratgeber/krankenhaustagegeld',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'medication',
-              tone: 'sky',
-              eyebrow: 'Reha',
-              title: 'Zuzahlung bei der Reha',
-              text: 'Rentenversicherung und Krankenkasse getrennt, mit Befreiung und Höchstdauer.',
-              to: '/ratgeber/reha-zuzahlung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'pregnancy',
-              tone: 'coral',
-              eyebrow: 'Schwanger',
-              title: 'Schwanger: welcher Zusatzschutz noch geht',
-              text: 'Was bei bestehender Schwangerschaft noch möglich ist und was zu spät kommt.',
-              to: '/ratgeber/schwanger-zusatzversicherung',
-              linkLabel: 'Ratgeber lesen',
-            },
-            {
-              icon: 'family',
-              tone: 'mint',
-              eyebrow: 'Kinder und Familie',
-              title: 'Zusatzversicherung für Kinder',
-              text: 'Kinder nachversichern, Krankenhaus, Zahn und Brille im Überblick.',
-              to: '/ratgeber/zusatzversicherung-kinder',
-              linkLabel: 'Ratgeber lesen',
-            },
-          ],
-        },
-      ],
+  {
+    "type": "paragraph",
+    "text": "Je nach Frage führt dich einer dieser Ratgeber weiter."
+  },
+  {
+    "type": "cards",
+    "heading": "Zimmer, Zuzahlung und Begleitung und Stationärer Ergänzungsweg",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "money",
+        "tone": "butter",
+        "eyebrow": "Du fragst nach dem Preis",
+        "title": "Einzelzimmer im Krankenhaus: Kosten",
+        "text": "Preise pro Tag aus sechs Preislisten und wer das Zimmer zahlt.",
+        "to": "/ratgeber/einzelzimmer-krankenhaus-kosten",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "eyebrow": "Tagegeld",
+        "title": "Krankenhaustagegeld",
+        "text": "Wie hoch, wie lange und was bei Reha gilt.",
+        "to": "/ratgeber/krankenhaustagegeld",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "medication",
+        "tone": "sky",
+        "eyebrow": "Reha",
+        "title": "Zuzahlung bei der Reha",
+        "text": "Rentenversicherung und Krankenkasse getrennt, mit Befreiung und Höchstdauer.",
+        "to": "/ratgeber/reha-zuzahlung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Chefarztbehandlung: Was zahlst du als Kassenpatient?",
+        "text": "Chefarztbehandlung als zusätzliche Wahlarztleistung kannst du auch als Kassenpatient vereinbaren; die Kosten werden nach ärztlichen Einzelleistungen abgerechnet. Deine Krankenkasse übernimmt die medizinisch notwendige Versorgung, während eine private Zusatzversicherung die gewünschte Wahlleistung nur nach ihren vereinbarten Bedingungen erstattet.",
+        "to": "/ratgeber/chefarztbehandlung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Begleitperson im Krankenhaus: Wann übernimmt die Kasse die Kosten?",
+        "text": "Die gesetzliche Kasse übernimmt eine Begleitperson im Krankenhaus, wenn die Mitaufnahme medizinisch notwendig ist; bei versicherten Kindern unter neun Jahren vermutet das Gesetz diese Notwendigkeit. Unterkunft und Verpflegung sind dabei von einem möglichen Anspruch auf Kinderkrankengeld oder Krankengeld wegen Verdienstausfalls zu unterscheiden.",
+        "to": "/ratgeber/begleitperson-krankenhaus",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "protection",
+        "tone": "lavender",
+        "eyebrow": "Dir ist das Zimmer wichtig",
+        "title": "Einzelzimmer-Zusatzversicherung",
+        "text": "Was sie leistet, was sie im Monat kostet und wo ihre Grenzen liegen.",
+        "to": "/ratgeber/zusatzversicherung-einzelzimmer",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung vergleichen: Was zählt für dich?",
+        "text": "Beim Vergleich einer Krankenhauszusatzversicherung zählen Versicherungsanlass, Zimmer, Arztwahl und Erstattungsgrenzen vor dem Beitrag. Ein Unfalltarif ist keine Ergänzung für krankheitsbedingte Aufenthalte; ein gewünschtes Einzelzimmer oder eine Wahlarztbehandlung sagt allein nichts über die medizinische Qualität aus.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-vergleich",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung: Was kostet sie?",
+        "text": "Was kostet eine Krankenhauszusatzversicherung? SDK-Beispiele für 30-Jährige, Jahreskosten und Unterschiede zwischen Krankheitsschutz und Unfalltarif.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-kosten",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Stationärer Ergänzungsweg",
+    "hint": "Wähle den Ratgeber, der zu deiner Frage passt.",
+    "items": [
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung ohne Wartezeit: Ab wann gilt sie?",
+        "text": "Ohne Wartezeit heißt nicht rückwirkend versichert: Beginn, geplante OP und neue Versicherungsfälle bei den SDK-Kliniktarifen verständlich prüfen.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-ohne-wartezeit",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "AOK und Krankenhaus: Was kostet das Einzelzimmer?",
+        "text": "AOK, Einzelzimmer und Krankenhauszuzahlung: Was die Kasse trägt, welche Kosten privat entstehen und wie du den passenden Klinikschutz prüfst.",
+        "to": "/ratgeber/aok-krankenhauszusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "TK und Krankenhaus: Welche private Ergänzung passt?",
+        "text": "Als TK-Mitglied erhältst du die gesetzlich vorgesehene Krankenhausversorgung; eine Krankenhauszusatzversicherung kann privat vereinbarte Wahlleistungen ergänzen. Welcher Vertrag passt, hängt von deinem Wunsch nach Zimmer und Wahlarzt, den versicherten Anlässen, deinem Beitrag und den Annahmebedingungen ab.",
+        "to": "/ratgeber/tk-krankenhauszusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung mit Vorerkrankung",
+        "text": "Gesundheitsfragen, mögliche Vertragsgrenzen und Kosten vor dem Antrag einordnen.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-vorerkrankung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung für Kinder und Familien",
+        "text": "Eine Krankenhauszusatzversicherung für Kinder kann vereinbarte Klinik-Wahlleistungen und Rooming-in ergänzen, wenn das Kind selbst im passenden Tarif versichert ist. Die gesetzliche Kasse trägt bereits die notwendige Krankenhausversorgung und unter bestimmten Voraussetzungen die Mitaufnahme einer Begleitperson; diese Ansprüche solltest du zuerst klären.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-kinder",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "hospital",
+        "tone": "mint",
+        "title": "Krankenhauszusatzversicherung ab 65 und 70 prüfen",
+        "text": "Ob du eine Krankenhauszusatzversicherung ab 65 oder 70 Jahren abschließen kannst, hängt von den Altersgrenzen und Annahmebedingungen des konkreten Tarifs ab. Prüfe zuerst die gewünschten Wahlleistungen und danach Gesundheitsangaben, persönlichen Beitrag und Vertragsbeginn.",
+        "to": "/ratgeber/krankenhauszusatzversicherung-senioren",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  },
+  {
+    "type": "cards",
+    "heading": "Weitere passende Themen",
+    "items": [
+      {
+        "icon": "pregnancy",
+        "tone": "coral",
+        "eyebrow": "Schwanger",
+        "title": "Schwanger: welcher Zusatzschutz noch geht",
+        "text": "Was bei bestehender Schwangerschaft noch möglich ist und was zu spät kommt.",
+        "to": "/ratgeber/schwanger-zusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "family",
+        "tone": "mint",
+        "eyebrow": "Kinder und Familie",
+        "title": "Zusatzversicherung für Kinder",
+        "text": "Kinder nachversichern, Krankenhaus, Zahn und Brille im Überblick.",
+        "to": "/ratgeber/zusatzversicherung-kinder",
+        "linkLabel": "Ratgeber lesen"
+      }
+    ]
+  }
+],
     },
     {
       id: 'kinder',
