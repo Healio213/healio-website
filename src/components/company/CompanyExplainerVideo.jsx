@@ -10,16 +10,17 @@ const VIDEO_CONFIG = Object.freeze({
     source: '/videos/erklaerfilme/erklaervideo-unternehmen-1-v1.mp4',
     poster: '/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-poster.jpg',
     captions: '/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-de.vtt',
-    // Wie bei allen neuen Erklärfilmen (ohne Untertitel im Bild) sind die
-    // Untertitel beim Start eingeschaltet.
+    // Untertitel zum Einschalten, damit sie die Bedingungszeilen im Bild nicht verdecken.
     captionsDefault: false,
     dark: true,
   },
+  // Seit 08.10.2026 Erklärfilm „Der kaufmännische Hebel“ (unternehmen-2, 60 Sekunden)
+  // statt des früheren Vorsorgemanagement-Films; Anker bleibt für bestehende Links.
   system: {
     anchor: 'vorsorgemanagement-erklaervideo',
-    source: '/videos/unternehmen/vorsorgemanagement-a-v3.mp4',
-    poster: '/videos/unternehmen/vorsorgemanagement-a-v3-poster.webp',
-    captions: '/videos/unternehmen/vorsorgemanagement-a-v3-de.vtt',
+    source: '/videos/erklaerfilme/erklaervideo-unternehmen-2-v1.mp4',
+    poster: '/videos/erklaerfilme/erklaervideo-unternehmen-2-v1-poster.jpg',
+    captions: '/videos/erklaerfilme/erklaervideo-unternehmen-2-v1-de.vtt',
   },
   bav: {
     anchor: 'bav-zahlenbeispiel-video',

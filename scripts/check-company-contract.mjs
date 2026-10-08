@@ -60,12 +60,16 @@ assert.match(explainerVideos, /playsInline/);
 assert.match(explainerVideos, /preload="none"/);
 assert.match(explainerVideos, /kind="captions"/);
 assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
-assert.match(explainerVideos, /vorsorgemanagement-a-v3\.mp4/);
+assert.match(explainerVideos, /erklaervideo-unternehmen-1-v1\.mp4/);
+assert.match(explainerVideos, /erklaervideo-unternehmen-2-v1\.mp4/);
 assert.match(explainerVideos, /bav-zahlenbeispiel-b-v4\.mp4/);
 [
-  'public/videos/unternehmen/vorsorgemanagement-a-v3.mp4',
-  'public/videos/unternehmen/vorsorgemanagement-a-v3-poster.webp',
-  'public/videos/unternehmen/vorsorgemanagement-a-v3-de.vtt',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-1-v1.mp4',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-poster.jpg',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-de.vtt',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-2-v1.mp4',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-2-v1-poster.jpg',
+  'public/videos/erklaerfilme/erklaervideo-unternehmen-2-v1-de.vtt',
   'public/videos/unternehmen/bav-zahlenbeispiel-b-v4.mp4',
   'public/videos/unternehmen/bav-zahlenbeispiel-b-v4-poster.webp',
   'public/videos/unternehmen/bav-zahlenbeispiel-b-v4-de.vtt',
