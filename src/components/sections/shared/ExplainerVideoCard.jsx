@@ -35,7 +35,7 @@ const ExplainerVideoCard = ({
           >
             <source src={videoSrc} type="video/mp4" />
             {captionsSrc && (
-              <track kind="captions" src={captionsSrc} srcLang={captionsLang} label={captionsLabel} default />
+              <track kind="captions" src={captionsSrc} srcLang={captionsLang} label={captionsLabel} />
             )}
           </video>
         </div>

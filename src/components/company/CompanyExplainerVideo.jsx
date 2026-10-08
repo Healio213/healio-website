@@ -12,7 +12,7 @@ const VIDEO_CONFIG = Object.freeze({
     captions: '/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-de.vtt',
     // Wie bei allen neuen Erklärfilmen (ohne Untertitel im Bild) sind die
     // Untertitel beim Start eingeschaltet.
-    captionsDefault: true,
+    captionsDefault: false,
     dark: true,
   },
   system: {

@@ -97,7 +97,7 @@ const B2BExplainerVideo = ({
                   }}
                 >
                   <source src={videoSrc} type="video/mp4" />
-                  {captionsSrc && <track kind="captions" src={captionsSrc} srcLang={captionsLanguage} label={captionsLabel} default />}
+                  {captionsSrc && <track kind="captions" src={captionsSrc} srcLang={captionsLanguage} label={captionsLabel} />}
                   {videoFallbackText}
                 </video>
               </div>
