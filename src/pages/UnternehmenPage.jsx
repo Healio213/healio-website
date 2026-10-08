@@ -63,14 +63,19 @@ const UnternehmenPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Mobil als Spalte in Besucherreihenfolge: Einstieg, Erklärvideo zum Antippen, dann
-          Lage prüfen, Bausteine wählen, rechnen, Ablauf, Fragen, Kontakt. Die Reihenfolge im
-          Quelltext bleibt die bisherige. Ab md ist es wieder der normale Block, die Hüllen
-          lösen sich dort mit contents auf. */}
+      {/* Mobil als Spalte in Besucherreihenfolge: Einstieg mit dem Erklärfilm „Fachkräfte-Weckruf“,
+          Lage prüfen, Erklärvideo zum System, Bausteine wählen, rechnen, Ablauf, Fragen, Kontakt.
+          Seit 08.10.2026 steht der neue Film im dunklen Kopfbereich direkt unter dem Einstieg; das
+          System-Video folgt mobil erst nach dem Reality Check, damit nicht zwei Filme direkt
+          aufeinander folgen. Ab md ist es wieder der normale Block in Quelltextreihenfolge, die
+          Hüllen lösen sich dort mit contents auf. */}
       <article className="flex w-full flex-col overflow-hidden bg-white md:block">
-        <div className="order-1 md:contents"><CompanyHero /></div>
-        <div className="order-3 md:contents"><CompanyRealityCheck /></div>
-        <div className="order-2 md:contents"><CompanyExplainerVideo kind="system" /></div>
+        <div className="order-1 md:contents">
+          <CompanyHero />
+          <CompanyExplainerVideo kind="weckruf" />
+        </div>
+        <div className="order-2 md:contents"><CompanyRealityCheck /></div>
+        <div className="order-3 md:contents"><CompanyExplainerVideo kind="system" /></div>
         <div className="order-4 md:contents"><CompanySolutions /></div>
         <div className="order-5 md:contents"><CompanyBavLeverage /></div>
         <div className="order-6 md:contents"><CompanyExplainerVideo kind="bav" /></div>

@@ -30,6 +30,11 @@
       }
     ]
   },
+  "explanationVideo": {
+    "eyebrow": "Healio in just over a minute",
+    "title": "What Healio does for you",
+    "aria": "Explainer video: what Healio does for you"
+  },
   "seo": {
     "title": "Insurance for Individuals & Companies | Healio",
     "description": "Connect personal protection and workplace benefits with independent, digital and personal support – from supplementary cover to company pensions.",

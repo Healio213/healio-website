@@ -30,6 +30,11 @@
       }
     ]
   },
+  "explanationVideo": {
+    "eyebrow": "Healio in gut einer Minute",
+    "title": "Was Healio für dich macht",
+    "aria": "Erklärvideo: Was Healio für dich macht"
+  },
   "seo": {
     "title": "Versicherungen für Privatkunden & Unternehmen | Healio",
     "description": "Private Absicherung und betriebliche Vorsorge verständlich verbinden. Healio begleitet unabhängig, digital und persönlich, von Zusatzschutz bis bAV.",

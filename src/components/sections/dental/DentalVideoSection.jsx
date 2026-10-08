@@ -10,8 +10,9 @@ const DentalVideoSection = () => {
   return (
     <ExplainerVideoCard
       id="zahn-erklaervideo"
-      videoSrc="/erklaervideo-zahn.mp4"
-      poster="/images/erklaervideo-zahn-poster.jpg"
+      videoSrc="/videos/erklaerfilme/erklaervideo-zahn-v1.mp4"
+      poster="/videos/erklaerfilme/erklaervideo-zahn-v1-poster.jpg"
+      captionsSrc="/videos/erklaerfilme/erklaervideo-zahn-v1-de.vtt"
       eyebrow={content.eyebrow}
       title={content.title}
       ariaLabel={content.aria}

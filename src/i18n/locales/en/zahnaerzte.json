@@ -191,6 +191,11 @@
     "missingTeeth": "Up to three missing teeth may be insured for a surcharge",
     "clearRoles": "The practice informs – Healio checks and advises"
   },
+  "explanationVideo": {
+    "eyebrow": "For practices in just over a minute",
+    "title": "When the patient share decides",
+    "aria": "Explainer video for dental practices: when the patient share decides"
+  },
   "miaPrompt": {
     "ariaLabel": "Nita offers help with the Healio concept for dental practices",
     "close": "Close Nita prompt",

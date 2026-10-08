@@ -26,6 +26,11 @@
     ],
     "mapNote": "Weigh it up. Understand it. Decide with confidence."
   },
+  "explanationVideo": {
+    "eyebrow": "Explained in under two minutes",
+    "title": "Don't leave your health fund bonus unused",
+    "aria": "Explainer video: don't leave your health fund bonus unused"
+  },
   "paths": {
     "eyebrow": "What matters to you?",
     "title": "The cheapest insurer is not automatically the best for you.",

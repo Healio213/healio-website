@@ -14,6 +14,7 @@ import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
+import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const KASSENBOOST_URL = 'https://kassenboost.de/?utm_source=healio&utm_medium=website&utm_campaign=kassenbonus#vergleich';
@@ -189,6 +190,21 @@ const KassenbonusPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Erklärfilm Kassenbonus (08.10.2026, nur Deutsch): nach dem Einstieg,
+            vor den zwei Wegen. */}
+        {lang === 'de' && (
+          <ExplainerVideoCard
+            id="kassenbonus-erklaervideo"
+            videoSrc="/videos/erklaerfilme/erklaervideo-kassenbonus-v1.mp4"
+            poster="/videos/erklaerfilme/erklaervideo-kassenbonus-v1-poster.jpg"
+            captionsSrc="/videos/erklaerfilme/erklaervideo-kassenbonus-v1-de.vtt"
+            eyebrow={t('explanationVideo.eyebrow')}
+            title={t('explanationVideo.title')}
+            ariaLabel={t('explanationVideo.aria')}
+            className="bg-home-ice"
+          />
+        )}
 
         <section className="px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="kassenbonus-paths-heading">
           <div className="healio-container">

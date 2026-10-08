@@ -27,11 +27,15 @@ import SceneHero, {
 // Laufband, danach helle Abschnitte im Wechsel Weiß und Eisgrün mit runden
 // Karten. Texte inhaltlich unverändert aus hebammen.json.
 
-// Erklärvideo für /hebammen folgt. Sobald Video und Vorschaubild unter public/
-// liegen, hier eintragen (wie auf /stationaer, z. B. '/erklaervideo-hebammen.mp4'
-// und '/images/erklaervideo-hebammen-poster.jpg'). Ohne Videoquelle wird der
-// Abschnitt nicht gerendert und der zweite Knopf im Kopfbereich bleibt aus.
-const HEBAMMEN_VIDEO = { src: '', poster: '' };
+// Erklärfilm Hebammen v1 (Nita + Motion, 104 Sekunden), seit 08.10.2026.
+// Quelle: Healio/video-studio/website-erklaervideos-2026-10-06/24-web/
+// Ohne Videoquelle wird der Abschnitt nicht gerendert und der zweite Knopf im
+// Kopfbereich bleibt aus.
+const HEBAMMEN_VIDEO = {
+  src: '/videos/erklaerfilme/erklaervideo-hebammen-v1.mp4',
+  poster: '/videos/erklaerfilme/erklaervideo-hebammen-v1-poster.jpg',
+  captions: '/videos/erklaerfilme/erklaervideo-hebammen-v1-de.vtt',
+};
 const VIDEO_ID = 'hebammen-video';
 const BOOKING_ID = 'calendly-hebammen';
 
@@ -279,12 +283,13 @@ const HebammenPage = () => {
           </div>
         </section>
 
-        {/* ERKLÄRVIDEO: vorbereitet, erscheint erst mit Videoquelle (siehe oben). */}
+        {/* ERKLÄRVIDEO: nur Deutsch, erscheint nur mit Videoquelle (siehe oben). */}
         {showVideo && (
           <ExplainerVideoCard
             id={VIDEO_ID}
             videoSrc={HEBAMMEN_VIDEO.src}
             poster={HEBAMMEN_VIDEO.poster || undefined}
+            captionsSrc={HEBAMMEN_VIDEO.captions || undefined}
             eyebrow={t('explanationVideo.eyebrow')}
             title={t('explanationVideo.title')}
             ariaLabel={t('explanationVideo.aria')}

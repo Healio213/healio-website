@@ -26,6 +26,11 @@
     ],
     "mapNote": "Abwägen. Verstehen. Bewusst entscheiden."
   },
+  "explanationVideo": {
+    "eyebrow": "In knapp zwei Minuten erklärt",
+    "title": "Lass deinen Kassenbonus nicht liegen",
+    "aria": "Erklärvideo: Lass deinen Kassenbonus nicht liegen"
+  },
   "paths": {
     "eyebrow": "Was zählt für dich?",
     "title": "Die günstigste Kasse ist nicht automatisch die beste für dich.",

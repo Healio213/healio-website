@@ -271,7 +271,7 @@ const de = {
     footer: 'Die Annahme und der genaue Leistungsumfang werden immer erst im Antrag verbindlich geprüft.',
   },
   video: {
-    eyebrow: 'Das Konzept in 3 Minuten',
+    eyebrow: 'Das Konzept in gut einer Minute',
     title: 'So findest du den Zahnschutz, der zu deiner Situation passt.',
     text: 'Das Video zeigt dir, warum eine angeratene Behandlung einen anderen Weg braucht als Vorsorge, Leistungswunsch oder fehlende Zähne.',
     points: [
@@ -595,7 +595,7 @@ const en = {
     footer: 'Acceptance and exact benefits are only checked bindingly in the application.',
   },
   video: {
-    eyebrow: 'The concept in 3 minutes',
+    eyebrow: 'The concept in just over a minute',
     title: 'How to find dental cover that fits your situation.',
     text: 'The video explains why recommended treatment needs a different route than prevention, benefit priorities or missing teeth.',
     points: [

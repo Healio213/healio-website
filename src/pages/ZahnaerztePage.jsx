@@ -15,6 +15,8 @@ import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt'
 import ProductTicker from '@/components/sections/ProductTicker';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import AppointmentBooking from '@/components/CalendlyEmbed';
+import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const FOUNDER_IMAGE = '/images/frank-steinfurt-gruender-healio.webp';
 
@@ -24,6 +26,7 @@ const plain = (text) => String(text || '').replace(/<\/?highlight>/g, '');
 const ZahnaerztePage = () => {
   const { t } = useTranslation('zahnaerzte');
   const { t: tSeo } = useTranslation('seo');
+  const { lang } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
 
   const scrollToCalendly = () => {
@@ -199,8 +202,23 @@ const ZahnaerztePage = () => {
           </div>
         </section>
 
+        {/* Erklärfilm für Praxen (08.10.2026, nur Deutsch): direkt nach Einstieg,
+            Vertrauensleiste und Laufband, vor der Situation. Er steht in derselben
+            Hülle wie das Laufband, damit die mobile Reihenfolge gleich bleibt. */}
         <div className="order-3 md:contents">
           <ProductTicker variant="zahnaerzte" />
+          {lang === 'de' && (
+            <ExplainerVideoCard
+              id="zahnaerzte-erklaervideo"
+              videoSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1.mp4"
+              poster="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-poster.jpg"
+              captionsSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-de.vtt"
+              eyebrow={t('explanationVideo.eyebrow')}
+              title={t('explanationVideo.title')}
+              ariaLabel={t('explanationVideo.aria')}
+              className="bg-[#f7faf9]"
+            />
+          )}
         </div>
 
         <section className="order-4 px-4 py-10 sm:px-6 sm:py-24 md:order-none md:px-8 lg:py-32">

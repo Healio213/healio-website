@@ -8,6 +8,10 @@ const ExplainerVideoCard = ({
   eyebrow,
   title,
   ariaLabel,
+  // Optional: Untertitel-Datei (WebVTT). Ohne Angabe bleibt das Video wie bisher.
+  captionsSrc,
+  captionsLang = 'de',
+  captionsLabel = 'Deutsch',
   className = 'bg-home-ice',
 }) => {
   const headingId = `${id}-heading`;
@@ -30,6 +34,9 @@ const ExplainerVideoCard = ({
             aria-label={ariaLabel}
           >
             <source src={videoSrc} type="video/mp4" />
+            {captionsSrc && (
+              <track kind="captions" src={captionsSrc} srcLang={captionsLang} label={captionsLabel} default />
+            )}
           </video>
         </div>
 

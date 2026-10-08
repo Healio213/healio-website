@@ -31,10 +31,12 @@ import SceneHero, {
 const GOOGLE_TERMIN_ANCHOR = 'google-termin';
 const LEGACY_TERMIN_ANCHORS = ['calendly-embed'];
 
-// Freigegebene Webfassung des Partner-Erklärvideos (V2.15, 1600x900, faststart).
-// Master und QA: Healio/video-studio/output/website-explainers/FINAL-PRODUCTION/
-const PARTNER_VIDEO_SRC = '/erklaervideo-partner-v2-15.mp4';
-const PARTNER_VIDEO_POSTER = '/images/erklaervideo-partner-poster.jpg';
+// Erklärfilm Partner v1 (Nita + Motion, 73 Sekunden, 1600x900, faststart),
+// seit 08.10.2026. Quelle: Healio/video-studio/website-erklaervideos-2026-10-06/24-web/
+// Untertitel als zuschaltbare WebVTT-Spur (der Film hat keine Untertitel im Bild).
+const PARTNER_VIDEO_SRC = '/videos/erklaerfilme/erklaervideo-partner-v1.mp4';
+const PARTNER_VIDEO_POSTER = '/videos/erklaerfilme/erklaervideo-partner-v1-poster.jpg';
+const PARTNER_VIDEO_CAPTIONS = '/videos/erklaerfilme/erklaervideo-partner-v1-de.vtt';
 
 // Für Beschriftungen (aria-label) ohne die <highlight>-Auszeichnung der Überschriften.
 const plain = (text) => String(text || '').replace(/<\/?highlight>/g, '');
@@ -220,7 +222,7 @@ const PartnerPage = () => {
           <HealioAwardsRow label={t('quality.label')} size="large" />
         </div>
 
-        {/* Partner-Erklärvideo V2.15 mit Nita (nur Deutsch, Untertitel im Bild).
+        {/* Partner-Erklärfilm v1 mit Nita (nur Deutsch, Untertitel als Spur).
             Ohne Video (EN oder Ladefehler) bleiben die drei Kernpunkte stehen. */}
         <div className="order-3 md:contents">
         <B2BExplainerVideo
@@ -231,6 +233,7 @@ const PartnerPage = () => {
           showStatusPanel={false}
           videoSrc={isEnglish ? undefined : PARTNER_VIDEO_SRC}
           posterSrc={isEnglish ? undefined : PARTNER_VIDEO_POSTER}
+          captionsSrc={isEnglish ? undefined : PARTNER_VIDEO_CAPTIONS}
           bookingCtaLabel={t('explanationVideo.bookingCta')}
           onBookingCta={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
           videoHint={t('explanationVideo.hint')}

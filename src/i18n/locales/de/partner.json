@@ -4,7 +4,7 @@
     "title": "Wie viele hochwertige Behandlungspläne verlierst du an die <highlight>Angst vor dem Eigenanteil?</highlight>",
     "subtitle": "Bis zu <highlight>3.000 EUR Gesundheitsbudget in zwei Jahren</highlight> aus einem passenden Tarif. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Gesundheitsangaben und Tarifbedingungen entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert. Deine Praxis informiert, Healio berät und begleitet.",
     "cta": "30-minütiges Kennenlernen buchen",
-    "secondaryCta": "Erklärvideo ansehen (3 Min.)",
+    "secondaryCta": "Erklärvideo ansehen (1 Min.)",
     "roleNote": "Keine Versicherungsberatung durch die Praxis erforderlich.",
     "imageAlt": "Therapeutin im Gespräch mit einer Patientin in einer hellen Praxis",
     "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
@@ -33,7 +33,7 @@
     ]
   },
   "explanationVideo": {
-    "title": "Das Partnerkonzept in gut drei Minuten",
+    "title": "Das Partnerkonzept in gut einer Minute",
     "subtitle": "Nita zeigt dir, wie das Gesundheitsbudget funktioniert und was es für deine Praxis bedeutet.",
     "points": [
       "Klare Rollen für Praxis, Patienten und Healio",

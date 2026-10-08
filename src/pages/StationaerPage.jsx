@@ -70,8 +70,9 @@ const StationaerPage = () => {
           <Slot order="order-3">
             <ExplainerVideoCard
               id="stationaer-erklaervideo"
-              videoSrc="/erklaervideo-stationaer.mp4"
-              poster="/images/erklaervideo-stationaer-poster.jpg"
+              videoSrc="/videos/erklaerfilme/erklaervideo-stationaer-v1.mp4"
+              poster="/videos/erklaerfilme/erklaervideo-stationaer-v1-poster.jpg"
+              captionsSrc="/videos/erklaerfilme/erklaervideo-stationaer-v1-de.vtt"
               eyebrow={t('refresh.video.eyebrow')}
               title={t('refresh.video.title')}
               ariaLabel={t('refresh.video.aria')}

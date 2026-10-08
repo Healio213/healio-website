@@ -191,6 +191,11 @@
     "missingTeeth": "Bis zu drei fehlende Zähne gegen Zuschlag mitversicherbar",
     "clearRoles": "Praxis informiert, Healio prüft und berät"
   },
+  "explanationVideo": {
+    "eyebrow": "Für Praxen in gut einer Minute",
+    "title": "Wenn der Eigenanteil entscheidet",
+    "aria": "Erklärvideo für Zahnarztpraxen: Wenn der Eigenanteil entscheidet"
+  },
   "miaPrompt": {
     "ariaLabel": "Nita bietet Hilfe zum Healio-Konzept für Zahnarztpraxen an",
     "close": "Nita-Hinweis schließen",
