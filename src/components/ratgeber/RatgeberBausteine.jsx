@@ -372,6 +372,63 @@ export const PathLink = ({ block }) => {
 };
 
 /* -------------------------------------------------------------------------
+ * Rechner-Karte am Ende des Artikels (vor Quellen und Autor, seit 08.10.2026)
+ * ---------------------------------------------------------------------- */
+
+// Ein Einstieg je Themengruppe (src/content/ratgeber/rechnerWege.js). Interne
+// Ziele bekommen wie die Weg-Karten nur eine gültige Klick-Kennung angehängt,
+// externe (kassenboost.de) öffnen in neuem Tab. Die Karte selbst misst nichts:
+// kein Ereignis, kein Pixel, auch nicht auf gesperrten Seiten. Tippfläche des
+// Knopfs 52 px hoch, auf dem Handy volle Breite.
+export const RechnerKarte = ({ rechner }) => {
+  const { search } = useLocation();
+  if (!rechner) return null;
+  const buttonClass = `inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.28)] transition hover:bg-[#5ee0b1] sm:w-auto ${FOCUS_RING}`;
+  const buttonBody = (
+    <>
+      {rechner.label}
+      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+    </>
+  );
+  return (
+    <section
+      aria-labelledby="rechner-heading"
+      data-ratgeber-rechner={rechner.to ? rechner.to.split(/[?#]/)[0] : 'extern'}
+      className="relative mt-12 overflow-hidden rounded-[1.75rem] bg-[#07111f] p-5 text-white shadow-[0_22px_52px_rgba(7,17,31,0.18)] sm:mt-14 sm:p-8"
+    >
+      <span className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#25c990]/20 blur-3xl" aria-hidden="true" />
+      <div className="relative flex items-start gap-4">
+        <FriendlyIcon kind={rechner.icon || 'calculator'} tone="mint" size="sm" />
+        <div className="min-w-0">
+          {rechner.eyebrow && (
+            <p className="font-display text-sm font-extrabold uppercase tracking-[0.12em] text-[#5ee0b1] md:text-xs md:tracking-[0.18em]">
+              {rechner.eyebrow}
+            </p>
+          )}
+          <h2 id="rechner-heading" className="mt-1 break-words font-display text-xl font-extrabold leading-snug tracking-[-0.02em] hyphens-auto sm:text-2xl sm:hyphens-manual">
+            {rechner.title}
+          </h2>
+        </div>
+      </div>
+      {rechner.text && (
+        <p className="relative mt-4 text-base leading-7 text-slate-300 sm:text-[1.05rem] sm:leading-8">{rechner.text}</p>
+      )}
+      <div className="relative mt-5 sm:mt-6">
+        {rechner.to ? (
+          <Link to={withAdClickIds(rechner.to, search)} data-ratgeber-path="rechner" className={buttonClass}>
+            {buttonBody}
+          </Link>
+        ) : (
+          <a href={rechner.href} target="_blank" rel="noopener noreferrer" data-ratgeber-path="rechner" className={buttonClass}>
+            {buttonBody}
+          </a>
+        )}
+      </div>
+    </section>
+  );
+};
+
+/* -------------------------------------------------------------------------
  * Häufige Fragen zum Aufklappen (faqStyle: 'accordion')
  * ---------------------------------------------------------------------- */
 

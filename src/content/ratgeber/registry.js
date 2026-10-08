@@ -450,7 +450,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 11,
     "metaTitle": "Zusatzversicherung Kinder: Kasse und Zusatzschutz | Healio",
     "metaDescription": "Zusatzversicherung für Kinder: was die Kasse bei Krankenhaus, Zahn und Brille zahlt, wie du Neugeborene nachversicherst und welche Voraussetzungen dafür gelten.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-08"
   },
   {
     "slug": "baby-geplant-zusatzversicherung",
@@ -495,6 +496,17 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Babybonus Krankenkasse 2026: wer zahlt was | Healio",
     "metaDescription": "Babybonus der Krankenkassen 2026: Was IKK classic, TK, Barmer, DAK, mkk und AOKs zahlen, mit Fundstelle in der Satzung, Musterrechnung und Rechenweg.",
     "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "hebamme-rufbereitschaft",
+    "kind": "ratgeber",
+    "group": "familie",
+    "listTitle": "Rufbereitschaft der Hebamme: was die Kasse zahlt",
+    "listTeaser": "Was die Rufbereitschaftspauschale ist, warum die Kasse sie nicht regulär zahlt und welche Kassen laut Satzung etwas erstatten, mit Betrag und Fundstelle.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Hebamme Rufbereitschaft: welche Kasse zahlt wie viel | Healio",
+    "metaDescription": "Rufbereitschaftspauschale der Hebamme: warum die Kasse sie nicht regulär zahlt und welche Kassen laut Satzung bis 500 EUR erstatten. Mit Tabelle.",
+    "publishedAt": "2026-10-08"
   },
   {
     "slug": "schwanger-zusatzversicherung",

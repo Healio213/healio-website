@@ -7,6 +7,7 @@ import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl, buildKassenbo
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
 import { authorSchemaFor, getAuthor } from '@/content/ratgeber/authors';
 import { shouldShowToc } from '@/content/ratgeber/articleText';
+import { resolveRatgeberRechner } from '@/content/ratgeber/rechnerWege';
 import {
   ArticleByline,
   AuthorBox,
@@ -15,6 +16,7 @@ import {
   HonestBox,
   PathLink,
   QuickAnswerCard,
+  RechnerKarte,
   ResponsiveTable,
   SourcesBlock,
   StepTrack,
@@ -291,7 +293,7 @@ const RatgeberFaqList = ({ faqs }) => {
   );
 };
 
-const RatgeberArticleLayout = ({ article }) => {
+const RatgeberArticleLayout = ({ article, groupId = null }) => {
   const { search } = useLocation();
   const endRef = useRef(null);
   const [mobileBarVisible, setMobileBarVisible] = useState(true);
@@ -317,6 +319,8 @@ const RatgeberArticleLayout = ({ article }) => {
   const notice = KIND_NOTICE[article.kind] || KIND_NOTICE.ratgeber;
   const author = getAuthor(article.author);
   const showToc = useMemo(() => shouldShowToc(article), [article]);
+  // Rechner-Karte am Ende, über die Themengruppe gesteuert (rechnerWege.js).
+  const rechner = useMemo(() => resolveRatgeberRechner(article, groupId), [article, groupId]);
   const canonicalUrl = `https://healio.de/ratgeber/${article.slug}`;
 
   const schemaMarkup = useMemo(() => {
@@ -478,6 +482,8 @@ const RatgeberArticleLayout = ({ article }) => {
               </p>
             </section>
           )}
+
+          {rechner && <RechnerKarte rechner={rechner} />}
 
           {article.sources && <SourcesBlock sources={article.sources} />}
 

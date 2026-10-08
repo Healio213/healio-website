@@ -55,6 +55,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-08',
+  updatedAtLabel: '8. Oktober 2026',
   readingTimeMinutes: 11,
 
   listTitle: 'Zusatzversicherung für Kinder: was die Kasse zahlt und welcher Zusatzschutz passt',
@@ -265,6 +267,15 @@ export const article = {
               title: 'Hebamme: was die Krankenkasse zahlt',
               text: 'Hebammenhilfe, Rufbereitschaft und was du selbst zahlst.',
               to: '/ratgeber/hebamme-kosten-krankenkasse',
+              linkLabel: 'Ratgeber lesen',
+            },
+            {
+              icon: 'calendar',
+              tone: 'coral',
+              eyebrow: 'Hebamme',
+              title: 'Rufbereitschaft der Hebamme',
+              text: 'Was die Pauschale ist und welche Kassen laut Satzung etwas erstatten.',
+              to: '/ratgeber/hebamme-rufbereitschaft',
               linkLabel: 'Ratgeber lesen',
             },
             {

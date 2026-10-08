@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import RatgeberArticleLayout from '@/components/ratgeber/RatgeberArticleLayout';
 import NotFoundPage from '@/pages/NotFoundPage';
-import { RATGEBER_LOADERS } from '@/content/ratgeber/registry.loaders';
+import { RATGEBER_GROUP_OF, RATGEBER_LOADERS } from '@/content/ratgeber/registry.loaders';
 
 /**
  * Artikelseite /ratgeber/:slug.
@@ -18,10 +18,11 @@ const lazyArticleFor = (slug) => {
   let LazyArticle = lazyArticles.get(slug);
   if (!LazyArticle) {
     const load = RATGEBER_LOADERS.get(slug);
+    const groupId = RATGEBER_GROUP_OF.get(slug) || null;
     LazyArticle = React.lazy(() => load().then(
       ({ article }) => ({
         default: function LoadedRatgeberArticle() {
-          return <RatgeberArticleLayout article={article} />;
+          return <RatgeberArticleLayout article={article} groupId={groupId} />;
         },
       }),
       (error) => {

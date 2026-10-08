@@ -124,6 +124,13 @@ ${GENERATED_NOTE}
 export const RATGEBER_LOADERS = new Map([
 ${ratgeberArticles.map((article) => `  ['${article.slug}', () => import('./${article.slug}.js')],`).join('\n')}
 ]);
+
+// Themengruppe je Slug (nur Artikel mit Gruppe). Die Vorlage wählt damit die
+// Rechner-Karte am Ende des Artikels (src/content/ratgeber/rechnerWege.js),
+// ohne die Gliederung oder das Register zu laden.
+export const RATGEBER_GROUP_OF = new Map([
+${ratgeberArticles.filter((article) => groupOf.has(article.slug)).map((article) => `  ['${article.slug}', '${groupOf.get(article.slug)}'],`).join('\n')}
+]);
 `;
 
 const sitemapEntry = (article) => [

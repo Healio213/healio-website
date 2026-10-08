@@ -29,6 +29,7 @@ import { buildOverviewData, registryEntryFor, staleRatgeberRegistryFiles } from 
 import { collectBlockText, countArticleWords, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
 import { AUTHORS } from '../src/content/ratgeber/authors.js';
 import { ZAHN_WEITERLESEN } from '../src/content/ratgeber/zahnWeiterlesen.js';
+import { RATGEBER_RECHNER_JE_GRUPPE, resolveRatgeberRechner } from '../src/content/ratgeber/rechnerWege.js';
 import {
   KASSENBOOST_ANCHOR,
   RATGEBER_INTERNAL_UTM_DEFAULTS,
@@ -775,6 +776,8 @@ const OPT_IN_SLUGS = [
   'baby-geplant-zusatzversicherung',
   'neugeborenes-versichern',
   'familienzimmer-krankenhaus',
+  // Auftrag Frank 08.10.2026
+  'hebamme-rufbereitschaft',
   // Serie Stapel 2, Vorsorge (07.10.2026)
   'vorsorgeuntersuchung',
   'vorsorgeuntersuchung-frauen',
@@ -897,6 +900,8 @@ const SERIEN_ZIELBEGRIFFE = {
   'baby-geplant-zusatzversicherung': /zusatzversicherung vor der schwangerschaft/i,
   'neugeborenes-versichern': /neugeborenes versichern/i,
   'familienzimmer-krankenhaus': /familienzimmer (?:im )?krankenhaus/i,
+  // Auftrag Frank 08.10.2026
+  'hebamme-rufbereitschaft': /rufbereitschaft der hebamme|hebamme rufbereitschaft/i,
   // Serie Stapel 2, Vorsorge (07.10.2026)
   'vorsorgeuntersuchung': /vorsorgeuntersuchung/i,
   'vorsorgeuntersuchung-frauen': /vorsorgeuntersuchung(?:en)? frauen/i,
@@ -1160,6 +1165,101 @@ for (const slug of SERIEN_SLUGS) {
   // Bezugsgröße 3.955 EUR) ist 1.582,00 EUR; 1.498 EUR war der Wert 2025.
   expect(!/1\.498/.test(text) && !/2\.059,75/.test(text) && !/374,50/.test(text), `${label}: veraltete Härtefallgrenze 2025 (1.498 EUR); 2026 gilt 1.582,00 EUR.`);
   expect(countArticleWords(article) >= 900, `${label}: unter 900 Wörtern, zu dünn für den Zielbegriff (gefunden ${countArticleWords(article)}).`);
+}
+
+// --- 9b. Rechner-Karte am Ende jedes Gruppen-Ratgebers (seit 08.10.2026) ---
+
+// Auftrag Frank 08.10.2026: Jeder Ratgeber mit Themengruppe endet vor Quellen
+// und Autorenkasten mit einer einheitlichen Rechner-Karte. Gesteuert zentral
+// über die Gruppe (src/content/ratgeber/rechnerWege.js), nicht je Artikel;
+// ein Artikel darf per Feld rechner abweichen oder abschalten. Ziel ist ein
+// Angebotspfad des Feldes. Interne Ziele reichen nur die Klick-Kennung weiter
+// (withAdClickIds), die Karte misst nichts, auch nicht auf gesperrten Seiten.
+const RECHNER_ERWARTET = {
+  zaehne: '/zahn#zahn-check',
+  ambulant: '/ambulant#tarifwahl',
+  brille: '/ambulant#tarifwahl',
+  vorsorge: '/ambulant#tarifwahl',
+  krankenhaus: '/stationaer#tarife',
+  familie: '/stationaer#familie',
+};
+const rechnerZiel = (rechner) => rechner?.to || rechner?.href || '';
+const rechnerKartenTexte = (rechner) => ['eyebrow', 'title', 'text', 'label'].map((field) => rechner?.[field] || '').join('\n');
+for (const [id, feld] of Object.entries(RATGEBER_FELDER)) {
+  const rechner = RATGEBER_RECHNER_JE_GRUPPE[id];
+  expect(Boolean(rechner), `Rechner-Karte: Feld ${id} ohne Eintrag in rechnerWege.js.`);
+  if (!rechner) continue;
+  expect(Boolean(rechner.title && rechner.text && rechner.label) && Boolean(rechner.to) !== Boolean(rechner.href), `Rechner-Karte ${id}: Titel, Text, Knopf und genau ein Ziel (to oder href).`);
+  expect(matchesAngebot(rechnerZiel(rechner), feld.angebotsPfade), `Rechner-Karte ${id}: Ziel ${rechnerZiel(rechner)} ist kein Angebotspfad des Feldes.`);
+  if (RECHNER_ERWARTET[id]) expect(rechner.to === RECHNER_ERWARTET[id], `Rechner-Karte ${id}: Ziel muss ${RECHNER_ERWARTET[id]} sein (gefunden ${rechnerZiel(rechner)}).`);
+  if (rechner.href) expect(/^https:\/\/kassenboost\.de\//.test(rechner.href), `Rechner-Karte ${id}: externes Ziel nur kassenboost.de.`);
+  const texte = rechnerKartenTexte(rechner);
+  expect(!SERIEN_SPERRWORTE.test(texte) && !/kostenlos/i.test(texte), `Rechner-Karte ${id}: Sperrwort "${texte.match(SERIEN_SPERRWORTE)?.[0]}".`);
+  expect(!/[–—]|\s-\s/.test(texte), `Rechner-Karte ${id}: keine Gedankenstriche.`);
+  expect(!/\bSie\b|\bIhre?[nmrs]?\b/.test(texte), `Rechner-Karte ${id}: Du-Form.`);
+  expect(!UMLAUT_ERSATZ.test(texte), `Rechner-Karte ${id}: echte Umlaute.`);
+  expect(!/(?<!Soziale )\bsicher/i.test(texte), `Rechner-Karte ${id}: Wortstamm "sicher" nicht als Versprechen.`);
+  expect(rechner.label.length <= 28, `Rechner-Karte ${id}: Knopftext höchstens 28 Zeichen.`);
+}
+expect(RATGEBER_RECHNER_JE_GRUPPE['kasse-bonus']?.href?.startsWith('https://kassenboost.de/'), 'Rechner-Karte kasse-bonus: KassenBoost-Vergleich (auf /kassenbonus gibt es keinen eigenen Bonus-Rechner).');
+
+// Jeder Gruppenartikel bekommt die Karte, außer er schaltet sie ab oder hat
+// schon einen internen Schluss-Button. Abweichungen zeigen auf den
+// Angebotsweg des Feldes.
+const { RATGEBER_GROUP_OF } = await import('../src/content/ratgeber/registry.loaders.js');
+for (const group of RATGEBER_GROUPS) {
+  const feld = RATGEBER_FELDER[group.id];
+  for (const slug of group.slugs) {
+    const article = getRatgeberArticle(slug);
+    expect(RATGEBER_GROUP_OF?.get(slug) === group.id, `Rechner-Karte: registry.loaders.js nennt für ${slug} nicht die Gruppe ${group.id}.`);
+    if (!article) continue;
+    const rechner = resolveRatgeberRechner(article, group.id);
+    if (article.rechner === false || article.internalCta) {
+      expect(!rechner, `Rechner-Karte ${slug}: abgeschaltet oder interner Button, also keine Karte.`);
+      continue;
+    }
+    expect(Boolean(rechner), `Rechner-Karte fehlt in ${slug} (Gruppe ${group.id}).`);
+    if (rechner && feld) expect(matchesAngebot(rechnerZiel(rechner), feld.angebotsPfade), `Rechner-Karte ${slug}: Ziel ${rechnerZiel(rechner)} ist kein Angebotspfad des Feldes ${group.id}.`);
+    if (rechner && article.rechner) {
+      const texte = rechnerKartenTexte(rechner);
+      expect(!SERIEN_SPERRWORTE.test(texte) && !/[–—]/.test(texte) && !/\bSie\b|\bIhre?[nmrs]?\b/.test(texte), `Rechner-Karte ${slug}: abweichender Text verletzt die Schreibregeln.`);
+    }
+  }
+}
+for (const article of ratgeberArticles) {
+  if (RATGEBER_GROUP_OF?.has(article.slug)) continue;
+  expect(!resolveRatgeberRechner(article, null), `Rechner-Karte: ${article.slug} hat keine Gruppe und bekommt keine Karte.`);
+}
+
+// Vorlage: Karte nach dem Artikeltext, vor Quellen und Autor; kein Messcode.
+const bausteine = read('src/components/ratgeber/RatgeberBausteine.jsx');
+const rechnerKarteQuelle = bausteine.slice(bausteine.indexOf('export const RechnerKarte'), bausteine.indexOf('export const FaqAccordion'));
+expect(rechnerKarteQuelle.length > 200, 'RatgeberBausteine.jsx: RechnerKarte fehlt.');
+expect(/withAdClickIds\(rechner\.to, search\)/.test(rechnerKarteQuelle), 'RechnerKarte: interne Ziele reichen die Klick-Kennung über withAdClickIds weiter.');
+expect(/min-h-\[3\.25rem\]/.test(rechnerKarteQuelle), 'RechnerKarte: Tippfläche des Knopfs mindestens 44 px (min-h-[3.25rem]).');
+expect(/data-ratgeber-rechner=/.test(rechnerKarteQuelle), 'RechnerKarte: Markierung data-ratgeber-rechner fehlt.');
+expect(!/fetch\(|sendBeacon|dataLayer|gtag|fbq|track[A-Z]\w*\(|onClick|localStorage|sessionStorage/.test(rechnerKarteQuelle), 'RechnerKarte: Die Karte darf nichts messen oder speichern.');
+expect(!/@\/lib\/(?:analytics|google-ads|meta-pixel|consent)/.test(bausteine), 'RatgeberBausteine.jsx: keine Mess-Module.');
+const rechnerPos = layout.indexOf('<RechnerKarte');
+expect(rechnerPos > layout.indexOf('article.faqs?.length > 0') && rechnerPos < layout.indexOf('<SourcesBlock') && rechnerPos < layout.indexOf('<AuthorBox'), 'Vorlage: Rechner-Karte steht am Ende, vor Quellen und Autorenkasten.');
+expect(/resolveRatgeberRechner\(article, groupId\)/.test(layout), 'Vorlage: Rechner-Karte über die Gruppe auflösen (resolveRatgeberRechner).');
+const artikelSeite = read('src/pages/RatgeberArtikelPage.jsx');
+expect(/RATGEBER_GROUP_OF\.get\(slug\)/.test(artikelSeite) && /groupId=\{groupId\}/.test(artikelSeite), 'Artikelseite: Gruppe aus registry.loaders.js an die Vorlage geben.');
+
+// Gebaut: Karte mit Ziel vor dem Quellenblock.
+for (const group of RATGEBER_GROUPS) {
+  for (const slug of group.slugs) {
+    const builtArticle = path.join(root, 'dist', 'ratgeber', slug, 'index.html');
+    const article = getRatgeberArticle(slug);
+    const rechner = article && resolveRatgeberRechner(article, group.id);
+    if (!rechner || !fs.existsSync(builtArticle)) continue;
+    const html = fs.readFileSync(builtArticle, 'utf8');
+    const kartePos = html.indexOf('data-ratgeber-rechner=');
+    expect(kartePos > -1, `Gebaut ${slug}: Rechner-Karte fehlt.`);
+    expect(html.includes(`href="${(rechner.to || rechner.href).replace(/&/g, '&amp;')}"`), `Gebaut ${slug}: Rechner-Karte zeigt nicht auf ${rechner.to || rechner.href}.`);
+    const quellenPos = html.indexOf('data-ratgeber-sources');
+    expect(quellenPos === -1 || kartePos < quellenPos, `Gebaut ${slug}: Rechner-Karte steht nicht vor den Quellen.`);
+  }
 }
 
 // Übersicht: Gruppe Zähne mit allen Zahn-Ratgebern und dem fehlenden Zahn.

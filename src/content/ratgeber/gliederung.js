@@ -143,6 +143,8 @@ export const RATGEBER_GROUPS = [
       'neugeborenes-versichern',
       'familienzimmer-krankenhaus',
       'babybonus-krankenkasse',
+      // Auftrag Frank 08.10.2026, Rufbereitschaft der Hebamme.
+      'hebamme-rufbereitschaft',
       // Ältere Artikel ohne Vorlage (AELTERE_GRUPPENARTIKEL im Vertragstest).
       'schwanger-zusatzversicherung',
       'schwangerschaft-was-steht-mir-zu',

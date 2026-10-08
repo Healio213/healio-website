@@ -40,6 +40,7 @@ const BLOCKED_PATHS = new Set([
   '/ratgeber/baby-geplant-zusatzversicherung',
   '/ratgeber/familienzimmer-krankenhaus',
   '/ratgeber/neugeborenes-versichern',
+  '/ratgeber/hebamme-rufbereitschaft',
   '/ratgeber/vorsorgeuntersuchung',
   '/ratgeber/hautkrebsscreening',
   '/ratgeber/vorsorgeuntersuchung-frauen',

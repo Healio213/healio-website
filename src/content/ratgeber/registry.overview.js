@@ -230,7 +230,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was Kasse und Zusatzschutz rund um Schwangerschaft, Baby und Kinder leisten, wie ein Babybonus funktioniert und worauf es beim Nachversichern ankommt.",
       "icon": "family",
       "hubSlug": "zusatzversicherung-kinder",
-      "total": 8,
+      "total": 9,
       "entries": [
         {
           "slug": "zusatzversicherung-kinder",
@@ -268,18 +268,18 @@ export const RATGEBER_OVERVIEW = {
           "readingTimeMinutes": 11
         },
         {
+          "slug": "hebamme-rufbereitschaft",
+          "kind": "ratgeber",
+          "listTitle": "Rufbereitschaft der Hebamme: was die Kasse zahlt",
+          "listTeaser": "Was die Rufbereitschaftspauschale ist, warum die Kasse sie nicht regulär zahlt und welche Kassen laut Satzung etwas erstatten, mit Betrag und Fundstelle.",
+          "readingTimeMinutes": 9
+        },
+        {
           "slug": "schwanger-zusatzversicherung",
           "kind": "ratgeber",
           "listTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt",
           "listTeaser": "Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.",
           "readingTimeMinutes": 6
-        },
-        {
-          "slug": "schwangerschaft-was-steht-mir-zu",
-          "kind": "ratgeber",
-          "listTitle": "Was steht mir in der Schwangerschaft zu? Leistungen, Extras und Fristen",
-          "listTeaser": "Pflichtleistungen jeder Kasse, Haushaltshilfe, Hebamme, Mutterschaftsgeld, die Extras der großen Kassen und eine Checkliste mit allen Fristen bis zum ersten Geburtstag.",
-          "readingTimeMinutes": 15
         }
       ]
     },
