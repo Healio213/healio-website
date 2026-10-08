@@ -15,6 +15,9 @@ const DentalVideoSection = () => {
       captionsSrc="/videos/erklaerfilme/erklaervideo-zahn-v1-de.vtt"
       eyebrow={content.eyebrow}
       title={content.title}
+      badge={content.badge}
+      subtitle={content.subtitle}
+      disclosure={content.disclosure}
       ariaLabel={content.aria}
       className="bg-[#fffaf0]"
     />

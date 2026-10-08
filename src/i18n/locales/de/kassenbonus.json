@@ -8,7 +8,7 @@
   },
   "hero": {
     "eyebrow": "Krankenkasse bewusst wählen",
-    "title": "Welche Krankenkasse bringt dir wirklich mehr?",
+    "title": "Wie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?",
     "description": "Der niedrigste Beitrag ist nur die halbe Antwort. Finde heraus, was du sparen kannst, welchen Bonus du realistisch erreichst und welche Leistungen zu deinem Alltag passen.",
     "cta": "Kassenvorteil prüfen",
     "ctaHint": "Kostenlos · ohne Kontaktdaten",
@@ -20,16 +20,27 @@
     "mapEyebrow": "Dein Vergleich",
     "mapTitle": "Was ist dir wirklich wichtig?",
     "mapItems": [
-      { "label": "Beitrag", "text": "Was zahlst du wirklich?" },
-      { "label": "Bonus", "text": "Was erreichst du realistisch?" },
-      { "label": "Leistungen", "text": "Was nutzt dir im Alltag?" }
+      {
+        "label": "Beitrag",
+        "text": "Was zahlst du wirklich?"
+      },
+      {
+        "label": "Bonus",
+        "text": "Was erreichst du realistisch?"
+      },
+      {
+        "label": "Leistungen",
+        "text": "Was nutzt dir im Alltag?"
+      }
     ],
     "mapNote": "Abwägen. Verstehen. Bewusst entscheiden."
   },
   "explanationVideo": {
     "eyebrow": "In knapp zwei Minuten erklärt",
-    "title": "Lass deinen Kassenbonus nicht liegen",
-    "aria": "Erklärvideo: Lass deinen Kassenbonus nicht liegen"
+    "title": "Lass deinen Kassenbonus nicht liegen: Prüfe deinen möglichen Zuschuss.",
+    "aria": "Erklärvideo: Kassenbonus und möglichen Zuschuss nutzen",
+    "subtitle": "Wie normale Alltagsaktivitäten deinen Zusatzschutz mitfinanzieren können.",
+    "disclosure": "Bonus und Zuschuss hängen von deiner Krankenkasse, nachgewiesenen Maßnahmen und anerkannten eigenen Kosten ab. Die 810 EUR im Video sind kein allgemeiner Höchstbetrag des IKK-Bonusprogramms."
   },
   "paths": {
     "eyebrow": "Was zählt für dich?",
@@ -154,11 +165,26 @@
     "eyebrow": "Häufige Fragen",
     "title": "Kurz und verständlich beantwortet.",
     "items": [
-      { "q": "Muss ich für den Vergleich schon wechseln?", "a": "Nein. Du erhältst zuerst dein Ergebnis und entscheidest danach, ob du einen Wechsel starten möchtest." },
-      { "q": "Wird automatisch die günstigste Krankenkasse empfohlen?", "a": "Nein. Die günstigste passende Kasse ist ein klarer Preisanker. Zusätzlich zeigen wir Alternativen, wenn Bonus, Leistungen, Bekanntheit oder Service für dich wichtiger sind." },
-      { "q": "Bekomme ich den angezeigten Bonus sicher?", "a": "Nein. Bonuszahlungen hängen von den Regeln der Krankenkasse und deinen tatsächlich erfüllten und nachgewiesenen Maßnahmen ab. Deshalb sollte im Ergebnis zwischen möglichem und realistisch erreichbarem Bonus unterschieden werden." },
-      { "q": "Kann der Kassenbonus eine Zusatzversicherung bezahlen?", "a": "Das kann je nach erreichbarem Bonus und Beitrag teilweise oder vollständig möglich sein. Es ist keine Garantie. Geldbonus und zweckgebundene Zuschüsse müssen dabei getrennt betrachtet werden." },
-      { "q": "Funktioniert der Vergleich auch für Familien?", "a": "Ja. Einkommen, Versicherungsstatus, Kinder und die persönliche Situation gehören in die Berechnung, weil sie Beiträge, Pflegeversicherung und mögliche Bonusmaßnahmen beeinflussen können." }
+      {
+        "q": "Muss ich für den Vergleich schon wechseln?",
+        "a": "Nein. Du erhältst zuerst dein Ergebnis und entscheidest danach, ob du einen Wechsel starten möchtest."
+      },
+      {
+        "q": "Wird automatisch die günstigste Krankenkasse empfohlen?",
+        "a": "Nein. Die günstigste passende Kasse ist ein klarer Preisanker. Zusätzlich zeigen wir Alternativen, wenn Bonus, Leistungen, Bekanntheit oder Service für dich wichtiger sind."
+      },
+      {
+        "q": "Bekomme ich den angezeigten Bonus sicher?",
+        "a": "Nein. Bonuszahlungen hängen von den Regeln der Krankenkasse und deinen tatsächlich erfüllten und nachgewiesenen Maßnahmen ab. Deshalb sollte im Ergebnis zwischen möglichem und realistisch erreichbarem Bonus unterschieden werden."
+      },
+      {
+        "q": "Kann der Kassenbonus eine Zusatzversicherung bezahlen?",
+        "a": "Das kann je nach erreichbarem Bonus und Beitrag teilweise oder vollständig möglich sein. Es ist keine Garantie. Geldbonus und zweckgebundene Zuschüsse müssen dabei getrennt betrachtet werden."
+      },
+      {
+        "q": "Funktioniert der Vergleich auch für Familien?",
+        "a": "Ja. Einkommen, Versicherungsstatus, Kinder und die persönliche Situation gehören in die Berechnung, weil sie Beiträge, Pflegeversicherung und mögliche Bonusmaßnahmen beeinflussen können."
+      }
     ]
   },
   "final": {

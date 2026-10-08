@@ -77,10 +77,12 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
       dataAttributes={{ 'data-desktop-lead': surface }}
       heading={(
         <>
-          <span className="block">{copy.titleLead}</span>
+          <span className="block">{copy.titleLead}</span>{' '}
           <span className={sceneAccentClass}>{copy.titleAccent}</span>
         </>
       )}
+      subtitle={isHome || surface === 'zahn' ? copy.description : undefined}
+      actionHint={isHome ? copy.hint : undefined}
       actions={(
         <>
           <a
@@ -99,9 +101,9 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
     >
       <div className={sceneBelow.grid}>
         <div className="min-w-0">
-          <p className={sceneBelow.lead}>{copy.description}</p>
+          {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}>{copy.description}</p>}
           <p className={sceneBelow.note}>{copy.condition}</p>
-          <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>
+          {!isHome && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>
         <OfferList copy={copy} surface={surface} />
       </div>

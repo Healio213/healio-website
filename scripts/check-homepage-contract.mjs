@@ -20,12 +20,12 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.');
-assert.equal(en.hero.title, 'Your health fund bonus is too valuable to leave unused.');
+assert.equal(de.hero.title, 'Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?');
+assert.equal(en.hero.title, 'Why leave hundreds of euros with your health fund every year?');
 assert.equal(`${de.hero.titleLead} ${de.hero.titleAccent}`, de.hero.title);
 assert.equal(`${en.hero.titleLead} ${en.hero.titleAccent}`, en.hero.title);
 assert.match(de.hero.description, /3\.000 EUR/);
-assert.match(de.hero.description, /kann[\s\S]*Beitrag|Beitrag[\s\S]*ausgleichen/);
+assert.match(de.explanationVideo.disclosure, /kann[\s\S]*beitrag|beitrag[\s\S]*ausgleichen/i);
 assert.equal(de.hero.switch.length, 3, 'Die Weiche im Hero hat genau drei Einstiege.');
 assert.deepEqual(
   de.hero.switch.map((item) => item.routeKey),
@@ -91,7 +91,9 @@ assert.match(homeHero, /getPath\(item\.routeKey\)/);
 assert.match(homeHero, /hero\.switch/);
 assert.match(homeHero, /hero\.switchLabel/);
 assert.match(homeHero, /<motion\.nav/);
-assert.doesNotMatch(homeHero, /hero\.primaryCta|hero\.secondaryCta/);
+assert.match(homeHero, /hero\.primaryCta/);
+assert.match(homeHero, /hero\.ctaHint/);
+assert.match(homeHero, /KASSENBOOST_COMPARE_URL/);
 assert.doesNotMatch(homeHero, /hero\.bonusCheckCta|HighlightText/);
 assert.doesNotMatch(homeHero, /HealthPassHeroVisual|conceptOptions|HomeProtectionScene|HomeProtectionFallback|QuietProtectionHeroVisual/);
 assert.doesNotMatch(homeHero, /PrivateProtectionHeroVisual/);

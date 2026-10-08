@@ -1,0 +1,473 @@
+{
+  "rows": [
+    {
+      "route": "/",
+      "width": 320,
+      "h1": [
+        "Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Kassenpotenzial in 90 Sekunden prüfen",
+      "buttonBottom": 692.275634765625,
+      "heroText": "Warum lassen Sie jedes Jahr hunderte Euro\nbei Ihrer Krankenkasse liegen?\n\nKassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.\n\nKassenpotenzial in 90 Sekunden prüfen\n\n100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch\n\nWÄHLE DEINEN EINSTIEG\n\nIch bin Privatperson\n\nAmbulant, Zahn und Klinik: mehr Leistung, als deine Kasse zahlt.\n\nBeispiel: bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren.\n\nSchutz auswählen\nIch bin Arbeitgeber\n\nbAV und bKV als Benefit fürs Team. Steuerlich gefördert, ohne Mehraufwand für HR.\n\nUnternehmenslösungen ansehen\nIch habe eine Praxis\n\nBehandlungen für deine Patienten finanzierbar machen. Für deine Praxis kostenlos, du informierst nur.\n\nPartnerprogramm ansehen",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/ambulant",
+      "width": 320,
+      "h1": [
+        "Warum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Ambulantes Budget prüfen ➔",
+      "buttonBottom": 679.8017578125,
+      "heroText": "AMBULANTE ZUSATZVERSICHERUNG\n\nWarum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?\n\nBis zu 3.000 EUR Gesundheitsbudget in zwei Jahren für versicherte Leistungen. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Gesundheitsangaben, Leistungsgrenzen und Tarifbedingungen entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.\n\nAmbulantes Budget prüfen ➔\n\n1 Minute Orientierung · Den persönlichen Beitrag siehst du anschließend im Tarifrechner.\n\nBis zu 3.000 € in zwei Jahren\n\nStufe Ambulant 100 (AP1), 100 % Erstattung\n\nSehhilfen\nbis 500 €\nBrille & Kontaktlinsen\nNaturheilverfahren\nbis 1.000 €\nHeilpraktiker & Osteopathie\nVorsorge\nbis 500 €\nZusätzliche Untersuchungen\nZuzahlungen\nbis 1.000 €\nGesetzliche Eigenanteile\n\nDie Werte zeigen die tariflichen Höchstbeträge über zwei Jahre. Maßgeblich sind Versicherungsbeginn, versicherte Leistungen, Erstattungsgrenzen und die jeweils geltenden Tarifbedingungen.",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 0
+      }
+    },
+    {
+      "route": "/zahn",
+      "width": 320,
+      "h1": [
+        "Dein Lächeln ist dein stärkstes Statussignal. Warum überlässt du es dem Kassenstandard?"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Passenden Zahnschutz prüfen",
+      "buttonBottom": 581.65625,
+      "heroText": "ZAHNZUSATZVERSICHERUNG\n\nDein Lächeln ist dein stärkstes Statussignal.\nWarum überlässt du es dem Kassenstandard?\n\nBis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe im Tarif ZahnPRIVAT 100, einschließlich Kassenleistung. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen.\n\nPassenden Zahnschutz prüfen\n\nDer Bonus hängt von Kasse und Aktivitäten ab. Gesundheitsangaben, Zahnstaffel und Tarifbedingungen gelten; bereits angeratene oder laufende Behandlungen brauchen einen gesonderten Prüfweg.\n\n1 Minute\nohne Kontaktdaten\nAnnahme erst im Antrag\nRegistrierter Versicherungsmakler\nAntworten bleiben auf dieser Seite\nPersönlich erreichbar",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/kassenbonus",
+      "width": 320,
+      "h1": [
+        "Wie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Kassenvorteil prüfen",
+      "buttonBottom": 754.03125,
+      "ctaHintTop": 766.03125,
+      "heroText": "KRANKENKASSE BEWUSST WÄHLEN\n\nWie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?\n\nDer niedrigste Beitrag ist nur die halbe Antwort. Finde heraus, was du sparen kannst, welchen Bonus du realistisch erreichst und welche Leistungen zu deinem Alltag passen.\n\nKassenvorteil prüfen\nKostenlos · ohne Kontaktdaten\nErgebnis vor dem Antrag\nBeitrag, Bonus und Leistung getrennt\nDu entscheidest selbst\n\nDEIN VERGLEICH\n\nWas ist dir wirklich wichtig?\n01\nBeitrag\n02\nBonus\n03\nLeistungen\n\nAbwägen. Verstehen. Bewusst entscheiden.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/tierkrankenversicherung",
+      "width": 320,
+      "h1": [
+        "Damit im Ernstfall die Medizin entscheidet:nicht dein Kontostand."
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Schutz für mein Tier prüfen",
+      "buttonBottom": 712.3645629882812,
+      "heroText": "TIERKRANKENVERSICHERUNG FÜR HUND, KATZE & PFERD\n\nDamit im Ernstfall die Medizin entscheidet:\nnicht dein Kontostand.\n\nWähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung, persönlich, verständlich und je nach Tarif.\n\nSchutz für mein Tier prüfen\n\nUnverbindlich · persönliche Rückmeldung · keine automatische Tarifzusage",
+      "iframes": 0,
+      "checkboxes": 2,
+      "video": null
+    },
+    {
+      "route": "/partner",
+      "width": 320,
+      "h1": [
+        "Wie viele hochwertige Behandlungspläne verlieren Sie an die Angst vor dem Eigenanteil?"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "30-minütiges Kennenlernen buchen",
+      "buttonBottom": 814.1681518554688,
+      "heroText": "FÜR PRAXEN, THERAPEUTEN UND OPTIKER\n\nWie viele hochwertige Behandlungspläne verlieren Sie an die Angst vor dem Eigenanteil?\n\nHealio liefert Ihrer Praxis die Infrastruktur für bis zu 3.000 EUR Behandlungsbudget in 2 Jahren durch einen passenden Tarif. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Versicherungsberatung und Antragsbegleitung übernimmt Healio.\n\n30-minütiges Kennenlernen buchen\nErklärvideo ansehen (1 Min.)\n\nKeine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.\n\nDas Konzept zum Nachlesen:\n\nPraxis-Leitfaden als PDF anfordern",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/unternehmen",
+      "width": 320,
+      "h1": [
+        "Verwandeln Sie Lohnnebenkosten in Ihr stärkstes Bindungsinstrument für Leistungsträger."
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "Vorsorge-Check starten",
+      "buttonBottom": 862.23486328125,
+      "heroText": "BETRIEBLICHE VORSORGE FÜR UNTERNEHMEN\n\nVerwandeln Sie Lohnnebenkosten in Ihr\nstärkstes Bindungsinstrument für Leistungsträger.\n\nHealio denkt Vorsorge ganzheitlich: erst die Krankenkasse Ihrer Mitarbeiter und deren Bonus als Hebel, dann bAV, bKV und Gesundheitsmanagement als betreutes System für Ihren Bestand. Klare Zuständigkeiten, nachvollziehbare Leistungen und persönliche Begleitung entlasten Ihr HR-Team.\n\nVorsorge-Check starten\nBausteine ansehen\nUnabhängiger Makler\nBestand einbezogen\nDauerhaft begleitet",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/about",
+      "width": 320,
+      "h1": [
+        "Wir machen Gesundheitskosten planbarer."
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "button": "So arbeitet Healio",
+      "buttonBottom": 560.9013671875,
+      "heroText": "HEALIO\n\nÜBER HEALIO\n\nWir machen Gesundheitskosten planbarer.\n\nDie Healio GmbH ist unabhängiger Versicherungsmakler und betreibt ein Partnernetzwerk für Patienten, Praxen und Unternehmen. Wir verbinden Kassenboni, Krankenzusatzversicherungen und persönliche Beratung zu nachvollziehbaren Lösungen.\n\nSo arbeitet Healio\nGespräch vereinbaren\n\nHealio GmbH · Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO\n\nPersönliche Beratung aus Hamburg\n\nDAS HEALIO-PRINZIP\n\nEin Konzept. Drei Perspektiven.\n\nWir bringen die Beteiligten zusammen, ohne ihre Rollen zu vermischen.\n\nPatienten und Privatkunden\nZusatzschutz verstehen und passend auswählen.\nPraxen und Gesundheitsberufe\nFinanzierungswege sichtbar machen, ohne selbst zu vermitteln.\nUnternehmen\nBetriebliche Vorsorge nachvollziehbar gestalten.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/kontakt",
+      "width": 320,
+      "h1": [
+        "Hier erreichst du uns"
+      ],
+      "scrollWidth": 320,
+      "viewport": 320,
+      "heroText": "Hier erreichst du uns\n\nFragen zu Kassenboni und Zusatzversicherungen? Healio berät Privatpersonen und informiert Praxen über die Zusammenarbeit.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "h1": [
+        "Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Kassenpotenzial in 90 Sekunden prüfen",
+      "buttonBottom": 644.3732299804688,
+      "heroText": "Warum lassen Sie jedes Jahr hunderte Euro\nbei Ihrer Krankenkasse liegen?\n\nKassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.\n\nKassenpotenzial in 90 Sekunden prüfen\n\n100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch\n\nWÄHLE DEINEN EINSTIEG\n\nIch bin Privatperson\n\nAmbulant, Zahn und Klinik: mehr Leistung, als deine Kasse zahlt.\n\nBeispiel: bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren.\n\nSchutz auswählen\nIch bin Arbeitgeber\n\nbAV und bKV als Benefit fürs Team. Steuerlich gefördert, ohne Mehraufwand für HR.\n\nUnternehmenslösungen ansehen\nIch habe eine Praxis\n\nBehandlungen für deine Patienten finanzierbar machen. Für deine Praxis kostenlos, du informierst nur.\n\nPartnerprogramm ansehen",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/ambulant",
+      "width": 390,
+      "h1": [
+        "Warum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Ambulantes Budget prüfen ➔",
+      "buttonBottom": 664.3193359375,
+      "heroText": "AMBULANTE ZUSATZVERSICHERUNG\n\nWarum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?\n\nBis zu 3.000 EUR Gesundheitsbudget in zwei Jahren für versicherte Leistungen. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Gesundheitsangaben, Leistungsgrenzen und Tarifbedingungen entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.\n\nAmbulantes Budget prüfen ➔\n\n1 Minute Orientierung · Den persönlichen Beitrag siehst du anschließend im Tarifrechner.\n\nBis zu 3.000 € in zwei Jahren\n\nStufe Ambulant 100 (AP1), 100 % Erstattung\n\nSehhilfen\nbis 500 €\nBrille & Kontaktlinsen\nNaturheilverfahren\nbis 1.000 €\nHeilpraktiker & Osteopathie\nVorsorge\nbis 500 €\nZusätzliche Untersuchungen\nZuzahlungen\nbis 1.000 €\nGesetzliche Eigenanteile\n\nDie Werte zeigen die tariflichen Höchstbeträge über zwei Jahre. Maßgeblich sind Versicherungsbeginn, versicherte Leistungen, Erstattungsgrenzen und die jeweils geltenden Tarifbedingungen.",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 0
+      }
+    },
+    {
+      "route": "/zahn",
+      "width": 390,
+      "h1": [
+        "Dein Lächeln ist dein stärkstes Statussignal. Warum überlässt du es dem Kassenstandard?"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Passenden Zahnschutz prüfen",
+      "buttonBottom": 586.90625,
+      "heroText": "ZAHNZUSATZVERSICHERUNG\n\nDein Lächeln ist dein stärkstes Statussignal.\nWarum überlässt du es dem Kassenstandard?\n\nBis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe im Tarif ZahnPRIVAT 100, einschließlich Kassenleistung. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen.\n\nPassenden Zahnschutz prüfen\n\nDer Bonus hängt von Kasse und Aktivitäten ab. Gesundheitsangaben, Zahnstaffel und Tarifbedingungen gelten; bereits angeratene oder laufende Behandlungen brauchen einen gesonderten Prüfweg.\n\n1 Minute\nohne Kontaktdaten\nAnnahme erst im Antrag\nRegistrierter Versicherungsmakler\nAntworten bleiben auf dieser Seite\nPersönlich erreichbar",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/kassenbonus",
+      "width": 390,
+      "h1": [
+        "Wie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Kassenvorteil prüfen",
+      "buttonBottom": 626.359375,
+      "ctaHintTop": 638.359375,
+      "heroText": "KRANKENKASSE BEWUSST WÄHLEN\n\nWie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?\n\nDer niedrigste Beitrag ist nur die halbe Antwort. Finde heraus, was du sparen kannst, welchen Bonus du realistisch erreichst und welche Leistungen zu deinem Alltag passen.\n\nKassenvorteil prüfen\nKostenlos · ohne Kontaktdaten\nErgebnis vor dem Antrag\nBeitrag, Bonus und Leistung getrennt\nDu entscheidest selbst\n\nDEIN VERGLEICH\n\nWas ist dir wirklich wichtig?\n01\nBeitrag\n02\nBonus\n03\nLeistungen\n\nAbwägen. Verstehen. Bewusst entscheiden.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/tierkrankenversicherung",
+      "width": 390,
+      "h1": [
+        "Damit im Ernstfall die Medizin entscheidet:nicht dein Kontostand."
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Schutz für mein Tier prüfen",
+      "buttonBottom": 620.994873046875,
+      "heroText": "TIERKRANKENVERSICHERUNG FÜR HUND, KATZE & PFERD\n\nDamit im Ernstfall die Medizin entscheidet:\nnicht dein Kontostand.\n\nWähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung, persönlich, verständlich und je nach Tarif.\n\nSchutz für mein Tier prüfen\n\nUnverbindlich · persönliche Rückmeldung · keine automatische Tarifzusage",
+      "iframes": 0,
+      "checkboxes": 2,
+      "video": null
+    },
+    {
+      "route": "/partner",
+      "width": 390,
+      "h1": [
+        "Wie viele hochwertige Behandlungspläne verlieren Sie an die Angst vor dem Eigenanteil?"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "30-minütiges Kennenlernen buchen",
+      "buttonBottom": 755.506591796875,
+      "heroText": "FÜR PRAXEN, THERAPEUTEN UND OPTIKER\n\nWie viele hochwertige Behandlungspläne verlieren Sie an die Angst vor dem Eigenanteil?\n\nHealio liefert Ihrer Praxis die Infrastruktur für bis zu 3.000 EUR Behandlungsbudget in 2 Jahren durch einen passenden Tarif. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Versicherungsberatung und Antragsbegleitung übernimmt Healio.\n\n30-minütiges Kennenlernen buchen\nErklärvideo ansehen (1 Min.)\n\nKeine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.\n\nDas Konzept zum Nachlesen:\n\nPraxis-Leitfaden als PDF anfordern",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/unternehmen",
+      "width": 390,
+      "h1": [
+        "Verwandeln Sie Lohnnebenkosten in Ihr stärkstes Bindungsinstrument für Leistungsträger."
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "Vorsorge-Check starten",
+      "buttonBottom": 741.4746704101562,
+      "heroText": "BETRIEBLICHE VORSORGE FÜR UNTERNEHMEN\n\nVerwandeln Sie Lohnnebenkosten in Ihr\nstärkstes Bindungsinstrument für Leistungsträger.\n\nHealio denkt Vorsorge ganzheitlich: erst die Krankenkasse Ihrer Mitarbeiter und deren Bonus als Hebel, dann bAV, bKV und Gesundheitsmanagement als betreutes System für Ihren Bestand. Klare Zuständigkeiten, nachvollziehbare Leistungen und persönliche Begleitung entlasten Ihr HR-Team.\n\nVorsorge-Check starten\nBausteine ansehen\nUnabhängiger Makler\nBestand einbezogen\nDauerhaft begleitet",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/about",
+      "width": 390,
+      "h1": [
+        "Wir machen Gesundheitskosten planbarer."
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "button": "So arbeitet Healio",
+      "buttonBottom": 504.84759521484375,
+      "heroText": "HEALIO\n\nÜBER HEALIO\n\nWir machen Gesundheitskosten planbarer.\n\nDie Healio GmbH ist unabhängiger Versicherungsmakler und betreibt ein Partnernetzwerk für Patienten, Praxen und Unternehmen. Wir verbinden Kassenboni, Krankenzusatzversicherungen und persönliche Beratung zu nachvollziehbaren Lösungen.\n\nSo arbeitet Healio\nGespräch vereinbaren\n\nHealio GmbH · Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO\n\nPersönliche Beratung aus Hamburg\n\nDAS HEALIO-PRINZIP\n\nEin Konzept. Drei Perspektiven.\n\nWir bringen die Beteiligten zusammen, ohne ihre Rollen zu vermischen.\n\nPatienten und Privatkunden\nZusatzschutz verstehen und passend auswählen.\nPraxen und Gesundheitsberufe\nFinanzierungswege sichtbar machen, ohne selbst zu vermitteln.\nUnternehmen\nBetriebliche Vorsorge nachvollziehbar gestalten.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/kontakt",
+      "width": 390,
+      "h1": [
+        "Hier erreichst du uns"
+      ],
+      "scrollWidth": 390,
+      "viewport": 390,
+      "heroText": "Hier erreichst du uns\n\nFragen zu Kassenboni und Zusatzversicherungen? Healio berät Privatpersonen und informiert Praxen über die Zusammenarbeit.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "h1": [
+        "Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Kassenpotenzial in 90 Sekunden prüfen",
+      "buttonBottom": 748,
+      "heroText": "Warum lassen Sie jedes Jahr hunderte Euro\nbei Ihrer Krankenkasse liegen?\n\nKassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.\n\nKassenpotenzial in 90 Sekunden prüfen\nÖffnet KassenBoost in einem neuen Tab.\n\n100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch\n\nDein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.\n\nDie Rechnung beginnt bei deiner Kasse.\n\nBeispielrechnung: was dein Zusatzschutz nach Bonusausgleich tatsächlich kostet.\n\nJahresbeitrag Zusatzversicherung\n470,28 EUR\n\nBeispiel: 35 Jahre, SDK Ambulant 100 (AP1) mit 39,19 EUR im Monat. Den Beitrag zahlst du zunächst selbst.\n\n−\nErreichter Kassenbonus\n400,00 EUR\n\nRechenannahme für den IKK-classic-Zuschuss, kein garantierter Betrag. Erfüllte Bonusbedingungen, anerkannte Maßnahmen und eigene Kosten entscheiden.\n\n=\nDein verbleibender Jahresbeitrag\n70,28 EUR\n\nRund 5,86 EUR im Monat. Der Ausgleich erfolgt nachträglich, bis zur Höhe der anrechenbaren Kosten.\n\nTarifbudget für versicherte Leistungen. Kassenbonus zum Beitragsausgleich. Maßgeblich sind die jeweiligen Tarif- und Bonusbedingungen.\n\nVersicherungsmakler nach § 34d GewO\nTarifgrenzen vor Abschluss erklärt\nPersönliche Begleitung",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/ambulant",
+      "width": 1440,
+      "h1": [
+        "Warum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Ambulantes Budget prüfen",
+      "buttonBottom": 784,
+      "heroText": "Warum bezahlst du Privatleistungen selbst,\nwährend dein Kassenbonus ungenutzt bleibt?\nAmbulantes Budget prüfen\n\nBis zu 3.000 EUR Tarifleistungen in 2 Jahren für Heilpraktiker, Osteopathie, Sehhilfen und Vorsorge. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen.\n\nSDK AP1: vier getrennte Höchstbeträge für 2 Kalenderjahre ab Versicherungsbeginn. Erstattungsfähige Kosten, Gesundheitsangaben und Tarifbedingungen gelten.\n\nTarifleistungen, Beitrag und persönliches Bonuspotenzial nachvollziehbar gegenüberstellen.\n\nBis zu 3.000 EUR in 2 Jahren.\n\nSDK Ambulant 100 / AP1. Vier getrennte Leistungstöpfe.\n\nSehhilfen\n500 EUR\nNaturheilverfahren\n1.000 EUR\nVorsorge\n500 EUR\nHilfsmittel & Zuzahlungen\n1.000 EUR\n\nKein frei verfügbares Guthaben. Die Erstattung setzt versicherte Leistungen und Rechnungen voraus. Bei Hilfsmitteln ist eine Vorleistung deiner gesetzlichen Kasse erforderlich.\n\nVersicherungsmakler nach § 34d GewO\nTarifgrenzen vor Abschluss erklärt\nPersönliche Begleitung",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 0
+      }
+    },
+    {
+      "route": "/zahn",
+      "width": 1440,
+      "h1": [
+        "Dein Lächeln ist dein stärkstes Statussignal. Warum überlässt du es dem Kassenstandard?"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Passenden Zahnschutz prüfen",
+      "buttonBottom": 784,
+      "heroText": "Dein Lächeln ist dein stärkstes Statussignal.\nWarum überlässt du es dem Kassenstandard?\n\nBis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe im Tarif ZahnPRIVAT 100, einschließlich Kassenleistung. So reduzierst du deinen Eigenanteil tarifgemäß. Dein Kassenbonus kann den Versicherungsbeitrag je nach Kasse und Aktivitäten ganz oder teilweise ausgleichen.\n\nPassenden Zahnschutz prüfen\n\nBis zu 100 % Erstattung nach Tarif und Kassenleistung. Annahme, Leistungsstaffeln und bereits empfohlene oder laufende Behandlungen werden gesondert geprüft.\n\nVier kurze Fragen. Ohne Kontaktdaten. Die verbindliche Annahme erfolgt im Antrag.\n\nDeine Situation entscheidet.\n\nZwei Wege mit unterschiedlichen Voraussetzungen.\n\nVorsorgen, bevor etwas ansteht\nUKV ZahnPRIVAT\n\nErstattung von 75, 90 oder 100 % je nach Stufe. Fehlende Zähne und Vorgeschichte im Check berücksichtigen.\n\nEine Behandlung steht bereits an\nZAHN Sofort prüfen\n\nDie Bayerische: bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Nur mit passendem neuen Zahntarif.\n\nEmpfohlene, laufende und bereits abgerechnete Behandlungen sind unterschiedliche Fälle. Der Check ordnet deinen nächsten Prüfungsschritt ein.\n\nVersicherungsmakler nach § 34d GewO\nTarifgrenzen vor Abschluss erklärt\nPersönliche Begleitung",
+      "bonusOpen": true,
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/kassenbonus",
+      "width": 1440,
+      "h1": [
+        "Wie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Kassenvorteil prüfen",
+      "buttonBottom": 748.015625,
+      "ctaHintTop": 760.015625,
+      "heroText": "KRANKENKASSE BEWUSST WÄHLEN\n\nWie viel Geld lässt du jedes Jahr bei deiner Krankenkasse liegen?\n\nDer niedrigste Beitrag ist nur die halbe Antwort. Finde heraus, was du sparen kannst, welchen Bonus du realistisch erreichst und welche Leistungen zu deinem Alltag passen.\n\nKassenvorteil prüfen\nKostenlos · ohne Kontaktdaten\nErgebnis vor dem Antrag\nBeitrag, Bonus und Leistung getrennt\nDu entscheidest selbst\n\nDEIN VERGLEICH\n\nWas ist dir wirklich wichtig?\n01\nBeitrag\nWas zahlst du wirklich?\n02\nBonus\nWas erreichst du realistisch?\n03\nLeistungen\nWas nutzt dir im Alltag?\n\nAbwägen. Verstehen. Bewusst entscheiden.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/tierkrankenversicherung",
+      "width": 1440,
+      "h1": [
+        "Damit im Ernstfall die Medizin entscheidet:nicht dein Kontostand."
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Schutz für mein Tier prüfen",
+      "buttonBottom": 869.6270751953125,
+      "heroText": "TIERKRANKENVERSICHERUNG FÜR HUND, KATZE & PFERD\n\nDamit im Ernstfall die Medizin entscheidet:\nnicht dein Kontostand.\n\nWähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung, persönlich, verständlich und je nach Tarif.\n\nSchutz für mein Tier prüfen\n\nUnverbindlich · persönliche Rückmeldung · keine automatische Tarifzusage",
+      "iframes": 0,
+      "checkboxes": 2,
+      "video": null
+    },
+    {
+      "route": "/partner",
+      "width": 1440,
+      "h1": [
+        "Wie viele hochwertige Behandlungspläne verlieren Sie an die Angst vor dem Eigenanteil?"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "30-minütiges Kennenlernen buchen",
+      "buttonBottom": 783,
+      "heroText": "Wie viele hochwertige Behandlungspläne verlieren Sie an die\nAngst vor dem Eigenanteil?\n\nHealio liefert Ihrer Praxis die Infrastruktur für bis zu 3.000 EUR Behandlungsbudget in 2 Jahren durch einen passenden Tarif. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Versicherungsberatung und Antragsbegleitung übernimmt Healio.\n\n30-minütiges Kennenlernen buchen\nErklärvideo ansehen (1 Min.)\n\nFür Praxen, Therapeuten und Optiker\n\nKeine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.\n\nDas Konzept zum Nachlesen:\n\nPraxis-Leitfaden als PDF anfordern",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/unternehmen",
+      "width": 1440,
+      "h1": [
+        "Verwandeln Sie Lohnnebenkosten in Ihr stärkstes Bindungsinstrument für Leistungsträger."
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "Vorsorge-Check starten",
+      "buttonBottom": 965.9022827148438,
+      "heroText": "BETRIEBLICHE VORSORGE FÜR UNTERNEHMEN\n\nVerwandeln Sie Lohnnebenkosten in Ihr\nstärkstes Bindungsinstrument für Leistungsträger.\n\nHealio denkt Vorsorge ganzheitlich: erst die Krankenkasse Ihrer Mitarbeiter und deren Bonus als Hebel, dann bAV, bKV und Gesundheitsmanagement als betreutes System für Ihren Bestand. Klare Zuständigkeiten, nachvollziehbare Leistungen und persönliche Begleitung entlasten Ihr HR-Team.\n\nVorsorge-Check starten\nBausteine ansehen\nUnabhängiger Makler\nBestand einbezogen\nDauerhaft begleitet",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": {
+        "preload": "none",
+        "controls": true,
+        "tracks": 1
+      }
+    },
+    {
+      "route": "/about",
+      "width": 1440,
+      "h1": [
+        "Wir machen Gesundheitskosten planbarer."
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "button": "So arbeitet Healio",
+      "buttonBottom": 783,
+      "heroText": "Wir machen Gesundheitskosten planbarer.\nSo arbeitet Healio\nGespräch vereinbaren\n\nDie Healio GmbH ist unabhängiger Versicherungsmakler und betreibt ein Partnernetzwerk für Patienten, Praxen und Unternehmen. Wir verbinden Kassenboni, Krankenzusatzversicherungen und persönliche Beratung zu nachvollziehbaren Lösungen.\n\nDas Healio-Prinzip\n\nEin Konzept. Drei Perspektiven.\n\nWir bringen die Beteiligten zusammen, ohne ihre Rollen zu vermischen.\n\nPatienten und Privatkunden\n\nZusatzschutz verstehen und passend auswählen.\n\nPraxen und Gesundheitsberufe\n\nFinanzierungswege sichtbar machen, ohne selbst zu vermitteln.\n\nUnternehmen\n\nBetriebliche Vorsorge nachvollziehbar gestalten.\n\nHealio GmbH · Versicherungsmakler mit Erlaubnis nach § 34d Abs. 1 GewO\nPersönliche Beratung aus Hamburg",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    },
+    {
+      "route": "/kontakt",
+      "width": 1440,
+      "h1": [
+        "Hier erreichst du uns"
+      ],
+      "scrollWidth": 1440,
+      "viewport": 1440,
+      "heroText": "Hier erreichst du uns\n\nFragen zu Kassenboni und Zusatzversicherungen? Healio berät Privatpersonen und informiert Praxen über die Zusammenarbeit.",
+      "iframes": 0,
+      "checkboxes": 0,
+      "video": null
+    }
+  ],
+  "errors": []
+}

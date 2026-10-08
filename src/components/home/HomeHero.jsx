@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -102,7 +103,7 @@ const HomeHero = () => {
             lang={i18n.resolvedLanguage || i18n.language}
             className="max-w-[20ch] [hyphens:manual] font-display text-[2.35rem] font-extrabold leading-[1.035] tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] sm:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
           >
-            <span className="block">{titleLead}</span>
+            <span className="block">{titleLead}</span>{' '}
             <span className="relative mt-2 inline-block w-fit max-w-full pb-[0.16em] text-[#F4FFF9] drop-shadow-[0_0_26px_rgba(37,201,144,0.32)]">
               <span className="absolute -inset-x-6 -inset-y-2 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,201,144,0.22),rgba(37,201,144,0.06)_48%,transparent_74%)] blur-xl" aria-hidden="true" />
               <span className="relative">{titleAccent}</span>
@@ -113,11 +114,24 @@ const HomeHero = () => {
             </span>
           </HeroHeading>
 
-          <motion.p {...entrance(0.17)} className="order-2 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8 md:order-1">
+          <motion.p {...entrance(0.17)} className="order-1 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
             {t('hero.description')}
           </motion.p>
 
-          <motion.nav {...entrance(0.24)} className="order-1 mt-5 sm:mt-9 md:order-2" aria-label={t('hero.switchLabel')}>
+          <motion.div {...entrance(0.21)} className="order-2 mt-5 flex flex-col items-start">
+            <a
+              href={KASSENBOOST_COMPARE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent('home_kassenboost_link', { placement: 'mobile-hero' })}
+              className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 font-display text-base font-extrabold leading-6 text-home-midnight transition hover:bg-home-mint-active"
+            >
+              {t('hero.primaryCta')}<ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+            </a>
+            <p className="mt-3 text-sm leading-6 text-white/80">{t('hero.ctaHint')}</p>
+          </motion.div>
+
+          <motion.nav {...entrance(0.24)} className="order-3 mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
             <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
             {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
             <MobileSwipeRow

@@ -150,6 +150,7 @@ const COPY = {
     finalTitle: 'Mach aus Selbstzahlerkosten dein Gesundheitsbudget.',
     finalText: 'Vergleiche Budget und Beitrag. Danach siehst du mit KassenBoost, ob dein Bonus den Beitrag ganz oder teilweise ausgleichen kann.',
     finalCta: 'Budget & Beitrag berechnen',
+    finalMicro: 'Dauert 2 Minuten · Kostenlos, unverbindlich und ohne Vertreteranrufe.',
     finalHelp: 'Noch unsicher? Persönlich einordnen lassen',
     // Fragen und Antworten liegen in ambulantFaqs.js, weil das vorgerenderte
     // FAQ-Schema (scripts/seo-routes.mjs) dieselbe Quelle nutzt.
@@ -259,6 +260,7 @@ const COPY = {
     finalTitle: 'Turn out-of-pocket costs into a health budget.',
     finalText: 'Compare budget and premium, then use KassenBoost to see whether your bonus may offset all or part of the premium.',
     finalCta: 'Calculate budget & premium',
+    finalMicro: 'Takes 2 minutes · Free, non-binding and without sales calls.',
     finalHelp: 'Not sure yet? Get personal guidance',
     faqs: AMBULANT_FAQS.en,
   },
@@ -752,7 +754,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
       <section className="order-9 bg-home-ice px-4 py-8 sm:px-6 md:order-none md:py-14 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <details className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-white shadow-[0_20px_60px_rgba(7,17,31,0.08)]">
+          <details open className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-white shadow-[0_20px_60px_rgba(7,17,31,0.08)]">
             <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-6 sm:px-8 sm:py-7 [&::-webkit-details-marker]:hidden">
               <span className="flex min-w-0 items-center gap-4">
                 <FriendlyIcon kind="calculator" tone="butter" size="md" />
@@ -913,6 +915,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
             </a>
+            <p className="relative mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">{copy.finalMicro}</p>
             <div className="relative mt-3 md:mt-5">
               <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
             </div>

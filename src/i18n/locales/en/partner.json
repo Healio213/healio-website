@@ -2,18 +2,18 @@
   "hero": {
     "badge": "For practices, therapists and opticians",
     "title": "How many high-quality treatment plans do you lose to <highlight>fear of out-of-pocket costs?</highlight>",
-    "subtitle": "Up to <highlight>EUR 3,000 in health budget over two years</highlight> through a suitable plan. A health fund bonus may offset all or part of the premium. Health declarations and policy terms determine cover; treatment already recommended is not automatically insured. Your practice informs; Healio advises and supports.",
+    "subtitle": "Healio provides the infrastructure for your practice to help patients access up to <highlight>EUR 3,000 in treatment benefits over 2 years</highlight> through a suitable plan. A health fund bonus may offset all or part of the premium. Your practice provides neutral information; Healio handles insurance advice and application support.",
     "cta": "Book a 30-minute introduction",
     "secondaryCta": "View the concept with Nita",
-    "roleNote": "No insurance advice by the practice is required.",
+    "roleNote": "No insurance advice by the practice. Policy terms and health declarations determine cover; treatment already recommended is not automatically insured.",
     "imageAlt": "Therapist talking with a patient in a bright practice",
     "videoPreviewAlt": "Preview of Healio's explainer video for partner practices",
     "videoPlayLabel": "Play explainer video",
     "videoFallback": "Your browser does not support video."
   },
   "leitfadenHint": {
-    "lead": "Prefer to read first?",
-    "cta": "Get the guide (in German)."
+    "lead": "The concept in writing:",
+    "cta": "Request the practice guide as a PDF (in German)"
   },
   "proof": {
     "ariaLabel": "Responsibilities in the Healio partner concept",
@@ -33,19 +33,21 @@
     ]
   },
   "explanationVideo": {
-    "title": "The partner concept at a glance",
-    "subtitle": "The key points at a glance. You can clarify your questions directly with Nita.",
+    "title": "When the budget stops treatment: the partner concept at a glance.",
+    "subtitle": "Help your patients find suitable supplementary cover and use a possible health fund bonus towards the premium.",
     "points": [
       "Clear responsibilities for practices, patients and Healio",
       "Eligibility explained without blanket promises",
       "Next step: a 30-minute introduction"
     ],
     "bookingCta": "Book a 30-minute intro call",
-    "hint": "Important for your patients: the plan must be in place before the next treatment.",
+    "hint": "The benefits come from a suitable plan. Important for your patients: check the application timing and eligibility requirements before treatment.",
     "aiNote": "Note: The digital presenter Nita and her voice were created with AI.",
     "cta": "Clarify the concept with Nita",
     "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
-    "fallback": "This video cannot be played in your browser."
+    "fallback": "This video cannot be played in your browser.",
+    "badge": "Up to EUR 3,000 in treatment benefits over 2 years through a suitable plan",
+    "subline": "Financing options for practices without having to provide insurance advice."
   },
   "trust": {
     "budget": "Up to EUR 3,000 over two years may be available",

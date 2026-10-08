@@ -54,8 +54,8 @@ const content = {
         link: 'Klinikleistungen ansehen',
       },
     ],
-    trustTitle: 'Leistungen verstehen. Dann entscheiden.',
-    trustText: 'Du brauchst eine nachvollziehbare Rechnung und einen Ansprechpartner. Beides gehört bei Healio zusammen.',
+    trustTitle: 'Beenden Sie das Verschenken Ihrer Kassenboni.',
+    trustText: 'Rechnen Sie nach, fordern Sie Ihren Bonus ein und sichern Sie sich den Zusatzschutz, der zu Ihnen passt.',
     trustItems: [
       {
         title: 'Registrierter Versicherungsmakler',
@@ -71,7 +71,7 @@ const content = {
         text: 'Leistungen, Beiträge, Voraussetzungen und Tarifgrenzen stellen wir gegenüber, bevor du dich entscheidest.',
       },
     ],
-    primaryCta: 'KassenBoost Potenzial prüfen',
+    primaryCta: 'Jetzt Kassenpotenzial berechnen',
     ctaHint: 'Beitrag, Bonus und Leistungen getrennt vergleichen.',
   },
   en: {
@@ -113,8 +113,8 @@ const content = {
         link: 'Explore hospital benefits',
       },
     ],
-    trustTitle: 'Understand the benefits. Then decide.',
-    trustText: 'You need a calculation you can follow and someone you can speak to. Healio brings both together.',
+    trustTitle: 'Stop giving away your health fund bonuses.',
+    trustText: 'Do the maths, claim your bonus and find supplementary cover that suits you.',
     trustItems: [
       {
         title: 'Registered insurance broker',
@@ -130,7 +130,7 @@ const content = {
         text: 'We set out benefits, premiums, eligibility requirements and plan limits before you make your decision.',
       },
     ],
-    primaryCta: 'Check your KassenBoost potential',
+    primaryCta: 'Calculate health fund potential now',
     ctaHint: 'Compare contributions, bonuses and benefits separately.',
   },
 };

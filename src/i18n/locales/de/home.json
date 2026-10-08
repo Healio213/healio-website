@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.",
-    "titleLead": "Dein Kassenbonus ist zu wertvoll,",
-    "titleAccent": "um ihn ungenutzt zu lassen.",
-    "description": "Setze deinen Kassenbonus gezielt für Zusatzschutz ein: Er kann den Beitrag ganz oder teilweise ausgleichen. Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren sind tarifliche Leistungen. Gesundheitsangaben, versicherte Behandlungen und Leistungsgrenzen entscheiden.",
+    "title": "Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?",
+    "titleLead": "Warum lassen Sie jedes Jahr hunderte Euro",
+    "titleAccent": "bei Ihrer Krankenkasse liegen?",
+    "description": "Kassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.",
     "switchLabel": "Wähle deinen Einstieg",
     "switch": [
       {
@@ -28,12 +28,16 @@
         "description": "Behandlungen für deine Patienten finanzierbar machen. Für deine Praxis kostenlos, du informierst nur.",
         "cta": "Partnerprogramm ansehen"
       }
-    ]
+    ],
+    "primaryCta": "Kassenpotenzial in 90 Sekunden prüfen",
+    "ctaHint": "100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch"
   },
   "explanationVideo": {
-    "eyebrow": "Healio in gut einer Minute",
-    "title": "Was Healio für dich macht",
-    "aria": "Erklärvideo: Was Healio für dich macht"
+    "eyebrow": "ERKLÄRVIDEO · GUT 1 MINUTE",
+    "title": "In gut einer Minute: Wie Sie mit Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren nutzen.",
+    "aria": "Erklärvideo: Kassenbonus und Gesundheitsbudget nutzen",
+    "subtitle": "Kassenbonus aktivieren, statt private Gesundheitskosten allein zu tragen.",
+    "disclosure": "Ihr Bonus hängt von Krankenkasse und nachgewiesenen Aktivitäten ab. Er kann den Versicherungsbeitrag ganz oder teilweise ausgleichen. Die 3.000 EUR sind Tarifleistungen für versicherte Behandlungen, kein auszahlbares Guthaben."
   },
   "seo": {
     "title": "Versicherungen für Privatkunden & Unternehmen | Healio",
@@ -145,10 +149,10 @@
     ]
   },
   "finalCta": {
-    "title": "Finde heraus, welche Krankenkasse dir wirklich mehr bringt.",
-    "description": "Kostenlos starten. Beitrag, Bonus und Leistungen getrennt vergleichen.",
+    "title": "Beenden Sie das Verschenken Ihrer Kassenboni.",
+    "description": "Rechnen Sie nach, fordern Sie Ihren Bonus ein und sichern Sie sich den Zusatzschutz, der zu Ihnen passt.",
     "detailsCta": "So funktioniert KassenBoost",
-    "cta": "Kassenvorteil prüfen"
+    "cta": "Jetzt Kassenpotenzial berechnen"
   },
   "audience": {
     "eyebrow": "Der passende Einstieg",

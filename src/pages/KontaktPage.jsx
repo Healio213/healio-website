@@ -13,7 +13,6 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
-import GoogleMapEmbed from '@/components/GoogleMapEmbed';
 import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 
@@ -326,13 +325,15 @@ const KontaktPage = () => {
           </div>
         </section>
 
-        {/* SECTION 3: Location (Google Maps) */}
-        <section className="w-full">
-          <div className="w-full bg-slate-200">
-            <GoogleMapEmbed
-              url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.349633854124!2d10.015241777265267!3d53.56942945826958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18ef0e3f28249%3A0xc02e48e8990b798b!2sArndtstraße%206%2C%2022085%20Hamburg!5e0!3m2!1sen!2sde!4v1710000000000!5m2!1sen!2sde"
-              title={lang === 'en' ? 'Healio location in Hamburg' : 'Healio Standort Hamburg'}
-            />
+        {/* SECTION 3: Standort ohne externen Kartendienst */}
+        <section className="healio-container w-full px-4 sm:px-6 md:px-8" aria-labelledby="contact-location-title">
+          <div className="mx-auto flex max-w-6xl flex-col items-start gap-5 rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm sm:flex-row sm:p-8">
+            <FriendlyIcon emoji="📍" label={t('page.address')} tone="coral" size="sm" />
+            <div className="min-w-0">
+              <h2 id="contact-location-title" className="text-xl font-bold text-slate-900 sm:text-2xl">{t('page.locationTitle')}</h2>
+              <p className="mt-2 text-base leading-7 text-slate-600">{t('page.locationAddress')}</p>
+              <p className="mt-4 inline-flex rounded-xl bg-emerald-50 px-4 py-2 text-sm font-semibold leading-6 text-emerald-900">{t('page.locationBadge')}</p>
+            </div>
           </div>
         </section>
 

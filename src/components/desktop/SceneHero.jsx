@@ -42,7 +42,7 @@ export const scenePrimaryButtonClass =
 export const sceneSecondaryButtonClass =
   'inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-white/35 px-7 py-4 font-display text-base font-bold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white';
 
-const SceneHero = ({ surface, image, headingId, heading, actions, children, className = '', dataAttributes = {} }) => {
+const SceneHero = ({ surface, image, headingId, heading, subtitle, actions, actionHint, children, className = '', dataAttributes = {} }) => {
   // Auf dem Rechner trägt dieser Kopfbereich die h1; die Handy-Fassung der Seite nutzt dort h2.
   const Heading = useDesktopLayout() ? 'h1' : 'h2';
   const src = image || sceneHeroImages[surface];
@@ -74,7 +74,9 @@ const SceneHero = ({ surface, image, headingId, heading, actions, children, clas
             >
               {heading}
             </Heading>
+            {subtitle && <p className="mt-6 max-w-[62ch] text-lg leading-8 text-white/90">{subtitle}</p>}
             {actions && <div className="mt-9 flex flex-wrap items-center gap-4">{actions}</div>}
+            {actionHint && <p className="mt-3 text-sm leading-6 text-white/80">{actionHint}</p>}
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ try {
   const open = async (route) => {
     await page.goto(`${origin}${route}`, { waitUntil: 'networkidle0' });
     await page.waitForSelector('#tarifwahl');
-    await page.evaluate(() => { document.querySelector('#bonus-calculator').closest('details').open = true; });
+    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The personal bonus calculation must be open on initial render.');
   };
   const choose = async (code) => {
     await page.evaluate((tariff) => [...document.querySelectorAll('#tarifwahl button')].find((button) => button.textContent.includes(tariff)).click(), code);

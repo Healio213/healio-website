@@ -30,6 +30,8 @@ const B2BExplainerVideo = ({
   onBookingCta,
   videoHint,
   videoNote,
+  overlayBadge,
+  videoSubline,
 }) => {
   const [playing, setPlaying] = useState(false);
   const [mediaError, setMediaError] = useState(false);
@@ -113,11 +115,16 @@ const B2BExplainerVideo = ({
                 transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               >
                 <img src={posterSrc} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                <span className="absolute inset-0 flex items-center justify-center bg-[#07111f]/30 transition-colors group-hover:bg-[#07111f]/40">
+                <span className={`absolute inset-0 flex items-center justify-center bg-[#07111f]/30 transition-colors group-hover:bg-[#07111f]/40 ${overlayBadge ? 'pb-16 sm:pb-0' : ''}`}>
                   <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25c990] shadow-[0_12px_30px_rgba(7,96,70,0.3)] md:h-20 md:w-20">
                     <Play className="ml-1 h-7 w-7 text-white md:h-9 md:w-9" aria-hidden="true" />
                   </span>
                 </span>
+                {overlayBadge && (
+                  <span className="absolute inset-x-3 bottom-3 rounded-xl bg-[#07111f]/85 px-3 py-2 text-center text-sm font-bold leading-5 text-white backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-5 sm:py-3 sm:text-base sm:leading-6">
+                    {overlayBadge}
+                  </span>
+                )}
               </motion.button>
             )
           ) : !showStatusPanel ? (
@@ -194,6 +201,10 @@ const B2BExplainerVideo = ({
                 </ul>
               </div>
             </div>
+          )}
+
+          {hasApprovedVideo && videoSubline && (
+            <p className="mt-4 text-center text-base font-semibold leading-7 text-[#07111f]">{videoSubline}</p>
           )}
 
           {/* KI-Hinweis direkt am Player (Art. 50 KI-VO), danach Pflichthinweis und nächster Schritt */}

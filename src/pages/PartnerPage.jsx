@@ -95,6 +95,7 @@ const PartnerPage = () => {
           headingId="desktop-partner-heading"
           dataAttributes={{ 'data-desktop-lead': 'partner' }}
           heading={<HighlightText text={t('hero.title')} className={sceneAccentClass} />}
+          subtitle={<HighlightText text={t('hero.subtitle')} className="text-[#5ee0b1]" />}
           actions={(
             <>
               <button
@@ -119,20 +120,17 @@ const PartnerPage = () => {
           <div className={sceneBelow.grid}>
             <div className="min-w-0">
               <p className="mb-4 text-sm font-semibold leading-6 text-[#bfced6]">{t('hero.badge')}</p>
-              <p className={sceneBelow.lead}>
-                <HighlightText text={t('hero.subtitle')} className="text-[#5ee0b1]" />
+              <p className="flex items-start gap-3 text-base leading-7 text-[#e1ebef]">
+                <Shield className="mt-1 h-5 w-5 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
+                {t('hero.roleNote')}
               </p>
             </div>
             <ul className={`min-w-0 ${sceneBelow.list}`}>
-              <li className="flex items-start gap-3 py-4 text-base leading-7 text-[#e1ebef]">
-                <Shield className="mt-1 h-5 w-5 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
-                {t('hero.roleNote')}
-              </li>
-              <li className="py-4 pl-8 text-base leading-7 text-[#e1ebef]">
-                {t('leitfadenHint.lead')}{' '}
+              <li className="py-4 text-base leading-7 text-[#e1ebef]">
+                <p className="mb-3">{t('leitfadenHint.lead')}</p>
                 <Link
                   to="/partner/leitfaden"
-                  className="rounded-sm font-semibold text-[#5ee0b1] underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className={sceneSecondaryButtonClass}
                 >
                   {t('leitfadenHint.cta')}
                 </Link>
@@ -174,13 +172,13 @@ const PartnerPage = () => {
                 <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
                   {t('hero.badge')}
                 </p>
-                <Heading className="order-1 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                <Heading className="order-1 text-[1.75rem] sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                   <HighlightText text={t('hero.title')} />
                 </Heading>
-                <p className="order-3 mt-6 text-base sm:text-lg md:text-xl text-slate-100 mb-6 sm:mb-8 leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
+                <p className="order-2 text-base sm:text-lg md:text-xl text-slate-100 mb-4 sm:mb-8 leading-6 sm:leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
                   <HighlightText text={t('hero.subtitle')} />
                 </p>
-                <div className="order-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+                <div className="order-3 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
                     size="lg"
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
@@ -202,15 +200,15 @@ const PartnerPage = () => {
                   <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
-                <p className="order-5 mt-3 text-sm text-white/75">
-                  {t('leitfadenHint.lead')}{' '}
+                <div className="order-5 mt-5 text-sm text-white/75">
+                  <p className="mb-3">{t('leitfadenHint.lead')}</p>
                   <Link
                     to="/partner/leitfaden"
-                    className="py-3.5 font-semibold text-[#75e6bf] underline underline-offset-4 sm:py-0"
+                    className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/55 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base"
                   >
                     {t('leitfadenHint.cta')}
                   </Link>
-                </p>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -229,6 +227,8 @@ const PartnerPage = () => {
           sectionId="partner-video"
           title={t('explanationVideo.title')}
           subtitle={t('explanationVideo.subtitle')}
+          overlayBadge={t('explanationVideo.badge')}
+          videoSubline={t('explanationVideo.subline')}
           points={t('explanationVideo.points', { returnObjects: true })}
           showStatusPanel={false}
           videoSrc={isEnglish ? undefined : PARTNER_VIDEO_SRC}

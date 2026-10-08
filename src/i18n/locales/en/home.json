@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Your health fund bonus is too valuable to leave unused.",
-    "titleLead": "Your health fund bonus is too valuable",
-    "titleAccent": "to leave unused.",
-    "description": "Put your health fund bonus towards supplementary cover: it may offset all or part of the premium. Up to EUR 3,000 in health budget over two years comes from plan benefits. Health declarations, insured treatments and benefit limits determine cover.",
+    "title": "Why leave hundreds of euros with your health fund every year?",
+    "titleLead": "Why leave hundreds of euros",
+    "titleAccent": "with your health fund every year?",
+    "description": "Health fund bonuses are not paid automatically. If you meet the conditions, you need to claim them. The KassenBoost method helps you use this potential for suitable supplementary cover: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable options for dental and hospital cover.",
     "switchLabel": "Choose your path",
     "switch": [
       {
@@ -28,7 +28,9 @@
         "description": "Make treatments affordable for your patients. Free for your practice, you only inform.",
         "cta": "Explore the partner programme"
       }
-    ]
+    ],
+    "primaryCta": "Check health fund potential in 90 seconds",
+    "ctaHint": "100% free · No obligation to switch · No home visit"
   },
   "explanationVideo": {
     "eyebrow": "Healio in just over a minute",
@@ -145,10 +147,10 @@
     ]
   },
   "finalCta": {
-    "title": "Find out which health insurer really gives you more.",
-    "description": "Start for free. Compare contributions, bonuses and benefits separately.",
+    "title": "Stop giving away your health fund bonuses.",
+    "description": "Do the maths, claim your bonus and find supplementary cover that suits you.",
     "detailsCta": "How KassenBoost works",
-    "cta": "Check insurer value"
+    "cta": "Calculate health fund potential now"
   },
   "audience": {
     "eyebrow": "Choose your entry point",

@@ -125,7 +125,7 @@ const KassenbonusPage = () => {
                 {t('hero.description')}
               </p>
 
-              <div className="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center">
+              <div className="mt-6 flex flex-col items-start gap-3 sm:mt-8">
                 <a
                   href={KASSENBOOST_URL}
                   target="_blank"
@@ -201,6 +201,8 @@ const KassenbonusPage = () => {
             captionsSrc="/videos/erklaerfilme/erklaervideo-kassenbonus-v1-de.vtt"
             eyebrow={t('explanationVideo.eyebrow')}
             title={t('explanationVideo.title')}
+            subtitle={t('explanationVideo.subtitle')}
+            disclosure={t('explanationVideo.disclosure')}
             ariaLabel={t('explanationVideo.aria')}
             className="bg-home-ice"
           />

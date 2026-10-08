@@ -8,7 +8,7 @@
   },
   "hero": {
     "eyebrow": "Choose your health insurer with confidence",
-    "title": "Which health insurer genuinely gives you more?",
+    "title": "How much money do you leave with your health fund every year?",
     "description": "The lowest contribution is only half the answer. Find out what you could save, which bonus is realistic and which benefits fit your everyday needs.",
     "cta": "Check my insurance advantage",
     "ctaHint": "Free · no contact details",
@@ -20,9 +20,18 @@
     "mapEyebrow": "Your comparison",
     "mapTitle": "What genuinely matters to you?",
     "mapItems": [
-      { "label": "Cost", "text": "What do you actually pay?" },
-      { "label": "Bonus", "text": "What can you realistically earn?" },
-      { "label": "Benefits", "text": "What helps in everyday life?" }
+      {
+        "label": "Cost",
+        "text": "What do you actually pay?"
+      },
+      {
+        "label": "Bonus",
+        "text": "What can you realistically earn?"
+      },
+      {
+        "label": "Benefits",
+        "text": "What helps in everyday life?"
+      }
     ],
     "mapNote": "Weigh it up. Understand it. Decide with confidence."
   },
@@ -154,11 +163,26 @@
     "eyebrow": "Frequently asked questions",
     "title": "Short and clear answers.",
     "items": [
-      { "q": "Do I need to switch before seeing the comparison?", "a": "No. You see your result first and then decide whether you want to start an application." },
-      { "q": "Is the cheapest insurer always recommended?", "a": "No. The cheapest suitable insurer is a clear price anchor. We also show alternatives when bonus, benefits, reputation or service matter more to you." },
-      { "q": "Is the displayed bonus guaranteed?", "a": "No. Bonus payments depend on the insurer's rules and the activities you actually complete and document. A responsible result distinguishes between a possible and a realistically achievable bonus." },
-      { "q": "Can a health insurance bonus pay for supplementary cover?", "a": "Depending on the achievable bonus and premium, this may be possible in part or in full. It is not guaranteed. Cash bonuses and earmarked reimbursements must be considered separately." },
-      { "q": "Does the comparison work for families?", "a": "Yes. Income, insurance status, children and personal circumstances belong in the calculation because they can affect contributions, long-term care insurance and eligible bonus activities." }
+      {
+        "q": "Do I need to switch before seeing the comparison?",
+        "a": "No. You see your result first and then decide whether you want to start an application."
+      },
+      {
+        "q": "Is the cheapest insurer always recommended?",
+        "a": "No. The cheapest suitable insurer is a clear price anchor. We also show alternatives when bonus, benefits, reputation or service matter more to you."
+      },
+      {
+        "q": "Is the displayed bonus guaranteed?",
+        "a": "No. Bonus payments depend on the insurer's rules and the activities you actually complete and document. A responsible result distinguishes between a possible and a realistically achievable bonus."
+      },
+      {
+        "q": "Can a health insurance bonus pay for supplementary cover?",
+        "a": "Depending on the achievable bonus and premium, this may be possible in part or in full. It is not guaranteed. Cash bonuses and earmarked reimbursements must be considered separately."
+      },
+      {
+        "q": "Does the comparison work for families?",
+        "a": "Yes. Income, insurance status, children and personal circumstances belong in the calculation because they can affect contributions, long-term care insurance and eligible bonus activities."
+      }
     ]
   },
   "final": {

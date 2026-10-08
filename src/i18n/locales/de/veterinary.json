@@ -124,9 +124,9 @@
     }
   },
   "form": {
-    "eyebrow": "03 · Healio beauftragen",
-    "title": "Gib uns jetzt den Auftrag zur Tarifprüfung.",
-    "subtitle": "Du erlaubst Healio, deine Angaben zu prüfen und dich persönlich zu passenden Tierkranken- oder Tier-OP-Versicherungen zu beraten. Ein Versicherungsantrag entsteht erst nach deiner gesonderten Entscheidung.",
+    "eyebrow": "03 · Kostenfreie Tarifprüfung",
+    "title": "Jetzt kostenfreie Tarifprüfung anfordern.",
+    "subtitle": "Wir prüfen passende Tarife für dein Tier unverbindlich und persönlich. Ein Versicherungsantrag entsteht erst nach deiner gesonderten Entscheidung.",
     "profileLabel": "Deine Auswahl",
     "next": {
       "eyebrow": "Was danach passiert",
@@ -162,7 +162,7 @@
     },
     "privacyPrefix": "Ich bin damit einverstanden, dass Healio meine Angaben zur Bearbeitung dieser Anfrage verarbeitet. Weitere Informationen stehen in den",
     "privacyLink": "Datenschutzhinweisen",
-    "submit": "Healio mit Tarifprüfung beauftragen",
+    "submit": "Kostenfreie Tarifprüfung starten ➔",
     "sending": "Anfrage wird gesendet …",
     "responseNote": "Kostenlos · noch kein Versicherungsantrag · persönliche Rückmeldung von Healio",
     "successTitle": "Deine Anfrage ist angekommen",

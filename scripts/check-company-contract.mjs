@@ -23,11 +23,11 @@ const bavLeverage = readText('src/components/company/CompanyBavLeverage.jsx');
 const page = readText('src/pages/UnternehmenPage.jsx');
 const seoRoutes = readText('scripts/seo-routes.mjs');
 
-assert.equal(de.hero.titleLead, 'Vorsorge, die Mitarbeiter verstehen.');
-assert.equal(de.hero.titleHighlight, 'Ein System, das Sie steuern.');
+assert.equal(de.hero.titleLead, 'Verwandeln Sie Lohnnebenkosten in Ihr');
+assert.equal(de.hero.titleHighlight, 'stärkstes Bindungsinstrument für Leistungsträger.');
 assert.equal(de.hero.analysisCta, 'Vorsorge-Check starten');
 assert.match(de.hero.description, /bAV, bKV und Gesundheitsmanagement/);
-assert.equal(en.hero.titleLead, 'Benefits employees understand.');
+assert.equal(en.hero.titleLead, 'Turn employment costs into your');
 assert.match(hero, /healio-hero-markenrelief-v1\.webp/);
 assert.match(hero, /object-\[62%_center\]/);
 assert.doesNotMatch(hero, /healio-wordmark-white/);

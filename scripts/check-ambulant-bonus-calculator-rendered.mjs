@@ -48,6 +48,7 @@ try {
   await page.setViewport({ width: 1440, height: 1000 });
   await page.goto(`http://127.0.0.1:${address.port}/ambulant`, { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('button[aria-label="Schutzimpfung: Anzahl erhöhen"]');
+  assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The outpatient bonus calculator must be open on initial render.');
 
   const exerciseCounter = async ({ incrementLabel, attempts }) => {
     const interactionFound = await page.evaluate(({ incrementLabel: label, attempts: clickCount }) => {
@@ -108,6 +109,7 @@ try {
       [...document.querySelectorAll('strong')]
         .some((node) => node.textContent.trim() === expectedAmount)
     ), {}, amount);
+    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The dental bonus calculator must be open on initial render.');
 
     return page.evaluate(({ expectedAmount, expectedCta }) => {
       const amountNode = [...document.querySelectorAll('strong')]

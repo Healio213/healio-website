@@ -74,6 +74,7 @@ const COPY = {
 
 const SHOW_AFTER_PX = 520;
 const BUBBLE_DELAY_MS = 30_000;
+const DENTAL_BUBBLE_DELAY_MS = 35_000;
 const DISMISS_KEY = 'healio-nita-bubble-dismissed';
 // Erklärvideo der Seite (Ambulant, Stationär, Zahn). Fehlt es, gilt das
 // Ersatzziel (siehe unten); gibt es auch das nicht, entfällt der Knopf.
@@ -172,7 +173,9 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
   const [bubbleDue, setBubbleDue] = useState(false);
   const [bubbleDismissed, setBubbleDismissed] = useState(readDismissed);
   const hideKey = hideNearIds.join('|');
-  const webAvailable = HEALIO_VOICE_CONTACT_ENABLED && !NITA_PANEL_BLOCKED_PATHS.has(pathname.replace(/\/+$/, '') || '/');
+  const normalizedPath = pathname.replace(/\/+$/, '') || '/';
+  const webAvailable = HEALIO_VOICE_CONTACT_ENABLED && !NITA_PANEL_BLOCKED_PATHS.has(normalizedPath);
+  const isDentalRoute = normalizedPath === '/zahn' || normalizedPath === '/en/dental';
 
   // Eine Messung für alles: Scrolltiefe, Fuß und Kontaktblöcke, Formularfelder.
   // Über dem Formular und dem Footer hat die Leiste nichts zu suchen, dort
@@ -230,13 +233,14 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
     };
   }, [hideKey]);
 
-  // 30 Sekunden nach dem Seitenaufruf wird die Blase fällig, außer sie wurde
-  // in dieser Sitzung schon weggeklickt.
+  // Auf Zahn bleibt der Check mindestens 35 Sekunden ohne Sprechblase.
+  // Bei einem Routenwechsel beginnt die Wartezeit neu.
   useEffect(() => {
-    if (bubbleDismissed || bubbleDue) return undefined;
-    const timer = window.setTimeout(() => setBubbleDue(true), BUBBLE_DELAY_MS);
+    setBubbleDue(false);
+    if (bubbleDismissed) return undefined;
+    const timer = window.setTimeout(() => setBubbleDue(true), isDentalRoute ? DENTAL_BUBBLE_DELAY_MS : BUBBLE_DELAY_MS);
     return () => window.clearTimeout(timer);
-  }, [bubbleDismissed, bubbleDue]);
+  }, [bubbleDismissed, isDentalRoute, pathname]);
 
   const dismissBubble = useCallback(() => {
     writeDismissed();

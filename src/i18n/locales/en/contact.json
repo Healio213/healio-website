@@ -6,7 +6,10 @@
     "addressValue": "Healio GmbH\nArndtstr. 6\n22085 Hamburg",
     "email": "Email",
     "phone": "Phone",
-    "startCall": "Start Call"
+    "startCall": "Start Call",
+    "locationTitle": "Hamburg headquarters location",
+    "locationAddress": "Arndtstraße 6, 22085 Hamburg (Uhlenhorst)",
+    "locationBadge": "Personal contact · advice without sales pressure"
   },
   "form": {
     "name": "Name *",

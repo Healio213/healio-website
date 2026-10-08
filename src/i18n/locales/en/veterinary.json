@@ -98,9 +98,9 @@
     }
   },
   "form": {
-    "eyebrow": "03 · Commission Healio",
-    "title": "Now commission us to review suitable plans.",
-    "subtitle": "You authorise Healio to review your information and personally advise you on suitable pet health or surgery-only cover. An insurance application is only made after a separate decision by you.",
+    "eyebrow": "03 · Free plan review",
+    "title": "Request your free plan review now.",
+    "subtitle": "We personally review suitable plans for your animal without obligation. An insurance application is only made after a separate decision by you.",
     "profileLabel": "Your selection",
     "next": {
       "eyebrow": "What happens next",
@@ -136,7 +136,7 @@
     },
     "privacyPrefix": "I agree that Healio may process my information to handle this inquiry. More information is available in the",
     "privacyLink": "privacy notice",
-    "submit": "Commission Healio to review plans",
+    "submit": "Start your free plan review ➔",
     "sending": "Sending request …",
     "responseNote": "Free of charge · not an insurance application · personal response from Healio",
     "successTitle": "Your inquiry has arrived",

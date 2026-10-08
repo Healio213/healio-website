@@ -141,10 +141,10 @@ const ZahnPage = () => {
                   id="zahn-hero-heading"
                   className="mt-5 max-w-[17ch] font-display text-[clamp(1.9rem,9vw,2.4rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-[clamp(2.4rem,4.6vw,4.25rem)] [text-wrap:balance]"
                 >
-                  <span className="block">{content.hero.titleLead}</span>
+                  <span className="block">{content.hero.titleLead}</span>{' '}
                   <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
                 </HeroHeading>
-                <p className="mt-4 max-w-xl text-lg leading-7 text-slate-200 md:mt-6 sm:text-xl">
+                <p className="mt-4 max-w-xl text-base leading-6 text-slate-200 sm:text-xl sm:leading-7 md:mt-6">
                   {content.hero.text}
                 </p>
 
@@ -155,6 +155,7 @@ const ZahnPage = () => {
                 >
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{content.hero.condition}</p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
                   {content.hero.micro.map((item) => (
@@ -335,6 +336,7 @@ const ZahnPage = () => {
 
         <CompactBonusFeature
           className="order-1 bg-[#f8faf9] md:order-none"
+          defaultOpen={true}
           mobileSwipe
           calculatorProps={{
             tarifTypes: 'Zahn',

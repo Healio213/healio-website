@@ -61,6 +61,8 @@ const MainHomePage = () => {
             captionsSrc="/videos/erklaerfilme/erklaervideo-startseite-v1-de.vtt"
             eyebrow={t('explanationVideo.eyebrow')}
             title={t('explanationVideo.title')}
+            subtitle={t('explanationVideo.subtitle')}
+            disclosure={t('explanationVideo.disclosure')}
             ariaLabel={t('explanationVideo.aria')}
             className="bg-white"
           />

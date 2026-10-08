@@ -1,20 +1,20 @@
 const content = {
   de: {
     home: {
-      titleLead: 'Dein Kassenbonus',
-      titleAccent: 'ist zu wertvoll, um ihn ungenutzt zu lassen.',
-      description: 'Dein Kassenbonus kann den Beitrag für deinen Zusatzschutz ganz oder teilweise ausgleichen, ob stationär, Zahn oder ambulant. Ambulant sind bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren möglich, für Heilpraktiker, Osteopathie, Brille und Vorsorge.',
+      titleLead: 'Warum lassen Sie jedes Jahr hunderte Euro',
+      titleAccent: 'bei Ihrer Krankenkasse liegen?',
+      description: 'Kassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.',
       condition: 'Dein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.',
-      cta: 'KassenBoost Potenzial prüfen',
-      hint: 'Beitrag, Bonus und Leistungen getrennt vergleichen. Ein Kassenwechsel bleibt deine Entscheidung.',
+      cta: 'Kassenpotenzial in 90 Sekunden prüfen',
+      hint: '100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch',
       panelTitle: 'Die Rechnung beginnt bei deiner Kasse.',
       panelText: 'Beispielrechnung: was dein Zusatzschutz nach Bonusausgleich tatsächlich kostet.',
       // Beitrag: SDK Ambulant 100 (AP1), Altersgruppe 31 bis 40, 39,19 EUR im Monat
       // (src/data/sdkAmbulantBeitraege.js). Bonus: unterer Wert der üblichen
-      // 400 bis 700 EUR bei der IKK classic, laut Satzung bis zu 810 EUR.
+      // 400 EUR als Rechenannahme; tatsächlicher Zuschuss individuell nachweisen.
       calculation: [
         { sign: '', label: 'Jahresbeitrag Zusatzversicherung', value: '470,28 EUR', detail: 'Beispiel: 35 Jahre, SDK Ambulant 100 (AP1) mit 39,19 EUR im Monat. Den Beitrag zahlst du zunächst selbst.' },
-        { sign: '−', label: 'Erreichter Kassenbonus', value: '400,00 EUR', detail: 'Beispielwert IKK classic. Üblich sind 400 bis 700 EUR im Jahr, laut Satzung bis zu 810 EUR, bei erfüllten Bedingungen und anerkannten Nachweisen.' },
+        { sign: '−', label: 'Erreichter Kassenbonus', value: '400,00 EUR', detail: 'Rechenannahme für den IKK-classic-Zuschuss, kein garantierter Betrag. Erfüllte Bonusbedingungen, anerkannte Maßnahmen und eigene Kosten entscheiden.' },
         { sign: '=', label: 'Dein verbleibender Jahresbeitrag', value: '70,28 EUR', detail: 'Rund 5,86 EUR im Monat. Der Ausgleich erfolgt nachträglich, bis zur Höhe der anrechenbaren Kosten.' },
       ],
       panelNote: 'Tarifbudget für versicherte Leistungen. Kassenbonus zum Beitragsausgleich. Maßgeblich sind die jeweiligen Tarif- und Bonusbedingungen.',
@@ -39,7 +39,7 @@ const content = {
     zahn: {
       titleLead: 'Dein Lächeln ist dein stärkstes Statussignal.',
       titleAccent: 'Warum überlässt du es dem Kassenstandard?',
-      description: 'Die Kasse zahlt bei Zahnersatz einen Festzuschuss. Prüfe, wie du deinen Eigenanteil absichern kannst und welcher Tarifweg zu deiner Situation passt.',
+      description: 'Bis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe im Tarif ZahnPRIVAT 100, einschließlich Kassenleistung. So reduzierst du deinen Eigenanteil tarifgemäß. Dein Kassenbonus kann den Versicherungsbeitrag je nach Kasse und Aktivitäten ganz oder teilweise ausgleichen.',
       condition: 'Bis zu 100 % Erstattung nach Tarif und Kassenleistung. Annahme, Leistungsstaffeln und bereits empfohlene oder laufende Behandlungen werden gesondert geprüft.',
       cta: 'Passenden Zahnschutz prüfen',
       hint: 'Vier kurze Fragen. Ohne Kontaktdaten. Die verbindliche Annahme erfolgt im Antrag.',
@@ -80,17 +80,17 @@ const content = {
   },
   en: {
     home: {
-      titleLead: 'Your health fund bonus',
-      titleAccent: 'is too valuable to leave unused.',
-      description: 'Your statutory health fund’s bonus may offset some or all of the premium for your supplementary cover, whether inpatient, dental or outpatient. Outpatient cover offers up to EUR 3,000 in health benefits over 2 years for alternative practitioners, osteopathy, glasses and preventive care.',
+      titleLead: 'Why leave hundreds of euros',
+      titleAccent: 'with your health fund every year?',
+      description: 'Health fund bonuses are not paid automatically. If you meet the conditions, you need to claim them. The KassenBoost method helps you use this potential for suitable supplementary cover: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable options for dental and hospital cover.',
       condition: 'Your fund, activities, plan and eligible expenses determine the result. EUR 3,000 is the sum of separate plan limits, not a cash balance.',
-      cta: 'Check your KassenBoost potential',
-      hint: 'Compare contributions, bonuses and benefits separately. Changing health funds remains your decision.',
+      cta: 'Check health fund potential in 90 seconds',
+      hint: '100% free · No obligation to switch · No home visit',
       panelTitle: 'Start the calculation with your health fund.',
       panelText: 'Example: what your supplementary cover actually costs after the bonus offset.',
       calculation: [
         { sign: '', label: 'Annual supplementary premium', value: 'EUR 470.28', detail: 'Example: age 35, SDK Ambulant 100 (AP1) at EUR 39.19 per month. You pay the premium first.' },
-        { sign: '−', label: 'Bonus achieved', value: 'EUR 400.00', detail: 'Example value IKK classic. 400 to 700 EUR per year is typical, up to EUR 810 under the fund’s statutes, subject to the conditions and accepted evidence.' },
+        { sign: '−', label: 'Bonus achieved', value: 'EUR 400.00', detail: 'Illustrative assumption for the IKK classic subsidy, not a guaranteed amount. Bonus conditions, recognised activities and your own eligible costs determine the result.' },
         { sign: '=', label: 'Your remaining annual premium', value: 'EUR 70.28', detail: 'About EUR 5.86 per month. The offset is paid later, up to the eligible expenses.' },
       ],
       panelNote: 'Plan benefits reimburse insured services. The statutory bonus may offset your premium. The respective plan and bonus conditions apply.',
@@ -115,7 +115,7 @@ const content = {
     zahn: {
       titleLead: 'Your smile is your strongest status signal.',
       titleAccent: 'Why let statutory coverage set the standard?',
-      description: 'Your statutory health fund pays a fixed subsidy for dentures. Check how you can cover your remaining share and which plan pathway fits your situation.',
+      description: 'Up to 100% of eligible costs for implants, crowns and preventive dental care under ZahnPRIVAT 100, including statutory benefits. Reduce your share under the plan terms. Depending on your fund and activities, your bonus may offset some or all of the insurance premium.',
       condition: 'Up to 100% reimbursement subject to the plan and statutory contribution. Benefit scales, acceptance and recommended or ongoing treatment are checked separately.',
       cta: 'Check suitable dental cover',
       hint: 'Four short questions. No contact details. Binding acceptance takes place in the application.',
