@@ -47,14 +47,15 @@ const shape = (value) => {
 };
 assert.deepEqual(shape(en), shape(de), 'DE und EN des Vorsorge-Bausteins müssen dieselben Schlüssel und Listenlängen haben.');
 
-// 2. Platzierung: unter der SDK-Tarifwahl, vor der IKK-Wechsel-Strecke, nur auf
-//    /ambulant und /en/outpatient.
+// 2. Platzierung: unter der SDK-Tarifwahl, vor der IKK-Wechsel-Strecke im
+//    Desktop-Quelltext, nur auf /ambulant und /en/outpatient. Die mobile
+//    Wischkarten-Option verändert die Platzierung des Bausteins nicht.
 const tarifStart = flow.indexOf('id="tarifwahl"');
 const bausteinAt = flow.indexOf('<AmbulantVorsorgeBaustein />');
 const overviewAt = flow.indexOf('{copy.tiers.overviewTitle}');
-const ikkAt = flow.indexOf('<AmbulantIKKWechsel variant="ambulant" />');
+const ikkAt = flow.search(/<AmbulantIKKWechsel\s+variant="ambulant"(?:\s+mobileSwipe)?\s*\/>/);
 assert(tarifStart > -1 && overviewAt > tarifStart && bausteinAt > overviewAt, 'Der Vorsorge-Baustein steht unter der SDK-Tarifübersicht.');
-assert(bausteinAt < ikkAt, 'Die IKK-Wechsel-Strecke bleibt direkt nach dem Tarifwahl-Abschnitt.');
+assert(ikkAt > bausteinAt, 'Die IKK-Wechsel-Strecke bleibt im Desktop-Quelltext nach dem Tarifwahl-Abschnitt mit dem Vorsorge-Baustein.');
 assert.equal((flow.match(/<AmbulantVorsorgeBaustein \/>/g) || []).length, 1, 'Der Vorsorge-Baustein erscheint genau einmal.');
 assert(/\{showVorsorgeBaustein && <AmbulantVorsorgeBaustein \/>\}/.test(flow), 'Der Baustein erscheint nur mit der Routen-Freigabe.');
 assert(/const showVorsorgeBaustein = !fromBonusTopic\s*&& \(vorsorgePath === '\/ambulant' \|\| vorsorgePath === '\/en\/outpatient'\);/.test(flow), 'Der Baustein gilt nur für /ambulant und /en/outpatient, nie auf dem Themen-Anschluss.');

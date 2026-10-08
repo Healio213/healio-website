@@ -40,7 +40,7 @@
     "test:ambulant-bonus-model": "node scripts/check-ambulant-bonus-calculator-model.mjs",
     "test:ambulant-bonus-rendered": "node scripts/check-ambulant-bonus-calculator-rendered.mjs",
     "test:appointment": "node --test scripts/check-appointment-booking.mjs && node scripts/check-appointment-rendered.mjs",
-    "test:pregnancy": "node --test scripts/check-pregnancy-bonus-model.mjs && node scripts/check-pregnancy-integration.mjs && node scripts/check-pregnancy-bonus-rendered.mjs && node scripts/check-bruno-ambulant-rendered.mjs && node scripts/check-bruno-final-flow.mjs",
+    "test:pregnancy": "node --test scripts/check-pregnancy-bonus-model.mjs && node scripts/check-pregnancy-integration.mjs && node scripts/check-pregnancy-bonus-rendered.mjs && node scripts/check-bruno-ambulant-rendered.mjs && node scripts/check-bruno-final-flow.mjs && node scripts/check-pregnancy-guidance-rendered.mjs",
     "test:privacy": "node scripts/check-privacy-consent-contract.mjs",
     "test:google-ads": "node scripts/check-google-ads-conversions.mjs",
     "test:leitfaden": "node scripts/check-praxis-leitfaden-contract.mjs",

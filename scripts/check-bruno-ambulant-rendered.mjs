@@ -47,7 +47,8 @@ try {
   };
   const readFlow = () => page.evaluate(() => {
     const tariffSection = document.querySelector('#tarifwahl');
-    const hero = document.querySelector('section[aria-labelledby="hero-heading"]');
+    const hero = [...document.querySelectorAll('section[data-desktop-lead="ambulant"], section[aria-labelledby="hero-heading"]')]
+      .find((section) => section.getClientRects().length > 0);
     const heroMarkup = hero.cloneNode(true);
     // Motion's transient inline styles do not change the standard hero contract.
     heroMarkup.querySelectorAll('[style]').forEach((node) => node.removeAttribute('style'));
@@ -63,11 +64,13 @@ try {
       hasContinuation: Boolean(document.querySelector('#bonus-topic-continuation-heading')),
       calculatorControls: document.querySelectorAll('button[aria-label="Mutterschaftsvorsorge: Anzahl erhöhen"]').length,
       content,
-      heroTitle: hero.querySelector('h1').textContent,
+      heroTitle: hero.querySelector('h1').innerText.replace(/\s+/g, ' ').trim(),
       heroText: hero.textContent,
       heroMarkup: heroMarkup.outerHTML,
-      heroTargets: [...hero.querySelectorAll('a')].map((link) => link.getAttribute('href')),
-      heroNote: hero.querySelector('[role="note"]')?.textContent || '',
+      heroTargets: [...new Set([...hero.querySelectorAll('a[href^="#"]')].map((link) => link.getAttribute('href')))],
+      heroNote: hero.querySelector('[role="note"]')?.textContent
+        || [...hero.querySelectorAll('p')].find((paragraph) => paragraph.textContent.includes('Bereits angeratene oder begonnene'))?.textContent
+        || '',
       bonusLinks: sections.flatMap((section) => [...section.querySelectorAll('a')])
         .filter((link) => new URL(link.href).pathname.endsWith('/kassenboost')).length,
       quoteUrl: tariffSection.querySelector('a[target="_blank"]')?.getAttribute('href'),
@@ -87,8 +90,8 @@ try {
   assert.equal(ordinary.hasContinuation, false);
   assert.equal(ordinary.calculatorControls, 1, 'Der normale Bonusrechner muss erhalten bleiben.');
   assert(ordinary.bonusLinks > 0, 'Der normale KassenBoost-Anschluss muss erhalten bleiben.');
-  assert.equal(ordinary.heroTitle, 'Dein 3.000 EUR Gesundheitsbudget. Effektiv ab 0 EUR.', 'Der allgemeine Hero darf durch den Herkunftszweig nicht neu getextet werden.');
-  assert.match(ordinary.heroText, /Heilpraktiker, Brille und Vorsorge absichern\. 0 EUR effektiv sind möglich, wenn dein anerkannter Kassenbonus den selbst gezahlten Beitrag vollständig ausgleicht\./);
+  assert.equal(ordinary.heroTitle, 'Warum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?', 'Der veröffentlichte allgemeine Desktop-Hero darf durch den Herkunftszweig nicht neu getextet werden.');
+  assert.match(ordinary.heroText, /Bis zu 3\.000 EUR Tarifleistungen in 2 Jahren für Heilpraktiker, Osteopathie, Sehhilfen und Vorsorge\. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen\./);
   assert.deepEqual(ordinary.heroTargets, ['#budget-kompass']);
   assert.equal(ordinary.heroNote, '');
 
@@ -141,9 +144,9 @@ try {
   }
 
   await open('/en/outpatient');
-  const ordinaryEnglish = await page.$eval('section[aria-labelledby="hero-heading"]', (hero) => hero.textContent);
+  const ordinaryEnglish = await page.$eval('section[data-desktop-lead="ambulant"]', (hero) => hero.textContent);
   await open('/en/outpatient?src=reel-f05');
-  assert.equal(await page.$eval('section[aria-labelledby="hero-heading"]', (hero) => hero.textContent), ordinaryEnglish, 'Der deutsche Herkunftszweig darf die englische Route nicht verändern.');
+  assert.equal(await page.$eval('section[data-desktop-lead="ambulant"]', (hero) => hero.textContent), ordinaryEnglish, 'Der deutsche Herkunftszweig darf die englische Route nicht verändern.');
 
   await page.setViewport({ width: 390, height: 844 });
   await open('/ambulant?src=reel-f05#tarifwahl');

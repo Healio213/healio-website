@@ -4,6 +4,7 @@ import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import PregnancyBonusExample from '@/components/PregnancyBonusExample';
+import { AlreadyPregnantNotice, PregnancyCoverageComparison, PregnancyStageEntry } from '@/components/PregnancyGuidance';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
@@ -29,12 +30,12 @@ const TOPICS = {
     path: '/schwangerschaft',
     // Kopfzeile nach Eisert: Ergebnis, Bedingung, Einwand gleich vorweg.
     title: 'Schwanger? Laut Satzung sind <highlight>bis zu 1.155\u00a0EUR</highlight> für dich drin.',
-    lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz das Geld und hol dir den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
+    lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz den Zuschuss für den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
     leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
     seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     protectionTitle: 'Vorsorge ohne Wartezeit',
-    protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder die Nackenfaltenmessung, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
+    protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder Streptokokken, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
     caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
@@ -62,8 +63,8 @@ const paths = [
     title: 'Vorsorge, die du gerade brauchst',
     body: [
       'Der Vorsorge-Topf der SDK AP-Tarife greift auch dann, wenn deine Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in diesen Tarifen nicht. Je nach Stufe werden 50 bis 100 Prozent erstattet, bei AP1 bis zu 500 EUR je zwei Kalenderjahre.',
-      'Bezahlt werden damit die Untersuchungen, die dir deine Praxis als Selbstzahlerleistung anbietet: Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken, Cytomegalie und die Nackenfaltenmessung.',
-      'Nicht dabei sind die Entbindung, die Behandlung von Beschwerden und Komplikationen wegen der Schwangerschaft und gendiagnostische Tests wie NIPT. Nur auf Auslandsreisen zahlt der Tarif auch bei Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
+      'Bezahlt werden damit die Untersuchungen, die dir deine Praxis als Selbstzahlerleistung anbietet: Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken und Cytomegalie.',
+      'Nicht dabei sind die Entbindung, die Behandlung von Beschwerden und Komplikationen wegen der Schwangerschaft und gendiagnostische Tests. Nur auf Auslandsreisen zahlt der Tarif auch bei Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
     ],
   },
   {
@@ -107,7 +108,7 @@ const film = [['10 gesetzliche Schwangerschaftsvorsorgen', '300 EUR'], ['Ein ane
 // Kurzfassung für die Karten; die vollständigen Texte stehen im Aufklapper.
 // Einschränkungen (limit: true) stehen mit Hinweis-Symbol, nie mit Haken.
 const ambulantPoints = [
-  { text: 'Feinultraschall, Toxoplasmose, Streptokokken, Nackenfaltenmessung: Diese Selbstzahlerleistungen zahlt der Vorsorge-Topf, auch wenn du schon schwanger bist.' },
+  { text: 'Feinultraschall, Toxoplasmose, Streptokokken: Diese Selbstzahlerleistungen zahlt der Vorsorge-Topf, auch wenn du schon schwanger bist.' },
   { text: 'Keine Wartezeit, je nach Stufe 50 bis 100 Prozent Erstattung.' },
   { text: 'Nicht dabei sind Entbindung und Komplikationen. Beantworte die Gesundheitsfragen im Antrag vollständig.', limit: true },
 ];
@@ -169,7 +170,7 @@ export default function BenefitFunnelPage() {
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
     ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten dagegen versichert.'],
-    ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus, ohne Wartezeit. Die Betreuung zu Hause, Hausgeburt und Geburtshaus gehören dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Dort gibt es keine allgemeine Wartezeit, für die Entbindung gilt eine Wartezeit von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.'],
+    ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause, Hausgeburt und Geburtshaus gehören dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Für die Entbindung gilt eine Wartezeit von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],
     ['Wie entstehen die bis zu 3.000 EUR Gesundheitsbudget?', 'Im SDK-Tarif Ambulant 100 (AP1) gibt es je zwei Kalenderjahre vier getrennte Leistungstöpfe: bis zu 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge, Impfungen und Präventionskurse sowie 1.000 EUR für Hilfsmittel nach GKV-Vorleistung und gesetzliche Zuzahlungen. Erstattet werden versicherte Kosten innerhalb dieser Grenzen, keine pauschale Barauszahlung. Maßgeblich sind Versicherungsbeginn und Tarifbedingungen. Das 630-EUR-Bonusbeispiel ist davon getrennt: Ein anerkannter Bonuszuschuss kann den Beitrag mitfinanzieren, erhöht aber nicht die Leistungstöpfe.'],
     ['Wie läuft der Antrag ab?', 'Du wählst auf der nächsten Seite deine Stufe und öffnest den Rechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein und siehst deinen Beitrag. Danach folgen deine Antragsdaten mit den Gesundheitsfragen und eine Zusammenfassung, bevor du den Antrag abschickst. Einen Termin brauchst du nicht.'],
@@ -309,6 +310,8 @@ export default function BenefitFunnelPage() {
           </div>
         </section>
 
+        <AlreadyPregnantNotice />
+
         {/* Experiment 06.10.2026: mobil stehen die Testsiegel direkt unter dem Einstieg
             (Reihenfolge: Einstieg, Siegel, Ablauf, Wege, Bonus, Fragen). Ab md bleiben sie
             wie bisher im Bonus-Abschnitt; die Hälfte hier ist dort ausgeblendet und
@@ -338,6 +341,8 @@ export default function BenefitFunnelPage() {
             ))}
           </MobileSwipeRow>
         </section>
+
+        <PregnancyCoverageComparison />
 
         <section id="drei-wege" aria-labelledby="drei-wege-heading" className="scroll-mt-28 bg-home-ice py-12 md:py-20">
           <div className={wrap}>
@@ -375,7 +380,7 @@ export default function BenefitFunnelPage() {
                   <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>
                   <div className="mt-3 space-y-3 text-base leading-relaxed text-home-slate">
                     <p><strong>Zwischen Versicherungsbeginn und Geburt weniger als drei Monate:</strong> Dann passt die SDK. Dort genügt es, dass ein Elternteil am Tag der Geburt versichert ist.</p>
-                    <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK hat keine Wartezeiten, schließt aber eine beim Antrag schon festgestellte Schwangerschaft aus. Dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
+                    <p><strong>Mindestens drei Monate:</strong> Dann hast du die Wahl. Die Bayerische verlangt drei Monate Vorversicherung und ist für dein Kind bis 15 Jahre günstiger, im Prestige 4,10 EUR und im Komfort 3,20 EUR im Monat. Die Entbindung selbst versichert sie erst nach acht Monaten. Die SDK schließt eine beim Antrag schon festgestellte Schwangerschaft aus. Dort kostet dein Kind bis 15 Jahre im SP1 5,60 EUR und im SP2 3,37 EUR im Monat.</p>
                     <p>Dein Kind meldest du beim selben Versicherer an, bei dem du versichert bist.</p>
                     <ul className="list-disc space-y-2 pl-5">
                       {hospitalArguments.map((argument) => <li key={argument.slice(0, 40)}>{argument}</li>)}
@@ -413,6 +418,7 @@ export default function BenefitFunnelPage() {
             <p className="px-4 pb-2 text-base leading-relaxed text-home-slate">{kasseVergleichen}</p>
           </div>
           <div className="mt-6 sm:mt-8">
+            <PregnancyStageEntry ambulantPath={productPath} />
             <PregnancyBonusExample />
             <details className="mt-4 rounded-2xl bg-home-ice p-5 sm:p-8">
               <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>Was du dafür brauchst und wie gerechnet wird</summary>

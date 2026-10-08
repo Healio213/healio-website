@@ -23,10 +23,7 @@ try {
     const blockedDataRequest = request.method() !== 'GET'
       || ['xhr', 'fetch', 'ping', 'eventsource', 'websocket'].includes(type)
       || /^\/(?:api(?:\/|$)|_vercel\/|cdn-cgi\/rum)/.test(url.pathname);
-    const publicAsset = (url.hostname === 'fonts.googleapis.com' && type === 'stylesheet')
-      || (url.hostname === 'fonts.gstatic.com' && type === 'font')
-      || (url.hostname === 'horizons-cdn.hostinger.com' && type === 'image');
-    if (!blockedDataRequest && (url.origin === origin || url.protocol === 'data:' || publicAsset)) request.continue();
+    if (!blockedDataRequest && (url.origin === origin || ['data:', 'blob:'].includes(url.protocol))) request.continue();
     else request.abort();
   });
   await page.evaluateOnNewDocument(() => localStorage.setItem('healio:consent:v2', JSON.stringify({ version: 2, decided: true, preferences: { analytics: false, google_calendar: false, maps: false, openai: false }, updatedAt: '2026-09-08T10:00:00.000Z' })));
@@ -50,7 +47,8 @@ try {
       throw new Error(`${error.message}; local JS errors: ${JSON.stringify(errors)}; body: ${await page.$eval('body', node => node.innerText.slice(0, 500))}`);
     });
     await settleRealFonts();
-    assert(await page.evaluate(() => [...document.fonts].some(font => font.status === 'loaded' && font.family.replaceAll('"', '') === 'Baloo 2')), 'The pregnancy page must be checked with its loaded public display font.');
+    assert(await page.evaluate(() => [...document.fonts].some(font => font.status === 'loaded' && font.family.replaceAll('"', '') === 'Manrope')), 'The pregnancy page must be checked with its actually loaded local Manrope display font.');
+    assert(await page.evaluate(() => getComputedStyle(document.querySelector('h1')).fontFamily.startsWith('Manrope')), 'The pregnancy page must use the current locally loaded Manrope display font.');
     await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
     assert(await page.$('#fragen [data-product-link]'), 'The reader needs a direct tariff CTA after the FAQ, without returning to the top.');
     const links = await page.$$eval('[data-product-link]', nodes => nodes.map(node => ({ href: node.getAttribute('href'), text: node.textContent })));
@@ -72,7 +70,7 @@ try {
     assert.equal(page.url(), `${origin}/ambulant?src=reel-f05#tarifwahl`);
     assert(await page.$('#bonus-topic-continuation-heading'));
     const hero = await page.$eval('section[aria-labelledby="hero-heading"]', node => node.textContent);
-    assert.doesNotMatch(hero, /effektiv ab 0|ohne Wartezeit/i, 'The topic entry must not imply automatic pregnancy coverage.');
+    assert.doesNotMatch(hero, /effektiv ab 0|ohne Wartezeit[^.!?]*Entbindung|Entbindung[^.!?]*ohne Wartezeit/i, 'The topic entry must not imply a zero premium or childbirth cover without its waiting period.');
     await assertFits(`Campaign Ambulant at ${width}px with real fonts`);
 
     await page.goto(`${origin}/ambulant`, { waitUntil: 'networkidle0' });
@@ -81,7 +79,7 @@ try {
     await assertFits(`Ordinary Ambulant at ${width}px with real fonts`);
   }
   assert.deepEqual(errors, []);
-  console.log('Final Bruno flow passed with loaded Inter/Manrope/Baloo fonts: matching lower CTA, visible/structured budget FAQ, actual direct tariff transition, neutral topic hero, campaign and ordinary Ambulant without overflow at 1440/390/320px.');
+  console.log('Final Bruno flow passed with locally loaded Inter/Manrope fonts: matching lower CTA, visible/structured budget FAQ, actual direct tariff transition, neutral topic hero, campaign and ordinary Ambulant without overflow at 1440/390/320px.');
 } finally {
   await browser?.close();
   await server.close();

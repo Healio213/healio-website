@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
 import { createServer } from 'vite';
+import { HEALIO_VOICE_CONTACT_ENABLED } from '../src/config/contactChannels.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const visualAssets = process.env.PREGNANCY_VISUAL_ASSETS === '1';
@@ -26,11 +27,7 @@ try {
   page.on('request', request => {
     const url = request.url();
     const host = new URL(url).hostname;
-    const publicAsset = visualAssets && (
-      (host === 'fonts.googleapis.com' && request.resourceType() === 'stylesheet')
-      || (host === 'fonts.gstatic.com' && request.resourceType() === 'font')
-      || (host === 'horizons-cdn.hostinger.com' && request.resourceType() === 'image')
-    );
+    const publicAsset = visualAssets && host === 'horizons-cdn.hostinger.com' && request.resourceType() === 'image';
     if (url.startsWith(origin) || url.startsWith('data:') || publicAsset) request.continue();
     else request.abort(); // No provider, insurer or tracking requests in this test.
   });
@@ -62,7 +59,7 @@ try {
       pageImages: [...document.querySelectorAll('main section img')].every(img => img.complete && img.naturalWidth > 0),
     }));
     console.log('Public visual assets:', assets);
-    assert(assets.logo && assets.pageImages && assets.fonts.some(font => font.includes('Baloo')), 'Visual review requires the real logo, figures and friendly font');
+    assert(assets.logo && assets.pageImages && assets.fonts.some(font => font.includes('Manrope')), 'Visual review requires the real logo, figures and current local Manrope font');
   }
   // Native test clicks must not race the site's animated anchor scrolling.
   await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
@@ -156,7 +153,7 @@ try {
   assert.deepEqual(errors, []);
   // The suppression is route-local; the existing site contact entry points stay.
   await page.goto(`${origin}/leistungen`, { waitUntil: 'networkidle0' });
-  assert(await page.$('[aria-label="Sprachpanel mit Nita öffnen"]'), 'The normal site must retain its voice launcher');
+  assert.equal(Boolean(await page.$('[aria-label="Sprachpanel mit Nita öffnen"]')), HEALIO_VOICE_CONTACT_ENABLED, 'The normal site voice launcher must follow the operational contact flag');
   assert(await page.$('[data-healio-whatsapp="floating"]'), 'The normal site must retain its WhatsApp launcher');
   assert.deepEqual(errors, []);
   console.log('Pregnancy rendered flow passed: collapsed illustration, native CTA/toggle, conditions, empty/630/partial/premium/status cases, no stored answers, links, schema, 1440/390/320px.');

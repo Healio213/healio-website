@@ -193,10 +193,24 @@ try {
     assert.equal(current.documentWidth, viewport.width, 'Partner fills the width without page overflow');
     assert.equal(current.outsideHeroText, baseline.outsideHeroText, 'Partner content outside the hero is unchanged');
     assert.deepEqual(current.swipeCards, baseline.swipeCards, 'Partner swipe cards are preserved');
-    const primary = await page.$('main section button');
+    // Partner has separate desktop and mobile heroes. Select the booking
+    // action inside the visible hero, rather than the hidden desktop button
+    // that appears first in the document on a phone.
+    const primaryHandle = await page.evaluateHandle(() => {
+      const heading = [...document.querySelectorAll('main h1')].find((node) => node.getClientRects().length);
+      return [...(heading?.closest('section')?.querySelectorAll('button') || [])].find((node) => (
+        node.getClientRects().length && node.innerText.trim() === '30-minütiges Kennenlernen buchen'
+      ));
+    });
+    const primary = primaryHandle.asElement();
     assert(primary, 'Partner hero retains its booking button');
+    assert(await page.$('#google-termin'), 'Partner booking CTA has a real destination');
     await primary.click();
     await page.waitForFunction(() => window.scrollY > 80);
+    await page.waitForFunction(() => {
+      const top = document.getElementById('google-termin')?.getBoundingClientRect().top;
+      return top >= 0 && top < window.innerHeight;
+    });
     report.navigation.push({ path: '/partner', viewport, heading: current.headings[0], bookingConsent: 'necessary-only', bookingScroll: true });
     if (viewport.width === 390 || viewport.width === 1440) {
       await page.evaluate(() => window.scrollTo(0, 0));

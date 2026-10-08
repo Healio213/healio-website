@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { JSDOM } from 'jsdom';
 
 const de = fs.readFileSync(new URL('../dist/unternehmen/vorsorge-rechner/index.html', import.meta.url), 'utf8');
 const en = fs.readFileSync(new URL('../dist/en/companies/pension-calculator/index.html', import.meta.url), 'utf8');
@@ -21,7 +22,10 @@ for (const [language, html, canonical] of [
   ['de', de, 'https://healio.de/unternehmen/vorsorge-rechner'],
   ['en', en, 'https://healio.de/en/companies/pension-calculator'],
 ]) {
-  assert.match(html, /<meta name="robots" content="noindex, nofollow">/);
+  const dom = new JSDOM(html);
+  const robots = dom.window.document.querySelectorAll('meta[name="robots"]');
+  assert.equal(robots.length, 1, `${language}: expected exactly one robots meta tag.`);
+  assert.equal(robots[0].getAttribute('content'), 'noindex, nofollow', `${language}: calculator must remain excluded from indexing and following.`);
   assert.match(html, /data-result-group="company"/);
   assert.match(html, /data-result-group="employee"/);
   assert.match(html, /data-result-group="capital"/);
@@ -80,6 +84,7 @@ for (const [language, html, canonical] of [
   const costHint = html.match(/<p id="effective-costs-hint" class="([^"]+)">/);
   assert(costHint, `${language}: effective-cost hint is missing.`);
   assert.match(costHint[1], /text-slate-300/, `${language}: effective-cost hint is unreadable on the dark surface.`);
+  dom.window.close();
 }
 
 assert.match(de, /162\.240&nbsp;€/);

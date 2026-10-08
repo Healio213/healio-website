@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import puppeteer from 'puppeteer';
+import { HEALIO_VOICE_CONTACT_ENABLED } from '../src/config/contactChannels.js';
 
 const baseUrl = process.env.HEALIO_TEST_BASE_URL || 'http://127.0.0.1:4173';
 const baseOrigin = new URL(baseUrl).origin;
@@ -100,10 +101,13 @@ try {
       };
     });
   });
-  assert.equal(desktopLaunchers.filter(Boolean).length, 2, 'Auf Desktop müssen genau Nita und WhatsApp als globale Launcher vorhanden sein.');
-  assert(desktopLaunchers.every((launcher) => launcher?.visible), 'Beide Desktop-Launcher müssen sichtbar sein.');
-  assert(desktopLaunchers.every((launcher) => launcher?.text === ''), 'Die beiden Launcher dürfen keinen sichtbaren Textbalken enthalten.');
-  assert(desktopLaunchers.every((launcher) => Math.abs(launcher.width - launcher.height) <= 2), 'Beide Desktop-Launcher müssen kreisförmig sein.');
+  assert.equal(Boolean(desktopLaunchers[0]), HEALIO_VOICE_CONTACT_ENABLED, 'Nita muss genau entsprechend der betrieblichen Freigabe vorhanden sein.');
+  assert(desktopLaunchers[1], 'Der WhatsApp-Launcher muss vorhanden bleiben.');
+  const activeDesktopLaunchers = desktopLaunchers.filter(Boolean);
+  assert.equal(activeDesktopLaunchers.length, HEALIO_VOICE_CONTACT_ENABLED ? 2 : 1, 'Die Anzahl der Desktop-Launcher muss der Kontaktfreigabe entsprechen.');
+  assert(activeDesktopLaunchers.every((launcher) => launcher.visible), 'Alle freigegebenen Desktop-Launcher müssen sichtbar sein.');
+  assert(activeDesktopLaunchers.every((launcher) => launcher.text === ''), 'Die Launcher dürfen keinen sichtbaren Textbalken enthalten.');
+  assert(activeDesktopLaunchers.every((launcher) => Math.abs(launcher.width - launcher.height) <= 2), 'Alle freigegebenen Desktop-Launcher müssen kreisförmig sein.');
 
   await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle0', timeout: 30_000 });
   const homepageHeroLaunchers = await page.evaluate(() => [
@@ -116,8 +120,11 @@ try {
   }));
   assert.deepEqual(homepageHeroLaunchers, [false, false], 'Der obere Startseiten-Hero muss ohne schwebende Kontaktkreise ruhig bleiben.');
 
-  await page.evaluate(() => window.scrollTo(0, window.innerHeight + 120));
-  await new Promise((resolve) => setTimeout(resolve, 250));
+  await page.evaluate(() => {
+    const hero = document.querySelector('[data-desktop-lead="home"]');
+    window.scrollTo({ top: window.scrollY + hero.parentElement.getBoundingClientRect().bottom + 120, behavior: 'instant' });
+  });
+  await page.waitForFunction(() => document.documentElement.classList.contains('home-hero-passed'));
   const homepageContentLaunchers = await page.evaluate(() => [
     document.querySelector('[data-healio-nita="launcher"]'),
     document.querySelector('[data-healio-whatsapp="floating"]'),
@@ -126,7 +133,7 @@ try {
     const style = window.getComputedStyle(element);
     return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
   }));
-  assert.deepEqual(homepageContentLaunchers, [true, true], 'Nach dem Startseiten-Hero müssen beide Kontaktkreise wieder erreichbar sein.');
+  assert.deepEqual(homepageContentLaunchers, [HEALIO_VOICE_CONTACT_ENABLED, true], 'Nach dem Startseiten-Hero müssen alle freigegebenen Kontaktkreise wieder erreichbar sein.');
 
   const footerContact = await page.$('[data-healio-whatsapp="footer"]');
   assert(footerContact, 'Der dauerhaft erreichbare WhatsApp-Link im Footer fehlt.');
@@ -135,11 +142,17 @@ try {
 
   await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
   await page.goto(`${baseUrl}/ambulant`, { waitUntil: 'networkidle0', timeout: 30_000 });
-  await page.evaluate(() => window.scrollTo(0, 480));
+  await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
   await new Promise((resolve) => setTimeout(resolve, 350));
 
   const mobileLayout = await page.evaluate(() => {
-    const whatsapp = document.querySelector('[data-healio-whatsapp="floating"]');
+    // Seit dem mobilen Kontaktleisten-Umbau bleibt der einzelne schwebende
+    // WhatsApp-Kreis auf /ambulant unter md verborgen. Der gleiche Kontaktweg
+    // sitzt in der Nita-Leiste, unabhängig von der Web-Sprachfreigabe.
+    const floating = document.querySelector('[data-healio-whatsapp="floating"]');
+    const floatingRect = floating?.getBoundingClientRect();
+    const pill = document.querySelector('.healio-nita-pill');
+    const whatsapp = pill?.querySelector('a[href="https://wa.me/494089755500"]');
     const whatsappRect = whatsapp?.getBoundingClientRect();
     const nita = document.querySelector('[data-healio-nita="launcher"]');
     const nitaRect = nita?.getBoundingClientRect();
@@ -160,6 +173,9 @@ try {
     const style = whatsapp ? window.getComputedStyle(whatsapp) : null;
 
     return {
+      floatingVisible: Boolean(floatingRect?.width && floatingRect?.height),
+      pillShown: pill?.getAttribute('data-shown') === 'true',
+      href: whatsapp?.href,
       whatsapp: whatsappRect && {
         left: whatsappRect.left,
         top: whatsappRect.top,
@@ -186,14 +202,19 @@ try {
     };
   });
 
-  assert(mobileLayout.whatsapp, 'Der WhatsApp-Kontakt fehlt in der mobilen Ambulant-Ansicht.');
-  assert(mobileLayout.nita, 'Der Nita-Kreis fehlt in der mobilen Ambulant-Ansicht.');
+  assert.equal(mobileLayout.floatingVisible, false, 'Der einzelne WhatsApp-Kreis muss auf /ambulant mobil für die Kontaktleiste Platz machen.');
+  assert(mobileLayout.whatsapp, 'Der WhatsApp-Kontakt fehlt in der mobilen Ambulant-Kontaktleiste.');
+  assert(mobileLayout.pillShown, 'Die mobile Kontaktleiste muss außerhalb der geschützten Formularbereiche sichtbar sein.');
+  assert.equal(mobileLayout.href, 'https://wa.me/494089755500', 'Auch die mobile Kontaktleiste muss die freigegebene WhatsApp-Nummer verwenden.');
+  assert.equal(Boolean(mobileLayout.nita), HEALIO_VOICE_CONTACT_ENABLED, 'Der mobile Nita-Kreis muss der betrieblichen Freigabe entsprechen.');
   assert(mobileLayout.visible, 'Der WhatsApp-Kontakt ist in der mobilen Ambulant-Ansicht nicht sichtbar.');
   assert(mobileLayout.whatsapp.width >= 48 && mobileLayout.whatsapp.height >= 48, 'Die mobile WhatsApp-Klickfläche muss mindestens 48 × 48 Pixel groß sein.');
-  assert(844 - mobileLayout.whatsapp.bottom >= 76, 'Der WhatsApp-Kontakt muss oberhalb des mobilen Tarifknopfs sitzen.');
-  assert(390 - mobileLayout.nita.right >= 8, 'Der mobile Nita-Kreis braucht Abstand zum rechten Rand, damit sein Schatten nicht abgeschnitten wird.');
-  assert(Math.abs(mobileLayout.nita.width - mobileLayout.nita.height) <= 2, 'Der mobile Nita-Launcher muss kreisförmig sein.');
-  assert(mobileLayout.nita.bottom <= mobileLayout.whatsapp.top, 'Nita und WhatsApp dürfen sich mobil nicht überlagern.');
+  assert(844 - mobileLayout.whatsapp.bottom >= 16, 'Die mobile Kontaktleiste braucht Abstand zum unteren Bildschirmrand.');
+  if (HEALIO_VOICE_CONTACT_ENABLED) {
+    assert(390 - mobileLayout.nita.right >= 8, 'Der mobile Nita-Kreis braucht Abstand zum rechten Rand, damit sein Schatten nicht abgeschnitten wird.');
+    assert(Math.abs(mobileLayout.nita.width - mobileLayout.nita.height) <= 2, 'Der mobile Nita-Launcher muss kreisförmig sein.');
+    assert(mobileLayout.nita.bottom <= mobileLayout.whatsapp.top, 'Nita und WhatsApp dürfen sich mobil nicht überlagern.');
+  }
 
   if (mobileLayout.quote) {
     const overlaps = !(
@@ -204,6 +225,20 @@ try {
     );
     assert.equal(overlaps, false, 'WhatsApp-Kontakt und mobiler Tarifknopf überlagern sich.');
   }
+
+  const ambulantMenuButton = await page.$('button[aria-controls="mobile-navigation"]');
+  assert(ambulantMenuButton, 'Der mobile Menüknopf fehlt auf /ambulant.');
+  await ambulantMenuButton.click();
+  await new Promise((resolve) => setTimeout(resolve, 250));
+  const pillHiddenByMenu = await page.$eval('.healio-nita-pill', (pill) => {
+    const style = window.getComputedStyle(pill);
+    return style.visibility === 'hidden' && style.pointerEvents === 'none';
+  });
+  assert(pillHiddenByMenu, 'Die Kontaktleiste muss bei geöffnetem Mobilmenü ausgeblendet werden.');
+  await ambulantMenuButton.click();
+  await page.emulateMediaType('print');
+  assert(await page.$eval('.healio-nita-pill', (pill) => window.getComputedStyle(pill).display === 'none'), 'Die mobile Kontaktleiste muss in der Druckansicht verborgen sein.');
+  await page.emulateMediaType('screen');
 
   await page.goto(`${baseUrl}/kontakt`, { waitUntil: 'networkidle0', timeout: 30_000 });
   const contactPageLink = await page.$('[data-healio-whatsapp="contact-page"]');

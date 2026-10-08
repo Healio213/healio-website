@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { JSDOM } from 'jsdom';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const imagePaths = [
@@ -24,9 +25,10 @@ const pages = [
 ];
 
 const readHtml = (relativePath) => fs.readFileSync(path.join(rootDir, relativePath), 'utf8');
-const readMeta = (html, attribute, value) => {
-  const pattern = new RegExp(`<meta ${attribute}="${value}" content="([^"]*)">`);
-  return html.match(pattern)?.[1] || null;
+const readMeta = (document, attribute, value) => {
+  const tags = document.querySelectorAll(`meta[${attribute}="${value}"]`);
+  assert.equal(tags.length, 1, `Expected exactly one ${value} meta tag.`);
+  return tags[0].getAttribute('content');
 };
 
 const collectWebPages = (value, results = []) => {
@@ -44,6 +46,7 @@ const collectWebPages = (value, results = []) => {
 
 for (const page of pages) {
   const html = readHtml(page.file);
+  const dom = new JSDOM(html);
   const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
   assert.equal(canonical, page.canonical, `Falscher Canonical in ${page.file}`);
 
@@ -60,10 +63,11 @@ for (const page of pages) {
     `Ambulant-WebPage-Schema darf nicht in ${page.file} vererbt werden`
   );
 
-  assert.equal(readMeta(html, 'property', 'og:image'), imageUrl, `Falsches OG-Bild in ${page.file}`);
-  assert.equal(readMeta(html, 'name', 'twitter:image'), imageUrl, `Falsches Twitter-Bild in ${page.file}`);
-  assert.equal(readMeta(html, 'property', 'og:image:alt'), page.alt, `Falscher OG-Alt-Text in ${page.file}`);
-  assert.equal(readMeta(html, 'name', 'twitter:image:alt'), page.alt, `Falscher Twitter-Alt-Text in ${page.file}`);
+  assert.equal(readMeta(dom.window.document, 'property', 'og:image'), imageUrl, `Falsches OG-Bild in ${page.file}`);
+  assert.equal(readMeta(dom.window.document, 'name', 'twitter:image'), imageUrl, `Falsches Twitter-Bild in ${page.file}`);
+  assert.equal(readMeta(dom.window.document, 'property', 'og:image:alt'), page.alt, `Falscher OG-Alt-Text in ${page.file}`);
+  assert.equal(readMeta(dom.window.document, 'name', 'twitter:image:alt'), page.alt, `Falscher Twitter-Alt-Text in ${page.file}`);
+  dom.window.close();
 }
 
 for (const imagePath of imagePaths) {

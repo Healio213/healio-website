@@ -203,14 +203,15 @@ export const ConsentManager = () => {
       {/* Experiment Handy-Conversion 10/2026: Unter md sitzt der Hinweis unten statt
           oben, damit er beim ersten Laden nicht die Hauptüberschrift verdeckt. Die
           Nita-Leiste und der WhatsApp-Knopf blenden sich aus, solange er offen ist
-          (Klasse healio-consent-ui-active). Ab md bleibt alles wie zuvor. */}
+          (Klasse healio-consent-ui-active). Ab md steht er als schmale Karte rechts
+          unten, damit die primäre Hero-Aktion links beim ersten Besuch frei bleibt. */}
       {showBanner && !settingsOpen && !isDentalCheckRoute && (
         <section
-          className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:top-auto md:max-w-5xl md:rounded-2xl md:p-5"
+          className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:left-auto md:right-3 md:top-auto md:mx-0 md:w-full md:max-w-md md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
+          <div className="flex flex-col gap-3">
             <div className="max-w-2xl min-w-0">
               <h2 className="text-sm font-extrabold text-slate-950 md:text-lg">{copy.bannerTitle}</h2>
               <p className="mt-1 text-xs leading-5 text-slate-600 md:text-sm md:leading-6">

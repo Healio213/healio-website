@@ -85,9 +85,15 @@ const enLeistungen = readJson('src/i18n/locales/en/leistungen.json');
 assert.equal(enLeistungen.budget.amount, '3,000 EUR', 'Englische Zahlenschreibweise muss ein Komma verwenden.');
 
 const footer = read('src/components/sections/Footer.jsx');
-assert(
-  footer.includes("to={getPath('heilberufeVorsorge')}"),
+assert.match(
+  footer,
+  /\{\s*id:\s*'heilberufe',\s*to:\s*getPath\('heilberufeVorsorge'\),\s*label:\s*t\('footer\.heilberufe'\)\s*\}/,
   'Der Footer muss die Heilberufe-Vorsorge in beiden Sprachen sprachabhängig intern verlinken.',
+);
+assert.match(
+  footer,
+  /<Link\s+to=\{item\.to\}[^>]*>\{item\.label\}<\/Link>/,
+  'Die sprachabhängigen Footer-Linkdaten müssen als interne Links gerendert werden.',
 );
 const partnerPage = read('src/pages/PartnerPage.jsx');
 assert(

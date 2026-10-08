@@ -129,7 +129,7 @@ try {
   });
   assert.match(germanDentalBonus.cardText, /Höchstwert laut Satzung 2026 · passende Nachweise · anerkannte Eigenkosten/);
   assert.match(germanDentalBonus.cardText, /tatsächlich erreichbare.*hängt von den aktuellen Bonusbedingungen ab/i);
-  assert.equal(germanDentalBonus.ctaHref, '#zahn-check', 'The German dental bonus CTA must keep opening the dental check.');
+  assert.equal(germanDentalBonus.ctaHref, '/zahn#zahn-check', 'The German dental bonus CTA must keep opening the dental check on its route.');
 
   const englishDentalBonus = await readDentalBonusCard({
     route: '/en/dental',

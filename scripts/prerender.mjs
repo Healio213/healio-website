@@ -29,7 +29,8 @@ import { seoRoutes } from './seo-routes.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
-const PORT = 4899;
+// Eigener Port für parallele Worktree-Builds, Standard bleibt unverändert.
+const PORT = Number(process.env.HEALIO_PRERENDER_PORT || 4899);
 
 // Nur diese externen Hosts dürfen im Prerender geladen werden
 // (Blog-Artikel kommen zur Laufzeit aus der Content-API).
