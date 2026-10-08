@@ -10,6 +10,7 @@ import { TextHighlight } from '@/components/ui/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
 import { calculateIkkBonus, capActivityCount } from '@/lib/ikkBonusCalculator';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { BEISPIEL_GRUPPE } from '@/data/sdkAmbulantBeitraege';
 
 // IKK classic Bonustabelle 2026. Geldbonus und Zuschuss sind Alternativen;
@@ -563,8 +564,9 @@ const AmbulantBonusCalculator = ({
                       {ctaOverride.label}
                     </a>
                   ) : (
-                    <a
+                    <LeadCaptureLink
                       href={calculatorUrl}
+                      trackingCategory="sdk-ambulant"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackSdkClick('bonus-calculator', referrer)}
@@ -572,7 +574,7 @@ const AmbulantBonusCalculator = ({
                     >
                       <Gift className="w-5 h-5 mr-2" />
                       {t('bonusCalculator.ctaCalculate')}
-                    </a>
+                    </LeadCaptureLink>
                   )}
 
                   <a

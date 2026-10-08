@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Check, ChevronDown, ExternalLink, ShieldCheck } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { getUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections/ambulant/ukvAmbulantLinks';
 
@@ -91,8 +92,9 @@ const AmbulantVorsorgeBaustein = () => {
 
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
           {ukvUrl ? (
-            <a
+            <LeadCaptureLink
               href={ukvUrl}
+              trackingCategory="ukv-vorsorge"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackUkvAmbulantAntrag()}
@@ -101,7 +103,7 @@ const AmbulantVorsorgeBaustein = () => {
             >
               {text('ctaLink')}
               <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
-            </a>
+            </LeadCaptureLink>
           ) : (
             <Link to={getPath('kontakt')} data-healio-ambulant="vorsorge-cta" className={ctaClass}>
               {text('cta')}

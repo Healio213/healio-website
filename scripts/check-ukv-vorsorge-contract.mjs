@@ -109,7 +109,7 @@ assert.equal(
   'Außer tarifftypes und tariffs bleibt der Link Zeichen für Zeichen gleich.',
 );
 
-assert(/href=\{ukvUrl\}\s*target="_blank"\s*rel="noopener noreferrer"\s*onClick=\{\(\) => trackUkvAmbulantAntrag\(\)\}/.test(component), 'Der Abschlusslink öffnet neu und zählt ohne Argumente als „Antrag geöffnet“.');
+assert(/<LeadCaptureLink\s+href=\{ukvUrl\}\s*trackingCategory="ukv-vorsorge"\s*target="_blank"\s*rel="noopener noreferrer"\s*onClick=\{\(\) => trackUkvAmbulantAntrag\(\)\}/.test(component), 'Der Abschlusslink nutzt die zentrale Lead-Erfassung, öffnet neu und zählt ohne Argumente als „Antrag geöffnet“.');
 assert.equal((component.match(/trackUkvAmbulantAntrag\(\)/g) || []).length, 1, 'Nur der externe Abschlusslink zählt als Antrag.');
 assert(/to=\{getPath\('kontakt'\)\}/.test(component), 'Ohne gültigen Link bleibt der Kontaktweg als Rückfall.');
 assert(!/bg-home-mint px-7/.test(component), 'Der Baustein bekommt keinen zweiten mintfarbenen Hauptknopf neben der SDK.');

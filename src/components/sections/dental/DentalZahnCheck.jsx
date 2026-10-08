@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
@@ -56,9 +57,9 @@ const CTA_HREFS = {
   ukv: UKV_URL,
 };
 
-// Einziger Messpunkt im Zahn-Check: der Klick auf einen Antragslink zählt bei
-// Google Ads als „Antrag geöffnet“. Ohne Argument, ohne Versicherer, ohne
-// Antworten. Was jemand im Check angegeben hat, verlässt das Gerät nie.
+// Einziger Messpunkt im Zahn-Check: das tatsächliche Öffnen des Antragslinks
+// nach der Lead-Erfassung zählt bei Google Ads als „Antrag geöffnet“. Ohne
+// Argument, ohne Versicherer, ohne Antworten. Check-Antworten bleiben lokal.
 const countAntragOpened = () => {
   trackGoogleAdsAntrag();
 };
@@ -342,9 +343,9 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <a href={CTA_HREFS[result.ctaType]} target="_blank" rel="noopener noreferrer" onClick={countAntragOpened}>
+                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" onClick={countAntragOpened}>
                           {result.cta}<ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
-                        </a>
+                        </LeadCaptureLink>
                       </Button>
                     )}
                     <button

@@ -10,6 +10,9 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
+
+const AnimatedLeadCaptureLink = motion(LeadCaptureLink);
 
 const AMBULANT_CTA_DELAY_MS = 30_000;
 // Experiment Handy-Conversion 10/2026: Unter md (768 px) erscheint der Knopf
@@ -365,8 +368,9 @@ const Header = () => {
           {isAmbulant ? (
             <AnimatePresence initial={false}>
               {showSolidHeader && ambulantCtaReady && (
-                <motion.a
+                <AnimatedLeadCaptureLink
                   href={ambulantSdkUrl}
+                  trackingCategory="sdk-ambulant"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackSdkClick('ambulant-header-desktop', referrer)}
@@ -379,7 +383,7 @@ const Header = () => {
                 >
                   <Calculator className="mr-2 h-4 w-4" aria-hidden="true" />
                   {lang === 'de' ? 'Beitrag berechnen' : 'Quote (German form)'}
-                </motion.a>
+                </AnimatedLeadCaptureLink>
               )}
             </AnimatePresence>
           ) : (
@@ -433,8 +437,9 @@ const Header = () => {
 
         <AnimatePresence initial={false}>
           {isAmbulant && showSolidHeader && ambulantCtaReady && (
-            <motion.a
+            <AnimatedLeadCaptureLink
               href={ambulantSdkUrl}
+              trackingCategory="sdk-ambulant"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackSdkClick('ambulant-header-mobile', referrer)}
@@ -449,7 +454,7 @@ const Header = () => {
               <Calculator className="h-4 w-4" aria-hidden="true" />
               <span className="min-[390px]:hidden">{lang === 'de' ? 'Beitrag' : 'Quote DE'}</span>
               <span className="hidden min-[390px]:inline">{lang === 'de' ? 'Beitrag berechnen' : 'Quote (German)'}</span>
-            </motion.a>
+            </AnimatedLeadCaptureLink>
           )}
         </AnimatePresence>
 

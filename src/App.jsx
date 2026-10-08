@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
+import LeadCaptureProvider from '@/components/LeadCaptureProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import Layout from '@/components/Layout';
 import RouteNormalizer from '@/components/RouteNormalizer';
@@ -184,7 +185,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <>
+    <LeadCaptureProvider>
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
@@ -303,7 +304,7 @@ function App() {
           </Routes>
         </Suspense>
       </RouteNormalizer>
-    </>
+    </LeadCaptureProvider>
   );
 }
 

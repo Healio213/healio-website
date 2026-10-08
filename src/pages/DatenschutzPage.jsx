@@ -78,6 +78,9 @@ const DatenschutzPage = () => {
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.ebookRequest')}</h3>
               <p>{t('datenschutz.ebookRequestText')}</p>
 
+              <h3 id="kassenbonus-leitfaden" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.bonusGuideTitle')}</h3>
+              <p>{t('datenschutz.bonusGuideText')}</p>
+
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.emailJsTitle')}</h3>
               <p>{t('datenschutz.emailJsText')}</p>
               <p className="mt-3">

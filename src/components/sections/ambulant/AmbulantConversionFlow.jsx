@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
@@ -603,10 +604,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                     </MobileSwipeRow>
                   </motion.div>
                 </AnimatePresence>
-                <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
+                <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
-                </a>
+                </LeadCaptureLink>
                 <p className="mt-3 max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
                 <p className="mt-4 max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
               </div>
@@ -911,10 +912,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
             {/* Mobil ausgeblendet (Experiment Handy-Conversion 10/2026): derselbe Hinweis steht unter dem Knopf der Tarifwahl. */}
             <p className="relative mx-auto mt-4 hidden max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-            <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
+            <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
-            </a>
+            </LeadCaptureLink>
             <p className="relative mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">{copy.finalMicro}</p>
             <div className="relative mt-3 md:mt-5">
               <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
