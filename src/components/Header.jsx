@@ -158,10 +158,10 @@ const Header = () => {
         // und soll auch ohne Kampagnenlink über das Menü erreichbar sein.
         ...(lang === 'en' ? [] : [{ to: '/schwangerschaft', label: t('nav.schwangerschaft') }]),
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
+        // Das Altersvorsorgedepot ist derzeit nur auf Deutsch verfügbar.
+        ...(lang === 'en' ? [] : [{ to: '/altersvorsorgedepot', label: t('nav.altersvorsorgedepot') }]),
       ]
     },
-    // Wie der Ratgeber ist diese Seite derzeit nur auf Deutsch verfügbar.
-    ...(lang === 'en' ? [] : [{ to: '/altersvorsorgedepot', label: t('nav.altersvorsorgedepot'), type: 'link' }]),
     { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
@@ -261,8 +261,8 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden xl:flex items-center gap-4 2xl:gap-6">
-          <ul className="flex items-center gap-4 2xl:gap-6">
+        <div className="hidden xl:flex items-center gap-5 xl:gap-8">
+          <ul className="flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => (
               <li
                 key={link.label}
@@ -282,6 +282,7 @@ const Header = () => {
                          location.pathname.includes('/zahn') || location.pathname.includes('/dental') ||
                          location.pathname.includes('/stationaer') || location.pathname.includes('/inpatient') ||
                          location.pathname.includes('/tierkrankenversicherung') || location.pathname.includes('/pet-insurance') ||
+                         location.pathname.startsWith('/altersvorsorgedepot') ||
                          location.pathname === '/leistungen' || location.pathname === '/en/services') && "text-healio-mint font-bold"
                       )}
                     >
