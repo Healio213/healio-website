@@ -270,6 +270,39 @@ export const RATGEBER_GROUPS = [
       "brillenkosten",
       "zahn-und-brillenversicherung"
     ]
+  },
+  {
+    "id": "altersvorsorge",
+    "title": "Altersvorsorge und Riester",
+    "intro": "Das Altersvorsorgedepot ab 2027 verstehen: Förderung, Riester-Verträge, Kinderzulage, Selbstständige, Kosten und Auszahlung. Mit Beispielen und amtlichen Quellen.",
+    "icon": "money",
+    "hubSlug": "altersvorsorgedepot-was-ist-das",
+    "slugs": [
+      "altersvorsorgedepot-was-ist-das",
+      "altersvorsorgedepot-ab-wann",
+      "altersvorsorgedepot-foerderung",
+      "altersvorsorgedepot-wer-ist-berechtigt",
+      "riester-altersvorsorgedepot-wechsel",
+      "riester-kuendigen-oder-behalten",
+      "riester-jahresmitteilung-checkliste",
+      "riester-alte-oder-neue-foerderung",
+      "altersvorsorgedepot-kinderzulage",
+      "altersvorsorgedepot-kinderzulage-elternteil",
+      "altersvorsorgedepot-teilzeit-elternzeit",
+      "altersvorsorgedepot-kindergeld-ende",
+      "altersvorsorgedepot-selbststaendige",
+      "altersvorsorgedepot-schwankendes-einkommen",
+      "altersvorsorgedepot-heilpraktiker",
+      "altersvorsorgedepot-oder-ruerup",
+      "altersvorsorgedepot-kosten",
+      "altersvorsorgedepot-garantie",
+      "altersvorsorgedepot-etf-sparplan",
+      "altersvorsorgedepot-steuern",
+      "altersvorsorgedepot-geld-entnehmen",
+      "altersvorsorgedepot-auszahlung",
+      "altersvorsorgedepot-anbieterwechsel",
+      "altersvorsorgedepot-passt-das-zu-mir"
+    ]
   }
 ];
 

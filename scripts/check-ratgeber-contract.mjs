@@ -26,6 +26,7 @@ import {
   validateRatgeberSources,
 } from './lib/ratgeber-articles.mjs';
 import { buildOverviewData, registryEntryFor, staleRatgeberRegistryFiles } from './lib/ratgeber-registry.mjs';
+import { altersvorsorgeArticles, ALTERSVORSORGE_HUB_PATH } from '../src/content/ratgeber/altersvorsorge/index.js';
 import { collectBlockText, countArticleWords, renderArticleText as renderSharedArticleText, shouldShowToc } from '../src/content/ratgeber/articleText.js';
 import { AUTHORS } from '../src/content/ratgeber/authors.js';
 import { ZAHN_WEITERLESEN } from '../src/content/ratgeber/zahnWeiterlesen.js';
@@ -70,6 +71,10 @@ const RATGEBER_SLUGS = [
 const IKK_LANDING_SLUG = 'ikk-classic-bonusprogramm-2026';
 const SCHWANGER_SLUG = 'schwanger-zusatzversicherung';
 const ZAHN_SLUG = 'zahnzusatzversicherung-fehlender-zahn';
+// Eigener Fachbereich mit amtlichen Quellen und Artikelrechner, geprüft in
+// check-altersvorsorge-ratgeber.mjs. Die bisherigen Gesundheitsartikel
+// behalten ihre konkreten CTA-, Autoren- und Serienverträge.
+const ALTERSVORSORGE_SLUGS = new Set(altersvorsorgeArticles.map((article) => article.slug));
 
 // Die einzigen Artikel mit internem Button. Ziel, Beschriftung und
 // Abschnittsueberschrift sind festgeschrieben. Die Schwangerschaftsseite
@@ -217,7 +222,7 @@ expect(/id="fact-nugget"/.test(layout), 'Der Fact-Nugget-Block behaelt seine id.
 // interner SEO-Kniff. Sichtbar steht "So funktioniert Healio", id und data-geo
 // bleiben fuer die GEO-Markierung.
 expect(!/Fact Nugget/.test(stripLayoutComments(layout)), 'Die sichtbare Überschrift "Fact Nugget für KI" darf nicht mehr in der Vorlage stehen.');
-expect(/>\s*So funktioniert Healio\s*</.test(layout), 'Der Fact-Nugget-Block heißt sichtbar "So funktioniert Healio".');
+expect(/article\.factNuggetHeading \|\| 'So funktioniert Healio'/.test(layout), 'Der Fact-Nugget-Block übernimmt die Fachüberschrift und behält "So funktioniert Healio" als Standard.');
 expect(/createFAQSchema\(article\.faqs\)/.test(layout), 'Die FAQ muessen als FAQPage ausgezeichnet werden.');
 expect(/createArticleSchema\(/.test(layout), 'Ratgeberartikel brauchen eine Article-Auszeichnung.');
 expect(
@@ -268,7 +273,7 @@ for (const slug of [IKK_LANDING_SLUG, SCHWANGER_SLUG, ZAHN_SLUG]) {
 // Kein weiterer Artikel darf sich einen internen Button anhaengen, ohne dass
 // er hier bewusst eingetragen wird. Das gilt auch fuer das Advertorial.
 for (const article of ratgeberArticles) {
-  if (INTERNAL_BUTTONS[article.slug]) continue;
+  if (INTERNAL_BUTTONS[article.slug] || ALTERSVORSORGE_SLUGS.has(article.slug)) continue;
   expect(!article.internalCta, `Unerwarteter interner Button: ${article.slug}`);
 }
 
@@ -473,7 +478,7 @@ for (const article of ratgeberArticles) {
     if (!segment.to?.startsWith('/ratgeber/')) continue;
     const targetSlug = segment.to.slice('/ratgeber/'.length);
     expect(
-      Boolean(getRatgeberArticle(targetSlug)),
+      Boolean(getRatgeberArticle(targetSlug)) || (segment.to === ALTERSVORSORGE_HUB_PATH && routeByPath.has(segment.to)),
       `Interner Ratgeber-Link zeigt ins Leere: ${article.slug} -> ${segment.to}`,
     );
   }
@@ -908,7 +913,7 @@ for (const article of ratgeberArticles) {
 
 // Ältere Artikel ohne Opt-in bleiben unverändert: keine neuen Felder.
 for (const article of ratgeberArticles) {
-  if (OPT_IN_SLUGS.includes(article.slug)) continue;
+  if (OPT_IN_SLUGS.includes(article.slug) || ALTERSVORSORGE_SLUGS.has(article.slug)) continue;
   expect(!article.quickAnswer && !article.sources && !article.author && !article.faqStyle && !shouldShowToc(article), `Opt-in-Baustein in einem älteren Artikel ohne Auftrag: ${article.slug}`);
 }
 
@@ -955,6 +960,7 @@ const RATGEBER_FELDER = {
   vorsorge: { label: 'Vorsorge-Ratgeber', angebotsPfade: ['/ambulant'] },
   'kasse-bonus': { label: 'Kassen-Ratgeber', angebotsPfade: ['/kassenbonus', '/ambulant', 'https://kassenboost.de'] },
   familie: { label: 'Familien-Ratgeber', angebotsPfade: ['/stationaer', '/zahn', '/ambulant', 'https://kassenboost.de'] },
+  altersvorsorge: { label: 'Altersvorsorge-Ratgeber', angebotsPfade: ['/altersvorsorgedepot'], eigenerArtikelCheck: true },
 };
 
 // Zielbegriff je Serienseite: muss in H1 und Seitentitel stehen. Wer hier
@@ -1185,6 +1191,11 @@ const internalPfade = (feld) => feld.angebotsPfade.filter((pfad) => pfad.startsW
 for (const group of RATGEBER_GROUPS) {
   expect(Boolean(RATGEBER_FELDER[group.id]), `Gruppe ${group.id} in gliederung.js ohne Eintrag in RATGEBER_FELDER (erlaubte Angebotspfade).`);
   expect(group.slugs.includes(group.hubSlug), `Gruppe ${group.id}: Die Bereichsseite ${group.hubSlug} steht nicht in slugs.`);
+  if (group.id === 'altersvorsorge') {
+    expect(group.slugs.length === 24 && group.slugs.every((slug) => ALTERSVORSORGE_SLUGS.has(slug)), 'Altersvorsorge-Gruppe: alle 24 ausdrücklich freigegebenen Artikel.');
+    expect(routeByPath.has(ALTERSVORSORGE_HUB_PATH), 'Altersvorsorge-Gruppe: eigene Themenübersicht als SEO-Route.');
+    continue;
+  }
   expect(Boolean(SERIEN_ZIELBEGRIFFE[group.hubSlug]), `Gruppe ${group.id}: Die Bereichsseite ${group.hubSlug} braucht einen Zielbegriff und die Serienprüfung.`);
   for (const slug of group.slugs) {
     expect(Boolean(SERIEN_ZIELBEGRIFFE[slug]) || AELTERE_GRUPPENARTIKEL.includes(slug), `Gruppe ${group.id}: ${slug} ohne Zielbegriff in SERIEN_ZIELBEGRIFFE.`);
@@ -1395,6 +1406,10 @@ const rechnerZiel = (rechner) => rechner?.to || rechner?.href || '';
 const rechnerKartenTexte = (rechner) => ['eyebrow', 'title', 'text', 'label'].map((field) => rechner?.[field] || '').join('\n');
 for (const [id, feld] of Object.entries(RATGEBER_FELDER)) {
   const rechner = RATGEBER_RECHNER_JE_GRUPPE[id];
+  if (feld.eigenerArtikelCheck) {
+    expect(altersvorsorgeArticles.every((article) => article.internalCta?.to?.startsWith('/altersvorsorgedepot')), 'Altersvorsorge: eigener Artikelcheck und genau ein passender Schlussweg.');
+    continue;
+  }
   expect(Boolean(rechner), `Rechner-Karte: Feld ${id} ohne Eintrag in rechnerWege.js.`);
   if (!rechner) continue;
   expect(Boolean(rechner.title && rechner.text && rechner.label) && Boolean(rechner.to) !== Boolean(rechner.href), `Rechner-Karte ${id}: Titel, Text, Knopf und genau ein Ziel (to oder href).`);
@@ -1573,6 +1588,7 @@ for (const group of RATGEBER_OVERVIEW.groups) {
 }
 expect(
   /group\.total > group\.entries\.length/.test(overview)
+    && /groupHubPath\(group\)/.test(overview)
     && /getRatgeberPath\(group\.hubSlug\)/.test(overview)
     && /data-ratgeber-group-all=\{group\.id\}/.test(overview)
     && />\s*Alle anzeigen\s*</.test(overview),
@@ -1605,7 +1621,11 @@ for (const file of srcFiles(path.join(root, 'src'))) {
   const source = fs.readFileSync(file, 'utf8');
   expect(!/scripts\/lib\/ratgeber-/.test(source), `${relative}: Website-Code darf die Node-Ladehilfe nicht importieren.`);
   if (relative === path.join('src', 'content', 'ratgeber', 'registry.loaders.js')) continue;
+  // Diese drei Importlisten sind ausschließlich der Node-Einstieg für die
+  // Redaktion und Tests. Kein Browsermodul darf sie oder ihren Index laden.
+  if (/^src\/content\/ratgeber\/altersvorsorge\/(?:grundlagen-riester|familien-selbststaendige|entscheidung)\.js$/.test(relative)) continue;
   expect(!staticArticleImport.test(source), `${relative}: Artikeltext darf nur über registry.loaders.js geladen werden.`);
+  expect(!/(?:from\s*|import\s*)['"]@\/content\/ratgeber\/altersvorsorge(?:['"]|\/(?:index|grundlagen-riester|familien-selbststaendige|entscheidung))/.test(source), `${relative}: Altersvorsorge-Sammeldateien dürfen nicht im Browser geladen werden.`);
 }
 const articlePage = read('src/pages/RatgeberArtikelPage.jsx');
 expect(/from '@\/content\/ratgeber\/registry\.loaders'/.test(articlePage), 'Die Artikelseite lädt ihren Artikel über registry.loaders.js.');
@@ -1632,5 +1652,5 @@ console.log(
   `Register: ${ratgeberArticles.length} Artikel, erzeugte Dateien aktuell, Übersicht mit ${RATGEBER_OVERVIEW.single.length} Einzelartikeln und ${RATGEBER_OVERVIEW.groups.length} Gruppe(n), Artikeltext nur über registry.loaders.js.`,
 );
 console.log(
-  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${RATGEBER_SLUGS.length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, ${Object.keys(INTERNAL_BUTTONS).length} Artikel mit je einem internen Button (IKK-Landingpage und Schwangerschaft auf /ambulant, fehlender Zahn auf /zahn#zahn-check), 1.155 EUR nur mit Schwangerschaftsbezug, Schwangerschafts-Hinweis im Vorsorge-Baustein, Fact Nugget unter neuer Überschrift, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
+  `Ratgeber-Vertrag erfüllt: ${ratgeberArticles.length} Artikel (${ratgeberArticles.filter((article) => article.kind === 'ratgeber').length} indexiert), 3 Buttons auf ${ADVERTORIAL_PATH}, ${Object.keys(INTERNAL_BUTTONS).length} Gesundheitsartikel mit festgelegtem internem Button und ${ALTERSVORSORGE_SLUGS.size} Altersvorsorgeartikel mit eigenem Schlussweg, 1.155 EUR nur mit Schwangerschaftsbezug, Schwangerschafts-Hinweis im Vorsorge-Baustein, fachliche Fact-Nugget-Überschrift, FAQ-Schema, Pflichtlinks und Schreibregeln geprüft.`,
 );

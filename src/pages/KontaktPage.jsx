@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Phone, Send, Loader2, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,8 +16,12 @@ import { useLanguage } from '@/hooks/useLanguage';
 import ProductTicker from '@/components/sections/ProductTicker';
 import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
+import { buildAltersvorsorgeKontaktMessage } from '@/lib/altersvorsorgeArtikelCheck';
 
 const KontaktPage = () => {
+  const location = useLocation();
+  const altersvorsorgeNachricht = buildAltersvorsorgeKontaktMessage(location.state);
+  const isAltersvorsorge = Boolean(altersvorsorgeNachricht);
   const { t } = useTranslation('contact');
   const { t: tSeo } = useTranslation('seo');
   const { lang } = useLanguage();
@@ -28,7 +33,7 @@ const KontaktPage = () => {
     email: '',
     company: '',
     phone: '',
-    message: ''
+    message: altersvorsorgeNachricht
   });
 
   const handleChange = (e) => {
@@ -114,15 +119,17 @@ const KontaktPage = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
-              {t('page.title')}
+              {isAltersvorsorge ? 'Deine Anfrage zum Altersvorsorgedepot' : t('page.title')}
             </h1>
             <p className="text-xl text-slate-600 leading-relaxed">
-              {tSeo('kontakt.description')}
+              {isAltersvorsorge
+                ? 'Prüfe die vorbereitete Nachricht und ergänze deine Frage. Wir antworten auf deine Anfrage und stimmen bei Bedarf einen Zuschuss-Check per Video oder Telefon mit dir ab. Das ist noch keine Terminbuchung und kein Vertrag.'
+                : tSeo('kontakt.description')}
             </p>
           </motion.div>
         </section>
 
-        <ProductTicker variant="contact" />
+        {!isAltersvorsorge && <ProductTicker variant="contact" />}
 
         {/* SECTION 2: Two-Column Layout */}
         <section className="healio-container px-4 sm:px-6 md:px-8 mb-24">
@@ -235,8 +242,9 @@ const KontaktPage = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-md border border-slate-100">
-                <form method="post" action="/kontakt" onSubmit={handleSubmit} className="space-y-6">
+                <form id="kontaktformular" method="post" action="/kontakt" onSubmit={handleSubmit} className="scroll-mt-24 space-y-6">
                   <FormHoneypot />
+                  {isAltersvorsorge && <p className="rounded-xl bg-emerald-50 p-4 text-base leading-7 text-slate-700">Deine Nachricht lässt sich vor dem Absenden bearbeiten. Für eine Antwort genügen die erforderlichen Kontaktangaben und deine Frage. Wenn du einen Rückruf möchtest, ergänze bitte deine Telefonnummer. Die Anfrage ist keine Anmeldung für regelmäßige Werbemails.</p>}
                   
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-semibold text-slate-700">{t('form.name')}</Label>

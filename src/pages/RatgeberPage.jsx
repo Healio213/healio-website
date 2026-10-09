@@ -64,6 +64,7 @@ const ARTICLE_FIGURES = {
   'vorsorgeuntersuchung': friendlyIconAssets.prevention,
   'brille-krankenkasse': friendlyIconAssets.glasses,
   'bonusprogramm-krankenkasse': friendlyIconAssets.bonus,
+  'altersvorsorgedepot-was-ist-das': friendlyIconAssets.money,
 };
 const figureFor = (slug) => ARTICLE_FIGURES[slug] || friendlyIconAssets.document;
 
@@ -75,7 +76,13 @@ const TOPICS = [
   { slug: 'zahnzusatzversicherung-fehlender-zahn', group: 'zaehne', label: 'Zähne', kind: 'dental', tone: 'mint' },
   // Seit Stapel 2 (07.10.2026) stehen die Schwangerschafts-Ratgeber in der Gruppe familie.
   { slug: 'schwanger-zusatzversicherung', group: 'familie', label: 'Schwangerschaft und Familie', kind: 'pregnancy', tone: 'coral' },
+  { slug: 'altersvorsorgedepot-was-ist-das', group: 'altersvorsorge', label: 'Altersvorsorge und Riester', kind: 'money', tone: 'mint' },
 ];
+
+// Die Altersvorsorge hat eine eigene Übersicht aller 24 Ratgeber.
+const groupHubPath = (group) => group.id === 'altersvorsorge'
+  ? '/ratgeber/altersvorsorgedepot'
+  : getRatgeberPath(group.hubSlug);
 
 // Blogartikel nach Leserkreis. Unbekannte oder fehlende target_group landet
 // bei den Patientinnen und Patienten.
@@ -469,7 +476,7 @@ const RatgeberPage = () => {
                 {group.total > group.entries.length && (
                   <p className="mt-5 sm:mt-8">
                     <Link
-                      to={getRatgeberPath(group.hubSlug)}
+                      to={groupHubPath(group)}
                       data-ratgeber-group-all={group.id}
                       className="inline-flex min-h-12 items-center gap-2 rounded-full border border-slate-300 px-6 font-display text-base font-extrabold text-home-midnight transition hover:border-home-mint hover:bg-home-ice focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-2"
                     >

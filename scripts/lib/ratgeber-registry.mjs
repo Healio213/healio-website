@@ -23,6 +23,7 @@ export const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.
 export const REGISTRY_FILE = 'src/content/ratgeber/registry.js';
 export const OVERVIEW_FILE = 'src/content/ratgeber/registry.overview.js';
 export const LOADERS_FILE = 'src/content/ratgeber/registry.loaders.js';
+export const ALTERSVORSORGE_RELATED_FILE = 'src/content/ratgeber/altersvorsorge/related.js';
 export const SITEMAP_FILE = 'public/sitemap.xml';
 
 export const SITEMAP_BLOCK_START = '<!-- Ratgeberartikel: automatisch aus src/content/ratgeber/gliederung.js (npm run ratgeber:register), nicht von Hand bearbeiten -->';
@@ -53,6 +54,7 @@ const REGISTRY_FIELDS = [
   'slug',
   'kind',
   'group',
+  'cluster',
   'listTitle',
   'listTeaser',
   'readingTimeMinutes',
@@ -133,6 +135,21 @@ ${ratgeberArticles.filter((article) => groupOf.has(article.slug)).map((article) 
 ]);
 `;
 
+// Die Artikelvorlage benötigt nur die Titel der Altersvorsorge-Querverweise.
+// Das vollständige Register mit Metadaten aller Fachbereiche bleibt draußen.
+const buildAltersvorsorgeRelatedSource = () => `/**
+${GENERATED_NOTE}
+ * Nur die Titel der Altersvorsorge-Ratgeber für ihre Querverweise, ohne
+ * Volltexte oder das vollständige Website-Register.
+ */
+
+const TITLES = new Map(${json(ratgeberArticles
+  .filter((article) => article.topic === 'altersvorsorge')
+  .map((article) => [article.slug, article.listTitle]))});
+
+export const getAltersvorsorgeRelatedTitle = (slug) => TITLES.get(slug) || null;
+`;
+
 const sitemapEntry = (article) => [
   '  <url>',
   `    <loc>${SITE_URL}/ratgeber/${article.slug}</loc>`,
@@ -164,6 +181,7 @@ export const buildRatgeberRegistryFiles = () => ({
   [REGISTRY_FILE]: buildRegistrySource(),
   [OVERVIEW_FILE]: buildOverviewSource(),
   [LOADERS_FILE]: buildLoadersSource(),
+  [ALTERSVORSORGE_RELATED_FILE]: buildAltersvorsorgeRelatedSource(),
   [SITEMAP_FILE]: updateSitemap(fs.readFileSync(path.join(PROJECT_ROOT, SITEMAP_FILE), 'utf8')),
 });
 

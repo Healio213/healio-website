@@ -23,7 +23,11 @@ import {
   SwipeCards,
   TableOfContents,
 } from '@/components/ratgeber/RatgeberBausteine';
+import { getRatgeberPath } from '@/content/ratgeber/paths';
+import { getAltersvorsorgeRelatedTitle } from '@/content/ratgeber/altersvorsorge/related';
 import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
+
+const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeArtikelCheck'));
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -407,7 +411,7 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
             />
           )}
 
-          {article.sections.map((section) => (
+          {article.sections.map((section, sectionIndex) => (
             <section key={section.id} id={section.id} className="mt-10 scroll-mt-28 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {section.heading}
@@ -416,6 +420,8 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
               {section.blocks.map((block, index) => (
                 <RatgeberBlock key={`${section.id}-${index}`} block={block} />
               ))}
+
+              {article.topic === 'altersvorsorge' && sectionIndex === 1 && <React.Suspense fallback={null}><AltersvorsorgeArtikelCheck article={article} search={search} /></React.Suspense>}
 
               {isAdvertorial && section.id === article.ctaAfterSectionId && (
                 <div className="mt-8 sm:mt-10">
@@ -439,7 +445,7 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
                 id="fact-nugget-heading"
                 className="font-display text-xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] sm:text-2xl"
               >
-                So funktioniert Healio
+                {article.factNuggetHeading || 'So funktioniert Healio'}
               </h2>
               <p className="mt-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
                 {article.factNugget}
@@ -458,7 +464,7 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
             </section>
           )}
 
-          {article.internalCta && (
+          {article.internalCta && article.topic !== 'altersvorsorge' && (
             <section id={article.internalCta.id || 'bonus-umwandeln'} className="mt-10 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {article.internalCta.heading}
@@ -481,6 +487,17 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
                 <RatgeberSegments segments={article.onward.segments} />
               </p>
             </section>
+          )}
+
+          {article.relatedSlugs?.length > 0 && (
+            <nav aria-label="Weitere Ratgeber zur Altersvorsorge" className="mt-8">
+              <ul className="space-y-3">
+                {article.relatedSlugs.map((slug) => {
+                  const title = getAltersvorsorgeRelatedTitle(slug);
+                  return title ? <li key={slug}><Link to={getRatgeberPath(slug)} className="inline-flex min-h-11 items-center text-base font-semibold text-emerald-800 underline underline-offset-4">{title}</Link></li> : null;
+                })}
+              </ul>
+            </nav>
           )}
 
           {rechner && <RechnerKarte rechner={rechner} />}

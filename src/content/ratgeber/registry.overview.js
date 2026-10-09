@@ -431,6 +431,65 @@ export const RATGEBER_OVERVIEW = {
           "readingTimeMinutes": 9
         }
       ]
+    },
+    {
+      "id": "altersvorsorge",
+      "title": "Altersvorsorge und Riester",
+      "intro": "Das Altersvorsorgedepot ab 2027 verstehen: Förderung, Riester-Verträge, Kinderzulage, Selbstständige, Kosten und Auszahlung. Mit Beispielen und amtlichen Quellen.",
+      "icon": "money",
+      "hubSlug": "altersvorsorgedepot-was-ist-das",
+      "total": 24,
+      "entries": [
+        {
+          "slug": "altersvorsorgedepot-was-ist-das",
+          "kind": "ratgeber",
+          "listTitle": "Was ist das Altersvorsorgedepot und wie funktioniert es?",
+          "listTeaser": "Das Konzept, die drei Produktwege und der Unterschied zu einem gewöhnlichen Wertpapierdepot.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "altersvorsorgedepot-ab-wann",
+          "kind": "ratgeber",
+          "listTitle": "Altersvorsorgedepot: Ab wann kannst du anfangen?",
+          "listTeaser": "Startdatum, Vorbereitung und die verschiedenen Fristen verständlich auseinanderhalten.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "altersvorsorgedepot-foerderung",
+          "kind": "ratgeber",
+          "listTitle": "Altersvorsorgedepot: Wie viel Förderung bekommst du?",
+          "listTeaser": "Die Zulagenrechnung mit vier Beiträgen und einem klar abgegrenzten Familienbeispiel.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "altersvorsorgedepot-wer-ist-berechtigt",
+          "kind": "ratgeber",
+          "listTitle": "Wer ist beim Altersvorsorgedepot förderberechtigt?",
+          "listTeaser": "Die wichtigsten Gruppen und Voraussetzungen vor der persönlichen Zulagenrechnung.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "riester-altersvorsorgedepot-wechsel",
+          "kind": "ratgeber",
+          "listTitle": "Riester ins Altersvorsorgedepot wechseln: Was bedeutet das?",
+          "listTeaser": "Die drei Wege für den Bestand und eine geordnete Vorbereitung des möglichen Wechsels.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "riester-kuendigen-oder-behalten",
+          "kind": "ratgeber",
+          "listTitle": "Riester kündigen oder behalten: Welche Entscheidung passt?",
+          "listTeaser": "Kündigungsfolgen und Alternativen nach dem eigentlichen Grund für deine Entscheidung ordnen.",
+          "readingTimeMinutes": 4
+        },
+        {
+          "slug": "riester-jahresmitteilung-checkliste",
+          "kind": "ratgeber",
+          "listTitle": "Riester-Jahresmitteilung prüfen: Eine praktische Checkliste",
+          "listTeaser": "Welche Zahlen du markieren und welche Fragen du dem Anbieter stellen solltest.",
+          "readingTimeMinutes": 4
+        }
+      ]
     }
   ]
 };

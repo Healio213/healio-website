@@ -160,6 +160,8 @@ const Header = () => {
         { to: getPath('tierkrankenversicherung'), label: t('nav.tier') },
       ]
     },
+    // Wie der Ratgeber ist diese Seite derzeit nur auf Deutsch verfügbar.
+    ...(lang === 'en' ? [] : [{ to: '/altersvorsorgedepot', label: t('nav.altersvorsorgedepot'), type: 'link' }]),
     { to: getPath('unternehmen'), label: t('nav.unternehmen'), type: 'link' },
     { to: getPath('partner'), label: t('nav.partner'), type: 'link' },
     { to: getPath('about'), label: t('nav.about'), type: 'link' },
@@ -241,7 +243,7 @@ const Header = () => {
         : "bg-transparent py-5"
     )} role="banner">
       <nav className="healio-container flex items-center justify-between px-4 sm:px-6 md:px-8 w-full mx-auto">
-        <Link to={getPath('home')} className="flex items-center z-50 group">
+        <Link to={getPath('home')} className="flex shrink-0 items-center z-50 group">
           <motion.img
             src="/healio-logo-white-web.svg"
             alt="Healio Logo"
@@ -259,8 +261,8 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden xl:flex items-center gap-5 xl:gap-8">
-          <ul className="flex items-center gap-5 xl:gap-8">
+        <div className="hidden xl:flex items-center gap-4 2xl:gap-6">
+          <ul className="flex items-center gap-4 2xl:gap-6">
             {navLinks.map((link) => (
               <li
                 key={link.label}

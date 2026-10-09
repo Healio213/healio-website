@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import { ratgeberArticles } from './lib/ratgeber-articles.mjs';
 import { authorSchemaFor } from '../src/content/ratgeber/authors.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
+import { faq as altersvorsorgeFaq } from '../src/content/altersvorsorgedepotContent.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
 /**
@@ -87,6 +88,30 @@ const ratgeberRoutes = () => ratgeberArticles.map((article) => {
 
 export const seoRoutes = [
   // === DEUTSCH ===
+  {
+    path: '/altersvorsorgedepot',
+    title: 'Altersvorsorgedepot 2027: Zulage berechnen | Healio',
+    description: 'Bis zu 540 EUR Grundzulage im Jahr und bis zu 300 EUR je zugeordnetem Kind. Förderung ab 2027 verstehen und deinen möglichen Zuschuss berechnen.',
+    canonical: 'https://healio.de/altersvorsorgedepot',
+    lang: 'de',
+    schemaMarkup: [{ '@context': 'https://schema.org', '@type': 'WebPage', '@id': 'https://healio.de/altersvorsorgedepot#webpage', name: 'Altersvorsorgedepot 2027: Zulage berechnen', description: 'Bis zu 540 EUR Grundzulage im Jahr, bis zu 300 EUR je zugeordnetem zulagenberechtigten Kind. Der Zulagen-Rechner für das neue Altersvorsorgedepot ab 2027.', url: 'https://healio.de/altersvorsorgedepot', inLanguage: 'de-DE', isPartOf: { '@id': 'https://healio.de/#website' }, about: { '@id': 'https://healio.de/#organization' } }, createFAQSchema(altersvorsorgeFaq)],
+  },
+  {
+    path: '/altersvorsorgedepot/danke',
+    title: 'Startinfos zum Altersvorsorgedepot | Healio',
+    description: 'Informationen zu deiner Vormerkung für neue Details und den Start des Altersvorsorgedepots.',
+    canonical: 'https://healio.de/altersvorsorgedepot/danke',
+    robots: 'noindex, nofollow',
+    lang: 'de',
+  },
+  {
+    path: '/ratgeber/altersvorsorgedepot',
+    title: 'Altersvorsorgedepot: 24 Ratgeber zu Förderung und Riester | Healio',
+    description: 'Altersvorsorgedepot ab 2027 verstehen: Förderung, Riester-Wechsel, Kinderzulage, Selbstständige, Kosten und Auszahlung. Mit Beispielen und amtlichen Quellen.',
+    canonical: 'https://healio.de/ratgeber/altersvorsorgedepot',
+    lang: 'de',
+    schemaMarkup: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Ratgeber zum Altersvorsorgedepot', url: 'https://healio.de/ratgeber/altersvorsorgedepot', hasPart: ratgeberArticles.filter(article => article.topic === 'altersvorsorge').map(article => ({ '@type': 'Article', headline: article.headline, url: `https://healio.de/ratgeber/${article.slug}` })) },
+  },
   {
     path: '/',
     title: 'Versicherungen für Privatkunden & Unternehmen | Healio',

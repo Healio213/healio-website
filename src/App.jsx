@@ -20,6 +20,7 @@ import {
   trackMetaPageView,
   trackMetaViewContent,
 } from '@/lib/meta-pixel';
+import { isAltersvorsorgeRoute } from '@/lib/altersvorsorgeStartinfo';
 import { initializeGoogleAds, syncGoogleAdsConsent } from '@/lib/google-ads';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
@@ -61,10 +62,15 @@ const AppPasswordResetPage = React.lazy(() => import('@/pages/AppPasswordResetPa
 const TerminvereinbarungPage = React.lazy(() => import('@/pages/TerminvereinbarungPage'));
 const BlogPage = React.lazy(() => import('@/pages/BlogPage'));
 const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
+const AltersvorsorgedepotPage = React.lazy(() => import('@/pages/AltersvorsorgedepotPage'));
+const AltersvorsorgedepotDankePage = React.lazy(() => import('@/pages/AltersvorsorgedepotDankePage'));
+const AltersvorsorgeRatgeberPage = React.lazy(() => import('@/pages/AltersvorsorgeRatgeberPage'));
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
 const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
+
+const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -188,6 +194,7 @@ function App() {
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
           : <WhatsAppContactButton />
       )}
+      {isAltersvorsorgeRoute(location.pathname) && <Suspense fallback={null}><AltersvorsorgeStartinfoPopup /></Suspense>}
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>
@@ -237,6 +244,9 @@ function App() {
               <Route path="blog/:slug" element={<BlogArticlePage />} />
               {/* Ratgeber und Advertorials: nur im deutschen Baum. */}
               <Route path="ratgeber" element={<RatgeberPage />} />
+              <Route path="altersvorsorgedepot" element={<AltersvorsorgedepotPage />} />
+              <Route path="altersvorsorgedepot/danke" element={<AltersvorsorgedepotDankePage />} />
+              <Route path="ratgeber/altersvorsorgedepot" element={<AltersvorsorgeRatgeberPage />} />
               <Route path="ratgeber/:slug" element={<RatgeberArtikelPage />} />
             </Route>
 
