@@ -12,6 +12,7 @@ import {
   BLOG_RELATED_LINK_SLUGS,
   BLOG_SCHEMA_FALLBACK_IMAGE,
   createBlogArticleSchema,
+  getBlogArticleImage,
   getBlogRelatedLinks,
 } from '../src/lib/blogSeo.js';
 
@@ -23,6 +24,29 @@ const articles = rawArticles.map(applyBlogEditorialFixes);
 const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 const articleBySlug = new Map(articles.map((article) => [article.slug, article]));
 const routePaths = new Set(seoRoutes.map((route) => route.path));
+
+const legacyBudgetImage = 'https://healio.de/images/healio-health-pass-hero-v3.webp';
+const liveBudgetArticle = {
+  ...articleBySlug.get('gesundheitsbudget-3000-euro'),
+  featured_image_url: legacyBudgetImage,
+  structured_data: { article: { image: legacyBudgetImage } },
+};
+assert.equal(
+  getBlogArticleImage(liveBudgetArticle, liveBudgetArticle.structured_data.article),
+  BLOG_ARTICLE_IMAGES['gesundheitsbudget-3000-euro'],
+  'Die ältere Content-API darf das freigegebene Gesundheitsbudget-Motiv nicht überschreiben.',
+);
+assert.equal(
+  createBlogArticleSchema(liveBudgetArticle, 'https://healio.de/blog/gesundheitsbudget-3000-euro').image,
+  BLOG_ARTICLE_IMAGES['gesundheitsbudget-3000-euro'],
+  'Auch die strukturierten Daten müssen das aktuelle Gesundheitsbudget-Motiv verwenden.',
+);
+const customArticleImage = 'https://healio.de/images/hero-hebammen.webp';
+assert.equal(
+  getBlogArticleImage({ slug: 'osteopathie-krankenkasse-2026', featured_image_url: customArticleImage }),
+  customArticleImage,
+  'Andere Artikel behalten die Bildangaben aus der Content-API.',
+);
 
 assert.equal(articles.length, 23, 'Der geprüfte Blog-Cache muss 23 Artikel enthalten.');
 const NEW_SERIES_SLUGS_2026_09_23 = new Set([

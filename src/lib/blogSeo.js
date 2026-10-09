@@ -169,6 +169,11 @@ export function getBlogArticleDates(article, sourceSchema = {}) {
 }
 
 export function getBlogArticleImage(article, sourceSchema = {}) {
+  // Das freigegebene Markenmotiv gilt auch für ältere Bildangaben aus der Content-API.
+  if (article?.slug === 'gesundheitsbudget-3000-euro') {
+    return BLOG_ARTICLE_IMAGES[article.slug];
+  }
+
   const schemaImage = Array.isArray(sourceSchema.image)
     ? sourceSchema.image.find(Boolean)
     : sourceSchema.image;
