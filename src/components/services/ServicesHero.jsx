@@ -94,7 +94,7 @@ const ServicesHero = () => {
         }}
       />
       <div className="pointer-events-none absolute -left-48 top-28 h-[36rem] w-[36rem] rounded-full bg-[#25C990]/10 blur-[120px]" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-40 bottom-0 h-[34rem] w-[34rem] rounded-full bg-[#5E8BFF]/10 blur-[130px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[34rem] w-[34rem] rounded-full bg-home-mint-active/10 blur-[130px]" aria-hidden="true" />
 
       <div className="healio-container relative z-10 grid w-full gap-8 px-4 pb-8 sm:gap-16 sm:px-6 sm:pb-20 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-14 lg:px-8 lg:pb-24">
         {/* Experiment Handy-Conversion 10/2026: Der Textblock wird nach dem Vorrendern nicht mehr
@@ -108,7 +108,7 @@ const ServicesHero = () => {
           <Heading className="mt-4 sm:mt-6 max-w-[12ch] [hyphens:manual] font-display text-[clamp(2.25rem,12.3vw,2.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
             <span className="block">{t('hero.titleLine1')}</span>
             {' '}
-            <span className="mt-2 block bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-[#77BDFB] bg-clip-text text-transparent">
+            <span className="mt-2 block bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-home-mint-active bg-clip-text text-transparent">
               {t('hero.titleLine2')}
             </span>
           </Heading>

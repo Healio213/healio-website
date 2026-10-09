@@ -299,7 +299,7 @@ const PartnerPage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="h-full bg-gradient-to-br from-[#25c990] to-emerald-600 rounded-2xl p-6 sm:p-8 text-white text-center shadow-md md:shadow-xl"
+                className="h-full bg-gradient-to-br from-home-midnight to-healio-primary-dark rounded-2xl p-6 sm:p-8 text-white text-center shadow-md md:shadow-xl"
               >
                 <FriendlyIcon kind="budget" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
@@ -593,7 +593,7 @@ const PartnerPage = () => {
         </section>
 
         {/* FOOTER BANNER */}
-        <section className="order-last md:order-none py-10 sm:py-20 bg-gradient-to-br from-[#25c990] to-emerald-600">
+        <section className="order-last md:order-none py-10 sm:py-20 bg-gradient-to-br from-home-midnight to-healio-primary-dark">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

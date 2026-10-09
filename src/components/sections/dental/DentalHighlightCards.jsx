@@ -71,7 +71,7 @@ const BODY_INK = {
   coral: 'text-[#934638]',
   mint: 'text-[#075f46]',
   butter: 'text-[#70520b]',
-  sky: 'text-[#245f83]',
+  sky: 'text-home-midnight',
   lavender: 'text-[#4b4485]',
   mintDeep: 'text-[#075f46]',
 };
@@ -80,7 +80,7 @@ const TONES = {
   coral: { panel: 'bg-[#fff1ed]', ink: 'text-[#934638]', glow: 'bg-[#ffb59f]/45', soft: 'bg-[#fff1ed]' },
   mint: { panel: 'bg-[#e7f8f0]', ink: 'text-[#075f46]', glow: 'bg-[#5ee0b1]/40', soft: 'bg-[#effbf6]' },
   butter: { panel: 'bg-[#fff6d6]', ink: 'text-[#70520b]', glow: 'bg-[#f5cf5f]/40', soft: 'bg-[#fff8df]' },
-  sky: { panel: 'bg-[#e8f4fd]', ink: 'text-[#245f83]', glow: 'bg-[#8cc3ec]/45', soft: 'bg-[#eef8ff]' },
+  sky: { panel: 'bg-healio-light', ink: 'text-home-midnight', glow: 'bg-home-mint-active/45', soft: 'bg-home-ice' },
   lavender: { panel: 'bg-[#f1effb]', ink: 'text-[#4b4485]', glow: 'bg-[#b7aee8]/45', soft: 'bg-[#f4f2fc]' },
   mintDeep: { panel: 'bg-[#0d2a2a]', ink: 'text-[#5ee0b1]', glow: 'bg-[#25c990]/30', soft: 'bg-[#effbf6]' },
 };

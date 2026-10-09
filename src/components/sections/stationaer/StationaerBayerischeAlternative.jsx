@@ -93,10 +93,10 @@ const StationaerBayerischeAlternative = () => {
       data-healio-insurer="bayerische"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <article className="grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[1.8rem] border border-[#d6e3f0] bg-white shadow-[0_18px_45px_rgba(29,53,63,0.07)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
-          <div className="bg-[#f4f8fc] p-6 sm:p-8 lg:p-10">
+        <article className="grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[1.8rem] border border-home-mint/20 bg-white shadow-[0_18px_45px_rgba(29,53,63,0.07)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+          <div className="bg-home-ice p-6 sm:p-8 lg:p-10">
             <FriendlyIcon kind="hospital" tone="sky" size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
-            <p className="mt-4 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-[#2b6497] md:mt-6 md:text-xs md:tracking-[0.18em]">
+            <p className="mt-4 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-midnight md:mt-6 md:text-xs md:tracking-[0.18em]">
               {copy.eyebrow}
             </p>
             <h2
@@ -116,7 +116,7 @@ const StationaerBayerischeAlternative = () => {
               {TARIFFS.map((tariff) => (
                 <li
                   key={tariff}
-                  className="rounded-full border border-[#cfe0f0] bg-white px-3.5 py-1.5 text-sm font-extrabold text-[#1f4f7a]"
+                  className="rounded-full border border-home-mint/20 bg-white px-3.5 py-1.5 text-sm font-extrabold text-home-midnight"
                 >
                   {tariff}
                 </li>
@@ -130,7 +130,7 @@ const StationaerBayerischeAlternative = () => {
                 rel="noopener noreferrer"
                 aria-label={copy.ctaAria}
                 onClick={() => trackStationaerBayerischeClick('stationaer-alternative')}
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#071726] px-6 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2b6497] motion-reduce:transform-none sm:w-auto"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#071726] px-6 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-healio-primary-dark motion-reduce:transform-none sm:w-auto"
               >
                 {copy.cta}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -166,7 +166,7 @@ const StationaerBayerischeAlternative = () => {
                   key={fact.label}
                   className="h-full rounded-2xl border border-[#e3ecf5] bg-[#f8fbfe] p-5 md:rounded-none md:border-0 md:bg-transparent md:px-0 md:py-6"
                 >
-                  <dt className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#2b6497] md:text-xs md:tracking-[0.16em]">
+                  <dt className="text-sm font-extrabold uppercase tracking-[0.12em] text-home-midnight md:text-xs md:tracking-[0.16em]">
                     {fact.label}
                   </dt>
                   <dd className="mt-2 text-base leading-relaxed text-slate-700 md:leading-6">

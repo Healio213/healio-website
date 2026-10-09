@@ -65,7 +65,7 @@ const countAntragOpened = () => {
 
 const toneClasses = {
   mint: 'border-[#a6e9d2] bg-[#effbf6] text-[#0b6f52]',
-  sky: 'border-[#b9def4] bg-[#eef8ff] text-[#27658b]',
+  sky: 'border-home-mint/20 bg-home-ice text-home-midnight',
   butter: 'border-[#efd99b] bg-[#fff8df] text-[#7b5b0a]',
   coral: 'border-[#ffc7bc] bg-[#fff1ed] text-[#a84837]',
   neutral: 'border-slate-200 bg-slate-50 text-slate-600',

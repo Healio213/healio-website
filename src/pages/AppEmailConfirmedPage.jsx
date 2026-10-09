@@ -57,7 +57,7 @@ const AppEmailConfirmedPage = () => {
             className="text-center lg:text-left"
           >
             <img
-              src="/healio-logo-white.svg"
+              src="/healio-logo-white-web.svg"
               alt="Healio"
               className="mx-auto mb-10 h-16 w-auto lg:mx-0"
             />

@@ -1,4 +1,4 @@
-export const BLOG_SCHEMA_FALLBACK_IMAGE = 'https://healio.de/og-image.png';
+export const BLOG_SCHEMA_FALLBACK_IMAGE = 'https://healio.de/images/healio-linkvorschau-v2.png';
 
 export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'healio-konzept-fuer-hebammen': 'https://healio.de/images/hero-hebammen.webp',
@@ -11,7 +11,7 @@ export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'heilpraktiker-kosten-gkv-erstattung-healio': 'https://healio.de/images/hero-ambulant.webp',
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': 'https://healio.de/images/video-partner-thumb.jpg',
   'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung': 'https://healio.de/images/healio-app-dashboard-card.webp',
-  'gesundheitsbudget-3000-euro': 'https://healio.de/images/healio-health-pass-hero-v3.webp',
+  'gesundheitsbudget-3000-euro': 'https://healio.de/images/healio-gesundheitsbudget-v2.png',
   'naturheilkunde-krankenkasse-2026': 'https://healio.de/images/hero-ambulant.webp',
   'osteopathie-krankenkasse-2026': 'https://healio.de/images/hero-ambulant.webp',
   'ikk-classic-bonus-700-euro': 'https://healio.de/images/kassenboost-bridge-og.png',

@@ -22,9 +22,9 @@ const productVisuals = {
   },
   hospital: {
     scene: '/images/home-cards/stationaer.webp',
-    surface: 'bg-[#EAF2FF]',
-    border: 'border-[#D6E1F1]',
-    label: 'text-sky-800',
+    surface: 'bg-healio-light',
+    border: 'border-home-mint/20',
+    label: 'text-home-midnight',
   },
 };
 

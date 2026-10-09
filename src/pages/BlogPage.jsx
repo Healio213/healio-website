@@ -27,12 +27,12 @@ const TARGET_GROUP_KEYS = {
 const TARGET_GROUP_COLORS = {
   heilpraktiker: 'bg-emerald-100 text-emerald-800',
   hebammen: 'bg-pink-100 text-pink-800',
-  osteopathen: 'bg-teal-100 text-teal-800',
+  osteopathen: 'bg-home-mint/15 text-healio-primary-dark',
   tcm: 'bg-orange-100 text-orange-800',
-  endkunden: 'bg-blue-100 text-blue-800',
+  endkunden: 'bg-home-ice text-home-midnight',
   optiker: 'bg-purple-100 text-purple-800',
   hoerakustiker: 'bg-amber-100 text-amber-800',
-  physiotherapeut: 'bg-cyan-100 text-cyan-800',
+  physiotherapeut: 'bg-healio-light text-home-midnight',
   arbeitgeber: 'bg-slate-100 text-slate-800',
 };
 

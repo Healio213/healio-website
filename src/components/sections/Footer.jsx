@@ -281,7 +281,7 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
 
         {/* CTA Banner */}
         {!hideCta && (
-          <div className="bg-gradient-to-r from-healio-primary/10 to-emerald-500/10 border border-healio-primary/20 rounded-2xl p-5 md:p-8 lg:p-10 mb-8 md:mb-16 flex flex-col lg:flex-row items-center justify-between gap-4 md:gap-6">
+          <div className="bg-gradient-to-r from-healio-primary/10 to-home-mint-active/10 border border-healio-primary/20 rounded-2xl p-5 md:p-8 lg:p-10 mb-8 md:mb-16 flex flex-col lg:flex-row items-center justify-between gap-4 md:gap-6">
             <div>
               <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">{t('footer.ctaTitle')}</h3>
               <p className="text-slate-400">{t('footer.ctaSubtitle')}</p>

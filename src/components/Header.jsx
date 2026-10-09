@@ -320,7 +320,7 @@ const Header = () => {
                                 className={cn(
                                   "px-4 py-3 text-sm rounded-lg transition-all duration-200",
                                   "text-gray-800 hover:bg-gray-100 hover:text-gray-900",
-                                  location.pathname === subLink.to ? "bg-slate-50 text-emerald-600 font-semibold" : "font-medium"
+                                  location.pathname === subLink.to ? "bg-slate-50 text-healio-primary-dark font-semibold" : "font-medium"
                                 )}
                               >
                                 {subLink.label}
@@ -341,7 +341,7 @@ const Header = () => {
                   >
                     {link.label}
                     {location.pathname === link.to && (
-                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-healio-mint rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-healio-mint rounded-full shadow-[0_0_8px_rgba(37,201,144,0.8)]" />
                     )}
                   </Link>
                 ) : (
@@ -375,7 +375,7 @@ const Header = () => {
                   exit={{ opacity: 0, y: -6, scale: 0.96 }}
                   transition={{ duration: 0.24, ease: 'easeOut' }}
                   data-ambulant-header-cta="desktop"
-                  className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-[#10B981] px-5 xl:px-6 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-colors hover:bg-[#059669] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full bg-home-mint px-5 xl:px-6 text-sm font-semibold text-home-midnight shadow-[0_4px_12px_rgba(37,201,144,0.3)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   <Calculator className="mr-2 h-4 w-4" aria-hidden="true" />
                   {lang === 'de' ? 'Beitrag berechnen' : 'Quote (German form)'}
@@ -385,7 +385,7 @@ const Header = () => {
           ) : (
             <Button
               asChild
-              className="whitespace-nowrap bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-5 xl:px-6 shadow-[0_4px_12px_rgba(16,185,129,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
+              className="whitespace-nowrap bg-home-mint hover:bg-home-mint-active text-home-midnight rounded-full px-5 xl:px-6 shadow-[0_4px_12px_rgba(37,201,144,0.3)] transition-transform hover:scale-105 active:scale-95 border-0"
             >
               {isHome ? (
                 <a href={KASSENBOOST_COMPARE_URL} target="_blank" rel="noopener noreferrer">
@@ -443,7 +443,7 @@ const Header = () => {
               exit={{ opacity: 0, y: -6, scale: 0.96 }}
               transition={{ duration: 0.24, ease: 'easeOut' }}
               data-ambulant-header-cta="mobile"
-              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-healio-primary px-3 text-xs font-bold text-white shadow-[0_4px_14px_rgba(16,185,129,0.28)] transition-colors hover:bg-emerald-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
+              className="absolute right-[4.5rem] z-50 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-3 text-xs font-bold text-home-midnight shadow-[0_4px_14px_rgba(37,201,144,0.28)] transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
               aria-label={lang === 'de' ? 'Beitrag berechnen' : 'Get quote – German form'}
             >
               <Calculator className="h-4 w-4" aria-hidden="true" />
@@ -472,7 +472,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-[#1a1a2e]/95 backdrop-blur-md z-40 pt-28 px-6 xl:hidden flex flex-col items-center gap-6 h-screen overflow-y-auto pb-20"
+              className="fixed inset-0 bg-home-midnight/95 backdrop-blur-md z-40 pt-28 px-6 xl:hidden flex flex-col items-center gap-6 h-screen overflow-y-auto pb-20"
             >
               <ul className="flex flex-col items-center gap-6 text-xl w-full">
                 {navLinks.map((link) => (
@@ -555,7 +555,7 @@ const Header = () => {
               </button>
               <Button
                 asChild
-                className="w-full max-w-xs bg-[#10B981] hover:bg-[#059669] text-white py-6 text-lg shadow-xl shadow-[#10B981]/20 rounded-xl mt-6 border-0 shrink-0"
+                className="w-full max-w-xs bg-home-mint hover:bg-home-mint-active text-home-midnight py-6 text-lg shadow-xl shadow-home-mint/20 rounded-xl mt-6 border-0 shrink-0"
               >
                 {isHome ? (
                   <a href={KASSENBOOST_COMPARE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>

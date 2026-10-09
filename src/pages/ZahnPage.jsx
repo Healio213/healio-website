@@ -41,14 +41,14 @@ const pathVisuals = {
 
 const pathStyles = {
   mint: 'bg-[#effbf6] text-[#075f46]',
-  sky: 'bg-[#eef8ff] text-[#245f83]',
+  sky: 'bg-home-ice text-home-midnight',
   butter: 'bg-[#fff8df] text-[#70520b]',
   coral: 'bg-[#fff1ed] text-[#934638]',
 };
 
 // Rahmen- und Punktfarben der vier Zahn-Situationen im Hero (wie die Auswahl auf /stationaer).
-const offerBorders = ['border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]', 'border-[#c9dcef]'];
-const offerDots = ['bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]', 'bg-[#5b8fd1]'];
+const offerBorders = ['border-[#b9e6d6]', 'border-[#ead8a7]', 'border-[#d7d3ee]', 'border-home-mint/20'];
+const offerDots = ['bg-[#25c990]', 'bg-[#e6b946]', 'bg-[#8a80c9]', 'bg-home-mint-active'];
 
 const trustVisuals = [
   { kind: 'broker', tone: 'mint' },
@@ -103,7 +103,7 @@ const ZahnPage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={tSeo('zahn.title')}
         ogDescription={tSeo('zahn.description')}
-        ogImage="https://healio.de/og-image.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
         ogUrl={canonicalUrl}
         schemaMarkup={createServiceSchema()}
       />
@@ -123,7 +123,7 @@ const ZahnPage = () => {
           aria-labelledby="zahn-hero-heading"
         >
           <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
-          <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
+          <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-home-mint-active/14 blur-3xl" aria-hidden="true" />
           <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
           <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">

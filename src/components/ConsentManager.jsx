@@ -282,7 +282,7 @@ export const ConsentManager = () => {
                   <p className="font-bold text-slate-900">{copy.necessaryTitle}</p>
                   <p className="mt-1 text-sm leading-6 text-slate-600">{copy.necessaryText}</p>
                 </div>
-                <input type="checkbox" checked disabled className="mt-1 h-5 w-5 accent-emerald-600" aria-label={copy.necessaryTitle} />
+                <input type="checkbox" checked disabled className="mt-1 h-5 w-5 accent-healio-primary-dark" aria-label={copy.necessaryTitle} />
               </div>
 
               {CONSENT_PURPOSES.map((purpose) => {
@@ -297,7 +297,7 @@ export const ConsentManager = () => {
                       type="checkbox"
                       checked={draft[purpose] === true}
                       onChange={(event) => setDraft((current) => ({ ...current, [purpose]: event.target.checked }))}
-                      className="mt-1 h-5 w-5 shrink-0 accent-emerald-600"
+                      className="mt-1 h-5 w-5 shrink-0 accent-healio-primary-dark"
                     />
                   </label>
                 );

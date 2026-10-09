@@ -93,7 +93,7 @@ const HomeHero = () => {
       </picture>
 
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(3,12,20,0.62)_0%,rgba(3,12,20,0.48)_30%,rgba(3,12,20,0.72)_76%,rgba(3,12,20,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(3,12,20,0.9)_0%,rgba(3,12,20,0.77)_43%,rgba(3,12,20,0.28)_73%,rgba(3,12,20,0.5)_100%)]" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(31,72,121,0.22),transparent_44%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(37,201,144,0.22),transparent_44%)]" />
 
       <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-6 sm:px-6 md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
         <div className="relative z-20 flex w-full max-w-[1060px] flex-col">

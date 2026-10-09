@@ -45,7 +45,7 @@ const MainHomePage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
-        ogImage="https://healio.de/og-image.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
       />

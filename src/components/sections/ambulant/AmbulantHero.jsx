@@ -54,7 +54,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
   return (
     <section className={`relative isolate overflow-hidden bg-[#071726] text-white ${className}`} aria-labelledby="hero-heading">
       <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
-      <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
+      <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-home-mint-active/14 blur-3xl" aria-hidden="true" />
       <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-10 pt-28 sm:px-6 sm:pb-12 md:gap-12 md:pb-20 md:pt-32 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12 lg:px-8">

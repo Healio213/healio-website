@@ -74,7 +74,7 @@ const COPY = {
 // runden Marke im passenden Ton.
 const TONES = [
   { card: 'bg-[#f4fbf7]', badge: 'bg-[#d6f1e4] text-[#0b7a5a]' },
-  { card: 'bg-[#f5faff]', badge: 'bg-[#d9eafa] text-[#245f83]' },
+  { card: 'bg-home-ice', badge: 'bg-home-mint/15 text-home-midnight' },
   { card: 'bg-[#f9f7ff]', badge: 'bg-[#e6e1f8] text-[#4b4485]' },
   { card: 'bg-[#fffcf2]', badge: 'bg-[#fbeab4] text-[#70520b]' },
 ];

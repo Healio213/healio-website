@@ -589,7 +589,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                              ab md wie bisher rechts neben Name, Beschreibung und Balken. */
                           <div key={potKey} className="grid h-full min-w-0 grid-cols-1 content-start gap-x-4 rounded-2xl border border-slate-200 bg-white p-3.5 md:h-auto md:grid-cols-[minmax(0,1fr)_auto] md:content-normal md:rounded-none md:border-0 md:bg-transparent md:p-0 md:py-4">
                             <div className="order-1 flex min-w-0 items-center gap-2 md:order-none md:col-start-1 md:row-start-1">
-                              <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${['bg-[#61cfa5]', 'bg-[#eab95f]', 'bg-[#92bfe4]', 'bg-[#b3a1df]'][index]}`} aria-hidden="true" />
+                              <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${['bg-[#61cfa5]', 'bg-[#eab95f]', 'bg-home-mint-active', 'bg-[#b3a1df]'][index]}`} aria-hidden="true" />
                               <p className="font-display text-base font-extrabold text-home-midnight md:truncate">{pot.label}</p>
                             </div>
                             <p className="order-2 mt-0.5 min-w-0 pl-[18px] text-sm text-home-slate md:order-none md:col-start-1 md:row-start-2 md:mt-1 md:truncate">{pot.detail}</p>

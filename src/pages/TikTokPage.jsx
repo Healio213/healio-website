@@ -30,23 +30,23 @@ const ProductCard = ({ card, index, colorClass, gradientClass, textColorClass })
         <div className={`absolute top-0 left-0 right-0 h-[3px] ${gradientClass}`} />
 
         <div className="flex justify-between items-start mb-3">
-          <div>
+          <div className="min-w-0 flex-1">
             <span className="text-[28px] block mb-1">{card.icon}</span>
             <h2 className="text-lg font-bold text-white">
               {card.title}
               {card.budgetHighlight && (
-                <span className="ml-2 text-[12px] font-bold text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded-md align-middle">{card.budgetHighlight}</span>
+                <span className="ml-2 text-[12px] font-bold text-home-mint-active bg-home-mint/10 px-2 py-0.5 rounded-md align-middle">{card.budgetHighlight}</span>
               )}
             </h2>
             <p className="text-[13px] text-slate-400 leading-relaxed mt-1">{card.subtitle}</p>
           </div>
-          <div className="text-right flex-shrink-0 ml-4">
-            <span className={`text-[22px] font-extrabold ${textColorClass}`}>{card.price}</span>
+          <div className="min-w-0 max-w-[55%] ml-3 text-right">
+            <span className={`block whitespace-normal break-words text-[22px] font-extrabold leading-tight ${textColorClass}`}>{card.price}</span>
             <span className="block text-[11px] text-slate-500">{card.period}</span>
           </div>
         </div>
 
-        <div className="inline-block bg-emerald-500/15 text-emerald-400 text-[11px] font-semibold px-2.5 py-1 rounded-md mt-2">
+        <div className="inline-block bg-home-mint/15 text-home-mint-active text-[11px] font-semibold px-2.5 py-1 rounded-md mt-2">
           {card.badge}
         </div>
 
@@ -64,18 +64,18 @@ const TikTokPage = () => {
   const cards = [
     {
       ...t('cards.ambulant', { returnObjects: true }),
-      gradient: 'bg-gradient-to-r from-cyan-400 to-blue-500',
-      textColor: 'text-cyan-400',
+      gradient: 'bg-gradient-to-r from-home-mint to-home-mint-active',
+      textColor: 'text-home-mint-active',
     },
     {
       ...t('cards.zahn', { returnObjects: true }),
-      gradient: 'bg-gradient-to-r from-violet-400 to-purple-500',
-      textColor: 'text-violet-400',
+      gradient: 'bg-gradient-to-r from-home-mint-active to-healio-primary',
+      textColor: 'text-home-mint-active',
     },
     {
       ...t('cards.klinik', { returnObjects: true }),
-      gradient: 'bg-gradient-to-r from-emerald-400 to-green-500',
-      textColor: 'text-emerald-400',
+      gradient: 'bg-gradient-to-r from-home-mint-active to-home-mint',
+      textColor: 'text-home-mint-active',
     },
   ];
 
@@ -104,12 +104,12 @@ const TikTokPage = () => {
             className="text-center mb-9"
           >
             <img
-              src="/healio-logo-white.svg"
+              src="/healio-logo-white-web.svg"
               alt="Healio Logo"
               className="h-10 w-auto mx-auto brightness-0 invert"
             />
             <p className="text-[15px] text-slate-400 mt-1">{t('header.tagline')}</p>
-            <p className="text-[14px] text-cyan-400 font-semibold mt-2 italic">{t('header.provocation')}</p>
+            <p className="text-[14px] text-home-mint-active font-semibold mt-2 italic">{t('header.provocation')}</p>
           </motion.header>
 
           {/* Trust Badges */}
@@ -120,7 +120,7 @@ const TikTokPage = () => {
             className="flex justify-center gap-4 mb-8 text-[12px] text-slate-500"
           >
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-home-mint rounded-full" />
               {t('trust.noWaiting')}
             </span>
           </motion.div>

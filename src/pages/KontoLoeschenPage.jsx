@@ -57,7 +57,7 @@ const KontoLoeschenPage = () => {
               </p>
               <a
                 href="mailto:info@healio.de?subject=Konto%20l%C3%B6schen"
-                className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="inline-block bg-home-mint hover:bg-home-mint-active text-home-midnight font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 info@healio.de
               </a>

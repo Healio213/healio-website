@@ -40,9 +40,9 @@ const PROTECTION_CARD_STYLES = {
     note: 'border-[#ead9ad] bg-white/65',
   },
   stationaer: {
-    card: 'border-[#bed7ec] bg-[#eef6ff]',
-    badge: 'bg-[#dbeafb] text-[#245b87]',
-    note: 'border-[#cadeef] bg-white/65',
+    card: 'border-home-mint/20 bg-healio-light',
+    badge: 'bg-home-mint/15 text-home-midnight',
+    note: 'border-home-mint/20 bg-white/65',
   },
 };
 
@@ -102,7 +102,7 @@ const KassenbonusPage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
-        ogImage="https://healio.de/og-image.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
         ogImageAlt={t('seo.ogImageAlt')}
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
@@ -110,7 +110,7 @@ const KassenbonusPage = () => {
 
       <article className="w-full overflow-hidden bg-white text-slate-800">
         <section className="relative isolate overflow-hidden bg-home-midnight px-4 pb-12 pt-28 text-white sm:px-6 sm:pb-24 sm:pt-36 lg:px-8 lg:pb-28 lg:pt-44">
-          <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_74%_28%,rgba(37,201,144,0.2),transparent_28%),radial-gradient(circle_at_12%_88%,rgba(67,125,180,0.16),transparent_30%)]" aria-hidden="true" />
+          <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_74%_28%,rgba(37,201,144,0.2),transparent_28%),radial-gradient(circle_at_12%_88%,rgba(37,201,144,0.16),transparent_30%)]" aria-hidden="true" />
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(255,255,255,0.035),transparent_35%,rgba(255,255,255,0.02))]" aria-hidden="true" />
 
           <div className="healio-container grid items-center gap-8 sm:gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(420px,0.8fr)] lg:gap-16">
@@ -362,9 +362,9 @@ const KassenbonusPage = () => {
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50 p-4 sm:mt-7 sm:p-5">
+              <div className="mt-5 rounded-2xl border border-home-mint/20 bg-healio-light p-4 sm:mt-7 sm:p-5">
                 <p className="flex items-center gap-2 font-display text-sm font-extrabold text-home-midnight">
-                  <Info className="h-4 w-4 text-sky-700" aria-hidden="true" />
+                  <Info className="h-4 w-4 text-healio-primary-dark" aria-hidden="true" />
                   {t('everyday.noteTitle')}
                 </p>
                 <p className="mt-2 text-base leading-6 text-slate-600 sm:text-sm sm:leading-6">{t('everyday.note')}</p>
@@ -374,7 +374,7 @@ const KassenbonusPage = () => {
         </section>
 
         <section className="relative isolate overflow-hidden bg-home-midnight px-4 py-12 text-white sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="kassenbonus-bridge-heading">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgba(37,201,144,0.2),transparent_32%),radial-gradient(circle_at_84%_100%,rgba(76,143,197,0.14),transparent_30%)]" aria-hidden="true" />
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgba(37,201,144,0.2),transparent_32%),radial-gradient(circle_at_84%_100%,rgba(94,224,177,0.14),transparent_30%)]" aria-hidden="true" />
           <div className="healio-container">
             <div className="max-w-4xl">
               <p className="font-display text-sm font-bold uppercase tracking-[0.22em] text-home-mint md:text-xs">{t('bridge.eyebrow')}</p>

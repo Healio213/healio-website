@@ -46,7 +46,7 @@ const HomePage = () => {
         canonicalUrl="https://healio.de/"
         ogTitle="Healio - Ganzheitliche Gesundheit & Bonusoptimierung"
         ogDescription="Maximiere deine Gesundheitsvorteile mit Healio. Bis zu 100% Erstattung für Heilpraktiker, Massagen und mehr durch clevere Kombination aus Zusatzversicherung und IKK Bonusprogramm."
-        ogImage="https://healio.de/og-image.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
         ogUrl="https://healio.de/"
         schemaMarkup={schemaMarkup}
       />

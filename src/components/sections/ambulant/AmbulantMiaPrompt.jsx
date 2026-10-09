@@ -120,7 +120,7 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
                 <img
                   src="/nita-avatar.jpg"
                   alt=""
-                  className="h-11 w-11 flex-shrink-0 rounded-full object-cover shadow-lg shadow-emerald-500/25 ring-2 ring-emerald-100"
+                  className="h-11 w-11 flex-shrink-0 rounded-full object-cover shadow-lg shadow-home-mint/25 ring-2 ring-emerald-100"
                   aria-hidden="true"
                 />
                 <div>
@@ -136,7 +136,7 @@ const AmbulantMiaPrompt = ({ variant = 'ambulant' }) => {
                   <button
                     type="button"
                     onClick={handleOpen}
-                    className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors hover:bg-emerald-600"
+                    className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-home-mint px-4 py-2.5 text-sm font-bold text-home-midnight shadow-lg shadow-home-mint/20 transition-colors hover:bg-home-mint-active"
                   >
                     {t('miaPrompt.cta')}
                   </button>

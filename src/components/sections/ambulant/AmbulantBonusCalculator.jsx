@@ -238,7 +238,7 @@ const AmbulantBonusCalculator = ({
               {t('bonusCalculator.subtitle')}
             </p>
           </div>
-          <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`h-6 w-6 flex-shrink-0 text-healio-primary-dark transition-transform ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>}
 
         <div className={`${embedded ? 'hidden' : 'hidden md:block'} text-center mb-16`}>
@@ -379,18 +379,18 @@ const AmbulantBonusCalculator = ({
             )}
 
             {/* Vertrauens-Hinweis */}
-            <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-3 md:mt-6 md:p-4 flex gap-3 items-start">
-              <HeartHandshake className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-700" aria-hidden="true" />
+            <div className="mt-4 bg-healio-light border border-home-mint/20 rounded-xl p-3 md:mt-6 md:p-4 flex gap-3 items-start">
+              <HeartHandshake className="mt-0.5 h-5 w-5 flex-shrink-0 text-healio-primary-dark" aria-hidden="true" />
               <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
-                <p className="text-base font-bold text-blue-900 mb-1">{t('bonusCalculator.trustNote')}</p>
-                <p className="text-base text-blue-800 leading-relaxed">
+                <p className="text-base font-bold text-home-midnight mb-1">{t('bonusCalculator.trustNote')}</p>
+                <p className="text-base text-home-midnight leading-relaxed">
                   {t('bonusCalculator.trustNoteDesc')}
                 </p>
                 <a
                   href={IKK_BONUS_2026_INFO}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex text-sm font-bold text-blue-900 underline decoration-blue-400 underline-offset-2 hover:text-blue-700"
+                  className="mt-2 inline-flex text-sm font-bold text-home-midnight underline decoration-home-mint underline-offset-2 hover:text-healio-primary-dark"
                 >
                   {t('bonusCalculator.officialSource')}
                 </a>

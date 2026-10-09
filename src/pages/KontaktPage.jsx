@@ -101,10 +101,10 @@ const KontaktPage = () => {
         title={tSeo('kontakt.title')}
         description={tSeo('kontakt.description')}
         canonicalUrl={canonicalUrl}
-        ogImage="https://healio.de/images/healio-app-icon.png"
-        ogImageAlt="Healio – Figur mit Blatt"
-        ogImageWidth={1024}
-        ogImageHeight={1024}
+        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
+        ogImageAlt="Healio – aktuelles Logo auf Navy mit Mint-Markenmotiv"
+        ogImageWidth={1200}
+        ogImageHeight={630}
         schemaMarkup={schemaMarkup}
       />
 
@@ -162,7 +162,7 @@ const KontaktPage = () => {
                     <FriendlyIcon emoji="✉️" label={t('page.email')} tone="sky" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.email')}</h3>
-                      <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
+                      <a href="mailto:info@healio.de" className="text-lg text-slate-900 font-medium hover:text-healio-primary-dark transition-colors">
                         info@healio.de
                       </a>
                     </div>
@@ -172,7 +172,7 @@ const KontaktPage = () => {
                     <FriendlyIcon emoji="📞" label={t('page.phone')} tone="mint" size="sm" />
                     <div>
                       <h3 className="text-sm font-semibold text-slate-500 mb-1">{t('page.phone')}</h3>
-                      <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-[#10B981] transition-colors">
+                      <a href="tel:+494089755705" className="text-lg text-slate-900 font-medium hover:text-healio-primary-dark transition-colors">
                         +49 40 89755705
                       </a>
                     </div>
@@ -256,7 +256,7 @@ const KontaktPage = () => {
                       required 
                       value={formData.name} 
                       onChange={handleChange} 
-                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
+                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-home-mint focus:ring-home-mint"
                       placeholder={t('form.namePlaceholder')} 
                     />
                   </div>
@@ -271,7 +271,7 @@ const KontaktPage = () => {
                       required 
                       value={formData.email} 
                       onChange={handleChange} 
-                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
+                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-home-mint focus:ring-home-mint"
                       placeholder={t('form.emailPlaceholder')} 
                     />
                   </div>
@@ -285,7 +285,7 @@ const KontaktPage = () => {
                       maxLength={160}
                       value={formData.company} 
                       onChange={handleChange} 
-                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
+                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-home-mint focus:ring-home-mint"
                       placeholder={t('form.companyPlaceholder')} 
                     />
                   </div>
@@ -299,7 +299,7 @@ const KontaktPage = () => {
                       maxLength={40}
                       value={formData.phone} 
                       onChange={handleChange} 
-                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-[#10B981] focus:ring-[#10B981]" 
+                      className="w-full text-slate-900 bg-slate-50 h-12 border-slate-200 focus:border-home-mint focus:ring-home-mint"
                       placeholder={t('form.phonePlaceholder')} 
                     />
                   </div>
@@ -313,7 +313,7 @@ const KontaktPage = () => {
                       maxLength={4000}
                       value={formData.message} 
                       onChange={handleChange} 
-                      className="w-full text-slate-900 bg-slate-50 min-h-[150px] p-4 rounded-xl border border-slate-200 focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] outline-none transition-all resize-y" 
+                      className="w-full text-slate-900 bg-slate-50 min-h-[150px] p-4 rounded-xl border border-slate-200 focus:border-home-mint focus:ring-1 focus:ring-home-mint outline-none transition-all resize-y"
                       placeholder={t('form.messagePlaceholder')} 
                     />
                   </div>
@@ -321,7 +321,7 @@ const KontaktPage = () => {
                   <Button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full bg-[#10B981] hover:bg-[#059669] text-white h-14 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all"
+                    className="w-full bg-home-mint hover:bg-home-mint-active text-home-midnight h-14 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transition-all"
                   >
                     {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> {t('form.sending')}</> : <><Send className="mr-2 w-5 h-5" /> {t('form.submit')}</>}
                   </Button>

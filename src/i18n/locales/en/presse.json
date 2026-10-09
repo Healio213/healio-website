@@ -67,9 +67,9 @@
     "title": "Downloads",
     "note": "The files may be used unchanged for reporting about Healio.",
     "items": [
-      { "label": "Healio wordmark, white", "format": "SVG", "href": "/healio-logo-white.svg" },
+      { "label": "Healio wordmark, white", "format": "SVG", "href": "/healio-logo-white-web.svg" },
       { "label": "Healio logo mark", "format": "SVG", "href": "/favicon.svg" },
-      { "label": "Healio preview image", "format": "PNG", "href": "/og-image.png" }
+      { "label": "Healio preview image", "format": "PNG", "href": "/images/healio-linkvorschau-v2.png" }
     ]
   },
   "publications": {

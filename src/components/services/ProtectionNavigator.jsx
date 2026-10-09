@@ -19,7 +19,7 @@ const pathVisuals = {
 const headerTones = {
   ambulant: { band: 'bg-[#E4F6EE] border-[#CBEBDC]', label: 'text-[#0B6B4B]' },
   dental: { band: 'bg-[#FFF3D6] border-[#F5E2AE]', label: 'text-[#7A5600]' },
-  hospital: { band: 'bg-[#E3F0FB] border-[#CFE0F0]', label: 'text-[#2B6497]' },
+  hospital: { band: 'bg-healio-light border-home-mint/20', label: 'text-home-midnight' },
   pet: { band: 'bg-[#EFEAFB] border-[#DDD5F3]', label: 'text-[#5B3FA8]' },
 };
 

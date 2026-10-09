@@ -97,7 +97,7 @@ const toneClasses = {
   mint: 'from-[#eefaf5] via-[#dff5eb] to-[#c9eddf] ring-[#bddfd2]',
   lavender: 'from-[#f7f4ff] via-[#eee9fb] to-[#ddd5f4] ring-[#d5cdec]',
   butter: 'from-[#fffdf2] via-[#fff5d5] to-[#fbe7a8] ring-[#eadca9]',
-  sky: 'from-[#f1f8ff] via-[#e4f2ff] to-[#cde5f6] ring-[#c5dceb]',
+  sky: 'from-home-ice via-healio-light to-home-mint/15 ring-home-midnight/10',
   coral: 'from-[#fff6f2] via-[#ffe8de] to-[#f7cdbd] ring-[#eac3b5]',
 };
 

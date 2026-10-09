@@ -75,7 +75,7 @@ const STEP_ICONS = [
 ];
 const KLINIK_BLOCKS = [
   { key: 'chance', tone: 'bg-[#fff6f2] ring-[#f3d3c6]' },
-  { key: 'chanceOben', tone: 'bg-[#f1f8ff] ring-[#d3e3f2]' },
+  { key: 'chanceOben', tone: 'bg-home-ice ring-home-mint/20' },
   { key: 'deadline', tone: 'bg-[#fffaf0] ring-[#efe0b2]' },
   { key: 'ehrlich', tone: 'bg-slate-50 ring-slate-200' },
   { key: 'rooming', tone: 'bg-home-ice ring-[#cde8dc]' },
@@ -339,13 +339,13 @@ const HebammenPage = () => {
               </article>
               <article className={cardClass} data-hebammen-case="hausbesuch">
                 <FriendlyIcon kind="support" tone="sky" size="sm" />
-                <p className="mt-4 font-display text-sm font-bold uppercase tracking-[0.14em] text-[#1f5f8b] md:text-xs md:tracking-[0.22em]">{t('examples.homeVisit.eyebrow')}</p>
+                <p className="mt-4 font-display text-sm font-bold uppercase tracking-[0.14em] text-home-midnight md:text-xs md:tracking-[0.22em]">{t('examples.homeVisit.eyebrow')}</p>
                 <h3 className="mt-2 font-display text-xl font-extrabold leading-tight text-[#071726] sm:text-2xl">{t('examples.homeVisit.title')}</h3>
                 <p className="mt-4 text-base leading-relaxed text-slate-700">{t('examples.homeVisit.text')}</p>
                 <ol className="mt-4 space-y-3">
                   {t('examples.homeVisit.steps', { returnObjects: true }).map((item, index) => (
                     <li key={item} className="flex gap-3 text-base leading-relaxed text-slate-700">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e4f2ff] font-display text-sm font-extrabold text-[#1f5f8b]">{index + 1}</span>
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-healio-light font-display text-sm font-extrabold text-home-midnight">{index + 1}</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -425,19 +425,19 @@ const HebammenPage = () => {
                 </summary>
                 <div className="grid grid-cols-1 gap-5 border-t border-slate-100 p-5 sm:p-7 md:grid-cols-2 md:gap-6">
                   {/* IKK classic */}
-                  <div className="rounded-[1.5rem] bg-[#f1f8ff] p-5 ring-1 ring-[#d3e3f2] sm:p-7">
-                    <h3 className="font-display text-xl font-extrabold text-[#1f4f7a]">{t('leistungen.ikkTitle')}</h3>
+                  <div className="rounded-[1.5rem] bg-home-ice p-5 ring-1 ring-home-mint/20 sm:p-7">
+                    <h3 className="font-display text-xl font-extrabold text-home-midnight">{t('leistungen.ikkTitle')}</h3>
                     <div className="mt-5 space-y-4">
                       {t('leistungen.ikkItems', { returnObjects: true }).map((item) => (
                         <div key={item.name} className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 md:flex-nowrap">
                           <div className="flex flex-1 items-start gap-3">
-                            <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#2f7fbf]" aria-hidden="true" />
+                            <Check className="mt-0.5 h-5 w-5 shrink-0 text-healio-primary-dark" aria-hidden="true" />
                             <div>
                               <p className="text-base font-semibold text-[#071726]">{item.name}</p>
                               <p className="text-sm text-slate-500">{item.detail}</p>
                             </div>
                           </div>
-                          <span className="whitespace-nowrap pl-8 font-display text-base font-extrabold text-[#1f4f7a] md:pl-0">{item.amount}</span>
+                          <span className="whitespace-nowrap pl-8 font-display text-base font-extrabold text-home-midnight md:pl-0">{item.amount}</span>
                         </div>
                       ))}
                     </div>
@@ -515,7 +515,7 @@ const HebammenPage = () => {
 
                   <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                     {[
-                      { key: 'bayerische', accent: 'text-[#1f4f7a]', check: 'text-[#2f7fbf]' },
+                      { key: 'bayerische', accent: 'text-home-midnight', check: 'text-healio-primary-dark' },
                       { key: 'sdk', accent: 'text-[#087454]', check: 'text-[#25c990]' },
                     ].map((insurer) => (
                       <div key={insurer.key} className="flex flex-col rounded-[1.5rem] border border-slate-100 bg-white p-5 shadow-[0_14px_35px_rgba(31,57,66,0.06)] sm:p-7">

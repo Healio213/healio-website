@@ -343,7 +343,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
           <div className={cx('grid sm:grid-cols-2 lg:grid-cols-3', mobileSwipe ? 'gap-2.5 md:gap-3' : 'gap-3')}>
             {Array.isArray(identicalItems) && identicalItems.map((item, idx) => (
               <div key={idx} className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-healio-primary-dark flex-shrink-0" />
                 <span className="text-gray-700 text-base">{item}</span>
               </div>
             ))}
@@ -365,7 +365,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                 {t('ikkWechsel.extrasSubtitle')}
               </p>
             </div>
-            <ChevronDown className="h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform group-open:rotate-180" />
+            <ChevronDown className="h-6 w-6 flex-shrink-0 text-healio-primary-dark transition-transform group-open:rotate-180" />
           </summary>
           {mobileSwipe ? (
             <div className="px-4 pb-4 sm:px-6 md:pb-6">
@@ -433,7 +433,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                 {t('ikkWechsel.timelineSubtitle')}
               </p>
             </div>
-            <ChevronDown className={`h-6 w-6 flex-shrink-0 text-emerald-500 transition-transform ${mobileTimelineOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-6 w-6 flex-shrink-0 text-healio-primary-dark transition-transform ${mobileTimelineOpen ? 'rotate-180' : ''}`} />
           </button>
 
           <div className="hidden text-center max-w-3xl mx-auto mb-10 md:block">
@@ -447,7 +447,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
 
           <div id="wechselstrecke-inhalt" className={`${mobileTimelineOpen ? 'block' : 'hidden'} md:block`}>
             <div className="relative mt-6 md:mt-0">
-              <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-600 rounded-full" />
+              <div className="hidden lg:block absolute top-10 left-[8%] right-[8%] h-1 bg-gradient-to-r from-home-mint-active via-home-mint to-healio-primary-dark rounded-full" />
               {mobileSwipe ? (
                 <MobileSwipeRow
                   as="ol"
@@ -476,7 +476,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                   {t('ikkWechsel.timelineFinanceDesc')}
                 </p>
               </div>
-              <div className="bg-emerald-600 text-white rounded-xl p-5 md:p-6 flex flex-col justify-center">
+              <div className="bg-healio-primary-dark text-white rounded-xl p-5 md:p-6 flex flex-col justify-center">
                 <div className="text-3xl md:text-4xl font-black mb-2">
                   {t('ikkWechsel.timelineBridgeValue')}
                 </div>
@@ -510,7 +510,7 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                    <HelpCircle className="w-5 h-5 text-healio-primary-dark flex-shrink-0" />
                     <span className="font-semibold text-gray-900">{t(`ikkWechsel.fears.${key}.q`)}</span>
                   </div>
                   <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ${openIndex === idx ? 'rotate-180' : ''}`} />

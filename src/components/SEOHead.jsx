@@ -5,6 +5,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { serializeJsonLd } from '@/lib/contentSecurity';
 
 const SITE_URL = 'https://healio.de';
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/healio-linkvorschau-v2.png`;
 
 const normalizeHealioUrl = (url) => {
   if (!url) return url;
@@ -68,7 +69,7 @@ const SEOHead = ({
   canonicalUrl,
   ogTitle,
   ogDescription,
-  ogImage = `${SITE_URL}/og-image.png`,
+  ogImage = DEFAULT_OG_IMAGE,
   ogImageAlt = 'Healio Gesundheitsbudget und Zusatzversicherungen',
   ogImageWidth = 1200,
   ogImageHeight = 630,

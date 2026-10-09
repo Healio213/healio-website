@@ -26,7 +26,7 @@ const StationaerHero = () => {
       aria-labelledby="stationaer-hero-heading"
     >
       <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#25c990]/16 blur-3xl" aria-hidden="true" />
-      <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#789bd7]/14 blur-3xl" aria-hidden="true" />
+      <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-home-mint-active/14 blur-3xl" aria-hidden="true" />
       <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
       {/* Inhalt bündig zum Logo im Header (max-w-7xl mit px-4/6/8, wie

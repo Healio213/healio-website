@@ -121,8 +121,8 @@ for (const article of articles) {
   }
 }
 
-assert.ok(fs.existsSync(path.join(rootDir, 'public', 'og-image.png')), 'Das Schema-Fallback-Bild fehlt lokal.');
-assert.equal(BLOG_SCHEMA_FALLBACK_IMAGE, 'https://healio.de/og-image.png');
+assert.ok(fs.existsSync(path.join(rootDir, 'public', 'images', 'healio-linkvorschau-v2.png')), 'Das Schema-Fallback-Bild fehlt lokal.');
+assert.equal(BLOG_SCHEMA_FALLBACK_IMAGE, 'https://healio.de/images/healio-linkvorschau-v2.png');
 
 function sitemapEntry(url) {
   const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

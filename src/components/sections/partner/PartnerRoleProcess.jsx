@@ -38,7 +38,7 @@ const PartnerRoleProcess = () => {
     <section className="relative overflow-hidden bg-[#061923] py-10 sm:py-24 lg:py-28 text-white">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute -right-32 top-0 h-80 w-80 rounded-full bg-[#25c990]/10 blur-3xl" />
-        <div className="absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-cyan-300/5 blur-3xl" />
+        <div className="absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-home-mint-active/5 blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8">

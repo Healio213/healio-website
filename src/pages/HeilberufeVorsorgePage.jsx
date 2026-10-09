@@ -23,7 +23,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 const SectionEyebrow = ({ children, variant = 'light' }) => {
   const styles = variant === 'dark'
     ? 'bg-white/10 border-white/20 text-white/95'
-    : 'bg-teal-50 border-teal-100 text-teal-800';
+    : 'bg-healio-light border-home-mint/20 text-healio-primary-dark';
   return (
     <div className={`inline-flex items-center gap-2 border text-sm sm:text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4 sm:mb-5 ${styles}`}>
       <Sparkles className="w-3.5 h-3.5" />
@@ -34,7 +34,7 @@ const SectionEyebrow = ({ children, variant = 'light' }) => {
 
 // Reusable Divider-Strich für H2
 const SectionDivider = ({ variant = 'light' }) => {
-  const color = variant === 'dark' ? 'from-white/50 to-[#25c990]' : 'from-teal-500 to-[#25c990]';
+  const color = variant === 'dark' ? 'from-white/50 to-[#25c990]' : 'from-home-mint-active to-[#25c990]';
   return <div className={`w-20 h-1 bg-gradient-to-r ${color} rounded-full mx-auto mb-4 sm:mb-5`} />;
 };
 
@@ -143,7 +143,7 @@ const HeilberufeVorsorgePage = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span className="inline-flex items-center gap-2 bg-teal-100 text-teal-800 text-sm font-medium px-4 py-1.5 rounded-full">
+                <span className="inline-flex items-center gap-2 bg-home-mint/15 text-healio-primary-dark text-sm font-medium px-4 py-1.5 rounded-full">
                   <Stethoscope className="w-4 h-4" />
                   {t('hero.badge')}
                 </span>
@@ -328,7 +328,7 @@ const HeilberufeVorsorgePage = () => {
           transition={{ duration: 0.6 }}
         >
           {/* Deko-Akzente */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-home-mint/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 right-10 w-72 h-72 bg-[#25c990]/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
@@ -353,14 +353,14 @@ const HeilberufeVorsorgePage = () => {
                 const isFirst = pIdx === 0;
                 const colorScheme = isFirst
                   ? {
-                      headerBg: 'bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900',
-                      eyebrow: 'text-teal-300',
-                      number: 'text-teal-400/30',
-                      iconBg: 'bg-teal-500/15 ring-1 ring-teal-400/30',
-                      iconColor: 'text-teal-300',
-                      cardIconBg: 'bg-teal-50',
-                      cardIconColor: 'text-teal-700',
-                      cardHover: 'hover:border-teal-200 hover:shadow-teal-100'
+                      headerBg: 'bg-gradient-to-br from-home-midnight via-[#06131c] to-healio-primary-dark',
+                      eyebrow: 'text-home-mint-active',
+                      number: 'text-home-mint/30',
+                      iconBg: 'bg-home-mint/15 ring-1 ring-home-mint/30',
+                      iconColor: 'text-home-mint-active',
+                      cardIconBg: 'bg-healio-light',
+                      cardIconColor: 'text-healio-primary-dark',
+                      cardHover: 'hover:border-home-mint/25 hover:shadow-home-mint/10'
                     }
                   : {
                       headerBg: 'bg-gradient-to-br from-[#0b4d4a] via-[#1fb37f] to-[#25c990]',
@@ -449,7 +449,7 @@ const HeilberufeVorsorgePage = () => {
         >
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-10 right-10 w-96 h-96 bg-[#25c990] rounded-full blur-3xl" />
-            <div className="absolute bottom-10 left-10 w-96 h-96 bg-teal-500 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 left-10 w-96 h-96 bg-home-mint rounded-full blur-3xl" />
           </div>
 
           <div className="container mx-auto relative z-10 px-4 sm:px-6 md:px-8">
@@ -541,7 +541,7 @@ const HeilberufeVorsorgePage = () => {
             </div>
             <div className="relative max-w-6xl mx-auto">
               {/* Verbindungslinie zwischen Schritten (nur Desktop) */}
-              <div className="hidden lg:block absolute top-10 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-teal-200 via-[#25c990]/40 to-teal-200 z-0" />
+              <div className="hidden lg:block absolute top-10 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-home-mint/20 via-[#25c990]/40 to-home-mint/20 z-0" />
 
               {/* Mobil wischen die vier Schritte als Karten; ab md das bisherige Raster. */}
               <MobileSwipeRow

@@ -18,14 +18,14 @@ import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 // Tarifbedingungen, schriftliche Bestätigung beim Versicherer angefragt.
 const CARDS = [
   { key: 'parents', icon: 'pregnancy', tone: 'coral', border: 'border-[#f0cfc0]', accent: 'text-[#b75f42]', noteBg: 'bg-[#fff4ef]' },
-  { key: 'bayerische', icon: 'calendar', tone: 'sky', border: 'border-[#cfe0f0]', accent: 'text-[#2b6497]', noteBg: 'bg-[#f1f7fd]' },
+  { key: 'bayerische', icon: 'calendar', tone: 'sky', border: 'border-home-mint/20', accent: 'text-home-midnight', noteBg: 'bg-home-ice' },
   { key: 'children', icon: 'family', tone: 'mint', border: 'border-[#c9e7dc]', accent: 'text-[#087454]', noteBg: 'bg-[#eefaf5]' },
 ];
 
 const MIDWIFE_TONES = {
   kasse: 'bg-[#eefaf5] text-[#075f46]',
   sdk: 'bg-[#fff4ef] text-[#a4523a]',
-  bay: 'bg-[#f1f7fd] text-[#1f4f7a]',
+  bay: 'bg-home-ice text-home-midnight',
   nicht: 'bg-slate-100 text-slate-600',
 };
 

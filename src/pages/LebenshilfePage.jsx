@@ -222,7 +222,7 @@ const LebenshilfePage = () => {
         <section className="py-16 lg:py-24 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 border bg-teal-50 border-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
+              <div className="inline-flex items-center gap-2 border bg-healio-light border-home-mint/20 text-healio-primary-dark text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
                 <Sparkles className="w-3.5 h-3.5" />
                 So funktioniert Ihr Modell
               </div>
@@ -277,7 +277,7 @@ const LebenshilfePage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
-                <div className="inline-flex items-center gap-2 border bg-teal-50 border-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
+                <div className="inline-flex items-center gap-2 border bg-healio-light border-home-mint/20 text-healio-primary-dark text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
                   <Calculator className="w-3.5 h-3.5" />
                   Ihr persönlicher Überblick
                 </div>
@@ -468,14 +468,14 @@ const LebenshilfePage = () => {
                       Nach Inflation entspricht das real einem Kaufkraftverlust.
                     </p>
                   </div>
-                  <div className="rounded-2xl border-2 border-[#25c990] bg-teal-50/60 p-7 shadow-md">
-                    <span className="inline-block text-xs font-semibold uppercase tracking-wider text-teal-800 bg-[#25c990]/20 px-3 py-1 rounded-full mb-4">
+                  <div className="rounded-2xl border-2 border-[#25c990] bg-healio-light/60 p-7 shadow-md">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-wider text-healio-primary-dark bg-[#25c990]/20 px-3 py-1 rounded-full mb-4">
                       Nachher: marktorientiert
                     </span>
                     <p className="text-sm text-slate-600 mb-1">
                       bis zu 100 % Aktien-/ETF-Quote, Modellszenario 7 % p. a.
                     </p>
-                    <p className="text-4xl font-bold text-teal-800">{euro(vergleich.markt)} €</p>
+                    <p className="text-4xl font-bold text-healio-primary-dark">{euro(vergleich.markt)} €</p>
                     <p className="text-xs text-slate-500 mt-2 inline-flex items-center gap-1">
                       <TrendingUp className="w-3.5 h-3.5" />
                       im mittleren Szenario mit 5 % p. a.: {euro(vergleich.mittel)} €
@@ -505,7 +505,7 @@ const LebenshilfePage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10">
-                <div className="inline-flex items-center gap-2 border bg-teal-50 border-teal-100 text-teal-800 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
+                <div className="inline-flex items-center gap-2 border bg-healio-light border-home-mint/20 text-healio-primary-dark text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
                   <Info className="w-3.5 h-3.5" />
                   Zum Nachlesen
                 </div>
@@ -546,7 +546,7 @@ const LebenshilfePage = () => {
         </section>
 
         {/* CTA MIT DIREKTER TERMINBUCHUNG */}
-        <section id="termin" className="py-16 lg:py-24 bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white">
+        <section id="termin" className="py-16 lg:py-24 bg-gradient-to-br from-home-midnight via-[#06131c] to-home-midnight text-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
