@@ -4,6 +4,7 @@ import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import StationaerHero from '@/components/sections/stationaer/StationaerHero';
+import StationaerRoomCosts from '@/components/sections/stationaer/StationaerRoomCosts';
 import DesktopLead from '@/components/desktop/DesktopLead';
 import StationaerTariffSelector from '@/components/sections/stationaer/StationaerTariffSelector';
 import StationaerBenefits from '@/components/sections/stationaer/StationaerBenefits';
@@ -62,7 +63,10 @@ const StationaerPage = () => {
             <StationaerHero />
           </div>
         </Slot>
-        {/* Siegel direkt unter dem Hero, wie auf /ambulant und /partner. */}
+        <Slot order="order-2">
+          <StationaerRoomCosts />
+        </Slot>
+        {/* Zimmerkosten zuerst beantworten, danach die bisherigen Siegel. */}
         <Slot order="order-2">
           <HealioAwardsRow size="large" productSet="stationaer" />
         </Slot>

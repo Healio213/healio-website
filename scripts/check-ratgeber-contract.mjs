@@ -706,9 +706,20 @@ for (const slug of RATGEBER_SLUGS) {
   const internalCtaCount = (html.match(/data-ratgeber-internal-cta=/g) || []).length;
   const expectedButton = INTERNAL_BUTTONS[slug];
   if (expectedButton) {
-    expect(internalCtaCount === 1, `Der gebaute Artikel traegt genau einen internen Button (gefunden ${internalCtaCount}): ${slug}`);
+    const earlyCta = getRatgeberArticle(slug).earlyCta;
+    const expectedCount = earlyCta ? 2 : 1;
+    expect(internalCtaCount === expectedCount, `Der gebaute Artikel braucht ${expectedCount} interne Buttons (gefunden ${internalCtaCount}): ${slug}`);
     const anchorTag = (html.match(/<a\b[^>]*data-ratgeber-internal-cta="end"[^>]*>[^<]*<\/a>/) || [''])[0];
     const hrefValue = ((anchorTag.match(/href="([^"]*)"/) || [])[1] || '').replace(/&amp;/g, '&');
+    if (earlyCta) {
+      const earlyTag = (html.match(/<a\b[^>]*data-ratgeber-internal-cta="start"[^>]*>[^<]*<\/a>/) || [''])[0];
+      const earlyHref = ((earlyTag.match(/href="([^"]*)"/) || [])[1] || '').replace(/&amp;/g, '&');
+      expect(earlyTag.includes(`>${earlyCta.label}</a>`), `Der frühe Button braucht seinen konkreten nächsten Schritt: ${slug}`);
+      expect(earlyHref === hrefValue, `Früher und abschließender Button müssen denselben Ziel- und Kampagnenweg verwenden: ${slug}`);
+      const articleStart = html.indexOf('<article');
+      const firstArticleSection = html.indexOf('<section', articleStart);
+      expect(articleStart >= 0 && earlyTag && html.indexOf(earlyTag, articleStart) < firstArticleSection, `Der frühe Button muss vor den Artikelabschnitten stehen: ${slug}`);
+    }
     expect(anchorTag.includes(`>${expectedButton.label}</a>`), `Der gebaute Button von ${slug} heisst "${expectedButton.label}".`);
     expect(hrefValue.startsWith(expectedButton.builtHrefStart), `Der gebaute Button von ${slug} muss mit UTM auf ${expectedButton.builtHrefStart} zeigen (gefunden "${hrefValue}").`);
     if (expectedButton.builtHrefEnd) {

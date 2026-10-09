@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
+import { trackGoogleAdsLead } from '../lib/google-ads.js';
 import {
   createLeadRequestId,
   hasCapturedLeadThisSession,
@@ -114,7 +115,13 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
       if (!isCurrentRequest()) return;
       if (controller.signal.aborted) throw new Error('delivery-aborted');
 
+      const alreadyCaptured = hasCapturedLeadThisSession();
       markLeadCapturedThisSession();
+      // CMS acknowledgment is the request success. Opening the calculator is
+      // a separate event below. No contact fields enter the consent-gated tag.
+      if (!alreadyCaptured) {
+        try { trackGoogleAdsLead(); } catch { /* Measurement never blocks delivery. */ }
+      }
       setCaptured(true);
       setFirstName('');
       setEmail('');

@@ -49,6 +49,10 @@ export const article = {
     'Ein Versicherer nimmt bis zu drei Lücken an, ein anderer lehnt schon bei einer ab. Und angeratener Ersatz ist noch einmal eine ganz andere Frage.',
 
   headline: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
+  earlyCta: {
+    text: 'Fehlender Zahn oder bereits angeratener Ersatz? Der Zahn-Check ordnet mit bis zu vier kurzen Fragen deinen nächsten Schritt ein. Deine Antworten bleiben auf deinem Gerät und werden nicht gespeichert.',
+    label: 'Meinen Zahn-Weg prüfen',
+  },
   lead:
     'Mit einer nicht ersetzten Zahnlücke ist eine Zahnzusatzversicherung weiterhin möglich, aber nicht bei jedem Anbieter. Die UKV nimmt laut ihrem Antrag bis zu drei fehlende Zähne gegen einen festen Zuschlag je Zahn an, die Bayerische lehnt nach ihren Annahmerichtlinien mit Stand 11.2025 bereits bei einem einzigen fehlenden Zahn ab. Entscheidend ist dabei eine zweite Frage, die viele übersehen: ob der Ersatz für genau diese Lücke in den letzten zwei Jahren zahnärztlich angeraten wurde. Dafür gelten andere Regeln als für die Lücke selbst.',
 
@@ -266,7 +270,7 @@ export const article = {
     },
   ],
 
-  // Einziger Button dieses Artikels, Ziel ist der Zahn-Check auf /zahn. Der
+  // Früher und abschließender Button führen zum Zahn-Check auf /zahn. Der
   // Anker steht im Ziel, buildInternalRatgeberUrl setzt ihn hinter die UTM-Query.
   // Der Check hat zwei bis vier Fragen (die vierte nur, wenn nichts angeraten
   // ist und keine Lücke besteht) und speichert nichts: Antworten bleiben im

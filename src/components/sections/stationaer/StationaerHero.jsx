@@ -59,6 +59,9 @@ const StationaerHero = () => {
             {t('refresh.hero.cta')}
             <ArrowDown className="h-4 w-4" aria-hidden="true" />
           </a>
+          <a href="#einzelzimmer-kosten" className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
+            {t('refresh.hero.costsCta')}
+          </a>
 
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-slate-300 md:text-sm">
             {/* Mobil nur der Wartezeit-Hinweis (Eintrag 1): "Drei Tarifwege klar

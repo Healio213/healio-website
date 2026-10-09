@@ -74,6 +74,10 @@ export const article = {
     'Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.',
 
   headline: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
+  earlyCta: {
+    text: 'Vorsorge und Entbindung sind zwei verschiedene Dinge. Prüfe die SDK-Vorsorge-Stufen und deinen Beitrag. Die bestehende Schwangerschaft gehört in den Antrag; der Versicherer entscheidet über die Annahme.',
+    label: 'SDK-Vorsorge prüfen',
+  },
   lead:
     'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
 
@@ -301,7 +305,7 @@ export const article = {
     },
   ],
 
-  // Einziger Button dieses Artikels, Ziel /ambulant. Der Weg führt bewusst
+  // Ziel des frühen und des abschließenden Buttons ist /ambulant. Der Weg führt bewusst
   // zur SDK: Auf /ambulant steht seit 05.10.2026 auch der UKV-Vorsorge-Baustein.
   // Der ist laut interner UKV-Prüfung für eine schon bestehende Schwangerschaft
   // nicht gedacht, deshalb sagt der Absatz ausdrücklich, welchen Tarif

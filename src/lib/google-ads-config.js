@@ -5,7 +5,7 @@
  * „Healio Antrag geöffnet“):
  * - GOOGLE_ADS_ID: Konto-ID des Google-Tags im Format AW-<Ziffern>
  * - LEAD_LABEL: Conversion-Label der Aktion „Anfrage“
- *   (Kontaktformular abgeschickt oder Klick auf „Direkt in Google Kalender öffnen“)
+ *   (CMS-Anfrage bestätigt, Kontaktformular abgeschickt oder Kalenderlink geklickt)
  * - ANTRAG_LABEL: Conversion-Label der Aktion „Antrag geöffnet“
  *   (Klick auf den Abschluss- oder Rechnerlink eines Versicherers)
  *

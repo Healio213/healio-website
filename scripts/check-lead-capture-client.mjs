@@ -243,6 +243,40 @@ test('gültiger Submit reserviert synchron einen leeren Tab und navigiert erst n
   } finally { await h.cleanup(); }
 });
 
+test('CMS-Anfrage zählt nach Bestätigung einmal mit Zustimmung, unabhängig vom blockierten Rechnerfenster', async () => {
+  const h = await harness('modal', { popupBlocked: true, path: '/zahn?utm_campaign=privat&gclid=abcdefghijklmnop' });
+  try {
+    h.consent.saveConsentPreferences({ marketing: true });
+    const conversions = () => (window.dataLayer || []).filter((entry) => entry[0] === 'event' && entry[1] === 'conversion');
+    await h.fill(); await h.submit();
+    assert.equal(conversions().length, 0, 'Absenden ohne CMS-Bestätigung ist kein Erfolg');
+    await h.respond(0, false, { ok: false });
+    assert.equal(conversions().length, 0, 'Fehler zählt nicht');
+    await h.submit(); await h.respond(1);
+    assert.equal(conversions().length, 1, 'Bestätigte Anfrage zählt auch bei blockiertem Rechnerfenster');
+    assert.equal(h.callbacks.opened, 0);
+    const params = conversions()[0][2];
+    assert.match(params.send_to, /\/27UQCIu4iZIdEK_jvuVE$/);
+    assert.deepEqual(Object.keys(params).sort(), ['page_location', 'page_referrer', 'page_title', 'send_to']);
+    assert.equal(params.page_title, 'Healio');
+    assert(!JSON.stringify(params).includes('test@example.test'));
+    assert(!JSON.stringify(params).includes('utm_campaign'));
+    h.setPopupBlocked(false);
+    await h.click('a[target="_blank"]');
+    assert.equal(h.callbacks.opened, 1);
+    assert.equal(conversions().length, 1, 'Manuelles Nachöffnen erzeugt keine weitere Anfrage');
+  } finally { await h.cleanup(); }
+});
+
+test('bestätigte CMS-Anfrage ohne Marketingzustimmung sendet keine Google-Conversion', async () => {
+  const h = await harness();
+  try {
+    await h.fill(); await h.submit(); await h.respond(0);
+    assert.equal(h.capture.hasCapturedLeadThisSession(), true);
+    assert.equal((window.dataLayer || []).filter((entry) => entry[0] === 'event' && entry[1] === 'conversion').length, 0);
+  } finally { await h.cleanup(); }
+});
+
 test('ungültige E-Mail und reiner Leerzeichenname öffnen keinen Tab und senden nichts', async () => {
   const h = await harness();
   try {

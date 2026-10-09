@@ -358,7 +358,8 @@
           "label": "Accidents only",
           "note": "Affordable entry without a health assessment"
         }
-      }
+      },
+      "costsCta": "Understand single-room costs"
     },
     "selector": {
       "eyebrow": "Your options at a glance",

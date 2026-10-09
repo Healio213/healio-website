@@ -43,8 +43,9 @@ const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgebe
  *   Leiste. Die Leiste blendet sich aus, sobald der Schluss sichtbar wird,
  *   damit sie nie ueber der Fusszeile mit den Pflichtangaben liegt.
  * - 'ratgeber': organischer, indexierter Artikel. Kein dreifacher Button,
- *   keine feste Leiste. Hoechstens ein einzelner interner Button aus dem
- *   Feld internalCta, plus der Absatz "So gehst du weiter vor" mit Links.
+ *   keine feste Leiste. Ein interner Schlussbutton aus internalCta, optional
+ *   derselbe Zielweg früh im Artikel über earlyCta. Dazu der Absatz
+ *   "So gehst du weiter vor" mit Links.
  */
 
 const KIND_NOTICE = {
@@ -101,10 +102,10 @@ const RatgeberCtaButton = ({ href, label, placement, className = '' }) => (
  * Anzeigengruppe bis zur Tarifseite messbar bleibt. Der Klick selbst ist
  * kein Erfolg für Google Ads oder Meta, gezählt wird erst auf der Zielseite.
  */
-const RatgeberInternalCtaButton = ({ to, label }) => (
+const RatgeberInternalCtaButton = ({ to, label, placement = 'end' }) => (
   <Link
     to={to}
-    data-ratgeber-internal-cta="end"
+    data-ratgeber-internal-cta={placement}
     className={CTA_BASE_CLASS}
   >
     {label}
@@ -396,6 +397,13 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
           )}
 
           {article.quickAnswer && <QuickAnswerCard quick={article.quickAnswer} />}
+
+          {article.earlyCta && internalCtaUrl && (
+            <aside className="mt-6 rounded-2xl border border-[#cfeee0] bg-[#f4faf7] p-4 sm:p-5" aria-label="Dein nächster Schritt">
+              <p className="mb-4 text-base leading-relaxed text-slate-700">{article.earlyCta.text}</p>
+              <RatgeberInternalCtaButton to={internalCtaUrl} label={article.earlyCta.label} placement="start" />
+            </aside>
+          )}
 
           <p className="mt-4 text-lg leading-[1.7] text-slate-600 sm:mt-6 sm:text-[1.3rem] sm:leading-10">
             {article.lead}

@@ -358,7 +358,8 @@
           "label": "Nur nach Unfall",
           "note": "Günstiger Einstieg ohne Gesundheitsprüfung"
         }
-      }
+      },
+      "costsCta": "Einzelzimmerkosten verstehen"
     },
     "selector": {
       "eyebrow": "Deine Entscheidung in einem Blick",

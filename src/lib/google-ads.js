@@ -382,7 +382,8 @@ export const trackGoogleAdsAntrag = () => {
 export const trackGoogleAdsRechnerStart = trackGoogleAdsAntrag;
 
 /**
- * Erfolg "Anfrage": abgeschicktes Kontaktformular (emailjsService) oder Klick
+ * Erfolg "Anfrage": bestätigte CMS-Anfrage im Lead-Popup oder abgeschicktes
+ * Kontaktformular (emailjsService) oder Klick
  * auf den externen Terminlink "Direkt in Google Kalender öffnen"
  * (ExternalProviderGate.jsx) bzw. "Kalender lädt nicht? Direkt in Google
  * Kalender öffnen" (CalendlyEmbed.jsx, lädt nur noch Google Kalender; Calendly
