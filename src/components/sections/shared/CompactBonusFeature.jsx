@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calculator, ChevronDown, MousePointerClick, ShieldCheck } from 'lucide-react';
+import { ChevronDown, ShieldCheck } from 'lucide-react';
 import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -50,11 +50,12 @@ const LAYOUT = {
   },
 };
 
-// mobileSwipe (Standard false): nur die Zahnseite schaltet die kompakte
-// Handy-Anordnung ein (Experiment 05.10.2026).
+// Gemeinsamer Rechner-Einstieg für Ambulant, Zahn und Stationär.
+// mobileSwipe wählt die engeren Abstände auf dem Handy.
 const CompactBonusFeature = ({
   className = '',
   calculatorProps = {},
+  calculatorIntroNote,
   defaultOpen = false,
   mobileSwipe = false,
 }) => {
@@ -70,24 +71,33 @@ const CompactBonusFeature = ({
         className={`group mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-amber-200/70 bg-gradient-to-br from-[#fffdf8] via-white to-emerald-50 ${ui.card}`}
         open={defaultOpen || undefined}
       >
-        <summary className={`home-focus grid cursor-pointer list-none items-center sm:px-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:py-9 lg:px-12 [&::-webkit-details-marker]:hidden ${ui.summary}`}>
-          <div className="flex min-w-0 items-start gap-4 sm:gap-5">
-            <span className="relative hidden h-16 w-16 shrink-0 place-items-center rounded-[1.35rem] border border-amber-200 bg-amber-50 text-amber-700 shadow-[0_10px_24px_rgba(180,123,31,0.12)] sm:grid">
-              <Calculator className="h-7 w-7" aria-hidden="true" />
-              <MousePointerClick className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-home-mint p-1.5 text-home-midnight shadow-md" aria-hidden="true" />
+        <summary className={`home-focus grid cursor-pointer list-none grid-cols-[6rem_minmax(0,1fr)] items-center sm:grid-cols-[9rem_minmax(0,1fr)] sm:px-9 md:gap-x-8 md:py-9 lg:grid-cols-[12rem_minmax(0,1fr)_auto] lg:px-12 [&::-webkit-details-marker]:hidden ${ui.summary}`}>
+          <div className="relative self-center lg:row-span-2">
+            <div className="absolute inset-3 rounded-full bg-home-mint/15 blur-2xl" aria-hidden="true" />
+            <img
+              src="/images/friendly-icons/bonus-you-mascot.webp"
+              alt=""
+              aria-hidden="true"
+              width="512"
+              height="512"
+              loading="lazy"
+              decoding="async"
+              className="relative mx-auto h-28 w-28 max-w-full object-contain sm:h-36 sm:w-36 lg:h-52 lg:w-52"
+            />
+          </div>
+          <div className="min-w-0">
+            <span className={`font-display font-extrabold uppercase tracking-[0.2em] text-emerald-700 ${ui.eyebrow}`}>{copy.eyebrow}</span>
+            <h2 id="compact-bonus-title" className="mt-2 block font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl lg:text-4xl">{copy.title}</h2>
+          </div>
+          <div className="col-span-2 min-w-0 lg:col-span-1 lg:col-start-2">
+            <span className={`block max-w-3xl text-base text-home-slate ${ui.text}`}>{copy.text}</span>
+            <span className={`inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 font-bold text-emerald-900 ${ui.badge}`}>
+              <ShieldCheck className="h-4 w-4 text-home-mint" aria-hidden="true" />
+              {copy.badge}
             </span>
-            <div>
-              <span className={`font-display font-extrabold uppercase tracking-[0.2em] text-emerald-700 ${ui.eyebrow}`}>{copy.eyebrow}</span>
-              <h2 id="compact-bonus-title" className="mt-2 block font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl lg:text-4xl">{copy.title}</h2>
-              <span className={`mt-2 block max-w-3xl text-base text-home-slate ${ui.text}`}>{copy.text}</span>
-              <span className={`inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 font-bold text-emerald-900 ${ui.badge}`}>
-                <ShieldCheck className="h-4 w-4 text-home-mint" aria-hidden="true" />
-                {copy.badge}
-              </span>
-            </div>
           </div>
 
-          <span className="inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-5 font-display text-base font-extrabold text-white shadow-lg transition group-open:bg-home-mint group-open:text-home-midnight sm:min-w-[235px]">
+          <span className="col-span-2 inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-5 font-display text-base font-extrabold text-white shadow-lg transition group-open:bg-home-mint group-open:text-home-midnight sm:min-w-[235px] lg:col-span-1 lg:col-start-3 lg:row-span-2 lg:row-start-1">
             <span className="group-open:hidden">{copy.open}</span>
             <span className="hidden group-open:inline">{copy.close}</span>
             <ChevronDown className="ml-2 h-5 w-5 transition-transform group-open:rotate-180" aria-hidden="true" />
@@ -95,6 +105,7 @@ const CompactBonusFeature = ({
         </summary>
 
         <div className="border-t border-emerald-900/10 bg-white/80 px-4 py-7 sm:px-7 md:px-10 md:py-10">
+          {calculatorIntroNote && <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{calculatorIntroNote}</p>}
           <AmbulantBonusCalculator
             {...calculatorProps}
             embedded

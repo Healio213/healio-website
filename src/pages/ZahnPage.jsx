@@ -332,7 +332,6 @@ const ZahnPage = () => {
 
         <CompactBonusFeature
           className="order-1 bg-[#f8faf9] md:order-none"
-          defaultOpen={true}
           mobileSwipe
           calculatorProps={{
             tarifTypes: 'Zahn',

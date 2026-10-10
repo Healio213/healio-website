@@ -18,7 +18,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
+import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
@@ -759,41 +759,22 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section className="order-9 bg-home-ice px-4 py-8 sm:px-6 md:order-none md:py-14 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <details open className="group overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-white shadow-[0_20px_60px_rgba(7,17,31,0.08)]">
-            <summary className="home-focus flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-6 sm:px-8 sm:py-7 [&::-webkit-details-marker]:hidden">
-              <span className="flex min-w-0 items-center gap-4">
-                <FriendlyIcon kind="calculator" tone="butter" size="md" />
-                <span className="min-w-0">
-                  <span className="block font-display text-sm font-extrabold uppercase tracking-[0.1em] text-emerald-700 md:text-xs md:tracking-[0.2em]">{copy.calculator.eyebrow}</span>
-                  <span className="mt-1 block font-display text-xl font-extrabold leading-tight text-home-midnight sm:text-2xl">{copy.calculator.title}</span>
-                  <span className="mt-1 hidden text-sm leading-6 text-home-slate sm:block">{copy.calculator.summary}</span>
-                </span>
-              </span>
-              <span className="flex shrink-0 items-center gap-2 font-display text-xs font-extrabold text-home-midnight sm:text-sm">
-                <span className="hidden md:inline">{copy.calculator.hint}</span>
-                <span className="inline-grid h-11 w-11 place-items-center rounded-full bg-home-midnight text-home-mint-active"><ChevronDown className="h-5 w-5 transition group-open:rotate-180" /></span>
-              </span>
-            </summary>
-            <div className="border-t border-slate-200 px-4 py-7 sm:px-7 sm:py-9">
-              <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{copy.calculator.disclosure}</p>
-              <AmbulantBonusCalculator
-                embedded
-                defaultMonatsbeitrag={rechnerBeitrag}
-                tariffInfoText={language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName(rechnerGruppe)}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName(rechnerGruppe)}`}
-                effectiveValue={language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`}
-                calculatorHint={calculatorHint}
-                effectiveNote={language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.'}
-                secondaryCtaOverride={{
-                  href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
-                  label: copy.calculator.secondaryCta,
-                }}
-              />
-            </div>
-          </details>
-        </div>
-      </section>
+      <CompactBonusFeature
+        className="order-9 bg-home-ice md:order-none"
+        mobileSwipe
+        calculatorIntroNote={copy.calculator.disclosure}
+        calculatorProps={{
+          defaultMonatsbeitrag: rechnerBeitrag,
+          tariffInfoText: language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName(rechnerGruppe)}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName(rechnerGruppe)}`,
+          effectiveValue: language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`,
+          calculatorHint,
+          effectiveNote: language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.',
+          secondaryCtaOverride: {
+            href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
+            label: copy.calculator.secondaryCta,
+          },
+        }}
+      />
 
         </>
       )}
