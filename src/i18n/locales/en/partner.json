@@ -2,9 +2,9 @@
   "hero": {
     "badge": "For practices, therapists and opticians",
     "title": "How many high-quality treatment plans do you lose to <highlight>fear of out-of-pocket costs?</highlight>",
-    "subtitle": "Healio provides the infrastructure for your practice to help patients access up to <highlight>EUR 3,000 in treatment benefits over 2 years</highlight> through a suitable plan. A health fund bonus may offset all or part of the premium. Your practice provides neutral information; Healio handles insurance advice and application support.",
+    "subtitle": "Give your patients financial clarity: suitable supplementary cover may provide up to <highlight>EUR 3,000 in health benefits over 2 years</highlight>, divided into four benefit categories. A health fund bonus may offset all or part of the premium. Your practice provides neutral information; Healio checks eligibility, advises and supports the application.",
     "cta": "Book a 30-minute introduction",
-    "secondaryCta": "View the concept with Nita",
+    "secondaryCta": "Request the practice guide (PDF in German)",
     "roleNote": "No insurance advice by the practice. Policy terms and health declarations determine cover; treatment already recommended is not automatically insured.",
     "imageAlt": "Therapist talking with a patient in a bright practice",
     "videoPreviewAlt": "Preview of Healio's explainer video for partner practices",
@@ -46,8 +46,8 @@
     "cta": "Clarify the concept with Nita",
     "privacy": "Nita starts only after your consent. Please do not share sensitive health data.",
     "fallback": "This video cannot be played in your browser.",
-    "badge": "Up to EUR 3,000 in treatment benefits over 2 years through a suitable plan",
-    "subline": "Financing options for practices without having to provide insurance advice."
+    "badge": "Up to EUR 3,000 in health benefits over 2 years, divided into four benefit categories",
+    "subline": "Understand possible reimbursements. Your practice provides neutral information; Healio handles the advice."
   },
   "trust": {
     "budget": "Up to EUR 3,000 over two years may be available",
@@ -123,13 +123,13 @@
     "subtitle": "The partnership creates a simple information path without turning the treatment room into a sales conversation.",
     "practiceLabel": "Practice",
     "practiceTitle": "Provide neutral information",
-    "practiceText": "You make patients aware of the concept and provide information materials or a QR code.",
+    "practiceText": "You provide neutral information cards, leaflets or a QR code. Your team does not advise on plans, hold sales conversations or receive commission for contacts or policies.",
     "patientLabel": "Patient",
     "patientTitle": "Decide voluntarily",
-    "patientText": "Interested patients decide for themselves whether they want to learn more and contact Healio directly.",
+    "patientText": "Patients use the QR code independently and choose freely whether to get in touch. Your practice does not pass any patient data to Healio.",
     "healioLabel": "Healio",
     "healioTitle": "Check, advise and support",
-    "healioText": "We clarify eligibility, explain options and, if requested, handle insurance brokerage and ongoing support.",
+    "healioText": "As an independent insurance broker, we check individual eligibility, explain benefits and limits and support the application if requested.",
     "closing": "You remain professionally independent and focus on treatment."
   },
   "faq": {

@@ -2,11 +2,11 @@
   "hero": {
     "eyebrow": "Ambulante Zusatzversicherung",
     "title": "Warum bezahlst du Privatleistungen selbst, <highlight>während dein Kassenbonus ungenutzt bleibt?</highlight>",
-    "subtitle": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren für versicherte Leistungen. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Gesundheitsangaben, Leistungsgrenzen und Tarifbedingungen entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.",
+    "subtitle": "Mit SDK wählst du bis zu 3.000 EUR Gesundheitsbudget in zwei Kalenderjahren für versicherte Leistungen. Mehr ärztliche Vorsorge gewünscht? Den UKV-Baustein kannst du optional dazubuchen. Dein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen.",
     "factsLabel": "Kurz erklärt",
     "facts": [
-      "Erstattung versicherter Rechnungen, mit festen Grenzen je Leistungsbereich.",
-      "Bis zu 3.000 EUR insgesamt in zwei Jahren.",
+      "Erstattung versicherter Rechnungen. Gesundheitsangaben, Leistungsgrenzen und Tarifbedingungen entscheiden.",
+      "SDK: vier getrennte Budgets, zusammen bis zu 3.000 EUR in zwei Kalenderjahren. Kein frei verfügbares Guthaben.",
       "Du zahlst einen Versicherungsbeitrag. Ein möglicher Kassenbonus kann deine Belastung nachträglich senken."
     ],
     "ctaCalculate": "Ambulantes Budget prüfen",
@@ -969,9 +969,9 @@
     "footnote": "Alle Beiträge sind altersabhängig. Beispielbeiträge für den Tarif Ambulant 100, Stand 2026. Die Budgets gelten je 2 Jahre laut SDK-Tarifbedingungen; deinen exakten Beitrag zeigt dir die SDK-Rechenstrecke vor dem Abschluss."
   },
   "vorsorgeBaustein": {
-    "eyebrow": "Zusatzoption · UKV VorsorgePRIVAT",
-    "title": "Nur Vorsorge wichtig? Der kleine Vorsorge-Baustein.",
-    "lead": "Laut UKV zahlt der Vorsorgetarif ärztliche Vorsorge auch dann, wenn deine Krankenkasse sie in deinem Alter oder in diesem Abstand nicht übernimmt.",
+    "eyebrow": "Freiwillige Ergänzung",
+    "title": "UKV optional dazubuchen.",
+    "lead": "Laut UKV zahlt der Vorsorgetarif zusätzliche ärztliche Vorsorge.",
     "preventionLabel": "Ärztliche Vorsorge zu 100 %",
     "preventionValue": "bis 500 EUR pro Jahr",
     "preventionStart": "Im 1. Kalenderjahr bis 200 EUR",
@@ -994,9 +994,9 @@
     "pregnancyNote": "Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.",
     "cta": "Vorsorge-Baustein anfragen",
     "ctaHint": "Wir melden uns persönlich und klären den Antrag mit dir.",
-    "ctaLink": "Vorsorge-Baustein berechnen",
+    "ctaLink": "UKV-Beitrag berechnen",
     "ctaLinkHint": "Der Rechner zeigt dir direkt den Vorsorge-Baustein.",
-    "sdkTitle": "Mehr als Vorsorge? Das SDK-Gesundheitsbudget mit bis zu 3.000 EUR in zwei Jahren.",
+    "sdkTitle": "Du entscheidest, ob du diesen Baustein zusätzlich möchtest.",
     "detailsTitle": "Alle Details",
     "detailsHint": "Bedingungen, Immer mit drin, Kündigung",
     "preventionStaffel": "Im 1. Kalenderjahr bis 200 EUR, in den ersten beiden Kalenderjahren zusammen bis 500 EUR.",
@@ -1036,9 +1036,10 @@
       "Fernreisen mit Impfungen",
       "Mehr Vorsorge, als dein SDK-Topf abdeckt"
     ],
-    "sdkText": "Jede SDK-Stufe hat schon einen Topf für Vorsorge und einen für Brille und Kontaktlinsen, je nach Stufe jeweils 200 bis 500 EUR in zwei Jahren. Der Vorsorge-Baustein passt, wenn du nur Vorsorge willst oder dir mehr Vorsorge wichtig ist, als dein SDK-Topf abdeckt.",
+    "sdkText": "Jede SDK-Stufe hat bereits einen eigenen Topf für Vorsorge und einen für Brille und Kontaktlinsen, je nach Stufe jeweils 200 bis 500 EUR in zwei Kalenderjahren. Die UKV-Ergänzung ist freiwillig. Welche Rechnung erstattet wird, richtet sich nach den jeweiligen Bedingungen; zusammen wird nie mehr als der Rechnungsbetrag erstattet.",
     "priceGlasses": "Wer eine Brille oder Kontaktlinsen trägt oder braucht, zahlt 4 € mehr: 17,45 € für Erwachsene, 12,80 € für Kinder.",
     "priceAgeRule": "Der Erwachsenenbeitrag gilt ab Januar des Jahres, in dem du 20 wirst. Danach gibt es keine weitere Altersstufe, Beitragsanpassungen bleiben möglich.",
-    "disclosure": "Beiträge der UKV gültig ab 01.05.2026. Zusammen mit Krankenkasse und anderen Versicherungen wird nie mehr als der Rechnungsbetrag erstattet. Der Vorsorge-Baustein läuft mindestens bis zum Ende des folgenden Kalenderjahres und ist danach jährlich mit drei Monaten Frist zum Jahresende kündbar. Maßgeblich sind die Tarifbedingungen der UKV."
+    "disclosure": "Beiträge der UKV gültig ab 01.05.2026. Zusammen mit Krankenkasse und anderen Versicherungen wird nie mehr als der Rechnungsbetrag erstattet. Der Vorsorge-Baustein läuft mindestens bis zum Ende des folgenden Kalenderjahres und ist danach jährlich mit drei Monaten Frist zum Jahresende kündbar. Maßgeblich sind die Tarifbedingungen der UKV.",
+    "preventionScope": "Laut UKV zahlt der Vorsorgetarif ärztliche Vorsorge auch außerhalb der Altersgrenzen und Abstände deiner Krankenkasse."
   }
 }

@@ -2,9 +2,9 @@
   "hero": {
     "badge": "Für Praxen, Therapeuten und Optiker",
     "title": "Wie viele hochwertige Behandlungspläne verlieren Sie an die <highlight>Angst vor dem Eigenanteil?</highlight>",
-    "subtitle": "Healio liefert Ihrer Praxis die Infrastruktur für bis zu <highlight>3.000 EUR Behandlungsbudget in 2 Jahren</highlight> durch einen passenden Tarif. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Versicherungsberatung und Antragsbegleitung übernimmt Healio.",
+    "subtitle": "Schaffen Sie finanzielle Klarheit für Ihre Patienten: Mit passendem Zusatzschutz sind bis zu <highlight>3.000 EUR Gesundheitsbudget in 2 Jahren</highlight> möglich, verteilt auf vier Leistungstöpfe. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Prüfung, Beratung und Antragsbegleitung übernimmt Healio.",
     "cta": "30-minütiges Kennenlernen buchen",
-    "secondaryCta": "Erklärvideo ansehen (1 Min.)",
+    "secondaryCta": "Praxis-Leitfaden als PDF anfordern",
     "roleNote": "Keine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.",
     "imageAlt": "Therapeutin im Gespräch mit einer Patientin in einer hellen Praxis",
     "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
@@ -46,8 +46,8 @@
     "cta": "Konzept mit Nita klären",
     "privacy": "Nita startet erst nach Ihrer Freigabe. Bitte teilen Sie keine sensiblen Gesundheitsdaten.",
     "fallback": "Dieses Video kann in Ihrem Browser nicht wiedergegeben werden.",
-    "badge": "Bis zu 3.000 EUR Behandlungsbudget in 2 Jahren durch einen passenden Tarif",
-    "subline": "Finanzierungswege für Praxen ohne eigenen Versicherungsberatungsaufwand."
+    "badge": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, verteilt auf vier Leistungstöpfe",
+    "subline": "Mögliche Erstattungen verstehen. Ihre Praxis informiert neutral, Healio übernimmt die Beratung."
   },
   "trust": {
     "budget": "Bis zu 3.000 EUR in zwei Jahren möglich",
@@ -123,13 +123,13 @@
     "subtitle": "Die Partnerschaft schafft einen einfachen Informationsweg, ohne aus dem Behandlungszimmer ein Verkaufsgespräch zu machen.",
     "practiceLabel": "Praxis",
     "practiceTitle": "Neutral informieren",
-    "practiceText": "Sie machen Patienten auf das Konzept aufmerksam und stellen Informationsmaterial oder einen QR-Code bereit.",
+    "practiceText": "Sie stellen neutrale Informationskarten, Flyer oder einen QR-Code bereit. Ihr Team berät keine Tarife, führt keine Verkaufsgespräche und erhält keine Provision für Kontakte oder Abschlüsse.",
     "patientLabel": "Patient",
     "patientTitle": "Freiwillig entscheiden",
-    "patientText": "Interessierte Patienten entscheiden selbst, ob sie mehr erfahren möchten, und wenden sich direkt an Healio.",
+    "patientText": "Patienten nutzen den QR-Code eigenständig und entscheiden freiwillig über die Kontaktaufnahme. Ihre Praxis übermittelt keine Patientendaten an Healio.",
     "healioLabel": "Healio",
     "healioTitle": "Prüfen, beraten, begleiten",
-    "healioText": "Wir klären Voraussetzungen, erklären Optionen und übernehmen auf Wunsch die Versicherungsvermittlung und weitere Begleitung.",
+    "healioText": "Wir prüfen die individuellen Voraussetzungen, erklären Leistungen und Grenzen und begleiten auf Wunsch den Antrag als unabhängiger Versicherungsmakler.",
     "closing": "Sie bleiben fachlich unabhängig und konzentrieren sich auf die Behandlung."
   },
   "faq": {

@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?",
-    "titleLead": "Warum lassen Sie jedes Jahr hunderte Euro",
-    "titleAccent": "bei Ihrer Krankenkasse liegen?",
-    "description": "Kassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.",
+    "title": "Warum lässt du jedes Jahr hunderte Euro bei deiner Krankenkasse liegen?",
+    "titleLead": "Warum lässt du jedes Jahr hunderte Euro",
+    "titleAccent": "bei deiner Krankenkasse liegen?",
+    "description": "Kassenboni werden nicht automatisch ausgezahlt. Erfüllst du die Voraussetzungen, kannst du sie aktiv beantragen und damit deinen Zusatzschutz ganz oder teilweise finanzieren: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.",
     "switchLabel": "Wähle deinen Einstieg",
     "switch": [
       {
@@ -18,14 +18,14 @@
         "key": "employer",
         "routeKey": "unternehmen",
         "title": "Ich bin Arbeitgeber",
-        "description": "bAV und bKV als Benefit fürs Team. Steuerlich gefördert, ohne Mehraufwand für HR.",
+        "description": "bAV und bKV als Benefit fürs Team. Wir begleiten Einführung, Kommunikation und laufende Betreuung.",
         "cta": "Unternehmenslösungen ansehen"
       },
       {
         "key": "practice",
         "routeKey": "partner",
         "title": "Ich habe eine Praxis",
-        "description": "Behandlungen für deine Patienten finanzierbar machen. Für deine Praxis kostenlos, du informierst nur.",
+        "description": "Behandlungen für deine Patienten finanzierbar machen. Deine Praxis informiert neutral; Healio übernimmt die Beratung.",
         "cta": "Partnerprogramm ansehen"
       }
     ],
@@ -34,10 +34,10 @@
   },
   "explanationVideo": {
     "eyebrow": "ERKLÄRVIDEO · GUT 1 MINUTE",
-    "title": "In gut einer Minute: Wie Sie mit Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren nutzen.",
+    "title": "In gut einer Minute: Wie du mit Kassenbonus und Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren nutzt.",
     "aria": "Erklärvideo: Kassenbonus und Gesundheitsbudget nutzen",
     "subtitle": "Kassenbonus aktivieren, statt private Gesundheitskosten allein zu tragen.",
-    "disclosure": "Ihr Bonus hängt von Krankenkasse und nachgewiesenen Aktivitäten ab. Er kann den Versicherungsbeitrag ganz oder teilweise ausgleichen. Die 3.000 EUR sind Tarifleistungen für versicherte Behandlungen, kein auszahlbares Guthaben."
+    "disclosure": "Dein Bonus hängt von Krankenkasse und nachgewiesenen Aktivitäten ab. Er kann den Versicherungsbeitrag ganz oder teilweise ausgleichen. Die 3.000 EUR sind Tarifleistungen für versicherte Behandlungen, kein auszahlbares Guthaben."
   },
   "seo": {
     "title": "Versicherungen für Privatkunden & Unternehmen | Healio",
@@ -77,22 +77,22 @@
   },
   "process": {
     "title": "Zuerst die richtige Kasse, dann der richtige Zusatzschutz.",
-    "description": "Wir stellen nicht Versicherung A gegen Versicherung B. Wir starten bei deiner gesetzlichen Krankenkasse, denn dort liegt der größte Hebel: KassenBoost zeigt dir kostenlos, was Beitrag und Bonus bei dir möglich machen. Erst danach klären wir, wie sich dein Zusatzschutz finanzieren lässt und welcher zu dir passt.",
+    "description": "Prüfe zuerst Beitrag, Leistungen und Bonuspotenzial deiner Krankenkasse mit KassenBoost. Wähle anschließend den Zusatzschutz, der zu deinem Bedarf passt. Du entscheidest selbst über Kassenwechsel und Versicherung.",
     "steps": [
       {
         "number": "01",
-        "title": "Kasse vergleichen",
+        "title": "Kassenpotenzial prüfen",
         "description": "KassenBoost zeigt Beitrag, erreichbaren Bonus und Leistungen getrennt. Du entscheidest, ob sich ein Wechsel lohnt."
       },
       {
         "number": "02",
-        "title": "Zusatzschutz wählen",
+        "title": "Schutz und Beitrag wählen",
         "description": "Ambulant, Zahn oder Klinik: Healio erklärt Leistungen, Grenzen und Kosten, bevor du dich entscheidest."
       },
       {
         "number": "03",
-        "title": "Bonus nutzen",
-        "description": "Den Beitrag zahlst du selbst. Erfüllst du die Bonusbedingungen deiner Kasse, kann der Bonus einen Teil davon ausgleichen."
+        "title": "Bonus mit Nachweisen nutzen",
+        "description": "Den Versicherungsbeitrag zahlst du zunächst selbst. Erfüllst du die Bonusbedingungen und reichst die nötigen Aktivitäts- und Kostennachweise ein, kann deine Kasse den anrechenbaren Beitrag ganz oder teilweise nachträglich ausgleichen."
       }
     ],
     "detailsCta": "So funktioniert KassenBoost"
@@ -149,8 +149,8 @@
     ]
   },
   "finalCta": {
-    "title": "Beenden Sie das Verschenken Ihrer Kassenboni.",
-    "description": "Rechnen Sie nach, fordern Sie Ihren Bonus ein und sichern Sie sich den Zusatzschutz, der zu Ihnen passt.",
+    "title": "Nutze das Bonuspotenzial deiner Kasse.",
+    "description": "Rechne nach, beantrage deinen Bonus und wähle den Zusatzschutz, der zu dir passt.",
     "detailsCta": "So funktioniert KassenBoost",
     "cta": "Jetzt Kassenpotenzial berechnen"
   },

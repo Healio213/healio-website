@@ -10,17 +10,17 @@ import { DKV_UZ1_URL, trackStationaerDkvClick } from './stationaerDkvLink';
 const COPY = {
   de: {
     title: 'Nur Einbettzimmer? DKV UZ1.',
-    body: '100 % der gesondert berechenbaren Kosten für die Unterbringung im Einbettzimmer. Ohne Chefarzt und privatärztliche Behandlung.',
+    body: '100 % des tariflich erstattungsfähigen Zuschlags für ein Ein- oder Zweibettzimmer, wenn deine gesetzliche Krankenkasse ihre Pflichtleistung erbringt. Ohne Chefarzt und privatärztliche Behandlung.',
     note: 'Wartezeit: 3 Monate allgemein, 8 Monate für Entbindung. Die allgemeine Wartezeit entfällt bei Unfall. Es gelten die Tarifbedingungen.',
     cta: 'Einbettzimmer-Beitrag berechnen',
-    destination: 'Erst Unterlagen sichern, dann zum DKV-Rechner im neuen Tab',
+    destination: 'Beim ersten Rechnerstart: Vorname und E-Mail für den Bonusleitfaden eingeben. Danach öffnet sich der DKV-Rechner in einem neuen Tab.',
   },
   en: {
     title: 'Single room only? DKV UZ1.',
-    body: '100% of separately billed accommodation costs for a single room. Without head-physician or private medical treatment.',
+    body: '100% of the eligible surcharge for a single or twin room when your statutory health insurer pays its required benefit. Without head-physician or private medical treatment.',
     note: 'Waiting periods: 3 months generally, 8 months for childbirth. The general waiting period is waived after an accident. Policy terms apply.',
     cta: 'Calculate single-room premium',
-    destination: 'Save your guide first, then open the German DKV calculator in a new tab',
+    destination: 'First calculator visit: enter your first name and email for the bonus guide. The German DKV calculator then opens in a new tab.',
   },
 };
 

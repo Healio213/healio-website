@@ -8,6 +8,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import DesktopLead from '@/components/desktop/DesktopLead';
+import HomeContributionExample from './HomeContributionExample';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
 
@@ -171,6 +172,7 @@ const HomeHero = () => {
         </div>
       </div>
       </section>
+      <HomeContributionExample language={lang} />
     </div>
   );
 };

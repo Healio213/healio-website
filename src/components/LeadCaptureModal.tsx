@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, type FormEvent, type MouseEvent } f
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { trackGoogleAdsLead } from '../lib/google-ads.js';
+import { getLeadCaptureCopy } from '../lib/lead-capture-copy.js';
 import {
   createLeadRequestId,
   hasCapturedLeadThisSession,
@@ -25,9 +26,11 @@ export type LeadCaptureModalProps = {
 
 export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingCategory, onExternalOpen }: LeadCaptureModalProps) {
   const personalOffer = isPersonalOfferUrl(targetUrl);
+  const copy = getLeadCaptureCopy({ sourcePage: typeof window === 'undefined' ? '' : window.location.pathname, trackingCategory, personalOffer });
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [errorField, setErrorField] = useState<'firstName' | 'email' | 'request' | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [shortLoading, setShortLoading] = useState(false);
   const [captured, setCaptured] = useState(false);
@@ -49,6 +52,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     setFirstName('');
     setEmail('');
     setError('');
+    setErrorField(null);
     setSubmitting(false);
     setShortLoading(false);
     setCaptured(isOpen && !personalOffer && hasCapturedLeadThisSession());
@@ -72,19 +76,22 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     const name = firstName.trim();
     const address = email.trim();
     if (!name || name.length > 80) {
-      setError('Bitte gib deinen Vornamen ein.');
+      setError(copy.nameError);
+      setErrorField('firstName');
       firstNameRef.current?.focus();
       return;
     }
     if (!isValidLeadEmail(address)) {
-      setError('Bitte prüfe deine E-Mail-Adresse, zum Beispiel name@anbieter.de.');
+      setError(copy.emailError);
+      setErrorField('email');
       emailRef.current?.focus();
       return;
     }
     const destination = validateApplicationUrl(targetUrl);
     const sourcePage = sanitizeLeadSourcePage(window.location.pathname);
     if (!destination || !sourcePage) {
-      setError(personalOffer ? 'Diese Anfrage ist gerade nicht verfügbar.' : 'Dieser Rechnerlink ist gerade nicht verfügbar.');
+      setError(copy.unavailableError);
+      setErrorField('request');
       return;
     }
 
@@ -98,6 +105,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     requestIdRef.current ??= createLeadRequestId();
     timestampRef.current ??= new Date().toISOString();
     setError('');
+    setErrorField(null);
     setSubmitting(true);
     setShortLoading(true);
     const labelTimer = setTimeout(() => { if (isCurrentRequest()) setShortLoading(false); }, 1000);
@@ -133,7 +141,10 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
         onClose();
       }
     } catch {
-      if (isCurrentRequest()) setError('Die Unterlagen konnten gerade nicht angefordert werden. Bitte versuche es erneut.');
+      if (isCurrentRequest()) {
+        setError(copy.deliveryError);
+        setErrorField('request');
+      }
       if (reservedWindow && !reservedWindow.closed) reservedWindow.close();
       if (windowRef.current === reservedWindow) windowRef.current = null;
     } finally {
@@ -155,7 +166,8 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
       onExternalOpen?.();
       onClose();
     } else {
-      setError('Bitte erlaube neue Fenster für Healio in deinem Browser und versuche es erneut.');
+      setError(copy.popupError);
+      setErrorField('request');
     }
   };
 
@@ -164,41 +176,43 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[120] bg-home-midnight/80 backdrop-blur-sm" />
         <Dialog.Content
+          lang={copy.lang}
           className="fixed bottom-0 left-1/2 z-[121] max-h-[90dvh] w-full max-w-[460px] -translate-x-1/2 overflow-y-auto rounded-t-2xl border border-[#233044] bg-[#131B26] px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-7 font-sans text-white shadow-2xl outline-none sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:p-8"
           onOpenAutoFocus={(event) => { event.preventDefault(); if (!captured) firstNameRef.current?.focus(); }}
           onCloseAutoFocus={(event) => { event.preventDefault(); returnFocusRef.current?.focus(); }}
         >
-          <Dialog.Close aria-label="Fenster schließen" className="absolute right-2 top-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">
+          <Dialog.Close aria-label={copy.closeLabel} className="absolute right-2 top-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">
             <X className="h-5 w-5" aria-hidden="true" />
           </Dialog.Close>
           <img src="/healio-logo-white-web.svg" alt="Healio" width="100" height="40" className="mb-4 h-8 w-auto" />
-          <p className="mb-4 pr-8 text-[11px] font-semibold tracking-[0.12em] text-home-mint">{personalOffer ? 'ARAG V100 · PERSÖNLICHES ANGEBOT' : 'KASSENBONUS EINREICHSERVICE'}</p>
-          <Dialog.Title className="max-w-[20ch] font-display text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[28px]">{personalOffer ? 'Wohin dürfen wir dir dein V100-Angebot senden?' : 'Wohin dürfen wir dir den Kassenbonus Leitfaden senden?'}</Dialog.Title>
-          <Dialog.Description className="mt-4 text-sm leading-6 text-slate-300">{personalOffer ? 'Wir melden uns per E-Mail, klären die passenden Leistungen und erstellen dein persönliches Angebot. Den Kassenbonus Leitfaden erhältst du zusätzlich.' : 'Sichere dir die Schritt für Schritt Anleitung für deinen Bonusabruf und Kassenwechsel, bevor du den Rechner startest.'}</Dialog.Description>
+          <p className="mb-4 pr-8 text-[11px] font-semibold tracking-[0.12em] text-home-mint">{copy.badge}</p>
+          <Dialog.Title className="max-w-[20ch] font-display text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[28px]">{copy.title}</Dialog.Title>
+          <Dialog.Description className="mt-4 text-sm leading-6 text-slate-300">{copy.description}</Dialog.Description>
 
           {captured ? (
             <div className="mt-6">
-              <p role="status" className="mb-4 text-sm leading-6 text-slate-200">{personalOffer ? 'Deine V100-Angebotsanfrage ist gespeichert. Wir melden uns per E-Mail für die persönliche Abstimmung. Damit ist noch keine Versicherung beantragt oder abgeschlossen.' : 'Deine Anfrage ist gespeichert. Falls dein Browser das neue Fenster blockiert hat, öffne den Rechner hier:'}</p>
-              {personalOffer ? <button type="button" onClick={onClose} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">Zurück zur Vorsorgeübersicht</button> : validDestination && <a href={validDestination} target="_blank" rel="noopener noreferrer" onClick={finishManualOpen} className="flex min-h-12 items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-center text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">Weiter zum Rechner ➔</a>}
+              <p role="status" className="mb-4 text-sm leading-6 text-slate-200">{copy.captured}</p>
+              {personalOffer ? <button type="button" onClick={onClose} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">{copy.returnLabel}</button> : validDestination && <a href={validDestination} target="_blank" rel="noopener noreferrer" onClick={finishManualOpen} className="flex min-h-12 items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-center text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">{copy.manualOpen}</a>}
               {error && <p role="alert" className="mt-4 text-sm leading-6 text-amber-300">{error}</p>}
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="mt-6 space-y-4">
               <div>
-                <label htmlFor="lead-capture-first-name" className="mb-2 block text-sm font-medium text-slate-200">Vorname</label>
-                <input ref={firstNameRef} id="lead-capture-first-name" name="firstName" type="text" required maxLength={80} autoComplete="given-name" placeholder="Dein Vorname" value={firstName} onChange={(event) => { setFirstName(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />
+                <label htmlFor="lead-capture-first-name" className="mb-2 block text-sm font-medium text-slate-200">{copy.firstNameLabel}</label>
+                <input ref={firstNameRef} id="lead-capture-first-name" name="firstName" type="text" required maxLength={80} autoComplete="given-name" placeholder={copy.firstNamePlaceholder} value={firstName} onChange={(event) => { setFirstName(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} aria-invalid={errorField === 'firstName'} aria-describedby={errorField === 'firstName' ? 'lead-capture-error' : undefined} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />
               </div>
               <div>
-                <label htmlFor="lead-capture-email" className="mb-2 block text-sm font-medium text-slate-200">E-Mail-Adresse</label>
-                <input ref={emailRef} id="lead-capture-email" name="email" type="email" required maxLength={254} autoComplete="email" inputMode="email" placeholder="deine@email.de" value={email} onChange={(event) => { setEmail(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} aria-invalid={Boolean(error)} aria-describedby={error ? 'lead-capture-error' : undefined} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />
+                <label htmlFor="lead-capture-email" className="mb-2 block text-sm font-medium text-slate-200">{copy.emailLabel}</label>
+                <input ref={emailRef} id="lead-capture-email" name="email" type="email" required maxLength={254} autoComplete="email" inputMode="email" placeholder={copy.emailPlaceholder} value={email} onChange={(event) => { setEmail(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} aria-invalid={errorField === 'email'} aria-describedby={errorField === 'email' ? 'lead-capture-error' : undefined} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />
               </div>
               {error && <p id="lead-capture-error" role="alert" className="text-sm leading-6 text-amber-300">{error}</p>}
-              <button type="submit" disabled={submitting} aria-busy={submitting} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3.5 text-center text-sm font-bold leading-5 text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint disabled:cursor-wait disabled:opacity-70">{shortLoading ? 'Einen Moment...' : personalOffer ? 'Persönliches Angebot anfragen ➔' : 'Weiter zum Rechner & Unterlagen sichern ➔'}</button>
-              {submitting && !shortLoading && <p role="status" className="text-sm leading-6 text-slate-300">Deine Anfrage wird noch übermittelt. Bei langsamer Verbindung kann das etwas länger dauern.</p>}
+              <button type="submit" disabled={submitting} aria-busy={submitting} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3.5 text-center text-sm font-bold leading-5 text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint disabled:cursor-wait disabled:opacity-70">{shortLoading ? copy.loading : copy.submit}</button>
+              {submitting && !shortLoading && <p role="status" className="text-sm leading-6 text-slate-300">{copy.pending}</p>}
             </form>
           )}
-          <p className="mt-4 text-center text-xs leading-5 text-slate-400">100 % kostenlos · Kein Spam · Deine Daten sind nach DSGVO geschützt.</p>
-          <p className="mt-3 text-xs leading-5 text-slate-400">{personalOffer ? 'Mit deiner Anfrage dürfen wir dich per E-Mail zu ARAG V100 kontaktieren und dir den Leitfaden senden.' : 'Mit deiner Anfrage dürfen wir dir den Leitfaden per E-Mail senden.'} <a href="/datenschutz" className="text-slate-300 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">Datenschutz</a></p>
+          <p className="mt-4 text-center text-xs leading-5 text-slate-400">{copy.microcopy}</p>
+          <p className="mt-3 text-xs leading-5 text-slate-400">{copy.permission} <a href={copy.privacyUrl} className="text-slate-300 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">{copy.privacyLabel}</a></p>
+          {copy.languageNote && <p className="mt-3 text-xs leading-5 text-slate-400">{copy.languageNote} <a href={copy.helpUrl} className="text-slate-300 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">{copy.helpLabel}</a></p>}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

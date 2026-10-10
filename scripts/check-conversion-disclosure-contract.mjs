@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 import { parse } from '@babel/parser';
 import traverseModule from '@babel/traverse';
 import { sanitizeReferrer } from '../src/lib/referrer.js';
+import { getDentalContent } from '../src/components/sections/dental/dentalContent.js';
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -115,6 +116,22 @@ expect(dentalPage.indexOf('<DentalVideoSection />') < dentalPage.indexOf('<Denta
 expect(germanOnlyComponent(dentalPage, 'DentalVideoSection'), 'Das deutsche Zahn-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(dentalPage.indexOf('<DentalZahnCheck />') < dentalPage.indexOf('id="kassenbonus"'), 'Der Zahn-Check muss vor der Bonusbrücke stehen.');
 expect(/routes:\s*\['UKV ZahnPRIVAT', 'Bayerische mit ZAHN Sofort'\]/.test(dentalContent), 'Der Zahn-Check muss genau die zwei Wege UKV ZahnPRIVAT und Bayerische mit ZAHN Sofort enthalten.');
+// Der unveränderte UKV-Link wählt keinen Tarif vor. Die Orientierung aus dem
+// lokalen Check muss deshalb vor dem Rechnerknopf bis zur manuellen Auswahl
+// reichen, in jedem UKV-Ergebnis und in beiden Sprachen.
+for (const lang of ['de', 'en']) {
+  const check = getDentalContent(lang).check;
+  expect(Object.keys(check.results).length === 9, `Der Zahn-Check behält alle neun Ergebniswege (${lang}).`);
+  const ukvResults = Object.values(check.results).filter((result) => result.ctaType === 'ukv');
+  expect(ukvResults.length === 6, `Alle sechs UKV-Ergebniswege bleiben erhalten (${lang}).`);
+  for (const result of ukvResults) {
+    expect(typeof result.calculatorHint === 'string' && result.calculatorHint.includes('ZahnPRIVAT'), `UKV braucht einen verständlichen Tarif-Auswahlhinweis (${lang}).`);
+    expect((lang === 'de' ? /kein Tarif vorausgewählt/ : /No plan is preselected/).test(result.calculatorHint), `Der Hinweis darf keine Tarifvorauswahl zusagen (${lang}).`);
+  }
+  expect(check.results.ukvLeistung.calculatorHint.includes('ZahnPRIVAT 100') && check.results.ukvPreis.calculatorHint.includes('ZahnPRIVAT 75'), `Der genannte Tarif wird in die Rechner-Übergabe übernommen (${lang}).`);
+}
+expect(dentalCheck.indexOf('id="zahn-calculator-handoff"') < dentalCheck.indexOf('href={CTA_HREFS[result.ctaType]}'), 'Der UKV-Tarif-Auswahlhinweis steht vor dem externen Rechnerknopf.');
+expect(/aria-describedby=\{result\.ctaType === 'ukv' \? 'zahn-calculator-handoff' : undefined\}/.test(dentalCheck), 'Der UKV-Knopf verweist auch für Hilfstechnologien auf den Auswahlhinweis.');
 expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der UKV-Lückenweg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
 expect(/6,10 EUR[^']*9,00 EUR[^']*10,90 EUR/.test(dentalContent), 'Der UKV-Lückenweg muss die geprüften Zuschläge je Zahn nennen.');
 // UKV-Lückenregel (Maklerbetreuer, 05.10.2026): Heil- und Kostenplan oder Anratung in den
@@ -126,9 +143,9 @@ const zahnEn = read('src/i18n/locales/en/zahn.json');
 const seoRoutesSource = read('scripts/seo-routes.mjs');
 const nitaKnowledge = read('public/mia-knowledge-base.txt');
 const fehlenderZahnRatgeber = read('src/content/ratgeber/zahnzusatzversicherung-fehlender-zahn.js');
-expect(/warning: 'Ab 4 fehlenden Zähnen ist keine Aufnahme möglich\. Gab es für deine Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\.'/.test(dentalContent), 'Das UKV-Lückenergebnis muss die 2-Jahres-Regel zu Heil- und Kostenplan und Anratung klar erklären.');
-expect(/exactly that treatment is not covered\. If that was more than 2 years ago, it is covered again\./.test(dentalContent), 'Das englische UKV-Lückenergebnis braucht dieselbe 2-Jahres-Regel.');
-expect(/Wurde die Versorgung der Lücke in den letzten 2 Jahren angeraten oder geplant, ist genau diese Behandlung nicht versichert\./.test(dentalContent), 'Die UKV-Lückenkarte muss die 2-Jahres-Regel nennen.');
+expect(/Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert\./.test(dentalContent), 'Das UKV-Lückenergebnis muss den aktuellen Behandlungsstand trotz älterer Empfehlung prüfen lassen.');
+expect(/An older recommendation does not automatically cover restoration that is currently intended or underway\./.test(dentalContent), 'Das englische UKV-Lückenergebnis braucht dieselbe fachliche Abgrenzung.');
+expect(/Wurde die Versorgung der Lücke in den letzten 2 Jahren angeraten, ist sie aktuell beabsichtigt oder läuft sie schon, ist genau diese Behandlung nicht versichert\./.test(dentalContent), 'Die UKV-Lückenkarte muss Rückblick und aktuell beabsichtigte oder laufende Versorgung unterscheiden.');
 for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent, 'de/zahn.json': zahnDe, 'en/zahn.json': zahnEn, 'seo-routes.mjs': seoRoutesSource, 'mia-knowledge-base.txt': nitaKnowledge, 'Ratgeber fehlender Zahn': fehlenderZahnRatgeber })) {
   expect(!/(?:bloße Wunsch|irgendwann schließen lassen möchtest|ist kein Hindernis|is no obstacle|genau dieses Implantat)/.test(source), `${file} darf keine unbestätigte Aussage zum Wunsch nach Lückenschluss und kein Implantat-only-Beispiel enthalten.`);
 }
@@ -138,17 +155,17 @@ for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent,
   expect(!oldGapContactOnly.test(source), `${file} darf bei geplanter Lückenversorgung nicht mehr nur auf das Gespräch verweisen, die 2-Jahres-Regel gehört dazu.`);
 }
 const gapFaqAnswer = dentalContent.match(/q: 'Kann ich mich mit fehlenden Zähnen noch versichern\?',\s*a: '([^']+)'/)?.[1];
-expect(Boolean(gapFaqAnswer) && /ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\./.test(gapFaqAnswer), 'Die Zahn-FAQ zu fehlenden Zähnen muss die 2-Jahres-Regel enthalten.');
+expect(Boolean(gapFaqAnswer) && /aktuell beabsichtigt oder läuft/.test(gapFaqAnswer) && /Eine ältere Empfehlung allein garantiert keine Deckung/.test(gapFaqAnswer), 'Die Zahn-FAQ zu fehlenden Zähnen darf aus einer älteren Empfehlung keine automatische Deckung ableiten.');
 expect(Boolean(gapFaqAnswer) && seoRoutesSource.includes(`name: 'Kann ich mich mit fehlenden Zähnen noch versichern?', acceptedAnswer: { '@type': 'Answer', text: '${gapFaqAnswer}' }`), 'Das FAQ-Schema auf /zahn muss die Lücken-Antwort wortgleich zur sichtbaren FAQ tragen.');
-// Zeitraum in Frage 1 (Frank 05.10.2026): empfohlen oder geplant zählt nur in den letzten
-// 2 Jahren, laufend immer; ältere Empfehlungen sind bei der UKV ganz normal mitversichert.
-expect(/text: 'Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung empfohlen oder geplant\? Oder läuft sie schon\?'/.test(dentalContent) && /text: 'Has your dentist recommended or planned treatment in the last 2 years\? Or is it already underway\?'/.test(dentalContent), 'Frage 1 des Zahn-Checks muss den Zeitraum von 2 Jahren in DE und EN nennen.');
-expect(/question\.rules/.test(dentalCheck) && /title: 'Vor mehr als 2 Jahren empfohlen\?'/.test(dentalContent), 'Unter Frage 1 muss sichtbar stehen, dass ältere Empfehlungen nicht mehr zählen.');
+// UKV-Antrag 6.2.2: Empfehlungen haben eine Rückblickfrist, beabsichtigte und
+// laufende Behandlungen werden unabhängig davon abgefragt.
+expect(/text: 'Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung empfohlen\? Ist aktuell eine beabsichtigt oder läuft sie schon\?'/.test(dentalContent) && /text: 'Has your dentist recommended treatment in the last 2 years\? Is any treatment currently intended or underway\?'/.test(dentalContent), 'Frage 1 des Zahn-Checks muss Rückblick und aktuellen Behandlungsstand in DE und EN abfragen.');
+expect(/question\.rules/.test(dentalCheck) && /title: 'Vor mehr als 2 Jahren empfohlen\?'/.test(dentalContent), 'Frage 1 behält den sichtbaren Regelkasten zu älteren Empfehlungen.');
 // Kieferorthopädie (UKV-Antrag 4.4) kennt keine 2-Jahres-Grenze: Wo ältere Empfehlungen als
 // versichert gelten, steht die Ausnahme Zahnspange dabei, ebenso im Familien-Ergebnis.
 expect((dentalContent.match(/Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung\./g) || []).length >= 3 && (dentalContent.match(/Exception: for braces, an older recommendation still counts\./g) || []).length >= 3, 'Regelkasten und FAQ zu älteren Empfehlungen brauchen in DE und EN die Ausnahme Zahnspange.');
-expect(/Ältere Empfehlungen zählen nicht mehr \(außer bei Zahnspangen\)\./.test(dentalContent) && /Older recommendations no longer count \(except for braces\)\./.test(dentalContent), 'Die UKV-Wegekarte braucht die Ausnahme Zahnspange in DE und EN.');
-expect(/warning: 'Wurde für dein Kind schon eine Zahnspange empfohlen, oder läuft sie schon\? Dann ist Kieferorthopädie nicht versichert, auch wenn die Empfehlung älter als 2 Jahre ist\./.test(dentalContent) && /warning: 'Have braces already been recommended for your child, or are they underway\? Then orthodontics is not covered, even if the recommendation is more than 2 years old\./.test(dentalContent), 'Das Familien-Ergebnis muss sagen, dass bei Kieferorthopädie auch ältere Empfehlungen zählen.');
+expect(/Für Zahnspangen gilt keine 2-Jahres-Grenze\./.test(dentalContent) && /Braces have no 2-year lookback limit\./.test(dentalContent), 'Die UKV-Wegekarte braucht die gesonderte Zahnspangen-Regel in DE und EN.');
+expect(/warning: 'Ist eine Zahnspange für dein Kind notwendig, angeraten, beabsichtigt oder läuft sie bereits/.test(dentalContent) && /warning: 'If braces for your child are necessary, recommended, intended or underway/.test(dentalContent), 'Das Familien-Ergebnis muss die eigene UKV-Kieferorthopädiefrage wiedergeben.');
 // Ob UKV-Antrag 4.2 schon abgerechnete Behandlungen der letzten 2 Jahre erfasst, ist offen.
 expect(!/(?:fertige Behandlungen mit Rechnung|schon abgerechnete Behandlungen|finished treatment with an invoice|treatments already invoiced)/.test(dentalContent), 'Der Zahn-Check darf nicht behaupten, dass abgerechnete Behandlungen für die Behandlungsfrage nicht zählen.');
 for (const question of ['Es wurde schon eine Behandlung angeraten. Ist es zu spät?', 'Mein Zahnarzt hat vor mehr als 2 Jahren etwas empfohlen. Bin ich trotzdem versichert?']) {
@@ -156,10 +173,10 @@ for (const question of ['Es wurde schon eine Behandlung angeraten. Ist es zu sp�
   const answer = dentalContent.match(new RegExp(`q: '${escaped}',\\s*a: '([^']+)'`))?.[1];
   expect(Boolean(answer) && /2 Jahre/.test(answer) && seoRoutesSource.includes(`name: '${question}', acceptedAnswer: { '@type': 'Answer', text: '${answer}' }`), `Das FAQ-Schema auf /zahn muss „${question}“ wortgleich zur sichtbaren FAQ tragen.`);
 }
-expect(/ist genau diese Behandlung nicht versichert\. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert\./.test(zahnDe) &&/exactly that treatment is not covered\. If that was more than 2 years ago, it is covered again\./.test(zahnEn), 'Die Startseiten-FAQ aus zahn.json braucht die 2-Jahres-Regel in DE und EN.');
+expect(/Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert\./.test(zahnDe) && /An older recommendation does not automatically cover treatment currently intended or underway\./.test(zahnEn), 'Auch die übrigen Zahntexte dürfen ältere Empfehlungen nicht als automatische Deckung darstellen.');
 const nitaZahn = nitaKnowledge.slice(nitaKnowledge.indexOf('## Zahnzusatzversicherung'), nitaKnowledge.indexOf('## Für wen ist HEALIO geeignet?'));
-expect(/Gab es in den letzten 2 Jahren einen Heil- und Kostenplan, also einen Kostenvoranschlag, oder hat der Zahnarzt eine Behandlung angeraten, ist genau diese Behandlung nicht versichert\. Liegt der Heil- und Kostenplan oder die Anratung länger als 2 Jahre zurück, ist das Thema wieder versichert\./.test(nitaZahn), 'Nita muss die UKV-2-Jahres-Regel im Zahnabschnitt klar erklären.');
-expect(/ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke/.test(nitaZahn), 'Nitas Beispiel muss die ganze Lückenversorgung meinen, nicht nur das Implantat.');
+expect(/Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert\./.test(nitaZahn), 'Nita muss ältere Empfehlungen von aktuell beabsichtigten und laufenden Behandlungen unterscheiden.');
+expect(/aktuellen Zustand und die Angaben im Antrag/.test(nitaZahn), 'Nita lässt die UKV anhand des aktuellen Zustands und der vollständigen Angaben entscheiden.');
 expect(!/sagt Nita nicht, wie die UKV dann entscheidet/.test(nitaKnowledge), 'Nita darf die 2-Jahres-Regel nicht mehr verschweigen.');
 // Interna bleiben intern: Zuschlag und Vergütung gehören nie in öffentliche Zahntexte.
 for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent, 'de/zahn.json': zahnDe, 'en/zahn.json': zahnEn, 'mia-knowledge-base.txt': nitaKnowledge, 'Ratgeber fehlender Zahn': fehlenderZahnRatgeber })) {

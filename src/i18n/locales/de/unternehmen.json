@@ -4,12 +4,12 @@
     "description": "Healio bündelt bAV, bKV, BGM-Koordination und Mitarbeiterkommunikation zu einem betrieblichen Vorsorgesystem, transparent, wirtschaftlich und dauerhaft begleitet."
   },
   "hero": {
-    "eyebrow": "Betriebliche Vorsorge für Unternehmen",
+    "eyebrow": "Betriebliche Vorsorge für Arbeitgeber",
     "titleLead": "Verwandeln Sie Lohnnebenkosten in Ihr",
     "titleHighlight": "stärkstes Bindungsinstrument für Leistungsträger.",
-    "description": "Healio denkt Vorsorge ganzheitlich: erst die Krankenkasse Ihrer Mitarbeiter und deren Bonus als Hebel, dann bAV, bKV und Gesundheitsmanagement als betreutes System für Ihren Bestand. Klare Zuständigkeiten, nachvollziehbare Leistungen und persönliche Begleitung entlasten Ihr HR-Team.",
+    "description": "Healio verbindet bAV, bKV und Gesundheitsmanagement zu einem betreuten Gesamtsystem. Wir prüfen bestehende Verträge, machen Leistungen verständlich und unterstützen Ihre HR-Abteilung bei Einführung und laufender Betreuung. KassenBoost ergänzt das Angebot als freiwilliger, privater Zugang für Ihre Mitarbeiter.",
     "analysisCta": "Vorsorge-Check starten",
-    "solutionsCta": "Bausteine ansehen",
+    "solutionsCta": "Eigenes Beispiel rechnen",
     "proof": ["Unabhängiger Makler", "Bestand einbezogen", "Dauerhaft begleitet"]
   },
   "realityCheck": {
@@ -124,22 +124,22 @@
         "key": "pension",
         "horizon": "Morgen · bAV",
         "title": "bAV, die nachvollziehbar wirkt.",
-        "description": "Wir prüfen Bestand, Kosten, Zuschüsse und Annahmen, verständlich bis auf Mitarbeiterebene.",
+        "description": "Wir prüfen Bestand, Kosten, Zuschüsse und mögliche Haftungsfragen und entwickeln nachvollziehbare Versorgungsmodelle für Ihre Mitarbeiter.",
         "points": ["Bestand und Kosten transparent prüfen", "Geeignete Durchführungswege einordnen", "Versorgung je Mitarbeiter verständlich erklären"]
       },
       {
         "key": "health",
         "horizon": "Heute · bKV",
         "title": "bKV, die sofort ankommt.",
-        "description": "Wir entwickeln einen Leistungsumfang, der zur Belegschaft und zum verfügbaren Budget passt.",
+        "description": "Zähne, Brille und Vorsorge: Wir wählen Gesundheitsleistungen passend zur Belegschaft und zu Ihrem Budget.",
         "points": ["Planbarer Beitrag je versichertem Mitarbeiter", "Leistungen passend zur Belegschaft auswählen", "Einführung und Nutzung verständlich begleiten"],
-        "note": "Welche Leistungen gelten, hängt vom gewählten Tarif und den jeweiligen Versicherungsbedingungen ab."
+        "note": "Leistungsumfang, Aufnahmevoraussetzungen und eine mögliche Aufnahme ohne Gesundheitsprüfung richten sich nach Tarif und Kollektiv. Die steuerliche Behandlung hängt von der Vertragsgestaltung und den gesetzlichen Grenzen ab."
       },
       {
         "key": "prevention",
         "horizon": "BGM-Koordination & Prävention",
         "title": "Prävention, die zum Alltag passt.",
-        "description": "Wir koordinieren freiwillige Gesundheits- und Präventionsangebote mit den zuständigen Stellen.",
+        "description": "Wir koordinieren qualifizierte Gesundheitsförderung. Zusätzlich zum Arbeitslohn gewährte Maßnahmen können bei erfüllten gesetzlichen Voraussetzungen bis zu 600 EUR je Mitarbeiter und Jahr steuerfrei bleiben.",
         "points": ["Bedarf und Zielgruppen strukturiert erfassen", "Qualifizierte Maßnahmen auswählen", "Gesundheitskommunikation planbar machen"],
         "note": "Healio unterstützt bei BGM-Koordination und freiwilliger Gesundheitsförderung. Gesetzliche Aufgaben aus Arbeitsschutz, BEM oder Betriebsmedizin bleiben bei den jeweils verantwortlichen Stellen."
       },
@@ -147,7 +147,7 @@
         "key": "management",
         "horizon": "Dauerhaft · Steuerung & Kommunikation",
         "title": "Betreuung, die nach dem Start bleibt.",
-        "description": "Healio hält Bestand, Anbieter, Prozesse und Kommunikation zusammen und bleibt zentraler Ansprechpartner.",
+        "description": "Wir unterstützen die Mitarbeiterkommunikation, den Einstieg neuer Kollegen und die Abläufe bei Austritten. Zuständigkeiten mit HR und Lohnabrechnung werden vorab abgestimmt.",
         "points": ["Bestehende Lösungen sinnvoll einbinden", "Personalbereich und Lohnabrechnung unterstützen", "Versorgung regelmäßig überprüfen und nachsteuern"]
       }
     ]

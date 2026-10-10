@@ -2,9 +2,9 @@
   "hero": {
     "eyebrow": "Patient service for dental practices",
     "title": "So the out-of-pocket cost does not decide the <highlight>treatment.</highlight>",
-    "subtitle": "Healio gives your patients a neutral path to information about dental treatment costs, health fund bonuses and supplementary cover. Your practice remains the medical point of contact. Healio handles the insurance advice.",
+    "subtitle": "Give your patients a neutral source of information on health fund bonuses, statutory dental allowances and supplementary cover. Your practice remains the medical provider; Healio handles independent insurance advice.",
     "primaryCta": "Get to know us",
-    "secondaryCta": "See the clear boundaries",
+    "secondaryCta": "Download the practice checklist (in German)",
     "note": "Free for your practice. No commission, product recommendation or transfer of patient data by your team.",
     "visualLabel": "Schematic treatment plan with neutral patient information",
     "plan": {
@@ -41,7 +41,7 @@
   "insurerHighlights": {
     "eyebrow": "Why the referral matters",
     "title": "Providing this information is genuine patient service.",
-    "intro": "This is not about selling insurance in your practice. It is about not leaving patients unaware: subsidy and protection routes may make a treatment decision financially easier, yet many patients would never discover them without a brief referral.",
+    "intro": "Neutral information can help patients understand possible subsidy and cover routes. Your practice does not recommend a plan. Healio checks directly with each patient whether a route suits their dental status and planned treatment.",
     "highlights": [
       {
         "kicker": "Most important: immediate cover",
@@ -114,20 +114,20 @@
         "text": "The practice receives no commission, reward or other benefit for contacts or purchases."
       },
       {
-        "title": "Neutral information material",
-        "text": "The patient information explains cost and protection routes objectively. It recommends no product and does not call for a purchase."
+        "title": "Factual information for independent review",
+        "text": "The model provides for a passive display of neutral information. Your team does not actively approach patients about plans. Materials and the onward process are reviewed under the applicable professional rules before use in a practice."
       },
       {
         "title": "No advice by the team",
-        "text": "For insurance questions, the practice team refers patients exclusively to Healio. Product selection, documentation and advice take place there."
+        "text": "For insurance questions, your team points to an external information route. Healio handles product selection, documentation and advice outside the practice."
       },
       {
         "title": "Direct patient contact",
-        "text": "The practice collects or transfers no data. Patients scan the QR code themselves and independently choose whether to get in touch."
+        "text": "Your practice does not pass patient data to Healio, including findings or treatment and cost plans. Patients use the QR code independently and decide for themselves whether to get in touch."
       }
     ],
     "closingTitle": "Your practice remains the medical point of contact. Healio remains the insurance broker.",
-    "closingText": "For a regional rollout, the actual material is reviewed against the professional rules of the relevant regional dental chamber. This replaces blanket legal promises with a documented review process.",
+    "closingText": "Informing patients about expected treatment costs under section 630c(3) of the German Civil Code remains your practice’s responsibility. Neutral materials do not replace it. Before use in a practice, we review materials and the onward process against the professional rules of the relevant state dental chamber.",
     "disclaimer": "Note: This presentation does not constitute legal advice. The applicable regional professional rules, the actual design and the way the material is used in the practice are decisive."
   },
   "package": {
@@ -148,7 +148,7 @@
         "text": "Patients go directly to Healio. On request, the practice receives aggregate usage figures only, never names or health data."
       }
     ],
-    "note": "The placement and format of the material are coordinated with the relevant chamber during the pilot. Large promotional displays and active product pitches are not part of the model."
+    "note": "Materials and the onward process are reviewed under the applicable professional rules before use in a practice. Advertising displays or active discussions about plans are not part of the model."
   },
   "faq": {
     "eyebrow": "In brief",
@@ -169,7 +169,7 @@
       },
       {
         "q": "What happens to patient data?",
-        "a": "Your practice neither collects nor transfers data to Healio. Only when a patient contacts Healio independently does Healio process the information required within its own area of responsibility."
+        "a": "Your practice does not pass patient data to Healio. Only when a patient gets in touch independently does Healio process the information needed within its own area of responsibility."
       },
       {
         "q": "Can the model be used identically in every chamber district?",

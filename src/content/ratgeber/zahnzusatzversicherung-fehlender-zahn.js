@@ -18,6 +18,9 @@
  *     Kostenplan oder Anratung in den letzten zwei Jahren schließt genau diese
  *     Behandlung aus, liegt das länger zurück, ist sie wieder versichert. Der frühere
  *     Satz "sprich vorher mit uns" ist nicht mehr die einzige Aussage.
+ *   - Originalprüfung 10.10.2026: Die Auskunft allein begründet keine Deckung
+ *     einer heute beabsichtigten oder laufenden Behandlung. Der aktuelle
+ *     Zustand und die Antragsfragen werden gesondert geprüft.
  *   - Stand 05.10.2026 (Gegenpruefung der Demand-Gen-Anzeigen): Der Faktenkasten
  *     nennt 1.155 EUR nur noch mit Schwangerschaftsbezug, allgemein gilt bis zu
  *     810 EUR. Neuer interner Button zum Zahn-Check auf /zahn.
@@ -40,8 +43,8 @@ export const article = {
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
-  updatedAt: '2026-10-05',
-  updatedAtLabel: '5. Oktober 2026',
+  updatedAt: '2026-10-10',
+  updatedAtLabel: '10. Oktober 2026',
   readingTimeMinutes: 6,
 
   listTitle: 'Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht',
@@ -54,7 +57,7 @@ export const article = {
     label: 'Meinen Zahn-Weg prüfen',
   },
   lead:
-    'Mit einer nicht ersetzten Zahnlücke ist eine Zahnzusatzversicherung weiterhin möglich, aber nicht bei jedem Anbieter. Die UKV nimmt laut ihrem Antrag bis zu drei fehlende Zähne gegen einen festen Zuschlag je Zahn an, die Bayerische lehnt nach ihren Annahmerichtlinien mit Stand 11.2025 bereits bei einem einzigen fehlenden Zahn ab. Entscheidend ist dabei eine zweite Frage, die viele übersehen: ob der Ersatz für genau diese Lücke in den letzten zwei Jahren zahnärztlich angeraten wurde. Dafür gelten andere Regeln als für die Lücke selbst.',
+    'Mit einer nicht ersetzten Zahnlücke ist eine Zahnzusatzversicherung weiterhin möglich, aber nicht bei jedem Anbieter. Die UKV nimmt laut ihrem Antrag bis zu drei fehlende Zähne gegen einen festen Zuschlag je Zahn an, die Bayerische lehnt nach ihren Annahmerichtlinien mit Stand 11.2025 bereits bei einem einzigen fehlenden Zahn ab. Entscheidend ist dabei eine zweite Frage, die viele übersehen: ob der Ersatz für genau diese Lücke in den letzten zwei Jahren zahnärztlich angeraten wurde, aktuell beabsichtigt ist oder schon läuft. Dafür gelten andere Regeln als für die Lücke selbst.',
 
   sections: [
     {
@@ -78,7 +81,7 @@ export const article = {
             },
             {
               lead: 'Fehlender Zahn und angeratener Ersatz sind zwei verschiedene Fragen.',
-              text: 'Bei der UKV gilt dafür eine einfache Regel: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als zwei Jahre zurück, ist sie wieder versichert.',
+              text: 'Bei der UKV gilt dafür eine einfache Regel: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag.',
             },
             {
               lead: 'Der Baustein ZAHN Sofort der Bayerischen',
@@ -169,11 +172,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Bei der UKV gibt es neben der Lückenfrage eine zweite, breitere Frage: ob aktuell eine Zahnersatz- oder Zahnbehandlung läuft, beabsichtigt ist oder in den letzten zwei Jahren zahnärztlich empfohlen wurde. Nach Auskunft des zuständigen Maklerbetreuers der UKV gilt dafür eine einfache Regel: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als zwei Jahre zurück, ist sie wieder versichert.',
+          text: 'Bei der UKV gibt es neben der Lückenfrage eine zweite, breitere Frage: ob aktuell eine Zahnersatz- oder Zahnbehandlung läuft, beabsichtigt ist oder in den letzten zwei Jahren zahnärztlich empfohlen wurde. Nach Auskunft des zuständigen Maklerbetreuers der UKV gilt dafür eine einfache Regel: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag.',
         },
         {
           type: 'paragraph',
-          text: 'Ein Beispiel: Hat dein Zahnarzt vor einem Jahr ein Implantat für die Lücke angeraten, ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke. Liegt die Anratung drei Jahre zurück und kam seitdem nichts Neues dazu, ist sie wieder versichert.',
+          text: 'Ein Beispiel: Hat dein Zahnarzt vor einem Jahr ein Implantat für die Lücke angeraten, ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke. Auch bei einer drei Jahre alten Anratung muss die UKV prüfen, ob die Versorgung aktuell beabsichtigt ist oder läuft; allein das Datum garantiert keine Deckung.',
         },
         {
           type: 'paragraph',
@@ -251,17 +254,17 @@ export const article = {
     {
       question: 'Ist der bezuschlagte Zahn auch wirklich mitversichert?',
       answer:
-        'Ja. Nach Auskunft des zuständigen Maklerbetreuers der UKV sind die bezuschlagten Zähne mitversichert, es gilt die normale Zahnstaffel ohne eigenen Deckel für die Lücke. Gab es für die Lücke in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert; liegt das länger als zwei Jahre zurück, ist sie wieder versichert. Maßgeblich sind die Versicherungsbedingungen.',
+        'Ja. Nach Auskunft des zuständigen Maklerbetreuers der UKV sind die bezuschlagten Zähne mitversichert, es gilt die normale Zahnstaffel ohne eigenen Deckel für die Lücke. Gab es für die Lücke in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert; eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Maßgeblich sind die Versicherungsbedingungen.',
     },
     {
       question: 'Mein Zahnarzt hat die Lücke schon einmal angesprochen. Ist sie dann ausgeschlossen?',
       answer:
-        'Das hängt vom Zeitpunkt ab. Bei der UKV gilt: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als zwei Jahre zurück, ist sie wieder versichert.',
+        'Das hängt vom Zeitpunkt ab. Bei der UKV gilt: Gab es in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde die Versorgung der Lücke angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag.',
     },
     {
       question: 'Zahlt eine Zusatzversicherung den bereits angeratenen Zahnersatz?',
       answer:
-        'Wurde er in den letzten zwei Jahren angeraten oder geplant, oder läuft die Behandlung schon? Dann in der Regel nicht. Liegt die Anratung länger als zwei Jahre zurück und ist seitdem nichts passiert, ist er bei der UKV wieder versichert. Für die Fälle der letzten zwei Jahre leistet im Healio-Sortiment allein der Baustein ZAHN Sofort der Bayerischen, begrenzt auf höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, und nur solange für die Behandlung noch keine Rechnung gestellt wurde. Am Markt gibt es vergleichbare Sofortbausteine auch bei anderen Anbietern. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
+        'Wurde er in den letzten zwei Jahren angeraten oder geplant, oder läuft die Behandlung schon? Dann in der Regel nicht. Eine ältere Anratung allein macht den geplanten Zahnersatz nicht versichert. Aktuell beabsichtigte und laufende Maßnahmen werden gesondert geprüft. Für die Fälle der letzten zwei Jahre leistet im Healio-Sortiment allein der Baustein ZAHN Sofort der Bayerischen, begrenzt auf höchstens 750 EUR je Kalenderjahr und höchstens 1.500 EUR insgesamt, und nur solange für die Behandlung noch keine Rechnung gestellt wurde. Am Markt gibt es vergleichbare Sofortbausteine auch bei anderen Anbietern. Voraussetzung bleibt, dass die Bayerische dich annimmt.',
     },
     {
       question: 'Was passiert nach den 24 Monaten Sofortschutz?',
@@ -285,7 +288,7 @@ export const article = {
     blocks: [
       {
         type: 'paragraph',
-        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Weg. Bei ein bis drei fehlenden Zähnen ohne Behandlung, die in den letzten zwei Jahren angeraten wurde oder schon läuft, ist das UKV ZahnPRIVAT mit Zuschlag je Zahn, mit direktem Link zum Antrag. Ältere Empfehlungen zählen nicht mehr. Fehlen mehr als drei Zähne oder kommt zur Lücke eine Behandlung, die in den letzten zwei Jahren angeraten wurde oder schon läuft, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
+        text: 'Bis zu vier kurze Fragen, dann siehst du deinen Prüfweg. Bei ein bis drei fehlenden Zähnen ohne aktuell beabsichtigte oder laufende Behandlung und ohne Empfehlung aus den letzten zwei Jahren prüfst du UKV ZahnPRIVAT mit Zuschlag je Zahn. Eine ältere Empfehlung allein garantiert keine Deckung. Fehlen mehr als drei Zähne oder kommt zur Lücke eine aktuell beabsichtigte, laufende oder in den letzten zwei Jahren angeratene Behandlung, klären wir das persönlich mit dir. Deine Antworten werden nicht gespeichert.',
       },
     ],
   },

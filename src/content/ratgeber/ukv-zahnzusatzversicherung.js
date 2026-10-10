@@ -36,6 +36,8 @@
  *     Rechnung minus Kassenleistung), nicht 75 % des Rests.
  *
  * Faktenprüfung 07.10.2026: PRUEFBERICHT-zahn-kasse-partner.md.
+ * Originalabgleich 10.10.2026: UKV-Antrag 6.2.2 prüft aktuell beabsichtigte
+ * und laufende Maßnahmen unabhängig vom Datum einer früheren Empfehlung.
  */
 
 export const article = {
@@ -49,6 +51,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-10',
+  updatedAtLabel: '10. Oktober 2026',
   readingTimeMinutes: 10,
 
   listTitle: 'UKV ZahnPRIVAT im Überblick: Stufen, Leistungen, Grenzen',
@@ -69,11 +73,11 @@ export const article = {
       { value: '100 %', label: 'der erstattungsfähigen Kosten nach Kassenleistung, Stufe 100' },
       { value: 'bis 1.000 EUR', label: 'erstattet der Tarif im ersten Kalenderjahr (Zahnstaffel)' },
     ],
-    text: 'Drei Leistungsstufen ohne Wartezeiten. Was in den letzten 2 Jahren angeraten wurde oder schon läuft, ist nicht versichert.',
+    text: 'Drei Leistungsstufen ohne Wartezeiten. Was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft, ist nicht versichert.',
     path: { to: '/zahn#zahn-check', text: 'Welche Stufe passt zu dir?', label: 'Zahn-Check starten' },
   },
 
-  lead: 'Die UKV ZahnPRIVAT hat drei Leistungsstufen, 75, 90 und 100, und in keiner gibt es Wartezeiten. In den ersten drei Kalenderjahren begrenzt eine Zahnstaffel die Erstattung. Nicht versichert ist, was in den letzten 2 Jahren angeraten wurde oder schon läuft. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit einem Zuschlag je Zahn auf. Diese Seite zeigt Stufen, Zahlen und Grenzen so, wie sie auf healio.de/zahn stehen.',
+  lead: 'Die UKV ZahnPRIVAT hat drei Leistungsstufen, 75, 90 und 100, und in keiner gibt es Wartezeiten. In den ersten drei Kalenderjahren begrenzt eine Zahnstaffel die Erstattung. Nicht versichert ist, was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit einem Zuschlag je Zahn auf. Diese Seite zeigt Stufen, Zahlen und Grenzen so, wie sie auf healio.de/zahn stehen.',
 
   sections: [
     {
@@ -86,7 +90,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Healio zeigt die ZahnPRIVAT für alle, bei denen in den letzten 2 Jahren nichts empfohlen wurde und nichts läuft. Ältere Empfehlungen zählen nicht mehr, außer bei der Zahnspange. Für Behandlungen, die schon angeraten sind, gibt es einen zweiten Weg, den Baustein ZAHN Sofort der Bayerischen. Beide Wege stehen auf healio.de/zahn nebeneinander.',
+          text: 'Healio zeigt die ZahnPRIVAT für alle, bei denen in den letzten 2 Jahren nichts empfohlen wurde und aktuell nichts beabsichtigt ist oder läuft. Eine ältere Empfehlung bedeutet keine automatische Deckung. Für Zahnspangen gilt keine Zwei-Jahres-Grenze. Für Behandlungen, die schon angeraten sind, gibt es einen zweiten Weg, den Baustein ZAHN Sofort der Bayerischen. Beide Wege stehen auf healio.de/zahn nebeneinander.',
         },
         {
           type: 'segments',
@@ -204,7 +208,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert.',
+          text: 'Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag.',
         },
         {
           type: 'segments',
@@ -222,7 +226,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Behandlungen, die in den letzten 2 Jahren angeraten oder geplant wurden oder schon laufen. Die Regel ist einfach: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Wurde für dein Kind schon eine Zahnspange empfohlen oder läuft sie schon, ist Kieferorthopädie nicht versichert, auch wenn die Empfehlung älter als 2 Jahre ist.',
+          text: 'Behandlungen, die in den letzten 2 Jahren angeraten wurden, aktuell beabsichtigt sind oder schon laufen. Die Regel ist einfach: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Wurde für dein Kind schon eine Zahnspange empfohlen oder läuft sie schon, ist Kieferorthopädie nicht versichert, auch wenn die Empfehlung älter als 2 Jahre ist.',
         },
         {
           type: 'paragraph',
@@ -259,7 +263,7 @@ export const article = {
           heading: 'Ehrlich gesagt',
           items: [
             { lead: 'Ohne Wartezeit heißt nicht ohne Grenzen.', text: 'Die Zahnstaffel begrenzt die Erstattung in den ersten drei Kalenderjahren, bei Unfall gilt sie nicht.' },
-            { lead: 'Angeratenes zahlt auch die UKV nicht.', text: 'Was in den letzten 2 Jahren angeraten oder geplant wurde oder schon läuft, ist nicht versichert. Für solche Fälle gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.' },
+            { lead: 'Angeratenes zahlt auch die UKV nicht.', text: 'Was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft, ist nicht versichert. Für solche Fälle gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.' },
             { lead: 'Hier steht kein Beitrag.', text: 'Er hängt unter anderem von Alter, Tarif und Leistungsstufe ab. Deinen konkreten Beitrag siehst du im Tarifrechner.' },
             { lead: 'Verbindlich entscheidet die UKV.', text: 'Annahme und Leistungsumfang prüft sie nach den Angaben im Antrag.' },
           ],
@@ -326,7 +330,7 @@ export const article = {
     {
       question: 'Zahlt die UKV eine schon angeratene Behandlung?',
       answer:
-        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.',
+        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.',
     },
     {
       question: 'Was kostet die UKV ZahnPRIVAT?',

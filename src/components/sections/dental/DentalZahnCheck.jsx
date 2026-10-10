@@ -336,6 +336,13 @@ const DentalZahnCheck = () => {
                     </p>
                   </div>
 
+                  {result.ctaType === 'ukv' && (
+                    <p id="zahn-calculator-handoff" className="mt-5 rounded-2xl border border-[#c8deeb] bg-[#eff7fc] px-4 py-3 text-base leading-6 text-[#324d60] md:leading-7">
+                      <strong className="font-display font-extrabold text-home-midnight">{content.calculatorHintLabel}</strong>{' '}
+                      {result.calculatorHint}
+                    </p>
+                  )}
+
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-7">
                     {result.ctaType === 'contact' ? (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
@@ -343,7 +350,7 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" onClick={countAntragOpened}>
+                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={countAntragOpened}>
                           {result.cta}<ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
                         </LeadCaptureLink>
                       </Button>

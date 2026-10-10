@@ -20,7 +20,7 @@ const enCommon = readJson('src/i18n/locales/en/common.json');
 const indexCss = fs.readFileSync(path.join(rootDir, 'src/index.css'), 'utf8');
 const tailwindConfig = fs.readFileSync(path.join(rootDir, 'tailwind.config.js'), 'utf8');
 
-assert.equal(de.hero.title, 'Warum lassen Sie jedes Jahr hunderte Euro bei Ihrer Krankenkasse liegen?');
+assert.equal(de.hero.title, 'Warum lässt du jedes Jahr hunderte Euro bei deiner Krankenkasse liegen?');
 assert.equal(en.hero.title, 'Why leave hundreds of euros with your health fund every year?');
 assert.equal(`${de.hero.titleLead} ${de.hero.titleAccent}`, de.hero.title);
 assert.equal(`${en.hero.titleLead} ${en.hero.titleAccent}`, en.hero.title);

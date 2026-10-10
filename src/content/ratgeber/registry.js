@@ -522,7 +522,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Zahnzusatzversicherung bei fehlendem Zahn | Healio",
     "metaDescription": "Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.",
     "publishedAt": "2026-09-22",
-    "updatedAt": "2026-10-05"
+    "updatedAt": "2026-10-10"
   },
   {
     "slug": "zahnzusatzversicherung-lohnt-sich",
@@ -544,7 +544,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 10,
     "metaTitle": "UKV Zahnzusatzversicherung: ZahnPRIVAT im Überblick | Healio",
     "metaDescription": "UKV Zahnzusatzversicherung: ZahnPRIVAT 75, 90 und 100 ohne Wartezeit, mit Zahnstaffel, Zuschlag bei 1 bis 3 fehlenden Zähnen und klaren Grenzen bei Angeratenem.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-10"
   },
   {
     "slug": "bayerische-zahnzusatzversicherung",

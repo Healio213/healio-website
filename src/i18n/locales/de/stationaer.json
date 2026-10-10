@@ -333,43 +333,49 @@
     "hero": {
       "eyebrow": "Krankenhauszusatzversicherung",
       "title": "Wenn es um deine Gesundheit geht, sind Arztwahl und Privatsphäre keine Nebensache.",
-      "subtitle": "Vergleiche Arztwahl, Einbettzimmer und Zweibettzimmer. Gesundheitsfragen und Tarifbedingungen entscheiden; günstiger Unfallschutz gilt nur nach Unfall. Beim regulären Klinikschutz kann dein Kassenbonus den Beitrag meist teilweise, beim Unfallschutz oft ganz ausgleichen.",
-      "cta": "Klinikschutz auswählen",
+      "subtitle": "Nur ein ruhiges Einbettzimmer oder zusätzlich Arztwahl? Vergleiche DKV UZ1 und die SDK-Tarife für Krankheit oder ausschließlich Unfall. Dein Kassenbonus kann deinen Beitrag je nach Voraussetzungen teilweise oder ganz ausgleichen.",
+      "cta": "Klinikschutz vergleichen",
       "micro": [
         "Zimmer und Arztwahl getrennt vergleichen",
         "SDK: keine Wartezeit für neue Versicherungsfälle"
       ],
-      "visualAria": "Healio Auswahlhilfe für SP2, SP1 und SPU",
+      "visualAria": "Healio Auswahlhilfe für DKV UZ1, SDK SP2, SP1 und SPU",
       "visualTitle": "Was ist dir im Ernstfall wichtig?",
       "choiceAria": "{{code}} {{label}} ansehen",
       "choices": {
+        "dkv": {
+          "code": "DKV UZ1",
+          "label": "Nur Einbettzimmer",
+          "note": "Ruhe und Privatsphäre ohne Chefarzt"
+        },
         "sp2": {
-          "code": "SP2",
-          "label": "Zweibettzimmer",
+          "code": "SDK SP2",
+          "label": "Zweibettzimmer + Wahlarzt",
           "note": "Komfort bei Krankheit und Unfall"
         },
         "sp1": {
-          "code": "SP1",
-          "label": "Einbettzimmer",
-          "note": "Mehr Ruhe bei Krankheit und Unfall"
+          "code": "SDK SP1",
+          "label": "Einbettzimmer + Wahlarzt",
+          "note": "Mehr Privatsphäre und Familienleistungen"
         },
         "spu": {
-          "code": "SPU",
+          "code": "SDK SPU",
           "label": "Nur nach Unfall",
-          "note": "Günstiger Einstieg ohne Gesundheitsprüfung"
+          "note": "Zimmer und Wahlarzt ausschließlich nach Unfall"
         }
       },
-      "costsCta": "Einzelzimmerkosten verstehen"
+      "costsCta": "Einzelzimmerkosten verstehen",
+      "familyCta": "Kinderschutz & Hebammenleistungen prüfen"
     },
     "selector": {
       "eyebrow": "Deine Entscheidung in einem Blick",
       "title": "Welcher Klinikschutz passt zu dir?",
-      "subtitle": "Entscheidend ist nicht nur der Preis, sondern wann dein Schutz greifen soll. Wähle zuerst den Leistungsumfang. Den persönlichen Beitrag siehst du danach.",
+      "subtitle": "Vier Wege: nur Zimmer, Zimmer mit Wahlarzt oder Klinik-Extras ausschließlich nach Unfall. Wähle zuerst die Leistungen, dann berechne deinen persönlichen Beitrag.",
       "sdkTitle": "Mit Arztwahl: die drei Klinik-Tarife der SDK",
       "choose": "Diesen Schutz wählen",
       "selected": "Ausgewählt",
       "resultEyebrow": "Deine gewählte Richtung",
-      "resultNote": "Im Rechner gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein. Danach wählst du dort denselben Tarif und siehst deinen persönlichen Beitrag.",
+      "resultNote": "Vor dem ersten Rechnerstart fragen wir Vorname und E-Mail für den Bonusleitfaden ab. Im SDK-Rechner wählst du deinen Tarif nochmals aus und siehst deinen altersabhängigen Beitrag.",
       "calculate": "Persönlichen Beitrag berechnen",
       "empty": "Wähle eine der drei Karten. Der Button zum Beitragsrechner erscheint danach unter den Karten.",
       "disclosure": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag. SPU gilt ausschließlich für unfallbedingte Behandlungen und kommt ohne Gesundheitsprüfung aus. Leistungen gelten im tariflich vereinbarten Umfang; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab.",
@@ -384,7 +390,7 @@
             "Zweibettzimmer",
             "Privatärztliche Behandlung",
             "Freie Krankenhauswahl nach Tarifbedingungen",
-            "Rooming-in für versicherte Kinder unter 16 Jahren"
+            "Rooming-in über SP2 des Kindes: unter 16, versicherter Klinikfall"
           ],
           "result": "SP2: Komfort bei Krankheit und Unfall"
         },
@@ -398,7 +404,7 @@
             "Ein- oder Zweibettzimmer",
             "Privatärztliche Behandlung",
             "Gesetzliche Zuzahlung von 10 EUR je Kliniktag, an Tagen ohne Zuzahlung 10 EUR Krankenhaustagegeld",
-            "Familienzimmer bei der Entbindung"
+            "Familienzimmer bei versicherter Entbindung; Schwangerschaftsausschluss beachten"
           ],
           "result": "SP1: Mehr Ruhe bei Krankheit und Unfall"
         },
@@ -446,17 +452,17 @@
     "family": {
       "eyebrow": "Familie klar eingeordnet",
       "title": "Werdende Eltern und Kinder: drei klare Antworten.",
-      "subtitle": "Bleibt bis zur Geburt wenig Zeit, sichert die SDK dein Kind trotzdem ab. Planst du früh, ist die Bayerische für Erwachsene günstiger. Und bei Kindern entscheidet, ob auch Krankheit versichert sein soll.",
+      "subtitle": "Elternschutz und Kinderschutz sind zwei verschiedene Fragen. Die SDK verlangt für die Kindernachversicherung keinen Vorlauf, die Bayerische drei Monate. Für Geburt und Hebamme gelten die jeweiligen Tarifbedingungen.",
       "parents": {
         "label": "Werdende Eltern · SDK",
-        "title": "Ohne Vorlauf",
-        "body": "Ist ein Elternteil am Tag der Geburt bei der SDK im Klinik-Tarif versichert, nimmt die SDK dein Kind ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Leistungsausschluss auf, auch bei Geburtsschäden oder angeborenen Krankheiten. Eine Vorversicherungszeit gibt es nicht.",
+        "title": "Elternschutz öffnet den Weg fürs Kind",
+        "body": "Ist ein Elternteil am Tag der Geburt im SDK-Klinik-Tarif versichert und geht die Anmeldung deines Kindes binnen zwei Monaten bei der SDK ein, gilt sein Schutz rückwirkend ab Geburt. Ohne Gesundheitsprüfung, Risikozuschlag oder neue Leistungsausschlüsse, höchstens im Umfang des besser versicherten Elternteils. Eine Vorversicherungszeit ist nicht nötig.",
         "items": [
-          "Es reicht, wenn einer von euch beiden bei der SDK im Klinik-Tarif versichert ist",
-          "Deine Anmeldung muss spätestens zwei Monate nach der Geburt bei der SDK eingehen, dann gilt der Schutz rückwirkend ab dem Tag der Geburt",
-          "Bei einer späteren Geburt: Beleghebamme in SP1 und SP2, Familienzimmer im SP1, ohne Wartezeit"
+          "Geburtsschäden und angeborene Krankheiten sind innerhalb des gewählten Tarifs eingeschlossen",
+          "Für SP1 beim Kind braucht ein Elternteil selbst SP1",
+          "Bei einer späteren versicherten Geburt: gesondert berechenbare Beleghebamme in SP1 und SP2, Familienzimmer im SP1"
         ],
-        "note": "Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, zahlt der Tarif weder diese Entbindung noch Komplikationen dabei. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der besser versicherte Elternteil. Soll es so SP1 bekommen, braucht ein Elternteil selbst SP1."
+        "note": "Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, zahlt der Elternvertrag weder diese Entbindung noch Komplikationen dabei. Die Kindernachversicherung wird davon getrennt geprüft. Zimmer- und Arztleistungen richten sich nach dem gewählten Tarif und dem versicherten Krankenhausfall."
       },
       "bayerische": {
         "label": "Werdende Eltern · Bayerische",
@@ -468,19 +474,19 @@
           "Familienzimmer bei einer späteren Entbindung: im Prestige ohne Begrenzung, im Komfort bis zur Höhe des Zweibettzimmers, über den Vertrag der Mutter",
           "Anmeldung spätestens zwei Monate nach der Geburt, Schutz rückwirkend",
           "Muss dein Kind unter 16 ins Krankenhaus, zahlt sein Komfort- oder Prestige-Tarif Unterkunft und Verpflegung für dich als Begleitperson zu 100 Prozent, soweit die Kasse sie nicht trägt",
-          "Bei einer späteren Schwangerschaft: Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, im Komfort und im Prestige"
+          "Bei einer späteren Schwangerschaft: Hebammen-Mehrkosten nach Kassenleistung gemäß bestätigter Leistungspraxis; konkrete Positionen vorab klären"
         ],
         "note": "Bist du beim Antrag schon schwanger, zahlt der Tarif weder diese Entbindung noch Hebammenkosten für diese Schwangerschaft. Auch später gilt: Kommt ein Kind vor Ablauf der acht Monate zur Welt, auch als Frühgeburt, zahlt der Tarif die Entbindung nicht. Über die Nachversicherung kann dein Kind höchstens so umfassend versichert werden wie der Elternteil."
       },
       "children": {
         "label": "Für Kinder · SDK",
         "title": "Krankheitsschutz oder nur Unfall?",
-        "body": "Auch bei Kindern entscheidet der Anlass: SP1 und SP2 sichern vereinbarte Klinikleistungen bei Krankheit und Unfall, SPU ausschließlich nach einem Unfall.",
+        "body": "SP1 und SP2 sichern vereinbarte Klinikleistungen bei Krankheit und Unfall, SPU ausschließlich nach einem Unfall. Rooming-in zahlt der eigene SP1- oder SP2-Tarif deines Kindes: Unterkunft und Verpflegung für einen Elternteil, wenn dein Kind bei Behandlungsbeginn unter 16 ist und die SDK für den Krankenhausfall leistet.",
         "items": [
           "SP1: Ein- oder Zweibettzimmer",
           "SP2: Zweibettzimmer",
           "SPU: günstiger Unfallschutz ohne Gesundheitsprüfung",
-          "Rooming-in für versicherte Kinder unter 16 Jahren"
+          "Rooming-in über den eigenen SP1- oder SP2-Vertrag des Kindes"
         ],
         "note": "SPU ist kein allgemeiner Kinder-Klinikschutz. Bei einer stationären Behandlung wegen Krankheit leistet dieser Unfalltarif nicht."
       },
@@ -508,8 +514,8 @@
           {
             "who": "Bayerische Komfort und Prestige",
             "tone": "bay",
-            "text": "Laut Produktunterlagen der Bayerischen erstatten Komfort und Prestige Hebammenkosten, die über die Leistungen deiner Krankenkasse hinausgehen, auch für privat abrechnende Hebammen.",
-            "condition": "Bist du beim Antrag schon schwanger, gilt das für diese Schwangerschaft und Geburt nicht. Eine allgemeine Wartezeit gibt es nicht, für die Entbindung gelten acht Monate."
+            "text": "Komfort und Prestige erstatten laut bestätigter Leistungspraxis der Bayerischen Hebammen-Mehrkosten nach Kassenleistung, auch für bestimmte ambulante Leistungen. Diese Praxis ist kein eigenständiger ambulanter Tarifanspruch. Welche privat berechenbaren Positionen erstattet werden, klären wir vorab.",
+            "condition": "Laut Fachauskunft vom 06.10.2026 gelten acht Monate Wartezeit auch für diese ambulanten Hebammenleistungen. Eine beim Antrag bereits bekannte Schwangerschaft und Geburt sind nicht mitversichert. Keine pauschale Erstattung pro Besuch."
           }
         ]
       },
@@ -577,8 +583,8 @@
       "title": "Die wichtigsten Fragen vor deiner Auswahl",
       "items": [
         {
-          "q": "Was ist der Unterschied zwischen SP1, SP2 und SPU?",
-          "a": "SP1 bietet Ein- oder Zweibettzimmer und übernimmt die gesetzliche Zuzahlung von 10 EUR je Kliniktag, an Tagen ohne Zuzahlung zahlt er 10 EUR Krankenhaustagegeld. SP2 sichert das Zweibettzimmer. Beide Tarife gelten im vereinbarten Umfang bei Krankheit und Unfall. SPU bietet Klinik-Extras ausschließlich nach einem Unfall."
+          "q": "Welche vier Klinikwege kann ich vergleichen?",
+          "a": "DKV UZ1 erstattet tariflich anerkannte Zimmerzuschläge ohne privatärztliche Behandlung. SDK SP2 bietet Zweibettzimmer mit Wahlarzt, SP1 Ein- oder Zweibettzimmer mit Wahlarzt und weiteren Familienleistungen. SP1 und SP2 gelten im vereinbarten Umfang bei Krankheit und Unfall. SDK SPU leistet ausschließlich nach Unfall."
         },
         {
           "q": "Ist SPU eine vollwertige Krankenhauszusatzversicherung?",
@@ -586,7 +592,7 @@
         },
         {
           "q": "Gibt es Wartezeiten?",
-          "a": "Die SDK Klinik-Tarife verzichten auf tarifliche Wartezeiten. Schutz besteht für neue Versicherungsfälle ab Versicherungsbeginn. Ein Versicherungsfall, der bereits vorher eingetreten ist, ist nicht versichert. Bei der Bayerischen gibt es keine allgemeine Wartezeit, für Entbindung und Psychotherapie gelten acht Monate, nach einem Unfall entfallen sie."
+          "a": "Die SDK Klinik-Tarife haben keine tarifliche Wartezeit für neue Versicherungsfälle ab Versicherungsbeginn. Bereits vorher eingetretene Fälle sind nicht versichert. DKV UZ1 hat drei Monate allgemeine Wartezeit und acht Monate für Entbindung; die allgemeine Wartezeit entfällt bei Unfall. Bei der Bayerischen gibt es keine allgemeine Wartezeit, für Entbindung und Psychotherapie gelten acht Monate, nach einem Unfall entfallen sie. Eine schon bestehende Schwangerschaft wird nicht rückwirkend versichert."
         },
         {
           "q": "Muss ich Gesundheitsfragen beantworten?",
@@ -594,7 +600,7 @@
         },
         {
           "q": "Wie schließe ich den Klinikschutz ab?",
-          "a": "Du wählst oben SP2, SP1 oder SPU und öffnest den Beitragsrechner der SDK in einem neuen Tab. Dort gibst du Versicherungsbeginn, Geburtsdatum und Geschlecht ein, wählst denselben Tarif und siehst deinen Beitrag. Danach folgen deine Antragsdaten, bei SP1 und SP2 mit Gesundheitsfragen, und eine Zusammenfassung. Einen Termin brauchst du nicht."
+          "a": "Wähle DKV UZ1 oder einen der SDK-Tarife SP2, SP1 und SPU. Beim ersten Rechnerstart in dieser Sitzung geben wir dir einen Zwischenschritt für Vorname und E-Mail: Du forderst einmalig den Kassenbonus-Leitfaden an. Nach bestätigter Speicherung öffnet sich der jeweilige Versichererrechner in einem neuen Tab. Im SDK-Rechner wählst du den zuvor gewählten Tarif nochmals aus. Dort folgen persönliche Beitragsberechnung, Antragsdaten und gegebenenfalls Gesundheitsfragen. Absenden bei Healio beantragt noch keine Versicherung. Die Bayerische hat einen eigenen Rechner mit demselben Leitfaden-Zwischenschritt."
         },
         {
           "q": "Kann ein Kassenbonus den ganzen Beitrag ausgleichen?",
@@ -602,7 +608,7 @@
         },
         {
           "q": "Wie funktioniert die Aufnahme eines Neugeborenen?",
-          "a": "Ist ein Elternteil am Tag der Geburt bei der SDK versichert, meldest du dein Kind innerhalb von zwei Monaten an. Es ist dann rückwirkend ab Geburt versichert, ohne Gesundheitsprüfung und ohne Vorversicherungszeit, höchstens im Umfang des Elternteils. Bei der Bayerischen muss ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei ihr versichert sein."
+          "a": "Bei der SDK muss ein Elternteil am Tag der Geburt im entsprechenden Tarif versichert sein. Geht die Anmeldung des Kindes binnen zwei Monaten ein, beginnt sein Schutz rückwirkend ab Geburt, ohne Gesundheitsprüfung und ohne Vorversicherungszeit, höchstens im Umfang des besser versicherten Elternteils. Bei der Bayerischen muss der Elternteil am Geburtstag mindestens drei Monate versichert sein; auch dort gelten zwei Monate Anmeldefrist und höchstens der Elternschutz. Die Leistungen für die Entbindung der Mutter werden davon getrennt geprüft."
         }
       ]
     },
@@ -615,7 +621,7 @@
     "final": {
       "eyebrow": "Bereit für deine Entscheidung?",
       "title": "Wähle zuerst den Schutz. Den Beitrag berechnest du danach.",
-      "body": "Du wählst oben deinen Tarif und schließt ihn selbst online bei der SDK ab. Ohne Termin."
+      "body": "DKV UZ1 nur fürs Zimmer oder SDK SP2, SP1 und SPU: Vergleiche die Leistungen und starte danach den passenden Beitragsrechner."
     }
   }
 }

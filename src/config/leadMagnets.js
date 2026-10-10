@@ -59,9 +59,10 @@ export const LEAD_MAGNETS = {
     downloadPath: '/downloads/healio-belegschafts-check.pdf',
     downloadFileName: 'Healio-Belegschafts-Check.pdf',
     appointmentIntro:
-      'Wenn Sie es lieber durchgerechnet haben wollen: Zwanzig Minuten am Telefon reichen, damit Sie wissen, wie das für Ihr Haus aussieht.',
+      'Sie möchten die Möglichkeiten für Ihr Unternehmen einordnen? Starten Sie den Vorsorge-Check. Mit Ihren Angaben können wir das persönliche Gespräch vorbereiten.',
+    appointmentCta: 'Vorsorge-Check starten',
     appointmentUrl:
-      'https://healio.de/partner?utm_source=linkedin&utm_medium=funnel&utm_campaign=team-vorteil&utm_content=termin',
+      'https://healio.de/potenzialanalyse?utm_source=linkedin&utm_medium=funnel&utm_campaign=team-vorteil&utm_content=termin',
     pageSource: 'Funnel Unternehmen Team-Vorteil',
     status: 'entwurf',
   },
@@ -161,7 +162,7 @@ export const LEAD_MAGNETS = {
     appointmentIntro:
       'Wenn Sie Fragen dazu haben: Zwanzig Minuten am Telefon, ohne dass daraus etwas folgen muss.',
     appointmentUrl:
-      'https://healio.de/partner?utm_source=linkedin&utm_medium=funnel&utm_campaign=zahnarztpraxis-material&utm_content=termin',
+      'https://healio.de/zahnaerzte?utm_source=linkedin&utm_medium=funnel&utm_campaign=zahnarztpraxis-material&utm_content=termin#calendly-zahnaerzte',
     pageSource: 'Funnel Zahnärzte Praxis-Material',
     status: 'entwurf',
   },

@@ -4,12 +4,12 @@
     "description": "Healio combines corporate pension, health insurance, wellbeing coordination and employee communication into one managed benefits system."
   },
   "hero": {
-    "eyebrow": "Employee benefits for companies",
+    "eyebrow": "Employee benefits for employers",
     "titleLead": "Turn employment costs into your",
     "titleHighlight": "strongest tool for retaining top performers.",
-    "description": "Healio takes a holistic view of benefits: first your employees' health fund and its bonus as leverage, then company pension, company health insurance and health management as a managed system for your workforce. Clear responsibilities, understandable benefits and personal support ease the workload for your HR team.",
+    "description": "Healio brings company pension, company health insurance and health management together in one supported system. We review existing plans, explain benefits clearly and help your HR team with implementation and ongoing support. KassenBoost adds a voluntary, private comparison route for your employees.",
     "analysisCta": "Start a benefits review",
-    "solutionsCta": "Explore the building blocks",
+    "solutionsCta": "Calculate your own example",
     "proof": ["Independent broker", "Existing plans included", "Ongoing support"]
   },
   "realityCheck": {
@@ -95,22 +95,22 @@
         "key": "pension",
         "horizon": "Tomorrow · Pension",
         "title": "A pension people can understand.",
-        "description": "We review plans, costs, contributions and assumptions — clearly, down to employee level.",
+        "description": "We review existing plans, costs, contributions and potential liability issues and develop transparent provision models for your employees.",
         "points": ["Review existing plans and costs transparently", "Assess suitable implementation routes", "Explain provision clearly at employee level"]
       },
       {
         "key": "health",
         "horizon": "Today · Health insurance",
         "title": "Health cover employees value now.",
-        "description": "We develop cover that fits your workforce and available budget.",
+        "description": "Dental care, glasses and preventive care: we select health benefits that fit your workforce and budget.",
         "points": ["Predictable contribution per insured employee", "Choose benefits suited to the workforce", "Explain rollout and use clearly"],
-        "note": "Available benefits depend on the selected plan and its insurance terms."
+        "note": "Benefits, eligibility and any option to join without health questions depend on the plan and group arrangement. Tax treatment depends on the contract structure and statutory limits."
       },
       {
         "key": "prevention",
         "horizon": "Wellbeing coordination and prevention",
         "title": "Wellbeing that fits everyday work.",
-        "description": "We coordinate voluntary health and prevention services with the responsible parties.",
+        "description": "We coordinate qualified health promotion. Measures provided in addition to regular pay may be tax-exempt up to EUR 600 per employee per year if the legal requirements are met.",
         "points": ["Assess needs and employee groups", "Select qualified measures", "Plan health communication"],
         "note": "Healio supports wellbeing coordination and voluntary health promotion. Statutory duties relating to occupational health and safety, return-to-work management or occupational medicine remain with the responsible parties."
       },
@@ -118,7 +118,7 @@
         "key": "management",
         "horizon": "Ongoing · Management and communication",
         "title": "Support that continues after launch.",
-        "description": "Healio connects plans, providers, processes and communication and remains your central contact.",
+        "description": "We support employee communication, new colleagues joining and processes when staff leave. Responsibilities are agreed with HR and payroll in advance.",
         "points": ["Integrate existing solutions sensibly", "Support HR and payroll", "Review and adjust provision regularly"]
       }
     ]

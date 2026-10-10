@@ -76,7 +76,7 @@ const COPY = {
       visionNote: 'Sehhilfen erstattet jede Stufe zu 100 %, bis der Topf ausgeschöpft ist.',
       budget: 'Gesundheitsbudget in 2 Jahren',
       ledgerTitle: 'So verteilt sich dein Budget',
-      ledgerHint: 'Vier klar getrennte Leistungstöpfe · jeweils innerhalb der Tarifbedingungen',
+      ledgerHint: 'Vier getrennte Erstattungstöpfe · kein frei verfügbares Guthaben',
       perMonth: '/ Monat',
       tierGroupLabel: 'Tarifstufe wählen',
       ageLabel: 'Dein Geburtsjahr',
@@ -103,11 +103,11 @@ const COPY = {
       pots: {
         vision: { label: 'Sehhilfen', detail: 'Brille & Kontaktlinsen' },
         natural: { label: 'Naturheilverfahren', detail: 'Heilpraktiker & Osteopathie' },
-        prevention: { label: 'Vorsorge', detail: 'Zusätzliche Untersuchungen' },
-        copay: { label: 'Zuzahlungen', detail: 'Gesetzliche Eigenanteile' },
+        prevention: { label: 'Vorsorge & Impfungen', detail: 'Checks, Impfungen & anerkannte Präventionskurse' },
+        copay: { label: 'Hilfsmittel & Zuzahlungen', detail: 'Verordnete Hilfsmittel & gesetzliche Eigenanteile' },
       },
       cta: 'Budget & Beitrag berechnen',
-      disclosure: 'Die Werte zeigen die tariflichen Höchstbeträge über zwei Jahre. Maßgeblich sind Versicherungsbeginn, versicherte Leistungen, Erstattungsgrenzen und die jeweils geltenden Tarifbedingungen.',
+      disclosure: 'Die Werte zeigen vier eigene Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Du erhältst Erstattungen für versicherte Rechnungen, kein frei verfügbares Guthaben. Vorsorge, Impfungen und anerkannte Präventionskurse teilen sich einen Topf. Tarifbedingungen und Erstattungsgrenzen gelten.',
     },
     bonus: {
       eyebrow: 'Danach kommt KassenBoost',
@@ -186,7 +186,7 @@ const COPY = {
       visionNote: 'Vision aids are reimbursed at 100% in every tier until the pot is used up.',
       budget: 'Health budget over 2 years',
       ledgerTitle: 'How your budget is allocated',
-      ledgerHint: 'Four separate benefit pots · each subject to the policy terms',
+      ledgerHint: 'Four separate reimbursement pots · not cash to spend freely',
       perMonth: '/ month',
       tierGroupLabel: 'Choose a tier',
       ageLabel: 'Your year of birth',
@@ -213,11 +213,11 @@ const COPY = {
       pots: {
         vision: { label: 'Vision aids', detail: 'Glasses & contact lenses' },
         natural: { label: 'Natural therapies', detail: 'Alternative medicine & osteopathy' },
-        prevention: { label: 'Prevention', detail: 'Additional screening' },
-        copay: { label: 'Co-payments', detail: 'Statutory out-of-pocket shares' },
+        prevention: { label: 'Screening & vaccines', detail: 'Checks, vaccines & approved prevention courses' },
+        copay: { label: 'Medical aids & co-payments', detail: 'Prescribed aids & statutory out-of-pocket shares' },
       },
       cta: 'Calculate budget & premium',
-      disclosure: 'The values are tariff maximums over two years. Policy start, insured benefits, reimbursement limits and current terms apply.',
+      disclosure: 'The values are four separate maximums per two calendar years from the policy start. Eligible invoices are reimbursed; this is not cash to spend freely. Screening, vaccines and approved prevention courses share one pot. Policy terms and reimbursement limits apply.',
     },
     bonus: {
       eyebrow: 'Then comes KassenBoost',
@@ -364,8 +364,8 @@ export const AmbulantExplainerVideo = () => {
 const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const { lang, getPath } = useLanguage();
   const { pathname } = useLocation();
-  // UKV-Vorsorge-Baustein nur auf /ambulant und /en/outpatient, nie auf der
-  // Heilpraktiker-Adresse und nie auf dem neutralen Themen-Anschluss.
+  // Frank 10.10.: SDK bleibt Kernprodukt, UKV ist freiwillig dazubuchbar.
+  // Die Vorsorgeoptionen erscheinen nur auf den allgemeinen Ambulant-Routen.
   const vorsorgePath = pathname.replace(/\/+$/, '');
   const showVorsorgeBaustein = !fromBonusTopic
     && (vorsorgePath === '/ambulant' || vorsorgePath === '/en/outpatient');
@@ -696,17 +696,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5"><span className="hidden md:inline">{copy.tiers.visionNote} </span>{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
 
-          {/* Eigenständige ARAG-Vorsorgeoption (Frank 10.10.2026), ohne eine
-              Kombination oder Budgetaddition mit SDK und UKV zu empfehlen. */}
-          {showAragVorsorge && <AmbulantAragVorsorge />}
-
-          {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
-              unter der SDK-Tarifwahl, bewusst innerhalb dieses Abschnitts, damit
-              die IKK-Wechsel-Strecke direkt nach der Tarifwahl bleibt. Auf dem
-              neutralen Themen-Anschluss (src=reel-f05/bonus-check) und nicht auf
-              der Heilpraktiker-Adresse; showVorsorgeBaustein gilt nur für
-              /ambulant und /en/outpatient. */}
+          {/* UKV freiwillig ergänzen, ARAG als eigener Alternativweg aufklappen. */}
           {showVorsorgeBaustein && <AmbulantVorsorgeBaustein />}
+          {showAragVorsorge && <AmbulantAragVorsorge />}
         </div>
       </section>
 

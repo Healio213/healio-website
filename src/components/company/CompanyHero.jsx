@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -112,13 +112,13 @@ const CompanyHero = () => {
               {t('hero.analysisCta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <a
-              href="#unternehmen-leistungen"
+            <Link
+              to={getPath('vorsorgeRechner')}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-7 py-4 font-display text-sm font-bold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07141d] sm:text-base"
             >
               {t('hero.solutionsCta')}
-              <ArrowDown className="h-4 w-4" aria-hidden="true" />
-            </a>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </motion.div>
 
           <motion.div

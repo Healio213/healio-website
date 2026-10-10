@@ -131,7 +131,7 @@ const LeadMagnetLanding = ({ config }) => {
                         className="mt-4 inline-flex items-center gap-2 font-display text-sm font-bold text-[#5ee0b1] underline decoration-[#25c990]/60 decoration-2 underline-offset-4 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f]"
                       >
                         <CalendarClock className="h-4 w-4" aria-hidden="true" />
-                        Wunschtermin finden
+                        {config.appointmentCta || 'Wunschtermin finden'}
                       </a>
                     </div>
                   </div>

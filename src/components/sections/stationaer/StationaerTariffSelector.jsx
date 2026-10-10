@@ -69,6 +69,9 @@ const StationaerTariffSelector = () => {
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">
             {t('refresh.selector.subtitle')}
           </p>
+          <a href="#familie" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#075f46] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46]">
+            {t('refresh.hero.familyCta')}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
         </div>
 
         <StationaerDkvAlternative />

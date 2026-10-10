@@ -1,9 +1,9 @@
 const content = {
   de: {
     home: {
-      titleLead: 'Warum lassen Sie jedes Jahr hunderte Euro',
-      titleAccent: 'bei Ihrer Krankenkasse liegen?',
-      description: 'Kassenboni werden nicht automatisch ausgezahlt. Wer die Voraussetzungen erfüllt, muss sie aktiv beantragen. Mit der KassenBoost-Methode nutzen Sie dieses Potenzial für passenden Zusatzschutz: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.',
+      titleLead: 'Warum lässt du jedes Jahr hunderte Euro',
+      titleAccent: 'bei deiner Krankenkasse liegen?',
+      description: 'Kassenboni werden nicht automatisch ausgezahlt. Erfüllst du die Voraussetzungen, kannst du sie aktiv beantragen und damit deinen Zusatzschutz ganz oder teilweise finanzieren: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.',
       condition: 'Dein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.',
       cta: 'Kassenpotenzial in 90 Sekunden prüfen',
       hint: '100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch',
@@ -15,9 +15,9 @@ const content = {
       calculation: [
         { sign: '', label: 'Jahresbeitrag Zusatzversicherung', value: '470,28 EUR', detail: 'Beispiel: 35 Jahre, SDK Ambulant 100 (AP1) mit 39,19 EUR im Monat. Den Beitrag zahlst du zunächst selbst.' },
         { sign: '−', label: 'Erreichter Kassenbonus', value: '400,00 EUR', detail: 'Rechenannahme für den IKK-classic-Zuschuss, kein garantierter Betrag. Erfüllte Bonusbedingungen, anerkannte Maßnahmen und eigene Kosten entscheiden.' },
-        { sign: '=', label: 'Dein verbleibender Jahresbeitrag', value: '70,28 EUR', detail: 'Rund 5,86 EUR im Monat. Der Ausgleich erfolgt nachträglich, bis zur Höhe der anrechenbaren Kosten.' },
+        { sign: '=', label: 'Dein Jahresaufwand nach Bonus', value: '70,28 EUR', detail: 'Rechnerisch rund 5,86 EUR im Monat, wenn du den angenommenen Bonus tatsächlich erhältst.' },
       ],
-      panelNote: 'Tarifbudget für versicherte Leistungen. Kassenbonus zum Beitragsausgleich. Maßgeblich sind die jeweiligen Tarif- und Bonusbedingungen.',
+      panelNote: 'Du zahlst den Versicherungsbeitrag monatlich selbst. Den Bonus beantragst du danach mit Aktivitäts- und Kostennachweisen bei deiner Kasse. Es gibt keine automatische Verrechnung; Tarif- und Bonusbedingungen gelten.',
     },
     ambulant: {
       titleLead: 'Warum bezahlst du Privatleistungen selbst,',
@@ -54,13 +54,14 @@ const content = {
     stationaer: {
       titleLead: 'Wenn es um deine Gesundheit geht,',
       titleAccent: 'sind Arztwahl und Privatsphäre keine Nebensache.',
-      description: 'Ein- oder Zweibettzimmer und wahlärztliche Behandlung: Vergleiche deine vertraglichen Wahlleistungen und ihren Beitrag. Prüfe anschließend dein Kassenbonuspotenzial.',
+      description: 'Nur ein Einbettzimmer oder zusätzlich freie Arztwahl? DKV UZ1 versichert das Zimmer, SDK SP1 und SP2 auch wahlärztliche Behandlung. SDK SPU bietet Wahlleistungen ausschließlich nach einem Unfall. Vergleiche den Schutz, der zu dir passt.',
       condition: 'Leistungsumfang, Annahme und Zimmerverfügbarkeit sind maßgeblich. Der Unfalltarif SPU gilt ausschließlich nach einem Unfall.',
       cta: 'Klinikschutz vergleichen',
       hint: 'Zimmer, Arztwahl und Beitrag nebeneinander sehen. Bonusprüfung freiwillig.',
-      panelTitle: 'Drei Wege. Klarer Leistungsumfang.',
-      panelText: 'SDK Klinikschutz im Überblick.',
+      panelTitle: 'Vier Wege. Klarer Leistungsumfang.',
+      panelText: 'Zimmer, Arztwahl und Unfallschutz im Überblick.',
       benefits: [
+        { label: 'Nur Einbettzimmer', value: 'DKV UZ1', detail: 'Bei Krankheit und Unfall, ohne Wahlarzt. Gesundheitsprüfung; allgemeine Wartezeit 3 Monate, bei Entbindung 8 Monate.' },
         { label: 'Einbettzimmer & Wahlarzt', value: 'SP1', detail: 'Bei Krankheit und Unfall. Mit Gesundheitsprüfung.' },
         { label: 'Zweibettzimmer & Wahlarzt', value: 'SP2', detail: 'Bei Krankheit und Unfall. Mit Gesundheitsprüfung.' },
         { label: 'Wahlleistungen nach Unfall', value: 'SPU', detail: 'Einbettzimmer und Wahlarzt nach Unfall. Ohne Gesundheitsprüfung.' },
@@ -82,7 +83,7 @@ const content = {
     home: {
       titleLead: 'Why leave hundreds of euros',
       titleAccent: 'with your health fund every year?',
-      description: 'Health fund bonuses are not paid automatically. If you meet the conditions, you need to claim them. The KassenBoost method helps you use this potential for suitable supplementary cover: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable options for dental and hospital cover.',
+      description: 'Health fund bonuses are not paid automatically. If you meet the conditions, you can claim them to offset some or all of your supplementary insurance premium: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable dental and hospital options.',
       condition: 'Your fund, activities, plan and eligible expenses determine the result. EUR 3,000 is the sum of separate plan limits, not a cash balance.',
       cta: 'Check health fund potential in 90 seconds',
       hint: '100% free · No obligation to switch · No home visit',
@@ -91,9 +92,9 @@ const content = {
       calculation: [
         { sign: '', label: 'Annual supplementary premium', value: 'EUR 470.28', detail: 'Example: age 35, SDK Ambulant 100 (AP1) at EUR 39.19 per month. You pay the premium first.' },
         { sign: '−', label: 'Bonus achieved', value: 'EUR 400.00', detail: 'Illustrative assumption for the IKK classic subsidy, not a guaranteed amount. Bonus conditions, recognised activities and your own eligible costs determine the result.' },
-        { sign: '=', label: 'Your remaining annual premium', value: 'EUR 70.28', detail: 'About EUR 5.86 per month. The offset is paid later, up to the eligible expenses.' },
+        { sign: '=', label: 'Annual cost after the bonus', value: 'EUR 70.28', detail: 'Equivalent to about EUR 5.86 per month, if you actually receive the assumed bonus.' },
       ],
-      panelNote: 'Plan benefits reimburse insured services. The statutory bonus may offset your premium. The respective plan and bonus conditions apply.',
+      panelNote: 'You pay the monthly insurance premium yourself. Then claim your bonus with activity and expense evidence from your health fund. There is no automatic deduction; plan and bonus conditions apply.',
     },
     ambulant: {
       titleLead: 'Why pay for private care yourself',
@@ -130,13 +131,14 @@ const content = {
     stationaer: {
       titleLead: 'When your health is at stake,',
       titleAccent: 'doctor choice and privacy matter.',
-      description: 'A single or double room and privately billed medical care: compare your contractual hospital benefits and their premium. Then check your health fund bonus potential.',
+      description: 'Just a single room, or a choice of doctor too? DKV UZ1 covers the room; SDK SP1 and SP2 also cover privately billed medical care. SDK SPU provides additional benefits only after an accident. Compare the cover that fits your needs.',
       condition: 'Benefits, acceptance and room availability apply. SPU accident cover only applies after an accident.',
       cta: 'Compare hospital cover',
       hint: 'Compare rooms, doctor choice and premiums. The bonus check is optional.',
-      panelTitle: 'Three options. Clear benefits.',
-      panelText: 'SDK hospital cover at a glance.',
+      panelTitle: 'Four options. Clear benefits.',
+      panelText: 'Rooms, doctor choice and accident cover at a glance.',
       benefits: [
+        { label: 'Single room only', value: 'DKV UZ1', detail: 'For illness and accidents, without privately billed doctors. Health assessment; general waiting period 3 months, childbirth 8 months.' },
         { label: 'Single room & privately billed doctor', value: 'SP1', detail: 'For illness and accidents. Health assessment required.' },
         { label: 'Double room & privately billed doctor', value: 'SP2', detail: 'For illness and accidents. Health assessment required.' },
         { label: 'Additional benefits after an accident', value: 'SPU', detail: 'Single room and privately billed doctor after an accident. No health assessment.' },

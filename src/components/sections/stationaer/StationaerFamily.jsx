@@ -7,15 +7,15 @@ import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 
 // Drei Antworten für Familien (Frank 29.09.2026): SDK ohne Vorlauf, die
 // Bayerische mit Vorlauf, dazu die Kindertarife. Nur belegte Punkte aus den
-// AVB der SDK (SP1/SP2 08/2025) und der Bayerischen (AVB B 275000 Stand
+// AVB der SDK (SP1 08/2025, SP2 10/2026) und der Bayerischen (AVB B 275000 Stand
 // 11/2024, TB 11/2024). Bayerische-Karte seit 05.10.2026: Familienzimmer
 // Prestige ohne Begrenzung, Komfort bis Zweibettzimmer (TB 2.1, Highlightblatt
 // B 275008), nur über den Vertrag der Mutter (Auskunft der Bayerischen
 // 05.10.2026), Begleitperson 100 Prozent unter 16 (TB 2.3).
-// Hebamme: SDK laut Bedingungen (SP1/SP2). Hebammen-Aussage der Bayerischen
-// laut Produktunterlagen (Highlightblatt B 275008, Produktsteckbrief B 275010),
-// Freigabe Frank 29.09.2026, bestätigt 06.10.2026; nicht in den
-// Tarifbedingungen, schriftliche Bestätigung beim Versicherer angefragt.
+// Hebamme: SDK laut Bedingungen (SP1/SP2). Die Bayerische bestätigt am
+// 06.10.2026 eine Leistungspraxis auch für bestimmte ambulante Positionen,
+// mit acht Monaten Wartezeit. Das ist kein eigenständiger ambulanter
+// Tarifanspruch; konkrete privat berechenbare Positionen vorab klären.
 const CARDS = [
   { key: 'parents', icon: 'pregnancy', tone: 'coral', border: 'border-[#f0cfc0]', accent: 'text-[#b75f42]', noteBg: 'bg-[#fff4ef]' },
   { key: 'bayerische', icon: 'calendar', tone: 'sky', border: 'border-home-mint/20', accent: 'text-home-midnight', noteBg: 'bg-home-ice' },

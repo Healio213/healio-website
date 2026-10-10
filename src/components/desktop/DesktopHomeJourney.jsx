@@ -54,8 +54,8 @@ const content = {
         link: 'Klinikleistungen ansehen',
       },
     ],
-    trustTitle: 'Beenden Sie das Verschenken Ihrer Kassenboni.',
-    trustText: 'Rechnen Sie nach, fordern Sie Ihren Bonus ein und sichern Sie sich den Zusatzschutz, der zu Ihnen passt.',
+    trustTitle: 'Nutze das Bonuspotenzial deiner Kasse.',
+    trustText: 'Rechne nach, beantrage deinen Bonus und wähle den Zusatzschutz, der zu dir passt.',
     trustItems: [
       {
         title: 'Registrierter Versicherungsmakler',

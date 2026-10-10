@@ -6,11 +6,12 @@ import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 
-const choiceKeys = ['sp2', 'sp1', 'spu'];
+const choiceKeys = ['dkv', 'sp2', 'sp1', 'spu'];
 
 // Jede Tarif-Karte bekommt ihre eigene Figur und einen warmen Farbton
 // (Frank 07.10.2026: „liebevoller und sympathischer“ statt Farbpunkt).
 const choiceStyles = {
+  dkv: { icon: '/images/friendly-icons/hospital-room.webp', tone: 'sky', card: 'from-[#f2faff] to-[#e1eff8] ring-[#c8dfed]' },
   sp2: { icon: '/images/friendly-icons/hospital-room.webp', tone: 'mint', card: 'from-[#f4fbf7] to-[#e2f4eb] ring-[#cde8dc]' },
   sp1: { icon: '/images/friendly-icons/medical-stethoscope.webp', tone: 'lavender', card: 'from-[#f9f7ff] to-[#ece8fb] ring-[#dcd6f1]' },
   spu: { icon: '/images/friendly-icons/protection-shield.webp', tone: 'butter', card: 'from-[#fffcf2] to-[#fcf0cf] ring-[#efe0b2]' },
@@ -62,9 +63,12 @@ const StationaerHero = () => {
           <a href="#einzelzimmer-kosten" className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
             {t('refresh.hero.costsCta')}
           </a>
+          <a href="#familie" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
+            {t('refresh.hero.familyCta')}
+          </a>
 
           <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-slate-300 md:text-sm">
-            {/* Mobil nur der Wartezeit-Hinweis (Eintrag 1): "Drei Tarifwege klar
+            {/* Mobil nur der Wartezeit-Hinweis (Eintrag 1): "Vier Tarifwege klar
                 getrennt" (Eintrag 0) wiederholt die Auswahlkarte direkt darunter
                 (Experiment Handy-Conversion 10/2026). Ab md bleiben beide. */}
             {t('refresh.hero.micro', { returnObjects: true }).map((item, index) => (
@@ -84,7 +88,7 @@ const StationaerHero = () => {
           aria-label={t('refresh.hero.visualAria')}
         >
           <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
-            {/* Mobil: kleine Figur neben der Frage, darunter die drei Wege als
+            {/* Mobil: kleine Figur neben der Frage, darunter die vier Wege als
                 Wischreihe; ab md (768 px) unverändert Figur links und
                 gestapelte Karten rechts. */}
             <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 md:min-h-[29rem] md:grid-cols-[0.9fr_1.1fr] md:items-end md:gap-x-0">
@@ -114,7 +118,7 @@ const StationaerHero = () => {
                   {choiceKeys.map((key) => (
                     <a
                       key={key}
-                      href="#tarife"
+                      href={key === 'dkv' ? '#dkv-einbettzimmer' : '#tarife'}
                       aria-label={t('refresh.hero.choiceAria', {
                         code: t(`refresh.hero.choices.${key}.code`),
                         label: t(`refresh.hero.choices.${key}.label`),

@@ -96,9 +96,14 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
             {isHome ? <ArrowUpRight className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
           </a>
           {surface === 'stationaer' && (
-            <a href="#einzelzimmer-kosten" className="inline-flex min-h-11 items-center font-semibold text-[#5ee0b1] underline underline-offset-4">
-              {language === 'en' ? 'Understand single-room costs' : 'Einzelzimmerkosten verstehen'}
-            </a>
+            <>
+              <a href="#einzelzimmer-kosten" className="inline-flex min-h-11 items-center font-semibold text-[#5ee0b1] underline underline-offset-4">
+                {language === 'en' ? 'Understand single-room costs' : 'Einzelzimmerkosten verstehen'}
+              </a>
+              <a href="#familie" className="inline-flex min-h-11 items-center font-semibold text-[#5ee0b1] underline underline-offset-4">
+                {language === 'en' ? 'Planning a family? See cover for children' : 'Familie geplant? Schutz für Kinder ansehen'}
+              </a>
+            </>
           )}
           {isHome && <span id={`desktop-${surface}-external`} className="sr-only">{copy.externalHint}</span>}
         </>

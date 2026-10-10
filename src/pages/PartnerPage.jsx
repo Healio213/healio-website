@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowDown, Shield } from 'lucide-react';
+import { ArrowRight, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -107,14 +107,13 @@ const PartnerPage = () => {
               >
                 {t('hero.cta')}
               </button>
-              <button
-                type="button"
+              <Link
+                to="/partner/leitfaden"
                 className={sceneSecondaryButtonClass}
-                onClick={scrollTo('partner-video')}
               >
                 {t('hero.secondaryCta')}
-                <ArrowDown className="h-5 w-5" aria-hidden="true" />
-              </button>
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
             </>
           )}
         >
@@ -188,13 +187,15 @@ const PartnerPage = () => {
                     {t('hero.cta')}
                   </Button>
                   <Button
+                    asChild
                     size="lg"
                     variant="outline"
-                    className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg"
-                    onClick={scrollTo('partner-video')}
+                    className="h-auto min-h-12 whitespace-normal border-white/55 bg-white/10 px-6 py-4 text-center text-base font-semibold leading-6 text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:px-8 sm:text-lg"
                   >
-                    {t('hero.secondaryCta')}
-                    <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+                    <Link to="/partner/leitfaden">
+                      {t('hero.secondaryCta')}
+                      <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                    </Link>
                   </Button>
                 </div>
               </motion.div>

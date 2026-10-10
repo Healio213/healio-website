@@ -3,7 +3,7 @@
     "title": "Why leave hundreds of euros with your health fund every year?",
     "titleLead": "Why leave hundreds of euros",
     "titleAccent": "with your health fund every year?",
-    "description": "Health fund bonuses are not paid automatically. If you meet the conditions, you need to claim them. The KassenBoost method helps you use this potential for suitable supplementary cover: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable options for dental and hospital cover.",
+    "description": "Health fund bonuses are not paid automatically. If you meet the conditions, you can claim them to offset some or all of your supplementary insurance premium: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable dental and hospital options.",
     "switchLabel": "Choose your path",
     "switch": [
       {
@@ -18,14 +18,14 @@
         "key": "employer",
         "routeKey": "unternehmen",
         "title": "I'm an employer",
-        "description": "Company pension and company health insurance as a team benefit. Tax-advantaged, no extra work for HR.",
+        "description": "Company pension and health insurance as a team benefit. We help with introduction, communication and ongoing support.",
         "cta": "Explore company solutions"
       },
       {
         "key": "practice",
         "routeKey": "partner",
         "title": "I run a practice",
-        "description": "Make treatments affordable for your patients. Free for your practice, you only inform.",
+        "description": "Help patients afford treatment. Your practice provides neutral information; Healio handles the insurance advice.",
         "cta": "Explore the partner programme"
       }
     ],
@@ -75,22 +75,22 @@
   },
   "process": {
     "title": "First the right health fund, then the right extra cover.",
-    "description": "We do not pit insurer A against insurer B. We start with your statutory health fund, because that is where the biggest lever sits: KassenBoost shows you free of charge what contribution and bonus are possible for you. Only then do we clarify how your supplementary cover can be financed and which one fits you.",
+    "description": "First check your health fund’s contributions, benefits and bonus potential with KassenBoost. Then choose supplementary cover that fits your needs. Changing funds and taking out insurance remain your decision.",
     "steps": [
       {
         "number": "01",
-        "title": "Compare funds",
+        "title": "Check fund potential",
         "description": "KassenBoost shows contributions, achievable bonuses and benefits separately. You decide whether switching pays off."
       },
       {
         "number": "02",
-        "title": "Choose cover",
+        "title": "Choose cover and premium",
         "description": "Outpatient, dental or hospital: Healio explains benefits, limits and costs before you decide."
       },
       {
         "number": "03",
-        "title": "Use your bonus",
-        "description": "You pay the premium yourself. If you meet your fund's bonus conditions, the bonus can offset part of it."
+        "title": "Claim your bonus with evidence",
+        "description": "You pay the insurance premium first. If you meet the bonus conditions and submit the required activity and expense evidence, your fund may offset some or all of the eligible premium afterwards."
       }
     ],
     "detailsCta": "How KassenBoost works"

@@ -58,7 +58,7 @@
     "ikkCta": "Kassenvorteil prüfen",
     "questions": {
       "q1": {
-        "text": "Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
+        "text": "Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten? Ist aktuell eine beabsichtigt oder läuft sie?",
         "hint": "Zum Beispiel Krone, Wurzelbehandlung, Füllung, Implantat oder ein Heil- und Kostenplan. Auch ein dokumentierter Befund in der Patientenakte zählt als angeraten.",
         "options": {
           "ja": {
@@ -144,9 +144,9 @@
         "reasons": [
           "Bis zu 3 fehlende Zähne voll mitversichert, je nach Tarifstufe für 6,10 bis 10,90 EUR Zuschlag je Zahn und Monat",
           "Deine Erstattungs-Staffel bleibt dabei ungekürzt",
-          "Die Gesundheitsfragen schauen nur 2 Jahre zurück"
+          "Empfehlungen aus den letzten 2 Jahren sowie aktuell beabsichtigte und laufende Behandlungen werden geprüft"
         ],
-        "warning": "Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Gab es für deine Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert.",
+        "warning": "Ab 4 fehlenden Zähnen ist keine Aufnahme möglich. Gab es für deine Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert. Die UKV prüft die Angaben im Antrag.",
         "cta": "Tarife ansehen und online abschließen",
         "ctaType": "ukv",
         "note": "Du wirst zur Online-Abschlussstrecke der Versicherungskammer (UKV) weitergeleitet. Gib dort die Anzahl der fehlenden Zähne an.",
@@ -156,10 +156,10 @@
       "ukvVorgeschichte": {
         "insurer": "UKV (Union Krankenversicherung)",
         "title": "ZahnPRIVAT: kulante Annahme trotz Vorgeschichte",
-        "text": "Mit Prothese, älterem Zahnersatz oder einer Parodontitis-Historie bist du bei der UKV deutlich besser aufgehoben: Der Antrag schaut maximal 2 Jahre zurück.",
+        "text": "Mit Prothese, älterem Zahnersatz oder einer Parodontitis-Historie bist du bei der UKV deutlich besser aufgehoben: Der Antrag prüft die Vorgeschichte mit den jeweils genannten Zeiträumen sowie aktuell beabsichtigte und laufende Behandlungen.",
         "reasons": [
           "Zahnersatz, der älter als 10 Jahre ist, und intakte Prothesen sind bei der UKV kein Ausschlussgrund",
-          "Diagnosen und Empfehlungen, die länger als 2 Jahre zurückliegen, musst du gar nicht angeben",
+          "Beantworte die Antragsfragen mit ihren jeweiligen Zeiträumen vollständig; aktuell beabsichtigte und laufende Behandlungen zählen unabhängig von einer älteren Empfehlung",
           "Parodontitis innerhalb der letzten 2 Jahre: Annahme mit Ausschluss nur für Parodontose-Behandlungen, statt Ablehnung"
         ],
         "cta": "Tarife ansehen und online abschließen",
@@ -273,7 +273,7 @@
     "badge": "Sofortschutz oder starke Vorsorge",
     "title": "Zahnersatz nötig? Es ist nicht zu spät für eine Versicherung.",
     "intro": "Viele gehen davon aus, dass nach einer angeratenen Behandlung kein Versicherungsschutz mehr möglich ist. Je nach Zeitpunkt gibt es jedoch noch einen Sofortschutz-Weg. Bei Healio findest du für jede Situation eine klare, sachliche Einordnung: Sofortschutz der Bayerischen oder starke Vorsorge mit der UKV.",
-    "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten oder schon begonnen?",
+    "question": "Eine Frage entscheidet: Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung angeraten? Ist aktuell eine beabsichtigt oder läuft sie?",
     "details": {
       "show": "Leistungen und Besonderheiten anzeigen",
       "hide": "Leistungen und Besonderheiten ausblenden"
@@ -304,11 +304,11 @@
       "label": "Starke Vorsorge, bevor etwas ansteht",
       "insurer": "UKV (Union Krankenversicherung)",
       "tariff": "ZahnPRIVAT",
-      "text": "Wenn dein Zahnarzt in den letzten 2 Jahren keine Behandlung angeraten hat, sicherst du dir mit ZahnPRIVAT hohe Erstattungen für Zahnersatz, Zahnbehandlung und professionelle Zahnreinigung. Drei Tarifstufen, damit der Schutz zu deinem Budget passt. Besonders stark für Familien.",
+      "text": "Wenn in den letzten 2 Jahren keine Behandlung angeraten wurde und aktuell keine beabsichtigt ist oder läuft, prüfst du mit ZahnPRIVAT hohe Erstattungen für Zahnersatz, Zahnbehandlung und professionelle Zahnreinigung. Drei Tarifstufen, damit der Schutz zu deinem Budget passt. Besonders stark für Familien.",
       "bullets": [
         "Kieferorthopädie für Kinder: bis zu 5.000 EUR in den Top-Stufen, alle KIG-Stufen, auch Aligner",
         "Professionelle Zahnreinigung in den Top-Stufen ohne Jahreslimit, zählt nicht in die Erstattungs-Staffel",
-        "Kulante Annahme: Die Gesundheitsfragen schauen nur 2 Jahre zurück",
+        "Kulante Annahme: Empfehlungen aus den letzten 2 Jahren sowie aktuell beabsichtigte und laufende Behandlungen werden geprüft",
         "Bis zu 3 fehlende Zähne gegen festen Zuschlag voll mitversichert, die Staffel bleibt ungekürzt",
         "Volle Leistung auch ohne Vorleistung der Krankenkasse, zum Beispiel beim Privatzahnarzt"
       ],
@@ -355,12 +355,12 @@
         },
         {
           "situation": "Zahn-Vorgeschichte, etwa Parodontitis, Prothese oder älterer Zahnersatz",
-          "empfehlung": "UKV ZahnPRIVAT: Die Gesundheitsfragen schauen nur 2 Jahre zurück, ältere Diagnosen und Empfehlungen musst du nicht angeben. Selbst bei Parodontitis innerhalb der letzten 2 Jahre gibt es die Annahme mit Ausschluss nur für Parodontose-Behandlungen statt einer Ablehnung.",
+          "empfehlung": "UKV ZahnPRIVAT: Die Antragsfragen haben jeweils eigene Zeiträume. Aktuell beabsichtigte und laufende Behandlungen zählen unabhängig von einer älteren Empfehlung. Selbst bei Parodontitis innerhalb der letzten 2 Jahre gibt es die Annahme mit Ausschluss nur für Parodontose-Behandlungen statt einer Ablehnung.",
           "weg": "ukv"
         },
         {
           "situation": "Dir fehlen 1 bis 3 Zähne, die noch nicht ersetzt sind",
-          "empfehlung": "UKV ZahnPRIVAT: Aufnahme mit Zuschlag je fehlendem Zahn, danach sind die Lücken mitversichert und es gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Die Bayerische nimmt bei fehlenden Zähnen nicht an.",
+          "empfehlung": "UKV ZahnPRIVAT: Aufnahme mit Zuschlag je fehlendem Zahn, danach sind die Lücken mitversichert und es gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert. Die UKV prüft die Angaben im Antrag. Die Bayerische nimmt bei fehlenden Zähnen nicht an.",
           "weg": "ukv"
         },
         {
@@ -401,7 +401,7 @@
     },
     "fehlend": {
       "title": "Fehlende Zähne versicherbar",
-      "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn mitversicherbar, danach gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert."
+      "desc": "Bei der UKV sind bis zu 3 bereits fehlende Zähne gegen einen festen Zuschlag je Zahn mitversicherbar, danach gilt die normale Zahnstaffel. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert. Die UKV prüft die Angaben im Antrag."
     },
     "unfall": {
       "title": "Ausgezeichneter Leistungsweg",
@@ -433,11 +433,11 @@
       },
       {
         "q": "Kann ich mit fehlenden Zähnen abschließen?",
-        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, du erfährst sie am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
+        "a": "Ja, bei der UKV: Bis zu 3 bereits fehlende Zähne werden gegen einen festen Zuschlag (je nach Tarifstufe 6,10 bis 10,90 Euro je Zahn und Monat) voll mitversichert, die Erstattungs-Staffel bleibt ungekürzt. Gab es für die Lücke in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde ihre Versorgung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Versorgung nicht automatisch versichert. Die UKV prüft die Angaben im Antrag. Die Bayerische nimmt bei fehlenden Zähnen aktuell nicht an. Ab 4 fehlenden Zähnen gibt es am Markt eine Sofort-Lösung ganz ohne Gesundheitsfragen, du erfährst sie am Telefon: 040 89755705. Weisheitszähne und ein vom Zahnarzt bestätigter Lückenschluss zählen übrigens nicht als fehlende Zähne."
       },
       {
         "q": "Ich hatte vor Kurzem Parodontitis. Geht trotzdem etwas?",
-        "a": "Ja. Die UKV fragt nur 2 Jahre zurück: Liegt die Parodontitis länger zurück und wurde seitdem nichts erneut angeraten, musst du sie gar nicht angeben. Liegt sie innerhalb der letzten 2 Jahre, nimmt dich die UKV trotzdem an, dann mit einem Ausschluss nur für Parodontose-Behandlungen, alle übrigen Leistungen gelten voll. Die Bayerische fragt 3 Jahre zurück und nimmt bei Parodontitis oder Zahnschmelzdefekten in diesem Zeitraum nicht an."
+        "a": "Im UKV-Antrag wird gefragt, ob in den letzten 2 Jahren Parodontitis festgestellt oder behandelt wurde oder eine Behandlung angeraten ist. Bei einer Ja-Antwort sieht der Antrag einen Ausschluss für Parodontosebehandlungen vor. Beantworte alle Fragen mit ihren jeweiligen Zeiträumen vollständig; Annahme und weitere Leistungen werden im Antrag geprüft. Die Bayerische fragt 3 Jahre zurück und nimmt bei Parodontitis oder Zahnschmelzdefekten in diesem Zeitraum nicht an."
       },
       {
         "q": "Kann ich den Sofortschutz-Baustein später noch dazubuchen?",

@@ -26,7 +26,7 @@ const bundle = buildSync({
       export { act, capture, consent };
       function ModalHarness({ url, callbacks }) {
         const [open, setOpen] = useState(true);
-        return <LeadCaptureModal isOpen={open} targetUrl={url} trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'}
+        return <LeadCaptureModal isOpen={open} targetUrl={url} trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'zahn-antrag'}
           onClose={() => { callbacks.closed += 1; setOpen(false); }}
           onExternalOpen={() => { callbacks.opened += 1; }} />;
       }
@@ -43,9 +43,9 @@ const bundle = buildSync({
         root.render(<MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <LeadCaptureProvider>
             <LeadCaptureLink id="first-link" href={url} target="_blank" rel="noopener noreferrer"
-              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'} onClick={() => { callbacks.opened += 1; }}>Erster Rechner</LeadCaptureLink>
+              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'zahn-antrag'} onClick={() => { callbacks.opened += 1; }}>Erster Rechner</LeadCaptureLink>
             <LeadCaptureLink id="next-link" href={url} target="_blank" rel="noopener noreferrer"
-              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'} onClick={() => { callbacks.opened += 1; }}>Zweiter Rechner</LeadCaptureLink>
+              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'zahn-antrag'} onClick={() => { callbacks.opened += 1; }}>Zweiter Rechner</LeadCaptureLink>
             <LeadCaptureLink id="non-application-link" href="https://kassenboost.de/" target="_blank" rel="noopener noreferrer">Kassenvergleich</LeadCaptureLink>
           </LeadCaptureProvider>
         </MemoryRouter>);
@@ -200,6 +200,8 @@ test('echte Desktop- und Mobil-Header-CTAs öffnen auf DE/EN zuerst das Modal un
       const tariffEvents = () => (window.dataLayer || []).filter((entry) => entry[0] === 'event' && entry[1] === 'tariff_calculator_click');
       await h.click(selector);
       assert(document.querySelector('[role="dialog"]'));
+      assert.match(document.querySelector('[role="dialog"] h2').textContent, path.startsWith('/en') ? /outpatient premium/ : /Ambulanten Beitrag/);
+      assert.equal(document.querySelector('[role="dialog"]').lang, path.startsWith('/en') ? 'en' : 'de');
       assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
       assert.equal(tariffEvents().length, 0);
       await h.fill(); await h.submit();
@@ -222,6 +224,8 @@ test('DKV auf DE/EN-Stationär öffnet zuerst Erfassung, navigiert erst nach CMS
     try {
       await h.click('#first-link');
       assert(document.querySelector('[role="dialog"]'));
+      assert.match(document.querySelector('[role="dialog"] h2').textContent, path.startsWith('/en') ? /hospital premium/ : /Klinikbeitrag/);
+      assert(document.querySelector(`[role="dialog"] a[href="${path.startsWith('/en') ? '/en/privacy' : '/datenschutz'}"]`));
       assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
       await h.fill(); await h.submit();
       assert.equal(h.tabs[0].destination, undefined);
@@ -243,7 +247,7 @@ test('ARAG-Angebot bleibt eine eigene Anfrage auch nach früherem Guide; kein ex
       h.capture.markLeadCapturedThisSession();
       await h.click('#first-link');
       assert(document.querySelector('form'));
-      assert.match(document.querySelector('[role="dialog"]').textContent, /V100-Angebot/);
+      assert.match(document.querySelector('[role="dialog"]').textContent, path.startsWith('/en') ? /personal V100 offer/ : /V100-Angebot/);
       assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
       await h.fill(); await h.submit();
       assert.equal(h.tabs.length, 0); assert.equal(h.callbacks.opened, 0);
@@ -255,7 +259,8 @@ test('ARAG-Angebot bleibt eine eigene Anfrage auch nach früherem Guide; kein ex
       assert(document.querySelector('form')); assert(document.querySelector('[role="alert"]'));
       await h.submit(); await h.respond(1);
       assert.equal(document.querySelector('form'), null);
-      assert.match(document.querySelector('[role="status"]').textContent, /V100-Angebotsanfrage ist gespeichert/);
+      assert.match(document.querySelector('[role="status"]').textContent, path.startsWith('/en') ? /V100 offer request has been saved/ : /V100-Angebotsanfrage ist gespeichert/);
+      assert.match(document.querySelector('[role="status"]').textContent, path.startsWith('/en') ? /does not submit an insurance application/ : /noch keine Versicherung beantragt/);
       assert.equal(document.querySelector('[role="dialog"] a[target="_blank"]'), null);
       assert.equal(h.tabs.length, 0); assert.equal(h.callbacks.opened, 0);
     } finally { await h.cleanup(); }
@@ -276,7 +281,7 @@ test('gültiger Submit reserviert synchron einen leeren Tab und navigiert erst n
     const sent = JSON.parse(h.requests[0].options.body);
     assert.equal(sent.firstName, 'Test'); assert.equal(sent.email, 'test@example.test');
     assert.equal(sent.sourcePage, '/zahn'); assert.equal(sent.targetUrl, targetUrl);
-    assert.equal(sent.trackingCategory, 'bayerische');
+    assert.equal(sent.trackingCategory, 'zahn-antrag');
     assert.deepEqual(Object.keys(sent).sort(), ['email', 'firstName', 'sourcePage', 'targetUrl', 'timestamp', 'trackingCategory']);
     assert.equal(h.capture.hasCapturedLeadThisSession(), false);
     await h.respond(0);
@@ -330,9 +335,17 @@ test('ungültige E-Mail und reiner Leerzeichenname öffnen keinen Tab und senden
     await h.fill('   ', 'test@example.test'); await h.submit();
     assert.equal(document.activeElement.name, 'firstName');
     assert.match(document.querySelector('[role="alert"]').textContent, /Vornamen/);
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-invalid'), 'true');
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-describedby'), 'lead-capture-error');
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-invalid'), 'false');
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-describedby'), null);
     await h.fill('Test', 'test@example..test'); await h.submit();
     assert.equal(document.activeElement.name, 'email');
     assert.match(document.querySelector('[role="alert"]').textContent, /E-Mail-Adresse/);
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-invalid'), 'false');
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-describedby'), null);
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-invalid'), 'true');
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-describedby'), 'lead-capture-error');
     assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
   } finally { await h.cleanup(); }
 });
@@ -379,6 +392,10 @@ test('HTTP-Erfolg ohne bestätigendes JSON und Netzwerkfehler setzen kein Sitzun
       assert.equal(h.tabs[0].closed, true); assert.equal(h.capture.hasCapturedLeadThisSession(), false);
       assert.equal(window.sessionStorage.length, 0); assert.equal(h.callbacks.opened, 0);
       assert(document.querySelector('[role="alert"]'));
+      for (const field of document.querySelectorAll('form input')) {
+        assert.equal(field.getAttribute('aria-invalid'), 'false', 'Übertragungsfehler sind keine Feldfehler');
+        assert.equal(field.getAttribute('aria-describedby'), null);
+      }
     } finally { await h.cleanup(); }
   }
 });
@@ -389,7 +406,7 @@ test('Ladetext endet nach einer Sekunde, laufende Anfrage bleibt gesperrt und Ti
     await h.fill(); await h.submit();
     assert.equal(document.querySelector('button[type="submit"]').textContent, 'Einen Moment...');
     await h.fireTimer(1000);
-    assert.equal(document.querySelector('button[type="submit"]').textContent, 'Weiter zum Rechner & Unterlagen sichern ➔');
+    assert.equal(document.querySelector('button[type="submit"]').textContent, 'Weiter zum Rechner & Leitfaden sichern ➔');
     assert.equal(document.querySelector('button[type="submit"]').disabled, true);
     assert.match(document.querySelector('[role="status"]').textContent, /noch übermittelt/);
     await h.fireTimer(12000);
@@ -595,5 +612,89 @@ test('Schließen während POST bricht ab und schließt den leeren reservierten T
     assert.equal(h.requests[0].options.signal.aborted, true);
     assert.equal(h.tabs[0].closed, true); assert.equal(h.tabs[0].destination, undefined);
     assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(window.sessionStorage.length, 0);
+  } finally { await h.cleanup(); }
+});
+
+test('Zahndialog erklärt auf DE/EN den Rechnerwechsel und verspricht ausschließlich den vorhandenen Bonusleitfaden', async () => {
+  for (const path of ['/zahn', '/en/dental']) {
+    const h = await harness('provider', { path });
+    try {
+      await h.click('#first-link');
+      const dialog = document.querySelector('[role="dialog"]');
+      const english = path.startsWith('/en');
+      assert.match(dialog.querySelector('h2').textContent, english ? /dental calculator/ : /Zahnrechner/);
+      assert.match(dialog.textContent, english ? /health insurance bonuses/ : /Kassenbonus-Leitfaden/);
+      assert.match(dialog.textContent, english ? /new tab/ : /neuen Tab/);
+      assert.match(dialog.textContent, english ? /No newsletter/ : /Kein Newsletter/);
+      assert.doesNotMatch(dialog.textContent, /Tarifdetails|Tarifübersicht|Zahnzusatz-Fahrplan|plan overview/);
+      assert.equal(document.querySelectorAll('input').length, 2);
+      assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
+      if (english) {
+        assert.match(dialog.textContent, /guide and email are in German/);
+        assert.match(dialog.textContent, /official insurer application is also in German/);
+        assert.equal(dialog.querySelector('a[href="/en/privacy"]').textContent, 'Privacy policy');
+        assert.equal(dialog.querySelector('a[href="/en/contact"]').textContent, 'Need help? Contact Healio.');
+        assert.equal(dialog.querySelector('input[name="firstName"]').placeholder, 'Your first name');
+        assert.equal(dialog.querySelector('input[name="email"]').placeholder, 'you@example.com');
+        assert.equal(dialog.querySelector('[aria-label="Close window"]').tagName, 'BUTTON');
+      }
+    } finally { await h.cleanup(); }
+  }
+});
+
+test('englischer Dialog behält Sprache, Eingaben, UUID und Popup-Fallback bei Validierung, Fehler und Retry', async () => {
+  const h = await harness('provider', { path: '/en/dental', popupBlocked: true });
+  try {
+    await h.click('#first-link');
+    await h.submit();
+    assert.equal(document.querySelector('[role="alert"]').textContent, 'Please enter your first name.');
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-invalid'), 'true');
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-describedby'), 'lead-capture-error');
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-invalid'), 'false');
+    await h.fill('Test', 'invalid'); await h.submit();
+    assert.match(document.querySelector('[role="alert"]').textContent, /Please check your email address/);
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-invalid'), 'false');
+    assert.equal(document.querySelector('input[name="firstName"]').getAttribute('aria-describedby'), null);
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-invalid'), 'true');
+    assert.equal(document.querySelector('input[name="email"]').getAttribute('aria-describedby'), 'lead-capture-error');
+    assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
+
+    await h.fill(); await h.submit();
+    assert.equal(document.querySelector('button[type="submit"]').textContent, 'One moment...');
+    await h.fireTimer(1000);
+    assert.equal(document.querySelector('button[type="submit"]').disabled, true);
+    assert.match(document.querySelector('[role="status"]').textContent, /request is still being sent/);
+    const sent = JSON.parse(h.requests[0].options.body);
+    assert.equal(sent.sourcePage, '/en/dental'); assert.equal(sent.trackingCategory, 'zahn-antrag');
+    assert.deepEqual(Object.keys(sent).sort(), ['email', 'firstName', 'sourcePage', 'targetUrl', 'timestamp', 'trackingCategory']);
+
+    await h.reject(0);
+    assert.match(document.querySelector('[role="alert"]').textContent, /Your guide could not be requested/);
+    for (const field of document.querySelectorAll('form input')) {
+      assert.equal(field.getAttribute('aria-invalid'), 'false');
+      assert.equal(field.getAttribute('aria-describedby'), null);
+    }
+    assert.equal(document.querySelector('input[name="email"]').value, 'test@example.test');
+    await h.submit();
+    assert.equal(h.requests[0].options.headers['X-Idempotency-Key'], h.requests[1].options.headers['X-Idempotency-Key']);
+    assert.equal(h.requests[0].options.body, h.requests[1].options.body);
+    await h.respond(1);
+    assert.match(document.querySelector('[role="status"]').textContent, /Your request has been saved/);
+    assert.equal(document.querySelector('form'), null);
+    const manual = document.querySelector('[role="dialog"] a[target="_blank"]');
+    assert.equal(manual.href, targetUrl); assert.equal(manual.textContent, 'Continue to calculator ➔');
+    await h.act(() => manual.click());
+    assert.match(document.querySelector('[role="alert"]').textContent, /Please allow new windows/);
+    assert.equal(h.requests.length, 2);
+
+    h.setPopupBlocked(false);
+    await h.act(() => manual.click());
+    assert.equal(h.tabs[0].destination, targetUrl);
+    assert.equal(document.querySelector('[role="dialog"]'), null);
+    await h.click('#next-link');
+    assert.equal(h.requests.length, 2); assert.equal(h.tabs.length, 2);
+    assert.equal(document.querySelector('[role="dialog"]'), null);
+    assert.deepEqual(Object.entries(window.sessionStorage), [[h.capture.LEAD_CAPTURE_SESSION_KEY, 'captured']]);
+    assert.equal(window.localStorage.length, 0);
   } finally { await h.cleanup(); }
 });

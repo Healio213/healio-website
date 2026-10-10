@@ -33,12 +33,12 @@ assert.equal(de.package.items.length, 3);
 assert.equal(de.faq.items.length, 5);
 assert.equal(en.faq.items.length, de.faq.items.length);
 
-assert.match(de.hero.subtitle, /deinen Patienten/);
-assert.match(de.hero.note, /deine Praxis/);
+assert.match(de.hero.subtitle, /Ihren Patienten/);
+assert.match(de.hero.note, /Ihre Praxis/);
 assert.doesNotMatch(
   deSource,
-  /\b(?:Sie|Ihr|Ihre|Ihren|Ihrem|Ihnen|Ihrer|Ihres)\b/,
-  'The German dentist page must consistently use the informal Du address'
+  /\b(?:du|Du|dein|Dein|deine|Deine|deinen|Deinen|deiner|Deiner|dir|Dir|dich|Dich)\b/,
+  'The German dentist page must consistently use the formal Sie address'
 );
 
 const combinedCopy = `${deSource}\n${enSource}`;
@@ -52,7 +52,7 @@ assert.match(de.bonus.disclaimer, /kein pauschales Gratisversprechen/i);
 assert.match(de.legal.disclaimer, /keine Rechtsberatung/i);
 assert.match(de.legal.disclaimer, /Landeszahnärztekammer/i);
 assert.match(de.legal.items[0].text, /keine Provision/i);
-assert.match(de.legal.items[3].text, /keine Daten/i);
+assert.match(de.legal.items[3].text, /keine Patientendaten/i);
 assert.match(de.insurerHighlights.title, /Patientenservice/);
 assert.match(de.insurerHighlights.highlights[0].text, /1\.500 EUR/);
 assert.match(de.insurerHighlights.highlights[0].text, /ZAHN Sofort/);

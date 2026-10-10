@@ -8,7 +8,8 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { getUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections/ambulant/ukvAmbulantLinks';
 
 // Vorsorge-Baustein (UKV VorsorgePRIVAT) als klar abgegrenzte Zusatzoption
-// unter der SDK-Tarifwahl (Vorgabe 05.10.2026). Das SDK-Gesundheitsbudget
+// unter der SDK-Tarifwahl (Vorgabe 05.10.2026, freiwilliges Dazubuchen von
+// Frank am 10.10.2026 bestätigt). Das SDK-Gesundheitsbudget
 // bleibt das Kernprodukt: kein zweiter Hauptknopf, keine Abfrage zum
 // Gesundheitszustand. Alle Zahlen stammen aus den freigegebenen UKV-Fakten
 // (Beiträge gültig ab 01.05.2026) in ambulant.json.
@@ -16,8 +17,8 @@ import { getUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections
 // Ein weiterer ambulanter UKV-Tarif wird nicht genannt; für den umfassenden
 // ambulanten Schutz bleibt ausschließlich die SDK.
 // Kompakt gehalten, damit die IKK-Strecke mobil nicht weit nach unten rutscht:
-// sichtbar sind nur Nutzen, drei Beispiele, Leistung und Beitrag, zwei
-// Pflichtangaben, der Knopf und der Verweis auf die SDK. Alles Weitere steht im
+// sichtbar sind nur Nutzen, Leistung und Beitrag, die Antragsfragen und der
+// Knopf. Beispiele, Schwangerschaft und SDK-Abgrenzung stehen im
 // gemeinsamen Aufklapper „Alle Details“.
 const labelClass = 'text-sm font-bold uppercase tracking-[0.06em] text-slate-500 md:text-xs md:tracking-[0.12em]';
 const detailTitleClass = 'font-display text-sm font-extrabold text-home-midnight';
@@ -39,20 +40,17 @@ const AmbulantVorsorgeBaustein = () => {
       id="vorsorge-baustein"
       aria-labelledby="vorsorge-baustein-title"
       data-healio-ambulant="vorsorge-baustein"
-      className="mt-8 scroll-mt-20 overflow-hidden rounded-[2rem] border-2 border-emerald-600/40 bg-emerald-50 shadow-lg shadow-emerald-900/10 md:mt-14 md:border md:border-emerald-900/10 md:bg-home-ice md:shadow-none"
+      className="mt-8 scroll-mt-20 overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-home-ice md:mt-10"
     >
-      <div className="p-5 sm:p-8 lg:p-10">
+      <div className="p-5 sm:p-7">
         <div className="flex items-center gap-3 sm:items-start sm:gap-4">
           <span className="hidden shrink-0 sm:block"><FriendlyIcon kind="prevention" tone="mint" size="md" /></span>
           <div className="min-w-0">
             <p className="inline-block rounded-full bg-emerald-700 px-3 py-1 font-display text-sm font-extrabold uppercase tracking-[0.08em] text-white md:bg-transparent md:p-0 md:text-xs md:tracking-[0.18em] md:text-emerald-700">{text('eyebrow')}</p>
-            <h3 id="vorsorge-baustein-title" className="mt-2 font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:text-3xl">{text('title')}</h3>
+            <h3 id="vorsorge-baustein-title" className="mt-2 font-display text-xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight [text-wrap:balance] sm:text-2xl">{text('title')}</h3>
           </div>
         </div>
         <p className="mt-4 max-w-3xl text-base leading-6 text-home-slate sm:leading-7">{text('lead')}</p>
-        <p className="mt-2 max-w-3xl text-base leading-6 text-home-midnight md:text-sm md:leading-6">
-          <span className="font-bold">{text('examplesTitle')}:</span> {list('examplesShort').join(' · ')}
-        </p>
 
         <div className="mt-4 grid gap-x-6 gap-y-3 rounded-[1.4rem] border border-emerald-900/10 bg-white px-4 py-3 sm:grid-cols-2 md:px-5 md:py-4">
           <div className="min-w-0">
@@ -83,13 +81,6 @@ const AmbulantVorsorgeBaustein = () => {
           ))}
         </ul>
 
-        {/* Schwangere gehören in den SDK-Vorsorge-Topf, nicht in diesen Baustein
-            (Gegenprüfung 05.10.2026). Bewusst sichtbar, nicht im Aufklapper,
-            und direkt vor dem Antragslink, damit er vor dem Klick gelesen wird. */}
-        <p className="mt-3 max-w-3xl text-base font-semibold leading-6 text-home-midnight md:text-sm md:leading-6" data-healio-ambulant="vorsorge-pregnancy">
-          {text('pregnancyNote')}
-        </p>
-
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
           {ukvUrl ? (
             <LeadCaptureLink
@@ -113,11 +104,6 @@ const AmbulantVorsorgeBaustein = () => {
           <p className="text-center text-sm leading-5 text-slate-500 sm:max-w-sm sm:text-left md:text-xs md:leading-5">{ukvUrl ? text('ctaLinkHint') : text('ctaHint')}</p>
         </div>
 
-        <div className="mt-5 flex items-start gap-3 border-t border-emerald-900/10 pt-4">
-          <ShieldCheck className="mt-0.5 hidden h-5 w-5 shrink-0 text-home-mint sm:block" aria-hidden="true" />
-          <p className="font-display text-base font-extrabold leading-6 text-home-midnight">{text('sdkTitle')}</p>
-        </div>
-
         <details className="group mt-4 rounded-[1.4rem] border border-emerald-900/10 bg-white/60" data-healio-ambulant="vorsorge-details">
           <summary className="home-focus flex cursor-pointer list-none items-start justify-between gap-3 px-5 py-3 [&::-webkit-details-marker]:hidden">
             <span className="min-w-0">
@@ -129,6 +115,7 @@ const AmbulantVorsorgeBaustein = () => {
           <div className="space-y-6 border-t border-emerald-900/10 px-5 py-5">
             <div>
               <p className={detailTitleClass}>{text('preventionLabel')}</p>
+              <p className={detailTextClass}>{text('preventionScope')}</p>
               <p className={detailTextClass}>{text('preventionStaffel')}</p>
               <ul className="mt-3 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
                 {list('examples').map((item) => (
@@ -139,6 +126,7 @@ const AmbulantVorsorgeBaustein = () => {
                 ))}
               </ul>
               <p className="mt-3 text-sm leading-5 text-slate-500 md:text-xs md:leading-5">{text('preventionRule')}</p>
+              <p className="mt-3 text-base font-semibold leading-6 text-home-midnight md:text-sm md:leading-6" data-healio-ambulant="vorsorge-pregnancy">{text('pregnancyNote')}</p>
             </div>
 
             <div>
@@ -164,6 +152,10 @@ const AmbulantVorsorgeBaustein = () => {
                   {list('fit').map((item) => (
                     <span key={item} className="rounded-full border border-emerald-900/10 bg-white px-3 py-1.5 text-sm font-semibold text-home-slate md:text-xs">{item}</span>
                   ))}
+                </div>
+                <div className="mt-4 flex items-start gap-2">
+                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-home-mint" aria-hidden="true" />
+                  <p className="font-display text-sm font-extrabold leading-6 text-home-midnight">{text('sdkTitle')}</p>
                 </div>
                 <p className={`${detailTextClass} mt-3`}>{text('sdkText')}</p>
               </div>

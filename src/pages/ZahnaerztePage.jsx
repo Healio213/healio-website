@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
-  ArrowDown,
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react';
@@ -31,20 +31,6 @@ const ZahnaerztePage = () => {
 
   const scrollToCalendly = () => {
     document.getElementById('calendly-zahnaerzte')?.scrollIntoView({
-      behavior: shouldReduceMotion ? 'auto' : 'smooth',
-      block: 'start',
-    });
-  };
-
-  const scrollToVideo = () => {
-    document.getElementById('zahnaerzte-erklaervideo')?.scrollIntoView({
-      behavior: shouldReduceMotion ? 'auto' : 'smooth',
-      block: 'start',
-    });
-  };
-
-  const scrollToBoundaries = () => {
-    document.getElementById('klare-rollen')?.scrollIntoView({
       behavior: shouldReduceMotion ? 'auto' : 'smooth',
       block: 'start',
     });
@@ -175,13 +161,14 @@ const ZahnaerztePage = () => {
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Button>
                 <Button
-                  type="button"
+                  asChild
                   variant="outline"
-                  onClick={lang === 'de' ? scrollToVideo : scrollToBoundaries}
-                  className="h-auto min-h-14 rounded-xl border-white/30 bg-[#07111f]/25 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm hover:border-white/50 hover:bg-[#07111f]/40 hover:text-white focus-visible:ring-[#75e6bf]"
+                  className="h-auto min-h-14 whitespace-normal rounded-xl border-white/30 bg-[#07111f]/25 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm hover:border-white/50 hover:bg-[#07111f]/40 hover:text-white focus-visible:ring-[#75e6bf]"
                 >
-                  {lang === 'de' ? 'Erklärvideo ansehen' : t('hero.secondaryCta')}
-                  <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+                  <Link to="/zahnaerzte/praxis-checkliste">
+                    {t('hero.secondaryCta')}
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Link>
                 </Button>
               </div>
 

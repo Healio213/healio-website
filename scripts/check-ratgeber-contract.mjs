@@ -254,7 +254,9 @@ for (const [slug, expected] of Object.entries(INTERNAL_BUTTONS)) {
   // Die IKK-Seite erhielt beim Serien-Einbau neue Bereichs- und Nachbarlinks.
   const expectedStand = slug === 'ikk-classic-bonusprogramm-2026'
     ? { iso: '2026-10-08', label: '8. Oktober 2026' }
-    : { iso: '2026-10-05', label: '5. Oktober 2026' };
+    : slug === ZAHN_SLUG
+      ? { iso: '2026-10-10', label: '10. Oktober 2026' }
+      : { iso: '2026-10-05', label: '5. Oktober 2026' };
   expect(article.updatedAt === expectedStand.iso && article.updatedAtLabel === expectedStand.label, `${slug} trägt Stand ${expectedStand.iso} / ${expectedStand.label}.`);
   expect(
     new RegExp(`<loc>https://healio\\.de/ratgeber/${slug}</loc>\\s*<lastmod>${expectedStand.iso}</lastmod>`).test(sitemap),
@@ -311,10 +313,10 @@ if (schwanger) {
   expect(schwanger.updatedAt === '2026-10-05', 'Der Schwangerschaftsartikel traegt das Aenderungsdatum 2026-10-05.');
 }
 
-// /ambulant: Der UKV-Vorsorge-Baustein sagt sichtbar, dass eine festgestellte
-// Schwangerschaft zum SDK-Vorsorge-Topf gehoert. Der Satz steht in DE und EN,
-// nicht im Aufklapper, und wird von check-ukv-vorsorge-contract.mjs als einzige
-// Stelle mit dem Wort Schwangerschaft im Baustein zugelassen.
+// /ambulant: Der freiwillige UKV-Baustein bleibt im Einstieg kurz. Der Hinweis
+// auf den SDK-Vorsorge-Topf bei festgestellter Schwangerschaft ist in DE und EN
+// im vorhandenen Aufklapper „Alle Details“ erhalten. Das entspricht Franks
+// Präzisierung vom 10.10.2026 und dem check-ukv-vorsorge-contract.mjs.
 const ambulantDe = JSON.parse(read('src/i18n/locales/de/ambulant.json')).vorsorgeBaustein;
 const ambulantEn = JSON.parse(read('src/i18n/locales/en/ambulant.json')).vorsorgeBaustein;
 expect(
@@ -326,8 +328,13 @@ expect(
   'ambulant.json (EN) braucht im Vorsorge-Baustein den Hinweis auf den SDK-Vorsorge-Topf bei festgestellter Schwangerschaft.',
 );
 const vorsorgeComponent = read('src/components/sections/ambulant/AmbulantVorsorgeBaustein.jsx');
-const vorsorgeVisible = vorsorgeComponent.slice(0, vorsorgeComponent.indexOf('<details'));
-expect(/text\('pregnancyNote'\)/.test(vorsorgeVisible), 'Der Schwangerschafts-Hinweis muss im Baustein ohne Aufklappen sichtbar sein.');
+const vorsorgeDetailsStart = vorsorgeComponent.indexOf('<details');
+const vorsorgeDetailsEnd = vorsorgeComponent.indexOf('</details>');
+const vorsorgeVisible = vorsorgeComponent.slice(0, vorsorgeDetailsStart);
+const vorsorgeDetails = vorsorgeComponent.slice(vorsorgeDetailsStart, vorsorgeDetailsEnd);
+expect(vorsorgeDetailsStart > -1 && vorsorgeDetailsEnd > vorsorgeDetailsStart && ambulantDe?.detailsTitle === 'Alle Details', 'Der freiwillige UKV-Baustein behält den gemeinsamen Aufklapper „Alle Details“.');
+expect(/text\('pregnancyNote'\)/.test(vorsorgeDetails) && !/text\('pregnancyNote'\)/.test(vorsorgeVisible), 'Der qualifizierte Schwangerschafts-Hinweis bleibt im vorhandenen Detailaufklapper erhalten.');
+expect(/optional dazubuchen/.test(ambulantDe?.title || '') && /freiwillig/.test(ambulantDe?.sdkText || '') && /optional/.test(ambulantEn?.sdkText || ''), 'UKV bleibt eine kurze freiwillige Ergänzung zum SDK-Hauptweg.');
 
 const internalDefault = buildInternalRatgeberUrl('/ambulant', '');
 expect(internalDefault.startsWith('/ambulant?'), 'Das interne Button-Ziel muss ein Pfad auf healio.de sein.');
@@ -616,21 +623,21 @@ for (const article of ratgeberArticles) {
 
 // --- 6a. Fehlender Zahn: UKV-Zwei-Jahres-Regel klar erklaert -------------
 
-// Vom UKV-Maklerbetreuer am 05.10.2026 bestaetigt: Heil- und Kostenplan oder
-// Anratung in den letzten zwei Jahren schliesst genau diese Behandlung aus,
-// liegt das laenger zurueck, ist sie wieder versichert. Der Kontakt darf
-// bleiben, aber nicht als einzige Aussage. Interne Verguetung nie im Text.
+// Auskunft des UKV-Maklerbetreuers 05.10.2026 gegen den aktuellen Antrag
+// geprüft: Die Rückblickfrist macht eine aktuell beabsichtigte oder laufende
+// Behandlung nicht versichert. Der Kontakt ist ergänzend, interne Vergütung
+// bleibt ausgeschlossen.
 const fehlenderZahn = getRatgeberArticle('zahnzusatzversicherung-fehlender-zahn');
 if (fehlenderZahn) {
   const text = renderArticleText(fehlenderZahn);
-  const rule = /Gab es (?:für die Lücke )?in den letzten zwei Jahren einen Heil- und Kostenplan oder wurde (?:die Versorgung der Lücke|ihre Versorgung|die Behandlung) angeraten, ist genau diese Behandlung nicht versichert[.;] (?:L|l)iegt das länger als zwei Jahre zurück, ist sie wieder versichert\./g;
-  expect((text.match(rule) || []).length >= 3, 'Der Ratgeber fehlender Zahn muss die UKV-Zwei-Jahres-Regel in Kurz gesagt, im Abschnitt und in der FAQ klar nennen.');
+  const rule = /(?:E|e)ine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert\./g;
+  expect((text.match(rule) || []).length >= 3, 'Der Ratgeber fehlender Zahn muss Rückblick und aktuellen Behandlungsstand in Kurz gesagt, im Abschnitt und in der FAQ unterscheiden.');
   expect(!/bloße Wunsch|ist kein Hindernis|genau dieses Implantat/.test(text), 'Der Ratgeber fehlender Zahn darf keine unbestätigte Aussage zum Wunsch nach Lückenschluss enthalten.');
   expect(/ist die Versorgung genau dieser Lücke nicht versichert, egal ob Implantat oder Brücke/.test(text), 'Das Beispiel im Ratgeber fehlender Zahn muss die ganze Lückenversorgung meinen.');
-  expect(fehlenderZahn.faqs.some((faq) => /in den letzten zwei Jahren einen Heil- und Kostenplan/.test(faq.answer) && /wieder versichert/.test(faq.answer) && /angesprochen/.test(faq.question)), 'Die FAQ braucht die Frage zur früher angesprochenen Lücke mit der Zwei-Jahres-Regel.');
+  expect(fehlenderZahn.faqs.some((faq) => /in den letzten zwei Jahren einen Heil- und Kostenplan/.test(faq.answer) && /nicht automatisch versichert/.test(faq.answer) && /angesprochen/.test(faq.question)), 'Die FAQ muss die frühere Empfehlung von einem heute beabsichtigten oder laufenden Lückenschluss unterscheiden.');
   expect(!/schon geplant oder empfohlen|sprich deshalb vor dem Antrag|Ist die Versorgung deiner Lücke schon geplant/.test(text), 'Der Ratgeber fehlender Zahn darf bei geplanter Versorgung nicht mehr nur auf das Gespräch verweisen.');
   expect(!/verprovision|Provision|Courtage/i.test(text), 'Der Ratgeber fehlender Zahn darf keine Vergütung oder Courtage nennen.');
-  expect(fehlenderZahn.updatedAt === '2026-10-05', 'Der Ratgeber fehlender Zahn trägt das Änderungsdatum 2026-10-05.');
+  expect(fehlenderZahn.updatedAt === '2026-10-10', 'Der Ratgeber fehlender Zahn trägt das Datum der erneuten Originalprüfung 2026-10-10.');
 }
 
 // Kommentare erklaeren die Regel und duerfen sie deshalb zitieren. Geprueft

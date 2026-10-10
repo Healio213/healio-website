@@ -33,7 +33,7 @@ assert.match(hero, /healio-hero-markenrelief-v1\.webp/);
 assert.match(hero, /object-\[62%_center\]/);
 assert.doesNotMatch(hero, /healio-wordmark-white/);
 assert.match(hero, /min-h-\[100svh\]/);
-assert.match(hero, /href="#unternehmen-leistungen"/);
+assert.match(hero, /getPath\('vorsorgeRechner'\)/);
 assert.match(solutions, /id="unternehmen-leistungen"/);
 
 assert.match(responsibility, /dai\.de/);

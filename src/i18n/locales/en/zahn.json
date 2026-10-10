@@ -58,7 +58,7 @@
     "ikkCta": "Check insurer value",
     "questions": {
       "q1": {
-        "text": "Has your dentist recommended or started a treatment within the last 2 years?",
+        "text": "Has your dentist recommended treatment within the last 2 years? Is any treatment currently intended or underway?",
         "hint": "For example a crown, root canal, filling, implant or a treatment and cost plan. A documented finding in your patient record also counts as recommended.",
         "options": {
           "ja": {
@@ -144,9 +144,9 @@
         "reasons": [
           "Up to 3 missing teeth fully co-insured, for €6.10 to €10.90 surcharge per tooth per month depending on the tier",
           "Your reimbursement scale remains uncut",
-          "Health questions only look back 2 years"
+          "Recommendations from the last 2 years and treatment currently intended or underway are assessed"
         ],
-        "warning": "With 4 or more missing teeth, acceptance is not possible. If there was a treatment and cost plan for your gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again.",
+        "warning": "With 4 or more missing teeth, acceptance is not possible. If there was a treatment and cost plan for your gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information.",
         "cta": "View tariffs and sign up online",
         "ctaType": "ukv",
         "note": "You will be redirected to the online application of Versicherungskammer (UKV). State the number of missing teeth there.",
@@ -156,10 +156,10 @@
       "ukvVorgeschichte": {
         "insurer": "UKV (Union Krankenversicherung)",
         "title": "ZahnPRIVAT: lenient acceptance despite dental history",
-        "text": "With a denture, older dental prosthetics or a periodontitis history you are far better off with UKV: the application only looks back a maximum of 2 years.",
+        "text": "With a denture, older dental prosthetics or a periodontitis history you are far better off with UKV: the application assesses the history for each stated period and treatment currently intended or underway.",
         "reasons": [
           "Dental prosthetics older than 10 years and intact dentures are no exclusion reason at UKV",
-          "Diagnoses and recommendations older than 2 years do not need to be declared at all",
+          "Answer each application question fully for its stated period; treatment currently intended or underway counts regardless of an older recommendation",
           "Periodontitis within the last 2 years: acceptance with an exclusion only for periodontal treatments, instead of rejection"
         ],
         "cta": "View tariffs and sign up online",
@@ -273,7 +273,7 @@
     "badge": "Immediate cover or strong prevention",
     "title": "Need dental work? It is not too late for insurance.",
     "intro": "Many people assume that insurance is no longer possible once treatment has been recommended. Depending on the timing, an immediate-cover route may still be available. Healio gives you a clear, factual assessment for every situation: immediate cover from die Bayerische or strong prevention with UKV.",
-    "question": "One question decides: Has your dentist recommended or started a treatment within the last 2 years?",
+    "question": "One question decides: Has your dentist recommended treatment within the last 2 years? Is any treatment currently intended or underway?",
     "details": {
       "show": "Show benefits and important details",
       "hide": "Hide benefits and important details"
@@ -304,11 +304,11 @@
       "label": "Strong prevention before anything comes up",
       "insurer": "UKV (Union Krankenversicherung)",
       "tariff": "ZahnPRIVAT",
-      "text": "If your dentist has not recommended any treatment in the past 2 years, ZahnPRIVAT gives you high reimbursements for dentures, dental treatment and professional teeth cleaning. Three tariff levels, so the cover fits your budget. Especially strong for families.",
+      "text": "If no treatment was recommended in the past 2 years and none is currently intended or underway, you can assess ZahnPRIVAT for high reimbursements for dentures, dental treatment and professional teeth cleaning. Three tariff levels, so the cover fits your budget. Especially strong for families.",
       "bullets": [
         "Orthodontics for children: up to 5,000 EUR in the top tiers, all KIG levels, including aligners",
         "Professional teeth cleaning with no annual limit in the top tiers, not counted towards the reimbursement scale",
-        "Lenient acceptance: health questions only look back 2 years",
+        "Lenient acceptance: recommendations from the last 2 years and treatment currently intended or underway are assessed",
         "Up to 3 missing teeth fully co-insured for a fixed surcharge, the reimbursement scale remains uncut",
         "Full benefits even without your statutory insurer paying first, for example at a private dentist"
       ],
@@ -355,12 +355,12 @@
         },
         {
           "situation": "Dental history, such as periodontitis, a denture or older prosthetics",
-          "empfehlung": "UKV ZahnPRIVAT: health questions only look back 2 years, older diagnoses and recommendations do not need to be declared. Even with periodontitis within the last 2 years you are accepted, with an exclusion only for periodontal treatments instead of a rejection.",
+          "empfehlung": "UKV ZahnPRIVAT: each application question has its own period. Treatment currently intended or underway counts regardless of an older recommendation. Even with periodontitis within the last 2 years you are accepted, with an exclusion only for periodontal treatments instead of a rejection.",
           "weg": "ukv"
         },
         {
           "situation": "You are missing 1 to 3 teeth that have not been replaced",
-          "empfehlung": "UKV ZahnPRIVAT: acceptance with a surcharge per missing tooth, after which the gaps are covered and the normal dental benefit scale applies. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again. die Bayerische does not accept missing teeth.",
+          "empfehlung": "UKV ZahnPRIVAT: acceptance with a surcharge per missing tooth, after which the gaps are covered and the normal dental benefit scale applies. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information. die Bayerische does not accept missing teeth.",
           "weg": "ukv"
         },
         {
@@ -401,7 +401,7 @@
     },
     "fehlend": {
       "title": "Missing teeth insurable",
-      "desc": "With UKV, up to 3 already missing teeth can be co-insured for a fixed surcharge per tooth, after which the normal dental benefit scale applies. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again."
+      "desc": "With UKV, up to 3 already missing teeth can be co-insured for a fixed surcharge per tooth, after which the normal dental benefit scale applies. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information."
     },
     "unfall": {
       "title": "Award-winning benefits route",
@@ -433,11 +433,11 @@
       },
       {
         "q": "Can I sign up with missing teeth?",
-        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. If that was more than 2 years ago, it is covered again. Bayerische currently does not accept missing teeth. From 4 missing teeth there is an immediate-cover solution on the market entirely without health questions, and we name it for you by phone: +49 40 89755705. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
+        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information. Bayerische currently does not accept missing teeth. From 4 missing teeth there is an immediate-cover solution on the market entirely without health questions, and we name it for you by phone: +49 40 89755705. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
       },
       {
         "q": "I recently had periodontitis. Is anything still possible?",
-        "a": "Yes. UKV only looks back 2 years: if the periodontitis is older and nothing has been recommended again since, you do not need to declare it at all. If it is within the last 2 years, UKV still accepts you, with an exclusion only for periodontal treatments, all other benefits apply in full. die Bayerische asks 3 years back and does not accept periodontitis or enamel defects within that period."
+        "a": "UKV asks whether periodontitis was diagnosed or treated in the last 2 years or treatment is recommended. A Yes answer provides for an exclusion of periodontal treatment. Answer all questions fully for their stated periods; acceptance and other benefits are assessed in the application. die Bayerische asks 3 years back and does not accept periodontitis or enamel defects within that period."
       },
       {
         "q": "Can I add the immediate-cover module later?",
