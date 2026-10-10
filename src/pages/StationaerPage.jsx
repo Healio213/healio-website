@@ -22,7 +22,7 @@ import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard'
 
 // Mobile Reihenfolge (unter md): Die Abschnitte stehen als Geschwister in einem
 // Flex-Container und bekommen über "order" ihren Platz im Besucher-Ablauf:
-// Einstieg, Siegel, Erklärvideo, verstehen, Tarif wählen, zweiter Versicherer,
+// Einstieg, Erklärvideo, Kostenhilfe, Siegel, Tarif wählen, weitere Tarife, Details,
 // Kontakt für Rückfragen, Finanzierung und Bonus, Familie, Fragen. Familie
 // steht mobil hinter dem Bonus, damit die Finanzierung früher kommt und der
 // Kontaktblock nicht erst nach rund 14 Bildschirmen auftaucht (Experiment
@@ -63,15 +63,8 @@ const StationaerPage = () => {
             <StationaerHero />
           </div>
         </Slot>
-        <Slot order="order-2">
-          <StationaerRoomCosts />
-        </Slot>
-        {/* Zimmerkosten zuerst beantworten, danach die bisherigen Siegel. */}
-        <Slot order="order-2">
-          <HealioAwardsRow size="large" productSet="stationaer" />
-        </Slot>
         {lang === 'de' && (
-          <Slot order="order-3">
+          <Slot order="order-2">
             <ExplainerVideoCard
               id="stationaer-erklaervideo"
               videoSrc="/videos/erklaerfilme/erklaervideo-stationaer-v1.mp4"
@@ -79,40 +72,47 @@ const StationaerPage = () => {
               captionsSrc="/videos/erklaerfilme/erklaervideo-stationaer-v1-de.vtt"
               eyebrow={t('refresh.video.eyebrow')}
               title={t('refresh.video.title')}
+              subtitle="Das Video erklärt die SDK-Klinik-Tarife. Die DKV-Alternative nur fürs Einbettzimmer findest du unten in der Tarifwahl."
               ariaLabel={t('refresh.video.aria')}
               className="bg-[#f4f8f6]"
             />
           </Slot>
         )}
-        <Slot order="order-5">
+        <Slot order="order-3">
+          <StationaerRoomCosts />
+        </Slot>
+        <Slot order="order-4">
+          <HealioAwardsRow size="large" productSet="stationaer" />
+        </Slot>
+        <Slot order="order-6">
           <StationaerTariffSelector />
         </Slot>
         {/* Zweiter Klinik-Versicherer direkt nach der SDK-Tarifwahl. */}
-        <Slot order="order-6">
+        <Slot order="order-7">
           <StationaerBayerischeAlternative />
         </Slot>
-        {/* Mobil steht "Im Ernstfall zählt, was wirklich versichert ist" vor der
-            Tarifwahl: erst verstehen, dann wählen (order-4 vor order-5). */}
-        <Slot order="order-4">
+        {/* Die konkreten Tarifwege stehen vor den ausführlichen SDK-Details,
+            damit die Einbettzimmer-Alternative auf Mobil früh erreichbar ist. */}
+        <Slot order="order-7">
           <StationaerBenefits />
         </Slot>
         {/* Familie, Kinder und Hebamme: mobil hinter Finanzierung und Bonus
-            (order-12, Experiment Handy-Conversion 10/2026). Der Anker #familie
+            (order-13). Der Anker #familie
             bleibt erreichbar, ab md ändert sich die Reihenfolge nicht. */}
-        <Slot order="order-12">
+        <Slot order="order-[13]">
           <StationaerFamily />
         </Slot>
         {/* Zwei-Wege-Botschaft direkt vor dem KassenBoost-Abschnitt. Der Link zu
             /kassenboost steht mobil gleich darunter in der Bonus-Brücke noch
             einmal; die Option blendet ihn hier unter md aus (Experiment
             Handy-Conversion 10/2026, wirkt sobald der Baustein sie kennt). */}
-        <Slot order="order-8">
+        <Slot order="order-9">
           <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe hideLinkOnMobile />
         </Slot>
-        <Slot order="order-9">
+        <Slot order="order-10">
           <StationaerBonusBridge />
         </Slot>
-        <Slot order="order-10">
+        <Slot order="order-11">
           <CompactBonusFeature
             className="bg-[#fbfaf7]"
             mobileSwipe
@@ -130,17 +130,17 @@ const StationaerPage = () => {
           />
         </Slot>
         {/* Brücken-Strecke nach dem Bonusrechner, wie auf /ambulant. */}
-        <Slot order="order-11">
+        <Slot order="order-12">
           <AmbulantIKKWechsel variant="stationaer" mobileSwipe />
         </Slot>
-        <Slot order="order-[13]">
+        <Slot order="order-[14]">
           <SalesAiAssist className="bg-[#fbfaf7]" />
         </Slot>
         {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6).
-            Mobil direkt hinter Tarifwahl und zweitem Versicherer (order-7),
+            Mobil direkt hinter Tarifwahl und zweitem Versicherer (order-8),
             damit eine Rückfrage früh möglich ist (Experiment Handy-Conversion
             10/2026); ab md bleibt er am Ende vor den Fragen. */}
-        <Slot order="order-7">
+        <Slot order="order-8">
           <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
         </Slot>
         <Slot order="order-last">

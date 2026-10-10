@@ -103,7 +103,7 @@ const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
   const { t: tCommon } = useTranslation('common');
-  const { lang } = useLanguage();
+  const { lang, getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
   // Ab lg trägt SceneHero die h1; der Handy-Einstieg nutzt dort h2.
   const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
@@ -134,7 +134,7 @@ const HebammenPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Eine Reihenfolge für Handy und Rechner: Einstieg, Siegel, Erklärvideo,
+      {/* Eine Reihenfolge für Handy und Rechner: Einstieg, Erklärvideo, Rollen, Siegel,
           dann Fälle, Bausteine, Kind, Tarife, Rollen, Ablauf und Termin. */}
       <article className="w-full overflow-hidden bg-white text-[#071726]">
 
@@ -209,20 +209,51 @@ const HebammenPage = () => {
               <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-slate-200 sm:text-lg md:mt-6">
                 {t('hero.subtitle')}
               </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row md:mt-8">
               <button
                 type="button"
                 onClick={scrollTo(BOOKING_ID)}
-                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-display font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1] motion-reduce:transform-none md:mt-8"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-display font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1] motion-reduce:transform-none"
               >
                 {t('hero.cta')}
                 <ArrowDown className="h-4 w-4" aria-hidden="true" />
               </button>
+                {showVideo && (
+                  <button
+                    type="button"
+                    onClick={scrollTo(VIDEO_ID)}
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/50 bg-white/5 px-6 py-3.5 font-display font-bold text-white transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
+                  >
+                    {t('hero.secondaryCta')}
+                    <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                  </button>
+                )}
+              </div>
               <p className="mt-5 flex items-start gap-2 text-base font-semibold text-slate-300 md:text-sm">
                 <Shield className="mt-0.5 h-4 w-4 shrink-0 text-[#5ee0b1]" aria-hidden="true" />
                 {t('hero.note')}
               </p>
             </motion.div>
 
+          </div>
+        </section>
+
+        {/* ERKLÄRVIDEO: nur Deutsch, erscheint nur mit Videoquelle (siehe oben). */}
+        {showVideo && (
+          <ExplainerVideoCard
+            id={VIDEO_ID}
+            videoSrc={HEBAMMEN_VIDEO.src}
+            poster={HEBAMMEN_VIDEO.poster || undefined}
+            captionsSrc={HEBAMMEN_VIDEO.captions || undefined}
+            eyebrow={t('explanationVideo.eyebrow')}
+            title={t('explanationVideo.title')}
+            ariaLabel={t('explanationVideo.aria')}
+            className="bg-[#f4f8f6]"
+          />
+        )}
+
+        {/* Die drei Rollen bleiben am Handy nach dem Film schnell erreichbar. */}
+        <section className="bg-[#f5faf8] px-4 py-8 sm:px-6 lg:hidden" aria-label={t('proof.ariaLabel')}>
             <div className="relative mx-auto min-w-0 w-full max-w-[35rem] md:max-w-none">
               <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">
                 <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3">
@@ -256,7 +287,6 @@ const HebammenPage = () => {
                 </MobileSwipeRow>
               </div>
             </div>
-          </div>
         </section>
 
         {/* SIEGEL: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
@@ -282,20 +312,6 @@ const HebammenPage = () => {
             </div>
           </div>
         </section>
-
-        {/* ERKLÄRVIDEO: nur Deutsch, erscheint nur mit Videoquelle (siehe oben). */}
-        {showVideo && (
-          <ExplainerVideoCard
-            id={VIDEO_ID}
-            videoSrc={HEBAMMEN_VIDEO.src}
-            poster={HEBAMMEN_VIDEO.poster || undefined}
-            captionsSrc={HEBAMMEN_VIDEO.captions || undefined}
-            eyebrow={t('explanationVideo.eyebrow')}
-            title={t('explanationVideo.title')}
-            ariaLabel={t('explanationVideo.aria')}
-            className="bg-[#f4f8f6]"
-          />
-        )}
 
         {/* PROBLEM & LÖSUNG */}
         <section className={`bg-white ${sectionPad}`} aria-labelledby="hebammen-problem-heading">
@@ -537,7 +553,7 @@ const HebammenPage = () => {
                   <div className="mt-6 rounded-[1.5rem] bg-home-ice p-5 ring-1 ring-[#cde8dc] sm:p-7">
                     <p className="text-base leading-relaxed text-slate-700">{t('klinik.bonusNote')}</p>
                     <p className="mt-4 text-base leading-relaxed text-slate-700">{t('klinik.closingNote')}</p>
-                    <Link to="/stationaer" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-sm font-bold text-[#087454] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25c990]">
+                    <Link to={getPath('stationaer')} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-sm font-bold text-[#087454] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25c990]">
                       {t('klinik.ctaLink')}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
@@ -706,11 +722,11 @@ const HebammenPage = () => {
         </section>
 
         {/* TERMIN: 45-Minuten-Kennenlernen */}
-        <section className={`bg-home-ice ${sectionPad}`} aria-labelledby="hebammen-termin-heading">
+        <section id={BOOKING_ID} className={`scroll-mt-24 bg-home-ice ${sectionPad}`} aria-labelledby="hebammen-termin-heading">
           <div className={wrap}>
             <SectionHead id="hebammen-termin-heading" title={t('cta.title')} subtitle={t('cta.subtitle')} />
             <motion.div {...reveal} className="mx-auto mt-8 max-w-4xl rounded-[2rem] border border-emerald-900/10 bg-white p-3 shadow-[0_24px_60px_rgba(7,17,31,0.10)] sm:p-6 md:mt-10">
-              <div id={BOOKING_ID} className="scroll-mt-28">
+              <div>
                 <AppointmentBooking
                   placement="midwives_page"
                   title={lang === 'en' ? 'Book an appointment' : 'Termin buchen'}

@@ -6,6 +6,7 @@ import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import WhatsAppHelpHint, { useWhatsAppHelp } from '@/components/sections/shared/WhatsAppHelpHint';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
+import StationaerDkvAlternative from './StationaerDkvAlternative';
 
 // Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte zeigt oben eine
 // Cartoon-Szene, darunter ein weicher Pastellton statt Weiß (wie bei den
@@ -68,11 +69,17 @@ const StationaerTariffSelector = () => {
           </p>
         </div>
 
+        <StationaerDkvAlternative />
+
+        <h3 className="mt-8 font-display text-xl font-extrabold text-[#071726] md:mt-10 sm:text-2xl">
+          {t('refresh.selector.sdkTitle')}
+        </h3>
+
         {/* Mobil Wischreihe mit sichtbarer Nachbarkarte; ab md wie zuvor (bis lg
             untereinander, ab lg drei Spalten). */}
         <MobileSwipeRow
           label={t('refresh.selector.title')}
-          className="mt-8 min-w-0 md:mt-12"
+          className="mt-5 min-w-0 md:mt-6"
           desktopClassName="md:grid md:gap-5 lg:grid-cols-3"
         >
           {tariffOptions.map((option) => {

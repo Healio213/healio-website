@@ -54,6 +54,8 @@ const Header = () => {
     '/datenschutz', '/en/privacy',
     '/erstinformation', '/en/initial-information',
     '/zahnaerzte/praxis-checkliste',
+    '/zahnaerzte/praxis-material',
+    '/heilberufe-vorsorge/praxis-material',
     '/partner/leitfaden',
     '/konto-loeschen',
     '/schwangerschaft',

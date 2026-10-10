@@ -24,6 +24,7 @@ import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
+import AmbulantAragVorsorge from '@/components/sections/ambulant/AmbulantAragVorsorge';
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
@@ -340,6 +341,26 @@ export const getAmbulantHeroBudget = (language = 'de') => {
   };
 };
 
+// Der Film steht auf der Produktseite direkt nach dem Hero. Die deutsche
+// Fassung bleibt auf englischen Routen ausgeblendet.
+export const AmbulantExplainerVideo = () => {
+  const { lang } = useLanguage();
+  const language = lang === 'en' ? 'en' : 'de';
+  const copy = getAmbulantCopy(language, false);
+
+  return language === 'de' && (
+    <ExplainerVideoCard
+      id="erklaervideo"
+      videoSrc="/erklaervideo-ambulant-v6.mp4"
+      poster="/images/erklaervideo-ambulant-v6-poster.jpg"
+      eyebrow={copy.video.eyebrow}
+      title={copy.video.title}
+      ariaLabel={copy.video.label}
+      className="bg-home-ice"
+    />
+  );
+};
+
 const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const { lang, getPath } = useLanguage();
   const { pathname } = useLocation();
@@ -348,6 +369,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const vorsorgePath = pathname.replace(/\/+$/, '');
   const showVorsorgeBaustein = !fromBonusTopic
     && (vorsorgePath === '/ambulant' || vorsorgePath === '/en/outpatient');
+  const showAragVorsorge = vorsorgePath === '/ambulant' || vorsorgePath === '/en/outpatient';
   const language = lang === 'en' ? 'en' : 'de';
   const copy = getAmbulantCopy(language, fromBonusTopic);
   const referrer = useReferrer();
@@ -392,18 +414,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
   return (
     <>
-      {language === 'de' && (
-        <ExplainerVideoCard
-          id="erklaervideo"
-          videoSrc="/erklaervideo-ambulant-v6.mp4"
-          poster="/images/erklaervideo-ambulant-v6-poster.jpg"
-          eyebrow={copy.video.eyebrow}
-          title={copy.video.title}
-          ariaLabel={copy.video.label}
-          className="order-3 bg-home-ice md:order-none"
-        />
-      )}
-
       {/* Experiment Handy-Conversion 10/2026: mobil unsichtbar und ohne Höhe. Die vier
           Themen stehen schon in den Kacheln im Einstieg, der Kompass nennt keine
           Beträge und führte Brillen-Besucher in eine Sackgasse. Der Abschnitt bleibt
@@ -685,6 +695,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             </details>
             <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5"><span className="hidden md:inline">{copy.tiers.visionNote} </span>{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
           </div>
+
+          {/* Eigenständige ARAG-Vorsorgeoption (Frank 10.10.2026), ohne eine
+              Kombination oder Budgetaddition mit SDK und UKV zu empfehlen. */}
+          {showAragVorsorge && <AmbulantAragVorsorge />}
 
           {/* Vorsorge-Baustein der UKV (Frank 05.10.2026): kleine Zusatzoption
               unter der SDK-Tarifwahl, bewusst innerhalb dieses Abschnitts, damit

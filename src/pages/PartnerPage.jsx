@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
@@ -42,16 +42,18 @@ const PARTNER_VIDEO_CAPTIONS = '/videos/erklaerfilme/erklaervideo-partner-v1-de.
 const plain = (text) => String(text || '').replace(/<\/?highlight>/g, '');
 
 const PartnerPage = () => {
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const hash = window.location.hash.replace(/^#/, '');
     if (!LEGACY_TERMIN_ANCHORS.includes(hash)) return;
     window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${GOOGLE_TERMIN_ANCHOR}`);
-    document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
+    document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  }, [reduceMotion]);
   const { t, i18n } = useTranslation('partner');
   const { t: tSeo } = useTranslation('seo');
   const { getPath } = useLanguage();
+  const scrollTo = (id) => () => document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   const isEnglish = i18n.language?.startsWith('en');
   // Ab lg trägt SceneHero die h1; die ausgeblendete Handy-Fassung nutzt dort h2.
   const isDesktop = useDesktopLayout();
@@ -83,7 +85,7 @@ const PartnerPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Mobil bestimmt order die Reihenfolge der Abschnitte (Einstieg, Siegel, Video, dann der Weg vom Verstehen bis zum Termin),
+      {/* Mobil bestimmt order die Reihenfolge der Abschnitte (Einstieg, Video, Siegel, dann der Weg vom Verstehen bis zum Termin),
             ab md bleibt es der bisherige Blocksatz in Quellreihenfolge. */}
       <main className="bg-white overflow-hidden w-full flex flex-col md:block">
 
@@ -102,14 +104,14 @@ const PartnerPage = () => {
                 type="button"
                 data-desktop-primary
                 className={scenePrimaryButtonClass}
-                onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={scrollTo(GOOGLE_TERMIN_ANCHOR)}
               >
                 {t('hero.cta')}
               </button>
               <button
                 type="button"
                 className={sceneSecondaryButtonClass}
-                onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={scrollTo('partner-video')}
               >
                 {t('hero.secondaryCta')}
                 <ArrowDown className="h-5 w-5" aria-hidden="true" />
@@ -164,7 +166,7 @@ const PartnerPage = () => {
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 className="flex flex-col"
@@ -181,8 +183,8 @@ const PartnerPage = () => {
                 <div className="order-3 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
                     size="lg"
-                    className="bg-[#25c990] hover:bg-[#1fb37e] text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
-                    onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+                    className="bg-[#25c990] hover:bg-[#1fb37e] text-[#071726] font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
+                    onClick={scrollTo(GOOGLE_TERMIN_ANCHOR)}
                   >
                     {t('hero.cta')}
                   </Button>
@@ -190,24 +192,11 @@ const PartnerPage = () => {
                     size="lg"
                     variant="outline"
                     className="border-white/55 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:text-lg"
-                    onClick={() => document.getElementById('partner-video')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={scrollTo('partner-video')}
                   >
                     {t('hero.secondaryCta')}
                     <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
-                </div>
-                <p className="order-4 mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
-                  <Shield className="h-4 w-4 text-[#75e6bf]" aria-hidden="true" />
-                  {t('hero.roleNote')}
-                </p>
-                <div className="order-5 mt-5 text-sm text-white/75">
-                  <p className="mb-3">{t('leitfadenHint.lead')}</p>
-                  <Link
-                    to="/partner/leitfaden"
-                    className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/55 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:text-base"
-                  >
-                    {t('leitfadenHint.cta')}
-                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -215,14 +204,9 @@ const PartnerPage = () => {
         </section>
         </div>
 
-        {/* QUALITÄTSSIEGEL: SDK + IKK, groß direkt unter dem Hero */}
-        <div className="order-2 md:contents">
-          <HealioAwardsRow label={t('quality.label')} size="large" />
-        </div>
-
         {/* Partner-Erklärfilm v1 mit Nita (nur Deutsch, Untertitel als Spur).
             Ohne Video (EN oder Ladefehler) bleiben die drei Kernpunkte stehen. */}
-        <div className="order-3 md:contents">
+        <div className="order-2 md:contents">
         <B2BExplainerVideo
           sectionId="partner-video"
           title={t('explanationVideo.title')}
@@ -235,7 +219,7 @@ const PartnerPage = () => {
           posterSrc={isEnglish ? undefined : PARTNER_VIDEO_POSTER}
           captionsSrc={isEnglish ? undefined : PARTNER_VIDEO_CAPTIONS}
           bookingCtaLabel={t('explanationVideo.bookingCta')}
-          onBookingCta={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+          onBookingCta={scrollTo(GOOGLE_TERMIN_ANCHOR)}
           videoHint={t('explanationVideo.hint')}
           videoNote={t('explanationVideo.aiNote')}
           ctaLabel={t('explanationVideo.cta')}
@@ -248,11 +232,35 @@ const PartnerPage = () => {
         />
         </div>
 
+        {/* Hinweise und Lesestoff folgen am Handy dem Film, damit der Einstieg kurz bleibt. */}
+        <section className="order-3 bg-[#f4faf7] px-4 pb-8 sm:px-6 lg:hidden">
+          <div className="mx-auto max-w-3xl">
+                <p className="flex items-start justify-center gap-2 text-sm leading-6 text-[#52666d]">
+                  <Shield className="mt-1 h-4 w-4 shrink-0 text-[#087654]" aria-hidden="true" />
+                  {t('hero.roleNote')}
+                </p>
+                <div className="mt-5 text-center text-sm text-[#52666d]">
+                  <p className="mb-3">{t('leitfadenHint.lead')}</p>
+                  <Link
+                    to="/partner/leitfaden"
+                    className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#9bbab2] bg-white px-5 py-3 text-sm font-bold text-[#071726] transition-colors hover:bg-[#e4f6ee] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087654] sm:text-base"
+                  >
+                    {t('leitfadenHint.cta')}
+                  </Link>
+                </div>
+          </div>
+        </section>
+
+        {/* QUALITÄTSSIEGEL: SDK + IKK, nach dem Erklärvideo */}
+        <div className="order-3 md:contents">
+          <HealioAwardsRow label={t('quality.label')} size="large" />
+        </div>
+
         {/* SECTION 2: PROBLEM AWARENESS */}
         <section className="order-4 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
@@ -272,7 +280,7 @@ const PartnerPage = () => {
         <section className="order-5 md:order-none py-10 sm:py-20 lg:py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-6 sm:mb-16"
@@ -296,7 +304,7 @@ const PartnerPage = () => {
             >
               {/* Total Budget - Featured */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="h-full bg-gradient-to-br from-home-midnight to-healio-primary-dark rounded-2xl p-6 sm:p-8 text-white text-center shadow-md md:shadow-xl"
@@ -309,7 +317,7 @@ const PartnerPage = () => {
 
               {/* Naturheilkunde */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
@@ -323,7 +331,7 @@ const PartnerPage = () => {
 
               {/* Sehhilfen */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
@@ -345,7 +353,7 @@ const PartnerPage = () => {
         <section className="order-6 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-6 sm:mb-16"
@@ -369,7 +377,7 @@ const PartnerPage = () => {
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.08 }}
@@ -389,7 +397,7 @@ const PartnerPage = () => {
         <section className="order-7 md:order-none py-10 sm:py-20 lg:py-24 pb-12 sm:pb-20 lg:pb-32 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-6 sm:mb-16"
@@ -435,7 +443,7 @@ const PartnerPage = () => {
                 return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -467,7 +475,7 @@ const PartnerPage = () => {
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -500,26 +508,26 @@ const PartnerPage = () => {
         <section className="order-9 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-8">
+              <motion.h2 initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-8">
                 {t('moral.title')}
               </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
+              <motion.p initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
                 {t('moral.text1')}
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
+              <motion.p initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-base sm:text-lg text-white/85 leading-relaxed sm:leading-relaxed mb-4 sm:mb-6">
                 {t('moral.text2')}
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-base sm:text-lg font-semibold text-emerald-300 leading-relaxed sm:leading-relaxed">
+              <motion.p initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-base sm:text-lg font-semibold text-emerald-300 leading-relaxed sm:leading-relaxed">
                 {t('moral.text3')}
               </motion.p>
             </div>
           </div>
         </section>
 
-        <section className="order-11 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
+        <section id={GOOGLE_TERMIN_ANCHOR} className="order-11 md:order-none scroll-mt-24 py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="text-center mb-5 sm:mb-12"
@@ -534,13 +542,13 @@ const PartnerPage = () => {
 
             <div className="grid lg:grid-cols-1">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
                 className="bg-white p-2 sm:p-4 md:p-6 rounded-2xl border border-slate-200 shadow-xl overflow-hidden flex flex-col items-center w-full"
               >
-                <div id={GOOGLE_TERMIN_ANCHOR} className="w-full scroll-mt-28">
+                <div className="w-full">
                   <AppointmentBooking
                     placement="partner_page"
                     title={t('cta.title')}
@@ -596,7 +604,7 @@ const PartnerPage = () => {
         <section className="order-last md:order-none py-10 sm:py-20 bg-gradient-to-br from-home-midnight to-healio-primary-dark">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
@@ -609,7 +617,7 @@ const PartnerPage = () => {
               <Button
                 size="lg"
                 className="bg-white text-[#25c990] hover:bg-slate-100 font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
-                onClick={() => document.getElementById(GOOGLE_TERMIN_ANCHOR)?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={scrollTo(GOOGLE_TERMIN_ANCHOR)}
               >
                 {t('footer.cta')}
               </Button>

@@ -1,9 +1,10 @@
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, Play } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import ClickToPlayVideo from '@/components/sections/shared/ClickToPlayVideo';
 
 const B2BExplainerVideo = ({
   sectionId,
@@ -33,9 +34,7 @@ const B2BExplainerVideo = ({
   overlayBadge,
   videoSubline,
 }) => {
-  const [playing, setPlaying] = useState(false);
   const [mediaError, setMediaError] = useState(false);
-  const videoRef = useRef(null);
   const milestones = useRef(new Set());
   const playTracked = useRef(false);
   const reduceMotion = useReducedMotion();
@@ -47,8 +46,8 @@ const B2BExplainerVideo = ({
     value,
   });
 
-  const handleProgress = () => {
-    const video = videoRef.current;
+  const handleProgress = (event) => {
+    const video = event.currentTarget;
     if (!video?.duration) return;
     const progress = Math.floor((video.currentTime / video.duration) * 100);
     [25, 50, 75, 100].forEach((milestone) => {
@@ -74,59 +73,31 @@ const B2BExplainerVideo = ({
 
         <div className="mx-auto mt-6 max-w-4xl md:mt-10">
           {hasApprovedVideo ? (
-            playing ? (
-              <div className="aspect-video overflow-hidden rounded-2xl bg-black shadow-[0_24px_70px_rgba(7,17,31,0.2)]">
-                <video
-                  ref={videoRef}
-                  className="h-full w-full"
-                  controls
-                  autoPlay
-                  playsInline
-                  preload="none"
-                  poster={posterSrc}
-                  onPlay={() => {
-                    if (!playTracked.current) {
-                      playTracked.current = true;
-                      track('video_play');
-                    }
-                  }}
-                  onTimeUpdate={handleProgress}
-                  onEnded={() => track('video_complete', 100)}
-                  onError={() => {
-                    setPlaying(false);
-                    setMediaError(true);
-                    track('video_error');
-                  }}
-                >
-                  <source src={videoSrc} type="video/mp4" />
-                  {captionsSrc && <track kind="captions" src={captionsSrc} srcLang={captionsLanguage} label={captionsLabel} />}
-                  {videoFallbackText}
-                </video>
-              </div>
-            ) : (
-              <motion.button
-                type="button"
-                onClick={() => setPlaying(true)}
-                aria-label={title}
-                className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-[#07111f] shadow-[0_24px_70px_rgba(7,17,31,0.2)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25c990]/55 focus-visible:ring-offset-4"
-                initial={reduceMotion ? false : { opacity: 0.76, y: 18 }}
-                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <img src={posterSrc} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
-                <span className={`absolute inset-0 flex items-center justify-center bg-[#07111f]/30 transition-colors group-hover:bg-[#07111f]/40 ${overlayBadge ? 'pb-16 sm:pb-0' : ''}`}>
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25c990] shadow-[0_12px_30px_rgba(7,96,70,0.3)] md:h-20 md:w-20">
-                    <Play className="ml-1 h-7 w-7 text-white md:h-9 md:w-9" aria-hidden="true" />
-                  </span>
-                </span>
-                {overlayBadge && (
-                  <span className="absolute inset-x-3 bottom-3 rounded-xl bg-[#07111f]/85 px-3 py-2 text-center text-sm font-bold leading-5 text-white backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-5 sm:py-3 sm:text-base sm:leading-6">
-                    {overlayBadge}
-                  </span>
-                )}
-              </motion.button>
-            )
+            <div className="overflow-hidden rounded-2xl bg-[#07111f] shadow-[0_24px_70px_rgba(7,17,31,0.2)]">
+              <ClickToPlayVideo
+                src={videoSrc}
+                poster={posterSrc}
+                ariaLabel={title}
+                captionsSrc={captionsSrc}
+                captionsLang={captionsLanguage}
+                captionsLabel={captionsLabel}
+                className="aspect-video w-full bg-black"
+                fallback={videoFallbackText}
+                overlayBadge={overlayBadge}
+                onPlay={() => {
+                  if (!playTracked.current) {
+                    playTracked.current = true;
+                    track('video_play');
+                  }
+                }}
+                onTimeUpdate={handleProgress}
+                onEnded={() => track('video_complete', 100)}
+                onError={() => {
+                  setMediaError(true);
+                  track('video_error');
+                }}
+              />
+            </div>
           ) : !showStatusPanel ? (
             /* Drei Kernpunkte: mobil als Wischreihe (bei weniger als drei
                kompakt untereinander), ab md das bisherige Raster. */
@@ -224,7 +195,7 @@ const B2BExplainerVideo = ({
                     track('video_booking_click');
                     onBookingCta?.();
                   }}
-                  className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#25c990] px-8 py-3 text-base font-bold text-white shadow-[0_12px_30px_rgba(7,96,70,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1fb37f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-2 motion-reduce:transform-none"
+                  className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#25c990] px-8 py-3 text-base font-bold text-[#07111f] shadow-[0_12px_30px_rgba(7,96,70,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1fb37f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-2 motion-reduce:transform-none"
                 >
                   {bookingCtaLabel}
                 </button>
@@ -239,7 +210,7 @@ const B2BExplainerVideo = ({
                 track('video_cta_click');
                 onCta?.();
               }}
-              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#25c990] px-8 py-3 text-base font-bold text-white shadow-[0_12px_30px_rgba(7,96,70,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1fb37f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-2 motion-reduce:transform-none"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#25c990] px-8 py-3 text-base font-bold text-[#07111f] shadow-[0_12px_30px_rgba(7,96,70,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1fb37f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-2 motion-reduce:transform-none"
             >
               {ctaLabel}
             </button>

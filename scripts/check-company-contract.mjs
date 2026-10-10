@@ -15,6 +15,7 @@ const solutions = readText('src/components/company/CompanySolutions.jsx');
 const economics = readText('src/components/company/CompanyEconomics.jsx');
 const workforce = readText('src/components/company/CompanyWorkforceConcept.jsx');
 const explainerVideos = readText('src/components/company/CompanyExplainerVideo.jsx');
+const player = readText('src/components/sections/shared/ClickToPlayVideo.jsx');
 assert(
   fs.existsSync(path.join(rootDir, 'src/components/company/CompanyBavLeverage.jsx')),
   'Der kompakte bAV-Hebel fehlt.',
@@ -55,14 +56,17 @@ assert.match(workforce, /healio-belegschaft/);
 assert.match(workforce, /https:\/\/kassenboost\.de\/\?utm_source=healio&utm_medium=website&utm_campaign=arbeitgeberzugang/);
 assert.match(workforce, /useLanguage/);
 assert.match(explainerVideos, /lang !== 'de'/);
-assert.match(explainerVideos, /controls/);
-assert.match(explainerVideos, /playsInline/);
-assert.match(explainerVideos, /preload="none"/);
-assert.match(explainerVideos, /kind="captions"/);
-assert.doesNotMatch(explainerVideos, /autoPlay|autoplay/);
+assert.match(explainerVideos, /ClickToPlayVideo/);
+assert.match(player, /controls=\{started\}/);
+assert.match(player, /playsInline/);
+assert.match(player, /preload="none"/);
+assert.match(player, /kind="captions"/);
+assert.doesNotMatch(player, /autoPlay|autoplay/);
 assert.match(explainerVideos, /erklaervideo-unternehmen-1-v1\.mp4/);
 assert.match(explainerVideos, /erklaervideo-unternehmen-2-v1\.mp4/);
-assert.match(explainerVideos, /bav-zahlenbeispiel-b-v4\.mp4/);
+assert.doesNotMatch(explainerVideos, /bav-zahlenbeispiel-b-v4\.mp4/);
+assert.equal((page.match(/<CompanyExplainerVideo /g) || []).length, 2, 'Genau die beiden aktuellen Unternehmensfilme bleiben eingebettet.');
+assert.doesNotMatch(page, /kind="bav"/);
 [
   'public/videos/erklaerfilme/erklaervideo-unternehmen-1-v1.mp4',
   'public/videos/erklaerfilme/erklaervideo-unternehmen-1-v1-poster.jpg',
@@ -153,8 +157,9 @@ assert(
   'Video A muss zwischen Reality Check und Produktbausteinen stehen.',
 );
 assert(
-  page.indexOf('<CompanyBavLeverage />') < page.indexOf('<CompanyExplainerVideo kind="bav" />'),
-  'Video B muss direkt nach dem bAV-Zahlenbeispiel stehen.',
+  page.indexOf('<CompanyHero />') < page.indexOf('<CompanyExplainerVideo kind="weckruf" />')
+    && page.indexOf('<CompanyExplainerVideo kind="weckruf" />') < page.indexOf('<CompanyRealityCheck />'),
+  'Der aktuelle Weckruf-Film muss direkt auf den Hero folgen.',
 );
 assert(
   page.indexOf('<CompanyProcess />') < page.indexOf('<CompanyWorkforceConcept />'),

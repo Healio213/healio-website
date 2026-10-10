@@ -336,8 +336,8 @@
       "subtitle": "Compare choice of doctor, private rooms and twin rooms. Health questions and policy terms determine cover; affordable accident-only cover applies only after an accident. Your health fund bonus may usually offset part of the regular hospital premium, often all of the accident-only premium.",
       "cta": "Choose hospital cover",
       "micro": [
-        "Three plan routes, clearly separated",
-        "No waiting period for new insured events"
+        "Compare room and private medical care separately",
+        "SDK: no waiting period for new insured events"
       ],
       "visualAria": "Healio choice guide for SP2, SP1 and SPU",
       "visualTitle": "What matters to you in an emergency?",
@@ -363,8 +363,9 @@
     },
     "selector": {
       "eyebrow": "Your options at a glance",
-      "title": "Three routes. One fits your sense of security.",
+      "title": "Which hospital cover suits you?",
       "subtitle": "The premium is not the only factor: what matters is when cover should apply. Choose the scope first, then see your personal premium.",
+      "sdkTitle": "With private medical care: the three SDK hospital plans",
       "choose": "Choose this cover",
       "selected": "Selected",
       "resultEyebrow": "Your chosen direction",
@@ -420,8 +421,8 @@
     "benefits": {
       "eyebrow": "Benefits before price",
       "title": "When it matters, what is actually insured counts.",
-      "subtitle": "Statutory insurance covers medically necessary care. Your hospital plan adds the optional services that matter to you personally.",
-      "contextTitle": "Important: the plan determines when cover applies",
+      "subtitle": "Statutory insurance covers medically necessary care. These are the optional services offered by SDK hospital plans. DKV UZ1 is the separate single-room option without private medical treatment.",
+      "contextTitle": "SDK: the plan determines when cover applies",
       "contextBody": "SP1 and SP2 apply within the agreed scope for illness and accidents. SPU covers the hospital extras only after an accident.",
       "cards": {
         "doctor": {
@@ -437,8 +438,8 @@
           "body": "You choose the hospital freely, including a specialist hospital. In a private clinic the plan pays the costs above the rate of a contracted hospital, provided your statutory insurer pays that rate. If your insurer does not pay that rate, you bear the general hospital costs yourself."
         },
         "start": {
-          "title": "No policy waiting period",
-          "body": "New insured events are covered from the policy start date. Events that occurred before then are not insured."
+          "title": "SDK: no policy waiting period",
+          "body": "With SDK, new insured events are covered from the policy start date. Events that occurred before then are not insured. DKV UZ1 has its own waiting periods."
         }
       }
     },

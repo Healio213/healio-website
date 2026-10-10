@@ -108,7 +108,7 @@ const TikTokPage = () => {
               alt="Healio Logo"
               className="h-10 w-auto mx-auto brightness-0 invert"
             />
-            <p className="text-[15px] text-slate-400 mt-1">{t('header.tagline')}</p>
+            <h1 className="text-[15px] font-normal text-slate-400 mt-1">{t('header.tagline')}</h1>
             <p className="text-[14px] text-home-mint-active font-semibold mt-2 italic">{t('header.provocation')}</p>
           </motion.header>
 

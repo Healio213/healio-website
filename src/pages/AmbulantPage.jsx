@@ -6,7 +6,7 @@ import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 import AmbulantHero from '@/components/sections/ambulant/AmbulantHero';
 import DesktopLead from '@/components/desktop/DesktopLead';
-import AmbulantConversionFlow, { getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
+import AmbulantConversionFlow, { AmbulantExplainerVideo, getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
 import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
@@ -55,18 +55,18 @@ const AmbulantPage = () => {
   return (
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
-      {/* Experiment 06.10.2026: mobil stehen die Abschnitte als Geschwister in
-          einer Spalte und folgen der Reihenfolge, wie ein Besucher denkt (Hero,
-          Siegel, Erklärvideo, Situation, Tarif, Finanzierung und Bonus, Ablauf,
-          Fragen). Die Nummern stehen an den Abschnitten (order-N md:order-none);
-          ab md bleibt es ein normaler Block mit der bisherigen Reihenfolge. */}
+      {/* Hero, Film und Siegel folgen auf allen Bildschirmgrößen derselben
+          Reihenfolge. Mobil bleiben Situation, Tarif und Bonus danach kompakt. */}
       <div className="flex min-h-screen flex-col bg-white md:block">
         <DesktopLead surface="ambulant" language={lang} fromBonusTopic={fromBonusTopic} />
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
-        {/* Siegel direkt unter dem Hero, wie auf /partner. */}
+        {/* Frank 10.10.: Film direkt unter dem Hero, vor Siegeln und Karten. */}
         <div className="order-2 md:contents">
+          <AmbulantExplainerVideo />
+        </div>
+        <div className="order-3 md:contents">
           <HealioAwardsRow size="large" />
         </div>
         {/* Mobil direkt nach dem Erklärvideo (Experiment Handy-Conversion 10/2026):

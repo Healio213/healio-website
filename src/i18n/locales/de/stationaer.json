@@ -336,8 +336,8 @@
       "subtitle": "Vergleiche Arztwahl, Einbettzimmer und Zweibettzimmer. Gesundheitsfragen und Tarifbedingungen entscheiden; günstiger Unfallschutz gilt nur nach Unfall. Beim regulären Klinikschutz kann dein Kassenbonus den Beitrag meist teilweise, beim Unfallschutz oft ganz ausgleichen.",
       "cta": "Klinikschutz auswählen",
       "micro": [
-        "Drei Tarifwege klar getrennt",
-        "Keine Wartezeit für neue Versicherungsfälle"
+        "Zimmer und Arztwahl getrennt vergleichen",
+        "SDK: keine Wartezeit für neue Versicherungsfälle"
       ],
       "visualAria": "Healio Auswahlhilfe für SP2, SP1 und SPU",
       "visualTitle": "Was ist dir im Ernstfall wichtig?",
@@ -363,8 +363,9 @@
     },
     "selector": {
       "eyebrow": "Deine Entscheidung in einem Blick",
-      "title": "Drei Wege. Einer passt zu deinem Sicherheitsgefühl.",
+      "title": "Welcher Klinikschutz passt zu dir?",
       "subtitle": "Entscheidend ist nicht nur der Preis, sondern wann dein Schutz greifen soll. Wähle zuerst den Leistungsumfang. Den persönlichen Beitrag siehst du danach.",
+      "sdkTitle": "Mit Arztwahl: die drei Klinik-Tarife der SDK",
       "choose": "Diesen Schutz wählen",
       "selected": "Ausgewählt",
       "resultEyebrow": "Deine gewählte Richtung",
@@ -420,8 +421,8 @@
     "benefits": {
       "eyebrow": "Leistung vor Preis",
       "title": "Im Ernstfall zählt, was wirklich versichert ist.",
-      "subtitle": "Die gesetzliche Krankenkasse übernimmt die medizinisch notwendige Versorgung. Dein Klinik-Tarif ergänzt die Wahlleistungen, die dir persönlich wichtig sind.",
-      "contextTitle": "Wichtig: Der Tarif bestimmt den Anlass",
+      "subtitle": "Die gesetzliche Krankenkasse übernimmt die medizinisch notwendige Versorgung. Hier siehst du, welche Wahlleistungen die SDK-Klinik-Tarife ergänzen. DKV UZ1 ist der separate Weg fürs Einbettzimmer ohne privatärztliche Behandlung.",
+      "contextTitle": "SDK: Der Tarif bestimmt den Anlass",
       "contextBody": "SP1 und SP2 greifen im vereinbarten Umfang bei Krankheit und Unfall. SPU übernimmt die Klinik-Extras ausschließlich nach einem Unfall.",
       "cards": {
         "doctor": {
@@ -437,8 +438,8 @@
           "body": "Du wählst die Klinik frei, auch eine Fachklinik. In einer Privatklinik zahlt der Tarif die Kosten über dem Satz eines zugelassenen Krankenhauses, wenn deine Krankenkasse diesen Satz übernimmt. Übernimmt deine Kasse diesen Satz nicht, trägst du die allgemeinen Krankenhauskosten selbst."
         },
         "start": {
-          "title": "Keine tarifliche Wartezeit",
-          "body": "Neue Versicherungsfälle sind ab Versicherungsbeginn geschützt. Bereits vorher eingetretene Versicherungsfälle sind nicht versichert."
+          "title": "SDK: keine tarifliche Wartezeit",
+          "body": "Bei der SDK sind neue Versicherungsfälle ab Versicherungsbeginn geschützt. Bereits vorher eingetretene Versicherungsfälle sind nicht versichert. DKV UZ1 hat eigene Wartezeiten."
         }
       }
     },

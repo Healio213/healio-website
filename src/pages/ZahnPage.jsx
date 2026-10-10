@@ -108,9 +108,8 @@ const ZahnPage = () => {
         schemaMarkup={createServiceSchema()}
       />
 
-      {/* Handy-Reihenfolge nach Vorgabe (06.10.2026): Einstieg, Siegel,
-          Erklärvideo, dann der Ablauf. Nur unter md per CSS-Reihenfolge, am
-          Desktop bleibt die bisherige Abfolge. */}
+      {/* Einstieg und Erklärvideo stehen auf allen Bildschirmgrößen direkt
+          hintereinander, danach Siegel, Situationen und der Zahn-Check. */}
       <article className="flex flex-col overflow-hidden bg-white text-[#07111f] md:block">
         <DesktopLead surface="zahn" language={lang} />
         {/* Hero wie auf /stationaer (Frank 30.09.2026: Foto am Tresen "geht gar
@@ -232,18 +231,15 @@ const ZahnPage = () => {
           </div>
         </section>
 
-        {/* Produktpassende Siegel direkt unter dem Hero, wie auf /ambulant. */}
-        <HealioAwardsRow size="large" productSet="zahn" className="order-[-2] md:order-none" />
-
-        {/* Experiment 05.10.2026: Highlight-Karten nach dem Vorbild von
-            mercedes-benz.de, nur auf diesem Zweig, nicht live. */}
-        <DentalHighlightCards />
-
         {lang === 'de' && (
-          <div className="order-[-1] md:order-none">
+          <div className="order-[-2] md:order-none">
             <DentalVideoSection />
           </div>
         )}
+
+        <HealioAwardsRow size="large" productSet="zahn" className="order-[-1] md:order-none" />
+
+        <DentalHighlightCards />
 
         <DentalZahnCheck />
 

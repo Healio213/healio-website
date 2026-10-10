@@ -89,10 +89,6 @@ const HeilberufeVorsorgePage = () => {
     en: 'https://healio.de/en/healthcare-professionals-protection',
   };
 
-  const scrollToCTA = () => {
-    document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const schemaMarkup = createWebPageSchema(
     tSeo('heilberufe.title'),
     tSeo('heilberufe.description'),
@@ -130,9 +126,9 @@ const HeilberufeVorsorgePage = () => {
               style={{ backgroundImage: "url('/images/hero-heilberufe-vorsorge.webp')" }}
             />
             {/* Sehr zarter Gradient links, nur so viel wie nötig für Lesbarkeit */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/55 via-slate-900/5 to-transparent z-10" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,23,38,0.94)_0%,rgba(7,23,38,0.88)_48%,rgba(7,23,38,0.24)_100%)] z-10" />
             {/* Mobil dunkelt ein zarter Schleier das Foto ab, damit der weiße Text über der ganzen Breite lesbar bleibt */}
-            <div className="absolute inset-0 bg-slate-900/30 z-10 md:hidden" />
+            <div className="absolute inset-0 bg-[#071726]/55 z-10 md:hidden" />
           </div>
 
           <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8">
@@ -143,11 +139,11 @@ const HeilberufeVorsorgePage = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span className="inline-flex items-center gap-2 bg-home-mint/15 text-healio-primary-dark text-sm font-medium px-4 py-1.5 rounded-full">
+                <span className="inline-flex items-center gap-2 border border-white/25 bg-[#071726]/40 text-white text-sm font-medium px-4 py-1.5 rounded-full">
                   <Stethoscope className="w-4 h-4" />
                   {t('hero.badge')}
                 </span>
-                <span className="inline-flex items-center gap-2 bg-[#25c990]/15 text-[#25c990] text-sm font-medium px-4 py-1.5 rounded-full ring-1 ring-[#25c990]/30">
+                <span className="inline-flex items-center gap-2 bg-[#071726]/40 text-[#75e6bf] text-sm font-medium px-4 py-1.5 rounded-full ring-1 ring-[#25c990]/30">
                   <Sparkles className="w-4 h-4" />
                   {t('hero.exclusiveLabel')}
                 </span>
@@ -161,21 +157,20 @@ const HeilberufeVorsorgePage = () => {
               <p className="text-base text-white/90 mb-6 sm:mb-10 max-w-2xl drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
                 {t('hero.description')}
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button
-                  onClick={scrollToCTA}
-                  className="bg-[#25c990] hover:bg-[#1fb37f] text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                  asChild
+                  className="h-auto min-h-12 bg-[#25c990] hover:bg-[#1fb37f] text-[#071726] text-base sm:text-lg px-6 sm:px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
-                  {t('hero.ctaPrimary')}
+                  <Link to={getPath('terminvereinbarung')}>{t('hero.ctaPrimary')}</Link>
                 </Button>
-                <Link to={getPath('partner')}>
-                  <Button
-                    variant="outline"
-                    className="bg-white/10 border-white/40 text-white hover:bg-white/20 text-lg px-8 py-6 rounded-xl"
-                  >
-                    {t('hero.ctaSecondary')}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-auto min-h-12 bg-white/10 border-white/40 text-white hover:bg-white/20 hover:text-white text-base sm:text-lg px-6 sm:px-8 py-4 rounded-xl"
+                >
+                  <Link to={getPath('partner')}>{t('hero.ctaSecondary')}</Link>
+                </Button>
               </div>
               <div className="mt-6 sm:mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/95 drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]">
                 {trustPoints.map((point, i) => (
@@ -607,7 +602,10 @@ const HeilberufeVorsorgePage = () => {
                     }`}
                   >
                     <button
-                      className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 transition-colors"
+                      type="button"
+                      id={`heilberufe-faq-question-${i}`}
+                      className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#087454]"
+                      aria-controls={`heilberufe-faq-answer-${i}`}
                       onClick={() => setOpenFaq(isOpen ? null : i)}
                       aria-expanded={isOpen}
                     >
@@ -618,11 +616,15 @@ const HeilberufeVorsorgePage = () => {
                         <ChevronDown className="w-4 h-4" />
                       </div>
                     </button>
-                    {isOpen && (
-                      <div className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                        {item.a}
-                      </div>
-                    )}
+                    <div
+                      id={`heilberufe-faq-answer-${i}`}
+                      role="region"
+                      aria-labelledby={`heilberufe-faq-question-${i}`}
+                      hidden={!isOpen}
+                      className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4"
+                    >
+                      {item.a}
+                    </div>
                   </div>
                 );
               })}
@@ -663,11 +665,9 @@ const HeilberufeVorsorgePage = () => {
                 <p className="text-white/75 mb-6 leading-relaxed">
                   {t('cta.primary.description')}
                 </p>
-                <Link to={getPath('terminvereinbarung')}>
-                  <Button className="w-full bg-[#25c990] hover:bg-[#1fb37f] text-white py-6 rounded-xl">
-                    {t('cta.primary.cta')}
-                  </Button>
-                </Link>
+                <Button asChild className="h-auto min-h-12 w-full bg-[#25c990] hover:bg-[#1fb37f] text-[#071726] py-4 rounded-xl">
+                  <Link to={getPath('terminvereinbarung')}>{t('cta.primary.cta')}</Link>
+                </Button>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-5 sm:p-8 border border-white/10">
                 <FriendlyIcon
@@ -682,14 +682,13 @@ const HeilberufeVorsorgePage = () => {
                 <p className="text-white/75 mb-6 leading-relaxed">
                   {t('cta.secondary.description')}
                 </p>
-                <Link to={getPath('kontakt')}>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-white/10 border-white/40 text-white hover:bg-white/20 py-6 rounded-xl"
-                  >
-                    {t('cta.secondary.cta')}
-                  </Button>
-                </Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-auto min-h-12 w-full bg-white/10 border-white/40 text-white hover:bg-white/20 hover:text-white py-4 rounded-xl"
+                >
+                  <Link to={getPath('kontakt')}>{t('cta.secondary.cta')}</Link>
+                </Button>
               </div>
             </div>
             <p className="text-sm sm:text-xs text-white/50 text-center mt-6 sm:mt-12 max-w-2xl mx-auto leading-relaxed sm:leading-relaxed">

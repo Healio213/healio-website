@@ -23,9 +23,9 @@ const TARIFFS = ['Prestige', 'Komfort', 'Smart'];
 
 const COPY = {
   de: {
-    eyebrow: 'Zweiter Klinik-Versicherer',
+    eyebrow: 'Weitere Klinik-Tarife',
     title: 'Lieber die Bayerische? Auch das geht.',
-    lead: 'Healio bietet dir zwei Klinik-Versicherer an: die SDK mit den drei Tarifen oben und die Bayerische. Du wählst, was besser zu dir passt.',
+    lead: 'Neben der SDK und dem Einbettzimmer-Tarif DKV UZ1 kannst du auch die Klinik-Tarife der Bayerischen vergleichen. Du wählst, was besser zu dir passt.',
     tariffsLabel: 'Klinik-Tarife der Bayerischen',
     facts: [
       {
@@ -52,9 +52,9 @@ const COPY = {
     pregnancyLink: 'Dann lies zuerst, was ein Klinik-Tarif jetzt noch leistet.',
   },
   en: {
-    eyebrow: 'Second hospital insurer',
+    eyebrow: 'More hospital plans',
     title: 'Prefer die Bayerische? That works too.',
-    lead: 'Healio offers you two hospital insurers: SDK with the three plans above, and die Bayerische. You choose what suits you better.',
+    lead: 'Alongside SDK and the single-room plan DKV UZ1, you can compare hospital plans from die Bayerische. You choose what suits you better.',
     tariffsLabel: 'Hospital plans from die Bayerische',
     facts: [
       {

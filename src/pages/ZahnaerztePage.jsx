@@ -36,6 +36,13 @@ const ZahnaerztePage = () => {
     });
   };
 
+  const scrollToVideo = () => {
+    document.getElementById('zahnaerzte-erklaervideo')?.scrollIntoView({
+      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  };
+
   const scrollToBoundaries = () => {
     document.getElementById('klare-rollen')?.scrollIntoView({
       behavior: shouldReduceMotion ? 'auto' : 'smooth',
@@ -124,7 +131,7 @@ const ZahnaerztePage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Mobil bestimmt order die Reihenfolge (Einstieg, Vertrauensleiste, Situation, Nutzen, Bonus, Rollen, Praxis-Set,
+      {/* Mobil bestimmt order die Reihenfolge (Einstieg, Erklärvideo, Vertrauensleiste, Situation, Nutzen, Bonus, Rollen, Praxis-Set,
           Gründer, Fragen, Termin), ab md bleibt es der bisherige Blocksatz in Quellreihenfolge. */}
       <main className="flex w-full flex-col overflow-hidden bg-[#f7faf9] text-[#17252d] md:block">
         <section className="relative order-1 md:order-none flex w-full items-center overflow-hidden bg-[#07111f] pb-16 pt-28 text-white sm:min-h-[92svh] sm:pb-24 sm:pt-36 lg:min-h-[760px] lg:pb-28 lg:pt-40">
@@ -152,7 +159,7 @@ const ZahnaerztePage = () => {
               <p className="mb-4 inline-flex rounded-full border border-white/20 bg-[#07111f]/30 px-4 py-2 font-display text-sm font-bold uppercase tracking-[0.12em] text-[#75e6bf] backdrop-blur-sm sm:mb-6 sm:text-xs sm:tracking-[0.2em]">
                 {t('hero.eyebrow')}
               </p>
-              <h1 className="max-w-[46rem] font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.045em] text-white drop-shadow-sm sm:text-5xl md:text-6xl lg:text-[4.55rem]">
+              <h1 className="max-w-[46rem] font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-white drop-shadow-sm sm:text-5xl md:text-6xl lg:text-[4.55rem]">
                 <HighlightText text={t('hero.title')} className="text-[#75e6bf]" />
               </h1>
               <p className="mt-5 max-w-[42rem] text-lg leading-7 text-white/88 sm:mt-7 sm:text-xl">
@@ -170,10 +177,10 @@ const ZahnaerztePage = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={scrollToBoundaries}
+                  onClick={lang === 'de' ? scrollToVideo : scrollToBoundaries}
                   className="h-auto min-h-14 rounded-xl border-white/30 bg-[#07111f]/25 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm hover:border-white/50 hover:bg-[#07111f]/40 hover:text-white focus-visible:ring-[#75e6bf]"
                 >
-                  {t('hero.secondaryCta')}
+                  {lang === 'de' ? 'Erklärvideo ansehen' : t('hero.secondaryCta')}
                   <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Button>
               </div>
@@ -185,7 +192,24 @@ const ZahnaerztePage = () => {
           </div>
         </section>
 
-        <section className="relative z-20 order-2 -mt-8 px-4 sm:px-6 md:order-none md:px-8" aria-label={t('proof.label')}>
+        {/* Erklärfilm für Praxen (08.10.2026, nur Deutsch): direkt unter dem Hero,
+            vor Vertrauensleiste und Laufband, auf Handy und Rechner. */}
+        <div className="order-2 md:contents">
+          {lang === 'de' && (
+            <ExplainerVideoCard
+              id="zahnaerzte-erklaervideo"
+              videoSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1.mp4"
+              poster="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-poster.jpg"
+              captionsSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-de.vtt"
+              eyebrow={t('explanationVideo.eyebrow')}
+              title={t('explanationVideo.title')}
+              ariaLabel={t('explanationVideo.aria')}
+              className="bg-[#f7faf9]"
+            />
+          )}
+        </div>
+
+        <section className="relative z-20 order-3 px-4 py-6 sm:px-6 md:order-none md:px-8 md:py-8" aria-label={t('proof.label')}>
           <div className="container mx-auto px-0 md:px-8 grid max-w-6xl border border-[#dbe6e3] bg-white shadow-[0_18px_55px_rgba(7,17,31,0.08)] md:grid-cols-3">
             {proofItems.map((item, index) => {
               const icon = proofIcons[index] || proofIcons[0];
@@ -202,23 +226,8 @@ const ZahnaerztePage = () => {
           </div>
         </section>
 
-        {/* Erklärfilm für Praxen (08.10.2026, nur Deutsch): direkt nach Einstieg,
-            Vertrauensleiste und Laufband, vor der Situation. Er steht in derselben
-            Hülle wie das Laufband, damit die mobile Reihenfolge gleich bleibt. */}
         <div className="order-3 md:contents">
           <ProductTicker variant="zahnaerzte" />
-          {lang === 'de' && (
-            <ExplainerVideoCard
-              id="zahnaerzte-erklaervideo"
-              videoSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1.mp4"
-              poster="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-poster.jpg"
-              captionsSrc="/videos/erklaerfilme/erklaervideo-zahnaerzte-v1-de.vtt"
-              eyebrow={t('explanationVideo.eyebrow')}
-              title={t('explanationVideo.title')}
-              ariaLabel={t('explanationVideo.aria')}
-              className="bg-[#f7faf9]"
-            />
-          )}
         </div>
 
         <section className="order-4 px-4 py-10 sm:px-6 sm:py-24 md:order-none md:px-8 lg:py-32">
@@ -261,7 +270,7 @@ const ZahnaerztePage = () => {
                     <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                     {insurerHighlights[0].kicker}
                   </span>
-                  <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.045em] text-[#087654] sm:mt-7 sm:text-5xl">
+                  <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.035em] text-[#087654] sm:mt-7 sm:text-5xl">
                     1.500 EUR
                   </p>
                 </div>
@@ -295,7 +304,7 @@ const ZahnaerztePage = () => {
                       <ShieldCheck className="h-4 w-4 flex-none" aria-hidden="true" />
                       {insurerHighlights[0].kicker}
                     </span>
-                    <p className="mt-3 font-display text-4xl font-extrabold tracking-[-0.045em] text-[#087654]">
+                    <p className="mt-3 font-display text-4xl font-extrabold tracking-[-0.035em] text-[#087654]">
                       1.500 EUR
                     </p>
                     <h3 className="mt-3 font-display text-xl font-extrabold leading-7 tracking-[-0.02em] text-[#07111f]">
@@ -430,7 +439,7 @@ const ZahnaerztePage = () => {
               })}
             </MobileSwipeRow>
 
-            <motion.div {...revealProps(0.12)} className="mt-5 grid gap-3 border-l-4 border-[#25c990] bg-[#edf7f4] p-5 sm:mt-7 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-4 sm:p-7">
+            <motion.div {...revealProps(0.12)} className="mt-5 grid gap-3 border border-[#cbdeda] bg-[#edf7f4] p-5 sm:mt-7 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-4 sm:p-7">
               <FriendlyIcon kind="support" tone="mint" size="sm" />
               <div>
                 <p className="font-display font-extrabold text-[#07111f]">{t('legal.closingTitle')}</p>
@@ -499,7 +508,7 @@ const ZahnaerztePage = () => {
           </div>
         </section>
 
-        <section className="order-11 md:order-none bg-[#25c990] px-4 py-10 sm:px-6 sm:py-20 md:px-8 lg:py-24">
+        <section id="calendly-zahnaerzte" className="order-11 md:order-none scroll-mt-24 bg-[#25c990] px-4 py-10 sm:px-6 sm:py-20 md:px-8 lg:py-24">
           <div className="container mx-auto px-0 md:px-8 max-w-5xl text-center">
             <motion.div {...revealProps()}>
               <p className="font-mono text-sm font-bold uppercase tracking-[0.1em] sm:text-xs sm:tracking-[0.18em] text-[#064c38]">{t('cta.eyebrow')}</p>
@@ -510,7 +519,7 @@ const ZahnaerztePage = () => {
             </motion.div>
 
             <motion.div {...revealProps(0.08)} className="mt-6 bg-white p-3 shadow-[0_28px_80px_rgba(7,17,31,0.18)] sm:mt-10 sm:p-5">
-              <div id="calendly-zahnaerzte" className="scroll-mt-24 overflow-hidden">
+              <div className="overflow-hidden">
                 <AppointmentBooking
                   placement="dentists_page"
                   title={t('cta.calendarTitle')}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play } from 'lucide-react';
+import ClickToPlayVideo from '@/components/sections/shared/ClickToPlayVideo';
 
 const ExplainerVideoCard = ({
   id,
@@ -38,19 +39,15 @@ const ExplainerVideoCard = ({
           </div>
         </div>
         <div className="overflow-hidden rounded-[1.25rem] bg-home-midnight p-1.5 sm:rounded-[1.55rem] sm:p-2">
-          <video
+          <ClickToPlayVideo
+            src={videoSrc}
             className="aspect-video w-full rounded-[0.95rem] bg-black object-cover sm:rounded-[1.15rem]"
-            controls
-            preload="none"
-            playsInline
             poster={poster}
-            aria-label={ariaLabel}
-          >
-            <source src={videoSrc} type="video/mp4" />
-            {captionsSrc && (
-              <track kind="captions" src={captionsSrc} srcLang={captionsLang} label={captionsLabel} />
-            )}
-          </video>
+            ariaLabel={ariaLabel}
+            captionsSrc={captionsSrc}
+            captionsLang={captionsLang}
+            captionsLabel={captionsLabel}
+          />
         </div>
 
         {(subtitle || disclosure) && <div className="px-3 py-3 sm:px-5 sm:py-4">
