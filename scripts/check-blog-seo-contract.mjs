@@ -159,8 +159,9 @@ assert.match(sitemapEntry('https://healio.de/unternehmen'), /<lastmod>2026-09-01
 assert.match(sitemapEntry('https://healio.de/blog'), /<lastmod>2026-09-02<\/lastmod>/);
 assert.match(sitemapEntry('https://healio.de/blog'), /<changefreq>weekly<\/changefreq>/);
 for (const article of articles) {
-  const expectedLastmod = BLOG_CORRECTION_SLUGS_2026_10_06.has(article.slug)
-    ? '2026-10-06'
+  const expectedLastmod = ['naturheilkunde-krankenkasse-2026', 'osteopathie-krankenkasse-2026'].includes(article.slug)
+    ? '2026-10-10'
+    : BLOG_CORRECTION_SLUGS_2026_10_06.has(article.slug) ? '2026-10-06'
     : NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
   assert.match(
     sitemapEntry(`https://healio.de/blog/${article.slug}`),

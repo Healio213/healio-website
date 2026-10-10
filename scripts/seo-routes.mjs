@@ -371,14 +371,14 @@ export const seoRoutes = [
   {
     path: '/blog/osteopathie-krankenkasse-2026',
     title: 'Osteopathie Krankenkasse 2026: Erstattung & Budget | Healio',
-    description: 'Welche Krankenkasse zahlt Osteopathie? Überblick zu Zuschüssen, Grenzen und dem Gesundheitsbudget von bis zu 3.000 € in 2 Jahren über Healio.',
+    description: 'Osteopathie-Kostenübernahme 2026: Kassenzuschuss, Nachweise und private Tarifgrenzen vergleichen. Bestehende Behandlungen vor einem neuen Vertrag gesondert prüfen.',
     canonical: 'https://healio.de/blog/osteopathie-krankenkasse-2026',
     lang: 'de',
   },
   {
     path: '/blog/naturheilkunde-krankenkasse-2026',
     title: 'Naturheilkunde Krankenkasse 2026: Was wird erstattet? | Healio',
-    description: 'Naturheilkunde, Akupunktur, TCM und Heilpraktiker: Was gesetzliche Krankenkassen zahlen und wie ein Gesundheitsbudget hilft.',
+    description: 'Naturheilkunde und Krankenkasse 2026: Leistungen, Kassenzuschüsse und Zusatzversicherung unterscheiden. TK-Osteopathie und Tarifgrenzen verständlich einordnen.',
     canonical: 'https://healio.de/blog/naturheilkunde-krankenkasse-2026',
     lang: 'de',
   },
