@@ -24,6 +24,11 @@ const hasOnlyParams = (url, allowed, required) => {
   return Object.entries(required).every(([key, value]) => url.searchParams.get(key) === value);
 };
 
+// V100 wird über ein persönliches Angebot vermittelt. Dies ist ausschließlich
+// unser Anfrageziel, kein Kundenrechner oder Onlineabschluss bei ARAG.
+export const ARAG_OFFER_URL = 'https://healio.de/ambulant?angebot=arag-v100';
+export const isPersonalOfferUrl = (value) => value === ARAG_OFFER_URL;
+
 // Der SDK-Empfehlungscode bleibt erhalten. Freie Daten im Base64-Feld werden
 // abgewiesen, damit sich dort keine Formulareingaben verstecken lassen.
 const isSdkCustomValues = (value) => {
@@ -50,9 +55,19 @@ export const validateApplicationUrl = (value) => {
     const url = new URL(value);
     if (url.protocol !== 'https:' || url.username || url.password || url.port || url.hash) return null;
 
+    if (isPersonalOfferUrl(url.toString())) return url.toString();
+
     if (url.hostname === 'www.diebayerische.de'
-      && url.pathname === '/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen'
+      && ['/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen', '/online-berechnen/krankenhauszusatzversicherung-berechnen/'].includes(url.pathname)
       && hasOnlyParams(url, new Set(['m', 'um']), { m: '002637', um: 'MAK226487' })) {
+      return url.toString();
+    }
+
+    // Persönlicher Fonds-Finanz-Link für den reinen Einbettzimmer-Tarif.
+    // Weder Vermittlerzuordnung noch zusätzliche Kundendaten verändern.
+    if (url.hostname === 'www.beitragsrechner.dkv.com'
+      && url.pathname === '/tarifrechner/600085/UZ1'
+      && hasOnlyParams(url, new Set(['leitmerk']), { leitmerk: 'MAK226487' })) {
       return url.toString();
     }
 
@@ -82,8 +97,8 @@ export const validateApplicationUrl = (value) => {
 };
 
 const SOURCE_PAGES = new Set([
-  '/ambulant', '/zahn', '/kassenbonus', '/tierkrankenversicherung',
-  '/en/outpatient', '/en/dental', '/en/health-insurance-bonus', '/en/pet-insurance',
+  '/ambulant', '/zahn', '/stationaer', '/kassenbonus', '/tierkrankenversicherung',
+  '/en/outpatient', '/en/dental', '/en/inpatient', '/en/health-insurance-bonus', '/en/pet-insurance',
 ]);
 
 /** Nur die freigegebenen Seitenpfade, ohne Query, Hash oder Antworten. */

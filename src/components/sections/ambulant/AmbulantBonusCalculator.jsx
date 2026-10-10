@@ -566,7 +566,7 @@ const AmbulantBonusCalculator = ({
                   ) : (
                     <LeadCaptureLink
                       href={calculatorUrl}
-                      trackingCategory="sdk-ambulant"
+                      trackingCategory={tarifTypes === 'Stationär' ? 'sdk-stationaer' : 'sdk-ambulant'}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackSdkClick('bonus-calculator', referrer)}

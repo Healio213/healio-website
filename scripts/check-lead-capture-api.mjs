@@ -14,6 +14,9 @@ const constant = (source, name) => source.match(new RegExp(`const ${name} = '([^
 const bayerischeUrl = constant(dentalSource, 'BAYERISCHE_RAW_URL');
 const ukvUrl = constant(dentalSource, 'UKV_RAW_URL');
 const ukvAmbulantUrl = ukvUrl.replace('&tarifftypes=Zahn&', '&tarifftypes=Ambulant&').replace('&tariffs=&', '&tariffs=UKVVorsorgePRIVAT@&');
+const dkvUrl = 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487';
+const aragOfferUrl = 'https://healio.de/ambulant?angebot=arag-v100';
+const bayerischeStationaerUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=002637&um=MAK226487';
 const sdkUrl = (custom = {}) => `https://insurances-online.levelnine.biz/?${new URLSearchParams({
   mandant: 'sdk', tarifftypes: 'Ambulant', agentId1: constant(sdkSource, 'AGENT_ID'), agentId2: '',
   insurers: constant(sdkSource, 'INSURER_ID'), tariffs: '', customValues: btoa(JSON.stringify(custom)),
@@ -58,6 +61,57 @@ test('falsche Anbieter, verschobene Zuordnung und zusätzliche Eingabedaten werd
     sdkUrl({ email: 'test@example.test' }), sdkUrl().replace('https://', 'https://user:pass@'),
     sdkUrl().replace('.biz/', '.biz:444/'), sdkUrl().replace('.biz/', '.biz/another-path'),
   ]) assert.equal(validateApplicationUrl(url), null, url);
+});
+
+test('DKV UZ1 behält genau die bestätigte Fonds-Finanz-Zuordnung, keine freien Kundendaten', () => {
+  assert.equal(validateApplicationUrl(dkvUrl), dkvUrl);
+  for (const url of [
+    dkvUrl.replace('MAK226487', 'MAK999999'), dkvUrl.replace('600085', '600000'),
+    dkvUrl.replace('UZ1', 'UZ2'), dkvUrl.replace('www.beitragsrechner.dkv.com', 'evil.example.test'),
+    `${dkvUrl}&email=test@example.test`, `${dkvUrl}&leitmerk=MAK226487`, `${dkvUrl}#kunde`,
+  ]) assert.equal(validateApplicationUrl(url), null);
+});
+
+test('DKV-Anfrage von DE/EN-Stationär erreicht den bestehenden Empfänger unverändert', async () => {
+  for (const sourcePage of ['/stationaer', '/en/inpatient']) {
+    const { invoke, calls } = setup();
+    const body = { ...payload(), targetUrl: dkvUrl, sourcePage, trackingCategory: 'dkv-stationaer' };
+    assert.equal((await invoke(request(body))).code, 200);
+    assert.equal(calls.length, 1);
+    assert.deepEqual(JSON.parse(calls[0][1].body), body);
+  }
+});
+
+test('ARAG-Angebotsanfrage ist ausschließlich das eigene genaue Ziel mit passender Kategorie', async () => {
+  assert.equal(validateApplicationUrl(aragOfferUrl), aragOfferUrl);
+  for (const url of [aragOfferUrl.replace('healio.de', 'evil.example.test'), `${aragOfferUrl}&email=test@example.test`, aragOfferUrl.replace('arag-v100', 'other'), `${aragOfferUrl}#antrag`]) assert.equal(validateApplicationUrl(url), null);
+  for (const sourcePage of ['/ambulant', '/en/outpatient']) {
+    const { invoke, calls } = setup();
+    const body = { ...payload(), targetUrl: aragOfferUrl, sourcePage, trackingCategory: 'arag-v100' };
+    assert.equal((await invoke(request(body))).code, 200);
+    assert.deepEqual(JSON.parse(calls[0][1].body), body);
+  }
+  for (const body of [
+    { ...payload(), targetUrl: aragOfferUrl },
+    { ...payload(), trackingCategory: 'arag-v100' },
+  ]) {
+    const { invoke, calls } = setup();
+    assert.equal((await invoke(request(body))).code, 400);
+    assert.equal(calls.length, 0);
+  }
+});
+
+test('bestehende SDK- und Bayerische-Stationärlinks nutzen dieselbe Erfassung mit unveränderter Zuordnung', async () => {
+  const sdkStationaerUrl = sdkUrl().replace('tarifftypes=Ambulant', 'tarifftypes=Station%C3%A4r');
+  for (const sourcePage of ['/stationaer', '/en/inpatient']) {
+    for (const [targetUrl, trackingCategory] of [[sdkStationaerUrl, 'sdk-stationaer'], [bayerischeStationaerUrl, 'bayerische-stationaer']]) {
+      const { invoke, calls } = setup();
+      const body = { ...payload(), targetUrl, sourcePage, trackingCategory };
+      assert.equal((await invoke(request(body))).code, 200);
+      assert.deepEqual(JSON.parse(calls[0][1].body), body);
+    }
+  }
+  assert.equal(validateApplicationUrl(bayerischeStationaerUrl.replace('MAK226487', 'MAK999999')), null);
 });
 
 test('sourcePage enthält ausschließlich bekannte Pfade ohne Query, Hash und Antworten', () => {

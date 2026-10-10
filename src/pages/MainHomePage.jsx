@@ -57,7 +57,7 @@ const MainHomePage = () => {
           <ExplainerVideoCard
             id="startseite-erklaervideo"
             videoSrc="/videos/erklaerfilme/erklaervideo-startseite-v1.mp4"
-            poster="/videos/erklaerfilme/erklaervideo-startseite-v1-poster.jpg"
+            poster="/videos/erklaerfilme/erklaervideo-startseite-nutzen-v2-poster.jpg"
             captionsSrc="/videos/erklaerfilme/erklaervideo-startseite-v1-de.vtt"
             eyebrow={t('explanationVideo.eyebrow')}
             title={t('explanationVideo.title')}

@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl } from '../shared/lead-capture.js';
+import { isPersonalOfferUrl, isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl } from '../shared/lead-capture.js';
 
 const MAX_BODY_BYTES = 8192;
 const MAX_BUCKETS = 2048;
@@ -35,6 +35,9 @@ export const validateCapturePayload = (payload) => {
     return { error: 'invalid_timestamp' };
   }
   const lead = { firstName, email, targetUrl, timestamp: isoTimestamp, sourcePage };
+  if (isPersonalOfferUrl(targetUrl) !== (payload.trackingCategory === 'arag-v100')) {
+    return { error: 'invalid_tracking_category' };
+  }
   if (payload.trackingCategory !== undefined) {
     if (typeof payload.trackingCategory !== 'string' || !/^[a-z][a-z0-9_-]{0,63}$/.test(payload.trackingCategory)) {
       return { error: 'invalid_tracking_category' };

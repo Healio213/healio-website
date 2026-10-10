@@ -11,7 +11,6 @@ import PartnerRoleProcess from '@/components/sections/partner/PartnerRoleProcess
 import PartnerFAQ from '@/components/sections/partner/PartnerFAQ';
 import AmbulantMiaPrompt from '@/components/sections/ambulant/AmbulantMiaPrompt';
 import B2BExplainerVideo from '@/components/sections/B2BExplainerVideo';
-import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import HighlightText from '@/components/ui/HighlightText';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
@@ -85,7 +84,7 @@ const PartnerPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Mobil bestimmt order die Reihenfolge der Abschnitte (Einstieg, Video, Siegel, dann der Weg vom Verstehen bis zum Termin),
+      {/* Mobil bestimmt order die Reihenfolge der Abschnitte (Einstieg, Video, dann der Weg vom Verstehen bis zum Termin),
             ab md bleibt es der bisherige Blocksatz in Quellreihenfolge. */}
       <main className="bg-white overflow-hidden w-full flex flex-col md:block">
 
@@ -250,11 +249,6 @@ const PartnerPage = () => {
                 </div>
           </div>
         </section>
-
-        {/* QUALITÄTSSIEGEL: SDK + IKK, nach dem Erklärvideo */}
-        <div className="order-3 md:contents">
-          <HealioAwardsRow label={t('quality.label')} size="large" />
-        </div>
 
         {/* SECTION 2: PROBLEM AWARENESS */}
         <section className="order-4 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">

@@ -92,7 +92,7 @@
   },
   "langSwitch": "DE",
   "awards": {
-    "label": "Awards and tests for selected providers in the Healio concept",
+    "label": "Ratings for our product partners",
     "groups": {
       "sdk": "Our product partner SDK",
       "zahn": "Dental plans from our product partners",
@@ -108,6 +108,26 @@
       "fairness": "ntv German Fairness Award 2025 for SDK: overall winner among private health insurers, customer survey of 24 providers, German Institute for Service Quality",
       "ikkParents": "krankenkasseninfo.de health fund test for expectant and new parents: IKK classic grade 1.7 (good), as of 09/2026, 72 statutory health funds tested",
       "ikkFamily": "krankenkasseninfo.de health fund test for families: IKK classic grade 1.6 (good), as of 09/2026, 72 statutory health funds tested"
+    },
+    "details": {
+      "sdk": {
+        "title": "SDK · provider rating",
+        "result": "German Fairness Award 2025",
+        "scope": "Overall winner among private health insurers. Customer survey of 24 providers.",
+        "source": "ntv / DISQ · 2025"
+      },
+      "ukv": {
+        "title": "UKV · ZahnPRIVAT 100",
+        "result": "FFF+ · excellent (0.5)",
+        "scope": "Plan rating for ZahnPRIVAT 100, policy version 12/2024.",
+        "source": "Franke & Bornberg · 08/2026"
+      },
+      "bayerische": {
+        "title": "die Bayerische · ZAHN Prestige",
+        "result": "VERY GOOD (0.5)",
+        "scope": "278 dental plans tested. Rating for ZAHN Prestige.",
+        "source": "Stiftung Warentest · 09/2026"
+      }
     }
   }
 }
