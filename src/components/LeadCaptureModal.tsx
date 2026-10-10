@@ -5,6 +5,7 @@ import { trackGoogleAdsLead } from '../lib/google-ads.js';
 import {
   createLeadRequestId,
   hasCapturedLeadThisSession,
+  isPersonalOfferUrl,
   isValidLeadEmail,
   markLeadCapturedThisSession,
   navigateApplicationWindow,
@@ -23,6 +24,7 @@ export type LeadCaptureModalProps = {
 };
 
 export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingCategory, onExternalOpen }: LeadCaptureModalProps) {
+  const personalOffer = isPersonalOfferUrl(targetUrl);
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -49,7 +51,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     setError('');
     setSubmitting(false);
     setShortLoading(false);
-    setCaptured(isOpen && hasCapturedLeadThisSession());
+    setCaptured(isOpen && !personalOffer && hasCapturedLeadThisSession());
     requestIdRef.current = null;
     timestampRef.current = null;
     return () => {
@@ -62,7 +64,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
       if (windowRef.current && !windowRef.current.closed) windowRef.current.close();
       windowRef.current = null;
     };
-  }, [isOpen, targetUrl]);
+  }, [isOpen, targetUrl, personalOffer]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,12 +84,12 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     const destination = validateApplicationUrl(targetUrl);
     const sourcePage = sanitizeLeadSourcePage(window.location.pathname);
     if (!destination || !sourcePage) {
-      setError('Dieser Rechnerlink ist gerade nicht verfügbar.');
+      setError(personalOffer ? 'Diese Anfrage ist gerade nicht verfügbar.' : 'Dieser Rechnerlink ist gerade nicht verfügbar.');
       return;
     }
 
     // Reserve on the submit gesture. The insurer is loaded only after confirmed delivery.
-    const reservedWindow = reserveApplicationWindow();
+    const reservedWindow = personalOffer ? null : reserveApplicationWindow();
     windowRef.current = reservedWindow;
     const controller = new AbortController();
     const generation = generationRef.current;
@@ -125,7 +127,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
       setCaptured(true);
       setFirstName('');
       setEmail('');
-      if (navigateApplicationWindow(reservedWindow, destination)) {
+      if (!personalOffer && navigateApplicationWindow(reservedWindow, destination)) {
         windowRef.current = null;
         onExternalOpen?.();
         onClose();
@@ -170,14 +172,14 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
             <X className="h-5 w-5" aria-hidden="true" />
           </Dialog.Close>
           <img src="/healio-logo-white-web.svg" alt="Healio" width="100" height="40" className="mb-4 h-8 w-auto" />
-          <p className="mb-4 pr-8 text-[11px] font-semibold tracking-[0.12em] text-home-mint">KASSENBONUS EINREICHSERVICE</p>
-          <Dialog.Title className="max-w-[20ch] font-display text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[28px]">Wohin dürfen wir dir den Kassenbonus Leitfaden senden?</Dialog.Title>
-          <Dialog.Description className="mt-4 text-sm leading-6 text-slate-300">Sichere dir die Schritt für Schritt Anleitung für deinen Bonusabruf und Kassenwechsel, bevor du den Rechner startest.</Dialog.Description>
+          <p className="mb-4 pr-8 text-[11px] font-semibold tracking-[0.12em] text-home-mint">{personalOffer ? 'ARAG V100 · PERSÖNLICHES ANGEBOT' : 'KASSENBONUS EINREICHSERVICE'}</p>
+          <Dialog.Title className="max-w-[20ch] font-display text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[28px]">{personalOffer ? 'Wohin dürfen wir dir dein V100-Angebot senden?' : 'Wohin dürfen wir dir den Kassenbonus Leitfaden senden?'}</Dialog.Title>
+          <Dialog.Description className="mt-4 text-sm leading-6 text-slate-300">{personalOffer ? 'Wir melden uns per E-Mail, klären die passenden Leistungen und erstellen dein persönliches Angebot. Den Kassenbonus Leitfaden erhältst du zusätzlich.' : 'Sichere dir die Schritt für Schritt Anleitung für deinen Bonusabruf und Kassenwechsel, bevor du den Rechner startest.'}</Dialog.Description>
 
           {captured ? (
             <div className="mt-6">
-              <p role="status" className="mb-4 text-sm leading-6 text-slate-200">Deine Anfrage ist gespeichert. Falls dein Browser das neue Fenster blockiert hat, öffne den Rechner hier:</p>
-              {validDestination && <a href={validDestination} target="_blank" rel="noopener noreferrer" onClick={finishManualOpen} className="flex min-h-12 items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-center text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">Weiter zum Rechner ➔</a>}
+              <p role="status" className="mb-4 text-sm leading-6 text-slate-200">{personalOffer ? 'Deine V100-Angebotsanfrage ist gespeichert. Wir melden uns per E-Mail für die persönliche Abstimmung. Damit ist noch keine Versicherung beantragt oder abgeschlossen.' : 'Deine Anfrage ist gespeichert. Falls dein Browser das neue Fenster blockiert hat, öffne den Rechner hier:'}</p>
+              {personalOffer ? <button type="button" onClick={onClose} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">Zurück zur Vorsorgeübersicht</button> : validDestination && <a href={validDestination} target="_blank" rel="noopener noreferrer" onClick={finishManualOpen} className="flex min-h-12 items-center justify-center rounded-xl bg-home-mint px-4 py-3 text-center text-sm font-bold text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint">Weiter zum Rechner ➔</a>}
               {error && <p role="alert" className="mt-4 text-sm leading-6 text-amber-300">{error}</p>}
             </div>
           ) : (
@@ -191,12 +193,12 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
                 <input ref={emailRef} id="lead-capture-email" name="email" type="email" required maxLength={254} autoComplete="email" inputMode="email" placeholder="deine@email.de" value={email} onChange={(event) => { setEmail(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} aria-invalid={Boolean(error)} aria-describedby={error ? 'lead-capture-error' : undefined} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />
               </div>
               {error && <p id="lead-capture-error" role="alert" className="text-sm leading-6 text-amber-300">{error}</p>}
-              <button type="submit" disabled={submitting} aria-busy={submitting} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3.5 text-center text-sm font-bold leading-5 text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint disabled:cursor-wait disabled:opacity-70">{shortLoading ? 'Einen Moment...' : 'Weiter zum Rechner & Unterlagen sichern ➔'}</button>
+              <button type="submit" disabled={submitting} aria-busy={submitting} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3.5 text-center text-sm font-bold leading-5 text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint disabled:cursor-wait disabled:opacity-70">{shortLoading ? 'Einen Moment...' : personalOffer ? 'Persönliches Angebot anfragen ➔' : 'Weiter zum Rechner & Unterlagen sichern ➔'}</button>
               {submitting && !shortLoading && <p role="status" className="text-sm leading-6 text-slate-300">Deine Anfrage wird noch übermittelt. Bei langsamer Verbindung kann das etwas länger dauern.</p>}
             </form>
           )}
           <p className="mt-4 text-center text-xs leading-5 text-slate-400">100 % kostenlos · Kein Spam · Deine Daten sind nach DSGVO geschützt.</p>
-          <p className="mt-3 text-xs leading-5 text-slate-400">Mit deiner Anfrage dürfen wir dir den Leitfaden per E-Mail senden. <a href="/datenschutz" className="text-slate-300 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">Datenschutz</a></p>
+          <p className="mt-3 text-xs leading-5 text-slate-400">{personalOffer ? 'Mit deiner Anfrage dürfen wir dich per E-Mail zu ARAG V100 kontaktieren und dir den Leitfaden senden.' : 'Mit deiner Anfrage dürfen wir dir den Leitfaden per E-Mail senden.'} <a href="/datenschutz" className="text-slate-300 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">Datenschutz</a></p>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

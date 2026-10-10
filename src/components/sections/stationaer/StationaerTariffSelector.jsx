@@ -7,6 +7,7 @@ import WhatsAppHelpHint, { useWhatsAppHelp } from '@/components/sections/shared/
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import StationaerDkvAlternative from './StationaerDkvAlternative';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 
 // Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte zeigt oben eine
 // Cartoon-Szene, darunter ein weicher Pastellton statt Weiß (wie bei den
@@ -42,8 +43,9 @@ const StationaerTariffSelector = () => {
   };
 
   const calculateLink = selected ? (
-    <a
+    <LeadCaptureLink
       href={sdkUrl}
+      trackingCategory="sdk-stationaer"
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackSdkClick(`stationaer-selector-${selected}`, referrer)}
@@ -51,7 +53,7 @@ const StationaerTariffSelector = () => {
     >
       {t('refresh.selector.calculate')}
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
-    </a>
+    </LeadCaptureLink>
   ) : null;
 
   return (

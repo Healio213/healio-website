@@ -93,7 +93,7 @@
   },
   "langSwitch": "EN",
   "awards": {
-    "label": "Auszeichnungen und Tests ausgewählter Anbieter im Healio-Konzept",
+    "label": "Bewertungen unserer Produktpartner",
     "groups": {
       "sdk": "Unser Produktpartner SDK",
       "zahn": "Zahn-Tarife unserer Produktpartner",
@@ -109,6 +109,26 @@
       "fairness": "ntv Deutscher Fairness-Preis 2025 für die SDK: Gesamtsieger Private Krankenversicherer, Kundenurteil zu 24 Anbietern, Deutsches Institut für Service-Qualität",
       "ikkParents": "krankenkasseninfo.de Krankenkassentest für Schwangere und junge Eltern: IKK classic Testnote 1,7 (Gut), Stand 09/2026, 72 gesetzliche Krankenkassen im Test",
       "ikkFamily": "krankenkasseninfo.de Krankenkassentest für Familien: IKK classic Testnote 1,6 (Gut), Stand 09/2026, 72 gesetzliche Krankenkassen im Test"
+    },
+    "details": {
+      "sdk": {
+        "title": "SDK · Anbieterbewertung",
+        "result": "Deutscher Fairness-Preis 2025",
+        "scope": "Gesamtsieger Private Krankenversicherer. Kundenurteil zu 24 Anbietern.",
+        "source": "ntv / DISQ · 2025"
+      },
+      "ukv": {
+        "title": "UKV · ZahnPRIVAT 100",
+        "result": "FFF+ · hervorragend (0,5)",
+        "scope": "Tarifbewertung für ZahnPRIVAT 100, Produktstand 12/2024.",
+        "source": "Franke & Bornberg · 08/2026"
+      },
+      "bayerische": {
+        "title": "die Bayerische · ZAHN Prestige",
+        "result": "SEHR GUT (0,5)",
+        "scope": "278 Zahnzusatztarife im Test. Bewertet wird ZAHN Prestige.",
+        "source": "Stiftung Warentest · 09/2026"
+      }
     }
   }
 }

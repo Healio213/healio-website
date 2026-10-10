@@ -26,7 +26,7 @@ const bundle = buildSync({
       export { act, capture, consent };
       function ModalHarness({ url, callbacks }) {
         const [open, setOpen] = useState(true);
-        return <LeadCaptureModal isOpen={open} targetUrl={url} trackingCategory="bayerische"
+        return <LeadCaptureModal isOpen={open} targetUrl={url} trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'}
           onClose={() => { callbacks.closed += 1; setOpen(false); }}
           onExternalOpen={() => { callbacks.opened += 1; }} />;
       }
@@ -43,9 +43,9 @@ const bundle = buildSync({
         root.render(<MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <LeadCaptureProvider>
             <LeadCaptureLink id="first-link" href={url} target="_blank" rel="noopener noreferrer"
-              trackingCategory="bayerische" onClick={() => { callbacks.opened += 1; }}>Erster Rechner</LeadCaptureLink>
+              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'} onClick={() => { callbacks.opened += 1; }}>Erster Rechner</LeadCaptureLink>
             <LeadCaptureLink id="next-link" href={url} target="_blank" rel="noopener noreferrer"
-              trackingCategory="bayerische" onClick={() => { callbacks.opened += 1; }}>Zweiter Rechner</LeadCaptureLink>
+              trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'bayerische'} onClick={() => { callbacks.opened += 1; }}>Zweiter Rechner</LeadCaptureLink>
             <LeadCaptureLink id="non-application-link" href="https://kassenboost.de/" target="_blank" rel="noopener noreferrer">Kassenvergleich</LeadCaptureLink>
           </LeadCaptureProvider>
         </MemoryRouter>);
@@ -211,6 +211,53 @@ test('echte Desktop- und Mobil-Header-CTAs öffnen auf DE/EN zuerst das Modal un
       assert.equal(tariffEvents().length, 1);
       assert.equal(tariffEvents()[0][2].placement, `ambulant-header-${placement}`);
       assert.equal(document.querySelector('[role="dialog"]'), null);
+    } finally { await h.cleanup(); }
+  }
+});
+
+test('DKV auf DE/EN-Stationär öffnet zuerst Erfassung, navigiert erst nach CMS-Ack zum exakten persönlichen Rechner', async () => {
+  const url = 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487';
+  for (const path of ['/stationaer', '/en/inpatient']) {
+    const h = await harness('provider', { path, url });
+    try {
+      await h.click('#first-link');
+      assert(document.querySelector('[role="dialog"]'));
+      assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
+      await h.fill(); await h.submit();
+      assert.equal(h.tabs[0].destination, undefined);
+      const sent = JSON.parse(h.requests[0].options.body);
+      assert.equal(sent.sourcePage, path); assert.equal(sent.trackingCategory, 'dkv-stationaer');
+      assert.equal(sent.targetUrl, url);
+      await h.respond(0);
+      assert.equal(h.tabs[0].destination, url);
+      assert.equal(h.callbacks.opened, 1);
+    } finally { await h.cleanup(); }
+  }
+});
+
+test('ARAG-Angebot bleibt eine eigene Anfrage auch nach früherem Guide; kein externer Tab und Erfolg erst nach Ack', async () => {
+  const url = 'https://healio.de/ambulant?angebot=arag-v100';
+  for (const path of ['/ambulant', '/en/outpatient']) {
+    const h = await harness('provider', { path, url });
+    try {
+      h.capture.markLeadCapturedThisSession();
+      await h.click('#first-link');
+      assert(document.querySelector('form'));
+      assert.match(document.querySelector('[role="dialog"]').textContent, /V100-Angebot/);
+      assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
+      await h.fill(); await h.submit();
+      assert.equal(h.tabs.length, 0); assert.equal(h.callbacks.opened, 0);
+      const sent = JSON.parse(h.requests[0].options.body);
+      assert.equal(sent.trackingCategory, 'arag-v100'); assert.equal(sent.sourcePage, path);
+      assert.equal(sent.targetUrl, url);
+      assert(document.querySelector('form'));
+      await h.respond(0, false, { error: 'delivery_failed' });
+      assert(document.querySelector('form')); assert(document.querySelector('[role="alert"]'));
+      await h.submit(); await h.respond(1);
+      assert.equal(document.querySelector('form'), null);
+      assert.match(document.querySelector('[role="status"]').textContent, /V100-Angebotsanfrage ist gespeichert/);
+      assert.equal(document.querySelector('[role="dialog"] a[target="_blank"]'), null);
+      assert.equal(h.tabs.length, 0); assert.equal(h.callbacks.opened, 0);
     } finally { await h.cleanup(); }
   }
 });
@@ -472,7 +519,7 @@ test('Erfolgsantwort nach abgelaufenem Abort darf keine Sitzung oder Weiterleitu
 });
 
 test('unzulässiges Ziel oder nicht freigegebener Quellpfad lässt sich auch direkt im Modal nicht absenden', async () => {
-  for (const options of [{ url: 'https://evil.example.test/' }, { path: '/stationaer' }]) {
+  for (const options of [{ url: 'https://evil.example.test/' }, { path: '/unternehmen' }]) {
     const h = await harness('modal', options);
     try {
       await h.fill(); await h.submit();
@@ -483,7 +530,7 @@ test('unzulässiges Ziel oder nicht freigegebener Quellpfad lässt sich auch dir
 });
 
 test('Provider sperrt weder KassenBoost-Vergleiche noch nicht beauftragte Routen', async () => {
-  for (const path of ['/zahn', '/stationaer']) {
+  for (const path of ['/zahn', '/unternehmen']) {
     const h = await harness('provider', { path });
     try {
       const link = document.querySelector(path === '/zahn' ? '#non-application-link' : '#first-link');

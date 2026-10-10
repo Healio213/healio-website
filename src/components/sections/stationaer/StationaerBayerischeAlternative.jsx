@@ -1,4 +1,5 @@
 import React from 'react';
+import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
@@ -124,8 +125,9 @@ const StationaerBayerischeAlternative = () => {
             </ul>
 
             <div className="mt-6 md:mt-8">
-              <a
+              <LeadCaptureLink
                 href={BAYERISCHE_STATIONAER_URL}
+                trackingCategory="bayerische-stationaer"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={copy.ctaAria}
@@ -134,7 +136,7 @@ const StationaerBayerischeAlternative = () => {
               >
                 {copy.cta}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </LeadCaptureLink>
 
               {language === 'de' && (
                 <p className="mt-5 max-w-md text-base leading-relaxed text-slate-600 [text-wrap:pretty] md:text-sm md:leading-relaxed">

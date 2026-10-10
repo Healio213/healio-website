@@ -12,8 +12,6 @@ import { createWebPageSchema } from '@/lib/createSchemaMarkup';
 import { useLanguage } from '@/hooks/useLanguage';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import AppointmentBooking from '@/components/CalendlyEmbed';
-import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
-import { HealioSiegelBand } from '@/components/sections/shared/HealioAwardsRow';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import SceneHero, {
   sceneAccentClass,
@@ -23,8 +21,8 @@ import SceneHero, {
 } from '@/components/desktop/SceneHero';
 
 // Look wie /ambulant, /stationaer und /zahn (Frank 08.10.2026): Szene als
-// Kopfbereich am Rechner, dunkler Einstieg mit Kartenreihe am Handy, Siegel als
-// Laufband, danach helle Abschnitte im Wechsel Weiß und Eisgrün mit runden
+// Kopfbereich am Rechner, dunkler Einstieg mit Kartenreihe am Handy,
+// danach helle Abschnitte im Wechsel Weiß und Eisgrün mit runden
 // Karten. Texte inhaltlich unverändert aus hebammen.json.
 
 // Erklärfilm Hebammen v1 (Nita + Motion, 104 Sekunden), seit 08.10.2026.
@@ -102,7 +100,6 @@ const SectionHead = ({ eyebrow, title, subtitle, id, className = '' }) => (
 const HebammenPage = () => {
   const { t } = useTranslation('hebammen');
   const { t: tSeo } = useTranslation('seo');
-  const { t: tCommon } = useTranslation('common');
   const { lang, getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
   // Ab lg trägt SceneHero die h1; der Handy-Einstieg nutzt dort h2.
@@ -134,7 +131,7 @@ const HebammenPage = () => {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Eine Reihenfolge für Handy und Rechner: Einstieg, Erklärvideo, Rollen, Siegel,
+      {/* Eine Reihenfolge für Handy und Rechner: Einstieg, Erklärvideo, Rollen,
           dann Fälle, Bausteine, Kind, Tarife, Rollen, Ablauf und Termin. */}
       <article className="w-full overflow-hidden bg-white text-[#071726]">
 
@@ -287,30 +284,6 @@ const HebammenPage = () => {
                 </MobileSwipeRow>
               </div>
             </div>
-        </section>
-
-        {/* SIEGEL: SDK + IKK classic. Stand 03.10.2026: Die Siegel der
-            SDK-Vollversicherung (Warentest 0,9, Morgen & Morgen) sind entfernt,
-            die IKK-Siegel durch die Fassung 09/2026 ersetzt (IKK-Mail 01.10.2026).
-            Beide Partner stehen als eigene Gruppe, damit klar bleibt, dass die
-            IKK-Siegel die Krankenkasse bewerten und nicht die Zusatzversicherung.
-            Handy: nur das laufende Band ohne Überschrift (Hinweise als sr-only). */}
-        <section className="border-b border-gray-100 bg-white py-3 md:py-12" aria-label={tCommon('awards.label')}>
-          <div className="container mx-auto px-4">
-            <HealioSiegelBand className="mx-auto max-w-6xl md:hidden" withIkk ikkOrder="parents" size="large" />
-            <div className="hidden md:block">
-              <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-500">
-                {lang === 'en' ? 'Our partners: SDK Süddeutsche Krankenversicherung & IKK classic' : 'Unsere Partner: SDK Süddeutsche Krankenversicherung & IKK classic'}
-              </p>
-              <div className="mx-auto mt-5 flex max-w-6xl flex-row flex-wrap items-start justify-center gap-8 gap-x-14">
-                <div className="flex flex-col items-center">
-                  <p className="text-center text-sm font-semibold text-slate-600">{tCommon('awards.groups.sdk')}</p>
-                  <img src="/siegel/sdk/fairnesspreis.png" alt={tCommon('awards.items.fairness')} width="240" height="240" className="mt-3 h-24 w-auto lg:h-28" loading="lazy" decoding="async" />
-                </div>
-                <IkkKassenSiegel order="parents" size="large" />
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* PROBLEM & LÖSUNG */}

@@ -283,7 +283,7 @@ const de = {
       'Wie fehlende Zähne gegen Zuschlag mitversichert werden können',
       'Was erst im Antrag verbindlich entschieden wird',
     ],
-    aria: 'Healio Erklärvideo zur Zahnzusatzversicherung',
+    aria: 'Erklärvideo: Dein Lächeln. Nicht nur Kassenstandard.',
   },
   bonus: {
     eyebrow: 'KassenBoost nach der Tarifwahl',
@@ -611,7 +611,7 @@ const en = {
       'How missing teeth can be covered for a surcharge',
       'What is only decided bindingly in the application',
     ],
-    aria: 'Healio explainer video about supplementary dental insurance',
+    aria: 'Explainer video: Your smile. More than statutory standard care.',
   },
   bonus: {
     ...de.bonus,

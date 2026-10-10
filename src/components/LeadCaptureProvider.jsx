@@ -1,6 +1,6 @@
 import React, { createContext, lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { hasCapturedLeadThisSession, openApplicationWindow, shouldCaptureApplicationLink } from '@/lib/lead-capture';
+import { hasCapturedLeadThisSession, isPersonalOfferUrl, openApplicationWindow, shouldCaptureApplicationLink } from '@/lib/lead-capture';
 
 const LeadCaptureModal = lazy(() => import('./LeadCaptureModal.tsx'));
 export const LeadCaptureContext = createContext(null);
@@ -14,7 +14,7 @@ export default function LeadCaptureProvider({ children }) {
 
   const requestApplication = useCallback((targetUrl, trackingCategory, onExternalOpen) => {
     if (!shouldCaptureApplicationLink(targetUrl, pathname)) return false;
-    if (hasCapturedLeadThisSession() && openApplicationWindow(targetUrl)) {
+    if (!isPersonalOfferUrl(targetUrl) && hasCapturedLeadThisSession() && openApplicationWindow(targetUrl)) {
       onExternalOpen?.();
       return true;
     }

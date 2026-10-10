@@ -1,4 +1,4 @@
-import { isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl } from '../../shared/lead-capture.js';
+import { ARAG_OFFER_URL, isPersonalOfferUrl, isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl } from '../../shared/lead-capture.js';
 
 export const LEAD_CAPTURE_SESSION_KEY = 'healio:lead-capture:v1';
 let capturedInMemory = false;
@@ -52,4 +52,4 @@ export function createLeadRequestId() {
   return window.crypto.randomUUID();
 }
 
-export { isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl };
+export { ARAG_OFFER_URL, isPersonalOfferUrl, isValidLeadEmail, sanitizeLeadSourcePage, validateApplicationUrl };

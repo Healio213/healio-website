@@ -5,67 +5,14 @@ import SiegelTicker from '@/components/sections/shared/SiegelTicker';
 import { IKK_SEALS } from '@/components/sections/shared/IkkKassenSiegel';
 
 /**
- * Gemeinsame Siegelzeile für /ambulant, /zahn, /stationaer und /partner.
- *
- * Stand 03.10.2026: Die Zeile ist in Gruppen geteilt, damit jedes Siegel
- * sichtbar dem zugeordnet ist, was es bewertet.
- * - Produktpartner: nur Auszeichnungen, die zum Versicherer oder genau zum
- *   gezeigten Tarif gehören. Die früheren Siegel der SDK-Vollversicherung
- *   (Stiftung Warentest 0,9 und Morgen & Morgen Beitragsstabilität) gehören
- *   nicht zu unseren Zusatztarifen und sind entfernt.
- * - Die Textangabe „Stiftung Warentest Finanzen 04/2026, SDK SP1 sehr gut
- *   (1,1)“ ist wieder entfernt: Die Note 1,1 war am 03.10.2026 nur bei
- *   procontra zu finden, weder bei der SDK noch frei auf test.de (dort hinter
- *   der Bezahlschranke). Erst wieder aufnehmen, wenn die Note belegt ist.
- * - IKK classic: Die Testsiegel der Krankenkasse stehen nicht mehr hier,
- *   sondern nur im IKK-Zusammenhang (Komponente IkkKassenSiegel).
- *
- * Stand 05.10.2026 (/zahn): Zwei Siegel, je in einer eigenen Gruppe mit dem
- * Versicherer und genau dem Tarif, den das Siegel bewertet. Regel für jedes
- * neue Siegel: genau ein Tarif, den wir auf der Seite anbieten; neueste
- * Ausgabe des Tests; frei und eindeutig belegt; Bilddatei nur von der
- * offiziellen Quelle, unverändert.
- * - UKV ZahnPRIVAT 100: Franke & Bornberg FFF+ hervorragend (0,5), Produkt
- *   12|2024, Rating 08|2026. Quelle: ukv.de/ueber-uns/ratings-auszeichnungen
- *   (Bilddatei dort), Gegenprobe franke-bornberg.de (Rating gkvzahn_neu). Gilt
- *   nur für ZahnPRIVAT 100, nicht für 75 und 90. F&B verlangt für die werbliche
- *   Nutzung einen schriftlichen Nutzungsvertrag: vor dem Livegang schriftlich
- *   über den Maklerbetreuer der Versicherungskammer oder info@franke-bornberg.de
- *   bestätigen lassen (gilt auch für die bisherige Fassung 08|2025).
- * - die Bayerische ZAHN Prestige: Stiftung Warentest SEHR GUT (0,5), Ausgabe
- *   09/2026, 278 Tarife, Lizenznummer 26PM28 (Lizenznehmer ist die Bayerische).
- *   Quelle: diebayerische.de/versicherungen/zahnzusatzversicherung/ (Bilddatei
- *   dort). Gilt nur für ZAHN Prestige, nicht für ZAHN Sofort, Smart oder
- *   Komfort. Kurze schriftliche Unterlizenz über den Maklerbetreuer der
- *   Bayerischen einholen. Das Wording „Testsieger“ nicht übernehmen.
- * - Nicht eingebaut (keine freie offizielle Siegeldatei, Lizenz offen): SDK SP1
- *   und AP1 (Franke & Bornberg), SDK SP2 und AP1 sowie Bayerische Prestige
- *   stationär (FOCUS MONEY 35/2026).
- *
- * Stand 06.10.2026 (Handy, unter md): Statt der hohen Zeile läuft ein
- * schmales Siegel-Band (Komponente SiegelTicker; ursprünglich mit Beschriftung
- * je Siegel und ruhendem Pflichthinweis, siehe Stand 06.10.2026 unten). Die
- * IKK-Siegel (Krankenkasse, nicht Zusatzversicherung) laufen im Band mit, wo
- * die Seite sie auch im IKK-Block zeigt: /zahn, /stationaer, /ambulant. Das
- * steuert withIkk; ohne Angabe entscheidet der Pfad (nur /ambulant und die
- * Heilpraktiker-Landingpage), /partner bleibt bei der SDK. Ab md bleibt die
- * Zeile exakt wie bisher.
- * Das Band gibt es auch einzeln als HealioSiegelBand (für Seiten mit eigener
- * Siegelzeile, z. B. /hebammen: neben der bisherigen Zeile in einem
- * "hidden md:block"-Wrapper, das Band mit "md:hidden").
- *
- * Stand 06.10.2026 (Rückmeldung zur Handy-Vorschau): Am Handy läuft im
- * Siegelbereich nur noch das Band mit den Siegelbildern, ohne Überschrift, ohne
- * Beschriftung und ohne sichtbare Hinweise ("das kann alles weg"). Alt-Texte
- * bleiben vollständig, die Hinweise bleiben als sr-only-Text im Dokument. Neu:
- * productSet "schwangerschaft" für /schwangerschaft (SDK Fairness-Preis plus die
- * beiden IKK-Siegel, 72 px hoch). Gründe für die Auswahl: Auf der Seite werden
- * SDK-Tarife (Ambulant AP1, Klinik SP1 und SP2) und Klinik-Tarife der Bayerischen
- * angeboten, dazu der IKK-Bonus. Frei und eindeutig belegte Siegel gibt es nur
- * für die SDK (Fairness-Preis 2025, Unternehmenssiegel) und für die IKK classic
- * (krankenkasseninfo.de 09/2026). Die Bayerische-Siegel im Ordner gelten dem
- * Zahntarif ZAHN Prestige, nicht den Klinik-Tarifen; die LKH-Siegel gehören zu
- * einem Versicherer, der auf /schwangerschaft nicht angeboten wird.
+ * Produktseiten: statische Siegelzeilen mit sichtbarer Bewertung und Geltungsbereich.
+ * Vorhandene Originalbilder bleiben unverändert. SDK Fairness 2025 bewertet den
+ * Anbieter; die Zahnsiegel gelten nur für UKV ZahnPRIVAT 100 bzw. ZAHN Prestige.
+ * SDK-Vollversicherungsratings dürfen nicht als AP-/SP-Auszeichnung erscheinen.
+ * Originalquellen am 10.10.2026 erneut geprüft; die bestehenden Lizenzfragen
+ * sind im Marketing-Nachweis dokumentiert, keine neue Nutzungsfreigabe behauptet.
+ * HealioSiegelBand bleibt für die separate B2C-Schwangerschaftsstrecke erhalten.
+ * Partnerseiten verwenden diese Komponenten nicht.
  */
 const FAIRNESS = { src: '/siegel/sdk/fairnesspreis.png', altKey: 'awards.items.fairness' };
 
@@ -82,7 +29,7 @@ const BAYERISCHE_ZAHN_WARENTEST = {
   ns: 'zahn',
 };
 
-// Bildmaße für das Handy-Band (Quelldateien, damit nichts springt).
+// Quelldateimaße halten die Bildfläche beim Laden stabil.
 const SDK_SIZE = { width: 240, height: 240 };
 const UKV_ZAHN_SIZE = { width: 432, height: 216 };
 const BAYERISCHE_ZAHN_SIZE = { width: 600, height: 399 };
@@ -112,7 +59,7 @@ const AWARD_SETS = {
   stationaer: [
     { id: 'sdk', labelKey: 'awards.groups.sdk', items: [FAIRNESS] },
   ],
-  // Nur fürs Handy-Band (HealioSiegelBand). Siehe Kopfkommentar, Stand 06.10.2026.
+  // Separate B2C-Schwangerschaftsstrecke (HealioSiegelBand).
   schwangerschaft: [
     { id: 'sdk', labelKey: 'awards.groups.sdk', items: [FAIRNESS] },
   ],
@@ -130,20 +77,23 @@ const toneClasses = {
   transparent: 'bg-transparent border-transparent',
 };
 
-// large: Siegelband direkt unter dem Hero (/partner). Die Quelldateien sind
-// mindestens 240 px breit, deshalb höchstens 112 px Anzeigehöhe.
-// Handy (unter md): niedrigere Abstände und Überschrift in 14 px ohne
-// Großbuchstaben; ab md die bisherigen Werte.
-const sizeClasses = {
-  compact: { section: 'py-3 md:py-6', caption: 'text-sm text-slate-500 md:text-xs md:text-slate-400', gap: 'gap-5 md:gap-8', image: 'h-12 w-auto md:h-14' },
-  regular: { section: 'py-3 md:py-8', caption: 'text-sm text-slate-500 md:text-xs md:text-slate-400', gap: 'gap-6 md:gap-10', image: 'h-16 w-auto md:h-20' },
-  large: { section: 'py-3 md:py-12', caption: 'text-sm text-slate-500', gap: 'gap-x-8 gap-y-6 sm:gap-x-10 lg:gap-x-14', image: 'h-20 w-auto sm:h-24 lg:h-28' },
+const AWARD_DETAILS = {
+  sdk: {
+    key: 'sdk',
+    source: 'https://www.sdk.de/unternehmen/presse/sdk-zum-zwoelften-mal-mit-dem-deutschen-fairness-preis-ausgezeichnet',
+  },
+  ukv: {
+    key: 'ukv',
+    source: 'https://www.ukv.de/ueber-uns/ratings-auszeichnungen.html',
+  },
+  bayerische: {
+    key: 'bayerische',
+    source: 'https://www.diebayerische.de/versicherungen/zahnzusatzversicherung/',
+  },
 };
 
-// Siegel-Band fürs Handy als eigener Baustein, damit Seiten mit eigener
-// Siegelzeile (z. B. /hebammen) es ohne Umbau der Desktop-Zeile einsetzen
-// können: <HealioSiegelBand className="md:hidden" ... /> neben der bisherigen
-// Zeile in einem "hidden md:block"-Wrapper.
+// Bestehendes Handy-Band der separaten B2C-Schwangerschaftsstrecke.
+// Die Produkt- und Partnerseiten verwenden es nicht mehr.
 export const HealioSiegelBand = ({ productSet, withIkk, ikkOrder, size, ariaLabel, className = '' }) => {
   const { t } = useTranslation(['common', 'zahn']);
   const { pathname } = useLocation();
@@ -191,65 +141,62 @@ const HealioAwardsRow = ({
   bordered = true,
   className = '',
   productSet,
-  withIkk,
 }) => {
   const { t } = useTranslation(['common', 'zahn']);
   const caption = label || t('awards.label');
   const groups = AWARD_SETS[productSet] || AWARD_SETS.default;
   const noteKey = AWARD_NOTES[productSet];
-  // Mehrere Gruppen (/zahn): mobil zwei Spalten nebeneinander, damit die Zeile
-  // niedrig bleibt; Bilder unten bündig. Eine Gruppe (/partner, /ambulant,
-  // /stationaer) bleibt exakt wie bisher.
   const multi = groups.length > 1;
-  const styles = sizeClasses[size] || (compact ? sizeClasses.compact : sizeClasses.regular);
+  const spacing = compact || size === 'compact' ? 'py-4 md:py-6' : 'py-6 md:py-8';
 
   return (
     <section
-      className={`${toneClasses[tone] || toneClasses.light} ${bordered ? 'border-b' : ''} ${styles.section} ${className}`}
+      data-awards-row
+      className={`${toneClasses[tone] || toneClasses.light} ${bordered ? 'border-b' : ''} ${spacing} ${className}`}
       aria-label={caption}
     >
-      <div className="container mx-auto px-4">
-        {/* Handy: keine sichtbare Überschrift, nur das Siegel-Band (der Bereich
-            trägt sein aria-label am section-Element). */}
-        <p className={`hidden text-center font-medium tracking-wider md:block md:uppercase ${styles.caption}`}>{caption}</p>
-
-        {/* Handy: ruhiges Siegel-Band, nur Bilder */}
-        <HealioSiegelBand
-          className="mx-auto max-w-6xl md:hidden"
-          productSet={productSet}
-          withIkk={withIkk}
-          ariaLabel={caption}
-        />
-
-        {/* Ab md: die bisherige Siegelzeile */}
-        <div className="hidden md:block">
-          <div
-            className={`mx-auto mt-5 max-w-6xl ${multi
-              ? 'grid grid-cols-2 items-stretch gap-x-4 gap-y-6 md:flex md:flex-wrap md:justify-center md:gap-x-14'
-              : 'flex flex-col items-center gap-8 md:flex-row md:flex-wrap md:items-start md:justify-center md:gap-x-14'}`}
-          >
-            {groups.map((group) => (
-              <div key={group.id} className={`flex flex-col items-center ${multi ? 'md:max-w-md' : ''}`}>
-                <p className={`text-center font-semibold text-slate-600 ${multi ? 'text-xs leading-5 [text-wrap:balance] sm:text-sm' : 'text-sm'}`}>{t(group.labelKey)}</p>
-                <div className={`flex flex-wrap items-center justify-center ${multi ? 'mt-auto pt-3' : 'mt-3'} ${styles.gap}`}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <p className="text-center text-sm font-semibold text-slate-600">{caption}</p>
+        <ul className={`mx-auto mt-5 grid gap-6 ${multi ? 'md:grid-cols-2 md:gap-10' : 'max-w-2xl'}`}>
+          {groups.map((group) => {
+            const detail = AWARD_DETAILS[group.id];
+            const key = `awards.details.${detail.key}`;
+            return (
+              <li key={group.id} className="flex min-w-0 items-center gap-4 sm:gap-6">
+                <div className="flex w-28 shrink-0 items-center justify-center sm:w-32">
                   {group.items.map((award) => (
                     <img
                       key={award.src}
                       src={award.src}
                       alt={t(award.altKey, award.ns ? { ns: award.ns } : undefined)}
-                      className={`${styles.image} ${multi ? 'max-w-full object-contain' : ''}`}
+                      width={TICKER_IMAGE_SIZE[group.id].width}
+                      height={TICKER_IMAGE_SIZE[group.id].height}
+                      className="max-h-24 w-auto max-w-full object-contain sm:max-h-28"
                       loading="lazy"
                       decoding="async"
                     />
                   ))}
                 </div>
-              </div>
-            ))}
-          </div>
-          {noteKey && (
-            <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-6 text-slate-500">{t(noteKey)}</p>
-          )}
-        </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-bold leading-snug text-[#071726]">{t(`${key}.title`)}</p>
+                  <p className="mt-1 text-sm font-semibold leading-5 text-[#087654]">{t(`${key}.result`)}</p>
+                  <p className="mt-1 text-sm leading-5 text-slate-600">{t(`${key}.scope`)}</p>
+                  <a
+                    href={detail.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-flex min-h-10 items-center text-sm leading-5 text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-[#087654] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087654]"
+                  >
+                    {t(`${key}.source`)}<span className="ml-1" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        {noteKey && (
+          <p className="mx-auto mt-5 max-w-3xl text-center text-sm leading-6 text-slate-600">{t(noteKey)}</p>
+        )}
       </div>
     </section>
   );
