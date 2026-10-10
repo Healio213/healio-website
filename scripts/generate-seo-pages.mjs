@@ -213,7 +213,7 @@ function createStaticBlogArticleHtml(article) {
     : '';
 
   return `
-    <article class="pt-32 pb-20" data-static-blog-article>
+    <article class="pt-32 pb-20 break-words hyphens-auto" data-static-blog-article>
       <header class="max-w-3xl mx-auto px-4 mb-12">
         <p class="text-sm font-medium text-[#25c990] mb-4">Healio Ratgeber</p>
         <h1 class="text-3xl md:text-4xl font-bold text-[#464f5d] mb-4 leading-tight">${escapeHtml(article.title || 'Healio Ratgeber')}</h1>

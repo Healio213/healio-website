@@ -37,7 +37,7 @@ const TARGET_GROUP_KEYS = {
 
 const stripLeadingArticleHeading = (html) => {
   if (!html) return '';
-  return html.replace(/^\s*<article>\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '<article>');
+  return html.replace(/^(\s*(?:<article\b[^>]*>\s*)?)<h1\b[^>]*>[\s\S]*?<\/h1>/i, '$1');
 };
 
 const BlogArticlePage = () => {
@@ -193,7 +193,7 @@ const BlogArticlePage = () => {
         schemaMarkup={combinedSchema}
       />
 
-      <article data-prerendered-blog-article className="pt-32 pb-20">
+      <article data-prerendered-blog-article className="pt-32 pb-20 break-words hyphens-auto">
         {/* Header */}
         <header className="max-w-3xl mx-auto px-4 mb-12">
           <Link
