@@ -51,14 +51,14 @@ const MainHomePage = () => {
       />
       <article className="w-full overflow-hidden bg-white">
         <HomeHero />
-        {/* Erklärfilm Startseite (08.10.2026, nur Deutsch): eine schlanke Karte
+        {/* Erklärfilm Startseite (V2 seit 11.10.2026, nur Deutsch): eine schlanke Karte
             direkt nach dem Einstieg, danach Ablauf und Produkte wie bisher. */}
         {lang === 'de' && (
           <ExplainerVideoCard
             id="startseite-erklaervideo"
-            videoSrc="/videos/erklaerfilme/erklaervideo-startseite-v1.mp4"
-            poster="/videos/erklaerfilme/erklaervideo-startseite-nutzen-v2-poster.jpg"
-            captionsSrc="/videos/erklaerfilme/erklaervideo-startseite-v1-de.vtt"
+            videoSrc="/videos/erklaerfilme/erklaervideo-startseite-v2.mp4"
+            poster="/videos/erklaerfilme/erklaervideo-startseite-v2-poster.jpg"
+            captionsSrc="/videos/erklaerfilme/erklaervideo-startseite-v2-de.vtt"
             eyebrow={t('explanationVideo.eyebrow')}
             title={t('explanationVideo.title')}
             subtitle={t('explanationVideo.subtitle')}
