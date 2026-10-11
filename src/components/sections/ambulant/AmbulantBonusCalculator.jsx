@@ -27,8 +27,8 @@ const ACTIVITY_DEFS = [
   { id: 'hautkrebs', cash: 10, subsidy: 30 },
   { id: 'ultraschall', cash: 10, subsidy: 30 },
   { id: 'mammographie', cash: 10, subsidy: 30 },
-  // Das dokumentierte 1.155-EUR-Beispiel setzt zwölf anerkannte Vorsorgen an.
-  { id: 'mutterschaft', cash: 10, subsidy: 30, countable: true, max: 12 },
+  // Bis zu 15 Mutterschaftsvorsorgen sind bonusfähig (Herleitung 1.155 EUR, von Frank am 11.10.2026 bestätigt).
+  { id: 'mutterschaft', cash: 10, subsidy: 30, countable: true, max: 15 },
   { id: 'kind', cash: 10, subsidy: 30, countable: true, max: 12 },
   { id: 'jugend', cash: 10, subsidy: 30, countable: true, max: 2 },
   { id: 'amblyopie', cash: 10, subsidy: 30, countable: true, max: 2 },
@@ -47,24 +47,29 @@ const ACTIVITY_DEFS = [
   { id: 'leistungsabzeichen', cash: 25, subsidy: 75, category: 'status' },
   { id: 'bmi', cash: 25, subsidy: 75, category: 'status' },
   { id: 'blutdruck', cash: 25, subsidy: 75, category: 'status' },
+  { id: 'nichtraucher', cash: 25, subsidy: 75, category: 'status' },
 ];
 
-// Schalter „Ich bin schwanger“ (Frank 11.10.2026): rechnet mit allen Vorsorgen der
-// Schwangerschaft aus der IKK-classic-Bonustabelle, die dieser Rechner schon kennt, mit
-// den hier hinterlegten Obergrenzen (zwölf Mutterschaftsvorsorgen, siehe oben).
-// Der Höchstwert „bis zu 1.155 EUR laut Satzung“ steht als Hinweis daneben und wird
-// nicht berechnet, weil darin Posten stehen, die dieser Rechner nicht führt.
+// Schalter „Ich bin schwanger“ (Frank 11.10.2026): setzt den Korb der Satzungs-Herleitung
+// (SATZUNGSHERLEITUNG-1155-ENTWURF.md, von Frank bestätigt): 15 Mutterschaftsvorsorgen,
+// Check-up, Krebsfrüherkennung, Hautkrebs, Ultraschall, 2 Zahnvorsorgen, Zahnfrüherkennung,
+// Schutzimpfung, vier regelmäßige Aktivitäten, drei Statuswerte. Zuschuss zusammen 1.155 EUR.
 const PREGNANT_SELECTION = {
-  mutterschaft: 12,
+  mutterschaft: 15,
   checkup: true,
   krebs: true,
+  hautkrebs: true,
+  ultraschall: true,
   zahn: 2,
+  zahnFrueh: 1,
+  impfung: 1,
   kurs: true,
   fitness: true,
   sport: true,
   rueckbildung: true,
   bmi: true,
   blutdruck: true,
+  nichtraucher: true,
 };
 
 const IKK_BONUS_2026_INFO = 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf';

@@ -464,6 +464,10 @@
       "blutdruck": {
         "title": "Normal blood pressure",
         "desc": "Status value, combine with activity"
+      },
+      "nichtraucher": {
+        "title": "Non-smoker status",
+        "desc": "Once per calendar year"
       }
     },
     "tip": "Strong lever",
@@ -504,7 +508,7 @@
     "pregnantLabel": "I am pregnant",
     "pregnantHint": "Calculates with all pregnancy check-ups.",
     "pregnantResultTitle": "Calculated if you attend all check-ups and take part in all activities during pregnancy.",
-    "pregnantResultText": "The bonus pays for your supplementary cover and your health budget stays in place. Under the statutes, up to EUR 1,155 is the maximum possible in pregnancy if everything applies at once.",
+    "pregnantResultText": "The bonus pays for your supplementary cover and your health budget stays in place. This is the maximum under the statutes if everything applies at once.",
     "pregnantLink": "More on pregnancy"
   },
   "beispielrechnung": {

@@ -512,6 +512,10 @@
       "blutdruck": {
         "title": "Blutdruck normal",
         "desc": "Statuswert, mit Aktivität kombinieren"
+      },
+      "nichtraucher": {
+        "title": "Nichtraucherstatus",
+        "desc": "1x pro Kalenderjahr"
       }
     },
     "tip": "Starker Hebel",
@@ -552,7 +556,7 @@
     "pregnantLabel": "Ich bin schwanger",
     "pregnantHint": "Rechnet mit allen Vorsorgen in der Schwangerschaft.",
     "pregnantResultTitle": "Gerechnet, wenn du alle Vorsorgen und Aktivitäten in der Schwangerschaft wahrnimmst.",
-    "pregnantResultText": "Der Bonus bezahlt deinen Zusatzschutz, dein Gesundheitsbudget bleibt bestehen. Laut Satzung sind in der Schwangerschaft bis zu 1.155 EUR als Höchstwert möglich, wenn alles gleichzeitig zutrifft.",
+    "pregnantResultText": "Der Bonus bezahlt deinen Zusatzschutz, dein Gesundheitsbudget bleibt bestehen. Das ist der Höchstwert laut Satzung, wenn alles gleichzeitig zutrifft.",
     "pregnantLink": "Mehr zur Schwangerschaft"
   },
   "beispielrechnung": {
