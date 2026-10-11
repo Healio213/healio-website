@@ -126,7 +126,7 @@ try {
     assert.deepEqual(layout.buttons.map(button => button.text), ['Wir planen ein Baby', 'Ich bin schwanger', 'Unser Baby ist da']);
     assert(layout.buttons.every(button => button.height >= 44 && button.width >= 44 && button.pressed === 'false'), 'Three unselected accessible tap targets are at least 44px');
     assert.equal(await page.$eval('aside[aria-labelledby="schon-schwanger-heading"] a', node => node.getAttribute('href')), '/ratgeber/schwanger-zusatzversicherung');
-    assert.match(await page.$eval('aside[aria-labelledby="schon-schwanger-heading"]', node => node.textContent), /Schon schwanger\?Dann zählt jetzt der Vorsorgeschutz und dein Kassenbonus\. Die Geburt selbst lässt sich nicht mehr nachträglich versichern\.Was jetzt noch geht/);
+    assert.match(await page.$eval('aside[aria-labelledby="schon-schwanger-heading"]', node => node.textContent), /Schon schwanger\? Warum es sich trotzdem lohntDie Geburt selbst lässt sich jetzt nicht mehr versichern\..*innerhalb von zwei Monaten anmelden.*Was jetzt noch geht/s);
     const content = await page.$$eval('aside[aria-labelledby="schon-schwanger-heading"], #kasse-und-zusatzschutz, #familien-einstieg, #fragen details', nodes => nodes.map(node => node.textContent).join('\n'));
     assert(!forbiddenText.test(content), 'Guidance and all FAQ expansions avoid the prohibited claims and terms');
     const hebammeAnswer = await page.$$eval('#fragen details', nodes => nodes.find(node => node.querySelector('summary')?.textContent === 'Wer zahlt meine Hebamme?')?.textContent || '');

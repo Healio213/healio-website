@@ -26,8 +26,13 @@ export function AlreadyPregnantNotice() {
   return (
     <aside aria-labelledby="schon-schwanger-heading" className="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8 md:pt-8">
       <div className="rounded-2xl border border-[#f2c9d4] bg-[#fff5f8] p-5 sm:p-7">
-        <h2 id="schon-schwanger-heading" className="font-display text-xl font-bold sm:text-2xl">Schon schwanger?</h2>
-        <p className="mt-2 max-w-prose leading-relaxed text-home-slate">Dann zählt jetzt der Vorsorgeschutz und dein Kassenbonus. Die Geburt selbst lässt sich nicht mehr nachträglich versichern.</p>
+        <h2 id="schon-schwanger-heading" className="font-display text-xl font-bold sm:text-2xl">Schon schwanger? Warum es sich trotzdem lohnt</h2>
+        <p className="mt-2 max-w-prose leading-relaxed text-home-slate">Die Geburt selbst lässt sich jetzt nicht mehr versichern. Drei Dinge gehen aber noch:</p>
+        <ol className="mt-3 max-w-prose list-decimal space-y-2 pl-5 leading-relaxed text-home-slate">
+          <li><strong className="text-home-midnight">Vorsorge ab sofort:</strong> Feinultraschall oder ein Test auf Toxoplasmose zahlt der ambulante Schutz auch in deiner jetzigen Schwangerschaft.</li>
+          <li><strong className="text-home-midnight">Schutz für dein Baby:</strong> Hast du selbst rechtzeitig einen Klinikschutz, nimmt der Versicherer dein Kind ohne Gesundheitsprüfung auf, auch wenn es bei der Geburt Komplikationen gab. Du musst es nur innerhalb von zwei Monaten anmelden. Wie früh du selbst versichert sein musst, hängt vom Versicherer ab, bei der Bayerischen zum Beispiel drei Monate.</li>
+          <li><strong className="text-home-midnight">Bereit fürs nächste Kind:</strong> Die Wartezeit von 8 Monaten hast du dann längst hinter dir. Beim nächsten Kind greift dein Klinikschutz auch für die Geburt.</li>
+        </ol>
         <Link to="/ratgeber/schwanger-zusatzversicherung" className={`mt-2 ${textLink}`}>Was jetzt noch geht</Link>
       </div>
     </aside>
