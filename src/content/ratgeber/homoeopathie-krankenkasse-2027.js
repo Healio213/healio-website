@@ -2,7 +2,7 @@
  * Ratgeber Homöopathie ab 2027 (Krankenkasse, Zusatzschutz, Labor, TCM).
  * Feld: Ambulant. Freigegebener Entwurf vom 11.10.2026.
  * Keine Wirksamkeitsaussage zu Homöopathie; der Ratgeber erklärt nur, wer welche Kosten trägt.
- * Tarifangaben nach den Versicherungsbedingungen des Tarifs, Stand 01.01.2023.
+ * Tarifangaben nach den SDK-Versicherungsbedingungen AP-Tarife (AVB Teil II 1.753a), Stand 01.01.2023.
  */
 export const article = {
   slug: 'homoeopathie-krankenkasse-2027',
@@ -69,7 +69,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Ja, wenn der Tarif Naturheilverfahren abdeckt. Das gilt auch für das Healio Gesundheitsbudget: In den Versicherungsbedingungen des Tarifs zählt Homöopathie ausdrücklich zu den klassischen Naturheilverfahren. Versichert sind Behandlungen durch Heilpraktikerinnen und Heilpraktiker, die nach dem Gebührenverzeichnis für Heilpraktiker (GebüH) abrechnen, und durch Ärztinnen und Ärzte, die nach der GOÄ abrechnen.',
+          text: 'Ja, wenn der Tarif Naturheilverfahren abdeckt. Das gilt auch für das Healio Gesundheitsbudget, das Healio mit den ambulanten Tarifen der SDK (AP5 bis AP1) vermittelt: In den Versicherungsbedingungen der SDK zählt Homöopathie ausdrücklich zu den klassischen Naturheilverfahren. Versichert sind Behandlungen durch Heilpraktikerinnen und Heilpraktiker, die nach dem Gebührenverzeichnis für Heilpraktiker (GebüH) abrechnen, und durch Ärztinnen und Ärzte, die nach der GOÄ abrechnen.',
         },
         {
           type: 'paragraph',
@@ -78,15 +78,15 @@ export const article = {
         {
           type: 'table',
           mobile: 'cards',
-          caption: 'Naturheilverfahren im Healio Gesundheitsbudget: Erstattung je Stufe',
+          caption: 'Naturheilverfahren im Healio Gesundheitsbudget (SDK AP-Tarife): Erstattung je Stufe',
           head: ['Stufe', 'Erstattung', 'Höchstens in 2 Jahren'],
           rows: [
-            ['Stufe 50', '50 %', '500 EUR'],
-            ['Stufe 70', '70 %', '700 EUR'],
-            ['Stufe 90', '90 %', '900 EUR'],
-            ['Stufe 100', '100 %', '1.000 EUR'],
+            ['Stufe 50 (SDK AP5)', '50 %', '500 EUR'],
+            ['Stufe 70 (SDK AP7)', '70 %', '700 EUR'],
+            ['Stufe 90 (SDK AP9)', '90 %', '900 EUR'],
+            ['Stufe 100 (SDK AP1)', '100 %', '1.000 EUR'],
           ],
-          note: 'Nach den Versicherungsbedingungen des Tarifs, Stand 01.01.2023.',
+          note: 'Nach den Versicherungsbedingungen der SDK für die AP-Tarife, Stand 01.01.2023.',
         },
         {
           type: 'paragraph',
@@ -219,7 +219,7 @@ export const article = {
           items: [
             'Prüfe auf kassenboost.de, welchen Bonus deine Krankenkasse zahlt und ob sich ein Wechsel lohnt.',
             'Reiche Homöopathie-Rechnungen aus 2026 noch bei deiner Kasse ein, falls sie bisher Homöopathie bezahlt hat.',
-            'Schau dir auf healio.de/ambulant an, welche Tarifstufe zu dir passt. Es gibt keine Wartezeit.',
+            'Schau dir auf healio.de/ambulant an, welche Tarifstufe zu dir passt. Die SDK-Tarife haben keine Wartezeit.',
           ],
         },
       ],
@@ -251,7 +251,7 @@ export const article = {
   ],
 
   factNugget:
-    'Healio verbindet ambulanten Zusatzschutz mit dem Bonusprogramm der Krankenkasse. Das Healio Gesundheitsbudget bietet in der höchsten Stufe bis zu 3.000 EUR in zwei Jahren, davon bis zu 1.000 EUR für Naturheilverfahren. Homöopathie zählt in den Versicherungsbedingungen des Tarifs ausdrücklich zu den Naturheilverfahren. Ob und wie gut sie wirkt, bewertet dieser Ratgeber nicht.',
+    'Healio verbindet ambulanten Zusatzschutz mit dem Bonusprogramm der Krankenkasse. Das Healio Gesundheitsbudget bietet in der höchsten Stufe bis zu 3.000 EUR in zwei Jahren, davon bis zu 1.000 EUR für Naturheilverfahren. Homöopathie zählt in den Versicherungsbedingungen der SDK ausdrücklich zu den Naturheilverfahren. Ob und wie gut sie wirkt, bewertet dieser Ratgeber nicht.',
 
   faqs: [
     {
@@ -262,7 +262,7 @@ export const article = {
     {
       question: 'Welche Zusatzversicherung zahlt Homöopathie?',
       answer:
-        'Eine ambulante Zusatzversicherung mit Baustein für Naturheilverfahren, zum Beispiel das Healio Gesundheitsbudget. Es erstattet je nach Stufe 50 bis 100 % bis 500 bis 1.000 EUR in zwei Kalenderjahren für Heilpraktiker- und Naturheilbehandlungen einschließlich verordneter Arzneimittel aus der Apotheke.',
+        'Eine ambulante Zusatzversicherung mit Baustein für Naturheilverfahren, zum Beispiel das Healio Gesundheitsbudget mit den SDK-Tarifen AP5 bis AP1. Es erstattet je nach Stufe 50 bis 100 % bis 500 bis 1.000 EUR in zwei Kalenderjahren für Heilpraktiker- und Naturheilbehandlungen einschließlich verordneter Arzneimittel aus der Apotheke.',
     },
     {
       question: 'Werden homöopathische Globuli erstattet?',
@@ -295,7 +295,7 @@ export const article = {
   sources: {
     checkedAt: '2026-10-11',
     checkedAtLabel: '11. Oktober 2026',
-    intro: 'Die Neuregelung stammt aus der Praxisnachricht der Kassenärztlichen Bundesvereinigung, die Kassenleistung bei Akupunktur aus der Richtlinie des G-BA, die Tarifregeln aus den Versicherungsbedingungen des Tarifs.',
+    intro: 'Die Neuregelung stammt aus der Praxisnachricht der Kassenärztlichen Bundesvereinigung, die Kassenleistung bei Akupunktur aus der Richtlinie des G-BA, die Tarifregeln aus den Versicherungsbedingungen der SDK.',
     items: [
       {
         label: 'Homöopathika, Anthroposophika und Cannabisblüten nicht mehr verordnungsfähig',
@@ -318,8 +318,10 @@ export const article = {
         accessedAt: '11.10.2026',
       },
       {
-        label: 'Versicherungsbedingungen des Tarifs: Naturheilverfahren, Stufen und Wartezeiten',
-        publisher: 'Healio Gesundheitsbudget',
+        label: 'SDK AP-Tarife: Naturheilverfahren, Stufen und Wartezeiten (AVB Teil II 1.753a)',
+        publisher: 'SDK',
+        href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf',
+        accessedAt: '11.10.2026',
         stand: 'Stand 01.01.2023',
       },
     ],
