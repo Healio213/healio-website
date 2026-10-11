@@ -913,6 +913,7 @@ const OPT_IN_SLUGS = [
   'wechselpraemie-krankenkasse',
   'tk-krankenhauszusatzversicherung',
   'tcm-krankenkasse',
+  'homoeopathie-krankenkasse-2027',
   'vorsorgeuntersuchungen-kinder',
 
 ];
@@ -1138,6 +1139,7 @@ const SERIEN_ZIELBEGRIFFE = {
   "wechselpraemie-krankenkasse": new RegExp("(?=.*krankenkasse)(?=.*wechsel)(?=.*prämie)", 'i'),
   "tk-krankenhauszusatzversicherung": new RegExp("(?=.*tk)(?=.*krankenhaus)", 'i'),
   "tcm-krankenkasse": new RegExp("(?=.*tcm)(?=.*kassenzulassung)", 'i'),
+  "homoeopathie-krankenkasse-2027": new RegExp("(?=.*homöopathie)(?=.*2027)", 'i'),
   "vorsorgeuntersuchungen-kinder": new RegExp("(?=.*vorsorgeuntersuchungen)(?=.*kind)", 'i'),
 
 };

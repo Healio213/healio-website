@@ -176,6 +176,7 @@ export const RATGEBER_GROUPS = [
       "akupunktur-krankenkasse",
       "aok-osteopathie",
       "tcm-krankenkasse",
+      "homoeopathie-krankenkasse-2027",
       "aok-heilpraktiker",
       "zusatzversicherung-osteopathie",
       "heilpraktiker-zusatzversicherung-ohne-wartezeit",

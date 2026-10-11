@@ -1121,6 +1121,17 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "homoeopathie-krankenkasse-2027",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Homöopathie ab 2027: Krankenkasse und Zusatzschutz",
+    "listTeaser": "Seit Juli 2026 gibt es Homöopathie nicht mehr auf Kassenrezept, ab Januar 2027 dürfen die Kassen sie auch freiwillig nicht mehr bezahlen. Hier erfährst du, was das für dich heißt, ob eine Zusatzversicherung homöopathische Mittel und Bluttests beim Heilpraktiker erstattet und worauf du bei der Rechnung achten musst.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Homöopathie ab 2027: Krankenkasse und Zusatzschutz | Healio",
+    "metaDescription": "Homöopathie ab 2027: keine Kassenleistung mehr. Was eine Zusatzversicherung bei Globuli, Bluttest und TCM erstattet. Mit Stufen, Rechnungstipps und FAQ.",
+    "publishedAt": "2026-10-11"
+  },
+  {
     "slug": "aok-heilpraktiker",
     "kind": "ratgeber",
     "group": "ambulant",

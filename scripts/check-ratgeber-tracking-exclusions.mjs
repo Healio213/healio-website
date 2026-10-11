@@ -97,8 +97,8 @@ async function capiStatus(mod, path) {
 }
 
 try {
-  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 61, 'Alle 61 neuen sensiblen Pfade gehören zur Freigabe.');
-  assert.equal(new Set(NEW_SENSITIVE_RATGEBER_PATHS).size, 61, 'Keine doppelten Soll-Pfade.');
+  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 62, 'Alle 62 neuen sensiblen Pfade gehören zur Freigabe.');
+  assert.equal(new Set(NEW_SENSITIVE_RATGEBER_PATHS).size, 62, 'Keine doppelten Soll-Pfade.');
 
   // Direkteinstieg und direkte Tracker-Aufrufe trotz vollständiger Zustimmung.
   for (const path of EXPECTED_GOOGLE_META_EXCLUDED_PATHS) {

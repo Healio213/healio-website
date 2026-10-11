@@ -321,6 +321,14 @@ export const article = {
       {
         "icon": "naturopathy",
         "tone": "mint",
+        "title": "Homöopathie ab 2027: Krankenkasse und Zusatzschutz",
+        "text": "Seit Juli 2026 nicht mehr auf Kassenrezept, ab Januar 2027 auch keine Satzungsleistung mehr. Was eine Zusatzversicherung bei Globuli, Bluttest und TCM erstattet.",
+        "to": "/ratgeber/homoeopathie-krankenkasse-2027",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "naturopathy",
+        "tone": "mint",
         "title": "AOK und Heilpraktiker: Leistungen richtig prüfen",
         "text": "Regionale Kassenextras, private Ergänzungsverträge und konkrete Rechnungen auseinanderhalten.",
         "to": "/ratgeber/aok-heilpraktiker",

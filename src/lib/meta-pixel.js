@@ -119,6 +119,7 @@ const META_EXCLUDED_PATHS = new Set([
   '/ratgeber/professionelle-zahnreinigung-sinnvoll',
   '/ratgeber/schwangerschaft-krankenkasse-melden',
   '/ratgeber/tcm-krankenkasse',
+  '/ratgeber/homoeopathie-krankenkasse-2027',
   '/ratgeber/tk-brille',
   '/ratgeber/tk-hautkrebsscreening',
   '/ratgeber/tk-heilpraktiker',
