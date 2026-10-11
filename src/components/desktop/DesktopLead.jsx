@@ -1,4 +1,5 @@
 import React from 'react';
+import UrgencyNote from '@/components/UrgencyNote';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, ChevronDown } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
@@ -104,6 +105,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={isHome ? copy.hint : undefined}
+      urgency={isHome || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
       actions={(
         <>
           <a

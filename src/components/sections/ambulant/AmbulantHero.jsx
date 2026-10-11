@@ -1,4 +1,5 @@
 import React from 'react';
+import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -106,6 +107,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
               <ArrowDown className="mr-2 h-5 w-5" />
               {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : t('hero.ctaCalculate')}
             </a>
+            {!fromBonusTopic && <UrgencyNote surface="ambulant" className="!mt-0" />}
             <p className="max-w-xl text-left text-base leading-7 text-slate-300">
               {fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}
             </p>

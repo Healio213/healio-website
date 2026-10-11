@@ -1,4 +1,5 @@
 import React from 'react';
+import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
@@ -62,6 +63,7 @@ const StationaerHero = () => {
             {t('refresh.hero.cta')}
             <ArrowDown className="h-4 w-4" aria-hidden="true" />
           </a>
+          <UrgencyNote surface="stationaer" />
           <a href="#einzelzimmer-kosten" className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
             {t('refresh.hero.costsCta')}
           </a>

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -156,6 +157,7 @@ const ZahnPage = () => {
                 >
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
+                <UrgencyNote surface="zahn" />
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{content.hero.condition}</p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">

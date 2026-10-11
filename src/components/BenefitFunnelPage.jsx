@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { Check, Heart, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
@@ -200,6 +201,7 @@ export default function BenefitFunnelPage() {
               <a href="#klinikschutz" className={sceneSecondaryButtonClass}>Klinikschutz für dein Kind</a>
             </>
           )}
+          urgency={<UrgencyNote surface="schwangerschaft" />}
         >
           <div className={sceneBelow.grid}>
             <div className="min-w-0">
@@ -249,6 +251,7 @@ export default function BenefitFunnelPage() {
                 <a href="#zusatzschutz" className={primary}>Zusatzschutz und Beitrag ansehen</a>
                 <a href="#klinikschutz" className={`${secondary} bg-white/60`}>Klinikschutz für dein Kind</a>
               </div>
+              <UrgencyNote surface="schwangerschaft" tone="light" />
               <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-home-slate">{config.leadSecondary}</p>
             </div>
 
