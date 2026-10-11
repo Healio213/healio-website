@@ -3,8 +3,9 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown, HeartHandshake, Watch } from 'lucide-react';
+import { Gift, ArrowRightLeft, Plus, Minus, Pencil, ChevronDown, HeartHandshake } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TextHighlight } from '@/components/ui/ScrollAnimation';
 import { trackEvent } from '@/lib/analytics';
@@ -12,6 +13,7 @@ import { calculateIkkBonus, capActivityCount } from '@/lib/ikkBonusCalculator';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { BEISPIEL_GRUPPE } from '@/data/sdkAmbulantBeitraege';
+import { useLanguage } from '@/hooks/useLanguage';
 
 // IKK classic Bonustabelle 2026. Geldbonus und Zuschuss sind Alternativen;
 // der Zuschuss beträgt das Dreifache des Geldbonus und ist auf die
@@ -46,6 +48,24 @@ const ACTIVITY_DEFS = [
   { id: 'bmi', cash: 25, subsidy: 75, category: 'status' },
   { id: 'blutdruck', cash: 25, subsidy: 75, category: 'status' },
 ];
+
+// Schalter „Ich bin schwanger“ (Frank 11.10.2026): rechnet mit allen Vorsorgen der
+// Schwangerschaft aus der IKK-classic-Bonustabelle, die dieser Rechner schon kennt, mit
+// den hier hinterlegten Obergrenzen (zwölf Mutterschaftsvorsorgen, siehe oben).
+// Der Höchstwert „bis zu 1.155 EUR laut Satzung“ steht als Hinweis daneben und wird
+// nicht berechnet, weil darin Posten stehen, die dieser Rechner nicht führt.
+const PREGNANT_SELECTION = {
+  mutterschaft: 12,
+  checkup: true,
+  krebs: true,
+  zahn: 2,
+  kurs: true,
+  fitness: true,
+  sport: true,
+  rueckbildung: true,
+  bmi: true,
+  blutdruck: true,
+};
 
 const IKK_BONUS_2026_INFO = 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf';
 
@@ -109,7 +129,10 @@ const AmbulantBonusCalculator = ({
     bmi: true,
   };
 
+  const { getPath } = useLanguage();
   const [selectedActivities, setSelectedActivities] = useState(EXAMPLE_SELECTION);
+  const [pregnant, setPregnant] = useState(false);
+  const selectionBeforePregnant = useRef(null);
   // Follow the selected tariff's example until the visitor enters a personal
   // premium. Changing tariff must preserve their activities and own input.
   const [customMonatsbeitrag, setMonatsbeitrag] = useState(null);
@@ -135,7 +158,20 @@ const AmbulantBonusCalculator = ({
     });
   };
 
+  const handlePregnantToggle = () => {
+    if (!pregnant) {
+      selectionBeforePregnant.current = selectedActivities;
+      setSelectedActivities(PREGNANT_SELECTION);
+      setPregnant(true);
+      trackEvent('bonus_calculator_pregnant', { component: 'bonus_calculator', interaction_type: 'toggle_on' });
+    } else {
+      setSelectedActivities(selectionBeforePregnant.current || EXAMPLE_SELECTION);
+      setPregnant(false);
+    }
+  };
+
   const handleReset = () => {
+    setPregnant(false);
     setSelectedActivities({});
     setMonatsbeitrag(null);
   };
@@ -271,6 +307,23 @@ const AmbulantBonusCalculator = ({
 
           {/* Left Column: Checkboxes (60%) */}
           <div className="w-full lg:w-[60%] bg-white rounded-2xl p-3 sm:p-6 lg:p-8 shadow-lg border border-gray-100">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={pregnant}
+              onClick={handlePregnantToggle}
+              data-healio-nita-avoid
+              data-healio-calculator="pregnant-switch"
+              className={`mb-5 flex min-h-14 w-full items-center justify-between gap-4 rounded-xl border-2 px-4 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-healio-primary ${pregnant ? 'border-healio-primary bg-healio-light' : 'border-gray-200 bg-white hover:border-gray-300'}`}
+            >
+              <span className="min-w-0">
+                <span className="block font-bold text-healio-dark">{t('bonusCalculator.pregnantLabel')}</span>
+                <span className="mt-0.5 block text-base leading-snug text-gray-600">{t('bonusCalculator.pregnantHint')}</span>
+              </span>
+              <span className={`relative inline-flex h-7 w-12 shrink-0 rounded-full transition-colors ${pregnant ? 'bg-healio-primary' : 'bg-gray-300'}`} aria-hidden="true">
+                <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-all ${pregnant ? 'left-[1.375rem]' : 'left-0.5'}`} />
+              </span>
+            </button>
             <h3 className="text-2xl font-bold text-healio-dark mb-2">{t('bonusCalculator.selectActivities')}</h3>
             <p className="mb-4 text-base md:mb-6 font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>
 
@@ -398,17 +451,6 @@ const AmbulantBonusCalculator = ({
               </div>
             </div>
 
-            {/* Apple Watch Hinweis */}
-            <div className="mt-3 bg-purple-50 border border-purple-200 rounded-xl p-3 md:mt-4 md:p-4 flex gap-3 items-start">
-              <Watch className="mt-0.5 h-5 w-5 flex-shrink-0 text-purple-700" aria-hidden="true" />
-              <div className="min-w-0 hyphens-auto [hyphenate-limit-chars:10_4_4]">
-                <p className="text-base font-bold text-purple-900 mb-1">{t('bonusCalculator.appleWatchNote')}</p>
-                <p className="text-base text-purple-800 leading-relaxed">
-                  {t('bonusCalculator.appleWatchNoteDesc')}
-                </p>
-              </div>
-            </div>
-
             <div className="mt-4 text-center md:text-left">
               <button
                 onClick={handleReset}
@@ -510,6 +552,14 @@ const AmbulantBonusCalculator = ({
                     {t(customMonatsbeitrag === null ? 'bonusCalculator.editHint' : 'bonusCalculator.customPremiumNote')}
                   </p>
                 </div>
+
+                {pregnant && (
+                  <div className="mb-4 rounded-xl border border-white/25 bg-white/10 p-4 text-left text-base leading-relaxed text-white" data-healio-calculator="pregnant-note">
+                    <p className="font-bold">{t('bonusCalculator.pregnantResultTitle')}</p>
+                    <p className="mt-1 text-white/90">{t('bonusCalculator.pregnantResultText')}</p>
+                    <Link to={getPath('schwangerschaft')} className="mt-2 inline-flex min-h-11 items-center font-bold text-white underline underline-offset-4">{t('bonusCalculator.pregnantLink')}</Link>
+                  </div>
+                )}
 
                 {/* Der Tausch unterm Strich: effektive Kosten gegen 3.000-EUR-Budget */}
                 <div className="bg-white rounded-xl p-4 mb-4 md:p-5 md:mb-6 text-left shadow-lg">
