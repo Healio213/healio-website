@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import MobileScene from '@/components/desktop/MobileScene';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -28,9 +28,6 @@ const HomeHero = () => {
   const reducedMotion = useReducedMotion();
   const HeroHeading = useDesktopLayout() ? motion.h2 : motion.h1;
   const heroRef = useRef(null);
-  const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 900], [0, 72]);
-  const backgroundScale = useTransform(scrollY, [0, 900], [1.035, 1.08]);
   const titleLead = t('hero.titleLead');
   const titleAccent = t('hero.titleAccent');
   const switchItems = t('hero.switch', { returnObjects: true });
@@ -72,28 +69,6 @@ const HomeHero = () => {
       className="relative isolate flex lg:hidden min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
       aria-labelledby="home-hero-heading"
     >
-      <picture className="absolute inset-0 -z-30 overflow-hidden">
-        <source srcSet="/hero-bg.webp" type="image/webp" />
-        <motion.img
-          src="/hero-bg.jpg"
-          alt=""
-          width="1536"
-          height="1024"
-          loading="eager"
-          {...{ fetchpriority: 'high' }}
-          decoding="async"
-          draggable="false"
-          className="absolute -top-12 left-0 h-[calc(100%+6rem)] w-full select-none object-cover object-[72%_center] md:object-center"
-          initial={reducedMotion ? false : { opacity: 0.58 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: reducedMotion ? 0 : 1.1, ease: entranceEase }}
-          style={{
-            y: reducedMotion ? 0 : backgroundY,
-            scale: reducedMotion ? 1 : backgroundScale,
-          }}
-          aria-hidden="true"
-        />
-      </picture>
 
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(3,12,20,0.62)_0%,rgba(3,12,20,0.48)_30%,rgba(3,12,20,0.72)_76%,rgba(3,12,20,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(3,12,20,0.9)_0%,rgba(3,12,20,0.77)_43%,rgba(3,12,20,0.28)_73%,rgba(3,12,20,0.5)_100%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(37,201,144,0.22),transparent_44%)]" />

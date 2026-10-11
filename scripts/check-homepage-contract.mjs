@@ -82,10 +82,9 @@ assert.match(header, /KASSENBOOST_COMPARE_URL/);
 
 assert.match(homeHero, /id="home-hero-heading"/);
 assert.match(homeHero, /home-hero-passed/);
-assert.match(homeHero, /\/hero-bg\.webp/);
-assert.match(homeHero, /object-\[72%_center\]/);
-assert.match(homeHero, /useScroll/);
-assert.match(homeHero, /useTransform/);
+// Seit 11.10.2026: Handy-Kopf ohne altes Hintergrundfoto, nur Cartoon-Szene (Franks Wunsch).
+assert.doesNotMatch(homeHero, /\/hero-bg\.(webp|jpg)/);
+assert.match(homeHero, /<MobileScene surface="home"/);
 assert.match(homeHero, /useReducedMotion/);
 assert.match(homeHero, /getPath\(item\.routeKey\)/);
 assert.match(homeHero, /hero\.switch/);
