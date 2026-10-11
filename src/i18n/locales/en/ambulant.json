@@ -503,7 +503,7 @@
     "effectiveNote": "Example calculation based on your inputs and the Ambulant 100 tariff. Payment is capped at the documented annual premium and subject to current bonus and tariff terms.",
     "pregnantLabel": "I am pregnant",
     "pregnantHint": "Calculates with all pregnancy check-ups.",
-    "pregnantResultTitle": "Calculated if you attend all check-ups during pregnancy.",
+    "pregnantResultTitle": "Calculated if you attend all check-ups and take part in all activities during pregnancy.",
     "pregnantResultText": "The bonus pays for your supplementary cover and your health budget stays in place. Under the statutes, up to EUR 1,155 is the maximum possible in pregnancy if everything applies at once.",
     "pregnantLink": "More on pregnancy"
   },

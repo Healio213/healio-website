@@ -551,7 +551,7 @@
     "effectiveNote": "Beispielrechnung mit deinen Angaben und dem Tarif Ambulant 100. Ausgezahlt wird höchstens der nachgewiesene Jahresbeitrag; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.",
     "pregnantLabel": "Ich bin schwanger",
     "pregnantHint": "Rechnet mit allen Vorsorgen in der Schwangerschaft.",
-    "pregnantResultTitle": "Gerechnet, wenn du alle Vorsorgen in der Schwangerschaft wahrnimmst.",
+    "pregnantResultTitle": "Gerechnet, wenn du alle Vorsorgen und Aktivitäten in der Schwangerschaft wahrnimmst.",
     "pregnantResultText": "Der Bonus bezahlt deinen Zusatzschutz, dein Gesundheitsbudget bleibt bestehen. Laut Satzung sind in der Schwangerschaft bis zu 1.155 EUR als Höchstwert möglich, wenn alles gleichzeitig zutrifft.",
     "pregnantLink": "Mehr zur Schwangerschaft"
   },

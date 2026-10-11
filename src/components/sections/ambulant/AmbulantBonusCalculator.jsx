@@ -325,7 +325,7 @@ const AmbulantBonusCalculator = ({
               </span>
             </button>
             <h3 className="text-2xl font-bold text-healio-dark mb-2">{t('bonusCalculator.selectActivities')}</h3>
-            <p className="mb-4 text-base md:mb-6 font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>
+            {!pregnant && <p className="mb-4 text-base md:mb-6 font-medium leading-relaxed text-gray-600">{t('bonusCalculator.exampleNote')}</p>}
 
             <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-4 lg:grid-cols-1 xl:grid-cols-2">
               {ACTIVITIES.map((activity, index) => {
