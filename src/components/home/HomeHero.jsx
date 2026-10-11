@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import MobileScene from '@/components/desktop/MobileScene';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
@@ -11,6 +12,7 @@ import DesktopLead from '@/components/desktop/DesktopLead';
 import HomeContributionExample from './HomeContributionExample';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
+import { getDesktopLeadContent } from '@/components/desktop/desktopLeadContent';
 
 const entranceEase = [0.16, 1, 0.3, 1];
 
@@ -98,6 +100,7 @@ const HomeHero = () => {
 
       <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-6 sm:px-6 md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
         <div className="relative z-20 flex w-full max-w-[1060px] flex-col">
+          <MobileScene surface="home" className="mb-5 !mx-0 sm:mb-7" />
           <HeroHeading
             {...entrance(0.08)}
             id="home-hero-heading"
@@ -116,7 +119,8 @@ const HomeHero = () => {
           </HeroHeading>
 
           <motion.p {...entrance(0.17)} className="order-1 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
-            {t('hero.description')}
+            {t('hero.description')}{' '}
+            <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-home-mint-active underline underline-offset-4" onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}>{getDesktopLeadContent('home', lang).budgetLink}</Link>
           </motion.p>
 
           <motion.div {...entrance(0.21)} className="order-2 mt-5 flex flex-col items-start">

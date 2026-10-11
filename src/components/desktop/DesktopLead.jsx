@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, ChevronDown } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { trackEvent } from '@/lib/analytics';
@@ -16,7 +16,7 @@ const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', station
 const OfferList = ({ copy, surface }) => (
   <div className="min-w-0">
     <h2 className={sceneBelow.listTitle}>{copy.panelTitle}</h2>
-    <p className={sceneBelow.listIntro}>{copy.panelText}</p>
+    {copy.panelText && <p className={sceneBelow.listIntro}>{copy.panelText}</p>}
     {copy.calculation ? (
       <ol className={sceneBelow.list}>
         {copy.calculation.map((row) => (
@@ -47,7 +47,20 @@ const OfferList = ({ copy, surface }) => (
         ))}
       </dl>
     )}
-    <p className="mt-4 text-sm leading-6 text-[#bfced6]">{copy.panelNote}</p>
+    {surface === 'home' ? (
+      <details className="group mt-5 rounded-2xl border border-white/20 bg-white/[0.06] px-5 py-1" data-home-know="">
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 font-display text-base font-bold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] [&::-webkit-details-marker]:hidden">
+          {copy.knowTitle}
+          <ChevronDown className="h-5 w-5 shrink-0 text-[#5ee0b1] transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div className="space-y-2 pb-4 text-sm leading-6 text-[#c9d8de]">
+          {copy.knowItems.map((item) => <p key={item}>{item}</p>)}
+          <p>{copy.panelNote}</p>
+        </div>
+      </details>
+    ) : (
+      <p className="mt-4 text-sm leading-6 text-[#bfced6]">{copy.panelNote}</p>
+    )}
   </div>
 );
 
@@ -56,6 +69,9 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const { getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
   const isHome = surface === 'home';
+  // Besuchertest 11.10.2026: Auf /zahn und /stationaer steht dieselbe Auswahl (zwei Zahn-Wege,
+  // vier Klinik-Tarife) weiter unten ausführlich; die Kurzliste im Kopfbereich entfällt.
+  const showOffer = surface !== 'zahn' && surface !== 'stationaer';
   const headingId = `desktop-${surface}-heading`;
   const action = isHome ? KASSENBOOST_COMPARE_URL : fromBonusTopic && surface === 'ambulant' ? '#tarifwahl' : destinations[surface];
 
@@ -81,7 +97,12 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           <span className={sceneAccentClass}>{copy.titleAccent}</span>
         </>
       )}
-      subtitle={isHome || surface === 'zahn' ? copy.description : undefined}
+      subtitle={isHome ? (
+        <>
+          {copy.description}{' '}
+          <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-[#5ee0b1] underline decoration-[#5ee0b1]/60 underline-offset-4 hover:text-white" onClick={() => trackEvent('home_budget_link', { placement: 'desktop-hero' })}>{copy.budgetLink}</Link>
+        </>
+      ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={isHome ? copy.hint : undefined}
       actions={(
         <>
@@ -109,13 +130,13 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       )}
     >
-      <div className={sceneBelow.grid}>
-        <div className="min-w-0">
+      <div className={showOffer && !isHome ? sceneBelow.grid : 'grid grid-cols-1 gap-6'}>
+        <div className={isHome ? 'hidden' : 'min-w-0'}>
           {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}>{copy.description}</p>}
-          <p className={sceneBelow.note}>{copy.condition}</p>
+          {!isHome && <p className={sceneBelow.note}>{copy.condition}</p>}
           {!isHome && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>
-        <OfferList copy={copy} surface={surface} />
+        {showOffer && (isHome ? <div className="max-w-2xl"><OfferList copy={copy} surface={surface} /></div> : <OfferList copy={copy} surface={surface} />)}
       </div>
 
       <ul className={sceneBelow.trust}>

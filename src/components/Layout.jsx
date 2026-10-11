@@ -45,7 +45,7 @@ const Layout = () => {
       <main className="flex-grow w-full">
         <Outlet />
       </main>
-      <Footer hideCta={hideCta} hideAppPromotion={hideAppPromotion} />
+      <Footer hideCta={hideCta} hideAppPromotion={hideAppPromotion} formalApp={pathname.startsWith('/unternehmen') || pathname.startsWith('/en/company')} />
       {NITA_PILL_ROUTES.has(pathname) && <NitaQuickPill key={pathname} mobileOnly />}
     </div>
   );

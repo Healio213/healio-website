@@ -25,8 +25,11 @@ const HomeContributionExample = ({ language }) => {
         </p>
         <details className="mt-3">
           <summary className="min-h-11 cursor-pointer py-3 font-bold text-[#075f46] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
-            {english ? 'How the bonus offset works' : 'So funktioniert der Bonusausgleich'}
+            {copy.knowTitle}
           </summary>
+          <div className="space-y-2 pb-2 text-sm leading-6 text-[#334f46]">
+            {copy.knowItems.map((item) => <p key={item}>{item}</p>)}
+          </div>
           <dl className="space-y-3 pb-2">
             {copy.calculation.map((row) => (
               <div key={row.label}>

@@ -115,7 +115,7 @@ const FooterGroup = ({ id, title, items, mobileItems = items, renderItem, classN
   );
 };
 
-const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
+const Footer = ({ hideCta = false, hideAppPromotion = false, formalApp = false }) => {
   const { t } = useTranslation('common');
   const { getPath, lang } = useLanguage();
   const { pathname } = useLocation();
@@ -216,10 +216,10 @@ const Footer = ({ hideCta = false, hideAppPromotion = false }) => {
                 {t('footer.appLabel')}
               </div>
               <h3 className="text-2xl font-bold leading-tight text-white md:text-3xl">
-                {t('footer.appTitle')}
+                {t(formalApp ? 'footer.appTitleFormal' : 'footer.appTitle')}
               </h3>
               <p className="mt-3 text-base leading-relaxed text-slate-300 md:leading-6">
-                {t('footer.appBody')}
+                {t(formalApp ? 'footer.appBodyFormal' : 'footer.appBody')}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 text-sm text-slate-200 md:mt-5">
                 {[t('footer.appFeatureBudget'), t('footer.appFeatureReceipts'), t('footer.appFeatureBonus')].map((feature) => (

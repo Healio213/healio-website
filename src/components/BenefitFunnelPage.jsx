@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import MobileScene from '@/components/desktop/MobileScene';
 import { Check, Heart, Info } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import HighlightText from '@/components/ui/HighlightText';
@@ -234,6 +235,7 @@ export default function BenefitFunnelPage() {
           <div className="absolute left-1/2 top-8 -z-10 h-64 w-64 rounded-full bg-[#ffe3c2]/45 blur-3xl" aria-hidden="true" />
           <div className="absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle_at_center,#f3c6d0_1px,transparent_1px)] [background-size:26px_26px]" aria-hidden="true" />
           <div className={`${wrap} grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12`}>
+            <MobileScene surface="schwangerschaft" className="-mb-2" />
             <div className="min-w-0">
               <p className="inline-flex items-center gap-2 rounded-full bg-white/75 px-4 py-1.5 font-display text-sm font-extrabold uppercase tracking-[0.18em] text-[#b0476a] md:text-xs shadow-[0_6px_18px_rgba(176,71,106,0.10)]">
                 <Heart className="h-3.5 w-3.5 fill-current" aria-hidden="true" />

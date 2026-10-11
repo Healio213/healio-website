@@ -16,7 +16,7 @@ const SCHUTZ = {
 const COPY = {
   de: {
     title: 'So kannst du {{schutz}} finanzieren',
-    lead: 'Zwei Wege, die sich auch kombinieren lassen:',
+    lead: 'Beides lässt sich kombinieren:',
     ways: [
       {
         title: 'Günstigere Krankenkasse',

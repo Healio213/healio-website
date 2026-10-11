@@ -56,12 +56,14 @@ const ClickToPlayVideo = ({
           type="button"
           onClick={startVideo}
           aria-label={ariaLabel}
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/10 transition-colors hover:bg-black/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-home-mint"
+          className="absolute inset-0 flex items-end justify-between gap-3 bg-black/10 p-3 transition-colors hover:bg-black/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-home-mint sm:p-5"
         >
-          <span className="grid h-16 w-16 place-items-center rounded-full bg-home-mint text-home-midnight shadow-lg sm:h-20 sm:w-20">
-            <Play className="ml-1 h-8 w-8 fill-current sm:h-9 sm:w-9" aria-hidden="true" />
+          {/* Besuchertest 11.10.2026: Der Startknopf sitzt unten rechts und nicht mehr
+              mittig auf der Titelzeile des Vorschaubilds. */}
+          {overlayBadge ? <span className="rounded-full bg-home-midnight px-4 py-2 text-left text-sm font-semibold text-white">{overlayBadge}</span> : <span aria-hidden="true" />}
+          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-home-mint text-home-midnight shadow-lg sm:h-16 sm:w-16">
+            <Play className="ml-1 h-6 w-6 fill-current sm:h-7 sm:w-7" aria-hidden="true" />
           </span>
-          {overlayBadge && <span className="rounded-full bg-home-midnight px-4 py-2 text-sm font-semibold text-white">{overlayBadge}</span>}
         </button>
       )}
     </div>

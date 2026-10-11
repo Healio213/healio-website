@@ -54,14 +54,20 @@ const SceneHero = ({ surface, image, headingId, heading, subtitle, actions, acti
       aria-labelledby={headingId}
     >
       <div className="relative isolate overflow-hidden">
-        <img
-          src={src}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          decoding="async"
-          className="absolute bottom-0 right-0 top-20 -z-20 h-[calc(100%-5rem)] w-[86%] object-cover object-[80%_22%]"
-        />
+        {/* Besuchertest 11.10.2026: Die Szene lädt nur ab lg. Unter lg bleibt dieser Bereich
+            ausgeblendet; ohne <source media> würde das Handy das große Bild trotzdem laden
+            (rund 110 bis 130 KB), obwohl es nie sichtbar ist. */}
+        <picture>
+          <source media="(min-width: 1024px)" srcSet={src} />
+          <img
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            decoding="async"
+            className="absolute bottom-0 right-0 top-20 -z-20 h-[calc(100%-5rem)] w-[86%] object-cover object-[80%_22%]"
+          />
+        </picture>
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,#071726_0%,#071726_14%,rgba(7,23,38,0.78)_30%,rgba(7,23,38,0.32)_52%,rgba(7,23,38,0)_74%)]" aria-hidden="true" />
         <div className="absolute inset-x-0 top-20 -z-10 h-28 bg-gradient-to-b from-[#071726] to-transparent" aria-hidden="true" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-gradient-to-t from-[#071726] to-transparent" aria-hidden="true" />

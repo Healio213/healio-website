@@ -1,4 +1,5 @@
 import React from 'react';
+import MobileScene from '@/components/desktop/MobileScene';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -160,6 +161,7 @@ const AboutPage = () => {
             </div>
 
             <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
+              <MobileScene surface="about" />
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 22 }}
                 animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}

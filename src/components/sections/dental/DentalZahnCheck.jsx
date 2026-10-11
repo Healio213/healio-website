@@ -221,7 +221,7 @@ const DentalZahnCheck = () => {
             })}
           </div>
           {/* Mobil nur im Ergebnis sichtbar: bei einer Frage steht dieselbe Zeile schon oben in der Karte. */}
-          <p className={`mt-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-slate-400 md:text-xs md:tracking-[0.16em] ${result ? '' : 'hidden md:block'}`}>
+          <p className={`mt-3 font-display text-sm font-bold uppercase tracking-[0.1em] text-slate-400 md:text-xs md:tracking-[0.16em] ${result ? '' : 'hidden'}`}>
             {fillTemplate(content.progress, { current: progress })}
           </p>
         </div>
@@ -258,21 +258,26 @@ const DentalZahnCheck = () => {
                   <h3 className="mt-4 max-w-[24ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl md:mt-7">
                     {question.text}
                   </h3>
-                  {question.hint && <p className="mt-3 max-w-2xl text-base leading-6 text-slate-600 md:leading-7">{question.hint}</p>}
-                  {/* Zeitraum-Regel direkt unter Frage 1 (Frank 05.10.2026): was älter
-                      als 2 Jahre ist, zählt nicht mehr. Das Gegenstück (in den letzten
-                      2 Jahren oder läuft schon, dann Sofortschutz) steht in der Unterzeile
-                      der Ja-Antwort. Kompakt gehalten, damit die Antwortknöpfe am Handy
-                      nah an der Frage bleiben. Reine Anzeige, die Weiche bleibt computeResult. */}
-                  {question.rules && (
-                    <ul className="mt-3 grid max-w-2xl gap-2">
-                      {question.rules.map((rule) => (
-                        <li key={rule.title} className={`rounded-2xl border px-3 py-2 text-base leading-6 ${toneClasses[rule.tone] || toneClasses.neutral}`}>
-                          <strong className="font-display font-extrabold">{rule.title}</strong>{' '}
-                          <span className="text-slate-700">{rule.text}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Besuchertest 11.10.2026: Erklärtext und Zeitraum-Regel stehen im HTML,
+                      sind aber hinter "Warum fragen wir das?" eingeklappt. Die Frage und
+                      die Antwortknöpfe stehen so direkt untereinander. */}
+                  {(question.hint || question.rules) && (
+                    <details className="group mt-3 max-w-2xl" data-zahn-frage-erklaerung="">
+                      <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1 font-display text-base font-bold text-[#087654] underline underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] [&::-webkit-details-marker]:hidden">
+                        Warum fragen wir das?
+                      </summary>
+                      {question.hint && <p className="mt-2 text-base leading-6 text-slate-600 md:leading-7">{question.hint}</p>}
+                      {question.rules && (
+                        <ul className="mt-3 grid gap-2">
+                          {question.rules.map((rule) => (
+                            <li key={rule.title} className={`rounded-2xl border px-3 py-2 text-base leading-6 ${toneClasses[rule.tone] || toneClasses.neutral}`}>
+                              <strong className="font-display font-extrabold">{rule.title}</strong>{' '}
+                              <span className="text-slate-700">{rule.text}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </details>
                   )}
 
                   <div className="mt-5 grid gap-3 md:mt-8">

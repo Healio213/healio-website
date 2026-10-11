@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { ArrowUp, Check, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -35,6 +35,13 @@ const StationaerFamily = () => {
   const { t } = useTranslation('stationaer');
   const midwifeRows = asList(t('refresh.family.midwife.rows', { returnObjects: true }));
   const reduceMotion = useReducedMotion();
+  const midwifeRef = useRef(null);
+  useEffect(() => {
+    const open = () => { if (window.location.hash === '#hebamme' && midwifeRef.current) midwifeRef.current.open = true; };
+    open();
+    window.addEventListener('hashchange', open);
+    return () => window.removeEventListener('hashchange', open);
+  }, []);
   // Nur mobil (unter md): die drei langen Antworten stehen als Akkordeon. Die
   // erste Karte (werdende Eltern) startet offen, weil dort die Bedingungen der
   // Neugeborenen-Nachversicherung stehen (Frist, Ausschluss bei festgestellter
@@ -108,14 +115,21 @@ const StationaerFamily = () => {
                 </div>
                 <div id={panelId} className={`${isOpen ? 'flex flex-col' : 'hidden'} md:contents`}>
                   <p className="mt-4 text-base leading-relaxed text-slate-600 md:mt-5 md:leading-6">{t(`refresh.family.${card.key}.body`)}</p>
-                  <ul className="mb-5 mt-4 space-y-3 text-base text-slate-700 md:mb-6 md:mt-5 md:text-sm">
-                    {asList(t(`refresh.family.${card.key}.items`, { returnObjects: true })).map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <Check className={`mt-1 h-4 w-4 shrink-0 md:mt-0.5 ${card.accent}`} aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Besuchertest 11.10.2026: Die Einzelpunkte stehen im HTML, sind aber eingeklappt. */}
+                  <details className="group mb-5 mt-4 text-base text-slate-700 md:mb-6 md:mt-5 md:text-sm">
+                    <summary className={`inline-flex min-h-11 cursor-pointer list-none items-center gap-1 font-display text-base font-bold underline underline-offset-4 md:text-sm [&::-webkit-details-marker]:hidden ${card.accent}`}>
+                      Alle Punkte ansehen
+                      <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+                    </summary>
+                    <ul className="mt-3 space-y-3">
+                      {asList(t(`refresh.family.${card.key}.items`, { returnObjects: true })).map((item) => (
+                        <li key={item} className="flex items-start gap-2.5">
+                          <Check className={`mt-1 h-4 w-4 shrink-0 md:mt-0.5 ${card.accent}`} aria-hidden="true" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
                   <p className={`mt-auto rounded-2xl ${card.noteBg} p-4 text-base font-medium leading-relaxed text-slate-600 md:text-sm md:leading-relaxed`}>
                     {t(`refresh.family.${card.key}.note`)}
                   </p>
@@ -131,7 +145,11 @@ const StationaerFamily = () => {
           aria-labelledby="stationaer-hebamme-heading"
           data-healio-midwife="stationaer"
         >
-          <div>
+          {/* Besuchertest 11.10.2026: Die Hebammen-Tabelle ist eingeklappt (steht im HTML),
+              damit die Familien-Strecke kürzer wird. Der Anker #hebamme öffnet sie. */}
+          <details ref={midwifeRef} className="group min-w-0 md:col-span-full" data-healio-midwife-details="">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] [&::-webkit-details-marker]:hidden">
+              <div>
             <FriendlyIcon kind="pregnancy" tone="coral" size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
             <p className="mt-4 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-[#b75f42] md:mt-6 md:text-xs md:tracking-[0.18em]">
               {t('refresh.family.midwife.eyebrow')}
@@ -139,11 +157,15 @@ const StationaerFamily = () => {
             <h3 id="stationaer-hebamme-heading" className="mt-3 font-display text-2xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#071726] [text-wrap:balance] sm:text-3xl">
               {t('refresh.family.midwife.title')}
             </h3>
+              </div>
+              <ChevronDown className="mt-3 h-6 w-6 shrink-0 text-[#087454] transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="mt-4 grid gap-6 md:gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+              <div>
             <p className="mt-4 text-base leading-relaxed text-slate-600 [text-wrap:pretty]">
               {t('refresh.family.midwife.lead')}
             </p>
-          </div>
-
+              </div>
           {/* Mobil Wischreihe mit vier kleinen Karten; ab md bleibt es die
               bisherige Liste mit Trennlinien. */}
           <MobileSwipeRow
@@ -170,6 +192,8 @@ const StationaerFamily = () => {
               </dl>
             ))}
           </MobileSwipeRow>
+            </div>
+          </details>
         </article>
 
         <div className="mt-6 text-center md:mt-8">

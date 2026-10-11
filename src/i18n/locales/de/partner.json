@@ -1,15 +1,15 @@
 {
   "hero": {
     "badge": "Für Praxen, Therapeuten und Optiker",
-    "title": "Wie viele hochwertige Behandlungspläne verlieren Sie an die <highlight>Angst vor dem Eigenanteil?</highlight>",
-    "subtitle": "Schaffen Sie finanzielle Klarheit für Ihre Patienten: Mit passendem Zusatzschutz sind bis zu <highlight>3.000 EUR Gesundheitsbudget in 2 Jahren</highlight> möglich, verteilt auf vier Leistungstöpfe. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Ihre Praxis informiert neutral; Prüfung, Beratung und Antragsbegleitung übernimmt Healio.",
+    "title": "Wie viele hochwertige Behandlungspläne verlierst du an die <highlight>Angst vor dem Eigenanteil?</highlight>",
+    "subtitle": "Schaffe finanzielle Klarheit für deine Patienten: Mit passendem Zusatzschutz sind bis zu <highlight>3.000 EUR Gesundheitsbudget in 2 Jahren</highlight> möglich, verteilt auf vier Leistungstöpfe. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Deine Praxis informiert neutral; Prüfung, Beratung und Antragsbegleitung übernimmt Healio.",
     "cta": "30-minütiges Kennenlernen buchen",
     "secondaryCta": "Praxis-Leitfaden als PDF anfordern",
     "roleNote": "Keine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.",
     "imageAlt": "Therapeutin im Gespräch mit einer Patientin in einer hellen Praxis",
     "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
     "videoPlayLabel": "Erklärvideo starten",
-    "videoFallback": "Ihr Browser unterstützt kein Video."
+    "videoFallback": "Dein Browser unterstützt kein Video."
   },
   "leitfadenHint": {
     "lead": "Das Konzept zum Nachlesen:",
@@ -20,7 +20,7 @@
     "items": [
       {
         "title": "Praxis informiert",
-        "text": "Sie geben einen neutralen Hinweis, ohne Versicherungsberatung."
+        "text": "Du gibst einen neutralen Hinweis, ohne Versicherungsberatung."
       },
       {
         "title": "Patienten entscheiden",
@@ -34,20 +34,20 @@
   },
   "explanationVideo": {
     "title": "Wenn das Budget die Therapie stoppt: Das Partnerkonzept in gut einer Minute.",
-    "subtitle": "So eröffnen Sie Ihren Patienten einen Weg zu passendem Zusatzschutz und nutzen einen möglichen Kassenbonus für den Beitrag.",
+    "subtitle": "So eröffnest du deinen Patienten einen Weg zu passendem Zusatzschutz und nutzen einen möglichen Kassenbonus für den Beitrag.",
     "points": [
       "Klare Rollen für Praxis, Patienten und Healio",
       "Voraussetzungen ohne Pauschalversprechen",
       "Nächster Schritt: 30-minütiges Kennenlernen"
     ],
     "bookingCta": "30-minütiges Kennenlernen buchen",
-    "hint": "Das Budget entsteht durch einen passenden Tarif. Wichtig für Ihre Patienten: Abschluss und Leistungsvoraussetzungen rechtzeitig vor der Behandlung prüfen.",
+    "hint": "Das Budget entsteht durch einen passenden Tarif. Wichtig für deine Patienten: Abschluss und Leistungsvoraussetzungen rechtzeitig vor der Behandlung prüfen.",
     "aiNote": "Hinweis: Die digitale Sprecherin Nita und ihre Stimme wurden mit KI erstellt.",
     "cta": "Konzept mit Nita klären",
-    "privacy": "Nita startet erst nach Ihrer Freigabe. Bitte teilen Sie keine sensiblen Gesundheitsdaten.",
-    "fallback": "Dieses Video kann in Ihrem Browser nicht wiedergegeben werden.",
+    "privacy": "Nita startet erst nach deiner Freigabe. Bitte teile keine sensiblen Gesundheitsdaten.",
+    "fallback": "Dieses Video kann in deinem Browser nicht wiedergegeben werden.",
     "badge": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, verteilt auf vier Leistungstöpfe",
-    "subline": "Mögliche Erstattungen verstehen. Ihre Praxis informiert neutral, Healio übernimmt die Beratung."
+    "subline": "Mögliche Erstattungen verstehen. Deine Praxis informiert neutral, Healio übernimmt die Beratung."
   },
   "trust": {
     "budget": "Bis zu 3.000 EUR in zwei Jahren möglich",
@@ -60,7 +60,7 @@
   },
   "professionalCover": {
     "badge": "Vorsorge für Heilberufe",
-    "title": "Und wer sichert eigentlich Sie ab?",
+    "title": "Und wer sichert eigentlich dich ab?",
     "text": "Berufshaftpflicht, Praxisausfall, Berufsunfähigkeit und Rürup, fachlich gebündelt, digital organisiert und persönlich begleitet.",
     "note": "Welche Lösung passt, hängt von Beruf, Absicherungsbedarf und bestehendem Schutz ab.",
     "cta": "Zur Heilberufe-Vorsorge",
@@ -98,39 +98,39 @@
     "brillenladen": "Brillengeschäfte und Optiker",
     "brillenladenDesc": "Die SDK sieht tariflich bis zu 500 EUR für Sehhilfen vor. Den Monatsbeitrag für diesen Zusatzschutz kann ein möglicher IKK Bonus mitfinanzieren.",
     "hebamme": "Hebammen",
-    "hebammeDesc": "Sie können Familien neutral auf die Informationen hinweisen. Die individuelle Prüfung, Beratung und Vermittlung übernimmt Healio."
+    "hebammeDesc": "Du kannst Familien neutral auf die Informationen hinweisen. Die individuelle Prüfung, Beratung und Vermittlung übernimmt Healio."
   },
   "solution": {
     "title": "Ein klarer Prozess. <highlight>Klare Rollen.</highlight>",
     "manageableEffort": "Überschaubarer Praxisaufwand",
-    "manageableEffortDesc": "Sie stellen neutrale Informationen oder einen QR-Code bereit. Versicherungsberatung und Antragsbegleitung bleiben bei Healio.",
+    "manageableEffortDesc": "Du stellst neutrale Informationen oder einen QR-Code bereit. Versicherungsberatung und Antragsbegleitung bleiben bei Healio.",
     "financialRoom": "Mehr finanzieller Spielraum",
     "financialRoomDesc": "Ein passendes Gesundheitsbudget kann Eigenanteile reduzieren. Ob und wie Leistungen genutzt werden, entscheiden Patienten selbst.",
     "freeParticipation": "Unverbindlich teilnehmen",
-    "freeParticipationDesc": "Sie gehen keine Verpflichtung ein. Informationsmaterial und Aufsteller erhalten Sie von Healio."
+    "freeParticipationDesc": "Du gehst keine Verpflichtung ein. Informationsmaterial und Aufsteller bekommst du von Healio."
   },
   "steps": {
     "step1Title": "30-Minuten-Kennenlernen",
-    "step1Desc": "Wir erklären Konzept, Rollen und Ablauf. Danach entscheiden Sie in Ruhe, ob Healio zu Ihrer Praxis passt.",
+    "step1Desc": "Wir erklären Konzept, Rollen und Ablauf. Danach entscheidest du in Ruhe, ob Healio zu deiner Praxis passt.",
     "step2Title": "Information bereitstellen",
-    "step2Desc": "Sie erhalten neutrale Karten, Flyer oder einen QR-Code und entscheiden selbst, wo Sie darauf hinweisen möchten.",
+    "step2Desc": "Du bekommst neutrale Karten, Flyer oder einen QR-Code und entscheidest selbst, wo du darauf hinweisen möchtest.",
     "step3Title": "Healio übernimmt",
     "step3Desc": "Interessierte Patienten melden sich direkt bei Healio. Wir prüfen Voraussetzungen, beraten individuell und vermitteln auf Wunsch eine passende Lösung."
   },
   "roleProcess": {
     "eyebrow": "Verantwortung sauber getrennt",
-    "title": "Ihre Praxis behandelt. <highlight>Healio berät.</highlight>",
+    "title": "Deine Praxis behandelt. <highlight>Healio berät.</highlight>",
     "subtitle": "Die Partnerschaft schafft einen einfachen Informationsweg, ohne aus dem Behandlungszimmer ein Verkaufsgespräch zu machen.",
     "practiceLabel": "Praxis",
     "practiceTitle": "Neutral informieren",
-    "practiceText": "Sie stellen neutrale Informationskarten, Flyer oder einen QR-Code bereit. Ihr Team berät keine Tarife, führt keine Verkaufsgespräche und erhält keine Provision für Kontakte oder Abschlüsse.",
+    "practiceText": "Du stellst neutrale Informationskarten, Flyer oder einen QR-Code bereit. Dein Team berät keine Tarife, führt keine Verkaufsgespräche und erhält keine Provision für Kontakte oder Abschlüsse.",
     "patientLabel": "Patient",
     "patientTitle": "Freiwillig entscheiden",
-    "patientText": "Patienten nutzen den QR-Code eigenständig und entscheiden freiwillig über die Kontaktaufnahme. Ihre Praxis übermittelt keine Patientendaten an Healio.",
+    "patientText": "Patienten nutzen den QR-Code eigenständig und entscheiden freiwillig über die Kontaktaufnahme. Deine Praxis übermittelt keine Patientendaten an Healio.",
     "healioLabel": "Healio",
     "healioTitle": "Prüfen, beraten, begleiten",
     "healioText": "Wir prüfen die individuellen Voraussetzungen, erklären Leistungen und Grenzen und begleiten auf Wunsch den Antrag als unabhängiger Versicherungsmakler.",
-    "closing": "Sie bleiben fachlich unabhängig und konzentrieren sich auf die Behandlung."
+    "closing": "Du bleibst fachlich unabhängig und konzentrierst dich auf die Behandlung."
   },
   "faq": {
     "title": "Häufige Fragen zur <highlight>Partnerschaft</highlight>",
@@ -142,11 +142,11 @@
       },
       {
         "question": "Gehe ich mit der Partnerschaft eine Verpflichtung ein?",
-        "answer": "Nein. Informationsmaterial und Aufsteller stellt Healio bereit. Ob und wo Sie die Informationen einsetzen, entscheiden Sie nach dem Kennenlernen selbst."
+        "answer": "Nein. Informationsmaterial und Aufsteller stellt Healio bereit. Ob und wo du die Informationen einsetzt, entscheidest du nach dem Kennenlernen selbst."
       },
       {
         "question": "Muss ich Versicherungen erklären oder empfehlen?",
-        "answer": "Nein. Ihre Aufgabe ist ausschließlich die neutrale Information. Die individuelle Prüfung, Versicherungsberatung, Vermittlung und Antragsbegleitung übernimmt Healio direkt mit dem interessierten Patienten."
+        "answer": "Nein. Deine Aufgabe ist ausschließlich die neutrale Information. Die individuelle Prüfung, Versicherungsberatung, Vermittlung und Antragsbegleitung übernimmt Healio direkt mit dem interessierten Patienten."
       },
       {
         "question": "Welche Leistungen können erstattet werden?",
@@ -154,7 +154,7 @@
       },
       {
         "question": "Muss ich mein Praxiskonzept ändern?",
-        "answer": "Nein. Behandlung, Preisgestaltung und fachliche Entscheidungen bleiben vollständig bei Ihnen. Healio ergänzt lediglich einen neutralen Informationsweg für Patienten, die ihre Finanzierungsmöglichkeiten prüfen möchten."
+        "answer": "Nein. Behandlung, Preisgestaltung und fachliche Entscheidungen bleiben vollständig bei dir. Healio ergänzt lediglich einen neutralen Informationsweg für Patienten, die ihre Finanzierungsmöglichkeiten prüfen möchten."
       },
       {
         "question": "Wie setzen sich die Leistungen für Sehhilfen zusammen?",
@@ -163,16 +163,16 @@
     ]
   },
   "moral": {
-    "title": "Gute Information stärkt die Beziehung zu Ihren Patienten.",
+    "title": "Gute Information stärkt die Beziehung zu deinen Patienten.",
     "text1": "Viele Patienten möchten ihre Behandlung fortsetzen, werden aber durch Eigenanteile gebremst. Ein neutraler Hinweis auf mögliche Kassenboni und passenden Zusatzschutz gibt ihnen eine zusätzliche Entscheidungsgrundlage.",
-    "text2": "Sie bleiben vollständig in Ihrer Rolle: Sie behandeln und informieren. Healio erklärt die finanziellen Möglichkeiten und begleitet interessierte Patienten bei den nächsten Schritten.",
-    "text3": "So entsteht Mehrwert ohne Verkaufsdruck: Ihre Patienten kennen ihre Optionen, und Sie entscheiden selbst, wie der Informationsweg in Ihren Praxisalltag passt."
+    "text2": "Du bleibst vollständig in deiner Rolle: Du behandelst und informierst. Healio erklärt die finanziellen Möglichkeiten und begleitet interessierte Patienten bei den nächsten Schritten.",
+    "text3": "So entsteht Mehrwert ohne Verkaufsdruck: Deine Patienten kennen ihre Optionen, und du entscheidest selbst, wie der Informationsweg in deinen Praxisalltag passt."
   },
   "cta": {
-    "title": "Passt Healio zu <highlight>Ihrer Praxis</highlight>?",
-    "subtitle": "In 30 Minuten klären wir Konzept, Rollen und Ablauf. Danach entscheiden Sie, ob Sie Ihren Patienten den Informationsweg anbieten möchten.",
+    "title": "Passt Healio zu <highlight>deiner Praxis</highlight>?",
+    "subtitle": "In 30 Minuten klären wir Konzept, Rollen und Ablauf. Danach entscheidest du, ob du deinen Patienten den Informationsweg anbieten möchtest.",
     "calendarError": "Kalender konnte nicht geladen werden",
-    "calendarErrorDesc": "Bitte überprüfen Sie Ihre Internetverbindung oder deaktivieren Sie einen möglicherweise aktiven Inhaltsblocker."
+    "calendarErrorDesc": "Bitte überprüfe deine Internetverbindung oder deaktiviere einen möglicherweise aktiven Inhaltsblocker."
   },
   "footer": {
     "title": "Gute Versorgung braucht <highlight>klare Wege</highlight>.",
@@ -191,8 +191,8 @@
     "ariaLabel": "Nita bietet Hilfe zum Healio-Partnerkonzept an",
     "close": "Nita-Hinweis schließen",
     "eyebrow": "Nita · digitale Healio-Assistentin",
-    "title": "Sie möchten Patienten helfen, ohne selbst beraten zu müssen?",
-    "body": "Ich zeige Ihnen die drei Rollen und den nächsten Schritt: Sie informieren neutral, Patienten entscheiden frei, Healio prüft und berät individuell.",
+    "title": "Du möchtest Patienten helfen, ohne selbst beraten zu müssen?",
+    "body": "Ich zeige dir die drei Rollen und den nächsten Schritt: Du informierst neutral, Patienten entscheiden frei, Healio prüft und berät individuell.",
     "cta": "Rollen mit Nita klären"
   }
 }

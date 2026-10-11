@@ -3,8 +3,13 @@ const content = {
     home: {
       titleLead: 'Warum lässt du jedes Jahr hunderte Euro',
       titleAccent: 'bei deiner Krankenkasse liegen?',
-      description: 'Kassenboni werden nicht automatisch ausgezahlt. Erfüllst du die Voraussetzungen, kannst du sie aktiv beantragen und damit deinen Zusatzschutz ganz oder teilweise finanzieren: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.',
-      condition: 'Dein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.',
+      description: 'Mit dem Bonus deiner Krankenkasse kannst du deinen Zusatzschutz ganz oder teilweise finanzieren: ambulant bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren, dazu passende Wege für Zähne und Krankenhaus.',
+      budgetLink: 'So setzt sich das zusammen',
+      knowTitle: 'Was du wissen musst',
+      knowItems: [
+        'Kassenboni werden nicht automatisch ausgezahlt. Erfüllst du die Voraussetzungen, kannst du sie aktiv beantragen.',
+        'Dein Ergebnis hängt von Kasse, Aktivitäten, Tarif und anrechenbaren Kosten ab. Die 3.000 EUR sind getrennte Tarifhöchstbeträge, kein auszahlbares Guthaben.',
+      ],
       cta: 'Kassenpotenzial in 90 Sekunden prüfen',
       hint: '100 % kostenfrei · Keine Kündigungspflicht · Kein Vertreterbesuch',
       panelTitle: 'Die Rechnung beginnt bei deiner Kasse.',
@@ -44,7 +49,7 @@ const content = {
       cta: 'Passenden Zahnschutz prüfen',
       hint: 'Vier kurze Fragen. Ohne Kontaktdaten. Die verbindliche Annahme erfolgt im Antrag.',
       panelTitle: 'Deine Situation entscheidet.',
-      panelText: 'Zwei Wege mit unterschiedlichen Voraussetzungen.',
+      panelText: '',
       benefits: [
         { label: 'Vorsorgen, bevor etwas ansteht', value: 'UKV ZahnPRIVAT', detail: 'Erstattung von 75, 90 oder 100 % je nach Stufe. Fehlende Zähne und Vorgeschichte im Check berücksichtigen.' },
         { label: 'Eine Behandlung steht bereits an', value: 'ZAHN Sofort prüfen', detail: 'Die Bayerische: bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Nur mit passendem neuen Zahntarif.' },
@@ -83,8 +88,13 @@ const content = {
     home: {
       titleLead: 'Why leave hundreds of euros',
       titleAccent: 'with your health fund every year?',
-      description: 'Health fund bonuses are not paid automatically. If you meet the conditions, you can claim them to offset some or all of your supplementary insurance premium: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable dental and hospital options.',
-      condition: 'Your fund, activities, plan and eligible expenses determine the result. EUR 3,000 is the sum of separate plan limits, not a cash balance.',
+      description: 'With your health fund bonus you can offset some or all of your supplementary insurance premium: up to EUR 3,000 in outpatient benefits over 2 years, plus suitable dental and hospital options.',
+      budgetLink: 'How this adds up',
+      knowTitle: 'What you should know',
+      knowItems: [
+        'Health fund bonuses are not paid automatically. If you meet the conditions, you can claim them.',
+        'Your fund, activities, plan and eligible expenses determine the result. EUR 3,000 is the sum of separate plan limits, not a cash balance.',
+      ],
       cta: 'Check health fund potential in 90 seconds',
       hint: '100% free · No obligation to switch · No home visit',
       panelTitle: 'Start the calculation with your health fund.',

@@ -213,11 +213,15 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
         <div className={cx(mobileSwipe && 'flex flex-col md:block')}>
         {/* Die Brücken-Szene steht wieder offen sichtbar (Frank 29.09.2026);
             nur die weiteren Details bleiben aufklappbar. */}
+        {/* Besuchertest 11.10.2026: Die große Brücken-Szene (rund 1.000 Pixel Höhe) erscheint
+            erst nach "Kassenwechsel im Detail", damit die Seite kürzer bleibt. */}
+        {detailsOpen && (
         <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? 'order-2 max-md:rounded-none max-md:border-0 max-md:bg-none max-md:!p-0 max-md:shadow-none md:order-none md:mb-12' : 'mb-12 p-4')}>
           <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
             <IkkSwitch3DScene variant={activeVariant} />
           </Suspense>
         </div>
+        )}
 
         <div
           id="ikk-wechsel-details"

@@ -276,16 +276,11 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
     requestNitaConsent('quick_pill_bubble_advice');
   };
 
-  const mainClass = 'home-focus flex min-h-14 items-center gap-2.5 rounded-full pl-5 pr-4 text-left text-white transition hover:bg-white/[0.06]';
+  const mainClass = 'home-focus flex min-h-12 items-center gap-2 rounded-full pl-4 pr-3.5 text-left text-white transition hover:bg-white/[0.06]';
   const mainContent = (
     <>
       <Sparkles className="h-5 w-5 shrink-0 text-home-mint-active" aria-hidden="true" />
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-base font-extrabold">{copy.title}</span>
-        <span className="mt-1 text-xs font-semibold text-slate-300">
-          {webAvailable ? copy.subWeb : copy.subPhone}
-        </span>
-      </span>
+      <span className="font-display text-sm font-extrabold leading-none">{copy.title}</span>
     </>
   );
 
@@ -296,10 +291,10 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
       <style>{`
         .healio-nita-pill {
           position: fixed;
-          left: 50%;
-          bottom: calc(1rem + env(safe-area-inset-bottom));
+          right: max(0.5rem, env(safe-area-inset-right));
+          bottom: calc(0.75rem + env(safe-area-inset-bottom));
           z-index: 80;
-          transform: translate(-50%, 0);
+          transform: translate(0, 0);
           transition: opacity 200ms ease, transform 200ms ease, visibility 200ms ease;
         }
         .healio-nita-pill[data-shown='false'],
@@ -308,16 +303,16 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
-          transform: translate(-50%, 0.75rem);
+          transform: translate(0, 0.75rem);
         }
         .healio-nita-bubble {
           position: fixed;
-          left: 50%;
-          /* Über der Leiste: 1 rem Rand, 4,25 rem Leistenhöhe, 0,75 rem Luft */
-          bottom: calc(6rem + env(safe-area-inset-bottom));
+          right: max(0.5rem, env(safe-area-inset-right));
+          /* Über dem Knopf: 0,75 rem Rand, 3,5 rem Knopfhöhe, 0,75 rem Luft */
+          bottom: calc(5.25rem + env(safe-area-inset-bottom));
           z-index: 80;
-          width: min(24rem, calc(100vw - 1.5rem));
-          transform: translate(-50%, 0);
+          width: min(22rem, calc(100vw - 1rem));
+          transform: translate(0, 0);
           transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
         }
         .healio-nita-bubble[data-shown='false'],
@@ -326,13 +321,17 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
-          transform: translate(-50%, 0.5rem);
+          transform: translate(0, 0.5rem);
         }
         @media (prefers-reduced-motion: reduce) {
           .healio-nita-pill,
           .healio-nita-bubble { transition: none; }
         }
         @media (min-width: 768px) {
+          .healio-nita-pill,
+          .healio-nita-bubble { right: max(1.5rem, env(safe-area-inset-right)); }
+          .healio-nita-pill { bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+          .healio-nita-bubble { bottom: calc(6.25rem + env(safe-area-inset-bottom)); }
           .healio-nita-pill--mobile-only,
           .healio-nita-bubble--mobile-only { display: none !important; }
         }
@@ -401,7 +400,7 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
           </button>
           {/* Zipfel der Sprechblase, zeigt auf die Leiste */}
           <span
-            className="absolute -bottom-[7px] left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 border-b border-r border-home-mint/60 bg-white"
+            className="absolute -bottom-[7px] right-8 h-3.5 w-3.5 rotate-45 border-b border-r border-home-mint/60 bg-white"
             aria-hidden="true"
           />
         </div>
@@ -441,7 +440,7 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
             {mainContent}
           </a>
         )}
-        <span className="h-7 w-px bg-white/15" aria-hidden="true" />
+        <span className="h-6 w-px bg-white/15" aria-hidden="true" />
         <a
           href={HEALIO_WHATSAPP_URL}
           target="_blank"

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import MobileScene from '@/components/desktop/MobileScene';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
@@ -125,7 +126,8 @@ const ZahnPage = () => {
           <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-home-mint-active/14 blur-3xl" aria-hidden="true" />
           <div className="absolute inset-0 opacity-[0.055] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
 
-          <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-28 sm:px-6 md:pb-16 md:pt-32 lg:px-8">
+          <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-24 sm:px-6 md:pb-16 md:pt-28 lg:px-8">
+            <MobileScene surface="zahn" className="mb-6" />
             <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-12">
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -310,7 +312,6 @@ const ZahnPage = () => {
                 {content.bonus.title}
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-200 sm:leading-8 md:mt-5">{content.bonus.text}</p>
-              <p className="mt-3 hidden max-w-2xl font-display text-base font-extrabold text-[#5ee0b1] md:block">{content.bonus.detail}</p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center md:mt-8">
                 <a
@@ -413,7 +414,7 @@ const ZahnPage = () => {
 
         <SalesAiAssist className="order-2 bg-white md:order-none" />
         {/* Gleicher Kontaktblock wie auf /ambulant und /stationaer (Marktanalyse W6). */}
-        <ZielseitenKontakt placement="zahn" className="order-2 bg-white md:order-none" />
+        <ZielseitenKontakt placement="zahn" className="order-2 bg-white md:hidden" />
 
         <section className="order-2 bg-[#f4faf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
           <div className="healio-container">

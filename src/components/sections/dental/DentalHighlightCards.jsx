@@ -12,6 +12,8 @@ import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll'
 // Textband, ein Tipp öffnet alle Details. Die Texte kommen bewusst 1:1 aus
 // den geprüften Ergebnissen des Zahn-Checks (dentalContent.js), hier steht
 // nur, welche Karte welche Kennzahl und welches Bild zeigt.
+// Besuchertest 11.10.2026: Die Karte „Beitrag finanzieren“ entfällt, weil der Kassenbonus weiter unten
+// im eigenen Abschnitt steht (jede Bonus-Erklärung höchstens einmal pro Seite).
 const CARDS = [
   {
     key: 'sofort',
@@ -55,13 +57,6 @@ const CARDS = [
     label: { de: 'Günstiger Einstieg', en: 'Affordable start' },
     figure: { de: '75 %', en: '75%' },
     figureNote: { de: 'der erstattungsfähigen Kosten nach Kassenleistung', en: 'of eligible costs after statutory cover' },
-  },
-  {
-    key: 'bonus',
-    scene: '/images/zahn-cards/bonus.webp',
-    tone: 'mintDeep',
-    icon: 'bonus-medal',
-    label: { de: 'Beitrag finanzieren', en: 'Fund your premium' },
   },
 ];
 

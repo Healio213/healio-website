@@ -1,4 +1,5 @@
 import React from 'react';
+import MobileScene from '@/components/desktop/MobileScene';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -33,7 +34,8 @@ const StationaerHero = () => {
       {/* Inhalt bündig zum Logo im Header (max-w-7xl mit px-4/6/8, wie
           Startseite und /unternehmen); Oberkante pt-28/md:pt-32 unter dem
           festen Header. */}
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-10 pt-28 sm:px-6 sm:pb-20 md:gap-12 md:pt-32 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:gap-12 lg:px-8 lg:pb-24">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-10 pt-24 sm:px-6 sm:pb-20 md:gap-12 md:pt-28 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:gap-12 lg:px-8 lg:pb-24">
+        <MobileScene surface="stationaer" className="-mb-2" />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

@@ -625,12 +625,11 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           </div>
 
           <div className="mt-4 overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white md:mt-6">
-            <p className="border-b border-slate-200 bg-slate-50 px-4 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
+            <p id="ambulant-stufen-uebersicht" className="border-b border-slate-200 bg-slate-50 px-4 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
               {copy.tiers.overviewTitle}
             </p>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left sm:min-w-[34rem]">
-                <caption className="sr-only">{copy.tiers.overviewTitle}</caption>
+              <table aria-labelledby="ambulant-stufen-uebersicht" className="w-full border-collapse text-left sm:min-w-[34rem]">
                 <thead>
                   <tr className="border-b border-slate-200 text-sm font-bold normal-case tracking-normal text-slate-500 md:text-xs md:uppercase md:tracking-[0.12em]">
                     <th scope="col" className="py-3 pl-3 pr-1 sm:px-6">{copy.tiers.overviewTier}</th>

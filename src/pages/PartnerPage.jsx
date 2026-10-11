@@ -1,4 +1,5 @@
 
+import MobileScene from '@/components/desktop/MobileScene';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -125,43 +126,18 @@ const PartnerPage = () => {
                 {t('hero.roleNote')}
               </p>
             </div>
-            <ul className={`min-w-0 ${sceneBelow.list}`}>
-              <li className="py-4 text-base leading-7 text-[#e1ebef]">
-                <p className="mb-3">{t('leitfadenHint.lead')}</p>
-                <Link
-                  to="/partner/leitfaden"
-                  className={sceneSecondaryButtonClass}
-                >
-                  {t('leitfadenHint.cta')}
-                </Link>
-              </li>
-            </ul>
           </div>
         </SceneHero>
 
         <div className="order-1 md:order-none lg:hidden">
         <section className="relative bg-slate-900 pt-20 pb-10 md:pb-14">
-          {/* Therapeutin im Sessel mit Patientin (partner-hero-*.webp, Quelle partner-hero-neu.png).
-              Ein Querausschnitt mit beiden Frauen steht über dem Text. */}
-          <div className="relative z-0">
-            <picture>
-              <img
-                src="/images/partner-hero-mobil-800.webp"
-                srcSet="/images/partner-hero-mobil-480.webp 480w, /images/partner-hero-mobil-800.webp 800w, /images/partner-hero-mobil-1200.webp 1200w"
-                sizes="100vw"
-                alt={t('hero.imageAlt')}
-                width="1200"
-                height="847"
-                {...{ fetchpriority: isDesktop ? 'low' : 'high' }}
-                className="block h-auto max-h-[62svh] w-full object-cover object-[center_25%]"
-              />
-            </picture>
-            {/* Das Bild läuft unten ins Dunkle aus, der Text steht darunter. */}
-            <div className="absolute inset-0 bg-black/10 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent z-10" />
+          {/* Besuchertest 11.10.2026: Die Cartoon-Szene von /partner ersetzt das Foto der zwei
+              Frauen am Handy (kleine Handy-Fassung, Überschrift und Knöpfe darunter). */}
+          <div className="relative z-0 px-4 sm:px-6">
+            <MobileScene surface="partner" />
           </div>
 
-          <div className="container mx-auto relative z-20 w-full px-4 sm:px-6 md:px-8 -mt-12 sm:-mt-20">
+          <div className="container mx-auto relative z-20 w-full px-4 pt-6 sm:px-6 md:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 30 }}
@@ -239,15 +215,6 @@ const PartnerPage = () => {
                   <Shield className="mt-1 h-4 w-4 shrink-0 text-[#087654]" aria-hidden="true" />
                   {t('hero.roleNote')}
                 </p>
-                <div className="mt-5 text-center text-sm text-[#52666d]">
-                  <p className="mb-3">{t('leitfadenHint.lead')}</p>
-                  <Link
-                    to="/partner/leitfaden"
-                    className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#9bbab2] bg-white px-5 py-3 text-sm font-bold text-[#071726] transition-colors hover:bg-[#e4f6ee] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087654] sm:text-base"
-                  >
-                    {t('leitfadenHint.cta')}
-                  </Link>
-                </div>
           </div>
         </section>
 
