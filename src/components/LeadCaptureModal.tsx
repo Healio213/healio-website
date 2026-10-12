@@ -171,6 +171,19 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
     }
   };
 
+  // Calculator without the guide: no contact data, no lead request, no lead conversion.
+  const skipToCalculator = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    if (validDestination && openApplicationWindow(validDestination)) {
+      markLeadCapturedThisSession();
+      onExternalOpen?.();
+      onClose();
+    } else {
+      setError(copy.popupError);
+      setErrorField('request');
+    }
+  };
+
   return (
     <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <Dialog.Portal>
@@ -208,6 +221,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
               {error && <p id="lead-capture-error" role="alert" className="text-sm leading-6 text-amber-300">{error}</p>}
               <button type="submit" disabled={submitting} aria-busy={submitting} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-home-mint px-4 py-3.5 text-center text-sm font-bold leading-5 text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint disabled:cursor-wait disabled:opacity-70">{shortLoading ? copy.loading : copy.submit}</button>
               {submitting && !shortLoading && <p role="status" className="text-sm leading-6 text-slate-300">{copy.pending}</p>}
+              {!personalOffer && validDestination && copy.skip && <a href={validDestination} target="_blank" rel="noopener noreferrer" onClick={skipToCalculator} className="block min-h-11 py-2 text-center text-sm font-medium text-slate-300 underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">{copy.skip}</a>}
             </form>
           )}
           <p className="mt-4 text-center text-xs leading-5 text-slate-400">{copy.microcopy}</p>
