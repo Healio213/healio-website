@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Calculator, CheckCircle2, ChevronDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { useReferrer } from '@/hooks/useReferrer';
 
@@ -16,7 +17,8 @@ const nudgeItems = [
 const AmbulantConversionNudge = () => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const stufe = useAmbulantStufe();
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe });
 
   return (
     <section className="relative overflow-hidden border-b border-emerald-100/70 bg-gradient-to-br from-white via-emerald-50/70 to-white py-8 md:py-14">

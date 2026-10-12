@@ -17,9 +17,9 @@ const ukvAmbulantUrl = ukvUrl.replace('&tarifftypes=Zahn&', '&tarifftypes=Ambula
 const dkvUrl = 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487';
 const aragOfferUrl = 'https://healio.de/ambulant?angebot=arag-v100';
 const bayerischeStationaerUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=002637&um=MAK226487';
-const sdkUrl = (custom = {}) => `https://insurances-online.levelnine.biz/?${new URLSearchParams({
+const sdkUrl = (custom = {}, tariffs = '') => `https://insurances-online.levelnine.biz/?${new URLSearchParams({
   mandant: 'sdk', tarifftypes: 'Ambulant', agentId1: constant(sdkSource, 'AGENT_ID'), agentId2: '',
-  insurers: constant(sdkSource, 'INSURER_ID'), tariffs: '', customValues: btoa(JSON.stringify(custom)),
+  insurers: constant(sdkSource, 'INSURER_ID'), tariffs, customValues: btoa(JSON.stringify(custom)),
   contactInformation: constant(sdkSource, 'CONTACT_INFO'), remarks: constant(sdkSource, 'REMARKS'),
   defaultContact: 'false', employeeInsurance: 'NOT_BKV',
 })}`;
@@ -46,6 +46,16 @@ const setup = (options = {}) => {
   const invoke = async (req = request()) => { const res = response(); await handler(req, res); return res; };
   return { handler, calls, invoke };
 };
+
+test('SDK-Ambulant-Links mit vorgewählter Stufe werden freigegeben, fremde kennungen nicht', () => {
+  for (const code of ['SDKAP5@', 'SDKAP7@', 'SDKAP9@', 'SDKAP1@']) {
+    const url = sdkUrl({}, code);
+    assert.equal(validateApplicationUrl(url), new URL(url).toString());
+  }
+  assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKAP2@')), null);
+  assert.equal(validateApplicationUrl(sdkUrl({}, 'UKVVorsorgePRIVAT@')), null);
+  assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKAP1@').replace('tarifftypes=Ambulant', 'tarifftypes=Station%C3%A4r')), null);
+});
 
 test('aktuelle SDK-, UKV- und Bayerische-URLs werden unverändert freigegeben', () => {
   for (const url of [sdkUrl(), sdkUrl({ ref: 'praxis_test-1', source: 'healio.de', ts: 1791460800000 }), ukvUrl, ukvAmbulantUrl, bayerischeUrl]) {

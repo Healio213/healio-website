@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Calculator, Check } from 'lucide-react';
 import { useReferrer } from '@/hooks/useReferrer';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import HighlightText from '@/components/ui/HighlightText';
 
@@ -20,7 +21,8 @@ const TIERS = [
 const AmbulantTarifTabelle = () => {
   const { t, i18n } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const stufe = useAmbulantStufe();
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe });
   const locale = (i18n.resolvedLanguage || i18n.language || '').startsWith('en') ? 'en-US' : 'de-DE';
   const formatEuro = (value) => new Intl.NumberFormat(locale, {
     style: 'currency',

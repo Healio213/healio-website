@@ -16,6 +16,7 @@ import LeadCaptureLink from '@/components/LeadCaptureLink';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
+import { useAmbulantStufe, setAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
@@ -25,6 +26,7 @@ import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzier
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
 import AmbulantAragVorsorge from '@/components/sections/ambulant/AmbulantAragVorsorge';
+import WhatsAppHelpHint from '@/components/sections/shared/WhatsAppHelpHint';
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
 import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
@@ -373,9 +375,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const language = lang === 'en' ? 'en' : 'de';
   const copy = getAmbulantCopy(language, fromBonusTopic);
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const selectedTier = useAmbulantStufe();
+  const setSelectedTier = setAmbulantStufe;
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: selectedTier });
   const [selectedGoal, setSelectedGoal] = useState('natur');
-  const [selectedTier, setSelectedTier] = useState(100);
   const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
   const goal = copy.compass.goals[selectedGoal];
   const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
@@ -618,6 +621,12 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
                 </LeadCaptureLink>
+                <WhatsAppHelpHint
+                  placement="ambulant-tarifwahl"
+                  variant="line"
+                  text="Im Antrag hängen geblieben? Schreib uns kurz auf WhatsApp, wir gehen ihn mit dir zusammen durch."
+                  className="mt-4 max-w-2xl"
+                />
                 <p className="mt-3 max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
                 <p className="mt-4 max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
               </div>

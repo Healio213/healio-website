@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,8 @@ const AmbulantFinalCTA = () => {
   const { t } = useTranslation('ambulant');
   const { getPath } = useLanguage();
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const stufe = useAmbulantStufe();
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe });
 
   return (
     <section className="py-24 bg-healio-dark text-white relative overflow-hidden">

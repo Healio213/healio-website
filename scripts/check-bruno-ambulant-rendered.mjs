@@ -42,6 +42,8 @@ try {
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
 
   const open = async (route) => {
+    // Die gemerkte Stufe (healio_ambulant_stufe) gehört zur Sitzung: jeder Aufruf startet frisch.
+    await page.evaluate(() => { try { sessionStorage.removeItem('healio_ambulant_stufe'); } catch { /* egal */ } }).catch(() => {});
     await page.goto(`${origin}${route}`, { waitUntil: 'networkidle0' });
     await page.waitForSelector('#tarifwahl');
   };

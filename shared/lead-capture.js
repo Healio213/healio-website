@@ -29,6 +29,8 @@ const hasOnlyParams = (url, allowed, required) => {
 export const ARAG_OFFER_URL = 'https://healio.de/ambulant?angebot=arag-v100';
 export const isPersonalOfferUrl = (value) => value === ARAG_OFFER_URL;
 
+const SDK_AMBULANT_TARIFFS = new Set(['SDKAP5@', 'SDKAP7@', 'SDKAP9@', 'SDKAP1@']);
+
 // Der SDK-Empfehlungscode bleibt erhalten. Freie Daten im Base64-Feld werden
 // abgewiesen, damit sich dort keine Formulareingaben verstecken lassen.
 const isSdkCustomValues = (value) => {
@@ -74,12 +76,16 @@ export const validateApplicationUrl = (value) => {
     if (url.hostname !== LEVEL_NINE_HOST || url.pathname !== '/') return null;
     if (url.searchParams.get('mandant') === 'sdk') {
       if (!hasOnlyParams(url, LEVEL_NINE_PARAMS, {
-        mandant: 'sdk', agentId1: '901334', agentId2: '', insurers: '36', tariffs: '',
+        mandant: 'sdk', agentId1: '901334', agentId2: '', insurers: '36',
         contactInformation: SDK_CONTACT,
         remarks: 'IkJlaSBSw7xja2ZyYWdlbiBzaW5kIHdpciBnZXJuZSBmw7xyIFNpZSBkYS4i',
         defaultContact: 'false', employeeInsurance: 'NOT_BKV',
       })) return null;
-      if (!['Ambulant', 'Ambulant,Stationär', 'Stationär'].includes(url.searchParams.get('tarifftypes'))) return null;
+      const sdkType = url.searchParams.get('tarifftypes');
+      if (!['Ambulant', 'Ambulant,Stationär', 'Stationär'].includes(sdkType)) return null;
+      // Vorauswahl der Ambulant-Stufe (SDKAP5@ bis SDKAP1@) nur für reine Ambulant-Links.
+      const sdkTariff = url.searchParams.get('tariffs');
+      if (sdkTariff !== '' && !(sdkType === 'Ambulant' && SDK_AMBULANT_TARIFFS.has(sdkTariff))) return null;
       return isSdkCustomValues(url.searchParams.get('customValues')) ? url.toString() : null;
     }
 

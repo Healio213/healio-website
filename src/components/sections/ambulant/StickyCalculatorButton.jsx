@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,8 @@ import { Link } from 'react-router-dom';
 const StickyCalculatorButton = () => {
   const { t } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant' });
+  const stufe = useAmbulantStufe();
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe });
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

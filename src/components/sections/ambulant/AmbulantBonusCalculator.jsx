@@ -2,6 +2,7 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReferrer } from '@/hooks/useReferrer';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick, trackIkkClick, IKK_LINK } from '@/lib/sdk-url';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -93,7 +94,8 @@ const AmbulantBonusCalculator = ({
 }) => {
   const { t, i18n } = useTranslation('ambulant');
   const referrer = useReferrer();
-  const calculatorUrl = buildSdkUrl({ ref: referrer, tarifTypes });
+  const gemerkteStufe = useAmbulantStufe();
+  const calculatorUrl = buildSdkUrl({ ref: referrer, tarifTypes, stufe: gemerkteStufe });
   const ikkLink = IKK_LINK;
 
   const handleOverrideClick = (e) => {

@@ -69,7 +69,7 @@ try {
     assert(current.budget.includes(budget), `${code}: benefit budget must follow the selection.`);
     assert.equal(current.potential, initial.potential, 'Changing tariff must preserve the activity selection.');
     assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every provider CTA must explain which tier to choose again.');
-    assert.equal(current.tariffsParam, '', 'Do not invent undocumented provider tariff identifiers.');
+    assert.equal(current.tariffsParam, `SDK${code}@`, 'The calculator link must preselect the chosen tier (Level Nine identifier SDKAP5@ to SDKAP1@).');
   }
 
   // Personal premiums are explicit user input, not another published example.
