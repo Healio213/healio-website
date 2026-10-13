@@ -79,6 +79,7 @@ const de = {
         hint: 'Milch- und Weisheitszähne zählen nicht. Ein vollständiger Lückenschluss zählt ebenfalls nicht als fehlender Zahn.',
         options: {
           keine: { label: 'Nein, alle Zähne sind vorhanden oder ersetzt' },
+          ziehen: { label: 'Noch nicht, aber ein Zahn soll gezogen werden', sub: 'Dein Zahnarzt rät dir, einen oder mehrere Zähne ziehen zu lassen.' },
           wenige: { label: 'Ja, 1 bis 3 Zähne' },
           viele: { label: 'Ja, mehr als 3 Zähne' },
         },
@@ -436,6 +437,7 @@ const en = {
         hint: 'Baby teeth and wisdom teeth do not count. A complete gap closure does not count either.',
         options: {
           keine: { label: 'No, all teeth are present or replaced' },
+          ziehen: { label: 'Not yet, but a tooth needs to be extracted', sub: 'Your dentist recommends having one or more teeth extracted.' },
           wenige: { label: 'Yes, 1 to 3 teeth' },
           viele: { label: 'Yes, more than 3 teeth' },
         },

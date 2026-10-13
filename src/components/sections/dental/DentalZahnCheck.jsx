@@ -31,6 +31,10 @@ const needsQ4 = (answers) =>
 // auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn).
 const computeResult = (answers) => {
   if (answers.q2 === 'viele') return 'sonderViele';
+  // Angeratenes Zahnziehen: Die Bayerische lehnt in Gesundheitsfrage 1 ab, bei der
+  // UKV zählt die Entfernung eines Zahnes zu Frage 4.2. Deshalb nie Sofort, sondern
+  // persönliche Klärung (Konzept Antragsstrecke 12.10.2026, Abschnitt 3.2, Risiko 7).
+  if (answers.q2 === 'ziehen') return 'sonderKomplex';
 
   if (answers.q1 === 'ja') {
     if (answers.q2 === 'wenige' || answers.q3 === 'ja') return 'sonderKomplex';
@@ -124,6 +128,7 @@ const DentalZahnCheck = () => {
     path.length > 0 &&
     (currentQuestionId === undefined ||
       answers.q2 === 'viele' ||
+      answers.q2 === 'ziehen' ||
       (answers.q1 === 'nein' && answers.q2 === 'wenige') ||
       (answers.q1 === 'ja' && answers.q2 === 'wenige'));
 
