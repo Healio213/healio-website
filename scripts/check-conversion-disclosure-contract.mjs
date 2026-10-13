@@ -201,6 +201,7 @@ const nitaZahn = nitaKnowledge.slice(nitaKnowledge.indexOf('## Zahnzusatzversich
 expect(/Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert\./.test(nitaZahn), 'Nita muss ältere Empfehlungen von aktuell beabsichtigten und laufenden Behandlungen unterscheiden.');
 expect(/aktuellen Zustand und die Angaben im Antrag/.test(nitaZahn), 'Nita lässt die UKV anhand des aktuellen Zustands und der vollständigen Angaben entscheiden.');
 expect(!/sagt Nita nicht, wie die UKV dann entscheidet/.test(nitaKnowledge), 'Nita darf die 2-Jahres-Regel nicht mehr verschweigen.');
+expect(/es soll kein Zahn gezogen werden und es gibt keine Zahn-Vorgeschichte: die Bayerische mit ZAHN Sofort\./.test(nitaZahn) && /Ist das Ziehen eines Zahns angeraten, auch eines Weisheitszahns, nimmt die Bayerische ebenfalls nicht an; das klärt Healio persönlich\./.test(nitaZahn), 'Nita darf bei angeratenem Zahnziehen nicht den Sofort-Weg der Bayerischen nahelegen.');
 // Interna bleiben intern: Zuschlag und Vergütung gehören nie in öffentliche Zahntexte.
 for (const [file, source] of Object.entries({ 'dentalContent.js': dentalContent, 'de/zahn.json': zahnDe, 'en/zahn.json': zahnEn, 'mia-knowledge-base.txt': nitaKnowledge, 'Ratgeber fehlender Zahn': fehlenderZahnRatgeber })) {
   expect(!/verprovision|Provision|Courtage|commission/i.test(source), `${file} darf keine Vergütung oder Courtage nennen.`);
