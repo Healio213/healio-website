@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 // die Source of Truth und darf sie niemals aus React-Routen neu erzeugen.
 const CURATED_LLMS_PATH = path.join(process.cwd(), 'public', 'llms.txt');
 const REQUIRED_SIGNALS = [
-  '# HEALIO GmbH',
+  '# Healio GmbH',
   '3.000 EUR',
   'https://healio.de/blog',
 ];

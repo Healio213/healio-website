@@ -405,6 +405,15 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
             </aside>
           )}
 
+          {article.answerBlock && (
+            <section aria-label={article.answerBlock.question} data-ratgeber-answer="" className="mt-6 sm:mt-8">
+              <h2 className="font-display text-xl font-extrabold leading-snug tracking-[-0.01em] text-[#07111f] sm:text-2xl">
+                {article.answerBlock.question}
+              </h2>
+              <p className="mt-2 text-base leading-relaxed text-slate-700 sm:text-lg">{article.answerBlock.answer}</p>
+            </section>
+          )}
+
           <p className="mt-4 text-lg leading-[1.7] text-slate-600 sm:mt-6 sm:text-[1.3rem] sm:leading-10">
             {article.lead}
           </p>

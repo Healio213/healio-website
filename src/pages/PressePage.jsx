@@ -19,6 +19,7 @@ const PressePage = () => {
   const vita = t('founder.vita', { returnObjects: true });
   const downloads = t('downloads.items', { returnObjects: true });
   const publications = t('publications.items', { returnObjects: true });
+  const featured = t('publications.featured', { returnObjects: true });
 
   const schemaMarkup = {
     '@context': 'https://schema.org',
@@ -156,6 +157,11 @@ const PressePage = () => {
 
               <section>
                 <h2 className="text-xl font-bold text-healio-slate mb-4">{t('publications.title')}</h2>
+                <p className="mb-6 font-medium text-gray-900">
+                  {featured.prefix}:{' '}
+                  <a href={featured.href} target="_blank" rel="noopener noreferrer" className="text-healio-primary hover:underline">{featured.outlet}</a>
+                  , {featured.date}
+                </p>
                 <ul className="space-y-6">
                   {publications.map((item) => (
                     <li key={item.href}>

@@ -9,8 +9,8 @@ export const createOrganizationSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "HEALIO GmbH",
-    "legalName": "HEALIO GmbH",
+    "name": "Healio GmbH",
+    "legalName": "Healio GmbH",
     "url": SITE_URL,
     "logo": `${SITE_URL}/favicon.svg`,
     "description": "Healio ist ein unabhängiger Versicherungsmakler für ambulante, Zahn- und stationäre Krankenzusatzversicherungen mit digitaler und persönlicher Begleitung.",
@@ -27,6 +27,12 @@ export const createOrganizationSchema = () => {
       "contactType": "customer service",
       "email": "info@healio.de",
       "availableLanguage": ["German"]
+    },
+    "brand": {
+      "@type": "Brand",
+      "@id": "https://kassenboost.de/#brand",
+      "name": "KassenBoost",
+      "url": "https://kassenboost.de"
     },
     "foundingDate": "2021",
     "sameAs": [

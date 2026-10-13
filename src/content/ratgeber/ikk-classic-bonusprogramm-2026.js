@@ -63,6 +63,11 @@ export const article = {
 
   headline:
     'IKK classic Bonusprogramm 2026: alle Positionen, Nachweise und wie der Bonus den Beitrag einer Zusatzversicherung senken kann',
+  answerBlock: {
+    question: 'Kann der IKK-classic-Bonus eine Zusatzversicherung bezahlen?',
+    answer:
+      'Ja, wenn du beim Antrag statt des Geldbonus den zweckgebundenen Zuschuss wählst: Er beträgt das Dreifache des Bonusbetrags, höchstens aber deine nachgewiesenen Kosten. Weil der Jahresbeitrag einer privaten Krankenzusatzversicherung zu den zuschussfähigen Leistungen zählt (Nr. 63), kann der Bonus diesen Beitrag je nach Maßnahmen und Beitragshöhe ganz oder teilweise tragen.',
+  },
   lead:
     'Die IKK classic zahlt für Vorsorge, Impfungen und Sport einen Geldbonus schon ab der ersten anerkannten Maßnahme, und wer stattdessen den zweckgebundenen Zuschuss wählt, bekommt den dreifachen Betrag, höchstens aber die selbst nachgewiesenen Kosten. Weil der Jahresbeitrag einer privaten Krankenzusatzversicherung ausdrücklich zu den zuschussfähigen Leistungen gehört, kann der Bonus diesen Beitrag je nach nachgewiesenen Maßnahmen und eigenen Kosten ganz oder teilweise tragen. Ausgezahlt wird nie mehr, als du selbst bezahlt hast.',
 
@@ -350,6 +355,11 @@ export const article = {
     'Healio verbindet Kassenbonusprogramme mit Zusatzversicherungen: Der ambulante Tarif bietet ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren, der Kassenbonus kann je nach Kasse beim Beitrag helfen. Der Kassenbonus ist jährlich und fließt als zweckgebundener Zuschuss in den Zusatzschutz; je nach nachgewiesenen Maßnahmen und eigenen Kosten deckt der Zuschuss den Jahresbeitrag ganz oder teilweise, mehr als die nachgewiesenen Kosten wird nie ausgezahlt. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
+    {
+      question: 'Kann der IKK-classic-Bonus eine Zusatzversicherung bezahlen?',
+      answer:
+        'Ja, wenn du beim Antrag statt des Geldbonus den zweckgebundenen Zuschuss wählst: Er beträgt das Dreifache des Bonusbetrags, höchstens aber deine nachgewiesenen Kosten. Weil der Jahresbeitrag einer privaten Krankenzusatzversicherung zu den zuschussfähigen Leistungen zählt (Nr. 63), kann der Bonus diesen Beitrag je nach Maßnahmen und Beitragshöhe ganz oder teilweise tragen.',
+    },
     {
       question: 'Bis wann muss ich das Bonusheft 2026 abgeben?',
       answer:

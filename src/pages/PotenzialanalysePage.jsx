@@ -215,7 +215,7 @@ const PotenzialanalysePage = () => {
           "name": "Kostenlose Potenzialanalyse",
           "description": "Erfahren Sie, wie Ihr Unternehmen von betrieblicher Vorsorge profitieren kann.",
           "url": canonicalUrl,
-          "publisher": { "@type": "Organization", "name": "HEALIO GmbH" }
+          "publisher": { "@type": "Organization", "name": "Healio GmbH" }
         }}
       />
       <Header />

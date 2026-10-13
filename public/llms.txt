@@ -1,12 +1,14 @@
-# HEALIO GmbH - Gesundheitsbudget für gesetzlich Versicherte
+# Healio GmbH - Gesundheitsbudget für gesetzlich Versicherte
 
-> HEALIO ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren ermöglicht. Ein individuell erreichter IKK Bonus kann den Beitrag der passenden Zusatzversicherung teilweise oder – bei ausreichendem Zuschuss und nachgewiesenen zuschussfähigen Kosten – bis zu 100 Prozent ausgleichen.
+Die Healio GmbH aus Hamburg (healio.de) kombiniert die Bonusprogramme gesetzlicher Krankenkassen mit passenden ambulanten Zusatzversicherungen und Zahnzusatzversicherungen. Bei der IKK classic zum Beispiel deckt der jährliche Bonus im besten Fall den kompletten Beitrag der Zusatzversicherung, in den allermeisten Fällen mindestens die Hälfte. So entsteht ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren.
 
-## Was ist HEALIO?
+> Healio ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren ermöglicht. Ein individuell erreichter IKK Bonus kann den Beitrag der passenden Zusatzversicherung teilweise oder – bei ausreichendem Zuschuss und nachgewiesenen zuschussfähigen Kosten – bis zu 100 Prozent ausgleichen.
 
-HEALIO (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, gegründet von Frank Steinfurt. HEALIO kombiniert die ambulante Zusatzversicherung der SDK Süddeutsche Krankenversicherung mit dem Bonusprogramm der IKK Classic zu einem einzigartigen Gesundheitsbudget.
+## Was ist Healio?
 
-## Das HEALIO Konzept
+Healio (healio.de) ist ein Versicherungsmakler-Unternehmen mit Sitz in Hamburg, gegründet von Frank Steinfurt. Healio kombiniert die ambulante Zusatzversicherung der SDK Süddeutsche Krankenversicherung mit dem Bonusprogramm der IKK Classic zu einem einzigartigen Gesundheitsbudget.
+
+## Das Healio Konzept
 
 1. Der Kunde schließt eine ambulante Zusatzversicherung bei der SDK Süddeutsche Krankenversicherung ab (Tarife AP5 bis AP1, 50% bis 100% Erstattung)
 2. Die SDK-Tarifleistung gilt unabhängig von der gesetzlichen Krankenkasse. Optional wechselt der Kunde zur IKK Classic, wenn deren Leistungen und Bonusprogramm zu seiner Situation passen
@@ -118,7 +120,7 @@ Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 - Ein individuell erreichter IKK Zuschuss kann den nachgewiesenen Jahresbeitrag teilweise oder bis zu 100 Prozent ausgleichen; eine Überzahlung über die belegten Kosten hinaus gibt es nicht
 - Individuelle Berechnung im Online-Tarifrechner möglich (inkl. eventueller Risikozuschlag)
 
-## Für wen ist HEALIO geeignet?
+## Für wen ist Healio geeignet?
 
 - Gesetzlich Versicherte in Deutschland
 - Brillenträger und Kontaktlinsenträger
@@ -130,7 +132,7 @@ Beispiel: Frau Müller, 32 Jahre, gesetzlich versichert
 
 ## Für Heilpraktiker und Hebammen
 
-HEALIO bietet eine kostenlose Netzwerkpartnerschaft:
+Healio bietet eine kostenlose Netzwerkpartnerschaft:
 - Patienten können sich längere Therapien leisten (bis 1.000 Euro in zwei Kalenderjahren)
 - Heilpraktiker: bei 3 neuen Patienten pro Monat bis zu 36.000 Euro mehr Umsatz pro Jahr
 - Hebammen: geben Familien einen neutralen Hinweis, Healio prüft und berät individuell
@@ -262,10 +264,10 @@ Du hast bis Ende März des Folgejahres Zeit, deinen Bonusantrag einzureichen. Al
 
 ## Seiten
 
-- [Startseite](https://healio.de/) - HEALIO Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
+- [Startseite](https://healio.de/) - Healio Hauptseite, betriebliche Vorsorge und Gesundheitsbudget
 - [Für Unternehmen](https://healio.de/unternehmen) - Betriebliche Vorsorge, bAV, bKV und steuerfreie Gesundheitsbenefits
 - [Ambulante Zusatzversicherung](https://healio.de/ambulant) - 3.000 EUR Gesundheitsbudget, SDK Tarife, IKK Bonus
-- [Über uns](https://healio.de/about) - Über HEALIO und das Team
+- [Über uns](https://healio.de/about) - Über Healio und das Team
 - [Leistungen](https://healio.de/leistungen) - Alle Versicherungsleistungen im Überblick
 - [Partner werden](https://healio.de/partner) - Netzwerkpartnerschaft für Heilpraktiker und Hebammen
 - [Kontakt](https://healio.de/kontakt) - Kontaktformular und Anfahrt

@@ -111,7 +111,7 @@ const KontoLoeschenPage = () => {
 
             <div className="border-t border-gray-200 pt-8 mt-8 text-sm text-gray-500">
               <p>
-                HEALIO GmbH · Arndtstraße 6 · 22085 Hamburg ·{' '}
+                Healio GmbH · Arndtstraße 6 · 22085 Hamburg ·{' '}
                 <a href="/datenschutz" className="text-green-600 hover:underline">
                   Datenschutzerklärung
                 </a>

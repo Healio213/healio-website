@@ -75,6 +75,12 @@
   "publications": {
     "title": "Veröffentlichungen",
     "note": "Fachbeiträge mit Healio Beteiligung, chronologisch nach Erscheinungsdatum.",
+    "featured": {
+      "prefix": "Erschienen in",
+      "outlet": "VersicherungsJournal",
+      "date": "08.09.2026",
+      "href": "https://www.versicherungsjournal.de/versicherungen-und-finanzen/kassenbonus-plus-zusatzschutz-der-unterschaetzte-einstieg-in-die-private-und-betriebliche-vorsorge-156657"
+    },
     "items": [
       {
         "title": "Der unbekannte Geldtopf",
