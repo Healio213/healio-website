@@ -61,7 +61,7 @@ const de = {
     questions: {
       q1: {
         text: 'Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung empfohlen? Ist aktuell eine beabsichtigt oder läuft sie schon?',
-        hint: 'Etwa Krone, Füllung oder Implantat. Auch eine aktuell geplante Behandlung zählt, zum Beispiel mit einem Heil- und Kostenplan, also einem Kostenvoranschlag.',
+        hint: 'Etwa Krone, Füllung, Implantat oder das Ziehen eines Zahns. Auch eine aktuell geplante Behandlung zählt, zum Beispiel mit einem Heil- und Kostenplan, also einem Kostenvoranschlag.',
         rules: [
           {
             tone: 'mint',
@@ -79,7 +79,7 @@ const de = {
         hint: 'Milch- und Weisheitszähne zählen nicht. Ein vollständiger Lückenschluss zählt ebenfalls nicht als fehlender Zahn.',
         options: {
           keine: { label: 'Nein, alle Zähne sind vorhanden oder ersetzt' },
-          ziehen: { label: 'Noch nicht, aber ein Zahn soll gezogen werden', sub: 'Dein Zahnarzt rät dir, einen oder mehrere Zähne ziehen zu lassen.' },
+          ziehen: { label: 'Noch nicht, aber ein Zahn soll gezogen werden', sub: 'Dein Zahnarzt rät dir, einen oder mehrere Zähne ziehen zu lassen. Das gilt auch für Weisheitszähne.' },
           wenige: { label: 'Ja, 1 bis 3 Zähne' },
           viele: { label: 'Ja, mehr als 3 Zähne' },
         },
@@ -265,7 +265,7 @@ const de = {
         label: 'Behandlung steht an',
         title: 'die Bayerische',
         product: 'ZAHN Sofort',
-        text: 'Für Behandlungen, die in den letzten 2 Jahren empfohlen oder geplant wurden oder schon laufen. Bis zu 1.500 EUR können möglich sein, wenn Abschluss und Rechnung zeitlich richtig liegen. Voraussetzung: Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
+        text: 'Für Behandlungen, die in den letzten 2 Jahren empfohlen oder geplant wurden oder schon laufen. Bis zu 1.500 EUR können möglich sein, wenn Abschluss und Rechnung zeitlich richtig liegen. Voraussetzung: Es fehlen keine Zähne, es soll kein Zahn gezogen werden und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
         tone: 'coral',
       },
     ],
@@ -419,7 +419,7 @@ const en = {
     questions: {
       q1: {
         text: 'Has your dentist recommended treatment in the last 2 years? Is any treatment currently intended or underway?',
-        hint: 'For example a crown, filling or implant. Current plans count too, such as a treatment and cost plan (Heil- und Kostenplan), in other words a cost estimate.',
+        hint: 'For example a crown, filling, implant or a tooth extraction. Current plans count too, such as a treatment and cost plan (Heil- und Kostenplan), in other words a cost estimate.',
         rules: [
           {
             tone: 'mint',
@@ -437,7 +437,7 @@ const en = {
         hint: 'Baby teeth and wisdom teeth do not count. A complete gap closure does not count either.',
         options: {
           keine: { label: 'No, all teeth are present or replaced' },
-          ziehen: { label: 'Not yet, but a tooth needs to be extracted', sub: 'Your dentist recommends having one or more teeth extracted.' },
+          ziehen: { label: 'Not yet, but a tooth needs to be extracted', sub: 'Your dentist recommends having one or more teeth extracted. This includes wisdom teeth.' },
           wenige: { label: 'Yes, 1 to 3 teeth' },
           viele: { label: 'Yes, more than 3 teeth' },
         },
@@ -603,7 +603,7 @@ const en = {
     text: 'The dental check first classifies your situation. Only then do premium and application follow.',
     cards: [
       { ...de.paths.cards[0], label: 'Benefits, family and dental gaps', product: 'ZahnPRIVAT 75, 90 or 100', text: 'For everyone with nothing recommended in the last 2 years and no treatment currently intended or underway. Braces have no 2-year lookback limit. Three benefit levels without waiting periods. With 1 to 3 missing teeth, UKV assesses acceptance with a surcharge per tooth.' },
-      { ...de.paths.cards[1], label: 'Treatment coming up', text: 'For treatment recommended or planned in the last 2 years, or already underway. Up to €1,500 may be possible when sign-up and invoice timing meet the conditions. Requirement: no missing teeth and no dental history, for example no periodontitis in the last 3 years and no removable dentures.' },
+      { ...de.paths.cards[1], label: 'Treatment coming up', text: 'For treatment recommended or planned in the last 2 years, or already underway. Up to €1,500 may be possible when sign-up and invoice timing meet the conditions. Requirement: no missing teeth, no tooth due to be extracted and no dental history, for example no periodontitis in the last 3 years and no removable dentures.' },
     ],
     footer: 'Acceptance and exact benefits are only checked bindingly in the application.',
   },

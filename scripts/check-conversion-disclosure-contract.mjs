@@ -161,6 +161,29 @@ expect(Boolean(gapFaqAnswer) && seoRoutesSource.includes(`name: 'Kann ich mich m
 // laufende Behandlungen werden unabhängig davon abgefragt.
 expect(/text: 'Hat dein Zahnarzt in den letzten 2 Jahren eine Behandlung empfohlen\? Ist aktuell eine beabsichtigt oder läuft sie schon\?'/.test(dentalContent) && /text: 'Has your dentist recommended treatment in the last 2 years\? Is any treatment currently intended or underway\?'/.test(dentalContent), 'Frage 1 des Zahn-Checks muss Rückblick und aktuellen Behandlungsstand in DE und EN abfragen.');
 expect(/question\.rules/.test(dentalCheck) && /title: 'Vor mehr als 2 Jahren empfohlen\?'/.test(dentalContent), 'Frage 1 behält den sichtbaren Regelkasten zu älteren Empfehlungen.');
+// Angeratenes Zahnziehen (Konzept Antragsstrecke 12.10.2026, Risiko 7): Die Bayerische lehnt bei
+// angeratener Extraktion ab, ohne Ausnahme für Weisheitszähne. Die Antwort „ziehen“ in Frage 2
+// beendet den Check deshalb sofort in der persönlichen Klärung, nie im Sofort-Weg.
+expect(/ziehen: \{ label: 'Noch nicht, aber ein Zahn soll gezogen werden'/.test(dentalContent) && /ziehen: \{ label: 'Not yet, but a tooth needs to be extracted'/.test(dentalContent), 'Frage 2 braucht in DE und EN die Antwort zum angeratenen Zahnziehen.');
+for (const lang of ['de', 'en']) {
+  const { q1, q2 } = getDentalContent(lang).check.questions;
+  expect(Object.keys(q2.options).join(',') === 'keine,ziehen,wenige,viele', `Frage 2 behält die Antwort zum Zahnziehen an zweiter Stelle (${lang}).`);
+  expect((lang === 'de' ? /Das gilt auch für Weisheitszähne\./ : /This includes wisdom teeth\./).test(q2.options.ziehen?.sub || ''), `Die Antwort zum Zahnziehen schließt Weisheitszähne ausdrücklich ein (${lang}).`);
+  expect((lang === 'de' ? /^Etwa Krone, Füllung, Implantat oder das Ziehen eines Zahns\./ : /^For example a crown, filling, implant or a tooth extraction\./).test(q1.hint), `Der Hinweis zu Frage 1 nennt das Ziehen eines Zahns als Behandlung (${lang}).`);
+}
+const dentalComputeSource = dentalCheck.slice(dentalCheck.indexOf('const computeResult = '), dentalCheck.indexOf('const CTA_HREFS'));
+const dentalCompute = runInNewContext(`${dentalComputeSource}\ncomputeResult;`, {}, { timeout: 1000 });
+const dentalIsDoneSource = dentalCheck.match(/const isDone =([\s\S]*?);\n/)?.[1];
+const dentalIsDone = (answers, path, currentQuestionId) => runInNewContext(dentalIsDoneSource, { answers, path, currentQuestionId }, { timeout: 1000 });
+for (const q1 of ['ja', 'nein']) {
+  for (const q3 of [undefined, 'nein']) {
+    const answers = q3 ? { q1, q2: 'ziehen', q3 } : { q1, q2: 'ziehen' };
+    expect(dentalCompute(answers) === 'sonderKomplex', `Angeratenes Zahnziehen führt in die persönliche Klärung (q1=${q1}${q3 ? `, q3=${q3}` : ''}).`);
+  }
+  expect(Boolean(dentalIsDoneSource) && dentalIsDone({ q1, q2: 'ziehen' }, ['q1', 'q2'], 'q3') === true, `Nach „ziehen“ endet der Check sofort, ohne Frage 3 (q1=${q1}).`);
+}
+expect(dentalCompute({ q1: 'ja', q2: 'keine', q3: 'nein' }) === 'sofort', 'Der Sofort-Weg der Bayerischen bleibt für Behandlung ohne Lücke und ohne Vorgeschichte erhalten.');
+expect(/Es fehlen keine Zähne, es soll kein Zahn gezogen werden und es gibt keine Zahn-Vorgeschichte/.test(dentalContent) && /no missing teeth, no tooth due to be extracted and no dental history/.test(dentalContent), 'Die Wegekarte der Bayerischen nennt in DE und EN das angeratene Zahnziehen als Ausschluss.');
 // Kieferorthopädie (UKV-Antrag 4.4) kennt keine 2-Jahres-Grenze: Wo ältere Empfehlungen als
 // versichert gelten, steht die Ausnahme Zahnspange dabei, ebenso im Familien-Ergebnis.
 expect((dentalContent.match(/Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung\./g) || []).length >= 3 && (dentalContent.match(/Exception: for braces, an older recommendation still counts\./g) || []).length >= 3, 'Regelkasten und FAQ zu älteren Empfehlungen brauchen in DE und EN die Ausnahme Zahnspange.');
