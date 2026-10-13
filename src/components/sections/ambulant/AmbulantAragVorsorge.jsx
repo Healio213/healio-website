@@ -16,7 +16,7 @@ const COPY = {
     body: 'Wenn du gezielte Checks suchst, ist ARAG V100 ein eigener Prüfweg: bis zu 1.000 EUR für Vorsorge aus einem festen Tarifkatalog, etwa großer Gesundheitscheck, Sonografie der inneren Organe, Lungencheck und Krebsfrüherkennung.',
     benefit: '100 % der anerkannten Restkosten · bis 1.000 EUR Vorsorge in zwei aufeinanderfolgenden Kalenderjahren',
     vaccine: 'Impfungen: separater Höchstbetrag von 200 EUR im selben Zeitraum',
-    note: 'Ohne Gesundheitsfragen · 3 Monate allgemeine Wartezeit. Kassenleistungen zuerst nutzen. Tarifkatalog und Bedingungen gelten.',
+    note: 'Keine Ablehnung wegen Vorerkrankungen · 3 Monate allgemeine Wartezeit. Kassenleistungen zuerst nutzen. Tarifkatalog und Bedingungen gelten.',
     cta: 'Mein V100-Angebot anfragen',
     destination: 'Vorname und E-Mail genügen für den Start. Angebot und Antrag begleiten wir persönlich.',
     checksTitle: 'Welche Checks werden erstattet?',

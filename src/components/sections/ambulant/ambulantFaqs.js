@@ -50,7 +50,7 @@ export const AMBULANT_FAQS = {
     },
     {
       q: 'Muss ich Gesundheitsfragen beantworten?',
-      a: 'Bei der SDK beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Abgelehnt wirst du deshalb grundsätzlich nicht, auch nicht mit Vorerkrankungen. Je nach Angaben kann ein Risikozuschlag dazukommen, in Einzelfällen auch ein Ausschluss für eine bestimmte Erkrankung. Beim freiwilligen UKV-Baustein fragt der Antrag nach Sehhilfe und Gehör. ARAG V100 stellt keine Gesundheitsfragen, prüft aber vorhandenen oder beantragten gleichartigen Schutz.',
+      a: 'Bei der SDK beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Abgelehnt wirst du deshalb grundsätzlich nicht, auch nicht mit Vorerkrankungen. Je nach Angaben kann ein Risikozuschlag dazukommen, in Einzelfällen auch ein Ausschluss für eine bestimmte Erkrankung. Beim freiwilligen UKV-Baustein fragt der Antrag nach Sehhilfe und Gehör. ARAG V100 lehnt wegen Vorerkrankungen nicht ab, prüft aber vorhandenen oder beantragten gleichartigen Schutz.',
     },
     {
       q: 'Was passiert nach dem Klick auf den Rechner?',
