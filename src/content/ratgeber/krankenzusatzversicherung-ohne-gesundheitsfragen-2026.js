@@ -11,9 +11,12 @@
  * auch mit Vorerkrankungen; Gesundheitsfragen werden gestellt, führen aber
  * nicht zur Ablehnung; laufende Behandlungen sind ausgenommen. „Sicher
  * angenommen“ nur, wo ein Beleg des Versicherers vorliegt.
- * Franks Vorgabe 14.10.2026: exakter Suchbegriff mit 2026 in Titel, H1, URL,
- * Beschreibung und erstem Absatz; URL /ratgeber/zusatzversicherung-ohne-
- * gesundheitspruefung-2026.
+ * Franks Entscheidung 14.10.2026: eine Hauptseite für beide Suchbegriffe,
+ * URL /ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026, 301 von
+ * /ratgeber/zusatzversicherung-ohne-gesundheitsfragen und
+ * /ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026. Beide Begriffe in
+ * Beschreibung und erstem Absatz. SDK ambulant: Vorerkrankungen per Zuschlag
+ * voll mitversichert, keine Leistungsausschlüsse (Frank, Broschüre 1.781).
  * Prüfskript-Ausnahme nur für diesen Slug (scripts/check-ratgeber-
  * contract.mjs, OHNE_GF_AUSNAHME): Suchfrage „Zusatzversicherung ohne
  * Gesundheitsprüfung/-fragen“ und „sicher angenommen“ in begrenzter Zahl.
@@ -22,9 +25,8 @@
  *   - SDK-Broschüre Ambulante Zusatzversicherung 1.781/07.23: „Vorerkrankungen
  *     können direkt im Antrag über feste Zuschläge mitversichert werden (keine
  *     Ablehnungen, keine Leistungsausschlüsse, keine Arztanfragen).“ Basis für
- *     „sicher angenommen“ im SDK-Ambulanttarif. Abweichung: healio.de/ambulant
- *     nennt zusätzlich einen möglichen einzelnen Ausschluss; diese Seite nennt
- *     deshalb keine Ausschluss-Freiheit.
+ *     „sicher angenommen“ im SDK-Ambulanttarif. Frank bestätigt
+ *     14.10.2026: keine Leistungsausschlüsse, /ambulant entsprechend korrigiert.
  *   - SDK AVB AP-Tarife 1.753a: keine Wartezeiten; Versicherungsfälle vor
  *     Beginn nicht versichert (wie healio.de/ambulant).
  *   - ARAG Antrag A842: „Für Tarif V100 müssen keine Gesundheitsfragen
@@ -41,17 +43,17 @@
  * meta-pixel.js, api/meta-events.js), weil Leser Vorerkrankungen mitbringen.
  */
 export const article = {
-  slug: 'zusatzversicherung-ohne-gesundheitspruefung-2026',
+  slug: 'krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   kind: 'ratgeber',
   group: 'ambulant',
-  metaTitle: 'Zusatzversicherung ohne Gesundheitsprüfung 2026 | Healio',
-  metaDescription: 'Zusatzversicherung ohne Gesundheitsprüfung 2026: Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.',
+  metaTitle: 'Krankenzusatzversicherung ohne Gesundheitsfragen 2026 | Healio',
+  metaDescription: 'Krankenzusatzversicherung ohne Gesundheitsfragen oder ohne Gesundheitsprüfung? Im ambulanten SDK-Tarif wirst du 2026 trotz Vorerkrankung sicher angenommen.',
   publishedAt: '2026-10-14',
   publishedAtLabel: '14. Oktober 2026',
   readingTimeMinutes: 8,
-  listTitle: 'Zusatzversicherung ohne Gesundheitsprüfung 2026',
+  listTitle: 'Krankenzusatzversicherung ohne Gesundheitsfragen 2026',
   listTeaser: 'Trotz Vorerkrankung angenommen werden: wo das bei den Tarifen von Healio klappt und wo nicht.',
-  headline: 'Zusatzversicherung ohne Gesundheitsprüfung 2026: So wirst du trotzdem sicher angenommen',
+  headline: 'Krankenzusatzversicherung ohne Gesundheitsfragen 2026: ohne Gesundheitsprüfung trotzdem sicher angenommen',
   author: 'frank-steinfurt',
   toc: 'auto',
   faqStyle: 'accordion',
@@ -60,13 +62,13 @@ export const article = {
     icon: 'document',
     facts: [
       { value: 'Annahme ambulant', label: 'im SDK-Tarif auch mit Vorerkrankungen, laut SDK ohne Ablehnung' },
-      { value: 'Gesundheitsfragen', label: 'werden gestellt, Vorerkrankungen über feste Zuschläge' },
+      { value: 'Kein Ausschluss', label: 'Vorerkrankungen per Zuschlag voll mitversichert' },
       { value: 'Ab Beginn', label: 'nur neue Fälle, laufende Behandlungen bleiben draußen' }
     ],
-    text: 'Wer eine „Krankenzusatzversicherung ohne Gesundheitsfragen“ sucht, will vor allem eins: angenommen werden. Im ambulanten Tarif der SDK klappt das. Du beantwortest Gesundheitsfragen, Vorerkrankungen versichert die SDK über feste Zuschläge mit. Eine Ablehnung gibt es dort laut SDK nicht.',
+    text: 'Wer so sucht, will vor allem eins: angenommen werden. Im ambulanten Tarif der SDK klappt das. Du beantwortest Gesundheitsfragen, Vorerkrankungen versichert die SDK über feste Zuschläge mit. Eine Ablehnung gibt es dort laut SDK nicht.',
     path: { to: '/ambulant#tarifwahl', text: 'Beitrag nach Alter und Stufe ausrechnen', label: 'Zum ambulanten Rechner' }
   },
-  lead: 'Wer 2026 eine Zusatzversicherung ohne Gesundheitsprüfung sucht, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum eine schon laufende Behandlung in keinem neuen Vertrag steckt.',
+  lead: 'Wer 2026 eine Krankenzusatzversicherung ohne Gesundheitsfragen oder eine Zusatzversicherung ohne Gesundheitsprüfung sucht, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum eine schon laufende Behandlung in keinem neuen Vertrag steckt.',
   sections: [
     {
       id: 'suchfrage',
@@ -98,12 +100,12 @@ export const article = {
       id: 'ambulant',
       heading: 'Bei welchen ambulanten Tarifen wirst du trotz Vorerkrankung angenommen?',
       blocks: [
-        { type: 'paragraph', text: 'Im ambulanten SDK-Tarif, den Healio vermittelt. Die SDK schreibt in ihrer Produktbroschüre: Vorerkrankungen können direkt im Antrag über feste Zuschläge mitversichert werden, ohne Ablehnungen und ohne Arztanfragen. Du beantwortest die Gesundheitsfragen also vollständig, und aus deinen Antworten ergibt sich höchstens ein Zuschlag. Eine allgemeine Wartezeit gibt es in den AP-Tarifen nicht.' },
+        { type: 'paragraph', text: 'Im ambulanten SDK-Tarif, den Healio vermittelt. Die SDK schreibt in ihrer Produktbroschüre: Vorerkrankungen können direkt im Antrag über feste Zuschläge mitversichert werden, ohne Ablehnungen, ohne Leistungsausschlüsse und ohne Arztanfragen. Du beantwortest die Gesundheitsfragen also vollständig, aus deinen Antworten ergibt sich höchstens ein Zuschlag, und deine Vorerkrankung ist dann voll mitversichert. Eine allgemeine Wartezeit gibt es in den AP-Tarifen nicht.' },
         { type: 'paragraph', text: 'In der höchsten Stufe Ambulant 100 (AP1) stehen bis zu 3.000 EUR in zwei Jahren bereit, verteilt auf vier eigene Töpfe: 1.000 EUR für Naturheilverfahren wie Heilpraktiker und Osteopathie, 500 EUR für Sehhilfen, 500 EUR für Vorsorge und 1.000 EUR für Hilfsmittel und gesetzliche Zuzahlungen. Das ist kein frei verfügbares Guthaben, erstattet werden versicherte Rechnungen nach den Tarifbedingungen.' },
         { type: 'table', mobile: 'cards', caption: 'Ambulante Wege bei Healio und die Annahme, Stand 14. Oktober 2026',
           head: ['Tarif', 'Annahme mit Vorerkrankung', 'Wartezeit und Grenzen'],
           rows: [
-            ['SDK Ambulant (AP1, AP9, AP7, AP5)', 'Gesundheitsfragen, Vorerkrankungen über feste Zuschläge, laut SDK keine Ablehnung', 'Keine allgemeine Wartezeit, vier Töpfe je zwei Kalenderjahre'],
+            ['SDK Ambulant (AP1, AP9, AP7, AP5)', 'Gesundheitsfragen, Vorerkrankungen per festem Zuschlag voll mitversichert, keine Ablehnung, kein Leistungsausschluss', 'Keine allgemeine Wartezeit, vier Töpfe je zwei Kalenderjahre'],
             ['UKV VorsorgePRIVAT, zubuchbar', 'Der Antrag fragt nach Sehhilfe und Gehör', 'Keine allgemeine Wartezeit, Vorsorge nach Tarif'],
             ['ARAG V100, eigener Vorsorgeweg', 'Keine Ablehnung wegen Vorerkrankungen', '3 Monate allgemeine Wartezeit, nur Vorsorge aus dem Tarifkatalog']
           ],
@@ -193,7 +195,7 @@ export const article = {
       ]
     }
   ],
-  factNugget: 'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Im ambulanten SDK-Tarif, den Healio vermittelt, werden Vorerkrankungen laut SDK über feste Zuschläge mitversichert, eine Ablehnung gibt es dort nicht. Behandlungen, die vor Versicherungsbeginn laufen oder angeraten sind, sind in keinem neuen Vertrag versichert.',
+  factNugget: 'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Im ambulanten SDK-Tarif, den Healio vermittelt, werden Vorerkrankungen laut SDK über feste Zuschläge voll mitversichert, ohne Ablehnung und ohne Leistungsausschluss. Behandlungen, die vor Versicherungsbeginn laufen oder angeraten sind, sind in keinem neuen Vertrag versichert.',
   faqs: [
     { question: 'Welche Krankenzusatzversicherung nimmt mich trotz Vorerkrankung an?', answer: 'Bei Healio der ambulante Tarif der SDK. Du beantwortest Gesundheitsfragen, laut SDK werden Vorerkrankungen über feste Zuschläge mitversichert, ohne Ablehnung. Laufende oder angeratene Behandlungen bleiben ausgenommen.' },
     { question: 'Gibt es eine Krankenhauszusatzversicherung, die nicht nach der Gesundheit fragt?', answer: 'Bei Healio nur für Unfälle: Der SDK-Tarif SPU verzichtet auf die Gesundheitsprüfung, leistet aber nur nach einem Unfall. Die Tarife SP1 und SP2 für Krankheit und Unfall haben Gesundheitsfragen, die Annahme entscheidet der Versicherer im Antrag.' },

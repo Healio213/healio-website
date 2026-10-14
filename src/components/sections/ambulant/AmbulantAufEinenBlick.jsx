@@ -10,7 +10,9 @@ import MobileDetails from '@/components/ui/MobileDetails';
 // von jeweils 2 Kalenderjahren ab Versicherungsbeginn“, Sehhilfen in allen
 // Stufen 100 %, refraktive Chirurgie je Auge und Versicherungsfall, in den
 // ersten vier Kalenderjahren die Hälfte. Gesundheitsfragen nach Roter Linie:
-// „ohne Ablehnung“, nie „keine Gesundheitsfragen“.
+// „ohne Ablehnung“, nie „keine Gesundheitsfragen“. Vorerkrankungen per
+// Zuschlag mitversichert, keine Leistungsausschlüsse (SDK-Broschüre 1.781,
+// Frank 14.10.2026).
 const COPY = {
   de: {
     title: 'Auf einen Blick',
@@ -30,7 +32,7 @@ const COPY = {
       {
         icon: ClipboardList,
         title: 'Gesundheitsfragen ohne Ablehnung',
-        text: 'Im Antrag beantwortest du Gesundheitsfragen. Abgelehnt wirst du grundsätzlich nicht, bei Vorerkrankungen kann ein Zuschlag oder ein einzelner Ausschluss dazukommen.',
+        text: 'Im Antrag beantwortest du Gesundheitsfragen. Abgelehnt wirst du nicht. Vorerkrankungen sind über einen Zuschlag voll mitversichert, ohne Leistungsausschluss.',
       },
       {
         icon: Wallet,
@@ -58,7 +60,7 @@ const COPY = {
       {
         icon: ClipboardList,
         title: 'Health questions without rejection',
-        text: 'You answer health questions in the application. As a rule you are not rejected; pre-existing conditions may add a surcharge or a single exclusion.',
+        text: 'You answer health questions in the application. You are not rejected. Pre-existing conditions are fully covered with a surcharge, without benefit exclusions.',
       },
       {
         icon: Wallet,
@@ -83,13 +85,13 @@ const TONES = [
 const MOBILE_FACTS = {
   de: [
     ['Keine Wartezeit', 'Ab Versicherungsbeginn. Bereits angeratene oder laufende Behandlungen sind ausgenommen.'],
-    ['Gesundheitsfragen', 'Grundsätzlich ohne Ablehnung. Zuschlag oder einzelner Ausschluss möglich.'],
+    ['Gesundheitsfragen', 'Ohne Ablehnung. Vorerkrankungen per Zuschlag mitversichert, kein Ausschluss.'],
     ['Vier eigene Grenzen', 'Je nach Stufe 50 bis 100 % Erstattung. Sehhilfen immer 100 %.'],
     ['Zwei Kalenderjahre', 'Volle Töpfe ab Start. Der erste Zeitraum kann kürzer sein.'],
   ],
   en: [
     ['No waiting period', 'From the policy start. Previously recommended or ongoing treatment is excluded.'],
-    ['Health questions', 'As a rule, no rejection. A surcharge or individual exclusion is possible.'],
+    ['Health questions', 'No rejection. Pre-existing conditions covered with a surcharge, no exclusions.'],
     ['Four separate limits', '50 to 100% reimbursement by tier. Vision aids always 100%.'],
     ['Two calendar years', 'Full pots from the start. The first period may be shorter.'],
   ],

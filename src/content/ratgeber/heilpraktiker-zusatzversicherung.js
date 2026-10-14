@@ -15,7 +15,8 @@
  *   - Keine Rangliste, kein Anbietervergleich: Die Seite nennt Kriterien und
  *     zeigt als Beispiel nur den Tarif, den Healio auf /ambulant vermittelt.
  *   - Keine Zahl zu Risikozuschlägen. Die Bedingungen nennen sie nur als
- *     Möglichkeit (Zuschlag oder Ausschluss), eine Höhe steht dort nicht.
+ *     Möglichkeit (Zuschlag), eine Höhe steht dort nicht. Seit 14.10.2026 nach
+ *     Frank und SDK-Broschüre 1.781: keine Leistungsausschlüsse.
  *   - Das Rechenbeispiel arbeitet mit angenommenen Preisen und ist als eigene
  *     Rechnung gekennzeichnet. Eine neutrale Durchschnittsangabe für
  *     Heilpraktikerrechnungen gibt es nicht.
@@ -136,7 +137,7 @@ export const article = {
             ['Anlaufstaffel', 'Gilt in den ersten Jahren eine niedrigere Grenze', 'Für Naturheilverfahren nennen die Bedingungen keine Staffel, die Zwei-Jahres-Zeiträume zählen ab Versicherungsbeginn'],
             ['Wartezeit', 'Ab wann der Tarif zahlt', 'Die Tarifbedingungen sehen keine Wartezeiten vor'],
             ['Mehrere Kostenträger', 'Wie Kassenzuschuss oder andere Versicherungen angerechnet werden', 'Die gesamte Erstattung darf nicht höher sein als die gesamten Kosten'],
-            ['Annahme', 'Gesundheitsfragen, Zuschlag, Ausschluss', 'Gesundheitsprüfung vor Vertragsbeginn, Risikozuschlag oder Leistungsausschluss möglich'],
+            ['Annahme', 'Gesundheitsfragen, Zuschlag, Ausschluss', 'Gesundheitsprüfung vor Vertragsbeginn, keine Ablehnung, Vorerkrankungen per Risikozuschlag mitversichert, kein Leistungsausschluss'],
             ['Laufzeit und Beitrag', 'Kündigungsfrist, Beitragsanpassung, Beitrag nach Alter', 'Versicherungsjahr 1. Juli bis 30. Juni, Kündigung mit 3 Monaten Frist zum Ende des Versicherungsjahres, Beitrag nach erreichtem Alter, Anpassungen möglich'],
           ],
           note: 'Quellen: SDK, Allgemeine Versicherungsbedingungen Teil I (Stand 01.01.2022), Abschnitte A.4, A.8 und D.1, und Teil II (Stand 01.01.2023), Abschnitte I.5, II und III. Die Spalte zu den SDK-Tarifen ist ein Beispiel für die Prüfung, kein Vergleich mit anderen Anbietern.',
@@ -183,7 +184,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Je nach Angaben kann aber ein Risikozuschlag auf den Beitrag dazukommen, in Einzelfällen auch ein Leistungsausschluss für eine bestimmte Erkrankung. Einen Leistungsausschluss vereinbart die SDK nach ihrer Definition zum Beispiel dann, wenn erhebliche Erkrankungen schon vor Versicherungsbeginn bestehen.',
+          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag auf den Beitrag mit, Leistungsausschlüsse gibt es dabei nicht. Behandlungen, die vor Versicherungsbeginn schon laufen oder angeraten sind, bleiben trotzdem ausgenommen.',
         },
         {
           type: 'paragraph',
@@ -341,7 +342,7 @@ export const article = {
               tone: 'mint',
               title: 'Zusatzversicherung trotz Vorerkrankung',
               text: 'Wo du mit Vorgeschichte angenommen wirst und wo nicht.',
-              to: '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
+              to: '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
               linkLabel: 'Ratgeber lesen',
             },
           ],
@@ -367,7 +368,7 @@ export const article = {
     {
       question: 'Muss ich Gesundheitsfragen beantworten?',
       answer:
-        'Ja. Der Antrag enthält Gesundheitsfragen, die du vollständig und wahrheitsgemäß beantwortest (§ 19 VVG). Bei der SDK wirst du laut Angaben auf der Seite Ambulant grundsätzlich nicht abgelehnt, je nach Angaben kann aber ein Risikozuschlag oder ein Leistungsausschluss für eine Erkrankung dazukommen.',
+        'Ja. Der Antrag enthält Gesundheitsfragen, die du vollständig und wahrheitsgemäß beantwortest (§ 19 VVG). Bei der SDK wirst du laut Angaben auf der Seite Ambulant nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss.',
     },
     {
       question: 'Ist eine laufende Behandlung beim Heilpraktiker versichert?',

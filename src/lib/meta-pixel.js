@@ -66,6 +66,7 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Familienplanungs-Ratgeber und die vier Krebsvorsorge-Ratgeber.
 const META_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
+  '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
@@ -137,7 +138,6 @@ const META_EXCLUDED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
-  '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

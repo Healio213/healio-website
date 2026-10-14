@@ -75,6 +75,7 @@ const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 // src/lib/ratgeber-cta.js), gemessen wird dort.
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
+  '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
@@ -146,7 +147,6 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
-  '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

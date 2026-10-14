@@ -185,7 +185,7 @@ export const RATGEBER_GROUPS = [
       "barmer-osteopathie",
       "tk-heilpraktiker",
       "mobil-krankenkasse-osteopathie",
-      "zusatzversicherung-ohne-gesundheitspruefung-2026"
+      "krankenzusatzversicherung-ohne-gesundheitsfragen-2026"
     ]
   },
   {

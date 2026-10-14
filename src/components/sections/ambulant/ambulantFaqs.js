@@ -11,9 +11,10 @@
 // am 06.10.2026 unverändert abrufbar): keine Wartezeiten (Abschnitt II), vier
 // Töpfe je zwei Kalenderjahre ab Versicherungsbeginn ohne Anlaufstaffel,
 // Sehhilfen in jeder Stufe zu 100 %, Heilpraktiker rechnen nach GebüH ab.
-// Gesundheitsfragen: Die SDK lehnt grundsätzlich niemanden ab, Zuschlag oder
-// einzelner Ausschluss sind möglich (Rote Linie: „ohne Ablehnung“, nie „keine
-// Gesundheitsfragen“).
+// Gesundheitsfragen: Die SDK lehnt niemanden ab, Vorerkrankungen sind per
+// Zuschlag voll mitversichert, keine Leistungsausschlüsse (SDK-Broschüre
+// 1.781/07.23, Frank 14.10.2026). Rote Linie: „ohne Ablehnung“, nie „keine
+// Gesundheitsfragen“.
 
 import { SDK_AMBULANT_BEITRAEGE } from '../../../data/sdkAmbulantBeitraege.js';
 
@@ -50,7 +51,7 @@ export const AMBULANT_FAQS = {
     },
     {
       q: 'Muss ich Gesundheitsfragen beantworten?',
-      a: 'Bei der SDK beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Abgelehnt wirst du deshalb grundsätzlich nicht, auch nicht mit Vorerkrankungen. Je nach Angaben kann ein Risikozuschlag dazukommen, in Einzelfällen auch ein Ausschluss für eine bestimmte Erkrankung. Beim freiwilligen UKV-Baustein fragt der Antrag nach Sehhilfe und Gehör. ARAG V100 lehnt wegen Vorerkrankungen nicht ab, prüft aber vorhandenen oder beantragten gleichartigen Schutz.',
+      a: 'Bei der SDK beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Abgelehnt wirst du deshalb grundsätzlich nicht, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, Leistungsausschlüsse gibt es nicht. Beim freiwilligen UKV-Baustein fragt der Antrag nach Sehhilfe und Gehör. ARAG V100 lehnt wegen Vorerkrankungen nicht ab, prüft aber vorhandenen oder beantragten gleichartigen Schutz.',
     },
     {
       q: 'Was passiert nach dem Klick auf den Rechner?',
@@ -79,7 +80,7 @@ export const AMBULANT_FAQS = {
     { q: 'How much of the premium can my insurer bonus offset?', a: 'All or part of it. Your insurer, verified activities, selected plan and eligible costs determine the result. KassenBoost compares your realistically achievable bonus with the premium.' },
     { q: 'Do I have to switch statutory insurer?', a: 'No. Supplementary cover and statutory insurance are separate decisions. Choose cover first, then use KassenBoost to check whether another insurer is a better financial match.' },
     { q: 'Is there a waiting period?', a: 'SDK AP plans and the optional UKV VorsorgePRIVAT add-on have no general waiting period. Cover applies from the agreed start under the applicable terms; treatment already under way or recommended is not automatically covered. The separate ARAG V100 alternative has a general waiting period of three months.' },
-    { q: 'Do I have to answer health questions?', a: 'For SDK, you answer health questions fully and truthfully. As a rule, this does not lead to a rejection, even with pre-existing conditions. Depending on your answers, a risk surcharge may apply, and in individual cases an exclusion for a specific condition. The optional UKV add-on asks about vision aids and hearing. ARAG V100 does not reject applicants due to pre-existing conditions, but checks existing or applied-for equivalent cover.' },
+    { q: 'Do I have to answer health questions?', a: 'For SDK, you answer health questions fully and truthfully. As a rule, this does not lead to a rejection, even with pre-existing conditions. SDK covers pre-existing conditions with a risk surcharge; there are no benefit exclusions. The optional UKV add-on asks about vision aids and hearing. ARAG V100 does not reject applicants due to pre-existing conditions, but checks existing or applied-for equivalent cover.' },
     { q: 'What happens after I open the calculator?', a: 'Before opening the external calculator, you enter your first name and email once per session so we can email you the statutory health bonus guide once. The calculator then opens in a new tab. There you compare tiers, see your personal premium and answer the application questions before applying. The insurer’s application is in German.' },
     { q: 'How is the budget divided?', a: 'Each SDK tariff has four separate maximums: vision aids, natural therapies, screening with vaccinations and approved prevention courses, and medical aids with statutory co-payments. Each pot covers two calendar years from the policy start. There is no ramp-up period. If your policy starts during the year, the first period is shorter. The budget overview shows the exact split; policy terms remain decisive.' },
     { q: 'Are alternative practitioners and osteopathy covered?', a: 'Both are considered under the natural-therapies pot. Alternative practitioners bill under the German fee schedule for Heilpraktiker (GebüH). Eligible treatments and invoice amounts depend on the selected tariff and policy terms.' },

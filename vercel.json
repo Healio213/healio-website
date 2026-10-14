@@ -160,7 +160,12 @@
     },
     {
       "source": "/ratgeber/zusatzversicherung-ohne-gesundheitsfragen",
-      "destination": "/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026",
+      "destination": "/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026",
+      "statusCode": 301
+    },
+    {
+      "source": "/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026",
+      "destination": "/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026",
       "statusCode": 301
     },
     {

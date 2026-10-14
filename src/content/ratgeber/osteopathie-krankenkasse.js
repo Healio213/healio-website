@@ -624,7 +624,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Wie das in Zahlen aussieht, zeigt die Karte. Die Preise sind angenommen, deine Praxis nennt dir ihre eigenen. Der Antrag enthält Gesundheitsfragen, die du vollständig beantwortest. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, je nach Angaben kann aber ein Risikozuschlag oder ein Leistungsausschluss dazukommen."
+          "text": "Wie das in Zahlen aussieht, zeigt die Karte. Die Preise sind angenommen, deine Praxis nennt dir ihre eigenen. Der Antrag enthält Gesundheitsfragen, die du vollständig beantwortest. Laut den Angaben auf der Seite Ambulant wirst du nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss."
         },
         {
           "type": "costCard",

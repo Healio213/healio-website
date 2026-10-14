@@ -76,11 +76,11 @@ export const article = {
       heading: 'Warum gehören Gesundheitsfragen und laufende Behandlungen in den Vergleich?',
       blocks: [
         { type: 'paragraph', text: 'Weil der beste Tarif nichts nützt, wenn du nicht aufgenommen wirst. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Manche lehnen bei Vorerkrankungen ab, andere nehmen mit Risikozuschlag oder einem Ausschluss an. Für Menschen mit Vorgeschichte ist das oft das wichtigste Kriterium überhaupt.' },
-        { type: 'paragraph', text: 'Im ambulanten SDK-Tarif beantwortest du Gesundheitsfragen, wirst deshalb aber grundsätzlich nicht abgelehnt. Ein Zuschlag oder ein einzelner Ausschluss ist möglich. Bei den Klinik-Tarifen SP1 und SP2 entscheidet der Versicherer die Annahme im Antrag. Bei der UKV ZahnPRIVAT haben die Fragen jeweils eigene Zeiträume.' },
+        { type: 'paragraph', text: 'Im ambulanten SDK-Tarif beantwortest du Gesundheitsfragen, wirst deshalb aber nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Zuschlag mit, ohne Leistungsausschluss. Bei den Klinik-Tarifen SP1 und SP2 entscheidet der Versicherer die Annahme im Antrag. Bei der UKV ZahnPRIVAT haben die Fragen jeweils eigene Zeiträume.' },
         { type: 'paragraph', text: 'In jedem Baustein gilt: Was vor Versicherungsbeginn schon läuft oder angeraten ist, zahlt der neue Vertrag nicht. Wer vergleicht, während die Behandlung schon geplant ist, vergleicht deshalb oft zu spät.' },
         { type: 'segments', segments: [
           { text: 'Wo du trotz Vorerkrankung angenommen wirst, erklärt der Ratgeber ' },
-          { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026' },
+          { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026' },
           { text: '.' }
         ] }
       ]
@@ -95,7 +95,7 @@ export const article = {
           rows: [
             ['Leistung', '100 %, vier Töpfe mit zusammen bis zu 3.000 EUR in zwei Jahren', '100 % der erstattungsfähigen Kosten nach Kassenleistung', 'Zweibettzimmer und private ärztliche Behandlung'],
             ['Wartezeit', 'Keine allgemeine Wartezeit', 'Keine Wartezeiten', 'Ohne allgemeine Wartezeit für neue Fälle laut Produktseite'],
-            ['Gesundheitsfragen', 'Ja, grundsätzlich ohne Ablehnung, Zuschlag möglich', 'Ja, mit eigenen Zeiträumen je Frage', 'Ja, individuelle Annahme im Antrag'],
+            ['Gesundheitsfragen', 'Ja, ohne Ablehnung, Vorerkrankungen per Zuschlag mitversichert', 'Ja, mit eigenen Zeiträumen je Frage', 'Ja, individuelle Annahme im Antrag'],
             ['Beispielbeitrag', '39,19 EUR im Monat, Alter 31 bis 40', 'Im Rechner nach Alter', '33,41 EUR im Monat, Alter 30']
           ],
           note: 'Quellen: healio.de/ambulant (SDK-Beiträge Stand 29.09.2026), healio.de/zahn, healio.de/stationaer, Abruf 14. Oktober 2026. Laufende oder angeratene Behandlungen sind in keinem der Tarife versichert.' },

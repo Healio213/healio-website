@@ -919,7 +919,7 @@ const OPT_IN_SLUGS = [
   'homoeopathie-krankenkasse-2027',
   'vorsorgeuntersuchungen-kinder',
   // SEO-Umsetzung Thema C, neue Ratgeber (14.10.2026)
-  'zusatzversicherung-ohne-gesundheitspruefung-2026',
+  'krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   'krankenzusatzversicherung-vergleichen',
   'zahnreinigung-krankenkasse',
 
@@ -1149,7 +1149,7 @@ const SERIEN_ZIELBEGRIFFE = {
   "homoeopathie-krankenkasse-2027": new RegExp("(?=.*homöopathie)(?=.*2027)", 'i'),
   "vorsorgeuntersuchungen-kinder": new RegExp("(?=.*vorsorgeuntersuchungen)(?=.*kind)", 'i'),
   // SEO-Umsetzung Thema C, neue Ratgeber (14.10.2026)
-  'zusatzversicherung-ohne-gesundheitspruefung-2026': /zusatzversicherung ohne gesundheitsprüfung/i,
+  'krankenzusatzversicherung-ohne-gesundheitsfragen-2026': /krankenzusatzversicherung ohne gesundheitsfragen 2026/i,
   'krankenzusatzversicherung-vergleichen': /krankenzusatzversicherung vergleichen/i,
   'zahnreinigung-krankenkasse': /zahnreinigung.*krankenkasse/i,
 
@@ -1208,11 +1208,11 @@ const satzUm = (text, index) => {
 
 // Eng begrenzte Ausnahme vom Sperrwort „ohne Gesundheitsfragen“, siehe Schleife unten.
 const OHNE_GF_AUSNAHME = {
-  slug: 'zusatzversicherung-ohne-gesundheitspruefung-2026',
-  suchfrage: /„[^„“\n]{0,60}?ohne Gesundheitsfragen“|\b(?:Kranken)?[Zz]usatzversicherung ohne Gesundheits(?:prüfung|fragen)\b/g,
+  slug: 'krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
+  suchfrage: /„[^„“\n]{0,60}?ohne Gesundheitsfragen“|\bohne Gesundheits(?:prüfung|fragen)\b/g,
   sicher: /\bsicher angenommen\b/gi,
 };
-expect(SERIEN_SPERRWORTE.test('Wir bieten ohne Gesundheitsfragen an'.replace(OHNE_GF_AUSNAHME.suchfrage, '')) && SERIEN_SPERRWORTE.test('Zusatzversicherung mit keine Gesundheitsprüfung'.replace(OHNE_GF_AUSNAHME.suchfrage, '')), 'OHNE_GF_AUSNAHME darf unzitierte Fundstellen und „keine Gesundheitsfragen“ nicht freigeben.');
+expect(SERIEN_SPERRWORTE.test('Tarif mit keine Gesundheitsfragen'.replace(OHNE_GF_AUSNAHME.suchfrage, '')) && SERIEN_SPERRWORTE.test('Tarif mit keine Gesundheitsprüfung'.replace(OHNE_GF_AUSNAHME.suchfrage, '')), 'OHNE_GF_AUSNAHME darf „keine Gesundheitsfragen/-prüfung“ nicht freigeben.');
 const SERIEN_ALL = Object.keys(SERIEN_ZIELBEGRIFFE);
 // SERIE_ONLY=slug1,slug2 (früher ZAHN_ONLY) prüft beim Schreiben nur die
 // genannten Seiten im Detail. Die Querprüfungen laufen immer über alle.
@@ -1389,9 +1389,10 @@ for (const slug of SERIEN_SLUGS) {
   // Erwachsenen bleibt die Formel gesperrt, "keine Gesundheitsprüfung" und
   // "keine/ohne Gesundheitsfragen" bleiben es überall.
   // Einzige Ausnahme (Frank-Freigabe und Präzisierung 14.10.2026): Im Ratgeber
-  // zusatzversicherung-ohne-gesundheitspruefung-2026 darf die Suchfrage stehen, die
-  // die Seite aufklärt: „(Kranken)Zusatzversicherung ohne Gesundheitsprüfung
-  // bzw. -fragen“ oder zitiert „… ohne Gesundheitsfragen“, höchstens zehn Mal,
+  // krankenzusatzversicherung-ohne-gesundheitsfragen-2026 (Franks Entscheidung
+  // 14.10.2026: eine Hauptseite für beide Suchbegriffe) darf die Suchfragen
+  // „ohne Gesundheitsfragen“ und „ohne Gesundheitsprüfung“ tragen, höchstens
+  // zwölf Mal,
   // dazu „sicher angenommen“ höchstens vier Mal (belegt durch SDK-Broschüre
   // 1.781). Nur dieser Slug; „keine Gesundheitsfragen/-prüfung“ und jede andere
   // Form bleiben gesperrt.
@@ -1400,7 +1401,7 @@ for (const slug of SERIEN_SLUGS) {
   if (ausnahme) {
     const fragen = text.match(OHNE_GF_AUSNAHME.suchfrage) || [];
     const sicher = text.match(OHNE_GF_AUSNAHME.sicher) || [];
-    expect(fragen.length >= 1 && fragen.length <= 10, `${label}: Suchfrage ohne Gesundheitsprüfung/-fragen ein bis zehn Mal (gefunden ${fragen.length}).`);
+    expect(fragen.length >= 2 && fragen.length <= 12, `${label}: Suchfragen ohne Gesundheitsprüfung/-fragen zwei bis zwölf Mal (gefunden ${fragen.length}).`);
     expect(sicher.length <= 4, `${label}: „sicher angenommen“ höchstens vier Mal (gefunden ${sicher.length}).`);
   }
   const sperr = sperrText.match(SERIEN_SPERRWORTE);

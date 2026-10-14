@@ -177,7 +177,7 @@ export const article = {
           items: [
             { lead: 'Einen Preis pro Stunde nennen wir nicht.', text: 'Es gibt dafür keine neutrale Quelle. Die Zahlen oben sind Orientierung, keine Preise, und die Beispiele rechnen mit angenommenen Beträgen.' },
             { lead: 'Wer behandelt, entscheidet über die Kasse.', text: 'Beim Vertragsarzt mit Qualifikation kann die Kasse zahlen, beim Heilpraktiker in der Regel nicht. Einzelne Satzungen machen Ausnahmen, in den Beispielen dieses Bereichs mit Verordnung und Jahresdeckel.' },
-            { lead: 'Gesundheitsfragen gehören zum Antrag.', text: 'Du beantwortest sie vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, je nach Angaben kann ein Risikozuschlag oder ein Leistungsausschluss dazukommen.' },
+            { lead: 'Gesundheitsfragen gehören zum Antrag.', text: 'Du beantwortest sie vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss.' },
             { lead: 'Was schon läuft, zählt nicht.', text: 'Für Versicherungsfälle, die vor dem Versicherungsbeginn eingetreten sind, leistet der Versicherer nicht. Abschließen gehört vor die Behandlung.' },
             { lead: 'Zur Wirkung sagen wir nichts.', text: 'Welche Behandlung zu dir passt, entscheidet eine Ärztin, ein Arzt oder du mit deiner Praxis. Diese Seite gibt keine Behandlungsempfehlung.' },
           ],
@@ -329,7 +329,7 @@ export const article = {
         "tone": "mint",
         "title": "Zusatzversicherung trotz Vorerkrankung",
         "text": "Wo du mit Vorgeschichte angenommen wirst und wo nicht.",
-        "to": "/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026",
+        "to": "/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026",
         "linkLabel": "Ratgeber lesen"
       }
     ]

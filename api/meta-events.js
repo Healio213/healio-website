@@ -31,6 +31,7 @@ const VERCEL_PREVIEW_HOST = /^[a-z0-9][a-z0-9-]{0,200}\.vercel\.app$/;
 // src/lib/meta-pixel.js (der Hebammen-Ratgeber fehlte hier bis 07.10.2026).
 const BLOCKED_PATHS = new Set([
   '/schwangerschaft',
+  '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
@@ -102,7 +103,6 @@ const BLOCKED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
-  '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

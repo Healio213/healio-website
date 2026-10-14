@@ -214,7 +214,7 @@ export const article = {
           heading: 'Ehrlich gesagt',
           items: [
             { lead: 'Das ist kein Privatpatientenschutz.', text: 'Die Töpfe haben feste Bereiche und Höchstbeträge. Eine Behandlung außerhalb der vier Bereiche zahlt der Tarif nicht.' },
-            { lead: 'Gesundheitsfragen gehören zum Antrag.', text: 'Du beantwortest sie vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, je nach Angaben kann aber ein Risikozuschlag oder ein Leistungsausschluss dazukommen.' },
+            { lead: 'Gesundheitsfragen gehören zum Antrag.', text: 'Du beantwortest sie vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss.' },
             { lead: 'Was schon läuft, zählt nicht.', text: 'Für Versicherungsfälle, die vor dem Beginn des Versicherungsschutzes eingetreten sind, leistet der Versicherer nicht.' },
             { lead: 'Mehr als die Rechnung gibt es nie.', text: 'Zahlen mehrere Kostenträger, darf die gesamte Erstattung nicht höher sein als die gesamten Kosten. Auch ein Kassenbonus wird nur bis zu den nachgewiesenen Kosten gezahlt.' },
             { lead: 'Der Beitrag bleibt nicht für immer gleich.', text: 'Er steigt mit der Altersgruppe, und der Versicherer kann ihn anpassen.' },
@@ -240,7 +240,7 @@ export const article = {
             ['Erstattungssatz und Höchstbetrag', 'Ein hoher Prozentsatz nützt wenig, wenn der Topf klein ist', 'je nach Stufe 50 bis 100 Prozent, bis zu 3.000 EUR in zwei Jahren in der höchsten Stufe'],
             ['Zeitraum', 'Kalenderjahr oder zwei Kalenderjahre ändern, wie schnell der Topf wieder voll ist', 'zwei Kalenderjahre ab Versicherungsbeginn'],
             ['Wartezeit', 'Mit Wartezeit zahlt der Tarif in den ersten Monaten nicht', 'keine Wartezeiten laut Bedingungen'],
-            ['Gesundheitsfragen und Annahme', 'Entscheiden über Zuschlag, Ausschluss oder Ablehnung', 'Gesundheitsfragen ja, laut healio.de/ambulant keine Ablehnung, je nach Angaben Risikozuschlag oder Ausschluss'],
+            ['Gesundheitsfragen und Annahme', 'Entscheiden über Zuschlag, Ausschluss oder Ablehnung', 'Gesundheitsfragen ja, keine Ablehnung, Vorerkrankungen per Risikozuschlag mitversichert, kein Leistungsausschluss'],
           ],
           note: 'Werte nach den SDK-Bedingungen Teil II, Tarife AP5 bis AP1 (1.753a, Stand 01.01.2023), Leistungsübersicht und Abschnitt II, sowie den Angaben auf healio.de/ambulant. Andere Tarife regeln das anders, maßgeblich sind jeweils deren Bedingungen.',
         },
@@ -302,7 +302,7 @@ export const article = {
             },
             {
               title: 'Antrag mit Gesundheitsfragen',
-              text: 'Du beantwortest die Gesundheitsfragen vollständig und wahrheitsgemäß. Der Versicherer entscheidet über Annahme, Zuschlag oder Ausschluss.',
+              text: 'Du beantwortest die Gesundheitsfragen vollständig und wahrheitsgemäß. Bei der SDK ergibt sich daraus höchstens ein Zuschlag, keine Ablehnung und kein Leistungsausschluss.',
             },
             {
               title: 'Rechnungen einreichen',
@@ -352,7 +352,7 @@ export const article = {
               tone: 'mint',
               title: 'Zusatzversicherung trotz Vorerkrankung',
               text: 'Wo du mit Vorgeschichte angenommen wirst und wo nicht.',
-              to: '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
+              to: '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
               linkLabel: 'Ratgeber lesen',
             },
           ],
@@ -383,7 +383,7 @@ export const article = {
     {
       question: 'Muss ich Gesundheitsfragen beantworten?',
       answer:
-        'Ja, im Antrag beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Je nach Angaben kann ein Risikozuschlag dazukommen, in Einzelfällen ein Ausschluss für eine bestimmte Erkrankung.',
+        'Ja, im Antrag beantwortest du Gesundheitsfragen vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, Leistungsausschlüsse gibt es nicht.',
     },
     {
       question: 'Gibt es eine Wartezeit?',
