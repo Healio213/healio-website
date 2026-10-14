@@ -102,7 +102,7 @@ const StationaerHero = () => {
                 Wischreihe; ab md (768 px) unverändert Figur links und
                 gestapelte Karten rechts. */}
             <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 md:min-h-[29rem] md:grid-cols-[0.9fr_1.1fr] md:items-end md:gap-x-0">
-              <div className="relative z-10 hidden min-w-0 md:block md:self-end">
+              <div className="relative z-10 min-w-0 md:self-end">
                 <img
                   src="/images/friendly-icons/decision-choice.webp"
                   alt=""
@@ -115,22 +115,12 @@ const StationaerHero = () => {
               </div>
 
               <div className="contents md:relative md:z-20 md:flex md:min-w-0 md:flex-col md:gap-3 md:self-center md:py-5">
-                <p className="col-span-2 font-display text-base font-extrabold leading-tight text-[#0b6048] md:col-span-1 md:mb-1 md:leading-6">
+                <p className="font-display text-base font-extrabold leading-tight text-[#0b6048] md:mb-1 md:leading-6">
                   {t('refresh.hero.visualTitle')}
                 </p>
-                <ul className="col-span-2 mt-4 grid grid-cols-2 gap-3 md:hidden">
-                  {choiceKeys.map((key) => (
-                    <li key={key}>
-                      <a href={key === 'dkv' ? '#dkv-einbettzimmer' : '#tarife'} className="block h-full rounded-xl bg-white/85 p-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b6048]">
-                        <span className="block text-xs font-bold text-[#0b6048]">{t(`refresh.hero.choices.${key}.code`)}</span>
-                        <span className="mt-1 block text-sm font-extrabold leading-5 text-[#071726]">{t(`refresh.hero.choices.${key}.label`)}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
                 <MobileSwipeRow
                   label={t('refresh.hero.visualTitle')}
-                  className="col-span-2 mt-2 hidden min-w-0 md:col-span-1 md:mt-0 md:block"
+                  className="col-span-2 mt-2 min-w-0 md:col-span-1 md:mt-0"
                   desktopClassName="-mx-4 scroll-pl-4 px-4 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:flex md:flex-col md:gap-3 md:px-0"
                   mobileItemWidth="w-[78%]"
                   bleed={false}

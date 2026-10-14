@@ -309,8 +309,18 @@
       "ctaHint": "Free · Switching is your choice",
       "paths": {
         "private": "For me",
-        "employer": "Employers",
-        "practice": "Practices"
+        "employer": "For employers",
+        "practice": "For practices"
+      },
+      "switchDescriptions": {
+        "private": "Outpatient, dental or hospital: cover that fits you.",
+        "employer": "Company pension and health cover for your team.",
+        "practice": "Help patients afford care. Healio provides insurance advice."
+      },
+      "switchCtas": {
+        "private": "Choose cover",
+        "employer": "Explore solutions",
+        "practice": "Explore partnership"
       }
     },
     "contribution": {
@@ -347,7 +357,12 @@
     "trust": {
       "title": "Digital. Personal.",
       "description": "Budget, receipts and policies in the Healio app. We are here when you have questions.",
-      "detailsTitle": "Broker and ongoing support"
+      "detailsTitle": "Broker and ongoing support",
+      "itemDescriptions": [
+        "Broker licensed under section 34d (1) GewO.",
+        "Benefits, limits and costs before you decide.",
+        "Personal support after you take out cover."
+      ]
     },
     "finalCta": {
       "title": "What can your fund offer?",

@@ -585,6 +585,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                 </div>
               </div>
               <div className="p-5 sm:p-9">
+                <div className="hidden md:block">
                 <p className="font-display text-xl font-extrabold text-home-midnight">{copy.tiers.ledgerTitle}</p>
                 <p className="mt-1 text-base leading-6 text-home-slate md:mt-2 md:text-sm md:leading-6">{copy.tiers.ledgerHint}</p>
                 <AnimatePresence mode="wait">
@@ -619,6 +620,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                     </MobileSwipeRow>
                   </motion.div>
                 </AnimatePresence>
+                </div>
                 <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
@@ -627,18 +629,20 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   placement="ambulant-tarifwahl"
                   variant="line"
                   text="Im Antrag hängen geblieben? Schreib uns kurz auf WhatsApp, wir gehen ihn mit dir zusammen durch."
-                  className="mt-4 max-w-2xl"
+                  className="mt-4 hidden max-w-2xl md:block"
                 />
-                <p className="mt-3 max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-                <p className="mt-4 text-sm leading-5 text-slate-500 md:hidden">{language === 'en' ? 'Four limits per two calendar years from policy start. Reimbursement of insured invoices, no freely available cash.' : 'Vier Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Erstattung versicherter Rechnungen, kein frei verfügbares Guthaben.'}</p>
-                <MobileDetails summary={language === 'en' ? 'Budget terms in detail' : 'Budgetbedingungen im Detail'} className="mt-2">
+                <p className="mt-3 hidden max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
+                <MobileDetails summary={language === 'en' ? 'Details for your selected tier' : 'Details zur gewählten Stufe'} className="mt-2">
+                  <dl className="mb-4 divide-y divide-slate-200 md:hidden">
+                    {POT_KEYS.map((potKey) => <div key={potKey} className="flex items-center justify-between gap-4 py-3"><dt className="text-sm font-semibold text-home-midnight">{copy.tiers.pots[potKey].label}</dt><dd className="shrink-0 text-base font-bold text-home-midnight">{euro.format(tier.pots[potKey])}</dd></div>)}
+                  </dl>
                   <p className="max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
+                  <p className="mt-3 text-sm leading-6 text-slate-500 md:hidden">{copy.tiers.priceNote}</p>
                 </MobileDetails>
               </div>
             </div>
           </div>
 
-          <p className="mt-4 text-sm leading-6 text-slate-500 md:hidden">{copy.tiers.priceNote}</p>
           {/* Ein einziger Tabellenbestand samt Altersgruppen-Aufklapper.
               Ab md steht die Übersicht wie bisher dauerhaft offen. */}
           <button type="button" aria-expanded={mobileOverviewOpen} aria-controls="ambulant-mobile-stufen" onClick={() => setMobileOverviewOpen((open) => !open)} className="home-focus mt-3 flex min-h-11 w-full items-center justify-between gap-3 py-2 text-left text-sm font-semibold text-home-midnight md:hidden" data-healio-ambulant="tier-overview">
@@ -739,7 +743,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
 
       <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe hideLinkOnMobile />
 
-      <section className="order-8 bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:py-24 lg:px-8">
+      {/* Mobil gibt es eine Finanzierungs-Erklärung, die IKK-Karte und den
+          Bonusrechner. Dieser weitere Bonus-Werbeblock wiederholt sie. */}
+      <section className="order-8 hidden bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:block md:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-6 md:gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           {/* Mobil ersetzt die Stempel-Karte die Bild-Karte (Aussage steht im Text darunter). */}
           <BonusStempelKarte className="md:hidden" headingLevel="p" />
@@ -797,24 +803,55 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         }}
       />
 
+      {language !== 'en' && <p className="order-9 bg-home-ice px-4 pb-8 text-center md:hidden"><Link to="/ratgeber/ikk-classic-bonusprogramm-2026" className="home-focus inline-flex min-h-11 items-center text-sm font-semibold text-emerald-900 underline underline-offset-4">Bonus-Leitfaden: Aktivitäten & Fristen</Link></p>}
+
         </>
       )}
 
       <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl md:hidden">
           <h2 className="font-display text-2xl font-extrabold text-home-midnight">{language === 'en' ? 'Three simple steps.' : 'Drei einfache Schritte.'}</h2>
-          <ol className="mt-5 space-y-4">
-            {copy.process.steps.map((step, index) => (
-              <li key={step.title} className="flex items-start gap-3">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-home-mint/15 text-sm font-extrabold text-emerald-800" aria-hidden="true">{index + 1}</span>
-                <div><h3 className="font-display text-base font-extrabold text-home-midnight">{step.title}</h3><p className="mt-1 text-sm leading-6 text-home-slate">{step.text}</p></div>
-              </li>
-            ))}
-          </ol>
-          <MobileDetails summary={language === 'en' ? 'About Healio & your decision' : 'Über Healio & deine Entscheidung'} className="mt-4">
+          <MobileSwipeRow
+            as="ol"
+            label={copy.process.title}
+            className="mt-6 md:mt-12"
+            desktopClassName="md:grid md:grid-cols-3 md:gap-5"
+            mobileItemWidth="w-[78vw] max-w-[22rem]"
+          >
+            {copy.process.steps.map((step, index) => {
+              const visual = PROCESS_VISUALS[index];
+              return (
+                <article key={step.title} className={`group flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-[#07111f]/[0.07] shadow-[0_2px_6px_rgba(7,17,31,0.06)] md:shadow-[0_14px_40px_rgba(7,17,31,0.06)] ${visual.surface}`}>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#071726]">
+                    <img
+                      src={visual.scene}
+                      alt=""
+                      aria-hidden="true"
+                      width="720"
+                      height="540"
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+                    />
+                  </div>
+                  <div className="p-5 md:p-6">
+                    <h3 className="flex items-center gap-3 font-display text-xl font-extrabold text-home-midnight">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white font-display text-sm font-extrabold text-emerald-800 ring-1 ring-[#07111f]/10" aria-hidden="true">{index + 1}</span>
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-base leading-6 text-home-slate md:text-sm md:leading-6">{step.text}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </MobileSwipeRow>
+          <div className="mt-4 flex items-start gap-4">
+            <FriendlyIcon kind="broker" tone="mint" size="lg" className="!h-14 !w-14" />
+          <MobileDetails summary={language === 'en' ? 'About Healio & your decision' : 'Über Healio & deine Entscheidung'} className="min-w-0 flex-1">
             <p className="text-sm leading-6 text-home-slate">{copy.process.trustText}</p>
             {fromBonusTopic && <p className="mt-3 text-sm leading-6 text-home-slate">{copy.process.switchText}</p>}
           </MobileDetails>
+          </div>
           {HEALIO_VOICE_CONTACT_ENABLED && <button type="button" onClick={() => requestNitaConsent('global_launcher')} className="home-focus mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-home-midnight underline underline-offset-4"><Bot className="h-4 w-4" aria-hidden="true" />{copy.process.assistantCta}</button>}
         </div>
         <div className="mx-auto hidden max-w-7xl md:block">

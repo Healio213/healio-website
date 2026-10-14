@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
 
 // Gleiche Figuren und Farbtöne wie auf der Startseite, damit jeder Bereich überall gleich aussieht.
 const pathVisuals = {
@@ -125,15 +126,17 @@ const ProtectionNavigator = () => {
           <div className="min-w-0">
             <FriendlyIcon kind={visual.kind} tone={visual.tone} size="xl" className="max-md:hidden" />
             <h3 className="max-w-[18ch] font-display text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#10202A] [text-wrap:balance] sm:text-4xl md:mt-6">
-              {item.title}
+              <span className="md:hidden">{t(`mobile.paths.${item.key}.title`)}</span>
+              <span className="hidden md:inline">{item.title}</span>
             </h3>
           </div>
           <div className="flex min-w-0 flex-1 flex-col md:block lg:self-end">
-            <p className="mb-4 max-w-2xl text-[1.0625rem] leading-7 text-slate-600 sm:text-lg sm:leading-8 md:mb-0">{item.description}</p>
+            <p className="mb-4 max-w-2xl text-[1.0625rem] leading-7 text-slate-600 sm:text-lg sm:leading-8 md:mb-0"><span className="md:hidden">{t(`mobile.paths.${item.key}.text`)}</span><span className="hidden md:inline">{item.description}</span></p>
             {check && (
-              <div className="mb-5 rounded-2xl border border-slate-200 bg-[#F7F9F8] p-4 md:hidden">
-                <p className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-slate-600">{checkLabel}</p>
-                <p className="mt-2 text-base font-semibold leading-7 text-[#10202A]">{check.check}</p>
+              <div className="mb-3 md:hidden">
+                <MobileDetails summary={checkLabel} className="text-slate-600">
+                  <p className="text-base leading-7 text-[#10202A]">{check.check}</p>
+                </MobileDetails>
               </div>
             )}
             {item.highlight && <HighlightBox highlight={item.highlight} className="mt-7 hidden rounded-2xl md:block" />}
@@ -168,28 +171,10 @@ const ProtectionNavigator = () => {
           </h2>
         </div>
 
-        <ul className="mt-7 md:hidden">
-          {items.map((item) => {
-            const visual = pathVisuals[item.key] || pathVisuals.ambulant;
-            return (
-              <li key={item.key} className="border-b border-slate-200 last:border-0">
-                <Link to={getPath(item.routeKey)} className="home-focus flex items-center gap-4 py-6 text-[#10202A]">
-                  <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-lg font-extrabold">{t(`mobile.paths.${item.key}.title`)}</h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">{t(`mobile.paths.${item.key}.text`)}</p>
-                  </div>
-                  <ArrowUpRight className="h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
         {/* Mobil Wischreihe (vier Schutzwege), ab md die bisherigen Karten untereinander. */}
         <MobileSwipeRow
           label={t('paths.title')}
-          className="hidden md:mt-12 md:block lg:mt-14"
+          className="mt-8 md:mt-12 lg:mt-14"
           desktopClassName={`md:grid md:gap-6 lg:gap-7 ${extraCardPosition ? hideExtraCardFromMd[extraCardPosition] || '' : ''}`}
           itemClassName="flex"
         >

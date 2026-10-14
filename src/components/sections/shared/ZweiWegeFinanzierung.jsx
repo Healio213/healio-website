@@ -49,6 +49,17 @@ const COPY = {
 // Dieselben plastischen Healio-Icons wie im Rest der Seite.
 const ICONS = [{ kind: 'money', tone: 'mint' }, { kind: 'bonus', tone: 'butter' }];
 
+const AMBULANT_MOBILE_WAYS = {
+  de: [
+    'Ein niedrigerer Kassenbeitrag lässt mehr Geld für deinen Zusatzschutz übrig.',
+    'Sport und Vorsorge können dir einen Bonus bringen, der beim Beitrag hilft.',
+  ],
+  en: [
+    'A lower fund contribution leaves more money for your supplementary cover.',
+    'Sport and preventive care may earn a bonus that helps pay your premium.',
+  ],
+};
+
 // Klassen für die kompakte Handy-Anordnung (mobileSwipe) und den bisherigen
 // Stand. Es gibt nur zwei Wege, daher kein Wischen, sondern kompakt
 // untereinander: engere Abstände, Icon klein neben der Überschrift und der
@@ -124,7 +135,7 @@ const ZweiWegeFinanzierung = ({
                 <FriendlyIcon kind={ICONS[index].kind} tone={ICONS[index].tone} size="sm" className={ui.icon} />
                 <div className={ui.wayBody}>
                   <h3 className="font-display text-lg font-extrabold leading-snug text-home-midnight">{way.title}</h3>
-                  <p className={ui.wayText}>{fill(way.text)}</p>
+                  <p className={ui.wayText}>{produkt === 'ambulant' ? <><span className="md:hidden">{AMBULANT_MOBILE_WAYS[language][index]}</span><span className="hidden md:inline">{fill(way.text)}</span></> : fill(way.text)}</p>
                 </div>
               </article>
             ))}

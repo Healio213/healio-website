@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, Check, ChevronDown, ExternalLink, ShieldCheck } from 'lucide-react';
@@ -16,17 +16,17 @@ import { getUkvAmbulantUrl, trackUkvAmbulantAntrag } from '@/components/sections
 // Franks Entscheidung 05.10.2026: Auf der Website steht nur der Vorsorge-Baustein.
 // Ein weiterer ambulanter UKV-Tarif wird nicht genannt; für den umfassenden
 // ambulanten Schutz bleibt ausschließlich die SDK.
-// Kompakt gehalten, damit die IKK-Strecke mobil nicht weit nach unten rutscht:
-// sichtbar sind nur Nutzen, Leistung und Beitrag, die Antragsfragen und der
-// Knopf. Beispiele, Schwangerschaft und SDK-Abgrenzung stehen im
-// gemeinsamen Aufklapper „Alle Details“.
+// Mobil zunächst nur die freiwillige Ergänzung nennen. Der optionale Einstieg
+// öffnet den vollständigen vorhandenen Inhalt einschließlich Bedingungen und
+// Antrag. Ab md bleibt die bisherige Ansicht unverändert.
 const labelClass = 'text-sm font-bold uppercase tracking-[0.06em] text-slate-500 md:text-xs md:tracking-[0.12em]';
 const detailTitleClass = 'font-display text-sm font-extrabold text-home-midnight';
 const detailTextClass = 'mt-1 text-base leading-6 text-home-slate md:text-sm md:leading-6';
 
 const AmbulantVorsorgeBaustein = () => {
   const { t } = useTranslation('ambulant');
-  const { getPath } = useLanguage();
+  const { lang, getPath } = useLanguage();
+  const [mobileDetailsOpen, setMobileDetailsOpen] = useState(false);
   const ukvUrl = getUkvAmbulantUrl();
   const text = (key) => t(`vorsorgeBaustein.${key}`);
   const list = (key) => {
@@ -43,6 +43,20 @@ const AmbulantVorsorgeBaustein = () => {
       className="mt-8 scroll-mt-20 overflow-hidden rounded-[2rem] border border-emerald-900/10 bg-home-ice md:mt-10"
     >
       <div className="p-5 sm:p-7">
+        <p className="text-base leading-6 text-home-slate md:hidden">
+          {lang === 'en' ? 'Want more preventive care? You can add the UKV module voluntarily.' : 'Du möchtest mehr Vorsorge? Den UKV-Baustein kannst du freiwillig ergänzen.'}
+        </p>
+        <button
+          type="button"
+          aria-expanded={mobileDetailsOpen}
+          aria-controls="vorsorge-baustein-mobile-inhalt"
+          onClick={() => setMobileDetailsOpen((open) => !open)}
+          className="home-focus mt-3 flex min-h-11 w-full items-center justify-between gap-3 py-2 text-left font-display text-sm font-extrabold text-home-midnight md:hidden"
+        >
+          {lang === 'en' ? 'Optional: view UKV details' : 'Optional: UKV-Details ansehen'}
+          <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${mobileDetailsOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+        </button>
+        <div id="vorsorge-baustein-mobile-inhalt" className={`${mobileDetailsOpen ? 'block' : 'hidden'} md:contents`}>
         <div className="flex items-center gap-3 sm:items-start sm:gap-4">
           <span className="hidden shrink-0 sm:block"><FriendlyIcon kind="prevention" tone="mint" size="md" /></span>
           <div className="min-w-0">
@@ -104,7 +118,7 @@ const AmbulantVorsorgeBaustein = () => {
           <p className="text-center text-sm leading-5 text-slate-500 sm:max-w-sm sm:text-left md:text-xs md:leading-5">{ukvUrl ? text('ctaLinkHint') : text('ctaHint')}</p>
         </div>
 
-        <details className="group mt-4 rounded-[1.4rem] border border-emerald-900/10 bg-white/60" data-healio-ambulant="vorsorge-details">
+        <details open={mobileDetailsOpen} className="group mt-4 rounded-[1.4rem] border border-emerald-900/10 bg-white/60" data-healio-ambulant="vorsorge-details">
           <summary className="home-focus flex cursor-pointer list-none items-start justify-between gap-3 px-5 py-3 [&::-webkit-details-marker]:hidden">
             <span className="min-w-0">
               <span className="block font-display text-sm font-extrabold leading-6 text-home-midnight">{text('detailsTitle')}</span>
@@ -164,6 +178,7 @@ const AmbulantVorsorgeBaustein = () => {
             <p className="text-sm leading-5 text-slate-500 md:text-xs md:leading-5">{text('priceGlasses')} {text('priceAgeRule')} {text('disclosure')}</p>
           </div>
         </details>
+        </div>
       </div>
     </aside>
   );

@@ -46,39 +46,10 @@ const InsurancePathway = () => {
           </p>
         </div>
 
-        <ul className="mt-7 divide-y divide-[#DFE9E4] md:hidden">
-          {items.map((item) => (
-            <li key={item.key}>
-              <Link
-                to={getPath(item.routeKey)}
-                className="home-focus group flex min-h-[7rem] items-center gap-4 py-4"
-              >
-                <img
-                  src={productVisuals[item.key].scene}
-                  alt=""
-                  width="72"
-                  height="72"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover"
-                />
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-xl font-bold leading-6 text-home-midnight">{item.label}</h3>
-                  <p className="mt-1 text-sm leading-5 text-[#3f5b51]">{t(`mobile.products.descriptions.${item.key}`)}</p>
-                  <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-emerald-800 underline underline-offset-4">
-                    {t('mobile.products.cta')}
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Ab md bleibt das bestehende Dreier-Raster erhalten. */}
+        {/* Große Bildkarten wischen mobil; ab md bleibt das Dreier-Raster erhalten. */}
         <MobileSwipeRow
           label={t('products.title')}
-          className="mt-8 hidden md:mt-12 md:block"
+          className="mt-8 md:mt-12"
           desktopClassName="md:grid md:grid-cols-3 md:gap-5"
           itemClassName="flex"
         >
@@ -108,7 +79,7 @@ const InsurancePathway = () => {
                   <h3 className="mt-2 max-w-[17ch] font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-home-midnight sm:text-[1.7rem]">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{item.description}</p>
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6"><span className="md:hidden">{t(`mobile.products.descriptions.${item.key}`)}</span><span className="hidden md:inline">{item.description}</span></p>
                   <span className="mt-auto pt-5 md:pt-7">
                     <span className="inline-flex min-h-11 items-center gap-2 rounded-full bg-home-midnight px-5 py-2.5 font-display text-sm font-extrabold text-white shadow-[0_10px_26px_rgba(7,17,31,0.16)] transition group-hover:bg-[#12243a]">
                       {item.cta}

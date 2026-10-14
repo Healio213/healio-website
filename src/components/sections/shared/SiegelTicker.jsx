@@ -3,12 +3,10 @@ import React from 'react';
 /**
  * Siegel-Ticker für das Handy (Experiment 06.10.2026, Vorgabe).
  *
- * Statt einer hohen Siegelzeile läuft ein ruhiges, schmales Band mit den
- * Siegelbildern durch. Vorgabe (06.10.2026): am Handy KEINE Überschrift,
- * KEINE Beschriftung unter den Siegeln und KEINE sichtbaren Hinweise, nur die
- * durchlaufenden Bilder. Die Bilder nennen Versicherer bzw. Tarif selbst; die
- * Alt-Texte bleiben vollständig, und die Pflichthinweise stehen als
- * Screenreader-Text (sr-only) weiter im Dokument, ohne sichtbar zu sein.
+ * Statt einer hohen Textzeile läuft ein ruhiges Band mit den Originalbildern.
+ * Franks Präzisierung 14.10.: live durchlaufen lassen, wenig Begleittext.
+ * Optional nennt caption knapp den bewerteten Anbieter oder Tarif.
+ * Alt-Texte bleiben vollständig. Ausführliche Details verwaltet der Aufrufer.
  *
  * Nur für unter md (768 px) gedacht: Der Aufrufer rendert den Ticker in einem
  * Wrapper mit "md:hidden"; ab md bleibt die bisherige Siegelzeile.
@@ -20,20 +18,24 @@ import React from 'react';
  * - Pause bei Berührung, Hover und Tastaturfokus.
  * - prefers-reduced-motion: kein Lauf, die erste Liste steht als wischbare
  *   Reihe, die Doppelung fällt weg.
- * - Weniger als drei Siegel: kein Lauf, die Siegel stehen ruhig nebeneinander.
+ * - forceScroll lässt auch ein oder zwei vorhandene Siegel laufen.
+ *   Zusätzliche Wiederholungen sind dekorativ und für Screenreader verborgen.
  *
  * items: [{ id, src, alt, width, height }]
  * notes: Pflichthinweise (Text), nur für Screenreader.
- * size: 'regular' (56 px hoch) oder 'large' (72 px hoch, z. B. /schwangerschaft).
+ * size: 'regular' (56 px), 'large' (72 px) oder 'prominent' (96 px).
  */
-const IMAGE_CLASS = { regular: 'h-14 w-auto', large: 'h-[4.5rem] w-auto' };
+const IMAGE_CLASS = { regular: 'h-14 w-auto', large: 'h-[4.5rem] w-auto', prominent: 'h-24 w-auto object-contain' };
 const GAP_CLASS = { regular: 'gap-x-9 pr-9', large: 'gap-x-12 pr-12' };
 
-const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', className = '' }) => {
+const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', className = '', forceScroll = false }) => {
   if (!items.length) return null;
   const imageClass = IMAGE_CLASS[size] || IMAGE_CLASS.regular;
   const gapClass = GAP_CLASS[size] || GAP_CLASS.regular;
-  const running = items.length >= 3;
+  const running = forceScroll || items.length >= 3;
+  // Sechs Originalflächen reichen auch am oberen mobilen Rand bis 767 px.
+  const repetitions = forceScroll ? Math.ceil(6 / items.length) : 1;
+  const tickerItems = Array.from({ length: repetitions }, (_, repeat) => items.map((item) => ({ ...item, repeat }))).flat();
   // Eine volle Runde dauert je Siegel etwa neun Sekunden: ruhig, nicht hektisch.
   const duration = `${Math.max(24, items.length * 9)}s`;
 
@@ -42,11 +44,11 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
       className={`siegel-ticker__list flex shrink-0 items-center ${gapClass} ${hidden ? 'siegel-ticker__dup' : ''}`}
       aria-hidden={hidden ? 'true' : undefined}
     >
-      {items.map((item) => (
-        <li key={`${item.id}${suffix}`} className="flex shrink-0 items-center">
+      {tickerItems.map((item) => (
+        <li key={`${item.id}${suffix}-${item.repeat}`} aria-hidden={item.repeat > 0 ? 'true' : undefined} className={`flex shrink-0 flex-col items-center ${item.repeat > 0 ? 'siegel-ticker__repeat' : ''}`}>
           <img
             src={item.src}
-            alt={hidden ? '' : item.alt}
+            alt={hidden || item.repeat > 0 ? '' : item.alt}
             width={item.width}
             height={item.height}
             className={imageClass}
@@ -54,6 +56,7 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
             decoding="async"
             draggable="false"
           />
+          {item.caption && <span className="mt-2 max-w-[13rem] text-center text-xs font-semibold leading-5 text-slate-600">{item.caption}</span>}
         </li>
       ))}
     </ul>
@@ -62,7 +65,7 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
   return (
     <div className={className}>
       {running ? (
-        <div role="group" aria-label={ariaLabel} className="siegel-ticker relative overflow-hidden py-1" style={{ '--siegel-ticker-duration': duration }}>
+        <div role="group" tabIndex={0} aria-label={ariaLabel} className="siegel-ticker relative overflow-hidden py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700" style={{ '--siegel-ticker-duration': duration }}>
           <div className="siegel-ticker__track flex w-max">
             {renderList(false, '-a')}
             {renderList(true, '-b')}
@@ -125,7 +128,7 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
           .siegel-ticker__track { animation: none; will-change: auto; }
           .siegel-ticker__list { padding-left: 1rem; }
           .siegel-ticker__list > li { scroll-snap-align: start; }
-          .siegel-ticker__dup { display: none; }
+          .siegel-ticker__dup, .siegel-ticker__repeat { display: none; }
         }
       `}</style>
     </div>

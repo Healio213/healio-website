@@ -69,14 +69,12 @@ const AmbulantPage = () => {
         <div className="order-3 md:contents">
           <HealioAwardsRow size="large" />
         </div>
-        {/* Mobil direkt nach dem Erklärvideo (Experiment Handy-Conversion 10/2026):
-            erst die Brillen-Karte (nur mobil, Wortlaut aus der FAQ), weil die
-            Brillen-Anzeige ohne Anker hierher führt, dann die vier belegten Fakten
-            vor dem Vergleich (Marktanalyse W4, 06.10.2026). Ab md ist die Karte
-            ausgeblendet, die Reihenfolge am Desktop bleibt dadurch unverändert. */}
+        {/* Die Brillen-Karte bleibt mobil als konkreter Einstieg erhalten.
+            Die zusätzliche Faktenübersicht wiederholt den Hero und entfällt
+            mobil auf Franks Wunsch vom 14.10.; Desktop bleibt unverändert. */}
         <div className="order-4 md:contents">
           <AmbulantBrilleKarte />
-          <AmbulantAufEinenBlick />
+          <div className="hidden md:contents"><AmbulantAufEinenBlick /></div>
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
       </div>

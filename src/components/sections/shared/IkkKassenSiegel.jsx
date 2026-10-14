@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import SiegelTicker from '@/components/sections/shared/SiegelTicker';
 
 /**
  * Testsiegel der Krankenkasse IKK classic (krankenkasseninfo.de, Stand 09/2026).
@@ -52,7 +53,15 @@ const IkkKassenSiegel = ({ order = 'family', size = 'regular', align = 'center',
       className={`flex flex-col ${isStart ? 'items-start' : 'items-center'} ${className}`}
     >
       <p className={`sr-only md:not-sr-only ${isStart ? 'text-left' : 'text-center'} text-sm font-semibold text-slate-600`}>{label}</p>
-      <div className={`${styles.head} flex flex-wrap items-center ${isStart ? 'justify-start' : 'justify-center'} ${styles.gap}`}>
+      <div className="w-full min-w-0 md:hidden">
+        <SiegelTicker
+          ariaLabel={label}
+          size="prominent"
+          forceScroll
+          items={keys.map((key) => ({ id: `ikk-${key}`, src: IKK_SEALS[key].src, alt: t(IKK_SEALS[key].altKey), width: 500, height: 403 }))}
+        />
+      </div>
+      <div className={`${styles.head} hidden flex-wrap items-center md:flex ${isStart ? 'justify-start' : 'justify-center'} ${styles.gap}`}>
         {keys.map((key) => (
           <img
             key={key}

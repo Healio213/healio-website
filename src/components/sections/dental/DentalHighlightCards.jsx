@@ -289,7 +289,7 @@ const DentalHighlightCards = () => {
                     aria-label={`${card.label[language]}: ${card.body.title}. ${copy.more} (${index + 1}/${cards.length})`}
                     className={`group flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-[#07111f]/[0.06] text-left shadow-[0_18px_44px_rgba(7,17,31,0.10)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 ${tone.soft}`}
                   >
-                    <span className="relative block aspect-[2/1] w-full overflow-hidden bg-[#071726] md:aspect-[3/2]">
+                    <span className="relative block aspect-[3/2] w-full overflow-hidden bg-[#071726]">
                       <img
                         src={card.scene}
                         alt=""

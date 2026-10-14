@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import SiegelTicker from '@/components/sections/shared/SiegelTicker';
 import { IKK_SEALS } from '@/components/sections/shared/IkkKassenSiegel';
+import { useLanguage } from '@/hooks/useLanguage';
 
 /**
- * Produktseiten: statische Siegelzeilen mit sichtbarer Bewertung und Geltungsbereich.
+ * Produktseiten: mobil ein laufendes Siegelband mit kurzer Tarifzuordnung,
+ * ausführliche Bewertung und Quelle im Aufklapper. Desktop bleibt statisch.
  * Vorhandene Originalbilder bleiben unverändert. SDK Fairness 2025 bewertet den
  * Anbieter; die Zahnsiegel gelten nur für UKV ZahnPRIVAT 100 bzw. ZAHN Prestige.
  * SDK-Vollversicherungsratings dürfen nicht als AP-/SP-Auszeichnung erscheinen.
@@ -143,11 +145,19 @@ const HealioAwardsRow = ({
   productSet,
 }) => {
   const { t } = useTranslation(['common', 'zahn']);
+  const { lang } = useLanguage();
   const caption = label || t('awards.label');
   const groups = AWARD_SETS[productSet] || AWARD_SETS.default;
   const noteKey = AWARD_NOTES[productSet];
   const multi = groups.length > 1;
   const spacing = compact || size === 'compact' ? 'py-4 md:py-6' : 'py-6 md:py-8';
+  const tickerItems = groups.flatMap((group) => group.items.map((award) => ({
+    id: group.id,
+    src: award.src,
+    alt: t(award.altKey, award.ns ? { ns: award.ns } : undefined),
+    caption: t(`awards.details.${AWARD_DETAILS[group.id].key}.title`),
+    ...TICKER_IMAGE_SIZE[group.id],
+  })));
 
   return (
     <section
@@ -155,7 +165,28 @@ const HealioAwardsRow = ({
       className={`${toneClasses[tone] || toneClasses.light} ${bordered ? 'border-b' : ''} ${spacing} ${className}`}
       aria-label={caption}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="md:hidden">
+        <SiegelTicker items={tickerItems} ariaLabel={caption} size="prominent" forceScroll />
+        <div className="px-4 sm:px-6">
+          {noteKey && <p className="mt-2 text-center text-sm leading-5 text-slate-600">{lang === 'en' ? 'Ratings apply to the named plans.' : 'Bewertet sind die genannten Tarife.'}</p>}
+          <details className="mt-2 text-sm text-slate-600">
+            <summary className="mx-auto flex min-h-11 w-fit cursor-pointer items-center font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">{lang === 'en' ? 'Rating details' : 'Siegel-Details'}</summary>
+            <ul className="space-y-4 py-3">
+              {groups.map((group) => {
+                const detail = AWARD_DETAILS[group.id];
+                const key = `awards.details.${detail.key}`;
+                return <li key={group.id}>
+                  <p className="font-semibold text-[#071726]">{t(`${key}.title`)}</p>
+                  <p className="mt-1 leading-6">{t(`${key}.result`)}. {t(`${key}.scope`)}</p>
+                  <a href={detail.source} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-4">{t(`${key}.source`)}</a>
+                </li>;
+              })}
+            </ul>
+            {noteKey && <p className="pb-3 leading-6">{t(noteKey)}</p>}
+          </details>
+        </div>
+      </div>
+      <div className="mx-auto hidden max-w-6xl px-4 sm:px-6 md:block">
         <p className="text-center text-sm font-semibold text-slate-600">{caption}</p>
         <ul className={`mx-auto mt-5 grid gap-6 ${multi ? 'md:grid-cols-2 md:gap-10' : 'max-w-2xl'}`}>
           {groups.map((group) => {

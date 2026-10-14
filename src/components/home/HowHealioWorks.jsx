@@ -39,42 +39,11 @@ const HowHealioWorks = () => {
           <p className="hidden max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 md:block lg:justify-self-end">{t('process.description')}</p>
         </div>
 
-        <ol className="mt-7 space-y-6 md:hidden">
-          {mobileSteps.map((step, index) => (
-            <li key={steps[index].number} className="flex items-center gap-4">
-              <img
-                src={stepVisuals[index].scene}
-                alt=""
-                width="56"
-                height="56"
-                loading="lazy"
-                decoding="async"
-                className="h-14 w-14 shrink-0 rounded-xl object-cover"
-              />
-              <div className="min-w-0">
-                <h3 className="font-display text-lg font-bold leading-6 text-[#0C2A21]">
-                  <span className="mr-2 text-sm text-emerald-800">{index + 1}.</span>{step.title}
-                </h3>
-                <p className="mt-1 text-sm leading-5 text-[#3f5b51]">{step.description}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <details className="mt-6 border-t border-[#D9E6DF] md:hidden">
-          <summary className="home-focus min-h-[3rem] cursor-pointer py-3 text-sm font-bold text-emerald-800 underline underline-offset-4">
-            {t('mobile.process.detailsTitle')}
-          </summary>
-          <div className="space-y-3 pb-3 text-sm leading-6 text-[#3f5b51]">
-            <p>{t('process.description')}</p>
-            <p>{steps[2].description}</p>
-          </div>
-        </details>
-
-        {/* Ab md bleibt das bestehende Dreier-Raster erhalten. */}
+        {/* Große Bildkarten wischen mobil; ab md bleibt das Dreier-Raster erhalten. */}
         <MobileSwipeRow
           as="ol"
           label={t('process.title')}
-          className="relative mt-8 hidden md:mt-12 md:block"
+          className="relative mt-8 md:mt-12"
           desktopClassName="md:grid md:grid-cols-3 md:gap-5"
           itemClassName="flex"
           bleed
@@ -101,14 +70,24 @@ const HowHealioWorks = () => {
                 <div className="p-5 md:p-7">
                   <h3 className="flex items-center gap-3 font-display text-2xl font-bold leading-tight text-[#0C2A21]">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white font-display text-sm font-extrabold tracking-[0.08em] text-emerald-800 ring-1 ring-emerald-900/10 md:text-xs" aria-hidden="true">{step.number}</span>
-                    {step.title}
+                    <span className="md:hidden">{mobileSteps[index].title}</span><span className="hidden md:inline">{step.title}</span>
                   </h3>
-                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{step.description}</p>
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6"><span className="md:hidden">{mobileSteps[index].description}</span><span className="hidden md:inline">{step.description}</span></p>
                 </div>
               </div>
             );
           })}
         </MobileSwipeRow>
+
+        <details className="mt-6 border-t border-[#D9E6DF] md:hidden">
+          <summary className="home-focus min-h-[3rem] cursor-pointer py-3 text-sm font-bold text-emerald-800 underline underline-offset-4">
+            {t('mobile.process.detailsTitle')}
+          </summary>
+          <div className="space-y-3 pb-3 text-sm leading-6 text-[#3f5b51]">
+            <p>{t('process.description')}</p>
+            <p>{steps[2].description}</p>
+          </div>
+        </details>
 
         <div className="relative mt-3 md:mt-8">
           <Link

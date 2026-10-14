@@ -311,8 +311,18 @@
       "ctaHint": "Kostenfrei · Wechsel freiwillig",
       "paths": {
         "private": "Für mich",
-        "employer": "Unternehmen",
-        "practice": "Praxis"
+        "employer": "Für Unternehmen",
+        "practice": "Für Praxen"
+      },
+      "switchDescriptions": {
+        "private": "Ambulant, Zahn oder Klinik: dein passender Zusatzschutz.",
+        "employer": "bAV und bKV als Benefit für dein Team.",
+        "practice": "Patienten entlasten. Healio übernimmt die Versicherungsberatung."
+      },
+      "switchCtas": {
+        "private": "Schutz wählen",
+        "employer": "Lösungen ansehen",
+        "practice": "Partnerprogramm ansehen"
       }
     },
     "contribution": {
@@ -349,7 +359,12 @@
     "trust": {
       "title": "Digital. Persönlich.",
       "description": "Budget, Belege und Verträge in der Healio App. Bei Fragen sind wir für dich da.",
-      "detailsTitle": "Makler und Begleitung"
+      "detailsTitle": "Makler und Begleitung",
+      "itemDescriptions": [
+        "Makler mit Erlaubnis nach § 34d Abs. 1 GewO.",
+        "Leistungen, Grenzen und Kosten vor deiner Entscheidung.",
+        "Wir begleiten dich auch nach dem Abschluss."
+      ]
     },
     "finalCta": {
       "title": "Was steckt in deiner Kasse?",

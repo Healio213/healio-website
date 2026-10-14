@@ -1,0 +1,87 @@
+{
+  "generated": "2026-10-14T10:17:13.696668+00:00",
+  "base": "http://127.0.0.1:4830",
+  "views": 6,
+  "checks": 130,
+  "passed": 130,
+  "failed": [],
+  "checkTypes": {
+    "initial-mobile-slim-sections": 6,
+    "initial-optional-details-closed": 5,
+    "three-steps-faq-guide-reachable": 5,
+    "ikk-bridge-open-large": 4,
+    "bonus-initial-closed": 4,
+    "year-input-premium": 6,
+    "selected-tier-details-open": 5,
+    "tier-change-sdk-destination": 24,
+    "selected-tier-details-dynamic-pots": 20,
+    "selected-tier-details-restored": 5,
+    "comparison-opened-selected-tier": 5,
+    "ukv-optional-full-content": 4,
+    "ukv-closed-restored": 4,
+    "arag-details-open": 5,
+    "ikk-details-open": 4,
+    "bonus-pointer-open": 4,
+    "bonus-closed-restored": 4,
+    "faq-pointer-open": 5,
+    "real-touch-swipe-right": 10,
+    "bonus-topic-separation": 1
+  },
+  "mobileText390": {
+    "baselineCommit": "eeaaac09b3de820ab745cef0ebe653c768627859",
+    "baselineWords": 1221,
+    "previousImagePhaseWords": 865,
+    "nowWords": 538,
+    "deltaToOriginal": -683,
+    "reductionPercentOriginal": 55.9,
+    "deltaToPreviousImagePhase": -327,
+    "originalHeight": 13952,
+    "nowHeight": 9163,
+    "heightNote": "Große IKK-Brückenszene jetzt auf Mobil offen. Höhe ist getrennt von Textmenge bewertet."
+  },
+  "desktop": {
+    "route": "/ambulant",
+    "baselineSize": [
+      1440,
+      12653
+    ],
+    "candidateSize": [
+      1440,
+      12653
+    ],
+    "wordsBefore": 1337,
+    "wordsAfter": 1337,
+    "heroWordsBefore": 140,
+    "heroWordsAfter": 140,
+    "heightBefore": 12653,
+    "heightAfter": 12653,
+    "headlineSame": true,
+    "heroCtasSame": true,
+    "changedPixelsThreshold12": 0,
+    "changedPixelsPercent": 0.0,
+    "rmsRGB": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "diffBounds": null
+  },
+  "pageOverflow": 0,
+  "duplicateIds": 0,
+  "brokenVisibleImages": 0,
+  "distortedImages": 0,
+  "javascriptPageErrors": 0,
+  "harnessAdjustedChecks": 24,
+  "harnessNotes": [
+    "Anfänglicher Abbruch durch Auswahl einer nackten Zahl statt der Buttonbeschriftung AP1 / 100 %. Vor vollständig erfasstem Pass korrigiert.",
+    "Providerhost ist für SDK und UKV derselbe; aufgezeichnete SDK-Linkparameter wurden nach mandant=sdk gefiltert, keine neue Browserrunde.",
+    "Bonusrechner verwendet im Einstieg Aktivitätsbuttons; aufgezeichnete Öffnung per echtem Pointer, open=true und Rechnerinhalt genügt. Keine Input-Voraussetzung.",
+    "Raw-Harnessmetrik bleibt separat erhalten; korrigierte Auswertung prüft die tatsächlich erfassten Daten, ohne fehlgeschlagene Produktchecks zu verwerfen."
+  ],
+  "knownDevelopmentDiagnostics": [
+    "React fetchPriority Warnung",
+    "React UNSAFE_componentWillMount Warnung",
+    "Vorhandene EN Visual-Editor-404"
+  ],
+  "safety": "Keine Produktdateiänderungen, Formulare, Leads oder externe Antragsaktionen."
+}

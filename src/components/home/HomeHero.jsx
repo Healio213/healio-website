@@ -60,7 +60,7 @@ const HomeHero = () => {
     },
   });
 
-  // Mobil: ein kurzer Einstieg mit einer Hauptaktion und direkt sichtbaren Zielwegen.
+  // Mobil: kurze Texte, die große Szene und die ursprünglichen Wischkarten bleiben sichtbar.
   // Die bisherige Tablet-Fassung und der separate DesktopLead bleiben erhalten.
   return (
     <div ref={heroRef}>
@@ -75,12 +75,12 @@ const HomeHero = () => {
 
       <div className="healio-container flex w-full items-center px-4 pb-8 sm:px-6 md:min-h-[calc(100svh-7rem)] md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
         <div className="relative z-20 flex w-full max-w-[1060px] flex-col">
-          <MobileScene surface="home" className="mb-6 !mx-0 max-md:max-w-none max-md:rounded-2xl max-md:[&>img]:aspect-[3/1] max-md:[&>img]:object-cover max-md:[&>img]:object-[50%_42%] md:mb-7" />
+          <MobileScene surface="home" className="mb-5 !mx-0 sm:mb-7" />
           <HeroHeading
             {...entrance(0.08)}
             id="home-hero-heading"
             lang={i18n.resolvedLanguage || i18n.language}
-            className="max-w-[20ch] [hyphens:manual] font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.025em] md:leading-[1.035] md:tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] md:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
+            className="max-w-[20ch] [hyphens:manual] font-display text-[2.35rem] font-extrabold leading-[1.08] tracking-[-0.025em] md:leading-[1.035] md:tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] md:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
           >
             <span className="block md:hidden">
               <span className="block">{t('mobile.hero.titleLead')}</span>
@@ -128,24 +128,7 @@ const HomeHero = () => {
             <p className="mt-3 text-sm leading-6 text-white/80"><span className="md:hidden">{t('mobile.hero.ctaHint')}</span><span className="hidden md:inline">{t('hero.ctaHint')}</span></p>
           </motion.div>
 
-          <motion.nav {...entrance(0.24)} className="order-3 mt-6 md:hidden" aria-label={t('hero.switchLabel')}>
-            <ul className="flex flex-wrap gap-x-5 border-t border-white/15 pt-2">
-              {switchList.map((item) => (
-                <li key={item.key}>
-                  <Link
-                    to={getPath(item.routeKey)}
-                    onClick={() => trackEvent('home_switch_click', { component: item.key })}
-                    className="home-focus inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-white/90 underline underline-offset-4"
-                  >
-                    {t(`mobile.hero.paths.${item.key}`)}
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.nav>
-
-          <motion.nav {...entrance(0.24)} className="order-3 mt-5 hidden sm:mt-9 md:block" aria-label={t('hero.switchLabel')}>
+          <motion.nav {...entrance(0.24)} className="order-3 mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
             <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
             {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
             <MobileSwipeRow
@@ -165,15 +148,15 @@ const HomeHero = () => {
                   >
                     <div className="flex items-center gap-3">
                       <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
-                      <span className="font-display text-lg font-extrabold leading-tight text-white">{item.title}</span>
+                      <span className="font-display text-lg font-extrabold leading-tight text-white"><span className="md:hidden">{t(`mobile.hero.paths.${item.key}`)}</span><span className="hidden md:inline">{item.title}</span></span>
                     </div>
-                    <p className="mt-2 text-base leading-6 text-white/85 sm:mt-3 md:text-sm md:leading-6">{item.description}</p>
+                    <p className="mt-2 text-base leading-6 text-white/85 sm:mt-3 md:text-sm md:leading-6"><span className="md:hidden">{t(`mobile.hero.switchDescriptions.${item.key}`)}</span><span className="hidden md:inline">{item.description}</span></p>
                     {item.example && (
-                      <p className="mt-1.5 text-sm leading-5 text-home-mint-active md:text-xs md:leading-5">{item.example}</p>
+                      <p className="mt-1.5 hidden text-sm leading-5 text-home-mint-active md:block md:text-xs md:leading-5">{item.example}</p>
                     )}
                     <span className="mt-auto pt-3 sm:pt-5">
                       <span className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-home-mint px-5 py-2.5 font-display text-sm font-extrabold text-home-midnight shadow-[0_10px_26px_rgba(37,201,144,0.22)] transition group-hover:bg-home-mint-active">
-                        {item.cta}
+                        <span className="md:hidden">{t(`mobile.hero.switchCtas.${item.key}`)}</span><span className="hidden md:inline">{item.cta}</span>
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
                       </span>
                     </span>

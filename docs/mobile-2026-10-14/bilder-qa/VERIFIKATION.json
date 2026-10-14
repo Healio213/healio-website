@@ -1,0 +1,529 @@
+{
+  "generated": "2026-10-14T10:07:21.246146+00:00",
+  "scope": "Lokale Bild-/Swipe-/Siegelprüfung vor Franks neuer Ambulant-Straffung; keine Releasefreigabe",
+  "base": "http://127.0.0.1:4830",
+  "snapshotViews": 35,
+  "touchConfirmationViews": 16,
+  "ikkConfirmationViews": 6,
+  "checks": 144,
+  "passed": 144,
+  "realTouchSwipes": 48,
+  "checkTypes": {
+    "ticker-reduced-originals": 33,
+    "ticker-animated-transform": 21,
+    "ticker-hover-pause": 21,
+    "ticker-focus-pause": 21,
+    "real-touch-swipe-right": 48
+  },
+  "failed": [],
+  "desktop": [
+    {
+      "route": "/",
+      "baselineSize": [
+        1440,
+        5653
+      ],
+      "candidateSize": [
+        1440,
+        5653
+      ],
+      "wordsBefore": 481,
+      "wordsAfter": 481,
+      "heroWordsBefore": 156,
+      "heroWordsAfter": 156,
+      "heightBefore": 5653,
+      "heightAfter": 5653,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    },
+    {
+      "route": "/leistungen",
+      "baselineSize": [
+        1440,
+        8388
+      ],
+      "candidateSize": [
+        1440,
+        8388
+      ],
+      "wordsBefore": 500,
+      "wordsAfter": 500,
+      "heroWordsBefore": 57,
+      "heroWordsAfter": 57,
+      "heightBefore": 8388,
+      "heightAfter": 8388,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 1,
+      "changedPixelsPercent": 1e-05,
+      "rmsRGB": [
+        0.0709,
+        0.0829,
+        0.0804
+      ],
+      "diffBounds": [
+        387,
+        751,
+        388,
+        752
+      ]
+    },
+    {
+      "route": "/ambulant",
+      "baselineSize": [
+        1440,
+        12653
+      ],
+      "candidateSize": [
+        1440,
+        12653
+      ],
+      "wordsBefore": 1337,
+      "wordsAfter": 1337,
+      "heroWordsBefore": 140,
+      "heroWordsAfter": 140,
+      "heightBefore": 12653,
+      "heightAfter": 12653,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    },
+    {
+      "route": "/zahn",
+      "baselineSize": [
+        1440,
+        12027
+      ],
+      "candidateSize": [
+        1440,
+        12027
+      ],
+      "wordsBefore": 1394,
+      "wordsAfter": 1394,
+      "heroWordsBefore": 110,
+      "heroWordsAfter": 110,
+      "heightBefore": 12027,
+      "heightAfter": 12027,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    },
+    {
+      "route": "/stationaer",
+      "baselineSize": [
+        1440,
+        13293
+      ],
+      "candidateSize": [
+        1440,
+        13293
+      ],
+      "wordsBefore": 1870,
+      "wordsAfter": 1870,
+      "heroWordsBefore": 104,
+      "heroWordsAfter": 104,
+      "heightBefore": 13293,
+      "heightAfter": 13293,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    }
+  ],
+  "pageOverflow": 0,
+  "duplicateIds": 0,
+  "brokenImages": 0,
+  "distortedImages": 0,
+  "javascriptPageErrors": 0,
+  "ikk": [
+    {
+      "route": "/ambulant",
+      "width": 390,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -4.5237, 0)",
+          "transform": "matrix(1, 0, 0, 1, -45.2339, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 358,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 358,
+        "height": 104,
+        "left": 16,
+        "right": 374,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "ambulant-390-ikk.png"
+    },
+    {
+      "route": "/zahn",
+      "width": 390,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -4.52234, 0)",
+          "transform": "matrix(1, 0, 0, 1, -45.235, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 358,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 358,
+        "height": 104,
+        "left": 16,
+        "right": 374,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "zahn-390-ikk.png"
+    },
+    {
+      "route": "/stationaer",
+      "width": 390,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -5.81683, 0)",
+          "transform": "matrix(1, 0, 0, 1, -46.5257, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 358,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 358,
+        "height": 104,
+        "left": 16,
+        "right": 374,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "stationaer-390-ikk.png"
+    },
+    {
+      "route": "/ambulant",
+      "width": 767,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -3.87583, 0)",
+          "transform": "matrix(1, 0, 0, 1, -45.2348, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 719,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 719,
+        "height": 104,
+        "left": 24,
+        "right": 743,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "ambulant-767-ikk.png"
+    },
+    {
+      "route": "/zahn",
+      "width": 767,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -4.52304, 0)",
+          "transform": "matrix(1, 0, 0, 1, -45.2332, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 719,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 719,
+        "height": 104,
+        "left": 24,
+        "right": 743,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "zahn-767-ikk.png"
+    },
+    {
+      "route": "/stationaer",
+      "width": 767,
+      "checks": [
+        {
+          "type": "ticker-reduced-originals",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "images": [
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-familien-2026-09.webp",
+              "height": 96
+            },
+            {
+              "src": "/siegel/ikk/krankenkasseninfo-schwangere-2026-09.webp",
+              "height": 96
+            }
+          ],
+          "uniqueCount": 2,
+          "originalCount": 2,
+          "repeatsHidden": true,
+          "dupHidden": true,
+          "animationName": "none",
+          "passed": true
+        },
+        {
+          "type": "ticker-animated-transform",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "first": "matrix(1, 0, 0, 1, -5.81423, 0)",
+          "transform": "matrix(1, 0, 0, 1, -46.5231, 0)",
+          "playState": "running",
+          "halfListWidth": 930.5625,
+          "bandWidth": 719,
+          "ariaSafe": true,
+          "passed": true
+        },
+        {
+          "type": "ticker-hover-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        },
+        {
+          "type": "ticker-focus-pause",
+          "label": "Die Krankenkasse IKK classic im Test",
+          "passed": true
+        }
+      ],
+      "layout": {
+        "width": 719,
+        "height": 104,
+        "left": 24,
+        "right": 743,
+        "broken": [],
+        "visible": true,
+        "overflow": false
+      },
+      "errors": [],
+      "blockedMutations": [],
+      "screenshot": "stationaer-767-ikk.png"
+    }
+  ],
+  "notes": [
+    "Erster 35-Ansichten-Pass hatte einen korrigierten Sichtbarkeitsfehler im Testskript und prüfte keine Gesten; die 48 echten Touch-Gesten stammen ausschließlich aus der 16-Ansichten-Bestätigung.",
+    "IKK war hinter einer alten max-md:hidden-Hülle verborgen; Root hat die Hülle entfernt. Alle sechs IKK-Folgeansichten wurden danach frisch geprüft.",
+    "Sichtbare Wörter schließen geschlossene Details und horizontal außerhalb der Wischkarten abgeschnittene Inhalte aus.",
+    "Sichtbarkeit/Proportionen per CSS-Layoutmaßen; object-fit cover/contain verhindert Streckung.",
+    "Bekannte Entwicklungswarnungen (React fetchPriority/UNSAFE und EN Visual-Editor-404) sind nicht als neue Produktfehler gezählt."
+  ]
+}

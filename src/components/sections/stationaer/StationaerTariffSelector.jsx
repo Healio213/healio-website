@@ -111,7 +111,7 @@ const StationaerTariffSelector = () => {
                     height="480"
                     loading="lazy"
                     decoding="async"
-                    className="aspect-[2/1] w-full object-cover transition duration-500 md:aspect-[3/2] md:group-hover:scale-[1.04] motion-reduce:transition-none"
+                    className="aspect-[3/2] w-full object-cover transition duration-500 md:group-hover:scale-[1.04] motion-reduce:transition-none"
                   />
                 </div>
 

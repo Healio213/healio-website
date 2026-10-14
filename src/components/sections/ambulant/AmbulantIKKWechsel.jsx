@@ -8,6 +8,7 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import IkkKassenSiegel from '@/components/sections/shared/IkkKassenSiegel';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { IKK_LINK, trackIkkClick } from '@/lib/sdk-url';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const IkkSwitch3DScene = lazy(() => import('@/components/sections/ambulant/IkkSwitch3DScene'));
 
@@ -68,10 +69,15 @@ const cx = (...parts) => parts.filter(Boolean).join(' ');
 //   schlanker; kein Wortlaut und keine Versicherungsaussage ist gekürzt.
 const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
   const { t } = useTranslation('ambulant');
+  const { lang } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
   const [mobileTimelineOpen, setMobileTimelineOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const activeVariant = ['ambulant', 'zahn', 'stationaer'].includes(variant) ? variant : 'ambulant';
+  const compactAmbulantCopy = activeVariant === 'ambulant';
+  const mobileIntro = lang === 'en'
+    ? { title: 'Your health fund bonus can help pay.', subtitle: 'Changing your statutory health fund remains optional.' }
+    : { title: 'Dein Kassenbonus kann mitzahlen.', subtitle: 'Ein Wechsel deiner gesetzlichen Krankenkasse bleibt freiwillig.' };
 
   const identicalItems = t('ikkWechsel.identicalItems', { returnObjects: true });
   const timelineText = (key, field) => (
@@ -164,10 +170,12 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
             {t('ikkWechsel.badge')}
           </div>
           <h2 className="mx-auto mb-4 max-w-4xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight [text-wrap:balance] sm:text-4xl lg:text-5xl">
-            <HighlightText text={t('ikkWechsel.title')} />
+            {compactAmbulantCopy && <span className="md:hidden">{mobileIntro.title}</span>}
+            <span className={compactAmbulantCopy ? 'hidden md:inline' : undefined}><HighlightText text={t('ikkWechsel.title')} /></span>
           </h2>
           <p className="mx-auto max-w-3xl text-base leading-7 text-home-slate md:text-lg">
-            <HighlightText text={t('ikkWechsel.subtitle')} />
+            {compactAmbulantCopy && <span className="md:hidden">{mobileIntro.subtitle}</span>}
+            <span className={compactAmbulantCopy ? 'hidden md:inline' : undefined}><HighlightText text={t('ikkWechsel.subtitle')} /></span>
           </p>
 
           <div className={cx('flex flex-col justify-center gap-3 sm:flex-row', mobileSwipe ? 'mt-6 md:mt-7' : 'mt-7')}>
@@ -199,9 +207,8 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
 
           {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
               03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile.
-              Unter md (mit mobileSwipe) entfallen sie hier: Sie laufen oben im
-              Siegelband der Seite (Vorgabe 06.10.2026). */}
-          <div className={cx(mobileSwipe && 'max-md:hidden')}>
+              Mobil laufen sie hier als kompaktes Band (Frank 14.10.2026). */}
+          <div>
             <IkkKassenSiegel className="mx-auto mt-8" />
           </div>
         </div>
@@ -211,12 +218,10 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
             der Szene stehen, direkt unter den Knöpfen. Ab md ist er ein Block
             in der Reihenfolge des Quelltexts wie bisher. */}
         <div className={cx(mobileSwipe && 'flex flex-col md:block')}>
-        {/* Die Brücken-Szene steht wieder offen sichtbar (Frank 29.09.2026);
-            nur die weiteren Details bleiben aufklappbar. */}
-        {/* Besuchertest 11.10.2026: Die große Brücken-Szene (rund 1.000 Pixel Höhe) erscheint
-            erst nach "Kassenwechsel im Detail", damit die Seite kürzer bleibt. */}
-        {detailsOpen && (
-        <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? 'order-2 max-md:rounded-none max-md:border-0 max-md:bg-none max-md:!p-0 max-md:shadow-none md:order-none md:mb-12' : 'mb-12 p-4')}>
+        {/* Ambulant mobil: die geliebte Brücken-Szene bleibt offen und groß sichtbar.
+            Desktop und die anderen Varianten behalten den bisherigen Details-Einstieg. */}
+        {(detailsOpen || compactAmbulantCopy) && (
+        <div className={cx('relative overflow-hidden rounded-[2rem] border border-[#d9d3eb] bg-[linear-gradient(145deg,#fbf9ff_0%,#fffdf3_48%,#edf9f3_100%)] shadow-[0_26px_75px_rgba(69,53,108,0.12)] sm:p-6 md:rounded-[2.75rem] md:p-8', mobileSwipe ? 'order-2 max-md:rounded-none max-md:border-0 max-md:bg-none max-md:!p-0 max-md:shadow-none md:order-none md:mb-12' : 'mb-12 p-4', compactAmbulantCopy && !detailsOpen && 'md:hidden')}>
           <Suspense fallback={<div className="h-[420px] rounded-[1.65rem] border border-[#ddd6ef] bg-white/55 sm:h-[520px] sm:rounded-[2rem] lg:h-[560px]" />}>
             <IkkSwitch3DScene variant={activeVariant} />
           </Suspense>

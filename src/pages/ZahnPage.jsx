@@ -230,7 +230,7 @@ const ZahnPage = () => {
               </motion.div>
             </div>
 
-            <div className="mt-8 hidden gap-3 border-t border-white/15 pt-5 md:mt-12 md:grid md:gap-4 md:pt-6 sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 border-t border-white/15 pt-5 md:mt-12 md:gap-4 md:pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
                 <div key={item} className="flex items-center gap-3 text-left text-base font-bold text-white/85">
                   <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" className="!h-10 !w-10 sm:!h-12 sm:!w-12" />
@@ -266,7 +266,6 @@ const ZahnPage = () => {
               <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.paths.text}</p>
             </div>
 
-            <MobileDetails summary={lang === 'en' ? 'The two insurers & their conditions' : 'Die zwei Versicherer & ihre Voraussetzungen'}>
             <div className="mt-0 overflow-hidden rounded-[2rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)] md:mt-12 md:rounded-[2.75rem]">
               <div className="grid md:grid-cols-2">
               {content.paths.cards.map((card, index, cards) => {
@@ -288,12 +287,15 @@ const ZahnPage = () => {
                     </div>
                     <h3 className="font-display text-xl font-extrabold tracking-[-0.035em] md:mt-8 md:text-2xl">{card.label}</h3>
                     <p className="mt-1 font-display text-sm font-extrabold uppercase tracking-[0.14em] opacity-80 md:mt-2">{card.title} · {card.product}</p>
-                    <p className="col-span-2 mt-4 max-w-xl leading-6 text-slate-600 sm:leading-7">{card.text}</p>
+                    <MobileDetails summary={lang === 'en' ? 'Requirements' : 'Voraussetzungen'} className="col-span-2 mt-4 text-slate-600">
+                      <p className="col-span-2 mt-4 max-w-xl leading-6 text-slate-600 sm:leading-7">{card.text}</p>
+                    </MobileDetails>
                   </article>
                 );
               })}
               </div>
             </div>
+            <MobileDetails summary={lang === 'en' ? 'Acceptance & missing teeth' : 'Annahme & Zahnlücken'} className="mt-4 text-slate-600">
             <p className="mt-4 text-base leading-7 text-slate-600 md:mt-6">{content.paths.footer}</p>
             {lang === 'de' && (
               /* Vertiefung zum Thema Zahnluecke. Bewusst nur ein Satz mit

@@ -97,13 +97,13 @@ const StationaerBayerischeAlternative = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <article className="grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[1.8rem] border border-home-mint/20 bg-white shadow-[0_18px_45px_rgba(29,53,63,0.07)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
           <div className="bg-home-ice p-6 sm:p-8 lg:p-10">
-            <FriendlyIcon kind="hospital" tone="sky" size="md" className="!hidden md:!inline-grid md:!h-16 md:!w-16" />
+            <FriendlyIcon kind="hospital" tone="sky" size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
             <p className="mt-4 hidden font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-midnight md:mt-6 md:block md:text-xs md:tracking-[0.18em]">
               {copy.eyebrow}
             </p>
             <h2
               id="stationaer-bayerische-heading"
-              className="max-w-[18ch] font-display text-2xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#071726] [text-wrap:balance] md:mt-3 sm:text-3xl"
+              className="mt-3 max-w-[18ch] font-display text-2xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#071726] [text-wrap:balance] sm:text-3xl"
             >
               {copy.title}
             </h2>
@@ -160,11 +160,41 @@ const StationaerBayerischeAlternative = () => {
           {/* Mobil sind die vier Angaben eine Wischreihe aus kleinen Karten;
               ab md bleibt es die bisherige Liste mit Trennlinien. */}
           <div className="border-t border-[#e3ecf5] px-6 py-3 sm:px-8 md:hidden">
-            <MobileDetails summary={language === 'en' ? 'Full benefits & conditions' : 'Leistungen & Voraussetzungen im Detail'}>
-              <dl className="space-y-5">
-                {copy.facts.map((fact) => <div key={fact.label}><dt className="text-sm font-extrabold text-home-midnight">{fact.label}</dt><dd className="mt-1 text-sm leading-6 text-slate-700">{fact.text}{fact.link && <> <a href={fact.link.href} className="font-bold text-[#075f46] underline underline-offset-4">{fact.link.label}</a></>}</dd></div>)}
-              </dl>
-            </MobileDetails>
+            <MobileSwipeRow
+              label={copy.title}
+              className="min-w-0"
+              desktopClassName="-mx-6 scroll-pl-6 px-6 sm:-mx-8 sm:scroll-pl-8 sm:px-8 md:mx-0 md:block md:divide-y md:divide-slate-100 md:px-0"
+              mobileItemWidth="w-[calc(100%-2rem)]"
+              bleed={false}
+            >
+              {copy.facts.map((fact) => (
+                <dl
+                  key={fact.label}
+                  className="h-full rounded-2xl border border-[#e3ecf5] bg-[#f8fbfe] p-5 md:rounded-none md:border-0 md:bg-transparent md:px-0 md:py-6"
+                >
+                  <dt className="text-sm font-extrabold uppercase tracking-[0.12em] text-home-midnight md:text-xs md:tracking-[0.16em]">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-2 text-base leading-relaxed text-slate-700 md:leading-6">
+                  <MobileDetails summary="Details" className="text-slate-700">
+                    {fact.text}
+                    {fact.link && (
+                      <>
+                        {' '}
+                        <a
+                          href={fact.link.href}
+                          className="font-bold text-[#075f46] underline decoration-[#9fd8c2] underline-offset-4 transition hover:decoration-[#075f46] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#075f46]"
+                        >
+                          {fact.link.label}
+                          <ArrowDown className="ml-1 inline h-3.5 w-3.5 align-[-0.125em]" aria-hidden="true" />
+                        </a>
+                      </>
+                    )}
+                  </MobileDetails>
+                  </dd>
+                </dl>
+              ))}
+            </MobileSwipeRow>
           </div>
           <div className="hidden border-t border-[#e3ecf5] px-6 py-5 sm:px-8 md:block md:py-2 lg:border-l lg:border-t-0 lg:px-10 lg:py-4">
             <MobileSwipeRow

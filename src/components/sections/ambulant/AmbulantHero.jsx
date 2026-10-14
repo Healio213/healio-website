@@ -106,9 +106,9 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none"
             >
               <ArrowDown className="mr-2 h-5 w-5" />
-              {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : t('hero.ctaCalculate')}
+              {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : <><span className="md:hidden">{language === 'en' ? 'Calculate your premium' : 'Beitrag berechnen'}</span><span className="hidden md:inline">{t('hero.ctaCalculate')}</span></>}
             </a>
-            {!fromBonusTopic && <UrgencyNote surface="ambulant" className="!mt-0" />}
+            {!fromBonusTopic && <div className="hidden md:contents"><UrgencyNote surface="ambulant" className="!mt-0" /></div>}
             <p className="max-w-xl text-left text-base leading-7 text-slate-300">
               <span className="md:hidden">{fromBonusTopic ? 'Abschluss und persönliche Hilfe bleiben freiwillig.' : language === 'en' ? 'Personal premium in the calculator. Your bonus may help pay it.' : 'Persönlicher Beitrag im Rechner. Dein Bonus kann mitzahlen.'}</span>
               <span className="hidden md:inline">{fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}</span>
@@ -132,7 +132,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 height="315"
                 loading="eager"
                 decoding="async"
-                className="hidden w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] md:block sm:w-24"
+                className="w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
               />
               <div className="min-w-0">
                 <p className="hidden font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl md:block">
@@ -143,22 +143,12 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 </p>
               </div>
             </div>
-            <ul className="mt-4 grid grid-cols-2 gap-x-5 gap-y-4 md:hidden">
-              {budget.pots.map((pot) => (
-                <li key={pot.key}>
-                  <a href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'} onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')} className="block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint">
-                    <span className="block text-sm font-semibold leading-5 text-slate-600">{pot.label}</span>
-                    <strong className="mt-1 block font-display text-lg font-extrabold text-[#0b6048]">{t('hero.offerUpTo', { amount: euro.format(pot.amount) })}</strong>
-                  </a>
-                </li>
-              ))}
-            </ul>
             {/* Experiment 06.10.2026: mobil eine Wischreihe statt vier gestapelter
                 Karten, ab md das bisherige Zwei-Spalten-Raster. Jede Karte führt
                 weiterhin in den Budget-Kompass bzw. die Tarifwahl. */}
             <MobileSwipeRow
               label={t('hero.offerAria')}
-              className="mt-4 hidden md:mt-5 md:block"
+              className="mt-4 md:mt-5"
               desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:gap-3"
               mobileItemWidth="w-[74%]"
               bleed={false}
@@ -186,7 +176,6 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 );
               })}
             </MobileSwipeRow>
-            <p className="mt-4 text-sm leading-5 text-slate-600 md:hidden">{language === 'en' ? 'Reimbursement of eligible invoices. No freely available cash.' : 'Erstattung versicherter Rechnungen. Kein frei verfügbares Guthaben.'}</p>
             <MobileDetails summary={language === 'en' ? 'How the budgets apply' : 'So gelten die Budgets'} className="mt-3 md:mt-4">
               <p className="text-sm leading-6 text-slate-500 md:mt-4">{budget.disclosure}</p>
             </MobileDetails>
