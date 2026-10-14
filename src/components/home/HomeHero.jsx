@@ -9,13 +9,11 @@ import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import DesktopLead from '@/components/desktop/DesktopLead';
-import HomeContributionExample from './HomeContributionExample';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
 import { getDesktopLeadContent } from '@/components/desktop/desktopLeadContent';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
-import GuidedJourney from '@/components/guided/GuidedJourney';
 import { getGuidedHomeContent } from './guidedHomeContent';
 
 const entranceEase = [0.16, 1, 0.3, 1];
@@ -181,7 +179,6 @@ const HomeHero = () => {
         </div>
       </div>
       </section>
-      {GUIDED_CALLBACK_ENABLED ? <GuidedJourney product="any" showImages /> : <HomeContributionExample language={lang} />}
     </div>
   );
 };

@@ -256,13 +256,13 @@ const ZahnPage = () => {
           </div>
         </section>
 
-        {GUIDED_CALLBACK_ENABLED && <div className="order-[-3] md:order-none"><GuidedJourney product="zahn" /></div>}
-
         {lang === 'de' && (
           <div className="order-[-2] md:order-none">
             <DentalVideoSection />
           </div>
         )}
+
+        {GUIDED_CALLBACK_ENABLED && <div className="order-[-2] md:order-none"><GuidedJourney product="zahn" /></div>}
 
         <HealioAwardsRow size="large" productSet="zahn" mobileWithIkk className="order-[-1] md:order-none" />
 

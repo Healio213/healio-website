@@ -65,7 +65,6 @@ const StationaerPage = () => {
             <StationaerHero />
           </div>
         </Slot>
-        {GUIDED_CALLBACK_ENABLED && <Slot order="order-1"><GuidedJourney product="stationaer" /></Slot>}
         {lang === 'de' && (
           <Slot order="order-2">
             <ExplainerVideoCard
@@ -81,6 +80,7 @@ const StationaerPage = () => {
             />
           </Slot>
         )}
+        {GUIDED_CALLBACK_ENABLED && <Slot order="order-2"><GuidedJourney product="stationaer" /></Slot>}
         <Slot order="order-3">
           <StationaerRoomCosts />
         </Slot>

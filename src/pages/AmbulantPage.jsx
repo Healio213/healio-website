@@ -64,11 +64,11 @@ const AmbulantPage = () => {
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
-        {GUIDED_CALLBACK_ENABLED && <div className="order-1 md:order-none"><GuidedJourney product="ambulant" /></div>}
         {/* Frank 10.10.: Film direkt unter dem Hero, vor Siegeln und Karten. */}
         <div className="order-2 md:contents">
           <AmbulantExplainerVideo />
         </div>
+        {GUIDED_CALLBACK_ENABLED && <div className="order-2 md:order-none"><GuidedJourney product="ambulant" /></div>}
         <div className="order-3 md:contents">
           <HealioAwardsRow size="large" mobileWithIkk={!fromBonusTopic} />
         </div>

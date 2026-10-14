@@ -2,6 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import HomeHero from '@/components/home/HomeHero';
+import HomeContributionExample from '@/components/home/HomeContributionExample';
+import GuidedJourney from '@/components/guided/GuidedJourney';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import DesktopHomeJourney from '@/components/desktop/DesktopHomeJourney';
 import InsurancePathway from '@/components/home/InsurancePathway';
 import HowHealioWorks from '@/components/home/HowHealioWorks';
@@ -67,6 +70,7 @@ const MainHomePage = () => {
             className="bg-white"
           />
         )}
+        {GUIDED_CALLBACK_ENABLED ? <GuidedJourney product="any" showImages /> : <HomeContributionExample language={lang} />}
         <DesktopHomeJourney language={lang} />
         <div className="lg:hidden">
         <HowHealioWorks />
