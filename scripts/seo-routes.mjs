@@ -168,7 +168,7 @@ export const seoRoutes = [
   },
   {
     path: '/schwangerschaft',
-    title: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
+    title: 'Zusatzversicherung schwanger: was jetzt noch geht | Healio',
     description: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     canonical: 'https://healio.de/schwangerschaft',
     keywords: 'Zusatzversicherung Schwangerschaft, Zusatzversicherung schwanger abschließen, Schwangerschaft Kassenbonus, Mutterschaftsvorsorge Bonus, Kindernachversicherung',
@@ -187,8 +187,8 @@ export const seoRoutes = [
   },
   {
     path: '/ambulant',
-    title: 'Ambulante Zusatzversicherung – Bis zu 3.000 € Gesundheitsbudget | Healio',
-    description: 'Bis zu 3.000 € Gesundheitsbudget in zwei Jahren für Heilpraktiker, Osteopathie und Naturheilkunde. Dein Kassenbonus kann beim Beitrag helfen. Jetzt berechnen!',
+    title: 'Ambulante Zusatzversicherung: bis 3.000 EUR Budget | Healio',
+    description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Brille und Vorsorge. Je nach Kasse trägt dein Kassenbonus den Beitrag ganz oder zum Teil.',
     canonical: 'https://healio.de/ambulant',
     keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, Kassenbonus Zusatzversicherung',
     lang: 'de',
@@ -260,7 +260,7 @@ export const seoRoutes = [
   {
     path: '/zahn',
     title: 'Zahnzusatzversicherung: Bis zu 100 % Erstattung | Healio',
-    description: 'Zahnzusatzversicherung, auch wenn die Behandlung schon angeraten ist: Sofortschutz mit bis zu 1.500 € Zuschuss oder starke Vorsorge mit ZahnPRIVAT. Jetzt passenden Tarif finden!',
+    description: 'Zahnzusatzversicherung auch bei angeratener Behandlung: bis zu 1.500 EUR Zuschuss mit ZAHN Sofort oder starke Vorsorge mit ZahnPRIVAT. Finde deinen Tarif.',
     canonical: 'https://healio.de/zahn',
     keywords: 'Zahnzusatzversicherung, Zahnersatz Erstattung, Implantate Versicherung, Zahnversicherung Vergleich',
     lang: 'de',
@@ -285,7 +285,7 @@ export const seoRoutes = [
   },
   {
     path: '/stationaer',
-    title: 'Krankenhauszusatzversicherung: Privatpatient im Krankenhaus | Healio',
+    title: 'Krankenhauszusatzversicherung: Privatpatient sein | Healio',
     description: 'Krankenhauszusatzversicherung: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. SDK Klinik-Tarife z. B. ab 7,00 EUR/Monat (SPU, 30 Jahre). Jetzt berechnen.',
     canonical: 'https://healio.de/stationaer',
     keywords: 'Krankenhauszusatzversicherung, stationäre Zusatzversicherung, Krankenhaus Zusatzversicherung, Chefarztbehandlung, Einbettzimmer Versicherung',

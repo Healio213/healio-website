@@ -34,7 +34,7 @@ const TOPICS = {
     title: 'Schwanger? Laut Satzung sind <highlight>bis zu 1.155\u00a0EUR</highlight> für dich drin.',
     lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz den Zuschuss für den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
     leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
-    seoTitle: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht | Healio',
+    seoTitle: 'Zusatzversicherung schwanger: was jetzt noch geht | Healio',
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder Streptokokken, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',

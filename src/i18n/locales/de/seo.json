@@ -4,15 +4,15 @@
     "description": "Healio optimiert bAV, bKV und steuerfreie Gesundheitsbenefits für Unternehmen. Mehr Mitarbeiterbindung, klare Beratung und messbarer Nutzen."
   },
   "ambulant": {
-    "title": "Ambulante Zusatzversicherung: Bis zu 3.000 EUR Gesundheitsbudget | Healio",
-    "description": "Bis zu 3.000 EUR Gesundheitsbudget in zwei Jahren für Heilpraktiker, Brille und Vorsorge. Je nach Kasse und Aktivitäten kann dein Kassenbonus den Monatsbeitrag ganz oder teilweise ausgleichen."
+    "title": "Ambulante Zusatzversicherung: bis 3.000 EUR Budget | Healio",
+    "description": "Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Brille und Vorsorge. Je nach Kasse trägt dein Kassenbonus den Beitrag ganz oder zum Teil."
   },
   "zahn": {
     "title": "Zahnzusatzversicherung: Bis zu 100% Erstattung | Healio",
-    "description": "Bis zu 100 % Erstattung für Zahnersatz. Bis zu 3 fehlende Zähne mitversicherbar. Ohne Wartezeiten."
+    "description": "Zahnzusatzversicherung auch bei angeratener Behandlung: bis zu 1.500 EUR Zuschuss mit ZAHN Sofort oder starke Vorsorge mit ZahnPRIVAT. Finde deinen Tarif."
   },
   "stationaer": {
-    "title": "Krankenhauszusatzversicherung: Privatpatient im Krankenhaus | Healio",
+    "title": "Krankenhauszusatzversicherung: Privatpatient sein | Healio",
     "description": "Krankenhauszusatzversicherung: Einbettzimmer, Chefarztbehandlung, freie Klinikwahl. SDK Klinik-Tarife z. B. ab 7,00 EUR/Monat (SPU, 30 Jahre). Jetzt berechnen."
   },
   "partner": {
