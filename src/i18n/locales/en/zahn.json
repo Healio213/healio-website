@@ -231,7 +231,7 @@
       "sonderLuecke": {
         "insurer": "Your special path at Healio",
         "title": "There is a special path for you that hardly anyone knows",
-        "text": "Honest answer: for the combination of a recommended treatment and missing teeth, neither of our two online applications fits, you would be rejected or deferred there. But there are immediate-cover tariffs on the market without health questions that co-insure exactly your case. We name the right one for you, free of charge.",
+        "text": "Honest answer: for the combination of a recommended treatment and missing teeth, neither of our two online applications fits, you would be rejected or deferred there. Call us free of charge and we will look at which route is left for your case.",
         "reasons": [
           "We tell you specifically which immediate-cover tariff accepts your case, free and non-binding",
           "A short phone call is enough, afterwards you can sign up directly online",
@@ -244,7 +244,7 @@
       "sonderVorgeschichte": {
         "insurer": "Your special path at Healio",
         "title": "One question decides your path, we clarify it in 2 minutes",
-        "text": "With a recommended treatment plus dental history, the right tariff depends on whether you need dentures (crown, bridge, prosthesis) or dental treatment (filling, root canal or periodontitis treatment). For both cases there is an immediate-cover solution on the market without health questions, but a different one each. We name the right one for you, free of charge.",
+        "text": "With a recommended treatment plus dental history, the right tariff depends on whether you need dentures (crown, bridge, prosthesis) or dental treatment (filling, root canal or periodontitis treatment). We will clarify which route is left for you free of charge by phone.",
         "reasons": [
           "We clarify on the phone in 2 minutes which immediate-cover tariff fits your treatment",
           "Free and non-binding, afterwards you sign up directly online",
@@ -257,7 +257,7 @@
       "sonderViele": {
         "insurer": "Your special path at Healio",
         "title": "Even with many missing teeth there is a path",
-        "text": "From 4 missing teeth our two partner insurers no longer accept, and neither do most dental tariffs on the market. But there is an immediate-cover solution without health questions that also co-insures many missing teeth. We name it for you free of charge and tell you honestly what it covers and what it does not.",
+        "text": "From 4 missing teeth our two partner insurers no longer accept, and neither do most dental tariffs on the market. Call us free of charge and we will tell you honestly which route is left for you.",
         "reasons": [
           "We name the tariff that genuinely co-insures your situation, free and non-binding",
           "With an honest assessment: what is paid, where the limits are and how to plan your treatment smartly",
@@ -365,7 +365,7 @@
         },
         {
           "situation": "More than 3 missing teeth",
-          "empfehlung": "Special path: our two partners do not accept from 4 missing teeth. But there is an immediate-cover solution on the market without health questions that co-insures this too. We name it for you free of charge: +49 40 89755705.",
+          "empfehlung": "Special path: our two partners do not accept from 4 missing teeth. We will clarify which route is left for you free of charge: +49 40 89755705.",
           "weg": "beide"
         },
         {
@@ -433,7 +433,7 @@
       },
       {
         "q": "Can I sign up with missing teeth?",
-        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information. Bayerische currently does not accept missing teeth. From 4 missing teeth there is an immediate-cover solution on the market entirely without health questions, and we name it for you by phone: +49 40 89755705. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
+        "a": "Yes, with UKV: up to 3 already missing teeth are fully co-insured for a fixed surcharge (€6.10 to €10.90 per tooth per month depending on the tier), and the reimbursement scale remains uncut. If there was a treatment and cost plan for the gap in the last 2 years or its restoration was recommended, exactly that treatment is not covered. An older recommendation does not automatically cover treatment currently intended or underway. UKV assesses the application information. Bayerische currently does not accept missing teeth. From 4 missing teeth we clarify your route with you by phone: +49 40 89755705. Wisdom teeth and a gap closure confirmed by your dentist do not count as missing teeth."
       },
       {
         "q": "I recently had periodontitis. Is anything still possible?",
