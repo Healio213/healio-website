@@ -253,7 +253,7 @@ for (const [slug, expected] of Object.entries(INTERNAL_BUTTONS)) {
   expect(!article.updatedAt || Boolean(article.updatedAtLabel), `${slug} hat updatedAt, aber kein updatedAtLabel fuer die sichtbare Stand-Zeile.`);
   // Die IKK-Seite erhielt beim Serien-Einbau neue Bereichs- und Nachbarlinks.
   const expectedStand = slug === 'ikk-classic-bonusprogramm-2026'
-    ? { iso: '2026-10-08', label: '8. Oktober 2026' }
+    ? { iso: '2026-10-14', label: '14. Oktober 2026' }
     : slug === ZAHN_SLUG
       ? { iso: '2026-10-10', label: '10. Oktober 2026' }
       : { iso: '2026-10-05', label: '5. Oktober 2026' };

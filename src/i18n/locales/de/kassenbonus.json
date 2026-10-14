@@ -124,7 +124,7 @@
   "bridge": {
     "eyebrow": "Deinen Vorteil weiterdenken",
     "title": "Behalten, oder gezielt in besseren Schutz stecken.",
-    "description": "Deine Ersparnis und dein Bonus gehören zuerst dir. Wenn du möchtest, können sie den Beitrag für passenden Zusatzschutz ganz oder teilweise ausgleichen.",
+    "description": "Deine Ersparnis und dein Bonus gehören zuerst dir. Wenn du möchtest, können sie den Beitrag für passenden Zusatzschutz ganz oder teilweise ausgleichen. Ob du deinen Kassenbonus für eine Zusatzversicherung als Geld bekommst oder als zweckgebundenen Zuschuss zum Beitrag, regelt deine Kasse.",
     "cards": [
       {
         "routeKey": "ambulant",

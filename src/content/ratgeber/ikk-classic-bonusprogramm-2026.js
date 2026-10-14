@@ -53,8 +53,8 @@ export const article = {
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
-  updatedAt: "2026-10-08",
-  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-14",
+  updatedAtLabel: "14. Oktober 2026",
   readingTimeMinutes: 8,
 
   listTitle: 'IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen',
@@ -293,8 +293,12 @@ export const article = {
       heading: 'Lohnt sich die IKK classic trotz 3,85 Prozent Zusatzbeitrag?',
       blocks: [
         {
-          type: 'paragraph',
-          text: 'Das muss gegengerechnet werden. Die IKK classic verlangt 3,85 Prozent Zusatzbeitrag. Der Median der 34 bundesweit geöffneten Kassen liegt bei 3,625 Prozent, günstige Kassen aus demselben amtlichen Abzug darunter, etwa die TUI BKK mit 2,50 Prozent oder die hkk mit 2,59 Prozent.',
+          type: 'segments',
+          segments: [
+            { text: 'Das muss gegengerechnet werden. Der Zusatzbeitrag der IKK classic liegt 2026 seit dem 1. August bei 3,85 Prozent, bis Ende Juli waren es 3,40 Prozent. Beide Werte nennt die Kasse auf ihrer ' },
+            { text: 'Seite zu den Beitragssätzen', href: 'https://www.ikk-classic.de/pk/rv/beitraege/beitragssaetze' },
+            { text: ' (abgerufen am 14.10.2026). Der Median der 34 bundesweit geöffneten Kassen liegt bei 3,625 Prozent, günstige Kassen aus demselben amtlichen Abzug darunter, etwa die TUI BKK mit 2,50 Prozent oder die hkk mit 2,59 Prozent.' },
+          ],
         },
         {
           type: 'paragraph',

@@ -46,7 +46,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio",
     "metaDescription": "IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.",
     "publishedAt": "2026-09-22",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "mkk-bonusprogramm-2026",
