@@ -65,7 +65,7 @@ const MERGED_INTO_RATGEBER_2026_10_14 = {
     assert.ok(!sitemap.includes(`https://healio.de/blog/${slug}<`), `${slug} ist zusammengelegt und darf nicht mehr in der Sitemap stehen.`);
     for (const source of [`/blog/${slug}`, `/en/blog/${slug}`]) {
       const redirect = (vercelConfig.redirects || []).find((entry) => entry.source === source);
-      assert.ok(redirect && redirect.destination === target && redirect.permanent === true, `301 von ${source} auf ${target} fehlt in vercel.json.`);
+      assert.ok(redirect && redirect.destination === target && redirect.statusCode === 301, `301 von ${source} auf ${target} fehlt in vercel.json.`);
     }
     assert.ok(!JSON.stringify(rawArticles).includes(`/blog/${slug}`), `Ein Blogartikel verlinkt noch auf die zusammengelegte URL /blog/${slug}.`);
   }
