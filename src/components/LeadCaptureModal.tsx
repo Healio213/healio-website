@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
+import FormHoneypot, { isHoneypotFilled } from './forms/FormHoneypot.jsx';
 import { trackGoogleAdsLead } from '../lib/google-ads.js';
 import { getLeadCaptureCopy } from '../lib/lead-capture-copy.js';
 import {
@@ -72,6 +73,7 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isHoneypotFilled(event.currentTarget)) return;
     if (abortRef.current) return;
     const name = firstName.trim();
     const address = email.trim();
@@ -209,7 +211,8 @@ export default function LeadCaptureModal({ isOpen, onClose, targetUrl, trackingC
               {error && <p role="alert" className="mt-4 text-sm leading-6 text-amber-300">{error}</p>}
             </div>
           ) : (
-            <form onSubmit={submit} noValidate className="mt-6 space-y-4">
+            <form method="post" action="/kontakt" onSubmit={submit} noValidate className="mt-6 space-y-4">
+              <FormHoneypot />
               <div>
                 <label htmlFor="lead-capture-first-name" className="mb-2 block text-sm font-medium text-slate-200">{copy.firstNameLabel}</label>
                 <input ref={firstNameRef} id="lead-capture-first-name" name="firstName" type="text" required maxLength={80} autoComplete="given-name" placeholder={copy.firstNamePlaceholder} value={firstName} onChange={(event) => { setFirstName(event.target.value); requestIdRef.current = null; timestampRef.current = null; }} disabled={submitting} aria-invalid={errorField === 'firstName'} aria-describedby={errorField === 'firstName' ? 'lead-capture-error' : undefined} className="min-h-12 w-full rounded-xl border border-[#233044] bg-home-midnight px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-home-mint focus:outline-none focus:ring-1 focus:ring-home-mint disabled:opacity-60" />

@@ -1,4 +1,7 @@
 import React from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { useTranslation } from 'react-i18next';
@@ -101,6 +104,16 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col items-start justify-center gap-3"
           >
+            {GUIDED_CALLBACK_ENABLED ? (
+              <div className="flex w-full flex-col items-start gap-2">
+                <GuidedCallbackButton product="ambulant" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
+                  {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                </GuidedCallbackButton>
+                <a href="#tarifwahl" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
+                  {language === 'en' ? 'Explore benefits first' : 'Erst Leistungen vergleichen'}<ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
+            ) : (
             <a
               href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_42px_rgba(37,201,144,0.3)] transition hover:-translate-y-0.5 hover:bg-home-mint-active hover:shadow-[0_20px_50px_rgba(37,201,144,0.36)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 focus-visible:ring-offset-[#071726] motion-reduce:transform-none"
@@ -108,11 +121,15 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
               <ArrowDown className="mr-2 h-5 w-5" />
               {fromBonusTopic ? 'Leistungen und Beitrag ansehen' : <><span className="md:hidden">{language === 'en' ? 'Calculate your premium' : 'Beitrag berechnen'}</span><span className="hidden md:inline">{t('hero.ctaCalculate')}</span></>}
             </a>
-            {!fromBonusTopic && <div className="hidden md:contents"><UrgencyNote surface="ambulant" className="!mt-0" /></div>}
+            )}
+            {!GUIDED_CALLBACK_ENABLED && !fromBonusTopic && <div className="hidden md:contents"><UrgencyNote surface="ambulant" className="!mt-0" /></div>}
+            {GUIDED_CALLBACK_ENABLED ? (
+              <p className="max-w-xl text-sm leading-6 text-slate-300">{language === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+            ) : (
             <p className="max-w-xl text-left text-base leading-7 text-slate-300">
               <span className="md:hidden">{fromBonusTopic ? 'Abschluss und persönliche Hilfe bleiben freiwillig.' : language === 'en' ? 'Personal premium in the calculator. Your bonus may help pay it.' : 'Persönlicher Beitrag im Rechner. Dein Bonus kann mitzahlen.'}</span>
               <span className="hidden md:inline">{fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}</span>
-            </p>
+            </p>            )}
           </motion.div>
         </div>
 

@@ -10,6 +10,9 @@ import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll'
 import { useLanguage } from '@/hooks/useLanguage';
 import { getDesktopLeadContent } from './desktopLeadContent';
 import SceneHero, { sceneAccentClass, sceneBelow, scenePrimaryButtonClass } from './SceneHero';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
 
 const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', stationaer: '#tarife' };
 
@@ -70,9 +73,11 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const { getPath } = useLanguage();
   const reduceMotion = useReducedMotion();
   const isHome = surface === 'home';
+  const guidedCallbackEnabled = GUIDED_CALLBACK_ENABLED && ['home', 'ambulant', 'zahn', 'stationaer'].includes(surface);
+  const guidedCopy = getGuidedHomeContent(language);
   // Besuchertest 11.10.2026: Auf /zahn und /stationaer steht dieselbe Auswahl (zwei Zahn-Wege,
   // vier Klinik-Tarife) weiter unten ausführlich; die Kurzliste im Kopfbereich entfällt.
-  const showOffer = surface !== 'zahn' && surface !== 'stationaer';
+  const showOffer = surface !== 'zahn' && surface !== 'stationaer' && !(guidedCallbackEnabled && isHome);
   const headingId = `desktop-${surface}-heading`;
   const action = isHome ? KASSENBOOST_COMPARE_URL : fromBonusTopic && surface === 'ambulant' ? '#tarifwahl' : destinations[surface];
 
@@ -101,14 +106,26 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
       subtitle={isHome ? (
         <>
           {copy.description}{' '}
-          <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-[#5ee0b1] underline decoration-[#5ee0b1]/60 underline-offset-4 hover:text-white" onClick={() => trackEvent('home_budget_link', { placement: 'desktop-hero' })}>{copy.budgetLink}</Link>
+          {!guidedCallbackEnabled && <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-[#5ee0b1] underline decoration-[#5ee0b1]/60 underline-offset-4 hover:text-white" onClick={() => trackEvent('home_budget_link', { placement: 'desktop-hero' })}>{copy.budgetLink}</Link>}
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
-      actionHint={isHome ? copy.hint : undefined}
+      actionHint={guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
       urgency={isHome || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
       actions={(
         <>
-          <a
+          {guidedCallbackEnabled ? (
+            <>
+              <GuidedCallbackButton data-desktop-primary product={isHome ? 'any' : surface} className={scenePrimaryButtonClass}>
+                {guidedCopy.cta}
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </GuidedCallbackButton>
+              {isHome && (
+                <a href="#desktop-home-products" className="inline-flex min-h-11 items-center gap-2 font-semibold text-[#5ee0b1] underline underline-offset-4">
+                  {copy.discoverCta}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
+            </>
+          ) : <a
             data-desktop-primary
             href={action}
             {...(isHome ? { target: '_blank', rel: 'noopener noreferrer', 'aria-describedby': `desktop-${surface}-external` } : {})}
@@ -117,7 +134,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           >
             {copy.cta}
             {isHome ? <ArrowUpRight className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
-          </a>
+          </a>}
           {surface === 'stationaer' && (
             <>
               <a href="#einzelzimmer-kosten" className="inline-flex min-h-11 items-center font-semibold text-[#5ee0b1] underline underline-offset-4">
@@ -128,7 +145,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
               </a>
             </>
           )}
-          {isHome && <span id={`desktop-${surface}-external`} className="sr-only">{copy.externalHint}</span>}
+          {isHome && !guidedCallbackEnabled && <span id={`desktop-${surface}-external`} className="sr-only">{copy.externalHint}</span>}
         </>
       )}
     >
@@ -136,7 +153,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         <div className={isHome ? 'hidden' : 'min-w-0'}>
           {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}>{copy.description}</p>}
           {!isHome && <p className={sceneBelow.note}>{copy.condition}</p>}
-          {!isHome && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
+          {!isHome && !guidedCallbackEnabled && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>
         {showOffer && (isHome ? <div className="max-w-2xl"><OfferList copy={copy} surface={surface} /></div> : <OfferList copy={copy} surface={surface} />)}
       </div>

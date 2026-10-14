@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import GuidedJourney from '@/components/guided/GuidedJourney';
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { Link } from 'react-router-dom';
@@ -149,10 +152,21 @@ const ZahnPage = () => {
                   <span className="hidden text-[#5ee0b1] md:block">{content.hero.titleAccent}</span>
                 </HeroHeading>
                 <p className="mt-4 max-w-xl text-base leading-6 text-slate-200 sm:text-xl sm:leading-7 md:mt-6">
-                  <span className="md:hidden">{lang === 'en' ? 'ZahnPRIVAT 100: up to 100% of eligible costs, including statutory benefits. Find your route in one minute.' : 'ZahnPRIVAT 100: bis zu 100 % der erstattungsfähigen Kosten inklusive Kassenleistung. Finde deinen Weg in einer Minute.'}</span>
+                  <span className="md:hidden">{lang === 'en' ? (GUIDED_CALLBACK_ENABLED ? 'Find suitable cover for dentures, treatment and cleaning.' : 'ZahnPRIVAT 100: up to 100% of eligible costs, including statutory benefits. Find your route in one minute.') : (GUIDED_CALLBACK_ENABLED ? 'Passender Schutz für Zahnersatz, Behandlung und Zahnreinigung.' : 'ZahnPRIVAT 100: bis zu 100 % der erstattungsfähigen Kosten inklusive Kassenleistung. Finde deinen Weg in einer Minute.')}</span>
                   <span className="hidden md:inline">{content.hero.text}</span>
                 </p>
 
+                {GUIDED_CALLBACK_ENABLED ? (
+                  <div className="mt-6 flex flex-col items-start gap-2 md:mt-8">
+                    <GuidedCallbackButton product="zahn" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
+                      {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                    </GuidedCallbackButton>
+                    <a href="#zahn-check" onClick={(event) => scrollToCheck(event, reduceMotion)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
+                      {lang === 'en' ? 'Try the dental check first' : 'Erst den Zahn-Check machen'}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                    <p className="max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+                  </div>
+                ) : (<>
                 <a
                   href="#zahn-check"
                   onClick={(event) => scrollToCheck(event, reduceMotion)}
@@ -161,13 +175,14 @@ const ZahnPage = () => {
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
                 <UrgencyNote surface="zahn" />
+                </>)}
                 <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">
                   <span className="md:hidden">{lang === 'en' ? 'Health declarations and benefit limits apply. Treatment already recommended needs a separate check.' : 'Gesundheitsangaben und Leistungsgrenzen gelten. Bereits angeratene Behandlungen separat prüfen.'}</span>
                   <span className="hidden md:inline">{content.hero.condition}</span>
                 </p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
-                  {content.hero.micro.map((item) => (
+                  {(GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? ['Guided application', 'You review and decide'] : ['Begleiteter Antrag', 'Du prüfst und entscheidest']) : content.hero.micro).map((item) => (
                     <li key={item} className="inline-flex items-center gap-2">
                       <Check className="h-4 w-4 text-[#5ee0b1]" aria-hidden="true" />{item}
                     </li>
@@ -240,6 +255,8 @@ const ZahnPage = () => {
             </div>
           </div>
         </section>
+
+        {GUIDED_CALLBACK_ENABLED && <div className="order-[-3] md:order-none"><GuidedJourney product="zahn" /></div>}
 
         {lang === 'de' && (
           <div className="order-[-2] md:order-none">
@@ -372,7 +389,7 @@ const ZahnPage = () => {
         {/* Experiment Handy-Conversion 10/2026: Am Handy steht der Ablauf direkt nach den zwei
             Wegen (Reihenfolge 0), die Kassen-Abschnitte (1) sowie Beratung, Kontakt und
             Fragen (2) folgen danach. Ab md bleibt die bisherige Abfolge. */}
-        <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
+        {!GUIDED_CALLBACK_ENABLED && <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
           <div className="healio-container grid gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">
             <div className="min-w-0">
               <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] md:block md:text-xs text-[#087654]">{content.process.eyebrow}</p>
@@ -422,11 +439,11 @@ const ZahnPage = () => {
               <p className="col-span-2 mt-3 text-sm leading-6 text-slate-600 md:mt-4">{content.process.sealNote}</p>
             </aside>
           </div>
-        </section>
+        </section>}
 
-        <SalesAiAssist className="order-2 bg-white md:order-none" />
+        {!GUIDED_CALLBACK_ENABLED && <SalesAiAssist className="order-2 bg-white md:order-none" />}
         {/* Gleicher Kontaktblock wie auf /ambulant und /stationaer (Marktanalyse W6). */}
-        <ZielseitenKontakt placement="zahn" className="order-2 bg-white md:hidden" />
+        {!GUIDED_CALLBACK_ENABLED && <ZielseitenKontakt placement="zahn" className="order-2 bg-white md:hidden" />}
 
         <section className="order-2 bg-[#f4faf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-faq-heading">
           <div className="healio-container">
@@ -460,21 +477,26 @@ const ZahnPage = () => {
               <div className="absolute -right-20 -top-20 -z-10 h-72 w-72 rounded-full bg-[#25c990]/10" aria-hidden="true" />
               <div>
                 <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#5ee0b1]">{content.faq.finalEyebrow}</p>
-                <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{content.faq.finalTitle}</h2>
-                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{content.faq.finalText}</p>
+                <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Let’s find suitable dental cover.' : 'Finden wir deinen passenden Zahnschutz.') : content.faq.finalTitle}</h2>
+                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'We guide you from your questions to your application. You review it before making a decision.' : 'Wir begleiten dich von deinen Fragen bis zum Antrag. Du prüfst alles, bevor du entscheidest.') : content.faq.finalText}</p>
               </div>
+              {GUIDED_CALLBACK_ENABLED ? (
+                <GuidedCallbackButton product="zahn" className="mt-6 inline-flex min-h-14 w-full flex-none items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active lg:mt-0 lg:w-auto max-w-full whitespace-normal text-center py-3">
+                  {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                </GuidedCallbackButton>
+              ) : (
               <a
                 href="#zahn-check"
                 onClick={(event) => scrollToCheck(event, reduceMotion)}
                 className="mt-6 inline-flex min-h-14 w-full flex-none items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 font-display text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5ee0b1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07111f] md:mt-8 lg:mt-0 lg:w-auto"
               >
                 {content.faq.finalCta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </a>
+              </a>              )}
             </div>
           </div>
         </section>
 
-        {lang === 'de' && (
+        {!GUIDED_CALLBACK_ENABLED && lang === 'de' && (
           <div className="hidden md:block">
             <DentalCallbackForm />
           </div>
@@ -512,7 +534,7 @@ const ZahnPage = () => {
         )}
       </article>
 
-      <ZahnNitaPill />
+      {!GUIDED_CALLBACK_ENABLED && <ZahnNitaPill />}
     </>
   );
 };

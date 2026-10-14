@@ -11,6 +11,8 @@ import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
 
 const AnimatedLeadCaptureLink = motion(LeadCaptureLink);
 
@@ -41,6 +43,8 @@ const Header = () => {
   const isPregnancy = location.pathname === '/schwangerschaft';
   const isDental = location.pathname === '/zahn' || location.pathname === '/en/dental';
   const isInpatient = location.pathname === '/stationaer' || location.pathname === '/en/inpatient';
+  const guidedSurface = GUIDED_CALLBACK_ENABLED && (isHome || isAmbulant || isDental || isInpatient);
+  const guidedProduct = getGuidedProduct(location.pathname);
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
     || location.pathname === '/unternehmen/vorsorge-rechner'
@@ -367,7 +371,11 @@ const Header = () => {
           >
             {t('langSwitch')}
           </button>
-          {isAmbulant ? (
+          {guidedSurface ? (
+            <GuidedCallbackButton product={guidedProduct} className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full bg-home-mint px-5 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              {lang === 'de' ? 'Termin buchen' : 'Book an appointment'}<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </GuidedCallbackButton>
+          ) : isAmbulant ? (
             <AnimatePresence initial={false}>
               {showSolidHeader && ambulantCtaReady && (
                 <AnimatedLeadCaptureLink
@@ -416,7 +424,7 @@ const Header = () => {
             /schwangerschaft erscheint er erst nach dem Scrollen (scrolled) und
             nur unter md (768 px), damit der Desktop dort unverändert bleibt. */}
         <AnimatePresence initial={false}>
-          {mobileAnchorCta && mobileAnchorCta.visible && (
+          {!guidedSurface && mobileAnchorCta && mobileAnchorCta.visible && (
             <motion.a
               key={mobileAnchorCta.target}
               href={`#${mobileAnchorCta.target}`}
@@ -438,7 +446,7 @@ const Header = () => {
         </AnimatePresence>
 
         <AnimatePresence initial={false}>
-          {isAmbulant && showSolidHeader && ambulantCtaReady && (
+          {!guidedSurface && isAmbulant && showSolidHeader && ambulantCtaReady && (
             <AnimatedLeadCaptureLink
               href={ambulantSdkUrl}
               trackingCategory="sdk-ambulant"
@@ -459,6 +467,12 @@ const Header = () => {
             </AnimatedLeadCaptureLink>
           )}
         </AnimatePresence>
+
+        {guidedSurface && showSolidHeader && !mobileMenuOpen && (
+          <GuidedCallbackButton product={guidedProduct} data-guided-header="mobile" className="absolute right-[4.5rem] inline-flex min-h-11 items-center justify-center rounded-full bg-home-mint px-4 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden">
+            {lang === 'de' ? 'Termin buchen' : 'Book appointment'}
+          </GuidedCallbackButton>
+        )}
 
         <button
           ref={mobileMenuButtonRef}
@@ -564,7 +578,9 @@ const Header = () => {
                 asChild
                 className="w-full max-w-xs bg-home-mint hover:bg-home-mint-active text-home-midnight py-6 text-lg shadow-xl shadow-home-mint/20 rounded-xl mt-6 border-0 shrink-0"
               >
-                {isHome ? (
+                {guidedSurface ? (
+                  <GuidedCallbackButton product={guidedProduct} onClick={() => setMobileMenuOpen(false)}>{lang === 'de' ? 'Termin buchen' : 'Book an appointment'}</GuidedCallbackButton>
+                ) : isHome ? (
                   <a href={KASSENBOOST_COMPARE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                     {ctaLabel}
                   </a>

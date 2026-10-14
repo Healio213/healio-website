@@ -1,4 +1,6 @@
 import React from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedJourney from '@/components/guided/GuidedJourney';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -62,6 +64,7 @@ const AmbulantPage = () => {
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
+        {GUIDED_CALLBACK_ENABLED && <div className="order-1 md:order-none"><GuidedJourney product="ambulant" /></div>}
         {/* Frank 10.10.: Film direkt unter dem Hero, vor Siegeln und Karten. */}
         <div className="order-2 md:contents">
           <AmbulantExplainerVideo />

@@ -1,3 +1,6 @@
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
+
 const content = {
   de: {
     home: {
@@ -171,5 +174,10 @@ const content = {
 export const getDesktopLeadContent = (surface, language = 'de', fromBonusTopic = false) => {
   const locale = content[language] || content.de;
   const page = locale[surface] || locale.home;
-  return { ...locale, ...page, ...(surface === 'ambulant' && fromBonusTopic ? locale.bonusEntry : {}) };
+  return {
+    ...locale,
+    ...page,
+    ...(surface === 'ambulant' && fromBonusTopic ? locale.bonusEntry : {}),
+    ...(GUIDED_CALLBACK_ENABLED && surface === 'home' ? getGuidedHomeContent(language) : {}),
+  };
 };

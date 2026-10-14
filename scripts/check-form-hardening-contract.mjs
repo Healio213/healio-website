@@ -45,7 +45,8 @@ for (const path of formFiles) {
   const source = read(path);
   const ast = parse(source, {
     sourceType: 'module',
-    plugins: ['jsx'],
+    sourceFilename: path,
+    plugins: path.endsWith('.tsx') ? ['jsx', 'typescript'] : ['jsx'],
   });
   const forms = [];
 

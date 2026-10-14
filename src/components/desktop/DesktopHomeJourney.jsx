@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import { useLanguage } from '@/hooks/useLanguage';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import HomeContributionExample from '@/components/home/HomeContributionExample';
+import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
 
 // Frank 07.10.2026: dieselben Cartoon-Karten wie am Handy auch am Rechner.
 const stepScenes = ['/images/home-cards/schritt1-kasse.webp', '/images/home-cards/schritt2-schutz.webp', '/images/home-cards/schritt3-bonus.webp'];
@@ -136,12 +140,21 @@ const content = {
 };
 
 const DesktopHomeJourney = ({ language = 'de' }) => {
-  const copy = content[language] || content.de;
+  const guidedCopy = getGuidedHomeContent(language);
+  const copy = {
+    ...(content[language] || content.de),
+    ...(GUIDED_CALLBACK_ENABLED ? {
+      trustTitle: guidedCopy.trustTitle,
+      trustText: guidedCopy.trustText,
+      primaryCta: guidedCopy.cta,
+      ctaHint: guidedCopy.hint,
+    } : {}),
+  };
   const { getPath } = useLanguage();
 
   return (
     <div className="hidden lg:block">
-      <section
+      {!GUIDED_CALLBACK_ENABLED && <section
         id="desktop-home-process"
         className="scroll-mt-24 bg-[#f4f8f6] py-20 xl:py-24"
         aria-labelledby="desktop-home-process-title"
@@ -176,7 +189,7 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
             ))}
           </ol>
         </div>
-      </section>
+      </section>}
 
       <section
         id="desktop-home-products"
@@ -217,6 +230,8 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
         </div>
       </section>
 
+      {GUIDED_CALLBACK_ENABLED && <HomeContributionExample language={language} compact idPrefix="desktop-home-contribution" />}
+
       <section
         id="desktop-home-trust"
         className="bg-home-midnight py-20 text-white xl:py-24"
@@ -231,7 +246,11 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
               {copy.trustTitle}
             </h2>
             <p className="mt-5 max-w-[45ch] text-lg leading-8 text-[#d4e1e5]">{copy.trustText}</p>
-            <a
+            {GUIDED_CALLBACK_ENABLED ? (
+              <GuidedCallbackButton product="any" className="mt-8 inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-home-mint px-7 py-4 font-display text-base font-extrabold text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                {copy.primaryCta}<ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+              </GuidedCallbackButton>
+            ) : <a
               href={KASSENBOOST_COMPARE_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -239,7 +258,7 @@ const DesktopHomeJourney = ({ language = 'de' }) => {
             >
               {copy.primaryCta}
               <ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
-            </a>
+            </a>}
             <p className="mt-4 text-sm leading-6 text-[#c5d6de]">{copy.ctaHint}</p>
           </div>
 

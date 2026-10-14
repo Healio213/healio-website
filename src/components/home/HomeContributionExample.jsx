@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getDesktopLeadContent } from '@/components/desktop/desktopLeadContent';
 
-const HomeContributionExample = ({ language }) => {
+const HomeContributionExample = ({ language, compact = false, idPrefix = 'home-contribution' }) => {
   const { t } = useTranslation('home');
   const copy = getDesktopLeadContent('home', language);
   const english = language === 'en';
@@ -12,7 +12,7 @@ const HomeContributionExample = ({ language }) => {
     const ConditionsHeading = mobile ? 'h3' : 'summary';
     return (
       <>
-        <h2 id={mobile ? 'home-contribution-mobile-example' : 'home-contribution-example'} className="font-display text-xl font-extrabold leading-7">
+        <h2 id={`${idPrefix}-${mobile ? 'mobile-' : ''}example`} className="font-display text-xl font-extrabold leading-7">
           {english ? 'An example: premium minus bonus' : 'Ein Beispiel: Beitrag minus Bonus'}
         </h2>
         <p className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 font-display text-lg font-extrabold tabular-nums" aria-label={english ? 'EUR 470.28 annual premium minus EUR 400 assumed bonus equals EUR 70.28 annual cost' : '470,28 EUR Jahresbeitrag minus 400 EUR angenommener Bonus ergibt 70,28 EUR Jahresaufwand'}>
@@ -49,16 +49,16 @@ const HomeContributionExample = ({ language }) => {
   };
 
   return (
-    <section className="bg-[#eef6f2] px-4 py-4 text-home-midnight md:py-7 lg:hidden" aria-label={t('mobile.contribution.title')}>
+    <section className={`bg-[#eef6f2] px-4 py-4 text-home-midnight md:py-7 ${compact ? '' : 'lg:hidden'}`} aria-label={t('mobile.contribution.title')}>
       <div className="mx-auto max-w-2xl">
-        <details className="md:hidden">
+        <details className={compact ? undefined : 'md:hidden'}>
           <summary className="home-focus min-h-[44px] cursor-pointer py-2 font-display font-bold text-[#075f46]">
             {t('mobile.contribution.title')}
             <span className="mt-1 block text-sm font-normal text-[#334f46]">{t('mobile.contribution.hint')}</span>
           </summary>
           <div className="pb-2 pt-5">{exampleContent(true)}</div>
         </details>
-        <div className="hidden md:block">{exampleContent()}</div>
+        {!compact && <div className="hidden md:block">{exampleContent()}</div>}
       </div>
     </section>
   );

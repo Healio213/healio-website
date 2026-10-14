@@ -1,5 +1,7 @@
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -384,6 +386,10 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const [mobileOverviewOpen, setMobileOverviewOpen] = useState(false);
   const goal = copy.compass.goals[selectedGoal];
   const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
+  const guidedTariff = `SDK Ambulant ${tier.id} (${tier.code})`;
+  useEffect(() => {
+    if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('ambulant', guidedTariff);
+  }, [guidedTariff]);
   // Beiträge nie pauschal: ohne Geburtsjahr zeigt die Seite die Spanne über
   // alle Altersgruppen, mit Geburtsjahr den Beitrag der eigenen Gruppe.
   const geburtsjahr = parseGeburtsjahr(geburtsjahrEingabe);
@@ -425,7 +431,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           als Sprungziel erhalten: die Einstiegs-Knöpfe (href '#budget-kompass')
           landen mobil direkt vor der Tarifwahl, auch bevor das Skript geladen ist.
           Ab md sind Höhe, Sichtbarkeit und Abstände wie zuvor. */}
-      <section id="budget-kompass" className="invisible order-4 h-0 scroll-mt-20 overflow-hidden bg-home-ice px-4 py-0 sm:px-6 md:visible md:order-none md:h-auto md:overflow-visible md:py-24 lg:px-8">
+      <section id="budget-kompass" data-healio-nita-avoid="" className="invisible order-4 h-0 scroll-mt-20 overflow-hidden bg-home-ice px-4 py-0 sm:px-6 md:visible md:order-none md:h-auto md:overflow-visible md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
             <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.compass.eyebrow}</p>
@@ -510,7 +516,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
-      <section id="tarifwahl" className="order-5 scroll-mt-20 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
+      <section id="tarifwahl" data-healio-nita-avoid="" className="order-5 scroll-mt-20 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {fromBonusTopic && (
             <div className="mb-8 rounded-[1.6rem] border border-emerald-900/10 bg-home-ice p-5 sm:p-7 md:mb-10" role="note" aria-labelledby="bonus-topic-continuation-heading">
@@ -621,6 +627,17 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   </motion.div>
                 </AnimatePresence>
                 </div>
+                {GUIDED_CALLBACK_ENABLED ? (
+                  <div className="mt-5 md:mt-7">
+                    <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active md:inline-flex md:w-auto max-w-full whitespace-normal text-center py-3">
+                      {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                    </GuidedCallbackButton>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-home-slate">{language === 'en' ? 'We clarify health questions and your personal premium together.' : 'Gesundheitsfragen und persönlichen Beitrag klären wir gemeinsam.'}</p>
+                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" className="home-focus mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4">
+                      {language === 'en' ? 'Open the SDK calculator yourself (new tab)' : 'SDK-Rechner selbst öffnen (neuer Tab)'}
+                    </a>
+                  </div>
+                ) : (<>
                 <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
@@ -632,6 +649,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   className="mt-4 hidden max-w-2xl md:block"
                 />
                 <p className="mt-3 hidden max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
+                </>)}
                 <MobileDetails summary={language === 'en' ? 'Details for your selected tier' : 'Details zur gewählten Stufe'} className="mt-2">
                   <dl className="mb-4 divide-y divide-slate-200 md:hidden">
                     {POT_KEYS.map((potKey) => <div key={potKey} className="flex items-center justify-between gap-4 py-3"><dt className="text-sm font-semibold text-home-midnight">{copy.tiers.pots[potKey].label}</dt><dd className="shrink-0 text-base font-bold text-home-midnight">{euro.format(tier.pots[potKey])}</dd></div>)}
@@ -808,6 +826,24 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </>
       )}
 
+      {GUIDED_CALLBACK_ENABLED ? (
+        <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-20 lg:px-8" aria-labelledby="ambulant-guided-support-heading">
+          <div className="mx-auto max-w-7xl">
+            <h2 id="ambulant-guided-support-heading" className="max-w-2xl font-display text-3xl font-extrabold leading-tight text-home-midnight sm:text-4xl">{language === 'en' ? 'Your questions deserve time.' : 'Für deine Fragen nehmen wir uns Zeit.'}</h2>
+            <MobileSwipeRow label={language === 'en' ? 'Personal support with Healio' : 'Persönliche Begleitung mit Healio'} className="mt-6" desktopClassName="md:grid md:grid-cols-3 md:gap-5" mobileItemWidth="w-[78vw] max-w-[22rem]">
+              {PROCESS_VISUALS.map((visual) => (
+                <div key={visual.scene} className="overflow-hidden rounded-2xl bg-[#071726]">
+                  <img src={visual.scene} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover object-[50%_20%]" />
+                </div>
+              ))}
+            </MobileSwipeRow>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-home-slate">{language === 'en' ? 'We explain the options and guide you through the application. You review everything before deciding.' : 'Wir erklären dir die Möglichkeiten und begleiten dich durch den Antrag. Du prüfst alles, bevor du entscheidest.'}</p>
+            <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-6 font-display text-base font-extrabold text-white transition hover:bg-[#143247] max-w-full whitespace-normal text-center py-3">
+              {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
+            </GuidedCallbackButton>
+          </div>
+        </section>
+      ) : (
       <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl md:hidden">
           <h2 className="font-display text-2xl font-extrabold text-home-midnight">{language === 'en' ? 'Three simple steps.' : 'Drei einfache Schritte.'}</h2>
@@ -945,9 +981,11 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
         </div>
       </section>
 
+      )}
+
       {/* Gleicher Kontaktblock wie auf /zahn und /stationaer (Marktanalyse W6).
           Nicht auf dem neutralen Themen-Anschluss, der ohne Termin auskommt. */}
-      {!fromBonusTopic && <ZielseitenKontakt placement="ambulant" className="order-11 bg-[#fbfaf7] md:order-none" />}
+      {!GUIDED_CALLBACK_ENABLED && !fromBonusTopic && <ZielseitenKontakt placement="ambulant" className="order-11 bg-[#fbfaf7] md:order-none" />}
 
       <section className="order-11 bg-white px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8" itemScope itemType="https://schema.org/FAQPage">
         <div className="mx-auto max-w-4xl">
@@ -969,15 +1007,21 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           <div className="relative mt-10 overflow-hidden rounded-[2.2rem] bg-home-midnight px-5 py-8 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14 md:mt-14">
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-home-mint/15" />
             <p className="relative font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.finalEyebrow}</p>
-            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{copy.finalTitle}</h2>
-            <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
+            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{GUIDED_CALLBACK_ENABLED ? (language === 'en' ? 'Find suitable cover together.' : 'Gemeinsam zum passenden Schutz.') : copy.finalTitle}</h2>
+            <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{GUIDED_CALLBACK_ENABLED ? (language === 'en' ? 'Benefits, personal premium and application: we guide you through each step.' : 'Leistungen, persönlicher Beitrag und Antrag: Wir begleiten dich Schritt für Schritt.') : copy.finalText}</p>
             {/* Mobil ausgeblendet (Experiment Handy-Conversion 10/2026): derselbe Hinweis steht unter dem Knopf der Tarifwahl. */}
+            {GUIDED_CALLBACK_ENABLED ? (
+              <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active md:inline-flex md:w-auto max-w-full whitespace-normal text-center py-3">
+                {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
+              </GuidedCallbackButton>
+            ) : (<>
             <p className="relative mx-auto mt-4 hidden max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
             </LeadCaptureLink>
             <p className="relative mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">{copy.finalMicro}</p>
+            </>)}
             <div className="relative mt-3 md:mt-5">
               <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
             </div>

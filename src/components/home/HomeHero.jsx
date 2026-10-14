@@ -13,6 +13,10 @@ import HomeContributionExample from './HomeContributionExample';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { trackEvent } from '@/lib/analytics';
 import { getDesktopLeadContent } from '@/components/desktop/desktopLeadContent';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import GuidedJourney from '@/components/guided/GuidedJourney';
+import { getGuidedHomeContent } from './guidedHomeContent';
 
 const entranceEase = [0.16, 1, 0.3, 1];
 
@@ -28,8 +32,9 @@ const HomeHero = () => {
   const reducedMotion = useReducedMotion();
   const HeroHeading = useDesktopLayout() ? motion.h2 : motion.h1;
   const heroRef = useRef(null);
-  const titleLead = t('hero.titleLead');
-  const titleAccent = t('hero.titleAccent');
+  const guidedCopy = getGuidedHomeContent(lang);
+  const titleLead = GUIDED_CALLBACK_ENABLED ? guidedCopy.titleLead : t('hero.titleLead');
+  const titleAccent = GUIDED_CALLBACK_ENABLED ? guidedCopy.titleAccent : t('hero.titleAccent');
   const switchItems = t('hero.switch', { returnObjects: true });
   const switchList = Array.isArray(switchItems) ? switchItems : [];
 
@@ -61,7 +66,7 @@ const HomeHero = () => {
   });
 
   // Mobil: kurze Texte, die große Szene und die ursprünglichen Wischkarten bleiben sichtbar.
-  // Die bisherige Tablet-Fassung und der separate DesktopLead bleiben erhalten.
+  // Der begleitete Weg nutzt gebuchte Gesprächstermine mit dem Healio-Team.
   return (
     <div ref={heroRef}>
       <DesktopLead surface="home" language={lang} />
@@ -83,8 +88,8 @@ const HomeHero = () => {
             className="max-w-[20ch] [hyphens:manual] font-display text-[2.35rem] font-extrabold leading-[1.08] tracking-[-0.025em] md:leading-[1.035] md:tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] md:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
           >
             <span className="block md:hidden">
-              <span className="block">{t('mobile.hero.titleLead')}</span>
-              <span className="block text-home-mint-active">{t('mobile.hero.titleAccent')}</span>
+              <span className="block">{GUIDED_CALLBACK_ENABLED ? guidedCopy.titleLead : t('mobile.hero.titleLead')}</span>
+              <span className="block text-home-mint-active">{GUIDED_CALLBACK_ENABLED ? guidedCopy.titleAccent : t('mobile.hero.titleAccent')}</span>
             </span>
             <span className="hidden md:block">{titleLead}</span>{' '}
             <span className="relative mt-2 hidden w-fit md:inline-block max-w-full pb-[0.16em] text-[#F4FFF9] drop-shadow-[0_0_26px_rgba(37,201,144,0.32)]">
@@ -98,24 +103,33 @@ const HomeHero = () => {
           </HeroHeading>
 
           <div className="order-1 mt-4 md:hidden">
-            <p className="max-w-[32ch] text-base leading-6 text-white/90">{t('mobile.hero.description')}</p>
-            <Link
+            <p className="max-w-[32ch] text-base leading-6 text-white/90">{GUIDED_CALLBACK_ENABLED ? guidedCopy.description : t('mobile.hero.description')}</p>
+            {!GUIDED_CALLBACK_ENABLED && <Link
               to={getPath('ambulant')}
               className="home-focus mt-3 inline-flex min-h-11 items-center gap-2 font-bold leading-6 text-home-mint-active underline underline-offset-4"
               onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}
             >
               {t('mobile.hero.budgetLink')}
               <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-            </Link>
+            </Link>}
           </div>
 
           <motion.p {...entrance(0.17)} className="order-1 mt-4 hidden max-w-2xl md:block text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
-            {t('hero.description')}{' '}
-            <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-home-mint-active underline underline-offset-4" onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}>{getDesktopLeadContent('home', lang).budgetLink}</Link>
+            {GUIDED_CALLBACK_ENABLED ? guidedCopy.description : t('hero.description')}{' '}
+            {!GUIDED_CALLBACK_ENABLED && <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-home-mint-active underline underline-offset-4" onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}>{getDesktopLeadContent('home', lang).budgetLink}</Link>}
           </motion.p>
 
           <motion.div {...entrance(0.21)} className="order-2 mt-6 flex flex-col items-start md:mt-5">
-            <a
+            {GUIDED_CALLBACK_ENABLED ? (
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                <GuidedCallbackButton product="any" className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 font-display text-base font-extrabold leading-6 text-home-midnight transition hover:bg-home-mint-active">
+                  {guidedCopy.cta}<ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+                </GuidedCallbackButton>
+                <Link to={getPath('leistungen')} className="home-focus inline-flex min-h-11 items-center gap-2 font-semibold text-home-mint-active underline underline-offset-4">
+                  {guidedCopy.discoverCta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                </Link>
+              </div>
+            ) : <a
               href={KASSENBOOST_COMPARE_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -123,8 +137,8 @@ const HomeHero = () => {
               className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 font-display text-base font-extrabold leading-6 text-home-midnight transition hover:bg-home-mint-active"
             >
               <span className="md:hidden">{t('mobile.hero.primaryCta')}</span><span className="hidden md:inline">{t('hero.primaryCta')}</span><ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
-            </a>
-            <p className="mt-3 text-sm leading-6 text-white/80"><span className="md:hidden">{t('mobile.hero.ctaHint')}</span><span className="hidden md:inline">{t('hero.ctaHint')}</span></p>
+            </a>}
+            <p className={`mt-3 text-sm leading-6 text-white/80 ${GUIDED_CALLBACK_ENABLED ? 'max-w-[42ch]' : ''}`}>{GUIDED_CALLBACK_ENABLED ? guidedCopy.hint : <><span className="md:hidden">{t('mobile.hero.ctaHint')}</span><span className="hidden md:inline">{t('hero.ctaHint')}</span></>}</p>
           </motion.div>
 
           <motion.nav {...entrance(0.24)} className="order-3 mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
@@ -167,7 +181,7 @@ const HomeHero = () => {
         </div>
       </div>
       </section>
-      <HomeContributionExample language={lang} />
+      {GUIDED_CALLBACK_ENABLED ? <GuidedJourney product="any" showImages /> : <HomeContributionExample language={lang} />}
     </div>
   );
 };

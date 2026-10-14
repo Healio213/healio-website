@@ -30,6 +30,7 @@ export const emailjsService = {
   }),
   
   sendEmail: async (formData, pageSource) => {
+    let response;
     try {
       const normalizedParams = emailjsService.normalizeData(formData, pageSource);
       // Klick-Kennung der Google-Anzeige, damit Frank einen spaeteren
@@ -38,7 +39,7 @@ export const emailjsService = {
       // erlaubt ist; ohne beides bleibt das Feld leer. Damit sie in der
       // Mail sichtbar wird, muss die EmailJS-Vorlage {{gclid}} enthalten.
       const gclid = readGoogleClickId();
-      const response = await emailjs.send(
+      response = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
         {
@@ -47,18 +48,24 @@ export const emailjsService = {
           to_email: 'info@healio.de',
         }
       );
+    } catch (error) {
+      console.error('EmailJS: Versand konnte nicht bestätigt werden.');
+      throw error;
+    }
+
+    // Die Versandannahme steht fest. Eine ausgefallene Messung darf daraus
+    // keinen Versandfehler machen und damit einen erneuten Versand auslösen.
+    // Die bestehenden Messfunktionen prüfen weiterhin selbst die Einwilligung.
+    try {
       trackEvent('generate_lead', {
         component: 'contact_form',
         placement: toPlacementToken(pageSource),
       });
-      // Meta erfaehrt nur, DASS eine Anfrage abgeschickt wurde.
-      trackMetaLead();
-      // Google Ads ebenso: ein Conversion-Ereignis, sonst nichts.
-      trackGoogleAdsLead();
-      return { success: true, response };
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      throw error;
-    }
+    } catch { /* Messung beeinflusst die Versandbestätigung nicht. */ }
+    // Meta erfaehrt nur, DASS eine Anfrage abgeschickt wurde.
+    try { trackMetaLead(); } catch { /* Messung beeinflusst die Versandbestätigung nicht. */ }
+    // Google Ads ebenso: ein Conversion-Ereignis, sonst nichts.
+    try { trackGoogleAdsLead(); } catch { /* Messung beeinflusst die Versandbestätigung nicht. */ }
+    return { success: true, response };
   }
 };

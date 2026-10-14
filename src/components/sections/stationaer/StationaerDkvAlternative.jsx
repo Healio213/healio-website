@@ -1,4 +1,7 @@
 import React from 'react';
+import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+
 import { ArrowUpRight } from 'lucide-react';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
@@ -39,10 +42,17 @@ const StationaerDkvAlternative = () => {
         <p className="mt-2 max-w-[74ch] text-sm leading-relaxed text-[#426153]">{copy.note}</p>
       </div>
       <div className="flex flex-col items-start gap-2">
+        {GUIDED_CALLBACK_ENABLED ? (<>
+          <GuidedCallbackButton product="stationaer" tariff="DKV UZ1" onClick={() => setGuidedSelection('stationaer', 'DKV UZ1')} className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-home-midnight px-5 py-3 text-sm font-extrabold text-white transition hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46] sm:w-auto max-w-full whitespace-normal text-center">
+            {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+          </GuidedCallbackButton>
+          <a href={DKV_UZ1_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm font-semibold text-[#075f46] underline underline-offset-4">{lang === 'en' ? 'Open the DKV calculator yourself (new tab)' : 'DKV-Rechner selbst öffnen (neuer Tab)'}</a>
+        </>) : (<>
         <LeadCaptureLink href={DKV_UZ1_URL} trackingCategory="dkv-stationaer" target="_blank" rel="noopener noreferrer" aria-describedby="stationaer-dkv-destination" onClick={trackStationaerDkvClick} className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#071726] px-5 py-3 text-sm font-extrabold text-white transition hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46] sm:w-auto">
           {copy.cta}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
         </LeadCaptureLink>
-        <p id="stationaer-dkv-destination" className="text-sm leading-5 text-[#426153]">{copy.destination}</p>
+        </>)}
+        {!GUIDED_CALLBACK_ENABLED && <p id="stationaer-dkv-destination" className="text-sm leading-5 text-[#426153]">{copy.destination}</p>}
       </div>
     </article>
   );

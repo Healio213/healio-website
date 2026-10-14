@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { trackEvent } from '@/lib/analytics';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import HomeContributionExample from './HomeContributionExample';
 
 // Frank 07.10.2026: Karten liebevoller gestalten. Jeder Schritt zeigt oben
 // eine kleine Cartoon-Szene im Stil der Kopfbereiche (ohne Geld, ohne Schrift).
@@ -16,9 +18,11 @@ const stepVisuals = [
 
 const HowHealioWorks = () => {
   const { t } = useTranslation('home');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
   const steps = t('process.steps', { returnObjects: true });
   const mobileSteps = t('mobile.process.steps', { returnObjects: true });
+
+  if (GUIDED_CALLBACK_ENABLED) return <HomeContributionExample language={lang} compact />;
 
   return (
     <section id="so-funktioniert" className="home-section relative scroll-mt-20 overflow-hidden bg-[#FDFAF6] py-10 md:py-24 lg:py-28" aria-labelledby="how-healio-title">

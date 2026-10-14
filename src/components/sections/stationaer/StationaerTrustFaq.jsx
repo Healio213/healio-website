@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { useLanguage } from '@/hooks/useLanguage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +22,7 @@ const trustCards = [
 
 const StationaerTrustFaq = () => {
   const { t } = useTranslation('stationaer');
+  const { lang } = useLanguage();
   // Die erste Frage ist ab md (768 px) wie bisher offen. Mobil startet die Liste
   // zugeklappt, weil die erste Antwort die Kartentexte weiter oben fast wörtlich
   // wiederholt (Experiment Handy-Conversion 10/2026). Die Abfrage steht bewusst
@@ -128,16 +132,21 @@ const StationaerTrustFaq = () => {
         <div className="mx-auto mt-10 flex max-w-5xl flex-col items-center justify-between gap-6 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#0a6c50] to-[#063e35] px-6 py-8 text-center md:mt-16 md:py-9 text-white shadow-[0_24px_60px_rgba(6,62,53,0.18)] sm:px-9 md:flex-row md:text-left">
           <div>
             <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-[#9af0d1] md:text-xs md:tracking-[0.2em]">{t('refresh.final.eyebrow')}</p>
-            <h2 className="mt-2 max-w-[20ch] font-display text-2xl font-extrabold leading-tight [text-wrap:pretty] sm:text-3xl">{t('refresh.final.title')}</h2>
-            <p className="mt-2 max-w-2xl text-base leading-relaxed text-emerald-50/85 md:leading-6">{t('refresh.final.body')}</p>
+            <h2 className="mt-2 max-w-[20ch] font-display text-2xl font-extrabold leading-tight [text-wrap:pretty] sm:text-3xl">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Let’s clarify your hospital cover.' : 'Klären wir deinen Klinikschutz gemeinsam.') : t('refresh.final.title')}</h2>
+            <p className="mt-2 max-w-2xl text-base leading-relaxed text-emerald-50/85 md:leading-6">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'We guide you through the options and the application. You review everything before deciding.' : 'Wir begleiten dich durch die Auswahl und den Antrag. Du prüfst alles, bevor du entscheidest.') : t('refresh.final.body')}</p>
           </div>
+          {GUIDED_CALLBACK_ENABLED ? (
+            <GuidedCallbackButton product="stationaer" className="inline-flex min-h-12 w-full shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-extrabold text-[#075f46] transition hover:bg-[#e9fff7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto max-w-full whitespace-normal text-center">
+              {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+            </GuidedCallbackButton>
+          ) : (
           <a
             href="#tarife"
             className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-extrabold text-[#075f46] transition hover:-translate-y-0.5 hover:bg-[#e9fff7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
           >
             {t('refresh.hero.cta')}
             <ArrowUp className="h-4 w-4" aria-hidden="true" />
-          </a>
+          </a>          )}
         </div>
       </div>
     </section>

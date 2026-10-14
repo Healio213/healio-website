@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   AlertTriangle,
@@ -134,6 +136,13 @@ const DentalZahnCheck = () => {
 
   const resultKey = isDone ? computeResult(answers) : null;
   const result = resultKey ? content.results[resultKey] : null;
+  // Only the neutral product label is shared with the callback dialog. Health
+  // answers and the result variant stay inside this check's React state.
+  const guidedTariff = result?.ctaType === 'ukv' ? 'UKV ZahnPRIVAT'
+    : result?.ctaType === 'bayerische' ? 'Die Bayerische – Zahn mit ZAHN Sofort' : '';
+  useEffect(() => {
+    if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('zahn', guidedTariff);
+  }, [guidedTariff]);
   const question = currentQuestionId ? content.questions[currentQuestionId] : null;
   const options = question ? Object.entries(question.options || {}) : [];
 
@@ -172,6 +181,7 @@ const DentalZahnCheck = () => {
   return (
     <section
       id="zahn-check"
+      data-healio-nita-avoid=""
       className="relative isolate scroll-mt-6 overflow-hidden bg-[#07111f] px-4 py-12 text-white sm:px-6 md:scroll-mt-0 md:py-24 lg:px-8 lg:py-28"
       aria-labelledby="zahn-check-heading"
     >
@@ -263,13 +273,13 @@ const DentalZahnCheck = () => {
                   <h3 className="mt-4 max-w-[24ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl md:mt-7">
                     {question.text}
                   </h3>
-                  {/* Besuchertest 11.10.2026: Erklärtext und Zeitraum-Regel stehen im HTML,
-                      sind aber hinter "Warum fragen wir das?" eingeklappt. Die Frage und
-                      die Antwortknöpfe stehen so direkt untereinander. */}
-                  {(question.hint || question.rules) && (
+                  {currentQuestionId === 'q3' && question.hint && (
+                    <p className="mt-3 max-w-2xl text-base leading-6 text-slate-700 md:leading-7">{question.hint}</p>
+                  )}
+                  {((question.hint && currentQuestionId !== 'q3') || question.rules) && (
                     <details className="group mt-3 max-w-2xl" data-zahn-frage-erklaerung="">
                       <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1 font-display text-base font-bold text-[#087654] underline underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990] [&::-webkit-details-marker]:hidden">
-                        Warum fragen wir das?
+                        {lang === 'en' ? 'Why do we ask?' : 'Warum fragen wir das?'}
                       </summary>
                       {question.hint && <p className="mt-2 text-base leading-6 text-slate-600 md:leading-7">{question.hint}</p>}
                       {question.rules && (
@@ -346,7 +356,7 @@ const DentalZahnCheck = () => {
                     </p>
                   </div>
 
-                  {result.ctaType === 'ukv' && (
+                  {!GUIDED_CALLBACK_ENABLED && result.ctaType === 'ukv' && (
                     <p id="zahn-calculator-handoff" className="mt-5 rounded-2xl border border-[#c8deeb] bg-[#eff7fc] px-4 py-3 text-base leading-6 text-[#324d60] md:leading-7">
                       <strong className="font-display font-extrabold text-home-midnight">{content.calculatorHintLabel}</strong>{' '}
                       {result.calculatorHint}
@@ -354,7 +364,11 @@ const DentalZahnCheck = () => {
                   )}
 
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-7">
-                    {result.ctaType === 'contact' ? (
+                    {GUIDED_CALLBACK_ENABLED ? (
+                      <GuidedCallbackButton product="zahn" tariff={guidedTariff} className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-6 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-800 max-w-full whitespace-normal text-center py-3">
+                        {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                      </GuidedCallbackButton>
+                    ) : result.ctaType === 'contact' ? (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <a href={getPath('kontakt')}>{result.cta}<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" /></a>
                       </Button>
@@ -375,12 +389,22 @@ const DentalZahnCheck = () => {
                     </button>
                   </div>
 
+                  {GUIDED_CALLBACK_ENABLED && result.ctaType !== 'contact' && (
+                    <details className="mt-3">
+                      <summary className="min-h-11 cursor-pointer py-3 text-sm font-bold text-[#087654] underline underline-offset-4">{lang === 'en' ? 'Continue on my own instead' : 'Lieber selbst weitermachen'}</summary>
+                      {result.ctaType === 'ukv' && <p className="mb-2 text-sm leading-6 text-slate-600">{result.calculatorHint}</p>}
+                      <a href={CTA_HREFS[result.ctaType]} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#087654] underline underline-offset-4">
+                        {lang === 'en' ? 'Continue with the insurer yourself (new tab)' : 'Selbst beim Anbieter fortfahren (neuer Tab)'}<ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                      </a>
+                    </details>
+                  )}
+
                   {/* Zweiter, interner Weg zum Gespräch, etwa bei Fragen zur Lücke. Die
                       2-Jahres-Regel zu Heil- und Kostenplan und Anratung steht schon im
                       Hinweis des Ergebnisses; der Kontakt ergänzt sie nur. Es werden keine
                       Antworten aus dem Check übergeben, der Link führt nur auf die
                       Kontaktseite. */}
-                  {result.contactLabel && (
+                  {!GUIDED_CALLBACK_ENABLED && result.contactLabel && (
                     <a
                       href={getPath('kontakt')}
                       className="mt-4 inline-flex min-h-11 items-center gap-1 text-base font-bold text-[#087654] underline underline-offset-4"

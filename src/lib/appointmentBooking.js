@@ -9,11 +9,17 @@ export const APPOINTMENT_BOOKING = Object.freeze({
   location: 'Google Meet',
 });
 
+// Frank explicitly selected the existing website calendar for this launch.
+// The UI says appointment to match its current Google Meet setup.
+export const PHONE_APPOINTMENT_BOOKING = APPOINTMENT_BOOKING;
+
 export const getSafeAppointmentEmbedUrl = (value) => {
-  if (typeof value !== 'string' || value !== APPOINTMENT_BOOKING.embedUrl) return null;
+  const configuration = [APPOINTMENT_BOOKING, PHONE_APPOINTMENT_BOOKING]
+    .find((booking) => booking && booking.embedUrl === value);
+  if (typeof value !== 'string' || !configuration) return null;
   try {
     const url = new URL(value);
-    const booking = new URL(BOOKING_URL);
+    const booking = new URL(configuration.url);
     if (url.origin !== booking.origin || url.pathname !== booking.pathname) return null;
     if (url.username || url.password || url.hash) return null;
     return url.toString();

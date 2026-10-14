@@ -1,4 +1,6 @@
 import React from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedJourney from '@/components/guided/GuidedJourney';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
@@ -63,6 +65,7 @@ const StationaerPage = () => {
             <StationaerHero />
           </div>
         </Slot>
+        {GUIDED_CALLBACK_ENABLED && <Slot order="order-1"><GuidedJourney product="stationaer" /></Slot>}
         {lang === 'de' && (
           <Slot order="order-2">
             <ExplainerVideoCard
@@ -134,14 +137,14 @@ const StationaerPage = () => {
           <AmbulantIKKWechsel variant="stationaer" mobileSwipe sealsInMobileAwardsRow />
         </Slot>
         <Slot order="order-[14]">
-          <SalesAiAssist className="bg-[#fbfaf7]" />
+          {!GUIDED_CALLBACK_ENABLED && <SalesAiAssist className="bg-[#fbfaf7]" />}
         </Slot>
         {/* Gleicher Kontaktblock wie auf /ambulant und /zahn (Marktanalyse W6).
             Mobil direkt hinter Tarifwahl und zweitem Versicherer (order-8),
             damit eine Rückfrage früh möglich ist (Experiment Handy-Conversion
             10/2026); ab md bleibt er am Ende vor den Fragen. */}
         <Slot order="order-8">
-          <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />
+          {!GUIDED_CALLBACK_ENABLED && <ZielseitenKontakt placement="stationaer" className="bg-[#fbfaf7]" />}
         </Slot>
         <Slot order="order-last">
           <StationaerTrustFaq />

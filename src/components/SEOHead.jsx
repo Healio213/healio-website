@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import { serializeJsonLd } from '@/lib/contentSecurity';
+import { GUIDED_CALLBACK_PREVIEW } from '@/lib/guided-callback';
 
 const SITE_URL = 'https://healio.de';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/healio-linkvorschau-v2.png`;
@@ -138,7 +139,7 @@ const SEOHead = ({
       <meta name="twitter:image:alt" content={ogImageAlt} />
 
       {/* Additional SEO Meta Tags */}
-      <meta name="robots" content={robots} />
+      <meta name="robots" content={GUIDED_CALLBACK_PREVIEW ? 'noindex, nofollow' : robots} />
       <meta name="language" content={language} />
       <meta name="author" content="Healio" />
 

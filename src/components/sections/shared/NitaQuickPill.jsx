@@ -10,6 +10,7 @@ import {
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import { useLanguage } from '@/hooks/useLanguage';
 import { trackEvent } from '@/lib/analytics';
+import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
 
 // Experiment 05.10.2026 nach dem „Frag KI“-Knopf auf mercedes-benz.de: eine
 // schwebende Leiste mittig unten. Solange die Sprach-KI im Browser aus ist
@@ -275,6 +276,10 @@ const NitaQuickPill = ({ hideNearIds = [], mobileOnly = false }) => {
     dismissBubble();
     requestNitaConsent('quick_pill_bubble_advice');
   };
+
+  // The guided preview has an inline explanation and a persistent callback
+  // action. A second floating assistant must not cover these decisions.
+  if (GUIDED_CALLBACK_ENABLED && (getGuidedProduct(normalizedPath) !== 'any' || normalizedPath === '/' || normalizedPath === '/en')) return null;
 
   const mainClass = 'home-focus flex min-h-12 items-center gap-2 rounded-full pl-4 pr-3.5 text-left text-white transition hover:bg-white/[0.06]';
   const mainContent = (

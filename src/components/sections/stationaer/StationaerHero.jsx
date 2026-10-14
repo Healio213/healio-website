@@ -1,4 +1,7 @@
 import React from 'react';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { motion } from 'framer-motion';
@@ -60,6 +63,17 @@ const StationaerHero = () => {
             <span className="hidden md:inline">{t('refresh.hero.subtitle')}</span>
           </p>
 
+          {GUIDED_CALLBACK_ENABLED ? (
+            <div className="mt-6 flex flex-col items-start gap-2 md:mt-8">
+              <GuidedCallbackButton product="stationaer" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
+                {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+              </GuidedCallbackButton>
+              <a href="#tarife" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
+                {lang === 'en' ? 'Explore benefits first' : 'Erst Leistungen vergleichen'}<ArrowDown className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <p className="max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+            </div>
+          ) : (<>
           <a
             href="#tarife"
             className="mt-6 inline-flex min-h-12 w-full md:mt-8 md:w-auto items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
@@ -68,6 +82,7 @@ const StationaerHero = () => {
             <ArrowDown className="h-4 w-4" aria-hidden="true" />
           </a>
           <UrgencyNote surface="stationaer" />
+          </>)}
           <div className="mt-2 flex flex-wrap gap-x-6 md:mt-0 md:block">
             <a href="#einzelzimmer-kosten" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4 md:mt-2">
               <span className="md:hidden">{lang === 'en' ? 'Room costs' : 'Zimmerkosten'}</span><span className="hidden md:inline">{t('refresh.hero.costsCta')}</span>

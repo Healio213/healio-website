@@ -4,21 +4,29 @@ import ExternalProviderGate from '@/components/ExternalProviderGate';
 import { APPOINTMENT_BOOKING, getSafeAppointmentEmbedUrl } from '@/lib/appointmentBooking';
 import { trackMetaLead } from '@/lib/meta-pixel';
 import { trackGoogleAdsLead } from '@/lib/google-ads';
+import { GUIDED_CALLBACK_PREVIEW } from '@/lib/guided-callback';
 
 // Keep this file as a compatibility entry point; booking configuration is provider-neutral.
 const AppointmentBooking = ({
   className = 'h-[600px] md:h-[700px]',
   title,
+  booking = APPOINTMENT_BOOKING,
 }) => {
   const { pathname } = useLocation();
   const english = pathname === '/en' || pathname.startsWith('/en/');
   const frameTitle = title || (english ? 'Google Calendar appointment booking' : 'Google Kalender zur Terminvereinbarung');
-  const safeUrl = getSafeAppointmentEmbedUrl(APPOINTMENT_BOOKING.embedUrl);
+  const safeUrl = getSafeAppointmentEmbedUrl(booking.embedUrl);
+
+  if (GUIDED_CALLBACK_PREVIEW) {
+    return <div className="rounded-2xl bg-[#E6F2EA] p-6 text-center text-[#153C2B]" role="note">
+      {english ? 'Preview: appointment booking is available on the live website.' : 'Vorschau: Die Terminbuchung ist auf der Live-Website verfügbar.'}
+    </div>;
+  }
 
   return (
     <ExternalProviderGate
-      provider={APPOINTMENT_BOOKING.provider}
-      externalUrl={APPOINTMENT_BOOKING.url}
+      provider={booking.provider}
+      externalUrl={booking.url}
       placeholderClassName={className}
       embedAvailable={Boolean(safeUrl)}
     >
@@ -32,7 +40,7 @@ const AppointmentBooking = ({
           referrerPolicy="no-referrer"
         />
         <a
-          href={APPOINTMENT_BOOKING.url}
+          href={booking.url}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => { trackMetaLead(); trackGoogleAdsLead(); }}

@@ -3,6 +3,8 @@ import React, { useEffect, useRef, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import LeadCaptureProvider from '@/components/LeadCaptureProvider';
+import GuidedAppointmentDialog from '@/components/guided/GuidedAppointmentDialog';
+import { GUIDED_CALLBACK_ENABLED, GUIDED_CALLBACK_PREVIEW, isGuidedCallbackRoute } from '@/lib/guided-callback';
 import ScrollToTop from '@/components/ScrollToTop';
 import Layout from '@/components/Layout';
 import RouteNormalizer from '@/components/RouteNormalizer';
@@ -96,7 +98,8 @@ function App() {
   const location = useLocation();
   const lastTrackedPathRef = useRef(null);
   const lastMetaPathRef = useRef(null);
-  const isPrivateCheckRoute = isAnalyticsExcludedRoute(location);
+  const isPrivateCheckRoute = GUIDED_CALLBACK_PREVIEW || isAnalyticsExcludedRoute(location);
+  const isGuidedSurface = GUIDED_CALLBACK_ENABLED && isGuidedCallbackRoute(location.pathname);
   const isPregnancy = location.pathname === '/schwangerschaft';
   // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
   const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
@@ -155,9 +158,10 @@ function App() {
 
   // Meta-Funnel: eigener Pfad, eigene Zustimmung. /zahn und /ambulant sind
   // hier bewusst erlaubt, /schwangerschaft und private Kampagnenquellen nicht.
-  useEffect(() => initializeMetaPixel(), []);
+  useEffect(() => { if (!GUIDED_CALLBACK_PREVIEW) return initializeMetaPixel(); }, []);
 
   useEffect(() => {
+    if (GUIDED_CALLBACK_PREVIEW) return undefined;
     const trackMetaCurrentPage = (state) => {
       syncMetaConsent(state);
       if (isMetaExcludedRoute() || !hasConsent('marketing', state)) {
@@ -178,19 +182,21 @@ function App() {
   // Google Ads: eigener Pfad, dieselbe Zustimmung wie Meta. Ohne gesetzte
   // Konto-ID passiert hier gar nichts. Seitenaufrufe werden bewusst nicht
   // gemeldet, nur Rechnerstart und Anfrage.
-  useEffect(() => initializeGoogleAds(), []);
+  useEffect(() => { if (!GUIDED_CALLBACK_PREVIEW) return initializeGoogleAds(); }, []);
 
   useEffect(() => {
+    if (GUIDED_CALLBACK_PREVIEW) return;
     syncGoogleAdsConsent();
   }, [location.pathname]);
 
   return (
     <LeadCaptureProvider>
+      {GUIDED_CALLBACK_PREVIEW && <GuidedAppointmentDialog />}
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
-      {!isPregnancy && <NitaConsentWidget />}
-      {!isPregnancy && !isDentalPage && (
+      {!isGuidedSurface && !isPregnancy && <NitaConsentWidget />}
+      {!isGuidedSurface && !isPregnancy && !isDentalPage && (
         isLeisteMobilePage
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
           : <WhatsAppContactButton />

@@ -1,14 +1,18 @@
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
+import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { getGuidedHomeContent } from './guidedHomeContent';
 
 const HomeFinalCTA = () => {
   const { t } = useTranslation('home');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
+  const guidedCopy = getGuidedHomeContent(lang);
 
   return (
     <section className="bg-[#FDFAF6] px-4 pb-8 sm:px-6 sm:pb-10" aria-labelledby="home-final-cta-title">
@@ -18,21 +22,25 @@ const HomeFinalCTA = () => {
           <FriendlyIcon kind="calculator" tone="mint" size="xl" className="mx-auto -rotate-2 lg:mx-0" />
           <div>
             <h2 id="home-final-cta-title" className="mx-auto max-w-[23ch] font-display text-3xl font-bold leading-[1.06] tracking-[-0.025em] lg:mx-0 sm:text-4xl">
-              <span className="md:hidden">{t('mobile.finalCta.title')}</span>
-              <span className="hidden md:inline">{t('finalCta.title')}</span>
+              {GUIDED_CALLBACK_ENABLED ? guidedCopy.finalTitle : <><span className="md:hidden">{t('mobile.finalCta.title')}</span>
+              <span className="hidden md:inline">{t('finalCta.title')}</span></>}
             </h2>
-            <p className="mx-auto mt-3 hidden max-w-xl text-base md:block leading-7 text-slate-300 lg:mx-0">{t('finalCta.description')}</p>
+            <p className="mx-auto mt-3 hidden max-w-xl text-base md:block leading-7 text-slate-300 lg:mx-0">{GUIDED_CALLBACK_ENABLED ? guidedCopy.finalDescription : t('finalCta.description')}</p>
             {/* Experiment Handy-Conversion 10/2026: Derselbe Link steht schon am Ende von „So funktioniert“; am Handy nur dort. */}
-            <Link
+            {!GUIDED_CALLBACK_ENABLED && <Link
               to={getPath('kassenboost')}
               className="home-focus mt-1 hidden min-h-11 items-center gap-1.5 text-sm font-bold text-home-mint md:mt-3 md:inline-flex md:min-h-0 underline decoration-home-mint/40 decoration-2 underline-offset-4 transition hover:text-white"
             >
               {t('finalCta.detailsCta')}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </Link>
+            </Link>}
           </div>
 
-          <a
+          {GUIDED_CALLBACK_ENABLED ? (
+            <GuidedCallbackButton product="any" className="home-focus mx-auto inline-flex min-h-14 items-center gap-2 rounded-full bg-home-mint px-7 py-4 font-display text-sm font-extrabold text-home-midnight transition hover:bg-home-mint-active lg:mx-0">
+              {guidedCopy.cta}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </GuidedCallbackButton>
+          ) : <a
             href={KASSENBOOST_COMPARE_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -41,7 +49,7 @@ const HomeFinalCTA = () => {
             <span className="md:hidden">{t('mobile.finalCta.cta')}</span>
             <span className="hidden md:inline">{t('finalCta.cta')}</span>
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
+          </a>}
         </div>
       </div>
     </section>

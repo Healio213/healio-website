@@ -1,4 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
+import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +26,10 @@ const StationaerTariffSelector = () => {
   const { t } = useTranslation('stationaer');
   const { lang } = useLanguage();
   const [selected, setSelected] = useState('');
+  const guidedTariff = selected ? `SDK ${selected.toUpperCase()}` : '';
+  useEffect(() => {
+    if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('stationaer', guidedTariff);
+  }, [guidedTariff]);
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
   const helpVisible = useWhatsAppHelp();
@@ -42,10 +48,17 @@ const StationaerTariffSelector = () => {
 
   const choose = (key) => {
     if (key !== selected) scrollToResult.current = true;
+    // Re-selecting the active SDK card must also replace a later DKV/Bayerische
+    // callback choice; React would skip the effect for an unchanged state value.
+    if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('stationaer', `SDK ${key.toUpperCase()}`);
     setSelected(key);
   };
 
-  const calculateLink = selected ? (
+  const calculateLink = selected ? (GUIDED_CALLBACK_ENABLED ? (
+    <GuidedCallbackButton product="stationaer" tariff={guidedTariff} className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 text-sm font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center">
+      {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+    </GuidedCallbackButton>
+  ) : (
     <LeadCaptureLink
       href={sdkUrl}
       trackingCategory="sdk-stationaer"
@@ -57,10 +70,10 @@ const StationaerTariffSelector = () => {
       {t('refresh.selector.calculate')}
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
     </LeadCaptureLink>
-  ) : null;
+  )) : null;
 
   return (
-    <section id="tarife" className="scroll-mt-24 bg-[#f5faf8] py-12 md:py-24" aria-labelledby="stationaer-tariffs-heading">
+    <section id="tarife" data-healio-nita-avoid="" className="scroll-mt-24 bg-[#f5faf8] py-12 md:py-24" aria-labelledby="stationaer-tariffs-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <p className="hidden font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:block md:text-xs md:tracking-[0.22em]">
@@ -198,10 +211,10 @@ const StationaerTariffSelector = () => {
                   {t(`refresh.selector.options.${selected}.result`)}
                 </p>
                 <p className="mt-1 text-base leading-relaxed text-slate-300 md:text-sm md:leading-relaxed">
-                  {t('refresh.selector.resultNote')}
+                  {GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'We clarify the health questions and personal premium together.' : 'Gesundheitsfragen und persönlichen Beitrag klären wir gemeinsam.') : t('refresh.selector.resultNote')}
                 </p>
               </div>
-              {helpVisible ? (
+              {helpVisible && !GUIDED_CALLBACK_ENABLED ? (
                 <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:w-auto sm:max-w-xs sm:items-stretch">
                   {calculateLink}
                   <WhatsAppHelpHint placement="stationaer-rechner" variant="line" tone="dark" text={t('refresh.help.result')} />
@@ -220,6 +233,14 @@ const StationaerTariffSelector = () => {
             </motion.p>
           )}
         </AnimatePresence>
+
+        {GUIDED_CALLBACK_ENABLED && selected && (
+          <div className="mt-3 text-center">
+            <a href={sdkUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm font-semibold text-[#075f46] underline underline-offset-4">
+              {lang === 'en' ? 'Open the SDK calculator yourself (new tab)' : 'SDK-Rechner selbst öffnen (neuer Tab)'}
+            </a>
+          </div>
+        )}
 
         <WhatsAppHelpHint placement="stationaer-tarifwahl" variant="line" text={t('refresh.help.selector')} className="mx-auto mt-5 max-w-2xl text-center md:mt-6" />
 

@@ -4,12 +4,19 @@ import { fileURLToPath } from 'node:url';
 import { buildSync } from 'esbuild';
 import { JSDOM } from 'jsdom';
 import test from 'node:test';
+import { APPOINTMENT_BOOKING } from '../src/lib/appointmentBooking.js';
 
 // Echte Komponenten, Radix-Dialog und Router; nur Netzwerk/neue Tabs sind Stubs.
 // JSDOM lädt keine externen Ressourcen. Es gibt keinen echten Lead oder Antrag.
 const targetUrl = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
+const guidedRoutes = [
+  ['/', 'any'], ['/en', 'any'],
+  ['/ambulant', 'ambulant'], ['/en/outpatient', 'ambulant'],
+  ['/zahn', 'zahn'], ['/en/dental', 'zahn'],
+  ['/stationaer', 'stationaer'], ['/en/inpatient', 'stationaer'],
+];
 const rootDirectory = fileURLToPath(new URL('..', import.meta.url));
-const bundle = buildSync({
+const buildBundle = (guidedPreview = false) => buildSync({
   stdin: {
     contents: `
       import React, { act, useState } from 'react';
@@ -18,12 +25,14 @@ const bundle = buildSync({
       import { createInstance } from 'i18next';
       import { I18nextProvider, initReactI18next } from 'react-i18next';
       import Header from './src/components/Header.jsx';
+      import GuidedAppointmentDialog from './src/components/guided/GuidedAppointmentDialog.jsx';
+      import { GUIDED_CALLBACK_EVENT, GUIDED_CALLBACK_PREVIEW } from './src/lib/guided-callback.js';
       import LeadCaptureModal from './src/components/LeadCaptureModal.tsx';
       import LeadCaptureProvider from './src/components/LeadCaptureProvider.jsx';
       import LeadCaptureLink from './src/components/LeadCaptureLink.jsx';
       import * as capture from './src/lib/lead-capture.js';
       import * as consent from './src/lib/consent.js';
-      export { act, capture, consent };
+      export { act, capture, consent, GUIDED_CALLBACK_EVENT };
       function ModalHarness({ url, callbacks }) {
         const [open, setOpen] = useState(true);
         return <LeadCaptureModal isOpen={open} targetUrl={url} trackingCategory={url.includes('angebot=arag-v100') ? 'arag-v100' : url.includes('beitragsrechner.dkv.com') ? 'dkv-stationaer' : 'zahn-antrag'}
@@ -61,7 +70,7 @@ const bundle = buildSync({
         const root = createRoot(container);
         root.render(<I18nextProvider i18n={i18n}>
           <MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <LeadCaptureProvider><Header /></LeadCaptureProvider>
+            <LeadCaptureProvider><Header />{GUIDED_CALLBACK_PREVIEW && <GuidedAppointmentDialog />}</LeadCaptureProvider>
           </MemoryRouter>
         </I18nextProvider>);
         return root;
@@ -71,20 +80,23 @@ const bundle = buildSync({
     loader: 'jsx',
   },
   alias: { '@': `${rootDirectory}/src` },
-  define: { 'import.meta': '{"env":{}}' },
+  define: { 'import.meta': JSON.stringify({ env: { VITE_GUIDED_CALLBACK_PREVIEW: guidedPreview ? 'true' : 'false' } }) },
   external: ['react', 'react-dom/*', 'react-router-dom'],
   bundle: true,
   format: 'cjs',
   platform: 'node',
   write: false,
 });
+// Nur die ausdrücklich markierten Headerfälle verwenden die Termin-Vorschau.
+// Alle bestehenden Leitfaden-/Rechnerfälle behalten den normalen Release-Modus.
+const bundles = new Map([[false, buildBundle(false)], [true, buildBundle(true)]]);
 
 const nativeSetTimeout = globalThis.setTimeout;
 const nativeClearTimeout = globalThis.clearTimeout;
 const nativeFetch = globalThis.fetch;
 const require = createRequire(import.meta.url);
 
-const harness = async (mode = 'modal', { popupBlocked = false, ignoreAbort = false, path = '/zahn', url = targetUrl } = {}) => {
+const harness = async (mode = 'modal', { popupBlocked = false, ignoreAbort = false, path = '/zahn', url = targetUrl, guidedPreview = false } = {}) => {
   const dom = new JSDOM('<button id="return-focus">Vorheriger Fokus</button><div id="root"></div>', { url: `https://healio.de${path}`, pretendToBeVisual: true });
   Object.assign(globalThis, {
     window: dom.window, document: dom.window.document,
@@ -99,8 +111,11 @@ const harness = async (mode = 'modal', { popupBlocked = false, ignoreAbort = fal
     IS_REACT_ACT_ENVIRONMENT: true,
   });
   const module = { exports: {} };
+  const bundle = bundles.get(guidedPreview);
   new Function('require', 'module', 'exports', bundle.outputFiles[0].text)(require, module, module.exports);
-  const { act, capture, consent, mountModal, updateModal, mountProvider, mountHeader } = module.exports;
+  const { act, capture, consent, mountModal, updateModal, mountProvider, mountHeader, GUIDED_CALLBACK_EVENT } = module.exports;
+  const guidedRequests = [];
+  window.addEventListener(GUIDED_CALLBACK_EVENT, (event) => guidedRequests.push(event.detail));
   const order = [];
   const requests = [];
   const tabs = [];
@@ -182,37 +197,91 @@ const harness = async (mode = 'modal', { popupBlocked = false, ignoreAbort = fal
     globalThis.fetch = nativeFetch;
   };
   const changeTarget = async (newUrl) => act(() => updateModal(root, newUrl, callbacks));
-  return { act, capture, consent, callbacks, requests, tabs, order, timers, fill, setInput, submit, respond, reject, fireTimer, click, cleanup, changeTarget, setPopupBlocked: (value) => { popupsBlocked = value; } };
+  return { act, capture, consent, callbacks, requests, tabs, order, timers, guidedRequests, fill, setInput, submit, respond, reject, fireTimer, click, cleanup, changeTarget, setPopupBlocked: (value) => { popupsBlocked = value; } };
 };
 
-test('echte Desktop- und Mobil-Header-CTAs öffnen auf DE/EN zuerst das Modal und messen erst das bestätigte SDK-Öffnen', async () => {
-  for (const [path, placement] of [['/ambulant', 'desktop'], ['/ambulant', 'mobile'], ['/en/outpatient', 'desktop'], ['/en/outpatient', 'mobile']]) {
+test('befülltes Honeypot-Feld verhindert Lead-Anfrage, neue Tabs und Erfolgsmessung', async () => {
+  const h = await harness();
+  try {
+    h.consent.saveConsentPreferences({ analytics: true, marketing: true });
+    const form = document.querySelector('form');
+    assert.equal(form.getAttribute('method'), 'post');
+    assert.equal(form.getAttribute('action'), '/kontakt');
+    await h.fill();
+    await h.setInput('healio_website', 'synthetic-bot-value');
+    await h.submit();
+    assert.equal(h.requests.length, 0);
+    assert.equal(h.tabs.length, 0);
+    assert.deepEqual(h.callbacks, { closed: 0, opened: 0 });
+    assert.equal(h.capture.hasCapturedLeadThisSession(), false);
+    assert.equal((window.dataLayer || []).filter((entry) => entry[0] === 'event').length, 0);
+  } finally { await h.cleanup(); }
+});
+
+test('DE/EN-Header verlinkt im Release direkt den bestehenden Kalender in einem sicheren neuen Tab', async () => {
+  for (const [path, product] of guidedRoutes) for (const placement of ['desktop', 'mobile']) {
     const h = await harness('header', { path });
     try {
-      // Die echte Statistikfunktion wird lokal ausgeführt; jsdom lädt keine Tags.
-      h.consent.saveConsentPreferences({ analytics: true });
+      h.consent.saveConsentPreferences({ analytics: true, marketing: true });
       Object.defineProperty(window, 'scrollY', { configurable: true, value: 120 });
       await h.act(() => window.dispatchEvent(new window.Event('scroll')));
-      await h.fireTimer(30000);
-      const selector = `[data-ambulant-header-cta="${placement}"]`;
-      const expectedUrl = document.querySelector(selector).href;
-      assert.match(expectedUrl, /^https:\/\/insurances-online\.levelnine\.biz\//);
-      const tariffEvents = () => (window.dataLayer || []).filter((entry) => entry[0] === 'event' && entry[1] === 'tariff_calculator_click');
+      const selector = placement === 'mobile'
+        ? `[data-guided-callback="${product}"][data-guided-header="mobile"]`
+        : `[data-guided-callback="${product}"]:not([data-guided-header="mobile"])`;
+      const link = document.querySelector(selector);
+      assert.equal(link?.tagName, 'A', `${path}/${placement}: direkter Kalenderlink`);
+      assert.equal(link.getAttribute('href'), APPOINTMENT_BOOKING.url);
+      assert.equal(link.target, '_blank');
+      assert.deepEqual([...link.relList].sort(), ['noopener', 'noreferrer']);
+      assert.equal(document.querySelector('[data-guided-preview-notice], [role="dialog"], iframe'), null);
+      // Ziel und Schutzattribute prüfen, ohne den externen Kalender aufzurufen.
+      assert.equal(h.requests.length, 0);
+      assert.equal(h.tabs.length, 0);
+      assert.equal(h.guidedRequests.length, 0);
+      assert.equal(h.capture.hasCapturedLeadThisSession(), false);
+      assert.equal((window.dataLayer || []).filter((entry) => entry[0] === 'event').length, 0);
+    } finally { await h.cleanup(); }
+  }
+});
+
+test('DE/EN-Header öffnet in der Vorschau den Termin-Platzhalter und schließt ohne Anfrage oder Conversion', async () => {
+  for (const [path, product] of guidedRoutes) for (const placement of ['desktop', 'mobile']) {
+    const h = await harness('header', { path, guidedPreview: true });
+    try {
+      // Die echte Statistikfunktion wird lokal ausgeführt; jsdom lädt keine Tags.
+      h.consent.saveConsentPreferences({ analytics: true, marketing: true });
+      Object.defineProperty(window, 'scrollY', { configurable: true, value: 120 });
+      await h.act(() => window.dispatchEvent(new window.Event('scroll')));
+      const english = path.startsWith('/en');
+      const selector = placement === 'mobile'
+        ? `[data-guided-callback="${product}"][data-guided-header="mobile"]`
+        : `[data-guided-callback="${product}"]:not([data-guided-header="mobile"])`;
+      const trigger = document.querySelector(selector);
+      assert.equal(trigger?.tagName, 'BUTTON');
+      assert.equal(trigger.textContent, placement === 'mobile'
+        ? (english ? 'Book appointment' : 'Termin buchen')
+        : (english ? 'Book an appointment' : 'Termin buchen'));
+      assert(document.querySelector('[data-guided-preview-notice]'));
       await h.click(selector);
-      assert(document.querySelector('[role="dialog"]'));
-      assert.match(document.querySelector('[role="dialog"] h2').textContent, path.startsWith('/en') ? /outpatient premium/ : /Ambulanten Beitrag/);
-      assert.equal(document.querySelector('[role="dialog"]').lang, path.startsWith('/en') ? 'en' : 'de');
-      assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
-      assert.equal(tariffEvents().length, 0);
-      await h.fill(); await h.submit();
-      assert.equal(h.requests.length, 1);
-      assert.equal(JSON.parse(h.requests[0].options.body).trackingCategory, 'sdk-ambulant');
-      assert.equal(h.tabs[0].destination, undefined); assert.equal(tariffEvents().length, 0);
-      await h.respond(0);
-      assert.equal(h.tabs[0].destination, expectedUrl);
-      assert.equal(tariffEvents().length, 1);
-      assert.equal(tariffEvents()[0][2].placement, `ambulant-header-${placement}`);
+      const dialog = document.querySelector('[role="dialog"]');
+      assert(dialog);
+      assert.deepEqual(h.guidedRequests, [{ product, tariff: '' }]);
+      assert.equal(dialog.querySelector('h2').textContent, english ? 'Your appointment with Healio.' : 'Dein Termin mit Healio.');
+      assert.match(dialog.textContent, english ? /This preview does not book appointments/ : /Diese Vorschau bucht keine Termine/);
+      assert.doesNotMatch(dialog.textContent, /Wir rufen dich|We call you/);
+      assert.equal(dialog.querySelector('form, input, textarea, iframe'), null);
+      assert.ok(document.activeElement === dialog.querySelector('h2'), `${path}/${placement}: Dialogtitel erhält den Fokus`);
+      assert.equal(h.requests.length, 0);
+      assert.equal(h.tabs.length, 0);
+      assert.equal(h.capture.hasCapturedLeadThisSession(), false);
+      assert.equal((window.dataLayer || []).filter((entry) => entry[0] === 'event').length, 0);
+      await h.click(`[role="dialog"] button[aria-label="${english ? 'Close' : 'Schließen'}"]`);
+      // Radix gibt den Fokus nach dem Abbau seines FocusScope per Timer zurück.
+      await h.act(() => new Promise((resolve) => nativeSetTimeout(resolve, 1)));
       assert.equal(document.querySelector('[role="dialog"]'), null);
+      assert.ok(document.activeElement === trigger, `${path}/${placement}: Schließen stellt den Auslöserfokus wieder her`);
+      assert.equal(h.requests.length, 0);
+      assert.equal(h.tabs.length, 0);
     } finally { await h.cleanup(); }
   }
 });
@@ -392,7 +461,7 @@ test('HTTP-Erfolg ohne bestätigendes JSON und Netzwerkfehler setzen kein Sitzun
       assert.equal(h.tabs[0].closed, true); assert.equal(h.capture.hasCapturedLeadThisSession(), false);
       assert.equal(window.sessionStorage.length, 0); assert.equal(h.callbacks.opened, 0);
       assert(document.querySelector('[role="alert"]'));
-      for (const field of document.querySelectorAll('form input')) {
+      for (const field of document.querySelectorAll('form input:not([aria-hidden="true"])')) {
         assert.equal(field.getAttribute('aria-invalid'), 'false', 'Übertragungsfehler sind keine Feldfehler');
         assert.equal(field.getAttribute('aria-describedby'), null);
       }
@@ -627,7 +696,7 @@ test('Zahndialog erklärt auf DE/EN den Rechnerwechsel und verspricht ausschlie�
       assert.match(dialog.textContent, english ? /new tab/ : /neuen Tab/);
       assert.match(dialog.textContent, english ? /No newsletter/ : /Kein Newsletter/);
       assert.doesNotMatch(dialog.textContent, /Tarifdetails|Tarifübersicht|Zahnzusatz-Fahrplan|plan overview/);
-      assert.equal(document.querySelectorAll('input').length, 2);
+      assert.equal(document.querySelectorAll('input:not([aria-hidden="true"])').length, 2);
       assert.equal(h.requests.length, 0); assert.equal(h.tabs.length, 0);
       if (english) {
         assert.match(dialog.textContent, /guide and email are in German/);
@@ -670,7 +739,7 @@ test('englischer Dialog behält Sprache, Eingaben, UUID und Popup-Fallback bei V
 
     await h.reject(0);
     assert.match(document.querySelector('[role="alert"]').textContent, /Your guide could not be requested/);
-    for (const field of document.querySelectorAll('form input')) {
+    for (const field of document.querySelectorAll('form input:not([aria-hidden="true"])')) {
       assert.equal(field.getAttribute('aria-invalid'), 'false');
       assert.equal(field.getAttribute('aria-describedby'), null);
     }
