@@ -139,6 +139,66 @@
       "permanent": true
     },
     {
+      "source": "/blog/ikk-classic-bonus-700-euro",
+      "destination": "/ratgeber/ikk-classic-bonusprogramm-2026",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/ikk-classic-bonus-700-euro",
+      "destination": "/ratgeber/ikk-classic-bonusprogramm-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/heilpraktiker-zusatzversicherung-vergleich-2026",
+      "destination": "/ratgeber/heilpraktiker-zusatzversicherung",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/heilpraktiker-zusatzversicherung-vergleich-2026",
+      "destination": "/ratgeber/heilpraktiker-zusatzversicherung",
+      "permanent": true
+    },
+    {
+      "source": "/blog/osteopathie-krankenkasse-2026",
+      "destination": "/ratgeber/osteopathie-krankenkasse",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/osteopathie-krankenkasse-2026",
+      "destination": "/ratgeber/osteopathie-krankenkasse",
+      "permanent": true
+    },
+    {
+      "source": "/blog/heilpraktiker-kosten-guide-2026",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/heilpraktiker-kosten-guide-2026",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
+      "source": "/blog/heilpraktiker-kosten-bonus-finanziert",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/heilpraktiker-kosten-bonus-finanziert",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
+      "source": "/blog/heilpraktiker-kosten-gkv-erstattung-healio",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/heilpraktiker-kosten-gkv-erstattung-healio",
+      "destination": "/ratgeber/heilpraktiker-kosten",
+      "permanent": true
+    },
+    {
       "source": "/en/blog/:slug",
       "destination": "/blog/:slug",
       "permanent": true

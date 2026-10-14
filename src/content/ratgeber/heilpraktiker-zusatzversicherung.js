@@ -29,6 +29,15 @@
  *   - Einbau 07.10.2026: H1 gekürzt (vorher "... und wo ihre Grenzen liegen"),
  *     damit der Kurzantwort-Weg bei 390 px im ersten Bildschirm liegt (vorher
  *     872 px Unterkante).
+ *
+ * Zusammenlegung 14.10.2026 (Semrush-Analyse, Kannibalisierung): Der
+ * Blogartikel heilpraktiker-zusatzversicherung-vergleich-2026 ist in diese
+ * Seite übernommen und leitet per 301 hierher (vercel.json). Übernommen nur,
+ * was belegt ist: Wartezeit-Abschnitt (SDK AVB Teil II, Abschnitt II),
+ * für wen es passt und für wen nicht, Beitragsentwicklung, Kassenbonus mit
+ * IKK-Beispiel (Werte aus ikk-classic-bonusprogramm-2026, Beitrag AP1 21 bis
+ * 30 Jahre). Suchbegriffe: zusatzversicherung heilpraktiker,
+ * heilpraktikerversicherung, versicherung für heilpraktiker, ohne wartezeit.
  */
 
 export const article = {
@@ -36,12 +45,14 @@ export const article = {
   kind: 'ratgeber',
   group: 'ambulant',
 
-  metaTitle: 'Heilpraktiker Zusatzversicherung: worauf es ankommt | Healio',
+  metaTitle: 'Heilpraktiker Zusatzversicherung: Leistung, Wartezeit | Healio',
   metaDescription:
-    'Heilpraktiker Zusatzversicherung im Check: Kriterien statt Rangliste, was die Bedingungen erstatten, Gesundheitsfragen im Antrag und was schon läuft.',
+    'Zusatzversicherung Heilpraktiker: was nach GebüH erstattet wird, Wartezeit, Gesundheitsfragen ohne Ablehnung, Rechenbeispiel und wie dein Kassenbonus hilft.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-14',
+  updatedAtLabel: '14. Oktober 2026',
   readingTimeMinutes: 10,
 
   listTitle: 'Heilpraktiker-Zusatzversicherung: Kriterien, Grenzen und ein Rechenbeispiel',
@@ -77,6 +88,10 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Der Tarif zahlt einen Teil der Rechnung, den die Bedingungen als erstattungsfähig einstufen. Die gesetzliche Krankenkasse übernimmt Heilpraktikerbehandlungen dagegen in der Regel nicht. Ärztliche Behandlung wird nach § 15 SGB V von Ärzten erbracht, und die Verbraucherzentrale schreibt etwa zur Akupunktur, dass Sitzungen beim Heilpraktiker aus eigener Tasche zu zahlen sind. Einzelne Kassen zahlen nach ihrer Satzung Zuschüsse in angrenzenden Bereichen, etwa für Osteopathie oder für naturheilkundliche Arzneimittel auf ärztliches Privatrezept.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Ob du sie Heilpraktikerversicherung, Zusatzversicherung für den Heilpraktiker oder ambulanten Zusatztarif nennst, gemeint ist dasselbe: eine private Krankenzusatzversicherung, die neben deiner gesetzlichen Kasse läuft und Rechnungen für Naturheilverfahren erstattet. Mit einer Berufshaftpflicht für Heilpraktiker, also einer Versicherung für die Praxis selbst, hat sie nichts zu tun.',
         },
         {
           type: 'paragraph',
@@ -129,6 +144,32 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Lies außerdem, wie der Versicherer den Begriff Naturheilverfahren abgrenzt. Die SDK trennt im Glossar zwischen klassischen Naturheilverfahren und sogenannten Außenseiterverfahren, die sie als wissenschaftlich nicht anerkannt beschreibt. Ob deine Methode erstattet wird, entscheidet am Ende der Versicherer nach seinen Bedingungen.',
+        },
+      ],
+    },
+    {
+      id: 'wartezeit',
+      heading: 'Gibt es eine Heilpraktiker-Zusatzversicherung ohne Wartezeit?',
+      blocks: [
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Ja. Die ambulanten Tarife der SDK sehen laut ihren ' },
+            { text: 'Tarifbedingungen', href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf' },
+            { text: ' (Teil II, Abschnitt II) keine Wartezeiten vor. Der Schutz gilt ab dem vereinbarten Versicherungsbeginn. Üblich ist das nicht überall: Die Verbraucherzentrale nennt drei Monate als gängige Wartezeit bei Zusatzversicherungen. Lies diesen Punkt deshalb in jedem Angebot nach, bevor du Tarife vergleichst.' },
+          ],
+        },
+        {
+          type: 'paragraph',
+          text: 'Ohne Wartezeit heißt aber nicht, dass schon Begonnenes mitversichert ist. Für Versicherungsfälle, die vor dem Versicherungsbeginn eingetreten sind, leistet der Versicherer nach den Allgemeinen Bedingungen der SDK (Teil I, A.4) nicht. Wer mitten in einer Behandlungsserie abschließt, bekommt diese Serie also nicht erstattet. Gesundheitsfragen stellt der Antrag trotzdem, darum geht es im nächsten Abschnitt.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Was der Wegfall der Wartezeit im Alltag bedeutet und ab welchem Tag die erste Rechnung zählt, erklärt der Ratgeber ' },
+            { text: 'Heilpraktiker-Zusatzversicherung ohne Wartezeit', to: '/ratgeber/heilpraktiker-zusatzversicherung-ohne-wartezeit' },
+            { text: '.' },
+          ],
         },
       ],
     },
@@ -207,6 +248,22 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Das Beispiel zeigt etwas, das in vielen Vergleichen fehlt: Wenn du nur Heilpraktikerkosten im Blick hast, kann der Beitrag über zwei Jahre höher liegen als das, was der Topf zurückgibt. Anders sieht die Rechnung aus, wenn du auch Brille, Vorsorge oder gesetzliche Zuzahlungen nutzt und ein Bonus einen Teil des Beitrags trägt. Dann gehört alles zusammen auf den Tisch.',
+        },
+        {
+          type: 'list',
+          items: [
+            { lead: 'Passt eher,', text: 'wenn du mehrere Termine im Jahr beim Heilpraktiker oder in der Osteopathie fest einplanst, wenn der Zuschuss deiner Kasse dafür nicht reicht oder wenn du Vorsorge und Brille ohnehin nutzt.' },
+            { lead: 'Passt eher nicht,', text: 'wenn du nur selten privat zahlst. Dann ist der Beitrag oft höher als der Nutzen. Prüf auch genau, wenn eine Behandlung schon läuft oder angeraten ist, denn die ist nicht versichert.' },
+            { lead: 'Beitrag über die Jahre.', text: 'Der Monatsbeitrag ist nur der Einstieg. Er richtet sich nach dem erreichten Alter und kann angepasst werden. Rechne deshalb nicht nur mit dem ersten Jahr.' },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Der größte Hebel liegt oft beim Bonusprogramm deiner Kasse. Ein Beispiel mit den Satzungswerten der IKK classic: Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung, dazu Fitnessstudio, Sportverein, BMI und Blutdruck ergeben als Zuschuss 405 EUR im Jahr. Der Jahresbeitrag für Ambulant 100 liegt in der Altersgruppe 21 bis 30 bei 379,68 EUR. Der Zuschuss kann ihn in diesem Fall ganz tragen, erstattet wird aber höchstens der gezahlte Beitrag. Ausgezahlt wird erst nach dem Antrag im Folgejahr, bis dahin zahlst du den Beitrag selbst. Gegenzurechnen ist der Zusatzbeitrag der IKK classic von 3,85 Prozent. Alle Positionen und die Rechnung dazu stehen im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: '.' },
+          ],
         },
         {
           type: 'honest',
@@ -323,6 +380,21 @@ export const article = {
         'Bei den ambulanten SDK-Tarifen sehen die Bedingungen keine Wartezeiten vor. Das ist nicht überall so. Die Verbraucherzentrale nennt drei Monate als übliche Wartezeit bei Zusatzversicherungen, bei Zahnersatz in der Regel acht Monate.',
     },
     {
+      question: 'Zahlt eine Heilpraktikerversicherung alle Heilpraktiker-Kosten?',
+      answer:
+        'Nein. Erstattet wird nach den Bedingungen des Tarifs: mit einem Erstattungssatz, einem Höchstbetrag für einen festen Zeitraum und nur für Leistungen, die als erstattungsfähig gelten. Bei den ambulanten SDK-Tarifen muss die Rechnung nach dem GebüH gestellt sein, und Behandlungen, die vor dem Versicherungsbeginn begonnen haben, sind nicht versichert.',
+    },
+    {
+      question: 'Muss ich für eine Zusatzversicherung beim Heilpraktiker die Krankenkasse wechseln?',
+      answer:
+        'Nein. Die Zusatzversicherung ist ein eigener privater Vertrag und läuft neben jeder gesetzlichen Kasse. Ob dein Kassenbonus als Zuschuss beim Beitrag hilft, hängt aber vom Bonusprogramm deiner Kasse ab.',
+    },
+    {
+      question: 'Ist der günstigste Tarif automatisch schlecht?',
+      answer:
+        'Nicht unbedingt. Wenn du nur wenige Termine planst, kann eine niedrigere Stufe reichen. Entscheidend ist, dass Erstattungssatz und Höchstbetrag zu dem passen, was du wirklich nutzt.',
+    },
+    {
       question: 'Zahlt der Tarif auch Psychotherapie beim Heilpraktiker?',
       answer:
         'Nein. Die Bedingungen der ambulanten SDK-Tarife nehmen Psychotherapie durch Heilpraktiker ausdrücklich von der Erstattung aus.',
@@ -345,8 +417,8 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-07',
-    checkedAtLabel: '7. Oktober 2026',
+    checkedAt: '2026-10-14',
+    checkedAtLabel: '14. Oktober 2026',
     intro: 'Die Tarifaussagen stammen aus den Bedingungen der SDK, die Rechtslage aus den Gesetzen, die Hinweise zu Wartezeiten und Leistungsgrenzen von der Verbraucherzentrale.',
     items: [
       {
@@ -389,6 +461,14 @@ export const article = {
         publisher: 'gesetze-im-internet.de (BMJV)',
         href: 'https://www.gesetze-im-internet.de/sgb_5/__15.html',
         accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Satzung der IKK classic, § 34 Bonusprogramm, und Infoblatt zum IKK Bonus 2026',
+        publisher: 'IKK classic',
+        href: 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf',
+        stand: '04/2026',
+        accessedAt: '14.10.2026',
+        note: 'Beträge des Zuschussbeispiels, Zusatzbeitrag laut Beitragsseite der IKK classic',
       },
       {
         label: 'Beitragstabelle und Tarifstufen der ambulanten SDK-Tarife, wie auf healio.de/ambulant',

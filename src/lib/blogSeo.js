@@ -7,18 +7,12 @@ export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'healio-konzept-fuer-heilpraktiker': 'https://healio.de/images/video-partner-thumb.jpg',
   'krankenhauszusatzversicherung-sportverein-best-ager': 'https://healio.de/images/erklaervideo-stationaer-poster.jpg',
   'zahnzusatzversicherung-trotz-angeratener-behandlung': 'https://healio.de/images/erklaervideo-zahn-poster.jpg',
-  'heilpraktiker-zusatzversicherung-vergleich-2026': 'https://healio.de/images/hero-ambulant.webp',
-  'heilpraktiker-kosten-gkv-erstattung-healio': 'https://healio.de/images/hero-ambulant.webp',
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': 'https://healio.de/images/video-partner-thumb.jpg',
   'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung': 'https://healio.de/images/healio-app-dashboard-card.webp',
   'gesundheitsbudget-3000-euro': 'https://healio.de/images/healio-gesundheitsbudget-v2.png',
   'naturheilkunde-krankenkasse-2026': 'https://healio.de/images/hero-ambulant.webp',
-  'osteopathie-krankenkasse-2026': 'https://healio.de/images/hero-ambulant.webp',
-  'ikk-classic-bonus-700-euro': 'https://healio.de/images/kassenboost-bridge-og.png',
-  'heilpraktiker-kosten-guide-2026': 'https://healio.de/images/hero-ambulant.webp',
   'kassenbonus-was-ist-drin': 'https://healio.de/images/kassenboost-bridge-og.png',
   'krankenkasse-wechseln-laufende-behandlung': 'https://healio.de/images/hero-ambulant.webp',
-  'heilpraktiker-kosten-bonus-finanziert': 'https://healio.de/images/video-partner-thumb.jpg',
   'zahnersatz-beitrag-vom-bonus': 'https://healio.de/images/erklaervideo-zahn-poster.jpg',
   'ikk-classic-bonus-schritt-fuer-schritt': 'https://healio.de/images/kassenboost-bridge-og.png',
   'bkv-und-kassenbonus-fuer-arbeitgeber': 'https://healio.de/images/hero-unternehmen-b2b.png',
@@ -30,22 +24,22 @@ const RELATED_LINKS = {
   'healio-konzept-fuer-hebammen': [
     { href: '/hebammen', label: 'Healio für Hebammen' },
     { href: '/blog/gesundheitsbudget-3000-euro', label: 'So entsteht das Gesundheitsbudget' },
-    { href: '/blog/osteopathie-krankenkasse-2026', label: 'Osteopathie und Krankenkassenzuschüsse' },
+    { href: '/ratgeber/osteopathie-krankenkasse', label: 'Osteopathie und Krankenkassenzuschüsse' },
   ],
   'healio-konzept-fuer-tcm-praxen': [
     { href: '/partner', label: 'Healio-Partner für Praxen werden' },
     { href: '/blog/naturheilkunde-krankenkasse-2026', label: 'Naturheilkunde und Kassenleistungen' },
-    { href: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026', label: 'Zusatzschutz für Naturheilverfahren vergleichen' },
+    { href: '/ratgeber/heilpraktiker-zusatzversicherung', label: 'Zusatzschutz für Naturheilverfahren vergleichen' },
   ],
   'healio-konzept-fuer-osteopathen': [
     { href: '/partner', label: 'Healio-Partner für Praxen werden' },
-    { href: '/blog/osteopathie-krankenkasse-2026', label: 'Welche Krankenkasse Osteopathie bezuschusst' },
+    { href: '/ratgeber/osteopathie-krankenkasse', label: 'Welche Krankenkasse Osteopathie bezuschusst' },
     { href: '/blog/gesundheitsbudget-3000-euro', label: 'Gesundheitsbudget verständlich erklärt' },
   ],
   'healio-konzept-fuer-heilpraktiker': [
     { href: '/partner', label: 'Das Healio-Partnermodell' },
     { href: '/blog/heilpraktiker-patienten-finanzierung-gesundheitsbudget', label: 'Heilpraktiker-Kosten besser planbar machen' },
-    { href: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026', label: 'Heilpraktiker-Zusatzschutz vergleichen' },
+    { href: '/ratgeber/heilpraktiker-zusatzversicherung', label: 'Heilpraktiker-Zusatzschutz vergleichen' },
   ],
   'krankenhauszusatzversicherung-sportverein-best-ager': [
     { href: '/stationaer', label: 'Stationären Zusatzschutz vergleichen' },
@@ -56,16 +50,6 @@ const RELATED_LINKS = {
     { href: '/zahn', label: 'Zahnzusatzversicherung nach Ausgangslage prüfen' },
     { href: '/kassenbonus', label: 'Kassenbonus für den Beitrag nutzen' },
     { href: '/blog/gesundheitsbudget-3000-euro', label: 'Das Healio-Gesundheitsbudget verstehen' },
-  ],
-  'heilpraktiker-zusatzversicherung-vergleich-2026': [
-    { href: '/ambulant', label: 'Ambulante Tarifstufen vergleichen' },
-    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Bis zu 3.000 EUR Gesundheitsbudget erklärt' },
-    { href: '/blog/heilpraktiker-kosten-guide-2026', label: 'Heilpraktiker-Kosten im Überblick' },
-  ],
-  'heilpraktiker-kosten-gkv-erstattung-healio': [
-    { href: '/ambulant', label: 'Ambulanten Zusatzschutz ansehen' },
-    { href: '/kassenbonus', label: 'Kassenbonus und Bedingungen verstehen' },
-    { href: '/blog/heilpraktiker-kosten-guide-2026', label: 'Typische Heilpraktiker-Kosten vergleichen' },
   ],
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': [
     { href: '/partner', label: 'Healio für Heilpraktiker-Praxen' },
@@ -80,27 +64,12 @@ const RELATED_LINKS = {
   'gesundheitsbudget-3000-euro': [
     { href: '/ambulant', label: 'Bis zu 3.000 EUR Gesundheitsbudget prüfen' },
     { href: '/kassenbonus', label: 'Kassenbonus verständlich erklärt' },
-    { href: '/blog/ikk-classic-bonus-700-euro', label: 'IKK Bonus mit 700 EUR+ als Beispiel' },
+    { href: '/ratgeber/ikk-classic-bonusprogramm-2026', label: 'IKK classic Bonusprogramm 2026 erklärt' },
   ],
   'naturheilkunde-krankenkasse-2026': [
     { href: '/ambulant', label: 'Naturheilkunde mit Zusatzschutz absichern' },
-    { href: '/blog/heilpraktiker-kosten-guide-2026', label: 'Kosten für Heilpraktiker-Behandlungen' },
-    { href: '/blog/osteopathie-krankenkasse-2026', label: 'Osteopathie-Zuschüsse vergleichen' },
-  ],
-  'osteopathie-krankenkasse-2026': [
-    { href: '/ambulant', label: 'Ambulanten Schutz für Osteopathie prüfen' },
-    { href: '/blog/naturheilkunde-krankenkasse-2026', label: 'Kassenleistungen für Naturheilkunde' },
-    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Gesundheitsbudget aus Bonus und Zusatzschutz' },
-  ],
-  'ikk-classic-bonus-700-euro': [
-    { href: '/kassenbonus', label: 'Kassenbonus Schritt für Schritt verstehen' },
-    { href: '/kassenboost', label: 'Krankenkassen nach Beitrag, Bonus und Leistung vergleichen' },
-    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Kassenbonus mit Zusatzschutz kombinieren' },
-  ],
-  'heilpraktiker-kosten-guide-2026': [
-    { href: '/ambulant', label: 'Ambulanten Zusatzschutz vergleichen' },
-    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Bis zu 3.000 EUR Gesundheitsbudget verstehen' },
-    { href: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026', label: 'Tarife für Heilpraktiker-Leistungen vergleichen' },
+    { href: '/ratgeber/heilpraktiker-kosten', label: 'Kosten für Heilpraktiker-Behandlungen' },
+    { href: '/ratgeber/osteopathie-krankenkasse', label: 'Osteopathie-Zuschüsse vergleichen' },
   ],
   'kassenbonus-was-ist-drin': [
     { href: '/kassenbonus', label: 'Kassenbonus auf der Healio-Seite verstehen' },
@@ -111,11 +80,6 @@ const RELATED_LINKS = {
     { href: '/kassenbonus', label: 'Kassenbonus realistisch einordnen lassen' },
     { href: '/ambulant', label: 'Ambulanten Zusatzschutz vor dem Wechsel prüfen' },
     { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus: Was wirklich drin ist' },
-  ],
-  'heilpraktiker-kosten-bonus-finanziert': [
-    { href: '/ambulant', label: 'Ambulanten Zusatzschutz für Heilpraktiker ansehen' },
-    { href: '/blog/heilpraktiker-kosten-guide-2026', label: 'Typische Heilpraktiker-Kosten vergleichen' },
-    { href: '/blog/ikk-classic-bonus-schritt-fuer-schritt', label: 'IKK-Bonus Schritt für Schritt beantragen' },
   ],
   'zahnersatz-beitrag-vom-bonus': [
     { href: '/zahn', label: 'Zahnzusatzversicherung nach Ausgangslage prüfen' },

@@ -348,34 +348,6 @@ export const seoRoutes = [
     },
   },
   {
-    path: '/blog/heilpraktiker-kosten-guide-2026',
-    title: 'Heilpraktiker Kosten 2026: Preise, Erstattung & Budget | Healio',
-    description: 'Was kostet ein Heilpraktiker 2026? Preise, Beispiele und Wege zur Erstattung durch Zusatzversicherung und Gesundheitsbudget.',
-    canonical: 'https://healio.de/blog/heilpraktiker-kosten-guide-2026',
-    lang: 'de',
-  },
-  {
-    path: '/blog/heilpraktiker-zusatzversicherung-vergleich-2026',
-    title: 'Heilpraktiker Zusatzversicherung Vergleich 2026 | Healio',
-    description: 'Heilpraktiker Zusatzversicherung 2026: Welche Leistungen wichtig sind, welche Grenzen es gibt und wie du Erstattung mit Kassenbonus planst.',
-    canonical: 'https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026',
-    lang: 'de',
-  },
-  {
-    path: '/blog/ikk-classic-bonus-700-euro',
-    title: 'IKK Classic Bonus 700 €+: So nutzt du den Kassenbonus | Healio',
-    description: 'So funktioniert der IKK Classic Bonus mit 700 €+ pro Jahr: Aktivitäten, Nachweise und Kombination mit dem Healio Gesundheitsbudget.',
-    canonical: 'https://healio.de/blog/ikk-classic-bonus-700-euro',
-    lang: 'de',
-  },
-  {
-    path: '/blog/osteopathie-krankenkasse-2026',
-    title: 'Osteopathie Krankenkasse 2026: Erstattung & Budget | Healio',
-    description: 'Osteopathie-Kostenübernahme 2026: Kassenzuschuss, Nachweise und private Tarifgrenzen vergleichen. Bestehende Behandlungen vor einem neuen Vertrag gesondert prüfen.',
-    canonical: 'https://healio.de/blog/osteopathie-krankenkasse-2026',
-    lang: 'de',
-  },
-  {
     path: '/blog/naturheilkunde-krankenkasse-2026',
     title: 'Naturheilkunde Krankenkasse 2026: Was wird erstattet? | Healio',
     description: 'Naturheilkunde und Krankenkasse 2026: Leistungen, Kassenzuschüsse und Zusatzversicherung unterscheiden. TK-Osteopathie und Tarifgrenzen verständlich einordnen.',
@@ -500,13 +472,6 @@ export const seoRoutes = [
     lang: 'de',
   },
   {
-    path: '/blog/heilpraktiker-kosten-gkv-erstattung-healio',
-    title: 'Heilpraktiker-Kosten GKV: Warum alles selbst zahlen + Lösung | Healio',
-    description: 'Was die GKV bei Heilpraktiker-Kosten leistet und wie Zusatzschutz bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren ermöglichen kann.',
-    canonical: 'https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio',
-    lang: 'de',
-  },
-  {
     path: '/blog/zahnzusatzversicherung-trotz-angeratener-behandlung',
     title: 'Zahnzusatzversicherung trotz angeratener Behandlung: Sofortschutz | Healio',
     description: 'Behandlung schon angeraten? Der Baustein ZAHN Sofort der Bayerischen zahlt bis zu 1.500 € Zuschuss, wenn der Abschluss vor der Rechnung erfolgt.',
@@ -560,13 +525,6 @@ export const seoRoutes = [
     title: 'Krankenkasse wechseln: Was passiert mit laufenden Behandlungen? | Healio',
     description: 'Krankenkasse wechseln und trotzdem Leistungen, Genehmigungen und Hilfsmittel behalten: Was du vorher klären solltest.',
     canonical: 'https://healio.de/blog/krankenkasse-wechseln-laufende-behandlung',
-    lang: 'de',
-  },
-  {
-    path: '/blog/heilpraktiker-kosten-bonus-finanziert',
-    title: 'Heilpraktiker-Kosten: Kassenbonus finanziert Zusatzversicherung | Healio',
-    description: 'Heilpraktiker sind Selbstzahlerleistung. So finanziert eine ambulante Zusatzversicherung den Beitrag, und dein Kassenbonus kann ihn zurückholen.',
-    canonical: 'https://healio.de/blog/heilpraktiker-kosten-bonus-finanziert',
     lang: 'de',
   },
   {

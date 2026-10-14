@@ -15,11 +15,6 @@ const knownGermanArticles = [
     expected: { href: '/zahn#zahn-check', copyKey: 'dental' },
   },
   {
-    slug: 'heilpraktiker-zusatzversicherung-vergleich-2026',
-    targetGroup: 'endkunden',
-    expected: { href: '/ambulant#tarif-tabelle', copyKey: 'outpatientComparison' },
-  },
-  {
     slug: 'gesundheitsbudget-3000-euro',
     targetGroup: 'endkunden',
     expected: { href: '/ambulant#bonus-calculator', copyKey: 'healthBudget' },
@@ -28,21 +23,6 @@ const knownGermanArticles = [
     slug: 'naturheilkunde-krankenkasse-2026',
     targetGroup: 'endkunden',
     expected: { href: '/ambulant#ikk-wechsel', copyKey: 'healthFund' },
-  },
-  {
-    slug: 'osteopathie-krankenkasse-2026',
-    targetGroup: 'endkunden',
-    expected: { href: '/ambulant#bonus-calculator', copyKey: 'healthBudget' },
-  },
-  {
-    slug: 'ikk-classic-bonus-700-euro',
-    targetGroup: 'endkunden',
-    expected: { href: '/ambulant#bonus-calculator', copyKey: 'bonus' },
-  },
-  {
-    slug: 'heilpraktiker-kosten-guide-2026',
-    targetGroup: 'endkunden',
-    expected: { href: '/ambulant#tarif-tabelle', copyKey: 'outpatientComparison' },
   },
   {
     slug: 'healio-konzept-fuer-heilpraktiker',
@@ -56,11 +36,6 @@ const knownGermanArticles = [
   },
   {
     slug: 'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
-    targetGroup: 'heilpraktiker',
-    expected: { href: '/partner', copyKey: 'partner' },
-  },
-  {
-    slug: 'heilpraktiker-kosten-gkv-erstattung-healio',
     targetGroup: 'heilpraktiker',
     expected: { href: '/partner', copyKey: 'partner' },
   },
@@ -92,7 +67,7 @@ const expectedEnglishRoutes = {
   midwives: '/en/midwives',
 };
 
-assert.equal(knownGermanArticles.length, 15, 'Der Vertrag muss alle 15 bekannten Artikel abdecken.');
+assert.equal(knownGermanArticles.length, 10, 'Der Vertrag muss alle 10 bekannten Artikel abdecken (sechs seit 14.10.2026 in Ratgeber zusammengelegt).');
 
 for (const article of knownGermanArticles) {
   const actual = getBlogArticleCta({
@@ -228,8 +203,10 @@ for (const copyKey of duCopyKeys) {
 }
 assert.deepEqual(
   [...consumerCopyKeys].sort(),
-  ['bonus', 'dental', 'healthBudget', 'healthFund', 'inpatient', 'outpatient', 'outpatientComparison'],
-  'Die Endkunden-Kästen sind genau diese sieben.',
+  // bonus und outpatientComparison trugen nur die seit 14.10.2026 in Ratgeber
+  // zusammengelegten Blogartikel (IKK-Bonus, Heilpraktiker-Vergleich, -Kosten).
+  ['dental', 'healthBudget', 'healthFund', 'inpatient', 'outpatient'],
+  'Die Endkunden-Kästen sind genau diese fünf.',
 );
 // Das Verbum ist Imperativ Du, kein Infinitiv mit Sie.
 assert.match(germanMessages.articleCta.dental.description, /^Starte den kurzen Zahn-Check und finde heraus, welcher nächste Schritt zu deiner Situation passt\.$/);
@@ -255,4 +232,4 @@ for (const [file, id] of anchorContracts) {
   assert.match(source, new RegExp(`id=["']${id}["']`), `CTA-Anker #${id} fehlt.`);
 }
 
-console.log('Blog-CTA-Contract erfüllt: 15 Slugs und alle Fallbacks sind zielgruppengerecht.');
+console.log('Blog-CTA-Contract erfüllt: 10 Slugs und alle Fallbacks sind zielgruppengerecht.');

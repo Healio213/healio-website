@@ -603,13 +603,13 @@
   </url>
   <url>
     <loc>https://healio.de/ratgeber/heilpraktiker-kosten</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://healio.de/ratgeber/heilpraktiker-zusatzversicherung</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -663,7 +663,7 @@
   </url>
   <url>
     <loc>https://healio.de/ratgeber/osteopathie-krankenkasse</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1192,30 +1192,6 @@
   </url>
   <!-- Blog-Artikel: Endkunden -->
   <url>
-    <loc>https://healio.de/blog/heilpraktiker-kosten-guide-2026</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/blog/heilpraktiker-zusatzversicherung-vergleich-2026</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/blog/ikk-classic-bonus-700-euro</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/blog/osteopathie-krankenkasse-2026</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://healio.de/blog/naturheilkunde-krankenkasse-2026</loc>
     <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
@@ -1236,12 +1212,6 @@
   </url>
   <url>
     <loc>https://healio.de/blog/digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/blog/heilpraktiker-kosten-gkv-erstattung-healio</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -1401,12 +1371,6 @@
   </url>
   <url>
     <loc>https://healio.de/blog/krankenkasse-wechseln-laufende-behandlung</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://healio.de/blog/heilpraktiker-kosten-bonus-finanziert</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

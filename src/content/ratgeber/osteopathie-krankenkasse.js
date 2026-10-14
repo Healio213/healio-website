@@ -1,16 +1,26 @@
 /**
  * Welle B, Feld ambulant. Recherche: 7. Oktober 2026.
  * Einzelbelege: osteopathie-krankenkasse.belege.md.
+ * Zusammenlegung 14.10.2026 (Semrush-Analyse, Kannibalisierung): Der Blogartikel
+ * osteopathie-krankenkasse-2026 ist hier aufgegangen und leitet per 301 hierher
+ * (vercel.json). Übernommen: Kurzübersicht großer Kassen mit Euro je Sitzung,
+ * Sitzungen und Jahresgrenze (Werte identisch mit der großen Tabelle, KKH,
+ * Knappschaft, AOK NordWest, AOK Bayern und Barmer am 14.10.2026 gegengeprüft),
+ * VOD-Preisorientierung, Kassenwechsel nach § 175 SGB V, Beispielrechnung mit
+ * Ambulant 100 statt angenommener 80 Prozent. Suchbegriffe: osteopathie
+ * krankenkasse, welche krankenkasse zahlt osteopathie, versicherung osteopathie.
  * Grenzen: Sperrlisten-Kandidat für Google Ads und Analytics wegen Schwangerschafts- und Säuglingsregeln. 39 Kassen aus der KassenBoost-Vorarbeit, aktuelle Originalsatzungen neu geprüft. Keine medizinische Wirkung zugesagt. Keine bestätigte Ablehnung aus fehlenden Regeln abgeleitet. Linde, VerbundPlus und Innovationskasse: nur konkrete Leistungsanfrage, kein Zuschussbetrag oder Ausschluss behauptet. Private Angaben ausschließlich Live-Produktseite; belegter Kalenderjahresbezug ab Versicherungsbeginn.
  */
 export const article = {
   "slug": "osteopathie-krankenkasse",
   "kind": "ratgeber",
   "group": "ambulant",
-  "metaTitle": "Welche Krankenkasse zahlt Osteopathie? | Healio",
-  "metaDescription": "Osteopathie bei 39 Kassen: Zuschüsse, ärztliche Nachweise, Qualifikation und gemeinsame Budgets. Mit aktuellen Satzungsfundstellen.",
+  "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
+  "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
+  "updatedAt": "2026-10-14",
+  "updatedAtLabel": "14. Oktober 2026",
   "readingTimeMinutes": 16,
   "listTitle": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
   "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
@@ -44,6 +54,171 @@ export const article = {
   },
   "lead": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
   "sections": [
+    {
+      "id": "kurzuebersicht",
+      "heading": "Welche Krankenkasse zahlt Osteopathie und wie viel?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Osteopathie ist keine Regelleistung der gesetzlichen Krankenversicherung. Viele Kassen zahlen trotzdem einen Zuschuss als Satzungsleistung, nach § 11 Abs. 6 SGB V darf jede Kasse solche Mehrleistungen anbieten. Die Kurzübersicht zeigt große Kassen mit Euro je Sitzung, Sitzungen im Kalenderjahr und dem Höchstbetrag im Jahr. Alle 39 geprüften Kassen mit Nachweisen und Satzungsfundstelle stehen in der großen Tabelle darunter."
+        },
+        {
+          "type": "table",
+          "mobile": "cards",
+          "caption": "Osteopathie und Krankenkasse: Zuschuss großer Kassen 2026",
+          "head": [
+            "Krankenkasse",
+            "Zuschuss je Sitzung",
+            "Sitzungen im Kalenderjahr",
+            "Höchstens im Jahr"
+          ],
+          "rows": [
+            [
+              "IKK classic",
+              "bis 40 EUR",
+              "4",
+              "160 EUR"
+            ],
+            [
+              "TK",
+              "bis 40 EUR",
+              "3",
+              "120 EUR"
+            ],
+            [
+              "DAK-Gesundheit",
+              "bis 40 EUR",
+              "3",
+              "120 EUR"
+            ],
+            [
+              "hkk",
+              "bis 40 EUR",
+              "4",
+              "160 EUR"
+            ],
+            [
+              "KKH",
+              "bis 60 EUR",
+              "4",
+              "240 EUR"
+            ],
+            [
+              "AOK PLUS",
+              "90 Prozent, bis 60 EUR",
+              "3",
+              "180 EUR"
+            ],
+            [
+              "AOK NordWest",
+              "bis 50 EUR",
+              "6",
+              "300 EUR, im gemeinsamen Jahrestopf von 500 EUR"
+            ],
+            [
+              "AOK Bayern",
+              "bis 50 EUR, nur unter 18 Jahren und in der Schwangerschaft",
+              "6, in der Schwangerschaft 6 je Schwangerschaft",
+              "300 EUR"
+            ],
+            [
+              "AOK Nordost",
+              "kein Betrag je Sitzung",
+              "keine Angabe",
+              "40 EUR, vor dem ersten Geburtstag bis 150 EUR"
+            ],
+            [
+              "Mobil Krankenkasse",
+              "bis 60 EUR",
+              "3",
+              "180 EUR, im gemeinsamen Topf von 200 EUR"
+            ],
+            [
+              "SBK",
+              "bis 30 EUR",
+              "6",
+              "180 EUR"
+            ],
+            [
+              "KNAPPSCHAFT",
+              "80 Prozent, bis 30 EUR",
+              "keine Angabe",
+              "150 EUR, gemeinsam mit weiteren Naturheilverfahren"
+            ],
+            [
+              "VIACTIV",
+              "80 Prozent, bis 50 EUR",
+              "8",
+              "400 EUR"
+            ],
+            [
+              "BKK24",
+              "80 Prozent, bis 60 EUR",
+              "6",
+              "360 EUR"
+            ],
+            [
+              "BARMER",
+              "Erwachsene außerhalb der Schwangerschaft: kein Zuschuss",
+              "nach Satzungsweg",
+              "Säuglinge und Schwangere: bis 200 EUR gemeinsam mit weiteren Leistungen"
+            ]
+          ],
+          "note": "Stand 14.10.2026. Werte aus den Satzungen der Kassen, Fundstellen und Quellen in der großen Tabelle und in der Quellenliste; KKH, KNAPPSCHAFT, AOK NordWest, AOK Bayern und BARMER am 14.10.2026 gegengeprüft. Höchstens im Jahr ist eigene Rechnung aus Betrag und Sitzungszahl, soweit die Satzung keinen Jahresbetrag nennt. Alle Beträge sind Obergrenzen und gelten nur, wenn Nachweis und Behandlerqualifikation stimmen. Maßgeblich ist die aktuelle Satzung."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Zum Vergleich mit dem Praxispreis: Der "
+            },
+            {
+              "text": "Verband der Osteopathen Deutschland",
+              "href": "https://www.osteopathie.de/behandlung"
+            },
+            {
+              "text": " nennt als Orientierung 80 bis 150 EUR für eine Sitzung mit Anamnese, Untersuchung und Behandlung. Selbst bei den höheren Zuschüssen bleibt also oft ein Eigenanteil. Für die Kassen mit eigener Seite findest du die Details in den Ratgebern "
+            },
+            {
+              "text": "Osteopathie bei der TK",
+              "to": "/ratgeber/tk-osteopathie"
+            },
+            {
+              "text": " und "
+            },
+            {
+              "text": "Osteopathie bei der AOK",
+              "to": "/ratgeber/aok-osteopathie"
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Lohnt sich ein Kassenwechsel wegen des Osteopathie-Zuschusses? Das kann sein, nur zählt dann die ganze Rechnung mit Beitrag, Bonus und weiteren Leistungen. Regulär bist du zwölf Monate an deine Kasse gebunden, der Wechsel gilt zum Ablauf des übernächsten Kalendermonats nach deiner Erklärung. Erhöht deine Kasse den Zusatzbeitrag, entfällt die Bindungsfrist ("
+            },
+            {
+              "text": "§ 175 SGB V",
+              "href": "https://www.gesetze-im-internet.de/sgb_5/__175.html"
+            },
+            {
+              "text": "). Kassen vergleichst du quellenbelegt anhand der Satzungen auf "
+            },
+            {
+              "text": "kassenboost.de",
+              "href": "https://kassenboost.de/"
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "kassen",
       "heading": "Welche Krankenkassen bezuschussen Osteopathie?",
@@ -448,6 +623,51 @@ export const article = {
           "text": "Vergleiche die tariflich anerkannten Leistungen, Höchstbeträge, Bedingungen und deinen persönlichen Beitrag mit den tatsächlich erwarteten Rechnungen. Teile vorhandene Kassenleistungen mit und kläre ihre Anrechnung. Eine allgemeine Nennung von Osteopathie auf einer Produktseite entscheidet weder über jede Praxis noch über eine konkrete bereits geplante Behandlung."
         },
         {
+          "type": "paragraph",
+          "text": "Wie das in Zahlen aussieht, zeigt die Karte. Die Preise sind angenommen, deine Praxis nennt dir ihre eigenen. Der Antrag enthält Gesundheitsfragen, die du vollständig beantwortest. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, je nach Angaben kann aber ein Risikozuschlag oder ein Leistungsausschluss dazukommen."
+        },
+        {
+          "type": "costCard",
+          "title": "Osteopathie-Serie: wer was trägt",
+          "icon": "calculator",
+          "tariffLabel": "Gerechnet mit der Stufe Ambulant 100 (AP1): 100 Prozent der erstattungsfähigen Kosten, bis 1.000 EUR für Naturheilverfahren in zwei Kalenderjahren ab Versicherungsbeginn. Der Vertrag besteht schon, bevor die Behandlung beginnt.",
+          "caption": "Kostenkarte: Osteopathie mit Kassenzuschuss und Zusatztarif",
+          "head": [
+            "Beispiel",
+            "Kasse zahlt",
+            "Du ohne Tarif",
+            "Du mit Tarif"
+          ],
+          "rows": [
+            [
+              "6 Sitzungen, angenommen 100 EUR je Sitzung (600 EUR), bei der IKK classic",
+              "160 EUR (4 mal 40 EUR)",
+              "440 EUR",
+              "Bis zu 440 EUR erstattet, wenn ein Heilpraktiker oder Arzt behandelt und die Rechnung erstattungsfähig ist"
+            ],
+            [
+              "Dieselbe Serie bei der TK",
+              "120 EUR (3 mal 40 EUR)",
+              "480 EUR",
+              "Bis zu 480 EUR erstattet, unter denselben Bedingungen"
+            ],
+            [
+              "Beitrag Ambulant 100 über zwei Jahre, 21 bis 30 Jahre (31,64 EUR im Monat)",
+              "nicht betroffen",
+              "nichts",
+              "759,36 EUR Beitrag, den ein Kassenbonus teilweise mittragen kann"
+            ],
+            [
+              "Serie schon vor dem Versicherungsbeginn gestartet",
+              "Zuschuss nach Satzung",
+              "den Rest",
+              "Nicht versichert, wenn der Versicherungsfall vor dem Beginn eingetreten ist"
+            ]
+          ],
+          "note": "Rechenbeispiel mit angenommenen Preisen, keine Preisangabe. Kassenwerte nach § 34f Satzung IKK classic und § 27b Satzung TK, Voraussetzungen wie in der Tabelle oben. Tarifwerte nach den SDK-Bedingungen Teil II, Stand 01.01.2023; nach Teil I darf die gesamte Erstattung aus Kasse und Tarif die Kosten nicht übersteigen. Eigene Rechnung: 31,64 EUR mal 12 mal 2 ergibt 759,36 EUR. Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant, Stand 29.09.2026.",
+          "bonusNote": "Dein Kassenbonus kann den Beitrag mittragen: Viele Kassen zahlen ihn auf Wunsch als Zuschuss zu einer Zusatzversicherung. Wie viel, hängt von deiner Kasse und deinen Aktivitäten ab."
+        },
+        {
           "type": "path",
           "to": "/ambulant",
           "icon": "ambulant",
@@ -510,9 +730,9 @@ export const article = {
             },
             {
               "icon": "document",
-              "title": "Ambulante Ergänzung prüfen",
-              "text": "Leistungsbedingungen und persönlichen Beitrag einordnen.",
-              "to": "/ratgeber/heilpraktiker-zusatzversicherung",
+              "title": "Zusatzversicherung für Osteopathie",
+              "text": "Was der Tarif bei Osteopathie erstattet und wo die Grenzen liegen.",
+              "to": "/ratgeber/zusatzversicherung-osteopathie",
               "linkLabel": "Ratgeber lesen"
             }
           ]
@@ -521,6 +741,14 @@ export const article = {
     }
   ],
   "faqs": [
+    {
+      "question": "Welche Krankenkasse zahlt am meisten für Osteopathie?",
+      "answer": "Für Erwachsene nennt in unserer Übersicht die VIACTIV mit bis zu 400 EUR im Jahr den höchsten Betrag (80 Prozent, bis 50 EUR je Sitzung, acht Sitzungen). BKK24 und Salus BKK kommen auf bis zu 360 EUR, die AOK NordWest auf bis zu 300 EUR innerhalb eines gemeinsamen Topfs. Bei TK und DAK sind es bis 120 EUR, bei IKK classic und hkk bis 160 EUR. Ob das für dich gilt, hängt an Nachweis, Behandler und Alter."
+    },
+    {
+      "question": "Zahlt eine Zusatzversicherung Osteopathie?",
+      "answer": "Je nach Tarif ja. Bei den ambulanten SDK-Tarifen, die Healio vermittelt, zählt Osteopathie zum Topf Naturheilverfahren: in der Stufe Ambulant 100 bis 1.000 EUR in zwei Kalenderjahren ab Versicherungsbeginn, gemeinsam mit Heilpraktikerleistungen. Kasse und Tarif zusammen erstatten nie mehr als die Rechnung, und eine Serie, die vor dem Versicherungsbeginn begonnen hat, ist nicht versichert."
+    },
     {
       "question": "Übernimmt die Krankenkasse Osteopathie vollständig?",
       "answer": "Das hängt von der tatsächlichen Rechnung und der Satzungsregel ab. Beträge je Sitzung, Prozentquoten und Jahresbudgets können einen Eigenanteil lassen. Bei der TK sind bis 40 EUR für höchstens drei Sitzungen pro Kalenderjahr vorgesehen; die vollständigen Voraussetzungen müssen erfüllt sein."
@@ -559,10 +787,13 @@ export const article = {
     ]
   },
   "sources": {
-    "checkedAt": "2026-10-07",
-    "checkedAtLabel": "7. Oktober 2026",
+    "checkedAt": "2026-10-14",
+    "checkedAtLabel": "14. Oktober 2026",
     "intro": "Satzungszuschuss, Bonusweg und private Erstattung haben eigene Voraussetzungen. Die Originalquellen zeigen die Grundlagen.",
     "items": [
+      {"label": "Osteopathische Behandlung: Kosten und Dauer", "publisher": "Verband der Osteopathen Deutschland (VOD)", "href": "https://www.osteopathie.de/behandlung", "stand": "ohne Datum", "accessedAt": "14.10.2026", "note": "Preisorientierung des Verbands, keine Marktpreiserhebung"},
+      {"label": "SGB V § 175: Ausübung des Wahlrechts", "publisher": "gesetze-im-internet.de (BMJV)", "href": "https://www.gesetze-im-internet.de/sgb_5/__175.html", "accessedAt": "14.10.2026"},
+      {"label": "SDK: Allgemeine Versicherungsbedingungen Teil I (1.751)", "publisher": "SDK", "href": "https://gesundwerker.sdk.de/downloads/Bedingungen/1-751.pdf", "stand": "01.01.2022", "accessedAt": "14.10.2026"},
       {"label": "SDK: Originalbedingungen der AP-Tarife", "publisher": "SDK", "href": "https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf", "stand": "01.01.2023; aktuell sichtbarer Zeitraum mit Healio abgeglichen", "accessedAt": "07.10.2026"},
       {
         "label": "AOK Bayern: Satzung und Osteopathie",

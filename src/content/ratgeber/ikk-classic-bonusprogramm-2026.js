@@ -49,7 +49,7 @@ export const article = {
 
   metaTitle: 'IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio',
   metaDescription:
-    'IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.',
+    'IKK classic Bonusheft und Bonussystem 2026: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.',
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
@@ -113,6 +113,10 @@ export const article = {
         },
         {
           type: 'paragraph',
+          text: 'Das IKK Bonussystem hat damit drei Stufen. Vorsorge und Impfungen bringen kleine Beträge je Termin, regelmäßige Aktivitäten wie Studio, Verein oder Gesundheitskurs bringen mehr, und die Statuswerte BMI, Blutdruck und Sportabzeichen zählen erst, wenn mindestens eine Aktivität dabei ist. Wer nur zur Vorsorge geht, bleibt deshalb im unteren Bereich. Wer dazu Sport nachweist, landet ein gutes Stück höher.',
+        },
+        {
+          type: 'paragraph',
           text: 'Beim Antrag entscheidest du dich für genau eine von zwei Auszahlungsarten, den Geldbonus aufs Konto oder den zweckgebundenen Zuschuss in dreifacher Höhe. Beides zusammen geht nicht. Jede Maßnahme muss zwischen dem 01.01.2026 und dem 31.12.2026 stattfinden, der vollständige Antrag muss bis zum 31.03.2027 vorliegen, per App, Onlinefiliale, Post oder persönlich.',
         },
       ],
@@ -145,6 +149,10 @@ export const article = {
             { text: 'Bonusseite', href: 'https://www.ikk-classic.de/pk/rv/produkte/bonusprogramm' },
             { text: ' bereit, dazu ein Merkblatt zum Fotonachweis in der App.' },
           ],
+        },
+        {
+          type: 'paragraph',
+          text: 'Das IKK Bonusheft ausdrucken, so wie viele danach suchen, geht deshalb nur zum Teil. Zum Ausdrucken stehen auf der Bonusseite das Infoblatt, die Teilnahmebedingungen und der Fotonachweis bereit. Den Fotonachweis lässt du in der Praxis stempeln, wenn dir kein anderer Beleg vorliegt, und lädst ihn dann in der App hoch. Einen Papierantrag bietet die Bonusseite nicht als Download an (Stand 14.10.2026); wer auf Papier sammeln will, fragt ihn bei der IKK classic an. Hast du bisher auf Papier gesammelt, kannst du laut IKK classic in die App wechseln und überträgst die Nachweise dann einmalig dorthin.',
         },
         {
           type: 'paragraph',
@@ -320,6 +328,16 @@ export const article = {
           type: 'paragraph',
           text: 'Wer den Geldbonus wählt, muss dieselbe Rechnung mit einem Drittel führen. Nicht eingerechnet sind Satzungsleistungen wie professionelle Zahnreinigung, Osteopathie oder homöopathische Arzneimittel.',
         },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Ein Beispiel dafür: Osteopathie bezuschusst die IKK classic nach § 34f ihrer Satzung mit bis zu 40 EUR je Sitzung, höchstens vier Sitzungen im Kalenderjahr, also bis 160 EUR. Dafür brauchst du eine schriftliche ärztliche Anordnung, und die Praxis muss eine abgeschlossene Osteopathie-Ausbildung nachweisen. Die Kasse erklärt das auf ihrer ' },
+            { text: 'Seite zur Osteopathie', href: 'https://www.ikk-classic.de/pk/leistungen/alternative-heilmethoden/osteopathie-kosten' },
+            { text: '. Wie andere Kassen das regeln, steht im Ratgeber ' },
+            { text: 'Welche Krankenkasse zahlt Osteopathie', to: '/ratgeber/osteopathie-krankenkasse' },
+            { text: '.' },
+          ],
+        },
       ],
     },
     {
@@ -368,6 +386,16 @@ export const article = {
       question: 'Bis wann muss ich das Bonusheft 2026 abgeben?',
       answer:
         'Der vollständige Bonusantrag für 2026 muss bis zum 31.03.2027 bei der IKK classic sein. Jede Maßnahme und jede Ausgabe muss ins Kalenderjahr 2026 fallen.',
+    },
+    {
+      question: 'Wie funktioniert das IKK Bonussystem?',
+      answer:
+        'Du sammelst im Kalenderjahr Vorsorge, Impfungen, Aktivitäten und Statuswerte. Jede anerkannte Maßnahme hat einen festen Betrag, schon die erste zählt. Statuswerte wie BMI und Blutdruck zählen nur zusammen mit einer Aktivität. Beim Antrag wählst du Geldbonus oder den dreifachen Zuschuss, der höchstens deine nachgewiesenen Kosten erstattet.',
+    },
+    {
+      question: 'Kann ich das IKK Bonusheft ausdrucken?',
+      answer:
+        'Ausdrucken kannst du von der Bonusseite das Infoblatt, die Teilnahmebedingungen und den Fotonachweis, den die Praxis stempelt. Einen Papierantrag bietet die Seite nicht als Download an (Stand 14.10.2026), ihn fragst du bei der IKK classic an. Einfacher ist die App: Dort trägst du die Maßnahmen ein und lädst die Nachweise als Foto hoch.',
     },
     {
       question: 'Gibt es das IKK classic Bonusheft als PDF?',

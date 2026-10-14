@@ -43,12 +43,35 @@ assert.equal(
 );
 const customArticleImage = 'https://healio.de/images/hero-hebammen.webp';
 assert.equal(
-  getBlogArticleImage({ slug: 'osteopathie-krankenkasse-2026', featured_image_url: customArticleImage }),
+  getBlogArticleImage({ slug: 'naturheilkunde-krankenkasse-2026', featured_image_url: customArticleImage }),
   customArticleImage,
   'Andere Artikel behalten die Bildangaben aus der Content-API.',
 );
 
-assert.equal(articles.length, 23, 'Der geprüfte Blog-Cache muss 23 Artikel enthalten.');
+// Zusammenlegung 14.10.2026 (Semrush, Kannibalisierung): sechs Blogartikel sind in
+// Ratgeber aufgegangen, archiviert und leiten per 301 weiter (vercel.json).
+const MERGED_INTO_RATGEBER_2026_10_14 = {
+  'ikk-classic-bonus-700-euro': '/ratgeber/ikk-classic-bonusprogramm-2026',
+  'heilpraktiker-zusatzversicherung-vergleich-2026': '/ratgeber/heilpraktiker-zusatzversicherung',
+  'osteopathie-krankenkasse-2026': '/ratgeber/osteopathie-krankenkasse',
+  'heilpraktiker-kosten-guide-2026': '/ratgeber/heilpraktiker-kosten',
+  'heilpraktiker-kosten-bonus-finanziert': '/ratgeber/heilpraktiker-kosten',
+  'heilpraktiker-kosten-gkv-erstattung-healio': '/ratgeber/heilpraktiker-kosten',
+};
+{
+  const vercelConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'vercel.json'), 'utf8'));
+  for (const [slug, target] of Object.entries(MERGED_INTO_RATGEBER_2026_10_14)) {
+    assert.ok(!articles.some((article) => article.slug === slug), `${slug} ist zusammengelegt und darf nicht mehr im Blog-Cache stehen.`);
+    assert.ok(!sitemap.includes(`https://healio.de/blog/${slug}<`), `${slug} ist zusammengelegt und darf nicht mehr in der Sitemap stehen.`);
+    for (const source of [`/blog/${slug}`, `/en/blog/${slug}`]) {
+      const redirect = (vercelConfig.redirects || []).find((entry) => entry.source === source);
+      assert.ok(redirect && redirect.destination === target && redirect.permanent === true, `301 von ${source} auf ${target} fehlt in vercel.json.`);
+    }
+    assert.ok(!JSON.stringify(rawArticles).includes(`/blog/${slug}`), `Ein Blogartikel verlinkt noch auf die zusammengelegte URL /blog/${slug}.`);
+  }
+}
+
+assert.equal(articles.length, 17, 'Der geprüfte Blog-Cache muss 17 Artikel enthalten.');
 const NEW_SERIES_SLUGS_2026_09_23 = new Set([
   'kassenbonus-was-ist-drin',
   'krankenkasse-wechseln-laufende-behandlung',
@@ -159,9 +182,7 @@ assert.match(sitemapEntry('https://healio.de/unternehmen'), /<lastmod>2026-09-01
 assert.match(sitemapEntry('https://healio.de/blog'), /<lastmod>2026-09-02<\/lastmod>/);
 assert.match(sitemapEntry('https://healio.de/blog'), /<changefreq>weekly<\/changefreq>/);
 for (const article of articles) {
-  const expectedLastmod = ['heilpraktiker-zusatzversicherung-vergleich-2026', 'osteopathie-krankenkasse-2026'].includes(article.slug)
-    ? '2026-10-14'
-    : article.slug === 'naturheilkunde-krankenkasse-2026' ? '2026-10-10'
+  const expectedLastmod = article.slug === 'naturheilkunde-krankenkasse-2026' ? '2026-10-10'
     : BLOG_CORRECTION_SLUGS_2026_10_06.has(article.slug) ? '2026-10-06'
     : NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
   assert.match(

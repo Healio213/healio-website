@@ -15,11 +15,16 @@
  *     keine neutrale Quelle. Der Text sagt das und zeigt, wovon der Preis
  *     abhängt. Als Orientierung stehen nur gekennzeichnete Werte (Beihilfe-
  *     Höchstbeträge, GOÄ im einfachen Satz, Verbandsangabe zur Osteopathie).
- *   - Die Bereichsseite verlinkt die bestehenden Blogartikel
- *     heilpraktiker-kosten-guide-2026 und osteopathie-krankenkasse-2026
- *     (Osteopathie-Tabelle seit 07.10.2026 nach Satzung korrigiert). Der
- *     Blogartikel naturheilkunde-krankenkasse-2026 ist bewusst nicht verlinkt,
- *     weil er noch auf den Ersatztext der Codex-Prüfung wartet.
+ *   - Zusammenlegung 14.10.2026 (Semrush-Analyse, Kannibalisierung): Die
+ *     Blogartikel heilpraktiker-kosten-guide-2026,
+ *     heilpraktiker-kosten-bonus-finanziert und
+ *     heilpraktiker-kosten-gkv-erstattung-healio leiten per 301 hierher
+ *     (vercel.json). Übernommen ist nur Belegtes: das Bonus-Beispiel (mit
+ *     IKK-Satzungswerten neu gerechnet, ohne Hautkrebs-Screening, das erst ab
+ *     35 gilt) und die Frage nach dem Kassenwechsel. Die Preisspannen der
+ *     Blogartikel ohne Quelle sind bewusst nicht übernommen. Der Blogartikel
+ *     osteopathie-krankenkasse-2026 ist in /ratgeber/osteopathie-krankenkasse
+ *     aufgegangen; die alten Blog-Karten zeigen jetzt auf Ratgeber.
  *   - Keine Aussage zur Wirkung, keine Behandlungsempfehlung, keine
  *     Anbietervergleiche.
  *   - Rechenbeispiele arbeiten mit angenommenen Preisen.
@@ -30,8 +35,8 @@
  */
 
 export const article = {
-  updatedAt: "2026-10-08",
-  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-14",
+  updatedAtLabel: "14. Oktober 2026",
   slug: 'heilpraktiker-kosten',
   kind: 'ratgeber',
   group: 'ambulant',
@@ -183,6 +188,38 @@ export const article = {
           icon: 'naturopathy',
           text: 'Du siehst die vier Stufen, den Beitrag für dein Alter und kannst vor dem Antrag in Ruhe rechnen.',
           label: 'Tarifstufen und Beitrag ansehen',
+        },
+      ],
+    },
+    {
+      id: 'bonus-traegt-beitrag',
+      heading: 'Kann dein Kassenbonus den Beitrag für den Heilpraktiker-Tarif tragen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Er kann, und genau hier liegt für viele der Unterschied. Der Bonus erstattet keine Heilpraktikerrechnung. Bei vielen Kassen kannst du ihn aber als zweckgebundenen Zuschuss zum Beitrag einer privaten Zusatzversicherung nehmen. Dann bezahlt die Kasse über den Bonus einen Teil deines Beitrags, und der Tarif erstattet die Rechnungen. Beides läuft getrennt und wird nie addiert.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Beispiel: Zuschuss der IKK classic und Beitrag Ambulant 100, Altersgruppe 21 bis 30',
+          head: ['Position', 'Betrag im Jahr'],
+          rows: [
+            ['Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung', '105 EUR Zuschuss'],
+            ['Fitnessstudio, Sportverein, BMI und Blutdruck im Normbereich', '300 EUR Zuschuss'],
+            ['Zuschuss zusammen', '405 EUR'],
+            ['Beitrag Ambulant 100 (31,64 EUR mal 12)', '379,68 EUR'],
+            ['Erstattet wird höchstens der gezahlte Beitrag', '379,68 EUR'],
+          ],
+          note: 'Zuschusswerte nach Satzung und Infoblatt der IKK classic zum Bonusjahr 2026 (Zuschuss in dreifacher Höhe des Bonus, höchstens die nachgewiesenen Kosten). Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant, Stand 29.09.2026. Modellbeispiel, kein Versprechen: Was du erreichst, hängt von deinen Maßnahmen und Nachweisen ab.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Zwei Dinge gehören ehrlich dazu. Der Zuschuss kommt erst nach dem Antrag im Folgejahr, den Beitrag zahlst du bis dahin selbst. Und bei der IKK classic ist der Zusatzbeitrag von 3,85 Prozent gegenzurechnen. Wie das Bonusprogramm im Detail funktioniert, steht im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: '. Für die Zusatzversicherung musst du die Kasse übrigens nicht wechseln: Der Tarif ist ein eigener Vertrag und läuft neben jeder gesetzlichen Kasse.' },
+          ],
         },
       ],
     },
@@ -414,18 +451,18 @@ export const article = {
       {
         "icon": "calculator",
         "tone": "butter",
-        "title": "Heilpraktiker Kosten: wer zahlt was, der Guide 2026",
-        "text": "Der ausführliche Blogartikel zu Kosten, Kasse und Zusatzschutz.",
-        "to": "/blog/heilpraktiker-kosten-guide-2026",
-        "linkLabel": "Artikel lesen"
+        "title": "IKK classic Bonusprogramm 2026",
+        "text": "Alle Positionen, der dreifache Zuschuss und wie er den Beitrag einer Zusatzversicherung tragen kann.",
+        "to": "/ratgeber/ikk-classic-bonusprogramm-2026",
+        "linkLabel": "Ratgeber lesen"
       },
       {
         "icon": "comparison",
         "tone": "lavender",
-        "title": "Osteopathie: welche Krankenkasse zahlt 2026",
-        "text": "Welche Kassen Osteopathie bezuschussen, im Überblick.",
-        "to": "/blog/osteopathie-krankenkasse-2026",
-        "linkLabel": "Artikel lesen"
+        "title": "Krankenkassen-Bonus und Zusatzversicherung",
+        "text": "Wie der Bonus deiner Kasse als Zuschuss beim Beitrag hilft und wo die Grenzen liegen.",
+        "to": "/ratgeber/krankenkassen-bonus-zusatzversicherung",
+        "linkLabel": "Ratgeber lesen"
       }
     ]
   }
@@ -461,6 +498,11 @@ export const article = {
       question: 'Was ist das GebüH und muss die Praxis danach abrechnen?',
       answer:
         'Das GebüH ist ein Verzeichnis üblicher Vergütungen und nach Beschreibung des Fachverbands Deutscher Heilpraktiker eine Berechnungshilfe, keine Gebührentaxe. Rechtlich muss keine Praxis danach abrechnen. Manche Zusatztarife machen die Abrechnung nach GebüH aber zur Voraussetzung der Erstattung.',
+    },
+    {
+      question: 'Kann mein Kassenbonus die Zusatzversicherung bezahlen?',
+      answer:
+        'Teilweise oder ganz, je nach Kasse, Maßnahmen und Beitrag. Viele Kassen zahlen den Bonus auf Wunsch als Zuschuss zum Beitrag einer Zusatzversicherung, höchstens bis zu deinen nachgewiesenen Kosten. Bei der IKK classic ergeben zum Beispiel Vorsorge, Studio, Verein, BMI und Blutdruck 405 EUR Zuschuss im Jahr, mehr als der Jahresbeitrag von Ambulant 100 mit 21 bis 30 Jahren. Gegenzurechnen ist der Zusatzbeitrag der Kasse.',
     },
     {
       question: 'Was klärst du vor dem ersten Termin?',
@@ -550,6 +592,14 @@ export const article = {
         stand: 'ohne Datum',
         accessedAt: '07.10.2026',
         note: 'Preisorientierung des Verbands, keine Marktpreiserhebung',
+      },
+      {
+        label: 'Infoblatt zum IKK Bonus 2026',
+        publisher: 'IKK classic',
+        href: 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf',
+        stand: '04/2026',
+        accessedAt: '14.10.2026',
+        note: 'Zuschusswerte des Bonus-Beispiels',
       },
       {
         label: 'SGB V § 61 Zuzahlungen',

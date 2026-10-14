@@ -44,7 +44,7 @@ export const RATGEBER_ENTRIES = [
     "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
     "readingTimeMinutes": 8,
     "metaTitle": "IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio",
-    "metaDescription": "IKK classic Bonus 2026: Bonusheft oder App, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der dreifache Zuschuss deinen Beitrag senkt.",
+    "metaDescription": "IKK classic Bonusheft und Bonussystem 2026: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.",
     "publishedAt": "2026-09-22",
     "updatedAt": "2026-10-14"
   },
@@ -963,7 +963,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Heilpraktiker Kosten: wer zahlt was, Übersicht | Healio",
     "metaDescription": "Heilpraktiker Kosten im Überblick: Honorar, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie, was die Kasse zahlt und was ein Zusatztarif erstattet.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "heilpraktiker-zusatzversicherung",
@@ -972,9 +972,10 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Heilpraktiker-Zusatzversicherung: Kriterien, Grenzen und ein Rechenbeispiel",
     "listTeaser": "Was eine Heilpraktiker-Zusatzversicherung erstattet, woran du sie prüfst und was ehrlich zu den Gesundheitsfragen im Antrag und zu bestehenden Beschwerden gehört.",
     "readingTimeMinutes": 10,
-    "metaTitle": "Heilpraktiker Zusatzversicherung: worauf es ankommt | Healio",
-    "metaDescription": "Heilpraktiker Zusatzversicherung im Check: Kriterien statt Rangliste, was die Bedingungen erstatten, Gesundheitsfragen im Antrag und was schon läuft.",
-    "publishedAt": "2026-10-07"
+    "metaTitle": "Heilpraktiker Zusatzversicherung: Leistung, Wartezeit | Healio",
+    "metaDescription": "Zusatzversicherung Heilpraktiker: was nach GebüH erstattet wird, Wartezeit, Gesundheitsfragen ohne Ablehnung, Rechenbeispiel und wie dein Kassenbonus hilft.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "ambulante-zusatzversicherung",
@@ -1072,9 +1073,10 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
     "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
     "readingTimeMinutes": 16,
-    "metaTitle": "Welche Krankenkasse zahlt Osteopathie? | Healio",
-    "metaDescription": "Osteopathie bei 39 Kassen: Zuschüsse, ärztliche Nachweise, Qualifikation und gemeinsame Budgets. Mit aktuellen Satzungsfundstellen.",
-    "publishedAt": "2026-10-07"
+    "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
+    "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "physiotherapie-kosten",

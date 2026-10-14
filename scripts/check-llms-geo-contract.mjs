@@ -27,9 +27,12 @@ assert.match(
 
 const requiredBlogLinks = [
   'gesundheitsbudget-3000-euro',
-  'heilpraktiker-zusatzversicherung-vergleich-2026',
-  'ikk-classic-bonus-700-euro',
 ];
+// Seit 14.10.2026 in Ratgeber zusammengelegt (301), llms.txt verlinkt die Ratgeber.
+for (const url of ['https://healio.de/ratgeber/heilpraktiker-zusatzversicherung', 'https://healio.de/ratgeber/ikk-classic-bonusprogramm-2026']) {
+  assert(before.includes(url), `Ratgeber-Link fehlt in llms.txt: ${url}`);
+}
+assert(!/healio\.de\/blog\/(?:heilpraktiker-zusatzversicherung-vergleich-2026|ikk-classic-bonus-700-euro)/.test(before), 'llms.txt verlinkt noch zusammengelegte Blog-URLs.');
 
 assert.match(before, /\[Alle Healio-Ratgeberartikel\]\(https:\/\/healio\.de\/blog\)/, 'Der Ratgeber-Hub fehlt in llms.txt.');
 for (const slug of requiredBlogLinks) {
