@@ -149,5 +149,37 @@
     "title": "Du musst heute nicht alles versichern. Aber du solltest wissen, was du offenlässt.",
     "description": "Wir ordnen deinen Bedarf ein und zeigen dir die passenden nächsten Schritte, verständlich, persönlich und ohne Verkaufsdruck.",
     "cta": "Passenden Schutz finden"
+  },
+  "mobile": {
+    "heroTitle": "Welcher Schutz passt zu dir?",
+    "heroPrimaryCta": "Schutz auswählen",
+    "heroDescription": "Finde passenden Zusatzschutz für dich oder dein Tier.",
+    "trust": "Unabhängig beraten. Persönlich erreichbar.",
+    "pathsTitle": "Wähle deinen Bereich.",
+    "paths": {
+      "ambulant": {
+        "title": "Ambulant",
+        "text": "Heilpraktiker, Osteopathie, Brille und Vorsorge."
+      },
+      "dental": {
+        "title": "Zahn",
+        "text": "Zahnersatz, Behandlung und Prophylaxe."
+      },
+      "hospital": {
+        "title": "Klinik",
+        "text": "Zimmerwahl und privatärztliche Behandlung."
+      },
+      "pet": {
+        "title": "Tier",
+        "text": "Kranken- oder OP-Schutz für dein Tier."
+      }
+    },
+    "budgetTitle": "Mehr Budget für deine Gesundheit.",
+    "budgetText": "Kassenbonus und Zusatzschutz können zusammenspielen. Dein Ergebnis hängt vom Tarif und erreichten Bonus ab.",
+    "budgetDetails": "Wie entsteht das Budget?",
+    "kassenboostCta": "Krankenkasse vergleichen",
+    "adviceTitle": "Schutz, der zu dir passt.",
+    "processTitle": "In drei Schritten.",
+    "finalTitle": "Noch unsicher? Lass uns sprechen."
   }
 }

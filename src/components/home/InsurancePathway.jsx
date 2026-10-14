@@ -34,21 +34,51 @@ const InsurancePathway = () => {
   const items = t('products.items', { returnObjects: true });
 
   return (
-    <section id="schutz" className="home-section relative z-10 scroll-mt-20 overflow-hidden bg-white py-12 md:py-24 lg:py-28" aria-labelledby="insurance-pathway-title">
+    <section id="schutz" className="home-section relative z-10 scroll-mt-20 overflow-hidden bg-white py-10 md:py-24 lg:py-28" aria-labelledby="insurance-pathway-title">
       <div className="healio-container max-md:px-0">
         <div className="grid gap-4 md:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <h2 id="insurance-pathway-title" className="max-w-[15ch] font-display text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-home-midnight sm:text-5xl sm:leading-none">
-            {t('products.title')}
+          <h2 id="insurance-pathway-title" className="max-w-[15ch] font-display text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-home-midnight md:text-5xl md:leading-none">
+            <span className="md:hidden">{t('mobile.products.title')}</span>
+            <span className="hidden md:inline">{t('products.title')}</span>
           </h2>
-          <p className="max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:justify-self-end">
+          <p className="hidden max-w-xl text-base leading-7 md:block text-slate-600 sm:text-lg sm:leading-8 lg:justify-self-end">
             {t('products.description')}
           </p>
         </div>
 
-        {/* Mobil Wischreihe (drei Sparten), ab md das bisherige Dreier-Raster. */}
+        <ul className="mt-7 divide-y divide-[#DFE9E4] md:hidden">
+          {items.map((item) => (
+            <li key={item.key}>
+              <Link
+                to={getPath(item.routeKey)}
+                className="home-focus group flex min-h-[7rem] items-center gap-4 py-4"
+              >
+                <img
+                  src={productVisuals[item.key].scene}
+                  alt=""
+                  width="72"
+                  height="72"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-[72px] w-[72px] shrink-0 rounded-2xl object-cover"
+                />
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-display text-xl font-bold leading-6 text-home-midnight">{item.label}</h3>
+                  <p className="mt-1 text-sm leading-5 text-[#3f5b51]">{t(`mobile.products.descriptions.${item.key}`)}</p>
+                  <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-emerald-800 underline underline-offset-4">
+                    {t('mobile.products.cta')}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Ab md bleibt das bestehende Dreier-Raster erhalten. */}
         <MobileSwipeRow
           label={t('products.title')}
-          className="mt-8 md:mt-12"
+          className="mt-8 hidden md:mt-12 md:block"
           desktopClassName="md:grid md:grid-cols-3 md:gap-5"
           itemClassName="flex"
         >

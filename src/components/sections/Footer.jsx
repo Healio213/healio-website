@@ -219,9 +219,10 @@ const Footer = ({ hideCta = false, hideAppPromotion = false, formalApp = false }
                 {t(formalApp ? 'footer.appTitleFormal' : 'footer.appTitle')}
               </h3>
               <p className="mt-3 text-base leading-relaxed text-slate-300 md:leading-6">
-                {t(formalApp ? 'footer.appBodyFormal' : 'footer.appBody')}
+                <span className="md:hidden">{t('footer.appCompactBody')}</span>
+                <span className="hidden md:inline">{t(formalApp ? 'footer.appBodyFormal' : 'footer.appBody')}</span>
               </p>
-              <div className="mt-4 flex flex-wrap gap-2 text-sm text-slate-200 md:mt-5">
+              <div className="hidden flex-wrap gap-2 text-sm text-slate-200 md:mt-5 md:flex">
                 {[t('footer.appFeatureBudget'), t('footer.appFeatureReceipts'), t('footer.appFeatureBonus')].map((feature) => (
                   <span key={feature} className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.06] px-2.5 py-1.5 md:px-3 md:py-2">
                     <CheckCircle2 className="h-4 w-4 text-healio-primary" />

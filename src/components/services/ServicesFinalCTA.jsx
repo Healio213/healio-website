@@ -13,11 +13,12 @@ const ServicesFinalCTA = () => {
       <div className="healio-container overflow-hidden rounded-[2.5rem] bg-[#10202A] px-6 py-10 text-white shadow-[0_28px_90px_rgba(7,17,31,0.18)] sm:px-10 sm:py-16 lg:px-16 lg:py-20">
         <div className="grid gap-8 md:gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:text-xs">{t('finalCta.eyebrow')}</p>
+            <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:block md:text-xs">{t('finalCta.eyebrow')}</p>
             <h2 id="services-final-cta-title" className="mt-4 max-w-[20ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.045em] [text-wrap:balance] sm:text-5xl lg:text-6xl">
-              {t('finalCta.title')}
+              <span className="md:hidden">{t('mobile.finalTitle')}</span>
+              <span className="hidden md:inline">{t('finalCta.title')}</span>
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">{t('finalCta.description')}</p>
+            <p className="hidden max-w-2xl text-base leading-7 text-slate-300 md:mt-6 md:block md:text-lg md:leading-8">{t('finalCta.description')}</p>
           </div>
           <Link to={getPath('terminvereinbarung')} className="home-focus inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-[#25C990] px-7 py-4 font-display text-base font-extrabold text-[#07111F] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#10202A] motion-reduce:transform-none">
             {t('finalCta.cta')}

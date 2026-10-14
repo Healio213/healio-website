@@ -1,6 +1,7 @@
 import React from 'react';
 import { CalendarRange, ClipboardList, Clock3, Wallet } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import MobileDetails from '@/components/ui/MobileDetails';
 
 // Kasten „Auf einen Blick“ unter dem Ambulant-Hero (Marktanalyse 06.10.2026,
 // W4): die vier Fragen, die vor dem Abschluss am häufigsten offen bleiben.
@@ -79,17 +80,41 @@ const TONES = [
   { card: 'bg-[#fffcf2]', badge: 'bg-[#fbeab4] text-[#70520b]' },
 ];
 
+const MOBILE_FACTS = {
+  de: [
+    ['Keine Wartezeit', 'Ab Versicherungsbeginn. Bereits angeratene oder laufende Behandlungen sind ausgenommen.'],
+    ['Gesundheitsfragen', 'Grundsätzlich ohne Ablehnung. Zuschlag oder einzelner Ausschluss möglich.'],
+    ['Vier eigene Grenzen', 'Je nach Stufe 50 bis 100 % Erstattung. Sehhilfen immer 100 %.'],
+    ['Zwei Kalenderjahre', 'Volle Töpfe ab Start. Der erste Zeitraum kann kürzer sein.'],
+  ],
+  en: [
+    ['No waiting period', 'From the policy start. Previously recommended or ongoing treatment is excluded.'],
+    ['Health questions', 'As a rule, no rejection. A surcharge or individual exclusion is possible.'],
+    ['Four separate limits', '50 to 100% reimbursement by tier. Vision aids always 100%.'],
+    ['Two calendar years', 'Full pots from the start. The first period may be shorter.'],
+  ],
+};
+
 const AmbulantAufEinenBlick = () => {
   const { lang } = useLanguage();
   const copy = COPY[lang === 'en' ? 'en' : 'de'];
 
   return (
     <section className="bg-white px-4 pb-12 pt-2 sm:px-6 md:pb-16 lg:px-8" aria-labelledby="ambulant-auf-einen-blick" data-healio-ambulant="auf-einen-blick">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-emerald-900/10 bg-white p-5 shadow-[0_18px_44px_rgba(7,17,31,0.05)] sm:p-8">
+      <div className="mx-auto max-w-7xl bg-white md:rounded-[2rem] md:border md:border-emerald-900/10 md:p-8 md:shadow-[0_18px_44px_rgba(7,17,31,0.05)]">
         <h2 id="ambulant-auf-einen-blick" className="font-display text-2xl font-extrabold tracking-[-0.03em] text-home-midnight sm:text-3xl">
           {copy.title}
         </h2>
-        <p className="mt-2 text-base leading-7 text-home-slate">{copy.intro}</p>
+        <p className="mt-2 hidden text-base leading-7 text-home-slate md:block">{copy.intro}</p>
+        <dl className="mt-5 divide-y divide-slate-200 md:hidden">
+          {MOBILE_FACTS[lang === 'en' ? 'en' : 'de'].map(([title, text]) => (
+            <div key={title} className="py-3 first:pt-0">
+              <dt className="font-display text-base font-extrabold text-home-midnight">{title}</dt>
+              <dd className="mt-1 text-sm leading-6 text-home-slate">{text}</dd>
+            </div>
+          ))}
+        </dl>
+        <MobileDetails summary={lang === 'en' ? 'Full conditions & laser eye surgery' : 'Bedingungen & Augenlasern im Detail'} className="mt-3 md:mt-0">
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
           {copy.facts.map(({ icon: Icon, title, text, footnote }, index) => {
             const tone = TONES[index % TONES.length];
@@ -109,6 +134,7 @@ const AmbulantAufEinenBlick = () => {
           })}
         </ul>
         <p className="mt-5 text-xs leading-5 text-slate-500">* {copy.footnote}</p>
+        </MobileDetails>
       </div>
     </section>
   );

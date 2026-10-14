@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import MobileDetails from '@/components/ui/MobileDetails';
 
 const priceList = 'https://www.unimedizin-mainz.de/fileadmin/kliniken/kl33/Dokumente/UEbersicht_Entgelte_fuer_Wahlleistung_Unterkunft_UM_Stand_01.01.2026.pdf';
 const copy = {
@@ -45,10 +46,13 @@ export default function StationaerRoomCosts() {
   return (
     <section id="einzelzimmer-kosten" aria-labelledby="stationaer-room-costs-heading" className="scroll-mt-24 bg-[#fbfaf7] py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-bold text-[#087454]">{text.eyebrow}</p>
-        <h2 id="stationaer-room-costs-heading" className="mt-2 font-display text-2xl font-extrabold tracking-tight text-[#071726] sm:text-3xl">{text.title}</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-slate-600">{text.lead}</p>
+        <p className="hidden text-sm font-bold text-[#087454] md:block">{text.eyebrow}</p>
+        <h2 id="stationaer-room-costs-heading" className="font-display text-2xl font-extrabold tracking-tight text-[#071726] md:mt-2 sm:text-3xl"><span className="md:hidden">{lang === 'en' ? 'What can a single room cost?' : 'Was kann ein Einzelzimmer kosten?'}</span><span className="hidden md:inline">{text.title}</span></h2>
+        <p className="mt-3 hidden max-w-3xl leading-relaxed text-slate-600 md:block">{text.lead}</p>
+        <p className="mt-4 font-display text-3xl font-extrabold text-[#087454] md:hidden">{text.amount}<span className="ml-2 text-base font-semibold text-[#071726]">{lang === 'en' ? 'for 5 days' : 'für 5 Tage'}</span></p>
+        <p className="mt-2 text-sm leading-6 text-slate-600 md:hidden">{lang === 'en' ? 'Mainz example, room only. Each hospital charges differently.' : 'Beispiel Mainz, nur Zimmer. Jede Klinik berechnet anders.'}</p>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <MobileDetails summary={lang === 'en' ? 'Price example & original source' : 'Preisbeispiel & Originalquelle'}>
           <div className="rounded-2xl bg-[#eefaf5] p-5 sm:p-6">
             <p className="text-sm font-semibold text-slate-600">{text.example}</p>
             <p className="mt-4 font-medium text-[#071726]">{text.calculation}</p>
@@ -57,12 +61,13 @@ export default function StationaerRoomCosts() {
             <a href={priceList} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-[#087454] underline underline-offset-4">{text.source}</a>
             {text.detailCta && <Link to="/ratgeber/einzelzimmer-krankenhaus-kosten" className="mt-1 block py-2 text-sm font-semibold text-[#087454] underline underline-offset-4">{text.detailCta}</Link>}
           </div>
+          </MobileDetails>
           <div className="flex flex-col justify-center">
-            <h3 className="text-lg font-bold text-[#071726]">{text.futureTitle}</h3>
-            <p className="mt-2 leading-relaxed text-slate-600">{text.futureBody}</p>
+            <h3 className="hidden text-lg font-bold text-[#071726] md:block">{text.futureTitle}</h3>
+            <p className="leading-relaxed text-slate-600 md:mt-2"><span className="md:hidden">{lang === 'en' ? 'SP1: single room. SP2: twin room. SPU: accidents only. Policy terms apply.' : 'SP1: Einbettzimmer. SP2: Zweibettzimmer. SPU: nur nach Unfall. Tarifbedingungen gelten.'}</span><span className="hidden md:inline">{text.futureBody}</span></p>
             <a href="#tarife" className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 self-start rounded-full bg-[#25c990] px-5 py-3 font-bold text-[#071726] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087454]">{text.futureCta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
             <h3 className="mt-6 font-bold text-[#071726]">{text.currentTitle}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">{text.currentBody}</p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600"><span className="md:hidden">{lang === 'en' ? 'New cover does not pay for an event that has already occurred. Ask your hospital about its surcharge and check existing cover.' : 'Neuer Schutz zahlt keinen bereits eingetretenen Fall. Frag die Klinik nach ihrem Zuschlag und prüfe vorhandenen Schutz.'}</span><span className="hidden md:inline">{text.currentBody}</span></p>
           </div>
         </div>
       </div>

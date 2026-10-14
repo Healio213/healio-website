@@ -14,6 +14,7 @@ import {
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { useAmbulantStufe, setAmbulantStufe } from '@/lib/ambulant-stufe';
@@ -380,6 +381,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: selectedTier });
   const [selectedGoal, setSelectedGoal] = useState('natur');
   const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
+  const [mobileOverviewOpen, setMobileOverviewOpen] = useState(false);
   const goal = copy.compass.goals[selectedGoal];
   const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
   // Beiträge nie pauschal: ohne Geburtsjahr zeigt die Seite die Spanne über
@@ -518,9 +520,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
             </div>
           )}
           <div className="max-w-4xl">
-            <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.tiers.eyebrow}</p>
-            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight [text-wrap:balance] sm:text-4xl lg:text-5xl">{copy.tiers.title}</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-home-slate sm:text-lg md:mt-5">{copy.tiers.subtitle}</p>
+            <p className="home-eyebrow hidden text-sm tracking-[0.12em] md:block md:text-xs md:tracking-[0.22em]">{copy.tiers.eyebrow}</p>
+            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-home-midnight [text-wrap:balance] md:mt-4 sm:text-4xl lg:text-5xl"><span className="md:hidden">{language === 'en' ? 'Choose your health budget.' : 'Wähle dein Gesundheitsbudget.'}</span><span className="hidden md:inline">{copy.tiers.title}</span></h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-home-slate sm:text-lg md:mt-5"><span className="md:hidden">{language === 'en' ? 'Four tiers. Your age determines the premium.' : 'Vier Stufen. Dein Alter bestimmt den Beitrag.'}</span><span className="hidden md:inline">{copy.tiers.subtitle}</span></p>
           </div>
 
           <div className="mt-6 grid gap-3 md:mt-9 md:grid-cols-[minmax(0,1fr)_minmax(15rem,18rem)]">
@@ -576,7 +578,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                       {spanneText(tier)} <span className="text-sm font-semibold text-slate-300">{copy.tiers.perMonth}</span>
                     </p>
                   )}
-                  <p className="mt-2 text-base leading-6 text-slate-300 md:mt-3 md:text-sm md:leading-6">{altersgruppe ? copy.tiers.groupRule : copy.tiers.priceRangeHint}</p>
+                  <p className="mt-2 text-base leading-6 text-slate-300 md:mt-3 md:text-sm md:leading-6"><span className="md:hidden">{altersgruppe ? language === 'en' ? 'The premium rises when you enter the next age group.' : 'Mit der nächsten Altersgruppe steigt der Beitrag.' : copy.tiers.priceRangeHint}</span><span className="hidden md:inline">{altersgruppe ? copy.tiers.groupRule : copy.tiers.priceRangeHint}</span></p>
                   {/* Mobil ausgeblendet: derselbe Satz „Beiträge der SDK-Tarife, Stand …“ steht
                       wortgleich unter der Stufenübersicht weiter unten. */}
                   <p className="mt-3 hidden text-xs text-slate-400 md:block">{copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}</p>
@@ -628,11 +630,21 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
                   className="mt-4 max-w-2xl"
                 />
                 <p className="mt-3 max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-                <p className="mt-4 max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
+                <p className="mt-4 text-sm leading-5 text-slate-500 md:hidden">{language === 'en' ? 'Four limits per two calendar years from policy start. Reimbursement of insured invoices, no freely available cash.' : 'Vier Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Erstattung versicherter Rechnungen, kein frei verfügbares Guthaben.'}</p>
+                <MobileDetails summary={language === 'en' ? 'Budget terms in detail' : 'Budgetbedingungen im Detail'} className="mt-2">
+                  <p className="max-w-2xl text-sm leading-5 text-slate-500 md:mt-5 md:text-xs md:leading-5">{copy.tiers.disclosure}</p>
+                </MobileDetails>
               </div>
             </div>
           </div>
 
+          <p className="mt-4 text-sm leading-6 text-slate-500 md:hidden">{copy.tiers.priceNote}</p>
+          {/* Ein einziger Tabellenbestand samt Altersgruppen-Aufklapper.
+              Ab md steht die Übersicht wie bisher dauerhaft offen. */}
+          <button type="button" aria-expanded={mobileOverviewOpen} aria-controls="ambulant-mobile-stufen" onClick={() => setMobileOverviewOpen((open) => !open)} className="home-focus mt-3 flex min-h-11 w-full items-center justify-between gap-3 py-2 text-left text-sm font-semibold text-home-midnight md:hidden" data-healio-ambulant="tier-overview">
+            {language === 'en' ? 'Compare all tiers & age groups' : 'Alle Stufen & Altersgruppen vergleichen'}<ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${mobileOverviewOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+          </button>
+          <div id="ambulant-mobile-stufen" className={`${mobileOverviewOpen ? 'block' : 'hidden'} md:contents`}>
           <div className="mt-4 overflow-hidden rounded-[1.6rem] border border-slate-200 bg-white md:mt-6">
             <p id="ambulant-stufen-uebersicht" className="border-b border-slate-200 bg-slate-50 px-4 py-3 font-display text-sm font-extrabold text-home-midnight sm:px-6">
               {copy.tiers.overviewTitle}
@@ -702,6 +714,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
               </div>
             </details>
             <p className="border-t border-slate-100 px-4 py-3 text-sm leading-5 text-slate-500 sm:px-6 md:text-xs md:leading-5"><span className="hidden md:inline">{copy.tiers.visionNote} </span>{copy.tiers.priceNote} {copy.tiers.priceSource.replace('{{stand}}', SDK_AMBULANT_BEITRAEGE.stand)}.</p>
+          </div>
           </div>
 
           {/* UKV freiwillig ergänzen, ARAG als eigener Alternativweg aufklappen. */}
@@ -788,7 +801,23 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
       )}
 
       <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl md:hidden">
+          <h2 className="font-display text-2xl font-extrabold text-home-midnight">{language === 'en' ? 'Three simple steps.' : 'Drei einfache Schritte.'}</h2>
+          <ol className="mt-5 space-y-4">
+            {copy.process.steps.map((step, index) => (
+              <li key={step.title} className="flex items-start gap-3">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-home-mint/15 text-sm font-extrabold text-emerald-800" aria-hidden="true">{index + 1}</span>
+                <div><h3 className="font-display text-base font-extrabold text-home-midnight">{step.title}</h3><p className="mt-1 text-sm leading-6 text-home-slate">{step.text}</p></div>
+              </li>
+            ))}
+          </ol>
+          <MobileDetails summary={language === 'en' ? 'About Healio & your decision' : 'Über Healio & deine Entscheidung'} className="mt-4">
+            <p className="text-sm leading-6 text-home-slate">{copy.process.trustText}</p>
+            {fromBonusTopic && <p className="mt-3 text-sm leading-6 text-home-slate">{copy.process.switchText}</p>}
+          </MobileDetails>
+          {HEALIO_VOICE_CONTACT_ENABLED && <button type="button" onClick={() => requestNitaConsent('global_launcher')} className="home-focus mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-home-midnight underline underline-offset-4"><Bot className="h-4 w-4" aria-hidden="true" />{copy.process.assistantCta}</button>}
+        </div>
+        <div className="mx-auto hidden max-w-7xl md:block">
           <div className="mx-auto max-w-3xl text-center">
             <p className="home-eyebrow text-sm tracking-[0.12em] md:text-xs md:tracking-[0.22em]">{copy.process.eyebrow}</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.process.title}</h2>

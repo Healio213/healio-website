@@ -297,5 +297,64 @@
     "moreInfo": "Learn more",
     "notSure": "Not sure which insurance is right for you?",
     "freeConsultation": "Request free consultation"
+  },
+  "mobile": {
+    "hero": {
+      "titleLead": "Get more from",
+      "titleAccent": "your health fund.",
+      "description": "Your health fund bonus may help pay for extra cover.",
+      "budgetLink": "Outpatient: up to EUR 3,000 over 2 years",
+      "budgetNote": "Plan benefits subject to conditions, not a cash balance.",
+      "primaryCta": "Check your fund in 90 seconds",
+      "ctaHint": "Free · Switching is your choice",
+      "paths": {
+        "private": "For me",
+        "employer": "Employers",
+        "practice": "Practices"
+      }
+    },
+    "contribution": {
+      "title": "What does extra cover cost?",
+      "hint": "An example with premium and bonus"
+    },
+    "process": {
+      "title": "Three simple steps.",
+      "detailsTitle": "How is the bonus paid?",
+      "steps": [
+        {
+          "title": "Check your fund",
+          "description": "Compare premiums, bonuses and benefits."
+        },
+        {
+          "title": "Choose cover",
+          "description": "Outpatient, dental or hospital. Tailored to you."
+        },
+        {
+          "title": "Claim your bonus",
+          "description": "Pay the premium first. Claim with supporting evidence."
+        }
+      ]
+    },
+    "products": {
+      "title": "Your cover. Your choice.",
+      "cta": "Explore",
+      "descriptions": {
+        "ambulant": "Naturopathy, osteopathy, vision aids and prevention.",
+        "dental": "Treatment, restorations and prevention, depending on the plan.",
+        "hospital": "Rooms, specialists and hospital choice, depending on the plan."
+      }
+    },
+    "trust": {
+      "title": "Digital. Personal.",
+      "description": "Budget, receipts and policies in the Healio app. We are here when you have questions.",
+      "detailsTitle": "Broker and ongoing support"
+    },
+    "finalCta": {
+      "title": "What can your fund offer?",
+      "cta": "Check for free"
+    },
+    "explanationVideo": {
+      "title": "Healio in 2 minutes"
+    }
   }
 }

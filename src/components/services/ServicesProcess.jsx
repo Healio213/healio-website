@@ -9,9 +9,10 @@ const ServicesProcess = () => {
     <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="services-process-title">
       <div className="healio-container max-md:px-0">
         <div className="min-w-0">
-          <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700 md:text-xs">{t('process.eyebrow')}</p>
+          <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700 md:block md:text-xs">{t('process.eyebrow')}</p>
           <h2 id="services-process-title" className="mt-4 max-w-[20ch] break-words font-display text-[clamp(1.375rem,calc((100vw_-_4rem)/11.5),2.25rem)] font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] max-[319px]:[hyphens:auto] sm:text-5xl lg:text-[clamp(2.5rem,3.9vw,3rem)]">
-            {t('process.title')}
+            <span className="md:hidden">{t('mobile.processTitle')}</span>
+            <span className="hidden md:inline">{t('process.title')}</span>
           </h2>
         </div>
 

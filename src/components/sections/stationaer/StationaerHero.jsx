@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const choiceKeys = ['dkv', 'sp2', 'sp1', 'spu'];
 
@@ -22,6 +23,7 @@ const choiceStyles = {
 const StationaerHero = () => {
   const HeroHeading = useDesktopLayout() ? 'h2' : 'h1';
   const { t } = useTranslation('stationaer');
+  const { lang } = useLanguage();
 
   return (
     <section
@@ -43,35 +45,39 @@ const StationaerHero = () => {
           transition={{ duration: 0.65 }}
           className="min-w-0 w-full max-w-3xl"
         >
-          <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] [overflow-wrap:anywhere] sm:tracking-[0.23em]">
+          <p className="hidden font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] [overflow-wrap:anywhere] md:block sm:tracking-[0.23em]">
             {t('refresh.hero.eyebrow')}
           </p>
           <HeroHeading
             id="stationaer-hero-heading"
-            className="mt-4 max-w-[17ch] font-display text-[2.15rem] md:mt-5 md:text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
+            className="max-w-[17ch] font-display text-[2.15rem] md:mt-5 md:text-[clamp(2.4rem,4.6vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.035em] [text-wrap:balance]"
           >
-            {t('refresh.hero.title')}
+            <span className="md:hidden">{lang === 'en' ? <>Your room.<span className="block text-[#5ee0b1]">Your choice of doctor.</span></> : <>Dein Zimmer.<span className="block text-[#5ee0b1]">Deine Arztwahl.</span></>}</span>
+            <span className="hidden md:inline">{t('refresh.hero.title')}</span>
           </HeroHeading>
           <p className="mt-4 max-w-2xl text-base font-medium md:mt-6 leading-relaxed text-slate-200 sm:text-lg lg:text-xl">
-            {t('refresh.hero.subtitle')}
+            <span className="md:hidden">{lang === 'en' ? 'Single room only, or private medical care too? Choose your hospital cover. Your bonus may help with the premium.' : 'Nur Einbettzimmer oder auch Wahlarzt? Wähle deinen Klinikschutz. Dein Bonus kann beim Beitrag helfen.'}</span>
+            <span className="hidden md:inline">{t('refresh.hero.subtitle')}</span>
           </p>
 
           <a
             href="#tarife"
-            className="mt-6 inline-flex min-h-12 md:mt-8 items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
+            className="mt-6 inline-flex min-h-12 w-full md:mt-8 md:w-auto items-center justify-center gap-2 rounded-full bg-[#25c990] px-7 py-3.5 font-extrabold text-[#071726] shadow-[0_14px_36px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
           >
             {t('refresh.hero.cta')}
             <ArrowDown className="h-4 w-4" aria-hidden="true" />
           </a>
           <UrgencyNote surface="stationaer" />
-          <a href="#einzelzimmer-kosten" className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
-            {t('refresh.hero.costsCta')}
-          </a>
-          <a href="#familie" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
-            {t('refresh.hero.familyCta')}
-          </a>
+          <div className="mt-2 flex flex-wrap gap-x-6 md:mt-0 md:block">
+            <a href="#einzelzimmer-kosten" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4 md:mt-2">
+              <span className="md:hidden">{lang === 'en' ? 'Room costs' : 'Zimmerkosten'}</span><span className="hidden md:inline">{t('refresh.hero.costsCta')}</span>
+            </a>
+            <a href="#familie" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
+              <span className="md:hidden">{lang === 'en' ? 'Family & midwife' : 'Familie & Hebamme'}</span><span className="hidden md:inline">{t('refresh.hero.familyCta')}</span>
+            </a>
+          </div>
 
-          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-slate-300 md:text-sm">
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-300 md:mt-6">
             {/* Mobil nur der Wartezeit-Hinweis (Eintrag 1): "Vier Tarifwege klar
                 getrennt" (Eintrag 0) wiederholt die Auswahlkarte direkt darunter
                 (Experiment Handy-Conversion 10/2026). Ab md bleiben beide. */}
@@ -96,7 +102,7 @@ const StationaerHero = () => {
                 Wischreihe; ab md (768 px) unverändert Figur links und
                 gestapelte Karten rechts. */}
             <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 md:min-h-[29rem] md:grid-cols-[0.9fr_1.1fr] md:items-end md:gap-x-0">
-              <div className="relative z-10 min-w-0 md:self-end">
+              <div className="relative z-10 hidden min-w-0 md:block md:self-end">
                 <img
                   src="/images/friendly-icons/decision-choice.webp"
                   alt=""
@@ -109,12 +115,22 @@ const StationaerHero = () => {
               </div>
 
               <div className="contents md:relative md:z-20 md:flex md:min-w-0 md:flex-col md:gap-3 md:self-center md:py-5">
-                <p className="font-display text-base font-extrabold leading-tight text-[#0b6048] md:mb-1 md:leading-6">
+                <p className="col-span-2 font-display text-base font-extrabold leading-tight text-[#0b6048] md:col-span-1 md:mb-1 md:leading-6">
                   {t('refresh.hero.visualTitle')}
                 </p>
+                <ul className="col-span-2 mt-4 grid grid-cols-2 gap-3 md:hidden">
+                  {choiceKeys.map((key) => (
+                    <li key={key}>
+                      <a href={key === 'dkv' ? '#dkv-einbettzimmer' : '#tarife'} className="block h-full rounded-xl bg-white/85 p-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b6048]">
+                        <span className="block text-xs font-bold text-[#0b6048]">{t(`refresh.hero.choices.${key}.code`)}</span>
+                        <span className="mt-1 block text-sm font-extrabold leading-5 text-[#071726]">{t(`refresh.hero.choices.${key}.label`)}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
                 <MobileSwipeRow
                   label={t('refresh.hero.visualTitle')}
-                  className="col-span-2 mt-2 min-w-0 md:col-span-1 md:mt-0"
+                  className="col-span-2 mt-2 hidden min-w-0 md:col-span-1 md:mt-0 md:block"
                   desktopClassName="-mx-4 scroll-pl-4 px-4 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:flex md:flex-col md:gap-3 md:px-0"
                   mobileItemWidth="w-[78%]"
                   bleed={false}

@@ -133,5 +133,37 @@
     "title": "You do not have to insure everything today. But you should know what you leave open.",
     "description": "We clarify your needs and show you the right next steps – clearly, personally and without sales pressure.",
     "cta": "Find the right cover"
+  },
+  "mobile": {
+    "heroTitle": "Which cover fits your needs?",
+    "heroPrimaryCta": "Choose cover",
+    "heroDescription": "Find supplementary cover for you or your pet.",
+    "trust": "Independent advice. Personal support.",
+    "pathsTitle": "Choose your cover.",
+    "paths": {
+      "ambulant": {
+        "title": "Outpatient",
+        "text": "Naturopathy, osteopathy, glasses and screenings."
+      },
+      "dental": {
+        "title": "Dental",
+        "text": "Dentures, treatment and preventive care."
+      },
+      "hospital": {
+        "title": "Hospital",
+        "text": "Room choice and private medical treatment."
+      },
+      "pet": {
+        "title": "Pet",
+        "text": "Health or surgery cover for your pet."
+      }
+    },
+    "budgetTitle": "More room for your health.",
+    "budgetText": "An insurer bonus and supplementary cover can work together. Your result depends on the plan and bonus achieved.",
+    "budgetDetails": "How does the budget work?",
+    "kassenboostCta": "Compare health insurers",
+    "adviceTitle": "Cover that fits your needs.",
+    "processTitle": "Three simple steps.",
+    "finalTitle": "Unsure? Let’s talk."
   }
 }

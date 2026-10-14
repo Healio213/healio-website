@@ -299,5 +299,64 @@
     "moreInfo": "Mehr erfahren",
     "notSure": "Nicht sicher, welche Versicherung die richtige für Sie ist?",
     "freeConsultation": "Kostenlose Beratung anfragen"
+  },
+  "mobile": {
+    "hero": {
+      "titleLead": "Mehr aus deiner",
+      "titleAccent": "Krankenkasse holen.",
+      "description": "Dein Kassenbonus kann deinen Zusatzschutz mitfinanzieren.",
+      "budgetLink": "Ambulant: bis zu 3.000 EUR in 2 Jahren",
+      "budgetNote": "Tarifleistungen nach Bedingungen, kein auszahlbares Guthaben.",
+      "primaryCta": "Kasse in 90 Sekunden prüfen",
+      "ctaHint": "Kostenfrei · Wechsel freiwillig",
+      "paths": {
+        "private": "Für mich",
+        "employer": "Unternehmen",
+        "practice": "Praxis"
+      }
+    },
+    "contribution": {
+      "title": "Was kostet der Zusatzschutz?",
+      "hint": "Beispielrechnung mit Beitrag und Bonus"
+    },
+    "process": {
+      "title": "So einfach geht’s.",
+      "detailsTitle": "Wie wird der Bonus ausgezahlt?",
+      "steps": [
+        {
+          "title": "Kasse prüfen",
+          "description": "Beitrag, Bonus und Leistungen vergleichen."
+        },
+        {
+          "title": "Schutz wählen",
+          "description": "Ambulant, Zahn oder Klinik. Passend zu dir."
+        },
+        {
+          "title": "Bonus beantragen",
+          "description": "Beitrag zuerst selbst zahlen. Bonus mit Nachweisen nutzen."
+        }
+      ]
+    },
+    "products": {
+      "title": "Dein Schutz. Deine Wahl.",
+      "cta": "Ansehen",
+      "descriptions": {
+        "ambulant": "Heilpraktiker, Osteopathie, Brille und Vorsorge.",
+        "dental": "Behandlung, Zahnersatz und Prophylaxe, je nach Tarif.",
+        "hospital": "Zimmer, Spezialisten und Klinikwahl, je nach Tarif."
+      }
+    },
+    "trust": {
+      "title": "Digital. Persönlich.",
+      "description": "Budget, Belege und Verträge in der Healio App. Bei Fragen sind wir für dich da.",
+      "detailsTitle": "Makler und Begleitung"
+    },
+    "finalCta": {
+      "title": "Was steckt in deiner Kasse?",
+      "cta": "Jetzt kostenfrei prüfen"
+    },
+    "explanationVideo": {
+      "title": "Healio in 2 Minuten"
+    }
   }
 }

@@ -234,15 +234,15 @@ const DentalHighlightCards = () => {
   };
 
   return (
-    <section id="zahn-highlights" className="relative overflow-hidden bg-white py-16 md:py-24" aria-labelledby="zahn-highlights-heading">
+    <section id="zahn-highlights" className="relative overflow-hidden bg-white py-12 md:py-24" aria-labelledby="zahn-highlights-heading">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="font-display text-base font-bold text-[#0b7a5a]">{copy.label}</p>
-            <h2 id="zahn-highlights-heading" className="mt-3 font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#07111f] [text-wrap:balance] sm:text-4xl lg:text-5xl">
-              {copy.title}
+            <p className="hidden font-display text-base font-bold text-[#0b7a5a] md:block">{copy.label}</p>
+            <h2 id="zahn-highlights-heading" className="font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#07111f] [text-wrap:balance] md:mt-3 sm:text-4xl lg:text-5xl">
+              <span className="md:hidden">{language === 'en' ? 'Dental cover at a glance.' : 'Zahnschutz auf einen Blick.'}</span><span className="hidden md:inline">{copy.title}</span>
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">{copy.text}</p>
+            <p className="mt-3 max-w-xl text-base leading-7 text-slate-600 md:mt-4 sm:text-lg sm:leading-8"><span className="md:hidden">{language === 'en' ? 'Tap a card for benefits and conditions.' : 'Tippe für Leistungen und Voraussetzungen.'}</span><span className="hidden md:inline">{copy.text}</span></p>
           </div>
           <div className="hidden shrink-0 gap-2 md:flex">
             <button
@@ -271,7 +271,7 @@ const DentalHighlightCards = () => {
         <ul
           ref={trackRef}
           aria-label={copy.carousel}
-          className="relative mt-9 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-pl-4 px-4 pb-3 [scrollbar-width:none] sm:scroll-pl-6 sm:px-6 lg:scroll-pl-8 lg:px-8 xl:scroll-pl-[calc((100vw_-_80rem)/2_+_2rem)] xl:px-[calc((100vw_-_80rem)/2_+_2rem)] [&::-webkit-scrollbar]:hidden"
+          className="relative mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-pl-4 px-4 pb-3 [scrollbar-width:none] md:mt-9 sm:scroll-pl-6 sm:px-6 lg:scroll-pl-8 lg:px-8 xl:scroll-pl-[calc((100vw_-_80rem)/2_+_2rem)] xl:px-[calc((100vw_-_80rem)/2_+_2rem)] [&::-webkit-scrollbar]:hidden"
         >
           {cards.map((card, index) => {
             const tone = TONES[card.tone];
@@ -289,7 +289,7 @@ const DentalHighlightCards = () => {
                     aria-label={`${card.label[language]}: ${card.body.title}. ${copy.more} (${index + 1}/${cards.length})`}
                     className={`group flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-[#07111f]/[0.06] text-left shadow-[0_18px_44px_rgba(7,17,31,0.10)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-4 ${tone.soft}`}
                   >
-                    <span className="relative block aspect-[3/2] w-full overflow-hidden bg-[#071726]">
+                    <span className="relative block aspect-[2/1] w-full overflow-hidden bg-[#071726] md:aspect-[3/2]">
                       <img
                         src={card.scene}
                         alt=""
@@ -300,7 +300,7 @@ const DentalHighlightCards = () => {
                         className="h-full w-full object-cover object-[50%_20%] transition duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
                       />
                     </span>
-                    <span className="flex flex-1 flex-col p-6">
+                    <span className="flex flex-1 flex-col p-5 md:p-6">
                       {/* Frank 07.10.2026: keine Beschriftung auf dem Bild, die Situation steht hier unten. */}
                       <span className={`mb-2 block text-sm font-bold ${BODY_INK[card.tone]}`}>{card.label[language]}</span>
                       {card.figure ? (
@@ -311,10 +311,10 @@ const DentalHighlightCards = () => {
                           <span className="min-w-[9rem] flex-1 text-sm leading-5 text-[#07111f]/70">{card.figureNote[language]}</span>
                         </span>
                       ) : null}
-                      <span className={`block font-display text-xl font-extrabold leading-snug text-[#07111f] [text-wrap:balance] ${card.figure ? 'mt-3' : ''}`}>
+                      <span className={`${card.figure ? 'hidden md:block' : 'block'} font-display text-xl font-extrabold leading-snug text-[#07111f] [text-wrap:balance] ${card.figure ? 'mt-3' : ''}`}>
                         {card.body.title}
                       </span>
-                      <span className="mt-2 line-clamp-3 text-base leading-6 text-slate-600">{card.body.text}</span>
+                      <span className="mt-2 line-clamp-3 text-base leading-6 text-slate-600 max-md:hidden">{card.body.text}</span>
                       <span className="mt-auto flex items-center justify-between gap-3 pt-5">
                         <span className={`text-sm font-bold ${BODY_INK[card.tone]}`}>{card.body.insurer}</span>
                         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#07111f] text-white transition group-hover:bg-home-mint group-hover:text-home-midnight" aria-hidden="true">

@@ -11,14 +11,15 @@ const HonestAdvice = () => {
       <div className="healio-container relative z-10 max-md:px-0">
         <div className="grid gap-8 md:gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
           <div>
-            <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:text-xs">{t('advice.eyebrow')}</p>
-            <h2 id="honest-advice-title" className="mt-4 max-w-[13ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl">
-              {t('advice.title')}
+            <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:block md:text-xs">{t('advice.eyebrow')}</p>
+            <h2 id="honest-advice-title" className="max-w-[20ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] md:mt-4 md:max-w-[13ch] md:text-5xl md:tracking-[-0.045em]">
+              <span className="md:hidden">{t('mobile.adviceTitle')}</span>
+              <span className="hidden md:inline">{t('advice.title')}</span>
             </h2>
             <p className="mt-4 max-w-lg text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">{t('advice.description')}</p>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 sm:p-9">
+          <div className="hidden rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 sm:p-9 md:block">
             <p className="font-display text-sm font-bold uppercase tracking-[0.16em] text-slate-400">{t('advice.wrongLabel')}</p>
             <p className="mt-3 font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-slate-400 line-through decoration-slate-500 sm:text-3xl">
               {t('advice.wrongQuestion')}
@@ -31,10 +32,10 @@ const HonestAdvice = () => {
           </div>
         </div>
 
-        <div className="mt-8 grid border-y border-white/10 sm:mt-14 sm:grid-cols-3">
+        <div className="mt-6 grid border-y border-white/10 md:mt-14 md:grid-cols-3">
           {criteria.map((item, index) => (
-            <article key={item.title} className={`py-5 sm:px-7 sm:py-8 ${index > 0 ? 'border-t border-white/10 sm:border-l sm:border-t-0' : ''}`}>
-              <h3 className="font-display text-xl font-extrabold leading-snug tracking-[-0.025em] text-white [text-wrap:balance] sm:text-2xl">{item.title}</h3>
+            <article key={item.title} className={`py-5 md:px-7 md:py-8 ${index > 0 ? 'border-t border-white/10 md:border-l md:border-t-0' : ''}`}>
+              <h3 className="font-display text-base font-extrabold leading-snug tracking-[-0.025em] text-white [text-wrap:balance] md:text-2xl">{item.title}</h3>
             </article>
           ))}
         </div>

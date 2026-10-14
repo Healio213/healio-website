@@ -19,6 +19,7 @@ import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
 import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
@@ -136,18 +137,20 @@ const ZahnPage = () => {
                 transition={{ duration: reduceMotion ? 0 : 0.5 }}
                 className="min-w-0 max-w-2xl"
               >
-                <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1]">
+                <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#5ee0b1] md:block">
                   {content.hero.eyebrow}
                 </p>
                 <HeroHeading
                   id="zahn-hero-heading"
-                  className="mt-5 max-w-[17ch] font-display text-[clamp(1.9rem,9vw,2.4rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-[clamp(2.4rem,4.6vw,4.25rem)] [text-wrap:balance]"
+                  className="max-w-[17ch] font-display text-[clamp(1.9rem,9vw,2.4rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-[clamp(2.4rem,4.6vw,4.25rem)] md:mt-5 [text-wrap:balance]"
                 >
-                  <span className="block">{content.hero.titleLead}</span>{' '}
-                  <span className="block text-[#5ee0b1]">{content.hero.titleAccent}</span>
+                  <span className="md:hidden">{lang === 'en' ? <>Strong cover <span className="block text-[#5ee0b1]">for your teeth.</span></> : <>Starker Schutz <span className="block text-[#5ee0b1]">für deine Zähne.</span></>}</span>
+                  <span className="hidden md:block">{content.hero.titleLead}</span>{' '}
+                  <span className="hidden text-[#5ee0b1] md:block">{content.hero.titleAccent}</span>
                 </HeroHeading>
                 <p className="mt-4 max-w-xl text-base leading-6 text-slate-200 sm:text-xl sm:leading-7 md:mt-6">
-                  {content.hero.text}
+                  <span className="md:hidden">{lang === 'en' ? 'ZahnPRIVAT 100: up to 100% of eligible costs, including statutory benefits. Find your route in one minute.' : 'ZahnPRIVAT 100: bis zu 100 % der erstattungsfähigen Kosten inklusive Kassenleistung. Finde deinen Weg in einer Minute.'}</span>
+                  <span className="hidden md:inline">{content.hero.text}</span>
                 </p>
 
                 <a
@@ -158,7 +161,10 @@ const ZahnPage = () => {
                   {content.hero.cta}<ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </a>
                 <UrgencyNote surface="zahn" />
-                <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{content.hero.condition}</p>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">
+                  <span className="md:hidden">{lang === 'en' ? 'Health declarations and benefit limits apply. Treatment already recommended needs a separate check.' : 'Gesundheitsangaben und Leistungsgrenzen gelten. Bereits angeratene Behandlungen separat prüfen.'}</span>
+                  <span className="hidden md:inline">{content.hero.condition}</span>
+                </p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
                   {content.hero.micro.map((item) => (
@@ -224,7 +230,7 @@ const ZahnPage = () => {
               </motion.div>
             </div>
 
-            <div className="mt-8 grid gap-3 border-t border-white/15 pt-5 md:mt-12 md:gap-4 md:pt-6 sm:grid-cols-3">
+            <div className="mt-8 hidden gap-3 border-t border-white/15 pt-5 md:mt-12 md:grid md:gap-4 md:pt-6 sm:grid-cols-3">
               {content.hero.trust.map((item, index) => (
                 <div key={item} className="flex items-center gap-3 text-left text-base font-bold text-white/85">
                   <FriendlyIcon kind={trustVisuals[index].kind} tone={trustVisuals[index].tone} size="sm" className="!h-10 !w-10 sm:!h-12 sm:!w-12" />
@@ -260,6 +266,7 @@ const ZahnPage = () => {
               <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.paths.text}</p>
             </div>
 
+            <MobileDetails summary={lang === 'en' ? 'The two insurers & their conditions' : 'Die zwei Versicherer & ihre Voraussetzungen'}>
             <div className="mt-0 overflow-hidden rounded-[2rem] border border-[#dfe8e3] bg-white shadow-[0_24px_70px_rgba(20,46,37,0.08)] md:mt-12 md:rounded-[2.75rem]">
               <div className="grid md:grid-cols-2">
               {content.paths.cards.map((card, index, cards) => {
@@ -298,6 +305,7 @@ const ZahnPage = () => {
                 </Link>.
               </p>
             )}
+            </MobileDetails>
           </div>
         </section>
 
@@ -365,11 +373,11 @@ const ZahnPage = () => {
         <section className="bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-process-heading">
           <div className="healio-container grid gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.75fr)] lg:gap-20">
             <div className="min-w-0">
-              <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#087654]">{content.process.eyebrow}</p>
-              <h2 id="zahn-process-heading" className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl lg:text-5xl">
+              <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] md:block md:text-xs text-[#087654]">{content.process.eyebrow}</p>
+              <h2 id="zahn-process-heading" className="max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] md:mt-4 sm:text-4xl lg:text-5xl">
                 {content.process.title}
               </h2>
-              <p className="mt-4 max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5">{content.process.text}</p>
+              <p className="mt-4 hidden max-w-2xl text-lg leading-7 text-slate-600 sm:leading-8 md:mt-5 md:block">{content.process.text}</p>
 
               {/* Experiment 05.10.2026: die drei Schritte sind eine Reihenfolge und
                   wischen mobil als Karten nebeneinander; ab md bleibt die

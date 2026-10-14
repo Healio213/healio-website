@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_STATIONAER_URL, trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
 
@@ -96,21 +97,21 @@ const StationaerBayerischeAlternative = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <article className="grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[1.8rem] border border-home-mint/20 bg-white shadow-[0_18px_45px_rgba(29,53,63,0.07)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
           <div className="bg-home-ice p-6 sm:p-8 lg:p-10">
-            <FriendlyIcon kind="hospital" tone="sky" size="md" className="!h-12 !w-12 md:!h-16 md:!w-16" />
-            <p className="mt-4 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-midnight md:mt-6 md:text-xs md:tracking-[0.18em]">
+            <FriendlyIcon kind="hospital" tone="sky" size="md" className="!hidden md:!inline-grid md:!h-16 md:!w-16" />
+            <p className="mt-4 hidden font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-midnight md:mt-6 md:block md:text-xs md:tracking-[0.18em]">
               {copy.eyebrow}
             </p>
             <h2
               id="stationaer-bayerische-heading"
-              className="mt-3 max-w-[18ch] font-display text-2xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#071726] [text-wrap:balance] sm:text-3xl"
+              className="max-w-[18ch] font-display text-2xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#071726] [text-wrap:balance] md:mt-3 sm:text-3xl"
             >
               {copy.title}
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 [text-wrap:pretty]">
+            <p className="mt-4 hidden max-w-xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] md:block">
               {copy.lead}
             </p>
 
-            <p className="mt-5 text-sm font-extrabold uppercase tracking-[0.12em] text-slate-500 md:mt-6 md:text-xs md:tracking-[0.16em]">
+            <p className="mt-5 hidden text-sm font-extrabold uppercase tracking-[0.12em] text-slate-500 md:mt-6 md:block md:text-xs md:tracking-[0.16em]">
               {copy.tariffsLabel}
             </p>
             <ul className="mt-3 flex flex-wrap gap-2" aria-label={copy.tariffsLabel}>
@@ -123,6 +124,9 @@ const StationaerBayerischeAlternative = () => {
                 </li>
               ))}
             </ul>
+
+            <p className="mt-4 text-sm leading-6 text-slate-600 md:hidden">{language === 'en' ? 'At age 21–30: Komfort EUR 10.20, Prestige EUR 13.40/month (09/2026). Premiums rise with age groups.' : 'Mit 21–30 Jahren: Komfort 10,20 EUR, Prestige 13,40 EUR/Monat (09/2026). Mit der Altersgruppe steigt der Beitrag.'}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600 md:hidden">{language === 'en' ? 'No general waiting period. Eight months for childbirth and psychotherapy, waived after accidents. An existing pregnancy is excluded for that birth.' : 'Keine allgemeine Wartezeit. Für Entbindung und Psychotherapie acht Monate, bei Unfall keine. Eine bestehende Schwangerschaft ist für diese Geburt ausgeschlossen.'}</p>
 
             <div className="mt-6 md:mt-8">
               <LeadCaptureLink
@@ -155,7 +159,14 @@ const StationaerBayerischeAlternative = () => {
 
           {/* Mobil sind die vier Angaben eine Wischreihe aus kleinen Karten;
               ab md bleibt es die bisherige Liste mit Trennlinien. */}
-          <div className="border-t border-[#e3ecf5] px-6 py-5 sm:px-8 md:py-2 lg:border-l lg:border-t-0 lg:px-10 lg:py-4">
+          <div className="border-t border-[#e3ecf5] px-6 py-3 sm:px-8 md:hidden">
+            <MobileDetails summary={language === 'en' ? 'Full benefits & conditions' : 'Leistungen & Voraussetzungen im Detail'}>
+              <dl className="space-y-5">
+                {copy.facts.map((fact) => <div key={fact.label}><dt className="text-sm font-extrabold text-home-midnight">{fact.label}</dt><dd className="mt-1 text-sm leading-6 text-slate-700">{fact.text}{fact.link && <> <a href={fact.link.href} className="font-bold text-[#075f46] underline underline-offset-4">{fact.link.label}</a></>}</dd></div>)}
+              </dl>
+            </MobileDetails>
+          </div>
+          <div className="hidden border-t border-[#e3ecf5] px-6 py-5 sm:px-8 md:block md:py-2 lg:border-l lg:border-t-0 lg:px-10 lg:py-4">
             <MobileSwipeRow
               label={copy.title}
               className="min-w-0"

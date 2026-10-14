@@ -82,9 +82,9 @@ const ServicesHero = () => {
 
   // Experiment Handy-Conversion 10/2026: Unter md keine feste Mindesthöhe, damit der Schutz-Kompass früher im Bild steht. Ab md unverändert.
   return (
-    <section className="relative isolate flex min-h-0 w-full items-center overflow-hidden bg-[#07111F] pt-28 text-white md:min-h-[860px] lg:min-h-screen lg:pt-32">
+    <section className="relative isolate flex min-h-0 w-full items-center overflow-hidden bg-[#07111F] pt-24 text-white md:min-h-[860px] md:pt-28 lg:min-h-screen lg:pt-32">
       <div
-        className="pointer-events-none absolute inset-0 opacity-50"
+        className="pointer-events-none absolute inset-0 hidden opacity-50 md:block"
         aria-hidden="true"
         style={{
           backgroundImage:
@@ -102,13 +102,13 @@ const ServicesHero = () => {
             Browser den Absatz erst nach dem Laden des Skripts als größten Inhalt und die Seite
             wirkt am Handy deutlich langsamer. Das Endbild ist unverändert. */}
         <div className="min-w-0">
-          <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:text-xs">
+          <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-[#8EE7CA] md:block md:text-xs">
             {t('hero.eyebrow')}
           </p>
-          <Heading className="mt-4 sm:mt-6 max-w-[12ch] [hyphens:manual] font-display text-[clamp(2.25rem,12.3vw,2.65rem)] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
-            <span className="block">{t('hero.titleLine1')}</span>
-            {' '}
-            <span className="mt-2 block bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-home-mint-active bg-clip-text text-transparent">
+          <Heading className="max-w-[16ch] [hyphens:manual] font-display text-[2rem] font-extrabold leading-[1.12] tracking-[-0.03em] md:mt-6 md:max-w-[12ch] md:text-6xl md:leading-[0.98] md:tracking-[-0.055em] lg:text-[clamp(3.25rem,5.5vw,4.4rem)]">
+            <span className="md:hidden">{t('mobile.heroTitle')}</span>
+            <span className="hidden md:block">{t('hero.titleLine1')}</span>
+            <span className="mt-2 hidden bg-gradient-to-r from-[#8EE7CA] via-[#25C990] to-home-mint-active bg-clip-text text-transparent md:block">
               {t('hero.titleLine2')}
             </span>
           </Heading>
@@ -120,7 +120,8 @@ const ServicesHero = () => {
               Absatz gleich mit der richtigen Schrift. Ab md bleibt die Schrift wie bisher. */}
           <style>{`@font-face{font-family:HealioInterHero;font-style:normal;font-weight:400;font-display:block;src:url(/fonts/inter-latin.woff2) format("woff2")}`}</style>
           <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 max-md:[font-family:HealioInterHero,Inter,sans-serif] sm:mt-7 sm:text-xl sm:leading-7">
-            {t('hero.description')}
+            <span className="md:hidden">{t('mobile.heroDescription')}</span>
+            <span className="hidden md:inline">{t('hero.description')}</span>
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap">
@@ -128,12 +129,13 @@ const ServicesHero = () => {
               href="#schutz-kompass"
               className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25C990] px-7 py-4 font-display text-base font-extrabold text-[#07111F] shadow-[0_16px_44px_rgba(37,201,144,0.22)] transition hover:-translate-y-0.5 hover:bg-[#5EDCAF] focus-visible:ring-offset-[#07111F] motion-reduce:transform-none"
             >
-              {t('hero.primaryCta')}
-              <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              <span className="md:hidden">{t('mobile.heroPrimaryCta')}</span>
+              <span className="hidden md:inline">{t('hero.primaryCta')}</span>
+              <ArrowDown className="h-4 w-4 shrink-0" aria-hidden="true" />
             </a>
             <Link
               to={getPath('terminvereinbarung')}
-              className="home-focus inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.055] px-7 py-4 font-display text-base font-bold text-white backdrop-blur-sm transition hover:border-white/30 hover:bg-white/[0.1] focus-visible:ring-offset-[#07111F]"
+              className="home-focus inline-flex min-h-11 items-center justify-center gap-2 font-display text-sm font-bold text-white underline underline-offset-4 md:gap-2 md:whitespace-nowrap md:rounded-full md:border md:border-white/15 md:bg-white/[0.055] md:px-7 md:py-4 md:text-base md:no-underline md:backdrop-blur-sm md:transition md:hover:border-white/30 md:hover:bg-white/[0.1] focus-visible:ring-offset-[#07111F]"
             >
               {t('hero.secondaryCta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -141,7 +143,8 @@ const ServicesHero = () => {
           </div>
 
           {/* Experiment Handy-Conversion 10/2026: Belegzeile auch am Handy, kompakt (ab sm unverändert). */}
-          <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-white/10 pt-4 sm:mt-10 sm:gap-x-6 sm:gap-y-3 sm:pt-6">
+          <p className="mt-5 text-sm leading-6 text-white/75 md:hidden">{t('mobile.trust')}</p>
+          <div className="hidden flex-wrap gap-x-4 gap-y-2 border-t border-white/10 pt-4 md:mt-10 md:flex md:gap-x-6 md:gap-y-3 md:pt-6">
             {t('hero.proof', { returnObjects: true }).map((item) => (
               <span key={item} className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#25C990]" aria-hidden="true" />

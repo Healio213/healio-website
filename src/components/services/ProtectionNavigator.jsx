@@ -161,16 +161,35 @@ const ProtectionNavigator = () => {
     <section id="schutz-kompass" className="scroll-mt-20 bg-[#F5F8F6] px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="protection-navigator-title">
       <div className="healio-container max-md:px-0">
         <div>
-          <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700 md:text-xs">{t('paths.eyebrow')}</p>
-          <h2 id="protection-navigator-title" className="mt-4 max-w-[14ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] sm:text-5xl">
-            {t('paths.title')}
+          <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700 md:block md:text-xs">{t('paths.eyebrow')}</p>
+          <h2 id="protection-navigator-title" className="max-w-[20ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#10202A] md:mt-4 md:max-w-[14ch] md:text-5xl md:tracking-[-0.045em]">
+            <span className="md:hidden">{t('mobile.pathsTitle')}</span>
+            <span className="hidden md:inline">{t('paths.title')}</span>
           </h2>
         </div>
+
+        <ul className="mt-7 md:hidden">
+          {items.map((item) => {
+            const visual = pathVisuals[item.key] || pathVisuals.ambulant;
+            return (
+              <li key={item.key} className="border-b border-slate-200 last:border-0">
+                <Link to={getPath(item.routeKey)} className="home-focus flex items-center gap-4 py-6 text-[#10202A]">
+                  <FriendlyIcon kind={visual.kind} tone={visual.tone} size="sm" className="shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display text-lg font-extrabold">{t(`mobile.paths.${item.key}.title`)}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{t(`mobile.paths.${item.key}.text`)}</p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
 
         {/* Mobil Wischreihe (vier Schutzwege), ab md die bisherigen Karten untereinander. */}
         <MobileSwipeRow
           label={t('paths.title')}
-          className="mt-8 md:mt-12 lg:mt-14"
+          className="hidden md:mt-12 md:block lg:mt-14"
           desktopClassName={`md:grid md:gap-6 lg:gap-7 ${extraCardPosition ? hideExtraCardFromMd[extraCardPosition] || '' : ''}`}
           itemClassName="flex"
         >

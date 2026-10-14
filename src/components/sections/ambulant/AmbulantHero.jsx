@@ -7,6 +7,7 @@ import { ArrowDown } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
 import { useLanguage } from '@/hooks/useLanguage';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
@@ -66,7 +67,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mb-4 font-display text-sm font-extrabold uppercase tracking-[0.16em] text-[#5ee0b1] md:mb-5 md:tracking-[0.24em]"
+            className="mb-4 hidden font-display text-sm font-extrabold uppercase tracking-[0.16em] text-[#5ee0b1] md:mb-5 md:block md:tracking-[0.24em]"
           >
             {t('hero.eyebrow')}
           </motion.p>
@@ -77,7 +78,8 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             id="hero-heading"
             className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.2vw,3.75rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance] md:mb-7`}
           >
-            <HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" />
+            <span className="md:hidden">{fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : language === 'en' ? <>Up to EUR 3,000 <span className="text-[#5ee0b1]">for your health.</span></> : <>Bis zu 3.000 EUR <span className="text-[#5ee0b1]">für deine Gesundheit.</span></>}</span>
+            <span className="hidden md:inline"><HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" /></span>
           </HeroHeading>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -85,9 +87,8 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-5 max-w-2xl text-base font-medium leading-7 text-slate-200 sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl"
           >
-            {fromBonusTopic
-              ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.'
-              : t('hero.subtitle')}
+            <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : language === 'en' ? 'Four reimbursement pots for natural therapies, glasses, prevention and co-payments. Per two calendar years.' : 'Vier Erstattungstöpfe für Heilpraktiker, Brille, Vorsorge und Zuzahlungen. Je zwei Kalenderjahre.'}</span>
+            <span className="hidden md:inline">{fromBonusTopic ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.' : t('hero.subtitle')}</span>
           </motion.p>
           {fromBonusTopic && (
             <p role="note" className="mb-8 max-w-2xl text-base leading-7 text-slate-200 md:mb-10">
@@ -109,7 +110,8 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             </a>
             {!fromBonusTopic && <UrgencyNote surface="ambulant" className="!mt-0" />}
             <p className="max-w-xl text-left text-base leading-7 text-slate-300">
-              {fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}
+              <span className="md:hidden">{fromBonusTopic ? 'Abschluss und persönliche Hilfe bleiben freiwillig.' : language === 'en' ? 'Personal premium in the calculator. Your bonus may help pay it.' : 'Persönlicher Beitrag im Rechner. Dein Bonus kann mitzahlen.'}</span>
+              <span className="hidden md:inline">{fromBonusTopic ? 'Du vergleichst zuerst. Ein Abschluss und persönliche Hilfe bleiben freiwillig.' : t('hero.ctaHint')}</span>
             </p>
           </motion.div>
         </div>
@@ -130,23 +132,33 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 height="315"
                 loading="eager"
                 decoding="async"
-                className="w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] sm:w-24"
+                className="hidden w-20 shrink-0 drop-shadow-[0_12px_18px_rgba(7,23,38,0.12)] md:block sm:w-24"
               />
               <div className="min-w-0">
-                <p className="font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl">
+                <p className="hidden font-display text-xl font-extrabold leading-tight text-[#0b6048] sm:text-2xl md:block">
                   {t('hero.offerTitle', { amount: euro.format(budget.budget) })}
                 </p>
-                <p className="mt-1 text-base font-semibold text-slate-600">
+                <p className="text-sm font-semibold text-slate-600 md:mt-1 md:text-base">
                   {t('hero.offerTier', { code: budget.code, refund: budget.refund })}
                 </p>
               </div>
             </div>
+            <ul className="mt-4 grid grid-cols-2 gap-x-5 gap-y-4 md:hidden">
+              {budget.pots.map((pot) => (
+                <li key={pot.key}>
+                  <a href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'} onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')} className="block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint">
+                    <span className="block text-sm font-semibold leading-5 text-slate-600">{pot.label}</span>
+                    <strong className="mt-1 block font-display text-lg font-extrabold text-[#0b6048]">{t('hero.offerUpTo', { amount: euro.format(pot.amount) })}</strong>
+                  </a>
+                </li>
+              ))}
+            </ul>
             {/* Experiment 06.10.2026: mobil eine Wischreihe statt vier gestapelter
                 Karten, ab md das bisherige Zwei-Spalten-Raster. Jede Karte führt
                 weiterhin in den Budget-Kompass bzw. die Tarifwahl. */}
             <MobileSwipeRow
               label={t('hero.offerAria')}
-              className="mt-4 md:mt-5"
+              className="mt-4 hidden md:mt-5 md:block"
               desktopClassName="-mx-5 scroll-pl-5 px-5 sm:-mx-7 sm:scroll-pl-7 sm:px-7 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:gap-3"
               mobileItemWidth="w-[74%]"
               bleed={false}
@@ -174,7 +186,10 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                 );
               })}
             </MobileSwipeRow>
-            <p className="mt-3 text-sm leading-6 text-slate-500 md:mt-4">{budget.disclosure}</p>
+            <p className="mt-4 text-sm leading-5 text-slate-600 md:hidden">{language === 'en' ? 'Reimbursement of eligible invoices. No freely available cash.' : 'Erstattung versicherter Rechnungen. Kein frei verfügbares Guthaben.'}</p>
+            <MobileDetails summary={language === 'en' ? 'How the budgets apply' : 'So gelten die Budgets'} className="mt-3 md:mt-4">
+              <p className="text-sm leading-6 text-slate-500 md:mt-4">{budget.disclosure}</p>
+            </MobileDetails>
           </div>
         </motion.div>
       </div>

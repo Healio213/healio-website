@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
+import MobileDetails from '@/components/ui/MobileDetails';
 
 const ServicesBudget = () => {
   const { t } = useTranslation('leistungen');
@@ -25,20 +26,25 @@ const ServicesBudget = () => {
         </div>
 
         <div className="min-w-0">
-          <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-800 md:text-xs">{t('budget.eyebrow')}</p>
+          <p className="hidden font-display text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-800 md:block md:text-xs">{t('budget.eyebrow')}</p>
           {/* Schriftgröße folgt der Bildschirmbreite, damit „Gesundheitsspielraum.“ ohne Trennung passt; Silbentrennung nur als Notnetz unter 320 px. */}
           <h2 id="services-budget-title" className="mt-4 max-w-[20ch] break-words font-display text-[clamp(1.375rem,calc((100vw_-_4rem)/11.5),2.25rem)] font-extrabold leading-tight tracking-[-0.045em] text-[#10202A] [text-wrap:balance] max-[319px]:[hyphens:auto] sm:text-5xl lg:text-[clamp(2.5rem,3.9vw,3rem)]">
-            {t('budget.title')}
+            <span className="md:hidden">{t('mobile.budgetTitle')}</span>
+            <span className="hidden md:inline">{t('budget.title')}</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 sm:mt-6 sm:text-lg sm:leading-8">{t('budget.description')}</p>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:mt-5">{t('budget.note')}</p>
+          <p className="mt-4 text-base leading-7 text-slate-700 md:hidden">{t('mobile.budgetText')}</p>
+          <MobileDetails summary={t('mobile.budgetDetails')} className="mt-3 text-emerald-900">
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 sm:mt-6 sm:text-lg sm:leading-8">{t('budget.description')}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:mt-5">{t('budget.note')}</p>
+          </MobileDetails>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-8">
             <Link to={getPath('ambulant')} className="home-focus inline-flex items-center gap-2 rounded-full bg-[#10202A] px-6 py-3.5 font-display text-base font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#18333C] motion-reduce:transform-none">
               {t('budget.cta')}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link to={getPath('kassenboost')} className="home-focus inline-block font-display text-base font-extrabold leading-7 text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A]">
-              {t('budget.kassenboostCta')}
+            <Link to={getPath('kassenboost')} className="home-focus inline-flex min-h-11 items-center font-display text-sm font-extrabold leading-7 text-emerald-800 underline decoration-emerald-800/25 decoration-2 underline-offset-4 transition hover:text-[#10202A] md:inline-block md:min-h-0 md:text-base md:leading-7">
+              <span className="md:hidden">{t('mobile.kassenboostCta')}</span>
+              <span className="hidden md:inline">{t('budget.kassenboostCta')}</span>
               <ArrowUpRight className="ml-2 inline-block h-4 w-4 align-[-0.2em]" aria-hidden="true" />
             </Link>
           </div>

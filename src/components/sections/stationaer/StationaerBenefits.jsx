@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
+import { useLanguage } from '@/hooks/useLanguage';
 
 // Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte bekommt einen
 // weichen Pastellton mit passendem Rand und ein größeres, freundliches Icon.
@@ -14,11 +16,23 @@ const benefitCards = [
 
 const StationaerBenefits = () => {
   const { t } = useTranslation('stationaer');
+  const { lang } = useLanguage();
 
   return (
     <section className="bg-white py-12 md:py-24" aria-labelledby="stationaer-benefits-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-14">
+        <div className="md:hidden">
+          <h2 className="font-display text-2xl font-extrabold leading-tight text-[#071726]">{lang === 'en' ? 'SDK benefits in detail.' : 'SDK-Leistungen im Detail.'}</h2>
+          <p className="mt-3 text-sm leading-6 text-slate-600">{t('refresh.benefits.contextBody')}</p>
+          <MobileDetails summary={lang === 'en' ? 'Doctor, room, hospital choice & policy start' : 'Arzt, Zimmer, Klinikwahl & Versicherungsbeginn'} className="mt-4">
+            <dl className="space-y-5">
+              {benefitCards.map((card) => (
+                <div key={card.key}><dt className="font-display text-base font-extrabold text-[#071726]">{t(`refresh.benefits.cards.${card.key}.title`)}</dt><dd className="mt-1 text-sm leading-6 text-slate-600">{t(`refresh.benefits.cards.${card.key}.body`)}</dd></div>
+              ))}
+            </dl>
+          </MobileDetails>
+        </div>
+        <div className="hidden grid-cols-[minmax(0,1fr)] gap-6 md:grid md:gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-14">
           <div className="lg:sticky lg:top-28">
             <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:text-xs md:tracking-[0.22em]">
               {t('refresh.benefits.eyebrow')}

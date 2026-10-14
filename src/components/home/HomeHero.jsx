@@ -60,30 +60,34 @@ const HomeHero = () => {
     },
   });
 
-  // Experiment Handy-Conversion 10/2026: Unter sm etwas dichter (Kopfabstand, Zeilenhöhe, Abstände der Einstiegskarte),
-  // damit der Knopf der ersten Karte auch bei 360 x 740 im ersten Bild liegt. Ab sm unverändert.
+  // Mobil: ein kurzer Einstieg mit einer Hauptaktion und direkt sichtbaren Zielwegen.
+  // Die bisherige Tablet-Fassung und der separate DesktopLead bleiben erhalten.
   return (
     <div ref={heroRef}>
       <DesktopLead surface="home" language={lang} />
       <section
-      className="relative isolate flex lg:hidden min-h-[820px] w-full items-center overflow-hidden bg-home-midnight pt-24 text-white sm:min-h-[860px] sm:pt-28 lg:min-h-screen lg:pt-32"
+      className="relative isolate flex lg:hidden w-full items-center md:min-h-[860px] overflow-hidden bg-home-midnight pt-24 text-white md:pt-28 lg:min-h-screen lg:pt-32"
       aria-labelledby="home-hero-heading"
     >
 
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(3,12,20,0.62)_0%,rgba(3,12,20,0.48)_30%,rgba(3,12,20,0.72)_76%,rgba(3,12,20,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(3,12,20,0.9)_0%,rgba(3,12,20,0.77)_43%,rgba(3,12,20,0.28)_73%,rgba(3,12,20,0.5)_100%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_82%,rgba(37,201,144,0.22),transparent_44%)]" />
 
-      <div className="healio-container flex min-h-[calc(100svh-7rem)] w-full items-center px-4 pb-6 sm:px-6 md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
+      <div className="healio-container flex w-full items-center px-4 pb-8 sm:px-6 md:min-h-[calc(100svh-7rem)] md:pb-14 lg:min-h-[calc(100vh-8rem)] lg:px-8 lg:pb-12">
         <div className="relative z-20 flex w-full max-w-[1060px] flex-col">
-          <MobileScene surface="home" className="mb-5 !mx-0 sm:mb-7" />
+          <MobileScene surface="home" className="mb-6 !mx-0 max-md:max-w-none max-md:rounded-2xl max-md:[&>img]:aspect-[3/1] max-md:[&>img]:object-cover max-md:[&>img]:object-[50%_42%] md:mb-7" />
           <HeroHeading
             {...entrance(0.08)}
             id="home-hero-heading"
             lang={i18n.resolvedLanguage || i18n.language}
-            className="max-w-[20ch] [hyphens:manual] font-display text-[2.35rem] font-extrabold leading-[1.035] tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] sm:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
+            className="max-w-[20ch] [hyphens:manual] font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-[-0.025em] md:leading-[1.035] md:tracking-[-0.045em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)] md:text-[3rem] lg:max-w-[22ch] lg:text-[3.5rem] xl:text-[3.9rem]"
           >
-            <span className="block">{titleLead}</span>{' '}
-            <span className="relative mt-2 inline-block w-fit max-w-full pb-[0.16em] text-[#F4FFF9] drop-shadow-[0_0_26px_rgba(37,201,144,0.32)]">
+            <span className="block md:hidden">
+              <span className="block">{t('mobile.hero.titleLead')}</span>
+              <span className="block text-home-mint-active">{t('mobile.hero.titleAccent')}</span>
+            </span>
+            <span className="hidden md:block">{titleLead}</span>{' '}
+            <span className="relative mt-2 hidden w-fit md:inline-block max-w-full pb-[0.16em] text-[#F4FFF9] drop-shadow-[0_0_26px_rgba(37,201,144,0.32)]">
               <span className="absolute -inset-x-6 -inset-y-2 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,201,144,0.22),rgba(37,201,144,0.06)_48%,transparent_74%)] blur-xl" aria-hidden="true" />
               <span className="relative">{titleAccent}</span>
               <svg className="absolute -bottom-[0.02em] left-0 h-[0.22em] w-full overflow-visible" viewBox="0 0 520 26" preserveAspectRatio="none" aria-hidden="true">
@@ -93,12 +97,25 @@ const HomeHero = () => {
             </span>
           </HeroHeading>
 
-          <motion.p {...entrance(0.17)} className="order-1 mt-4 max-w-2xl text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
+          <div className="order-1 mt-4 md:hidden">
+            <p className="max-w-[32ch] text-base leading-6 text-white/90">{t('mobile.hero.description')}</p>
+            <Link
+              to={getPath('ambulant')}
+              className="home-focus mt-3 inline-flex min-h-11 items-center gap-2 font-bold leading-6 text-home-mint-active underline underline-offset-4"
+              onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}
+            >
+              {t('mobile.hero.budgetLink')}
+              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </Link>
+            <p className="mt-1 max-w-[38ch] text-sm leading-5 text-white/75">{t('mobile.hero.budgetNote')}</p>
+          </div>
+
+          <motion.p {...entrance(0.17)} className="order-1 mt-4 hidden max-w-2xl md:block text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">
             {t('hero.description')}{' '}
             <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-home-mint-active underline underline-offset-4" onClick={() => trackEvent('home_budget_link', { placement: 'mobile-hero' })}>{getDesktopLeadContent('home', lang).budgetLink}</Link>
           </motion.p>
 
-          <motion.div {...entrance(0.21)} className="order-2 mt-5 flex flex-col items-start">
+          <motion.div {...entrance(0.21)} className="order-2 mt-6 flex flex-col items-start md:mt-5">
             <a
               href={KASSENBOOST_COMPARE_URL}
               target="_blank"
@@ -106,12 +123,29 @@ const HomeHero = () => {
               onClick={() => trackEvent('home_kassenboost_link', { placement: 'mobile-hero' })}
               className="home-focus inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 font-display text-base font-extrabold leading-6 text-home-midnight transition hover:bg-home-mint-active"
             >
-              {t('hero.primaryCta')}<ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <span className="md:hidden">{t('mobile.hero.primaryCta')}</span><span className="hidden md:inline">{t('hero.primaryCta')}</span><ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
             </a>
-            <p className="mt-3 text-sm leading-6 text-white/80">{t('hero.ctaHint')}</p>
+            <p className="mt-3 text-sm leading-6 text-white/80"><span className="md:hidden">{t('mobile.hero.ctaHint')}</span><span className="hidden md:inline">{t('hero.ctaHint')}</span></p>
           </motion.div>
 
-          <motion.nav {...entrance(0.24)} className="order-3 mt-5 sm:mt-9" aria-label={t('hero.switchLabel')}>
+          <motion.nav {...entrance(0.24)} className="order-3 mt-6 md:hidden" aria-label={t('hero.switchLabel')}>
+            <ul className="flex flex-wrap gap-x-5 border-t border-white/15 pt-2">
+              {switchList.map((item) => (
+                <li key={item.key}>
+                  <Link
+                    to={getPath(item.routeKey)}
+                    onClick={() => trackEvent('home_switch_click', { component: item.key })}
+                    className="home-focus inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-white/90 underline underline-offset-4"
+                  >
+                    {t(`mobile.hero.paths.${item.key}`)}
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+
+          <motion.nav {...entrance(0.24)} className="order-3 mt-5 hidden sm:mt-9 md:block" aria-label={t('hero.switchLabel')}>
             <p className="home-eyebrow mb-2 text-sm text-home-mint-active sm:mb-4 md:text-xs">{t('hero.switchLabel')}</p>
             {/* Mobil eine Wischreihe mit sichtbarer Nachbarkarte, ab md das bisherige Dreier-Raster. */}
             <MobileSwipeRow

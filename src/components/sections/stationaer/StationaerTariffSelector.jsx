@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
+import MobileDetails from '@/components/ui/MobileDetails';
+import { useLanguage } from '@/hooks/useLanguage';
 import WhatsAppHelpHint, { useWhatsAppHelp } from '@/components/sections/shared/WhatsAppHelpHint';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
@@ -20,6 +22,7 @@ const tariffOptions = [
 
 const StationaerTariffSelector = () => {
   const { t } = useTranslation('stationaer');
+  const { lang } = useLanguage();
   const [selected, setSelected] = useState('');
   const referrer = useReferrer();
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
@@ -60,17 +63,17 @@ const StationaerTariffSelector = () => {
     <section id="tarife" className="scroll-mt-24 bg-[#f5faf8] py-12 md:py-24" aria-labelledby="stationaer-tariffs-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:text-xs md:tracking-[0.22em]">
+          <p className="hidden font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:block md:text-xs md:tracking-[0.22em]">
             {t('refresh.selector.eyebrow')}
           </p>
-          <h2 id="stationaer-tariffs-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
+          <h2 id="stationaer-tariffs-heading" className="font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] md:mt-4 sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.selector.title')}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">
-            {t('refresh.selector.subtitle')}
+            <span className="md:hidden">{lang === 'en' ? 'Room only, with a private doctor, or after accidents only. Choose your benefits first.' : 'Nur Zimmer, mit Wahlarzt oder nur nach Unfall. Wähle zuerst deine Leistungen.'}</span><span className="hidden md:inline">{t('refresh.selector.subtitle')}</span>
           </p>
           <a href="#familie" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#075f46] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46]">
-            {t('refresh.hero.familyCta')}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="md:hidden">{lang === 'en' ? 'Family & midwife benefits' : 'Familie & Hebammenleistungen'}</span><span className="hidden md:inline">{t('refresh.hero.familyCta')}</span><ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
           </a>
         </div>
 
@@ -108,7 +111,7 @@ const StationaerTariffSelector = () => {
                     height="480"
                     loading="lazy"
                     decoding="async"
-                    className="aspect-[3/2] w-full object-cover transition duration-500 md:group-hover:scale-[1.04] motion-reduce:transition-none"
+                    className="aspect-[2/1] w-full object-cover transition duration-500 md:aspect-[3/2] md:group-hover:scale-[1.04] motion-reduce:transition-none"
                   />
                 </div>
 
@@ -131,11 +134,19 @@ const StationaerTariffSelector = () => {
                   <p className="mt-2 text-base font-extrabold md:text-sm" style={{ color: option.accent }}>
                     {t(`refresh.selector.options.${option.key}.price`)}
                   </p>
-                  <p className="mt-3 text-base leading-relaxed text-slate-600 md:min-h-[3.25rem] md:text-sm md:leading-relaxed">
+                  <p className="mt-3 hidden text-base leading-relaxed text-slate-600 md:block md:min-h-[3.25rem] md:text-sm md:leading-relaxed">
                     {t(`refresh.selector.options.${option.key}.description`)}
                   </p>
 
-                  <ul className="mt-5 space-y-3 text-base text-slate-700 md:mt-6 md:text-sm">
+                  <div className="md:hidden">
+                    <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+                      {(Array.isArray(features) ? features : []).slice(0, 2).map((feature) => <li key={feature} className="flex items-start gap-2"><Check className="mt-1 h-4 w-4 shrink-0" style={{ color: option.accent }} aria-hidden="true" /><span>{feature}</span></li>)}
+                    </ul>
+                    <MobileDetails summary={lang === 'en' ? 'Further benefits & conditions' : 'Weitere Leistungen & Bedingungen'} className="mt-3 text-slate-700">
+                      <ul className="space-y-2 text-sm leading-6">{(Array.isArray(features) ? features : []).slice(2).map((feature) => <li key={feature}>{feature}</li>)}</ul>
+                    </MobileDetails>
+                  </div>
+                  <ul className="mt-5 hidden space-y-3 text-base text-slate-700 md:mt-6 md:block md:text-sm">
                     {(Array.isArray(features) ? features : []).map((feature) => (
                       <li key={feature} className="flex items-start gap-2.5">
                         <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: option.accent }} aria-hidden="true" />

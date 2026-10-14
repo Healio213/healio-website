@@ -18,30 +18,63 @@ const HowHealioWorks = () => {
   const { t } = useTranslation('home');
   const { getPath } = useLanguage();
   const steps = t('process.steps', { returnObjects: true });
+  const mobileSteps = t('mobile.process.steps', { returnObjects: true });
 
   return (
-    <section id="so-funktioniert" className="home-section relative scroll-mt-20 overflow-hidden bg-[#FDFAF6] py-12 md:py-24 lg:py-28" aria-labelledby="how-healio-title">
-      <div className="absolute -left-24 top-10 h-80 w-80 rounded-full bg-home-mint/10 blur-3xl" aria-hidden="true" />
-      <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#FFF1D6]/70 blur-3xl" aria-hidden="true" />
+    <section id="so-funktioniert" className="home-section relative scroll-mt-20 overflow-hidden bg-[#FDFAF6] py-10 md:py-24 lg:py-28" aria-labelledby="how-healio-title">
+      <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-home-mint/10 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#FFF1D6]/70 blur-3xl" aria-hidden="true" />
       <div className="healio-container max-md:px-0">
         <div className="relative grid gap-5 md:gap-7 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
           <div>
-            <span className="inline-flex rounded-full border border-emerald-900/10 bg-white px-3 py-1.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_22px_rgba(12,42,33,0.06)] md:text-xs">
+            <span className="hidden rounded-full md:inline-flex border border-emerald-900/10 bg-white px-3 py-1.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-emerald-800 shadow-[0_8px_22px_rgba(12,42,33,0.06)] md:text-xs">
               KassenBoost × Healio
             </span>
-            <h2 id="how-healio-title" className="mt-4 max-w-[17ch] font-display text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-[#0C2A21] sm:mt-5 sm:text-5xl sm:leading-none">
-              {t('process.title')}
+            <h2 id="how-healio-title" className="max-w-[17ch] md:mt-5 font-display text-3xl font-bold leading-[1.08] tracking-[-0.025em] text-[#0C2A21] md:text-5xl md:leading-none">
+              <span className="md:hidden">{t('mobile.process.title')}</span>
+              <span className="hidden md:inline">{t('process.title')}</span>
             </h2>
           </div>
           {/* Experiment Handy-Conversion 10/2026: Einleitung wiederholt Überschrift und Karten; am Handy ausgeblendet, ab md unverändert. */}
           <p className="hidden max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 md:block lg:justify-self-end">{t('process.description')}</p>
         </div>
 
-        {/* Mobil Wischreihe (drei Schritte), ab md das bisherige Dreier-Raster. */}
+        <ol className="mt-7 space-y-6 md:hidden">
+          {mobileSteps.map((step, index) => (
+            <li key={steps[index].number} className="flex items-center gap-4">
+              <img
+                src={stepVisuals[index].scene}
+                alt=""
+                width="56"
+                height="56"
+                loading="lazy"
+                decoding="async"
+                className="h-14 w-14 shrink-0 rounded-xl object-cover"
+              />
+              <div className="min-w-0">
+                <h3 className="font-display text-lg font-bold leading-6 text-[#0C2A21]">
+                  <span className="mr-2 text-sm text-emerald-800">{index + 1}.</span>{step.title}
+                </h3>
+                <p className="mt-1 text-sm leading-5 text-[#3f5b51]">{step.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <details className="mt-6 border-t border-[#D9E6DF] md:hidden">
+          <summary className="home-focus min-h-[3rem] cursor-pointer py-3 text-sm font-bold text-emerald-800 underline underline-offset-4">
+            {t('mobile.process.detailsTitle')}
+          </summary>
+          <div className="space-y-3 pb-3 text-sm leading-6 text-[#3f5b51]">
+            <p>{t('process.description')}</p>
+            <p>{steps[2].description}</p>
+          </div>
+        </details>
+
+        {/* Ab md bleibt das bestehende Dreier-Raster erhalten. */}
         <MobileSwipeRow
           as="ol"
           label={t('process.title')}
-          className="relative mt-8 md:mt-12"
+          className="relative mt-8 hidden md:mt-12 md:block"
           desktopClassName="md:grid md:grid-cols-3 md:gap-5"
           itemClassName="flex"
           bleed

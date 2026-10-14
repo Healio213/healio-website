@@ -60,7 +60,7 @@ const MainHomePage = () => {
             poster="/videos/erklaerfilme/erklaervideo-startseite-v2-poster.jpg"
             captionsSrc="/videos/erklaerfilme/erklaervideo-startseite-v2-de.vtt"
             eyebrow={t('explanationVideo.eyebrow')}
-            title={t('explanationVideo.title')}
+            title={<><span className="md:hidden">{t('mobile.explanationVideo.title')}</span><span className="hidden md:inline">{t('explanationVideo.title')}</span></>}
             subtitle={t('explanationVideo.subtitle')}
             disclosure={t('explanationVideo.disclosure')}
             ariaLabel={t('explanationVideo.aria')}

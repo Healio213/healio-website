@@ -86,10 +86,14 @@ const CompactBonusFeature = ({
             />
           </div>
           <div className="min-w-0">
-            <span className={`font-display font-extrabold uppercase tracking-[0.2em] text-emerald-700 ${ui.eyebrow}`}>{copy.eyebrow}</span>
-            <h2 id="compact-bonus-title" className="mt-2 block font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight sm:text-3xl lg:text-4xl">{copy.title}</h2>
+            <span className={`hidden font-display font-extrabold uppercase tracking-[0.2em] text-emerald-700 md:inline ${ui.eyebrow}`}>{copy.eyebrow}</span>
+            <h2 id="compact-bonus-title" className="block font-display text-xl font-extrabold leading-tight tracking-[-0.03em] text-home-midnight md:mt-2 md:text-3xl lg:text-4xl">
+              <span className="md:hidden">{language === 'en' ? 'How much bonus is possible?' : 'Wie viel Bonus ist möglich?'}</span>
+              <span className="hidden md:inline">{copy.title}</span>
+            </h2>
+            <span className="mt-2 block text-sm leading-5 text-emerald-900 md:hidden">{copy.badge}</span>
           </div>
-          <div className="col-span-2 min-w-0 lg:col-span-1 lg:col-start-2">
+          <div className="col-span-2 hidden min-w-0 md:block lg:col-span-1 lg:col-start-2">
             <span className={`block max-w-3xl text-base text-home-slate ${ui.text}`}>{copy.text}</span>
             <span className={`inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-3 py-2 font-bold text-emerald-900 ${ui.badge}`}>
               <ShieldCheck className="h-4 w-4 text-home-mint" aria-hidden="true" />
@@ -105,6 +109,7 @@ const CompactBonusFeature = ({
         </summary>
 
         <div className="border-t border-emerald-900/10 bg-white/80 px-4 py-7 sm:px-7 md:px-10 md:py-10">
+          <p className="mb-5 text-base leading-7 text-home-slate md:hidden">{copy.text}</p>
           {calculatorIntroNote && <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{calculatorIntroNote}</p>}
           <AmbulantBonusCalculator
             {...calculatorProps}

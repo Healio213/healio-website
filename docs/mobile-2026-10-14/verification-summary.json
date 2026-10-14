@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-14",
+  "baseCommit": "eeaaac09b3de820ab745cef0ebe653c768627859",
+  "routesMobile390": [
+    {
+      "route": "/",
+      "width": 390,
+      "wordsBefore": 354,
+      "wordsAfter": 154,
+      "wordReductionPercent": 56.5,
+      "heightBefore": 6372,
+      "heightAfter": 3757
+    },
+    {
+      "route": "/leistungen",
+      "width": 390,
+      "wordsBefore": 302,
+      "wordsAfter": 134,
+      "wordReductionPercent": 55.6,
+      "heightBefore": 5906,
+      "heightAfter": 4022
+    },
+    {
+      "route": "/ambulant",
+      "width": 390,
+      "wordsBefore": 1221,
+      "wordsAfter": 902,
+      "wordReductionPercent": 26.1,
+      "heightBefore": 13952,
+      "heightAfter": 11284
+    },
+    {
+      "route": "/zahn",
+      "width": 390,
+      "wordsBefore": 1106,
+      "wordsAfter": 753,
+      "wordReductionPercent": 31.9,
+      "heightBefore": 12770,
+      "heightAfter": 10339
+    },
+    {
+      "route": "/stationaer",
+      "width": 390,
+      "wordsBefore": 1447,
+      "wordsAfter": 1166,
+      "wordReductionPercent": 19.4,
+      "heightBefore": 16479,
+      "heightAfter": 13745
+    }
+  ],
+  "candidateViews": 70,
+  "confirmationViews": 19,
+  "confirmationInteractionChecks": 288,
+  "confirmationChecksDirectlyPassed": 286,
+  "harnessScrollCasesResolvedWithStablePointer": 2,
+  "desktopComparison": [
+    {
+      "route": "/",
+      "baselineSize": [
+        1440,
+        5653
+      ],
+      "candidateSize": [
+        1440,
+        5653
+      ],
+      "wordsBefore": 481,
+      "wordsAfter": 481,
+      "heroWordsBefore": 156,
+      "heroWordsAfter": 156,
+      "heightBefore": 5653,
+      "heightAfter": 5653,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 1,
+      "changedPixelsPercent": 1e-05,
+      "rmsRGB": [
+        0.078,
+        0.0816,
+        0.0854
+      ],
+      "diffBounds": [
+        243,
+        1624,
+        244,
+        1625
+      ]
+    },
+    {
+      "route": "/leistungen",
+      "baselineSize": [
+        1440,
+        8388
+      ],
+      "candidateSize": [
+        1440,
+        8388
+      ],
+      "wordsBefore": 500,
+      "wordsAfter": 500,
+      "heroWordsBefore": 57,
+      "heroWordsAfter": 57,
+      "heightBefore": 8388,
+      "heightAfter": 8388,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    },
+    {
+      "route": "/ambulant",
+      "baselineSize": [
+        1440,
+        12653
+      ],
+      "candidateSize": [
+        1440,
+        12653
+      ],
+      "wordsBefore": 1337,
+      "wordsAfter": 1337,
+      "heroWordsBefore": 140,
+      "heroWordsAfter": 140,
+      "heightBefore": 12653,
+      "heightAfter": 12653,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 157,
+      "changedPixelsPercent": 0.00086,
+      "rmsRGB": [
+        0.1121,
+        0.1179,
+        0.113
+      ],
+      "diffBounds": [
+        84,
+        1526,
+        1356,
+        11837
+      ]
+    },
+    {
+      "route": "/zahn",
+      "baselineSize": [
+        1440,
+        12027
+      ],
+      "candidateSize": [
+        1440,
+        12027
+      ],
+      "wordsBefore": 1394,
+      "wordsAfter": 1394,
+      "heroWordsBefore": 110,
+      "heroWordsAfter": 110,
+      "heightBefore": 12027,
+      "heightAfter": 12027,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    },
+    {
+      "route": "/stationaer",
+      "baselineSize": [
+        1440,
+        13293
+      ],
+      "candidateSize": [
+        1440,
+        13293
+      ],
+      "wordsBefore": 1870,
+      "wordsAfter": 1870,
+      "heroWordsBefore": 104,
+      "heroWordsAfter": 104,
+      "heightBefore": 13293,
+      "heightAfter": 13293,
+      "headlineSame": true,
+      "heroCtasSame": true,
+      "changedPixelsThreshold12": 0,
+      "changedPixelsPercent": 0.0,
+      "rmsRGB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diffBounds": null
+    }
+  ],
+  "sourceContracts": [
+    "homepage",
+    "services",
+    "conversion",
+    "ambulant-bonus-model",
+    "friendly-icons",
+    "contact-ui"
+  ],
+  "changedJsxLint": "passed",
+  "designDetector": "one existing desktop gradient retained to preserve desktop appearance",
+  "build": {
+    "status": "passed",
+    "prerenderedPages": 246,
+    "failed": 0,
+    "seoRoutes": 269,
+    "ratgeberPages": 179,
+    "blogArticles": 23
+  }
+}
