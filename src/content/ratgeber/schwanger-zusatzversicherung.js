@@ -53,6 +53,13 @@
  *     Tabelle und sagt, dass Gentests wie NIPT nicht dazugehoeren. Der Satz
  *     "Einen Maximalbetrag gibt es ... nicht" ist gestrichen (Sperrliste
  *     "ohne Obergrenze"). Button-Ziel jetzt /ambulant#tarifwahl.
+ *
+ * Ausbau 14.10.2026 (SEO Thema B, Semrush: "zusatzversicherung schwangerschaft"
+ * 390, KD 15): Beschreibung mit Suchbegriff, Abschnitt "Welche
+ * Zusatzversicherung passt in der Schwangerschaft?" mit Bausteintabelle,
+ * Rechenbeispiel Beitrag gegen Bonus (SDK-Beitragstabelle 29.09.2026, eigene
+ * Rechnung), zwei FAQ, Quellenblock. Entbindung bleibt ehrlich ausgeschlossen,
+ * kein Kinderwunsch als Argument. H1 unverändert.
  */
 
 export const article = {
@@ -61,13 +68,13 @@ export const article = {
 
   metaTitle: 'Schwanger: welcher Zusatzschutz jetzt noch geht | Healio',
   metaDescription:
-    'Schwanger ohne Zusatzschutz? Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
+    'Zusatzversicherung in der Schwangerschaft: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
 
   publishedAt: '2026-09-28',
   publishedAtLabel: '28. September 2026',
-  updatedAt: '2026-10-05',
-  updatedAtLabel: '5. Oktober 2026',
-  readingTimeMinutes: 6,
+  updatedAt: '2026-10-14',
+  updatedAtLabel: '14. Oktober 2026',
+  readingTimeMinutes: 8,
 
   listTitle: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
   listTeaser:
@@ -128,6 +135,44 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Stationär sieht es anders aus. In den Bedingungen der SDK für SP1 und SP2 steht, dass sie für diese Entbindung nicht leistet, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Im Antrag der Bayerischen steht wörtlich, dass laufende oder angeratene Untersuchungen und Behandlungen, auch im Zusammenhang mit Schwangerschaft und Entbindung, nicht mitversichert sind. Bei der Bayerischen kommt eine besondere Wartezeit von 8 Monaten für die Entbindung dazu, die SDK hat keine Wartezeit. Einen stationären Sofort-Baustein für eine bereits festgestellte Schwangerschaft gibt es deshalb weder bei der SDK noch bei der Bayerischen.',
+        },
+      ],
+    },
+    {
+      id: 'welche',
+      heading: 'Welche Zusatzversicherung passt in der Schwangerschaft?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Eine Zusatzversicherung für die Schwangerschaft als eigenes Produkt gibt es bei der SDK und der Bayerischen nicht. Es gibt drei Bausteine, und jeder hat in der Schwangerschaft eine andere Aufgabe. Wer das durcheinanderwirft, zahlt Beitrag für eine Leistung, die bei dieser Geburt nicht kommt.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Zusatzversicherung in der Schwangerschaft: welcher Baustein was leistet',
+          head: ['Baustein', 'Was er jetzt noch leistet', 'Was er nicht leistet'],
+          rows: [
+            [
+              'Ambulant: SDK AP5 bis AP1',
+              'Vorsorge während der Schwangerschaft, etwa Feinultraschall oder Toxoplasmose, je nach Stufe 50 bis 100 Prozent bis 200 bis 500 EUR in zwei Kalenderjahren, ohne Wartezeit',
+              'Gentests wie NIPT, Behandlung wegen Schwangerschaftsbeschwerden, die Entbindung',
+            ],
+            [
+              'Stationär: SDK SP1, SP2 oder Bayerische Komfort, Prestige',
+              'deine eigene Versorgung bei neuen Klinikaufenthalten ohne Bezug zu dieser Schwangerschaft, später das Familienzimmer bei einer nächsten Geburt nach den Tarifregeln',
+              'Chefarzt und Familienzimmer bei dieser Entbindung, wenn die Schwangerschaft beim Antrag schon festgestellt ist',
+            ],
+            [
+              'Kind: Nachversicherung nach der Geburt',
+              'Aufnahme des Kindes rückwirkend zum Tag der Geburt, wenn du es innerhalb von zwei Monaten anmeldest und ein Elternteil versichert ist',
+              'mehr Schutz fürs Kind, als der Vertrag des Elternteils hat',
+            ],
+          ],
+          note: 'Nach den Bedingungen der SDK (AP-Tarife 1.753a, Stand 01.01.2023; Klinik-Tarife SP1 und SP2) und der Bayerischen (AVB B 275000, Stand 11/2024) sowie § 198 VVG. Verbindlich sind Antrag und Versicherungsschein.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Was das kostet, zeigt ein Beispiel. Ambulant 90 kostet mit 31 bis 40 Jahren 33,84 EUR im Monat, das sind 406,08 EUR im Jahr (eigene Rechnung, Beitrag laut SDK-Beitragstabelle, Stand 29.09.2026). Dem steht der Vorsorge-Topf mit 90 Prozent bis 400 EUR in zwei Kalenderjahren gegenüber. Zahlt deine Kasse ihren Bonus als Zuschuss zur Zusatzversicherung, kann er diesen Beitrag ganz oder zum Teil tragen, ausgezahlt wird höchstens der Beitrag, den du wirklich gezahlt hast.',
         },
       ],
     },
@@ -272,12 +317,42 @@ export const article = {
         },
       ],
     },
+    {
+      id: 'quellen',
+      heading: 'Woher stammen die Angaben?',
+      blocks: [
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Stand 14. Oktober 2026. Leistungen des ambulanten Tarifs aus den ' },
+            { text: 'Bedingungen der SDK für die Tarife AP5 bis AP1', href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf' },
+            { text: ' (Stand 01.01.2023), Wartezeiten der Bayerischen aus ihren ' },
+            { text: 'Allgemeinen Versicherungsbedingungen B 275000', href: 'https://www.diebayerische.de/dam/jcr:0159d4a8-b666-4f77-a345-9acdb8e95608/275000_allgemeine_versicherungsbedingungen_krankheitskostenversicherung.pdf' },
+            { text: ' (Stand 11/2024), die Kindernachversicherung aus ' },
+            { text: '§ 198 VVG', href: 'https://www.gesetze-im-internet.de/vvg_2008/__198.html' },
+            { text: ', die Bonusregeln aus der ' },
+            { text: 'Satzung der IKK classic', href: 'https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf' },
+            { text: ' (Stand 01.08.2026). Beiträge nach der SDK-Beitragstabelle wie auf healio.de/ambulant, Stand 29.09.2026.' },
+          ],
+        },
+      ],
+    },
   ],
 
   factNugget:
     'Healio kombiniert Kassenbonusprogramme mit Zusatzversicherungen zu einem Gesundheitsbudget bis zu 3.000 EUR in zwei Jahren. Der Kassenbonus ist jährlich und wird als zweckgebundener Zuschuss auf den Jahresbeitrag der Zusatzversicherung angerechnet, höchstens bis zur Höhe des tatsächlich gezahlten Beitrags. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab, wir rechnen es individuell für dich aus. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
+    {
+      question: 'Welche Zusatzversicherung ist in der Schwangerschaft sinnvoll?',
+      answer:
+        'Wenn die Schwangerschaft schon feststeht, ist der ambulante Tarif der Baustein, der jetzt noch etwas bringt: Sein Vorsorge-Topf zahlt Selbstzahleruntersuchungen wie Feinultraschall oder Toxoplasmose, ohne Wartezeit. Ein Klinik-Tarif zahlt bei dieser Geburt nicht, er zählt für die Zeit danach und als Grundlage für den Klinik-Tarif deines Kindes.',
+    },
+    {
+      question: 'Gibt es eine Zusatzversicherung, die meine Entbindung noch zahlt?',
+      answer:
+        'Bei der SDK und der Bayerischen nicht. Die SDK leistet in SP1 und SP2 nicht für die Entbindung, wenn die Schwangerschaft beim Antrag schon ärztlich festgestellt ist. Bei der Bayerischen gilt für die Entbindung eine Wartezeit von acht Monaten, und eine beim Antrag bestehende Schwangerschaft ist nicht mitversichert.',
+    },
     {
       question: 'Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?',
       answer:

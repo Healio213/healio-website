@@ -6,7 +6,6 @@ export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'healio-konzept-fuer-osteopathen': 'https://healio.de/images/video-partner-thumb.jpg',
   'healio-konzept-fuer-heilpraktiker': 'https://healio.de/images/video-partner-thumb.jpg',
   'krankenhauszusatzversicherung-sportverein-best-ager': 'https://healio.de/images/erklaervideo-stationaer-poster.jpg',
-  'zahnzusatzversicherung-trotz-angeratener-behandlung': 'https://healio.de/images/erklaervideo-zahn-poster.jpg',
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': 'https://healio.de/images/video-partner-thumb.jpg',
   'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung': 'https://healio.de/images/healio-app-dashboard-card.webp',
   'gesundheitsbudget-3000-euro': 'https://healio.de/images/healio-gesundheitsbudget-v2.png',
@@ -46,11 +45,6 @@ const RELATED_LINKS = {
     { href: '/kassenbonus', label: 'Kassenbonus realistisch einordnen' },
     { href: '/blog/gesundheitsbudget-3000-euro', label: 'Kassenbonus und Zusatzschutz kombinieren' },
   ],
-  'zahnzusatzversicherung-trotz-angeratener-behandlung': [
-    { href: '/zahn', label: 'Zahnzusatzversicherung nach Ausgangslage prüfen' },
-    { href: '/kassenbonus', label: 'Kassenbonus für den Beitrag nutzen' },
-    { href: '/blog/gesundheitsbudget-3000-euro', label: 'Das Healio-Gesundheitsbudget verstehen' },
-  ],
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': [
     { href: '/partner', label: 'Healio für Heilpraktiker-Praxen' },
     { href: '/ambulant', label: 'Gesundheitsbudget und Tarifstufen prüfen' },
@@ -83,7 +77,7 @@ const RELATED_LINKS = {
   ],
   'zahnersatz-beitrag-vom-bonus': [
     { href: '/zahn', label: 'Zahnzusatzversicherung nach Ausgangslage prüfen' },
-    { href: '/blog/zahnzusatzversicherung-trotz-angeratener-behandlung', label: 'Sofortschutz bei angeratener Behandlung verstehen' },
+    { href: '/ratgeber/zahnzusatzversicherung-laufende-behandlung', label: 'Sofortschutz bei angeratener Behandlung verstehen' },
     { href: '/blog/kassenbonus-was-ist-drin', label: 'Kassenbonus als Zuschuss zum Beitrag nutzen' },
   ],
   'ikk-classic-bonus-schritt-fuer-schritt': [

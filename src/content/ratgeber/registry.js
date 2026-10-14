@@ -723,12 +723,12 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "zaehne",
     "listTitle": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
-    "listTeaser": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
-    "readingTimeMinutes": 7,
+    "listTeaser": "Angeraten, begonnen oder schon abgerechnet? Welche Zahnzusatzversicherung bei laufender Behandlung noch zahlt und wo die Grenze liegt.",
+    "readingTimeMinutes": 9,
     "metaTitle": "Zahnzusatzversicherung bei laufender Behandlung | Healio",
-    "metaDescription": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+    "metaDescription": "Zahnzusatzversicherung nach Befund oder bei angeratener Behandlung: Was ZAHN Sofort zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "professionelle-zahnreinigung-sinnvoll",
@@ -983,10 +983,11 @@ export const RATGEBER_ENTRIES = [
     "group": "ambulant",
     "listTitle": "Ambulante Zusatzversicherung: was sie zahlt, was sie kostet und für wen sie passt",
     "listTeaser": "Vier Leistungstöpfe, Beiträge nach Alter und eine ehrliche Antwort auf die Frage, ob eine ambulante Zusatzversicherung dich zum Privatpatienten macht.",
-    "readingTimeMinutes": 10,
+    "readingTimeMinutes": 12,
     "metaTitle": "Ambulante Zusatzversicherung: Leistungen und Grenzen | Healio",
     "metaDescription": "Ambulante Zusatzversicherung erklärt: vier Töpfe mit bis zu 3.000 EUR in zwei Jahren, Beiträge nach Alter, wer sie braucht und was sie nicht leistet.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "akupunktur-kosten",
@@ -1438,11 +1439,11 @@ export const RATGEBER_ENTRIES = [
     "group": "familie",
     "listTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt",
     "listTeaser": "Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.",
-    "readingTimeMinutes": 6,
+    "readingTimeMinutes": 8,
     "metaTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht | Healio",
-    "metaDescription": "Schwanger ohne Zusatzschutz? Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
+    "metaDescription": "Zusatzversicherung in der Schwangerschaft: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
     "publishedAt": "2026-09-28",
-    "updatedAt": "2026-10-05"
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "schwangerschaft-was-steht-mir-zu",
@@ -1662,11 +1663,11 @@ export const RATGEBER_ENTRIES = [
     "group": "brille",
     "listTitle": "Brillenversicherung: lohnt sie sich? Beitrag, Erstattung und Selbstzahlung",
     "listTeaser": "Welche Arten von Brillenversicherung es gibt, was der ambulante Tarif bei der Brille erstattet und wann Selbstzahlen die günstigere Rechnung ist.",
-    "readingTimeMinutes": 7,
+    "readingTimeMinutes": 9,
     "metaTitle": "Brillenversicherung: lohnt sie sich? Rechenbeispiel | Healio",
-    "metaDescription": "Brillenversicherung vom Optiker, Zuschuss-Police oder ambulanter Tarif: was sie erstatten, was sie im Monat kosten und wann Selbstzahlen günstiger ist.",
+    "metaDescription": "Brillenversicherung oder ambulanter Tarif mit Sehhilfen-Topf: was sie erstatten, was sie kosten, ob es ohne Wartezeit geht und wann Selbstzahlen günstiger ist.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "gleitsichtbrille-kosten",

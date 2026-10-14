@@ -31,22 +31,30 @@
  *   - Kein Nutzenversprechen für den Bonus, keine Aussage, ob Healio
  *     verdient, kein Anbietervergleich.
  *   - Keine Krebsvorsorge, deshalb kein Eintrag in die Ausschlusslisten.
+ *
+ * Ausbau 14.10.2026 (SEO Thema B, Semrush: brillenversicherung 5.400, brille
+ * versichern 480, brillenversicherung ohne wartezeit 260, zuschuss brille
+ * krankenkasse 590): Wortvarianten im Text, Stufentabelle Sehhilfen-Topf
+ * AP5 bis AP1 (SDK AVB 1.753a, Leistungsübersicht und I.1), Abschnitt ohne
+ * Wartezeit (AVB 1.753a Abschnitt II, Zwei-Kalenderjahre-Beispiel aus I.1),
+ * Abschnitt Bruch und Verlust mit Verweis auf brille-verloren-versicherung,
+ * drei neue FAQ. H1 unverändert.
  */
 
 export const article = {
-  updatedAtLabel: "8. Oktober 2026",
-  updatedAt: "2026-10-08",
+  updatedAtLabel: "14. Oktober 2026",
+  updatedAt: "2026-10-14",
   slug: 'brillenversicherung',
   kind: 'ratgeber',
   group: 'brille',
 
   metaTitle: 'Brillenversicherung: lohnt sie sich? Rechenbeispiel | Healio',
   metaDescription:
-    'Brillenversicherung vom Optiker, Zuschuss-Police oder ambulanter Tarif: was sie erstatten, was sie im Monat kosten und wann Selbstzahlen günstiger ist.',
+    'Brillenversicherung oder ambulanter Tarif mit Sehhilfen-Topf: was sie erstatten, was sie kosten, ob es ohne Wartezeit geht und wann Selbstzahlen günstiger ist.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  readingTimeMinutes: 7,
+  readingTimeMinutes: 9,
 
   listTitle: 'Brillenversicherung: lohnt sie sich? Beitrag, Erstattung und Selbstzahlung',
   listTeaser:
@@ -80,7 +88,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Unter dem Namen laufen drei verschiedene Dinge. Optiker bieten beim Kauf Policen an, die Schäden an der Brille zumindest teilweise ausgleichen, etwa nach Bruch, Verlust oder Diebstahl. Bei einigen greift der Schutz auch, wenn sich die Sehstärke um mehr als 0,5 Dioptrien verändert. So beschreibt es die Stiftung Warentest (31.08.2023).',
+          text: 'Wer eine Brille versichern will, findet unter den Namen Brillenversicherung, Brillenzusatzversicherung oder Augenversicherung drei verschiedene Dinge. Optiker bieten beim Kauf Policen an, die Schäden an der Brille zumindest teilweise ausgleichen, etwa nach Bruch, Verlust oder Diebstahl. Bei einigen greift der Schutz auch, wenn sich die Sehstärke um mehr als 0,5 Dioptrien verändert. So beschreibt es die Stiftung Warentest (31.08.2023).',
         },
         {
           type: 'paragraph',
@@ -106,7 +114,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei Erwachsenen nur in Ausnahmen. Nach § 33 Abs. 2 SGB V besteht der Anspruch ab 18 Jahren bei einer schweren Sehbeeinträchtigung mindestens der Stufe 1 oder bei einem verordneten Fern-Korrekturausgleich von mehr als 6 Dioptrien bei Kurz- oder Weitsichtigkeit oder mehr als 4 Dioptrien bei Astigmatismus. Die Hilfsmittel-Richtlinie des G-BA nennt dafür die Werte 6,25 und 4,25 Dioptrien.',
+          text: 'Einen Zuschuss zur Brille von der Krankenkasse gibt es bei Erwachsenen nur in Ausnahmen. Nach § 33 Abs. 2 SGB V besteht der Anspruch ab 18 Jahren bei einer schweren Sehbeeinträchtigung mindestens der Stufe 1 oder bei einem verordneten Fern-Korrekturausgleich von mehr als 6 Dioptrien bei Kurz- oder Weitsichtigkeit oder mehr als 4 Dioptrien bei Astigmatismus. Die Hilfsmittel-Richtlinie des G-BA nennt dafür die Werte 6,25 und 4,25 Dioptrien.',
         },
         {
           type: 'paragraph',
@@ -155,6 +163,47 @@ export const article = {
       ],
     },
     {
+      id: 'stufen',
+      heading: 'Wie viel zahlt jede Tarifstufe für Brille und Kontaktlinsen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Der ambulante Tarif der SDK hat vier Stufen. Bei Sehhilfen erstatten alle vier 100 % der erstattungsfähigen Kosten, sie unterscheiden sich nur im Höchstbetrag. Versichert sind laut Bedingungen Brillengläser, Brillengestelle, Kontaktlinsen und Reparaturen. Der Betrag gilt je zwei Kalenderjahre, egal wie viele Sehhilfen oder Reparaturen du einreichst. Pflege und Reinigung zahlt der Tarif nicht.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Sehhilfen-Topf der ambulanten SDK-Tarife je Stufe, mit Monatsbeitrag für 21 bis 30 Jahre',
+          head: ['Stufe', 'Erstattung Sehhilfen', 'Höchstbetrag je 2 Kalenderjahre', 'Beitrag 21 bis 30 Jahre'],
+          rows: [
+            ['Ambulant 50 (AP5)', '100 %', '200 EUR', '10,36 EUR im Monat'],
+            ['Ambulant 70 (AP7)', '100 %', '300 EUR', '15,82 EUR im Monat'],
+            ['Ambulant 90 (AP9)', '100 %', '400 EUR', '27,44 EUR im Monat'],
+            ['Ambulant 100 (AP1)', '100 %', '500 EUR', '31,64 EUR im Monat'],
+          ],
+          note: 'Quelle: SDK, Allgemeine Versicherungsbedingungen Teil II, Tarife AP5, AP7, AP9 und AP1 (1.753a, Stand 01.01.2023), Leistungsübersicht und Abschnitt I.1. Beiträge nach der Beitragstabelle der SDK wie auf healio.de/ambulant, Stand 29.09.2026; mit dem Alter steigend. Daneben enthält jede Stufe die Töpfe Naturheilverfahren, Vorsorge und Zuzahlungen.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Der Unterschied zur reinen Brillenversicherung liegt in diesen anderen Töpfen. Du zahlst nicht nur für die Brille, sondern für Heilpraktiker, Vorsorge und Zuzahlungen mit. Das lohnt sich nur, wenn du sie auch nutzt.',
+        },
+      ],
+    },
+    {
+      id: 'wartezeit',
+      heading: 'Gibt es eine Brillenversicherung ohne Wartezeit?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Im ambulanten Tarif der SDK ja. In den Bedingungen steht wörtlich, dass keine Wartezeiten bestehen. Der Sehhilfen-Topf gilt ab Versicherungsbeginn. Was du vorher gekauft hast, zählt nicht, denn der Versicherer zahlt nur für Fälle nach Beginn.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Wichtig ist die Zählweise. Der Topf läuft in Abschnitten von jeweils zwei Kalenderjahren ab Versicherungsbeginn. Die SDK nennt selbst ein Beispiel: Beginnt der Vertrag am 01.08. und du kaufst im September eine Sehhilfe, gibt es die volle Leistung wieder ab dem 01.01. des übernächsten Jahres. Wer im Herbst abschließt, hat im ersten Abschnitt also nur wenige Monate des Startjahres.',
+        },
+      ],
+    },
+    {
       id: 'rechnung',
       heading: 'Wie rechnet sich das gegen Selbstzahlen?',
       blocks: [
@@ -181,6 +230,26 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Allein für die Brille gerechnet, kostet der Tarif in diesem Beispiel mehr als das Selbstzahlen. Mit Ambulant 100 sind es 259,36 EUR mehr, mit dem Baustein 18,80 EUR mehr (eigene Rechnung). Das ist die ehrliche Antwort auf die Frage der Überschrift.',
+        },
+      ],
+    },
+    {
+      id: 'bruch',
+      heading: 'Kann ich meine Brille gegen Bruch und Verlust versichern?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Das ist die Schadenspolice vom Optiker, und die zahlt nur nach ihren eigenen Bedingungen. Der ambulante Tarif kennt keinen Diebstahl- oder Verlustschutz. Er erstattet Brillengläser, Gestelle und Reparaturen bis zur Grenze des Sehhilfen-Topfs. Bevor du für Bruch und Verlust extra zahlst, prüf, ob deine Haftpflicht oder Hausrat schon greift.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Welche Versicherung bei einer verlorenen oder kaputten Brille zahlt, steht im Ratgeber ' },
+            { text: 'Brille verloren oder kaputt', to: '/ratgeber/brille-verloren-versicherung' },
+            { text: '. Was eine Brille überhaupt kostet, erklärt der Ratgeber ' },
+            { text: 'Brillenkosten', to: '/ratgeber/brillenkosten' },
+            { text: '.' },
+          ],
         },
       ],
     },
@@ -296,9 +365,19 @@ export const article = {
         'Jede Tarifstufe hat einen eigenen Sehhilfen-Topf von 200 bis 500 EUR je zwei Kalenderjahre. Brille und Kontaktlinsen erstattet der Tarif in jeder Stufe zu 100 %, bis die Grenze des Topfs erreicht ist. In Ambulant 100 sind es bis zu 500 EUR.',
     },
     {
-      question: 'Gibt es eine Wartezeit?',
+      question: 'Gibt es eine Brillenversicherung ohne Wartezeit?',
       answer:
-        'Im ambulanten Tarif gibt es keine allgemeine Wartezeit. Versicherungsschutz besteht für neue Versicherungsfälle ab dem vereinbarten Beginn im Rahmen der Tarifbedingungen. Behandlungen, die vor Beginn schon laufen oder angeraten sind, bleiben ausgenommen.',
+        'Im ambulanten Tarif der SDK bestehen laut Bedingungen keine Wartezeiten. Der Sehhilfen-Topf gilt ab Versicherungsbeginn für neue Käufe, je nach Stufe mit 200 bis 500 EUR in zwei Kalenderjahren. Was vor Beginn gekauft wurde, zählt nicht.',
+    },
+    {
+      question: 'Zahlt die Krankenkasse einen Zuschuss zur Brille?',
+      answer:
+        'Bei Erwachsenen nur in Ausnahmen, etwa ab mehr als 6 Dioptrien Kurz- oder Weitsichtigkeit oder mehr als 4 Dioptrien Hornhautverkrümmung (§ 33 Abs. 2 SGB V), und dann nur für die Gläser. Kinder und Jugendliche bis 18 haben Anspruch auf Sehhilfen. Das Gestell zahlt die Kasse nie.',
+    },
+    {
+      question: 'Was ist der Unterschied zwischen Brillenversicherung und ambulanter Zusatzversicherung?',
+      answer:
+        'Eine Brillenversicherung zahlt nur für die Brille, etwa einen Zuschuss je Jahr oder Schäden. Eine ambulante Zusatzversicherung hat die Sehhilfe als einen Topf unter mehreren, daneben Heilpraktiker, Vorsorge und Zuzahlungen. Der Beitrag ist höher, das lohnt sich aber, wenn du mehrere Töpfe nutzt.',
     },
     {
       question: 'Kann ich meine Brille mit dem Kassenbonus mitfinanzieren?',
@@ -321,8 +400,8 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-07',
-    checkedAtLabel: '7. Oktober 2026',
+    checkedAt: '2026-10-14',
+    checkedAtLabel: '14. Oktober 2026',
     intro: 'Die Aussagen zu Policen, Kassenanspruch und Preisen stammen aus diesen Quellen, die Tarifangaben aus den Unterlagen auf healio.de/ambulant.',
     items: [
       {
@@ -375,6 +454,13 @@ export const article = {
         href: 'https://www.tk.de/tk/unternehmen-und-karriere/ueber-die-tk/satzung-der-tk/149038',
         stand: 'Stand 17.04.2026',
         accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Allgemeine Versicherungsbedingungen Teil II: Tarife AP5, AP7, AP9 und AP1 (1.753a), Sehhilfen und Wartezeiten',
+        publisher: 'SDK Süddeutsche Krankenversicherung',
+        href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf',
+        stand: '01.01.2023',
+        accessedAt: '14.10.2026',
       },
       {
         label: 'Tarifunterlagen SDK Ambulant und UKV Vorsorge-Baustein, wie auf healio.de/ambulant',

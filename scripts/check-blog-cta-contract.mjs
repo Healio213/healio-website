@@ -10,7 +10,7 @@ const knownGermanArticles = [
     expected: { href: '/stationaer', copyKey: 'inpatient' },
   },
   {
-    slug: 'zahnzusatzversicherung-trotz-angeratener-behandlung',
+    slug: 'zahnersatz-beitrag-vom-bonus',
     targetGroup: 'endkunden',
     expected: { href: '/zahn#zahn-check', copyKey: 'dental' },
   },
@@ -67,7 +67,7 @@ const expectedEnglishRoutes = {
   midwives: '/en/midwives',
 };
 
-assert.equal(knownGermanArticles.length, 10, 'Der Vertrag muss alle 10 bekannten Artikel abdecken (sechs seit 14.10.2026 in Ratgeber zusammengelegt).');
+assert.equal(knownGermanArticles.length, 10, 'Der Vertrag muss alle 10 bekannten Artikel abdecken (sieben seit 14.10.2026 in Ratgeber zusammengelegt).');
 
 for (const article of knownGermanArticles) {
   const actual = getBlogArticleCta({

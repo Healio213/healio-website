@@ -25,6 +25,13 @@
  * Prüfung Opus 07.10.2026 (PRÜFBERICHT-ambulant.md): Status in Faktenkasten und
  * Fußzeile wie Zahn-Welle 1; Tarifaussagen gegen healio.de/ambulant, die Dateien
  * im Serien-Worktree und die SDK-AVB gelesen.
+ *
+ * Ausbau 14.10.2026 (SEO Thema B, Semrush: "ambulante zusatzversicherung"
+ * 2.400, KD 30): Abschnitt Vergleichskriterien (Wartezeit, Erstattung,
+ * Zeitraum, Gesundheitsfragen ohne Ablehnung laut /ambulant), Abschnitt
+ * Kassenbonus finanziert Beitrag mit eigener Rechnung (Ambulant 70, 21 bis 30
+ * Jahre), Querverweise auf Brillenversicherung, Schwangerschaft und
+ * /kassenbonus. H1 unverändert.
  */
 
 export const article = {
@@ -38,7 +45,9 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  readingTimeMinutes: 10,
+  updatedAt: '2026-10-14',
+  updatedAtLabel: '14. Oktober 2026',
+  readingTimeMinutes: 12,
 
   listTitle: 'Ambulante Zusatzversicherung: was sie zahlt, was sie kostet und für wen sie passt',
   listTeaser:
@@ -214,6 +223,68 @@ export const article = {
       ],
     },
     {
+      id: 'vergleich',
+      heading: 'Worauf achtest du beim Vergleich ambulanter Zusatzversicherungen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Den einen besten Tarif für alle gibt es nicht. Ambulante Zusatzversicherungen sind sehr unterschiedlich gebaut, deshalb vergleichst du nicht Noten, sondern Bedingungen. Diese fünf Punkte entscheiden, ob ein Tarif zu deinem Alltag passt.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Fünf Prüfpunkte für eine ambulante Zusatzversicherung, mit den Werten der SDK-Tarife AP5 bis AP1',
+          head: ['Prüfpunkt', 'Warum er zählt', 'Bei den SDK-Tarifen AP5 bis AP1'],
+          rows: [
+            ['Leistungsbereiche', 'Nur was im Tarif steht, wird erstattet', 'Sehhilfen, Naturheilverfahren und Heilpraktiker, Vorsorge, Zuzahlungen und Hilfsmittel, dazu Augenlasern und Auslandsreisen'],
+            ['Erstattungssatz und Höchstbetrag', 'Ein hoher Prozentsatz nützt wenig, wenn der Topf klein ist', 'je nach Stufe 50 bis 100 Prozent, bis zu 3.000 EUR in zwei Jahren in der höchsten Stufe'],
+            ['Zeitraum', 'Kalenderjahr oder zwei Kalenderjahre ändern, wie schnell der Topf wieder voll ist', 'zwei Kalenderjahre ab Versicherungsbeginn'],
+            ['Wartezeit', 'Mit Wartezeit zahlt der Tarif in den ersten Monaten nicht', 'keine Wartezeiten laut Bedingungen'],
+            ['Gesundheitsfragen und Annahme', 'Entscheiden über Zuschlag, Ausschluss oder Ablehnung', 'Gesundheitsfragen ja, laut healio.de/ambulant keine Ablehnung, je nach Angaben Risikozuschlag oder Ausschluss'],
+          ],
+          note: 'Werte nach den SDK-Bedingungen Teil II, Tarife AP5 bis AP1 (1.753a, Stand 01.01.2023), Leistungsübersicht und Abschnitt II, sowie den Angaben auf healio.de/ambulant. Andere Tarife regeln das anders, maßgeblich sind jeweils deren Bedingungen.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Wer vor allem eine Brille versichern will, rechnet anders als jemand mit Heilpraktiker und Brille. Für die Brille allein lohnt sich ein ambulanter Tarif selten, das zeigt der Ratgeber zur Brillenversicherung mit Rechenbeispiel.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Zum Weiterlesen: ' },
+            { text: 'Brillenversicherung: lohnt sie sich?', to: '/ratgeber/brillenversicherung' },
+            { text: ' und, wenn du schwanger bist, ' },
+            { text: 'welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
+            { text: '.' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'bonus',
+      heading: 'Kann der Kassenbonus den Beitrag bezahlen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Bei vielen Kassen ja, zumindest zum Teil. Einige Krankenkassen zahlen ihren Bonus auf Wunsch als Zuschuss zu einer privaten Zusatzversicherung aus. Bei der IKK classic ist dieser Zuschuss laut Satzung das Dreifache der Bonuszahlung, höchstens aber die tatsächlichen Kosten. Ausgezahlt wird dabei höchstens der Beitrag, den du nachweislich gezahlt hast. Ob und wie viel, regelt die Satzung deiner Kasse.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Ein Beispiel zur Größenordnung: Ambulant 70 kostet mit 21 bis 30 Jahren 15,82 EUR im Monat, im Jahr also 189,84 EUR (eigene Rechnung nach der Beitragstabelle, Stand 29.09.2026). Ein Bonuszuschuss in dieser Höhe kann den Jahresbeitrag dann ganz tragen. Wer den Bonus nicht abruft, verschenkt dieses Geld jedes Jahr.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Die Regeln stehen in der ' },
+            { text: 'Satzung der IKK classic', href: 'https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf' },
+            { text: ' (Stand 01.08.2026). Was dein Kassenbonus bringen kann, siehst du auf ' },
+            { text: 'healio.de/kassenbonus', to: '/kassenbonus' },
+            { text: '.' },
+          ],
+        },
+      ],
+    },
+    {
       id: 'ablauf',
       heading: 'Wie schließt du eine ambulante Zusatzversicherung ab?',
       blocks: [
@@ -312,6 +383,11 @@ export const article = {
         'Nein, die Bedingungen der ambulanten SDK-Tarife sehen keine Wartezeiten vor. Behandlungen, die vor Beginn schon laufen oder angeraten sind, bleiben aber ausgenommen.',
     },
     {
+      question: 'Welche ambulante Zusatzversicherung ist die beste?',
+      answer:
+        'Das hängt davon ab, welche Leistungen du nutzt. Vergleiche Leistungsbereiche, Erstattungssatz und Höchstbetrag, den Zeitraum der Töpfe, die Wartezeit und die Regeln zu Gesundheitsfragen. Die ambulanten SDK-Tarife haben keine Wartezeiten und in der höchsten Stufe bis zu 3.000 EUR in zwei Jahren.',
+    },
+    {
       question: 'Muss ich für die ambulante Zusatzversicherung die Krankenkasse wechseln?',
       answer:
         'Nein. Zusatzversicherung und gesetzliche Krankenkasse sind zwei getrennte Entscheidungen. Du kannst zuerst den Schutz wählen und danach prüfen, ob eine andere Kasse mit ihrem Bonusprogramm finanziell besser zu deinem Tarif passt.',
@@ -334,8 +410,8 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-07',
-    checkedAtLabel: '7. Oktober 2026',
+    checkedAt: '2026-10-14',
+    checkedAtLabel: '14. Oktober 2026',
     intro: 'Leistungen, Höchstbeträge und Vertragsregeln stammen aus den Bedingungen der SDK, die Einordnung ambulanter Zusatzversicherungen von der Verbraucherzentrale.',
     items: [
       {

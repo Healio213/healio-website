@@ -256,7 +256,10 @@ for (const [slug, expected] of Object.entries(INTERNAL_BUTTONS)) {
     ? { iso: '2026-10-14', label: '14. Oktober 2026' }
     : slug === ZAHN_SLUG
       ? { iso: '2026-10-10', label: '10. Oktober 2026' }
-      : { iso: '2026-10-05', label: '5. Oktober 2026' };
+      // Ausbau Suchbegriff "zusatzversicherung schwangerschaft" (SEO Thema B, 14.10.2026).
+      : slug === SCHWANGER_SLUG
+        ? { iso: '2026-10-14', label: '14. Oktober 2026' }
+        : { iso: '2026-10-05', label: '5. Oktober 2026' };
   expect(article.updatedAt === expectedStand.iso && article.updatedAtLabel === expectedStand.label, `${slug} trägt Stand ${expectedStand.iso} / ${expectedStand.label}.`);
   expect(
     new RegExp(`<loc>https://healio\\.de/ratgeber/${slug}</loc>\\s*<lastmod>${expectedStand.iso}</lastmod>`).test(sitemap),
@@ -310,7 +313,7 @@ if (schwanger) {
   const kurz = schwanger.sections[0].blocks.flatMap((block) => (block.items || []).map((item) => (typeof item === 'string' ? item : `${item.lead} ${item.text}`)));
   const bonusPoint = kurz.find((item) => /1\.155 EUR/.test(item));
   expect(Boolean(bonusPoint) && /In der breiten Masse liegen aktive Versicherte bei 400 bis 700 EUR im Jahr\./.test(bonusPoint), '"Kurz gesagt" nennt neben 1.155 EUR die breite Masse mit 400 bis 700 EUR im Jahr.');
-  expect(schwanger.updatedAt === '2026-10-05', 'Der Schwangerschaftsartikel traegt das Aenderungsdatum 2026-10-05.');
+  expect(schwanger.updatedAt === '2026-10-14', 'Der Schwangerschaftsartikel traegt das Aenderungsdatum 2026-10-14.');
 }
 
 // /ambulant: Der freiwillige UKV-Baustein bleibt im Einstieg kurz. Der Hinweis

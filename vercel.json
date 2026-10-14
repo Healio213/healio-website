@@ -199,6 +199,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/zahnzusatzversicherung-trotz-angeratener-behandlung",
+      "destination": "/ratgeber/zahnzusatzversicherung-laufende-behandlung",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/zahnzusatzversicherung-trotz-angeratener-behandlung",
+      "destination": "/ratgeber/zahnzusatzversicherung-laufende-behandlung",
+      "permanent": true
+    },
+    {
       "source": "/en/blog/:slug",
       "destination": "/blog/:slug",
       "permanent": true

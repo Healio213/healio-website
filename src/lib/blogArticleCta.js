@@ -47,7 +47,7 @@ const CTA_ROUTES = {
 
 const ARTICLE_CTA_KEYS = {
   'krankenhauszusatzversicherung-sportverein-best-ager': 'inpatient',
-  'zahnzusatzversicherung-trotz-angeratener-behandlung': 'dental',
+  'zahnersatz-beitrag-vom-bonus': 'dental',
   'gesundheitsbudget-3000-euro': 'healthBudget',
   'naturheilkunde-krankenkasse-2026': 'healthFund',
   'healio-konzept-fuer-heilpraktiker': 'partner',

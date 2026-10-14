@@ -71,7 +71,7 @@ const MERGED_INTO_RATGEBER_2026_10_14 = {
   }
 }
 
-assert.equal(articles.length, 17, 'Der geprüfte Blog-Cache muss 17 Artikel enthalten.');
+assert.equal(articles.length, 16, 'Der geprüfte Blog-Cache muss 16 Artikel enthalten.');
 const NEW_SERIES_SLUGS_2026_09_23 = new Set([
   'kassenbonus-was-ist-drin',
   'krankenkasse-wechseln-laufende-behandlung',
@@ -104,7 +104,6 @@ const BLOG_CORRECTION_SLUGS_2026_10_06 = new Set([
   'naturheilkunde-krankenkasse-2026',
   'osteopathie-krankenkasse-2026',
   'zahnersatz-beitrag-vom-bonus',
-  'zahnzusatzversicherung-trotz-angeratener-behandlung',
 ]);
 assert.equal(BLOG_RELATED_LINK_SLUGS.length, articles.length, 'Für jeden Artikel muss eine Linkgruppe gepflegt sein.');
 assert.doesNotMatch(

@@ -1,21 +1,40 @@
 /**
  * Welle B, Feld Zahn.
- * Live healio.de/zahn mit dentalContent.js read-only abgeglichen. Nur gemeinsam belegbarer Sofortweg: 750 EUR je Kalenderjahr, insgesamt 1.500 EUR, 24 Monate, neuer Zahntarif, Abschluss vor Rechnung, noch nicht abgeschlossen oder abgerechnet. Lokale Zweijahresregel für UKV nicht übernommen. Keine Annahme- oder Erstattungszusage.
+ * Live healio.de/zahn mit dentalContent.js read-only abgeglichen. Nur gemeinsam belegbarer Sofortweg: 750 EUR je Kalenderjahr, insgesamt 1.500 EUR, 24 Monate, neuer Zahntarif, Abschluss vor Rechnung, noch nicht abgeschlossen oder abgerechnet. Keine Annahme- oder Erstattungszusage.
  * Quellen und Belege: zahnzusatzversicherung-laufende-behandlung.belege.md, Abruf 07.10.2026.
+ *
+ * Zusammenlegung 14.10.2026 (SEO Thema B, Semrush-Analyse 4a/4c): Der Blogartikel
+ * /blog/zahnzusatzversicherung-trotz-angeratener-behandlung ist hier aufgegangen
+ * und leitet per 301 (vercel.json) auf diese Seite. Übernommen wurde nur, was
+ * primärquellig belegt ist, jetzt direkt mit den Unterlagen der Bayerischen statt
+ * mit dem Verweis auf die eigene Zahnseite:
+ *   - Besondere Bedingungen ZAHN Sofort B 261005 (08.23): Rückwärtsversicherung,
+ *     "Als abgeschlossen gilt eine Behandlung, die bereits in Rechnung gestellt
+ *     wurde", 1.500 EUR davon höchstens 750 EUR je Kalenderjahr, Erstattungshöhe
+ *     nach dem Trägertarif, keine Wartezeiten, Beitrag altersunabhängig ohne
+ *     Anpassung, 24 Monate, endet automatisch, keine Verlängerung.
+ *   - Highlightblatt Zahn B 333551 (07.2026): pauschal 29,90 EUR pro Monat.
+ *   - Highlightblatt ZAHN Sofort B 333549 (Stand März 2024): Leistungsbeispiele
+ *     Inlays und Implantat (Beträge der Bayerischen, keine eigenen Preise).
+ *   - Annahmerichtlinien Zahn B 333546 (11.2025): "angeraten" = Behandler hat
+ *     konkreten Handlungsbedarf angemeldet, Zeitraum 2 Jahre; Baustein nur mit
+ *     Trägertarif und nur beim erstmaligen Vertragsbeginn.
+ * Nicht übernommen: Testurteil (Sperrwort), IKK-Refinanzierung "bis zu 100 Prozent"
+ * (ohne Primärquelle), Wertungen wie "Schande".
  */
 export const article = {
-  updatedAtLabel: "8. Oktober 2026",
-  updatedAt: "2026-10-08",
+  updatedAtLabel: "14. Oktober 2026",
+  updatedAt: "2026-10-14",
   "slug": "zahnzusatzversicherung-laufende-behandlung",
   "kind": "ratgeber",
   "group": "zaehne",
   "metaTitle": "Zahnzusatzversicherung bei laufender Behandlung | Healio",
-  "metaDescription": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+  "metaDescription": "Zahnzusatzversicherung nach Befund oder bei angeratener Behandlung: Was ZAHN Sofort zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
-  "readingTimeMinutes": 7,
+  "readingTimeMinutes": 9,
   "listTitle": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
-  "listTeaser": "Zahnzusatz bei laufender Behandlung: Grenzen normaler Tarife, der auf Healio beschriebene ZAHN-Sofort-Weg und wichtige Unterlagen vor der Rechnung.",
+  "listTeaser": "Angeraten, begonnen oder schon abgerechnet? Welche Zahnzusatzversicherung bei laufender Behandlung noch zahlt und wo die Grenze liegt.",
   "headline": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
   "author": "frank-steinfurt",
   "toc": "auto",
@@ -25,159 +44,224 @@ export const article = {
     "icon": "comparison",
     "facts": [
       {
-        "value": "750 EUR",
-        "label": "höchstens je Kalenderjahr im auf Healio beschriebenen Sofortweg"
-      },
-      {
         "value": "1.500 EUR",
-        "label": "höchstens insgesamt, nur bei passenden Bedingungen"
+        "label": "aus ZAHN Sofort: 750 EUR je Kalenderjahr, insgesamt 1.500 EUR"
       },
       {
-        "value": "24 Monate",
-        "label": "Laufzeit des Zusatzbausteins, der Zahntarif läuft danach weiter"
+        "value": "vor der Rechnung",
+        "label": "abschließen, denn was in Rechnung gestellt ist, gilt als abgeschlossen"
+      },
+      {
+        "value": "29,90 EUR",
+        "label": "im Monat für den Baustein, 24 Monate lang, plus Zahntarif"
       }
     ],
-    "text": "Eine neue Zahnzusatzversicherung übernimmt in der Regel nicht die Behandlung, die bei Abschluss bereits nötig ist oder läuft.",
+    "text": "Ein normaler Zahntarif zahlt nicht für das, was beim Abschluss schon angeraten ist oder läuft. Der Baustein ZAHN Sofort der Bayerischen ist die Ausnahme, mit festem Deckel.",
     "path": {
       "to": "/zahn",
-      "text": "Beitrag, Leistungsgrenzen und deine Situation prüfen",
+      "text": "Angeraten oder begonnen? Deinen Weg prüfen",
       "label": "Zahn-Check bei Healio öffnen"
     }
   },
-  "lead": "Eine neue Zahnzusatzversicherung übernimmt in der Regel nicht die Behandlung, die bei Abschluss bereits nötig ist oder läuft. Der auf Healio beschriebene Baustein ZAHN Sofort kann einen begrenzten Zuschuss ermöglichen, wenn du vor der Rechnung abschließt, die Behandlung noch nicht abgeschlossen oder abgerechnet ist und die Annahmebedingungen passen.",
+  "lead": "Der Zahnarzt hat eine Krone, ein Inlay oder ein Implantat angeraten, und jetzt heißt es überall: zu spät für eine Zahnzusatzversicherung. Für einen normalen Tarif stimmt das. Mit dem Baustein ZAHN Sofort der Bayerischen ist eine angeratene oder schon begonnene Behandlung trotzdem versicherbar, mit bis zu 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Die Bedingung, an der alles hängt: Der Vertrag muss beginnen, bevor die Praxis die Rechnung stellt. Wer das verpasst, zahlt seinen Eigenanteil allein.",
   "sections": [
     {
       "id": "status",
-      "heading": "Was zählt als laufende oder bereits angeratene Behandlung?",
+      "heading": "Was heißt angeraten, begonnen oder nach Befund?",
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Eine Behandlung kann für einen neuen Standardvertrag schon vor dem ersten Eingriff relevant sein. Die Verbraucherzentrale nennt bereits notwendige beziehungsweise angekündigte Behandlungen als typische Grenze. Ein dokumentierter Befund oder eine Empfehlung ist deshalb etwas anderes als eine reine Kontrolle ohne Behandlungsbedarf. Der Zeitpunkt einer Rechnung allein beantwortet diese Frage nicht."
+          "text": "Angeraten ist eine Behandlung nach den Annahmerichtlinien der Bayerischen, wenn der Behandler konkreten Handlungsbedarf angemeldet hat. Ein Heil- und Kostenplan ist dafür nicht nötig, ein Eintrag in deiner Patientenakte reicht. Die Bayerische schaut dabei auf die letzten 2 Jahre. Wer nach einem Befund sucht, also nachdem der Zahnarzt etwas festgestellt hat, steckt genau in dieser Lage."
         },
         {
           "type": "paragraph",
-          "text": "Trenne für die Prüfung vier Angaben: Wann wurde der Bedarf dokumentiert, wann wurde die Versorgung empfohlen oder geplant, wann hat die Behandlung begonnen und ist sie schon abgeschlossen oder abgerechnet? Der Heil- und Kostenplan kann den geplanten Zahnersatz und seine Kosten beschreiben. Andere Behandlungen brauchen nicht zwangsläufig denselben Plan. Entscheidend sind die Angaben und Unterlagen, die der konkrete Antrag verlangt."
+          "text": "Begonnen ist eine Behandlung, die schon angefangen hat. Abgeschlossen ist sie nach den Bedingungen von ZAHN Sofort, sobald sie in Rechnung gestellt wurde. Ob du die Rechnung schon bezahlt hast, spielt dafür keine Rolle. Diese drei Zustände entscheiden darüber, welcher Weg überhaupt noch offen ist."
         },
         {
           "type": "paragraph",
-          "text": "Wenn dir ein Datum oder die Bedeutung eines Akteneintrags unklar ist, lass es in der Praxis erläutern. Du kannst Einsicht in deine Behandlungsakte verlangen. Eine Erinnerung wie „das wurde nur kurz erwähnt“ ersetzt einen dokumentierten Verlauf nicht. Angaben im Versicherungsantrag müssen vollständig und richtig sein."
+          "text": "Wenn dir ein Datum oder ein Eintrag unklar ist, lass ihn in der Praxis erklären. Du kannst Einsicht in deine Behandlungsakte verlangen (§ 630g BGB). Eine Erinnerung wie „das wurde nur kurz erwähnt“ ersetzt den dokumentierten Verlauf nicht, und deine Angaben im Antrag müssen vollständig und richtig sein."
         }
       ]
     },
     {
       "id": "standard",
-      "heading": "Warum hilft ein normaler Zahntarif oft nicht mehr?",
+      "heading": "Warum zahlt ein normaler Zahntarif bei laufender Behandlung nicht?",
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Die Versicherung beurteilt beim Abschluss die im Antrag erfragte Ausgangslage. Bereits bekannte notwendige Behandlungen werden nach der Verbraucherzentrale gewöhnlich nicht in einen neuen Vertrag einbezogen. Das bedeutet nicht automatisch, dass jede spätere Zahnleistung ausgeschlossen wäre. Es bedeutet, dass du den laufenden Fall und mögliche spätere, eigenständige Leistungsfälle getrennt prüfen musst."
+          "text": "Weil der Versicherer nur für Fälle leistet, die nach Vertragsbeginn entstehen. Die Bayerische schreibt für ihre Tarife ZAHN Smart, Komfort und Prestige ausdrücklich: Für Behandlungen, die bei Vertragsabschluss bereits begonnen oder angeraten sind, besteht kein Versicherungsschutz. Die Verbraucherzentrale nennt bekannte Schäden und angekündigte Behandlungen ebenfalls als typische Grenze."
         },
         {
           "type": "paragraph",
-          "text": "Ein Tarif ohne klassische Wartezeit beseitigt diese Grenze nicht. Auf Healio steht ausdrücklich, dass Leistungsstaffeln, Höchstgrenzen und Ausschlüsse trotzdem gelten können. Auch eine hohe allgemeine Erstattungsquote sagt nicht, dass der konkrete bereits begonnene Fall dazugehört."
+          "text": "Ein Tarif ohne Wartezeit ändert daran nichts. Keine Wartezeit heißt nur, dass neue Fälle sofort zählen. Der Fall, der schon in deiner Akte steht, bleibt draußen. Und eine hohe Erstattungsquote im Prospekt sagt nichts darüber, ob genau deine laufende Behandlung dazugehört."
         },
         {
           "type": "paragraph",
-          "text": "Ebenso wenig macht ein neuer Vertragsbeginn eine alte Behandlung rückwirkend versichert. Wenn du bereits eine Zusatzversicherung hast, prüfst du zuerst diesen bestehenden Vertrag und seinen damaligen Beginn. Ein späterer Neuabschluss ist nicht dieselbe Anspruchsgrundlage. Hol für den laufenden Fall eine konkrete Einordnung ein, statt nur zwei Produktnamen zu vergleichen."
+          "text": "Hast du schon eine Zahnzusatzversicherung, prüfst du zuerst diesen Vertrag und seinen damaligen Beginn. Ein Neuabschluss macht eine alte Behandlung nicht rückwirkend versichert."
         }
       ]
     },
     {
       "id": "sofort",
-      "heading": "Was ermöglicht ZAHN Sofort bei einer laufenden Behandlung?",
+      "heading": "Was zahlt ZAHN Sofort bei angeratener oder laufender Behandlung?",
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Die Healio-Zahnseite beschreibt ZAHN Sofort als Zusatzbaustein zu einem neuen Zahntarif. Bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Der Abschluss muss vor der Rechnung erfolgen; eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter."
+          "text": "ZAHN Sofort ist ein Ergänzungsbaustein der Bayerischen zu den Zahntarifen Smart, Komfort und Prestige. Nach den Besonderen Bedingungen leistet er auch für Behandlungen, die vor dem Vertragsbeginn angeraten oder schon begonnen wurden, aber noch nicht abgeschlossen sind. Wartezeiten entfallen. Erstattet wird nach den Prozentsätzen deines Zahntarifs, aus ZAHN Sofort höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR."
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "lead": "Beitrag:",
+              "text": "pauschal 29,90 EUR im Monat, für alle Altersgruppen gleich und während der Laufzeit ohne Beitragsanpassung. Dazu kommt der Beitrag für den Zahntarif."
+            },
+            {
+              "lead": "Laufzeit:",
+              "text": "24 Monate. Danach endet der Baustein automatisch, ohne Kündigung. Verlängern lässt er sich nicht. Der Zahntarif läuft weiter und gilt für alles, was nach Vertragsbeginn neu beginnt."
+            },
+            {
+              "lead": "Nur beim ersten Abschluss:",
+              "text": "Der Baustein geht nur zusammen mit einem Zahntarif und nur beim erstmaligen Vertragsbeginn. In einen bestehenden Vertrag lässt er sich nicht einschließen."
+            },
+            {
+              "lead": "Kein Übertrag:",
+              "text": "Was du in einem Kalenderjahr nicht ausschöpfst, verfällt. Ins nächste Jahr wandert es nicht."
+            }
+          ]
         },
         {
           "type": "paragraph",
-          "text": "Diese Bedingungen gehören zusammen. Ein noch offener Rechnungsbetrag allein reicht nicht, wenn die Behandlung bereits abgeschlossen ist. Umgekehrt ersetzt ein noch laufender Eingriff nicht den erforderlichen Abschluss vor der Rechnung. Ob dein konkreter Fall angenommen wird und welcher Umfang gilt, wird verbindlich im Antrag geprüft."
+          "text": "Die Kalenderjahre kannst du nutzen. Verteilen sich Rechnungen einer größeren Behandlung auf zwei Kalenderjahre, kann der Jahreshöchstbetrag zweimal greifen. Plane die Termine mit deiner Praxis, aber nur so, wie es medizinisch passt."
         },
         {
           "type": "table",
           "mobile": "cards",
-          "caption": "Laufende Behandlung und Kosten: Welche Information entscheidet?",
+          "caption": "Laufende Behandlung: Welcher Weg ist noch offen?",
           "head": [
             "Situation",
-            "Möglicher Prüfweg",
-            "Was für deine Kosten wichtig ist"
+            "Möglicher Weg",
+            "Worauf es ankommt"
           ],
           "rows": [
             [
-              "Angeraten oder bereits begonnen, noch nicht abgeschlossen oder abgerechnet",
-              "Auf Healio beschriebenen Sofortweg prüfen",
-              "Abschluss vor der Rechnung und passende Annahmebedingungen"
+              "Angeraten in den letzten 2 Jahren, noch nicht begonnen",
+              "Zahntarif mit ZAHN Sofort",
+              "Vertragsbeginn vor der Rechnung, Annahme nach den Gesundheitsfragen"
             ],
             [
-              "Behandlung schon abgeschlossen",
-              "Keine Übernahme aus dem beschriebenen Sofortweg ableiten",
-              "Eigenanteil und bestehenden Versicherungsschutz prüfen"
+              "Begonnen, noch nicht in Rechnung gestellt",
+              "Zahntarif mit ZAHN Sofort",
+              "Die Rechnung darf erst nach Vertragsbeginn kommen"
             ],
             [
-              "Behandlung bereits abgerechnet",
-              "Keine Übernahme aus dem beschriebenen Sofortweg ableiten",
-              "Eine noch offene Zahlung ändert die zeitliche Grenze nicht"
+              "Schon in Rechnung gestellt",
+              "Kein Weg über einen neuen Vertrag",
+              "Eine noch offene Zahlung ändert nichts, die Behandlung gilt als abgeschlossen"
             ],
             [
-              "Spätere eigenständige Behandlung",
-              "Standardtarif nach dessen Bedingungen prüfen",
-              "Neuer Fall, Leistungsbeginn, Staffel und Ausschlüsse"
+              "Nichts angeraten in den letzten 2 Jahren",
+              "Normaler Zahntarif ohne Sofortbaustein",
+              "Neue Fälle nach den Tarifbedingungen, Staffel und Ausschlüsse beachten"
             ]
           ],
-          "note": "Keine Behandlungspreise und keine individuelle Leistungszusage. Der live beschriebene Sofortbaustein begrenzt einen möglichen Zuschuss auf 750 EUR je Kalenderjahr und 1.500 EUR insgesamt; zusätzlich gelten Annahme und übrige Bedingungen."
+          "note": "Nach den Besonderen Bedingungen ZAHN Sofort B 261005 (08.23) und den Annahmerichtlinien Zahn B 333546 (11.2025) der Bayerischen. Keine Leistungszusage für deinen Einzelfall, verbindlich sind Antrag, Versicherungsschein und Bedingungen."
         }
-      ,
-{
-  "type": "costCard",
-  "title": "Kosten und Erstattung getrennt prüfen",
-  "icon": "dental",
-  "caption": "Laufende Behandlung und Kosten: Welche Information entscheidet?",
-  "head": [
-    "Leistung",
-    "Kasse zahlt",
-    "Du ohne Tarif",
-    "Du mit Tarif"
-  ],
-  "rows": [
-    [
-      "Angeraten oder bereits begonnen, noch nicht abgeschlossen oder abgerechnet",
-      "Reguläre Kassenleistung gesondert klären.",
-      "Die konkreten Positionen und den Eigenanteil im Kostenplan klären.",
-      "Auf Healio beschriebenen Sofortweg prüfen; Abschluss vor der Rechnung und passende Annahmebedingungen"
-    ],
-    [
-      "Behandlung schon abgeschlossen",
-      "Reguläre Kassenleistung gesondert klären.",
-      "Die konkreten Positionen und den Eigenanteil im Kostenplan klären.",
-      "Keine Übernahme aus dem beschriebenen Sofortweg ableiten; Eigenanteil und bestehenden Versicherungsschutz prüfen"
-    ],
-    [
-      "Behandlung bereits abgerechnet",
-      "Reguläre Kassenleistung gesondert klären.",
-      "Die konkreten Positionen und den Eigenanteil im Kostenplan klären.",
-      "Keine Übernahme aus dem beschriebenen Sofortweg ableiten; Eine noch offene Zahlung ändert die zeitliche Grenze nicht"
-    ]
-  ],
-  "note": "Keine Behandlungspreise und keine individuelle Leistungszusage. Der live beschriebene Sofortbaustein begrenzt einen möglichen Zuschuss auf 750 EUR je Kalenderjahr und 1.500 EUR insgesamt; zusätzlich gelten Annahme und übrige Bedingungen."
-},
-]
+      ]
     },
     {
-      "id": "kosten",
-      "heading": "Welche Kosten musst du trotzdem getrennt prüfen?",
+      "id": "rechnung",
+      "heading": "Warum ist die Rechnung die entscheidende Grenze?",
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Ein begrenzter Zuschuss deckt nicht automatisch deine ganze Rechnung. Lass dir den geplanten Umfang, die gesetzliche Kassenleistung und den verbleibenden Eigenanteil erklären. Bei Zahnersatz unterscheidet der Heil- und Kostenplan Befund, geplante Versorgung und Kosten. Die Kasse prüft ihren Anspruch unabhängig von einem neu abzuschließenden privaten Baustein."
+          "text": "Weil die Bedingungen es so festlegen. ZAHN Sofort übernimmt Kosten nur für Behandlungen, die vor dem Vertragsbeginn noch nicht abgeschlossen sind, und als abgeschlossen gilt eine Behandlung, die bereits in Rechnung gestellt wurde. Eine Sechs-Monats-Frist ab Heil- und Kostenplan steht dort nicht. Maßgeblich ist der Zeitpunkt der Rechnung."
         },
         {
           "type": "paragraph",
-          "text": "Für die Gesamtrechnung kommen die vertraglichen Beiträge hinzu. Der Sofortbaustein endet nach dem angegebenen Zeitraum, der neue Zahntarif läuft weiter. Vergleiche deshalb die mögliche Zuschussleistung mit den tatsächlich angebotenen Beiträgen und den Regeln des weiterlaufenden Vertrags. Ohne konkretes Angebot wäre eine vermeintliche Ersparnis nur eine unvollständige Rechnung."
+          "text": "Für dich heißt das: erst der Vertrag, dann die Rechnung. Sprich mit deiner Praxis, wann sie abrechnet, bevor du den nächsten Termin machst. Ist die Rechnung einmal geschrieben, ist es für diese Behandlung zu spät, auch wenn du sie noch nicht bezahlt hast."
+        }
+      ]
+    },
+    {
+      "id": "kosten",
+      "heading": "Wie viel bleibt bei dir? Zwei Beispiele der Bayerischen",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Die Bayerische rechnet in ihrem Highlightblatt zu ZAHN Sofort zwei Fälle vor. Die Beispiele zeigen, wofür der Baustein reicht und wofür nicht: Eine kleinere Versorgung kann er fast ganz tragen, bei einem Implantat bleibt der größte Teil bei dir."
+        },
+        {
+          "type": "costCard",
+          "title": "Zwei Leistungsbeispiele zu ZAHN Sofort",
+          "icon": "dental",
+          "tariffLabel": "Beispiele der Bayerischen aus dem Highlightblatt B 333549 (Stand März 2024): Inlays mit Prestige und Sofortbaustein, Implantat mit Komfort und Sofortbaustein. Beträge laut Bayerischer, keine Preisangabe von Healio.",
+          "caption": "Kostenkarte: angeratene Inlays und begonnenes Implantat mit Sofortbaustein",
+          "head": [
+            "Beispiel",
+            "Kasse zahlt",
+            "Du ohne Tarif",
+            "Du mit Tarif"
+          ],
+          "rows": [
+            [
+              "Inlays aus Keramik, angeraten vor Vertragsbeginn, ca. 750 EUR",
+              "50 EUR",
+              "700 EUR",
+              "nichts mehr, der Versicherer übernimmt die restlichen 700 EUR"
+            ],
+            [
+              "Implantat mit Metall-Keramik-Krone, vor Vertragsbeginn begonnen, ca. 3.950 EUR",
+              "472 EUR Festzuschuss",
+              "3.478 EUR",
+              "2.728 EUR, der Versicherer zahlt 750 EUR im ersten Kalenderjahr"
+            ]
+          ],
+          "note": "Quelle: die Bayerische, Highlightblatt Baustein ZAHN Sofort (B 333549, Stand März 2024), Beispiele 1 und 2. „Du ohne Tarif“ ist eigene Rechnung (Kosten minus Kassenanteil). Wie viel in deinem Fall erstattet wird, hängt von Zahntarif, Rechnung und Annahme ab.",
+          "bonusNote": "Den Beitrag für Zahntarif und Baustein kann ein Kassenbonus mittragen, wenn deine Kasse ihn als Zuschuss zu einer Zusatzversicherung zahlt. Wie viel, hängt von Kasse und Aktivitäten ab."
         },
         {
           "type": "paragraph",
-          "text": "Wenn kein später Abschluss für den laufenden Fall passt, bleiben die reguläre Kassenleistung, ein bereits bestehender Vertrag und die konkrete Kostenplanung zu prüfen. Der Ratgeber nennt keine pauschale OP-, Kronen- oder Implantatrechnung. Ein individueller Plan ist dafür aussagekräftiger als ein allgemeiner Internetbetrag."
+          "text": "Rechne den Beitrag mit. Der Baustein kostet über 24 Monate 717,60 EUR (24 mal 29,90 EUR, eigene Rechnung), dazu kommt der Zahntarif. Bei einer einzelnen kleinen Behandlung liegt der Vorteil deshalb vor allem darin, dass der Zahntarif danach weiterläuft. Bei mehreren angeratenen Behandlungen über zwei Kalenderjahre rechnet sich der Baustein eher."
+        }
+      ]
+    },
+    {
+      "id": "annahme",
+      "heading": "Wann passt ZAHN Sofort nicht?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Auch mit Sofortbaustein beantwortest du Gesundheitsfragen, und die Bayerische nimmt nicht jeden an. Im Zahn-Check auf healio.de/zahn passt der Sofortweg nur, wenn dir keine Zähne fehlen, kein Zahn gezogen werden soll und keine Vorgeschichte wie Parodontitis in den letzten 3 Jahren, eine herausnehmbare Prothese oder alter Zahnersatz besteht."
+        },
+        {
+          "type": "paragraph",
+          "text": "Wurde in den letzten 2 Jahren nichts angeraten, brauchst du den Baustein nicht. Dann zeigt dir der Zahn-Check einen normalen Zahntarif, auch wenn dir 1 bis 3 Zähne fehlen. Passt keiner der beiden Wege, etwa bei fehlenden Zähnen zusammen mit einer angeratenen Behandlung, klären wir das persönlich mit dir unter 040 89755705."
+        },
+        {
+          "type": "path",
+          "to": "/zahn",
+          "icon": "comparison",
+          "text": "In bis zu vier Fragen siehst du, ob der Sofortweg für dich offen ist oder ein anderer Tarif passt.",
+          "label": "Zahn-Check bei Healio öffnen"
+        },
+        {
+          "type": "honest",
+          "heading": "Ehrlich gesagt",
+          "items": [
+            {
+              "lead": "Das ist ein Zuschuss mit Deckel, keine volle Übernahme.",
+              "text": "Aus ZAHN Sofort kommen höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Bei einem Implantat bleibt der größte Teil bei dir."
+            },
+            {
+              "lead": "Die Rechnung entscheidet, nicht die Zahlung.",
+              "text": "Was schon in Rechnung gestellt ist, gilt als abgeschlossen. Eine noch offene Zahlung rettet die Behandlung nicht."
+            },
+            {
+              "lead": "Der Zahntarif läuft weiter und kostet weiter.",
+              "text": "Bewerte den ganzen Vertrag mit seinen Beiträgen, nicht nur den möglichen Zuschuss für den laufenden Fall."
+            }
+          ]
         }
       ]
     },
@@ -187,36 +271,11 @@ export const article = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Halte den Behandlungsplan, vorhandene Kostenvoranschläge und die bekannten Termine bereit. Notiere getrennt, ob die Praxis bereits Leistungen abgerechnet hat und ob die gesamte geplante Behandlung abgeschlossen ist. Lass Unklarheiten zur Zuordnung einzelner Behandlungsschritte durch die Praxis erklären. Die Prüfung des Versicherers folgt den exakten Fragen des Antrags."
+          "text": "Halte den Behandlungsplan, einen vorhandenen Heil- und Kostenplan und die bekannten Termine bereit. Notiere, ob die Praxis schon etwas abgerechnet hat und ob die Behandlung abgeschlossen ist. Den Heil- und Kostenplan reichst du zuerst bei deiner Krankenkasse ein, damit ihr Festzuschuss feststeht."
         },
         {
           "type": "paragraph",
-          "text": "Auf der Healio-Seite beginnt der Weg mit einer Einordnung der Zahnsituation. Danach siehst du im passenden Tarifangebot Beitrag und Bedingungen. Die Antworten in einer ersten Orientierung sind keine Annahme oder Bewilligung. Speichere die tatsächlichen Antrags- und Vertragsunterlagen, damit du den späteren Leistungsfall auf die richtige Fassung beziehen kannst."
-        },
-        {
-          "type": "path",
-          "to": "/zahn",
-          "icon": "comparison",
-          "text": "Kläre den zeitlichen Ablauf und den prüfbaren Tarifweg.",
-          "label": "Zahn-Check bei Healio öffnen"
-        },
-        {
-          "type": "honest",
-          "heading": "Ehrlich gesagt",
-          "items": [
-            {
-              "lead": "Rückwirkend ist kein allgemeiner Leistungsweg.",
-              "text": "Bereits notwendige Standardfälle und der ausdrücklich begrenzte Sofortbaustein müssen getrennt betrachtet werden."
-            },
-            {
-              "lead": "Vor der Rechnung ist nur eine der Bedingungen.",
-              "text": "Die Behandlung darf im beschriebenen Sofortweg auch noch nicht abgeschlossen oder abgerechnet sein."
-            },
-            {
-              "lead": "Der weiterlaufende Zahntarif kostet ebenfalls Beitrag.",
-              "text": "Bewerte den ganzen Vertrag und seine Annahme, statt nur den möglichen Zuschuss im laufenden Fall zu betrachten."
-            }
-          ]
+          "text": "Speichere Antrag und Versicherungsschein, damit du den späteren Leistungsfall auf die richtige Fassung beziehen kannst. Die Antworten im Zahn-Check sind eine Orientierung, keine Annahme. Verbindlich entscheidet der Versicherer im Antrag."
         }
       ]
     },
@@ -234,6 +293,13 @@ export const article = {
               "to": "/ratgeber/zahnersatz-kosten",
               "icon": "bonus",
               "linkLabel": "Zur Übersicht"
+            },
+            {
+              "title": "Heil- und Kostenplan verstehen",
+              "text": "Was im Plan steht und warum er zuerst zur Kasse geht.",
+              "to": "/ratgeber/heil-und-kostenplan",
+              "icon": "document",
+              "linkLabel": "Ratgeber lesen"
             },
             {
               "title": "Zahnzusatzversicherung Kosten",
@@ -254,54 +320,93 @@ export const article = {
       ]
     }
   ],
-  "factNugget": "Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Bei einer laufenden Behandlung sind Empfehlung, Beginn, Abschluss und Abrechnung verschiedene Zeitpunkte. Der auf Healio beschriebene Sofortweg setzt Abschluss vor der Rechnung sowie eine noch nicht abgeschlossene oder abgerechnete Behandlung voraus. Ein offener Rechnungsbetrag allein genügt nicht.",
+  "factNugget": "Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Bei einer angeratenen oder begonnenen Zahnbehandlung kann der Baustein ZAHN Sofort der Bayerischen leisten, wenn der Vertrag vor der Rechnung beginnt: aus dem Baustein höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR, für 29,90 EUR im Monat über 24 Monate. Was schon in Rechnung gestellt ist, gilt als abgeschlossen.",
   "faqs": [
     {
-      "question": "Kann ich bei laufender Behandlung noch eine Zahnzusatzversicherung abschließen?",
-      "answer": "Ein Abschluss kann je nach Antrag und Tarif prüfbar sein. Daraus folgt keine Leistung für genau die bereits laufende Behandlung. Ein Standardvertrag und der begrenzte, auf Healio beschriebene Sofortweg haben unterschiedliche Bedingungen."
+      "question": "Welche Zahnzusatzversicherung zahlt bei laufender Behandlung?",
+      "answer": "Normale Zahntarife zahlen nicht für Behandlungen, die beim Abschluss schon angeraten oder begonnen sind. Die Bayerische bietet dafür den Baustein ZAHN Sofort zu ihren Tarifen Smart, Komfort und Prestige an. Er leistet auch für laufende Behandlungen, solange sie noch nicht in Rechnung gestellt sind: aus dem Baustein höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR."
     },
     {
-      "question": "Zahlt ein Tarif ohne Wartezeit für eine schon begonnene Behandlung?",
-      "answer": "Eine fehlende klassische Wartezeit hebt Ausschlüsse für bereits bestehende Behandlungen nicht auf. Leistungsbeginn, Staffel und die Ausgangslage beim Antrag bleiben maßgeblich."
-    },
-    {
-      "question": "Wie viel kann ZAHN Sofort beitragen?",
-      "answer": "Nach der Healio-Zahnseite können bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR möglich sein. Der Baustein gehört zu einem neuen Zahntarif. Die zeitlichen Bedingungen und verbindliche Annahme müssen passen."
+      "question": "Kann ich nach dem Befund noch eine Zahnzusatzversicherung abschließen?",
+      "answer": "Abschließen ja, aber ein normaler Tarif zahlt dann nicht für die angeratene Behandlung. Mit dem Baustein ZAHN Sofort ist sie versicherbar, wenn der Vertrag vor der Rechnung beginnt und die Gesundheitsfragen passen. Die Bayerische schaut bei angeratenen Behandlungen auf die letzten 2 Jahre."
     },
     {
       "question": "Reicht es, wenn ich die Zahnarztrechnung noch nicht bezahlt habe?",
-      "answer": "Für den beschriebenen Sofortweg zählen Abschluss vor der Rechnung sowie eine noch nicht abgeschlossene oder abgerechnete Behandlung. Eine bereits ausgestellte Rechnung wird durch spätere Zahlung nicht zu einer unbehandelten Ausgangslage."
+      "answer": "Nein. Nach den Bedingungen gilt eine Behandlung als abgeschlossen, sobald sie in Rechnung gestellt wurde. Ob du schon bezahlt hast, ändert daran nichts."
     },
     {
-      "question": "Was passiert nach den 24 Monaten des Sofortbausteins?",
-      "answer": "Der Zusatzbaustein endet nach diesem Zeitraum. Der dazu neu abgeschlossene Zahntarif läuft weiter. Prüfe deshalb dessen Beiträge, Leistungen, Laufzeit und Kündigungsregeln im konkreten Angebot."
+      "question": "Was kostet ZAHN Sofort?",
+      "answer": "Pauschal 29,90 EUR im Monat, unabhängig vom Alter, dazu der Beitrag für den Zahntarif. Der Baustein läuft 24 Monate und endet dann automatisch. Über die ganze Laufzeit sind das 717,60 EUR für den Baustein (eigene Rechnung)."
+    },
+    {
+      "question": "Was passiert nach den 24 Monaten?",
+      "answer": "Der Baustein endet automatisch und lässt sich nicht verlängern. Der Zahntarif läuft weiter und leistet nach seinen Bedingungen für Behandlungen, die nach Vertragsbeginn neu beginnen."
+    },
+    {
+      "question": "Kann ich ZAHN Sofort in meinen bestehenden Vertrag aufnehmen?",
+      "answer": "Nein. Den Baustein gibt es nur zusammen mit einem Zahntarif der Bayerischen und nur beim erstmaligen Vertragsbeginn."
     }
   ],
   "onward": {
     "heading": "So gehst du weiter vor",
     "segments": [
       {
-        "text": "Kläre zuerst die Leistung und die dafür maßgeblichen Kosten. Den passenden Tarifweg kannst du danach im "
+        "text": "Kläre mit deiner Praxis, ob schon abgerechnet wurde und wann die nächste Rechnung kommt. Welcher Weg für dich offen ist, siehst du im "
       },
       {
         "text": "Zahn-Check bei Healio",
         "to": "/zahn"
       },
       {
-        "text": " prüfen."
+        "text": ". Was dein Kassenbonus zum Beitrag beitragen kann, vergleichst du auf "
+      },
+      {
+        "text": "kassenboost.de",
+        "href": "https://kassenboost.de/"
+      },
+      {
+        "text": "."
       }
     ]
   },
   "sources": {
-    "checkedAt": "2026-10-07",
-    "checkedAtLabel": "7. Oktober 2026",
-    "intro": "Beträge und Regeln wurden anhand der folgenden Originalquellen geprüft. Eigene Rechnungen sind im Text ausdrücklich gekennzeichnet.",
+    "checkedAt": "2026-10-14",
+    "checkedAtLabel": "14. Oktober 2026",
+    "intro": "Leistungen, Grenzen und Beitrag von ZAHN Sofort stammen aus den Unterlagen der Bayerischen, die allgemeinen Regeln von der Verbraucherzentrale und aus dem BGB. Eigene Rechnungen sind im Text gekennzeichnet.",
     "items": [
       {
-        "label": "Live-Bedingungen des ZAHN-Sofort-Wegs",
-        "publisher": "Healio",
-        "href": "https://healio.de/zahn",
-        "stand": "Abruf 7. Oktober 2026",
+        "label": "Besondere Bedingungen für den Ergänzungsbaustein ZAHN Sofort (B 261005)",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:a4c467fb-8060-4ed2-afea-6d44757e1970/261005_besondere_bedignungen_zahn_sofort_2023.pdf",
+        "stand": "08.23",
+        "accessedAt": "14.10.2026"
+      },
+      {
+        "label": "Highlightblatt Zahnzusatzversicherung mit Ergänzungsbaustein Zahn Sofort (B 333551)",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:65e23042-960a-4478-90c7-a249e0b5f628/B%20333551%20Highlightblatt%20allgemein%20Stadt_Zahn.PDF",
+        "stand": "07.2026",
+        "accessedAt": "14.10.2026"
+      },
+      {
+        "label": "Highlightblatt Baustein ZAHN Sofort mit Leistungsbeispielen (B 333549)",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:b29de137-b763-4efa-bcc0-9e51a33a5da7/333549_highlightblatt_zahn-sofort_endkunden.pdf",
+        "stand": "März 2024",
+        "accessedAt": "14.10.2026"
+      },
+      {
+        "label": "Annahmerichtlinien Zahn, Definition „angeraten“ und Regeln zum Baustein (B 333546)",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:0b42be21-a714-4ccb-a134-c3a848d472d7/333546_annahmerichtlinien_zahn.pdf",
+        "stand": "11.2025",
+        "accessedAt": "14.10.2026"
+      },
+      {
+        "label": "Bekannte Schäden und angekündigte Behandlungen",
+        "publisher": "Verbraucherzentrale",
+        "href": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/zahnzusatzversicherungen-lohnt-sich-ein-abschluss-12943",
+        "stand": "21. Februar 2024",
         "accessedAt": "07.10.2026"
       },
       {
@@ -312,21 +417,7 @@ export const article = {
         "accessedAt": "07.10.2026"
       },
       {
-        "label": "Bekannte Schäden und angekündigte Behandlungen",
-        "publisher": "Verbraucherzentrale",
-        "href": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/zahnzusatzversicherungen-lohnt-sich-ein-abschluss-12943",
-        "stand": "21. Februar 2024",
-        "accessedAt": "07.10.2026"
-      },
-      {
-        "label": "Heil- und Kostenplan für Zahnersatz",
-        "publisher": "Verbraucherzentrale",
-        "href": "https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/aerztinnen-und-kliniken/der-heil-und-kostenplan-was-sie-darueber-wissen-muessen-12888",
-        "stand": "19. Februar 2024",
-        "accessedAt": "07.10.2026"
-      },
-      {
-        "label": "Einsicht in die Behandlungsakte",
+        "label": "Einsicht in die Patientenakte, § 630g BGB",
         "publisher": "Gesetze im Internet",
         "href": "https://www.gesetze-im-internet.de/bgb/__630g.html",
         "stand": "Abruf 7. Oktober 2026",
@@ -334,7 +425,7 @@ export const article = {
       }
     ]
   },
-  "footnote": "Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Dieser Ratgeber erklärt Regeln und Rechenwege. Maßgeblich sind die zahnärztliche Einordnung, die gesetzliche Kassenleistung sowie die Bedingungen und Annahme des gewählten Tarifs."
+  "footnote": "Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Angaben zu ZAHN Sofort nach den Unterlagen der Bayerischen, Abruf 14. Oktober 2026. Maßgeblich sind die zahnärztliche Einordnung, die Kassenleistung sowie Antrag, Versicherungsschein und Bedingungen des Versicherers."
 };
 
 export default article;

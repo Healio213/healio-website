@@ -164,7 +164,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Ambulante Zusatzversicherung: was sie zahlt, was sie kostet und für wen sie passt",
           "listTeaser": "Vier Leistungstöpfe, Beiträge nach Alter und eine ehrliche Antwort auf die Frage, ob eine ambulante Zusatzversicherung dich zum Privatpatienten macht.",
-          "readingTimeMinutes": 10
+          "readingTimeMinutes": 12
         },
         {
           "slug": "akupunktur-kosten",
@@ -310,7 +310,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt",
           "listTeaser": "Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.",
-          "readingTimeMinutes": 6
+          "readingTimeMinutes": 8
         }
       ]
     },
@@ -393,7 +393,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Brillenversicherung: lohnt sie sich? Beitrag, Erstattung und Selbstzahlung",
           "listTeaser": "Welche Arten von Brillenversicherung es gibt, was der ambulante Tarif bei der Brille erstattet und wann Selbstzahlen die günstigere Rechnung ist.",
-          "readingTimeMinutes": 7
+          "readingTimeMinutes": 9
         },
         {
           "slug": "gleitsichtbrille-kosten",
