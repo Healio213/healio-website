@@ -4,10 +4,11 @@ import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
+import MobileDetails from '@/components/ui/MobileDetails';
 
 const StationaerBonusBridge = () => {
   const { t } = useTranslation('stationaer');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
   const rows = t('refresh.bonus.example.rows', { returnObjects: true });
 
   return (
@@ -32,21 +33,23 @@ const StationaerBonusBridge = () => {
                 decoding="async"
                 className="w-20 shrink-0 sm:w-44"
               />
-              <p className="mb-3 font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] sm:mb-4 md:text-xs md:tracking-[0.22em]">
+              <p className="mb-3 hidden font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] sm:mb-4 md:block md:text-xs md:tracking-[0.22em]">
                 {t('refresh.bonus.eyebrow')}
               </p>
             </div>
             <h2 id="stationaer-bonus-heading" className="mt-2 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] sm:text-4xl md:max-w-[15ch] lg:text-5xl lg:leading-[1.08]">
-              {t('refresh.bonus.title')}
+              <span className="md:hidden">{lang === 'en' ? 'Let your fund bonus help pay.' : 'Lass deinen Kassenbonus mitzahlen.'}</span>
+              <span className="hidden md:inline">{t('refresh.bonus.title')}</span>
             </h2>
             <p className="mt-5 max-w-xl text-lg font-semibold leading-relaxed text-white">
-              {t('refresh.bonus.lead')}
+              <span className="md:hidden">{lang === 'en' ? 'Your bonus may cover all or part of your hospital-plan premium.' : 'Dein Bonus kann den Beitrag für deinen Klinikschutz ganz oder teilweise ausgleichen.'}</span>
+              <span className="hidden md:inline">{t('refresh.bonus.lead')}</span>
             </p>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-slate-300 md:leading-6">
+            <p className="mt-3 hidden max-w-xl text-base leading-relaxed text-slate-300 md:block md:leading-6">
               {t('refresh.bonus.body')}
             </p>
 
-            <div className="mt-6 rounded-2xl border border-white/12 bg-white/[0.06] p-5 md:mt-7">
+            <div className="mt-6 hidden rounded-2xl border border-white/12 bg-white/[0.06] p-5 md:mt-7 md:block">
               <p className="text-base font-extrabold text-[#5ee0b1] md:text-sm">{t('refresh.bonus.fullPlansTitle')}</p>
               <p className="mt-2 text-base leading-relaxed text-slate-300 md:text-sm md:leading-relaxed">{t('refresh.bonus.fullPlansBody')}</p>
             </div>
@@ -60,6 +63,7 @@ const StationaerBonusBridge = () => {
             </Link>
           </div>
 
+          <MobileDetails summary={lang === 'en' ? 'View the SPU example' : 'SPU-Beispiel ansehen'} className="min-w-0 border-t border-white/20 text-white">
           <div className="rounded-[2rem] border border-[#f1d899]/70 bg-gradient-to-br from-[#fffdf7] via-white to-[#fff4d7] p-5 text-[#071726] shadow-[0_30px_75px_rgba(0,0,0,0.26)] sm:p-8">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
@@ -90,6 +94,7 @@ const StationaerBonusBridge = () => {
 
             <p className="mt-5 text-sm leading-relaxed text-slate-500 md:text-xs md:leading-relaxed">{t('refresh.bonus.example.disclosure')}</p>
           </div>
+          </MobileDetails>
         </div>
       </div>
     </section>

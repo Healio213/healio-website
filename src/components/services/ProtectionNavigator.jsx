@@ -58,8 +58,8 @@ const useIsDesktop = () => {
   return isDesktop;
 };
 
-// Das Highlight steht ab md wie bisher in der Zahn-Karte. Mobil ist es eine eigene Karte
-// direkt neben der Zahn-Karte, damit die Wischreihe gleich hohe Karten behält.
+// Das Highlight bleibt ab md in der Zahn-Karte. Mobil zeigen die vier
+// Bereichskarten die Orientierung; Details stehen auf der jeweiligen Zielseite.
 const HighlightBox = ({ highlight, className = '' }) => (
   <aside className={`overflow-hidden bg-[#10202A] p-5 text-white shadow-[0_2px_10px_rgba(16,32,42,0.16)] sm:p-6 md:shadow-[0_18px_50px_rgba(16,32,42,0.14)] ${className}`} aria-label={highlight.label}>
     <div className="flex items-center gap-3">
@@ -83,14 +83,6 @@ const HighlightBox = ({ highlight, className = '' }) => (
   </aside>
 );
 
-// Ab md blendet die Wischreihe die mobile Highlight-Karte wieder aus (Position der Karte in der Reihe).
-const hideExtraCardFromMd = {
-  2: 'md:[&>li:nth-child(2)]:hidden',
-  3: 'md:[&>li:nth-child(3)]:hidden',
-  4: 'md:[&>li:nth-child(4)]:hidden',
-  5: 'md:[&>li:nth-child(5)]:hidden',
-};
-
 const ProtectionNavigator = () => {
   const { t } = useTranslation('leistungen');
   const { getPath } = useLanguage();
@@ -99,14 +91,11 @@ const ProtectionNavigator = () => {
   const items = t('paths.items', { returnObjects: true });
   const checks = t('comparison.items', { returnObjects: true });
   const checkLabel = t('comparison.headers.check');
-  const highlightIndex = items.findIndex((item) => item.highlight);
-  const extraCardPosition = highlightIndex >= 0 ? highlightIndex + 2 : null;
-
-  const cards = items.flatMap((item, index) => {
+  const cards = items.map((item, index) => {
     const visual = pathVisuals[item.key] || pathVisuals.ambulant;
     const header = headerTones[item.key] || headerTones.ambulant;
     const check = Array.isArray(checks) ? checks.find((entry) => entry.key === item.key) : null;
-    const card = (
+    return (
       <motion.article
         id={item.anchor}
         key={item.key}
@@ -151,13 +140,6 @@ const ProtectionNavigator = () => {
       </motion.article>
     );
 
-    if (!item.highlight) return [card];
-    return [
-      card,
-      <div key={`${item.key}-highlight`} className="flex h-full w-full md:hidden">
-        <HighlightBox highlight={item.highlight} className="flex w-full flex-col rounded-[2rem]" />
-      </div>,
-    ];
   });
 
   return (
@@ -175,7 +157,7 @@ const ProtectionNavigator = () => {
         <MobileSwipeRow
           label={t('paths.title')}
           className="mt-8 md:mt-12 lg:mt-14"
-          desktopClassName={`md:grid md:gap-6 lg:gap-7 ${extraCardPosition ? hideExtraCardFromMd[extraCardPosition] || '' : ''}`}
+          desktopClassName="md:grid md:gap-6 lg:gap-7"
           itemClassName="flex"
         >
           {cards}

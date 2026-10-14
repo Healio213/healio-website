@@ -247,7 +247,7 @@ const ZahnPage = () => {
           </div>
         )}
 
-        <HealioAwardsRow size="large" productSet="zahn" className="order-[-1] md:order-none" />
+        <HealioAwardsRow size="large" productSet="zahn" mobileWithIkk className="order-[-1] md:order-none" />
 
         <DentalHighlightCards />
 
@@ -366,7 +366,7 @@ const ZahnPage = () => {
         {/* Brücken-Strecke zur IKK classic nach dem Bonusrechner, wie auf
             /ambulant (Frank 29.09.2026: auf allen drei Produktseiten zurück). */}
         <div className="order-1 md:order-none">
-          <AmbulantIKKWechsel variant="zahn" mobileSwipe />
+          <AmbulantIKKWechsel variant="zahn" mobileSwipe sealsInMobileAwardsRow />
         </div>
 
         {/* Experiment Handy-Conversion 10/2026: Am Handy steht der Ablauf direkt nach den zwei

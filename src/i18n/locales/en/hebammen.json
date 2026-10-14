@@ -133,7 +133,8 @@
     ],
     "totalLabel": "Outpatient health budget under the plan",
     "totalAmount": "up to EUR 3,000",
-    "totalNote": "EUR 3,000 represents maximum plan benefits, not a cash bonus from a health fund. Statutory benefits, bonuses and insurance benefits are reviewed separately."
+    "totalNote": "EUR 3,000 represents maximum plan benefits, not a cash bonus from a health fund. Statutory benefits, bonuses and insurance benefits are reviewed separately.",
+    "totalNoteMobile": "Plan reimbursement for additional outpatient care."
   },
   "klinik": {
     "eyebrow": "Newborn cover",

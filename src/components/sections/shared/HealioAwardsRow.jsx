@@ -143,6 +143,7 @@ const HealioAwardsRow = ({
   bordered = true,
   className = '',
   productSet,
+  mobileWithIkk = false,
 }) => {
   const { t } = useTranslation(['common', 'zahn']);
   const { lang } = useLanguage();
@@ -151,22 +152,33 @@ const HealioAwardsRow = ({
   const noteKey = AWARD_NOTES[productSet];
   const multi = groups.length > 1;
   const spacing = compact || size === 'compact' ? 'py-4 md:py-6' : 'py-6 md:py-8';
-  const tickerItems = groups.flatMap((group) => group.items.map((award) => ({
+  const tickerItems = [...groups.flatMap((group) => group.items.map((award) => ({
     id: group.id,
     src: award.src,
     alt: t(award.altKey, award.ns ? { ns: award.ns } : undefined),
     caption: t(`awards.details.${AWARD_DETAILS[group.id].key}.title`),
     ...TICKER_IMAGE_SIZE[group.id],
-  })));
+  }))), ...(mobileWithIkk ? ['family', 'parents'].map((key) => ({
+    id: `ikk-${key}`,
+    src: IKK_SEALS[key].src,
+    alt: t(IKK_SEALS[key].altKey),
+    caption: key === 'family'
+      ? lang === 'en' ? 'IKK classic · Families' : 'IKK classic · Familien'
+      : lang === 'en' ? 'IKK classic · Parents' : 'IKK classic · Eltern',
+    ...IKK_SIZE,
+  })) : [])];
+  const mobileCaption = mobileWithIkk
+    ? lang === 'en' ? 'Ratings of our partners' : 'Bewertungen unserer Partner'
+    : caption;
 
   return (
     <section
       data-awards-row
       className={`${toneClasses[tone] || toneClasses.light} ${bordered ? 'border-b' : ''} ${spacing} ${className}`}
-      aria-label={caption}
+      aria-label={mobileCaption}
     >
       <div className="md:hidden">
-        <SiegelTicker items={tickerItems} ariaLabel={caption} size="prominent" forceScroll />
+        <SiegelTicker items={tickerItems} ariaLabel={mobileCaption} size="prominent" forceScroll notes={mobileWithIkk ? [t('awards.groups.ikkNote')] : []} />
         <div className="px-4 sm:px-6">
           {noteKey && <p className="mt-2 text-center text-sm leading-5 text-slate-600">{lang === 'en' ? 'Ratings apply to the named plans.' : 'Bewertet sind die genannten Tarife.'}</p>}
           <details className="mt-2 text-sm text-slate-600">
@@ -182,6 +194,7 @@ const HealioAwardsRow = ({
                 </li>;
               })}
             </ul>
+            {mobileWithIkk && <p className="pb-3 leading-6">{t('awards.groups.ikkNote')}</p>}
             {noteKey && <p className="pb-3 leading-6">{t(noteKey)}</p>}
           </details>
         </div>

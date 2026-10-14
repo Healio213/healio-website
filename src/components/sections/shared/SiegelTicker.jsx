@@ -18,7 +18,7 @@ import React from 'react';
  * - Pause bei Berührung, Hover und Tastaturfokus.
  * - prefers-reduced-motion: kein Lauf, die erste Liste steht als wischbare
  *   Reihe, die Doppelung fällt weg.
- * - forceScroll lässt auch ein oder zwei vorhandene Siegel laufen.
+ * - forceScroll lässt auch zwei vorhandene Siegel laufen. Ein Siegel steht.
  *   Zusätzliche Wiederholungen sind dekorativ und für Screenreader verborgen.
  *
  * items: [{ id, src, alt, width, height }]
@@ -32,9 +32,9 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
   if (!items.length) return null;
   const imageClass = IMAGE_CLASS[size] || IMAGE_CLASS.regular;
   const gapClass = GAP_CLASS[size] || GAP_CLASS.regular;
-  const running = forceScroll || items.length >= 3;
+  const running = items.length >= 3 || (forceScroll && items.length > 1);
   // Sechs Originalflächen reichen auch am oberen mobilen Rand bis 767 px.
-  const repetitions = forceScroll ? Math.ceil(6 / items.length) : 1;
+  const repetitions = running ? Math.ceil(6 / items.length) : 1;
   const tickerItems = Array.from({ length: repetitions }, (_, repeat) => items.map((item) => ({ ...item, repeat }))).flat();
   // Eine volle Runde dauert je Siegel etwa neun Sekunden: ruhig, nicht hektisch.
   const duration = `${Math.max(24, items.length * 9)}s`;
@@ -74,7 +74,7 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
       ) : (
         <ul role="group" aria-label={ariaLabel} className="flex flex-wrap items-center justify-center gap-x-9 gap-y-3 py-1">
           {items.map((item) => (
-            <li key={item.id} className="flex shrink-0 items-center">
+            <li key={item.id} className="flex shrink-0 flex-col items-center">
               <img
                 src={item.src}
                 alt={item.alt}
@@ -84,6 +84,7 @@ const SiegelTicker = ({ items = [], ariaLabel, notes = [], size = 'regular', cla
                 loading="lazy"
                 decoding="async"
               />
+              {item.caption && <span className="mt-2 max-w-[13rem] text-center text-xs font-semibold leading-5 text-slate-600">{item.caption}</span>}
             </li>
           ))}
         </ul>

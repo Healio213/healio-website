@@ -133,7 +133,8 @@
     ],
     "totalLabel": "Ambulantes Gesundheitsbudget nach Tarif",
     "totalAmount": "bis zu 3.000 EUR",
-    "totalNote": "Die 3.000 EUR sind tarifliche Höchstleistungen, kein ausgezahlter Kassenbonus. Kassenleistungen, Bonus und Versicherungsleistungen werden getrennt geprüft."
+    "totalNote": "Die 3.000 EUR sind tarifliche Höchstleistungen, kein ausgezahlter Kassenbonus. Kassenleistungen, Bonus und Versicherungsleistungen werden getrennt geprüft.",
+    "totalNoteMobile": "Tarifliche Erstattung für ergänzende ambulante Leistungen."
   },
   "klinik": {
     "eyebrow": "Kindernachversicherung",

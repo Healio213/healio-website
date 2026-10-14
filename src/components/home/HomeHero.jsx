@@ -107,7 +107,6 @@ const HomeHero = () => {
               {t('mobile.hero.budgetLink')}
               <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
-            <p className="mt-1 max-w-[38ch] text-sm leading-5 text-white/75">{t('mobile.hero.budgetNote')}</p>
           </div>
 
           <motion.p {...entrance(0.17)} className="order-1 mt-4 hidden max-w-2xl md:block text-base font-medium leading-6 text-white/90 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-lg sm:leading-8">

@@ -82,7 +82,7 @@ const StationaerPage = () => {
           <StationaerRoomCosts />
         </Slot>
         <Slot order="order-4">
-          <HealioAwardsRow size="large" productSet="stationaer" />
+          <HealioAwardsRow size="large" productSet="stationaer" mobileWithIkk />
         </Slot>
         <Slot order="order-6">
           <StationaerTariffSelector />
@@ -131,7 +131,7 @@ const StationaerPage = () => {
         </Slot>
         {/* Brücken-Strecke nach dem Bonusrechner, wie auf /ambulant. */}
         <Slot order="order-12">
-          <AmbulantIKKWechsel variant="stationaer" mobileSwipe />
+          <AmbulantIKKWechsel variant="stationaer" mobileSwipe sealsInMobileAwardsRow />
         </Slot>
         <Slot order="order-[14]">
           <SalesAiAssist className="bg-[#fbfaf7]" />

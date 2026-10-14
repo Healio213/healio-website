@@ -738,7 +738,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           der Bonus. Ab md bleibt die bisherige Reihenfolge (display: contents
           bzw. order-none verändern das Desktop-Layout nicht). */}
       <div className="order-7 md:contents">
-        <AmbulantIKKWechsel variant="ambulant" mobileSwipe />
+        <AmbulantIKKWechsel variant="ambulant" mobileSwipe sealsInMobileAwardsRow />
       </div>
 
       <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe hideLinkOnMobile />

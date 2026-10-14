@@ -10,7 +10,7 @@ const ServicesBudget = () => {
   const { getPath } = useLanguage();
 
   return (
-    <section className="overflow-hidden bg-[#DDEFE8] px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="services-budget-title">
+    <section className="hidden overflow-hidden bg-[#DDEFE8] px-4 py-12 sm:px-6 md:block md:py-24 lg:px-8 lg:py-28" aria-labelledby="services-budget-title">
       <div className="healio-container grid gap-8 max-md:px-0 md:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
         <div className="relative min-w-0">
           <div className="absolute -left-10 -top-10 h-36 w-36 rounded-full border border-emerald-900/10" aria-hidden="true" />

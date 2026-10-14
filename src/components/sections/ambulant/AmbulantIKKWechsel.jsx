@@ -67,7 +67,7 @@ const cx = (...parts) => parts.filter(Boolean).join(' ');
 //   Szene hat ihren eigenen Rahmen) und der zweite "IKK-Bonus sichern"-Knopf
 //   in den Details (derselbe Link steht direkt darüber). Der Abschnitt ist dadurch deutlich
 //   schlanker; kein Wortlaut und keine Versicherungsaussage ist gekürzt.
-const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
+const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false, sealsInMobileAwardsRow = false }) => {
   const { t } = useTranslation('ambulant');
   const { lang } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
@@ -207,8 +207,9 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false }) => {
 
           {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
               03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile.
-              Mobil laufen sie hier als kompaktes Band (Frank 14.10.2026). */}
-          <div>
+              Ambulant mobil laufen sie gemeinsam mit SDK oben im Siegelband
+              (Frank 14.10.2026); Desktop und andere Varianten bleiben hier. */}
+          <div className={sealsInMobileAwardsRow ? 'hidden md:block' : undefined}>
             <IkkKassenSiegel className="mx-auto mt-8" />
           </div>
         </div>

@@ -278,7 +278,7 @@ const HebammenPage = () => {
                         <FriendlyIcon kind={item.kind} tone={item.tone} size="sm" />
                         <p className="min-w-0 font-display text-base font-extrabold leading-tight text-[#071726]">{item.title}</p>
                       </div>
-                      <p className="mt-3 text-base font-medium leading-snug text-slate-600 md:text-sm">{item.text}</p>
+                      <p className="mt-3 hidden text-base font-medium leading-snug text-slate-600 md:block md:text-sm">{item.text}</p>
                     </div>
                   ))}
                 </MobileSwipeRow>
@@ -459,7 +459,10 @@ const HebammenPage = () => {
                   <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#5ee0b1] md:text-xs md:tracking-[0.22em]">{t('leistungen.totalLabel')}</p>
                   <p className="mt-2 font-display text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">{t('leistungen.totalAmount')}</p>
                 </div>
-                <p className="text-base leading-relaxed text-slate-200">{t('leistungen.totalNote')}</p>
+                <p className="text-base leading-relaxed text-slate-200">
+                  <span className="md:hidden">{t('leistungen.totalNoteMobile')}</span>
+                  <span className="hidden md:inline">{t('leistungen.totalNote')}</span>
+                </p>
               </motion.div>
             </div>
           </div>

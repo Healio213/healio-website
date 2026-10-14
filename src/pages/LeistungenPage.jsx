@@ -62,11 +62,12 @@ const LeistungenPage = () => {
       />
       {/* Experiment Handy-Conversion 10/2026: Mobil stehen die Abschnitte als
           Geschwister in einer Spalte und folgen der Reihenfolge, wie ein
-          Besucher denkt (Hero, Schutz-Kompass, Budget und Finanzierung, ehrlich
+          Besucher denkt (Hero, Schutz-Kompass, ehrlich
           beraten, Ablauf, nächster Schritt). Die Nummern stehen an den
           Abschnitten (order-N md:order-none); ab md bleibt es ein normaler
           Block mit der bisherigen Reihenfolge. Das Textband entfällt mobil, weil
-          es nur wiederholt, was die Seite ohnehin sagt. */}
+          es nur wiederholt, was die Seite ohnehin sagt. Die Budgetsektion steht
+          ebenfalls ausschließlich ab md; mobil führen vier Bereichskarten weiter. */}
       <article className="flex w-full flex-col overflow-hidden bg-white md:block">
         <ServicesDesktopHero />
         {/* Ab lg übernimmt der Szenen-Kopfbereich, die bisherige Fassung bleibt für Handy und Tablet. */}

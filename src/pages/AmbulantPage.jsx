@@ -67,7 +67,7 @@ const AmbulantPage = () => {
           <AmbulantExplainerVideo />
         </div>
         <div className="order-3 md:contents">
-          <HealioAwardsRow size="large" />
+          <HealioAwardsRow size="large" mobileWithIkk={!fromBonusTopic} />
         </div>
         {/* Die Brillen-Karte bleibt mobil als konkreter Einstieg erhalten.
             Die zusätzliche Faktenübersicht wiederholt den Hero und entfällt
