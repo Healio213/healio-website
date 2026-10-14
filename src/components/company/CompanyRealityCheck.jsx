@@ -13,7 +13,7 @@ const CompanyRealityCheck = () => {
   return (
     <section className="bg-[#06131c] pb-10 text-white md:pb-14 lg:pb-20" aria-labelledby="company-reality-check-title">
       <div className="healio-container px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 border-t border-white/10 pt-8 sm:gap-8 sm:pt-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14 lg:pt-14">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 border-t border-white/10 pt-8 sm:gap-8 sm:pt-12 md:grid-cols-none lg:grid-cols-[0.72fr_1.28fr] lg:gap-14 lg:pt-14">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#8ee7ca] md:text-xs">{t('realityCheck.eyebrow')}</p>
             <h2
@@ -24,11 +24,12 @@ const CompanyRealityCheck = () => {
             </h2>
           </div>
 
-          <div>
+          <div className="min-w-0 md:min-w-[auto]">
             {/* Mobil Wischreihe (drei Fragen), ab md die bisherige verbundene Dreier-Tafel. */}
             <MobileSwipeRow
               as="ol"
               label={t('realityCheck.title')}
+              className="min-w-0 md:min-w-[auto]"
               dotsTone="dark"
               desktopClassName="md:grid md:grid-cols-3 md:gap-px md:!overflow-hidden md:rounded-2xl md:bg-white/10"
               itemClassName="flex"
@@ -42,7 +43,10 @@ const CompanyRealityCheck = () => {
             </MobileSwipeRow>
 
             <div className="mt-3 flex flex-col gap-4 border-l-2 border-[#25c990] pl-5 sm:gap-5 sm:flex-row sm:items-center sm:justify-between md:mt-7">
-              <p className="max-w-2xl text-base leading-6 text-slate-300 md:text-sm md:leading-6">{t('realityCheck.conclusion')}</p>
+              <p className="max-w-2xl text-base leading-6 text-slate-300 md:text-sm md:leading-6">
+                <span className="md:hidden">{t('mobile.realityCheck.conclusion')}</span>
+                <span className="hidden md:inline">{t('realityCheck.conclusion')}</span>
+              </p>
               <Link
                 to={getPath('potenzialanalyse')}
                 className="inline-flex min-h-11 shrink-0 items-center gap-2 font-display text-sm font-extrabold text-[#8ee7ca] transition md:min-h-0 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#06131c]"

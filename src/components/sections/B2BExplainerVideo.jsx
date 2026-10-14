@@ -9,6 +9,7 @@ import ClickToPlayVideo from '@/components/sections/shared/ClickToPlayVideo';
 const B2BExplainerVideo = ({
   sectionId,
   title,
+  ariaLabel = title,
   subtitle,
   statusLabel,
   message,
@@ -77,7 +78,7 @@ const B2BExplainerVideo = ({
               <ClickToPlayVideo
                 src={videoSrc}
                 poster={posterSrc}
-                ariaLabel={title}
+                ariaLabel={ariaLabel}
                 captionsSrc={captionsSrc}
                 captionsLang={captionsLanguage}
                 captionsLabel={captionsLabel}
@@ -103,7 +104,7 @@ const B2BExplainerVideo = ({
                kompakt untereinander), ab md das bisherige Raster. */
             points.length >= 3 ? (
               <MobileSwipeRow
-                label={title}
+                label={ariaLabel}
                 desktopClassName="md:grid md:grid-cols-3 md:gap-4"
                 mobileItemWidth="w-[78vw] max-w-[20rem]"
                 itemClassName="md:h-auto"

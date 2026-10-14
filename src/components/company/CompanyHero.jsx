@@ -87,13 +87,24 @@ const CompanyHero = () => {
             id="company-hero-title"
             className="mt-4 max-w-[20ch] sm:max-w-[14ch] font-display text-[2rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.34)] sm:text-5xl md:mt-5 md:text-[clamp(3.25rem,5vw,4.5rem)] md:leading-[0.98]"
           >
-            <span className="block">{t('hero.titleLead')}</span>
+            <span className="block">
+              <span className="md:hidden">{t('mobile.hero.titleLead')}</span>
+              <span className="hidden md:inline">{t('hero.titleLead')}</span>
+            </span>
             {' '}
             <span className="mt-2 block md:mt-3">
-              <HighlightText
-                text={`<highlight>${t('hero.titleHighlight')}</highlight>`}
-                className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent"
-              />
+              <span className="md:hidden">
+                <HighlightText
+                  text={`<highlight>${t('mobile.hero.titleHighlight')}</highlight>`}
+                  className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent"
+                />
+              </span>
+              <span className="hidden md:inline">
+                <HighlightText
+                  text={`<highlight>${t('hero.titleHighlight')}</highlight>`}
+                  className="bg-[linear-gradient(135deg,#8ee7ca_0%,#25c990_48%,#1aa875_100%)] bg-clip-text text-transparent"
+                />
+              </span>
             </span>
           </motion.h1>
 
@@ -101,7 +112,8 @@ const CompanyHero = () => {
             {...entrance(0.23)}
             className="mt-4 max-w-[590px] text-base leading-6 text-slate-200 drop-shadow-[0_2px_14px_rgba(0,0,0,0.5)] sm:mt-6 sm:text-lg sm:leading-8"
           >
-            {t('hero.description')}
+            <span className="md:hidden">{t('mobile.hero.description')}</span>
+            <span className="hidden md:inline">{t('hero.description')}</span>
           </motion.p>
 
           <motion.div {...entrance(0.31)} className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">

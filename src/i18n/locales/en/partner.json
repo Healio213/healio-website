@@ -194,5 +194,53 @@
     "title": "Would you like to help patients without having to advise them yourself?",
     "body": "I can walk you through the three roles and the next step: your practice provides neutral information, patients decide freely, and Healio checks eligibility and advises individually.",
     "cta": "Clarify the roles with Nita"
+  },
+  "mobile": {
+    "hero": {
+      "title": "More options for <highlight>your patients.</highlight>",
+      "subtitle": "A health budget can help patients plan treatment costs. Healio advises and supports your patients.",
+      "cta": "Book a 30-minute introduction",
+      "secondaryCta": "Practice guide (PDF)"
+    },
+    "explanationVideo": {
+      "title": "The partner concept explained.",
+      "subtitle": "How supplementary cover and a health fund bonus work together.",
+      "badge": "Up to EUR 3,000 in plan benefits over 2 years",
+      "hint": "Check the requirements well before treatment."
+    },
+    "budget": {
+      "title": "What patients may benefit from.",
+      "subtitle": "Plan benefits over 2 years. A possible health fund bonus can help cover the premium.",
+      "totalDesc": "Subject to the plan and individual requirements.",
+      "naturheilkundeDesc": "Alternative practitioners, osteopathy, TCM or chiropractic care, depending on the plan.",
+      "sehhilfenDesc": "Reimbursement for vision aids under the plan.",
+      "note": "Plan terms and health disclosures determine eligibility. Treatment already recommended is not automatically covered.",
+      "detailsTitle": "Plan, bonus and requirements"
+    },
+    "partners": {
+      "title": "For your practice or specialist shop.",
+      "heilpraktikerDesc": "Naturopathic care under the plan.",
+      "osteopathDesc": "Osteopathy under the plan.",
+      "tcmDesc": "Acupuncture, herbal therapy and Tuina under the plan.",
+      "chiropraktikerDesc": "Chiropractic care under the plan.",
+      "brillenladenDesc": "Vision aids under the plan.",
+      "hebammeDesc": "Neutral information for families."
+    },
+    "steps": {
+      "title": "How the partnership starts.",
+      "step1Desc": "Explore the concept and process. You decide.",
+      "step2Desc": "Cards, flyers or a QR code for your practice.",
+      "step3Desc": "Patients contact Healio directly. We advise and arrange cover on request."
+    },
+    "roleProcess": {
+      "practiceText": "You provide neutral information.",
+      "patientText": "Patients decide for themselves and contact Healio directly.",
+      "healioText": "We check, advise and arrange cover on request.",
+      "detailsTitle": "Roles and responsibilities"
+    },
+    "cta": {
+      "title": "Let’s get to know each other.",
+      "subtitle": "In 30 minutes, we explore whether Healio fits your practice."
+    }
   }
 }

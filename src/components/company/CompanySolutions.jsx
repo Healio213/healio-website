@@ -32,7 +32,7 @@ const CompanySolutions = () => {
               {t('solutions.title')}
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 lg:justify-self-end">{t('solutions.description')}</p>
+          <p className="hidden max-w-2xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8 md:block lg:justify-self-end">{t('solutions.description')}</p>
         </div>
 
         {/* Mobil Wischreihe (vier Bausteine, jede Karte bleibt ein Akkordeon), ab md das bisherige Zweier-Raster. */}
@@ -58,7 +58,10 @@ const CompanySolutions = () => {
                   <h3 className="mt-2 max-w-[22ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.025em] text-[#10202a]">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{item.description}</p>
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:text-sm md:leading-6">
+                    <span className="md:hidden">{t(`mobile.solutions.${item.key}`)}</span>
+                    <span className="hidden md:inline">{item.description}</span>
+                  </p>
                   <span className="mt-4 inline-flex min-h-11 items-center gap-2 font-display text-sm font-extrabold text-emerald-700 md:mt-5 md:min-h-0">
                     <span className="group-open:hidden">{t('solutions.detailsShow')}</span>
                     <span className="hidden group-open:inline">{t('solutions.detailsHide')}</span>
@@ -66,6 +69,7 @@ const CompanySolutions = () => {
                 </summary>
 
                 <div className="border-t border-slate-100 px-5 pb-5 pt-5 sm:px-7 sm:pb-7">
+                  <p className="mb-5 text-base leading-6 text-slate-600 md:hidden">{item.description}</p>
                   <ul className="space-y-3">
                     {item.points.map((point) => (
                       <li key={point} className="flex items-start gap-3 text-base font-semibold leading-6 text-slate-700 md:text-sm md:leading-6">

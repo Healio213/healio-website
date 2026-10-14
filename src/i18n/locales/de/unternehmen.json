@@ -450,5 +450,33 @@
     "description": "Im Vorsorge-Check ordnen wir Ihre bestehende Versorgung ein, machen wirtschaftliche Hebel sichtbar und zeigen, welche Entscheidung heute wirklich ansteht.",
     "primary": "Vorsorge-Check starten",
     "proof": ["45 Minuten", "unverbindlich", "mit erster Bestandsaufnahme"]
+  },
+  "mobile": {
+    "hero": {
+      "titleLead": "Vorsorge für Ihr Unternehmen.",
+      "titleHighlight": "Klar geplant. Dauerhaft betreut.",
+      "description": "Healio verbindet bAV, bKV und Gesundheitsmanagement – vom Bestandscheck bis zur laufenden Betreuung."
+    },
+    "realityCheck": {
+      "conclusion": "Bestand prüfen. Ohne Wechselpflicht."
+    },
+    "solutions": {
+      "pension": "Bestand, Kosten und Zuschüsse nachvollziehbar prüfen.",
+      "health": "Gesundheitsleistungen passend zu Belegschaft und Budget.",
+      "prevention": "Qualifizierte Gesundheitsförderung im Alltag koordinieren.",
+      "management": "Mitarbeiter, HR und Lohnabrechnung laufend begleiten."
+    },
+    "process": {
+      "steps": [
+        "Verträge, Kosten und Nutzung prüfen.",
+        "Passende Bausteine für Ihr Budget rechnen.",
+        "Anbieter und interne Abläufe koordinieren.",
+        "Mitarbeiter begleiten und Versorgung überprüfen."
+      ]
+    },
+    "cta": {
+      "title": "Ihr nächster Schritt.",
+      "description": "Im Vorsorge-Check prüfen wir Ihren Bestand und die nächsten Schritte."
+    }
   }
 }

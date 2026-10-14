@@ -16,9 +16,13 @@ const CompanyFinalCTA = () => {
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#8ee7ca] md:text-xs">{t('cta.eyebrow')}</p>
             <h2 id="company-final-cta-title" className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-6xl">
-              {t('cta.title')}
+              <span className="md:hidden">{t('mobile.cta.title')}</span>
+              <span className="hidden md:inline">{t('cta.title')}</span>
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">{t('cta.description')}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">
+              <span className="md:hidden">{t('mobile.cta.description')}</span>
+              <span className="hidden md:inline">{t('cta.description')}</span>
+            </p>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300 md:mt-8">
               {proof.map((item) => (
                 <span key={item} className="inline-flex items-center gap-2">

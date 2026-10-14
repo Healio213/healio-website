@@ -194,5 +194,53 @@
     "title": "Du möchtest Patienten helfen, ohne selbst beraten zu müssen?",
     "body": "Ich zeige dir die drei Rollen und den nächsten Schritt: Du informierst neutral, Patienten entscheiden frei, Healio prüft und berät individuell.",
     "cta": "Rollen mit Nita klären"
+  },
+  "mobile": {
+    "hero": {
+      "title": "Mehr Spielraum für <highlight>deine Patienten.</highlight>",
+      "subtitle": "Ein Gesundheitsbudget kann Behandlungskosten planbarer machen. Healio berät und begleitet deine Patienten.",
+      "cta": "30 Minuten kennenlernen",
+      "secondaryCta": "Praxis-Leitfaden (PDF)"
+    },
+    "explanationVideo": {
+      "title": "Das Partnerkonzept kurz erklärt.",
+      "subtitle": "Wie Zusatzschutz und Kassenbonus zusammenwirken.",
+      "badge": "Bis zu 3.000 EUR Tarifleistung in 2 Jahren",
+      "hint": "Voraussetzungen rechtzeitig vor einer Behandlung prüfen."
+    },
+    "budget": {
+      "title": "Das können Patienten nutzen.",
+      "subtitle": "Tarifleistungen in 2 Jahren. Ein möglicher Kassenbonus kann den Beitrag mitfinanzieren.",
+      "totalDesc": "Je nach Tarif und persönlichen Voraussetzungen.",
+      "naturheilkundeDesc": "Für Heilpraktiker, Osteopathie, TCM oder Chiropraktik – nach Tarif.",
+      "sehhilfenDesc": "Erstattung für Sehhilfen nach Tarif.",
+      "note": "Tarif und Gesundheitsangaben entscheiden. Bereits angeratene Behandlungen sind nicht automatisch versichert.",
+      "detailsTitle": "Tarif, Bonus und Voraussetzungen"
+    },
+    "partners": {
+      "title": "Für deine Praxis oder dein Fachgeschäft.",
+      "heilpraktikerDesc": "Naturheilverfahren nach Tarif.",
+      "osteopathDesc": "Osteopathie nach Tarif.",
+      "tcmDesc": "Akupunktur, Kräutertherapie und Tuina nach Tarif.",
+      "chiropraktikerDesc": "Chiropraktik nach Tarif.",
+      "brillenladenDesc": "Sehhilfen nach Tarif.",
+      "hebammeDesc": "Neutrale Hinweise für Familien."
+    },
+    "steps": {
+      "title": "So startet die Partnerschaft.",
+      "step1Desc": "Konzept und Ablauf klären. Du entscheidest.",
+      "step2Desc": "Karten, Flyer oder QR-Code für deine Praxis.",
+      "step3Desc": "Patienten kontaktieren Healio direkt. Wir beraten und vermitteln auf Wunsch."
+    },
+    "roleProcess": {
+      "practiceText": "Du stellst neutrale Informationen bereit.",
+      "patientText": "Patienten entscheiden selbst und kontaktieren Healio direkt.",
+      "healioText": "Wir prüfen, beraten und vermitteln auf Wunsch.",
+      "detailsTitle": "Rollen und Verantwortung"
+    },
+    "cta": {
+      "title": "Lernen wir uns kennen.",
+      "subtitle": "In 30 Minuten klären wir, ob Healio zu deiner Praxis passt."
+    }
   }
 }

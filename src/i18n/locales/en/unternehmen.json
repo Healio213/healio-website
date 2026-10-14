@@ -421,5 +421,33 @@
     "description": "In a focused benefits review, we assess your current provision, identify economic levers and clarify which decision actually matters today.",
     "primary": "Start a benefits review",
     "proof": ["45 minutes", "no obligation", "with an initial plan review"]
+  },
+  "mobile": {
+    "hero": {
+      "titleLead": "Benefits for your company.",
+      "titleHighlight": "Clearly planned. Ongoing support.",
+      "description": "Company pension, health insurance and health management – from reviewing existing plans to ongoing support."
+    },
+    "realityCheck": {
+      "conclusion": "Review existing plans. No obligation to switch."
+    },
+    "solutions": {
+      "pension": "Review existing plans, costs and contributions clearly.",
+      "health": "Health benefits matched to your workforce and budget.",
+      "prevention": "Coordinate qualified workplace health promotion.",
+      "management": "Ongoing support for employees, HR and payroll."
+    },
+    "process": {
+      "steps": [
+        "Review plans, costs and participation.",
+        "Calculate suitable modules for your budget.",
+        "Coordinate providers and internal processes.",
+        "Support employees and review benefits."
+      ]
+    },
+    "cta": {
+      "title": "Your next step.",
+      "description": "Review your existing plans and next steps with Healio."
+    }
   }
 }

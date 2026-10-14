@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Shield } from 'lucide-react';
+import { ArrowRight, ChevronDown, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
 import { createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -41,6 +41,10 @@ const PARTNER_VIDEO_CAPTIONS = '/videos/erklaerfilme/erklaervideo-partner-v1-de.
 // Für Beschriftungen (aria-label) ohne die <highlight>-Auszeichnung der Überschriften.
 const plain = (text) => String(text || '').replace(/<\/?highlight>/g, '');
 
+const responsiveCopy = (mobile, original) => (
+  <><span className="md:hidden">{mobile}</span><span className="hidden md:inline">{original}</span></>
+);
+
 const PartnerPage = () => {
   const reduceMotion = useReducedMotion();
   useEffect(() => {
@@ -68,12 +72,12 @@ const PartnerPage = () => {
   );
 
   const partnerTypes = [
-    { kind: 'naturopathy', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc') },
-    { kind: 'naturopathy', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc') },
-    { kind: 'naturopathy', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc') },
-    { kind: 'naturopathy', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc') },
-    { kind: 'glasses', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc') },
-    { kind: 'pregnancy', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc') },
+    { kind: 'naturopathy', tone: 'mint', title: t('partners.heilpraktiker'), text: t('partners.heilpraktikerDesc'), mobileText: t('mobile.partners.heilpraktikerDesc') },
+    { kind: 'naturopathy', tone: 'butter', title: t('partners.osteopath'), text: t('partners.osteopathDesc'), mobileText: t('mobile.partners.osteopathDesc') },
+    { kind: 'naturopathy', tone: 'coral', title: t('partners.tcm'), text: t('partners.tcmDesc'), mobileText: t('mobile.partners.tcmDesc') },
+    { kind: 'naturopathy', tone: 'lavender', title: t('partners.chiropraktiker'), text: t('partners.chiropraktikerDesc'), mobileText: t('mobile.partners.chiropraktikerDesc') },
+    { kind: 'glasses', tone: 'sky', title: t('partners.brillenladen'), text: t('partners.brillenladenDesc'), mobileText: t('mobile.partners.brillenladenDesc') },
+    { kind: 'pregnancy', tone: 'coral', title: t('partners.hebamme'), text: t('partners.hebammeDesc'), mobileText: t('mobile.partners.hebammeDesc') },
   ];
 
   return (
@@ -145,14 +149,14 @@ const PartnerPage = () => {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col"
               >
-                <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md">
+                <p className="inline-flex mb-5 self-center rounded-full border border-white/25 bg-slate-950/25 px-4 py-2 text-sm sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/90 backdrop-blur-md max-md:hidden">
                   {t('hero.badge')}
                 </p>
                 <Heading className="order-1 text-[1.75rem] sm:text-4xl md:text-5xl font-bold text-white leading-[1.08] mb-4 sm:mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                  <HighlightText text={t('hero.title')} />
+                  {responsiveCopy(<HighlightText text={t('mobile.hero.title')} />, <HighlightText text={t('hero.title')} />)}
                 </Heading>
                 <p className="order-2 text-base sm:text-lg md:text-xl text-slate-100 mb-4 sm:mb-8 leading-6 sm:leading-relaxed font-medium drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] max-w-3xl mx-auto">
-                  <HighlightText text={t('hero.subtitle')} />
+                  {responsiveCopy(t('mobile.hero.subtitle'), <HighlightText text={t('hero.subtitle')} />)}
                 </p>
                 <div className="order-3 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
                   <Button
@@ -160,7 +164,7 @@ const PartnerPage = () => {
                     className="bg-[#25c990] hover:bg-[#1fb37e] text-[#071726] font-semibold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg"
                     onClick={scrollTo(GOOGLE_TERMIN_ANCHOR)}
                   >
-                    {t('hero.cta')}
+                    {responsiveCopy(t('mobile.hero.cta'), t('hero.cta'))}
                   </Button>
                   <Button
                     asChild
@@ -169,7 +173,7 @@ const PartnerPage = () => {
                     className="h-auto min-h-12 whitespace-normal border-white/55 bg-white/10 px-6 py-4 text-center text-base font-semibold leading-6 text-white backdrop-blur-sm hover:bg-white hover:text-slate-900 sm:px-8 sm:text-lg"
                   >
                     <Link to="/partner/leitfaden">
-                      {t('hero.secondaryCta')}
+                      {responsiveCopy(t('mobile.hero.secondaryCta'), t('hero.secondaryCta'))}
                       <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                     </Link>
                   </Button>
@@ -185,18 +189,19 @@ const PartnerPage = () => {
         <div className="order-2 md:contents">
         <B2BExplainerVideo
           sectionId="partner-video"
-          title={t('explanationVideo.title')}
-          subtitle={t('explanationVideo.subtitle')}
-          overlayBadge={t('explanationVideo.badge')}
-          videoSubline={t('explanationVideo.subline')}
+          title={responsiveCopy(t('mobile.explanationVideo.title'), t('explanationVideo.title'))}
+          ariaLabel={t('explanationVideo.title')}
+          subtitle={responsiveCopy(t('mobile.explanationVideo.subtitle'), t('explanationVideo.subtitle'))}
+          overlayBadge={responsiveCopy(t('mobile.explanationVideo.badge'), t('explanationVideo.badge'))}
+          videoSubline={<span className="hidden md:inline">{t('explanationVideo.subline')}</span>}
           points={t('explanationVideo.points', { returnObjects: true })}
           showStatusPanel={false}
           videoSrc={isEnglish ? undefined : PARTNER_VIDEO_SRC}
           posterSrc={isEnglish ? undefined : PARTNER_VIDEO_POSTER}
           captionsSrc={isEnglish ? undefined : PARTNER_VIDEO_CAPTIONS}
-          bookingCtaLabel={t('explanationVideo.bookingCta')}
+          bookingCtaLabel={responsiveCopy(t('mobile.hero.cta'), t('explanationVideo.bookingCta'))}
           onBookingCta={scrollTo(GOOGLE_TERMIN_ANCHOR)}
-          videoHint={t('explanationVideo.hint')}
+          videoHint={responsiveCopy(t('mobile.explanationVideo.hint'), t('explanationVideo.hint'))}
           videoNote={t('explanationVideo.aiNote')}
           ctaLabel={t('explanationVideo.cta')}
           onCta={() => requestNitaConsent('delayed_prompt')}
@@ -209,7 +214,7 @@ const PartnerPage = () => {
         </div>
 
         {/* Hinweise und Lesestoff folgen am Handy dem Film, damit der Einstieg kurz bleibt. */}
-        <section className="order-3 bg-[#f4faf7] px-4 pb-8 sm:px-6 lg:hidden">
+        <section className="order-3 bg-[#f4faf7] px-4 pb-8 sm:px-6 lg:hidden max-md:hidden">
           <div className="mx-auto max-w-3xl">
                 <p className="flex items-start justify-center gap-2 text-sm leading-6 text-[#52666d]">
                   <Shield className="mt-1 h-4 w-4 shrink-0 text-[#087654]" aria-hidden="true" />
@@ -219,7 +224,7 @@ const PartnerPage = () => {
         </section>
 
         {/* SECTION 2: PROBLEM AWARENESS */}
-        <section className="order-4 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
+        <section className="order-4 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white max-md:hidden">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -239,7 +244,7 @@ const PartnerPage = () => {
         </section>
 
         {/* SECTION 3: BUDGET OVERVIEW */}
-        <section className="order-5 md:order-none py-10 sm:py-20 lg:py-24 bg-white">
+        <section className="order-3 md:order-none py-10 sm:py-20 lg:py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -248,10 +253,10 @@ const PartnerPage = () => {
               className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                <HighlightText text={t('budget.title')} />
+                {responsiveCopy(t('mobile.budget.title'), <HighlightText text={t('budget.title')} />)}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                <HighlightText text={t('budget.subtitle')} />
+                {responsiveCopy(t('mobile.budget.subtitle'), <HighlightText text={t('budget.subtitle')} />)}
               </p>
             </motion.div>
 
@@ -274,7 +279,7 @@ const PartnerPage = () => {
                 <FriendlyIcon kind="budget" label={t('budget.total')} tone="butter" className="mx-auto mb-4" />
                 <p className="text-sm uppercase tracking-widest opacity-80 mb-2">{t('budget.total')}</p>
                 <p className="text-4xl sm:text-5xl font-extrabold mb-2">{t('budget.totalAmount')}</p>
-                <p className="text-base opacity-90">{t('budget.totalDesc')}</p>
+                <p className="text-base opacity-90">{responsiveCopy(t('mobile.budget.totalDesc'), t('budget.totalDesc'))}</p>
               </motion.div>
 
               {/* Naturheilkunde */}
@@ -288,7 +293,7 @@ const PartnerPage = () => {
                 <FriendlyIcon kind="naturopathy" label={t('budget.naturheilkunde')} tone="mint" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.naturheilkunde')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.naturheilkundeAmount')}</p>
-                <p className="text-base sm:text-sm text-slate-600">{t('budget.naturheilkundeDesc')}</p>
+                <p className="text-base sm:text-sm text-slate-600">{responsiveCopy(t('mobile.budget.naturheilkundeDesc'), t('budget.naturheilkundeDesc'))}</p>
               </motion.div>
 
               {/* Sehhilfen */}
@@ -302,17 +307,25 @@ const PartnerPage = () => {
                 <FriendlyIcon kind="glasses" label={t('budget.sehhilfen')} tone="sky" className="mb-4" />
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">{t('budget.sehhilfen')}</p>
                 <p className="text-3xl font-extrabold text-slate-800 mb-2">{t('budget.sehhilfenAmount')}</p>
-                <p className="text-base sm:text-sm text-slate-600">{t('budget.sehhilfenDesc')}</p>
+                <p className="text-base sm:text-sm text-slate-600">{responsiveCopy(t('mobile.budget.sehhilfenDesc'), t('budget.sehhilfenDesc'))}</p>
               </motion.div>
             </MobileSwipeRow>
             <p className="mx-auto mt-4 sm:mt-7 max-w-4xl text-center text-sm leading-relaxed text-slate-500 sm:leading-5">
-              {t('budget.footnote')}
+              {responsiveCopy(t('mobile.budget.note'), t('budget.footnote'))}
             </p>
+            <details className="group/partner-details mx-auto mt-4 max-w-4xl border-t border-slate-200 text-slate-600 md:hidden">
+              <summary className="[&::-webkit-details-marker]:hidden flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-2 text-sm font-semibold text-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">{t('mobile.budget.detailsTitle')}<ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open/partner-details:rotate-180 motion-reduce:transition-none" aria-hidden="true" /></summary>
+              <div className="space-y-3 pb-3 pt-1 text-sm leading-6">
+                <p><HighlightText text={t('budget.subtitle')} /></p>
+                <p>{t('hero.roleNote')}</p>
+                <p>{t('budget.footnote')}</p>
+              </div>
+            </details>
           </div>
         </section>
 
         {/* SECTION 4: FÜR WEN? (Partner Types) */}
-        <section className="order-6 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
+        <section className="order-5 md:order-none py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-emerald-50/40 via-emerald-50/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -321,9 +334,9 @@ const PartnerPage = () => {
               className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-4 sm:mb-6">
-                <HighlightText text={t('partners.title')} />
+                {responsiveCopy(t('mobile.partners.title'), <HighlightText text={t('partners.title')} />)}
               </h2>
-              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto max-md:hidden">
                 <HighlightText text={t('partners.subtitle')} />
               </p>
             </motion.div>
@@ -347,7 +360,7 @@ const PartnerPage = () => {
                   >
                     <FriendlyIcon kind={item.kind} label={item.title} tone={item.tone} className="mb-4 sm:mb-5" />
                     <h3 className="text-xl font-bold text-slate-800 mb-3">{item.title}</h3>
-                    <p className="text-base text-slate-600 leading-relaxed sm:leading-6">{item.text}</p>
+                    <p className="text-base text-slate-600 leading-relaxed sm:leading-6">{responsiveCopy(item.mobileText, item.text)}</p>
                   </motion.div>
                 );
               })}
@@ -356,7 +369,7 @@ const PartnerPage = () => {
         </section>
 
         {/* SECTION 5: SO EINFACH FUNKTIONIERT ES (Benefits + Steps) */}
-        <section className="order-7 md:order-none py-10 sm:py-20 lg:py-24 pb-12 sm:pb-20 lg:pb-32 bg-white">
+        <section className="order-6 md:order-none py-10 sm:py-20 lg:py-24 pb-12 sm:pb-20 lg:pb-32 bg-white">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -365,7 +378,7 @@ const PartnerPage = () => {
               className="text-center mb-6 sm:mb-16"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800">
-                <HighlightText text={t('solution.title')} />
+                {responsiveCopy(t('mobile.steps.title'), <HighlightText text={t('solution.title')} />)}
               </h2>
             </motion.div>
 
@@ -385,6 +398,7 @@ const PartnerPage = () => {
                   tone: 'mint',
                   title: t('steps.step1Title'),
                   text: t('steps.step1Desc'),
+                  mobileText: t('mobile.steps.step1Desc'),
                   step: '1'
                 },
                 {
@@ -392,6 +406,7 @@ const PartnerPage = () => {
                   tone: 'butter',
                   title: t('steps.step2Title'),
                   text: t('steps.step2Desc'),
+                  mobileText: t('mobile.steps.step2Desc'),
                   step: '2'
                 },
                 {
@@ -399,6 +414,7 @@ const PartnerPage = () => {
                   tone: 'sky',
                   title: t('steps.step3Title'),
                   text: t('steps.step3Desc'),
+                  mobileText: t('mobile.steps.step3Desc'),
                   step: '3'
                 }
               ].map((item, index) => {
@@ -416,7 +432,7 @@ const PartnerPage = () => {
                   </div>
                   <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} className="mb-4 sm:mb-6" />
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2 sm:mb-4">{item.title}</h3>
-                  <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.text}</p>
+                  <p className="text-base md:text-lg text-slate-600 leading-relaxed">{responsiveCopy(item.mobileText, item.text)}</p>
                 </motion.div>
               )})}
             </MobileSwipeRow>
@@ -445,7 +461,7 @@ const PartnerPage = () => {
                   >
                     <FriendlyIcon emoji={item.emoji} label={item.title} tone={item.tone} size="sm" className="mb-3 sm:mb-4" />
                     <h3 className="text-lg font-bold text-slate-800 mb-2"><HighlightText text={item.title} /></h3>
-                    <p className="text-base sm:text-sm text-slate-600 leading-relaxed sm:leading-relaxed">{item.text}</p>
+                    <p className="text-base sm:text-sm text-slate-600 leading-relaxed sm:leading-relaxed max-md:hidden">{item.text}</p>
                   </motion.div>
                 );
               })}
@@ -454,12 +470,12 @@ const PartnerPage = () => {
         </section>
 
         {/* KLARE ROLLEN STATT UNBELEGTER TESTIMONIALS */}
-        <div className="order-8 md:contents">
+        <div className="order-4 md:contents">
           <PartnerRoleProcess />
         </div>
 
         {/* FAQ: mobil nach dem Appell und direkt vor dem Termin */}
-        <div className="order-10 md:contents">
+        <div className="order-7 md:contents">
           <PartnerFAQ />
         </div>
 
@@ -467,7 +483,7 @@ const PartnerPage = () => {
 
         {/* SECTION: BOOKING */}
         {/* MORAL */}
-        <section className="order-9 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900">
+        <section className="order-9 md:order-none py-10 sm:py-20 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 max-md:hidden">
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <motion.h2 initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 sm:mb-8">
@@ -486,7 +502,7 @@ const PartnerPage = () => {
           </div>
         </section>
 
-        <section id={GOOGLE_TERMIN_ANCHOR} className="order-11 md:order-none scroll-mt-24 py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
+        <section id={GOOGLE_TERMIN_ANCHOR} className="order-8 md:order-none scroll-mt-24 py-10 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-emerald-50/20">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -495,10 +511,10 @@ const PartnerPage = () => {
               className="text-center mb-5 sm:mb-12"
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 mb-3 sm:mb-6">
-                <HighlightText text={t('cta.title')} />
+                {responsiveCopy(t('mobile.cta.title'), <HighlightText text={t('cta.title')} />)}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                <HighlightText text={t('cta.subtitle')} />
+                {responsiveCopy(t('mobile.cta.subtitle'), <HighlightText text={t('cta.subtitle')} />)}
               </p>
             </motion.div>
 
@@ -523,7 +539,7 @@ const PartnerPage = () => {
         </section>
 
         {/* TEASER: Heilberufe-Vorsorge für HPs und Osteopathen als Direktkunden */}
-        <section className="relative order-12 md:order-none py-10 sm:py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
+        <section className="relative order-9 md:order-none py-10 sm:py-16 bg-gradient-to-br from-[#25c990] via-[#1fb37f] to-[#0b4d4a] text-white overflow-hidden">
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />

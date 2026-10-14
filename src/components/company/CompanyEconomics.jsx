@@ -47,7 +47,7 @@ const CompanyEconomics = () => {
             </h2>
           </div>
           <div className="max-w-2xl lg:justify-self-end">
-            <p className="text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{t('economics.description')}</p>
+            <p className="hidden text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 md:block">{t('economics.description')}</p>
             <Link
               to={getPath('potenzialanalyse')}
               className="mt-4 inline-flex min-h-11 items-center gap-2 font-display text-sm font-extrabold text-[#8ee7ca] transition md:mt-7 md:min-h-0 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#07161f]"

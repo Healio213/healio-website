@@ -72,8 +72,8 @@ const CompanyExplainerVideo = ({ kind = 'system' }) => {
             </p>
           </div>
           <div className="lg:col-start-1 lg:row-start-2">
-            <p className={`max-w-xl text-base leading-7 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{content.description}</p>
-            <p className={`mt-4 text-sm font-semibold leading-6 ${isDark ? 'text-[#8ee7ca]' : 'text-[#07563f]'}`}>{content.note}</p>
+            <p className={`hidden max-w-xl text-base leading-7 md:block ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{content.description}</p>
+            <p className={`mt-4 hidden text-sm font-semibold leading-6 md:block ${isDark ? 'text-[#8ee7ca]' : 'text-[#07563f]'}`}>{content.note}</p>
             <Link
               to={getPath('potenzialanalyse')}
               className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-home-mint px-6 py-3 text-sm font-bold text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-home-mint focus-visible:ring-offset-2"

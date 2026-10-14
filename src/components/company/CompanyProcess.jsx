@@ -22,7 +22,7 @@ const CompanyProcess = () => {
           <h2 id="company-process-title" className="mt-4 max-w-[15ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] text-[#10202a] sm:text-5xl">
             {t('process.title')}
           </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8">{t('process.description')}</p>
+          <p className="mt-4 hidden text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8 md:block">{t('process.description')}</p>
         </div>
 
         {/* Mobil Wischreihe (vier Schritte), ab md die bisherige verbundene Tafel. */}
@@ -42,7 +42,10 @@ const CompanyProcess = () => {
                   <span className="font-display text-sm font-extrabold tracking-[0.18em] text-emerald-700 md:text-xs">0{index + 1}</span>
                 </div>
                 <h3 className="mt-4 font-display text-xl font-extrabold tracking-[-0.025em] text-[#10202a] md:mt-5">{step.title}</h3>
-                <p className="mt-2 text-base leading-6 text-slate-600 md:text-sm md:leading-6">{step.description}</p>
+                <p className="mt-2 text-base leading-6 text-slate-600 md:text-sm md:leading-6">
+                  <span className="md:hidden">{t(`mobile.process.steps.${index}`)}</span>
+                  <span className="hidden md:inline">{step.description}</span>
+                </p>
               </div>
             );
           })}

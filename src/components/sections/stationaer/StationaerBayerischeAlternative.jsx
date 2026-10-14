@@ -1,10 +1,9 @@
 import React from 'react';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
-import MobileDetails from '@/components/ui/MobileDetails';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_STATIONAER_URL, trackStationaerBayerischeClick } from '@/components/sections/hospital/hospitalLinks';
 
@@ -157,26 +156,17 @@ const StationaerBayerischeAlternative = () => {
             </div>
           </div>
 
-          {/* Mobil sind die vier Angaben eine Wischreihe aus kleinen Karten;
-              ab md bleibt es die bisherige Liste mit Trennlinien. */}
-          <div className="border-t border-[#e3ecf5] px-6 py-3 sm:px-8 md:hidden">
-            <MobileSwipeRow
-              label={copy.title}
-              className="min-w-0"
-              desktopClassName="-mx-6 scroll-pl-6 px-6 sm:-mx-8 sm:scroll-pl-8 sm:px-8 md:mx-0 md:block md:divide-y md:divide-slate-100 md:px-0"
-              mobileItemWidth="w-[calc(100%-2rem)]"
-              bleed={false}
-            >
+          {/* Die vier Textthemen stehen mobil direkt untereinander.
+              Jeder Titel öffnet seine vollständige Erklärung; Desktop bleibt unverändert. */}
+          <div className="border-t border-[#e3ecf5] px-6 py-2 sm:px-8 md:hidden" data-bayerische-facts="mobile">
+            <div className="divide-y divide-slate-100">
               {copy.facts.map((fact) => (
-                <dl
-                  key={fact.label}
-                  className="h-full rounded-2xl border border-[#e3ecf5] bg-[#f8fbfe] p-5 md:rounded-none md:border-0 md:bg-transparent md:px-0 md:py-6"
-                >
-                  <dt className="text-sm font-extrabold uppercase tracking-[0.12em] text-home-midnight md:text-xs md:tracking-[0.16em]">
-                    {fact.label}
-                  </dt>
-                  <dd className="mt-2 text-base leading-relaxed text-slate-700 md:leading-6">
-                  <MobileDetails summary="Details" className="text-slate-700">
+                <details key={fact.label} className="group">
+                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-display text-base font-extrabold leading-6 text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#075f46] [&::-webkit-details-marker]:hidden">
+                    <span className="min-w-0">{fact.label}</span>
+                    <ChevronDown className="h-5 w-5 shrink-0 text-[#075f46] transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+                  </summary>
+                  <p className="pb-5 text-base leading-7 text-slate-600">
                     {fact.text}
                     {fact.link && (
                       <>
@@ -190,11 +180,10 @@ const StationaerBayerischeAlternative = () => {
                         </a>
                       </>
                     )}
-                  </MobileDetails>
-                  </dd>
-                </dl>
+                  </p>
+                </details>
               ))}
-            </MobileSwipeRow>
+            </div>
           </div>
           <div className="hidden border-t border-[#e3ecf5] px-6 py-5 sm:px-8 md:block md:py-2 lg:border-l lg:border-t-0 lg:px-10 lg:py-4">
             <MobileSwipeRow
