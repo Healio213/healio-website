@@ -153,7 +153,9 @@ export const RATGEBER_GROUPS = [
       "unsichtbare-zahnspange-kosten",
       "zahnzusatzversicherung-kieferorthopaedie",
       "zahnzusatzversicherung-familie",
-      "zahnreinigung-krankenkasse"
+      "zahnreinigung-krankenkasse",
+      "zahnzusatzversicherung-sofort-2026",
+      "zahnzusatzversicherung-zahnreinigung-2026"
     ]
   },
   {
@@ -272,7 +274,8 @@ export const RATGEBER_GROUPS = [
       "kontaktlinsen-krankenkasse",
       "brille-verloren-versicherung",
       "brillenkosten",
-      "zahn-und-brillenversicherung"
+      "zahn-und-brillenversicherung",
+      "fielmann-brillenversicherung-kuendigen-2026"
     ]
   },
   {

@@ -37,9 +37,9 @@ export const article = {
   slug: 'zahnzusatzversicherung-fehlender-zahn',
   kind: 'ratgeber',
 
-  metaTitle: 'Zahnzusatzversicherung bei fehlendem Zahn | Healio',
+  metaTitle: 'Zahnzusatzversicherung trotz fehlender Zähne 2026 | Healio',
   metaDescription:
-    'Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.',
+    'Zahnzusatzversicherung trotz fehlender Zähne: welcher Versicherer bis zu drei fehlende Zähne annimmt, was der Zuschlag je Zahn kostet und wo der Sofortschutz endet.',
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',
@@ -57,7 +57,7 @@ export const article = {
     label: 'Meinen Zahn-Weg prüfen',
   },
   lead:
-    'Mit einer nicht ersetzten Zahnlücke ist eine Zahnzusatzversicherung weiterhin möglich, aber nicht bei jedem Anbieter. Die UKV nimmt laut ihrem Antrag bis zu drei fehlende Zähne gegen einen festen Zuschlag je Zahn an, die Bayerische lehnt nach ihren Annahmerichtlinien mit Stand 11.2025 bereits bei einem einzigen fehlenden Zahn ab. Entscheidend ist dabei eine zweite Frage, die viele übersehen: ob der Ersatz für genau diese Lücke in den letzten zwei Jahren zahnärztlich angeraten wurde, aktuell beabsichtigt ist oder schon läuft. Dafür gelten andere Regeln als für die Lücke selbst.',
+    'Eine Zahnzusatzversicherung trotz fehlender Zähne ist möglich, aber nicht bei jedem Anbieter. Ob dir ein Zahn fehlt oder zwei oder drei fehlende Zähne noch nicht ersetzt sind, entscheidet über den Weg. Die UKV nimmt laut ihrem Antrag bis zu drei fehlende Zähne gegen einen festen Zuschlag je Zahn an, die Bayerische lehnt nach ihren Annahmerichtlinien mit Stand 11.2025 bereits bei einem einzigen fehlenden Zahn ab. Entscheidend ist dabei eine zweite Frage, die viele übersehen: ob der Ersatz für genau diese Lücke in den letzten zwei Jahren zahnärztlich angeraten wurde, aktuell beabsichtigt ist oder schon läuft. Dafür gelten andere Regeln als für die Lücke selbst.',
 
   sections: [
     {

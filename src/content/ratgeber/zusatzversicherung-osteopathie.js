@@ -7,8 +7,10 @@ export const article = {
   "slug": "zusatzversicherung-osteopathie",
   "kind": "ratgeber",
   "group": "ambulant",
-  "metaTitle": "Zusatzversicherung für Osteopathie: Leistungen | Healio",
-  "metaDescription": "Zusatzversicherung für Osteopathie prüfen: Kassenzuschuss, Naturheilverfahren-Topf, Behandler, Rechnung und Tarifgrenzen verständlich vergleichen.",
+  "metaTitle": "Osteopathie Zusatzversicherung 2026: Leistungen | Healio",
+  "metaDescription": "Osteopathie Zusatzversicherung 2026: Kassenzuschuss, Naturheilverfahren-Topf ohne Wartezeit, Behandler, Rechnung und Tarifgrenzen verständlich vergleichen.",
+  "updatedAt": "2026-10-14",
+  "updatedAtLabel": "14. Oktober 2026",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
   "readingTimeMinutes": 7,
@@ -38,7 +40,7 @@ export const article = {
       "label": "Ambulanten Tarif bei Healio prüfen"
     }
   },
-  "lead": "Eine Zusatzversicherung für Osteopathie kann versicherte Behandlungskosten nach den Bedingungen des gewählten Tarifs ergänzen. Prüfe zuerst den Zuschuss deiner gesetzlichen Kasse und vergleiche danach Behandleranforderungen, Erstattungsumfang und verfügbares Teilbudget des privaten Vertrags.",
+  "lead": "Eine Osteopathie Zusatzversicherung ist meist ein ambulanter Tarif mit Naturheilverfahren-Topf und kann versicherte Behandlungskosten nach den Bedingungen des gewählten Tarifs ergänzen. Prüfe zuerst den Zuschuss deiner gesetzlichen Kasse und vergleiche danach Behandleranforderungen, Erstattungsumfang und verfügbares Teilbudget des privaten Vertrags.",
   "sections": [
     {
       "id": "kostenwege",

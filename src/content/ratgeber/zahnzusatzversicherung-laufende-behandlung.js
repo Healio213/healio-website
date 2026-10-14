@@ -314,6 +314,13 @@ export const article = {
               "to": "/ratgeber/zahnzusatzversicherung-ohne-wartezeit",
               "icon": "document",
               "linkLabel": "Ratgeber lesen"
+            },
+            {
+              "title": "Zahnzusatzversicherung sofort 2026",
+              "text": "Was ab Tag eins zahlt und wie Staffel und Sofortbaustein zusammenspielen.",
+              "to": "/ratgeber/zahnzusatzversicherung-sofort-2026",
+              "icon": "dental",
+              "linkLabel": "Ratgeber lesen"
             }
           ]
         }

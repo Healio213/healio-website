@@ -43,8 +43,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "IKK classic Bonusprogramm 2026: Bonusheft, alle Positionen, Nachweise und Fristen",
     "listTeaser": "Jede bonusfähige Position mit Betrag, die Regeln für den dreifachen Zuschuss und die Gegenrechnung mit dem Zusatzbeitrag.",
     "readingTimeMinutes": 8,
-    "metaTitle": "IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio",
-    "metaDescription": "IKK classic Bonusheft und Bonussystem 2026: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.",
+    "metaTitle": "IKK classic Bonusprogramm 2026: Bonussystem, Bonusheft | Healio",
+    "metaDescription": "IKK Bonussystem 2026 mit Bonusheft der IKK classic: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.",
     "publishedAt": "2026-09-22",
     "updatedAt": "2026-10-14"
   },
@@ -530,8 +530,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Zahnzusatzversicherung bei fehlendem Zahn: was noch geht und was nicht",
     "listTeaser": "Ein Versicherer nimmt bis zu drei Lücken an, ein anderer lehnt schon bei einer ab. Und angeratener Ersatz ist noch einmal eine ganz andere Frage.",
     "readingTimeMinutes": 6,
-    "metaTitle": "Zahnzusatzversicherung bei fehlendem Zahn | Healio",
-    "metaDescription": "Fehlender Zahn und Zahnzusatzversicherung: welcher Versicherer bis zu drei Lücken annimmt, was ein Zuschlag kostet und wo der Sofortschutz endet.",
+    "metaTitle": "Zahnzusatzversicherung trotz fehlender Zähne 2026 | Healio",
+    "metaDescription": "Zahnzusatzversicherung trotz fehlender Zähne: welcher Versicherer bis zu drei fehlende Zähne annimmt, was der Zuschlag je Zahn kostet und wo der Sofortschutz endet.",
     "publishedAt": "2026-09-22",
     "updatedAt": "2026-10-10"
   },
@@ -976,6 +976,28 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-14"
   },
   {
+    "slug": "zahnzusatzversicherung-sofort-2026",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung sofort 2026: Was ab Tag eins zahlt",
+    "listTeaser": "Ohne Wartezeit, ab dem ersten Jahr voll oder für die schon angeratene Krone: was „sofort“ bei Zahntarifen wirklich heißt.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Zahnzusatzversicherung sofort 2026: was ab Tag 1 zahlt | Healio",
+    "metaDescription": "Zahnzusatzversicherung sofort 2026: was ohne Wartezeit ab Tag eins gilt, was ZAHN Sofort bei angeratener Behandlung zahlt und wo die Staffel bremst.",
+    "publishedAt": "2026-10-14"
+  },
+  {
+    "slug": "zahnzusatzversicherung-zahnreinigung-2026",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnzusatzversicherung mit Zahnreinigung 2026",
+    "listTeaser": "Welche Zahntarife die professionelle Zahnreinigung zahlen, mit welchem Deckel und warum die PZR allein selten den Beitrag trägt.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnzusatzversicherung Zahnreinigung 2026: PZR-Tarife | Healio",
+    "metaDescription": "Zahnzusatzversicherung mit Zahnreinigung 2026: welche Tarife die PZR zahlen, wie hoch der Deckel je Jahr ist und wann sich das gegen den Beitrag rechnet.",
+    "publishedAt": "2026-10-14"
+  },
+  {
     "slug": "heilpraktiker-kosten",
     "kind": "ratgeber",
     "group": "ambulant",
@@ -1174,9 +1196,10 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Zusatzversicherung für Osteopathie prüfen",
     "listTeaser": "Eine Zusatzversicherung für Osteopathie kann versicherte Behandlungskosten nach den Bedingungen des gewählten Tarifs ergänzen. Prüfe zuerst den Zuschuss deiner gesetzlichen Kasse und vergleiche danach Behandleranforderungen, Erstattungsumfang und verfügbares Teilbudget des privaten Vertrags.",
     "readingTimeMinutes": 7,
-    "metaTitle": "Zusatzversicherung für Osteopathie: Leistungen | Healio",
-    "metaDescription": "Zusatzversicherung für Osteopathie prüfen: Kassenzuschuss, Naturheilverfahren-Topf, Behandler, Rechnung und Tarifgrenzen verständlich vergleichen.",
-    "publishedAt": "2026-10-07"
+    "metaTitle": "Osteopathie Zusatzversicherung 2026: Leistungen | Healio",
+    "metaDescription": "Osteopathie Zusatzversicherung 2026: Kassenzuschuss, Naturheilverfahren-Topf ohne Wartezeit, Behandler, Rechnung und Tarifgrenzen verständlich vergleichen.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-14"
   },
   {
     "slug": "heilpraktiker-zusatzversicherung-ohne-wartezeit",
@@ -1473,8 +1496,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt",
     "listTeaser": "Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.",
     "readingTimeMinutes": 8,
-    "metaTitle": "Schwanger: welcher Zusatzschutz jetzt noch geht | Healio",
-    "metaDescription": "Zusatzversicherung in der Schwangerschaft: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
+    "metaTitle": "Zusatzversicherung Schwangerschaft 2026: was jetzt geht | Healio",
+    "metaDescription": "Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
     "publishedAt": "2026-09-28",
     "updatedAt": "2026-10-14"
   },
@@ -1697,8 +1720,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Brillenversicherung: lohnt sie sich? Beitrag, Erstattung und Selbstzahlung",
     "listTeaser": "Welche Arten von Brillenversicherung es gibt, was der ambulante Tarif bei der Brille erstattet und wann Selbstzahlen die günstigere Rechnung ist.",
     "readingTimeMinutes": 9,
-    "metaTitle": "Brillenversicherung: lohnt sie sich? Rechenbeispiel | Healio",
-    "metaDescription": "Brillenversicherung oder ambulanter Tarif mit Sehhilfen-Topf: was sie erstatten, was sie kosten, ob es ohne Wartezeit geht und wann Selbstzahlen günstiger ist.",
+    "metaTitle": "Brillenversicherung Vergleich 2026: lohnt sie sich? | Healio",
+    "metaDescription": "Brillenversicherung im Vergleich: Optiker-Police, Zuschuss-Police oder ambulanter Tarif mit Sehhilfen-Topf, was sie erstatten, kosten und wann Selbstzahlen reicht.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-14"
   },
@@ -1802,6 +1825,17 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Zahn- und Brillenversicherung zusammen prüfen | Healio",
     "metaDescription": "Zahn und Brille gemeinsam planen: Vergleiche zwei Leistungswege, Beiträge und Grenzen. Erfahre, was Kasse und private Ergänzung jeweils übernehmen.",
     "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "fielmann-brillenversicherung-kuendigen-2026",
+    "kind": "ratgeber",
+    "group": "brille",
+    "listTitle": "Fielmann Brillenversicherung kündigen 2026",
+    "listTeaser": "Frist, Adresse und Vorlage nach den Bedingungen der HanseMerkur, dazu was du verlierst und welche Brillenleistung danach passt.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Fielmann Brillenversicherung kündigen 2026: Frist | Healio",
+    "metaDescription": "Fielmann Brillenversicherung kündigen 2026: Frist ein Monat zum Ende des Versicherungsjahres, Adresse, Vorlage und welche Brillenleistung danach passt.",
+    "publishedAt": "2026-10-14"
   },
   {
     "slug": "altersvorsorgedepot-was-ist-das",

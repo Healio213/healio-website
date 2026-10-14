@@ -78,8 +78,6 @@ export const article = {
         { type: 'segments', segments: [
           { text: 'Mehr zu den einzelnen Kassen: ' },
           { text: 'TK Zahnreinigung', to: '/ratgeber/tk-zahnreinigung' },
-          { text: ', ' },
-          { text: 'DAK Zahnreinigung', to: '/ratgeber/dak-zahnreinigung' },
           { text: ' und ' },
           { text: 'AOK Zahnreinigung', to: '/ratgeber/aok-zahnreinigung' },
           { text: '. Die Tabelle mit 27 Kassen steht im Ratgeber ' },
@@ -134,7 +132,7 @@ export const article = {
         { type: 'path', to: '/zahn#zahn-check', icon: 'dental', text: 'Vier kurze Fragen, dann siehst du, welcher Zahntarifweg zu dir passt.', label: 'Zahn-Check starten' },
         { type: 'cards', heading: 'Das passt dazu', items: [
           { title: 'Zahnersatz Kosten', text: 'Was die Kasse beim Zahnarzt zahlt und was bei dir bleibt.', to: '/ratgeber/zahnersatz-kosten', icon: 'comparison', linkLabel: 'Zur Übersicht' },
-          { title: 'Professionelle Zahnreinigung: Kosten', text: 'Kosten nach GOZ und der Zuschuss von 27 Kassen.', to: '/ratgeber/professionelle-zahnreinigung-kosten', icon: 'dental', linkLabel: 'Ratgeber lesen' }
+          { title: 'Zahnzusatzversicherung mit Zahnreinigung 2026', text: 'Welche Zahntarife die PZR zahlen und mit welchem Deckel.', to: '/ratgeber/zahnzusatzversicherung-zahnreinigung-2026', icon: 'dental', linkLabel: 'Ratgeber lesen' }
         ] }
       ]
     }

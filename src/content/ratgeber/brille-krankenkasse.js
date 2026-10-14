@@ -372,6 +372,14 @@ export const article = {
         "text": "Was deine Brille kostet, ergibt sich aus dem konkreten Angebot für Gläser, Fassung und gewählte Ausführung; einen pauschalen Marktpreis kannst du daraus nicht ableiten. Deinen Eigenanteil kennst du erst, wenn eine mögliche Kassenbeteiligung und eine bestehende private Erstattung für dieses Angebot geklärt sind.",
         "to": "/ratgeber/brillenkosten",
         "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "glasses",
+        "tone": "sky",
+        "title": "Fielmann Brillenversicherung kündigen 2026",
+        "text": "Frist, Adresse und Vorlage nach den Bedingungen der HanseMerkur und welche Brillenleistung danach passt.",
+        "to": "/ratgeber/fielmann-brillenversicherung-kuendigen-2026",
+        "linkLabel": "Ratgeber lesen"
       }
     ]
   }

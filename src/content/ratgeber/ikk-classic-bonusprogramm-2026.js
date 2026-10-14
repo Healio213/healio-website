@@ -47,9 +47,9 @@ export const article = {
   slug: 'ikk-classic-bonusprogramm-2026',
   kind: 'ratgeber',
 
-  metaTitle: 'IKK classic Bonusprogramm 2026: Bonusheft, Beträge | Healio',
+  metaTitle: 'IKK classic Bonusprogramm 2026: Bonussystem, Bonusheft | Healio',
   metaDescription:
-    'IKK classic Bonusheft und Bonussystem 2026: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.',
+    'IKK Bonussystem 2026 mit Bonusheft der IKK classic: Antrag per App oder Papier, alle Positionen mit Beträgen, Frist 31.03.2027 und wie der Zuschuss den Beitrag senkt.',
 
   publishedAt: '2026-09-22',
   publishedAtLabel: '22. September 2026',

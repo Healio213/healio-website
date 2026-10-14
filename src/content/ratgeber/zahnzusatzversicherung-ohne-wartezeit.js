@@ -266,9 +266,9 @@ export const article = {
             {
               icon: 'prevention',
               tone: 'lavender',
-              title: 'Wurzelbehandlung',
-              text: 'Wann die Kasse zahlt und was privat kostet.',
-              to: '/ratgeber/wurzelbehandlung-kosten',
+              title: 'Zahnzusatzversicherung sofort 2026',
+              text: 'Staffel im ersten Jahr und Sofortbaustein für Angeratenes.',
+              to: '/ratgeber/zahnzusatzversicherung-sofort-2026',
               linkLabel: 'Ratgeber lesen',
             },
           ],

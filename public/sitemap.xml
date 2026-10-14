@@ -614,6 +614,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://healio.de/ratgeber/zahnzusatzversicherung-sofort-2026</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/zahnzusatzversicherung-zahnreinigung-2026</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://healio.de/ratgeber/heilpraktiker-kosten</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -717,7 +729,7 @@
   </url>
   <url>
     <loc>https://healio.de/ratgeber/zusatzversicherung-osteopathie</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1054,6 +1066,12 @@
   <url>
     <loc>https://healio.de/ratgeber/zahn-und-brillenversicherung</loc>
     <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/fielmann-brillenversicherung-kuendigen-2026</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

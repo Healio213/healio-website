@@ -748,6 +748,22 @@ export const article = {
         "text": "Was die Kasse in der Familie zahlt, wie der Eigenanteil bei zwei Kindern in der Zahnspange wirkt und wie du Beiträge und mögliche Kosten gegenüberstellst.",
         "to": "/ratgeber/zahnzusatzversicherung-familie",
         "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "mint",
+        "title": "Zahnzusatzversicherung sofort 2026",
+        "text": "Ohne Wartezeit, Leistungsstaffel im ersten Jahr und der Sofortbaustein für schon angeratene Behandlungen.",
+        "to": "/ratgeber/zahnzusatzversicherung-sofort-2026",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "sky",
+        "title": "Zahnzusatzversicherung mit Zahnreinigung 2026",
+        "text": "Welche Zahntarife die professionelle Zahnreinigung zahlen und mit welchem Deckel.",
+        "to": "/ratgeber/zahnzusatzversicherung-zahnreinigung-2026",
+        "linkLabel": "Ratgeber lesen"
       }
     ]
   }

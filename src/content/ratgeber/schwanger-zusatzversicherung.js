@@ -66,9 +66,9 @@ export const article = {
   slug: 'schwanger-zusatzversicherung',
   kind: 'ratgeber',
 
-  metaTitle: 'Schwanger: welcher Zusatzschutz jetzt noch geht | Healio',
+  metaTitle: 'Zusatzversicherung Schwangerschaft 2026: was jetzt geht | Healio',
   metaDescription:
-    'Zusatzversicherung in der Schwangerschaft: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
+    'Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
 
   publishedAt: '2026-09-28',
   publishedAtLabel: '28. September 2026',
@@ -86,7 +86,7 @@ export const article = {
     label: 'SDK-Vorsorge prüfen',
   },
   lead:
-    'Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes noch erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
+    'Eine Zusatzversicherung in der Schwangerschaft geht noch, aber nicht mehr für alles. Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
 
   sections: [
     {

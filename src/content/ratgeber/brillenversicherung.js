@@ -48,9 +48,9 @@ export const article = {
   kind: 'ratgeber',
   group: 'brille',
 
-  metaTitle: 'Brillenversicherung: lohnt sie sich? Rechenbeispiel | Healio',
+  metaTitle: 'Brillenversicherung Vergleich 2026: lohnt sie sich? | Healio',
   metaDescription:
-    'Brillenversicherung oder ambulanter Tarif mit Sehhilfen-Topf: was sie erstatten, was sie kosten, ob es ohne Wartezeit geht und wann Selbstzahlen günstiger ist.',
+    'Brillenversicherung im Vergleich: Optiker-Police, Zuschuss-Police oder ambulanter Tarif mit Sehhilfen-Topf, was sie erstatten, kosten und wann Selbstzahlen reicht.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
@@ -79,7 +79,7 @@ export const article = {
     path: { to: '/ambulant', text: 'Brille, Heilpraktiker, Vorsorge zusammen prüfen?', label: 'Ambulanten Tarif ansehen' },
   },
 
-  lead: 'Eine Versicherung nur für die Brille rechnet sich selten. Die Stiftung Warentest hielt sie 2018 für nicht lohnend und riet, das Geld lieber selbst anzusparen. Hier siehst du, welche Arten von Brillenversicherung es gibt, was der ambulante Tarif bei Sehhilfen erstattet und wie die Rechnung mit einem angenommenen Brillenpreis von 680 EUR ausgeht. Außerdem steht hier, wann sich ein Tarif trotzdem lohnt, nämlich wenn mehrere Leistungen zusammenkommen.',
+  lead: 'Eine Versicherung nur für die Brille rechnet sich selten. Die Stiftung Warentest hielt sie 2018 für nicht lohnend und riet, das Geld lieber selbst anzusparen. Im Vergleich siehst du, welche Arten von Brillenversicherung es gibt, was der ambulante Tarif bei Sehhilfen erstattet und wie die Rechnung mit einem angenommenen Brillenpreis von 680 EUR ausgeht. Außerdem steht hier, wann sich ein Tarif trotzdem lohnt, nämlich wenn mehrere Leistungen zusammenkommen.',
 
   sections: [
     {

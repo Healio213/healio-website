@@ -84,7 +84,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was die Kasse beim Zahnarzt zahlt, was an dir hängen bleibt und wann eine Zahnzusatzversicherung hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "dental",
       "hubSlug": "zahnersatz-kosten",
-      "total": 46,
+      "total": 48,
       "entries": [
         {
           "slug": "zahnersatz-kosten",
@@ -379,7 +379,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Wann die Kasse bei der Brille zahlt, was Gläser und Gleitsicht kosten und wann sich ein Tarif für Sehhilfen lohnt. Mit Rechenbeispielen und Quellen.",
       "icon": "glasses",
       "hubSlug": "brille-krankenkasse",
-      "total": 11,
+      "total": 12,
       "entries": [
         {
           "slug": "brille-krankenkasse",

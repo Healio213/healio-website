@@ -922,6 +922,10 @@ const OPT_IN_SLUGS = [
   'krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   'krankenzusatzversicherung-vergleichen',
   'zahnreinigung-krankenkasse',
+  // SEO-Umsetzung Thema D, neue Keyword-Seiten (14.10.2026)
+  'zahnzusatzversicherung-sofort-2026',
+  'zahnzusatzversicherung-zahnreinigung-2026',
+  'fielmann-brillenversicherung-kuendigen-2026',
 
 ];
 
@@ -1152,6 +1156,10 @@ const SERIEN_ZIELBEGRIFFE = {
   'krankenzusatzversicherung-ohne-gesundheitsfragen-2026': /krankenzusatzversicherung ohne gesundheitsfragen 2026/i,
   'krankenzusatzversicherung-vergleichen': /krankenzusatzversicherung vergleichen/i,
   'zahnreinigung-krankenkasse': /zahnreinigung.*krankenkasse/i,
+  // SEO-Umsetzung Thema D, neue Keyword-Seiten (14.10.2026)
+  'zahnzusatzversicherung-sofort-2026': /zahnzusatzversicherung sofort 2026/i,
+  'zahnzusatzversicherung-zahnreinigung-2026': /zahnzusatzversicherung (?:mit )?zahnreinigung 2026/i,
+  'fielmann-brillenversicherung-kuendigen-2026': /fielmann brillenversicherung kündigen 2026/i,
 
 };
 
