@@ -80,7 +80,7 @@ export const article = {
         { type: 'paragraph', text: 'In jedem Baustein gilt: Was vor Versicherungsbeginn schon läuft oder angeraten ist, zahlt der neue Vertrag nicht. Wer vergleicht, während die Behandlung schon geplant ist, vergleicht deshalb oft zu spät.' },
         { type: 'segments', segments: [
           { text: 'Wo du trotz Vorerkrankung angenommen wirst, erklärt der Ratgeber ' },
-          { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen' },
+          { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026' },
           { text: '.' }
         ] }
       ]

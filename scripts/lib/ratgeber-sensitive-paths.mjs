@@ -1,6 +1,6 @@
 /**
  * Unabhängige Soll-Liste für die Tracking-Verträge, Freigabe 08.10.2026.
- * 54 explizite Kopfhinweise (seit 14.10.2026 mit zusatzversicherung-ohne-gesundheitsfragen) plus acht Seiten mit konkreten Seh-/KFO-Indikationen.
+ * 54 explizite Kopfhinweise (seit 14.10.2026 mit zusatzversicherung-ohne-gesundheitspruefung-2026) plus acht Seiten mit konkreten Seh-/KFO-Indikationen.
  * Die Laufzeitmodule importieren diese Testdaten nicht. Bestehende Sperren bleiben.
  */
 
@@ -61,7 +61,7 @@ export const NEW_SENSITIVE_RATGEBER_PATHS = Object.freeze([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
-  '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen',
+  '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

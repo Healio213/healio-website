@@ -97,7 +97,7 @@ async function capiStatus(mod, path) {
 }
 
 try {
-  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 63, 'Alle 63 neuen sensiblen Pfade gehören zur Freigabe (seit 14.10.2026 mit zusatzversicherung-ohne-gesundheitsfragen).');
+  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 63, 'Alle 63 neuen sensiblen Pfade gehören zur Freigabe (seit 14.10.2026 mit zusatzversicherung-ohne-gesundheitspruefung-2026).');
   assert.equal(new Set(NEW_SENSITIVE_RATGEBER_PATHS).size, 63, 'Keine doppelten Soll-Pfade.');
 
   // Direkteinstieg und direkte Tracker-Aufrufe trotz vollständiger Zustimmung.

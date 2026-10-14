@@ -1223,14 +1223,14 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
-    "slug": "zusatzversicherung-ohne-gesundheitsfragen",
+    "slug": "zusatzversicherung-ohne-gesundheitspruefung-2026",
     "kind": "ratgeber",
     "group": "ambulant",
-    "listTitle": "Zusatzversicherung ohne Gesundheitsprüfung",
+    "listTitle": "Zusatzversicherung ohne Gesundheitsprüfung 2026",
     "listTeaser": "Trotz Vorerkrankung angenommen werden: wo das bei den Tarifen von Healio klappt und wo nicht.",
     "readingTimeMinutes": 8,
-    "metaTitle": "Zusatzversicherung ohne Gesundheitsprüfung: Annahme | Healio",
-    "metaDescription": "Zusatzversicherung ohne Gesundheitsprüfung gesucht? Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.",
+    "metaTitle": "Zusatzversicherung ohne Gesundheitsprüfung 2026 | Healio",
+    "metaDescription": "Zusatzversicherung ohne Gesundheitsprüfung 2026: Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.",
     "publishedAt": "2026-10-14"
   },
   {

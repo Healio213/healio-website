@@ -329,7 +329,7 @@ export const article = {
         "tone": "mint",
         "title": "Zusatzversicherung trotz Vorerkrankung",
         "text": "Wo du mit Vorgeschichte angenommen wirst und wo nicht.",
-        "to": "/ratgeber/zusatzversicherung-ohne-gesundheitsfragen",
+        "to": "/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026",
         "linkLabel": "Ratgeber lesen"
       }
     ]

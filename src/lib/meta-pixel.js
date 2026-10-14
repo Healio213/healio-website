@@ -137,7 +137,7 @@ const META_EXCLUDED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
-  '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen',
+  '/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

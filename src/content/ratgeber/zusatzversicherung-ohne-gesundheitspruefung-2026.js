@@ -11,6 +11,9 @@
  * auch mit Vorerkrankungen; Gesundheitsfragen werden gestellt, führen aber
  * nicht zur Ablehnung; laufende Behandlungen sind ausgenommen. „Sicher
  * angenommen“ nur, wo ein Beleg des Versicherers vorliegt.
+ * Franks Vorgabe 14.10.2026: exakter Suchbegriff mit 2026 in Titel, H1, URL,
+ * Beschreibung und erstem Absatz; URL /ratgeber/zusatzversicherung-ohne-
+ * gesundheitspruefung-2026.
  * Prüfskript-Ausnahme nur für diesen Slug (scripts/check-ratgeber-
  * contract.mjs, OHNE_GF_AUSNAHME): Suchfrage „Zusatzversicherung ohne
  * Gesundheitsprüfung/-fragen“ und „sicher angenommen“ in begrenzter Zahl.
@@ -38,17 +41,17 @@
  * meta-pixel.js, api/meta-events.js), weil Leser Vorerkrankungen mitbringen.
  */
 export const article = {
-  slug: 'zusatzversicherung-ohne-gesundheitsfragen',
+  slug: 'zusatzversicherung-ohne-gesundheitspruefung-2026',
   kind: 'ratgeber',
   group: 'ambulant',
-  metaTitle: 'Zusatzversicherung ohne Gesundheitsprüfung: Annahme | Healio',
-  metaDescription: 'Zusatzversicherung ohne Gesundheitsprüfung gesucht? Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.',
+  metaTitle: 'Zusatzversicherung ohne Gesundheitsprüfung 2026 | Healio',
+  metaDescription: 'Zusatzversicherung ohne Gesundheitsprüfung 2026: Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.',
   publishedAt: '2026-10-14',
   publishedAtLabel: '14. Oktober 2026',
   readingTimeMinutes: 8,
-  listTitle: 'Zusatzversicherung ohne Gesundheitsprüfung',
+  listTitle: 'Zusatzversicherung ohne Gesundheitsprüfung 2026',
   listTeaser: 'Trotz Vorerkrankung angenommen werden: wo das bei den Tarifen von Healio klappt und wo nicht.',
-  headline: 'Zusatzversicherung ohne Gesundheitsprüfung: So wirst du trotzdem sicher angenommen',
+  headline: 'Zusatzversicherung ohne Gesundheitsprüfung 2026: So wirst du trotzdem sicher angenommen',
   author: 'frank-steinfurt',
   toc: 'auto',
   faqStyle: 'accordion',
@@ -60,10 +63,10 @@ export const article = {
       { value: 'Gesundheitsfragen', label: 'werden gestellt, Vorerkrankungen über feste Zuschläge' },
       { value: 'Ab Beginn', label: 'nur neue Fälle, laufende Behandlungen bleiben draußen' }
     ],
-    text: 'Wer eine Zusatzversicherung ohne Gesundheitsprüfung sucht, will vor allem eins: angenommen werden. Im ambulanten Tarif der SDK klappt das. Du beantwortest Gesundheitsfragen, Vorerkrankungen versichert die SDK über feste Zuschläge mit. Eine Ablehnung gibt es dort laut SDK nicht.',
+    text: 'Wer eine „Krankenzusatzversicherung ohne Gesundheitsfragen“ sucht, will vor allem eins: angenommen werden. Im ambulanten Tarif der SDK klappt das. Du beantwortest Gesundheitsfragen, Vorerkrankungen versichert die SDK über feste Zuschläge mit. Eine Ablehnung gibt es dort laut SDK nicht.',
     path: { to: '/ambulant#tarifwahl', text: 'Beitrag nach Alter und Stufe ausrechnen', label: 'Zum ambulanten Rechner' }
   },
-  lead: 'Wer „Krankenzusatzversicherung ohne Gesundheitsfragen“ googelt, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum eine schon laufende Behandlung in keinem neuen Vertrag steckt.',
+  lead: 'Wer 2026 eine Zusatzversicherung ohne Gesundheitsprüfung sucht, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum eine schon laufende Behandlung in keinem neuen Vertrag steckt.',
   sections: [
     {
       id: 'suchfrage',

@@ -159,6 +159,11 @@
       "statusCode": 301
     },
     {
+      "source": "/ratgeber/zusatzversicherung-ohne-gesundheitsfragen",
+      "destination": "/ratgeber/zusatzversicherung-ohne-gesundheitspruefung-2026",
+      "statusCode": 301
+    },
+    {
       "source": "/blog/osteopathie-krankenkasse-2026",
       "destination": "/ratgeber/osteopathie-krankenkasse",
       "statusCode": 301
