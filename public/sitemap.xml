@@ -332,6 +332,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://healio.de/ratgeber/krankenzusatzversicherung-vergleichen</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://healio.de/ratgeber/zahnersatz-kosten</loc>
     <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
@@ -602,6 +608,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://healio.de/ratgeber/zahnreinigung-krankenkasse</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://healio.de/ratgeber/heilpraktiker-kosten</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -730,6 +742,12 @@
   <url>
     <loc>https://healio.de/ratgeber/mobil-krankenkasse-osteopathie</loc>
     <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://healio.de/ratgeber/zusatzversicherung-ohne-gesundheitsfragen</loc>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

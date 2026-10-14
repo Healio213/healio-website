@@ -435,6 +435,17 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "krankenzusatzversicherung-vergleichen",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenzusatzversicherung vergleichen",
+    "listTeaser": "Leistung, Grenzen, Wartezeit, Gesundheitsfragen und Beitrag: worauf es beim Vergleich wirklich ankommt.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Krankenzusatzversicherung vergleichen: die Kriterien | Healio",
+    "metaDescription": "Krankenzusatzversicherung vergleichen: Welche Kriterien zählen, welcher Baustein zuerst passt und wie dein Kassenbonus den Beitrag mittragen kann.",
+    "publishedAt": "2026-10-14"
+  },
+  {
     "slug": "zahnersatz-kosten",
     "kind": "ratgeber",
     "group": "zaehne",
@@ -954,6 +965,17 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-07"
   },
   {
+    "slug": "zahnreinigung-krankenkasse",
+    "kind": "ratgeber",
+    "group": "zaehne",
+    "listTitle": "Zahnreinigung: Was zahlt die Krankenkasse?",
+    "listTeaser": "Regelleistung, Satzungszuschuss oder Bonus: was die großen Kassen zur professionellen Zahnreinigung geben.",
+    "readingTimeMinutes": 7,
+    "metaTitle": "Zahnreinigung: Was zahlt die Krankenkasse? | Healio",
+    "metaDescription": "Zahnreinigung und Krankenkasse: Was TK, BARMER, DAK, AOK und IKK classic laut Satzung zur PZR zahlen, wie du den Zuschuss bekommst und was ein Zahntarif leistet.",
+    "publishedAt": "2026-10-14"
+  },
+  {
     "slug": "heilpraktiker-kosten",
     "kind": "ratgeber",
     "group": "ambulant",
@@ -1199,6 +1221,17 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Mobil Krankenkasse: Osteopathie und Zuschuss | Healio",
     "metaDescription": "Mobil erstattet Osteopathie unter Satzungsbedingungen: drei Sitzungen bis 60 EUR im gemeinsamen Jahrestopf. Prüfe Verordnung, Qualifikation und Frist.",
     "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "zusatzversicherung-ohne-gesundheitsfragen",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Zusatzversicherung ohne Ablehnung",
+    "listTeaser": "Was hinter der Suche nach Tarifen ohne Fragen steckt und welche Tarife Vorerkrankte trotzdem aufnehmen.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Zusatzversicherung „ohne Gesundheitsfragen“? Was gilt | Healio",
+    "metaDescription": "Zusatzversicherung „ohne Gesundheitsfragen“: Was Tarife wirklich fragen, wo es keine Ablehnung gibt und warum laufende Behandlungen nicht versichert sind.",
+    "publishedAt": "2026-10-14"
   },
   {
     "slug": "stationaere-zusatzversicherung",

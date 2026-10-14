@@ -146,6 +146,7 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-familie',
   '/ratgeber/zahnzusatzversicherung-kieferorthopaedie',
   '/ratgeber/zahnzusatzversicherung-kinder',
+  '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
   '/ratgeber/zuzahlungsbefreiung',

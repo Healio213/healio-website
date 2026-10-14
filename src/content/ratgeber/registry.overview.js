@@ -26,7 +26,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Wie Kassenbonus, Beiträge, Zuzahlung und Wechsel zusammenhängen. Mit Voraussetzungen, Quellen und den Grenzen der Zuschusswege.",
       "icon": "bonus",
       "hubSlug": "bonusprogramm-krankenkasse",
-      "total": 36,
+      "total": 37,
       "entries": [
         {
           "slug": "bonusprogramm-krankenkasse",
@@ -84,7 +84,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was die Kasse beim Zahnarzt zahlt, was an dir hängen bleibt und wann eine Zahnzusatzversicherung hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "dental",
       "hubSlug": "zahnersatz-kosten",
-      "total": 45,
+      "total": 46,
       "entries": [
         {
           "slug": "zahnersatz-kosten",
@@ -143,7 +143,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was Heilpraktiker, Osteopathie, Akupunktur und Physiotherapie kosten, was die Kasse dazugibt und wann ein ambulanter Tarif hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "naturopathy",
       "hubSlug": "heilpraktiker-kosten",
-      "total": 22,
+      "total": 23,
       "entries": [
         {
           "slug": "heilpraktiker-kosten",

@@ -353,6 +353,14 @@ export const article = {
         "linkLabel": "Ratgeber lesen"
       },
       {
+        "icon": "comparison",
+        "tone": "sky",
+        "title": "Krankenzusatzversicherung vergleichen",
+        "text": "Die Kriterien und wie der Bonus den Beitrag mitträgt.",
+        "to": "/ratgeber/krankenzusatzversicherung-vergleichen",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
         "icon": "bonus",
         "tone": "mint",
         "title": "DAK Bonusprogramm 2026: Wie nutzt du die Punkte?",

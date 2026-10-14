@@ -97,7 +97,8 @@ export const RATGEBER_GROUPS = [
       "barmer-zuzahlungsbefreiung",
       "zuzahlungsbefreiung-rentner",
       "bkk-firmus-bonusprogramm-2026",
-      "krankenkasse-wechseln-rentner"
+      "krankenkasse-wechseln-rentner",
+      "krankenzusatzversicherung-vergleichen"
     ]
   },
   {
@@ -151,7 +152,8 @@ export const RATGEBER_GROUPS = [
       "zahnspange-erwachsene",
       "unsichtbare-zahnspange-kosten",
       "zahnzusatzversicherung-kieferorthopaedie",
-      "zahnzusatzversicherung-familie"
+      "zahnzusatzversicherung-familie",
+      "zahnreinigung-krankenkasse"
     ]
   },
   {
@@ -182,7 +184,8 @@ export const RATGEBER_GROUPS = [
       "heilpraktiker-zusatzversicherung-ohne-wartezeit",
       "barmer-osteopathie",
       "tk-heilpraktiker",
-      "mobil-krankenkasse-osteopathie"
+      "mobil-krankenkasse-osteopathie",
+      "zusatzversicherung-ohne-gesundheitsfragen"
     ]
   },
   {

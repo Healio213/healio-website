@@ -417,6 +417,14 @@ export const article = {
         "text": "Wie oft zur professionellen Zahnreinigung? Befund, Kontrolltermin und Kassenleistung unterscheiden und Kosten für den gewählten Abstand prüfen.",
         "to": "/ratgeber/zahnreinigung-wie-oft",
         "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "dental",
+        "tone": "sky",
+        "title": "Zahnreinigung: Was zahlt die Krankenkasse?",
+        "text": "Regelleistung, Satzungszuschuss und Bonus der großen Kassen.",
+        "to": "/ratgeber/zahnreinigung-krankenkasse",
+        "linkLabel": "Ratgeber lesen"
       }
     ]
   },

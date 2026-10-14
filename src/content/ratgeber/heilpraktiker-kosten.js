@@ -323,6 +323,14 @@ export const article = {
         "text": "Naturheilkunde verständlich erklärt: Arzt und Heilpraktiker unterscheiden, Kosten klären und Kassenleistungen sowie Tarifgrenzen prüfen.",
         "to": "/ratgeber/naturheilkunde",
         "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "document",
+        "tone": "mint",
+        "title": "Zusatzversicherung ohne Ablehnung",
+        "text": "Was hinter der Suche nach Tarifen ohne Fragen steckt.",
+        "to": "/ratgeber/zusatzversicherung-ohne-gesundheitsfragen",
+        "linkLabel": "Ratgeber lesen"
       }
     ]
   },
