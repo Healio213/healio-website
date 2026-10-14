@@ -32,7 +32,7 @@ const COPY = {
     body: 'For targeted health checks, ARAG V100 is a separate route to assess: up to EUR 1,000 for screening in a fixed benefit catalogue, such as a comprehensive health check, ultrasound of internal organs, lung checks and cancer screening.',
     benefit: '100% of eligible remaining costs · up to EUR 1,000 for screening over two consecutive calendar years',
     vaccine: 'Vaccinations: a separate EUR 200 limit over the same period',
-    note: 'No health questions · 3-month general waiting period. Use statutory benefits first. Benefit catalogue and policy terms apply.',
+    note: 'No rejection due to pre-existing conditions · 3-month general waiting period. Use statutory benefits first. Benefit catalogue and policy terms apply.',
     cta: 'Request my V100 quote',
     destination: 'Start with your first name and email. We personally guide your quote and application.',
     checksTitle: 'Which checks are eligible?',
