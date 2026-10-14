@@ -201,12 +201,12 @@
     {
       "source": "/blog/zahnzusatzversicherung-trotz-angeratener-behandlung",
       "destination": "/ratgeber/zahnzusatzversicherung-laufende-behandlung",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/en/blog/zahnzusatzversicherung-trotz-angeratener-behandlung",
       "destination": "/ratgeber/zahnzusatzversicherung-laufende-behandlung",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/en/blog/:slug",
