@@ -327,8 +327,8 @@ export const article = {
       {
         "icon": "document",
         "tone": "mint",
-        "title": "Zusatzversicherung ohne Ablehnung",
-        "text": "Was hinter der Suche nach Tarifen ohne Fragen steckt.",
+        "title": "Zusatzversicherung trotz Vorerkrankung",
+        "text": "Wo du mit Vorgeschichte angenommen wirst und wo nicht.",
         "to": "/ratgeber/zusatzversicherung-ohne-gesundheitsfragen",
         "linkLabel": "Ratgeber lesen"
       }

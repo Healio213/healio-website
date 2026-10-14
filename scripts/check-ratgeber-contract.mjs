@@ -1149,7 +1149,7 @@ const SERIEN_ZIELBEGRIFFE = {
   "homoeopathie-krankenkasse-2027": new RegExp("(?=.*homöopathie)(?=.*2027)", 'i'),
   "vorsorgeuntersuchungen-kinder": new RegExp("(?=.*vorsorgeuntersuchungen)(?=.*kind)", 'i'),
   // SEO-Umsetzung Thema C, neue Ratgeber (14.10.2026)
-  'zusatzversicherung-ohne-gesundheitsfragen': /zusatzversicherung (?:ohne ablehnung|„ohne gesundheitsfragen“)/i,
+  'zusatzversicherung-ohne-gesundheitsfragen': /zusatzversicherung ohne gesundheitsprüfung/i,
   'krankenzusatzversicherung-vergleichen': /krankenzusatzversicherung vergleichen/i,
   'zahnreinigung-krankenkasse': /zahnreinigung.*krankenkasse/i,
 
@@ -1207,8 +1207,12 @@ const satzUm = (text, index) => {
 };
 
 // Eng begrenzte Ausnahme vom Sperrwort „ohne Gesundheitsfragen“, siehe Schleife unten.
-const OHNE_GF_AUSNAHME = { slug: 'zusatzversicherung-ohne-gesundheitsfragen', zitat: /„[^„“\n]{0,60}?ohne Gesundheitsfragen“/g };
-expect(SERIEN_SPERRWORTE.test('Wir bieten ohne Gesundheitsfragen an'.replace(OHNE_GF_AUSNAHME.zitat, '')) && SERIEN_SPERRWORTE.test('„Tarif mit keine Gesundheitsfragen“'.replace(OHNE_GF_AUSNAHME.zitat, '')), 'OHNE_GF_AUSNAHME darf unzitierte Fundstellen und „keine Gesundheitsfragen“ nicht freigeben.');
+const OHNE_GF_AUSNAHME = {
+  slug: 'zusatzversicherung-ohne-gesundheitsfragen',
+  suchfrage: /„[^„“\n]{0,60}?ohne Gesundheitsfragen“|\b(?:Kranken)?[Zz]usatzversicherung ohne Gesundheits(?:prüfung|fragen)\b/g,
+  sicher: /\bsicher angenommen\b/gi,
+};
+expect(SERIEN_SPERRWORTE.test('Wir bieten ohne Gesundheitsfragen an'.replace(OHNE_GF_AUSNAHME.suchfrage, '')) && SERIEN_SPERRWORTE.test('Zusatzversicherung mit keine Gesundheitsprüfung'.replace(OHNE_GF_AUSNAHME.suchfrage, '')), 'OHNE_GF_AUSNAHME darf unzitierte Fundstellen und „keine Gesundheitsfragen“ nicht freigeben.');
 const SERIEN_ALL = Object.keys(SERIEN_ZIELBEGRIFFE);
 // SERIE_ONLY=slug1,slug2 (früher ZAHN_ONLY) prüft beim Schreiben nur die
 // genannten Seiten im Detail. Die Querprüfungen laufen immer über alle.
@@ -1384,19 +1388,24 @@ for (const slug of SERIEN_SLUGS) {
   // Elternteil und die Anmeldefrist von zwei Monaten. Für Anträge von
   // Erwachsenen bleibt die Formel gesperrt, "keine Gesundheitsprüfung" und
   // "keine/ohne Gesundheitsfragen" bleiben es überall.
-  // Einzige Ausnahme (Frank-Freigabe 14.10.2026): Im Ratgeber
-  // zusatzversicherung-ohne-gesundheitsfragen darf die Suchfrage
-  // „… ohne Gesundheitsfragen“ in deutschen Anführungszeichen stehen, weil die
-  // Seite sie aufklärt. Nur dieser Slug, nur zitiert, höchstens sechs Mal;
-  // „keine Gesundheitsfragen“ und jede unzitierte Form bleiben gesperrt.
-  const sperrText = slug === OHNE_GF_AUSNAHME.slug ? text.replace(OHNE_GF_AUSNAHME.zitat, '„Suchfrage“') : text;
-  if (slug === OHNE_GF_AUSNAHME.slug) {
-    const zitate = text.match(OHNE_GF_AUSNAHME.zitat) || [];
-    expect(zitate.length >= 1 && zitate.length <= 6, `${label}: Die Suchfrage „ohne Gesundheitsfragen“ steht zitiert ein bis sechs Mal (gefunden ${zitate.length}).`);
+  // Einzige Ausnahme (Frank-Freigabe und Präzisierung 14.10.2026): Im Ratgeber
+  // zusatzversicherung-ohne-gesundheitsfragen darf die Suchfrage stehen, die
+  // die Seite aufklärt: „(Kranken)Zusatzversicherung ohne Gesundheitsprüfung
+  // bzw. -fragen“ oder zitiert „… ohne Gesundheitsfragen“, höchstens zehn Mal,
+  // dazu „sicher angenommen“ höchstens vier Mal (belegt durch SDK-Broschüre
+  // 1.781). Nur dieser Slug; „keine Gesundheitsfragen/-prüfung“ und jede andere
+  // Form bleiben gesperrt.
+  const ausnahme = slug === OHNE_GF_AUSNAHME.slug;
+  const sperrText = ausnahme ? text.replace(OHNE_GF_AUSNAHME.suchfrage, 'Suchfrage').replace(OHNE_GF_AUSNAHME.sicher, 'angenommen') : text;
+  if (ausnahme) {
+    const fragen = text.match(OHNE_GF_AUSNAHME.suchfrage) || [];
+    const sicher = text.match(OHNE_GF_AUSNAHME.sicher) || [];
+    expect(fragen.length >= 1 && fragen.length <= 10, `${label}: Suchfrage ohne Gesundheitsprüfung/-fragen ein bis zehn Mal (gefunden ${fragen.length}).`);
+    expect(sicher.length <= 4, `${label}: „sicher angenommen“ höchstens vier Mal (gefunden ${sicher.length}).`);
   }
   const sperr = sperrText.match(SERIEN_SPERRWORTE);
   expect(!sperr, `${label}: Sperrwort im Text: "${sperr?.[0]}".`);
-  for (const match of text.matchAll(/ohne Gesundheitsprüfung/gi)) {
+  for (const match of sperrText.matchAll(/ohne Gesundheitsprüfung/gi)) {
     const context = text.slice(Math.max(0, match.index - 220), match.index);
     const sentence = satzUm(text, match.index);
     expect(
@@ -1404,7 +1413,7 @@ for (const slug of SERIEN_SLUGS) {
       `${label}: "ohne Gesundheitsprüfung" nur bei der Kindernachversicherung, mit Elternteil und Zwei-Monats-Frist im selben Satz: ${sentence.slice(0, 90)}`,
     );
   }
-  expect(!/(?<!Soziale )\bsicher/i.test(text), `${label}: Wortstamm "sicher" nicht als Versprechen.`);
+  expect(!/(?<!Soziale )\bsicher/i.test(sperrText), `${label}: Wortstamm "sicher" nicht als Versprechen.`);
   expect(!/verdient (?:an einem|am) Kassenwechsel|An einem Kassenwechsel verdient/i.test(text), `${label}: nie schreiben, ob Healio am Kassenwechsel verdient.`);
   expect(!/Zahnärzt\w* (?:erhalten|bekommen) (?:eine )?(?:Vergütung|Prämie)/i.test(text), `${label}: keine Vergütung für Zahnärzte.`);
   expect(!/Versorgungswerk/i.test(text), `${label}: "Versorgungswerk" ist gesperrt.`);

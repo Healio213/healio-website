@@ -79,8 +79,8 @@ export const article = {
         { type: 'paragraph', text: 'Im ambulanten SDK-Tarif beantwortest du Gesundheitsfragen, wirst deshalb aber grundsätzlich nicht abgelehnt. Ein Zuschlag oder ein einzelner Ausschluss ist möglich. Bei den Klinik-Tarifen SP1 und SP2 entscheidet der Versicherer die Annahme im Antrag. Bei der UKV ZahnPRIVAT haben die Fragen jeweils eigene Zeiträume.' },
         { type: 'paragraph', text: 'In jedem Baustein gilt: Was vor Versicherungsbeginn schon läuft oder angeraten ist, zahlt der neue Vertrag nicht. Wer vergleicht, während die Behandlung schon geplant ist, vergleicht deshalb oft zu spät.' },
         { type: 'segments', segments: [
-          { text: 'Was hinter der Suche nach Tarifen ohne Fragen steckt, erklärt der Ratgeber ' },
-          { text: 'Zusatzversicherung ohne Ablehnung', to: '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen' },
+          { text: 'Wo du trotz Vorerkrankung angenommen wirst, erklärt der Ratgeber ' },
+          { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/zusatzversicherung-ohne-gesundheitsfragen' },
           { text: '.' }
         ] }
       ]

@@ -1226,11 +1226,11 @@ export const RATGEBER_ENTRIES = [
     "slug": "zusatzversicherung-ohne-gesundheitsfragen",
     "kind": "ratgeber",
     "group": "ambulant",
-    "listTitle": "Zusatzversicherung ohne Ablehnung",
-    "listTeaser": "Was hinter der Suche nach Tarifen ohne Fragen steckt und welche Tarife Vorerkrankte trotzdem aufnehmen.",
+    "listTitle": "Zusatzversicherung ohne Gesundheitsprüfung",
+    "listTeaser": "Trotz Vorerkrankung angenommen werden: wo das bei den Tarifen von Healio klappt und wo nicht.",
     "readingTimeMinutes": 8,
-    "metaTitle": "Zusatzversicherung „ohne Gesundheitsfragen“? Was gilt | Healio",
-    "metaDescription": "Zusatzversicherung „ohne Gesundheitsfragen“: Was Tarife wirklich fragen, wo es keine Ablehnung gibt und warum laufende Behandlungen nicht versichert sind.",
+    "metaTitle": "Zusatzversicherung ohne Gesundheitsprüfung: Annahme | Healio",
+    "metaDescription": "Zusatzversicherung ohne Gesundheitsprüfung gesucht? Im ambulanten SDK-Tarif wirst du auch mit Vorerkrankungen sicher angenommen. Was dabei gilt.",
     "publishedAt": "2026-10-14"
   },
   {
