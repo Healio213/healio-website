@@ -1257,6 +1257,17 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-14"
   },
   {
+    "slug": "heilpraktiker-zusatzversicherung-vergleich-2026",
+    "kind": "ratgeber",
+    "group": "ambulant",
+    "listTitle": "Heilpraktiker Zusatzversicherung Vergleich 2026",
+    "listTeaser": "Bekannte ambulante Tarife nebeneinander, mit Quelle zu jedem Wert und einer Auswahlhilfe nach deinem Schwerpunkt.",
+    "readingTimeMinutes": 9,
+    "metaTitle": "Heilpraktiker Zusatzversicherung Vergleich 2026 | Healio",
+    "metaDescription": "Heilpraktiker Zusatzversicherung Vergleich 2026: acht ambulante Tarife mit Erstattung, Höchstbetrag, Wartezeit, Brille und Annahme, jeder Wert mit Quelle.",
+    "publishedAt": "2026-10-15"
+  },
+  {
     "slug": "stationaere-zusatzversicherung",
     "kind": "ratgeber",
     "group": "krankenhaus",
@@ -1700,6 +1711,17 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "AOK-Reiseimpfung: Kosten und regionale Regeln | Healio",
     "metaDescription": "AOK-Reiseimpfungen: Kostenübernahme in Bayern, Baden-Württemberg und bei PLUS prüfen. Mit Satzungsgrenzen, Unterlagen und Kostenwegen.",
     "publishedAt": "2026-10-07"
+  },
+  {
+    "slug": "vorsorge-zusatzversicherung-2026",
+    "kind": "ratgeber",
+    "group": "vorsorge",
+    "listTitle": "Vorsorge Zusatzversicherung 2026: Tarife im Vergleich",
+    "listTeaser": "Was private Tarife für Check-ups und Impfungen zahlen, wo die Anlaufstaffel bremst und welcher Tarif zu deinem Bedarf passt.",
+    "readingTimeMinutes": 8,
+    "metaTitle": "Vorsorge Zusatzversicherung 2026: Tarife im Vergleich | Healio",
+    "metaDescription": "Vorsorge Zusatzversicherung 2026: was private Tarife für Check-ups, Impfungen und Krebsfrüherkennung zahlen, mit Staffel, Wartezeit und Beitrag nebeneinander.",
+    "publishedAt": "2026-10-15"
   },
   {
     "slug": "brille-krankenkasse",

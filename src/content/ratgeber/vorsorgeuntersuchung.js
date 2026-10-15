@@ -394,6 +394,14 @@ export const article = {
         "linkLabel": "Ratgeber lesen"
       },
       {
+        "icon": "comparison",
+        "tone": "mint",
+        "title": "Vorsorge Zusatzversicherung 2026",
+        "text": "Private Tarife für Check-ups und Impfungen im Vergleich, mit Staffel und Beitrag.",
+        "to": "/ratgeber/vorsorge-zusatzversicherung-2026",
+        "linkLabel": "Zum Vergleich"
+      },
+      {
         "icon": "prevention",
         "tone": "lavender",
         "title": "Passenden Angebotsweg ansehen",

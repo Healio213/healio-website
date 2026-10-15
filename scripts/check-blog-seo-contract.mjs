@@ -52,7 +52,7 @@ assert.equal(
 // Ratgeber aufgegangen, archiviert und leiten per 301 weiter (vercel.json).
 const MERGED_INTO_RATGEBER_2026_10_14 = {
   'ikk-classic-bonus-700-euro': '/ratgeber/ikk-classic-bonusprogramm-2026',
-  'heilpraktiker-zusatzversicherung-vergleich-2026': '/ratgeber/heilpraktiker-zusatzversicherung',
+  'heilpraktiker-zusatzversicherung-vergleich-2026': '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026',
   'osteopathie-krankenkasse-2026': '/ratgeber/osteopathie-krankenkasse',
   'heilpraktiker-kosten-guide-2026': '/ratgeber/heilpraktiker-kosten',
   'heilpraktiker-kosten-bonus-finanziert': '/ratgeber/heilpraktiker-kosten',

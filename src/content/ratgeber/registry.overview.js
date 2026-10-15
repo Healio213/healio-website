@@ -143,7 +143,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Was Heilpraktiker, Osteopathie, Akupunktur und Physiotherapie kosten, was die Kasse dazugibt und wann ein ambulanter Tarif hilft. Mit Kosten, Quellen und den Grenzen.",
       "icon": "naturopathy",
       "hubSlug": "heilpraktiker-kosten",
-      "total": 23,
+      "total": 24,
       "entries": [
         {
           "slug": "heilpraktiker-kosten",
@@ -320,7 +320,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Welche Vorsorgeuntersuchungen die Kasse in welchem Alter zahlt, was privat bleibt und wann Satzungsleistungen oder ein ambulanter Tarif helfen. Mit Quellen und Stand.",
       "icon": "prevention",
       "hubSlug": "vorsorgeuntersuchung",
-      "total": 10,
+      "total": 11,
       "entries": [
         {
           "slug": "vorsorgeuntersuchung",

@@ -251,7 +251,11 @@ export const article = {
         {
           type: 'segments',
           segments: [
-            { text: 'Zum Weiterlesen: ' },
+            { text: 'Bekannte Tarife mit allen Werten nebeneinander stehen im ' },
+            { text: 'Heilpraktiker Zusatzversicherung Vergleich 2026', to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026' },
+            { text: ', reine Vorsorgetarife im Ratgeber ' },
+            { text: 'Vorsorge Zusatzversicherung 2026', to: '/ratgeber/vorsorge-zusatzversicherung-2026' },
+            { text: '. Zum Weiterlesen: ' },
             { text: 'Brillenversicherung: lohnt sie sich?', to: '/ratgeber/brillenversicherung' },
             { text: ' und, wenn du schwanger bist, ' },
             { text: 'welcher Zusatzschutz jetzt noch geht', to: '/ratgeber/schwanger-zusatzversicherung' },
@@ -342,9 +346,9 @@ export const article = {
             {
               icon: 'comparison',
               tone: 'lavender',
-              title: 'Akupunktur Kosten',
-              text: 'Wann die Kasse zahlt und was die Sitzung privat kostet.',
-              to: '/ratgeber/akupunktur-kosten',
+              title: 'Heilpraktiker Zusatzversicherung Vergleich 2026',
+              text: 'Bekannte ambulante Tarife nebeneinander, jeder Wert mit Quelle.',
+              to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026',
               linkLabel: 'Ratgeber lesen',
             },
             {

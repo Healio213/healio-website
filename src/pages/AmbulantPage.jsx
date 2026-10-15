@@ -12,6 +12,7 @@ import AmbulantConversionFlow, { AmbulantExplainerVideo, getAmbulantCompactFaqs 
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
 import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
+import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -80,6 +81,8 @@ const AmbulantPage = () => {
           <div className="hidden md:contents"><AmbulantAufEinenBlick /></div>
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
+        {/* Frank 15.10.: Verweis auf den Tarifvergleich unter allen Abschnitten. */}
+        <div className="order-[12] md:order-none"><AmbulantVergleichTeaser /></div>
       </div>
     </>
   );

@@ -146,6 +146,14 @@ export const article = {
           type: 'paragraph',
           text: 'Lies außerdem, wie der Versicherer den Begriff Naturheilverfahren abgrenzt. Die SDK trennt im Glossar zwischen klassischen Naturheilverfahren und sogenannten Außenseiterverfahren, die sie als wissenschaftlich nicht anerkannt beschreibt. Ob deine Methode erstattet wird, entscheidet am Ende der Versicherer nach seinen Bedingungen.',
         },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Wie die SDK neben Barmenia, ARAG, HanseMerkur, SIGNAL IDUNA, DKV und UKV abschneidet, zeigt der ' },
+            { text: 'Heilpraktiker Zusatzversicherung Vergleich 2026', to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026' },
+            { text: ' mit Quelle zu jedem Wert.' },
+          ],
+        },
       ],
     },
     {
@@ -330,11 +338,11 @@ export const article = {
               linkLabel: 'Ratgeber lesen',
             },
             {
-              icon: 'ambulant',
+              icon: 'comparison',
               tone: 'sky',
-              title: 'Ambulante Zusatzversicherung',
-              text: 'Was die vier Töpfe zusammen leisten und für wen sie sich eignen.',
-              to: '/ratgeber/ambulante-zusatzversicherung',
+              title: 'Heilpraktiker Zusatzversicherung Vergleich 2026',
+              text: 'Bekannte Tarife mit Erstattung, Wartezeit und Brille nebeneinander.',
+              to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026',
               linkLabel: 'Ratgeber lesen',
             },
             {

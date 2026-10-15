@@ -926,6 +926,9 @@ const OPT_IN_SLUGS = [
   'zahnzusatzversicherung-sofort-2026',
   'zahnzusatzversicherung-zahnreinigung-2026',
   'fielmann-brillenversicherung-kuendigen-2026',
+  // Tarifvergleich ambulant (15.10.2026)
+  'heilpraktiker-zusatzversicherung-vergleich-2026',
+  'vorsorge-zusatzversicherung-2026',
 
 ];
 
@@ -1160,6 +1163,9 @@ const SERIEN_ZIELBEGRIFFE = {
   'zahnzusatzversicherung-sofort-2026': /zahnzusatzversicherung sofort 2026/i,
   'zahnzusatzversicherung-zahnreinigung-2026': /zahnzusatzversicherung (?:mit )?zahnreinigung 2026/i,
   'fielmann-brillenversicherung-kuendigen-2026': /fielmann brillenversicherung kündigen 2026/i,
+  // Tarifvergleich ambulant (15.10.2026)
+  'heilpraktiker-zusatzversicherung-vergleich-2026': /heilpraktiker zusatzversicherung vergleich 2026/i,
+  'vorsorge-zusatzversicherung-2026': /vorsorge zusatzversicherung 2026/i,
 
 };
 

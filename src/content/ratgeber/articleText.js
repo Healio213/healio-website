@@ -61,6 +61,21 @@ export const collectBlockText = (blocks, parts) => {
         // der Vertragstest prüft ihn dort gesondert.
         parts.push(block.heading, block.intro);
         break;
+      case 'tarifvergleich':
+        // Tarifvergleich ambulant (15.10.2026): alle Karten stehen sichtbar
+        // im HTML, deshalb laufen auch ihre Texte durch Sperrwort-, Umlaut-
+        // und Gedankenstrichprüfung.
+        parts.push(block.heading, block.intro, block.question, block.allHint, block.note);
+        for (const criterion of block.criteria || []) parts.push(criterion.label, criterion.hint);
+        for (const row of block.rows || []) parts.push(row[1]);
+        for (const tarif of block.tarife || []) {
+          for (const [key, value] of Object.entries(tarif)) {
+            if (key !== 'id' && key !== 'healio' && typeof value === 'string') parts.push(value);
+          }
+          parts.push(tarif.quelle?.label, tarif.quelle?.stand);
+          for (const fit of Object.values(tarif.passt || {})) parts.push(fit?.[1]);
+        }
+        break;
       default:
         parts.push(block.text);
     }

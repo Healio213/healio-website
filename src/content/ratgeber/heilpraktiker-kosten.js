@@ -285,6 +285,14 @@ export const article = {
         "linkLabel": "Ratgeber lesen"
       },
       {
+        "icon": "comparison",
+        "tone": "mint",
+        "title": "Heilpraktiker Zusatzversicherung Vergleich 2026",
+        "text": "Bekannte ambulante Tarife nebeneinander, jeder Wert mit Quelle.",
+        "to": "/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026",
+        "linkLabel": "Zum Vergleich"
+      },
+      {
         "icon": "naturopathy",
         "tone": "sky",
         "title": "Akupunktur Kosten",

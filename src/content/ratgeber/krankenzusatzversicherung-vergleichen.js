@@ -100,6 +100,11 @@ export const article = {
           ],
           note: 'Quellen: healio.de/ambulant (SDK-Beiträge Stand 29.09.2026), healio.de/zahn, healio.de/stationaer, Abruf 14. Oktober 2026. Laufende oder angeratene Behandlungen sind in keinem der Tarife versichert.' },
         { type: 'paragraph', text: 'Die 3.000 EUR im ambulanten Tarif sind kein frei verfügbares Guthaben. Der Betrag verteilt sich auf 1.000 EUR für Naturheilverfahren, 500 EUR für Sehhilfen, 500 EUR für Vorsorge und 1.000 EUR für Hilfsmittel und gesetzliche Zuzahlungen, je zwei Kalenderjahre ab Versicherungsbeginn.' },
+        { type: 'segments', segments: [
+          { text: 'Wie der ambulante SDK-Tarif neben anderen bekannten Heilpraktiker-Tarifen steht, zeigt der ' },
+          { text: 'Heilpraktiker Zusatzversicherung Vergleich 2026', to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026' },
+          { text: '.' }
+        ] },
         { type: 'path', to: '/ambulant#tarifwahl', icon: 'calculator', text: 'Stufe wählen, Geburtsjahr eingeben und den Beitrag neben die Töpfe legen.', label: 'Zum ambulanten Rechner' }
       ]
     },

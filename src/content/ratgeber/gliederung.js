@@ -187,7 +187,8 @@ export const RATGEBER_GROUPS = [
       "barmer-osteopathie",
       "tk-heilpraktiker",
       "mobil-krankenkasse-osteopathie",
-      "krankenzusatzversicherung-ohne-gesundheitsfragen-2026"
+      "krankenzusatzversicherung-ohne-gesundheitsfragen-2026",
+      "heilpraktiker-zusatzversicherung-vergleich-2026"
     ]
   },
   {
@@ -254,7 +255,8 @@ export const RATGEBER_GROUPS = [
       "reiseimpfung-krankenkasse",
       "tk-hautkrebsscreening",
       "vorsorgeuntersuchungen-kinder",
-      "aok-reiseimpfung"
+      "aok-reiseimpfung",
+      "vorsorge-zusatzversicherung-2026"
     ]
   },
   {

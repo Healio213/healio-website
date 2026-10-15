@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
@@ -26,6 +26,13 @@ import {
 import { getRatgeberPath } from '@/content/ratgeber/paths';
 import { getAltersvorsorgeRelatedTitle } from '@/content/ratgeber/altersvorsorge/related';
 import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
+
+// Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
+// Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
+const AmbulantTarifvergleich = lazy(() => import('@/components/ratgeber/AmbulantTarifvergleich'));
+const TarifvergleichPlatzhalter = () => (
+  <div className="mt-10 min-h-[40rem] rounded-[1.75rem] border border-dashed border-slate-200 bg-white/60" aria-hidden="true" />
+);
 
 const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeArtikelCheck'));
 
@@ -242,6 +249,13 @@ const RatgeberBlock = ({ block }) => {
   if (block.type === 'cards') return <SwipeCards block={block} />;
   if (block.type === 'path') return <PathLink block={block} />;
   if (block.type === 'calculator') return <LazyZahnkostenRechner block={block} />;
+  if (block.type === 'tarifvergleich') {
+    return (
+      <Suspense fallback={<TarifvergleichPlatzhalter />}>
+        <AmbulantTarifvergleich block={block} />
+      </Suspense>
+    );
+  }
   if (block.type === 'table' && block.mobile === 'cards') return <ResponsiveTable block={block} />;
 
   // Ältere Tabellen ohne Kartenfassung: Wischrahmen mit stehender erster
