@@ -79,10 +79,11 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             id="hero-heading"
-            className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.75rem,9vw,2.25rem)] sm:text-[clamp(2.25rem,4.2vw,3.75rem)]'} font-extrabold leading-[1.04] tracking-[-0.035em] text-white [text-wrap:balance] md:mb-7`}
+            className={`mb-5 max-w-[21ch] font-display ${fromBonusTopic ? 'text-4xl sm:text-5xl' : 'text-[clamp(1.625rem,7.6vw,2.25rem)] sm:text-[clamp(2.25rem,4.2vw,3.75rem)]'} font-extrabold leading-[1.06] tracking-[-0.035em] text-white [text-wrap:balance] md:mb-7`}
           >
-            <span className="md:hidden">{fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : language === 'en' ? <>Up to EUR 3,000 <span className="text-[#5ee0b1]">for your health.</span></> : <>Bis zu 3.000 EUR <span className="text-[#5ee0b1]">für deine Gesundheit.</span></>}</span>
-            <span className="hidden md:inline"><HighlightText text={fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : t('hero.title')} className="text-[#5ee0b1]" /></span>
+            {/* Frank 15.10.2026: dieselbe freigegebene Überschrift auf allen Größen
+                (Nutzen zuerst). Mobil etwas kleiner gesetzt, weil sie länger ist. */}
+            {fromBonusTopic ? 'Leistungen und Beitrag. Klar im Blick.' : <HighlightText text={t('hero.title')} className="text-[#5ee0b1]" />}
           </HeroHeading>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -91,7 +92,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             className="mb-5 max-w-2xl text-base font-medium leading-7 text-slate-200 sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl"
           >
             <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : language === 'en' ? 'Four reimbursement pots for natural therapies, glasses, prevention and co-payments. Per two calendar years.' : 'Vier Erstattungstöpfe für Heilpraktiker, Brille, Vorsorge und Zuzahlungen. Je zwei Kalenderjahre.'}</span>
-            <span className="hidden md:inline">{fromBonusTopic ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.' : t('hero.subtitle')}</span>
+            <span className="hidden md:inline">{fromBonusTopic ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.' : <HighlightText text={t('hero.subtitle')} className="font-bold text-[#5ee0b1]" />}</span>
           </motion.p>
           {fromBonusTopic && (
             <p role="note" className="mb-8 max-w-2xl text-base leading-7 text-slate-200 md:mb-10">

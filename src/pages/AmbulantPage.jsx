@@ -65,7 +65,13 @@ const AmbulantPage = () => {
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
-        {/* Frank 10.10.: Film direkt unter dem Hero, vor Siegeln und Karten. */}
+        {/* Frank 15.10.2026: „Auf einen Blick“ ist die wichtigste Sektion und steht
+            auf allen Größen direkt unter dem Hero, vor dem Film. Gleiche
+            order-Stufe wie der Hero, die Quellreihenfolge entscheidet. */}
+        <div className="order-1 md:contents">
+          <AmbulantAufEinenBlick fromBonusTopic={fromBonusTopic} />
+        </div>
+        {/* Frank 10.10.: Film unter dem Einstieg, vor Siegeln und Karten. */}
         <div className="order-2 md:contents">
           <AmbulantExplainerVideo />
         </div>
@@ -73,12 +79,9 @@ const AmbulantPage = () => {
         <div className="order-3 md:contents">
           <HealioAwardsRow size="large" mobileWithIkk={!fromBonusTopic} />
         </div>
-        {/* Die Brillen-Karte bleibt mobil als konkreter Einstieg erhalten.
-            Die zusätzliche Faktenübersicht wiederholt den Hero und entfällt
-            mobil auf Franks Wunsch vom 14.10.; Desktop bleibt unverändert. */}
+        {/* Die Brillen-Karte bleibt mobil als konkreter Einstieg erhalten. */}
         <div className="order-4 md:contents">
           <AmbulantBrilleKarte />
-          <div className="hidden md:contents"><AmbulantAufEinenBlick /></div>
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
         {/* Frank 15.10.: Verweis auf den Tarifvergleich unter allen Abschnitten. */}

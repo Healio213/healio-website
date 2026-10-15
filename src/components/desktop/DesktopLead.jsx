@@ -9,6 +9,7 @@ import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 import { useLanguage } from '@/hooks/useLanguage';
 import { getDesktopLeadContent } from './desktopLeadContent';
+import HighlightText from '@/components/ui/HighlightText';
 import SceneHero, { sceneAccentClass, sceneBelow, scenePrimaryButtonClass } from './SceneHero';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
@@ -151,7 +152,8 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
     >
       <div className={showOffer && !isHome ? sceneBelow.grid : 'grid grid-cols-1 gap-6'}>
         <div className={isHome ? 'hidden' : 'min-w-0'}>
-          {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}>{copy.description}</p>}
+          {/* Frank 15.10.2026: „Unser Geheimtipp“ im Ambulant-Text hervorheben (<highlight>). */}
+          {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}><HighlightText text={copy.description} className="font-bold text-[#5ee0b1]" /></p>}
           {!isHome && <p className={sceneBelow.note}>{copy.condition}</p>}
           {!isHome && !guidedCallbackEnabled && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>

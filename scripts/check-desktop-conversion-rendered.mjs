@@ -18,7 +18,7 @@ const browser = await puppeteer.launch({ headless: true });
 const report = { desktop: [], mobile: [], breakpoints: [], navigation: [] };
 const mobileHeadlines = {
   '/': 'Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.',
-  '/ambulant': 'Warum bezahlst du Privatleistungen selbst, während dein Kassenbonus ungenutzt bleibt?',
+  '/ambulant': 'Warum zahlst du Heilpraktiker und Brille noch selbst? Bis zu 3.000 EUR zurück, ohne Wartezeit.',
   '/zahn': 'Dein Lächeln ist dein stärkstes Statussignal. Warum überlässt du es dem Kassenstandard?',
   '/stationaer': 'Wenn es um deine Gesundheit geht, sind Arztwahl und Privatsphäre keine Nebensache.',
   '/partner': 'Wie viele hochwertige Behandlungspläne verlierst du an die Angst vor dem Eigenanteil?',
