@@ -32,7 +32,7 @@ const content = {
       // Gleicher Wortlaut wie hero.title/hero.subtitle in de/ambulant.json.
       titleLead: 'Warum zahlst du Heilpraktiker und Brille noch selbst?',
       titleAccent: 'Bis zu 3.000 EUR zurück, ohne Wartezeit.',
-      description: 'Bis zu 3.000 EUR Gesundheitsbudget in zwei Kalenderjahren für Heilpraktiker, Osteopathie, Brille und Vorsorge. Keine Wartezeit, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
+      description: 'Bis zu 3.000 EUR Gesundheitsbudget in zwei Kalenderjahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und Zuzahlungen. Keine Wartezeit, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
       condition: 'SDK AP1: vier getrennte Höchstbeträge für 2 Kalenderjahre ab Versicherungsbeginn. Erstattungsfähige Kosten, Gesundheitsangaben und Tarifbedingungen gelten.',
       cta: 'Ambulantes Budget prüfen',
       hint: 'Tarifleistungen, Beitrag und persönliches Bonuspotenzial nachvollziehbar gegenüberstellen.',
@@ -114,7 +114,7 @@ const content = {
     ambulant: {
       titleLead: 'Why are you still paying for naturopaths and glasses yourself?',
       titleAccent: 'Get up to EUR 3,000 back, with no waiting period.',
-      description: 'Up to EUR 3,000 health budget over two calendar years for naturopaths (Heilpraktiker), osteopathy, glasses and preventive care. No waiting period, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
+      description: 'Up to EUR 3,000 health budget over two calendar years for naturopaths (Heilpraktiker), osteopathy, glasses, preventive care and co-payments. No waiting period, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
       condition: 'SDK AP1: four separate limits for 2 calendar years from the start of cover. Eligible expenses, health declarations and plan conditions apply.',
       cta: 'Check outpatient benefits',
       hint: 'Compare plan benefits, premiums and your own bonus potential clearly.',

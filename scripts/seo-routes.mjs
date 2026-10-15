@@ -188,7 +188,7 @@ export const seoRoutes = [
   {
     path: '/ambulant',
     title: 'Ambulante Zusatzversicherung: bis 3.000 EUR Budget | Healio',
-    description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Brille und Vorsorge. Je nach Kasse trägt dein Kassenbonus den Beitrag ganz oder zum Teil.',
+    description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Heilpraktiker, Brille, Vorsorge und Zuzahlungen. Je nach Kasse trägt dein Kassenbonus den Beitrag ganz oder zum Teil.',
     canonical: 'https://healio.de/ambulant',
     keywords: 'ambulante Zusatzversicherung, Gesundheitsbudget, Heilpraktiker Kosten, Osteopathie Erstattung, Naturheilkunde Krankenkasse, Kassenbonus Zusatzversicherung',
     lang: 'de',
@@ -611,7 +611,7 @@ export const seoRoutes = [
   {
     path: '/en/outpatient',
     title: 'Outpatient Supplementary Insurance – Up to 3,000 € Health Budget | Healio',
-    description: 'Up to 3,000 € health budget in two years for naturopathy, osteopathy and alternative medicine. Your health insurance bonus can help with the premium.',
+    description: 'Up to 3,000 € health budget in two years for naturopathy, osteopathy, glasses, prevention and co-payments. Your health insurance bonus can help with the premium.',
     canonical: 'https://healio.de/en/outpatient',
     lang: 'en',
     hreflang: { de: 'https://healio.de/ambulant', en: 'https://healio.de/en/outpatient' },
