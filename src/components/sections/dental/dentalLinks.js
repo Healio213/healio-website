@@ -2,9 +2,11 @@ import { trackEvent } from '@/lib/analytics';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 
 // Persönliche Abschluss-Links (Vermittler-Zuordnung über MAK-Nummer in der URL).
+// Bayerische seit 16.10.2026 über die Direktanbindung (Vermittlernummer 032834,
+// Links von Max Dietrichs), nicht mehr über die Fonds Finanz.
 // Die URL-Parameter werden statisch validiert. Seitenparameter, Referrer-Codes oder
 // Zahn-Check-Antworten werden nie an diese Links angehängt.
-const BAYERISCHE_RAW_URL = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
+const BAYERISCHE_RAW_URL = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=032834';
 const UKV_RAW_URL = 'https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Zahn&agentId1=180188803&agentId2=226487&insurers=37&tariffs=&customValues=e30=&contactInformation=eyJmaXJzdE5hbWUiOiJVS1YiLCJsYXN0TmFtZSI6IlVuaW9uIEtyYW5rZW52ZXJzaWNoZXJ1bmcgQUciLCJjb21wYW55IjoiIiwic3RyZWV0IjoiUGV0ZXItWmltbWVyLVN0ci4gMiIsInppcGNvZGUiOiI2NjEyMyIsImNpdHkiOiJTYWFyYnL8Y2tlbiIsIm1vYmlsZSI6IiIsImVtYWlsIjoia3JhbmtlbkBmb25kc2ZpbmFuei5kZSJ9&remarks=IiI=&defaultContact=false';
 
 // UKV-Vorsorge-Baustein auf /ambulant (Frank 05.10.2026): derselbe von der UKV
@@ -46,8 +48,8 @@ const PROVIDER_RULES = Object.freeze({
   bayerische: Object.freeze({
     hostname: 'www.diebayerische.de',
     pathname: '/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen',
-    allowedSearchParams: Object.freeze(['m', 'um']),
-    requiredSearchParams: Object.freeze({ m: '002637', um: 'MAK226487' }),
+    allowedSearchParams: Object.freeze(['m']),
+    requiredSearchParams: Object.freeze({ m: '032834' }),
   }),
   ukv: UKV_RULES,
   // Wie der Zahn-Link, nur mit tarifftypes "Ambulant" und fest gewähltem

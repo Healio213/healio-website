@@ -59,9 +59,10 @@ export const validateApplicationUrl = (value) => {
 
     if (isPersonalOfferUrl(url.toString())) return url.toString();
 
+    // Bayerische-Direktanbindung (Vermittlernummer 032834) seit 16.10.2026.
     if (url.hostname === 'www.diebayerische.de'
       && ['/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen', '/online-berechnen/krankenhauszusatzversicherung-berechnen/'].includes(url.pathname)
-      && hasOnlyParams(url, new Set(['m', 'um']), { m: '002637', um: 'MAK226487' })) {
+      && hasOnlyParams(url, new Set(['m']), { m: '032834' })) {
       return url.toString();
     }
 

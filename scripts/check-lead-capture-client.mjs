@@ -8,7 +8,7 @@ import { APPOINTMENT_BOOKING } from '../src/lib/appointmentBooking.js';
 
 // Echte Komponenten, Radix-Dialog und Router; nur Netzwerk/neue Tabs sind Stubs.
 // JSDOM lädt keine externen Ressourcen. Es gibt keinen echten Lead oder Antrag.
-const targetUrl = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=002637&um=MAK226487';
+const targetUrl = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=032834';
 const guidedRoutes = [
   ['/', 'any'], ['/en', 'any'],
   ['/ambulant', 'ambulant'], ['/en/outpatient', 'ambulant'],
@@ -567,7 +567,7 @@ test('erneute Popupblockade nach Erfassung verlangt keine zweite Eingabe oder Li
 
 test('ständig gemountetes Modal ignoriert eine alte Erfolgsantwort nach targetUrl-Wechsel', async () => {
   const h = await harness('modal', { ignoreAbort: true });
-  const nextUrl = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?um=MAK226487&m=002637';
+  const nextUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=032834';
   try {
     await h.fill(); await h.submit();
     await h.changeTarget(nextUrl);

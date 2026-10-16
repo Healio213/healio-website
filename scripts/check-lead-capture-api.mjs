@@ -16,7 +16,7 @@ const ukvUrl = constant(dentalSource, 'UKV_RAW_URL');
 const ukvAmbulantUrl = ukvUrl.replace('&tarifftypes=Zahn&', '&tarifftypes=Ambulant&').replace('&tariffs=&', '&tariffs=UKVVorsorgePRIVAT@&');
 const dkvUrl = 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487';
 const aragOfferUrl = 'https://healio.de/ambulant?angebot=arag-v100';
-const bayerischeStationaerUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=002637&um=MAK226487';
+const bayerischeStationaerUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=032834';
 const sdkUrl = (custom = {}, tariffs = '') => `https://insurances-online.levelnine.biz/?${new URLSearchParams({
   mandant: 'sdk', tarifftypes: 'Ambulant', agentId1: constant(sdkSource, 'AGENT_ID'), agentId2: '',
   insurers: constant(sdkSource, 'INSURER_ID'), tariffs, customValues: btoa(JSON.stringify(custom)),
@@ -121,7 +121,10 @@ test('bestehende SDK- und Bayerische-Stationärlinks nutzen dieselbe Erfassung m
       assert.deepEqual(JSON.parse(calls[0][1].body), body);
     }
   }
-  assert.equal(validateApplicationUrl(bayerischeStationaerUrl.replace('MAK226487', 'MAK999999')), null);
+  assert.equal(validateApplicationUrl(bayerischeStationaerUrl.replace('032834', '999999')), null);
+  // Alte Fonds-Finanz-Zuordnung wird nicht mehr angenommen.
+  assert.equal(validateApplicationUrl(`${bayerischeStationaerUrl}&um=MAK226487`), null);
+  assert.equal(validateApplicationUrl(bayerischeStationaerUrl.replace('032834', '002637')), null);
 });
 
 test('sourcePage enthält ausschließlich bekannte Pfade ohne Query, Hash und Antworten', () => {
