@@ -28,7 +28,7 @@ const ACTIVITY_DEFS = [
   { id: 'hautkrebs', cash: 10, subsidy: 30 },
   { id: 'ultraschall', cash: 10, subsidy: 30 },
   { id: 'mammographie', cash: 10, subsidy: 30 },
-  // Bis zu 15 Mutterschaftsvorsorgen sind bonusfähig (Herleitung 1.155 EUR, von Frank am 11.10.2026 bestätigt).
+  // Bis zu 15 Mutterschaftsvorsorgen sind bonusfähig (Hinweis IKK classic, 10.04.2026).
   { id: 'mutterschaft', cash: 10, subsidy: 30, countable: true, max: 15 },
   { id: 'kind', cash: 10, subsidy: 30, countable: true, max: 12 },
   { id: 'jugend', cash: 10, subsidy: 30, countable: true, max: 2 },
@@ -48,29 +48,31 @@ const ACTIVITY_DEFS = [
   { id: 'leistungsabzeichen', cash: 25, subsidy: 75, category: 'status' },
   { id: 'bmi', cash: 25, subsidy: 75, category: 'status' },
   { id: 'blutdruck', cash: 25, subsidy: 75, category: 'status' },
-  { id: 'nichtraucher', cash: 25, subsidy: 75, category: 'status' },
+  // Einen Nichtraucherstatus bonifiziert die IKK classic nicht (Infoblatt 04/2026
+  // Nr. 50 bis 53, Satzung § 34 Abs. 2 Nr. 4 e bis h); Posten am 16.10.2026 entfernt.
 ];
 
-// Schalter „Ich bin schwanger“ (Frank 11.10.2026): setzt den Korb der Satzungs-Herleitung
-// (SATZUNGSHERLEITUNG-1155-ENTWURF.md, von Frank bestätigt): 15 Mutterschaftsvorsorgen,
-// Check-up, Krebsfrüherkennung, Hautkrebs, Ultraschall, 2 Zahnvorsorgen, Zahnfrüherkennung,
-// Schutzimpfung, vier regelmäßige Aktivitäten, drei Statuswerte. Zuschuss zusammen 1.155 EUR.
+// Schalter „Ich bin schwanger“ (Frank 11.10.2026, Korb korrigiert 16.10.2026): derselbe Korb
+// wie die IKK-Kachel auf kassenboost.de, jeder Posten steht in Infoblatt 04/2026 und § 34 der
+// Satzung: 12 Mutterschaftsvorsorgen, 2 Schutzimpfungen, Check-up, Krebsfrüherkennung,
+// 2 Zahnvorsorgen, fünf regelmäßige Aktivitäten, vier Statuswerte. 385 EUR Geldbonus,
+// Zuschuss zusammen 1.155 EUR. Ultraschall (Nr. 08, Männer ab 65), Z1 bis Z6 (Bonuskonto
+// des Kindes) und Nichtraucher (kein Satzungsposten) gehören nicht hinein.
 const PREGNANT_SELECTION = {
-  mutterschaft: 15,
+  mutterschaft: 12,
+  impfung: 2,
   checkup: true,
   krebs: true,
-  hautkrebs: true,
-  ultraschall: true,
   zahn: 2,
-  zahnFrueh: 1,
-  impfung: 1,
   kurs: true,
   fitness: true,
   sport: true,
+  outdoorSport: true,
   rueckbildung: true,
+  abzeichen: true,
+  leistungsabzeichen: true,
   bmi: true,
   blutdruck: true,
-  nichtraucher: true,
 };
 
 const IKK_BONUS_2026_INFO = 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf';

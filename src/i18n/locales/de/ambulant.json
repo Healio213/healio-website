@@ -512,10 +512,6 @@
       "blutdruck": {
         "title": "Blutdruck normal",
         "desc": "Statuswert, mit Aktivität kombinieren"
-      },
-      "nichtraucher": {
-        "title": "Nichtraucherstatus",
-        "desc": "1x pro Kalenderjahr"
       }
     },
     "tip": "Starker Hebel",

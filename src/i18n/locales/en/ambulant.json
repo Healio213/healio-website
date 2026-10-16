@@ -464,10 +464,6 @@
       "blutdruck": {
         "title": "Normal blood pressure",
         "desc": "Status value, combine with activity"
-      },
-      "nichtraucher": {
-        "title": "Non-smoker status",
-        "desc": "Once per calendar year"
       }
     },
     "tip": "Strong lever",
