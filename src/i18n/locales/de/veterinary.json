@@ -5,12 +5,12 @@
     "titleHighlight": "nicht dein Kontostand.",
     "subtitle": "Wähle dein Tier und den Schutz, den du suchst. Wir prüfen OP- und Vollschutz passend zu Alter, Rasse beziehungsweise Nutzung, persönlich, verständlich und je nach Tarif.",
     "cta": "Schutz für mein Tier prüfen",
-    "microcopy": "Unverbindlich · Persönliche Rückmeldung von Healio · Noch kein Versicherungsantrag",
+    "microcopy": "Unverbindlich · persönliche Rückmeldung · keine automatische Tarifzusage",
     "heroImageAlt": "Frau mit ihrem Golden Retriever"
   },
   "trust": {
     "ariaLabel": "Vertrauen und Ablauf",
-    "broker": "Makler nach §\u00a034d GewO",
+    "broker": "Makler nach § 34d GewO",
     "personal": "Persönlich statt Vergleichsportal",
     "nonBinding": "Unverbindliche Tarifprüfung",
     "animals": "Für Hund, Katze und Pferd"
@@ -98,10 +98,22 @@
       "eyebrow": "Illustratives Beispiel Hund",
       "title": "So kann sich eine Kreuzband-OP zusammensetzen",
       "rows": {
-        "diagnostics": { "label": "Diagnostik", "value": "ca. 650 EUR" },
-        "surgery": { "label": "Operation", "value": "ca. 2.100 EUR" },
-        "anaesthesia": { "label": "Narkose & Überwachung", "value": "ca. 350 EUR" },
-        "aftercare": { "label": "Medikamente & Nachsorge", "value": "ca. 450 EUR" }
+        "diagnostics": {
+          "label": "Diagnostik",
+          "value": "ca. 650 EUR"
+        },
+        "surgery": {
+          "label": "Operation",
+          "value": "ca. 2.100 EUR"
+        },
+        "anaesthesia": {
+          "label": "Narkose & Überwachung",
+          "value": "ca. 350 EUR"
+        },
+        "aftercare": {
+          "label": "Medikamente & Nachsorge",
+          "value": "ca. 450 EUR"
+        }
       },
       "totalLabel": "Mögliche Gesamtkosten",
       "totalValue": "ca. 3.550 EUR",
@@ -124,9 +136,9 @@
     }
   },
   "form": {
-    "eyebrow": "03 · Kostenfreie Tarifprüfung",
-    "title": "Jetzt kostenfreie Tarifprüfung anfordern.",
-    "subtitle": "Wir prüfen passende Tarife für dein Tier unverbindlich und persönlich. Ein Versicherungsantrag entsteht erst nach deiner gesonderten Entscheidung.",
+    "eyebrow": "03 · Healio beauftragen",
+    "title": "Gib uns jetzt den Auftrag zur Tarifprüfung.",
+    "subtitle": "Du erlaubst Healio, deine Angaben zu prüfen und dich persönlich zu passenden Tierkranken- oder Tier-OP-Versicherungen zu beraten. Ein Versicherungsantrag entsteht erst nach deiner gesonderten Entscheidung.",
     "profileLabel": "Deine Auswahl",
     "next": {
       "eyebrow": "Was danach passiert",
@@ -162,7 +174,7 @@
     },
     "privacyPrefix": "Ich bin damit einverstanden, dass Healio meine Angaben zur Bearbeitung dieser Anfrage verarbeitet. Weitere Informationen stehen in den",
     "privacyLink": "Datenschutzhinweisen",
-    "submit": "Kostenfreie Tarifprüfung starten ➔",
+    "submit": "Healio mit Tarifprüfung beauftragen",
     "sending": "Anfrage wird gesendet …",
     "responseNote": "Kostenlos · noch kein Versicherungsantrag · persönliche Rückmeldung von Healio",
     "successTitle": "Deine Anfrage ist angekommen",
@@ -190,6 +202,14 @@
         "question": "Warum gibt es für Pferde einen eigenen Weg?",
         "answer": "Bei Pferden sind neben Alter und Gesundheitszustand auch Haltung und Nutzung wichtig. Wir behandeln Pferde deshalb nicht wie einen kopierten Hundetarif, sondern prüfen den Bedarf separat."
       },
+      "insurers": {
+        "question": "Welche Versicherer vergleicht Healio?",
+        "answer": "Für Hund und Katze prüfen wir unter anderem Uelzener, Allianz, Helvetia und AGILA, für Pferde Uelzener, Allianz, BarmeniaGothaer, GHV und R+V. Die Auswahl richtet sich nach Alter, Gesundheit und Nutzung deines Tieres. Wenn ein Anbieter nicht in Frage kommt, sagen wir dir auch das."
+      },
+      "tracker": {
+        "question": "Gibt es einen GPS-Tracker zur Versicherung dazu?",
+        "answer": "Bei der Uelzener bekommst du zur OP- oder Krankenversicherung für Hund und Katze auf Wunsch einen Tractive GPS- und Gesundheitstracker ohne Gerätepreis. Das Abo für den Tracker kostet extra, ab etwa fünf Euro im Monat bei mehrjähriger Laufzeit. Die Aktion hat keinen veröffentlichten Endtermin, deshalb bestätigen wir sie vor dem Antrag."
+      },
       "next": {
         "question": "Was passiert nach meiner Anfrage?",
         "answer": "Healio prüft deine Angaben und meldet sich persönlich mit einer Einordnung. Erst danach entscheidest du, ob du einen konkreten Antrag stellen möchtest. Die Anfrage selbst ist keine Tarifzusage."
@@ -197,5 +217,55 @@
     },
     "ctaTitle": "Dein Tier. Dein Bedarf. Jetzt sauber prüfen.",
     "ctaText": "Wähle Tier und Schutz. Den Rest ordnen wir gemeinsam ein."
+  },
+  "providers": {
+    "eyebrow": "Anbieter und Wege",
+    "title": "Mit diesen Versicherern prüfen wir deinen Schutz.",
+    "subtitle": "Healio ist Makler. Wir vergleichen über unseren Maklerpool und die Rechner der Gesellschaften, nicht über ein Vergleichsportal. Welche Tarife für dein Tier in Frage kommen, hängt von Tierart, Alter und Gesundheit ab.",
+    "animals": {
+      "dog": {
+        "label": "Hund",
+        "insurers": "Uelzener, Allianz, Helvetia, AGILA",
+        "facts": {
+          "one": "Allianz: vier Linien Basis, Smart, Komfort und Premium, OP-Limit 2.500 EUR bis unbegrenzt, Aufnahme ab der 8. Lebenswoche ohne Höchstalter, Wartezeit drei Monate, Unfall sofort.",
+          "two": "Uelzener: Erstattung unabhängig vom GOT-Satz, Jahreslimit 3.000, 6.000 EUR oder unbegrenzt, Aufnahme ab dem ersten Lebenstag ohne Höchstalter, Wartezeit 30 Tage.",
+          "three": "Helvetia und AGILA: bis zum 4-fachen GOT-Satz je nach Tarif, Altersgrenzen und Selbstbeteiligung tarifabhängig."
+        }
+      },
+      "cat": {
+        "label": "Katze",
+        "insurers": "Uelzener, Allianz, Helvetia, AGILA",
+        "facts": {
+          "one": "Allianz: OP-Limit 2.000 EUR bis unbegrenzt, Behandlung ohne OP 1.000 bis 6.000 EUR je Linie, kein Höchstalter, Wartezeit drei Monate.",
+          "two": "Uelzener: Jahreslimit 1.000, 5.000 EUR oder unbegrenzt, Freigänger und Wohnungskatze gleich versichert, Wartezeit 30 Tage.",
+          "three": "Zahn und FORL prüfen wir getrennt. Bei einigen Tarifen gelten dafür längere Wartezeiten oder eigene Bausteine."
+        }
+      },
+      "horse": {
+        "label": "Pferd",
+        "insurers": "Uelzener, Allianz, BarmeniaGothaer, GHV, R+V",
+        "facts": {
+          "one": "Uelzener und Allianz nehmen Pferde ohne Höchstaufnahmealter auf. BarmeniaGothaer bis 19 Jahre, GHV bis 16 Jahre, R+V bis 15 Jahre, jeweils OP-Schutz.",
+          "two": "Allianz: OP-Limit 7.500 EUR bis unbegrenzt. Uelzener: OP oder Vollschutz mit 15.000, 25.000 oder 50.000 EUR im Jahr, Kolik als eigener Baustein.",
+          "three": "Kolik, Chips und Röntgenbefunde, Zahn, Nutzung und Auslandsaufenthalte prüfen wir vor jeder Empfehlung einzeln."
+        }
+      }
+    },
+    "tracker": {
+      "eyebrow": "Gut zu wissen",
+      "title": "GPS- und Gesundheitstracker zum Vertrag",
+      "text": "Bei der Uelzener gibt es zur OP- oder Krankenversicherung für Hund und Katze auf Wunsch einen GPS- und Gesundheitstracker von Tractive ohne Gerätepreis dazu. Das Tracker-Abo zahlst du selbst. Mit dem Vorsorge-Baustein wird ein Teil der Abo-Kosten jährlich erstattet.",
+      "note": "Stand Oktober 2026, Bedingungen und Laufzeit der Aktion laut Anbieter. Wir bestätigen dir die aktuellen Konditionen vor dem Antrag."
+    },
+    "path": {
+      "eyebrow": "So läuft deine Anfrage",
+      "title": "Drei Schritte bis zum Antrag",
+      "steps": {
+        "request": "Du schickst uns den Prüfauftrag mit Tierart, Alter und gewünschtem Schutz. Das dauert eine Minute.",
+        "reply": "Wir melden uns innerhalb von zwei Werktagen mit einer Einordnung und, wenn du möchtest, mit konkreten Angeboten.",
+        "apply": "Den Antrag reichst du gemeinsam mit Healio beim Versicherer ein. Die Gesundheitsfragen beantwortest du selbst."
+      }
+    },
+    "stand": "Stand 18.10.2026. Angaben laut Produktunterlagen der Versicherer, Änderungen vorbehalten. Beitrag, Annahme und Leistungen hängen vom konkreten Tarif, vom Tier und von der Gesundheitsprüfung ab."
   }
 }

@@ -5,7 +5,7 @@
     "titleHighlight": "not your bank balance.",
     "subtitle": "Choose your animal and the cover you are looking for. We review surgery-only and full cover based on age, breed or use – personally, clearly and subject to the plan.",
     "cta": "Check cover for my animal",
-    "microcopy": "Non-binding · Personal response from Healio · Not an insurance application yet",
+    "microcopy": "Non-binding · personal response · no automatic promise of acceptance",
     "heroImageAlt": "Woman with her Golden Retriever"
   },
   "trust": {
@@ -22,19 +22,45 @@
     "animalQuestion": "Which animal needs cover?",
     "coverageQuestion": "What would you like to cover?",
     "animals": {
-      "dog": { "title": "Dog", "description": "Matched to age and breed" },
-      "cat": { "title": "Cat", "description": "For indoor and outdoor cats" },
-      "horse": { "title": "Horse", "description": "A separate path based on keeping and use" }
+      "dog": {
+        "title": "Dog",
+        "description": "Matched to age and breed"
+      },
+      "cat": {
+        "title": "Cat",
+        "description": "For indoor and outdoor cats"
+      },
+      "horse": {
+        "title": "Horse",
+        "description": "A separate path based on keeping and use"
+      }
     },
     "coverage": {
-      "full": { "title": "Full cover", "code": "FULL", "description": "Treatment, diagnostics and surgery – scope depends on the plan." },
-      "surgery": { "title": "Surgery cover", "code": "OP", "description": "Focused on major surgery and aftercare costs – subject to the plan." },
-      "unsure": { "title": "Not sure yet", "description": "We assess together which type of cover fits your needs." }
+      "full": {
+        "title": "Full cover",
+        "code": "FULL",
+        "description": "Treatment, diagnostics and surgery – scope depends on the plan."
+      },
+      "surgery": {
+        "title": "Surgery cover",
+        "code": "OP",
+        "description": "Focused on major surgery and aftercare costs – subject to the plan."
+      },
+      "unsure": {
+        "title": "Not sure yet",
+        "description": "We assess together which type of cover fits your needs."
+      }
     },
     "coverageHorse": {
-      "full": { "description": "Medical or full cover for treatment and surgery – subject to the horse plan." },
-      "surgery": { "description": "Protection against major surgery costs and possible aftercare – subject to the plan." },
-      "unsure": { "description": "We consider keeping, use and budget before recommending a direction." }
+      "full": {
+        "description": "Medical or full cover for treatment and surgery – subject to the horse plan."
+      },
+      "surgery": {
+        "description": "Protection against major surgery costs and possible aftercare – subject to the plan."
+      },
+      "unsure": {
+        "description": "We consider keeping, use and budget before recommending a direction."
+      }
     },
     "profile": {
       "eyebrow": "Your selection",
@@ -72,10 +98,22 @@
       "eyebrow": "Illustrative dog example",
       "title": "How cruciate ligament surgery costs can add up",
       "rows": {
-        "diagnostics": { "label": "Diagnostics", "value": "approx. EUR 650" },
-        "surgery": { "label": "Surgery", "value": "approx. EUR 2,100" },
-        "anaesthesia": { "label": "Anaesthesia & monitoring", "value": "approx. EUR 350" },
-        "aftercare": { "label": "Medication & aftercare", "value": "approx. EUR 450" }
+        "diagnostics": {
+          "label": "Diagnostics",
+          "value": "approx. EUR 650"
+        },
+        "surgery": {
+          "label": "Surgery",
+          "value": "approx. EUR 2,100"
+        },
+        "anaesthesia": {
+          "label": "Anaesthesia & monitoring",
+          "value": "approx. EUR 350"
+        },
+        "aftercare": {
+          "label": "Medication & aftercare",
+          "value": "approx. EUR 450"
+        }
       },
       "totalLabel": "Possible total cost",
       "totalValue": "approx. EUR 3,550",
@@ -98,9 +136,9 @@
     }
   },
   "form": {
-    "eyebrow": "03 · Free plan review",
-    "title": "Request your free plan review now.",
-    "subtitle": "We personally review suitable plans for your animal without obligation. An insurance application is only made after a separate decision by you.",
+    "eyebrow": "03 · Commission Healio",
+    "title": "Now commission us to review suitable plans.",
+    "subtitle": "You authorise Healio to review your information and personally advise you on suitable pet health or surgery-only cover. An insurance application is only made after a separate decision by you.",
     "profileLabel": "Your selection",
     "next": {
       "eyebrow": "What happens next",
@@ -136,7 +174,7 @@
     },
     "privacyPrefix": "I agree that Healio may process my information to handle this inquiry. More information is available in the",
     "privacyLink": "privacy notice",
-    "submit": "Start your free plan review ➔",
+    "submit": "Commission Healio to review plans",
     "sending": "Sending request …",
     "responseNote": "Free of charge · not an insurance application · personal response from Healio",
     "successTitle": "Your inquiry has arrived",
@@ -164,6 +202,14 @@
         "question": "Why do horses have a separate path?",
         "answer": "For horses, keeping and use matter alongside age and health. We therefore do not treat horse cover as a copied dog plan, but assess the need separately."
       },
+      "insurers": {
+        "question": "Which insurers does Healio compare?",
+        "answer": "For dogs and cats we review Uelzener, Allianz, Helvetia and AGILA among others, for horses Uelzener, Allianz, BarmeniaGothaer, GHV and R+V. The selection depends on your animal's age, health and use. If an insurer is not an option, we tell you that too."
+      },
+      "tracker": {
+        "question": "Does a GPS tracker come with the policy?",
+        "answer": "With Uelzener, dog and cat owners can add a Tractive GPS and health tracker to a surgery or full-cover policy at no device cost. The tracker subscription costs extra, from about five euros a month on multi-year terms. The offer has no published end date, so we confirm it before you apply."
+      },
       "next": {
         "question": "What happens after my inquiry?",
         "answer": "Healio reviews your information and responds personally with an assessment. Only then do you decide whether to submit a specific application. The inquiry itself is not a promise of cover."
@@ -171,5 +217,55 @@
     },
     "ctaTitle": "Your animal. Your needs. Check them properly.",
     "ctaText": "Choose animal and cover – we will assess the rest together."
+  },
+  "providers": {
+    "eyebrow": "Insurers and routes",
+    "title": "These are the insurers we review your cover with.",
+    "subtitle": "Healio is a broker. We compare through our broker pool and the insurers' own calculators, not through a comparison portal. Which plans qualify depends on species, age and health.",
+    "animals": {
+      "dog": {
+        "label": "Dog",
+        "insurers": "Uelzener, Allianz, Helvetia, AGILA",
+        "facts": {
+          "one": "Allianz: four lines Basis, Smart, Komfort and Premium, surgery limit 2,500 EUR to unlimited, entry from week 8 with no maximum age, three months waiting period, accidents immediately.",
+          "two": "Uelzener: reimbursement regardless of the GOT fee factor, annual limit 3,000, 6,000 EUR or unlimited, entry from day one with no maximum age, 30 days waiting period.",
+          "three": "Helvetia and AGILA: up to four times the GOT fee depending on the plan, age limits and deductible depend on the plan."
+        }
+      },
+      "cat": {
+        "label": "Cat",
+        "insurers": "Uelzener, Allianz, Helvetia, AGILA",
+        "facts": {
+          "one": "Allianz: surgery limit 2,000 EUR to unlimited, treatment without surgery 1,000 to 6,000 EUR per line, no maximum age, three months waiting period.",
+          "two": "Uelzener: annual limit 1,000, 5,000 EUR or unlimited, outdoor and indoor cats insured alike, 30 days waiting period.",
+          "three": "We review dental care and FORL separately. Some plans apply longer waiting periods or separate add-ons for them."
+        }
+      },
+      "horse": {
+        "label": "Horse",
+        "insurers": "Uelzener, Allianz, BarmeniaGothaer, GHV, R+V",
+        "facts": {
+          "one": "Uelzener and Allianz accept horses with no maximum entry age. BarmeniaGothaer up to 19 years, GHV up to 16, R+V up to 15, each for surgery cover.",
+          "two": "Allianz: surgery limit 7,500 EUR to unlimited. Uelzener: surgery or full cover with 15,000, 25,000 or 50,000 EUR per year, colic as a separate module.",
+          "three": "Colic, chips and X-ray findings, dental care, use and stays abroad are reviewed one by one before any recommendation."
+        }
+      }
+    },
+    "tracker": {
+      "eyebrow": "Good to know",
+      "title": "GPS and health tracker with the policy",
+      "text": "With Uelzener, dog and cat owners can add a Tractive GPS and health tracker to a surgery or full-cover policy at no device cost. You pay the tracker subscription yourself. With the prevention add-on, part of the subscription is reimbursed each year.",
+      "note": "As of October 2026, terms and duration of the offer as published by the insurer. We confirm the current conditions for you before you apply."
+    },
+    "path": {
+      "eyebrow": "How your request works",
+      "title": "Three steps to the application",
+      "steps": {
+        "request": "You send us the review mandate with species, age and the cover you want. It takes a minute.",
+        "reply": "We get back to you within two working days with an assessment and, if you wish, concrete offers.",
+        "apply": "You submit the application to the insurer together with Healio. You answer the health questions yourself."
+      }
+    },
+    "stand": "As of 18 October 2026. Details from the insurers' product documents, subject to change. Premium, acceptance and benefits depend on the specific plan, the animal and the health assessment."
   }
 }
