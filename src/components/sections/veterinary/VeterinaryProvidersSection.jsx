@@ -1,9 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { trackEvent } from '@/lib/analytics';
 
 const ANIMALS = ['dog', 'cat', 'horse'];
 const FACT_ROWS = ['one', 'two', 'three'];
 const PATH_STEPS = ['request', 'reply', 'apply'];
+const ONLINE_ANIMALS = ['dog', 'cat', 'horse'];
+// Uelzener Koop-Rechner über den Maklerpool Fonds Finanz (Vertriebspartner 104912), Quelle Wissenswelt 18.10.2026
+const UELZENER_ONLINE_LINKS = {
+  dog: 'https://mas.uelzener.de/econ/process/uelzenerversicherung/hunde_koop_rechner?antrag.vertriebspartner=0000104912&tprint=1&vdata=1',
+  cat: 'https://mas.uelzener.de/econ/process/uelzenerversicherung/katze_koop_rechner?antrag.vertriebspartner=0000104912&tprint=1&vdata=1',
+  horse: 'https://mas.uelzener.de/econ/process/uelzenerversicherung/pferde_koop_rechner?antrag.vertriebspartner=0000104912&tprint=1&vdata=1',
+};
 
 const VeterinaryProvidersSection = () => {
   const { t } = useTranslation('veterinary');
@@ -56,6 +64,29 @@ const VeterinaryProvidersSection = () => {
                 </li>
               ))}
             </ol>
+          </div>
+        </div>
+
+        <div id="vet-online" className="mx-auto mt-6 max-w-6xl rounded-[1.5rem] border border-[#25c990]/40 bg-[#fffdf8] px-6 py-6 shadow-[0_18px_40px_rgba(16,39,45,0.08)] sm:px-7 lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-8">
+          <div>
+            <p className="font-display text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#087451]">{t('providers.online.eyebrow')}</p>
+            <strong className="mt-2 block font-friendly text-xl font-bold text-[#10272d] sm:text-2xl">{t('providers.online.title')}</strong>
+            <p className="mt-2 text-sm leading-relaxed text-[#30484c] sm:text-base">{t('providers.online.text')}</p>
+            <p className="mt-3 text-xs leading-relaxed text-[#6f7772]">{t('providers.online.note')}</p>
+          </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3 lg:mt-0 lg:grid-cols-1">
+            {ONLINE_ANIMALS.map((animal) => (
+              <a
+                key={animal}
+                href={UELZENER_ONLINE_LINKS[animal]}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent('vet_uelzener_online_click', { animal })}
+                className="inline-flex items-center justify-center rounded-full bg-[#25c990] px-6 py-3.5 text-center font-display text-sm font-extrabold text-[#062319] shadow-[0_14px_35px_rgba(37,201,144,0.28)] transition hover:-translate-y-0.5 hover:bg-[#69e1b8] sm:text-base"
+              >
+                {t(`providers.online.buttons.${animal}`)}
+              </a>
+            ))}
           </div>
         </div>
 

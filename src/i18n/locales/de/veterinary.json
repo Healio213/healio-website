@@ -266,6 +266,17 @@
         "apply": "Den Antrag reichst du gemeinsam mit Healio beim Versicherer ein. Die Gesundheitsfragen beantwortest du selbst."
       }
     },
+    "online": {
+      "eyebrow": "Direkt online",
+      "title": "Uelzener sofort berechnen und online abschließen",
+      "text": "Du willst nicht auf unsere Rückmeldung warten? Über unseren Maklerpool Fonds Finanz kannst du die Uelzener-Tarife für Hund, Katze und Pferd direkt online berechnen und abschließen. Der Rechner öffnet sich in einem neuen Fenster.",
+      "note": "Die Strecke läuft bei der Uelzener über die Fonds Finanz Maklerservice GmbH, unseren Maklerpool. Hast du vor dem Antrag Fragen, nutze den Prüfauftrag unten, dann ordnen wir die Tarife für dein Tier ein.",
+      "buttons": {
+        "dog": "Hund berechnen",
+        "cat": "Katze berechnen",
+        "horse": "Pferd berechnen"
+      }
+    },
     "stand": "Stand 18.10.2026. Angaben laut Produktunterlagen der Versicherer, Änderungen vorbehalten. Beitrag, Annahme und Leistungen hängen vom konkreten Tarif, vom Tier und von der Gesundheitsprüfung ab."
   }
 }

@@ -266,6 +266,17 @@
         "apply": "You submit the application to the insurer together with Healio. You answer the health questions yourself."
       }
     },
+    "online": {
+      "eyebrow": "Apply online",
+      "title": "Get a Uelzener quote and apply online right away",
+      "text": "Don't want to wait for our reply? Through our broker pool Fonds Finanz you can calculate and take out Uelzener cover for dogs, cats and horses directly online. The calculator opens in a new window.",
+      "note": "The Uelzener route runs via Fonds Finanz Maklerservice GmbH, our broker pool. If you have questions before applying, use the request form below and we will assess the tariffs for your animal.",
+      "buttons": {
+        "dog": "Dog quote",
+        "cat": "Cat quote",
+        "horse": "Horse quote"
+      }
+    },
     "stand": "As of 18 October 2026. Details from the insurers' product documents, subject to change. Premium, acceptance and benefits depend on the specific plan, the animal and the health assessment."
   }
 }
