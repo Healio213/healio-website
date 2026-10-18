@@ -278,5 +278,119 @@
       }
     },
     "stand": "As of 18 October 2026. Details from the insurers' product documents, subject to change. Premium, acceptance and benefits depend on the specific plan, the animal and the health assessment."
+  },
+  "market": {
+    "eyebrow": "Market overview",
+    "title": "This is how we rank the market.",
+    "subtitle": "As a broker we compare instead of selling one plan. Here are the insurers we review for dogs, cats and horses, and why we start with Uelzener in most cases.",
+    "recommended": "Our recommendation",
+    "groups": {
+      "pets": "Dogs and cats",
+      "horse": "Horses"
+    },
+    "labels": {
+      "refund": "Reimbursement",
+      "got": "GOT fee factor",
+      "limit": "Annual limit",
+      "age": "Maximum age",
+      "waiting": "Waiting period",
+      "senior": "In old age",
+      "oplimit": "Surgery limit",
+      "full": "Full cover"
+    },
+    "pets": {
+      "uelzener": {
+        "name": "Uelzener",
+        "refund": "up to 100 percent, deductible 0, 250 or 500 EUR per year",
+        "got": "regardless of the GOT factor, including emergency service",
+        "limit": "dogs 3,000, 6,000 EUR or unlimited; cats 1,000, 5,000 EUR or unlimited",
+        "age": "none, from day one",
+        "waiting": "30 days, accidents 5 days",
+        "senior": "reimbursement rate stays, premium follows age"
+      },
+      "allianz": {
+        "name": "Allianz",
+        "refund": "up to 100 percent, deductible 0, 10 or 20 percent per invoice",
+        "got": "Basis 2x, from Smart 4x in emergencies",
+        "limit": "dogs 2,500 EUR to unlimited; cats 2,000 EUR to unlimited",
+        "age": "none, from week 8",
+        "waiting": "3 months, accidents immediately",
+        "senior": "reimbursement rate stays, premium follows age"
+      },
+      "agila": {
+        "name": "AGILA",
+        "refund": "80, 90 or 100 percent depending on the package",
+        "got": "up to 4x",
+        "limit": "dogs 3,000, 7,500 EUR or unlimited; cats 2,500, 5,000 EUR or unlimited",
+        "age": "depends on the plan, from week 8",
+        "waiting": "1 month, traffic accidents immediately",
+        "senior": "at most 80 percent from age 5 (dogs) or 8 (cats)"
+      },
+      "helvetia": {
+        "name": "Helvetia",
+        "refund": "usually 80 percent, Komfort 100 percent up to age 4",
+        "got": "2x, 3x with justification, 4x in emergency service",
+        "limit": "surgery unlimited; full cover dogs 2,500, 5,000 EUR or unlimited, cats 2,000, 4,000 EUR or unlimited",
+        "age": "none, individual review from age 9",
+        "waiting": "3 months, traffic accidents immediately",
+        "senior": "individual review from age 9"
+      }
+    },
+    "horse": {
+      "uelzener": {
+        "name": "Uelzener",
+        "age": "none, from day one",
+        "oplimit": "15,000, 25,000 or 50,000 EUR per year",
+        "got": "regardless of the GOT factor",
+        "full": "yes, own full cover or surgery plus treatment, colic as a module"
+      },
+      "allianz": {
+        "name": "Allianz",
+        "age": "none, from week 8",
+        "oplimit": "7,500, 15,000, 30,000 EUR or unlimited",
+        "got": "2x in all lines",
+        "full": "yes, treatment without surgery 1,000 to 10,000 EUR"
+      },
+      "barmenia": {
+        "name": "BarmeniaGothaer",
+        "age": "up to 19 years",
+        "oplimit": "Basis 2,500 EUR per surgery, Top and Premium without annual limit",
+        "got": "2x, Premium 4x in emergency service",
+        "full": "no, surgery cover only"
+      },
+      "ruv": {
+        "name": "R+V",
+        "age": "up to 15 years",
+        "oplimit": "maximum per surgery, Exzellent unlimited",
+        "got": "regardless of the GOT factor within the maximums",
+        "full": "no, surgery cover only"
+      },
+      "ghv": {
+        "name": "GHV",
+        "age": "up to 16 years",
+        "oplimit": "7,500, 15,000 or 50,000 EUR",
+        "got": "2x, Premium 4x in emergency service",
+        "full": "yes, Premium up to 50,000 EUR"
+      }
+    },
+    "why": {
+      "eyebrow": "Why mostly Uelzener",
+      "title": "This is why we start with Uelzener in most cases.",
+      "reasons": {
+        "one": "Reimbursement regardless of the GOT factor: even if the practice bills four times the fee, the plan pays up to the chosen limit.",
+        "two": "No maximum age and no cut in old age: the reimbursement rate stays, only the premium follows the animal's age.",
+        "three": "Calculate and apply online right away through our broker pool, without waiting for a reply.",
+        "four": "Dog and cat owners can add the GPS and health tracker on request."
+      },
+      "elseEyebrow": "To be honest",
+      "elseTitle": "When we advise differently",
+      "elseItems": {
+        "one": "Young animal, small budget: AGILA is often cheaper for surgery cover as long as the dog is under five and the cat under eight.",
+        "two": "Cat with a fixed limit: Allianz Komfort covers 8,000 EUR a year and 4,000 EUR of treatment without surgery at a similar premium.",
+        "three": "Pre-existing conditions or planned treatment: the health assessment comes first, then the recommendation, with every insurer."
+      }
+    },
+    "basis": "Selection basis: for dogs and cats we consider Uelzener, Allianz, Helvetia and AGILA, for horses also BarmeniaGothaer, GHV and R+V. We add further insurers to the review on request.",
+    "stand": "As of 18 October 2026, details from the insurers' product documents, subject to change. We show premiums only after a calculation for your animal."
   }
 }

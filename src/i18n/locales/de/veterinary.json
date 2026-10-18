@@ -278,5 +278,119 @@
       }
     },
     "stand": "Stand 18.10.2026. Angaben laut Produktunterlagen der Versicherer, Änderungen vorbehalten. Beitrag, Annahme und Leistungen hängen vom konkreten Tarif, vom Tier und von der Gesundheitsprüfung ab."
+  },
+  "market": {
+    "eyebrow": "Marktvergleich",
+    "title": "So ordnen wir den Markt ein.",
+    "subtitle": "Als Makler vergleichen wir, statt einen Tarif zu verkaufen. Hier siehst du die Anbieter, die wir für Hund, Katze und Pferd prüfen, und warum wir in den meisten Fällen mit der Uelzener starten.",
+    "recommended": "Unsere Empfehlung",
+    "groups": {
+      "pets": "Hund und Katze",
+      "horse": "Pferd"
+    },
+    "labels": {
+      "refund": "Erstattung",
+      "got": "GOT-Satz",
+      "limit": "Jahreslimit",
+      "age": "Höchstalter",
+      "waiting": "Wartezeit",
+      "senior": "Im Alter",
+      "oplimit": "OP-Limit",
+      "full": "Vollschutz"
+    },
+    "pets": {
+      "uelzener": {
+        "name": "Uelzener",
+        "refund": "bis 100 Prozent, Selbstbeteiligung 0, 250 oder 500 EUR im Jahr",
+        "got": "unabhängig vom GOT-Satz, auch im Notdienst",
+        "limit": "Hund 3.000, 6.000 EUR oder unbegrenzt; Katze 1.000, 5.000 EUR oder unbegrenzt",
+        "age": "keines, ab dem ersten Lebenstag",
+        "waiting": "30 Tage, Unfall 5 Tage",
+        "senior": "Erstattungssatz bleibt, Beitrag richtet sich nach dem Alter"
+      },
+      "allianz": {
+        "name": "Allianz",
+        "refund": "bis 100 Prozent, Selbstbeteiligung 0, 10 oder 20 Prozent je Rechnung",
+        "got": "Basis 2-fach, ab Smart 4-fach im Notfall",
+        "limit": "Hund 2.500 EUR bis unbegrenzt; Katze 2.000 EUR bis unbegrenzt",
+        "age": "keines, ab der 8. Lebenswoche",
+        "waiting": "3 Monate, Unfall sofort",
+        "senior": "Erstattungssatz bleibt, Beitrag richtet sich nach dem Alter"
+      },
+      "agila": {
+        "name": "AGILA",
+        "refund": "80, 90 oder 100 Prozent je Paket",
+        "got": "bis 4-fach",
+        "limit": "Hund 3.000, 7.500 EUR oder unbegrenzt; Katze 2.500, 5.000 EUR oder unbegrenzt",
+        "age": "je Tarif, ab der 8. Lebenswoche",
+        "waiting": "1 Monat, Verkehrsunfall sofort",
+        "senior": "ab dem 5. Lebensjahr (Hund) bzw. 8. Lebensjahr (Katze) höchstens 80 Prozent"
+      },
+      "helvetia": {
+        "name": "Helvetia",
+        "refund": "regelmäßig 80 Prozent, Komfort bis Alter 4 100 Prozent",
+        "got": "2-fach, 3-fach mit Begründung, 4-fach im Notdienst",
+        "limit": "OP unbegrenzt; Vollschutz Hund 2.500, 5.000 EUR oder unbegrenzt, Katze 2.000, 4.000 EUR oder unbegrenzt",
+        "age": "keines, ab 9 Jahren Einzelprüfung",
+        "waiting": "3 Monate, Verkehrsunfall sofort",
+        "senior": "Einzelprüfung ab 9 Jahren"
+      }
+    },
+    "horse": {
+      "uelzener": {
+        "name": "Uelzener",
+        "age": "keines, ab dem ersten Lebenstag",
+        "oplimit": "15.000, 25.000 oder 50.000 EUR im Jahr",
+        "got": "unabhängig vom GOT-Satz",
+        "full": "ja, eigener Vollschutz oder OP plus Behandlung, Kolik als Baustein"
+      },
+      "allianz": {
+        "name": "Allianz",
+        "age": "keines, ab der 8. Lebenswoche",
+        "oplimit": "7.500, 15.000, 30.000 EUR oder unbegrenzt",
+        "got": "2-fach in allen Linien",
+        "full": "ja, Behandlung ohne OP 1.000 bis 10.000 EUR"
+      },
+      "barmenia": {
+        "name": "BarmeniaGothaer",
+        "age": "bis 19 Jahre",
+        "oplimit": "Basis 2.500 EUR je OP, Top und Premium ohne Jahreslimit",
+        "got": "2-fach, Premium 4-fach im Notdienst",
+        "full": "nein, nur OP-Schutz"
+      },
+      "ruv": {
+        "name": "R+V",
+        "age": "bis 15 Jahre",
+        "oplimit": "Höchstbetrag je OP, Exzellent unbegrenzt",
+        "got": "unabhängig vom GOT-Satz innerhalb der Höchstbeträge",
+        "full": "nein, nur OP-Schutz"
+      },
+      "ghv": {
+        "name": "GHV",
+        "age": "bis 16 Jahre",
+        "oplimit": "7.500, 15.000 oder 50.000 EUR",
+        "got": "2-fach, Premium 4-fach im Notdienst",
+        "full": "ja, Premium bis 50.000 EUR"
+      }
+    },
+    "why": {
+      "eyebrow": "Warum meist Uelzener",
+      "title": "Darum starten wir in den meisten Fällen mit der Uelzener.",
+      "reasons": {
+        "one": "Erstattung unabhängig vom GOT-Satz: Auch wenn die Praxis den vierfachen Satz abrechnet, zahlt der Tarif bis zur gewählten Grenze.",
+        "two": "Kein Höchstalter und keine Kürzung im Alter: Der Erstattungssatz bleibt, nur der Beitrag richtet sich nach dem Alter.",
+        "three": "Direkt online berechnen und abschließen, über unseren Maklerpool, ohne auf eine Rückmeldung zu warten.",
+        "four": "Für Hund und Katze kommt auf Wunsch der GPS- und Gesundheitstracker dazu."
+      },
+      "elseEyebrow": "Ehrlich gesagt",
+      "elseTitle": "Wann wir anders raten",
+      "elseItems": {
+        "one": "Junges Tier, kleines Budget: AGILA ist beim OP-Schutz oft günstiger, solange der Hund jünger als fünf und die Katze jünger als acht Jahre ist.",
+        "two": "Katze mit festem Limit: Allianz Komfort deckt 8.000 EUR im Jahr und 4.000 EUR Behandlung ohne OP zu einem ähnlichen Beitrag.",
+        "three": "Vorerkrankungen oder geplante Behandlung: erst die Gesundheitsprüfung, dann die Empfehlung, bei jedem Anbieter."
+      }
+    },
+    "basis": "Auswahlgrundlage: Für Hund und Katze berücksichtigen wir Uelzener, Allianz, Helvetia und AGILA, für Pferde zusätzlich BarmeniaGothaer, GHV und R+V. Weitere Anbieter nehmen wir auf Wunsch in die Prüfung auf.",
+    "stand": "Stand 18.10.2026, Angaben laut Produktunterlagen der Versicherer, Änderungen vorbehalten. Beiträge zeigen wir erst nach einer Berechnung für dein Tier."
   }
 }

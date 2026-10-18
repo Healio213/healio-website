@@ -4,6 +4,7 @@ import SEOHead from '@/components/SEOHead';
 import VeterinaryHero from '@/components/sections/veterinary/VeterinaryHero';
 import CostAnalysisSection from '@/components/sections/veterinary/CostAnalysisSection';
 import VeterinaryProvidersSection from '@/components/sections/veterinary/VeterinaryProvidersSection';
+import VeterinaryMarketSection from '@/components/sections/veterinary/VeterinaryMarketSection';
 import TariffSelection from '@/components/sections/veterinary/TariffSelection';
 import VeterinaryTrustStrip from '@/components/sections/veterinary/VeterinaryTrustStrip';
 import VeterinaryFaq from '@/components/sections/veterinary/VeterinaryFaq';
@@ -37,6 +38,7 @@ const VeterinaryHomePage = () => {
         <TariffSelection selection={selection} onSelectionChange={setSelection} />
         <CostAnalysisSection />
         <VeterinaryProvidersSection />
+        <VeterinaryMarketSection />
         <SalesAiAssist className="bg-[#f5f0e7]" variant="pet" />
         <VeterinaryContactForm selection={selection} onSelectionChange={setSelection} />
         <VeterinaryFaq />
