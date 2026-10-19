@@ -26,12 +26,18 @@ export const normalizeKurzcheckPhone = (value) => (typeof value === 'string'
     .trim()
   : '');
 
+// Steuerzeichen und kaputte Unicode-Folgen lehnt die Datenbank ab; das Formular
+// und die Funktion fangen sie deshalb vorher ab.
+const CONTROL_CHARACTERS = /[\u0000-\u001f\u007f]/;
+export const isCleanText = (value) => typeof value === 'string' && !CONTROL_CHARACTERS.test(value) && value.isWellFormed();
+
 export const isValidKurzcheckEmail = (value) => (
-  typeof value === 'string' && value.length <= 254 && EMAIL_PATTERN.test(value)
+  isCleanText(value) && value.length >= 5 && value.length <= 254 && EMAIL_PATTERN.test(value)
 );
 
 export const isValidKurzcheckPhone = (value) => (
-  typeof value === 'string'
+  isCleanText(value)
+  && value.length <= 40
   && PHONE_PATTERN.test(value)
   && value.replace(/\D/g, '').length >= PHONE_MIN_DIGITS
 );

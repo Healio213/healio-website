@@ -19,6 +19,8 @@ import test from 'node:test';
 import {
   buildUtm, createKurzcheckHandler, EU_CHECKS, readClientKey, validateKurzcheck,
 } from '../api/kurzcheck-lead.js';
+import { createReminderHandler } from '../api/kurzcheck-erinnerung.js';
+import { logIncident, RELAY_SECRET_HEADER, RELAY_URL } from '../shared/kurzcheck-server.js';
 import { buildKurzcheckPayload, isValidKurzcheckPhone, normalizeKurzcheckPhone } from '../shared/kurzcheck.js';
 import { KURZCHECK_ENDPOINT, META_CHECKS } from '../src/content/meta-checks.js';
 import { buildKurzcheckRequest } from '../src/lib/kurzcheck-request.js';
@@ -73,9 +75,11 @@ const okResponse = { ok: true, status: 204, json: async () => null };
 
 const setup = ({ env = environment, reply = okResponse, ...options } = {}) => {
   const calls = [];
+  const logs = [];
   let counter = 0;
   const handler = createKurzcheckHandler({
     environment: env,
+    logger: { error: (line) => logs.push(line) },
     fetchImpl: async (url, init) => {
       calls.push({ url, init, body: JSON.parse(init.body) });
       if (reply instanceof Error) throw reply;
@@ -89,7 +93,7 @@ const setup = ({ env = environment, reply = okResponse, ...options } = {}) => {
     await handler(req, res);
     return res;
   };
-  return { calls, invoke };
+  return { calls, invoke, logs };
 };
 
 const PII = ['Testperson', '040 1234567', 'test@example.test', '198.51.100.7'];
@@ -295,11 +299,24 @@ test('Formularzustand wird über buildKurzcheckRequest zu einer Anfrage, die der
   assert.equal(plain.utm, null);
 });
 
+test('was die Datenbank ablehnen würde, fängt schon die Funktion ab', () => {
+  assert.equal(validateKurzcheck(payload({ email: 'a\u0000b@example.de' })).error, 'invalid_email');
+  assert.equal(validateKurzcheck(payload({ email: 'a\u001fb@example.de' })).error, 'invalid_email');
+  assert.equal(validateKurzcheck(payload({ first_name: 'Anna\ud800' })).error, 'invalid_first_name');
+  assert.equal(validateKurzcheck(payload({ phone: `+${'1'.repeat(40)}` })).error, 'invalid_phone');
+  assert.equal(validateKurzcheck(payload({ phone: '040 1234567\u0000' })).error, 'invalid_phone');
+  const wide = buildUtm(Object.fromEntries(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].map((key) => [key, '中'.repeat(200)])));
+  for (const value of Object.values(wide)) assert.ok(Buffer.byteLength(value, 'utf8') <= 200, 'utm-Wert über 200 Byte');
+  assert.ok(Buffer.byteLength(JSON.stringify(wide), 'utf8') < 1200);
+  assert.equal(buildUtm({ utm_source: 'meta\ud800' }), null);
+  assert.equal(buildUtm({ utm_source: 'ä'.repeat(150) }).utm_source.length, 100);
+});
+
 test('utm: nur die fünf Kampagnenfelder, gekürzt, ohne Klick-Kennungen', () => {
   const utm = buildUtm({ utm_source: ' meta ', utm_term: 'x'.repeat(300), fbclid: 'IwAR123', gclid: 'abc', referrer: 'https://l.instagram.com/?u=x' });
   assert.deepEqual(Object.keys(utm), ['utm_source', 'utm_term']);
   assert.equal(utm.utm_source, 'meta');
-  assert.equal(utm.utm_term.length, 200);
+  assert.equal(Buffer.byteLength(utm.utm_term, 'utf8'), 200);
   assert.equal(buildUtm(null), null);
   assert.equal(buildUtm({ fbclid: 'x' }), null);
   assert.equal(buildUtm(['utm_source']), null);
@@ -348,6 +365,7 @@ test('Datenbankbremse wird zu 429, andere Speicherfehler zu 502, ohne Personenda
   const slow = createKurzcheckHandler({
     environment,
     storageTimeoutMs: 10,
+    logger: { error: () => {} },
     fetchImpl: (url, init) => new Promise((resolve, reject) => {
       init.signal.addEventListener('abort', () => reject(new Error('aborted')));
     }),
@@ -358,48 +376,136 @@ test('Datenbankbremse wird zu 429, andere Speicherfehler zu 502, ohne Personenda
   assert.deepEqual(slowRes.body, { error: 'storage_timeout' });
 });
 
-test('ohne KURZCHECK_NOTIFY_BREVO_KEY geht keine Benachrichtigung hinaus', async () => {
-  for (const key of [undefined, '', '   ', 'schluessel\nmit-umbruch']) {
-    const { calls, invoke } = setup({ env: { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: key } });
+const RELAY_ENV = {
+  ...environment,
+  KURZCHECK_NOTIFY_WEBHOOK_URL: RELAY_URL,
+  KURZCHECK_NOTIFY_WEBHOOK_SECRET: 'synthetic-relay-secret-0123456789abcdef',
+};
+const relayAccepted = { ok: true, status: 200, json: async () => ({ accepted: true }) };
+const routes = (overrides = {}) => (url) => {
+  if (url === RELAY_URL) return overrides.relay ?? relayAccepted;
+  if (url.endsWith('/rpc/record_kurzcheck_notification')) return overrides.record ?? okResponse;
+  return overrides.storage ?? okResponse;
+};
+const byUrl = (calls, part) => calls.filter(({ url }) => url.includes(part));
+const FORBIDDEN_OUT = ['testperson', '040 1234567', 'test@example.test', '198.51.100.7', 'schwanger', 'vorsorge', 'klinikschutz', 'ikk', 'kasse', 'utm', 'meta'];
+const assertClean = (value, label) => {
+  const text = JSON.stringify(value).toLowerCase();
+  for (const word of FORBIDDEN_OUT) assert.ok(!text.includes(word), `${label} enthält ${word}`);
+};
+
+test('ohne eingerichteten Weiterleiter geht kein Hinweis hinaus, die Anfrage ist trotzdem gespeichert', async () => {
+  for (const env of [environment, { ...RELAY_ENV, KURZCHECK_NOTIFY_WEBHOOK_URL: 'https://n8n.example.test/webhook/x' }, { ...RELAY_ENV, KURZCHECK_NOTIFY_WEBHOOK_SECRET: 'kurz' }]) {
+    const { calls, invoke } = setup({ env, reply: routes() });
     assert.equal((await invoke()).code, 200);
-    assert.equal(calls.length, 1, String(key));
-    assert.ok(!calls.some(({ url }) => url.includes('brevo')));
+    assert.equal(calls.length, 1);
+    assert.match(calls[0].url, /rpc\/submit_kurzcheck_lead$/);
   }
 });
 
-test('Benachrichtigung über Brevo enthält nur Kennung, Fassung und Eingang', async () => {
+test('Eingang: erst speichern, dann Hinweis über den eigenen Weiterleiter, dann Vermerk in der Datenbank', async () => {
   const receivedAt = Date.UTC(2026, 10, 3, 13, 3);
-  const { calls, invoke } = setup({ env: { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: 'synthetic-brevo-key' }, now: () => receivedAt });
+  const { calls, invoke, logs } = setup({ env: RELAY_ENV, reply: routes(), now: () => receivedAt });
   const res = await invoke(request(payload({ utm: { utm_source: 'meta', utm_campaign: 'schwangere-vorsorge-a' } })));
   assert.equal(res.code, 200);
-  assert.equal(calls.length, 2);
-  const [storage, notify] = calls;
-  assert.match(storage.url, /\/rest\/v1\/rpc\/submit_kurzcheck_lead$/);
-  assert.equal(notify.url, 'https://api.brevo.com/v3/smtp/email');
-  assert.equal(notify.init.method, 'POST');
-  assert.equal(notify.init.headers['api-key'], 'synthetic-brevo-key');
-  assert.equal(notify.init.redirect, 'error');
-  assert.deepEqual(Object.keys(notify.body).sort(), ['sender', 'subject', 'textContent', 'to']);
-  assert.deepEqual(notify.body.sender, { name: 'Healio', email: 'info@healio.de' });
-  assert.deepEqual(notify.body.to, [{ email: 'info@healio.de' }]);
-  assert.equal(notify.body.subject, 'Neue Kurzcheck-Anfrage');
-  const lead = storage.body.p_lead;
-  assert.match(notify.body.textContent, new RegExp(`Kennung: ${lead.id}`));
-  assert.match(notify.body.textContent, new RegExp(`Fassung der Einwilligung: ${schwangerschaft.consent.version}`));
-  assert.match(notify.body.textContent, /Eingang: 03\.11\.2026, 14:03 Uhr/);
-  const outgoing = JSON.stringify(notify.body).toLowerCase();
-  const forbidden = [
-    'testperson', '040 1234567', 'test@example.test', '198.51.100.7', lead.ip_hash, TOKEN,
-    'schwanger', 'vorsorge', 'klinikschutz', 'ikk', 'kasse', 'meta', 'utm', 'gesundheit', 'art. 9',
-    ...schwangerschaft.steps.flatMap((step) => step.options.map((option) => option.label.toLowerCase())),
-  ];
-  for (const value of forbidden) assert.ok(!outgoing.includes(String(value).toLowerCase()), `Benachrichtigung enthält ${value}`);
+  assert.deepEqual(calls.map(({ url }) => url.replace('https://projekt.supabase.example/rest/v1/', '')), ['rpc/submit_kurzcheck_lead', RELAY_URL, 'rpc/record_kurzcheck_notification']);
+  const [storage, relay, record] = calls;
+  assert.equal(relay.init.method, 'POST');
+  assert.equal(relay.init.redirect, 'error');
+  assert.equal(relay.init.headers[RELAY_SECRET_HEADER], RELAY_ENV.KURZCHECK_NOTIFY_WEBHOOK_SECRET);
+  assert.deepEqual(relay.body, {
+    kind: 'eingang',
+    request_id: storage.body.p_lead.id,
+    consent_version: schwangerschaft.consent.version,
+    received_at: '2026-11-03T13:03:00.000Z',
+  });
+  assertClean(relay.body, 'Hinweis');
+  assert.deepEqual(record.body, { p_token: TOKEN, p_id: storage.body.p_lead.id, p_ok: true });
+  assert.deepEqual(logs, []);
 });
 
-test('Benachrichtigungen sind je Stunde und je Tag begrenzt', async () => {
+test('scheitert der Hinweis, bleibt die Anfrage gespeichert, die Datenbank vermerkt es und das Log nennt den Fehler', async () => {
+  for (const relay of [
+    { ok: false, status: 502, json: async () => ({ accepted: false }) },
+    { ok: true, status: 200, json: async () => ({ accepted: false }) },
+    { ok: true, status: 200, json: async () => { throw new Error('kein JSON'); } },
+    new Error('Testperson test@example.test'),
+  ]) {
+    const { calls, invoke, logs } = setup({ env: RELAY_ENV, reply: (url) => { if (url === RELAY_URL && relay instanceof Error) throw relay; return routes({ relay })(url); } });
+    const res = await invoke();
+    assert.equal(res.code, 200);
+    const record = byUrl(calls, 'record_kurzcheck_notification');
+    assert.equal(record.length, 1);
+    assert.equal(record[0].body.p_ok, false);
+    assert.equal(logs.length, 1);
+    assert.equal(JSON.parse(logs[0]).event, 'kurzcheck_hinweis_fehlgeschlagen');
+    assertClean(logs, 'Log');
+    assertNoPii(res);
+  }
+});
+
+test('scheitert auch der Vermerk, steht das im Log, die Antwort bleibt 200', async () => {
+  const { invoke, logs } = setup({ env: RELAY_ENV, reply: routes({ record: { ok: false, status: 500, json: async () => ({}) } }) });
+  assert.equal((await invoke()).code, 200);
+  assert.deepEqual(logs.map((line) => JSON.parse(line)), [{ event: 'kurzcheck_hinweis_status_fehlgeschlagen', status: 500 }]);
+});
+
+test('scheitert das Speichern, warnt ein Hinweis ohne Angaben aus der Anfrage, es gibt keinen Eingangshinweis', async () => {
+  const receivedAt = Date.UTC(2026, 10, 3, 13, 3);
+  const failed = setup({ env: RELAY_ENV, now: () => receivedAt, reply: routes({ storage: { ok: false, status: 403, json: async () => ({ message: 'kurzcheck_forbidden', details: 'Testperson' }) } }) });
+  assert.equal((await failed.invoke()).code, 502);
+  const relays = byUrl(failed.calls, RELAY_URL);
+  assert.equal(relays.length, 1);
+  assert.deepEqual(relays[0].body, { kind: 'fehler', reason: 'storage_failed', status: 403, received_at: '2026-11-03T13:03:00.000Z' });
+  assert.equal(byUrl(failed.calls, 'record_kurzcheck_notification').length, 0);
+  assert.deepEqual(failed.logs.map((line) => JSON.parse(line)), [{ event: 'kurzcheck_speichern_fehlgeschlagen', status: 403 }]);
+
+  const missing = setup({ env: { ...RELAY_ENV, KURZCHECK_INGEST_TOKEN: '' }, reply: routes() });
+  assert.equal((await missing.invoke()).code, 503);
+  assert.equal(missing.calls.length, 1);
+  assert.equal(missing.calls[0].body.kind, 'fehler');
+  assert.equal(missing.calls[0].body.reason, 'not_configured');
+  assert.equal(JSON.parse(missing.logs[0]).event, 'kurzcheck_nicht_eingerichtet');
+
+  const slow = createKurzcheckHandler({
+    environment: RELAY_ENV,
+    storageTimeoutMs: 10,
+    logger: { error: () => {} },
+    fetchImpl: (url, init) => (url === RELAY_URL
+      ? Promise.resolve(relayAccepted)
+      : new Promise((resolve, reject) => init.signal.addEventListener('abort', () => reject(new Error('aborted'))))),
+  });
+  const slowRes = response();
+  await slow(request(), slowRes);
+  assert.equal(slowRes.code, 504);
+
+  const braked = setup({ env: RELAY_ENV, reply: routes({ storage: { ok: false, status: 400, json: async () => ({ message: 'kurzcheck_rate_limited' }) } }) });
+  assert.equal((await braked.invoke()).code, 429);
+  assert.equal(byUrl(braked.calls, RELAY_URL).length, 0, 'Hinweis bei Bremse');
+});
+
+test('Prüfregel-Ablehnung meldet sich anders als ein Einrichtungsfehler, Warnungen haben ein eigenes Budget', async () => {
+  const rejected = setup({ env: RELAY_ENV, reply: routes({ storage: { ok: false, status: 400, json: async () => ({ code: '23514' }) } }) });
+  assert.equal((await rejected.invoke()).code, 502);
+  assert.equal(byUrl(rejected.calls, RELAY_URL)[0].body.reason, 'storage_rejected');
+  const server = setup({ env: RELAY_ENV, reply: routes({ storage: { ok: false, status: 500, json: async () => ({}) } }) });
+  await server.invoke();
+  assert.equal(byUrl(server.calls, RELAY_URL)[0].body.reason, 'storage_failed');
+
+  // Viele Warnungen verbrauchen nicht das Budget der Eingangshinweise.
+  let failing = true;
+  const mixed = setup({ env: RELAY_ENV, reply: (url) => (failing && url.endsWith('submit_kurzcheck_lead') ? { ok: false, status: 500, json: async () => ({}) } : routes()(url)) });
+  for (let index = 0; index < 12; index += 1) await mixed.invoke(request(payload(), { 'x-forwarded-for': `10.9.0.${index + 1}` }));
+  assert.equal(byUrl(mixed.calls, RELAY_URL).length, 5, 'Warnungen je Stunde nicht begrenzt');
+  failing = false;
+  assert.equal((await mixed.invoke(request(payload(), { 'x-forwarded-for': '10.9.1.1' }))).code, 200);
+  assert.equal(byUrl(mixed.calls, RELAY_URL).filter(({ body }) => body.kind === 'eingang').length, 1, 'Eingangshinweis wegen Warnungen zurückgehalten');
+});
+
+test('Hinweise sind je Stunde und je Tag begrenzt, Zurückgehaltenes bleibt für die Erinnerung offen', async () => {
   let time = 5_000_000;
-  const { calls, invoke } = setup({ env: { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: 'synthetic-brevo-key' }, now: () => time });
-  const mails = () => calls.filter(({ url }) => url.includes('brevo')).length;
+  const { calls, invoke } = setup({ env: RELAY_ENV, reply: routes(), now: () => time });
+  const relays = () => byUrl(calls, RELAY_URL).length;
   let address = 0;
   const burst = async (count) => {
     for (let index = 0; index < count; index += 1) {
@@ -408,82 +514,158 @@ test('Benachrichtigungen sind je Stunde und je Tag begrenzt', async () => {
     }
   };
   await burst(25);
-  assert.equal(mails(), 20);
+  assert.equal(relays(), 20);
+  assert.equal(byUrl(calls, 'record_kurzcheck_notification').length, 20, 'Vermerk für zurückgehaltene Hinweise');
   time += 60 * 60 * 1000;
   await burst(25);
-  assert.equal(mails(), 40);
+  assert.equal(relays(), 40);
   time += 60 * 60 * 1000;
   await burst(5);
-  assert.equal(mails(), 40, 'Tagesgrenze überschritten');
+  assert.equal(relays(), 40, 'Tagesgrenze überschritten');
   time += 24 * 60 * 60 * 1000;
   await burst(1);
-  assert.equal(mails(), 41);
+  assert.equal(relays(), 41);
 });
 
-test('scheitert das Speichern, warnt eine Mail ohne Angaben aus der Anfrage', async () => {
-  const env = { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: 'synthetic-brevo-key' };
-  const receivedAt = Date.UTC(2026, 10, 3, 13, 3);
-  const forbidden = setup({ env, now: () => receivedAt, reply: (url) => (url.includes('brevo') ? okResponse : { ok: false, status: 403, json: async () => ({ message: 'kurzcheck_forbidden' }) }) });
-  assert.equal((await forbidden.invoke()).code, 502);
-  const [alert] = forbidden.calls.filter(({ url }) => url.includes('brevo'));
-  assert.ok(alert, 'keine Warnung');
-  assert.equal(alert.body.subject, 'Kurzcheck: Anfrage konnte nicht gespeichert werden');
-  assert.match(alert.body.textContent, /Fehler: storage_failed \(Status 403\)/);
-  assert.match(alert.body.textContent, /Zeit: 03\.11\.2026, 14:03 Uhr/);
-  const text = JSON.stringify(alert.body).toLowerCase();
-  for (const value of ['testperson', '040 1234567', 'test@example.test', '198.51.100.7', 'schwanger', 'vorsorge', 'ikk', TOKEN.toLowerCase()]) {
-    assert.ok(!text.includes(value), `Warnung enthält ${value}`);
+test('Log nimmt nur feste Ereignisnamen und Statuszahlen an', () => {
+  const lines = [];
+  const logger = { error: (line) => lines.push(line) };
+  logIncident('kurzcheck_hinweis_fehlgeschlagen', 401, logger);
+  logIncident('etwas anderes mit test@example.test', 500, logger);
+  logIncident('kurzcheck_speichern_fehlgeschlagen', 'Testperson', logger);
+  assert.deepEqual(lines.map((line) => JSON.parse(line)), [
+    { event: 'kurzcheck_hinweis_fehlgeschlagen', status: 401 },
+    { event: 'kurzcheck_speichern_fehlgeschlagen', status: null },
+  ]);
+});
+
+const n8nCode = read('docs/kurzcheck-hinweis/n8n-hinweis-code.txt');
+const runN8n = (body, data = {}) => new Function('$json', '$getWorkflowStaticData', n8nCode)({ body }, () => data)[0].json;
+const isoNow = () => new Date(Math.floor(Date.now() / 1000) * 1000).toISOString();
+
+test('n8n-Weiterleiter: nur feste Arten und Felder, feste Adressen, Mail ohne Angaben aus der Anfrage', () => {
+  const id = '0b5a7c1e-2f3d-4a8b-9c0d-1e2f3a4b5c6d';
+  const valid = [
+    { kind: 'eingang', request_id: id, consent_version: schwangerschaft.consent.version, received_at: isoNow() },
+    { kind: 'fehler', reason: 'storage_failed', status: 403, received_at: isoNow() },
+    { kind: 'fehler', reason: 'not_configured', status: null, received_at: isoNow() },
+    { kind: 'fehler', reason: 'storage_rejected', status: 400, received_at: isoNow() },
+    { kind: 'fehler', reason: 'storage_timeout', status: null, received_at: isoNow() },
+    { kind: 'erinnerung', open: 3, open_overdue: 1, unannounced: 2, received_at: isoNow() },
+    { kind: 'test', received_at: isoNow() },
+  ];
+  for (const body of valid) {
+    const result = runN8n(body);
+    assert.equal(result.ok, true, JSON.stringify(body));
+    assert.deepEqual(Object.keys(result.payload).sort(), ['sender', 'subject', 'textContent', 'to']);
+    assert.deepEqual(result.payload.sender, { name: 'Healio', email: 'info@healio.de' });
+    assert.deepEqual(result.payload.to, [{ email: 'info@healio.de', name: 'Healio' }]);
+    assert.ok(!/[–—]/.test(result.payload.textContent + result.payload.subject), 'Gedankenstrich in der Mail');
+    for (const word of ['schwanger', 'gesundheit', 'vorsorge', 'ikk', 'krankenkasse', 'utm']) {
+      assert.ok(!result.payload.textContent.toLowerCase().includes(word), `${body.kind}: ${word}`);
+    }
+  }
+  assert.match(runN8n(valid[0]).payload.textContent, new RegExp(`Kennung: ${id}`));
+  assert.match(runN8n(valid.find((body) => body.kind === 'erinnerung')).payload.textContent, /Ohne Eingangsmail: 2/);
+  const timeout = runN8n(valid.find((body) => body.reason === 'storage_timeout')).payload;
+  assert.match(timeout.subject, /Speichern unbestätigt/);
+  assert.match(timeout.textContent, /kann trotzdem gespeichert sein/);
+  assert.match(runN8n(valid.find((body) => body.reason === 'storage_rejected')).payload.textContent, /Prüfregel/);
+
+  const invalid = [
+    null, [], {}, { kind: 'unbekannt', received_at: isoNow() },
+    { ...valid[0], first_name: 'Testperson' },
+    { ...valid[0], email: 'test@example.test' },
+    { ...valid[0], request_id: 'keine-kennung' },
+    { ...valid[0], consent_version: 'schwangerschaft' },
+    { ...valid[0], received_at: '2020-01-01T00:00:00.000Z' },
+    { ...valid[0], received_at: 'gestern' },
+    { kind: 'fehler', reason: 'Testperson', status: 403, received_at: isoNow() },
+    { kind: 'erinnerung', open: '3', open_overdue: 1, unannounced: 2, received_at: isoNow() },
+    { kind: 'test', received_at: isoNow(), note: 'x' },
+  ];
+  for (const body of invalid) assert.deepEqual(runN8n(body), { ok: false, status: 400 }, JSON.stringify(body));
+
+  const data = {};
+  const testMail = valid.find((body) => body.kind === 'test');
+  for (let index = 0; index < 60; index += 1) assert.equal(runN8n(testMail, data).ok, true);
+  assert.deepEqual(runN8n(testMail, data), { ok: false, status: 429 });
+  assert.ok(!n8nCode.includes('/contacts'), 'Weiterleiter darf keine Brevo-Kontakte anlegen');
+});
+
+const REMINDER_ENV = { ...RELAY_ENV, CRON_SECRET: 'synthetic-cron-secret-0123456789abcdef' };
+const reminderRequest = (headers = {}) => ({ method: 'GET', headers: { authorization: `Bearer ${REMINDER_ENV.CRON_SECRET}`, ...headers } });
+const statusResponse = (status) => ({ ok: true, status: 200, json: async () => status });
+const reminderSetup = ({ env = REMINDER_ENV, status = { checked_at: '2026-11-03T05:00:00+00:00', open: 2, open_overdue: 1, unannounced: 1 }, relay = relayAccepted, mark = okResponse } = {}) => {
+  const calls = [];
+  const logs = [];
+  const handler = createReminderHandler({
+    environment: env,
+    now: () => Date.UTC(2026, 10, 3, 5, 0),
+    logger: { error: (line) => logs.push(line) },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init, body: JSON.parse(init.body) });
+      if (url === RELAY_URL) return relay;
+      if (url.endsWith('/rpc/kurzcheck_reminder_status')) return typeof status === 'function' ? status() : statusResponse(status);
+      if (url.endsWith('/rpc/mark_kurzcheck_reminded')) return mark;
+      throw new Error(`unerwartet: ${url}`);
+    },
+  });
+  const invoke = async (req = reminderRequest()) => { const res = response(); await handler(req, res); return res; };
+  return { calls, logs, invoke };
+};
+
+test('Erinnerung: nur mit CRON_SECRET, meldet nur Zahlen und vermerkt Nachgemeldetes', async () => {
+  assert.equal((await reminderSetup().invoke({ method: 'POST', headers: {} })).code, 405);
+  assert.equal((await reminderSetup({ env: { ...REMINDER_ENV, CRON_SECRET: '' } }).invoke()).code, 503);
+  for (const authorization of [undefined, 'Bearer falsch', `Bearer ${REMINDER_ENV.CRON_SECRET}x`, REMINDER_ENV.CRON_SECRET]) {
+    const { calls, invoke } = reminderSetup();
+    assert.equal((await invoke({ method: 'GET', headers: { authorization } })).code, 401, String(authorization));
+    assert.equal(calls.length, 0);
   }
 
-  const missing = setup({ env: { ...env, KURZCHECK_INGEST_TOKEN: '' } });
-  assert.equal((await missing.invoke()).code, 503);
-  assert.equal(missing.calls.length, 1);
-  assert.match(missing.calls[0].body.textContent, /Fehler: not_configured/);
-
-  const braked = setup({ env, reply: (url) => (url.includes('brevo') ? okResponse : { ok: false, status: 400, json: async () => ({ message: 'kurzcheck_rate_limited' }) }) });
-  assert.equal((await braked.invoke()).code, 429);
-  assert.equal(braked.calls.filter(({ url }) => url.includes('brevo')).length, 0, 'Warnung bei Bremse');
-
-  const quiet = setup({ env: { ...environment, KURZCHECK_INGEST_TOKEN: '' } });
-  assert.equal((await quiet.invoke()).code, 503);
-  assert.equal(quiet.calls.length, 0, 'ohne Brevo-Schlüssel geht nichts hinaus');
+  const { calls, logs, invoke } = reminderSetup();
+  const res = await invoke();
+  assert.equal(res.code, 200);
+  assert.deepEqual(res.body, { sent: true });
+  assert.deepEqual(calls.map(({ url }) => url.split('/').pop()), ['kurzcheck_reminder_status', 'healio-kurzcheck-hinweis', 'mark_kurzcheck_reminded']);
+  assert.deepEqual(calls[0].body, { p_token: TOKEN });
+  assert.deepEqual(calls[1].body, { kind: 'erinnerung', open: 2, open_overdue: 1, unannounced: 1, received_at: '2026-11-03T05:00:00.000Z' });
+  assert.deepEqual(calls[2].body, { p_token: TOKEN, p_until: '2026-11-03T05:00:00+00:00' });
+  assert.deepEqual(logs, []);
 });
 
-test('Ausfall der Benachrichtigung ändert nichts an der gespeicherten Anfrage', async () => {
-  const env = { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: 'synthetic-brevo-key' };
-  const thrown = setup({ env, reply: (url) => { if (url.includes('brevo')) throw new Error('Testperson test@example.test'); return okResponse; } });
-  const thrownRes = await thrown.invoke();
-  assert.equal(thrownRes.code, 200);
-  assertNoPii(thrownRes);
+test('Erinnerung: nichts offen heißt keine Mail, Fehler sind im Cron-Lauf und im Log sichtbar', async () => {
+  const quiet = reminderSetup({ status: { checked_at: '2026-11-03T05:00:00+00:00', open: 4, open_overdue: 0, unannounced: 0 } });
+  const quietRes = await quiet.invoke();
+  assert.deepEqual([quietRes.code, quietRes.body], [200, { sent: false }]);
+  assert.equal(quiet.calls.length, 1);
 
-  const rejected = setup({ env, reply: (url) => (url.includes('brevo') ? { ok: false, status: 401 } : okResponse) });
-  assert.equal((await rejected.invoke()).code, 200);
+  const overdueOnly = reminderSetup({ status: { checked_at: '2026-11-03T05:00:00+00:00', open: 1, open_overdue: 1, unannounced: 0 } });
+  assert.equal((await overdueOnly.invoke()).code, 200);
+  assert.equal(byUrl(overdueOnly.calls, 'mark_kurzcheck_reminded').length, 0);
 
-  const slow = createKurzcheckHandler({
-    environment: env,
-    notifyTimeoutMs: 10,
-    fetchImpl: (url, init) => (url.includes('brevo')
-      ? new Promise((resolve, reject) => init.signal.addEventListener('abort', () => reject(new Error('aborted'))))
-      : Promise.resolve(okResponse)),
-  });
-  const slowRes = response();
-  await slow(request(), slowRes);
-  assert.equal(slowRes.code, 200);
+  const relayDown = reminderSetup({ relay: { ok: false, status: 502, json: async () => ({ accepted: false }) } });
+  assert.equal((await relayDown.invoke()).code, 502);
+  assert.equal(byUrl(relayDown.calls, 'mark_kurzcheck_reminded').length, 0, 'als gemeldet vermerkt, obwohl die Mail scheiterte');
+  assert.deepEqual(relayDown.logs.map((line) => JSON.parse(line)), [{ event: 'kurzcheck_erinnerung_fehlgeschlagen', status: 502 }]);
+
+  const statusDown = reminderSetup({ status: () => ({ ok: false, status: 403, json: async () => ({}) }) });
+  assert.equal((await statusDown.invoke()).code, 502);
+  assert.equal(JSON.parse(statusDown.logs[0]).event, 'kurzcheck_erinnerung_fehlgeschlagen');
+
+  const broken = reminderSetup({ status: { checked_at: '2026-11-03T05:00:00+00:00', open: 'viele', open_overdue: 1, unannounced: 1 } });
+  assert.equal((await broken.invoke()).code, 502);
+
+  const unconfigured = reminderSetup({ env: { ...REMINDER_ENV, KURZCHECK_NOTIFY_WEBHOOK_SECRET: '' } });
+  assert.equal((await unconfigured.invoke()).code, 503);
+  assert.equal(JSON.parse(unconfigured.logs[0]).event, 'kurzcheck_nicht_eingerichtet');
 });
 
-test('keine Eingangsmail ohne gespeicherte Anfrage', async () => {
-  const env = { ...environment, KURZCHECK_NOTIFY_BREVO_KEY: 'synthetic-brevo-key' };
-  const failed = setup({ env, reply: (url) => (url.includes('brevo') ? okResponse : { ok: false, status: 409, json: async () => ({}) }) });
-  assert.equal((await failed.invoke()).code, 502);
-  assert.ok(!failed.calls.some(({ body }) => body.subject === 'Neue Kurzcheck-Anfrage'), 'Eingangsmail trotz Fehler');
-
-  const honeypot = setup({ env });
-  assert.equal((await honeypot.invoke(request({ ...payload(), healio_website: 'x' }))).code, 200);
-  assert.equal(honeypot.calls.length, 0);
-
-  const invalid = setup({ env });
-  assert.equal((await invalid.invoke(request(payload({ consent_health_data: false })))).code, 400);
-  assert.equal(invalid.calls.length, 0);
+test('Cron läuft einmal am Tag auf die Erinnerung (Hobby-Tarif)', () => {
+  const vercel = JSON.parse(read('vercel.json'));
+  assert.deepEqual(vercel.crons, [{ path: '/api/kurzcheck-erinnerung', schedule: '0 5 * * *' }]);
+  assert.ok(fs.existsSync(new URL('../api/kurzcheck-erinnerung.js', import.meta.url)));
 });
 
 test('Rohdaten: Strom wird gelesen, zu große oder kaputte Daten werden abgelehnt', async () => {
@@ -503,12 +685,19 @@ test('Rohdaten: Strom wird gelesen, zu große oder kaputte Daten werden abgelehn
   assert.equal(calls.length, 0);
 });
 
-test('Funktion schreibt nichts ins Log und läuft in Frankfurt', () => {
+test('Funktionen protokollieren nur über logIncident und laufen in Frankfurt', () => {
   const source = read('api/kurzcheck-lead.js');
-  assert.ok(!/\bconsole\./.test(source), 'console.* in api/kurzcheck-lead.js');
+  for (const file of ['api/kurzcheck-lead.js', 'api/kurzcheck-erinnerung.js']) {
+    assert.ok(!/\bconsole\./.test(read(file)), `console.* in ${file}`);
+  }
+  const server = read('shared/kurzcheck-server.js');
+  assert.equal((server.match(/logger\.error\(/g) || []).length, 1);
+  assert.match(server, /logger\.error\(JSON\.stringify\(\{ event, status: code \}\)\);/);
+  assert.ok(!/\bconsole\./.test(server));
   assert.ok(!/emailjs/i.test(source.replace(/weder an EmailJS/g, '')), 'EmailJS im EU-Weg');
   assert.ok(!/user[-_]agent/i.test(source), 'Browser-Kennung wird nicht gespeichert');
-  assert.ok(!/rest\/v1\/kurzcheck_leads/.test(source), 'direkter Tabellenzugriff statt Token-Schreibweg');
+  assert.ok(!/rest\/v1\/kurzcheck_leads/.test(source + read('shared/kurzcheck-server.js')), 'direkter Tabellenzugriff statt Token-Schreibweg');
+  assert.ok(!/api\.brevo\.com/.test(source + read('api/kurzcheck-erinnerung.js') + read('shared/kurzcheck-server.js')), 'Brevo direkt statt über den Weiterleiter');
   const vercel = JSON.parse(read('vercel.json'));
   assert.deepEqual(vercel.regions, ['fra1']);
 });
@@ -544,9 +733,20 @@ test('Migration: kein Direktzugriff für anon, Token-Schreibweg, Werte passend z
   assert.ok(!/create policy/i.test(code), 'Policy angelegt');
   assert.ok(!/grant [^;]*on table public\.kurzcheck_leads to (anon|authenticated)/i.test(code), 'Tabellenrecht für anon oder authenticated');
   assert.match(code, /drop policy if exists anon_insert_kurzcheck_leads on public\.kurzcheck_leads;/);
-  assert.match(code, /grant execute on function public\.submit_kurzcheck_lead\(text, jsonb\) to anon;/);
-  assert.match(code, /revoke all on function public\.submit_kurzcheck_lead\(text, jsonb\) from public, anon, authenticated;/);
+  for (const signature of ['submit_kurzcheck_lead(text, jsonb)', 'record_kurzcheck_notification(text, uuid, boolean)', 'kurzcheck_reminder_status(text)', 'mark_kurzcheck_reminded(text, timestamptz)']) {
+    const escaped = signature.replace(/[()]/g, '\\$&');
+    assert.match(code, new RegExp(`revoke all on function public\\.${escaped} from public, anon, authenticated;`), signature);
+    assert.match(code, new RegExp(`grant execute on function public\\.${escaped} to anon;`), signature);
+    const name = signature.split('(')[0];
+    const body = code.match(new RegExp(`create or replace function public\\.${name}\\([\\s\\S]*?\\n\\$\\$;`))[0];
+    assert.match(body, /begin\s+if not private\.kurzcheck_token_valid\(p_token\) then\s+raise exception 'kurzcheck_forbidden'/, `${name} prüft das Token nicht zuerst`);
+  }
+  assert.equal((code.match(/grant execute on function/g) || []).length, 4, 'weitere Funktionen für anon freigegeben');
   assert.match(code, /token\.token_sha256 = pg_catalog\.sha256\(pg_catalog\.convert_to\(p_token, 'UTF8'\)\)/);
+  const reminder = code.match(/create or replace function public\.kurzcheck_reminder_status[\s\S]*?\n\$\$;/)[0];
+  for (const column of ['first_name', 'phone', 'email', 'thema', 'kasse', 'utm', 'ip_hash']) {
+    assert.ok(!new RegExp(`\\b${column}\\b`).test(reminder), `Erinnerung liest ${column}`);
+  }
   for (const table of ['kurzcheck_ingest_tokens', 'kurzcheck_consent_proofs']) {
     assert.match(code, new RegExp(`revoke all on table private\\.${table} from public, anon, authenticated;`), table);
     assert.match(code, new RegExp(`alter table private\\.${table} force row level security;`), table);
@@ -593,7 +793,8 @@ test('Datenschutzerklärung beschreibt den EU-Weg in beiden Sprachen', () => {
   assert.match(de.kurzCheckRecipients, /Supabase Inc\.[^.]*EU-Region Frankfurt/);
   assert.match(de.kurzCheckRecipients, /Cloudflare/);
   assert.match(de.kurzCheckRecipients, /Kurzcheck Naturheilkunde senden wir über EmailJS/);
-  assert.match(de.kurzCheckRecipients, /über Brevo \(Sendinblue GmbH, Deutschland\) versenden\. Sie enthält nur eine zufällige Kennung, die Fassung Ihrer Einwilligung und den Eingangszeitpunkt, keine Angaben aus Ihrer Anfrage\./);
+  assert.match(de.kurzCheckRecipients, /Hetzner Online GmbH \(Deutschland\) über Brevo \(Sendinblue GmbH, Deutschland\) versendet\. Sie enthält nur eine zufällige Kennung, die Fassung Ihrer Einwilligung und den Eingangszeitpunkt, keine Angaben aus Ihrer Anfrage\./);
+  assert.match(de.kurzCheckRecipients, /tägliche Übersicht, die nur die Zahl offener Anfragen nennt/);
   assert.match(de.kurzCheckStorage, /Löschlauf entfernt sie nach spätestens 90 Tagen/);
   assert.match(de.kurzCheckStorage, /Haben Sie eine Telefonnummer angegeben, bewahren wir diesen Nachweis fünf Jahre auf, gerechnet ab dem Abschluss Ihrer Anfrage/);
   assert.match(de.kurzCheckStorage, /bis zum Ende des dritten Kalenderjahres auf, das auf den Abschluss Ihrer Anfrage folgt/);
@@ -610,7 +811,8 @@ test('Datenschutzerklärung beschreibt den EU-Weg in beiden Sprachen', () => {
   assert.match(de.emailJsText, /Kurzcheck Schwangerschaft läuft nicht über EmailJS/);
   assert.match(en.kurzCheckRecipients, /pregnancy check go neither through EmailJS nor through our inbox/);
   assert.match(en.kurzCheckRecipients, /Supabase Inc\.[^.]*EU region Frankfurt/);
-  assert.match(en.kurzCheckRecipients, /Brevo \(Sendinblue GmbH, Germany\)[^.]*\. It contains only a random identifier/);
+  assert.match(en.kurzCheckRecipients, /Hetzner Online GmbH \(Germany\) sends through Brevo \(Sendinblue GmbH, Germany\)\. It contains only a random identifier/);
+  assert.match(en.kurzCheckRecipients, /daily overview states only the number of open requests/);
   assert.match(en.kurzCheckStorage, /automatic deletion run removes them after 90 days/);
   assert.match(en.kurzCheckStorage, /Without a telephone number, we keep it until the end of the third calendar year/);
   assert.match(en.kurzCheckStorage, /Article 9\(2\)\(f\) GDPR/);

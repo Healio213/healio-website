@@ -21,34 +21,37 @@
  * - Angenommen werden nur Checks, deren Konfiguration diesen Weg vorsieht,
  *   nur die dort hinterlegten Antworten und nur die aktuelle
  *   Einwilligungsfassung. Unbekannte Felder führen zur Ablehnung.
- * - Benachrichtigung an info@healio.de nur, wenn KURZCHECK_NOTIFY_BREVO_KEY
- *   gesetzt ist. Die Mail enthält nur Kennung, Fassung und Eingangszeit, nie
- *   Name, Kontakt, Antworten oder Kampagnenwerte. Ohne Schlüssel geht nichts
- *   hinaus; die Anfrage steht dann nur im Supabase-Dashboard. Scheitert das
- *   Speichern, geht mit Schlüssel eine Warnung ohne Angaben aus der Anfrage
- *   an info@healio.de, damit ein abgelaufenes Token oder eine fehlende
- *   Tabelle nicht unbemerkt bleibt.
+ * - Danach meldet ein Hinweis an info@healio.de den Eingang, über den eigenen
+ *   n8n-Weiterleiter (Hetzner, fester Brevo-Zugang). Er enthält nur Kennung,
+ *   Fassung und Eingangszeit, nie Name, Kontakt, Antworten oder Kampagnenwerte.
+ *   Ob er ankam, steht in der Datenbank; die tägliche Erinnerung
+ *   (api/kurzcheck-erinnerung.js) holt nicht gemeldete Anfragen nach. Scheitert
+ *   das Speichern, geht eine Warnung ohne Angaben aus der Anfrage hinaus.
+ * - Fehler landen mit festem Ereignisnamen ohne Personendaten im Vercel-Log.
  */
 
 import crypto from 'node:crypto';
 import net from 'node:net';
-import { isValidKurzcheckEmail, isValidKurzcheckPhone, normalizeKurzcheckPhone } from '../shared/kurzcheck.js';
+import {
+  isCleanText, isValidKurzcheckEmail, isValidKurzcheckPhone, normalizeKurzcheckPhone,
+} from '../shared/kurzcheck.js';
+import {
+  callRpc, logIncident, readRelayConfig, readStorageConfig, sendToRelay,
+} from '../shared/kurzcheck-server.js';
 import { KURZCHECK_ENDPOINT, META_CHECKS } from '../src/content/meta-checks.js';
 
 const LEAD_SOURCE = 'website_kurzcheck';
 const STORAGE_RPC = 'submit_kurzcheck_lead';
 
-const NOTIFY_ENDPOINT = 'https://api.brevo.com/v3/smtp/email';
-// Absender wie im bestehenden Brevo-Transaktionsweg (n8n, Leitfaden-Mail).
-const NOTIFY_SENDER = Object.freeze({ name: 'Healio', email: 'info@healio.de' });
-const NOTIFY_RECIPIENT = 'info@healio.de';
-const NOTIFY_TIMEOUT_MS = 3000;
-// Höchstens 20 Mails je Stunde und 40 je Tag und Instanz. Echter Verkehr liegt
-// weit darunter. Die Grenze dämpft eine Flut, sie gilt aber je Instanz und
-// beginnt nach einem Kaltstart neu. Jede Mail bittet ohnehin darum, alle
-// neuen Einträge im Dashboard zu prüfen.
-const NOTIFY_MAX_PER_HOUR = 20;
-const NOTIFY_MAX_PER_DAY = 40;
+const NOTIFY_TIMEOUT_MS = 4000;
+// Grenzen je Instanz, zusätzlich bremst der Weiterleiter selbst. Echter Verkehr
+// liegt weit darunter; Zurückgehaltenes meldet die tägliche Erinnerung nach.
+// Warnungen haben ein eigenes, kleineres Budget, damit sie die Eingangshinweise
+// nicht verdrängen.
+const NOTIFY_LIMITS = Object.freeze({
+  eingang: { hour: 20, day: 40 },
+  fehler: { hour: 5, day: 10 },
+});
 const HOUR_MS = 60 * 60 * 1000;
 const DAY_MS = 24 * HOUR_MS;
 
@@ -72,10 +75,11 @@ const PAYLOAD_KEYS = new Set([
   'healio_website',
 ]);
 const UTM_KEYS = Object.freeze(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']);
-const CONTROL_CHARACTERS = /[\u0000-\u001f\u007f]/;
 
 const MAX_BODY_BYTES = 8192;
-const MAX_UTM_LENGTH = 200;
+// Je Wert höchstens 200 Byte in UTF-8, damit utm sicher unter der Grenze der
+// Datenbank bleibt (pg_column_size(utm) <= 2048).
+const MAX_UTM_BYTES = 200;
 const STORAGE_TIMEOUT_MS = 5000;
 
 // Ratenbegrenzung je Absender: 5 Anfragen in 10 Minuten, nur im Arbeitsspeicher
@@ -109,8 +113,21 @@ const CLOUDFLARE_RANGES = (() => {
 const readText = (value, maxLength) => {
   if (typeof value !== 'string') return null;
   const trimmed = value.trim();
-  if (trimmed === '' || trimmed.length > maxLength || CONTROL_CHARACTERS.test(trimmed)) return null;
+  if (trimmed === '' || trimmed.length > maxLength || !isCleanText(trimmed)) return null;
   return trimmed;
+};
+
+/** Kürzt an einer Zeichengrenze auf höchstens maxBytes Byte in UTF-8. */
+const truncateBytes = (value, maxBytes) => {
+  let result = '';
+  let bytes = 0;
+  for (const character of value) {
+    const size = Buffer.byteLength(character, 'utf8');
+    if (bytes + size > maxBytes) break;
+    result += character;
+    bytes += size;
+  }
+  return result;
 };
 
 /** Nur die bekannten Kampagnenfelder, gekürzt. Keine Klick-Kennungen, keine Herkunftsseite. */
@@ -119,9 +136,9 @@ export const buildUtm = (tracking) => {
 
   const utm = {};
   for (const key of UTM_KEYS) {
-    if (typeof tracking[key] !== 'string') continue;
-    const value = tracking[key].trim().slice(0, MAX_UTM_LENGTH);
-    if (value !== '' && !CONTROL_CHARACTERS.test(value)) utm[key] = value;
+    if (typeof tracking[key] !== 'string' || !isCleanText(tracking[key])) continue;
+    const value = truncateBytes(tracking[key].trim(), MAX_UTM_BYTES);
+    if (value !== '') utm[key] = value;
   }
 
   return Object.keys(utm).length > 0 ? utm : null;
@@ -328,14 +345,6 @@ const readBody = async (req) => {
   });
 };
 
-const readStorageConfig = (environment) => {
-  const url = typeof environment.SUPABASE_URL === 'string' ? environment.SUPABASE_URL.trim().replace(/\/+$/, '') : '';
-  const key = typeof environment.SUPABASE_PUBLISHABLE_KEY === 'string' ? environment.SUPABASE_PUBLISHABLE_KEY.trim() : '';
-  const token = typeof environment.KURZCHECK_INGEST_TOKEN === 'string' ? environment.KURZCHECK_INGEST_TOKEN.trim() : '';
-  if (!/^https:\/\/[a-z0-9.-]+$/i.test(url) || key === '' || token.length < 32 || /[\r\n]/.test(token)) return null;
-  return { url, key, token };
-};
-
 /** Liest nur den festen Fehlertext der Datenbankbremse, nie Details der Antwort. */
 const isDatabaseRateLimit = async (response) => {
   try {
@@ -343,74 +352,6 @@ const isDatabaseRateLimit = async (response) => {
     return body?.message === 'kurzcheck_rate_limited';
   } catch {
     return false;
-  }
-};
-
-const readNotifyKey = (environment) => {
-  const key = typeof environment.KURZCHECK_NOTIFY_BREVO_KEY === 'string' ? environment.KURZCHECK_NOTIFY_BREVO_KEY.trim() : '';
-  return key === '' || /[\r\n]/.test(key) ? null : key;
-};
-
-const formatBerlinTime = (timestamp) => new Intl.DateTimeFormat('de-DE', {
-  timeZone: 'Europe/Berlin',
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-}).format(new Date(timestamp));
-
-/**
- * Reiner Mailinhalt, damit der Test genau prüfen kann, was hinausgeht. Bewusst
- * ohne Check-Namen, Antworten und utm-Werte: auch eine Kampagnenbezeichnung
- * kann den Schwangerschaftsbezug verraten.
- */
-export const buildNotification = ({ requestId, consentVersion, receivedAt }) => ({
-  sender: NOTIFY_SENDER,
-  to: [{ email: NOTIFY_RECIPIENT }],
-  subject: 'Neue Kurzcheck-Anfrage',
-  textContent: [
-    'Neue Kurzcheck-Anfrage über healio.de.',
-    '',
-    `Kennung: ${requestId}`,
-    `Fassung der Einwilligung: ${consentVersion}`,
-    `Eingang: ${formatBerlinTime(receivedAt)} Uhr`,
-    '',
-    'Die Anfrage selbst steht nur in Supabase (Projekt HEALIO Production, Tabelle kurzcheck_leads). Bitte dort alle Einträge mit Status „neu“ prüfen. Diese Mail enthält bewusst keine Angaben aus der Anfrage.',
-  ].join('\n'),
-});
-
-/** Warnung, wenn eine Anfrage nicht gespeichert werden konnte. Nur Fehlerart und Zeit. */
-export const buildFailureNotification = ({ reason, status, receivedAt }) => ({
-  sender: NOTIFY_SENDER,
-  to: [{ email: NOTIFY_RECIPIENT }],
-  subject: 'Kurzcheck: Anfrage konnte nicht gespeichert werden',
-  textContent: [
-    'Eine Kurzcheck-Anfrage über healio.de konnte nicht gespeichert werden.',
-    '',
-    `Fehler: ${reason}${status ? ` (Status ${status})` : ''}`,
-    `Zeit: ${formatBerlinTime(receivedAt)} Uhr`,
-    '',
-    'Die Angaben der Anfrage sind weder gespeichert noch in dieser Mail. Bitte KURZCHECK_INGEST_TOKEN in Vercel, das Token in Supabase (private.kurzcheck_ingest_tokens) und die Migration kurzcheck_leads prüfen.',
-  ].join('\n'),
-});
-
-/** Fehler der Benachrichtigung ändern nichts an der gespeicherten Anfrage. */
-const notifyHealio = async ({ key, fetchImpl, timeoutMs, message }) => {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    await fetchImpl(NOTIFY_ENDPOINT, {
-      method: 'POST',
-      headers: { 'api-key': key, 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(message),
-      signal: controller.signal,
-      redirect: 'error',
-    });
-  } catch {
-    // Bewusst still: kein Log, damit nichts aus der Anfrage in Protokolle gerät.
-  } finally {
-    clearTimeout(timer);
   }
 };
 
@@ -422,10 +363,11 @@ export const createKurzcheckHandler = ({
   randomUUID = () => crypto.randomUUID(),
   storageTimeoutMs = STORAGE_TIMEOUT_MS,
   notifyTimeoutMs = NOTIFY_TIMEOUT_MS,
+  logger = console,
 } = {}) => {
   const rateBuckets = new Map();
-  let notifyTimes = [];
-  const notifyKey = readNotifyKey(environment);
+  const notifyTimes = { eingang: [], fehler: [] };
+  const relay = readRelayConfig(environment);
 
   const isRateLimited = (key) => {
     const time = now();
@@ -443,21 +385,29 @@ export const createKurzcheckHandler = ({
     return bucket.count > RATE_LIMIT_MAX;
   };
 
-  const mayNotify = () => {
+  const mayNotify = (kind) => {
     const time = now();
-    notifyTimes = notifyTimes.filter((sentAt) => time - sentAt < DAY_MS);
-    const lastHour = notifyTimes.filter((sentAt) => time - sentAt < HOUR_MS).length;
-    if (lastHour >= NOTIFY_MAX_PER_HOUR || notifyTimes.length >= NOTIFY_MAX_PER_DAY) return false;
-    notifyTimes.push(time);
+    const limits = NOTIFY_LIMITS[kind];
+    notifyTimes[kind] = notifyTimes[kind].filter((sentAt) => time - sentAt < DAY_MS);
+    const lastHour = notifyTimes[kind].filter((sentAt) => time - sentAt < HOUR_MS).length;
+    if (lastHour >= limits.hour || notifyTimes[kind].length >= limits.day) return false;
+    notifyTimes[kind].push(time);
     return true;
   };
 
-  const notify = async (message) => {
-    if (!notifyKey || !mayNotify()) return;
-    await notifyHealio({ key: notifyKey, fetchImpl, timeoutMs: notifyTimeoutMs, message });
+  // Ergebnis: 'sent', 'failed' oder 'skipped' (kein Weiterleiter eingerichtet oder Grenze erreicht).
+  const notify = async (payload) => {
+    if (!relay || !mayNotify(payload.kind)) return 'skipped';
+    const result = await sendToRelay({ relay, fetchImpl, payload, timeoutMs: notifyTimeoutMs });
+    if (result.ok) return 'sent';
+    logIncident('kurzcheck_hinweis_fehlgeschlagen', result.status, logger);
+    return 'failed';
   };
 
-  const warnStorageFailure = (reason, status) => notify(buildFailureNotification({ reason, status, receivedAt: now() }));
+  const warnStorageFailure = async (reason, status) => {
+    logIncident(reason === 'not_configured' ? 'kurzcheck_nicht_eingerichtet' : 'kurzcheck_speichern_fehlgeschlagen', status, logger);
+    await notify({ kind: 'fehler', reason, status: Number.isInteger(status) ? status : null, received_at: new Date(now()).toISOString() });
+  };
 
   return async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
@@ -515,29 +465,13 @@ export const createKurzcheckHandler = ({
     // Die Kennung entsteht hier, weil der Schreibweg kein Zurücklesen erlaubt.
     const row = { id: randomUUID(), ...result.lead, ip_hash: ipHash };
 
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), storageTimeoutMs);
-    let response = null;
-    try {
-      response = await fetchImpl(`${storage.url}/rest/v1/rpc/${STORAGE_RPC}`, {
-        method: 'POST',
-        headers: {
-          apikey: storage.key,
-          Authorization: `Bearer ${storage.key}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ p_token: storage.token, p_lead: row }),
-        signal: controller.signal,
-        redirect: 'error',
-      });
-    } catch {
-      if (controller.signal.aborted) {
-        await warnStorageFailure('storage_timeout', null);
-        reply(504, { error: 'storage_timeout' });
-        return;
-      }
-    } finally {
-      clearTimeout(timer);
+    const { response, timedOut } = await callRpc({
+      storage, fetchImpl, name: STORAGE_RPC, args: { p_lead: row }, timeoutMs: storageTimeoutMs,
+    });
+    if (timedOut) {
+      await warnStorageFailure('storage_timeout', null);
+      reply(504, { error: 'storage_timeout' });
+      return;
     }
 
     if (!response || !response.ok) {
@@ -546,12 +480,28 @@ export const createKurzcheckHandler = ({
         reply(429, { error: 'too_many_requests' });
         return;
       }
-      await warnStorageFailure('storage_failed', response ? response.status : null);
+      // 4xx ohne Bremse heißt: die Datenbank hat eine Prüfregel verletzt gesehen
+      // (Abweichung zwischen Funktion und Migration). 5xx, 401/403 und Netzfehler
+      // sind Einrichtungs- oder Betriebsfehler.
+      const status = response ? response.status : null;
+      await warnStorageFailure(status === 400 ? 'storage_rejected' : 'storage_failed', status);
       reply(502, { error: 'storage_failed' });
       return;
     }
 
-    await notify(buildNotification({ requestId: row.id, consentVersion: row.consent_text_version, receivedAt: now() }));
+    // Gespeichert ist gespeichert: der Hinweis entscheidet nicht mehr über die Antwort.
+    const outcome = await notify({
+      kind: 'eingang',
+      request_id: row.id,
+      consent_version: row.consent_text_version,
+      received_at: new Date(now()).toISOString(),
+    });
+    if (outcome !== 'skipped') {
+      const marked = await callRpc({
+        storage, fetchImpl, name: 'record_kurzcheck_notification', args: { p_id: row.id, p_ok: outcome === 'sent' }, timeoutMs: notifyTimeoutMs,
+      });
+      if (!marked.response?.ok) logIncident('kurzcheck_hinweis_status_fehlgeschlagen', marked.response?.status ?? null, logger);
+    }
 
     reply(200, { ok: true });
   };

@@ -1,0 +1,111 @@
+// n8n-Code-Knoten „Hinweis prüfen und Mail bauen“ (JavaScript, Endung .txt,
+// weil n8n den Code in eine Funktion einbettet und ESLint ein „return“ auf
+// oberster Ebene ablehnt) im Workflow
+// „Healio Kurzcheck Hinweis 2026-10-19“. setup_kurzcheck_hinweis.py setzt
+// diese Datei unverändert als jsCode ein; scripts/check-kurzcheck-lead-api.mjs
+// führt sie mit Testdaten aus.
+//
+// Angenommen werden nur vier feste Arten mit festen Feldern. Empfänger,
+// Absender, Betreff und Text stehen hier fest. Aus der Website kommen nur
+// Kennung, Fassung, Zeitpunkte und Zählwerte, nie Name, Kontakt, Antworten
+// oder Kampagnenwerte.
+const body = $json.body;
+const fail = (status) => [{ json: { ok: false, status } }];
+const FIELDS = {
+  eingang: ['kind', 'request_id', 'consent_version', 'received_at'],
+  fehler: ['kind', 'reason', 'status', 'received_at'],
+  erinnerung: ['kind', 'open', 'open_overdue', 'unannounced', 'received_at'],
+  test: ['kind', 'received_at'],
+};
+if (!body || typeof body !== 'object' || Array.isArray(body) || !Object.hasOwn(FIELDS, body.kind)) return fail(400);
+const fields = FIELDS[body.kind];
+if (Object.keys(body).length !== fields.length || Object.keys(body).some((key) => !fields.includes(key))) return fail(400);
+
+const time = Date.parse(body.received_at);
+if (typeof body.received_at !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(body.received_at)
+  || !Number.isFinite(time) || new Date(time).toISOString() !== body.received_at
+  || Math.abs(Date.now() - time) > 10 * 60 * 1000) return fail(400);
+
+const count = (value) => Number.isInteger(value) && value >= 0 && value <= 100000;
+if (body.kind === 'eingang' && (
+  typeof body.request_id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(body.request_id)
+  || typeof body.consent_version !== 'string' || !/^check-[a-z0-9]{1,8}-v\d{1,3}-\d{4}-\d{2}-\d{2}$/.test(body.consent_version))) return fail(400);
+if (body.kind === 'fehler' && (
+  !['not_configured', 'storage_failed', 'storage_rejected', 'storage_timeout'].includes(body.reason)
+  || !(body.status === null || (Number.isInteger(body.status) && body.status >= 100 && body.status < 600)))) return fail(400);
+if (body.kind === 'erinnerung' && !(count(body.open) && count(body.open_overdue) && count(body.unannounced))) return fail(400);
+
+// Globale Bremse ohne Speicherung von Inhalten: 60 Hinweise je zehn Minuten.
+const data = $getWorkflowStaticData('global');
+const bucket = Math.floor(Date.now() / (10 * 60 * 1000));
+if (data.rateBucket !== bucket) { data.rateBucket = bucket; data.rateCount = 0; }
+if (data.rateCount >= 60) return fail(429);
+data.rateCount += 1;
+
+const when = new Date(time).toLocaleString('de-DE', {
+  timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
+});
+const PLACE = 'Supabase (Projekt HEALIO Production, Tabelle kurzcheck_leads)';
+const MAILS = {
+  eingang: () => ({
+    subject: 'Neue Kurzcheck-Anfrage',
+    lines: [
+      'Neue Kurzcheck-Anfrage über healio.de.',
+      '',
+      `Kennung: ${body.request_id}`,
+      `Fassung der Einwilligung: ${body.consent_version}`,
+      `Eingang: ${when} Uhr`,
+      '',
+      `Die Anfrage selbst steht nur in ${PLACE}. Bitte dort alle Einträge mit Status „neu“ prüfen. Diese Mail enthält bewusst keine Angaben aus der Anfrage.`,
+    ],
+  }),
+  fehler: () => (body.reason === 'storage_timeout' ? {
+    subject: 'Kurzcheck: Speichern unbestätigt (Zeitüberschreitung)',
+    lines: [
+      'Supabase hat eine Kurzcheck-Anfrage über healio.de nicht rechtzeitig bestätigt.',
+      `Zeit: ${when} Uhr`,
+      '',
+      `Die Anfrage kann trotzdem gespeichert sein. Bitte in ${PLACE} nach neuen Einträgen mit Status „neu“ sehen; die tägliche Erinnerung zählt sie dann unter „Ohne Eingangsmail“. Diese Mail enthält keine Angaben aus der Anfrage.`,
+    ],
+  } : {
+    subject: 'Kurzcheck: Anfrage konnte nicht gespeichert werden',
+    lines: [
+      'Eine Kurzcheck-Anfrage über healio.de konnte nicht gespeichert werden.',
+      '',
+      `Fehler: ${body.reason}${body.status ? ` (Status ${body.status})` : ''}`,
+      `Zeit: ${when} Uhr`,
+      '',
+      body.reason === 'storage_rejected'
+        ? 'Die Datenbank hat die Anfrage wegen einer Prüfregel abgelehnt. Die Angaben sind weder gespeichert noch in dieser Mail. Bitte prüfen, ob Website und Migration kurzcheck_leads zusammenpassen.'
+        : 'Die Angaben der Anfrage sind weder gespeichert noch in dieser Mail. Bitte die Einrichtung prüfen (Vercel-Variablen KURZCHECK_INGEST_TOKEN, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, Token in private.kurzcheck_ingest_tokens, Migration kurzcheck_leads).',
+    ],
+  }),
+  erinnerung: () => ({
+    subject: 'Kurzcheck: offene Anfragen',
+    lines: [
+      `Stand ${when} Uhr`,
+      '',
+      `Offen (Status „neu“): ${body.open}`,
+      `Davon älter als 24 Stunden: ${body.open_overdue}`,
+      `Ohne Eingangsmail: ${body.unannounced}`,
+      '',
+      `Bitte in ${PLACE} prüfen und nach dem Rückruf den Status auf „kontaktiert“ oder „erledigt“ setzen. Diese Mail enthält keine Angaben aus den Anfragen.`,
+    ],
+  }),
+  test: () => ({
+    subject: 'Kurzcheck: Testmail des Hinweiswegs',
+    lines: [
+      'Diese Testmail bestätigt, dass Hinweise zum Kurzcheck bei info@healio.de ankommen.',
+      `Zeit: ${when} Uhr`,
+      '',
+      'Sie enthält keine Anfrage.',
+    ],
+  }),
+};
+const mail = MAILS[body.kind]();
+return [{ json: { ok: true, payload: {
+  sender: { name: 'Healio', email: 'info@healio.de' },
+  to: [{ email: 'info@healio.de', name: 'Healio' }],
+  subject: mail.subject,
+  textContent: mail.lines.join('\n'),
+} } }];

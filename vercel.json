@@ -1,5 +1,8 @@
 {
   "regions": ["fra1"],
+  "crons": [
+    { "path": "/api/kurzcheck-erinnerung", "schedule": "0 5 * * *" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

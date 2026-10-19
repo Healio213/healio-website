@@ -21,21 +21,20 @@ begin;
 --     die Datenbank.
 --   * Die IP steht nur als HMAC-Prüfwert in der Tabelle (IPv6 als /64-Netz).
 --
--- Token einrichten, einmalig nach dem Einspielen (wie beim Ereignis-Alarm):
---   Im Terminal, Klartext nie in Dateien oder den Chat:
---     TOKEN="$(openssl rand -base64 48 | tr '+/' '-_' | tr -d '=')"
---     printf '%s' "$TOKEN" | shasum -a 256 | cut -d' ' -f1
---   Klartext als KURZCHECK_INGEST_TOKEN in Vercel (Production) eintragen,
---   den Hex-Wert hier eintragen und <SHA256_HEX> ersetzen:
+-- Token einrichten, einmalig nach dem Einspielen: Das Einrichtungsskript
+-- docs/kurzcheck-hinweis/setup_kurzcheck_hinweis.py (Phase activate) legt
+-- KURZCHECK_INGEST_TOKEN verschlüsselt in Vercel an und schreibt nur dessen
+-- SHA-256-Wert (ingest_token_sha256) in seinen Checkpoint. Diesen Wert hier
+-- eintragen und <SHA256_HEX> ersetzen (Claude per Supabase-MCP, nichts für Frank):
 --     insert into private.kurzcheck_ingest_tokens (token_name, token_sha256)
 --     values ('vercel-kurzcheck', '\x<SHA256_HEX>'::bytea)
 --     on conflict (token_name) do update
 --       set token_sha256 = excluded.token_sha256, enabled = true,
 --           valid_from = now(), rotated_at = now();
 --   Das Token läuft bewusst nicht von selbst ab, damit der Check nicht eines
---   Tages still ausfällt. Getauscht wird nur bei Verdacht (gleicher Befehl mit
---   neuem Wert, danach Vercel aktualisieren). Scheitert das Speichern, warnt
---   die Funktion per Mail an info@ (nur mit Brevo-Schlüssel).
+--   Tages still ausfällt. Getauscht wird nur bei Verdacht. Scheitert das
+--   Speichern, meldet die Funktion das über den Hinweisweg an info@ und im
+--   Vercel-Log.
 --
 -- Löschfristen, wie in der Datenschutzerklärung (#kurzcheck) zugesagt:
 --   * Anfragen löscht der tägliche Löschlauf ab dem 89. Tag, spätestens am 90.
@@ -49,8 +48,12 @@ begin;
 --     (regelmäßige Verjährung). Bis zur Löschung der Anfrage steht dort die
 --     längste mögliche Frist.
 --
--- Die Benachrichtigung an Healio liegt in api/kurzcheck-lead.js (Brevo, nur
--- mit Schlüssel, ohne Angaben aus der Anfrage), nicht in der Datenbank.
+-- Hinweis an Healio: api/kurzcheck-lead.js meldet jeden Eingang über den
+-- eigenen n8n-Weiterleiter (Hetzner) an info@healio.de, nur Kennung, Fassung
+-- und Zeit. Ob das geklappt hat, steht je Anfrage in notified_at und
+-- notify_failures. Die tägliche Erinnerung (api/kurzcheck-erinnerung.js, Vercel
+-- Cron) liest nur Zählwerte über kurzcheck_reminder_status und meldet offene
+-- und nicht gemeldete Anfragen, damit kein Ausfall still bleibt.
 -- ---------------------------------------------------------------------------
 
 create table if not exists public.kurzcheck_leads (
@@ -98,6 +101,9 @@ create table if not exists public.kurzcheck_leads (
     check (status in ('neu', 'kontaktiert', 'erledigt')),
   notes text
     check (notes is null or char_length(notes) <= 500),
+  notified_at timestamptz,
+  notify_failures smallint not null default 0
+    check (notify_failures between 0 and 1000),
   constraint kurzcheck_leads_contact_check
     check (phone is not null or email is not null)
 );
@@ -108,6 +114,10 @@ comment on column public.kurzcheck_leads.ip_hash is
   'HMAC-SHA-256 mit LEAD_IP_SALT über die IP (IPv6 als /64-Netz), nie die IP selbst.';
 comment on column public.kurzcheck_leads.notes is
   'Nur für Healio. Keine weiteren Gesundheitsangaben eintragen.';
+comment on column public.kurzcheck_leads.notified_at is
+  'Zeitpunkt der Eingangsmail oder der Erinnerung an info@healio.de. Leer heißt: Healio wurde noch nicht benachrichtigt.';
+comment on column public.kurzcheck_leads.notify_failures is
+  'Fehlgeschlagene Versuche der Eingangsmail. Die tägliche Erinnerung holt sie nach.';
 
 create index if not exists kurzcheck_leads_created_at_idx
   on public.kurzcheck_leads (created_at);
@@ -144,6 +154,28 @@ create table if not exists private.kurzcheck_ingest_tokens (
 alter table private.kurzcheck_ingest_tokens enable row level security;
 alter table private.kurzcheck_ingest_tokens force row level security;
 revoke all on table private.kurzcheck_ingest_tokens from public, anon, authenticated;
+
+-- Gemeinsame Tokenprüfung für alle Schreib- und Lesewege der Funktionen.
+create or replace function private.kurzcheck_token_valid(p_token text)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select p_token is not null
+     and char_length(p_token) >= 32
+     and exists (
+       select 1
+         from private.kurzcheck_ingest_tokens as token
+        where token.enabled
+          and token.valid_from <= now()
+          and (token.expires_at is null or token.expires_at > now())
+          and token.token_sha256 = pg_catalog.sha256(pg_catalog.convert_to(p_token, 'UTF8'))
+     );
+$$;
+
+revoke all on function private.kurzcheck_token_valid(text) from public, anon, authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Bremse: je Absender wie in der Funktion, dazu eine sehr hohe Gesamtgrenze
@@ -196,14 +228,7 @@ security definer
 set search_path = ''
 as $$
 begin
-  if p_token is null or char_length(p_token) < 32 or not exists (
-    select 1
-      from private.kurzcheck_ingest_tokens as token
-     where token.enabled
-       and token.valid_from <= now()
-       and (token.expires_at is null or token.expires_at > now())
-       and token.token_sha256 = pg_catalog.sha256(pg_catalog.convert_to(p_token, 'UTF8'))
-  ) then
+  if not private.kurzcheck_token_valid(p_token) then
     raise exception 'kurzcheck_forbidden' using errcode = '42501';
   end if;
 
@@ -248,6 +273,87 @@ $$;
 
 revoke all on function public.submit_kurzcheck_lead(text, jsonb) from public, anon, authenticated;
 grant execute on function public.submit_kurzcheck_lead(text, jsonb) to anon;
+
+-- ---------------------------------------------------------------------------
+-- Hinweisstatus und tägliche Erinnerung (nur Zählwerte, keine Personendaten)
+-- ---------------------------------------------------------------------------
+
+create or replace function public.record_kurzcheck_notification(p_token text, p_id uuid, p_ok boolean)
+returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if not private.kurzcheck_token_valid(p_token) then
+    raise exception 'kurzcheck_forbidden' using errcode = '42501';
+  end if;
+  if p_ok then
+    update public.kurzcheck_leads
+       set notified_at = coalesce(notified_at, now())
+     where id = p_id;
+  else
+    update public.kurzcheck_leads
+       set notify_failures = least(notify_failures + 1, 1000)
+     where id = p_id;
+  end if;
+end;
+$$;
+
+revoke all on function public.record_kurzcheck_notification(text, uuid, boolean) from public, anon, authenticated;
+grant execute on function public.record_kurzcheck_notification(text, uuid, boolean) to anon;
+
+create or replace function public.kurzcheck_reminder_status(p_token text)
+returns jsonb
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_status jsonb;
+begin
+  if not private.kurzcheck_token_valid(p_token) then
+    raise exception 'kurzcheck_forbidden' using errcode = '42501';
+  end if;
+  select pg_catalog.jsonb_build_object(
+           'checked_at', now(),
+           'open', count(*) filter (where lead.status = 'neu'),
+           'open_overdue', count(*) filter (where lead.status = 'neu' and lead.created_at < now() - interval '24 hours'),
+           'unannounced', count(*) filter (where lead.notified_at is null and lead.created_at < now() - interval '5 minutes')
+         )
+    into v_status
+    from public.kurzcheck_leads as lead;
+  return v_status;
+end;
+$$;
+
+revoke all on function public.kurzcheck_reminder_status(text) from public, anon, authenticated;
+grant execute on function public.kurzcheck_reminder_status(text) to anon;
+
+create or replace function public.mark_kurzcheck_reminded(p_token text, p_until timestamptz)
+returns integer
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_count integer;
+begin
+  if not private.kurzcheck_token_valid(p_token) then
+    raise exception 'kurzcheck_forbidden' using errcode = '42501';
+  end if;
+  update public.kurzcheck_leads
+     set notified_at = now()
+   where notified_at is null
+     and created_at < p_until - interval '5 minutes';
+  get diagnostics v_count = row_count;
+  return v_count;
+end;
+$$;
+
+revoke all on function public.mark_kurzcheck_reminded(text, timestamptz) from public, anon, authenticated;
+grant execute on function public.mark_kurzcheck_reminded(text, timestamptz) to anon;
 
 -- ---------------------------------------------------------------------------
 -- Einwilligungsnachweis, getrennt von der Anfrage und ohne Antworten
@@ -396,9 +502,12 @@ commit;
 --    where schemaname = 'public' and tablename = 'kurzcheck_leads';
 --   Erwartet: keine Zeile.
 --
---   select has_function_privilege('anon', 'public.submit_kurzcheck_lead(text, jsonb)', 'execute') as anon_rpc,
---          has_function_privilege('authenticated', 'public.submit_kurzcheck_lead(text, jsonb)', 'execute') as auth_rpc;
---   Erwartet: anon_rpc = true, auth_rpc = false.
+--   select p.proname,
+--          has_function_privilege('anon', p.oid, 'execute') as anon_rpc,
+--          has_function_privilege('authenticated', p.oid, 'execute') as auth_rpc
+--     from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+--    where n.nspname = 'public' and p.proname like '%kurzcheck%';
+--   Erwartet: vier Funktionen, anon_rpc = true, auth_rpc = false.
 --
 --   select token_name, enabled, expires_at, octet_length(token_sha256) as hash_bytes
 --     from private.kurzcheck_ingest_tokens;
