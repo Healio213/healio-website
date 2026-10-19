@@ -4,11 +4,33 @@ import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import { emailjsService } from '@/services/emailjsService';
 import { describeCampaignSource, markCheckLeadPending, readCampaignSearch } from '@/lib/campaign-landing';
+import { buildKurzcheckRequest, readKurzcheckContact } from '@/lib/kurzcheck-request';
 import { hasConsent } from '@/lib/consent';
+import { isValidKurzcheckEmail, isValidKurzcheckPhone, normalizeKurzcheckPhone, PHONE_MIN_DIGITS } from '../../../shared/kurzcheck.js';
 
 const HEALIO_PHONE_DISPLAY = '040 89755705';
-const EMAIL_PATTERN = /^[^\s@]{1,64}@[^\s@.]{1,63}(?:\.[^\s@.]{1,63}){1,4}$/;
+// Länger als der ungünstigste Lauf der Funktion (Speichern plus Benachrichtigung).
+const SUBMIT_TIMEOUT_MS = 15000;
 const EMPTY_CONTACT = { vorname: '', telefon: '', email: '', einwilligung: false };
+const DEFAULT_SUBMIT_ERROR = `Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder ruf uns an: ${HEALIO_PHONE_DISPLAY}.`;
+const PHONE_FORMAT_ERROR = 'Bitte prüfe die Schreibweise deiner Telefonnummer, zum Beispiel 040 1234567 oder +49 40 1234567.';
+// Passt der offene Seitenstand nicht mehr zum Server, hilft nur Neuladen.
+const RELOAD_ERROR = `Die Seite wurde gerade aktualisiert. Bitte lade sie neu und schick deine Anfrage noch einmal ab. Du erreichst uns auch telefonisch: ${HEALIO_PHONE_DISPLAY}.`;
+
+// Antworten des EU-Wegs, die eine eigene Meldung brauchen. Ein neuer Versuch
+// hilft dort nicht, solange sich nichts ändert.
+const FIELD_ERRORS = {
+  invalid_first_name: ['vorname', 'Bitte prüfe deinen Vornamen.'],
+  invalid_phone: ['telefon', PHONE_FORMAT_ERROR],
+  invalid_email: ['email', 'Bitte prüfe deine E-Mail-Adresse.'],
+};
+const SUBMIT_ERRORS = {
+  consent_version_outdated: RELOAD_ERROR,
+  invalid_answers: RELOAD_ERROR,
+  invalid_check: RELOAD_ERROR,
+  invalid_request: RELOAD_ERROR,
+  too_many_requests: `Gerade kommen sehr viele Anfragen an. Bitte versuch es in ein paar Minuten noch einmal oder ruf uns an: ${HEALIO_PHONE_DISPLAY}.`,
+};
 
 const inputClass = 'mt-2 block min-h-14 w-full rounded-xl border border-slate-300 bg-white px-4 text-base text-home-midnight placeholder:text-slate-400 focus:border-home-mint focus:outline-none focus:ring-2 focus:ring-home-mint/30';
 
@@ -56,6 +78,7 @@ const KurzCheck = ({ config }) => {
   const [contact, setContact] = useState(EMPTY_CONTACT);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
+  const [submitError, setSubmitError] = useState(DEFAULT_SUBMIT_ERROR);
 
   const totalSteps = config.steps.length + 1;
   const isContactStep = stepIndex === config.steps.length;
@@ -87,17 +110,58 @@ const KurzCheck = ({ config }) => {
 
   const validate = () => {
     const next = {};
-    const telefon = contact.telefon.trim();
+    const telefon = normalizeKurzcheckPhone(contact.telefon);
     const email = contact.email.trim();
     if (!contact.vorname.trim()) next.vorname = 'Bitte gib deinen Vornamen an.';
     if (!telefon && !email) next.telefon = 'Bitte gib eine Telefonnummer oder eine E-Mail-Adresse an.';
-    if (telefon && telefon.replace(/\D/g, '').length < 6) next.telefon = 'Diese Telefonnummer sieht unvollständig aus.';
-    if (email && !EMAIL_PATTERN.test(email)) next.email = 'Diese E-Mail-Adresse sieht unvollständig aus.';
+    if (telefon && telefon.replace(/\D/g, '').length < PHONE_MIN_DIGITS) next.telefon = 'Diese Telefonnummer sieht unvollständig aus.';
+    else if (telefon && !isValidKurzcheckPhone(telefon)) next.telefon = PHONE_FORMAT_ERROR;
+    if (email && !isValidKurzcheckEmail(email)) next.email = 'Diese E-Mail-Adresse sieht unvollständig aus.';
     if (!contact.einwilligung) next.einwilligung = 'Ohne dein Einverständnis dürfen wir uns nicht bei dir melden.';
     return next;
   };
 
   const labelFor = (stepConfig, value) => stepConfig.options.find((option) => option.value === value)?.label || 'nicht angegeben';
+
+  // Gesundheitsangaben (Art. 9 DSGVO) laufen nur über den eigenen Weg in der
+  // EU: Funktion in Frankfurt, Speicherung bei Supabase in Frankfurt.
+  const sendToEuRoute = async () => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+    try {
+      const response = await fetch(config.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildKurzcheckRequest({ config, answers, contact, search: location.search })),
+        signal: controller.signal,
+      });
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw Object.assign(new Error('kurzcheck_not_stored'), { code: typeof body?.error === 'string' ? body.error : null });
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  const sendByMail = async ({ firstName, telefon, email }) => {
+    // Sicherung gegen eine falsche Konfiguration: nie eine Gesundheitsangabe per EmailJS.
+    if (config.consent.healthData) throw new Error('health_data_requires_eu_route');
+    await emailjsService.sendEmail({
+      from_name: firstName,
+      from_email: email,
+      phone: telefon,
+      message: [
+        `Anfrage über healio.de${config.path} (Meta-Zielseite)`,
+        ...config.steps.map((stepConfig) => `${stepConfig.question} ${labelFor(stepConfig, answers[stepConfig.id])}`),
+        `Erreichbar über: ${[telefon && 'Telefon', email && 'E-Mail'].filter(Boolean).join(' und ')}`,
+        `Einwilligung Rückruf: ja (${config.consent.version})`,
+        '',
+        'Kampagne:',
+        describeCampaignSource(location.search),
+      ].join('\n'),
+    }, config.pageSource, { track: false });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -113,29 +177,24 @@ const KurzCheck = ({ config }) => {
     }
 
     setStatus('sending');
-    const firstName = contact.vorname.trim();
-    const telefon = contact.telefon.trim();
-    const email = contact.email.trim();
-    const answerLines = config.steps.map((stepConfig) => `${stepConfig.question} ${labelFor(stepConfig, answers[stepConfig.id])}`);
+    const { firstName, phone: telefon, email } = readKurzcheckContact(contact);
 
     try {
-      await emailjsService.sendEmail({
-        from_name: firstName,
-        from_email: email,
-        phone: telefon,
-        message: [
-          `Anfrage über healio.de${config.path} (Meta-Zielseite)`,
-          ...answerLines,
-          `Erreichbar über: ${[telefon && 'Telefon', email && 'E-Mail'].filter(Boolean).join(' und ')}`,
-          config.consent.healthData
-            ? `Einwilligung Rückruf und ausdrückliche Einwilligung Gesundheitsangabe (Art. 9 Abs. 2 lit. a DSGVO): ja (${config.consent.version})`
-            : `Einwilligung Rückruf: ja (${config.consent.version})`,
-          '',
-          'Kampagne:',
-          describeCampaignSource(location.search),
-        ].join('\n'),
-      }, config.pageSource, { track: false });
-    } catch {
+      if (config.endpoint) {
+        await sendToEuRoute();
+      } else {
+        await sendByMail({ firstName, telefon, email });
+      }
+    } catch (error) {
+      const fieldError = FIELD_ERRORS[error?.code];
+      if (fieldError) {
+        const [field, message] = fieldError;
+        setErrors({ [field]: message });
+        setStatus('idle');
+        document.getElementById(`check-${field}`)?.focus();
+        return;
+      }
+      setSubmitError(SUBMIT_ERRORS[error?.code] || DEFAULT_SUBMIT_ERROR);
       setStatus('error');
       return;
     }
@@ -273,7 +332,7 @@ const KurzCheck = ({ config }) => {
 
           {status === 'error' ? (
             <p role="alert" className="rounded-2xl bg-[#fff1ed] p-4 text-sm font-semibold leading-6 text-[#934638]">
-              Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder ruf uns an: {HEALIO_PHONE_DISPLAY}.
+              {submitError}
             </p>
           ) : null}
 

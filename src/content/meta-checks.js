@@ -32,6 +32,13 @@ const BONUS_ZUSATZ = 'Wie viel dein Kassenbonus bringt, hängt von deiner Kranke
 const WIDERRUF = 'Ich kann das jederzeit widerrufen, zum Beispiel per Mail an info@healio.de.';
 
 /**
+ * Eigener Weg in der EU für Checks mit Gesundheitsbezug: Vercel-Funktion in
+ * Frankfurt, Speicherung bei Supabase in Frankfurt (api/kurzcheck-lead.js).
+ * Checks ohne diesen Eintrag laufen weiter über EmailJS an info@healio.de.
+ */
+export const KURZCHECK_ENDPOINT = '/api/kurzcheck-lead';
+
+/**
  * Einwilligungstexte der Kurzchecks. Die Fassung geht mit jeder Anfrage an
  * Healio und belegt, welchem Wortlaut zugestimmt wurde (Art. 7 Abs. 1 DSGVO,
  * § 7a UWG). Die Kennungen sind bewusst neutral, damit der Nachweis selbst
@@ -98,6 +105,8 @@ export const META_CHECKS = {
     // Diese Strecke misst nichts an Meta, Google oder Analyse (wie /schwangerschaft).
     metaContentName: null,
     consent: CONSENT_RUECKRUF_GESUNDHEIT,
+    // Gesundheitsangabe (Art. 9 DSGVO): nie über EmailJS, nur über den EU-Weg.
+    endpoint: KURZCHECK_ENDPOINT,
     seoTitle: 'Kurzcheck Vorsorge in der Schwangerschaft | Healio',
     seoDescription: 'Prüfe in 45 Sekunden, welcher Zusatzschutz Feinultraschall, Toxoplasmose und Streptokokken erstattet und wie viel dein Kassenbonus zum Beitrag beisteuert.',
     badge: 'Vorsorge-Extras · Kurzcheck',

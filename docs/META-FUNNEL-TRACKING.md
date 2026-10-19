@@ -82,6 +82,7 @@ doppelte Conversions werden.
 | `src/services/emailjsService.js` | Lead bei abgeschicktem Kontaktformular |
 | `src/components/sections/partner/PraxisLeitfadenForm.jsx` | Lead bei angefordertem Praxis-Leitfaden |
 | `api/partner-lead.js` | Speichert die Leitfaden-Anfrage, sendet nichts an Meta |
+| `api/kurzcheck-lead.js` | Speichert den Kurzcheck Schwangerschaft in Supabase Frankfurt, misst nichts und sendet nichts an Meta, Google oder EmailJS |
 | `src/components/CalendlyEmbed.jsx`, `src/components/ExternalProviderGate.jsx` | Lead beim Terminlink |
 | `scripts/check-privacy-consent-contract.mjs` | Vertragstest, `npm run test:privacy` |
 | `vercel.json` | CSP (Report-Only) um die Meta-Hosts erweitert |

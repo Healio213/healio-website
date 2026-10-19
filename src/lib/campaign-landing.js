@@ -46,6 +46,16 @@ export const readCampaignSearch = (search) => {
 };
 
 /** Kampagnenmerkmale als Textzeilen fuer die Anfrage-Mail an Healio. */
+/** Nur die utm-Werte als Objekt, ohne Klick-Kennungen wie fbclid. */
+export const readCampaignUtm = (search) => {
+  const params = new URLSearchParams(readCampaignSearch(search));
+  const utm = {};
+  params.forEach((value, key) => {
+    if (key.startsWith('utm_')) utm[key] = value;
+  });
+  return Object.keys(utm).length > 0 ? utm : null;
+};
+
 export const describeCampaignSource = (search) => {
   const params = new URLSearchParams(readCampaignSearch(search));
   const lines = [];

@@ -17,6 +17,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
 
 const kurzCheck = read('src/components/campaign/KurzCheck.jsx');
+const kurzcheckShared = read('shared/kurzcheck.js');
 const privacyPage = read('src/pages/DatenschutzPage.jsx');
 const legalDe = JSON.parse(read('src/i18n/locales/de/legal.json')).datenschutz;
 const legalEn = JSON.parse(read('src/i18n/locales/en/legal.json')).datenschutz;
@@ -42,7 +43,12 @@ check('Beide Texte nennen Healio, Rückruf und Widerruf', [naturheilkunde, schwa
   && /info@healio\.de/.test(consent.text)));
 check('Einwilligungstexte ohne Gedankenstriche', ![naturheilkunde, schwangerschaft].some(({ consent }) => DASH.test(consent.text)));
 check('Formular zeigt den Text aus der Konfiguration', /<span>\{config\.consent\.text\}<\/span>/.test(kurzCheck));
-check('Mail dokumentiert Fassung und Art. 9', /config\.consent\.version/.test(kurzCheck) && /Art\. 9 Abs\. 2 lit\. a DSGVO/.test(kurzCheck));
+check('Mail dokumentiert die Fassung', /`Einwilligung Rückruf: ja \(\$\{config\.consent\.version\}\)`/.test(kurzCheck));
+check('Gesundheitsangaben gehen nie per Mail, nur über den EU-Weg', schwangerschaft.endpoint === '/api/kurzcheck-lead'
+  && naturheilkunde.endpoint === undefined
+  && /if \(config\.consent\.healthData\) throw new Error\('health_data_requires_eu_route'\);/.test(kurzCheck)
+  && /buildKurzcheckRequest\(\{ config, answers, contact, search: location\.search \}\)/.test(kurzCheck)
+  && /consent_text_version: config\.consent\.version/.test(kurzcheckShared));
 check('Merker nur bei messender Strecke und mit Einwilligung', /if \(config\.metaContentName && \(hasConsent\('marketing'\) \|\| hasConsent\('analytics'\)\)\) \{\s*markCheckLeadPending\(config\.key\);/.test(kurzCheck));
 check('Datenschutz-Link springt zum Kurzcheck-Absatz', /href="\/datenschutz#kurzcheck"/.test(kurzCheck));
 
@@ -51,8 +57,9 @@ const metaLeadKeys = ['metaLeadFormsTitle', 'metaLeadFormsText', 'metaLeadFormsL
 check('Kurzcheck- und Meta-Formular-Absätze liegen in beiden Sprachen vor', [...kurzCheckKeys, ...metaLeadKeys].every((key) => legalDe[key] && legalEn[key]));
 check('Datenschutzseite gibt alle neuen Absätze aus', [...kurzCheckKeys, ...metaLeadKeys].every((key) => privacyPage.includes(`datenschutz.${key}`)));
 check('Datenschutzseite hat die Sprungmarken', /id="kurzcheck"/.test(privacyPage) && /id="meta-formulare"/.test(privacyPage));
-check('Kurzcheck-Absatz nennt Art. 9, EmailJS, Speicherdauer und Widerruf', /Art\. 9 Abs\. 2 lit\. a DSGVO/.test(legalDe.kurzCheckLegalBasis)
+check('Kurzcheck-Absatz nennt Art. 9, EmailJS, Supabase Frankfurt, Speicherdauer und Widerruf', /Art\. 9 Abs\. 2 lit\. a DSGVO/.test(legalDe.kurzCheckLegalBasis)
   && /EmailJS/.test(legalDe.kurzCheckRecipients)
+  && /Supabase Inc\.[^.]*EU-Region Frankfurt/.test(legalDe.kurzCheckRecipients)
   && /USA/.test(legalDe.kurzCheckRecipients)
   && /90 Tage/.test(legalDe.kurzCheckStorage)
   && /§ 7a UWG/.test(legalDe.kurzCheckStorage)
