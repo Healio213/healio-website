@@ -28,6 +28,18 @@ const EMPTY_FORM = {
   consent: false,
 };
 
+const readExternalReferrerOrigin = () => {
+  if (!document.referrer) return '';
+  try {
+    const referrer = new URL(document.referrer);
+    if (referrer.protocol !== 'https:' && referrer.protocol !== 'http:') return '';
+    if (referrer.origin === window.location.origin) return '';
+    return referrer.origin;
+  } catch {
+    return '';
+  }
+};
+
 /** Nur die bekannten Kampagnenfelder, nichts Freies aus der Adresszeile. */
 const readTracking = () => {
   if (typeof window === 'undefined') return undefined;
@@ -39,7 +51,10 @@ const readTracking = () => {
       const value = params.get(key);
       if (value) tracking[key] = value.slice(0, 200);
     }
-    if (document.referrer) tracking.referrer = document.referrer.slice(0, 200);
+    // Von der Herkunft bleibt nur die fremde Domain, ohne Pfad und Parameter.
+    // Link-Weiterleitungen von Instagram oder Facebook tragen dort sonst Kennungen.
+    const referrerOrigin = readExternalReferrerOrigin();
+    if (referrerOrigin) tracking.referrer = referrerOrigin;
     return Object.keys(tracking).length > 0 ? tracking : undefined;
   } catch {
     return undefined;

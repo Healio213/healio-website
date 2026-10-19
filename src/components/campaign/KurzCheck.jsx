@@ -4,8 +4,8 @@ import { ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import { emailjsService } from '@/services/emailjsService';
 import { describeCampaignSource, markCheckLeadPending, readCampaignSearch } from '@/lib/campaign-landing';
+import { hasConsent } from '@/lib/consent';
 
-export const CHECK_CONSENT_VERSION = 'meta-check-v1-2026-10-19';
 const HEALIO_PHONE_DISPLAY = '040 89755705';
 const EMAIL_PATTERN = /^[^\s@]{1,64}@[^\s@.]{1,63}(?:\.[^\s@.]{1,63}){1,4}$/;
 const EMPTY_CONTACT = { vorname: '', telefon: '', email: '', einwilligung: false };
@@ -127,7 +127,9 @@ const KurzCheck = ({ config }) => {
           `Anfrage über healio.de${config.path} (Meta-Zielseite)`,
           ...answerLines,
           `Erreichbar über: ${[telefon && 'Telefon', email && 'E-Mail'].filter(Boolean).join(' und ')}`,
-          `Einwilligung Rückruf: ja (${CHECK_CONSENT_VERSION})`,
+          config.consent.healthData
+            ? `Einwilligung Rückruf und ausdrückliche Einwilligung Gesundheitsangabe (Art. 9 Abs. 2 lit. a DSGVO): ja (${config.consent.version})`
+            : `Einwilligung Rückruf: ja (${config.consent.version})`,
           '',
           'Kampagne:',
           describeCampaignSource(location.search),
@@ -138,7 +140,12 @@ const KurzCheck = ({ config }) => {
       return;
     }
 
-    markCheckLeadPending(config.key);
+    // Der Merker im Browser dient nur der Zählung auf der Dankeseite. Er wird
+    // deshalb nur gesetzt, wenn die Strecke misst und eine Einwilligung für
+    // Analyse oder Marketing vorliegt (§ 25 TDDDG).
+    if (config.metaContentName && (hasConsent('marketing') || hasConsent('analytics'))) {
+      markCheckLeadPending(config.key);
+    }
     navigate(`${config.thankYouPath}${readCampaignSearch(location.search)}`, { state: { firstName } });
   };
 
@@ -259,10 +266,7 @@ const KurzCheck = ({ config }) => {
                 aria-describedby={errors.einwilligung ? 'check-einwilligung-fehler' : undefined}
                 className="mt-0.5 h-6 w-6 shrink-0 rounded border-slate-300 text-home-mint focus:ring-home-mint"
               />
-              <span>
-                Ich bin einverstanden, dass die Healio GmbH mich zu meiner Anfrage anruft oder anschreibt.
-                Ich kann das jederzeit widerrufen, zum Beispiel per Mail an info@healio.de.
-              </span>
+              <span>{config.consent.text}</span>
             </label>
             {errors.einwilligung ? <p id="check-einwilligung-fehler" className="mt-2 text-sm font-semibold text-[#c2412d]">{errors.einwilligung}</p> : null}
           </div>
@@ -285,7 +289,7 @@ const KurzCheck = ({ config }) => {
 
           <p className="text-sm leading-6 text-slate-500">
             Kein Newsletter, kein Weiterverkauf deiner Daten. Mehr dazu in der{' '}
-            <a href="/datenschutz" target="_blank" rel="noopener" className="font-semibold text-home-midnight underline decoration-home-mint decoration-2 underline-offset-4">
+            <a href="/datenschutz#kurzcheck" target="_blank" rel="noopener" className="font-semibold text-home-midnight underline decoration-home-mint decoration-2 underline-offset-4">
               Datenschutzerklärung
             </a>.
           </p>

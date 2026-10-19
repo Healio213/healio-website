@@ -93,6 +93,14 @@ const DatenschutzPage = () => {
                 </a>
               </p>
 
+              <h3 id="kurzcheck" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.kurzCheckTitle')}</h3>
+              <p>{t('datenschutz.kurzCheckText')}</p>
+              <p>{t('datenschutz.kurzCheckLegalBasis')}</p>
+              <p>{t('datenschutz.kurzCheckTracking')}</p>
+              <p>{t('datenschutz.kurzCheckRecipients')}</p>
+              <p>{t('datenschutz.kurzCheckStorage')}</p>
+              <p>{t('datenschutz.kurzCheckRevocation')}</p>
+
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.leitfadenTitle')}</h3>
               <p>{t('datenschutz.leitfadenText')}</p>
 
@@ -105,6 +113,11 @@ const DatenschutzPage = () => {
               <p>{t('datenschutz.googleAdsText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.metaTitle')}</h3>
               <p>{t('datenschutz.metaText')}</p>
+              <h3 id="meta-formulare" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.metaLeadFormsTitle')}</h3>
+              <p>{t('datenschutz.metaLeadFormsText')}</p>
+              <p>{t('datenschutz.metaLeadFormsLegalBasis')}</p>
+              <p>{t('datenschutz.metaLeadFormsStorage')}</p>
+              <p>{t('datenschutz.metaLeadFormsPlatform')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.nitaTitle')}</h3>
               <p>{t('datenschutz.nitaText')}</p>
               <h3 id="whatsapp-kontakt" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">

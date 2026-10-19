@@ -129,6 +129,20 @@ check('Datenschutz-Absatz nennt Zweck, Daten, Speicherort und Rechtsgrundlage', 
   && /löschen/.test(legalDe.datenschutz.leitfadenText));
 check('Datenschutzseite gibt den Absatz aus', privacyPage.includes("datenschutz.leitfadenTitle") && privacyPage.includes("datenschutz.leitfadenText"));
 
+// Herkunftsseite: nur die Domain, nie Pfad oder Parameter (Datenschutzerklaerung 19.10.2026).
+const { buildUtm } = await import('../api/partner-lead.js');
+const shimReferrer = 'https://l.instagram.com/?u=https%3A%2F%2Fhealio.de%2Fpartner%2Fleitfaden&e=AT0geheim';
+check('Server kürzt die Herkunftsseite auf die Domain', buildUtm({ referrer: shimReferrer })?.referrer === 'https://l.instagram.com');
+check('Server verwirft Herkunftsangaben ohne Webadresse', buildUtm({ referrer: 'android-app://com.instagram' }) === null);
+check('Server behält die utm-Werte neben der gekürzten Herkunft', buildUtm({ utm_source: 'meta', referrer: 'https://www.facebook.com/x?fbclid=1' })?.utm_source === 'meta'
+  && buildUtm({ utm_source: 'meta', referrer: 'https://www.facebook.com/x?fbclid=1' })?.referrer === 'https://www.facebook.com');
+check('Formular schickt nur die fremde Domain als Herkunft', /return referrer\.origin;/.test(form)
+  && /referrer\.origin === window\.location\.origin\) return '';/.test(form)
+  && !/document\.referrer\.slice/.test(form));
+check('Datenschutz-Absatz nennt die gekürzte Herkunftsseite', /Herkunftsseite/.test(legalDe.datenschutz.leitfadenText)
+  && /nur die Domain/.test(legalDe.datenschutz.leitfadenText)
+  && /referring site/.test(legalEn.datenschutz.leitfadenText));
+
 const failed = checks.filter(([, passed]) => !passed);
 for (const [label, passed] of checks) {
   console.log(`${passed ? '✓' : '✗'} ${label}`);

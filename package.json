@@ -46,6 +46,7 @@
     "test:privacy": "node scripts/check-privacy-consent-contract.mjs",
     "test:google-ads": "node scripts/check-google-ads-conversions.mjs",
     "test:leitfaden": "node scripts/check-praxis-leitfaden-contract.mjs",
+    "test:meta-check-consent": "node scripts/check-meta-check-consent-contract.mjs",
     "test:ratgeber": "node scripts/check-ratgeber-contract.mjs",
     "test:ratgeber-build": "node scripts/check-ratgeber-build-output.mjs",
     "ratgeber:register": "node scripts/build-ratgeber-registry.mjs",

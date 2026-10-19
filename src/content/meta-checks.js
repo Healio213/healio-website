@@ -29,6 +29,28 @@ const KASSE_STEP = {
 
 const BONUS_ZUSATZ = 'Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.';
 
+const WIDERRUF = 'Ich kann das jederzeit widerrufen, zum Beispiel per Mail an info@healio.de.';
+
+/**
+ * Einwilligungstexte der Kurzchecks. Die Fassung geht mit jeder Anfrage an
+ * Healio und belegt, welchem Wortlaut zugestimmt wurde (Art. 7 Abs. 1 DSGVO,
+ * § 7a UWG). Die Kennungen sind bewusst neutral, damit der Nachweis selbst
+ * keine Schwangerschaft verrät. Neuer Wortlaut braucht eine neue Fassung.
+ */
+const CONSENT_RUECKRUF = {
+  version: 'check-n-v2-2026-10-19',
+  text: `Ich bin einverstanden, dass die Healio GmbH mich zu meiner Anfrage anruft oder anschreibt. Meine Angaben werden nur dafür genutzt. ${WIDERRUF}`,
+  healthData: false,
+};
+
+// Ausdrückliche Einwilligung nach Art. 9 Abs. 2 lit. a DSGVO: Herkunft und
+// Auswahl lassen auf eine Schwangerschaft schließen (EuGH C-21/23).
+const CONSENT_RUECKRUF_GESUNDHEIT = {
+  version: 'check-f-v2-2026-10-19',
+  text: `Ich bin einverstanden, dass die Healio GmbH mich zu meiner Anfrage anruft oder anschreibt. Aus meiner Anfrage kann sich eine Schwangerschaft ergeben, also eine Gesundheitsangabe. Ich willige ausdrücklich ein, dass Healio auch diese Angabe nur für meine Anfrage verarbeitet. ${WIDERRUF}`,
+  healthData: true,
+};
+
 export const META_CHECKS = {
   naturheilkunde: {
     key: 'naturheilkunde',
@@ -37,6 +59,7 @@ export const META_CHECKS = {
     pageSource: 'Meta-Check Naturheilkunde',
     // Darf nur ein fester Seitenschlüssel aus META_PAGE_KEYS sein.
     metaContentName: 'ambulant',
+    consent: CONSENT_RUECKRUF,
     seoTitle: 'Kurzcheck Osteopathie und Heilpraktiker | Healio',
     seoDescription: 'Prüfe in 45 Sekunden, was eine ambulante Zusatzversicherung bei Osteopathie und Heilpraktiker erstattet und wie dein Kassenbonus den Beitrag mitzahlen kann.',
     badge: 'Osteopathie · Heilpraktiker',
@@ -74,6 +97,7 @@ export const META_CHECKS = {
     pageSource: 'Meta-Check Schwangerschaft',
     // Diese Strecke misst nichts an Meta, Google oder Analyse (wie /schwangerschaft).
     metaContentName: null,
+    consent: CONSENT_RUECKRUF_GESUNDHEIT,
     seoTitle: 'Kurzcheck Vorsorge in der Schwangerschaft | Healio',
     seoDescription: 'Prüfe in 45 Sekunden, welcher Zusatzschutz Feinultraschall, Toxoplasmose und Streptokokken erstattet und wie viel dein Kassenbonus zum Beitrag beisteuert.',
     badge: 'Vorsorge-Extras · Kurzcheck',

@@ -137,15 +137,34 @@ const readOptionalTracking = (value) => {
   return trimmed.slice(0, MAX_UTM_LENGTH);
 };
 
+/**
+ * Von der Herkunftsseite bleibt nur die Domain (Schema und Host), ohne Pfad
+ * und Parameter. So steht es in der Datenschutzerklaerung; aeltere Clients
+ * schicken noch die volle Adresse.
+ */
+export const readReferrerOrigin = (value) => {
+  const trimmed = readOptionalTracking(value);
+  if (!trimmed) return null;
+  try {
+    const referrer = new URL(trimmed);
+    if (referrer.protocol !== 'https:' && referrer.protocol !== 'http:') return null;
+    return referrer.origin;
+  } catch {
+    return null;
+  }
+};
+
 /** Nur die bekannten Kampagnenfelder, gekuerzt, ohne freie Zusatzschluessel. */
 export const buildUtm = (tracking) => {
   if (!tracking || typeof tracking !== 'object' || Array.isArray(tracking)) return null;
 
   const utm = {};
-  for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'referrer']) {
+  for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
     const value = readOptionalTracking(tracking[key]);
     if (value) utm[key] = value;
   }
+  const referrer = readReferrerOrigin(tracking.referrer);
+  if (referrer) utm.referrer = referrer;
 
   return Object.keys(utm).length > 0 ? utm : null;
 };
