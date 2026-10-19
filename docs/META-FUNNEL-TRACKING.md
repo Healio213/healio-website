@@ -2,6 +2,15 @@
 
 Stand: 21.09.2026 · Branch `feature/meta-funnel-tracking` · noch nicht in `main`
 
+**Pixel-Stand 19.10.2026:** Pixel-/Datensatz-ID `1409141335613467` (Datensatz
+„healio.de Website“, Meta-Unternehmenskonto Healio GmbH) ist in Vercel gesetzt:
+`VITE_META_PIXEL_ID` und `META_PIXEL_ID`, jeweils Production und Preview. Der
+Code ist damit scharf, lädt aber weiterhin nur nach Zustimmung zum Zweck
+„Marketing“ im Cookie-Banner. Offen: `META_CAPI_ACCESS_TOKEN` (setzt Frank selbst
+in Vercel). Ohne Token antwortet `/api/meta-events` mit 204, es läuft nur der
+Browser-Pixel. Voraussetzung für das Funktionieren mit dem echten `fbevents.js`
+ist die Freigabe nach dem Laden des Skripts (Commit 729deb4).
+
 Meta-Pixel plus Conversions API (CAPI) mit Ereignis-Deduplizierung, hinter dem
 bestehenden Consent-Manager. Umsetzung nach Jonas Eiserts Schritt 7.
 
