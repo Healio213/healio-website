@@ -75,6 +75,9 @@ const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 // src/lib/ratgeber-cta.js), gemessen wird dort.
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
+  // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
+  '/check/schwangerschaft',
+  '/check/schwangerschaft/danke',
   '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',

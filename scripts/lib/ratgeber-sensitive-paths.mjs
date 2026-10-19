@@ -72,6 +72,9 @@ export const NEW_SENSITIVE_RATGEBER_PATHS = Object.freeze([
 
 export const EXPECTED_GOOGLE_META_EXCLUDED_PATHS = Object.freeze([
   '/schwangerschaft',
+  // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
+  '/check/schwangerschaft',
+  '/check/schwangerschaft/danke',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',
   '/ratgeber/schwangerschaft-was-steht-mir-zu',
@@ -93,6 +96,9 @@ export const EXPECTED_ANALYTICS_EXCLUDED_PATHS = Object.freeze([
   '/zahn',
   '/en/dental',
   '/schwangerschaft',
+  // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
+  '/check/schwangerschaft',
+  '/check/schwangerschaft/danke',
   '/ratgeber/vorsorgeuntersuchung',
   '/ratgeber/hautkrebsscreening',
   '/ratgeber/vorsorgeuntersuchung-frauen',

@@ -29,7 +29,9 @@ export const emailjsService = {
     page_source: pageSource || "Unbekannt"
   }),
   
-  sendEmail: async (formData, pageSource) => {
+  // track: false nur fuer die Meta-Zielseiten unter /check. Dort zaehlt die
+  // Dankeseite den Lead, damit er nicht doppelt gemessen wird.
+  sendEmail: async (formData, pageSource, { track = true } = {}) => {
     let response;
     try {
       const normalizedParams = emailjsService.normalizeData(formData, pageSource);
@@ -52,6 +54,8 @@ export const emailjsService = {
       console.error('EmailJS: Versand konnte nicht bestätigt werden.');
       throw error;
     }
+
+    if (!track) return { success: true, response };
 
     // Die Versandannahme steht fest. Eine ausgefallene Messung darf daraus
     // keinen Versandfehler machen und damit einen erneuten Versand auslösen.

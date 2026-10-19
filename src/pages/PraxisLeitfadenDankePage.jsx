@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowDownToLine, CalendarCheck } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { APPOINTMENT_BOOKING } from '@/lib/appointmentBooking';
 import { trackMetaLead } from '@/lib/meta-pixel';
+import AppointmentBooking from '@/components/CalendlyEmbed';
+import { isLeitfadenCampaign } from '@/lib/campaign-landing';
 
 export const LEITFADEN_DOWNLOAD_PATH = '/downloads/healio-leitfaden-therapieabbruch-stopper-2026.pdf';
 
@@ -33,7 +35,12 @@ const praxisCheck = [
   },
 ];
 
-const PraxisLeitfadenDankePage = () => (
+const PraxisLeitfadenDankePage = () => {
+  // Meta-Fassung (?kampagne=meta): ohne Menü, Kalender direkt auf der Seite,
+  // damit niemand die Strecke über /partner verlassen muss.
+  const campaign = isLeitfadenCampaign(useLocation());
+
+  return (
   <>
     <SEOHead
       title="Dein Leitfaden ist da | Healio"
@@ -43,7 +50,7 @@ const PraxisLeitfadenDankePage = () => (
       ogImageAlt="Healio Leitfaden für Naturheilpraxen"
     />
 
-    <main className="min-h-screen bg-[#f4faf7] pt-24 text-slate-700 sm:pt-28">
+    <main className={`min-h-screen bg-[#f4faf7] text-slate-700 ${campaign ? 'pt-2' : 'pt-24 sm:pt-28'}`}>
       <section className="healio-container px-4 pb-12 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <FriendlyIcon kind="document" tone="mint" size="lg" className="mx-auto" />
@@ -76,7 +83,9 @@ const PraxisLeitfadenDankePage = () => (
             Was dich im Praxis-Check erwartet
           </h2>
           <p className="mt-3 leading-7 text-slate-600">
-            30 Minuten, per Telefon oder Videocall, unverbindlich.
+            {campaign
+              ? '45 Minuten per Videocall, unverbindlich. Such dir direkt hier einen Termin aus.'
+              : '30 Minuten, per Telefon oder Videocall, unverbindlich.'}
           </p>
 
           <ul className="mt-8 space-y-6">
@@ -93,6 +102,11 @@ const PraxisLeitfadenDankePage = () => (
             ))}
           </ul>
 
+          {campaign ? (
+            <div className="mt-9 overflow-hidden rounded-xl border border-slate-100">
+              <AppointmentBooking title="Kalender für den Praxis-Check" />
+            </div>
+          ) : (
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               to={TERMIN_PATH}
@@ -112,10 +126,12 @@ const PraxisLeitfadenDankePage = () => (
               Lieber sofort einen Termin wählen
             </a>
           </div>
+          )}
         </div>
       </section>
     </main>
   </>
-);
+  );
+};
 
 export default PraxisLeitfadenDankePage;

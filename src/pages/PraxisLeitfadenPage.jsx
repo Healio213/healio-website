@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import PraxisLeitfadenForm from '@/components/sections/partner/PraxisLeitfadenForm';
+import { isLeitfadenCampaign } from '@/lib/campaign-landing';
 
 const CANONICAL_URL = 'https://healio.de/partner/leitfaden';
 
@@ -27,7 +29,11 @@ const nutzen = [
   },
 ];
 
-const PraxisLeitfadenPage = () => (
+const PraxisLeitfadenPage = () => {
+  // Meta-Fassung ohne Kopfmenü: kein Abstand für den festen Header nötig.
+  const campaign = isLeitfadenCampaign(useLocation());
+
+  return (
   <>
     <SEOHead
       title="Der Therapieabbruch-Stopper: Leitfaden für Naturheilpraxen | Healio"
@@ -47,7 +53,7 @@ const PraxisLeitfadenPage = () => (
       }}
     />
 
-    <main className="min-h-screen bg-[#f4faf7] pt-24 text-slate-700 sm:pt-28">
+    <main className={`min-h-screen bg-[#f4faf7] text-slate-700 ${campaign ? 'pt-2' : 'pt-24 sm:pt-28'}`}>
       <section className="healio-container px-4 pb-16 pt-8 sm:px-6 sm:pb-20 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.85fr)] lg:items-start">
           <div className="max-w-2xl">
@@ -110,6 +116,7 @@ const PraxisLeitfadenPage = () => (
       </section>
     </main>
   </>
-);
+  );
+};
 
 export default PraxisLeitfadenPage;

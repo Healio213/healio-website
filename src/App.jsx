@@ -14,6 +14,7 @@ import { ConsentManager } from '@/components/ConsentManager';
 import { NitaConsentWidget } from '@/components/NitaConsentWidget';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import { useReferrer } from '@/hooks/useReferrer';
+import { isCampaignLandingRoute } from '@/lib/campaign-landing';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
 import { isAnalyticsExcludedRoute, setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
 import {
@@ -71,6 +72,8 @@ const AltersvorsorgeRatgeberPage = React.lazy(() => import('@/pages/Altersvorsor
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
+const CheckLandingPage = React.lazy(() => import('@/pages/CheckLandingPage'));
+const CheckDankePage = React.lazy(() => import('@/pages/CheckDankePage'));
 const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 
 const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));
@@ -101,6 +104,8 @@ function App() {
   const isPrivateCheckRoute = GUIDED_CALLBACK_PREVIEW || isAnalyticsExcludedRoute(location);
   const isGuidedSurface = GUIDED_CALLBACK_ENABLED && isGuidedCallbackRoute(location.pathname);
   const isPregnancy = location.pathname === '/schwangerschaft';
+  // Meta-Zielseiten (19.10.2026): ablenkungsfrei, ohne Nita und ohne schwebenden WhatsApp-Knopf.
+  const isCampaignLanding = isCampaignLandingRoute(location);
   // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
   const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Experiment 06.10.2026: auch auf /ambulant und /stationaer sitzt WhatsApp am
@@ -195,8 +200,8 @@ function App() {
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
-      {!isGuidedSurface && !isPregnancy && <NitaConsentWidget />}
-      {!isGuidedSurface && !isPregnancy && !isDentalPage && (
+      {!isGuidedSurface && !isPregnancy && !isCampaignLanding && <NitaConsentWidget />}
+      {!isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding && (
         isLeisteMobilePage
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
           : <WhatsAppContactButton />
@@ -284,6 +289,12 @@ function App() {
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<EnglishBlogArticleRedirect />} />
             </Route>
+
+            {/* Meta-Zielseiten (19.10.2026): ohne Layout, nur Logo, Impressum und Datenschutz */}
+            <Route path="/check/naturheilkunde" element={<CheckLandingPage variant="naturheilkunde" />} />
+            <Route path="/check/naturheilkunde/danke" element={<CheckDankePage variant="naturheilkunde" />} />
+            <Route path="/check/schwangerschaft" element={<CheckLandingPage variant="schwangerschaft" />} />
+            <Route path="/check/schwangerschaft/danke" element={<CheckDankePage variant="schwangerschaft" />} />
 
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}
             <Route path="/tiktok" element={<TikTokPage />} />

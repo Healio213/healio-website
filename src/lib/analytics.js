@@ -15,6 +15,9 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/zahn',
   '/en/dental',
   '/schwangerschaft',
+  // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
+  '/check/schwangerschaft',
+  '/check/schwangerschaft/danke',
   '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/vorsorgeuntersuchung',
   '/ratgeber/hautkrebsscreening',

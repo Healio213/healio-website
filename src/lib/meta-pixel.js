@@ -49,6 +49,8 @@ const META_PAGE_KEY_BY_PATH = Object.freeze({
   '/en/partner': 'partner',
   '/ratgeber': 'ratgeber',
   '/partner/leitfaden': 'praxis-leitfaden',
+  // Meta-Zielseite Naturheilkunde zaehlt zum ambulanten Angebot.
+  '/check/naturheilkunde': 'ambulant',
 });
 
 // Der Ratgeber hat Unterseiten (Advertorials, spaeter organische Artikel).
@@ -66,6 +68,9 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Familienplanungs-Ratgeber und die vier Krebsvorsorge-Ratgeber.
 const META_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
+  // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
+  '/check/schwangerschaft',
+  '/check/schwangerschaft/danke',
   '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
   '/ratgeber/schwanger-zusatzversicherung',
   '/ratgeber/schwangerschaft-worauf-achten',

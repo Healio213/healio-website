@@ -28,12 +28,14 @@ const publicRouterPaths = [
   '/en/contact', '/en/appointment', '/en/outpatient', '/en/dental', '/en/inpatient',
   '/en/legal-notice', '/en/terms', '/en/privacy', '/en/initial-information', '/en/blog',
   '/tiktok', '/en/tiktok', '/instagram', '/en/instagram',
+  '/check/naturheilkunde', '/check/naturheilkunde/danke', '/check/schwangerschaft', '/check/schwangerschaft/danke',
   '/potenzialanalyse', '/en/potential-analysis', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tierkrankenversicherung', '/en/pet-insurance',
 ];
 
 const noindexPaths = new Set([
   '/partner/leitfaden/danke',
+  '/check/naturheilkunde', '/check/naturheilkunde/danke', '/check/schwangerschaft', '/check/schwangerschaft/danke',
   '/lebenshilfe', '/zahnaerzte/praxis-checkliste', '/konto-loeschen', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',

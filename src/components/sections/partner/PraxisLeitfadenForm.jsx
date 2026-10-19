@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Loader2, ArrowRight } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import { META_LEITFADEN_KEY, trackMetaLead } from '@/lib/meta-pixel';
+import { isLeitfadenCampaign, readCampaignSearch } from '@/lib/campaign-landing';
 
 export const LEITFADEN_ENDPOINT = '/api/partner-lead';
 export const LEITFADEN_THANK_YOU_PATH = '/partner/leitfaden/danke';
@@ -50,6 +51,7 @@ const labelClass = 'block text-sm font-semibold text-slate-800';
 
 const PraxisLeitfadenForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -117,7 +119,10 @@ const PraxisLeitfadenForm = () => {
       // Meta-Modul selbst, hier steht bewusst keine zweite Logik daneben.
       trackMetaLead({ content_name: META_LEITFADEN_KEY });
       setFormData(EMPTY_FORM);
-      navigate(LEITFADEN_THANK_YOU_PATH);
+      // Meta-Fassung: Dankeseite bleibt in der schlanken Hülle, UTM gehen mit.
+      navigate(isLeitfadenCampaign(location)
+        ? `${LEITFADEN_THANK_YOU_PATH}${readCampaignSearch(location.search)}`
+        : LEITFADEN_THANK_YOU_PATH);
     } catch {
       setErrorMessage('Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder schreib uns an info@healio.de.');
       setIsSubmitting(false);
@@ -211,7 +216,7 @@ const PraxisLeitfadenForm = () => {
           Ich möchte den Leitfaden erhalten und bin einverstanden, dass die Healio GmbH mich dazu per
           E-Mail und, wenn ich meine Nummer angebe, telefonisch kontaktiert. Ich kann das jederzeit
           widerrufen, zum Beispiel per Mail an info@healio.de. Hinweise in der{' '}
-          <Link to="/datenschutz" className="font-semibold text-[#0b4d4a] underline underline-offset-2">
+          <Link to="/datenschutz" target={isLeitfadenCampaign(location) ? '_blank' : undefined} className="font-semibold text-[#0b4d4a] underline underline-offset-2">
             Datenschutzerklärung
           </Link>.
         </span>
