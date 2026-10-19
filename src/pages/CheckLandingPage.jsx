@@ -32,6 +32,9 @@ const CheckLandingPage = ({ variant }) => {
           <p className="mt-4 text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
             {config.lead}
           </p>
+          {config.heroNote ? (
+            <p className="mt-3 text-sm leading-6 text-slate-400">{config.heroNote}</p>
+          ) : null}
           <ul className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
             {config.bullets.map((bullet) => (
               <li key={bullet} className="flex items-center gap-2.5 text-base font-semibold text-white">

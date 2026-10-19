@@ -42,6 +42,8 @@ export const META_CHECKS = {
     badge: 'Osteopathie · Heilpraktiker',
     title: 'Schon wieder 360 € selbst gezahlt?',
     lead: 'Prüfe in 45 Sekunden, was eine ambulante Zusatzversicherung bei Osteopathie und Heilpraktiker erstattet und wie dein Kassenbonus den Beitrag mitzahlen kann.',
+    // Pflicht-Zusatz in Sichtnähe der Bonus-Aussage (Rote Linie, Live-Prüfung 19.10.2026).
+    heroNote: BONUS_ZUSATZ,
     bullets: ['Ohne Wartezeit', 'Je nach Tarif 50 bis 100 %', 'Mit Berechnung deines Kassenbonus'],
     steps: [
       {
@@ -59,7 +61,6 @@ export const META_CHECKS = {
     ],
     footnotes: [
       'Rechenbeispiel: 4 × 90 € Osteopathie = 360 €. Erstattet wird je nach Tarif 50 bis 100 % im Rahmen der Höchstbeträge, für Behandlungen ab Versicherungsbeginn.',
-      BONUS_ZUSATZ,
     ],
     thankYou: {
       text: 'Wir rechnen jetzt aus, was ein passender Zusatzschutz bei Osteopathie und Heilpraktiker erstattet und wie viel dein Kassenbonus zum Beitrag beisteuert. Danach melden wir uns bei dir, so wie du es angegeben hast.',
@@ -77,8 +78,10 @@ export const META_CHECKS = {
     seoDescription: 'Prüfe in 45 Sekunden, welcher Zusatzschutz Feinultraschall, Toxoplasmose und Streptokokken erstattet und wie viel dein Kassenbonus zum Beitrag beisteuert.',
     badge: 'Vorsorge-Extras · Kurzcheck',
     title: 'Feinultraschall und Bluttests selbst zahlen?',
-    lead: 'Zusatzschutz für diese Vorsorge gibt es auch, wenn du schon schwanger bist. Den Beitrag kann dein Kassenbonus mitzahlen: laut Satzung der IKK classic bis zu 810 € im Jahr, für Schwangere bis zu 1.155 €, in der Regel 400 bis 700 €.',
-    bullets: ['Vorsorge ohne Wartezeit', 'Je nach Tarif 50 bis 100 %', 'Mit Berechnung deines Kassenbonus'],
+    lead: 'Zusatzschutz für diese Vorsorge gibt es auch, wenn du schon schwanger bist. Den Beitrag kann dein Kassenbonus mitzahlen: laut Satzung der IKK classic bis zu 810 € im Jahr, für Schwangere im besten Fall bis zu 1.155 €, in der Regel 400 bis 700 €.',
+    // Einschränkungen direkt bei den Aussagen, nicht erst im Kleingedruckten.
+    heroNote: 'Die Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
+    bullets: ['Vorsorge ohne Wartezeit', 'Je nach Tarif 50 bis 100 %'],
     steps: [
       {
         id: 'thema',
@@ -93,8 +96,8 @@ export const META_CHECKS = {
       KASSE_STEP,
     ],
     footnotes: [
-      'Der Vorsorge-Topf erstattet Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose und Streptokokken, je nach Tarif 50 bis 100 %. Eine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag. Schon angeratene Untersuchungen sind nicht automatisch mitversichert.',
-      `Kassenbonus: Rechenbeispiel IKK classic laut Satzung, als Zuschuss für deinen Zusatzschutz, höchstens bis zur Höhe deines Beitrags. ${BONUS_ZUSATZ}`,
+      'Der Vorsorge-Topf erstattet Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose und Streptokokken, je nach Tarif 50 bis 100 %. Schon angeratene Untersuchungen sind nicht automatisch mitversichert.',
+      'Kassenbonus: Rechenbeispiel IKK classic laut Satzung, als Zuschuss für deinen Zusatzschutz, höchstens bis zur Höhe deines Beitrags.',
     ],
     thankYou: {
       text: 'Wir rechnen jetzt aus, welcher Zusatzschutz zu dir passt und wie viel deine Krankenkasse laut Satzung zum Beitrag beisteuert. Danach melden wir uns bei dir, so wie du es angegeben hast.',
