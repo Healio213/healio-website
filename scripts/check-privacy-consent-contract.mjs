@@ -208,6 +208,11 @@ expect(/isAmbulant\s*&&\s*showSolidHeader\s*&&\s*ambulantCtaReady/.test(header),
 expect(/ambulant-header-mobile/.test(header), 'Die Ambulant-Seite braucht mobil einen Tarif-CTA im Header.');
 expect(/fixed bottom-6 right-6[\s\S]*hidden[\s\S]*md:block/.test(stickyCalculator), 'Der schwebende Tarif-CTA darf mobil nicht mehr in der Daumenzone liegen.');
 expect(/showBanner && !settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Das initiale Consent-Banner darf im Zahn-Check nicht erscheinen.');
+expect(
+  /const privacyLinkTarget = isCampaignLandingRoute\(location\) \? \{ target: '_blank', rel: 'noopener' \} : \{\};/.test(consentManager)
+    && /'\/datenschutz'\} \{\.\.\.privacyLinkTarget\}/.test(consentManager),
+  'Auf den ablenkungsfreien Zielseiten muss der Datenschutz-Link im Cookie-Hinweis im neuen Tab öffnen.',
+);
 // Werte die tatsächlichen Footer-Listen für beide Sprachen und Routen aus.
 // Die Ausblendung darf weder von JSX-Schreibweise noch von Klassenreihenfolge abhängen.
 const footerBindings = new Map();
@@ -352,6 +357,10 @@ expect(
 expect(
   /fbq\('set', 'autoConfig', false, META_PIXEL_ID\)/.test(metaPixel),
   'Automatische Button- und Formularerfassung von Meta muss abgeschaltet bleiben.',
+);
+expect(
+  /fbq\.disablePushState = true;\s*\n\s*fbq\.allowDuplicatePageViews = true;[\s\S]{0,400}?fbq\('init', META_PIXEL_ID\)/.test(metaPixel),
+  'fbevents.js darf bei Routenwechseln keine eigenen PageViews ohne eventID senden; disablePushState und allowDuplicatePageViews muessen vor fbq(init) stehen.',
 );
 expect(
   /crypto\?\.randomUUID/.test(metaPixel) && /eventID: eventId/.test(metaPixel) && /event_id: eventId/.test(metaPixel),

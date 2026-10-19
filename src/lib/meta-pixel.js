@@ -335,6 +335,17 @@ const loadMetaPixel = () => {
   const fbq = ensureFbqStub();
   if (!fbq) return false;
 
+  // Single-Page-App: App.jsx meldet jeden Routenwechsel selbst als PageView
+  // mit eventID (Pixel + CAPI dedupliziert). fbevents.js wuerde bei jedem
+  // history.pushState/replaceState zusaetzlich einen automatischen PageView
+  // ohne eventID senden. disablePushState schaltet das ab. Ohne
+  // allowDuplicatePageViews liesse fbevents.js danach je Pixel nur den
+  // allerersten PageView durch, jeder weitere Routen-PageView fiele im
+  // Browser stillschweigend weg und kaeme nur noch per CAPI an.
+  // Beide Schalter muessen vor dem Laden von fbevents.js am fbq-Objekt stehen.
+  fbq.disablePushState = true;
+  fbq.allowDuplicatePageViews = true;
+
   // Vor der Initialisierung: keine automatische Button- und Formularerfassung,
   // kein Automatic Advanced Matching. Wir senden nur eigene Ereignisse.
   fbq('consent', 'revoke');

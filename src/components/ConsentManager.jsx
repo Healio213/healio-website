@@ -12,6 +12,7 @@ import {
   subscribeConsent,
 } from '@/lib/consent';
 import { initializeAnalytics } from '@/lib/analytics';
+import { isCampaignLandingRoute } from '@/lib/campaign-landing';
 
 const COPY = {
   de: {
@@ -78,7 +79,8 @@ const focusableSelector = [
 ].join(',');
 
 export const ConsentManager = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const initialState = useRef(getInitialState()).current;
   const [consent, setConsent] = useState(initialState.consent);
   const [showBanner, setShowBanner] = useState(initialState.showBanner);
@@ -91,6 +93,8 @@ export const ConsentManager = () => {
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
   const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  // Ablenkungsfreie Meta-Zielseiten: Datenschutz öffnet im neuen Tab, damit niemand die Strecke verlässt.
+  const privacyLinkTarget = isCampaignLandingRoute(location) ? { target: '_blank', rel: 'noopener' } : {};
   const consentUiActive = (showBanner && !isDentalCheckRoute) || (settingsOpen && !isDentalCheckRoute);
 
   useEffect(() => initializeAnalytics(), []);
@@ -216,7 +220,7 @@ export const ConsentManager = () => {
               <h2 className="text-sm font-extrabold text-slate-950 md:text-lg">{copy.bannerTitle}</h2>
               <p className="mt-1 text-xs leading-5 text-slate-600 md:text-sm md:leading-6">
                 {copy.bannerText}{' '}
-                <a href={language === 'en' ? '/en/privacy' : '/datenschutz'} className="font-semibold text-slate-800 underline underline-offset-2">
+                <a href={language === 'en' ? '/en/privacy' : '/datenschutz'} {...privacyLinkTarget} className="font-semibold text-slate-800 underline underline-offset-2">
                   {copy.privacy}
                 </a>
               </p>
