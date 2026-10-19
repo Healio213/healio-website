@@ -351,14 +351,29 @@ const loadMetaPixel = () => {
   fbq('consent', 'revoke');
   fbq('set', 'autoConfig', false, META_PIXEL_ID);
   fbq('init', META_PIXEL_ID);
-  fbq('consent', 'grant');
+
+  // Die Freigabe darf nicht in der Warteschlange stehen: fbevents.js arbeitet
+  // die Warteschlange ab, sperrt beim 'revoke' und laesst alles danach liegen,
+  // auch ein eingereihtes 'grant'. init und jedes Ereignis kaemen dann nie an.
+  // Erst ein direkter Aufruf nach dem Laden hebt die Sperre auf. Wurde in der
+  // Zwischenzeit widerrufen (pixelActive false), bleibt die Sperre bestehen.
+  const grantWhenLoaded = () => {
+    if (pixelActive && hasConsent('marketing') && typeof window.fbq === 'function') {
+      window.fbq('consent', 'grant');
+    }
+  };
 
   if (!document.querySelector(META_SCRIPT_SELECTOR)) {
     const script = document.createElement('script');
     script.async = true;
     script.src = scriptUrl;
     script.dataset.healioMeta = 'true';
+    script.addEventListener('load', grantWhenLoaded);
     document.head.appendChild(script);
+  } else if (typeof fbq.callMethod === 'function') {
+    // Skript lief schon (etwa nach Hot Reload in der Entwicklung).
+    pixelActive = true;
+    grantWhenLoaded();
   }
 
   pixelLoaded = true;

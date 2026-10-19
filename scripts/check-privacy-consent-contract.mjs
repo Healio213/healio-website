@@ -363,6 +363,12 @@ expect(
   'fbevents.js darf bei Routenwechseln keine eigenen PageViews ohne eventID senden; disablePushState und allowDuplicatePageViews muessen vor fbq(init) stehen.',
 );
 expect(
+  !/fbq\('init', META_PIXEL_ID\);\s*\n\s*fbq\('consent', 'grant'\);/.test(metaPixel)
+    && /const grantWhenLoaded = \(\) => \{\s*\n\s*if \(pixelActive && hasConsent\('marketing'\)[\s\S]{0,120}?window\.fbq\('consent', 'grant'\);/.test(metaPixel)
+    && /script\.addEventListener\('load', grantWhenLoaded\);/.test(metaPixel),
+  'Die Pixel-Freigabe muss nach dem Laden von fbevents.js direkt erfolgen; ein eingereihtes grant bleibt hinter der revoke-Sperre liegen.',
+);
+expect(
   /crypto\?\.randomUUID/.test(metaPixel) && /eventID: eventId/.test(metaPixel) && /event_id: eventId/.test(metaPixel),
   'Pixel und CAPI muessen dieselbe event_id fuer die Deduplizierung verwenden.',
 );
