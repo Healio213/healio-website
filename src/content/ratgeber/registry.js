@@ -1427,11 +1427,12 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "krankenhaus",
     "listTitle": "Krankenhauszusatzversicherung ab 65 und 70 prüfen",
-    "listTeaser": "Ob du eine Krankenhauszusatzversicherung ab 65 oder 70 Jahren abschließen kannst, hängt von den Altersgrenzen und Annahmebedingungen des konkreten Tarifs ab. Prüfe zuerst die gewünschten Wahlleistungen und danach Gesundheitsangaben, persönlichen Beitrag und Vertragsbeginn.",
-    "readingTimeMinutes": 6,
-    "metaTitle": "Krankenhauszusatzversicherung ab 65 und 70 | Healio",
-    "metaDescription": "Krankenhauszusatzversicherung für Senioren prüfen: Altersgrenzen, Gesundheitsfragen, Zimmer, Wahlarzt und persönliche Kosten ab 65 oder 70 Jahren.",
-    "publishedAt": "2026-10-07"
+    "listTeaser": "Auch mit 70 kannst du noch eine Krankenhauszusatzversicherung abschließen. Die Bayerische nimmt ohne Höchsteintrittsalter auf und stellt zwei Gesundheitsfragen. Hier stehen die Beiträge je Altersgruppe und die Grenzen.",
+    "readingTimeMinutes": 13,
+    "metaTitle": "Krankenhauszusatzversicherung ab 65 und 70: Beiträge | Healio",
+    "metaDescription": "Krankenhauszusatzversicherung ab 65 und 70: Die Bayerische nimmt ohne Höchsteintrittsalter auf. Komfort kostet mit 66 bis 70 Jahren 54,40 EUR im Monat.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "zusatzversicherung-kinder",
