@@ -85,7 +85,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Für den Beitrag zählt dein Eintrittsalter. Beide Versicherer rechnen das Jahr des Versicherungsbeginns minus dein Geburtsjahr, dein Geburtstag spielt keine Rolle. Wer 1956 geboren ist, zählt bei Beginn im Jahr 2026 als 70 und bei Beginn im Januar 2027 schon als 71. Bei der Bayerischen ist das genau die Grenze zwischen zwei Altersgruppen. Steht der Wechsel in die nächste Gruppe kurz bevor, lohnt sich deshalb ein Beginn noch im laufenden Jahr."
+          "text": "Für den Einstiegsbeitrag zählt dein Eintrittsalter. Beide Versicherer rechnen das Jahr des Versicherungsbeginns minus dein Geburtsjahr, dein Geburtstag spielt keine Rolle. Wer 1956 geboren ist, zählt bei Beginn im Jahr 2026 als 70 und bei Beginn im Januar 2027 schon als 71. Bei der Bayerischen ist das genau die Grenze zwischen zwei Altersgruppen. Ein Beginn noch im laufenden Jahr hält dich dort die ersten zwei Versicherungsjahre in der günstigeren Gruppe, danach zahlst du auch bei ihr den Beitrag deiner Altersgruppe. Bei der SDK bleibt das Eintrittsalter für den Beitrag maßgeblich."
         },
         {
           "type": "paragraph",
@@ -149,7 +149,7 @@ export const article = {
               "79,50 bis 92,50 EUR"
             ]
           ],
-          "note": "Produktsteckbrief Krankenhauszusatzversicherung der Bayerischen (B 275010, Stand 08.2025), am 21.10.2026 mit der veröffentlichten Fassung abgeglichen. Prestige: Ein- oder Zweibettzimmer, Komfort und Smart: Zweibettzimmer, jeweils mit Chefarzt. Smart leistet nur bei schweren Krankheiten laut Liste und nach Unfall; sein Beitrag steht je Lebensjahr in der Tabelle, hier als Spanne der Gruppe. Maßgeblich ist dein Eintrittsalter."
+          "note": "Produktsteckbrief Krankenhauszusatzversicherung der Bayerischen (B 275010, Stand 08.2025), am 21.10.2026 mit der veröffentlichten Fassung abgeglichen. Prestige: Ein- oder Zweibettzimmer, Komfort und Smart: Zweibettzimmer, jeweils mit Chefarzt. Smart leistet nur bei schweren Krankheiten laut Liste und nach Unfall; sein Beitrag steht je Lebensjahr in der Tabelle, hier als Spanne der Gruppe. Maßgeblich ist das Kalenderjahr minus dein Geburtsjahr, die Gruppe wechselt zur Hauptfälligkeit, frühestens im dritten Versicherungsjahr."
         },
         {
           "type": "paragraph",
@@ -310,7 +310,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab. Die Beitragsbeispiele auf der Produktseite gelten für 30-Jährige, deinen Beitrag ab 65 zeigt dir der Rechner. Hast du SP2 bereits vor deinem 60. oder 65. Geburtstag, kannst du zu diesem Geburtstag laut Tarif ohne erneute Gesundheitsprüfung in SP1 wechseln, wenn du den Antrag sechs Monate vorher stellst."
+          "text": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab. Die Beitragsbeispiele auf der Produktseite gelten für 30-Jährige, deinen Beitrag ab 65 zeigt dir der Rechner. Hast du SP2 bereits vor deinem 60. oder 65. Geburtstag, kannst du laut Tarif ohne erneute Gesundheitsprüfung in SP1 wechseln, und zwar zum Ersten deines Geburtsmonats. Den Antrag stellst du mindestens sechs Monate vorher. Für den Beitrag gilt dann dein Alter beim Wechsel."
         },
         {
           "type": "table",
@@ -437,7 +437,7 @@ export const article = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Jetzt der Teil, den kaum ein Vergleich erwähnt. Viele gesetzliche Krankenkassen zahlen ihren Bonus für Vorsorge, Impfungen und Bewegung auf Wunsch als Zuschuss zu einer privaten Zusatzversicherung. Der Bonus trägt dann einen Teil deines Klinikschutzes."
+          "text": "Zum Schluss der Geheimtipp. Viele gesetzliche Krankenkassen zahlen ihren Bonus für Vorsorge, Impfungen und Bewegung auf Wunsch als Zuschuss zu einer privaten Zusatzversicherung. Der Bonus trägt dann einen Teil deines Klinikschutzes."
         },
         {
           "type": "paragraph",
@@ -445,7 +445,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Der Zuschuss ist an deinen Schutz gebunden. Du zahlst den Beitrag wie gewohnt und reichst ihn nach dem Bonusjahr bei deiner Kasse ein. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Rechne deshalb zuerst mit dem vollen Beitrag. Kommt der Bonus dazu, ist er ein Plus und nicht die Grundlage deiner Entscheidung."
+          "text": "Der Zuschuss ist an deinen Schutz gebunden. Du zahlst den Beitrag wie gewohnt und reichst ihn nach dem Bonusjahr bei deiner Kasse ein. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus. Plane trotzdem zuerst mit dem vollen Beitrag. Kommt der Bonus dazu, ist er ein Plus und nicht die Grundlage deiner Entscheidung."
         },
         {
           "type": "segments",
