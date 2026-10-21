@@ -127,14 +127,14 @@ export const article = {
           ],
           "rows": [
             ["Erstattung Zahnersatz", "75, 90 oder 100 % inkl. Kasse", "Sofortbaustein bis 1.500 EUR", "Bis 100 % je nach Tarif"],
-            ["Staffel am Anfang", "In den ersten 3 Kalenderjahren", "Endet nach 24 Monaten", "In den Bedingungen prüfen"],
+            ["Staffel am Anfang", "In den ersten 3 Kalenderjahren", "In den ersten 4 Kalenderjahren", "In den Bedingungen prüfen"],
             ["Zahnreinigung", "90 und 100 ohne Jahresdeckel", "Je nach Zahntarif", "Zuschuss, Höhe laut Tarif"],
-            ["Wartezeit", "Keine", "Je nach Zahntarif", "Laut Barmer keine"],
+            ["Wartezeit", "Keine", "Keine", "Laut Barmer keine"],
             ["Behandlung schon angeraten", "Nicht versichert", "Mit ZAHN Sofort möglich", "In den Bedingungen prüfen"],
-            ["Fehlende Zähne", "1 bis 3 mit Zuschlag je Zahn", "Für ZAHN Sofort keine", "Im Antrag prüfen"],
+            ["Fehlende Zähne", "1 bis 3 mit Zuschlag je Zahn", "Keine Aufnahme", "Im Antrag prüfen"],
             ["Beitrag", "Nach Alter, Tabelle unten", "29,90 EUR im Monat plus Zahntarif", "Nach Alter, für Mitglieder verringert"]
           ],
-          "note": "Kurzfassung, die Einzelheiten stehen unter der Tabelle. UKV und Bayerische: Tarifangaben wie auf healio.de/zahn, Zahnreinigung und Staffel in Stufe 75 laut UKV-Produktübersicht, gültig ab 1. Mai 2026. Partnertarif: Angaben der Barmer-Seite zur Zahnzusatzversicherung, zuletzt aktualisiert am 09.11.2022. Verbindlich sind die jeweiligen Tarifbedingungen."
+          "note": "Kurzfassung, die Einzelheiten stehen unter der Tabelle. UKV und Bayerische: Tarifangaben wie auf healio.de/zahn, Zahnreinigung und Staffel in Stufe 75 laut UKV-Produktübersicht, gültig ab 1. Mai 2026. Staffel und Wartezeit der Bayerischen laut Highlightblatt Zahn B 333551 (07.2026), Annahme laut Annahmerichtlinien Zahn B 333546 (11.2025). Partnertarif: Angaben der Barmer-Seite zur Zahnzusatzversicherung, zuletzt aktualisiert am 09.11.2022. Verbindlich sind die jeweiligen Tarifbedingungen."
         },
         {
           "type": "paragraph",
@@ -142,7 +142,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Eine Behandlung, die in den letzten 2 Jahren empfohlen wurde, aktuell beabsichtigt ist oder schon läuft, ist bei der UKV nicht versichert. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit Risikozuschlag je Zahn auf, ab 4 fehlenden Zähnen ist keine Aufnahme möglich. ZAHN Sofort der Bayerischen leistet bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, auch für eine schon angeratene Behandlung. Dafür muss der Abschluss vor der Rechnung liegen, die Behandlung darf weder abgeschlossen noch abgerechnet sein, und es dürfen keine Zähne fehlen. Wartezeiten hängen bei der Bayerischen am gewählten Zahntarif, sie stehen im Antrag und im Versicherungsschein."
+          "text": "Eine Behandlung, die in den letzten 2 Jahren empfohlen wurde, aktuell beabsichtigt ist oder schon läuft, ist bei der UKV nicht versichert. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit Risikozuschlag je Zahn auf, ab 4 fehlenden Zähnen ist keine Aufnahme möglich. ZAHN Sofort der Bayerischen leistet bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, auch für eine schon angeratene Behandlung. Dafür muss der Abschluss vor der Rechnung liegen, die Behandlung darf weder abgeschlossen noch abgerechnet sein, und es dürfen keine Zähne fehlen. Wartezeiten gibt es laut Bayerischer in keinem ihrer drei Zahntarife. Dafür begrenzt eine Leistungsstaffel die Erstattung des Zahntarifs in den ersten vier Kalenderjahren. Was ZAHN Sofort zahlt, wird darauf nicht angerechnet."
         },
         {
           "type": "paragraph",
@@ -403,7 +403,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Ob die Barmer deinen Tarif anerkennt, entscheidet sie bei der Erstattung. Statt für den Beitrag kannst du den Zuschuss auch für die Rechnung der Zahnreinigung einsetzen. Den Antrag stellst du spätestens bis zum 31. Dezember des Folgejahres. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab."
+          "text": "Ob die Barmer deinen Tarif anerkennt, entscheidet sie bei der Erstattung. Statt für den Beitrag kannst du den Zuschuss auch für die Rechnung der Zahnreinigung einsetzen. Den Antrag stellst du spätestens bis zum 31. Dezember des Folgejahres. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus."
         },
         {
           "type": "segments",
@@ -624,6 +624,22 @@ export const article = {
         "href": "https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf",
         "stand": "Stand 01.08.2026",
         "accessedAt": "2026-10-07",
+        "note": ""
+      },
+      {
+        "label": "Highlightblatt Zahnzusatzversicherung mit Ergänzungsbaustein Zahn Sofort (B 333551): Leistungsstaffel, keine Wartezeit",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:65e23042-960a-4478-90c7-a249e0b5f628/B%20333551%20Highlightblatt%20allgemein%20Stadt_Zahn.PDF",
+        "stand": "07.2026",
+        "accessedAt": "2026-10-21",
+        "note": ""
+      },
+      {
+        "label": "Annahmerichtlinien Zahn (B 333546): kein Abschluss bei fehlendem Zahn",
+        "publisher": "die Bayerische",
+        "href": "https://www.diebayerische.de/dam/jcr:0b42be21-a714-4ccb-a134-c3a848d472d7/333546_annahmerichtlinien_zahn.pdf",
+        "stand": "11.2025",
+        "accessedAt": "2026-10-21",
         "note": ""
       },
       {
