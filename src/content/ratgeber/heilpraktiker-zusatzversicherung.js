@@ -39,22 +39,74 @@
  * IKK-Beispiel (Werte aus ikk-classic-bonusprogramm-2026, Beitrag AP1 21 bis
  * 30 Jahre). Suchbegriffe: zusatzversicherung heilpraktiker,
  * heilpraktikerversicherung, versicherung für heilpraktiker, ohne wartezeit.
+ *
+ * Ausbau 21.10.2026 (SEO, Hauptbegriff "heilpraktiker zusatzversicherung" und
+ * "zusatzversicherung heilpraktiker"; Fragen aus der Search Console):
+ *   - Neuer Abschnitt "kosten" mit allen Altersgruppen und Stufen. Die Beiträge
+ *     kommen unverändert aus src/data/sdkAmbulantBeitraege.js (eine
+ *     Datenquelle mit /ambulant und dem Tarifvergleich), auch die bisher von
+ *     Hand eingetragenen Werte der Gruppe 21 bis 30. Kein Beitrag steht hier
+ *     als feste Zahl.
+ *   - Neue FAQ nur mit Beleg: 100 Prozent (AVB 1.753a I.5), Abrechnung nach
+ *     GebüH (1.753a I.5, I.8, Glossar "Erstattungsfähige Kosten"; 1.751 A.8
+ *     Abs. 2, A.9 Abs. 2), schon beim Heilpraktiker gewesen (1.751 A.1, A.4;
+ *     SDK-Broschüre 1.781/07.23), zwei Verträge (1.751 A.8 Abs. 4, A.9 Abs. 1;
+ *     ARAG-Antrag A842, Abruf 21.10.2026), steuerlich absetzen (§ 10 Abs. 1
+ *     Nr. 3a und Abs. 4 EStG, Abruf 21.10.2026), Kinder (1.753a III.1 Abs. 3
+ *     und Versicherungsfähigkeit).
+ *   - Vorerkrankung: Nach Frank und SDK-Broschüre 1.781/07.23 werden
+ *     Vorerkrankungen über feste Zuschläge mitversichert, ohne Ablehnung und
+ *     ohne Leistungsausschluss. Die älteren Sätze zu möglichen Ausschlüssen
+ *     (Glossar AVB 1.751) sind deshalb an Franks Regel vom 14.10.2026
+ *     angeglichen.
+ *   - Kassenbonus als Geheimtipp am Ende (eigener Abschnitt), IKK-Werte nach
+ *     Satzung: bis zu 810 EUR, in der Schwangerschaft bis zu 1.155 EUR, breite
+ *     Masse 400 bis 700 EUR nach Healio-Einschätzung aus der Beratung.
+ *   - Bewusst nicht aufgenommen: einzelne Verfahren als Suchthema (etwa
+ *     Ausleitung), Testsieger-Abschnitt, Link auf die Meta-Zielseite
+ *     /check/naturheilkunde (noindex, zählt Leads für den Meta-Test).
+ *   - Nachbarn der Gruppe ambulant bleiben bei vier (Prüfgrenze), neue Links
+ *     gehen auf Zusatzversicherungs-Ratgeber anderer Gruppen.
  */
+
+import { BEISPIEL_GRUPPE, SDK_AMBULANT_BEITRAEGE } from '../../data/sdkAmbulantBeitraege.js';
+
+// Beträge in deutscher Schreibweise mit zwei Nachkommastellen (1.218,24).
+const eur = (wert) => {
+  const [ganz, cent] = wert.toFixed(2).split('.');
+  return `${ganz.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${cent}`;
+};
+const runden = (wert) => Math.round(wert * 100) / 100;
+
+const STAND_BEITRAEGE = SDK_AMBULANT_BEITRAEGE.stand;
+const GRUPPEN = SDK_AMBULANT_BEITRAEGE.gruppen;
+const KINDER = GRUPPEN.find((gruppe) => gruppe.von === 0);
+const ERWACHSENE = GRUPPEN.filter((gruppe) => gruppe.von > 0);
+const GRUPPE_31 = GRUPPEN.find((gruppe) => gruppe.von === 31);
+// Beispielgruppe 21 bis 30 Jahre, wie auf /ambulant ohne Geburtsjahr.
+const BEISPIEL = BEISPIEL_GRUPPE;
+const ERWACHSENE_VON = Math.min(...ERWACHSENE.map((gruppe) => gruppe.AP5));
+const ERWACHSENE_BIS = Math.max(...ERWACHSENE.map((gruppe) => gruppe.AP1));
+const STUFEN = ['AP5', 'AP7', 'AP9', 'AP1'];
+const gruppenName = (gruppe) => {
+  if (gruppe.von === 0) return `0 bis ${gruppe.bis} Jahre (Kinderbeitrag)`;
+  return gruppe.bis === null ? `ab ${gruppe.von} Jahren` : `${gruppe.von} bis ${gruppe.bis} Jahre`;
+};
 
 export const article = {
   slug: 'heilpraktiker-zusatzversicherung',
   kind: 'ratgeber',
   group: 'ambulant',
 
-  metaTitle: 'Heilpraktiker Zusatzversicherung: Leistung, Wartezeit | Healio',
+  metaTitle: 'Heilpraktiker Zusatzversicherung: Kosten & Wartezeit | Healio',
   metaDescription:
-    'Zusatzversicherung Heilpraktiker: was nach GebüH erstattet wird, Wartezeit, Gesundheitsfragen ohne Ablehnung, Rechenbeispiel und wie dein Kassenbonus hilft.',
+    'Zusatzversicherung Heilpraktiker: bis 100 % und 1.000 EUR in zwei Jahren, keine Wartezeit laut Bedingungen, Beiträge nach Alter in der Tabelle, Kassenbonus-Tipp.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  updatedAt: '2026-10-14',
-  updatedAtLabel: '14. Oktober 2026',
-  readingTimeMinutes: 10,
+  updatedAt: '2026-10-21',
+  updatedAtLabel: '21. Oktober 2026',
+  readingTimeMinutes: 15,
 
   listTitle: 'Heilpraktiker-Zusatzversicherung: Kriterien, Grenzen und ein Rechenbeispiel',
   listTeaser:
@@ -70,16 +122,16 @@ export const article = {
     title: 'Das Wichtigste in Kürze',
     icon: 'naturopathy',
     facts: [
-      { value: 'bis zu 1.000 EUR', label: 'für Naturheilverfahren in zwei Jahren (Ambulant 100)' },
-      { value: 'Gesundheitsfragen', label: 'gehören zum Antrag und müssen vollständig stimmen' },
+      { value: 'bis zu 1.000 EUR', label: 'für Naturheilverfahren in zwei Jahren, 100 Prozent in Ambulant 100' },
+      { value: `${eur(ERWACHSENE_VON)} bis ${eur(ERWACHSENE_BIS)} EUR`, label: 'im Monat ab 21 Jahren, je nach Alter und Stufe' },
       { value: 'Was läuft, zählt nicht', label: 'Behandlungen vor Versicherungsbeginn sind nicht versichert' },
     ],
-    text: 'Die gesetzliche Kasse zahlt Heilpraktiker in der Regel nicht. Ein Zusatztarif erstattet nach seinen Bedingungen, mit Höchstbetrag, Erstattungssatz und Regeln zu bestehenden Beschwerden.',
+    text: 'Die gesetzliche Kasse zahlt Heilpraktiker in der Regel nicht. Ein Zusatztarif erstattet nach seinen Bedingungen, mit Höchstbetrag, Erstattungssatz und Regeln zu bestehenden Beschwerden. Bei der SDK gilt laut Tarifbedingungen keine Wartezeit. Gesundheitsfragen gibt es, eine Ablehnung wegen Vorerkrankungen nicht.',
     path: { to: '/ambulant', text: 'Heilpraktiker, Brille, Vorsorge?', label: 'Tarifstufen und Beitrag ansehen' },
   },
 
   lead:
-    'Eine Heilpraktiker-Zusatzversicherung erstattet nach ihren Bedingungen einen Teil deiner Heilpraktikerrechnung, denn die gesetzliche Kasse zahlt sie in der Regel nicht. Wie viel das ist, wofür und ab wann, regeln die Tarifbedingungen. Eine Rangliste mit einem Sieger gibt es hier nicht, weil sie bei diesem Thema in die Irre führt. Du bekommst stattdessen Kriterien, ein Rechenbeispiel und die Grenzen, die du vor dem Antrag kennen solltest.',
+    `Eine Heilpraktiker-Zusatzversicherung erstattet nach ihren Bedingungen einen Teil deiner Heilpraktikerrechnung, denn die gesetzliche Kasse zahlt sie in der Regel nicht. Wie viel das ist, wofür und ab wann, regeln die Tarifbedingungen. Bei den ambulanten SDK-Tarifen, die Healio vermittelt, sind es 50 bis 100 Prozent, höchstens 1.000 EUR in zwei Kalenderjahren, laut Bedingungen ohne Wartezeit. Ab 21 Jahren kostet das ${eur(ERWACHSENE_VON)} bis ${eur(ERWACHSENE_BIS)} EUR im Monat, je nach Alter und Stufe. Eine Rangliste mit einem Sieger gibt es hier nicht, weil sie bei diesem Thema in die Irre führt. Du bekommst stattdessen Kriterien, die Beiträge aller Altersgruppen, ein Rechenbeispiel und die Grenzen, die du vor dem Antrag kennen solltest.`,
 
   sections: [
     {
@@ -96,7 +148,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wie ein Zusatztarif das ausgestaltet, zeigt der ambulante Tarif der SDK, den Healio auf der Seite Ambulant vermittelt. Er versichert Naturheilverfahren und Behandlungen durch Heilpraktiker, wenn die Heilpraktikerin oder der Heilpraktiker die Anforderungen des Heilpraktikergesetzes erfüllt und nach dem Gebührenverzeichnis für Heilpraktiker (GebüH) abrechnet. Erstattet werden alle Leistungen, die im aktuellen GebüH stehen. Als Naturheilverfahren gelten die Verfahren nach dem Hufelandverzeichnis in der jeweils gültigen Fassung. Ausgenommen ist Psychotherapie durch Heilpraktiker.',
+          text: 'Wie ein Zusatztarif das ausgestaltet, zeigt der ambulante Tarif der SDK, den Healio auf der Seite Ambulant vermittelt. Er versichert Naturheilverfahren und Behandlungen durch Heilpraktiker, wenn die Heilpraktikerin oder der Heilpraktiker die Anforderungen des Heilpraktikergesetzes erfüllt und nach dem Gebührenverzeichnis für Heilpraktiker (GebüH) abrechnet. Erstattet werden alle Leistungen, die im aktuellen GebüH stehen. Als Naturheilverfahren gelten die Verfahren nach dem Hufelandverzeichnis in der jeweils gültigen Fassung. Ausgenommen ist Psychotherapie durch Heilpraktiker. Geht es dir um ein bestimmtes Verfahren, frag vorher, unter welcher GebüH-Ziffer die Praxis es abrechnet.',
         },
         {
           type: 'table',
@@ -104,16 +156,79 @@ export const article = {
           caption: 'Topf Naturheilverfahren der SDK-Tarife AP5 bis AP1 und Beitrag der Altersgruppe 21 bis 30',
           head: ['Stufe', 'Erstattung', 'Naturheilverfahren in zwei Kalenderjahren', 'Beitrag im Monat, 21 bis 30 Jahre'],
           rows: [
-            ['Ambulant 50 (AP5)', '50 Prozent', 'bis 500 EUR', '10,36 EUR'],
-            ['Ambulant 70 (AP7)', '70 Prozent', 'bis 700 EUR', '15,82 EUR'],
-            ['Ambulant 90 (AP9)', '90 Prozent', 'bis 900 EUR', '27,44 EUR'],
-            ['Ambulant 100 (AP1)', '100 Prozent', 'bis 1.000 EUR', '31,64 EUR'],
+            ['Ambulant 50 (AP5)', '50 Prozent', 'bis 500 EUR', `${eur(BEISPIEL.AP5)} EUR`],
+            ['Ambulant 70 (AP7)', '70 Prozent', 'bis 700 EUR', `${eur(BEISPIEL.AP7)} EUR`],
+            ['Ambulant 90 (AP9)', '90 Prozent', 'bis 900 EUR', `${eur(BEISPIEL.AP9)} EUR`],
+            ['Ambulant 100 (AP1)', '100 Prozent', 'bis 1.000 EUR', `${eur(BEISPIEL.AP1)} EUR`],
           ],
-          note: 'Quelle: SDK, Allgemeine Versicherungsbedingungen Teil II, Tarife AP5, AP7, AP9 und AP1, Stand 01.01.2023, Abschnitt I.5. Die Zeiträume zählen ab Versicherungsbeginn. Die Beiträge hängen vom Alter ab, die Tabelle zeigt die Gruppe 21 bis 30 Jahre. Beiträge der SDK-Tarife, Stand 29.09.2026, wortgleich mit healio.de/ambulant. Die Beiträge ersetzen kein persönliches Angebot, deinen Beitrag siehst du im Tarifrechner auf der Seite Ambulant.',
+          note: `Quelle: SDK, Allgemeine Versicherungsbedingungen Teil II, Tarife AP5, AP7, AP9 und AP1, Stand 01.01.2023, Abschnitt I.5. Die Zeiträume zählen ab Versicherungsbeginn. Die Beiträge hängen vom Alter ab, die Tabelle zeigt die Gruppe 21 bis 30 Jahre, alle Altersgruppen stehen im nächsten Abschnitt. Beiträge der SDK-Tarife, Stand ${STAND_BEITRAEGE}, wortgleich mit healio.de/ambulant. Die Beiträge ersetzen kein persönliches Angebot, deinen Beitrag siehst du im Tarifrechner auf der Seite Ambulant.`,
         },
         {
           type: 'paragraph',
           text: 'Der Topf für Naturheilverfahren ist einer von vier. In der höchsten Stufe kommen Sehhilfen (bis 500 EUR), Vorsorge (bis 500 EUR) und gesetzliche Zuzahlungen (bis 1.000 EUR) hinzu, zusammen bis zu 3.000 EUR in zwei Jahren. Mehr als die Rechnung zahlt der Tarif nie.',
+        },
+      ],
+    },
+    {
+      id: 'kosten',
+      heading: 'Was kostet eine Heilpraktiker-Zusatzversicherung im Monat?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: `Bei den ambulanten SDK-Tarifen zahlst du ab 21 Jahren zwischen ${eur(ERWACHSENE_VON)} und ${eur(ERWACHSENE_BIS)} EUR im Monat. Für Kinder beginnt der Beitrag bei ${eur(KINDER.AP5)} EUR. Wo du in dieser Spanne landest, entscheiden zwei Dinge: die Stufe, also wie viel Prozent der Tarif erstattet, und dein Alter. Ambulant 100 mit 100 Prozent Erstattung kostet mit 21 bis 30 Jahren ${eur(BEISPIEL.AP1)} EUR im Monat.`,
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: `Monatsbeitrag der SDK-Tarife AP5 bis AP1 nach Altersgruppe, Stand ${STAND_BEITRAEGE}`,
+          head: ['Altersgruppe', 'Ambulant 50 (AP5)', 'Ambulant 70 (AP7)', 'Ambulant 90 (AP9)', 'Ambulant 100 (AP1)'],
+          rows: GRUPPEN.map((gruppe) => [gruppenName(gruppe), ...STUFEN.map((stufe) => `${eur(gruppe[stufe])} EUR`)]),
+          note: `Quelle: Beiträge der SDK-Tarife, Stand ${STAND_BEITRAEGE}, dieselben Werte wie im Tarifrechner auf healio.de/ambulant. Maßgeblich ist das erreichte Alter, also das laufende Kalenderjahr minus dein Geburtsjahr (SDK, Allgemeine Versicherungsbedingungen Teil II, Abschnitt III.1). Bei Vorerkrankungen kommt ein Risikozuschlag dazu. Die Beiträge können angepasst werden und ersetzen kein persönliches Angebot.`,
+        },
+        {
+          type: 'paragraph',
+          text: 'Die Altersgruppe wechselt nicht am Geburtstag, sondern zum Jahreswechsel. Nach dem 20., 30., 40., 50., 60. und 70. Geburtstag zahlst du ab dem folgenden Kalenderjahr den Beitrag der nächsten Gruppe. Kinder zahlen bis zum Ende des Kalenderjahres, in dem sie 20 werden, den Kinderbeitrag. Weil der Tarif keine Alterungsrückstellungen bildet, steigt der Beitrag mit den Jahren. Außerdem darf die SDK die Beiträge neu festsetzen, wenn die Leistungsausgaben um mehr als 5 Prozent von der Kalkulation abweichen, das nicht nur vorübergehend ist und ein unabhängiger Treuhänder zustimmt.',
+        },
+        {
+          type: 'paragraph',
+          text: `Am günstigsten ist Ambulant 50, mit 21 bis 30 Jahren ${eur(BEISPIEL.AP5)} EUR im Monat. Dafür erstattet die Stufe 50 Prozent und höchstens 500 EUR für Naturheilverfahren in zwei Jahren. Dieser Topf ist mit Rechnungen über 1.000 EUR ausgeschöpft. Leg den Preis deshalb immer neben das, was die Stufe zurückgibt.`,
+        },
+        {
+          type: 'steps',
+          heading: 'So rechnest du Beitrag gegen Erstattung',
+          items: [
+            {
+              title: 'Beitrag für zwei Jahre',
+              text: `Nimm den Monatsbeitrag deiner Altersgruppe mal 24. Mit 35 Jahren kostet Ambulant 100 ${eur(GRUPPE_31.AP1)} EUR im Monat, in zwei Jahren also ${eur(runden(GRUPPE_31.AP1 * 24))} EUR.`,
+            },
+            {
+              title: 'Erstattung für zwei Jahre',
+              text: 'Nimm deine geplanten Heilpraktikerkosten mal den Erstattungssatz, höchstens bis zum Topf deiner Stufe. Bei 800 EUR in zwei Jahren erstattet Ambulant 100 bis zu 800 EUR, Ambulant 50 bis zu 400 EUR, soweit die Rechnungen erstattungsfähig sind.',
+            },
+            {
+              title: 'Weitere Töpfe ehrlich ansetzen',
+              text: 'Brille, Vorsorge und gesetzliche Zuzahlungen zählst du nur dazu, wenn du sie wirklich nutzt. In Ambulant 100 sind das bis 500, 500 und 1.000 EUR in zwei Jahren, mit den Naturheilverfahren zusammen bis 3.000 EUR.',
+            },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Wie dein Kassenbonus den Beitrag mittragen kann, steht am Ende dieser Seite. Für die anderen Töpfe gibt es eigene Ratgeber: ' },
+            { text: 'Brillenversicherung', to: '/ratgeber/brillenversicherung' },
+            { text: ' für die Brille, ' },
+            { text: 'Vorsorge Zusatzversicherung 2026', to: '/ratgeber/vorsorge-zusatzversicherung-2026' },
+            { text: ' zu den Vorsorge-Töpfen verschiedener Anbieter und ' },
+            { text: 'Zusatzversicherung für Kinder', to: '/ratgeber/zusatzversicherung-kinder' },
+            { text: ' für die Familie.' },
+          ],
+        },
+        {
+          type: 'path',
+          to: '/ambulant#tarifwahl',
+          icon: 'calculator',
+          text: 'Gib dein Geburtsjahr ein, dann siehst du deinen Beitrag in jeder Stufe.',
+          label: 'Beitrag berechnen',
         },
       ],
     },
@@ -192,7 +307,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag auf den Beitrag mit, Leistungsausschlüsse gibt es dabei nicht. Behandlungen, die vor Versicherungsbeginn schon laufen oder angeraten sind, bleiben trotzdem ausgenommen.',
+          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag auf den Beitrag mit, Leistungsausschlüsse gibt es dabei nicht. Eine Heilpraktiker-Zusatzversicherung mit Vorerkrankung ist bei der SDK also möglich: Laut ihrer Broschüre zur ambulanten Zusatzversicherung geht das direkt im Antrag über feste Zuschläge, ohne Arztanfrage. Behandlungen, die vor Versicherungsbeginn schon laufen oder angeraten sind, bleiben trotzdem ausgenommen.',
         },
         {
           type: 'paragraph',
@@ -224,7 +339,7 @@ export const article = {
           items: [
             'Eine neue Beschwerde, die erst nach dem Versicherungsbeginn auftritt, kann versichert sein.',
             'Eine Behandlung, die vor dem Beginn schon lief oder angeraten war, ist nicht versichert, auch wenn du sie später fortsetzt.',
-            'Bei erheblichen Erkrankungen vor dem Beginn kann der Versicherer die Leistung dafür ausschließen.',
+            'Eine Vorerkrankung versichert die SDK über einen festen Zuschlag mit, einen Leistungsausschluss vereinbart sie dafür laut ihrer Broschüre nicht. Eine laufende Behandlung bleibt trotzdem draußen.',
             'Der Abschluss gehört deshalb vor die Behandlung, nicht mittendrin.',
           ],
         },
@@ -248,10 +363,10 @@ export const article = {
           rows: [
             ['8 Sitzungen, angenommen 80 EUR je Sitzung (640 EUR)', 'meist nichts', '640 EUR', 'Der Tarif erstattet bis zu 640 EUR, soweit die Rechnung erstattungsfähig ist'],
             ['Längere Serie, angenommen 1.400 EUR', 'meist nichts', '1.400 EUR', 'Höchstens 1.000 EUR in zwei Kalenderjahren, die übrigen 400 EUR trägst du'],
-            ['Beitrag Ambulant 100 über zwei Jahre, 21 bis 30 Jahre (31,64 EUR im Monat)', 'nicht betroffen', 'nichts', '759,36 EUR Beitrag, den ein Kassenbonus teilweise mittragen kann'],
+            [`Beitrag Ambulant 100 über zwei Jahre, 21 bis 30 Jahre (${eur(BEISPIEL.AP1)} EUR im Monat)`, 'nicht betroffen', 'nichts', `${eur(runden(BEISPIEL.AP1 * 24))} EUR Beitrag, den ein Kassenbonus teilweise mittragen kann`],
             ['Behandlung schon vor dem Versicherungsbeginn gestartet', 'meist nichts', 'die ganze Rechnung', 'Nicht versichert, wenn der Versicherungsfall vor dem Beginn eingetreten ist'],
           ],
-          note: 'Rechenbeispiel mit angenommenen Preisen, keine Preisangabe und kein Durchschnitt. Eigene Rechnung: 31,64 EUR mal 12 Monate mal 2 Jahre ergibt 759,36 EUR. Tarifwerte nach den SDK-Bedingungen Teil II, Stand 01.01.2023, Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant (Stand 29.09.2026). Was erstattungsfähig ist, steht in den Bedingungen, verbindlich ist die Entscheidung des Versicherers.',
+          note: `Rechenbeispiel mit angenommenen Preisen, keine Preisangabe und kein Durchschnitt. Eigene Rechnung: ${eur(BEISPIEL.AP1)} EUR mal 12 Monate mal 2 Jahre ergibt ${eur(runden(BEISPIEL.AP1 * 24))} EUR. Tarifwerte nach den SDK-Bedingungen Teil II, Stand 01.01.2023, Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant (Stand ${STAND_BEITRAEGE}). Was erstattungsfähig ist, steht in den Bedingungen, verbindlich ist die Entscheidung des Versicherers.`,
           bonusNote: 'Dein Kassenbonus kann den Beitrag mittragen: Viele Kassen zahlen ihn auf Wunsch als Zuschuss zu einer Zusatzversicherung. Wie viel, hängt von deiner Kasse und deinen Aktivitäten ab.',
         },
         {
@@ -269,7 +384,7 @@ export const article = {
         {
           type: 'segments',
           segments: [
-            { text: 'Der größte Hebel liegt oft beim Bonusprogramm deiner Kasse. Ein Beispiel mit den Satzungswerten der IKK classic: Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung, dazu Fitnessstudio, Sportverein, BMI und Blutdruck ergeben als Zuschuss 405 EUR im Jahr. Der Jahresbeitrag für Ambulant 100 liegt in der Altersgruppe 21 bis 30 bei 379,68 EUR. Der Zuschuss kann ihn in diesem Fall ganz tragen, erstattet wird aber höchstens der gezahlte Beitrag. Ausgezahlt wird erst nach dem Antrag im Folgejahr, bis dahin zahlst du den Beitrag selbst. Gegenzurechnen ist der Zusatzbeitrag der IKK classic von 3,85 Prozent. Alle Positionen und die Rechnung dazu stehen im Ratgeber ' },
+            { text: `Der größte Hebel liegt oft beim Bonusprogramm deiner Kasse. Ein Beispiel mit den Satzungswerten der IKK classic: Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung, dazu Fitnessstudio, Sportverein, BMI und Blutdruck ergeben als Zuschuss 405 EUR im Jahr. Der Jahresbeitrag für Ambulant 100 liegt in der Altersgruppe 21 bis 30 bei ${eur(runden(BEISPIEL.AP1 * 12))} EUR. Der Zuschuss kann ihn in diesem Fall ganz tragen, erstattet wird aber höchstens der gezahlte Beitrag. Ausgezahlt wird erst nach dem Antrag im Folgejahr, bis dahin zahlst du den Beitrag selbst. Gegenzurechnen ist der Zusatzbeitrag der IKK classic von 3,85 Prozent. Alle Positionen und die Rechnung dazu stehen im Ratgeber ` },
             { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
             { text: '.' },
           ],
@@ -279,8 +394,8 @@ export const article = {
           heading: 'Ehrlich gesagt',
           items: [
             { lead: 'Eine Rangliste würde dich in die Irre führen.', text: 'Ob ein Tarif passt, hängt an Behandlern, Höchstbeträgen, Annahme und deinem Alter. Darum stehen hier Kriterien statt eines Siegers.' },
-            { lead: 'Die Gesundheitsfragen sind Teil des Vertrags.', text: 'Falsche oder unvollständige Antworten können Rücktritt oder Kündigung nach sich ziehen. Wer ehrlich antwortet, kann einen Zuschlag oder Ausschluss bekommen, aber eine verlässliche Grundlage.' },
-            { lead: 'Was vorher lief, zählt nicht.', text: 'Behandlungen vor dem Versicherungsbeginn sind nicht versichert, und erhebliche Vorerkrankungen kann der Versicherer ausschließen.' },
+            { lead: 'Die Gesundheitsfragen sind Teil des Vertrags.', text: 'Falsche oder unvollständige Antworten können Rücktritt oder Kündigung nach sich ziehen. Wer ehrlich antwortet, zahlt bei der SDK im Zweifel einen Zuschlag und hat dafür eine verlässliche Grundlage.' },
+            { lead: 'Was vorher lief, zählt nicht.', text: 'Behandlungen vor dem Versicherungsbeginn sind nicht versichert, auch wenn die Vorerkrankung selbst per Zuschlag mitversichert ist.' },
             { lead: 'Der Versicherer prüft die Methode.', text: 'Er leistet für Methoden, die von der Schulmedizin überwiegend anerkannt sind. Dazu kommen Methoden, die sich in der Praxis als ebenso erfolgversprechend bewährt haben oder angewandt werden, weil es keine schulmedizinische gibt. Bei den bewährten darf er auf den Betrag kürzen, der bei schulmedizinischer Behandlung angefallen wäre. Dieser Ratgeber sagt nichts zur Wirkung einer Behandlung.' },
           ],
         },
@@ -315,6 +430,35 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Wie die Rechnung aufgebaut ist und was das Gebührenverzeichnis überhaupt ist, erklärt der Ratgeber zur Gebührenordnung für Heilpraktiker.',
+        },
+      ],
+    },
+    {
+      id: 'kassenbonus',
+      heading: 'Geheimtipp: Wie kann dein Kassenbonus den Beitrag mittragen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Erst kommt der Schutz, dann der Bonus. Viele gesetzliche Kassen zahlen ihren Bonus auf Wunsch als zweckgebundenen Zuschuss zu einer privaten Zusatzversicherung aus. So trägt der Bonus einen Teil deines Beitrags, im IKK-Beispiel weiter oben sogar den ganzen. Erstattet wird dabei nie mehr als der Beitrag, den du nachweislich gezahlt hast.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR. Das sind Höchstwerte. In der breiten Masse kommen nach unserer Erfahrung aus der Beratung 400 bis 700 EUR zusammen. Gegenzurechnen ist immer der Zusatzbeitrag der Kasse.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus. Welche Kasse wie viel dazugibt, vergleichst du auf ' },
+            { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
+            { text: '.' },
+          ],
+        },
+        {
+          type: 'path',
+          to: '/ambulant',
+          icon: 'bonus',
+          text: 'Auf der Seite Ambulant legst du Beitrag und Bonus nebeneinander.',
+          label: 'Bonus und Beitrag prüfen',
         },
         {
           type: 'cards',
@@ -369,6 +513,16 @@ export const article = {
         'Eine Heilpraktiker-Zusatzversicherung erstattet einen Teil der Heilpraktikerrechnung nach ihren Bedingungen. Bei den ambulanten SDK-Tarifen sind das 50 bis 100 Prozent der erstattungsfähigen Kosten für Naturheilverfahren, höchstens 500 bis 1.000 EUR in zwei Kalenderjahren, je nach Stufe. Heilpraktiker müssen nach dem GebüH abrechnen, Psychotherapie ist ausgenommen.',
     },
     {
+      question: 'Was kostet eine Heilpraktikerversicherung im Monat?',
+      answer:
+        `Bei den ambulanten SDK-Tarifen zahlst du ab 21 Jahren je nach Alter und Stufe ${eur(ERWACHSENE_VON)} bis ${eur(ERWACHSENE_BIS)} EUR im Monat, für Kinder ab ${eur(KINDER.AP5)} EUR (Stand ${STAND_BEITRAEGE}). Ambulant 100 kostet mit 21 bis 30 Jahren ${eur(BEISPIEL.AP1)} EUR. Bei Vorerkrankungen kann ein Risikozuschlag dazukommen. Deinen Beitrag siehst du auf der Seite Ambulant, sobald du dein Geburtsjahr eingibst.`,
+    },
+    {
+      question: 'Gibt es eine Heilpraktikerversicherung mit 100 Prozent Erstattung?',
+      answer:
+        `Ja. Die Stufe Ambulant 100 (AP1) der SDK erstattet 100 Prozent der erstattungsfähigen Kosten für Naturheilverfahren, höchstens 1.000 EUR je zwei Kalenderjahre ab Versicherungsbeginn. Erstattungsfähig sind Leistungen, die vom Tarif umfasst sind und im GebüH stehen. Was in zwei Jahren über 1.000 EUR hinausgeht, zahlst du selbst. Mit 21 bis 30 Jahren kostet die Stufe ${eur(BEISPIEL.AP1)} EUR im Monat.`,
+    },
+    {
       question: 'Welche Heilpraktiker-Zusatzversicherung ist die beste?',
       answer:
         'Eine allgemeingültig beste gibt es nicht. Entscheidend sind Behandlerkreis, Erstattungssatz, Höchstbetrag und Zeitraum, Wartezeit, Annahmeregeln und Beitrag. Vergleiche diese Punkte mit deiner geplanten Nutzung und prüfe, was nach den Bedingungen erstattungsfähig ist.',
@@ -377,6 +531,11 @@ export const article = {
       question: 'Muss ich Gesundheitsfragen beantworten?',
       answer:
         'Ja. Der Antrag enthält Gesundheitsfragen, die du vollständig und wahrheitsgemäß beantwortest (§ 19 VVG). Bei der SDK wirst du laut Angaben auf der Seite Ambulant nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss.',
+    },
+    {
+      question: 'Kann ich abschließen, wenn ich schon beim Heilpraktiker war?',
+      answer:
+        'Ja. Frühere Besuche beim Heilpraktiker schließen den Antrag nicht aus. Du gibst sie bei den Gesundheitsfragen an, soweit danach gefragt wird. Wegen Vorerkrankungen lehnt die SDK laut ihrer Broschüre niemanden ab, sie versichert sie über feste Zuschläge mit, ohne Leistungsausschluss. Nicht versichert ist eine Behandlung, die vor dem Versicherungsbeginn begonnen hat und weiterläuft. Eine neue Behandlung nach dem Beginn kann dagegen versichert sein.',
     },
     {
       question: 'Ist eine laufende Behandlung beim Heilpraktiker versichert?',
@@ -389,9 +548,19 @@ export const article = {
         'Bei den ambulanten SDK-Tarifen sehen die Bedingungen keine Wartezeiten vor. Das ist nicht überall so. Die Verbraucherzentrale nennt drei Monate als übliche Wartezeit bei Zusatzversicherungen, bei Zahnersatz in der Regel acht Monate.',
     },
     {
+      question: 'Zahlt der Tarif, wenn die Praxis nicht nach GebüH abrechnet?',
+      answer:
+        'Bei den ambulanten SDK-Tarifen ist die Abrechnung nach dem gültigen Gebührenverzeichnis für Heilpraktiker (GebüH) eine Voraussetzung. Die Rechnung muss die Leistungen mit den Nummern des Gebührenverzeichnisses nennen. Positionen, die diesen Vorgaben nicht entsprechen, muss der Versicherer nicht zahlen. Ist eine Vergütung unangemessen hoch, darf er auf einen angemessenen Betrag kürzen. Frag deshalb vor dem ersten Termin, ob die Praxis nach GebüH abrechnet.',
+    },
+    {
       question: 'Zahlt eine Heilpraktikerversicherung alle Heilpraktiker-Kosten?',
       answer:
         'Nein. Erstattet wird nach den Bedingungen des Tarifs: mit einem Erstattungssatz, einem Höchstbetrag für einen festen Zeitraum und nur für Leistungen, die als erstattungsfähig gelten. Bei den ambulanten SDK-Tarifen muss die Rechnung nach dem GebüH gestellt sein, und Behandlungen, die vor dem Versicherungsbeginn begonnen haben, sind nicht versichert.',
+    },
+    {
+      question: 'Darf ich zwei Heilpraktikerversicherungen haben?',
+      answer:
+        'Das regelt der Antrag des jeweiligen Versicherers. Die ARAG etwa verlangt in ihrem Antrag A 842, dass bei einem anderen privaten Krankenversicherer kein gleichartiger Schutz besteht oder beantragt ist. Hast du zwei Verträge, gilt bei der SDK: Die gesamte Erstattung darf nicht höher sein als die gesamten Kosten. Beim zweiten Versicherer reichst du dann eine Kopie der Rechnung mit dem Erstattungsnachweis des ersten ein. Rechne vorher nach, ob eine höhere Stufe nicht weniger kostet als zwei Beiträge.',
     },
     {
       question: 'Muss ich für eine Zusatzversicherung beim Heilpraktiker die Krankenkasse wechseln?',
@@ -402,6 +571,16 @@ export const article = {
       question: 'Ist der günstigste Tarif automatisch schlecht?',
       answer:
         'Nicht unbedingt. Wenn du nur wenige Termine planst, kann eine niedrigere Stufe reichen. Entscheidend ist, dass Erstattungssatz und Höchstbetrag zu dem passen, was du wirklich nutzt.',
+    },
+    {
+      question: 'Was kostet eine Heilpraktikerversicherung für Kinder?',
+      answer:
+        `Kinder zahlen bis zum Ende des Kalenderjahres, in dem sie 20 werden, den Kinderbeitrag. Bei der SDK sind das ${eur(KINDER.AP5)} EUR in Ambulant 50, ${eur(KINDER.AP7)} EUR in Ambulant 70, ${eur(KINDER.AP9)} EUR in Ambulant 90 und ${eur(KINDER.AP1)} EUR in Ambulant 100 im Monat (Stand ${STAND_BEITRAEGE}). Auch familienversicherte Kinder können den Tarif bekommen, denn die Bedingungen verlangen eine gesetzliche Krankenversicherung oder einen Anspruch auf Familienversicherung. Erstattungssätze und Töpfe sind dieselben wie bei Erwachsenen.`,
+    },
+    {
+      question: 'Kann ich die Beiträge steuerlich absetzen?',
+      answer:
+        'Grundsätzlich ja, als sonstige Vorsorgeaufwendungen nach § 10 Abs. 1 Nr. 3a EStG. Die Beiträge teilen sich aber einen Höchstbetrag mit deinen Basisbeiträgen zur Kranken- und Pflegeversicherung: 1.900 EUR im Jahr, wenn du Zuschüsse zur Krankenversicherung bekommst, etwa als Arbeitnehmer, oder ohne eigene Beiträge versichert bist, sonst 2.800 EUR (§ 10 Abs. 4 EStG). Die Basisbeiträge zählen immer voll. Liegen sie schon über deinem Höchstbetrag, fällt der Abzug für die Zusatzversicherung weg. Deine Basisbeiträge findest du als Arbeitnehmer auf der Lohnsteuerbescheinigung. Verbindlich klärt das deine Steuerberatung.',
     },
     {
       question: 'Zahlt der Tarif auch Psychotherapie beim Heilpraktiker?',
@@ -426,9 +605,9 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-14',
-    checkedAtLabel: '14. Oktober 2026',
-    intro: 'Die Tarifaussagen stammen aus den Bedingungen der SDK, die Rechtslage aus den Gesetzen, die Hinweise zu Wartezeiten und Leistungsgrenzen von der Verbraucherzentrale.',
+    checkedAt: '2026-10-21',
+    checkedAtLabel: '21. Oktober 2026',
+    intro: 'Die Tarifaussagen stammen aus den Bedingungen und der Broschüre der SDK, die Rechtslage aus den Gesetzen, die Hinweise zu Wartezeiten und Leistungsgrenzen von der Verbraucherzentrale.',
     items: [
       {
         label: 'Allgemeine Versicherungsbedingungen für die Kranken-Zusatzversicherung, Teil II: Tarife AP5, AP7, AP9 und AP1 (1.753a/01.23)',
@@ -443,6 +622,13 @@ export const article = {
         href: 'https://gesundwerker.sdk.de/downloads/Bedingungen/1-751.pdf',
         stand: '01.01.2022',
         accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Broschüre Ambulante Zusatzversicherung: Vorerkrankungen über feste Zuschläge, keine Ablehnungen, keine Leistungsausschlüsse',
+        publisher: 'SDK Süddeutsche Krankenversicherung',
+        href: 'https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf',
+        stand: '1.781/07.23',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Zusatzversicherungen zur gesetzlichen Krankenversicherung: Sinnvoll oder nicht?',
@@ -472,6 +658,19 @@ export const article = {
         accessedAt: '07.10.2026',
       },
       {
+        label: 'EStG § 10 Sonderausgaben, Abs. 1 Nr. 3a und Abs. 4 (Höchstbetrag 1.900 und 2.800 EUR)',
+        publisher: 'gesetze-im-internet.de (BMJV)',
+        href: 'https://www.gesetze-im-internet.de/estg/__10.html',
+        accessedAt: '21.10.2026',
+      },
+      {
+        label: 'Antrag Zusatzversicherung A 842, Hinweis zu gleichartigem Schutz bei einem anderen privaten Krankenversicherer',
+        publisher: 'ARAG',
+        href: 'https://www.arag-partnervertrieb.de/medien/pdf/KV/Antraege/arag_kv_antrag_zusatz_a842.pdf',
+        stand: '1.2025',
+        accessedAt: '21.10.2026',
+      },
+      {
         label: 'Satzung der IKK classic, § 34 Bonusprogramm, und Infoblatt zum IKK Bonus 2026',
         publisher: 'IKK classic',
         href: 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf',
@@ -480,10 +679,10 @@ export const article = {
         note: 'Beträge des Zuschussbeispiels, Zusatzbeitrag laut Beitragsseite der IKK classic',
       },
       {
-        label: 'Beitragstabelle und Tarifstufen der ambulanten SDK-Tarife, wie auf healio.de/ambulant',
+        label: 'Beitragstabelle und Tarifstufen der ambulanten SDK-Tarife, alle Altersgruppen, wie auf healio.de/ambulant',
         publisher: 'SDK und Healio',
-        stand: '29.09.2026',
-        note: 'Leistungen wortgleich mit der Seite healio.de/ambulant',
+        stand: STAND_BEITRAEGE,
+        note: 'Beiträge aus derselben Datenquelle wie der Tarifrechner auf healio.de/ambulant, Leistungen wortgleich mit der Seite',
       },
     ],
   },

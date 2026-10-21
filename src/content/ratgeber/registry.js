@@ -1015,11 +1015,11 @@ export const RATGEBER_ENTRIES = [
     "group": "ambulant",
     "listTitle": "Heilpraktiker-Zusatzversicherung: Kriterien, Grenzen und ein Rechenbeispiel",
     "listTeaser": "Was eine Heilpraktiker-Zusatzversicherung erstattet, woran du sie prüfst und was ehrlich zu den Gesundheitsfragen im Antrag und zu bestehenden Beschwerden gehört.",
-    "readingTimeMinutes": 10,
-    "metaTitle": "Heilpraktiker Zusatzversicherung: Leistung, Wartezeit | Healio",
-    "metaDescription": "Zusatzversicherung Heilpraktiker: was nach GebüH erstattet wird, Wartezeit, Gesundheitsfragen ohne Ablehnung, Rechenbeispiel und wie dein Kassenbonus hilft.",
+    "readingTimeMinutes": 15,
+    "metaTitle": "Heilpraktiker Zusatzversicherung: Kosten & Wartezeit | Healio",
+    "metaDescription": "Zusatzversicherung Heilpraktiker: bis 100 % und 1.000 EUR in zwei Jahren, keine Wartezeit laut Bedingungen, Beiträge nach Alter in der Tabelle, Kassenbonus-Tipp.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "ambulante-zusatzversicherung",

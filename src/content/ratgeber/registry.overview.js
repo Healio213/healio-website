@@ -157,7 +157,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Heilpraktiker-Zusatzversicherung: Kriterien, Grenzen und ein Rechenbeispiel",
           "listTeaser": "Was eine Heilpraktiker-Zusatzversicherung erstattet, woran du sie prüfst und was ehrlich zu den Gesundheitsfragen im Antrag und zu bestehenden Beschwerden gehört.",
-          "readingTimeMinutes": 10
+          "readingTimeMinutes": 15
         },
         {
           "slug": "ambulante-zusatzversicherung",
