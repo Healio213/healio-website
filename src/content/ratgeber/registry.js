@@ -794,12 +794,12 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "zaehne",
     "listTitle": "Barmer Zahnzusatzversicherung: Was zahlt die Kasse, was ein Tarif?",
-    "listTeaser": "Eine Barmer Zahnzusatzversicherung ist privater Zusatzschutz und gehört nicht automatisch zu deiner gesetzlichen Mitgliedschaft. Bei Zahnersatz zahlt die Barmer 2026 den gesetzlichen Festzuschuss zur Regelversorgung; zusätzliche Tarifleistungen ergeben sich aus einem gesonderten Vertrag.",
-    "readingTimeMinutes": 6,
-    "metaTitle": "Barmer Zahnzusatzversicherung: Kasse und Tarif | Healio",
-    "metaDescription": "Barmer Zahnzusatzversicherung: Was die gesetzliche Kasse bei Zahnersatz und Füllungen zahlt und welche Tarifbedingungen du separat prüfst.",
+    "listTeaser": "Eine Barmer Zahnzusatzversicherung ist privater Zusatzschutz und gehört nicht automatisch zu deiner gesetzlichen Mitgliedschaft. Was die Barmer beim Zahnersatz zahlt, welchen Partnertarif sie vermittelt und wie du freie Tarife nach Leistung und Beitrag vergleichst.",
+    "readingTimeMinutes": 14,
+    "metaTitle": "Barmer Zahnzusatzversicherung 2026: Tarife und Beiträge | Healio",
+    "metaDescription": "Barmer Zahnzusatzversicherung 2026: Festzuschuss 60, 70 oder 75 Prozent, Partnertarif oder freie Wahl, Beiträge nach Alter und Zahn-Check in einer Minute.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "zahnkrone-rausgefallen",
