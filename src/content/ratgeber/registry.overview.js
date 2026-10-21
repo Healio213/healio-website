@@ -150,7 +150,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Heilpraktiker Kosten: was es kostet und wer zahlt",
           "listTeaser": "Heilpraktiker, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie auf einer Seite: was die Kasse zahlt, was bei dir bleibt und was ein Zusatztarif erstattet.",
-          "readingTimeMinutes": 9
+          "readingTimeMinutes": 12
         },
         {
           "slug": "heilpraktiker-zusatzversicherung",

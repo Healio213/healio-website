@@ -1003,11 +1003,11 @@ export const RATGEBER_ENTRIES = [
     "group": "ambulant",
     "listTitle": "Heilpraktiker Kosten: was es kostet und wer zahlt",
     "listTeaser": "Heilpraktiker, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie auf einer Seite: was die Kasse zahlt, was bei dir bleibt und was ein Zusatztarif erstattet.",
-    "readingTimeMinutes": 9,
-    "metaTitle": "Heilpraktiker Kosten: wer zahlt was, Übersicht | Healio",
-    "metaDescription": "Heilpraktiker Kosten im Überblick: Honorar, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie, was die Kasse zahlt und was ein Zusatztarif erstattet.",
+    "readingTimeMinutes": 12,
+    "metaTitle": "Heilpraktiker Kosten 2026: Preise je Sitzung, wer zahlt | Healio",
+    "metaDescription": "Heilpraktiker Kosten 2026: Rahmen je Sitzung laut GebüH, welche Krankenkasse etwas dazugibt und was ein ambulanter Tarif bei Heilpraktikerrechnungen erstattet.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "heilpraktiker-zusatzversicherung",

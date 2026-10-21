@@ -32,22 +32,51 @@
  * Prüfung Opus 07.10.2026 (PRÜFBERICHT-ambulant.md): Status in Faktenkasten und
  * Fußzeile wie Zahn-Welle 1; Tarifaussagen gegen healio.de/ambulant, die Dateien
  * im Serien-Worktree und die SDK-AVB gelesen.
+ *
+ * Ausbau 21.10.2026 (SEO, Hauptbegriff "heilpraktiker kosten"; Rolle:
+ * Zubringer zur Kaufseite heilpraktiker-zusatzversicherung, deshalb keine
+ * weiteren Zusatz-Begriffe hier). Neu, alle Quellen am 21.10.2026 im Original
+ * gelesen, sofern nicht anders vermerkt:
+ *   - GebüH-Rahmen je Sitzung: Gebührenverzeichnis für Heilpraktiker,
+ *     GebüH 85 in der Fassung 2002, PDF des Fachverbands Deutscher
+ *     Heilpraktiker (SHA-256 7a8acd2108e1a1f8...). Ziffer 1 12,30 bis 20,50;
+ *     Ziffer 4 16,40 bis 22,00 (mindestens 10 Minuten); Ziffer 5 8,20 bis
+ *     20,50; 21.1 10,30 bis 26,00; 34.2 15,40 bis 19,00; 35.1 bis 35.6 je
+ *     Region 5,20 bis 26,00 (35.2 15,40 bis 26,00). 1 plus 4 = 28,70 bis
+ *     42,50 EUR ist eigene Addition; laut GebüH-Anmerkung wird Ziffer 4 mit
+ *     Ziffer 1 erstattet. Gezeigt als Rahmen des Verzeichnisses, nicht als
+ *     heutiger Durchschnitts- oder Marktpreis.
+ *   - BBhV Anlage 2 Nr. 2a: homöopathische Erstanamnese ab einer Stunde,
+ *     Beihilfe-Höchstbetrag 80,00 EUR (gesetze-im-internet.de).
+ *   - Satzungswege: DAK Anlage zu § 25 (Fassung 07/2026, 65. Nachtrag),
+ *     Kategorie A "Naturheilverfahren, durch Ärzte oder Heilpraktiker
+ *     erbracht", Faktor 1,2, höchstens 500 EUR im Jahr; BARMER § 37 Abs. 3 mit
+ *     Anlage Teil 1 und 4 (39./40. Nachtrag, Stand 15.10.2026), Osteopathie und
+ *     Akupunktur, Zuschuss doppelt, höchstens 200 EUR je Kalenderjahr;
+ *     AOK NordWest § 8c (Stand 16.12.2025, Beleg aok-heilpraktiker.belege.md,
+ *     Abruf 07.10.2026; am 21.10.2026 war aok.de in Wartung).
+ *   - SDK AVB Teil II, Abschnitt II: "Es bestehen keine Wartezeiten."
+ *   - IKK classic Satzung Stand 15.10.2026 (81. Nachtrag), § 34: Zuschuss in
+ *     dreifacher Höhe, auch für Krankenzusatzversicherungen. 810 EUR und
+ *     1.155 EUR als Satzungs-Höchstwerte wie im Ratgeber
+ *     ikk-classic-bonusprogramm-2026; 400 bis 700 EUR als Einschätzung aus der
+ *     Beratung gekennzeichnet.
  */
 
 export const article = {
-  updatedAt: "2026-10-14",
-  updatedAtLabel: "14. Oktober 2026",
+  updatedAt: "2026-10-21",
+  updatedAtLabel: "21. Oktober 2026",
   slug: 'heilpraktiker-kosten',
   kind: 'ratgeber',
   group: 'ambulant',
 
-  metaTitle: 'Heilpraktiker Kosten: wer zahlt was, Übersicht | Healio',
+  metaTitle: 'Heilpraktiker Kosten 2026: Preise je Sitzung, wer zahlt | Healio',
   metaDescription:
-    'Heilpraktiker Kosten im Überblick: Honorar, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie, was die Kasse zahlt und was ein Zusatztarif erstattet.',
+    'Heilpraktiker Kosten 2026: Rahmen je Sitzung laut GebüH, welche Krankenkasse etwas dazugibt und was ein ambulanter Tarif bei Heilpraktikerrechnungen erstattet.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  readingTimeMinutes: 9,
+  readingTimeMinutes: 12,
 
   listTitle: 'Heilpraktiker Kosten: was es kostet und wer zahlt',
   listTeaser:
@@ -64,15 +93,15 @@ export const article = {
     icon: 'naturopathy',
     facts: [
       { value: 'Meist selbst zahlen', label: 'Heilpraktiker bezahlt die gesetzliche Kasse in der Regel nicht' },
-      { value: 'frei vereinbart', label: 'Das Honorar regelt die Absprache, das GebüH hilft beim Rechnen' },
+      { value: '28,70 bis 42,50 EUR', label: 'Erster Termin im GebüH-Rahmen (Ziffern 1 und 4, Fassung 2002)' },
       { value: 'bis zu 1.000 EUR', label: 'Naturheilverfahren in zwei Jahren (Ambulant 100)' },
     ],
-    text: 'Was ein Heilpraktiker kostet, sagt dir keine Preisliste, sondern deine Praxis. Ob etwas zurückkommt, hängt an Behandlung, Behandler, Satzung deiner Kasse und deinem Tarif.',
+    text: 'Das Honorar vereinbarst du frei mit deiner Praxis. Das GebüH liefert nur einen Rahmen, und der stammt von 2002. Ob etwas zurückkommt, hängt an Behandlung, Behandler, Satzung deiner Kasse und deinem Tarif.',
     path: { to: '/ambulant', text: 'Heilpraktikerkosten selbst getragen?', label: 'Ambulante Tarife ansehen' },
   },
 
   lead:
-    'Heilpraktiker, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie haben eines gemeinsam: Wer zahlt, hängt von der Behandlung und von der Person ab, die behandelt. Die gesetzliche Kasse zahlt Heilpraktiker in der Regel nicht, beim Arzt gelten andere Regeln, und einzelne Kassen bezuschussen Teile in der Satzung. Dazu kommt, was ein ambulanter Tarif erstattet. Diese Seite sortiert das und führt dich zur passenden Antwort.',
+    'Heilpraktiker, Osteopathie, Akupunktur, Chiropraktik und Physiotherapie haben eines gemeinsam: Wer zahlt, hängt von der Behandlung und von der Person ab, die behandelt. Die gesetzliche Kasse zahlt Heilpraktiker in der Regel nicht, beim Arzt gelten andere Regeln, und einzelne Kassen bezuschussen Teile in der Satzung. Dazu kommt, was ein ambulanter Tarif erstattet. Diese Seite sortiert, was es kostet und wer zahlt. Suchst du schon einen Tarif für deine Heilpraktikerrechnungen, hilft dir der Ratgeber zur Heilpraktiker-Zusatzversicherung weiter.',
 
   sections: [
     {
@@ -80,12 +109,38 @@ export const article = {
       heading: 'Was kostet ein Heilpraktiker?',
       blocks: [
         {
-          type: 'paragraph',
-          text: 'Das lässt sich nicht pauschal sagen, und eine neutrale Preisliste gibt es nicht. Das Honorar vereinbarst du mit der Praxis (§ 611 BGB). Das Gebührenverzeichnis für Heilpraktiker (GebüH) hilft nur beim Rechnen, verbindlich ist es nicht. Der Preis hängt davon ab, wer behandelt, wie lange eine Sitzung dauert, welches Verfahren die Praxis anbietet und wie oft du kommst. Auch eine Angabe pro Stunde taugt deshalb nicht als Maßstab.',
+          type: 'segments',
+          segments: [
+            { text: 'Einen festen Preis gibt es nicht, und eine neutrale Preisliste auch nicht. Das Honorar vereinbarst du mit der Praxis (§ 611 BGB). Das Gebührenverzeichnis für Heilpraktiker (GebüH) hilft nur beim Rechnen, verbindlich ist es nicht. Der Preis hängt davon ab, wer behandelt, wie lange eine Sitzung dauert, welches Verfahren die Praxis anbietet und wie oft du kommst. Auch eine Angabe pro Stunde taugt deshalb nicht als Maßstab. Ob ein Tarif solche Rechnungen künftig erstattet und worauf du beim Abschluss achtest, klärt der ' },
+            { text: 'Ratgeber zur Heilpraktiker-Zusatzversicherung', to: '/ratgeber/heilpraktiker-zusatzversicherung' },
+            { text: '.' },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Einen Rahmen gibt es trotzdem. Das GebüH nennt für die meisten Leistungen eine Spanne mit Mindest- und Höchstbetrag. Ist vorher nichts anderes vereinbart, kannst du laut Fachverband Deutscher Heilpraktiker davon ausgehen, dass sich das Honorar darin bewegt. Habt ihr ein anderes Honorar abgesprochen, gilt die Absprache. Eine staatliche Gebührenordnung für Heilpraktiker gibt es auch 2026 nicht; der Fachverband stellt das Verzeichnis in der Fassung von 2002 bereit. Was darin steht und wie ein Zusatztarif danach erstattet, erklärt der Ratgeber zum ' },
+            { text: 'GebüH 2026', to: '/ratgeber/gebuehrenordnung-heilpraktiker' },
+            { text: '.' },
+          ],
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Heilpraktiker Kosten je Sitzung: Rahmen laut GebüH, Fassung 2002',
+          head: ['Sitzung', 'Ziffern im GebüH', 'Rahmen laut GebüH'],
+          rows: [
+            ['Erster Termin mit Untersuchung und Beratung', 'Ziffer 1, eingehende Untersuchung (12,30 bis 20,50 EUR), dazu Ziffer 4, eingehende Beratung ab 10 Minuten (16,40 bis 22,00 EUR)', '28,70 bis 42,50 EUR'],
+            ['Folgetermin, nur Beratung', 'Ziffer 5, Beratung, gegebenenfalls mit kurzer Untersuchung', '8,20 bis 20,50 EUR'],
+            ['Folgetermin mit Akupunktur', 'Ziffer 21.1, Akupunktur einschließlich Pulsdiagnose', '10,30 bis 26,00 EUR'],
+            ['Folgetermin mit Chiropraktik', 'Ziffer 34.2, gezielter chiropraktischer Eingriff an der Wirbelsäule', '15,40 bis 19,00 EUR'],
+            ['Folgetermin mit Osteopathie', 'Ziffern 35.1 bis 35.6, eine je behandelter Körperregion', '5,20 bis 26,00 EUR je Region, für die Schultergelenke (35.2) 15,40 bis 26,00 EUR'],
+          ],
+          note: 'Quelle: Fachverband Deutscher Heilpraktiker, Gebührenverzeichnis für Heilpraktiker (GebüH 85, Fassung 2002), Abruf 21.10.2026. Das sind Spannen aus dem Verzeichnis, kein heutiger Durchschnittspreis und keine Preisliste. Die Summe in der ersten Zeile ist eigene Addition. Eine Sitzung kann mehrere Ziffern enthalten, Auslagen wie Arzneimittel können gesondert dazukommen. Was du zahlst, regelt die Absprache mit deiner Praxis.',
         },
         {
           type: 'paragraph',
-          text: 'Was es gibt, sind Orientierungswerte aus neutralen Quellen. Diese Werte sind keine Preise, helfen aber bei der Größenordnung. Die Tabelle zeigt sie zusammen mit der Frage, wer in der Regel zahlt.',
+          text: 'Daneben gibt es Orientierungswerte aus neutralen Quellen. Diese Werte sind keine Preise, helfen aber bei der Größenordnung. Die nächste Tabelle zeigt sie zusammen mit der Frage, wer in der Regel zahlt.',
         },
         {
           type: 'table',
@@ -116,8 +171,28 @@ export const article = {
           items: [
             { lead: 'Kassenleistung beim Arzt.', text: 'Akupunktur zahlt die Kasse bei chronischen Schmerzen der Lendenwirbelsäule oder des Knies durch Gonarthrose, wenn ein Vertragsarzt mit der geforderten Qualifikation behandelt. Chirotherapie ist Kassenleistung beim Vertragsarzt mit der Zusatzbezeichnung.' },
             { lead: 'Satzungsleistung deiner Kasse.', text: 'Nach § 11 Abs. 6 SGB V kann jede Kasse zusätzliche Leistungen anbieten. Die TK zahlt zum Beispiel 40 EUR je Osteopathie-Sitzung, höchstens dreimal im Jahr. Andere Kassen bezuschussen etwa Chiropraktik oder Akupunktur, in den Beispielen dieses Bereichs mit Jahresdeckel.' },
-            { lead: 'Bonusprogramm.', text: 'Ein Bonus ist keine Erstattung einer Rechnung. Er kann aber als Zuschuss zum Beitrag einer Zusatzversicherung helfen, bis zu den nachgewiesenen Kosten.' },
+            { lead: 'Bonusprogramm.', text: 'Manche Kassen tauschen Bonuspunkte in einen zweckgebundenen Zuschuss zu bestimmten Behandlungen, Beispiele stehen in der Tabelle unten. Bei vielen Kassen kann der Bonus außerdem als Zuschuss zum Beitrag einer Zusatzversicherung helfen, bis zu den nachgewiesenen Kosten.' },
           ],
+        },
+        {
+          type: 'paragraph',
+          text: 'Welche Krankenkasse zahlt also beim Heilpraktiker? Als Kassenleistung in der Regel keine. Über Satzung oder Bonusprogramm geben einzelne Kassen aber etwas dazu, immer mit Grenzen. Drei Beispiele mit Fundstelle:',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Welche Krankenkasse beim Heilpraktiker etwas dazugibt: drei Satzungswege mit Fundstelle',
+          head: ['Kasse', 'Weg', 'Was bezuschusst wird', 'Grenze'],
+          rows: [
+            ['DAK-Gesundheit', 'Bonusprogramm: Punkte werden in einen zweckgebundenen Zuschuss getauscht (Anlage zu § 25 der Satzung)', 'In Kategorie A ausdrücklich Naturheilverfahren, durch Ärzte oder Heilpraktiker erbracht, dazu Osteopathie', 'Punkte zählen beim Tausch 1,2fach, zusammen höchstens 500 EUR im Jahr, nur wenn keine andere Leistungspflicht besteht'],
+            ['Barmer', 'Bonusprogramm: Zuschuss statt Auszahlung (§ 37 Abs. 3 mit Anlage Teil 4)', 'Osteopathie und Akupunktur als Leistung außerhalb der Kassenleistung. Heilpraktiker allgemein stehen nicht in der Liste', 'Zuschuss doppelt so hoch wie die Auszahlung, höchstens 200 EUR je Kalenderjahr (1.000 Bonuspunkte)'],
+            ['AOK NordWest', 'Satzungsleistung Osteopathie (§ 8c)', 'Osteopathie mit ärztlicher Bescheinigung, auch bei Heilpraktikern mit der Osteopathie-Ausbildung, die die Satzung verlangt', 'bis 50 EUR je Behandlung, höchstens sechs im Kalenderjahr, aus einem gemeinsamen Topf von 500 EUR für mehrere Extras'],
+          ],
+          note: 'Quellen: DAK-Gesundheit, Anlage zu § 25 der Satzung, Fassung 07/2026 (65. Nachtrag), Abruf 21.10.2026; BARMER, Satzung in der Fassung des 39. und 40. Nachtrags, Stand 15.10.2026, § 37 Abs. 3 und Anlage Teil 1 und 4, Abruf 21.10.2026; AOK NordWest, Satzung Stand 16.12.2025, § 8c und § 8 Abs. 3, Abruf 07.10.2026. Jede Kasse regelt das selbst, andere AOKs und Kassen haben eigene Regeln. Gezahlt wird nur gegen Rechnung und die geforderten Nachweise.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Was Satzung und Bonus offenlassen, zahlst du selbst. Diesen Rest trägt ein ambulanter Tarif: Er erstattet Heilpraktikerrechnungen aus seinem Topf für Naturheilverfahren, je nach Stufe 50 bis 100 Prozent bis zum Höchstbetrag, für Behandlungsfälle nach Versicherungsbeginn. Der Bonus kann dabei mithelfen: DAK und Barmer nennen in ihren Zuschusskatalogen auch die private Krankenzusatzversicherung. Wie das geht, steht im letzten Abschnitt.',
         },
         {
           type: 'paragraph',
@@ -147,8 +222,24 @@ export const article = {
           note: 'Quelle: SDK, Allgemeine Versicherungsbedingungen Teil II, Tarife AP5, AP7, AP9 und AP1, Stand 01.01.2023, Leistungsübersicht und Abschnitt I.5. Die Summen sind die Addition der vier Höchstbeträge. Erstattet werden nur erstattungsfähige Kosten, verbindlich sind die Bedingungen.',
         },
         {
-          type: 'paragraph',
-          text: 'Wie der Tarif Heilpraktikerrechnungen behandelt, erklärt der Ratgeber zur Heilpraktiker-Zusatzversicherung. Er zeigt Kriterien statt einer Rangliste und sagt ehrlich, was zu den Gesundheitsfragen im Antrag und zu bestehenden Beschwerden gehört. Was die vier Töpfe zusammen leisten und für wen sie passen, steht im Ratgeber zur ambulanten Zusatzversicherung.',
+          type: 'segments',
+          segments: [
+            { text: 'Wer den Heilpraktiker heute selbst zahlt, muss nicht lange warten: Eine Wartezeit haben diese Tarife nicht, so steht es in Abschnitt II der Bedingungen. Tritt ein neuer Behandlungsfall nach Versicherungsbeginn ein, erstattet der Tarif im Rahmen der Bedingungen bereits die erste Rechnung dazu. Was vorher lief oder angeraten war, bleibt ausgenommen. Wo diese Grenze genau liegt, zeigt der Ratgeber ' },
+            { text: 'Heilpraktiker-Zusatzversicherung ohne Wartezeit', to: '/ratgeber/heilpraktiker-zusatzversicherung-ohne-wartezeit' },
+            { text: '.' },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Wie der Tarif Heilpraktikerrechnungen behandelt, ' },
+            { text: 'erklärt der Ratgeber zur Heilpraktiker-Zusatzversicherung', to: '/ratgeber/heilpraktiker-zusatzversicherung' },
+            { text: '. Er zeigt Kriterien statt einer Rangliste und sagt ehrlich, was zu den Gesundheitsfragen im Antrag und zu bestehenden Beschwerden gehört. Was die vier Töpfe zusammen leisten und für wen sie passen, steht im ' },
+            { text: 'Ratgeber zur ambulanten Zusatzversicherung', to: '/ratgeber/ambulante-zusatzversicherung' },
+            { text: '. Tarife anderer Versicherer mit Quelle nebeneinander findest du im ' },
+            { text: 'Heilpraktiker Zusatzversicherung Vergleich 2026', to: '/ratgeber/heilpraktiker-zusatzversicherung-vergleich-2026' },
+            { text: '.' },
+          ],
         },
         {
           type: 'costCard',
@@ -175,7 +266,8 @@ export const article = {
           type: 'honest',
           heading: 'Ehrlich gesagt',
           items: [
-            { lead: 'Einen Preis pro Stunde nennen wir nicht.', text: 'Es gibt dafür keine neutrale Quelle. Die Zahlen oben sind Orientierung, keine Preise, und die Beispiele rechnen mit angenommenen Beträgen.' },
+            { lead: 'Einen Preis pro Stunde nennen wir nicht.', text: 'Es gibt dafür keine neutrale Quelle. Die Zahlen oben sind Rahmen und Orientierung, keine Preise, und die Beispiele rechnen mit angenommenen Beträgen.' },
+            { lead: 'Der GebüH-Rahmen ist von 2002.', text: 'Er greift nur, wenn nichts anderes vereinbart ist. Frag deshalb vor dem ersten Termin nach dem Honorar und danach, nach welchen Ziffern die Praxis abrechnet.' },
             { lead: 'Wer behandelt, entscheidet über die Kasse.', text: 'Beim Vertragsarzt mit Qualifikation kann die Kasse zahlen, beim Heilpraktiker in der Regel nicht. Einzelne Satzungen machen Ausnahmen, in den Beispielen dieses Bereichs mit Verordnung und Jahresdeckel.' },
             { lead: 'Gesundheitsfragen gehören zum Antrag.', text: 'Du beantwortest sie vollständig und wahrheitsgemäß. Laut den Angaben auf der Seite Ambulant wirst du nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Risikozuschlag mit, ohne Leistungsausschluss.' },
             { lead: 'Was schon läuft, zählt nicht.', text: 'Für Versicherungsfälle, die vor dem Versicherungsbeginn eingetreten sind, leistet der Versicherer nicht. Abschließen gehört vor die Behandlung.' },
@@ -188,38 +280,6 @@ export const article = {
           icon: 'naturopathy',
           text: 'Du siehst die vier Stufen, den Beitrag für dein Alter und kannst vor dem Antrag in Ruhe rechnen.',
           label: 'Tarifstufen und Beitrag ansehen',
-        },
-      ],
-    },
-    {
-      id: 'bonus-traegt-beitrag',
-      heading: 'Kann dein Kassenbonus den Beitrag für den Heilpraktiker-Tarif tragen?',
-      blocks: [
-        {
-          type: 'paragraph',
-          text: 'Er kann, und genau hier liegt für viele der Unterschied. Der Bonus erstattet keine Heilpraktikerrechnung. Bei vielen Kassen kannst du ihn aber als zweckgebundenen Zuschuss zum Beitrag einer privaten Zusatzversicherung nehmen. Dann bezahlt die Kasse über den Bonus einen Teil deines Beitrags, und der Tarif erstattet die Rechnungen. Beides läuft getrennt und wird nie addiert.',
-        },
-        {
-          type: 'table',
-          mobile: 'cards',
-          caption: 'Beispiel: Zuschuss der IKK classic und Beitrag Ambulant 100, Altersgruppe 21 bis 30',
-          head: ['Position', 'Betrag im Jahr'],
-          rows: [
-            ['Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung', '105 EUR Zuschuss'],
-            ['Fitnessstudio, Sportverein, BMI und Blutdruck im Normbereich', '300 EUR Zuschuss'],
-            ['Zuschuss zusammen', '405 EUR'],
-            ['Beitrag Ambulant 100 (31,64 EUR mal 12)', '379,68 EUR'],
-            ['Erstattet wird höchstens der gezahlte Beitrag', '379,68 EUR'],
-          ],
-          note: 'Zuschusswerte nach Satzung und Infoblatt der IKK classic zum Bonusjahr 2026 (Zuschuss in dreifacher Höhe des Bonus, höchstens die nachgewiesenen Kosten). Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant, Stand 29.09.2026. Modellbeispiel, kein Versprechen: Was du erreichst, hängt von deinen Maßnahmen und Nachweisen ab.',
-        },
-        {
-          type: 'segments',
-          segments: [
-            { text: 'Zwei Dinge gehören ehrlich dazu. Der Zuschuss kommt erst nach dem Antrag im Folgejahr, den Beitrag zahlst du bis dahin selbst. Und bei der IKK classic ist der Zusatzbeitrag von 3,85 Prozent gegenzurechnen. Wie das Bonusprogramm im Detail funktioniert, steht im Ratgeber ' },
-            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
-            { text: '. Für die Zusatzversicherung musst du die Kasse übrigens nicht wechseln: Der Tarif ist ein eigener Vertrag und läuft neben jeder gesetzlichen Kasse.' },
-          ],
         },
       ],
     },
@@ -247,6 +307,42 @@ export const article = {
               title: 'Tarif prüfen und früh abschließen',
               text: 'Prüf, was dein Tarif erstattet. Der Abschluss gehört vor die Behandlung, Rechnungen reichst du mit den Nummern des Gebührenverzeichnisses ein.',
             },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'bonus-traegt-beitrag',
+      heading: 'Kann dein Kassenbonus den Beitrag für den Heilpraktiker-Tarif tragen?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Er kann, und genau hier liegt für viele der Unterschied. Gemeint ist diesmal kein Zuschuss zur einzelnen Rechnung, sondern zum Beitrag: Bei vielen Kassen kannst du den Bonus als zweckgebundenen Zuschuss zum Beitrag einer privaten Zusatzversicherung nehmen. Dann bezahlt die Kasse über den Bonus einen Teil deines Beitrags, und der Tarif erstattet die Rechnungen. Beides läuft getrennt und wird nie addiert.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Das ist der Geheimtipp dieser Seite. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR; das sind theoretische Höchstwerte. In der breiten Masse kommen nach unserer Einschätzung aus der Beratung 400 bis 700 EUR zusammen. Ausgezahlt wird höchstens, was du tatsächlich an Beitrag gezahlt hast, und gegenzurechnen ist der Zusatzbeitrag der Kasse. Wie viel es bei dir ist, hängt von deiner Kasse und deinen Aktivitäten ab.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Beispiel: Zuschuss der IKK classic und Beitrag Ambulant 100, Altersgruppe 21 bis 30',
+          head: ['Position', 'Betrag im Jahr'],
+          rows: [
+            ['Check-up, Krebsfrüherkennung, zwei Zahnkontrollen, eine Impfung', '105 EUR Zuschuss'],
+            ['Fitnessstudio, Sportverein, BMI und Blutdruck im Normbereich', '300 EUR Zuschuss'],
+            ['Zuschuss zusammen', '405 EUR'],
+            ['Beitrag Ambulant 100 (31,64 EUR mal 12)', '379,68 EUR'],
+            ['Erstattet wird höchstens der gezahlte Beitrag', '379,68 EUR'],
+          ],
+          note: 'Zuschusswerte nach Satzung und Infoblatt der IKK classic zum Bonusjahr 2026 (Zuschuss in dreifacher Höhe des Bonus, höchstens die nachgewiesenen Kosten). Beitrag nach der Beitragstabelle der SDK wie auf healio.de/ambulant, Stand 29.09.2026. Modellbeispiel, kein Versprechen: Was du erreichst, hängt von deinen Maßnahmen und Nachweisen ab.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Zwei Dinge gehören ehrlich dazu. Der Zuschuss kommt erst nach dem Antrag im Folgejahr, den Beitrag zahlst du bis dahin selbst. Und bei der IKK classic ist der Zusatzbeitrag von 3,85 Prozent gegenzurechnen. Wie das Bonusprogramm im Detail funktioniert, steht im Ratgeber ' },
+            { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
+            { text: '. Für die Zusatzversicherung musst du die Kasse übrigens nicht wechseln: Der Tarif ist ein eigener Vertrag und läuft neben jeder gesetzlichen Kasse. Auch DAK und Barmer nennen die private Krankenzusatzversicherung in ihren Zuschusskatalogen (DAK Anlage zu § 25, Barmer Anlage zu § 37 Teil 4).' },
           ],
         },
       ],
@@ -491,14 +587,34 @@ export const article = {
 
   faqs: [
     {
+      question: 'Was kostet ein Heilpraktiker oder eine Heilpraktikerin pro Sitzung?',
+      answer:
+        'Das legt die Praxis mit dir fest. Als Rahmen nennt das Gebührenverzeichnis für Heilpraktiker (GebüH, Fassung 2002) für einen ersten Termin mit eingehender Untersuchung und Beratung 28,70 bis 42,50 EUR, für eine Akupunktur einschließlich Pulsdiagnose 10,30 bis 26,00 EUR. Eine Sitzung kann mehrere Ziffern enthalten. Habt ihr vorher ein anderes Honorar vereinbart, gilt die Absprache.',
+    },
+    {
       question: 'Was kostet ein Heilpraktiker pro Stunde?',
       answer:
-        'Dafür gibt es keine neutrale Euro-Angabe. Das Honorar ist frei vereinbar, das Gebührenverzeichnis für Heilpraktiker (GebüH) ist nur eine Berechnungshilfe. Der Preis hängt von Behandler, Dauer, Verfahren und Zahl der Sitzungen ab. Frag deine Praxis vorab nach dem Honorar.',
+        'Dafür gibt es keine neutrale Euro-Angabe. Das Honorar ist frei vereinbar, das Gebührenverzeichnis für Heilpraktiker (GebüH) ist nur eine Berechnungshilfe und rechnet nach einzelnen Leistungen, nicht nach Zeit. Einen Anhaltspunkt gibt die Beihilfe des Bundes: Für eine homöopathische Erstanamnese von mindestens einer Stunde erkennt sie höchstens 80,00 EUR an (Anlage 2 BBhV Nr. 2a). Das ist ein Höchstbetrag, kein Preis. Frag deine Praxis vorab nach dem Honorar.',
     },
     {
       question: 'Zahlt die Krankenkasse den Heilpraktiker?',
       answer:
         'In der Regel nicht. Ärztliche Behandlung wird nach § 15 SGB V von Ärzten erbracht. Ausnahmen sind Kassenleistungen beim qualifizierten Vertragsarzt, etwa Akupunktur bei chronischen Schmerzen der Lendenwirbelsäule oder des Knies, und Satzungsleistungen einzelner Kassen, zum Beispiel für Osteopathie.',
+    },
+    {
+      question: 'Welche Krankenkasse zahlt Heilpraktiker?',
+      answer:
+        'Als Kassenleistung in der Regel keine, aber einzelne Kassen geben über Satzung oder Bonus etwas dazu. Die DAK nennt in ihrem Bonuskatalog ausdrücklich Naturheilverfahren durch Ärzte oder Heilpraktiker, der Zuschuss ist auf 500 EUR im Jahr begrenzt. Die Barmer bezuschusst über ihr Bonusprogramm Osteopathie und Akupunktur mit höchstens 200 EUR je Kalenderjahr. Was offen bleibt, erstattet ein ambulanter Tarif aus seinem Topf für Naturheilverfahren.',
+    },
+    {
+      question: 'Übernimmt die AOK oder die Barmer den Heilpraktiker?',
+      answer:
+        'Nicht pauschal. Jede AOK hat eine eigene Satzung: Die AOK NordWest zahlt zum Beispiel bis zu sechs Osteopathie-Behandlungen im Kalenderjahr mit je bis zu 50 EUR, auch bei Heilpraktikern mit der verlangten Osteopathie-Ausbildung und mit ärztlicher Bescheinigung. Die Barmer gibt über ihr Bonusprogramm einen Zuschuss zu Osteopathie und Akupunktur, Heilpraktikerleistungen allgemein stehen dort nicht. Für alles andere brauchst du eine eigene Regel in der Satzung deiner Kasse oder einen privaten Tarif.',
+    },
+    {
+      question: 'Gibt es eine neue Gebührenordnung für Heilpraktiker 2026?',
+      answer:
+        'Eine staatliche Gebührenordnung für Heilpraktiker gibt es auch 2026 nicht. Der Fachverband Deutscher Heilpraktiker stellt das Gebührenverzeichnis (GebüH) in der Fassung von 2002 bereit, abgerufen am 21.10.2026. Es ist eine Berechnungshilfe: Ohne andere Absprache kannst du davon ausgehen, dass sich das Honorar in seinem Rahmen bewegt.',
     },
     {
       question: 'Was erstattet eine Zusatzversicherung bei Heilpraktikerkosten?',
@@ -541,16 +657,54 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-07',
-    checkedAtLabel: '7. Oktober 2026',
-    intro: 'Die Zahlen dieser Übersicht stammen aus den Einzelseiten dieses Bereichs. Dort steht jeder Rechenweg mit Quelle, hier die wichtigsten Grundlagen.',
+    checkedAt: '2026-10-21',
+    checkedAtLabel: '21. Oktober 2026',
+    intro: 'Die meisten Zahlen dieser Übersicht stammen aus den Einzelseiten dieses Bereichs, dort steht jeder Rechenweg mit Quelle. GebüH-Rahmen, Kassenbeispiele und Wartezeit haben wir am 21. Oktober 2026 direkt im Verzeichnis, in den Satzungen und in den Bedingungen nachgelesen.',
     items: [
       {
         label: 'Allgemeine Versicherungsbedingungen für die Kranken-Zusatzversicherung, Teil II: Tarife AP5, AP7, AP9 und AP1 (1.753a/01.23)',
         publisher: 'SDK Süddeutsche Krankenversicherung',
         href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf',
         stand: '01.01.2023',
+        accessedAt: '21.10.2026',
+        note: 'Töpfe und Erstattung (Abschnitt I.5), keine Wartezeiten (Abschnitt II)',
+      },
+      {
+        label: 'Gebührenverzeichnis für Heilpraktiker (GebüH 85), Leistungsübersicht',
+        publisher: 'Fachverband Deutscher Heilpraktiker',
+        href: 'https://www.heilpraktiker.org/files/seiteninhalt/inhaltsseiten/c_fuer_heilpraktiker/cf-fuer-mitglieder-intern/cf-02-versicherungsfragen/cf-02-01-01-gebueh-85-2002-final.pdf',
+        stand: 'Fassung 2002',
+        accessedAt: '21.10.2026',
+        note: 'Spannen der Ziffern 1, 4, 5, 21.1, 34.2 und 35.1 bis 35.6',
+      },
+      {
+        label: 'Anlage zu § 25 der Satzung: Bonusprogramm und Katalog der Gesundheitsleistungen',
+        publisher: 'DAK-Gesundheit',
+        href: 'https://caas.content.dak.de/caas/v1/media/224230/data/b3363239bea3a9d0e92d2b5cb2110299/anlage-zu-25-der-satzung-dak-g-bonusprogramm-stand-25-07-2026.pdf',
+        stand: '07/2026, zuletzt geändert mit dem 65. Nachtrag',
+        accessedAt: '21.10.2026',
+      },
+      {
+        label: 'Satzung der BARMER, § 37 Bonus für gesundheitsbewusstes Verhalten und Anlage zu § 37',
+        publisher: 'BARMER',
+        href: 'https://www.barmer.de/resource/blob/1022552/b2c26cec88be1e70caad268f9961fd09/barmer-satzung-der-barmer-barrierefrei-19-data.pdf',
+        stand: '15.10.2026, Fassung des 39. und 40. Nachtrags',
+        accessedAt: '21.10.2026',
+      },
+      {
+        label: 'Satzung der AOK NordWest, § 8c Osteopathie',
+        publisher: 'AOK NordWest',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/nordwest/pdf/satzung.pdf',
+        stand: '16.12.2025',
         accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Satzung der IKK classic, § 34 Bonus für gesundheitsbewusstes Verhalten',
+        publisher: 'IKK classic',
+        href: 'https://cdn.ikk-classic.de/exporter/20152-satzung-kv-incl-sana-81-2026-10-15.pdf',
+        stand: '15.10.2026, 81. Nachtrag',
+        accessedAt: '21.10.2026',
+        note: 'Zuschuss in dreifacher Höhe, auch zum Beitrag einer Krankenzusatzversicherung',
       },
       {
         label: 'Zusatzversicherungen zur gesetzlichen Krankenversicherung: Sinnvoll oder nicht?',
@@ -585,7 +739,7 @@ export const article = {
         publisher: 'gesetze-im-internet.de (BMJV)',
         href: 'https://www.gesetze-im-internet.de/bbhv/anlage_2.html',
         stand: 'BGBl. I 2012, 1947 bis 1952, mit späteren Änderungen',
-        accessedAt: '07.10.2026',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Wie viel übernimmt die TK bei Osteopathie?',
@@ -639,7 +793,7 @@ export const article = {
   },
 
   footnote:
-    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Angaben zur Kassenleistung nach den genannten Quellen vom 7. Oktober 2026, zu Tarifen nach dem Stand der Bedingungen. Maßgeblich sind immer dein Befund, die Entscheidung deiner Kasse und die Bedingungen des Versicherers.',
+    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Angaben zur Kassenleistung nach den genannten Quellen vom 7. und 21. Oktober 2026, zu Tarifen nach dem Stand der Bedingungen. Maßgeblich sind immer dein Befund, die Entscheidung deiner Kasse und die Bedingungen des Versicherers.',
 };
 
 export default article;
