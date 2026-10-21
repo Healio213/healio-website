@@ -434,7 +434,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Zum Vergleich: Komfort mit ZAHN Sofort kostet im Beispiel oben mit 33 Jahren im ersten Jahr 680,40 EUR. Ein Zuschuss von 400 bis 700 EUR im Jahr trägt davon einen großen Teil. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab."
+          "text": "Zum Vergleich: Komfort mit ZAHN Sofort kostet im Beispiel oben mit 33 Jahren im ersten Jahr 680,40 EUR. Ein Zuschuss von 400 bis 700 EUR im Jahr trägt davon einen großen Teil. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus."
         },
         {
           "type": "segments",
