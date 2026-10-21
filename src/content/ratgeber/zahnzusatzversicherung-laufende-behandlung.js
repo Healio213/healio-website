@@ -21,18 +21,52 @@
  *     Trägertarif und nur beim erstmaligen Vertragsbeginn.
  * Nicht übernommen: Testurteil (Sperrwort), IKK-Refinanzierung "bis zu 100 Prozent"
  * (ohne Primärquelle), Wertungen wie "Schande".
+ *
+ * SEO-Ausbau 21.10.2026 (Auftrag seo-zv-3, Hauptbegriff "zahnzusatzversicherung
+ * bei laufender behandlung" plus "angeratene behandlung" und "nach befund").
+ * Rollenverteilung im Zahnfeld, damit die drei Seiten sich nicht gegenseitig
+ * Suchbegriffe wegnehmen: diese Seite = angeraten, begonnen, laufend, nach
+ * Befund, trotz Behandlung; zahnzusatzversicherung-sofort-2026 = sofort,
+ * Sofortschutz, Sofortleistung (Ankertext von hier: "Zahnzusatzversicherung mit
+ * Sofortschutz"); zahnzusatzversicherung-ohne-wartezeit = Wartezeit (Ankertext
+ * "Zahnzusatzversicherung ohne Wartezeit"). Das Wort "Sofortschutz" steht hier
+ * deshalb nur im Ankertext.
+ * Alle Unterlagen am 21.10.2026 frisch abgerufen und gelesen:
+ *   - BB ZAHN Sofort B 261005 (08.23, Stand 09/2023), unverändert: Vorwort
+ *     (Zahnbehandlung, Zahnersatz, Prophylaxe, bei Beginn bekannt oder
+ *     angeraten), 2 Erstattung nach Abschnitt B des Trägertarifs, 3.1
+ *     1.500 EUR, davon höchstens 750 EUR je Kalenderjahr, keine Anrechnung auf
+ *     die Staffel, 3.2 Kieferorthopädie von vorher ausgenommen außer Unfall.
+ *   - Highlightblatt Zahn B 333551 (07.2026), unverändert: 29,90 EUR pro
+ *     Monat, 1.500 EUR und max. 750 EUR je Kalenderjahr, Erstattungssätze
+ *     Smart/Komfort/Prestige, "sogar bei Aufbissschienen", Abzug bei Ärzten
+ *     ohne Kassenzulassung pauschal 40 %, Jahresbeitrag 33-Jährige 152,40 /
+ *     321,60 / 529,20 EUR. Summen mit ZAHN Sofort sind eigene Rechnung.
+ *   - Annahmerichtlinien Zahn B 333546 (11.2025), Datei identisch mit der
+ *     Ablage Healio/Zahnzusatz-Unterlagen: Abschluss bis 70 ohne Anfrage,
+ *     24 Monate Mindestlaufzeit, Kündigung ein Monat vor Ablauf, fehlender Zahn
+ *     = kein Abschluss, Weisheitszähne nicht als fehlend angeben, Abrasionen
+ *     und Schlifffacetten zählen als Zahnschmelzdefekt, in Behandlung
+ *     versicherbar außer Parodontose, Parodontitis, Zahnschmelzdefekt.
+ *   - IKK classic Satzung Stand 01.08.2026 § 34 Abs. 8 (Zuschuss für Beiträge
+ *     zu Krankenzusatzversicherungen, dreifacher Wert, höchstens tatsächliche
+ *     Kosten); Krankenkassenliste GKV-Spitzenverband vom 21.10.2026: IKK
+ *     classic 3,85 %. 810/1.155 EUR und 400 bis 700 EUR wortgleich mit
+ *     bonusheft-zahnarzt und dentalContent.js (Franks Satzungsregel).
+ * Zahn-Check-Logik (DentalZahnCheck.jsx): Zahnziehen, auch Weisheitszahn,
+ * führt nie zum Sofortweg, sondern zur persönlichen Klärung.
  */
 export const article = {
-  updatedAtLabel: "14. Oktober 2026",
-  updatedAt: "2026-10-14",
+  updatedAtLabel: "21. Oktober 2026",
+  updatedAt: "2026-10-21",
   "slug": "zahnzusatzversicherung-laufende-behandlung",
   "kind": "ratgeber",
   "group": "zaehne",
-  "metaTitle": "Zahnzusatzversicherung bei laufender Behandlung | Healio",
-  "metaDescription": "Zahnzusatzversicherung nach Befund oder bei angeratener Behandlung: Was ZAHN Sofort zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
+  "metaTitle": "Zahnzusatzversicherung bei laufender oder angeratener Behandlung",
+  "metaDescription": "Zahnzusatzversicherung bei laufender Behandlung, nach Befund oder schon angeraten: wer noch zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
-  "readingTimeMinutes": 9,
+  "readingTimeMinutes": 14,
   "listTitle": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
   "listTeaser": "Angeraten, begonnen oder schon abgerechnet? Welche Zahnzusatzversicherung bei laufender Behandlung noch zahlt und wo die Grenze liegt.",
   "headline": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
@@ -56,14 +90,14 @@ export const article = {
         "label": "im Monat für den Baustein, 24 Monate lang, plus Zahntarif"
       }
     ],
-    "text": "Ein normaler Zahntarif zahlt nicht für das, was beim Abschluss schon angeraten ist oder läuft. Der Baustein ZAHN Sofort der Bayerischen ist die Ausnahme, mit festem Deckel.",
+    "text": "Ja, auch bei laufender oder angeratener Behandlung geht noch etwas, aber nur bis zur Rechnung. Ein normaler Zahntarif zahlt nicht für das, was beim Abschluss schon angeraten ist oder läuft. Der Baustein ZAHN Sofort der Bayerischen ist die Ausnahme, mit festem Deckel.",
     "path": {
       "to": "/zahn",
       "text": "Angeraten oder begonnen? Deinen Weg prüfen",
       "label": "Zahn-Check bei Healio öffnen"
     }
   },
-  "lead": "Der Zahnarzt hat eine Krone, ein Inlay oder ein Implantat angeraten, und jetzt heißt es überall: zu spät für eine Zahnzusatzversicherung. Für einen normalen Tarif stimmt das. Mit dem Baustein ZAHN Sofort der Bayerischen ist eine angeratene oder schon begonnene Behandlung trotzdem versicherbar, mit bis zu 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Die Bedingung, an der alles hängt: Der Vertrag muss beginnen, bevor die Praxis die Rechnung stellt. Wer das verpasst, zahlt seinen Eigenanteil allein.",
+  "lead": "Der Zahnarzt hat nach dem Befund eine Krone, ein Inlay oder ein Implantat angeraten, und jetzt heißt es überall: zu spät für eine Zahnzusatzversicherung. Für einen normalen Tarif stimmt das. Mit dem Baustein ZAHN Sofort der Bayerischen ist eine angeratene oder schon begonnene Behandlung trotzdem versicherbar, mit bis zu 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Die Bedingung, an der alles hängt: Der Vertrag muss beginnen, bevor die Praxis die Rechnung stellt. Wer das verpasst, zahlt seinen Eigenanteil allein.",
   "sections": [
     {
       "id": "status",
@@ -94,6 +128,21 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Ein Tarif ohne Wartezeit ändert daran nichts. Keine Wartezeit heißt nur, dass neue Fälle sofort zählen. Der Fall, der schon in deiner Akte steht, bleibt draußen. Und eine hohe Erstattungsquote im Prospekt sagt nichts darüber, ob genau deine laufende Behandlung dazugehört."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Was ab dem ersten Tag gilt und wo die Leistungsstaffel bremst, steht im Ratgeber "
+            },
+            {
+              "text": "Zahnzusatzversicherung ohne Wartezeit",
+              "to": "/ratgeber/zahnzusatzversicherung-ohne-wartezeit"
+            },
+            {
+              "text": "."
+            }
+          ]
         },
         {
           "type": "paragraph",
@@ -127,6 +176,29 @@ export const article = {
             {
               "lead": "Kein Übertrag:",
               "text": "Was du in einem Kalenderjahr nicht ausschöpfst, verfällt. Ins nächste Jahr wandert es nicht."
+            },
+            {
+              "lead": "Keine laufende Zahnspange:",
+              "text": "Eine Kieferorthopädie, die vor dem Versicherungsbeginn begonnen oder erstmals angeraten wurde, ist im Baustein ausgenommen. Das gilt nicht, wenn sie nachweislich auf einen Unfall zurückgeht."
+            },
+            {
+              "lead": "Staffel bleibt unberührt:",
+              "text": "Was ZAHN Sofort zahlt, wird nach Ziffer 3.1 der Bedingungen nicht auf die Leistungsstaffel deines Zahntarifs angerechnet."
+            }
+          ]
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Wie Staffel und Baustein im ersten Kalenderjahr zusammenspielen und was „sofort“ sonst bei Zahntarifen heißt, erklärt der Ratgeber "
+            },
+            {
+              "text": "Zahnzusatzversicherung mit Sofortschutz",
+              "to": "/ratgeber/zahnzusatzversicherung-sofort-2026"
+            },
+            {
+              "text": "."
             }
           ]
         },
@@ -166,6 +238,71 @@ export const article = {
             ]
           ],
           "note": "Nach den Besonderen Bedingungen ZAHN Sofort B 261005 (08.23) und den Annahmerichtlinien Zahn B 333546 (11.2025) der Bayerischen. Keine Leistungszusage für deinen Einzelfall, verbindlich sind Antrag, Versicherungsschein und Bedingungen."
+        }
+      ]
+    },
+    {
+      "id": "tarifwahl",
+      "heading": "Welcher Zahntarif gehört zu ZAHN Sofort?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Den Baustein gibt es nur zusammen mit ZAHN Smart, Komfort oder Prestige. Welchen du wählst, entscheidet mit darüber, wie viel von deiner angeratenen Behandlung erstattet wird. Nach Ziffer 2 der Bedingungen zahlt ZAHN Sofort nach den Prozentsätzen des Zahntarifs, aus dem Baustein höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR."
+        },
+        {
+          "type": "table",
+          "mobile": "cards",
+          "caption": "Erstattung und Beitrag der drei Zahntarife, jeweils mit ZAHN Sofort",
+          "head": [
+            "Laut Bayerischer",
+            "ZAHN Smart",
+            "ZAHN Komfort",
+            "ZAHN Prestige"
+          ],
+          "rows": [
+            [
+              "Zahnbehandlung",
+              "75 %",
+              "100 %",
+              "100 %"
+            ],
+            [
+              "Zahnersatz bis zur Regelversorgung",
+              "75 %",
+              "100 %",
+              "100 %"
+            ],
+            [
+              "Zahnersatz über der Regelversorgung",
+              "75 %",
+              "80 bis 90 %",
+              "100 %"
+            ],
+            [
+              "Jahresbeitrag Zahntarif, Beispiel 33 Jahre",
+              "152,40 EUR",
+              "321,60 EUR",
+              "529,20 EUR"
+            ],
+            [
+              "Mit ZAHN Sofort (12 mal 29,90 EUR) im ersten Jahr",
+              "511,20 EUR",
+              "680,40 EUR",
+              "888,00 EUR"
+            ]
+          ],
+          "note": "Quelle: die Bayerische, Highlightblatt Zahn B 333551, Stand 07.2026. Die Summen mit ZAHN Sofort sind eigene Rechnung. Bei Komfort und Prestige hängt der Beitrag auch von der Regionalklasse ab, verbindlich ist der Beitrag im Antrag."
+        },
+        {
+          "type": "paragraph",
+          "text": "Spürbar wird der Satz bei teurem Zahnersatz. Im Beispiel der Bayerischen kostet eine Krone 1.040 EUR, mit Smart bleiben davon 260 EUR bei dir, ein Viertel der Rechnung. Komfort und Prestige erstatten Zahnbehandlungen zu 100 %, kosten dafür mehr im Monat. Und wenn der Baustein nach 24 Monaten endet, bleibt der Zahntarif für jede neue Behandlung."
+        },
+        {
+          "type": "path",
+          "to": "/zahn#zahn-check",
+          "icon": "dental",
+          "text": "Im Zahn-Check siehst du, ob ZAHN Sofort für dich offen ist, und rechnest deinen Beitrag direkt aus.",
+          "label": "Zahn-Check starten"
         }
       ]
     },
@@ -236,6 +373,10 @@ export const article = {
         },
         {
           "type": "paragraph",
+          "text": "Fehlen dir schon Zähne oder gibt es eine Zahn-Vorgeschichte, ist ZAHN Sofort nicht dein Weg, auch nicht für eine Brücke, die eine bestehende Lücke schließen soll. Nach den Annahmerichtlinien der Bayerischen ist bei einem fehlenden Zahn kein Abschluss möglich. Die laufende Behandlung selbst ist dagegen kein Ausschlussgrund. Wer gerade in Behandlung ist, kann sich dort versichern, außer die Diagnose lautet Parodontose, Parodontitis oder Zahnschmelzdefekt."
+        },
+        {
+          "type": "paragraph",
           "text": "Wurde in den letzten 2 Jahren nichts angeraten, brauchst du den Baustein nicht. Dann zeigt dir der Zahn-Check einen normalen Zahntarif, auch wenn dir 1 bis 3 Zähne fehlen. Passt keiner der beiden Wege, etwa bei fehlenden Zähnen zusammen mit einer angeratenen Behandlung, klären wir das persönlich mit dir unter 040 89755705."
         },
         {
@@ -276,6 +417,39 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Speichere Antrag und Versicherungsschein, damit du den späteren Leistungsfall auf die richtige Fassung beziehen kannst. Die Antworten im Zahn-Check sind eine Orientierung, keine Annahme. Verbindlich entscheidet der Versicherer im Antrag."
+        }
+      ]
+    },
+    {
+      "id": "kassenbonus",
+      "heading": "Kann dein Kassenbonus den Beitrag mittragen?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Erst kommt der Schutz für die Behandlung, dann der Geheimtipp. Manche Krankenkassen zahlen ihren Bonus auf Wunsch als Zuschuss zum Beitrag einer Zusatzversicherung. Die IKK classic regelt das in § 34 ihrer Satzung: Der Zuschuss ist dreimal so hoch wie der normale Bonus, erstattet werden höchstens deine nachgewiesenen Kosten."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR, beides theoretische Höchstwerte. In der breiten Masse sind es 400 bis 700 EUR, das ist unsere Einschätzung aus der Beratung. Gegenzurechnen ist der Zusatzbeitrag der IKK classic von 3,85 Prozent."
+        },
+        {
+          "type": "paragraph",
+          "text": "Zum Vergleich: Komfort mit ZAHN Sofort kostet im Beispiel oben mit 33 Jahren im ersten Jahr 680,40 EUR. Ein Zuschuss von 400 bis 700 EUR im Jahr trägt davon einen großen Teil. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Welche Kasse zu deinem Zahntarif passt, vergleichst du quellenbelegt auf "
+            },
+            {
+              "text": "kassenboost.de",
+              "href": "https://kassenboost.de/"
+            },
+            {
+              "text": "."
+            }
+          ]
         }
       ]
     },
@@ -352,6 +526,30 @@ export const article = {
     {
       "question": "Kann ich ZAHN Sofort in meinen bestehenden Vertrag aufnehmen?",
       "answer": "Nein. Den Baustein gibt es nur zusammen mit einem Zahntarif der Bayerischen und nur beim erstmaligen Vertragsbeginn."
+    },
+    {
+      "question": "Wann ist es für eine Zahnzusatzversicherung zu spät?",
+      "answer": "Für die laufende Behandlung in dem Moment, in dem die Praxis sie in Rechnung stellt. Dann gilt sie nach den Bedingungen von ZAHN Sofort als abgeschlossen, und auch der Baustein zahlt nicht mehr dafür. Bis dahin ist er noch möglich, wenn die Annahme passt. Für künftige Behandlungen kannst du einen Zahntarif der Bayerischen bis zu einem Alter von 70 Jahren ohne gesonderte Anfrage beantragen, darüber nur auf Anfrage beim Versicherer."
+    },
+    {
+      "question": "Zahlt ZAHN Sofort eine schon angeratene Wurzelbehandlung?",
+      "answer": "Das kann er. Nach seinen Bedingungen deckt der Baustein Zahnbehandlungen, Zahnersatz und Prophylaxe, die beim Vertragsbeginn schon bekannt oder angeraten sind, und eine Wurzelbehandlung ist eine Zahnbehandlung. Erstattet wird nach dem Satz deines Zahntarifs für Zahnbehandlung, laut Bayerischer 75 % in Smart und 100 % in Komfort und Prestige, aus ZAHN Sofort höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Die Rechnung darf erst nach Vertragsbeginn kommen, und die Annahme muss passen."
+    },
+    {
+      "question": "Bekomme ich eine Zahnzusatzversicherung trotz CMD?",
+      "answer": "CMD steht in den Annahmerichtlinien der Bayerischen nicht unter den Gründen, die einen Abschluss ausschließen. Genau hinschauen musst du bei Abrasionen und Schlifffacetten: Die gibst du dort als Zahnschmelzdefekt an, und wurde ein Zahnschmelzdefekt in den letzten 3 Jahren festgestellt, nimmt die Bayerische dich nicht an. Frag deine Praxis vor dem Antrag, was in deiner Akte steht. Aufbissschienen nennt die Bayerische ausdrücklich als Leistung ihrer Zahntarife. Ist eine Schiene schon angeraten, kann ZAHN Sofort nach den Prozentsätzen deines Zahntarifs dafür leisten."
+    },
+    {
+      "question": "Was gilt bei Weisheitszähnen?",
+      "answer": "Fehlende Weisheitszähne musst du bei der Bayerischen im Antrag nicht als fehlende Zähne angeben, so steht es in ihren Annahmerichtlinien. Anders ist es, wenn ein Zahn gezogen werden soll, auch ein Weisheitszahn. Dann zeigt dir der Zahn-Check auf healio.de/zahn den Sofortweg nicht an, und wir klären deine Lage persönlich mit dir."
+    },
+    {
+      "question": "Darf ich nach dem Befund den Zahnarzt wechseln?",
+      "answer": "Welche Praxis dich behandelt, entscheidest du. Für die Versicherung ändert der Wechsel aber nichts. Angeraten ist eine Behandlung nach den Annahmerichtlinien der Bayerischen, sobald ein Behandler konkreten Handlungsbedarf angemeldet hat, und dafür gilt ein Zeitraum von 2 Jahren. Die Empfehlung der ersten Praxis zählt also weiter, auch wenn du inzwischen woanders in Behandlung bist. Achte bei der neuen Praxis auf die Kassenzulassung: Für Zahnärzte ohne Kassenzulassung nennt die Bayerische einen pauschalen Abzug von 40 %."
+    },
+    {
+      "question": "Kann ich den Zahntarif nach der Behandlung wieder kündigen?",
+      "answer": "Nicht sofort. Der Zahntarif der Bayerischen läuft zunächst 24 Monate und verlängert sich dann jeweils um ein Jahr, wenn du nicht spätestens einen Monat vor Ablauf in Textform kündigst. ZAHN Sofort endet nach 24 Monaten von selbst."
     }
   ],
   "onward": {
@@ -377,37 +575,51 @@ export const article = {
     ]
   },
   "sources": {
-    "checkedAt": "2026-10-14",
-    "checkedAtLabel": "14. Oktober 2026",
-    "intro": "Leistungen, Grenzen und Beitrag von ZAHN Sofort stammen aus den Unterlagen der Bayerischen, die allgemeinen Regeln von der Verbraucherzentrale und aus dem BGB. Eigene Rechnungen sind im Text gekennzeichnet.",
+    "checkedAt": "2026-10-21",
+    "checkedAtLabel": "21. Oktober 2026",
+    "intro": "Leistungen, Grenzen, Annahme und Beitrag von ZAHN Sofort stammen aus den Unterlagen der Bayerischen, der Kassenbonus aus der Satzung der IKK classic, die allgemeinen Regeln von der Verbraucherzentrale und aus dem BGB. Eigene Rechnungen sind im Text gekennzeichnet.",
     "items": [
       {
         "label": "Besondere Bedingungen für den Ergänzungsbaustein ZAHN Sofort (B 261005)",
         "publisher": "die Bayerische",
         "href": "https://www.diebayerische.de/dam/jcr:a4c467fb-8060-4ed2-afea-6d44757e1970/261005_besondere_bedignungen_zahn_sofort_2023.pdf",
         "stand": "08.23",
-        "accessedAt": "14.10.2026"
+        "accessedAt": "21.10.2026"
       },
       {
-        "label": "Highlightblatt Zahnzusatzversicherung mit Ergänzungsbaustein Zahn Sofort (B 333551)",
+        "label": "Highlightblatt Zahnzusatzversicherung mit Ergänzungsbaustein Zahn Sofort (B 333551), Erstattungssätze, Beiträge, Abzug ohne Kassenzulassung",
         "publisher": "die Bayerische",
         "href": "https://www.diebayerische.de/dam/jcr:65e23042-960a-4478-90c7-a249e0b5f628/B%20333551%20Highlightblatt%20allgemein%20Stadt_Zahn.PDF",
         "stand": "07.2026",
-        "accessedAt": "14.10.2026"
+        "accessedAt": "21.10.2026"
       },
       {
         "label": "Highlightblatt Baustein ZAHN Sofort mit Leistungsbeispielen (B 333549)",
         "publisher": "die Bayerische",
         "href": "https://www.diebayerische.de/dam/jcr:b29de137-b763-4efa-bcc0-9e51a33a5da7/333549_highlightblatt_zahn-sofort_endkunden.pdf",
         "stand": "März 2024",
-        "accessedAt": "14.10.2026"
+        "accessedAt": "21.10.2026"
       },
       {
-        "label": "Annahmerichtlinien Zahn, Definition „angeraten“ und Regeln zum Baustein (B 333546)",
+        "label": "Annahmerichtlinien Zahn, Definition „angeraten“, Annahme, Weisheitszähne, Zahnschmelzdefekt, Laufzeit und Regeln zum Baustein (B 333546)",
         "publisher": "die Bayerische",
         "href": "https://www.diebayerische.de/dam/jcr:0b42be21-a714-4ccb-a134-c3a848d472d7/333546_annahmerichtlinien_zahn.pdf",
         "stand": "11.2025",
-        "accessedAt": "14.10.2026"
+        "accessedAt": "21.10.2026"
+      },
+      {
+        "label": "Satzung der IKK classic, § 34 Bonus für gesundheitsbewusstes Verhalten, Zuschuss zu Zusatzversicherungen",
+        "publisher": "IKK classic",
+        "href": "https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf",
+        "stand": "Satzung Stand 01.08.2026",
+        "accessedAt": "21.10.2026"
+      },
+      {
+        "label": "Krankenkassenliste mit Zusatzbeiträgen",
+        "publisher": "GKV-Spitzenverband",
+        "href": "https://www.gkv-spitzenverband.de/krankenkassenliste.pdf",
+        "stand": "Kassenliste vom 21.10.2026",
+        "accessedAt": "21.10.2026"
       },
       {
         "label": "Bekannte Schäden und angekündigte Behandlungen",
@@ -432,7 +644,7 @@ export const article = {
       }
     ]
   },
-  "footnote": "Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Angaben zu ZAHN Sofort nach den Unterlagen der Bayerischen, Abruf 14. Oktober 2026. Maßgeblich sind die zahnärztliche Einordnung, die Kassenleistung sowie Antrag, Versicherungsschein und Bedingungen des Versicherers."
+  "footnote": "Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Angaben zu ZAHN Sofort nach den Unterlagen der Bayerischen, Abruf 21. Oktober 2026. Maßgeblich sind die zahnärztliche Einordnung, die Kassenleistung sowie Antrag, Versicherungsschein und Bedingungen des Versicherers."
 };
 
 export default article;

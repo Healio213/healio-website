@@ -735,11 +735,11 @@ export const RATGEBER_ENTRIES = [
     "group": "zaehne",
     "listTitle": "Zahnzusatzversicherung bei laufender Behandlung: Was geht?",
     "listTeaser": "Angeraten, begonnen oder schon abgerechnet? Welche Zahnzusatzversicherung bei laufender Behandlung noch zahlt und wo die Grenze liegt.",
-    "readingTimeMinutes": 9,
-    "metaTitle": "Zahnzusatzversicherung bei laufender Behandlung | Healio",
-    "metaDescription": "Zahnzusatzversicherung nach Befund oder bei angeratener Behandlung: Was ZAHN Sofort zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
+    "readingTimeMinutes": 14,
+    "metaTitle": "Zahnzusatzversicherung bei laufender oder angeratener Behandlung",
+    "metaDescription": "Zahnzusatzversicherung bei laufender Behandlung, nach Befund oder schon angeraten: wer noch zahlt, warum die Rechnung die Grenze ist und wann es zu spät ist.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "professionelle-zahnreinigung-sinnvoll",
