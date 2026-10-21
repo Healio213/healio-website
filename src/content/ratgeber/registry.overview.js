@@ -289,7 +289,7 @@ export const RATGEBER_OVERVIEW = {
           "kind": "ratgeber",
           "listTitle": "Familienzimmer im Krankenhaus: Kosten und wer zahlt",
           "listTeaser": "Was ein Familienzimmer nach der Geburt kostet, was die Kasse dazu zahlt und wie der Klinikschutz es trägt, mit Preislisten aus 2026.",
-          "readingTimeMinutes": 10
+          "readingTimeMinutes": 17
         },
         {
           "slug": "babybonus-krankenkasse",

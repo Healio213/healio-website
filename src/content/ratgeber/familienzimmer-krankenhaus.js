@@ -46,6 +46,38 @@
  *     2026", Datei vom 21.01.2026; InnKlinikum Flyer Nr. 080 vom 27.03.2026;
  *     Mainz Stand 01.01.2026; Dessau 01.01.2026). AOK NordWest mit
  *     Satzungsfundstelle (§ 8e Abs. 4 und § 8 Abs. 3, Stand 16.12.2025).
+ *
+ * SEO-Ausbau 21.10.2026 (Suchbegriff "familienzimmer krankenhaus kosten",
+ * Auftrag SEO Zusatzversicherung 5, H1 unverändert):
+ *   - Seitentitel mit Preisspanne 135 bis 150 EUR (kleinster Wert Mainz
+ *     134,84 EUR, größter InnKlinikum 150 EUR, wie Vorspann und FAQ).
+ *     Mainz und Dessau am 21.10.2026 neu geladen, ohne Abweichung.
+ *     Hochsauerland zeigte am 21.10.2026 "Webservices vorübergehend
+ *     deaktiviert", InnKlinikum war nicht erreichbar; beide Werte bleiben mit
+ *     dem Abruf vom 07.10.2026 stehen.
+ *   - Neuer Abschnitt Kind im Krankenhaus: § 11 Abs. 3 SGB V; Ziffer 2.3 der
+ *     Tarifbedingungen Komfort B 275005, Prestige B 275006 und Smart B 275004
+ *     (Stand 11/2024, Smart am 21.10.2026 neu geladen); Smart leistet nur bei
+ *     Unfall und den in § 2 genannten schweren Erkrankungen. Kinderbeiträge
+ *     0 bis 15 Jahre laut Produktsteckbrief B 275010 (08.2025), am 21.10.2026
+ *     auf diebayerische.de neu geladen und mit der lokalen Fassung
+ *     textgleich: Prestige 4,10, Komfort 3,20, Smart 2,10 EUR im Monat.
+ *     Jahresbeträge (12 mal) eigene Rechnung. SDK Rooming-in unter 16 nach
+ *     SP1/SP2 Nr. 8 und healio.de/stationaer; einen SDK-Kinderbeitrag nennt
+ *     die Produktseite nicht, die Seite nennt keinen.
+ *   - Neuer Abschnitt bestehende Schwangerschaft: AVB B 275000 § 2 Abs. 2
+ *     (am 21.10.2026 neu geladen) und § 198 Abs. 1 und 3 VVG. "Ohne
+ *     Gesundheitsprüfung" nur mit Elternteil und Zwei-Monats-Frist im selben
+ *     Satz (Franks Regel 06.10.2026). Der Abschnitt spricht die Leserin nicht
+ *     als schwanger an ("Wenn die Schwangerschaft schon besteht"). SDK
+ *     ambulant ohne Wartezeit nach AVB AP-Tarife 1.753a Abschnitt II (am
+ *     21.10.2026 neu geladen); "Gesundheitsfragen ja, keine Ablehnung".
+ *   - Kassenbonus als Geheimtipp am Ende: IKK classic laut Satzung bis zu
+ *     810 EUR, in der Schwangerschaft bis zu 1.155 EUR, breite Masse 400 bis
+ *     700 EUR, Gegenrechnung mit dem Zusatzbeitrag 3,85 Prozent (Seite der
+ *     IKK classic zu den Beitragssätzen, wie im IKK-Ratgeber).
+ *   - Elternzimmer als Wort in Text und FAQ, AOK-Frage mit der vorhandenen
+ *     Satzungsstelle der AOK NordWest.
  */
 
 export const article = {
@@ -53,13 +85,15 @@ export const article = {
   kind: 'ratgeber',
   group: 'familie',
 
-  metaTitle: 'Familienzimmer Krankenhaus: Kosten und wer zahlt | Healio',
+  metaTitle: 'Familienzimmer Krankenhaus Kosten 2026: 135 bis 150 EUR | Healio',
   metaDescription:
-    'Was ein Familienzimmer nach der Geburt kostet, mit vier Preislisten von 2026, was die Krankenkasse zahlt und wann ein Klinikschutz es trägt.',
+    'Familienzimmer: rund 135 bis 150 EUR je Nacht. Die Kasse zahlt meist nicht, Klinikschutz nur vor der Schwangerschaft. Plus der Weg für dein Kind.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
-  readingTimeMinutes: 10,
+  updatedAt: '2026-10-21',
+  updatedAtLabel: '21. Oktober 2026',
+  readingTimeMinutes: 17,
 
   listTitle: 'Familienzimmer im Krankenhaus: Kosten und wer zahlt',
   listTeaser:
@@ -75,11 +109,11 @@ export const article = {
     title: 'Das Wichtigste in Kürze',
     icon: 'hospital',
     facts: [
-      { value: '140 bis 150 EUR', label: 'je Nacht in zwei Preislisten von 2026, als Beispiel' },
+      { value: '135 bis 150 EUR', label: 'je Nacht in vier Preislisten von 2026, als Beispiel' },
       { value: 'Wahlleistung', label: 'der Klinik, die Kasse zahlt sie nicht als Regelleistung' },
       { value: '8 Monate', label: 'Wartezeit für die Entbindung beim Klinikschutz der Bayerischen' },
     ],
-    text: 'Das Familienzimmer bezahlst du in der Regel selbst. Ein Klinikschutz kann es tragen, wenn beim Abschluss keine Schwangerschaft besteht oder bekannt ist. Bei der Bayerischen muss er außerdem mindestens acht Monate vor der Geburt beginnen.',
+    text: 'Das Familienzimmer bezahlst du in der Regel selbst. Ein Klinikschutz kann es tragen, wenn beim Abschluss keine Schwangerschaft besteht oder bekannt ist. Bei der Bayerischen muss er außerdem mindestens acht Monate vor der Geburt beginnen. Ist es dafür zu spät, bleibt der Weg für dein Kind: Es lässt sich ab der Geburt versichern, und sein Tarif kann deine Unterkunft zahlen, wenn du später bei ihm im Krankenhaus bleibst.',
     path: { to: '/stationaer#familie', text: 'Familienzimmer und Klinikschutz im Überblick', label: 'Klinik-Tarife ansehen' },
   },
 
@@ -93,6 +127,10 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Ein Familienzimmer ist ein Zimmer auf der Wochenstation, in dem der Vater, die Partnerin oder eine andere Begleitperson mit Mutter und Baby übernachtet. Kliniken bieten es als Wahlleistung an, gegen Aufpreis und nur, wenn eines frei ist. Die München Klinik Schwabing schreibt dazu, es sei ausschließlich für gesetzlich Versicherte gedacht und müsse selbst gezahlt werden.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Manche sagen auch Elternzimmer. Das kann dasselbe meinen oder das Bett für Mutter oder Vater neben einem kranken Kind. Für beides gelten andere Regeln, frag also nach, was deine Klinik mit dem Wort meint.',
         },
         {
           type: 'paragraph',
@@ -238,6 +276,104 @@ export const article = {
       ],
     },
     {
+      id: 'schwangerschaft-besteht',
+      heading: 'Was geht noch, wenn die Schwangerschaft schon besteht?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Für das Familienzimmer dieser Geburt ist es dann zu spät. Ein neuer Klinikschutz zahlt weder die Entbindung noch das Zimmer, wenn die Schwangerschaft beim Abschluss besteht oder bekannt ist. Für dein Kind ist es dagegen nicht zu spät.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Dein Baby kann ab der Geburt einen eigenen Klinikschutz bekommen, ohne Gesundheitsprüfung, ohne Risikozuschlag und ohne Wartezeit, wenn ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist und du dein Baby spätestens zwei Monate nach der Geburt anmeldest (AVB B 275000, § 2 Abs. 2). Das gilt auch für Geburtsschäden, angeborene Krankheiten und Anomalien. Mehr als diese drei Monate darf kein Versicherer verlangen (§ 198 Abs. 3 VVG). Bei der SDK reicht es, wenn ein Elternteil am Tag der Geburt im Klinik-Tarif versichert ist.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Eine Grenze hat das: Dein Kind ist höchstens so umfassend versichert wie der Elternteil (§ 198 Abs. 1 VVG). Soll es Prestige bekommen, braucht ein Elternteil selbst Prestige.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Praktisch heißt das: Ein Elternteil schließt bei der Bayerischen spätestens drei Monate vor dem errechneten Termin ab. Für dein Kind reicht einer, das kann auch der Vater sein, anders als beim Familienzimmer, das über den Vertrag der Mutter läuft. Plan Puffer ein: Kommt dein Baby früher, zählt der Tag der Geburt, nicht der Termin. Die Gesundheitsfragen im Antrag werden wahrheitsgemäß und vollständig beantwortet.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Auch ambulant geht in der Schwangerschaft noch etwas. Der Vorsorge-Topf der SDK zahlt Untersuchungen, die die Kasse nicht übernimmt, und die ambulanten Tarife der SDK haben keine Wartezeit (AVB AP-Tarife 1.753a, Abschnitt II). Gesundheitsfragen gibt es im Antrag, eine Ablehnung nicht.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Was der Vorsorge-Topf zahlt und wo seine Grenzen liegen, steht auf ' },
+            { text: 'healio.de/schwangerschaft', to: '/schwangerschaft' },
+            { text: '. Alle Fristen für dein Baby findest du im Ratgeber ' },
+            { text: 'Neugeborenes versichern', to: '/ratgeber/neugeborenes-versichern' },
+            { text: '.' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'kind-krankenhaus',
+      heading: 'Wer zahlt das Familienzimmer, wenn dein Kind ins Krankenhaus muss?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Dann geht es nicht um die Wochenstation, sondern darum, ob du als Begleitperson mit aufgenommen wirst. Bei Kindern unter neun Jahren gilt das als medizinisch notwendig, und die Kasse zahlt deine Unterkunft und Verpflegung (§ 11 Abs. 3 SGB V). Ab neun zahlt sie nur, wenn die Mitaufnahme im Einzelfall medizinisch notwendig ist. Ohne diesen Grund zahlst du in der Regel selbst.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Hier hilft ein Klinikschutz, der auf dein Kind läuft. Bei der Bayerischen zahlen Komfort, Prestige und Smart Unterkunft und Verpflegung eines Elternteils zu 100 Prozent, wenn du als Begleitperson neben deinem versicherten Kind unter 16 aufgenommen wirst, soweit die Kasse die Kosten nicht trägt (Ziffer 2.3 der Tarifbedingungen). Komfort und Prestige leisten bei jedem medizinisch notwendigen Klinikaufenthalt. Smart leistet nur nach einem Unfall und bei den schweren Krankheiten, die der Tarif aufzählt, etwa Krebs oder Herzinfarkt. Bei der SDK heißt die Leistung Rooming-in, in SP1 und SP2 für Kinder, die zu Beginn der Behandlung jünger als 16 sind.',
+        },
+        {
+          type: 'table',
+          mobile: 'cards',
+          caption: 'Klinikschutz für Kinder bis 15 Jahre: Beitrag und Elternteil im Krankenhaus',
+          head: ['Tarif', 'Beitrag 0 bis 15 Jahre', 'Wann der Tarif leistet', 'Elternteil im Krankenhaus'],
+          rows: [
+            [
+              'Bayerische Prestige',
+              '4,10 EUR im Monat, 49,20 EUR im Jahr',
+              'Bei jedem medizinisch notwendigen Klinikaufenthalt, Ein- oder Zweibettzimmer und Chefarzt',
+              'Unterkunft und Verpflegung zu 100 Prozent, Kind unter 16, soweit die Kasse nicht zahlt',
+            ],
+            [
+              'Bayerische Komfort',
+              '3,20 EUR im Monat, 38,40 EUR im Jahr',
+              'Bei jedem medizinisch notwendigen Klinikaufenthalt, Zweibettzimmer und Chefarzt',
+              'Wie Prestige',
+            ],
+            [
+              'Bayerische Smart',
+              '2,10 EUR im Monat, 25,20 EUR im Jahr',
+              'Nur nach einem Unfall und bei schweren Krankheiten aus der Liste des Tarifs, die erstmals nach Versicherungsbeginn festgestellt werden',
+              'Wie Prestige, aber nur in diesen Fällen',
+            ],
+            [
+              'SDK SP1 und SP2',
+              'Für Kinder nennt healio.de/stationaer keinen Beitrag, das Angebot richtet sich nach dem Alter',
+              'Bei Krankheit und Unfall, SP1 Ein- oder Zweibettzimmer, SP2 Zweibettzimmer',
+              'Rooming-in für Kinder, die zu Beginn der Behandlung jünger als 16 sind',
+            ],
+          ],
+          note: 'Beiträge der Bayerischen laut Produktsteckbrief B 275010 (08.2025), abgerufen am 21. Oktober 2026. Jahresbeträge eigene Rechnung (12 mal Monatsbeitrag). Leistungen nach den Tarifbedingungen Prestige B 275006, Komfort B 275005 und Smart B 275004 (Stand 11/2024), Ziffer 2.3, bei Smart zusätzlich § 2, für die SDK nach healio.de/stationaer. Beiträge können sich ändern, maßgeblich ist dein Angebot.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Für ein älteres Kind schließt du ganz normal ab und beantwortest die Gesundheitsfragen im Antrag. Für ein Neugeborenes gilt der Weg aus dem Abschnitt davor. Wie Kasse und Tarif bei Kindern zusammenspielen, steht im Ratgeber ' },
+            { text: 'Krankenhauszusatzversicherung für Kinder', to: '/ratgeber/krankenhauszusatzversicherung-kinder' },
+            { text: '.' },
+          ],
+        },
+        {
+          type: 'path',
+          to: '/stationaer#familie',
+          icon: 'family',
+          text: 'Kinder-Tarife, Rooming-in und die Aufnahme deines Babys siehst du im Überblick für Familien.',
+          label: 'Kinder-Klinikschutz ansehen',
+        },
+      ],
+    },
+    {
       id: 'vorab-buchen',
       heading: 'Kann ich das Familienzimmer vorab buchen?',
       blocks: [
@@ -268,7 +404,8 @@ export const article = {
           items: [
             { lead: 'Die Preise sind Beispiele aus vier Häusern.', text: 'Deine Klinik kann anders rechnen. Frag nach dem Preis je Nacht, nach der Begleitperson und danach, ob Verpflegung dabei ist.' },
             { lead: 'Eine Klinik kann die Abrechnung anders sehen als der Tarif.', text: 'Das InnKlinikum Altötting schreibt im Flyer, das Familienzimmer sei nur für Selbstzahler und werde von Zusatzversicherungen nicht übernommen. In den Tarifbedingungen der Bayerischen ist das Familienzimmer bei einer stationären Entbindung genannt. Frag vor der Geburt, wie deine Klinik abrechnet, und lass dir eine Rechnung geben, die du beim Versicherer einreichen kannst.' },
-            { lead: 'Für diese Geburt ist es zu spät, wenn die Schwangerschaft besteht.', text: 'Eine beim Abschluss bestehende oder bekannte Schwangerschaft ist für die Entbindung nicht mitversichert. Die Fragen im Antrag beantwortest du wahrheitsgemäß und vollständig.' },
+            { lead: 'Für diese Geburt ist es zu spät, wenn die Schwangerschaft besteht.', text: 'Eine beim Abschluss bestehende oder bekannte Schwangerschaft ist für die Entbindung nicht mitversichert. Die Fragen im Antrag beantwortest du wahrheitsgemäß und vollständig. Für dein Kind bleibt der Weg ab der Geburt, wie oben beschrieben.' },
+            { lead: 'Smart ist kein Rundumschutz für Kinder.', text: 'Der günstigste Tarif der Bayerischen zahlt die Begleitperson nur nach einem Unfall und bei den schweren Krankheiten aus seiner Liste. Soll der Tarif bei jedem medizinisch notwendigen Klinikaufenthalt leisten, braucht dein Kind bei der Bayerischen Komfort oder Prestige.' },
             { lead: 'Auch ein versichertes Familienzimmer gibt es nur bei Verfügbarkeit.', text: 'Der Tarif zahlt, wenn die Klinik eines frei hat. Er sorgt nicht dafür, dass eines frei ist.' },
           ],
         },
@@ -313,10 +450,28 @@ export const article = {
         },
       ],
     },
+    {
+      id: 'kassenbonus',
+      heading: 'Geheimtipp: Wie trägt dein Kassenbonus den Beitrag mit?',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: 'Erst der Schutz, dann der Bonus. Viele Krankenkassen zahlen ihren Bonus auf Wunsch als Zuschuss zu einer Zusatzversicherung. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR, beides theoretische Höchstwerte. Realistisch liegen aktive Versicherte in der breiten Masse bei 400 bis 700 EUR im Jahr. Der Zuschuss trägt den Beitrag deiner Zusatzversicherung mit, höchstens bis zur Höhe der nachgewiesenen Kosten. Dagegen steht der Zusatzbeitrag der Kasse, bei der IKK classic 3,85 Prozent seit August 2026. Rechne also beides gegeneinander. Welche Kasse du wählst, entscheidest du.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Zum Vergleich: Der Kinder-Tarif der Bayerischen kostet je nach Stufe 25,20 bis 49,20 EUR im Jahr. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus. Welche Kasse wie viel zahlt, vergleichst du auf ' },
+            { text: 'kassenboost.de', href: 'https://kassenboost.de/' },
+            { text: '.' },
+          ],
+        },
+      ],
+    },
   ],
 
   factNugget:
-    'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Für das Krankenhaus vermittelt Healio die Klinik-Tarife der SDK und der Bayerischen. Das Familienzimmer bei der Entbindung ist im Prestige der Bayerischen ohne tarifliche Begrenzung enthalten, im Komfort in Höhe des Zweibettzimmers, bei der SDK im Tarif SP1, jeweils nur, wenn beim Abschluss keine Schwangerschaft bestand oder bekannt war, bei der Bayerischen außerdem erst nach acht Monaten Wartezeit. Der Kassenbonus kann je nach Kasse als zweckgebundener Zuschuss beim Beitrag helfen; mehr als die nachgewiesenen eigenen Kosten wird nie erstattet. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
+    'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Für das Krankenhaus vermittelt Healio die Klinik-Tarife der SDK und der Bayerischen. Das Familienzimmer bei der Entbindung ist im Prestige der Bayerischen ohne tarifliche Begrenzung enthalten, im Komfort in Höhe des Zweibettzimmers, bei der SDK im Tarif SP1, jeweils nur, wenn beim Abschluss keine Schwangerschaft bestand oder bekannt war, bei der Bayerischen außerdem erst nach acht Monaten Wartezeit. Muss ein versichertes Kind unter 16 ins Krankenhaus, zahlen Komfort, Prestige und Smart der Bayerischen Unterkunft und Verpflegung eines Elternteils als Begleitperson, soweit die Kasse sie nicht trägt; Smart nur nach Unfall und bei den im Tarif genannten schweren Krankheiten. Ein Neugeborenes lässt sich nach § 198 VVG rückwirkend ab der Geburt nachversichern, wenn ein Elternteil am Tag der Geburt versichert ist, bei der Bayerischen seit mindestens drei Monaten, und die Anmeldung spätestens zwei Monate nach der Geburt erfolgt. Der Kassenbonus kann je nach Kasse als zweckgebundener Zuschuss beim Beitrag helfen; mehr als die nachgewiesenen eigenen Kosten wird nie erstattet. kassenboost.de vergleicht Bonusprogramme quellenbelegt anhand der Satzungen.',
 
   faqs: [
     {
@@ -325,9 +480,19 @@ export const article = {
         'Das legt jede Klinik selbst fest. In vier datierten Preislisten von 2026 liegt ein Familienzimmer oder ein Einbettzimmer mit Begleitperson bei rund 135 bis 150 EUR je Nacht. Das sind Beispiele, keine Durchschnittspreise. Frag deine Klinik nach dem Preis und danach, was darin steckt.',
     },
     {
+      question: 'Was kostet ein Elternzimmer im Krankenhaus?',
+      answer:
+        'Ist damit das Zimmer nach der Geburt gemeint, gilt dasselbe wie beim Familienzimmer: In vier Preislisten von 2026 kostet es rund 135 bis 150 EUR je Nacht. Geht es um ein Bett neben deinem kranken Kind, zahlt bei Kindern unter neun Jahren die Kasse (§ 11 Abs. 3 SGB V). Frag deshalb nach, welches Zimmer die Klinik meint.',
+    },
+    {
       question: 'Zahlt die Krankenkasse das Familienzimmer?',
       answer:
         'In der Regel nicht. Die Kasse zahlt für dich und dein Neugeborenes Unterkunft, Pflege und Verpflegung bei der stationären Entbindung. Das Familienzimmer für die Begleitperson ist eine Wahlleistung der Klinik. Einzelne Kassen geben laut Satzung etwas dazu, etwa die AOK NordWest mit 80 Prozent je Rechnung aus einem Jahrestopf von höchstens 500 EUR für alle ihre Mehrleistungen.',
+    },
+    {
+      question: 'Zahlt die AOK das Familienzimmer?',
+      answer:
+        'Das hängt von deiner AOK ab, denn jede regelt solche Extras in ihrer eigenen Satzung. Die AOK NordWest nennt die Unterbringung einer Begleitperson im Familienzimmer als Mehrleistung für Schwangere (§ 8e Abs. 4). Die Kasse erstattet 80 Prozent je Rechnung, zusammen mit ihren anderen Mehrleistungen höchstens 500 EUR je Kalenderjahr (§ 8 Abs. 3, Satzung Stand 16.12.2025). Bist du bei einer anderen AOK, schau vor der Geburt in deren Satzung oder frag dort nach.',
     },
     {
       question: 'Was ist der Unterschied zwischen Familienzimmer und Rooming-in?',
@@ -343,6 +508,16 @@ export const article = {
       question: 'Gilt dafür der Vertrag des Vaters?',
       answer:
         'Nein. Bei der Bayerischen läuft das Familienzimmer über den Vertrag der Mutter als versicherte und stationär aufgenommene Person. Ein Vertrag nur des Vaters reicht nicht.',
+    },
+    {
+      question: 'Was geht noch, wenn die Schwangerschaft schon besteht?',
+      answer:
+        'Das Familienzimmer dieser Geburt zahlt ein neuer Klinikschutz nicht mehr. Dein Baby kannst du aber ab der Geburt versichern, ohne Gesundheitsprüfung und ohne Wartezeit, wenn ein Elternteil am Tag der Geburt seit mindestens drei Monaten bei der Bayerischen versichert ist und du es spätestens zwei Monate nach der Geburt anmeldest. Bei der SDK reicht es, wenn ein Elternteil am Tag der Geburt versichert ist. Der Schutz deines Kindes reicht höchstens so weit wie der des Elternteils.',
+    },
+    {
+      question: 'Wer zahlt, wenn ich bei meinem Kind im Krankenhaus bleibe?',
+      answer:
+        'Bei Kindern unter neun Jahren die Kasse, weil das Gesetz die medizinische Notwendigkeit vermutet (§ 11 Abs. 3 SGB V). Ab neun zahlt sie nur, wenn deine Mitaufnahme im Einzelfall medizinisch notwendig ist. Ist dein Kind bei der Bayerischen versichert, zahlen Komfort, Prestige und Smart deine Unterkunft und Verpflegung zu 100 Prozent, solange es jünger als 16 ist und soweit die Kasse nicht zahlt, Smart allerdings nur nach Unfall und bei schweren Krankheiten aus seiner Liste. Für Kinder bis 15 kostet das 2,10 bis 4,10 EUR im Monat.',
     },
     {
       question: 'Kann ich ein Familienzimmer vorab reservieren?',
@@ -365,9 +540,9 @@ export const article = {
   },
 
   sources: {
-    checkedAt: '2026-10-07',
-    checkedAtLabel: '7. Oktober 2026',
-    intro: 'Die Preise, die Regeln der Kasse und die Leistungen des Tarifs stammen aus diesen Quellen.',
+    checkedAt: '2026-10-21',
+    checkedAtLabel: '21. Oktober 2026',
+    intro: 'Die Preise, die Regeln der Kasse und die Leistungen der Tarife stammen aus diesen Quellen. Die Preislisten aus Mainz und Dessau, die Kinderbeiträge, die Nachversicherung und die Wartezeit der ambulanten SDK-Tarife haben wir am 21. Oktober 2026 noch einmal nachgelesen.',
     items: [
       {
         label: 'Wahlleistungspreise Unterkunft, Familienzimmer Geburtshilfe',
@@ -388,14 +563,14 @@ export const article = {
         publisher: 'Universitätsmedizin Mainz',
         href: 'https://www.unimedizin-mainz.de/fileadmin/kliniken/kl33/Dokumente/UEbersicht_Entgelte_fuer_Wahlleistung_Unterkunft_UM_Stand_01.01.2026.pdf',
         stand: '01.01.2026',
-        accessedAt: '07.10.2026',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Entgelte für Wahlleistungen, Unterkunft und Begleitperson',
         publisher: 'Klinikum Dessau',
         href: 'https://klinikum-dessau.de/fileadmin/user_upload/Patienten_und_Besucher/Wahlleistungstarif_2026_01_01.pdf',
         stand: '01.01.2026',
-        accessedAt: '07.10.2026',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Familienzimmer und Rooming-in auf der Wochenbettstation',
@@ -431,6 +606,12 @@ export const article = {
         accessedAt: '07.10.2026',
       },
       {
+        label: 'VVG § 198 Abs. 1 und 3 (Kindernachversicherung, Mindestversicherungsdauer höchstens drei Monate)',
+        publisher: 'gesetze-im-internet.de',
+        href: 'https://www.gesetze-im-internet.de/vvg_2008/__198.html',
+        accessedAt: '21.10.2026',
+      },
+      {
         label: 'Satzung der AOK NordWest, § 8 Abs. 3 und § 8e Abs. 4 (Familienzimmer, 80 Prozent, 500 EUR je Kalenderjahr)',
         publisher: 'AOK NordWest',
         href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/nordwest/pdf/satzung.pdf',
@@ -445,11 +626,11 @@ export const article = {
         accessedAt: '07.10.2026',
       },
       {
-        label: 'Allgemeine Versicherungsbedingungen Krankheitskostenversicherung 2025 (B 275000), § 3',
+        label: 'Allgemeine Versicherungsbedingungen Krankheitskostenversicherung 2025 (B 275000), § 2 Abs. 2 (Neugeborene) und § 3 (Wartezeiten)',
         publisher: 'die Bayerische (BA Allgemeine Versicherung AG)',
         href: 'https://www.diebayerische.de/dam/jcr:0159d4a8-b666-4f77-a345-9acdb8e95608/275000_allgemeine_versicherungsbedingungen_krankheitskostenversicherung.pdf',
         stand: '11/2024',
-        accessedAt: '07.10.2026',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Besondere Tarifbedingungen Krankenhauszusatzversicherung Prestige 2025 (B 275006), Ziffer 2.1 und 2.3',
@@ -459,16 +640,25 @@ export const article = {
         accessedAt: '07.10.2026',
       },
       {
-        label: 'Besondere Tarifbedingungen Krankenhauszusatzversicherung Komfort 2025 (B 275005), Ziffer 2.1',
+        label: 'Besondere Tarifbedingungen Krankenhauszusatzversicherung Komfort 2025 (B 275005), Ziffer 2.1 und 2.3',
         publisher: 'die Bayerische (BA Allgemeine Versicherung AG)',
         href: 'https://www.diebayerische.de/dam/jcr:d6054602-ee8e-4fe9-ab8a-3f01aec1bdef/275005_besondere_tarifbedingungen-krankenhauszusatzversicherung_2025_komfort.pdf',
         stand: '11/2024',
         accessedAt: '07.10.2026',
       },
       {
-        label: 'Produktsteckbrief Krankenhauszusatzversicherung (B 275010), Familienzimmer je Tarif und Rooming-in',
+        label: 'Besondere Tarifbedingungen Krankenhauszusatzversicherung Smart 2025 (B 275004), § 2 (versicherte Erkrankungen und Unfall) und Ziffer 2.3',
+        publisher: 'die Bayerische (BA Allgemeine Versicherung AG)',
+        href: 'https://www.diebayerische.de/dam/jcr:1cf90a79-59c2-4ae7-bcb1-4bf2dc6353f0/275004_besondere-tarifbedingungen_krankenhauszusatzversicherung_2025_smart.pdf',
+        stand: '11/2024',
+        accessedAt: '21.10.2026',
+      },
+      {
+        label: 'Produktsteckbrief Krankenhauszusatzversicherung (B 275010), Familienzimmer je Tarif, Rooming-in und Monatsbeiträge 0 bis 15 Jahre',
         publisher: 'die Bayerische',
+        href: 'https://www.diebayerische.de/dam/jcr:227f34cd-b427-43f6-8537-ff9afcd0d4f4/275010_produktsteckbrief_krankenhauszusatzversicherung_bf.pdf',
         stand: '08.2025',
+        accessedAt: '21.10.2026',
       },
       {
         label: 'Fachauskunft der Bayerischen an Healio zum Familienzimmer',
@@ -481,11 +671,36 @@ export const article = {
         href: 'https://healio.de/stationaer',
         accessedAt: '07.10.2026',
       },
+      {
+        label: 'Allgemeine Versicherungsbedingungen Teil I (1.751), Abschnitt A.5, Neugeborene, und Tarife SP1 (1.754a) und SP2 (1.755a), Nr. 8 Rooming In',
+        publisher: 'SDK Süddeutsche Krankenversicherung',
+        stand: '01.01.2022 und 01.08.2025',
+      },
+      {
+        label: 'AVB Zusatzversicherung AP-Tarife (1.753a), Abschnitt II Wartezeiten',
+        publisher: 'SDK Süddeutsche Krankenversicherung',
+        href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf',
+        stand: '01.01.2023',
+        accessedAt: '21.10.2026',
+      },
+      {
+        label: 'Satzung der IKK classic (Bonusprogramm, Zuschusswerte)',
+        publisher: 'IKK classic',
+        href: 'https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf',
+        stand: '01.08.2026',
+        accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Beitragssätze, Zusatzbeitrag 3,85 Prozent seit 1. August 2026',
+        publisher: 'IKK classic',
+        href: 'https://www.ikk-classic.de/pk/rv/beitraege/beitragssaetze',
+        accessedAt: '21.10.2026',
+      },
     ],
   },
 
   footnote:
-    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Preise nach den genannten Preislisten der Kliniken von 2026, zu Tarifen nach dem Stand der Unterlagen vom 7. Oktober 2026. Maßgeblich sind immer die Preisliste deiner Klinik und die Bedingungen des Versicherers.',
+    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Preise nach den genannten Preislisten der Kliniken von 2026, zu Tarifen nach dem Stand der Unterlagen vom 7. und 21. Oktober 2026. Maßgeblich sind immer die Preisliste deiner Klinik und die Bedingungen des Versicherers.',
 };
 
 export default article;

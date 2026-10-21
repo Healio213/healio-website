@@ -1473,10 +1473,11 @@ export const RATGEBER_ENTRIES = [
     "group": "familie",
     "listTitle": "Familienzimmer im Krankenhaus: Kosten und wer zahlt",
     "listTeaser": "Was ein Familienzimmer nach der Geburt kostet, was die Kasse dazu zahlt und wie der Klinikschutz es trägt, mit Preislisten aus 2026.",
-    "readingTimeMinutes": 10,
-    "metaTitle": "Familienzimmer Krankenhaus: Kosten und wer zahlt | Healio",
-    "metaDescription": "Was ein Familienzimmer nach der Geburt kostet, mit vier Preislisten von 2026, was die Krankenkasse zahlt und wann ein Klinikschutz es trägt.",
-    "publishedAt": "2026-10-07"
+    "readingTimeMinutes": 17,
+    "metaTitle": "Familienzimmer Krankenhaus Kosten 2026: 135 bis 150 EUR | Healio",
+    "metaDescription": "Familienzimmer: rund 135 bis 150 EUR je Nacht. Die Kasse zahlt meist nicht, Klinikschutz nur vor der Schwangerschaft. Plus der Weg für dein Kind.",
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "babybonus-krankenkasse",
