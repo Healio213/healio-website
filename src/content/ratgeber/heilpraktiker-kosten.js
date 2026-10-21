@@ -192,7 +192,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Was Satzung und Bonus offenlassen, zahlst du selbst. Diesen Rest trägt ein ambulanter Tarif: Er erstattet Heilpraktikerrechnungen aus seinem Topf für Naturheilverfahren, je nach Stufe 50 bis 100 Prozent bis zum Höchstbetrag, für Behandlungsfälle nach Versicherungsbeginn. Der Bonus kann dabei mithelfen: DAK und Barmer nennen in ihren Zuschusskatalogen auch die private Krankenzusatzversicherung. Wie das geht, steht im letzten Abschnitt.',
+          text: 'Was Satzung und Bonus offenlassen, zahlst du selbst. Diesen Rest trägt ein ambulanter Tarif: Er erstattet Heilpraktikerrechnungen aus seinem Topf für Naturheilverfahren, je nach Stufe 50 bis 100 Prozent bis zum Höchstbetrag, für Behandlungsfälle nach Versicherungsbeginn. Der Bonus kann dabei mithelfen: DAK und Barmer nennen in ihren Zuschusskatalogen auch die private Krankenzusatzversicherung, jeweils mit Verweis auf § 194 Abs. 1a SGB V. Ob deine Kasse deinen Tarif anerkennt, entscheidet sie bei der Erstattung. Wie das geht, steht im letzten Abschnitt.',
         },
         {
           type: 'paragraph',
@@ -321,7 +321,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Das ist der Geheimtipp dieser Seite. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR; das sind theoretische Höchstwerte. In der breiten Masse kommen nach unserer Einschätzung aus der Beratung 400 bis 700 EUR zusammen. Ausgezahlt wird höchstens, was du tatsächlich an Beitrag gezahlt hast, und gegenzurechnen ist der Zusatzbeitrag der Kasse. Wie viel es bei dir ist, hängt von deiner Kasse und deinen Aktivitäten ab.',
+          text: 'Das ist der Geheimtipp dieser Seite. Bei der IKK classic sind laut Satzung bis zu 810 EUR Zuschusswert im Jahr möglich, in der Schwangerschaft bis zu 1.155 EUR; das sind theoretische Höchstwerte. In der breiten Masse kommen nach unserer Einschätzung aus der Beratung 400 bis 700 EUR zusammen. Erstattet wird höchstens der Beitrag, den du tatsächlich gezahlt hast, und gegenzurechnen ist der Zusatzbeitrag der Kasse. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
         },
         {
           type: 'table',
@@ -342,7 +342,7 @@ export const article = {
           segments: [
             { text: 'Zwei Dinge gehören ehrlich dazu. Der Zuschuss kommt erst nach dem Antrag im Folgejahr, den Beitrag zahlst du bis dahin selbst. Und bei der IKK classic ist der Zusatzbeitrag von 3,85 Prozent gegenzurechnen. Wie das Bonusprogramm im Detail funktioniert, steht im Ratgeber ' },
             { text: 'IKK classic Bonusprogramm 2026', to: '/ratgeber/ikk-classic-bonusprogramm-2026' },
-            { text: '. Für die Zusatzversicherung musst du die Kasse übrigens nicht wechseln: Der Tarif ist ein eigener Vertrag und läuft neben jeder gesetzlichen Kasse. Auch DAK und Barmer nennen die private Krankenzusatzversicherung in ihren Zuschusskatalogen (DAK Anlage zu § 25, Barmer Anlage zu § 37 Teil 4).' },
+            { text: '. Für die Zusatzversicherung musst du die Kasse übrigens nicht wechseln: Der Tarif ist ein eigener Vertrag und läuft neben jeder gesetzlichen Kasse. Auch DAK und Barmer nennen die private Krankenzusatzversicherung in ihren Zuschusskatalogen (DAK Anlage zu § 25, Barmer Anlage zu § 37 Teil 4). Ob sie deinen Tarif anerkennen, entscheiden sie bei der Erstattung.' },
           ],
         },
       ],
