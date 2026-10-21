@@ -1,16 +1,22 @@
 /**
  * Welle B, Feld zahn. Recherche: 7. Oktober 2026.
  * Einzelbelege: aok-zahnreinigung.belege.md.
+ * 21.10.2026 (Auftrag Ratgeber-Zusatzversicherung stärken, 857 Impressionen, Ø Position 8,9,
+ * 0 Klicks): Titel und Beschreibung mit konkreten Satzungswerten aus der Tabelle geschärft
+ * (H1 unverändert), Brücken-Absatz "Befund bei der Kontrolle oder Reinigung?" im Abschnitt zusatz
+ * mit Link auf zahnzusatzversicherung-laufende-behandlung. Werte zu ZAHN Sofort aus dieser Seite:
+ * Besondere Bedingungen B 261005 (Ziffer 3.1: 1.500 EUR, höchstens 750 EUR je Kalenderjahr;
+ * abgeschlossen ist eine Behandlung, die in Rechnung gestellt wurde), Annahmerichtlinien B 333546.
  * Grenzen: Alle elf regionalen AOKs aufgenommen. Für BW keine Ablehnung aus einem fehlenden Satzungstreffer abgeleitet; Bonus und besondere Versorgungsverträge gesondert prüfen. Für Sachsen-Anhalt ist die aktuelle HTML-Fassung mit 52. Änderung maßgeblich; alte PDF mit 50. Änderung nicht als Quelle übernommen. Relevante PDF-Abschnitte aktuell gelesen, geteilte Töpfe berücksichtigt. Keine Behandlungsempfehlung und keine unbestätigten privaten PZR-Tarifwerte.
  */
 export const article = {
-  updatedAtLabel: "8. Oktober 2026",
-  updatedAt: "2026-10-08",
+  updatedAtLabel: "21. Oktober 2026",
+  updatedAt: "2026-10-21",
   "slug": "aok-zahnreinigung",
   "kind": "ratgeber",
   "group": "zaehne",
-  "metaTitle": "AOK Zahnreinigung: Zuschüsse aller elf AOKs | Healio",
-  "metaDescription": "AOK Zahnreinigung: Zuschüsse, Altersgrenzen und geteilte Budgets aller elf AOKs. Mit Satzungsfundstellen und Hinweisen zur Erstattung.",
+  "metaTitle": "AOK Zahnreinigung 2026: So viel zahlt deine AOK | Healio",
+  "metaDescription": "AOK Zahnreinigung: Bayern zahlt bis zweimal 50 EUR im Jahr, Bremen und Hessen bis zweimal 60 EUR, Niedersachsen 80 Prozent. Alle elf AOKs im Überblick.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
   "readingTimeMinutes": 7,
@@ -248,6 +254,21 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Healio zeigt auf der Zahnseite unterschiedliche Prüfwege und UKV ZahnPRIVAT mit drei Leistungsstufen. Der Zahn-Check dient der ersten Einordnung. Er ersetzt keine Prüfung des Antrags und der vollständigen Vertragsbedingungen. Deine AOK-Mitgliedschaft, ihr Satzungszuschuss und der private Vertrag bleiben getrennte Grundlagen für die Rechnung."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Befund bei der Kontrolle oder Reinigung? Sobald dein Zahnarzt eine Krone, ein Inlay oder eine andere Behandlung anrät, zahlt ein Zahntarif, den du erst danach abschließt, genau dafür nicht mehr. Dann bleibt der Baustein ZAHN Sofort der Bayerischen, den es nur zusammen mit einem ihrer Zahntarife gibt. Er zahlt auch für angeratene oder schon begonnene Behandlungen, höchstens 750 EUR je Kalenderjahr und insgesamt 1.500 EUR. Die Grenze ist die Rechnung: Dein Vertrag muss beginnen, bevor die Praxis sie stellt, und die Annahme muss passen. Wie das abläuft, erklärt der Ratgeber "
+            },
+            {
+              "text": "Zahnzusatzversicherung bei laufender Behandlung",
+              "to": "/ratgeber/zahnzusatzversicherung-laufende-behandlung"
+            },
+            {
+              "text": "."
+            }
+          ]
         },
         {
           "type": "path",

@@ -94,7 +94,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "BARMER Bonusprogramm 2026: Punkte, Maßnahmen, Frist | Healio",
     "metaDescription": "BARMER Bonus 2026 laut Satzung: Punkte je Maßnahme, je nach Aktivität bis zu 100 EUR Geld oder 200 EUR Zuschuss, auch für die Zusatzversicherung, Fristen.",
     "publishedAt": "2026-10-05",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "krankenkassen-bonus-zusatzversicherung",
@@ -218,7 +218,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 7,
     "metaTitle": "DAK Bonusprogramm 2026: Punkte und Zuschüsse | Healio",
     "metaDescription": "DAK Bonusprogramm 2026 erklärt: Punkte sammeln, Zuschüsse zu Gesundheitsleistungen nutzen, Nachweise beachten und die jährliche Grenze verstehen.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "krankenkasse-zuschuss-fitnessstudio",
@@ -421,7 +422,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "BKK firmus Bonusprogramm 2026: Beträge, Bonusheft, Frist | Healio",
     "metaDescription": "BKK firmus Bonusprogramm 2026: 30 EUR für Verhalten, 5 EUR je Vorsorge, Familienbonus und Fristen. Mit Nachweisen und einer ehrlichen Gegenrechnung.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "krankenkasse-wechseln-rentner",
@@ -676,10 +677,10 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "AOK Zahnreinigung: Welche regionale AOK zahlt wie viel?",
     "listTeaser": "Der Zuschuss zur AOK-Zahnreinigung hängt von deiner regionalen AOK und ihrer Satzung ab. Es gibt keine einheitliche Leistung für alle AOK-Versicherten; die Tabelle zeigt Beträge, Altersgrenzen und gemeinsame Budgets mit Stand 7. Oktober 2026.",
     "readingTimeMinutes": 7,
-    "metaTitle": "AOK Zahnreinigung: Zuschüsse aller elf AOKs | Healio",
-    "metaDescription": "AOK Zahnreinigung: Zuschüsse, Altersgrenzen und geteilte Budgets aller elf AOKs. Mit Satzungsfundstellen und Hinweisen zur Erstattung.",
+    "metaTitle": "AOK Zahnreinigung 2026: So viel zahlt deine AOK | Healio",
+    "metaDescription": "AOK Zahnreinigung: Bayern zahlt bis zweimal 50 EUR im Jahr, Bremen und Hessen bis zweimal 60 EUR, Niedersachsen 80 Prozent. Alle elf AOKs im Überblick.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-21"
   },
   {
     "slug": "tk-zahnreinigung",

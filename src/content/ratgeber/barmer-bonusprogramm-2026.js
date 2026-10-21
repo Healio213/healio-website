@@ -79,6 +79,27 @@
  * Zusatzbeitrags) vor den Fristen. Beleg: KassenBoost-Prüfung IKK classic gegen
  * den Markt, Zusatzbeiträge aus website/app/funds.ts, Stand 05.10.2026. Frank
  * 05.10.2026: kein Hinweis auf eine Zusammenarbeit mit der IKK classic.
+ *
+ * 21.10.2026 (Auftrag Ratgeber-Zusatzversicherung stärken): Brücken-Absatz
+ * "Was der BARMER-Zuschuss nicht abdeckt" nach der Katalog-Tabelle, Links auf
+ * heilpraktiker-zusatzversicherung und barmer-zahnzusatzversicherung. Werte
+ * aus den Zielseiten: SDK-Tarifbedingungen 1.753a Teil II I.5 (50/70/90/100 %,
+ * 500 bis 1.000 EUR je 2 Kalenderjahre, Stand 01.01.2023), Festzuschuss nach
+ * § 55 SGB V wie in barmer-zahnzusatzversicherung. Vorab geklärt, ob der
+ * Zuschuss nur für von der BARMER vermittelte Verträge gilt: In der Satzung
+ * Stand 15.10.2026 (39. und 40. Nachtrag, Wortlaut gleich wie 21.07.2026)
+ * steht in Anlage zu § 37 Teil 4 "private Krankenzusatzversicherung im Sinne
+ * des § 194 Absatz 1a SGB V". "Im Sinne des" verweist auf die Versicherungsart
+ * (Satz 2: alles, was den GKV-Schutz ergänzt), die Vermittlung regelt die
+ * Satzung getrennt in § 40. § 37 Abs. 3 verlangt als Nachweis nur Abschluss
+ * des Versicherungsvertrages oder bezahlte Beitragsrechnung, ein Partner oder
+ * Vermittlungsnachweis ist nicht vorgeschrieben; die Programmseite nennt
+ * "private Krankenzusatzversicherung" ohne Einschränkung. Eine schriftliche
+ * Bestätigung der BARMER fehlt (siehe Healio/Marktanalyse-2026-10/
+ * TK-GESUNDHEITSDIVIDENDE-KLAERUNG.md). Folge: "kann mitfinanzieren" bleibt,
+ * dazu derselbe Vorbehalt wie in barmer-zahnzusatzversicherung ("Ob die
+ * BARMER deinen Tarif anerkennt, entscheidet sie bei der Erstattung") im
+ * Abschnitt zusatzversicherung und in der FAQ.
  */
 
 export const article = {
@@ -91,8 +112,8 @@ export const article = {
 
   publishedAt: '2026-10-05',
   publishedAtLabel: '5. Oktober 2026',
-  updatedAt: "2026-10-08",
-  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-21",
+  updatedAtLabel: "21. Oktober 2026",
   readingTimeMinutes: 10,
 
   listTitle: 'BARMER Bonusprogramm 2026: Maßnahmen, Punkte, Nachweise und Fristen',
@@ -253,8 +274,18 @@ export const article = {
           ],
         },
         {
+          type: 'segments',
+          segments: [
+            { text: 'Was der BARMER-Zuschuss nicht abdeckt: Bei 200 EUR im Jahr ist Schluss, für alle Rechnungen aus dem Katalog zusammen. Osteopathie und Akupunktur stehen darin, Heilpraktikerbehandlungen allgemein nicht. Wer regelmäßig in Behandlung ist, zahlt den Rest selbst. Den übernehmen die ambulanten Tarife der SDK, je nach Stufe zu 50 bis 100 Prozent, in der höchsten Stufe bis 1.000 EUR in zwei Kalenderjahren, auch beim Heilpraktiker. Wie das funktioniert, steht im Ratgeber ' },
+            { text: 'Heilpraktiker-Zusatzversicherung', to: '/ratgeber/heilpraktiker-zusatzversicherung' },
+            { text: '. Bei den Zähnen ist es ähnlich. Die professionelle Zahnreinigung steht im Katalog, für Zahnersatz wie eine Krone zahlt die BARMER den gesetzlichen Festzuschuss. Den Eigenanteil darüber kann ein Zahntarif erstatten, mehr dazu im Ratgeber ' },
+            { text: 'BARMER Zahnzusatzversicherung', to: '/ratgeber/barmer-zahnzusatzversicherung' },
+            { text: '.' },
+          ],
+        },
+        {
           type: 'paragraph',
-          text: 'Für die Zusatzversicherung heißt das: Du wählst im Antrag den Zuschuss und reichst als Nachweis den Versicherungsvertrag oder die bezahlte Beitragsrechnung ein. Laut § 37 Abs. 4 darfst du Geld und Zuschuss im selben Jahr auch kombinieren, jeder Punkt wird dabei nur einmal eingelöst. Ein Beispiel: Mit 800 Punkten wären rechnerisch 160 EUR Zuschuss drin. Kostet dein Tarif 120 EUR im Jahr, bekommst du dafür 120 EUR, dafür reichen 600 Punkte. Die übrigen 200 Punkte bringen dir als Zuschuss zu weiteren Kosten aus dem Katalog bis zu 40 EUR oder als Geld 20 EUR.',
+          text: 'Für die Zusatzversicherung heißt das: Du wählst im Antrag den Zuschuss und reichst als Nachweis den Versicherungsvertrag oder die bezahlte Beitragsrechnung ein. Einen bestimmten Versicherer schreibt die Satzung nicht vor. Ob die BARMER deinen Tarif anerkennt, entscheidet sie bei der Erstattung. Laut § 37 Abs. 4 darfst du Geld und Zuschuss im selben Jahr auch kombinieren, jeder Punkt wird dabei nur einmal eingelöst. Ein Beispiel: Mit 800 Punkten wären rechnerisch 160 EUR Zuschuss drin. Kostet dein Tarif 120 EUR im Jahr, bekommst du dafür 120 EUR, dafür reichen 600 Punkte. Die übrigen 200 Punkte bringen dir als Zuschuss zu weiteren Kosten aus dem Katalog bis zu 40 EUR oder als Geld 20 EUR.',
         },
         {
           type: 'paragraph',
@@ -455,7 +486,7 @@ export const article = {
     {
       question: 'Zahlt die BARMER einen Zuschuss zur Zusatzversicherung?',
       answer:
-        'Ja. Private Kranken- und Pflegezusatzversicherungen stehen im Zuschusskatalog der Satzung. Der Zuschuss ist doppelt so hoch wie der Geldbonus, höchstens 200 EUR im Jahr, und nie höher als der Beitrag, den du mit Vertrag oder bezahlter Beitragsrechnung nachweist. Wie viel du bekommst, hängt von deinen Maßnahmen ab.',
+        'Ja. Private Kranken- und Pflegezusatzversicherungen stehen im Zuschusskatalog der Satzung, ohne dass sie einen bestimmten Versicherer nennt. Der Zuschuss ist doppelt so hoch wie der Geldbonus, höchstens 200 EUR im Jahr, und nie höher als der Beitrag, den du mit Vertrag oder bezahlter Beitragsrechnung nachweist. Ob die BARMER deinen Tarif anerkennt, entscheidet sie bei der Erstattung. Wie viel du bekommst, hängt von deinen Maßnahmen ab.',
     },
     {
       question: 'Zählt die professionelle Zahnreinigung beim BARMER Bonus?',

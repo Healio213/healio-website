@@ -2,8 +2,16 @@
  * Welle B, Feld Krankenkasse und Bonus.
  * Satzung aktuell in Fassung 67. Nachtrag vom 01.09.2026 gelesen, Anlage § 25 vom 25.07.2026. Erklärung ausschließlich des zweckgebundenen Zuschusswegs. Keine frei verwendbare Zahlung, keine Tarifleistungen einer Zusatzversicherung. 500 EUR sind Gesamtgrenze dieses Zuschusses, nicht lediglich Sportausrüstung.
  * Quellen und Belege: dak-bonusprogramm-2026.belege.md, Abruf 07.10.2026.
+ * 21.10.2026 (Auftrag Ratgeber-Zusatzversicherung stärken): Brücken-Absatz im Abschnitt
+ * leistungen nach der Kategorie-A-Liste und ein Satz in der FAQ zu Heilpraktiker und Osteopathie.
+ * Links auf heilpraktiker-kosten und heilpraktiker-zusatzversicherung. Tarifwerte aus den
+ * SDK-Tarifbedingungen 1.753a (Teil II I.5: 50/70/90/100 %, 500 bis 1.000 EUR je 2 Kalenderjahre;
+ * Abschnitt II: keine Wartezeiten), wie auf den beiden Zielseiten. 120 EUR für 100 Punkte aus der
+ * Tabelle oben (Faktor 1,2), 500 EUR Jahresgrenze aus der Anlage zu § 25.
  */
 export const article = {
+  updatedAtLabel: "21. Oktober 2026",
+  updatedAt: "2026-10-21",
   "slug": "dak-bonusprogramm-2026",
   "kind": "ratgeber",
   "group": "kasse-bonus",
@@ -139,6 +147,28 @@ export const article = {
           "text": "Die Satzungsanlage nennt für Kategorie A unter anderem Osteopathie, professionelle Zahnreinigung, Naturheilverfahren durch Ärzte oder Heilpraktiker, Brillengläser und Kontaktlinsen zur Verbesserung der Sehstärke sowie die Mitgliedschaft im Sportverein oder Fitnessstudio. Das sind mögliche Verwendungszwecke im Bonusprogramm. Daraus folgt keine pauschale Übernahme jeder Behandlung oder vollständigen Rechnung."
         },
         {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Die Punkte tragen also einen Teil einer Rechnung. 100 Punkte sind 120 EUR, und für alle Zwecke zusammen ist bei 500 EUR im Jahr Schluss. Gehst du regelmäßig zum Heilpraktiker oder zur Osteopathie, bleibt der Rest bei dir. Laufende Heilpraktikerkosten erstatten die ambulanten Tarife der SDK, je nach Stufe zu 50 bis 100 Prozent, in der höchsten Stufe bis 1.000 EUR in zwei Kalenderjahren und laut Bedingungen ohne Wartezeit. Was eine Sitzung kostet, zeigt der Ratgeber "
+            },
+            {
+              "text": "Heilpraktiker Kosten",
+              "to": "/ratgeber/heilpraktiker-kosten"
+            },
+            {
+              "text": ", wie der Tarif zahlt, der Ratgeber "
+            },
+            {
+              "text": "Heilpraktiker-Zusatzversicherung",
+              "to": "/ratgeber/heilpraktiker-zusatzversicherung"
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
           "type": "paragraph",
           "text": "Unterscheide beim selben Thema die reguläre Kassenleistung und die Verwendung von Bonuspunkten. Eine Bezeichnung wie Osteopathie kann in verschiedenen Leistungswegen vorkommen. Lass klären, welcher Rechnungsanteil im konkreten Bonusantrag berücksichtigt werden kann. Die Anlage erlaubt den Eintausch nur, soweit keine Leistungspflicht nach anderen Regelungen besteht."
         },
@@ -259,7 +289,7 @@ export const article = {
     },
     {
       "question": "Kann ich DAK-Bonuspunkte für Heilpraktiker oder Osteopathie nutzen?",
-      "answer": "Die Satzungsanlage nennt Naturheilverfahren durch Ärzte oder Heilpraktiker und Osteopathie als Verwendungszwecke der Kategorie A. Voraussetzung sind ein anerkannter Beleg und die Bonusbedingungen; vorhandene anderweitige Leistungspflichten sind zu berücksichtigen."
+      "answer": "Die Satzungsanlage nennt Naturheilverfahren durch Ärzte oder Heilpraktiker und Osteopathie als Verwendungszwecke der Kategorie A. Voraussetzung sind ein anerkannter Beleg und die Bonusbedingungen; vorhandene anderweitige Leistungspflichten sind zu berücksichtigen. Die Punkte tragen dabei nur einen Teil der Rechnung, für alle Zwecke zusammen höchstens 500 EUR im Jahr. Laufende Heilpraktikerkosten erstatten die ambulanten Tarife der SDK, je nach Stufe zu 50 bis 100 Prozent, bis 1.000 EUR in zwei Kalenderjahren."
     },
     {
       "question": "Sind 500 EUR jedes Jahr automatisch verfügbar?",

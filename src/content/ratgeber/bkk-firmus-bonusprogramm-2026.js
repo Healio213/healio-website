@@ -1,8 +1,13 @@
 // Faktenprüfung: 7. Oktober 2026. Originalquellen und Claimnachweise in der zugehörigen .belege.md.
 // Sperrlisten-Kandidat für Google Ads/Analytics: Schwangerschaft und Kindervorsorge im Familienbonus.
+// 21.10.2026 (Auftrag Ratgeber-Zusatzversicherung stärken): Brücken-Absatz für Familien im Abschnitt
+// zuschuss, Links auf familienzimmer-krankenhaus und heilpraktiker-zusatzversicherung. Werte wie auf
+// den Zielseiten: § 11 Abs. 3 SGB V (Begleitperson unter neun Jahren), Bayerische Tarifbedingungen
+// Ziffer 2.3 (Elternteil neben versichertem Kind unter 16, soweit die Kasse nicht zahlt), SDK 1.753a
+// III.1 Abs. 3 (familienversicherte Kinder versicherbar).
 export const article = {
-  updatedAtLabel: "8. Oktober 2026",
-  updatedAt: "2026-10-08",
+  updatedAtLabel: "21. Oktober 2026",
+  updatedAt: "2026-10-21",
   "slug": "bkk-firmus-bonusprogramm-2026",
   "kind": "ratgeber",
   "group": "kasse-bonus",
@@ -219,6 +224,28 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Diese neutrale Beschreibung betrifft die Bonusprogramme der BKK firmus. Im Healio-Konzept zählt ein von der jeweiligen Kasse vorgesehener zweckgebundener Beitragszuschuss. Der firmus-Versichertenbonus wird nicht zu einem solchen Zuschuss umgedeutet. Die Bereichsseite Krankenkasse und Bonus zeigt die unterschiedlichen Wege."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            {
+              "text": "Für Familien heißt das: Auch der Familienbonus nach § 14b ist kein Zuschuss zum Beitrag einer Zusatzversicherung. Teuer wird es an anderer Stelle. Das Familienzimmer nach der Geburt zahlst du in der Regel selbst. Und muss dein Kind ins Krankenhaus, zahlt die Kasse deine Übernachtung ab seinem neunten Geburtstag nur noch, wenn sie medizinisch notwendig ist. Ein Klinikschutz für dein Kind kann sie übernehmen, ein eigener Klinikschutz das Familienzimmer, wenn er schon vor der Schwangerschaft besteht. Wie das zusammenhängt, steht im Ratgeber "
+            },
+            {
+              "text": "Familienzimmer im Krankenhaus",
+              "to": "/ratgeber/familienzimmer-krankenhaus"
+            },
+            {
+              "text": ". Geht ihr zum Heilpraktiker, erstattet das ein ambulanter Tarif, auch für familienversicherte Kinder. Mehr dazu im Ratgeber "
+            },
+            {
+              "text": "Heilpraktiker-Zusatzversicherung",
+              "to": "/ratgeber/heilpraktiker-zusatzversicherung"
+            },
+            {
+              "text": "."
+            }
+          ]
         },
         {
           "type": "path",
