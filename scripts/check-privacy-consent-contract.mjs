@@ -208,6 +208,21 @@ expect(/isAmbulant\s*&&\s*showSolidHeader\s*&&\s*ambulantCtaReady/.test(header),
 expect(/ambulant-header-mobile/.test(header), 'Die Ambulant-Seite braucht mobil einen Tarif-CTA im Header.');
 expect(/fixed bottom-6 right-6[\s\S]*hidden[\s\S]*md:block/.test(stickyCalculator), 'Der schwebende Tarif-CTA darf mobil nicht mehr in der Daumenzone liegen.');
 expect(/showBanner && !settingsOpen && !isDentalCheckRoute/.test(consentManager), 'Das initiale Consent-Banner darf im Zahn-Check nicht erscheinen.');
+// Streckencheck 22.10.2026: Auf den Seiten mit der ersten Handlung im ersten
+// Bildschirm erscheint der Hinweis erst nach dem ersten Tipp, und solange er
+// offen ist, hält die Seite unten seine Höhe frei.
+expect(
+  ['/check/naturheilkunde', '/check/schwangerschaft', '/terminvereinbarung', '/en/appointment']
+    .every((route) => new RegExp(`FIRST_ACTION_PATHS = new Set\\(\\[[\\s\\S]*?'${route.replace(/\//g, '\\/')}'`).test(consentManager))
+    && /showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred/.test(consentManager)
+    && /addEventListener\('click', handleFirstAction, \{ capture: true, once: true \}\)/.test(consentManager),
+  'Auf Kurzchecks und Terminseite darf der Cookie-Hinweis die erste Handlung nicht verdecken.',
+);
+expect(
+  /html\.healio-consent-banner-open body \{\s*padding-bottom: calc\(var\(--healio-consent-space, 0px\) \+ 1\.5rem\);/.test(consentManager)
+    && /setProperty\('--healio-consent-space'/.test(consentManager),
+  'Solange der Cookie-Hinweis offen ist, muss die Seite unten seine Höhe freihalten.',
+);
 expect(
   /const privacyLinkTarget = isCampaignLandingRoute\(location\) \? \{ target: '_blank', rel: 'noopener' \} : \{\};/.test(consentManager)
     && /'\/datenschutz'\} \{\.\.\.privacyLinkTarget\}/.test(consentManager),

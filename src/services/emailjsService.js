@@ -4,6 +4,7 @@ import { EMAILJS_CONFIG } from '@/config/emailjs';
 import { trackEvent } from '@/lib/analytics';
 import { trackMetaLead } from '@/lib/meta-pixel';
 import { readGoogleClickId, trackGoogleAdsLead } from '@/lib/google-ads';
+import { describeCampaignSource, readCampaignUtm } from '@/lib/campaign-landing';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
@@ -31,10 +32,16 @@ export const emailjsService = {
   
   // track: false nur fuer die Meta-Zielseiten unter /check. Dort zaehlt die
   // Dankeseite den Lead, damit er nicht doppelt gemessen wird.
-  sendEmail: async (formData, pageSource, { track = true } = {}) => {
+  // campaign: false, wenn das Formular den Block „Kampagne“ schon selbst schreibt.
+  sendEmail: async (formData, pageSource, { track = true, campaign = true } = {}) => {
     let response;
     try {
       const normalizedParams = emailjsService.normalizeData(formData, pageSource);
+      // utm-Werte der Einstiegsseite, damit jede Anfrage ihre Herkunft
+      // mitbringt, auch wenn jemand vorher weitergeklickt hat.
+      if (campaign && readCampaignUtm(window.location.search)) {
+        normalizedParams.message = [normalizedParams.message, '', 'Kampagne:', describeCampaignSource(window.location.search)].join('\n');
+      }
       // Klick-Kennung der Google-Anzeige, damit Frank einen spaeteren
       // Abschluss der richtigen Kampagne zuordnen kann. Sie wird nur
       // mitgeschickt, wenn sie in der Adresszeile steht UND "marketing"

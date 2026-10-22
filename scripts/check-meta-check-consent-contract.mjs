@@ -71,6 +71,27 @@ check('Meta-Formular-Absatz nennt Meta, Rechtsgrundlage, Löschfrist und Datensc
   && /facebook\.com\/privacy\/policy/.test(legalDe.metaLeadFormsPlatform));
 check('Neue Absätze in Sie-Form', ![...kurzCheckKeys, ...metaLeadKeys, 'leitfadenText'].some((key) => /\b(du|dein|deine|dich|dir)\b/i.test(legalDe[key])));
 
+// Streckencheck 22.10.2026: utm der Einstiegsseite gehen in Check- und
+// Kontaktanfragen mit, auch nach dem Weiterklicken, ohne Browserspeicher.
+const campaignLanding = read('src/lib/campaign-landing.js');
+const emailjsService = read('src/services/emailjsService.js');
+globalThis.window = { location: { search: '?utm_source=instagram&utm_medium=social&utm_campaign=profil&fbclid=abc' } };
+const landing = await import(`../src/lib/campaign-landing.js?landing=${Date.now()}`);
+delete globalThis.window;
+const landingUtm = landing.readCampaignUtm('');
+check('Ohne utm in der Adresse gelten die utm der Einstiegsseite', landingUtm?.utm_source === 'instagram' && landingUtm?.utm_campaign === 'profil' && !('fbclid' in landingUtm));
+check('utm in der aktuellen Adresse haben Vorrang', landing.readCampaignUtm('?utm_source=meta&utm_content=direkt')?.utm_source === 'meta');
+check('Mailblock nennt die utm der Einstiegsseite', /utm_source: instagram\nutm_medium: social\nutm_campaign: profil/.test(landing.describeCampaignSource('')));
+check('Steuerzeichen in utm werden entschärft', !/\n/.test(landing.readCampaignUtm('?utm_source=a%0Ab').utm_source));
+check('Einstiegs-utm liegen nur im Arbeitsspeicher', /const landingUtm = typeof window !== 'undefined' \? readUtmFromSearch\(window\.location\.search\) : null;/.test(campaignLanding)
+  && !/localStorage/.test(campaignLanding));
+check('Kontaktanfragen hängen den Block „Kampagne“ an', /campaign = true/.test(emailjsService)
+  && /if \(campaign && readCampaignUtm\(window\.location\.search\)\)/.test(emailjsService)
+  && /'Kampagne:', describeCampaignSource\(window\.location\.search\)/.test(emailjsService));
+check('Kurzcheck schreibt den Block nur einmal', /\{ track: false, campaign: false \}/.test(kurzCheck));
+check('Datenschutz nennt utm in Formularanfragen', /Kampagnenmerkmale \(utm-Werte\) der Adresse, über die Sie auf unsere Website gekommen sind/.test(legalDe.emailJsText)
+  && /campaign parameters \(utm values\) of the URL through which you reached our website/.test(legalEn.emailJsText));
+
 const failed = checks.filter(([, passed]) => !passed);
 for (const [label, passed] of checks) {
   console.log(`${passed ? '✓' : '✗'} ${label}`);

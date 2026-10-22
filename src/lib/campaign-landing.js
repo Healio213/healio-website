@@ -39,30 +39,42 @@ export const readCampaignSearch = (search) => {
   const kept = new URLSearchParams();
   params.forEach((value, key) => {
     if (key === CAMPAIGN_PARAM && value === CAMPAIGN_META) kept.set(key, value);
-    else if (PASS_THROUGH_PARAM.test(key) && value) kept.set(key, value.slice(0, 200));
+    else if (PASS_THROUGH_PARAM.test(key) && value) kept.set(key, value.replace(/\p{Cc}+/gu, ' ').trim().slice(0, 200));
   });
   const query = kept.toString();
   return query ? `?${query}` : '';
 };
 
-/** Kampagnenmerkmale als Textzeilen fuer die Anfrage-Mail an Healio. */
-/** Nur die utm-Werte als Objekt, ohne Klick-Kennungen wie fbclid. */
-export const readCampaignUtm = (search) => {
+const readUtmFromSearch = (search) => {
   const params = new URLSearchParams(readCampaignSearch(search));
   const utm = {};
   params.forEach((value, key) => {
-    if (key.startsWith('utm_')) utm[key] = value;
+    if (key.startsWith('utm_') && value) utm[key] = value;
   });
   return Object.keys(utm).length > 0 ? utm : null;
 };
 
+// utm-Werte der Einstiegsseite, beim Laden der App festgehalten (wie die
+// GA4-Herkunft in analytics.js). Sie bleiben nur im Arbeitsspeicher dieses
+// Tabs, bis er geschlossen oder neu geladen wird, und landen ausschliesslich
+// in Anfragen, die jemand selbst abschickt. Kein Browserspeicher, kein Cookie.
+const landingUtm = typeof window !== 'undefined' ? readUtmFromSearch(window.location.search) : null;
+
+/**
+ * Nur die utm-Werte als Objekt, ohne Klick-Kennungen wie fbclid. Traegt die
+ * aktuelle Adresse keine utm, gelten die der Einstiegsseite.
+ */
+export const readCampaignUtm = (search) => {
+  const utm = readUtmFromSearch(search) || landingUtm;
+  return utm ? { ...utm } : null;
+};
+
+/** Kampagnenmerkmale als Textzeilen fuer die Anfrage-Mail an Healio. */
 export const describeCampaignSource = (search) => {
-  const params = new URLSearchParams(readCampaignSearch(search));
-  const lines = [];
-  params.forEach((value, key) => {
-    if (key.startsWith('utm_')) lines.push(`${key}: ${value}`);
-  });
-  return lines.length > 0 ? lines.join('\n') : 'keine Kampagnenmerkmale';
+  const utm = readCampaignUtm(search);
+  return utm
+    ? Object.entries(utm).map(([key, value]) => `${key}: ${value}`).join('\n')
+    : 'keine Kampagnenmerkmale';
 };
 
 export const markCheckLeadPending = (key) => {

@@ -160,7 +160,7 @@ const KurzCheck = ({ config }) => {
         'Kampagne:',
         describeCampaignSource(location.search),
       ].join('\n'),
-    }, config.pageSource, { track: false });
+    }, config.pageSource, { track: false, campaign: false });
   };
 
   const handleSubmit = async (event) => {

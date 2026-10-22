@@ -18,7 +18,8 @@ const COPY = {
   de: {
     bannerLabel: 'Datenschutzeinstellungen',
     bannerTitle: 'Du entscheidest, was geladen wird.',
-    bannerText: 'Analyse und externe Dienste starten erst nach deiner Zustimmung. Unsere Auswahlhilfen bleiben lokal und funktionieren ohne optionale Dienste.',
+    bannerText: 'Analyse und externe Dienste starten erst nach deiner Zustimmung.',
+    bannerTextMore: 'Unsere Auswahlhilfen bleiben lokal und funktionieren ohne optionale Dienste.',
     necessaryOnly: 'Nur notwendige',
     allowAll: 'Alle erlauben',
     settings: 'Einstellungen',
@@ -41,7 +42,8 @@ const COPY = {
   en: {
     bannerLabel: 'Privacy settings',
     bannerTitle: 'You decide what is loaded.',
-    bannerText: 'Analytics and external services start only after your consent. Our selection tools stay local and work without optional services.',
+    bannerText: 'Analytics and external services start only after your consent.',
+    bannerTextMore: 'Our selection tools stay local and work without optional services.',
     necessaryOnly: 'Necessary only',
     allowAll: 'Allow all',
     settings: 'Settings',
@@ -71,6 +73,19 @@ const getInitialState = () => {
   };
 };
 
+// Seiten, deren erste Handlung schon im ersten Bildschirm liegt (Antworten im
+// Kurzcheck, „Google Kalender laden“). Dort erscheint der Hinweis erst nach dem
+// ersten Tipp, damit er die Handlung nicht verdeckt. Geladen wird bis dahin
+// trotzdem nichts Optionales, die Voreinstellung bleibt „abgelehnt“.
+const FIRST_ACTION_PATHS = new Set([
+  '/check/naturheilkunde',
+  '/check/schwangerschaft',
+  '/terminvereinbarung',
+  '/en/appointment',
+]);
+
+const normalizePathname = (pathname) => (pathname || '/').replace(/\/+$/, '').toLowerCase() || '/';
+
 const focusableSelector = [
   'button:not([disabled])',
   'a[href]',
@@ -86,18 +101,49 @@ export const ConsentManager = () => {
   const [showBanner, setShowBanner] = useState(initialState.showBanner);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [draft, setDraft] = useState(initialState.consent.preferences);
+  const [firstActionSeen, setFirstActionSeen] = useState(false);
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const bannerRef = useRef(null);
   const titleId = useId();
   const descriptionId = useId();
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
   const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  const bannerDeferred = !firstActionSeen && FIRST_ACTION_PATHS.has(normalizePathname(pathname));
   // Ablenkungsfreie Meta-Zielseiten: Datenschutz öffnet im neuen Tab, damit niemand die Strecke verlässt.
   const privacyLinkTarget = isCampaignLandingRoute(location) ? { target: '_blank', rel: 'noopener' } : {};
-  const consentUiActive = (showBanner && !isDentalCheckRoute) || (settingsOpen && !isDentalCheckRoute);
+  const bannerVisible = showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred;
+  const consentUiActive = bannerVisible || (settingsOpen && !isDentalCheckRoute);
 
   useEffect(() => initializeAnalytics(), []);
+
+  useEffect(() => {
+    if (!showBanner || !bannerDeferred) return undefined;
+    // Ein Tipp (kein Wischen) auf der Seite gibt den Hinweis frei. Der Tipp selbst
+    // erreicht sein Ziel unverändert.
+    const handleFirstAction = () => setFirstActionSeen(true);
+    document.addEventListener('click', handleFirstAction, { capture: true, once: true });
+    return () => document.removeEventListener('click', handleFirstAction, { capture: true });
+  }, [showBanner, bannerDeferred]);
+
+  useEffect(() => {
+    // Solange der Hinweis offen ist, hält die Seite unten genau seine Höhe frei.
+    // So lässt sich jeder Inhalt und jeder Knopf über den Hinweis scrollen.
+    const root = document.documentElement;
+    const banner = bannerRef.current;
+    if (!bannerVisible || !banner) return undefined;
+    const update = () => root.style.setProperty('--healio-consent-space', `${Math.ceil(banner.getBoundingClientRect().height)}px`);
+    update();
+    root.classList.add('healio-consent-banner-open');
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(update) : null;
+    observer?.observe(banner);
+    return () => {
+      observer?.disconnect();
+      root.classList.remove('healio-consent-banner-open');
+      root.style.removeProperty('--healio-consent-space');
+    };
+  }, [bannerVisible]);
 
   useEffect(() => subscribeConsent((nextConsent) => {
     setConsent(nextConsent);
@@ -199,6 +245,14 @@ export const ConsentManager = () => {
           pointer-events: none;
           visibility: hidden;
         }
+        @media (max-width: 767px) {
+          html.healio-consent-banner-open {
+            scroll-padding-bottom: calc(var(--healio-consent-space, 0px) + 1.5rem);
+          }
+          html.healio-consent-banner-open body {
+            padding-bottom: calc(var(--healio-consent-space, 0px) + 1.5rem);
+          }
+        }
         @media print {
           .healio-consent-surface { display: none !important; }
         }
@@ -208,18 +262,22 @@ export const ConsentManager = () => {
           oben, damit er beim ersten Laden nicht die Hauptüberschrift verdeckt. Die
           Nita-Leiste und der WhatsApp-Knopf blenden sich aus, solange er offen ist
           (Klasse healio-consent-ui-active). Ab md steht er als schmale Karte rechts
-          unten, damit die primäre Hero-Aktion links beim ersten Besuch frei bleibt. */}
-      {showBanner && !settingsOpen && !isDentalCheckRoute && (
+          unten, damit die primäre Hero-Aktion links beim ersten Besuch frei bleibt.
+          Streckencheck 22.10.2026: Am Handy nur noch zwei Zeilen Text ohne sichtbare
+          Überschrift (rund 110 statt 166 px), die Seite hält unten seine Höhe frei. */}
+      {showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred && (
         <section
-          className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-3 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:left-auto md:right-3 md:top-auto md:mx-0 md:w-full md:max-w-md md:rounded-2xl md:p-5"
+          ref={bannerRef}
+          className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-2.5 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:left-auto md:right-3 md:top-auto md:mx-0 md:w-full md:max-w-md md:rounded-2xl md:p-5"
           role="region"
           aria-label={copy.bannerLabel}
         >
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 md:gap-3">
             <div className="max-w-2xl min-w-0">
-              <h2 className="text-sm font-extrabold text-slate-950 md:text-lg">{copy.bannerTitle}</h2>
-              <p className="mt-1 text-xs leading-5 text-slate-600 md:text-sm md:leading-6">
-                {copy.bannerText}{' '}
+              <h2 className="sr-only text-sm font-extrabold text-slate-950 md:not-sr-only md:text-lg">{copy.bannerTitle}</h2>
+              <p className="text-xs leading-[1.125rem] text-slate-600 md:mt-1 md:text-sm md:leading-6">
+                {copy.bannerText}
+                <span className="hidden md:inline"> {copy.bannerTextMore}</span>{' '}
                 <a href={language === 'en' ? '/en/privacy' : '/datenschutz'} {...privacyLinkTarget} className="font-semibold text-slate-800 underline underline-offset-2">
                   {copy.privacy}
                 </a>
