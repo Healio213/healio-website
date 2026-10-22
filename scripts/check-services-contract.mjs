@@ -57,6 +57,9 @@ assert.match(header, /isServices[\s\S]{0,100}nav\.schutzWaehlen/);
 assert.match(header, /getPath\('leistungen'\)\}#schutz-kompass/);
 assert.match(veterinaryLayout, /<Footer hideCta hideAppPromotion \/>/);
 assert.match(navigator, /getPath\(item\.routeKey\)/);
+// Streckencheck 22.10.2026: Am Handy führt eine Zeile unter „Wähle deinen Bereich.“ zur Schwangerschaft.
+assert.equal(de.mobile.pregnancyLink, 'Schwanger? Vorsorge-Extras ansehen');
+assert.match(navigator, /\{lang === 'de' && \([\s\S]{0,40}<Link[\s\S]{0,20}to="\/schwangerschaft"[\s\S]{0,200}md:hidden"[\s\S]{0,40}\{t\('mobile\.pregnancyLink'\)\}/);
 assert.match(budget, /\[hyphens:auto\]/);
 assert.doesNotMatch(finalCta, /getPath\('tierkrankenversicherung'\)/);
 assert.match(finalCta, /getPath\('terminvereinbarung'\)/);

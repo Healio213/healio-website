@@ -140,6 +140,7 @@
     "heroDescription": "Healio helps you find cover for treatment costs. Choose outpatient, dental, hospital or pet cover and compare benefits and premiums.",
     "trust": "Independent advice. Personal support.",
     "pathsTitle": "Choose your cover.",
+    "pregnancyLink": "Pregnant? See prenatal extras",
     "paths": {
       "ambulant": {
         "title": "Outpatient",

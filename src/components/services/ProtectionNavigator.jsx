@@ -85,7 +85,7 @@ const HighlightBox = ({ highlight, className = '' }) => (
 
 const ProtectionNavigator = () => {
   const { t } = useTranslation('leistungen');
-  const { getPath } = useLanguage();
+  const { getPath, lang } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
   const items = t('paths.items', { returnObjects: true });
@@ -151,6 +151,16 @@ const ProtectionNavigator = () => {
             <span className="md:hidden">{t('mobile.pathsTitle')}</span>
             <span className="hidden md:inline">{t('paths.title')}</span>
           </h2>
+          {/* Streckencheck 22.10.2026: Schwangerschaft hat keine eigene Karte. Am Handy
+              führt eine Zeile unter der Überschrift direkt hin (nur auf Deutsch, wie im Menü). */}
+          {lang === 'de' && (
+            <Link
+              to="/schwangerschaft"
+              className="home-focus mt-3 inline-block font-display text-base font-extrabold leading-6 text-emerald-700 underline underline-offset-4 hover:text-emerald-900 md:hidden"
+            >
+              {t('mobile.pregnancyLink')} <span aria-hidden="true">→</span>
+            </Link>
+          )}
         </div>
 
         {/* Mobil Wischreihe (vier Schutzwege), ab md die bisherigen Karten untereinander. */}
