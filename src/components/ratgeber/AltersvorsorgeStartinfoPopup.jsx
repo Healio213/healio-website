@@ -53,7 +53,7 @@ const AltersvorsorgeStartinfoPopup = () => {
       if (sessionValue() || Date.now() - started < 35000 || document.visibilityState !== 'visible') return;
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollable > 0 && window.scrollY / scrollable < 0.25) return;
-      if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog[open]')) return;
+      if (document.querySelector('[role="dialog"], [role="alertdialog"], dialog[open], [data-altersvorsorge-vormerkung]')) return;
       setOpen(true);
       remember();
     };

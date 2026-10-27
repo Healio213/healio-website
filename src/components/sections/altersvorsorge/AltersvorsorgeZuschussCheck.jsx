@@ -8,16 +8,14 @@ import { createAltersvorsorgeKontaktState } from '@/lib/altersvorsorgeArtikelChe
 import { buildInternalRatgeberUrl } from '@/lib/ratgeber-cta';
 
 /**
- * Abschnitt "Dein persönlicher Zuschuss-Check" (Anker #zuschuss-check), direkt
- * nach dem Rechner. Er ist das Ziel der Seite: Hauptknopf "Wunschtermin wählen"
- * öffnet die Terminplanung in einem neuen Tab und zählt den Klick wie die
- * übrigen Kalenderlinks der Website. "Lieber anrufen lassen" springt zum
- * Formular (onRueckruf), das dort den Rückruf vorbereitet.
+ * Drei Schritte von der gespeicherten Rechnung zum vorbereiteten Januarstart.
+ * Der Hauptknopf öffnet das Kurzformular beim Rechner (onVormerken).
+ * Der bestehende Kontaktweg bleibt für eine gesonderte Rückrufanfrage erhalten.
  *
  * Alle Texte stehen in der Content-Datei (zuschussCheck). `kapazitaetHinweis`
  * zeigt den Satz zur begrenzten Zahl an Checks nur, wenn er dort eingeschaltet ist.
  */
-const AltersvorsorgeZuschussCheck = ({ rechnerWert, id = 'zuschuss-check' }) => {
+const AltersvorsorgeZuschussCheck = ({ rechnerWert, onVormerken, id = 'zuschuss-check' }) => {
   const headingId = useId();
   const inhalt = zuschussCheck;
   const { search } = useLocation();
@@ -45,10 +43,13 @@ const AltersvorsorgeZuschussCheck = ({ rechnerWert, id = 'zuschuss-check' }) => 
           dotsTone="dark"
           bleed={false}
         >
-          {inhalt.karten.map((karte) => {
+          {inhalt.karten.map((karte, index) => {
             return (
               <div key={karte.titel} className="h-full w-full rounded-2xl border border-white/15 bg-white/10 p-5">
-                <AltersvorsorgeIllustration kind={karte.icon} className="h-20 w-20" />
+                <div className="flex items-start justify-between gap-3">
+                  <AltersvorsorgeIllustration kind={karte.icon} className="h-20 w-20" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#5ee0b1]/50 font-display text-base font-extrabold text-[#5ee0b1]" aria-label={`Schritt ${index + 1}`}>{index + 1}</span>
+                </div>
                 <h3 className="mt-4 font-display text-lg font-extrabold leading-snug text-white">{karte.titel}</h3>
                 <p className="mt-2 text-base leading-7 text-white/85">{karte.text}</p>
               </div>
@@ -67,14 +68,14 @@ const AltersvorsorgeZuschussCheck = ({ rechnerWert, id = 'zuschuss-check' }) => 
         </div>
 
         <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <Link
-            to={kontaktUrl}
-            state={createAltersvorsorgeKontaktState(rechnerWert, 'check')}
-            className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-[#25c990] px-7 py-4 font-display text-base font-extrabold text-[#07111f] shadow-lg shadow-[#25c990]/25 transition hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
+          <button
+            type="button"
+            onClick={onVormerken}
+            className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-[#25c990] px-7 py-4 text-center font-display text-base font-extrabold text-[#07111f] shadow-lg shadow-[#25c990]/25 transition hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ee0b1]"
           >
-            <CalendarCheck className="h-5 w-5" aria-hidden="true" />
+            <CalendarCheck className="h-5 w-5 shrink-0" aria-hidden="true" />
             {inhalt.knopfTermin}
-          </Link>
+          </button>
           <Link
             to={kontaktUrl}
             state={createAltersvorsorgeKontaktState(rechnerWert, 'rueckruf')}

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
@@ -10,6 +10,7 @@ import AltersvorsorgeWebinarForm from '@/components/sections/altersvorsorge/Alte
 import AltersvorsorgeHero from '@/components/sections/altersvorsorge/AltersvorsorgeHero';
 import AltersvorsorgeBegleitung from '@/components/sections/altersvorsorge/AltersvorsorgeBegleitung';
 import AltersvorsorgeZuschussCheck from '@/components/sections/altersvorsorge/AltersvorsorgeZuschussCheck';
+import AltersvorsorgeVormerkung from '@/components/sections/altersvorsorge/AltersvorsorgeVormerkung';
 import { readArtikelCheckState } from '@/lib/altersvorsorgeArtikelCheck';
 import { formatEuroDE } from '@/lib/altersvorsorgeZulagen';
 import {
@@ -28,7 +29,7 @@ import {
 const scrollToId = (id) => {
   if (typeof document === 'undefined') return;
   const element = document.getElementById(id);
-  if (element) element.scrollIntoView({ behavior: 'smooth' });
+  if (element) element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 };
 
 /**
@@ -63,6 +64,11 @@ const AltersvorsorgedepotPage = () => {
 
   const artikelCheck = useMemo(() => readArtikelCheckState(state), [state]);
   const [rechnerWert, setRechnerWert] = useState(() => ({ ...variante.voreinstellung, ...(artikelCheck?.value || {}) }));
+  const [vormerkungAnfrage, setVormerkungAnfrage] = useState(0);
+  const vormerken = () => setVormerkungAnfrage((number) => number + 1);
+  useEffect(() => {
+    if (vormerkungAnfrage > 0) scrollToId('altersvorsorge-vormerkung');
+  }, [vormerkungAnfrage]);
   // "Lieber anrufen lassen" im Zuschuss-Check bereitet den Rückruf im Formular vor.
   const formRef = useRef(null);
 
@@ -95,7 +101,7 @@ const AltersvorsorgedepotPage = () => {
         <AltersvorsorgeHero
           variante={variante}
           onRechner={() => scrollToId('rechner')}
-          onCheck={() => scrollToId('zuschuss-check')}
+          onCheck={vormerken}
         />
 
         {/* Abschnitt 2: Drei Beispielkarten */}
@@ -139,8 +145,9 @@ const AltersvorsorgedepotPage = () => {
           <ZulagenRechner
             value={rechnerWert}
             onChange={setRechnerWert}
-            onCheck={() => scrollToId('zuschuss-check')}
+            onCheck={vormerken}
             onWebinar={() => scrollToId('webinar')}
+            vormerkung={vormerkungAnfrage > 0 ? <AltersvorsorgeVormerkung value={rechnerWert} requestNumber={vormerkungAnfrage} /> : null}
           />
         </section>
 
@@ -152,7 +159,7 @@ const AltersvorsorgedepotPage = () => {
             </p>
           </div>
         )}
-        <AltersvorsorgeZuschussCheck rechnerWert={rechnerWert} />
+        <AltersvorsorgeZuschussCheck rechnerWert={rechnerWert} onVormerken={vormerken} />
 
         {/* Abschnitt 4: Problem, Verstärkung, Lösung */}
         <section className="healio-container px-4 py-14 sm:px-6 lg:px-8">
@@ -227,7 +234,7 @@ const AltersvorsorgedepotPage = () => {
             <h2 className="text-center font-display text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">
               {ablauf.ueberschrift}
             </h2>
-            <div className="relative mt-10 grid gap-8 sm:grid-cols-4">
+            <div className="relative mt-10 grid gap-8 sm:grid-cols-3">
               <div className="absolute left-0 right-0 top-6 hidden h-0.5 bg-emerald-200 sm:block" aria-hidden="true" />
               {ablauf.schritte.map((schritt, index) => (
                 <div key={schritt.titel} className="relative z-10 text-center sm:text-left">

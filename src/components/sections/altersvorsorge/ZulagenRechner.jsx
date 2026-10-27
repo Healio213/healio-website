@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Minus, Plus } from 'lucide-react';
+import { Lock, Minus, Plus } from 'lucide-react';
 import { berechneZulagen, formatEuroDE, formatCentDE, formatZahlDE, RECHNER_MAX_MONATSBEITRAG } from '@/lib/altersvorsorgeZulagen';
 import { rechner as rechnerContent } from '@/content/altersvorsorgedepotContent';
 
@@ -44,7 +44,7 @@ const SchalterZeile = ({ label, value, onChange }) => (
  * Zuschuss-Check, onCheck) und darunter der weichere Weg ins Webinar
  * (onWebinar).
  */
-const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, id = 'rechner' }) => {
+const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 'rechner' }) => {
   const { monatsbeitrag, kinder, unter25, selbststaendig, riester } = value;
 
   const ergebnis = useMemo(
@@ -151,7 +151,7 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, id = 'rechner' })
                 <div>
                   <p className="text-base leading-relaxed text-white/90">
                     Beispiel: Grund- und Kinderzulage im Jahr{' '}
-                    <span className="text-2xl font-extrabold text-white">{formatEuroDE(ergebnis.zulageJahr)}</span>{' '}
+                    <span className="my-2 block text-4xl font-extrabold text-white sm:text-5xl">{formatEuroDE(ergebnis.zulageJahr)}</span>{' '}
                     bei unmittelbarer Förderberechtigung.
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-white/85">
@@ -181,20 +181,25 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, id = 'rechner' })
                   )}
 
                   {selbststaendig && (
-                    <p className="mt-3 text-base leading-relaxed text-white/85">{rechnerContent.hinweise.selbststaendig}</p>
+                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">Fördercheck für Selbstständige</p><p className="mt-1">{rechnerContent.hinweise.selbststaendig}</p></div>
                   )}
                   {riester && (
-                    <p className="mt-3 text-base leading-relaxed text-white/85">{rechnerContent.hinweise.riester}</p>
+                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">Riester-Vertrag vorhanden: Wechsel prüfen</p><p className="mt-1">{rechnerContent.hinweise.riester}</p></div>
                   )}
                   <p className="mt-3 text-base leading-relaxed text-white/85">{rechnerContent.hinweise.immer}</p>
                 </div>
               )}
             </div>
 
+            <div className="mt-5 rounded-xl border border-dashed border-white/40 bg-white/5 p-4 text-white">
+              <div className="flex items-center gap-2 font-bold"><Lock className="h-5 w-5 shrink-0 text-[#8ee7ca]" aria-hidden="true" /><span>Steuervorteil & ETF-Modell bis 67</span></div>
+              <p className="mt-2 text-sm leading-6 text-white/85">Nach der Vormerkung: deine Modellrechnung mit anpassbarem Alter und Steuersatz. Die persönliche Prüfung folgt im Vorabcheck.</p>
+            </div>
+
             <button
               type="button"
               onClick={onCheck}
-              className="mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-lg bg-white px-6 py-4 text-center text-base font-extrabold text-healio-primary-dark shadow-md transition [text-wrap:balance] hover:shadow-lg"
+              className="mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-lg bg-white px-6 py-4 text-center text-base font-extrabold text-healio-primary-dark shadow-md transition [text-wrap:balance] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8ee7ca]"
             >
               {ergebnis.berechtigt
                 ? rechnerContent.knopfMitBetrag.replace('{zulageJahr}', formatZahlDE(ergebnis.zulageJahr))
@@ -209,6 +214,8 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, id = 'rechner' })
             </a>
           </div>
         </div>
+
+        {vormerkung}
 
         <p className="mt-6 text-base leading-relaxed text-healio-text-light">{rechnerContent.kleingedruckt}</p>
       </div>

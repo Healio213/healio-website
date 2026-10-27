@@ -7,11 +7,11 @@ export const isHoneypotFilled = (form) => {
   return typeof field?.value === 'string' && field.value.trim().length > 0;
 };
 
-const FormHoneypot = () => (
+const FormHoneypot = ({ id = 'healio-website' }) => (
   <div className="sr-only" aria-hidden="true">
-    <label htmlFor="healio-website">Website</label>
+    <label htmlFor={id}>Website</label>
     <input
-      id="healio-website"
+      id={id}
       name={HONEYPOT_FIELD_NAME}
       type="text"
       tabIndex={-1}

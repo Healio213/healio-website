@@ -1,5 +1,5 @@
 /**
- * Texte für /altersvorsorgedepot, für den Release09.10.2026 präzisiert.
+ * Texte für /altersvorsorgedepot, Vormerkung und Vorabcheck präzisiert 27.10.2026.
  * Amtliche Faktenprüfung08.10.2026; Kalender und Webinar noch nicht bereit.
  * Persönliche Anfragen nutzen den bestehenden Kontaktweg.
  *
@@ -30,7 +30,7 @@ export const getWebinarTermin = (webinarSlot) => (
 );
 
 const STANDARD_VOREINSTELLUNG = {
-  monatsbeitrag: 50, kinder: 0, unter25: false, selbststaendig: false, riester: false,
+  monatsbeitrag: 150, kinder: 0, unter25: false, selbststaendig: false, riester: false,
 };
 
 // Abschnitt 1: Hero. Varianten tauschen nur Eyebrow, H1, Unterzeile, Fußnote,
@@ -72,7 +72,7 @@ export const VARIANTEN = {
     fussnote: null,
     kachelFokus: null,
     voreinstellung: {
-      monatsbeitrag: 50, kinder: 0, unter25: false, selbststaendig: false, riester: true,
+      monatsbeitrag: 150, kinder: 0, unter25: false, selbststaendig: false, riester: true,
     },
   },
   einsteiger: {
@@ -94,7 +94,7 @@ export const getVariante = (fuer) => (FUER_WERTE.includes(fuer) ? VARIANTEN[fuer
 
 export const hero = {
   knopfRechner: 'Meinen Zuschuss berechnen',
-  linkCheck: 'Oder direkt einen Zuschuss-Check anfragen',
+  linkCheck: 'Oder deinen Start für Januar vorbereiten',
   vertrauenszeile: 'Gesetz beschlossen · gilt ab 01.01.2027 · Rechnen ohne Anmeldung',
   // Rechte Seite des Hero: helle Angebotskarte nach dem Muster von /stationaer,
   // ohne Foto und ohne Person. Wert groß, Text klein. Der Schlüssel (key) legt
@@ -149,32 +149,32 @@ export const beispiele = {
 };
 
 // Abschnitt 3a: Zuschuss-Check, direkt nach dem Rechner (Anker #zuschuss-check).
-// Ziel der Seite ist der Termin. Das Webinar bleibt der weiche Weg für alle,
-// die noch nicht so weit sind (Abschnitt 8).
+// Ziel der Seite ist die Vormerkung mit übernommener Beispielrechnung.
+// Der Zuschuss-Fahrplan bleibt der weiche Weg (Abschnitt 8).
 export const zuschussCheck = {
   eyebrow: 'Unverbindlich und persönlich',
-  ueberschrift: 'Dein persönlicher Zuschuss-Check',
-  unterzeile: 'Wir prüfen deine Voraussetzungen, deinen Beitrag und einen vorhandenen Riester-Vertrag. So bereitest du deine Entscheidung mit nachvollziehbaren Zahlen vor.',
+  ueberschrift: 'Dein Weg zum Start im Januar',
+  unterzeile: 'Bereite deinen Start ins Altersvorsorgedepot jetzt vor. Wir prüfen deine Förderberechtigung, die Kinderzuordnung und einen möglichen Riesterwechsel.',
   karten: [
     {
       icon: 'zulage',
-      titel: 'Deine genaue Zulage',
-      text: 'Grundzulage, zugeordnete Kinderzulage und möglicher Startbonus: Wir prüfen deine tatsächlichen Voraussetzungen.',
+      titel: 'Jetzt Berechnung speichern',
+      text: 'Übernimm deine Auswahl aus dem Rechner und merke dich für den Start ab Januar 2027 vor. Vorname und E-Mail genügen; deine Mobilnummer für Rückfragen ist optional.',
     },
     {
       icon: 'riester',
-      titel: 'Dein Riester-Vertrag',
-      text: 'Behalten, ruhen lassen oder übertragen? Kosten, Förderung und Garantien gehören gemeinsam in den Vergleich.',
+      titel: 'Etwa 10 Minuten Vorabcheck',
+      text: 'Wir klären telefonisch deine Förderberechtigung, die Kinderzuordnung und welche Unterlagen nötig sind. Bei Riester vergleichen wir auch Kosten, Förderung und bestehende Garantien.',
     },
     {
       icon: 'startplan',
-      titel: 'Deine nächsten Schritte',
-      text: 'Was du vorbereiten kannst und welche Unterlagen fehlen. Konkrete Angebote prüfen wir erst, wenn sie tatsächlich verfügbar sind.',
+      titel: 'Januarstart vorbereiten',
+      text: 'Wir ordnen deine Angaben und Unterlagen vorab. Sobald passende Angebote verfügbar sind, prüfen wir deinen persönlichen Vorschlag und die nächsten Schritte zum Abschluss.',
     },
   ],
-  ablaufzeile: 'Ein unverbindlicher Check ist für etwa 20 Minuten per Video oder Telefon gedacht. Den Termin stimmen wir über deine Kontaktanfrage mit dir ab.',
-  startzeile: 'Jetzt in Ruhe prüfen, im neuen Jahr starten. Wer früh im Jahr anfängt, verteilt seinen Beitrag für die volle Zulage auf mehr Monate.',
-  knopfTermin: 'Zuschuss-Check anfragen',
+  ablaufzeile: 'Die Vormerkung dauert nur einen Moment. Deinen etwa 10-minütigen Vorabcheck vereinbaren wir anschließend persönlich mit dir.',
+  startzeile: 'Mach jetzt den ersten Schritt für Januar: Berechnung speichern, Fördervoraussetzungen klären und einen möglichen Vertragswechsel vorbereiten.',
+  knopfTermin: 'Berechnung speichern & für Januar vormerken',
   knopfRueckruf: 'Rückruf anfragen',
   // Nur einschalten, wenn es stimmt.
   kapazitaetHinweis: false,
@@ -203,17 +203,16 @@ export const rechner = {
     unter30KeineKinder: 'Mit 30 EUR im Monat holst du dir die volle 50-Prozent-Stufe.',
     unter25MitKindern: 'Mit 25 EUR im Monat bekommst du die volle Kinderzulage von 300 EUR je Kind.',
     unter150: 'Die höchste Grundzulage von 540 EUR gibt es ab 150 EUR im Monat.',
-    bei150: 'Bei 150 EUR im Monat ist die höchste Grundzulage von 540 EUR erreicht. Ein höherer Beitrag erhöht die Grundzulage nicht.',
+    bei150: 'Mit diesem Beitrag ist die maximale Grundzulage erreicht.',
   },
   hinweise: {
-    selbststaendig: 'Neu für dich: Ab 2027 sind Selbstständige unter 67 grundsätzlich förderberechtigt, wenn sie im Beitragsjahr selbstständige Einkünfte erzielen und dafür eine Einkommensteuererklärung abgeben.',
-    riester: 'Bei einem Riester-Vertrag erst Behalten, Ruhenlassen und geregeltes Übertragen vergleichen. Eine Kündigung mit Auszahlung kann Förderung kosten. Ein neuer geförderter Vertrag kann die Fördersystematik weiterer Riester-Bestandsverträge verändern.',
-    immer: 'Dazu prüft das Finanzamt, ob du zusätzlich Steuern sparst.',
+    selbststaendig: 'Auch für Selbstständige ist die Förderung ab 2027 möglich. Wir prüfen, ob du die Voraussetzungen erfüllst – dazu gehören grundsätzlich ein Alter unter 67, entsprechende Einkünfte und die Einkommensteuererklärung für das Beitragsjahr.',
+    riester: 'Riester-Vertrag vorhanden: Wir prüfen, ob sich ein Wechsel für dich lohnt – einschließlich Kosten, Förderung und bestehender Garantien. Eine Kündigung mit Auszahlung kann Förderung kosten. Ein neuer geförderter Vertrag kann die Fördersystematik weiterer Riester-Bestandsverträge verändern.',
+    immer: 'Zusätzlich zur Zulage ist ein Steuervorteil möglich. Lass uns deine Gesamtrechnung inklusive Steuerprüfung und ETF-Modell für deinen Start im Januar vorbereiten.',
   },
-  // Hauptknopf unter dem Ergebnis. {zulageJahr} setzt ZulagenRechner.jsx ein, im
-  // deutschen Format und ohne Nachkommastellen, wenn der Betrag ganzzahlig ist.
-  knopfMitBetrag: 'Zuschuss-Check zu meiner Rechnung anfragen',
-  knopfOhneAnspruch: 'Zuschuss-Check anfragen',
+  // Hauptknopf öffnet das Kurzformular direkt beim Rechner.
+  knopfMitBetrag: 'Berechnung speichern & für Januar vormerken',
+  knopfOhneAnspruch: 'Für den Start im Januar vormerken',
   webinarLink: 'Erst den Zuschuss-Fahrplan ansehen',
   kleingedruckt: 'Unverbindliches Beispiel für unmittelbar Förderberechtigte im neuen System ab 2027. Kinderzulage nur bei Kindergeldanspruch und gesetzlicher Zuordnung; die Regeln unterscheiden sich für 2027 und ab 2028. Mittelbar berechtigte Partner haben eine eigene Rechnung. Vor Vertragskosten und Wertentwicklung; ohne zusätzliche Steuerermäßigung. Grundsätzlich bis zur Rente gebunden, keine Anlage- oder Steuerberatung.',
 };
@@ -284,14 +283,13 @@ export const fuerWenEs = {
   ],
 };
 
-// Abschnitt 7: Ablauf in vier Schritten.
+// Abschnitt 7: Ablauf in drei Schritten.
 export const ablauf = {
-  ueberschrift: 'So kommst du an deinen Zuschuss',
+  ueberschrift: 'So bereitest du deinen Start für Januar vor',
   schritte: [
-    { titel: 'Zuschuss berechnen.', text: 'Eine Minute, ohne Anmeldung.' },
-    { titel: 'Zuschuss-Check anfragen.', text: 'Über unser Kontaktformular. Wir stimmen einen Termin per Video oder Telefon mit dir ab.' },
-    { titel: 'Entscheidung vorbereiten.', text: 'Voraussetzungen, Riester-Bestand und offene Fragen gemeinsam ordnen.' },
-    { titel: 'Konkretes Angebot prüfen.', text: 'Die neuen Produkte können ab 2027 angeboten werden. Ein Abschluss setzt tatsächlich verfügbare, geprüfte Unterlagen voraus.' },
+    { titel: 'Jetzt Berechnung speichern.', text: 'Deine Auswahl übernehmen und mit dem Kurzformular für den Start ab Januar 2027 vormerken.' },
+    { titel: 'Kurzer Vorabcheck.', text: 'In etwa 10 Minuten Förderberechtigung, Kinderzuordnung und einen möglichen Riesterwechsel telefonisch klären.' },
+    { titel: 'Januarstart vorbereiten.', text: 'Unterlagen vorab ordnen. Sobald passende Angebote verfügbar sind, deinen persönlichen Vorschlag prüfen und den Abschluss vorbereiten.' },
   ],
 };
 
@@ -322,8 +320,8 @@ export const werDahinter = {
     },
     {
       icon: 'check',
-      titel: 'Im Zuschuss-Check',
-      text: 'Wir prüfen deine Voraussetzungen und ordnen die nächsten Schritte. Eine Produktentscheidung braucht konkrete, tatsächlich verfügbare Angebote.',
+      titel: 'Im persönlichen Vorabcheck',
+      text: 'Wir prüfen deine Förderberechtigung, Kinderzuordnung und einen möglichen Riesterwechsel. So stehen deine nächsten Schritte für den Start 2027 fest.',
     },
   ],
   // Porträts, gleich groß nebeneinander über den Rollenkarten.
@@ -343,7 +341,7 @@ export const faq = [
   },
   {
     question: 'Was passiert im Zuschuss-Check?',
-    answer: 'Wir prüfen deine Fördervoraussetzungen, deinen Beitrag und einen vorhandenen Riester-Vertrag. Den unverbindlichen Termin stimmen wir nach deiner Kontaktanfrage ab. Konkrete Anbieterangebote vergleichen wir erst, wenn sie tatsächlich verfügbar sind.',
+    answer: 'Nach deiner Vormerkung vereinbaren wir einen etwa 10-minütigen telefonischen Vorabcheck. Dabei klären wir deine Förderberechtigung, die Kinderzuordnung, deinen Beitrag und einen möglichen Riesterwechsel. Wir bereiten deine Unterlagen vor und prüfen passende Angebote, sobald sie verfügbar sind.',
   },
   {
     question: 'Muss ich nach dem Check etwas abschließen?',
@@ -351,7 +349,7 @@ export const faq = [
   },
   {
     question: 'Ab wann gibt es das?',
-    answer: 'Die Reform ist beschlossen. Neue Produkte können ab 1. Januar 2027 angeboten werden. Bis dahin kannst du dich informieren, rechnen und deine Fragen vorbereiten. Die Verfügbarkeit eines konkreten Angebots muss gesondert geprüft werden.',
+    answer: 'Die Reform ist beschlossen. Neue Produkte können ab 1. Januar 2027 angeboten werden. Mit deiner Vormerkung kannst du deine Fördervoraussetzungen und Unterlagen schon jetzt klären. Der Vertragsstart hängt vom passenden Angebot und dessen Verfügbarkeit ab. Für die Zulagenhöhe zählt der Jahresbeitrag; ein Vertragsbeginn im Januar ist dafür keine Voraussetzung.',
   },
   {
     question: 'Wie hoch ist die Zulage?',

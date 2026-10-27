@@ -60,7 +60,8 @@
     "test:about": "node scripts/check-about-contract.mjs",
     "test:nita-knowledge": "node scripts/check-nita-bonus-knowledge-contract.mjs",
     "test:ukv-vorsorge": "node scripts/check-ukv-vorsorge-contract.mjs",
-    "test:altersvorsorge": "node scripts/check-altersvorsorge-release.mjs && node scripts/check-altersvorsorge-ratgeber.mjs",
+    "test:altersvorsorge": "node scripts/check-altersvorsorge-release.mjs && node scripts/check-altersvorsorge-ratgeber.mjs && node scripts/check-altersvorsorge-vormerkung.mjs",
+    "test:altersvorsorge-vormerkung-rendered": "node scripts/check-altersvorsorge-vormerkung-rendered.mjs",
     "test:altersvorsorge-startinfo": "node scripts/check-altersvorsorge-startinfo.mjs",
     "test:lead-capture": "node --test scripts/check-lead-capture-api.mjs scripts/check-lead-capture-client.mjs"
   },

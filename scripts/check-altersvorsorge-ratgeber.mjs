@@ -21,7 +21,7 @@ const expectedSlugs = [
 assert.deepEqual(altersvorsorgeArticles.map((article) => article.slug).sort(), [...expectedSlugs].sort());
 assert.deepEqual(await validateRatgeberSources(), [], 'Register und Inhaltsdateien passen nicht zusammen');
 assert.deepEqual(RATGEBER_GROUPS.find((group) => group.id === 'altersvorsorge')?.slugs, expectedSlugs, 'Die neue Gruppe muss alle 24 Artikel enthalten');
-assert.equal(ratgeberArticles.length, 178, '154 bestehende und 24 neue Artikel müssen im Register bleiben');
+assert.equal(ratgeberArticles.length, 187, '163 weitere und 24 Altersvorsorgeartikel müssen im Register bleiben');
 assert.equal(new Set(ratgeberArticles.map((article) => article.slug)).size, ratgeberArticles.length, 'Doppelte Artikelroute');
 const routeMap = new Map(seoRoutes.map((route) => [route.path, route]));
 const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
