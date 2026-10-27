@@ -29,6 +29,9 @@
 export const article = {
   slug: 'hebamme-rufbereitschaft',
   kind: 'ratgeber',
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  rechner: false,
   group: 'familie',
 
   metaTitle: 'Hebamme Rufbereitschaft: welche Kasse zahlt wie viel | Healio',

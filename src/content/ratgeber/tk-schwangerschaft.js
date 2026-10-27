@@ -8,6 +8,9 @@
 export const article = {
   "slug": "tk-schwangerschaft",
   "kind": "ratgeber",
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  "rechner": false,
   "group": "familie",
   "metaTitle": "TK und Schwangerschaft: Leistungen und Extras | Healio",
   "metaDescription": "Was die TK in der Schwangerschaft zahlt: Vorsorge, Hebammenhilfe, Rufbereitschaft, bestimmte Arzneimittel und Partnerkurs mit Voraussetzungen.",

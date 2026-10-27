@@ -51,6 +51,9 @@
 export const article = {
   slug: 'babybonus-krankenkasse',
   kind: 'ratgeber',
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  rechner: false,
   group: 'familie',
 
   metaTitle: 'Babybonus Krankenkasse 2026: wer zahlt was | Healio',

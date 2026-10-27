@@ -8,6 +8,9 @@
 export const article = {
   "slug": "aok-babybonus",
   "kind": "ratgeber",
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  "rechner": false,
   "group": "familie",
   "metaTitle": "AOK-Babybonus: Zuschüsse und regionale Regeln | Healio",
   "metaDescription": "AOK-Babybonus einordnen: Hessen, Rheinland/Hamburg, Bayern, Baden-Württemberg, Niedersachsen und PLUS, mit Kostenwegen, Nachweisen und Grenzen.",

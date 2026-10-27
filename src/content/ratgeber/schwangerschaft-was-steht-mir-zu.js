@@ -96,6 +96,9 @@
 export const article = {
   slug: 'schwangerschaft-was-steht-mir-zu',
   kind: 'ratgeber',
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  rechner: false,
 
   metaTitle: 'Was steht mir in der Schwangerschaft zu? Leistungen | Healio',
   metaDescription:

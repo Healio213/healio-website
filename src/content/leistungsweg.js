@@ -31,6 +31,15 @@
  *     (src/i18n/locales/de/leistungen.json, paths.items),
  *   - Schwangerschaft: Vorsorge-Topf auch bei festgestellter Schwangerschaft
  *     (src/components/BenefitFunnelPage.jsx).
+ *
+ * Eine Abschluss-Karte (Frank, 27.10.2026): Am Ende steht genau eine Karte auf
+ * eine Healio-Seite, dazu der Textlink „Alle Bausteine ansehen“. Zeigt die
+ * Rechner-Karte der Gruppe auf eine andere Seite als der Abschluss-Block,
+ * schaltet der Artikel sie mit rechner: false ab (Schwangerschaft) oder das
+ * Ziel folgt der Rechner-Karte (familienversicherung-krankenkasse). Externe
+ * Karten wie der KassenBoost-Vergleich zählen nicht als Healio-Seite.
+ * Knopftexte nennen den Baustein („Baustein … ansehen“, „Zum Baustein …“),
+ * nie „Zur Seite …“.
  */
 
 import { collectBlockText } from './ratgeber/articleText.js';
@@ -146,6 +155,19 @@ export const LEISTUNGSZIELE = Object.freeze({
       text: 'Wichtige Entscheidungen triffst du besser vor der Aufnahme. Je nach Tarif sind Chefarzt, Ein- oder Zweibettzimmer und eine erweiterte Krankenhauswahl versichert.',
       label: 'Zum Baustein stationär',
     },
+    varianten: {
+      // Familienversicherung: Kinder-Klinikschutz statt Chefarzt für dich.
+      // Wortlaut wie auf /schwangerschaft (BenefitFunnelPage.jsx) und
+      // /stationaer#familie (SP1 Ein- oder Zweibettzimmer, SP2 Zweibettzimmer).
+      // Abschluss ist die Rechner-Karte „Klinikschutz für die Familie“.
+      familie: {
+        icon: 'family',
+        mitte: {
+          frage: 'Dein Kind muss ins Krankenhaus?',
+          text: 'Im Baustein stationär bekommt es je nach Tarif Chefarzt und ein Ein- oder Zweibettzimmer.',
+        },
+      },
+    },
   },
   schwangerschaft: {
     to: '/schwangerschaft',
@@ -158,8 +180,8 @@ export const LEISTUNGSZIELE = Object.freeze({
     },
     ende: {
       titel: 'Welcher Baustein passt zu dir?',
-      text: 'Auf der Seite Schwangerschaft siehst du, was jetzt noch geht, von Vorsorge-Extras ohne Wartezeit bis zum Klinikschutz für dein Kind.',
-      label: 'Zur Seite Schwangerschaft',
+      text: 'Auf der Seite Schwangerschaft siehst du, was jetzt noch geht, von Vorsorge-Extras ohne Wartezeit bis zum Klinikschutz für dein Kind ab Geburt.',
+      label: 'Baustein Schwangerschaft ansehen',
     },
     varianten: {
       hebamme: {
@@ -219,7 +241,7 @@ export const LEISTUNGSZIELE = Object.freeze({
     ende: {
       titel: 'Gesundheitsbausteine fürs Team',
       text: 'Welche Gesundheitsbausteine Firmen ihren Beschäftigten anbieten können, steht übersichtlich auf der Seite für Unternehmen.',
-      label: 'Zur Seite für Unternehmen',
+      label: 'Bausteine fürs Team ansehen',
     },
   },
   // Altersvorsorge hat einen eigenen Weg: Artikelcheck nach Abschnitt 2 und
@@ -272,14 +294,16 @@ const KASSENWECHSEL_UND_BEITRAG = [
   // Advertorial (noindex): Franks Ansage 27.10.2026 gilt für alle Ratgeber.
   // Neutral auf die Übersicht, damit der KassenBoost-Weg vorne bleibt.
   'krankenkassen-bonus-zusatzversicherung',
-  // Familie allgemein, kein einzelner Baustein.
-  'familienversicherung-krankenkasse',
 ];
 
 const SCHWANGERSCHAFT = [
   // Schwangerschaftsseite mit Bonus-Check, Vorsorge-Extras und Klinikschutz
   // fürs Kind. baby-geplant-zusatzversicherung bleibt bei /stationaer:
   // noch nicht schwanger, und Kinderwunsch ist kein Tarifargument.
+  // Die neun Artikel der Gruppe familie schalten die Rechner-Karte
+  // „Klinikschutz für die Familie“ ab (rechner: false): ein Abschluss, eine
+  // Karte. Den Klinikschutz fürs Kind zeigt /schwangerschaft selbst
+  // (#kind, #nachversicherung), der Abschluss-Satz nennt ihn.
   'schwangerschaft-worauf-achten',
   'schwangerschaft-was-steht-mir-zu',
   'hebamme-kosten-krankenkasse',
@@ -314,6 +338,10 @@ export const RATGEBER_ZIEL_JE_SLUG = Object.freeze({
   ...Object.fromEntries(KASSENWECHSEL_UND_BEITRAG.map((slug) => [slug, { ziel: 'leistungen' }])),
   ...Object.fromEntries(SCHWANGERSCHAFT.map((slug) => [slug, { ziel: 'schwangerschaft' }])),
   ...Object.fromEntries(ZUZAHLUNG.map((slug) => [slug, { ziel: 'ambulant', variante: 'zuzahlung' }])),
+  // Familie (Frank, 27.10.2026): eine Abschluss-Karte auf den Klinikschutz
+  // für Kinder (/stationaer#familie, Rechner-Karte der Gruppe) mit Textlink
+  // auf alle Bausteine, statt Übersichts-Block plus Rechner-Karte.
+  'familienversicherung-krankenkasse': { ziel: 'stationaer', variante: 'familie' },
 });
 
 const RUECKFALL = Object.freeze({ ziel: 'leistungen' });

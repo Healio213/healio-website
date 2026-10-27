@@ -13,6 +13,9 @@
 export const article = {
   "slug": "geburtsvorbereitungskurs-partner",
   "kind": "ratgeber",
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  "rechner": false,
   "group": "familie",
   "metaTitle": "TK-Geburtsvorbereitungskurs für Partner: Kosten | Healio",
   "metaDescription": "Geburtsvorbereitungskurs für Partner: TK-Zuschuss und Regeln von Barmer, firmus, DAK und IKK classic prüfen. Mit Gebühren, Grenzen und Nachweisen.",

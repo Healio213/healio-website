@@ -15,6 +15,9 @@
 export const article = {
   "slug": "geburtsvorbereitungskurs",
   "kind": "ratgeber",
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  "rechner": false,
   "group": "familie",
   "metaTitle": "Geburtsvorbereitungskurs: Kosten, Kasse und Beginn | Healio",
   "metaDescription": "Geburtsvorbereitungskurs: früh anmelden, Kassenleistung und Partnergebühr trennen. Erfahre, was bei Präsenz, Live-Onlinekurs und Videos gilt.",

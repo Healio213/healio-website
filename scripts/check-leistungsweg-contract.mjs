@@ -10,7 +10,9 @@
  *   2. der Zwischendurch-Hinweis: neu eingefügt oder schon gleichwertig im
  *      Text vorhanden, nie neben einem großen Klickbaustein,
  *   3. der Abschluss: eigener Block oder ein gleichwertiger Abschluss auf
- *      dieselbe Seite, dann mit Textlink „Alle Bausteine ansehen“,
+ *      dieselbe Seite, dann mit Textlink „Alle Bausteine ansehen“; neben dem
+ *      eigenen Block keine zweite Karte auf eine andere Healio-Seite
+ *      (Frank, 27.10.2026: eine Karte),
  *   4. die Texte (Du-Form, Umlaute, keine Gedankenstriche, Sperrwörter,
  *      Nutzen vor Kassenbonus, Gesundheitsfragen ja, keine Ablehnung),
  *   5. die Verdrahtung in Vorlage, Blogseite und statischem Blog-HTML, ohne
@@ -114,7 +116,7 @@ const SLUG_ERWARTET = {
   'krankenkasse-wechseln': 'leistungen',
   'zusatzbeitrag-krankenkasse-2026': 'leistungen',
   'krankenzusatzversicherung-vergleichen': 'leistungen',
-  'familienversicherung-krankenkasse': 'leistungen',
+  'familienversicherung-krankenkasse': 'stationaer',
   'krankenkassen-bonus-zusatzversicherung': 'leistungen',
   'schwangerschaft-worauf-achten': 'schwangerschaft',
   'schwanger-zusatzversicherung': 'schwangerschaft',
@@ -126,6 +128,34 @@ const SLUG_ERWARTET = {
 for (const [slug, ziel] of Object.entries(SLUG_ERWARTET)) {
   expect(resolveRatgeberLeistungsziel(slug, RATGEBER_GROUP_OF.get(slug) || null).ziel === ziel, `Ratgeber ${slug} muss zu ${ziel} führen.`);
 }
+// Eine Abschluss-Karte (Frank, 27.10.2026): Die Schwangerschafts-Ratgeber der
+// Gruppe familie enden mit dem Block auf /schwangerschaft ohne Rechner-Karte,
+// die Familienversicherung mit der Rechner-Karte auf den Klinikschutz für
+// Kinder plus Textlink auf alle Bausteine.
+const EINE_KARTE_ERWARTET = {
+  'babybonus-krankenkasse': { ende: 'block', ziel: 'schwangerschaft' },
+  'hebamme-rufbereitschaft': { ende: 'block', ziel: 'schwangerschaft' },
+  'schwangerschaft-was-steht-mir-zu': { ende: 'block', ziel: 'schwangerschaft' },
+  'hebamme-kosten-krankenkasse': { ende: 'block', ziel: 'schwangerschaft' },
+  geburtsvorbereitungskurs: { ende: 'block', ziel: 'schwangerschaft' },
+  'aok-babybonus': { ende: 'block', ziel: 'schwangerschaft' },
+  'geburtsvorbereitungskurs-partner': { ende: 'block', ziel: 'schwangerschaft' },
+  'schwangerschaft-krankenkasse-melden': { ende: 'block', ziel: 'schwangerschaft' },
+  'tk-schwangerschaft': { ende: 'block', ziel: 'schwangerschaft' },
+  'familienversicherung-krankenkasse': { ende: 'rechner', ziel: 'stationaer', rechnerZiel: '/stationaer#familie' },
+};
+for (const [slug, erwartet] of Object.entries(EINE_KARTE_ERWARTET)) {
+  const article = ratgeberArticles.find((entry) => entry.slug === slug);
+  expect(Boolean(article), `Eine Karte: Ratgeber ${slug} fehlt.`);
+  if (!article) continue;
+  const groupId = RATGEBER_GROUP_OF.get(slug) || null;
+  const plan = planRatgeberLeistungsweg(article, groupId);
+  const rechner = resolveRatgeberRechner(article, groupId);
+  expect(plan.ziel.id === erwartet.ziel && plan.ende === erwartet.ende, `Eine Karte: ${slug} endet mit ${plan.ende} auf ${plan.ziel.to} (erwartet ${erwartet.ende} auf ${LEISTUNGSZIELE[erwartet.ziel].to}).`);
+  if (erwartet.ende === 'block') expect(article.rechner === false && !rechner, `Eine Karte: ${slug} braucht rechner: false, sonst folgt auf den Block die Karte zu /stationaer#familie.`);
+  if (erwartet.rechnerZiel) expect(rechner?.to === erwartet.rechnerZiel && plan.alleBausteine, `Eine Karte: ${slug} endet mit der Karte zu ${erwartet.rechnerZiel} und dem Textlink auf alle Bausteine.`);
+}
+
 // Zuzahlungs-Ratgeber zeigen auf den Zuzahlungs-Topf, nicht auf Heilpraktiker oder Brille.
 for (const slug of [...ratgeberSlugs].filter((entry) => /zuzahlung/.test(entry) && entry !== 'reha-zuzahlung')) {
   expect(resolveRatgeberLeistungsziel(slug, RATGEBER_GROUP_OF.get(slug) || null).variante === 'zuzahlung', `Ratgeber ${slug}: Hinweis auf den Zuzahlungs-Topf (Variante zuzahlung).`);
@@ -202,6 +232,13 @@ for (const article of ratgeberArticles) {
   }
   if (plan.ende === 'internalCta') expect(basisPfad(article.internalCta?.to) === plan.ziel.to, `${label}: Schlussknopf zeigt nicht auf ${plan.ziel.to}.`);
   if (plan.ende === 'eigen') expect(plan.ziel.id === 'altersvorsorge' && article.topic === 'altersvorsorge', `${label}: eigener Weg nur für Altersvorsorge.`);
+  // Eine Karte: Neben dem eigenen Abschluss-Block steht keine Rechner-Karte
+  // auf eine andere Healio-Seite. Externe Karten (KassenBoost-Vergleich) zählen
+  // nicht. Abhilfe: rechner: false im Artikel oder ein Ziel, das zur Karte passt.
+  if (plan.ende === 'block') {
+    const rechner = resolveRatgeberRechner(article, groupId);
+    expect(!rechner?.to, `${label}: Abschluss-Block auf ${plan.ziel.to} und Rechner-Karte auf ${rechner?.to}, zwei Karten am Ende (rechner: false oder passendes Ziel).`);
+  }
   expect(plan.alleBausteine === !OHNE_UEBERSICHTSLINK.has(plan.ziel.id), `${label}: Textlink auf /leistungen fehlt oder ist überflüssig.`);
 }
 
@@ -249,7 +286,11 @@ for (const { id, ziel, felder } of texteJeZiel) {
   expect(!SPERRWORTE.test(text), `Texte ${id}: Sperrwort "${text.match(SPERRWORTE)?.[0]}".`);
   expect(!/(?<!Soziale )\bsicher/i.test(text), `Texte ${id}: Wortstamm "sicher" nicht als Versprechen.`);
   expect(!/3\.000/.test(text), `Texte ${id}: 3.000 EUR nur zusammen mit Vorsorge, Sehhilfen und Zuzahlungen, hier nicht nötig.`);
-  expect(ziel.mitte.label.length <= 28 && ziel.ende.label.length <= 28, `Texte ${id}: Knopftexte höchstens 28 Zeichen.`);
+  // Hauptknopf am Ende bis 32 Zeichen („Baustein Schwangerschaft ansehen“,
+  // Frank 27.10.2026); auf dem Handy bricht er notfalls in zwei Zeilen um.
+  expect(ziel.mitte.label.length <= 28 && ziel.ende.label.length <= 32, `Texte ${id}: Knopftexte höchstens 28 Zeichen (Hauptknopf am Ende 32).`);
+  // Der Abschluss fragt nach dem Baustein, also nennt der Knopf den Baustein.
+  expect(!/^Zur Seite\b/.test(ziel.mitte.label) && !/^Zur Seite\b/.test(ziel.ende.label), `Texte ${id}: Knopftext nennt den Baustein, nicht „Zur Seite …“.`);
   expect(`${ziel.mitte.frage} ${ziel.mitte.text}`.length <= 170, `Texte ${id}: Zwischendurch-Hinweis zu lang für das Handy.`);
   expect(ziel.ende.text.length <= 200, `Texte ${id}: Abschluss-Satz zu lang.`);
   for (const satz of [ziel.mitte.text, ziel.ende.text]) {
@@ -283,7 +324,8 @@ for (const [name, quelle] of [['LeistungsHinweis.jsx', komponente], ['leistungsw
 }
 expect(/from 'react-router-dom'/.test(komponente) && !/<a\s/.test(komponente) && !/target=/.test(komponente), 'LeistungsHinweis.jsx: interne Links nur per React Router, kein neuer Tab.');
 expect((komponente.match(/withAdClickIds\(/g) || []).length >= 3, 'LeistungsHinweis.jsx: Links reichen nur die Klick-Kennung weiter (withAdClickIds).');
-expect(/min-h-11/.test(LEISTUNGSWEG_KLASSEN.mitteKnopf) && /min-h-\[3\.25rem\]/.test(LEISTUNGSWEG_KLASSEN.endeKnopf) && Object.values(LEISTUNGSWEG_KLASSEN.alleLink).every((klasse) => /min-h-11/.test(klasse)), 'Tippflächen ab 44 px.');
+expect(/whitespace-normal/.test(LEISTUNGSWEG_KLASSEN.endeKnopf) && /sm:whitespace-nowrap/.test(LEISTUNGSWEG_KLASSEN.endeKnopf), 'Hauptknopf am Ende: bricht auf dem Handy um statt überzulaufen, ab sm einzeilig.');
+expect(/min-h-11/.test(LEISTUNGSWEG_KLASSEN.mitteKnopf) &&/min-h-\[3\.25rem\]/.test(LEISTUNGSWEG_KLASSEN.endeKnopf) && Object.values(LEISTUNGSWEG_KLASSEN.alleLink).every((klasse) => /min-h-11/.test(klasse)), 'Tippflächen ab 44 px.');
 for (const [id] of Object.entries(LEISTUNGSZIELE).filter(([, ziel]) => !ziel.eigenerWeg)) {
   const ziel = getLeistungsziel(id);
   const html = leistungsHinweisMitteHtml(ziel) + leistungsHinweisEndeHtml(ziel);
@@ -312,6 +354,9 @@ if (fs.existsSync(path.join(distDir, 'index.html'))) {
     expect(mitte === plan.mitteNach.length, `${label}: ${mitte} statt ${plan.mitteNach.length} Zwischendurch-Hinweise.`);
     const ende = (html.match(/data-leistungsweg="ende"/g) || []).length;
     expect(ende === (plan.ende === 'block' ? 1 : 0), `${label}: Abschluss-Block ${ende}-mal (erwartet ${plan.ende === 'block' ? 1 : 0}).`);
+    const interneRechnerKarten = (html.match(/data-ratgeber-rechner="\//g) || []).length;
+    if (plan.ende === 'block') expect(interneRechnerKarten === 0, `${label}: neben dem Abschluss-Block steht noch eine Rechner-Karte auf eine Healio-Seite.`);
+    if (plan.ende === 'rechner') expect(interneRechnerKarten === 1, `${label}: ${interneRechnerKarten} Rechner-Karten statt einer.`);
     if (plan.alleBausteine) expect(hatAlleLink(html), `${label}: Textlink „Alle Bausteine ansehen“ fehlt.`);
     if (plan.ziel.id === 'leistungen') expect(hrefsZu(html, LEISTUNGEN_PFAD).length > 0, `${label}: Rückfall ohne Link auf /leistungen.`);
   }

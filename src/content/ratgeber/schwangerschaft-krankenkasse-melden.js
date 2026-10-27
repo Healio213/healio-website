@@ -9,6 +9,9 @@
 export const article = {
   "slug": "schwangerschaft-krankenkasse-melden",
   "kind": "ratgeber",
+  // Ein Abschluss, eine Karte: Der Abschluss-Block führt auf /schwangerschaft,
+  // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
+  "rechner": false,
   "group": "familie",
   "metaTitle": "Schwangerschaft der Krankenkasse melden: Ablauf | Healio",
   "metaDescription": "Schwangerschaft der Krankenkasse melden: Zeitpunkt, Bescheinigung und Mutterschaftsgeld verständlich erklärt. Kläre Anträge und private Kosten früh.",

@@ -47,7 +47,10 @@ export const LEISTUNGSWEG_KLASSEN = Object.freeze({
   endeSatz: 'col-span-2 row-start-2 max-w-[54ch] text-base leading-7 text-slate-700 hyphens-manual sm:col-span-1 sm:col-start-1 sm:text-[1.05rem] sm:leading-8',
   endeIcon: 'col-start-2 row-start-1 sm:row-span-2 sm:h-20 sm:w-20 sm:rounded-[1.5rem]',
   endeAktionen: 'mt-5 flex flex-col gap-2 sm:mt-7 sm:items-start sm:gap-3',
-  endeKnopf: `group inline-flex min-h-[3.25rem] w-full shrink-0 items-center justify-center gap-3 whitespace-nowrap rounded-full bg-[#07111f] py-1.5 pl-6 pr-2 text-center font-display text-base font-extrabold text-white shadow-[0_16px_36px_rgba(7,17,31,0.22)] transition hover:bg-[#12233a] hover:shadow-[0_20px_44px_rgba(7,17,31,0.26)] sm:w-auto ${FOCUS}`,
+  // Auf dem Handy darf ein langer Knopftext („Baustein Schwangerschaft
+  // ansehen“) in zwei ausgewogene Zeilen umbrechen, statt aus dem Knopf zu
+  // laufen; ab sm bleibt er einzeilig.
+  endeKnopf: `group inline-flex min-h-[3.25rem] w-full shrink-0 items-center justify-center gap-3 whitespace-normal rounded-full bg-[#07111f] py-1.5 pl-6 pr-2 text-center font-display text-base font-extrabold leading-tight text-white [text-wrap:balance] sm:whitespace-nowrap shadow-[0_16px_36px_rgba(7,17,31,0.22)] transition hover:bg-[#12233a] hover:shadow-[0_20px_44px_rgba(7,17,31,0.26)] sm:w-auto ${FOCUS}`,
   pfeilKreis: 'grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25c990] text-[#07111f] transition-transform duration-300 ease-out group-hover:translate-x-0.5 motion-reduce:transform-none',
 
   // Textlink „Alle Bausteine ansehen“ mit den vier Baustein-Figuren.
