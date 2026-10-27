@@ -42,6 +42,15 @@ export const LEISTUNGEN_PFAD = '/leistungen';
 // Zwischendurch-Hinweis, sofern dort noch kein gleichwertiger Hinweis steht.
 export const ZWEITER_HINWEIS_AB_WOERTERN = 1800;
 
+// Steht im Ratgeber schon ein gleichwertiger Hinweis (Weg-Karte, Karten,
+// Tarifvergleich) auf dieselbe Seite in diesem Bereich des Fließtexts, ist er
+// der Zwischendurch-Hinweis. Ein neuer Hinweis käme nur doppelt dazu.
+export const MITTE_BEREICH = Object.freeze([0.12, 0.7]);
+// Mindestabstand eines neuen Hinweises zu einem gleichwertigen Hinweis auf
+// dieselbe Seite: ein Fünftel des Fließtexts, mindestens 300 Wörter.
+export const MIN_ABSTAND_ANTEIL = 0.2;
+export const MIN_ABSTAND_WOERTER = 300;
+
 /* -------------------------------------------------------------------------
  * Ziele und Texte
  * ---------------------------------------------------------------------- */
@@ -77,6 +86,17 @@ export const LEISTUNGSZIELE = Object.freeze({
         mitte: {
           frage: 'Vorsorge, die deine Kasse nicht zahlt?',
           text: 'Der Baustein ambulant erstattet sie je nach Tarif zu 50 bis 100 Prozent.',
+        },
+      },
+      // Zuzahlungs-Ratgeber: der eigene Topf für gesetzliche Zuzahlungen und
+      // verordnete Hilfsmittel (AmbulantConversionFlow.jsx, pots.copay).
+      zuzahlung: {
+        mitte: {
+          frage: 'Zuzahlungen für Medikamente oder Physiotherapie?',
+          text: 'Der Baustein ambulant hat einen eigenen Topf für gesetzliche Zuzahlungen und verordnete Hilfsmittel.',
+        },
+        ende: {
+          text: 'Ein Tarif für Heilpraktiker, Osteopathie, Brille, Vorsorge und Zuzahlungen, und jeder Topf steht dir ab Beginn in voller Höhe zur Verfügung. Gesundheitsfragen ja, keine Ablehnung.',
         },
       },
       kasse: {
@@ -175,7 +195,7 @@ export const LEISTUNGSZIELE = Object.freeze({
     alleBausteine: false,
     mitte: {
       frage: 'Welche Kosten willst du selbst tragen?',
-      text: 'Die Bausteine ambulant, Zahn, stationär und Tier schließen je eine andere Lücke deiner Kasse.',
+      text: 'Die Bausteine ambulant, Zahn, stationär und Tier schließen je eine andere Lücke.',
       label: 'Bausteine ansehen',
     },
     ende: {
@@ -273,10 +293,27 @@ const SCHWANGERSCHAFT = [
   'tk-schwangerschaft',
 ];
 
+const ZUZAHLUNG = [
+  // Gesetzliche Zuzahlungen: Hinweis auf den eigenen Zuzahlungs-Topf statt
+  // Heilpraktiker oder Brille. reha-zuzahlung bleibt bei /stationaer.
+  'zuzahlung-medikamente',
+  'zuzahlungsbefreiung',
+  'zuzahlungsbefreiung-chronisch-krank',
+  'zuzahlungsbefreiung-rentner',
+  'zuzahlungsbefreiung-schwerbehinderung',
+  'aok-zuzahlungsbefreiung',
+  'barmer-zuzahlungsbefreiung',
+  'dak-zuzahlungsbefreiung',
+  'ikk-zuzahlungsbefreiung',
+  'tk-zuzahlungsbefreiung',
+  'physiotherapie-zuzahlung',
+];
+
 // Abweichungen je Slug vom Standard der Gruppe.
 export const RATGEBER_ZIEL_JE_SLUG = Object.freeze({
   ...Object.fromEntries(KASSENWECHSEL_UND_BEITRAG.map((slug) => [slug, { ziel: 'leistungen' }])),
   ...Object.fromEntries(SCHWANGERSCHAFT.map((slug) => [slug, { ziel: 'schwangerschaft' }])),
+  ...Object.fromEntries(ZUZAHLUNG.map((slug) => [slug, { ziel: 'ambulant', variante: 'zuzahlung' }])),
 });
 
 const RUECKFALL = Object.freeze({ ziel: 'leistungen' });
@@ -374,6 +411,21 @@ const zeigtAufZiel = (block, zielPfad) => {
   return false;
 };
 
+// Wortposition (Ende des Blocks im Fließtext) jedes gleichwertigen Hinweises
+// auf dieselbe Seite. Zählt wie abschnittWoerter: Überschrift, dann Blöcke.
+export const gleichwertigePositionen = (sections, zielPfad) => {
+  const positionen = [];
+  let lauf = 0;
+  for (const section of sections) {
+    lauf += woerter([section.heading]);
+    for (const block of section.blocks || []) {
+      lauf += woerter(collectBlockText([block], []));
+      if (zeigtAufZiel(block, zielPfad)) positionen.push(lauf);
+    }
+  }
+  return positionen;
+};
+
 // Große, klickbare Bausteine, neben die kein weiterer Hinweis rückt.
 const istKlickblock = (block) => Boolean(block) && (
   block.type === 'path'
@@ -390,8 +442,11 @@ const istKlickblock = (block) => Boolean(block) && (
  *   nächsten liegt, ab ZWEITER_HINWEIS_AB_WOERTERN ein zweiter bei zwei
  *   Dritteln. Nie direkt vor oder nach einem großen Klickbaustein, nie im
  *   selben oder angrenzenden Abschnitt eines gleichwertigen Hinweises auf
- *   dieselbe Seite, nie nach dem letzten Abschnitt, beim Advertorial nie an
- *   der Stelle seines KassenBoost-Knopfs.
+ *   dieselbe Seite und nie näher als MIN_ABSTAND an ihm, nie nach dem letzten
+ *   Abschnitt, beim Advertorial nie an der Stelle seines KassenBoost-Knopfs.
+ *   Steht ein gleichwertiger Hinweis schon im MITTE_BEREICH, entfällt der
+ *   erste neue Hinweis (nichts doppelt); ein zweiter folgt nur bei langen
+ *   Artikeln mit Abstand dahinter.
  * mitteVorhanden: Der Artikel hat schon einen gleichwertigen Hinweis im
  *   Textverlauf (Weg-Karte, Karten, Tarifvergleich, Altersvorsorge-Check).
  * ende: 'block'       eigener Abschluss-Block,
@@ -416,6 +471,14 @@ export const planRatgeberLeistungsweg = (article, groupId = null) => {
 
   const counts = sections.map(abschnittWoerter);
   const gesamt = counts.reduce((sum, count) => sum + count, 0);
+  const zielPositionen = gleichwertigePositionen(sections, zielPfad);
+  const mindestAbstand = Math.max(MIN_ABSTAND_WOERTER, MIN_ABSTAND_ANTEIL * gesamt);
+  const weitGenug = (position) => zielPositionen.every((vorhanden) => Math.abs(vorhanden - position) >= mindestAbstand);
+  // Gleichwertige Hinweise mitten im Text zählen als Zwischendurch-Hinweis.
+  const vorhandenMitte = gesamt > 0
+    ? zielPositionen.map((position) => position / gesamt).filter((anteil) => anteil >= MITTE_BEREICH[0] && anteil <= MITTE_BEREICH[1])
+    : [];
+
   let kumuliert = 0;
   const grenzen = [];
   for (let index = 0; index < sections.length - 1; index += 1) {
@@ -426,6 +489,7 @@ export const planRatgeberLeistungsweg = (article, groupId = null) => {
       && !istKlickblock(danach)
       && !enthaeltZiel[index]
       && !enthaeltZiel[index + 1]
+      && weitGenug(kumuliert)
       && !(article.kind === 'advertorial' && sections[index].id === article.ctaAfterSectionId);
     if (frei) grenzen.push({ index, anteil: gesamt > 0 ? kumuliert / gesamt : 0 });
   }
@@ -435,14 +499,29 @@ export const planRatgeberLeistungsweg = (article, groupId = null) => {
     null,
   );
 
+  // Plätze: ein Drittel, bei langen Artikeln auch zwei Drittel. Jeder
+  // gleichwertige Hinweis in der Mitte belegt den Platz, dem er am nächsten ist.
+  const plaetze = gesamt >= ZWEITER_HINWEIS_AB_WOERTERN ? [1 / 3, 2 / 3] : [1 / 3];
+  for (const anteil of vorhandenMitte) {
+    if (plaetze.length === 0) break;
+    plaetze.sort((a, b) => Math.abs(a - anteil) - Math.abs(b - anteil));
+    plaetze.shift();
+  }
+  plaetze.sort((a, b) => a - b);
+
   const mitteNach = [];
-  const erste = naechste(1 / 3, grenzen.filter((grenze) => grenze.anteil <= 0.6));
-  if (erste) {
-    mitteNach.push(erste.index);
-    const spaeterVorhanden = enthaeltZiel.some((hat, index) => hat && index > erste.index);
-    if (gesamt >= ZWEITER_HINWEIS_AB_WOERTERN && !spaeterVorhanden) {
-      const zweite = naechste(2 / 3, grenzen.filter((grenze) => grenze.index >= erste.index + 2 && grenze.anteil <= 0.85));
-      if (zweite) mitteNach.push(zweite.index);
+  const gewaehlt = [];
+  for (const platz of plaetze) {
+    // Steht davor schon ein Hinweis, kommt ein weiterer nur dazu, wenn danach
+    // kein gleichwertiger mehr folgt.
+    const davorSchonEiner = (anteil) => mitteNach.length > 0 || vorhandenMitte.some((vorhanden) => vorhanden < anteil);
+    const kandidat = naechste(platz, grenzen.filter((grenze) => grenze.anteil <= (platz < 0.5 ? 0.6 : 0.85)
+      && mitteNach.every((index) => grenze.index >= index + 2)
+      && gewaehlt.every((position) => Math.abs(grenze.anteil * gesamt - position) >= mindestAbstand)
+      && !(davorSchonEiner(grenze.anteil) && zielPositionen.some((position) => position > grenze.anteil * gesamt))));
+    if (kandidat) {
+      mitteNach.push(kandidat.index);
+      gewaehlt.push(kandidat.anteil * gesamt);
     }
   }
 

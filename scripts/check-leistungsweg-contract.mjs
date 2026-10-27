@@ -30,14 +30,20 @@ import { RATGEBER_GROUPS } from '../src/content/ratgeber/gliederung.js';
 import { RATGEBER_GROUP_OF } from '../src/content/ratgeber/registry.loaders.js';
 import { resolveRatgeberRechner } from '../src/content/ratgeber/rechnerWege.js';
 import { getBlogArticleCta } from '../src/lib/blogArticleCta.js';
+import { collectBlockText } from '../src/content/ratgeber/articleText.js';
 import {
   BLOG_ZIEL_JE_SLUG,
   LEISTUNGEN_PFAD,
   LEISTUNGSZIELE,
+  MIN_ABSTAND_ANTEIL,
+  MIN_ABSTAND_WOERTER,
+  MITTE_BEREICH,
   RATGEBER_ZIEL_JE_GRUPPE,
   RATGEBER_ZIEL_JE_SLUG,
+  ZWEITER_HINWEIS_AB_WOERTERN,
   basisPfad,
   getLeistungsziel,
+  gleichwertigePositionen,
   planBlogLeistungsweg,
   planRatgeberLeistungsweg,
   resolveBlogLeistungsziel,
@@ -48,6 +54,11 @@ import { LEISTUNGSWEG_KLASSEN, leistungsHinweisEndeHtml, leistungsHinweisMitteHt
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
+const zaehleWoerter = (parts) => parts
+  .filter((part) => typeof part === 'string')
+  .join(' ')
+  .split(/\s+/)
+  .filter((word) => /[\p{L}\p{N}]/u.test(word)).length;
 const failures = [];
 const expect = (condition, message) => {
   if (!condition) failures.push(message);
@@ -115,6 +126,10 @@ const SLUG_ERWARTET = {
 for (const [slug, ziel] of Object.entries(SLUG_ERWARTET)) {
   expect(resolveRatgeberLeistungsziel(slug, RATGEBER_GROUP_OF.get(slug) || null).ziel === ziel, `Ratgeber ${slug} muss zu ${ziel} führen.`);
 }
+// Zuzahlungs-Ratgeber zeigen auf den Zuzahlungs-Topf, nicht auf Heilpraktiker oder Brille.
+for (const slug of [...ratgeberSlugs].filter((entry) => /zuzahlung/.test(entry) && entry !== 'reha-zuzahlung')) {
+  expect(resolveRatgeberLeistungsziel(slug, RATGEBER_GROUP_OF.get(slug) || null).variante === 'zuzahlung', `Ratgeber ${slug}: Hinweis auf den Zuzahlungs-Topf (Variante zuzahlung).`);
+}
 const BLOG_ERWARTET = {
   'zahnersatz-beitrag-vom-bonus': 'zahn',
   'krankenhauszusatzversicherung-sportverein-best-ager': 'stationaer',
@@ -159,6 +174,25 @@ for (const article of ratgeberArticles) {
     if (article.kind === 'advertorial') expect(article.sections[index].id !== article.ctaAfterSectionId, `${label}: Hinweis an der Stelle des KassenBoost-Knopfs.`);
   }
   if (plan.mitteNach.length === 2) expect(plan.mitteNach[1] - plan.mitteNach[0] >= 2, `${label}: zwei Hinweise zu dicht beieinander.`);
+
+  // Nichts doppelt: Ein neuer Hinweis hält Abstand zu jeder Weg-Karte auf
+  // dieselbe Seite, und eine Weg-Karte mitten im Text belegt einen Platz.
+  if (!plan.ziel.eigenerWeg) {
+    const vorhanden = gleichwertigePositionen(article.sections, plan.ziel.to);
+    const enden = [];
+    let lauf = 0;
+    for (const section of article.sections) {
+      lauf += zaehleWoerter(collectBlockText(section.blocks, [section.heading]));
+      enden.push(lauf);
+    }
+    const abstand = Math.max(MIN_ABSTAND_WOERTER, MIN_ABSTAND_ANTEIL * lauf);
+    for (const index of plan.mitteNach) {
+      expect(vorhanden.every((position) => Math.abs(position - enden[index]) >= abstand), `${label}: Hinweis nach Abschnitt ${index} doppelt eine Weg-Karte auf ${plan.ziel.to} (unter ${Math.round(abstand)} Wörter Abstand).`);
+    }
+    const inMitte = vorhanden.filter((position) => position / lauf >= MITTE_BEREICH[0] && position / lauf <= MITTE_BEREICH[1]).length;
+    const plaetze = lauf >= ZWEITER_HINWEIS_AB_WOERTERN ? 2 : 1;
+    expect(plan.mitteNach.length + inMitte <= Math.max(plaetze, inMitte), `${label}: ${plan.mitteNach.length} neue Hinweise, obwohl schon ${inMitte} Weg-Karte(n) mitten im Text auf ${plan.ziel.to} zeigen.`);
+  }
 
   // Abschluss.
   expect(['block', 'rechner', 'internalCta', 'eigen'].includes(plan.ende), `${label}: unbekannter Abschluss ${plan.ende}.`);
