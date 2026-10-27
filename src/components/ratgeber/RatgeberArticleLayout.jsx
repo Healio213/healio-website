@@ -26,6 +26,8 @@ import {
 import { getRatgeberPath } from '@/content/ratgeber/paths';
 import { getAltersvorsorgeRelatedTitle } from '@/content/ratgeber/altersvorsorge/related';
 import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
+import { planRatgeberLeistungsweg } from '@/content/leistungsweg';
+import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '@/components/leistungsweg/LeistungsHinweis';
 
 // Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
 // Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
@@ -340,6 +342,9 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
   const showToc = useMemo(() => shouldShowToc(article), [article]);
   // Rechner-Karte am Ende, über die Themengruppe gesteuert (rechnerWege.js).
   const rechner = useMemo(() => resolveRatgeberRechner(article, groupId), [article, groupId]);
+  // Leistungsweg (27.10.2026): Zwischendurch-Hinweis und Abschluss zur
+  // passenden Leistungsseite, zentral geplant in src/content/leistungsweg.js.
+  const leistungsweg = useMemo(() => planRatgeberLeistungsweg(article, groupId), [article, groupId]);
   const canonicalUrl = `https://healio.de/ratgeber/${article.slug}`;
 
   const schemaMarkup = useMemo(() => {
@@ -443,7 +448,8 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
           )}
 
           {article.sections.map((section, sectionIndex) => (
-            <section key={section.id} id={section.id} className="mt-10 scroll-mt-28 sm:mt-14">
+            <React.Fragment key={section.id}>
+            <section id={section.id} className="mt-10 scroll-mt-28 sm:mt-14">
               <h2 className="break-words font-display text-2xl font-extrabold leading-snug tracking-[-0.02em] text-[#07111f] hyphens-auto sm:text-3xl sm:hyphens-manual">
                 {section.heading}
               </h2>
@@ -460,6 +466,8 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
                 </div>
               )}
             </section>
+            {leistungsweg.mitteNach.includes(sectionIndex) && <LeistungsHinweisMitte ziel={leistungsweg.ziel} />}
+            </React.Fragment>
           ))}
 
           {article.factNugget && (
@@ -506,7 +514,16 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
               <div className="mt-6 sm:mt-8">
                 <RatgeberInternalCtaButton to={internalCtaUrl} label={article.internalCta.label} />
               </div>
+              {leistungsweg.ende === 'internalCta' && leistungsweg.alleBausteine && (
+                <div className="mt-3 flex justify-center sm:justify-start">
+                  <AlleBausteineLink />
+                </div>
+              )}
             </section>
+          )}
+
+          {leistungsweg.ende === 'block' && (
+            <LeistungsHinweisEnde ziel={leistungsweg.ziel} alleBausteine={leistungsweg.alleBausteine} />
           )}
 
           {article.onward && (
@@ -531,7 +548,7 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
             </nav>
           )}
 
-          {rechner && <RechnerKarte rechner={rechner} />}
+          {rechner && <RechnerKarte rechner={rechner} alleBausteine={leistungsweg.ende === 'rechner' && leistungsweg.alleBausteine} />}
 
           {article.sources && <SourcesBlock sources={article.sources} />}
 

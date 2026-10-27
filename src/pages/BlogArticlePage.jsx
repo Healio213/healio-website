@@ -15,6 +15,8 @@ import {
 } from '@/lib/blogSeo';
 import DOMPurify from 'dompurify';
 import { sanitizeRichHtml } from '@/lib/contentSecurity';
+import { planBlogLeistungsweg, teileBlogHtml } from '@/content/leistungsweg';
+import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '@/components/leistungsweg/LeistungsHinweis';
 
 // Leer = same-origin. Der Abruf laeuft ueber healio.de und wird von
 // Vercel an app.healio.de weitergereicht (Rewrite in vercel.json,
@@ -34,6 +36,25 @@ const TARGET_GROUP_KEYS = {
   physiotherapeut: 'categories.physiotherapie',
   arbeitgeber: 'categories.arbeitgeber',
 };
+
+const ARTICLE_PROSE_CLASS = `prose prose-lg max-w-none
+              prose-headings:text-[#464f5d] prose-headings:font-bold
+              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+              prose-p:text-gray-700 prose-p:leading-relaxed
+              prose-strong:text-[#464f5d]
+              prose-a:text-[#25c990] prose-a:no-underline hover:prose-a:underline
+              prose-ul:text-gray-700 prose-li:mb-1
+              prose-blockquote:border-l-[#25c990] prose-blockquote:bg-[#e8f8f0] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg`;
+
+// Geteilter Artikeltext: Liegt der Text in einer Hülle (<article>), sitzen
+// die Außenabstände an deren erstem und letztem Kind. Sie fallen an der
+// Teilungsstelle weg, damit der Hinweis gleichmäßig Luft hat.
+const blogProseClass = (index, count) => [
+  ARTICLE_PROSE_CLASS,
+  index > 0 ? 'mt-10 [&>article>:first-child]:mt-0' : '',
+  index < count - 1 ? '[&>article>:last-child]:mb-0' : '',
+].filter(Boolean).join(' ');
 
 const stripLeadingArticleHeading = (html) => {
   if (!html) return '';
@@ -178,6 +199,14 @@ const BlogArticlePage = () => {
     lang,
   });
   const articleCtaCopyKey = `articleCta.${articleCta.copyKey}`;
+  // Leistungsweg (27.10.2026): Hinweis im Textverlauf an einer H2-Grenze und
+  // Abschluss zur passenden Leistungsseite (src/content/leistungsweg.js).
+  const articleBodyParts = teileBlogHtml(articleBodyHtml);
+  const leistungsweg = planBlogLeistungsweg({
+    slug: article.slug,
+    targetGroup: article.target_group,
+    ctaHref: articleCta.href,
+  });
 
   return (
     <>
@@ -235,18 +264,19 @@ const BlogArticlePage = () => {
 
         {/* Article Content */}
         <div className="max-w-3xl mx-auto px-4">
-          <div
-            className="prose prose-lg max-w-none
-              prose-headings:text-[#464f5d] prose-headings:font-bold
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-gray-700 prose-p:leading-relaxed
-              prose-strong:text-[#464f5d]
-              prose-a:text-[#25c990] prose-a:no-underline hover:prose-a:underline
-              prose-ul:text-gray-700 prose-li:mb-1
-              prose-blockquote:border-l-[#25c990] prose-blockquote:bg-[#e8f8f0] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg"
-            dangerouslySetInnerHTML={{ __html: articleBodyHtml }}
-          />
+          {articleBodyParts.map((partHtml, index) => (
+            <React.Fragment key={`teil-${index}`}>
+              {index > 0 && <LeistungsHinweisMitte ziel={leistungsweg.ziel} />}
+              <div
+                className={blogProseClass(index, articleBodyParts.length)}
+                dangerouslySetInnerHTML={{ __html: partHtml }}
+              />
+            </React.Fragment>
+          ))}
+
+          {leistungsweg.ende === 'block' && (
+            <LeistungsHinweisEnde ziel={leistungsweg.ziel} alleBausteine={leistungsweg.alleBausteine} />
+          )}
 
           {relatedLinks.length > 0 && (
             <aside className="mt-12 rounded-2xl border border-emerald-100 bg-[#f4fbf8] p-6 sm:p-8">
@@ -296,6 +326,11 @@ const BlogArticlePage = () => {
                 {t('bookConsultation')}
               </Link>
             </div>
+            {leistungsweg.ende === 'zielkasten' && leistungsweg.alleBausteine && (
+              <div className="mt-4 flex justify-center">
+                <AlleBausteineLink ton="gruen" />
+              </div>
+            )}
           </div>
         </div>
       </article>

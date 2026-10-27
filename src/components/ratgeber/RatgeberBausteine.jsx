@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, ChevronDown, Plus } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { withAdClickIds } from '@/lib/ratgeber-cta';
+import { AlleBausteineLink } from '@/components/leistungsweg/LeistungsHinweis';
 
 /**
  * Optionale Bausteine der Ratgeber-Vorlage (Zahn-Ratgeber, 06.10.2026).
@@ -379,8 +380,10 @@ export const PathLink = ({ block }) => {
 // Ziele bekommen wie die Weg-Karten nur eine gültige Klick-Kennung angehängt,
 // externe (kassenboost.de) öffnen in neuem Tab. Die Karte selbst misst nichts:
 // kein Ereignis, kein Pixel, auch nicht auf gesperrten Seiten. Tippfläche des
-// Knopfs 52 px hoch, auf dem Handy volle Breite.
-export const RechnerKarte = ({ rechner }) => {
+// Knopfs 52 px hoch, auf dem Handy volle Breite. Zeigt die Karte schon auf die
+// Leistungsseite des Artikels (src/content/leistungsweg.js), steht neben dem
+// Knopf der Textlink „Alle Bausteine ansehen“ statt eines zweiten Blocks.
+export const RechnerKarte = ({ rechner, alleBausteine = false }) => {
   const { search } = useLocation();
   if (!rechner) return null;
   const buttonClass = `inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.28)] transition hover:bg-[#5ee0b1] sm:w-auto ${FOCUS_RING}`;
@@ -413,9 +416,9 @@ export const RechnerKarte = ({ rechner }) => {
       {rechner.text && (
         <p className="relative mt-4 text-base leading-7 text-slate-300 sm:text-[1.05rem] sm:leading-8">{rechner.text}</p>
       )}
-      <div className="relative mt-5 sm:mt-6">
+      <div className={`relative mt-5 sm:mt-6 ${alleBausteine ? 'flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3' : ''}`}>
         {rechner.to ? (
-          <Link to={withAdClickIds(rechner.to, search)} data-ratgeber-path="rechner" className={buttonClass}>
+          <Link to={withAdClickIds(rechner.to, search)} data-ratgeber-path="rechner" className={`${buttonClass} ${alleBausteine ? 'sm:shrink-0 sm:whitespace-nowrap' : ''}`}>
             {buttonBody}
           </Link>
         ) : (
@@ -423,6 +426,7 @@ export const RechnerKarte = ({ rechner }) => {
             {buttonBody}
           </a>
         )}
+        {alleBausteine && <AlleBausteineLink ton="dunkel" />}
       </div>
     </section>
   );

@@ -20,6 +20,8 @@ import {
   createBlogArticleSchema as createNormalizedBlogArticleSchema,
   getBlogRelatedLinks,
 } from '../src/lib/blogSeo.js';
+import { planBlogLeistungsweg, teileBlogHtml } from '../src/content/leistungsweg.js';
+import { leistungsHinweisEndeHtml, leistungsHinweisMitteHtml } from '../src/lib/leistungswegMarkup.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -203,6 +205,16 @@ function createStaticBlogArticleHtml(article) {
     article.reading_time_minutes ? `${article.reading_time_minutes} Min. Lesezeit` : '',
   ].filter(Boolean).join(' · ');
   const relatedLinks = getBlogRelatedLinks(article.slug);
+  // Leistungsweg (27.10.2026): wie BlogArticlePage.jsx ein Hinweis an einer
+  // H2-Grenze und am Ende der Abschluss-Block. Der Ziel-Kasten der geladenen
+  // Seite fehlt hier, deshalb steht der Block im statischen HTML immer.
+  const leistungsweg = planBlogLeistungsweg({ slug: article.slug, targetGroup: article.target_group });
+  const contentMarkup = teileBlogHtml(safeContent)
+    .map((part, index) => (index === 0
+      ? `<div class="prose prose-lg max-w-none">${part}</div>`
+      : `${leistungsHinweisMitteHtml(leistungsweg.ziel)}\n        <div class="prose prose-lg max-w-none mt-10">${part}</div>`))
+    .join('\n        ');
+  const leistungswegEnde = leistungsHinweisEndeHtml(leistungsweg.ziel);
   const relatedMarkup = relatedLinks.length > 0
     ? `<aside class="mt-12 rounded-2xl border border-emerald-100 bg-[#f4fbf8] p-6 sm:p-8">
         <h2 class="text-xl font-bold text-[#464f5d] mb-4">Passend zu diesem Thema</h2>
@@ -220,7 +232,8 @@ function createStaticBlogArticleHtml(article) {
         <p class="text-sm text-gray-500">${escapeHtml(meta)}</p>
       </header>
       <div class="max-w-3xl mx-auto px-4">
-        <div class="prose prose-lg max-w-none">${safeContent}</div>
+        ${contentMarkup}
+        ${leistungswegEnde}
         ${relatedMarkup}
       </div>
     </article>
