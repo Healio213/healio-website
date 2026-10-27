@@ -30,7 +30,11 @@
  *   - Zahn, stationär, Tier: Formulierungen der Karten auf /leistungen
  *     (src/i18n/locales/de/leistungen.json, paths.items),
  *   - Schwangerschaft: Vorsorge-Topf auch bei festgestellter Schwangerschaft
- *     (src/components/BenefitFunnelPage.jsx).
+ *     (src/components/BenefitFunnelPage.jsx),
+ *   - ambulant/schwangerschaft: Vorsorge-Untersuchungen wie Feinultraschall
+ *     je nach Tarif 50 bis 100 Prozent, auch bei festgestellter
+ *     Schwangerschaft (Ratgeber schwanger-zusatzversicherung: Tabelle
+ *     „Vorsorge-Topf je Tarifstufe“, „Kurz gesagt“, Schlussabsatz).
  *
  * Eine Abschluss-Karte (Frank, 27.10.2026): Am Ende steht genau eine Karte auf
  * eine Healio-Seite, dazu der Textlink „Alle Bausteine ansehen“. Zeigt die
@@ -40,6 +44,14 @@
  * Karten wie der KassenBoost-Vergleich zählen nicht als Healio-Seite.
  * Knopftexte nennen den Baustein („Baustein … ansehen“, „Zum Baustein …“),
  * nie „Zur Seite …“.
+ *
+ * SDK-Weg in der Schwangerschaft (Frank, 27.10.2026: „Das musst du auf den
+ * SDK-Tarif ziehen“): schwanger-zusatzversicherung führt zu /ambulant. Am
+ * Ende steht nur ihr Schlussknopf „SDK-Tarife ansehen“ (/ambulant#tarifwahl)
+ * mit dem Textlink auf alle Bausteine, kein Block auf /schwangerschaft. Der
+ * Hinweis im Text (Variante schwangerschaft) führt über den Anker direkt zur
+ * SDK-Tarifwahl, weil der UKV-Vorsorge-Baustein auf /ambulant für eine
+ * bestehende Schwangerschaft nicht gedacht ist.
  */
 
 import { collectBlockText } from './ratgeber/articleText.js';
@@ -67,6 +79,8 @@ export const MIN_ABSTAND_WOERTER = 300;
 // mitte: frage (fett), text (ein Satz), label (Knopf)
 // ende:  titel, text (ein Satz Nutzen), label (Hauptknopf)
 // alleBausteine: Textlink „Alle Bausteine ansehen“ auf /leistungen zeigen.
+// anker (nur Varianten): Hinweis und Abschluss springen auf diesen Abschnitt
+//   der Zielseite. Die Zuordnung prüft weiter nur den Pfad (to).
 export const LEISTUNGSZIELE = Object.freeze({
   ambulant: {
     to: '/ambulant',
@@ -122,6 +136,17 @@ export const LEISTUNGSZIELE = Object.freeze({
         ende: {
           titel: 'Welcher Baustein hilft deinen Patienten?',
           text: 'Ein Tarif für Heilpraktiker, Osteopathie, Brille und Vorsorge, und jeder Topf steht ab Beginn in voller Höhe zur Verfügung. Gesundheitsfragen ja, keine Ablehnung.',
+        },
+      },
+      // Schon schwanger (schwanger-zusatzversicherung): direkt zur
+      // SDK-Tarifwahl, Knopf wie der Schlussknopf des Ratgebers.
+      schwangerschaft: {
+        icon: 'pregnancy',
+        anker: 'tarifwahl',
+        mitte: {
+          frage: 'Vorsorge wie den Feinultraschall selbst zahlen?',
+          text: 'Der Baustein ambulant erstattet sie je nach Tarif zu 50 bis 100 Prozent, auch bei festgestellter Schwangerschaft.',
+          label: 'SDK-Tarife ansehen',
         },
       },
     },
@@ -300,6 +325,8 @@ const SCHWANGERSCHAFT = [
   // Schwangerschaftsseite mit Bonus-Check, Vorsorge-Extras und Klinikschutz
   // fürs Kind. baby-geplant-zusatzversicherung bleibt bei /stationaer:
   // noch nicht schwanger, und Kinderwunsch ist kein Tarifargument.
+  // schwanger-zusatzversicherung führt seit 27.10.2026 zur SDK auf
+  // /ambulant (siehe RATGEBER_ZIEL_JE_SLUG).
   // Die neun Artikel der Gruppe familie schalten die Rechner-Karte
   // „Klinikschutz für die Familie“ ab (rechner: false): ein Abschluss, eine
   // Karte. Den Klinikschutz fürs Kind zeigt /schwangerschaft selbst
@@ -309,7 +336,6 @@ const SCHWANGERSCHAFT = [
   'hebamme-kosten-krankenkasse',
   'babybonus-krankenkasse',
   'hebamme-rufbereitschaft',
-  'schwanger-zusatzversicherung',
   'geburtsvorbereitungskurs',
   'aok-babybonus',
   'geburtsvorbereitungskurs-partner',
@@ -342,6 +368,9 @@ export const RATGEBER_ZIEL_JE_SLUG = Object.freeze({
   // für Kinder (/stationaer#familie, Rechner-Karte der Gruppe) mit Textlink
   // auf alle Bausteine, statt Übersichts-Block plus Rechner-Karte.
   'familienversicherung-krankenkasse': { ziel: 'stationaer', variante: 'familie' },
+  // SDK-Weg (Frank, 27.10.2026): Ende über den Schlussknopf „SDK-Tarife
+  // ansehen“ auf /ambulant#tarifwahl plus „Alle Bausteine ansehen“.
+  'schwanger-zusatzversicherung': { ziel: 'ambulant', variante: 'schwangerschaft' },
 });
 
 const RUECKFALL = Object.freeze({ ziel: 'leistungen' });
@@ -407,6 +436,8 @@ export const getLeistungsziel = (zielId, variante = null) => {
     id: LEISTUNGSZIELE[zielId] ? zielId : 'leistungen',
     variante: abweichung === basis.varianten?.[variante] ? variante : null,
     to: basis.to,
+    // Klickziel von Hinweis und Abschluss, mit Anker der Variante.
+    link: abweichung.anker ? `${basis.to}#${abweichung.anker}` : basis.to,
     icon: abweichung.icon || basis.icon,
     alleBausteine: basis.alleBausteine,
     eigenerWeg: Boolean(basis.eigenerWeg),

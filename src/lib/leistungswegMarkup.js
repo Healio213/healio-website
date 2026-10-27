@@ -111,7 +111,7 @@ export const alleBausteineHtml = (ton = 'hell') => `<a href="${LEISTUNGEN_PFAD}"
 export const leistungsHinweisMitteHtml = (ziel) => {
   const k = LEISTUNGSWEG_KLASSEN;
   const { frage, text, label } = ziel.mitte;
-  return `<aside aria-label="Passender Baustein" data-leistungsweg="mitte" data-leistungsziel="${escapeHtml(ziel.id)}" class="${k.mitteRahmen}"><a href="${escapeHtml(ziel.to)}" class="${k.mitteKarte}"><span class="${k.mitteSchein}" aria-hidden="true"></span>${figurHtml(ziel.icon, 'sm', k.mitteIcon)}<span class="${k.mitteFrage}">${escapeHtml(frage)}</span><span class="${k.mitteSatz}">${escapeHtml(text)}</span><span class="${k.mitteKnopf}">${escapeHtml(label)}<span class="${k.pfeilKreisKlein}">${PFEIL_SVG}</span></span></a></aside>`;
+  return `<aside aria-label="Passender Baustein" data-leistungsweg="mitte" data-leistungsziel="${escapeHtml(ziel.id)}" class="${k.mitteRahmen}"><a href="${escapeHtml(ziel.link || ziel.to)}" class="${k.mitteKarte}"><span class="${k.mitteSchein}" aria-hidden="true"></span>${figurHtml(ziel.icon, 'sm', k.mitteIcon)}<span class="${k.mitteFrage}">${escapeHtml(frage)}</span><span class="${k.mitteSatz}">${escapeHtml(text)}</span><span class="${k.mitteKnopf}">${escapeHtml(label)}<span class="${k.pfeilKreisKlein}">${PFEIL_SVG}</span></span></a></aside>`;
 };
 
 /**
@@ -120,5 +120,5 @@ export const leistungsHinweisMitteHtml = (ziel) => {
 export const leistungsHinweisEndeHtml = (ziel, { alleBausteine = ziel.alleBausteine } = {}) => {
   const k = LEISTUNGSWEG_KLASSEN;
   const { titel, text, label } = ziel.ende;
-  return `<section aria-labelledby="leistungsweg-heading" data-leistungsweg="ende" data-leistungsziel="${escapeHtml(ziel.id)}" class="${k.endeRahmen}"><span class="${k.endeScheinOben}" aria-hidden="true"></span><span class="${k.endeScheinUnten}" aria-hidden="true"></span><div class="${k.endeKopf}"><h2 id="leistungsweg-heading" class="${k.endeTitel}">${escapeHtml(titel)}</h2>${figurHtml(ziel.icon, 'md', k.endeIcon)}<p class="${k.endeSatz}">${escapeHtml(text)}</p></div><div class="${k.endeAktionen}"><a href="${escapeHtml(ziel.to)}" class="${k.endeKnopf}">${escapeHtml(label)}<span class="${k.pfeilKreis}">${PFEIL_SVG}</span></a>${alleBausteine ? alleBausteineHtml('hell') : ''}</div></section>`;
+  return `<section aria-labelledby="leistungsweg-heading" data-leistungsweg="ende" data-leistungsziel="${escapeHtml(ziel.id)}" class="${k.endeRahmen}"><span class="${k.endeScheinOben}" aria-hidden="true"></span><span class="${k.endeScheinUnten}" aria-hidden="true"></span><div class="${k.endeKopf}"><h2 id="leistungsweg-heading" class="${k.endeTitel}">${escapeHtml(titel)}</h2>${figurHtml(ziel.icon, 'md', k.endeIcon)}<p class="${k.endeSatz}">${escapeHtml(text)}</p></div><div class="${k.endeAktionen}"><a href="${escapeHtml(ziel.link || ziel.to)}" class="${k.endeKnopf}">${escapeHtml(label)}<span class="${k.pfeilKreis}">${PFEIL_SVG}</span></a>${alleBausteine ? alleBausteineHtml('hell') : ''}</div></section>`;
 };

@@ -12,7 +12,8 @@
  *   3. der Abschluss: eigener Block oder ein gleichwertiger Abschluss auf
  *      dieselbe Seite, dann mit Textlink „Alle Bausteine ansehen“; neben dem
  *      eigenen Block keine zweite Karte auf eine andere Healio-Seite
- *      (Frank, 27.10.2026: eine Karte),
+ *      (Frank, 27.10.2026: eine Karte); schwanger-zusatzversicherung endet
+ *      nur mit dem SDK-Schlussknopf auf /ambulant#tarifwahl,
  *   4. die Texte (Du-Form, Umlaute, keine Gedankenstriche, Sperrwörter,
  *      Nutzen vor Kassenbonus, Gesundheitsfragen ja, keine Ablehnung),
  *   5. die Verdrahtung in Vorlage, Blogseite und statischem Blog-HTML, ohne
@@ -119,7 +120,7 @@ const SLUG_ERWARTET = {
   'familienversicherung-krankenkasse': 'stationaer',
   'krankenkassen-bonus-zusatzversicherung': 'leistungen',
   'schwangerschaft-worauf-achten': 'schwangerschaft',
-  'schwanger-zusatzversicherung': 'schwangerschaft',
+  'schwanger-zusatzversicherung': 'ambulant',
   'hebamme-kosten-krankenkasse': 'schwangerschaft',
   'baby-geplant-zusatzversicherung': 'stationaer',
   'praeventionskurs-krankenkasse': 'ambulant',
@@ -131,7 +132,14 @@ for (const [slug, ziel] of Object.entries(SLUG_ERWARTET)) {
 // Eine Abschluss-Karte (Frank, 27.10.2026): Die Schwangerschafts-Ratgeber der
 // Gruppe familie enden mit dem Block auf /schwangerschaft ohne Rechner-Karte,
 // die Familienversicherung mit der Rechner-Karte auf den Klinikschutz für
-// Kinder plus Textlink auf alle Bausteine.
+// Kinder plus Textlink auf alle Bausteine. schwanger-zusatzversicherung endet
+// nur mit ihrem Schlussknopf „SDK-Tarife ansehen“ auf /ambulant#tarifwahl
+// plus Textlink, ohne Block auf /schwangerschaft („auf den SDK-Tarif ziehen“).
+const SDK_SCHWANGER = {
+  slug: 'schwanger-zusatzversicherung',
+  link: '/ambulant#tarifwahl',
+  label: 'SDK-Tarife ansehen',
+};
 const EINE_KARTE_ERWARTET = {
   'babybonus-krankenkasse': { ende: 'block', ziel: 'schwangerschaft' },
   'hebamme-rufbereitschaft': { ende: 'block', ziel: 'schwangerschaft' },
@@ -143,6 +151,7 @@ const EINE_KARTE_ERWARTET = {
   'schwangerschaft-krankenkasse-melden': { ende: 'block', ziel: 'schwangerschaft' },
   'tk-schwangerschaft': { ende: 'block', ziel: 'schwangerschaft' },
   'familienversicherung-krankenkasse': { ende: 'rechner', ziel: 'stationaer', rechnerZiel: '/stationaer#familie' },
+  [SDK_SCHWANGER.slug]: { ende: 'internalCta', ziel: 'ambulant', schlussknopf: SDK_SCHWANGER },
 };
 for (const [slug, erwartet] of Object.entries(EINE_KARTE_ERWARTET)) {
   const article = ratgeberArticles.find((entry) => entry.slug === slug);
@@ -154,6 +163,11 @@ for (const [slug, erwartet] of Object.entries(EINE_KARTE_ERWARTET)) {
   expect(plan.ziel.id === erwartet.ziel && plan.ende === erwartet.ende, `Eine Karte: ${slug} endet mit ${plan.ende} auf ${plan.ziel.to} (erwartet ${erwartet.ende} auf ${LEISTUNGSZIELE[erwartet.ziel].to}).`);
   if (erwartet.ende === 'block') expect(article.rechner === false && !rechner, `Eine Karte: ${slug} braucht rechner: false, sonst folgt auf den Block die Karte zu /stationaer#familie.`);
   if (erwartet.rechnerZiel) expect(rechner?.to === erwartet.rechnerZiel && plan.alleBausteine, `Eine Karte: ${slug} endet mit der Karte zu ${erwartet.rechnerZiel} und dem Textlink auf alle Bausteine.`);
+  if (erwartet.schlussknopf) {
+    const { link, label } = erwartet.schlussknopf;
+    expect(article.internalCta?.to === link && article.internalCta?.label === label && !rechner && plan.alleBausteine, `Eine Karte: ${slug} endet nur mit dem Schlussknopf „${label}“ auf ${link} und dem Textlink auf alle Bausteine.`);
+    expect(plan.ziel.variante === 'schwangerschaft' && plan.ziel.link === link && plan.ziel.mitte.label === label, `Eine Karte: Der Hinweis im Text von ${slug} führt wie der Schlussknopf mit „${label}“ auf ${link}.`);
+  }
 }
 
 // Zuzahlungs-Ratgeber zeigen auf den Zuzahlungs-Topf, nicht auf Heilpraktiker oder Brille.
@@ -356,6 +370,20 @@ if (fs.existsSync(path.join(distDir, 'index.html'))) {
     expect(ende === (plan.ende === 'block' ? 1 : 0), `${label}: Abschluss-Block ${ende}-mal (erwartet ${plan.ende === 'block' ? 1 : 0}).`);
     const interneRechnerKarten = (html.match(/data-ratgeber-rechner="\//g) || []).length;
     if (plan.ende === 'block') expect(interneRechnerKarten === 0, `${label}: neben dem Abschluss-Block steht noch eine Rechner-Karte auf eine Healio-Seite.`);
+    if (plan.ende === 'internalCta') {
+      expect(interneRechnerKarten === 0, `${label}: neben dem Schlussknopf steht noch eine Rechner-Karte auf eine Healio-Seite.`);
+      const schlussknoepfe = [...html.matchAll(/<a\b[^>]*data-ratgeber-internal-cta="end"[^>]*>/g)].map((match) => match[0].match(/href="([^"]*)"/)?.[1]?.replace(/&amp;/g, '&') || '');
+      expect(schlussknoepfe.length === 1 && basisPfad(schlussknoepfe[0]) === plan.ziel.to, `${label}: ${schlussknoepfe.length} Schlussknöpfe statt einem auf ${plan.ziel.to}.`);
+    }
+    // Hinweis im Text und Abschluss tragen nur das eigene Ziel.
+    const fremdeZiele = [...new Set([...html.matchAll(/data-leistungsziel="([^"]+)"/g)].map((match) => match[1]))].filter((id) => id !== plan.ziel.id);
+    expect(fremdeZiele.length === 0, `${label}: Leistungsweg zeigt zusätzlich auf ${fremdeZiele.join(', ')}.`);
+    if (article.slug === SDK_SCHWANGER.slug) {
+      const mitteLinks = [...html.matchAll(/<aside\b[^>]*data-leistungsweg="mitte"[^>]*>\s*<a\b[^>]*href="([^"]*)"/g)].map((match) => match[1].replace(/&amp;/g, '&'));
+      expect(mitteLinks.length === plan.mitteNach.length && mitteLinks.every((href) => href === SDK_SCHWANGER.link), `${label}: Hinweis im Text führt nicht auf ${SDK_SCHWANGER.link} (${mitteLinks.join(', ') || 'keiner'}).`);
+      expect(!hrefsZu(html, '/schwangerschaft').length, `${label}: Am Ende nur der SDK-Weg, kein Link auf /schwangerschaft.`);
+      expect(html.includes(`>${SDK_SCHWANGER.label}<`), `${label}: Schlussknopf „${SDK_SCHWANGER.label}“ fehlt.`);
+    }
     if (plan.ende === 'rechner') expect(interneRechnerKarten === 1, `${label}: ${interneRechnerKarten} Rechner-Karten statt einer.`);
     if (plan.alleBausteine) expect(hatAlleLink(html), `${label}: Textlink „Alle Bausteine ansehen“ fehlt.`);
     if (plan.ziel.id === 'leistungen') expect(hrefsZu(html, LEISTUNGEN_PFAD).length > 0, `${label}: Rückfall ohne Link auf /leistungen.`);

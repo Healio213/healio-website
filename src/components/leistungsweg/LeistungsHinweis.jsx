@@ -62,7 +62,7 @@ export const LeistungsHinweisMitte = ({ ziel }) => {
   const { frage, text, label } = ziel.mitte;
   return (
     <aside aria-label="Passender Baustein" data-leistungsweg="mitte" data-leistungsziel={ziel.id} className={K.mitteRahmen}>
-      <Link to={withAdClickIds(ziel.to, search)} className={K.mitteKarte}>
+      <Link to={withAdClickIds(ziel.link || ziel.to, search)} className={K.mitteKarte}>
         <span className={K.mitteSchein} aria-hidden="true" />
         <FriendlyIcon kind={ziel.icon} tone="mint" size="sm" className={K.mitteIcon} />
         <span className={K.mitteFrage}>{frage}</span>
@@ -90,7 +90,7 @@ export const LeistungsHinweisEnde = ({ ziel, alleBausteine = ziel?.alleBausteine
         <p className={K.endeSatz}>{text}</p>
       </div>
       <div className={K.endeAktionen}>
-        <Link to={withAdClickIds(ziel.to, search)} className={K.endeKnopf}>
+        <Link to={withAdClickIds(ziel.link || ziel.to, search)} className={K.endeKnopf}>
           {label}
           <Pfeil className={K.pfeilKreis} />
         </Link>
