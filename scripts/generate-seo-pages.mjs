@@ -355,6 +355,9 @@ async function loadBlogArticles() {
 }
 
 function generateHtml(route, article = null) {
+  if (article) {
+    route = { ...route, title: article.title, description: article.meta_description };
+  }
   let html = template;
   const e = escapeHtml;
 

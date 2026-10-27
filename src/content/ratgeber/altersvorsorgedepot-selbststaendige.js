@@ -5,10 +5,12 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'selbststaendige',
     audience: 'selbststaendige',
     nextStep: 'check',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
     metaTitle: 'Altersvorsorgedepot für Selbstständige ab 2027 | Healio',
     metaDescription: 'Welche Selbstständigen ab 2027 förderberechtigt sind: Alter, Einkunftsart, Steuererklärung und Beitrag prüfen, bevor du mit bis zu 540 EUR Zulage planst.',
     headline: 'Altersvorsorgedepot für Selbstständige: Wer bekommt ab 2027 eine Zulage?',
-    lead: 'Die Reform öffnet die geförderte private Altersvorsorge für weitere Selbstständige. „Ich bin selbstständig“ ist trotzdem noch kein vollständiger Fördernachweis. Für die neue Berechtigung kommt es auf Alter, Einkunftsart und die abgegebene Steuererklärung für das Beitragsjahr an. Wenn diese Grundlage passt, kannst du die Förderung mit einem tragbaren Jahresbeitrag berechnen.',
+    lead: 'Als Selbstständiger kannst du ab 2027 die neue Förderung nutzen, wenn du die gesetzlichen Voraussetzungen erfüllst: Du bist unter 67, erzielst im Beitragsjahr entsprechende gewerbliche oder selbstständige Einkünfte und gibst dafür eine Einkommensteuererklärung ab. Bei unmittelbarer Berechtigung sind bis zu 540 EUR Grundzulage im Jahr möglich. Hier prüfst du zuerst deinen Zugang und berechnest anschließend, welcher Beitrag zu deinem Budget passt.',
     listTeaser: 'Die neuen Voraussetzungen verständlich prüfen und zwischen betrieblicher Reserve, Altersvorsorgebeitrag und Zulage unterscheiden.',
     sections: [
       { id: 'kurz-gesagt', heading: 'Kurz gesagt', blocks: [
@@ -55,6 +57,7 @@ export const article = makeAltersvorsorgeArticle({
       { question: 'Bekomme ich 540 EUR auch bei 50 EUR Beitrag im Monat?', answer: 'Bei zwölf Zahlungen von 50 EUR sind es im neuen System 600 EUR Eigenbeitrag und 240 EUR Grundzulage. Die maximale Grundzulage von 540 EUR wird bei 1.800 EUR Jahresbeitrag erreicht.' },
       { question: 'Muss ich die Steuererklärung schon für dasselbe Beitragsjahr abgeben?', answer: 'Die neue gesetzliche Voraussetzung bezieht sich auf die Steuererklärung für das Beitragsjahr. Plane die Abgabe und den Nachweis im Verfahren ein; die Erklärung eines anderen Jahres ersetzt diese Bedingung nicht.' },
     ],
-    sourceIds: ['gesetz', 'bmf'],
-    relatedSlugs: ['altersvorsorgedepot-schwankendes-einkommen', 'altersvorsorgedepot-oder-ruerup'],
+    sourceIds: ['gesetz', 'bmf', 'rv10a'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 geprüft: neuer Zugang für Selbstständige nach § 10a Absatz 1 Satz 5 EStG in der Fassung für 2027. Die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
+    relatedSlugs: ['altersvorsorgedepot-schwankendes-einkommen', 'altersvorsorgedepot-oder-ruerup', 'altersvorsorgedepot-foerderung'],
   });

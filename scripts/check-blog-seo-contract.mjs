@@ -25,6 +25,17 @@ const sitemap = fs.readFileSync(sitemapPath, 'utf8');
 const articleBySlug = new Map(articles.map((article) => [article.slug, article]));
 const routePaths = new Set(seoRoutes.map((route) => route.path));
 
+assert.equal(
+  applyBlogEditorialFixes({
+    slug: 'heilpraktiker-patienten-finanzierung-gesundheitsbudget',
+    updated_at: '2026-10-27T10:00:00.000Z',
+    published_at: '2026-04-07T10:21:14.000Z',
+    content_html: '<p>Aktueller CMS-Text</p>',
+  }).updated_at,
+  '2026-10-27T10:00:00.000Z',
+  'Eine ältere redaktionelle Korrektur darf das neuere CMS-Änderungsdatum nicht zurücksetzen.',
+);
+
 const legacyBudgetImage = 'https://healio.de/images/healio-health-pass-hero-v3.webp';
 const liveBudgetArticle = {
   ...articleBySlug.get('gesundheitsbudget-3000-euro'),
@@ -72,39 +83,6 @@ const MERGED_INTO_RATGEBER_2026_10_14 = {
 }
 
 assert.equal(articles.length, 16, 'Der geprüfte Blog-Cache muss 16 Artikel enthalten.');
-const NEW_SERIES_SLUGS_2026_09_23 = new Set([
-  'kassenbonus-was-ist-drin',
-  'krankenkasse-wechseln-laufende-behandlung',
-  'heilpraktiker-kosten-bonus-finanziert',
-  'zahnersatz-beitrag-vom-bonus',
-  'ikk-classic-bonus-schritt-fuer-schritt',
-  'bkv-und-kassenbonus-fuer-arbeitgeber',
-  'kassenbonus-schwangerschaft-vorsorge',
-  'hebammen-gesundheitsbudget-erklaeren',
-]);
-// Blog-Sammelkorrektur 06.10.2026 (Bonus 810/1.155, kostenlos, Zahn zwei Wege): neues lastmod.
-const BLOG_CORRECTION_SLUGS_2026_10_06 = new Set([
-  'bkv-und-kassenbonus-fuer-arbeitgeber',
-  'digitale-erstattung-heilpraktiker-rechnungen-zusatzversicherung',
-  'gesundheitsbudget-3000-euro',
-  'healio-konzept-fuer-hebammen',
-  'healio-konzept-fuer-heilpraktiker',
-  'healio-konzept-fuer-osteopathen',
-  'healio-konzept-fuer-tcm-praxen',
-  'heilpraktiker-kosten-bonus-finanziert',
-  'heilpraktiker-kosten-gkv-erstattung-healio',
-  'heilpraktiker-kosten-guide-2026',
-  'heilpraktiker-patienten-finanzierung-gesundheitsbudget',
-  'ikk-classic-bonus-700-euro',
-  'ikk-classic-bonus-schritt-fuer-schritt',
-  'kassenbonus-schwangerschaft-vorsorge',
-  'kassenbonus-was-ist-drin',
-  'krankenhauszusatzversicherung-sportverein-best-ager',
-  'krankenkasse-wechseln-laufende-behandlung',
-  'naturheilkunde-krankenkasse-2026',
-  'osteopathie-krankenkasse-2026',
-  'zahnersatz-beitrag-vom-bonus',
-]);
 assert.equal(BLOG_RELATED_LINK_SLUGS.length, articles.length, 'Für jeden Artikel muss eine Linkgruppe gepflegt sein.');
 assert.doesNotMatch(
   JSON.stringify(rawArticles),
@@ -119,6 +97,9 @@ assert.doesNotMatch(
 
 for (const article of articles) {
   const canonicalUrl = `https://healio.de/blog/${article.slug}`;
+  const route = seoRoutes.find((entry) => entry.path === `/blog/${article.slug}`);
+  assert.equal(route?.title, article.title, `${article.slug}: statische Route und CMS brauchen denselben Titel.`);
+  assert.equal(route?.description, article.meta_description, `${article.slug}: statische Route und CMS brauchen dieselbe Beschreibung.`);
   const schema = createBlogArticleSchema(article, canonicalUrl);
   const sourceSchema = article.structured_data?.article || {};
   const sourceMainEntity = typeof sourceSchema.mainEntityOfPage === 'string'
@@ -178,12 +159,11 @@ function sitemapEntry(url) {
 }
 
 assert.match(sitemapEntry('https://healio.de/unternehmen'), /<lastmod>2026-09-01<\/lastmod>/);
-assert.match(sitemapEntry('https://healio.de/blog'), /<lastmod>2026-09-02<\/lastmod>/);
+const currentBlogDates = articles.map((article) => new Date(article.updated_at || article.published_at).toISOString().slice(0, 10));
+assert.ok(sitemapEntry('https://healio.de/blog').includes(`<lastmod>${[...currentBlogDates].sort().at(-1)}</lastmod>`), 'Die Blogübersicht braucht das tatsächliche neueste Artikeländerungsdatum.');
 assert.match(sitemapEntry('https://healio.de/blog'), /<changefreq>weekly<\/changefreq>/);
 for (const article of articles) {
-  const expectedLastmod = article.slug === 'naturheilkunde-krankenkasse-2026' ? '2026-10-10'
-    : BLOG_CORRECTION_SLUGS_2026_10_06.has(article.slug) ? '2026-10-06'
-    : NEW_SERIES_SLUGS_2026_09_23.has(article.slug) ? '2026-09-23' : '2026-09-02';
+  const expectedLastmod = new Date(article.updated_at || article.published_at).toISOString().slice(0, 10);
   assert.match(
     sitemapEntry(`https://healio.de/blog/${article.slug}`),
     new RegExp(`<lastmod>${expectedLastmod}</lastmod>`),

@@ -46,6 +46,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 11,
 
   listTitle: 'Lohnt sich eine Zahnzusatzversicherung? Rechnung statt Bauchgefühl',
@@ -246,7 +248,7 @@ export const article = {
           items: [
             { lead: 'Diese Seite kürt keinen besten Tarif.', text: 'Die Seite zeigt, worauf es ankommt, und zwei Wege, die Healio anbietet. Welcher Tarif zu dir passt, hängt von deinen Zähnen, deinem Alter und deinem Budget ab.' },
             { lead: 'Die Beispiele sind keine Preisangaben.', text: 'Die Beiträge in der Tabelle sind angenommen, der Eigenanteil bei Krone, Brücke und Implantat ist gerechnet. Deine Rechnung entsteht in deiner Praxis, und ein Tarif erstattet nur den erstattungsfähigen Teil.' },
-            { lead: 'Ein Tarif ist für künftige Kosten da.', text: 'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.' },
+            { lead: 'Ein Tarif ist für künftige Kosten da.', text: 'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.' },
             { lead: 'Beitrag und Leistung können sich ändern.', text: 'Laut Verbraucherzentrale bleibt der Beitrag nicht stabil. Verbindlich entscheidet der Versicherer im Antrag über Annahme und Leistung.' },
           ],
         },
@@ -302,7 +304,7 @@ export const article = {
     {
       question: 'Lohnt sich eine Zahnzusatzversicherung, wenn schon etwas angeraten wurde?',
       answer:
-        'Ein normaler Tarif zahlt genau diese Behandlung nicht. Bei der UKV gilt: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist sie nicht versichert, liegt das länger zurück, ist sie wieder versichert. Für Behandlungen der letzten 2 Jahre gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
+        'Ein normaler Tarif zahlt genau diese Behandlung nicht. Bei der UKV gilt: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen der letzten 2 Jahre gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
     },
     {
       question: 'Wie rechne ich, ob sich eine Zahnzusatzversicherung lohnt?',
@@ -337,8 +339,9 @@ export const article = {
   sources: {
     checkedAt: '2026-10-07',
     checkedAtLabel: '7. Oktober 2026',
-    intro: 'Einordnung und Prüfpunkte stammen von der Verbraucherzentrale, Zuschüsse und Beträge aus Gesetz und G-BA-Richtlinie, Tarifaussagen aus den Unterlagen auf healio.de/zahn.',
+    intro: 'Einordnung und Prüfpunkte stammen von der Verbraucherzentrale, Zuschüsse und Beträge aus Gesetz und G-BA-Richtlinie, Tarifaussagen aus den Unterlagen auf healio.de/zahn. Die Aussage zu älteren Behandlungsempfehlungen wurde am 27.10.2026 präzisiert; die übrigen Belege behalten ihren angegebenen Stand.',
     items: [
+      { label: 'ZahnPRIVAT: Schutzbeginn, neue Versicherungsfälle und Tarifgrenzen', publisher: 'UKV', href: 'https://www.ukv.de/v/krankenversicherung/krankenzusatzversicherung/zahnzusatzversicherung.html', stand: 'Öffentliche Produktinformation, gezielter Abgleich des Schutzbeginns 27.10.2026', accessedAt: '27.10.2026' },
       {
         label: 'Zahnzusatzversicherung, Risiken und Vorteile',
         publisher: 'Verbraucherzentrale',

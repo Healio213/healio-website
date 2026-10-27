@@ -38,6 +38,8 @@ export const article = {
 
   publishedAt: '2026-10-06',
   publishedAtLabel: '6. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 10,
 
   listTitle: 'Zahnzusatzversicherung ohne Wartezeit: was ab dem ersten Tag gilt',
@@ -140,7 +142,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Behandlungen, die in den letzten 2 Jahren angeraten wurden oder schon laufen. Bei der UKV ist die Regel einfach. Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. „Läuft schon“ zählt immer.',
+          text: 'Behandlungen, die in den letzten 2 Jahren angeraten wurden oder schon laufen. Bei der UKV ist die Regel einfach. Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. „Läuft schon“ zählt immer.',
         },
         {
           type: 'paragraph',
@@ -299,7 +301,7 @@ export const article = {
     {
       question: 'Ist eine schon angeratene Behandlung versichert?',
       answer:
-        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Liegt das länger als 2 Jahre zurück, ist sie wieder versichert. Für Behandlungen aus den letzten 2 Jahren gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
+        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen aus den letzten 2 Jahren gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
     },
     {
       question: 'Was ist die Zahnstaffel?',
@@ -329,8 +331,9 @@ export const article = {
   sources: {
     checkedAt: '2026-10-06',
     checkedAtLabel: '6. Oktober 2026',
-    intro: 'Die Gesetzeslage, die Aussagen zu Wartezeit und Zahnstaffel, die Implantatkosten und der Festzuschuss stammen aus diesen Quellen.',
+    intro: 'Die Gesetzeslage, die Aussagen zu Wartezeit und Zahnstaffel, die Implantatkosten und der Festzuschuss stammen aus diesen Quellen. Die Aussage zu älteren Behandlungsempfehlungen wurde am 27.10.2026 präzisiert; die übrigen Belege behalten ihren angegebenen Stand.',
     items: [
+      { label: 'ZahnPRIVAT: Schutzbeginn, neue Versicherungsfälle und Tarifgrenzen', publisher: 'UKV', href: 'https://www.ukv.de/v/krankenversicherung/krankenzusatzversicherung/zahnzusatzversicherung.html', stand: 'Öffentliche Produktinformation, gezielter Abgleich des Schutzbeginns 27.10.2026', accessedAt: '27.10.2026' },
       {
         label: 'VVG § 197 (Wartezeiten)',
         publisher: 'gesetze-im-internet.de',

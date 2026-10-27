@@ -109,4 +109,26 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 const temporaryOutputPath = `${outputPath}.tmp`;
 fs.writeFileSync(temporaryOutputPath, `${JSON.stringify(normalizedArticles, null, 2)}\n`);
 fs.renameSync(temporaryOutputPath, outputPath);
+
+// Nur tatsächlich veröffentlichte Änderungsdaten übernehmen. Ein späterer
+// CMS-Text darf nicht mit dem alten Datum der ursprünglichen SEO-Welle erscheinen.
+const sitemapPath = path.join(rootDir, 'public', 'sitemap.xml');
+let sitemap = fs.readFileSync(sitemapPath, 'utf8');
+function updateLastmod(url, date) {
+  const start = sitemap.indexOf(`<loc>${url}</loc>`);
+  const end = sitemap.indexOf('</url>', start);
+  if (start < 0 || end < start) throw new Error(`Sitemap-Eintrag fehlt: ${url}`);
+  const entry = sitemap.slice(start, end);
+  if (!/<lastmod>[^<]+<\/lastmod>/.test(entry)) throw new Error(`Sitemap-Datum fehlt: ${url}`);
+  sitemap = sitemap.slice(0, start)
+    + entry.replace(/<lastmod>[^<]+<\/lastmod>/, `<lastmod>${date}</lastmod>`)
+    + sitemap.slice(end);
+}
+const articleDates = normalizedArticles.map((article) => {
+  const date = new Date(article.updated_at || article.published_at).toISOString().slice(0, 10);
+  updateLastmod(`https://healio.de/blog/${article.slug}`, date);
+  return date;
+});
+updateLastmod('https://healio.de/blog', articleDates.sort().at(-1));
+fs.writeFileSync(sitemapPath, sitemap);
 console.log(`Blog-Cache aktualisiert: ${normalizedArticles.length} veröffentlichte Artikel.`);

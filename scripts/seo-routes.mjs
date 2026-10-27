@@ -9,6 +9,8 @@ import { ratgeberArticles } from './lib/ratgeber-articles.mjs';
 import { authorSchemaFor } from '../src/content/ratgeber/authors.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
 import { faq as altersvorsorgeFaq } from '../src/content/altersvorsorgedepotContent.js';
+import { altersvorsorgeHub } from '../src/content/altersvorsorgeHubContent.js';
+import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
 /**
@@ -106,8 +108,8 @@ export const seoRoutes = [
   },
   {
     path: '/ratgeber/altersvorsorgedepot',
-    title: 'Altersvorsorgedepot: 24 Ratgeber zu Förderung und Riester | Healio',
-    description: 'Altersvorsorgedepot ab 2027 verstehen: Förderung, Riester-Wechsel, Kinderzulage, Selbstständige, Kosten und Auszahlung. Mit Beispielen und amtlichen Quellen.',
+    title: altersvorsorgeHub.title,
+    description: altersvorsorgeHub.description,
     canonical: 'https://healio.de/ratgeber/altersvorsorgedepot',
     lang: 'de',
     schemaMarkup: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Ratgeber zum Altersvorsorgedepot', url: 'https://healio.de/ratgeber/altersvorsorgedepot', hasPart: ratgeberArticles.filter(article => article.topic === 'altersvorsorge').map(article => ({ '@type': 'Article', headline: article.headline, url: `https://healio.de/ratgeber/${article.slug}` })) },
@@ -980,3 +982,18 @@ export const seoRoutes = [
     robots: 'noindex, follow',
   },
 ];
+
+// Der geprüfte CMS-Cache ist auch für die Blog-Metadaten die Quelle. Ältere
+// manuelle SEO-Titel dürfen WebPage-Schema und sichtbaren Artikel nicht trennen.
+const blogMetadata = new Map(
+  JSON.parse(readFileSync(new URL('../public/data/blog-articles-cache.json', import.meta.url), 'utf8'))
+    .map(applyBlogEditorialFixes)
+    .map((article) => [article.slug, article]),
+);
+for (const route of seoRoutes) {
+  const slug = route.path.match(/^\/blog\/([^/]+)$/)?.[1];
+  const article = blogMetadata.get(slug);
+  if (!article) continue;
+  route.title = article.title;
+  route.description = article.meta_description;
+}

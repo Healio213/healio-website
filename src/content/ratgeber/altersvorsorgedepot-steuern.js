@@ -4,17 +4,24 @@ export const article = makeAltersvorsorgeArticle({
     slug: 'altersvorsorgedepot-steuern',
     cluster: 'entscheidung',
     audience: 'standard',
-    nextStep: 'webinar',
-    metaTitle: 'Altersvorsorgedepot und Steuern: die drei Phasen | Healio',
-    metaDescription: 'Ansparphase, Sonderausgabenabzug und spätere Auszahlung beim Altersvorsorgedepot: Welche Steuerregeln du auseinanderhalten solltest.',
-    headline: 'Altersvorsorgedepot und Steuern: Was beim Sparen und bei der Auszahlung gilt',
-    lead: 'Beim Altersvorsorgedepot gehören drei Fragen auseinander: Wie werden Erträge während des Sparens behandelt? Welcher Sonderausgabenabzug ist möglich? Und was passiert bei der Auszahlung? Wer nur den Vorteil in der Ansparphase betrachtet, übersieht einen Teil der Rechnung.',
+    nextStep: 'calculator',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
+    metaTitle: 'Altersvorsorgedepot 2027: Steuern und Auszahlung | Healio',
+    metaDescription: 'Was du beim Altersvorsorgedepot absetzen kannst, wie Zulagen angerechnet werden und was bei der Auszahlung gilt. Mit Steuerbeispiel und Rechner.',
+    headline: 'Altersvorsorgedepot und Steuern: Absetzen und Auszahlung ab 2027',
+    lead: 'Beim Altersvorsorgedepot werden Erträge im Vertragsrahmen während des Sparens grundsätzlich nicht jährlich bei dir besteuert. Unmittelbar Förderberechtigte können bis zu 1.800 EUR Jahresbeitrag zuzüglich der berücksichtigten Zulagen als Sonderausgaben abziehen. Das Finanzamt verrechnet den Vorteil mit dem Zulageanspruch; nur ein Mehrbetrag bringt eine zusätzliche Steuerermäßigung. Die spätere Auszahlung ist grundsätzlich steuerpflichtig. Hier siehst du die drei Phasen und ein vereinfachtes Rechenbeispiel.',
     listTeaser: 'Zulage, Günstigerprüfung und nachgelagerte Besteuerung verständlich eingeordnet.',
     sections: [
       {
         id: 'phasen',
         heading: 'Der Zeitpunkt der Steuer ist Teil des Konzepts',
         blocks: [
+          { type: 'table', caption: 'Die drei Steuerfragen im Überblick', head: ['Phase', 'Was grundsätzlich gilt'], rows: [
+            ['Einzahlung', 'Sonderausgabenabzug und Zulage werden über die Günstigerprüfung abgestimmt'],
+            ['Erträge beim Sparen', 'Im geförderten Vertragsrahmen keine jährliche Besteuerung der Erträge bei dir'],
+            ['Auszahlung', 'Leistungen aus gefördertem Altersvorsorgevermögen werden grundsätzlich nachgelagert besteuert'],
+          ], note: 'Geförderte und nicht geförderte Vertragsanteile können unterschiedlich behandelt werden. Die Übersicht ersetzt keine persönliche Steuerberechnung.' },
           { type: 'paragraph', text: 'Die geförderte private Altersvorsorge arbeitet mit nachgelagerter Besteuerung. Das bedeutet vereinfacht: Während des Sparens gelten steuerliche Vorteile, während die späteren Leistungen grundsätzlich steuerlich berücksichtigt werden. Die Aussage, dass Erträge im Vertragsrahmen während der Ansparphase nicht jährlich bei dir besteuert werden, ist deshalb kein Versprechen einer lebenslang steuerfreien Anlage.' },
           { type: 'paragraph', text: 'Für deine Planung zählt das Geld, das du im Alter nach Steuern tatsächlich verwenden kannst. Eine Beispielrechnung mit einer Bruttoauszahlung beantwortet diese Frage noch nicht. Du brauchst dafür unter anderem deine weiteren Einkünfte und die voraussichtliche Auszahlungsform. Diese Größen können sich über Jahrzehnte ändern, weshalb eine heute genannte Nettosumme keine feste Zusage ist.' },
         ],
@@ -25,6 +32,15 @@ export const article = makeAltersvorsorgeArticle({
         blocks: [
           { type: 'paragraph', text: 'Nach den neuen Regeln können unmittelbar förderberechtigte Personen Altersvorsorgebeiträge bis zu 1.800 EUR im Jahr zuzüglich der dafür zustehenden Zulagen als Sonderausgaben berücksichtigen lassen. Das Finanzamt prüft, ob der daraus entstehende Steuervorteil günstiger ist als die Zulagenförderung. Nur ein darüber hinausgehender Vorteil führt zu einer zusätzlichen Steuerermäßigung. Das ist die Günstigerprüfung. Mittelbar Berechtigte haben keinen eigenen Sonderausgabenabzugsbetrag. Deren Beiträge und Zulagen werden unter den gesetzlichen Voraussetzungen beim unmittelbar berechtigten Ehepartner berücksichtigt.' },
           { type: 'paragraph', text: 'Du solltest also nicht eine Zulage von beispielsweise 540 EUR und einen separat ausgerechneten vollen Abzugsvorteil zusammenzählen. Beide Wege werden verrechnet. Wie das Ergebnis in deinem Fall aussieht, hängt unter anderem von deinem Einkommen und deiner steuerlichen Situation ab. Bei besonderen Fragen, etwa grenzüberschreitenden Fällen oder mehreren Vertragsarten, gehört die konkrete Berechnung in fachkundige Hände.' },
+          { type: 'table', caption: 'Vereinfachtes Beispiel mit 150 EUR Monatsbeitrag und angenommenen 30 Prozent Steuersatz', head: ['Rechenschritt', 'Betrag'], rows: [
+            ['Eigener Jahresbeitrag', '1.800 EUR'],
+            ['Grundzulage im Jahr', '540 EUR'],
+            ['Im Beispiel berücksichtigter Sonderausgabenbetrag', '2.340 EUR'],
+            ['Rechnerischer Abzugsvorteil bei pauschal 30 Prozent', '702 EUR'],
+            ['Abzüglich berücksichtigter Zulage', '540 EUR'],
+            ['Möglicher zusätzlicher Steuervorteil im Modell', '162 EUR'],
+          ], note: 'Beispiel bei unmittelbarer Förderberechtigung, ohne Kinderzulage und ohne Berufseinsteigerbonus. Ein fester angenommener Satz vereinfacht den Einkommensteuertarif. Das tatsächliche Ergebnis der Günstigerprüfung hängt von deiner gesamten steuerlichen Situation ab.' },
+          { type: 'paragraph', text: 'Der einmalige Berufseinsteigerbonus von 200 EUR bleibt bei der steuerlichen Ermittlung des Zulageanspruchs außer Betracht. Das regelt § 10a Absatz 1 Satz 6 EStG. Du darfst ihn deshalb nicht wie eine zusätzliche jährlich anzurechnende Zulage in dieses Steuerbeispiel einsetzen. Für die Depotgutschrift und die Steuerprüfung gelten hier unterschiedliche Rechenschritte.' },
         ],
       },
       {
@@ -57,7 +73,7 @@ export const article = makeAltersvorsorgeArticle({
             'Den letzten Steuerbescheid für eine spätere persönliche Prüfung, ohne ihn öffentlich zu teilen.',
             'Deine Vorstellungen zur späteren Rente, Einmalzahlung und weiteren Einkünften.',
           ] },
-          { type: 'paragraph', text: 'Im Webinar erklären wir den Zusammenhang mit einfachen Beispielen. Eine konkrete Steuerberatung ersetzt das nicht. Wenn du anschließend Angebote vergleichst, lass dir auch zeigen, welche steuerlichen Annahmen in der Rechnung stecken. So verstehst du, welche Vorteile aus dem Gesetz folgen und welche Ergebnisse von deiner persönlichen Situation abhängen.' },
+          { type: 'paragraph', text: 'Im Zuschuss-Rechner kannst du zuerst deinen Beitrag und die möglichen Zulagen auswählen. Nach deiner Vormerkung lässt sich auch das vereinfachte Steuer- und Depotmodell ansehen. Eine konkrete Steuerberatung ersetzt das nicht. Wenn du anschließend Angebote vergleichst, lass dir zeigen, welche steuerlichen Annahmen in der Rechnung stecken und welche Ergebnisse von deiner persönlichen Situation abhängen.' },
         ],
       },
     ],
@@ -66,6 +82,7 @@ export const article = makeAltersvorsorgeArticle({
       { question: 'Bekomme ich Zulage und Steuervorteil immer zusätzlich?', answer: 'Das Finanzamt stimmt beide über die Günstigerprüfung ab. Eine zusätzliche Steuerermäßigung entsteht nur, soweit der errechnete Abzugsvorteil die berücksichtigte Zulagenförderung übersteigt.' },
       { question: 'Kann ich 6.840 EUR als Sonderausgaben abziehen?', answer: 'Die mögliche Einzahlung und der Sonderausgabenrahmen sind verschiedene Grenzen. Bei unmittelbarer Berechtigung beträgt der neue Abzugsrahmen grundsätzlich 1.800 EUR an Beiträgen zuzüglich der dafür zustehenden Zulagen.' },
     ],
-    sourceIds: ['gesetz'],
+    sourceIds: ['gesetz', 'rv10a'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 geprüft: Sonderausgabenrahmen, Günstigerprüfung und die Ausnahme für den einmaligen Berufseinsteigerbonus nach § 10a EStG in der Fassung für 2027. Die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
     relatedSlugs: ['altersvorsorgedepot-foerderung', 'altersvorsorgedepot-auszahlung'],
   });

@@ -5,10 +5,12 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'riester',
     audience: 'riester',
     nextStep: 'check',
-    metaTitle: 'Riester ins Altersvorsorgedepot übertragen?',
-    metaDescription: 'Weiterführen, ruhen lassen oder ab 2027 übertragen: So bereitest du einen Riester-Wechsel vor und trennst Guthabentransfer von Fördersystemwechsel.',
-    headline: 'Riester ins Altersvorsorgedepot wechseln: Was bedeutet das?',
-    lead: 'Ab 2027 ist ein Wechsel von einem bestehenden Riester-Vertrag in einen neuen geförderten Altersvorsorgevertrag möglich. Du musst dafür nicht zuerst das Guthaben auszahlen lassen. Entscheidend sind ein geeignetes neues Angebot, die geregelte Übertragung und der Vergleich mit deinem Altvertrag. Der Wechsel zur neuen Förderung betrifft auch deine weiteren bestehenden Altersvorsorgeverträge.',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
+    metaTitle: 'Riester-Wechsel 2027: Altersvorsorgedepot | Healio',
+    metaDescription: 'Riester ab 2027 ins Altersvorsorgedepot übertragen: Ablauf, Kosten und Garantien vergleichen. Wann Förderung erhalten bleibt und was Altverträge betrifft.',
+    headline: 'Riester ins Altersvorsorgedepot wechseln: Ablauf und Kosten ab 2027',
+    lead: 'Ab 2027 kannst du Riester-Guthaben geregelt in einen neuen geförderten Altersvorsorgevertrag übertragen, ohne die bisherige Förderung allein wegen dieses Wechsels zurückzahlen zu müssen. Eine Auszahlung an dich ist dafür nicht nötig. Ob sich der Wechsel lohnt, hängt von Übertragungswert, Kosten, Garantien und dem neuen Angebot ab. Wichtig: Ein neuer geförderter Vertrag kann auch die Förderung deiner weiteren Riester-Verträge verändern.',
     listTeaser: 'Die drei Wege für den Bestand und eine geordnete Vorbereitung des möglichen Wechsels.',
     sections: [
       {
@@ -67,6 +69,7 @@ export const article = makeAltersvorsorgeArticle({
       { question: 'Ziehen alle meine Riester-Guthaben automatisch um?', answer: 'Nein. Das neue Fördersystem gilt einheitlich, aber Guthaben wechseln nur durch den entsprechenden Übertragungsvorgang. Andere Altverträge können vertraglich weiterbestehen.' },
       { question: 'Kann ich mein Guthaben behalten und nur neue Beiträge anders anlegen?', answer: 'Das ist grundsätzlich ein möglicher Weg. Ein neuer geförderter Vertrag löst jedoch ebenfalls den Wechsel zur neuen Fördersystematik aus. Prüfe deshalb die Folgen für alle betroffenen Riester-Bestandsverträge.' },
     ],
-    sourceIds: ['regierung', 'gesetz', 'bmf', 'zfa', 'riester-kuendigung'],
-    relatedSlugs: ['riester-kuendigen-oder-behalten', 'riester-alte-oder-neue-foerderung'],
+    sourceIds: ['regierung', 'gesetz', 'bmf', 'zfa', 'riester-kuendigung', 'reform-drv'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 mit der Deutschen Rentenversicherung abgeglichen: Bestandsschutz, geregelter Wechsel, mögliche Wechselkosten und Folgen eines parallelen Neuvertrags für die Förderung. Die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
+    relatedSlugs: ['riester-kuendigen-oder-behalten', 'riester-alte-oder-neue-foerderung', 'altersvorsorgedepot-kosten'],
   });

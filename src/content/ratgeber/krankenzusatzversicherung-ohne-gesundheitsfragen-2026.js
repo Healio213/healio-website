@@ -50,6 +50,8 @@ export const article = {
   metaDescription: 'Krankenzusatzversicherung ohne Gesundheitsfragen oder ohne Gesundheitsprüfung? Im ambulanten SDK-Tarif wirst du 2026 trotz Vorerkrankung sicher angenommen.',
   publishedAt: '2026-10-14',
   publishedAtLabel: '14. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 8,
   listTitle: 'Krankenzusatzversicherung ohne Gesundheitsfragen 2026',
   listTeaser: 'Trotz Vorerkrankung angenommen werden: wo das bei den Tarifen von Healio klappt und wo nicht.',
@@ -68,7 +70,7 @@ export const article = {
     text: 'Wer so sucht, will vor allem eins: angenommen werden. Im ambulanten Tarif der SDK klappt das. Du beantwortest Gesundheitsfragen, Vorerkrankungen versichert die SDK über feste Zuschläge mit. Eine Ablehnung gibt es dort laut SDK nicht.',
     path: { to: '/ambulant#tarifwahl', text: 'Beitrag nach Alter und Stufe ausrechnen', label: 'Zum ambulanten Rechner' }
   },
-  lead: 'Wer 2026 eine Krankenzusatzversicherung ohne Gesundheitsfragen oder eine Zusatzversicherung ohne Gesundheitsprüfung sucht, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum eine schon laufende Behandlung in keinem neuen Vertrag steckt.',
+  lead: 'Wer 2026 eine Krankenzusatzversicherung ohne Gesundheitsfragen oder eine Zusatzversicherung ohne Gesundheitsprüfung sucht, hat meistens eine Vorgeschichte und Sorge vor der Absage. Die gute Nachricht: Im ambulanten Tarif der SDK wirst du auch mit Vorerkrankungen sicher angenommen. Gefragt wird trotzdem, denn davon hängt ein möglicher Zuschlag ab. Hier liest du, welche Tarife dich wirklich aufnehmen, was der Zuschlag bedeutet und warum die Annahme nicht automatisch den Schutz für bereits laufende Behandlungen einschließt.',
   sections: [
     {
       id: 'suchfrage',
@@ -120,7 +122,7 @@ export const article = {
       blocks: [
         { type: 'paragraph', text: 'Für eine schon laufende Behandlung nicht. Was vor Versicherungsbeginn schon behandelt wird oder angeraten ist, bleibt bei der SDK ausgenommen. Das gilt auch ohne Wartezeit: Der Schutz beginnt mit dem vereinbarten Datum und wirkt nicht zurück.' },
         { type: 'paragraph', text: 'Angenommen werden und eine laufende Behandlung bezahlt bekommen sind zwei verschiedene Dinge. Wirst du mit Rückenbeschwerden aufgenommen, ist deine bereits laufende Behandlungsserie trotzdem nicht versichert. Ein neuer Versicherungsfall nach Beginn kann dagegen erstattet werden, im Rahmen der Töpfe und der Bedingungen.' },
-        { type: 'paragraph', text: 'Daraus folgt eine einfache Regel: Schließe den Tarif ab, bevor du ihn brauchst. Wer erst nach dem Befund sucht, findet keinen Vertrag, der die Rechnung rückwirkend übernimmt.' }
+        { type: 'paragraph', text: 'Der normale ambulante SDK-Schutz übernimmt keine bereits vor Versicherungsbeginn eingetretenen Versicherungsfälle. Das ist keine Regel für sämtliche Zusatzverträge: Spezialisierte Lösungen wie ZAHN Sofort der Bayerischen können bereits angeratene oder begonnene Zahnbehandlungen nach ihren eigenen Bedingungen einbeziehen. Annahme, zeitliche Grenzen und Leistungsumfang müssen vor dem Abschluss konkret geprüft werden.' }
       ]
     },
     {
@@ -175,7 +177,7 @@ export const article = {
         { type: 'paragraph', text: 'Falsche oder fehlende Angaben können teuer werden. Die Verbraucherzentrale warnt: Bei nachweislich falsch beantworteten Fragen droht eine Leistungsverweigerung, der Vertrag kann gekündigt werden. Wer heute etwas weglässt, riskiert also genau den Schutz, für den er zahlt.' },
         { type: 'honest', heading: 'Ehrlich gesagt', items: [
           { lead: 'Gefragt wird trotzdem.', text: 'Die Antworten bestimmen im SDK-Tarif nicht die Annahme, aber einen möglichen Zuschlag.' },
-          { lead: 'Sicher angenommen heißt nicht rückwirkend versichert.', text: 'Laufende oder angeratene Behandlungen zahlt kein neuer Vertrag.' },
+          { lead: 'Sicher angenommen heißt nicht rückwirkend versichert.', text: 'Beim normalen ambulanten SDK-Schutz sind bereits eingetretene Versicherungsfälle ausgeschlossen. Spezialisierte Zahnbausteine haben eigene Bedingungen.' },
           { lead: 'Im Krankenhaus und bei den Zähnen entscheidet der Antrag.', text: 'Dort gibt es keine pauschale Annahme für Vorerkrankte.' }
         ] }
       ]
@@ -195,12 +197,12 @@ export const article = {
       ]
     }
   ],
-  factNugget: 'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Im ambulanten SDK-Tarif, den Healio vermittelt, werden Vorerkrankungen laut SDK über feste Zuschläge voll mitversichert, ohne Ablehnung und ohne Leistungsausschluss. Behandlungen, die vor Versicherungsbeginn laufen oder angeraten sind, sind in keinem neuen Vertrag versichert.',
+  factNugget: 'Healio ist ein unabhängiger Versicherungsmakler und verbindet Zusatzversicherungen mit dem Bonusprogramm der Krankenkasse. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Im ambulanten SDK-Tarif, den Healio vermittelt, werden Vorerkrankungen laut SDK über feste Zuschläge voll mitversichert, ohne Ablehnung und ohne Leistungsausschluss. Beim normalen ambulanten SDK-Schutz bleiben bereits eingetretene Versicherungsfälle ausgeschlossen. Spezialisierte Zahnbausteine können unter eigenen Bedingungen weitergehen.',
   faqs: [
     { question: 'Welche Krankenzusatzversicherung nimmt mich trotz Vorerkrankung an?', answer: 'Bei Healio der ambulante Tarif der SDK. Du beantwortest Gesundheitsfragen, laut SDK werden Vorerkrankungen über feste Zuschläge mitversichert, ohne Ablehnung. Laufende oder angeratene Behandlungen bleiben ausgenommen.' },
     { question: 'Gibt es eine Krankenhauszusatzversicherung, die nicht nach der Gesundheit fragt?', answer: 'Bei Healio nur für Unfälle: Der SDK-Tarif SPU verzichtet auf die Gesundheitsprüfung, leistet aber nur nach einem Unfall. Die Tarife SP1 und SP2 für Krankheit und Unfall haben Gesundheitsfragen, die Annahme entscheidet der Versicherer im Antrag.' },
     { question: 'Warum fragt der Tarif, wenn er mich sowieso annimmt?', answer: 'Weil sich aus deinen Angaben ein möglicher Zuschlag ergibt. Beantworte die Fragen deshalb vollständig nach § 19 VVG. Falsche Angaben können laut Verbraucherzentrale zur Leistungsverweigerung und zur Kündigung führen.' },
-    { question: 'Zahlt die Versicherung meine laufende Behandlung, wenn ich jetzt abschließe?', answer: 'Nein. Behandlungen, die vor Versicherungsbeginn schon laufen oder angeraten sind, bleiben ausgenommen, auch in Tarifen ohne Wartezeit. Versichert sind neue Fälle ab dem vereinbarten Beginn.' },
+    { question: 'Zahlt die Versicherung meine laufende Behandlung, wenn ich jetzt abschließe?', answer: 'Beim normalen ambulanten SDK-Schutz sind bereits vor Versicherungsbeginn eingetretene Versicherungsfälle ausgeschlossen, auch ohne Wartezeit. Das gilt nicht pauschal für jeden Zusatzvertrag. Ein spezialisierter Zahnbaustein wie ZAHN Sofort der Bayerischen kann bereits angeratene oder begonnene Zahnbehandlungen nach seinen eigenen Bedingungen einbeziehen. Prüfe den konkreten Fall vor dem Abschluss; eine Leistungszusage folgt daraus nicht.' },
     { question: 'Was ist ein Risikozuschlag?', answer: 'Ein Aufschlag auf den Beitrag wegen deiner Gesundheitsangaben. Seine Höhe steht in deinem persönlichen Angebot. Rechne den Gesamtbeitrag gegen die Leistung, bevor du annimmst.' }
   ],
   onward: {
@@ -220,15 +222,17 @@ export const article = {
   sources: {
     checkedAt: '2026-10-14',
     checkedAtLabel: '14. Oktober 2026',
-    intro: 'Annahme mit Vorerkrankung, Gesundheitsprüfung und die Tarifangaben stammen aus diesen Quellen.',
+    intro: 'Annahme mit Vorerkrankung, Gesundheitsprüfung und die Tarifangaben stammen aus diesen Quellen. Am 27.10.2026 wurde die Abgrenzung zwischen SDK-Vertragsbeginn und spezialisiertem Zahn-Sofortschutz nachgeprüft; die übrigen Quellen behalten ihren angegebenen Stand.',
     items: [
+      { label: 'ZAHN Sofort bei laufender oder angeratener Behandlung', publisher: 'die Bayerische', href: 'https://www.diebayerische.de/zahn-sofort/laufende-behandlung/', stand: 'Öffentliche Produktinformation, Abruf 27.10.2026', accessedAt: '27.10.2026' },
+      { label: 'Allgemeine Bedingungen der SDK: Versicherungsfall und Beginn des Schutzes, A.1 und A.4', publisher: 'SDK', href: 'https://gesundwerker.sdk.de/downloads/Bedingungen/1-751.pdf', stand: '1.751/01.22, Stand 01.01.2022', accessedAt: '27.10.2026' },
       { label: 'Broschüre Ambulante Zusatzversicherung, Annahme mit Vorerkrankungen', publisher: 'SDK', href: 'https://www.sdk.de/downloads/Broschueren/Broschuere-Ambulante-Zusatzversicherung-1.781.pdf', stand: '1.781/07.23', accessedAt: '14.10.2026' },
       { label: 'AVB Zusatzversicherung AP-Tarife', publisher: 'SDK', href: 'https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf', stand: '1.753a, Stand 1. Januar 2023', accessedAt: '14.10.2026' },
       { label: 'Zusatzversicherungen zur gesetzlichen Krankenversicherung', publisher: 'Verbraucherzentrale', href: 'https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/krankenversicherung/zusatzversicherungen-zur-gesetzlichen-krankenversicherung-sinnvoll-oder-nicht-10425', stand: '19. August 2025', accessedAt: '14.10.2026' },
       { label: 'Anzeigepflicht, § 19 VVG', publisher: 'Gesetze im Internet', href: 'https://www.gesetze-im-internet.de/vvg_2008/__19.html', stand: 'Geltende Fassung', accessedAt: '14.10.2026' },
       { label: 'Ambulanter Schutz: Gesundheitsfragen, Wartezeit, UKV und ARAG V100', publisher: 'Healio', href: 'https://healio.de/ambulant', stand: 'Live-Abruf 14. Oktober 2026, Beiträge 29. September 2026', accessedAt: '14.10.2026' },
       { label: 'Antrag Zusatzversicherung A842 mit Tarif V100', publisher: 'ARAG', href: 'https://www.arag-partnervertrieb.de/medien/pdf/KV/Antraege/arag_kv_antrag_zusatz_a842.pdf', stand: 'Abruf 14. Oktober 2026', accessedAt: '14.10.2026' },
-      { label: 'Tarifbeschreibung Krankenhauszusatzversicherung SPU', publisher: 'SDK', href: 'https://www.sdk.de/downloads/Bedingungen/Tarifbeschreibung-Krankenhauszusatzversicherung-SPU-1.671g.pdf', stand: '1.671g', accessedAt: '14.10.2026' },
+      { label: 'Klinik bei Unfall: Kostenübernahme ohne Gesundheitsprüfung', publisher: 'SDK', href: 'https://www.sdk.de/versicherungen/zusatzversicherung/krankenhauszusatzversicherung', stand: 'Produktseite, Abschnitt Klinik bei Unfall', accessedAt: '27.10.2026' },
       { label: 'Klinik-Tarife SP1, SP2 und SPU', publisher: 'Healio', href: 'https://healio.de/stationaer', stand: 'Live-Abruf 14. Oktober 2026', accessedAt: '14.10.2026' },
       { label: 'Zahn-Check und Annahmeregeln UKV und Bayerische', publisher: 'Healio', href: 'https://healio.de/zahn', stand: 'Live-Abruf 14. Oktober 2026', accessedAt: '14.10.2026' }
     ]

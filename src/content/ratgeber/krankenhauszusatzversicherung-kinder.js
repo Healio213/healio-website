@@ -312,9 +312,9 @@ export const article = {
       {
         "label": "Begleitperson: Kosten und Ablauf",
         "publisher": "gesund.bund.de",
-        "href": "https://gesund.bund.de/gesundheitsversorgung/begleitperson-im-krankenhaus",
+        "href": "https://gesund.bund.de/begleitperson-im-krankenhaus",
         "stand": "Abschnitte Kosten und Kinderkrankengeld",
-        "accessedAt": "2026-10-07"
+        "accessedAt": "2026-10-27"
       },
       {
         "label": "Kindernachversicherung",

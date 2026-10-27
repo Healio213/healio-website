@@ -19,8 +19,8 @@ export const article = {
   "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
-  "updatedAt": "2026-10-14",
-  "updatedAtLabel": "14. Oktober 2026",
+  "updatedAt": "2026-10-27",
+  "updatedAtLabel": "27. Oktober 2026",
   "readingTimeMinutes": 16,
   "listTitle": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
   "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
@@ -1001,9 +1001,9 @@ export const article = {
       {
         "label": "novitas bkk: Satzung und Osteopathie",
         "publisher": "novitas bkk",
-        "href": "https://media.novitas-bkk.de/documents/2026-07/Satzung_novitas%20bkk_g%C3%BCltig%20ab%2004.08.2026.pdf",
-        "stand": "Stand 04.08.2026",
-        "accessedAt": "07.10.2026"
+        "href": "https://media.novitas-bkk.de/documents/2026-10/Satzung_novitas%20bkk_g%C3%BCltig%20ab%2017.10.2026.pdf",
+        "stand": "17.10.2026; § 13 Abs. 7 Satz 3 und Nr. 4 am 27.10.2026 erneut geprüft, Zuschuss und Voraussetzungen unverändert",
+        "accessedAt": "27.10.2026"
       },
       {
         "label": "Pronova BKK: Satzung und Osteopathie",

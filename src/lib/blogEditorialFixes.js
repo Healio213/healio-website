@@ -5,8 +5,8 @@ const CURRENT_BONUS_WORDING = 'Ein passender Kassenbonus kann den individuellen 
 const ARTICLE_FIXES = {
   'heilpraktiker-patienten-finanzierung-gesundheitsbudget': {
     title: 'Heilpraktiker-Kostenübernahme: Gesundheitsbudget für Patienten',
-    meta_description: 'Bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren für Naturheilverfahren. Ein passender Kassenbonus kann den Beitrag individuell bis zu 100 % reduzieren.',
-    excerpt: 'So werden Naturheilverfahren besser planbar: bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren und ein Kassenbonus, der den Beitrag individuell bis zu 100 % reduzieren kann.',
+    meta_description: 'Für Naturheilverfahren sind im SDK-Beispiel bis zu 1.000 EUR je zwei Kalenderjahre vorgesehen. Ein passender Kassenbonus kann den Beitrag mitfinanzieren.',
+    excerpt: 'Im SDK-Beispiel stehen bis zu 1.000 EUR je zwei Kalenderjahre für Naturheilverfahren zur Verfügung. Ein erreichbarer Kassenbonus kann den Versicherungsbeitrag mitfinanzieren.',
     geo_section: 'Patienten können mit einer passenden ambulanten Zusatzversicherung tarifabhängig bis zu 3.000 EUR Gesundheitsbudget in 2 Jahren nutzen. Darin können bis zu 1.000 EUR für Naturheilverfahren enthalten sein. Ein passender Kassenbonus kann den individuellen Versicherungsbeitrag abhängig von Kasse, Aktivitäten, Nachweisen und Tarif bis zu 100 % reduzieren. Ob und in welcher Höhe das gelingt, wird für jeden Patienten getrennt geprüft. Der Schutz muss vor Behandlungsbeginn bestehen; laufende oder bereits angeratene Behandlungen sind nicht rückwirkend versichert.',
     replacements: [
       ['Heilpraktiker Kostenübernahme: So finanzieren Patienten Naturheilverfahren ohne Eigenanteil', 'Heilpraktiker-Kostenübernahme: Gesundheitsbudget sinnvoll einordnen'],
@@ -218,13 +218,17 @@ export function applyBlogEditorialFixes(article) {
     (content, [search, replacement]) => replaceAllLiteral(content, search, replacement),
     article.content_html || '',
   );
+  const modifiedAt = [EDITORIAL_UPDATE_AT, article.published_at, article.updated_at]
+    .filter((value) => Number.isFinite(Date.parse(value || '')))
+    .sort((left, right) => Date.parse(left) - Date.parse(right))
+    .at(-1);
 
   return {
     ...article,
     ...fields,
     content_html: contentHtml,
     structured_data: replaceLiteralsDeep(article.structured_data, replacements),
-    updated_at: EDITORIAL_UPDATE_AT,
+    updated_at: modifiedAt,
   };
 }
 

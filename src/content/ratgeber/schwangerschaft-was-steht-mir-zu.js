@@ -103,6 +103,8 @@ export const article = {
 
   publishedAt: '2026-10-06',
   publishedAtLabel: '6. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 15,
 
   listTitle: 'Was steht mir in der Schwangerschaft zu? Leistungen, Extras und Fristen',
@@ -631,6 +633,14 @@ export const article = {
             { text: 'Die aktuellen Antragswege für Kindergeld, Elterngeld und Mutterschaftsleistungen beschreibt das ' },
             { text: 'Familienportal des Bundes', href: 'https://familienportal.de/' },
             { text: '.' },
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Für deine langfristige Vorsorge als Elternteil hilft dir außerdem der Ratgeber ' },
+            { text: 'Kinderzulage im Altersvorsorgedepot ab 2027', to: '/ratgeber/altersvorsorgedepot-kinderzulage' },
+            { text: '. Diese Förderung gehört zur Altersvorsorge des berechtigten Elternteils und ist kein zusätzlich verfügbares Kindergeld. Förderberechtigung und Kinderzuordnung müssen passen.' },
           ],
         },
         {

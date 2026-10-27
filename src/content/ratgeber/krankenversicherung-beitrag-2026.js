@@ -5,8 +5,8 @@
  */
 
 export const article = {
-  updatedAt: "2026-10-08",
-  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-27",
+  updatedAtLabel: "27. Oktober 2026",
   "slug": "krankenversicherung-beitrag-2026",
   "kind": "ratgeber",
   "group": "kasse-bonus",
@@ -14,8 +14,8 @@ export const article = {
   "metaDescription": "Krankenversicherung Beitrag 2026: 14,6 Prozent plus Zusatzbeitrag, Beitragsbemessungsgrenze und Rechenbeispiele für deinen Anteil.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
-  "updatedAt": "2026-10-08",
-  "updatedAtLabel": "8. Oktober 2026",
+  "updatedAt": "2026-10-27",
+  "updatedAtLabel": "27. Oktober 2026",
   "readingTimeMinutes": 9,
   "listTitle": "Krankenkassenbeitrag 2026: Beitragssatz, Zusatzbeitrag und Rechenbeispiel",
   "listTeaser": "Aus welchen Teilen dein Beitrag besteht, was die Kassen als Zusatzbeitrag verlangen, bis zu welchem Einkommen du zahlst und wie du den Unterschied in Euro ausrechnest.",
@@ -224,6 +224,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Freiwillige Mitglieder sind gegenüber der Kasse grundsätzlich selbst Beitragsschuldner (§ 250 Abs. 2 SGB V). Das bedeutet nicht, dass sie die Kosten immer allein tragen: Wegen Überschreitens der Jahresarbeitsentgeltgrenze freiwillig GKV-versicherte Beschäftigte erhalten den Arbeitgeberzuschuss nach § 257 Abs. 1. Selbstständige tragen ihre Beiträge grundsätzlich selbst. Bei pflichtversicherten Rentnern teilen sich Rentner und Rentenversicherung die Beiträge aus der gesetzlichen Rente einschließlich Zusatzbeitrag je zur Hälfte (§§ 247, 249a). Das gilt nicht pauschal für Betriebsrenten oder andere Einkünfte. Freiwillig GKV-versicherte Rentner können einen Beitragszuschuss der Rentenversicherung beantragen. Entscheidend sind Versicherungsstatus und Einnahmeart."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Wenn du als Selbstständiger neben den laufenden Kassenbeiträgen deine langfristige Vorsorge planst, findest du im Ratgeber " },
+            { "text": "Altersvorsorgedepot für Selbstständige ab 2027", "to": "/ratgeber/altersvorsorgedepot-selbststaendige" },
+            { "text": " die Voraussetzungen für den neuen Förderzugang und den passenden Zuschuss-Rechner. Dein Krankenversicherungsstatus und deine Förderberechtigung sind getrennt zu prüfen." }
+          ]
         },
         {
           "type": "segments",

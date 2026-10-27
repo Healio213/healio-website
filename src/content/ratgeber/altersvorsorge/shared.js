@@ -20,22 +20,30 @@ const SOURCE_URLS = {
   estg85: ['Einkommensteuergesetz: Kinderzulage, § 85', 'https://www.gesetze-im-internet.de/estg/__85.html'],
   estg89: ['Einkommensteuergesetz: Zulagenantrag, § 89', 'https://www.gesetze-im-internet.de/estg/__89.html'],
   rv84: ['Deutsche Rentenversicherung: Grundzulage ab 2027, § 84', 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0084/0084_2027_01_01.html'],
+  rv85: ['Deutsche Rentenversicherung: Kinderzulage, § 85 in der Fassung für 2027', 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0085/0085_2027_01_01.html'],
+  rv10a: ['Deutsche Rentenversicherung: Sonderausgaben und Förderberechtigung, § 10a für 2027', 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0010a/0010a_2027_01_01.html'],
+  'reform-drv': ['Deutsche Rentenversicherung: Altersvorsorge-Reformgesetz und Riesterwechsel', 'https://www.deutsche-rentenversicherung.de/DRV/DE/Rente/Moeglichkeiten-der-Altersvorsorge/Altervorsorgereformgesetz'],
   kindergeld: ['Familienportal: Kindergeld und Altersgrenzen', 'https://familienportal.de/familienportal/familienleistungen/kindergeld/faq/bis-zu-welchem-alter-meines-kindes-bekomme-ich-kindergeld--124966'],
 };
 
 const NEXT_STEPS = {
   webinar: { label: 'Zuschuss-Fahrplan und Startinfos ansehen', heading: 'Die nächsten Fragen gemeinsam klären', anchor: 'webinar', text: 'Auf der nächsten Seite findest du den Zuschuss-Fahrplan zum Herunterladen. Du kannst dich für neue Details und den Start vormerken oder eine persönliche Frage stellen. Webinar-Einladungen folgen, sobald Termine feststehen.' },
-  check: { label: 'Persönlichen Zuschuss-Check ansehen', heading: 'Deinen eigenen Fall durchgehen', anchor: 'zuschuss-check', text: 'Wenn du schon einen konkreten Vertrag oder eine Entscheidung vor dir hast, kannst du den persönlichen Zuschuss-Check ansehen. Wir besprechen die Unterlagen, Kosten und Voraussetzungen. Du entscheidest anschließend in Ruhe.' },
-  calculator: { label: 'Meinen Zuschuss berechnen', heading: 'Die Beispielrechnung für dich ausprobieren', anchor: 'rechner', text: 'Unser Rechner zeigt Grund- und Kinderzulage für unterschiedliche Eigenbeiträge. Er ist ohne Anmeldung zugänglich und ersetzt keine Prüfung deiner persönlichen Förderberechtigung.' },
+  check: { label: 'Zulage berechnen und Januarstart vorbereiten', heading: 'Deine Rechnung und den nächsten Schritt vorbereiten', anchor: 'rechner', text: 'Berechne zuerst deine mögliche Grund- und Kinderzulage ohne Anmeldung. Danach kannst du deine Rechnung mit dem Kurzformular für Januar vormerken. Im etwa 10-minütigen Vorabcheck klären wir Förderberechtigung, Kinderzuordnung und einen möglichen Riesterwechsel.' },
+  calculator: { label: 'Meinen Zuschuss berechnen', heading: 'Die Beispielrechnung für dich ausprobieren', anchor: 'rechner', text: 'Unser Rechner zeigt Grund- und Kinderzulage für unterschiedliche Eigenbeiträge ohne Anmeldung. Wenn du deinen Start vorbereiten möchtest, kannst du anschließend deine Rechnung mit dem Kurzformular für Januar vormerken. Deine persönlichen Fördervoraussetzungen prüfen wir im Vorabcheck.' },
 };
 
 export function makeAltersvorsorgeArticle(raw) {
-  const { sourceIds, relatedSlugs, nextStep = 'webinar', audience = 'standard', ...content } = raw;
+  const {
+    sourceIds, relatedSlugs, nextStep = 'webinar', audience = 'standard',
+    updatedAt = '2026-10-09', updatedAtLabel = '9. Oktober 2026',
+    sourceReviewNote, ...content
+  } = raw;
   const step = NEXT_STEPS[nextStep];
   if (!step) throw new Error(`Unbekannter nächster Schritt: ${nextStep}`);
   const sources = {
     checkedAt: ALTERSVORSORGE_REVIEW_DATE,
     checkedAtLabel: '8. Oktober 2026',
+    ...(sourceReviewNote ? { intro: sourceReviewNote } : {}),
     items: sourceIds.map((id) => {
       const source = SOURCE_URLS[id];
       if (!source) throw new Error(`Unbekannte Quelle: ${id}`);
@@ -54,8 +62,8 @@ export function makeAltersvorsorgeArticle(raw) {
     listTitle: content.headline,
     publishedAt: '2026-10-09',
     publishedAtLabel: '9. Oktober 2026',
-    updatedAt: '2026-10-09',
-    updatedAtLabel: '9. Oktober 2026',
+    updatedAt,
+    updatedAtLabel,
     readingTimeMinutes: Math.max(3, Math.ceil(wordCount / 210)),
     factNuggetHeading: 'Was Healio mit dir klärt',
     factNugget: 'Healio begleitet die Versicherungsvarianten der geförderten Altersvorsorge und hilft dir, Förderung, vorhandene Verträge, Kosten und Risiken zusammen zu betrachten. Die Ratgeber erklären auch andere Produktwege allgemein. Bei einem von Healio vermittelten Versicherungsabschluss wird Healio vom Versicherungsunternehmen über die Vertragskosten vergütet. Konkrete Angebote werden erst besprochen, wenn sie tatsächlich verfügbar und geprüft sind.',

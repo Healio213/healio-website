@@ -352,11 +352,11 @@ export const article = {
         accessedAt: '06.10.2026',
       },
       {
-        label: 'Wurzelkanalbehandlung (Patientenportal)',
-        publisher: 'Zahnärztekammer und KZV Hamburg',
-        href: 'https://www.zahnaerzte-hh.de/patientenportal-der-hamburger-zahnaerzte/wissen/fachinformationen-von-a-z/wurzelkanalbehandlung',
-        stand: 'ohne Datum',
-        accessedAt: '06.10.2026',
+        label: 'Zahnwurzelbehandlung: Kassenbedingungen und private Behandlungstechniken',
+        publisher: 'Kassenzahnärztliche Bundesvereinigung (KZBV)',
+        href: 'https://www.kzbv.de/patienten/medizinische-infos/behandlung-der-zahnwurzel/wann-ist-eine-wurzelspitzenresektion-erforderlich/',
+        stand: 'Abschnitte zur Kassenleistung, Juli und November 2023',
+        accessedAt: '27.10.2026',
       },
       {
         label: 'GOZ, Anlage 1 (Gebührenverzeichnis), Nr. 0110, 2400 bis 2440',

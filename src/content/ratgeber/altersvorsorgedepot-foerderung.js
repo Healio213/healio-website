@@ -5,10 +5,12 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'grundlagen',
     audience: 'standard',
     nextStep: 'calculator',
-    metaTitle: 'Altersvorsorgedepot: Förderung mit Beispielen',
-    metaDescription: '10, 25, 30 oder 150 EUR monatlich: So berechnen sich Grundzulage und Kinderzulage ab 2027. Voraussetzungen, Höchstbeträge und Geldbindung.',
-    headline: 'Altersvorsorgedepot: Wie viel Förderung bekommst du?',
-    lead: 'Im neuen Fördersystem erhältst du 50 Cent Grundzulage je Eigenbeitrags-Euro bis 360 EUR im Jahr und 25 Cent für den weiteren Beitrag bis 1.800 EUR. Das ergibt höchstens 540 EUR Grundzulage jährlich. Für zugeordnete zulagenberechtigte Kinder kommen bis zu 300 EUR je Kind hinzu. Voraussetzung sind Förderberechtigung und mindestens 120 EUR Eigenbeitrag im Jahr.',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
+    metaTitle: 'Altersvorsorgedepot 2027: Förderung berechnen | Healio',
+    metaDescription: 'Bis zu 540 EUR Grundzulage und bis zu 300 EUR je zugeordnetem Kind: Förderung ab 2027 mit Beitragstabelle, Voraussetzungen und Rechner verständlich erklärt.',
+    headline: 'Altersvorsorgedepot 2027: Wie viel Förderung bekommst du?',
+    lead: 'Ab 2027 sind bis zu 540 EUR Grundzulage im Jahr möglich, wenn du unmittelbar förderberechtigt bist und 1.800 EUR eigenen Jahresbeitrag einzahlst. Für jedes dir zugeordnete zulagenberechtigte Kind kommen bis zu 300 EUR hinzu. Schon ab 120 EUR Eigenbeitrag im Jahr beginnt die Zulagenförderung. Die Tabelle zeigt dir, was unterschiedliche Beiträge bringen; im Rechner kannst du anschließend deine eigene Auswahl ausprobieren.',
     listTeaser: 'Die Zulagenrechnung mit vier Beiträgen und einem klar abgegrenzten Familienbeispiel.',
     sections: [
       {
@@ -16,6 +18,7 @@ export const article = makeAltersvorsorgeArticle({
         heading: 'Die Grundzulage besteht aus zwei Beitragsstufen',
         blocks: [
           { type: 'paragraph', text: 'Bis zu einem Jahresbeitrag von 360 EUR beträgt die Grundzulage die Hälfte deiner eigenen Einzahlung. Auf weitere Eigenbeiträge bis zur Jahresgrenze von 1.800 EUR kommen jeweils 25 Prozent. Die Höchstzulage berechnet sich deshalb aus 180 EUR für die erste Stufe und 360 EUR für die zweite Stufe. Zusammen sind das 540 EUR.' },
+          { type: 'paragraph', text: 'Für diese Rechnung zählt dein Eigenbeitrag im gesamten Beitragsjahr. Ein Vertragsbeginn im Januar ist keine Voraussetzung für die volle Grundzulage. 150 EUR monatlich sind ein Beispiel mit zwölf gleichen Raten; bei einem späteren Start muss der notwendige Jahresbeitrag auf die verbleibende Zeit verteilt werden.' },
           { type: 'paragraph', text: 'Die Rechnung betrifft unmittelbar Förderberechtigte. Mittelbar berechtigte Ehepartner haben eigene Regeln; ihre Grundzulage ist auf 175 EUR begrenzt und orientiert sich an den Beiträgen des unmittelbar Berechtigten. Du darfst deshalb eine Standardrechnung nicht unverändert auf beide Partner übertragen. Auch die Kinderzulage wird nicht gleichzeitig an beide Eltern für dasselbe Kind gezahlt.' },
         ],
       },
@@ -63,5 +66,6 @@ export const article = makeAltersvorsorgeArticle({
       { question: 'Ist die Zulage Geld, das ich sofort ausgeben kann?', answer: 'Nein. Die Zulage wird dem Vorsorgevertrag gutgeschrieben und bleibt grundsätzlich für die Altersvorsorge gebunden. Eine mögliche zusätzliche Steuerermäßigung ist davon zu unterscheiden.' },
     ],
     sourceIds: ['regierung', 'gesetz', 'bmf', 'zfa', 'rv84'],
-    relatedSlugs: ['altersvorsorgedepot-kinderzulage', 'altersvorsorgedepot-wer-ist-berechtigt'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 geprüft: Beitragsstaffel und Jahresbezug der Grundzulage nach § 84 EStG in der Fassung ab 2027. Die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
+    relatedSlugs: ['altersvorsorgedepot-kinderzulage', 'altersvorsorgedepot-wer-ist-berechtigt', 'altersvorsorgedepot-steuern'],
   });

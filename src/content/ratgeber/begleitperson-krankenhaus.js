@@ -311,8 +311,8 @@ export const article = {
       {
         "label": "Unterkunft, Kosten und Einreichungswege",
         "publisher": "gesund.bund.de",
-        "href": "https://gesund.bund.de/gesundheitsversorgung/begleitperson-im-krankenhaus",
-        "accessedAt": "2026-10-07",
+        "href": "https://gesund.bund.de/begleitperson-im-krankenhaus",
+        "accessedAt": "2026-10-27",
         "note": ""
       },
       {

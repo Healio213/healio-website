@@ -87,13 +87,14 @@ try {
   await page.waitForSelector('[data-artikel-check-uebernahme]');
   const url = new URL(page.url());
   assert.equal(url.pathname, '/altersvorsorgedepot');
-  assert.equal(url.hash, '#zuschuss-check');
+  assert.equal(url.hash, '#altersvorsorge-vormerkung');
   assert.equal(url.searchParams.get('fuer'), 'eltern');
   assert.equal(url.searchParams.get('utm_content'), 'altersvorsorgedepot-kinderzulage');
   for (const key of ['email', 'monatsbeitrag', 'kinder', 'unter25']) assert.equal(url.searchParams.get(key), null);
   assert.equal(await page.$eval('#rechner-beitrag', (input) => input.value), '50');
   assert.ok((await page.$eval('[data-artikel-check-uebernahme]', (element) => element.textContent)).includes('3 berücksichtigte Kinder'));
-  await page.waitForFunction(() => document.getElementById('zuschuss-check').getBoundingClientRect().top < 200);
+  await page.waitForSelector('[data-altersvorsorge-vormerkung] input[name="first_name"]', { visible: true });
+  await page.waitForFunction(() => document.getElementById('altersvorsorge-vormerkung').getBoundingClientRect().top < 200);
   assert.equal((await page.$$('a[href*="TODO-"]')).length, 0, 'Unfertiger Buchungslink darf nicht klickbar sein');
   const checkLink = await page.evaluateHandle(() => [...document.querySelectorAll('#zuschuss-check button')].find((link) => link.textContent.includes('Berechnung speichern')));
   assert.ok(checkLink.asElement(), 'Vormerkung braucht einen direkten Formularweg');

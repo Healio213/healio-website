@@ -9,6 +9,7 @@ import { seoRoutes } from './seo-routes.mjs';
 import { buildInternalRatgeberUrl } from '../src/lib/ratgeber-cta.js';
 import { getArtikelCheckVoreinstellung, createArtikelCheckState, readArtikelCheckState } from '../src/lib/altersvorsorgeArtikelCheck.js';
 import { berechneZulagen } from '../src/lib/altersvorsorgeZulagen.js';
+import { article as bonusAdvertorial } from '../src/content/ratgeber/krankenkassen-bonus-zusatzversicherung.js';
 
 const expectedSlugs = [
   'altersvorsorgedepot-was-ist-das', 'altersvorsorgedepot-ab-wann', 'altersvorsorgedepot-foerderung', 'altersvorsorgedepot-wer-ist-berechtigt',
@@ -18,6 +19,12 @@ const expectedSlugs = [
   'altersvorsorgedepot-kosten', 'altersvorsorgedepot-garantie', 'altersvorsorgedepot-etf-sparplan', 'altersvorsorgedepot-steuern',
   'altersvorsorgedepot-geld-entnehmen', 'altersvorsorgedepot-auszahlung', 'altersvorsorgedepot-anbieterwechsel', 'altersvorsorgedepot-passt-das-zu-mir',
 ];
+const revisedSlugs = new Set([
+  'altersvorsorgedepot-foerderung', 'riester-altersvorsorgedepot-wechsel',
+  'altersvorsorgedepot-selbststaendige', 'altersvorsorgedepot-kinderzulage',
+  'altersvorsorgedepot-steuern', 'altersvorsorgedepot-oder-ruerup',
+  'altersvorsorgedepot-teilzeit-elternzeit',
+]);
 assert.deepEqual(altersvorsorgeArticles.map((article) => article.slug).sort(), [...expectedSlugs].sort());
 assert.deepEqual(await validateRatgeberSources(), [], 'Register und Inhaltsdateien passen nicht zusammen');
 assert.deepEqual(RATGEBER_GROUPS.find((group) => group.id === 'altersvorsorge')?.slugs, expectedSlugs, 'Die neue Gruppe muss alle 24 Artikel enthalten');
@@ -26,7 +33,7 @@ assert.equal(new Set(ratgeberArticles.map((article) => article.slug)).size, ratg
 const routeMap = new Map(seoRoutes.map((route) => [route.path, route]));
 const sitemap = fs.readFileSync(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const readText = (article) => [article.headline, article.lead, ...article.sections.flatMap((section) => [section.heading, ...section.blocks.flatMap((block) => [block.text, block.caption, block.note, ...(block.head || []), ...(block.rows || []).flat(), ...(block.items || []).map((item) => typeof item === 'string' ? item : `${item.lead} ${item.text}`)])]), ...article.faqs.flatMap((faq) => [faq.question, faq.answer])].filter(Boolean).join(' ');
-const sourceHosts = new Set(['www.bundesregierung.de', 'dserver.bundestag.de', 'www.bundesfinanzministerium.de', 'riester.deutsche-rentenversicherung.de', 'rvrecht.deutsche-rentenversicherung.de', 'www.gesetze-im-internet.de', 'familienportal.de']);
+const sourceHosts = new Set(['www.bundesregierung.de', 'dserver.bundestag.de', 'www.bundesfinanzministerium.de', 'www.deutsche-rentenversicherung.de', 'riester.deutsche-rentenversicherung.de', 'rvrecht.deutsche-rentenversicherung.de', 'www.gesetze-im-internet.de', 'familienportal.de']);
 const details = [];
 
 for (const article of altersvorsorgeArticles) {
@@ -41,7 +48,7 @@ for (const article of altersvorsorgeArticles) {
   assert.ok(article.sections.some((section) => section.blocks.some((block) => block.type === 'table')), `${article.slug}: Praktische Tabelle fehlt`);
   assert.ok(!/\b(kostenlos|gratis|umsonst|ohne Kosten)\b|EUR sichern|sicher abholen|Platz sichern|Versorgungswerk|[\u2013\u2014]/i.test(text), `${article.slug}: Textregel verletzt`);
   assert.equal(article.publishedAt, '2026-10-09', `${article.slug}: Veröffentlichung mit der Freigabe vom 9. Oktober`);
-  assert.equal(article.updatedAt, '2026-10-09');
+  assert.equal(article.updatedAt, revisedSlugs.has(article.slug) ? '2026-10-27' : '2026-10-09', `${article.slug}: Nur redaktionell überarbeitete Artikel erhalten ein neues Änderungsdatum`);
   assert.equal(article.contentStatus, 'published');
   assert.ok(altersvorsorgeClusters.some((cluster) => cluster.id === article.cluster));
   assert.equal(article.sources.checkedAt, '2026-10-08', `${article.slug}: Quellenstand darf nicht mit Veröffentlichung verwechselt werden`);
@@ -75,7 +82,7 @@ for (const article of altersvorsorgeArticles) {
   assert.equal(route.description, article.metaDescription);
   assert.ok(sitemap.includes(`<loc>https://healio.de/ratgeber/${article.slug}</loc>`));
   assert.ok(JSON.stringify(route.schemaMarkup).includes('"datePublished":"2026-10-09"'), `${article.slug}: Freigegebenes Veröffentlichungsdatum fehlt im Schema`);
-  assert.ok(JSON.stringify(route.schemaMarkup).includes('"dateModified":"2026-10-09"'), `${article.slug}: Änderungsdatum fehlt im Schema`);
+  assert.ok(JSON.stringify(route.schemaMarkup).includes(`"dateModified":"${article.updatedAt}"`), `${article.slug}: Änderungsdatum fehlt im Schema`);
   details.push({ slug: article.slug, words });
 
   if (process.argv.includes('--built')) {
@@ -85,7 +92,7 @@ for (const article of altersvorsorgeArticles) {
     assert.ok(html.includes('data-ratgeber-sources'));
     assert.ok(html.includes('8. Oktober 2026'), `${article.slug}: Quellenstand fehlt`);
     assert.ok(html.includes('data-altersvorsorge-artikel-check'), `${article.slug}: Interaktiver Check fehlt`);
-    assert.ok(html.includes('Mit meiner Rechnung zum Zuschuss-Check'));
+    assert.ok(html.includes('Mit meiner Rechnung weiter'));
     assert.ok(html.includes('Passende Ratgeber zum Weiterlesen'));
     assert.ok(html.includes('"@type":"Article"'));
     assert.ok(!/<meta[^>]+name="robots"[^>]*noindex/.test(html));
@@ -107,6 +114,13 @@ const childAssignment = readText(altersvorsorgeArticles.find((article) => articl
 assert.ok(/2027/.test(childAssignment) && /2028/.test(childAssignment), 'Kinderzuordnung braucht getrennte Anwendungsjahre');
 const selfEmployed = readText(altersvorsorgeArticles.find((article) => article.slug === 'altersvorsorgedepot-selbststaendige'));
 assert.ok(/67/.test(selfEmployed) && /Steuererklärung/.test(selfEmployed), 'Selbstständigenberechtigung darf nicht allein aus der Berufsbezeichnung folgen');
+const parentalArticle = altersvorsorgeArticles.find((article) => article.slug === 'altersvorsorgedepot-teilzeit-elternzeit');
+const parentalText = readText(parentalArticle);
+assert.ok(/vorläufige Gleichstellung/.test(parentalText) && /vierten Geburtstag/.test(parentalText) && /rückwirkend/.test(parentalText), 'Elternzeit-Ratgeber braucht die bedingte Gleichstellung bei noch nicht anerkannten Kindererziehungszeiten');
+assert.ok(parentalArticle.sources.items.some((source) => source.href.includes('0010a_2027_01_01')), 'Berechtigungsausnahme braucht die direkte Gesetzesfassung für 2027');
+const bonusBody = JSON.stringify(bonusAdvertorial.sections);
+assert.ok(!/Body-Mass-Index und Nichtrauchen/.test(bonusBody), 'IKK-Beispiel darf keinen bloßen Nichtraucherstatus bonifizieren');
+assert.ok(bonusBody.includes('19125-infoblatt-ikkbonus.pdf'), 'IKK-Beispiel braucht den Original-Maßnahmenkatalog 2026');
 if (process.argv.includes('--built')) {
   const html = fs.readFileSync(new URL(`../dist${ALTERSVORSORGE_HUB_PATH}/index.html`, import.meta.url), 'utf8');
   for (const slug of expectedSlugs) assert.ok(html.includes(`/ratgeber/${slug}`), `Artikel im ausgelieferten Hub nicht erreichbar: ${slug}`);

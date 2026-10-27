@@ -25,9 +25,8 @@
  *
  * Bewusste Grenzen:
  *   - Alter, Abstand und Leistung nur nach G-BA-Richtlinien und gesund.bund.de.
- *   - Mammographie ab 45 ist NICHT beschlossen (Beratung seit 16.04.2026,
- *     Stellungnahmeverfahren seit 23.07.2026). Vor Veröffentlichung erneut auf
- *     g-ba.de prüfen.
+ *   - Mammographie ab 45: Beschluss vom 15.10.2026 noch nicht in Kraft.
+ *     Voraussichtlicher Leistungsbeginn 01.08.2027 vorbehaltlich Rechtsprüfung.
  *   - Keine Bonus-Euro-Beträge: Die Seite sagt nur, dass Vorsorge zählt, und
  *     verlinkt auf die Kassen-Ratgeber, die die Satzungswerte tragen.
  *   - Schwangerschaft nur mit Verweis auf den bestehenden Ratgeber, kein
@@ -39,8 +38,8 @@
  */
 
 export const article = {
-  updatedAt: "2026-10-08",
-  updatedAtLabel: "8. Oktober 2026",
+  updatedAt: "2026-10-27",
+  updatedAtLabel: "27. Oktober 2026",
   slug: 'vorsorgeuntersuchung',
   kind: 'ratgeber',
   group: 'vorsorge',
@@ -124,7 +123,7 @@ export const article = {
             ['Mammographie-Screening', '50 bis 75 Jahre', 'alle 24 Monate', 'G-BA, KFE-Richtlinie, § 10'],
             ['Test auf Chlamydien-Infektion', 'bis 25 Jahre', 'einmal jährlich', 'gesund.bund.de, Check-up'],
           ],
-          note: 'Über eine Absenkung der Mammographie-Altersgrenze auf 45 Jahre berät der G-BA (Pressemitteilung 16.04.2026, Stellungnahmeverfahren seit 23.07.2026). Beschlossen ist sie nicht, es gilt 50 bis 75. Für die Schwangerschaft gelten die Regeln der Mutterschaftsvorsorge.',
+          note: 'Der G-BA hat die Absenkung auf 45 Jahre am 15.10.2026 beschlossen. Der Beschluss ist noch nicht in Kraft: Frauen von 45 bis 49 sollen vorbehaltlich der Rechtsprüfung voraussichtlich ab 1. August 2027 teilnehmen können. Aktuell gilt weiter 50 bis 75. Für die Schwangerschaft gelten eigene Regeln.',
         },
         {
           type: 'table',
@@ -465,8 +464,10 @@ export const article = {
   sources: {
     checkedAt: '2026-10-07',
     checkedAtLabel: '7. Oktober 2026',
-    intro: 'Alter, Abstand und Leistung stammen aus den Richtlinien des G-BA und gesund.bund.de, die Einordnung der Selbstzahlerleistungen aus der Verbraucherzentrale, der Bonus aus dem Gesetz und den Kassen-Ratgebern.',
+    intro: 'Alter, Abstand und Leistung stammen aus den Richtlinien des G-BA und gesund.bund.de, die Einordnung der Selbstzahlerleistungen aus der Verbraucherzentrale, der Bonus aus dem Gesetz und den Kassen-Ratgebern. Der Mammographie-Beschluss wurde am 27.10.2026 nachgeprüft; der übrige Quellenstand bleibt der 07.10.2026.',
     items: [
+      { label: 'Mammographie-Screening: Erweiterung der unteren Altersgrenze', publisher: 'Gemeinsamer Bundesausschuss (G-BA), Beschluss', href: 'https://www.g-ba.de/beschluesse/8061/', stand: '15.10.2026, noch nicht in Kraft', accessedAt: '27.10.2026' },
+      { label: 'Mammographie-Screening künftig auch für Frauen von 45 bis 49 Jahren', publisher: 'Gemeinsamer Bundesausschuss (G-BA), Pressemitteilung', href: 'https://www.g-ba.de/presse/pressemitteilungen-meldungen/1356/', stand: '15.10.2026, Teilnahme voraussichtlich ab 01.08.2027 vorbehaltlich Rechtsprüfung', accessedAt: '27.10.2026' },
       {
         label: 'Krebsfrüherkennungs-Richtlinie (KFE-RL)',
         publisher: 'Gemeinsamer Bundesausschuss (G-BA)',

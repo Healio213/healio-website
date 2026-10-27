@@ -457,7 +457,7 @@ export const RATGEBER_OVERVIEW = {
         {
           "slug": "altersvorsorgedepot-foerderung",
           "kind": "ratgeber",
-          "listTitle": "Altersvorsorgedepot: Wie viel Förderung bekommst du?",
+          "listTitle": "Altersvorsorgedepot 2027: Wie viel Förderung bekommst du?",
           "listTeaser": "Die Zulagenrechnung mit vier Beiträgen und einem klar abgegrenzten Familienbeispiel.",
           "readingTimeMinutes": 4
         },
@@ -471,7 +471,7 @@ export const RATGEBER_OVERVIEW = {
         {
           "slug": "riester-altersvorsorgedepot-wechsel",
           "kind": "ratgeber",
-          "listTitle": "Riester ins Altersvorsorgedepot wechseln: Was bedeutet das?",
+          "listTitle": "Riester ins Altersvorsorgedepot wechseln: Ablauf und Kosten ab 2027",
           "listTeaser": "Die drei Wege für den Bestand und eine geordnete Vorbereitung des möglichen Wechsels.",
           "readingTimeMinutes": 4
         },

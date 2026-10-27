@@ -1,7 +1,8 @@
-import React, { useEffect, useId, useMemo, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { berechneZulagen, formatEuroDE, RECHNER_MAX_MONATSBEITRAG } from '@/lib/altersvorsorgeZulagen';
 import { getArtikelCheckVoreinstellung, createArtikelCheckState } from '@/lib/altersvorsorgeArtikelCheck';
+import { trackAltersvorsorgeFunnel } from '@/lib/altersvorsorgeAnalytics';
 import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl } from '@/lib/ratgeber-cta';
 
 const ZIELGRUPPEN = new Set(['eltern', 'riester', 'selbststaendige', 'einsteiger']);
@@ -12,9 +13,11 @@ const AltersvorsorgeArtikelCheck = ({ article, search = '' }) => {
   const id = useId();
   const voreinstellung = useMemo(() => getArtikelCheckVoreinstellung(article), [article]);
   const [value, setValue] = useState(voreinstellung);
+  const calculatorStarted = useRef(false);
 
   useEffect(() => {
     setValue(voreinstellung);
+    calculatorStarted.current = false;
   }, [voreinstellung]);
 
   const ergebnis = useMemo(() => berechneZulagen(value), [value]);
@@ -25,13 +28,14 @@ const AltersvorsorgeArtikelCheck = ({ article, search = '' }) => {
     utm_campaign: 'altersvorsorge-ratgeber',
     utm_content: article.slug,
   };
-  const checkUrl = buildInternalRatgeberUrl(`/altersvorsorgedepot${zielgruppe}#zuschuss-check`, search, defaults);
+  const checkUrl = buildInternalRatgeberUrl(`/altersvorsorgedepot${zielgruppe}#altersvorsorge-vormerkung`, search, defaults);
   const webinarUrl = buildInternalRatgeberUrl(`/altersvorsorgedepot${zielgruppe}#webinar`, search, defaults);
   const heading = article.cluster === 'riester'
     ? 'Deine Zulage und deinen Riester-Vertrag zusammen prüfen'
     : 'Was könnte der Staat zu deinem Beitrag dazulegen?';
 
   const updateValue = (field, nextValue) => {
+    if (!calculatorStarted.current) calculatorStarted.current = trackAltersvorsorgeFunnel('calculator_start', 'article_calculator');
     setValue((previous) => ({ ...previous, [field]: nextValue }));
   };
 
@@ -159,11 +163,12 @@ const AltersvorsorgeArtikelCheck = ({ article, search = '' }) => {
       <div className="mt-5 flex min-w-0 flex-col gap-3">
         <Link
           to={checkUrl}
-          state={state}
+          state={{ ...state, altersvorsorgeVormerkung: true }}
+          onClick={() => trackAltersvorsorgeFunnel('article_click', 'article_calculator')}
           data-ratgeber-internal-cta="end"
           className={`inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[#25c990] px-4 py-3 text-center text-base font-extrabold leading-6 text-[#07111f] transition hover:bg-[#5ee0b1] ${LINK_FOCUS_CLASS}`}
         >
-          Mit meiner Rechnung zum Zuschuss-Check
+          Mit meiner Rechnung weiter
         </Link>
         <Link
           to={webinarUrl}
@@ -174,8 +179,9 @@ const AltersvorsorgeArtikelCheck = ({ article, search = '' }) => {
         </Link>
       </div>
       <p className="mt-3 text-base leading-7 text-slate-700">
-        Zuschuss-Check: etwa 20 Minuten per Video oder Telefon, unverbindlich. Auf der nächsten Seite
-        kannst du den Check oder einen Rückruf über unser Kontaktformular anfragen. Die Rechnung braucht keine E-Mail-Adresse.
+        Deine Auswahl wird ins Kurzformular übernommen. Wenn du deinen Start für Januar vormerken möchtest,
+        trägst du dort deine Kontaktdaten ein. Im etwa 10-minütigen Vorabcheck klären wir deine Förderberechtigung
+        und die nächsten Schritte. Die Zulagenrechnung bleibt ohne Anmeldung verfügbar.
       </p>
       <p className="mt-2 text-base leading-7 text-slate-600">
         Neue Produkte können ab 2027 angeboten werden. Ein konkreter Vertrag setzt ein tatsächlich

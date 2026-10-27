@@ -5,10 +5,12 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'selbststaendige',
     audience: 'selbststaendige',
     nextStep: 'check',
-    metaTitle: 'Altersvorsorgedepot oder Rürup: Kriterienvergleich | Healio',
-    metaDescription: 'Altersvorsorgedepot und Rürup-Basisrente unterscheiden sich bei Förderung, Steuern und Auszahlung. Eine Entscheidungstabelle für Selbstständige ohne Pauschalurteil.',
-    headline: 'Altersvorsorgedepot oder Rürup-Rente: Wie vergleichst du die beiden Wege?',
-    lead: 'Für Selbstständige kommt ab 2027 ein weiterer geförderter Vorsorgeweg hinzu. Das macht eine vorhandene Rürup-Rente nicht automatisch überflüssig. Die Basisrente und das Altersvorsorgedepot haben unterschiedliche Regeln für Förderung und Auszahlung. Ein sinnvoller Vergleich beginnt mit deinem Budget und Vorsorgeziel, rechnet beide Steuerphasen mit ein und prüft anschließend die konkreten Kosten.',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
+    metaTitle: 'Altersvorsorgedepot oder Rürup: Vergleich 2027 | Healio',
+    metaDescription: 'Altersvorsorgedepot oder Rürup-Rente? Vergleiche Förderung, Steuerabzug, Geldbindung und Auszahlung ab 2027. Mit Entscheidungstabelle für Selbstständige.',
+    headline: 'Altersvorsorgedepot oder Rürup-Rente: Was passt ab 2027 zu dir?',
+    lead: 'Das Altersvorsorgedepot bietet bei erfüllten Voraussetzungen Zulagen und eine steuerliche Günstigerprüfung. Bei der Rürup-Basisrente steht der Sonderausgabenabzug für die Basisversorgung im Vordergrund. Keiner der beiden Wege ist für alle Selbstständigen günstiger. Die Tabelle vergleicht Förderung, Geldbindung und Auszahlung; für deine Entscheidung zählen außerdem Einkommen, verfügbare Reserve und konkrete Vertragskosten. Eine vorhandene Rürup-Rente wird durch den neuen Vorsorgeweg nicht automatisch überflüssig.',
     listTeaser: 'Zulagen und Sonderausgabenabzug auseinanderhalten, Geldbindung und Auszahlung vergleichen und bestehende Verträge einbeziehen.',
     sections: [
       { id: 'kurz-gesagt', heading: 'Kurz gesagt', blocks: [

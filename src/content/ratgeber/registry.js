@@ -104,7 +104,7 @@ export const RATGEBER_ENTRIES = [
     "listTeaser": "Warum ein Blick in die Satzung der eigenen Krankenkasse oft mehr bringt als jeder Tarifwechsel.",
     "metaTitle": "Krankenkassen-Bonus nutzen und Zusatzschutz finanzieren | Healio",
     "metaDescription": "Wie das Bonusprogramm der eigenen gesetzlichen Krankenkasse den größten Teil einer ambulanten Zusatzversicherung trägt. Erst prüfen, dann entscheiden.",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "zusatzbeitrag-krankenkasse-2026",
@@ -376,7 +376,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Krankenversicherung Beitrag 2026: Satz und Zusatzbeitrag | Healio",
     "metaDescription": "Krankenversicherung Beitrag 2026: 14,6 Prozent plus Zusatzbeitrag, Beitragsbemessungsgrenze und Rechenbeispiele für deinen Anteil.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "tk-zuzahlungsbefreiung",
@@ -522,7 +522,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 10,
     "metaTitle": "Zahnzusatzversicherung ohne Wartezeit: was gilt | Healio",
     "metaDescription": "Zahnzusatzversicherung ohne Wartezeit: was ab dem ersten Tag versichert ist, wo die Zahnstaffel greift und warum Angeratenes nur ein Sofortbaustein abdeckt.",
-    "publishedAt": "2026-10-06"
+    "publishedAt": "2026-10-06",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "zahnzusatzversicherung-fehlender-zahn",
@@ -545,7 +546,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 11,
     "metaTitle": "Lohnt sich eine Zahnzusatzversicherung? Die Rechnung | Healio",
     "metaDescription": "Lohnt sich eine Zahnzusatzversicherung? Rechenbeispiele zu Krone, Brücke und Implantat, Prüfpunkte, Zahnstaffel, Zwei-Jahres-Regel und die zwei Wege bei Healio.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "ukv-zahnzusatzversicherung",
@@ -1122,7 +1124,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
     "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "physiotherapie-kosten",
@@ -1255,7 +1257,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 8,
     "metaTitle": "Krankenzusatzversicherung ohne Gesundheitsfragen 2026 | Healio",
     "metaDescription": "Krankenzusatzversicherung ohne Gesundheitsfragen oder ohne Gesundheitsprüfung? Im ambulanten SDK-Tarif wirst du 2026 trotz Vorerkrankung sicher angenommen.",
-    "publishedAt": "2026-10-14"
+    "publishedAt": "2026-10-14",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "heilpraktiker-zusatzversicherung-vergleich-2026",
@@ -1300,7 +1303,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 9,
     "metaTitle": "Zusatzversicherung Krankenhaus Einzelzimmer: Leistungen | Healio",
     "metaDescription": "Zusatzversicherung fürs Einzelzimmer im Krankenhaus: Was SDK SP1, SP2 und SPU leisten, was sie im Monat kosten und worauf du bei Wartezeit und Klinikwahl achtest.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "krankenhaustagegeld",
@@ -1524,7 +1528,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 15,
     "metaTitle": "Was steht mir in der Schwangerschaft zu? Leistungen | Healio",
     "metaDescription": "Was steht dir in der Schwangerschaft zu? Kassenleistungen, Extras von AOK, TK, Barmer, IKK classic und mkk, dazu die Fristen.",
-    "publishedAt": "2026-10-06"
+    "publishedAt": "2026-10-06",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "hebamme-kosten-krankenkasse",
@@ -1557,7 +1562,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 7,
     "metaTitle": "Familienversicherung 2026: Einkommen und Antrag | Healio",
     "metaDescription": "Familienversicherung 2026: Einkommensgrenzen, Altersregeln für Kinder und Antrag bei der Krankenkasse. Voraussetzungen und Beiträge klar erklärt.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "aok-babybonus",
@@ -1614,7 +1620,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Vorsorgeuntersuchung: Alter, Abstand, Kassenleistung | Healio",
     "metaDescription": "Vorsorgeuntersuchung: Alle Untersuchungen für Kinder, Frauen und Männer mit Alter, Abstand und Quelle. Dazu, was privat bleibt und wie Vorsorge im Bonus zählt.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-08"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "vorsorgeuntersuchung-frauen",
@@ -1625,7 +1631,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 10,
     "metaTitle": "Vorsorgeuntersuchung Frauen: Alter und Leistung | Healio",
     "metaDescription": "Vorsorgeuntersuchung für Frauen: Untersuchung ab 20, Brust ab 30, Mammographie von 50 bis 75, Darm ab 50. Mit Abstand, Quelle und Selbstzahlerleistungen.",
-    "publishedAt": "2026-10-07"
+    "publishedAt": "2026-10-07",
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "vorsorgeuntersuchung-maenner",
@@ -1893,13 +1900,13 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "altersvorsorge",
     "cluster": "grundlagen",
-    "listTitle": "Altersvorsorgedepot: Wie viel Förderung bekommst du?",
+    "listTitle": "Altersvorsorgedepot 2027: Wie viel Förderung bekommst du?",
     "listTeaser": "Die Zulagenrechnung mit vier Beiträgen und einem klar abgegrenzten Familienbeispiel.",
     "readingTimeMinutes": 4,
-    "metaTitle": "Altersvorsorgedepot: Förderung mit Beispielen",
-    "metaDescription": "10, 25, 30 oder 150 EUR monatlich: So berechnen sich Grundzulage und Kinderzulage ab 2027. Voraussetzungen, Höchstbeträge und Geldbindung.",
+    "metaTitle": "Altersvorsorgedepot 2027: Förderung berechnen | Healio",
+    "metaDescription": "Bis zu 540 EUR Grundzulage und bis zu 300 EUR je zugeordnetem Kind: Förderung ab 2027 mit Beitragstabelle, Voraussetzungen und Rechner verständlich erklärt.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-wer-ist-berechtigt",
@@ -1919,13 +1926,13 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "altersvorsorge",
     "cluster": "riester",
-    "listTitle": "Riester ins Altersvorsorgedepot wechseln: Was bedeutet das?",
+    "listTitle": "Riester ins Altersvorsorgedepot wechseln: Ablauf und Kosten ab 2027",
     "listTeaser": "Die drei Wege für den Bestand und eine geordnete Vorbereitung des möglichen Wechsels.",
     "readingTimeMinutes": 4,
-    "metaTitle": "Riester ins Altersvorsorgedepot übertragen?",
-    "metaDescription": "Weiterführen, ruhen lassen oder ab 2027 übertragen: So bereitest du einen Riester-Wechsel vor und trennst Guthabentransfer von Fördersystemwechsel.",
+    "metaTitle": "Riester-Wechsel 2027: Altersvorsorgedepot | Healio",
+    "metaDescription": "Riester ab 2027 ins Altersvorsorgedepot übertragen: Ablauf, Kosten und Garantien vergleichen. Wann Förderung erhalten bleibt und was Altverträge betrifft.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "riester-kuendigen-oder-behalten",
@@ -1974,10 +1981,10 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Kinderzulage im Altersvorsorgedepot: Was bekommen Eltern ab 2027?",
     "listTeaser": "Die Förderrechnung für ein oder zwei Kinder, die Mindestbeiträge und der Unterschied zwischen Kinderzulage und Kindersparen.",
     "readingTimeMinutes": 4,
-    "metaTitle": "Altersvorsorgedepot: Kinderzulage berechnen | Healio",
+    "metaTitle": "Altersvorsorgedepot 2027: Kinderzulage | Healio",
     "metaDescription": "Bis zu 300 EUR Kinderzulage je Kind ab 2027: Welche Voraussetzungen gelten und wie 25 EUR Monatsbeitrag bei zwei Kindern zu 750 EUR Zulagen führen.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-kinderzulage-elternteil",
@@ -1999,11 +2006,11 @@ export const RATGEBER_ENTRIES = [
     "cluster": "familien",
     "listTitle": "Altersvorsorgedepot in Teilzeit oder Elternzeit: Worauf kommt es an?",
     "listTeaser": "Berechtigung und Nachweise getrennt vom Familienbudget prüfen, mit einer Beispielrechnung für kleinere Beiträge.",
-    "readingTimeMinutes": 4,
+    "readingTimeMinutes": 5,
     "metaTitle": "Altersvorsorgedepot in Teilzeit und Elternzeit | Healio",
     "metaDescription": "Teilzeit, Elternzeit und Kindererziehungszeiten: Welche Nachweise Eltern für die Förderberechtigung ab 2027 brauchen und wie ein tragbarer Beitrag entsteht.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-kindergeld-ende",
@@ -2029,7 +2036,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Altersvorsorgedepot für Selbstständige ab 2027 | Healio",
     "metaDescription": "Welche Selbstständigen ab 2027 förderberechtigt sind: Alter, Einkunftsart, Steuererklärung und Beitrag prüfen, bevor du mit bis zu 540 EUR Zulage planst.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-schwankendes-einkommen",
@@ -2062,13 +2069,13 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "altersvorsorge",
     "cluster": "selbststaendige",
-    "listTitle": "Altersvorsorgedepot oder Rürup-Rente: Wie vergleichst du die beiden Wege?",
+    "listTitle": "Altersvorsorgedepot oder Rürup-Rente: Was passt ab 2027 zu dir?",
     "listTeaser": "Zulagen und Sonderausgabenabzug auseinanderhalten, Geldbindung und Auszahlung vergleichen und bestehende Verträge einbeziehen.",
     "readingTimeMinutes": 4,
-    "metaTitle": "Altersvorsorgedepot oder Rürup: Kriterienvergleich | Healio",
-    "metaDescription": "Altersvorsorgedepot und Rürup-Basisrente unterscheiden sich bei Förderung, Steuern und Auszahlung. Eine Entscheidungstabelle für Selbstständige ohne Pauschalurteil.",
+    "metaTitle": "Altersvorsorgedepot oder Rürup: Vergleich 2027 | Healio",
+    "metaDescription": "Altersvorsorgedepot oder Rürup-Rente? Vergleiche Förderung, Steuerabzug, Geldbindung und Auszahlung ab 2027. Mit Entscheidungstabelle für Selbstständige.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-kosten",
@@ -2114,13 +2121,13 @@ export const RATGEBER_ENTRIES = [
     "kind": "ratgeber",
     "group": "altersvorsorge",
     "cluster": "entscheidung",
-    "listTitle": "Altersvorsorgedepot und Steuern: Was beim Sparen und bei der Auszahlung gilt",
+    "listTitle": "Altersvorsorgedepot und Steuern: Absetzen und Auszahlung ab 2027",
     "listTeaser": "Zulage, Günstigerprüfung und nachgelagerte Besteuerung verständlich eingeordnet.",
     "readingTimeMinutes": 4,
-    "metaTitle": "Altersvorsorgedepot und Steuern: die drei Phasen | Healio",
-    "metaDescription": "Ansparphase, Sonderausgabenabzug und spätere Auszahlung beim Altersvorsorgedepot: Welche Steuerregeln du auseinanderhalten solltest.",
+    "metaTitle": "Altersvorsorgedepot 2027: Steuern und Auszahlung | Healio",
+    "metaDescription": "Was du beim Altersvorsorgedepot absetzen kannst, wie Zulagen angerechnet werden und was bei der Auszahlung gilt. Mit Steuerbeispiel und Rechner.",
     "publishedAt": "2026-10-09",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-27"
   },
   {
     "slug": "altersvorsorgedepot-geld-entnehmen",

@@ -554,9 +554,10 @@ expect(Boolean(wasSteht), `Ratgeberartikel fehlt im Inhaltsregister: ${WAS_STEHT
 if (wasSteht) {
   const text = renderArticleText(wasSteht);
   expect(wasSteht.publishedAt === '2026-10-06', `${WAS_STEHT_SLUG} traegt publishedAt 2026-10-06.`);
+  expect(wasSteht.updatedAt === '2026-10-27', `${WAS_STEHT_SLUG}: Der neue Familien-/Altersvorsorgeverweis trägt sein tatsächliches Änderungsdatum.`);
   expect(
-    new RegExp(`<loc>https://healio\\.de${WAS_STEHT_PATH}</loc>\\s*<lastmod>2026-10-06</lastmod>`).test(sitemap),
-    `Die Sitemap nennt fuer ${WAS_STEHT_SLUG} lastmod 2026-10-06.`,
+    new RegExp(`<loc>https://healio\\.de${WAS_STEHT_PATH}</loc>\\s*<lastmod>2026-10-27</lastmod>`).test(sitemap),
+    `Die Sitemap nennt fuer ${WAS_STEHT_SLUG} lastmod 2026-10-27.`,
   );
   expect(!/NIPT|Ersttrimester|Nackenfalt|Kinderwunsch|\bERGO\b|DA Direkt|\bLKH\b/i.test(text), `${WAS_STEHT_SLUG}: gesperrtes Thema oder gesperrter Anbietername.`);
   expect(

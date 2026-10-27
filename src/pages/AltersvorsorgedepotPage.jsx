@@ -12,6 +12,7 @@ import AltersvorsorgeBegleitung from '@/components/sections/altersvorsorge/Alter
 import AltersvorsorgeZuschussCheck from '@/components/sections/altersvorsorge/AltersvorsorgeZuschussCheck';
 import AltersvorsorgeVormerkung from '@/components/sections/altersvorsorge/AltersvorsorgeVormerkung';
 import { readArtikelCheckState } from '@/lib/altersvorsorgeArtikelCheck';
+import { getAltersvorsorgeArticleSource, trackAltersvorsorgeFunnel } from '@/lib/altersvorsorgeAnalytics';
 import { formatEuroDE } from '@/lib/altersvorsorgeZulagen';
 import {
   CANONICAL_URL,
@@ -56,16 +57,36 @@ function splitBetrag(text) {
 }
 
 const AltersvorsorgedepotPage = () => {
-  const { state } = useLocation();
+  const { state, hash } = useLocation();
   const [searchParams] = useSearchParams();
   const fuerRoh = searchParams.get('fuer');
   const fuerParam = FUER_WERTE.includes(fuerRoh) ? fuerRoh : null;
   const variante = useMemo(() => getVariante(fuerParam), [fuerParam]);
 
-  const artikelCheck = useMemo(() => readArtikelCheckState(state), [state]);
+  const artikelCheck = useMemo(() => {
+    const snapshot = readArtikelCheckState(state);
+    return getAltersvorsorgeArticleSource(snapshot?.slug) ? snapshot : null;
+  }, [state]);
   const [rechnerWert, setRechnerWert] = useState(() => ({ ...variante.voreinstellung, ...(artikelCheck?.value || {}) }));
-  const [vormerkungAnfrage, setVormerkungAnfrage] = useState(0);
-  const vormerken = () => setVormerkungAnfrage((number) => number + 1);
+  const sourceArticleSlug = getAltersvorsorgeArticleSource(artikelCheck?.slug);
+  const artikelDirektVormerken = Boolean(sourceArticleSlug && state?.altersvorsorgeVormerkung === true);
+  const direktVormerken = artikelDirektVormerken || hash === '#altersvorsorge-vormerkung';
+  const [vormerkungAnfrage, setVormerkungAnfrage] = useState(direktVormerken ? 1 : 0);
+  const calculatorStarted = useRef(false);
+  const formOpened = useRef(false);
+  const updateRechner = (value) => {
+    if (!calculatorStarted.current) calculatorStarted.current = trackAltersvorsorgeFunnel('calculator_start', 'landing_calculator');
+    setRechnerWert(value);
+  };
+  const vormerken = (placement) => {
+    if (!formOpened.current) formOpened.current = trackAltersvorsorgeFunnel('form_open', placement);
+    setVormerkungAnfrage((number) => number + 1);
+  };
+  useEffect(() => {
+    if (!direktVormerken) return;
+    setVormerkungAnfrage((number) => number || 1);
+    if (!formOpened.current) formOpened.current = trackAltersvorsorgeFunnel('form_open', artikelDirektVormerken ? 'article_calculator' : 'inline_form');
+  }, [direktVormerken, artikelDirektVormerken]);
   useEffect(() => {
     if (vormerkungAnfrage > 0) scrollToId('altersvorsorge-vormerkung');
   }, [vormerkungAnfrage]);
@@ -101,7 +122,7 @@ const AltersvorsorgedepotPage = () => {
         <AltersvorsorgeHero
           variante={variante}
           onRechner={() => scrollToId('rechner')}
-          onCheck={vormerken}
+          onCheck={() => vormerken('landing_hero')}
         />
 
         {/* Abschnitt 2: Drei Beispielkarten */}
@@ -144,10 +165,10 @@ const AltersvorsorgedepotPage = () => {
         <section className="healio-container bg-white px-4 py-14 sm:px-6 lg:px-8">
           <ZulagenRechner
             value={rechnerWert}
-            onChange={setRechnerWert}
-            onCheck={vormerken}
+            onChange={updateRechner}
+            onCheck={() => vormerken('landing_calculator')}
             onWebinar={() => scrollToId('webinar')}
-            vormerkung={vormerkungAnfrage > 0 ? <AltersvorsorgeVormerkung value={rechnerWert} requestNumber={vormerkungAnfrage} /> : null}
+            vormerkung={vormerkungAnfrage > 0 ? <AltersvorsorgeVormerkung value={rechnerWert} requestNumber={vormerkungAnfrage} sourceArticleSlug={sourceArticleSlug} /> : null}
           />
         </section>
 
@@ -159,7 +180,7 @@ const AltersvorsorgedepotPage = () => {
             </p>
           </div>
         )}
-        <AltersvorsorgeZuschussCheck rechnerWert={rechnerWert} onVormerken={vormerken} />
+        <AltersvorsorgeZuschussCheck rechnerWert={rechnerWert} onVormerken={() => vormerken('landing_steps')} />
 
         {/* Abschnitt 4: Problem, Verstärkung, Lösung */}
         <section className="healio-container px-4 py-14 sm:px-6 lg:px-8">

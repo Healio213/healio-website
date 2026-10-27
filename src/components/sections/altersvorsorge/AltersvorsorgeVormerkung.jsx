@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
+import { getAltersvorsorgeArticleSource, trackAltersvorsorgeFunnel } from '@/lib/altersvorsorgeAnalytics';
 import { emailjsService } from '@/services/emailjsService';
 import { berechneZulagen, formatEuroDE } from '@/lib/altersvorsorgeZulagen';
 import { berechneVorsorgeModell, berechneSteuerModell, buildVormerkungMessage, vormerkungConsent } from '@/lib/altersvorsorgeVormerkung';
@@ -27,17 +28,18 @@ const Modellrechnung = ({ value }) => {
       </div>
       <div className="mt-5 grid gap-4 sm:grid-cols-2" aria-live="polite" aria-atomic="true">
         <div className="rounded-xl bg-[#064b3d] p-5 text-white"><p>ETF-Depot mit 67 im Modell</p><p className="mt-2 text-3xl font-extrabold">{modell ? formatEuroDE(Math.round(modell.endkapital)) : 'Alter 18–66 eingeben'}</p>{modell && <p className="mt-2 text-sm leading-6 text-white/85">Über {modell.jahre} Jahre: {formatEuroDE(modell.eigenbeitraege)} Eigenbeiträge und {formatEuroDE(modell.zulagen)} Grundzulagen.</p>}</div>
-        <div className="rounded-xl border border-emerald-200 bg-white p-5"><p className="text-slate-700">Zusätzlicher Steuervorteil im Modelljahr 2027</p><p className="mt-2 text-3xl font-extrabold text-[#064b3d]">{formatEuroDE(steuer)}</p><p className="mt-2 text-sm leading-6 text-slate-600">Zulage und möglicher einmaliger Startbonus bereits angerechnet. Der tatsächliche Vorteil hängt von Einkommen und Günstigerprüfung ab.</p></div>
+        <div className="rounded-xl border border-emerald-200 bg-white p-5"><p className="text-slate-700">Zusätzlicher Steuervorteil im Modelljahr 2027</p><p className="mt-2 text-3xl font-extrabold text-[#064b3d]">{formatEuroDE(steuer)}</p><p className="mt-2 text-sm leading-6 text-slate-600">Reguläre Zulage bereits angerechnet. Der einmalige Startbonus bleibt bei der Günstigerprüfung außer Betracht. Der tatsächliche Vorteil hängt von Einkommen und Günstigerprüfung ab.</p></div>
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-600">Depotannahmen: {formatEuroDE(value.monatsbeitrag)} monatlich bis 67, 4 % jährliche Rendite nach angenommenen Kosten; keine Renditezusage. Eigenbeiträge jeweils am Monatsende, heutige Grundzulage unverändert und rechnerisch jeweils zum Jahresende gutgeschrieben. Ohne Kinderzulage, Startbonus und Wiederanlage von Steuerersparnissen. Vor späteren Auszahlungssteuern, ohne Inflationsausgleich. Auch Verluste sind möglich. Das Steuermodell vereinfacht den Tarif mit einem festen Satz und ist keine persönliche Steuerberechnung.</p>
     </div>
   );
 };
 
-const AltersvorsorgeVormerkung = ({ value, requestNumber = 0 }) => {
+const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug = null }) => {
   const firstNameRef = useRef(null);
   const pendingRef = useRef(false);
   const mountedRef = useRef(false);
+  const formStarted = useRef(false);
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('idle');
   const [savedValue, setSavedValue] = useState(null);
@@ -50,12 +52,19 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0 }) => {
     if (!pendingRef.current) { setStatus('idle'); setSavedValue(null); setError(''); firstNameRef.current?.focus({ preventScroll: true }); }
   }, [requestNumber]);
 
+  const beginForm = (event) => {
+    if (['first_name', 'email', 'phone'].includes(event.target.name) && !formStarted.current) {
+      formStarted.current = trackAltersvorsorgeFunnel('form_start', 'inline_form');
+    }
+  };
+
   const submit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (pendingRef.current || isHoneypotFilled(form) || !form.reportValidity()) return;
     const data = new FormData(form);
     const snapshot = { ...value };
+    const articleSource = getAltersvorsorgeArticleSource(sourceArticleSlug);
     const mitTelefon = String(data.get('phone') || '').trim() !== '';
     pendingRef.current = true;
     setStatus('sending'); setError('');
@@ -63,8 +72,9 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0 }) => {
       await emailjsService.sendEmail({
         from_name: String(data.get('first_name')).trim(), from_email: String(data.get('email')).trim(),
         phone: String(data.get('phone') || '').trim(), company: '',
-        message: buildVormerkungMessage(snapshot, mitTelefon),
+        message: [buildVormerkungMessage(snapshot, mitTelefon), articleSource ? `Ratgeber-Herkunft: /ratgeber/${articleSource}` : ''].filter(Boolean).join('\n\n'),
       }, 'Altersvorsorge Vormerkung', { track: false, campaign: false });
+      trackAltersvorsorgeFunnel('lead', 'inline_form');
       if (!mountedRef.current) return;
       setSavedValue(snapshot); setStatus('success'); setPhone(''); setConsent(false);
       form.reset();
@@ -85,9 +95,9 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0 }) => {
       ) : (
         <>
           <h3 id="vormerkung-heading" className="font-display text-2xl font-extrabold text-slate-950">Deine Berechnung für Januar vormerken</h3>
-          <p className="mt-3 rounded-xl border border-emerald-200 bg-white p-4 text-base font-semibold leading-7 text-[#064b3d]" aria-live="polite">Deine Auswahl wurde übernommen: {formatEuroDE(value.monatsbeitrag)} Monatsbeitrag, {formatEuroDE(ergebnis.zulageJahr)} jährliche Zulage und {value.kinder} berücksichtigte Kinder.{ergebnis.startbonus > 0 ? ` Dazu ${formatEuroDE(ergebnis.startbonus)} einmaliger Startbonus.` : ''}</p>
+          <p className="mt-3 rounded-xl border border-emerald-200 bg-white p-4 text-base font-semibold leading-7 text-[#064b3d]" aria-live="polite">Deine aktuelle Berechnung: {formatEuroDE(value.monatsbeitrag)} Monatsbeitrag, {formatEuroDE(ergebnis.zulageJahr)} jährliche Zulage und {value.kinder} berücksichtigte Kinder.{ergebnis.startbonus > 0 ? ` Dazu ${formatEuroDE(ergebnis.startbonus)} einmaliger Startbonus.` : ''}</p>
           <p className="mt-3 text-base leading-7 text-slate-600">Nach dem Absenden siehst du dein Steuer- und ETF-Modell. Deine persönliche Einschätzung klären wir im unverbindlichen Vorabcheck.</p>
-          <form method="post" action="/kontakt" onSubmit={submit} className="mt-5 space-y-4">
+          <form method="post" action="/kontakt" onSubmit={submit} onInput={beginForm} className="mt-5 space-y-4">
             <fieldset disabled={status === 'sending'} className="grid min-w-0 gap-4 sm:grid-cols-2">
               <legend className="sr-only">Deine Kontaktdaten</legend>
               <label htmlFor="vormerkung-name" className="text-base font-semibold text-slate-800">Vorname<input ref={firstNameRef} id="vormerkung-name" name="first_name" required maxLength={80} autoComplete="given-name" className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 focus-visible:outline-emerald-700" /></label>

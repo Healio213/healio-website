@@ -22,12 +22,8 @@
  *     Die Themenliste nennt "ab 20, 30 und 50": Die Seite folgt der
  *     Richtlinie (20 Genitale und Abstrich, 30 Brust, 50 Mammographie und
  *     Darm, 35 Haut und Ko-Test).
- *   - Mammographie ab 45 ist NICHT beschlossen: Der G-BA berät
- *     (Pressemitteilung 16.04.2026), Stellungnahmeverfahren seit 23.07.2026
- *     (Beschluss 7918), kein Endbeschluss am 07.10.2026 (KFE-RL-Seite und
- *     Pressemitteilungen geprüft). Die Seite sagt neutral "der G-BA berät",
- *     ohne Termin oder Prognose (Entscheidung Marktanalyse-Sitzung
- *     07.10.2026). Vor Veröffentlichung erneut auf g-ba.de prüfen.
+ *   - Mammographie ab 45: Beschluss vom 15.10.2026 noch nicht in Kraft.
+ *     Voraussichtlicher Leistungsbeginn 01.08.2027 vorbehaltlich Rechtsprüfung.
  *   - Darmkrebs gilt für Frauen und Männer gleich seit 01.04.2025.
  *   - Faktenprüfung 07.10.2026: PRÜFBERICHT-brille-vorsorge.md.
  *   - IGeL-Extras (Ultraschall der Eierstöcke) klar getrennt, mit der
@@ -48,6 +44,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 10,
 
   listTitle: 'Vorsorgeuntersuchungen für Frauen: was ab 20, 30 und 50 zusteht',
@@ -137,7 +135,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ob die Altersgrenze sinkt, ist nicht entschieden. Der G-BA berät über eine Absenkung der unteren Altersgrenze auf 45 Jahre (Pressemitteilung vom 16.04.2026) und hat dazu am 23.07.2026 das Stellungnahmeverfahren eingeleitet. Beschlossen ist das nicht, es gilt weiter 50 bis 75.',
+          text: 'Der G-BA hat die Absenkung auf 45 Jahre am 15.10.2026 beschlossen. Der Beschluss ist noch nicht in Kraft. Vorbehaltlich der Rechtsprüfung sollen Frauen von 45 bis 49 voraussichtlich ab 1. August 2027 teilnehmen können. Aktuell gilt weiter 50 bis 75.',
         },
       ],
     },
@@ -173,7 +171,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Die ärztliche Vorsorge ist dort zu 100 % versichert, bis 500 EUR pro Jahr. Im 1. Kalenderjahr sind es bis 200 EUR, in den ersten beiden Kalenderjahren zusammen bis 500 EUR. Der Baustein kostet ab 20 Jahren 13,45 EUR im Monat. Erstattet wird die Untersuchung beim Arzt mit Rechnung nach GOÄ. Rechnungen vom Heilpraktiker, Pauschalrechnungen und Quittungen zählen nicht. Bei begründetem Krankheitsverdacht ist es Behandlung und keine Vorsorge. Für eine schon festgestellte Schwangerschaft ist laut Seite der Vorsorge-Topf der SDK der richtige Weg.',
+          text: 'Die ärztliche Vorsorge ist dort zu 100 % versichert, bis 500 EUR pro Jahr. Im 1. Kalenderjahr sind es bis 200 EUR, in den ersten beiden Kalenderjahren zusammen bis 500 EUR. Der Baustein kostet ab 20 Jahren 13,45 EUR im Monat. Erstattet wird die Untersuchung beim Arzt mit Rechnung nach GOÄ. Rechnungen vom Heilpraktiker, Pauschalrechnungen und Quittungen zählen nicht. Bei begründetem Krankheitsverdacht ist es Behandlung und keine Vorsorge. Bei einer bereits bestehenden Schwangerschaft müssen Annahme, Versicherungsbeginn und die konkrete Untersuchung individuell geprüft werden. Die SDK schließt bereits eingetretene Versicherungsfälle nach ihren allgemeinen Bedingungen aus. Ein Vorsorgebudget und fehlende Wartezeiten sind deshalb keine pauschale Zusage für spätere Termine derselben Schwangerschaft.',
         },
         {
           type: 'costCard',
@@ -270,7 +268,7 @@ export const article = {
     {
       question: 'Ab wann zahlt die Kasse die Mammographie?',
       answer:
-        'Ab 50 Jahren, bis 75, alle zwei Jahre im Mammographie-Screening. Über eine Absenkung auf 45 Jahre berät der G-BA, beschlossen ist sie nicht.',
+        'Aktuell von 50 bis 75 alle zwei Jahre. Die Absenkung auf 45 wurde am 15.10.2026 beschlossen, ist aber noch nicht in Kraft. Die Teilnahme ab 45 ist vorbehaltlich der Rechtsprüfung voraussichtlich ab 1. August 2027 möglich.',
     },
     {
       question: 'Zahlt die Kasse die Brustuntersuchung?',
@@ -305,8 +303,11 @@ export const article = {
   sources: {
     checkedAt: '2026-10-07',
     checkedAtLabel: '7. Oktober 2026',
-    intro: 'Alter, Abstand und Leistung stammen aus den Richtlinien des G-BA und gesund.bund.de, die Bewertung des Ultraschalls der Eierstöcke aus IGeL-Monitor und Verbraucherzentrale.',
+    intro: 'Alter, Abstand und Leistung stammen aus den Richtlinien des G-BA und gesund.bund.de, die Bewertung des Ultraschalls der Eierstöcke aus IGeL-Monitor und Verbraucherzentrale. Mammographie-Beschluss und Abgrenzung bei bestehender Schwangerschaft wurden am 27.10.2026 anhand der G-BA-Originalquellen und SDK-AVB nachgeprüft; der übrige Quellenstand bleibt der 07.10.2026.',
     items: [
+      { label: 'Mammographie-Screening: Erweiterung der unteren Altersgrenze', publisher: 'Gemeinsamer Bundesausschuss (G-BA), Beschluss', href: 'https://www.g-ba.de/beschluesse/8061/', stand: '15.10.2026, noch nicht in Kraft', accessedAt: '27.10.2026' },
+      { label: 'Mammographie-Screening künftig auch für Frauen von 45 bis 49 Jahren', publisher: 'Gemeinsamer Bundesausschuss (G-BA), Pressemitteilung', href: 'https://www.g-ba.de/presse/pressemitteilungen-meldungen/1356/', stand: '15.10.2026, Teilnahme voraussichtlich ab 01.08.2027 vorbehaltlich Rechtsprüfung', accessedAt: '27.10.2026' },
+      { label: 'Allgemeine Bedingungen der SDK: Versicherungsfall und Beginn des Schutzes, A.1 und A.4', publisher: 'SDK', href: 'https://gesundwerker.sdk.de/downloads/Bedingungen/1-751.pdf', stand: '1.751/01.22, Stand 01.01.2022', accessedAt: '27.10.2026' },
       {
         label: 'Krebsfrüherkennungs-Richtlinie (KFE-RL), §§ 1, 2, 6, 10, 13, 29 und 38',
         publisher: 'Gemeinsamer Bundesausschuss (G-BA)',

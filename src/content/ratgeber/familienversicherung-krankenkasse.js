@@ -9,6 +9,8 @@
 export const article = {
   "slug": "familienversicherung-krankenkasse",
   "kind": "ratgeber",
+  "updatedAt": "2026-10-27",
+  "updatedAtLabel": "27. Oktober 2026",
   "group": "familie",
   "metaTitle": "Familienversicherung 2026: Einkommen und Antrag | Healio",
   "metaDescription": "Familienversicherung 2026: Einkommensgrenzen, Altersregeln für Kinder und Antrag bei der Krankenkasse. Voraussetzungen und Beiträge klar erklärt.",
@@ -237,6 +239,14 @@ export const article = {
             ]
           ],
           "note": "Quellen: § 3 SGB V, BMG zur sozialen Pflegeversicherung und Verbraucherzentrale zum Versicherungsstatus. Keine erfundenen Monatsbeiträge. Familienversicherung und eigene Mitgliedschaft sind unterschiedliche Beitragswege."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Planst du neben euren laufenden Familienkosten auch deine eigene Altersvorsorge, erklärt der Ratgeber " },
+            { "text": "Kinderzulage im Altersvorsorgedepot ab 2027", "to": "/ratgeber/altersvorsorgedepot-kinderzulage" },
+            { "text": " die Voraussetzungen und die Zuordnung zum Elternteil. Eine Familienversicherung allein begründet keinen Anspruch auf diese Vorsorgeförderung." }
+          ]
         },
         {
           "type": "paragraph",

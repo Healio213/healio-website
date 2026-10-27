@@ -17,7 +17,7 @@ const TITLES = new Map([
   ],
   [
     "altersvorsorgedepot-foerderung",
-    "Altersvorsorgedepot: Wie viel Förderung bekommst du?"
+    "Altersvorsorgedepot 2027: Wie viel Förderung bekommst du?"
   ],
   [
     "altersvorsorgedepot-wer-ist-berechtigt",
@@ -25,7 +25,7 @@ const TITLES = new Map([
   ],
   [
     "riester-altersvorsorgedepot-wechsel",
-    "Riester ins Altersvorsorgedepot wechseln: Was bedeutet das?"
+    "Riester ins Altersvorsorgedepot wechseln: Ablauf und Kosten ab 2027"
   ],
   [
     "riester-kuendigen-oder-behalten",
@@ -69,7 +69,7 @@ const TITLES = new Map([
   ],
   [
     "altersvorsorgedepot-oder-ruerup",
-    "Altersvorsorgedepot oder Rürup-Rente: Wie vergleichst du die beiden Wege?"
+    "Altersvorsorgedepot oder Rürup-Rente: Was passt ab 2027 zu dir?"
   ],
   [
     "altersvorsorgedepot-kosten",
@@ -85,7 +85,7 @@ const TITLES = new Map([
   ],
   [
     "altersvorsorgedepot-steuern",
-    "Altersvorsorgedepot und Steuern: Was beim Sparen und bei der Auszahlung gilt"
+    "Altersvorsorgedepot und Steuern: Absetzen und Auszahlung ab 2027"
   ],
   [
     "altersvorsorgedepot-geld-entnehmen",

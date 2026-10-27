@@ -48,7 +48,7 @@
     "test:leitfaden": "node scripts/check-praxis-leitfaden-contract.mjs",
     "test:meta-check-consent": "node scripts/check-meta-check-consent-contract.mjs",
     "test:kurzcheck-lead": "node --test scripts/check-kurzcheck-lead-api.mjs",
-    "test:ratgeber": "node scripts/check-ratgeber-contract.mjs",
+    "test:ratgeber": "node scripts/check-ratgeber-contract.mjs && node scripts/check-ratgeber-beginn-regression.mjs",
     "test:ratgeber-build": "node scripts/check-ratgeber-build-output.mjs",
     "ratgeber:register": "node scripts/build-ratgeber-registry.mjs",
     "test:whatsapp": "node scripts/check-whatsapp-contact-rendered.mjs",
@@ -62,6 +62,7 @@
     "test:ukv-vorsorge": "node scripts/check-ukv-vorsorge-contract.mjs",
     "test:altersvorsorge": "node scripts/check-altersvorsorge-release.mjs && node scripts/check-altersvorsorge-ratgeber.mjs && node scripts/check-altersvorsorge-vormerkung.mjs",
     "test:altersvorsorge-vormerkung-rendered": "node scripts/check-altersvorsorge-vormerkung-rendered.mjs",
+    "test:altersvorsorge-analytics-rendered": "node scripts/check-altersvorsorge-analytics.mjs",
     "test:altersvorsorge-startinfo": "node scripts/check-altersvorsorge-startinfo.mjs",
     "test:lead-capture": "node --test scripts/check-lead-capture-api.mjs scripts/check-lead-capture-client.mjs"
   },

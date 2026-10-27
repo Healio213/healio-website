@@ -14,8 +14,8 @@
 
 export const article = {
   rechner: false,
-  updatedAtLabel: "8. Oktober 2026",
-  updatedAt: "2026-10-08",
+  updatedAtLabel: "27. Oktober 2026",
+  updatedAt: "2026-10-27",
   slug: 'krankenkassen-bonus-zusatzversicherung',
   kind: 'advertorial',
 
@@ -74,9 +74,17 @@ export const article = {
           items: [
             'die Vorsorgeuntersuchung beim Hausarzt',
             'die zwei Zahnvorsorgetermine im Jahr',
-            'ein vollständiger Impfschutz',
-            'die Mitgliedschaft im Fitnessstudio oder Sportverein',
-            'gesunde Werte bei Blutdruck, Body-Mass-Index und Nichtrauchen',
+            'anerkannte Schutzimpfungen mit abgeschlossener Immunisierung',
+            'anerkannte Aktivitäten im Fitnessstudio oder Sportverein',
+            'nachgewiesene Blutdruck- und Body-Mass-Index-Werte im anerkannten Bereich',
+          ],
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Welche Nachweise gelten, zeigt das ' },
+            { text: 'Original-Infoblatt der IKK classic für das Bonusjahr 2026', href: 'https://cdn.ikk-classic.de/exporter/19125-infoblatt-ikkbonus.pdf' },
+            { text: '. Blutdruck und BMI zählen dort nur zusammen mit mindestens einer anerkannten regelmäßigen Aktivität. Ein bloßer Nichtraucherstatus steht nicht als eigene Bonusmaßnahme im Katalog.' },
           ],
         },
         {
@@ -164,7 +172,7 @@ export const article = {
   ctaAfterSectionId: 'rechnung',
 
   footnote:
-    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft.',
+    'Healio GmbH, unabhängiger Versicherungsmakler nach Paragraf 93 HGB. Kein Vertreter einer einzelnen Gesellschaft. Das IKK-Maßnahmenbeispiel wurde am 27. Oktober 2026 mit dem Original-Infoblatt zum Bonusjahr 2026, Stand April 2026, abgeglichen. Diese punktuelle Prüfung datiert die übrigen Aussagen nicht neu.',
 };
 
 export default article;

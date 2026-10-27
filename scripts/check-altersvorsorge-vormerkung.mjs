@@ -32,6 +32,11 @@ test('Steuermodell zieht Zulage ab und zeigt keinen doppelten Fördervorteil', (
   assert.equal(model.berechneSteuerModell({ monatsbeitrag: 150, kinder: 2, steuersatz: 0.3 }), 0);
 });
 
+test('Einmaliger Startbonus mindert den zusätzlichen Steuervorteil nicht (§ 10a Abs. 1 Satz 6)', () => {
+  assert.equal(model.berechneSteuerModell({ monatsbeitrag: 150, kinder: 0, unter25: true, steuersatz: 0.3 }), 162);
+  assert.equal(model.berechneSteuerModell({ monatsbeitrag: 150, kinder: 2, unter25: true, steuersatz: 0.42 }), 94.8);
+});
+
 test('Anfrage enthält die gewählte Rechnung, Status und ausdrücklich erteilte Einwilligung', () => {
   assert.equal(typeof model.buildVormerkungMessage, 'function', 'Anfragetext fehlt');
   const message = model.buildVormerkungMessage({ monatsbeitrag: 50, kinder: 2, unter25: true, selbststaendig: true, riester: true }, true);

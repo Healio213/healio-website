@@ -38,6 +38,8 @@ export const article = {
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',
+  updatedAt: '2026-10-27',
+  updatedAtLabel: '27. Oktober 2026',
   readingTimeMinutes: 9,
 
   listTitle: 'Zusatzversicherung Krankenhaus Einzelzimmer: was sie leistet und kostet',
@@ -71,7 +73,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die Zusatzversicherung ergänzt, was die gesetzliche Kasse im Krankenhaus nicht zahlt. Die Kasse übernimmt die medizinisch notwendige Versorgung, in der Regel im nächstgelegenen Krankenhaus und im Mehrbettzimmer. Mit einer Zusatzversicherung kann ein Kassenpatient nach Angabe der Verbraucherzentrale nahezu die gleichen Leistungen wie ein Privatpatient versichern: die Wahl der Klinik, die Behandlung durch den Chefarzt und ein Ein- oder Zweibett- statt eines Mehrbettzimmers.',
+          text: 'Die Kasse übernimmt die medizinisch notwendige Versorgung einschließlich Unterkunft. Du kannst bereits als Kassenpatient unter den zugelassenen Krankenhäusern wählen. Wählst du ohne zwingenden Grund eine andere Klinik als in der Einweisung genannt, kann die Kasse dir entstehende Mehrkosten auferlegen (§ 39 Absatz 2 SGB V). Eine Zusatzversicherung kann je nach Tarif private Wahlleistungen wie Ein- oder Zweibettzimmer, Wahlarztbehandlung und zusätzliche Kosten der Klinikwahl ergänzen. Für eine reine Privatklinik gelten andere Voraussetzungen; kläre die Kostenübernahme vorher.',
         },
         {
           type: 'paragraph',
@@ -309,8 +311,10 @@ export const article = {
   sources: {
     checkedAt: '2026-10-07',
     checkedAtLabel: '7. Oktober 2026',
-    intro: 'Die Einordnung stammt von der Verbraucherzentrale und aus dem Gesetz, die Tarifaussagen und Beiträge von der Produktseite.',
+    intro: 'Die Einordnung stammt von der Verbraucherzentrale und aus dem Gesetz, die Tarifaussagen und Beiträge von der Produktseite. Die gesetzliche Klinikwahl wurde am 27.10.2026 anhand von BMG und § 39 SGB V nachgeprüft; der übrige Quellenstand bleibt der 07.10.2026.',
     items: [
+      { label: 'Krankenhausbehandlung: Wahl und mögliche Mehrkosten, § 39 Absätze 1 und 2 SGB V', publisher: 'Gesetze im Internet', href: 'https://www.gesetze-im-internet.de/sgb_5/__39.html', stand: 'Geltende Fassung', accessedAt: '27.10.2026' },
+      { label: 'Versorgung im Krankenhaus: freie Wahl unter zugelassenen Krankenhäusern', publisher: 'Bundesgesundheitsministerium', href: 'https://www.bundesgesundheitsministerium.de/themen/krankenversicherung/online-ratgeber-krankenversicherung/krankenversicherung/versorgung-im-krankenhaus', stand: '03.09.2026', accessedAt: '27.10.2026' },
       {
         label: 'Zusatzversicherungen zur gesetzlichen Krankenversicherung: Sinnvoll oder nicht?',
         publisher: 'Verbraucherzentrale',

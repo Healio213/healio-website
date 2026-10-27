@@ -5,10 +5,12 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'familien',
     audience: 'eltern',
     nextStep: 'calculator',
-    metaTitle: 'Altersvorsorgedepot: Kinderzulage berechnen | Healio',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
+    metaTitle: 'Altersvorsorgedepot 2027: Kinderzulage | Healio',
     metaDescription: 'Bis zu 300 EUR Kinderzulage je Kind ab 2027: Welche Voraussetzungen gelten und wie 25 EUR Monatsbeitrag bei zwei Kindern zu 750 EUR Zulagen führen.',
     headline: 'Kinderzulage im Altersvorsorgedepot: Was bekommen Eltern ab 2027?',
-    lead: 'Bei zwei Kindern können 25 EUR Eigenbeitrag im Monat zu 750 EUR Zulagen im Jahr führen. Das setzt eine passende Förderberechtigung, Kindergeld und die richtige Zuordnung der Kinderzulage voraus. Die Förderung fließt in die Altersvorsorge eines Elternteils und steht nicht für den Familienalltag zur Verfügung. Hier siehst du die Rechnung und die Punkte, die davor zu klären sind.',
+    lead: 'Ab 2027 sind bis zu 300 EUR Kinderzulage im Jahr je dir zugeordnetem zulagenberechtigten Kind möglich. Bei unmittelbarer Förderberechtigung reichen dafür 300 EUR eigener Jahresbeitrag, also zum Beispiel zwölfmal 25 EUR. Mit zwei entsprechend zugeordneten Kindern ergeben sich zusammen mit der Grundzulage 750 EUR Zulagen. Die Förderung fließt in die Altersvorsorge des berechtigten Elternteils, nicht auf das Konto des Kindes. Hier siehst du Voraussetzungen, Beispiele und den Weg zum Rechner.',
     listTeaser: 'Die Förderrechnung für ein oder zwei Kinder, die Mindestbeiträge und der Unterschied zwischen Kinderzulage und Kindersparen.',
     sections: [
       { id: 'kurz-gesagt', heading: 'Kurz gesagt', blocks: [
@@ -54,6 +56,7 @@ export const article = makeAltersvorsorgeArticle({
       { question: 'Brauche ich für jedes Kind zusätzlich 25 EUR Monatsbeitrag?', answer: 'Bei der gezeigten Rechnung nicht. Derselbe Eigenbeitrag von 300 EUR wird für jedes zugeordnete Kind berücksichtigt. Die Kinderzulage ist je Kind auf 300 EUR begrenzt.' },
       { question: 'Kann ich die Kinderzulage für aktuelle Familienausgaben abheben?', answer: 'Die Zulage fließt in deinen Altersvorsorgevertrag. Eine vorzeitige schädliche Verwendung kann die Rückzahlung von Förderung auslösen. Für laufende Ausgaben und die Familienreserve solltest du anderes Geld einplanen.' },
     ],
-    sourceIds: ['gesetz', 'bmf', 'estg85'],
+    sourceIds: ['gesetz', 'bmf', 'estg85', 'rv85'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 geprüft: Höhe der Kinderzulage und Zuordnung nach § 85 EStG in der Fassung für 2027. Für spätere Beitragsjahre gelten gesonderte Zuordnungsregeln; die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
     relatedSlugs: ['altersvorsorgedepot-kinderzulage-elternteil', 'altersvorsorgedepot-foerderung'],
   });

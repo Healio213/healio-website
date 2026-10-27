@@ -75,6 +75,10 @@ for (const slug of knownBlogSlugs) {
   assert.ok(fs.existsSync(htmlPath), `${route}: HTML-Datei fehlt.`);
 
   const html = readText(htmlPath);
+  const article = cachedBySlug.get(slug);
+  const escapeHtml = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+  assert.ok(html.includes(`<title>${escapeHtml(article.title)}</title>`), `${route}: HTML-Titel entspricht nicht dem aktuellen CMS-Artikel.`);
+  assert.ok(html.includes(`name="description" content="${escapeHtml(article.meta_description)}"`), `${route}: HTML-Beschreibung entspricht nicht dem aktuellen CMS-Artikel.`);
   const rootMarkup = getRootMarkup(html);
   assertNoSoft404(rootMarkup, route);
   assert.match(rootMarkup, /data-static-blog-article|data-prerendered-blog-article/, `${route}: Artikel-Markup fehlt.`);

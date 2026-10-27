@@ -499,9 +499,9 @@ export const article = {
       {
         label: 'Begleitperson im Krankenhaus: Anspruch und Kosten',
         publisher: 'gesund.bund.de (Bundesgesundheitsministerium)',
-        href: 'https://gesund.bund.de/gesundheitsversorgung/begleitperson-im-krankenhaus',
+        href: 'https://gesund.bund.de/begleitperson-im-krankenhaus',
         stand: '23.04.2026',
-        accessedAt: '07.10.2026',
+        accessedAt: '27.10.2026',
       },
       {
         label: 'Ratgeber Krankenhaus, Abschnitt 2.4.2 Befreiung von der Zuzahlung',

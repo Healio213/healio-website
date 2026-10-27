@@ -5,6 +5,8 @@ export const article = makeAltersvorsorgeArticle({
     cluster: 'familien',
     audience: 'eltern',
     nextStep: 'webinar',
+    updatedAt: '2026-10-27',
+    updatedAtLabel: '27. Oktober 2026',
     metaTitle: 'Altersvorsorgedepot in Teilzeit und Elternzeit | Healio',
     metaDescription: 'Teilzeit, Elternzeit und Kindererziehungszeiten: Welche Nachweise Eltern für die Förderberechtigung ab 2027 brauchen und wie ein tragbarer Beitrag entsteht.',
     headline: 'Altersvorsorgedepot in Teilzeit oder Elternzeit: Worauf kommt es an?',
@@ -14,7 +16,7 @@ export const article = makeAltersvorsorgeArticle({
       { id: 'kurz-gesagt', heading: 'Kurz gesagt', blocks: [
         { type: 'list', items: [
           'Bei rentenversicherungspflichtiger Teilzeitarbeit besteht grundsätzlich eine unmittelbare Grundlage für die Förderung.',
-          'Elternzeit allein beweist diese Berechtigung nicht. Anerkannte Kindererziehungszeiten können die erforderliche rentenrechtliche Grundlage schaffen.',
+          'Elternzeit allein beweist diese Berechtigung nicht. Anerkannte Kindererziehungszeiten oder die bedingte vorläufige Gleichstellung nach § 10a Absatz 1a EStG können relevant sein.',
           'Die neue Förderhöhe folgt dem Jahresbeitrag. Für eine unmittelbar berechtigte Person können auch kleine Beiträge eine Grundzulage auslösen.',
           'Das Familienbudget, die Zuordnung der Kinderzulage und vorhandene Riester-Verträge gehören vor einem neuen Vertrag in dieselbe Prüfung.',
         ] },
@@ -23,13 +25,14 @@ export const article = makeAltersvorsorgeArticle({
         { type: 'paragraph', text: 'Bei einem normalen Teilzeitjob mit Pflichtbeiträgen zur gesetzlichen Rentenversicherung ist die Grundlage meist aus der Beschäftigung ersichtlich. Arbeite mit deiner aktuellen Abrechnung und dem Versicherungsverlauf, statt nur die Stundenzahl zu betrachten. Ein Minijob mit Befreiung von der Rentenversicherungspflicht ist nicht dieselbe Situation. Beim neuen Selbstständigenzugang musst du unter 67 sein, im Beitragsjahr passende Einkünfte erzielen und dafür eine Steuererklärung abgeben.' },
         { type: 'table', caption: 'Unterlagen für unterschiedliche Familiensituationen', head: ['Situation', 'Erster Nachweis', 'Was zusätzlich prüfen?'], rows: [
           ['Rentenversicherungspflichtige Teilzeit', 'Aktuelle Abrechnung und Versicherungsstatus', 'Kinderzulage und mögliche Altverträge'],
-          ['Elternzeit ohne Beschäftigung', 'Rentenrechtliche Anerkennung der Kindererziehungszeiten', 'Welchem Elternteil die Zeiten zugeordnet sind'],
+          ['Elternzeit ohne Beschäftigung', 'Kindererziehungszeiten oder Voraussetzungen der vorläufigen Gleichstellung prüfen', 'Zuordnung, Kindergeld und fristgerechter Antrag auf Kindererziehungszeiten'],
           ['Selbstständigkeit während der Betreuung', 'Unter 67, passende Einkünfte und Erklärung für das Beitragsjahr', 'Neue Berechtigung und tragbarer Beitrag'],
           ['Keine eigene Berechtigungsgrundlage', 'Situation des Ehepartners', 'Voraussetzungen und Grenzen mittelbarer Berechtigung'],
         ], note: 'Die Tabelle ist eine Vorbereitung für die Prüfung. Die Tabelle begründet keinen Anspruch für eine bestimmte Person.' },
       ] },
       { id: 'erziehungszeiten', heading: 'Elternzeit ist nicht dasselbe wie Kindererziehungszeit', blocks: [
         { type: 'paragraph', text: 'Elternzeit beschreibt deine arbeitsrechtliche Auszeit. Kindererziehungszeiten werden dagegen im Rentenkonto berücksichtigt und einem Elternteil zugeordnet. Nach dem Hinweis der Zulagenstelle sind Eltern ohne rentenversicherungspflichtige Tätigkeit während der Elternzeit nicht automatisch förderberechtigt. Die Berücksichtigung der Erziehungszeiten muss beim zuständigen Rentenversicherungsträger geklärt werden. Dafür steht unter anderem der Antrag V0800 zur Verfügung.' },
+        { type: 'paragraph', text: 'Ab 2027 gibt es außerdem eine bedingte vorläufige Gleichstellung nach § 10a Absatz 1a EStG: Diese Gleichstellung kann greifen, wenn eine Anerkennung von Kindererziehungszeiten nur wegen eines fehlenden oder noch nicht beschiedenen Antrags aussteht. Voraussetzung ist unter anderem, dass das Kind im Beitragsjahr das vierte Lebensjahr noch nicht vollendet hat, Kindergeld gegenüber dir oder deinem Ehepartner festgesetzt wurde und du die Kinderzulage beantragt oder auf den Ehepartner übertragen hast. Den Antrag auf Kindererziehungszeiten musst du spätestens am Tag nach dem vierten Geburtstag stellen. Bei am 1. Januar geborenen Kindern gilt eine besondere Altersregel. Werden die Erziehungszeiten später nicht anerkannt, entfällt die Förderberechtigung nach dieser Regel rückwirkend. Eine ausstehende Anerkennung ist deshalb weder ein pauschaler Ausschluss noch eine Förderzusage.' },
         { type: 'paragraph', text: 'Prüfe deshalb deinen eigenen Versicherungsverlauf. Eine Eintragung beim anderen Elternteil hilft nicht automatisch deinem Vertrag. Außerdem laufen eine lange Betreuungsauszeit, der Bezug von Elterngeld und die rentenrechtlichen Kindererziehungszeiten nicht zwingend über dieselben Zeiträume. Wenn du später noch zu Hause bleibst, solltest du deine Berechtigung erneut betrachten, bevor du die bisherige Förderrechnung einfach fortschreibst.' },
       ] },
       { id: 'beitrag', heading: 'Wie viel Beitrag passt zu weniger Einkommen?', blocks: [
@@ -51,9 +54,10 @@ export const article = makeAltersvorsorgeArticle({
     ],
     faqs: [
       { question: 'Sinkt die neue Grundzulage automatisch, wenn ich in Teilzeit gehe?', answer: 'Für unmittelbar Berechtigte richtet sich die neue Grundzulage nach dem Eigenbeitrag. Ein geringeres Einkommen allein senkt sie nicht. Änderst du den Beitrag oder deine Berechtigungsgrundlage, muss die Rechnung neu geprüft werden.' },
-      { question: 'Reicht meine Elternzeitbestätigung als Fördernachweis?', answer: 'Die Elternzeit ersetzt die rentenrechtliche Prüfung nicht. Ohne rentenversicherungspflichtige Tätigkeit solltest du insbesondere die Anerkennung und Zuordnung der Kindererziehungszeiten beim Rentenversicherungsträger klären.' },
+      { question: 'Reicht meine Elternzeitbestätigung als Fördernachweis?', answer: 'Die Elternzeit ersetzt die rentenrechtliche Prüfung nicht. Kläre ohne rentenversicherungspflichtige Tätigkeit die Kindererziehungszeiten und ihre Zuordnung. Bei einem fehlenden oder noch nicht beschiedenen Antrag kann ab 2027 die bedingte vorläufige Gleichstellung nach § 10a Absatz 1a EStG greifen. Dafür gelten eigene Voraussetzungen und eine Antragsfrist; bei späterer Nichtanerkennung entfällt diese Berechtigung rückwirkend.' },
       { question: 'Kann ich während der Elternzeit einfach auf 10 EUR monatlich reduzieren?', answer: '120 EUR Jahresbeitrag sind eine Fördervoraussetzung des neuen Systems. Ob eine bestehende Vereinbarung auf diese Rate geändert werden kann und welche Kosten folgen, hängt vom konkreten Vertrag ab.' },
     ],
-    sourceIds: ['gesetz', 'bmf', 'zfa', 'familien-foerderung'],
+    sourceIds: ['gesetz', 'bmf', 'zfa', 'familien-foerderung', 'rv10a'],
+    sourceReviewNote: 'Ergänzend am 27. Oktober 2026 geprüft: bedingte Gleichstellung bei noch nicht anerkannten Kindererziehungszeiten, Antragsfrist und rückwirkender Wegfall nach § 10a Absatz 1a EStG in der Fassung für 2027. Die übrige Quellenbasis bleibt vom 8. Oktober 2026.',
     relatedSlugs: ['altersvorsorgedepot-wer-ist-berechtigt', 'altersvorsorgedepot-kinderzulage-elternteil'],
   });

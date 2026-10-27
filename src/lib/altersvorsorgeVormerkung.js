@@ -28,7 +28,9 @@ export function berechneSteuerModell({ monatsbeitrag, kinder = 0, unter25 = fals
   if (!gueltigerBeitrag(monatsbeitrag) || !Number.isFinite(steuersatz) || steuersatz < 0 || steuersatz > 0.45
     || !Number.isInteger(kinder) || kinder < 0 || kinder > 6) return null;
   const ergebnis = berechneZulagen({ monatsbeitrag, kinder, unter25 });
-  const zulagen = ergebnis.zulageJahr + ergebnis.startbonus;
+  // § 10a Abs. 1 Satz 6 EStG: Der einmalige Startbonus nach § 84 Satz 2
+  // bleibt bei der steuerlichen Zulageermittlung außer Betracht.
+  const zulagen = ergebnis.zulageJahr;
   return Math.round(Math.max(0, (ergebnis.jahresbeitrag + zulagen) * steuersatz - zulagen) * 100) / 100;
 }
 
