@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedJourney from '@/components/guided/GuidedJourney';
 import { useTranslation } from 'react-i18next';
@@ -13,12 +13,14 @@ import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
 import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
 import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
+import AmbulantBonusFeature from '@/components/sections/ambulant/AmbulantBonusFeature';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
   const { pathname, search } = useLocation();
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
+  const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
   // These codes identify only the entry path, never a completed bonus check
   // or a verified personal result. No amounts or health details are imported.
   const originCode = new URLSearchParams(search).get('src');
@@ -58,16 +60,16 @@ const AmbulantPage = () => {
   return (
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
-      {/* Hero, Film und Siegel folgen auf allen Bildschirmgrößen derselben
-          Reihenfolge. Mobil bleiben Situation, Tarif und Bonus danach kompakt. */}
+      {/* Der Bonusrechner steht direkt unter dem Einstieg. Tarifwahl und
+          Rechner teilen sich den Jahrgang, ohne ihn dauerhaft zu speichern. */}
       <div className="flex min-h-screen flex-col bg-white md:block">
         <DesktopLead surface="ambulant" language={lang} fromBonusTopic={fromBonusTopic} />
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
-        {/* Frank 15.10.2026: „Auf einen Blick“ ist die wichtigste Sektion und steht
-            auf allen Größen direkt unter dem Hero, vor dem Film. Gleiche
-            order-Stufe wie der Hero, die Quellreihenfolge entscheidet. */}
+        <AmbulantBonusFeature geburtsjahrEingabe={geburtsjahrEingabe} fromBonusTopic={fromBonusTopic} />
+        {/* Gleiche order-Stufe wie Hero und Bonusrechner; die Quellreihenfolge
+            hält „Auf einen Blick“ vor dem Film. */}
         <div className="order-1 md:contents">
           <AmbulantAufEinenBlick fromBonusTopic={fromBonusTopic} />
         </div>
@@ -83,7 +85,7 @@ const AmbulantPage = () => {
         <div className="order-4 md:contents">
           <AmbulantBrilleKarte />
         </div>
-        <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} />
+        <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} geburtsjahrEingabe={geburtsjahrEingabe} setGeburtsjahrEingabe={setGeburtsjahrEingabe} />
         {/* Frank 15.10.: Verweis auf den Tarifvergleich unter allen Abschnitten. */}
         <div className="order-[12] md:order-none"><AmbulantVergleichTeaser /></div>
       </div>

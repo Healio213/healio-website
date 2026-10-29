@@ -72,6 +72,8 @@ const Header = () => {
     location.pathname === path || location.pathname.startsWith(`${path}/`)
   ));
   const showSolidHeader = scrolled || forceSolidHeader;
+  const bonusCalculatorPath = `${getPath('ambulant')}#bonus-rechner`;
+  const bonusCalculatorLabel = lang === 'en' ? 'Bonus calculator' : 'Bonusrechner';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -270,8 +272,8 @@ const Header = () => {
           />
         </Link>
 
-        <div className="hidden xl:flex items-center gap-5 xl:gap-8">
-          <ul className="flex items-center gap-5 xl:gap-8">
+        <div className="hidden xl:flex items-center gap-3 2xl:gap-6">
+          <ul className="flex items-center gap-3 2xl:gap-6">
             {navLinks.map((link) => (
               <li
                 key={link.label}
@@ -364,6 +366,14 @@ const Header = () => {
               </li>
             ))}
           </ul>
+          <Link
+            to={bonusCalculatorPath}
+            data-bonus-calculator-link="desktop"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-home-mint/70 bg-home-midnight/30 px-3 text-sm font-bold text-white transition-colors hover:bg-home-mint hover:text-home-midnight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          >
+            <Calculator className="h-4 w-4" aria-hidden="true" />
+            {bonusCalculatorLabel}
+          </Link>
           <button
             onClick={switchLanguage}
             className="text-sm font-semibold text-white/80 hover:text-white transition-colors px-3 py-1.5 rounded-full border border-white/20 hover:border-white/40"
@@ -495,6 +505,15 @@ const Header = () => {
               transition={{ duration: 0.2 }}
               className="fixed inset-0 bg-home-midnight/95 backdrop-blur-md z-40 pt-28 px-6 xl:hidden flex flex-col items-center gap-6 h-screen overflow-y-auto pb-20"
             >
+              <Link
+                to={bonusCalculatorPath}
+                onClick={() => setMobileMenuOpen(false)}
+                data-bonus-calculator-link="mobile"
+                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-home-mint px-6 text-base font-bold text-home-midnight transition-colors hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <Calculator className="h-5 w-5" aria-hidden="true" />
+                {bonusCalculatorLabel}
+              </Link>
               <ul className="flex flex-col items-center gap-6 text-xl w-full">
                 {navLinks.map((link) => (
                   <li key={link.label} className="w-full text-center">

@@ -62,7 +62,7 @@ const sdkUrl = read('src/lib/sdk-url.js');
 
 // Ambulant: Bedarf, Tarif und KassenBoost bleiben ein einziger linearer Weg.
 expect(/href=\{fromBonusTopic \? '#tarifwahl' : '#budget-kompass'\}/.test(ambulantHero), 'Der normale Ambulant-Hero führt in den Budget-Kompass, der Themenanschluss direkt zur Tarifwahl.');
-expect(/<AmbulantHero\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>[\s\S]*?<AmbulantConversionFlow\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>/.test(ambulantPage), 'Ambulant braucht einen durchgängig optionalen Themenanschluss in Hero und Funnel.');
+expect(/<AmbulantHero\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>[\s\S]*?<AmbulantConversionFlow\s+fromBonusTopic=\{fromBonusTopic\}\s+geburtsjahrEingabe=\{geburtsjahrEingabe\}\s+setGeburtsjahrEingabe=\{setGeburtsjahrEingabe\}\s*\/>/.test(ambulantPage), 'Ambulant braucht einen durchgängig optionalen Themenanschluss in Hero und Funnel und denselben Jahrgang in Tarifwahl und Bonusrechner.');
 expect(ambulantFlow.indexOf('<ExplainerVideoCard') < ambulantFlow.indexOf('id="budget-kompass"'), 'Ambulant muss das Erklärvideo vor dem Budget-Kompass zeigen.');
 expect(germanOnlyComponent(ambulantFlow, 'ExplainerVideoCard'), 'Das deutsche Ambulant-Video darf auf der englischen Route keinen Abschnitt rendern.');
 expect(ambulantFlow.indexOf('id="budget-kompass"') < ambulantFlow.indexOf('id="tarifwahl"'), 'Auf Ambulant muss die Bedarfseinordnung vor der Tarifwahl stehen.');

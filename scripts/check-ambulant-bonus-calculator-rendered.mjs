@@ -29,6 +29,7 @@ const server = await createServer({
   server: {
     host: '127.0.0.1',
     port: 0,
+    watch: { ignored: ['**/dist/**'] },
   },
 });
 
@@ -46,9 +47,16 @@ try {
 
   const page = await browser.newPage();
   await page.setViewport({ width: 1440, height: 1000 });
+  const openBonusCalculator = async () => {
+    await page.waitForSelector('#bonus-rechner summary');
+    assert.equal(await page.$eval('#bonus-rechner details', (details) => details.open), false, 'The bonus calculator starts collapsed.');
+    await page.click('#bonus-rechner summary');
+    await page.waitForSelector('#bonus-calculator', { visible: true });
+    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'Opening the summary must reveal the bonus calculator.');
+  };
   await page.goto(`http://127.0.0.1:${address.port}/ambulant`, { waitUntil: 'domcontentloaded' });
+  await openBonusCalculator();
   await page.waitForSelector('button[aria-label="Schutzimpfung: Anzahl erhöhen"]');
-  assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The outpatient bonus calculator must be open on initial render.');
 
   const exerciseCounter = async ({ incrementLabel, attempts }) => {
     const interactionFound = await page.evaluate(({ incrementLabel: label, attempts: clickCount }) => {
@@ -96,10 +104,10 @@ try {
       subsidyPotential: '120 €',
     },
     maternityCheckups: {
-      count: 12,
+      count: 15,
       disabled: true,
-      maxText: 'max. 12',
-      subsidyPotential: '360 €',
+      maxText: 'max. 15',
+      subsidyPotential: '450 €',
     },
   }, 'Countable bonus activities must stop at their documented UI and calculation caps.');
 
@@ -109,7 +117,7 @@ try {
       [...document.querySelectorAll('strong')]
         .some((node) => node.textContent.trim() === expectedAmount)
     ), {}, amount);
-    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The dental bonus calculator must be open on initial render.');
+    await openBonusCalculator();
 
     return page.evaluate(({ expectedAmount, expectedCta }) => {
       const amountNode = [...document.querySelectorAll('strong')]
@@ -131,7 +139,9 @@ try {
   });
   assert.match(germanDentalBonus.cardText, /Höchstwert laut Satzung 2026 · passende Nachweise · anerkannte Eigenkosten/);
   assert.match(germanDentalBonus.cardText, /tatsächlich erreichbare.*hängt von den aktuellen Bonusbedingungen ab/i);
-  assert.equal(germanDentalBonus.ctaHref, '/zahn#zahn-check', 'The German dental bonus CTA must keep opening the dental check on its route.');
+  const germanDentalTarget = new URL(germanDentalBonus.ctaHref, `http://127.0.0.1:${address.port}/zahn`);
+  assert.equal(germanDentalTarget.pathname, '/zahn', 'The German dental bonus CTA must stay on its route.');
+  assert.equal(germanDentalTarget.hash, '#zahn-check', 'The German dental bonus CTA must keep opening the dental check.');
 
   const englishDentalBonus = await readDentalBonusCard({
     route: '/en/dental',
@@ -140,7 +150,9 @@ try {
   });
   assert.match(englishDentalBonus.cardText, /Maximum under the 2026 statutes · suitable evidence · recognised out-of-pocket costs/);
   assert.match(englishDentalBonus.cardText, /actually available depends on the current bonus terms/i);
-  assert.equal(englishDentalBonus.ctaHref, '#zahn-check', 'The English dental bonus CTA must keep opening the dental check.');
+  const englishDentalTarget = new URL(englishDentalBonus.ctaHref, `http://127.0.0.1:${address.port}/en/dental`);
+  assert.equal(englishDentalTarget.pathname, '/en/dental', 'The English dental bonus CTA must stay on its route.');
+  assert.equal(englishDentalTarget.hash, '#zahn-check', 'The English dental bonus CTA must keep opening the dental check.');
 
   console.log('Rendered bonus caps and dental assumptions passed.');
 } finally {

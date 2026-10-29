@@ -22,7 +22,6 @@ import { useReferrer } from '@/hooks/useReferrer';
 import { useAmbulantStufe, setAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
-import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
 import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
@@ -332,6 +331,36 @@ export const getAmbulantCompactFaqs = (language = 'de', fromBonusTopic = false) 
   getAmbulantCopy(language, fromBonusTopic).faqs
 );
 
+// Bonus und Tarifwahl verwenden dieselbe Stufe und denselben Jahrgang.
+// Ohne Jahrgang bleibt die ausdrücklich benannte Beispielgruppe erhalten.
+export const getAmbulantBonusFeatureProps = (language, fromBonusTopic, selectedTier, geburtsjahrEingabe) => {
+  const copy = getAmbulantCopy(language, fromBonusTopic);
+  const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
+  const rechnerGruppe = findeAltersgruppe(parseGeburtsjahr(geburtsjahrEingabe)) ?? BEISPIEL_GRUPPE;
+  const rechnerBeitrag = beitragInGruppe(rechnerGruppe, tier.code);
+  const gruppenName = (rechnerGruppe.bis === null ? copy.tiers.groupOpen : copy.tiers.groupRange)
+    .replace('{{from}}', rechnerGruppe.von)
+    .replace('{{to}}', rechnerGruppe.bis);
+  const locale = language === 'en' ? 'en-GB' : 'de-DE';
+  const monthlyEuro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const euro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+  return {
+    calculatorIntroNote: copy.calculator.disclosure,
+    calculatorProps: {
+      defaultMonatsbeitrag: rechnerBeitrag,
+      tariffInfoText: language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName}`,
+      effectiveValue: language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`,
+      calculatorHint: copy.tiers.calculatorHandoff.replace('{{level}}', tier.id).replace('{{code}}', tier.code),
+      effectiveNote: language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.',
+      secondaryCtaOverride: {
+        href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
+        label: copy.calculator.secondaryCta,
+      },
+    },
+  };
+};
+
 // Angebotskarte im Ambulant-Hero (Frank 30.09.2026, Vorbild /stationaer):
 // höchste Stufe mit ihren vier Töpfen aus denselben Daten wie die Tarifwahl.
 export const getAmbulantHeroBudget = (language = 'de') => {
@@ -366,7 +395,7 @@ export const AmbulantExplainerVideo = () => {
   );
 };
 
-const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
+const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, setGeburtsjahrEingabe }) => {
   const { lang, getPath } = useLanguage();
   const { pathname } = useLocation();
   // Frank 10.10.: SDK bleibt Kernprodukt, UKV ist freiwillig dazubuchbar.
@@ -382,7 +411,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
   const setSelectedTier = setAmbulantStufe;
   const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: selectedTier });
   const [selectedGoal, setSelectedGoal] = useState('natur');
-  const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
   const [mobileOverviewOpen, setMobileOverviewOpen] = useState(false);
   const goal = copy.compass.goals[selectedGoal];
   const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
@@ -404,10 +432,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
     return `${monthlyEuro.format(min)} ${copy.tiers.priceRangeJoin} ${monthlyEuro.format(max)}`;
   };
   const tierBeitrag = beitragFuer(tier);
-  // Der Bonusrechner braucht immer einen belegten Betrag: eigene Gruppe, sonst
-  // die Beispielgruppe. Die Gruppe steht jeweils in der Tarifzeile dabei.
-  const rechnerGruppe = altersgruppe ?? BEISPIEL_GRUPPE;
-  const rechnerBeitrag = beitragInGruppe(rechnerGruppe, tier.code);
   const euro = useMemo(() => new Intl.NumberFormat(language === 'en' ? 'en-GB' : 'de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -751,10 +775,9 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           Produktseiten, auf Vorgabe zurück). Seit 30.09. direkt nach der
           Tarifwahl als erster Teil der Kassen-Geschichte (Frank: die Szene soll
           im Fokus stehen); die Regel „erst Tarif, dann Kasse“ bleibt. */}
-      {/* Mobile Reihenfolge (Experiment 06.10.2026): erst die kurze Übersicht der
-          zwei Finanzierungswege, dann die Kassenwechsel-Strecke im Detail, dann
-          der Bonus. Ab md bleibt die bisherige Reihenfolge (display: contents
-          bzw. order-none verändern das Desktop-Layout nicht). */}
+      {/* Nach der Tarifwahl folgen die Finanzierungswege und die
+          Kassenwechsel-Strecke. Der interaktive Bonusrechner steht bereits
+          direkt unter dem Einstieg. */}
       <div className="order-7 md:contents">
         <AmbulantIKKWechsel variant="ambulant" mobileSwipe sealsInMobileAwardsRow />
       </div>
@@ -803,25 +826,6 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false }) => {
           </div>
         </div>
       </section>
-
-      <CompactBonusFeature
-        className="order-9 bg-home-ice md:order-none"
-        mobileSwipe
-        calculatorIntroNote={copy.calculator.disclosure}
-        calculatorProps={{
-          defaultMonatsbeitrag: rechnerBeitrag,
-          tariffInfoText: language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName(rechnerGruppe)}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName(rechnerGruppe)}`,
-          effectiveValue: language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`,
-          calculatorHint,
-          effectiveNote: language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.',
-          secondaryCtaOverride: {
-            href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
-            label: copy.calculator.secondaryCta,
-          },
-        }}
-      />
-
-      {language !== 'en' && <p className="order-9 bg-home-ice px-4 pb-8 text-center md:hidden"><Link to="/ratgeber/ikk-classic-bonusprogramm-2026" className="home-focus inline-flex min-h-11 items-center text-sm font-semibold text-emerald-900 underline underline-offset-4">Bonus-Leitfaden: Aktivitäten & Fristen</Link></p>}
 
         </>
       )}

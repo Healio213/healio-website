@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChevronDown, ShieldCheck } from 'lucide-react';
-import AmbulantBonusCalculator from '@/components/sections/ambulant/AmbulantBonusCalculator';
 import { useLanguage } from '@/hooks/useLanguage';
+
+const AmbulantBonusCalculator = React.lazy(() => import('@/components/sections/ambulant/AmbulantBonusCalculator'));
 
 const COPY = {
   de: {
@@ -60,18 +62,41 @@ const CompactBonusFeature = ({
   mobileSwipe = false,
 }) => {
   const { lang } = useLanguage();
+  const { hash, key } = useLocation();
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  // Mount once on demand, then retain the visitor's inputs across closing.
+  const [hasOpened, setHasOpened] = useState(defaultOpen);
+  const sectionRef = useRef(null);
+  const summaryRef = useRef(null);
   const language = lang === 'en' ? 'en' : 'de';
   const copy = COPY[language];
   const kassenboostPath = language === 'en' ? '/en/kassenboost' : '/kassenboost';
   const ui = mobileSwipe ? LAYOUT.kompakt : LAYOUT.standard;
 
+  useEffect(() => {
+    if (hash === '#bonus-rechner' || hash === '#bonus-calculator') {
+      setHasOpened(true);
+      setIsOpen(true);
+      const frame = window.requestAnimationFrame(() => {
+        sectionRef.current?.scrollIntoView({ block: 'start' });
+        summaryRef.current?.focus({ preventScroll: true });
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, [hash, key]);
+
   return (
-    <section className={`px-4 sm:px-6 md:py-14 lg:px-8 ${ui.section} ${className}`} aria-labelledby="compact-bonus-title">
+    <section ref={sectionRef} id="bonus-rechner" className={`scroll-mt-24 px-4 sm:px-6 md:py-14 lg:px-8 ${ui.section} ${className}`} aria-labelledby="compact-bonus-title">
       <details
         className={`group mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-amber-200/70 bg-gradient-to-br from-[#fffdf8] via-white to-emerald-50 ${ui.card}`}
-        open={defaultOpen || undefined}
+        open={isOpen}
+        onToggle={(event) => {
+          const open = event.currentTarget.open;
+          setIsOpen(open);
+          if (open) setHasOpened(true);
+        }}
       >
-        <summary className={`home-focus grid cursor-pointer list-none grid-cols-[6rem_minmax(0,1fr)] items-center sm:grid-cols-[9rem_minmax(0,1fr)] sm:px-9 md:gap-x-8 md:py-9 lg:grid-cols-[12rem_minmax(0,1fr)_auto] lg:px-12 [&::-webkit-details-marker]:hidden ${ui.summary}`}>
+        <summary ref={summaryRef} className={`home-focus grid cursor-pointer list-none grid-cols-[6rem_minmax(0,1fr)] items-center sm:grid-cols-[9rem_minmax(0,1fr)] sm:px-9 md:gap-x-8 md:py-9 lg:grid-cols-[12rem_minmax(0,1fr)_auto] lg:px-12 [&::-webkit-details-marker]:hidden ${ui.summary}`}>
           <div className="relative self-center lg:row-span-2">
             <div className="absolute inset-3 rounded-full bg-home-mint/15 blur-2xl" aria-hidden="true" />
             <img
@@ -111,6 +136,7 @@ const CompactBonusFeature = ({
         <div className="border-t border-emerald-900/10 bg-white/80 px-4 py-7 sm:px-7 md:px-10 md:py-10">
           <p className="mb-5 text-base leading-7 text-home-slate md:hidden">{copy.text}</p>
           {calculatorIntroNote && <p className="mx-auto mb-7 max-w-4xl border-l-2 border-home-mint pl-4 text-sm leading-6 text-home-slate">{calculatorIntroNote}</p>}
+          {hasOpened && <Suspense fallback={<p role="status" className="py-8 text-center text-home-slate">{language === 'en' ? 'Loading bonus calculator…' : 'Bonusrechner wird geladen…'}</p>}>
           <AmbulantBonusCalculator
             {...calculatorProps}
             embedded
@@ -120,6 +146,7 @@ const CompactBonusFeature = ({
               ...calculatorProps.secondaryCtaOverride,
             }}
           />
+          </Suspense>}
           <p className="mx-auto mt-6 max-w-4xl text-center text-base leading-7 text-slate-600">{copy.disclosure}</p>
         </div>
       </details>

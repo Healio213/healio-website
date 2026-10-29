@@ -48,7 +48,7 @@ const tarifStart = flow.indexOf('id="tarifwahl"');
 const bausteinAt = flow.indexOf('<AmbulantVorsorgeBaustein />');
 const aragAt = flow.indexOf('<AmbulantAragVorsorge />');
 const overviewAt = flow.indexOf('{copy.tiers.overviewTitle}');
-const ikkAt = flow.search(/<AmbulantIKKWechsel\s+variant="ambulant"(?:\s+mobileSwipe)?\s*\/>/);
+const ikkAt = flow.search(/<AmbulantIKKWechsel\s+variant="ambulant"(?:\s+mobileSwipe)?(?:\s+sealsInMobileAwardsRow)?\s*\/>/);
 assert(tarifStart > -1 && overviewAt > tarifStart && aragAt > overviewAt, 'ARAG steht nach der vollständigen SDK-Tarifübersicht.');
 assert(bausteinAt > overviewAt && bausteinAt < aragAt, 'UKV steht als freiwillige Ergänzung nach der SDK-Tarifübersicht und vor der ARAG-Alternative.');
 assert(ikkAt > aragAt, 'Die IKK-Wechsel-Strecke bleibt nach der Tarifwahl und dem getrennten Vorsorgeweg.');
@@ -60,7 +60,7 @@ assert(/\{showAragVorsorge && <AmbulantAragVorsorge \/>\}/.test(flow), 'ARAG ers
 assert(/const showAragVorsorge = vorsorgePath === '\/ambulant' \|\| vorsorgePath === '\/en\/outpatient';/.test(flow), 'Der ARAG-Weg gilt nur für /ambulant und /en/outpatient.');
 assert(/const vorsorgePath = pathname\.replace\(\/\\\/\+\$\/, ''\);/.test(flow) && /const \{ pathname \} = useLocation\(\);/.test(flow), 'Die Freigabe richtet sich nach der aktuellen Adresse.');
 assert(!/heilpraktiker-zusatzversicherung/.test(flow), 'Auf der Heilpraktiker-Adresse erscheint der Baustein nicht.');
-assert(/<AmbulantConversionFlow\s+fromBonusTopic=\{fromBonusTopic\}\s*\/>/.test(page), 'AmbulantPage bleibt unverändert.');
+assert(/<AmbulantConversionFlow\s+fromBonusTopic=\{fromBonusTopic\}\s+geburtsjahrEingabe=\{geburtsjahrEingabe\}\s+setGeburtsjahrEingabe=\{setGeburtsjahrEingabe\}\s*\/>/.test(page), 'AmbulantPage übergibt weiterhin den Themenanschluss und teilt den Jahrgang mit dem Bonusrechner.');
 
 // 3. Knopf und Abschlusslink. Die Module werden echt gebündelt und ausgeführt.
 assert(!/https?:\/\//.test(links), 'ukvAmbulantLinks.js enthält keine eigene Adresse, der Link kommt aus dentalLinks.js.');

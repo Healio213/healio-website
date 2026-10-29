@@ -3,11 +3,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
 import { createServer } from 'vite';
+import { GUIDED_CALLBACK_ENABLED } from '../src/lib/guided-callback.js';
 
 // Regression: selecting a tier must update the premium AND benefit budget in
 // the bonus example. This test never opens a provider or sends form data.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const server = await createServer({ root, logLevel: 'silent', server: { host: '127.0.0.1', port: 0 } });
+const server = await createServer({ root, logLevel: 'silent', server: { host: '127.0.0.1', port: 0, watch: { ignored: ['**/dist/**'] } } });
 let browser;
 try {
   await server.listen();
@@ -30,7 +31,11 @@ try {
   const open = async (route) => {
     await page.goto(`${origin}${route}`, { waitUntil: 'networkidle0' });
     await page.waitForSelector('#tarifwahl');
-    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'The personal bonus calculation must be open on initial render.');
+    await page.waitForSelector('#bonus-rechner summary');
+    assert.equal(await page.$eval('#bonus-rechner details', (details) => details.open), false, 'The personal bonus calculation starts collapsed.');
+    await page.click('#bonus-rechner summary');
+    await page.waitForSelector('#bonus-calculator', { visible: true });
+    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'Opening the summary must reveal the personal bonus calculation.');
   };
   const choose = async (code) => {
     await page.evaluate((tariff) => [...document.querySelectorAll('#tarifwahl button')].find((button) => button.textContent.includes(tariff)).click(), code);
@@ -47,7 +52,7 @@ try {
       eligible: valueFor('Für diesen Beitrag anrechenbar:'),
       budget: valueFor('Dein Gesundheitsbudget dafür (2 Jahre)'),
       handoffs: [...document.querySelectorAll('[data-healio-ambulant="calculator-handoff"]')].map((node) => node.textContent),
-      tariffsParam: new URL(document.querySelector('#tarifwahl a[target="_blank"]').href).searchParams.get('tariffs'),
+      tariffsParam: new URL(document.querySelector('#tarifwahl a[href^="https://insurances-online.levelnine.biz/"]').href).searchParams.get('tariffs'),
     };
   });
 
@@ -68,7 +73,7 @@ try {
     assert.equal(current.annual, annual);
     assert(current.budget.includes(budget), `${code}: benefit budget must follow the selection.`);
     assert.equal(current.potential, initial.potential, 'Changing tariff must preserve the activity selection.');
-    assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every provider CTA must explain which tier to choose again.');
+    assert(current.handoffs.length === (GUIDED_CALLBACK_ENABLED ? 1 : 3) && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every calculator handoff must explain which tier to choose again; appointment CTAs do not add calculator handoffs.');
     assert.equal(current.tariffsParam, `SDK${code}@`, 'The calculator link must preselect the chosen tier (Level Nine identifier SDKAP5@ to SDKAP1@).');
   }
 
@@ -79,7 +84,7 @@ try {
   await choose('AP5');
   const custom = await read();
   assert.equal(custom.annual, '366 €', 'Typing a decimal comma must preserve cents instead of turning 30,50 into 3050.');
-  assert(custom.text.includes('Dein eingegebener Beitrag bleibt erhalten.'));
+  assert(custom.text.includes('Dein Beitrag bleibt erhalten. Prüfe ihn bei einer anderen Tarifstufe erneut.'));
   assert.equal(custom.potential, initial.potential);
   await page.evaluate(() => [...document.querySelectorAll('#bonus-calculator button')].find((button) => button.textContent.trim() === 'Auswahl zurücksetzen').click());
   const reset = await read();
