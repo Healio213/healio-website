@@ -14,6 +14,7 @@ import SceneHero, { sceneAccentClass, sceneBelow, scenePrimaryButtonClass } from
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
+import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
 
 const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', stationaer: '#tarife' };
 
@@ -110,11 +111,13 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           {!guidedCallbackEnabled && <Link to={getPath('ambulant')} className="whitespace-nowrap font-bold text-[#5ee0b1] underline decoration-[#5ee0b1]/60 underline-offset-4 hover:text-white" onClick={() => trackEvent('home_budget_link', { placement: 'desktop-hero' })}>{copy.budgetLink}</Link>}
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
-      actionHint={guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
-      urgency={isHome || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
+      actionHint={guidedCallbackEnabled && surface === 'zahn'
+        ? (language === 'en' ? 'About one minute to find your route: UKV ZahnPRIVAT or ZAHN Sofort from die Bayerische. You can also discuss your questions with us first.' : 'In ca. 1 Minute zu deinem Tarifweg: UKV ZahnPRIVAT oder ZAHN Sofort von der Bayerischen. Du kannst deine Fragen auch zuerst mit uns klären.')
+        : guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
+      urgency={isHome || surface === 'zahn' || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
       actions={(
         <>
-          {guidedCallbackEnabled ? (
+          {guidedCallbackEnabled && surface === 'zahn' ? <DentalEntryActions desktop /> : guidedCallbackEnabled ? (
             <>
               <GuidedCallbackButton data-desktop-primary product={isHome ? 'any' : surface} className={scenePrimaryButtonClass}>
                 {guidedCopy.cta}

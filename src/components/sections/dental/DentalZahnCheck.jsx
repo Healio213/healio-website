@@ -356,48 +356,52 @@ const DentalZahnCheck = () => {
                     </p>
                   </div>
 
-                  {!GUIDED_CALLBACK_ENABLED && result.ctaType === 'ukv' && (
+                  {result.ctaType === 'ukv' && (
                     <p id="zahn-calculator-handoff" className="mt-5 rounded-2xl border border-[#c8deeb] bg-[#eff7fc] px-4 py-3 text-base leading-6 text-[#324d60] md:leading-7">
                       <strong className="font-display font-extrabold text-home-midnight">{content.calculatorHintLabel}</strong>{' '}
                       {result.calculatorHint}
                     </p>
                   )}
 
-                  <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-7">
-                    {GUIDED_CALLBACK_ENABLED ? (
+                  <p className="mt-6 font-display text-lg font-extrabold text-slate-950">
+                    {result.ctaType === 'contact'
+                      ? (lang === 'en' ? 'Let’s clarify your situation together.' : 'Klären wir deine Situation gemeinsam.')
+                      : (lang === 'en' ? 'Apply online or talk to us first.' : 'Online abschließen oder erst mit uns sprechen.')}
+                  </p>
+                  <div data-dental-result-actions className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                    {result.ctaType === 'contact' ? GUIDED_CALLBACK_ENABLED ? (
                       <GuidedCallbackButton product="zahn" tariff={guidedTariff} className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-6 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-800 max-w-full whitespace-normal text-center py-3">
                         {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
                       </GuidedCallbackButton>
-                    ) : result.ctaType === 'contact' ? (
+                    ) : (
                       <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <a href={getPath('kontakt')}>{result.cta}<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" /></a>
                       </Button>
                     ) : (
-                      <Button asChild className="min-h-14 rounded-full bg-[#25c990] px-6 font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
+                      <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={countAntragOpened}>
-                          {result.cta}<ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+                          {lang === 'en'
+                            ? (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online')
+                            : (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen')}
+                          <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
                         </LeadCaptureLink>
                       </Button>
                     )}
-                    <button
-                      type="button"
-                      onClick={restart}
-                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-sm font-bold text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]"
-                    >
-                      <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                      {content.restart}
-                    </button>
+                    {GUIDED_CALLBACK_ENABLED && result.ctaType !== 'contact' && (
+                      <GuidedCallbackButton product="zahn" tariff={guidedTariff} className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#087654] px-6 py-3 text-center font-display text-base font-bold text-[#075c43] transition hover:bg-[#effbf6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-800">
+                        {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
+                      </GuidedCallbackButton>
+                    )}
                   </div>
-
-                  {GUIDED_CALLBACK_ENABLED && result.ctaType !== 'contact' && (
-                    <details className="mt-3">
-                      <summary className="min-h-11 cursor-pointer py-3 text-sm font-bold text-[#087654] underline underline-offset-4">{lang === 'en' ? 'Continue on my own instead' : 'Lieber selbst weitermachen'}</summary>
-                      {result.ctaType === 'ukv' && <p className="mb-2 text-sm leading-6 text-slate-600">{result.calculatorHint}</p>}
-                      <a href={CTA_HREFS[result.ctaType]} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#087654] underline underline-offset-4">
-                        {lang === 'en' ? 'Continue with the insurer yourself (new tab)' : 'Selbst beim Anbieter fortfahren (neuer Tab)'}<ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
-                      </a>
-                    </details>
-                  )}
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:leading-7">{result.note}</p>
+                  <button
+                    type="button"
+                    onClick={restart}
+                    className="mt-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-sm font-bold text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25c990]"
+                  >
+                    <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                    {content.restart}
+                  </button>
 
                   {/* Zweiter, interner Weg zum Gespräch, etwa bei Fragen zur Lücke. Die
                       2-Jahres-Regel zu Heil- und Kostenplan und Anratung steht schon im
@@ -412,7 +416,6 @@ const DentalZahnCheck = () => {
                       {result.contactLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
                   )}
-                  <p className="mt-3 text-base leading-6 text-slate-600 md:leading-7">{result.note}</p>
 
                   <div className="mt-5 rounded-2xl border border-[#a6e9d2] bg-[#effbf6] p-4 sm:p-5 md:mt-7">
                     <p className="font-display text-base font-extrabold leading-6 text-[#075c43] md:leading-7">{content.bonusLead}</p>

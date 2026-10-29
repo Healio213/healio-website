@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import GuidedJourney from '@/components/guided/GuidedJourney';
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
@@ -14,6 +13,7 @@ import {
 import SEOHead from '@/components/SEOHead';
 import DesktopLead from '@/components/desktop/DesktopLead';
 import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
+import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
 import DentalVideoSection from '@/components/sections/dental/DentalVideoSection';
 import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCards';
 import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
@@ -157,14 +157,9 @@ const ZahnPage = () => {
                 </p>
 
                 {GUIDED_CALLBACK_ENABLED ? (
-                  <div className="mt-6 flex flex-col items-start gap-2 md:mt-8">
-                    <GuidedCallbackButton product="zahn" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
-                      {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                    </GuidedCallbackButton>
-                    <a href="#zahn-check" onClick={(event) => scrollToCheck(event, reduceMotion)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
-                      {lang === 'en' ? 'Try the dental check first' : 'Erst den Zahn-Check machen'}<ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </a>
-                    <p className="max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+                  <div className="mt-6 md:mt-8">
+                    <DentalEntryActions />
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'About one minute to UKV ZahnPRIVAT or ZAHN Sofort from die Bayerische. Apply online or discuss your questions with us first.' : 'In ca. 1 Minute zu UKV ZahnPRIVAT oder ZAHN Sofort von der Bayerischen. Online abschließen oder Fragen zuerst mit uns klären.'}</p>
                   </div>
                 ) : (<>
                 <a
@@ -182,7 +177,7 @@ const ZahnPage = () => {
                 </p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
-                  {(GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? ['Guided application', 'You review and decide'] : ['Begleiteter Antrag', 'Du prüfst und entscheidest']) : content.hero.micro).map((item) => (
+                  {(GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? ['Online or with personal guidance', 'You review and decide'] : ['Online oder persönlich begleitet', 'Du prüfst und entscheidest']) : content.hero.micro).map((item) => (
                     <li key={item} className="inline-flex items-center gap-2">
                       <Check className="h-4 w-4 text-[#5ee0b1]" aria-hidden="true" />{item}
                     </li>
@@ -473,17 +468,15 @@ const ZahnPage = () => {
           </div>
 
           <div className="healio-container mt-10 md:mt-16">
-            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#07111f] p-5 text-white sm:p-10 md:rounded-[2.5rem] lg:flex lg:items-center lg:justify-between lg:gap-12 lg:p-14">
+            <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#07111f] p-5 text-white sm:p-10 md:rounded-[2.5rem] lg:p-14">
               <div className="absolute -right-20 -top-20 -z-10 h-72 w-72 rounded-full bg-[#25c990]/10" aria-hidden="true" />
               <div>
                 <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#5ee0b1]">{content.faq.finalEyebrow}</p>
                 <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Let’s find suitable dental cover.' : 'Finden wir deinen passenden Zahnschutz.') : content.faq.finalTitle}</h2>
-                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'We guide you from your questions to your application. You review it before making a decision.' : 'Wir begleiten dich von deinen Fragen bis zum Antrag. Du prüfst alles, bevor du entscheidest.') : content.faq.finalText}</p>
+                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Find the right route with the dental check, then calculate your premium and apply online. Prefer personal guidance? Book a consultation.' : 'Finde mit dem Zahn-Check den passenden Tarifweg, berechne deinen Beitrag und schließe online ab. Du möchtest persönliche Begleitung? Buche einen Beratungstermin.') : content.faq.finalText}</p>
               </div>
               {GUIDED_CALLBACK_ENABLED ? (
-                <GuidedCallbackButton product="zahn" className="mt-6 inline-flex min-h-14 w-full flex-none items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active lg:mt-0 lg:w-auto max-w-full whitespace-normal text-center py-3">
-                  {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                </GuidedCallbackButton>
+                <DentalEntryActions className="mt-6" />
               ) : (
               <a
                 href="#zahn-check"
