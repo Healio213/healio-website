@@ -518,6 +518,12 @@ export const AuthorBox = ({ author }) => (
         Eintrag im Vermittlerregister prüfen
       </a>
     </p>
+    <p className="mt-4 text-sm leading-6 text-slate-500">
+      Healio informiert zu Versicherung und Erstattung. Medizinische Diagnose und Behandlung gehören in die Hände qualifizierter Gesundheitsberufe. Bei einem Versicherungsabschluss erhält Healio in der Regel eine Courtage vom Versicherer.{' '}
+      <Link to="/about#redaktion" className={LINK_UNDERLINE}>Redaktion und fachliche Grenzen</Link>{' · '}
+      <Link to="/impressum" className={LINK_UNDERLINE}>Impressum</Link>{' · '}
+      <Link to="/erstinformation" className={LINK_UNDERLINE}>Erstinformation</Link>
+    </p>
     <Link
       to={author.profilePath}
       className={`mt-5 inline-flex min-h-11 items-center gap-2 font-display text-base font-extrabold text-[#07111f] ${LINK_UNDERLINE} ${FOCUS_RING}`}

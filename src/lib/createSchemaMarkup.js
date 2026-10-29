@@ -9,6 +9,7 @@ export const createOrganizationSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
     "name": "Healio GmbH",
     "legalName": "Healio GmbH",
     "url": SITE_URL,
@@ -34,7 +35,13 @@ export const createOrganizationSchema = () => {
       "name": "KassenBoost",
       "url": "https://kassenboost.de"
     },
-    "foundingDate": "2021",
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "Vermittlerregister (§ 34d Abs. 1 GewO)",
+      "value": "D-C1LE-OVLQH-98",
+      "url": "https://www.vermittlerregister.info"
+    },
+    "publishingPrinciples": `${SITE_URL}/about#redaktion`,
     "sameAs": [
       "https://www.tiktok.com/@healio.de",
       "https://www.instagram.com/healio.de"
@@ -51,7 +58,8 @@ export const createServiceSchema = (overrides = {}) => {
     "description": "Intelligente Kombination aus Zusatzversicherung und IKK Bonusprogramm für maximale Gesundheitsvorteile und Kostenerstattung.",
     "provider": {
       "@type": "Organization",
-      "name": "Healio",
+      "@id": `${SITE_URL}/#organization`,
+      "name": "Healio GmbH",
       "url": SITE_URL
     },
     "areaServed": {
@@ -61,7 +69,7 @@ export const createServiceSchema = (overrides = {}) => {
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": SITE_URL,
-      "servicePhone": HEALIO_PHONE
+      "servicePhone": { "@type": "ContactPoint", "telephone": HEALIO_PHONE }
     },
     "offers": {
       "@type": "Offer",
@@ -100,7 +108,8 @@ export const createWebPageSchema = (pageName, description, url = null, inLanguag
     "url": pageUrl,
     "publisher": {
       "@type": "Organization",
-      "name": "Healio"
+      "@id": `${SITE_URL}/#organization`,
+      "name": "Healio GmbH"
     },
     "inLanguage": inLanguage
   };
@@ -167,11 +176,13 @@ export const createArticleSchema = ({
     ...(dateModified ? { dateModified } : {}),
     "author": author || {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       "name": "Healio GmbH",
       "url": SITE_URL
     },
     "publisher": {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       "name": "Healio GmbH",
       "url": SITE_URL,
       "logo": {

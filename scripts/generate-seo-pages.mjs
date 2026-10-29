@@ -19,7 +19,10 @@ import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 import {
   createBlogArticleSchema as createNormalizedBlogArticleSchema,
   getBlogRelatedLinks,
+  getBlogAuthor,
+  getBlogFaqSchema,
 } from '../src/lib/blogSeo.js';
+import { createEditorialTransparencyHtml } from '../src/content/editorialTransparency.js';
 import { planBlogLeistungsweg, teileBlogHtml } from '../src/content/leistungsweg.js';
 import { leistungsHinweisEndeHtml, leistungsHinweisMitteHtml } from '../src/lib/leistungswegMarkup.js';
 
@@ -173,18 +176,6 @@ function stripLeadingArticleHeading(html = '') {
     .replace(/^\s*<h1[^>]*>[\s\S]*?<\/h1>/i, '');
 }
 
-function stripHtml(html = '') {
-  return html
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&euro;/g, '€')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Intl.DateTimeFormat('de-DE', {
@@ -194,13 +185,13 @@ function formatDate(dateStr) {
   }).format(new Date(dateStr));
 }
 
-function createStaticBlogArticleHtml(article) {
+function createStaticBlogArticleHtml(article, lang = 'de') {
   const safeContent = sanitizeStaticBlogHtml(
     stripLeadingArticleHeading(article.content_html || ''),
   );
   const published = formatDate(article.published_at);
   const meta = [
-    article.author || 'Healio Redaktion',
+    getBlogAuthor(article).name,
     published,
     article.reading_time_minutes ? `${article.reading_time_minutes} Min. Lesezeit` : '',
   ].filter(Boolean).join(' · ');
@@ -235,48 +226,10 @@ function createStaticBlogArticleHtml(article) {
         ${contentMarkup}
         ${leistungswegEnde}
         ${relatedMarkup}
+        ${createEditorialTransparencyHtml(getBlogAuthor(article).name, lang)}
       </div>
     </article>
   `;
-}
-
-function extractFaqSchema(article) {
-  const html = article.content_html || '';
-  const faqStart = html.search(/<h2[^>]*>\s*Häufige Fragen/i);
-  if (faqStart === -1) return null;
-
-  const afterFaqHeading = html.slice(faqStart);
-  const headingEnd = afterFaqHeading.search(/<\/h2>/i);
-  if (headingEnd === -1) return null;
-
-  const faqBody = afterFaqHeading.slice(headingEnd + 5);
-  const nextHeadingIndex = faqBody.search(/<h2[^>]*>/i);
-  const faqSection = nextHeadingIndex === -1 ? faqBody : faqBody.slice(0, nextHeadingIndex);
-  const questions = [];
-  const questionRegex = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
-  let match;
-
-  while ((match = questionRegex.exec(faqSection)) !== null) {
-    const name = stripHtml(match[1]);
-    const text = stripHtml(match[2]);
-    if (name && text) {
-      questions.push({
-        '@type': 'Question',
-        name,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text,
-        },
-      });
-    }
-  }
-
-  if (!questions.length) return null;
-
-  return {
-    '@type': 'FAQPage',
-    mainEntity: questions,
-  };
 }
 
 function createBlogArticleSchema(article, route) {
@@ -286,7 +239,7 @@ function createBlogArticleSchema(article, route) {
     articleSchema,
   ];
 
-  const faqSchema = extractFaqSchema(article);
+  const faqSchema = getBlogFaqSchema(article);
   if (faqSchema) graph.push(faqSchema);
 
   return {
@@ -518,7 +471,7 @@ function generateHtml(route, article = null) {
   if (article) {
     html = html.replace(
       '<div id="root"></div>',
-      `<div id="root">${createStaticBlogArticleHtml(article)}</div>`
+      `<div id="root">${createStaticBlogArticleHtml(article, route.lang)}</div>`
     );
   }
 

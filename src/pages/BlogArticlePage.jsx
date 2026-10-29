@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
+import EditorialTransparency from '@/components/EditorialTransparency';
 import { ArrowLeft, Clock, User, Calendar, Tag } from 'lucide-react';
 import { getBlogArticleCta } from '@/lib/blogArticleCta';
 import { getPrerenderedBlogArticleHtml } from '@/lib/prerenderedBlogContent';
@@ -12,6 +13,8 @@ import {
   createBlogArticleSchema,
   getBlogArticleImage,
   getBlogRelatedLinks,
+  getBlogAuthor,
+  getBlogFaqSchema,
 } from '@/lib/blogSeo';
 import DOMPurify from 'dompurify';
 import { sanitizeRichHtml } from '@/lib/contentSecurity';
@@ -187,7 +190,8 @@ const BlogArticlePage = () => {
     ? `https://healio.de/en/blog/${article.slug}`
     : `https://healio.de/blog/${article.slug}`;
   const articleSchema = createBlogArticleSchema(article, canonicalUrl);
-  const faqSchema = article.structured_data?.faq || null;
+  const articleAuthor = getBlogAuthor(article);
+  const faqSchema = getBlogFaqSchema(article);
   const combinedSchema = faqSchema
     ? [articleSchema, faqSchema]
     : articleSchema;
@@ -247,7 +251,7 @@ const BlogArticlePage = () => {
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-1">
               <User className="w-4 h-4" />
-              {article.author || 'Healio Redaktion'}
+              <a href="#redaktion" className="underline underline-offset-4">{articleAuthor.name}</a>
             </span>
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
@@ -303,6 +307,8 @@ const BlogArticlePage = () => {
               <p className="text-[#464f5d] leading-relaxed">{article.geo_section}</p>
             </aside>
           )}
+
+          <EditorialTransparency authorName={articleAuthor.name} />
 
           {/* CTA Section */}
           <div className="mt-16 p-8 bg-gradient-to-r from-[#25c990] to-[#076046] rounded-2xl text-white text-center">

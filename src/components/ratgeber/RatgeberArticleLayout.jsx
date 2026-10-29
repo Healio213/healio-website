@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'rea
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import EditorialTransparency from '@/components/EditorialTransparency';
 import useIsDesktop from '@/components/ratgeber/useIsDesktop';
 import { RATGEBER_INTERNAL_UTM_DEFAULTS, buildInternalRatgeberUrl, buildKassenboostUrl } from '@/lib/ratgeber-cta';
 import { createArticleSchema, createFAQSchema } from '@/lib/createSchemaMarkup';
@@ -409,9 +410,10 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
               standLabel={standLabel}
               readingTimeMinutes={article.readingTimeMinutes}
             />
-          ) : article.readingTimeMinutes && (
+          ) : (
             <p className="mt-4 text-sm leading-6 text-slate-500">
-              Lesezeit etwa {article.readingTimeMinutes} Minuten
+              Autor: <Link to="/about#redaktion" className="font-semibold underline underline-offset-4">Healio GmbH</Link>
+              {article.readingTimeMinutes ? ` · Lesezeit etwa ${article.readingTimeMinutes} Minuten` : ''}
             </p>
           )}
 
@@ -552,7 +554,7 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
 
           {article.sources && <SourcesBlock sources={article.sources} />}
 
-          {author && <AuthorBox author={author} />}
+          {author ? <AuthorBox author={author} /> : <EditorialTransparency authorName="Healio GmbH" />}
 
           {isAdvertorial && (
             <div className="mt-10 sm:mt-14">

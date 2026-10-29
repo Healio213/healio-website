@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import EditorialTransparency from '@/components/EditorialTransparency';
 import { useLanguage } from '@/hooks/useLanguage';
 import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
@@ -271,7 +272,7 @@ const AboutPage = () => {
 
         <ProductTicker variant="about" />
 
-        <section className="w-full bg-[#f4faf7] px-4 py-12 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-story-heading">
+        <section id="frank-steinfurt" className="w-full scroll-mt-24 bg-[#f4faf7] px-4 py-12 sm:px-6 sm:py-24 lg:px-8 lg:py-32" aria-labelledby="about-story-heading">
           <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 md:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:gap-24">
             <motion.figure {...reveal()} className="order-2 mx-auto w-full max-w-[32rem] lg:order-1 lg:mx-0">
               <div className="relative">
@@ -445,6 +446,9 @@ const AboutPage = () => {
             </MobileSwipeRow>
           </div>
         </section>
+        <div className="mx-auto max-w-4xl px-4 pb-12 sm:px-6 sm:pb-20">
+          <EditorialTransparency />
+        </div>
       </main>
     </>
   );

@@ -1,4 +1,23 @@
+import { authorSchemaFor } from '../content/ratgeber/authors.js';
+
 export const BLOG_SCHEMA_FALLBACK_IMAGE = 'https://healio.de/images/healio-linkvorschau-v2.png';
+
+export function getBlogAuthor(article) {
+  const visibleName = typeof article?.author === 'string' ? article.author.trim() : '';
+  const source = article?.structured_data?.article?.author;
+  const name = visibleName || (typeof source?.name === 'string' ? source.name.trim() : '') || 'Healio Redaktion';
+  if (name === 'Frank Steinfurt') return authorSchemaFor('frank-steinfurt');
+  if (['Healio', 'Healio GmbH', 'Healio Redaktion'].includes(name)) {
+    return {
+      '@type': 'Organization',
+      '@id': 'https://healio.de/#organization',
+      name,
+      url: 'https://healio.de/about#redaktion',
+    };
+  }
+  // Unbekannte Autoren erhalten keine erfundene Qualifikation oder Healio-Identität.
+  return { '@type': source?.name === name && source?.['@type'] === 'Organization' ? 'Organization' : 'Person', name };
+}
 
 export const BLOG_ARTICLE_IMAGES = Object.freeze({
   'healio-konzept-fuer-hebammen': 'https://healio.de/images/hero-hebammen.webp',
@@ -160,10 +179,11 @@ export function createBlogArticleSchema(article, canonicalUrl) {
     image,
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
-    author: sourceSchema.author || { '@type': 'Organization', name: 'Healio GmbH' },
+    author: getBlogAuthor(article),
     publisher: {
       ...(sourceSchema.publisher || {}),
       '@type': 'Organization',
+      '@id': 'https://healio.de/#organization',
       name: 'Healio GmbH',
       url: 'https://healio.de',
       logo: {
@@ -179,3 +199,55 @@ export function getBlogRelatedLinks(slug) {
 }
 
 export const BLOG_RELATED_LINK_SLUGS = Object.freeze(Object.keys(RELATED_LINKS));
+
+function stripHtml(html = '') {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&euro;/g, '€')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function getBlogFaqSchema(article) {
+  const html = article.content_html || '';
+  const faqStart = html.search(/<h2[^>]*>\s*Häufige Fragen/i);
+  if (faqStart === -1) return null;
+
+  const afterFaqHeading = html.slice(faqStart);
+  const headingEnd = afterFaqHeading.search(/<\/h2>/i);
+  if (headingEnd === -1) return null;
+
+  const faqBody = afterFaqHeading.slice(headingEnd + 5);
+  const nextHeadingIndex = faqBody.search(/<h2[^>]*>/i);
+  const faqSection = nextHeadingIndex === -1 ? faqBody : faqBody.slice(0, nextHeadingIndex);
+  const questions = [];
+  const questionRegex = /<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/gi;
+  let match;
+
+  while ((match = questionRegex.exec(faqSection)) !== null) {
+    const name = stripHtml(match[1]);
+    const text = stripHtml(match[2]);
+    if (name && text) {
+      questions.push({
+        '@type': 'Question',
+        name,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text,
+        },
+      });
+    }
+  }
+
+  if (!questions.length) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: questions,
+  };
+}

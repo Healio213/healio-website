@@ -17,7 +17,7 @@ import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.
  * FAQ-Schema aus genau den Fragen, die die Seite sichtbar zeigt.
  *
  * Google erwartet, dass FAQ-Auszeichnung und sichtbarer Text übereinstimmen,
- * und KI-Antworten übernehmen die Sätze daraus. Abgeschriebene Fassungen sind
+ * ohne dass daraus eine Übernahme in KI-Antworten folgt. Abgeschriebene Fassungen sind
  * auseinandergelaufen (Gegenprüfung der Marktanalyse 05.10.2026: /stationaer
  * „Gesundheitsprüfung: Ja“ ohne SPU, /ambulant „Gibt es einen Haken? Nein.“
  * und „15 bis 50 Euro“). Deshalb lesen /ambulant, /stationaer und /partner ihre
@@ -206,6 +206,7 @@ export const seoRoutes = [
           description: 'Bis zu 3.000 € Gesundheitsbudget in zwei Jahren aus einer ambulanten Zusatzversicherung für Heilpraktiker, Osteopathie, Naturheilkunde, Sehhilfen und Vorsorge. Ein Kassenbonus kommt nicht obendrauf, er kann je nach Krankenkasse und Aktivitäten beim Beitrag helfen.',
           provider: {
             '@type': 'Organization',
+            '@id': 'https://healio.de/#organization',
             name: 'Healio GmbH',
             url: 'https://healio.de',
             telephone: '+494089755705',

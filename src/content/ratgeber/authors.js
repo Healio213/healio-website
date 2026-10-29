@@ -21,7 +21,7 @@ export const AUTHORS = Object.freeze({
     // (Foto wie auf /about), 240 x 240, rund 7 KB.
     image: '/images/frank-steinfurt-autor-240.webp',
     imageAlt: 'Frank Steinfurt, Gründer und Geschäftsführer der Healio GmbH',
-    profilePath: '/about',
+    profilePath: '/about#frank-steinfurt',
     bio: 'Frank hat Healio gegründet, weil viele Menschen Zahnarzt, Vorsorge und Therapie selbst zahlen oder verschieben, obwohl Kasse, Kassenbonus und Zusatzschutz zusammen oft mehr tragen, als man denkt. In seinen Ratgebern rechnet er mit Satzungen, Gesetzestexten und Tarifunterlagen, nicht mit Werbeversprechen.',
     permission: 'Die Healio GmbH hat die Erlaubnis nach § 34d Abs. 1 GewO und ist im Vermittlerregister unter der Registrierungsnummer D-C1LE-OVLQH-98 eingetragen (Registrierungsstelle IHK Hamburg).',
     registerUrl: 'https://www.vermittlerregister.info',
