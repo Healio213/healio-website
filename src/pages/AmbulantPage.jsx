@@ -9,9 +9,7 @@ import DesktopLead from '@/components/desktop/DesktopLead';
 import AmbulantConversionFlow, { AmbulantExplainerVideo, getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
-import AmbulantBrilleKarte from '@/components/sections/ambulant/AmbulantBrilleKarte';
 import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
-import AmbulantBonusFeature from '@/components/sections/ambulant/AmbulantBonusFeature';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -58,16 +56,15 @@ const AmbulantPage = () => {
   return (
     <>
       <SEOHead title={seoTitle} description={seoDescription} canonicalUrl={canonicalUrl} schemaMarkup={schemaMarkup} />
-      {/* Der Bonusrechner steht direkt unter dem Einstieg. Tarifwahl und
-          Rechner teilen sich den Jahrgang, ohne ihn dauerhaft zu speichern. */}
+      {/* Frank 01.11.2026: Der Bonusrechner unter dem Einstieg entfällt, der
+          Bonus steht als Geheimtipp in „Auf einen Blick“ und in der IKK-Strecke. */}
       <div className="flex min-h-screen flex-col bg-white md:block">
         <DesktopLead surface="ambulant" language={lang} fromBonusTopic={fromBonusTopic} />
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
-        <AmbulantBonusFeature geburtsjahrEingabe={geburtsjahrEingabe} fromBonusTopic={fromBonusTopic} />
-        {/* Gleiche order-Stufe wie Hero und Bonusrechner; die Quellreihenfolge
-            hält „Auf einen Blick“ vor dem Film. */}
+        {/* Gleiche order-Stufe wie der Hero; die Quellreihenfolge hält
+            „Auf einen Blick“ vor dem Film. */}
         <div className="order-1 md:contents">
           <AmbulantAufEinenBlick fromBonusTopic={fromBonusTopic} />
         </div>
@@ -77,10 +74,6 @@ const AmbulantPage = () => {
         </div>
         <div className="order-3 md:contents">
           <HealioAwardsRow size="large" mobileWithIkk={!fromBonusTopic} />
-        </div>
-        {/* Die Brillen-Karte bleibt mobil als konkreter Einstieg erhalten. */}
-        <div className="order-4 md:contents">
-          <AmbulantBrilleKarte />
         </div>
         <AmbulantConversionFlow fromBonusTopic={fromBonusTopic} geburtsjahrEingabe={geburtsjahrEingabe} setGeburtsjahrEingabe={setGeburtsjahrEingabe} />
         {/* Frank 15.10.: Verweis auf den Tarifvergleich unter allen Abschnitten. */}

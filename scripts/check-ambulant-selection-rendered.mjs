@@ -5,7 +5,7 @@ import puppeteer from 'puppeteer';
 import { createServer } from 'vite';
 
 // Regression: selecting a tier must update the premium AND benefit budget in
-// the bonus example. This test never opens a provider or sends form data.
+// the tariff selection. This test never opens a provider or sends form data.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const server = await createServer({ root, logLevel: 'silent', server: { host: '127.0.0.1', port: 0, watch: { ignored: ['**/dist/**'] } } });
 let browser;
@@ -27,88 +27,55 @@ try {
     preferences: { analytics: false, calendly: false, maps: false, openai: false },
     source: 'settings', updatedAt: '2026-09-14T12:00:00.000Z',
   })));
+  // Frank 01.11.2026: Der Bonusrechner unter dem Einstieg entfällt. Geprüft
+  // wird die Tarifwahl selbst: Stufe, Beitrag nach Alter, Budget und Rechner-Link.
   const open = async (route) => {
     await page.goto(`${origin}${route}`, { waitUntil: 'networkidle0' });
     await page.waitForSelector('#tarifwahl');
-    await page.waitForSelector('#bonus-rechner summary');
-    assert.equal(await page.$eval('#bonus-rechner details', (details) => details.open), false, 'The personal bonus calculation starts collapsed.');
-    await page.click('#bonus-rechner summary');
-    await page.waitForSelector('#bonus-calculator', { visible: true });
-    assert(await page.$eval('#bonus-calculator', (calculator) => calculator.closest('details').open), 'Opening the summary must reveal the personal bonus calculation.');
+    assert.equal(await page.$('#bonus-rechner'), null, 'The bonus calculator is removed from /ambulant.');
   };
   const choose = async (code) => {
     await page.evaluate((tariff) => [...document.querySelectorAll('#tarifwahl button')].find((button) => button.textContent.includes(tariff)).click(), code);
-    await page.waitForFunction((tariff) => document.querySelector('#bonus-calculator').textContent.includes(`(${tariff})`), {}, code);
+    await page.waitForFunction((tariff) => document.querySelector('#tarifwahl button[aria-pressed="true"]')?.textContent.includes(tariff), {}, code);
   };
-  const read = () => page.evaluate(() => {
-    const bonus = document.querySelector('#bonus-calculator');
-    const valueFor = (label) => [...bonus.querySelectorAll('span')].find((el) => el.textContent === label)?.parentElement?.lastElementChild?.textContent;
-    return {
-      text: bonus.textContent,
-      monthly: bonus.querySelector('button[aria-label^="Monatlichen Tarifbeitrag"]')?.textContent,
-      annual: valueFor('= Jahresbeitrag:'),
-      potential: valueFor('Erreichtes Zuschusspotenzial:'),
-      eligible: valueFor('Für diesen Beitrag anrechenbar:'),
-      budget: valueFor('Dein Gesundheitsbudget dafür (2 Jahre)'),
-      handoffs: [...document.querySelectorAll('[data-healio-ambulant="calculator-handoff"]')].map((node) => node.textContent),
-      tariffsParam: new URL(document.querySelector('#tarifwahl a[href^="https://insurances-online.levelnine.biz/"]').href).searchParams.get('tariffs'),
-    };
-  });
+  const read = () => page.evaluate(() => ({
+    text: document.querySelector('#tarifwahl').textContent,
+    agePrice: document.querySelector('[data-healio-ambulant="age-price"]').textContent,
+    handoffs: [...document.querySelectorAll('[data-healio-ambulant="calculator-handoff"]')].map((node) => node.textContent),
+    tariffsParam: new URL(document.querySelector('#tarifwahl a[href^="https://insurances-online.levelnine.biz/"]').href).searchParams.get('tariffs'),
+  }));
 
   await page.setViewport({ width: 1440, height: 960 });
   await open('/ambulant');
-  const initial = await read();
-  await page.click('#bonus-calculator button[aria-label^="Monatlichen Tarifbeitrag"]');
-  await page.keyboard.press('Enter');
-  for (const [code, monthly, annual, budget] of [
-    ['AP5', '10,36', '124,32 €', '1.400'],
-    ['AP7', '15,82', '189,84 €', '2.000'],
-    ['AP9', '27,44', '329,28 €', '2.600'],
-    ['AP1', '31,64', '379,68 €', '3.000'],
+  // Ohne Geburtsjahr nie ein Pauschalbetrag: Spanne über alle Altersgruppen.
+  for (const [code, min, max, budget] of [
+    ['AP5', '6,79', '21,00', '1.400'],
+    ['AP7', '10,13', '33,13', '2.000'],
+    ['AP9', '18,08', '43,91', '2.600'],
+    ['AP1', '20,76', '50,76', '3.000'],
   ]) {
     await choose(code);
     const current = await read();
-    assert(current.monthly.includes(monthly), `${code}: example premium must follow the selection.`);
-    assert.equal(current.annual, annual);
-    assert(current.budget.includes(budget), `${code}: benefit budget must follow the selection.`);
-    assert.equal(current.potential, initial.potential, 'Changing tariff must preserve the activity selection.');
-    assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every calculator handoff must explain which tier to choose again (bonus example, tier selection, final box; Frank 01.11.2026: online first).');
+    assert(current.agePrice.includes(min) && current.agePrice.includes(max) && current.agePrice.includes('bis'), `${code}: without a year of birth the tariff card must show the price range.`);
+    assert(current.text.includes(budget), `${code}: benefit budget must follow the selection.`);
+    assert(current.handoffs.length === 2 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every calculator handoff must explain which tier to choose again (tier selection, final box).');
     assert.equal(current.tariffsParam, `SDK${code}@`, 'The calculator link must preselect the chosen tier (Level Nine identifier SDKAP5@ to SDKAP1@).');
   }
 
-  // Personal premiums are explicit user input, not another published example.
-  await page.click('#bonus-calculator button[aria-label^="Monatlichen Tarifbeitrag"]');
-  await page.type('#bonus-calculator input[aria-label="Monatlichen Tarifbeitrag eingeben"]', '30,50');
-  await page.keyboard.press('Enter');
-  await choose('AP5');
-  const custom = await read();
-  assert.equal(custom.annual, '366 €', 'Typing a decimal comma must preserve cents instead of turning 30,50 into 3050.');
-  assert(custom.text.includes('Dein Beitrag bleibt erhalten. Prüfe ihn bei einer anderen Tarifstufe erneut.'));
-  assert.equal(custom.potential, initial.potential);
-  await page.evaluate(() => [...document.querySelectorAll('#bonus-calculator button')].find((button) => button.textContent.trim() === 'Auswahl zurücksetzen').click());
-  const reset = await read();
-  assert(reset.monthly.includes('10,36'), 'Reset must restore the currently selected tariff example.');
-
-  // Ohne Geburtsjahr nie ein Pauschalbetrag: Spanne über alle Altersgruppen.
   // Mit Geburtsjahr zählt das erreichte Alter (Kalenderjahr minus Geburtsjahr).
-  const agePrice = () => page.$eval('[data-healio-ambulant="age-price"]', (node) => node.textContent);
-  assert((await agePrice()).includes('bis'), 'Without a year of birth the tariff card must show a price range.');
+  await choose('AP5');
   const year = new Date().getFullYear();
   await page.type('#ambulant-geburtsjahr', String(year - 43));
-  await page.waitForFunction(() => document.querySelector('[data-healio-ambulant="age-price"]').textContent.includes('6,79') === false);
-  assert((await agePrice()).includes('14,14'), 'AP5 at reached age 43 must show the 41 to 50 group premium.');
+  await page.waitForFunction(() => document.querySelector('[data-healio-ambulant="age-price"]').textContent.includes('bis') === false);
+  assert((await read()).agePrice.includes('14,14'), 'AP5 at reached age 43 must show the 41 to 50 group premium.');
   await choose('AP1');
-  assert((await agePrice()).includes('44,13'), 'AP1 at reached age 43 must show 44,13.');
-  const calcWithAge = await read();
-  assert(calcWithAge.monthly.includes('44,13'), 'The bonus calculator must follow the age group premium.');
-  assert.equal(reset.potential, '0 €');
-  assert.equal(reset.eligible, '0 €');
+  assert((await read()).agePrice.includes('44,13'), 'AP1 at reached age 43 must show 44,13.');
 
   await open('/en/outpatient');
   await choose('AP7');
-  const english = await page.$eval('#bonus-calculator', (node) => node.textContent);
-  assert(english.includes('AP7') && english.includes('15.82') && english.includes('2,000'));
-  assert(english.includes('pick the same tier') && english.includes('German'));
+  const english = await read();
+  assert(english.text.includes('AP7') && english.text.includes('2,000'));
+  assert(english.handoffs.every((text) => text.includes('pick the same tier') && text.includes('German')));
 
   for (const width of [390, 320]) {
     await page.setViewport({ width, height: 740 });
@@ -133,7 +100,7 @@ try {
     assert.equal(layout.clippedHeading, false, `${width}px: hero text must not be clipped by overflow-hidden.`);
   }
   assert.deepEqual(errors, []);
-  console.log('Ambulant-Auswahl: vier Tarifstufen, Bonusbudget/Beitrag, eigene Eingaben, Rücksetzen, DE/EN und mobile Hero-CTAs bestanden.');
+  console.log('Ambulant-Auswahl: vier Tarifstufen, Budget/Beitrag nach Alter, Rechner-Link, DE/EN und mobile Hero-CTAs bestanden.');
 } finally {
   await browser?.close();
   await server.close();

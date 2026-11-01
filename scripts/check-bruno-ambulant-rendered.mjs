@@ -73,7 +73,9 @@ try {
       heroNote: hero.querySelector('[role="note"]')?.textContent
         || [...hero.querySelectorAll('p')].find((paragraph) => paragraph.textContent.includes('Bereits angeratene oder begonnene'))?.textContent
         || '',
-      bonusLinks: sections.flatMap((section) => [...section.querySelectorAll('a')])
+      // Frank 01.11.2026: Der KassenBoost-Link steht in der IKK-Strecke, die in
+      // einem Wrapper liegt; daher alle Links unterhalb des Ablaufs zählen.
+      bonusLinks: [...tariffSection.parentElement.querySelectorAll('a')]
         .filter((link) => new URL(link.href).pathname.endsWith('/kassenboost')).length,
       quoteUrl: tariffSection.querySelector('a[target="_blank"]')?.getAttribute('href'),
       canonical: document.querySelector('link[rel="canonical"]')?.href,
@@ -90,11 +92,12 @@ try {
   await open('/ambulant');
   const ordinary = await readFlow();
   assert.equal(ordinary.hasContinuation, false);
-  assert.equal(ordinary.calculatorControls, 1, 'Der normale Bonusrechner muss erhalten bleiben.');
+  // Frank 01.11.2026: Der Bonusrechner unter dem Einstieg entfällt auch auf dem normalen Weg.
+  assert.equal(ordinary.calculatorControls, 0, 'Der Bonusrechner ist von /ambulant entfernt.');
   assert(ordinary.bonusLinks > 0, 'Der normale KassenBoost-Anschluss muss erhalten bleiben.');
   assert.equal(ordinary.heroTitle, 'Warum zahlst du Heilpraktiker und Brille noch selbst? Bis zu 3.000 EUR zurück, ohne Wartezeit.', 'Der veröffentlichte allgemeine Desktop-Hero (Frank 15.10.2026) darf durch den Herkunftszweig nicht neu getextet werden.');
   // Frank 01.11.2026: stärkerer Einstieg mit Beispielpreis, Geheimtipp bleibt.
-  assert.match(ordinary.heroText, /Fünf Heilpraktiker-Sitzungen à 90 EUR\? Ohne Zusatzschutz zahlst du 450 EUR selbst\. Der SDK-Tarif erstattet bis zu 100 %.*Vorerkrankungen werden mit Zuschlag mitversichert\. Unser Geheimtipp: Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen\./);
+  assert.match(ordinary.heroText, /Fünf Heilpraktiker-Sitzungen à 90 EUR\? Ohne Zusatzschutz zahlst du 450 EUR selbst\. Der SDK-Tarif erstattet bis zu 100 % und kostet dafür mit 30 rund 32 EUR im Monat, weniger als eine halbe Sitzung\..*Vorerkrankungen werden mit Zuschlag mitversichert\. Unser Geheimtipp: Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen\./);
   // Frank 01.11.2026: Der Einstieg führt in den SDK-Tarifrechner, daneben nur der Sprung zur Tarifwahl.
   assert.deepEqual(ordinary.heroTargets, ['#tarifwahl']);
   assert.equal(ordinary.heroNote, '');
@@ -143,7 +146,7 @@ try {
     await open(route);
     const nonCampaign = await readFlow();
     assert.equal(nonCampaign.hasContinuation, false, 'Nur der exakt gebundene Herkunftscode darf den Anschluss ändern.');
-    assert.equal(nonCampaign.calculatorControls, 1);
+    assert.equal(nonCampaign.calculatorControls, 0, 'Auch ohne Herkunftscode zeigt /ambulant keinen Bonusrechner mehr (Frank 01.11.2026).');
     assert.equal(nonCampaign.heroMarkup, ordinary.heroMarkup, 'Ohne exakt erlaubten Ursprung muss der gesamte allgemeine Hero unverändert bleiben.');
   }
 

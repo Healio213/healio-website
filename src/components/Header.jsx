@@ -19,11 +19,10 @@ const AnimatedLeadCaptureLink = motion(LeadCaptureLink);
 
 const AMBULANT_CTA_DELAY_MS = 30_000;
 // Experiment Handy-Conversion 10/2026: Unter md (768 px) erscheint der Knopf
-// „Beitrag berechnen“ auf /ambulant nicht erst nach 30 Sekunden, sondern sobald
-// die Brillen-Karte (#ambulant-brille) in die untere Bildhälfte kommt. Fehlt sie,
-// gilt eine Wischtiefe von eineinhalb Bildschirmen. Ab md bleibt es bei der Zeit.
-const AMBULANT_CTA_ANCHOR_ID = 'ambulant-brille';
-const AMBULANT_CTA_FALLBACK_SCREENS = 1.5;
+// „Beitrag berechnen“ auf /ambulant nicht erst nach 30 Sekunden, sondern nach
+// einer Wischtiefe von eineinhalb Bildschirmen (die Brillen-Karte als Anker ist
+// seit 01.11.2026 entfallen). Ab md bleibt es bei der Zeit.
+const AMBULANT_CTA_SCROLL_SCREENS = 1.5;
 const PHONE_MAX_WIDTH = 767;
 
 const Header = () => {
@@ -112,11 +111,7 @@ const Header = () => {
     const checkDepth = () => {
       frame = 0;
       if (window.innerWidth > PHONE_MAX_WIDTH) return;
-      const anchor = document.getElementById(AMBULANT_CTA_ANCHOR_ID);
-      const reached = anchor && anchor.getBoundingClientRect().height > 0
-        ? anchor.getBoundingClientRect().top < window.innerHeight * 0.5
-        : window.scrollY > window.innerHeight * AMBULANT_CTA_FALLBACK_SCREENS;
-      if (reached) setAmbulantCtaReady(true);
+      if (window.scrollY > window.innerHeight * AMBULANT_CTA_SCROLL_SCREENS) setAmbulantCtaReady(true);
     };
     const scheduleCheck = () => {
       if (!frame) frame = window.requestAnimationFrame(checkDepth);

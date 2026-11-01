@@ -82,7 +82,8 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const selfServiceSurface = surface === 'ambulant' || surface === 'stationaer';
   // Besuchertest 11.10.2026: Auf /zahn und /stationaer steht dieselbe Auswahl (zwei Zahn-Wege,
   // vier Klinik-Tarife) weiter unten ausführlich; die Kurzliste im Kopfbereich entfällt.
-  const showOffer = surface !== 'zahn' && surface !== 'stationaer' && !(guidedCallbackEnabled && isHome);
+  // Frank 01.11.2026: ebenso auf /ambulant, die Töpfe je Stufe zeigt die Tarifwahl.
+  const showOffer = surface !== 'zahn' && surface !== 'stationaer' && surface !== 'ambulant' && !(guidedCallbackEnabled && isHome);
   const headingId = `desktop-${surface}-heading`;
   const action = isHome ? KASSENBOOST_COMPARE_URL : fromBonusTopic && surface === 'ambulant' ? '#tarifwahl' : destinations[surface];
 
@@ -164,7 +165,9 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           {/* Frank 15.10.2026: „Unser Geheimtipp“ im Ambulant-Text hervorheben (<highlight>). */}
           {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}><HighlightText text={copy.description} className="font-bold text-[#5ee0b1]" /></p>}
           {!isHome && <p className={sceneBelow.note}>{copy.condition}</p>}
-          {!isHome && !guidedCallbackEnabled && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
+          {/* Der Hinweis zu angeratenen oder begonnenen Behandlungen bleibt für Besucher aus
+              dem Bonus-Check auch im Terminmodus sichtbar (fehlte seit 14.10., Fix 01.11.2026). */}
+          {!isHome && (!guidedCallbackEnabled || (fromBonusTopic && surface === 'ambulant')) && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>
         {showOffer && (isHome ? <div className="max-w-2xl"><OfferList copy={copy} surface={surface} /></div> : <OfferList copy={copy} surface={surface} />)}
       </div>

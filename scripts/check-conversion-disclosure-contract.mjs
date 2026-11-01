@@ -80,20 +80,21 @@ traverse(parse(ambulantFlow, { sourceType: 'module', plugins: ['jsx'] }), {
 });
 const tariffSections = ambulantSections.filter((section) => section.id === 'tarifwahl');
 // Frank 01.11.2026: Der eigene KassenBoost-Werbeblock entfällt auch am Desktop.
-// Die Finanzierungswege übernehmen die Brücke nach der Tarifwahl.
-const twoWaysMatch = /<ZweiWegeFinanzierung produkt="ambulant" className="([^"]+)"/.exec(ambulantFlow);
-expect(tariffSections.length === 1 && twoWaysMatch, 'Tarifwahl und Finanzierungswege müssen als eindeutige Abschnitte vorhanden sein.');
+// Finanzierungswege und IKK-Strecke sind zu einem Abschnitt zusammengelegt:
+// Nach der Tarifwahl steht nur noch die IKK-Strecke, keine Zwei-Wege-Karten.
+const ikkMatch = /<div className="([^"]+)">\s*<AmbulantIKKWechsel variant="ambulant"/.exec(ambulantFlow);
+expect(tariffSections.length === 1 && ikkMatch, 'Tarifwahl und IKK-Strecke müssen als eindeutige Abschnitte vorhanden sein.');
+expect(!/<ZweiWegeFinanzierung/.test(ambulantFlow), 'Ambulant zeigt die Finanzierungswege nicht zusätzlich zur IKK-Strecke.');
 expect(!ambulantSections.some((section) => section.classes.includes('bg-[#071722]')), 'Ambulant zeigt keinen zusätzlichen KassenBoost-Werbeblock mehr.');
 const mobileOrder = (section) => {
   const token = section.classes.find((item) => /^order-(?:\d+|\[\d+\])$/.test(item));
   return token ? Number(token.match(/\d+/)[0]) : null;
 };
-const twoWays = { start: twoWaysMatch?.index ?? -1, classes: twoWaysMatch ? twoWaysMatch[1].split(/\s+/) : [] };
-expect(tariffSections[0].start < twoWays.start
-  && mobileOrder(tariffSections[0]) !== null && mobileOrder(twoWays) !== null
-  && mobileOrder(tariffSections[0]) < mobileOrder(twoWays),
-'KassenBoost darf sowohl im Quelltext als auch in der mobilen CSS-Reihenfolge erst nach der Tarifwahl erklärt werden.');
-expect(/\/kassenboost/.test(read('src/components/sections/shared/ZweiWegeFinanzierung.jsx')), 'Die Ambulant-Finanzierungswege müssen in KassenBoost führen.');
+const ikkBlock = { start: ikkMatch?.index ?? -1, classes: ikkMatch ? ikkMatch[1].split(/\s+/) : [] };
+expect(tariffSections[0].start < ikkBlock.start
+  && mobileOrder(tariffSections[0]) !== null && mobileOrder(ikkBlock) !== null
+  && mobileOrder(tariffSections[0]) < mobileOrder(ikkBlock),
+'Der Kassenwechsel darf sowohl im Quelltext als auch in der mobilen CSS-Reihenfolge erst nach der Tarifwahl erklärt werden.');
 // Rote Linie (Healio/CONTENT-ROTE-LINIE-B2C.md): Der Bonus kann den Beitrag
 // „ganz oder teilweise“ ausgleichen, nie pauschal „bis zu 100 %“ oder
 // „Hol dir deinen Beitrag zurück“.

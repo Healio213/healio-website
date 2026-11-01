@@ -1,6 +1,7 @@
 
 import React, { Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Shield, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
 import HighlightText from '@/components/ui/HighlightText';
@@ -204,6 +205,19 @@ const AmbulantIKKWechsel = ({ variant = 'ambulant', mobileSwipe = false, sealsIn
               />
             </button>
           </div>
+          {/* Frank 01.11.2026: Auf /ambulant ersetzt dieser Abschnitt die
+              Zwei-Wege-Karten; deren KassenBoost-Link wandert hierher (wie dort
+              erst ab md, am Handy bleibt es bei den zwei Knöpfen). */}
+          {compactAmbulantCopy && (
+            <Link
+              to={lang === 'en' ? '/en/kassenboost' : '/kassenboost'}
+              data-healio-nita-avoid
+              className="home-focus mt-5 hidden items-center font-display text-base font-extrabold text-emerald-800 underline decoration-home-mint/50 decoration-2 underline-offset-4 transition hover:text-emerald-950 md:inline-flex"
+            >
+              {lang === 'en' ? 'Which route gets you more? Check with KassenBoost' : 'Welcher Weg bringt dir mehr? Mit KassenBoost prüfen'}
+              <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
+            </Link>
+          )}
 
           {/* Testsiegel der Krankenkasse IKK classic (Stand 09/2026), seit
               03.10.2026 hier im IKK-Block statt in der allgemeinen Siegelzeile.

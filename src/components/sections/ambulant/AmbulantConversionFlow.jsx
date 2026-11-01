@@ -23,15 +23,13 @@ import { useAmbulantStufe, setAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
-import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
 import AmbulantAragVorsorge from '@/components/sections/ambulant/AmbulantAragVorsorge';
 import WhatsAppHelpHint from '@/components/sections/shared/WhatsAppHelpHint';
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
-import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
+import { beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
-import { BRILLE_QUESTION } from '@/components/sections/ambulant/ambulantBrilleFrage';
 
 const COPY = {
   de: {
@@ -111,14 +109,6 @@ const COPY = {
       },
       cta: 'Beitrag berechnen & online abschließen',
       disclosure: 'Die Werte zeigen vier eigene Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Du erhältst Erstattungen für versicherte Rechnungen, kein frei verfügbares Guthaben. Vorsorge, Impfungen und anerkannte Präventionskurse teilen sich einen Topf. Tarifbedingungen und Erstattungsgrenzen gelten.',
-    },
-    calculator: {
-      eyebrow: 'Konkretes Bonus-Beispiel',
-      title: 'Wie weit trägt dein Bonus?',
-      summary: 'Klappe den Rechner auf und teste eine IKK-classic-Beispielrechnung mit deinen Aktivitäten.',
-      hint: 'Vollständig anzeigen',
-      disclosure: 'Dieses Rechenmodell bildet das Bonusprogramm der IKK classic ab und ist keine Vorentscheidung für eine Krankenkasse. KassenBoost vergleicht anschließend, welche Kasse zu deinem Tarif und deinem Alltag passt.',
-      secondaryCta: 'Krankenkassen mit KassenBoost vergleichen',
     },
     process: {
       eyebrow: 'So kommst du zum Ergebnis',
@@ -212,14 +202,6 @@ const COPY = {
       cta: 'Calculate premium & apply online',
       disclosure: 'The values are four separate maximums per two calendar years from the policy start. Eligible invoices are reimbursed; this is not cash to spend freely. Screening, vaccines and approved prevention courses share one pot. Policy terms and reimbursement limits apply.',
     },
-    calculator: {
-      eyebrow: 'A concrete bonus example',
-      title: 'How far could your bonus go?',
-      summary: 'Open the calculator and test an IKK classic example using your activities.',
-      hint: 'Show the full calculator',
-      disclosure: 'This model reflects the IKK classic bonus programme and is not a preselection. KassenBoost then compares which statutory insurer fits your plan and routine.',
-      secondaryCta: 'Compare statutory insurers with KassenBoost',
-    },
     process: {
       eyebrow: 'How you get your result',
       title: 'Three steps. No insurance jargon.',
@@ -309,36 +291,6 @@ const getAmbulantCopy = (language, fromBonusTopic) => (
 export const getAmbulantCompactFaqs = (language = 'de', fromBonusTopic = false) => (
   getAmbulantCopy(language, fromBonusTopic).faqs
 );
-
-// Bonus und Tarifwahl verwenden dieselbe Stufe und denselben Jahrgang.
-// Ohne Jahrgang bleibt die ausdrücklich benannte Beispielgruppe erhalten.
-export const getAmbulantBonusFeatureProps = (language, fromBonusTopic, selectedTier, geburtsjahrEingabe) => {
-  const copy = getAmbulantCopy(language, fromBonusTopic);
-  const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
-  const rechnerGruppe = findeAltersgruppe(parseGeburtsjahr(geburtsjahrEingabe)) ?? BEISPIEL_GRUPPE;
-  const rechnerBeitrag = beitragInGruppe(rechnerGruppe, tier.code);
-  const gruppenName = (rechnerGruppe.bis === null ? copy.tiers.groupOpen : copy.tiers.groupRange)
-    .replace('{{from}}', rechnerGruppe.von)
-    .replace('{{to}}', rechnerGruppe.bis);
-  const locale = language === 'en' ? 'en-GB' : 'de-DE';
-  const monthlyEuro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const euro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
-  return {
-    calculatorIntroNote: copy.calculator.disclosure,
-    calculatorProps: {
-      defaultMonatsbeitrag: rechnerBeitrag,
-      tariffInfoText: language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName}`,
-      effectiveValue: language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`,
-      calculatorHint: copy.tiers.calculatorHandoff.replace('{{level}}', tier.id).replace('{{code}}', tier.code),
-      effectiveNote: language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.',
-      secondaryCtaOverride: {
-        href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
-        label: copy.calculator.secondaryCta,
-      },
-    },
-  };
-};
 
 // Angebotskarte im Ambulant-Hero (Frank 30.09.2026, Vorbild /stationaer):
 // höchste Stufe mit ihren vier Töpfen aus denselben Daten wie die Tarifwahl.
@@ -744,17 +696,14 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
           Produktseiten, auf Vorgabe zurück). Seit 30.09. direkt nach der
           Tarifwahl als erster Teil der Kassen-Geschichte (Frank: die Szene soll
           im Fokus stehen); die Regel „erst Tarif, dann Kasse“ bleibt. */}
-      {/* Nach der Tarifwahl folgen die Finanzierungswege und die
-          Kassenwechsel-Strecke. Der interaktive Bonusrechner steht bereits
-          direkt unter dem Einstieg. */}
+      {/* Frank 01.11.2026: Finanzierungswege und IKK-Strecke sind zu einem
+          Abschnitt zusammengelegt. Die IKK-Strecke bleibt mit ihrem Knopf und
+          den Wechseldetails, die doppelten Zwei-Wege-Karten entfallen. */}
       <div className="order-7 md:contents">
         <AmbulantIKKWechsel variant="ambulant" mobileSwipe sealsInMobileAwardsRow />
       </div>
 
-      <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe hideLinkOnMobile />
-
-      {/* Frank 01.11.2026: Der weitere Bonus-Werbeblock entfällt auch am Desktop.
-          Finanzierungswege, IKK-Karte und Bonusrechner sagen es bereits. */}
+      {/* Frank 01.11.2026: Der weitere Bonus-Werbeblock entfällt auch am Desktop. */}
 
         </>
       )}
@@ -909,10 +858,8 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
         <div className="mx-auto max-w-4xl">
           <h2 className="text-center font-display text-3xl font-extrabold tracking-[-0.035em] text-home-midnight sm:text-4xl lg:text-5xl">{copy.faqTitle}</h2>
           <div className="mt-6 space-y-2 md:mt-10 md:space-y-3">
-            {/* Experiment Handy-Conversion 10/2026: die Brillen-Frage steht mobil schon als Karte
-                unter dem Erklärvideo; die Antwort im FAQ-Schema bleibt unverändert. */}
             {copy.faqs.map((faq) => (
-              <details key={faq.q} className={`group rounded-2xl border border-slate-200 bg-[#fbfcfc] px-5 py-1${faq.q === BRILLE_QUESTION[language] ? ' hidden md:block' : ''}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+              <details key={faq.q} className="group rounded-2xl border border-slate-200 bg-[#fbfcfc] px-5 py-1" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                 <summary className="home-focus flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-display text-base font-extrabold text-home-midnight sm:text-lg md:min-h-0 md:py-5 [&::-webkit-details-marker]:hidden">
                   <span itemProp="name">{faq.q}</span>
                   <ChevronDown className="h-5 w-5 shrink-0 text-home-mint transition group-open:rotate-180" />

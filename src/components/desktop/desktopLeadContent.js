@@ -30,9 +30,11 @@ const content = {
     ambulant: {
       // Frank 15.10.2026: Nutzen zuerst, der Kassenbonus folgt als Geheimtipp.
       // Gleicher Wortlaut wie hero.title/hero.subtitle in de/ambulant.json.
+      // Beitrag „mit 30 rund 32 EUR“: AP1, Altersgruppe 21 bis 30, 31,64 EUR
+      // (src/data/sdkAmbulantBeitraege.js), halbe Sitzung = 45 EUR (Frank 01.11.2026).
       titleLead: 'Warum zahlst du Heilpraktiker und Brille noch selbst?',
       titleAccent: 'Bis zu 3.000 EUR zurück, ohne Wartezeit.',
-      description: 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight>, dazu eigene Töpfe für Brille, Vorsorge und Zuzahlungen. Keine Ablehnung, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
+      description: 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight> und kostet dafür mit 30 rund 32 EUR im Monat, weniger als eine halbe Sitzung. Keine Ablehnung, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
       condition: 'SDK AP1: vier getrennte Höchstbeträge für 2 Kalenderjahre ab Versicherungsbeginn. Erstattungsfähige Kosten, Gesundheitsangaben und Tarifbedingungen gelten.',
       cta: 'Ambulantes Budget prüfen',
       hint: 'Tarifleistungen, Beitrag und persönliches Bonuspotenzial nachvollziehbar gegenüberstellen.',
@@ -114,7 +116,7 @@ const content = {
     ambulant: {
       titleLead: 'Why are you still paying for naturopaths and glasses yourself?',
       titleAccent: 'Get up to EUR 3,000 back, with no waiting period.',
-      description: 'Five naturopath (Heilpraktiker) sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight>, plus separate pots for glasses, preventive care and co-payments. No rejection, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
+      description: 'Five naturopath (Heilpraktiker) sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight> and costs around EUR 32 a month at age 30, less than half a session. No rejection, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
       condition: 'SDK AP1: four separate limits for 2 calendar years from the start of cover. Eligible expenses, health declarations and plan conditions apply.',
       cta: 'Check outpatient benefits',
       hint: 'Compare plan benefits, premiums and your own bonus potential clearly.',

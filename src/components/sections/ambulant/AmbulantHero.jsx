@@ -27,20 +27,8 @@ const potStyles = {
 // Experiment Handy-Conversion 10/2026: mobil ist der Budget-Kompass ohne Höhe
 // (er wiederholt die vier Themen dieser Kacheln und nennt keine Beträge). Der
 // href bleibt überall '#budget-kompass'; mobil liegt dieser Anker direkt vor der
-// Tarifwahl und funktioniert auch vor dem Laden des Skripts. Nur die
-// Sehhilfen-Kachel springt unter md zusätzlich zur Brillen-Karte. Die Abfrage
-// läuft erst beim Klick, das gerenderte HTML ist am Handy und am Desktop gleich.
-const MOBILE_QUERY = '(max-width: 767px)';
-const jumpOnMobile = (targetId) => (event) => {
-  if (!window.matchMedia(MOBILE_QUERY).matches) return;
-  const target = document.getElementById(targetId);
-  if (!target) return;
-  event.preventDefault();
-  target.scrollIntoView({
-    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    block: 'start',
-  });
-};
+// Tarifwahl und funktioniert auch vor dem Laden des Skripts. Die eigene
+// Brillen-Karte ist seit 01.11.2026 entfallen (Frank), Brille steht in der FAQ.
 
 // Hero wie auf /stationaer (Frank 30.09.2026): dunkler Grund, links Text und
 // Budget-Button, rechts die Karte mit dem Budget der höchsten Stufe und ihren
@@ -91,8 +79,10 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-5 max-w-2xl text-base font-semibold leading-7 text-white sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl md:font-medium md:text-slate-200"
           >
-            {/* Frank 01.11.2026: Einstieg stärker, Verlust zuerst (Nasher-Stil, Beispielpreis). */}
-            <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : <HighlightText text={language === 'en' ? 'Five naturopath sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight>.' : 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight>.'} className="font-extrabold text-[#5ee0b1]" />}</span>
+            {/* Frank 01.11.2026: Einstieg stärker, Verlust zuerst (Nasher-Stil, Beispielpreis).
+                Beitrag „mit 30 rund 32 EUR“: AP1, 21 bis 30 Jahre, 31,64 EUR (sdkAmbulantBeitraege.js).
+                Mobil ohne „halbe Sitzung“, damit der Knopf auch bei 740 px Höhe sichtbar bleibt. */}
+            <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : <HighlightText text={language === 'en' ? 'Five naturopath sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight>, at age 30 for around EUR 32 a month.' : 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight>, mit 30 für rund 32 EUR im Monat.'} className="font-extrabold text-[#5ee0b1]" />}</span>
             <span className="hidden md:inline">{fromBonusTopic ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.' : <HighlightText text={t('hero.subtitle')} className="font-bold text-[#5ee0b1]" />}</span>
           </motion.p>
           {fromBonusTopic && (
@@ -128,11 +118,13 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
           </motion.div>
         </div>
 
+        {/* Frank 01.11.2026: am Handy ohne Budget-Karte. „Auf einen Blick“ und
+            die Tarifwahl nennen dieselben Zahlen, die Töpfe je Stufe stehen dort. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12 }}
-          className="relative mx-auto min-w-0 w-full max-w-[35rem] lg:mx-0"
+          className="relative mx-auto hidden min-w-0 w-full max-w-[35rem] md:block lg:mx-0"
           aria-label={t('hero.offerAria')}
         >
           <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-5 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:rounded-[2.2rem] sm:p-7">
@@ -171,7 +163,6 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
                   <a
                     key={pot.key}
                     href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
-                    onClick={fromBonusTopic || pot.key !== 'vision' ? undefined : jumpOnMobile('ambulant-brille')}
                     className={`group block h-full rounded-[1.4rem] bg-gradient-to-br p-4 ring-1 transition md:hover:-translate-y-0.5 md:hover:shadow-[0_16px_36px_rgba(39,63,72,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-home-mint motion-reduce:transform-none ${style.card}`}
                   >
                     <span className="flex items-center gap-3">
