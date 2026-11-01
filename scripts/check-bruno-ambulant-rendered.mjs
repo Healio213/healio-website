@@ -92,8 +92,9 @@ try {
   await open('/ambulant');
   const ordinary = await readFlow();
   assert.equal(ordinary.hasContinuation, false);
-  // Frank 01.11.2026: Der Bonusrechner unter dem Einstieg entfällt auch auf dem normalen Weg.
-  assert.equal(ordinary.calculatorControls, 0, 'Der Bonusrechner ist von /ambulant entfernt.');
+  // Frank 01.11.2026: Kein Bonusrechner unter dem Einstieg. Er steht zugeklappt
+  // am Ende der IKK-Strecke und lädt erst beim Aufklappen.
+  assert.equal(ordinary.calculatorControls, 0, 'Der Bonusrechner darf auf /ambulant nicht offen vorgeladen sein.');
   assert(ordinary.bonusLinks > 0, 'Der normale KassenBoost-Anschluss muss erhalten bleiben.');
   assert.equal(ordinary.heroTitle, 'Warum zahlst du Heilpraktiker und Brille noch selbst? Bis zu 3.000 EUR zurück, ohne Wartezeit.', 'Der veröffentlichte allgemeine Desktop-Hero (Frank 15.10.2026) darf durch den Herkunftszweig nicht neu getextet werden.');
   // Frank 01.11.2026: stärkerer Einstieg mit Beispielpreis, Geheimtipp bleibt.
@@ -146,7 +147,7 @@ try {
     await open(route);
     const nonCampaign = await readFlow();
     assert.equal(nonCampaign.hasContinuation, false, 'Nur der exakt gebundene Herkunftscode darf den Anschluss ändern.');
-    assert.equal(nonCampaign.calculatorControls, 0, 'Auch ohne Herkunftscode zeigt /ambulant keinen Bonusrechner mehr (Frank 01.11.2026).');
+    assert.equal(nonCampaign.calculatorControls, 0, 'Auch ohne Herkunftscode bleibt der Bonusrechner zugeklappt (Frank 01.11.2026).');
     assert.equal(nonCampaign.heroMarkup, ordinary.heroMarkup, 'Ohne exakt erlaubten Ursprung muss der gesamte allgemeine Hero unverändert bleiben.');
   }
 

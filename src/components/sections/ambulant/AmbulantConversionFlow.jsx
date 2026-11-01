@@ -28,7 +28,8 @@ import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVor
 import AmbulantAragVorsorge from '@/components/sections/ambulant/AmbulantAragVorsorge';
 import WhatsAppHelpHint from '@/components/sections/shared/WhatsAppHelpHint';
 import ZielseitenKontakt from '@/components/sections/shared/ZielseitenKontakt';
-import { beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
+import CompactBonusFeature from '@/components/sections/shared/CompactBonusFeature';
+import { BEISPIEL_GRUPPE, beitragInGruppe, beitragsSpanne, findeAltersgruppe, parseGeburtsjahr, SDK_AMBULANT_BEITRAEGE } from '@/data/sdkAmbulantBeitraege';
 import { AMBULANT_FAQS } from '@/components/sections/ambulant/ambulantFaqs';
 
 const COPY = {
@@ -109,6 +110,10 @@ const COPY = {
       },
       cta: 'Beitrag berechnen & online abschließen',
       disclosure: 'Die Werte zeigen vier eigene Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Du erhältst Erstattungen für versicherte Rechnungen, kein frei verfügbares Guthaben. Vorsorge, Impfungen und anerkannte Präventionskurse teilen sich einen Topf. Tarifbedingungen und Erstattungsgrenzen gelten.',
+    },
+    calculator: {
+      disclosure: 'Dieses Rechenmodell bildet das Bonusprogramm der IKK classic ab und ist keine Vorentscheidung für eine Krankenkasse. KassenBoost vergleicht anschließend, welche Kasse zu deinem Tarif und deinem Alltag passt.',
+      secondaryCta: 'Krankenkassen mit KassenBoost vergleichen',
     },
     process: {
       eyebrow: 'So kommst du zum Ergebnis',
@@ -202,6 +207,10 @@ const COPY = {
       cta: 'Calculate premium & apply online',
       disclosure: 'The values are four separate maximums per two calendar years from the policy start. Eligible invoices are reimbursed; this is not cash to spend freely. Screening, vaccines and approved prevention courses share one pot. Policy terms and reimbursement limits apply.',
     },
+    calculator: {
+      disclosure: 'This model reflects the IKK classic bonus programme and is not a preselection. KassenBoost then compares which statutory insurer fits your plan and routine.',
+      secondaryCta: 'Compare statutory insurers with KassenBoost',
+    },
     process: {
       eyebrow: 'How you get your result',
       title: 'Three steps. No insurance jargon.',
@@ -291,6 +300,36 @@ const getAmbulantCopy = (language, fromBonusTopic) => (
 export const getAmbulantCompactFaqs = (language = 'de', fromBonusTopic = false) => (
   getAmbulantCopy(language, fromBonusTopic).faqs
 );
+
+// Bonusrechner und Tarifwahl verwenden dieselbe Stufe und denselben Jahrgang.
+// Ohne Jahrgang bleibt die ausdrücklich benannte Beispielgruppe erhalten.
+const getAmbulantBonusFeatureProps = (language, selectedTier, geburtsjahrEingabe) => {
+  const copy = getAmbulantCopy(language, false);
+  const tier = TIERS.find((item) => item.id === selectedTier) || TIERS[3];
+  const rechnerGruppe = findeAltersgruppe(parseGeburtsjahr(geburtsjahrEingabe)) ?? BEISPIEL_GRUPPE;
+  const rechnerBeitrag = beitragInGruppe(rechnerGruppe, tier.code);
+  const gruppenName = (rechnerGruppe.bis === null ? copy.tiers.groupOpen : copy.tiers.groupRange)
+    .replace('{{from}}', rechnerGruppe.von)
+    .replace('{{to}}', rechnerGruppe.bis);
+  const locale = language === 'en' ? 'en-GB' : 'de-DE';
+  const monthlyEuro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const euro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+  return {
+    calculatorIntroNote: copy.calculator.disclosure,
+    calculatorProps: {
+      defaultMonatsbeitrag: rechnerBeitrag,
+      tariffInfoText: language === 'de' ? `Tarif Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/Monat, ${gruppenName}` : `Ambulant ${tier.id} (${tier.code}) · ${monthlyEuro.format(rechnerBeitrag)}/month, ${gruppenName}`,
+      effectiveValue: language === 'de' ? `bis zu ${euro.format(tier.budget)}` : `up to ${euro.format(tier.budget)}`,
+      calculatorHint: copy.tiers.calculatorHandoff.replace('{{level}}', tier.id).replace('{{code}}', tier.code),
+      effectiveNote: language === 'de' ? 'Beispielrechnung mit dem Bonusmodell der IKK classic. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; maßgeblich sind die aktuellen Bonus- und Tarifbedingungen.' : 'Example using the IKK classic bonus model. The subsidy is capped at the documented annual premium and subject to current bonus and tariff terms.',
+      secondaryCtaOverride: {
+        href: language === 'en' ? '/en/kassenboost' : '/kassenboost',
+        label: copy.calculator.secondaryCta,
+      },
+    },
+  };
+};
 
 // Angebotskarte im Ambulant-Hero (Frank 30.09.2026, Vorbild /stationaer):
 // höchste Stufe mit ihren vier Töpfen aus denselben Daten wie die Tarifwahl.
@@ -703,7 +742,14 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
         <AmbulantIKKWechsel variant="ambulant" mobileSwipe sealsInMobileAwardsRow />
       </div>
 
-      {/* Frank 01.11.2026: Der weitere Bonus-Werbeblock entfällt auch am Desktop. */}
+      {/* Frank 29.10.2026 wollte den Bonusrechner über den Kopfbereich direkt
+          erreichbar, am 01.11. vor der Tarifwahl gestrichen. Er steht deshalb
+          zugeklappt am Ende der IKK-Strecke, „Bonusrechner“ oben springt hierher. */}
+      <CompactBonusFeature
+        className="order-7 bg-home-ice md:order-none"
+        mobileSwipe
+        {...getAmbulantBonusFeatureProps(language, selectedTier, geburtsjahrEingabe)}
+      />
 
         </>
       )}

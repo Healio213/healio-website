@@ -57,6 +57,15 @@ test('SDK-Ambulant-Links mit vorgewählter Stufe werden freigegeben, fremde kenn
   assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKAP1@').replace('tarifftypes=Ambulant', 'tarifftypes=Station%C3%A4r')), null);
 });
 
+test('SDK-Stationär-Links mit vorgewähltem Klinik-Tarif werden freigegeben, nur auf Stationär', () => {
+  const stationaer = (code) => sdkUrl({}, code).replace('tarifftypes=Ambulant', 'tarifftypes=Station%C3%A4r');
+  for (const code of ['SDKSP1@', 'SDKSP2@', 'SDKSPU@']) {
+    assert.equal(validateApplicationUrl(stationaer(code)), new URL(stationaer(code)).toString());
+  }
+  assert.equal(validateApplicationUrl(stationaer('SDKSP3@')), null);
+  assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKSP1@')), null);
+});
+
 test('aktuelle SDK-, UKV- und Bayerische-URLs werden unverändert freigegeben', () => {
   for (const url of [sdkUrl(), sdkUrl({ ref: 'praxis_test-1', source: 'healio.de', ts: 1791460800000 }), ukvUrl, ukvAmbulantUrl, bayerischeUrl]) {
     assert.equal(validateApplicationUrl(url), new URL(url).toString());

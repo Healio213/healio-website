@@ -35,16 +35,16 @@ try {
     await go('/ambulant');
     const geometry = await page.evaluate(() => {
       const feature = document.getElementById('bonus-rechner');
-      const overview = document.querySelector('[data-ambulant-overview]')
-        || [...document.querySelectorAll('h2')].find((node) => node.textContent === 'Auf einen Blick');
+      // Frank 01.11.2026: Der Rechner steht erst nach der Tarifwahl.
+      const tariffs = document.getElementById('tarifwahl');
       return {
         feature: feature.getBoundingClientRect().top,
-        overview: overview.getBoundingClientRect().top,
+        tariffs: tariffs.getBoundingClientRect().bottom,
         mounted: Boolean(document.getElementById('bonus-calculator')),
         width: document.documentElement.scrollWidth,
       };
     });
-    assert(geometry.feature < geometry.overview, `Bonus entry must precede overview at ${width}px.`);
+    assert(geometry.feature > geometry.tariffs, `Bonus entry must follow the tariff selection at ${width}px.`);
     assert.equal(geometry.mounted, false, 'Closed calculator must not mount during initial load.');
     assert(geometry.width <= width + 1, `Horizontal overflow at ${width}px.`);
     const nav = await page.$eval('[data-bonus-calculator-link="desktop"]', (node) => ({

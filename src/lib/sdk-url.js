@@ -28,6 +28,8 @@ const IKK_LINK = 'https://www.ikk-classic.de/formulare/mitglied-werden-vp?dsid=k
 // Rechner genau diese Stufe vor und spart den Auswahlschritt (getestet 12.10.2026).
 const AMBULANT_STUFEN = { 50: 'SDKAP5@', 70: 'SDKAP7@', 90: 'SDKAP9@', 100: 'SDKAP1@' };
 export const AMBULANT_STUFE_DEFAULT = 100;
+// Klinik-Tarife: mit Kennung zeigt der Rechner nur den gewählten Tarif (getestet 01.11.2026).
+const STATIONAER_TARIFE = { sp1: 'SDKSP1@', sp2: 'SDKSP2@', spu: 'SDKSPU@' };
 
 /**
  * Erstellt die SDK-URL mit optionalem Referrer-Code in customValues.
@@ -36,9 +38,10 @@ export const AMBULANT_STUFE_DEFAULT = 100;
  * @param {string} [options.tarifTypes] - z.B. "Ambulant,Stationär" (default: Ambulant + Stationär)
  * @param {string} [options.ref] - Referrer-Code (überschreibt sessionStorage)
  * @param {number|string} [options.stufe] - 50/70/90/100, nur bei tarifTypes 'Ambulant' (Standard 100)
+ * @param {string} [options.tarif] - sp1/sp2/spu, nur bei tarifTypes 'Stationär' (ohne: alle drei)
  * @returns {string} Vollständige SDK-URL
  */
-export function buildSdkUrl({ tarifTypes, ref, stufe } = {}) {
+export function buildSdkUrl({ tarifTypes, ref, stufe, tarif } = {}) {
   const referrer = sanitizeReferrer(ref) || readStoredReferrer();
 
   // customValues: JSON → Base64
@@ -50,7 +53,7 @@ export function buildSdkUrl({ tarifTypes, ref, stufe } = {}) {
 
   const tariffs = tarifTypes === 'Ambulant'
     ? AMBULANT_STUFEN[Number(stufe)] || AMBULANT_STUFEN[AMBULANT_STUFE_DEFAULT]
-    : '';
+    : tarifTypes === 'Stationär' ? STATIONAER_TARIFE[tarif] || '' : '';
 
   const params = new URLSearchParams({
     mandant: 'sdk',

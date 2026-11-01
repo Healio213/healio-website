@@ -27,12 +27,21 @@ try {
     preferences: { analytics: false, calendly: false, maps: false, openai: false },
     source: 'settings', updatedAt: '2026-09-14T12:00:00.000Z',
   })));
-  // Frank 01.11.2026: Der Bonusrechner unter dem Einstieg entfällt. Geprüft
-  // wird die Tarifwahl selbst: Stufe, Beitrag nach Alter, Budget und Rechner-Link.
+  // Frank 01.11.2026: Kein Bonusrechner mehr vor der Tarifwahl. Er steht
+  // zugeklappt am Ende der IKK-Strecke, damit „Bonusrechner“ im Kopfbereich
+  // weiter funktioniert. Geprüft wird die Tarifwahl selbst: Stufe, Beitrag
+  // nach Alter, Budget und Rechner-Link.
   const open = async (route) => {
     await page.goto(`${origin}${route}`, { waitUntil: 'networkidle0' });
     await page.waitForSelector('#tarifwahl');
-    assert.equal(await page.$('#bonus-rechner'), null, 'The bonus calculator is removed from /ambulant.');
+    const placement = await page.evaluate(() => {
+      const bonus = document.querySelector('#bonus-rechner');
+      return bonus && {
+        afterTariffs: bonus.getBoundingClientRect().top > document.querySelector('#tarifwahl').getBoundingClientRect().bottom,
+        open: bonus.querySelector('details').open,
+      };
+    });
+    assert.deepEqual(placement, { afterTariffs: true, open: false }, 'The collapsed bonus calculator follows the tariff selection.');
   };
   const choose = async (code) => {
     await page.evaluate((tariff) => [...document.querySelectorAll('#tarifwahl button')].find((button) => button.textContent.includes(tariff)).click(), code);

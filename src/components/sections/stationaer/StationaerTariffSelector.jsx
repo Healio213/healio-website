@@ -30,7 +30,8 @@ const StationaerTariffSelector = () => {
     if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('stationaer', guidedTariff);
   }, [guidedTariff]);
   const referrer = useReferrer();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
+  // Der gewählte Klinik-Tarif kommt im Rechner schon vorausgewählt an.
+  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: selected });
   const helpVisible = useWhatsAppHelp();
   const scrollToResult = useRef(false);
 
