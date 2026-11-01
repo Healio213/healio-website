@@ -1,7 +1,7 @@
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import React, { useEffect, useMemo, useState } from 'react';
 import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { TerminNebenweg } from '@/components/guided/SelfServiceEntryActions';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -23,7 +23,6 @@ import { useAmbulantStufe, setAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { requestNitaConsent } from '@/components/NitaConsentWidget';
 import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard';
-import BonusStempelKarte from '@/components/sections/shared/BonusStempelKarte';
 import ZweiWegeFinanzierung from '@/components/sections/shared/ZweiWegeFinanzierung';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
 import AmbulantVorsorgeBaustein from '@/components/sections/ambulant/AmbulantVorsorgeBaustein';
@@ -110,18 +109,8 @@ const COPY = {
         prevention: { label: 'Vorsorge & Impfungen', detail: 'Checks, Impfungen & anerkannte Präventionskurse' },
         copay: { label: 'Hilfsmittel & Zuzahlungen', detail: 'Verordnete Hilfsmittel & gesetzliche Eigenanteile' },
       },
-      cta: 'Budget & Beitrag berechnen',
+      cta: 'Beitrag berechnen & online abschließen',
       disclosure: 'Die Werte zeigen vier eigene Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Du erhältst Erstattungen für versicherte Rechnungen, kein frei verfügbares Guthaben. Vorsorge, Impfungen und anerkannte Präventionskurse teilen sich einen Topf. Tarifbedingungen und Erstattungsgrenzen gelten.',
-    },
-    bonus: {
-      eyebrow: 'Danach kommt KassenBoost',
-      title: 'Lass deinen Kassenbonus mitzahlen.',
-      value: 'Ganz oder teilweise',
-      valueLabel: 'kann dein Bonus den Beitrag ausgleichen.',
-      body: 'Dein Kassenbonus kann deinen Tarifbeitrag je nach Aktivitäten ganz oder teilweise ausgleichen. KassenBoost vergleicht dafür Beitrag, erreichbaren Bonus und Leistungen getrennt.',
-      disclosure: 'Wie viel du persönlich erreichst, hängt von deiner Krankenkasse, deinen Aktivitäten, dem gewählten Tarif und den anrechenbaren Kosten ab. Wir rechnen es transparent für dich aus.',
-      cta: 'Krankenkasse passend zum Tarif finden',
-      mini: ['Beitrag vergleichen', 'Bonus realistisch rechnen', 'Leistungen getrennt sehen'],
     },
     calculator: {
       eyebrow: 'Konkretes Bonus-Beispiel',
@@ -154,9 +143,9 @@ const COPY = {
     faqTitle: 'Die wichtigsten Fragen vor deiner Entscheidung.',
     finalEyebrow: 'Dein nächster Schritt',
     finalTitle: 'Mach aus Selbstzahlerkosten dein Gesundheitsbudget.',
-    finalText: 'Vergleiche Budget und Beitrag. Danach siehst du mit KassenBoost, ob dein Bonus den Beitrag ganz oder teilweise ausgleichen kann.',
-    finalCta: 'Budget & Beitrag berechnen',
-    finalMicro: 'Dauert 2 Minuten · Kostenlos, unverbindlich und ohne Vertreteranrufe.',
+    finalText: 'Ohne Zusatzschutz bleibt jede Heilpraktiker-Rechnung bei dir. Stufe wählen, Beitrag sehen, online abschließen.',
+    finalCta: 'Beitrag berechnen & online abschließen',
+    finalMicro: 'Beitrag in 2 Minuten · Antrag direkt online · ohne Vertreteranrufe.',
     finalHelp: 'Noch unsicher? Persönlich einordnen lassen',
     // Fragen und Antworten liegen in ambulantFaqs.js, weil das vorgerenderte
     // FAQ-Schema (scripts/seo-routes.mjs) dieselbe Quelle nutzt.
@@ -220,18 +209,8 @@ const COPY = {
         prevention: { label: 'Screening & vaccines', detail: 'Checks, vaccines & approved prevention courses' },
         copay: { label: 'Medical aids & co-payments', detail: 'Prescribed aids & statutory out-of-pocket shares' },
       },
-      cta: 'Calculate budget & premium',
+      cta: 'Calculate premium & apply online',
       disclosure: 'The values are four separate maximums per two calendar years from the policy start. Eligible invoices are reimbursed; this is not cash to spend freely. Screening, vaccines and approved prevention courses share one pot. Policy terms and reimbursement limits apply.',
-    },
-    bonus: {
-      eyebrow: 'Then comes KassenBoost',
-      title: 'Let your insurer bonus help pay.',
-      value: 'All or part',
-      valueLabel: 'of the premium may be offset by your bonus.',
-      body: 'Depending on your activities, your statutory insurer bonus may offset all or part of your plan premium. KassenBoost compares contribution, achievable bonus and benefits separately.',
-      disclosure: 'Your personal result depends on your insurer, activities, selected tariff and eligible costs. We calculate it transparently.',
-      cta: 'Find the insurer that fits the tariff',
-      mini: ['Compare contribution', 'Calculate a realistic bonus', 'See benefits separately'],
     },
     calculator: {
       eyebrow: 'A concrete bonus example',
@@ -264,9 +243,9 @@ const COPY = {
     faqTitle: 'The key questions before you decide.',
     finalEyebrow: 'Your next step',
     finalTitle: 'Turn out-of-pocket costs into a health budget.',
-    finalText: 'Compare budget and premium, then use KassenBoost to see whether your bonus may offset all or part of the premium.',
-    finalCta: 'Calculate budget & premium',
-    finalMicro: 'Takes 2 minutes · Free, non-binding and without sales calls.',
+    finalText: 'Without supplementary cover, every non-medical practitioner bill stays with you. Choose a tier, see your premium, apply online.',
+    finalCta: 'Calculate premium & apply online',
+    finalMicro: 'Premium in 2 minutes · Apply directly online · No sales calls.',
     finalHelp: 'Not sure yet? Get personal guidance',
     faqs: AMBULANT_FAQS.en,
   },
@@ -651,17 +630,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
                   </motion.div>
                 </AnimatePresence>
                 </div>
-                {GUIDED_CALLBACK_ENABLED ? (
-                  <div className="mt-5 md:mt-7">
-                    <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active md:inline-flex md:w-auto max-w-full whitespace-normal text-center py-3">
-                      {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                    </GuidedCallbackButton>
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-home-slate">{language === 'en' ? 'We clarify health questions and your personal premium together.' : 'Gesundheitsfragen und persönlichen Beitrag klären wir gemeinsam.'}</p>
-                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" className="home-focus mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4">
-                      {language === 'en' ? 'Open the SDK calculator yourself (new tab)' : 'SDK-Rechner selbst öffnen (neuer Tab)'}
-                    </a>
-                  </div>
-                ) : (<>
+                <>
                 <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
@@ -673,7 +642,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
                   className="mt-4 hidden max-w-2xl md:block"
                 />
                 <p className="mt-3 hidden max-w-2xl text-base font-semibold leading-6 text-home-slate md:mt-4 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-                </>)}
+                </>
                 <MobileDetails summary={language === 'en' ? 'Details for your selected tier' : 'Details zur gewählten Stufe'} className="mt-2">
                   <dl className="mb-4 divide-y divide-slate-200 md:hidden">
                     {POT_KEYS.map((potKey) => <div key={potKey} className="flex items-center justify-between gap-4 py-3"><dt className="text-sm font-semibold text-home-midnight">{copy.tiers.pots[potKey].label}</dt><dd className="shrink-0 text-base font-bold text-home-midnight">{euro.format(tier.pots[potKey])}</dd></div>)}
@@ -784,70 +753,15 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
 
       <ZweiWegeFinanzierung produkt="ambulant" className="order-6 bg-home-ice md:order-none" mobileSwipe hideLinkOnMobile />
 
-      {/* Mobil gibt es eine Finanzierungs-Erklärung, die IKK-Karte und den
-          Bonusrechner. Dieser weitere Bonus-Werbeblock wiederholt sie. */}
-      <section className="order-8 hidden bg-[#071722] px-4 py-12 text-white sm:px-6 md:order-none md:block md:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-6 md:gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-          {/* Mobil ersetzt die Stempel-Karte die Bild-Karte (Aussage steht im Text darunter). */}
-          <BonusStempelKarte className="md:hidden" headingLevel="p" />
-          <div className="relative mx-auto hidden w-full max-w-md md:block">
-            <div className="absolute inset-8 rounded-full bg-home-mint/20 blur-3xl" />
-            {/* Mobil Bild und Aussage nebeneinander statt untereinander (spart rund 250 px). */}
-            <div className="relative flex items-center gap-3 overflow-hidden rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#123241] to-home-midnight p-4 shadow-2xl md:block md:p-6">
-              <img src="/images/friendly-icons/decision-weighing.webp" alt="" loading="lazy" decoding="async" className="h-24 w-24 shrink-0 object-contain md:mx-auto md:h-64 md:w-64" aria-hidden="true" />
-              <div className="min-w-0 flex-1 rounded-2xl border border-home-mint/25 bg-home-mint/10 px-4 py-3 text-center md:flex-none md:px-5 md:py-4">
-                <p className="font-display text-3xl font-extrabold tracking-[-0.04em] text-home-mint-active md:text-4xl">{copy.bonus.value}</p>
-                <p className="mt-1 text-sm font-semibold text-slate-200">{copy.bonus.valueLabel}</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <p className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.bonus.eyebrow}</p>
-            <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-4xl md:mt-4 md:text-5xl lg:text-6xl">{copy.bonus.title}</h2>
-            <p className="mt-4 max-w-2xl text-lg font-semibold leading-8 text-white md:mt-6">{copy.bonus.body}</p>
-            <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
-              {copy.bonus.mini.map((item) => <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-sm text-slate-200">{item}</span>)}
-            </div>
-            <p className="mt-5 max-w-2xl border-l-2 border-home-mint/50 pl-4 text-sm leading-6 text-slate-400 md:mt-6">{copy.bonus.disclosure}</p>
-            {language !== 'en' && (
-              /* Ein Satz mit Link auf die IKK-Bonus-Landingpage, damit die
-                 Positionen und Nachweise nachlesbar sind. Kein zweiter Button. */
-              <p className="mt-4 max-w-2xl text-base leading-6 text-slate-400 md:text-sm md:leading-6">
-                Alle bonusfähigen Positionen der IKK classic mit Beträgen, Nachweisen und Fristen stehen im{' '}
-                <Link to="/ratgeber/ikk-classic-bonusprogramm-2026" className="font-bold text-white underline underline-offset-4 hover:text-home-mint-active">
-                  Ratgeber zum Bonusprogramm 2026
-                </Link>.
-              </p>
-            )}
-            <Link to={language === 'en' ? '/en/kassenboost' : '/kassenboost'} className="home-focus mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
-              {copy.bonus.cta}
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Frank 01.11.2026: Der weitere Bonus-Werbeblock entfällt auch am Desktop.
+          Finanzierungswege, IKK-Karte und Bonusrechner sagen es bereits. */}
 
         </>
       )}
 
-      {GUIDED_CALLBACK_ENABLED ? (
-        <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-20 lg:px-8" aria-labelledby="ambulant-guided-support-heading">
-          <div className="mx-auto max-w-7xl">
-            <h2 id="ambulant-guided-support-heading" className="max-w-2xl font-display text-3xl font-extrabold leading-tight text-home-midnight sm:text-4xl">{language === 'en' ? 'Your questions deserve time.' : 'Für deine Fragen nehmen wir uns Zeit.'}</h2>
-            <MobileSwipeRow label={language === 'en' ? 'Personal support with Healio' : 'Persönliche Begleitung mit Healio'} className="mt-6" desktopClassName="md:grid md:grid-cols-3 md:gap-5" mobileItemWidth="w-[78vw] max-w-[22rem]">
-              {PROCESS_VISUALS.map((visual) => (
-                <div key={visual.scene} className="overflow-hidden rounded-2xl bg-[#071726]">
-                  <img src={visual.scene} alt="" aria-hidden="true" width="720" height="540" loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover object-[50%_20%]" />
-                </div>
-              ))}
-            </MobileSwipeRow>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-home-slate">{language === 'en' ? 'We explain the options and guide you through the application. You review everything before deciding.' : 'Wir erklären dir die Möglichkeiten und begleiten dich durch den Antrag. Du prüfst alles, bevor du entscheidest.'}</p>
-            <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-home-midnight px-6 font-display text-base font-extrabold text-white transition hover:bg-[#143247] max-w-full whitespace-normal text-center py-3">
-              {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
-            </GuidedCallbackButton>
-          </div>
-        </section>
-      ) : (
+      {/* Frank 01.11.2026: Der eigene Termin-Abschnitt entfällt. Der Termin steht
+          als zweiter Weg unter Tarifwahl und Schlusskasten. */}
+      {GUIDED_CALLBACK_ENABLED ? null : (
       <section className="order-10 bg-[#fbfaf7] px-4 py-12 sm:px-6 md:order-none md:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl md:hidden">
           <h2 className="font-display text-2xl font-extrabold text-home-midnight">{language === 'en' ? 'Three simple steps.' : 'Drei einfache Schritte.'}</h2>
@@ -1011,23 +925,23 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
           <div className="relative mt-10 overflow-hidden rounded-[2.2rem] bg-home-midnight px-5 py-8 text-center text-white shadow-[0_25px_70px_rgba(7,17,31,0.20)] sm:px-10 sm:py-14 md:mt-14">
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border border-home-mint/15" />
             <p className="relative font-display text-sm font-extrabold uppercase tracking-[0.14em] text-home-mint-active md:text-xs md:tracking-[0.22em]">{copy.finalEyebrow}</p>
-            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{GUIDED_CALLBACK_ENABLED ? (language === 'en' ? 'Find suitable cover together.' : 'Gemeinsam zum passenden Schutz.') : copy.finalTitle}</h2>
-            <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{GUIDED_CALLBACK_ENABLED ? (language === 'en' ? 'Benefits, personal premium and application: we guide you through each step.' : 'Leistungen, persönlicher Beitrag und Antrag: Wir begleiten dich Schritt für Schritt.') : copy.finalText}</p>
+            <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] [text-wrap:balance] hyphens-auto sm:text-4xl sm:hyphens-none lg:text-5xl">{copy.finalTitle}</h2>
+            <p className="relative mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">{copy.finalText}</p>
             {/* Mobil ausgeblendet (Experiment Handy-Conversion 10/2026): derselbe Hinweis steht unter dem Knopf der Tarifwahl. */}
-            {GUIDED_CALLBACK_ENABLED ? (
-              <GuidedCallbackButton product="ambulant" tariff={guidedTariff} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active md:inline-flex md:w-auto max-w-full whitespace-normal text-center py-3">
-                {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
-              </GuidedCallbackButton>
-            ) : (<>
+            <>
             <p className="relative mx-auto mt-4 hidden max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
             <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
             </LeadCaptureLink>
             <p className="relative mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">{copy.finalMicro}</p>
-            </>)}
+            </>
             <div className="relative mt-3 md:mt-5">
-              <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
+              {GUIDED_CALLBACK_ENABLED ? (
+                <TerminNebenweg product="ambulant" tariff={guidedTariff} tone="dark" />
+              ) : (
+                <Link to={getPath('kontakt')} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-300 underline md:inline md:min-h-0 decoration-white/25 underline-offset-4 transition hover:text-white">{copy.finalHelp}</Link>
+              )}
             </div>
           </div>
         </div>

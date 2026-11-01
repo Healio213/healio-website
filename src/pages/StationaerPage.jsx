@@ -1,6 +1,5 @@
 import React from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedJourney from '@/components/guided/GuidedJourney';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '@/components/SEOHead';
 import { createFAQSchema, createServiceSchema } from '@/lib/createSchemaMarkup';
@@ -11,7 +10,6 @@ import DesktopLead from '@/components/desktop/DesktopLead';
 import StationaerTariffSelector from '@/components/sections/stationaer/StationaerTariffSelector';
 import StationaerBenefits from '@/components/sections/stationaer/StationaerBenefits';
 import StationaerFamily from '@/components/sections/stationaer/StationaerFamily';
-import StationaerBonusBridge from '@/components/sections/stationaer/StationaerBonusBridge';
 import StationaerTrustFaq from '@/components/sections/stationaer/StationaerTrustFaq';
 import StationaerBayerischeAlternative from '@/components/sections/stationaer/StationaerBayerischeAlternative';
 import AmbulantIKKWechsel from '@/components/sections/ambulant/AmbulantIKKWechsel';
@@ -25,7 +23,7 @@ import ExplainerVideoCard from '@/components/sections/shared/ExplainerVideoCard'
 // Mobile Reihenfolge (unter md): Die Abschnitte stehen als Geschwister in einem
 // Flex-Container und bekommen über "order" ihren Platz im Besucher-Ablauf:
 // Einstieg, Erklärvideo, Kostenhilfe, Siegel, Tarif wählen, weitere Tarife, Details,
-// Kontakt für Rückfragen, Finanzierung und Bonus, Familie, Fragen. Familie
+// Finanzierung und Bonus, Familie, Fragen. Familie
 // steht mobil hinter dem Bonus, damit die Finanzierung früher kommt und der
 // Kontaktblock nicht erst nach rund 14 Bildschirmen auftaucht (Experiment
 // Handy-Conversion 10/2026). Ab md (768 px) gilt
@@ -80,7 +78,6 @@ const StationaerPage = () => {
             />
           </Slot>
         )}
-        {GUIDED_CALLBACK_ENABLED && <Slot order="order-2"><GuidedJourney product="stationaer" /></Slot>}
         <Slot order="order-3">
           <StationaerRoomCosts />
         </Slot>
@@ -105,15 +102,11 @@ const StationaerPage = () => {
         <Slot order="order-[13]">
           <StationaerFamily />
         </Slot>
-        {/* Zwei-Wege-Botschaft direkt vor dem KassenBoost-Abschnitt. Der Link zu
-            /kassenboost steht mobil gleich darunter in der Bonus-Brücke noch
-            einmal; die Option blendet ihn hier unter md aus (Experiment
-            Handy-Conversion 10/2026, wirkt sobald der Baustein sie kennt). */}
+        {/* Frank 01.11.2026: Die Bonus-Brücke entfällt. Zwei Wege, Bonusrechner
+            und IKK-Karte erklären die Finanzierung bereits; der Link zu
+            /kassenboost steht deshalb hier auch mobil. */}
         <Slot order="order-9">
-          <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe hideLinkOnMobile />
-        </Slot>
-        <Slot order="order-10">
-          <StationaerBonusBridge />
+          <ZweiWegeFinanzierung produkt="stationaer" mobileSwipe />
         </Slot>
         <Slot order="order-11">
           <CompactBonusFeature

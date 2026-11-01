@@ -333,7 +333,7 @@
     "hero": {
       "eyebrow": "Hospital supplementary insurance",
       "title": "When it comes to your health, choice of doctor and privacy are not minor details.",
-      "subtitle": "A quiet single room, or a choice of doctor as well? Compare DKV UZ1 with SDK plans for illness or accidents only. Depending on your circumstances, your health insurance bonus can offset part or all of your premium.",
+      "subtitle": "As a statutory patient you share your room and the hospital picks your doctor. DKV UZ1 secures a single room; SDK SP1 and SP2 add your choice of doctor. SDK SPU provides these benefits only after an accident.",
       "cta": "Compare hospital cover",
       "micro": [
         "Compare room and private medical care separately",
@@ -375,8 +375,8 @@
       "choose": "Choose this cover",
       "selected": "Selected",
       "resultEyebrow": "Your chosen direction",
-      "resultNote": "Before your first calculator visit, we ask for your first name and email for the bonus guide. Select your chosen plan again in the German SDK calculator to see your age-related premium.",
-      "calculate": "Calculate personal premium",
+      "resultNote": "In the SDK calculator you pick the same plan, see your premium and apply directly online.",
+      "calculate": "Calculate premium & apply online",
       "empty": "Choose one of the three cards. A clear next step then takes you to the premium calculator.",
       "disclosure": "The SP1 and SP2 applications include health questions. SPU applies only to accident-related treatment and requires no health assessment. Benefits are subject to policy terms; your personal premium mainly depends on your age when joining.",
       "options": {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import SelfServiceEntryActions from '@/components/guided/SelfServiceEntryActions';
 
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
@@ -89,9 +89,10 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-5 max-w-2xl text-base font-medium leading-7 text-slate-200 sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl"
+            className="mb-5 max-w-2xl text-base font-semibold leading-7 text-white sm:text-lg sm:leading-relaxed md:mb-8 md:text-xl md:font-medium md:text-slate-200"
           >
-            <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : language === 'en' ? 'Four reimbursement pots for natural therapies, glasses, prevention and co-payments. Per two calendar years.' : 'Vier Erstattungstöpfe für Heilpraktiker, Brille, Vorsorge und Zuzahlungen. Je zwei Kalenderjahre.'}</span>
+            {/* Frank 01.11.2026: Einstieg stärker, Verlust zuerst (Nasher-Stil, Beispielpreis). */}
+            <span className="md:hidden">{fromBonusTopic ? 'Vergleiche deinen Zusatzschutz. Ohne Kassenwechsel oder Pflichttermin.' : <HighlightText text={language === 'en' ? 'Five naturopath sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight>.' : 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight>.'} className="font-extrabold text-[#5ee0b1]" />}</span>
             <span className="hidden md:inline">{fromBonusTopic ? 'Vergleiche den Zusatzschutz, der zu deinem Bedarf passt. Ohne Kassenwechsel und ohne Pflichttermin.' : <HighlightText text={t('hero.subtitle')} className="font-bold text-[#5ee0b1]" />}</span>
           </motion.p>
           {fromBonusTopic && (
@@ -106,14 +107,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             className="flex flex-col items-start justify-center gap-3"
           >
             {GUIDED_CALLBACK_ENABLED ? (
-              <div className="flex w-full flex-col items-start gap-2">
-                <GuidedCallbackButton product="ambulant" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
-                  {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                </GuidedCallbackButton>
-                <a href="#tarifwahl" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
-                  {language === 'en' ? 'Explore benefits first' : 'Erst Leistungen vergleichen'}<ArrowDown className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
+              <SelfServiceEntryActions product="ambulant" target="tarifwahl" />
             ) : (
             <a
               href={fromBonusTopic ? '#tarifwahl' : '#budget-kompass'}
@@ -125,7 +119,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
             )}
             {!GUIDED_CALLBACK_ENABLED && !fromBonusTopic && <div className="hidden md:contents"><UrgencyNote surface="ambulant" className="!mt-0" /></div>}
             {GUIDED_CALLBACK_ENABLED ? (
-              <p className="max-w-xl text-sm leading-6 text-slate-300">{language === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+              !fromBonusTopic && <UrgencyNote surface="ambulant" className="!mt-0" />
             ) : (
             <p className="max-w-xl text-left text-base leading-7 text-slate-300">
               <span className="md:hidden">{fromBonusTopic ? 'Abschluss und persönliche Hilfe bleiben freiwillig.' : language === 'en' ? 'Personal premium in the calculator. Your bonus may help pay it.' : 'Persönlicher Beitrag im Rechner. Dein Bonus kann mitzahlen.'}</span>

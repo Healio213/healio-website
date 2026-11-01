@@ -15,6 +15,9 @@ const guidedRoutes = [
   ['/zahn', 'zahn'], ['/en/dental', 'zahn'],
   ['/stationaer', 'stationaer'], ['/en/inpatient', 'stationaer'],
 ];
+// Frank 01.11.2026: Nur die Startseite behält den Termin im Kopf; Produktseiten führen zum Onlineabschluss.
+const guidedHeaderRoutes = guidedRoutes.filter(([, product]) => product === 'any');
+const selfServiceHeaderTargets = { ambulant: 'tarifwahl', zahn: 'zahn-check', stationaer: 'tarife' };
 const rootDirectory = fileURLToPath(new URL('..', import.meta.url));
 const buildBundle = (guidedPreview = false) => buildSync({
   stdin: {
@@ -218,8 +221,26 @@ test('befülltes Honeypot-Feld verhindert Lead-Anfrage, neue Tabs und Erfolgsmes
   } finally { await h.cleanup(); }
 });
 
+test('DE/EN-Header führt auf Produktseiten zum Onlineabschluss statt zum Termin', async () => {
+  for (const [path, product] of guidedRoutes.filter(([, item]) => item !== 'any')) {
+    const h = await harness('header', { path });
+    try {
+      Object.defineProperty(window, 'scrollY', { configurable: true, value: 120 });
+      await h.act(() => window.dispatchEvent(new window.Event('scroll')));
+      for (const placement of ['desktop', 'mobile']) {
+        const link = document.querySelector(`[data-self-service-header="${placement}"]`);
+        assert.equal(link?.tagName, 'A', `${path}/${placement}: Abschluss-Link im Kopf`);
+        assert.equal(link.getAttribute('href'), `#${selfServiceHeaderTargets[product]}`);
+      }
+      assert.equal(document.querySelector(`[data-guided-callback="${product}"]`), null, `${path}: kein Termin-Knopf im Kopf`);
+      assert.equal(h.requests.length, 0);
+      assert.equal(h.tabs.length, 0);
+    } finally { await h.cleanup(); }
+  }
+});
+
 test('DE/EN-Header verlinkt im Release direkt den bestehenden Kalender in einem sicheren neuen Tab', async () => {
-  for (const [path, product] of guidedRoutes) for (const placement of ['desktop', 'mobile']) {
+  for (const [path, product] of guidedHeaderRoutes) for (const placement of ['desktop', 'mobile']) {
     const h = await harness('header', { path });
     try {
       h.consent.saveConsentPreferences({ analytics: true, marketing: true });
@@ -245,7 +266,7 @@ test('DE/EN-Header verlinkt im Release direkt den bestehenden Kalender in einem 
 });
 
 test('DE/EN-Header öffnet in der Vorschau den Termin-Platzhalter und schließt ohne Anfrage oder Conversion', async () => {
-  for (const [path, product] of guidedRoutes) for (const placement of ['desktop', 'mobile']) {
+  for (const [path, product] of guidedHeaderRoutes) for (const placement of ['desktop', 'mobile']) {
     const h = await harness('header', { path, guidedPreview: true });
     try {
       // Die echte Statistikfunktion wird lokal ausgeführt; jsdom lädt keine Tags.

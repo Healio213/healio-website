@@ -1,6 +1,4 @@
 import React from 'react';
-import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { Link } from 'react-router-dom';
@@ -132,14 +130,6 @@ const StationaerBayerischeAlternative = () => {
             <p className="mt-2 text-sm leading-6 text-slate-600 md:hidden">{language === 'en' ? 'No general waiting period. Eight months for childbirth and psychotherapy, waived after accidents. An existing pregnancy is excluded for that birth.' : 'Keine allgemeine Wartezeit. Für Entbindung und Psychotherapie acht Monate, bei Unfall keine. Eine bestehende Schwangerschaft ist für diese Geburt ausgeschlossen.'}</p>
 
             <div className="mt-6 md:mt-8">
-              {GUIDED_CALLBACK_ENABLED ? (
-                <div className="flex flex-col items-start">
-                  <GuidedCallbackButton product="stationaer" tariff="Die Bayerische – Klinikschutz" onClick={() => setGuidedSelection('stationaer', 'Die Bayerische – Klinikschutz')} className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-home-midnight px-6 py-3 text-sm font-extrabold text-white transition hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46] sm:w-auto max-w-full whitespace-normal text-center">
-                    {language === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                  </GuidedCallbackButton>
-                  <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-[#075f46] underline underline-offset-4">{language === 'en' ? 'Open the Bayerische calculator yourself (new tab)' : 'Bayerische-Rechner selbst öffnen (neuer Tab)'}</a>
-                </div>
-              ) : (
               <LeadCaptureLink
                 href={BAYERISCHE_STATIONAER_URL}
                 trackingCategory="bayerische-stationaer"
@@ -152,8 +142,6 @@ const StationaerBayerischeAlternative = () => {
                 {copy.cta}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </LeadCaptureLink>
-
-              )}
 
               {language === 'de' && (
                 <p className="mt-5 max-w-md text-base leading-relaxed text-slate-600 [text-wrap:pretty] md:text-sm md:leading-relaxed">

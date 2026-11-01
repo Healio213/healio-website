@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedJourney from '@/components/guided/GuidedJourney';
+import { TerminNebenweg } from '@/components/guided/SelfServiceEntryActions';
+import HighlightText from '@/components/ui/HighlightText';
 import UrgencyNote from '@/components/UrgencyNote';
 import MobileScene from '@/components/desktop/MobileScene';
 import { Link } from 'react-router-dom';
@@ -151,15 +152,15 @@ const ZahnPage = () => {
                   <span className="hidden md:block">{content.hero.titleLead}</span>{' '}
                   <span className="hidden text-[#5ee0b1] md:block">{content.hero.titleAccent}</span>
                 </HeroHeading>
-                <p className="mt-4 max-w-xl text-base leading-6 text-slate-200 sm:text-xl sm:leading-7 md:mt-6">
-                  <span className="md:hidden">{lang === 'en' ? (GUIDED_CALLBACK_ENABLED ? 'Find suitable cover for dentures, treatment and cleaning.' : 'ZahnPRIVAT 100: up to 100% of eligible costs, including statutory benefits. Find your route in one minute.') : (GUIDED_CALLBACK_ENABLED ? 'Passender Schutz für Zahnersatz, Behandlung und Zahnreinigung.' : 'ZahnPRIVAT 100: bis zu 100 % der erstattungsfähigen Kosten inklusive Kassenleistung. Finde deinen Weg in einer Minute.')}</span>
+                <p className="mt-4 max-w-xl text-base font-semibold leading-7 text-white sm:text-xl sm:leading-7 md:mt-6 md:font-normal md:text-slate-200">
+                  <span className="md:hidden">{lang === 'en' ? (GUIDED_CALLBACK_ENABLED ? <HighlightText text={'An implant can easily cost EUR 3,000, and your health fund only pays a fixed subsidy. ZahnPRIVAT 100 reimburses <highlight>up to 100%</highlight> including statutory benefits.'} className="font-extrabold text-[#5ee0b1]" /> : 'ZahnPRIVAT 100: up to 100% of eligible costs, including statutory benefits. Find your route in one minute.') : (GUIDED_CALLBACK_ENABLED ? <HighlightText text={'Ein Implantat kostet schnell 3.000 EUR, die Kasse zahlt nur den Festzuschuss. ZahnPRIVAT 100 erstattet <highlight>bis zu 100 %</highlight> inklusive Kassenleistung.'} className="font-extrabold text-[#5ee0b1]" /> : 'ZahnPRIVAT 100: bis zu 100 % der erstattungsfähigen Kosten inklusive Kassenleistung. Finde deinen Weg in einer Minute.')}</span>
                   <span className="hidden md:inline">{content.hero.text}</span>
                 </p>
 
                 {GUIDED_CALLBACK_ENABLED ? (
                   <div className="mt-6 md:mt-8">
                     <DentalEntryActions />
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'About one minute to UKV ZahnPRIVAT or ZAHN Sofort from die Bayerische. Apply online or discuss your questions with us first.' : 'In ca. 1 Minute zu UKV ZahnPRIVAT oder ZAHN Sofort von der Bayerischen. Online abschließen oder Fragen zuerst mit uns klären.'}</p>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? '1-minute check, then the premium calculator for UKV ZahnPRIVAT or ZAHN Sofort.' : '1-Minuten-Check, dann Tarifrechner für UKV ZahnPRIVAT oder ZAHN Sofort.'}</p>
                   </div>
                 ) : (<>
                 <a
@@ -177,7 +178,7 @@ const ZahnPage = () => {
                 </p>
 
                 <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-white/85">
-                  {(GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? ['Online or with personal guidance', 'You review and decide'] : ['Online oder persönlich begleitet', 'Du prüfst und entscheidest']) : content.hero.micro).map((item) => (
+                  {(GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? ['Apply directly online', 'You review and decide'] : ['Antrag direkt online', 'Du prüfst und entscheidest']) : content.hero.micro).map((item) => (
                     <li key={item} className="inline-flex items-center gap-2">
                       <Check className="h-4 w-4 text-[#5ee0b1]" aria-hidden="true" />{item}
                     </li>
@@ -257,7 +258,6 @@ const ZahnPage = () => {
           </div>
         )}
 
-        {GUIDED_CALLBACK_ENABLED && <div className="order-[-2] md:order-none"><GuidedJourney product="zahn" /></div>}
 
         <HealioAwardsRow size="large" productSet="zahn" mobileWithIkk className="order-[-1] md:order-none" />
 
@@ -472,11 +472,14 @@ const ZahnPage = () => {
               <div className="absolute -right-20 -top-20 -z-10 h-72 w-72 rounded-full bg-[#25c990]/10" aria-hidden="true" />
               <div>
                 <p className="font-display text-sm font-extrabold uppercase tracking-[0.22em] md:text-xs text-[#5ee0b1]">{content.faq.finalEyebrow}</p>
-                <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Let’s find suitable dental cover.' : 'Finden wir deinen passenden Zahnschutz.') : content.faq.finalTitle}</h2>
-                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Find the right route with the dental check, then calculate your premium and apply online. Prefer personal guidance? Book a consultation.' : 'Finde mit dem Zahn-Check den passenden Tarifweg, berechne deinen Beitrag und schließe online ab. Du möchtest persönliche Begleitung? Buche einen Beratungstermin.') : content.faq.finalText}</p>
+                <h2 className="mt-4 max-w-[19ch] font-display text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-4xl">{content.faq.finalTitle}</h2>
+                <p className="mt-3 max-w-2xl leading-6 text-slate-300 sm:leading-7 md:mt-4">{GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'Once your dentist recommends a treatment, a regular dental plan no longer pays for it. Take the check, see your premium, apply online.' : 'Sobald dein Zahnarzt eine Behandlung empfiehlt, zahlt ein normaler Zahntarif dafür nicht mehr. Zahn-Check machen, Beitrag sehen, online abschließen.') : content.faq.finalText}</p>
               </div>
               {GUIDED_CALLBACK_ENABLED ? (
-                <DentalEntryActions className="mt-6" />
+                <>
+                  <DentalEntryActions className="mt-6" />
+                  <TerminNebenweg product="zahn" tone="dark" className="mt-2" />
+                </>
               ) : (
               <a
                 href="#zahn-check"

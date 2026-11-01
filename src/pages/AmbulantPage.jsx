@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedJourney from '@/components/guided/GuidedJourney';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -77,7 +75,6 @@ const AmbulantPage = () => {
         <div className="order-2 md:contents">
           <AmbulantExplainerVideo />
         </div>
-        {GUIDED_CALLBACK_ENABLED && <div className="order-2 md:order-none"><GuidedJourney product="ambulant" /></div>}
         <div className="order-3 md:contents">
           <HealioAwardsRow size="large" mobileWithIkk={!fromBonusTopic} />
         </div>

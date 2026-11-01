@@ -15,6 +15,7 @@ import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
 import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
+import SelfServiceEntryActions from '@/components/guided/SelfServiceEntryActions';
 
 const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', stationaer: '#tarife' };
 
@@ -77,6 +78,8 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const isHome = surface === 'home';
   const guidedCallbackEnabled = GUIDED_CALLBACK_ENABLED && ['home', 'ambulant', 'zahn', 'stationaer'].includes(surface);
   const guidedCopy = getGuidedHomeContent(language);
+  // Frank 01.11.2026: Auf den Produktseiten steht der Onlineabschluss vorne.
+  const selfServiceSurface = surface === 'ambulant' || surface === 'stationaer';
   // Besuchertest 11.10.2026: Auf /zahn und /stationaer steht dieselbe Auswahl (zwei Zahn-Wege,
   // vier Klinik-Tarife) weiter unten ausführlich; die Kurzliste im Kopfbereich entfällt.
   const showOffer = surface !== 'zahn' && surface !== 'stationaer' && !(guidedCallbackEnabled && isHome);
@@ -112,12 +115,15 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={guidedCallbackEnabled && surface === 'zahn'
-        ? (language === 'en' ? 'About one minute to find your route: UKV ZahnPRIVAT or ZAHN Sofort from die Bayerische. You can also discuss your questions with us first.' : 'In ca. 1 Minute zu deinem Tarifweg: UKV ZahnPRIVAT oder ZAHN Sofort von der Bayerischen. Du kannst deine Fragen auch zuerst mit uns klären.')
+        ? (language === 'en' ? '1-minute check, then the premium calculator for UKV ZahnPRIVAT or ZAHN Sofort. Apply directly online.' : '1-Minuten-Check, dann Tarifrechner für UKV ZahnPRIVAT oder ZAHN Sofort. Antrag direkt online.')
+        : guidedCallbackEnabled && selfServiceSurface ? undefined
         : guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
       urgency={isHome || surface === 'zahn' || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
       actions={(
         <>
-          {guidedCallbackEnabled && surface === 'zahn' ? <DentalEntryActions desktop /> : guidedCallbackEnabled ? (
+          {guidedCallbackEnabled && surface === 'zahn' ? <DentalEntryActions desktop /> : guidedCallbackEnabled && selfServiceSurface ? (
+            <SelfServiceEntryActions desktop product={surface} target={surface === 'ambulant' ? 'tarifwahl' : 'tarife'} />
+          ) : guidedCallbackEnabled ? (
             <>
               <GuidedCallbackButton data-desktop-primary product={isHome ? 'any' : surface} className={scenePrimaryButtonClass}>
                 {guidedCopy.cta}

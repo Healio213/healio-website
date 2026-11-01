@@ -50,7 +50,7 @@ const dentalCheck = read('src/components/sections/dental/DentalZahnCheck.jsx');
 const dentalContent = read('src/components/sections/dental/dentalContent.js');
 const inpatientPage = read('src/pages/StationaerPage.jsx');
 const inpatientSelector = read('src/components/sections/stationaer/StationaerTariffSelector.jsx');
-const inpatientBonus = read('src/components/sections/stationaer/StationaerBonusBridge.jsx');
+const inpatientTwoWays = read('src/components/sections/shared/ZweiWegeFinanzierung.jsx');
 const inpatientDe = read('src/i18n/locales/de/stationaer.json');
 const veterinaryPage = read('src/pages/VeterinaryHomePage.jsx');
 const veterinarySelector = read('src/components/sections/veterinary/TariffSelection.jsx');
@@ -79,23 +79,27 @@ traverse(parse(ambulantFlow, { sourceType: 'module', plugins: ['jsx'] }), {
   },
 });
 const tariffSections = ambulantSections.filter((section) => section.id === 'tarifwahl');
-const bonusSections = ambulantSections.filter((section) => section.classes.includes('bg-[#071722]'));
-expect(tariffSections.length === 1 && bonusSections.length === 1, 'Tarifwahl und KassenBoost müssen als eindeutige Abschnitte vorhanden sein.');
+// Frank 01.11.2026: Der eigene KassenBoost-Werbeblock entfällt auch am Desktop.
+// Die Finanzierungswege übernehmen die Brücke nach der Tarifwahl.
+const twoWaysMatch = /<ZweiWegeFinanzierung produkt="ambulant" className="([^"]+)"/.exec(ambulantFlow);
+expect(tariffSections.length === 1 && twoWaysMatch, 'Tarifwahl und Finanzierungswege müssen als eindeutige Abschnitte vorhanden sein.');
+expect(!ambulantSections.some((section) => section.classes.includes('bg-[#071722]')), 'Ambulant zeigt keinen zusätzlichen KassenBoost-Werbeblock mehr.');
 const mobileOrder = (section) => {
   const token = section.classes.find((item) => /^order-(?:\d+|\[\d+\])$/.test(item));
   return token ? Number(token.match(/\d+/)[0]) : null;
 };
-expect(tariffSections[0].start < bonusSections[0].start
-  && mobileOrder(tariffSections[0]) !== null && mobileOrder(bonusSections[0]) !== null
-  && mobileOrder(tariffSections[0]) < mobileOrder(bonusSections[0]),
+const twoWays = { start: twoWaysMatch?.index ?? -1, classes: twoWaysMatch ? twoWaysMatch[1].split(/\s+/) : [] };
+expect(tariffSections[0].start < twoWays.start
+  && mobileOrder(tariffSections[0]) !== null && mobileOrder(twoWays) !== null
+  && mobileOrder(tariffSections[0]) < mobileOrder(twoWays),
 'KassenBoost darf sowohl im Quelltext als auch in der mobilen CSS-Reihenfolge erst nach der Tarifwahl erklärt werden.');
-expect(/Krankenkasse passend zum Tarif finden/.test(ambulantFlow) && /\/kassenboost/.test(ambulantFlow), 'Die Ambulant-Bonusbrücke muss in KassenBoost führen.');
+expect(/\/kassenboost/.test(read('src/components/sections/shared/ZweiWegeFinanzierung.jsx')), 'Die Ambulant-Finanzierungswege müssen in KassenBoost führen.');
 // Rote Linie (Healio/CONTENT-ROTE-LINIE-B2C.md): Der Bonus kann den Beitrag
 // „ganz oder teilweise“ ausgleichen, nie pauschal „bis zu 100 %“ oder
 // „Hol dir deinen Beitrag zurück“.
-expect(/ganz oder teilweise ausgleichen/i.test(ambulantFlow), 'Ambulant muss die mögliche Beitragsentlastung als „ganz oder teilweise“ nennen.');
+expect(/ganz oder teilweise/i.test(read('src/components/sections/ambulant/AmbulantAufEinenBlick.jsx')), 'Ambulant muss die mögliche Beitragsentlastung als „ganz oder teilweise“ nennen.');
 expect(!/bis zu 100 %[^'\n]{0,40}ausgleich|Bis zu 100 % können möglich|Ja, bis zu 100 %|Hol dir deinen Beitrag zurück|up to 100%[^'\n]{0,40}(?:offset|premium)/i.test(ambulantFlow), 'Ambulant darf die Beitragsentlastung nicht pauschal mit bis zu 100 Prozent bewerben.');
-expect(/hängt von deiner Krankenkasse, deinen Aktivitäten, dem gewählten Tarif und den anrechenbaren Kosten ab/i.test(ambulantFlow), 'Der Bonus-Hinweis braucht die persönliche Berechnungsgrundlage in Sichtnähe.');
+expect(/Wie viel, hängt von deiner Kasse/i.test(read('src/components/sections/ambulant/AmbulantAufEinenBlick.jsx')), 'Der Bonus-Hinweis braucht die persönliche Berechnungsgrundlage in Sichtnähe.');
 expect(!/AmbulantIKKWechsel|KassenBoostChoiceHint|AmbulantBonusCalculator/.test(ambulantPage), 'Ambulant darf keine alte IKK- oder Doppelrechner-Strecke mehr rendern.');
 
 // Gemeinsamer Bonusrechner: 2026-Logik trennt Geldbonus und Zuschuss fachlich sauber.
@@ -218,8 +222,9 @@ expect(dentalPage.indexOf('<CompactBonusFeature') < dentalPage.indexOf('<Ambulan
 // Stationär: SP2, SP1 und SPU werden getrennt; SPU trägt die konkrete Modellrechnung, ohne 0-EUR-Versprechen (Frank 03.10.2026).
 expect(inpatientPage.indexOf('<ExplainerVideoCard') < inpatientPage.indexOf('<StationaerTariffSelector />'), 'Stationär muss das Erklärvideo vor der Tarifwahl zeigen.');
 expect(germanOnlyComponent(inpatientPage, 'ExplainerVideoCard'), 'Das deutsche Stationär-Video darf auf der englischen Route keinen Abschnitt rendern.');
-expect(/<StationaerTariffSelector\s*\/>[\s\S]*?<StationaerBonusBridge\s*\/>/.test(inpatientPage), 'Stationär muss die Tarifwahl vor der Bonusbrücke zeigen.');
-expect(!/erklaervideo-stationaer\.mp4/.test(inpatientBonus), 'Das Stationär-Video darf im Bonusblock nicht doppelt erscheinen.');
+// Frank 01.11.2026: Die Bonusbrücke entfällt; Zwei Wege übernimmt den KassenBoost-Link auch mobil.
+expect(!/StationaerBonusBridge/.test(inpatientPage), 'Stationär zeigt keine zusätzliche Bonusbrücke mehr.');
+expect(/<StationaerTariffSelector\s*\/>[\s\S]*?<ZweiWegeFinanzierung produkt="stationaer" mobileSwipe \/>/.test(inpatientPage), 'Stationär zeigt die Finanzierungswege nach der Tarifwahl und mit sichtbarem KassenBoost-Link.');
 expect(/SP2/.test(inpatientDe) && /SP1/.test(inpatientDe) && /SPU/.test(inpatientDe), 'Stationär muss SP2, SP1 und SPU sichtbar unterscheiden.');
 expect(/Nur nach Unfall|Unfallschutz/i.test(inpatientDe), 'SPU muss sichtbar als Unfallschutz gekennzeichnet sein.');
 expect(/7,00\s*EUR/.test(inpatientDe) && /84,00\s*EUR/.test(inpatientDe), 'Die konkrete Modellrechnung muss das aktuelle SPU-Beispiel transparent abbilden.');
@@ -230,11 +235,11 @@ expect(!/effektiven Tarifbeitrag bis zu 100 %|Bis zu 100 % Beitragsentlastung/.t
 expect(/nach dem Bonusjahr/.test(inpatientDe) && /nachgewiesenen Jahresbeitrags/.test(inpatientDe), 'Das SPU-Beispiel braucht Kostendeckel und Zeitversatz in Sichtnähe.');
 expect(/33,41\s*EUR/.test(inpatientDe) && /50,72\s*EUR/.test(inpatientDe), 'Stationär muss die aktuellen SDK-Beispielbeiträge für SP2 und SP1 bei Eintrittsalter 30 nennen.');
 expect(!/6,84|82,08|32,82|49,78|10,49|44,91|69,74/.test(inpatientDe), 'Stationär darf keine veralteten oder unbelegten Preisbeispiele enthalten.');
-expect(/getPath\('kassenboost'\)/.test(inpatientBonus), 'Die Stationär-Bonusbrücke muss in KassenBoost führen.');
+expect(/kassenboost/.test(inpatientTwoWays), 'Die Stationär-Finanzierungswege müssen in KassenBoost führen.');
 expect(!/AmbulantBonusCalculator|KassenBoostChoiceHint/.test(inpatientPage), 'Stationär darf keinen ambulanten Doppelrechner und keinen alten KassenBoost-Hinweis rendern.');
 // Brücken-Strecke auf Franks Wunsch (29.09.2026) zurück: genau einmal, als Stationär-Variante und erst nach Bonusbrücke und Bonusrechner.
 expect(hasSingleVariant(inpatientPage, 'AmbulantIKKWechsel', 'stationaer'), 'Stationär zeigt die Brücken-Strecke genau einmal als Stationär-Variante.');
-expect(inpatientPage.indexOf('<StationaerBonusBridge') < inpatientPage.indexOf('<AmbulantIKKWechsel') && inpatientPage.indexOf('<CompactBonusFeature') < inpatientPage.indexOf('<AmbulantIKKWechsel'), 'Die Stationär-Brücken-Strecke steht erst nach Bonusbrücke und Bonusrechner.');
+expect(inpatientPage.indexOf('<ZweiWegeFinanzierung') < inpatientPage.indexOf('<AmbulantIKKWechsel') && inpatientPage.indexOf('<CompactBonusFeature') < inpatientPage.indexOf('<AmbulantIKKWechsel'), 'Die Stationär-Brücken-Strecke steht erst nach Finanzierungswegen und Bonusrechner.');
 
 // Tier: Hund, Katze und Pferd mit wahrheitsgemäßer Tarifprüfung statt Pseudorechner.
 expect(/animalType:\s*''/.test(veterinaryPage) && /coverage:\s*''/.test(veterinaryPage), 'Die Tierseite muss das gewählte Profil bis zum Formular halten.');

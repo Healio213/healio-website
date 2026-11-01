@@ -12,6 +12,7 @@ import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import { scrollToTarget } from '@/components/guided/SelfServiceEntryActions';
 import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
 
 const AnimatedLeadCaptureLink = motion(LeadCaptureLink);
@@ -45,6 +46,20 @@ const Header = () => {
   const isInpatient = location.pathname === '/stationaer' || location.pathname === '/en/inpatient';
   const guidedSurface = GUIDED_CALLBACK_ENABLED && (isHome || isAmbulant || isDental || isInpatient);
   const guidedProduct = getGuidedProduct(location.pathname);
+  // Frank 01.11.2026: Auf den Produktseiten führt der Kopfknopf zum Onlineabschluss,
+  // nur die Startseite behält den Termin.
+  const selfServiceTarget = guidedSurface ? { ambulant: 'tarifwahl', zahn: 'zahn-check', stationaer: 'tarife' }[guidedProduct] : undefined;
+  const selfServiceLink = (placement, className, onClick) => (
+    <a
+      href={`#${selfServiceTarget}`}
+      data-self-service-header={placement}
+      onClick={(event) => { onClick?.(); scrollToTarget(event, selfServiceTarget, false); }}
+      className={className}
+    >
+      {placement === 'mobile' ? (lang === 'de' ? 'Abschließen' : 'Apply') : (lang === 'de' ? 'Online abschließen' : 'Apply online')}
+      {placement === 'desktop' && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
+    </a>
+  );
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
     || location.pathname === '/unternehmen/vorsorge-rechner'
@@ -381,7 +396,7 @@ const Header = () => {
           >
             {t('langSwitch')}
           </button>
-          {guidedSurface ? (
+          {selfServiceTarget ? selfServiceLink('desktop', 'inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full bg-home-mint px-5 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white') : guidedSurface ? (
             <GuidedCallbackButton product={guidedProduct} className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full bg-home-mint px-5 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
               {lang === 'de' ? 'Termin buchen' : 'Book an appointment'}<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </GuidedCallbackButton>
@@ -478,7 +493,8 @@ const Header = () => {
           )}
         </AnimatePresence>
 
-        {guidedSurface && showSolidHeader && !mobileMenuOpen && (
+        {selfServiceTarget && showSolidHeader && !mobileMenuOpen && selfServiceLink('mobile', 'absolute right-[4.5rem] inline-flex min-h-11 items-center justify-center rounded-full bg-home-mint px-4 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden')}
+        {guidedSurface && !selfServiceTarget && showSolidHeader && !mobileMenuOpen && (
           <GuidedCallbackButton product={guidedProduct} data-guided-header="mobile" className="absolute right-[4.5rem] inline-flex min-h-11 items-center justify-center rounded-full bg-home-mint px-4 text-sm font-bold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden">
             {lang === 'de' ? 'Termin buchen' : 'Book appointment'}
           </GuidedCallbackButton>
@@ -597,7 +613,7 @@ const Header = () => {
                 asChild
                 className="w-full max-w-xs bg-home-mint hover:bg-home-mint-active text-home-midnight py-6 text-lg shadow-xl shadow-home-mint/20 rounded-xl mt-6 border-0 shrink-0"
               >
-                {guidedSurface ? (
+                {selfServiceTarget ? selfServiceLink('menu', undefined, () => setMobileMenuOpen(false)) : guidedSurface ? (
                   <GuidedCallbackButton product={guidedProduct} onClick={() => setMobileMenuOpen(false)}>{lang === 'de' ? 'Termin buchen' : 'Book an appointment'}</GuidedCallbackButton>
                 ) : isHome ? (
                   <a href={KASSENBOOST_COMPARE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>

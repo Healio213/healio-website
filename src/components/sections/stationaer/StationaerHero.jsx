@@ -1,8 +1,9 @@
 import React from 'react';
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
+import SelfServiceEntryActions from '@/components/guided/SelfServiceEntryActions';
 
 import UrgencyNote from '@/components/UrgencyNote';
+import HighlightText from '@/components/ui/HighlightText';
 import MobileScene from '@/components/desktop/MobileScene';
 import { motion } from 'framer-motion';
 import { ArrowDown, Check } from 'lucide-react';
@@ -58,20 +59,16 @@ const StationaerHero = () => {
             <span className="md:hidden">{lang === 'en' ? <>Your room.<span className="block text-[#5ee0b1]">Your choice of doctor.</span></> : <>Dein Zimmer.<span className="block text-[#5ee0b1]">Deine Arztwahl.</span></>}</span>
             <span className="hidden md:inline">{t('refresh.hero.title')}</span>
           </HeroHeading>
-          <p className="mt-4 max-w-2xl text-base font-medium md:mt-6 leading-relaxed text-slate-200 sm:text-lg lg:text-xl">
-            <span className="md:hidden">{lang === 'en' ? 'Single room only, or private medical care too? Choose your hospital cover. Your bonus may help with the premium.' : 'Nur Einbettzimmer oder auch Wahlarzt? Wähle deinen Klinikschutz. Dein Bonus kann beim Beitrag helfen.'}</span>
+          <p className="mt-4 max-w-2xl text-base font-semibold md:mt-6 leading-relaxed text-white sm:text-lg md:font-medium md:text-slate-200 lg:text-xl">
+            {/* Frank 01.11.2026: Einstieg stärker, Verlust zuerst (Nasher-Stil). */}
+            <span className="md:hidden"><HighlightText text={lang === 'en' ? 'As a statutory patient you share your room and the hospital picks your doctor. With hospital cover <highlight>you decide</highlight>: single or double room, and depending on the plan your choice of doctor.' : 'Als Kassenpatient teilst du dir das Zimmer, und den Arzt bestimmt die Klinik. Mit Klinikschutz <highlight>entscheidest du selbst</highlight>: Einbett- oder Zweibettzimmer, je nach Tarif auch den Wahlarzt.'} className="font-extrabold text-[#5ee0b1]" /></span>
             <span className="hidden md:inline">{t('refresh.hero.subtitle')}</span>
           </p>
 
           {GUIDED_CALLBACK_ENABLED ? (
-            <div className="mt-6 flex flex-col items-start gap-2 md:mt-8">
-              <GuidedCallbackButton product="stationaer" className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center py-3">
-                {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-              </GuidedCallbackButton>
-              <a href="#tarife" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline underline-offset-4">
-                {lang === 'en' ? 'Explore benefits first' : 'Erst Leistungen vergleichen'}<ArrowDown className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <p className="max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Choose a time that suits you. We discuss your cover together.' : 'Wähle eine passende Zeit. Wir klären deinen Schutz gemeinsam.'}</p>
+            <div className="mt-6 md:mt-8">
+              <SelfServiceEntryActions product="stationaer" target="tarife" />
+              <UrgencyNote surface="stationaer" />
             </div>
           ) : (<>
           <a

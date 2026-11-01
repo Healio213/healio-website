@@ -333,7 +333,7 @@
     "hero": {
       "eyebrow": "Krankenhauszusatzversicherung",
       "title": "Wenn es um deine Gesundheit geht, sind Arztwahl und Privatsphäre keine Nebensache.",
-      "subtitle": "Nur ein ruhiges Einbettzimmer oder zusätzlich Arztwahl? Vergleiche DKV UZ1 und die SDK-Tarife für Krankheit oder ausschließlich Unfall. Dein Kassenbonus kann deinen Beitrag je nach Voraussetzungen teilweise oder ganz ausgleichen.",
+      "subtitle": "Als Kassenpatient teilst du dir das Zimmer, und den Arzt bestimmt die Klinik. DKV UZ1 sichert dir das Einbettzimmer, SDK SP1 und SP2 zusätzlich den Wahlarzt. SDK SPU bietet diese Wahlleistungen ausschließlich nach einem Unfall.",
       "cta": "Klinikschutz vergleichen",
       "micro": [
         "Zimmer und Arztwahl getrennt vergleichen",
@@ -375,8 +375,8 @@
       "choose": "Diesen Schutz wählen",
       "selected": "Ausgewählt",
       "resultEyebrow": "Deine gewählte Richtung",
-      "resultNote": "Vor dem ersten Rechnerstart fragen wir Vorname und E-Mail für den Bonusleitfaden ab. Im SDK-Rechner wählst du deinen Tarif nochmals aus und siehst deinen altersabhängigen Beitrag.",
-      "calculate": "Persönlichen Beitrag berechnen",
+      "resultNote": "Im SDK-Rechner wählst du denselben Tarif, siehst deinen Beitrag und schließt direkt online ab.",
+      "calculate": "Beitrag berechnen & online abschließen",
       "empty": "Wähle eine der drei Karten. Der Button zum Beitragsrechner erscheint danach unter den Karten.",
       "disclosure": "SP1 und SP2 enthalten Gesundheitsfragen im Antrag. SPU gilt ausschließlich für unfallbedingte Behandlungen und kommt ohne Gesundheitsprüfung aus. Leistungen gelten im tariflich vereinbarten Umfang; der persönliche Beitrag hängt insbesondere vom Eintrittsalter ab.",
       "options": {

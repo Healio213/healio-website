@@ -32,7 +32,7 @@ const content = {
       // Gleicher Wortlaut wie hero.title/hero.subtitle in de/ambulant.json.
       titleLead: 'Warum zahlst du Heilpraktiker und Brille noch selbst?',
       titleAccent: 'Bis zu 3.000 EUR zurück, ohne Wartezeit.',
-      description: 'Bis zu 3.000 EUR Gesundheitsbudget in zwei Kalenderjahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und Zuzahlungen. Keine Wartezeit, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
+      description: 'Fünf Heilpraktiker-Sitzungen à 90 EUR? Ohne Zusatzschutz zahlst du 450 EUR selbst. Der SDK-Tarif erstattet <highlight>bis zu 100 %</highlight>, dazu eigene Töpfe für Brille, Vorsorge und Zuzahlungen. Keine Ablehnung, Vorerkrankungen werden mit Zuschlag mitversichert. <highlight>Unser Geheimtipp:</highlight> Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen.',
       condition: 'SDK AP1: vier getrennte Höchstbeträge für 2 Kalenderjahre ab Versicherungsbeginn. Erstattungsfähige Kosten, Gesundheitsangaben und Tarifbedingungen gelten.',
       cta: 'Ambulantes Budget prüfen',
       hint: 'Tarifleistungen, Beitrag und persönliches Bonuspotenzial nachvollziehbar gegenüberstellen.',
@@ -49,7 +49,7 @@ const content = {
     zahn: {
       titleLead: 'Dein Lächeln ist dein stärkstes Statussignal.',
       titleAccent: 'Warum überlässt du es dem Kassenstandard?',
-      description: 'Bis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe im Tarif ZahnPRIVAT 100, einschließlich Kassenleistung. So reduzierst du deinen Eigenanteil tarifgemäß. Dein Kassenbonus kann den Versicherungsbeitrag je nach Kasse und Aktivitäten ganz oder teilweise ausgleichen.',
+      description: 'Ein Implantat kostet schnell 3.000 EUR, die Kasse zahlt nur den Festzuschuss. ZahnPRIVAT 100 erstattet bis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe, einschließlich Kassenleistung. Dein Kassenbonus kann den Versicherungsbeitrag je nach Kasse und Aktivitäten ganz oder teilweise ausgleichen.',
       condition: 'Bis zu 100 % Erstattung nach Tarif und Kassenleistung. Annahme, Leistungsstaffeln und bereits empfohlene oder laufende Behandlungen werden gesondert geprüft.',
       cta: 'Passenden Zahnschutz prüfen',
       hint: 'Vier kurze Fragen. Ohne Kontaktdaten. Die verbindliche Annahme erfolgt im Antrag.',
@@ -64,7 +64,7 @@ const content = {
     stationaer: {
       titleLead: 'Wenn es um deine Gesundheit geht,',
       titleAccent: 'sind Arztwahl und Privatsphäre keine Nebensache.',
-      description: 'Nur ein Einbettzimmer oder zusätzlich freie Arztwahl? DKV UZ1 versichert das Zimmer, SDK SP1 und SP2 auch wahlärztliche Behandlung. SDK SPU bietet Wahlleistungen ausschließlich nach einem Unfall. Vergleiche den Schutz, der zu dir passt.',
+      description: 'Als Kassenpatient teilst du dir das Zimmer, und den Arzt bestimmt die Klinik. DKV UZ1 sichert dir das Einbettzimmer, SDK SP1 und SP2 zusätzlich den Wahlarzt. SDK SPU bietet diese Wahlleistungen ausschließlich nach einem Unfall.',
       condition: 'Leistungsumfang, Annahme und Zimmerverfügbarkeit sind maßgeblich. Der Unfalltarif SPU gilt ausschließlich nach einem Unfall.',
       cta: 'Klinikschutz vergleichen',
       hint: 'Zimmer, Arztwahl und Beitrag nebeneinander sehen. Bonusprüfung freiwillig.',
@@ -114,7 +114,7 @@ const content = {
     ambulant: {
       titleLead: 'Why are you still paying for naturopaths and glasses yourself?',
       titleAccent: 'Get up to EUR 3,000 back, with no waiting period.',
-      description: 'Up to EUR 3,000 health budget over two calendar years for naturopaths (Heilpraktiker), osteopathy, glasses, preventive care and co-payments. No waiting period, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
+      description: 'Five naturopath (Heilpraktiker) sessions at EUR 90? Without supplementary cover you pay EUR 450 yourself. The SDK plan reimburses <highlight>up to 100%</highlight>, plus separate pots for glasses, preventive care and co-payments. No rejection, pre-existing conditions are covered with a surcharge. <highlight>Our insider tip:</highlight> your health fund bonus can win back all or part of the premium.',
       condition: 'SDK AP1: four separate limits for 2 calendar years from the start of cover. Eligible expenses, health declarations and plan conditions apply.',
       cta: 'Check outpatient benefits',
       hint: 'Compare plan benefits, premiums and your own bonus potential clearly.',
@@ -131,7 +131,7 @@ const content = {
     zahn: {
       titleLead: 'Your smile is your strongest status signal.',
       titleAccent: 'Why let statutory coverage set the standard?',
-      description: 'Up to 100% of eligible costs for implants, crowns and preventive dental care under ZahnPRIVAT 100, including statutory benefits. Reduce your share under the plan terms. Depending on your fund and activities, your bonus may offset some or all of the insurance premium.',
+      description: 'An implant can easily cost EUR 3,000, and your health fund only pays a fixed subsidy. ZahnPRIVAT 100 reimburses up to 100% of eligible costs for implants, crowns and preventive dental care, including statutory benefits. Depending on your fund and activities, your bonus may offset some or all of the insurance premium.',
       condition: 'Up to 100% reimbursement subject to the plan and statutory contribution. Benefit scales, acceptance and recommended or ongoing treatment are checked separately.',
       cta: 'Check suitable dental cover',
       hint: 'Four short questions. No contact details. Binding acceptance takes place in the application.',
@@ -146,7 +146,7 @@ const content = {
     stationaer: {
       titleLead: 'When your health is at stake,',
       titleAccent: 'doctor choice and privacy matter.',
-      description: 'Just a single room, or a choice of doctor too? DKV UZ1 covers the room; SDK SP1 and SP2 also cover privately billed medical care. SDK SPU provides additional benefits only after an accident. Compare the cover that fits your needs.',
+      description: 'As a statutory patient you share your room and the hospital picks your doctor. DKV UZ1 secures a single room; SDK SP1 and SP2 add your choice of doctor. SDK SPU provides these benefits only after an accident.',
       condition: 'Benefits, acceptance and room availability apply. SPU accident cover only applies after an accident.',
       cta: 'Compare hospital cover',
       hint: 'Compare rooms, doctor choice and premiums. The bonus check is optional.',

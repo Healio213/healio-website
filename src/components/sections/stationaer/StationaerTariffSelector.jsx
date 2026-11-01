@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GUIDED_CALLBACK_ENABLED, setGuidedSelection } from '@/lib/guided-callback';
-import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -54,11 +53,8 @@ const StationaerTariffSelector = () => {
     setSelected(key);
   };
 
-  const calculateLink = selected ? (GUIDED_CALLBACK_ENABLED ? (
-    <GuidedCallbackButton product="stationaer" tariff={guidedTariff} className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-home-mint px-6 py-3 text-sm font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-mint sm:w-auto max-w-full whitespace-normal text-center">
-      {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-    </GuidedCallbackButton>
-  ) : (
+  // Frank 01.11.2026: Nach der Auswahl steht der Onlineabschluss vorne.
+  const calculateLink = selected ? (
     <LeadCaptureLink
       href={sdkUrl}
       trackingCategory="sdk-stationaer"
@@ -70,7 +66,7 @@ const StationaerTariffSelector = () => {
       {t('refresh.selector.calculate')}
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
     </LeadCaptureLink>
-  )) : null;
+  ) : null;
 
   return (
     <section id="tarife" data-healio-nita-avoid="" className="scroll-mt-24 bg-[#f5faf8] py-12 md:py-24" aria-labelledby="stationaer-tariffs-heading">
@@ -211,15 +207,13 @@ const StationaerTariffSelector = () => {
                   {t(`refresh.selector.options.${selected}.result`)}
                 </p>
                 <p className="mt-1 text-base leading-relaxed text-slate-300 md:text-sm md:leading-relaxed">
-                  {GUIDED_CALLBACK_ENABLED ? (lang === 'en' ? 'We clarify the health questions and personal premium together.' : 'Gesundheitsfragen und persönlichen Beitrag klären wir gemeinsam.') : t('refresh.selector.resultNote')}
+                  {t('refresh.selector.resultNote')}
                 </p>
               </div>
-              {helpVisible && !GUIDED_CALLBACK_ENABLED ? (
-                <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:w-auto sm:max-w-xs sm:items-stretch">
-                  {calculateLink}
-                  <WhatsAppHelpHint placement="stationaer-rechner" variant="line" tone="dark" text={t('refresh.help.result')} />
-                </div>
-              ) : calculateLink}
+              <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-auto sm:max-w-xs sm:items-stretch">
+                {calculateLink}
+                {helpVisible && !GUIDED_CALLBACK_ENABLED && <WhatsAppHelpHint placement="stationaer-rechner" variant="line" tone="dark" text={t('refresh.help.result')} />}
+              </div>
             </motion.div>
           ) : (
             <motion.p
@@ -233,14 +227,6 @@ const StationaerTariffSelector = () => {
             </motion.p>
           )}
         </AnimatePresence>
-
-        {GUIDED_CALLBACK_ENABLED && selected && (
-          <div className="mt-3 text-center">
-            <a href={sdkUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm font-semibold text-[#075f46] underline underline-offset-4">
-              {lang === 'en' ? 'Open the SDK calculator yourself (new tab)' : 'SDK-Rechner selbst öffnen (neuer Tab)'}
-            </a>
-          </div>
-        )}
 
         <WhatsAppHelpHint placement="stationaer-tarifwahl" variant="line" text={t('refresh.help.selector')} className="mx-auto mt-5 max-w-2xl text-center md:mt-6" />
 

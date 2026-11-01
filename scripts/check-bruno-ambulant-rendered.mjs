@@ -93,8 +93,10 @@ try {
   assert.equal(ordinary.calculatorControls, 1, 'Der normale Bonusrechner muss erhalten bleiben.');
   assert(ordinary.bonusLinks > 0, 'Der normale KassenBoost-Anschluss muss erhalten bleiben.');
   assert.equal(ordinary.heroTitle, 'Warum zahlst du Heilpraktiker und Brille noch selbst? Bis zu 3.000 EUR zurück, ohne Wartezeit.', 'Der veröffentlichte allgemeine Desktop-Hero (Frank 15.10.2026) darf durch den Herkunftszweig nicht neu getextet werden.');
-  assert.match(ordinary.heroText, /Bis zu 3\.000 EUR Gesundheitsbudget in zwei Kalenderjahren für Heilpraktiker, Osteopathie, Brille, Vorsorge und Zuzahlungen\. Keine Wartezeit, Vorerkrankungen werden mit Zuschlag mitversichert\. Unser Geheimtipp: Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen\./);
-  assert.deepEqual(ordinary.heroTargets, ['#budget-kompass']);
+  // Frank 01.11.2026: stärkerer Einstieg mit Beispielpreis, Geheimtipp bleibt.
+  assert.match(ordinary.heroText, /Fünf Heilpraktiker-Sitzungen à 90 EUR\? Ohne Zusatzschutz zahlst du 450 EUR selbst\. Der SDK-Tarif erstattet bis zu 100 %.*Vorerkrankungen werden mit Zuschlag mitversichert\. Unser Geheimtipp: Dein Kassenbonus kann den Beitrag ganz oder teilweise zurückholen\./);
+  // Frank 01.11.2026: Der Einstieg führt in den SDK-Tarifrechner, daneben nur der Sprung zur Tarifwahl.
+  assert.deepEqual(ordinary.heroTargets, ['#tarifwahl']);
   assert.equal(ordinary.heroNote, '');
 
   await open('/ambulant?src=reel-f05#tarifwahl');

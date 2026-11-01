@@ -3,7 +3,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
 import { createServer } from 'vite';
-import { GUIDED_CALLBACK_ENABLED } from '../src/lib/guided-callback.js';
 
 // Regression: selecting a tier must update the premium AND benefit budget in
 // the bonus example. This test never opens a provider or sends form data.
@@ -73,7 +72,7 @@ try {
     assert.equal(current.annual, annual);
     assert(current.budget.includes(budget), `${code}: benefit budget must follow the selection.`);
     assert.equal(current.potential, initial.potential, 'Changing tariff must preserve the activity selection.');
-    assert(current.handoffs.length === (GUIDED_CALLBACK_ENABLED ? 1 : 3) && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every calculator handoff must explain which tier to choose again; appointment CTAs do not add calculator handoffs.');
+    assert(current.handoffs.length === 3 && current.handoffs.every((text) => text.includes(code) && text.includes('dieselbe Stufe')), 'Every calculator handoff must explain which tier to choose again (bonus example, tier selection, final box; Frank 01.11.2026: online first).');
     assert.equal(current.tariffsParam, `SDK${code}@`, 'The calculator link must preselect the chosen tier (Level Nine identifier SDKAP5@ to SDKAP1@).');
   }
 
