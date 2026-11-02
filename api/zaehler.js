@@ -9,6 +9,8 @@
  * - Weitergegeben werden nur ereignis, von_pfad, ziel und geraet. Keine IP,
  *   kein User-Agent, kein Referrer, keine Uhrzeit; das Datum setzt die
  *   Datenbank. Es wird nichts geloggt.
+ * - geraet („mobil“ oder „desktop“) leitet die Funktion aus der
+ *   Browserkennung der Anfrage ab. Der Browser selbst liest dafür nichts aus.
  * - Die IP dient nur flüchtig als Schutz gegen Schleifen (Zähler im Speicher
  *   der Instanz, als Prüfwert mit zufälligem Salz je Instanz) und wird nie
  *   gespeichert oder weitergegeben.
@@ -22,7 +24,7 @@
  */
 
 import crypto from 'node:crypto';
-import { pruefeZaehlerEintrag } from '../shared/anonyme-zaehler.js';
+import { geraetAusUserAgent, pruefeZaehlerEintrag } from '../shared/anonyme-zaehler.js';
 
 const ALLOWED_ORIGINS = new Set(['https://healio.de', 'https://www.healio.de']);
 const MAX_BODY_BYTES = 1024;
@@ -117,7 +119,7 @@ export default async function handler(req, res) {
   }
 
   const payload = parseBody(req.body) || parseBody(await readRawBody(req));
-  const eintrag = pruefeZaehlerEintrag(payload);
+  const eintrag = pruefeZaehlerEintrag(payload, geraetAusUserAgent(req.headers['user-agent']));
   if (!eintrag) {
     res.status(400).json({ error: 'invalid_event' });
     return;

@@ -34,7 +34,7 @@ const check = (condition, message) => { assert.ok(condition, message); checks +=
 // 1a. Regeln
 // ---------------------------------------------------------------------------
 const regeln = await import(path.join(root, 'shared/anonyme-zaehler.js'));
-const { baueZaehlerEintrag, pruefeZaehlerEintrag, normalisiereZaehlerPfad } = regeln;
+const { baueZaehlerEintrag, baueZaehlerNutzlast, geraetAusUserAgent, pruefeZaehlerEintrag, normalisiereZaehlerPfad } = regeln;
 
 check(normalisiereZaehlerPfad('/Ratgeber/Barmer-Osteopathie/?utm_source=x#mitte') === '/ratgeber/barmer-osteopathie', 'Pfad: Suchteil, Anker, Großschreibung und Schrägstrich am Ende fallen weg.');
 check(normalisiereZaehlerPfad('/ratgeber/zahnärzte') === null, 'Pfad mit Umlaut wird verworfen statt umgeschrieben.');
@@ -50,9 +50,14 @@ check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilku
 check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'tk' }) === null, 'Unbekannte Variante wird verworfen.');
 check(baueZaehlerEintrag('page_view', { vonPfad: '/' }) === null, 'Nur drei Ereignisse.');
 check(baueZaehlerEintrag('sdk_klick', { vonPfad: '/ambulant' }, 'tablet') === null, 'Nur mobil oder desktop.');
-check(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/Ambulant', ziel: null, geraet: 'mobil' }) === null, 'Server formt nichts um: nur fertige Form wird angenommen.');
-check(JSON.stringify(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'mobil', email: 'a@b.de', ip: '1.2.3.4' }))
-  === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'mobil' }), 'Server übernimmt keine Zusatzfelder.');
+check(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/Ambulant', ziel: null }, 'mobil') === null, 'Server formt nichts um: nur fertige Form wird angenommen.');
+check(JSON.stringify(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'desktop', email: 'a@b.de', ip: '1.2.3.4' }, 'mobil'))
+  === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'mobil' }), 'Server übernimmt keine Zusatzfelder, auch kein Gerät aus dem Browser.');
+check(JSON.stringify(baueZaehlerNutzlast('sdk_klick', { vonPfad: '/ambulant' })) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null }), 'Browser schickt nur drei Felder, kein Gerät.');
+check(geraetAusUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148') === 'mobil', 'iPhone zählt als mobil.');
+check(geraetAusUserAgent('Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 Chrome/130.0 Mobile Safari/537.36') === 'mobil', 'Android-Handy zählt als mobil.');
+check(geraetAusUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15') === 'desktop', 'Mac zählt als desktop.');
+check(geraetAusUserAgent(undefined) === 'desktop' && geraetAusUserAgent(['x']) === 'desktop', 'Ohne Kennung: desktop.');
 check(pruefeZaehlerEintrag([]) === null && pruefeZaehlerEintrag('x') === null && pruefeZaehlerEintrag(null) === null, 'Server verwirft Unsinn.');
 
 // ---------------------------------------------------------------------------
@@ -72,7 +77,7 @@ const ladeModul = async ({ html = '<!doctype html><body></body>', url = 'https:/
   const sends = [];
   const verboten = [];
   const window = dom.window;
-  window.matchMedia = (query) => ({ matches: mobil && /max-width: 767px/.test(query) });
+  window.matchMedia = () => { verboten.push('matchMedia'); return { matches: mobil }; };
   Object.defineProperty(window.navigator, 'webdriver', { get: () => webdriver, configurable: true });
   window.fetch = (input, init) => {
     sends.push({ input, init });
@@ -96,11 +101,11 @@ const ladeModul = async ({ html = '<!doctype html><body></body>', url = 'https:/
   const init = sends[0].init;
   check(init.method === 'POST' && init.keepalive === true && init.credentials === 'omit', 'POST mit keepalive und ohne Cookies.');
   check(init.referrerPolicy === 'no-referrer', 'Ohne Referrer.');
-  check(JSON.stringify(JSON.parse(init.body)) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: null, geraet: 'mobil' }), 'Inhalt: genau vier Felder, Pfad aus der Adresszeile ohne Suchteil.');
+  check(JSON.stringify(JSON.parse(init.body)) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: null }), 'Inhalt: genau drei Felder, Pfad aus der Adresszeile ohne Suchteil, kein Gerät.');
   check(mod.zaehle('sdk_klick') === false && sends.length === 1, 'Doppelte Auslösung innerhalb einer Sekunde zählt einmal.');
   check(mod.zaehle('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'naturheilkunde' }) === true && sends.length === 2, 'Kurzcheck-Ereignis wird gesendet.');
   check(mod.zaehle('generate_lead') === false && sends.length === 2, 'Fremde Ereignisse werden nicht gesendet.');
-  check(verboten.length === 0, `Kein Zugriff auf Cookies oder Speicher: ${verboten.join(', ')}`);
+  check(verboten.length === 0, `Kein Zugriff auf Cookies, Speicher oder Bildschirmbreite: ${verboten.join(', ')}`);
 }
 {
   const { mod, sends } = await ladeModul({ webdriver: true });
@@ -111,7 +116,7 @@ const ladeModul = async ({ html = '<!doctype html><body></body>', url = 'https:/
   let geworfen = false;
   try { mod.zaehle('sdk_klick'); } catch { geworfen = true; }
   check(!geworfen && sends.length === 1, 'Ein Netzfehler wirft nie bis zur Seite durch.');
-  check(JSON.parse(sends[0].init.body).geraet === 'desktop', 'Breite ab 768 px zählt als desktop.');
+  check(!('geraet' in JSON.parse(sends[0].init.body)), 'Der Browser schickt kein Gerät.');
 }
 {
   const { mod } = await ladeModul({ fetchVerhalten: 'ablehnen' });
@@ -138,7 +143,7 @@ const ladeModul = async ({ html = '<!doctype html><body></body>', url = 'https:/
     dom.window.document.getElementById(id).dispatchEvent(event);
   };
   klick('innen');
-  check(sends.length === 1 && JSON.stringify(JSON.parse(sends[0].init.body)) === JSON.stringify({ ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: '/ambulant', geraet: 'mobil' }), 'Klick im Inhalt zählt mit Ziel ohne Suchteil und Anker.');
+  check(sends.length === 1 && JSON.stringify(JSON.parse(sends[0].init.body)) === JSON.stringify({ ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: '/ambulant' }), 'Klick im Inhalt zählt mit Ziel ohne Suchteil und Anker.');
   for (const id of ['kopf', 'menue', 'fuss', 'anker', 'fremd', 'kontakt']) klick(id);
   check(sends.length === 1, 'Kopf, Menü, Fußzeile, Anker, fremde Seiten und Nicht-Leistungsseiten zählen nicht.');
   klick('alle', 'auxclick', 1);
@@ -159,7 +164,7 @@ delete globalThis.document;
 // ---------------------------------------------------------------------------
 const api = (await import(path.join(root, 'api/zaehler.js'))).default;
 const echterFetch = globalThis.fetch;
-const rufe = async ({ method = 'POST', origin = 'https://healio.de', body, ip = '198.51.100.7', env = { SUPABASE_URL: 'https://beispiel.supabase.co/', SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_attrappe' }, fetchVerhalten = 'ok' } = {}) => {
+const rufe = async ({ method = 'POST', origin = 'https://healio.de', body, ip = '198.51.100.7', env = { SUPABASE_URL: 'https://beispiel.supabase.co/', SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_attrappe' }, fetchVerhalten = 'ok', userAgent = IPHONE_UA } = {}) => {
   const aufrufe = [];
   globalThis.fetch = async (url, init) => {
     aufrufe.push({ url, init });
@@ -171,19 +176,21 @@ const rufe = async ({ method = 'POST', origin = 'https://healio.de', body, ip = 
     if (value === undefined) delete process.env[key]; else process.env[key] = value;
   }
   const res = { statusCode: 0, headers: {}, setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, status(code) { this.statusCode = code; return this; }, json() { return this; }, end() { return this; } };
-  await api({ method, headers: { origin, 'x-forwarded-for': ip }, body }, res);
+  await api({ method, headers: { origin, 'x-forwarded-for': ip, 'user-agent': userAgent }, body }, res);
   globalThis.fetch = echterFetch;
   if (vorher.url === undefined) delete process.env.SUPABASE_URL; else process.env.SUPABASE_URL = vorher.url;
   if (vorher.key === undefined) delete process.env.SUPABASE_PUBLISHABLE_KEY; else process.env.SUPABASE_PUBLISHABLE_KEY = vorher.key;
   return { res, aufrufe };
 };
-const gueltig = { ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/tk-schwangerschaft', ziel: '/schwangerschaft', geraet: 'mobil' };
+const IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148';
+const gueltig = { ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/tk-schwangerschaft', ziel: '/schwangerschaft' };
 {
   const { res, aufrufe } = await rufe({ body: JSON.stringify({ ...gueltig, ua: 'x', email: 'a@b.de' }) });
   check(res.statusCode === 204, 'Gültige Zählung: 204.');
   check(aufrufe.length === 1 && aufrufe[0].url === 'https://beispiel.supabase.co/rest/v1/anonyme_zaehler', 'Schreibt in public.anonyme_zaehler.');
   check(aufrufe[0].init.headers.Prefer === 'return=minimal' && aufrufe[0].init.headers.apikey === 'sb_publishable_attrappe', 'Nur Einfügen mit dem öffentlichen Schlüssel.');
-  check(JSON.stringify(JSON.parse(aufrufe[0].init.body)) === JSON.stringify(gueltig), 'Weitergegeben werden genau vier Felder, keine IP, kein Browser.');
+  check(JSON.stringify(JSON.parse(aufrufe[0].init.body)) === JSON.stringify({ ...gueltig, geraet: 'mobil' }), 'Weitergegeben werden genau vier Felder, Gerät aus der Kennung, keine IP, kein Browser.');
+  check(!/iPhone|Mozilla/.test(aufrufe[0].init.body), 'Die Browserkennung selbst verlässt die Funktion nicht.');
   check(!/198\.51\.100\.7/.test(aufrufe[0].init.body) && !Object.values(aufrufe[0].init.headers).some((v) => /198\.51/.test(v)), 'Die IP verlässt die Funktion nicht.');
 }
 check((await rufe({ method: 'GET' })).res.statusCode === 405, 'Nur POST.');
@@ -429,7 +436,7 @@ try {
     await page.waitForFunction(() => window.location.pathname === '/ambulant', { timeout: 10000 });
     await warte(500);
     check(log.zaehler.length === 1, `Ein Klick auf den Hinweis zählt genau einmal (${log.zaehler.length}).`);
-    check(JSON.stringify(log.zaehler[0]?.body) === JSON.stringify({ ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: '/ambulant', geraet: 'mobil' }), `Zähler-Inhalt Leistungsweg: ${JSON.stringify(log.zaehler[0]?.body)}`);
+    check(JSON.stringify(log.zaehler[0]?.body) === JSON.stringify({ ereignis: 'leistungsweg_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: '/ambulant' }), `Zähler-Inhalt Leistungsweg: ${JSON.stringify(log.zaehler[0]?.body)}`);
     check(log.fehler.length === 0, `Keine Seitenfehler: ${log.fehler.join(' | ')}`);
     await page.close();
   }
@@ -449,7 +456,7 @@ try {
     check(events[0] && Object.keys(events[0]).every((key) => erlaubt.has(key)) && events[0].component === 'meta_check' && events[0].placement === 'naturheilkunde', `generate_lead nur mit festen Werten: ${JSON.stringify(events[0])}`);
     check(!/pr%C3%BCffall|prüffall|example\.invalid|barmer|tk\b|aok|andere|osteopathie|alles/i.test(JSON.stringify(events[0])), 'generate_lead ohne Name, Kontakt, Kasse oder Antwort.');
     const kz = log.zaehler.filter((z) => z.body.ereignis === 'kurzcheck_abgeschickt');
-    check(kz.length === 1 && JSON.stringify(kz[0].body) === JSON.stringify({ ereignis: 'kurzcheck_abgeschickt', von_pfad: '/check/naturheilkunde', ziel: 'naturheilkunde', geraet: 'desktop' }), `Anonymer Kurzcheck-Zähler: ${JSON.stringify(kz.map((z) => z.body))}`);
+    check(kz.length === 1 && JSON.stringify(kz[0].body) === JSON.stringify({ ereignis: 'kurzcheck_abgeschickt', von_pfad: '/check/naturheilkunde', ziel: 'naturheilkunde' }), `Anonymer Kurzcheck-Zähler: ${JSON.stringify(kz.map((z) => z.body))}`);
     await page.reload({ waitUntil: 'domcontentloaded' });
     await warte(1500);
     check((await leadEvents(page)).length === 0, 'Neu laden der Dankeseite zählt keinen zweiten Lead.');
@@ -509,7 +516,7 @@ try {
     check(geklickt, 'Sichtbarer SDK-Knopf auf /ambulant gefunden.');
     await warte(600);
     const sdk = log.zaehler.filter((z) => z.body.ereignis === 'sdk_klick').map((z) => z.body);
-    check(sdk.length === 1 && JSON.stringify(sdk[0]) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'mobil' }), `SDK-Klick zählt anonym: ${JSON.stringify(sdk)}`);
+    check(sdk.length === 1 && JSON.stringify(sdk[0]) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null }), `SDK-Klick zählt anonym: ${JSON.stringify(sdk)}`);
     check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Rechner wird weiter geöffnet (Attrappe).');
     await page.close();
   }

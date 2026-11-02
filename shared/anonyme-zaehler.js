@@ -67,13 +67,34 @@ export const baueZaehlerEintrag = (ereignis, { vonPfad, ziel = null } = {}, gera
 };
 
 /**
- * Strenge Prüfung auf dem Server: Der Browser muss schon die fertige Form
- * schicken. Es wird nichts umgeformt, unbekannte Felder fallen weg.
+ * Was der Browser schickt: drei Felder. Ob mobil oder desktop, leitet erst die
+ * Funktion aus der Browserkennung ab, die jede Anfrage ohnehin mitbringt. Der
+ * Browser liest dafür nichts aus (§ 25 TDDDG).
  */
-export const pruefeZaehlerEintrag = (payload) => {
+export const baueZaehlerNutzlast = (ereignis, angaben = {}) => {
+  const eintrag = baueZaehlerEintrag(ereignis, angaben, 'desktop');
+  if (!eintrag) return null;
+  return { ereignis: eintrag.ereignis, von_pfad: eintrag.von_pfad, ziel: eintrag.ziel };
+};
+
+// Handys tragen „Mobi“ (Android, Firefox, Opera) oder „iPhone“/„iPod“ in der
+// Kennung. Tablets und alles Unklare zählen als desktop.
+const MOBIL_KENNUNG = /Mobi|iPhone|iPod/i;
+
+/** Gerät aus der Browserkennung, nur „mobil“ oder „desktop“. */
+export const geraetAusUserAgent = (userAgent) => (
+  typeof userAgent === 'string' && MOBIL_KENNUNG.test(userAgent.slice(0, 512)) ? 'mobil' : 'desktop'
+);
+
+/**
+ * Strenge Prüfung auf dem Server: Der Browser muss schon die fertige Form
+ * schicken. Es wird nichts umgeformt, unbekannte Felder fallen weg, auch ein
+ * mitgeschicktes Gerät. Das Gerät kommt von der Funktion.
+ */
+export const pruefeZaehlerEintrag = (payload, geraet = 'desktop') => {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return null;
-  const { ereignis, von_pfad: vonPfad, ziel = null, geraet } = payload;
-  if (typeof ereignis !== 'string' || typeof vonPfad !== 'string' || typeof geraet !== 'string') return null;
+  const { ereignis, von_pfad: vonPfad, ziel = null } = payload;
+  if (typeof ereignis !== 'string' || typeof vonPfad !== 'string') return null;
   if (ziel !== null && typeof ziel !== 'string') return null;
   const eintrag = baueZaehlerEintrag(ereignis, { vonPfad, ziel }, geraet);
   if (!eintrag) return null;

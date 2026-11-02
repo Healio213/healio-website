@@ -12,9 +12,10 @@
  * Grundregeln, die dieses Modul technisch erzwingt:
  * - Kein Cookie, kein localStorage, kein sessionStorage, keine Nutzer- oder
  *   Sitzungskennung, keine Uhrzeit. Das Datum setzt die Datenbank.
- * - Übertragen werden nur Ereignisname, zwei geprüfte Pfade und „mobil“ oder
- *   „desktop“. Suchparameter, Sprungmarken, Antworten, Formularinhalte und
- *   Kontaktdaten verlassen den Browser nie über diesen Weg.
+ * - Übertragen werden nur Ereignisname und zwei geprüfte Pfade. Ob mobil oder
+ *   desktop, leitet die Funktion aus der Browserkennung der Anfrage ab; der
+ *   Browser liest dafür nichts aus. Suchparameter, Sprungmarken, Antworten,
+ *   Formularinhalte und Kontaktdaten verlassen den Browser nie über diesen Weg.
  * - Gesendet wird per fetch mit keepalive an /api/zaehler (eigene Domain).
  *   Die Funktion schreibt mit dem vorhandenen öffentlichen Supabase-Schlüssel
  *   in public.anonyme_zaehler (HEALIO Production), ohne IP und Browserdaten.
@@ -27,7 +28,7 @@
  */
 
 import {
-  baueZaehlerEintrag,
+  baueZaehlerNutzlast,
   istLeistungsseite,
   normalisiereZaehlerPfad,
 } from '../../shared/anonyme-zaehler.js';
@@ -50,15 +51,6 @@ const DOPPEL_SPERRE_MS = 1000;
 
 const isBrowser = () => typeof window !== 'undefined' && typeof document !== 'undefined';
 
-const ermittleGeraet = () => {
-  try {
-    // Gleiche Grenze wie das Layout (Tailwind md = 768 px).
-    return window.matchMedia('(max-width: 767px)').matches ? 'mobil' : 'desktop';
-  } catch {
-    return 'desktop';
-  }
-};
-
 let letzterSchluessel = '';
 let letzterZeitpunkt = 0;
 
@@ -70,10 +62,10 @@ export const zaehle = (ereignis, angaben = {}) => {
   try {
     if (!isBrowser() || typeof window.fetch !== 'function') return false;
     if (window.navigator?.webdriver === true) return false;
-    const eintrag = baueZaehlerEintrag(ereignis, {
+    const eintrag = baueZaehlerNutzlast(ereignis, {
       vonPfad: angaben.vonPfad ?? window.location.pathname,
       ziel: angaben.ziel ?? null,
-    }, ermittleGeraet());
+    });
     if (!eintrag) return false;
 
     const schluessel = `${eintrag.ereignis}|${eintrag.von_pfad}|${eintrag.ziel || ''}`;
