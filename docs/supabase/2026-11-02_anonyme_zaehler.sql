@@ -30,8 +30,12 @@ begin;
 --   * anon darf nur einfügen, und nur die vier Spalten. Das Datum setzt die
 --     Datenbank, ein Rückdatieren ist nicht möglich.
 --   * kein select, update oder delete für anon und authenticated.
---   * höchstens 20.000 Zeilen je Tag, darüber verwirft die Datenbank still.
---     Das schützt vor einer Flutung mit dem öffentlichen Schlüssel.
+--   * Ziele nur aus der festen Liste (Leistungsseiten, zwei Kurzcheck-
+--     Varianten), wie in shared/anonyme-zaehler.js.
+--   * Keine security-definer-Funktion und kein Trigger (Gegenprüfung
+--     02.11.2026). Gegen Flutung bremst api/zaehler.js (60 Zählungen je
+--     Minute und Anschluss); der Schlüssel liegt nur in Vercel, nicht im
+--     Browser.
 --   * Löschung nach 25 Monaten per pg_cron (Vergleich Jahr gegen Vorjahr
 --     bleibt möglich). So steht es in der Datenschutzerklärung.
 -- ---------------------------------------------------------------------------
@@ -52,7 +56,17 @@ create table if not exists public.anonyme_zaehler (
     check (geraet in ('mobil', 'desktop')),
   -- Nur der SDK-Klick kommt ohne Ziel aus.
   constraint anonyme_zaehler_ziel_passt_check
-    check ((ereignis = 'sdk_klick') = (ziel is null))
+    check ((ereignis = 'sdk_klick') = (ziel is null)),
+  -- Feste Zielliste je Ereignis (shared/anonyme-zaehler.js: LEISTUNGSSEITEN,
+  -- KURZCHECK_VARIANTEN). Kein freier Text im Ziel.
+  constraint anonyme_zaehler_ziel_liste_check
+    check (
+      (ereignis = 'sdk_klick' and ziel is null)
+      or (ereignis = 'kurzcheck_abgeschickt' and ziel in ('naturheilkunde', 'schwangerschaft'))
+      or (ereignis = 'leistungsweg_klick' and ziel in (
+        '/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/leistungen',
+        '/en/outpatient', '/en/dental', '/en/inpatient', '/en/services'))
+    )
 );
 
 comment on table public.anonyme_zaehler is
@@ -60,11 +74,14 @@ comment on table public.anonyme_zaehler is
 
 create index if not exists anonyme_zaehler_tag_idx on public.anonyme_zaehler (tag);
 
--- RLS gilt für anon und authenticated. Bewusst ohne FORCE: Löschlauf und
--- Tagesgrenze laufen als Eigentümer und müssen die Zeilen sehen können.
+-- RLS gilt für anon und authenticated. Bewusst ohne FORCE: Der Löschlauf
+-- läuft als Eigentümer und muss die Zeilen sehen können.
 alter table public.anonyme_zaehler enable row level security;
 
 revoke all on table public.anonyme_zaehler from public, anon, authenticated;
+-- Die Standardrechte von Supabase geben service_role sonst alles; danach
+-- bleibt nur Lesen und Löschen, wie unten in der Prüfung erwartet.
+revoke all on table public.anonyme_zaehler from service_role;
 grant insert (ereignis, von_pfad, ziel, geraet) on table public.anonyme_zaehler to anon;
 grant select, delete on table public.anonyme_zaehler to service_role;
 
@@ -79,35 +96,6 @@ create policy anonyme_zaehler_anon_insert on public.anonyme_zaehler
     and geraet in ('mobil', 'desktop')
     and ((ereignis = 'sdk_klick') = (ziel is null))
   );
-
--- Tagesgrenze gegen Flutung. Läuft als Eigentümer, weil anon nicht lesen darf;
--- die Funktion gibt nichts zurück außer der Zeile oder NULL (= verwerfen).
--- Das Schema private besteht schon (Kurzcheck, Bewertungsbitte); die Zeile
--- schadet nicht, falls die Datei einmal allein eingespielt wird. Rechte am
--- Schema bleiben unverändert. Triggerfunktionen prüft Postgres beim Auslösen
--- nicht auf EXECUTE, anon braucht deshalb kein Recht daran.
-create schema if not exists private;
-
-create or replace function private.limit_anonyme_zaehler()
-returns trigger
-language plpgsql
-security definer
-set search_path = ''
-as $$
-begin
-  if (select count(*) from public.anonyme_zaehler where tag = current_date) >= 20000 then
-    return null;
-  end if;
-  return new;
-end;
-$$;
-
-revoke all on function private.limit_anonyme_zaehler() from public, anon, authenticated;
-
-drop trigger if exists anonyme_zaehler_tagesgrenze on public.anonyme_zaehler;
-create trigger anonyme_zaehler_tagesgrenze
-  before insert on public.anonyme_zaehler
-  for each row execute function private.limit_anonyme_zaehler();
 
 -- Löschfrist: Zeilen älter als 25 Monate. 03:40 UTC ist nachts in Hamburg.
 -- cron.schedule ersetzt einen gleichnamigen Auftrag, die Datei bleibt damit

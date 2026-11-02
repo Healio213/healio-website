@@ -221,6 +221,27 @@ check(/grant insert \(ereignis, von_pfad, ziel, geraet\) on table public\.anonym
 check(!/grant[^;]*(select|update|delete)[^;]*to anon/i.test(sql) && !/to authenticated/.test(sql.replace(/revoke[^;]*;/g, '')), 'Kein select, update oder delete für anon und authenticated.');
 check(/for insert to anon\s+with check \(\s+tag = current_date/.test(sql), 'Policy: nur Einfügen mit heutigem Datum.');
 check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02_anonyme_zaehler.sql')) && /NICHT AUSGEFÜHRT/.test(sql), 'SQL liegt vorbereitet neben den anderen und ist nicht angewendet.');
+{
+  // Gegenprüfung 02.11.2026: kein security definer, keine Funktion, kein
+  // Trigger, keine Rechte an anderen Tabellen; Ziele nur aus der festen Liste.
+  const sqlCode = sql.replace(/--.*$/gm, '');
+  check(!/security\s+definer/i.test(sqlCode) && !/create\s+(or\s+replace\s+)?(function|trigger|procedure)/i.test(sqlCode), 'SQL ohne security-definer-Funktion und ohne Trigger.');
+  const tabellen = [...sqlCode.matchAll(/\b(?:grant|revoke)[^;]*\bon\s+table\s+([a-z_.]+)/gi)].map((treffer) => treffer[1]);
+  check(
+    tabellen.length > 0 && tabellen.every((name) => name === 'public.anonyme_zaehler')
+      && !/\bgrant[^;]*\bon\s+(schema|function|procedure|sequence|all\s+(tables|functions|sequences))\b/i.test(sqlCode)
+      && !/alter\s+default\s+privileges/i.test(sqlCode),
+    'Rechte nur an public.anonyme_zaehler, keine an Schemata, Funktionen oder anderen Tabellen.',
+  );
+  check(/revoke all on table public\.anonyme_zaehler from service_role;/.test(sqlCode), 'service_role verliert die Standardrechte, behält nur Lesen und Löschen.');
+  const zielListe = (sqlCode.match(/constraint anonyme_zaehler_ziel_liste_check[\s\S]*?\n\s*\)\n/) || [''])[0];
+  check(
+    regeln.LEISTUNGSSEITEN.every((seite) => zielListe.includes(`'${seite}'`))
+      && regeln.KURZCHECK_VARIANTEN.every((variante) => zielListe.includes(`'${variante}'`))
+      && (zielListe.match(/'\/[a-z/]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
+    'CHECK erlaubt als Ziel nur die Leistungsseiten und Kurzcheck-Varianten aus shared/anonyme-zaehler.js.',
+  );
+}
 const shared = read('shared/anonyme-zaehler.js');
 check(/ZAEHLER_PFAD_MUSTER = \/\^\[a-z0-9\/-\]\{1,160\}\$\//.test(shared), 'Browser, Funktion und SQL nutzen dasselbe Pfadmuster.');
 
