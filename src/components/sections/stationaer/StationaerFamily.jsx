@@ -42,13 +42,13 @@ const StationaerFamily = () => {
     window.addEventListener('hashchange', open);
     return () => window.removeEventListener('hashchange', open);
   }, []);
-  // Nur mobil (unter md): die drei langen Antworten stehen als Akkordeon. Die
-  // erste Karte (werdende Eltern) startet offen, weil dort die Bedingungen der
-  // Neugeborenen-Nachversicherung stehen (Frist, Ausschluss bei festgestellter
-  // Schwangerschaft) und die Zusage im Untertitel sonst ohne sie dasteht. Die
-  // anderen beiden starten zugeklappt (Experiment Handy-Conversion 10/2026).
-  // Ab md sind alle drei Karten wie bisher dauerhaft offen.
-  const [openCard, setOpenCard] = useState(CARDS[0].key);
+  // Nur mobil (unter md): die langen Antworten stehen als Akkordeon. Bis
+  // 01.11.2026 startete die erste Karte offen, weil der Untertitel eine Zusage
+  // zur Neugeborenen-Nachversicherung macht (Experiment Handy-Conversion 10/2026).
+  // Ab md sind alle Karten wie bisher dauerhaft offen.
+  // Frank 02.11.2026: mobil zu viel Text. Der Untertitel mit der Zusage steht
+  // nur noch ab md, daher starten mobil alle Karten zugeklappt.
+  const [openCard, setOpenCard] = useState(null);
 
   const toggleCard = useCallback((key, event) => {
     const article = event.currentTarget.closest('article');
@@ -75,7 +75,7 @@ const StationaerFamily = () => {
           <h2 id="stationaer-family-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.family.title')}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg">
+          <p className="mx-auto mt-5 hidden max-w-2xl text-base leading-relaxed text-slate-600 [text-wrap:pretty] sm:text-lg md:block">
             {t('refresh.family.subtitle')}
           </p>
         </div>

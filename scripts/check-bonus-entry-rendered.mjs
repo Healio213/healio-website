@@ -35,16 +35,24 @@ try {
     await go('/ambulant');
     const geometry = await page.evaluate(() => {
       const feature = document.getElementById('bonus-rechner');
-      // Frank 01.11.2026: Der Rechner steht erst nach der Tarifwahl.
+      // Frank 01.11.2026: Der Rechner steht erst nach der Tarifwahl. Seit
+      // 02.11.2026 mobil (unter 768 px) direkt unter dem Erklärvideo.
       const tariffs = document.getElementById('tarifwahl');
+      const video = document.getElementById('erklaervideo');
       return {
         feature: feature.getBoundingClientRect().top,
         tariffs: tariffs.getBoundingClientRect().bottom,
+        tariffsTop: tariffs.getBoundingClientRect().top,
+        videoBottom: video.getBoundingClientRect().bottom,
         mounted: Boolean(document.getElementById('bonus-calculator')),
         width: document.documentElement.scrollWidth,
       };
     });
-    assert(geometry.feature > geometry.tariffs, `Bonus entry must follow the tariff selection at ${width}px.`);
+    if (width < 768) {
+      assert(geometry.feature >= geometry.videoBottom && geometry.feature < geometry.tariffsTop, `Bonus entry must follow the explainer video before the tariff selection at ${width}px.`);
+    } else {
+      assert(geometry.feature > geometry.tariffs, `Bonus entry must follow the tariff selection at ${width}px.`);
+    }
     assert.equal(geometry.mounted, false, 'Closed calculator must not mount during initial load.');
     assert(geometry.width <= width + 1, `Horizontal overflow at ${width}px.`);
     const nav = await page.$eval('[data-bonus-calculator-link="desktop"]', (node) => ({

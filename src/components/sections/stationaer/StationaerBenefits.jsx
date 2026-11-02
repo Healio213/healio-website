@@ -19,37 +19,10 @@ const StationaerBenefits = () => {
   const { lang } = useLanguage();
 
   return (
-    <section className="bg-white py-12 md:py-24" aria-labelledby="stationaer-benefits-heading">
+    <section className="hidden bg-white py-12 md:block md:py-24" aria-labelledby="stationaer-benefits-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="md:hidden">
-          <h2 className="font-display text-2xl font-extrabold leading-tight text-[#071726]">{lang === 'en' ? 'SDK benefits in detail.' : 'SDK-Leistungen im Detail.'}</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-600">{t('refresh.benefits.contextBody')}</p>
-          <MobileSwipeRow
-            label={t('refresh.benefits.title')}
-            className="mt-6 min-w-0"
-            desktopClassName="md:grid md:gap-5 md:grid-cols-2"
-          >
-            {benefitCards.map((card) => (
-              <article
-                key={card.key}
-                className={`h-full rounded-[1.4rem] border p-5 shadow-[0_2px_8px_rgba(28,52,62,0.07)] sm:p-7 md:shadow-[0_14px_38px_rgba(28,52,62,0.06)] ${card.surface}`}
-              >
-                {/* Mobil Icon und Titel nebeneinander, damit die Karte nicht höher wird; ab md Icon über dem Titel. */}
-                <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-0">
-                  <FriendlyIcon kind={card.kind} tone={card.tone} size="lg" className="!h-16 !w-16 md:!h-20 md:!w-20" />
-                  <h3 className="min-w-0 font-display text-xl font-extrabold text-[#071726] md:mt-5">
-                    {t(`refresh.benefits.cards.${card.key}.title`)}
-                  </h3>
-                </div>
-                <MobileDetails summary={lang === 'en' ? 'Benefits & conditions' : 'Leistungen & Bedingungen'} className="mt-3 text-slate-600">
-                  <p className="text-base leading-relaxed text-slate-600 md:mt-2 md:text-sm md:leading-relaxed">
-                    {t(`refresh.benefits.cards.${card.key}.body`)}
-                  </p>
-                </MobileDetails>
-              </article>
-            ))}
-          </MobileSwipeRow>
-        </div>
+        {/* Frank 02.11.2026: mobil entfällt der Abschnitt, die Tarifkarten nennen
+            dieselben Leistungen unter „Weitere Leistungen & Bedingungen“. */}
         <div className="hidden grid-cols-[minmax(0,1fr)] gap-6 md:grid md:gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-14">
           <div className="lg:sticky lg:top-28">
             <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#087454] md:text-xs md:tracking-[0.22em]">

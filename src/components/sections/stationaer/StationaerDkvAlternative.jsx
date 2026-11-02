@@ -15,6 +15,10 @@ const COPY = {
     note: 'Wartezeit: 3 Monate allgemein, 8 Monate für Entbindung. Die allgemeine Wartezeit entfällt bei Unfall. Es gelten die Tarifbedingungen.',
     cta: 'Einbettzimmer-Beitrag berechnen',
     destination: 'Beim ersten Rechnerstart: Vorname und E-Mail für den Bonusleitfaden eingeben. Danach öffnet sich der DKV-Rechner in einem neuen Tab.',
+    // Frank 02.11.2026: mobil kürzer, gleiche Aussagen.
+    bodyShort: '100 % des tariflich erstattungsfähigen Zimmerzuschlags. Ohne Chefarzt.',
+    noteShort: 'Wartezeit 3 Monate, für Entbindung 8 Monate, bei Unfall keine.',
+    destinationShort: 'Erst Vorname und E-Mail für den Bonusleitfaden, dann öffnet sich der DKV-Rechner.',
   },
   en: {
     title: 'Single room only? DKV UZ1.',
@@ -22,6 +26,9 @@ const COPY = {
     note: 'Waiting periods: 3 months generally, 8 months for childbirth. The general waiting period is waived after an accident. Policy terms apply.',
     cta: 'Calculate single-room premium',
     destination: 'First calculator visit: enter your first name and email for the bonus guide. The German DKV calculator then opens in a new tab.',
+    bodyShort: '100% of the eligible room surcharge. No head physician.',
+    noteShort: 'Waiting period 3 months, 8 months for childbirth, none after accidents.',
+    destinationShort: 'First name and email for the bonus guide first, then the DKV calculator opens.',
   },
 };
 
@@ -36,14 +43,14 @@ const StationaerDkvAlternative = () => {
           <FriendlyIcon src="/images/friendly-icons/hospital-room.webp" tone="mint" size="sm" />
           <h3 id="stationaer-dkv-heading" className="font-display text-xl font-extrabold leading-tight text-[#071726] sm:text-2xl">{copy.title}</h3>
         </div>
-        <p className="mt-3 max-w-[68ch] text-base leading-relaxed text-[#294c40]">{copy.body}</p>
-        <p className="mt-2 max-w-[74ch] text-sm leading-relaxed text-[#426153]">{copy.note}</p>
+        <p className="mt-3 max-w-[68ch] text-base leading-relaxed text-[#294c40]"><span className="md:hidden">{copy.bodyShort}</span><span className="hidden md:inline">{copy.body}</span></p>
+        <p className="mt-2 max-w-[74ch] text-sm leading-relaxed text-[#426153]"><span className="md:hidden">{copy.noteShort}</span><span className="hidden md:inline">{copy.note}</span></p>
       </div>
       <div className="flex flex-col items-start gap-2">
         <LeadCaptureLink href={DKV_UZ1_URL} trackingCategory="dkv-stationaer" target="_blank" rel="noopener noreferrer" aria-describedby="stationaer-dkv-destination" onClick={trackStationaerDkvClick} className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#071726] px-5 py-3 text-sm font-extrabold text-white transition hover:bg-[#12304a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#075f46] sm:w-auto">
           {copy.cta}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
         </LeadCaptureLink>
-        <p id="stationaer-dkv-destination" className="text-sm leading-5 text-[#426153]">{copy.destination}</p>
+        <p id="stationaer-dkv-destination" className="text-sm leading-5 text-[#426153]"><span className="md:hidden">{copy.destinationShort}</span><span className="hidden md:inline">{copy.destination}</span></p>
       </div>
     </article>
   );

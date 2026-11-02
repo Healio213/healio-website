@@ -80,12 +80,14 @@ const StationaerHero = () => {
           </a>
           <UrgencyNote surface="stationaer" />
           </>)}
-          <div className="mt-2 flex flex-wrap gap-x-6 md:mt-0 md:block">
-            <a href="#einzelzimmer-kosten" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4 md:mt-2">
-              <span className="md:hidden">{lang === 'en' ? 'Room costs' : 'Zimmerkosten'}</span><span className="hidden md:inline">{t('refresh.hero.costsCta')}</span>
+          {/* Frank 02.11.2026: mobil zu viel Text. Die Nebenlinks entfallen unter md,
+              Zimmerkosten folgen direkt nach dem Film, Familie verlinkt die Tarifwahl. */}
+          <div className="hidden md:block">
+            <a href="#einzelzimmer-kosten" className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
+              {t('refresh.hero.costsCta')}
             </a>
             <a href="#familie" className="flex min-h-11 w-fit items-center text-sm font-semibold text-[#5ee0b1] underline underline-offset-4">
-              <span className="md:hidden">{lang === 'en' ? 'Family & midwife' : 'Familie & Hebamme'}</span><span className="hidden md:inline">{t('refresh.hero.familyCta')}</span>
+              {t('refresh.hero.familyCta')}
             </a>
           </div>
 
@@ -106,7 +108,7 @@ const StationaerHero = () => {
           initial={{ opacity: 0, scale: 0.96, y: 18 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.12 }}
-          className="relative mx-auto min-w-0 w-full max-w-[35rem]"
+          className="relative mx-auto hidden min-w-0 w-full max-w-[35rem] md:block"
           aria-label={t('refresh.hero.visualAria')}
         >
           <div className="relative overflow-hidden rounded-[2.2rem] border border-white/15 bg-gradient-to-br from-[#eefaf5] via-white to-[#fff5d9] p-4 text-[#071726] shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:p-7">

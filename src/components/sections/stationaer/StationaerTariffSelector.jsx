@@ -231,9 +231,12 @@ const StationaerTariffSelector = () => {
 
         <WhatsAppHelpHint placement="stationaer-tarifwahl" variant="line" text={t('refresh.help.selector')} className="mx-auto mt-5 max-w-2xl text-center md:mt-6" />
 
-        <p className="mx-auto mt-5 max-w-4xl text-center text-sm leading-relaxed text-slate-500 md:mt-6 md:text-xs md:leading-relaxed">
-          {t('refresh.selector.disclosure')}
-        </p>
+        {/* Frank 02.11.2026: mobil zum Aufklappen statt Kleingedrucktem am Stück. */}
+        <MobileDetails summary={lang === 'en' ? 'Health questions & premium' : 'Gesundheitsfragen & Beitrag'} className="mx-auto mt-4 max-w-4xl text-slate-600">
+          <p className="mx-auto max-w-4xl text-sm leading-relaxed text-slate-500 md:mt-6 md:text-center md:text-xs md:leading-relaxed">
+            {t('refresh.selector.disclosure')}
+          </p>
+        </MobileDetails>
       </div>
     </section>
   );

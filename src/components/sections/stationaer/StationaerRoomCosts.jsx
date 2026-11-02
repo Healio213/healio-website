@@ -64,7 +64,8 @@ export default function StationaerRoomCosts() {
           </MobileDetails>
           <div className="flex flex-col justify-center">
             <h3 className="hidden text-lg font-bold text-[#071726] md:block">{text.futureTitle}</h3>
-            <p className="leading-relaxed text-slate-600 md:mt-2"><span className="md:hidden">{lang === 'en' ? 'SP1: single room. SP2: twin room. SPU: accidents only. Policy terms apply.' : 'SP1: Einbettzimmer. SP2: Zweibettzimmer. SPU: nur nach Unfall. Tarifbedingungen gelten.'}</span><span className="hidden md:inline">{text.futureBody}</span></p>
+            {/* Mobil ohne SP-Zeile: die Tarifwahl direkt darunter nennt dieselben Stufen (Frank 02.11.2026). */}
+            <p className="hidden leading-relaxed text-slate-600 md:mt-2 md:block">{text.futureBody}</p>
             <a href="#tarife" className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 self-start rounded-full bg-[#25c990] px-5 py-3 font-bold text-[#071726] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087454]">{text.futureCta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a>
             <h3 className="mt-6 font-bold text-[#071726]">{text.currentTitle}</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-600"><span className="md:hidden">{lang === 'en' ? 'New cover does not pay for an event that has already occurred. Ask your hospital about its surcharge and check existing cover.' : 'Neuer Schutz zahlt keinen bereits eingetretenen Fall. Frag die Klinik nach ihrem Zuschlag und prüfe vorhandenen Schutz.'}</span><span className="hidden md:inline">{text.currentBody}</span></p>

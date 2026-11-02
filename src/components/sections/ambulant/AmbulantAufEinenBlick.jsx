@@ -4,6 +4,8 @@ import { useLanguage } from '@/hooks/useLanguage';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileDetails from '@/components/ui/MobileDetails';
 import { HEALIO_PHONE_DISPLAY, HEALIO_PHONE_TEL } from '@/config/contactChannels';
+import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantConversionFlow';
+import { AMBULANT_POT_STYLES } from '@/components/sections/ambulant/AmbulantHero';
 
 // „Auf einen Blick“ direkt unter dem Ambulant-Hero. Frank 15.10.2026: Die
 // Sektion war zu schlicht. Sie ist die wichtigste der Seite, damit Besucher
@@ -27,6 +29,8 @@ const COPY = {
     title: 'Auf einen Blick',
     intro: 'Das solltest du vor der Tarifwahl wissen.',
     upTo: 'bis zu',
+    potsTitle: 'So verteilen sich die 3.000 EUR:',
+    potUpTo: 'bis',
     stats: [
       {
         kind: 'naturopathy',
@@ -104,6 +108,8 @@ const COPY = {
     title: 'At a glance',
     intro: 'What to know before you choose your plan.',
     upTo: 'up to',
+    potsTitle: 'How the EUR 3,000 is split:',
+    potUpTo: 'up to',
     stats: [
       {
         kind: 'naturopathy',
@@ -178,6 +184,13 @@ const COPY = {
   },
 };
 
+// Frank 02.11.2026: Die vier Leistungen sollen auf einen Blick erkennbar sein,
+// mobil als 2x2-Raster statt Wischreihe. Sehhilfen stehen bewusst zuletzt
+// („zusätzlich interessant, aber nicht einzeln bewerten“).
+const POT_ORDER = ['natural', 'prevention', 'copay', 'vision'];
+// Weiches Trennzeichen, damit schmale Kacheln „Naturheil-verfahren“ trennen.
+const softBreak = (label) => label.replace('Naturheilverfahren', 'Naturheil\u00ADverfahren');
+
 const goToTariffs = (event) => {
   const target = document.getElementById('tarifwahl');
   if (!target) return;
@@ -203,7 +216,11 @@ const StatValue = ({ number, unit, unitFirst, footnote, upTo }) => {
 
 const AmbulantAufEinenBlick = ({ fromBonusTopic = false }) => {
   const { lang } = useLanguage();
-  const copy = COPY[lang === 'en' ? 'en' : 'de'];
+  const language = lang === 'en' ? 'en' : 'de';
+  const copy = COPY[language];
+  const budget = getAmbulantHeroBudget(language);
+  const pots = POT_ORDER.map((key) => budget.pots.find((pot) => pot.key === key)).filter(Boolean);
+  const euro = new Intl.NumberFormat(language === 'en' ? 'en-GB' : 'de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
   return (
     <section
@@ -240,6 +257,26 @@ const AmbulantAufEinenBlick = ({ fromBonusTopic = false }) => {
               <p className="mt-5 hidden max-w-[44ch] text-lg leading-8 text-home-slate md:block">{stat.text}</p>
             </li>
           ))}
+        </ul>
+
+        {/* Die vier Töpfe der höchsten Stufe aus denselben Tarifdaten wie die Tarifwahl. */}
+        <p className="mt-5 font-display text-base font-extrabold text-home-midnight md:mt-8 md:text-lg">{copy.potsTitle}</p>
+        <ul className="mt-3 grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
+          {pots.map((pot) => {
+            const style = AMBULANT_POT_STYLES[pot.key];
+            return (
+              <li key={pot.key} className={`flex min-w-0 flex-col rounded-[1.2rem] bg-gradient-to-br p-3 ring-1 md:rounded-[1.6rem] md:p-6 ${style.card}`}>
+                <span className="flex flex-col items-start gap-2 md:flex-row md:items-center md:justify-between">
+                  <FriendlyIcon src={style.icon} tone={style.tone} size="sm" className="!h-11 !w-11 md:!h-14 md:!w-14" />
+                  <span className="whitespace-nowrap rounded-full bg-white/90 px-2 py-0.5 font-display text-base font-extrabold min-[390px]:px-2.5 text-[#0b6048] shadow-[0_1px_2px_rgba(39,63,72,0.08)] md:text-lg">
+                    {copy.potUpTo} {euro.format(pot.amount)}
+                  </span>
+                </span>
+                <span className="mt-2.5 font-display text-[0.9375rem] font-extrabold leading-tight text-home-midnight [hyphens:manual] md:mt-4 md:text-xl">{softBreak(pot.label)}</span>
+                <span className="mt-1 hidden text-base leading-6 text-home-slate md:block">{pot.detail}</span>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Die vier Fakten: mobil eine ruhige Liste ohne Wischen, ab md vier Karten. */}

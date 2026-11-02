@@ -28,7 +28,7 @@ try {
     source: 'settings', updatedAt: '2026-09-14T12:00:00.000Z',
   })));
   // Frank 01.11.2026: Kein Bonusrechner mehr vor der Tarifwahl. Er steht
-  // zugeklappt am Ende der IKK-Strecke, damit „Bonusrechner“ im Kopfbereich
+  // ab md zugeklappt am Ende der IKK-Strecke, damit „Bonusrechner“ im Kopfbereich
   // weiter funktioniert. Geprüft wird die Tarifwahl selbst: Stufe, Beitrag
   // nach Alter, Budget und Rechner-Link.
   const open = async (route) => {
@@ -36,12 +36,17 @@ try {
     await page.waitForSelector('#tarifwahl');
     const placement = await page.evaluate(() => {
       const bonus = document.querySelector('#bonus-rechner');
+      // Seit 02.11.2026 steht er mobil (unter 768 px) direkt unter dem Erklärvideo.
+      const mobile = window.innerWidth < 768;
+      const top = bonus?.getBoundingClientRect().top;
+      const tariffs = document.querySelector('#tarifwahl').getBoundingClientRect();
+      const video = document.querySelector('#erklaervideo')?.getBoundingClientRect();
       return bonus && {
-        afterTariffs: bonus.getBoundingClientRect().top > document.querySelector('#tarifwahl').getBoundingClientRect().bottom,
+        placed: mobile ? Boolean(video) && top >= video.bottom && top < tariffs.top : top > tariffs.bottom,
         open: bonus.querySelector('details').open,
       };
     });
-    assert.deepEqual(placement, { afterTariffs: true, open: false }, 'The collapsed bonus calculator follows the tariff selection.');
+    assert.deepEqual(placement, { placed: true, open: false }, 'The collapsed bonus calculator sits under the video on mobile and after the tariff selection from 768px.');
   };
   const choose = async (code) => {
     await page.evaluate((tariff) => [...document.querySelectorAll('#tarifwahl button')].find((button) => button.textContent.includes(tariff)).click(), code);

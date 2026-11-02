@@ -9,6 +9,7 @@ import DesktopLead from '@/components/desktop/DesktopLead';
 import AmbulantConversionFlow, { AmbulantExplainerVideo, getAmbulantCompactFaqs } from '@/components/sections/ambulant/AmbulantConversionFlow';
 import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
+import AmbulantDreiSchritte from '@/components/sections/ambulant/AmbulantDreiSchritte';
 import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
 
 const AmbulantPage = () => {
@@ -63,6 +64,12 @@ const AmbulantPage = () => {
         <div className="order-1 md:order-none lg:hidden">
           <AmbulantHero fromBonusTopic={fromBonusTopic} />
         </div>
+        {/* Frank 02.11.2026: mobil die drei Schritte direkt unter dem Einstieg. */}
+        {!fromBonusTopic && (
+          <div className="order-1 md:hidden">
+            <AmbulantDreiSchritte />
+          </div>
+        )}
         {/* Gleiche order-Stufe wie der Hero; die Quellreihenfolge hält
             „Auf einen Blick“ vor dem Film. */}
         <div className="order-1 md:contents">

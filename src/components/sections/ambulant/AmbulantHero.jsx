@@ -17,7 +17,7 @@ import { getAmbulantHeroBudget } from '@/components/sections/ambulant/AmbulantCo
 
 // Jede Topf-Karte bekommt ihre eigene Figur und einen warmen Farbton
 // (Frank 07.10.2026: „liebevoller und sympathischer“ statt Farbpunkt).
-const potStyles = {
+export const AMBULANT_POT_STYLES = {
   vision: { icon: '/images/friendly-icons/vision-glasses.webp', tone: 'sky', card: 'from-[#f5faff] to-[#e6f1fb] ring-[#d3e3f2]' },
   natural: { icon: '/images/friendly-icons/naturopathy.webp', tone: 'mint', card: 'from-[#f4fbf7] to-[#e2f4eb] ring-[#cde8dc]' },
   prevention: { icon: '/images/friendly-icons/prevention-vaccination.webp', tone: 'lavender', card: 'from-[#f9f7ff] to-[#ece8fb] ring-[#dcd6f1]' },
@@ -158,7 +158,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
               bleed={false}
             >
               {budget.pots.map((pot) => {
-                const style = potStyles[pot.key] || potStyles.natural;
+                const style = AMBULANT_POT_STYLES[pot.key] || AMBULANT_POT_STYLES.natural;
                 return (
                   <a
                     key={pot.key}

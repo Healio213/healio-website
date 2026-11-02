@@ -50,7 +50,7 @@ const StationaerTrustFaq = () => {
           <h2 id="stationaer-trust-heading" className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] text-[#071726] [text-wrap:balance] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
             {t('refresh.trust.title')}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mx-auto mt-5 hidden max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg md:block">
             {t('refresh.trust.subtitle')}
           </p>
         </div>

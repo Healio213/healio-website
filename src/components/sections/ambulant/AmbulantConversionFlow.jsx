@@ -745,8 +745,11 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
       {/* Frank 29.10.2026 wollte den Bonusrechner über den Kopfbereich direkt
           erreichbar, am 01.11. vor der Tarifwahl gestrichen. Er steht deshalb
           zugeklappt am Ende der IKK-Strecke, „Bonusrechner“ oben springt hierher. */}
+      {/* Frank 02.11.2026: mobil steht der zugeklappte Bonusrechner direkt unter
+          dem Erklärvideo (gleiche order-Stufe wie der Film, danach in der Quelle).
+          Ab md bleibt er am Ende der IKK-Strecke. */}
       <CompactBonusFeature
-        className="order-7 bg-home-ice md:order-none"
+        className="order-2 bg-home-ice md:order-none"
         mobileSwipe
         {...getAmbulantBonusFeatureProps(language, selectedTier, geburtsjahrEingabe)}
       />

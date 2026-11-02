@@ -127,7 +127,7 @@ const StationaerBayerischeAlternative = () => {
             </ul>
 
             <p className="mt-4 text-sm leading-6 text-slate-600 md:hidden">{language === 'en' ? 'At age 21–30: Komfort EUR 10.20, Prestige EUR 13.40/month (09/2026). Premiums rise with age groups.' : 'Mit 21–30 Jahren: Komfort 10,20 EUR, Prestige 13,40 EUR/Monat (09/2026). Mit der Altersgruppe steigt der Beitrag.'}</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600 md:hidden">{language === 'en' ? 'No general waiting period. Eight months for childbirth and psychotherapy, waived after accidents. An existing pregnancy is excluded for that birth.' : 'Keine allgemeine Wartezeit. Für Entbindung und Psychotherapie acht Monate, bei Unfall keine. Eine bestehende Schwangerschaft ist für diese Geburt ausgeschlossen.'}</p>
+            {/* Wartezeit und Schwangerschaft stehen mobil nur noch in den Klappen darunter (Frank 02.11.2026). */}
 
             <div className="mt-6 md:mt-8">
               <LeadCaptureLink
