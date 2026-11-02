@@ -408,7 +408,9 @@ export const RechnerKarte = ({ rechner, alleBausteine = false }) => {
               {rechner.eyebrow}
             </p>
           )}
-          <h2 id="rechner-heading" className="mt-1 break-words font-display text-xl font-extrabold leading-snug tracking-[-0.02em] hyphens-auto sm:text-2xl sm:hyphens-manual">
+          {/* Kurze Titel aus rechnerWege.js: ohne Silbentrennung, sonst trennte
+              das Handy mitten im Wort („ambu-lante“, Wegprüfung 02.11.2026). */}
+          <h2 id="rechner-heading" className="mt-1 break-words font-display text-xl font-extrabold leading-snug tracking-[-0.02em] hyphens-manual sm:text-2xl">
             {rechner.title}
           </h2>
         </div>

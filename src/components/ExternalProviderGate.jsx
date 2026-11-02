@@ -8,7 +8,6 @@ import {
   subscribeConsent,
   updateConsentPurpose,
 } from '@/lib/consent';
-import { trackMetaLead } from '@/lib/meta-pixel';
 import { trackGoogleAdsLead } from '@/lib/google-ads';
 
 const COPY = {
@@ -85,7 +84,8 @@ const ExternalProviderGate = ({
             href={externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { if (provider === 'google_calendar') { trackMetaLead(); trackGoogleAdsLead(); } }}
+            // Meta-Lead nur nach erfolgreichem Absenden (02.11.2026).
+            onClick={() => { if (provider === 'google_calendar') { trackGoogleAdsLead(); } }}
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-bold text-slate-800 transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
           >
             {providerCopy.external}

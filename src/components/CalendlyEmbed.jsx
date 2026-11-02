@@ -2,7 +2,6 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ExternalProviderGate from '@/components/ExternalProviderGate';
 import { APPOINTMENT_BOOKING, getSafeAppointmentEmbedUrl } from '@/lib/appointmentBooking';
-import { trackMetaLead } from '@/lib/meta-pixel';
 import { trackGoogleAdsLead } from '@/lib/google-ads';
 import { GUIDED_CALLBACK_PREVIEW } from '@/lib/guided-callback';
 
@@ -43,7 +42,9 @@ const AppointmentBooking = ({
           href={booking.url}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => { trackMetaLead(); trackGoogleAdsLead(); }}
+          // Meta-Lead nur nach erfolgreichem Absenden (02.11.2026), ein
+          // Klick auf den Kalender ist noch keine Anfrage.
+          onClick={() => { trackGoogleAdsLead(); }}
           className="shrink-0 px-4 py-3 text-center text-sm font-semibold text-slate-700 underline underline-offset-2"
         >
           {english ? 'Calendar not loading? Open directly in Google Calendar.' : 'Kalender lädt nicht? Direkt in Google Kalender öffnen.'}

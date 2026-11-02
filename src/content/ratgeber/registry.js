@@ -137,8 +137,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Zuzahlungsbefreiung AOK: Wie stellst du den richtigen Antrag?",
     "listTeaser": "Die AOK befreit dich auf Antrag von weiteren gesetzlichen Zuzahlungen, sobald deine jährliche Belastungsgrenze erreicht ist. Diese liegt grundsätzlich bei zwei Prozent der Bruttoeinnahmen zum Lebensunterhalt, bei anerkannter schwerwiegender chronischer Erkrankung unter den gesetzlichen Voraussetzungen bei einem Prozent.",
     "readingTimeMinutes": 7,
-    "metaTitle": "Zuzahlungsbefreiung AOK: Antrag und Grenze 2026 | Healio",
-    "metaDescription": "AOK-Zuzahlungsbefreiung: So findest du den regionalen Antrag, prüfst die Belastungsgrenze 2026 und reichst Einkommen und Zuzahlungsbelege ein.",
+    "metaTitle": "AOK Zuzahlungsbefreiung 2026: Antrag und Grenze | Healio",
+    "metaDescription": "AOK Zuzahlungsbefreiung 2026: Grenze 2 Prozent deiner Bruttoeinnahmen, chronisch Kranke 1 Prozent. So findest du den Antrag deiner AOK und die Belege.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-08"
   },
@@ -679,8 +679,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "AOK Zahnreinigung: Welche regionale AOK zahlt wie viel?",
     "listTeaser": "Der Zuschuss zur AOK-Zahnreinigung hängt von deiner regionalen AOK und ihrer Satzung ab. Es gibt keine einheitliche Leistung für alle AOK-Versicherten; die Tabelle zeigt Beträge, Altersgrenzen und gemeinsame Budgets mit Stand 7. Oktober 2026.",
     "readingTimeMinutes": 7,
-    "metaTitle": "AOK Zahnreinigung 2026: So viel zahlt deine AOK | Healio",
-    "metaDescription": "AOK Zahnreinigung: Bayern zahlt bis zweimal 50 EUR im Jahr, Bremen und Hessen bis zweimal 60 EUR, Niedersachsen 80 Prozent. Alle elf AOKs im Überblick.",
+    "metaTitle": "AOK Zahnreinigung 2026: Zuschuss aller 11 AOKs | Healio",
+    "metaDescription": "AOK Zahnreinigung: Je nach Region zahlt deine AOK 35 bis 120 EUR im Jahr, Niedersachsen 80 Prozent. Mit Tabelle aller 11 AOKs, Altersgrenzen und Fristen.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-21"
   },
@@ -799,8 +799,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Barmer Zahnzusatzversicherung: Was zahlt die Kasse, was ein Tarif?",
     "listTeaser": "Eine Barmer Zahnzusatzversicherung ist privater Zusatzschutz und gehört nicht automatisch zu deiner gesetzlichen Mitgliedschaft. Was die Barmer beim Zahnersatz zahlt, welchen Partnertarif sie vermittelt und wie du freie Tarife nach Leistung und Beitrag vergleichst.",
     "readingTimeMinutes": 14,
-    "metaTitle": "Barmer Zahnzusatzversicherung 2026: Tarife und Beiträge | Healio",
-    "metaDescription": "Barmer Zahnzusatzversicherung 2026: Festzuschuss 60, 70 oder 75 Prozent, Partnertarif oder freie Wahl, Beiträge nach Alter und Zahn-Check in einer Minute.",
+    "metaTitle": "Barmer Zahnzusatzversicherung: Beiträge nach Alter | Healio",
+    "metaDescription": "Barmer Zahnzusatzversicherung: 60 bis 75 Prozent Festzuschuss von der Kasse. Partnertarif oder freie Wahl, Tarife bis 100 Prozent im Vergleich.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-21"
   },
@@ -1222,8 +1222,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Barmer und Osteopathie: passende Erstattungswege",
     "listTeaser": "Die Barmer-Satzung sieht besondere Osteopathiewege für Säuglinge und während der Schwangerschaft vor; einen pauschalen Zuschuss für sämtliche Erwachsenen belegen diese Regeln nicht. Daneben kannst du einen zweckgebundenen Bonuszuschuss prüfen, für den eigene Teilnahme-, Nachweis- und Kostenbedingungen gelten.",
     "readingTimeMinutes": 6,
-    "metaTitle": "Barmer und Osteopathie: Erstattung prüfen | Healio",
-    "metaDescription": "Barmer-Osteopathie prüfen: Satzungswege für Säuglinge und Schwangere, gemeinsamer Rahmen, Behandlernachweise, Fristen und zweckgebundener Bonuszuschuss.",
+    "metaTitle": "Barmer Osteopathie: Wer bis 200 EUR bekommt | Healio",
+    "metaDescription": "Barmer Osteopathie: Schwangere und Babys im ersten Lebensjahr bekommen aus einem Topf bis 200 EUR. Sonst hilft der Bonuszuschuss beim Zusatzschutz.",
     "publishedAt": "2026-10-07"
   },
   {
@@ -1434,8 +1434,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Krankenhauszusatzversicherung ab 65 und 70 prüfen",
     "listTeaser": "Auch mit 70 kannst du noch eine Krankenhauszusatzversicherung abschließen. Die Bayerische nimmt ohne Höchsteintrittsalter auf und stellt zwei Gesundheitsfragen. Hier stehen die Beiträge je Altersgruppe und die Grenzen.",
     "readingTimeMinutes": 13,
-    "metaTitle": "Krankenhauszusatzversicherung ab 65 und 70: Beiträge | Healio",
-    "metaDescription": "Krankenhauszusatzversicherung ab 65 und 70: Die Bayerische nimmt ohne Höchsteintrittsalter auf. Komfort kostet mit 66 bis 70 Jahren 54,40 EUR im Monat.",
+    "metaTitle": "Krankenhauszusatzversicherung ab 65: noch möglich | Healio",
+    "metaDescription": "Krankenhauszusatzversicherung ab 65 und 70: kein Höchstalter, nur zwei Gesundheitsfragen bei der Bayerischen. Komfort mit 66 bis 70: 54,40 EUR im Monat.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-21"
   },
@@ -1480,8 +1480,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Familienzimmer im Krankenhaus: Kosten und wer zahlt",
     "listTeaser": "Was ein Familienzimmer nach der Geburt kostet, was die Kasse dazu zahlt und wie der Klinikschutz es trägt, mit Preislisten aus 2026.",
     "readingTimeMinutes": 17,
-    "metaTitle": "Familienzimmer Krankenhaus Kosten 2026: 135 bis 150 EUR | Healio",
-    "metaDescription": "Familienzimmer: rund 135 bis 150 EUR je Nacht. Die Kasse zahlt meist nicht, Klinikschutz nur vor der Schwangerschaft. Plus der Weg für dein Kind.",
+    "metaTitle": "Familienzimmer Krankenhaus Kosten: 135 bis 150 EUR | Healio",
+    "metaDescription": "Familienzimmer im Krankenhaus: rund 135 bis 150 EUR je Nacht, die Kasse zahlt meist nicht. Wann ein Klinikschutz einspringt und was für dein Kind geht.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-21"
   },
@@ -1583,8 +1583,8 @@ export const RATGEBER_ENTRIES = [
     "listTitle": "Geburtsvorbereitung mit Partner: Was erstattet die Kasse?",
     "listTeaser": "Die TK erstattet einen Teil der Partnergebühr. Andere Kassen haben eigene Regeln zu Mitgliedschaft, Nachweisen und gemeinsam genutzten Zuschüssen.",
     "readingTimeMinutes": 8,
-    "metaTitle": "TK-Geburtsvorbereitungskurs für Partner: Kosten | Healio",
-    "metaDescription": "Geburtsvorbereitungskurs für Partner: TK-Zuschuss und Regeln von Barmer, firmus, DAK und IKK classic prüfen. Mit Gebühren, Grenzen und Nachweisen.",
+    "metaTitle": "Geburtsvorbereitungskurs Partner: Zuschuss je Kasse | Healio",
+    "metaDescription": "Geburtsvorbereitungskurs für Partner: Die TK erstattet 80 Prozent, höchstens 100 EUR. Was Barmer, DAK, firmus und IKK zahlen und welche Belege du brauchst.",
     "publishedAt": "2026-10-07"
   },
   {

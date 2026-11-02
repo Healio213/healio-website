@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Loader2, ArrowRight } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import { META_LEITFADEN_KEY, trackMetaLead } from '@/lib/meta-pixel';
+import { trackEvent } from '@/lib/analytics';
 import { isLeitfadenCampaign, readCampaignSearch } from '@/lib/campaign-landing';
 
 export const LEITFADEN_ENDPOINT = '/api/partner-lead';
@@ -133,6 +134,9 @@ const PraxisLeitfadenForm = () => {
       // Feuert nur, wenn der Zweck Marketing freigegeben ist. Das prueft das
       // Meta-Modul selbst, hier steht bewusst keine zweite Logik daneben.
       trackMetaLead({ content_name: META_LEITFADEN_KEY });
+      // GA4 zählt dieselbe gespeicherte Anfrage, ohne Formularangaben. Die
+      // Dankeseite zählt nichts mehr nach (02.11.2026), damit es einmal bleibt.
+      try { trackEvent('generate_lead', { component: 'praxis_leitfaden', placement: 'partner' }); } catch { /* Messung ist optional. */ }
       setFormData(EMPTY_FORM);
       // Meta-Fassung: Dankeseite bleibt in der schlanken Hülle, UTM gehen mit.
       navigate(isLeitfadenCampaign(location)

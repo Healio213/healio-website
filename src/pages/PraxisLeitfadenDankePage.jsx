@@ -4,7 +4,6 @@ import { ArrowDownToLine, CalendarCheck } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { APPOINTMENT_BOOKING } from '@/lib/appointmentBooking';
-import { trackMetaLead } from '@/lib/meta-pixel';
 import AppointmentBooking from '@/components/CalendlyEmbed';
 import { isLeitfadenCampaign } from '@/lib/campaign-landing';
 
@@ -110,7 +109,6 @@ const PraxisLeitfadenDankePage = () => {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               to={TERMIN_PATH}
-              onClick={() => trackMetaLead()}
               className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-[#0b4d4a] px-6 py-4 font-display text-base font-extrabold text-white transition hover:bg-[#076046]"
             >
               <CalendarCheck className="h-5 w-5" aria-hidden="true" />
@@ -120,7 +118,6 @@ const PraxisLeitfadenDankePage = () => {
               href={APPOINTMENT_BOOKING.url}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackMetaLead()}
               className="text-sm font-semibold text-slate-700 underline underline-offset-2"
             >
               Lieber sofort einen Termin wählen

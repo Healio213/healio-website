@@ -1,6 +1,7 @@
 import { trackEvent } from '@/lib/analytics';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
+import { zaehle } from '@/lib/anonyme-zaehler';
 import { readStoredReferrer, sanitizeReferrer } from '@/lib/referrer';
 
 /**
@@ -79,6 +80,9 @@ export function buildSdkUrl({ tarifTypes, ref, stufe, tarif } = {}) {
  * @param {string|null} referrer - Referrer-Code
  */
 export function trackSdkClick(page) {
+  // Anonymer Zähler ohne Cookies: zählt auch ohne Einwilligung und auf
+  // gesperrten Seiten, übermittelt aber nur den Pfad der Seite.
+  zaehle('sdk_klick');
   // Meta: Start des Beitragsrechners, ohne jeden Eingabewert. Der Aufruf
   // filtert selbst auf /ambulant und /zahn.
   trackMetaRechnerStart();

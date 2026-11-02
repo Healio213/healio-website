@@ -109,6 +109,8 @@ const DatenschutzPage = () => {
               <p>{t('datenschutz.hostingText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.analyticsTitle')}</h3>
               <p>{t('datenschutz.analyticsText')}</p>
+              <h3 id="anonyme-zaehlung" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.anonymerZaehlerTitle')}</h3>
+              <p>{t('datenschutz.anonymerZaehlerText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.googleAdsTitle')}</h3>
               <p>{t('datenschutz.googleAdsText')}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.metaTitle')}</h3>

@@ -26,6 +26,7 @@ import {
 } from '@/lib/meta-pixel';
 import { isAltersvorsorgeRoute } from '@/lib/altersvorsorgeStartinfo';
 import { initializeGoogleAds, syncGoogleAdsConsent } from '@/lib/google-ads';
+import { installiereLeistungswegZaehler } from '@/lib/anonyme-zaehler';
 
 // Dynamic Lazy Imports for Code Splitting based on routes
 const MainHomePage = React.lazy(() => import('@/pages/MainHomePage'));
@@ -164,6 +165,10 @@ function App() {
   // Meta-Funnel: eigener Pfad, eigene Zustimmung. /zahn und /ambulant sind
   // hier bewusst erlaubt, /schwangerschaft und private Kampagnenquellen nicht.
   useEffect(() => { if (!GUIDED_CALLBACK_PREVIEW) return initializeMetaPixel(); }, []);
+
+  // Anonymer Zähler ohne Cookies für Klicks zu den Leistungsseiten, auf allen
+  // Seiten und unabhängig vom Cookie-Banner (src/lib/anonyme-zaehler.js).
+  useEffect(() => { if (!GUIDED_CALLBACK_PREVIEW) return installiereLeistungswegZaehler(); }, []);
 
   useEffect(() => {
     if (GUIDED_CALLBACK_PREVIEW) return undefined;

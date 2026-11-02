@@ -6,6 +6,7 @@ import { emailjsService } from '@/services/emailjsService';
 import { describeCampaignSource, markCheckLeadPending, readCampaignSearch } from '@/lib/campaign-landing';
 import { buildKurzcheckRequest, readKurzcheckContact } from '@/lib/kurzcheck-request';
 import { hasConsent } from '@/lib/consent';
+import { zaehle } from '@/lib/anonyme-zaehler';
 import { isValidKurzcheckEmail, isValidKurzcheckPhone, normalizeKurzcheckPhone, PHONE_MIN_DIGITS } from '../../../shared/kurzcheck.js';
 
 const HEALIO_PHONE_DISPLAY = '040 89755705';
@@ -198,6 +199,10 @@ const KurzCheck = ({ config }) => {
       setStatus('error');
       return;
     }
+
+    // Anonymer Zähler ohne Cookies, erst nach bestätigtem Eingang: nur Pfad und
+    // Variante des Checks, keine Antworten und keine Kontaktdaten.
+    zaehle('kurzcheck_abgeschickt', { vonPfad: config.path, ziel: config.key });
 
     // Der Merker im Browser dient nur der Zählung auf der Dankeseite. Er wird
     // deshalb nur gesetzt, wenn die Strecke misst und eine Einwilligung für

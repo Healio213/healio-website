@@ -85,9 +85,9 @@ export const article = {
   kind: 'ratgeber',
   group: 'familie',
 
-  metaTitle: 'Familienzimmer Krankenhaus Kosten 2026: 135 bis 150 EUR | Healio',
+  metaTitle: 'Familienzimmer Krankenhaus Kosten: 135 bis 150 EUR | Healio',
   metaDescription:
-    'Familienzimmer: rund 135 bis 150 EUR je Nacht. Die Kasse zahlt meist nicht, Klinikschutz nur vor der Schwangerschaft. Plus der Weg für dein Kind.',
+    'Familienzimmer im Krankenhaus: rund 135 bis 150 EUR je Nacht, die Kasse zahlt meist nicht. Wann ein Klinikschutz einspringt und was für dein Kind geht.',
 
   publishedAt: '2026-10-07',
   publishedAtLabel: '7. Oktober 2026',

@@ -17,8 +17,8 @@ export const article = {
   // dort steht auch der Klinikschutz fürs Kind (src/content/leistungsweg.js).
   "rechner": false,
   "group": "familie",
-  "metaTitle": "TK-Geburtsvorbereitungskurs für Partner: Kosten | Healio",
-  "metaDescription": "Geburtsvorbereitungskurs für Partner: TK-Zuschuss und Regeln von Barmer, firmus, DAK und IKK classic prüfen. Mit Gebühren, Grenzen und Nachweisen.",
+  "metaTitle": "Geburtsvorbereitungskurs Partner: Zuschuss je Kasse | Healio",
+  "metaDescription": "Geburtsvorbereitungskurs für Partner: Die TK erstattet 80 Prozent, höchstens 100 EUR. Was Barmer, DAK, firmus und IKK zahlen und welche Belege du brauchst.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
   "readingTimeMinutes": 8,
