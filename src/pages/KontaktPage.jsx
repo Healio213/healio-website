@@ -102,7 +102,7 @@ const KontaktPage = () => {
         description={tSeo('kontakt.description')}
         canonicalUrl={canonicalUrl}
         ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
-        ogImageAlt="Healio – aktuelles Logo auf Navy mit Mint-Markenmotiv"
+        ogImageAlt="Healio: aktuelles Logo auf Navy mit Mint-Markenmotiv"
         ogImageWidth={1200}
         ogImageHeight={630}
         schemaMarkup={schemaMarkup}

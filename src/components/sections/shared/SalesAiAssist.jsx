@@ -8,7 +8,7 @@ const COPY = {
   de: {
     eyebrow: 'Direkte KI-Hilfe von Healio',
     title: 'Soll ich dir das kurz erklären?',
-    text: 'Nita beantwortet deine Frage genau an der Stelle, an der du gerade bist – verständlich, ohne Fachsprache und in wenigen Augenblicken.',
+    text: 'Nita beantwortet deine Frage genau an der Stelle, an der du gerade bist, verständlich, ohne Fachsprache und in wenigen Augenblicken.',
     prompts: ['Konzept kurz erklären', 'Tariffrage klären', 'Nächsten Schritt finden'],
     cta: 'Jetzt Nita fragen',
     privacy: 'Startet erst nach deiner Datenschutz-Freigabe.',
@@ -27,7 +27,7 @@ const PET_COPY = {
   de: {
     eyebrow: 'Direkte Hilfe zu deinem Tier-Schutz',
     title: 'Soll ich dir den Schutz kurz erklären?',
-    text: 'Nita erklärt dir den Unterschied zwischen OP- und Vollschutz und worauf es bei Alter, Rasse, Haltung und Vorerkrankungen ankommt – ohne Versicherungsdeutsch.',
+    text: 'Nita erklärt dir den Unterschied zwischen OP- und Vollschutz und worauf es bei Alter, Rasse, Haltung und Vorerkrankungen ankommt, ohne Versicherungsdeutsch.',
     prompts: ['OP- oder Vollschutz?', 'Hund, Katze oder Pferd', 'Nächsten Schritt klären'],
     cta: 'Tier-Schutz erklären lassen',
     privacy: 'Startet erst nach deiner Datenschutz-Freigabe.',

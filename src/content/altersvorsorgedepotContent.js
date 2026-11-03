@@ -206,8 +206,8 @@ export const rechner = {
     bei150: 'Mit diesem Beitrag ist die maximale Grundzulage erreicht.',
   },
   hinweise: {
-    selbststaendig: 'Auch für Selbstständige ist die Förderung ab 2027 möglich. Wir prüfen, ob du die Voraussetzungen erfüllst – dazu gehören grundsätzlich ein Alter unter 67, entsprechende Einkünfte und die Einkommensteuererklärung für das Beitragsjahr.',
-    riester: 'Riester-Vertrag vorhanden: Wir prüfen, ob sich ein Wechsel für dich lohnt – einschließlich Kosten, Förderung und bestehender Garantien. Eine Kündigung mit Auszahlung kann Förderung kosten. Ein neuer geförderter Vertrag kann die Fördersystematik weiterer Riester-Bestandsverträge verändern.',
+    selbststaendig: 'Auch für Selbstständige ist die Förderung ab 2027 möglich. Wir prüfen, ob du die Voraussetzungen erfüllst. Dazu gehören grundsätzlich ein Alter unter 67, entsprechende Einkünfte und die Einkommensteuererklärung für das Beitragsjahr.',
+    riester: 'Riester-Vertrag vorhanden: Wir prüfen, ob sich ein Wechsel für dich lohnt, einschließlich Kosten, Förderung und bestehender Garantien. Eine Kündigung mit Auszahlung kann Förderung kosten. Ein neuer geförderter Vertrag kann die Fördersystematik weiterer Riester-Bestandsverträge verändern.',
     immer: 'Zusätzlich zur Zulage ist ein Steuervorteil möglich. Lass uns deine Gesamtrechnung inklusive Steuerprüfung und ETF-Modell für deinen Start im Januar vorbereiten.',
   },
   // Hauptknopf öffnet das Kurzformular direkt beim Rechner.
