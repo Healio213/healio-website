@@ -1,6 +1,6 @@
 # Qualitäts-Check healio.de, November 2026
 
-Stand: 3. November 2026. Geprüft wurde der Stand von `main` (Commit `843cac1`) auf dem Branch `claude/peaceful-brahmagupta-ijpttl`. Alle 274 Adressen der Website wurden einzeln geprüft: 71 Seiten, 187 Ratgeber-Artikel und 16 Blogartikel. Jede Adresse wurde in einem echten Browser (Chromium, ohne Bildschirm) zweimal vollständig von oben bis unten geladen: als Handy mit 390 px Breite und als Desktop mit 1.440 px Breite. Die Abhakliste mit jeder einzelnen Seite steht am Ende dieses Berichts.
+Stand: 3. November 2026. Geprüft wurde der Stand von `main` (Commit `843cac1`) auf dem Branch `claude/peaceful-brahmagupta-ijpttl`. Danach kam auf `main` noch Commit `8896cc0` (Links im Fuß auf die Praxisverzeichnisse) hinzu; er ist in den Branch übernommen, sein Text ist regelkonform, und die Zeilenangabe zu `Footer.jsx` in M11 ist auf den neuen Stand angepasst. Alle 274 Adressen der Website wurden einzeln geprüft: 71 Seiten, 187 Ratgeber-Artikel und 16 Blogartikel. Jede Adresse wurde in einem echten Browser (Chromium, ohne Bildschirm) zweimal vollständig von oben bis unten geladen: als Handy mit 390 px Breite und als Desktop mit 1.440 px Breite. Die Abhakliste mit jeder einzelnen Seite steht am Ende dieses Berichts.
 
 ## Die 5 wichtigsten Punkte
 
@@ -174,7 +174,7 @@ Schwere: **hoch** = sollte vor der nächsten Kampagne geklärt werden, **mittel*
 
 #### M11: Kontraste zu schwach
 - **Fundstellen:**
-  - Fußzeilen-Hinweis „Die Healio GmbH ist als Versicherungsmakler …“ am Desktop 4,2 : 1 auf Dunkelblau (`src/components/sections/Footer.jsx:261`, `md:text-slate-500`), auf 240 Seiten. Mindestens 4,5 : 1 nötig.
+  - Fußzeilen-Hinweis „Die Healio GmbH ist als Versicherungsmakler …“ am Desktop 4,2 : 1 auf Dunkelblau (`src/components/sections/Footer.jsx:268`, `md:text-slate-500`), auf 240 Seiten. Mindestens 4,5 : 1 nötig.
   - Kopfzeile „Ratgeber von Healio“ und Kasten-Überschriften hellgrau auf Weiß 2,6 : 1 (`src/components/ratgeber/RatgeberArticleLayout.jsx:398`, `src/components/ratgeber/RatgeberBausteine.jsx:509`), auf 187 Seiten.
   - Tabellen-Hinweise 4,4 : 1 (`RatgeberBausteine.jsx:245`), auf 58 Seiten.
   - Markengrün #25c990 als Schrift auf Weiß 2,1 : 1: Links in Blogartikeln, Link „Healio“ auf `/impressum`, `/presse`, `/datenschutz`, Kennzeichnungen auf `/ambulant` und `/stationaer`; weiße Schrift auf Markengrün beim Umschalter auf `/altersvorsorgedepot`.
