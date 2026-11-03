@@ -10,6 +10,13 @@ import { HEALIO_WHATSAPP_URL } from '@/config/contactChannels';
 const APP_STORE_URL = 'https://apps.apple.com/de/app/healio/id6762125390';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=de.healio.gesundheit';
 
+// Eigene Verzeichnisse der Healio GmbH, bewusst ohne nofollow, damit
+// Suchmaschinen sie über healio.de finden.
+const DIRECTORY_LINKS = [
+  { id: 'naturheilregister', href: 'https://naturheilregister.de/', label: 'Naturheilregister' },
+  { id: 'natuerlich-begleitet', href: 'https://natuerlichbegleitet.de/', label: 'natürlich begleitet' },
+];
+
 const AppleMark = () => (
   <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0" fill="currentColor" aria-hidden="true">
     <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.08-.48-3.23 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.06 7.31c1.23.07 2.09.68 2.81.73 1.08-.22 2.11-.85 3.27-.76 1.39.11 2.44.66 3.13 1.65-2.87 1.72-2.19 5.5.44 6.56-.53 1.4-1.21 2.8-1.66 4.79ZM12.03 7.25c-.15-2.08 1.55-3.79 3.49-3.95.27 2.4-2.17 4.2-3.49 3.95Z" />
@@ -304,6 +311,15 @@ const Footer = ({ hideCta = false, hideAppPromotion = false, formalApp = false }
             ))}
           </ul>
           <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          <p id="footer-verzeichnisse" className="mt-1 md:mt-2">
+            <span className="block md:inline">{t('footer.directories')}</span>{' '}
+            {DIRECTORY_LINKS.map((link, index) => (
+              <React.Fragment key={link.id}>
+                {index > 0 && ' · '}
+                <a href={link.href} target="_blank" rel="noopener noreferrer" lang="de" className="inline-flex min-h-11 items-center whitespace-nowrap text-slate-400 underline decoration-slate-700 underline-offset-4 transition-colors hover:text-healio-primary md:inline md:min-h-0">{link.label}</a>
+              </React.Fragment>
+            ))}
+          </p>
         </div>
       </div>
     </footer>
