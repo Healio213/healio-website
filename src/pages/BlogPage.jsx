@@ -107,7 +107,7 @@ const BlogPage = () => {
         description={tSeo('blog.description')}
         canonicalUrl={canonicalUrl}
         robots={lang === 'en' ? 'noindex, nofollow' : 'index, follow'}
-        ogTitle="Healio Ratgeber – Ihr Weg zum Gesundheitsbudget"
+        ogTitle="Healio Ratgeber: Ihr Weg zum Gesundheitsbudget"
         ogDescription="Fachartikel zu steuerfreien Gesundheitsleistungen, Naturheilverfahren und smarter Vorsorge."
         ogUrl={canonicalUrl}
         ogType="blog"

@@ -139,7 +139,7 @@ const DentalZahnCheck = () => {
   // Only the neutral product label is shared with the callback dialog. Health
   // answers and the result variant stay inside this check's React state.
   const guidedTariff = result?.ctaType === 'ukv' ? 'UKV ZahnPRIVAT'
-    : result?.ctaType === 'bayerische' ? 'Die Bayerische – Zahn mit ZAHN Sofort' : '';
+    : result?.ctaType === 'bayerische' ? 'Die Bayerische: Zahn mit ZAHN Sofort' : '';
   useEffect(() => {
     if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('zahn', guidedTariff);
   }, [guidedTariff]);

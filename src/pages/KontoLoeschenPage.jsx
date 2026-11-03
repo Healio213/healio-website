@@ -24,7 +24,7 @@ const KontoLoeschenPage = () => {
             </h1>
 
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Du kannst dein HEALIO Konto jederzeit löschen – direkt in der App oder
+              Du kannst dein HEALIO Konto jederzeit löschen: direkt in der App oder
               ohne App per E-Mail. Dabei werden dein Konto und die dazugehörigen
               operativen App-Daten unwiderruflich entfernt. Nur Unterlagen, die wir
               aufgrund gesetzlicher Pflichten aufbewahren müssen, bleiben für die

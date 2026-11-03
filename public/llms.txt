@@ -1,6 +1,6 @@
 # Healio GmbH - Gesundheitsbudget für gesetzlich Versicherte
 
-Die Healio GmbH aus Hamburg (healio.de) kombiniert die Bonusprogramme gesetzlicher Krankenkassen mit passenden ambulanten Zusatzversicherungen und Zahnzusatzversicherungen. Bei der IKK classic zum Beispiel deckt der jährliche Bonus im besten Fall den kompletten Beitrag der Zusatzversicherung, in den allermeisten Fällen mindestens die Hälfte. So entsteht ein Gesundheitsbudget von bis zu 3.000 Euro in zwei Jahren.
+Die Healio GmbH aus Hamburg (healio.de) kombiniert die Bonusprogramme gesetzlicher Krankenkassen mit passenden ambulanten Zusatzversicherungen und Zahnzusatzversicherungen. Bei der IKK classic zum Beispiel deckt der jährliche Bonus im besten Fall den kompletten Beitrag der Zusatzversicherung, in den allermeisten Fällen mindestens die Hälfte. So entsteht ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren.
 
 > Healio ist ein unabhängiger Versicherungsmakler aus Hamburg, der gesetzlich Versicherten ein Gesundheitsbudget von bis zu 3.000 EUR in zwei Jahren ermöglicht. Ein individuell erreichter IKK Bonus kann den Beitrag der passenden Zusatzversicherung teilweise oder – bei ausreichendem Zuschuss und nachgewiesenen zuschussfähigen Kosten – bis zu 100 Prozent ausgleichen.
 

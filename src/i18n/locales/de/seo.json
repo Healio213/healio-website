@@ -48,20 +48,20 @@
     "description": "Wähl einen passenden Termin für dein persönliches, unverbindliches Erstgespräch."
   },
   "impressum": {
-    "title": "Impressum - Healio",
-    "description": "Impressum und Kontaktinformationen von Healio."
+    "title": "Impressum | Healio GmbH",
+    "description": "Impressum der Healio GmbH, Hamburg. Anbieterangaben gemäß § 5 DDG."
   },
   "presse": {
     "title": "Presse und Fakten zur Healio GmbH | Healio",
     "description": "Faktenblatt der Healio GmbH für Redaktionen: Kurzprofil, Zahlen und Fakten zum Gesundheitsbudget, Gründerprofil, Pressekontakt und Logodateien zum Download."
   },
   "agb": {
-    "title": "Allgemeine Geschäftsbedingungen - Healio",
-    "description": "AGB von Healio."
+    "title": "AGB: Allgemeine Geschäftsbedingungen | Healio",
+    "description": "Allgemeine Geschäftsbedingungen der Healio GmbH."
   },
   "datenschutz": {
-    "title": "Datenschutz - Healio",
-    "description": "Datenschutzerklärung von Healio."
+    "title": "Datenschutzerklärung | Healio GmbH",
+    "description": "Datenschutzerklärung der Healio GmbH. Informationen zum Umgang mit personenbezogenen Daten."
   },
   "erstinformation": {
     "title": "Erstinformation für Versicherungsnehmer | Healio",

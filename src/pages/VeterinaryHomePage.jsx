@@ -20,7 +20,7 @@ const VeterinaryHomePage = () => {
     : 'Tierkrankenversicherung für Hund, Katze & Pferd | Healio';
   const seoDescription = lang === 'en'
     ? 'Have surgery-only or full cover reviewed personally for your dog, cat or horse – based on age, breed or use and subject to the plan.'
-    : 'OP- oder Vollschutz für Hund, Katze oder Pferd persönlich prüfen lassen – passend zu Alter, Rasse beziehungsweise Nutzung und je nach Tarif.';
+    : 'OP- oder Vollschutz für Hund, Katze oder Pferd persönlich prüfen lassen, passend zu Alter, Rasse beziehungsweise Nutzung und je nach Tarif.';
   const [selection, setSelection] = useState({ animalType: '', coverage: '' });
 
   return (

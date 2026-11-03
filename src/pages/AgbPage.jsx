@@ -24,7 +24,7 @@ const AgbPage = () => {
         title={tSeo('agb.title')}
         description={tSeo('agb.description')}
         canonicalUrl={canonicalUrl}
-        ogTitle="Allgemeine Geschäftsbedingungen - Healio"
+        ogTitle="AGB: Allgemeine Geschäftsbedingungen | Healio"
         ogDescription="Allgemeine Geschäftsbedingungen (AGB) für Versicherungsmakler der Healio GmbH."
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}
