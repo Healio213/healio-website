@@ -17,6 +17,11 @@ const NITA_SILENCE_STOP_MS = 30_000;
 // Kontaktleiste: klein am rechten Rand, fährt nach ein paar Sekunden aus; eingeklappt bleibt sie für die Sitzung am Rand.
 const NITA_DOCK_AUTO_OPEN_MS = 4_000;
 const NITA_DOCK_STORAGE_KEY = 'healio-nita-leiste';
+// Am Handy fährt die Leiste nicht von selbst aus (Frank 04.11.2026); stattdessen fragt einmal je Sitzung ein kleines Fenster neben der Kugel.
+const NITA_TEASER_DELAY_MS = 5_000;
+const NITA_TEASER_HIDE_MS = 15_000;
+const NITA_TEASER_STORAGE_KEY = 'healio-nita-hinweis';
+const NITA_MOBILE_QUERY = '(max-width: 767px)';
 const NITA_SESSION_ENDPOINT = 'https://voice-pilot.healio.de/nita/realtime/session';
 const HEALIO_PAGE_ORIGINS = new Set(['https://healio.de', 'https://www.healio.de']);
 
@@ -47,7 +52,7 @@ const isAudioSdp = (value) => typeof value === 'string'
 
 const COPY = {
   de: {
-    launcher: 'Sprachpanel mit Nita öffnen', dock: 'Mit Nita sprechen', dockShort: 'Sprechen', expand: 'Kontaktleiste von Nita ausklappen', collapse: 'Kontaktleiste einklappen', whatsapp: 'WhatsApp-Chat mit Healio öffnen (neuer Tab)', panel: 'Sprachpanel von Nita', title: 'Nita, die digitale Assistenz von Healio',
+    launcher: 'Sprachpanel mit Nita öffnen', dock: 'Nita anrufen', dockSub: 'KI-Assistentin, erklärt dir alles', dockSubShort: 'KI-Assistentin', teaser: 'Soll ich dir das Konzept kurz erklären?', teaserCta: 'Ja, Nita anrufen', teaserClose: 'Hinweis schließen', expand: 'Kontaktleiste von Nita ausklappen', collapse: 'Kontaktleiste einklappen', whatsapp: 'WhatsApp-Chat mit Healio öffnen (neuer Tab)', panel: 'Sprachpanel von Nita', title: 'Nita, die digitale Assistenz von Healio',
     text: 'Du entscheidest selbst, ob du die Sprachverbindung starten möchtest. Bitte teile keine sensiblen Gesundheitsdaten mit.',
     consentText: 'Für die Sprachverbindung werden Audiodaten an OpenAI übertragen. Die Verbindung startet erst nach deiner ausdrücklichen Freigabe.',
     allow: 'Sprachverbindung erlauben', start: 'Sprachverbindung starten', end: 'Gespräch beenden', close: 'Sprachpanel schließen',
@@ -58,7 +63,7 @@ const COPY = {
     endedRemote: 'Das Gespräch wurde beendet.',
   },
   en: {
-    launcher: 'Open Nita voice panel', dock: 'Talk to Nita', dockShort: 'Talk', expand: 'Expand Nita contact bar', collapse: 'Collapse contact bar', whatsapp: 'Open WhatsApp chat with Healio (new tab)', panel: 'Nita voice panel', title: 'Nita, Healio’s digital assistant',
+    launcher: 'Open Nita voice panel', dock: 'Call Nita', dockSub: 'AI assistant, explains everything', dockSubShort: 'AI assistant', teaser: 'Shall I explain how it works?', teaserCta: 'Yes, call Nita', teaserClose: 'Close hint', expand: 'Expand Nita contact bar', collapse: 'Collapse contact bar', whatsapp: 'Open WhatsApp chat with Healio (new tab)', panel: 'Nita voice panel', title: 'Nita, Healio’s digital assistant',
     text: 'You decide whether to start the voice connection. Please do not share sensitive health data.',
     consentText: 'Audio data is transferred to OpenAI for the voice connection. The connection starts only after your explicit approval.',
     allow: 'Allow voice connection', start: 'Start voice connection', end: 'End conversation', close: 'Close voice panel',
@@ -92,15 +97,28 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
   const connectionAttemptRef = useRef(0);
   const greetingSentRef = useRef(false);
   const [dockOpen, setDockOpen] = useState(false);
+  const [teaserVisible, setTeaserVisible] = useState(false);
   useEffect(() => {
-    let keptClosed = false;
-    try { keptClosed = window.sessionStorage.getItem(NITA_DOCK_STORAGE_KEY) === 'zu'; } catch { /* privater Modus: einfach ausfahren */ }
-    if (keptClosed) return undefined;
-    const timer = window.setTimeout(() => setDockOpen(true), NITA_DOCK_AUTO_OPEN_MS);
-    return () => window.clearTimeout(timer);
-  }, []);
+    const read = (key) => { try { return window.sessionStorage.getItem(key); } catch { return null; } };
+    const isMobile = window.matchMedia?.(NITA_MOBILE_QUERY).matches ?? false;
+    if (!isMobile) {
+      if (read(NITA_DOCK_STORAGE_KEY) === 'zu') return undefined;
+      const timer = window.setTimeout(() => setDockOpen(true), NITA_DOCK_AUTO_OPEN_MS);
+      return () => window.clearTimeout(timer);
+    }
+    if (mobileHidden || read(NITA_TEASER_STORAGE_KEY) === 'gesehen') return undefined;
+    let hideTimer;
+    const showTimer = window.setTimeout(() => {
+      setTeaserVisible(true);
+      try { window.sessionStorage.setItem(NITA_TEASER_STORAGE_KEY, 'gesehen'); } catch { /* dann eben bei jedem Laden */ }
+      hideTimer = window.setTimeout(() => setTeaserVisible(false), NITA_TEASER_HIDE_MS);
+    }, NITA_TEASER_DELAY_MS);
+    return () => { window.clearTimeout(showTimer); window.clearTimeout(hideTimer); };
+  }, [mobileHidden]);
+  const openFromTeaser = () => { setTeaserVisible(false); setPanelOpen(true); };
   const collapseDock = () => {
     setDockOpen(false);
+    setTeaserVisible(false);
     try { window.sessionStorage.setItem(NITA_DOCK_STORAGE_KEY, 'zu'); } catch { /* bleibt nur bis zum Neuladen eingeklappt */ }
   };
   const closeButtonRef = useRef(null);
@@ -323,17 +341,29 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
         .healio-nita-orb-shell::before { content: ''; position: absolute; inset: -28%; border-radius: inherit; pointer-events: none; background: conic-gradient(from 30deg,transparent 0 16%,rgba(255,255,255,.68) 24%,transparent 36% 60%,rgba(94,224,177,.5) 72%,transparent 84%); mix-blend-mode: screen; animation: healio-nita-orb-flow 8s linear infinite; }
         .healio-nita-dock-main:hover .healio-nita-orb-shell { transform: scale(1.05); }
         .healio-nita-dock-cta, .healio-nita-dock-whatsapp, .healio-nita-dock-zu { max-width: 0; opacity: 0; overflow: hidden; margin-left: 0; transition: max-width 340ms cubic-bezier(.2,.8,.2,1), opacity 220ms ease, margin 340ms cubic-bezier(.2,.8,.2,1), padding 340ms cubic-bezier(.2,.8,.2,1), background 160ms ease; }
-        .healio-nita-dock-cta { display: inline-flex; align-items: center; gap: .45rem; height: 2.5rem; padding: 0; border-radius: 999px; background: #0b1f3a; color: #fff; font-size: .875rem; font-weight: 700; letter-spacing: -.005em; white-space: nowrap; }
+        .healio-nita-dock-cta { display: inline-flex; align-items: center; gap: .5rem; height: 2.75rem; padding: 0; border-radius: 999px; background: #0b1f3a; color: #fff; white-space: nowrap; }
+        .healio-nita-dock-text { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
+        .healio-nita-dock-label { font-size: .875rem; font-weight: 700; letter-spacing: -.005em; }
+        .healio-nita-dock-sub { margin-top: .15rem; font-size: .6875rem; font-weight: 500; color: rgba(255,255,255,.72); }
         .healio-nita-dock-main:hover .healio-nita-dock-cta { background: #13305a; }
         .healio-nita-dock-cta svg { width: 1rem; height: 1rem; flex: 0 0 1rem; color: #5ee0b1; }
         .healio-nita-dock-short { display: none; }
+        .healio-nita-teaser { right: 4.1rem; top: 50%; transform: translateY(-50%); width: min(15.5rem, calc(100vw - 5.5rem)); padding: .85rem 2.25rem .85rem .95rem; border: 1px solid rgba(11,31,58,.08); border-radius: 1.1rem; background: #fff; box-shadow: 0 16px 40px rgba(7,17,31,.18), 0 2px 6px rgba(7,17,31,.06); font-family: Manrope, system-ui, -apple-system, 'Segoe UI', sans-serif; animation: healio-nita-teaser-in 260ms cubic-bezier(.2,.8,.2,1); }
+        .healio-nita-teaser::after { content: ''; position: absolute; right: -.45rem; top: 50%; width: .9rem; height: .9rem; background: #fff; border-top: 1px solid rgba(11,31,58,.08); border-right: 1px solid rgba(11,31,58,.08); transform: translateY(-50%) rotate(45deg); }
+        .healio-nita-teaser-text { margin: 0 0 .6rem; color: #0b1f3a; font-size: .875rem; font-weight: 700; line-height: 1.3; }
+        .healio-nita-teaser-cta { display: inline-flex; align-items: center; gap: .4rem; height: 2.25rem; padding: 0 .9rem; border: 0; border-radius: 999px; background: #0b1f3a; color: #fff; font: inherit; font-size: .8125rem; font-weight: 700; cursor: pointer; }
+        .healio-nita-teaser-cta svg { width: .95rem; height: .95rem; color: #5ee0b1; }
+        .healio-nita-teaser-close { position: absolute; top: .4rem; right: .4rem; display: inline-flex; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: rgba(11,31,58,.5); cursor: pointer; }
+        .healio-nita-teaser-close svg { width: .95rem; height: .95rem; }
+        .healio-nita-teaser-cta:focus-visible, .healio-nita-teaser-close:focus-visible { outline: 2px solid #076046; outline-offset: 2px; }
+        @keyframes healio-nita-teaser-in { from { opacity: 0; transform: translate(.5rem, -50%); } to { opacity: 1; transform: translate(0, -50%); } }
         .healio-nita-dock-whatsapp { display: inline-flex; height: 2.5rem; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: 999px; background: #effdf4; color: #128c4a; }
         .healio-nita-dock-whatsapp:hover { background: #dcfce7; }
         .healio-nita-dock-whatsapp svg { width: 1.25rem; height: 1.25rem; flex: 0 0 1.25rem; fill: currentColor; }
         .healio-nita-dock-zu { display: inline-flex; height: 2rem; flex: 0 0 auto; align-items: center; justify-content: center; border: 0; padding: 0; border-radius: 999px; background: transparent; color: rgba(11,31,58,.55); cursor: pointer; }
         .healio-nita-dock-zu:hover { background: #f1f5f9; color: #0b1f3a; }
         .healio-nita-dock-zu svg { width: 1.1rem; height: 1.1rem; flex: 0 0 1.1rem; }
-        .healio-nita-dock.is-open .healio-nita-dock-cta { max-width: 14rem; opacity: 1; margin-left: .5rem; padding: 0 1.05rem 0 .9rem; }
+        .healio-nita-dock.is-open .healio-nita-dock-cta { max-width: 16rem; opacity: 1; margin-left: .5rem; padding: 0 1.1rem 0 .95rem; }
         .healio-nita-dock.is-open .healio-nita-dock-whatsapp { max-width: 2.5rem; width: 2.5rem; opacity: 1; margin-left: .375rem; }
         .healio-nita-dock.is-open .healio-nita-dock-zu { max-width: 2rem; width: 2rem; opacity: 1; margin-left: .25rem; }
         .healio-nita-panel { right: max(1.25rem, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); max-height: calc(100dvh - 2rem); overflow-y: auto; }
@@ -341,8 +371,9 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
         html.healio-consent-ui-active .healio-nita-surface,html.healio-nita-teaser-active .healio-nita-surface,html.healio-mobile-menu-active .healio-nita-surface { opacity: 0; pointer-events: none; visibility: hidden; transform: translateY(calc(-50% + .5rem)); }
         @media (max-width:767px) {
           .healio-nita-orb-shell { width: 2.4rem; height: 2.4rem; flex-basis: 2.4rem; }
-          .healio-nita-dock-cta { height: 2.25rem; font-size: .8125rem; }
-          .healio-nita-dock.is-open .healio-nita-dock-cta { padding: 0 .85rem 0 .75rem; }
+          .healio-nita-dock-cta { height: 2.5rem; }
+          .healio-nita-dock-label { font-size: .8125rem; }
+          .healio-nita-dock.is-open .healio-nita-dock-cta { padding: 0 .9rem 0 .75rem; }
           .healio-nita-dock-long { display: none; }
           .healio-nita-dock-short { display: inline; }
           .healio-nita-dock-whatsapp { height: 2.25rem; }
@@ -350,14 +381,14 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
           .healio-nita-dock--desktop-only { display: none; }
           .healio-nita-panel { right: .75rem; }
         }
-        @media (prefers-reduced-motion:reduce) { .healio-nita-orb-shell,.healio-nita-orb-shell::before { animation: none; transition: none; } .healio-nita-surface, .healio-nita-dock-cta, .healio-nita-dock-whatsapp, .healio-nita-dock-zu { transition: none; } }
+        @media (prefers-reduced-motion:reduce) { .healio-nita-teaser { animation: none; } .healio-nita-orb-shell,.healio-nita-orb-shell::before { animation: none; transition: none; } .healio-nita-surface, .healio-nita-dock-cta, .healio-nita-dock-whatsapp, .healio-nita-dock-zu { transition: none; } }
         @media print { .healio-nita-surface { display: none !important; } }
       `}</style>
       {!panelOpen && (
         <div className={`healio-nita-surface healio-nita-dock${dockOpen ? ' is-open' : ''}${mobileHidden ? ' healio-nita-dock--desktop-only' : ''}`} data-healio-nita="dock">
-          <button ref={launcherRef} type="button" onClick={dockOpen ? handleLauncherClick : () => setDockOpen(true)} className="healio-nita-dock-main" data-healio-nita="launcher" aria-label={dockOpen ? copy.launcher : copy.expand} title={dockOpen ? copy.launcher : copy.expand} aria-controls="healio-nita-panel" aria-expanded={false}>
+          <button ref={launcherRef} type="button" onClick={dockOpen ? handleLauncherClick : () => { setTeaserVisible(false); setDockOpen(true); }} className="healio-nita-dock-main" data-healio-nita="launcher" aria-label={dockOpen ? copy.launcher : copy.expand} title={dockOpen ? copy.launcher : copy.expand} aria-controls="healio-nita-panel" aria-expanded={false}>
             <span className="healio-nita-orb-shell" aria-hidden="true" />
-            <span className="healio-nita-dock-cta" aria-hidden="true"><Mic /><span className="healio-nita-dock-long">{copy.dock}</span><span className="healio-nita-dock-short">{copy.dockShort}</span></span>
+            <span className="healio-nita-dock-cta" aria-hidden="true"><Mic /><span className="healio-nita-dock-text"><span className="healio-nita-dock-label">{copy.dock}</span><span className="healio-nita-dock-sub healio-nita-dock-long">{copy.dockSub}</span><span className="healio-nita-dock-sub healio-nita-dock-short">{copy.dockSubShort}</span></span></span>
           </button>
           {whatsapp && (
             <a href={HEALIO_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="healio-nita-dock-whatsapp" data-healio-whatsapp="floating" aria-label={copy.whatsapp} title={copy.whatsapp}
@@ -369,6 +400,13 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
           <button type="button" className="healio-nita-dock-zu" onClick={collapseDock} aria-label={copy.collapse} title={copy.collapse} tabIndex={dockOpen ? 0 : -1} aria-hidden={!dockOpen}>
             <ChevronRight aria-hidden="true" />
           </button>
+        </div>
+      )}
+      {teaserVisible && !dockOpen && !panelOpen && (
+        <div className={`healio-nita-surface healio-nita-teaser${mobileHidden ? ' healio-nita-dock--desktop-only' : ''}`} role="note" aria-label={copy.title}>
+          <p className="healio-nita-teaser-text">{copy.teaser}</p>
+          <button type="button" className="healio-nita-teaser-cta" onClick={openFromTeaser}><Mic aria-hidden="true" />{copy.teaserCta}</button>
+          <button type="button" className="healio-nita-teaser-close" onClick={() => setTeaserVisible(false)} aria-label={copy.teaserClose} title={copy.teaserClose}><X aria-hidden="true" /></button>
         </div>
       )}
       {panelOpen && (
