@@ -1,7 +1,8 @@
 export const HEALIO_WHATSAPP_URL = 'https://wa.me/494089755500';
 
-// Re-enable only after the voice agents pass operational acceptance.
-export const HEALIO_VOICE_CONTACT_ENABLED = false;
+// Seit 04.11.2026 an (Frank: „bringe die Telefonagenten auf die Seiten“): Nita in HD über GPT-Live, Dienst natascha-hd hinter
+// voice-pilot.healio.de. Zum Abschalten auf false setzen.
+export const HEALIO_VOICE_CONTACT_ENABLED = true;
 
 // Inline-Hilfe (WhatsAppHelpHint) auf /schwangerschaft und /stationaer.
 // Erst einschalten, wenn der WhatsApp-Dienst öffentlich freigeschaltet ist und

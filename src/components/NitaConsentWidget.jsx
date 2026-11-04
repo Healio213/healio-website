@@ -6,7 +6,9 @@ import { getConsentState, hasConsent, openConsentSettings, subscribeConsent, upd
 
 export const NITA_CONSENT_REQUEST_EVENT = 'healio:nita-consent-request';
 
-const NITA_SESSION_HARD_STOP_MS = 150_000;
+// Seit 04.11.2026 läuft Nita in HD über GPT-Live (Dienst natascha-hd hinter voice-pilot.healio.de). Gespräche dürfen bis 6 Minuten
+// dauern; der Dienst legt nach 7 Minuten zusätzlich selbst auf.
+const NITA_SESSION_HARD_STOP_MS = 360_000;
 const NITA_SILENCE_STOP_MS = 30_000;
 const NITA_SESSION_ENDPOINT = 'https://voice-pilot.healio.de/nita/realtime/session';
 const HEALIO_PAGE_ORIGINS = new Set(['https://healio.de', 'https://www.healio.de']);
@@ -29,6 +31,8 @@ const getSessionEndpoint = () => {
   }
 };
 
+const newEventId = (prefix) => `${prefix}_${(window.crypto?.randomUUID?.() ?? `${Date.now()}${Math.random().toString(16).slice(2)}`).replace(/[^A-Za-z0-9_-]/g, '')}`;
+
 const isAudioSdp = (value) => typeof value === 'string'
   && value.trimStart().startsWith('v=0')
   && /^m=audio\s+\d+\s+\S+\s+.+\r?$/m.test(value)
@@ -42,7 +46,7 @@ const COPY = {
     allow: 'Sprachverbindung erlauben', start: 'Sprachverbindung starten', end: 'Gespräch beenden', close: 'Sprachpanel schließen',
     settings: 'Datenschutz-Einstellungen', privacy: 'Datenschutzerklärung', connecting: 'Nita wird verbunden …', connected: 'Nita hört zu.',
     unavailable: 'Die Sprachverbindung wird gerade vorbereitet.', error: 'Die Sprachverbindung konnte nicht gestartet werden.', retry: 'Erneut versuchen', restart: 'Neues Gespräch starten',
-    endedLimit: 'Das Gespräch wurde nach 2:30 Minuten automatisch beendet.',
+    endedLimit: 'Das Gespräch wurde nach 6 Minuten automatisch beendet.',
     endedSilence: 'Das Gespräch wurde wegen längerer Stille automatisch beendet.',
     endedRemote: 'Das Gespräch wurde beendet.',
   },
@@ -53,7 +57,7 @@ const COPY = {
     allow: 'Allow voice connection', start: 'Start voice connection', end: 'End conversation', close: 'Close voice panel',
     settings: 'Privacy settings', privacy: 'Privacy policy', connecting: 'Connecting Nita …', connected: 'Nita is listening.',
     unavailable: 'The voice connection is being prepared.', error: 'The voice connection could not be started.', retry: 'Try again', restart: 'Start a new conversation',
-    endedLimit: 'The conversation ended automatically after 2:30 minutes.',
+    endedLimit: 'The conversation ended automatically after 6 minutes.',
     endedSilence: 'The conversation ended automatically after a longer silence.',
     endedRemote: 'The conversation has ended.',
   },
@@ -104,6 +108,9 @@ const ActiveNitaConsentWidget = () => {
     const eventChannel = eventChannelRef.current;
     eventChannelRef.current = null;
     if (eventChannel) {
+      if (eventChannel.readyState === 'open') {
+        try { eventChannel.send(JSON.stringify({ type: 'session.close' })); } catch { /* Verbindung wird ohnehin geschlossen */ }
+      }
       eventChannel.onopen = null;
       eventChannel.onmessage = null;
       eventChannel.onerror = null;
@@ -198,11 +205,29 @@ const ActiveNitaConsentWidget = () => {
 
       const eventChannel = peerConnection.createDataChannel('oai-events');
       eventChannelRef.current = eventChannel;
-      eventChannel.onopen = () => {
+      // GPT-Live: Nita meldet sich zuerst. Nach session.started legt die Seite das fest (instructions.append) und stößt nach der
+      // Bestätigung den ersten Beitrag an (commentary.append), wie src/live/browser-call.ts im Telefonagenten-Projekt.
+      const sendCommand = (command) => {
+        try { if (eventChannel.readyState === 'open') eventChannel.send(JSON.stringify(command)); } catch { /* Stille-Stopp greift */ }
+      };
+      let greetingEventId = null;
+      let greetingSpoken = false;
+      const speakGreeting = () => {
+        if (!isActiveAttempt() || greetingSpoken) return;
+        greetingSpoken = true;
+        sendCommand({ type: 'session.commentary.append', event_id: newEventId('begin'), delegation_id: null, content: 'Beginne jetzt das Gespräch nach den Vorgaben.' });
+      };
+      const requestGreeting = () => {
         if (!isActiveAttempt() || greetingSentRef.current || eventChannel.readyState !== 'open') return;
         greetingSentRef.current = true;
-        eventChannel.send(JSON.stringify({ type: 'response.create' }));
+        greetingEventId = newEventId('greeting');
+        sendCommand({
+          type: 'session.instructions.append', event_id: greetingEventId, delegation_id: null,
+          content: 'Der Anruf ist jetzt angenommen. Du meldest dich zuerst, mit der Begrüßung aus deinem Leitfaden, und wartest nicht auf die Person.',
+        });
+        window.setTimeout(speakGreeting, 2000);
       };
+      eventChannel.onopen = () => { window.setTimeout(requestGreeting, 3000); };
       eventChannel.onmessage = (event) => {
         if (!isActiveAttempt() || typeof event.data !== 'string') return;
         let serverEvent;
@@ -211,12 +236,15 @@ const ActiveNitaConsentWidget = () => {
         } catch {
           return;
         }
+        if (serverEvent?.type === 'session.started') requestGreeting();
+        if (serverEvent?.type === 'session.instructions.appended' && greetingEventId && serverEvent.client_event_id === greetingEventId) speakGreeting();
+        if (serverEvent?.type === 'session.input_transcript.delta' || serverEvent?.type === 'session.output_transcript.delta') scheduleSilenceStop();
         if (serverEvent?.type === 'input_audio_buffer.speech_started') clearSilenceTimer();
         if (serverEvent?.type === 'response.done') {
           if (serverEvent.response?.status === 'failed') stopConnection('error');
           else scheduleSilenceStop();
         }
-        if (serverEvent?.type === 'error') stopConnection('error');
+        // GPT-Live meldet auch behebbare Fehler als error. Sie beenden das Gespräch nicht; hängt es wirklich, greift der Stille-Stopp.
       };
       eventChannel.onerror = () => {
         if (isActiveAttempt()) stopConnection('error');
@@ -251,6 +279,7 @@ const ActiveNitaConsentWidget = () => {
       if (!isActiveAttempt()) return;
       if (!isAudioSdp(answerSdp)) throw new Error('Nita-Session liefert keine gültige SDP-Antwort');
       await peerConnection.setRemoteDescription({ type: 'answer', sdp: answerSdp });
+      scheduleSilenceStop();
     } catch {
       if (isActiveAttempt()) stopConnection('error');
     }

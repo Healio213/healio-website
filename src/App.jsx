@@ -205,7 +205,8 @@ function App() {
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
-      {!isGuidedSurface && !isPregnancy && !isCampaignLanding && <NitaConsentWidget />}
+      {/* Nita (Sprache) seit 04.11.2026 auch auf den Leistungsseiten: Dort öffnen „Frag Nita“ und die Sprachknöpfe im Ablauf dieses Fenster. */}
+      {!isPregnancy && !isCampaignLanding && <NitaConsentWidget />}
       {!isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding && (
         isLeisteMobilePage
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
