@@ -186,7 +186,7 @@ export const article = {
         {
           type: 'list',
           items: [
-            'Behandlungen, die schon vor Versicherungsbeginn angefangen haben oder angeraten wurden, sind nicht versichert. Der Schutz gilt für neu beginnende Behandlungen.',
+            'Behandlungen, die schon vor Versicherungsbeginn angefangen haben, sind nicht versichert. Der Schutz gilt für neu beginnende Behandlungen.',
             'Psychotherapie durch Heilpraktiker erstattet der Tarif nicht.',
             'Über die Höchstbeträge hinaus zahlst du selbst.',
           ],

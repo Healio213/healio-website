@@ -287,7 +287,7 @@ export const article = {
         { type: 'honest', heading: 'Ehrlich gesagt', items: [
           { lead: 'Für eine einzige Untersuchung lohnt kein Vertrag.', text: 'Rechne die Beiträge über zwei Jahre gegen die Checks, die du wirklich machst.' },
           { lead: 'Der Heilpraktiker zählt bei der Vorsorge nicht.', text: 'Die Vorsorgebausteine zahlen fast immer nur ärztliche Untersuchungen nach GOÄ.' },
-          { lead: 'Was vor Beginn schon angeraten ist, bleibt draußen.', text: 'Eine Vorsorge ohne Befund ist versichert, die Abklärung eines bekannten Befunds nicht automatisch.' }
+          { lead: 'Was vor Beginn schon läuft, bleibt draußen.', text: 'Eine Vorsorge ohne Befund ist versichert, die Abklärung eines bekannten Befunds nicht automatisch.' }
         ] },
         { type: 'path', to: '/ambulant#tarifwahl', icon: 'calculator', text: 'SDK-Stufe wählen, Geburtsjahr eingeben und den Beitrag sehen.', label: 'Zum ambulanten Rechner' }
       ]

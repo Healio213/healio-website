@@ -60,8 +60,8 @@ const COPY = {
         kind: 'calendar',
         tone: 'sky',
         title: 'Keine Wartezeit',
-        short: 'Schutz ab Beginn, außer für laufende oder angeratene Behandlungen.',
-        text: 'Dein Schutz gilt ab Versicherungsbeginn. Was vor Beginn schon behandelt wird oder angeraten ist, zahlt der Tarif nicht.',
+        short: 'Schutz ab Beginn, außer für Behandlungen, die schon laufen.',
+        text: 'Dein Schutz gilt ab Versicherungsbeginn für neue Behandlungen. Was vor Beginn schon läuft, zahlt der Tarif nicht.',
       },
       {
         kind: 'protection',

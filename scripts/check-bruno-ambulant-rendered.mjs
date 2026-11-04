@@ -71,7 +71,7 @@ try {
       heroMarkup: heroMarkup.outerHTML,
       heroTargets: [...new Set([...hero.querySelectorAll('a[href^="#"]')].map((link) => link.getAttribute('href')))],
       heroNote: hero.querySelector('[role="note"]')?.textContent
-        || [...hero.querySelectorAll('p')].find((paragraph) => paragraph.textContent.includes('Bereits angeratene oder begonnene'))?.textContent
+        || [...hero.querySelectorAll('p')].find((paragraph) => paragraph.textContent.includes('vor Versicherungsbeginn schon laufen'))?.textContent
         || '',
       // Frank 01.11.2026: Der KassenBoost-Link steht in der IKK-Strecke, die in
       // einem Wrapper liegt; daher alle Links unterhalb des Ablaufs zählen.
@@ -108,7 +108,7 @@ try {
   assert.equal(campaign.hasContinuation, true, 'Der direkte Themen-Anschluss an der Tarifwahl fehlt.');
   assert.doesNotMatch(campaign.heroText, /effektiv ab\s*0|(?:ohne|keine).*Wartezeit|100\s*%/i, 'Der Themen-Anschluss darf im Hero weder einen Nullbeitrag noch sofortige pauschale Deckung versprechen.');
   assert.match(campaign.heroTitle, /Leistungen.*Beitrag/i);
-  assert.match(campaign.heroNote, /bereits angeratene oder begonnene.*nicht automatisch abgedeckt/i, 'Die Grenze für bereits veranlasste Leistungen muss direkt im Hero sichtbar stehen.');
+  assert.match(campaign.heroNote, /vor Versicherungsbeginn schon laufen.*nicht abgedeckt/i, 'Die Grenze für bereits veranlasste Leistungen muss direkt im Hero sichtbar stehen.');
   assert.match(campaign.heroNote, /Versicherungsbeginn.*Gesundheitsangaben.*Tarifbedingungen/);
   assert.deepEqual(campaign.heroTargets, ['#tarifwahl'], 'Der neutrale Hero muss direkt zur eigenen Tarifwahl führen, nicht zurück in den Bonuscheck.');
   assert.equal(campaign.calculatorControls, 0, 'Die Kampagne darf den vorbelegten Bonusrechner nicht erneut zeigen.');

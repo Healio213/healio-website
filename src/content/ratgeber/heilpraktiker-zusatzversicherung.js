@@ -307,11 +307,11 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag auf den Beitrag mit, Leistungsausschlüsse gibt es dabei nicht. Eine Heilpraktiker-Zusatzversicherung mit Vorerkrankung ist bei der SDK also möglich: Laut ihrer Broschüre zur ambulanten Zusatzversicherung geht das direkt im Antrag über feste Zuschläge, ohne Arztanfrage. Behandlungen, die vor Versicherungsbeginn schon laufen oder angeraten sind, bleiben trotzdem ausgenommen.',
+          text: 'Was nach den Antworten passiert, regeln die Bedingungen. Die SDK führt vor Vertragsbeginn eine Gesundheitsprüfung durch. Laut den Angaben auf der Seite Ambulant wirst du grundsätzlich nicht abgelehnt, auch nicht mit Vorerkrankungen. Vorerkrankungen versichert die SDK über einen Risikozuschlag auf den Beitrag mit, Leistungsausschlüsse gibt es dabei nicht. Eine Heilpraktiker-Zusatzversicherung mit Vorerkrankung ist bei der SDK also möglich: Laut ihrer Broschüre zur ambulanten Zusatzversicherung geht das direkt im Antrag über feste Zuschläge, ohne Arztanfrage. Behandlungen, die vor Versicherungsbeginn schon laufen, bleiben trotzdem ausgenommen.',
         },
         {
           type: 'paragraph',
-          text: 'Für dich heißt das: Dein Gesundheitszustand entscheidet mit darüber, was du zahlst und was versichert ist. Was bei Versicherungsbeginn schon behandelt wird oder angeraten ist, bleibt laut der Seite Ambulant ausgenommen. Für genau diese Beschwerde hilft ein neuer Vertrag also nicht weiter.',
+          text: 'Für dich heißt das: Dein Gesundheitszustand entscheidet mit darüber, was du zahlst und was versichert ist. Was bei Versicherungsbeginn schon behandelt wird, bleibt laut der Seite Ambulant ausgenommen. Für genau diese Beschwerde hilft ein neuer Vertrag also nicht weiter.',
         },
         {
           type: 'path',
@@ -332,13 +332,13 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ein Versicherungsfall ist die medizinisch notwendige Heilbehandlung wegen einer Krankheit oder der Folgen eines Unfalls. Er beginnt mit der Heilbehandlung und endet, wenn nach medizinischem Befund keine Behandlungsbedürftigkeit mehr besteht. Eine Behandlung, die schon vor dem Vertrag lief und weiterläuft, beginnt deshalb nicht neu. Auf der Seite Ambulant heißt es entsprechend, dass Behandlungen, die vor Beginn schon laufen oder angeraten sind, ausgenommen bleiben. Im Einzelfall entscheidet der Versicherer, frag deshalb vor dem Abschluss nach.',
+          text: 'Ein Versicherungsfall ist die medizinisch notwendige Heilbehandlung wegen einer Krankheit oder der Folgen eines Unfalls. Er beginnt mit der Heilbehandlung und endet, wenn nach medizinischem Befund keine Behandlungsbedürftigkeit mehr besteht. Eine Behandlung, die schon vor dem Vertrag lief und weiterläuft, beginnt deshalb nicht neu. Auf der Seite Ambulant heißt es entsprechend, dass Behandlungen, die vor Beginn schon laufen, ausgenommen bleiben. Im Einzelfall entscheidet der Versicherer, frag deshalb vor dem Abschluss nach.',
         },
         {
           type: 'list',
           items: [
             'Eine neue Beschwerde, die erst nach dem Versicherungsbeginn auftritt, kann versichert sein.',
-            'Eine Behandlung, die vor dem Beginn schon lief oder angeraten war, ist nicht versichert, auch wenn du sie später fortsetzt.',
+            'Eine Behandlung, die vor dem Beginn schon lief, ist nicht versichert, auch wenn du sie später fortsetzt.',
             'Eine Vorerkrankung versichert die SDK über einen festen Zuschlag mit, einen Leistungsausschluss vereinbart sie dafür laut ihrer Broschüre nicht. Eine laufende Behandlung bleibt trotzdem draußen.',
             'Der Abschluss gehört deshalb vor die Behandlung, nicht mittendrin.',
           ],
@@ -377,7 +377,7 @@ export const article = {
           type: 'list',
           items: [
             { lead: 'Passt eher,', text: 'wenn du mehrere Termine im Jahr beim Heilpraktiker oder in der Osteopathie fest einplanst, wenn der Zuschuss deiner Kasse dafür nicht reicht oder wenn du Vorsorge und Brille ohnehin nutzt.' },
-            { lead: 'Passt eher nicht,', text: 'wenn du nur selten privat zahlst. Dann ist der Beitrag oft höher als der Nutzen. Prüf auch genau, wenn eine Behandlung schon läuft oder angeraten ist, denn die ist nicht versichert.' },
+            { lead: 'Passt eher nicht,', text: 'wenn du nur selten privat zahlst. Dann ist der Beitrag oft höher als der Nutzen. Prüf auch genau, wenn eine Behandlung schon läuft, denn die ist nicht versichert.' },
             { lead: 'Beitrag über die Jahre.', text: 'Der Monatsbeitrag ist nur der Einstieg. Er richtet sich nach dem erreichten Alter und kann angepasst werden. Rechne deshalb nicht nur mit dem ersten Jahr.' },
           ],
         },

@@ -77,7 +77,7 @@ export const article = {
       blocks: [
         { type: 'paragraph', text: 'Weil der beste Tarif nichts nützt, wenn du nicht aufgenommen wirst. Private Zusatzversicherungen fragen fast immer nach der Gesundheit. Manche lehnen bei Vorerkrankungen ab, andere nehmen mit Risikozuschlag oder einem Ausschluss an. Für Menschen mit Vorgeschichte ist das oft das wichtigste Kriterium überhaupt.' },
         { type: 'paragraph', text: 'Im ambulanten SDK-Tarif beantwortest du Gesundheitsfragen, wirst deshalb aber nicht abgelehnt. Vorerkrankungen versichert die SDK über einen Zuschlag mit, ohne Leistungsausschluss. Bei den Klinik-Tarifen SP1 und SP2 entscheidet der Versicherer die Annahme im Antrag. Bei der UKV ZahnPRIVAT haben die Fragen jeweils eigene Zeiträume.' },
-        { type: 'paragraph', text: 'In jedem Baustein gilt: Was vor Versicherungsbeginn schon läuft oder angeraten ist, zahlt der neue Vertrag nicht. Wer vergleicht, während die Behandlung schon geplant ist, vergleicht deshalb oft zu spät.' },
+        { type: 'paragraph', text: 'In jedem Baustein gilt: Was vor Versicherungsbeginn schon läuft, zahlt der neue Vertrag nicht. Bei den Zähnen gilt das auch für schon angeratene Behandlungen. Wer vergleicht, während die Behandlung schon geplant ist, vergleicht deshalb oft zu spät.' },
         { type: 'segments', segments: [
           { text: 'Wo du trotz Vorerkrankung angenommen wirst, erklärt der Ratgeber ' },
           { text: 'Zusatzversicherung trotz Vorerkrankung', to: '/ratgeber/krankenzusatzversicherung-ohne-gesundheitsfragen-2026' },
@@ -134,7 +134,7 @@ export const article = {
         { type: 'honest', heading: 'Ehrlich gesagt', items: [
           { lead: 'Den besten Tarif für alle gibt es nicht.', text: 'Welcher Tarif passt, hängt von deinem Bedarf und deiner Vorgeschichte ab.' },
           { lead: 'Der Bonus ist kein fester Betrag.', text: 'Er hängt von Kasse und Aktivitäten ab und wird nur zweckgebunden gezahlt.' },
-          { lead: 'Zu spät ist zu spät.', text: 'Laufende oder angeratene Behandlungen zahlt kein neuer Vertrag.' }
+          { lead: 'Zu spät ist zu spät.', text: 'Laufende Behandlungen zahlt kein neuer Vertrag, bei den Zähnen auch keine angeratenen.' }
         ] }
       ]
     },
@@ -167,7 +167,7 @@ export const article = {
     { question: 'Was ist beim Vergleich wichtiger, Beitrag oder Leistung?', answer: 'Die Leistung. Ein günstiger Tarif mit niedrigen Höchstbeträgen oder Staffeln in den ersten Jahren zahlt im Ernstfall oft wenig. Den Beitrag vergleichst du erst, wenn Leistung und Annahme passen.' },
     { question: 'Kann ich mehrere Zusatzversicherungen kombinieren?', answer: 'Ja, ambulant, Zähne und Krankenhaus sind getrennte Bausteine. Bei gleichartigem Schutz prüft mancher Versicherer im Antrag, ob du schon einen Vertrag bei einer anderen Gesellschaft hast.' },
     { question: 'Zahlt meine Krankenkasse einen Zuschuss zur Zusatzversicherung?', answer: 'Manche Kassen zahlen ihren Bonus wahlweise als zweckgebundenen Zuschuss für eine private Zusatzversicherung. Die BARMER zum Beispiel laut Satzung bis zu 200 EUR im Jahr. Wie viel bei dir möglich ist, hängt von Kasse und Aktivitäten ab.' },
-    { question: 'Ab wann leistet eine Krankenzusatzversicherung?', answer: 'Das regelt der Tarif. Eine allgemeine Wartezeit darf nach § 197 VVG höchstens drei Monate betragen. Die ambulanten SDK-Tarife haben keine allgemeine Wartezeit. Behandlungen, die vor Beginn laufen oder angeraten sind, sind in keinem Fall versichert.' }
+    { question: 'Ab wann leistet eine Krankenzusatzversicherung?', answer: 'Das regelt der Tarif. Eine allgemeine Wartezeit darf nach § 197 VVG höchstens drei Monate betragen. Die ambulanten SDK-Tarife haben keine allgemeine Wartezeit. Behandlungen, die vor Beginn schon laufen, sind in keinem Fall versichert, bei den Zähnen auch angeratene nicht.' }
   ],
   onward: {
     heading: 'So gehst du weiter vor',

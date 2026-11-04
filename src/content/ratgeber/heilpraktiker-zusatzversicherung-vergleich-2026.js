@@ -275,7 +275,7 @@ export const article = {
           { title: 'Wartezeit', text: 'Null oder drei Monate. In der Wartezeit zahlt der Tarif nicht.' },
           { title: 'Annahme', text: 'Welche Gesundheitsfragen gestellt werden und was bei einer Vorerkrankung passiert.' }
         ] },
-        { type: 'paragraph', text: 'Ein Punkt gilt für alle Tarife gleich: Was vor Versicherungsbeginn schon behandelt wird oder angeraten ist, zahlt kein neuer Vertrag. Auch ohne Wartezeit wirkt der Schutz nicht zurück.' }
+        { type: 'paragraph', text: 'Ein Punkt gilt für alle Tarife gleich: Was vor Versicherungsbeginn schon behandelt wird, zahlt kein neuer Vertrag. Auch ohne Wartezeit wirkt der Schutz nicht zurück.' }
       ]
     },
     {

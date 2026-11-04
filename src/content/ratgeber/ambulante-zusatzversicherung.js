@@ -392,7 +392,7 @@ export const article = {
     {
       question: 'Gibt es eine Wartezeit?',
       answer:
-        'Nein, die Bedingungen der ambulanten SDK-Tarife sehen keine Wartezeiten vor. Behandlungen, die vor Beginn schon laufen oder angeraten sind, bleiben aber ausgenommen.',
+        'Nein, die Bedingungen der ambulanten SDK-Tarife sehen keine Wartezeiten vor. Behandlungen, die vor Beginn schon laufen, bleiben aber ausgenommen.',
     },
     {
       question: 'Welche ambulante Zusatzversicherung ist die beste?',

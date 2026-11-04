@@ -156,7 +156,7 @@
       "details": {
         "arzneimittel": {
           "name": "Medication co-payments",
-          "info": "Reimbursement of statutory co-payment (€5–10 per medication)"
+          "info": "Reimbursement of the statutory co-payment per medication"
         },
         "heilmittel": {
           "name": "Remedy co-payments",

@@ -129,7 +129,7 @@ export const META_CHECKS = {
       KASSE_STEP,
     ],
     footnotes: [
-      'Der Vorsorge-Topf erstattet Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose und Streptokokken, je nach Tarif 50 bis 100 %. Schon angeratene Untersuchungen sind nicht automatisch mitversichert.',
+      'Der Vorsorge-Topf erstattet Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose und Streptokokken, je nach Tarif 50 bis 100 %. Was vor Versicherungsbeginn schon läuft, ist nicht mitversichert.',
       'Kassenbonus: Rechenbeispiel IKK classic laut Satzung, als Zuschuss für deinen Zusatzschutz, höchstens bis zur Höhe deines Beitrags.',
     ],
     thankYou: {

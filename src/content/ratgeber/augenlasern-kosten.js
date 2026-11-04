@@ -179,7 +179,7 @@ export const article = {
             },
             {
               "lead": "Die Laserleistung hat eine eigene Grenze.",
-              "text": "Bei AP1 wird die Augenlaserleistung außerhalb der vier Töpfe berechnet. In den ersten vier Kalenderjahren gilt die Hälfte des Höchstbetrags je Auge und Versicherungsfall. Ein schon angeratener Eingriff ist dadurch nicht automatisch versichert."
+              "text": "Bei AP1 wird die Augenlaserleistung außerhalb der vier Töpfe berechnet. In den ersten vier Kalenderjahren gilt die Hälfte des Höchstbetrags je Auge und Versicherungsfall. Ein Eingriff vor Versicherungsbeginn ist nicht versichert."
             }
           ]
         }
@@ -195,7 +195,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Healio nennt für SDK Ambulant 100, AP1, beim Augenlasern bis zu 1.000 EUR je Auge und Versicherungsfall. In den ersten vier Kalenderjahren gilt die Hälfte. Diese Leistung gehört nicht zu den vier Töpfen des Gesundheitsbudgets. Maßgeblich bleiben die versicherte Behandlung, der vereinbarte Beginn und die Tarifbedingungen; bereits laufende oder angeratene Behandlungen vor Beginn bleiben ausgenommen."
+          "text": "Healio nennt für SDK Ambulant 100, AP1, beim Augenlasern bis zu 1.000 EUR je Auge und Versicherungsfall. In den ersten vier Kalenderjahren gilt die Hälfte. Diese Leistung gehört nicht zu den vier Töpfen des Gesundheitsbudgets. Maßgeblich bleiben die versicherte Behandlung, der vereinbarte Beginn und die Tarifbedingungen; Behandlungen, die vor Beginn schon laufen, bleiben ausgenommen."
         },
         {
           "type": "paragraph",
