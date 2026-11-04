@@ -136,7 +136,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: dieselbe Krone mit und ohne Bonusheft',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit der Regelversorgung 2026 (398,39 EUR) und einer UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR.',
+          tariffLabel: 'Gerechnet mit der Regelversorgung 2026 (398,39 EUR) und einer UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR.',
           caption: 'Eigenanteil bei einer Metallkrone nach Befund 1.1, Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [

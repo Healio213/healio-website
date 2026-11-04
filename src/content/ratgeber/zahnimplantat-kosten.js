@@ -144,7 +144,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: Einzelzahn-Implantat inklusive Krone',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100, also 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR, ab dem vierten Kalenderjahr gelten allein die Erstattungssätze.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR, ab dem vierten Kalenderjahr gelten allein die Erstattungssätze.',
           caption: 'Eigenanteil bei einem Einzelzahn-Implantat, Festzuschuss 2026 mit Bonusheft über 5 Jahre (645,12 EUR)',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -199,7 +199,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Der Tarif erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. ZahnPRIVAT 75 erstattet 75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch dort sind Implantate, Brücken und Prothesen erstattungsfähig. Beide Tarife kommen ohne Wartezeiten aus.',
+          text: 'Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %, auch dort sind Implantate, Brücken und Prothesen erstattungsfähig. Beide Tarife kommen ohne Wartezeiten aus.',
         },
         {
           type: 'honest',

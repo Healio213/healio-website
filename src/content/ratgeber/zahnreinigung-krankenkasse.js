@@ -111,7 +111,7 @@ export const article = {
       id: 'zahntarif',
       heading: 'Zahlt eine Zahnzusatzversicherung die Zahnreinigung?',
       blocks: [
-        { type: 'paragraph', text: 'Das hängt vom Tarif ab. Bei der UKV ZahnPRIVAT gibt es die professionelle Zahnreinigung in den Top-Stufen. ZahnPRIVAT 100 hat keine Wartezeiten und leistet für die professionelle Zahnreinigung ohne Jahresdeckel. Der Tarif erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. In Stufe 75 gilt eine eigene Jahresgrenze.' },
+        { type: 'paragraph', text: 'Das hängt vom Tarif ab. Bei der UKV ZahnPRIVAT gibt es die professionelle Zahnreinigung in den Top-Stufen. ZahnPRIVAT 100 hat keine Wartezeiten und leistet für die professionelle Zahnreinigung ohne Jahresdeckel. Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In Stufe 75 gilt eine eigene Jahresgrenze.' },
         { type: 'costCard', title: 'Zwei Zahnreinigungen im Jahr', icon: 'calculator',
           tariffLabel: 'Beispiel für das Kalenderjahr 2026 mit UKV ZahnPRIVAT 100, Satzungsstand Oktober 2026, für eine Person ab 18 Jahren.',
           caption: 'Kostenkarte: zwei Zahnreinigungen zu je 100 EUR',

@@ -252,7 +252,7 @@ export const article = {
             },
             {
               title: 'Tarif erstattet',
-              text: 'Deine Zahnzusatzversicherung erstattet nach ihren Bedingungen, bei ZahnPRIVAT 100 zum Beispiel 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung.',
+              text: 'Deine Zahnzusatzversicherung erstattet nach ihren Bedingungen. Bei ZahnPRIVAT 100 zum Beispiel zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten.',
             },
           ],
         },
@@ -274,7 +274,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: Metallkrone auf einem hinteren Backenzahn, 398,39 EUR',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit der Regelversorgung 2026 und einer UKV ZahnPRIVAT 100 im ersten Kalenderjahr. Der Tarif erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die Zahnstaffel begrenzt das erste Jahr auf bis zu 1.000 EUR.',
+          tariffLabel: 'Gerechnet mit der Regelversorgung 2026 und einer UKV ZahnPRIVAT 100 im ersten Kalenderjahr. Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die Zahnstaffel begrenzt das erste Jahr auf bis zu 1.000 EUR.',
           caption: 'Eigenanteil bei einer Metallkrone nach Befund 1.1, Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -300,7 +300,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Healio zeigt dir zwei Wege, je nach Lage. Wurde in den letzten 2 Jahren nichts empfohlen und läuft nichts, ist die UKV ZahnPRIVAT der Weg, mit drei Leistungsstufen ohne Wartezeiten. ZahnPRIVAT 100 erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Dort sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig.',
+          text: 'Healio zeigt dir zwei Wege, je nach Lage. Wurde in den letzten 2 Jahren nichts empfohlen und läuft nichts, ist die UKV ZahnPRIVAT der Weg, mit drei Leistungsstufen ohne Wartezeiten. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Dort sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig.',
         },
         {
           type: 'paragraph',

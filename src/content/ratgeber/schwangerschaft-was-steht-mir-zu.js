@@ -463,7 +463,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Was die Kasse nicht zahlt, kann ein ambulanter Zusatztarif mittragen. Bei der SDK greift der Vorsorge-Topf ohne Wartezeit, auch bei bereits festgestellter Schwangerschaft, für Untersuchungen ab Versicherungsbeginn wie Feinultraschall oder einen Toxoplasmose-Test. Im Tarif Ambulant 100 stehen dafür bis zu 500 EUR je zwei Kalenderjahre bereit. Die Gesundheitsfragen im Antrag beantwortest du vollständig, auch zur Schwangerschaft. Die Entbindung selbst ist bei bestehender Schwangerschaft nicht mehr versicherbar, das sagen wir dir vorher.',
+          text: 'Was die Kasse nicht zahlt, kann ein ambulanter Zusatztarif mittragen. Bei der SDK zahlt der Vorsorgetopf Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, etwa Feinultraschall oder einen Test auf Toxoplasmose. Im Tarif Ambulant 100 stehen dafür bis zu 500 EUR je zwei Kalenderjahre bereit. Die Gesundheitsfragen im Antrag beantwortest du vollständig. Die Entbindung selbst ist bei bestehender Schwangerschaft nicht mehr versicherbar, das sagen wir dir vorher.',
         },
       ],
     },
@@ -541,7 +541,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant geht noch etwas: Der Vorsorge-Topf der SDK greift ohne Wartezeit auch bei bestehender Schwangerschaft, für Untersuchungen ab Versicherungsbeginn (siehe oben bei den Selbstzahlerleistungen). Die Gesundheitsfragen beantwortest du vollständig. Eine Aufnahme ist auch mit Vorerkrankungen möglich, unter Umständen mit Risikozuschlag.',
+          text: 'Ambulant geht noch etwas: Der Vorsorgetopf der SDK zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit (siehe oben bei den Selbstzahlerleistungen). Die Gesundheitsfragen beantwortest du vollständig. Eine Aufnahme ist auch mit Vorerkrankungen möglich, unter Umständen mit Risikozuschlag.',
         },
         {
           type: 'segments',

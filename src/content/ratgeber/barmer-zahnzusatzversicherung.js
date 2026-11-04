@@ -293,7 +293,7 @@ export const article = {
           "type": "costCard",
           "title": "Krone bei der Barmer: Festzuschuss und Eigenanteil",
           "icon": "calculator",
-          "tariffLabel": "Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.",
+          "tariffLabel": "Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.",
           "caption": "Kostenkarte: Metallkrone als Regelversorgung (Befund 1.1), Festzuschuss bei Bewilligung bis 31.12.2026",
           "head": [
             "Beispiel",

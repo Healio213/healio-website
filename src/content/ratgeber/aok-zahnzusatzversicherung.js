@@ -241,7 +241,7 @@ export const article = {
           type: 'costCard',
           title: 'Brücke bei der AOK: Festzuschuss und Eigenanteil',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Zahn ging erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Zahn ging erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.',
           caption: 'Kostenkarte: Brücke als Regelversorgung (Befund 2.1), Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -261,7 +261,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Healio zeigt zwei Wege, getrennt nach deiner Zahnsituation. Wurde bei dir in den letzten 2 Jahren nichts empfohlen und läuft nichts, ist es die UKV ZahnPRIVAT mit drei Leistungsstufen ohne Wartezeiten, bei 1 bis 3 fehlenden Zähnen mit Risikozuschlag je Zahn. In ZahnPRIVAT 100 erstattet der Tarif 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet.',
+          text: 'Healio zeigt zwei Wege, getrennt nach deiner Zahnsituation. Wurde bei dir in den letzten 2 Jahren nichts empfohlen und läuft nichts, ist es die UKV ZahnPRIVAT mit drei Leistungsstufen ohne Wartezeiten, bei 1 bis 3 fehlenden Zähnen mit Risikozuschlag je Zahn. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet.',
         },
         {
           type: 'paragraph',

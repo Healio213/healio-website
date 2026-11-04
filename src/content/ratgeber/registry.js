@@ -1515,7 +1515,7 @@ export const RATGEBER_ENTRIES = [
     "listTeaser": "Die Trennlinie verläuft zwischen Vorsorge und Entbindung. Was ambulant noch möglich ist, was stationär nicht mehr, und was fürs Kind gilt.",
     "readingTimeMinutes": 8,
     "metaTitle": "Zusatzversicherung Schwangerschaft 2026: was jetzt geht | Healio",
-    "metaDescription": "Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
+    "metaDescription": "Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorgetopf ab Versicherungsbeginn zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.",
     "publishedAt": "2026-09-28",
     "updatedAt": "2026-10-14"
   },

@@ -31,7 +31,7 @@ const CARDS = [
     icon: 'dental-shield',
     label: { de: 'Maximaler Zahnschutz', en: 'Maximum dental cover' },
     figure: { de: '100 %', en: '100%' },
-    figureNote: { de: 'der erstattungsfähigen Kosten nach Kassenleistung', en: 'of eligible costs after statutory cover' },
+    figureNote: { de: 'der Rechnung zahlen Kasse und Tarif zusammen', en: 'of the bill, paid by health fund and plan together' },
   },
   {
     key: 'ukvLuecke',
@@ -56,7 +56,7 @@ const CARDS = [
     icon: 'calculator',
     label: { de: 'Günstiger Einstieg', en: 'Affordable start' },
     figure: { de: '75 %', en: '75%' },
-    figureNote: { de: 'der erstattungsfähigen Kosten nach Kassenleistung', en: 'of eligible costs after statutory cover' },
+    figureNote: { de: 'der Rechnung zahlen Kasse und Tarif zusammen', en: 'of the bill, paid by health fund and plan together' },
   },
 ];
 

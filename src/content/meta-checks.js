@@ -111,9 +111,9 @@ export const META_CHECKS = {
     seoDescription: 'Prüfe in 45 Sekunden, welcher Zusatzschutz Feinultraschall, Toxoplasmose und Streptokokken erstattet und wie viel dein Kassenbonus zum Beitrag beisteuert.',
     badge: 'Vorsorge-Extras · Kurzcheck',
     title: 'Feinultraschall und Bluttests selbst zahlen?',
-    lead: 'Zusatzschutz für diese Vorsorge gibt es auch, wenn du schon schwanger bist. Den Beitrag kann dein Kassenbonus mitzahlen: laut Satzung der IKK classic bis zu 810 € im Jahr, für Schwangere im besten Fall bis zu 1.155 €, in der Regel 400 bis 700 €.',
+    lead: 'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Den Beitrag kann dein Kassenbonus mitzahlen: laut Satzung der IKK classic bis zu 810 € im Jahr, für Schwangere im besten Fall bis zu 1.155 €, in der Regel 400 bis 700 €.',
     // Einschränkungen direkt bei den Aussagen, nicht erst im Kleingedruckten.
-    heroNote: 'Die Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
+    heroNote: 'Beantworte die Gesundheitsfragen im Antrag vollständig. Wie viel dein Kassenbonus bringt, hängt von deiner Krankenkasse und deinen Aktivitäten ab. Wir rechnen es individuell für dich aus.',
     bullets: ['Vorsorge ohne Wartezeit', 'Je nach Tarif 50 bis 100 %'],
     steps: [
       {

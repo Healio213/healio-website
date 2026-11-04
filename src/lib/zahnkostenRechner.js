@@ -94,7 +94,7 @@ const byId = (list, id) => list.find((entry) => entry.id === id) || list[0];
 /**
  * Kasse zahlt den Festzuschuss (Prozent der Regelversorgung), höchstens die
  * Kosten. Der Tarif erstattet seinen Satz der Rechnung abzüglich der
- * Kassenleistung (dentalContent.js: "nach Abzug der Kassenleistung"),
+ * Kassenleistung, Kasse und Tarif kommen also zusammen auf den Satz,
  * im ersten Kalenderjahr höchstens bis zur Zahnstaffel.
  */
 // Eigener Betrag aus dem Heil- und Kostenplan: nur Zahlen bis 50.000 EUR,
@@ -168,7 +168,7 @@ export const RECHNER_TEXTE = Object.freeze({
       ? 'Die Kosten sind dein eigener Betrag. Für den Festzuschuss nimmt das Beispiel den Befund der gewählten Behandlung an; welcher Befund bei dir gilt, steht im Heil- und Kostenplan.'
       : `Die Kosten sind ein Beispiel. ${e.behandlung.kostenQuelle} Deine Rechnung hängt von Praxis, Material, Labor und Gebührensatz ab.`,
     `Festzuschuss: ${FESTZUSCHUSS_STAND.quelle} für Befund ${e.behandlung.befund}. Bis 31.12.2026 zahlt die Kasse 60, 70 oder 75 Prozent der Regelversorgung, ab 01.01.2027 50, 60 oder 65 Prozent (§ 55 SGB V, BGBl. 2026 I Nr. 228). Für 2027 rechnet das Beispiel mit den Euro-Beträgen von 2026.`,
-    'Tarif: UKV ZahnPRIVAT 100 erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, ZahnPRIVAT 75 entsprechend 75 %. Das Beispiel nimmt an, dass die ganze Rechnung erstattungsfähig ist.',
+    'Tarif: In UKV ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, in ZahnPRIVAT 75 zusammen 75 %. Das Beispiel nimmt an, dass die ganze Rechnung erstattungsfähig ist.',
     'Zahnstaffel: Im ersten Kalenderjahr erstattet der Tarif bis 1.000 EUR, danach steigen die Grenzen, ab dem vierten Kalenderjahr gelten allein die Erstattungssätze. Das Beispiel nimmt an, dass im selben Jahr nichts anderes erstattet wurde.',
     'Die Behandlung war bei Vertragsbeginn weder angeraten noch geplant, und es fehlte kein Zahn. Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert.',
     'Kein Härtefall. Verbindlich sind der Bescheid deiner Kasse und die Bedingungen des Versicherers.',

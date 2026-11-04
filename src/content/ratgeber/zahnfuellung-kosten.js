@@ -183,7 +183,7 @@ export const article = {
           type: 'costCard',
           title: 'Zahnfüllung: wer was trägt',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor die Füllung angeraten wird. Welche Leistungen erstattungsfähig sind, steht in den Tarifbedingungen.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor die Füllung angeraten wird. Welche Leistungen erstattungsfähig sind, steht in den Tarifbedingungen.',
           caption: 'Kostenkarte: Zahnfüllung mit und ohne Zahntarif',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -203,7 +203,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die UKV ZahnPRIVAT hat drei Leistungsstufen ohne Wartezeiten, je nach Tarif für Zahnersatz, Zahnbehandlung und Vorsorge. In ZahnPRIVAT 100 erstattet der Tarif 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es 75 % der erstattungsfähigen Kosten, ebenfalls nach Abzug der Kassenleistung.',
+          text: 'Die UKV ZahnPRIVAT hat drei Leistungsstufen ohne Wartezeiten, je nach Tarif für Zahnersatz, Zahnbehandlung und Vorsorge. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %.',
         },
         {
           type: 'honest',
@@ -324,7 +324,7 @@ export const article = {
     {
       question: 'Zahlt meine Zahnzusatzversicherung die Füllung?',
       answer:
-        'Das hängt vom Tarif und davon, was erstattungsfähig ist. In ZahnPRIVAT 100 erstattet die UKV 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Nicht versichert ist, was in den letzten 2 Jahren angeraten oder geplant wurde oder schon läuft.',
+        'Das hängt vom Tarif und davon, was erstattungsfähig ist. In ZahnPRIVAT 100 zahlen Kasse und UKV zusammen 100 % der erstattungsfähigen Kosten. Nicht versichert ist, was in den letzten 2 Jahren angeraten oder geplant wurde oder schon läuft.',
     },
   ],
 

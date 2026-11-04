@@ -93,7 +93,7 @@ export const article = {
         { type: 'table', mobile: 'cards', caption: 'Vergleichskriterien der Healio-Hauptwege, Stand 14. Oktober 2026',
           head: ['Kriterium', 'SDK Ambulant 100 (AP1)', 'UKV ZahnPRIVAT 100', 'SDK Klinik SP2'],
           rows: [
-            ['Leistung', '100 %, vier Töpfe mit zusammen bis zu 3.000 EUR in zwei Jahren', '100 % der erstattungsfähigen Kosten nach Kassenleistung', 'Zweibettzimmer und private ärztliche Behandlung'],
+            ['Leistung', '100 %, vier Töpfe mit zusammen bis zu 3.000 EUR in zwei Jahren', '100 % der erstattungsfähigen Kosten, Kasse und Tarif zusammen', 'Zweibettzimmer und private ärztliche Behandlung'],
             ['Wartezeit', 'Keine allgemeine Wartezeit', 'Keine Wartezeiten', 'Ohne allgemeine Wartezeit für neue Fälle laut Produktseite'],
             ['Gesundheitsfragen', 'Ja, ohne Ablehnung, Vorerkrankungen per Zuschlag mitversichert', 'Ja, mit eigenen Zeiträumen je Frage', 'Ja, individuelle Annahme im Antrag'],
             ['Beispielbeitrag', '39,19 EUR im Monat, Alter 31 bis 40', 'Im Rechner nach Alter', '33,41 EUR im Monat, Alter 30']

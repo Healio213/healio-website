@@ -191,7 +191,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: Krone, Brücke und Implantat mit und ohne Härtefall',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor der Zahn fehlt und die Behandlung angeraten wird.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor der Zahn fehlt und die Behandlung angeraten wird.',
           caption: 'Eigenanteil mit und ohne Härtefall, Festzuschuss 2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -226,7 +226,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die Regelversorgung zahlt im Härtefall die Kasse. Ein Zahntarif kommt nur für das ins Spiel, was darüber hinausgeht. Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Der Tarif erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. ZahnPRIVAT 75 erstattet 75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Beide kommen ohne Wartezeiten aus. Eine pauschale Preiszusage gibt es nicht, der Beitrag hängt unter anderem vom Alter ab.',
+          text: 'Die Regelversorgung zahlt im Härtefall die Kasse. Ein Zahntarif kommt nur für das ins Spiel, was darüber hinausgeht. Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %. Beide kommen ohne Wartezeiten aus. Eine pauschale Preiszusage gibt es nicht, der Beitrag hängt unter anderem vom Alter ab.',
         },
         {
           type: 'honest',

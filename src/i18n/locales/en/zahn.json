@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Dental prosthetics up to <highlight>100% reimbursed</highlight>. Your IKK bonus helps pay the premium.",
-    "subtitle": "Dental cover from around 10 EUR a month at age 30. First the right fund, then the bonus: the IKK classic bonus can bring back up to 100 % of the premium, and we check with you exactly how much.",
+    "subtitle": "Dental cover from around 12 EUR a month at age 30. First the right fund, then the bonus: the IKK classic bonus can bring back up to 100 % of the premium, and we check with you exactly how much.",
     "ikkNote": "<strong>Put health-fund bonuses in context:</strong> KassenBoost compares contributions, achievable bonuses and benefits separately. You decide whether the lowest contribution or the greatest personal value matters more.",
     "ctaCalculate": "Find your tariff",
     "ctaBenefits": "View benefits",
@@ -220,7 +220,7 @@
         "title": "ZahnPRIVAT 75: a solid entry with a smaller premium",
         "text": "With healthy teeth and a focus on price, ZahnPRIVAT 75 is the UKV entry level.",
         "reasons": [
-          "75% of eligible costs after deducting the health fund share, even if the fund pays nothing first",
+          "Health fund and plan together pay 75% of the bill, even if the fund pays nothing first",
           "No waiting periods, implants, bridges and dentures are eligible",
           "Benefit scale: up to €1,000 in the first calendar year, up to €2,000 in total over the first two and up to €3,000 over the first three years, unlimited after that"
         ],
@@ -340,7 +340,7 @@
         },
         {
           "situation": "Maximum coverage with healthy teeth",
-          "empfehlung": "UKV ZahnPRIVAT 100: 100% of eligible costs after deducting the health fund share, even if the fund pays nothing first, with no waiting periods.",
+          "empfehlung": "UKV ZahnPRIVAT 100: health fund and plan together pay 100% of the bill, even if the fund pays nothing first, with no waiting periods.",
           "weg": "ukv"
         },
         {
@@ -370,7 +370,7 @@
         },
         {
           "situation": "Affordable entry with strong benefits",
-          "empfehlung": "UKV ZahnPRIVAT 75: 75% of eligible costs after deducting the health fund share, with no waiting periods. Levels 90 and 100 reimburse more.",
+          "empfehlung": "UKV ZahnPRIVAT 75: health fund and plan together pay 75% of the bill, with no waiting periods. Levels 90 and 100 reimburse more.",
           "weg": "ukv"
         }
       ]
@@ -513,7 +513,7 @@
     "cta": "Yes, explain the dental concept"
   },
   "bonusRechner": {
-    "tariffInfo": "Dental plan, from around €10 per month at age 30",
+    "tariffInfo": "Dental plan, from around €12 per month at age 30",
     "effectiveLabel": "What you get at the dentist",
     "effectiveValue": "up to 100% reimbursement",
     "effectiveNote": "Example calculation based on your inputs. The subsidy is capped at the documented annual premium; premium, bonus and eligibility depend on the applicable terms."

@@ -170,7 +170,7 @@ export const article = {
           type: 'costCard',
           title: 'Parodontitis-Behandlung: wer was trägt',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die professionelle Zahnreinigung ohne Jahresdeckel. Der Vertrag besteht schon, bevor die Behandlung angeraten wird. Parodontitis in den letzten 3 Jahren zählt auf healio.de/zahn zur Zahn-Vorgeschichte.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die professionelle Zahnreinigung ohne Jahresdeckel. Der Vertrag besteht schon, bevor die Behandlung angeraten wird. Parodontitis in den letzten 3 Jahren zählt auf healio.de/zahn zur Zahn-Vorgeschichte.',
           caption: 'Kostenkarte: Parodontitis-Behandlung mit und ohne Zahntarif',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -191,7 +191,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die systematische Behandlung zahlt die Kasse, ein Tarif kommt bei privat vereinbarten Leistungen ins Spiel. Bei der UKV ZahnPRIVAT gibt es die professionelle Zahnreinigung in den Top-Stufen, ZahnPRIVAT 100 hat keine Wartezeiten und leistet dafür ohne Jahresdeckel. In ZahnPRIVAT 100 erstattet der Tarif 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es 75 % der erstattungsfähigen Kosten, ebenfalls nach Abzug der Kassenleistung.',
+          text: 'Die systematische Behandlung zahlt die Kasse, ein Tarif kommt bei privat vereinbarten Leistungen ins Spiel. Bei der UKV ZahnPRIVAT gibt es die professionelle Zahnreinigung in den Top-Stufen, ZahnPRIVAT 100 hat keine Wartezeiten und leistet dafür ohne Jahresdeckel. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %.',
         },
         {
           type: 'honest',

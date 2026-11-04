@@ -11,7 +11,7 @@ const coverage = [
   {
     label: 'Extra-Untersuchungen: Feinultraschall, Toxoplasmose, Streptokokken',
     statutory: 'Meist nicht.',
-    extra: 'Ambulanter Vorsorge-Topf, zum Beispiel SDK AP1: 100 % bis 500 EUR in zwei Kalenderjahren. Greift auch bei schon bestehender Schwangerschaft.',
+    extra: 'Ambulanter Vorsorgetopf, zum Beispiel SDK AP1: 100 % bis 500 EUR in zwei Kalenderjahren. Zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit.',
   },
   { label: 'Zimmer bei der Geburt', statutory: 'Mehrbettzimmer.', extra: 'Ein- oder Zweibettzimmer, Chefarzt, Familienzimmer je nach Tarif.', clinic: true },
   { label: 'Baby im Krankenhaus', statutory: 'Begleitperson nur in bestimmten Fällen.', extra: 'Elternteil beim versicherten Kind unter 16, soweit die Kasse die Kosten nicht trägt.', clinic: true },
@@ -29,7 +29,7 @@ export function AlreadyPregnantNotice() {
         <h2 id="schon-schwanger-heading" className="font-display text-xl font-bold sm:text-2xl">Schon schwanger? Warum es sich trotzdem lohnt</h2>
         <p className="mt-2 max-w-prose leading-relaxed text-home-slate">Die Geburt selbst lässt sich jetzt nicht mehr versichern. Drei Dinge gehen aber noch:</p>
         <ol className="mt-3 max-w-prose list-decimal space-y-2 pl-5 leading-relaxed text-home-slate">
-          <li><strong className="text-home-midnight">Vorsorge ab sofort:</strong> Feinultraschall oder ein Test auf Toxoplasmose zahlt der ambulante Schutz auch in deiner jetzigen Schwangerschaft.</li>
+          <li><strong className="text-home-midnight">Vorsorge ab sofort:</strong> Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, etwa Feinultraschall oder einen Test auf Toxoplasmose.</li>
           <li><strong className="text-home-midnight">Schutz für dein Baby:</strong> Hast du selbst rechtzeitig einen Klinikschutz, nimmt der Versicherer dein Kind ohne Gesundheitsprüfung auf, auch wenn es bei der Geburt Komplikationen gab. Du musst es nur innerhalb von zwei Monaten anmelden. Wie früh du selbst versichert sein musst, hängt vom Versicherer ab, bei der Bayerischen zum Beispiel drei Monate.</li>
           <li><strong className="text-home-midnight">Bereit fürs nächste Kind:</strong> Die Wartezeit von 8 Monaten hast du dann längst hinter dir. Beim nächsten Kind greift dein Klinikschutz auch für die Geburt.</li>
         </ol>

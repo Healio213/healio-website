@@ -188,6 +188,27 @@ for (const q1 of ['ja', 'nein']) {
   expect(Boolean(dentalIsDoneSource) && dentalIsDone({ q1, q2: 'ziehen' }, ['q1', 'q2'], 'q3') === true, `Nach „ziehen“ endet der Check sofort, ohne Frage 3 (q1=${q1}).`);
 }
 expect(dentalCompute({ q1: 'ja', q2: 'keine', q3: 'nein' }) === 'sofort', 'Der Sofort-Weg der Bayerischen bleibt für Behandlung ohne Lücke und ohne Vorgeschichte erhalten.');
+// Frank 04.11.2026: Dritte Antwort in Frage 1 für eine schon abgerechnete Behandlung.
+// Sie führt nie in den Sofort-Weg, sondern wie „Nein“ zur UKV, mit eigenem Hinweis.
+for (const lang of ['de', 'en']) {
+  const { q1 } = getDentalContent(lang).check.questions;
+  expect(Object.keys(q1.options).join(',') === 'ja,fertig,nein', `Frage 1 hat die drei Antworten Ja, schon abgerechnet und Nein (${lang}).`);
+  expect(Boolean(getDentalContent(lang).check.nachBehandlung), `Das UKV-Ergebnis hat den Hinweis zur abgerechneten Behandlung (${lang}).`);
+}
+expect(getDentalContent('de').check.questions.q1.options.fertig?.label === 'Ja, aber schon fertig behandelt und abgerechnet', 'Die dritte Antwort steht in Franks Wortlaut.');
+expect(/Was nach Versicherungsbeginn neu nötig wird, ist versichert/.test(getDentalContent('de').check.nachBehandlung), 'Der Hinweis sagt, dass nur Neues versichert ist.');
+for (const [answers, expected] of [
+  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'leistung' }, 'ukvLeistung'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'preis' }, 'ukvPreis'],
+  [{ q1: 'fertig', q2: 'wenige' }, 'ukvLuecke'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'ja' }, 'ukvVorgeschichte'],
+  [{ q1: 'fertig', q2: 'viele' }, 'sonderViele'],
+  [{ q1: 'fertig', q2: 'ziehen' }, 'sonderKomplex'],
+]) {
+  expect(dentalCompute(answers) === expected, `Schon abgerechnet führt zu ${expected}, nie zum Sofort-Weg (${JSON.stringify(answers)}).`);
+}
+expect(dentalIsDone({ q1: 'fertig', q2: 'wenige' }, ['q1', 'q2'], 'q3') === true, 'Schon abgerechnet und 1 bis 3 fehlende Zähne endet wie „Nein“ im UKV-Lückenweg.');
+expect(/textNachBehandlung/.test(dentalCheck) && /content\.nachBehandlung\b/.test(dentalCheck), 'Der Zahn-Check zeigt bei schon abgerechneter Behandlung Hinweis und passenden Ergebnistext.');
 expect(/Es fehlen keine Zähne, es soll kein Zahn gezogen werden und es gibt keine Zahn-Vorgeschichte/.test(dentalContent) && /no missing teeth, no tooth due to be extracted and no dental history/.test(dentalContent), 'Die Wegekarte der Bayerischen nennt in DE und EN das angeratene Zahnziehen als Ausschluss.');
 // Kieferorthopädie (UKV-Antrag 4.4) kennt keine 2-Jahres-Grenze: Wo ältere Empfehlungen als
 // versichert gelten, steht die Ausnahme Zahnspange dabei, ebenso im Familien-Ergebnis.
