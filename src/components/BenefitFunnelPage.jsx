@@ -38,7 +38,7 @@ const TOPICS = {
     seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     protectionTitle: 'Vorsorge ohne Wartezeit',
     protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder Streptokokken, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
-    caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Untersuchungen, die schon angeraten oder begonnen sind, sind nicht automatisch mitversichert.',
+    caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Was vor Versicherungsbeginn schon läuft, ist nicht mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
 

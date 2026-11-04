@@ -47,7 +47,7 @@ export const AMBULANT_FAQS = {
     },
     {
       q: 'Gibt es eine Wartezeit?',
-      a: 'Die SDK-AP-Tarife und der freiwillige UKV-Baustein VorsorgePRIVAT haben keine allgemeine Wartezeit. Versicherungsschutz besteht ab dem vereinbarten Beginn im Rahmen der Tarifbedingungen; bereits laufende oder angeratene Behandlungen sind dadurch nicht automatisch versichert. Für den getrennten Alternativweg ARAG V100 gilt eine allgemeine Wartezeit von drei Monaten.',
+      a: 'Die SDK-AP-Tarife und der freiwillige UKV-Baustein VorsorgePRIVAT haben keine allgemeine Wartezeit. Versicherungsschutz besteht ab dem vereinbarten Beginn im Rahmen der Tarifbedingungen; Behandlungen, die vor Beginn schon laufen, sind nicht versichert. Für den getrennten Alternativweg ARAG V100 gilt eine allgemeine Wartezeit von drei Monaten.',
     },
     {
       q: 'Muss ich Gesundheitsfragen beantworten?',

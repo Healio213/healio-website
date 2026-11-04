@@ -224,7 +224,7 @@ export const article = {
         {
           type: 'segments',
           segments: [
-            { text: 'Wer den Heilpraktiker heute selbst zahlt, muss nicht lange warten: Eine Wartezeit haben diese Tarife nicht, so steht es in Abschnitt II der Bedingungen. Tritt ein neuer Behandlungsfall nach Versicherungsbeginn ein, erstattet der Tarif im Rahmen der Bedingungen bereits die erste Rechnung dazu. Was vorher lief oder angeraten war, bleibt ausgenommen. Wo diese Grenze genau liegt, zeigt der Ratgeber ' },
+            { text: 'Wer den Heilpraktiker heute selbst zahlt, muss nicht lange warten: Eine Wartezeit haben diese Tarife nicht, so steht es in Abschnitt II der Bedingungen. Tritt ein neuer Behandlungsfall nach Versicherungsbeginn ein, erstattet der Tarif im Rahmen der Bedingungen bereits die erste Rechnung dazu. Was vorher schon lief, bleibt ausgenommen. Wo diese Grenze genau liegt, zeigt der Ratgeber ' },
             { text: 'Heilpraktiker-Zusatzversicherung ohne Wartezeit', to: '/ratgeber/heilpraktiker-zusatzversicherung-ohne-wartezeit' },
             { text: '.' },
           ],

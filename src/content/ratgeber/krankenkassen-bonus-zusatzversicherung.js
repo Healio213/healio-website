@@ -125,7 +125,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Zweitens: Eine Zusatzversicherung greift nur für das, was neu beginnt. Laufende oder bereits angeratene Behandlungen sind nicht versichert. Wer also ohnehin weiß, dass etwas ansteht, sollte lieber früher als später schauen.',
+          text: 'Zweitens: Eine Zusatzversicherung greift nur für das, was neu beginnt. Laufende Behandlungen sind nicht versichert, bei den Zähnen auch schon angeratene. Wer also ohnehin weiß, dass etwas ansteht, sollte lieber früher als später schauen.',
         },
       ],
     },

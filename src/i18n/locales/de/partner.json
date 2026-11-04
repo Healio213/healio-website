@@ -5,7 +5,7 @@
     "subtitle": "Schaffe finanzielle Klarheit für deine Patienten: Mit passendem Zusatzschutz sind bis zu <highlight>3.000 EUR Gesundheitsbudget in 2 Jahren</highlight> möglich, verteilt auf vier Leistungstöpfe. Ein Kassenbonus kann den Beitrag ganz oder teilweise ausgleichen. Deine Praxis informiert neutral; Prüfung, Beratung und Antragsbegleitung übernimmt Healio.",
     "cta": "30-minütiges Kennenlernen buchen",
     "secondaryCta": "Praxis-Leitfaden als PDF anfordern",
-    "roleNote": "Keine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; bereits angeratene Behandlungen sind nicht automatisch versichert.",
+    "roleNote": "Keine Versicherungsberatung durch die Praxis. Tarifbedingungen und Gesundheitsangaben entscheiden; Behandlungen, die schon laufen, sind nicht versichert.",
     "imageAlt": "Therapeutin im Gespräch mit einer Patientin in einer hellen Praxis",
     "videoPreviewAlt": "Vorschau des Healio-Erklärvideos für Partnerpraxen",
     "videoPlayLabel": "Erklärvideo starten",
@@ -214,7 +214,7 @@
       "totalDesc": "Je nach Tarif und persönlichen Voraussetzungen.",
       "naturheilkundeDesc": "Für Heilpraktiker, Osteopathie, TCM oder Chiropraktik – nach Tarif.",
       "sehhilfenDesc": "Erstattung für Sehhilfen nach Tarif.",
-      "note": "Tarif und Gesundheitsangaben entscheiden. Bereits angeratene Behandlungen sind nicht automatisch versichert.",
+      "note": "Tarif und Gesundheitsangaben entscheiden. Behandlungen, die schon laufen, sind nicht versichert.",
       "detailsTitle": "Tarif, Bonus und Voraussetzungen"
     },
     "partners": {

@@ -165,7 +165,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
           {/* Frank 15.10.2026: „Unser Geheimtipp“ im Ambulant-Text hervorheben (<highlight>). */}
           {!isHome && surface !== 'zahn' && <p className={sceneBelow.lead}><HighlightText text={copy.description} className="font-bold text-[#5ee0b1]" /></p>}
           {!isHome && <p className={sceneBelow.note}>{copy.condition}</p>}
-          {/* Der Hinweis zu angeratenen oder begonnenen Behandlungen bleibt für Besucher aus
+          {/* Der Hinweis zu schon laufenden Behandlungen bleibt für Besucher aus
               dem Bonus-Check auch im Terminmodus sichtbar (fehlte seit 14.10., Fix 01.11.2026). */}
           {!isHome && (!guidedCallbackEnabled || (fromBonusTopic && surface === 'ambulant')) && <p className="mt-2 max-w-[62ch] text-sm leading-6 text-[#bfced6]">{copy.hint}</p>}
         </div>

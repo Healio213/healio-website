@@ -173,7 +173,7 @@
       "details": {
         "arzneimittel": {
           "name": "Arzneimittel-Zuzahlungen",
-          "info": "Erstattung der gesetzlichen Zuzahlung (5-10 € pro Medikament)",
+          "info": "Erstattung der gesetzlichen Zuzahlung je Medikament",
           "source": "sdk"
         },
         "heilmittel": {

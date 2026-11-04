@@ -5,7 +5,7 @@
     "subtitle": "Give your patients financial clarity: suitable supplementary cover may provide up to <highlight>EUR 3,000 in health benefits over 2 years</highlight>, divided into four benefit categories. A health fund bonus may offset all or part of the premium. Your practice provides neutral information; Healio checks eligibility, advises and supports the application.",
     "cta": "Book a 30-minute introduction",
     "secondaryCta": "Request the practice guide (PDF in German)",
-    "roleNote": "No insurance advice by the practice. Policy terms and health declarations determine cover; treatment already recommended is not automatically insured.",
+    "roleNote": "No insurance advice by the practice. Policy terms and health declarations determine cover; treatment already underway is not insured.",
     "imageAlt": "Therapist talking with a patient in a bright practice",
     "videoPreviewAlt": "Preview of Healio's explainer video for partner practices",
     "videoPlayLabel": "Play explainer video",
@@ -214,7 +214,7 @@
       "totalDesc": "Subject to the plan and individual requirements.",
       "naturheilkundeDesc": "Alternative practitioners, osteopathy, TCM or chiropractic care, depending on the plan.",
       "sehhilfenDesc": "Reimbursement for vision aids under the plan.",
-      "note": "Plan terms and health disclosures determine eligibility. Treatment already recommended is not automatically covered.",
+      "note": "Plan terms and health disclosures determine eligibility. Treatment already underway is not covered.",
       "detailsTitle": "Plan, bonus and requirements"
     },
     "partners": {

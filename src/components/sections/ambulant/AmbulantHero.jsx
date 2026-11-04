@@ -87,7 +87,7 @@ const AmbulantHero = ({ fromBonusTopic = false, className = '' }) => {
           </motion.p>
           {fromBonusTopic && (
             <p role="note" className="mb-8 max-w-2xl text-base leading-7 text-slate-200 md:mb-10">
-              Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
+              Untersuchungen und Behandlungen, die vor Versicherungsbeginn schon laufen, sind nicht abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.
             </p>
           )}
           <motion.div

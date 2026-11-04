@@ -88,7 +88,7 @@ const content = {
       titleAccent: 'Klar im Blick.',
       description: 'Vergleiche den ambulanten Zusatzschutz, der zu deinem Bedarf passt. Ein Kassenwechsel oder Abschluss ist dafür keine Voraussetzung.',
       cta: 'Leistungen und Beitrag ansehen',
-      hint: 'Bereits angeratene oder begonnene Untersuchungen und Behandlungen sind nicht automatisch abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.',
+      hint: 'Untersuchungen und Behandlungen, die vor Versicherungsbeginn schon laufen, sind nicht abgedeckt. Entscheidend sind Versicherungsbeginn, Gesundheitsangaben und Tarifbedingungen.',
     },
   },
   en: {
@@ -170,7 +170,7 @@ const content = {
       titleAccent: 'Clearly set out.',
       description: 'Compare outpatient supplementary cover that fits your needs. Changing health funds or taking out cover is not required to compare.',
       cta: 'Explore benefits and premiums',
-      hint: 'Already recommended or started examinations and treatments are not automatically covered. The start of cover, health declarations and plan conditions determine eligibility.',
+      hint: 'Examinations and treatments already underway before the start of cover are not covered. The start of cover, health declarations and plan conditions determine eligibility.',
     },
   },
 };
