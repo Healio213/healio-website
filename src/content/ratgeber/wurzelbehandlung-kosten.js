@@ -156,7 +156,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Eine private Rechnung kann ein Zahntarif tragen, wenn die Behandlung versichert ist. Die UKV ZahnPRIVAT hat drei Leistungsstufen ohne Wartezeiten. In ZahnPRIVAT 100 erstattet der Tarif 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es 75 % der erstattungsfähigen Kosten, ebenfalls nach Abzug der Kassenleistung.',
+          text: 'Eine private Rechnung kann ein Zahntarif tragen, wenn die Behandlung versichert ist. Die UKV ZahnPRIVAT hat drei Leistungsstufen ohne Wartezeiten. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %.',
         },
         {
           type: 'paragraph',
@@ -210,7 +210,7 @@ export const article = {
           type: 'costCard',
           title: 'Wurzelbehandlung: wer was trägt',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor die Behandlung angeraten wird, außer in der letzten Zeile.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Vertrag besteht schon, bevor die Behandlung angeraten wird, außer in der letzten Zeile.',
           caption: 'Kostenkarte: Wurzelbehandlung mit und ohne Zahntarif',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [

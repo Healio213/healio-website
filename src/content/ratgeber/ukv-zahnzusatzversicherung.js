@@ -22,7 +22,7 @@
  *     keine Zuordnung der Zahnreinigung zu 90 (dentalContent sagt "Top-Stufen"
  *     und nennt "ohne Jahresdeckel" nur bei 100).
  *   - Keine Beitragszahl: dentalContent und /zahn nennen keinen Tarifbeitrag
- *     (die Angabe "ab rund 10 EUR mit 30 Jahren" gehört zum Bonusrechner auf
+ *     (die Angabe "ab rund 12 EUR mit 30 Jahren" gehört zum Bonusrechner auf
  *     /zahn und nennt keine Stufe). Nur die Zuschläge je fehlendem Zahn, die
  *     dort ausdrücklich stehen.
  *   - Keine Kieferorthopädie-Eurobeträge (stehen nur in der nicht ausgespielten
@@ -70,7 +70,7 @@ export const article = {
     icon: 'dental',
     facts: [
       { value: 'keine Wartezeit', label: 'in allen drei Stufen der UKV ZahnPRIVAT' },
-      { value: '100 %', label: 'der erstattungsfähigen Kosten nach Kassenleistung, Stufe 100' },
+      { value: '100 %', label: 'der erstattungsfähigen Kosten, Kasse und Tarif zusammen, Stufe 100' },
       { value: 'bis 1.000 EUR', label: 'erstattet der Tarif im ersten Kalenderjahr (Zahnstaffel)' },
     ],
     text: 'Drei Leistungsstufen ohne Wartezeiten. Was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft, ist nicht versichert.',
@@ -112,9 +112,9 @@ export const article = {
           caption: 'UKV ZahnPRIVAT 75, 90 und 100 nach den Tarifunterlagen auf healio.de/zahn',
           head: ['Stufe', 'Erstattung', 'Was dazu steht'],
           rows: [
-            ['ZahnPRIVAT 75', '75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet', 'Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig'],
+            ['ZahnPRIVAT 75', 'Kasse und Tarif zahlen zusammen 75 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet', 'Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig'],
             ['ZahnPRIVAT 90', 'Den Erstattungssatz zeigen die Tarifunterlagen im Antrag', 'Keine Wartezeiten, Zahnstaffel wie in der Stufe 100'],
-            ['ZahnPRIVAT 100', '100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet', 'Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Keine Wartezeiten, professionelle Zahnreinigung ohne Jahresdeckel'],
+            ['ZahnPRIVAT 100', 'Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet', 'Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Keine Wartezeiten, professionelle Zahnreinigung ohne Jahresdeckel'],
           ],
           note: 'Die Annahme und der genaue Leistungsumfang werden erst im Antrag verbindlich geprüft. Der Beitrag hängt unter anderem von Alter, Tarif und Leistungsstufe ab, deshalb steht hier kein Preis.',
         },
@@ -310,7 +310,7 @@ export const article = {
     {
       question: 'Wie viele Stufen hat die UKV ZahnPRIVAT?',
       answer:
-        'Drei: ZahnPRIVAT 75, 90 und 100, mit unterschiedlicher Erstattung und unterschiedlichem Beitrag. In ZahnPRIVAT 100 erstattet der Tarif 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, in ZahnPRIVAT 75 sind es 75 %.',
+        'Drei: ZahnPRIVAT 75, 90 und 100, mit unterschiedlicher Erstattung und unterschiedlichem Beitrag. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, in ZahnPRIVAT 75 sind es 75 %.',
     },
     {
       question: 'Hat die UKV Zahnzusatzversicherung Wartezeiten?',

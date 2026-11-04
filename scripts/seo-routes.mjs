@@ -171,7 +171,7 @@ export const seoRoutes = [
   {
     path: '/schwangerschaft',
     title: 'Zusatzversicherung schwanger: was jetzt noch geht | Healio',
-    description: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
+    description: 'Der ambulante Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     canonical: 'https://healio.de/schwangerschaft',
     keywords: 'Zusatzversicherung Schwangerschaft, Zusatzversicherung schwanger abschließen, Schwangerschaft Kassenbonus, Mutterschaftsvorsorge Bonus, Kindernachversicherung',
     lang: 'de',
@@ -181,7 +181,7 @@ export const seoRoutes = [
       '@id': 'https://healio.de/schwangerschaft#webpage',
       url: 'https://healio.de/schwangerschaft',
       name: 'Zusatzversicherung in der Schwangerschaft: was jetzt noch geht',
-      description: 'Ambulanter Vorsorge-Topf bei bestehender Schwangerschaft, stationäre Grenzen bei dieser Entbindung, Nachversicherung des Kindes und der Kassenbonus als Beitragshilfe. Kein pauschales Erstattungsversprechen.',
+      description: 'Ambulanter Vorsorgetopf ab Versicherungsbeginn, stationäre Grenzen bei dieser Entbindung, Nachversicherung des Kindes und der Kassenbonus als Beitragshilfe. Kein pauschales Erstattungsversprechen.',
       inLanguage: 'de-DE',
       isPartOf: { '@id': 'https://healio.de/#website' },
       about: { '@id': 'https://healio.de/#organization' },

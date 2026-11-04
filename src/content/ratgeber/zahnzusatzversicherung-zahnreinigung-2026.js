@@ -83,7 +83,7 @@ export const article = {
             ['Bayerische ZAHN Smart', 'bis 80 EUR', '80 EUR je Kalenderjahr', 'keine'],
             ['Bayerische ZAHN Komfort', 'bis 100 EUR je Behandlung', 'höchstens 150 EUR je Kalenderjahr', 'keine'],
             ['Bayerische ZAHN Prestige', 'bis 100 EUR je Behandlung', 'höchstens 200 EUR je Kalenderjahr', 'keine'],
-            ['UKV ZahnPRIVAT 100', '100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung', 'ohne Jahresdeckel', 'keine'],
+            ['UKV ZahnPRIVAT 100', 'Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten', 'ohne Jahresdeckel', 'keine'],
             ['UKV ZahnPRIVAT 90', 'Erstattung nach dem Satz der Stufe', 'ohne Jahresdeckel', 'keine'],
             ['UKV ZahnPRIVAT 75', 'Erstattung nach dem Satz der Stufe', 'eigene Jahresgrenze, Höhe im Tarifrechner', 'keine']
           ],
@@ -153,7 +153,7 @@ export const article = {
     { question: 'Welche Zahnzusatzversicherung zahlt die Zahnreinigung?', answer: 'Viele Zahntarife zahlen die professionelle Zahnreinigung. Bei der Bayerischen sind es je nach Tarif 80 EUR bis 200 EUR im Kalenderjahr, bei der UKV in ZahnPRIVAT 90 und 100 ohne Jahresdeckel. In ZahnPRIVAT 75 gilt eine eigene Jahresgrenze.' },
     { question: 'Gibt es eine Zahnreinigung-Versicherung ohne Wartezeit?', answer: 'Ja. Die Zahntarife der Bayerischen und der UKV haben keine Wartezeiten. Die erste Reinigung nach Vertragsbeginn zählt schon.' },
     { question: 'Wie oft im Jahr zahlt die Zahnzusatzversicherung die PZR?', answer: 'Das hängt vom Tarif ab. Manche begrenzen den Betrag je Behandlung und je Jahr, etwa ZAHN Komfort mit 100 EUR je Behandlung und 150 EUR im Jahr. Ohne Jahresdeckel zählt nur, was erstattungsfähig ist.' },
-    { question: 'Wird der Zuschuss der Krankenkasse angerechnet?', answer: 'Kasse und Zusatzversicherung erstatten zusammen nie mehr als die Rechnung. UKV ZahnPRIVAT 100 erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Reiche den Satzungszuschuss deiner Kasse deshalb immer mit ein.' },
+    { question: 'Wird der Zuschuss der Krankenkasse angerechnet?', answer: 'Kasse und Zusatzversicherung erstatten zusammen nie mehr als die Rechnung. In UKV ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten. Reiche den Satzungszuschuss deiner Kasse deshalb immer mit ein.' },
     { question: 'Lohnt sich eine Zahnzusatzversicherung nur wegen der Zahnreinigung?', answer: 'Meistens nicht. Der Jahresbeitrag liegt in der Regel über der PZR-Leistung, bei ZAHN Smart etwa 152,40 EUR Beitrag für einen 33-Jährigen gegen höchstens 80 EUR für die Reinigung. Sinnvoll wird der Tarif, wenn du auch Zahnersatz mitversichern willst.' }
   ],
   onward: {

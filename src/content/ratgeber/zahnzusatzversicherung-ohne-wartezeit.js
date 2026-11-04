@@ -104,7 +104,7 @@ export const article = {
           items: [
             {
               lead: 'ZahnPRIVAT 75:',
-              text: '75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig.',
+              text: 'Kasse und Tarif zahlen zusammen 75 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig.',
             },
             {
               lead: 'ZahnPRIVAT 90:',
@@ -112,7 +112,7 @@ export const article = {
             },
             {
               lead: 'ZahnPRIVAT 100:',
-              text: '100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Keine Wartezeiten, professionelle Zahnreinigung ohne Jahresdeckel.',
+              text: 'Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Keine Wartezeiten, professionelle Zahnreinigung ohne Jahresdeckel.',
             },
           ],
         },
@@ -216,7 +216,7 @@ export const article = {
           type: 'costCard',
           title: 'Ein Implantat, drei Fälle',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR. In den ersten beiden Zeilen ging der Zahn erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR. In den ersten beiden Zeilen ging der Zahn erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant.',
           caption: 'Kostenkarte: Einzelzahn-Implantat für 2.500 EUR',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [

@@ -287,7 +287,7 @@ for (const article of ratgeberArticles) {
 const schwanger = getRatgeberArticle(SCHWANGER_SLUG);
 if (schwanger) {
   const ctaText = (schwanger.internalCta?.blocks || []).map((block) => block.text).join(' ');
-  expect(/Vorsorge-Topf der SDK/.test(ctaText) && /Wähle dort deshalb eine SDK-Stufe\./.test(ctaText), 'Der Schwangerschafts-Button muss den Vorsorge-Topf der SDK und die Wahl einer SDK-Stufe nennen.');
+  expect(/Vorsorgetopf der SDK/.test(ctaText) && /Wähle dort deshalb eine SDK-Stufe\./.test(ctaText), 'Der Schwangerschafts-Button muss den Vorsorge-Topf der SDK und die Wahl einer SDK-Stufe nennen.');
   expect(/Vorsorge-Baustein der UKV/.test(ctaText) && /für eine bestehende Schwangerschaft nicht gedacht/.test(ctaText), 'Der Schwangerschafts-Button muss sagen, dass der UKV-Vorsorge-Baustein für eine bestehende Schwangerschaft nicht gedacht ist.');
   expect(/50 bis 100 Prozent/.test(ctaText) && /200 bis 500 EUR in zwei Kalenderjahren/.test(ctaText), 'Die Zahlen im Schwangerschafts-Button gehören zur Tabelle (50 bis 100 Prozent, 200 bis 500 EUR in zwei Kalenderjahren).');
   // Zahlen gegen die Tabelle des Artikels: kleinste und groesste Erstattung und Hoechstbetrag.
@@ -317,13 +317,14 @@ if (schwanger) {
 }
 
 // /ambulant: Der freiwillige UKV-Baustein bleibt im Einstieg kurz. Der Hinweis
-// auf den SDK-Vorsorge-Topf bei festgestellter Schwangerschaft ist in DE und EN
+// auf den SDK-Vorsorge-Topf in der Schwangerschaft ist in DE und EN
 // im vorhandenen Aufklapper „Alle Details“ erhalten. Das entspricht Franks
-// Präzisierung vom 10.10.2026 und dem check-ukv-vorsorge-contract.mjs.
+// Präzisierung vom 10.10.2026 und dem check-ukv-vorsorge-contract.mjs; seit
+// 04.11.2026 ohne Zusage für eine schon festgestellte Schwangerschaft.
 const ambulantDe = JSON.parse(read('src/i18n/locales/de/ambulant.json')).vorsorgeBaustein;
 const ambulantEn = JSON.parse(read('src/i18n/locales/en/ambulant.json')).vorsorgeBaustein;
 expect(
-  ambulantDe?.pregnancyNote === 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.',
+  ambulantDe?.pregnancyNote === 'In der Schwangerschaft ist der Vorsorgetopf der SDK der richtige Weg: Er zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit.',
   'ambulant.json (DE) braucht im Vorsorge-Baustein den Hinweis auf den Vorsorge-Topf der SDK bei festgestellter Schwangerschaft.',
 );
 expect(
@@ -752,7 +753,7 @@ const builtAmbulant = path.join(root, 'dist', 'ambulant', 'index.html');
 if (fs.existsSync(builtAmbulant)) {
   const html = fs.readFileSync(builtAmbulant, 'utf8');
   if (html.includes('data-healio-ambulant="vorsorge-baustein"')) {
-    expect(html.includes('Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.'), 'Der gebaute Vorsorge-Baustein auf /ambulant muss den Hinweis auf den SDK-Vorsorge-Topf zeigen.');
+    expect(html.includes('In der Schwangerschaft ist der Vorsorgetopf der SDK der richtige Weg: Er zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit.'), 'Der gebaute Vorsorge-Baustein auf /ambulant muss den Hinweis auf den SDK-Vorsorge-Topf zeigen.');
   }
 }
 

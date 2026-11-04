@@ -133,7 +133,7 @@ export const article = {
           type: 'costCard',
           title: 'Krone, Brücke und Implantat: Eigenanteil mit und ohne Zahntarif',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Zahn ging erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. Die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR. Der Zahn ging erst nach Vertragsbeginn verloren, bei Vertragsbeginn war nichts angeraten oder geplant, außer in der letzten Zeile.',
           caption: 'Kostenkarte: drei Fälle ohne Bonusheft, Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [

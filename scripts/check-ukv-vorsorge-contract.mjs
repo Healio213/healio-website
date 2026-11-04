@@ -184,8 +184,10 @@ for (const [file, source] of Object.entries(naturSources)) {
 //     Versicherungsfall vor Beginn. Der Satz bleibt unter den Leistungsdetails
 //     erhalten. Frank möchte den optionalen Einstieg bewusst kurz halten.
 //     Er ist die einzige Stelle, an der „Schwangerschaft“ vorkommen darf.
-const pregnancyNoteDe = 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg.';
-const pregnancyNoteEn = 'For a pregnancy that has already been confirmed, the SDK prevention pot is the right route.';
+//     Seit 04.11.2026 ohne Zusage für eine schon festgestellte Schwangerschaft
+//     (Frank, Variante B bis zur schriftlichen Antwort der SDK).
+const pregnancyNoteDe = 'In der Schwangerschaft ist der Vorsorgetopf der SDK der richtige Weg: Er zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit.';
+const pregnancyNoteEn = 'During pregnancy, the SDK prevention pot is the right route: it pays for check-ups from the start of cover, with no waiting period.';
 assert.equal(de.pregnancyNote, pregnancyNoteDe, 'DE braucht den Hinweis auf den SDK-Vorsorge-Topf für eine festgestellte Schwangerschaft.');
 assert.equal(en.pregnancyNote, pregnancyNoteEn, 'EN braucht den Hinweis auf den SDK-Vorsorge-Topf für eine festgestellte Schwangerschaft.');
 assert(detailsPart.indexOf("text('pregnancyNote')") > detailsPart.indexOf("text('preventionRule')"), 'Der Schwangerschafts-Hinweis bleibt direkt bei den Leistungsdetails erhalten.');

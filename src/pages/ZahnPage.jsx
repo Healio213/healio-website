@@ -360,7 +360,7 @@ const ZahnPage = () => {
           mobileSwipe
           calculatorProps={{
             tarifTypes: 'Zahn',
-            defaultMonatsbeitrag: 10,
+            defaultMonatsbeitrag: 12,
             tariffInfoText: tZahn('bonusRechner.tariffInfo'),
             effectiveLabel: tZahn('bonusRechner.effectiveLabel'),
             effectiveValue: tZahn('bonusRechner.effectiveValue'),

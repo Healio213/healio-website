@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Zahnersatz bis zu <highlight>100 % erstattet</highlight>. Den Beitrag zahlt dein IKK Bonus mit.",
-    "subtitle": "Zahnzusatzschutz mit 30 Jahren ab rund 10 EUR im Monat. Erst die richtige Kasse, dann der Bonus: Der IKK classic Bonus kann den Beitrag bis zu 100 % zurückholen, wie viel genau, hängt von den Bonusmaßnahmen ab, die du erfüllst.",
+    "subtitle": "Zahnzusatzschutz mit 30 Jahren ab rund 12 EUR im Monat. Erst die richtige Kasse, dann der Bonus: Der IKK classic Bonus kann den Beitrag bis zu 100 % zurückholen, wie viel genau, hängt von den Bonusmaßnahmen ab, die du erfüllst.",
     "ikkNote": "<strong>Kassenbonus sinnvoll einordnen:</strong> KassenBoost vergleicht Beitrag, erreichbaren Bonus und Leistungen getrennt. So entscheidest du selbst, ob der günstigste Beitrag oder der größte persönliche Vorteil für dich zählt.",
     "ctaCalculate": "Passenden Tarif finden",
     "ctaBenefits": "Leistungen ansehen",
@@ -220,7 +220,7 @@
         "title": "ZahnPRIVAT 75: solider Einstieg mit kleinerem Beitrag",
         "text": "Bei gesunden Zähnen und Preis-Fokus ist ZahnPRIVAT 75 die Einstiegsstufe der UKV.",
         "reasons": [
-          "75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet",
+          "Kasse und Tarif zahlen zusammen 75 % der Rechnung, auch wenn die Kasse nicht vorleistet",
           "Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig",
           "Zahnstaffel: bis 1.000 EUR im ersten Kalenderjahr, zusammen bis 2.000 EUR in den ersten zwei und bis 3.000 EUR in den ersten drei Jahren, danach unbegrenzt"
         ],
@@ -340,7 +340,7 @@
         },
         {
           "situation": "Maximale Leistung bei gesunden Zähnen",
-          "empfehlung": "UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet, ohne Wartezeiten.",
+          "empfehlung": "UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der Rechnung, auch wenn die Kasse nicht vorleistet, ohne Wartezeiten.",
           "weg": "ukv"
         },
         {
@@ -370,7 +370,7 @@
         },
         {
           "situation": "Günstiger Einstieg mit starker Leistung",
-          "empfehlung": "UKV ZahnPRIVAT 75: 75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, ohne Wartezeiten. Mehr Erstattung bieten die Stufen 90 und 100.",
+          "empfehlung": "UKV ZahnPRIVAT 75: Kasse und Tarif zahlen zusammen 75 % der Rechnung, ohne Wartezeiten. Mehr Erstattung bieten die Stufen 90 und 100.",
           "weg": "ukv"
         }
       ]
@@ -513,7 +513,7 @@
     "cta": "Ja, Zahn-Konzept erklären"
   },
   "bonusRechner": {
-    "tariffInfo": "Zahnzusatz, mit 30 Jahren ab rund 10 € im Monat",
+    "tariffInfo": "Zahnzusatz, mit 30 Jahren ab rund 12 € im Monat",
     "effectiveLabel": "Dafür bekommst du beim Zahnarzt",
     "effectiveValue": "bis zu 100 % Erstattung",
     "effectiveNote": "Beispielrechnung mit deinen Angaben. Der Zuschuss ist auf den nachgewiesenen Jahresbeitrag begrenzt; Beitrag, Bonus und Versicherbarkeit hängen von den jeweils geltenden Bedingungen ab."

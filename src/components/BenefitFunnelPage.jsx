@@ -35,9 +35,9 @@ const TOPICS = {
     lead: 'So viel Zuschuss kann dir die IKK classic in der Schwangerschaft zahlen. Nutz den Zuschuss für den Schutz, der jetzt zu dir passt: ambulant für deine Vorsorge, stationär für dich und dein Kind.',
     leadSecondary: 'Der Höchstwert gilt, wenn du alle Vorsorgen und Aktivitäten nachweist. In der breiten Masse sind es 400 bis 700 EUR im Jahr. Wo Schutz jetzt nicht mehr greift, sagen wir dir genauso deutlich.',
     seoTitle: 'Zusatzversicherung schwanger: was jetzt noch geht | Healio',
-    seoDescription: 'Der ambulante Vorsorge-Topf greift auch bei bestehender Schwangerschaft. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
+    seoDescription: 'Der ambulante Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Stationär ist diese Geburt zu spät. Dazu der Kassenbonus, der den Beitrag mitträgt.',
     protectionTitle: 'Vorsorge ohne Wartezeit',
-    protectionText: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder Streptokokken, auch wenn deine Schwangerschaft schon festgestellt ist. Wartezeiten gibt es nicht. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
+    protectionText: 'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Dazu gehören Selbstzahlerleistungen wie Feinultraschall, Toxoplasmose oder Streptokokken. Im nächsten Schritt siehst du die vier Stufen mit Beitrag.',
     caution: 'Du bist schon schwanger? Beantworte die Gesundheitsfragen im Antrag vollständig, der Versicherer prüft den Antrag. Was vor Versicherungsbeginn schon läuft, ist nicht mitversichert.',
     product: '/ambulant', productLabel: 'Ambulante Tarife und Beitrag ansehen',
   },
@@ -49,7 +49,7 @@ const TOPICS = {
 // hospitalArguments[0]; jede Karte springt zu ihrem Abschnitt.
 const heroOffers = [
   { href: '#bonus-check', code: 'Kassenbonus', label: 'Bis zu 1.155\u00a0EUR laut Satzung', note: 'IKK classic, jede Vorsorge zählt einzeln', tone: 'rose' },
-  { href: '#zusatzschutz', code: 'Ambulant, jetzt', label: 'Vorsorge ohne Wartezeit', note: 'Auch wenn deine Schwangerschaft schon festgestellt ist', tone: 'mint' },
+  { href: '#zusatzschutz', code: 'Ambulant, jetzt', label: 'Vorsorge ohne Wartezeit', note: 'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn', tone: 'mint' },
   { href: '#klinikschutz', code: 'Dein Kind', label: 'Ohne Gesundheitsprüfung versichert', note: 'Wenn ein Elternteil rechtzeitig im Klinik-Tarif versichert ist', tone: 'butter' },
 ];
 const offerTone = {
@@ -64,9 +64,9 @@ const paths = [
     id: 'ambulant', kicker: 'Ambulant, jetzt',
     title: 'Vorsorge, die du gerade brauchst',
     body: [
-      'Der Vorsorge-Topf der SDK AP-Tarife greift auch dann, wenn deine Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in diesen Tarifen nicht. Je nach Stufe werden 50 bis 100 Prozent erstattet, bei AP1 bis zu 500 EUR je zwei Kalenderjahre.',
+      'Der Vorsorgetopf der SDK zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Je nach Stufe werden 50 bis 100 Prozent erstattet, bei AP1 bis zu 500 EUR je zwei Kalenderjahre.',
       'Bezahlt werden damit die Untersuchungen, die dir deine Praxis als Selbstzahlerleistung anbietet: Feinultraschall, zusätzliche Ultraschalls, Toxoplasmose, Streptokokken und Cytomegalie.',
-      'Nicht dabei sind die Entbindung, die Behandlung von Beschwerden und Komplikationen wegen der Schwangerschaft und gendiagnostische Tests. Nur auf Auslandsreisen zahlt der Tarif auch bei Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten. Deine Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.',
+      'Nicht dabei sind die Entbindung, die Behandlung von Beschwerden und Komplikationen wegen der Schwangerschaft und gendiagnostische Tests. Nur auf Auslandsreisen zahlt der Tarif auch bei Komplikationen, Frühgeburten bis zum Ende der 36. Woche und Fehlgeburten.',
     ],
   },
   {
@@ -110,7 +110,7 @@ const film = [['10 gesetzliche Schwangerschaftsvorsorgen', '300 EUR'], ['Ein ane
 // Kurzfassung für die Karten; die vollständigen Texte stehen im Aufklapper.
 // Einschränkungen (limit: true) stehen mit Hinweis-Symbol, nie mit Haken.
 const ambulantPoints = [
-  { text: 'Feinultraschall, Toxoplasmose, Streptokokken: Diese Selbstzahlerleistungen zahlt der Vorsorge-Topf, auch wenn du schon schwanger bist.' },
+  { text: 'Feinultraschall, Toxoplasmose, Streptokokken: Diese Selbstzahlerleistungen zahlt der Vorsorgetopf ab Versicherungsbeginn.' },
   { text: 'Keine Wartezeit, je nach Stufe 50 bis 100 Prozent Erstattung.' },
   { text: 'Nicht dabei sind Entbindung und Komplikationen. Beantworte die Gesundheitsfragen im Antrag vollständig.', limit: true },
 ];
@@ -170,7 +170,7 @@ export default function BenefitFunnelPage() {
   const sdkHospitalUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
   const faq = [
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
-    ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Für die restlichen Vorsorgetermine ja, denn die AP-Tarife haben keine Wartezeit und der Vorsorge-Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen. Deine bestehende Schwangerschaft gehört in die Gesundheitsfragen, der Versicherer prüft den Antrag.'],
+    ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, und gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen.'],
     ['Was ist mit Komplikationen, wenn ich jetzt abschließe?', 'In Deutschland zahlt der ambulante Tarif weder die Entbindung noch die Behandlung von Beschwerden oder Komplikationen wegen der Schwangerschaft. Auf Auslandsreisen sind Komplikationen in der Schwangerschaft, Frühgeburten bis zum Ende der 36. Schwangerschaftswoche und Fehlgeburten dagegen versichert.'],
     ['Wer zahlt meine Hebamme?', 'Die Hebammenhilfe in der Schwangerschaft, bei der Geburt und im Wochenbett zahlt deine Krankenkasse, auch den Rückbildungskurs. Bei der SDK übernehmen die Klinik-Tarife SP1 und SP2 zusätzlich die gesondert berechenbaren Leistungen einer Beleghebamme bei der Geburt im Krankenhaus. Die Betreuung zu Hause, Hausgeburt und Geburtshaus gehören dort nicht dazu. Ist die Schwangerschaft beim Antrag schon ärztlich festgestellt, gilt das bei der SDK nicht. Bei der Bayerischen erstatten die Klinik-Tarife Komfort und Prestige laut Produktunterlagen Hebammenkosten, die über die Leistungen der Krankenkasse hinausgehen, auch für privat abrechnende Hebammen. Für die Entbindung gilt eine Wartezeit von acht Monaten, und eine beim Antrag schon bestehende Schwangerschaft ist nicht mitversichert.'],
     ['Muss ich für den Bonus jede Vorsorge einzeln einreichen?', 'Ja. Jede Mutterschaftsvorsorge bekommt ein eigenes Antragsfeld, und ein schriftlicher Nachweis ist Pflicht. Der Mutterpass reicht dafür aus, wenn Name, Maßnahme, Praxis und Datum daraus hervorgehen. Alle Maßnahmen müssen in dasselbe Kalenderjahr fallen. Für das Bonusjahr 2026 muss dein vollständiger Antrag bis zum 31.03.2027 bei der IKK classic sein.'],

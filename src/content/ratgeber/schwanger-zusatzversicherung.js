@@ -68,7 +68,7 @@ export const article = {
 
   metaTitle: 'Zusatzversicherung Schwangerschaft 2026: was jetzt geht | Healio',
   metaDescription:
-    'Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorge-Topf jetzt noch zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
+    'Zusatzversicherung Schwangerschaft 2026: Was der ambulante Vorsorgetopf ab Versicherungsbeginn zahlt, warum die Geburt stationär zu spät ist und was fürs Kind gilt.',
 
   publishedAt: '2026-09-28',
   publishedAtLabel: '28. September 2026',
@@ -82,11 +82,11 @@ export const article = {
 
   headline: 'Schwanger: welcher Zusatzschutz jetzt noch geht und welcher zu spät kommt',
   earlyCta: {
-    text: 'Vorsorge und Entbindung sind zwei verschiedene Dinge. Prüfe die SDK-Vorsorge-Stufen und deinen Beitrag. Die bestehende Schwangerschaft gehört in den Antrag; der Versicherer entscheidet über die Annahme.',
+    text: 'Vorsorge und Entbindung sind zwei verschiedene Dinge. Prüfe die SDK-Vorsorge-Stufen und deinen Beitrag.',
     label: 'SDK-Vorsorge prüfen',
   },
   lead:
-    'Eine Zusatzversicherung in der Schwangerschaft geht noch, aber nicht mehr für alles. Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorge-Topf greift auch bei bereits festgestellter Schwangerschaft, die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
+    'Eine Zusatzversicherung in der Schwangerschaft geht noch, aber nicht mehr für alles. Wenn die Schwangerschaft schon feststeht, ist ein Teil des Zusatzschutzes erreichbar und ein anderer Teil nicht mehr: Der ambulante Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Die Entbindung selbst bekommst du stationär nicht mehr versichert. Genau in dieser Phase liegt der Kassenbonus so hoch wie in kaum einer anderen Lebenslage, weil jede Mutterschaftsvorsorge einzeln zählt.',
 
   sections: [
     {
@@ -98,7 +98,7 @@ export const article = {
           items: [
             {
               lead: 'Ambulant geht noch etwas.',
-              text: 'Der Vorsorge-Topf der SDK AP-Tarife zahlt die Untersuchungen, die die Kasse nicht übernimmt, und er greift auch dann, wenn die Schwangerschaft bereits festgestellt ist. Wartezeiten gibt es in den AP-Tarifen nicht. Die Schwangerschaft gehört trotzdem in den Antrag, der Versicherer prüft sie.',
+              text: 'Der Vorsorgetopf der SDK zahlt die Untersuchungen, die die Kasse nicht übernimmt, ab Versicherungsbeginn, ohne Wartezeit.',
             },
             {
               lead: 'Die Geburt ist stationär zu spät.',
@@ -130,7 +130,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant ist der Abschluss möglich. Die SDK AP-Tarife haben keine Wartezeiten, der Schutz greift ab Versicherungsbeginn. Der Vorsorge-Topf nennt "die Vorsorge während der Schwangerschaft" ausdrücklich als versicherte Leistung, ohne die Einschränkung, dass die Schwangerschaft erst später eintreten müsste. Die bestehende Schwangerschaft gehört in die Gesundheitsfragen des Antrags. Der Versicherer prüft sie, und was am Ende in deinem Vertrag steht, siehst du in der Police.',
+          text: 'Ambulant ist der Abschluss möglich. Die SDK AP-Tarife haben keine Wartezeiten, der Schutz greift ab Versicherungsbeginn. Der Vorsorgetopf nennt "die Vorsorge während der Schwangerschaft" ausdrücklich als versicherte Leistung. Was am Ende in deinem Vertrag steht, siehst du in der Police.',
         },
         {
           type: 'paragraph',
@@ -294,7 +294,7 @@ export const article = {
           head: ['Versichert', 'Nicht versichert', 'Zu prüfen'],
           rows: [
             [
-              'Vorsorge während der Schwangerschaft, ambulant im Vorsorge-Topf, auch bei bestehender Schwangerschaft',
+              'Vorsorge während der Schwangerschaft, ambulant im Vorsorgetopf, ab Versicherungsbeginn',
               'Behandlung wegen Schwangerschaft, Schwangerschaftsbeschwerden, Entbindung',
               'Vorversicherungszeit des Elternteils vor der Geburt: bei der Bayerischen drei Monate, bei der SDK keine',
             ],
@@ -346,7 +346,7 @@ export const article = {
     {
       question: 'Welche Zusatzversicherung ist in der Schwangerschaft sinnvoll?',
       answer:
-        'Wenn die Schwangerschaft schon feststeht, ist der ambulante Tarif der Baustein, der jetzt noch etwas bringt: Sein Vorsorge-Topf zahlt Selbstzahleruntersuchungen wie Feinultraschall oder Toxoplasmose, ohne Wartezeit. Ein Klinik-Tarif zahlt bei dieser Geburt nicht, er zählt für die Zeit danach und als Grundlage für den Klinik-Tarif deines Kindes.',
+        'Wenn die Schwangerschaft schon feststeht, ist der ambulante Tarif der Baustein, den du jetzt noch abschließen kannst: Sein Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, etwa Feinultraschall oder Toxoplasmose. Ein Klinik-Tarif zahlt bei dieser Geburt nicht, er zählt für die Zeit danach und als Grundlage für den Klinik-Tarif deines Kindes.',
     },
     {
       question: 'Gibt es eine Zusatzversicherung, die meine Entbindung noch zahlt?',
@@ -356,7 +356,7 @@ export const article = {
     {
       question: 'Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?',
       answer:
-        'Für die restlichen Vorsorgetermine ja, denn es gibt keine Wartezeit und der Topf gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen noch anstehen.',
+        'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, und gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen noch anstehen.',
     },
     {
       question: 'Zahlt der ambulante Tarif meine Hebamme?',
@@ -397,7 +397,7 @@ export const article = {
     blocks: [
       {
         type: 'paragraph',
-        text: 'Für eine schon festgestellte Schwangerschaft ist der Vorsorge-Topf der SDK der richtige Weg. Er gilt ohne Wartezeit und erstattet Feinultraschall, Toxoplasmose und die übrigen Vorsorge-Untersuchungen aus der Tabelle oben je nach Stufe zu 50 bis 100 Prozent, mit 200 bis 500 EUR in zwei Kalenderjahren. Gentests wie NIPT gehören nicht dazu. Der kleine Vorsorge-Baustein der UKV auf derselben Seite ist für eine bestehende Schwangerschaft nicht gedacht. Wähle dort deshalb eine SDK-Stufe.',
+        text: 'In der Schwangerschaft ist der Vorsorgetopf der SDK der richtige Weg. Er zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, und erstattet Feinultraschall, Toxoplasmose und die übrigen Vorsorgeuntersuchungen aus der Tabelle oben je nach Stufe zu 50 bis 100 Prozent, mit 200 bis 500 EUR in zwei Kalenderjahren. Gentests wie NIPT gehören nicht dazu. Der kleine Vorsorge-Baustein der UKV auf derselben Seite ist für eine bestehende Schwangerschaft nicht gedacht. Wähle dort deshalb eine SDK-Stufe.',
       },
     ],
   },

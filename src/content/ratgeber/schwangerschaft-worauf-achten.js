@@ -261,7 +261,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Ambulant geht noch etwas. Vor dem Abschluss stehen Gesundheitsfragen, die wahrheitsgemäß zu beantworten sind; je nach Vorgeschichte kann ein Risikozuschlag dazukommen. Der Vorsorge-Topf der SDK AP-Tarife zahlt genau die Untersuchungen, die die Kasse nicht übernimmt. Er greift ohne Wartezeit und auch dann, wenn die Schwangerschaft bereits festgestellt ist. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Nur auf Auslandsreisen sind auch Komplikationen, Frühgeburten bis zum Ende der 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch versichert.',
+          text: 'Ambulant geht noch etwas. Vor dem Abschluss stehen Gesundheitsfragen, die wahrheitsgemäß zu beantworten sind; je nach Vorgeschichte kann ein Risikozuschlag dazukommen. Der Vorsorgetopf der SDK zahlt genau die Untersuchungen, die die Kasse nicht übernimmt, ab Versicherungsbeginn und ohne Wartezeit. Je nach Tarifstufe werden 50 bis 100 Prozent erstattet, mit einem Höchstbetrag zwischen 200 und 500 EUR je zwei Kalenderjahre. Nicht im Topf sind gendiagnostische Untersuchungen wie NIPT und die Behandlung wegen der Schwangerschaft selbst. Nur auf Auslandsreisen sind auch Komplikationen, Frühgeburten bis zum Ende der 36. Woche, Fehlgeburten und ein medizinisch indizierter Abbruch versichert.',
         },
         {
           type: 'paragraph',
@@ -389,7 +389,7 @@ export const article = {
     {
       question: 'Kann ich in der Schwangerschaft noch eine Zusatzversicherung abschließen?',
       answer:
-        'Ambulant ist ein Abschluss in der Regel noch möglich. Über den Antrag entscheidet der Versicherer nach den Gesundheitsfragen, eine Aufnahme ist auch mit Vorerkrankungen möglich, teils mit Risikozuschlag. Der Vorsorge-Topf greift dann ohne Wartezeit und auch bei bereits festgestellter Schwangerschaft. Stationär bekommst du diese Entbindung nicht mehr versichert.',
+        'Ambulant ist ein Abschluss in der Regel noch möglich. Über den Antrag entscheidet der Versicherer nach den Gesundheitsfragen, eine Aufnahme ist auch mit Vorerkrankungen möglich, teils mit Risikozuschlag. Der Vorsorgetopf zahlt dann Untersuchungen ab Versicherungsbeginn, ohne Wartezeit. Stationär bekommst du diese Entbindung nicht mehr versichert.',
     },
     {
       question: 'Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?',

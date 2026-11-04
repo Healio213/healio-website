@@ -29,11 +29,11 @@
  *   - Gesundheitsfragen ja, keine Ablehnung (Rote Linie, /ambulant),
  *   - Zahn, stationär, Tier: Formulierungen der Karten auf /leistungen
  *     (src/i18n/locales/de/leistungen.json, paths.items),
- *   - Schwangerschaft: Vorsorge-Topf auch bei festgestellter Schwangerschaft
- *     (src/components/BenefitFunnelPage.jsx),
+ *   - Schwangerschaft: Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn,
+ *     ohne Wartezeit (src/components/BenefitFunnelPage.jsx, Frank 04.11.2026),
  *   - ambulant/schwangerschaft: Vorsorge-Untersuchungen wie Feinultraschall
- *     je nach Tarif 50 bis 100 Prozent, auch bei festgestellter
- *     Schwangerschaft (Ratgeber schwanger-zusatzversicherung: Tabelle
+ *     je nach Tarif 50 bis 100 Prozent, ab Versicherungsbeginn und ohne
+ *     Wartezeit (Ratgeber schwanger-zusatzversicherung: Tabelle
  *     „Vorsorge-Topf je Tarifstufe“, „Kurz gesagt“, Schlussabsatz).
  *
  * Eine Abschluss-Karte (Frank, 27.10.2026): Am Ende steht genau eine Karte auf
@@ -145,7 +145,7 @@ export const LEISTUNGSZIELE = Object.freeze({
         anker: 'tarifwahl',
         mitte: {
           frage: 'Vorsorge wie den Feinultraschall selbst zahlen?',
-          text: 'Der Baustein ambulant erstattet sie je nach Tarif zu 50 bis 100 Prozent, auch bei festgestellter Schwangerschaft.',
+          text: 'Der Baustein ambulant erstattet sie je nach Tarif zu 50 bis 100 Prozent, ab Versicherungsbeginn und ohne Wartezeit.',
           label: 'SDK-Tarife ansehen',
         },
       },
@@ -200,7 +200,7 @@ export const LEISTUNGSZIELE = Object.freeze({
     alleBausteine: true,
     mitte: {
       frage: 'Schon schwanger?',
-      text: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie den Feinultraschall, auch bei festgestellter Schwangerschaft.',
+      text: 'Der Vorsorgetopf zahlt Selbstzahlerleistungen wie den Feinultraschall ab Versicherungsbeginn, ohne Wartezeit.',
       label: 'Was jetzt noch geht',
     },
     ende: {
@@ -212,7 +212,7 @@ export const LEISTUNGSZIELE = Object.freeze({
       hebamme: {
         mitte: {
           frage: 'Werdende Eltern fragen dich nach Zuschüssen?',
-          text: 'Der Vorsorge-Topf zahlt Selbstzahlerleistungen wie den Feinultraschall, auch bei festgestellter Schwangerschaft.',
+          text: 'Der Vorsorgetopf zahlt Selbstzahlerleistungen wie den Feinultraschall ab Versicherungsbeginn, ohne Wartezeit.',
         },
         ende: {
           titel: 'Was werdenden Eltern jetzt noch hilft',

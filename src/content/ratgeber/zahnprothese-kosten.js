@@ -174,7 +174,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: Teilprothese in der Regelversorgung',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR, die Beträge der Karte liegen darunter. Der Vertrag besteht schon, bevor die Zähne verloren gehen und bevor die Prothese angeraten wird, außer in der letzten Zeile.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten. Im ersten Kalenderjahr begrenzt die Zahnstaffel die Erstattung auf bis zu 1.000 EUR, die Beträge der Karte liegen darunter. Der Vertrag besteht schon, bevor die Zähne verloren gehen und bevor die Prothese angeraten wird, außer in der letzten Zeile.',
           caption: 'Eigenanteil bei einer Zahnprothese, Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -219,7 +219,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Der Tarif erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. ZahnPRIVAT 75 erstattet 75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch dort sind Implantate, Brücken und Prothesen erstattungsfähig. Beide Tarife kommen ohne Wartezeiten aus.',
+          text: 'Bei der UKV ZahnPRIVAT 100 sind Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig. Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %, auch dort sind Implantate, Brücken und Prothesen erstattungsfähig. Beide Tarife kommen ohne Wartezeiten aus.',
         },
         {
           type: 'honest',

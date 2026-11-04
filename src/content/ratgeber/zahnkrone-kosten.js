@@ -174,7 +174,7 @@ export const article = {
           type: 'costCard',
           title: 'Beispiel: Zahnkrone mit und ohne Tarif',
           icon: 'calculator',
-          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR.',
+          tariffLabel: 'Gerechnet mit UKV ZahnPRIVAT 100 im ersten Kalenderjahr: Kasse und Tarif zahlen zusammen 100 % der erstattungsfähigen Kosten, die Zahnstaffel begrenzt die Erstattung im ersten Kalenderjahr auf bis zu 1.000 EUR.',
           caption: 'Eigenanteil bei einer Krone, Festzuschuss bis 31.12.2026',
           head: ['Beispiel', 'Kasse zahlt', 'Du ohne Tarif', 'Du mit Tarif'],
           rows: [
@@ -216,7 +216,7 @@ export const article = {
             },
             {
               title: 'Tarif erstattet',
-              text: 'Dein Zahntarif erstattet nach seinen Bedingungen, bei ZahnPRIVAT 100 zum Beispiel 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung.',
+              text: 'Dein Zahntarif erstattet nach seinen Bedingungen. Bei ZahnPRIVAT 100 zum Beispiel zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten.',
             },
           ],
         },
@@ -228,7 +228,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die UKV ZahnPRIVAT gibt es in drei Leistungsstufen ohne Wartezeiten. ZahnPRIVAT 100 erstattet 100 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. ZahnPRIVAT 75 erstattet 75 % der erstattungsfähigen Kosten nach Abzug der Kassenleistung, auch wenn die Kasse nicht vorleistet. Was zu den erstattungsfähigen Kosten zählt, steht in den Tarifbedingungen.',
+          text: 'Die UKV ZahnPRIVAT gibt es in drei Leistungsstufen ohne Wartezeiten. In ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der erstattungsfähigen Kosten, auch wenn die Kasse nicht vorleistet. In ZahnPRIVAT 75 sind es zusammen 75 %, auch wenn die Kasse nicht vorleistet. Was zu den erstattungsfähigen Kosten zählt, steht in den Tarifbedingungen.',
         },
         {
           type: 'paragraph',

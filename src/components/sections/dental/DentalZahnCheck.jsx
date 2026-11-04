@@ -23,14 +23,17 @@ import { ZAHN_CHECK_CARD_ID } from './zahnCheckScroll';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
+// Frank 04.11.2026: „Ja, aber schon fertig behandelt und abgerechnet“ (fertig)
+// nimmt denselben Weg wie „Nein“, für den Sofortschutz ist es dann zu spät.
 const needsQ4 = (answers) =>
-  answers.q1 === 'nein' && answers.q2 === 'keine' && answers.q3 === 'nein';
+  (answers.q1 === 'nein' || answers.q1 === 'fertig') && answers.q2 === 'keine' && answers.q3 === 'nein';
 
 // Franks Entscheidung vom 05.10.2026: Beim Zahn gibt es nur noch zwei Wege.
 // Die Bayerische (Zahntarif plus Baustein ZAHN Sofort) nur, wenn eine
 // Behandlung angeraten oder begonnen ist und weder Zähne fehlen noch eine
 // Vorgeschichte besteht. Alle anderen Situationen führen zur UKV ZahnPRIVAT,
-// auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn).
+// auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn) und eine
+// schon abgerechnete Behandlung (q1 fertig).
 const computeResult = (answers) => {
   if (answers.q2 === 'viele') return 'sonderViele';
   // Angeratenes Zahnziehen: Die Bayerische lehnt in Gesundheitsfrage 1 ab, bei der
@@ -131,11 +134,13 @@ const DentalZahnCheck = () => {
     (currentQuestionId === undefined ||
       answers.q2 === 'viele' ||
       answers.q2 === 'ziehen' ||
-      (answers.q1 === 'nein' && answers.q2 === 'wenige') ||
+      ((answers.q1 === 'nein' || answers.q1 === 'fertig') && answers.q2 === 'wenige') ||
       (answers.q1 === 'ja' && answers.q2 === 'wenige'));
 
   const resultKey = isDone ? computeResult(answers) : null;
   const result = resultKey ? content.results[resultKey] : null;
+  // Schon abgerechnete Behandlung: Hinweis im UKV-Ergebnis, Text ohne die Bedingung „nichts empfohlen“.
+  const nachBehandlung = answers.q1 === 'fertig' && result?.ctaType === 'ukv';
   // Only the neutral product label is shared with the callback dialog. Health
   // answers and the result variant stay inside this check's React state.
   const guidedTariff = result?.ctaType === 'ukv' ? 'UKV ZahnPRIVAT'
@@ -338,7 +343,13 @@ const DentalZahnCheck = () => {
                   <h3 className="mt-3 max-w-[22ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">
                     {result.title}
                   </h3>
-                  <p className="mt-3 max-w-2xl leading-6 text-slate-600 md:mt-4 md:leading-7">{result.text}</p>
+                  <p className="mt-3 max-w-2xl leading-6 text-slate-600 md:mt-4 md:leading-7">{nachBehandlung && result.textNachBehandlung ? result.textNachBehandlung : result.text}</p>
+                  {nachBehandlung && (
+                    <p data-zahn-nach-behandlung="" className="mt-4 max-w-2xl rounded-2xl border border-[#a6e9d2] bg-[#effbf6] px-4 py-3 text-base leading-6 text-slate-700 md:leading-7">
+                      <strong className="font-display font-extrabold text-[#075c43]">{content.nachBehandlungLabel}</strong>{' '}
+                      {content.nachBehandlung}
+                    </p>
+                  )}
 
                   <ul className="mt-5 grid gap-3 md:mt-6 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                     {result.reasons.map((reason) => (

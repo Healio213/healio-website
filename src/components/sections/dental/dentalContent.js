@@ -27,7 +27,7 @@ const de = {
     iconAlt: 'Freundliches Symbol für Zahnschutz',
     offersAria: 'Zahn-Situationen und ihr Weg im Überblick',
     offers: [
-      { code: 'UKV ZahnPRIVAT 100', label: 'Maximaler Zahnschutz', note: '100 % der erstattungsfähigen Kosten nach Kassenleistung, ohne Wartezeit' },
+      { code: 'UKV ZahnPRIVAT 100', label: 'Maximaler Zahnschutz', note: 'Kasse und Tarif zahlen zusammen 100 % der Rechnung, ohne Wartezeit' },
       { code: 'ZAHN Sofort', label: 'Behandlung steht an', note: 'In den letzten 2 Jahren empfohlen oder schon begonnen: bis zu 1.500 EUR Zuschuss möglich, Abschluss vor der Rechnung' },
       { code: 'UKV mit Zuschlag', label: 'Zähne fehlen schon', note: 'Bei 1 bis 3 fehlenden Zähnen Aufnahme mit Zuschlag je Zahn' },
       { code: 'UKV ZahnPRIVAT', label: 'Familie und Vorsorge', note: 'Kieferorthopädie und Zahnreinigung je nach Stufe' },
@@ -53,6 +53,10 @@ const de = {
     resultEyebrow: 'Dein nächster sinnvoller Schritt',
     warningLabel: 'Darauf kommt es an:',
     calculatorHintLabel: 'Wichtig für den UKV-Rechner:',
+    // Frank 04.11.2026: Hinweis im UKV-Ergebnis, wenn in Frage 1 „schon fertig
+    // behandelt und abgerechnet“ gewählt ist. Angeratenes bleibt beim Zahn draußen.
+    nachBehandlungLabel: 'Deine abgerechnete Behandlung:',
+    nachBehandlung: 'Sie zählt nicht rückwirkend und ist nicht versichert. Was nach Versicherungsbeginn neu nötig wird, ist versichert, ohne Wartezeiten. Beantworte die Antragsfragen vollständig, die UKV prüft die Angaben im Antrag.',
     trust: 'Deine Antworten werden weder gespeichert noch übertragen.',
     disclaimer: 'Der Check ist eine erste Orientierung. Verbindlich entscheidet der jeweilige Versicherer nach den Angaben im Antrag.',
     bonusLead: 'Dein Bonus kann deinen Tarifbeitrag ganz oder teilweise ausgleichen. Die Höhe hängt von deiner Krankenkasse und deinen Aktivitäten ab.',
@@ -71,6 +75,7 @@ const de = {
         ],
         options: {
           ja: { label: 'Ja, etwas steht an oder läuft schon', sub: 'Das zahlt ein normaler Zahntarif nicht, dafür gibt es den Sofortschutz. Auch ein Eintrag in deiner Zahnarzt-Akte aus den letzten 2 Jahren kann zählen.' },
+          fertig: { label: 'Ja, aber schon fertig behandelt und abgerechnet', sub: 'Die Rechnung ist gestellt, und sonst steht nichts an oder läuft. Für den Sofortschutz ist es dann zu spät.' },
           nein: { label: 'Nein, nichts davon', sub: 'Nichts läuft oder ist aktuell beabsichtigt; in den letzten 2 Jahren wurde nichts empfohlen' },
         },
       },
@@ -188,8 +193,9 @@ const de = {
         insurer: 'UKV · ZahnPRIVAT 100',
         title: 'Maximalen Zahnschutz prüfen',
         text: 'Wenn in den letzten 2 Jahren nichts empfohlen wurde, aktuell nichts beabsichtigt ist oder läuft und du hohen Schutz suchst, lohnt sich die Prüfung von ZahnPRIVAT 100.',
+        textNachBehandlung: 'Deine Behandlung ist abgerechnet, aktuell ist nichts beabsichtigt und nichts läuft, und du suchst hohen Schutz: Dann lohnt sich die Prüfung von ZahnPRIVAT 100.',
         reasons: [
-          '100 % der erstattungsfähigen Gesamtkosten einschließlich Kassenleistung, auch ohne deren Vorleistung',
+          'Kasse und Tarif zahlen zusammen 100 % der Rechnung, auch ohne Vorleistung der Kasse',
           'Implantate inklusive Knochenaufbau, Brücken und Prothesen erstattungsfähig',
           'Keine Wartezeiten, professionelle Zahnreinigung ohne Jahresdeckel',
         ],
@@ -204,8 +210,9 @@ const de = {
         insurer: 'UKV · ZahnPRIVAT 75',
         title: 'Leistung und Beitrag bewusst abwägen',
         text: 'Wenn in den letzten 2 Jahren nichts empfohlen wurde, aktuell nichts beabsichtigt ist oder läuft und du einen kleineren Beitrag suchst, ist ZahnPRIVAT 75 die Einstiegsstufe der UKV.',
+        textNachBehandlung: 'Deine Behandlung ist abgerechnet, aktuell ist nichts beabsichtigt und nichts läuft, und du suchst einen kleineren Beitrag: Dann ist ZahnPRIVAT 75 die Einstiegsstufe der UKV.',
         reasons: [
-          '75 % der erstattungsfähigen Gesamtkosten einschließlich Kassenleistung; deren Anteil wird abgezogen',
+          'Kasse und Tarif zahlen zusammen 75 % der Rechnung',
           'Keine Wartezeiten, Implantate, Brücken und Prothesen erstattungsfähig',
           'Keine pauschale Preiszusage, dein Beitrag hängt unter anderem vom Alter ab',
         ],
@@ -388,7 +395,7 @@ const en = {
     iconAlt: 'Friendly dental protection icon',
     offersAria: 'Dental situations and their route at a glance',
     offers: [
-      { code: 'UKV ZahnPRIVAT 100', label: 'Maximum dental cover', note: '100% of eligible costs after the health fund share, no waiting period' },
+      { code: 'UKV ZahnPRIVAT 100', label: 'Maximum dental cover', note: 'Health fund and plan together pay 100% of the bill, no waiting period' },
       { code: 'ZAHN Sofort', label: 'Treatment coming up', note: 'Recommended in the last 2 years or already started: subsidy of up to €1,500 possible, sign up before the invoice' },
       { code: 'UKV with surcharge', label: 'Teeth already missing', note: 'With 1 to 3 missing teeth, acceptance with a surcharge per tooth' },
       { code: 'UKV ZahnPRIVAT', label: 'Family and prevention', note: 'Orthodontics and teeth cleaning depending on the level' },
@@ -411,6 +418,8 @@ const en = {
     resultEyebrow: 'Your next sensible step',
     warningLabel: 'What matters:',
     calculatorHintLabel: 'Before you open the UKV calculator:',
+    nachBehandlungLabel: 'Your invoiced treatment:',
+    nachBehandlung: 'It does not count retroactively and is not covered. What becomes newly necessary after cover starts is covered, with no waiting periods. Answer the application questions in full; UKV assesses the information in the application.',
     trust: 'Your answers are neither stored nor transmitted.',
     disclaimer: 'The check is initial guidance. The insurer makes the binding decision from the information in the application.',
     bonusLead: 'Your bonus can offset all or part of your tariff premium. How much depends on your health fund and your activities.',
@@ -429,6 +438,7 @@ const en = {
         ],
         options: {
           ja: { label: 'Yes, something is due or already underway', sub: 'A normal dental tariff does not pay for that. That is what immediate cover is for. An entry in your dental records from the last 2 years may also count.' },
+          fertig: { label: 'Yes, but already completed and invoiced', sub: 'The invoice has been issued, and nothing else is due or underway. Immediate cover then comes too late.' },
           nein: { label: 'No, none of these', sub: 'No treatment is underway or currently intended, and nothing was recommended in the last 2 years' },
         },
       },
@@ -541,8 +551,9 @@ const en = {
         insurer: 'UKV · ZahnPRIVAT 100',
         title: 'Check maximum dental cover',
         text: 'If nothing was recommended in the last 2 years, no treatment is currently intended or underway and you want high protection, ZahnPRIVAT 100 is worth assessing.',
+        textNachBehandlung: 'Your treatment has been invoiced, nothing is currently intended or underway, and you want high protection: then ZahnPRIVAT 100 is worth assessing.',
         reasons: [
-          '100% of total eligible costs including statutory benefits, even without a statutory contribution',
+          'Health fund and plan together pay 100% of the bill, even without a statutory contribution',
           'Implants including bone augmentation, bridges and dentures are eligible',
           'No waiting periods, professional teeth cleaning without an annual cap',
         ],
@@ -556,8 +567,9 @@ const en = {
         insurer: 'UKV · ZahnPRIVAT 75',
         title: 'Balance benefits and premium consciously',
         text: 'If nothing was recommended in the last 2 years, no treatment is currently intended or underway and you want a smaller premium, ZahnPRIVAT 75 is the UKV entry level.',
+        textNachBehandlung: 'Your treatment has been invoiced, nothing is currently intended or underway, and you want a smaller premium: then ZahnPRIVAT 75 is the UKV entry level.',
         reasons: [
-          '75% of total eligible costs including statutory benefits; the statutory share is deducted',
+          'Health fund and plan together pay 75% of the bill',
           'No waiting periods, implants, bridges and dentures are eligible',
           'No blanket price promise, your premium depends in part on age',
         ],
