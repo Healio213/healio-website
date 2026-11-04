@@ -93,6 +93,11 @@ const DatenschutzPage = () => {
                 </a>
               </p>
 
+              <h3 id="rueckruf" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.rueckrufTitle')}</h3>
+              <p>{t('datenschutz.rueckrufText')}</p>
+              <p>{t('datenschutz.rueckrufLegalBasis')}</p>
+              <p>{t('datenschutz.rueckrufStorage')}</p>
+
               <h3 id="kurzcheck" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.kurzCheckTitle')}</h3>
               <p>{t('datenschutz.kurzCheckText')}</p>
               <p>{t('datenschutz.kurzCheckLegalBasis')}</p>

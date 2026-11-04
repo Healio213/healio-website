@@ -54,6 +54,8 @@
     "ratgeber:register": "node scripts/build-ratgeber-registry.mjs",
     "test:whatsapp": "node scripts/check-whatsapp-contact-rendered.mjs",
     "test:contact-ui": "node scripts/check-contact-ui-contract.mjs",
+    "test:rueckruf": "node --test scripts/check-rueckruf-hinweis-contract.mjs",
+    "test:rueckruf-rendered": "node scripts/check-rueckruf-hinweis-rendered.mjs",
     "test:seo": "node scripts/check-site-seo.mjs && node scripts/check-llms-geo-contract.mjs",
     "test:llms-geo": "node scripts/check-llms-geo-contract.mjs",
     "test:seo:rendered": "node scripts/check-prerender-output.mjs && node scripts/check-blog-build-output.mjs && node scripts/check-schema-index-recovery.mjs",

@@ -14,6 +14,7 @@ import { ConsentManager } from '@/components/ConsentManager';
 import { NitaConsentWidget, isNitaHiddenRoute } from '@/components/NitaConsentWidget';
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
+import RueckrufHinweis from '@/components/RueckrufHinweis';
 import { useReferrer } from '@/hooks/useReferrer';
 import { isCampaignLandingRoute } from '@/lib/campaign-landing';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
@@ -219,6 +220,8 @@ function App() {
           : <WhatsAppContactButton />
       )}
       {isAltersvorsorgeRoute(location.pathname) && <Suspense fallback={null}><AltersvorsorgeStartinfoPopup /></Suspense>}
+      {/* Rückruf-Hinweis „Sprich mit einem Experten“ wie auf kassenboost.de (04.11.2026), Seiten in src/lib/rueckruf.js. */}
+      <RueckrufHinweis />
       <RouteNormalizer>
         <Toaster />
         <Suspense fallback={<PageLoader />}>
