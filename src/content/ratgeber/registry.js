@@ -447,6 +447,17 @@ export const RATGEBER_ENTRIES = [
     "publishedAt": "2026-10-14"
   },
   {
+    "slug": "krankenkasse-2027-aenderungen",
+    "kind": "ratgeber",
+    "group": "kasse-bonus",
+    "listTitle": "Krankenkasse 2027: alle Änderungen der Reform auf einen Blick",
+    "listTeaser": "Zuzahlungen, Zahnersatz, Homöopathie, Krankengeld und Familienversicherung: was sich 2027 und 2028 ändert, mit Rechenbeispielen und einer Liste für die letzten Wochen 2026.",
+    "readingTimeMinutes": 12,
+    "metaTitle": "Krankenkasse 2027: Alle Änderungen der Reform | Healio",
+    "metaDescription": "Krankenkasse 2027: höhere Zuzahlungen, weniger Zuschuss beim Zahnersatz, keine Homöopathie mehr. Alle Änderungen mit Stichtagen und was du jetzt tun kannst.",
+    "publishedAt": "2026-11-04"
+  },
+  {
     "slug": "zahnersatz-kosten",
     "kind": "ratgeber",
     "group": "zaehne",

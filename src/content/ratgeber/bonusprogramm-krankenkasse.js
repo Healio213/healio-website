@@ -457,6 +457,14 @@ export const article = {
       {
         "icon": "bonus",
         "tone": "mint",
+        "title": "Krankenkasse 2027: Was ändert die Reform?",
+        "text": "Zuzahlungen, Zahnersatz, Homöopathie, Krankengeld und Familienversicherung: alle Änderungen mit Stichtagen und einer Liste für die letzten Wochen 2026.",
+        "to": "/ratgeber/krankenkasse-2027-aenderungen",
+        "linkLabel": "Ratgeber lesen"
+      },
+      {
+        "icon": "bonus",
+        "tone": "mint",
         "title": "Krankenkasse Mindestbeitrag 2026: Was zahlst du ohne Einkommen?",
         "text": "Krankenkasse Mindestbeitrag 2026: Bemessungsgrundlage, Zusatzbeitrag und Pflegebeitrag verstehen. Was ohne Einkommen gilt und welche Nachweise du brauchst.",
         "to": "/ratgeber/mindestbeitrag-krankenkasse",

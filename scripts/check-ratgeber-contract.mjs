@@ -918,6 +918,7 @@ const OPT_IN_SLUGS = [
   'tk-krankenhauszusatzversicherung',
   'tcm-krankenkasse',
   'homoeopathie-krankenkasse-2027',
+  'krankenkasse-2027-aenderungen',
   'vorsorgeuntersuchungen-kinder',
   // SEO-Umsetzung Thema C, neue Ratgeber (14.10.2026)
   'krankenzusatzversicherung-ohne-gesundheitsfragen-2026',
@@ -1155,6 +1156,7 @@ const SERIEN_ZIELBEGRIFFE = {
   "tk-krankenhauszusatzversicherung": new RegExp("(?=.*tk)(?=.*krankenhaus)", 'i'),
   "tcm-krankenkasse": new RegExp("(?=.*tcm)(?=.*kassenzulassung)", 'i'),
   "homoeopathie-krankenkasse-2027": new RegExp("(?=.*homöopathie)(?=.*2027)", 'i'),
+  "krankenkasse-2027-aenderungen": new RegExp("(?=.*krankenkasse)(?=.*2027)", 'i'),
   "vorsorgeuntersuchungen-kinder": new RegExp("(?=.*vorsorgeuntersuchungen)(?=.*kind)", 'i'),
   // SEO-Umsetzung Thema C, neue Ratgeber (14.10.2026)
   'krankenzusatzversicherung-ohne-gesundheitsfragen-2026': /krankenzusatzversicherung ohne gesundheitsfragen 2026/i,

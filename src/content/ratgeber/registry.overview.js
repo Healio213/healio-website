@@ -26,7 +26,7 @@ export const RATGEBER_OVERVIEW = {
       "intro": "Wie Kassenbonus, Beiträge, Zuzahlung und Wechsel zusammenhängen. Mit Voraussetzungen, Quellen und den Grenzen der Zuschusswege.",
       "icon": "bonus",
       "hubSlug": "bonusprogramm-krankenkasse",
-      "total": 37,
+      "total": 38,
       "entries": [
         {
           "slug": "bonusprogramm-krankenkasse",

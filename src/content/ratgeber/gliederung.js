@@ -98,7 +98,8 @@ export const RATGEBER_GROUPS = [
       "zuzahlungsbefreiung-rentner",
       "bkk-firmus-bonusprogramm-2026",
       "krankenkasse-wechseln-rentner",
-      "krankenzusatzversicherung-vergleichen"
+      "krankenzusatzversicherung-vergleichen",
+      "krankenkasse-2027-aenderungen"
     ]
   },
   {

@@ -152,6 +152,7 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/ratgeber/zahnzusatzversicherung-kinder',
   '/ratgeber/zusatzversicherung-osteopathie',
   '/ratgeber/zuzahlung-medikamente',
+  '/ratgeber/krankenkasse-2027-aenderungen',
   '/ratgeber/zuzahlungsbefreiung',
   '/ratgeber/zuzahlungsbefreiung-chronisch-krank',
   '/ratgeber/zuzahlungsbefreiung-rentner',
