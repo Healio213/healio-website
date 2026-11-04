@@ -11,7 +11,8 @@ import RouteNormalizer from '@/components/RouteNormalizer';
 import VeterinaryLayout from '@/components/sections/veterinary/VeterinaryLayout';
 import PerformanceMetrics from '@/components/PerformanceMetrics';
 import { ConsentManager } from '@/components/ConsentManager';
-import { NitaConsentWidget } from '@/components/NitaConsentWidget';
+import { NitaConsentWidget, isNitaHiddenRoute } from '@/components/NitaConsentWidget';
+import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import { useReferrer } from '@/hooks/useReferrer';
 import { isCampaignLandingRoute } from '@/lib/campaign-landing';
@@ -114,6 +115,9 @@ function App() {
   // schwebende Knopf entfällt dort unter 768 px; ab md bleibt er wie live.
   // /schwangerschaft hat den schwebenden Knopf ohnehin nie (isPregnancy).
   const isLeisteMobilePage = ['/ambulant', '/en/outpatient', '/stationaer', '/en/inpatient'].includes(location.pathname);
+  const showWhatsAppFloating = !isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding;
+  // WhatsApp sitzt in Nitas Kontaktleiste, wo Nita zu sehen ist; sonst (z. B. Ratgeber) bleibt der eigene Knopf.
+  const nitaDockVisible = HEALIO_VOICE_CONTACT_ENABLED && !isPregnancy && !isCampaignLanding && !isNitaHiddenRoute(location.pathname);
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
   useReferrer();
 
@@ -205,9 +209,11 @@ function App() {
       <PerformanceMetrics />
       <ScrollToTop />
       <ConsentManager />
-      {/* Nita (Sprache) seit 04.11.2026 auch auf den Leistungsseiten: Dort öffnen „Frag Nita“ und die Sprachknöpfe im Ablauf dieses Fenster. */}
-      {!isPregnancy && !isCampaignLanding && <NitaConsentWidget />}
-      {!isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding && (
+      {/* Nita (Sprache) seit 04.11.2026 auch auf den Leistungsseiten: Dort öffnen „Frag Nita“ und die Sprachknöpfe im Ablauf dieses Fenster.
+          Kontaktleiste in der Mitte des rechten Randes mit WhatsApp dort, wo bisher der schwebende WhatsApp-Knopf saß; am Handy
+          entfällt sie auf Seiten mit der Nita-Leiste unten (ambulant, stationär, Zahn). */}
+      {!isPregnancy && !isCampaignLanding && <NitaConsentWidget whatsapp={showWhatsAppFloating} mobileHidden={isLeisteMobilePage || isDentalPage} />}
+      {showWhatsAppFloating && !nitaDockVisible && (
         isLeisteMobilePage
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
           : <WhatsAppContactButton />
