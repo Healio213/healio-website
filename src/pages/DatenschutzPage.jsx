@@ -183,6 +183,10 @@ const DatenschutzPage = () => {
               <p>{lang === 'en' ? 'You may withdraw consent at any time through the unsubscribe link in each update or by emailing info@healio.de. The mailing address is retained while your subscription is active; after withdrawal we stop sending and retain only evidence necessary to demonstrate consent or prevent further messages for as long as that purpose requires. Your choice does not affect access to articles, the calculator or personal enquiries. A session-only browser flag prevents repeated automatic pop-ups; it contains no name, email address or tracking identifier.' : 'Sie können Ihre Einwilligung jederzeit über den Abmeldelink in jeder Informationsmail oder per E-Mail an info@healio.de widerrufen. Die Versandadresse bleibt während Ihrer Anmeldung gespeichert; nach dem Widerruf stoppen wir den Versand und bewahren nur erforderliche Nachweise der Einwilligung beziehungsweise eine notwendige Versandsperre zweckgebunden auf. Ihre Entscheidung hat keinen Einfluss auf den Zugang zu Ratgebern, Rechner oder persönlichen Anfragen. Eine nur für die Browsersitzung gespeicherte Markierung verhindert wiederholte automatische Pop-ups; sie enthält keinen Namen, keine E-Mail-Adresse und keine Trackingkennung.'}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>
               <p>{t('datenschutz.insurerFlowsText')}</p>
+              <h3 id="partnercode" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.partnerCodeTitle')}</h3>
+              <p>{t('datenschutz.partnerCodeText')}</p>
+              <p>{t('datenschutz.partnerCodeLinks')}</p>
+              <p>{t('datenschutz.partnerCodeLegalBasis')}</p>
 
               <h2 id="healio-tree" className="scroll-mt-28 text-2xl font-bold text-healio-slate mt-10 mb-4">{t('datenschutz.appTitle')}</h2>
               <p>{t('datenschutz.appIntro')}</p>

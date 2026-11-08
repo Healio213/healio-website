@@ -65,8 +65,8 @@ export const RATGEBER_INTERNAL_UTM_DEFAULTS = Object.freeze({
 // Neben den UTM-Parametern wandern nur diese Kennungen mit, und nur, wenn sie
 // in der aufrufenden Adresse stehen: der Empfehlungscode (ref, wie in
 // src/lib/referrer.js) und die Google-Klick-Kennungen. So bleibt der Code auch
-// erhalten, wenn jemand den Button in einem neuen Tab öffnet (sessionStorage
-// wird dort nicht mitgenommen), und die Klick-Kennung steht noch in der
+// erhalten, wenn jemand den Button in einem neuen Tab öffnet (der gemerkte
+// Code der Seite wandert dorthin nicht mit), und die Klick-Kennung steht noch in der
 // Adresse, falls die Zustimmung erst auf der Zielseite kommt. Gespeichert wird
 // dabei nichts, gelesen wird die Klick-Kennung weiter nur mit Zustimmung
 // (readGoogleClickId in src/lib/google-ads.js).

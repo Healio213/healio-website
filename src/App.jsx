@@ -15,7 +15,7 @@ import { NitaConsentWidget, isNitaHiddenRoute } from '@/components/NitaConsentWi
 import { HEALIO_VOICE_CONTACT_ENABLED } from '@/config/contactChannels';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import RueckrufHinweis from '@/components/RueckrufHinweis';
-import { useReferrer } from '@/hooks/useReferrer';
+import { useReferrer, useReferrerLinks } from '@/hooks/useReferrer';
 import { isCampaignLandingRoute } from '@/lib/campaign-landing';
 import { getConsentState, hasConsent, subscribeConsent } from '@/lib/consent';
 import { isAnalyticsExcludedRoute, setAnalyticsRouteBlocked, trackPageView } from '@/lib/analytics';
@@ -120,7 +120,9 @@ function App() {
   // WhatsApp sitzt in Nitas Kontaktleiste, wo Nita zu sehen ist; sonst (z. B. Ratgeber) bleibt der eigene Knopf.
   const nitaDockVisible = HEALIO_VOICE_CONTACT_ENABLED && !isPregnancy && !isCampaignLanding && !isNitaHiddenRoute(location.pathname);
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
+  // und beim Klick an Links zu healio.de und kassenboost.de anhängen.
   useReferrer();
+  useReferrerLinks();
 
   useEffect(() => {
     // Performance monitoring for slow image load times

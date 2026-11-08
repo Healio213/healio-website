@@ -37,7 +37,7 @@ const STATIONAER_TARIFE = { sp1: 'SDKSP1@', sp2: 'SDKSP2@', spu: 'SDKSPU@' };
  *
  * @param {Object} options
  * @param {string} [options.tarifTypes] - z.B. "Ambulant,Stationär" (default: Ambulant + Stationär)
- * @param {string} [options.ref] - Referrer-Code (überschreibt sessionStorage)
+ * @param {string} [options.ref] - Referrer-Code (überschreibt den gemerkten Code der Seite)
  * @param {number|string} [options.stufe] - 50/70/90/100, nur bei tarifTypes 'Ambulant' (Standard 100)
  * @param {string} [options.tarif] - sp1/sp2/spu, nur bei tarifTypes 'Stationär' (ohne: alle drei)
  * @returns {string} Vollständige SDK-URL
