@@ -51,6 +51,7 @@ for (const directive of [
   'https://www.google-analytics.com',
   'https://app.healio.de',
   'https://voice-pilot.healio.de',
+  'https://anfragen.healio.de',
   'https://*.supabase.co',
   'wss://*.supabase.co',
   'https://api.emailjs.com',
@@ -73,6 +74,10 @@ expect(
   !cspDirectives.get('connect-src')?.has('https://storage.googleapis.com')
     && !cspDirectives.get('media-src')?.has('https://storage.googleapis.com'),
   'storage.googleapis.com darf nicht ohne belegten Bedarf für Verbindungen oder Medien freigegeben sein.',
+);
+expect(
+  cspDirectives.get('connect-src')?.has('https://anfragen.healio.de'),
+  'Die Anfragen-Zentrale muss als Verbindungsziel der Formulare freigegeben sein.',
 );
 expect(
   !csp.includes('m1.openfpcdn.io'),

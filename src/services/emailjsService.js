@@ -5,6 +5,7 @@ import { trackEvent } from '@/lib/analytics';
 import { trackMetaLead } from '@/lib/meta-pixel';
 import { readGoogleClickId, trackGoogleAdsLead } from '@/lib/google-ads';
 import { describeCampaignSource, readCampaignUtm } from '@/lib/campaign-landing';
+import { baueZentraleAnfrage, sendeAnZentrale } from '@/lib/anfragen-zentrale';
 
 // Initialize EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
@@ -35,19 +36,24 @@ export const emailjsService = {
   // campaign: false, wenn das Formular den Block „Kampagne“ schon selbst schreibt.
   sendEmail: async (formData, pageSource, { track = true, campaign = true } = {}) => {
     let response;
+    const normalizedParams = emailjsService.normalizeData(formData, pageSource);
+    // utm-Werte der Einstiegsseite, damit jede Anfrage ihre Herkunft
+    // mitbringt, auch wenn jemand vorher weitergeklickt hat.
+    const utm = readCampaignUtm(window.location.search);
+    // Klick-Kennung der Google-Anzeige, damit Frank einen spaeteren
+    // Abschluss der richtigen Kampagne zuordnen kann. Sie wird nur
+    // mitgeschickt, wenn sie in der Adresszeile steht UND "marketing"
+    // erlaubt ist; ohne beides bleibt das Feld leer. Damit sie in der
+    // Mail sichtbar wird, muss die EmailJS-Vorlage {{gclid}} enthalten.
+    const gclid = readGoogleClickId();
+    // Gleichzeitig direkt in die Anfragen-Zentrale: Sofort-Mitteilung auf Franks
+    // Handy und Sicherung, falls die Mail nicht ankommt.
+    const zentraleAnfrage = baueZentraleAnfrage({ params: normalizedParams, utm, gclid });
+    const zentrale = sendeAnZentrale(zentraleAnfrage);
     try {
-      const normalizedParams = emailjsService.normalizeData(formData, pageSource);
-      // utm-Werte der Einstiegsseite, damit jede Anfrage ihre Herkunft
-      // mitbringt, auch wenn jemand vorher weitergeklickt hat.
       if (campaign && readCampaignUtm(window.location.search)) {
         normalizedParams.message = [normalizedParams.message, '', 'Kampagne:', describeCampaignSource(window.location.search)].join('\n');
       }
-      // Klick-Kennung der Google-Anzeige, damit Frank einen spaeteren
-      // Abschluss der richtigen Kampagne zuordnen kann. Sie wird nur
-      // mitgeschickt, wenn sie in der Adresszeile steht UND "marketing"
-      // erlaubt ist; ohne beides bleibt das Feld leer. Damit sie in der
-      // Mail sichtbar wird, muss die EmailJS-Vorlage {{gclid}} enthalten.
-      const gclid = readGoogleClickId();
       response = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
@@ -59,7 +65,11 @@ export const emailjsService = {
       );
     } catch (error) {
       console.error('EmailJS: Versand konnte nicht bestätigt werden.');
-      throw error;
+      // Hat die Zentrale die Anfrage sicher, gilt sie als angekommen. Die Zentrale
+      // erfährt, dass die Mail fehlt, und zeigt das bei der Anfrage an.
+      if (!(await zentrale)) throw error;
+      sendeAnZentrale({ ...zentraleAnfrage, mail: 'fehler' });
+      response = { status: 200, text: 'Anfragen-Zentrale' };
     }
 
     if (!track) return { success: true, response };
