@@ -283,6 +283,13 @@ export const fuerWenEs = {
   ],
 };
 
+// Abschnitt 6a: Verweise auf die sechs Anfrageseiten (Seitenplan 09.11.2026).
+// Die Liste selbst steht in src/content/altersvorsorgeZielgruppen/gemeinsam.js.
+export const einstiege = {
+  ueberschrift: 'Finde deinen Einstieg',
+  intro: 'Für jede Lebenslage gibt es eine eigene Seite mit den Regeln, die für dich gelten, und einem passenden Rechenbeispiel.',
+};
+
 // Abschnitt 7: Ablauf in drei Schritten.
 export const ablauf = {
   ueberschrift: 'So bereitest du deinen Start für Januar vor',

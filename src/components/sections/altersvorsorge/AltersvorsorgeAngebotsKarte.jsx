@@ -44,7 +44,7 @@ const AltersvorsorgeAngebotsKarte = ({ titel, kacheln, hinweis }) => {
               key={kachel.key}
               className={`flex items-center gap-3 rounded-2xl border bg-white/95 p-3.5 shadow-[0_12px_30px_rgba(39,63,72,0.10)] sm:block sm:p-4 ${farbe.rand}`}
             >
-              <AltersvorsorgeIllustration kind={kachel.key} className="h-12 w-12 shrink-0 sm:mb-2 sm:h-14 sm:w-14" />
+              <AltersvorsorgeIllustration kind={kachel.motiv || kachel.key} className="h-12 w-12 shrink-0 sm:mb-2 sm:h-14 sm:w-14" />
               <div className="min-w-0">
                 <p className="whitespace-nowrap font-display text-[1.375rem] font-extrabold leading-tight tracking-tight text-[#071726] sm:text-2xl">
                   {kachel.wert}

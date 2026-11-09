@@ -1,0 +1,141 @@
+// Anlassseite /altersvorsorgedepot/elternzeit. Zahlen: FAKTENBASIS.md und
+// Quellenprüfung vom 08.10.2026 (Kindererziehungszeit samt Antrag V0800,
+// Elterngeld ersetzt den Nachweis nicht, Ruhen als gesetzlicher Anspruch).
+export default {
+  slug: 'elternzeit',
+  seo: {
+    title: 'Elternzeit: Zulage fürs Altersvorsorgedepot | Healio',
+    description: 'In der Elternzeit fehlt das Gehalt, die Förderung kann bleiben. Mit anerkannter Kindererziehungszeit bringen 10 EUR im Monat Grund- und Kinderzulage.',
+    ogImageAlt: 'Healio: Zulage fürs Altersvorsorgedepot in der Elternzeit',
+  },
+  hero: {
+    brotkrume: 'Elternzeit',
+    eyebrow: 'Baby da, Gehalt pausiert',
+    h1: 'Elternzeit ohne Gehalt? Die Zulage kann trotzdem weiterlaufen.',
+    unterzeile: 'Anerkannte Kindererziehungszeiten können dich in der Förderung halten, auch wenn du gerade nichts verdienst. Dann bringen schon 10 EUR im Monat Grundzulage und Kinderzulage.',
+    fussnote: 'Kindererziehungszeiten beantragst du bei der Rentenversicherung. Der Elterngeldbescheid allein ist kein Nachweis.',
+    linkInhalt: 'Die Regeln für die Auszeit lesen',
+    vertrauenszeile: 'Kindererziehungszeit über die Rentenversicherung · Zulage unabhängig vom Gehalt · ab 10 EUR im Monat',
+    karte: {
+      titel: 'Was in der Elternzeit möglich ist',
+      kacheln: [
+        { key: 'beitrag', motiv: 'zulage', wert: '10 EUR', text: 'im Monat halten dich in der Förderung' },
+        { key: 'kinderzulage', wert: 'bis zu 300 EUR', text: 'pro Kind und Jahr obendrauf' },
+        { key: 'nachweis', motiv: 'check', wert: 'V0800', text: 'Antrag auf Kindererziehungszeiten' },
+      ],
+      hinweis: 'Förderung nur mit anerkannter Kindererziehungszeit oder einem anderen Berechtigungsgrund. Kinderzulage nur für dir zugeordnete Kinder mit Kindergeld.',
+    },
+  },
+  fakten: {
+    ueberschrift: 'Die Regeln für die Auszeit',
+    intro: 'Elternzeit allein macht dich nicht förderberechtigt. Es kommt darauf an, was die Rentenversicherung als Kindererziehungszeit anerkennt.',
+    karten: [
+      { wert: 'V0800', titel: 'Kindererziehungszeit beantragen', text: 'Anerkannte Kindererziehungszeiten können die rentenrechtliche Grundlage für die Förderung schaffen. Beantragt werden sie bei der Rentenversicherung mit dem Formular V0800.', quelle: 'zfaFoerderung' },
+      { wert: 'kein Ersatz', titel: 'Elterngeld zählt nicht als Nachweis', text: 'Weder der Elterngeldbescheid noch eine Bestätigung des Arbeitgebers ersetzen die Anerkennung durch die Rentenversicherung.', quelle: 'zfaFoerderung' },
+      { wert: '120 EUR', titel: 'im Jahr genügen', text: 'Die Zulage hängt nicht mehr vom Einkommen ab. Schon der Mindestbeitrag von 120 EUR im Jahr bringt 60 EUR Grundzulage und je Kind Kinderzulage auf denselben Betrag.', quelle: 'rv84' },
+      { wert: 'ruhen', titel: 'statt kündigen', text: 'Neue Verträge darfst du bis zum Rentenbeginn ruhen lassen, das schreibt das Gesetz vor. Für Jahre ohne Beitrag gibt es allerdings keine Zulage.', quelle: 'gesetz' },
+    ],
+  },
+  beispiele: {
+    ueberschrift: 'Was der Mindestbeitrag von 10 EUR in der Elternzeit bringt',
+    labels: { beitrag: 'Dein Beitrag', zulage: 'Zulagen', quote: '{quote} vom Beitrag als Zulage' },
+    karten: [
+      { titel: 'Mit einem Kind', eingabe: { monatsbeitrag: 10, kinder: 1 }, text: 'Für das Kind kommt noch einmal so viel dazu, wie du einzahlst.' },
+      { titel: 'Mit zwei Kindern', eingabe: { monatsbeitrag: 10, kinder: 2 }, text: 'Jedes Kind bringt Kinderzulage auf deine 120 EUR, ganz ohne höheren Beitrag.' },
+      { titel: 'Mit drei Kindern', eingabe: { monatsbeitrag: 10, kinder: 3 }, text: 'Mit jedem weiteren Kind wächst die Zulage, der Beitrag bleibt klein.' },
+    ],
+    kleingedruckt: 'Angenommen ist ein Elternteil, der in der Elternzeit förderberechtigt bleibt und dem die Kinder mit Kindergeld zugeordnet sind. Ab 300 EUR Jahresbeitrag wäre die Kinderzulage voll. Steuern, Kosten und Kurse fehlen in dieser Rechnung.',
+  },
+  vertiefung: {
+    ueberschrift: 'So bleibt die Förderung in der Elternzeit',
+    intro: 'Drei Dinge solltest du in der Auszeit im Blick haben. Zwei weitere kommen dazu, wenn du später in Teilzeit gehst oder schon einen Vertrag hast.',
+    bloecke: [
+      { titel: 'Erst den Status klären', text: 'Lass die Kindererziehungszeit bei der Rentenversicherung anerkennen. Erst dann steht fest, ob du in dieser Zeit selbst förderberechtigt bist.' },
+      { titel: 'Den Mindestbeitrag weiterzahlen', text: 'Gefördert wird jedes Jahr nur, wenn Geld eingeht. Mit 10 EUR im Monat geht dir kein Förderjahr verloren.' },
+      { titel: 'Die Kinderzulage zuordnen', text: 'Je Kind geht sie nur an einen Elternteil. Wer sie 2027 bekommt und was sich 2028 ändert, steht auf unserer Seite für Eltern.', link: { to: '/altersvorsorgedepot/eltern', label: 'Zur Seite für Eltern' } },
+      { titel: 'Danach in Teilzeit', text: 'Arbeitest du nach der Elternzeit in Teilzeit und bist rentenversicherungspflichtig, bleibst du förderberechtigt. Weil die Zulage nicht vom Gehalt abhängt, bekommst du bei gleichem Beitrag dieselbe Zulage wie in Vollzeit.' },
+      { titel: 'Riester aus der Zeit davor', text: 'Läuft schon ein Riester-Vertrag, gilt auch hier: nicht kündigen, erst prüfen. Beitragsfrei stellen ist möglich, und ob ein Umzug ins neue Depot passt, klären wir in Ruhe.', link: { to: '/altersvorsorgedepot/riester', label: 'Zum Riester-Umzug' } },
+    ],
+  },
+  rechner: {
+    voreinstellung: { monatsbeitrag: 10, kinder: 1, unter25: false, selbststaendig: false, riester: false },
+    felder: ['monatsbeitrag', 'kinder'],
+    texte: {
+      ueberschrift: 'Rechne aus, was in der Elternzeit drin ist',
+      unterzeile: 'Das Beispiel nimmt an, dass deine Kindererziehungszeit anerkannt ist oder du anders förderberechtigt bist.',
+      labels: {
+        monatsbeitrag: 'Wie viel willst du in der Auszeit monatlich einzahlen?',
+        kinder: 'Wie viele Kinder zählen bei dir mit, das Baby eingeschlossen?',
+      },
+      ergebnis: {
+        vor: 'Zulage in der Elternzeit',
+        nach: 'pro Jahr, wenn deine Förderberechtigung steht.',
+        monat: 'Monat für Monat {monat}. Jeder Euro, den du einzahlst, bringt dir {quote} Zulage.',
+      },
+      tipps: {
+        unter25MitKindern: 'Bei 25 EUR im Monat wäre die Kinderzulage voll. Für die Auszeit genügt aber auch der Mindestbeitrag.',
+        unter30KeineKinder: 'Ohne Kind bringen 30 EUR im Monat die volle 50-Prozent-Stufe.',
+        unter150: 'Wenn wieder ein Gehalt kommt, bringt ein höherer Beitrag mehr Grundzulage, bis 150 EUR im Monat.',
+        bei150: 'Mehr Grundzulage geht nicht.',
+      },
+      hinweise: {
+        immer: 'Den Nachweis über die Kindererziehungszeit und die Zuordnung der Kinder gehen wir im Vorabcheck mit dir durch.',
+      },
+      teaser: { titel: 'Nach dem Speichern: Vorsorgemodell bis 67', text: 'Mit anpassbarem Alter. Kinderzulage und Bonus bleiben dort außen vor.' },
+      knopfMitBetrag: 'Berechnung speichern & Elternzeit-Check anfragen',
+      knopfOhneAnspruch: 'Für die Elternzeit vormerken',
+      kleingedruckt: 'Beispiel unter der Annahme einer bestehenden Förderberechtigung ab 2027. Kinder ohne Kindergeld oder ohne Zuordnung zu dir zählen nicht. Weder Kosten noch Wertentwicklung oder Steuern sind eingerechnet. Was du einzahlst, ist für deine Rente reserviert.',
+    },
+  },
+  check: {
+    eyebrow: 'Unverbindlich, auch mit Baby im Arm',
+    ueberschrift: 'Dein Zuschuss-Check für die Elternzeit',
+    unterzeile: 'Wir klären mit dir Nachweis, Zuordnung und einen Beitrag, der in die Auszeit passt.',
+    karten: [
+      { icon: 'zulage', titel: 'Auszeit-Rechnung übernehmen', text: 'Beitrag und Kinder aus dem Rechner gehen in die Vormerkung. Wie wir dich erreichen, entscheidest du.' },
+      { icon: 'check', titel: 'Nachweise klären', text: 'Zehn Minuten am Telefon genügen, um Kindererziehungszeit, Kindergeld und Zuordnung durchzugehen.' },
+      { icon: 'familien', titel: 'Beitrag für die Auszeit', text: 'Wir planen einen kleinen Beitrag für die Elternzeit und wie du ihn später anhebst.' },
+    ],
+    ablaufzeile: 'Healio meldet sich nach deiner Vormerkung. Den Termin legen wir so, dass er in euren Tag passt.',
+    startzeile: 'Die neuen Verträge starten 2027. Gefördert wird danach jedes Jahr, in dem Beiträge fließen, auch während der Elternzeit.',
+    knopfTermin: 'Für den Elternzeit-Check vormerken',
+    knopfRueckruf: 'Lieber zurückrufen lassen',
+  },
+  vormerkung: {
+    ueberschrift: 'Deine Berechnung für die Elternzeit vormerken',
+    intro: 'Nach dem Absenden siehst du dein Modell bis 67. Nachweis und Zuordnung klären wir im Vorabcheck.',
+  },
+  passt: {
+    passtTitel: 'Gut geeignet, wenn',
+    passtItems: [
+      'du in Elternzeit bist oder bald gehst,',
+      'deine Kindererziehungszeit anerkannt ist oder du sie beantragen willst,',
+      'du für dein Kind Kindergeld bekommst,',
+      'du auch in der Auszeit kleine Beiträge zahlen kannst.',
+    ],
+    passtNichtTitel: 'Passt nicht, wenn',
+    passtNichtItems: [
+      'ihr in der Elternzeit jeden Euro für den Alltag braucht. Das Geld bleibt bis zur Rente im Vertrag.',
+      'du die Zulage für das Konto des Kindes erwartest. Sie stärkt deine eigene Vorsorge.',
+      'du ein Bank- oder Broker-Depot suchst. Bei Healio geht es nur um Versicherungsvarianten.',
+    ],
+  },
+  faq: [
+    { question: 'Bin ich in der Elternzeit förderberechtigt?', answer: 'Elternzeit allein reicht nicht. Werden dir Kindererziehungszeiten in der Rentenversicherung anerkannt, kann das die Grundlage für die Förderung sein. Den Antrag stellst du mit dem Formular V0800.' },
+    { question: 'Reicht der Elterngeldbescheid als Nachweis?', answer: 'Nein. Weder Elterngeld noch eine Arbeitgeberbestätigung ersetzen die Anerkennung der Kindererziehungszeit durch die Rentenversicherung.' },
+    { question: 'Wie viel muss ich in der Elternzeit einzahlen?', answer: 'Mindestens 120 EUR im Jahr. Dafür gibt es 60 EUR Grundzulage und je zugeordnetem Kind mit Kindergeld 120 EUR Kinderzulage. Voll ist die Kinderzulage ab 300 EUR im Jahr.' },
+    { question: 'Kann ich den Vertrag in der Elternzeit pausieren?', answer: 'Neue Verträge darfst du bis zum Rentenbeginn ruhen lassen. Ein Pausenjahr bringt aber keine Zulage, deshalb ist der Mindestbeitrag oft der bessere Weg.' },
+    { question: 'Wer bekommt die Kinderzulage für unser Baby?', answer: 'Je Kind ein Elternteil. Die Regeln unterscheiden sich zwischen 2027 und den Jahren danach, Einzelheiten stehen auf unserer Seite für Eltern. Im Check klären wir, was bei euch gilt.' },
+  ],
+  quellen: [
+    { id: 'zfaFoerderung', wofuer: 'Kindererziehungszeit und Antrag V0800' },
+    { id: 'rv84', wofuer: 'Grundzulage schon beim Mindestbeitrag' },
+    { id: 'rv85', wofuer: 'Kinderzulage auf den eigenen Beitrag' },
+    { id: 'gesetz', wofuer: 'Recht, den Vertrag ruhen zu lassen' },
+    { id: 'kindergeld', wofuer: 'Kindergeld als Voraussetzung' },
+  ],
+  weiterlesen: ['altersvorsorgedepot-teilzeit-elternzeit', 'altersvorsorgedepot-passt-das-zu-mir'],
+  abschlussKnopf: 'Zulage in der Elternzeit berechnen',
+  verwandt: ['eltern', 'riester', 'selbststaendige', 'riester-kuendigen', 'unter-25'],
+  fussHinweis: 'Für Mütter und Väter in Elternzeit, als allgemeine Orientierung. Ob deine Kindererziehungszeit anerkannt wird, entscheidet die Rentenversicherung. Der Wert eines Depots kann schwanken.',
+};

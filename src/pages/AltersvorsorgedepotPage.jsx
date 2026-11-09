@@ -22,10 +22,13 @@ import {
   problemLoesung,
   neuerungen,
   fuerWenEs,
+  einstiege,
   ablauf,
   faq,
   fussHinweis,
 } from '@/content/altersvorsorgedepotContent';
+import { EINGAENGE } from '@/content/altersvorsorgeZielgruppen/gemeinsam';
+import AltersvorsorgeIllustration from '@/components/sections/altersvorsorge/AltersvorsorgeIllustration';
 
 const scrollToId = (id) => {
   if (typeof document === 'undefined') return;
@@ -246,6 +249,37 @@ const AltersvorsorgedepotPage = () => {
                 ))}
               </ul>
             </div>
+          </div>
+        </section>
+
+        {/* Abschnitt 6a: Einstiege je Zielgruppe und Anlass */}
+        <section className="healio-container px-4 pb-14 pt-2 sm:px-6 lg:px-8" aria-labelledby="altersvorsorge-einstiege-heading">
+          <div className="mx-auto max-w-5xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 id="altersvorsorge-einstiege-heading" className="font-display text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">{einstiege.ueberschrift}</h2>
+              <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">{einstiege.intro}</p>
+            </div>
+            <MobileSwipeRow
+              label={einstiege.ueberschrift}
+              className="mt-8"
+              desktopClassName="md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3"
+              itemClassName="flex"
+            >
+              {EINGAENGE.map((eingang) => (
+                <Link
+                  key={eingang.slug}
+                  to={eingang.path}
+                  className="group flex h-full w-full items-center gap-4 rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm transition hover:border-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700"
+                >
+                  <AltersvorsorgeIllustration kind={eingang.motiv} className="h-14 w-14 shrink-0" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg font-extrabold leading-snug text-slate-950">{eingang.label}</span>
+                    <span className="mt-1 block text-base leading-6 text-slate-600">{eingang.kurz}</span>
+                  </span>
+                  <ArrowRight className="h-5 w-5 shrink-0 text-[#076046] transition group-hover:translate-x-0.5" aria-hidden="true" />
+                </Link>
+              ))}
+            </MobileSwipeRow>
           </div>
         </section>
 

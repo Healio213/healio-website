@@ -1,10 +1,19 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import AltersvorsorgeAngebotsKarte from '@/components/sections/altersvorsorge/AltersvorsorgeAngebotsKarte';
 import { getHeroKacheln, hero } from '@/content/altersvorsorgedepotContent';
 
-/** Unternehmensmotiv, vorhandene geprüfte Texte und die vollständige Zulagenkarte. */
-const AltersvorsorgeHero = ({ variante, onRechner, onCheck }) => (
+/**
+ * Unternehmensmotiv, vorhandene geprüfte Texte und die vollständige Zulagenkarte.
+ *
+ * Die Unterseiten unter /altersvorsorgedepot/… geben zusätzlich eine
+ * Brotkrume, eine eigene Zahlenkarte, einen eigenen Zweitlink und eine eigene
+ * Vertrauenszeile mit. Ohne diese Angaben bleibt alles wie auf der Hauptseite.
+ */
+const AltersvorsorgeHero = ({
+  variante, onRechner, onCheck, brotkrume = null, karte = null, sekundaer = null, vertrauenszeile = null,
+}) => (
   <section data-altersvorsorge-hero aria-labelledby="altersvorsorge-hero-title" className="w-full bg-[#f4faf7]">
     <div className="relative isolate w-full overflow-hidden bg-[#06131c] text-white">
       <img
@@ -24,6 +33,19 @@ const AltersvorsorgeHero = ({ variante, onRechner, onCheck }) => (
 
       <div className="mx-auto w-full max-w-[1280px] px-4 pb-10 pt-28 sm:px-6 sm:pb-14 sm:pt-32 md:flex md:min-h-[720px] md:items-center md:px-8 md:pb-20 md:pt-32 lg:min-h-[760px]">
         <div className="w-full min-w-0 max-w-[660px] text-left">
+          {brotkrume && (
+            <nav aria-label="Brotkrumen" className="mb-4">
+              <ol className="flex flex-wrap items-center gap-1 text-base leading-6 text-[#c4d3da]">
+                <li>
+                  <Link to="/altersvorsorgedepot" className="inline-flex min-h-11 items-center underline decoration-white/30 underline-offset-4 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca]">
+                    Altersvorsorgedepot
+                  </Link>
+                </li>
+                <li aria-hidden="true"><ChevronRight className="h-4 w-4 text-[#8ee7ca]" /></li>
+                <li aria-current="page" className="font-semibold text-white">{brotkrume}</li>
+              </ol>
+            </nav>
+          )}
           <p className="max-w-[36rem] text-base font-bold leading-6 text-[#8ee7ca]">{variante.eyebrow}</p>
           <h1 id="altersvorsorge-hero-title" className="mt-4 font-display text-[1.875rem] font-extrabold leading-[1.1] tracking-[-0.035em] text-white [text-wrap:balance] sm:text-[2.75rem] md:mt-5 lg:text-[clamp(2.75rem,3.7vw,3.25rem)]">
             {variante.h1}
@@ -45,15 +67,15 @@ const AltersvorsorgeHero = ({ variante, onRechner, onCheck }) => (
               <ArrowRight className="hidden h-5 w-5 shrink-0 sm:block" aria-hidden="true" />
             </button>
             <a
-              href="#zuschuss-check"
-              onClick={(event) => { event.preventDefault(); onCheck(); }}
+              href={sekundaer?.href || '#zuschuss-check'}
+              onClick={(event) => { event.preventDefault(); (sekundaer?.onClick || onCheck)(); }}
               className="inline-flex min-h-11 max-w-full items-center justify-center px-1 text-center text-base font-semibold leading-6 text-white underline decoration-white/40 underline-offset-4 transition-colors hover:text-[#8ee7ca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] sm:justify-start sm:text-left"
             >
-              {hero.linkCheck}
+              {sekundaer?.label || hero.linkCheck}
             </a>
           </div>
           <p className="mt-6 max-w-[36rem] border-t border-white/15 pt-5 text-base font-medium leading-7 text-[#c4d3da] sm:mt-8">
-            {hero.vertrauenszeile}
+            {vertrauenszeile || hero.vertrauenszeile}
           </p>
         </div>
       </div>
@@ -61,9 +83,9 @@ const AltersvorsorgeHero = ({ variante, onRechner, onCheck }) => (
 
     <div className="mx-auto w-full max-w-[1280px] px-4 pb-6 pt-6 sm:px-6 sm:pb-8 sm:pt-8 md:px-8">
       <AltersvorsorgeAngebotsKarte
-        titel={hero.angebotskarte.titel}
-        kacheln={getHeroKacheln(variante)}
-        hinweis={hero.angebotskarte.hinweis}
+        titel={karte?.titel || hero.angebotskarte.titel}
+        kacheln={karte?.kacheln || getHeroKacheln(variante)}
+        hinweis={karte?.hinweis || hero.angebotskarte.hinweis}
       />
     </div>
   </section>

@@ -10,6 +10,8 @@ import { authorSchemaFor } from '../src/content/ratgeber/authors.js';
 import { createArticleSchema, createFAQSchema } from '../src/lib/createSchemaMarkup.js';
 import { faq as altersvorsorgeFaq } from '../src/content/altersvorsorgedepotContent.js';
 import { altersvorsorgeHub } from '../src/content/altersvorsorgeHubContent.js';
+import { zielgruppenSeiten } from '../src/content/altersvorsorgeZielgruppen/index.js';
+import { zielgruppenSeoRoute } from '../src/content/altersvorsorgeZielgruppen/seo.js';
 import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
@@ -98,6 +100,8 @@ export const seoRoutes = [
     lang: 'de',
     schemaMarkup: [{ '@context': 'https://schema.org', '@type': 'WebPage', '@id': 'https://healio.de/altersvorsorgedepot#webpage', name: 'Altersvorsorgedepot 2027: Zulage berechnen', description: 'Bis zu 540 EUR Grundzulage im Jahr, bis zu 300 EUR je zugeordnetem zulagenberechtigten Kind. Der Zulagen-Rechner für das neue Altersvorsorgedepot ab 2027.', url: 'https://healio.de/altersvorsorgedepot', inLanguage: 'de-DE', isPartOf: { '@id': 'https://healio.de/#website' }, about: { '@id': 'https://healio.de/#organization' } }, createFAQSchema(altersvorsorgeFaq)],
   },
+  // Anfrageseiten je Zielgruppe und Anlass (Seitenplan 09.11.2026)
+  ...zielgruppenSeiten.map(zielgruppenSeoRoute),
   {
     path: '/altersvorsorgedepot/danke',
     title: 'Startinfos zum Altersvorsorgedepot | Healio',

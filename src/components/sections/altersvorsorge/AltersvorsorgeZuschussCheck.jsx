@@ -15,19 +15,21 @@ import { buildInternalRatgeberUrl } from '@/lib/ratgeber-cta';
  * Alle Texte stehen in der Content-Datei (zuschussCheck). `kapazitaetHinweis`
  * zeigt den Satz zur begrenzten Zahl an Checks nur, wenn er dort eingeschaltet ist.
  */
-const AltersvorsorgeZuschussCheck = ({ rechnerWert, onVormerken, id = 'zuschuss-check' }) => {
+const AltersvorsorgeZuschussCheck = ({ rechnerWert, onVormerken, id = 'zuschuss-check', inhalt: eigeneTexte = null, utmContent = null }) => {
   const headingId = useId();
-  const inhalt = zuschussCheck;
+  // Unterseiten bringen eigene Texte mit; Knöpfe und Schalter bleiben die der Hauptseite.
+  const inhalt = eigeneTexte ? { ...zuschussCheck, ...eigeneTexte } : zuschussCheck;
   const { search } = useLocation();
   const kontaktUrl = buildInternalRatgeberUrl(CHECK_KONTAKT_URL, search, {
     utm_source: 'healio', utm_medium: 'landingpage', utm_campaign: 'altersvorsorgedepot',
+    ...(utmContent ? { utm_content: utmContent } : {}),
   });
 
   return (
     <section id={id} className="healio-container scroll-mt-24 px-4 py-14 sm:px-6 lg:px-8" aria-labelledby={headingId}>
       <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#081f2b] via-[#064b3d] to-[#03362f] p-6 text-white shadow-[0_28px_80px_rgba(7,17,31,0.22)] sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-[#5ee0b1]">{inhalt.eyebrow}</p>
+          <p className="font-display text-base font-bold uppercase tracking-[0.12em] text-[#5ee0b1]">{inhalt.eyebrow}</p>
           <h2 id={headingId} className="mt-3 font-display text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl lg:text-4xl">
             {inhalt.ueberschrift}
           </h2>

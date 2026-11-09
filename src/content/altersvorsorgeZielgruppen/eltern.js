@@ -1,0 +1,144 @@
+// Anfrageseite /altersvorsorgedepot/eltern. Zahlen: FAKTENBASIS.md und
+// Quellenprüfung vom 08.10.2026. Beispielwerte rechnet die Seite live aus.
+export default {
+  slug: 'eltern',
+  seo: {
+    title: 'Kinderzulage im Altersvorsorgedepot berechnen | Healio',
+    description: 'Bis zu 300 EUR Kinderzulage je Kind und Jahr, schon mit 25 EUR im Monat. Rechne aus, was deine Familie ab 2027 bekommt, und lass die Zuordnung prüfen.',
+    ogImageAlt: 'Healio: Kinderzulage im Altersvorsorgedepot für Eltern',
+  },
+  hero: {
+    brotkrume: 'Für Eltern',
+    eyebrow: 'Die Kinderzulage im neuen Fördersystem',
+    h1: 'Für jedes Kind bis zu 300 EUR Zulage im Jahr. Dafür reichen 25 EUR im Monat.',
+    unterzeile: 'Was du selbst einzahlst, legt der Staat für jedes Kind mit Kindergeld noch einmal obendrauf, bis 300 EUR im Jahr. Deine eigene Grundzulage kommt dazu. Hier siehst du, was für deine Familie drin ist.',
+    fussnote: 'Gilt bei unmittelbarer Förderberechtigung und für Kinder mit Kindergeldanspruch, die dir gesetzlich zugeordnet sind.',
+    linkInhalt: 'Erst lesen, was für Familien gilt',
+    vertrauenszeile: 'Kinderzulage gesetzlich geregelt · Start der neuen Verträge 2027 · Rechner ohne Anmeldung',
+    karte: {
+      titel: 'Was eine Familie ab 2027 bekommen kann',
+      kacheln: [
+        { key: 'kinderzulage', wert: 'bis zu 300 EUR', text: 'Kinderzulage für jedes Kind' },
+        { key: 'grundzulage', wert: 'bis zu 540 EUR', text: 'Grundzulage für dich selbst' },
+        { key: 'beitrag', motiv: 'zulage', wert: '25 EUR', text: 'Monatsbeitrag holt die volle Kinderzulage' },
+      ],
+      hinweis: 'Die 540 EUR Grundzulage gibt es bei 150 EUR Monatsbeitrag. Kinderzulage nur für zugeordnete Kinder mit Kindergeld.',
+    },
+  },
+  fakten: {
+    ueberschrift: 'Das gilt für Familien',
+    intro: 'Vier Regeln entscheiden, wie viel Kinderzulage bei dir ankommt. Jede Karte nennt die Stelle, an der du sie nachlesen kannst.',
+    karten: [
+      { wert: '100 %', titel: 'deines Beitrags, je Kind', text: 'Für jedes dir zugeordnete Kind bekommst du 100 Prozent deines Eigenbeitrags als Kinderzulage, höchstens 300 EUR im Jahr.', quelle: 'rv85' },
+      { wert: '300 EUR', titel: 'im Jahr reichen für alle Kinder', text: 'Einen Extrabeitrag je Kind gibt es nicht. Wer 300 EUR im Jahr einzahlt, holt für jedes Kind die volle Kinderzulage.', quelle: 'gesetz' },
+      { wert: 'bis 18', titel: 'läuft das Kindergeld in der Regel', text: 'Ohne Kindergeld keine Kinderzulage. Unter bestimmten Voraussetzungen gibt es Kindergeld bis 21 oder 25, etwa während einer Ausbildung.', quelle: 'kindergeld' },
+      { wert: '1 Elternteil', titel: 'bekommt die Zulage je Kind', text: 'Dieselbe Kinderzulage geht nicht an beide Eltern. Wer sie bekommt, legt das Gesetz fest, und für 2028 ändert sich die Regel.', quelle: 'estg85' },
+    ],
+  },
+  beispiele: {
+    ueberschrift: 'Drei Familien, drei Rechnungen',
+    labels: { beitrag: 'Eigenbeitrag', zulage: 'Familienzulage', quote: 'Förderquote {quote}' },
+    karten: [
+      { titel: 'Ein Kind, 25 EUR im Monat', eingabe: { monatsbeitrag: 25, kinder: 1 }, text: 'Damit ist die Kinderzulage für dieses Kind schon ausgeschöpft.' },
+      { titel: 'Zwei Kinder, 25 EUR im Monat', eingabe: { monatsbeitrag: 25, kinder: 2 }, text: 'Bei zwei Kindern liegt die Zulage deutlich über dem, was du selbst einzahlst.' },
+      { titel: 'Zwei Kinder, 150 EUR im Monat', eingabe: { monatsbeitrag: 150, kinder: 2 }, text: 'Hier kommt die höchste Grundzulage dazu, die Kinderzulage bleibt bei 300 EUR je Kind.' },
+    ],
+    kleingedruckt: 'Gerechnet für einen Elternteil, der selbst förderberechtigt ist, ein volles Beitragsjahr ab 2027 und zugeordnete Kinder mit Kindergeld. Steuern, Kosten und Kursentwicklung sind nicht enthalten. Die Zulagen landen in deinem Vorsorgevertrag, nicht auf einem Konto des Kindes.',
+  },
+  vertiefung: {
+    ueberschrift: 'Wer die Kinderzulage bekommt und wie lange',
+    intro: 'Höhe und Zuordnung sind zwei getrennte Fragen. Die Höhe ist schnell gerechnet, bei der Zuordnung lohnt ein zweiter Blick.',
+    bloecke: [
+      { titel: 'Im Beitragsjahr 2027', text: 'Bei verheirateten Eltern unterschiedlichen Geschlechts, die nicht dauernd getrennt leben, geht die Kinderzulage grundsätzlich an die Mutter. Stellen beide gemeinsam einen Antrag, kann der Vater sie bekommen. Bei gleichgeschlechtlichen Paaren richtet sich die Zuordnung nach der Kindergeldfestsetzung.' },
+      { titel: 'Ab dem Beitragsjahr 2028', text: 'Dann zählt grundsätzlich der Elternteil, für den das Kindergeld festgesetzt ist. Mit übereinstimmender Erklärung lässt sich die Zulage dem anderen Elternteil zuordnen. Für ein abgelaufenes Jahr kann diese Wahl nicht mehr widerrufen werden.' },
+      { titel: 'Wenn das Kindergeld endet', text: 'Die Kinderzulage ist eine Jahresleistung. Endet das Kindergeld mitten im Jahr, wird sie deshalb nicht automatisch nach Monaten gekürzt. Im ersten vollen Jahr ohne Kindergeld fällt sie weg, deine Grundzulage läuft weiter.' },
+      { titel: 'Partner ohne eigene Förderung', text: 'Ist dein Ehe- oder Lebenspartner nicht selbst förderberechtigt, kann er unter weiteren Voraussetzungen über dich mittelbar gefördert werden. Dafür gilt eine eigene Rechnung mit mindestens 120 EUR Beitrag im Jahr und höchstens 175 EUR Grundzulage. Diesen Teil rechnen wir im Check getrennt.' },
+      { titel: 'Riester in der Familie', text: 'Viele Familien sparen seit Jahren mit Riester, oft wegen der Kinderzulage. Nicht kündigen, erst prüfen. Hast du ein eher kleines Einkommen und mehrere Kinder, schneidet der alte Vertrag manchmal besser ab. Wir legen beide Rechnungen nebeneinander.', link: { to: '/altersvorsorgedepot/riester', label: 'Mehr zum Riester-Umzug' } },
+    ],
+  },
+  rechner: {
+    voreinstellung: { monatsbeitrag: 25, kinder: 2, unter25: false, selbststaendig: false, riester: false },
+    felder: ['monatsbeitrag', 'kinder', 'riester'],
+    texte: {
+      ueberschrift: 'Rechne die Zulage für deine Familie aus',
+      unterzeile: 'Stell Beitrag und Kinderzahl ein. Das Ergebnis ist ein Beispiel, die Zuordnung klären wir danach mit dir.',
+      labels: {
+        monatsbeitrag: 'Welchen Betrag legst du im Monat zurück?',
+        kinder: 'Wie viele Kinder mit Kindergeld sind dir zugeordnet?',
+        riester: 'Gibt es in der Familie schon einen Riester-Vertrag?',
+      },
+      ergebnis: {
+        vor: 'Zulagen für deine Familie im Jahr',
+        nach: 'im Beispiel, Grund- und Kinderzulage zusammen.',
+        monat: 'Das sind {monat} im Monat. Pro Euro, den du einzahlst, gibt der Staat {quote} dazu.',
+      },
+      tipps: {
+        unter25MitKindern: 'Ab 25 EUR im Monat bekommt jedes Kind die volle Kinderzulage.',
+        unter30KeineKinder: 'Mit 30 EUR im Monat ist die 50-Prozent-Stufe ganz ausgeschöpft.',
+        unter150: 'Bei 150 EUR im Monat käme die volle Grundzulage von 540 EUR dazu.',
+        bei150: 'Mehr Grundzulage als bei diesem Beitrag gibt es nicht.',
+      },
+      hinweisTitel: { riester: 'Riester-Vertrag in der Familie' },
+      hinweise: {
+        riester: 'Nicht kündigen, erst prüfen. Wir vergleichen alte und neue Förderung für eure Kinder, bevor ihr etwas ändert.',
+        immer: 'Ob zusätzlich ein Steuervorteil drin ist, prüft das Finanzamt automatisch. Im Check schauen wir auch, bei welchem Elternteil der Vertrag am meisten bringt.',
+      },
+      teaser: { titel: 'Nach dem Speichern: Familienmodell bis 67', text: 'Mit anpassbarem Alter und Steuersatz. Die Kinderzulage bleibt dort außen vor, weil ihre Dauer vom Kindergeld abhängt.' },
+      knopfMitBetrag: 'Familienrechnung speichern & vormerken',
+      knopfOhneAnspruch: 'Familie für den Start vormerken',
+      kleingedruckt: 'So rechnet das Gesetz ab 2027 für unmittelbar Förderberechtigte. Ohne Kindergeld und gesetzliche Zuordnung gibt es keine Kinderzulage, und die Zuordnung folgt 2027 anderen Regeln als danach. Kosten, Kurse und Steuerermäßigung bleiben außen vor. Eingezahltes Geld ist für die Rente bestimmt und bis dahin festgelegt.',
+    },
+  },
+  check: {
+    eyebrow: 'Unverbindlich, für deine Familie',
+    ueberschrift: 'Dein Zuschuss-Check für Familien',
+    unterzeile: 'In drei Schritten von der Beispielrechnung zu einem Plan, bei dem keine Kinderzulage liegen bleibt.',
+    karten: [
+      { icon: 'zulage', titel: 'Familienrechnung speichern', text: 'Beitrag und Kinderzahl wandern aus dem Rechner in deine Vormerkung. Dein Vorname und deine E-Mail genügen, eine Telefonnummer ist freiwillig.' },
+      { icon: 'familien', titel: 'Zuordnung klären', text: 'Im etwa 10-minütigen Vorabcheck klären wir, welchem Elternteil die Kinder zugeordnet sind und ob das Kindergeld für alle läuft.' },
+      { icon: 'startplan', titel: 'Beitrag festlegen', text: 'Wir planen den Beitrag so, dass jede Kinderzulage voll ankommt, und nehmen einen vorhandenen Riester-Vertrag mit in den Blick.' },
+    ],
+    ablaufzeile: 'Sobald deine Familienrechnung bei uns ist, melden wir uns für den Vorabcheck.',
+    startzeile: 'Die neuen Verträge starten am 1. Januar 2027. Die Kinderzulage richtet sich nach den Beiträgen des jeweiligen Jahres.',
+    knopfTermin: 'Familienrechnung speichern & vormerken',
+    knopfRueckruf: 'Lieber einen Rückruf',
+  },
+  vormerkung: {
+    ueberschrift: 'Eure Berechnung vormerken',
+    intro: 'Nach dem Absenden siehst du dein Modell bis 67. Zuordnung und Kindergeld klären wir im unverbindlichen Vorabcheck.',
+  },
+  passt: {
+    passtTitel: 'Passt zu euch, wenn',
+    passtItems: [
+      'ihr für mindestens ein Kind Kindergeld bekommt,',
+      'mindestens ein Elternteil selbst förderberechtigt ist, zum Beispiel rentenversichert angestellt,',
+      'ihr 25 EUR im Monat über viele Jahre zurücklegen könnt,',
+      'ihr die Kinderzulage für eure eigene Rente nutzen wollt.',
+    ],
+    passtNichtTitel: 'Passt nicht, wenn',
+    passtNichtItems: [
+      'ihr für das Kind spart, etwa für Führerschein oder Studium. Die Zulagen gehören zu deiner Rente und bleiben bis dahin im Vertrag.',
+      'ihr das Geld vor der Rente braucht. Wer es vorzeitig herausholt, muss die Förderung zurückzahlen.',
+      'dir ein Depot bei Bank oder Broker vorschwebt. Über Healio laufen nur Versicherungsvarianten.',
+    ],
+  },
+  faq: [
+    { question: 'Müssen wir für jedes Kind extra einzahlen?', answer: 'Nein. Die Kinderzulage beträgt je Kind 100 Prozent deines Eigenbeitrags, höchstens 300 EUR im Jahr. Mit 300 EUR Eigenbeitrag im Jahr, also 25 EUR im Monat, ist sie für jedes zugeordnete Kind voll.' },
+    { question: 'Können beide Eltern die Kinderzulage bekommen?', answer: 'Für dasselbe Kind nicht. 2027 geht sie bei verheirateten Eltern grundsätzlich an die Mutter, auf gemeinsamen Antrag an den Vater. Ab 2028 zählt grundsätzlich, für wen das Kindergeld festgesetzt ist. Die eigene Grundzulage kann dagegen jeder Elternteil bekommen, der selbst förderberechtigt ist und einzahlt.' },
+    { question: 'Gibt es die Kinderzulage auch für ältere Kinder?', answer: 'Solange Kindergeld läuft. In der Regel ist das bis 18 der Fall, unter bestimmten Voraussetzungen bis 21 oder 25, zum Beispiel während einer Ausbildung. Sonderfälle schauen wir uns einzeln an.' },
+    { question: 'Kommt das Geld beim Kind an?', answer: 'Nein. Die Kinderzulage fließt in den Vorsorgevertrag des Elternteils und bleibt dort bis zur Rente. Sie stärkt deine Altersvorsorge und ist kein Sparplan fürs Kind.' },
+    { question: 'Wir haben schon einen Riester-Vertrag. Was nun?', answer: 'Nicht kündigen, erst prüfen. Wer kündigt und sich das Geld auszahlen lässt, gibt Zulagen zurück. Schließt du ab 2027 einen neuen geförderten Vertrag ab, greift das neue Fördersystem für sämtliche Riester-Verträge in deinem Namen. Das Geld bleibt in den alten Verträgen, nur die Förderregeln wechseln, und zurück geht es nicht. Deshalb rechnen wir vorher beide Wege.' },
+  ],
+  quellen: [
+    { id: 'rv85', wofuer: 'Höhe der Kinderzulage' },
+    { id: 'estg85', wofuer: 'Zuordnung zu Mutter oder Vater' },
+    { id: 'kindergeld', wofuer: 'Altersgrenzen beim Kindergeld' },
+    { id: 'gesetz', wofuer: 'Zuordnungsregeln ab 2028' },
+    { id: 'zfa', wofuer: 'Förderrechnung für Familien' },
+    { id: 'regierung', wofuer: 'Überblick über die Reform' },
+  ],
+  weiterlesen: ['altersvorsorgedepot-kinderzulage', 'altersvorsorgedepot-kinderzulage-elternteil', 'altersvorsorgedepot-kindergeld-ende'],
+  abschlussKnopf: 'Familienzulage jetzt ausrechnen',
+  verwandt: ['elternzeit', 'riester', 'unter-25', 'selbststaendige', 'riester-kuendigen'],
+  fussHinweis: 'Diese Seite erklärt Familien die geförderte Altersvorsorge ab 2027 im Allgemeinen. Sie ersetzt keine Steuer- oder Anlageberatung. Ein Depot kann an Wert verlieren.',
+};

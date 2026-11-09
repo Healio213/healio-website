@@ -35,7 +35,14 @@ const Modellrechnung = ({ value }) => {
   );
 };
 
-const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug = null }) => {
+const STANDARD_TEXTE = {
+  ueberschrift: 'Deine Berechnung für Januar vormerken',
+  intro: 'Nach dem Absenden siehst du dein Steuer- und ETF-Modell. Deine persönliche Einschätzung klären wir im unverbindlichen Vorabcheck.',
+};
+
+// herkunft: fester Seitenpfad einer Unterseite (aus dem Content, nie aus der Adresse).
+const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug = null, texte = null, herkunft = null }) => {
+  const anzeige = { ...STANDARD_TEXTE, ...(texte || {}) };
   const firstNameRef = useRef(null);
   const pendingRef = useRef(false);
   const mountedRef = useRef(false);
@@ -72,7 +79,11 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug 
       await emailjsService.sendEmail({
         from_name: String(data.get('first_name')).trim(), from_email: String(data.get('email')).trim(),
         phone: String(data.get('phone') || '').trim(), company: '',
-        message: [buildVormerkungMessage(snapshot, mitTelefon), articleSource ? `Ratgeber-Herkunft: /ratgeber/${articleSource}` : ''].filter(Boolean).join('\n\n'),
+        message: [
+          buildVormerkungMessage(snapshot, mitTelefon),
+          articleSource ? `Ratgeber-Herkunft: /ratgeber/${articleSource}` : '',
+          typeof herkunft === 'string' && /^\/altersvorsorgedepot\/[a-z0-9-]+$/.test(herkunft) ? `Seiten-Herkunft: ${herkunft}` : '',
+        ].filter(Boolean).join('\n\n'),
       }, 'Altersvorsorge Vormerkung', { track: false, campaign: false });
       trackAltersvorsorgeFunnel('lead', 'inline_form');
       if (!mountedRef.current) return;
@@ -94,9 +105,9 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug 
         </div>
       ) : (
         <>
-          <h3 id="vormerkung-heading" className="font-display text-2xl font-extrabold text-slate-950">Deine Berechnung für Januar vormerken</h3>
+          <h3 id="vormerkung-heading" className="font-display text-2xl font-extrabold text-slate-950">{anzeige.ueberschrift}</h3>
           <p className="mt-3 rounded-xl border border-emerald-200 bg-white p-4 text-base font-semibold leading-7 text-[#064b3d]" aria-live="polite">Deine aktuelle Berechnung: {formatEuroDE(value.monatsbeitrag)} Monatsbeitrag, {formatEuroDE(ergebnis.zulageJahr)} jährliche Zulage und {value.kinder} berücksichtigte Kinder.{ergebnis.startbonus > 0 ? ` Dazu ${formatEuroDE(ergebnis.startbonus)} einmaliger Startbonus.` : ''}</p>
-          <p className="mt-3 text-base leading-7 text-slate-600">Nach dem Absenden siehst du dein Steuer- und ETF-Modell. Deine persönliche Einschätzung klären wir im unverbindlichen Vorabcheck.</p>
+          <p className="mt-3 text-base leading-7 text-slate-600">{anzeige.intro}</p>
           <form method="post" action="/kontakt" onSubmit={submit} onInput={beginForm} className="mt-5 space-y-4">
             <fieldset disabled={status === 'sending'} className="grid min-w-0 gap-4 sm:grid-cols-2">
               <legend className="sr-only">Deine Kontaktdaten</legend>

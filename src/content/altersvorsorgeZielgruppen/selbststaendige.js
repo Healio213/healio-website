@@ -1,0 +1,145 @@
+// Anfrageseite /altersvorsorgedepot/selbststaendige (Selbstständige und
+// Heilpraktiker). Zahlen: FAKTENBASIS.md und Quellenprüfung vom 08.10.2026,
+// § 18 EStG am 09.11.2026 gegengelesen.
+export default {
+  slug: 'selbststaendige',
+  seo: {
+    title: 'Altersvorsorge für Selbstständige: Zulage ab 2027 | Healio',
+    description: 'Ab 2027 bekommen auch Selbstständige und Heilpraktiker unter 67 die Zulage, bis zu 540 EUR im Jahr. Prüf die Voraussetzungen und rechne deinen Zuschuss aus.',
+    ogImageAlt: 'Healio: Altersvorsorgedepot für Selbstständige und Heilpraktiker',
+  },
+  hero: {
+    brotkrume: 'Für Selbstständige',
+    eyebrow: 'Neu ab 2027: Förderung für Selbstständige und Heilpraktiker',
+    h1: 'Selbstständig und bisher ohne Zulage? Ab 2027 legt der Staat bis zu 540 EUR im Jahr drauf.',
+    unterzeile: 'Für die meisten Selbstständigen war die staatliche Zulage bisher außer Reichweite. Mit der Reform kommen Gewerbetreibende und freie Berufe dazu, Heilpraktiker eingeschlossen. Ob du die Bedingungen erfüllst, siehst du hier in wenigen Minuten.',
+    fussnote: 'Für Selbstständige unter 67 mit Einkünften aus Gewerbe oder freiem Beruf und Steuererklärung für das Beitragsjahr. 540 EUR bei 150 EUR Monatsbeitrag.',
+    linkInhalt: 'Zuerst die Voraussetzungen ansehen',
+    vertrauenszeile: 'Neuer Förderzugang laut § 10a EStG · gilt für Beitragsjahre ab 2027 · Rechnen ohne Registrierung',
+    karte: {
+      titel: 'Was Selbstständige ab 2027 bekommen können',
+      kacheln: [
+        { key: 'neu', wert: 'Neu', text: 'förderberechtigt mit Gewerbe oder freiem Beruf' },
+        { key: 'grundzulage', wert: 'bis zu 540 EUR', text: 'Grundzulage im Jahr' },
+        { key: 'kinderzulage', wert: 'bis zu 300 EUR', text: 'je zugeordnetem Kind mit Kindergeld' },
+        { key: 'steuer', motiv: 'check', wert: '1.800 EUR', text: 'plus Zulage als Sonderausgaben ansetzbar' },
+      ],
+      hinweis: 'Sonderausgabenabzug mit Günstigerprüfung durch das Finanzamt. Keine Steuerberatung im Einzelfall.',
+    },
+  },
+  fakten: {
+    ueberschrift: 'Die vier Voraussetzungen des neuen Zugangs',
+    intro: 'Ab 2027 erweitert das Gesetz den Kreis der Förderberechtigten. Für Selbstständige müssen diese Bedingungen zusammenkommen.',
+    karten: [
+      { wert: 'unter 67', titel: 'Alter', text: 'Der neue Zugang gilt nur, solange du noch nicht 67 bist. Diese Grenze gehört fest dazu.', quelle: 'gesetz' },
+      { wert: '§ 15', titel: 'Gewerbe', text: 'Einkünfte aus Gewerbebetrieb im Beitragsjahr, etwa mit Laden, Online-Shop oder Agentur.', quelle: 'rv10a' },
+      { wert: '§ 18', titel: 'Freier Beruf', text: 'Einkünfte aus selbstständiger Arbeit nach § 18 Abs. 1 Nr. 1 bis 3 EStG. Heilpraktiker stehen dort ausdrücklich in der Liste der freien Berufe.', quelle: 'estg18' },
+      { wert: 'Erklärung', titel: 'Steuererklärung fürs Beitragsjahr', text: 'Für das Jahr, für das du die Zulage willst, gibst du eine Einkommensteuererklärung ab. Vor deiner ersten Einzahlung muss sie noch nicht vorliegen.', quelle: 'gesetz' },
+    ],
+  },
+  beispiele: {
+    ueberschrift: 'So viel Zulage bringt dein Beitrag',
+    labels: { beitrag: 'Du zahlst', zulage: 'Zulage', quote: '{quote} Förderquote' },
+    karten: [
+      { titel: 'Klein anfangen', eingabe: { monatsbeitrag: 40 }, text: 'Auch ein kleiner Beitrag hält dich in der Förderung, gerade in einem mageren Jahr.' },
+      { titel: 'Mittlerer Beitrag', eingabe: { monatsbeitrag: 80 }, text: 'Über 360 EUR im Jahr gibt es auf jeden weiteren Euro noch 25 Cent.' },
+      { titel: 'Höchste Grundzulage', eingabe: { monatsbeitrag: 150 }, text: 'Über 1.800 EUR im Jahr steigt die Zulage nicht weiter. Einzahlen kannst du bis 6.840 EUR.' },
+    ],
+    kleingedruckt: 'Rechnung ohne Kinder für Selbstständige, die den neuen Zugang erfüllen, mit vollem Beitragsjahr ab 2027. Was das Finanzamt zusätzlich erstattet, ist nicht eingerechnet, ebenso wenig Kosten und Kursentwicklung.',
+  },
+  vertiefung: {
+    ueberschrift: 'Was Selbstständige sonst noch wissen sollten',
+    intro: 'Für Selbstständige gelten ein paar Besonderheiten, die bei Angestellten keine Rolle spielen.',
+    bloecke: [
+      { titel: 'Dein Einkommen spielt keine Rolle', text: 'Bisher hing die volle Zulage am Vorjahreseinkommen. Im neuen System zählt nur, wie viel du im Jahr einzahlst. Ein schwaches Praxisjahr senkt deine Zulage also nicht, solange der Beitrag gleich bleibt.' },
+      { titel: 'Schwankende Einnahmen', text: 'Berechnet wird die Zulage nach dem Jahresbeitrag, mindestens 120 EUR sind nötig. Wie flexibel du Raten änderst oder Sonderzahlungen leistest, regelt dein Vertrag; das schauen wir vor dem Abschluss an. Ruhen lassen darfst du einen neuen Vertrag bis zum Rentenbeginn, das steht im Gesetz.' },
+      { titel: 'Heilpraktiker mit eigener Praxis', text: 'Als selbstständiger Heilpraktiker zählst du zu den freien Berufen und fällst damit unter den neuen Zugang. Bist du in einer Praxis angestellt und rentenversicherungspflichtig, warst du schon bisher förderberechtigt.' },
+      { titel: 'Angestellt mit berufsständischer Altersversorgung', text: 'Für Angestellte mit Pflichtmitgliedschaft in einer berufsständischen Altersversorgung gibt es einen eigenen Weg: unter 67, Arbeitslohn, gezahlte Versorgungsabgabe und eine Einwilligung zur Datenübermittlung bis Ende des Beitragsjahres. Die Berufsbezeichnung allein reicht nicht.' },
+      { titel: 'Basisrente schon vorhanden?', text: 'Rürup und Altersvorsorgedepot sind zwei getrennte Förderwege. Eine Basisrente lässt sich nicht ins neue Depot übertragen, sie läuft nach ihren eigenen Regeln weiter. Ob das Depot daneben passt, schauen wir uns an; steuerliche Einzelfragen klärst du mit deiner Steuerberatung.' },
+    ],
+  },
+  rechner: {
+    voreinstellung: { monatsbeitrag: 150, kinder: 0, unter25: false, selbststaendig: true, riester: false },
+    felder: ['monatsbeitrag', 'kinder'],
+    texte: {
+      ueberschrift: 'Rechne aus, was dein Beitrag an Zulage bringt',
+      unterzeile: 'Das Beispiel geht davon aus, dass du die Voraussetzungen erfüllst. Ob das so ist, prüfen wir im Anschluss gemeinsam.',
+      labels: {
+        monatsbeitrag: 'Wie viel willst du im Monat für später einzahlen?',
+        kinder: 'Hast du Kinder mit Kindergeld, die dir zugeordnet sind?',
+      },
+      ergebnis: {
+        vor: 'Mögliche Zulage für deine Selbstständigkeit',
+        nach: 'pro Jahr, wenn der neue Zugang für dich gilt.',
+        monat: 'Monatlich gerechnet {monat}. Auf jeden Euro Eigenbeitrag kommen {quote} vom Staat.',
+      },
+      tipps: {
+        unter25MitKindern: 'Mit Kindern lohnen sich schon 25 EUR im Monat, dann gibt es für jedes die volle Kinderzulage.',
+        unter30KeineKinder: 'Bis 30 EUR im Monat bekommst du auf jeden Euro 50 Cent.',
+        unter150: 'Die volle Grundzulage erreichst du mit 1.800 EUR im Jahr, also 150 EUR im Monat.',
+        bei150: 'Damit holst du die höchste Grundzulage, die das Gesetz vorsieht.',
+      },
+      hinweisTitel: { selbststaendig: 'Neuer Zugang für Selbstständige' },
+      hinweise: {
+        selbststaendig: 'Es zählen ein Alter unter 67, Einkünfte aus Gewerbe oder freiem Beruf im Beitragsjahr und die Steuererklärung für dieses Jahr. Diese Punkte gehen wir im Vorabcheck mit dir durch.',
+        immer: 'Dazu kommt der Sonderausgabenabzug bis 1.800 EUR plus Zulage. Ob er dir mehr bringt als die Zulage allein, prüft das Finanzamt von selbst.',
+      },
+      teaser: { titel: 'Nach dem Speichern: Steuer- und Depotmodell', text: 'Mit angenommenem Grenzsteuersatz und Alter. Ein Modell, keine Steuerberechnung.' },
+      knopfMitBetrag: 'Berechnung speichern & Voraussetzungen prüfen lassen',
+      knopfOhneAnspruch: 'Für den Start als Selbstständiger vormerken',
+      kleingedruckt: 'Zahlen nach der Förderung ab 2027 für unmittelbar Berechtigte, ohne Vertragskosten und Wertentwicklung. Was du einzahlst, kommt erst mit der Rente wieder heraus. Steuer- und Anlagefragen im Einzelfall beantwortet dir diese Rechnung nicht.',
+    },
+  },
+  check: {
+    eyebrow: 'Unverbindlich, für Selbstständige',
+    ueberschrift: 'Dein Zuschuss-Check für die Selbstständigkeit',
+    unterzeile: 'Wir klären mit dir, ob der neue Zugang für dich greift, und planen einen Beitrag, der zu deinen Einnahmen passt.',
+    karten: [
+      { icon: 'zulage', titel: 'Monatsbeitrag festhalten', text: 'Dein Betrag aus dem Rechner geht direkt in die Vormerkung. Mehr als Vorname und E-Mail-Adresse brauchen wir dafür nicht.' },
+      { icon: 'selbststaendige', titel: 'Voraussetzungen prüfen', text: 'Am Telefon gehen wir in rund zehn Minuten Einkunftsart, Alter und Steuererklärung mit dir durch.' },
+      { icon: 'startplan', titel: 'Jahresbeitrag planen', text: 'Wir legen einen Beitrag fest, der auch ein schwächeres Jahr übersteht, und zeigen dir vor jedem Abschluss die Kosten.' },
+    ],
+    ablaufzeile: 'Ist deine Vormerkung da, ruft dich Healio an oder schreibt dir, je nachdem, was du angibst.',
+    startzeile: 'Der neue Zugang für Selbstständige gilt für Beitragsjahre ab 2027. Maßgeblich ist, was du im jeweiligen Jahr einzahlst.',
+    knopfTermin: 'Fördercheck vormerken',
+    knopfRueckruf: 'Rückruf anfragen',
+  },
+  vormerkung: {
+    ueberschrift: 'Deine Berechnung vormerken',
+    intro: 'Nach dem Absenden siehst du dein Steuer- und Depotmodell. Ob du förderberechtigt bist, klären wir im Vorabcheck.',
+  },
+  passt: {
+    passtTitel: 'Passt zu dir, wenn',
+    passtItems: [
+      'du gewerblich oder freiberuflich arbeitest, zum Beispiel mit eigener Heilpraktikerpraxis,',
+      'du jünger als 67 bist und jedes Jahr eine Steuererklärung abgibst,',
+      'du bisher ohne staatliche Zulage fürs Alter sparst,',
+      'du mindestens 10 EUR im Monat dauerhaft zurücklegen kannst.',
+    ],
+    passtNichtTitel: 'Passt nicht, wenn',
+    passtNichtItems: [
+      'du das Geld als Reserve für Praxis oder Geschäft brauchst. Es bleibt bis zur Rente im Vertrag.',
+      'du dein Vorsorgegeld lieber bei Bank oder Neobroker anlegen willst. Healio vermittelt ausschließlich Versicherungsvarianten.',
+    ],
+  },
+  faq: [
+    { question: 'Gilt die Förderung auch für Heilpraktiker?', answer: 'Ja, wenn du als Heilpraktiker selbstständig arbeitest. Heilpraktiker zählen nach § 18 EStG zu den freien Berufen. Außerdem musst du unter 67 sein und für das Beitragsjahr eine Einkommensteuererklärung abgeben.' },
+    { question: 'Muss die Steuererklärung vorliegen, bevor ich einzahle?', answer: 'Nein. Verlangt wird eine Erklärung für das Beitragsjahr. Daraus folgt keine Pflicht, sie vor der ersten Einzahlung abzugeben. Wie der Anbieter den Nachweis später abfragt, klären wir vor dem Abschluss.' },
+    { question: 'Ich bin älter als 67. Kann ich noch einsteigen?', answer: 'Über den neuen Zugang für Selbstständige nicht, er gilt nur unter 67. Andere Berechtigungsgründe haben eigene Regeln. Wenn du nicht weißt, ob einer davon auf dich passt, schauen wir uns deinen Fall an.' },
+    { question: 'Altersvorsorgedepot oder Rürup-Rente?', answer: 'Das sind zwei eigene Förderwege. Das Depot bringt Zulagen und ist ab 10 EUR im Monat möglich, die Basisrente wird über den Sonderausgabenabzug gefördert. Eine bestehende Basisrente lässt sich nicht ins Depot übertragen. Welche Mischung passt, hängt von deinem Einkommen und deinen Plänen ab.' },
+    { question: 'Was passiert in einem Jahr mit wenig Umsatz?', answer: 'Die Zulage hängt nicht vom Einkommen ab, sondern von deinem Jahresbeitrag. Zahlst du in einem schwachen Jahr nur den Mindestbeitrag von 120 EUR, bekommst du 60 EUR Grundzulage. Einen neuen Vertrag ruhen zu lassen ist gesetzlich vorgesehen, in einem Jahr ganz ohne Einzahlung fällt die Zulage dann aber weg.' },
+  ],
+  quellen: [
+    { id: 'gesetz', wofuer: 'Altersgrenze und Steuererklärung' },
+    { id: 'rv10a', wofuer: 'Kreis der Förderberechtigten' },
+    { id: 'rv84', wofuer: 'Berechnung der Grundzulage' },
+    { id: 'estg18', wofuer: 'Heilpraktiker als freier Beruf' },
+    { id: 'bmf', wofuer: 'Sonderausgabenabzug und Basisrente' },
+    { id: 'estg10', wofuer: 'Basisrente als eigener Förderweg' },
+    { id: 'regierung', wofuer: 'Ziele der Reform' },
+  ],
+  weiterlesen: ['altersvorsorgedepot-selbststaendige', 'altersvorsorgedepot-heilpraktiker', 'altersvorsorgedepot-schwankendes-einkommen', 'altersvorsorgedepot-oder-ruerup'],
+  abschlussKnopf: 'Zulage als Selbstständiger berechnen',
+  verwandt: ['riester', 'eltern', 'riester-kuendigen', 'elternzeit', 'unter-25'],
+  fussHinweis: 'Ein Überblick für Selbstständige und Heilpraktiker, keine Beratung im Einzelfall. Für Steuerfragen in deinem Fall ist deine Steuerberatung zuständig. Wertpapiere können im Wert fallen.',
+};

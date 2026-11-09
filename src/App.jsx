@@ -72,6 +72,12 @@ const BlogArticlePage = React.lazy(() => import('@/pages/BlogArticlePage'));
 const AltersvorsorgedepotPage = React.lazy(() => import('@/pages/AltersvorsorgedepotPage'));
 const AltersvorsorgedepotDankePage = React.lazy(() => import('@/pages/AltersvorsorgedepotDankePage'));
 const AltersvorsorgeRatgeberPage = React.lazy(() => import('@/pages/AltersvorsorgeRatgeberPage'));
+const AltersvorsorgeElternPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeElternPage'));
+const AltersvorsorgeSelbststaendigePage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeSelbststaendigePage'));
+const AltersvorsorgeRiesterPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeRiesterPage'));
+const AltersvorsorgeUnter25Page = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeUnter25Page'));
+const AltersvorsorgeElternzeitPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeElternzeitPage'));
+const AltersvorsorgeRiesterKuendigenPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeRiesterKuendigenPage'));
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
@@ -275,6 +281,12 @@ function App() {
               <Route path="ratgeber" element={<RatgeberPage />} />
               <Route path="altersvorsorgedepot" element={<AltersvorsorgedepotPage />} />
               <Route path="altersvorsorgedepot/danke" element={<AltersvorsorgedepotDankePage />} />
+              <Route path="altersvorsorgedepot/eltern" element={<AltersvorsorgeElternPage />} />
+              <Route path="altersvorsorgedepot/selbststaendige" element={<AltersvorsorgeSelbststaendigePage />} />
+              <Route path="altersvorsorgedepot/riester" element={<AltersvorsorgeRiesterPage />} />
+              <Route path="altersvorsorgedepot/unter-25" element={<AltersvorsorgeUnter25Page />} />
+              <Route path="altersvorsorgedepot/elternzeit" element={<AltersvorsorgeElternzeitPage />} />
+              <Route path="altersvorsorgedepot/riester-kuendigen" element={<AltersvorsorgeRiesterKuendigenPage />} />
               <Route path="ratgeber/altersvorsorgedepot" element={<AltersvorsorgeRatgeberPage />} />
               <Route path="ratgeber/:slug" element={<RatgeberArtikelPage />} />
             </Route>

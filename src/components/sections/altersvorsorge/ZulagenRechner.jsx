@@ -7,6 +7,30 @@ const MIN_BEITRAG = 10;
 const MAX_BEITRAG = RECHNER_MAX_MONATSBEITRAG;
 const SCHRITT_BEITRAG = 5;
 const MAX_KINDER = 6;
+const ALLE_FELDER = ['monatsbeitrag', 'kinder', 'unter25', 'selbststaendig', 'riester'];
+const STANDARD_TEASER = {
+  titel: 'Steuervorteil & ETF-Modell bis 67',
+  text: 'Nach der Vormerkung: deine Modellrechnung mit anpassbarem Alter und Steuersatz. Die persönliche Prüfung folgt im Vorabcheck.',
+};
+
+// Wortlaut der Hauptseite (Abschnitt 3 der Vorlage); {monat} und {quote}
+// werden aus den Rechenwerten ersetzt.
+const STANDARD_ERGEBNIS = {
+  vor: 'Beispiel: Grund- und Kinderzulage im Jahr',
+  nach: 'bei unmittelbarer Förderberechtigung.',
+  monat: 'Umgerechnet sind das {monat} im Monat. Auf jeden Euro von dir kommen {quote} vom Staat.',
+};
+
+// Unterseiten geben eigene Texte mit; fehlende Teile kommen aus der Hauptseite.
+const mitTexten = (texte) => (!texte ? { ...rechnerContent, teaser: STANDARD_TEASER, ergebnis: STANDARD_ERGEBNIS } : {
+  ...rechnerContent,
+  ...texte,
+  labels: { ...rechnerContent.labels, ...(texte.labels || {}) },
+  hinweise: { ...rechnerContent.hinweise, ...(texte.hinweise || {}) },
+  tipps: { ...rechnerContent.tipps, ...(texte.tipps || {}) },
+  teaser: { ...STANDARD_TEASER, ...(texte.teaser || {}) },
+  ergebnis: { ...STANDARD_ERGEBNIS, ...(texte.ergebnis || {}) },
+});
 
 /** Ja/Nein-Schalter, thumb-tauglich (min. 44px hoch) mit aria-pressed. */
 const SchalterZeile = ({ label, value, onChange }) => (
@@ -44,8 +68,10 @@ const SchalterZeile = ({ label, value, onChange }) => (
  * Zuschuss-Check, onCheck) und darunter der weichere Weg ins Webinar
  * (onWebinar).
  */
-const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 'rechner' }) => {
+const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 'rechner', texte = null, felder = ALLE_FELDER }) => {
   const { monatsbeitrag, kinder, unter25, selbststaendig, riester } = value;
+  const inhalt = useMemo(() => mitTexten(texte), [texte]);
+  const zeigt = (feld) => felder.includes(feld);
 
   const ergebnis = useMemo(
     () => berechneZulagen({ monatsbeitrag, kinder, unter25 }),
@@ -59,10 +85,10 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
   // Bei genau 150 EUR ist die Grundzulage bereits maximal, deshalb kein Tipp.
   const tipp = (() => {
     if (!ergebnis.berechtigt) return null;
-    if (kinder > 0 && monatsbeitrag < 25) return rechnerContent.tipps.unter25MitKindern;
-    if (kinder === 0 && monatsbeitrag < 30) return rechnerContent.tipps.unter30KeineKinder;
-    if (monatsbeitrag < 150) return rechnerContent.tipps.unter150;
-    if (monatsbeitrag === MAX_BEITRAG) return rechnerContent.tipps.bei150;
+    if (kinder > 0 && monatsbeitrag < 25) return inhalt.tipps.unter25MitKindern;
+    if (kinder === 0 && monatsbeitrag < 30) return inhalt.tipps.unter30KeineKinder;
+    if (monatsbeitrag < 150) return inhalt.tipps.unter150;
+    if (monatsbeitrag === MAX_BEITRAG) return inhalt.tipps.bei150;
     return null;
   })();
 
@@ -74,9 +100,9 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
       <div className="mx-auto max-w-4xl">
         <div className="mb-10 text-center">
           <h2 id={`${id}-heading`} className="text-3xl font-extrabold text-healio-dark md:text-4xl">
-            {rechnerContent.ueberschrift}
+            {inhalt.ueberschrift}
           </h2>
-          <p className="mt-3 text-lg text-healio-text-light">{rechnerContent.unterzeile}</p>
+          <p className="mt-3 text-lg text-healio-text-light">{inhalt.unterzeile}</p>
         </div>
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
@@ -84,7 +110,7 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
           <div className="min-w-0 space-y-8 rounded-2xl border border-gray-100 bg-white p-6 shadow-lg lg:p-8">
             <div>
               <label htmlFor={idBeitrag} className="flex flex-wrap items-baseline justify-between gap-3 font-bold text-healio-dark">
-                <span className="min-w-0 flex-1 basis-40">{rechnerContent.labels.monatsbeitrag}</span>
+                <span className="min-w-0 flex-1 basis-40">{inhalt.labels.monatsbeitrag}</span>
                 <span className="shrink-0 whitespace-nowrap text-2xl font-extrabold text-healio-primary-dark">{formatEuroDE(monatsbeitrag)}</span>
               </label>
               <input
@@ -105,8 +131,8 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <span id={idKinderLabel} className="min-w-0 flex-1 basis-40 font-bold text-healio-dark">{rechnerContent.labels.kinder}</span>
+            {zeigt('kinder') && <div className="flex flex-wrap items-center justify-between gap-4">
+              <span id={idKinderLabel} className="min-w-0 flex-1 basis-40 font-bold text-healio-dark">{inhalt.labels.kinder}</span>
               <div className="flex shrink-0 items-center gap-3">
                 <button
                   type="button"
@@ -135,42 +161,43 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
                   <Plus className="h-4 w-4" />
                 </button>
               </div>
-            </div>
+            </div>}
 
-            <SchalterZeile label={rechnerContent.labels.unter25} value={unter25} onChange={(next) => setzeFeld({ unter25: next })} />
-            <SchalterZeile label={rechnerContent.labels.selbststaendig} value={selbststaendig} onChange={(next) => setzeFeld({ selbststaendig: next })} />
-            <SchalterZeile label={rechnerContent.labels.riester} value={riester} onChange={(next) => setzeFeld({ riester: next })} />
+            {zeigt('unter25') && <SchalterZeile label={inhalt.labels.unter25} value={unter25} onChange={(next) => setzeFeld({ unter25: next })} />}
+            {zeigt('selbststaendig') && <SchalterZeile label={inhalt.labels.selbststaendig} value={selbststaendig} onChange={(next) => setzeFeld({ selbststaendig: next })} />}
+            {zeigt('riester') && <SchalterZeile label={inhalt.labels.riester} value={riester} onChange={(next) => setzeFeld({ riester: next })} />}
           </div>
 
           {/* Ergebnis */}
           <div className="relative min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#081f2b] via-[#064b3d] to-[#03362f] p-6 shadow-xl lg:p-8">
             <div aria-live="polite" aria-atomic="true">
               {!ergebnis.berechtigt ? (
-                <p className="text-center text-lg font-semibold text-white">{rechnerContent.unterMindestbetragText}</p>
+                <p className="text-center text-lg font-semibold text-white">{inhalt.unterMindestbetragText}</p>
               ) : (
                 <div>
                   <p className="text-base leading-relaxed text-white/90">
-                    Beispiel: Grund- und Kinderzulage im Jahr{' '}
+                    {inhalt.ergebnis.vor}{' '}
                     <span className="my-2 block text-4xl font-extrabold text-white sm:text-5xl">{formatEuroDE(ergebnis.zulageJahr)}</span>{' '}
-                    bei unmittelbarer Förderberechtigung.
+                    {inhalt.ergebnis.nach}
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-white/85">
-                    Umgerechnet sind das {formatEuroDE(ergebnis.zulageMonat)} im Monat. Auf jeden Euro von dir kommen{' '}
-                    {ergebnis.quote >= 1 ? formatEuroDE(ergebnis.quote) : formatCentDE(ergebnis.quote)} vom Staat.
+                    {inhalt.ergebnis.monat
+                      .replace('{monat}', formatEuroDE(ergebnis.zulageMonat))
+                      .replace('{quote}', ergebnis.quote >= 1 ? formatEuroDE(ergebnis.quote) : formatCentDE(ergebnis.quote))}
                   </p>
 
                   <div className="mt-6 space-y-2 rounded-xl border border-white/20 bg-white/10 p-4 text-base text-white">
                     <div className="flex justify-between">
-                      <span>{rechnerContent.ergebnisLabels.grundzulage}</span>
+                      <span>{inhalt.ergebnisLabels.grundzulage}</span>
                       <span className="font-bold">{formatEuroDE(ergebnis.grundzulage)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{rechnerContent.ergebnisLabels.kinderzulage}</span>
+                      <span>{inhalt.ergebnisLabels.kinderzulage}</span>
                       <span className="font-bold">{formatEuroDE(ergebnis.kinderzulage)}</span>
                     </div>
                     {ergebnis.startbonus > 0 && (
                       <div className="flex justify-between">
-                        <span>{rechnerContent.ergebnisLabels.startbonus}</span>
+                        <span>{inhalt.ergebnisLabels.startbonus}</span>
                         <span className="font-bold">{formatEuroDE(ergebnis.startbonus)}</span>
                       </div>
                     )}
@@ -181,19 +208,19 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
                   )}
 
                   {selbststaendig && (
-                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">Fördercheck für Selbstständige</p><p className="mt-1">{rechnerContent.hinweise.selbststaendig}</p></div>
+                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">{inhalt.hinweisTitel?.selbststaendig || 'Fördercheck für Selbstständige'}</p><p className="mt-1">{inhalt.hinweise.selbststaendig}</p></div>
                   )}
                   {riester && (
-                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">Riester-Vertrag vorhanden: Wechsel prüfen</p><p className="mt-1">{rechnerContent.hinweise.riester}</p></div>
+                    <div className="mt-4 rounded-xl border border-[#5ee0b1]/50 bg-[#25c990]/15 p-4 text-base leading-7 text-white"><p className="font-bold">{inhalt.hinweisTitel?.riester || 'Riester-Vertrag vorhanden: Wechsel prüfen'}</p><p className="mt-1">{inhalt.hinweise.riester}</p></div>
                   )}
-                  <p className="mt-3 text-base leading-relaxed text-white/85">{rechnerContent.hinweise.immer}</p>
+                  <p className="mt-3 text-base leading-relaxed text-white/85">{inhalt.hinweise.immer}</p>
                 </div>
               )}
             </div>
 
             <div className="mt-5 rounded-xl border border-dashed border-white/40 bg-white/5 p-4 text-white">
-              <div className="flex items-center gap-2 font-bold"><Lock className="h-5 w-5 shrink-0 text-[#8ee7ca]" aria-hidden="true" /><span>Steuervorteil & ETF-Modell bis 67</span></div>
-              <p className="mt-2 text-sm leading-6 text-white/85">Nach der Vormerkung: deine Modellrechnung mit anpassbarem Alter und Steuersatz. Die persönliche Prüfung folgt im Vorabcheck.</p>
+              <div className="flex items-center gap-2 font-bold"><Lock className="h-5 w-5 shrink-0 text-[#8ee7ca]" aria-hidden="true" /><span>{inhalt.teaser.titel}</span></div>
+              <p className="mt-2 text-base leading-7 text-white/85">{inhalt.teaser.text}</p>
             </div>
 
             <button
@@ -202,22 +229,22 @@ const ZulagenRechner = ({ value, onChange, onCheck, onWebinar, vormerkung, id = 
               className="mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-lg bg-white px-6 py-4 text-center text-base font-extrabold text-healio-primary-dark shadow-md transition [text-wrap:balance] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8ee7ca]"
             >
               {ergebnis.berechtigt
-                ? rechnerContent.knopfMitBetrag.replace('{zulageJahr}', formatZahlDE(ergebnis.zulageJahr))
-                : rechnerContent.knopfOhneAnspruch}
+                ? inhalt.knopfMitBetrag.replace('{zulageJahr}', formatZahlDE(ergebnis.zulageJahr))
+                : inhalt.knopfOhneAnspruch}
             </button>
-            <a
+            {onWebinar && <a
               href="#webinar"
-              onClick={(event) => { event.preventDefault(); onWebinar?.(); }}
+              onClick={(event) => { event.preventDefault(); onWebinar(); }}
               className="mt-3 inline-flex min-h-11 w-full items-center justify-center px-3 text-center text-base font-semibold text-white underline underline-offset-4 transition hover:text-white/80"
             >
-              {rechnerContent.webinarLink}
-            </a>
+              {inhalt.webinarLink}
+            </a>}
           </div>
         </div>
 
         {vormerkung}
 
-        <p className="mt-6 text-base leading-relaxed text-healio-text-light">{rechnerContent.kleingedruckt}</p>
+        <p className="mt-6 text-base leading-relaxed text-healio-text-light">{inhalt.kleingedruckt}</p>
       </div>
     </section>
   );
