@@ -158,7 +158,7 @@ export const createArticleSchema = ({
   datePublished = null,
   dateModified = null,
   inLanguage = "de-DE",
-  image = `${SITE_URL}/images/healio-linkvorschau-v2.png`,
+  image = `${SITE_URL}/images/healio-linkvorschau-v3.jpg`,
   // Optional: eine Person (authorSchemaFor in src/content/ratgeber/authors.js).
   // Ohne Angabe bleibt die Healio GmbH Autorin, wie bei allen älteren Artikeln.
   author = null

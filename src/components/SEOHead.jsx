@@ -6,7 +6,7 @@ import { serializeJsonLd } from '@/lib/contentSecurity';
 import { GUIDED_CALLBACK_PREVIEW } from '@/lib/guided-callback';
 
 const SITE_URL = 'https://healio.de';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/images/healio-linkvorschau-v2.png`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/healio-linkvorschau-v3.jpg`;
 
 const normalizeHealioUrl = (url) => {
   if (!url) return url;

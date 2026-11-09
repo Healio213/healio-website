@@ -1,6 +1,6 @@
 import { authorSchemaFor } from '../content/ratgeber/authors.js';
 
-export const BLOG_SCHEMA_FALLBACK_IMAGE = 'https://healio.de/images/healio-linkvorschau-v2.png';
+export const BLOG_SCHEMA_FALLBACK_IMAGE = 'https://healio.de/images/healio-linkvorschau-v3.jpg';
 
 export function getBlogAuthor(article) {
   const visibleName = typeof article?.author === 'string' ? article.author.trim() : '';

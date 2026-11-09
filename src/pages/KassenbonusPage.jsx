@@ -102,7 +102,7 @@ const KassenbonusPage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={t('seo.ogTitle')}
         ogDescription={t('seo.ogDescription')}
-        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v3.jpg"
         ogImageAlt={t('seo.ogImageAlt')}
         ogUrl={canonicalUrl}
         schemaMarkup={schemaMarkup}

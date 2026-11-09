@@ -110,7 +110,7 @@ const ZahnPage = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={tSeo('zahn.title')}
         ogDescription={tSeo('zahn.description')}
-        ogImage="https://healio.de/images/healio-linkvorschau-v2.png"
+        ogImage="https://healio.de/images/healio-linkvorschau-v3.jpg"
         ogUrl={canonicalUrl}
         schemaMarkup={createServiceSchema()}
       />
