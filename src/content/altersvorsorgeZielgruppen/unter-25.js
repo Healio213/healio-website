@@ -38,7 +38,7 @@ export default {
   },
   beispiele: {
     ueberschrift: 'Drei Einstiege mit Startbonus',
-    labels: { beitrag: 'Du sparst', zulage: 'Grundzulage' },
+    labels: { beitrag: 'Du sparst im Jahr', zulage: 'Grundzulage jedes Jahr' },
     karten: [
       { titel: 'Einstieg mit 10 EUR', eingabe: { monatsbeitrag: 10, unter25: true }, text: 'Der kleinste Beitrag, der gefördert wird.' },
       { titel: 'Einstieg mit 15 EUR', eingabe: { monatsbeitrag: 15, unter25: true }, text: 'Fünf Euro mehr im Monat bringen 30 EUR mehr Zulage im Jahr.' },
@@ -134,7 +134,8 @@ export default {
     { id: 'zfa', wofuer: 'Bindung bis zur Rente' },
   ],
   weiterlesen: ['altersvorsorgedepot-foerderung', 'altersvorsorgedepot-wer-ist-berechtigt', 'altersvorsorgedepot-etf-sparplan'],
+  weiterlesenTitel: 'Grundlagen im Ratgeber',
   abschlussKnopf: 'Meinen Startbonus ausrechnen',
-  verwandt: ['eltern', 'selbststaendige', 'elternzeit', 'riester', 'riester-kuendigen'],
+  verwandt: ['eltern', 'kindergeld-endet', 'selbststaendige', 'elternzeit', 'riester', 'ehepartner', 'riester-kuendigen'],
   fussHinweis: 'Infos für Einsteiger unter 25, ohne Anlageberatung. Fonds und ETFs schwanken, auch Verluste kommen vor.',
 };

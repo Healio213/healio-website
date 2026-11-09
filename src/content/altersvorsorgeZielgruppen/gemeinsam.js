@@ -62,17 +62,17 @@ export const QUELLEN = {
   },
   rv84: {
     kurz: '§ 84 EStG',
-    label: '§ 84 EStG, Fassung ab 2027',
+    label: '§ 84 EStG ab 2027',
     href: 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0084/0084_2027_01_01.html',
   },
   rv85: {
     kurz: '§ 85 EStG',
-    label: '§ 85 EStG, Fassung ab 2027',
+    label: '§ 85 EStG ab 2027',
     href: 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0085/0085_2027_01_01.html',
   },
   rv10a: {
     kurz: '§ 10a EStG',
-    label: '§ 10a EStG, Fassung ab 2027',
+    label: '§ 10a EStG ab 2027',
     href: 'https://rvrecht.deutsche-rentenversicherung.de/SharedDocs/rvRecht/05_Normen_und_Vertraege/02_C-K/EStG/0010a/0010a_2027_01_01.html',
   },
   estg85: {
@@ -122,14 +122,18 @@ export const RATGEBER_TITEL = {
   'riester-kuendigen-oder-behalten': 'Riester kündigen oder behalten: Welche Entscheidung passt?',
   'riester-jahresmitteilung-checkliste': 'Riester-Jahresmitteilung prüfen: Eine praktische Checkliste',
   'altersvorsorgedepot-geld-entnehmen': 'Altersvorsorgedepot: Was gilt, wenn du vor der Rente an dein Geld musst?',
+  'altersvorsorgedepot-was-ist-das': 'Was ist das Altersvorsorgedepot und wie funktioniert es?',
+  'altersvorsorgedepot-steuern': 'Altersvorsorgedepot und Steuern: Absetzen und Auszahlung ab 2027',
 };
 
-// Die sechs Eingänge. label: kurzer Linktext, kurz: Unterzeile auf der Hauptseite.
+// Die acht Eingänge (Zielgruppen und Anlässe). label: kurzer Linktext, kurz: Unterzeile auf der Hauptseite.
 export const EINGAENGE = [
   { slug: 'eltern', label: 'Eltern', kurz: 'Bis zu 300 EUR je Kind und Jahr', motiv: 'kinderzulage' },
   { slug: 'selbststaendige', label: 'Selbstständige und Heilpraktiker', kurz: 'Ab 2027 neu förderberechtigt', motiv: 'selbststaendige' },
   { slug: 'riester', label: 'Riester-Vertrag', kurz: 'Umzug ins neue Depot prüfen', motiv: 'riester' },
   { slug: 'unter-25', label: 'Unter 25', kurz: '200 EUR Startbonus, einmalig', motiv: 'startbonus' },
+  { slug: 'ehepartner', label: 'Ehepartner ohne eigene Förderung', kurz: 'Bis zu 175 EUR Zulage über den Partner', motiv: 'zulage' },
   { slug: 'elternzeit', label: 'Elternzeit', kurz: 'Zulage auch ohne Gehalt', motiv: 'familien' },
+  { slug: 'kindergeld-endet', label: 'Kindergeld endet', kurz: 'Grundzulage bleibt, Kind kann starten', motiv: 'startplan' },
   { slug: 'riester-kuendigen', label: 'Riester kündigen?', kurz: 'Erst prüfen, was es kostet', motiv: 'entscheidung' },
 ].map((eingang) => ({ ...eingang, path: `${ZIELGRUPPEN_BASIS_PFAD}/${eingang.slug}` }));

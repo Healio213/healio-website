@@ -78,6 +78,8 @@ const AltersvorsorgeRiesterPage = React.lazy(() => import('@/pages/altersvorsorg
 const AltersvorsorgeUnter25Page = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeUnter25Page'));
 const AltersvorsorgeElternzeitPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeElternzeitPage'));
 const AltersvorsorgeRiesterKuendigenPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeRiesterKuendigenPage'));
+const AltersvorsorgeEhepartnerPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeEhepartnerPage'));
+const AltersvorsorgeKindergeldEndetPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeKindergeldEndetPage'));
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
@@ -287,6 +289,8 @@ function App() {
               <Route path="altersvorsorgedepot/unter-25" element={<AltersvorsorgeUnter25Page />} />
               <Route path="altersvorsorgedepot/elternzeit" element={<AltersvorsorgeElternzeitPage />} />
               <Route path="altersvorsorgedepot/riester-kuendigen" element={<AltersvorsorgeRiesterKuendigenPage />} />
+              <Route path="altersvorsorgedepot/ehepartner" element={<AltersvorsorgeEhepartnerPage />} />
+              <Route path="altersvorsorgedepot/kindergeld-endet" element={<AltersvorsorgeKindergeldEndetPage />} />
               <Route path="ratgeber/altersvorsorgedepot" element={<AltersvorsorgeRatgeberPage />} />
               <Route path="ratgeber/:slug" element={<RatgeberArtikelPage />} />
             </Route>

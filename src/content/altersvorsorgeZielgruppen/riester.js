@@ -39,7 +39,7 @@ export default {
   },
   beispiele: {
     ueberschrift: 'Alt und neu bei gleichem Beitrag',
-    labels: { beitrag: 'Beitrag', zulage: 'Neue Zulage', quote: 'neue Förderquote {quote}' },
+    labels: { beitrag: 'Beitrag jährlich', zulage: 'Neue Zulage pro Jahr', quote: 'neue Förderquote {quote}' },
     karten: [
       { titel: 'Alte Riester-Förderung', festwerte: { eigenbeitrag: '4 %', eigenbeitragRest: 'Gesamtbeitrag in Prozent des Vorjahreseinkommens', zulage: '175 EUR', zulageRest: 'Grundzulage höchstens' }, text: 'Für die volle Zulage mussten Beitrag und Zulagen zusammen 4 Prozent des Vorjahreseinkommens erreichen, höchstens 2.100 EUR. Mindestens 60 EUR im Jahr.' },
       { titel: 'Neue Förderung, 100 EUR im Monat', eingabe: { monatsbeitrag: 100 }, text: 'Unabhängig vom Einkommen. Die ersten 360 EUR werden mit 50 Prozent gefördert, der Rest bis 1.800 EUR mit 25 Prozent.' },
@@ -141,7 +141,8 @@ export default {
     { id: 'estg89', wofuer: 'Frist für den Zulagenantrag' },
   ],
   weiterlesen: ['riester-altersvorsorgedepot-wechsel', 'riester-alte-oder-neue-foerderung', 'altersvorsorgedepot-garantie'],
+  weiterlesenTitel: 'Weiterlesen zum Riester-Wechsel',
   abschlussKnopf: 'Neue Förderung für meinen Beitrag rechnen',
-  verwandt: ['riester-kuendigen', 'selbststaendige', 'eltern', 'unter-25', 'elternzeit'],
-  fussHinweis: 'Diese Seite informiert über bestehende Riester-Verträge und die Reform. Eine Prüfung deines konkreten Vertrags ersetzt sie nicht. Ohne Garantie kann ein Depot Verluste machen.',
+  verwandt: ['riester-kuendigen', 'selbststaendige', 'ehepartner', 'eltern', 'unter-25', 'elternzeit', 'kindergeld-endet'],
+  fussHinweis: 'Hinweis zu bestehenden Riester-Verträgen und zur Reform. Eine Prüfung deines konkreten Vertrags ersetzt sie nicht. Ohne Garantie kann ein Depot Verluste machen.',
 };

@@ -39,7 +39,7 @@ export default {
   },
   beispiele: {
     ueberschrift: 'So viel Zulage bringt dein Beitrag',
-    labels: { beitrag: 'Du zahlst', zulage: 'Zulage', quote: '{quote} Förderquote' },
+    labels: { beitrag: 'Du zahlst jährlich', zulage: 'Zulage dazu', quote: '{quote} Förderquote' },
     karten: [
       { titel: 'Klein anfangen', eingabe: { monatsbeitrag: 40 }, text: 'Auch ein kleiner Beitrag hält dich in der Förderung, gerade in einem mageren Jahr.' },
       { titel: 'Mittlerer Beitrag', eingabe: { monatsbeitrag: 80 }, text: 'Über 360 EUR im Jahr gibt es auf jeden weiteren Euro noch 25 Cent.' },
@@ -130,16 +130,17 @@ export default {
     { question: 'Was passiert in einem Jahr mit wenig Umsatz?', answer: 'Die Zulage hängt nicht vom Einkommen ab, sondern von deinem Jahresbeitrag. Zahlst du in einem schwachen Jahr nur den Mindestbeitrag von 120 EUR, bekommst du 60 EUR Grundzulage. Einen neuen Vertrag ruhen zu lassen ist gesetzlich vorgesehen, in einem Jahr ganz ohne Einzahlung fällt die Zulage dann aber weg.' },
   ],
   quellen: [
+    { id: 'regierung', wofuer: 'Ziele der Reform' },
     { id: 'gesetz', wofuer: 'Altersgrenze und Steuererklärung' },
     { id: 'rv10a', wofuer: 'Kreis der Förderberechtigten' },
     { id: 'rv84', wofuer: 'Berechnung der Grundzulage' },
     { id: 'estg18', wofuer: 'Heilpraktiker als freier Beruf' },
     { id: 'bmf', wofuer: 'Sonderausgabenabzug und Basisrente' },
     { id: 'estg10', wofuer: 'Basisrente als eigener Förderweg' },
-    { id: 'regierung', wofuer: 'Ziele der Reform' },
   ],
   weiterlesen: ['altersvorsorgedepot-selbststaendige', 'altersvorsorgedepot-heilpraktiker', 'altersvorsorgedepot-schwankendes-einkommen', 'altersvorsorgedepot-oder-ruerup'],
+  weiterlesenTitel: 'Ratgeber für Selbstständige',
   abschlussKnopf: 'Zulage als Selbstständiger berechnen',
-  verwandt: ['riester', 'eltern', 'riester-kuendigen', 'elternzeit', 'unter-25'],
+  verwandt: ['riester', 'eltern', 'ehepartner', 'riester-kuendigen', 'elternzeit', 'kindergeld-endet', 'unter-25'],
   fussHinweis: 'Ein Überblick für Selbstständige und Heilpraktiker, keine Beratung im Einzelfall. Für Steuerfragen in deinem Fall ist deine Steuerberatung zuständig. Wertpapiere können im Wert fallen.',
 };

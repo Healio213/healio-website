@@ -135,7 +135,8 @@ export default {
     { id: 'zfaJahr', wofuer: 'Beitragsjahr und Zulagenantrag' },
   ],
   abschlussKnopf: 'Vor dem Kündigen die Zahlen prüfen',
-  verwandt: ['riester', 'eltern', 'elternzeit', 'unter-25', 'selbststaendige'],
+  verwandt: ['riester', 'ehepartner', 'eltern', 'elternzeit', 'unter-25', 'selbststaendige', 'kindergeld-endet'],
   weiterlesen: ['riester-kuendigen-oder-behalten', 'riester-jahresmitteilung-checkliste', 'altersvorsorgedepot-geld-entnehmen'],
+  weiterlesenTitel: 'Ratgeber vor der Entscheidung',
   fussHinweis: 'Hier geht es allgemein um die Kündigung geförderter Riester-Verträge. Das ist keine Rechts- oder Steuerberatung, für deinen Vertrag gelten seine eigenen Bedingungen. Wertpapiere in einem neuen Vertrag ohne Garantie schwanken im Kurs.',
 };

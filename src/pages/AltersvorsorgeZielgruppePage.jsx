@@ -67,7 +67,7 @@ const Ueberschrift = ({ id, children, intro }) => (
   </div>
 );
 
-const STANDARD_BEISPIEL_LABELS = { beitrag: 'Du zahlst', zulage: 'Zulage', quote: '{quote} Förderquote' };
+const STANDARD_BEISPIEL_LABELS = { beitrag: 'Du zahlst im Jahr', zulage: 'Zulage im Jahr', quote: '{quote} Förderquote' };
 
 const BeispielKarte = ({ karte, index, labels: eigeneLabels }) => {
   const labels = { ...STANDARD_BEISPIEL_LABELS, ...(eigeneLabels || {}) };
@@ -82,11 +82,11 @@ const BeispielKarte = ({ karte, index, labels: eigeneLabels }) => {
         <p className="font-display text-base font-bold text-slate-950">{karte.titel}</p>
         <dl className="mt-4 space-y-2">
           <div className="flex items-baseline justify-between gap-3 border-b border-slate-100 pb-2">
-            <dt className="text-base leading-6 text-slate-500">{labels.beitrag} im Jahr</dt>
+            <dt className="text-base leading-6 text-slate-500">{labels.beitrag}</dt>
             <dd className="whitespace-nowrap font-display text-2xl font-extrabold leading-tight text-slate-800">{formatEuroDE(ergebnis.jahresbeitrag)}</dd>
           </div>
           <div className="flex items-baseline justify-between gap-3">
-            <dt className="text-base leading-6 text-slate-500">{labels.zulage} im Jahr</dt>
+            <dt className="text-base leading-6 text-slate-500">{labels.zulage}</dt>
             <dd className="whitespace-nowrap font-display text-2xl font-extrabold leading-tight text-[#076046] sm:text-3xl">{formatEuroDE(ergebnis.zulageJahr)}</dd>
           </div>
         </dl>
@@ -152,7 +152,8 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
   // Reihenfolge je Seite: die naheliegenden Eingänge zuerst.
   const andereEingaenge = (inhalt.verwandt || EINGAENGE.map((eingang) => eingang.slug))
     .map((slug) => EINGAENGE.find((eingang) => eingang.slug === slug))
-    .filter((eingang) => eingang && eingang.slug !== inhalt.slug);
+    .filter((eingang) => eingang && eingang.slug !== inhalt.slug)
+    .slice(0, 4);
   const variante = { eyebrow: inhalt.hero.eyebrow, h1: inhalt.hero.h1, unterzeile: inhalt.hero.unterzeile, fussnote: inhalt.hero.fussnote };
 
   return (
@@ -332,7 +333,7 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
               <p className="mt-4 text-base leading-6 text-slate-500">Prüfstand {ZIELGRUPPEN_QUELLENSTAND}</p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h2 className="font-display text-xl font-extrabold text-slate-950">Weiterlesen im Ratgeber</h2>
+              <h2 className="font-display text-xl font-extrabold text-slate-950">{inhalt.weiterlesenTitel || 'Weiterlesen im Ratgeber'}</h2>
               <ul className="mt-4 space-y-2">
                 {inhalt.weiterlesen.map((slug) => RATGEBER_TITEL[slug] && (
                   <li key={slug}>
@@ -343,7 +344,7 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
                   </li>
                 ))}
               </ul>
-              <h2 className="mt-8 font-display text-xl font-extrabold text-slate-950">Andere Eingänge</h2>
+              <h2 className="mt-8 font-display text-xl font-extrabold text-slate-950">Passende Seiten</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {andereEingaenge.map((eingang) => (
                   <li key={eingang.slug}>

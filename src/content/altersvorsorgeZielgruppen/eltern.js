@@ -37,7 +37,7 @@ export default {
   },
   beispiele: {
     ueberschrift: 'Drei Familien, drei Rechnungen',
-    labels: { beitrag: 'Eigenbeitrag', zulage: 'Familienzulage', quote: 'Förderquote {quote}' },
+    labels: { beitrag: 'Familienbeitrag', zulage: 'Familienzulage', quote: 'Förderquote {quote}' },
     karten: [
       { titel: 'Ein Kind, 25 EUR im Monat', eingabe: { monatsbeitrag: 25, kinder: 1 }, text: 'Damit ist die Kinderzulage für dieses Kind schon ausgeschöpft.' },
       { titel: 'Zwei Kinder, 25 EUR im Monat', eingabe: { monatsbeitrag: 25, kinder: 2 }, text: 'Bei zwei Kindern liegt die Zulage deutlich über dem, was du selbst einzahlst.' },
@@ -51,7 +51,7 @@ export default {
     bloecke: [
       { titel: 'Im Beitragsjahr 2027', text: 'Bei verheirateten Eltern unterschiedlichen Geschlechts, die nicht dauernd getrennt leben, geht die Kinderzulage grundsätzlich an die Mutter. Stellen beide gemeinsam einen Antrag, kann der Vater sie bekommen. Bei gleichgeschlechtlichen Paaren richtet sich die Zuordnung nach der Kindergeldfestsetzung.' },
       { titel: 'Ab dem Beitragsjahr 2028', text: 'Dann zählt grundsätzlich der Elternteil, für den das Kindergeld festgesetzt ist. Mit übereinstimmender Erklärung lässt sich die Zulage dem anderen Elternteil zuordnen. Für ein abgelaufenes Jahr kann diese Wahl nicht mehr widerrufen werden.' },
-      { titel: 'Wenn das Kindergeld endet', text: 'Die Kinderzulage ist eine Jahresleistung. Endet das Kindergeld mitten im Jahr, wird sie deshalb nicht automatisch nach Monaten gekürzt. Im ersten vollen Jahr ohne Kindergeld fällt sie weg, deine Grundzulage läuft weiter.' },
+      { titel: 'Wenn das Kindergeld endet', text: 'Mit dem Kindergeld läuft auch die Kinderzulage aus, deine Grundzulage nicht. Wie das letzte Jahr gerechnet wird und wie dein Kind selbst starten kann, steht auf einer eigenen Seite.', link: { to: '/altersvorsorgedepot/kindergeld-endet', label: 'Zur Seite Kindergeld endet' } },
       { titel: 'Partner ohne eigene Förderung', text: 'Ist dein Ehe- oder Lebenspartner nicht selbst förderberechtigt, kann er unter weiteren Voraussetzungen über dich mittelbar gefördert werden. Dafür gilt eine eigene Rechnung mit mindestens 120 EUR Beitrag im Jahr und höchstens 175 EUR Grundzulage. Diesen Teil rechnen wir im Check getrennt.' },
       { titel: 'Riester in der Familie', text: 'Viele Familien sparen seit Jahren mit Riester, oft wegen der Kinderzulage. Nicht kündigen, erst prüfen. Hast du ein eher kleines Einkommen und mehrere Kinder, schneidet der alte Vertrag manchmal besser ab. Wir legen beide Rechnungen nebeneinander.', link: { to: '/altersvorsorgedepot/riester', label: 'Mehr zum Riester-Umzug' } },
     ],
@@ -127,7 +127,7 @@ export default {
     { question: 'Können beide Eltern die Kinderzulage bekommen?', answer: 'Für dasselbe Kind nicht. 2027 geht sie bei verheirateten Eltern grundsätzlich an die Mutter, auf gemeinsamen Antrag an den Vater. Ab 2028 zählt grundsätzlich, für wen das Kindergeld festgesetzt ist. Die eigene Grundzulage kann dagegen jeder Elternteil bekommen, der selbst förderberechtigt ist und einzahlt.' },
     { question: 'Gibt es die Kinderzulage auch für ältere Kinder?', answer: 'Solange Kindergeld läuft. In der Regel ist das bis 18 der Fall, unter bestimmten Voraussetzungen bis 21 oder 25, zum Beispiel während einer Ausbildung. Sonderfälle schauen wir uns einzeln an.' },
     { question: 'Kommt das Geld beim Kind an?', answer: 'Nein. Die Kinderzulage fließt in den Vorsorgevertrag des Elternteils und bleibt dort bis zur Rente. Sie stärkt deine Altersvorsorge und ist kein Sparplan fürs Kind.' },
-    { question: 'Wir haben schon einen Riester-Vertrag. Was nun?', answer: 'Nicht kündigen, erst prüfen. Wer kündigt und sich das Geld auszahlen lässt, gibt Zulagen zurück. Schließt du ab 2027 einen neuen geförderten Vertrag ab, greift das neue Fördersystem für sämtliche Riester-Verträge in deinem Namen. Das Geld bleibt in den alten Verträgen, nur die Förderregeln wechseln, und zurück geht es nicht. Deshalb rechnen wir vorher beide Wege.' },
+    { question: 'Wir haben schon einen Riester-Vertrag. Was nun?', answer: 'Nicht kündigen, erst prüfen. Lässt du dir das Geld auszahlen, gibst du Zulagen zurück. Schließt du ab 2027 einen neuen geförderten Vertrag ab, greift das neue Fördersystem für sämtliche Riester-Verträge in deinem Namen. Das Geld bleibt in den alten Verträgen, nur die Förderregeln wechseln, und zurück geht es nicht. Deshalb rechnen wir vorher beide Wege.' },
   ],
   quellen: [
     { id: 'rv85', wofuer: 'Höhe der Kinderzulage' },
@@ -137,8 +137,9 @@ export default {
     { id: 'zfa', wofuer: 'Förderrechnung für Familien' },
     { id: 'regierung', wofuer: 'Überblick über die Reform' },
   ],
-  weiterlesen: ['altersvorsorgedepot-kinderzulage', 'altersvorsorgedepot-kinderzulage-elternteil', 'altersvorsorgedepot-kindergeld-ende'],
+  weiterlesen: ['altersvorsorgedepot-kinderzulage', 'altersvorsorgedepot-kinderzulage-elternteil'],
+  weiterlesenTitel: 'Mehr für Familien im Ratgeber',
   abschlussKnopf: 'Familienzulage jetzt ausrechnen',
-  verwandt: ['elternzeit', 'riester', 'unter-25', 'selbststaendige', 'riester-kuendigen'],
+  verwandt: ['elternzeit', 'kindergeld-endet', 'ehepartner', 'riester', 'unter-25', 'selbststaendige', 'riester-kuendigen'],
   fussHinweis: 'Diese Seite erklärt Familien die geförderte Altersvorsorge ab 2027 im Allgemeinen. Sie ersetzt keine Steuer- oder Anlageberatung. Ein Depot kann an Wert verlieren.',
 };

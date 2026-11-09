@@ -38,7 +38,7 @@ export default {
   },
   beispiele: {
     ueberschrift: 'Was der Mindestbeitrag von 10 EUR in der Elternzeit bringt',
-    labels: { beitrag: 'Dein Beitrag', zulage: 'Zulagen', quote: '{quote} vom Beitrag als Zulage' },
+    labels: { beitrag: 'Dein Beitrag im Jahr', zulage: 'Zulagen für dich', quote: '{quote} vom Beitrag als Zulage' },
     karten: [
       { titel: 'Mit einem Kind', eingabe: { monatsbeitrag: 10, kinder: 1 }, text: 'Für das Kind kommt noch einmal so viel dazu, wie du einzahlst.' },
       { titel: 'Mit zwei Kindern', eingabe: { monatsbeitrag: 10, kinder: 2 }, text: 'Jedes Kind bringt Kinderzulage auf deine 120 EUR, ganz ohne höheren Beitrag.' },
@@ -79,7 +79,7 @@ export default {
         bei150: 'Mehr Grundzulage geht nicht.',
       },
       hinweise: {
-        immer: 'Den Nachweis über die Kindererziehungszeit und die Zuordnung der Kinder gehen wir im Vorabcheck mit dir durch.',
+        immer: 'Den Nachweis über die Kindererziehungszeit und die Zuordnung der Kinder besprechen wir im Vorabcheck.',
       },
       teaser: { titel: 'Nach dem Speichern: Vorsorgemodell bis 67', text: 'Mit anpassbarem Alter. Kinderzulage und Bonus bleiben dort außen vor.' },
       knopfMitBetrag: 'Berechnung speichern & Elternzeit-Check anfragen',
@@ -115,7 +115,7 @@ export default {
     ],
     passtNichtTitel: 'Passt nicht, wenn',
     passtNichtItems: [
-      'ihr in der Elternzeit jeden Euro für den Alltag braucht. Das Geld bleibt bis zur Rente im Vertrag.',
+      'ihr in der Elternzeit jeden Euro für den Alltag braucht. Das Geld ist bis zum Rentenbeginn festgelegt.',
       'du die Zulage für das Konto des Kindes erwartest. Sie stärkt deine eigene Vorsorge.',
       'du ein Bank- oder Broker-Depot suchst. Bei Healio geht es nur um Versicherungsvarianten.',
     ],
@@ -123,7 +123,7 @@ export default {
   faq: [
     { question: 'Bin ich in der Elternzeit förderberechtigt?', answer: 'Elternzeit allein reicht nicht. Werden dir Kindererziehungszeiten in der Rentenversicherung anerkannt, kann das die Grundlage für die Förderung sein. Den Antrag stellst du mit dem Formular V0800.' },
     { question: 'Reicht der Elterngeldbescheid als Nachweis?', answer: 'Nein. Weder Elterngeld noch eine Arbeitgeberbestätigung ersetzen die Anerkennung der Kindererziehungszeit durch die Rentenversicherung.' },
-    { question: 'Wie viel muss ich in der Elternzeit einzahlen?', answer: 'Mindestens 120 EUR im Jahr. Dafür gibt es 60 EUR Grundzulage und je zugeordnetem Kind mit Kindergeld 120 EUR Kinderzulage. Voll ist die Kinderzulage ab 300 EUR im Jahr.' },
+    { question: 'Wie viel muss ich in der Elternzeit einzahlen?', answer: 'Mindestens 120 EUR im Jahr. Dafür gibt es 60 EUR Grundzulage und für jedes Kind, das dir mit Kindergeld zugeordnet ist, 120 EUR Kinderzulage. Voll ist die Kinderzulage ab 300 EUR im Jahr.' },
     { question: 'Kann ich den Vertrag in der Elternzeit pausieren?', answer: 'Neue Verträge darfst du bis zum Rentenbeginn ruhen lassen. Ein Pausenjahr bringt aber keine Zulage, deshalb ist der Mindestbeitrag oft der bessere Weg.' },
     { question: 'Wer bekommt die Kinderzulage für unser Baby?', answer: 'Je Kind ein Elternteil. Die Regeln unterscheiden sich zwischen 2027 und den Jahren danach, Einzelheiten stehen auf unserer Seite für Eltern. Im Check klären wir, was bei euch gilt.' },
   ],
@@ -135,7 +135,8 @@ export default {
     { id: 'kindergeld', wofuer: 'Kindergeld als Voraussetzung' },
   ],
   weiterlesen: ['altersvorsorgedepot-teilzeit-elternzeit', 'altersvorsorgedepot-passt-das-zu-mir'],
+  weiterlesenTitel: 'Passende Ratgeber zur Elternzeit',
   abschlussKnopf: 'Zulage in der Elternzeit berechnen',
-  verwandt: ['eltern', 'riester', 'selbststaendige', 'riester-kuendigen', 'unter-25'],
+  verwandt: ['eltern', 'ehepartner', 'riester', 'kindergeld-endet', 'selbststaendige', 'riester-kuendigen', 'unter-25'],
   fussHinweis: 'Für Mütter und Väter in Elternzeit, als allgemeine Orientierung. Ob deine Kindererziehungszeit anerkannt wird, entscheidet die Rentenversicherung. Der Wert eines Depots kann schwanken.',
 };
