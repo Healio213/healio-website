@@ -107,6 +107,14 @@ export default {
     ueberschrift: 'Eure Paarrechnung vormerken',
     intro: 'Nach dem Absenden siehst du das Modell für den förderberechtigten Partner. Den mitgeförderten Partner rechnen wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Ihr wollt euch erst abstimmen?',
+    ueberschrift: 'Wir erinnern euch zum Start der neuen Verträge',
+    text: 'Einer von euch trägt sich mit Vorname und E-Mail ein. Ihr bekommt Nachricht, sobald beide Verträge abgeschlossen werden können und Näheres zur Förderung für Ehepartner feststeht. Die Abmeldung steht in jeder Mail.',
+    knopf: 'Uns zum Start erinnern',
+    fahrplan: 'Fahrplan für 2027 öffnen',
+    rechnerLink: 'Zuerst nur erinnern lassen',
+  },
   passt: {
     passtTitel: 'Passend für euch, wenn',
     passtItems: [

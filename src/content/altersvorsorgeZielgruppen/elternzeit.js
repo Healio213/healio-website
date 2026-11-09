@@ -105,6 +105,14 @@ export default {
     ueberschrift: 'Deine Berechnung für die Elternzeit vormerken',
     intro: 'Nach dem Absenden siehst du dein Modell bis 67. Nachweis und Zuordnung klären wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Gerade keinen Kopf dafür?',
+    ueberschrift: 'Wir geben dir Bescheid, wenn es so weit ist',
+    text: 'Lass Vorname und E-Mail da. Du hörst von uns, wenn die neuen Verträge starten, ganz ohne Termin. Die Infos kannst du über den Link in der Mail wieder abbestellen.',
+    knopf: 'Später Bescheid bekommen',
+    fahrplan: 'Den Fahrplan als PDF speichern',
+    rechnerLink: 'Jetzt nicht, später Bescheid',
+  },
   passt: {
     passtTitel: 'Gut geeignet, wenn',
     passtItems: [

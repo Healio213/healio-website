@@ -6,6 +6,8 @@ import SEOHead from '@/components/SEOHead';
 import { RATGEBER_ENTRIES } from '@/content/ratgeber/registry';
 import { altersvorsorgeClusters, ALTERSVORSORGE_HUB_PATH } from '@/content/ratgeber/altersvorsorge/shared';
 import { altersvorsorgeHub } from '@/content/altersvorsorgeHubContent';
+import AltersvorsorgeEinstiege from '@/components/sections/altersvorsorge/AltersvorsorgeEinstiege';
+import { EINGAENGE } from '@/content/altersvorsorgeZielgruppen/gemeinsam';
 
 // Der Hub braucht nur Kartenmetadaten. Die vollständigen Artikel werden erst
 // auf der jeweiligen Artikelseite über registry.loaders.js geladen.
@@ -77,6 +79,14 @@ const AltersvorsorgeRatgeberPage = () => (
             </ul>
           </section>
         ))}
+
+        <AltersvorsorgeEinstiege
+          eingaenge={EINGAENGE}
+          ueberschrift="Finde deinen Einstieg"
+          intro="Für jede Lebenslage gibt es eine eigene Seite mit Zahlen, Quellen und Rechner."
+          headingId="altersvorsorge-zielgruppen-einstiege-heading"
+          variante="alle"
+        />
 
         <section className="mt-16 rounded-3xl bg-home-midnight p-7 text-white sm:p-10" aria-labelledby="webinar-naechster-schritt">
           <h2 id="webinar-naechster-schritt" className="font-display text-2xl font-extrabold sm:text-3xl">Du möchtest die Fragen gemeinsam durchgehen?</h2>

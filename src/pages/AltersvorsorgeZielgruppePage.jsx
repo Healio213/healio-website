@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, BookOpen, Check, ExternalLink } from 'lucide-react';
+import { ArrowDownToLine, ArrowRight, Bell, BookOpen, Check, ExternalLink } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
@@ -10,6 +10,7 @@ import ZulagenRechner from '@/components/sections/altersvorsorge/ZulagenRechner'
 import AltersvorsorgeZuschussCheck from '@/components/sections/altersvorsorge/AltersvorsorgeZuschussCheck';
 import AltersvorsorgeVormerkung from '@/components/sections/altersvorsorge/AltersvorsorgeVormerkung';
 import { trackAltersvorsorgeFunnel } from '@/lib/altersvorsorgeAnalytics';
+import { openAltersvorsorgeStartinfo } from '@/lib/altersvorsorgeArtikelCheck';
 import { berechneZulagen, formatEuroDE } from '@/lib/altersvorsorgeZulagen';
 import {
   EINGAENGE, QUELLEN, RATGEBER_TITEL, ZIELGRUPPEN_BASIS_PFAD, ZIELGRUPPEN_QUELLENSTAND,
@@ -132,6 +133,7 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
   const herkunft = `${ZIELGRUPPEN_BASIS_PFAD}/${inhalt.slug}`;
   const canonical = zielgruppenCanonical(inhalt);
   const schema = useMemo(() => ({ '@context': 'https://schema.org', '@graph': zielgruppenSchema(inhalt) }), [inhalt]);
+  const rechnerTexte = useMemo(() => ({ ...inhalt.rechner.texte, webinarLink: inhalt.startinfo.rechnerLink }), [inhalt]);
   const [rechnerWert, setRechnerWert] = useState(() => ({ ...inhalt.rechner.voreinstellung }));
   const [vormerkungAnfrage, setVormerkungAnfrage] = useState(hash === '#altersvorsorge-vormerkung' ? 1 : 0);
   const calculatorStarted = useRef(false);
@@ -246,7 +248,8 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
             value={rechnerWert}
             onChange={updateRechner}
             onCheck={() => vormerken('landing_calculator')}
-            texte={inhalt.rechner.texte}
+            onWebinar={() => scrollToId('bescheid')}
+            texte={rechnerTexte}
             felder={inhalt.rechner.felder}
             vormerkung={vormerkungAnfrage > 0 ? (
               <AltersvorsorgeVormerkung value={rechnerWert} requestNumber={vormerkungAnfrage} texte={inhalt.vormerkung} herkunft={herkunft} />
@@ -260,6 +263,25 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
           inhalt={inhalt.check}
           utmContent={inhalt.slug}
         />
+
+        {/* Startinfo-Eintragung: erst einmal nur Bescheid bekommen */}
+        <Abschnitt id="bescheid" labelledBy="bescheid-heading">
+          <div className="mx-auto max-w-4xl rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm sm:p-8">
+            <p className="text-base font-semibold text-[#087654]">{inhalt.startinfo.eyebrow}</p>
+            <h2 id="bescheid-heading" className="mt-2 font-display text-2xl font-extrabold text-[#07111f] sm:text-3xl">{inhalt.startinfo.ueberschrift}</h2>
+            <p className="mt-4 text-base leading-7 text-slate-700">{inhalt.startinfo.text}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <button type="button" onClick={openAltersvorsorgeStartinfo} className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl bg-[#25c990] px-5 py-3 text-center text-base font-extrabold text-[#07111f] transition hover:bg-[#5ee0b1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087654]">
+                <Bell className="h-5 w-5 shrink-0" aria-hidden="true" />
+                {inhalt.startinfo.knopf}
+              </button>
+              <a href="/downloads/healio-zuschuss-fahrplan-2027.pdf" download="Healio-Zuschuss-Fahrplan-2027.pdf" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-xl border border-[#087654] px-5 py-3 text-center text-base font-semibold text-[#087654] transition hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087654]">
+                <ArrowDownToLine className="h-5 w-5 shrink-0" aria-hidden="true" />
+                {inhalt.startinfo.fahrplan}
+              </a>
+            </div>
+          </div>
+        </Abschnitt>
 
         {/* Ehrlich sagen, für wen es passt und für wen nicht */}
         <Abschnitt id="passt" label={inhalt.passt.passtTitel.replace(/,$/, '')}>

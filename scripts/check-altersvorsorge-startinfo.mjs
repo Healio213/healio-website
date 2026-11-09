@@ -5,7 +5,7 @@
  */
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import handler, { CONSENT_VERSION, validateStartinfo, startinfoConfig } from '../api/altersvorsorge-startinfo.js';
+import handler, { CONSENT_VERSION, validateStartinfo, startinfoConfig, RELAY_KENNT_UNTERSEITEN, relaySourcePath } from '../api/altersvorsorge-startinfo.js';
 import { STARTINFO_CONSENT_VERSION, STARTINFO_CONSENT_TEXT, STARTINFO_EVENT, isAltersvorsorgeRoute } from '../src/lib/altersvorsorgeStartinfo.js';
 
 const payload = {
@@ -82,11 +82,16 @@ try {
     { ...payload, elapsed_ms: 1999 }, { ...payload, elapsed_ms: 86400001 }, { ...payload, elapsed_ms: NaN }, { ...payload, elapsed_ms: Infinity },
   ];
   for (const body of invalidBodies) check(Boolean(validateStartinfo(body).error), 'Ungültige Eingabe muss abgewiesen werden');
-  for (const route of ['/altersvorsorgedepot', '/ratgeber/altersvorsorgedepot', payload.source_path, '/ratgeber/riester-kuendigen-oder-behalten']) {
+  for (const route of ['/altersvorsorgedepot', '/ratgeber/altersvorsorgedepot', payload.source_path, '/ratgeber/riester-kuendigen-oder-behalten', '/altersvorsorgedepot/eltern', '/altersvorsorgedepot/riester-kuendigen', '/altersvorsorgedepot/unter-25']) {
     check(isAltersvorsorgeRoute(route), 'Erlaubte Route nicht erkannt');
     check(!validateStartinfo({ ...payload, source_path: route }).error, 'API und Browser müssen dieselben erlaubten Routen kennen');
   }
   for (const route of ['/zahn', '/ratgeber', '/kontakt', '/altersvorsorgedepot/danke', '/en/ratgeber/riester-wechsel']) check(!isAltersvorsorgeRoute(route), 'Popup außerhalb seines Fachbereichs');
+  // Unterseiten unter /altersvorsorgedepot/<slug>: Danke-Seite, leerer Slug, tiefere Pfade und Großbuchstaben bleiben draußen.
+  for (const route of ['/altersvorsorgedepot/danke', '/altersvorsorgedepot/', '/altersvorsorgedepot/eltern/x', '/altersvorsorgedepot/ELTERN']) {
+    check(!isAltersvorsorgeRoute(route), 'Popup außerhalb der erlaubten Unterseiten');
+    check(Boolean(validateStartinfo({ ...payload, source_path: route }).error), 'API muss unerlaubte Unterseiten abweisen');
+  }
   config();
   check(Boolean(startinfoConfig()), 'Vollständig konfigurierte Anmeldung muss bereit sein');
   for (const [name, value] of [
@@ -121,6 +126,14 @@ try {
     assert.equal(outbound[0].email, 'startinfo@example.invalid');
     check(!JSON.stringify(result.body).includes('example.invalid'), 'Antwort darf keine Kontaktwerte spiegeln');
   }
+  // Brücke bis zum Relay-Update: Unterseiten gehen mit dem Pfad der Hauptseite an den Relay.
+  check(RELAY_KENNT_UNTERSEITEN === false, 'Schalter erst nach dem Relay-Update umlegen');
+  check(relaySourcePath('/altersvorsorgedepot/eltern') === '/altersvorsorgedepot', 'Unterseite wird für den Relay auf die Hauptseite abgebildet');
+  check(relaySourcePath('/ratgeber/altersvorsorgedepot-kinderzulage') === '/ratgeber/altersvorsorgedepot-kinderzulage'
+    && relaySourcePath('/altersvorsorgedepot') === '/altersvorsorgedepot', 'Bekannte Pfade bleiben unverändert');
+  config(); result = await invoke({ body: { ...payload, email: 'startinfo-unterseite@example.invalid', source_path: '/altersvorsorgedepot/eltern' } });
+  check(result.status === 202 && outbound.length === 1 && outbound[0].source_path === '/altersvorsorgedepot',
+    'Anmeldung von einer Unterseite erreicht den Relay mit bekanntem Pfad');
   config(); process.env.VERCEL_URL = 'release-test.vercel.app';
   result = await invoke({ headers: { origin: 'https://release-test.vercel.app', 'content-type': 'application/json' } });
   check(result.status === 202, 'Eigener Vercel-Kandidat darf anmelden');

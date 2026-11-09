@@ -109,6 +109,14 @@ export default {
     ueberschrift: 'Deine Riester-Prüfung vormerken',
     intro: 'Nach dem Absenden siehst du dein Depotmodell. Den Vergleich mit deinem Vertrag machen wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Du willst noch nichts entscheiden?',
+    ueberschrift: 'Wir melden uns, wenn der Umzug möglich wird',
+    text: 'Mit Vorname und E-Mail kommst du auf unsere Infoliste. Du erfährst, wann die ersten Zielverträge verfügbar sind und was das für bestehende Riester-Verträge heißt. Abbestellen kannst du mit einem Klick.',
+    knopf: 'Auf die Infoliste setzen',
+    fahrplan: 'Zuschuss-Fahrplan ansehen (PDF)',
+    rechnerLink: 'Nur auf die Infoliste',
+  },
   passt: {
     passtTitel: 'Ein Umzug kann passen, wenn',
     passtItems: [

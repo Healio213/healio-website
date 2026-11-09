@@ -88,6 +88,20 @@ test('Healio vermittelt nur Versicherungsvarianten, Bindung bis zur Rente steht 
   }
 });
 
+const STARTINFO_FELDER = ['eyebrow', 'ueberschrift', 'text', 'knopf', 'fahrplan', 'rechnerLink'];
+
+// Die Startinfo-Texte laufen über texteVon() mit durch Sperrwort- und Zahlenprüfung.
+test('Jede Seite hat die Startinfo-Eintragung mit sechs Texten', () => {
+  for (const seite of zielgruppenSeiten) {
+    assert.ok(seite.startinfo && typeof seite.startinfo === 'object', `${seite.slug}: startinfo fehlt`);
+    assert.deepEqual(Object.keys(seite.startinfo).sort(), [...STARTINFO_FELDER].sort(), `${seite.slug}: startinfo-Felder stimmen nicht`);
+    for (const feld of STARTINFO_FELDER) {
+      assert.equal(typeof seite.startinfo[feld], 'string', `${seite.slug}: startinfo.${feld} ist kein Text`);
+      assert.ok(seite.startinfo[feld].trim().length > 0, `${seite.slug}: startinfo.${feld} ist leer`);
+    }
+  }
+});
+
 test('Quellen, Ratgeber und Eingänge existieren', () => {
   for (const seite of zielgruppenSeiten) {
     for (const karte of seite.fakten.karten) assert.ok(QUELLEN[karte.quelle], `${seite.slug}: unbekannte Quelle ${karte.quelle}`);

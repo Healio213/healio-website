@@ -105,6 +105,14 @@ export default {
     ueberschrift: 'Deinen Start vormerken',
     intro: 'Nach dem Absenden siehst du ein Modell bis 67. Deine Berechtigung klären wir danach im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Erst mal nur merken?',
+    ueberschrift: 'Wir schreiben dir, wenn es losgeht',
+    text: 'Vorname und Mailadresse reichen. Sobald du abschließen kannst, bekommst du Bescheid, zusammen mit den wichtigsten Infos zum Startbonus. Kein Interesse mehr? Dann genügt ein Klick auf den Abmeldelink.',
+    knopf: 'Bescheid geben lassen',
+    fahrplan: 'PDF mit dem Fahrplan holen',
+    rechnerLink: 'Erst mal nur Bescheid',
+  },
   passt: {
     passtTitel: 'Für dich gemacht, wenn',
     passtItems: [

@@ -106,6 +106,14 @@ export default {
     ueberschrift: 'Deine Riester-Prüfung anfragen',
     intro: 'Nach dem Absenden siehst du ein Modell für das neue Depot. Deinen alten Vertrag prüfen wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Du brauchst noch Bedenkzeit?',
+    ueberschrift: 'Lass dich informieren, bevor du etwas kündigst',
+    text: 'Über Vorname und E-Mail bleibst du auf dem Laufenden. Du bekommst Bescheid, sobald es Zielverträge für eine Übertragung gibt. Ein Abmeldelink ist in jeder Nachricht enthalten.',
+    knopf: 'Erst informieren lassen',
+    fahrplan: 'Zum Zuschuss-Fahrplan (PDF)',
+    rechnerLink: 'Erst nur informieren lassen',
+  },
   passt: {
     passtTitel: 'Der Check hilft dir, wenn',
     passtItems: [

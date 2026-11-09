@@ -4,6 +4,7 @@ export const STARTINFO_EVENT = 'healio:altersvorsorge-startinfo';
 
 export const isAltersvorsorgeRoute = (path) => path === '/altersvorsorgedepot'
   || path === '/ratgeber/altersvorsorgedepot'
-  || /^\/ratgeber\/(?:altersvorsorgedepot|riester)-[a-z0-9-]+$/.test(path);
+  || /^\/ratgeber\/(?:altersvorsorgedepot|riester)-[a-z0-9-]+$/.test(path)
+  || /^\/altersvorsorgedepot\/(?!danke$)[a-z0-9-]{1,40}$/.test(path);
 
 export const openAltersvorsorgeStartinfo = () => window.dispatchEvent(new Event(STARTINFO_EVENT));

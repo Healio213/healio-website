@@ -108,6 +108,14 @@ export default {
     ueberschrift: 'Deine Berechnung vormerken',
     intro: 'Nach dem Absenden siehst du dein Steuer- und Depotmodell. Ob du förderberechtigt bist, klären wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Lieber noch abwarten?',
+    ueberschrift: 'Lass dich erinnern, wenn der neue Zugang startet',
+    text: 'Hinterlass Vorname und E-Mail-Adresse. Wir schreiben dir, sobald Verträge für Selbstständige abgeschlossen werden können und neue Einzelheiten feststehen. Jede Mail enthält einen Abmeldelink.',
+    knopf: 'Zum Start erinnern lassen',
+    fahrplan: 'Fahrplan 2027 herunterladen',
+    rechnerLink: 'Lieber später erinnern lassen',
+  },
   passt: {
     passtTitel: 'Passt zu dir, wenn',
     passtItems: [

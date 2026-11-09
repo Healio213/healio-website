@@ -107,6 +107,14 @@ export default {
     ueberschrift: 'Eure Berechnung vormerken',
     intro: 'Nach dem Absenden siehst du dein Modell bis 67. Zuordnung und Kindergeld klären wir im unverbindlichen Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Erst einmal nur informiert bleiben?',
+    ueberschrift: 'Wir sagen euch Bescheid, sobald Familien starten können',
+    text: 'Trag dich mit Vorname und E-Mail ein. Du bekommst eine Nachricht, wenn die neuen Verträge abgeschlossen werden können und es Neues zur Kinderzulage gibt. Abmelden geht jederzeit über den Link in jeder Mail.',
+    knopf: 'Familie auf die Liste setzen',
+    fahrplan: 'Zuschuss-Fahrplan als PDF laden',
+    rechnerLink: 'Erst nur Bescheid bekommen',
+  },
   passt: {
     passtTitel: 'Passt zu euch, wenn',
     passtItems: [

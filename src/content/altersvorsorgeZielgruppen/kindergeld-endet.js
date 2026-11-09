@@ -105,6 +105,14 @@ export default {
     ueberschrift: 'Deinen neuen Plan vormerken',
     intro: 'Nach dem Absenden siehst du dein Modell bis 67. Das Übergangsjahr klären wir im Vorabcheck.',
   },
+  startinfo: {
+    eyebrow: 'Noch etwas Zeit bis dahin?',
+    ueberschrift: 'Bleib informiert, bis der Wechsel ansteht',
+    text: 'Trag Vorname und Mailadresse ein. Wir melden uns mit Neuigkeiten zum Start der Verträge, auch für Kinder in Ausbildung. Abmelden kannst du dich über jede einzelne Mail.',
+    knopf: 'Neuigkeiten per Mail erhalten',
+    fahrplan: 'Fahrplan-PDF herunterladen',
+    rechnerLink: 'Nur Neuigkeiten per Mail',
+  },
   passt: {
     passtTitel: 'Passt zu dir, wenn',
     passtItems: [

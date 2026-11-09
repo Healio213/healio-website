@@ -2,8 +2,15 @@ import crypto from 'node:crypto';
 
 export const CONSENT_VERSION = 'altersvorsorge-startinfos-2026-10-09';
 const EMAIL = /^[^\s@]{1,64}@[^\s@.]{1,63}(?:\.[^\s@.]{1,63}){1,4}$/;
-const SOURCE = /^\/(?:altersvorsorgedepot|ratgeber\/altersvorsorgedepot|ratgeber\/(?:altersvorsorgedepot|riester)-[a-z0-9-]+)$/;
+const SOURCE = /^\/(?:altersvorsorgedepot(?:\/(?!danke$)[a-z0-9-]{1,40})?|ratgeber\/altersvorsorgedepot|ratgeber\/(?:altersvorsorgedepot|riester)-[a-z0-9-]+)$/;
 const FIELDS = new Set(['first_name', 'email', 'consent', 'consent_version', 'source_path', 'website', 'elapsed_ms']);
+// Brücke (09.11.2026): Der n8n-Relay kennt die Unterseiten /altersvorsorgedepot/<slug> erst nach seinem
+// Pfad-Update (Healio/Altersvorsorgedepot-Funnel/startinfo/setup_startinfo.py update-pfade). Bis dahin gehen
+// Anmeldungen von dort mit dem Pfad der Hauptseite an den Relay, damit er sie nicht abweist. Nach dem
+// Update auf true stellen, dann speichert die Liste die genaue Unterseite.
+export const RELAY_KENNT_UNTERSEITEN = false;
+export const relaySourcePath = (path) => (!RELAY_KENNT_UNTERSEITEN && /^\/altersvorsorgedepot\/[a-z0-9-]+$/.test(path)
+  ? '/altersvorsorgedepot' : path);
 const buckets = new Map();
 
 export const validateStartinfo = (body) => {
@@ -64,7 +71,7 @@ export default async function handler(req, res) {
     const response = await fetch(config.url, {
       method: 'POST', redirect: 'error', signal: AbortSignal.timeout(15000),
       headers: { 'Content-Type': 'application/json', 'x-healio-startinfo-secret': config.secret },
-      body: JSON.stringify({ ...validated.value, requested_at: new Date().toISOString() }),
+      body: JSON.stringify({ ...validated.value, source_path: relaySourcePath(validated.value.source_path), requested_at: new Date().toISOString() }),
     });
     const result = await response.json().catch(() => null);
     if (!response.ok || result?.accepted !== true) { res.status(502).json({ error: 'registration_failed' }); return; }

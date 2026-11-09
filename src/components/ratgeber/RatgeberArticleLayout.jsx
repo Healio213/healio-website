@@ -29,6 +29,7 @@ import { getAltersvorsorgeRelatedTitle } from '@/content/ratgeber/altersvorsorge
 import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
 import { planRatgeberLeistungsweg } from '@/content/leistungsweg';
 import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '@/components/leistungsweg/LeistungsHinweis';
+import { getRatgeberEinstiege } from '@/content/altersvorsorgeZielgruppen/ratgeberZuordnung';
 
 // Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
 // Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
@@ -38,6 +39,7 @@ const TarifvergleichPlatzhalter = () => (
 );
 
 const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeArtikelCheck'));
+const AltersvorsorgeEinstiege = React.lazy(() => import('@/components/sections/altersvorsorge/AltersvorsorgeEinstiege'));
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -537,6 +539,18 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
                 <RatgeberSegments segments={article.onward.segments} />
               </p>
             </section>
+          )}
+
+          {article.topic === 'altersvorsorge' && getRatgeberEinstiege(article.slug).length > 0 && (
+            <React.Suspense fallback={null}>
+              <AltersvorsorgeEinstiege
+                eingaenge={getRatgeberEinstiege(article.slug)}
+                ueberschrift="Die passende Seite für deine Lage"
+                intro="Hier findest du die Regeln für deine Situation, ein Rechenbeispiel und den Weg zum Zuschuss-Check."
+                headingId="altersvorsorge-zielgruppen-einstiege-heading"
+                variante="kompakt"
+              />
+            </React.Suspense>
           )}
 
           {article.relatedSlugs?.length > 0 && (

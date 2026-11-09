@@ -8,9 +8,13 @@
  * - keine Konsolenfehler, kein seitliches Scrollen, Schrift und Tippflächen
  * - Formular erst nach „Berechnung speichern“, Einwilligung nicht vorbelegt,
  *   kein Absenden und keine Schreibanfrage
+ * - Abschnitt „Bescheid bekommen“: Knopf öffnet das Startinfo-Fenster,
+ *   Einwilligung nicht vorbelegt, keine Schreibanfrage, Schließen mit Escape
  * - Textüberschneidung der Unterseiten über Fünf-Wort-Folgen, Ziel unter 10 %
  *
  * Externe Anfragen werden lokal mit 204 beantwortet, Schreibanfragen gezählt.
+ * Die Bereitschaftsabfrage GET /api/altersvorsorge-startinfo antwortet lokal
+ * mit {"ready":true}, damit das Startinfo-Formular erscheint.
  */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -58,6 +62,9 @@ async function oeffne(pfad, breite) {
     const lokal = url.origin === origin || url.protocol === 'data:' || url.protocol === 'blob:';
     if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method())) schreibanfragen.push(`${request.method()} ${url.href}`);
     if (lokal && !url.pathname.startsWith('/api/')) return request.continue();
+    if (url.origin === origin && url.pathname === '/api/altersvorsorge-startinfo' && request.method() === 'GET') {
+      return request.respond({ status: 200, contentType: 'application/json', body: JSON.stringify({ ready: true }) });
+    }
     return request.respond({ status: 204, body: '' });
   });
   await page.goto(`${origin}${pfad}`, { waitUntil: 'networkidle0', timeout: 60000 });
@@ -112,7 +119,9 @@ const seitenText = (page) => page.evaluate(() => {
 
 // Meldungen, die nur der Entwicklungsserver erzeugt (React-Strict-Mode,
 // Editor-Plugin von Vite). Gegen den Produktionsbuild zählen sie als Fehler.
-const NUR_ENTWICKLUNG = [/UNSAFE_componentWillMount in strict mode/, /visual-editor-config\.js/];
+// Der AbortError entsteht nur im Entwicklungsmodus: Der Fetch-Patch aus vite.config.js meldet die im
+// Strict Mode doppelt gestartete und einmal abgebrochene Bereitschaftsabfrage des Startinfo-Fensters.
+const NUR_ENTWICKLUNG = [/UNSAFE_componentWillMount in strict mode/, /visual-editor-config\.js/, /AbortError: signal is aborted without reason/];
 
 for (const pfad of pfade) {
   const slug = pfad.split('/').pop();
@@ -129,6 +138,32 @@ for (const pfad of pfade) {
       if (layout.formularSichtbar) fehler.push(`${pfad} ${breite}: Formular steht schon vor dem Rechnen auf der Seite`);
       if (!layout.canonical?.endsWith(pfad)) fehler.push(`${pfad} ${breite}: Canonical ${layout.canonical}`);
       if (breite === 1440) eintrag.text = await seitenText(page);
+      // Abschnitt „Bescheid bekommen“: Knopf öffnet das Startinfo-Fenster.
+      const bescheid = await page.evaluate(() => {
+        const section = document.querySelector('section#bescheid');
+        return section ? { h2: section.querySelector('h2#bescheid-heading')?.textContent.trim(), knopf: Boolean(section.querySelector('button[type="button"]')) } : null;
+      });
+      if (!bescheid) fehler.push(`${pfad} ${breite}: Abschnitt #bescheid fehlt`);
+      else {
+        if (bescheid.h2 !== inhalt.startinfo.ueberschrift) fehler.push(`${pfad} ${breite}: Überschrift #bescheid weicht ab („${bescheid.h2}“)`);
+        if (!bescheid.knopf) fehler.push(`${pfad} ${breite}: Startinfo-Knopf fehlt`);
+        else {
+          const schreibVorher = schreibanfragen.length;
+          await page.waitForSelector('dialog[data-altersvorsorge-startinfo]', { timeout: 15000 });
+          await page.click('section#bescheid button[type="button"]');
+          try {
+            await page.waitForSelector('dialog[open] #startinfo-name', { timeout: 10000 });
+            const consentVorbelegt = await page.$eval('dialog[open] input[name="consent"]', (input) => input.checked).catch(() => null);
+            if (consentVorbelegt !== false) fehler.push(`${pfad} ${breite}: Startinfo-Einwilligung vorbelegt oder fehlt`);
+            await page.keyboard.press('Escape');
+            await page.waitForFunction(() => !document.querySelector('dialog[data-altersvorsorge-startinfo]')?.open, { timeout: 5000 });
+            eintrag.startinfo = { geoeffnet: true, consentVorbelegt, geschlossen: true };
+          } catch (error) {
+            fehler.push(`${pfad} ${breite}: Startinfo-Fenster öffnet oder schließt nicht (${error.message})`);
+          }
+          if (schreibanfragen.length !== schreibVorher) fehler.push(`${pfad} ${breite}: Schreibanfrage beim Startinfo-Fenster`);
+        }
+      }
       // Weg zur Anfrage: Rechner-Knopf öffnet das bestehende Kurzformular.
       const knopf = await page.$('#rechner button.bg-white');
       if (!knopf) fehler.push(`${pfad} ${breite}: Knopf im Rechner fehlt`);
