@@ -40,6 +40,9 @@ const create = async (analytics) => {
       analyticsRequests.push(url.href);
       await request.respond({ status: 200, contentType: 'application/javascript', body: '/* local GA4 stub: no provider connection */' }); return;
     }
+    // Seit 08.11.2026 geht jede Anfrage zusätzlich an die Anfragen-Zentrale. Im Test lokal mit
+    // „nicht erreichbar“ beantworten (nie senden), damit allein der EmailJS-Ausgang über Erfolg entscheidet.
+    if (url.hostname === 'anfragen.healio.de' && request.method() === 'POST') { await request.respond({ status: 503, headers: { 'access-control-allow-origin': origin }, contentType: 'application/json', body: '{"ok":false}' }); return; }
     if (request.method() !== 'GET') { forbiddenWrites.push(`${request.method()} ${url.hostname}${url.pathname}`); await request.abort(); return; }
     if (url.origin === origin && url.pathname.startsWith('/api/')) { await request.respond({ status: 200, contentType: 'application/json', body: '{"ready":false}' }); return; }
     if (url.origin === origin || ['data:', 'blob:'].includes(url.protocol)) await request.continue(); else await request.abort();

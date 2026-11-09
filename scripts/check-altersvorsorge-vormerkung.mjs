@@ -48,3 +48,12 @@ test('Anfrage enthält die gewählte Rechnung, Status und ausdrücklich erteilte
   assert.match(message, /telefonisch/);
   assert.doesNotMatch(model.buildVormerkungMessage({ monatsbeitrag: 150, kinder: 0, unter25: false }, false), /telefonisch/);
 });
+
+test('Vormerkung meldet den Erfolg über den gemeinsamen Versandweg mit Einwilligungsprüfung', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const source = await readFile(new URL('../src/components/sections/altersvorsorge/AltersvorsorgeVormerkung.jsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /track:\s*false/, 'Die Vormerkung darf die Lead-Meldung an GA4, Google Ads und Meta nicht abschalten');
+  assert.doesNotMatch(source, /campaign:\s*false/, 'Die Mail an Healio braucht den Kampagnenblock');
+  assert.doesNotMatch(source, /fbq\(|gtag\(|trackMetaLead|trackGoogleAdsLead/, 'Keine eigenen Messaufrufe neben dem gemeinsamen Versandweg');
+});
+

@@ -5,6 +5,7 @@
  */
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
 
 const origin = new URL(process.env.HEALIO_VORMERKUNG_PREVIEW_URL || 'http://127.0.0.1:4187').origin;
@@ -39,7 +40,7 @@ const screenshot = async (page, selector, filename) => {
     for (const { element } of window.__qaHiddenElements) element.style.setProperty('display', 'none', 'important');
   });
   try {
-    await (await page.$(selector)).screenshot({ path: new URL(filename, screenshotDirectory).pathname });
+    await (await page.$(selector)).screenshot({ path: fileURLToPath(new URL(filename, screenshotDirectory)) });
   } finally {
     await page.evaluate(() => {
       for (const { element, display, priority } of window.__qaHiddenElements) {
@@ -69,6 +70,11 @@ const createPage = async (width = 390) => {
         if (mode === 'hold') { heldRequest = request; return; }
         await respondEmail(request, mode === 'error' ? 500 : 200); return;
       }
+    }
+    // Seit 08.11.2026 geht jede Anfrage zusätzlich an die Anfragen-Zentrale. Im Test lokal mit
+    // „nicht erreichbar“ beantworten (nie senden), damit allein der EmailJS-Ausgang über Erfolg entscheidet.
+    if (url.hostname === 'anfragen.healio.de' && request.method() === 'POST') {
+      await request.respond({ status: 503, headers: corsHeaders, contentType: 'application/json', body: '{"ok":false}' }); return;
     }
     if (request.method() !== 'GET') {
       forbiddenWrites.push(`${request.method()} ${url.pathname}`);

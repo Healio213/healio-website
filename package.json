@@ -66,6 +66,7 @@
     "test:ukv-vorsorge": "node scripts/check-ukv-vorsorge-contract.mjs",
     "test:altersvorsorge": "node scripts/check-altersvorsorge-release.mjs && node scripts/check-altersvorsorge-ratgeber.mjs && node scripts/check-altersvorsorge-vormerkung.mjs && node --test scripts/check-altersvorsorge-zielgruppen.mjs",
     "test:altersvorsorge-zielgruppen-rendered": "node scripts/check-altersvorsorge-zielgruppen-rendered.mjs",
+    "test:altersvorsorge-nachverfolgung-rendered": "node scripts/check-altersvorsorge-nachverfolgung-rendered.mjs",
     "test:altersvorsorge-vormerkung-rendered": "node scripts/check-altersvorsorge-vormerkung-rendered.mjs",
     "test:altersvorsorge-analytics-rendered": "node scripts/check-altersvorsorge-analytics.mjs",
     "test:altersvorsorge-startinfo": "node scripts/check-altersvorsorge-startinfo.mjs",

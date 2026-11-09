@@ -84,7 +84,10 @@ const AltersvorsorgeVormerkung = ({ value, requestNumber = 0, sourceArticleSlug 
           articleSource ? `Ratgeber-Herkunft: /ratgeber/${articleSource}` : '',
           typeof herkunft === 'string' && /^\/altersvorsorgedepot\/[a-z0-9-]+$/.test(herkunft) ? `Seiten-Herkunft: ${herkunft}` : '',
         ].filter(Boolean).join('\n\n'),
-      }, 'Altersvorsorge Vormerkung', { track: false, campaign: false });
+      // Wie alle Formulare: Erfolg an GA4 (generate_lead), Google Ads und Meta, jeweils
+      // nur mit Einwilligung und ohne Kontaktdaten; Kampagnenblock für die Mail an
+      // Healio. Franks Auftrag 09.11.2026 („hole das nach mit der Nachverfolgung“).
+      }, 'Altersvorsorge Vormerkung');
       trackAltersvorsorgeFunnel('lead', 'inline_form');
       if (!mountedRef.current) return;
       setSavedValue(snapshot); setStatus('success'); setPhone(''); setConsent(false);
