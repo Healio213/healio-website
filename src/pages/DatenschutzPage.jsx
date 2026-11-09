@@ -93,6 +93,12 @@ const DatenschutzPage = () => {
                 </a>
               </p>
 
+              <h3 id="whatsapp-nita" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.whatsappNitaTitle')}</h3>
+              <p>{t('datenschutz.whatsappNitaText')}</p>
+              <p>{t('datenschutz.whatsappNitaStorage')}</p>
+              <p>{t('datenschutz.whatsappNitaLegalBasis')}</p>
+              <p>{t('datenschutz.whatsappNitaHealthTransfer')}</p>
+
               <h3 id="rueckruf" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.rueckrufTitle')}</h3>
               <p>{t('datenschutz.rueckrufText')}</p>
               <p>{t('datenschutz.rueckrufLegalBasis')}</p>

@@ -88,7 +88,7 @@ check('Einstiegs-utm liegen nur im Arbeitsspeicher', /const landingUtm = typeof 
 check('Kontaktanfragen hängen den Block „Kampagne“ an', /campaign = true/.test(emailjsService)
   && /if \(campaign && readCampaignUtm\(window\.location\.search\)\)/.test(emailjsService)
   && /'Kampagne:', describeCampaignSource\(window\.location\.search\)/.test(emailjsService));
-check('Kurzcheck schreibt den Block nur einmal', /\{ track: false, campaign: false \}/.test(kurzCheck));
+check('Kurzcheck schreibt den Block nur einmal', /\{ track: false, campaign: false(?:, whatsapp: whatsappOption\([^)]*\}\))? \}/.test(kurzCheck));
 check('Datenschutz nennt utm in Formularanfragen', /Kampagnenmerkmale \(utm-Werte\) der Adresse, über die Sie auf unsere Website gekommen sind/.test(legalDe.emailJsText)
   && /campaign parameters \(utm values\) of the URL through which you reached our website/.test(legalEn.emailJsText));
 

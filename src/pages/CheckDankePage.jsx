@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { CalendarCheck, Check } from 'lucide-react';
+import { CalendarCheck, Check, MessageCircle } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import CampaignShell from '@/components/campaign/CampaignShell';
 import { META_CHECKS } from '@/content/meta-checks';
@@ -9,6 +9,7 @@ import { consumeCheckLeadPending } from '@/lib/campaign-landing';
 import { trackMetaLead } from '@/lib/meta-pixel';
 import { trackGoogleAdsLead } from '@/lib/google-ads';
 import { trackEvent } from '@/lib/analytics';
+import { whatsappDankeText } from '@/lib/whatsapp-nita';
 
 const NAME_PATTERN = /^[\p{L}][\p{L}\s'-]{0,39}$/u;
 
@@ -24,6 +25,8 @@ const CheckDankePage = ({ variant }) => {
   const counted = useRef(false);
   const rawName = typeof location.state?.firstName === 'string' ? location.state.firstName.trim() : '';
   const firstName = NAME_PATTERN.test(rawName) ? rawName : '';
+  // Nur wer das freiwillige WhatsApp-Häkchen gesetzt hat, bekommt den Hinweis.
+  const whatsappText = location.state?.whatsapp === true ? whatsappDankeText('de') : '';
 
   // Der Lead zählt erst hier und nur nach einer echten Anfrage. Die
   // Messfunktionen prüfen Einwilligung und gesperrte Seiten selbst; die
@@ -59,6 +62,12 @@ const CheckDankePage = ({ variant }) => {
           <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
             {config.thankYou.text}
           </p>
+          {whatsappText ? (
+            <p role="status" data-whatsapp-danke className="mx-auto mt-5 inline-flex max-w-xl items-start gap-3 rounded-2xl bg-white/10 px-4 py-3 text-left text-base font-semibold leading-7 text-white">
+              <MessageCircle className="mt-1 h-5 w-5 shrink-0 text-home-mint" aria-hidden="true" />
+              <span>{whatsappText}</span>
+            </p>
+          ) : null}
         </div>
       </section>
 

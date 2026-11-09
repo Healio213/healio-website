@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { Check, Loader2, Phone } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
 import { HEALIO_PHONE_DISPLAY, HEALIO_PHONE_TEL } from '@/config/contactChannels';
+import WhatsAppHaekchen from '@/components/forms/WhatsAppHaekchen';
 import { emailjsService } from '@/services/emailjsService';
+import { whatsappDankeText, whatsappOption } from '@/lib/whatsapp-nita';
 import { useLanguage } from '@/hooks/useLanguage';
 import { trackEvent } from '@/lib/analytics';
 
@@ -24,7 +26,7 @@ const TIMES = [
   { value: 'egal', label: 'Egal' },
 ];
 
-const INITIAL = { vorname: '', telefon: '', email: '', thema: '', zeit: 'egal', nachricht: '' };
+const INITIAL = { vorname: '', telefon: '', email: '', thema: '', zeit: 'egal', nachricht: '', whatsapp: false };
 
 const inputClass = 'block min-h-12 w-full rounded-2xl border border-slate-300 bg-white px-4 text-base text-[#07111f] placeholder:text-slate-400 transition focus:border-home-mint focus:outline-none focus:ring-4 focus:ring-home-mint/20 aria-[invalid=true]:border-[#c2412d] md:min-h-14';
 
@@ -61,6 +63,7 @@ const DentalCallbackForm = () => {
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
+  const [sentWhatsapp, setSentWhatsapp] = useState(false);
 
   const setField = (name, value) => {
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -95,8 +98,9 @@ const DentalCallbackForm = () => {
         from_email: form.email.trim(),
         phone: form.telefon.trim(),
         message: `Rückrufwunsch von healio.de/zahn\nThema: ${topic}\nBeste Zeit: ${time}\n\n${form.nachricht.trim()}`,
-      }, 'Zahnseite Rückruf');
+      }, 'Zahnseite Rückruf', { whatsapp: whatsappOption({ checked: form.whatsapp, phone: form.telefon }) });
       trackEvent('zahn_rueckruf_gesendet', { thema: form.thema || 'keins' });
+      setSentWhatsapp(Boolean(form.whatsapp) && form.telefon.trim() !== '');
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -143,6 +147,11 @@ const DentalCallbackForm = () => {
               <p className="mt-3 max-w-md text-base leading-7 text-slate-700">
                 Deine Rückrufbitte ist bei uns angekommen. Wir melden uns unter der Nummer, die du angegeben hast.
               </p>
+              {sentWhatsapp ? (
+                <p data-whatsapp-danke className="mt-3 max-w-md text-base font-semibold leading-7 text-slate-700">
+                  {whatsappDankeText('de')}
+                </p>
+              ) : null}
             </div>
           ) : (
             <form method="post" action="/kontakt" onSubmit={handleSubmit} noValidate className="space-y-4 md:space-y-6">
@@ -179,6 +188,7 @@ const DentalCallbackForm = () => {
                   {errors.telefon ? <p id="zahn-rueckruf-telefon-fehler" className="mt-2 text-sm font-semibold text-[#c2412d]">{errors.telefon}</p> : null}
                 </div>
               </div>
+              <WhatsAppHaekchen id="zahn-rueckruf-whatsapp" phone={form.telefon} checked={form.whatsapp} onChange={(value) => setField('whatsapp', value)} />
 
               <div>
                 <label htmlFor="zahn-rueckruf-email" className="text-base font-bold text-[#07111f]">
