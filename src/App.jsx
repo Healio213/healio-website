@@ -86,6 +86,8 @@ const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
 const CheckLandingPage = React.lazy(() => import('@/pages/CheckLandingPage'));
 const CheckDankePage = React.lazy(() => import('@/pages/CheckDankePage'));
 const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
+// Prüfseite des Antrags am Telefon mit Nita (09.11.2026): eigenständig, noindex, ohne Messung.
+const AntragPruefenPage = React.lazy(() => import('@/pages/AntragPruefenPage'));
 
 const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));
 
@@ -117,6 +119,8 @@ function App() {
   const isPregnancy = location.pathname === '/schwangerschaft';
   // Meta-Zielseiten (19.10.2026): ablenkungsfrei, ohne Nita und ohne schwebenden WhatsApp-Knopf.
   const isCampaignLanding = isCampaignLandingRoute(location);
+  // Prüfseite des Antrags (09.11.2026): ohne Nita und ohne WhatsApp, auch bei anderer Schreibweise.
+  const isAntragPruefen = (location.pathname.replace(/\/+$/, '').toLowerCase() || '/') === '/antrag/pruefen';
   // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
   const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Experiment 06.10.2026: auch auf /ambulant und /stationaer sitzt WhatsApp am
@@ -124,7 +128,7 @@ function App() {
   // schwebende Knopf entfällt dort unter 768 px; ab md bleibt er wie live.
   // /schwangerschaft hat den schwebenden Knopf ohnehin nie (isPregnancy).
   const isLeisteMobilePage = ['/ambulant', '/en/outpatient', '/stationaer', '/en/inpatient'].includes(location.pathname);
-  const showWhatsAppFloating = !isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding;
+  const showWhatsAppFloating = !isGuidedSurface && !isPregnancy && !isDentalPage && !isCampaignLanding && !isAntragPruefen;
   // WhatsApp sitzt in Nitas Kontaktleiste, wo Nita zu sehen ist; sonst (z. B. Ratgeber) bleibt der eigene Knopf.
   const nitaDockVisible = HEALIO_VOICE_CONTACT_ENABLED && !isPregnancy && !isCampaignLanding && !isNitaHiddenRoute(location.pathname);
   // Ref-Code auf jeder Seite einfangen (z.B. healio.de/leistungen?ref=A7K2M9B4)
@@ -223,7 +227,7 @@ function App() {
       {/* Nita (Sprache) seit 04.11.2026 auch auf den Leistungsseiten: Dort öffnen „Frag Nita“ und die Sprachknöpfe im Ablauf dieses Fenster.
           Kontaktleiste in der Mitte des rechten Randes mit WhatsApp dort, wo bisher der schwebende WhatsApp-Knopf saß; am Handy
           entfällt sie auf Seiten mit der Nita-Leiste unten (ambulant, stationär, Zahn). */}
-      {!isPregnancy && !isCampaignLanding && <NitaConsentWidget whatsapp={showWhatsAppFloating} mobileHidden={isLeisteMobilePage || isDentalPage} />}
+      {!isPregnancy && !isCampaignLanding && !isAntragPruefen && <NitaConsentWidget whatsapp={showWhatsAppFloating} mobileHidden={isLeisteMobilePage || isDentalPage} />}
       {showWhatsAppFloating && !nitaDockVisible && (
         isLeisteMobilePage
           ? <div className="hidden md:contents"><WhatsAppContactButton /></div>
@@ -328,6 +332,11 @@ function App() {
             <Route path="/check/naturheilkunde/danke" element={<CheckDankePage variant="naturheilkunde" />} />
             <Route path="/check/schwangerschaft" element={<CheckLandingPage variant="schwangerschaft" />} />
             <Route path="/check/schwangerschaft/danke" element={<CheckDankePage variant="schwangerschaft" />} />
+
+            {/* Prüfseite des Antrags (09.11.2026): ohne Layout, noindex, kein Tracking.
+                Links zur Seite nur als echte Seitennavigation (Mail-Link), damit keine
+                Mess-Skripte einer vorherigen Seite im selben Dokument laufen. */}
+            <Route path="/antrag/pruefen" element={<AntragPruefenPage />} />
 
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}
             <Route path="/tiktok" element={<TikTokPage />} />

@@ -955,6 +955,16 @@ export const seoRoutes = [
     robots: 'noindex, nofollow',
   },
   {
+    // Prüfseite des Antrags am Telefon mit Nita (09.11.2026): nie indexieren,
+    // nicht in Sitemap oder llms.txt.
+    path: '/antrag/pruefen',
+    title: 'Antrag prüfen und bestätigen | Healio',
+    description: 'Prüfe deinen Antrag auf den ambulanten Zusatzschutz und bestätige ihn.',
+    canonical: 'https://healio.de/antrag/pruefen',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
     path: '/tiktok',
     title: 'Healio auf TikTok | Healio',
     description: 'Alle Healio-Links aus der TikTok-Bio auf einen Blick.',

@@ -67,6 +67,8 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Zusammenführen der Ratgeber-Serie (07.10.2026) also auch Babybonus, die drei
 // Familienplanungs-Ratgeber und die vier Krebsvorsorge-Ratgeber.
 const META_EXCLUDED_PATHS = new Set([
+  // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
+  '/antrag/pruefen',
   '/schwangerschaft',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',

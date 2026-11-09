@@ -30,6 +30,8 @@ const VERCEL_PREVIEW_HOST = /^[a-z0-9][a-z0-9-]{0,200}\.vercel\.app$/;
 // manipulierten Client-Aufruf. Gleiche Liste wie META_EXCLUDED_PATHS in
 // src/lib/meta-pixel.js (der Hebammen-Ratgeber fehlte hier bis 07.10.2026).
 const BLOCKED_PATHS = new Set([
+  // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
+  '/antrag/pruefen',
   '/schwangerschaft',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',

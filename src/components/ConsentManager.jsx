@@ -110,11 +110,15 @@ export const ConsentManager = () => {
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
   const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  // Prüfseite des Antrags (09.11.2026): Sie lädt keine optionalen Dienste, der
+  // Hinweis würde dort nur den Inhalt verdecken. Die Einwilligung selbst bleibt
+  // unverändert und gilt auf allen anderen Seiten.
+  const isAntragPruefen = normalizePathname(pathname) === '/antrag/pruefen';
   const bannerDeferred = !firstActionSeen && FIRST_ACTION_PATHS.has(normalizePathname(pathname));
   // Ablenkungsfreie Meta-Zielseiten: Datenschutz öffnet im neuen Tab, damit niemand die Strecke verlässt.
   const privacyLinkTarget = isCampaignLandingRoute(location) ? { target: '_blank', rel: 'noopener' } : {};
-  const bannerVisible = showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred;
-  const consentUiActive = bannerVisible || (settingsOpen && !isDentalCheckRoute);
+  const bannerVisible = showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred && !isAntragPruefen;
+  const consentUiActive = bannerVisible || (settingsOpen && !isDentalCheckRoute && !isAntragPruefen);
 
   useEffect(() => initializeAnalytics(), []);
 
@@ -169,8 +173,8 @@ export const ConsentManager = () => {
   }, [consentUiActive]);
 
   useEffect(() => {
-    if (isDentalCheckRoute) setSettingsOpen(false);
-  }, [isDentalCheckRoute]);
+    if (isDentalCheckRoute || isAntragPruefen) setSettingsOpen(false);
+  }, [isDentalCheckRoute, isAntragPruefen]);
 
   useEffect(() => {
     if (!settingsOpen) return undefined;
@@ -265,7 +269,7 @@ export const ConsentManager = () => {
           unten, damit die primäre Hero-Aktion links beim ersten Besuch frei bleibt.
           Streckencheck 22.10.2026: Am Handy nur noch zwei Zeilen Text ohne sichtbare
           Überschrift (rund 110 statt 166 px), die Seite hält unten seine Höhe frei. */}
-      {showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred && (
+      {showBanner && !settingsOpen && !isDentalCheckRoute && !bannerDeferred && !isAntragPruefen && (
         <section
           ref={bannerRef}
           className="healio-consent-surface fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-2.5 text-slate-900 shadow-[0_14px_50px_rgba(15,23,42,0.22)] md:bottom-3 md:left-auto md:right-3 md:top-auto md:mx-0 md:w-full md:max-w-md md:rounded-2xl md:p-5"
@@ -310,7 +314,7 @@ export const ConsentManager = () => {
         </section>
       )}
 
-      {settingsOpen && !isDentalCheckRoute && (
+      {settingsOpen && !isDentalCheckRoute && !isAntragPruefen && (
         <div className="healio-consent-surface fixed inset-0 z-[130] flex items-end justify-center bg-slate-950/55 p-0 sm:items-center sm:p-6">
           <section
             ref={dialogRef}

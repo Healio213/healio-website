@@ -12,6 +12,8 @@ const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
 // Seit Stapel 2 der Ratgeber-Serie (07.10.2026) auch die Krebsvorsorge-Ratgeber:
 // schon der Besuch kann etwas über die Gesundheit verraten (Art. 9 DSGVO).
 const ANALYTICS_EXCLUDED_PATHS = new Set([
+  // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
+  '/antrag/pruefen',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',
