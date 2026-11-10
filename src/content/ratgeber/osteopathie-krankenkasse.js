@@ -19,8 +19,8 @@ export const article = {
   "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 45 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
-  "updatedAt": "2026-10-27",
-  "updatedAtLabel": "27. Oktober 2026",
+  "updatedAt": "2026-11-10",
+  "updatedAtLabel": "10. November 2026",
   "readingTimeMinutes": 16,
   "listTitle": "Osteopathie: Welche Krankenkasse übernimmt welche Kosten?",
   "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
@@ -268,7 +268,7 @@ export const article = {
               "AOK Hessen",
               "60 EUR je Sitzung, bis zu vier Sitzungen im Kalenderjahr; im ersten Lebensjahr bis zu vier weitere Sitzungen.",
               "Ärztliche Bescheinigung der medizinischen Eignung, die Kosten dafür trägt der Versicherte; zugelassener Arzt oder Heilpraktiker mit Osteopathie-Zusatzqualifikation, die zum Verbandsbeitritt berechtigt.",
-              "Rechnerisch 240 EUR im Kalenderjahr, für Säuglinge bis 480 EUR; Teil des Gesundheitskontos, ein Gesamtdeckel über alle Kategorien ist nicht gefunden.",
+              "Rechnerisch 240 EUR im Kalenderjahr, für Säuglinge bis 480 EUR; Teil des Gesundheitskontos.",
               "§ 12f Abs. 5 Buchst. a, Lesefassung Stand 01.07.2026"
             ],
             [
@@ -311,14 +311,14 @@ export const article = {
               "Erwachsene: 100 Prozent der Rechnung, höchstens 60 EUR je Sitzung, höchstens vier Sitzungen im Kalenderjahr; bis 18 Jahre: höchstens sechs Sitzungen zu je bis 60 EUR.",
               "Physiotherapeut, Heilpraktiker oder Arzt mit ordentlicher Mitgliedschaft oder den Mitgliedschaftsvoraussetzungen in einem Osteopathie-Fachverband mit Berufsordnung und Fortbildungspflicht; keine ärztliche Verordnung in der Satzung genannt; Rechnungen vorlegen.",
               "Rechnerisch 240 EUR im Kalenderjahr, bis 18 Jahre 360 EUR.",
-              "§ 31e (Erwachsene), § 31b (Kinder und Jugendliche), Lesefassung, PDF erstellt 03.08.2026, ohne Fassungsnummer"
+              "§ 31e (Erwachsene), § 31b (Kinder und Jugendliche), Lesefassung, PDF vom 03.08.2026"
             ],
             [
               "AOK Sachsen-Anhalt",
               "Höchstens 60 EUR je Sitzung, höchstens vier Sitzungen im Kalenderjahr.",
               "Ärztliche Bescheinigung; Behandler mit Mitgliedschaft oder Mitgliedschaftsberechtigung in einem Verband aus dem Verzeichnis der AOK.",
               "Rechnerisch 240 EUR im Kalenderjahr; Gesamtdeckel GESUNDESKONTO 600 EUR im Jahr, daneben keine Teilnahme am AOK-Gesundheitsbonus; Rechnungen bis 28.02. des Folgejahres.",
-              "§ 11a Abs. 1 bis 3, § 11, 52. Änderung (Beschluss 16.12.2025), Änderungsübersicht bis 01.07.2026"
+              "§ 11a Abs. 1 bis 3, § 11, 52. Änderung (Beschluss vom 16.12.2025)"
             ],
             [
               "Audi BKK",
@@ -863,21 +863,21 @@ export const article = {
         "label": "AOK Bremen/Bremerhaven: Satzung und Osteopathie",
         "publisher": "AOK Bremen/Bremerhaven",
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/bremen-bremerhaven/pdf/2026/PDF/55._%C3%84nderung_der_Satzung_Stand_01.04.2026.pdf",
-        "stand": "55. Änderung vom 16.03.2026 (Datei: Stand 01.04.2026); § 10a Stand 01.01.2021, § 10h Stand 19.12.2022",
+        "stand": "55. Änderung vom 16.03.2026, Stand 01.04.2026",
         "accessedAt": "09.11.2026"
       },
       {
         "label": "AOK Hessen: Satzung und Osteopathie",
         "publisher": "AOK Hessen",
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/hessen/pdf/satzung-kv.pdf",
-        "stand": "Lesefassung Stand 01.07.2026 (Satzung vom 18.12.2024, bis 4. Nachtrag mit Wirkung 01.07.2026)",
+        "stand": "Lesefassung Stand 01.07.2026",
         "accessedAt": "09.11.2026"
       },
       {
         "label": "AOK Niedersachsen: Satzung und Osteopathie",
         "publisher": "AOK Niedersachsen",
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/niedersachsen/pdf/Satzung_AOK_Niedersachsen.pdf",
-        "stand": "142. Änderung vom 10.03.2026; § 10b Abs. 3 in Kraft seit 01.01.2026",
+        "stand": "142. Änderung vom 10.03.2026",
         "accessedAt": "09.11.2026"
       },
       {
@@ -912,14 +912,14 @@ export const article = {
         "label": "AOK Rheinland-Pfalz/Saarland: Satzung und Osteopathie",
         "publisher": "AOK Rheinland-Pfalz/Saarland",
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/rheinland-pfalz-saarland/pdf/Satzung/Satzung.pdf",
-        "stand": "Lesefassung, PDF erstellt 03.08.2026; Vorspann nennt keine Fassungsnummer",
+        "stand": "Lesefassung, PDF vom 03.08.2026",
         "accessedAt": "09.11.2026"
       },
       {
         "label": "AOK Sachsen-Anhalt: Satzung und Osteopathie",
         "publisher": "AOK Sachsen-Anhalt",
         "href": "https://www.deine-gesundheitswelt.de/die-aok/satzung/satzung-der-aok-sachsen-anhalt-die-gesundheitskasse",
-        "stand": "52. Änderung durch Beschluss des Verwaltungsrates vom 16.12.2025; Änderungsübersicht bis lfd. Nr. 207 (in Kraft 01.07.2026, nur Anhang 1)",
+        "stand": "52. Änderung, Beschluss des Verwaltungsrates vom 16.12.2025",
         "accessedAt": "09.11.2026"
       },
       {

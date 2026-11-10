@@ -1135,7 +1135,7 @@ export const RATGEBER_ENTRIES = [
     "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
     "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 45 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
     "publishedAt": "2026-10-07",
-    "updatedAt": "2026-10-27"
+    "updatedAt": "2026-11-10"
   },
   {
     "slug": "physiotherapie-kosten",
@@ -1516,7 +1516,8 @@ export const RATGEBER_ENTRIES = [
     "readingTimeMinutes": 9,
     "metaTitle": "Hebamme Rufbereitschaft: welche Kasse zahlt wie viel | Healio",
     "metaDescription": "Rufbereitschaftspauschale der Hebamme: warum die Kasse sie nicht regulär zahlt und welche Kassen laut Satzung bis 500 EUR erstatten. Mit Tabelle.",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-08",
+    "updatedAt": "2026-11-10"
   },
   {
     "slug": "schwanger-zusatzversicherung",
