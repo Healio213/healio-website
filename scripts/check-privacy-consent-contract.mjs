@@ -161,7 +161,9 @@ expect(!/googletagmanager\.com\/gtag\/js/i.test(indexHtml), 'GA4 darf nicht stat
 expect(!/elevenlabs\.io\/convai-widget/i.test(indexHtml), 'ElevenLabs darf nicht statisch aus index.html geladen werden.');
 expect(!/window\.gtag/.test(completeSource), 'Alte direkte gtag-Aufrufe müssen den consent-gesteuerten Tracker verwenden.');
 expect(/<ConsentManager\s*\/>/.test(app), 'ConsentManager muss global gemountet sein.');
-expect(/<NitaConsentWidget\s*\/>/.test(app), 'NitaConsentWidget muss global gemountet sein.');
+// Seit 04.11.2026 mit Props (WhatsApp in der Kontaktleiste) und bewusst nicht auf /schwangerschaft, den Kampagnen-Zielseiten
+// und der Antrags-Prüfseite.
+expect(/!isPregnancy && !isCampaignLanding && !isAntragPruefen && <NitaConsentWidget\b[^>]*\/>/.test(app), 'NitaConsentWidget muss global gemountet sein (außer Schwangerschaft, Kampagnen-Zielseiten und Antrags-Prüfseite).');
 expect(/trackPageView\(location\.pathname\)/.test(app), 'SPA-Seitenwechsel müssen über den consent-gesteuerten Tracker laufen.');
 expect(/setAnalyticsRouteBlocked\(isPrivateCheckRoute\)/.test(app), 'Analytics muss auf privaten Check-Routen global blockiert werden.');
 expect(/isPrivateCheckRoute \|\| !hasConsent\('analytics', state\)/.test(app), 'Der SPA-Tracker muss private Check-Routen überspringen.');
@@ -173,9 +175,21 @@ expect(/!isDentalCheckRoute && <button[\s\S]*?openConsentSettings\('openai'\)/.t
 expect(/https:\/\/voice-pilot\.healio\.de\/nita\/realtime\/session/.test(nitaWidget), 'Nita muss den fest gebundenen Healio-WebRTC-Broker verwenden.');
 expect(!/VITE_NITA_WEBRTC_SESSION_ENDPOINT|\/api\/nita-session/.test(nitaWidget), 'Nita darf keinen frei konfigurierbaren oder Vercel-basierten Session-Endpunkt verwenden.');
 expect(/RTCPeerConnection/.test(nitaWidget), 'Nita muss die direkte OpenAI-WebRTC-Strecke verwenden.');
-expect(!/ElevenLabs|elevenlabs-convai|unpkg\.com/.test(nitaWidget), 'Nita darf keine ElevenLabs-Einbindung mehr laden.');
-expect(/healio-nita-quiet-launcher/.test(nitaWidget), 'Nita muss beim Seitenaufruf als dezenter Kreis erscheinen.');
-expect(/aria-controls="healio-nita-panel"[\s\S]*?aria-expanded=\{panelOpen\}/.test(nitaWidget), 'Der Nita-Kreis muss das Sprachpanel zugänglich öffnen und schließen können.');
+// Kommentare zählen nicht: Die Kontaktleiste erwähnt im Kommentar, dass sie dem früheren ElevenLabs-Widget nachempfunden ist.
+const nitaWidgetCode = nitaWidget.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"\\])\/\/.*$/gm, '$1');
+expect(!/ElevenLabs|elevenlabs|unpkg\.com/i.test(nitaWidgetCode), 'Nita darf keine ElevenLabs-Einbindung mehr laden.');
+// Seit 04.11.2026 (Commits b5377f3, e4c59d9): Nitas Kontaktleiste startet eingeklappt als Kugel am rechten Rand und fährt am
+// Desktop erst nach vier Sekunden aus.
+expect(/const \[dockOpen, setDockOpen\] = useState\(false\)/.test(nitaWidget)
+  && /healio-nita-dock\$\{dockOpen \? ' is-open' : ''\}/.test(nitaWidget)
+  && /const NITA_DOCK_AUTO_OPEN_MS = 4_000;/.test(nitaWidget), 'Nita muss beim Seitenaufruf als dezente, eingeklappte Kugel erscheinen.');
+// Die Kugel gibt es nur bei geschlossenem Sprachpanel (deshalb aria-expanded={false}); geöffnet übernimmt der Dialog mit Fokus auf
+// „Schließen“, Escape schließt, danach springt der Fokus zurück auf die Kugel.
+expect(/\{!panelOpen && \(\s*<div className=\{`healio-nita-surface healio-nita-dock/.test(nitaWidget)
+  && /data-healio-nita="launcher"[^>]*aria-controls="healio-nita-panel"[^>]*aria-expanded=\{false\}/.test(nitaWidget)
+  && /<section id="healio-nita-panel"[^>]*role="dialog"/.test(nitaWidget)
+  && /closeButtonRef\.current\?\.focus\(\)/.test(nitaWidget)
+  && /launcherRef\.current\?\.focus\(\)/.test(nitaWidget), 'Der Nita-Kreis muss das Sprachpanel zugänglich öffnen und schließen können.');
 expect(/event\.key === 'Escape'[\s\S]*?closePanel\(\)/.test(nitaWidget), 'Das Sprachpanel muss per Escape wieder schließen.');
 expect(/const handleNitaRequest = \(\) => \{[\s\S]*?setPanelOpen\(true\)/.test(nitaWidget), 'Content-CTAs müssen das Sprachpanel öffnen, ohne Browseranweisungen an den Agenten zu senden.');
 expect(!/shadowRoot/.test(nitaWidget), 'Nita darf nicht von einer Anbieter-internen DOM-Struktur abhängen.');
