@@ -1,9 +1,12 @@
 // Gerenderte Prüfung der Seite /antrag/aufnehmen (Antragsgespräch mit Nita, SCHNITTSTELLE.md 11.2) gegen den
 // Nachbau des HD-Dienstes (scripts/antrag-gespraech-mock.mjs), unsichtbar im Headless-Chrome bei 390 und 1280 px.
-//   Schalter aus: zwei Wege, keine Anfrage an den Dienst, Einstiegsknopf rendert nicht.
-//   Schalter an: Einstieg, Knopf erst mit Häkchen, Verbindungsaufbau, Fehler 429 und 503, kein Mikrofon,
+//   Standard (ohne Umgebungswerte): Seite an, Einstiegsknopf aus.
+//   Seite aus (VITE_ANTRAG_GESPRAECH=0): zwei Wege, keine Anfrage an den Dienst, Einstiegsknopf rendert nicht.
+//   Knopf an (VITE_ANTRAG_KNOPF=1): Einstiegsknopf rendert.
+//   Seite an: Einstieg, Knopf erst mit Häkchen, Verbindungsaufbau, Fehler 429 und 503, kein Mikrofon,
 //   Gespräch und Festhalten mit Attrappen für RTCPeerConnection und getUserMedia (Ereignisse des Datenkanals
-//   werden eingespielt, die Werkzeugaufrufe gehen echt an den Nachbau), Gespräch ohne Festhalten beendet.
+//   werden eingespielt, die Werkzeugaufrufe gehen echt an den Nachbau), Gespräch ohne Festhalten beendet,
+//   Dienst meldet 404 hd_antrag_aus: ruhig die zwei Wege.
 //   Überall: kein waagerechtes Scrollen, keine fremden Hosts, keine Nita-Leiste, kein WhatsApp, kein Cookie-Hinweis.
 //
 // Aufruf: node scripts/check-antrag-aufnehmen-rendered.mjs [--fotos <ordner>] [--api-port 8794] [--web-port 3019]
@@ -60,10 +63,11 @@ async function starteMock() {
   const kennung = await fetch(`${API}/gesund`).then((antwort) => antwort.json()).catch(() => ({}));
   if (kennung.dienst !== 'antrag-gespraech-mock') throw new Error(`Port ${API_PORT} ist belegt (kein Nachbau). Anderen Port mit --api-port wählen.`);
 }
-async function starteVite(schalter) {
+async function starteVite(werte = {}) {
   const env = { ...process.env, VITE_ANTRAG_GESPRAECH_API: `${API}/nita/antrag` };
   delete env.VITE_ANTRAG_GESPRAECH;
-  if (schalter) env.VITE_ANTRAG_GESPRAECH = '1';
+  delete env.VITE_ANTRAG_KNOPF;
+  Object.assign(env, werte);
   viteProzess = spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(WEB_PORT), '--strictPort'], { cwd: ROOT, env, stdio: 'ignore' });
   await warteAuf(SEITE);
 }
@@ -233,7 +237,7 @@ async function einstiegUndFehler(browser, breite) {
   pruefe(await s.page.locator('[data-start]').isEnabled(), `${w}: Knopf mit Häkchen nicht aktiv`);
   await foto(s.page, `${breite}-02-einstieg-haekchen`);
   const knopf = await knopfProbe(s.page);
-  pruefe(knopf && knopf.href === '/antrag/aufnehmen' && knopf.text === 'Antrag gemeinsam aufnehmen', `${w}: Einstiegsknopf mit Schalter falsch (${JSON.stringify(knopf)})`);
+  pruefe(knopf === null, `${w}: Einstiegsknopf rendert im Standard (Knopf-Schalter aus)`);
   pruefe(s.dienst.length === 0, `${w}: Anfrage an den Dienst vor dem Start`);
 
   // Verbindung wird aufgebaut (Nachbau antwortet verzögert), dann Abbrechen
@@ -269,6 +273,19 @@ async function einstiegUndFehler(browser, breite) {
   await pruefeSeite(s.page, `${w} 503`);
   await foto(s.page, `${breite}-05-fehler-503`);
   await schliesse(s, `${w} 503`);
+
+  // 404 hd_antrag_aus: ruhig die zwei Wege, ohne Fehlerton und ohne „Noch einmal“
+  s = await neueSeite(browser, breite);
+  await mock('/__test/session-fehler/404');
+  await s.page.goto(SEITE, { waitUntil: 'networkidle' });
+  await startenMitHaken(s.page);
+  await erwarteText(s.page, /zwei einfache Wege/, `${w} 404`);
+  pruefe(await s.page.locator('[data-zustand="aus"]').count() === 1, `${w} 404: Ansicht „aus“ fehlt`);
+  pruefe(await s.page.locator('[data-nochmal], [data-zustand="fehler"]').count() === 0, `${w} 404: Fehlerton oder Noch einmal`);
+  pruefe(!/nicht erreichbar/.test(await text(s.page)), `${w} 404: Fehlertext`);
+  await pruefeSeite(s.page, `${w} 404`);
+  await foto(s.page, `${breite}-05b-dienst-aus`);
+  await schliesse(s, `${w} 404`);
   await mock('/__test/zuruecksetzen');
 }
 
@@ -382,18 +399,35 @@ async function gespraechMitAttrappen(browser, breite) {
   await schliesse(s, `${w} noch einmal`);
 }
 
+async function knopfAn(browser, breite) {
+  const w = `${breite}px Knopf an`;
+  const s = await neueSeite(browser, breite);
+  await s.page.goto(SEITE, { waitUntil: 'networkidle' });
+  await erwarteText(s.page, /Deinen Antrag gemeinsam mit Nita aufnehmen/, w);
+  const knopf = await knopfProbe(s.page);
+  pruefe(knopf && knopf.href === '/antrag/aufnehmen' && knopf.text === 'Antrag gemeinsam aufnehmen', `${w}: Einstiegsknopf falsch (${JSON.stringify(knopf)})`);
+  await schliesse(s, w);
+}
+
 // ---- Lauf ---------------------------------------------------------------------------------------------
 try {
   await starteMock();
-  // Schalter aus
-  await starteVite(false);
+  // Seite aus
+  await starteVite({ VITE_ANTRAG_GESPRAECH: '0' });
   let browser = await chromium.launch({ channel: 'chrome', headless: true });
   for (const breite of BREITEN) await schalterAus(browser, breite);
   await browser.close();
   await stoppeVite();
 
-  // Schalter an (lokale Prüfung im Entwicklungsmodus)
-  await starteVite(true);
+  // Knopf an (Seite im Standard an)
+  await starteVite({ VITE_ANTRAG_KNOPF: '1' });
+  browser = await chromium.launch({ channel: 'chrome', headless: true });
+  for (const breite of BREITEN) await knopfAn(browser, breite);
+  await browser.close();
+  await stoppeVite();
+
+  // Standard ohne Umgebungswerte: Seite an, Knopf aus
+  await starteVite();
   browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'] });
   const browserOhne = await chromium.launch({ channel: 'chrome', headless: true });
   try {

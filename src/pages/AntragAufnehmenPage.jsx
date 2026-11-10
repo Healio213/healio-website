@@ -17,7 +17,7 @@ import {
 // Antragsgespräch mit Nita (10.11.2026, SCHNITTSTELLE.md 11.2): Der Kunde spricht mit Nita, sie nimmt den
 // Antrag auf den ambulanten Zusatzschutz der SDK auf, danach kommt Mail 1 mit dem Link zur Prüfseite.
 // Auf dieser Seite gibt es nie einen Prüflink. Ohne Layout, noindex, ohne Messung, Nita-Leiste, WhatsApp und
-// Cookie-Hinweis (wie /antrag/pruefen). Hinter dem Schalter HEALIO_ANTRAG_GESPRAECH_AKTIV.
+// Cookie-Hinweis (wie /antrag/pruefen). Hinter dem Schalter HEALIO_ANTRAG_GESPRAECH_AKTIV (Einstiegsknopf: HEALIO_ANTRAG_KNOPF_AKTIV).
 // Die Zustimmung zur Sprachverbindung lebt nur im Zustand dieser Seite, nichts wird gespeichert.
 
 const ONLINE_LINK = '/ambulant';
@@ -311,12 +311,6 @@ const FEHLER = {
     text: 'Wir kommen gerade nicht zu ihr durch. Versuch es später noch einmal oder nimm einen der anderen Wege.',
     nochmal: true,
   },
-  aus: {
-    icon: WifiOff,
-    titel: 'Nita ist gerade nicht erreichbar',
-    text: 'Das Gespräch gibt es im Moment nicht. Nimm gern einen der anderen Wege.',
-    nochmal: false,
-  },
 };
 
 function Fehler({ grund, nochmal, titelRef }) {
@@ -381,6 +375,8 @@ function Gespraechsablauf({ titelRef }) {
   }
   if (lauf.phase === 'mikrofon' || lauf.phase === 'verbinden') return <Verbinden phase={lauf.phase} abbrechen={beenden} titelRef={titelRef} />;
   if (lauf.phase === 'gespraech') return <Gespraech gespraech={lauf} beitrag={beitrag} beenden={beenden} titelRef={titelRef} />;
+  // Dienst meldet 404 hd_antrag_aus: ruhig die zwei anderen Wege zeigen, ohne Fehlerton und ohne „Noch einmal“.
+  if (lauf.phase === 'fehler' && lauf.grund === 'aus') return <Ausgeschaltet titelRef={titelRef} />;
   if (lauf.phase === 'fehler') return <Fehler grund={lauf.grund} nochmal={starten} titelRef={titelRef} />;
   if (lauf.phase === 'beendet') return <Beendet grund={lauf.grund} nochmal={starten} titelRef={titelRef} />;
   return <Einstieg zustimmung={zustimmung} setZustimmung={setZustimmung} starten={starten} titelRef={titelRef} />;
