@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock } from 'lucide-react';
-import AltersvorsorgeIllustration from '@/components/sections/altersvorsorge/AltersvorsorgeIllustration';
 import SEOHead from '@/components/SEOHead';
 import { RATGEBER_ENTRIES } from '@/content/ratgeber/registry';
 import { altersvorsorgeClusters, ALTERSVORSORGE_HUB_PATH } from '@/content/ratgeber/altersvorsorge/shared';
 import { altersvorsorgeHub } from '@/content/altersvorsorgeHubContent';
 import AltersvorsorgeEinstiege from '@/components/sections/altersvorsorge/AltersvorsorgeEinstiege';
 import { EINGAENGE } from '@/content/altersvorsorgeZielgruppen/gemeinsam';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { RATGEBER_MOTIVE } from '@/lib/altersvorsorgeBildmotive';
 
 // Der Hub braucht nur Kartenmetadaten. Die vollständigen Artikel werden erst
 // auf der jeweiligen Artikelseite über registry.loaders.js geladen.
@@ -44,7 +45,7 @@ const AltersvorsorgeRatgeberPage = () => (
             <p className="mt-4 text-sm leading-6 text-slate-500">Redaktion: Healio GmbH · Quellenstand 8. Oktober 2026</p>
           </div>
           <aside className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm sm:p-8">
-            <AltersvorsorgeIllustration kind="wissen" className="h-20 w-20" />
+            <FriendlyIcon kind="choice" tone="mint" size="lg" />
             <h2 className="mt-4 font-display text-2xl font-extrabold">Wo möchtest du anfangen?</h2>
             <nav aria-label="Die wichtigsten Fragen zum Altersvorsorgedepot" className="mt-5" data-altersvorsorge-einstiege>
               <ul className="divide-y divide-emerald-100">
@@ -63,7 +64,7 @@ const AltersvorsorgeRatgeberPage = () => (
 
         {altersvorsorgeClusters.map((cluster) => (
           <section key={cluster.id} id={cluster.id} aria-labelledby={`${cluster.id}-heading`} className="mt-16 scroll-mt-28">
-            <AltersvorsorgeIllustration kind={cluster.id} className="mb-4 h-20 w-20" />
+            {RATGEBER_MOTIVE[cluster.id] ? <FriendlyIcon kind={RATGEBER_MOTIVE[cluster.id].kind} tone={RATGEBER_MOTIVE[cluster.id].ton} size="lg" className="mb-4" /> : null}
             <h2 id={`${cluster.id}-heading`} className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{cluster.title}</h2>
             <p className="mt-3 max-w-[70ch] text-base leading-7 text-slate-600">{cluster.description}</p>
             <ul className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

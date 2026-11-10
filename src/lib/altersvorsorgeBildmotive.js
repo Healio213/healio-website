@@ -87,3 +87,30 @@ export const motivSitzStil = (sitz, { breite, hoehe, fuss }) => {
     bottom: `${rund(fuss - sitz.u * bildHoehe)}rem`,
   };
 };
+
+// Einstiegskarten und die Liste „Passende Seiten“: Seite (slug) → Motiv und Farbton.
+export const EINGANG_MOTIVE = {
+  eltern: { kind: 'family', ton: 'lavender' },
+  selbststaendige: { kind: 'calculator', ton: 'mint' },
+  riester: { kind: 'switch', ton: 'butter' },
+  'unter-25': { kind: 'bonus', ton: 'sky' },
+  ehepartner: { kind: 'budget', ton: 'coral' },
+  elternzeit: { kind: 'money', ton: 'butter' },
+  'kindergeld-endet': { kind: 'calendar', ton: 'lavender' },
+  'riester-kuendigen': { kind: 'thinking', ton: 'sky' },
+};
+
+// Abschnitt Begleitung: Schlüssel der Rolle (rolle.icon) → Motiv und Farbton.
+export const ROLLEN_MOTIVE = {
+  webinar: { kind: 'advisor', ton: 'mint' },
+  check: { kind: 'document', ton: 'sky' },
+};
+
+// Ratgeber-Übersicht: Themenbereich (cluster.id) → Motiv und Farbton.
+export const RATGEBER_MOTIVE = {
+  grundlagen: { kind: 'bonus', ton: 'mint' },
+  riester: { kind: 'switch', ton: 'butter' },
+  familien: { kind: 'family', ton: 'lavender' },
+  selbststaendige: { kind: 'calculator', ton: 'sky' },
+  entscheidung: { kind: 'comparison', ton: 'coral' },
+};

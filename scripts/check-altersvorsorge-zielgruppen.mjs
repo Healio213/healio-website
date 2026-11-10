@@ -23,7 +23,7 @@ import {
 import { zielgruppenSchema, zielgruppenSeoRoute } from '../src/content/altersvorsorgeZielgruppen/seo.js';
 import { seoRoutes } from './seo-routes.mjs';
 import { friendlyIconAssets } from '../src/components/ui/healioSoftClayIcons.js';
-import { KACHEL_MOTIVE, KARTEN_FIGUR, MOTIV_SITZ, SCHRITT_MOTIVE } from '../src/lib/altersvorsorgeBildmotive.js';
+import { EINGANG_MOTIVE, KACHEL_MOTIVE, KARTEN_FIGUR, MOTIV_SITZ, RATGEBER_MOTIVE, ROLLEN_MOTIVE, SCHRITT_MOTIVE } from '../src/lib/altersvorsorgeBildmotive.js';
 import { getHeroKacheln, zuschussCheck } from '../src/content/altersvorsorgedepotContent.js';
 
 const TECHNISCH = new Set(['slug', 'icon', 'key', 'motiv', 'quelle', 'to', 'voreinstellung', 'felder', 'eingabe', 'weiterlesen', 'id', 'verwandt']);
@@ -198,4 +198,15 @@ test('Jede Zahlenkachel der Angebotskarte hat ein eigenes Bildmotiv', () => {
     });
     assert.equal(new Set(motive).size, motive.length, `${karte.name}: Bildmotiv doppelt (${motive.join(', ')})`);
   }
+});
+
+test('Einstiegskarten, Rollen und Ratgeber-Bereiche nutzen vorhandene, verschiedene Bildmotive', () => {
+  for (const eingang of EINGAENGE) assert.ok(EINGANG_MOTIVE[eingang.slug], `${eingang.slug}: kein Eintrag in EINGANG_MOTIVE`);
+  for (const [name, zuordnung] of Object.entries({ EINGANG_MOTIVE, ROLLEN_MOTIVE, RATGEBER_MOTIVE })) {
+    for (const [schluessel, motiv] of Object.entries(zuordnung)) {
+      assert.ok(friendlyIconAssets[motiv.kind], `${name}.${schluessel}: Motiv „${motiv.kind}“ fehlt im Bildsatz`);
+    }
+  }
+  const kinds = EINGAENGE.map((eingang) => EINGANG_MOTIVE[eingang.slug].kind);
+  assert.equal(new Set(kinds).size, kinds.length, `Einstiegs-Motive doppelt (${kinds.join(', ')})`);
 });

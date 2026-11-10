@@ -16,6 +16,8 @@ import {
   EINGAENGE, QUELLEN, RATGEBER_TITEL, ZIELGRUPPEN_BASIS_PFAD, ZIELGRUPPEN_QUELLENSTAND,
 } from '@/content/altersvorsorgeZielgruppen/gemeinsam';
 import { zielgruppenCanonical, zielgruppenSchema } from '@/content/altersvorsorgeZielgruppen/seo';
+import { friendlyIconAssets } from '@/components/ui/healioSoftClayIcons';
+import { EINGANG_MOTIVE } from '@/lib/altersvorsorgeBildmotive';
 
 /**
  * Vorlage der Anfrageseiten unter /altersvorsorgedepot/… (Microsite-Prinzip).
@@ -371,7 +373,7 @@ const AltersvorsorgeZielgruppePage = ({ inhalt }) => {
                 {andereEingaenge.map((eingang) => (
                   <li key={eingang.slug}>
                     <Link to={eingang.path} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200 bg-[#f4faf7] px-4 py-2 text-base font-semibold text-[#064b3d] hover:border-emerald-400">
-                      <AltersvorsorgeIllustration kind={eingang.motiv} className="h-6 w-6" />
+                      {EINGANG_MOTIVE[eingang.slug] ? <img src={friendlyIconAssets[EINGANG_MOTIVE[eingang.slug].kind]} alt="" aria-hidden="true" width="28" height="28" loading="lazy" decoding="async" className="h-7 w-7 shrink-0 object-contain" /> : <AltersvorsorgeIllustration kind={eingang.motiv} className="h-6 w-6" />}
                       {eingang.label}
                     </Link>
                   </li>

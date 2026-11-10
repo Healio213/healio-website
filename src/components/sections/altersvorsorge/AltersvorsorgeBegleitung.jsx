@@ -1,6 +1,8 @@
 import React from 'react';
 import AltersvorsorgeIllustration from './AltersvorsorgeIllustration';
 import { werDahinter } from '@/content/altersvorsorgedepotContent';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
+import { ROLLEN_MOTIVE } from '@/lib/altersvorsorgeBildmotive';
 
 /**
  * Abschnitt "Wer dich begleitet". Healio ist der Absender. Zwei Rollenkarten
@@ -55,7 +57,7 @@ const AltersvorsorgeBegleitung = ({ content = werDahinter }) => {
         {content.rollen.map((rolle) => {
           return (
             <li key={rolle.titel} className="rounded-2xl border border-emerald-100 bg-[#f4faf7] p-6">
-              <AltersvorsorgeIllustration kind={rolle.icon} className="h-20 w-20" />
+              {ROLLEN_MOTIVE[rolle.icon] ? <FriendlyIcon kind={ROLLEN_MOTIVE[rolle.icon].kind} tone={ROLLEN_MOTIVE[rolle.icon].ton} size="lg" /> : <AltersvorsorgeIllustration kind={rolle.icon} className="h-20 w-20" />}
               <h3 className="mt-4 font-display text-lg font-extrabold text-slate-950">{rolle.titel}</h3>
               <p className="mt-2 text-base leading-7 text-slate-700">{rolle.text}</p>
             </li>
