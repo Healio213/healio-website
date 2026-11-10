@@ -146,6 +146,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Der allgemeine Begriff Osteopath auf einem Praxisschild reicht für diese Satzungsprüfung nicht. Bitte die Praxis um Angaben zu Berufsberechtigung und Ausbildung und lass die Anerkennung bei Unklarheit von der Barmer bestätigen. Übertrage die Behandlerregel des Familienwegs nicht ungeprüft auf einen anderen Bonus- oder privaten Vertragsweg. Jeder dieser Wege kann eigene Rechnungs- und Anerkennungsbedingungen haben."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Im Naturheilregister, unserem Verzeichnis für Heilpraktiker, kannst du " },
+            { "text": "Osteopathie-Praxen nach Ort suchen", "href": "https://naturheilregister.de/fachgebiet/osteopathie" },
+            { "text": "; ob die Barmer eine Praxis für den Zuschuss anerkennt, klärst du vorab mit ihr." }
+          ]
         }
       ]
     },

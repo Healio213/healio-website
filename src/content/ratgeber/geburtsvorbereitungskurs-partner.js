@@ -65,6 +65,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Frage die Kursleitung nach gemeinsamen Terminen, der Abrechnung für die Schwangere und der eigenen Begleitgebühr. Die private Partnergebühr hängt von deinem konkreten Kursangebot ab. Lass den Betrag schriftlich nennen."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Wenn du noch einen Kurs suchst, findest du " },
+            { "text": "Geburtsvorbereitung bei Hebammen aus deiner Stadt", "href": "https://natuerlichbegleitet.de/fachgebiet/geburtsvorbereitung" },
+            { "text": " in unserem Verzeichnis natürlich begleitet." }
+          ]
         }
       ]
     },

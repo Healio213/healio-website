@@ -16,7 +16,7 @@ export const article = {
   "kind": "ratgeber",
   "group": "ambulant",
   "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
-  "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
+  "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 45 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
   "publishedAt": "2026-10-07",
   "publishedAtLabel": "7. Oktober 2026",
   "updatedAt": "2026-10-27",
@@ -41,7 +41,7 @@ export const article = {
         "label": "KKH je Sitzung, höchstens vier im Kalenderjahr"
       },
       {
-        "value": "39 Kassen",
+        "value": "45 Kassen",
         "label": "Ausgewählte Kassen mit Erstattungsregeln oder Anfragehinweisen"
       }
     ],
@@ -60,7 +60,7 @@ export const article = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Osteopathie ist keine Regelleistung der gesetzlichen Krankenversicherung. Viele Kassen zahlen trotzdem einen Zuschuss als Satzungsleistung, nach § 11 Abs. 6 SGB V darf jede Kasse solche Mehrleistungen anbieten. Die Kurzübersicht zeigt große Kassen mit Euro je Sitzung, Sitzungen im Kalenderjahr und dem Höchstbetrag im Jahr. Alle 39 geprüften Kassen mit Nachweisen und Satzungsfundstelle stehen in der großen Tabelle darunter."
+          "text": "Osteopathie ist keine Regelleistung der gesetzlichen Krankenversicherung. Viele Kassen zahlen trotzdem einen Zuschuss als Satzungsleistung, nach § 11 Abs. 6 SGB V darf jede Kasse solche Mehrleistungen anbieten. Die Kurzübersicht zeigt große Kassen mit Euro je Sitzung, Sitzungen im Kalenderjahr und dem Höchstbetrag im Jahr. Alle 45 geprüften Kassen mit Nachweisen und Satzungsfundstelle stehen in der großen Tabelle darunter."
         },
         {
           "type": "table",
@@ -225,7 +225,7 @@ export const article = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Die folgende Übersicht vergleicht Erstattungsregeln und Anfragehinweise für 39 ausgewählte Kassen mit Stand 7. Oktober 2026. Vergleiche stets die gesamte Zeile. Ein Betrag je Sitzung, eine Prozentquote und ein gemeinsamer Jahrestopf begrenzen die Leistung auf unterschiedliche Weise. Ein hoher Jahresrahmen kann deshalb für deinen Termin weniger bedeuten als ein niedrigerer Betrag mit passenden Voraussetzungen."
+          "text": "Die folgende Übersicht vergleicht Erstattungsregeln und Anfragehinweise für 45 ausgewählte Kassen mit Stand 7. Oktober 2026. Die sechs AOKs Baden-Württemberg, Bremen/Bremerhaven, Hessen, Niedersachsen, Rheinland-Pfalz/Saarland und Sachsen-Anhalt sind mit Stand 9. November 2026 ergänzt. Vergleiche stets die gesamte Zeile. Ein Betrag je Sitzung, eine Prozentquote und ein gemeinsamer Jahrestopf begrenzen die Leistung auf unterschiedliche Weise. Ein hoher Jahresrahmen kann deshalb für deinen Termin weniger bedeuten als ein niedrigerer Betrag mit passenden Voraussetzungen."
         },
         {
           "type": "paragraph",
@@ -244,11 +244,39 @@ export const article = {
           ],
           "rows": [
             [
+              "AOK Baden-Württemberg",
+              "Bis 60 EUR je Sitzung, höchstens 300 EUR im Kalenderjahr.",
+              "Vertragsärztliche Veranlassung; zugelassener Arzt oder Heilmittelerbringer mit Verbandsmitgliedschaft oder beitrittsberechtigender Ausbildung, Heilpraktiker in der Satzung nicht genannt.",
+              "Gemeinsamer Topf Gesundheitskonto allgemein von 300 EUR im Jahr, zusammen mit Reiseimpfungen und alternativen Arzneimitteln.",
+              "§ 14 Abs. 2 und Abs. 7, 97. Satzungsänderung, Stand 01.01.2026"
+            ],
+            [
               "AOK Bayern",
               "Unter 18 Jahren: sechs Sitzungen im Kalenderjahr bis je 50 EUR; Schwangere: sechs Behandlungen je Schwangerschaft bis je 50 EUR.",
               "Privatrezept und Rechnung mit Zusatzqualifikation; berechtigter Behandler mit Verbandsmitgliedschaft oder beitrittsberechtigender Ausbildung.",
               "Bei Arztbindung nach § 19c oder § 19d braucht der gewählte Arzt die Osteopathie-Zusatzqualifikation.",
               "§ 10j Abs. 1 bis 3, S. 3.23; § 10e Abs. 7 und 8, S. 3.17 bis 3.18"
+            ],
+            [
+              "AOK Bremen/Bremerhaven",
+              "80 Prozent der Rechnung, höchstens drei Behandlungen im Kalenderjahr; kein Eurobetrag je Sitzung in der Satzung.",
+              "Behandler zur Ausübung der Heilkunde berechtigt und mit abgeschlossener osteopathischer Ausbildung; keine ärztliche Verordnung in der Satzung genannt; personifizierte Rechnung.",
+              "Kein Eurodeckel in der Satzung.",
+              "§ 10a Abs. 1 und 2 in Verbindung mit § 10 Abs. 1, 55. Änderung vom 16.03.2026"
+            ],
+            [
+              "AOK Hessen",
+              "60 EUR je Sitzung, bis zu vier Sitzungen im Kalenderjahr; im ersten Lebensjahr bis zu vier weitere Sitzungen.",
+              "Ärztliche Bescheinigung der medizinischen Eignung, die Kosten dafür trägt der Versicherte; zugelassener Arzt oder Heilpraktiker mit Osteopathie-Zusatzqualifikation, die zum Verbandsbeitritt berechtigt.",
+              "Rechnerisch 240 EUR im Kalenderjahr, für Säuglinge bis 480 EUR; Teil des Gesundheitskontos, ein Gesamtdeckel über alle Kategorien ist nicht gefunden.",
+              "§ 12f Abs. 5 Buchst. a, Lesefassung Stand 01.07.2026"
+            ],
+            [
+              "AOK Niedersachsen",
+              "80 Prozent der Rechnung, höchstens 75 EUR je Behandlung, bis zu vier Behandlungen im Kalenderjahr.",
+              "Behandler mit Verbandsmitgliedschaft oder beitrittsberechtigender Ausbildung; keine ärztliche Bescheinigung in der Satzung genannt.",
+              "Rechnerisch 300 EUR im Kalenderjahr; zählt auf den gemeinsamen Jahrestopf von 500 EUR (§ 10a Abs. 1).",
+              "§ 10b Abs. 1 bis 3 in Verbindung mit § 10a Abs. 1, 142. Änderung vom 10.03.2026"
             ],
             [
               "AOK Nordost",
@@ -277,6 +305,20 @@ export const article = {
               "Erwachsenenweg mit Vertragsarztrezept. Ärzte, Heilpraktiker oder Physiotherapeuten mit den dort genannten Verbandsnachweisen, Heilpraktikererlaubnis oder BAO-Zertifikat.",
               "Erwachsene: im Vorjahr überwiegend Kostenerstattung für ambulante ärztliche Versorgung, Versorgung höchstens in einem Quartal; Ausnahmen laut Satzung. Säuglingsweg vor erstem Geburtstag im Baby-Bonus.",
               "§ 12b Abs. 1 und 2, S. 18 bis 20; § 12a Buchst. c, S. 17 bis 18"
+            ],
+            [
+              "AOK Rheinland-Pfalz/Saarland",
+              "Erwachsene: 100 Prozent der Rechnung, höchstens 60 EUR je Sitzung, höchstens vier Sitzungen im Kalenderjahr; bis 18 Jahre: höchstens sechs Sitzungen zu je bis 60 EUR.",
+              "Physiotherapeut, Heilpraktiker oder Arzt mit ordentlicher Mitgliedschaft oder den Mitgliedschaftsvoraussetzungen in einem Osteopathie-Fachverband mit Berufsordnung und Fortbildungspflicht; keine ärztliche Verordnung in der Satzung genannt; Rechnungen vorlegen.",
+              "Rechnerisch 240 EUR im Kalenderjahr, bis 18 Jahre 360 EUR.",
+              "§ 31e (Erwachsene), § 31b (Kinder und Jugendliche), Lesefassung, PDF erstellt 03.08.2026, ohne Fassungsnummer"
+            ],
+            [
+              "AOK Sachsen-Anhalt",
+              "Höchstens 60 EUR je Sitzung, höchstens vier Sitzungen im Kalenderjahr.",
+              "Ärztliche Bescheinigung; Behandler mit Mitgliedschaft oder Mitgliedschaftsberechtigung in einem Verband aus dem Verzeichnis der AOK.",
+              "Rechnerisch 240 EUR im Kalenderjahr; Gesamtdeckel GESUNDESKONTO 600 EUR im Jahr, daneben keine Teilnahme am AOK-Gesundheitsbonus; Rechnungen bis 28.02. des Folgejahres.",
+              "§ 11a Abs. 1 bis 3, § 11, 52. Änderung (Beschluss 16.12.2025), Änderungsübersicht bis 01.07.2026"
             ],
             [
               "Audi BKK",
@@ -554,6 +596,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Einige Regeln benennen Ärzte und Physiotherapeuten ausdrücklich. Andere sind hinsichtlich des Grundberufs offener. Die BKK Pfalz nennt zuerst einen qualifizierten osteopathischen Leistungserbringer und danach weitere Berufsgruppen. Die BKK24 formuliert die besonderen Erbringervorgaben mit Bezug auf Neugeborene. Kläre die konkrete Praxis mit der Kasse, statt aus einer verkürzten Liste eine pauschale Zusage oder Ablehnung für Heilpraktiker abzuleiten."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Suchst du noch eine Praxis, findest du " },
+            { "text": "Osteopathen in deiner Stadt", "href": "https://naturheilregister.de/fachgebiet/osteopathie" },
+            { "text": " im Naturheilregister, unserem Verzeichnis für Heilpraktiker." }
+          ]
         }
       ]
     },
@@ -796,11 +846,39 @@ export const article = {
       {"label": "SDK: Allgemeine Versicherungsbedingungen Teil I (1.751)", "publisher": "SDK", "href": "https://gesundwerker.sdk.de/downloads/Bedingungen/1-751.pdf", "stand": "01.01.2022", "accessedAt": "14.10.2026"},
       {"label": "SDK: Originalbedingungen der AP-Tarife", "publisher": "SDK", "href": "https://www.sdk.de/downloads/Bedingungen/AVB-Zusatzversicherung-AP-Tarife-1.753a.pdf", "stand": "01.01.2023; aktuell sichtbarer Zeitraum mit Healio abgeglichen", "accessedAt": "07.10.2026"},
       {
+        "label": "AOK Baden-Württemberg: Satzung und Osteopathie",
+        "publisher": "AOK Baden-Württemberg",
+        "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/baden-wuerttemberg/pdf/Satzung.pdf",
+        "stand": "97. Satzungsänderung, 01.01.2026",
+        "accessedAt": "09.11.2026"
+      },
+      {
         "label": "AOK Bayern: Satzung und Osteopathie",
         "publisher": "AOK Bayern",
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/bayern/pdf/noindex/Satzung/satzung.pdf",
         "stand": "Stand 27.02.2026",
         "accessedAt": "07.10.2026"
+      },
+      {
+        "label": "AOK Bremen/Bremerhaven: Satzung und Osteopathie",
+        "publisher": "AOK Bremen/Bremerhaven",
+        "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/bremen-bremerhaven/pdf/2026/PDF/55._%C3%84nderung_der_Satzung_Stand_01.04.2026.pdf",
+        "stand": "55. Änderung vom 16.03.2026 (Datei: Stand 01.04.2026); § 10a Stand 01.01.2021, § 10h Stand 19.12.2022",
+        "accessedAt": "09.11.2026"
+      },
+      {
+        "label": "AOK Hessen: Satzung und Osteopathie",
+        "publisher": "AOK Hessen",
+        "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/hessen/pdf/satzung-kv.pdf",
+        "stand": "Lesefassung Stand 01.07.2026 (Satzung vom 18.12.2024, bis 4. Nachtrag mit Wirkung 01.07.2026)",
+        "accessedAt": "09.11.2026"
+      },
+      {
+        "label": "AOK Niedersachsen: Satzung und Osteopathie",
+        "publisher": "AOK Niedersachsen",
+        "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/niedersachsen/pdf/Satzung_AOK_Niedersachsen.pdf",
+        "stand": "142. Änderung vom 10.03.2026; § 10b Abs. 3 in Kraft seit 01.01.2026",
+        "accessedAt": "09.11.2026"
       },
       {
         "label": "AOK Nordost: Satzung und Osteopathie",
@@ -829,6 +907,20 @@ export const article = {
         "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/rheinland-hamburg/pdf/satzung.pdf",
         "stand": "18. Nachtrag vom 07.07.2026, ab 01.07.2026",
         "accessedAt": "07.10.2026"
+      },
+      {
+        "label": "AOK Rheinland-Pfalz/Saarland: Satzung und Osteopathie",
+        "publisher": "AOK Rheinland-Pfalz/Saarland",
+        "href": "https://www.aok.de/pk/magazin/cms/fileadmin/pk/rheinland-pfalz-saarland/pdf/Satzung/Satzung.pdf",
+        "stand": "Lesefassung, PDF erstellt 03.08.2026; Vorspann nennt keine Fassungsnummer",
+        "accessedAt": "09.11.2026"
+      },
+      {
+        "label": "AOK Sachsen-Anhalt: Satzung und Osteopathie",
+        "publisher": "AOK Sachsen-Anhalt",
+        "href": "https://www.deine-gesundheitswelt.de/die-aok/satzung/satzung-der-aok-sachsen-anhalt-die-gesundheitskasse",
+        "stand": "52. Änderung durch Beschluss des Verwaltungsrates vom 16.12.2025; Änderungsübersicht bis lfd. Nr. 207 (in Kraft 01.07.2026, nur Anhang 1)",
+        "accessedAt": "09.11.2026"
       },
       {
         "label": "Audi BKK: Satzung und Osteopathie",

@@ -360,6 +360,13 @@ export const article = {
         {
           type: 'segments',
           segments: [
+            { text: 'Hebammen und Doulas in deiner Stadt', href: 'https://natuerlichbegleitet.de/' },
+            { text: ' findest du in unserem Verzeichnis natürlich begleitet.' }
+          ]
+        },
+        {
+          type: 'segments',
+          segments: [
             {
               text: 'Alle bonusfähigen Positionen mit Beträgen, Nachweisen und der Rechnung, wie der Zuschuss den Beitrag einer Zusatzversicherung senkt, stehen im ',
             },

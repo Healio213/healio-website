@@ -1133,7 +1133,7 @@ export const RATGEBER_ENTRIES = [
     "listTeaser": "Viele Krankenkassen bezuschussen Osteopathie nach ihrer Satzung: Die TK nennt bis 40 EUR für höchstens drei Sitzungen im Kalenderjahr, die KKH bis 60 EUR für höchstens vier Sitzungen. Ob du einen Zuschuss erhältst, hängt außerdem von ärztlichem Nachweis, Behandlerqualifikation, möglichen Altersgrenzen und einem noch verfügbaren gemeinsamen Budget ab.",
     "readingTimeMinutes": 16,
     "metaTitle": "Osteopathie Krankenkasse: Welche Kasse zahlt 2026? | Healio",
-    "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 39 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
+    "metaDescription": "Welche Krankenkasse zahlt Osteopathie? 45 Kassen mit Euro je Sitzung, Sitzungen im Jahr und Nachweisen, dazu was eine Zusatzversicherung erstattet.",
     "publishedAt": "2026-10-07",
     "updatedAt": "2026-10-27"
   },

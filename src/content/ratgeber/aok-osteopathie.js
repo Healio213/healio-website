@@ -154,6 +154,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Bei AOK Bayern kann die Bindung an einen gewählten Arzt im Selektivvertrag die Erstattung beeinflussen: Der gewählte Arzt muss die genannte Osteopathie-Zusatzqualifikation haben. Rheinland/Hamburg nennt eigene zulässige Nachweiswege, darunter bestimmte Verbandsnachweise, Heilpraktikererlaubnis oder BAO-Zertifikat. Eine allgemeine Internet-Behandlerliste ersetzt diese konkrete Satzungsprüfung nicht."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "Praxen mit Schwerpunkt Osteopathie aus deiner Region findest du auch in unserem " },
+            { "text": "Naturheilregister für Heilpraktiker", "href": "https://naturheilregister.de/fachgebiet/osteopathie" },
+            { "text": "." }
+          ]
         }
       ]
     },

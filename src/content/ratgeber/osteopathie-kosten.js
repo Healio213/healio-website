@@ -53,6 +53,14 @@ export const article = {
           "text": "Frag vor dem ersten Termin nach der vorgesehenen Leistung, der Dauer und den voraussichtlichen Kosten. Kläre, ob das Erstgespräch im genannten Betrag enthalten ist und wie weitere Termine berechnet werden. Bitte um eine Kosteninformation für deinen konkreten Termin und kläre, wie Änderungen am Behandlungsumfang berechnet werden."
         },
         {
+          "type": "segments",
+          "segments": [
+            { "text": "Wenn du noch eine Praxis suchst, kannst du dir im Naturheilregister, unserem Verzeichnis für Heilpraktiker, " },
+            { "text": "Praxen mit Schwerpunkt Osteopathie in deiner Nähe", "href": "https://naturheilregister.de/fachgebiet/osteopathie" },
+            { "text": " ansehen." }
+          ]
+        },
+        {
           "type": "paragraph",
           "text": "Wenn die Praxis weiß oder hinreichend erkennen kann, dass ein Dritter die Kosten nicht vollständig übernimmt, muss sie dich nach § 630c BGB vor Beginn über die voraussichtlichen Behandlungskosten in Textform informieren. Das Gesetz kennt Ausnahmen, etwa bei einer unaufschiebbaren Behandlung oder einem ausdrücklichen Informationsverzicht. Bitte bei einem planbaren Termin um eine nachvollziehbare Kosteninformation."
         },

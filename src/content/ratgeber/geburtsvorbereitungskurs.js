@@ -67,6 +67,14 @@ export const article = {
         {
           "type": "paragraph",
           "text": "Eine allgemeine gesetzliche Startwoche lässt sich aus dem geprüften Hebammenhilfevertrag nicht ableiten. Besprich mit der Kursleitung, welcher Kurs zeitlich zu deinem erwarteten Geburtstermin passt und ob besondere Umstände berücksichtigt werden müssen. Bei einer Kursreihe zählt auch das Ende, bei einem Kompaktkurs die Dauer des einzelnen Termins. Die konkrete Planung ersetzt keine individuelle Beratung zum Schwangerschaftsverlauf."
+        },
+        {
+          "type": "segments",
+          "segments": [
+            { "text": "In unserem Verzeichnis natürlich begleitet, das Hebammen und Doulas auflistet, kannst du " },
+            { "text": "Hebammen mit Geburtsvorbereitung in deiner Nähe", "href": "https://natuerlichbegleitet.de/fachgebiet/geburtsvorbereitung" },
+            { "text": " finden." }
+          ]
         }
       ]
     },

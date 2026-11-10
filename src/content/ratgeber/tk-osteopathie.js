@@ -126,6 +126,14 @@ export const article = {
           ],
         },
         {
+          type: 'segments',
+          segments: [
+            { text: 'Wenn du erst noch eine Praxis suchst, findest du in unserem Verzeichnis, dem Naturheilregister, ' },
+            { text: 'Heilpraktiker mit Osteopathie als Schwerpunkt in deiner Stadt', href: 'https://naturheilregister.de/fachgebiet/osteopathie' },
+            { text: '.' }
+          ]
+        },
+        {
           type: 'path',
           to: '/ambulant',
           icon: 'naturopathy',

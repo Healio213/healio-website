@@ -19,7 +19,7 @@
  *   - Keine Aussage, dass eine Zusatzversicherung die Rufbereitschaft zahlt.
  *     Die ambulante Hebammenleistung der Bayerischen steht nicht in den
  *     Bedingungen und wird nicht genannt (Recherche 05.10.2026).
- *   - Die Tabelle zeigt 15 Kassen, kein Marktquerschnitt.
+ *   - Die Tabelle zeigt 22 Kassen, kein Marktquerschnitt.
  *   - Semrush: Im Ordner Marktanalyse-2026-10/semrush gibt es keinen Export
  *     mit Rufbereitschaft. Zielbegriffe ohne gemessenes Volumen: hebamme
  *     rufbereitschaft, rufbereitschaftspauschale hebamme, rufbereitschaft
@@ -64,7 +64,7 @@ export const article = {
     path: { to: '/stationaer#familie', text: 'Für dein Baby ab dem Tag der Geburt', label: 'Klinikschutz fürs Kind ansehen' },
   },
 
-  lead: 'Wer mit der eigenen Hebamme zu Hause, im Geburtshaus oder als Beleggeburt in der Klinik entbinden will, bekommt meist eine Rechnung über die Rufbereitschaft. Die gesetzliche Kasse zahlt sie nicht als Regelleistung, viele Kassen geben aber laut Satzung etwas dazu. Hier siehst du, wofür die Pauschale steht, welche 15 Kassen wie viel erstatten, worauf du bei Rechnung und Fristen achtest und was ein Kassenwechsel in der Schwangerschaft dafür bedeutet.',
+  lead: 'Wer mit der eigenen Hebamme zu Hause, im Geburtshaus oder als Beleggeburt in der Klinik entbinden will, bekommt meist eine Rechnung über die Rufbereitschaft. Die gesetzliche Kasse zahlt sie nicht als Regelleistung, viele Kassen geben aber laut Satzung etwas dazu. Hier siehst du, wofür die Pauschale steht, welche 22 Kassen wie viel erstatten, worauf du bei Rechnung und Fristen achtest und was ein Kassenwechsel in der Schwangerschaft dafür bedeutet.',
 
   sections: [
     {
@@ -109,16 +109,18 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Die Tabelle zeigt 15 Kassen mit Betrag, wichtigster Bedingung und Fundstelle in der Satzung. Grundlage sind die Satzungsbelege von KassenBoost, die wir gegen die Satzungstexte gelesen haben, dazu Stichproben auf den Seiten von TK, DAK, KKH und Mobil Krankenkasse. Eine Rangliste ist das nicht, und vollständig ist sie auch nicht.',
+          text: 'Die Tabelle zeigt 22 Kassen mit Betrag, wichtigster Bedingung und Fundstelle in der Satzung. Grundlage sind die Satzungsbelege von KassenBoost, die wir gegen die Satzungstexte gelesen haben, dazu Stichproben auf den Seiten von TK, DAK, KKH und Mobil Krankenkasse. Eine Rangliste ist das nicht, und vollständig ist sie auch nicht.',
         },
         {
           type: 'table',
           mobile: 'cards',
-          caption: 'Erstattung der Hebammen-Rufbereitschaft bei 15 Krankenkassen mit Betrag, Bedingung und Fundstelle in der Satzung',
+          caption: 'Erstattung der Hebammen-Rufbereitschaft bei 22 Krankenkassen mit Betrag, Bedingung und Fundstelle in der Satzung',
           head: ['Krankenkasse', 'Betrag laut Satzung', 'Wichtigste Bedingung', 'Fundstelle und Stand'],
           rows: [
             ['DAK-Gesundheit', 'bis 500 EUR je Schwangerschaft', 'Hebamme in der Schwangerschaft und bei der Geburt, entfällt, wenn die DAK die Rufbereitschaft als Sachleistung stellen kann', '§ 19a Abs. 3, Satzung Stand 01.09.2026'],
             ['VIACTIV', 'bis 350 EUR einmal je Schwangerschaft', 'nur für die 34. bis 42. Schwangerschaftswoche', '§ 12h, 18. Nachtrag, gültig ab 01.01.2026'],
+            ['AOK Baden-Württemberg', 'bis 300 EUR je Kalenderjahr', 'nur bei vereinbarter außerklinischer Geburt oder Beleggeburt in 1:1 Betreuung; gemeinsamer Topf von 300 EUR im Jahr mit erweiterten Schwangerenleistungen', '§ 14 Abs. 6 und 7, 97. Satzungsänderung, Stand 01.01.2026'],
+            ['AOK Hessen', 'bis 300 EUR, im Gesamttopf von 400 EUR je Schwangerschaft', 'Rufbereitschaft in den letzten drei Wochen vor bis zwei Wochen nach dem errechneten Termin; keine Erstattung für Beleghebammen im Schichtdienst; 24 Stunden erreichbar', '§ 12b Abs. 1 und 2, Lesefassung Stand 01.07.2026'],
             ['AOK Nordost', 'bis 270 EUR je Schwangerschaft', 'Erstattungen aus anderen Satzungsleistungen im selben Kalenderjahr werden angerechnet', '§ 19d, § 19 Abs. 3, 52. Nachtrag'],
             ['TK', 'bis 250 EUR einmal je Schwangerschaft', 'Hebamme in der Schwangerschaft und bei der Geburt, nur eine Hebamme', '§ 27g, Satzung Stand 17.04.2026'],
             ['IKK classic', 'bis 250 EUR je Schwangerschaft', 'in der Regel 37. bis 42. Woche, Hebamme in Schwangerschaft und Geburt', '§ 34h, Satzung Stand 01.08.2026'],
@@ -127,13 +129,18 @@ export const article = {
             ['AOK Rheinland/Hamburg', 'bis 250 EUR je Schwangerschaft für Rufbereitschaft und weitere Vorsorge der Hebamme', 'du bist als Schwangere bei der AOK Rheinland/Hamburg versichert', '§ 12c Abs. 2, 18. Nachtrag vom 07.07.2026'],
             ['AOK PLUS', 'höchstens 250 EUR, aus dem Budget von 500 EUR je Schwangerschaft', 'alle Posten des Pakets zehren am selben Budget', '§ 11a Abs. 1 und 2'],
             ['Mobil Krankenkasse', 'bis 250 EUR je Geburt', 'nur bei außerklinischer Geburt oder Beleggeburt mit 1:1 Betreuung', '§ 10b Abs. 2 Nr. 1, Stand 01.01.2026'],
+            ['AOK Niedersachsen', 'bis 250 EUR je Geburt, Abrechnung direkt zwischen AOK und Hebamme', 'nur bei vereinbarter außerklinischer Geburt oder Beleggeburt in 1:1 Betreuung; nicht im Topf von 500 EUR', '§ 10f Abs. 1, 142. Änderung vom 10.03.2026'],
+            ['AOK Bremen/Bremerhaven', 'bis 250 EUR einmal je Schwangerschaft, ohne 80-Prozent-Kürzung', 'freiberufliche Hebamme nach § 134a Abs. 2 SGB V, Hebammenhilfe in Schwangerschaft und bei der Geburt, 24 Stunden erreichbar, nur eine Hebamme', '§ 10h Abs. 1 und 2, 55. Änderung vom 16.03.2026'],
+            ['AOK Rheinland-Pfalz/Saarland', 'bis 250 EUR je Schwangerschaft', 'nur bei außerklinischer Geburt oder Beleggeburt in 1:1 Betreuung; Rufbereitschaft in den letzten drei Wochen vor bis zwei Wochen nach dem errechneten Termin; Vereinbarung und Originalrechnung einreichen', '§ 31d Abs. 1 und 2, Lesefassung, PDF erstellt 03.08.2026, ohne Fassungsnummer'],
+            ['AOK Sachsen-Anhalt', 'bis 250 EUR je Geburt', 'nur bei vereinbarter außerklinischer Geburt oder Beleggeburt in 1:1 Betreuung; Bereitschaft ab der 37. Woche bis Geburtsende; zählt auf das GESUNDESKONTO (600 EUR im Jahr, gemeinsam)', '§ 11g, § 11, 52. Änderung (Beschluss 16.12.2025)'],
             ['SBK', 'Teil von zusammen höchstens 300 EUR je Schwangerschaft', 'ab der 37. Woche, nur eine Hebamme', '§ 22d, Satzung Stand 19.03.2026'],
             ['hkk', '80 Prozent, mit weiteren Leistungen zusammen höchstens 300 EUR im Kalenderjahr', 'in der Regel 38. bis 42. Woche', '§ 25a, Satzung Stand 27.05.2026'],
+            ['AOK NordWest', 'kein eigener Eurobetrag, 80 Prozent der Rechnung im gemeinsamen Jahrestopf von 500 EUR', 'persönliche Rufbereitschaft mit 24 Stunden Erreichbarkeit, Hebamme nach § 134a Abs. 2 SGB V zugelassen, keine zweite Hebamme', '§ 8e Abs. 1 in Verbindung mit § 8 Abs. 3 Nr. 1 und 3, 41. Nachtrag, Stand 16.12.2025'],
             ['Barmer', 'Teil von zusammen höchstens 200 EUR je Schwangerschaft', 'nur die letzten fünf Wochen vor dem tatsächlichen Entbindungstermin', '§ 28d Abs. 1 und 3, Satzung Stand 21.07.2026'],
             ['Knappschaft', 'Teil von zusammen höchstens 200 EUR je Schwangerschaft', 'höchstens sechs Wochen vor dem mutmaßlichen Entbindungstermin', '§ 57j Abs. 1 und 2, Satzung Stand 21.08.2026'],
             ['mkk', 'Teil von bis zu 600 EUR je Kalenderjahr für mehrere Schwangerschaftsleistungen', 'letzte Wochen der Schwangerschaft, einmal je Schwangerschaft', '§ 13 Abs. 11 Nr. 3 und Abs. 21, 38. Nachtrag'],
           ],
-          note: 'Quellen: KassenBoost (Satzungsbelege mit Fundstelle, erhoben am 26.08.2026), Satzungstexte der Kassen, abgerufen am 07.10.2026, und die Seiten von TK, DAK, KKH und Mobil Krankenkasse, abgerufen am 08.10.2026. Fast überall gilt zusätzlich: Die Hebamme ist nach § 134a Abs. 2 oder § 13 Abs. 4 SGB V zugelassen, 24 Stunden erreichbar, und erstattet wird höchstens die Rechnung. Satzungen ändern sich, maßgeblich ist die Fassung deiner Kasse.',
+          note: 'Quellen: KassenBoost (Satzungsbelege mit Fundstelle, erhoben am 26.08.2026), Satzungstexte der Kassen, abgerufen am 07.10.2026, und die Seiten von TK, DAK, KKH und Mobil Krankenkasse, abgerufen am 08.10.2026. Die sieben AOKs Baden-Württemberg, Bremen/Bremerhaven, Hessen, Niedersachsen, NordWest, Rheinland-Pfalz/Saarland und Sachsen-Anhalt sind mit Stand 9. November 2026 aus ihren Satzungen ergänzt. Fast überall gilt zusätzlich: Die Hebamme ist nach § 134a Abs. 2 oder § 13 Abs. 4 SGB V zugelassen, 24 Stunden erreichbar, und erstattet wird höchstens die Rechnung. Satzungen ändern sich, maßgeblich ist die Fassung deiner Kasse.',
         },
         {
           type: 'paragraph',
@@ -161,6 +168,13 @@ export const article = {
         {
           type: 'paragraph',
           text: 'Achte außerdem darauf, dass dieselbe Hebamme dich in der Schwangerschaft und bei der Geburt betreut. TK, DAK und IKK classic setzen das ausdrücklich voraus. Und die Rufbereitschaft einer zweiten Hebamme zahlen die meisten Kassen der Tabelle nicht. Klär das, bevor du den Vertrag mit der Hebamme unterschreibst.',
+        },
+        {
+          type: 'segments',
+          segments: [
+            { text: 'Hebammen mit Rufbereitschaft in deiner Stadt', href: 'https://natuerlichbegleitet.de/fachgebiet/rufbereitschaft' },
+            { text: ' findest du in unserem Verzeichnis natürlich begleitet, das Hebammen und Doulas auflistet.' }
+          ]
         },
       ],
     },
@@ -206,7 +220,7 @@ export const article = {
           items: [
             { lead: 'Die Kasse zahlt meist nur einen Teil.', text: 'Bei Pauschalen von mehreren Hundert bis über 1.000 EUR bleibt auch mit 250 oder 500 EUR Zuschuss ein Rest bei dir.' },
             { lead: 'Gemeinsame Töpfe schrumpfen schnell.', text: 'Bei Barmer, Knappschaft, SBK, hkk und mkk kann die Rufbereitschaft allein den Topf aufbrauchen, dann bleibt für Kurse oder Tests nichts.' },
-            { lead: 'Die Tabelle ersetzt nicht deine Satzung.', text: 'Wir haben 15 Kassen geprüft. Satzungen ändern sich, und nur die Fassung deiner Kasse zählt.' },
+            { lead: 'Die Tabelle ersetzt nicht deine Satzung.', text: 'Wir haben 22 Kassen geprüft. Satzungen ändern sich, und nur die Fassung deiner Kasse zählt.' },
             { lead: 'Für die Rufbereitschaft gibt es keinen Zusatztarif bei uns.', text: 'Was wir dir anbieten können, hilft beim Klinikschutz und beim Baby, nicht bei dieser Rechnung.' },
           ],
         },
@@ -272,7 +286,7 @@ export const article = {
     {
       question: 'Welche Krankenkasse zahlt am meisten für die Rufbereitschaft?',
       answer:
-        'Unter den 15 Kassen unserer Tabelle die DAK mit bis zu 500 EUR je Schwangerschaft, danach die VIACTIV mit bis zu 350 EUR und die AOK Nordost mit bis zu 270 EUR. Die meisten anderen erstatten bis 250 EUR. Gegenzurechnen ist immer der Zusatzbeitrag.',
+        'Unter den 22 Kassen unserer Tabelle die DAK mit bis zu 500 EUR je Schwangerschaft, danach die VIACTIV mit bis zu 350 EUR, die AOK Baden-Württemberg und die AOK Hessen mit bis zu 300 EUR und die AOK Nordost mit bis zu 270 EUR. Die meisten anderen erstatten bis 250 EUR. Gegenzurechnen ist immer der Zusatzbeitrag.',
     },
     {
       question: 'Zahlt die Kasse die Rufbereitschaft auch bei einer Geburt in der Klinik?',
@@ -353,6 +367,55 @@ export const article = {
         href: 'https://cdn.ikk-classic.de/exporter/19885-satzung-kv-incl-sana-78-80-20260801.pdf',
         stand: '01.08.2026',
         accessedAt: '07.10.2026',
+      },
+      {
+        label: 'Satzung der AOK Baden-Württemberg, Rufbereitschaft',
+        publisher: 'AOK Baden-Württemberg',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/baden-wuerttemberg/pdf/Satzung.pdf',
+        stand: '97. Satzungsänderung, 01.01.2026',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK Bremen/Bremerhaven, Rufbereitschaft',
+        publisher: 'AOK Bremen/Bremerhaven',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/bremen-bremerhaven/pdf/2026/PDF/55._%C3%84nderung_der_Satzung_Stand_01.04.2026.pdf',
+        stand: '55. Änderung vom 16.03.2026 (Datei: Stand 01.04.2026); § 10a Stand 01.01.2021, § 10h Stand 19.12.2022',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK Hessen, Rufbereitschaft',
+        publisher: 'AOK Hessen',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/hessen/pdf/satzung-kv.pdf',
+        stand: 'Lesefassung Stand 01.07.2026 (Satzung vom 18.12.2024, bis 4. Nachtrag mit Wirkung 01.07.2026)',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK Niedersachsen, Rufbereitschaft',
+        publisher: 'AOK Niedersachsen',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/niedersachsen/pdf/Satzung_AOK_Niedersachsen.pdf',
+        stand: '142. Änderung vom 10.03.2026; § 10b Abs. 3 in Kraft seit 01.01.2026',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK NordWest, Rufbereitschaft',
+        publisher: 'AOK NordWest',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/nordwest/pdf/satzung.pdf',
+        stand: '41. Nachtrag, Stand 16.12.2025; § 8c geändert mit Wirkung 01.04.2024',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK Rheinland-Pfalz/Saarland, Rufbereitschaft',
+        publisher: 'AOK Rheinland-Pfalz/Saarland',
+        href: 'https://www.aok.de/pk/magazin/cms/fileadmin/pk/rheinland-pfalz-saarland/pdf/Satzung/Satzung.pdf',
+        stand: 'Lesefassung, PDF erstellt 03.08.2026; Vorspann nennt keine Fassungsnummer',
+        accessedAt: '09.11.2026',
+      },
+      {
+        label: 'Satzung der AOK Sachsen-Anhalt, Rufbereitschaft',
+        publisher: 'AOK Sachsen-Anhalt',
+        href: 'https://www.deine-gesundheitswelt.de/die-aok/satzung/satzung-der-aok-sachsen-anhalt-die-gesundheitskasse',
+        stand: '52. Änderung durch Beschluss des Verwaltungsrates vom 16.12.2025; Änderungsübersicht bis lfd. Nr. 207 (in Kraft 01.07.2026, nur Anhang 1)',
+        accessedAt: '09.11.2026',
       },
       {
         label: 'Hebammen und Hebammenrufbereitschaft',
