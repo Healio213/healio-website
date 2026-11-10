@@ -59,9 +59,9 @@ export const MAKLERVERTRAG_PDF_PLATZHALTER = 'Maklervertrag als PDF herunterlade
 // Text 6: Healios Verarbeitung der Gesundheitsangaben (vollständig, Standort offen).
 export const TEXT_6_STANDORT_PLATZHALTER = '[Standort]';
 export const TEXT_6_GESUNDHEIT = [
-  'Ich bin einverstanden, dass Healio meine Antworten auf die Gesundheitsfragen sowie Größe und Gewicht speichert und verwendet, um meinen Antrag vorzubereiten und in meinem Auftrag an die SDK zu übermitteln. Gespeichert werden sie bei Supabase in Frankfurt und auf dem Server von Healio in ',
+  'Ich bin einverstanden, dass Healio meine Antworten auf die Gesundheitsfragen sowie Größe und Gewicht speichert und verwendet, um meinen Antrag vorzubereiten und in meinem Auftrag an die SDK zu übermitteln. Gespeichert werden sie verschlüsselt auf dem Server von Healio in ',
   TEXT_6_STANDORT_PLATZHALTER,
-  '. Healio überträgt sie in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt. Healio schickt meine Gesundheitsangaben nie offen per E-Mail und nie über WhatsApp. Meine Antragskopie bekomme ich als verschlüsselte PDF, das Passwort kommt per SMS. Ich kann die Einwilligung jederzeit widerrufen. Dann kann Healio meinen Antrag aber nicht weiterleiten.',
+  '. Healio überträgt sie in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt. Healio schickt meine Gesundheitsangaben nie per E-Mail und nie über WhatsApp. Ich kann die Einwilligung jederzeit widerrufen. Dann kann Healio meinen Antrag aber nicht weiterleiten.',
 ];
 
 // Weg B Teil 2: Lange Erklärungen stehen mit Titel, einer Kurzfassung in
@@ -171,7 +171,7 @@ export const BEITRAG_VORBEHALT = 'Nennt die SDK einen anderen Beitrag, fragt Hea
 // Konto gehört: Healio reicht erst ein, wenn die Unterlagen da sind und der
 // Kontoinhaber das Lastschriftmandat bestätigt hat.
 export const ABSCHLUSS_UNTERLAGEN = {
-  email: 'Du bekommst eine Bestätigungs-E-Mail mit deinen Unterlagen und einem Link zu deinem Antrag.',
+  email: 'Du bekommst eine Bestätigungs-E-Mail mit einem Link zu deinem Antrag.',
   post: 'Du bekommst deine Unterlagen per Post.',
 };
 export const ABSCHLUSS_EINREICHEN = {

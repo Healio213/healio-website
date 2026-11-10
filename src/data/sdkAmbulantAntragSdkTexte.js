@@ -26,7 +26,7 @@ export const SDK_VVG_19_MITTEILUNG = null;
 export const SDK_VERZICHT_SATZ = null;
 
 // Text 6: Standort des Servers von Healio (Antragsdienst).
-export const TEXT_6_STANDORT = 'Deutschland (Hetzner, Nürnberg)';
+export const TEXT_6_STANDORT = 'Deutschland (Rechenzentrum von Hetzner)';
 
 // Einwilligung in die Erhebung und Verwendung von Gesundheitsdaten und
 // Schweigepflichtentbindungserklärung. Blöcke in der Reihenfolge des
