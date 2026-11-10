@@ -94,9 +94,9 @@ export default {
     ueberschrift: 'Euer Zuschuss-Check als Paar',
     unterzeile: 'Wir klären, wer von euch selbst förderberechtigt ist, und stimmen beide Verträge aufeinander ab.',
     karten: [
-      { icon: 'zulage', titel: 'Paarrechnung speichern', text: 'Der Beitrag des förderberechtigten Partners geht in die Vormerkung. Für die Rückmeldung genügen dein Vorname und eine Mailadresse.' },
-      { icon: 'check', titel: 'Status beider klären', text: 'Im Vorabcheck schauen wir, ob dein Partner nicht doch selbst förderberechtigt ist, und welche Unterlagen ihr braucht.' },
-      { icon: 'familien', titel: 'Zwei Verträge abstimmen', text: 'Wir planen beide Beiträge so, dass die Zulage des mitgeförderten Partners nicht liegen bleibt.' },
+      { icon: 'rechnung', titel: 'Paarrechnung speichern', text: 'Der Beitrag des förderberechtigten Partners geht in die Vormerkung. Für die Rückmeldung genügen dein Vorname und eine Mailadresse.' },
+      { icon: 'paar', titel: 'Status beider klären', text: 'Im Vorabcheck schauen wir, ob dein Partner nicht doch selbst förderberechtigt ist, und welche Unterlagen ihr braucht.' },
+      { icon: 'abstimmen', titel: 'Zwei Verträge abstimmen', text: 'Wir planen beide Beiträge so, dass die Zulage des mitgeförderten Partners nicht liegen bleibt.' },
     ],
     ablaufzeile: 'Nach eurer Vormerkung meldet sich Healio, gern auch für einen Termin mit euch beiden.',
     startzeile: 'Neue Verträge für beide Partner gibt es ab 1. Januar 2027. Gerechnet wird je Beitragsjahr.',

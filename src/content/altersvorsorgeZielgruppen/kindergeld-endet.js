@@ -92,9 +92,9 @@ export default {
     ueberschrift: 'Dein Zuschuss-Check, wenn das Kindergeld endet',
     unterzeile: 'Wir sortieren das letzte Jahr mit Kinderzulage und den neuen Plan, für dich und auf Wunsch fürs Kind.',
     karten: [
-      { icon: 'zulage', titel: 'Neuen Beitrag festhalten', text: 'Dein künftiger Beitrag geht aus dem Rechner in die Vormerkung. Kontakt per E-Mail reicht, telefonisch nur, wenn du magst.' },
-      { icon: 'kinderzulage', titel: 'Übergangsjahr klären', text: 'Im Vorabcheck gehen wir durch, bis wann das Kindergeld läuft und welchem Elternteil die Zulage zuletzt zusteht.' },
-      { icon: 'startbonus', titel: 'Kind mitdenken', text: 'Macht dein Kind eine Ausbildung, zeigen wir dir, wie es mit eigenem Vertrag und Startbonus beginnen kann.' },
+      { icon: 'rechnung', titel: 'Neuen Beitrag festhalten', text: 'Dein künftiger Beitrag geht aus dem Rechner in die Vormerkung. Kontakt per E-Mail reicht, telefonisch nur, wenn du magst.' },
+      { icon: 'uebergang', titel: 'Übergangsjahr klären', text: 'Im Vorabcheck gehen wir durch, bis wann das Kindergeld läuft und welchem Elternteil die Zulage zuletzt zusteht.' },
+      { icon: 'ausbildung', titel: 'Kind mitdenken', text: 'Macht dein Kind eine Ausbildung, zeigen wir dir, wie es mit eigenem Vertrag und Startbonus beginnen kann.' },
     ],
     ablaufzeile: 'Healio meldet sich nach deiner Vormerkung und stimmt mit dir einen Termin ab.',
     startzeile: 'Die neuen Verträge laufen ab 2027. Ob für dein Kind ein Bonusjahr ansteht, hängt an seinem Alter zu Beginn des Beitragsjahres.',

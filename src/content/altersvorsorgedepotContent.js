@@ -157,17 +157,17 @@ export const zuschussCheck = {
   unterzeile: 'Bereite deinen Start ins Altersvorsorgedepot jetzt vor. Wir prüfen deine Förderberechtigung, die Kinderzuordnung und einen möglichen Riesterwechsel.',
   karten: [
     {
-      icon: 'zulage',
+      icon: 'rechnung',
       titel: 'Jetzt Berechnung speichern',
       text: 'Übernimm deine Auswahl aus dem Rechner und merke dich für den Start ab Januar 2027 vor. Vorname und E-Mail genügen; deine Mobilnummer für Rückfragen ist optional.',
     },
     {
-      icon: 'riester',
+      icon: 'vorabcheck',
       titel: 'Etwa 10 Minuten Vorabcheck',
       text: 'Wir klären telefonisch deine Förderberechtigung, die Kinderzuordnung und welche Unterlagen nötig sind. Bei Riester vergleichen wir auch Kosten, Förderung und bestehende Garantien.',
     },
     {
-      icon: 'startplan',
+      icon: 'januarstart',
       titel: 'Januarstart vorbereiten',
       text: 'Wir ordnen deine Angaben und Unterlagen vorab. Sobald passende Angebote verfügbar sind, prüfen wir deinen persönlichen Vorschlag und die nächsten Schritte zum Abschluss.',
     },

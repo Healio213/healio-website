@@ -93,9 +93,9 @@ export default {
     ueberschrift: 'Erst prüfen: dein Riester-Check',
     unterzeile: 'Zehn Minuten am Telefon, bevor du eine Entscheidung triffst, die sich nicht zurücknehmen lässt.',
     karten: [
-      { icon: 'zulage', titel: 'Zahlen festhalten', text: 'Dein Monatsbeitrag aus dem Rechner kommt mit in die Anfrage. Kontakt per E-Mail genügt, eine Nummer kannst du ergänzen.' },
-      { icon: 'riester', titel: 'Unterlagen durchgehen', text: 'Im Vorabcheck schauen wir auf Guthaben, Zulagen, Garantie und Kosten deines Vertrags.' },
-      { icon: 'entscheidung', titel: 'In Ruhe entscheiden', text: 'Du wählst zwischen behalten, beitragsfrei stellen und übertragen. Gekündigt wird dabei nichts, ein Umzug läuft per schriftlichem Auftrag.' },
+      { icon: 'rechnung', titel: 'Zahlen festhalten', text: 'Dein Monatsbeitrag aus dem Rechner kommt mit in die Anfrage. Kontakt per E-Mail genügt, eine Nummer kannst du ergänzen.' },
+      { icon: 'unterlagen', titel: 'Unterlagen durchgehen', text: 'Im Vorabcheck schauen wir auf Guthaben, Zulagen, Garantie und Kosten deines Vertrags.' },
+      { icon: 'entscheiden', titel: 'In Ruhe entscheiden', text: 'Du wählst zwischen behalten, beitragsfrei stellen und übertragen. Gekündigt wird dabei nichts, ein Umzug läuft per schriftlichem Auftrag.' },
     ],
     ablaufzeile: 'Schick die Kündigung erst ab, wenn du alle drei Wege kennst. Healio ruft dich an oder schreibt dir, sobald deine Anfrage da ist.',
     startzeile: 'Für den Wechsel läuft keine allgemeine Frist ab. Neue Zielverträge gibt es ab dem 1. Januar 2027.',

@@ -92,9 +92,9 @@ export default {
     ueberschrift: 'Dein Zuschuss-Check für den Start',
     unterzeile: 'Ein kurzer Check, damit Bonus und Zulage bei dir ankommen und der Beitrag in dein Budget passt.',
     karten: [
-      { icon: 'zulage', titel: 'Startbetrag merken', text: 'Was du im Rechner eingestellt hast, nehmen wir in deine Vormerkung. Wir fragen nur nach Vorname und Mail.' },
-      { icon: 'startbonus', titel: 'Berechtigung klären', text: 'In einem kurzen Telefonat klären wir, ob du über Ausbildung oder Job selbst förderberechtigt bist.' },
-      { icon: 'startplan', titel: 'Klein anfangen', text: 'Wir finden einen Beitrag, der auch mit Ausbildungsgehalt dauerhaft klappt, und sagen dir offen, wie lange das Geld gebunden ist.' },
+      { icon: 'rechnung', titel: 'Startbetrag merken', text: 'Was du im Rechner eingestellt hast, nehmen wir in deine Vormerkung. Wir fragen nur nach Vorname und Mail.' },
+      { icon: 'berechtigung', titel: 'Berechtigung klären', text: 'In einem kurzen Telefonat klären wir, ob du über Ausbildung oder Job selbst förderberechtigt bist.' },
+      { icon: 'kleinstart', titel: 'Klein anfangen', text: 'Wir finden einen Beitrag, der auch mit Ausbildungsgehalt dauerhaft klappt, und sagen dir offen, wie lange das Geld gebunden ist.' },
     ],
     ablaufzeile: 'Nach deiner Vormerkung meldet sich Healio für ein kurzes Gespräch.',
     startzeile: 'Abschließen kannst du ab Januar 2027. Dein Bonusjahr richtet sich nach deinem Alter zu Beginn des jeweiligen Beitragsjahres.',

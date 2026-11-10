@@ -94,9 +94,9 @@ export default {
     ueberschrift: 'Dein Zuschuss-Check für Familien',
     unterzeile: 'In drei Schritten von der Beispielrechnung zu einem Plan, bei dem keine Kinderzulage liegen bleibt.',
     karten: [
-      { icon: 'zulage', titel: 'Familienrechnung speichern', text: 'Beitrag und Kinderzahl wandern aus dem Rechner in deine Vormerkung. Dein Vorname und deine E-Mail genügen, eine Telefonnummer ist freiwillig.' },
-      { icon: 'familien', titel: 'Zuordnung klären', text: 'Im etwa 10-minütigen Vorabcheck klären wir, welchem Elternteil die Kinder zugeordnet sind und ob das Kindergeld für alle läuft.' },
-      { icon: 'startplan', titel: 'Beitrag festlegen', text: 'Wir planen den Beitrag so, dass jede Kinderzulage voll ankommt, und nehmen einen vorhandenen Riester-Vertrag mit in den Blick.' },
+      { icon: 'rechnung', titel: 'Familienrechnung speichern', text: 'Beitrag und Kinderzahl wandern aus dem Rechner in deine Vormerkung. Dein Vorname und deine E-Mail genügen, eine Telefonnummer ist freiwillig.' },
+      { icon: 'kinder', titel: 'Zuordnung klären', text: 'Im etwa 10-minütigen Vorabcheck klären wir, welchem Elternteil die Kinder zugeordnet sind und ob das Kindergeld für alle läuft.' },
+      { icon: 'beitrag', titel: 'Beitrag festlegen', text: 'Wir planen den Beitrag so, dass jede Kinderzulage voll ankommt, und nehmen einen vorhandenen Riester-Vertrag mit in den Blick.' },
     ],
     ablaufzeile: 'Sobald deine Familienrechnung bei uns ist, melden wir uns für den Vorabcheck.',
     startzeile: 'Die neuen Verträge starten am 1. Januar 2027. Die Kinderzulage richtet sich nach den Beiträgen des jeweiligen Jahres.',

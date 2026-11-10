@@ -96,9 +96,9 @@ export default {
     ueberschrift: 'Dein Riester-Check vor dem Umzug',
     unterzeile: 'Wir vergleichen deinen Vertrag mit der neuen Förderung, bevor du irgendetwas unterschreibst.',
     karten: [
-      { icon: 'zulage', titel: 'Neue Zulage festhalten', text: 'Das Ergebnis des Rechners übernimmst du mit einem Klick. Für den Rückweg zu dir reichen Vorname und E-Mail.' },
-      { icon: 'riester', titel: 'Vertrag nebeneinanderlegen', text: 'Im Vorabcheck, rund 10 Minuten, schauen wir auf Jahresmitteilung, Kosten und Garantie deines Vertrags.' },
-      { icon: 'entscheidung', titel: 'Weg wählen', text: 'Weiterführen, ruhen lassen oder übertragen. Für einen Umzug in eine Versicherungsvariante bereiten wir den schriftlichen Übertragungsauftrag vor.' },
+      { icon: 'rechnung', titel: 'Neue Zulage festhalten', text: 'Das Ergebnis des Rechners übernimmst du mit einem Klick. Für den Rückweg zu dir reichen Vorname und E-Mail.' },
+      { icon: 'vertragsvergleich', titel: 'Vertrag nebeneinanderlegen', text: 'Im Vorabcheck, rund 10 Minuten, schauen wir auf Jahresmitteilung, Kosten und Garantie deines Vertrags.' },
+      { icon: 'weg', titel: 'Weg wählen', text: 'Weiterführen, ruhen lassen oder übertragen. Für einen Umzug in eine Versicherungsvariante bereiten wir den schriftlichen Übertragungsauftrag vor.' },
     ],
     ablaufzeile: 'Wir melden uns nach deiner Vormerkung. Leg dir bis dahin deine letzte Jahresmitteilung bereit.',
     startzeile: 'Zielverträge für einen Umzug sind ab dem 1. Januar 2027 abschließbar. Eine allgemeine Wechselfrist existiert nicht.',

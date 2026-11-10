@@ -10,6 +10,7 @@
  * - Quellen, Ratgeber und Eingänge existieren
  * - Rechenbeispiele stimmen mit der Rechenlogik des Rechners überein
  * - Titel und Beschreibungen in sinnvoller Länge, FAQ-Schema = sichtbare Fragen
+ * - drei Schritt-Karten je Seite, jede mit eigenem Bildmotiv aus dem Friendly-Icon-Satz
  */
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
@@ -20,6 +21,9 @@ import {
 } from '../src/content/altersvorsorgeZielgruppen/index.js';
 import { zielgruppenSchema, zielgruppenSeoRoute } from '../src/content/altersvorsorgeZielgruppen/seo.js';
 import { seoRoutes } from './seo-routes.mjs';
+import { friendlyIconAssets } from '../src/components/ui/healioSoftClayIcons.js';
+import { MOTIV_SITZ, SCHRITT_MOTIVE } from '../src/lib/altersvorsorgeSchrittMotive.js';
+import { zuschussCheck } from '../src/content/altersvorsorgedepotContent.js';
 
 const TECHNISCH = new Set(['slug', 'icon', 'key', 'motiv', 'quelle', 'to', 'voreinstellung', 'felder', 'eingabe', 'weiterlesen', 'id', 'verwandt']);
 
@@ -155,4 +159,26 @@ test('Titel, Beschreibung, Schema und Routen passen', () => {
   assert.equal(new Set(titel).size, titel.length, 'Titel doppelt');
   const h1 = zielgruppenSeiten.map((seite) => seite.hero.h1);
   assert.equal(new Set(h1).size, h1.length, 'H1 doppelt');
+});
+
+test('Jede Seite hat drei Schritt-Karten mit eigenem Bildmotiv aus dem Friendly-Icon-Satz', () => {
+  const seiten = [{ slug: 'hauptseite', check: zuschussCheck }, ...zielgruppenSeiten];
+  for (const seite of seiten) {
+    assert.equal(seite.check.karten.length, 3, `${seite.slug}: nicht genau drei Schritt-Karten`);
+    const motive = seite.check.karten.map((karte) => {
+      const motiv = SCHRITT_MOTIVE[karte.icon];
+      assert.ok(motiv, `${seite.slug}: unbekannter Symbol-Schlüssel „${karte.icon}“`);
+      return motiv;
+    });
+    assert.equal(new Set(motive).size, 3, `${seite.slug}: Bildmotiv doppelt (${motive.join(', ')})`);
+  }
+  for (const motiv of new Set(Object.values(SCHRITT_MOTIVE))) {
+    const pfad = friendlyIconAssets[motiv];
+    assert.ok(pfad, `Motiv „${motiv}“ fehlt im Friendly-Icon-Satz`);
+    assert.ok(existsSync(new URL(`../public${pfad}`, import.meta.url)), `Bilddatei fehlt: ${pfad}`);
+    const sitz = MOTIV_SITZ[motiv];
+    assert.ok(sitz, `Motiv „${motiv}“ hat keine Maße für die Bühne`);
+    assert.ok(sitz.b > 0 && sitz.h > 0, `Motiv „${motiv}“: Dateigröße fehlt`);
+    for (const rand of ['l', 'o', 'r', 'u']) assert.ok(sitz[rand] >= 0 && sitz[rand] < 0.4, `Motiv „${motiv}“: Rand ${rand} unplausibel`);
+  }
 });

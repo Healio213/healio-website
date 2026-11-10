@@ -183,6 +183,37 @@ for (const pfad of pfade) {
         eintrag.formular = formular;
       }
     }
+    // Drei Schritt-Bühnen, jede mit geladenem Bild aus dem Friendly-Icon-Satz in der hinterlegten Dateigröße.
+    const symbole = await page.evaluate(async () => {
+      const buehnen = [...document.querySelectorAll('#zuschuss-check [data-schritt-symbol]')];
+      // Die Bilder laden erst in Sichtweite (auf dem Handy liegt die Reihe als Wischreihe nebeneinander):
+      // jede Bühne der Reihe nach ins Bild holen und höchstens 5 Sekunden auf ihr Bild warten.
+      for (const buehne of buehnen) {
+        buehne.scrollIntoView({ block: 'center', inline: 'center' });
+        const bild = buehne.querySelector('img');
+        if (!bild || bild.complete) continue;
+        await Promise.race([
+          new Promise((fertig) => { bild.addEventListener('load', fertig, { once: true }); bild.addEventListener('error', fertig, { once: true }); }),
+          new Promise((fertig) => { setTimeout(fertig, 5000); }),
+        ]);
+      }
+      buehnen[0]?.scrollIntoView({ block: 'center', inline: 'center' });
+      return buehnen.map((buehne) => {
+        const bild = buehne.querySelector('img');
+        return {
+          schluessel: buehne.dataset.schrittSymbol,
+          motiv: buehne.dataset.schrittMotiv,
+          geladen: Boolean(bild?.complete && bild.naturalWidth > 0),
+          massePassen: Boolean(bild) && bild.naturalWidth === Number(bild.getAttribute('width')) && bild.naturalHeight === Number(bild.getAttribute('height')),
+        };
+      });
+    });
+    if (symbole.length !== 3) fehler.push(`${pfad} ${breite}: ${symbole.length} statt 3 Schritt-Symbole im Zuschuss-Check`);
+    for (const symbol of symbole) {
+      if (symbol.motiv === 'ersatz') fehler.push(`${pfad} ${breite}: Schritt „${symbol.schluessel}“ ohne Bildmotiv`);
+      else if (!symbol.geladen) fehler.push(`${pfad} ${breite}: Bild für Schritt „${symbol.schluessel}“ lädt nicht`);
+      else if (!symbol.massePassen) fehler.push(`${pfad} ${breite}: Bild „${symbol.motiv}“ hat eine andere Größe als hinterlegt, Bühnenmaße neu ausmessen`);
+    }
     if (layout.scrollWidth > layout.innerWidth + 1) fehler.push(`${pfad} ${breite}: seitliches Scrollen (${layout.scrollWidth} > ${layout.innerWidth})`);
     if (konsole.length) fehler.push(`${pfad} ${breite}: Konsole: ${konsole.join(' | ')}`);
     await mkdir(SHOTS, { recursive: true });

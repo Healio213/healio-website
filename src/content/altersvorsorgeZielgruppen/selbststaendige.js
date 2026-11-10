@@ -95,9 +95,9 @@ export default {
     ueberschrift: 'Dein Zuschuss-Check für die Selbstständigkeit',
     unterzeile: 'Wir klären mit dir, ob der neue Zugang für dich greift, und planen einen Beitrag, der zu deinen Einnahmen passt.',
     karten: [
-      { icon: 'zulage', titel: 'Monatsbeitrag festhalten', text: 'Dein Betrag aus dem Rechner geht direkt in die Vormerkung. Mehr als Vorname und E-Mail-Adresse brauchen wir dafür nicht.' },
-      { icon: 'selbststaendige', titel: 'Voraussetzungen prüfen', text: 'Am Telefon gehen wir in rund zehn Minuten Einkunftsart, Alter und Steuererklärung mit dir durch.' },
-      { icon: 'startplan', titel: 'Jahresbeitrag planen', text: 'Wir legen einen Beitrag fest, der auch ein schwächeres Jahr übersteht, und zeigen dir vor jedem Abschluss die Kosten.' },
+      { icon: 'rechnung', titel: 'Monatsbeitrag festhalten', text: 'Dein Betrag aus dem Rechner geht direkt in die Vormerkung. Mehr als Vorname und E-Mail-Adresse brauchen wir dafür nicht.' },
+      { icon: 'voraussetzungen', titel: 'Voraussetzungen prüfen', text: 'Am Telefon gehen wir in rund zehn Minuten Einkunftsart, Alter und Steuererklärung mit dir durch.' },
+      { icon: 'jahresbeitrag', titel: 'Jahresbeitrag planen', text: 'Wir legen einen Beitrag fest, der auch ein schwächeres Jahr übersteht, und zeigen dir vor jedem Abschluss die Kosten.' },
     ],
     ablaufzeile: 'Ist deine Vormerkung da, ruft dich Healio an oder schreibt dir, je nachdem, was du angibst.',
     startzeile: 'Der neue Zugang für Selbstständige gilt für Beitragsjahre ab 2027. Maßgeblich ist, was du im jeweiligen Jahr einzahlst.',

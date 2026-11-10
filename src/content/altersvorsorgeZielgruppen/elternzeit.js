@@ -92,9 +92,9 @@ export default {
     ueberschrift: 'Dein Zuschuss-Check für die Elternzeit',
     unterzeile: 'Wir klären mit dir Nachweis, Zuordnung und einen Beitrag, der in die Auszeit passt.',
     karten: [
-      { icon: 'zulage', titel: 'Auszeit-Rechnung übernehmen', text: 'Beitrag und Kinder aus dem Rechner gehen in die Vormerkung. Wie wir dich erreichen, entscheidest du.' },
-      { icon: 'check', titel: 'Nachweise klären', text: 'Zehn Minuten am Telefon genügen, um Kindererziehungszeit, Kindergeld und Zuordnung durchzugehen.' },
-      { icon: 'familien', titel: 'Beitrag für die Auszeit', text: 'Wir planen einen kleinen Beitrag für die Elternzeit und wie du ihn später anhebst.' },
+      { icon: 'rechnung', titel: 'Auszeit-Rechnung übernehmen', text: 'Beitrag und Kinder aus dem Rechner gehen in die Vormerkung. Wie wir dich erreichen, entscheidest du.' },
+      { icon: 'nachweise', titel: 'Nachweise klären', text: 'Zehn Minuten am Telefon genügen, um Kindererziehungszeit, Kindergeld und Zuordnung durchzugehen.' },
+      { icon: 'auszeit', titel: 'Beitrag für die Auszeit', text: 'Wir planen einen kleinen Beitrag für die Elternzeit und wie du ihn später anhebst.' },
     ],
     ablaufzeile: 'Healio meldet sich nach deiner Vormerkung. Den Termin legen wir so, dass er in euren Tag passt.',
     startzeile: 'Die neuen Verträge starten 2027. Gefördert wird danach jedes Jahr, in dem Beiträge fließen, auch während der Elternzeit.',
