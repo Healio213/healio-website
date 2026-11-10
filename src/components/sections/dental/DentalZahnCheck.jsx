@@ -18,6 +18,7 @@ import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
+import { zaehle } from '@/lib/anonyme-zaehler';
 import { getDentalContent } from './dentalContent';
 import { ZAHN_CHECK_CARD_ID } from './zahnCheckScroll';
 
@@ -69,8 +70,12 @@ const CTA_HREFS = {
 // Einziger Messpunkt im Zahn-Check: das tatsächliche Öffnen des Antragslinks
 // nach der Lead-Erfassung zählt bei Google Ads als „Antrag geöffnet“. Ohne
 // Argument, ohne Versicherer, ohne Antworten. Check-Antworten bleiben lokal.
-const countAntragOpened = () => {
+// Dazu der anonyme Zähler ohne Cookies (src/lib/anonyme-zaehler.js): nur
+// Ereignis, Pfad der Seite und der Versicherer aus der festen Liste
+// (bayerische, ukv). Keine Antwort, kein Ergebnis, keine Kennung.
+const countAntragOpened = (insurer) => {
   trackGoogleAdsAntrag();
+  if (Object.hasOwn(CTA_HREFS, insurer)) zaehle('versicherer_klick', { ziel: insurer });
 };
 
 const toneClasses = {
@@ -390,7 +395,7 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={countAntragOpened}>
+                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
                           {lang === 'en'
                             ? (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online')
                             : (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen')}

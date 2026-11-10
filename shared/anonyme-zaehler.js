@@ -1,11 +1,13 @@
 /**
  * Feste Regeln des anonymen Zählers, gemeinsam für Browser (src/lib/
  * anonyme-zaehler.js) und Funktion (api/zaehler.js). Dieselben Prüfungen
- * stehen als CHECK und RLS-Regel in docs/supabase/2026-11-02_anonyme_zaehler.sql.
- * Wer hier etwas ändert, ändert die SQL-Datei mit.
+ * stehen als CHECK und RLS-Regel in docs/supabase/2026-11-02_anonyme_zaehler.sql,
+ * erweitert um versicherer_klick in
+ * docs/supabase/2026-11-10_anonyme_zaehler_versicherer_klick.sql.
+ * Wer hier etwas ändert, ändert die SQL-Dateien mit.
  */
 
-export const ZAEHLER_EREIGNISSE = Object.freeze(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt']);
+export const ZAEHLER_EREIGNISSE = Object.freeze(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick']);
 const EREIGNIS_SET = new Set(ZAEHLER_EREIGNISSE);
 
 export const ZAEHLER_GERAETE = Object.freeze(['mobil', 'desktop']);
@@ -30,6 +32,12 @@ const LEISTUNGSSEITEN_SET = new Set(LEISTUNGSSEITEN);
 
 export const KURZCHECK_VARIANTEN = Object.freeze(['naturheilkunde', 'schwangerschaft']);
 const KURZCHECK_VARIANTEN_SET = new Set(KURZCHECK_VARIANTEN);
+
+// Versicherer, deren Online-Abschluss direkt verlinkt ist (Zahn: Bayerische mit
+// ZAHN Sofort, UKV ZahnPRIVAT). Nur der Name aus dieser festen Liste, nie Tarif,
+// Antwort oder Ergebnis eines Checks.
+export const ZAEHLER_VERSICHERER = Object.freeze(['bayerische', 'ukv']);
+const VERSICHERER_SET = new Set(ZAEHLER_VERSICHERER);
 
 export const istLeistungsseite = (pfad) => LEISTUNGSSEITEN_SET.has(pfad);
 
@@ -59,6 +67,12 @@ export const baueZaehlerEintrag = (ereignis, { vonPfad, ziel = null } = {}, gera
   }
   if (ereignis === 'kurzcheck_abgeschickt') {
     if (!KURZCHECK_VARIANTEN_SET.has(ziel)) return null;
+    return { ereignis, von_pfad: von, ziel, geraet };
+  }
+  if (ereignis === 'versicherer_klick') {
+    // von_pfad ist jede Seite mit erlaubtem Pfad, auch künftige Unterseiten
+    // wie /zahn/behandlung-steht-an. Das Ziel ist nur der Versicherer.
+    if (!VERSICHERER_SET.has(ziel)) return null;
     return { ereignis, von_pfad: von, ziel, geraet };
   }
   // sdk_klick: nur die Seite, auf der der Rechner geöffnet wurde.

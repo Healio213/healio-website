@@ -2,7 +2,8 @@
  * Prüfung für Anfrage-Ereignis und anonymen Zähler (02.11.2026).
  *
  * Teil 1, ohne Browser:
- * - Regeln des Zählers (shared/anonyme-zaehler.js) und Browsermodul mit
+ * - Regeln des Zählers (shared/anonyme-zaehler.js, seit 10.11.2026 mit
+ *   versicherer_klick für Bayerische und UKV) und Browsermodul mit
  *   Attrappen: nur vier Felder, keepalive, keine Cookies, keine Kennung,
  *   Fehler still, Kopf/Menü/Fuß zählen nicht.
  * - Funktion api/zaehler.js mit Attrappen für Anfrage und Supabase.
@@ -48,7 +49,20 @@ check(baueZaehlerEintrag('sdk_klick', { vonPfad: '/ambulant' }).ziel === null, '
 check(baueZaehlerEintrag('sdk_klick', { vonPfad: '/ambulant', ziel: 'x' }) === null, 'SDK-Klick mit Ziel wird verworfen.');
 check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'naturheilkunde' })?.ziel === 'naturheilkunde', 'Kurzcheck mit Variante.');
 check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'tk' }) === null, 'Unbekannte Variante wird verworfen.');
-check(baueZaehlerEintrag('page_view', { vonPfad: '/' }) === null, 'Nur drei Ereignisse.');
+check(baueZaehlerEintrag('page_view', { vonPfad: '/' }) === null, 'Nur die vier festen Ereignisse.');
+check(JSON.stringify(regeln.ZAEHLER_EREIGNISSE) === JSON.stringify(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick']), 'Genau vier Ereignisse.');
+check(JSON.stringify(regeln.ZAEHLER_VERSICHERER) === JSON.stringify(['bayerische', 'ukv']), 'Versicherer nur Bayerische und UKV.');
+check(JSON.stringify(baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: 'ukv' }, 'mobil'))
+  === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: 'ukv', geraet: 'mobil' }), 'Versicherer-Klick hat genau vier Felder.');
+check(baueZaehlerEintrag('versicherer_klick', { vonPfad: '/Zahn/Behandlung-steht-an/?utm_source=x#ergebnis', ziel: 'bayerische' })?.von_pfad === '/zahn/behandlung-steht-an', 'Versicherer-Klick: künftige Unterseiten kommen mit ihrem eigenen Pfad an.');
+check(baueZaehlerEintrag('versicherer_klick', { vonPfad: '/en/dental', ziel: 'bayerische' })?.ziel === 'bayerische', 'Versicherer-Klick auch auf der englischen Fassung.');
+check(baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: 'ergo' }) === null
+  && baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: 'bayerische_zahn_sofort' }) === null
+  && baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: 'Bayerische' }) === null
+  && baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn' }) === null
+  && baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: { versicherer: 'ukv' } }) === null, 'Versicherer-Klick nur mit einem Namen aus der festen Liste, nichts anderes im Ziel.');
+check(pruefeZaehlerEintrag({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: 'ukv', antwort: 'ja', ergebnis: 'sofort' }, 'desktop')?.ziel === 'ukv'
+  && !('antwort' in pruefeZaehlerEintrag({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: 'ukv', antwort: 'ja' })), 'Server übernimmt beim Versicherer-Klick keine Antworten oder Ergebnisse.');
 check(baueZaehlerEintrag('sdk_klick', { vonPfad: '/ambulant' }, 'tablet') === null, 'Nur mobil oder desktop.');
 check(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/Ambulant', ziel: null }, 'mobil') === null, 'Server formt nichts um: nur fertige Form wird angenommen.');
 check(JSON.stringify(pruefeZaehlerEintrag({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null, geraet: 'desktop', email: 'a@b.de', ip: '1.2.3.4' }, 'mobil'))
@@ -105,6 +119,9 @@ const ladeModul = async ({ html = '<!doctype html><body></body>', url = 'https:/
   check(mod.zaehle('sdk_klick') === false && sends.length === 1, 'Doppelte Auslösung innerhalb einer Sekunde zählt einmal.');
   check(mod.zaehle('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'naturheilkunde' }) === true && sends.length === 2, 'Kurzcheck-Ereignis wird gesendet.');
   check(mod.zaehle('generate_lead') === false && sends.length === 2, 'Fremde Ereignisse werden nicht gesendet.');
+  check(mod.zaehle('versicherer_klick', { ziel: 'ukv' }) === true && sends.length === 3
+    && JSON.stringify(JSON.parse(sends[2].init.body)) === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/ratgeber/barmer-osteopathie', ziel: 'ukv' }), 'Versicherer-Klick: drei Felder, Pfad aus der Adresszeile.');
+  check(mod.zaehle('versicherer_klick', { ziel: 'ergo' }) === false && sends.length === 3, 'Unbekannter Versicherer wird nicht gesendet.');
   check(verboten.length === 0, `Kein Zugriff auf Cookies, Speicher oder Bildschirmbreite: ${verboten.join(', ')}`);
 }
 {
@@ -219,7 +236,7 @@ const sql = read('docs/supabase/2026-11-02_anonyme_zaehler.sql');
 check(/create table if not exists public\.anonyme_zaehler/.test(sql), 'SQL legt public.anonyme_zaehler an.');
 check(/tag date not null default current_date/.test(sql), 'Datum setzt die Datenbank.');
 check(!/\b(ip|ip_hash|user_agent|created_at|uhrzeit|timestamptz|uuid|identity|serial)\b/i.test(sql.split('-- Prüfung nach dem Einspielen')[0].replace(/^--.*$/gm, '').replace(/comment on table[\s\S]*?';/g, '')), 'Keine IP, keine Uhrzeit, keine Kennung im Schema.');
-check(/check \(ereignis in \('leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt'\)\)/.test(sql), 'CHECK auf die drei Ereignisse.');
+check(/check \(ereignis in \('leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt'\)\)/.test(sql), 'CHECK auf die drei Ereignisse der ersten Fassung.');
 check((sql.match(/\^\[a-z0-9\/-\]\{1,160\}\$/g) || []).length >= 4, 'CHECK und Policy prüfen Pfade auf a-z, 0-9, Bindestrich, Schrägstrich, höchstens 160.');
 check(/check \(geraet in \('mobil', 'desktop'\)\)/.test(sql), 'CHECK auf mobil und desktop.');
 check(/enable row level security/.test(sql), 'RLS an.');
@@ -248,6 +265,27 @@ check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02
       && (zielListe.match(/'\/[a-z/]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
     'CHECK erlaubt als Ziel nur die Leistungsseiten und Kurzcheck-Varianten aus shared/anonyme-zaehler.js.',
   );
+}
+{
+  // Erweiterung 10.11.2026: versicherer_klick. Nur CHECKs und Einfügeregel,
+  // keine neue Spalte, keine neuen Rechte.
+  const sqlV = read('docs/supabase/2026-11-10_anonyme_zaehler_versicherer_klick.sql');
+  const sqlVCode = sqlV.replace(/--.*$/gm, '');
+  const ereignisListe = `('${regeln.ZAEHLER_EREIGNISSE.join("', '")}')`;
+  check(/NICHT AUSGEFÜHRT/.test(sqlV) && /^begin;/.test(sqlV) && /\ncommit;\n/.test(sqlV), 'Erweiterung liegt vorbereitet als eine Transaktion und ist nicht angewendet.');
+  check(sqlVCode.includes(`check (ereignis in ${ereignisListe})`), 'Erweiterung: CHECK auf genau die Ereignisse aus shared/anonyme-zaehler.js.');
+  check(sqlVCode.includes(`and ereignis in ${ereignisListe}`), 'Erweiterung: Einfügeregel für anon kennt genau dieselben Ereignisse.');
+  check(/for insert to anon\s+with check \(\s+tag = current_date/.test(sqlVCode) && /\(\(ereignis = 'sdk_klick'\) = \(ziel is null\)\)/.test(sqlVCode), 'Erweiterung: Policy behält heutiges Datum und Ziel-Regel.');
+  const zielListeV = (sqlVCode.match(/add constraint anonyme_zaehler_ziel_liste_check[\s\S]*?\n\s*\);\n/) || [''])[0];
+  check(
+    regeln.LEISTUNGSSEITEN.every((seite) => zielListeV.includes(`'${seite}'`))
+      && regeln.KURZCHECK_VARIANTEN.every((variante) => zielListeV.includes(`'${variante}'`))
+      && zielListeV.includes(`(ereignis = 'versicherer_klick' and ziel in ('${regeln.ZAEHLER_VERSICHERER.join("', '")}'))`)
+      && (zielListeV.match(/'\/[a-z/]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
+    'Erweiterung: Ziele nur aus Leistungsseiten, Kurzcheck-Varianten und Versicherern.',
+  );
+  check(!/\b(grant|revoke|create\s+table|add\s+column|security\s+definer|create\s+(or\s+replace\s+)?(function|trigger|procedure))\b/i.test(sqlVCode), 'Erweiterung ändert keine Rechte, Spalten, Funktionen oder Trigger.');
+  check(!/\b(ip|ip_hash|user_agent|created_at|uhrzeit|timestamptz|uuid)\b/i.test(sqlVCode.replace(/comment on table[\s\S]*?';/g, '')), 'Erweiterung ohne IP, Uhrzeit oder Kennung.');
 }
 const shared = read('shared/anonyme-zaehler.js');
 check(/ZAEHLER_PFAD_MUSTER = \/\^\[a-z0-9\/-\]\{1,160\}\$\//.test(shared), 'Browser, Funktion und SQL nutzen dasselbe Pfadmuster.');
@@ -312,6 +350,16 @@ check(/if \(!hasConsent\('marketing'\)\) return false;\s*if \(isMetaExcludedRout
 // Zähler-Verdrahtung
 check(/zaehle\('sdk_klick'\);/.test(quellen['src/lib/sdk-url.js']), 'SDK-Klick zählt anonym in trackSdkClick.');
 check(/installiereLeistungswegZaehler\(\)/.test(quellen['src/App.jsx']), 'Leistungsweg-Zähler hängt einmal für alle Seiten in App.jsx.');
+{
+  const zahnCheck = quellen['src/components/sections/dental/DentalZahnCheck.jsx'];
+  check(/if \(Object\.hasOwn\(CTA_HREFS, insurer\)\) zaehle\('versicherer_klick', \{ ziel: insurer \}\);/.test(zahnCheck)
+    && /onClick=\{\(\) => countAntragOpened\(result\.ctaType\)\}/.test(zahnCheck), 'Zahn-Check zählt den geöffneten Antrag anonym nur mit dem Versicherer.');
+  check((zahnCheck.match(/zaehle\(/g) || []).length === 1, 'Zahn-Check zählt an genau einer Stelle, Antworten nie.');
+  const dentalLinks = quellen['src/components/sections/dental/dentalLinks.js'];
+  check(/zaehle\('versicherer_klick', \{ ziel: ZAEHLER_VERSICHERER_JE_ZIEL\[destination\] \}\);/.test(dentalLinks)
+    && dentalLinks.indexOf("zaehle('versicherer_klick'") > dentalLinks.indexOf('if (!SAFE_INSURER_DESTINATIONS.has(destination)) return false;'), 'Versicherer-Knöpfe außerhalb des Check zählen anonym, nur nach der Zielprüfung.');
+  check(!/zaehle\(/.test(dentalLinks.slice(0, dentalLinks.indexOf('export const trackZahnEvent'))), 'dentalLinks zählt nur in trackZahnEvent; die Links selbst bleiben unverändert.');
+}
 
 // ---------------------------------------------------------------------------
 // 1f. Datenschutzerklärung
@@ -518,6 +566,36 @@ try {
     const sdk = log.zaehler.filter((z) => z.body.ereignis === 'sdk_klick').map((z) => z.body);
     check(sdk.length === 1 && JSON.stringify(sdk[0]) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null }), `SDK-Klick zählt anonym: ${JSON.stringify(sdk)}`);
     check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Rechner wird weiter geöffnet (Attrappe).');
+    await page.close();
+  }
+
+  // R8: Zahn-Check auf /zahn bis zum Ergebnis, Antrag öffnen (Leitfaden schon
+  // angefordert, ohne Einwilligung): versicherer_klick nur mit Pfad und Versicherer.
+  for (const [antworten, versicherer, host] of [[[0, 0, 1], 'bayerische', 'diebayerische.de'], [[2, 0, 1, 0], 'ukv', 'levelnine.biz']]) {
+    const { page, log } = await neueSeite({ analytics: false, marketing: false, leadErfasst: true, mobil: false });
+    await bereit(page, '/zahn');
+    for (const index of antworten) {
+      await page.waitForFunction(() => document.querySelectorAll('#zahn-check-karte button[type="button"]').length > 1, { timeout: 10000 });
+      await page.evaluate((i) => {
+        const optionen = [...document.querySelectorAll('#zahn-check-karte .grid > button[type="button"]')];
+        optionen[i].click();
+      }, index);
+      await warte(900);
+    }
+    const geklickt = await page.evaluate((h) => {
+      const link = [...document.querySelectorAll('#zahn-check-karte a[href]')].find((item) => item.href.includes(h));
+      if (!link) return false;
+      link.click();
+      return true;
+    }, host);
+    check(geklickt, `Zahn-Check zeigt den Antragslink zu ${versicherer}.`);
+    await warte(600);
+    const vk = log.zaehler.filter((z) => z.body.ereignis === 'versicherer_klick').map((z) => z.body);
+    check(vk.length === 1 && JSON.stringify(vk[0]) === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: versicherer }), `Zahn-Check zählt anonym: ${JSON.stringify(vk)}`);
+    check(log.zaehler.length === 1, `Antworten im Zahn-Check lösen keine Zählung aus (${log.zaehler.length}).`);
+    check(log.ga.length === 0 && !log.fremd.some((entry) => /facebook|google/.test(entry)), 'Zahn-Check ohne Einwilligung: nichts an Google oder Meta.');
+    check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Antrag wird weiter geöffnet (Attrappe).');
+    check(log.fehler.length === 0, `Keine Seitenfehler: ${log.fehler.join(' | ')}`);
     await page.close();
   }
 

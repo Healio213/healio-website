@@ -1,6 +1,6 @@
 /**
  * Anonymer Zähler ohne Cookies und Kennungen (Vorbild: „healio_klick“ auf
- * kassenboost.de). Er zählt nur drei Ereignisse und läuft auf allen Seiten,
+ * kassenboost.de). Er zählt nur vier Ereignisse und läuft auf allen Seiten,
  * auch dort, wo Google Analytics und Meta wegen Art. 9 DSGVO schweigen:
  *
  *   leistungsweg_klick     Klick auf einen Link zu einer Leistungsseite
@@ -8,6 +8,9 @@
  *   sdk_klick              Der SDK-Rechner wird geöffnet (von_pfad)
  *   kurzcheck_abgeschickt  Ein Kurzcheck wurde erfolgreich abgeschickt
  *                          (von_pfad = Pfad des Checks, ziel = Variante)
+ *   versicherer_klick      Der Online-Abschluss eines Versicherers wird
+ *                          geöffnet (von_pfad = Seite des Klicks,
+ *                          ziel = bayerische oder ukv)
  *
  * Grundregeln, die dieses Modul technisch erzwingt:
  * - Kein Cookie, kein localStorage, kein sessionStorage, keine Nutzer- oder
@@ -38,6 +41,7 @@ export {
   LEISTUNGSSEITEN,
   ZAEHLER_EREIGNISSE,
   ZAEHLER_PFAD_MUSTER,
+  ZAEHLER_VERSICHERER,
   baueZaehlerEintrag,
   normalisiereZaehlerPfad,
 } from '../../shared/anonyme-zaehler.js';

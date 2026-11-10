@@ -4,7 +4,7 @@
  * Vercel Serverless Function, Node Runtime, Region fra1.
  *
  * Grundregeln:
- * - Angenommen werden nur drei Ereignisse mit festen, geprüften Feldern
+ * - Angenommen werden nur vier Ereignisse mit festen, geprüften Feldern
  *   (shared/anonyme-zaehler.js). Alles andere wird verworfen.
  * - Weitergegeben werden nur ereignis, von_pfad, ziel und geraet. Keine IP,
  *   kein User-Agent, kein Referrer, keine Uhrzeit; das Datum setzt die

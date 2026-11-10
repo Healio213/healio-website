@@ -1,5 +1,6 @@
 import { trackEvent } from '@/lib/analytics';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
+import { zaehle } from '@/lib/anonyme-zaehler';
 
 // Persönliche Abschluss-Links (Vermittler-Zuordnung über MAK-Nummer in der URL).
 // Bayerische seit 16.10.2026 über die Direktanbindung (Vermittlernummer 032834,
@@ -119,11 +120,21 @@ const SAFE_INSURER_DESTINATIONS = new Set([
   'ukv_zahnprivat',
 ]);
 
+// Versicherer für den anonymen Zähler (shared/anonyme-zaehler.js).
+const ZAEHLER_VERSICHERER_JE_ZIEL = Object.freeze({
+  bayerische_zahn_sofort: 'bayerische',
+  ukv_zahnprivat: 'ukv',
+});
+
 // Ausschließlich neutrale Versicherer-Klicks außerhalb des Zahn-Checks.
 // Der Zahn-Check selbst importiert oder verwendet diese Funktion bewusst nicht.
 export const trackZahnEvent = (action, destination) => {
   if (action !== 'zahnzusatz_versicherer_click') return false;
   if (!SAFE_INSURER_DESTINATIONS.has(destination)) return false;
+
+  // Anonymer Zähler ohne Cookies: zählt auch ohne Einwilligung, nur Ereignis,
+  // Pfad der Seite und Versicherer.
+  zaehle('versicherer_klick', { ziel: ZAEHLER_VERSICHERER_JE_ZIEL[destination] });
 
   // Google Ads: Erfolg „Antrag geöffnet“, ohne Versicherer und ohne Antworten.
   trackGoogleAdsAntrag();
