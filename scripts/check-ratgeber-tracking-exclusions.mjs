@@ -97,8 +97,8 @@ async function capiStatus(mod, path) {
 }
 
 try {
-  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 63, 'Alle 63 neuen sensiblen Pfade gehören zur Freigabe (seit 14.10.2026 mit krankenzusatzversicherung-ohne-gesundheitsfragen-2026).');
-  assert.equal(new Set(NEW_SENSITIVE_RATGEBER_PATHS).size, 63, 'Keine doppelten Soll-Pfade.');
+  assert.equal(NEW_SENSITIVE_RATGEBER_PATHS.length, 64, 'Alle 64 neuen sensiblen Pfade gehören zur Freigabe (seit 14.10.2026 mit krankenzusatzversicherung-ohne-gesundheitsfragen-2026, seit 04.11.2026 mit krankenkasse-2027-aenderungen).');
+  assert.equal(new Set(NEW_SENSITIVE_RATGEBER_PATHS).size, 64, 'Keine doppelten Soll-Pfade.');
 
   // Direkteinstieg und direkte Tracker-Aufrufe trotz vollständiger Zustimmung.
   for (const path of EXPECTED_GOOGLE_META_EXCLUDED_PATHS) {
