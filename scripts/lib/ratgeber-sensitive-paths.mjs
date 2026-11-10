@@ -74,6 +74,8 @@ export const NEW_SENSITIVE_RATGEBER_PATHS = Object.freeze([
 export const EXPECTED_GOOGLE_META_EXCLUDED_PATHS = Object.freeze([
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
+  // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
+  '/antrag/aufnehmen',
   '/schwangerschaft',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',
@@ -98,6 +100,8 @@ export const EXPECTED_GOOGLE_META_EXCLUDED_PATHS = Object.freeze([
 export const EXPECTED_ANALYTICS_EXCLUDED_PATHS = Object.freeze([
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
+  // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
+  '/antrag/aufnehmen',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',

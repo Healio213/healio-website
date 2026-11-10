@@ -965,6 +965,15 @@ export const seoRoutes = [
     robots: 'noindex, nofollow',
   },
   {
+    // Antragsgespräch mit Nita (10.11.2026): nie indexieren, nicht in Sitemap oder llms.txt.
+    path: '/antrag/aufnehmen',
+    title: 'Antrag mit Nita aufnehmen | Healio',
+    description: 'Nimm deinen Antrag auf den ambulanten Zusatzschutz im Gespräch mit Nita auf.',
+    canonical: 'https://healio.de/antrag/aufnehmen',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
     path: '/tiktok',
     title: 'Healio auf TikTok | Healio',
     description: 'Alle Healio-Links aus der TikTok-Bio auf einen Blick.',

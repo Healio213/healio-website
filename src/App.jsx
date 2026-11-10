@@ -88,6 +88,8 @@ const CheckDankePage = React.lazy(() => import('@/pages/CheckDankePage'));
 const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 // Prüfseite des Antrags am Telefon mit Nita (09.11.2026): eigenständig, noindex, ohne Messung.
 const AntragPruefenPage = React.lazy(() => import('@/pages/AntragPruefenPage'));
+// Antragsgespräch mit Nita (10.11.2026): eigenständig, noindex, ohne Messung, hinter HEALIO_ANTRAG_GESPRAECH_AKTIV.
+const AntragAufnehmenPage = React.lazy(() => import('@/pages/AntragAufnehmenPage'));
 
 const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));
 
@@ -119,8 +121,10 @@ function App() {
   const isPregnancy = location.pathname === '/schwangerschaft';
   // Meta-Zielseiten (19.10.2026): ablenkungsfrei, ohne Nita und ohne schwebenden WhatsApp-Knopf.
   const isCampaignLanding = isCampaignLandingRoute(location);
-  // Prüfseite des Antrags (09.11.2026): ohne Nita und ohne WhatsApp, auch bei anderer Schreibweise.
-  const isAntragPruefen = (location.pathname.replace(/\/+$/, '').toLowerCase() || '/') === '/antrag/pruefen';
+  // Prüfseite des Antrags (09.11.2026) und Antragsgespräch /antrag/aufnehmen (10.11.2026): ohne Nita und ohne WhatsApp,
+  // auch bei anderer Schreibweise. Der Name isAntragPruefen bleibt, weil test:privacy ihn im Quelltext erwartet.
+  const antragPfad = location.pathname.replace(/\/+$/, '').toLowerCase() || '/';
+  const isAntragPruefen = antragPfad === '/antrag/pruefen' || antragPfad === '/antrag/aufnehmen';
   // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
   const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Experiment 06.10.2026: auch auf /ambulant und /stationaer sitzt WhatsApp am
@@ -337,6 +341,8 @@ function App() {
                 Links zur Seite nur als echte Seitennavigation (Mail-Link), damit keine
                 Mess-Skripte einer vorherigen Seite im selben Dokument laufen. */}
             <Route path="/antrag/pruefen" element={<AntragPruefenPage />} />
+            {/* Antragsgespräch mit Nita (10.11.2026): ohne Layout, noindex, kein Tracking, Einstieg nur als echte Seitennavigation. */}
+            <Route path="/antrag/aufnehmen" element={<AntragAufnehmenPage />} />
 
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}
             <Route path="/tiktok" element={<TikTokPage />} />

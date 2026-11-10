@@ -14,6 +14,8 @@ const GA4_SCRIPT_SELECTOR = 'script[data-healio-ga4="true"]';
 const ANALYTICS_EXCLUDED_PATHS = new Set([
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
+  // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
+  '/antrag/aufnehmen',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',

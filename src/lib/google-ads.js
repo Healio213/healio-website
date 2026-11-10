@@ -76,6 +76,8 @@ const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
+  // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
+  '/antrag/aufnehmen',
   '/schwangerschaft',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',

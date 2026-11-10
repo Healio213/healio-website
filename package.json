@@ -75,7 +75,10 @@
     "test:editorial": "node scripts/check-editorial-transparency.mjs",
     "test:anfrage-zaehler": "node scripts/check-anfrage-zaehler.mjs",
     "antrag:mock": "node scripts/antrag-mock-server.mjs",
-    "test:antrag-pruefseite": "node scripts/check-antrag-pruefseite-rendered.mjs"
+    "test:antrag-pruefseite": "node scripts/check-antrag-pruefseite-rendered.mjs",
+    "antrag-gespraech:mock": "node scripts/antrag-gespraech-mock.mjs",
+    "test:antrag-gespraech": "node --test scripts/check-antrag-gespraech.mjs",
+    "test:antrag-aufnehmen": "node scripts/check-antrag-aufnehmen-rendered.mjs"
   },
   "dependencies": {
     "@babel/traverse": "^7.26.4",

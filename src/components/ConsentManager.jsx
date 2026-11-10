@@ -113,7 +113,8 @@ export const ConsentManager = () => {
   // Prüfseite des Antrags (09.11.2026): Sie lädt keine optionalen Dienste, der
   // Hinweis würde dort nur den Inhalt verdecken. Die Einwilligung selbst bleibt
   // unverändert und gilt auf allen anderen Seiten.
-  const isAntragPruefen = normalizePathname(pathname) === '/antrag/pruefen';
+  // Gleiches für das Antragsgespräch /antrag/aufnehmen (10.11.2026).
+  const isAntragPruefen = ['/antrag/pruefen', '/antrag/aufnehmen'].includes(normalizePathname(pathname));
   const bannerDeferred = !firstActionSeen && FIRST_ACTION_PATHS.has(normalizePathname(pathname));
   // Ablenkungsfreie Meta-Zielseiten: Datenschutz öffnet im neuen Tab, damit niemand die Strecke verlässt.
   const privacyLinkTarget = isCampaignLandingRoute(location) ? { target: '_blank', rel: 'noopener' } : {};
