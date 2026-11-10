@@ -183,6 +183,32 @@ for (const pfad of pfade) {
         eintrag.formular = formular;
       }
     }
+    // Angebotskarte unter dem Hero: je Kachel ein geladenes Bild in der hinterlegten Dateigröße, dazu die Figur,
+    // und keine Zahl läuft aus ihrer Kachel.
+    const karte = await page.evaluate(async () => {
+      const wurzel = document.querySelector('[data-altersvorsorge-hero] [role="group"]');
+      if (!wurzel) return null;
+      wurzel.scrollIntoView({ block: 'center' });
+      const bilder = [...wurzel.querySelectorAll('[data-kachel-motiv] img, [data-karten-figur] img')];
+      await Promise.all(bilder.filter((bild) => !bild.complete).map((bild) => Promise.race([
+        new Promise((fertig) => { bild.addEventListener('load', fertig, { once: true }); bild.addEventListener('error', fertig, { once: true }); }),
+        new Promise((fertig) => { setTimeout(fertig, 5000); }),
+      ])));
+      const pruefe = (bild) => Boolean(bild?.complete && bild.naturalWidth > 0 && bild.naturalWidth === Number(bild.getAttribute('width')) && bild.naturalHeight === Number(bild.getAttribute('height')));
+      return {
+        kacheln: wurzel.querySelectorAll('li').length,
+        motive: [...wurzel.querySelectorAll('[data-kachel-motiv]')].map((buehne) => ({ motiv: buehne.dataset.kachelMotiv, ok: pruefe(buehne.querySelector('img')) })),
+        figur: pruefe(wurzel.querySelector('[data-karten-figur] img')),
+        zahlenZuBreit: [...wurzel.querySelectorAll('li p:first-child')].filter((zahl) => zahl.scrollWidth > zahl.clientWidth + 1).map((zahl) => zahl.textContent.trim()),
+      };
+    });
+    if (!karte) fehler.push(`${pfad} ${breite}: Angebotskarte fehlt`);
+    else {
+      if (karte.motive.length !== karte.kacheln) fehler.push(`${pfad} ${breite}: ${karte.motive.length} Bildmotive für ${karte.kacheln} Kacheln der Angebotskarte`);
+      for (const motiv of karte.motive) if (!motiv.ok) fehler.push(`${pfad} ${breite}: Bild „${motiv.motiv}“ der Angebotskarte lädt nicht oder hat eine andere Größe als hinterlegt`);
+      if (!karte.figur) fehler.push(`${pfad} ${breite}: Figur der Angebotskarte lädt nicht`);
+      if (karte.zahlenZuBreit.length) fehler.push(`${pfad} ${breite}: Zahl läuft aus der Kachel: ${karte.zahlenZuBreit.join(', ')}`);
+    }
     // Drei Schritt-Bühnen, jede mit geladenem Bild aus dem Friendly-Icon-Satz in der hinterlegten Dateigröße.
     const symbole = await page.evaluate(async () => {
       const buehnen = [...document.querySelectorAll('#zuschuss-check [data-schritt-symbol]')];

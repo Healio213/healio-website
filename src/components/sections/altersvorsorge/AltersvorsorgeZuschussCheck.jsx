@@ -4,30 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { CalendarCheck, ChevronRight, PhoneCall } from 'lucide-react';
 import AltersvorsorgeIllustration from './AltersvorsorgeIllustration';
 import { friendlyIconAssets } from '@/components/ui/healioSoftClayIcons';
-import { MOTIV_SITZ, SCHRITT_MOTIVE } from '@/lib/altersvorsorgeSchrittMotive';
+import { MOTIV_SITZ, SCHRITT_MOTIVE, motivSitzStil } from '@/lib/altersvorsorgeBildmotive';
 import { CHECK_KONTAKT_URL, zuschussCheck } from '@/content/altersvorsorgedepotContent';
 import { createAltersvorsorgeKontaktState } from '@/lib/altersvorsorgeArtikelCheck';
 import { buildInternalRatgeberUrl } from '@/lib/ratgeber-cta';
 
 // Größter sichtbarer Bildinhalt auf der Bühne und Höhe des Fußpunkts über dem Bühnenboden (rem).
-const BILD_BREITE = 8.5;
-const BILD_HOEHE = 7.25;
-const FUSSPUNKT = 2.5;
-const rund = (wert) => Math.round(wert * 1000) / 1000;
-
-const sitzStil = (sitz) => {
-  const inhaltBreite = (1 - sitz.l - sitz.r) * sitz.b;
-  const inhaltHoehe = (1 - sitz.o - sitz.u) * sitz.h;
-  const faktor = Math.min(BILD_BREITE / inhaltBreite, BILD_HOEHE / inhaltHoehe);
-  const breite = sitz.b * faktor;
-  const hoehe = sitz.h * faktor;
-  return {
-    width: `${rund(breite)}rem`,
-    height: `${rund(hoehe)}rem`,
-    marginLeft: `${rund(-(sitz.l + (1 - sitz.l - sitz.r) / 2) * breite)}rem`,
-    bottom: `${rund(FUSSPUNKT - sitz.u * hoehe)}rem`,
-  };
-};
+const BUEHNE = { breite: 8.5, hoehe: 7.25, fuss: 2.5 };
 
 // Kleine Bühne je Schritt: Lichthof, Podest und darauf das plastische Motiv.
 const SchrittBuehne = ({ name, nummer }) => {
@@ -56,7 +39,7 @@ const SchrittBuehne = ({ name, nummer }) => {
             decoding="async"
             width={sitz.b}
             height={sitz.h}
-            style={sitzStil(sitz)}
+            style={motivSitzStil(sitz, BUEHNE)}
             className="absolute left-1/2 max-w-none select-none drop-shadow-[0_8px_10px_rgba(2,22,20,0.32)] transition-transform duration-300 ease-out group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
           />
         ) : (

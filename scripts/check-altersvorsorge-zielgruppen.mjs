@@ -11,6 +11,7 @@
  * - Rechenbeispiele stimmen mit der Rechenlogik des Rechners überein
  * - Titel und Beschreibungen in sinnvoller Länge, FAQ-Schema = sichtbare Fragen
  * - drei Schritt-Karten je Seite, jede mit eigenem Bildmotiv aus dem Friendly-Icon-Satz
+ * - jede Zahlenkachel der Angebotskarte mit eigenem Bildmotiv
  */
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
@@ -22,8 +23,8 @@ import {
 import { zielgruppenSchema, zielgruppenSeoRoute } from '../src/content/altersvorsorgeZielgruppen/seo.js';
 import { seoRoutes } from './seo-routes.mjs';
 import { friendlyIconAssets } from '../src/components/ui/healioSoftClayIcons.js';
-import { MOTIV_SITZ, SCHRITT_MOTIVE } from '../src/lib/altersvorsorgeSchrittMotive.js';
-import { zuschussCheck } from '../src/content/altersvorsorgedepotContent.js';
+import { KACHEL_MOTIVE, KARTEN_FIGUR, MOTIV_SITZ, SCHRITT_MOTIVE } from '../src/lib/altersvorsorgeBildmotive.js';
+import { getHeroKacheln, zuschussCheck } from '../src/content/altersvorsorgedepotContent.js';
 
 const TECHNISCH = new Set(['slug', 'icon', 'key', 'motiv', 'quelle', 'to', 'voreinstellung', 'felder', 'eingabe', 'weiterlesen', 'id', 'verwandt']);
 
@@ -172,7 +173,7 @@ test('Jede Seite hat drei Schritt-Karten mit eigenem Bildmotiv aus dem Friendly-
     });
     assert.equal(new Set(motive).size, 3, `${seite.slug}: Bildmotiv doppelt (${motive.join(', ')})`);
   }
-  for (const motiv of new Set(Object.values(SCHRITT_MOTIVE))) {
+  for (const motiv of new Set([...Object.values(SCHRITT_MOTIVE), ...Object.values(KACHEL_MOTIVE), KARTEN_FIGUR])) {
     const pfad = friendlyIconAssets[motiv];
     assert.ok(pfad, `Motiv „${motiv}“ fehlt im Friendly-Icon-Satz`);
     assert.ok(existsSync(new URL(`../public${pfad}`, import.meta.url)), `Bilddatei fehlt: ${pfad}`);
@@ -180,5 +181,21 @@ test('Jede Seite hat drei Schritt-Karten mit eigenem Bildmotiv aus dem Friendly-
     assert.ok(sitz, `Motiv „${motiv}“ hat keine Maße für die Bühne`);
     assert.ok(sitz.b > 0 && sitz.h > 0, `Motiv „${motiv}“: Dateigröße fehlt`);
     for (const rand of ['l', 'o', 'r', 'u']) assert.ok(sitz[rand] >= 0 && sitz[rand] < 0.4, `Motiv „${motiv}“: Rand ${rand} unplausibel`);
+  }
+});
+
+test('Jede Zahlenkachel der Angebotskarte hat ein eigenes Bildmotiv', () => {
+  const karten = [
+    ...[undefined, 'eltern', 'selbststaendige', 'riester', 'einsteiger'].map((variante) => ({ name: `hauptseite (${variante || 'ohne Variante'})`, kacheln: getHeroKacheln(variante) })),
+    ...zielgruppenSeiten.map((seite) => ({ name: seite.slug, kacheln: seite.hero.karte.kacheln })),
+  ];
+  for (const karte of karten) {
+    assert.ok(karte.kacheln.length >= 3 && karte.kacheln.length <= 4, `${karte.name}: ${karte.kacheln.length} Kacheln, das Raster kennt drei oder vier`);
+    const motive = karte.kacheln.map((kachel) => {
+      const motiv = KACHEL_MOTIVE[kachel.key];
+      assert.ok(motiv, `${karte.name}: Kachel „${kachel.key}“ hat kein Bildmotiv`);
+      return motiv;
+    });
+    assert.equal(new Set(motive).size, motive.length, `${karte.name}: Bildmotiv doppelt (${motive.join(', ')})`);
   }
 });

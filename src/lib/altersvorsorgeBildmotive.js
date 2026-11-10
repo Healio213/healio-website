@@ -1,4 +1,6 @@
-// Bildmotive für die drei Schritt-Karten im Zuschuss-Check (Altersvorsorgedepot).
+// Bildmotive der Altersvorsorge-Seiten: Schritt-Karten im Zuschuss-Check und
+// Zahlenkacheln der Angebotskarte unter dem Hero. Alle Motive stammen aus dem
+// verbindlichen Bildsatz der Website (docs/FRIENDLY_ICON_STANDARD.md).
 // Eigene Datei ohne JSX, damit auch die Prüfskripte sie lesen können.
 
 // Motiv je Schritt aus dem verbindlichen Bildsatz der Website (docs/FRIENDLY_ICON_STANDARD.md).
@@ -25,6 +27,27 @@ export const SCHRITT_MOTIVE = {
   entscheiden: 'thinking',
 };
 
+// Zahlenkacheln der Angebotskarte: Schlüssel der Kachel (kachel.key im Content) → Motiv.
+// Je Seite stehen so verschiedene Motive nebeneinander.
+export const KACHEL_MOTIVE = {
+  grundzulage: 'budget',
+  kinderzulage: 'family',
+  startbonus: 'bonus',
+  neu: 'switch',
+  beitrag: 'money',
+  steuer: 'calculator',
+  alt: 'comparison',
+  kosten: 'switch',
+  partner: 'family',
+  nachweis: 'document',
+  jahr: 'calendar',
+  rueckforderung: 'bonus',
+  wege: 'choice',
+};
+
+// Figur, die in der Angebotskarte hinter den Kacheln hervorschaut und auf die Überschrift zeigt.
+export const KARTEN_FIGUR = 'advisor';
+
 // Die Bilddateien bringen unterschiedlich viel leeren Rand mit. Damit jedes Motiv mittig
 // und mit dem Fuß auf dem Podest steht, steht hier je Motiv die Dateigröße (b, h) und der
 // leere Rand links, oben, rechts, unten als Anteil. Bei einem neuen Bild neu ausmessen.
@@ -41,4 +64,26 @@ export const MOTIV_SITZ = {
   protection: { b: 311, h: 315, l: 0.119, o: 0.035, r: 0.135, u: 0.178 },
   bonus: { b: 311, h: 315, l: 0.122, o: 0.165, r: 0.058, u: 0.06 },
   thinking: { b: 512, h: 512, l: 0.166, o: 0.021, r: 0.133, u: 0.025 },
+  switch: { b: 311, h: 315, l: 0.183, o: 0.016, r: 0.106, u: 0.146 },
+};
+
+const rund = (wert) => Math.round(wert * 1000) / 1000;
+
+/**
+ * Größe und Lage eines Motivs auf seiner Bühne als Inline-Stil (rem).
+ * breite/hoehe: größter sichtbarer Bildinhalt, fuss: Höhe des Fußpunkts über dem Bühnenboden.
+ * Das Bild selbst braucht dazu `absolute left-1/2 max-w-none`.
+ */
+export const motivSitzStil = (sitz, { breite, hoehe, fuss }) => {
+  const inhaltBreite = (1 - sitz.l - sitz.r) * sitz.b;
+  const inhaltHoehe = (1 - sitz.o - sitz.u) * sitz.h;
+  const faktor = Math.min(breite / inhaltBreite, hoehe / inhaltHoehe);
+  const bildBreite = sitz.b * faktor;
+  const bildHoehe = sitz.h * faktor;
+  return {
+    width: `${rund(bildBreite)}rem`,
+    height: `${rund(bildHoehe)}rem`,
+    marginLeft: `${rund(-(sitz.l + (1 - sitz.l - sitz.r) / 2) * bildBreite)}rem`,
+    bottom: `${rund(fuss - sitz.u * bildHoehe)}rem`,
+  };
 };
