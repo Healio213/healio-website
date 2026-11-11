@@ -53,7 +53,7 @@ test('Kopfdaten stimmen mit dem Seitenplan überein', () => {
   assert.equal(seite.hero.h1, 'Baby geplant? Rechne aus, ab wann die Geburt im Klinikschutz mitversichert ist.');
   assert.equal(seite.seo.ogImageAlt, 'Healio: Stichtag für den Klinikschutz rund um die Geburt ausrechnen');
   assert.equal(seite.hero.brotkrume, 'Baby geplant');
-  assert.equal(seite.hero.bildAlt, 'Ein Paar sitzt zu Hause am Tisch und plant mit einem Kalender');
+  assert.equal(seite.hero.bildAlt, 'Eine junge Familie mit ihrem Baby');
   const route = schwangerschaftAnlassSeoRoute(seite);
   assert.equal(route.path, PFAD);
   assert.equal(route.canonical, `https://healio.de${PFAD}`);

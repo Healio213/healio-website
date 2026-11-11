@@ -239,25 +239,32 @@ const SchwangerschaftAnlassPage = ({ inhalt }) => {
               </table>
             </div>
 
-            {/* Handy: zwei Karten untereinander */}
-            <div className="mt-8 grid gap-5 md:hidden">
-              {[
-                { kopf: tarife.kopfBayerische, feld: 'bayerische' },
-                { kopf: tarife.kopfSdk, feld: 'sdk' },
-              ].map(({ kopf, feld }) => (
-                <article key={feld} className="rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm">
-                  <h3 className="font-display text-lg font-extrabold text-slate-950">{kopf}</h3>
-                  <dl className="mt-3">
-                    {tarife.zeilen.map((zeile) => (
-                      <div key={zeile.label} className="border-t border-emerald-100 py-3 first:border-t-0">
-                        <dt className="text-base font-bold leading-6 text-slate-950">{zeile.label}</dt>
-                        <dd className="mt-1 text-base leading-6 text-slate-700">{zeile[feld]}</dd>
-                      </div>
+            {/* Handy: zugeklappter Aufklapper mit zwei Karten, Inhalt bleibt im HTML */}
+            <Accordion type="single" collapsible className="mt-6 md:hidden">
+              <AccordionItem value="tarife-vergleich" className="group">
+                <AccordionTrigger className="text-left font-display text-base font-bold text-slate-950">{tarife.aufklapper}</AccordionTrigger>
+                <AccordionContent forceMount className="group-data-[state=closed]:hidden">
+                  <div className="grid gap-5">
+                    {[
+                      { kopf: tarife.kopfBayerische, feld: 'bayerische' },
+                      { kopf: tarife.kopfSdk, feld: 'sdk' },
+                    ].map(({ kopf, feld }) => (
+                      <article key={feld} className="rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm">
+                        <h3 className="font-display text-lg font-extrabold text-slate-950">{kopf}</h3>
+                        <dl className="mt-3">
+                          {tarife.zeilen.map((zeile) => (
+                            <div key={zeile.label} className="border-t border-emerald-100 py-3 first:border-t-0">
+                              <dt className="text-base font-bold leading-6 text-slate-950">{zeile.label}</dt>
+                              <dd className="mt-1 text-base leading-6 text-slate-700">{zeile[feld]}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </article>
                     ))}
-                  </dl>
-                </article>
-              ))}
-            </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
               {knopfBayerische(tarife.knopfBayerische)}

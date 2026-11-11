@@ -25,7 +25,8 @@ const inhalt = {
     knopfAbschluss: 'Gleich online abschließen',
     fussnote: 'Für beide Tarife gilt: Schließ ab, solange keine Schwangerschaft besteht oder bekannt ist.',
     vertrauenszeile: 'Bedingungen der Versicherer verlinkt · Rechner ohne Anmeldung, nichts wird gespeichert · Healio ist Versicherungsmakler',
-    bildAlt: 'Ein Paar sitzt zu Hause am Tisch und plant mit einem Kalender',
+    // Geplantes neues Kopfbild (Plan 7): Alt-Text "Ein Paar sitzt zu Hause am Tisch und plant mit einem Kalender". Erst setzen, wenn das Bild da ist.
+    bildAlt: 'Eine junge Familie mit ihrem Baby',
     karte: {
       titel: 'Klinikschutz vor dem Baby auf einen Blick',
       kacheln: [
@@ -98,6 +99,7 @@ const inhalt = {
       { label: 'Laufzeit', bayerische: 'zunächst 24 Monate, danach jährlich kündbar', sdk: 'Versicherungsjahr bis 30. Juni, danach jährlich, Kündigung drei Monate vorher' },
       { label: 'Beitrag im Monat', bayerische: '21 bis 30 Jahre: Prestige 13,40 EUR, Komfort 10,20 EUR. 31 bis 45 Jahre: Prestige 17,60 EUR, Komfort 13,90 EUR (Stand 08.2025)', sdk: 'nach Alter, im Rechner der SDK' },
     ],
+    aufklapper: 'Beide Tarife im Vergleich ansehen',
     knopfBayerische: 'Bei der Bayerischen online abschließen',
     knopfSdk: 'Bei der SDK online abschließen',
     kleingedruckt: 'Ob du angenommen wirst und was erstattet wird, entscheidet der Versicherer nach deinem Antrag.',
