@@ -70,7 +70,7 @@ const expect = (condition, message) => {
 const routes = new Set(seoRoutes.map((route) => route.path));
 // Leistungsseiten im Sinn des Auftrags: Bausteine, Übersicht, eigene
 // Produktseiten (Schwangerschaft, Altersvorsorge) und Firmenkunden.
-const LEISTUNGSSEITEN = new Set(['/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/tierkrankenversicherung', LEISTUNGEN_PFAD, '/altersvorsorgedepot', '/unternehmen']);
+const LEISTUNGSSEITEN = new Set(['/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/schwangerschaft/baby-geplant', '/tierkrankenversicherung', LEISTUNGEN_PFAD, '/altersvorsorgedepot', '/unternehmen']);
 const OHNE_UEBERSICHTSLINK = new Set(['leistungen', 'altersvorsorge', 'unternehmen']);
 
 /* --- 1. Ziele und Zuordnung ---------------------------------------------- */

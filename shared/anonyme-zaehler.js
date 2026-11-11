@@ -22,6 +22,7 @@ export const LEISTUNGSSEITEN = Object.freeze([
   '/zahn',
   '/stationaer',
   '/schwangerschaft',
+  '/schwangerschaft/baby-geplant',
   '/leistungen',
   '/en/outpatient',
   '/en/dental',

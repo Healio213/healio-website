@@ -80,6 +80,7 @@ const AltersvorsorgeElternzeitPage = React.lazy(() => import('@/pages/altersvors
 const AltersvorsorgeRiesterKuendigenPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeRiesterKuendigenPage'));
 const AltersvorsorgeEhepartnerPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeEhepartnerPage'));
 const AltersvorsorgeKindergeldEndetPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeKindergeldEndetPage'));
+const BabyGeplantPage = React.lazy(() => import('@/pages/schwangerschaftAnlaesse/BabyGeplantPage'));
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
@@ -273,6 +274,7 @@ function App() {
               <Route path="ambulant" element={<AmbulantPage />} />
               <Route path="kassenbonus" element={<KassenbonusPage />} />
               <Route path="schwangerschaft" element={<SchwangerschaftPage />} />
+              <Route path="schwangerschaft/baby-geplant" element={<BabyGeplantPage />} />
               <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />

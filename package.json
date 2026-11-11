@@ -74,6 +74,8 @@
     "test:lead-capture": "node --test scripts/check-lead-capture-api.mjs scripts/check-lead-capture-client.mjs",
     "test:editorial": "node scripts/check-editorial-transparency.mjs",
     "test:anfrage-zaehler": "node scripts/check-anfrage-zaehler.mjs",
+    "test:baby-geplant-rechner": "node --test scripts/check-baby-geplant-rechner.mjs",
+    "test:schwangerschaft-anlaesse": "node --test scripts/check-schwangerschaft-anlaesse.mjs",
     "antrag:mock": "node scripts/antrag-mock-server.mjs",
     "test:antrag-pruefseite": "node scripts/check-antrag-pruefseite-rendered.mjs",
     "antrag-gespraech:mock": "node scripts/antrag-gespraech-mock.mjs",

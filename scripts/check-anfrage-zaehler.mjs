@@ -262,7 +262,7 @@ check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02
   check(
     regeln.LEISTUNGSSEITEN.every((seite) => zielListe.includes(`'${seite}'`))
       && regeln.KURZCHECK_VARIANTEN.every((variante) => zielListe.includes(`'${variante}'`))
-      && (zielListe.match(/'\/[a-z/]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
+      && (zielListe.match(/'\/[a-z/-]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
     'CHECK erlaubt als Ziel nur die Leistungsseiten und Kurzcheck-Varianten aus shared/anonyme-zaehler.js.',
   );
 }
@@ -281,7 +281,7 @@ check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02
     regeln.LEISTUNGSSEITEN.every((seite) => zielListeV.includes(`'${seite}'`))
       && regeln.KURZCHECK_VARIANTEN.every((variante) => zielListeV.includes(`'${variante}'`))
       && zielListeV.includes(`(ereignis = 'versicherer_klick' and ziel in ('${regeln.ZAEHLER_VERSICHERER.join("', '")}'))`)
-      && (zielListeV.match(/'\/[a-z/]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
+      && (zielListeV.match(/'\/[a-z/-]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
     'Erweiterung: Ziele nur aus Leistungsseiten, Kurzcheck-Varianten und Versicherern.',
   );
   check(!/\b(grant|revoke|create\s+table|add\s+column|security\s+definer|create\s+(or\s+replace\s+)?(function|trigger|procedure))\b/i.test(sqlVCode), 'Erweiterung ändert keine Rechte, Spalten, Funktionen oder Trigger.');

@@ -19,6 +19,8 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/zahn',
   '/en/dental',
   '/schwangerschaft',
+  // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
+  '/schwangerschaft/baby-geplant',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',
   '/check/schwangerschaft/danke',

@@ -72,6 +72,8 @@ const META_EXCLUDED_PATHS = new Set([
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
   '/antrag/aufnehmen',
   '/schwangerschaft',
+  // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
+  '/schwangerschaft/baby-geplant',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',
   '/check/schwangerschaft/danke',

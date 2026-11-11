@@ -64,7 +64,7 @@ create table if not exists public.anonyme_zaehler (
       (ereignis = 'sdk_klick' and ziel is null)
       or (ereignis = 'kurzcheck_abgeschickt' and ziel in ('naturheilkunde', 'schwangerschaft'))
       or (ereignis = 'leistungsweg_klick' and ziel in (
-        '/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/leistungen',
+        '/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/schwangerschaft/baby-geplant', '/leistungen',
         '/en/outpatient', '/en/dental', '/en/inpatient', '/en/services'))
     )
 );

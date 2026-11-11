@@ -30,6 +30,7 @@ import LazyZahnkostenRechner from '@/components/ratgeber/LazyZahnkostenRechner';
 import { planRatgeberLeistungsweg } from '@/content/leistungsweg';
 import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '@/components/leistungsweg/LeistungsHinweis';
 import { getRatgeberEinstiege } from '@/content/altersvorsorgeZielgruppen/ratgeberZuordnung';
+import { getSchwangerschaftRatgeberEinstiege } from '@/content/schwangerschaftAnlaesse/ratgeberZuordnung';
 
 // Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
 // Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
@@ -40,6 +41,7 @@ const TarifvergleichPlatzhalter = () => (
 
 const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeArtikelCheck'));
 const AltersvorsorgeEinstiege = React.lazy(() => import('@/components/sections/altersvorsorge/AltersvorsorgeEinstiege'));
+const SchwangerschaftAnlassEinstiege = React.lazy(() => import('@/components/sections/schwangerschaft/SchwangerschaftAnlassEinstiege'));
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -505,6 +507,12 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
                 ? <FaqAccordion faqs={article.faqs} />
                 : <RatgeberFaqList faqs={article.faqs} />}
             </section>
+          )}
+
+          {getSchwangerschaftRatgeberEinstiege(article.slug).length > 0 && (
+            <React.Suspense fallback={null}>
+              <SchwangerschaftAnlassEinstiege anlaesse={getSchwangerschaftRatgeberEinstiege(article.slug)} />
+            </React.Suspense>
           )}
 
           {article.internalCta && article.topic !== 'altersvorsorge' && (
