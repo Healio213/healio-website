@@ -22,6 +22,7 @@ export const LEISTUNGSSEITEN = Object.freeze([
   // Ambulant-Anlassseite Osteopathie (13.11.2026).
   '/ambulant/osteopathie',
   '/zahn',
+  '/zahn/behandlung-steht-an',
   '/stationaer',
   '/schwangerschaft',
   '/schwangerschaft/baby-geplant',

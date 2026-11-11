@@ -109,7 +109,7 @@ export const ConsentManager = () => {
   const descriptionId = useId();
   const language = pathname.startsWith('/en') ? 'en' : 'de';
   const copy = COPY[language];
-  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental' || pathname === '/zahn/behandlung-steht-an';
   // Prüfseite des Antrags (09.11.2026): Sie lädt keine optionalen Dienste, der
   // Hinweis würde dort nur den Inhalt verdecken. Die Einwilligung selbst bleibt
   // unverändert und gilt auf allen anderen Seiten.

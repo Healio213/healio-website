@@ -67,6 +67,8 @@ const META_PAGE_KEY_BY_PREFIX = Object.freeze({
 // Zusammenführen der Ratgeber-Serie (07.10.2026) also auch Babybonus, die drei
 // Familienplanungs-Ratgeber und die vier Krebsvorsorge-Ratgeber.
 const META_EXCLUDED_PATHS = new Set([
+  // Zahn-Anlassseite (10.11.2026): strenger als /zahn, auch ohne Meta, weil schon der Besuch eine anstehende Behandlung verrät.
+  '/zahn/behandlung-steht-an',
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.

@@ -74,6 +74,8 @@ const CLICK_ID_PARAMS = Object.freeze(['gclid', 'gbraid', 'wbraid']);
 // reichen nur die Klick-Kennung an /stationaer weiter (withAdClickIds in
 // src/lib/ratgeber-cta.js), gemessen wird dort.
 const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
+  // Zahn-Anlassseite (10.11.2026): strenger als /zahn, auch ohne Google Ads, weil schon der Besuch eine anstehende Behandlung verrät.
+  '/zahn/behandlung-steht-an',
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.

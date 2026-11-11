@@ -72,6 +72,8 @@ export const NEW_SENSITIVE_RATGEBER_PATHS = Object.freeze([
 ]);
 
 export const EXPECTED_GOOGLE_META_EXCLUDED_PATHS = Object.freeze([
+  // Zahn-Anlassseite (10.11.2026): strenger als /zahn, auch ohne Meta und Google Ads, weil schon der Besuch eine anstehende Behandlung verrät.
+  '/zahn/behandlung-steht-an',
   // Prüfseite des Antrags mit Gesundheitsfragen und IBAN (09.11.2026): nie messen.
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
@@ -108,6 +110,8 @@ export const EXPECTED_ANALYTICS_EXCLUDED_PATHS = Object.freeze([
   '/antrag/aufnehmen',
   '/zahn',
   '/en/dental',
+  // Zahn-Anlassseite (10.11.2026): schon der Besuch verrät eine anstehende Behandlung (Art. 9 DSGVO), gleiche Stille wie /zahn.
+  '/zahn/behandlung-steht-an',
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',

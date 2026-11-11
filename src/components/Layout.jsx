@@ -31,6 +31,7 @@ const Layout = () => {
     '/ambulant',
     '/en/outpatient',
     '/zahn',
+    '/zahn/behandlung-steht-an',
     '/en/dental',
     '/stationaer',
     '/en/inpatient',

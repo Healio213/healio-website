@@ -104,7 +104,7 @@ const categoryContexts = new Map([
 ]);
 const pageContexts = new Map([
   ['/ambulant', 'outpatient'], ['/en/outpatient', 'outpatient'],
-  ['/zahn', 'dental'], ['/en/dental', 'dental'],
+  ['/zahn', 'dental'], ['/en/dental', 'dental'], ['/zahn/behandlung-steht-an', 'dental'],
   ['/stationaer', 'inpatient'], ['/en/inpatient', 'inpatient'],
 ]);
 

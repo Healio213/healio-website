@@ -32,6 +32,7 @@ import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '
 import { getRatgeberEinstiege } from '@/content/altersvorsorgeZielgruppen/ratgeberZuordnung';
 import { getSchwangerschaftRatgeberEinstiege } from '@/content/schwangerschaftAnlaesse/ratgeberZuordnung';
 import { getAmbulantRatgeberEinstiege } from '@/content/ambulantAnlaesse/ratgeberZuordnung';
+import { getZahnRatgeberEinstiege } from '@/content/zahnAnlaesse/ratgeberZuordnung';
 
 // Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
 // Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
@@ -44,6 +45,7 @@ const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgebe
 const AltersvorsorgeEinstiege = React.lazy(() => import('@/components/sections/altersvorsorge/AltersvorsorgeEinstiege'));
 const SchwangerschaftAnlassEinstiege = React.lazy(() => import('@/components/sections/schwangerschaft/SchwangerschaftAnlassEinstiege'));
 const AmbulantAnlassEinstiege = React.lazy(() => import('@/components/sections/ambulant/AmbulantAnlassEinstiege'));
+const ZahnAnlassEinstiege = React.lazy(() => import('@/components/sections/dental/ZahnAnlassEinstiege'));
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -520,6 +522,12 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
           {getAmbulantRatgeberEinstiege(article.slug).length > 0 && (
             <React.Suspense fallback={null}>
               <AmbulantAnlassEinstiege anlaesse={getAmbulantRatgeberEinstiege(article.slug)} />
+            </React.Suspense>
+          )}
+
+          {getZahnRatgeberEinstiege(article.slug).length > 0 && (
+            <React.Suspense fallback={null}>
+              <ZahnAnlassEinstiege anlaesse={getZahnRatgeberEinstiege(article.slug)} />
             </React.Suspense>
           )}
 

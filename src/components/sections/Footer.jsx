@@ -126,7 +126,7 @@ const Footer = ({ hideCta = false, hideAppPromotion = false, formalApp = false }
   const { t } = useTranslation('common');
   const { getPath, lang } = useLanguage();
   const { pathname } = useLocation();
-  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental' || pathname === '/zahn/behandlung-steht-an';
 
   // Linkgruppen als Daten, damit Handy-Aufklapper und Desktop-Liste dieselben
   // Links zeigen. Reihenfolge und Bedingungen wie bisher.

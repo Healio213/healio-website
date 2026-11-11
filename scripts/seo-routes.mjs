@@ -16,6 +16,8 @@ import { schwangerschaftAnlassSeiten } from '../src/content/schwangerschaftAnlae
 import { schwangerschaftAnlassSeoRoute } from '../src/content/schwangerschaftAnlaesse/seo.js';
 import { ambulantAnlassSeiten } from '../src/content/ambulantAnlaesse/index.js';
 import { ambulantAnlassSeoRoute } from '../src/content/ambulantAnlaesse/seo.js';
+import { zahnAnlassSeiten } from '../src/content/zahnAnlaesse/index.js';
+import { zahnAnlassSeoRoute } from '../src/content/zahnAnlaesse/seo.js';
 import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
@@ -110,6 +112,8 @@ export const seoRoutes = [
   ...schwangerschaftAnlassSeiten.map(schwangerschaftAnlassSeoRoute),
   // Ambulant-Anlassseiten (Seitenplan 13.11.2026)
   ...ambulantAnlassSeiten.map(ambulantAnlassSeoRoute),
+  // Zahn-Anlassseiten (Seitenplan 10.11.2026)
+  ...zahnAnlassSeiten.map(zahnAnlassSeoRoute),
   {
     path: '/altersvorsorgedepot/danke',
     title: 'Startinfos zum Altersvorsorgedepot | Healio',
