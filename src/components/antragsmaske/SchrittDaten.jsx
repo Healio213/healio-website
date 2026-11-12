@@ -45,7 +45,7 @@ function Eingabe({
     return (
       <div className="min-w-0" data-gesperrt={feld.id}>
         <p className="font-display text-base font-extrabold text-home-midnight">{feld.label}</p>
-        <p id={`feld-${feld.id}`} className="mt-1.5 flex min-h-12 items-center rounded-xl border-2 border-slate-300 bg-slate-50 px-4 py-3 text-base text-home-midnight">{feld.wert ?? wert}</p>
+        <p id={`feld-${feld.id}`} className="mt-1.5 flex min-h-12 items-center rounded-xl bg-home-ice px-4 py-3 ring-1 ring-home-midnight/10 text-base text-home-midnight">{feld.wert ?? wert}</p>
         {feld.hinweis && <p className="mt-1 text-base leading-6 text-home-slate">{feld.hinweis}</p>}
       </div>
     );

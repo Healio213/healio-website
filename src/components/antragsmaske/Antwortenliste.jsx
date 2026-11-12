@@ -62,7 +62,7 @@ export default function Antwortenliste({
   definition, daten, kontext, aendern, className,
 }) {
   return (
-    <ul className={cx('rounded-[1.2rem] border-2 border-slate-300 bg-white px-4 py-1', className)} data-antwortenliste="">
+    <ul className={cx('rounded-[1.4rem] bg-white px-5 py-1 ring-1 ring-home-midnight/10', className)} data-antwortenliste="">
       {sichtbareFragen(definition, kontext).map((frage) => {
         const folge = daten.antworten[frage.id] === 'ja' ? folgeAngaben(frage, daten.antworten, kontext) : [];
         return (
@@ -72,7 +72,7 @@ export default function Antwortenliste({
               <Wortlaut text={frageWortlaut(frage)} />
               <span className="mt-0.5 block break-words text-base font-bold leading-6 text-home-midnight">{antwortText(frage, daten.antworten, kontext)}</span>
               {folge.length > 0 && (
-                <ul className="mt-1 space-y-1 border-l-4 border-slate-200 pl-3" data-folgeangaben="">
+                <ul className="mt-2 space-y-1 rounded-[0.8rem] bg-home-ice px-3 py-2" data-folgeangaben="">
                   {folge.map((eintrag) => (
                     <li key={eintrag.id} className="text-base leading-6">
                       <span className="block text-home-slate">{eintrag.frage}</span>

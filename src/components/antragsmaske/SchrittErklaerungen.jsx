@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText } from 'lucide-react';
+import { FileText, Info, Mail } from 'lucide-react';
 import { bedingungErfuellt } from '@/lib/antragsmaske/regeln';
 import {
   FehlerText, Gruppe, LINK, NeuerTab, OptionCard, TRENNUNG, cx, schuetze,
@@ -71,9 +71,12 @@ export default function SchrittErklaerungen({
       {teil.eintraege.map((eintrag) => {
         if (eintrag.art === 'hinweis') {
           return (
-            <div key={eintrag.text.slice(0, 30)} className={cx('border-l-4 border-emerald-700 bg-white py-2 pl-3 pr-2 text-base leading-7 text-home-midnight', TRENNUNG)}>
-              <p>{schuetze(eintrag.text)}</p>
-              {eintrag.terminLink && <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Termin vereinbaren<NeuerTab /></a>}
+            <div key={eintrag.text.slice(0, 30)} className={cx('flex gap-3 rounded-[1.2rem] bg-home-mint/10 p-4 text-base leading-7 text-home-midnight ring-1 ring-emerald-900/10', TRENNUNG)}>
+              <Info className="mt-1 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+              <div className="min-w-0">
+                <p>{schuetze(eintrag.text)}</p>
+                {eintrag.terminLink && <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Termin vereinbaren<NeuerTab /></a>}
+              </div>
             </div>
           );
         }
@@ -108,6 +111,10 @@ export default function SchrittErklaerungen({
         if (eintrag.art === 'unterlagen') {
           return (
             <Karte key={eintrag.key} titel={eintrag.titel}>
+              <p className="flex gap-3 rounded-[1rem] bg-home-ice p-3 text-base leading-6 text-home-midnight" data-unterlagen-mail="">
+                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                <span>Alle Vertragsunterlagen und Produktinformationen bekommst du mit der Bestätigung per E-Mail über einen geschützten Link.</span>
+              </p>
               <Unterlagen eintrag={eintrag} kontext={kontext} oeffnen={oeffnen} />
               {eintrag.haken && (
               <Haken feldKey={eintrag.key} checked={daten.erklaerungen[eintrag.key]} onChange={(wert) => setze(eintrag.key, wert)} fehler={fehler[eintrag.key]}>
@@ -119,8 +126,8 @@ export default function SchrittErklaerungen({
           );
         }
         return (
-          <Karte key={eintrag.key} titel={eintrag.titel}>
-            {eintrag.warnung && <p className="rounded-[1rem] border-2 border-amber-400 bg-amber-50 p-3 text-base leading-7 text-amber-950">{schuetze(eintrag.warnung)}</p>}
+          <Karte key={eintrag.key} titel={eintrag.titel} freiwillig={eintrag.pflicht === false}>
+            {eintrag.warnung && <p className="rounded-[1rem] bg-amber-50 p-4 text-base leading-7 text-amber-950 ring-1 ring-amber-300">{schuetze(eintrag.warnung)}</p>}
             {eintrag.terminLink && (
               <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Termin vereinbaren<NeuerTab /></a>
             )}
@@ -137,7 +144,14 @@ export default function SchrittErklaerungen({
                 <span>{eintrag.dokument}</span>
               </p>
             )}
-            <Haken feldKey={eintrag.key} checked={daten.erklaerungen[eintrag.key]} onChange={(wert) => setze(eintrag.key, wert)} fehler={fehler[eintrag.key]}>
+            <Haken
+              feldKey={eintrag.key}
+              checked={daten.erklaerungen[eintrag.key]}
+              onChange={(wert) => setze(eintrag.key, wert)}
+              fehler={fehler[eintrag.key]}
+              wortlaut={eintrag.hakenZusatz ? null : eintrag.haken}
+              zusatz={eintrag.freiwilligText && <span className="block text-home-slate">{eintrag.freiwilligText}</span>}
+            >
               {schuetze(eintrag.haken)}
               {eintrag.hakenZusatz && <span className="mt-2 block">{eintrag.hakenZusatz}</span>}
               {eintrag.freiwilligText && <span className="block text-home-slate">{eintrag.freiwilligText}</span>}

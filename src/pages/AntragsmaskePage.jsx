@@ -1,19 +1,19 @@
 import React, { useRef } from 'react';
 import { CalendarDays, Phone } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import CampaignShell from '@/components/campaign/CampaignShell';
 import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
 import { definitionFuer } from '@/data/antrag';
 import Antragsmaske from '@/components/antragsmaske/Antragsmaske';
+import ZahnStrecke from '@/components/antragsmaske/ZahnStrecke';
+import { MaskenRahmen, PRODUKTSEITE } from '@/components/antragsmaske/rahmen';
 import { TERMIN_LINK, telefonLink } from '@/components/antragsmaske/teile';
 import { schuetze } from '@/components/antrag/ui';
 
 // Eigene Antragsmaske /antrag/ambulant, /antrag/zahn, /antrag/stationaer
 // (12.11.2026). Ohne Layout, noindex, ohne Messung, Nita-Leiste, WhatsApp und
-// Cookie-Hinweis (wie /antrag/pruefen). Hinter HEALIO_ANTRAGSMASKE_AKTIV;
+// Cookie-Hinweis (wie /antrag/pruefen). /antrag/zahn beginnt mit der
+// Vorabfrage (ZahnStrecke) und führt zur Bayerischen oder zur UKV. Hinter HEALIO_ANTRAGSMASKE_AKTIV;
 // Sparten, deren Definition noch ein Gerüst ist, zeigen nur die anderen Wege.
-
-const PRODUKTSEITE = { ambulant: '/ambulant', zahn: '/zahn', stationaer: '/stationaer' };
 
 function AndereWege({ definition, titelRef }) {
   const wege = [
@@ -62,13 +62,11 @@ export default function AntragsmaskePage({ sparte }) {
         description={definition?.beschreibung || 'Dein Antrag bei Healio.'}
         robots="noindex, nofollow"
       />
-      <CampaignShell trustNote="Verschlüsselt übertragen">
-        <div className="flex min-h-[calc(100dvh-3.5rem)] flex-col">
-          {aktiv
-            ? <Antragsmaske definition={definition} />
-            : <div className="mx-auto w-full max-w-3xl break-words px-4 py-8 sm:py-12"><AndereWege definition={definition} titelRef={titelRef} /></div>}
-        </div>
-      </CampaignShell>
+      <MaskenRahmen sparte={definition?.sparte}>
+        {aktiv && sparte === 'zahn' && <ZahnStrecke definition={definition} />}
+        {aktiv && sparte !== 'zahn' && <Antragsmaske definition={definition} />}
+        {!aktiv && <div className="mx-auto w-full max-w-3xl break-words px-4 py-8 sm:py-12"><AndereWege definition={definition} titelRef={titelRef} /></div>}
+      </MaskenRahmen>
     </div>
   );
 }

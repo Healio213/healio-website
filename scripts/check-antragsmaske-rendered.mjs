@@ -337,6 +337,24 @@ async function zahnCheckBayerische(page) {
   await klick(/^Nein, nichts davon/);
 }
 
+// Vorabfrage der Zahn-Strecke /antrag/zahn (Zahn-Check-Zuordnung): Antworten,
+// dann Geburtsdatum (und PLZ), Ergebnis, Start in die Maske des Ziels.
+async function zahnVorab(page, antworten, { datum = '05.03.1990', plz = null, ziel = null, starten = true } = {}) {
+  for (const [frage, wert] of antworten) {
+    await page.waitForSelector(`[data-vorab-frage="${frage}"]`);
+    await page.click(`[data-vorab-antwort="${wert}"]`);
+  }
+  if (ziel === 'telefon') { await page.waitForSelector('[data-vorab-ergebnis="telefon"]'); return; }
+  await page.waitForSelector('[data-vorab-angaben]');
+  await page.fill('#vorab-geburtsdatum', datum);
+  if (plz) await page.fill('#vorab-plz', plz);
+  await page.click('[data-vorab-weiter]');
+  if (!starten) return;
+  await page.waitForSelector(`[data-vorab-ergebnis="${ziel}"]`);
+  await page.click('[data-vorab-start]');
+}
+const VORAB_SOFORT = [['q1', 'ja'], ['q2', 'keine'], ['q3', 'nein'], ['schmelz', 'nein']];
+
 async function zahnDurchlauf(browser, breite, viaWahl) {
   const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
   const page = await context.newPage();
@@ -354,6 +372,12 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
     await page.click('[data-weg="allein"]');
   } else {
     await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+    // Direkt aufgerufen: erst Healios Vorabfrage, dann ohne Bruch die Bayerische.
+    await zahnVorab(page, VORAB_SOFORT, { plz: '94130', ziel: 'bayerische-sofort', starten: false });
+    await page.waitForSelector('[data-vorab-ergebnis="bayerische-sofort"]');
+    await page.waitForFunction(() => /63,70 EUR/.test(document.querySelector('[data-vorab-preis]')?.textContent || ''));
+    pruefe((await page.textContent('[data-vorab-ergebnis]')).includes('Bayerische'), 'Ergebnis nennt den Versicherer');
+    await page.click('[data-vorab-start]');
   }
   await bildschirm(page, 'tarif');
   await pruefeSeite(page, `${name} Tarif`);
@@ -365,7 +389,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await page.waitForSelector('[data-gesamtbeitrag]');
   pruefe((await page.textContent('[data-stufe-beitrag="PRESTIGE"]')).includes('33,80 EUR'), 'Prestige Land 36 Jahre 33,80 EUR');
   pruefe((await page.textContent('[data-stufe-beitrag="SMART"]')).includes('14,60 EUR'), 'Smart 14,60 EUR');
-  await page.locator('label:has(#feld-baustein-ZAHN_SOFORT)').click();
+  if (viaWahl) await page.locator('label:has(#feld-baustein-ZAHN_SOFORT)').click();
+  else pruefe(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked(), 'ZAHN Sofort aus der Vorabfrage vorgewählt');
   await page.waitForFunction(() => /63,70 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
   await page.fill('#feld-plzTarif', '20095');
   await page.waitForFunction(() => /74,00 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
@@ -380,6 +405,11 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   for (const id of ['z1', 'z2', 'z3', 'z4', 'z5']) {
     await bildschirm(page, `frage:${id}`);
     await page.waitForTimeout(650);
+    if (!viaWahl) {
+      // Vorabfrage deckt Frage 1 bis 4 genau: vorbelegt, Wortlaut sichtbar, Bestätigung per Tipp.
+      const vorbelegt = await page.locator('[data-vorbelegt]').count();
+      pruefe(id === 'z5' ? vorbelegt === 0 : vorbelegt === 1 && await page.getAttribute(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`, 'data-antwort') === 'nein', `${id}: Vorbelegung aus der Vorabfrage`);
+    }
     await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
   }
   await bildschirm(page, 'beitrag');
@@ -449,15 +479,16 @@ async function zahnAblehnung(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  // Sicherheitsnetz: Vorabfrage führt zur Bayerischen, der Kunde wechselt auf Smart und antwortet anders.
+  await zahnVorab(page, VORAB_SOFORT, { plz: '20095', ziel: 'bayerische-sofort' });
+  await bildschirm(page, 'tarif');
   await page.locator('label:has(input[name="tarif"][value="SMART"])').click();
-  await page.fill('#feld-geburtsdatum', '05.03.1990');
-  await page.locator('#feld-geburtsdatum').blur();
-  await page.fill('#feld-plzTarif', '20095');
   await page.waitForSelector('[data-gesamtbeitrag]');
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
   await bildschirm(page, 'frage:z1s');
+  pruefe(await page.locator('[data-vorbelegt]').count() === 0, 'Smart: Frage 1 der kurzen Fassung kommt unbeantwortet');
   pruefe((await page.textContent('#frage-z1s-text')).trim() === 'Haben Sie fehlende Zähne, die noch nicht ersetzt sind?', 'Smart: kurze Frage 1');
   await page.waitForTimeout(650);
   await page.click('[data-antwort="ja"]');
@@ -466,11 +497,11 @@ async function zahnAblehnung(browser) {
   const hinweis = await page.textContent('[data-pruefung]');
   pruefe(!/barmenia/i.test(hinweis) && /UKV ZahnPRIVAT/.test(hinweis) && /Zusammen am Telefon/.test(hinweis), 'Auswege UKV und Telefon, kein Barmenia');
   await foto(page, '390-zahn-ablehnung');
-  // Altersgrenze 71
+  // Altersgrenze 71: schon in der Vorabfrage, bevor ein Ergebnis kommt.
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-  await page.fill('#feld-geburtsdatum', '15.05.1955');
-  await page.locator('#feld-geburtsdatum').blur();
+  await zahnVorab(page, VORAB_SOFORT, { datum: '15.05.1955', plz: '20095', starten: false });
   await page.waitForSelector('[data-altersgrenze]');
+  pruefe(await page.locator('[data-vorab-ergebnis]').count() === 0, '71 Jahre: kein Ergebnis, Weg ans Telefon');
   await foto(page, '390-zahn-71-jahre');
   await context.close();
 }
@@ -642,12 +673,11 @@ async function ukvDurchlauf(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await mock('/__test/zuruecksetzen', 'POST');
-  // Einstieg über den Ausweg der Bayerischen (fehlende Zähne, Smart).
+  // Einstieg über den Ausweg der Bayerischen (fehlende Zähne, Smart): das Sicherheitsnetz bleibt.
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await zahnVorab(page, VORAB_SOFORT, { plz: '20095', ziel: 'bayerische-sofort' });
+  await bildschirm(page, 'tarif');
   await page.locator('label:has(input[name="tarif"][value="SMART"])').click();
-  await page.fill('#feld-geburtsdatum', '05.03.1990');
-  await page.locator('#feld-geburtsdatum').blur();
-  await page.fill('#feld-plzTarif', '20095');
   await page.waitForSelector('[data-gesamtbeitrag]');
   await weiter(page);
   await bildschirm(page, 'hinweis');
@@ -960,7 +990,49 @@ async function unterlagenLeerListe(browser) {
   await context.close();
 }
 
+// Vorabfrage zur UKV (zwei fehlende Zähne) und zum Telefon (mehr als 3 Zähne).
+async function zahnVorabUkv(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await pruefeSeite(page, '390 Zahn Vorabfrage');
+  await zahnVorab(page, [['q1', 'nein'], ['q2', 'wenige'], ['anzahl', '2']], { ziel: 'ukv', starten: false });
+  await page.waitForSelector('[data-vorab-ergebnis="ukv"]');
+  const ergebnis = await page.textContent('[data-vorab-ergebnis]');
+  pruefe(ergebnis.includes('Union Krankenversicherung') && /\d+,\d\d EUR/.test(ergebnis) && ergebnis.includes('2 fehlende Zähne'), 'UKV-Ergebnis mit Versicherer, Beitrag ab und Zuschlag');
+  pruefe(await page.locator('[data-vorab-ergebnis] [data-weg], [data-vorab-ergebnis] a[href*="diebayerische"]').count() === 0, 'keine Wahl zwischen Versicherern');
+  await page.click('[data-vorab-start]');
+  await bildschirm(page, 'tarif');
+  pruefe(page.url().endsWith('/antrag/zahn'), 'kein Seitenwechsel');
+  pruefe(await page.inputValue('#feld-geburtsdatum') === '05.03.1990' && await page.locator('input[name="tarif"]:checked').count() === 0, 'Geburtsdatum übernommen, Stufe frei (Zahn-Check nennt bei Lücke keine)');
+  await page.locator('label:has(input[name="tarif"][value="Z90"])').click();
+  await weiter(page);
+  await bildschirm(page, 'person');
+  await page.locator('label:has(input[name="anrede"][value="frau"])').click();
+  await page.fill('#feld-vorname', 'Lena');
+  await page.fill('#feld-nachname', 'Muster');
+  await weiter(page);
+  await bildschirm(page, 'hinweis');
+  await weiter(page);
+  await bildschirm(page, 'frage:TF0021');
+  pruefe(await page.locator('input[name="frage-TF0021"][value="2"]').isChecked() && await page.locator('[data-vorbelegt]').count() === 1, 'TF0021 mit 2 Zähnen vorbelegt');
+  await weiter(page);
+  await bildschirm(page, 'frage:GF0073');
+  pruefe(await page.locator('[data-vorbelegt]').count() === 1, 'GF0073 aus „Nein, nichts davon“ vorbelegt');
+  await context.close();
+
+  const zweiter = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const seite = await zweiter.newPage();
+  await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await zahnVorab(seite, [['q1', 'nein'], ['q2', 'viele']], { ziel: 'telefon' });
+  pruefe(await seite.locator('[data-vorab-ergebnis="telefon"] a[href^="/antrag/aufnehmen"], [data-vorab-ergebnis="telefon"] a[href="/terminvereinbarung"]').count() === 1, 'Telefon-Ergebnis mit Weg zu Nita oder Termin');
+  pruefe(await seite.locator('[data-vorab-start]').count() === 0, 'kein Antrag ohne passenden Tarif');
+  await zweiter.close();
+}
+
 async function alleWeiteren(browser) {
+    await zahnVorabUkv(browser);
     await zahnDurchlauf(browser, 390, true);
     await zahnDurchlauf(browser, 1280, false);
     await zahnAblehnung(browser);

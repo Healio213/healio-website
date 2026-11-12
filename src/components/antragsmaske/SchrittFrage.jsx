@@ -7,13 +7,16 @@ import {
 import { UKV_URL } from '@/components/sections/dental/dentalLinks';
 import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV } from '@/config/contactChannels';
 import { TERMIN_LINK, telefonLink } from './teile';
+import { WARUM_GESUNDHEIT } from './anzeige';
+
+const wortlautVon = (definition) => `Wortlaut ${definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`}`;
 
 // Schritt 2: eine Frage je Bildschirm, Folgefragen auf demselben Bildschirm
 // darunter (wie 1a der Prüfseite). Wortlaut und Reihenfolge kommen aus der
 // Definition. Kein laufender Preis auf diesen Bildschirmen.
 
 const EINBLENDEN = 'motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-200';
-const KARTE = 'rounded-[1.4rem] border-2 border-slate-400 bg-white px-3 pb-3 pt-3 sm:px-4 sm:pb-4 sm:pt-4';
+const KARTE = 'rounded-[1.4rem] bg-white p-4 shadow-[0_1px_2px_rgba(7,17,31,0.06),0_16px_32px_-24px_rgba(7,17,31,0.3)] ring-1 ring-home-midnight/10 sm:p-6';
 
 export function fehlerHinweis(definition, daten) {
   const bestaetigung = definition.gesundheit?.vorspann?.bestaetigung;
@@ -34,23 +37,29 @@ export function SchrittHinweis({
   const vorspann = definition.gesundheit.vorspann;
   const bestaetigung = vorspann.bestaetigung;
   return (
-    <div className="space-y-4">
-      <h2 ref={ueberschriftRef} tabIndex={-1} className="font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
-        <span className="block text-base font-extrabold text-emerald-900">{vorspann.vorTitel || `Vor den ${anzahl} Fragen`}</span>
-        {vorspann.titel}
-      </h2>
-      <div className={cx('space-y-3 break-words rounded-[1.2rem] border-2 border-amber-400 bg-amber-50 p-4 text-base leading-7 text-amber-950', TRENNUNG)}>
-        {vorspann.absaetze.map((absatz) => (typeof absatz === 'string'
-          ? <p key={absatz.slice(0, 40)}>{absatz}</p>
-          : (
-            <p key={absatz.text.slice(0, 40)}>
-              {absatz.text}
-              {' '}
-              <a href={absatz.link.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className="font-semibold underline underline-offset-4">{absatz.link.text}<span className="sr-only"> (öffnet in neuem Tab)</span></a>
-              {absatz.nachLink}
-            </p>
-          )))}
+    <div className="space-y-5">
+      <div>
+        <h2 ref={ueberschriftRef} tabIndex={-1} className="font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
+          Kurz vorweg: {anzahl} {anzahl === 1 ? 'Frage' : 'Fragen'} zu deiner Gesundheit
+        </h2>
+        <p className="mt-1 text-base leading-7 text-home-slate">{WARUM_GESUNDHEIT}</p>
       </div>
+      <section className={cx(KARTE, 'space-y-3')} aria-labelledby="hinweis-titel">
+        <p className="text-base font-semibold text-home-slate">{wortlautVon(definition)}</p>
+        <h3 id="hinweis-titel" className="font-display text-lg font-extrabold text-home-midnight">{vorspann.titel}</h3>
+        <div className={cx('max-h-[22rem] space-y-3 overflow-y-auto break-words border-l-2 border-emerald-600/40 pl-4 text-base leading-7 text-home-midnight', TRENNUNG)} tabIndex={0} aria-label={vorspann.titel}>
+          {vorspann.absaetze.map((absatz) => (typeof absatz === 'string'
+            ? <p key={absatz.slice(0, 40)}>{absatz}</p>
+            : (
+              <p key={absatz.text.slice(0, 40)}>
+                {absatz.text}
+                {' '}
+                <a href={absatz.link.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className="font-semibold text-emerald-800 underline underline-offset-4">{absatz.link.text}<span className="sr-only"> (öffnet in neuem Tab)</span></a>
+                {absatz.nachLink}
+              </p>
+            )))}
+        </div>
+      </section>
       {vorspann.aufklapper && (
         <Aufklapper titel={vorspann.aufklapper.titel}>
           {vorspann.aufklapper.absaetze.map((absatz) => <p key={absatz.slice(0, 40)}>{absatz}</p>)}
@@ -84,7 +93,7 @@ function JaNein({
     <div data-janein="" className="pt-2">
       <FehlerText id={fehlerId}>{fehler}</FehlerText>
       {frage.zuschlagText && <p className="text-base leading-6 text-home-slate">{frage.zuschlagText}</p>}
-      <div role="group" aria-labelledby={`frage-${frage.id}-text`} className="mt-2 grid grid-cols-2 gap-3">
+      <div role="group" aria-labelledby={`frage-${frage.id}-text`} className="mt-4 grid grid-cols-2 gap-3">
         {['ja', 'nein'].map((antwort) => {
           const aktiv = wert === antwort;
           return (
@@ -99,12 +108,12 @@ function JaNein({
               onClick={() => beantworte(frage, antwort)}
               className={cx(
                 FOKUS,
-                'inline-flex min-h-14 min-w-0 items-center justify-center gap-2 rounded-full border-2 px-4 font-display text-lg font-extrabold transition',
-                aktiv ? 'border-emerald-700 bg-home-mint text-home-midnight' : 'border-slate-500 bg-white text-home-midnight [@media(hover:hover)]:hover:border-home-midnight',
+                'inline-flex min-h-[4.5rem] min-w-0 items-center justify-center gap-2 rounded-[1.2rem] border-2 px-4 font-display text-xl font-extrabold transition active:scale-[0.98] motion-reduce:active:scale-100',
+                aktiv ? 'border-emerald-700 bg-home-mint text-home-midnight shadow-[0_12px_24px_-12px_rgba(37,201,144,0.7)]' : 'border-home-midnight/20 bg-white text-home-midnight [@media(hover:hover)]:hover:border-home-midnight [@media(hover:hover)]:hover:bg-home-ice',
                 gesperrt && 'pointer-events-none',
               )}
             >
-              {aktiv && <Check className="h-5 w-5" strokeWidth={3} aria-hidden="true" />}
+              {aktiv && <Check className="h-6 w-6" strokeWidth={3} aria-hidden="true" />}
               {antwort === 'ja' ? 'Ja' : 'Nein'}
             </button>
           );
@@ -243,7 +252,7 @@ function Folgefragen({
 function Stamm({ frage }) {
   if (frage.stamm) {
     return (
-      <p className="border-l-4 border-slate-300 pl-3 text-base leading-6 text-home-slate">
+      <p className="rounded-[1rem] bg-home-ice px-4 py-3 text-base leading-6 text-home-slate ring-1 ring-home-midnight/5">
         <span className="font-bold text-home-midnight">{frage.stamm.label}: </span>
         „{frage.stamm.text}“
       </p>
@@ -288,23 +297,33 @@ function PruefungHinweis({ wirkung, sparte }) {
 }
 
 export default function SchrittFrage({
-  definition, frage, nummer, anzahl, daten, setAntwort, beantworte, gesperrt, fehler, ueberschriftRef, kontext, stop, weiter,
+  definition, frage, nummer, anzahl, daten, setAntwort, beantworte, gesperrt, fehler, ueberschriftRef, kontext, stop, weiter, vorbelegt = false, vorbelegtVon,
 }) {
   const folge = sichtbareFolgefragen(frage, kontext);
   // Bei Folgefragen ohne Hinweis: Hinweis bei „ja“ trotzdem zeigen (SDK stationär).
   const wert = daten.antworten[frage.id];
   return (
-    <div className="space-y-3">
-      <h2 ref={ueberschriftRef} tabIndex={-1} className="font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
-        {frage.titel || `Frage ${nummer}`}
-        <span className="sr-only">, </span>
-        <span className="ml-2 whitespace-nowrap text-base font-bold text-emerald-900">
-          <span aria-hidden="true">· </span>
-          {nummer} von {anzahl}
-        </span>
-      </h2>
+    <div className="space-y-4">
+      <div>
+        <h2 ref={ueberschriftRef} tabIndex={-1} className="flex flex-wrap items-baseline gap-x-3 font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
+          <span className="min-w-0">{frage.titel || `Frage ${nummer}`}</span>
+          <span className="sr-only">, </span>
+          <span className="whitespace-nowrap text-base font-bold text-emerald-800">{nummer} von {anzahl}</span>
+        </h2>
+        <div className="mt-2 flex gap-1" aria-hidden="true">
+          {Array.from({ length: anzahl }, (_, stelle) => <span key={stelle} className={cx('h-1 flex-1 rounded-full', stelle < nummer ? 'bg-emerald-600' : 'bg-home-midnight/10')} />)}
+        </div>
+        {nummer === 1 && !definition.gesundheit.vorspann && <p className="mt-3 text-base leading-7 text-home-slate">{WARUM_GESUNDHEIT}</p>}
+      </div>
+      {vorbelegt && (
+        <p className="flex gap-2 rounded-[1rem] bg-home-mint/15 px-4 py-3 text-base leading-6 text-emerald-950" data-vorbelegt="">
+          <Check className="mt-1 h-4 w-4 shrink-0" strokeWidth={3} aria-hidden="true" />
+          <span>{vorbelegtVon || 'Aus deinen Antworten vorab übernommen.'} Stimmt das so? Tippe deine Antwort zur Bestätigung an.</span>
+        </p>
+      )}
       <Stamm frage={frage} />
       <div key={frage.id} data-fehlerblock="" className={cx(KARTE, EINBLENDEN)}>
+        <p className="mb-2 text-base font-semibold text-home-slate">{wortlautVon(definition)}</p>
         {frage.liste && (
           <ul id={`frage-${frage.id}-text`} className="mb-1 space-y-1 text-base font-semibold leading-6 text-home-midnight sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0">
             {frage.liste.map((eintrag) => (

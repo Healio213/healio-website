@@ -3,7 +3,7 @@ import { euro, ibanOhneLeer } from '@/lib/antragsmaske/regeln';
 import { auftragSatz, beitragsAnzeige } from '@/lib/antragsmaske/vertrag';
 import { AendernKnopf } from '@/components/antrag/Antworten';
 import {
-  Button, Callout, bodyText, schuetze,
+  Button, Callout, FOKUS, bodyText, cx, schuetze,
 } from '@/components/antrag/ui';
 import Antwortenliste from './Antwortenliste';
 import { TeilKopf } from './teile';
@@ -24,6 +24,23 @@ function Pruefzeile({
   );
 }
 
+function Gruppe({ titel, children }) {
+  return (
+    <section className="rounded-[1.4rem] bg-white px-5 py-3 ring-1 ring-home-midnight/10">
+      <h3 className="pt-1 font-display text-lg font-extrabold text-home-midnight">{titel}</h3>
+      <ul className="mt-1">{children}</ul>
+    </section>
+  );
+}
+
+function AendernHell({ onClick, label }) {
+  return (
+    <button type="button" id="pruef-aendern-tarif" onClick={onClick} className={cx(FOKUS, 'inline-flex min-h-11 shrink-0 items-center rounded-full border border-white/30 px-4 font-semibold text-white focus-visible:ring-home-mint [@media(hover:hover)]:hover:border-home-mint')}>
+      ändern<span className="sr-only">: {label}</span>
+    </button>
+  );
+}
+
 export default function SchrittZusammenfassung({
   definition, daten, kontext, tarif, beginn, beitrag, geburtsdatumText, aendern, aendernFrage, ueberschriftRef,
   absenden, sendet, sendeFehler, beitragNeu,
@@ -32,37 +49,53 @@ export default function SchrittZusammenfassung({
   const anrede = (definition.person.anreden || []).find((eintrag) => eintrag.id === daten.anrede);
   const zahlweise = definition.zahlung.zahlweisen.find((eintrag) => eintrag.id === daten.zahlweise);
   const iban = ibanOhneLeer(daten.iban);
+  const bausteine = (definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id));
+  const anzeige = beitragsAnzeige(definition, daten, beitrag);
   return (
-    <div className="space-y-4">
-      <TeilKopf titel={definition.zusammenfassung?.titel || 'Zusammenfassung'} ueberschriftRef={ueberschriftRef} text="Bis du absendest, ist nichts abgeschlossen." />
+    <div className="space-y-5">
+      <TeilKopf titel={definition.zusammenfassung?.titel || 'Zusammenfassung'} ueberschriftRef={ueberschriftRef} text="Schau noch einmal drüber. Bis du absendest, ist nichts abgeschlossen." />
 
-      <ul className="rounded-[1.2rem] border-2 border-slate-300 bg-white px-4 py-1" data-uebersicht="">
-        <Pruefzeile label="Stufe" id="tarif" aendern={() => aendern('tarif')}>{tarif?.name}</Pruefzeile>
-        <Pruefzeile label="Beginn" id="beginn" aendern={() => aendern('tarif')}>{beginn?.label}</Pruefzeile>
-        {(definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id)).map((baustein) => (
-          <Pruefzeile key={baustein.id} label="Baustein" id={`baustein-${baustein.id}`} aendern={() => aendern('tarif')}>{baustein.name}</Pruefzeile>
-        ))}
-        <Pruefzeile label={beitragsAnzeige(definition, daten, beitrag).label}>{euro(beitrag?.beitrag)}</Pruefzeile>
-        <Pruefzeile label="Name" id="name" aendern={() => aendern('person')}>{[anrede?.label, f.vorname, f.nachname].filter(Boolean).join(' ')}</Pruefzeile>
-        <Pruefzeile label="Geburtsdatum" id="geburtsdatum" aendern={() => aendern('tarif')}>{geburtsdatumText}</Pruefzeile>
-        <Pruefzeile label="Adresse" id="adresse" aendern={() => aendern('anschrift')}>{[f.strasse, f.hausnummer].filter(Boolean).join(' ')}, {f.plz} {f.ort}</Pruefzeile>
-        <Pruefzeile label="Kontakt" id="kontakt" aendern={() => aendern('anschrift')}>
-          <span className="break-all">{f.email}</span>
-          <span className="block whitespace-nowrap font-bold">{f.telefon}</span>
-        </Pruefzeile>
-        {daten.bestaetigungen.gkv && (
-          <Pruefzeile label="Krankenversicherung" id="kasse" aendern={() => aendern('anschrift')}>
-            Gesetzlich versichert{String(f.krankenkasse || '').trim() ? `, ${String(f.krankenkasse).trim()}` : ''}
+      <div className="space-y-4" data-uebersicht="">
+        <section className="overflow-hidden rounded-[1.4rem] bg-home-midnight text-white">
+          <div className="flex flex-wrap items-end justify-between gap-3 px-5 pb-4 pt-5">
+            <div className="min-w-0">
+              <p className="text-base text-slate-300">{tarif?.name}{bausteine.map((baustein) => ` + ${baustein.name}`).join('')} bei {schuetze(definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`)}</p>
+              <p className="mt-1 text-base text-home-mint-active">{anzeige.label}</p>
+              <p className="whitespace-nowrap font-display text-4xl font-extrabold tracking-[-0.03em]">{euro(beitrag?.beitrag)}</p>
+            </div>
+            <AendernHell onClick={() => aendern('tarif')} label="Tarif und Beginn" />
+          </div>
+          <dl className="grid grid-cols-2 gap-px bg-white/10 text-base">
+            <div className="bg-home-midnight px-5 py-3"><dt className="text-slate-300">Stufe</dt><dd className="font-semibold">{tarif?.name}</dd></div>
+            <div className="bg-home-midnight px-5 py-3"><dt className="text-slate-300">Beginn</dt><dd className="font-semibold">{beginn?.label}</dd></div>
+          </dl>
+        </section>
+
+        <Gruppe titel="Über dich">
+          <Pruefzeile label="Name" id="name" aendern={() => aendern('person')}>{[anrede?.label, f.vorname, f.nachname].filter(Boolean).join(' ')}</Pruefzeile>
+          <Pruefzeile label="Geburtsdatum" id="geburtsdatum" aendern={() => aendern('tarif')}>{geburtsdatumText}</Pruefzeile>
+          <Pruefzeile label="Adresse" id="adresse" aendern={() => aendern('anschrift')}>{[f.strasse, f.hausnummer].filter(Boolean).join(' ')}, {f.plz} {f.ort}</Pruefzeile>
+          <Pruefzeile label="Kontakt" id="kontakt" aendern={() => aendern('anschrift')}>
+            <span className="break-all">{f.email}</span>
+            <span className="block whitespace-nowrap font-bold">{f.telefon}</span>
           </Pruefzeile>
-        )}
-        <Pruefzeile label="Zahlweise" id="zahlweise" aendern={() => aendern(definition.zahlweiseImTarif ? 'tarif' : 'zahlung')}>{zahlweise?.label}</Pruefzeile>
-        <Pruefzeile label="IBAN" id="iban" aendern={() => aendern('zahlung')}>{iban.length >= 4 ? `${iban.slice(0, 2)} …${iban.slice(-4)}` : ''}</Pruefzeile>
-      </ul>
+          {daten.bestaetigungen.gkv && (
+            <Pruefzeile label="Krankenversicherung" id="kasse" aendern={() => aendern('anschrift')}>
+              Gesetzlich versichert{String(f.krankenkasse || '').trim() ? `, ${String(f.krankenkasse).trim()}` : ''}
+            </Pruefzeile>
+          )}
+        </Gruppe>
 
-      <div className="rounded-[1.2rem] border-2 border-slate-300 bg-white px-4 py-2">
-        <h3 className="font-display text-lg font-extrabold text-home-midnight">Deine Antworten</h3>
-        <Antwortenliste definition={definition} daten={daten} kontext={kontext} aendern={aendernFrage} className="mt-1 !border-0 !px-0" />
+        <Gruppe titel="Zahlung">
+          <Pruefzeile label="Zahlweise" id="zahlweise" aendern={() => aendern(definition.zahlweiseImTarif ? 'tarif' : 'zahlung')}>{zahlweise?.label}</Pruefzeile>
+          <Pruefzeile label="IBAN" id="iban" aendern={() => aendern('zahlung')}>{iban.length >= 4 ? `${iban.slice(0, 2)} …${iban.slice(-4)}` : ''}</Pruefzeile>
+        </Gruppe>
       </div>
+
+      <section className="rounded-[1.4rem] bg-white px-5 py-4 ring-1 ring-home-midnight/10">
+        <h3 className="font-display text-lg font-extrabold text-home-midnight">Deine Antworten</h3>
+        <Antwortenliste definition={definition} daten={daten} kontext={kontext} aendern={aendernFrage} className="mt-1 !border-0 !px-0 !ring-0" />
+      </section>
 
       {beitragNeu && (
         <Callout tone="hinweis" title={`Dein Beitrag ist jetzt ${euro(beitragNeu)} im Monat.`} data-beitrag-neu="">
@@ -85,11 +118,11 @@ export default function SchrittZusammenfassung({
         </Callout>
       )}
 
-      <div>
+      <div className="rounded-[1.4rem] bg-home-ice p-5 ring-1 ring-emerald-900/10">
         <p className="text-base font-bold leading-7 text-home-midnight" data-auftrag="">{schuetze(auftragSatz(definition, daten, beitrag))}</p>
         {definition.absenden.vorbehalt && <p className={bodyText}>{schuetze(definition.absenden.vorbehalt)}</p>}
       </div>
-      <Button className="w-full sm:w-auto" onClick={absenden} disabled={sendet} aria-busy={sendet || undefined} id="knopf-absenden">
+      <Button className="w-full !min-h-14 text-lg sm:w-auto sm:px-10" onClick={absenden} disabled={sendet} aria-busy={sendet || undefined} id="knopf-absenden">
         {sendet ? 'Wird gesendet …' : definition.absenden.knopf}
       </Button>
     </div>

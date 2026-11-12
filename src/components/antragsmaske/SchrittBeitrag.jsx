@@ -51,7 +51,7 @@ export default function SchrittBeitrag({
         )}
       </div>
 
-      <ul className="rounded-[1.2rem] border-2 border-slate-300 bg-white px-4 py-1">
+      <ul className="rounded-[1.4rem] bg-white px-5 py-1 ring-1 ring-home-midnight/10">
         <Zeile label="Stufe" aendern={<AendernKnopf id="aendern-tarif" label="Stufe" onClick={() => aendern('tarif')} />}>{tarif?.name}</Zeile>
         {bausteine.map((baustein) => <Zeile key={baustein.id} label="Baustein" aendern={<AendernKnopf id={`aendern-${baustein.id}`} label={baustein.name} onClick={() => aendern('tarif')} />}>{baustein.name}</Zeile>)}
         {beitrag.dienst && zahlweise && <Zeile label="Zahlungsweise">{zahlweise.label}</Zeile>}
@@ -88,7 +88,7 @@ export default function SchrittBeitrag({
       </div>
 
       {definition.beitrag?.hinweisNachEingang && Object.values(daten.antworten).includes('ja') && (
-        <p className="rounded-[1rem] border-2 border-slate-300 bg-white p-3 text-base leading-7 text-home-midnight" data-hinweis-eingang="">{definition.beitrag.hinweisNachEingang}</p>
+        <p className="rounded-[1rem] bg-home-ice p-4 ring-1 ring-emerald-900/10 text-base leading-7 text-home-midnight" data-hinweis-eingang="">{definition.beitrag.hinweisNachEingang}</p>
       )}
       {definition.beitrag?.vorbehalt && <p className={bodyText}>{schuetze(definition.beitrag.vorbehalt)}</p>}
     </div>

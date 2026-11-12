@@ -1,7 +1,9 @@
 import React, {
   useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState,
 } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import {
+  ArrowLeft, ArrowRight, CheckCircle2, Inbox, Send, ShieldCheck,
+} from 'lucide-react';
 import {
   altersgrenze, antwortenBereinigt, beginnOptionenAus, berechneBeitrag, eintrittsalter, euro, parseDatum,
   sichtbareFolgefragen, sichtbareFragen, stopWirkungDerFrage,
@@ -25,6 +27,10 @@ import SchrittZusammenfassung from './SchrittZusammenfassung';
 import SchrittUnterlagenDownload from './SchrittUnterlagenDownload';
 import { fehlerUnterlagen } from './unterlagenPflicht';
 import { TelefonAusweg } from './teile';
+import {
+  Begruessung, DeinSchutzKarte, HilfeKarte, KARTE, KARTE_LG, Schrittleiste,
+} from './rahmen';
+import { dauerMinuten, kurzName } from './anzeige';
 
 /**
  * Eigene Antragsmaske /antrag/<sparte> (12.11.2026), gesteuert von der
@@ -83,6 +89,13 @@ export function startDaten(definition, vorbelegung = {}) {
   };
 }
 
+function mitVorab(start, vorabDaten) {
+  if (!vorabDaten) return start;
+  const neu = { ...start, ...vorabDaten };
+  if (vorabDaten.plz) neu.formular = { ...start.formular, plz: vorabDaten.plz };
+  return neu;
+}
+
 // Danke-Seite (Franks Vorgabe 12.11.2026): ehrlich, ohne Fristversprechen.
 export function dankePunkte(definition, email) {
   const beiDer = definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`;
@@ -95,33 +108,53 @@ export function dankePunkte(definition, email) {
   ].filter(Boolean);
 }
 
+// Die Punkte bleiben wortgleich (dankePunkte); die Seite ordnet sie in drei Schritte.
 function Danke({ definition, ergebnis, titelRef }) {
+  const punkte = dankePunkte(definition, ergebnis.email);
+  const vorbehalt = definition.absenden?.vorbehalt;
+  const schritte = [
+    { icon: Send, titel: 'Wir reichen ein', texte: punkte.slice(0, 2) },
+    { icon: ShieldCheck, titel: `Die ${definition.versicherer.kurz} bestätigt`, texte: punkte.slice(2, 3) },
+    { icon: Inbox, titel: 'Unterlagen per E-Mail', texte: [punkte[3], 'Alle Vertragsunterlagen und Produktinformationen bekommst du über einen geschützten Link.'] },
+  ];
   return (
     <div className="space-y-6" data-danke="">
-      <div className="flex flex-col items-start gap-3">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-home-mint/20 text-emerald-800">
-          <CheckCircle2 className="h-7 w-7" aria-hidden="true" />
-        </span>
-        <h1 ref={titelRef} tabIndex={-1} className="font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl">
-          Danke{ergebnis.vorname ? `, ${ergebnis.vorname}` : ''}. Dein Antrag ist bei uns.
-        </h1>
+      <div className={cx(KARTE, 'p-6 sm:p-10')}>
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-home-mint text-home-midnight shadow-[0_12px_24px_-8px_rgba(37,201,144,0.6)]">
+            <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <h1 ref={titelRef} tabIndex={-1} className="font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl">
+              Danke{ergebnis.vorname ? `, ${ergebnis.vorname}` : ''}. Dein Antrag ist bei uns.
+            </h1>
+            {ergebnis.kennung && (
+              <p className="mt-1 text-base text-home-slate">Deine Antragskennung: <span className="whitespace-nowrap font-bold text-home-midnight" data-kennung="">{ergebnis.kennung}</span></p>
+            )}
+          </div>
+        </div>
+        <dl className="mt-6 grid gap-px overflow-hidden rounded-[1.2rem] bg-home-midnight/10 sm:grid-cols-3">
+          <div className="bg-home-ice px-4 py-3"><dt className="text-base text-home-slate">Tarif bei {schuetze(definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`)}</dt><dd className="font-bold">{ergebnis.tarifName}</dd></div>
+          <div className="bg-home-ice px-4 py-3"><dt className="text-base text-home-slate">Beginn</dt><dd className="font-bold">{ergebnis.beginnText}</dd></div>
+          <div className="bg-home-ice px-4 py-3"><dt className="text-base text-home-slate">{ergebnis.jaehrlich ? 'Jahresbeitrag' : 'Monatsbeitrag'}</dt><dd className="whitespace-nowrap font-bold">{euro(ergebnis.beitrag)}</dd></div>
+        </dl>
       </div>
-      <ul className="rounded-[1.2rem] border-2 border-slate-300 bg-white px-4 py-1">
-        {ergebnis.kennung && <li className="flex justify-between gap-3 py-2"><span className="text-home-slate">Antragsnummer bei Healio</span><span className="font-bold" data-kennung="">{ergebnis.kennung}</span></li>}
-        <li className="flex justify-between gap-3 border-t border-slate-300 py-2"><span className="text-home-slate">Stufe</span><span className="font-bold">{ergebnis.tarifName}</span></li>
-        <li className="flex justify-between gap-3 border-t border-slate-300 py-2"><span className="text-home-slate">Beginn</span><span className="font-bold">{ergebnis.beginnText}</span></li>
-        <li className="flex justify-between gap-3 border-t border-slate-300 py-2"><span className="text-home-slate">{ergebnis.jaehrlich ? 'Jahresbeitrag' : 'Monatsbeitrag'}</span><span className="whitespace-nowrap font-bold">{euro(ergebnis.beitrag)}</span></li>
-      </ul>
-      <div className="space-y-2">
-        <h2 className="font-display text-xl font-extrabold text-home-midnight">So geht es weiter</h2>
-        <ol className="space-y-2" data-danke-punkte="">
-          {dankePunkte(definition, ergebnis.email).map((punkt, stelle) => (
-            <li key={punkt.slice(0, 30)} className="flex gap-3 text-base leading-7 text-home-midnight">
-              <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-home-mint/30 font-display font-extrabold">{stelle + 1}</span>
-              <span className={cx(TRENNUNG, 'min-w-0 break-words')}>{schuetze(punkt)}</span>
+      <div className={cx(KARTE, 'p-6 sm:p-10')}>
+        <h2 className="font-display text-xl font-extrabold text-home-midnight sm:text-2xl">So geht es weiter</h2>
+        <ol className="mt-5 grid gap-5 md:grid-cols-3" data-danke-punkte="">
+          {schritte.map(({ icon: Icon, titel, texte }, stelle) => (
+            <li key={titel} className="relative rounded-[1.2rem] bg-home-ice p-4 ring-1 ring-emerald-900/10">
+              <div className="flex items-center gap-3">
+                <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-home-midnight text-home-mint"><Icon className="h-5 w-5" /></span>
+                <p className="font-display text-lg font-extrabold leading-snug text-home-midnight"><span className="sr-only">{stelle + 1}. </span>{titel}</p>
+              </div>
+              {texte.filter(Boolean).map((text) => (
+                <p key={text.slice(0, 30)} className={cx('mt-2 text-base leading-7 text-home-midnight', TRENNUNG)}>{schuetze(text)}</p>
+              ))}
             </li>
           ))}
         </ol>
+        {vorbehalt && <p className={cx('mt-5 text-base leading-7 text-home-slate', TRENNUNG)}>{schuetze(vorbehalt)}</p>}
       </div>
     </div>
   );
@@ -130,14 +163,18 @@ function Danke({ definition, ergebnis, titelRef }) {
 // pruefen (optional): Prüfseite eines am Telefon aufgenommenen Antrags
 // ({ daten, beginnWahl, absenden(body), kennzeile? }). Dann startet die Maske
 // mit diesen Angaben, und „Absenden“ geht an die Prüfseiten-Bestätigung.
-export default function Antragsmaske({ definition, pruefen = null }) {
+// vorab (optional, Zahn-Strecke): { daten, vorbelegt: [Frage-ids], vorbelegung }
+// aus der Vorabfrage. daten überschreibt die Startwerte (Tarif, Baustein,
+// Geburtsdatum, PLZ, Antworten); vorbelegt markiert Antworten, die der Kunde
+// im Wortlaut des Versicherers nur noch bestätigt.
+export default function Antragsmaske({ definition, pruefen = null, vorab = null }) {
   const heute = useMemo(() => new Date(), []);
   const startZeit = useRef(Date.now());
-  const [vorbelegung] = useState(() => (pruefen ? {} : holeVorbelegung(definition.pfad || definition.sparte)));
+  const [vorbelegung] = useState(() => (pruefen ? {} : vorab?.vorbelegung || holeVorbelegung(definition.pfad || definition.sparte)));
   const [daten, setDaten] = useState(() => (pruefen?.daten
     // Leere Angaben vom Telefon überschreiben keine Vorgabe der Maske (z. B. Zahlweise monatlich).
     ? { ...startDaten(definition, {}), ...Object.fromEntries(Object.entries(pruefen.daten).filter(([, wert]) => wert !== null && wert !== undefined && wert !== '')) }
-    : startDaten(definition, vorbelegung)));
+    : mitVorab(startDaten(definition, vorbelegung), vorab?.daten)));
   const [dienst, setDienst] = useState({ schluessel: null, antwort: null, fehler: false });
   const [dienstVersuch, setDienstVersuch] = useState(0);
   const [pos, setPos] = useState({ id: 'tarif', aendern: null, uebersicht: false });
@@ -486,7 +523,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
         kennung: antwort.kennung || null,
         vorname: body.angaben.formular.vorname,
         email: body.angaben.formular.email,
-        tarifName: tarif?.name,
+        tarifName: [tarif?.name, ...(definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id)).map((baustein) => baustein.name)].filter(Boolean).join(' mit '),
         beginnText: beginn?.label,
         beitrag: beitrag?.beitrag,
         jaehrlich: daten.zahlweise === 'jaehrlich' && definition.zahlweiseImTarif,
@@ -589,7 +626,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
 
   if (ergebnis) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
+      <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
         <Danke definition={definition} ergebnis={ergebnis} titelRef={h1Ref} />
       </div>
     );
@@ -601,7 +638,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   };
   let inhalt;
   if (pos.id === 'tarif') {
-    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} />;
+    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} empfohlen={vorab?.empfohlen} />;
   } else if (pos.id === 'hinweis') {
     inhalt = <SchrittHinweis {...gemeinsam} setAntwort={setAntwort} anzahl={fragen.length} />;
   } else if (aktuell.frage) {
@@ -617,6 +654,8 @@ export default function Antragsmaske({ definition, pruefen = null }) {
         kontext={kontext}
         stop={stopWirkungDerFrage(aktuell.frage, kontext)}
         weiter={weiter}
+        vorbelegt={Boolean(vorab?.vorbelegt?.includes(aktuell.frage.id) && daten.antworten[aktuell.frage.id] !== undefined)}
+        vorbelegtVon={vorab?.quelle}
       />
     );
   } else if (pos.id === 'beitrag') {
@@ -672,7 +711,6 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   }
 
   const schritt = aktuell?.schritt || 1;
-  const SCHRITT_ANZAHL = schrittAnzahl;
   let weiterText = pos.aendern ? 'Fertig' : 'Weiter';
   // Ja/Nein blättert selbst weiter; „Weiter“ nur, wenn nach „ja“ Folgefragen oder Ankreuzlisten offen sind.
   const mitFolge = aktuell?.frage && daten.antworten[aktuell.frage.id] === 'ja'
@@ -686,51 +724,80 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   if (pos.id === 'beitrag' && !beitrag) weiterText = null;
   const zeigeZurueck = pos.aendern || indexVon(pos.id) > 0;
 
+  // Abschnitte mit Kurznamen für die Schrittleiste (reine Anzeige).
+  const abschnitte = [];
+  bildschirme.forEach((eintrag) => { if (!abschnitte[eintrag.schritt - 1]) abschnitte[eintrag.schritt - 1] = { name: kurzName(eintrag.titel) }; });
+
+  // Beitrag für „Dein Schutz“ und die Handy-Leiste. Vor dem Beitragsbildschirm
+  // zeigt die Maske nur den Beitrag aus Schritt 1 (ohne Zuschlag), nie einen
+  // laufenden Preis aus den Gesundheitsantworten.
+  const beitragErreicht = indexVon(pos.id) >= indexVon('beitrag') && indexVon('beitrag') >= 0;
+  const einheit = definition.zahlweiseImTarif && daten.zahlweise === 'jaehrlich' ? 'im Jahr' : 'im Monat';
+  let anzeigePreis = null;
+  if (mitDienst) {
+    if (beitrag) anzeigePreis = { betrag: beitrag.beitrag, einheit };
+  } else if (beitragErreicht && beitrag) {
+    anzeigePreis = { betrag: beitrag.beitrag, einheit };
+  } else if (tarif && Number.isFinite(preise?.[tarif.id])) {
+    anzeigePreis = { betrag: preise[tarif.id], einheit, hinweis: /Zuschlag/.test(definition.tarifHinweis || '') ? 'Noch ohne mögliche Zuschläge aus deinen Antworten.' : null };
+  }
+  const gewaehlteBausteine = (definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id));
+  const leisteSichtbar = zeigeZurueck || weiterText;
+
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col break-words px-4 pt-4 sm:pt-8" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
-      <div>
-        <p className="flex flex-wrap items-baseline justify-between gap-x-3 text-base">
-          <span aria-hidden="true" className="min-w-0 font-display font-extrabold uppercase tracking-[0.08em] text-emerald-900">
-            Schritt {schritt} von {SCHRITT_ANZAHL}
-          </span>
-          <span className={cx('min-w-0 text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</span>
-        </p>
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
-          <div className="h-full rounded-full bg-emerald-600 transition-[width] duration-300 motion-reduce:transition-none" style={{ width: `${(schritt / SCHRITT_ANZAHL) * 100}%` }} />
-        </div>
-        <div className="mt-3 flex flex-wrap items-start justify-between gap-x-4">
-          <h1 ref={h1Ref} tabIndex={-1} className="min-w-0 break-words font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl">
-            <span className="sr-only">Schritt {schritt} von {SCHRITT_ANZAHL}: </span>
-            {aktuell?.titel}
-          </h1>
-          <TelefonAusweg sparte={definition.sparte} className="-ml-1 sm:mt-1" />
-        </div>
-      </div>
+    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col break-words px-4 pt-5 sm:px-6 sm:pt-8" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
+      <Schrittleiste abschnitte={abschnitte} aktuell={schritt} />
 
-      <div className="mt-4 pb-6 sm:mt-6">{inhalt}</div>
-
-      {(zeigeZurueck || weiterText) && (
-        <div
-          ref={leisteRef}
-          data-leiste=""
-          className="sticky bottom-0 z-30 -mx-4 mt-auto border-t-2 border-slate-300 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur md:static md:mx-0 md:border-t md:bg-transparent md:px-0 md:pb-8 md:pt-6 md:backdrop-blur-none [@media(max-height:480px)]:static"
-        >
-          <div className="flex gap-3 md:justify-between">
-            {zeigeZurueck && (
-              <Button variant="secondary" onClick={zurueck} aria-label="Zurück" className="w-12 shrink-0 !px-0 md:w-auto md:!px-6">
-                <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-                <span className="hidden md:inline" aria-hidden="true">Zurück</span>
-              </Button>
-            )}
-            {weiterText && (
-              <Button onClick={weiter} className="min-w-0 flex-1 md:ml-auto md:flex-none md:px-10" data-weiter="">
-                {weiterText}
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </Button>
-            )}
+      <div className="mt-5 flex flex-1 flex-col lg:mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-8">
+        <div className={cx('flex min-w-0 flex-1 flex-col lg:p-10', KARTE_LG)}>
+          {pos.id === 'tarif' && !pruefen && !vorab?.daten && !pos.aendern && <Begruessung definition={definition} minuten={dauerMinuten(bildschirme.length)} />}
+          <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+            <h1 ref={h1Ref} tabIndex={-1} className={cx('min-w-0 break-words font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl', TRENNUNG)}>
+              <span className="sr-only">Schritt {schritt} von {schrittAnzahl}: </span>
+              {aktuell?.titel}
+            </h1>
+            {pruefen && <TelefonAusweg sparte={definition.sparte} className="-ml-1 sm:mt-1" />}
           </div>
+          {(pruefen?.kennzeile || !pruefen) && <p className={cx('mt-1 text-base text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</p>}
+
+          <div className="mt-5 pb-6 sm:mt-7">{inhalt}</div>
+
+          {leisteSichtbar && (
+            <div
+              ref={leisteRef}
+              data-leiste=""
+              className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:border-home-midnight/10 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none [@media(max-height:480px)]:static"
+            >
+              <div className="flex items-center gap-3 lg:justify-between">
+                {zeigeZurueck && (
+                  <Button variant="secondary" onClick={zurueck} aria-label="Zurück" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6">
+                    <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+                    <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
+                  </Button>
+                )}
+                {anzeigePreis && pos.id !== 'beitrag' && (
+                  <p className="min-w-0 shrink-0 leading-tight lg:hidden" aria-hidden="true" data-leiste-preis="">
+                    <span className="block whitespace-nowrap font-display text-lg font-extrabold text-home-midnight">{euro(anzeigePreis.betrag)}</span>
+                    <span className="block whitespace-nowrap text-base text-home-slate">{anzeigePreis.einheit}</span>
+                  </p>
+                )}
+                {weiterText && (
+                  <Button onClick={weiter} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" data-weiter="">
+                    {weiterText}
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </Button>
+                )}
+              </div>
+            </div>
+          )}
         </div>
-      )}
+
+        <aside className="hidden space-y-4 lg:sticky lg:top-6 lg:block">
+          <DeinSchutzKarte definition={definition} tarif={tarif} bausteine={gewaehlteBausteine} beginn={beginn} preis={anzeigePreis} />
+          <HilfeKarte sparte={definition.sparte} />
+        </aside>
+      </div>
+      <div className="h-6 lg:h-12" aria-hidden="true" />
     </div>
   );
 }
