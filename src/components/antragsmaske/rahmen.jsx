@@ -81,7 +81,7 @@ export function MaskenRahmen({ sparte, children }) {
 // durchgehende Nachtblau-Fläche bis zum Rand, die beim Scrollen stehen bleibt.
 // Der Inhalt links bleibt lesbar breit (zentriert), die Fläche wächst mit.
 export function GeteilteSeite({
-  rechts, children, className, ...props
+  rechts, rechtsFuss, children, className, ...props
 }) {
   return (
     <div className={cx('flex flex-1 flex-col lg:grid lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]', className)} {...props}>
@@ -90,8 +90,13 @@ export function GeteilteSeite({
       </div>
       {rechts && (
         <aside className="relative hidden bg-home-midnight text-white lg:block">
-          <div className="sticky top-0 max-h-[calc(100dvh-4rem)] overflow-y-auto px-10 py-8 xl:px-14 2xl:px-20 2xl:py-12 [scrollbar-width:thin]">
-            <div className="mx-auto max-w-[30rem] space-y-6 2xl:space-y-8">{rechts}</div>
+          {/* Stehende Fläche in Fensterhöhe: oben Beitrag und Tarif (bei Platzmangel kürzt sich
+              der Inhalt über Höhen-Abfragen), Nita unten fest und immer vollständig. */}
+          <div className="sticky top-0 flex h-[calc(100dvh-4rem)] flex-col px-10 xl:px-14 2xl:px-20">
+            <div className="min-h-0 flex-1 overflow-y-auto py-8 [@media(max-height:780px)]:py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden 2xl:py-10">
+              <div className="mx-auto max-w-[30rem] space-y-6 2xl:space-y-8">{rechts}</div>
+            </div>
+            {rechtsFuss && <div className="mx-auto w-full max-w-[30rem] shrink-0 pb-8 pt-2 2xl:pb-10">{rechtsFuss}</div>}
           </div>
         </aside>
       )}
@@ -177,11 +182,11 @@ export function SchutzPanel({
         </div>
       </dl>
       {tarif && kernzeilen.length > 0 && (
-        <div className="mt-5" data-kernleistungen="">
+        <div className="mt-5 [@media(max-height:780px)]:hidden" data-kernleistungen="">
           <p className="text-base font-semibold text-slate-300">Das steckt in {tarif.name}</p>
           <ul className="mt-2 space-y-1.5">
-            {kernzeilen.slice(0, 5).map(([label, wert]) => (
-              <li key={label} className="flex items-start justify-between gap-4 text-base leading-6">
+            {kernzeilen.slice(0, 5).map(([label, wert], stelle) => (
+              <li key={label} className={cx('flex items-start justify-between gap-4 text-base leading-6', stelle >= 4 && '[@media(max-height:1180px)]:hidden', stelle >= 3 && '[@media(max-height:1100px)]:hidden', stelle >= 2 && '[@media(max-height:900px)]:hidden', stelle >= 1 && '[@media(max-height:780px)]:hidden')}>
                 <span className="flex min-w-0 gap-2 text-slate-200">
                   <Check className="mt-1 h-4 w-4 shrink-0 text-home-mint" strokeWidth={3} aria-hidden="true" />
                   <span className="min-w-0">{label}</span>
@@ -219,8 +224,10 @@ export function Schrittleiste({ abschnitte, aktuell }) {
           const nummer = stelle + 1;
           const fertig = nummer < aktuell;
           const jetzt = nummer === aktuell;
+          // Bei vielen Schritten tragen nur der aktuelle und seine Nachbarn den Namen.
+          const mitName = anzahl <= 6 || Math.abs(nummer - aktuell) <= 1;
           return (
-            <li key={abschnitt.name + stelle} className="relative flex min-w-0 flex-1 flex-col items-center text-center">
+            <li key={abschnitt.name + stelle} title={mitName ? undefined : abschnitt.name} className={cx('relative flex flex-col items-center text-center', mitName ? 'min-w-0 flex-[3_1_0%]' : 'min-w-0 flex-[1_1_0%]')} data-schritt-name={mitName ? '' : undefined}>
               {stelle > 0 && <span className={cx('absolute right-1/2 top-4 h-0.5 w-full -translate-y-1/2', nummer <= aktuell ? 'bg-emerald-600' : 'bg-home-midnight/10')} />}
               <span
                 className={cx(
@@ -232,7 +239,7 @@ export function Schrittleiste({ abschnitte, aktuell }) {
               >
                 {fertig ? <Check className="h-4 w-4" strokeWidth={3} /> : nummer}
               </span>
-              <span lang="de" className={cx('mt-2 max-w-full px-0.5 leading-tight [hyphens:auto] [overflow-wrap:anywhere]', anzahl > 8 ? 'text-[16px]' : 'text-base', jetzt ? 'font-bold text-home-midnight' : 'text-home-slate')}>{abschnitt.name}</span>
+              {mitName && <span className={cx('mt-2 max-w-full px-0.5 text-base leading-tight [hyphens:none] [overflow-wrap:normal] [word-break:normal]', jetzt ? 'font-bold text-home-midnight' : 'text-home-slate')}>{abschnitt.name}</span>}
             </li>
           );
         })}

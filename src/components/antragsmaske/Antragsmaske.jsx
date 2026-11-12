@@ -755,13 +755,13 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const rechts = (
     <>
       <SchutzPanel definition={definition} tarif={tarif} bausteine={gewaehlteBausteine} beginn={beginn} preis={anzeigePreis} kernzeilen={tarif ? kernZeilen(tarif, definition.versicherer.id).zeilen : []} />
-      <VertrauenPunkte definition={definition} className="[@media(max-height:960px)]:hidden" />
-      <NitaDunkel sparte={definition.sparte} />
+      <VertrauenPunkte definition={definition} className="[@media(max-height:1100px)]:hidden" />
     </>
   );
+  const rechtsFuss = <NitaDunkel sparte={definition.sparte} />;
 
   return (
-    <GeteilteSeite rechts={rechts} className="break-words" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
+    <GeteilteSeite rechts={rechts} rechtsFuss={rechtsFuss} className="break-words" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
       <Schrittleiste abschnitte={abschnitte} aktuell={schritt} />
 
       <div className="mt-6 flex min-w-0 flex-1 flex-col lg:mt-10">
