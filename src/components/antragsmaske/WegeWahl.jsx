@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowRight, Laptop, Phone, X } from 'lucide-react';
-import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
+import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
 import { eigeneMaskeFuer } from '@/data/antrag';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import { merkeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
@@ -48,7 +48,7 @@ export default function WegeWahl({
   link, targetUrl, vorbelegung, onClose, onExternalOpen,
 }) {
   const sparte = link.sparte;
-  const eigene = HEALIO_ANTRAGSMASKE_AKTIV && eigeneMaskeFuer(link);
+  const eigene = HEALIO_ANTRAGSMASKE_AKTIV ? eigeneMaskeFuer(link, { ukvZahn: HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV }) : null;
   const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
   const ersterWeg = useRef(null);
   const gezaehlt = useRef(false);
@@ -63,7 +63,7 @@ export default function WegeWahl({
     zaehle('antragsweg', { ziel: `${sparte}-allein` });
     if (eigene) {
       merkeVorbelegung({
-        sparte, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: sammleHerkunft({ sparte, weg: 'allein' }),
+        sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: sammleHerkunft({ sparte, weg: 'allein' }),
       });
       return; // Der Link selbst navigiert nach /antrag/<sparte>.
     }
@@ -95,7 +95,7 @@ export default function WegeWahl({
               icon={Laptop}
               titel="Allein abschließen"
               text={eigene ? 'Du beantwortest die Fragen in Ruhe selbst, direkt hier bei Healio.' : 'Du füllst den Antrag selbst online beim Versicherer aus.'}
-              href={eigene ? `/antrag/${sparte}` : targetUrl}
+              href={eigene ? `/antrag/${eigene.pfad}` : targetUrl}
               onClick={allein}
               data={{ 'data-weg': 'allein' }}
             />

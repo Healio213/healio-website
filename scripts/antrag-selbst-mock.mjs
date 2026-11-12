@@ -20,6 +20,9 @@ import {
   istVolljaehrigAm, parseGeburtsdatum, zuschlagAufteilung,
 } from '../src/data/sdkAmbulantAntrag.js';
 import { bereinigeHerkunft } from '../src/lib/antragsmaske/vertrag.js';
+import { grundbeitragAusTabelle, mitZuschlag } from '../src/lib/antragsmaske/regeln.js';
+import { DEFINITIONEN } from '../src/data/antrag/index.js';
+import LEVELNINE from '../src/data/antrag/original/levelnine.js';
 import {
   KASSE_MUSTER, istEmailText, istIban, istNameText, istPlzText, istStrasseText, istTelefonText,
 } from '../src/lib/antragsmaske/regeln.js';
@@ -74,20 +77,24 @@ function pruefe(body, heute = new Date()) {
   const f = a.formular || {};
   if (body?.kanal !== 'web-selbst') return { status: 400, fehler: 'antrag_angaben_ungueltig', felder: ['kanal'] };
   if (body.sparte === 'zahn' && body.versicherer === 'bayerische') return pruefeZahn(body, heute);
+  if (body.sparte === 'zahn' && body.versicherer === 'ukv') return pruefeLevelnine(DEFINITIONEN['zahn-ukv'], body, heute);
+  if (body.sparte === 'stationaer' && body.versicherer === 'sdk') return pruefeLevelnine(DEFINITIONEN.stationaer, body, heute);
   if (body.sparte !== 'ambulant' || body.versicherer !== 'sdk') return { status: 409, fehler: 'antrag_sparte_nicht_bereit' };
   if (body.schutz?.feld) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder: [] };
   if (!['AP5', 'AP7', 'AP9', 'AP1'].includes(a.tarifCode)) felder.push('angaben.tarifCode');
   const optionen = beginnOptionen(heute);
-  if (![optionen.naechstmoeglich, ...optionen.weitere].some((option) => option.iso === a.beginnIso)) felder.push('angaben.beginnIso');
+  if (![optionen.naechstmoeglich, ...optionen.weitere, optionen.frueher].filter(Boolean).some((option) => option.iso === a.beginnIso)) felder.push('angaben.beginnIso');
   if (!['frau', 'herr', 'divers'].includes(a.anrede)) felder.push('angaben.anrede');
   if (!istNameText(f.vorname)) felder.push('angaben.formular.vorname');
   if (!istNameText(f.nachname)) felder.push('angaben.formular.nachname');
-  if (!istStrasseText(f.strasse)) felder.push('angaben.formular.strasse');
-  if (!istPlzText(f.plz)) felder.push('angaben.formular.plz');
+  // Ab 12.11.2026 wie die SDK-Online-Strecke: Straße und Hausnummer getrennt, Mobil Pflicht, Bankname.
+  if (!String(f.strasse || '').trim()) felder.push('angaben.formular.strasse');
+  if (!/^\d+(?:(?:\s*[A-Za-z\s-]+)|(?:\s*-\s*\d+))?(?:\s*\/\s*\d+)?$/.test(String(f.hausnummer || ''))) felder.push('angaben.formular.hausnummer');
+  if (!/^(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})$/.test(String(f.plz || ''))) felder.push('angaben.formular.plz');
   if (!istNameText(f.ort)) felder.push('angaben.formular.ort');
   if (!istTelefonText(f.telefon)) felder.push('angaben.formular.telefon');
   if (!istEmailText(f.email)) felder.push('angaben.formular.email');
-  if (a.gkv !== true) felder.push('angaben.gkv');
+  if (body.bestaetigungen?.acknowledge !== true) felder.push('bestaetigungen.acknowledge');
   if (a.krankenkasse !== undefined && !KASSE_MUSTER.test(String(a.krankenkasse))) felder.push('angaben.krankenkasse');
   const geburt = parseGeburtsdatum(a.geburtsdatum, heute);
   if (!geburt) felder.push('angaben.geburtsdatum');
@@ -100,12 +107,10 @@ function pruefe(body, heute = new Date()) {
   if (!gesundOk || FRAGEN_1B_1K.some((frage) => !['ja', 'nein'].includes(g.antworten?.[frage.id])) || !bmiAusEingabe(g.groesse, g.gewicht).plausibel) felder.push('gesundheit');
 
   const z = body.zahlung || {};
-  if (!ZAHLWEISEN.some((eintrag) => eintrag.id === z.zahlweise) || z.kontoinhaber !== 'selbst') felder.push('zahlung.zahlweise');
+  if (z.zahlweise !== 'monatlich' || z.kontoinhaber !== 'selbst') felder.push('zahlung.zahlweise');
   if (!istIban(z.iban)) felder.push('zahlung.iban');
-  const e = body.erklaerungen || {};
-  ['hinweisOk', 'verzicht', 'vollmacht', 'gesundheitsdaten', 'schluss', 'sepa'].forEach((key) => { if (e[key] !== true) felder.push(`erklaerungen.${key}`); });
-  if (!['I', 'II'].includes(e.schweigepflicht)) felder.push('erklaerungen.schweigepflicht');
-  if (typeof e.bonitaet !== 'boolean') felder.push('erklaerungen.bonitaet');
+  if (!String(z.bankname || '').trim()) felder.push('zahlung.bankname');
+  pruefeErklaerungen(DEFINITIONEN.ambulant, body, felder);
   if (felder.length) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder };
 
   const beginnJahr = Number(a.beginnIso.slice(0, 4));
@@ -117,6 +122,55 @@ function pruefe(body, heute = new Date()) {
       status: 409, fehler: 'antrag_beitrag_geaendert', beitrag: { grundbeitrag: grund, zuschlagProzent: zuschlag, beitrag, bestaetigt: true },
     };
   }
+  return { status: 201, beitrag };
+}
+
+// Pflicht-Erklärungen laut Definition (Haken und SEPA), freiwillige als boolean.
+function pruefeErklaerungen(definition, body, felder) {
+  const e = body.erklaerungen || {};
+  definition.erklaerungen.flatMap((teil) => teil.eintraege).filter((eintrag) => eintrag.key && eintrag.art !== 'hinweis').forEach((eintrag) => {
+    if (eintrag.pflicht && e[eintrag.key] !== true) felder.push(`erklaerungen.${eintrag.key}`);
+    if (!eintrag.pflicht && typeof e[eintrag.key] !== 'boolean') felder.push(`erklaerungen.${eintrag.key}`);
+  });
+  if (e[definition.zahlung.sepa.key] !== true) felder.push(`erklaerungen.${definition.zahlung.sepa.key}`);
+}
+
+// SDK stationär und UKV Zahn: Beitrag aus der Tabelle der Definition, UKV mit Zuschlag je fehlendem Zahn.
+function pruefeLevelnine(definition, body, heute) {
+  const a = body.angaben || {};
+  const f = a.formular || {};
+  const felder = [];
+  if (body.schutz?.feld) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder: [] };
+  if (!definition.tarife.some((tarif) => tarif.id === a.tarifCode)) felder.push('angaben.tarifCode');
+  if (!['frau', 'herr'].includes(a.anrede)) felder.push('angaben.anrede');
+  ['vorname', 'nachname', 'ort'].forEach((key) => { if (!istNameText(f[key])) felder.push(`angaben.formular.${key}`); });
+  if (!String(f.strasse || '').trim()) felder.push('angaben.formular.strasse');
+  if (!istPlzText(f.plz)) felder.push('angaben.formular.plz');
+  if (!istEmailText(f.email)) felder.push('angaben.formular.email');
+  const geburt = parseGeburtsdatum(a.geburtsdatum, heute);
+  if (!geburt) felder.push('angaben.geburtsdatum');
+  else if (!istVolljaehrigAm(a.geburtsdatum, heute)) return { status: 422, fehler: 'antrag_minderjaehrig' };
+  (definition.person.bestaetigungen || []).forEach((eintrag) => { if (body.bestaetigungen?.[eintrag.key] !== true) felder.push(`bestaetigungen.${eintrag.key}`); });
+  if (!istIban(body.zahlung?.iban)) felder.push('zahlung.iban');
+  if (definition.zahlung.bankname && !String(body.zahlung?.bankname || '').trim()) felder.push('zahlung.bankname');
+  pruefeErklaerungen(definition, body, felder);
+  const antworten = body.gesundheit?.antworten || [];
+  if (definition.produkt === 'zahn-ukv') {
+    const tf = antworten.find((eintrag) => eintrag.feld === 'TF0021')?.wert;
+    const behandlung = antworten.find((eintrag) => eintrag.feld === 'GF0073')?.wert;
+    if (!['0', '1', '2', '3'].includes(tf) || behandlung !== 'false') felder.push('gesundheit');
+  }
+  if (felder.length) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder };
+  const alter = Number(a.beginnIso.slice(0, 4)) - geburt.jahr;
+  const tabelle = grundbeitragAusTabelle(definition.beitrag, { tarif: a.tarifCode, alter });
+  if (!tabelle) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder: ['angaben.geburtsdatum'] };
+  let beitrag = tabelle.grund;
+  if (definition.produkt === 'zahn-ukv') {
+    const zaehne = Number(antworten.find((eintrag) => eintrag.feld === 'TF0021')?.wert || 0);
+    beitrag = mitZuschlag(tabelle.grund, 0, ({ Z100: 10.9, Z90: 9.0, Z75: 6.1 }[a.tarifCode] || 0) * zaehne);
+  }
+  beitrag = Math.round((beitrag + aufschlag) * 100) / 100;
+  if (body.beitragAngezeigt !== beitrag) return { status: 409, fehler: 'antrag_beitrag_geaendert', beitrag: { beitrag } };
   return { status: 201, beitrag };
 }
 
@@ -159,6 +213,25 @@ const server = http.createServer((anfrage, antwort) => {
   if (pfad === '/__test/letzter') { senden(antwort, 200, { ok: true, letzter }, herkunft); return; }
   if (pfad === '/__test/beitrag-aendern') { aufschlag = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/zuruecksetzen') { aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
+  // Unterlagen je Produkt und Tarif. NUR TEST: Platzhalter-PDFs mit dem Vermerk
+  // „Testdatei der Attrappe“, keine echten Unterlagen der SDK.
+  if (pfad === '/antrag/api/selbstantrag/unterlagen' && anfrage.method === 'GET') {
+    const suche = new URL(anfrage.url, 'http://x').searchParams;
+    const produkt = suche.get('produkt');
+    const tarif = suche.get('tarif');
+    const schluessel = produkt === 'sdk-ambulant' ? 'AP' : tarif;
+    const liste = ['sdk-ambulant', 'sdk-stationaer'].includes(produkt) ? LEVELNINE.sdkUnterlagen[schluessel] : null;
+    if (!liste) { senden(antwort, 404, { ok: false, fehler: 'antrag_unterlagen_unbekannt' }, herkunft); return; }
+    const pdf = (name) => Buffer.from(`%PDF-1.4\n% TESTDATEI DER ATTRAPPE, KEIN ECHTES DOKUMENT: ${name}\n%%EOF\n`).toString('base64');
+    senden(antwort, 200, {
+      ok: true,
+      test: true,
+      unterlagen: liste.map(([id, name]) => ({
+        id, name, dateiname: `${name.replace(/^[^:]+:\s*/, '').replace(/[^A-Za-z0-9._-]+/g, '_')}.pdf`, mime: 'application/pdf', stand: name.match(/\d{2}\.\d{2}$/)?.[0] || null, inhalt: pdf(name),
+      })),
+    }, herkunft);
+    return;
+  }
   // Prüfseite für einen am Telefon aufgenommenen Zahn-Antrag (Token test-zahn), Vertrag SCHNITTSTELLE.md 4.2 plus Feld sparte.
   if (pfad === '/antrag/api/entwurf' && anfrage.method === 'GET') {
     if (anfrage.headers.authorization !== 'Bearer test-zahn') { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }

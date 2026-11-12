@@ -17,12 +17,13 @@ const HAKEN_FEHLT = 'Ohne diesen Haken können wir deinen Antrag nicht stellen.'
 export function fehlerZahlung(definition, daten) {
   const fehler = [];
   const z = definition.zahlung;
-  if (!definition.zahlweiseImTarif && !z.zahlweisen.some((eintrag) => eintrag.id === daten.zahlweise)) fehler.push({ key: 'zahlweise', text: 'Bitte wähle, wie du zahlen möchtest.' });
+  if (z.zahlweisen.length > 1 && !definition.zahlweiseImTarif && !z.zahlweisen.some((eintrag) => eintrag.id === daten.zahlweise)) fehler.push({ key: 'zahlweise', text: 'Bitte wähle, wie du zahlen möchtest.' });
   if (daten.kontoinhaber !== 'selbst') {
     fehler.push({ key: 'kontoinhaber', text: daten.kontoinhaber === 'andere' ? '' : 'Bitte beantworte die Frage zum Konto.' });
   } else {
     const text = ibanHinweis(daten.iban);
     if (text) fehler.push({ key: 'iban', text });
+    if (z.bankname && !String(daten.bankname || '').trim()) fehler.push({ key: 'bankname', text: z.bankname.fehlerLeer });
     if (daten.erklaerungen[z.sepa.key] !== true) fehler.push({ key: z.sepa.key, text: HAKEN_FEHLT });
   }
   return fehler;
@@ -37,7 +38,7 @@ export default function SchrittZahlung({
   return (
     <div className="space-y-5">
       <TeilKopf titel="Deine Zahlung" ueberschriftRef={ueberschriftRef} text="Deine IBAN bleibt nur hier auf der Seite, bis du den Antrag abschickst." />
-      {!definition.zahlweiseImTarif && (
+      {!definition.zahlweiseImTarif && z.zahlweisen.length > 1 && (
       <Gruppe legend="Zahlweise" fehlerId="fehler-zahlweise" error={fehler.zahlweise}>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {z.zahlweisen.map((zahlweise, stelle) => (
@@ -59,7 +60,7 @@ export default function SchrittZahlung({
       </Gruppe>
       )}
 
-      <Gruppe legend={z.kontoinhaberFrage} fehlerId="fehler-kontoinhaber" error={fehler.kontoinhaber}>
+      <Gruppe legend={z.kontoinhaberFrage} hint={z.kontoinhaberHinweis || undefined} fehlerId="fehler-kontoinhaber" error={fehler.kontoinhaber}>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <OptionCard id="feld-kontoinhaber" kompakt name="kontoinhaber" value="selbst" checked={daten.kontoinhaber === 'selbst'} onChange={() => set({ kontoinhaber: 'selbst' })} invalid={Boolean(fehler.kontoinhaber)}>
             Ja, das ist mein Konto
@@ -102,11 +103,27 @@ export default function SchrittZahlung({
             </div>
           </Field>
 
+          {z.bankname && (
+            <Field id="feld-bankname" label={z.bankname.label} error={fehler.bankname}>
+              <input
+                {...fieldAria('feld-bankname', { error: fehler.bankname })}
+                type="text"
+                autoComplete="off"
+                maxLength={80}
+                value={daten.bankname || ''}
+                onChange={(event) => set({ bankname: event.target.value })}
+                className={cx(eingabeKlasse, 'max-w-md')}
+              />
+            </Field>
+          )}
+
           <Karte titel={z.sepa.karte}>
-            <ul className="space-y-1 text-base leading-7 text-home-midnight">
-              {z.sepa.angaben.map(([label, wert]) => <li key={label}><span className="text-home-slate">{label}: </span>{wert}</li>)}
-            </ul>
-            <Volltext titel={z.sepa.karte} bloecke={[['h', z.sepa.titel], ...z.sepa.absaetze.map((absatz) => ['p', absatz])]} />
+            {z.sepa.angaben.length > 0 && (
+              <ul className="space-y-1 text-base leading-7 text-home-midnight">
+                {z.sepa.angaben.map(([label, wert]) => <li key={label}><span className="text-home-slate">{label}: </span>{wert}</li>)}
+              </ul>
+            )}
+            {z.sepa.absaetze.length > 0 && <Volltext titel={z.sepa.karte} bloecke={[['h', z.sepa.titel], ...z.sepa.absaetze.map((absatz) => ['p', absatz])]} />}
             <Haken
               feldKey={z.sepa.key}
               checked={daten.erklaerungen[z.sepa.key]}

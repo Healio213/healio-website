@@ -88,6 +88,8 @@ const FRAGEN = [
 
 const zahn = {
   sparte: 'zahn',
+  produkt: 'zahn',
+  pfad: 'zahn',
   bereit: true,
   stand: '2026-11-12',
   textfassung: '2026-11-12-bayerische-zahn',

@@ -50,3 +50,9 @@ const ANTRAGSMASKE_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMAS
 const ANTRAGSWAHL_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSWAHL : undefined;
 export const HEALIO_ANTRAGSMASKE_AKTIV = ANTRAGSMASKE_LOKAL === '1' || ANTRAGSMASKE_FREIGABE;
 export const HEALIO_ANTRAGSWAHL_AKTIV = ANTRAGSWAHL_LOKAL === '1' || ANTRAGSWAHL_FREIGABE;
+
+// Zweites Zahn-Produkt UKV ZahnPRIVAT 75/90/100 in der eigenen Maske (/antrag/zahn-ukv, 12.11.2026), Standard aus.
+// Erst einschalten, wenn die Makler-Erklärungen der UKV-Strecke mit Fonds Finanz/UKV geklärt sind.
+const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;
+const ANTRAGSMASKE_UKV_ZAHN_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE_UKV_ZAHN : undefined;
+export const HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV = ANTRAGSMASKE_UKV_ZAHN_LOKAL === '1' || ANTRAGSMASKE_UKV_ZAHN_FREIGABE;

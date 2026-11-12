@@ -12,9 +12,11 @@ export function antwortText(frage, antworten, kontext) {
   const wert = antworten[frage.id];
   if (frage.typ === 'janein') {
     if (wert !== 'ja') return 'Nein';
-    const teile = sichtbareFolgefragen(frage, kontext).map((folge) => antwortText(folge, antworten, kontext)).filter(Boolean);
+    const teile = (frage.folge || []).filter((folge) => sichtbareFolgefragen(frage, kontext).includes(folge))
+      .map((folge) => antwortText(folge, antworten, kontext)).filter(Boolean);
     return teile.length ? `Ja: ${teile.join('; ')}` : 'Ja';
   }
+  if (frage.typ === 'datum' || frage.typ === 'zahl' || frage.typ === 'text') return String(wert ?? '').trim();
   if (frage.typ === 'auswahl') return ohneTrenner(frage.optionen.find((option) => option.id === wert)?.label);
   if (frage.typ === 'mehrfach') {
     const liste = Array.isArray(wert) ? wert : [];

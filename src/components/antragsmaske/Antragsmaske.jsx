@@ -10,7 +10,7 @@ import { baueSelbstantrag, bildschirmFuerFeld, datumText } from '@/lib/antragsma
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
 import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
 import {
-  AntragFehler, berechneSelbstBeitrag, fehlerText, sendeSelbstantrag,
+  AntragFehler, berechneSelbstBeitrag, fehlerText, ladeSelbstUnterlagen, sendeSelbstantrag,
 } from '@/lib/antragApi';
 import {
   Button, TRENNUNG, cx, schuetze, sofortScrollen,
@@ -22,6 +22,7 @@ import SchrittDaten, { fehlerAnschrift, fehlerPerson } from './SchrittDaten';
 import SchrittZahlung, { fehlerZahlung } from './SchrittZahlung';
 import SchrittErklaerungen, { fehlerErklaerungen } from './SchrittErklaerungen';
 import SchrittZusammenfassung from './SchrittZusammenfassung';
+import SchrittUnterlagenDownload from './SchrittUnterlagenDownload';
 import { TelefonAusweg } from './teile';
 
 /**
@@ -37,10 +38,21 @@ import { TelefonAusweg } from './teile';
  * Erst „Absenden“ schickt alles einmal an den Antragsdienst.
  */
 
-const SCHRITTE = {
-  1: 'Tarif und Beitrag', 2: 'Gesundheitsfragen', 3: 'Dein Beitrag', 4: 'Deine Daten', 5: 'Zahlung', 6: 'Erklärungen und Unterlagen', 7: 'Zusammenfassung',
-};
-const SCHRITT_ANZAHL = 7;
+// Standardablauf (Bayerische): Tarif, Gesundheitsfragen, Beitrag, Daten,
+// Zahlung, Erklärungen und Unterlagen, Zusammenfassung.
+function standardAblauf(definition) {
+  return [
+    { id: 'tarif', titel: 'Tarif und Beitrag' },
+    { id: 'hinweis', titel: definition.gesundheit.titel },
+    { id: 'fragen', titel: definition.gesundheit.titel },
+    { id: 'beitrag', titel: 'Dein Beitrag' },
+    { id: 'person', titel: 'Deine Daten' },
+    { id: 'anschrift', titel: 'Deine Daten' },
+    { id: 'zahlung', titel: 'Zahlung' },
+    ...definition.erklaerungen.map((teil, stelle) => ({ id: `erkl:${teil.id ?? stelle}`, titel: 'Erklärungen und Unterlagen' })),
+    { id: 'zusammenfassung', titel: 'Zusammenfassung' },
+  ];
+}
 
 export function startDaten(definition, vorbelegung = {}) {
   const tarifIds = definition.tarife.map((tarif) => tarif.id);
@@ -60,7 +72,8 @@ export function startDaten(definition, vorbelegung = {}) {
       vorname: '', nachname: '', strasse: '', plz: '', ort: '', telefon: '', email: '', krankenkasse: '',
     },
     bestaetigungen: {},
-    zahlweise: definition.zahlweiseImTarif ? definition.zahlung.zahlweisen[0]?.id ?? null : null,
+    zahlweise: definition.zahlweiseImTarif || definition.zahlung.zahlweisen.length === 1 ? definition.zahlung.zahlweisen[0]?.id ?? null : null,
+    bankname: '',
     kontoinhaber: null,
     iban: '',
     erklaerungen: {},
@@ -119,7 +132,7 @@ function Danke({ definition, ergebnis, titelRef }) {
 export default function Antragsmaske({ definition, pruefen = null }) {
   const heute = useMemo(() => new Date(), []);
   const startZeit = useRef(Date.now());
-  const [vorbelegung] = useState(() => (pruefen ? {} : holeVorbelegung(definition.sparte)));
+  const [vorbelegung] = useState(() => (pruefen ? {} : holeVorbelegung(definition.pfad || definition.sparte)));
   const [daten, setDaten] = useState(() => (pruefen?.daten ? { ...startDaten(definition, {}), ...pruefen.daten } : startDaten(definition, vorbelegung)));
   const [dienst, setDienst] = useState({ schluessel: null, antwort: null, fehler: false });
   const [dienstVersuch, setDienstVersuch] = useState(0);
@@ -146,7 +159,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   // ---- Abgeleitete Werte -----------------------------------------------------
   const beginnWahl = useMemo(() => pruefen?.beginnWahl || beginnOptionenAus(definition.beginn, heute), [definition, heute, pruefen]);
   const beginn = daten.beginnArt === 'anderer'
-    ? beginnWahl.weitere.find((option) => option.iso === daten.beginnIso) || null
+    ? [...beginnWahl.weitere, beginnWahl.frueher].filter(Boolean).find((option) => option.iso === daten.beginnIso) || null
     : beginnWahl.naechstmoeglich;
   const geburtsdatum = parseDatum(datumText(daten.geburtsdatum, heute) || daten.geburtsdatum, heute);
   const geburtsdatumText = datumText(daten.geburtsdatum, heute);
@@ -177,6 +190,25 @@ export default function Antragsmaske({ definition, pruefen = null }) {
     }, 250);
     return () => { window.clearTimeout(warte); steuerung.abort(); };
   }, [dienstSchluessel, dienstVersuch]);
+  // Pflicht-Downloads (SDK): Die PDFs kommen über den Antragsdienst, je Produkt und Tarif.
+  const [unterlagenDienst, setUnterlagenDienst] = useState({ schluessel: null, liste: null, fehler: false });
+  const [unterlagenVersuch, setUnterlagenVersuch] = useState(0);
+  const unterlagenSchluessel = definition.unterlagenDownload && daten.tarif ? `${definition.unterlagenDownload.produkt}|${daten.tarif}` : null;
+  useEffect(() => {
+    if (!unterlagenSchluessel) return undefined;
+    const steuerung = new AbortController();
+    ladeSelbstUnterlagen({ produkt: definition.unterlagenDownload.produkt, tarifCode: daten.tarif }, { signal: steuerung.signal })
+      .then((antwort) => setUnterlagenDienst({ schluessel: unterlagenSchluessel, liste: Array.isArray(antwort.unterlagen) ? antwort.unterlagen : [], fehler: false }))
+      .catch((fehler) => { if (fehler?.name !== 'AbortError') setUnterlagenDienst({ schluessel: unterlagenSchluessel, liste: null, fehler: true }); });
+    return () => steuerung.abort();
+  }, [unterlagenSchluessel, unterlagenVersuch]); // eslint-disable-line react-hooks/exhaustive-deps
+  const unterlagenJetzt = {
+    liste: unterlagenDienst.schluessel === unterlagenSchluessel ? unterlagenDienst.liste : null,
+    fehler: unterlagenDienst.schluessel === unterlagenSchluessel && unterlagenDienst.fehler,
+    nochmal: () => setUnterlagenVersuch((alt) => alt + 1),
+    erwartet: definition.unterlagenDownload?.liste?.(daten.tarif) || [],
+  };
+
   const dienstJetzt = mitDienst ? {
     leer: !dienstSchluessel,
     antwort: dienst.schluessel === dienstSchluessel ? dienst.antwort : null,
@@ -216,19 +248,40 @@ export default function Antragsmaske({ definition, pruefen = null }) {
 
   // ---- Bildschirme -----------------------------------------------------------
   const fragen = sichtbareFragen(definition, kontext);
+  // Bildschirme in der Reihenfolge der Definition (ablauf, wie im Original)
+  // oder im Standardablauf. Leere Teile (z. B. SPU: Schritt Gesundheitsfragen entfällt)
+  // fallen weg; die Schrittnummer zählt die vorhandenen Abschnitte.
   const bildschirme = useMemo(() => {
-    const liste = [{ id: 'tarif', schritt: 1 }];
-    if (definition.gesundheit.vorspann) liste.push({ id: 'hinweis', schritt: 2 });
-    fragen.forEach((frage, stelle) => liste.push({
-      id: `frage:${frage.id}`, schritt: 2, frage, nummer: stelle + 1,
-    }));
-    liste.push({ id: 'beitrag', schritt: 3 }, { id: 'person', schritt: 4 }, { id: 'anschrift', schritt: 4 }, { id: 'zahlung', schritt: 5 });
-    definition.erklaerungen.forEach((teil, stelle) => liste.push({
-      id: `erkl:${stelle}`, schritt: 6, teil, nummer: stelle + 1,
-    }));
-    liste.push({ id: 'zusammenfassung', schritt: 7 });
+    const ablauf = definition.ablauf || standardAblauf(definition);
+    const liste = [];
+    let schritt = 0;
+    let letzterTitel = null;
+    ablauf.forEach((eintrag) => {
+      let teilListe = [];
+      if (eintrag.id === 'hinweis') {
+        if (definition.gesundheit.vorspann && fragen.length) teilListe = [{ id: 'hinweis' }];
+      } else if (eintrag.id === 'fragen') {
+        teilListe = fragen.map((frage, stelle) => ({ id: `frage:${frage.id}`, frage, nummer: stelle + 1 }));
+      } else if (eintrag.id === 'unterlagenDownload') {
+        if (definition.unterlagenDownload) teilListe = [{ id: 'unterlagenDownload' }];
+      } else if (eintrag.id.startsWith('erkl:')) {
+        const schluessel = eintrag.id.slice(5);
+        const teil = definition.erklaerungen.find((t, stelle) => (t.id ?? String(stelle)) === schluessel);
+        if (teil) teilListe = [{ id: eintrag.id, teil }];
+      } else teilListe = [{ id: eintrag.id }];
+      if (!teilListe.length) return;
+      if (eintrag.titel !== letzterTitel) { schritt += 1; letzterTitel = eintrag.titel; }
+      teilListe.forEach((teil) => liste.push({ ...teil, schritt, titel: eintrag.titel }));
+    });
+    // Teile der Erklärungen innerhalb eines Abschnitts zählen („Teil 2 von 3“).
+    liste.filter((eintrag) => eintrag.teil).forEach((eintrag) => {
+      const gruppe = liste.filter((anderer) => anderer.teil && anderer.schritt === eintrag.schritt);
+      eintrag.nummer = gruppe.indexOf(eintrag) + 1;
+      eintrag.anzahl = gruppe.length;
+    });
     return liste;
   }, [definition, fragen.map((frage) => frage.id).join('|')]); // eslint-disable-line react-hooks/exhaustive-deps
+  const schrittAnzahl = bildschirme.length ? bildschirme[bildschirme.length - 1].schritt : 1;
   const indexVon = (id) => bildschirme.findIndex((eintrag) => eintrag.id === id);
   const aktuell = bildschirme[Math.max(0, indexVon(pos.id))];
 
@@ -241,6 +294,12 @@ export default function Antragsmaske({ definition, pruefen = null }) {
       });
     }
     if (id === 'hinweis') return fehlerHinweis(definition, daten);
+    if (id === 'unterlagenDownload') {
+      if (!unterlagenJetzt.liste) return [{ key: 'unterlagenDienst', text: '' }];
+      return unterlagenJetzt.liste
+        .filter((unterlage) => !daten.unterlagenGeoeffnet?.[`dienst:${unterlage.id ?? unterlage.name}`])
+        .map((unterlage) => ({ key: `download-${unterlage.id ?? unterlage.name}`, text: definition.unterlagenDownload.fehler }));
+    }
     if (eintrag.frage) {
       const liste = fehlerFrage(eintrag.frage, kontext);
       if (stopWirkungDerFrage(eintrag.frage, kontext)) liste.push({ key: 'stop', text: '' });
@@ -410,7 +469,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
       zeige({ id: bildschirme[grenzeIndex].id, aendern: null, uebersicht: false });
       return;
     }
-    const body = baueSelbstantrag(definition, daten, {
+    const body = baueSelbstantrag(definition, { ...daten, unterlagenDienst: unterlagenJetzt.liste || [] }, {
       beginn, beitrag, heute, dauerSekunden: (Date.now() - startZeit.current) / 1000, feld: falle,
       herkunft: sammleHerkunft({ sparte: definition.sparte, weg: 'allein', mitgebracht: vorbelegung.herkunft }),
     });
@@ -577,7 +636,9 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   } else if (pos.id === 'zahlung') {
     inhalt = <SchrittZahlung {...gemeinsam} />;
   } else if (aktuell.teil) {
-    inhalt = <SchrittErklaerungen {...gemeinsam} teil={aktuell.teil} nummer={aktuell.nummer} anzahl={definition.erklaerungen.length} kontext={kontext} />;
+    inhalt = <SchrittErklaerungen {...gemeinsam} teil={aktuell.teil} nummer={aktuell.nummer} anzahl={aktuell.anzahl} kontext={kontext} />;
+  } else if (pos.id === 'unterlagenDownload') {
+    inhalt = <SchrittUnterlagenDownload {...gemeinsam} unterlagen={unterlagenJetzt} />;
   } else {
     inhalt = (
       <>
@@ -607,8 +668,12 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   }
 
   const schritt = aktuell?.schritt || 1;
+  const SCHRITT_ANZAHL = schrittAnzahl;
   let weiterText = pos.aendern ? 'Fertig' : 'Weiter';
-  if (aktuell?.frage?.typ === 'janein' && !(daten.antworten[aktuell.frage.id] === 'ja' && aktuell.frage.weiterBeiJa === false)) weiterText = null;
+  // Ja/Nein blättert selbst weiter; „Weiter“ nur, wenn nach „ja“ Folgefragen oder Ankreuzlisten offen sind.
+  const mitFolge = aktuell?.frage && daten.antworten[aktuell.frage.id] === 'ja'
+    && (aktuell.frage.weiterBeiJa === false || sichtbareFolgefragen(aktuell.frage, kontext).length > 0);
+  if (aktuell?.frage?.typ === 'janein' && !mitFolge) weiterText = null;
   if (aktuell?.frage && stopWirkungDerFrage(aktuell.frage, kontext)) weiterText = null;
   if (pos.id === 'tarif' && grenze) weiterText = null;
   if (pos.id === 'tarif' && mitDienst && dienstJetzt.fehler) weiterText = null;
@@ -632,7 +697,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
         <div className="mt-3 flex flex-wrap items-start justify-between gap-x-4">
           <h1 ref={h1Ref} tabIndex={-1} className="min-w-0 break-words font-display text-2xl font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl">
             <span className="sr-only">Schritt {schritt} von {SCHRITT_ANZAHL}: </span>
-            {schritt === 2 ? definition.gesundheit.titel : SCHRITTE[schritt]}
+            {aktuell?.titel}
           </h1>
           <TelefonAusweg sparte={definition.sparte} className="-ml-1 sm:mt-1" />
         </div>

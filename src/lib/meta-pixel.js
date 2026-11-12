@@ -75,6 +75,7 @@ const META_EXCLUDED_PATHS = new Set([
   '/antrag/ambulant',
   '/antrag/zahn',
   '/antrag/stationaer',
+  '/antrag/zahn-ukv',
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',

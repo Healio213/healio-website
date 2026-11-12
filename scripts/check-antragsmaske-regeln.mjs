@@ -11,7 +11,9 @@ import { fileURLToPath } from 'node:url';
 
 import { DEFINITIONEN, antragAusLink, eigeneMaskeFuer } from '../src/data/antrag/index.js';
 import { pruefeDefinition } from '../src/data/antrag/aufbau.js';
-import ambulant, { SCHWEIGEPFLICHT_KURZ, SCHWEIGEPFLICHT_WAHL } from '../src/data/antrag/ambulant.js';
+import ambulant, {
+  ORIGINAL_1A, ORIGINAL_1B_1K, SCHWEIGEPFLICHT_KURZ, SCHWEIGEPFLICHT_WAHL,
+} from '../src/data/antrag/ambulant.js';
 import {
   altersgrenze, antwortenBereinigt, bedingungErfuellt, beginnOptionenAus, berechneBeitrag, feldFehler, ibanHinweis, istIban,
   mitZuschlag, offeneGesundheitsfragen, regionAusPlz, sichtbareFolgefragen, sichtbareFragen, wirkungen,
@@ -41,17 +43,10 @@ function zufall(saat) {
   return () => { wert = (wert * 1103515245 + 12345) % 2147483648; return wert / 2147483648; };
 }
 
-test('Definitionen: ambulant und Zahn fertig und gültig, stationär nur Gerüst', () => {
-  assert.deepEqual(pruefeDefinition(ambulant), []);
-  assert.deepEqual(pruefeDefinition(DEFINITIONEN.zahn), []);
-  assert.equal(ambulant.bereit, true);
-  assert.equal(DEFINITIONEN.zahn.bereit, true);
-  for (const sparte of ['stationaer']) {
-    const definition = DEFINITIONEN[sparte];
-    assert.equal(definition.bereit, false, `${sparte} darf noch nicht bereit sein`);
-    assert.deepEqual(pruefeDefinition(definition), []);
-    assert.equal(definition.gesundheit, undefined, `${sparte}: keine erfundenen Fragen`);
-    assert.equal(definition.beitrag, undefined, `${sparte}: keine erfundenen Preise`);
+test('Definitionen: alle vier Produkte fertig und gültig', () => {
+  for (const [name, definition] of Object.entries(DEFINITIONEN)) {
+    assert.deepEqual(pruefeDefinition(definition), [], name);
+    assert.equal(definition.bereit, true, name);
   }
   assert.ok(pruefeDefinition({ ...ambulant, tarife: [] }).includes('tarife fehlen'));
   assert.ok(pruefeDefinition({ ...ambulant, gesundheit: { fragen: [{ id: 'x', typ: 'quatsch', titel: 'x' }] } }).some((text) => text.includes('unbekannter Typ')));
@@ -76,7 +71,7 @@ test('Bedingungen und Folgefragen', () => {
 
   // „nein“ löscht die Kreuze darunter.
   const bereinigt = antwortenBereinigt(ambulant, { antworten: { '1a': 'nein', '1a-kreuze': ['krebs'], hinweisOk: true } });
-  assert.deepEqual(bereinigt, { '1a': 'nein', hinweisOk: true });
+  assert.deepEqual(bereinigt, { '1a': 'nein' }, 'ohne Vorspann der Online-Strecke');
   assert.deepEqual(offeneGesundheitsfragen(ambulant, { antworten: alleNein() }), []);
   assert.ok(offeneGesundheitsfragen(ambulant, { antworten: { ...alleNein(), '1a': 'ja' } }).includes('1a-kreuze'));
   assert.ok(offeneGesundheitsfragen(ambulant, { antworten: { ...alleNein(), 2: { groesse: '90', gewicht: '75' } } }).includes('2'));
@@ -185,8 +180,13 @@ test('IBAN und Eingaben', () => {
   const vorname = ambulant.person.felder[0];
   assert.match(feldFehler(vorname, 'Lena2'), /nur Buchstaben/);
   assert.equal(feldFehler(vorname, 'Anna-Lena'), null);
-  const kasse = ambulant.person.anschrift.find((feld) => feld.id === 'krankenkasse');
-  assert.equal(feldFehler(kasse, ''), null, 'Krankenkasse ist freiwillig');
+  const hausnummer = ambulant.person.anschrift.find((feld) => feld.id === 'hausnummer');
+  assert.equal(feldFehler(hausnummer, '12a'), null);
+  assert.ok(feldFehler(hausnummer, 'zwölf'), 'Hausnummer nach dem Muster der SDK');
+  assert.ok(feldFehler(ambulant.person.anschrift.find((feld) => feld.id === 'plz'), '99999'), 'PLZ 99999 lehnt die SDK ab');
+  const mobil = ambulant.person.anschrift.find((feld) => feld.id === 'telefon');
+  assert.equal(feldFehler(mobil, '+49 151 1234567'), null);
+  assert.ok(feldFehler(mobil, '(040) 123456'), 'Klammern nimmt die SDK nicht an');
 });
 
 test('Abschlusslinks: Sparte, Versicherer, Stufe', () => {
@@ -200,45 +200,62 @@ test('Abschlusslinks: Sparte, Versicherer, Stufe', () => {
   assert.equal(antragAusLink('https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487'), null, 'DKV bleibt wie heute');
   assert.equal(antragAusLink('https://insurances-online.levelnine.biz/?mandant=vmk&tarifftypes=Ambulant&tariffs=UKVVorsorgePRIVAT@'), null, 'UKV Vorsorge bleibt wie heute');
   assert.equal(antragAusLink('https://healio.de/ambulant?angebot=arag-v100'), null);
-  assert.equal(eigeneMaskeFuer({ sparte: 'ambulant', versicherer: 'sdk' }), true);
-  assert.equal(eigeneMaskeFuer({ sparte: 'zahn', versicherer: 'bayerische' }), true);
-  assert.equal(eigeneMaskeFuer({ sparte: 'zahn', versicherer: 'ukv' }), false, 'UKV Zahn: weiter zum Versicherer');
-  assert.equal(eigeneMaskeFuer({ sparte: 'stationaer', versicherer: 'sdk' }), false, 'Gerüst: weiter zum Versicherer');
+  assert.equal(eigeneMaskeFuer({ sparte: 'ambulant', versicherer: 'sdk' })?.produkt, 'ambulant');
+  assert.equal(eigeneMaskeFuer({ sparte: 'zahn', versicherer: 'bayerische' })?.produkt, 'zahn');
+  assert.equal(eigeneMaskeFuer({ sparte: 'stationaer', versicherer: 'sdk' })?.produkt, 'stationaer');
+  assert.equal(eigeneMaskeFuer({ sparte: 'zahn', versicherer: 'ukv' }), null, 'UKV Zahn ohne Schalter: weiter zum Versicherer');
+  assert.equal(eigeneMaskeFuer({ sparte: 'zahn', versicherer: 'ukv' }, { ukvZahn: true })?.produkt, 'zahn-ukv');
 });
 
-test('Datensatz für den Selbstantrag', () => {
+test('Datensatz für den Selbstantrag (ambulant, Online-Strecke)', () => {
   const daten = {
     tarif: 'AP1',
     geburtsdatum: '5.3.1990',
     antworten: { ...alleNein(), '1a': 'ja', '1a-kreuze': ['krebs', 'als'] },
     anrede: 'frau',
     formular: {
-      vorname: ' Lena ', nachname: 'Muster', strasse: 'Musterweg 12', plz: '20095', ort: 'Hamburg', telefon: '040 1234567', email: 'lena@beispiel.de', krankenkasse: '',
+      vorname: ' Lena ', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
     },
-    bestaetigungen: { gkv: true },
+    bestaetigungen: { acknowledge: true },
     zahlweise: 'monatlich',
     kontoinhaber: 'selbst',
     iban: 'DE89 3704 0044 0532 0130 00',
+    bankname: 'Testbank',
     erklaerungen: {
-      verzicht: true, vollmacht: true, gesundheitsdaten: true, schweigepflicht: 'II', bonitaet: false, schluss: true, sepa: true,
+      saveConfirmationtext: true, declarationOfConsentTermsOfContract: true, declarationOfConsentAndReleaseFromConfidentiality: true, avoidAdvice: true, verzicht: true, vollmacht: true, gesundheitsdaten: true, sepaMandatConfirmation: true,
     },
+    unterlagenDienst: [{ id: 12289, name: 'AVB: AVB KV ZV Teil I (Allgemeiner Teil)_1-751_01.22' }],
+    unterlagenGeoeffnet: { 'dienst:12289': '2026-11-12T10:00:00.000Z' },
   };
   const beitrag = berechneBeitrag(ambulant, {
     tarif: 'AP1', geburtsdatum: { tag: 5, monat: 3, jahr: 1990 }, beginn: BEGINN, antworten: daten.antworten,
   });
   const body = baueSelbstantrag(ambulant, daten, { beginn: BEGINN, beitrag, heute: HEUTE });
   assert.equal(body.kanal, 'web-selbst');
-  assert.deepEqual(Object.keys(body).sort(), ['angaben', 'beitragAngezeigt', 'erklaerungen', 'gesundheit', 'herkunft', 'kanal', 'schutz', 'sparte', 'textfassung', 'versand', 'versicherer', 'zahlung']);
+  assert.deepEqual(Object.keys(body).sort(), ['angaben', 'beitragAngezeigt', 'bestaetigungen', 'erklaerungen', 'gesundheit', 'herkunft', 'kanal', 'original', 'schutz', 'sparte', 'textfassung', 'unterlagen', 'versand', 'versicherer', 'zahlung']);
   assert.deepEqual(body.angaben, {
-    tarifCode: 'AP1', beginnIso: '2026-12-01', anrede: 'frau', formular: { vorname: 'Lena', nachname: 'Muster', strasse: 'Musterweg 12', plz: '20095', ort: 'Hamburg', telefon: '040 1234567', email: 'lena@beispiel.de' }, geburtsdatum: '05.03.1990', gkv: true,
+    tarifCode: 'AP1', beginnIso: '2026-12-01', anrede: 'frau', formular: { vorname: 'Lena', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de' }, geburtsdatum: '05.03.1990',
   });
+  assert.deepEqual(body.bestaetigungen, { acknowledge: true });
   assert.deepEqual(body.gesundheit.kreuze1a, ['als', 'krebs'], 'Reihenfolge wie im Formular');
-  assert.deepEqual(Object.keys(body.gesundheit.antworten), FRAGEN_1B_1K.map((frage) => frage.id));
   assert.equal(body.zahlung.iban, 'DE89370400440532013000');
-  assert.deepEqual(body.erklaerungen, {
-    hinweisOk: true, verzicht: true, vollmacht: true, gesundheitsdaten: true, schweigepflicht: 'II', bonitaet: false, schluss: true, sepa: true,
-  });
+  assert.equal(body.zahlung.bankname, 'Testbank');
+  assert.equal(body.erklaerungen.declarationOfConsentAdvertising, false, 'Werbung leer heißt false');
+  assert.equal(body.erklaerungen.avoidAdvice, true);
+  const g = (feld) => body.original.find((eintrag) => eintrag.feld === feld)?.wert;
+  assert.equal(g('G43'), 'true', 'ALS: eigene Zuordnung G43');
+  assert.equal(g('G49'), 'true', 'Krebs: G49');
+  assert.equal(g('G42'), 'false');
+  assert.equal(g('G54'), 'false');
+  assert.equal(g('G0A'), '178');
+  assert.equal(g('tarifwahl'), 'SDKAP1#');
+  assert.equal(g('downloadLnDocument_12289'), 'true');
+  assert.equal(g('confirmDataProtection'), 'true', 'verdeckte Antwort wie im Original');
+  assert.equal(body.unterlagen.gezeigt[0].pflichtDownload, true);
+  assert.deepEqual(body.unterlagen.geoeffnet, [{ href: 'dienst:12289', um: '2026-11-12T10:00:00.000Z' }]);
   assert.equal(body.beitragAngezeigt, beitragMitZuschlag(39.19, 80));
+  assert.equal(bildschirmFuerFeld('angaben.formular.plz').bildschirm, 'anschrift');
+  assert.equal(bildschirmFuerFeld('zahlung.iban').bildschirm, 'zahlung');
   assert.deepEqual(body.herkunft, {
     ref: null, utm: {}, einstiegsseite: null, sparte: 'ambulant', weg: 'allein',
   }, 'ohne Kennzeichen: leere Herkunft, kein Fehler');
@@ -251,8 +268,6 @@ test('Datensatz für den Selbstantrag', () => {
   assert.deepEqual(bereinigeHerkunft({ ref: 'a b<script>', utm: { utm_source: 'x y' }, einstiegsseite: '/a?x=1', weg: 'fax' }), {
     ref: null, utm: {}, einstiegsseite: null, sparte: null, weg: null,
   }, 'unsaubere Kennzeichen fallen weg');
-  assert.equal(bildschirmFuerFeld('angaben.formular.plz').bildschirm, 'anschrift');
-  assert.equal(bildschirmFuerFeld('zahlung.iban').bildschirm, 'zahlung');
 });
 
 test('Texte: Wortlaut wie Prüfseite, keine Gedankenstriche, nie „ohne Gesundheitsfragen“', () => {
@@ -358,23 +373,133 @@ test('Zahn: Vollständigkeit gegen bayerische-zahn.json', { skip: !fs.existsSync
   console.log(`Zahn: ${pflicht.length} Pflichtfelder im Original, ${pflicht.length - fehlend.length} abgedeckt, ${ungesehen} davon ungesehen.`);
 });
 
-test('Ambulant: Vollständigkeit gegen den Vertrag des Antragsdienstes (SCHNITTSTELLE.md 3 und 4.2)', () => {
-  const pflicht = [
-    'angaben.tarifCode', 'angaben.beginnIso', 'angaben.anrede', 'angaben.geburtsdatum', 'angaben.gkv',
-    ...['vorname', 'nachname', 'strasse', 'plz', 'ort', 'telefon', 'email'].map((k) => `angaben.formular.${k}`),
-    'gesundheit.antwort1a', 'gesundheit.kreuze1a', ...FRAGEN_1B_1K.map((f) => `gesundheit.antworten.${f.id}`), 'gesundheit.groesse', 'gesundheit.gewicht',
-    'zahlung.zahlweise', 'zahlung.kontoinhaber', 'zahlung.iban',
-    ...['hinweisOk', 'verzicht', 'vollmacht', 'gesundheitsdaten', 'schweigepflicht', 'bonitaet', 'schluss', 'sepa'].map((k) => `erklaerungen.${k}`),
-    'beitragAngezeigt',
-  ];
-  const daten = {
-    tarif: 'AP5', geburtsdatum: '05.03.1990', antworten: alleNein(), anrede: 'herr',
-    formular: { vorname: 'Max', nachname: 'Muster', strasse: 'Weg 1', plz: '20095', ort: 'Hamburg', telefon: '0401234567', email: 'max@beispiel.de' },
-    bestaetigungen: { gkv: true }, zahlweise: 'monatlich', kontoinhaber: 'selbst', iban: 'DE89370400440532013000', erklaerungen: { schweigepflicht: 'I' },
+
+// ---------------------------------------------------------------------------
+// Level-Nine-Produkte: SDK stationär, SDK ambulant, UKV Zahn
+// ---------------------------------------------------------------------------
+const ERFASSUNG_LN = path.join(ROOT, '../../Healio/Antragsstrecken/originale/levelnine');
+const lnDa = fs.existsSync(path.join(ERFASSUNG_LN, 'sdk-stationaer.json'));
+const NICHT_FELDER = new Set(['Knopf', 'Anzeige', 'Hinweistext', 'Überschrift', 'Hinweistexte', 'Liste mit Knöpfen', 'Liste aller Antworten (nur lesen)', 'Kontaktkasten', 'Knopf (öffnet Bestätigungsdialog)']);
+// Felder nur für einen abweichenden Versicherungsnehmer: Die Maske gilt nur für Versicherungsnehmer = versicherte Person
+// (im Original mit Ja vorbelegt und gesperrt).
+const NUR_ABWEICHENDER_VN = /^policyHolder(Gender|FirstName|FamilyName|Birthday)/;
+
+function pflichtfelderLevelnine(erfassung) {
+  const liste = [];
+  const geh = (feld, schritt, ungesehen) => {
+    if (!feld.id || NICHT_FELDER.has(feld.art) || /\s/.test(feld.id) || NUR_ABWEICHENDER_VN.test(feld.id)) return;
+    if (feld.pflicht === true) liste.push({ schritt, feld: feld.id, werte: (feld.werte || []).map((wert) => wert.wert), ungesehen });
+    (feld.folgefragen || []).forEach((folge) => geh(folge, schritt, ungesehen));
   };
-  const body = baueSelbstantrag(ambulant, daten, { beginn: BEGINN, beitrag: { beitrag: 12.29 }, heute: HEUTE });
-  const hat = (pfad) => pfad.split('.').reduce((o, k) => (o && k in o ? o[k] : undefined), body) !== undefined;
-  const fehlend = pflicht.filter((pfad) => !hat(pfad));
-  assert.deepEqual(fehlend, []);
-  console.log(`Ambulant: ${pflicht.length} Pflichtfelder im Vertrag des Antragsdienstes, ${pflicht.length - fehlend.length} abgedeckt, 0 ungesehen (Abgleich mit der SDK-Strecke folgt).`);
+  erfassung.schritte.forEach((schritt) => (Array.isArray(schritt.felder) ? schritt.felder : [])
+    .forEach((feld) => geh(feld, schritt.schritt, /nicht selbst gesehen|aus dem Code/i.test(String(schritt.quelle)))));
+  return liste;
+}
+
+// Abdeckung: Zuordnung aus originalFuerVertrag (Beispieldaten) plus alle Fragen der Definition (auch bedingte Folgefelder).
+function abdeckung(definition, daten) {
+  const felder = new Set(definition.originalFuerVertrag(daten, { beginn: BEGINN }).map((eintrag) => eintrag.feld));
+  const werte = {};
+  const geh = (frage) => {
+    const id = frage.original?.id || frage.id;
+    felder.add(id);
+    if (frage.typ === 'janein') werte[id] = ['true', 'false'];
+    if (frage.typ === 'auswahl' || frage.typ === 'mehrfach') werte[id] = frage.optionen.map((option) => option.id);
+    (frage.felder || []).forEach((feld) => feld.original && felder.add(feld.original));
+    (frage.folge || []).forEach(geh);
+  };
+  definition.gesundheit.fragen.forEach(geh);
+  return { felder, werte };
+}
+
+function pruefeVollstaendigkeit(name, definition, erfassung, daten) {
+  const pflicht = pflichtfelderLevelnine(erfassung);
+  const { felder, werte } = abdeckung(definition, daten);
+  const fehlend = pflicht.filter((eintrag) => !felder.has(eintrag.feld));
+  assert.deepEqual(fehlend.map((e) => `${e.schritt}:${e.feld}`), [], `${name}: Pflichtfelder ohne Zuordnung`);
+  for (const eintrag of pflicht) {
+    if (werte[eintrag.feld] && eintrag.werte.length) {
+      werte[eintrag.feld].forEach((wert) => assert.ok(eintrag.werte.includes(wert), `${name}: ${eintrag.feld} Wert ${wert} gibt es im Original nicht`));
+    }
+  }
+  const ungesehen = pflicht.filter((e) => e.ungesehen).length;
+  console.log(`${name}: ${pflicht.length} Pflichtfelder im Original, ${pflicht.length - fehlend.length} abgedeckt, ${ungesehen} davon ungesehen.`);
+}
+
+const lnDaten = (tarif, antworten) => ({
+  tarif,
+  geburtsdatumText: '05.03.1990',
+  anrede: 'frau',
+  antworten,
+  formular: {
+    vorname: 'Lena', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
+  },
+  bestaetigungen: { acknowledge: true },
+  iban: 'DE89370400440532013000',
+  bankname: 'Testbank',
+  erklaerungen: {},
+  unterlagenDienst: (DEFINITIONEN[tarif.startsWith('AP') ? 'ambulant' : 'stationaer'].unterlagenDownload?.liste(tarif) || []),
+});
+
+test('SDK stationär: Fragen nur bei SP1/SP2, kein Zuschlag, Tabelle und Vollständigkeit', { skip: !lnDa && 'Erfassung fehlt' }, () => {
+  const def = DEFINITIONEN.stationaer;
+  assert.equal(sichtbareFragen(def, { tarif: 'SPU' }).length, 0, 'SPU ohne Gesundheitsschritt');
+  assert.equal(sichtbareFragen(def, { tarif: 'SP2' }).length, 10, 'Größe/Gewicht plus 9 Fragen');
+  const ja = { G0: { groesse: '170', gewicht: '150' }, G18: 'ja' };
+  assert.equal(wirkungen(def, { tarif: 'SP2', antworten: ja }).zuschlagProzent, 0, 'Ja ändert online nichts');
+  const folge = sichtbareFolgefragen(def.gesundheit.fragen.find((f) => f.id === 'G18'), { antworten: ja, tarif: 'SP2' }).map((f) => f.id);
+  assert.deepEqual(folge.slice(0, 7), ['G18.C', 'G18.D', 'G18.E', 'G18.F', 'G18.G', 'G18.H', 'G18.K']);
+  // Beispiele aus dem Bericht: Eintrittsalter 30 (geboren 1996, Beginn 2026) und 31.
+  const b = (tarif, jahr, beginn = BEGINN) => berechneBeitrag(def, { tarif, geburtsdatum: { tag: 1, monat: 1, jahr }, beginn, antworten: {} })?.beitrag;
+  assert.equal(b('SP1', 1996), 49.78);
+  assert.equal(b('SP2', 1996), 32.82);
+  assert.equal(b('SPU', 1996), 6.84);
+  assert.equal(b('SP1', 1996, BEGINN_JAN), 50.72);
+  assert.equal(b('SP2', 1990), 36.5, 'Alter 36: 36,50 EUR wie in der Strecke');
+  const erfassung = JSON.parse(fs.readFileSync(path.join(ERFASSUNG_LN, 'sdk-stationaer.json'), 'utf8'));
+  pruefeVollstaendigkeit('SDK stationär', def, erfassung, lnDaten('SP2', { G0: { groesse: '170', gewicht: '70' } }));
+});
+
+test('SDK ambulant: Vollständigkeit gegen die Online-Strecke, Wortlaut der 25 Fragen', { skip: !lnDa && 'Erfassung fehlt' }, () => {
+  const erfassung = JSON.parse(fs.readFileSync(path.join(ERFASSUNG_LN, 'sdk-ambulant-abgleich.json'), 'utf8'));
+  const felder = erfassung.schritte.find((s) => s.schritt === 5).felder;
+  const wort = (id) => felder.find((f) => f.id === id).wortlaut;
+  assert.equal(FRAGE_1A_ITEMS.length, ORIGINAL_1A.length);
+  FRAGE_1A_ITEMS.forEach((item, stelle) => assert.equal(item.label.replace(/​/g, ''), wort(ORIGINAL_1A[stelle]), `1a: ${ORIGINAL_1A[stelle]}`));
+  FRAGEN_1B_1K.forEach((frage, stelle) => assert.equal(frage.text, wort(ORIGINAL_1B_1K[stelle]), `${frage.id}: ${ORIGINAL_1B_1K[stelle]}`));
+  assert.equal(ambulant.gesundheit.fragen[0].stamm.text, wort('G40'));
+  const daten = lnDaten('AP1', alleNein());
+  // Die 15 Einzelfragen und 1b bis 1k haben in der Maske keine eigene Frage-Kennung, nur die Zuordnung.
+  pruefeVollstaendigkeit('SDK ambulant', ambulant, { ...erfassung }, daten);
+});
+
+test('SDK ambulant: Regeländerungen 12.11.2026 (BMI gerundet, Beginn)', () => {
+  const bmi = (g, w) => wirkungen(ambulant, { antworten: { ...alleNein(), 2: { groesse: String(g), gewicht: String(w) } } }).zuschlagProzent;
+  assert.equal(bmi(191, 62), 0, '16,995 gerundet 17,0: 0 %');
+  assert.equal(bmi(189, 107), 20, '29,954 gerundet 30,0: 20 %');
+  assert.equal(bmi(170, 104), 40, '35,986 gerundet 36,0: 40 %');
+  assert.equal(bmi(175, 51), 20);
+  const optionen = beginnOptionenAus(ambulant.beginn, HEUTE);
+  assert.equal(optionen.frueher?.iso, '2026-11-01', 'bis zum 15. auch der laufende Monat');
+  assert.equal(optionen.weitere.at(-1).iso, '2027-05-01', 'höchstens 5 weitere Monate');
+  assert.equal(beginnOptionenAus(ambulant.beginn, new Date(2026, 10, 16)).frueher, null, 'ab dem 16. nicht mehr');
+  assert.deepEqual(beginnOptionen(HEUTE).frueher?.iso, '2026-11-01', 'Regelwerk der Prüfseite gleich');
+});
+
+test('UKV Zahn: Zuschlag je Zahn und Tarif, Ablehnung, Ausschluss, Vollständigkeit', { skip: !lnDa && 'Erfassung fehlt' }, () => {
+  const def = DEFINITIONEN['zahn-ukv'];
+  const basis = {
+    TF0021: '0', GF0073: 'nein', GF0074: 'nein', AF0010: 'nein', AF_AD_0001: 'Einzelfallentbindung', AF_AD_0005: 'pflichtversichert in deutscher GKV',
+  };
+  const b = (tarif, antworten) => berechneBeitrag(def, { tarif, geburtsdatum: { tag: 1, monat: 1, jahr: 1990 }, beginn: BEGINN, antworten })?.beitrag;
+  assert.equal(b('Z100', basis), 30.05, '36 Jahre ZahnPRIVAT 100');
+  assert.equal(b('Z100', { ...basis, TF0021: '1' }), 40.95, '1 Zahn: 30,05 + 10,90');
+  assert.equal(b('Z100', { ...basis, TF0021: '3' }), 62.75, '3 Zähne');
+  assert.equal(b('Z90', { ...basis, TF0021: '1' }), 31.77);
+  assert.equal(b('Z75', { ...basis, TF0021: '3' }), 30.0);
+  assert.equal(wirkungen(def, { tarif: 'Z100', antworten: { ...basis, TF0021: '>3' } }).keineAufnahme.length, 1, 'mehr als 3: keine Aufnahme');
+  assert.equal(wirkungen(def, { tarif: 'Z100', antworten: { ...basis, GF0073: 'ja' } }).keineAufnahme.length, 1, 'laufende Behandlung: keine Aufnahme');
+  assert.deepEqual(wirkungen(def, { tarif: 'Z100', antworten: { ...basis, GF0074: 'ja' } }).ausschluesse, ['Für Parodontosebehandlungen besteht kein Versicherungsschutz.']);
+  const erfassung = JSON.parse(fs.readFileSync(path.join(ERFASSUNG_LN, 'ukv-zahn.json'), 'utf8'));
+  pruefeVollstaendigkeit('UKV Zahn', def, erfassung, { ...lnDaten('Z100', basis), unterlagenDienst: [] });
 });

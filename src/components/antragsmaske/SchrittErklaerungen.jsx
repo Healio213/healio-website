@@ -67,10 +67,15 @@ export default function SchrittErklaerungen({
   const oeffnen = (href) => set((alt) => ({ unterlagenGeoeffnet: { ...alt.unterlagenGeoeffnet, [href]: alt.unterlagenGeoeffnet?.[href] || new Date().toISOString() } }));
   return (
     <div className="space-y-4">
-      <TeilKopf vorTitel={`Teil ${nummer} von ${anzahl}`} titel={teil.teil} ueberschriftRef={ueberschriftRef} />
+      <TeilKopf vorTitel={anzahl > 1 ? `Teil ${nummer} von ${anzahl}` : null} titel={teil.teil} ueberschriftRef={ueberschriftRef} />
       {teil.eintraege.map((eintrag) => {
         if (eintrag.art === 'hinweis') {
-          return <p key={eintrag.text.slice(0, 30)} className={cx('border-l-4 border-emerald-700 bg-white py-2 pl-3 pr-2 text-base leading-7 text-home-midnight', TRENNUNG)}>{schuetze(eintrag.text)}</p>;
+          return (
+            <div key={eintrag.text.slice(0, 30)} className={cx('border-l-4 border-emerald-700 bg-white py-2 pl-3 pr-2 text-base leading-7 text-home-midnight', TRENNUNG)}>
+              <p>{schuetze(eintrag.text)}</p>
+              {eintrag.terminLink && <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Termin vereinbaren<NeuerTab /></a>}
+            </div>
+          );
         }
         if (eintrag.art === 'wahl') {
           const text = fehler[eintrag.key];
@@ -104,10 +109,12 @@ export default function SchrittErklaerungen({
           return (
             <Karte key={eintrag.key} titel={eintrag.titel}>
               <Unterlagen eintrag={eintrag} kontext={kontext} oeffnen={oeffnen} />
+              {eintrag.haken && (
               <Haken feldKey={eintrag.key} checked={daten.erklaerungen[eintrag.key]} onChange={(wert) => setze(eintrag.key, wert)} fehler={fehler[eintrag.key]}>
                 <span className="block font-bold">{eintrag.haken}</span>
                 {(eintrag.hakenAbsaetze || []).map((absatz) => <span key={absatz.slice(0, 30)} className="mt-2 block">{absatz}</span>)}
               </Haken>
+              )}
             </Karte>
           );
         }

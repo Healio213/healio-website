@@ -1,3 +1,5 @@
+import { SDK_ABLAUF, sdkDatenZuordnung, sdkTeile } from './sdkStrecke.js';
+
 // Produktdefinition der Antragsmaske ambulant: SDK, Tarife AP5, AP7, AP9, AP1
 // (12.11.2026). Nur Zuordnung: Alle Wortlaute, Tarife, Beiträge und
 // Rechenregeln kommen unverändert aus dem Regelwerk, das auch die Prüfseite
@@ -82,8 +84,13 @@ export const SCHWEIGEPFLICHT_WAHL = [
   { id: 'II', titel: 'Möglichkeit II', text: 'Die SDK fragt dich jedes Mal vorher. Du entscheidest dann, ob sie nachfragen darf, oder schickst die Unterlagen selbst. Das kann etwas länger dauern.' },
 ];
 
-const FEHLER_GROESSE = `Bitte gib deine Größe in cm ein, zwischen ${GROESSE_MIN} und ${GROESSE_MAX}.`;
-const FEHLER_GEWICHT = `Bitte gib dein Gewicht in kg ein, zwischen ${GEWICHT_MIN} und ${GEWICHT_MAX}.`;
+// Online-Strecke: Größe und Gewicht nur als ganze Zahlen (Gewicht mit Komma ließ WEITER nicht zu).
+const FEHLER_GROESSE = `Bitte gib deine Größe in ganzen cm ein, zwischen ${GROESSE_MIN} und ${GROESSE_MAX}.`;
+const FEHLER_GEWICHT = `Bitte gib dein Gewicht in ganzen kg ein, zwischen ${GEWICHT_MIN} und ${GEWICHT_MAX}.`;
+const ganzeZahl = (text) => (/^\d{1,3}$/.test(String(text ?? '').trim()) ? Number(String(text).trim()) : null);
+// Einzelfragen des Originals: 1a als 15 Ja/Nein-Fragen G42 bis G53, 1b bis 1k als G54 bis G63.
+export const ORIGINAL_1A = ['G42', 'G43', 'G43A', 'G43B', 'G44', 'G45', 'G46', 'G47', 'G47A', 'G48', 'G49', 'G50', 'G50A', 'G51', 'G53'];
+export const ORIGINAL_1B_1K = ['G54', 'G55', 'G56', 'G57', 'G58', 'G59', 'G60', 'G61', 'G62', 'G63'];
 
 const frage1a = {
   id: '1a',
@@ -128,10 +135,10 @@ const frage2 = {
   kurz: `Frage 2: ${FRAGE_2_TEXT}`,
   felder: [
     {
-      id: 'groesse', label: 'Größe in cm', einheit: 'cm', min: GROESSE_MIN, max: GROESSE_MAX, fehler: FEHLER_GROESSE, platzhalter: 'z. B. 172', lesen: groesseAlsZahl, bereinigen: groesseEingabeBereinigt, anzeige: groesseAnzeige,
+      id: 'groesse', original: 'G0A', label: 'Körpergröße cm', einheit: 'cm', min: GROESSE_MIN, max: GROESSE_MAX, ganzzahl: true, fehler: FEHLER_GROESSE, platzhalter: 'z. B. 172', lesen: ganzeZahl, bereinigen: groesseEingabeBereinigt, anzeige: groesseAnzeige,
     },
     {
-      id: 'gewicht', label: 'Gewicht in kg', einheit: 'kg', min: GEWICHT_MIN, max: GEWICHT_MAX, fehler: FEHLER_GEWICHT, platzhalter: 'z. B. 68', lesen: gewichtAlsZahl, bereinigen: gewichtEingabeBereinigt, anzeige: gewichtAnzeige,
+      id: 'gewicht', original: 'G0B', label: 'Körpergewicht kg', einheit: 'kg', min: GEWICHT_MIN, max: GEWICHT_MAX, ganzzahl: true, fehler: FEHLER_GEWICHT, platzhalter: 'z. B. 68', lesen: ganzeZahl, bereinigen: gewichtEingabeBereinigt, anzeige: gewichtAnzeige,
     },
   ],
   // BMI-Tabelle aus dem SDK-Antrag 1.770aai, Seite 4 (bmiZuschlag).
@@ -141,18 +148,24 @@ const frage2 = {
   },
 };
 
+const teileSdk = sdkTeile({
+  strecke: 'sdkAmbulant', produkt: 'sdk-ambulant', vollmacht: TEXT_10_VOLLMACHT, tarifFuerUnterlagen: () => 'AP',
+});
+
 const ambulant = {
   sparte: 'ambulant',
+  produkt: 'ambulant',
+  pfad: 'ambulant',
   bereit: true,
   stand: '2026-11-12',
-  textfassung: '2026-11-09',
-  versicherer: {
-    id: 'sdk', name: SDK_NAME, kurz: 'SDK', beiDer: 'der SDK',
-  },
+  // Wortlaute ab 12.11.2026 nach der Online-Strecke der SDK (Erfassung Level Nine).
+  textfassung: '2026-11-12-sdk-ambulant-online',
+  quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, abgeglichen 12.11.2026',
   kennzeile: 'Ambulanter Zusatzschutz der SDK',
   seitentitel: 'Antrag ambulanter Zusatzschutz | Healio',
   beschreibung: 'Dein Antrag auf den ambulanten Zusatzschutz der SDK.',
-
+  ablauf: SDK_ABLAUF,
+  ...teileSdk,
   tarife: SDK_TARIFE.map((tarif) => ({
     id: tarif.code,
     name: tarifName(tarif),
@@ -161,7 +174,9 @@ const ambulant = {
   })),
   tarifHinweis: 'Beitrag im Monat, noch ohne Zuschlag aus den Gesundheitsfragen.',
 
-  beginn: { art: 'monatsErster', abMonat: 1, bisMonat: 1 + BEGINN_MONATE_NACH_NAECHSTMOEGLICH },
+  beginn: {
+    art: 'monatsErster', abMonat: 1, bisMonat: 1 + BEGINN_MONATE_NACH_NAECHSTMOEGLICH, laufenderMonatBisTag: 15,
+  },
   alter: { min: 18, stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG },
 
   beitrag: {
@@ -188,122 +203,28 @@ const ambulant = {
     vorbehalt: BEITRAG_VORBEHALT,
   },
 
-  gesundheit: {
-    titel: 'Gesundheitsfragen der SDK',
-    vorspann: {
-      vorTitel: 'Vor den 12 Fragen',
-      titel: 'Hinweis der SDK',
-      absaetze: SDK_VORSPANN_ABSAETZE,
-      aufklapper: SDK_VVG_19_MITTEILUNG ? { titel: VVG_19_AUFKLAPPEN, absaetze: [].concat(SDK_VVG_19_MITTEILUNG) } : null,
-      bestaetigung: { key: 'hinweisOk', label: MITTEILUNG_GELESEN, fehler: 'Bitte bestätige, dass du den Hinweis gelesen hast.' },
-    },
-    fragen: [frage1a, ...fragen1bk, frage2],
+  // Die Online-Strecke hat keinen Vorspann vor den Fragen (der Hinweis zur
+  // Anzeigepflicht steht als Haken unter „Erklärungen“).
+  gesundheit: { titel: 'Gesundheitsfragen der SDK', vorspann: null, fragen: [frage1a, ...fragen1bk, frage2] },
+
+  originalFuerVertrag: (daten, { beginn } = {}) => {
+    const a = daten.antworten || {};
+    const kreuze = a['1a'] === 'ja' && Array.isArray(a['1a-kreuze']) ? a['1a-kreuze'] : [];
+    const iso = (text) => { const t = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(String(text || '')); return t ? `${t[3]}-${t[2]}-${t[1]}` : null; };
+    const tf = (wert) => (wert === 'ja' ? 'true' : wert === 'nein' ? 'false' : null);
+    return [
+      { schritt: 1, feld: 'beginn', wert: beginn ? beginn.iso : null },
+      { schritt: 1, feld: 'geburtsdatum', wert: iso(daten.geburtsdatumText) },
+      { schritt: 1, feld: 'tarifwahl', wert: daten.tarif ? `SDK${daten.tarif}#` : null },
+      ...(daten.unterlagenDienst || []).map((u) => ({ schritt: 3, feld: `downloadLnDocument_${u.id ?? u.name}`, wert: daten.unterlagenGeoeffnet?.[`dienst:${u.id ?? u.name}`] ? 'true' : null })),
+      ...FRAGE_1A_ITEMS.map((item, stelle) => ({ schritt: 5, feld: ORIGINAL_1A[stelle], wert: a['1a'] ? (kreuze.includes(item.id) ? 'true' : 'false') : null })),
+      ...FRAGEN_1B_1K.map((frage, stelle) => ({ schritt: 5, feld: ORIGINAL_1B_1K[stelle], wert: tf(a[frage.id]) })),
+      { schritt: 5, feld: 'G0A', wert: String(a['2']?.groesse ?? '') },
+      { schritt: 5, feld: 'G0B', wert: String(a['2']?.gewicht ?? '') },
+      ...sdkDatenZuordnung(ambulant, daten),
+    ];
   },
 
-  person: {
-    anreden: ANREDEN,
-    felder: [
-      { id: 'vorname', label: 'Vorname', typ: 'name', autoComplete: 'given-name', fehlerLeer: 'Bitte gib deinen Vornamen ein.' },
-      { id: 'nachname', label: 'Nachname', typ: 'name', autoComplete: 'family-name', fehlerLeer: 'Bitte gib deinen Nachnamen ein.' },
-    ],
-    anschrift: [
-      { id: 'strasse', label: 'Straße und Hausnummer', typ: 'strasse', autoComplete: 'address-line1', fehlerLeer: 'Bitte gib Straße und Hausnummer ein.' },
-      { id: 'plz', label: 'PLZ', typ: 'plz', autoComplete: 'postal-code', inputMode: 'numeric', maxLength: 5, fehlerLeer: 'Bitte gib eine fünfstellige PLZ ein.' },
-      { id: 'ort', label: 'Ort', typ: 'name', autoComplete: 'address-level2', fehlerLeer: 'Bitte gib deinen Wohnort ein.' },
-      { id: 'telefon', label: 'Telefon', typ: 'telefon', type: 'tel', autoComplete: 'tel', inputMode: 'tel', fehlerLeer: 'Bitte gib eine Telefonnummer ein, unter der wir dich erreichen.' },
-      { id: 'email', label: 'E-Mail', typ: 'email', type: 'email', autoComplete: 'email', inputMode: 'email', fehlerLeer: 'Bitte gib deine E-Mail-Adresse ein.' },
-      {
-        id: 'krankenkasse', label: 'Deine Krankenkasse', hinweis: 'Freiwillig, zum Beispiel Techniker Krankenkasse.', typ: 'kasse', pflicht: false, maxLength: 80, autoComplete: 'off',
-      },
-    ],
-    bestaetigungen: [
-      {
-        key: 'gkv', label: GKV_BESTAETIGUNG, fehler: 'Bitte bestätige, dass du gesetzlich versichert bist und in Deutschland wohnst.', ausweg: 'Nicht gesetzlich versichert? Lass uns kurz sprechen.',
-      },
-    ],
-  },
-
-  zahlung: {
-    zahlweisen: ZAHLWEISEN,
-    kontoinhaberFrage: TEXT_13_FRAGE,
-    kontoAndere: {
-      titel: 'Das klären wir am besten kurz zusammen.',
-      text: 'Gehört das Konto jemand anderem, muss diese Person das Lastschriftmandat selbst erteilen. Vereinbare einfach einen Termin, dann machen wir den Rest gemeinsam.',
-    },
-    sepa: {
-      karte: 'SEPA-Lastschriftmandat der SDK', titel: SDK_SEPA_TITEL, absaetze: SDK_SEPA_MANDAT, angaben: SDK_SEPA_ANGABEN, key: 'sepa', haken: 'Ich erteile der SDK dieses SEPA-Lastschriftmandat für mein Konto.',
-    },
-  },
-
-  // Erklärungen in drei Teilen wie Schritt 4 der Prüfseite. art: hinweis
-  // (ohne Haken), haken (Pflicht oder freiwillig), wahl (I oder II).
-  erklaerungen: [
-    {
-      teil: 'Beratung und Auftrag',
-      eintraege: [
-        { art: 'hinweis', text: TEXT_8_AUSWAHL },
-        {
-          art: 'haken', key: 'verzicht', titel: 'Verzicht auf Beratung', warnung: TEXT_9_HINWEIS, terminLink: true, haken: TEXT_9_HAKEN, hakenZusatz: SDK_VERZICHT_SATZ, pflicht: true,
-        },
-        {
-          art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: ERKLAERUNG_KURZ.vollmacht, volltext: [['p', TEXT_10_VOLLMACHT]], dokument: 'Maklervertrag', haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
-        },
-      ],
-    },
-    {
-      teil: 'Deine Einwilligungen',
-      eintraege: [
-        {
-          art: 'haken',
-          key: 'gesundheitsdaten',
-          titel: 'Gesundheitsangaben bei Healio',
-          kurz: ERKLAERUNG_KURZ.gesundheitsdaten,
-          volltext: [['p', TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join('')]],
-          haken: 'Ich bin einverstanden.',
-          pflicht: true,
-        },
-        {
-          art: 'wahl',
-          key: 'schweigepflicht',
-          titel: 'Einwilligung und Schweigepflichtentbindung der SDK',
-          kurz: SCHWEIGEPFLICHT_KURZ,
-          volltext: SDK_SCHWEIGEPFLICHT_BLOECKE,
-          legend: 'Deine Wahl',
-          hinweis: 'Sie gilt für 2.1 und 2.2 der Erklärung. Mit deiner Wahl gibst du die ganze Erklärung ab.',
-          optionen: SCHWEIGEPFLICHT_WAHL,
-          fehler: 'Bitte wähle Möglichkeit I oder II.',
-          pflicht: true,
-        },
-        {
-          art: 'haken', key: 'bonitaet', titel: 'Einwilligung zur Bonitätsprüfung', kurz: ERKLAERUNG_KURZ.bonitaet, volltext: [['p', SDK_BONITAET]], haken: 'Ich bin einverstanden.', freiwilligText: 'Freiwillig. Dein Antrag geht auch ohne diesen Haken.', pflicht: false,
-        },
-      ],
-    },
-    {
-      teil: 'Unterlagen und Schlusserklärung',
-      eintraege: [
-        {
-          art: 'unterlagen',
-          key: 'schluss',
-          titel: 'Unterlagen und Schlusserklärung',
-          gruppen: [
-            { von: 'Von der SDK', eintraege: UNTERLAGEN_SDK.map((name) => ({ name, dateien: UNTERLAGEN_SDK_DATEIEN[name] || [] })) },
-            { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))] },
-          ],
-          haken: UNTERLAGEN_HAKEN,
-          hakenAbsaetze: SDK_SCHLUSSERKLAERUNG,
-          pflicht: true,
-        },
-      ],
-    },
-  ],
-
-  zusammenfassung: { titel: TEIL_3_TITEL },
-  absenden: { satz: TEXT_12_KNOPF, vorbehalt: BEITRAG_VORBEHALT, knopf: KNOPF_BEANTRAGEN },
-  danke: { punkte: abschlussPunkte({ versand: 'email', kontoinhaber: 'selbst' }) },
-
-  // Gesundheitsangaben im Format des Antragsdienstes (SCHNITTSTELLE.md 3),
-  // damit der Server mit zuschlagAufteilung() genau so nachrechnet.
   gesundheitFuerVertrag: (antworten = {}) => ({
     antwort1a: antworten['1a'] ?? null,
     kreuze1a: antworten['1a'] === 'ja' && Array.isArray(antworten['1a-kreuze']) ? FRAGE_1A_ITEMS.map((item) => item.id).filter((id) => antworten['1a-kreuze'].includes(id)) : [],

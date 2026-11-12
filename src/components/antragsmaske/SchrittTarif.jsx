@@ -142,6 +142,14 @@ export default function SchrittTarif({
                     : <span className="font-sans text-base font-normal text-home-slate">{brauchtPlz(definition) ? 'Beitrag nach Geburtsdatum und PLZ' : 'Beitrag nach Geburtsdatum'}</span>}
                 </span>
                 {tarif.zusatz && <span className="mt-1 block">{tarif.zusatz}</span>}
+                {gewaehlt && tarif.details && (
+                  <span className="relative z-20 -ml-9 mt-2 block border-t border-slate-300 pt-2">
+                    <details className="group">
+                      <summary className="cursor-pointer list-none font-semibold text-emerald-800 underline underline-offset-4 [&::-webkit-details-marker]:hidden">Tarifdetails anzeigen</summary>
+                      <span className="mt-2 block whitespace-pre-line text-home-slate">{tarif.details}</span>
+                    </details>
+                  </span>
+                )}
                 {gewaehlt && tarif.zeilen?.length > 0 && (
                   <span className="-ml-9 mt-2 block border-t border-slate-300 pt-2 text-home-slate [hyphens:manual]">
                     {tarif.zeilen.map(([label, wert]) => (
@@ -219,12 +227,23 @@ export default function SchrittTarif({
           >
             Nächstmöglich: <span className="whitespace-nowrap font-bold">{beginnWahl.naechstmoeglich?.label}</span>
           </OptionCard>
+          {beginnWahl.frueher && (
+            <OptionCard
+              kompakt
+              name="beginnArt"
+              value="frueher"
+              checked={daten.beginnArt === 'anderer' && daten.beginnIso === beginnWahl.frueher.iso}
+              onChange={() => set({ beginnArt: 'anderer', beginnIso: beginnWahl.frueher.iso })}
+            >
+              Rückwirkend ab <span className="whitespace-nowrap font-bold">{beginnWahl.frueher.label}</span>
+            </OptionCard>
+          )}
           {beginnWahl.weitere.length > 0 && (
             <OptionCard
               kompakt
               name="beginnArt"
               value="anderer"
-              checked={anderer}
+              checked={anderer && daten.beginnIso !== beginnWahl.frueher?.iso}
               onChange={() => set({
                 beginnArt: 'anderer',
                 beginnIso: beginnWahl.weitere.some((option) => option.iso === daten.beginnIso) ? daten.beginnIso : beginnWahl.weitere[0].iso,
@@ -233,7 +252,7 @@ export default function SchrittTarif({
               Später beginnen
             </OptionCard>
           )}
-          {anderer && (
+          {anderer && daten.beginnIso !== beginnWahl.frueher?.iso && (
             <div>
               <label htmlFor="feld-beginnDatum" className="sr-only">Beginn am</label>
               <div className="relative">

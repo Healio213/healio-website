@@ -20,6 +20,7 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/antrag/ambulant',
   '/antrag/zahn',
   '/antrag/stationaer',
+  '/antrag/zahn-ukv',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',

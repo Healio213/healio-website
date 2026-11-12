@@ -53,7 +53,7 @@
 
 export const SPARTEN = ['ambulant', 'zahn', 'stationaer'];
 
-const FRAGE_TYPEN = new Set(['janein', 'auswahl', 'mehrfach', 'zahl', 'masse', 'text']);
+const FRAGE_TYPEN = new Set(['janein', 'auswahl', 'mehrfach', 'zahl', 'masse', 'text', 'datum']);
 const WIRKUNG_ARTEN = new Set(['zuschlag', 'ausschluss', 'pruefung', 'keineAufnahme']);
 
 function pruefeWirkungen(liste, wo, fehler) {
@@ -61,7 +61,7 @@ function pruefeWirkungen(liste, wo, fehler) {
   if (!Array.isArray(liste)) { fehler.push(`${wo}: Wirkung muss eine Liste sein`); return; }
   liste.forEach((wirkung, stelle) => {
     if (!WIRKUNG_ARTEN.has(wirkung?.art)) fehler.push(`${wo}[${stelle}]: unbekannte Wirkung ${wirkung?.art}`);
-    if (wirkung?.art === 'zuschlag' && !Number.isFinite(wirkung.prozent) && !Number.isFinite(wirkung.euro)) fehler.push(`${wo}[${stelle}]: Zuschlag ohne Prozent oder Euro`);
+    if (wirkung?.art === 'zuschlag' && !Number.isFinite(wirkung.prozent) && !Number.isFinite(wirkung.euro) && !wirkung.euroJeTarif) fehler.push(`${wo}[${stelle}]: Zuschlag ohne Prozent oder Euro`);
   });
 }
 
@@ -70,7 +70,7 @@ function pruefeFrage(frage, ids, fehler) {
   if (!frage?.id || ids.has(frage.id)) fehler.push(`${wo}: Kennung fehlt oder doppelt`);
   ids.add(frage?.id);
   if (!FRAGE_TYPEN.has(frage?.typ)) fehler.push(`${wo}: unbekannter Typ ${frage?.typ}`);
-  if (!frage?.titel && !frage?.legend) fehler.push(`${wo}: Titel fehlt`);
+  if (!frage?.titel && !frage?.legend && !frage?.label && !frage?.text) fehler.push(`${wo}: Titel fehlt`);
   if (['auswahl', 'mehrfach'].includes(frage?.typ) && !(frage.optionen?.length > 0)) fehler.push(`${wo}: Antworten fehlen`);
   if (frage?.typ === 'janein' && frage.wirkung) {
     pruefeWirkungen(frage.wirkung.ja, `${wo} ja`, fehler);

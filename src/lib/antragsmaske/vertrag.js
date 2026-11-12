@@ -59,7 +59,12 @@ export function baueSelbstantrag(definition, daten, {
     angaben: angabenAus(daten, beginn, heute),
     gesundheit: definition.gesundheitFuerVertrag(daten.antworten || {}, { tarif: daten.tarif, bausteine: daten.bausteine || [] }),
     ...(definition.bausteine ? { bausteine: (daten.bausteine || []).filter((id) => definition.bausteine.some((baustein) => baustein.id === id)) } : {}),
-    zahlung: { zahlweise: daten.zahlweise, kontoinhaber: 'selbst', iban: ibanOhneLeer(daten.iban) },
+    zahlung: {
+      zahlweise: daten.zahlweise, kontoinhaber: 'selbst', iban: ibanOhneLeer(daten.iban), ...(definition.zahlung?.bankname ? { bankname: String(daten.bankname || '').trim() } : {}),
+    },
+    ...((definition.person?.bestaetigungen || []).length
+      ? { bestaetigungen: Object.fromEntries(definition.person.bestaetigungen.map((eintrag) => [eintrag.key, daten.bestaetigungen?.[eintrag.key] === true])) }
+      : {}),
     versand: 'email',
     erklaerungen,
     beitragAngezeigt: beitrag?.beitrag ?? null,
@@ -67,7 +72,12 @@ export function baueSelbstantrag(definition, daten, {
       ? { original: definition.originalFuerVertrag({ ...daten, geburtsdatumText: datumText(daten.geburtsdatum, heute) }, { beginn }) }
       : {}),
     unterlagen: {
-      gezeigt: gezeigteUnterlagen(definition, { tarif: daten.tarif, bausteine: daten.bausteine || [], antworten: daten.antworten || {} }),
+      gezeigt: [
+        ...(daten.unterlagenDienst || []).map((u) => ({
+          name: u.name, id: u.id ?? null, quelle: 'antragsdienst', stand: u.stand || definition.textfassung || null, pflichtDownload: true,
+        })),
+        ...gezeigteUnterlagen(definition, { tarif: daten.tarif, bausteine: daten.bausteine || [], antworten: daten.antworten || {} }),
+      ],
       geoeffnet: Object.entries(daten.unterlagenGeoeffnet || {}).map(([href, um]) => ({ href, um })),
       bestaetigt: Object.entries(daten.zeitpunkte || {}).map(([key, um]) => ({ erklaerung: key, um })),
     },

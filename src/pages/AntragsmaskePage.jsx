@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { CalendarDays, Phone } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import CampaignShell from '@/components/campaign/CampaignShell';
-import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
+import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
 import { definitionFuer } from '@/data/antrag';
 import Antragsmaske from '@/components/antragsmaske/Antragsmaske';
 import { TERMIN_LINK, telefonLink } from '@/components/antragsmaske/teile';
@@ -53,7 +53,8 @@ function AndereWege({ definition, titelRef }) {
 export default function AntragsmaskePage({ sparte }) {
   const definition = definitionFuer(sparte);
   const titelRef = useRef(null);
-  const aktiv = HEALIO_ANTRAGSMASKE_AKTIV && definition?.bereit;
+  const produktSchalter = { ukvZahn: HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV };
+  const aktiv = HEALIO_ANTRAGSMASKE_AKTIV && definition?.bereit && (!definition.schalter || produktSchalter[definition.schalter]);
   return (
     <div className="font-sans text-home-midnight">
       <SEOHead

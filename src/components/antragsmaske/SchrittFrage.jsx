@@ -5,6 +5,7 @@ import {
   Aufklapper, Callout, FOKUS, FehlerText, Field, Gruppe, OptionCard, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria,
 } from '@/components/antrag/ui';
 import { UKV_URL } from '@/components/sections/dental/dentalLinks';
+import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV } from '@/config/contactChannels';
 import { TERMIN_LINK, telefonLink } from './teile';
 
 // Schritt 2: eine Frage je Bildschirm, Folgefragen auf demselben Bildschirm
@@ -165,13 +166,13 @@ function Masse({
             <input
               {...fieldAria(`feld-frage-${frage.id}-${feld.id}`, { error: text })}
               type="text"
-              inputMode="decimal"
+              inputMode={feld.ganzzahl ? 'numeric' : 'decimal'}
               enterKeyHint={letzte ? 'done' : 'next'}
               autoComplete="off"
               maxLength={5}
               placeholder={feld.platzhalter}
               value={roh}
-              onChange={(event) => setze(feld.id, event.target.value.replace(/[^0-9.,]/g, '').slice(0, 5))}
+              onChange={(event) => setze(feld.id, event.target.value.replace(feld.ganzzahl ? /\D/g : /[^0-9.,]/g, '').slice(0, 5))}
               onBlur={() => {
                 setBeruehrt((alt) => ({ ...alt, [feld.id]: true }));
                 if (feld.bereinigen) setze(feld.id, feld.bereinigen(roh));
@@ -188,6 +189,55 @@ function Masse({
       })}
     </div>
   );
+}
+
+// Folgefelder des Originals: Text, Datum, Zahl (z. B. SDK stationär „Von wann“).
+function FolgeFeld({
+  frage, wert, setAntwort, fehler,
+}) {
+  const id = `feld-frage-${frage.id}`;
+  const text = fehler;
+  let eigenschaften = { type: 'text', autoComplete: 'off', maxLength: frage.maxLength || 500 };
+  if (frage.typ === 'datum') eigenschaften = { type: 'text', inputMode: 'numeric', placeholder: 'TT.MM.JJJJ', maxLength: 10, autoComplete: 'off' };
+  if (frage.typ === 'zahl') eigenschaften = { type: 'text', inputMode: 'numeric', maxLength: 5, autoComplete: 'off' };
+  return (
+    <Field id={id} label={frage.label || frage.text} hint={frage.pflicht === false ? 'Freiwillig' : undefined} error={text}>
+      <input
+        {...fieldAria(id, { hint: frage.pflicht === false, error: text })}
+        {...eigenschaften}
+        value={wert ?? ''}
+        onChange={(event) => {
+          let neu = event.target.value;
+          if (frage.typ === 'zahl') neu = neu.replace(/\D/g, '');
+          if (frage.typ === 'datum') neu = neu.replace(/[^0-9.]/g, '');
+          setAntwort(frage.id, neu);
+        }}
+        className={eingabeKlasse}
+      />
+    </Field>
+  );
+}
+
+// Folgefragen (rekursiv nach Bedingung) unter der Hauptfrage.
+function Folgefragen({
+  frage, daten, setAntwort, beantworte, fehler, kontext,
+}) {
+  return sichtbareFolgefragen(frage, kontext).map((teil) => (
+    <div key={teil.id} data-folge={teil.id}>
+      {(teil.typ === 'auswahl' || teil.typ === 'mehrfach') && (
+        <Auswahl frage={teil} wert={daten.antworten[teil.id]} setAntwort={setAntwort} fehler={fehler[`frage-${teil.id}`]} mehrfach={teil.typ === 'mehrfach'} />
+      )}
+      {teil.typ === 'janein' && (
+        <div className={KARTE}>
+          <p id={`frage-${teil.id}-text`} className="text-lg font-semibold leading-7 text-home-midnight">{teil.text}</p>
+          <JaNein frage={teil} wert={daten.antworten[teil.id]} beantworte={beantworte} gesperrt={false} fehler={fehler[`frage-${teil.id}`]} />
+        </div>
+      )}
+      {['text', 'datum', 'zahl'].includes(teil.typ) && (
+        <FolgeFeld frage={teil} wert={daten.antworten[teil.id]} setAntwort={setAntwort} fehler={fehler[`frage-${teil.id}`]} />
+      )}
+    </div>
+  ));
 }
 
 function Stamm({ frage }) {
@@ -215,9 +265,10 @@ function Stamm({ frage }) {
 const AUSWEGE = {
   telefon: (sparte) => ({ href: telefonLink(sparte), label: 'Zusammen am Telefon' }),
   termin: () => ({ href: TERMIN_LINK, label: 'Termin vereinbaren' }),
-  ukv: () => ({
-    href: UKV_URL, label: 'UKV ZahnPRIVAT online berechnen', extern: true,
-  }),
+  // Mit eingeschaltetem UKV-Produkt bleibt der Kunde in der eigenen Maske.
+  ukv: () => (HEALIO_ANTRAGSMASKE_AKTIV && HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV
+    ? { href: '/antrag/zahn-ukv', label: 'UKV ZahnPRIVAT beantragen' }
+    : { href: UKV_URL, label: 'UKV ZahnPRIVAT online berechnen', extern: true }),
 };
 function PruefungHinweis({ wirkung, sparte }) {
   const auswege = (wirkung.auswege || ['telefon', 'termin']).map((art) => AUSWEGE[art]?.(sparte)).filter(Boolean);
@@ -240,11 +291,12 @@ export default function SchrittFrage({
   definition, frage, nummer, anzahl, daten, setAntwort, beantworte, gesperrt, fehler, ueberschriftRef, kontext, stop, weiter,
 }) {
   const folge = sichtbareFolgefragen(frage, kontext);
+  // Bei Folgefragen ohne Hinweis: Hinweis bei „ja“ trotzdem zeigen (SDK stationär).
   const wert = daten.antworten[frage.id];
   return (
     <div className="space-y-3">
       <h2 ref={ueberschriftRef} tabIndex={-1} className="font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
-        {frage.titel}
+        {frage.titel || `Frage ${nummer}`}
         <span className="sr-only">, </span>
         <span className="ml-2 whitespace-nowrap text-base font-bold text-emerald-900">
           <span aria-hidden="true">· </span>
@@ -272,19 +324,10 @@ export default function SchrittFrage({
         )}
         {frage.typ === 'masse' && <Masse frage={frage} wert={wert} setAntwort={setAntwort} fehler={fehler[`frage-${frage.id}`]} weiter={weiter} />}
       </div>
-      {folge.map((teil) => (
-        <div key={teil.id}>
-          {(teil.typ === 'auswahl' || teil.typ === 'mehrfach') && (
-            <Auswahl frage={teil} wert={daten.antworten[teil.id]} setAntwort={setAntwort} fehler={fehler[`frage-${teil.id}`]} mehrfach={teil.typ === 'mehrfach'} />
-          )}
-          {teil.typ === 'janein' && (
-            <div className={KARTE}>
-              <p id={`frage-${teil.id}-text`} className="text-lg font-semibold leading-7 text-home-midnight">{teil.text}</p>
-              <JaNein frage={teil} wert={daten.antworten[teil.id]} beantworte={beantworte} gesperrt={false} fehler={fehler[`frage-${teil.id}`]} />
-            </div>
-          )}
-        </div>
-      ))}
+      {folge.length > 0 && wert === 'ja' && frage.hinweisBeiJa && <p className="text-base leading-6 text-emerald-900" data-hinweis-ja="">{frage.hinweisBeiJa}</p>}
+      <div className="space-y-3">
+        <Folgefragen frage={frage} daten={daten} setAntwort={setAntwort} beantworte={beantworte} fehler={fehler} kontext={kontext} />
+      </div>
       {stop && <PruefungHinweis wirkung={stop} sparte={definition.sparte} />}
     </div>
   );

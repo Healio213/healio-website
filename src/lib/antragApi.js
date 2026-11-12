@@ -70,13 +70,22 @@ export const sendeSelbstantrag = (body, optionen) => selbstAnfrage('/selbstantra
 // Gesundheitsangaben oder IBAN.
 export const berechneSelbstBeitrag = (body, optionen) => selbstAnfrage('/selbstantrag/beitrag', body, optionen);
 
+// Vertragsunterlagen je Produkt und Tarif (SDK: Pflicht-Downloads ohne
+// öffentliche Adresse, der Antragsdienst holt sie vom Versicherer). In der
+// Adresse stehen nur Produkt und Tarif, keine Angaben zur Person.
+export const ladeSelbstUnterlagen = ({ produkt, tarifCode }, optionen) => selbstAnfrage(
+  `/selbstantrag/unterlagen?produkt=${encodeURIComponent(produkt)}&tarif=${encodeURIComponent(tarifCode)}`,
+  undefined,
+  optionen,
+);
+
 async function selbstAnfrage(pfad, body, { signal } = {}) {
   let antwort;
   try {
     antwort = await fetch(`${ANTRAG_API_BASIS}${pfad}`, {
-      method: 'POST',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      method: body === undefined ? 'GET' : 'POST',
+      headers: body === undefined ? { Accept: 'application/json' } : { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: body === undefined ? undefined : JSON.stringify(body),
       cache: 'no-store',
       credentials: 'omit',
       referrerPolicy: 'no-referrer',

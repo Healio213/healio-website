@@ -67,7 +67,7 @@ function pruefDaten(entwurf) {
 const mitJahrMonat = (option) => (option ? { ...option, jahr: Number(option.iso.slice(0, 4)), monat: Number(option.iso.slice(5, 7)) } : null);
 
 function AndereSparte({ token, entwurf, titelRef }) {
-  const definition = definitionFuer(entwurf.sparte);
+  const definition = definitionFuer(entwurf.produkt || entwurf.sparte);
   if (!definition?.bereit) return <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12"><LinkUngueltig titelRef={titelRef} /></div>;
   const beginnWahl = entwurf.beginnOptionen?.naechstmoeglich
     ? { naechstmoeglich: mitJahrMonat(entwurf.beginnOptionen.naechstmoeglich), weitere: (entwurf.beginnOptionen.weitere || []).map(mitJahrMonat) }

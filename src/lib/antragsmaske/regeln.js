@@ -97,6 +97,8 @@ export function frageFehler(frage, antworten = {}) {
     return null;
   }
   if (frage.typ === 'zahl') {
+    if (String(wert ?? '').trim() === '' && frage.pflicht === false) return null;
+    if (frage.ganzzahl && !/^\d{1,5}$/.test(String(wert ?? '').trim())) return frage.fehler || 'Bitte gib eine ganze Zahl ein.';
     const zahl = zahlAusText(wert);
     if (zahl === null) return frage.fehler || 'Bitte gib eine Zahl ein.';
     if (Number.isFinite(frage.min) && zahl < frage.min) return frage.fehler || `Bitte gib mindestens ${frage.min} ein.`;
@@ -106,13 +108,32 @@ export function frageFehler(frage, antworten = {}) {
   if (frage.typ === 'masse') {
     const werte = wert && typeof wert === 'object' ? wert : {};
     const offen = (frage.felder || []).find((feld) => {
+      if (feld.ganzzahl && !/^\d{1,3}$/.test(String(werte[feld.id] ?? '').trim())) return true;
       const zahl = feld.lesen ? feld.lesen(werte[feld.id]) : zahlAusText(werte[feld.id]);
       return zahl === null || zahl < feld.min || zahl > feld.max;
     });
     return offen ? offen.fehler : null;
   }
-  if (frage.typ === 'text') return String(wert ?? '').trim().length > 0 ? null : 'Bitte fülle dieses Feld aus.';
+  if (frage.typ === 'text') {
+    const text = String(wert ?? '').trim();
+    if (!text) return frage.pflicht === false ? null : (frage.fehler || 'Bitte fülle dieses Feld aus.');
+    return text.length <= (frage.maxLength || 500) ? null : 'Bitte kürzer fassen.';
+  }
+  if (frage.typ === 'datum') {
+    const text = String(wert ?? '').trim();
+    if (!text) return frage.pflicht === false ? null : 'Bitte gib ein Datum ein, zum Beispiel 05.03.2024.';
+    return datumGueltig(text) ? null : 'Bitte prüfe das Datum (TT.MM.JJJJ).';
+  }
   return null;
+}
+
+// Datum TT.MM.JJJJ zwischen 1900 und 2100 (auch künftige Daten, etwa „Bis wann“).
+export function datumGueltig(text) {
+  const treffer = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(String(text ?? '').trim());
+  if (!treffer) return false;
+  const [tag, monat, jahr] = [treffer[1], treffer[2], treffer[3]].map(Number);
+  const datum = new Date(jahr, monat - 1, tag);
+  return jahr >= 1900 && jahr <= 2100 && datum.getFullYear() === jahr && datum.getMonth() === monat - 1 && datum.getDate() === tag;
 }
 
 // Offene Punkte der Gesundheitsfragen. Leer heißt vollständig.
@@ -186,6 +207,10 @@ export function wirkungen(definition, kontext = {}) {
       if (wirkung.art === 'zuschlag') {
         if (Number.isFinite(wirkung.prozent)) ergebnis.zuschlagProzent += wirkung.prozent;
         if (Number.isFinite(wirkung.euro)) ergebnis.zuschlagEuro = aufCent(ergebnis.zuschlagEuro + wirkung.euro);
+        // Fester Betrag je Tarif und Anzahl (UKV: je fehlendem Zahn je nach Tarif).
+        if (wirkung.euroJeTarif && Number.isFinite(wirkung.euroJeTarif[kontext.tarif])) {
+          ergebnis.zuschlagEuro = aufCent(ergebnis.zuschlagEuro + wirkung.euroJeTarif[kontext.tarif] * (Number.isInteger(wirkung.anzahl) ? wirkung.anzahl : 1));
+        }
         if (wirkung.grund && !ergebnis.gruende.includes(wirkung.grund)) ergebnis.gruende.push(wirkung.grund);
       } else if (wirkung.art === 'ausschluss') ergebnis.ausschluesse.push(wirkung.text);
       else if (wirkung.art === 'pruefung') ergebnis.pruefung.push(wirkung.text);
@@ -238,17 +263,21 @@ const labelAus = (datum) => `${zweistellig(datum.getDate())}.${zweistellig(datum
 // ergibt die Monatsersten vom nächsten (1) bis zum siebten Monat nach heute.
 // Optional rueckwirkendBis: 0 (keine Rückdatierung). Liefert
 // { naechstmoeglich, weitere } wie beginnOptionen der Prüfseite.
+// laufenderMonatBisTag: 15 (SDK-Strecke): bis einschließlich zum 15. ist auch
+// der Erste des laufenden Monats wählbar (als frueher, nicht vorbelegt).
 export function beginnOptionenAus(regel = {}, heute = new Date()) {
   const ab = Number.isInteger(regel.abMonat) ? regel.abMonat : 1;
   const bis = Number.isInteger(regel.bisMonat) ? regel.bisMonat : ab;
-  const liste = [];
-  for (let schritt = ab; schritt <= bis; schritt += 1) {
+  const option = (schritt) => {
     const datum = new Date(heute.getFullYear(), heute.getMonth() + schritt, 1);
-    liste.push({
+    return {
       iso: isoAus(datum), label: labelAus(datum), jahr: datum.getFullYear(), monat: datum.getMonth() + 1,
-    });
-  }
-  return { naechstmoeglich: liste[0] || null, weitere: liste.slice(1) };
+    };
+  };
+  const liste = [];
+  for (let schritt = ab; schritt <= bis; schritt += 1) liste.push(option(schritt));
+  const frueher = Number.isInteger(regel.laufenderMonatBisTag) && heute.getDate() <= regel.laufenderMonatBisTag ? option(0) : null;
+  return { naechstmoeglich: liste[0] || null, weitere: liste.slice(1), frueher };
 }
 
 // Eintrittsalter nach der Beitragsregel der Definition:
@@ -396,6 +425,8 @@ export function ibanHinweis(text) {
 export function feldFehler(feld, wert) {
   const text = String(wert ?? '').trim();
   if (!text) return feld.pflicht === false ? null : feld.fehlerLeer;
+  // Muster des Originals (z. B. PLZ, Hausnummer, Mobilnummer der SDK-Strecke): Die Maske nimmt nichts an, was das Original ablehnt.
+  if (feld.muster && !new RegExp(feld.muster).test(text)) return feld.fehlerMuster || feld.fehlerLeer;
   switch (feld.typ) {
     case 'name': return istNameText(text) ? null : 'Bitte nur Buchstaben, Leerzeichen, Punkt, Apostroph oder Bindestrich.';
     case 'strasse': return istStrasseText(text) ? null : feld.fehlerLeer;
@@ -403,6 +434,8 @@ export function feldFehler(feld, wert) {
     case 'hausnummer': return /^\d{1,4}\s?[a-zA-Z]?(?:\s?[-/]\s?\d{1,4}\s?[a-zA-Z]?)?$/.test(text) ? null : 'Bitte gib eine Hausnummer ein, zum Beispiel 12 oder 12a.';
     case 'plz': return istPlzText(text) ? null : 'Bitte gib eine fünfstellige PLZ ein.';
     case 'telefon': return istTelefonText(text) ? null : feld.fehlerLeer;
+    case 'mobil': return /^[0-9+\- ]+$/.test(text) && text.replace(/\D/g, '').length >= 6 && text.replace(/\D/g, '').length <= 16 ? null : feld.fehlerLeer;
+    case 'text': return text.length <= (feld.maxLength || 120) ? null : 'Bitte kürzer fassen.';
     case 'email': return istEmailText(text) ? null : 'Bitte gib eine gültige E-Mail-Adresse ein.';
     case 'kasse': return KASSE_MUSTER.test(text) ? null : 'Bitte nur Buchstaben, Ziffern, Leerzeichen und . - & + ( ) verwenden.';
     default: return text.length <= 120 ? null : 'Bitte kürzer fassen.';

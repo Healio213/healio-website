@@ -87,6 +87,9 @@ export default function SchrittBeitrag({
         </div>
       </div>
 
+      {definition.beitrag?.hinweisNachEingang && Object.values(daten.antworten).includes('ja') && (
+        <p className="rounded-[1rem] border-2 border-slate-300 bg-white p-3 text-base leading-7 text-home-midnight" data-hinweis-eingang="">{definition.beitrag.hinweisNachEingang}</p>
+      )}
       {definition.beitrag?.vorbehalt && <p className={bodyText}>{schuetze(definition.beitrag.vorbehalt)}</p>}
     </div>
   );

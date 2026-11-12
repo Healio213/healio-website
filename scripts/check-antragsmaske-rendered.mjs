@@ -49,7 +49,7 @@ async function starteServer() {
   const vite = (port, env) => spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
     cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, ...env }, stdio: 'ignore',
   });
-  prozesse.push(vite(3018, { VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1' }));
+  prozesse.push(vite(3018, { VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1' }));
   prozesse.push(vite(3019, { VITE_ANTRAGSMASKE: '0', VITE_ANTRAGSWAHL: '0' }));
   await warteAuf(`${API}/antrag/gesund`);
   await warteAuf(`${AN}/antrag/ambulant`);
@@ -131,10 +131,33 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   await foto(page, `${name}-01-tarif`);
   await weiter(page);
 
-  await bildschirm(page, 'hinweis');
+  // Reihenfolge wie die SDK-Online-Strecke: Daten mit Datenschutz-/GKV-Haken, Unterlagen (Pflicht-Download), Erklärungen, Fragen.
+  await bildschirm(page, 'person');
   await weiter(page);
-  pruefe(await page.locator('#fehler-hinweisOk').isVisible(), 'Hinweis ohne Haken bleibt stehen');
-  await page.locator('label:has(#feld-hinweisOk)').click();
+  pruefe(await page.locator('#fehler-acknowledge').isVisible(), 'Datenschutz- und GKV-Haken ist Pflicht');
+  await page.locator('label:has(input[name="anrede"][value="frau"])').click();
+  await page.fill('#feld-vorname', 'Lena');
+  await page.fill('#feld-nachname', 'Muster');
+  await page.locator('label:has(#feld-acknowledge)').click();
+  await foto(page, `${name}-02-person`);
+  await weiter(page);
+
+  await bildschirm(page, 'unterlagenDownload');
+  await page.waitForSelector('[data-download]');
+  pruefe(await page.locator('[data-download]').count() === 5, 'fünf Pflicht-Downloads');
+  await weiter(page);
+  pruefe((await page.textContent('[data-unterlagen-download]')).includes('Laden Sie die Datei bitte runter!'), 'Weiter erst nach allen Downloads');
+  await page.locator('[data-download]').first().click();
+  await weiter(page);
+  await bildschirm(page, 'unterlagenDownload');
+  await page.click('[data-alle-downloads]');
+  await foto(page, `${name}-03-unterlagen`);
+  await weiter(page);
+
+  await bildschirm(page, 'erkl:erklaerungen');
+  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  pruefe(!(await page.locator('#feld-declarationOfConsentAdvertising').isChecked()), 'Werbeeinwilligung leer');
+  await foto(page, `${name}-04-erklaerungen`);
   await weiter(page);
 
   await bildschirm(page, 'frage:1a');
@@ -146,23 +169,24 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
     await weiter(page);
     pruefe(await page.locator('#fehler-frage-1a-kreuze').isVisible(), '1a Ja ohne Kreuz bleibt stehen');
     await page.locator('label:has(input[name="frage-1a-kreuze"][value="krebs"])').click();
-    await foto(page, `${name}-02-frage-1a-ja`);
+    await foto(page, `${name}-05-frage-1a-ja`);
     await weiter(page);
   } else {
-    await foto(page, `${name}-02-frage-1a`);
+    await foto(page, `${name}-05-frage-1a`);
     await page.waitForTimeout(650);
     await page.click('[data-bildschirm="frage:1a"] [data-antwort="nein"]');
   }
   for (const id of ['1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
     await bildschirm(page, `frage:${id}`);
     await page.waitForTimeout(650);
-    if (id === '1e') await foto(page, `${name}-03-frage-1e`);
     await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="${mitJa && id === '1b' ? 'ja' : 'nein'}"]`);
   }
   await bildschirm(page, 'frage:2');
   await page.fill('#feld-frage-2-groesse', '178');
+  await page.fill('#feld-frage-2-gewicht', '75,5');
+  pruefe(await page.inputValue('#feld-frage-2-gewicht') === '755', 'Gewicht nur ganze Zahlen wie im Original');
   await page.fill('#feld-frage-2-gewicht', '75');
-  await foto(page, `${name}-04-frage-2`);
+  await foto(page, `${name}-06-frage-2`);
   await weiter(page);
 
   await bildschirm(page, 'beitrag');
@@ -170,9 +194,9 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   pruefe((await page.textContent('[data-beitrag-wert]')).includes(erwartet), `Beitrag ${erwartet}`);
   if (mitJa) pruefe((await page.textContent('[data-beitrag]')).includes('60 % Zuschlag'), '60 % Zuschlag (40 + 20)');
   await pruefeSeite(page, `${name} Beitrag`);
-  await foto(page, `${name}-05-beitrag`);
+  await foto(page, `${name}-07-beitrag`);
 
-  // Zurück ohne Datenverlust: zwei Bildschirme zurück und wieder vor.
+  // Zurück ohne Datenverlust: ein Bildschirm zurück und wieder vor.
   await page.locator('button[aria-label="Zurück"]').click();
   await bildschirm(page, 'frage:2');
   pruefe(await page.inputValue('#feld-frage-2-groesse') === '178', 'Zurück behält die Größe');
@@ -180,52 +204,37 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   await bildschirm(page, 'beitrag');
   await weiter(page);
 
-  await bildschirm(page, 'person');
-  await page.locator('label:has(input[name="anrede"][value="frau"])').click();
-  await page.fill('#feld-vorname', 'Lena');
-  await page.fill('#feld-nachname', 'Muster');
-  await foto(page, `${name}-06-person`);
+  await bildschirm(page, 'erkl:beratung');
+  for (const key of ['avoidAdvice', 'verzicht', 'vollmacht', 'gesundheitsdaten']) await page.locator(`label:has(#feld-${key})`).click();
+  await foto(page, `${name}-08-beratung`);
   await weiter(page);
 
   await bildschirm(page, 'anschrift');
-  await page.fill('#feld-strasse', 'Musterweg 12');
+  await page.fill('#feld-strasse', 'Musterweg');
+  await page.fill('#feld-hausnummer', '12');
   await page.fill('#feld-plz', '2009');
   await page.fill('#feld-ort', 'Hamburg');
-  await page.fill('#feld-telefon', '040 1234567');
   await page.fill('#feld-email', 'lena@beispiel.de');
+  await page.fill('#feld-telefon', '0151 1234567');
   await weiter(page);
   pruefe(await page.locator('#feld-plz-fehler').isVisible(), 'PLZ mit vier Ziffern wird abgewiesen');
   await page.fill('#feld-plz', '20095');
-  await page.locator('label:has(#feld-gkv)').click();
-  await foto(page, `${name}-07-anschrift`);
+  await foto(page, `${name}-09-anschrift`);
   await weiter(page);
 
   await bildschirm(page, 'zahlung');
-  await page.locator('label:has(input[name="zahlweise"][value="monatlich"])').click();
+  pruefe(await page.locator('input[name="zahlweise"]').count() === 0, 'keine Zahlweise (Original nur monatlich)');
   await page.locator('label:has(input[name="kontoinhaber"][value="selbst"])').click();
   await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 01');
   await page.locator('#feld-iban').blur();
-  await page.locator('label:has(#feld-sepa)').click();
-  pruefe(await page.locator('#feld-sepa').isChecked(), 'SEPA-Haken gesetzt');
+  await page.fill('#feld-bankname', 'Testbank');
+  await page.locator('label:has(#feld-sepaMandatConfirmation)').click();
+  pruefe(await page.locator('#feld-sepaMandatConfirmation').isChecked(), 'SEPA-Haken gesetzt');
   await weiter(page);
   pruefe((await page.textContent('#feld-iban-fehler')).includes('Tippfehler'), 'IBAN mit falscher Prüfziffer wird abgewiesen');
   await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 00');
   await page.locator('#feld-iban').blur();
-  await foto(page, `${name}-08-zahlung`);
-  await weiter(page);
-
-  await bildschirm(page, 'erkl:0');
-  await page.locator('label:has(#feld-verzicht)').click();
-  await page.locator('label:has(#feld-vollmacht)').click();
-  await foto(page, `${name}-09-erklaerungen-1`);
-  await weiter(page);
-  await bildschirm(page, 'erkl:1');
-  await page.locator('label:has(#feld-gesundheitsdaten)').click();
-  await page.locator('label:has(input[name="schweigepflicht"][value="I"])').click();
-  await weiter(page);
-  await bildschirm(page, 'erkl:2');
-  await page.locator('label:has(#feld-schluss)').click();
-  await foto(page, `${name}-10-unterlagen`);
+  await foto(page, `${name}-10-zahlung`);
   await weiter(page);
 
   await bildschirm(page, 'zusammenfassung');
@@ -253,6 +262,7 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter?.kanal === 'web-selbst' && letzter.zahlung.iban === 'DE89370400440532013000', 'Datensatz kommt an');
   pruefe(letzter.gesundheit.antwort1a === (mitJa ? 'ja' : 'nein') && letzter.gesundheit.antworten['1b'] === (mitJa ? 'ja' : 'nein'), 'Gesundheitsangaben im Vertragsformat');
+  pruefe(letzter.original.find((e) => e.feld === 'G49').wert === (mitJa ? 'true' : 'false') && letzter.unterlagen.geoeffnet.length === 5, 'Zuordnung G49 und fünf Downloads im Antrag');
   if (einstieg === 'werber') {
     pruefe(JSON.stringify(letzter.herkunft) === JSON.stringify({ ref: WERBER.ref, utm: WERBER.utm, einstiegsseite: '/ambulant', sparte: 'ambulant', weg: 'allein' }), `Herkunft mit Werber kommt an: ${JSON.stringify(letzter.herkunft)}`);
   } else if (einstieg === 'wahl') {
@@ -470,6 +480,197 @@ async function pruefseiteZahn(browser) {
   await context.close();
 }
 
+// Gemeinsame Schritte der SDK-Strecke nach dem Tarif (Daten, Unterlagen, Erklärungen).
+async function sdkVorFragen(page, name) {
+  await bildschirm(page, 'person');
+  await page.locator('label:has(input[name="anrede"][value="herr"])').click();
+  await page.fill('#feld-vorname', 'Max');
+  await page.fill('#feld-nachname', 'Muster');
+  await page.locator('label:has(#feld-acknowledge)').click();
+  await weiter(page);
+  await bildschirm(page, 'unterlagenDownload');
+  await page.waitForSelector('[data-alle-downloads]');
+  if (name) await foto(page, `${name}-unterlagen`);
+  await page.click('[data-alle-downloads]');
+  await weiter(page);
+  await bildschirm(page, 'erkl:erklaerungen');
+  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  await weiter(page);
+}
+async function sdkNachBeitrag(page, name) {
+  await bildschirm(page, 'erkl:beratung');
+  for (const key of ['avoidAdvice', 'verzicht', 'vollmacht', 'gesundheitsdaten']) await page.locator(`label:has(#feld-${key})`).click();
+  await weiter(page);
+  await bildschirm(page, 'anschrift');
+  await page.fill('#feld-strasse', 'Musterweg');
+  if (await page.locator('#feld-hausnummer').count()) await page.fill('#feld-hausnummer', '12');
+  await page.fill('#feld-plz', '20095');
+  await page.fill('#feld-ort', 'Hamburg');
+  await page.fill('#feld-email', 'max@beispiel.de');
+  await page.fill('#feld-telefon', '0151 1234567');
+  await weiter(page);
+  await bildschirm(page, 'zahlung');
+  await page.locator('label:has(input[name="kontoinhaber"][value="selbst"])').click();
+  await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 00');
+  await page.locator('#feld-iban').blur();
+  if (await page.locator('#feld-bankname').count()) await page.fill('#feld-bankname', 'Testbank');
+  await page.locator('label:has(#feld-sepaMandatConfirmation)').click();
+  await weiter(page);
+  if (name) await foto(page, `${name}-vor-zusammenfassung`);
+}
+
+async function stationaerDurchlauf(browser, breite, tarif) {
+  const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
+  const page = await context.newPage();
+  const name = `${breite}-stationaer-${tarif}`;
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.goto(`${AN}/antrag/stationaer`, { waitUntil: 'networkidle' });
+  await bildschirm(page, 'tarif');
+  await pruefeSeite(page, `${name} Tarif`);
+  await page.fill('#feld-geburtsdatum', '05.03.1990');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.locator(`label:has(input[name="tarif"][value="${tarif}"])`).click();
+  await page.waitForFunction(() => /EUR/.test(document.querySelector('[data-stufe-beitrag="SP2"]')?.textContent || ''));
+  pruefe((await page.textContent('[data-stufe-beitrag="SP2"]')).includes('36,50 EUR') && (await page.textContent('[data-stufe-beitrag="SP1"]')).includes('55,77 EUR'), 'Klinik-Beiträge 36 Jahre wie im Original');
+  await foto(page, `${name}-01-tarif`);
+  await weiter(page);
+  await sdkVorFragen(page, tarif === 'SP2' ? name : null);
+  if (tarif === 'SPU') {
+    await bildschirm(page, 'beitrag');
+    pruefe(true, 'SPU: Gesundheitsfragen entfallen');
+  } else {
+    await bildschirm(page, 'frage:G0');
+    await page.fill('#feld-frage-G0-groesse', '170');
+    await page.fill('#feld-frage-G0-gewicht', '70');
+    await weiter(page);
+    for (const id of ['G10', 'G11', 'G17', 'G18', 'G19', 'G20', 'G21', 'G3', 'G35']) {
+      await bildschirm(page, `frage:${id}`);
+      await page.waitForTimeout(650);
+      if (id === 'G18') {
+        await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="ja"]`);
+        await page.waitForSelector('#feld-frage-G18\\.C');
+        pruefe((await page.textContent('[data-hinweis-ja]')).includes('Die SDK prüft deine Angaben nach Eingang'), 'ehrlicher Hinweis statt Zuschlag');
+        await weiter(page);
+        pruefe(await page.locator('#feld-frage-G18\\.C-fehler').isVisible(), 'Folgefelder sind Pflicht wie im Original');
+        await page.fill('#feld-frage-G18\\.C', 'Kontrolle Schilddrüse');
+        await page.fill('#feld-frage-G18\\.D', '01.03.2025');
+        await page.click('[data-folge="G18.F"] [data-antwort="nein"]');
+        await page.fill('#feld-frage-G18\\.G', '0');
+        await page.click('[data-folge="G18.H"] [data-antwort="ja"]');
+        await page.fill('#feld-frage-G18\\.J', '01.06.2025');
+        await page.fill('#feld-frage-G18\\.K', 'Dr. Test, Teststraße 1, 20095 Hamburg');
+        await page.click('[data-folge="G18.1"] [data-antwort="nein"]');
+        await foto(page, `${name}-02-frage-G18-ja`);
+        await weiter(page);
+      } else {
+        await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
+      }
+    }
+    await bildschirm(page, 'beitrag');
+    pruefe((await page.textContent('[data-hinweis-eingang]')).includes('Die SDK prüft'), 'Beitrag: Prüfung nach Eingang, kein Zuschlag');
+  }
+  pruefe((await page.textContent('[data-beitrag-wert]')).includes(tarif === 'SP2' ? '36,50 EUR' : '7,92 EUR'), 'Beitrag ohne Zuschlag');
+  await foto(page, `${name}-03-beitrag`);
+  await weiter(page);
+  await sdkNachBeitrag(page, tarif === 'SP2' ? name : null);
+  await bildschirm(page, 'zusammenfassung');
+  await page.click('#knopf-absenden');
+  await page.waitForSelector('[data-danke]');
+  const { letzter } = await mock('/__test/letzter');
+  pruefe(letzter.sparte === 'stationaer' && letzter.angaben.tarifCode === tarif, `Stationär ${tarif} kommt an`);
+  if (tarif === 'SP2') {
+    const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
+    pruefe(g('G18') === 'true' && g('G18.D') === '2025-03-01' && g('G18.F') === 'false' && g('G0A') === '170' && g('tarifwahl') === 'SDKSP2#', 'Folgefelder in Original-Kennung und Format');
+  } else {
+    pruefe(!letzter.original.some((e) => /^G\d/.test(e.feld)), 'SPU: keine Gesundheitsfelder');
+  }
+  await foto(page, `${name}-04-danke`);
+  await context.close();
+}
+
+async function ukvDurchlauf(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  // Einstieg über den Ausweg der Bayerischen (fehlende Zähne, Smart).
+  await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await page.locator('label:has(input[name="tarif"][value="SMART"])').click();
+  await page.fill('#feld-geburtsdatum', '05.03.1990');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.fill('#feld-plzTarif', '20095');
+  await page.waitForSelector('[data-gesamtbeitrag]');
+  await weiter(page);
+  await bildschirm(page, 'hinweis');
+  await weiter(page);
+  await bildschirm(page, 'frage:z1s');
+  await page.waitForTimeout(650);
+  await page.click('[data-antwort="ja"]');
+  await page.waitForSelector('[data-pruefung] a[href="/antrag/zahn-ukv"]');
+  await page.click('[data-pruefung] a[href="/antrag/zahn-ukv"]');
+  await bildschirm(page, 'tarif');
+  pruefe(page.url().includes('/antrag/zahn-ukv'), 'Ausweg führt in die UKV-Maske');
+  await page.fill('#feld-geburtsdatum', '05.03.1990');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.locator('label:has(input[name="tarif"][value="Z100"])').click();
+  await page.waitForFunction(() => /30,05 EUR/.test(document.querySelector('[data-stufe-beitrag="Z100"]')?.textContent || ''));
+  await foto(page, '390-ukv-01-tarif');
+  await weiter(page);
+  await bildschirm(page, 'person');
+  await page.locator('label:has(input[name="anrede"][value="frau"])').click();
+  await page.fill('#feld-vorname', 'Lena');
+  await page.fill('#feld-nachname', 'Muster');
+  await weiter(page);
+  await bildschirm(page, 'hinweis');
+  await weiter(page);
+  await bildschirm(page, 'frage:TF0021');
+  await page.locator('label:has(input[name="frage-TF0021"][value="1"])').click();
+  await weiter(page);
+  await bildschirm(page, 'frage:GF0073');
+  await page.waitForTimeout(650);
+  await page.click('[data-antwort="nein"]');
+  await bildschirm(page, 'frage:GF0074');
+  await page.waitForTimeout(650);
+  await page.click('[data-antwort="nein"]');
+  await bildschirm(page, 'frage:AF0010');
+  await page.waitForTimeout(650);
+  await page.click('[data-antwort="nein"]');
+  await bildschirm(page, 'frage:AF_AD_0001');
+  await page.locator('label:has(input[name="frage-AF_AD_0001"])').click();
+  await weiter(page);
+  await bildschirm(page, 'frage:AF_AD_0005');
+  await page.locator('label:has(input[name="frage-AF_AD_0005"][value="pflichtversichert in deutscher GKV"])').click();
+  await weiter(page);
+  await bildschirm(page, 'beitrag');
+  pruefe((await page.textContent('[data-beitrag-wert]')).includes('40,95 EUR'), 'UKV 100 mit einem fehlenden Zahn 40,95 EUR');
+  await foto(page, '390-ukv-02-beitrag');
+  await weiter(page);
+  await bildschirm(page, 'erkl:auftrag');
+  for (const key of ['verzicht', 'vollmacht', 'gesundheitsdaten']) await page.locator(`label:has(#feld-${key})`).click();
+  await weiter(page);
+  await bildschirm(page, 'anschrift');
+  await page.fill('#feld-strasse', 'Musterweg 12');
+  await page.fill('#feld-plz', '20095');
+  await page.fill('#feld-ort', 'Hamburg');
+  await page.fill('#feld-email', 'lena@beispiel.de');
+  await weiter(page);
+  await bildschirm(page, 'zahlung');
+  await page.locator('label:has(input[name="kontoinhaber"][value="selbst"])').click();
+  await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 00');
+  await page.locator('#feld-iban').blur();
+  await page.locator('label:has(#feld-sepaMandatConfirmation)').click();
+  await weiter(page);
+  await bildschirm(page, 'erkl:unterlagen');
+  await weiter(page);
+  await bildschirm(page, 'zusammenfassung');
+  await page.click('#knopf-absenden');
+  await page.waitForSelector('[data-danke]');
+  const { letzter } = await mock('/__test/letzter');
+  const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
+  pruefe(letzter.versicherer === 'ukv' && letzter.beitragAngezeigt === 40.95 && g('TF0021') === '1' && g('tarifwahl') === 'UKVZahnPRIVAT100#', 'UKV-Antrag mit Zuschlag und Zuordnung');
+  await foto(page, '390-ukv-03-danke');
+  await context.close();
+}
+
 async function wahl(browser, breite) {
   const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
   const page = await context.newPage();
@@ -490,7 +691,7 @@ async function wahl(browser, breite) {
     const allein = await page.getAttribute('[data-weg="allein"]', 'href');
     const telefon = await page.getAttribute('[data-weg="telefon"]', 'href');
     pruefe(telefon === `/antrag/aufnehmen?sparte=${sparte}`, `${sparte}: Telefonweg mit Sparte`);
-    pruefe(sparte === 'stationaer' ? /^https:\/\//.test(allein) : allein === `/antrag/${sparte}`, `${sparte}: Allein-Weg (${allein})`);
+    pruefe(allein === `/antrag/${sparte}`, `${sparte}: Allein-Weg (${allein})`);
     await foto(page, `${breite}-wahl-${sparte}`);
     if (sparte === 'ambulant') {
       await page.click('[data-weg="allein"]');
@@ -502,11 +703,7 @@ async function wahl(browser, breite) {
   await page.goto(`${AN}/antrag/aufnehmen?sparte=zahn`, { waitUntil: 'networkidle' });
   pruefe(await page.locator('[data-sparte-hinweis="zahn"]').isVisible(), 'Hinweis „Nita nimmt deinen Wunsch auf“ für Zahn');
   await foto(page, `${breite}-aufnehmen-zahn`);
-  for (const sparte of ['stationaer']) {
-    await page.goto(`${AN}/antrag/${sparte}`, { waitUntil: 'networkidle' });
-    pruefe(await page.locator('[data-andere-wege]').isVisible() && await page.locator('[data-antragsmaske]').count() === 0, `/antrag/${sparte}: Gerüst zeigt nur die anderen Wege`);
-  }
-  await foto(page, `${breite}-gerüst-stationaer`);
+
   await context.close();
 }
 
@@ -540,6 +737,9 @@ try {
     await zahnDurchlauf(browser, 390, true);
     await zahnDurchlauf(browser, 1280, false);
     await zahnAblehnung(browser);
+    await stationaerDurchlauf(browser, 390, 'SP2');
+    await stationaerDurchlauf(browser, 1280, 'SPU');
+    await ukvDurchlauf(browser);
     await pruefseiteZahn(browser);
     await sonderfaelle(browser);
     await schalterAus(browser);

@@ -5,10 +5,17 @@
 import ambulant from './ambulant.js';
 import stationaer from './stationaer.js';
 import zahn from './zahn.js';
+import zahnUkv from './zahnUkv.js';
 
-export const DEFINITIONEN = { ambulant, zahn, stationaer };
+// Produkte (Schlüssel = Pfad unter /antrag/). Zahn hat zwei Versicherer.
+export const DEFINITIONEN = {
+  ambulant, zahn, stationaer, 'zahn-ukv': zahnUkv,
+};
 
-export const definitionFuer = (sparte) => DEFINITIONEN[sparte] || null;
+export const definitionFuer = (produkt) => DEFINITIONEN[produkt] || null;
+
+// Produkt zu Sparte und Versicherer (z. B. zahn + ukv → zahn-ukv).
+export const produktFuer = (sparte, versicherer) => Object.values(DEFINITIONEN).find((definition) => definition.sparte === sparte && definition.versicherer.id === versicherer) || null;
 
 export const istBereit = (sparte) => Boolean(DEFINITIONEN[sparte]?.bereit);
 
@@ -40,8 +47,12 @@ export function antragAusLink(href) {
   return null;
 }
 
-// Hat die Sparte eine fertige eigene Maske für genau diesen Versicherer?
-export function eigeneMaskeFuer(link) {
-  const definition = link ? definitionFuer(link.sparte) : null;
-  return Boolean(definition?.bereit && definition.versicherer.id === link.versicherer);
+// Fertige eigene Maske für genau diesen Versicherer? schalter: eingeschaltete
+// Produktschalter (z. B. { ukvZahn: true }); Produkte mit eigenem Schalter
+// gelten nur, wenn er an ist. Liefert die Definition oder null.
+export function eigeneMaskeFuer(link, schalter = {}) {
+  const definition = link ? produktFuer(link.sparte, link.versicherer) : null;
+  if (!definition?.bereit) return null;
+  if (definition.schalter && !schalter[definition.schalter]) return null;
+  return definition;
 }
