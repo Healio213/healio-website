@@ -24,17 +24,20 @@ import { ZAHN_CHECK_CARD_ID } from './zahnCheckScroll';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
 
-// Frank 04.11.2026: „Ja, aber schon fertig behandelt und abgerechnet“ (fertig)
-// nimmt denselben Weg wie „Nein“, für den Sofortschutz ist es dann zu spät.
+// Abnahme 12.11.2026: „Ja, aber schon fertig behandelt und abgerechnet“ (fertig)
+// führt nicht mehr zur UKV, deren Antragsfrage GF0073 fragt auch nach Empfehlungen
+// der letzten zwei Jahre (ehrliches „Ja“ heißt Ablehnung). Der Weg endet bei
+// fertig ohne Frage 4: Bayerische ohne ZAHN Sofort oder Gespräch.
 const needsQ4 = (answers) =>
-  (answers.q1 === 'nein' || answers.q1 === 'fertig') && answers.q2 === 'keine' && answers.q3 === 'nein';
+  answers.q1 === 'nein' && answers.q2 === 'keine' && answers.q3 === 'nein';
 
 // Franks Entscheidung vom 05.10.2026: Beim Zahn gibt es nur noch zwei Wege.
 // Die Bayerische (Zahntarif plus Baustein ZAHN Sofort) nur, wenn eine
 // Behandlung angeraten oder begonnen ist und weder Zähne fehlen noch eine
 // Vorgeschichte besteht. Alle anderen Situationen führen zur UKV ZahnPRIVAT,
-// auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn) und eine
-// schon abgerechnete Behandlung (q1 fertig).
+// auch 1 bis 3 fehlende Zähne (Aufnahme mit Risikozuschlag je Zahn).
+// Ausnahme seit 12.11.2026: eine schon abgerechnete Behandlung (q1 fertig) führt
+// ohne Lücke und ohne Vorgeschichte zur Bayerischen ohne ZAHN Sofort, sonst zum Gespräch.
 const computeResult = (answers) => {
   if (answers.q2 === 'viele') return 'sonderViele';
   // Angeratenes Zahnziehen: Die Bayerische lehnt in Gesundheitsfrage 1 ab, bei der
@@ -42,9 +45,9 @@ const computeResult = (answers) => {
   // persönliche Klärung (Konzept Antragsstrecke 12.10.2026, Abschnitt 3.2, Risiko 7).
   if (answers.q2 === 'ziehen') return 'sonderKomplex';
 
-  if (answers.q1 === 'ja') {
+  if (answers.q1 === 'ja' || answers.q1 === 'fertig') {
     if (answers.q2 === 'wenige' || answers.q3 === 'ja') return 'sonderKomplex';
-    return 'sofort';
+    return answers.q1 === 'ja' ? 'sofort' : 'bayerischeOhneSofort';
   }
 
   if (answers.q2 === 'wenige') return 'ukvLuecke';
@@ -145,8 +148,7 @@ const DentalZahnCheck = () => {
     (currentQuestionId === undefined ||
       answers.q2 === 'viele' ||
       answers.q2 === 'ziehen' ||
-      ((answers.q1 === 'nein' || answers.q1 === 'fertig') && answers.q2 === 'wenige') ||
-      (answers.q1 === 'ja' && answers.q2 === 'wenige'));
+      answers.q2 === 'wenige');
 
   const resultKey = isDone ? computeResult(answers) : null;
   const result = resultKey ? content.results[resultKey] : null;
@@ -155,6 +157,7 @@ const DentalZahnCheck = () => {
   // Only the neutral product label is shared with the callback dialog. Health
   // answers and the result variant stay inside this check's React state.
   const guidedTariff = result?.ctaType === 'ukv' ? 'UKV ZahnPRIVAT'
+    : resultKey === 'bayerischeOhneSofort' ? 'Die Bayerische – Zahn'
     : result?.ctaType === 'bayerische' ? 'Die Bayerische – Zahn mit ZAHN Sofort' : '';
   useEffect(() => {
     if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('zahn', guidedTariff);
@@ -403,8 +406,8 @@ const DentalZahnCheck = () => {
                       <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
                         <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
                           {lang === 'en'
-                            ? (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online')
-                            : (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen')}
+                            ? (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online'))
+                            : (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen'))}
                           <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
                         </LeadCaptureLink>
                       </Button>

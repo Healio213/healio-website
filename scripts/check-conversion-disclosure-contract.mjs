@@ -126,7 +126,7 @@ expect(/routes:\s*\['UKV ZahnPRIVAT', 'Bayerische mit ZAHN Sofort'\]/.test(denta
 // reichen, in jedem UKV-Ergebnis und in beiden Sprachen.
 for (const lang of ['de', 'en']) {
   const check = getDentalContent(lang).check;
-  expect(Object.keys(check.results).length === 9, `Der Zahn-Check behält alle neun Ergebniswege (${lang}).`);
+  expect(Object.keys(check.results).length === 10, `Der Zahn-Check hat zehn Ergebniswege, neun bisherige und die Bayerische ohne ZAHN Sofort (${lang}).`);
   const ukvResults = Object.values(check.results).filter((result) => result.ctaType === 'ukv');
   expect(ukvResults.length === 6, `Alle sechs UKV-Ergebniswege bleiben erhalten (${lang}).`);
   for (const result of ukvResults) {
@@ -195,7 +195,9 @@ for (const q1 of ['ja', 'nein']) {
 }
 expect(dentalCompute({ q1: 'ja', q2: 'keine', q3: 'nein' }) === 'sofort', 'Der Sofort-Weg der Bayerischen bleibt für Behandlung ohne Lücke und ohne Vorgeschichte erhalten.');
 // Frank 04.11.2026: Dritte Antwort in Frage 1 für eine schon abgerechnete Behandlung.
-// Sie führt nie in den Sofort-Weg, sondern wie „Nein“ zur UKV, mit eigenem Hinweis.
+// Sie führt nie in den Sofort-Weg und seit 12.11.2026 auch nie zur UKV (deren Antragsfrage
+// GF0073 fragt nach Empfehlungen der letzten 2 Jahre): Bayerische ohne ZAHN Sofort, bei Lücke
+// oder Vorgeschichte das Gespräch.
 for (const lang of ['de', 'en']) {
   const { q1 } = getDentalContent(lang).check.questions;
   expect(Object.keys(q1.options).join(',') === 'ja,fertig,nein', `Frage 1 hat die drei Antworten Ja, schon abgerechnet und Nein (${lang}).`);
@@ -204,15 +206,23 @@ for (const lang of ['de', 'en']) {
 expect(getDentalContent('de').check.questions.q1.options.fertig?.label === 'Ja, aber schon fertig behandelt und abgerechnet', 'Die dritte Antwort steht in Franks Wortlaut.');
 expect(/Was nach Versicherungsbeginn neu nötig wird, ist versichert/.test(getDentalContent('de').check.nachBehandlung), 'Der Hinweis sagt, dass nur Neues versichert ist.');
 for (const [answers, expected] of [
-  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'leistung' }, 'ukvLeistung'],
-  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'preis' }, 'ukvPreis'],
-  [{ q1: 'fertig', q2: 'wenige' }, 'ukvLuecke'],
-  [{ q1: 'fertig', q2: 'keine', q3: 'ja' }, 'ukvVorgeschichte'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'nein' }, 'bayerischeOhneSofort'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'leistung' }, 'bayerischeOhneSofort'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'nein', q4: 'preis' }, 'bayerischeOhneSofort'],
+  [{ q1: 'fertig', q2: 'wenige' }, 'sonderKomplex'],
+  [{ q1: 'fertig', q2: 'keine', q3: 'ja' }, 'sonderKomplex'],
   [{ q1: 'fertig', q2: 'viele' }, 'sonderViele'],
   [{ q1: 'fertig', q2: 'ziehen' }, 'sonderKomplex'],
 ]) {
-  expect(dentalCompute(answers) === expected, `Schon abgerechnet führt zu ${expected}, nie zum Sofort-Weg (${JSON.stringify(answers)}).`);
+  expect(dentalCompute(answers) === expected, `Schon abgerechnet führt zu ${expected}, nie zum Sofort-Weg und nie zur UKV (${JSON.stringify(answers)}).`);
 }
+expect(!/^ukv/.test(dentalCompute({ q1: 'fertig', q2: 'keine', q3: 'nein' })), 'Schon abgerechnet führt nie zur UKV.');
+expect(dentalIsDone({ q1: 'fertig', q2: 'keine', q3: 'nein' }, ['q1', 'q2', 'q3'], undefined) === true, 'Schon abgerechnet endet nach Frage 3 ohne Frage 4.');
+for (const lang of ['de', 'en']) {
+  const r = getDentalContent(lang).check.results.bayerischeOhneSofort;
+  expect(r && r.ctaType === 'bayerische' && !/ZAHN Sofort berechnen|calculate & apply/.test(r.ctaLabel || '') && !/Gesundheitsfragen/.test(JSON.stringify(r)), `Ergebnis Bayerische ohne ZAHN Sofort: Bayerische-Knopf, keine Behauptung zu fehlenden Gesundheitsfragen (${lang}).`);
+}
+expect(/answers\.q1 === 'nein' && answers\.q2 === 'keine' && answers\.q3 === 'nein'/.test(dentalCheck), 'Frage 4 (Tarifwunsch) wird bei schon abgerechneter Behandlung nicht gestellt.');
 expect(dentalIsDone({ q1: 'fertig', q2: 'wenige' }, ['q1', 'q2'], 'q3') === true, 'Schon abgerechnet und 1 bis 3 fehlende Zähne endet wie „Nein“ im UKV-Lückenweg.');
 expect(/textNachBehandlung/.test(dentalCheck) && /content\.nachBehandlung\b/.test(dentalCheck), 'Der Zahn-Check zeigt bei schon abgerechneter Behandlung Hinweis und passenden Ergebnistext.');
 expect(/Es fehlen keine Zähne, es soll kein Zahn gezogen werden und es gibt keine Zahn-Vorgeschichte/.test(dentalContent) && /no missing teeth, no tooth due to be extracted and no dental history/.test(dentalContent), 'Die Wegekarte der Bayerischen nennt in DE und EN das angeratene Zahnziehen als Ausschluss.');
