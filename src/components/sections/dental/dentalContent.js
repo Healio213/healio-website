@@ -507,7 +507,7 @@ const en = {
         title: 'Your treatment is finished, so you do not need immediate cover',
         text: 'You can choose a dental plan from die Bayerische without the ZAHN Sofort module. Die Bayerische does not ask about earlier recommendations from your dentist in the application.',
         reasons: [
-          'Your treatment has been invoiced. The questions from die Bayerische are about the current state of your teeth, and yours fits.',
+          'Your treatment has been invoiced. The questions from die Bayerische are about the current state of your teeth.',
           'You have no missing teeth and no dental history.',
           'No waiting periods in all three tiers.',
         ],
