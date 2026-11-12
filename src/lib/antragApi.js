@@ -59,6 +59,41 @@ export const berechneBeitrag = (token, body, optionen) => anfrage('/beitrag', to
 
 export const bestaetigeAntrag = (token, body) => anfrage('/bestaetigen', token, { methode: 'POST', body });
 
+// Selbstantrag aus der eigenen Antragsmaske /antrag/<sparte> (12.11.2026,
+// Kanal web-selbst). Den Endpunkt gibt es noch nicht, Vertragsentwurf:
+// Healio/Antragsstrecken/VERTRAG-SELBSTANTRAG-ENTWURF.md. Ohne Token und
+// ohne Cookie; Gesundheitsangaben und IBAN gehen nur hier, einmal, im Body.
+export const sendeSelbstantrag = (body, optionen) => selbstAnfrage('/selbstantrag', body, optionen);
+
+// Beitrag für Sparten, deren Preis nur der Versicherer kennt (Zahn: Preisregion
+// aus der Postleitzahl). Nur Tarifangaben, Geburtsdatum, Beginn und PLZ, nie
+// Gesundheitsangaben oder IBAN.
+export const berechneSelbstBeitrag = (body, optionen) => selbstAnfrage('/selbstantrag/beitrag', body, optionen);
+
+async function selbstAnfrage(pfad, body, { signal } = {}) {
+  let antwort;
+  try {
+    antwort = await fetch(`${ANTRAG_API_BASIS}${pfad}`, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+      signal,
+    });
+  } catch (fehler) {
+    if (fehler?.name === 'AbortError') throw fehler;
+    throw new AntragFehler('netz', 0);
+  }
+  let daten = null;
+  try { daten = await antwort.json(); } catch { daten = null; }
+  if (!antwort.ok || !daten || daten.ok === false) {
+    throw new AntragFehler(daten?.fehler || (antwort.ok ? 'antwort_ungueltig' : `status_${antwort.status}`), antwort.status, daten);
+  }
+  return daten;
+}
+
 // Feste Fehlercodes in freundliche Sätze (Du-Form, ohne Fachwörter).
 export function fehlerText(fehler) {
   const code = fehler?.code || fehler;
@@ -77,6 +112,9 @@ export function fehlerText(fehler) {
       return 'Du hast diesen Antrag schon bestätigt.';
     case 'antrag_beitrag_geaendert':
       return 'Dein Beitrag hat sich gerade geändert.';
+    case 'antrag_selbst_aus':
+    case 'antrag_sparte_nicht_bereit':
+      return 'Der Antrag lässt sich hier gerade nicht abschicken. Ruf uns gern an, dann machen wir ihn zusammen.';
     default:
       return 'Da ist etwas schiefgelaufen. Versuch es bitte gleich noch einmal.';
   }

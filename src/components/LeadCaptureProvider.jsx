@@ -2,8 +2,14 @@ import React, { createContext, lazy, Suspense, useCallback, useEffect, useState 
 import { useLocation } from 'react-router-dom';
 import { hasCapturedLeadThisSession, isPersonalOfferUrl, openApplicationWindow, shouldCaptureApplicationLink } from '@/lib/lead-capture';
 import { GUIDED_CALLBACK_PREVIEW, getGuidedProduct, openGuidedCallback } from '@/lib/guided-callback';
+import { HEALIO_ANTRAGSWAHL_AKTIV } from '@/config/contactChannels';
+import { antragAusLink } from '@/data/antrag';
 
 const LeadCaptureModal = lazy(() => import('./LeadCaptureModal.tsx'));
+// Wahl „Allein abschließen“ oder „Antrag zusammen am Telefon“ (12.11.2026), nur bei HEALIO_ANTRAGSWAHL_AKTIV.
+const WegeWahl = lazy(() => import('./antragsmaske/WegeWahl.jsx'));
+// Die Wahl gibt es nur auf den deutschen Produktseiten; die Maske ist deutsch.
+const WAHL_SEITEN = { '/ambulant': 'ambulant', '/zahn': 'zahn', '/stationaer': 'stationaer' };
 export const LeadCaptureContext = createContext(null);
 
 export default function LeadCaptureProvider({ children }) {
@@ -13,8 +19,15 @@ export default function LeadCaptureProvider({ children }) {
 
   useEffect(() => { setRequest(null); }, [pathname]);
 
-  const requestApplication = useCallback((targetUrl, trackingCategory, onExternalOpen) => {
+  const requestApplication = useCallback((targetUrl, trackingCategory, onExternalOpen, vorbelegung) => {
     if (!shouldCaptureApplicationLink(targetUrl, pathname)) return false;
+    if (HEALIO_ANTRAGSWAHL_AKTIV) {
+      const link = antragAusLink(targetUrl);
+      if (link && WAHL_SEITEN[pathname.replace(/\/+$/, '')] === link.sparte) {
+        setRequest({ wahl: link, targetUrl, onExternalOpen, vorbelegung });
+        return true;
+      }
+    }
     if (GUIDED_CALLBACK_PREVIEW) {
       openGuidedCallback({ product: getGuidedProduct(pathname) });
       return true;
@@ -30,7 +43,12 @@ export default function LeadCaptureProvider({ children }) {
   return (
     <LeadCaptureContext.Provider value={{ pathname, requestApplication }}>
       {children}
-      {request && (
+      {request?.wahl && (
+        <Suspense fallback={null}>
+          <WegeWahl link={request.wahl} targetUrl={request.targetUrl} vorbelegung={request.vorbelegung} onClose={close} onExternalOpen={request.onExternalOpen} />
+        </Suspense>
+      )}
+      {request && !request.wahl && (
         <Suspense fallback={null}>
           <LeadCaptureModal
             isOpen

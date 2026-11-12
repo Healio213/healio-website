@@ -78,6 +78,10 @@ const GOOGLE_ADS_EXCLUDED_PATHS = new Set([
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
   '/antrag/aufnehmen',
+  // Eigene Antragsmaske (12.11.2026): Gesundheitsangaben und IBAN, nie messen.
+  '/antrag/ambulant',
+  '/antrag/zahn',
+  '/antrag/stationaer',
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',

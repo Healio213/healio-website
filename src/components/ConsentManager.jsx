@@ -114,7 +114,8 @@ export const ConsentManager = () => {
   // Hinweis würde dort nur den Inhalt verdecken. Die Einwilligung selbst bleibt
   // unverändert und gilt auf allen anderen Seiten.
   // Gleiches für das Antragsgespräch /antrag/aufnehmen (10.11.2026).
-  const isAntragPruefen = ['/antrag/pruefen', '/antrag/aufnehmen'].includes(normalizePathname(pathname));
+  // Und für die eigene Antragsmaske (12.11.2026).
+  const isAntragPruefen = ['/antrag/pruefen', '/antrag/aufnehmen', '/antrag/ambulant', '/antrag/zahn', '/antrag/stationaer'].includes(normalizePathname(pathname));
   const bannerDeferred = !firstActionSeen && FIRST_ACTION_PATHS.has(normalizePathname(pathname));
   // Ablenkungsfreie Meta-Zielseiten: Datenschutz öffnet im neuen Tab, damit niemand die Strecke verlässt.
   const privacyLinkTarget = isCampaignLandingRoute(location) ? { target: '_blank', rel: 'noopener' } : {};

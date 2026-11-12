@@ -36,6 +36,53 @@ import StepBestaetigen, { fehlerBestaetigen } from '@/components/antrag/StepBest
 import {
   Bestaetigt, Laedt, LinkUngueltig, Netzfehler,
 } from '@/components/antrag/Zustaende';
+import { definitionFuer } from '@/data/antrag';
+import Antragsmaske from '@/components/antragsmaske/Antragsmaske';
+
+// Anträge anderer Sparten (12.11.2026): Der Dienst nennt die Sparte im Feld
+// „sparte“ des Entwurfs. Fehlt es oder heißt es „ambulant“, bleibt alles wie
+// bisher (AntragAblauf unten). Sonst zeigt die Seite die Antragsmaske mit
+// derselben Produktdefinition, vorbelegt mit den Angaben vom Telefon;
+// „Absenden“ geht als Bestätigung an POST /antrag/api/bestaetigen.
+const istAndereSparte = (entwurf) => Boolean(entwurf?.sparte) && entwurf.sparte !== 'ambulant';
+
+function pruefDaten(entwurf) {
+  const a = entwurf?.angaben || {};
+  const f = a.formular || {};
+  const weitere = entwurf?.beginnOptionen?.weitere || [];
+  const anderer = Boolean(a.beginnIso) && a.beginnIso !== entwurf?.beginnOptionen?.naechstmoeglich?.iso && weitere.some((o) => o.iso === a.beginnIso);
+  return {
+    tarif: a.tarifCode || null,
+    bausteine: Array.isArray(a.bausteine) ? a.bausteine : [],
+    zahlweise: a.zahlweise || null,
+    beginnArt: anderer ? 'anderer' : 'naechstmoeglich',
+    beginnIso: anderer ? a.beginnIso : null,
+    geburtsdatum: a.geburtsdatum || '',
+    plz: f.plz || '',
+    anrede: ['frau', 'herr', 'divers'].includes(a.anrede) ? a.anrede : null,
+    formular: { ...f },
+  };
+}
+
+const mitJahrMonat = (option) => (option ? { ...option, jahr: Number(option.iso.slice(0, 4)), monat: Number(option.iso.slice(5, 7)) } : null);
+
+function AndereSparte({ token, entwurf, titelRef }) {
+  const definition = definitionFuer(entwurf.sparte);
+  if (!definition?.bereit) return <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12"><LinkUngueltig titelRef={titelRef} /></div>;
+  const beginnWahl = entwurf.beginnOptionen?.naechstmoeglich
+    ? { naechstmoeglich: mitJahrMonat(entwurf.beginnOptionen.naechstmoeglich), weitere: (entwurf.beginnOptionen.weitere || []).map(mitJahrMonat) }
+    : null;
+  return (
+    <Antragsmaske
+      definition={definition}
+      pruefen={{
+        daten: pruefDaten(entwurf),
+        beginnWahl,
+        absenden: (body) => bestaetigeAntrag(token, { ...body, textfassung: definition.textfassung }),
+      }}
+    />
+  );
+}
 
 /**
  * Prüfseite /antrag/pruefen#<token> (09.11.2026). Der Kunde hat seinen
@@ -796,7 +843,9 @@ export default function AntragPruefenPage() {
   }, [zustand.phase]);
 
   let inhalt;
-  if (zustand.phase === 'offen') {
+  if (zustand.phase === 'offen' && istAndereSparte(zustand.entwurf)) {
+    inhalt = <AndereSparte token={zustand.token} entwurf={zustand.entwurf} titelRef={titelRef} />;
+  } else if (zustand.phase === 'offen') {
     inhalt = (
       <AntragAblauf
         key={zustand.entwurf.kennung}

@@ -1,0 +1,462 @@
+{
+ "quelle": "Healio/Antragsstrecken/originale/bayerische-zahn/beitraege-bayerische-zahn.json (Rechenabfrage der Bayerischen, 12.11.2026, Beginn 01.12.2026). NUR für die Attrappe; im Echtbetrieb rechnet der Antragsdienst bzw. die Bayerische.",
+ "altersstufen": {
+  "stadt": {
+   "smart": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 4.8
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 6.5
+    },
+    {
+     "von": 21,
+     "bis": 30,
+     "beitrag": 10.9
+    },
+    {
+     "von": 31,
+     "bis": 35,
+     "beitrag": 12.7
+    },
+    {
+     "von": 36,
+     "bis": 40,
+     "beitrag": 14.6
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 17.1
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 19.5
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 22.6
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 25.1
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 28.3
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 30.2
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 30.7
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 31.7
+    }
+   ],
+   "komfort": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 21.6
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 18.5
+    },
+    {
+     "von": 21,
+     "bis": 25,
+     "beitrag": 20.6
+    },
+    {
+     "von": 26,
+     "bis": 30,
+     "beitrag": 23.2
+    },
+    {
+     "von": 31,
+     "bis": 35,
+     "beitrag": 26.8
+    },
+    {
+     "von": 36,
+     "bis": 40,
+     "beitrag": 31.1
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 36.7
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 42.3
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 49.1
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 55
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 62.3
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 66.7
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 68
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 70
+    }
+   ],
+   "prestige": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 22.9
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 20.3
+    },
+    {
+     "von": 21,
+     "bis": 25,
+     "beitrag": 28.9
+    },
+    {
+     "von": 26,
+     "bis": 30,
+     "beitrag": 33.9
+    },
+    {
+     "von": 31,
+     "bis": 40,
+     "beitrag": 44.1
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 58.3
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 68
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 80.1
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 91.3
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 104.7
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 112.7
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 114.9
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 118.6
+    }
+   ]
+  },
+  "land": {
+   "smart": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 4.8
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 6.5
+    },
+    {
+     "von": 21,
+     "bis": 30,
+     "beitrag": 10.9
+    },
+    {
+     "von": 31,
+     "bis": 35,
+     "beitrag": 12.7
+    },
+    {
+     "von": 36,
+     "bis": 40,
+     "beitrag": 14.6
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 17.1
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 19.5
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 22.6
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 25.1
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 28.3
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 30.2
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 30.7
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 31.7
+    }
+   ],
+   "komfort": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 16.5
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 14.1
+    },
+    {
+     "von": 21,
+     "bis": 25,
+     "beitrag": 15.6
+    },
+    {
+     "von": 26,
+     "bis": 30,
+     "beitrag": 17.6
+    },
+    {
+     "von": 31,
+     "bis": 35,
+     "beitrag": 20.4
+    },
+    {
+     "von": 36,
+     "bis": 40,
+     "beitrag": 23.8
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 28
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 32.2
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 37.5
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 41.9
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 47.6
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 50.9
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 51.9
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 53.4
+    }
+   ],
+   "prestige": [
+    {
+     "von": 0,
+     "bis": 15,
+     "beitrag": 17.5
+    },
+    {
+     "von": 16,
+     "bis": 20,
+     "beitrag": 15.5
+    },
+    {
+     "von": 21,
+     "bis": 25,
+     "beitrag": 22
+    },
+    {
+     "von": 26,
+     "bis": 30,
+     "beitrag": 26
+    },
+    {
+     "von": 31,
+     "bis": 40,
+     "beitrag": 33.8
+    },
+    {
+     "von": 41,
+     "bis": 45,
+     "beitrag": 44.6
+    },
+    {
+     "von": 46,
+     "bis": 50,
+     "beitrag": 51.9
+    },
+    {
+     "von": 51,
+     "bis": 55,
+     "beitrag": 61.3
+    },
+    {
+     "von": 56,
+     "bis": 60,
+     "beitrag": 69.7
+    },
+    {
+     "von": 61,
+     "bis": 65,
+     "beitrag": 80.1
+    },
+    {
+     "von": 66,
+     "bis": 70,
+     "beitrag": 86.2
+    },
+    {
+     "von": 71,
+     "bis": 75,
+     "beitrag": 87.9
+    },
+    {
+     "von": 76,
+     "bis": 80,
+     "beitrag": 90.8
+    }
+   ]
+  }
+ },
+ "zahn_sofort": 29.9,
+ "plz": {
+  "20095": "stadt",
+  "22085": "stadt",
+  "21149": "stadt",
+  "10115": "stadt",
+  "12619": "stadt",
+  "80331": "stadt",
+  "81737": "stadt",
+  "50667": "stadt",
+  "60311": "stadt",
+  "04109": "stadt",
+  "29525": "land",
+  "37574": "land",
+  "25813": "land",
+  "22880": "stadt",
+  "94130": "land",
+  "17392": "land",
+  "54597": "land",
+  "00000": "stadt"
+ },
+ "zahlweise_stichprobe": [
+  {
+   "zahlweise": "QUARTERLY",
+   "SMART": 43.8,
+   "KOMFORT": 93.3,
+   "PRESTIGE": 132.3
+  },
+  {
+   "zahlweise": "HALFYEARLY",
+   "SMART": 87.6,
+   "KOMFORT": 186.6,
+   "PRESTIGE": 264.6
+  },
+  {
+   "zahlweise": "YEARLY",
+   "SMART": 171.7,
+   "KOMFORT": 365.7,
+   "PRESTIGE": 518.6
+  }
+ ]
+}

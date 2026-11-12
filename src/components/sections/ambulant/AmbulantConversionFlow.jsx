@@ -622,7 +622,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
                 </AnimatePresence>
                 </div>
                 <>
-                <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
+                <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" vorbelegung={geburtsjahr ? { geburtsjahr } : undefined} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-tariff', referrer)} className="home-focus mt-5 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight shadow-[0_16px_35px_rgba(37,201,144,0.24)] transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-7 md:inline-flex md:w-auto">
                   <Calculator className="mr-2 h-5 w-5" aria-hidden="true" />
                   {copy.tiers.cta}
                 </LeadCaptureLink>
@@ -926,7 +926,7 @@ const AmbulantConversionFlow = ({ fromBonusTopic = false, geburtsjahrEingabe, se
             {/* Mobil ausgeblendet (Experiment Handy-Conversion 10/2026): derselbe Hinweis steht unter dem Knopf der Tarifwahl. */}
             <>
             <p className="relative mx-auto mt-4 hidden max-w-2xl text-base leading-6 text-slate-200 md:mt-5 md:block md:text-sm md:leading-6" data-healio-ambulant="calculator-handoff">{calculatorHint}</p>
-            <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
+            <LeadCaptureLink href={sdkUrl} trackingCategory="sdk-ambulant" vorbelegung={geburtsjahr ? { geburtsjahr } : undefined} target="_blank" rel="noopener noreferrer" onClick={() => trackSdkClick('ambulant-compact-final', referrer)} className="home-focus relative mt-6 flex min-h-14 w-full items-center justify-center rounded-full bg-home-mint px-7 font-display text-base font-extrabold text-home-midnight transition hover:-translate-y-0.5 hover:bg-home-mint-active motion-reduce:transform-none md:mt-8 md:inline-flex md:w-auto">
               <Calculator className="mr-2 h-5 w-5" />
               {copy.finalCta}
             </LeadCaptureLink>

@@ -80,7 +80,10 @@
     "test:antrag-pruefseite": "node scripts/check-antrag-pruefseite-rendered.mjs",
     "antrag-gespraech:mock": "node scripts/antrag-gespraech-mock.mjs",
     "test:antrag-gespraech": "node --test scripts/check-antrag-gespraech.mjs",
-    "test:antrag-aufnehmen": "node scripts/check-antrag-aufnehmen-rendered.mjs"
+    "test:antrag-aufnehmen": "node scripts/check-antrag-aufnehmen-rendered.mjs",
+    "antrag-selbst:mock": "node scripts/antrag-selbst-mock.mjs",
+    "test:antragsmaske": "node --test scripts/check-antragsmaske-regeln.mjs",
+    "test:antragsmaske-rendered": "node scripts/check-antragsmaske-rendered.mjs"
   },
   "dependencies": {
     "@babel/traverse": "^7.26.4",

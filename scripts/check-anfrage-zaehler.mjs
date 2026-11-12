@@ -50,7 +50,13 @@ check(baueZaehlerEintrag('sdk_klick', { vonPfad: '/ambulant', ziel: 'x' }) === n
 check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'naturheilkunde' })?.ziel === 'naturheilkunde', 'Kurzcheck mit Variante.');
 check(baueZaehlerEintrag('kurzcheck_abgeschickt', { vonPfad: '/check/naturheilkunde', ziel: 'tk' }) === null, 'Unbekannte Variante wird verworfen.');
 check(baueZaehlerEintrag('page_view', { vonPfad: '/' }) === null, 'Nur die vier festen Ereignisse.');
-check(JSON.stringify(regeln.ZAEHLER_EREIGNISSE) === JSON.stringify(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick']), 'Genau vier Ereignisse.');
+check(JSON.stringify(regeln.ZAEHLER_EREIGNISSE) === JSON.stringify(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick', 'antragsweg']), 'Genau fünf Ereignisse.');
+check(JSON.stringify(baueZaehlerEintrag('antragsweg', { vonPfad: '/ambulant', ziel: 'ambulant-allein' }, 'mobil'))
+  === JSON.stringify({ ereignis: 'antragsweg', von_pfad: '/ambulant', ziel: 'ambulant-allein', geraet: 'mobil' }), 'Antragsweg hat genau vier Felder.');
+check(regeln.ANTRAGSWEG_ZIELE.length === 9
+  && baueZaehlerEintrag('antragsweg', { vonPfad: '/zahn', ziel: 'zahn-AP1' }) === null
+  && baueZaehlerEintrag('antragsweg', { vonPfad: '/zahn' }) === null
+  && baueZaehlerEintrag('antragsweg', { vonPfad: '/zahn', ziel: { weg: 'allein' } }) === null, 'Antragsweg nur mit Ziel aus der festen Liste.');
 check(JSON.stringify(regeln.ZAEHLER_VERSICHERER) === JSON.stringify(['bayerische', 'ukv']), 'Versicherer nur Bayerische und UKV.');
 check(JSON.stringify(baueZaehlerEintrag('versicherer_klick', { vonPfad: '/zahn', ziel: 'ukv' }, 'mobil'))
   === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: 'ukv', geraet: 'mobil' }), 'Versicherer-Klick hat genau vier Felder.');
@@ -269,7 +275,8 @@ check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02
 {
   // Erweiterung 10.11.2026: versicherer_klick. Nur CHECKs und Einfügeregel,
   // keine neue Spalte, keine neuen Rechte.
-  const sqlV = read('docs/supabase/2026-11-10_anonyme_zaehler_versicherer_klick.sql');
+  // Seit 12.11.2026 schreibt 2026-11-12_anonyme_zaehler_antragsweg.sql die Listen vollständig neu (mit antragsweg).
+  const sqlV = read('docs/supabase/2026-11-12_anonyme_zaehler_antragsweg.sql');
   const sqlVCode = sqlV.replace(/--.*$/gm, '');
   const ereignisListe = `('${regeln.ZAEHLER_EREIGNISSE.join("', '")}')`;
   check(/NICHT AUSGEFÜHRT/.test(sqlV) && /^begin;/.test(sqlV) && /\ncommit;\n/.test(sqlV), 'Erweiterung liegt vorbereitet als eine Transaktion und ist nicht angewendet.');
@@ -281,8 +288,9 @@ check(!/supabase\/migrations/.test(path.relative(root, 'docs/supabase/2026-11-02
     regeln.LEISTUNGSSEITEN.every((seite) => zielListeV.includes(`'${seite}'`))
       && regeln.KURZCHECK_VARIANTEN.every((variante) => zielListeV.includes(`'${variante}'`))
       && zielListeV.includes(`(ereignis = 'versicherer_klick' and ziel in ('${regeln.ZAEHLER_VERSICHERER.join("', '")}'))`)
+      && zielListeV.includes(`(ereignis = 'antragsweg' and ziel in ('${regeln.ANTRAGSWEG_ZIELE.join("', '")}'))`)
       && (zielListeV.match(/'\/[a-z/-]+'/g) || []).length === regeln.LEISTUNGSSEITEN.length,
-    'Erweiterung: Ziele nur aus Leistungsseiten, Kurzcheck-Varianten und Versicherern.',
+    'Erweiterung: Ziele nur aus Leistungsseiten, Kurzcheck-Varianten, Versicherern und Antragswegen.',
   );
   check(!/\b(grant|revoke|create\s+table|add\s+column|security\s+definer|create\s+(or\s+replace\s+)?(function|trigger|procedure))\b/i.test(sqlVCode), 'Erweiterung ändert keine Rechte, Spalten, Funktionen oder Trigger.');
   check(!/\b(ip|ip_hash|user_agent|created_at|uhrzeit|timestamptz|uuid)\b/i.test(sqlVCode.replace(/comment on table[\s\S]*?';/g, '')), 'Erweiterung ohne IP, Uhrzeit oder Kennung.');

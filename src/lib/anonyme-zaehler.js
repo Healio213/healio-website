@@ -11,6 +11,8 @@
  *   versicherer_klick      Der Online-Abschluss eines Versicherers wird
  *                          geöffnet (von_pfad = Seite des Klicks,
  *                          ziel = bayerische oder ukv)
+ *   antragsweg             Wahl der zwei Wege vor dem Abschluss (12.11.2026,
+ *                          ziel = <sparte>-gezeigt, -allein oder -telefon)
  *
  * Grundregeln, die dieses Modul technisch erzwingt:
  * - Kein Cookie, kein localStorage, kein sessionStorage, keine Nutzer- oder
@@ -37,6 +39,7 @@ import {
 } from '../../shared/anonyme-zaehler.js';
 
 export {
+  ANTRAGSWEG_ZIELE,
   KURZCHECK_VARIANTEN,
   LEISTUNGSSEITEN,
   ZAEHLER_EREIGNISSE,
