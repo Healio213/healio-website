@@ -5,6 +5,7 @@ import {
   Button, Callout, FehlerText, bodyText, buttonClass, cx, schuetze,
 } from '@/components/antrag/ui';
 import { TeilKopf, telefonLink } from './teile';
+import { UNTERLAGEN_HINWEIS, unterlagenUnvollstaendig } from './unterlagenPflicht';
 
 // „Ihre Vertragsunterlagen“ wie in der SDK-Strecke: Jedes Dokument muss
 // heruntergeladen sein, sonst geht es nicht weiter. Die PDFs kommen über den
@@ -51,12 +52,12 @@ export default function SchrittUnterlagenDownload({
     <div className="space-y-4" data-unterlagen-download="">
       <TeilKopf titel="Ihre Vertragsunterlagen" ueberschriftRef={ueberschriftRef} />
       <p className={bodyText}>{schuetze(regel.hinweis)}</p>
-      {unterlagen.fehler && (
-        <Callout tone="hinweis" title="Die Unterlagen laden gerade nicht.">
-          <p>Versuch es gleich noch einmal oder mach den Antrag zusammen mit uns am Telefon.</p>
+      {(unterlagen.fehler || (unterlagen.liste && unterlagenUnvollstaendig(unterlagen.erwartet, unterlagen.liste))) && (
+        <Callout tone="hinweis" data-unterlagen-hinweis="">
+          <p>{UNTERLAGEN_HINWEIS}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button variant="secondary" onClick={unterlagen.nochmal}>Noch einmal versuchen</Button>
-            <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Zusammen am Telefon</a>
+            <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Lieber zusammen am Telefon</a>
           </div>
         </Callout>
       )}

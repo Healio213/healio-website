@@ -918,6 +918,48 @@ try {
   stoppe();
 }
 
+// Leere Unterlagenliste vom Dienst: „Weiter“ bleibt gesperrt, Hinweis erscheint,
+// nach „Noch einmal versuchen“ mit voller Liste geht es erst nach den Downloads weiter.
+async function unterlagenLeerListe(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  await mock('/__test/unterlagen-leer', 'POST');
+  await page.goto(`${AN}/antrag/ambulant`, { waitUntil: 'networkidle' });
+  await bildschirm(page, 'tarif');
+  await page.fill('#feld-geburtsdatum', '05.03.1990');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.locator('label:has(input[name="tarif"][value="AP1"])').click();
+  await page.waitForFunction(() => /EUR/.test(document.querySelector('[data-stufe-beitrag="AP1"]')?.textContent || ''));
+  await weiter(page);
+  await bildschirm(page, 'person');
+  await page.locator('label:has(input[name="anrede"][value="herr"])').click();
+  await page.fill('#feld-vorname', 'Max');
+  await page.fill('#feld-nachname', 'Muster');
+  await page.locator('label:has(#feld-acknowledge)').click();
+  await weiter(page);
+  await bildschirm(page, 'unterlagenDownload');
+  await page.waitForSelector('[data-unterlagen-hinweis]');
+  pruefe(await page.locator('[data-download]').count() === 0, 'Leere Liste: kein Download sichtbar');
+  pruefe((await page.textContent('[data-unterlagen-hinweis]')).includes('Die Unterlagen lassen sich gerade nicht laden. Versuch es gleich noch einmal oder mach den Antrag zusammen mit uns am Telefon.'), 'Leere Liste: ruhiger Hinweis mit Wortlaut');
+  pruefe(await page.locator('[data-unterlagen-hinweis] a[href^="/antrag/aufnehmen"]').count() === 1, 'Leere Liste: Weg „zusammen am Telefon“ vorhanden');
+  await weiter(page);
+  await page.waitForTimeout(700);
+  pruefe(await page.locator('[data-bildschirm="unterlagenDownload"]').count() === 1, 'Leere Liste: Weiter bleibt gesperrt');
+  await foto(page, '390-unterlagen-leer');
+  await page.getByRole('button', { name: 'Noch einmal versuchen' }).click();
+  await page.waitForSelector('[data-download]');
+  pruefe(await page.locator('[data-download]').count() === 5 && await page.locator('[data-unterlagen-hinweis]').count() === 0, 'Nach erneutem Versuch: fünf Pflicht-Downloads, Hinweis weg');
+  await weiter(page);
+  await page.waitForTimeout(700);
+  pruefe(await page.locator('[data-bildschirm="unterlagenDownload"]').count() === 1, 'Volle Liste: Weiter erst nach allen Downloads');
+  await page.click('[data-alle-downloads]');
+  await page.waitForFunction(() => document.querySelectorAll('[data-download]').length === 5 && [...document.querySelectorAll('[data-unterlagen-download] li')].every((li) => /heruntergeladen/.test(li.textContent)));
+  await weiter(page);
+  await bildschirm(page, 'erkl:erklaerungen');
+  await context.close();
+}
+
 async function alleWeiteren(browser) {
     await zahnDurchlauf(browser, 390, true);
     await zahnDurchlauf(browser, 1280, false);
@@ -925,6 +967,7 @@ async function alleWeiteren(browser) {
     await stationaerDurchlauf(browser, 390, 'SP2');
     await stationaerDurchlauf(browser, 1280, 'SPU');
     await ukvDurchlauf(browser);
+    await unterlagenLeerListe(browser);
     await pruefseiteZahn(browser);
     await pruefseiteAmbulantOnline(browser);
     await pruefseiteLevelnine(browser, 'stationaer');

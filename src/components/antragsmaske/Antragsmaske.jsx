@@ -23,6 +23,7 @@ import SchrittZahlung, { fehlerZahlung } from './SchrittZahlung';
 import SchrittErklaerungen, { fehlerErklaerungen } from './SchrittErklaerungen';
 import SchrittZusammenfassung from './SchrittZusammenfassung';
 import SchrittUnterlagenDownload from './SchrittUnterlagenDownload';
+import { fehlerUnterlagen } from './unterlagenPflicht';
 import { TelefonAusweg } from './teile';
 
 /**
@@ -299,10 +300,9 @@ export default function Antragsmaske({ definition, pruefen = null }) {
     }
     if (id === 'hinweis') return fehlerHinweis(definition, daten);
     if (id === 'unterlagenDownload') {
-      if (!unterlagenJetzt.liste) return [{ key: 'unterlagenDienst', text: '' }];
-      return unterlagenJetzt.liste
-        .filter((unterlage) => !daten.unterlagenGeoeffnet?.[`dienst:${unterlage.id ?? unterlage.name}`])
-        .map((unterlage) => ({ key: `download-${unterlage.id ?? unterlage.name}`, text: definition.unterlagenDownload.fehler }));
+      return fehlerUnterlagen({
+        erwartet: unterlagenJetzt.erwartet, liste: unterlagenJetzt.liste, geoeffnet: daten.unterlagenGeoeffnet, text: definition.unterlagenDownload.fehler,
+      });
     }
     if (eintrag.frage) {
       const liste = fehlerFrage(eintrag.frage, kontext);

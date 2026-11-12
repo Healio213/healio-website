@@ -10,6 +10,7 @@
 // Website: VITE_ANTRAG_API=http://127.0.0.1:8792/antrag/api VITE_ANTRAGSMASKE=1 VITE_ANTRAGSWAHL=1 npm run dev
 // Nur für Prüfskripte:
 //   POST /__test/beitrag-aendern     rechnet ab jetzt 1,00 EUR mehr (für 409)
+//   POST /__test/unterlagen-leer     der nächste Listenabruf der Unterlagen liefert []
 //   POST /__test/zuruecksetzen
 //   GET  /__test/letzter             der zuletzt angenommene Datensatz
 
@@ -85,6 +86,7 @@ export const TELEFON_GESUNDHEIT = {
 const PORT = Number(process.env.ANTRAG_SELBST_MOCK_PORT || 8792);
 const ERLAUBT = new Set((process.env.ANTRAG_ERLAUBTE_HERKUNFT || 'http://localhost:3018,http://127.0.0.1:3018').split(',').map((eintrag) => eintrag.trim()).filter(Boolean));
 let aufschlag = 0;
+let unterlagenLeer = 0; // NUR TEST: so viele Listenabrufe liefern eine leere Liste
 let letzter = null;
 let zaehler = 0;
 
@@ -244,7 +246,8 @@ const server = http.createServer((anfrage, antwort) => {
   if (pfad === '/__test/telefon') { senden(antwort, 200, { ok: true, telefon: TELEFON_GESUNDHEIT }, herkunft); return; }
   if (pfad === '/__test/letzter') { senden(antwort, 200, { ok: true, letzter }, herkunft); return; }
   if (pfad === '/__test/beitrag-aendern') { aufschlag = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
-  if (pfad === '/__test/zuruecksetzen') { aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/unterlagen-leer') { unterlagenLeer = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/zuruecksetzen') { unterlagenLeer = 0; aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
   // Unterlagen wie der Dienst (SCHNITTSTELLE.md 12.6): Liste und Datei. NUR TEST:
   // Platzhalter-PDFs mit dem Vermerk „Testdatei der Attrappe“, keine echten Unterlagen.
   if ((pfad === '/antrag/api/unterlagen' || pfad === '/antrag/api/unterlagen/datei') && anfrage.method === 'GET') {
@@ -256,6 +259,7 @@ const server = http.createServer((anfrage, antwort) => {
     const eintraege = liste.map(([id, name], stelle) => ({
       id: String(id ?? `${tarif}-${stelle}`), name, art: name.startsWith('AVB') ? 'avb' : 'tarifbedingungen', stand: name.match(/\d{2}\.\d{2}$/)?.[0] || null, pflichtDownload: true,
     }));
+    if (pfad === '/antrag/api/unterlagen' && unterlagenLeer > 0) { unterlagenLeer -= 1; senden(antwort, 200, { ok: true, test: true, produkt, tarif, unterlagen: [] }, herkunft); return; }
     if (pfad === '/antrag/api/unterlagen') { senden(antwort, 200, { ok: true, test: true, produkt, tarif, unterlagen: eintraege }, herkunft); return; }
     const treffer = eintraege.find((eintrag) => eintrag.id === suche.get('id'));
     if (!treffer) { senden(antwort, 404, { ok: false, fehler: 'antrag_unterlagen_unbekannt' }, herkunft); return; }

@@ -18,6 +18,7 @@ import {
   altersgrenze, antwortenBereinigt, bedingungErfuellt, beginnOptionenAus, berechneBeitrag, feldFehler, ibanHinweis, istIban,
   mitZuschlag, offeneGesundheitsfragen, regionAusPlz, sichtbareFolgefragen, sichtbareFragen, wirkungen,
 } from '../src/lib/antragsmaske/regeln.js';
+import { fehlerUnterlagen, unterlagenUnvollstaendig } from '../src/components/antragsmaske/unterlagenPflicht.js';
 import { baueSelbstantrag, bereinigeHerkunft, bildschirmFuerFeld } from '../src/lib/antragsmaske/vertrag.js';
 import { SDK_AMBULANT_BEITRAEGE } from '../src/data/sdkAmbulantBeitraege.js';
 import {
@@ -546,4 +547,23 @@ test('Herkunft: ohne Zustimmung kein Speichereintrag (Gate 3), mit Zustimmung im
   beiZustimmungsWechsel(getDefaultConsentState());
   assert.equal(sitzung.size, 0, 'Widerruf löscht den Eintrag');
   delete globalThis.window;
+});
+
+test('Unterlagen-Schritt: leere oder zu kurze Liste und Abruffehler sperren, volle Liste verlangt jeden Download', () => {
+  const erwartet = ambulant.unterlagenDownload.liste('AP1');
+  assert.equal(erwartet.length, 5, 'SDK ambulant: fünf Pflichtunterlagen');
+  const voll = erwartet.map((u) => ({ id: String(u.id), name: u.name }));
+  const alle = Object.fromEntries(voll.map((u) => [`dienst:${u.id}`, '2026-11-12T10:00:00.000Z']));
+  // Abruf fehlgeschlagen, leere Liste, zu kurze Liste: gesperrt (Schlüssel ohne Text)
+  assert.deepEqual(fehlerUnterlagen({ erwartet, liste: null, geoeffnet: alle }).map((f) => f.key), ['unterlagenDienst']);
+  assert.deepEqual(fehlerUnterlagen({ erwartet, liste: [], geoeffnet: alle }).map((f) => f.key), ['unterlagenDienst']);
+  assert.deepEqual(fehlerUnterlagen({ erwartet, liste: voll.slice(0, 4), geoeffnet: alle }).map((f) => f.key), ['unterlagenDienst']);
+  assert.equal(unterlagenUnvollstaendig(erwartet, []), true);
+  // Volle Liste: jede nicht geöffnete Unterlage sperrt, alle geöffnet geht weiter
+  assert.equal(fehlerUnterlagen({ erwartet, liste: voll, geoeffnet: {} }).length, 5);
+  assert.equal(fehlerUnterlagen({ erwartet, liste: voll, geoeffnet: { ...alle, [`dienst:${voll[0].id}`]: undefined } }).length, 1);
+  assert.equal(fehlerUnterlagen({ erwartet, liste: voll, geoeffnet: alle }).length, 0);
+  // Produkte ohne Pflichtunterlagen an dieser Stelle (Zahn): unverändert, es gibt den Schritt gar nicht
+  assert.equal(DEFINITIONEN.zahn?.unterlagenDownload, undefined);
+  assert.equal(unterlagenUnvollstaendig([], []), false);
 });
