@@ -129,8 +129,8 @@ const de = {
         title: 'Deine Behandlung ist abgeschlossen, dafür brauchst du keinen Sofortschutz',
         text: 'Du kannst einen Zahntarif der Bayerischen wählen, ohne den Baustein ZAHN Sofort. Die Bayerische fragt im Antrag nicht nach früheren Empfehlungen deines Zahnarztes.',
         reasons: [
-          'Deine Behandlung ist abgerechnet. Die Fragen der Bayerischen betreffen den heutigen Zustand deiner Zähne, und der passt.',
-          'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Nach deinen Antworten passt du zu den Annahmefragen der Bayerischen.',
+          'Deine Behandlung ist abgerechnet. Die Fragen der Bayerischen betreffen den heutigen Zustand deiner Zähne.',
+          'Dir fehlen keine Zähne und es gibt keine Vorgeschichte.',
           'Keine Wartezeiten in allen drei Stufen.',
         ],
         warning: 'Deine abgerechnete Behandlung ist nicht versichert. Verbindlich entscheidet der Versicherer nach den Angaben in deinem Antrag.',
@@ -508,7 +508,7 @@ const en = {
         text: 'You can choose a dental plan from die Bayerische without the ZAHN Sofort module. Die Bayerische does not ask about earlier recommendations from your dentist in the application.',
         reasons: [
           'Your treatment has been invoiced. The questions from die Bayerische are about the current state of your teeth, and yours fits.',
-          'You have no missing teeth and no dental history. Based on your answers you fit the acceptance questions of die Bayerische.',
+          'You have no missing teeth and no dental history.',
           'No waiting periods in all three tiers.',
         ],
         warning: 'Your invoiced treatment is not covered. The insurer decides, based on the information in your application.',
