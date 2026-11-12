@@ -234,8 +234,28 @@ const server = http.createServer((anfrage, antwort) => {
   }
   // Prüfseite für einen am Telefon aufgenommenen Zahn-Antrag (Token test-zahn), Vertrag SCHNITTSTELLE.md 4.2 plus Feld sparte.
   if (pfad === '/antrag/api/entwurf' && anfrage.method === 'GET') {
-    if (anfrage.headers.authorization !== 'Bearer test-zahn') { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
     const optionen = beginnOptionen(new Date());
+    // Ambulant mit der Fassung der Online-Strecke (Token test-ambulant-online).
+    if (anfrage.headers.authorization === 'Bearer test-ambulant-online') {
+      senden(antwort, 200, {
+        ok: true,
+        kennung: 'HA-261112-AMBO',
+        status: 'offen',
+        sparte: 'ambulant',
+        regelwerkFassung: '2026-11-12-sdk-ambulant-online',
+        gueltigBis: '2026-11-19',
+        angaben: {
+          tarifCode: 'AP1', beginnIso: optionen.naechstmoeglich.iso, anrede: 'frau', geburtsdatum: '05.03.1990',
+          formular: {
+            vorname: 'Lena', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
+          },
+        },
+        gesundheitTelefon: null,
+        beginnOptionen: optionen,
+      }, herkunft);
+      return;
+    }
+    if (anfrage.headers.authorization !== 'Bearer test-zahn') { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
     senden(antwort, 200, {
       ok: true,
       kennung: 'HA-261112-ZAHN',
@@ -259,11 +279,13 @@ const server = http.createServer((anfrage, antwort) => {
     anfrage.on('end', () => {
       let body = null;
       try { body = JSON.parse(roh); } catch { /* unten */ }
-      if (anfrage.headers.authorization !== 'Bearer test-zahn' || !body) { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
-      const ergebnis = pruefeZahn(body, new Date());
+      const token = anfrage.headers.authorization;
+      if (!['Bearer test-zahn', 'Bearer test-ambulant-online'].includes(token) || !body) { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
+      if (token === 'Bearer test-ambulant-online' && body.textfassung !== '2026-11-12-sdk-ambulant-online') { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: ['textfassung'] }, herkunft); return; }
+      const ergebnis = token === 'Bearer test-zahn' ? pruefeZahn(body, new Date()) : pruefe(body);
       if (ergebnis.status !== 201) { senden(antwort, ergebnis.status, { ok: false, fehler: ergebnis.fehler, ...(ergebnis.felder ? { felder: ergebnis.felder } : {}) }, herkunft); return; }
       letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft), ueber: 'pruefseite' };
-      senden(antwort, 200, { ok: true, kennung: 'HA-261112-ZAHN', status: 'bestaetigt', bestaetigtAm: new Date().toISOString() }, herkunft);
+      senden(antwort, 200, { ok: true, kennung: token === 'Bearer test-zahn' ? 'HA-261112-ZAHN' : 'HA-261112-AMBO', status: 'bestaetigt', bestaetigtAm: new Date().toISOString() }, herkunft);
     });
     return;
   }

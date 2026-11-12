@@ -44,7 +44,15 @@ import Antragsmaske from '@/components/antragsmaske/Antragsmaske';
 // bisher (AntragAblauf unten). Sonst zeigt die Seite die Antragsmaske mit
 // derselben Produktdefinition, vorbelegt mit den Angaben vom Telefon;
 // „Absenden“ geht als Bestätigung an POST /antrag/api/bestaetigen.
-const istAndereSparte = (entwurf) => Boolean(entwurf?.sparte) && entwurf.sparte !== 'ambulant';
+//
+// Fassung des Regelwerks (12.11.2026): Meldet der Dienst im Entwurf
+// „regelwerkFassung“ die Fassung der Online-Strecke
+// (REGELWERK_FASSUNG_ONLINE), gilt auch für ambulant die Maske mit den
+// Texten und Schlüsseln der Online-Strecke. Ohne Feld oder mit der alten
+// Fassung („2026-11-09“) bleibt die Prüfseite wie bisher.
+export const REGELWERK_FASSUNG_ONLINE = '2026-11-12-sdk-ambulant-online';
+const istAndereSparte = (entwurf) => (Boolean(entwurf?.sparte) && entwurf.sparte !== 'ambulant')
+  || entwurf?.regelwerkFassung === REGELWERK_FASSUNG_ONLINE;
 
 function pruefDaten(entwurf) {
   const a = entwurf?.angaben || {};
@@ -67,7 +75,7 @@ function pruefDaten(entwurf) {
 const mitJahrMonat = (option) => (option ? { ...option, jahr: Number(option.iso.slice(0, 4)), monat: Number(option.iso.slice(5, 7)) } : null);
 
 function AndereSparte({ token, entwurf, titelRef }) {
-  const definition = definitionFuer(entwurf.produkt || entwurf.sparte);
+  const definition = definitionFuer(entwurf.produkt || entwurf.sparte || 'ambulant');
   if (!definition?.bereit) return <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12"><LinkUngueltig titelRef={titelRef} /></div>;
   const beginnWahl = entwurf.beginnOptionen?.naechstmoeglich
     ? { naechstmoeglich: mitJahrMonat(entwurf.beginnOptionen.naechstmoeglich), weitere: (entwurf.beginnOptionen.weitere || []).map(mitJahrMonat) }

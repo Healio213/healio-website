@@ -1,5 +1,6 @@
 import React from 'react';
 import { euro, ibanOhneLeer } from '@/lib/antragsmaske/regeln';
+import { auftragSatz, beitragsAnzeige } from '@/lib/antragsmaske/vertrag';
 import { AendernKnopf } from '@/components/antrag/Antworten';
 import {
   Button, Callout, bodyText, schuetze,
@@ -41,7 +42,7 @@ export default function SchrittZusammenfassung({
         {(definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id)).map((baustein) => (
           <Pruefzeile key={baustein.id} label="Baustein" id={`baustein-${baustein.id}`} aendern={() => aendern('tarif')}>{baustein.name}</Pruefzeile>
         ))}
-        <Pruefzeile label={definition.zahlweiseImTarif && daten.zahlweise === 'jaehrlich' ? 'Jahresbeitrag' : 'Monatsbeitrag'}>{euro(beitrag?.beitrag)}</Pruefzeile>
+        <Pruefzeile label={beitragsAnzeige(definition, daten, beitrag).label}>{euro(beitrag?.beitrag)}</Pruefzeile>
         <Pruefzeile label="Name" id="name" aendern={() => aendern('person')}>{[anrede?.label, f.vorname, f.nachname].filter(Boolean).join(' ')}</Pruefzeile>
         <Pruefzeile label="Geburtsdatum" id="geburtsdatum" aendern={() => aendern('tarif')}>{geburtsdatumText}</Pruefzeile>
         <Pruefzeile label="Adresse" id="adresse" aendern={() => aendern('anschrift')}>{[f.strasse, f.hausnummer].filter(Boolean).join(' ')}, {f.plz} {f.ort}</Pruefzeile>
@@ -85,7 +86,7 @@ export default function SchrittZusammenfassung({
       )}
 
       <div>
-        <p className="text-base font-bold leading-7 text-home-midnight">{schuetze(definition.absenden.satz)}</p>
+        <p className="text-base font-bold leading-7 text-home-midnight" data-auftrag="">{schuetze(auftragSatz(definition, daten, beitrag))}</p>
         {definition.absenden.vorbehalt && <p className={bodyText}>{schuetze(definition.absenden.vorbehalt)}</p>}
       </div>
       <Button className="w-full sm:w-auto" onClick={absenden} disabled={sendet} aria-busy={sendet || undefined} id="knopf-absenden">

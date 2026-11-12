@@ -6,7 +6,7 @@
 // Verhalten bei ausgeschalteten Schaltern.
 //
 // Aufruf: node scripts/check-antragsmaske-rendered.mjs [--fotos <ordner>]
-// Startet Attrappe und zwei Vite-Server (3018 mit Schaltern an, 3019 aus).
+// Startet Attrappe und zwei Vite-Server (Standard 3028 mit Schaltern an, 3029 aus, Attrappe 8802).
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -19,9 +19,13 @@ const ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
 const arg = (name, standard) => { const stelle = args.indexOf(name); return stelle >= 0 ? args[stelle + 1] : standard; };
 const FOTOS = arg('--fotos', null);
-const API = 'http://127.0.0.1:8792';
-const AN = 'http://127.0.0.1:3018';
-const AUS = 'http://127.0.0.1:3019';
+// Eigene Ports (Standard 8802, 3028, 3029), damit eine laufende Vorschau auf 8792/3018 nicht stört.
+const API_PORT = Number(arg('--api-port', 8802));
+const AN_PORT = Number(arg('--an-port', 3028));
+const AUS_PORT = Number(arg('--aus-port', 3029));
+const API = `http://127.0.0.1:${API_PORT}`;
+const AN = `http://127.0.0.1:${AN_PORT}`;
+const AUS = `http://127.0.0.1:${AUS_PORT}`;
 
 const require = createRequire(import.meta.url);
 function ladePlaywright() {
@@ -44,13 +48,13 @@ async function warteAuf(url, ms = 90000) {
 }
 async function starteServer() {
   prozesse.push(spawn(process.execPath, ['scripts/antrag-selbst-mock.mjs'], {
-    cwd: ROOT, env: { ...process.env, ANTRAG_SELBST_MOCK_PORT: '8792', ANTRAG_ERLAUBTE_HERKUNFT: AN }, stdio: 'ignore',
+    cwd: ROOT, env: { ...process.env, ANTRAG_SELBST_MOCK_PORT: String(API_PORT), ANTRAG_ERLAUBTE_HERKUNFT: AN }, stdio: 'ignore',
   }));
   const vite = (port, env) => spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
     cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, ...env }, stdio: 'ignore',
   });
-  prozesse.push(vite(3018, { VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1' }));
-  prozesse.push(vite(3019, { VITE_ANTRAGSMASKE: '0', VITE_ANTRAGSWAHL: '0' }));
+  prozesse.push(vite(AN_PORT, { VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1' }));
+  prozesse.push(vite(AUS_PORT, { VITE_ANTRAGSMASKE: '0', VITE_ANTRAGSWAHL: '0' }));
   await warteAuf(`${API}/antrag/gesund`);
   await warteAuf(`${AN}/antrag/ambulant`);
   await warteAuf(`${AUS}/antrag/ambulant`);
@@ -105,10 +109,12 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   } else {
     const suche = einstieg === 'werber' ? `?${new URLSearchParams({ ref: WERBER.ref, ...WERBER.utm })}` : '';
     await page.goto(`${AN}/ambulant${suche}`, { waitUntil: 'networkidle' });
-    // Erst eine andere Seite und zurück: Die Herkunft muss den Besuch überstehen.
-    await page.locator('footer a[href^="/"]:not([href^="/ambulant"])').filter({ visible: true }).first().click();
-    await page.waitForURL((adresse) => !adresse.pathname.startsWith('/ambulant'));
-    await page.goBack({ waitUntil: 'networkidle' });
+    // Seitenwechsel mit vollem Neuladen ohne Kennzeichen in der Adresse: Die Herkunft muss den Besuch überstehen.
+    await page.goto(`${AN}/leistungen`, { waitUntil: 'networkidle' });
+    await page.goto(`${AN}/ambulant`, { waitUntil: 'networkidle' });
+    pruefe(!/ref=|utm_/.test(page.url()), 'Neuladen ohne Kennzeichen in der Adresse');
+    const gespeichert = await page.evaluate(() => Object.entries(sessionStorage).map(([k, v]) => `${k}=${v}`).join('|'));
+    pruefe(!/Lena|Muster|DE89|krebs|geburt/i.test(gespeichert), 'Sitzungsspeicher nur mit Herkunft');
     const link = page.locator('a[href*="levelnine"][href*="tarifftypes=Ambulant&"]').filter({ visible: true }).first();
     await link.scrollIntoViewIfNeeded();
     await link.click();
@@ -242,6 +248,8 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   const uebersicht = await page.textContent('[data-uebersicht]');
   pruefe(uebersicht.includes('AP1') && uebersicht.includes(erwartet) && uebersicht.includes('…3000') && !uebersicht.includes('0532'), 'Übersicht mit Beitrag, IBAN nur gekürzt');
   pruefe((await page.textContent('[data-antwortenliste]')).includes(mitJa ? 'Ja: Krebserkrankungen' : 'Nein'), 'Antworten in der Übersicht');
+  pruefe((await page.textContent('[data-antwortenliste]')).includes('Atemwegserkrankungen (Asthma'), 'Fragetext im Wortlaut bei den Antworten');
+  pruefe((await page.textContent('[data-auftrag]')).includes(`Monatsbeitrag von ${erwartet}`), 'Auftragssatz nennt Monatsbeitrag mit Betrag');
   await foto(page, `${name}-11-zusammenfassung`);
 
   // Speicher und Adresse vor dem Absenden: nichts Persönliches.
@@ -392,6 +400,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await bildschirm(page, 'zusammenfassung');
   const text = await page.textContent('[data-bildschirm="zusammenfassung"]');
   pruefe(/in deinem Namen bei der Bayerischen zu stellen/.test(text), 'Auftrag an Healio vor dem Absenden sichtbar');
+  pruefe((await page.textContent('[data-auftrag]')).includes('Jahresbeitrag von 870,20 EUR') && !(await page.textContent('[data-auftrag]')).includes('Monatsbeitrag'), 'Auftragssatz passt zur jährlichen Zahlweise');
+  pruefe(text.includes('Haben Sie Zahnersatz, der älter als 10 Jahre ist?'), 'Zahnfragen im Wortlaut in der Zusammenfassung');
   pruefe(!/Level Nine|cpit|SDK/.test(text), 'keine Technik- oder SDK-Hinweise');
   await foto(page, `${name}-06-zusammenfassung`);
   await page.click('#knopf-absenden');
@@ -574,6 +584,12 @@ async function stationaerDurchlauf(browser, breite, tarif) {
   await weiter(page);
   await sdkNachBeitrag(page, tarif === 'SP2' ? name : null);
   await bildschirm(page, 'zusammenfassung');
+  const zusammen = await page.textContent('[data-bildschirm="zusammenfassung"]');
+  pruefe((await page.textContent('[data-auftrag]')).includes(`Monatsbeitrag von ${tarif === 'SP2' ? '36,50' : '7,92'} EUR`), 'Auftragssatz stationär');
+  if (tarif === 'SP2') {
+    pruefe(zusammen.includes('Kontrolle Schilddrüse') && zusammen.includes('Von wann') && zusammen.includes('01.03.2025'), 'Folgeangaben nach Ja in der Zusammenfassung');
+    await foto(page, `${name}-zusammenfassung`);
+  }
   await page.click('#knopf-absenden');
   await page.waitForSelector('[data-danke]');
   const { letzter } = await mock('/__test/letzter');
@@ -662,12 +678,59 @@ async function ukvDurchlauf(browser) {
   await bildschirm(page, 'erkl:unterlagen');
   await weiter(page);
   await bildschirm(page, 'zusammenfassung');
+  pruefe((await page.textContent('[data-auftrag]')).includes('bei der UKV') && (await page.textContent('[data-auftrag]')).includes('Monatsbeitrag von 40,95 EUR'), 'Auftragssatz UKV');
+  pruefe((await page.textContent('[data-antwortenliste]')).includes('Fehlen Zähne, die noch nicht ersetzt sind?'), 'UKV-Fragen im Wortlaut');
   await page.click('#knopf-absenden');
   await page.waitForSelector('[data-danke]');
   const { letzter } = await mock('/__test/letzter');
   const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
   pruefe(letzter.versicherer === 'ukv' && letzter.beitragAngezeigt === 40.95 && g('TF0021') === '1' && g('tarifwahl') === 'UKVZahnPRIVAT100#', 'UKV-Antrag mit Zuschlag und Zuordnung');
   await foto(page, '390-ukv-03-danke');
+  await context.close();
+}
+
+async function pruefseiteAmbulantOnline(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.goto(`${AN}/antrag/pruefen#test-ambulant-online`, { waitUntil: 'networkidle' });
+  await bildschirm(page, 'tarif');
+  pruefe(await page.locator('input[name="tarif"][value="AP1"]').isChecked(), 'Prüfseite ambulant (Online-Fassung): Angaben vorbelegt');
+  await weiter(page);
+  await bildschirm(page, 'person');
+  pruefe(await page.inputValue('#feld-vorname') === 'Lena', 'Name vom Telefon vorbelegt');
+  await page.locator('label:has(#feld-acknowledge)').click();
+  await weiter(page);
+  await bildschirm(page, 'unterlagenDownload');
+  await page.waitForSelector('[data-alle-downloads]');
+  await page.click('[data-alle-downloads]');
+  await weiter(page);
+  await bildschirm(page, 'erkl:erklaerungen');
+  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  await weiter(page);
+  await bildschirm(page, 'frage:1a');
+  await page.waitForTimeout(650);
+  await page.click('[data-bildschirm="frage:1a"] [data-antwort="nein"]');
+  for (const id of ['1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
+    await bildschirm(page, `frage:${id}`);
+    await page.waitForTimeout(650);
+    await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
+  }
+  await bildschirm(page, 'frage:2');
+  await page.fill('#feld-frage-2-groesse', '178');
+  await page.fill('#feld-frage-2-gewicht', '75');
+  await weiter(page);
+  await bildschirm(page, 'beitrag');
+  await weiter(page);
+  await sdkNachBeitrag(page, null);
+  await bildschirm(page, 'zusammenfassung');
+  await foto(page, '390-pruefseite-ambulant-online-zusammenfassung');
+  await page.click('#knopf-absenden');
+  await page.waitForSelector('[data-danke], [data-sendefehler]');
+  if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler: ${await page.textContent('[data-sendefehler]')}`);
+  pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
+  const { letzter } = await mock('/__test/letzter');
+  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-12-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
   await context.close();
 }
 
@@ -729,11 +792,24 @@ try {
   await starteServer();
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   try {
-    for (const breite of [390, 1280]) {
+    // --nur pruefseite-ambulant: nur diesen Teil (zum schnellen Nachprüfen).
+    const nurTeil = arg('--nur', null) === 'pruefseite-ambulant';
+    if (nurTeil) await pruefseiteAmbulantOnline(browser);
+    for (const breite of nurTeil ? [] : [390, 1280]) {
       await durchlauf(browser, breite, false, breite === 390 ? 'werber' : 'direkt');
       await durchlauf(browser, breite, true, breite === 390 ? 'wahl' : 'direkt');
       await wahl(browser, breite);
     }
+    if (!nurTeil) await alleWeiteren(browser);
+  } finally {
+    await browser.close();
+  }
+  console.log(`Antragsmaske gerendert: ${punkte} Prüfungen bestanden.`);
+} finally {
+  stoppe();
+}
+
+async function alleWeiteren(browser) {
     await zahnDurchlauf(browser, 390, true);
     await zahnDurchlauf(browser, 1280, false);
     await zahnAblehnung(browser);
@@ -741,12 +817,7 @@ try {
     await stationaerDurchlauf(browser, 1280, 'SPU');
     await ukvDurchlauf(browser);
     await pruefseiteZahn(browser);
+    await pruefseiteAmbulantOnline(browser);
     await sonderfaelle(browser);
     await schalterAus(browser);
-  } finally {
-    await browser.close();
-  }
-  console.log(`Antragsmaske gerendert: ${punkte} Prüfungen bestanden.`);
-} finally {
-  stoppe();
 }

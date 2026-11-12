@@ -503,3 +503,31 @@ test('UKV Zahn: Zuschlag je Zahn und Tarif, Ablehnung, Ausschluss, Vollständigk
   const erfassung = JSON.parse(fs.readFileSync(path.join(ERFASSUNG_LN, 'ukv-zahn.json'), 'utf8'));
   pruefeVollstaendigkeit('UKV Zahn', def, erfassung, { ...lnDaten('Z100', basis), unterlagenDienst: [] });
 });
+
+test('Auftragssatz vor dem Absenden passt zur Zahlweise und nennt den Betrag (alle vier Produkte)', async () => {
+  const { auftragSatz } = await import('../src/lib/antragsmaske/vertrag.js');
+  const faelle = [
+    ['ambulant', 'monatlich', 39.19, 'bei der SDK', 'Monatsbeitrag von 39,19 EUR'],
+    ['stationaer', 'monatlich', 36.5, 'bei der SDK', 'Monatsbeitrag von 36,50 EUR'],
+    ['zahn', 'monatlich', 74, 'bei der Bayerischen', 'Monatsbeitrag von 74,00 EUR'],
+    ['zahn', 'jaehrlich', 870.2, 'bei der Bayerischen', 'Jahresbeitrag von 870,20 EUR'],
+    ['zahn-ukv', 'monatlich', 40.95, 'bei der UKV', 'Monatsbeitrag von 40,95 EUR'],
+  ];
+  for (const [produkt, zahlweise, betrag, bei, erwartet] of faelle) {
+    const satz = auftragSatz(DEFINITIONEN[produkt], { zahlweise }, { beitrag: betrag });
+    assert.ok(satz.includes(bei) && satz.includes(`Er kostet dich den oben genannten ${erwartet}.`), `${produkt} ${zahlweise}: ${satz}`);
+  }
+});
+
+test('Herkunft im Sitzungsspeicher: nur Kennzeichen, erste Einstiegsseite bleibt', async () => {
+  const speicher = new Map();
+  globalThis.window = { sessionStorage: { getItem: (k) => speicher.get(k) ?? null, setItem: (k, v) => speicher.set(k, String(v)), removeItem: (k) => speicher.delete(k) } };
+  const { leseHerkunft, merkeHerkunft } = await import('../src/lib/herkunftSpeicher.js');
+  merkeHerkunft({ utm: { utm_source: 'qr', name: 'Lena' }, einstiegsseite: '/ambulant' });
+  merkeHerkunft({ utm: { utm_source: 'spaeter' }, einstiegsseite: '/zahn' });
+  merkeHerkunft({ ref: 'HP-test', iban: 'DE89370400440532013000' });
+  assert.deepEqual(leseHerkunft(), { ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant' });
+  assert.deepEqual([...speicher.keys()], ['healio.herkunft']);
+  assert.ok(!/Lena|DE89/.test(speicher.get('healio.herkunft')), 'keine Personen- oder Bankdaten');
+  delete globalThis.window;
+});

@@ -1,3 +1,4 @@
+import { merkeHerkunft } from './herkunftSpeicher.js';
 import {
   getConsentState,
   hasConsent,
@@ -208,6 +209,8 @@ const landingContext = isBrowser()
 // Herkunft des Besuchs für den Antrag (12.11.2026, Antragsmaske und Antragsgespräch): dieselben geprüften
 // utm-Kennzeichen und die Einstiegsseite, die beim Laden festgehalten wurden. Nur im Arbeitsspeicher, nie gesendet,
 // außer mit dem Antrag selbst.
+if (isBrowser()) merkeHerkunft({ utm: Object.fromEntries(new URLSearchParams(landingContext.query)), einstiegsseite: landingContext.pfad || null });
+
 export const einstiegsHerkunft = () => ({
   utm: Object.fromEntries(new URLSearchParams(landingContext.query)),
   einstiegsseite: landingContext.pfad || null,

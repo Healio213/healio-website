@@ -5,16 +5,19 @@
 // (src/lib/analytics.js). Nichts davon wird hier gespeichert.
 import { einstiegsHerkunft } from '@/lib/analytics';
 import { readStoredReferrer } from '@/lib/referrer';
+import { leseHerkunft } from '@/lib/herkunftSpeicher';
 import { bereinigeHerkunft } from './vertrag';
 
 export function sammleHerkunft({ sparte = null, weg = null, mitgebracht = null } = {}) {
   const jetzt = einstiegsHerkunft();
   const vorher = mitgebracht || {};
-  const utm = Object.keys(vorher.utm || {}).length ? vorher.utm : jetzt.utm;
+  // Haltbar für den Besuch im selben Fenster (herkunftSpeicher.js).
+  const besuch = leseHerkunft() || {};
+  const erste = (...listen) => listen.find((liste) => Object.keys(liste || {}).length) || {};
   return bereinigeHerkunft({
-    ref: readStoredReferrer() || vorher.ref,
-    utm,
-    einstiegsseite: vorher.einstiegsseite || jetzt.einstiegsseite,
+    ref: readStoredReferrer() || vorher.ref || besuch.ref,
+    utm: erste(vorher.utm, besuch.utm, jetzt.utm),
+    einstiegsseite: vorher.einstiegsseite || besuch.einstiegsseite || jetzt.einstiegsseite,
     sparte,
     weg,
   });

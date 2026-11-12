@@ -133,7 +133,10 @@ export default function Antragsmaske({ definition, pruefen = null }) {
   const heute = useMemo(() => new Date(), []);
   const startZeit = useRef(Date.now());
   const [vorbelegung] = useState(() => (pruefen ? {} : holeVorbelegung(definition.pfad || definition.sparte)));
-  const [daten, setDaten] = useState(() => (pruefen?.daten ? { ...startDaten(definition, {}), ...pruefen.daten } : startDaten(definition, vorbelegung)));
+  const [daten, setDaten] = useState(() => (pruefen?.daten
+    // Leere Angaben vom Telefon überschreiben keine Vorgabe der Maske (z. B. Zahlweise monatlich).
+    ? { ...startDaten(definition, {}), ...Object.fromEntries(Object.entries(pruefen.daten).filter(([, wert]) => wert !== null && wert !== undefined && wert !== '')) }
+    : startDaten(definition, vorbelegung)));
   const [dienst, setDienst] = useState({ schluessel: null, antwort: null, fehler: false });
   const [dienstVersuch, setDienstVersuch] = useState(0);
   const [pos, setPos] = useState({ id: 'tarif', aendern: null, uebersicht: false });

@@ -6,6 +6,10 @@ import { JSDOM } from 'jsdom';
 import test from 'node:test';
 import { APPOINTMENT_BOOKING } from '../src/lib/appointmentBooking.js';
 
+// Die Herkunft des Besuchs (healio.herkunft, src/lib/herkunftSpeicher.js, 12.11.2026) gehört nicht zur
+// Lead-Erfassung; geprüft wird, dass die Erfassung selbst nichts weiter speichert.
+const leadSpeicher = () => Object.entries(window.sessionStorage).filter(([schluessel]) => schluessel !== 'healio.herkunft');
+
 // Echte Komponenten, Radix-Dialog und Router; nur Netzwerk/neue Tabs sind Stubs.
 // JSDOM lädt keine externen Ressourcen. Es gibt keinen echten Lead oder Antrag.
 const targetUrl = 'https://www.diebayerische.de/diebayerische/online-berechnen/zahnzusatzversicherung-berechnen?m=032834';
@@ -380,7 +384,7 @@ test('gültiger Submit reserviert synchron einen leeren Tab und navigiert erst n
     assert.equal(h.callbacks.opened, 1); assert.equal(h.callbacks.closed, 1);
     assert.equal(document.querySelector('[role="dialog"]'), null);
     assert.equal(window.sessionStorage.getItem(h.capture.LEAD_CAPTURE_SESSION_KEY), 'captured');
-    assert.deepEqual(Object.entries(window.sessionStorage), [[h.capture.LEAD_CAPTURE_SESSION_KEY, 'captured']]);
+    assert.deepEqual(leadSpeicher(), [[h.capture.LEAD_CAPTURE_SESSION_KEY, 'captured']]);
     assert.equal(window.localStorage.length, 0);
   } finally { await h.cleanup(); }
 });
@@ -450,7 +454,7 @@ test('Fehler erhält Felder, schließt den reservierten Tab und Retry behält UU
     assert.equal(h.tabs[0].destination, undefined);
     assert.equal(document.querySelector('input[name="firstName"]').value, 'Test');
     assert.equal(document.querySelector('input[name="email"]').value, 'test@example.test');
-    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(window.sessionStorage.length, 0);
+    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(leadSpeicher().length, 0);
     await h.act(() => new Promise((resolve) => nativeSetTimeout(resolve, 5)));
     await h.submit();
     assert.equal(h.requests.length, 2);
@@ -480,7 +484,7 @@ test('HTTP-Erfolg ohne bestätigendes JSON und Netzwerkfehler setzen kein Sitzun
       await h.fill(); await h.submit();
       if (failure === 'unconfirmed') await h.respond(0, true, { ok: false }); else await h.reject(0);
       assert.equal(h.tabs[0].closed, true); assert.equal(h.capture.hasCapturedLeadThisSession(), false);
-      assert.equal(window.sessionStorage.length, 0); assert.equal(h.callbacks.opened, 0);
+      assert.equal(leadSpeicher().length, 0); assert.equal(h.callbacks.opened, 0);
       assert(document.querySelector('[role="alert"]'));
       for (const field of document.querySelectorAll('form input:not([aria-hidden="true"])')) {
         assert.equal(field.getAttribute('aria-invalid'), 'false', 'Übertragungsfehler sind keine Feldfehler');
@@ -598,7 +602,7 @@ test('ständig gemountetes Modal ignoriert eine alte Erfolgsantwort nach targetU
     assert.equal(h.requests.length, 2);
     assert.notEqual(h.requests[0].options.headers['X-Idempotency-Key'], h.requests[1].options.headers['X-Idempotency-Key']);
     await h.respond(0);
-    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(window.sessionStorage.length, 0);
+    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(leadSpeicher().length, 0);
     assert.equal(document.querySelector('input[name="firstName"]').value, 'Neue Anfrage');
     assert.equal(document.querySelector('button[type="submit"]').disabled, true);
     assert.equal(h.tabs[1].closed, false); assert.equal(h.tabs[1].destination, undefined);
@@ -617,7 +621,7 @@ test('Erfolgsantwort nach abgelaufenem Abort darf keine Sitzung oder Weiterleitu
     await h.fill(); await h.submit(); await h.fireTimer(12000);
     assert.equal(h.requests[0].options.signal.aborted, true);
     await h.respond(0);
-    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(window.sessionStorage.length, 0);
+    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(leadSpeicher().length, 0);
     assert.equal(h.tabs[0].closed, true); assert.equal(h.tabs[0].destination, undefined);
     assert.equal(document.querySelector('input[name="email"]').value, 'test@example.test');
     assert.equal(h.callbacks.opened, 0); assert.equal(h.callbacks.closed, 0);
@@ -701,7 +705,7 @@ test('Schließen während POST bricht ab und schließt den leeren reservierten T
     await h.fill(); await h.submit(); await h.click('[aria-label="Fenster schließen"]');
     assert.equal(h.requests[0].options.signal.aborted, true);
     assert.equal(h.tabs[0].closed, true); assert.equal(h.tabs[0].destination, undefined);
-    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(window.sessionStorage.length, 0);
+    assert.equal(h.capture.hasCapturedLeadThisSession(), false); assert.equal(leadSpeicher().length, 0);
   } finally { await h.cleanup(); }
 });
 
@@ -784,7 +788,7 @@ test('englischer Dialog behält Sprache, Eingaben, UUID und Popup-Fallback bei V
     await h.click('#next-link');
     assert.equal(h.requests.length, 2); assert.equal(h.tabs.length, 2);
     assert.equal(document.querySelector('[role="dialog"]'), null);
-    assert.deepEqual(Object.entries(window.sessionStorage), [[h.capture.LEAD_CAPTURE_SESSION_KEY, 'captured']]);
+    assert.deepEqual(leadSpeicher(), [[h.capture.LEAD_CAPTURE_SESSION_KEY, 'captured']]);
     assert.equal(window.localStorage.length, 0);
   } finally { await h.cleanup(); }
 });

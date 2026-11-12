@@ -6,6 +6,9 @@
 import {
   bedingungErfuellt, ibanOhneLeer, offeneGesundheitsfragen, parseDatum,
 } from './regeln.js';
+import { bereinigeHerkunft } from '../herkunftSpeicher.js';
+
+export { bereinigeHerkunft };
 
 export const SELBSTANTRAG_KANAL = 'web-selbst';
 export const SELBSTANTRAG_PFAD = '/selbstantrag';
@@ -118,29 +121,18 @@ export function bildschirmFuerFeld(pfad) {
 // Vollständigkeit vor dem Absenden (gleiche Regeln wie die Bildschirme).
 export const gesundheitVollstaendig = (definition, kontext) => offeneGesundheitsfragen(definition, kontext).length === 0;
 
-// Herkunft des Kunden (Franks Vorgabe 12.11.2026: Healio sieht beim Abschluss
-// selbst, wer den Kunden geworben hat). Nur Kennzeichen, nie Personen- oder
-// Gesundheitsangaben. Gleiche Muster wie src/lib/referrer.js (ref) und
-// src/lib/analytics.js (utm_*). Unbekanntes fällt weg, nichts wirft.
-const REF_MUSTER = /^[A-Za-z0-9_-]{1,64}$/;
-const UTM_SCHLUESSEL = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-const UTM_MUSTER = /^[a-z0-9][a-z0-9_.-]{0,99}$/i;
-const PFAD_MUSTER = /^\/[a-z0-9/-]{0,159}$/;
 
-export function bereinigeHerkunft(roh = {}) {
-  const quelle = roh && typeof roh === 'object' ? roh : {};
-  const utm = {};
-  UTM_SCHLUESSEL.forEach((key) => {
-    const wert = String(quelle.utm?.[key] ?? '').trim();
-    if (UTM_MUSTER.test(wert)) utm[key] = wert;
-  });
-  const ref = String(quelle.ref ?? '').trim();
-  const seite = String(quelle.einstiegsseite ?? '').trim().toLowerCase();
-  return {
-    ref: REF_MUSTER.test(ref) ? ref : null,
-    utm,
-    einstiegsseite: PFAD_MUSTER.test(seite) ? seite : null,
-    sparte: ['ambulant', 'zahn', 'stationaer'].includes(quelle.sparte) ? quelle.sparte : null,
-    weg: ['allein', 'telefon'].includes(quelle.weg) ? quelle.weg : null,
-  };
+// Beitragsart und Betrag, wie die Zusammenfassung sie zeigt (jährlich nur,
+// wenn die Zahlweise den Beitrag selbst ändert, z. B. Bayerische).
+export function beitragsAnzeige(definition, daten, beitrag) {
+  const jaehrlich = Boolean(definition.zahlweiseImTarif) && daten.zahlweise === 'jaehrlich';
+  return { label: jaehrlich ? 'Jahresbeitrag' : 'Monatsbeitrag', betrag: beitrag?.beitrag ?? null };
+}
+
+// Auftragssatz vor dem Absenden: Der Satz der Prüfseite (Text 12) nennt den
+// „oben genannten Monatsbeitrag“. Hier passend zur Zahlweise und mit Betrag.
+export function auftragSatz(definition, daten, beitrag) {
+  const { label, betrag } = beitragsAnzeige(definition, daten, beitrag);
+  const betragText = Number.isFinite(betrag) ? ` von ${new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(betrag)} EUR` : '';
+  return String(definition.absenden?.satz || '').replace(/Er kostet dich den oben genannten Monatsbeitrag\./, `Er kostet dich den oben genannten ${label}${betragText}.`);
 }
