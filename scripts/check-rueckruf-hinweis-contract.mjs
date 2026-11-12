@@ -21,9 +21,12 @@ test('läuft nur auf den Endkundenseiten aus der Liste', () => {
     '/', '/ambulant', '/en', '/en/dental', '/en/health-insurance-bonus', '/en/inpatient',
     '/en/outpatient', '/en/services', '/kassenbonus', '/leistungen', '/stationaer', '/zahn',
   ]);
-  assert.equal(getRueckrufTopic('/ambulant/'), 'ambulant');
-  assert.equal(getRueckrufTopic('/zahn'), 'zahn');
-  assert.equal(getRueckrufTopic('/en/inpatient'), 'stationaer');
+  assert.equal(getRueckrufTopic('/leistungen/'), 'start');
+  assert.equal(getRueckrufTopic('/kassenbonus'), 'bonus');
+  // Befund 5 (12.11.2026): auf den drei Produktseiten bleibt der Hinweis aus.
+  for (const path of ['/ambulant/', '/zahn', '/stationaer', '/en/outpatient', '/en/dental', '/en/inpatient']) {
+    assert.equal(getRueckrufTopic(path), null, `${path} zeigt keinen schwebenden Beratungsknopf.`);
+  }
   for (const path of [
     '/ratgeber', '/ratgeber/krankenkasse-2027', '/blog', '/blog/heilpraktiker', '/datenschutz', '/impressum',
     '/erstinformation', '/agb', '/kontakt', '/terminvereinbarung', '/schwangerschaft', '/partner', '/hebammen',

@@ -60,9 +60,18 @@ export const normalizeRueckrufPath = (pathname) => {
   return pathname.replace(/\/+$/, '') || '/';
 };
 
-export const getRueckrufTopic = (pathname) => (
-  RUECKRUF_ROUTE_TOPICS[normalizeRueckrufPath(pathname)] ?? null
-);
+// Befund 5 (Franks Regel 01.11.2026: Termin und Beratung nur einmal je Seite, klein im
+// Schlusskasten): Auf den drei Produktseiten schwebt kein zweiter Beratungsknopf mehr,
+// dort führt der Weg in den Abschluss. Wieder einschalten: Pfad hier entfernen.
+export const RUECKRUF_AUSGEBLENDET_AUF_PRODUKTSEITEN = Object.freeze(new Set([
+  '/ambulant', '/en/outpatient', '/zahn', '/en/dental', '/stationaer', '/en/inpatient',
+]));
+
+export const getRueckrufTopic = (pathname) => {
+  const path = normalizeRueckrufPath(pathname);
+  if (RUECKRUF_AUSGEBLENDET_AUF_PRODUKTSEITEN.has(path)) return null;
+  return RUECKRUF_ROUTE_TOPICS[path] ?? null;
+};
 
 const PHONE_ALLOWED = /^[0-9+()/\s.-]+$/;
 const PHONE_MIN_DIGITS = 6;

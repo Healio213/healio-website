@@ -202,7 +202,7 @@ const de = {
         warning: 'In den ersten drei Kalenderjahren gilt eine Zahnstaffel: bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, danach endet die Staffel und es gelten allein die Erstattungssätze des Tarifs. Bei Unfall gilt keine Staffel.',
         cta: 'UKV-Tarife berechnen',
         ctaType: 'ukv',
-        calculatorHint: 'Es ist kein Tarif vorausgewählt. Wähle im nächsten Fenster selbst ZahnPRIVAT 100, wenn du diesen Leistungsumfang berechnen möchtest.',
+        calculatorHint: 'Im nächsten Fenster ist ZahnPRIVAT 100 schon ausgewählt. Dort siehst du deinen Beitrag.',
         note: 'Nach dem Zwischenschritt mit Vorname und E-Mail öffnet sich die UKV-Antragsstrecke in einem neuen Tab. Erst dort werden Beitrag und Annahme verbindlich geprüft.',
       },
       ukvPreis: {
@@ -219,7 +219,7 @@ const de = {
         warning: 'In ZahnPRIVAT 75 gilt eine Zahnstaffel: bis 1.000 EUR im ersten Kalenderjahr, zusammen bis 2.000 EUR in den ersten zwei und bis 3.000 EUR in den ersten drei Jahren, danach endet die Staffel und es gelten allein die Erstattungssätze des Tarifs. Bei Unfall gilt keine Staffel.',
         cta: 'UKV-Tarife berechnen',
         ctaType: 'ukv',
-        calculatorHint: 'Es ist kein Tarif vorausgewählt. Wähle im nächsten Fenster selbst ZahnPRIVAT 75 für den günstigeren Einstieg oder vergleiche mit den höheren Stufen.',
+        calculatorHint: 'Im nächsten Fenster ist ZahnPRIVAT 75 schon ausgewählt, der günstigere Einstieg. Dort siehst du deinen Beitrag.',
         note: 'Nach dem Zwischenschritt mit Vorname und E-Mail öffnet sich die UKV-Antragsstrecke in einem neuen Tab. Erst dort werden Beitrag und Annahme verbindlich geprüft.',
       },
       sonderKomplex: {
@@ -356,7 +356,7 @@ const de = {
       },
       {
         q: 'Wie läuft der Abschluss nach dem Zahn-Check ab?',
-        a: 'Der Check zeigt dir zunächst den sinnvollen Prüfweg. Vor dem externen Rechner gibst du einmal pro Sitzung deinen Vornamen und deine E-Mail-Adresse ein, damit wir dir den Kassenbonus-Leitfaden einmalig per E-Mail senden können. Danach öffnet sich der Rechner in einem neuen Tab. Bei der UKV ist kein Tarif vorausgewählt: Du wählst die genannte ZahnPRIVAT-Stufe dort selbst aus. Du siehst Beitrag und Bedingungen und beantwortest die Antragsfragen. Erst der Versicherer entscheidet im Antrag verbindlich über Annahme und Leistung.',
+        a: 'Der Check zeigt dir zunächst den sinnvollen Prüfweg. Vor dem externen Rechner gibst du einmal pro Sitzung deinen Vornamen und deine E-Mail-Adresse ein, damit wir dir den Kassenbonus-Leitfaden einmalig per E-Mail senden können. Danach öffnet sich der Rechner in einem neuen Tab. Bei der UKV ist die Stufe vorausgewählt, wenn der Check genau eine nennt; sonst wählst du die genannte ZahnPRIVAT-Stufe dort selbst aus. Du siehst Beitrag und Bedingungen und beantwortest die Antragsfragen. Erst der Versicherer entscheidet im Antrag verbindlich über Annahme und Leistung.',
       },
       {
         q: 'Kann ich den Vertrag später wieder kündigen?',
@@ -559,7 +559,7 @@ const en = {
         ],
         warning: 'A benefit scale applies in the first three calendar years: up to €1,000 in the first year, up to €3,000 in total over the first two and up to €6,000 over the first three years; after that the scale ends and only the reimbursement rates of the tariff apply. No scale applies after an accident.',
         cta: 'Calculate UKV tariffs',
-        calculatorHint: 'No plan is preselected. In the next window, choose ZahnPRIVAT 100 yourself to calculate this level of cover. The insurer’s application is in German.',
+        calculatorHint: 'ZahnPRIVAT 100 is already selected in the next window, where you see your premium. The insurer’s application is in German.',
         note: 'After entering your first name and email, the UKV application opens in a new tab. Your premium and acceptance are assessed there.',
       },
       ukvPreis: {
@@ -575,7 +575,7 @@ const en = {
         ],
         warning: 'ZahnPRIVAT 75 has a benefit scale: up to €1,000 in the first calendar year, up to €2,000 in total over the first two and up to €3,000 over the first three years; after that the scale ends and only the reimbursement rates of the tariff apply. No scale applies after an accident.',
         cta: 'Calculate UKV tariffs',
-        calculatorHint: 'No plan is preselected. In the next window, choose ZahnPRIVAT 75 yourself for entry-level cover or compare it with the higher tiers. The insurer’s application is in German.',
+        calculatorHint: 'ZahnPRIVAT 75, the lower-cost entry tier, is already selected in the next window, where you see your premium. The insurer’s application is in German.',
         note: 'After entering your first name and email, the UKV application opens in a new tab. Your premium and acceptance are assessed there.',
       },
       sonderKomplex: {

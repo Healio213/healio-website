@@ -116,7 +116,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={guidedCallbackEnabled && surface === 'zahn'
-        ? (language === 'en' ? '1-minute check, then the premium calculator for UKV ZahnPRIVAT or ZAHN Sofort. Apply directly online.' : '1-Minuten-Check, dann Tarifrechner für UKV ZahnPRIVAT oder ZAHN Sofort. Antrag direkt online.')
+        ? (language === 'en' ? 'Three or four short questions, then on to the premium calculator. Apply directly online.' : 'Drei bis vier kurze Fragen, dann zum Beitragsrechner. Antrag direkt online.')
         : guidedCallbackEnabled && selfServiceSurface ? undefined
         : guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
       urgency={isHome || surface === 'zahn' || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}

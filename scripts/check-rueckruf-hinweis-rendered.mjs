@@ -184,32 +184,32 @@ try {
   // 2. Fehler beim Senden: freundliche Meldung, zweiter Versuch klappt.
   {
     const { page, posts } = await openPage(DESKTOP, { delivery: (attempt) => (attempt === 1 ? 500 : 200) });
-    await goto(page, '/ambulant');
+    await goto(page, '/kassenbonus');
     await revealTeaser(page);
-    await shoot(page, 'desktop-1280-ambulant-hinweis.png');
+    await shoot(page, 'desktop-1280-kassenbonus-hinweis.png');
     await page.click(`${TEASER} .healio-rueckruf-action`);
     await page.waitForSelector(`${DIALOG}[open]`);
-    check((await page.$eval(DIALOG, (element) => element.innerText)).includes('Persönlicher Check für deinen ambulanten Zusatzschutz'), 'Unterzeile Ambulant fehlt.');
+    check((await page.$eval(DIALOG, (element) => element.innerText)).includes('Persönlicher Check für Bonus und Zusatzschutz'), 'Unterzeile Kassenbonus fehlt.');
     await fillAndSend(DIALOG, page);
     await page.waitForSelector(`${DIALOG} [role="alert"]`, { timeout: 8_000 });
     check((await page.$eval(`${DIALOG} [role="alert"]`, (element) => element.textContent)).startsWith('Deine Anfrage ist gerade nicht bei uns angekommen.'), 'Fehlermeldung fehlt.');
     check((await page.$eval(`${DIALOG} button[type="submit"]`, (button) => button.textContent)) === 'Noch einmal senden', 'Knopf für den zweiten Versuch fehlt.');
     await page.click(`${DIALOG} button[type="submit"]`);
     await page.waitForFunction((selector) => document.querySelector(selector)?.innerText.includes('Danke!'), { timeout: 8_000 }, DIALOG);
-    check(posts.length === 2 && posts[1].template_params.page_source === 'Rückruf-Hinweis /ambulant', 'Zweiter Versuch mit Quelle /ambulant erwartet.');
+    check(posts.length === 2 && posts[1].template_params.page_source === 'Rückruf-Hinweis /kassenbonus', 'Zweiter Versuch mit Quelle /kassenbonus erwartet.');
     await page.close();
   }
 
   // 3. Schließen lässt nur den runden Knopf, auch nach dem Neuladen; Escape schließt das Formular.
   {
     const { page } = await openPage(DESKTOP);
-    await goto(page, '/stationaer');
+    await goto(page, '/leistungen');
     await revealTeaser(page);
     await page.click(`${TEASER} .healio-rueckruf-close`);
     await page.waitForSelector(TEASER, { hidden: true });
     check(await shown(page, LAUNCHER), 'Nach dem Schließen fehlt der runde Knopf.');
     check(await page.evaluate(() => sessionStorage.getItem('healio.rueckruf')) === 'geschlossen', 'Merker „geschlossen“ fehlt.');
-    await goto(page, '/stationaer');
+    await goto(page, '/leistungen');
     await scrollPastShare(page);
     await pause(3_600);
     check(await count(page, TEASER) === 0, 'In derselben Sitzung kein zweiter Hinweis.');
@@ -225,7 +225,7 @@ try {
   // 4. Nita-Hinweise haben Vorrang, das Rückruf-Formular auf /zahn auch.
   {
     const { page } = await openPage(DESKTOP);
-    await goto(page, '/zahn');
+    await goto(page, '/leistungen');
     await revealTeaser(page);
     await page.evaluate(() => {
       const hint = document.createElement('div');
@@ -265,7 +265,7 @@ try {
   // 5. Nicht auf Rechtsseiten, Ratgebern, Kampagnen-, B2B- und Sonderseiten.
   {
     const { page } = await openPage(DESKTOP);
-    for (const route of ['/datenschutz', '/impressum', '/ratgeber', '/schwangerschaft', '/partner', '/kontakt', '/terminvereinbarung', '/check/naturheilkunde']) {
+    for (const route of ['/datenschutz', '/impressum', '/ratgeber', '/schwangerschaft', '/partner', '/kontakt', '/terminvereinbarung', '/check/naturheilkunde', '/ambulant', '/zahn', '/stationaer']) {
       await goto(page, route);
       await scrollPastShare(page);
       await pause(3_600);
@@ -295,7 +295,7 @@ try {
   // 7. Handy: nach 20 s ohne Scrollen kompakt unten, frei von Nita, ohne Querscrollen.
   {
     const { page } = await openPage(MOBILE);
-    await goto(page, '/ambulant');
+    await goto(page, '/kassenbonus');
     await pause(20_800);
     if (!(await count(page, TEASER))) {
       // Liegt gerade ein Knopf der Seite unten, wartet der Hinweis auf das nächste Scrollen.
@@ -318,26 +318,25 @@ try {
     }
     await page.evaluate(() => window.scrollTo(0, 0));
     await pause(400);
-    await shoot(page, 'handy-390-ambulant-hinweis.png');
+    await shoot(page, 'handy-390-kassenbonus-hinweis.png');
     await page.click(`${TEASER} .healio-rueckruf-action`);
     await page.waitForSelector(`${DIALOG}[open]`);
     const sheet = await box(page, DIALOG);
     check(Math.round(sheet.width) === MOBILE.width && Math.round(sheet.bottom) === MOBILE.height, 'Handy: Formular gehört als Blatt an den unteren Rand.');
     await page.evaluate(() => document.activeElement?.blur());
-    await shoot(page, 'handy-390-ambulant-formular.png');
+    await shoot(page, 'handy-390-kassenbonus-formular.png');
     await page.close();
   }
 
-  // 8. Handy /zahn: ohne Cookie-Hinweis gibt es nichts abzuwarten.
+  // 8. Handy: auf den Produktseiten (Befund 5, 12.11.2026) schwebt kein Beratungsknopf.
   {
     const { page } = await openPage(MOBILE, { consent: false });
-    await goto(page, '/zahn');
-    await revealTeaser(page);
-    await shoot(page, 'handy-390-zahn-hinweis.png');
-    await page.click(`${TEASER} .healio-rueckruf-close`);
-    await page.waitForSelector(TEASER, { hidden: true });
-    const pillPresent = await count(page, '.healio-nita-pill');
-    check(pillPresent ? (await count(page, LAUNCHER)) === 0 : await shown(page, LAUNCHER), 'Handy: runder Knopf nur, wo unten keine Nita-Leiste steht.');
+    for (const route of ['/zahn', '/ambulant', '/stationaer']) {
+      await goto(page, route);
+      await scrollPastShare(page);
+      await pause(3_600);
+      check(await count(page, `${TEASER}, ${LAUNCHER}`) === 0, `Handy: ${route} darf keinen Beratungsknopf zeigen.`);
+    }
     await page.close();
   }
 

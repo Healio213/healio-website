@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { BAYERISCHE_URL, UKV_URL } from './dentalLinks';
+import { BAYERISCHE_URL, UKV_URL, UKV_ZAHN_100_URL, UKV_ZAHN_75_URL } from './dentalLinks';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import { getDentalContent } from './dentalContent';
@@ -65,6 +65,12 @@ const computeResult = (answers) => {
 const CTA_HREFS = {
   bayerische: BAYERISCHE_URL,
   ukv: UKV_URL,
+};
+
+// Genau ein empfohlener Tarif: Die UKV-Strecke öffnet mit diesem Tarif schon ausgewählt.
+const CTA_HREF_BY_RESULT = {
+  ukvLeistung: UKV_ZAHN_100_URL,
+  ukvPreis: UKV_ZAHN_75_URL,
 };
 
 // Einziger Messpunkt im Zahn-Check: das tatsächliche Öffnen des Antragslinks
@@ -382,7 +388,7 @@ const DentalZahnCheck = () => {
                   <p className="mt-6 font-display text-lg font-extrabold text-slate-950">
                     {result.ctaType === 'contact'
                       ? (lang === 'en' ? 'Let’s clarify your situation together.' : 'Klären wir deine Situation gemeinsam.')
-                      : (lang === 'en' ? 'Apply online or talk to us first.' : 'Online abschließen oder erst mit uns sprechen.')}
+                      : (lang === 'en' ? 'Apply online.' : 'Online abschließen.')}
                   </p>
                   <div data-dental-result-actions className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                     {result.ctaType === 'contact' ? GUIDED_CALLBACK_ENABLED ? (
@@ -395,7 +401,7 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <LeadCaptureLink href={CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
+                        <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
                           {lang === 'en'
                             ? (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online')
                             : (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen')}
@@ -403,11 +409,7 @@ const DentalZahnCheck = () => {
                         </LeadCaptureLink>
                       </Button>
                     )}
-                    {GUIDED_CALLBACK_ENABLED && result.ctaType !== 'contact' && (
-                      <GuidedCallbackButton product="zahn" tariff={guidedTariff} className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#087654] px-6 py-3 text-center font-display text-base font-bold text-[#075c43] transition hover:bg-[#effbf6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-800">
-                        {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
-                      </GuidedCallbackButton>
-                    )}
+                    {/* Befund 5 (12.11.2026): Termin nur einmal je Seite, klein im Schlusskasten. Nur die Ergebnisse ohne Online-Abschluss (contact) behalten ihren Termin-Knopf. */}
                   </div>
                   <p className="mt-3 text-base leading-6 text-slate-600 md:leading-7">{result.note}</p>
                   <button

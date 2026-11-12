@@ -24,7 +24,9 @@ const tariffOptions = [
 const StationaerTariffSelector = () => {
   const { t } = useTranslation('stationaer');
   const { lang } = useLanguage();
-  const [selected, setSelected] = useState('');
+  // Befund 4 (12.11.2026): SP2 ist vorgewählt, damit der SDK-Rechnerknopf sofort
+  // sichtbar steht und die DKV erst danach kommt.
+  const [selected, setSelected] = useState('sp2');
   const guidedTariff = selected ? `SDK ${selected.toUpperCase()}` : '';
   useEffect(() => {
     if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('stationaer', guidedTariff);
@@ -86,8 +88,6 @@ const StationaerTariffSelector = () => {
             <span className="md:hidden">{lang === 'en' ? 'Family & midwife benefits' : 'Familie & Hebammenleistungen'}</span><span className="hidden md:inline">{t('refresh.hero.familyCta')}</span><ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
           </a>
         </div>
-
-        <StationaerDkvAlternative />
 
         <h3 className="mt-8 font-display text-xl font-extrabold text-[#071726] md:mt-10 sm:text-2xl">
           {t('refresh.selector.sdkTitle')}
@@ -197,7 +197,7 @@ const StationaerTariffSelector = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="mx-auto mt-5 flex max-w-4xl scroll-mb-24 flex-col items-center justify-between gap-5 rounded-[1.6rem] bg-[#071726] px-6 py-6 text-white md:mt-8 shadow-[0_20px_55px_rgba(7,23,38,0.18)] sm:flex-row sm:px-8"
+              className="mx-auto mt-5 flex max-w-4xl scroll-mb-24 scroll-mt-28 flex-col items-center justify-between gap-5 rounded-[1.6rem] bg-[#071726] px-6 py-6 text-white md:mt-8 shadow-[0_20px_55px_rgba(7,23,38,0.18)] sm:flex-row sm:px-8"
               aria-live="polite"
             >
               <div>
@@ -228,6 +228,8 @@ const StationaerTariffSelector = () => {
             </motion.p>
           )}
         </AnimatePresence>
+
+        <StationaerDkvAlternative />
 
         <WhatsAppHelpHint placement="stationaer-tarifwahl" variant="line" text={t('refresh.help.selector')} className="mx-auto mt-5 max-w-2xl text-center md:mt-6" />
 

@@ -14,6 +14,7 @@ const constant = (source, name) => source.match(new RegExp(`const ${name} = '([^
 const bayerischeUrl = constant(dentalSource, 'BAYERISCHE_RAW_URL');
 const ukvUrl = constant(dentalSource, 'UKV_RAW_URL');
 const ukvAmbulantUrl = ukvUrl.replace('&tarifftypes=Zahn&', '&tarifftypes=Ambulant&').replace('&tariffs=&', '&tariffs=UKVVorsorgePRIVAT@&');
+const ukvZahnUrl = (tariff) => ukvUrl.replace('&tariffs=&', `&tariffs=${tariff}&`);
 const dkvUrl = 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487';
 const aragOfferUrl = 'https://healio.de/ambulant?angebot=arag-v100';
 const bayerischeStationaerUrl = 'https://www.diebayerische.de/online-berechnen/krankenhauszusatzversicherung-berechnen/?m=032834';
@@ -55,6 +56,15 @@ test('SDK-Ambulant-Links mit vorgewählter Stufe werden freigegeben, fremde kenn
   assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKAP2@')), null);
   assert.equal(validateApplicationUrl(sdkUrl({}, 'UKVVorsorgePRIVAT@')), null);
   assert.equal(validateApplicationUrl(sdkUrl({}, 'SDKAP1@').replace('tarifftypes=Ambulant', 'tarifftypes=Station%C3%A4r')), null);
+});
+
+test('UKV-Zahn-Links mit vorgewähltem ZahnPRIVAT 75 oder 100 werden freigegeben, fremde Kennungen nicht', () => {
+  for (const code of ['UKVZahnPRIVAT75@', 'UKVZahnPRIVAT100@']) {
+    const url = ukvZahnUrl(code);
+    assert.equal(validateApplicationUrl(url), new URL(url).toString());
+  }
+  assert.equal(validateApplicationUrl(ukvZahnUrl('UKVZahnPRIVAT50@')), null);
+  assert.equal(validateApplicationUrl(ukvZahnUrl('ZahnPRIVAT100@')), null);
 });
 
 test('SDK-Stationär-Links mit vorgewähltem Klinik-Tarif werden freigegeben, nur auf Stationär', () => {

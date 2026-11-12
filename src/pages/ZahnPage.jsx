@@ -160,7 +160,7 @@ const ZahnPage = () => {
                 {GUIDED_CALLBACK_ENABLED ? (
                   <div className="mt-6 md:mt-8">
                     <DentalEntryActions />
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? '1-minute check, then the premium calculator for UKV ZahnPRIVAT or ZAHN Sofort.' : '1-Minuten-Check, dann Tarifrechner für UKV ZahnPRIVAT oder ZAHN Sofort.'}</p>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Three or four short questions, then on to the premium calculator.' : 'Drei bis vier kurze Fragen, dann zum Beitragsrechner.'}</p>
                   </div>
                 ) : (<>
                 <a
@@ -477,7 +477,7 @@ const ZahnPage = () => {
               </div>
               {GUIDED_CALLBACK_ENABLED ? (
                 <>
-                  <DentalEntryActions className="mt-6" />
+                  <DentalEntryActions className="mt-6" hint />
                   <TerminNebenweg product="zahn" tone="dark" className="mt-2" />
                 </>
               ) : (

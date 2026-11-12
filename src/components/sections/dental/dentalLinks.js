@@ -20,6 +20,15 @@ const UKV_AMBULANT_RAW_URL = UKV_RAW_URL
   .replace('&tarifftypes=Zahn&', '&tarifftypes=Ambulant&')
   .replace('&tariffs=&', '&tariffs=UKVVorsorgePRIVAT@&');
 
+// Befund 3 (12.11.2026): Zahn-Check-Ergebnisse mit genau einem empfohlenen Tarif
+// öffnen die UKV-Strecke mit diesem Tarif schon ausgewählt. Kennungen aus
+// Healio/Antragsstrecken/originale/levelnine/ukv-zahn.json (UKVZahnPRIVAT75#,
+// UKVZahnPRIVAT100#, # steht in der URL als @). Live geprüft 12.11.2026: Die
+// Strecke zeigt dann nur den gewählten Tarif mit Beitrag. Alle übrigen
+// Parameter bleiben Zeichen für Zeichen gleich.
+const UKV_ZAHN_100_RAW_URL = UKV_RAW_URL.replace('&tariffs=&', '&tariffs=UKVZahnPRIVAT100@&');
+const UKV_ZAHN_75_RAW_URL = UKV_RAW_URL.replace('&tariffs=&', '&tariffs=UKVZahnPRIVAT75@&');
+
 const UKV_RULES = Object.freeze({
   hostname: 'insurances-online.levelnine.biz',
   pathname: '/',
@@ -53,6 +62,14 @@ const PROVIDER_RULES = Object.freeze({
     requiredSearchParams: Object.freeze({ m: '032834' }),
   }),
   ukv: UKV_RULES,
+  ukvZahn100: Object.freeze({
+    ...UKV_RULES,
+    requiredSearchParams: Object.freeze({ ...UKV_RULES.requiredSearchParams, tariffs: 'UKVZahnPRIVAT100@' }),
+  }),
+  ukvZahn75: Object.freeze({
+    ...UKV_RULES,
+    requiredSearchParams: Object.freeze({ ...UKV_RULES.requiredSearchParams, tariffs: 'UKVZahnPRIVAT75@' }),
+  }),
   // Wie der Zahn-Link, nur mit tarifftypes "Ambulant" und fest gewähltem
   // Tarif VorsorgePRIVAT.
   ukvAmbulant: Object.freeze({
@@ -108,6 +125,8 @@ const requireSafeProviderUrl = (rawUrl, rules, provider) => {
 // über agentId2=226487 bleibt unverändert). URL-Parameter niemals manuell ändern.
 export const BAYERISCHE_URL = requireSafeProviderUrl(BAYERISCHE_RAW_URL, PROVIDER_RULES.bayerische, 'die Bayerische');
 export const UKV_URL = requireSafeProviderUrl(UKV_RAW_URL, PROVIDER_RULES.ukv, 'UKV');
+export const UKV_ZAHN_100_URL = requireSafeProviderUrl(UKV_ZAHN_100_RAW_URL, PROVIDER_RULES.ukvZahn100, 'UKV ZahnPRIVAT 100');
+export const UKV_ZAHN_75_URL = requireSafeProviderUrl(UKV_ZAHN_75_RAW_URL, PROVIDER_RULES.ukvZahn75, 'UKV ZahnPRIVAT 75');
 export const UKV_AMBULANT_URL = requireSafeProviderUrl(UKV_AMBULANT_RAW_URL, PROVIDER_RULES.ukvAmbulant, 'UKV Vorsorge-Baustein');
 
 // Vorbereitet, aktuell BEWUSST NICHT verlinkt (Franks Ansage 02.08.2026:

@@ -7,7 +7,7 @@ import { scrollToZahnCheck } from './zahnCheckScroll';
 
 // Frank 01.11.2026: Der Einstieg führt in den Zahn-Check und von dort in den
 // Tarifrechner. Der Termin steht nur noch einmal am Seitenende.
-export default function DentalEntryActions({ className = '', desktop = false }) {
+export default function DentalEntryActions({ className = '', desktop = false, hint = false }) {
   const { lang } = useLanguage();
   const reduceMotion = useReducedMotion();
   return (
@@ -25,6 +25,13 @@ export default function DentalEntryActions({ className = '', desktop = false }) 
         <Calculator className="h-5 w-5 shrink-0" aria-hidden="true" />
         {lang === 'en' ? 'See what you would pay' : 'Jetzt sehen, was du zahlst'}
       </a>
+      {/* Befund 3 (12.11.2026): ehrlich sagen, was hinter dem Knopf kommt. Im Seitenkopf steht dieselbe
+          Aussage schon als Hinweiszeile unter dem Knopf (ZahnPage, DesktopLead), deshalb nur auf Wunsch. */}
+      {hint && (
+        <p className="w-full text-sm leading-5 text-slate-300">
+          {lang === 'en' ? 'Three or four short questions, then on to the premium calculator.' : 'Drei bis vier kurze Fragen, dann zum Beitragsrechner.'}
+        </p>
+      )}
     </div>
   );
 }

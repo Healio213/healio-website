@@ -30,6 +30,8 @@ export const ARAG_OFFER_URL = 'https://healio.de/ambulant?angebot=arag-v100';
 export const isPersonalOfferUrl = (value) => value === ARAG_OFFER_URL;
 
 const SDK_AMBULANT_TARIFFS = new Set(['SDKAP5@', 'SDKAP7@', 'SDKAP9@', 'SDKAP1@']);
+// Zahn: ohne Tarif oder (Befund 3, 12.11.2026) mit vorgewähltem ZahnPRIVAT 75 oder 100.
+const UKV_ZAHN_TARIFFS = new Set(['', 'UKVZahnPRIVAT75@', 'UKVZahnPRIVAT100@']);
 // Klinik-Tarife SP1, SP2 und SPU, im Rechner geprüft am 01.11.2026.
 const SDK_STATIONAER_TARIFFS = new Set(['SDKSP1@', 'SDKSP2@', 'SDKSPU@']);
 
@@ -101,7 +103,7 @@ export const validateApplicationUrl = (value) => {
     })) return null;
     const type = url.searchParams.get('tarifftypes');
     const tariff = url.searchParams.get('tariffs');
-    return ((type === 'Zahn' && tariff === '') || (type === 'Ambulant' && tariff === 'UKVVorsorgePRIVAT@'))
+    return ((type === 'Zahn' && UKV_ZAHN_TARIFFS.has(tariff)) || (type === 'Ambulant' && tariff === 'UKVVorsorgePRIVAT@'))
       ? url.toString() : null;
   } catch {
     return null;

@@ -131,11 +131,17 @@ for (const lang of ['de', 'en']) {
   expect(ukvResults.length === 6, `Alle sechs UKV-Ergebniswege bleiben erhalten (${lang}).`);
   for (const result of ukvResults) {
     expect(typeof result.calculatorHint === 'string' && result.calculatorHint.includes('ZahnPRIVAT'), `UKV braucht einen verständlichen Tarif-Auswahlhinweis (${lang}).`);
-    expect((lang === 'de' ? /kein Tarif vorausgewählt/ : /No plan is preselected/).test(result.calculatorHint), `Der Hinweis darf keine Tarifvorauswahl zusagen (${lang}).`);
+    // Befund 3 (12.11.2026): Nur die zwei Ergebnisse mit genau einem Tarif öffnen die UKV-Strecke
+    // mit vorgewähltem Tarif (Kennung belegt, live geprüft). Alle anderen bleiben bei der manuellen Auswahl.
+    const single = result === check.results.ukvLeistung || result === check.results.ukvPreis;
+    expect(single
+      ? (lang === 'de' ? /schon ausgewählt/ : /already selected/).test(result.calculatorHint)
+      : (lang === 'de' ? /kein Tarif vorausgewählt/ : /No plan is preselected/).test(result.calculatorHint), `Der Hinweis passt zur tatsächlichen Tarifvorauswahl (${lang}).`);
   }
   expect(check.results.ukvLeistung.calculatorHint.includes('ZahnPRIVAT 100') && check.results.ukvPreis.calculatorHint.includes('ZahnPRIVAT 75'), `Der genannte Tarif wird in die Rechner-Übergabe übernommen (${lang}).`);
 }
-expect(dentalCheck.indexOf('id="zahn-calculator-handoff"') < dentalCheck.indexOf('href={CTA_HREFS[result.ctaType]}'), 'Der UKV-Tarif-Auswahlhinweis steht vor dem externen Rechnerknopf.');
+expect(/ukvLeistung: UKV_ZAHN_100_URL/.test(dentalCheck) && /ukvPreis: UKV_ZAHN_75_URL/.test(dentalCheck), 'Die Ergebnisse mit genau einem Tarif nutzen die UKV-Links mit vorgewähltem Tarif.');
+expect(dentalCheck.indexOf('id="zahn-calculator-handoff"') < dentalCheck.indexOf('href={CTA_HREF_BY_RESULT[resultKey]'), 'Der UKV-Tarif-Auswahlhinweis steht vor dem externen Rechnerknopf.');
 expect(/aria-describedby=\{result\.ctaType === 'ukv' \? 'zahn-calculator-handoff' : undefined\}/.test(dentalCheck), 'Der UKV-Knopf verweist auch für Hilfstechnologien auf den Auswahlhinweis.');
 expect(/1 bis 3 fehlenden, noch nicht ersetzten Zähnen/.test(dentalContent), 'Der UKV-Lückenweg muss die Grenze von ein bis drei fehlenden Zähnen erklären.');
 expect(/6,10 EUR[^']*9,00 EUR[^']*10,90 EUR/.test(dentalContent), 'Der UKV-Lückenweg muss die geprüften Zuschläge je Zahn nennen.');

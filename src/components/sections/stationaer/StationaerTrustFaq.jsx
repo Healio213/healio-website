@@ -3,7 +3,7 @@ import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import { TerminNebenweg } from '@/components/guided/SelfServiceEntryActions';
 import { useLanguage } from '@/hooks/useLanguage';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUp, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
@@ -137,11 +137,11 @@ const StationaerTrustFaq = () => {
           </div>
           <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-auto md:items-end">
           <a
-            href="#tarife"
+            href="#stationaer-selector-result"
             className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-extrabold text-[#075f46] transition hover:-translate-y-0.5 hover:bg-[#e9fff7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
           >
             {lang === 'en' ? 'Choose a plan & apply online' : 'Tarif wählen & online abschließen'}
-            <ArrowUp className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
           {GUIDED_CALLBACK_ENABLED && <TerminNebenweg product="stationaer" tone="dark" className="text-emerald-50/85" />}
           </div>
