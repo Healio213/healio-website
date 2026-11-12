@@ -176,7 +176,7 @@ export function HilfeKarte({ sparte }) {
 }
 
 // Begrüßung oben im ersten Schritt.
-export function Begruessung({ definition, minuten }) {
+export function Begruessung({ definition }) {
   const produkt = produktAnzeige(definition.sparte);
   const punkte = [
     'Du bleibst die ganze Zeit bei Healio.',
@@ -187,7 +187,7 @@ export function Begruessung({ definition, minuten }) {
     <div className="mb-6 flex gap-4 rounded-[1.4rem] bg-home-ice p-4 ring-1 ring-emerald-900/10 sm:mb-8 sm:p-5" data-begruessung="">
       <FriendlyIcon kind={produkt.icon} size="md" tone="mint" className="hidden sm:inline-grid" />
       <div className="min-w-0">
-        <p className="font-display text-xl font-extrabold leading-tight text-home-midnight">{produkt.schutz} in etwa {minuten} Minuten</p>
+        <p className="font-display text-xl font-extrabold leading-tight text-home-midnight">{produkt.schutz} in wenigen Minuten</p>
         <ul className="mt-2 space-y-1">
           {punkte.map((punkt) => (
             <li key={punkt} className="flex gap-2 text-base leading-6 text-home-midnight">

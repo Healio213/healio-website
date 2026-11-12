@@ -149,8 +149,6 @@ export default function SchrittErklaerungen({
               checked={daten.erklaerungen[eintrag.key]}
               onChange={(wert) => setze(eintrag.key, wert)}
               fehler={fehler[eintrag.key]}
-              wortlaut={eintrag.hakenZusatz ? null : eintrag.haken}
-              zusatz={eintrag.freiwilligText && <span className="block text-home-slate">{eintrag.freiwilligText}</span>}
             >
               {schuetze(eintrag.haken)}
               {eintrag.hakenZusatz && <span className="mt-2 block">{eintrag.hakenZusatz}</span>}

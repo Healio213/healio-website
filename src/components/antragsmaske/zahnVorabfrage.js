@@ -4,8 +4,13 @@
 //
 // Fragen und Zuordnung sind die des Zahn-Checks auf /zahn
 // (src/components/sections/dental/DentalZahnCheck.jsx, computeResult und
-// needsQ4, Stand 04.11.2026). Ergänzt sind nur zwei Fragen, die die
-// Annahmeregeln der Strecken zwingend brauchen:
+// needsQ4, Stand 04.11.2026), mit einer Korrektur (Abnahme 12.11.2026):
+// „Ja, aber schon fertig behandelt“ führt nicht zur UKV, denn deren Frage
+// GF0073 fragt auch nach Empfehlungen der letzten zwei Jahre (ehrliches „Ja“
+// heißt dort Ablehnung). Die Bayerische fragt danach nicht: Ziel ist die
+// Bayerische ohne ZAHN Sofort, sofern keine Lücke, keine Vorgeschichte und
+// kein Zahnschmelzdefekt; sonst Telefon.
+// Ergänzt sind zwei Fragen, die die Annahmeregeln der Strecken brauchen:
 // - anzahl: Zahl der fehlenden Zähne (1, 2, 3). Die UKV rechnet den Zuschlag
 //   je Zahn (Frage TF0021); der Zahn-Check fragt nur „1 bis 3“.
 // - schmelz: Parodontose, Parodontitis oder Zahnschmelzdefekt in den letzten
@@ -27,6 +32,8 @@ export const OPTIONEN = {
 };
 
 const behandlungOffen = (a) => a.q1 === 'ja';
+// Weg zur Bayerischen: Behandlung steht an (mit ZAHN Sofort) oder ist schon abgerechnet (ohne).
+const zurBayerischen = (a) => a.q1 === 'ja' || a.q1 === 'fertig';
 
 // Nächste offene Frage oder null, wenn das Ziel feststeht.
 export function naechsteFrage(a = {}) {
@@ -34,11 +41,11 @@ export function naechsteFrage(a = {}) {
   if (!a.q2) return 'q2';
   if (a.q2 === 'viele' || a.q2 === 'ziehen') return null;
   if (a.q2 === 'wenige') {
-    if (behandlungOffen(a)) return null;
+    if (zurBayerischen(a)) return null;
     return a.anzahl ? null : 'anzahl';
   }
   if (!a.q3) return 'q3';
-  if (behandlungOffen(a)) {
+  if (zurBayerischen(a)) {
     if (a.q3 === 'ja') return null;
     return a.schmelz ? null : 'schmelz';
   }
@@ -65,9 +72,9 @@ export function gestellteFragen(a = {}) {
 export function ergebnisSchluessel(a = {}) {
   if (a.q2 === 'viele') return 'sonderViele';
   if (a.q2 === 'ziehen') return 'sonderKomplex';
-  if (behandlungOffen(a)) {
+  if (zurBayerischen(a)) {
     if (a.q2 === 'wenige' || a.q3 === 'ja' || a.schmelz === 'ja') return 'sonderKomplex';
-    return 'sofort';
+    return behandlungOffen(a) ? 'sofort' : 'bayerischeOhneSofort';
   }
   if (a.q2 === 'wenige') return 'ukvLuecke';
   if (a.q3 === 'ja') return 'ukvVorgeschichte';
@@ -86,8 +93,7 @@ const UKV_STUFE = {
 
 // Ziel der Vorabfrage. Liefert null, solange Fragen offen sind, sonst
 // { ziel, ergebnis, produkt, tarif, bausteine, antworten, vorbelegt }.
-// ziel: 'ukv' | 'bayerische-sofort' | 'telefon' ('bayerische' ohne Baustein
-// entsteht in der Vorabfrage nie, nur beim Einstieg über die Produktseite).
+// ziel: 'ukv' | 'bayerische-sofort' | 'bayerische' (ohne Baustein, Stufe frei) | 'telefon'.
 // antworten: Originalfragen, die eine Antwort der Vorabfrage inhaltlich
 // genau abdeckt (vorbelegt, der Kunde bestätigt sie im Wortlaut).
 export function zielAus(a = {}) {
@@ -98,13 +104,15 @@ export function zielAus(a = {}) {
       ziel: 'telefon', ergebnis, produkt: null, tarif: null, bausteine: [], antworten: {},
     };
   }
-  if (ergebnis === 'sofort') {
+  if (ergebnis === 'sofort' || ergebnis === 'bayerischeOhneSofort') {
+    const sofort = ergebnis === 'sofort';
     return {
-      ziel: 'bayerische-sofort',
+      ziel: sofort ? 'bayerische-sofort' : 'bayerische',
       ergebnis,
       produkt: 'zahn',
-      tarif: 'PRESTIGE',
-      bausteine: ['ZAHN_SOFORT'],
+      // Mit ZAHN Sofort die Vorgabe der Strecke (Prestige), ohne Baustein keine Vorauswahl.
+      tarif: sofort ? 'PRESTIGE' : null,
+      bausteine: sofort ? ['ZAHN_SOFORT'] : [],
       antworten: {
         // q2 „alle Zähne vorhanden oder ersetzt“ (nicht „soll gezogen werden“): Frage 1 beider Fassungen.
         z1: 'nein',
@@ -120,10 +128,8 @@ export function zielAus(a = {}) {
   const antworten = {};
   // q2 hat denselben Hinweis wie TF0021 (Milch-, Weisheitszähne, Lückenschluss zählen nicht).
   antworten.TF0021 = a.q2 === 'wenige' ? a.anzahl : '0';
-  // q1 „Nein, nichts davon“ deckt GF0073 (empfohlen in 2 Jahren, beabsichtigt, läuft).
-  // „Schon fertig behandelt“ deckt sie nicht: GF0073 fragt auch nach Empfehlungen
-  // der letzten zwei Jahre, die Frage kommt deshalb normal.
-  if (a.q1 === 'nein') antworten.GF0073 = 'nein';
+  // Zur UKV kommt nur q1 „Nein, nichts davon“; das deckt GF0073 (empfohlen in 2 Jahren, beabsichtigt, läuft).
+  antworten.GF0073 = 'nein';
   return {
     ziel: 'ukv', ergebnis, produkt: 'zahn-ukv', tarif: UKV_STUFE[ergebnis], bausteine: [], antworten,
   };

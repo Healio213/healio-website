@@ -8,7 +8,9 @@ import {
   Aufklapper, Callout, FOKUS, FehlerText, Field, Gruppe, LINK, NeuerTab, OptionCard, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria, schuetze,
 } from '@/components/antrag/ui';
 import { TERMIN_LINK, telefonLink } from './teile';
-import { feldHinweis, feldLabel } from './anzeige';
+import {
+  ALLE_STUFEN_HINWEIS, NICHT, anzeigeZeilen, feldHinweis, feldLabel,
+} from './anzeige';
 
 // Schritt 1 „Tarif und Beitrag“: erst Geburtsdatum (und PLZ), dann die
 // Stufen als gleich große Vergleichskarten mit echtem Beitrag, Zusatzbaustein
@@ -40,7 +42,9 @@ export function fehlerTarif(definition, daten, {
 // Kernleistungen einer Stufe als Zeilen [Bezeichnung, Wert]: aus den Zeilen
 // der Definition oder, wo es nur den Leistungstext des Versicherers gibt, aus
 // dessen ersten Punkten (Wortlaut unverändert).
-export function kernZeilen(tarif) {
+export function kernZeilen(tarif, versicherer) {
+  const anzeige = anzeigeZeilen(versicherer, tarif.id);
+  if (anzeige) return { kopf: null, zeilen: anzeige };
   if (tarif.zeilen?.length) return { kopf: null, zeilen: tarif.zeilen };
   if (!tarif.details) return { kopf: null, zeilen: [] };
   const zeilen = String(tarif.details).split('\n').map((zeile) => zeile.trim()).filter(Boolean);
@@ -60,7 +64,11 @@ export function kernZeilen(tarif) {
 }
 
 // Zustand der Beitragsabfrage beim Antragsdienst (nur bei beitrag.art 'dienst').
-function DienstBeitrag({ dienst, sparte, zahlweise }) {
+// Bei Erfolg eine Aufschlüsselung: Stufe + Zusatzbaustein = Gesamt (keine
+// Wiederholung der Karte „Dein Schutz“).
+function DienstBeitrag({
+  dienst, sparte, zahlweise, tarif, preisStufe, bausteine,
+}) {
   if (!dienst || dienst.leer) return null;
   if (dienst.fehler) {
     return (
@@ -74,20 +82,30 @@ function DienstBeitrag({ dienst, sparte, zahlweise }) {
     );
   }
   if (!dienst.antwort) return <p className="text-base leading-7 text-home-slate" aria-live="polite" data-beitrag-laedt="">Einen Moment, wir rechnen deinen Beitrag aus …</p>;
+  const gesamt = dienst.antwort.beitrag;
+  const aufpreis = Number.isFinite(preisStufe) && bausteine.length ? Math.round((gesamt - preisStufe) * 100) / 100 : null;
+  const einheit = zahlweise === 'jaehrlich' ? 'im Jahr' : 'im Monat';
   return (
-    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-[1.2rem] bg-home-midnight px-5 py-4 text-white" aria-live="polite" data-gesamtbeitrag="">
-      <p className="text-base font-semibold text-home-mint-active">{zahlweise === 'jaehrlich' ? 'Dein Gesamtbeitrag im Jahr' : 'Dein Gesamtbeitrag im Monat'}</p>
-      <p className="whitespace-nowrap font-display text-3xl font-extrabold tracking-[-0.02em]">{euro(dienst.antwort.beitrag)}</p>
+    <div className="rounded-[1.2rem] bg-white px-5 py-3 ring-1 ring-home-midnight/10" aria-live="polite" data-gesamtbeitrag="">
+      <dl className="divide-y divide-home-midnight/10 text-base">
+        {Number.isFinite(preisStufe) && (
+          <div className="flex justify-between gap-3 py-2"><dt className="text-home-slate">Stufe {tarif?.name}</dt><dd className="whitespace-nowrap font-semibold">{euro(preisStufe)}</dd></div>
+        )}
+        {bausteine.map((baustein) => (
+          <div key={baustein.id} className="flex justify-between gap-3 py-2"><dt className="text-home-slate">+ {baustein.name}</dt><dd className="whitespace-nowrap font-semibold">{Number.isFinite(aufpreis) ? euro(aufpreis) : baustein.preisText}</dd></div>
+        ))}
+        <div className="flex justify-between gap-3 py-2"><dt className="font-bold text-home-midnight">Gesamt {einheit}</dt><dd className="whitespace-nowrap font-display font-extrabold text-home-midnight">{euro(gesamt)}</dd></div>
+      </dl>
     </div>
   );
 }
 
-const ZEILEN_SICHTBAR = 4;
+const ZEILEN_SICHTBAR = 5;
 
 function Stufenkarte({
-  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen,
+  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen, versicherer,
 }) {
-  const { kopf, zeilen } = kernZeilen(tarif);
+  const { kopf, zeilen } = kernZeilen(tarif, versicherer);
   // Zeilen nur, wenn alle Stufen welche haben (gleich große Karten); sonst unter „Alle Leistungen“.
   const sichtbar = zeigeZeilen ? zeilen.slice(0, ZEILEN_SICHTBAR) : [];
   const mehr = zeilen.length > sichtbar.length || Boolean(tarif.details);
@@ -141,7 +159,7 @@ function Stufenkarte({
                     {!wert && <Check className="mt-1 h-4 w-4 shrink-0 text-emerald-700" strokeWidth={3} aria-hidden="true" />}
                     <span className="min-w-0">{label}</span>
                   </span>
-                  {wert && <span className={cx('font-semibold text-home-midnight', wert.length > 12 ? '' : 'shrink-0 whitespace-nowrap text-right')}>{wert}</span>}
+                  {wert && <span className={cx(wert === NICHT ? 'font-normal text-slate-500' : 'font-semibold text-home-midnight', wert.length > 12 && wert !== NICHT ? '' : 'shrink-0 whitespace-nowrap text-right')}>{wert}</span>}
                 </span>
               ))}
             </span>
@@ -293,12 +311,14 @@ export default function SchrittTarif({
                 platzhalter={platzhalter}
                 fehler={Boolean(fehler.tarif)}
                 onWaehlen={() => set({ tarif: tarif.id })}
-                zeigeZeilen={definition.tarife.every((eintrag) => kernZeilen(eintrag).zeilen.length > 0)}
+                zeigeZeilen={definition.tarife.every((eintrag) => kernZeilen(eintrag, definition.versicherer.id).zeilen.length > 0)}
+                versicherer={definition.versicherer.id}
               />
             </div>
           ))}
         </div>
         {anzahl > 1 && <p className="mt-1 text-base text-home-slate sm:hidden" aria-hidden="true">Wische für alle {anzahl} Stufen.</p>}
+        {ALLE_STUFEN_HINWEIS[definition.versicherer.id] && <p className="mt-2 flex items-center gap-2 text-base text-home-midnight"><Check className="h-4 w-4 text-emerald-700" strokeWidth={3} aria-hidden="true" />{ALLE_STUFEN_HINWEIS[definition.versicherer.id]}</p>}
 
         {(definition.bausteine || []).map((baustein) => {
           const an = daten.bausteine.includes(baustein.id);
@@ -340,7 +360,16 @@ export default function SchrittTarif({
         })}
       </fieldset>
 
-      {definition.beitrag?.art === 'dienst' && <DienstBeitrag dienst={dienst} sparte={definition.sparte} zahlweise={daten.zahlweise} />}
+      {definition.beitrag?.art === 'dienst' && (
+        <DienstBeitrag
+          dienst={dienst}
+          sparte={definition.sparte}
+          zahlweise={daten.zahlweise}
+          tarif={definition.tarife.find((eintrag) => eintrag.id === daten.tarif)}
+          preisStufe={preise?.[daten.tarif]}
+          bausteine={(definition.bausteine || []).filter((baustein) => daten.bausteine.includes(baustein.id))}
+        />
+      )}
 
       <Gruppe legend="Ab wann soll dein Schutz beginnen?" fehlerId="fehler-beginn" error={fehler.beginn}>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">

@@ -30,7 +30,7 @@ import { TelefonAusweg } from './teile';
 import {
   Begruessung, DeinSchutzKarte, HilfeKarte, KARTE, KARTE_LG, Schrittleiste,
 } from './rahmen';
-import { dauerMinuten, kurzName } from './anzeige';
+import { kurzName } from './anzeige';
 
 /**
  * Eigene Antragsmaske /antrag/<sparte> (12.11.2026), gesteuert von der
@@ -750,7 +750,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
 
       <div className="mt-5 flex flex-1 flex-col lg:mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-8">
         <div className={cx('flex min-w-0 flex-1 flex-col lg:p-10', KARTE_LG)}>
-          {pos.id === 'tarif' && !pruefen && !vorab?.daten && !pos.aendern && <Begruessung definition={definition} minuten={dauerMinuten(bildschirme.length)} />}
+          {pos.id === 'tarif' && !pruefen && !vorab?.daten && !pos.aendern && <Begruessung definition={definition} />}
           <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
             <h1 ref={h1Ref} tabIndex={-1} className={cx('min-w-0 break-words font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl', TRENNUNG)}>
               <span className="sr-only">Schritt {schritt} von {schrittAnzahl}: </span>

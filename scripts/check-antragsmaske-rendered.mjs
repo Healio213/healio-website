@@ -395,6 +395,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await page.fill('#feld-plzTarif', '20095');
   await page.waitForFunction(() => /74,00 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
   pruefe(true, 'Stadt mit ZAHN Sofort 44,10 + 29,90 = 74,00 EUR');
+  const aufschluesselung = await page.textContent('[data-gesamtbeitrag]');
+  pruefe(aufschluesselung.includes('Stufe Prestige') && aufschluesselung.includes('44,10 EUR') && aufschluesselung.includes('ZAHN Sofort') && aufschluesselung.includes('29,90 EUR'), 'Aufschlüsselung Stufe + Baustein = Gesamt');
   await page.locator('label:has(input[name="zahlweise"][value="jaehrlich"])').click();
   await page.waitForFunction(() => /870,20 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
   await foto(page, `${name}-01-tarif`);
@@ -1026,7 +1028,18 @@ async function zahnVorabUkv(browser) {
   const seite = await zweiter.newPage();
   await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
   await zahnVorab(seite, [['q1', 'nein'], ['q2', 'viele']], { ziel: 'telefon' });
-  pruefe(await seite.locator('[data-vorab-ergebnis="telefon"] a[href^="/antrag/aufnehmen"], [data-vorab-ergebnis="telefon"] a[href="/terminvereinbarung"]').count() === 1, 'Telefon-Ergebnis mit Weg zu Nita oder Termin');
+  const telefonHref = await seite.getAttribute('[data-vorab-telefon]', 'href');
+  pruefe(telefonHref?.startsWith('/antrag/aufnehmen') || telefonHref === '/terminvereinbarung', 'Telefon-Ergebnis: Haupthandlung Nita oder Termin als Knopf');
+  // Schon fertig behandelt: nie zur UKV (GF0073), sondern zur Bayerischen ohne ZAHN Sofort.
+  await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await zahnVorab(seite, [['q1', 'fertig'], ['q2', 'keine'], ['q3', 'nein'], ['schmelz', 'nein']], { plz: '20095', ziel: 'bayerische', starten: false });
+  await seite.waitForSelector('[data-vorab-ergebnis="bayerische"]');
+  await seite.waitForFunction(() => /ab/.test(document.querySelector('[data-vorab-preis]')?.textContent || '') && /EUR/.test(document.querySelector('[data-vorab-preis]')?.textContent || ''));
+  const ohne = await seite.textContent('[data-vorab-ergebnis]');
+  pruefe(ohne.includes('die Bayerische') && !ohne.includes('mit ZAHN Sofort') && await seite.locator('[data-gut-zu-wissen]').count() === 1, 'Fertig behandelt: Bayerische ohne ZAHN Sofort, Grenzen unter „Gut zu wissen“');
+  await seite.click('[data-vorab-start]');
+  await bildschirm(seite, 'tarif');
+  pruefe(!(await seite.locator('#feld-baustein-ZAHN_SOFORT').isChecked()) && await seite.locator('input[name="tarif"]:checked').count() === 1, 'Fertig behandelt: kein Baustein, Stufe wählbar');
   pruefe(await seite.locator('[data-vorab-start]').count() === 0, 'kein Antrag ohne passenden Tarif');
   await zweiter.close();
 }

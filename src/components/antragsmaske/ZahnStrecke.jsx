@@ -101,6 +101,50 @@ function TelefonWege({ sparte = 'zahn' }) {
   );
 }
 
+// Gründe aus der Lage des Kunden, dann die Grenzen („Gut zu wissen“). Nur
+// Aussagen aus der Produktdefinition, der Erfassung der Strecke
+// (config-KZV-lesbar.txt: keine Wartezeiten in allen Stufen, keine
+// Zuschläge bei der Bayerischen) und den Texten des Zahn-Checks.
+function ergebnisTexte(ziel, a, definition) {
+  const ergebnis = CHECK.results[ziel.ergebnis];
+  if (ziel.ziel === 'bayerische-sofort') {
+    return {
+      gruende: [
+        'Deine anstehende oder schon begonnene Behandlung ist über ZAHN Sofort rückwirkend mitversichert.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Deshalb passt der Antrag ohne Zuschlag, die Bayerische rechnet keine Zuschläge.',
+        'Keine Wartezeiten, der Schutz gilt ab Beginn.',
+      ],
+      gutZuWissen: [ergebnis.reasons[0], ergebnis.reasons[2], ergebnis.warning],
+    };
+  }
+  if (ziel.ziel === 'bayerische') {
+    return {
+      gruende: [
+        'Deine Behandlung ist abgerechnet. Die Fragen der Bayerischen betreffen den heutigen Zustand deiner Zähne, und der passt.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Die Bayerische rechnet keine Zuschläge.',
+        'Keine Wartezeiten in allen drei Stufen.',
+      ],
+      gutZuWissen: [
+        'Deine abgerechnete Behandlung ist nicht versichert. Ohne den Baustein ZAHN Sofort sind angeratene und begonnene Behandlungen ausgeschlossen.',
+        definition.tarifFussnote,
+      ].filter(Boolean),
+    };
+  }
+  const gruende = [];
+  if (a.q2 === 'wenige') gruende.push(`Deine ${a.anzahl === '1' ? 'Lücke ist' : `${a.anzahl} fehlenden Zähne sind`} nach Annahme mitversichert, mit einem Zuschlag je Zahn.`);
+  else gruende.push('Dir fehlen keine Zähne, deshalb ohne Zuschlag.');
+  gruende.push('In den letzten zwei Jahren wurde nichts empfohlen, und es läuft nichts. Genau danach fragt die UKV.');
+  if (a.q3 === 'ja') gruende.push('Prothese und älterer Zahnersatz sind bei der UKV keine Antragsfrage. Bei Parodontose gilt nur ein Ausschluss für deren Behandlung.');
+  else if (a.q4 === 'leistung') gruende.push('Du willst viel Leistung: Mit ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der Rechnung.');
+  else if (a.q4 === 'preis') gruende.push('Du willst einen günstigen Einstieg: ZahnPRIVAT 75 ist die günstigste Stufe der UKV.');
+  else if (a.q4 === 'familie') gruende.push('Kieferorthopädie bis Alter 18 ist in ZahnPRIVAT 100 mit bis zu 5.000 EUR enthalten.');
+  else if (a.q4 === 'pzr') gruende.push('Professionelle Zahnreinigung ist in ZahnPRIVAT 100 ohne Jahresdeckel enthalten.');
+  return {
+    gruende,
+    gutZuWissen: ['Keine Wartezeiten.', 'In den ersten Kalenderjahren gilt eine Zahnstaffel, bei Unfall nicht.'],
+  };
+}
+
 export default function ZahnStrecke({ definition }) {
   const heute = useMemo(() => new Date(), []);
   // Eintrag aus der Wahl der zwei Wege (nur Tarif, Geburtsjahr, Herkunft).
@@ -141,17 +185,24 @@ export default function ZahnStrecke({ definition }) {
 
   const preisSchluessel = bayerisch && phase === 'ergebnis' && datum && beginn && !grenze && plzOk
     ? JSON.stringify({
-      sparte: 'zahn', versicherer: 'bayerische', tarifCode: ziel.tarif, bausteine: ziel.bausteine, zahlweise: 'monatlich', geburtsdatum: datumText(geburtsdatum, heute), beginnIso: beginn.iso, plz,
+      sparte: 'zahn', versicherer: 'bayerische', tarifCode: ziel.tarif || 'SMART', bausteine: ziel.bausteine, zahlweise: 'monatlich', geburtsdatum: datumText(geburtsdatum, heute), beginnIso: beginn.iso, plz,
     })
     : null;
   useEffect(() => {
     if (!preisSchluessel) return undefined;
     const steuerung = new AbortController();
     berechneSelbstBeitrag(JSON.parse(preisSchluessel), { signal: steuerung.signal })
-      .then((antwort) => setPreis({ schluessel: preisSchluessel, betrag: antwort.beitrag, fehler: false }))
+      .then((antwort) => {
+        // Ohne Vorauswahl: günstigste Stufe als „ab“ (Beiträge aller Stufen vom Dienst).
+        const alle = Object.values(antwort.alleStufen || antwort.alleTarife || {}).filter(Number.isFinite);
+        const ab = !JSON.parse(preisSchluessel).bausteine.length && alle.length > 0 && !ziel?.tarif;
+        setPreis({
+          schluessel: preisSchluessel, betrag: ab ? Math.min(...alle) : antwort.beitrag, ab, fehler: false,
+        });
+      })
       .catch((fehler) => { if (fehler?.name !== 'AbortError') setPreis({ schluessel: preisSchluessel, betrag: null, fehler: true }); });
     return () => steuerung.abort();
-  }, [preisSchluessel]);
+  }, [preisSchluessel, ziel?.tarif]);
 
   useEffect(() => {
     if (phase === 'maske') return;
@@ -171,7 +222,8 @@ export default function ZahnStrecke({ definition }) {
           quelle: 'Aus deinen Antworten vorab übernommen.',
           vorbelegt: Object.keys(ziel.antworten),
           daten: {
-            ...(ziel.tarif ? { tarif: ziel.tarif } : { tarif: null }),
+            // Ohne Empfehlung: Vorgabe der Strecke (Bayerische Prestige wie im Original), sonst frei.
+            tarif: ziel.tarif || (bayerisch ? zielDefinition.tarifVorgabe : null),
             bausteine: ziel.bausteine,
             geburtsdatum: datumText(geburtsdatum, heute) || geburtsdatum,
             ...(bayerisch ? { plz } : {}),
@@ -213,7 +265,7 @@ export default function ZahnStrecke({ definition }) {
   const tarifName = ziel?.tarif ? zielDefinition?.tarife.find((tarif) => tarif.id === ziel.tarif)?.name : null;
   const baustein = ziel?.bausteine?.length ? zielDefinition?.bausteine.find((eintrag) => eintrag.id === ziel.bausteine[0]) : null;
   const preisJetzt = bayerisch
-    ? (preis.schluessel === preisSchluessel ? preis : { betrag: null, fehler: false })
+    ? (preis.schluessel === preisSchluessel ? { ...preis, ab: preis.ab || !ziel?.tarif } : { betrag: null, fehler: false })
     : { betrag: ukvPreis?.betrag ?? null, fehler: false, ab: ukvPreis?.ab };
   const nummer = Math.min(gestellt.length, MAX_FRAGEN);
 
@@ -226,7 +278,7 @@ export default function ZahnStrecke({ definition }) {
           <div className="mb-7 flex gap-4 rounded-[1.4rem] bg-home-ice p-4 ring-1 ring-emerald-900/10 sm:p-5" data-begruessung="">
             <FriendlyIcon kind="dental" size="md" tone="mint" className="hidden sm:inline-grid" />
             <div className="min-w-0">
-              <p className="font-display text-xl font-extrabold leading-tight text-home-midnight">Dein Zahnschutz in etwa 8 Minuten</p>
+              <p className="font-display text-xl font-extrabold leading-tight text-home-midnight">Dein Zahnschutz in wenigen Minuten</p>
               <ul className="mt-2 space-y-1">
                 {['Ein paar kurze Fragen, dann zeigen wir dir den Tarif, der zu dir passt.', 'Du musst keine Versicherer vergleichen und bleibst die ganze Zeit bei Healio.', 'Die Bestätigung bekommst du per E-Mail.'].map((punkt) => (
                   <li key={punkt} className="flex gap-2 text-base leading-6 text-home-midnight">
@@ -306,12 +358,16 @@ export default function ZahnStrecke({ definition }) {
             <li key={grund} className="flex gap-2 text-base leading-6 text-home-midnight"><Check className="mt-1 h-4 w-4 shrink-0 text-emerald-700" strokeWidth={3} aria-hidden="true" />{grund}</li>
           ))}
         </ul>
-        <p className="mt-5 text-base leading-7 text-home-slate">Am Telefon schauen wir in Ruhe, welcher Schutz für dich möglich ist.</p>
-        <div className="mt-4"><TelefonWege /></div>
+        <p className="mt-5 text-base leading-7 text-home-slate">Am Telefon schauen wir in Ruhe, welcher Schutz für dich möglich ist. Du erreichst uns auch direkt:</p>
+        <a href={HEALIO_PHONE_TEL} data-zaehler-ignorieren="" className={buttonClass('secondary', 'mt-3')}>
+          <Phone className="h-5 w-5" aria-hidden="true" />
+          {HEALIO_PHONE_DISPLAY}
+        </a>
       </div>
     );
   } else if (phase === 'ergebnis') {
     const versicherer = zielDefinition.versicherer;
+    const { gruende, gutZuWissen } = ergebnisTexte(ziel, antworten, zielDefinition);
     inhalt = (
       <div data-vorab-ergebnis={ziel.ziel}>
         <p className="text-base font-bold text-emerald-800">Dein Ergebnis</p>
@@ -320,10 +376,11 @@ export default function ZahnStrecke({ definition }) {
           <div className="flex items-start gap-4 p-5 sm:p-6">
             <FriendlyIcon kind="dental" size="md" tone="mint" />
             <div className="min-w-0">
-              <p className="text-base text-slate-300">{versicherer.name}</p>
-              <p className={cx('font-display text-2xl font-extrabold leading-tight', TRENNUNG)}>
-                {tarifName || 'ZahnPRIVAT 75, 90 oder 100'}
-                {baustein && <span className="block text-home-mint-active">mit {baustein.name}</span>}
+              <p className="font-display text-xl font-extrabold leading-tight text-home-mint-active">die {versicherer.kurz}</p>
+              <p className="text-base leading-6 text-slate-300">{versicherer.name}</p>
+              <p className={cx('mt-2 font-display text-2xl font-extrabold leading-tight', TRENNUNG)}>
+                {tarifName || (bayerisch ? 'Smart, Komfort oder Prestige' : 'ZahnPRIVAT 75, 90 oder 100')}
+                {baustein && <span className="block">mit {baustein.name}</span>}
               </p>
             </div>
           </div>
@@ -340,15 +397,27 @@ export default function ZahnStrecke({ definition }) {
           </div>
         </section>
         <h2 className="mt-7 font-display text-lg font-extrabold text-home-midnight">Darum passt das</h2>
-        <ul className="mt-3 space-y-2.5">
-          {ergebnis.reasons.slice(0, 3).map((grund) => (
+        <ul className="mt-3 space-y-2.5" data-gruende="">
+          {gruende.map((grund) => (
             <li key={grund} className="flex gap-3 text-base leading-6 text-home-midnight">
               <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-home-mint"><Check className="h-3.5 w-3.5 text-home-midnight" strokeWidth={3} /></span>
               <span className={cx('min-w-0', TRENNUNG)}>{grund}</span>
             </li>
           ))}
         </ul>
-        {antworten.q1 === 'fertig' && <p className={cx('mt-4 rounded-[1rem] bg-home-ice p-4 text-base leading-7 text-home-midnight ring-1 ring-emerald-900/10', TRENNUNG)}><span className="font-bold">{CHECK.nachBehandlungLabel}</span> {CHECK.nachBehandlung}</p>}
+        {gutZuWissen.length > 0 && (
+          <>
+            <p className="mt-6 text-base font-bold text-home-midnight">Gut zu wissen</p>
+            <ul className="mt-2 space-y-1.5 rounded-[1rem] bg-home-ice p-4 ring-1 ring-emerald-900/10" data-gut-zu-wissen="">
+              {gutZuWissen.map((punkt) => (
+                <li key={punkt} className={cx('flex gap-2 text-base leading-6 text-home-midnight', TRENNUNG)}>
+                  <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-700" />
+                  <span className="min-w-0">{punkt}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
         <p className={cx('mt-5 text-base leading-7 text-home-slate', TRENNUNG)}>
           {`Dein Vertrag kommt direkt von ${versicherer.beiDer}. `}
           {ziel.tarif || bayerisch ? 'Die Stufe kannst du im nächsten Schritt noch ändern. ' : 'Deine Stufe wählst du im nächsten Schritt. '}
@@ -363,7 +432,9 @@ export default function ZahnStrecke({ definition }) {
     );
   }
 
+  const telefonZiel = HEALIO_ANTRAG_GESPRAECH_AKTIV ? { text: 'Mit Nita am Telefon', href: telefonLink('zahn') } : { text: 'Termin vereinbaren', href: TERMIN_LINK };
   const weiterKnopf = (phase === 'angaben' && { text: 'Beitrag zeigen', onClick: angabenWeiter, data: { 'data-vorab-weiter': '' } })
+    || (phase === 'ergebnis' && ziel?.ziel === 'telefon' && { ...telefonZiel, data: { 'data-vorab-telefon': '' } })
     || (phase === 'ergebnis' && ziel?.ziel !== 'telefon' && !ukvAus && { text: 'Weiter zum Antrag', onClick: () => setPhase('maske'), data: { 'data-vorab-start': '' } })
     || null;
   const zeigeZurueck = phase !== 'fragen' || gestellt.length > 1;
@@ -382,7 +453,13 @@ export default function ZahnStrecke({ definition }) {
                     <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
                   </Button>
                 )}
-                {weiterKnopf && (
+                {weiterKnopf?.href && (
+                  <a href={weiterKnopf.href} data-zaehler-ignorieren="" className={buttonClass('primary', 'min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10')} {...weiterKnopf.data}>
+                    {weiterKnopf.text}
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </a>
+                )}
+                {weiterKnopf && !weiterKnopf.href && (
                   <Button onClick={weiterKnopf.onClick} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" {...weiterKnopf.data}>
                     {weiterKnopf.text}
                     <ArrowRight className="h-5 w-5" aria-hidden="true" />

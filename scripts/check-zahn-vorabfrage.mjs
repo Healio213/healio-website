@@ -9,7 +9,7 @@ import {
 } from '../src/components/antragsmaske/zahnVorabfrage.js';
 import { DEFINITIONEN } from '../src/data/antrag/index.js';
 
-const ZIELE = new Set(['ukv', 'bayerische-sofort', 'telefon']);
+const ZIELE = new Set(['ukv', 'bayerische-sofort', 'bayerische', 'telefon']);
 
 test('jede Kombination hat genau ein Ziel', () => {
   const alle = alleKombinationen();
@@ -30,7 +30,15 @@ test('Zuordnung wie im Zahn-Check (computeResult)', () => {
   assert.equal(ziel({ q1: 'nein', q2: 'ziehen' }), 'telefon');
   assert.equal(ziel({ q1: 'fertig', q2: 'viele' }), 'telefon');
   assert.equal(ziel({ q1: 'nein', q2: 'wenige', anzahl: '2' }), 'ukv');
-  assert.equal(ziel({ q1: 'fertig', q2: 'keine', q3: 'ja' }), 'ukv');
+  // Korrektur 12.11.: „schon fertig behandelt“ nie zur UKV (GF0073 fragt nach Empfehlungen der letzten 2 Jahre).
+  assert.equal(ziel({ q1: 'fertig', q2: 'keine', q3: 'nein', schmelz: 'nein' }), 'bayerische');
+  assert.deepEqual(zielAus({ q1: 'fertig', q2: 'keine', q3: 'nein', schmelz: 'nein' }).bausteine, []);
+  assert.equal(zielAus({ q1: 'fertig', q2: 'keine', q3: 'nein', schmelz: 'nein' }).tarif, null);
+  assert.equal(ziel({ q1: 'fertig', q2: 'keine', q3: 'ja' }), 'telefon');
+  assert.equal(ziel({ q1: 'fertig', q2: 'wenige' }), 'telefon');
+  assert.equal(ziel({ q1: 'fertig', q2: 'keine', q3: 'nein', schmelz: 'ja' }), 'telefon');
+  assert.equal(ziel({ q1: 'nein', q2: 'keine', q3: 'ja' }), 'ukv');
+  alleKombinationen().filter((a) => a.q1 === 'fertig').forEach((a) => assert.notEqual(zielAus(a).ziel, 'ukv', JSON.stringify(a)));
   assert.equal(ergebnisSchluessel({ q1: 'nein', q2: 'keine', q3: 'nein', q4: 'preis' }), 'ukvPreis');
   assert.equal(zielAus({ q1: 'nein', q2: 'keine', q3: 'nein', q4: 'preis' }).tarif, 'Z75');
   assert.equal(zielAus({ q1: 'nein', q2: 'keine', q3: 'nein', q4: 'leistung' }).tarif, 'Z100');

@@ -80,36 +80,10 @@ export function Volltext({ titel, bloecke }) {
 export const kurzText = (text) => <p className={cx('break-words text-base leading-7 text-home-midnight', TRENNUNG)}>{schuetze(text)}</p>;
 
 // Haken mit Fehlertext. key bestimmt die Feld-Kennung (feld-<key>) für den Fokus.
-// wortlaut (optional): Ist der Text des Hakens lang, steht er vollständig in
-// einem begrenzten Lesebereich, und der Haken darunter bestätigt genau diesen
-// Wortlaut (aria-describedby liest ihn vor). Keine Textwand im Haken selbst.
-const LANG = 280;
+// Am Haken steht immer die Beschriftung des Originals (Wortlaut 1:1).
 export function Haken({
-  feldKey, checked, onChange, fehler, children, wortlaut, zusatz,
+  feldKey, checked, onChange, fehler, children,
 }) {
-  if (typeof wortlaut === 'string' && wortlaut.length > LANG) {
-    const textId = `wortlaut-${feldKey}`;
-    return (
-      <div data-fehlerblock="" className="space-y-2">
-        <div id={textId} tabIndex={0} aria-label="Wortlaut zum Haken" className={cx('max-h-56 overflow-y-auto break-words rounded-[1rem] bg-home-ice p-4 text-base leading-7 text-home-midnight outline-none ring-1 ring-home-midnight/5 focus-visible:ring-[3px] focus-visible:ring-home-midnight', TRENNUNG)}>
-          {schuetze(wortlaut)}
-        </div>
-        <OptionCard
-          id={`feld-${feldKey}`}
-          type="checkbox"
-          name={feldKey}
-          checked={Boolean(checked)}
-          onChange={(event) => onChange(event.target.checked)}
-          describedBy={[textId, fehler && `fehler-${feldKey}`].filter(Boolean).join(' ')}
-          invalid={Boolean(fehler)}
-        >
-          <span className="block font-semibold">Ich stimme diesem Wortlaut zu.</span>
-          {zusatz}
-        </OptionCard>
-        <FehlerText id={`fehler-${feldKey}`}>{fehler}</FehlerText>
-      </div>
-    );
-  }
   return (
     <div data-fehlerblock="">
       <OptionCard
