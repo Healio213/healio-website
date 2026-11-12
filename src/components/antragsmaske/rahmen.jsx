@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Check, Lock, Phone,
 } from 'lucide-react';
@@ -205,6 +205,24 @@ export function SchutzPanel({
 export function Schrittleiste({ abschnitte, aktuell }) {
   const anzahl = abschnitte.length;
   const name = abschnitte[aktuell - 1]?.name;
+  // Breite der Leiste messen: Namen nur zeigen, wenn sie ohne Umbruch im Wort nebeneinander passen.
+  const listeRef = useRef(null);
+  const [breite, setBreite] = useState(0);
+  useEffect(() => {
+    const el = listeRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const beobachter = new ResizeObserver(() => setBreite(el.getBoundingClientRect().width));
+    beobachter.observe(el);
+    setBreite(el.getBoundingClientRect().width);
+    return () => beobachter.disconnect();
+  }, []);
+  const schrift = typeof window !== 'undefined' ? parseFloat(window.getComputedStyle(document.documentElement).fontSize) || 16 : 16;
+  const zeichen = schrift * 0.54;
+  const spalte = anzahl ? breite / anzahl : 0;
+  const laengstesWort = Math.max(...abschnitte.map((a) => Math.max(...String(a.name || '').split(/\s+/).map((w) => w.length))), 1);
+  const alleNamen = spalte >= laengstesWort * zeichen + 8;
+  const nameBreite = (nummer) => String(abschnitte[nummer - 1]?.name || '').length * zeichen;
+  const nachbarnPassen = [aktuell - 1, aktuell].every((links) => links < 1 || links >= anzahl || (nameBreite(links) + nameBreite(links + 1)) / 2 + 12 <= spalte);
   return (
     <div aria-hidden="true" data-schrittleiste="">
       {/* Handy und Tablet: kompakt mit Balken */}
@@ -218,16 +236,17 @@ export function Schrittleiste({ abschnitte, aktuell }) {
           ))}
         </div>
       </div>
-      {/* Desktop: alle Schritte mit Namen */}
-      <ol className="hidden items-start lg:flex">
+      {/* Desktop: gleich breite Spalten, durchgehende Linie. Namen unter allen Punkten, wenn sie
+          nebeneinander ohne Umbruch im Wort passen; sonst nur beim aktuellen Schritt und seinen
+          Nachbarn (mittig unter dem Punkt, schieben nichts), alle anderen mit Namen als Tooltip. */}
+      <ol ref={listeRef} className={cx('hidden items-start lg:flex', !alleNamen && 'pb-8')}>
         {abschnitte.map((abschnitt, stelle) => {
           const nummer = stelle + 1;
           const fertig = nummer < aktuell;
           const jetzt = nummer === aktuell;
-          // Bei vielen Schritten tragen nur der aktuelle und seine Nachbarn den Namen.
-          const mitName = anzahl <= 6 || Math.abs(nummer - aktuell) <= 1;
+          const nameHier = alleNamen || Math.abs(nummer - aktuell) <= (nachbarnPassen ? 1 : 0);
           return (
-            <li key={abschnitt.name + stelle} title={mitName ? undefined : abschnitt.name} className={cx('relative flex flex-col items-center text-center', mitName ? 'min-w-0 flex-[3_1_0%]' : 'min-w-0 flex-[1_1_0%]')} data-schritt-name={mitName ? '' : undefined}>
+            <li key={abschnitt.name + stelle} title={nameHier ? undefined : abschnitt.name} className="relative flex min-w-0 flex-1 flex-col items-center text-center">
               {stelle > 0 && <span className={cx('absolute right-1/2 top-4 h-0.5 w-full -translate-y-1/2', nummer <= aktuell ? 'bg-emerald-600' : 'bg-home-midnight/10')} />}
               <span
                 className={cx(
@@ -239,7 +258,13 @@ export function Schrittleiste({ abschnitte, aktuell }) {
               >
                 {fertig ? <Check className="h-4 w-4" strokeWidth={3} /> : nummer}
               </span>
-              {mitName && <span className={cx('mt-2 max-w-full px-0.5 text-base leading-tight [hyphens:none] [overflow-wrap:normal] [word-break:normal]', jetzt ? 'font-bold text-home-midnight' : 'text-home-slate')}>{abschnitt.name}</span>}
+              {nameHier && (
+                <span className={cx(
+                  'mt-2 text-base leading-tight [hyphens:none] [overflow-wrap:normal] [word-break:normal]',
+                  alleNamen ? 'max-w-full px-0.5' : 'absolute left-1/2 top-10 -translate-x-1/2 whitespace-nowrap',
+                  jetzt ? 'font-bold text-home-midnight' : 'text-home-slate',
+                )}>{abschnitt.name}</span>
+              )}
             </li>
           );
         })}
