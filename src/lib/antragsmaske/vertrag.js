@@ -98,7 +98,7 @@ export function gezeigteUnterlagen(definition, kontext = {}) {
     (eintrag.links || []).forEach((link) => dazu(link.label, link.href));
     (eintrag.gruppen || []).forEach((gruppe) => gruppe.eintraege
       .filter((unterlage) => bedingungErfuellt(unterlage.bedingung, kontext))
-      .forEach((unterlage) => unterlage.dateien.forEach((datei) => dazu(datei.label, datei.href))));
+      .forEach((unterlage) => unterlage.dateien.forEach((datei) => dazu(datei.label, datei.href || (datei.dienstId ? `dienst:${datei.dienstId}` : null)))));
   }));
   return liste;
 }

@@ -429,6 +429,11 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await page.fill('#feld-strasse', 'Musterweg');
   await page.fill('#feld-hausnummer', '12');
   await page.fill('#feld-email', 'lena@beispiel.de');
+  // Adressbestätigung wie im Original der Bayerischen: ohne Haken geht es nicht weiter.
+  await weiter(page);
+  await bildschirm(page, 'anschrift');
+  pruefe(await page.locator('#fehler-adresseBestaetigt').count() > 0 && (await page.textContent('#fehler-adresseBestaetigt')).includes('Adresse'), 'Bayerische: ohne Adressbestätigung kein Weiter');
+  await page.locator('label:has(#feld-adresseBestaetigt)').click();
   await foto(page, `${name}-04-anschrift`);
   await weiter(page);
   await bildschirm(page, 'zahlung');
@@ -470,6 +475,7 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   pruefe(letzter.sparte === 'zahn' && letzter.bausteine[0] === 'ZAHN_SOFORT' && letzter.zahlung.zahlweise === 'jaehrlich' && letzter.beitragAngezeigt === 870.2, 'Zahn-Antrag kommt an');
   pruefe(letzter.gesundheit.fragebogen === 'KZV' && letzter.gesundheit.antworten.length === 5, 'Zahnfragen mit Original-Kennungen');
   pruefe(letzter.original.find((e) => e.feld === 'paymentRhythm').wert === 'YEARLY' && letzter.original.find((e) => e.feld === 'tarif').wert === '00103', 'Zuordnung zum Original im Antrag');
+  pruefe(letzter.bestaetigungen?.adresseBestaetigt === true && letzter.original.find((e) => e.feld === 'adresseBestaetigt')?.wert === true, 'Adressbestätigung im Antrag und in der Zuordnung');
   pruefe(letzter.erklaerungen.werbung === false, 'Werbung nicht angehakt übermittelt');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.name === 'Produktinformationsblatt Zahn Prestige') && letzter.unterlagen.geoeffnet.length === 1 && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'unterlagen'), 'Gezeigte, geöffnete und bestätigte Unterlagen im Antrag');
   pruefe(danke.includes('Unterlagen schicken wir dir zusätzlich per E-Mail'), 'Danke: Unterlagen kommen per Mail');
@@ -529,7 +535,9 @@ async function pruefseiteZahn(browser) {
   }
   await bildschirm(page, 'beitrag'); await weiter(page);
   await bildschirm(page, 'person'); await weiter(page);
-  await bildschirm(page, 'anschrift'); await weiter(page);
+  await bildschirm(page, 'anschrift');
+  if (await page.locator('#feld-adresseBestaetigt').count()) await page.locator('label:has(#feld-adresseBestaetigt)').click();
+  await weiter(page);
   await bildschirm(page, 'zahlung');
   await page.locator('label:has(input[name="kontoinhaber"][value="selbst"])').click();
   await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 00');

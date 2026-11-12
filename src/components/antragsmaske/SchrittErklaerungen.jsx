@@ -1,5 +1,8 @@
-import React from 'react';
-import { FileText, Info, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  Download, FileText, Info, Mail,
+} from 'lucide-react';
+import { ladeUnterlagenDatei } from '@/lib/antragApi';
 import { bedingungErfuellt } from '@/lib/antragsmaske/regeln';
 import {
   FehlerText, Gruppe, LINK, NeuerTab, OptionCard, TRENNUNG, cx, schuetze,
@@ -26,6 +29,41 @@ export function fehlerErklaerungen(teil, daten) {
   return fehler;
 }
 
+// PDF, die nur der Antragsdienst ausliefert (z. B. UKV): Laden über den
+// Dienst, als geöffnet gilt die Datei erst, wenn sie da ist.
+function DienstUnterlage({
+  datei, produkt, tarif, oeffnen,
+}) {
+  const [stand, setStand] = useState('');
+  const lade = async () => {
+    setStand('laedt');
+    try {
+      const blob = await ladeUnterlagenDatei({ produkt, tarifCode: tarif, id: datei.dienstId });
+      const adresse = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = adresse;
+      link.download = `${String(datei.label).replace(/[^A-Za-z0-9ÄÖÜäöüß._-]+/g, '_')}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(adresse), 4000);
+      oeffnen(`dienst:${datei.dienstId}`);
+      setStand('');
+    } catch { setStand('fehler'); }
+  };
+  return (
+    <span className="block">
+      <button type="button" onClick={lade} data-unterlage="" data-dienst-unterlage={datei.dienstId} className={cx(LINK, 'min-h-11 gap-1.5 text-left')}>
+        <FileText className="h-5 w-5 shrink-0" aria-hidden="true" />
+        <span>{datei.label}</span>
+        <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
+      </button>
+      {stand === 'laedt' && <span className="block pl-7 text-base text-home-slate" aria-live="polite">Wird geladen …</span>}
+      {stand === 'fehler' && <span className="block pl-7 text-base font-semibold text-rose-700" role="alert">Das Dokument ließ sich gerade nicht laden. Tippe bitte noch einmal darauf.</span>}
+    </span>
+  );
+}
+
 function Unterlagen({ eintrag, kontext, oeffnen }) {
   return (
     <div className="space-y-2 text-base leading-7 text-home-midnight">
@@ -34,6 +72,9 @@ function Unterlagen({ eintrag, kontext, oeffnen }) {
           <p className="pt-1 font-bold">{schuetze(gruppe.von)}</p>
           <ul className="space-y-0.5">
             {gruppe.eintraege.filter((unterlage) => bedingungErfuellt(unterlage.bedingung, kontext)).map((unterlage) => {
+              if (unterlage.dateien.length === 1 && unterlage.dateien[0].dienstId) {
+                return <li key={`dienst-${unterlage.dateien[0].dienstId}`}><DienstUnterlage datei={unterlage.dateien[0]} produkt={eintrag.dienstProdukt} tarif={kontext.tarif} oeffnen={oeffnen} /></li>;
+              }
               if (!unterlage.dateien.length) {
                 return <li key={unterlage.name} className="flex min-h-11 items-center gap-1.5 text-home-slate"><FileText className="h-5 w-5 shrink-0" aria-hidden="true" />{unterlage.name}</li>;
               }

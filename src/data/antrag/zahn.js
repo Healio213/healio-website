@@ -190,7 +190,19 @@ const zahn = {
         id: 'telefon', label: 'Telefon', hinweis: 'Freiwillig, für Rückfragen von Healio.', typ: 'telefon', type: 'tel', autoComplete: 'tel', inputMode: 'tel', pflicht: false, fehlerLeer: 'Bitte gib eine Telefonnummer ein.',
       },
     ],
-    bestaetigungen: [],
+    // Wie im Original (Schritt 5): Erkennt die Bayerische eine Adresse nicht,
+    // fragt sie „Bitte bestätigen Sie, dass diese Adresse existiert:“ mit dem
+    // Haken unten (gesehen 12.11.2026, auch bei echten Adressen). Healio
+    // fragt das immer, der Einreicher setzt den Haken beim Versicherer nur,
+    // wenn der Kunde ihn hier gesetzt hat.
+    bestaetigungen: [
+      {
+        key: 'adresseBestaetigt',
+        label: 'Ich bestätige, dass die eingegebene Adresse korrekt ist.',
+        fehler: 'Bitte bestätige, dass deine Adresse stimmt.',
+        original: { schritt: 5, frage: 'Bitte bestätigen Sie, dass diese Adresse existiert:' },
+      },
+    ],
   },
 
   zahlung: {
@@ -354,6 +366,7 @@ const zahn = {
       { schritt: 5, feld: 'street', wert: String(f.strasse || '').trim() },
       { schritt: 5, feld: 'houseNumber', wert: String(f.hausnummer || '').trim() },
       { schritt: 5, feld: 'email', wert: String(f.email || '').trim() },
+      { schritt: 5, feld: 'adresseBestaetigt', wert: daten.bestaetigungen?.adresseBestaetigt === true },
       { schritt: 6, feld: 'kontoinhaberWeichtAb', wert: false },
       { schritt: 6, feld: 'accountHolder', wert: [f.vorname, f.nachname].map((teil) => String(teil || '').trim()).join(' ') },
       { schritt: 6, feld: 'iban', wert: String(daten.iban || '').replace(/\s/g, '').toUpperCase() },

@@ -567,3 +567,35 @@ test('Unterlagen-Schritt: leere oder zu kurze Liste und Abruffehler sperren, vol
   assert.equal(DEFINITIONEN.zahn?.unterlagenDownload, undefined);
   assert.equal(unterlagenUnvollstaendig([], []), false);
 });
+
+// ---------------------------------------------------------------------------
+// Nachtrag 12.11.2026 abends: Adressbestätigung Bayerische, Unterlagen UKV
+
+test('Bayerische: Adressbestätigung wie im Original (Pflicht in der Maske, Feld adresseBestaetigt in der Zuordnung und im Antrag)', () => {
+  const def = DEFINITIONEN.zahn;
+  const eintrag = def.person.bestaetigungen.find((b) => b.key === 'adresseBestaetigt');
+  assert.ok(eintrag, 'Bestätigung definiert');
+  assert.equal(eintrag.label, 'Ich bestätige, dass die eingegebene Adresse korrekt ist.');
+  const daten = {
+    tarif: 'KOMFORT', bausteine: [], zahlweise: 'monatlich', plz: '22085', geburtsdatumText: '15.05.1990', anrede: 'frau',
+    antworten: { z1: 'nein', z2: 'nein', z3: 'nein', z4: 'nein', z5: 'nein' },
+    formular: { vorname: 'Test', nachname: 'Healio-Prüfung', ort: 'Hamburg', strasse: 'Arndtstraße', hausnummer: '6', email: 'test@example.com' },
+    erklaerungen: {},
+  };
+  const wert = (b) => def.originalFuerVertrag({ ...daten, bestaetigungen: b }, { beginn: BEGINN }).find((e) => e.feld === 'adresseBestaetigt');
+  assert.deepEqual([wert({ adresseBestaetigt: true }).schritt, wert({ adresseBestaetigt: true }).wert], [5, true]);
+  assert.equal(wert({}).wert, false, 'ohne Haken des Kunden: false');
+});
+
+test('UKV: Unterlagen über den Antragsdienst, neun PDF mit Kennung, im Antrag als dienst:<id> gezeigt', async () => {
+  const { UKV_UNTERLAGEN } = await import('../src/data/antrag/zahnUkv.js');
+  const { gezeigteUnterlagen } = await import('../src/lib/antragsmaske/vertrag.js');
+  const def = DEFINITIONEN['zahn-ukv'];
+  assert.equal(UKV_UNTERLAGEN.length, 9);
+  const eintrag = def.erklaerungen.flatMap((t) => t.eintraege).find((e) => e.key === 'unterlagenUkv');
+  assert.equal(eintrag.dienstProdukt, 'ukv-zahn');
+  const ukv = eintrag.gruppen.find((g) => g.von === 'Von der UKV').eintraege;
+  assert.deepEqual(ukv.map((u) => u.dateien[0].dienstId), UKV_UNTERLAGEN.map(([id]) => id));
+  const gezeigt = gezeigteUnterlagen(def, { tarif: 'Z90' });
+  UKV_UNTERLAGEN.forEach(([id, name]) => assert.ok(gezeigt.some((g) => g.href === `dienst:${id}` && g.name === name), `${id} gezeigt`));
+});

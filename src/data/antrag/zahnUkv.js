@@ -77,6 +77,21 @@ const GRUPPEN = Object.entries(LEVELNINE.beitraege.ukvZahn).map(([alter, zeile])
   von: Number(alter), bis: Number(alter), preise: Object.fromEntries(TARIFE.map((tarif) => [tarif.id, zeile[tarif.schluessel]])),
 })).sort((a, b) => a.von - b.von);
 
+// Unterlagen der UKV für ZahnPRIVAT 75, 90 und 100 (gleich für alle drei
+// Tarife), erfasst 12.11.2026 über …/vmk/calculate/tariffs/additional/
+// UKVZahnPRIVAT<n>%23/documents. Name nach dem Kopf des jeweiligen PDF.
+export const UKV_UNTERLAGEN = [
+  ['13019', 'Teil I AVB/ZV: Allgemeine Versicherungsbedingungen, Stand 02.2023'],
+  ['15523', 'Teil II Tarife ZahnPRIVAT 100, 90 und 75, Stand 01.08.2024'],
+  ['15524', 'Informationsblatt zu Versicherungsprodukten ZahnPRIVAT, Stand 06.2024'],
+  ['15248', 'Weitere Vertragsgrundlagen und Zusatzerklärungen, Stand 06.2025'],
+  ['15124', 'Mitteilung nach § 19 Absatz 5 VVG, Stand 01.2021'],
+  ['15627', 'Datenschutzinformationen nach Art. 12 ff. DSGVO, Stand 04.2025'],
+  ['15546', 'Einwilligung zum Datenschutz und Schweigepflichtentbindung, Stand 06.2026'],
+  ['15605', 'Einwilligung zum Datenschutz für den Online-Abschluss, Stand 06.2026'],
+  ['15548', 'Informationen für Versicherungsvertreiber (POG) ZahnPRIVAT, Stand 01.08.2024'],
+];
+
 const zahnUkv = {
   sparte: 'zahn',
   produkt: 'zahn-ukv',
@@ -197,18 +212,19 @@ const zahnUkv = {
       teil: 'Unterlagen',
       eintraege: [
         {
-          // Das Original bietet keinen Download an; die Bedingungen sind nur im Leistungstext genannt.
+          // Die Strecke selbst hat keinen Unterlagen-Schritt. Die PDF holt der
+          // Antragsdienst beim Versicherer (Level Nine, Mandant vmk; Franks
+          // Vorgabe 12.11.2026: Vertragsunterlagen und Beilagen ohne
+          // Papierantrag, je Dokument die neueste Fassung). dienstId = documentId
+          // der Strecke, Download über /antrag/api/unterlagen/datei.
           art: 'unterlagen',
           key: 'unterlagenUkv',
           titel: 'Deine Unterlagen',
+          dienstProdukt: 'ukv-zahn',
           gruppen: [
             {
               von: 'Von der UKV',
-              eintraege: [
-                { name: 'Teil I AVB/ZV, Stand 01.02.2023 (SAP-Nr. 342743)', dateien: [] },
-                { name: 'Teil II Tarife ZahnPRIVAT, Stand 01.08.2024 (SAP-Nr. 348124)', dateien: [] },
-                { name: 'Mitteilung nach § 19 Abs. 5 VVG', dateien: [] },
-              ],
+              eintraege: UKV_UNTERLAGEN.map(([dienstId, name]) => ({ name, dateien: [{ label: name, dienstId }] })),
             },
             { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))] },
           ],
