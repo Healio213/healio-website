@@ -6,6 +6,7 @@ import { eigeneMaskeFuer } from '@/data/antrag';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import { merkeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
 import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
+import { hasConsent } from '@/lib/consent';
 import { openApplicationWindow } from '@/lib/lead-capture';
 import { TERMIN_LINK, telefonLink } from './teile';
 
@@ -63,7 +64,8 @@ export default function WegeWahl({
     zaehle('antragsweg', { ziel: `${sparte}-allein` });
     if (eigene) {
       merkeVorbelegung({
-        sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: sammleHerkunft({ sparte, weg: 'allein' }),
+        // Herkunft nur mit Zustimmung zur Messung über den Seitenwechsel tragen (Gate 3); ref kommt sonst über den Link.
+        sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: hasConsent('analytics') ? sammleHerkunft({ sparte, weg: 'allein' }) : null,
       });
       return; // Der Link selbst navigiert nach /antrag/<sparte>.
     }
@@ -107,7 +109,7 @@ export default function WegeWahl({
                 href={telefonLink(sparte)}
                 onClick={() => {
                   zaehle('antragsweg', { ziel: `${sparte}-telefon` });
-                  merkeVorbelegung({ sparte, herkunft: sammleHerkunft({ sparte, weg: 'telefon' }) });
+                  if (hasConsent('analytics')) merkeVorbelegung({ sparte, herkunft: sammleHerkunft({ sparte, weg: 'telefon' }) });
                 }}
                 data={{ 'data-weg': 'telefon' }}
               />

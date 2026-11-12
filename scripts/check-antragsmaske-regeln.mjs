@@ -519,15 +519,31 @@ test('Auftragssatz vor dem Absenden passt zur Zahlweise und nennt den Betrag (al
   }
 });
 
-test('Herkunft im Sitzungsspeicher: nur Kennzeichen, erste Einstiegsseite bleibt', async () => {
-  const speicher = new Map();
-  globalThis.window = { sessionStorage: { getItem: (k) => speicher.get(k) ?? null, setItem: (k, v) => speicher.set(k, String(v)), removeItem: (k) => speicher.delete(k) } };
-  const { leseHerkunft, merkeHerkunft } = await import('../src/lib/herkunftSpeicher.js');
+test('Herkunft: ohne Zustimmung kein Speichereintrag (Gate 3), mit Zustimmung im Sitzungsspeicher, Widerruf löscht', async () => {
+  const sitzung = new Map();
+  const lokal = new Map();
+  const speicherAus = (karte) => ({ getItem: (k) => karte.get(k) ?? null, setItem: (k, v) => karte.set(k, String(v)), removeItem: (k) => karte.delete(k) });
+  globalThis.window = {
+    sessionStorage: speicherAus(sitzung), localStorage: speicherAus(lokal), addEventListener: () => {}, removeEventListener: () => {}, dispatchEvent: () => true,
+  };
+  const { leseHerkunft, merkeHerkunft, beiZustimmungsWechsel } = await import('../src/lib/herkunftSpeicher.js');
+  const { parseConsentState, getDefaultConsentState } = await import('../src/lib/consent.js');
+  // Ohne Zustimmung: nur Arbeitsspeicher.
   merkeHerkunft({ utm: { utm_source: 'qr', name: 'Lena' }, einstiegsseite: '/ambulant' });
-  merkeHerkunft({ utm: { utm_source: 'spaeter' }, einstiegsseite: '/zahn' });
   merkeHerkunft({ ref: 'HP-test', iban: 'DE89370400440532013000' });
+  assert.equal(sitzung.size, 0, 'ohne Zustimmung kein Eintrag im Sitzungsspeicher');
   assert.deepEqual(leseHerkunft(), { ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant' });
-  assert.deepEqual([...speicher.keys()], ['healio.herkunft']);
-  assert.ok(!/Lena|DE89/.test(speicher.get('healio.herkunft')), 'keine Personen- oder Bankdaten');
+  // Zustimmung erteilt: Eintrag mit genau den Kennzeichen.
+  const zustimmung = { version: 2, decided: true, preferences: { analytics: true }, source: 'banner', updatedAt: '2026-11-12T10:00:00.000Z' };
+  lokal.set('healio:consent:v2', JSON.stringify(zustimmung));
+  beiZustimmungsWechsel(parseConsentState(zustimmung));
+  merkeHerkunft({ utm: { utm_source: 'spaeter' }, einstiegsseite: '/zahn' });
+  assert.deepEqual([...sitzung.keys()], ['healio.herkunft']);
+  assert.deepEqual(JSON.parse(sitzung.get('healio.herkunft')), { ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant' }, 'erste Einstiegsseite bleibt');
+  assert.ok(!/Lena|DE89/.test(sitzung.get('healio.herkunft')), 'keine Personen- oder Bankdaten');
+  // Widerruf: Eintrag weg.
+  lokal.delete('healio:consent:v2');
+  beiZustimmungsWechsel(getDefaultConsentState());
+  assert.equal(sitzung.size, 0, 'Widerruf löscht den Eintrag');
   delete globalThis.window;
 });

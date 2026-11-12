@@ -1,9 +1,14 @@
 // Herkunft des Besuchs für den Antrag (Franks Vorgabe 12.11.2026): Werber-
-// oder Partnercode, utm-Kennzeichen und Einstiegsseite sollen ein volles
-// Neuladen im selben Fenster überstehen. Dafür liegt im sessionStorage genau
-// dieser eine Eintrag, geprüft und gekürzt (bereinigeHerkunft). Nie
-// Gesundheitsangaben, Bankdaten oder Personendaten. Schließen des Fensters
-// löscht ihn. Kein Versand außer mit dem Antrag selbst.
+// oder Partnercode, utm-Kennzeichen und Einstiegsseite.
+// - Mit Zustimmung zur Messung (Einwilligung „analytics“, src/lib/consent.js)
+//   liegt sie als genau ein Eintrag im sessionStorage und übersteht ein volles
+//   Neuladen im selben Fenster. Nie Gesundheits-, Bank- oder Personendaten.
+// - Ohne Zustimmung gilt Gate 3 vom 08.11.2026: kein Gerätespeicher. Die
+//   Herkunft lebt nur im Arbeitsspeicher der geöffneten Seite; ref läuft wie
+//   bisher über die Links mit (src/lib/referrer.js).
+// - Widerruf der Zustimmung löscht den Eintrag sofort.
+// Kein Versand außer mit dem Antrag selbst.
+import { hasConsent, subscribeConsent } from './consent.js';
 
 const SCHLUESSEL = 'healio.herkunft';
 
@@ -35,7 +40,11 @@ export function bereinigeHerkunft(roh = {}) {
 }
 
 
-export function leseHerkunft() {
+// Herkunft dieser Seite im Arbeitsspeicher (gilt immer, auch ohne Zustimmung).
+let imSpeicher = null;
+const zustimmung = () => { try { return hasConsent('analytics'); } catch { return false; } };
+
+function ausSitzung() {
   try {
     const roh = JSON.parse(window.sessionStorage.getItem(SCHLUESSEL) || 'null');
     if (!roh) return null;
@@ -46,16 +55,38 @@ export function leseHerkunft() {
   }
 }
 
+function inSitzung(wert) {
+  try { window.sessionStorage.setItem(SCHLUESSEL, JSON.stringify(wert)); } catch { /* ohne Speicher bleibt es beim Arbeitsspeicher */ }
+}
+
+export function vergissHerkunftImSpeicher() {
+  try { window.sessionStorage.removeItem(SCHLUESSEL); } catch { /* nichts zu tun */ }
+}
+
+export function leseHerkunft() {
+  return (zustimmung() && ausSitzung()) || imSpeicher;
+}
+
 // Einstiegsseite und utm nur beim ersten Laden des Besuchs; ein neuer
 // Werbercode ersetzt den alten.
 export function merkeHerkunft({ ref = null, utm = null, einstiegsseite = null } = {}) {
-  try {
-    const alt = leseHerkunft() || { ref: null, utm: {}, einstiegsseite: null };
-    const neu = bereinigeHerkunft({
-      ref: ref || alt.ref,
-      utm: Object.keys(alt.utm || {}).length ? alt.utm : (utm || {}),
-      einstiegsseite: alt.einstiegsseite || einstiegsseite,
-    });
-    window.sessionStorage.setItem(SCHLUESSEL, JSON.stringify({ ref: neu.ref, utm: neu.utm, einstiegsseite: neu.einstiegsseite }));
-  } catch { /* ohne Speicher bleibt es beim Arbeitsspeicher */ }
+  const alt = leseHerkunft() || { ref: null, utm: {}, einstiegsseite: null };
+  const neu = bereinigeHerkunft({
+    ref: ref || alt.ref,
+    utm: Object.keys(alt.utm || {}).length ? alt.utm : (utm || {}),
+    einstiegsseite: alt.einstiegsseite || einstiegsseite,
+  });
+  imSpeicher = { ref: neu.ref, utm: neu.utm, einstiegsseite: neu.einstiegsseite };
+  if (zustimmung()) inSitzung(imSpeicher);
 }
+
+// Zustimmung erteilt: Herkunft dieser Seite in die Sitzung legen. Widerrufen: löschen.
+export function beiZustimmungsWechsel(state) {
+  if (hasConsent('analytics', state)) {
+    if (imSpeicher) inSitzung(imSpeicher);
+  } else {
+    vergissHerkunftImSpeicher();
+  }
+}
+
+if (typeof window !== 'undefined') subscribeConsent(beiZustimmungsWechsel);
