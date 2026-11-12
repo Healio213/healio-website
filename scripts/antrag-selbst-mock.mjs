@@ -51,6 +51,37 @@ function zahnBeitrag({
   };
 }
 
+// Gesundheitsangaben aus dem Gespräch im Format der Strecke (wie der Dienst sie liefert), für die Prüfseiten-Tests.
+export const TELEFON_GESUNDHEIT = {
+  zahn: {
+    fragebogen: 'KZV', fragebogenId: '9', antworten: [{ frageId: '1', antwortId: '9', antwort: 'nein' }, { frageId: '10', antwortId: '12', antwort: 'nein' }, { frageId: '13', antwortId: '21', antwort: 'nein' }, { frageId: '22', antwortId: '24', antwort: 'nein' }, { frageId: '25', antwortId: '26', antwort: 'ja' }, { frageId: '28', antwortId: '34', antwort: 'unbekannt' }],
+  },
+  stationaer: {
+    fragebogen: 'SDK_SP',
+    G0A: '170',
+    G0B: '70',
+    antworten: [
+      ...['G10', 'G11', 'G17'].map((feld) => ({ schritt: 5, feld, wert: 'false' })),
+      { schritt: 5, feld: 'G18', wert: 'true' },
+      { schritt: 5, feld: 'G18.C', wert: 'Kontrolle Schilddrüse' },
+      { schritt: 5, feld: 'G18.D', wert: '2025-03-01' },
+      { schritt: 5, feld: 'G18.F', wert: 'false' },
+      { schritt: 5, feld: 'G18.G', wert: '0' },
+      { schritt: 5, feld: 'G18.H', wert: 'true' },
+      { schritt: 5, feld: 'G18.J', wert: '2025-06-01' },
+      { schritt: 5, feld: 'G18.K', wert: 'Dr. Test, Teststraße 1, 20095 Hamburg' },
+      { schritt: 5, feld: 'G18.1', wert: 'false' },
+      ...['G19', 'G20', 'G21', 'G3', 'G35'].map((feld) => ({ schritt: 5, feld, wert: 'false' })),
+    ],
+  },
+  'zahn-ukv': {
+    fragebogen: 'UKV_ZAHN',
+    antworten: [
+      { schritt: 4, feld: 'TF0021', wert: '1' }, { schritt: 4, feld: 'GF0073', wert: 'false' }, { schritt: 4, feld: 'GF0074', wert: 'false' }, { schritt: 4, feld: 'AF0010', wert: 'false' }, { schritt: 4, feld: 'AF_AD_0001', wert: 'Einzelfallentbindung' }, { schritt: 4, feld: 'AF_AD_0005', wert: 'pflichtversichert in deutscher GKV' },
+    ],
+  },
+};
+
 const PORT = Number(process.env.ANTRAG_SELBST_MOCK_PORT || 8792);
 const ERLAUBT = new Set((process.env.ANTRAG_ERLAUBTE_HERKUNFT || 'http://localhost:3018,http://127.0.0.1:3018').split(',').map((eintrag) => eintrag.trim()).filter(Boolean));
 let aufschlag = 0;
@@ -210,26 +241,28 @@ const server = http.createServer((anfrage, antwort) => {
   if (anfrage.method === 'OPTIONS') { senden(antwort, herkunft && ERLAUBT.has(herkunft) ? 204 : 403, {}, herkunft); return; }
   if (herkunft && !ERLAUBT.has(herkunft)) { senden(antwort, 403, { ok: false, fehler: 'antrag_herkunft' }); return; }
   if (pfad === '/antrag/gesund') { senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/telefon') { senden(antwort, 200, { ok: true, telefon: TELEFON_GESUNDHEIT }, herkunft); return; }
   if (pfad === '/__test/letzter') { senden(antwort, 200, { ok: true, letzter }, herkunft); return; }
   if (pfad === '/__test/beitrag-aendern') { aufschlag = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/zuruecksetzen') { aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
-  // Unterlagen je Produkt und Tarif. NUR TEST: Platzhalter-PDFs mit dem Vermerk
-  // „Testdatei der Attrappe“, keine echten Unterlagen der SDK.
-  if (pfad === '/antrag/api/selbstantrag/unterlagen' && anfrage.method === 'GET') {
+  // Unterlagen wie der Dienst (SCHNITTSTELLE.md 12.6): Liste und Datei. NUR TEST:
+  // Platzhalter-PDFs mit dem Vermerk „Testdatei der Attrappe“, keine echten Unterlagen.
+  if ((pfad === '/antrag/api/unterlagen' || pfad === '/antrag/api/unterlagen/datei') && anfrage.method === 'GET') {
     const suche = new URL(anfrage.url, 'http://x').searchParams;
     const produkt = suche.get('produkt');
     const tarif = suche.get('tarif');
-    const schluessel = produkt === 'sdk-ambulant' ? 'AP' : tarif;
-    const liste = ['sdk-ambulant', 'sdk-stationaer'].includes(produkt) ? LEVELNINE.sdkUnterlagen[schluessel] : null;
+    const liste = ['sdk-ambulant', 'sdk-stationaer'].includes(produkt) ? LEVELNINE.sdkUnterlagen[produkt === 'sdk-ambulant' ? 'AP' : tarif] : null;
     if (!liste) { senden(antwort, 404, { ok: false, fehler: 'antrag_unterlagen_unbekannt' }, herkunft); return; }
-    const pdf = (name) => Buffer.from(`%PDF-1.4\n% TESTDATEI DER ATTRAPPE, KEIN ECHTES DOKUMENT: ${name}\n%%EOF\n`).toString('base64');
-    senden(antwort, 200, {
-      ok: true,
-      test: true,
-      unterlagen: liste.map(([id, name]) => ({
-        id, name, dateiname: `${name.replace(/^[^:]+:\s*/, '').replace(/[^A-Za-z0-9._-]+/g, '_')}.pdf`, mime: 'application/pdf', stand: name.match(/\d{2}\.\d{2}$/)?.[0] || null, inhalt: pdf(name),
-      })),
-    }, herkunft);
+    const eintraege = liste.map(([id, name], stelle) => ({
+      id: String(id ?? `${tarif}-${stelle}`), name, art: name.startsWith('AVB') ? 'avb' : 'tarifbedingungen', stand: name.match(/\d{2}\.\d{2}$/)?.[0] || null, pflichtDownload: true,
+    }));
+    if (pfad === '/antrag/api/unterlagen') { senden(antwort, 200, { ok: true, test: true, produkt, tarif, unterlagen: eintraege }, herkunft); return; }
+    const treffer = eintraege.find((eintrag) => eintrag.id === suche.get('id'));
+    if (!treffer) { senden(antwort, 404, { ok: false, fehler: 'antrag_unterlagen_unbekannt' }, herkunft); return; }
+    const kopf = { 'Content-Type': 'application/pdf', 'Cache-Control': 'no-store' };
+    if (herkunft && ERLAUBT.has(herkunft)) { kopf['Access-Control-Allow-Origin'] = herkunft; kopf.Vary = 'Origin'; }
+    antwort.writeHead(200, kopf);
+    antwort.end(`%PDF-1.4\n% TESTDATEI DER ATTRAPPE, KEIN ECHTES DOKUMENT: ${treffer.name}\n%%EOF\n`);
     return;
   }
   // Prüfseite für einen am Telefon aufgenommenen Zahn-Antrag (Token test-zahn), Vertrag SCHNITTSTELLE.md 4.2 plus Feld sparte.
@@ -243,6 +276,9 @@ const server = http.createServer((anfrage, antwort) => {
         status: 'offen',
         sparte: 'ambulant',
         regelwerkFassung: '2026-11-12-sdk-ambulant-online',
+        gesundheitTelefon: {
+          antwort1a: 'nein', kreuze1a: [], antworten: Object.fromEntries(FRAGEN_1B_1K.map((frage) => [frage.id, 'nein'])), groesse: '178', gewicht: '75',
+        },
         gueltigBis: '2026-11-19',
         angaben: {
           tarifCode: 'AP1', beginnIso: optionen.naechstmoeglich.iso, anrede: 'frau', geburtsdatum: '05.03.1990',
@@ -250,7 +286,29 @@ const server = http.createServer((anfrage, antwort) => {
             vorname: 'Lena', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
           },
         },
-        gesundheitTelefon: null,
+        
+        beginnOptionen: optionen,
+      }, herkunft);
+      return;
+    }
+    const levelnine = { 'Bearer test-stationaer': 'stationaer', 'Bearer test-ukv': 'zahn-ukv' }[anfrage.headers.authorization];
+    if (levelnine) {
+      const def = DEFINITIONEN[levelnine];
+      senden(antwort, 200, {
+        ok: true,
+        kennung: levelnine === 'stationaer' ? 'HA-261112-STAT' : 'HA-261112-UKVZ',
+        status: 'offen',
+        sparte: def.sparte,
+        produkt: levelnine === 'stationaer' ? 'sdk-stationaer' : 'zahn-ukv',
+        versicherer: def.versicherer.id,
+        gueltigBis: '2026-11-19',
+        angaben: {
+          tarifCode: levelnine === 'stationaer' ? 'SP2' : 'Z100', beginnIso: optionen.naechstmoeglich.iso, anrede: 'frau', geburtsdatum: '05.03.1990',
+          formular: {
+            vorname: 'Lena', nachname: 'Muster', strasse: levelnine === 'stationaer' ? 'Musterweg' : 'Musterweg 12', ...(levelnine === 'stationaer' ? { hausnummer: '12' } : {}), plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
+          },
+        },
+        gesundheitTelefon: TELEFON_GESUNDHEIT[levelnine],
         beginnOptionen: optionen,
       }, herkunft);
       return;
@@ -268,7 +326,7 @@ const server = http.createServer((anfrage, antwort) => {
           vorname: 'Lena', nachname: 'Muster', plz: '20095', ort: 'Hamburg', strasse: 'Musterweg', hausnummer: '12', email: 'lena@beispiel.de',
         },
       },
-      gesundheitTelefon: null,
+      gesundheitTelefon: TELEFON_GESUNDHEIT.zahn,
       beginnOptionen: { naechstmoeglich: optionen.naechstmoeglich, weitere: optionen.weitere.slice(0, 4) },
     }, herkunft);
     return;
@@ -280,12 +338,15 @@ const server = http.createServer((anfrage, antwort) => {
       let body = null;
       try { body = JSON.parse(roh); } catch { /* unten */ }
       const token = anfrage.headers.authorization;
-      if (!['Bearer test-zahn', 'Bearer test-ambulant-online'].includes(token) || !body) { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
+      const KENNUNGEN = {
+        'Bearer test-zahn': 'HA-261112-ZAHN', 'Bearer test-ambulant-online': 'HA-261112-AMBO', 'Bearer test-stationaer': 'HA-261112-STAT', 'Bearer test-ukv': 'HA-261112-UKVZ',
+      };
+      if (!KENNUNGEN[token] || !body) { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
       if (token === 'Bearer test-ambulant-online' && body.textfassung !== '2026-11-12-sdk-ambulant-online') { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: ['textfassung'] }, herkunft); return; }
       const ergebnis = token === 'Bearer test-zahn' ? pruefeZahn(body, new Date()) : pruefe(body);
       if (ergebnis.status !== 201) { senden(antwort, ergebnis.status, { ok: false, fehler: ergebnis.fehler, ...(ergebnis.felder ? { felder: ergebnis.felder } : {}) }, herkunft); return; }
       letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft), ueber: 'pruefseite' };
-      senden(antwort, 200, { ok: true, kennung: token === 'Bearer test-zahn' ? 'HA-261112-ZAHN' : 'HA-261112-AMBO', status: 'bestaetigt', bestaetigtAm: new Date().toISOString() }, herkunft);
+      senden(antwort, 200, { ok: true, kennung: KENNUNGEN[token], status: 'bestaetigt', bestaetigtAm: new Date().toISOString() }, herkunft);
     });
     return;
   }
@@ -302,7 +363,9 @@ const server = http.createServer((anfrage, antwort) => {
       if (body?.sparte !== 'zahn' || body?.versicherer !== 'bayerische') { senden(antwort, 409, { ok: false, fehler: 'antrag_sparte_nicht_bereit' }, herkunft); return; }
       const beitrag = zahnBeitrag(body);
       if (!beitrag) { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: [] }, herkunft); return; }
-      senden(antwort, 200, { ok: true, sparte: 'zahn', tarifCode: body.tarifCode, ...beitrag, beitrag: Math.round((beitrag.beitrag + aufschlag) * 100) / 100 }, herkunft);
+      senden(antwort, 200, {
+        ok: true, sparte: 'zahn', produkt: 'bayerische-zahn', tarifCode: body.tarifCode, ...beitrag, alleStufen: beitrag.alleTarife, regionGeprueft: Boolean(ZAHN.plz[body.plz]), ablehnung: null, beitrag: Math.round((beitrag.beitrag + aufschlag) * 100) / 100,
+      }, herkunft);
       return;
     }
     const ergebnis = pruefe(body);

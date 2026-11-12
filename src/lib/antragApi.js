@@ -70,14 +70,26 @@ export const sendeSelbstantrag = (body, optionen) => selbstAnfrage('/selbstantra
 // Gesundheitsangaben oder IBAN.
 export const berechneSelbstBeitrag = (body, optionen) => selbstAnfrage('/selbstantrag/beitrag', body, optionen);
 
-// Vertragsunterlagen je Produkt und Tarif (SDK: Pflicht-Downloads ohne
-// öffentliche Adresse, der Antragsdienst holt sie vom Versicherer). In der
-// Adresse stehen nur Produkt und Tarif, keine Angaben zur Person.
-export const ladeSelbstUnterlagen = ({ produkt, tarifCode }, optionen) => selbstAnfrage(
-  `/selbstantrag/unterlagen?produkt=${encodeURIComponent(produkt)}&tarif=${encodeURIComponent(tarifCode)}`,
-  undefined,
-  optionen,
-);
+// Vertragsunterlagen je Produkt und Tarif (Dienst, SCHNITTSTELLE.md 12.6):
+// Liste über GET /unterlagen, das PDF über GET /unterlagen/datei. SDK-PDFs
+// haben keine öffentliche Adresse, der Dienst holt sie beim Versicherer. In
+// der Adresse stehen nur Produkt, Tarif und Bausteine, keine Angaben zur Person.
+const unterlagenSuche = ({ produkt, tarifCode, bausteine = [] }) => `produkt=${encodeURIComponent(produkt)}&tarif=${encodeURIComponent(tarifCode)}${bausteine.length ? `&bausteine=${encodeURIComponent(bausteine.join(','))}` : ''}`;
+
+export const ladeSelbstUnterlagen = (angaben, optionen) => selbstAnfrage(`/unterlagen?${unterlagenSuche(angaben)}`, undefined, optionen);
+
+export async function ladeUnterlagenDatei({ produkt, tarifCode, id }) {
+  let antwort;
+  try {
+    antwort = await fetch(`${ANTRAG_API_BASIS}/unterlagen/datei?${unterlagenSuche({ produkt, tarifCode })}&id=${encodeURIComponent(id)}`, {
+      method: 'GET', headers: { Accept: 'application/pdf' }, cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer',
+    });
+  } catch {
+    throw new AntragFehler('netz', 0);
+  }
+  if (!antwort.ok) throw new AntragFehler(`status_${antwort.status}`, antwort.status);
+  return antwort.blob();
+}
 
 async function selbstAnfrage(pfad, body, { signal } = {}) {
   let antwort;

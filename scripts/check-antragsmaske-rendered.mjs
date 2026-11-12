@@ -35,6 +35,11 @@ function ladePlaywright() {
 const { chromium } = ladePlaywright();
 
 let punkte = 0;
+// Vergleich unabhängig von der Reihenfolge der Schlüssel (Listen bleiben geordnet).
+const gleich = (a, b) => {
+  const sortiert = (wert) => (Array.isArray(wert) ? wert.map(sortiert) : wert && typeof wert === 'object' ? Object.fromEntries(Object.keys(wert).sort().map((k) => [k, sortiert(wert[k])])) : wert);
+  return JSON.stringify(sortiert(a)) === JSON.stringify(sortiert(b));
+};
 const pruefe = (bedingung, text) => { assert.ok(bedingung, text); punkte += 1; };
 
 const prozesse = [];
@@ -461,7 +466,14 @@ async function pruefseiteZahn(browser) {
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
-  for (const id of ['z1', 'z2', 'z3', 'z4', 'z5']) { await bildschirm(page, `frage:${id}`); await page.waitForTimeout(650); await page.click('[data-antwort="nein"]'); }
+  // Antworten aus dem Gespräch sind vorbelegt (z5 „ja“); der Kunde bestätigt sie durch erneutes Antippen.
+  for (const id of ['z1', 'z2', 'z3', 'z4', 'z5']) {
+    await bildschirm(page, `frage:${id}`);
+    await page.waitForTimeout(650);
+    const vorbelegt = await page.getAttribute(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`, 'data-antwort');
+    pruefe(vorbelegt === (id === 'z5' ? 'ja' : 'nein'), `Prüfseite Zahn: ${id} vorbelegt (${vorbelegt})`);
+    await page.click(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`);
+  }
   await bildschirm(page, 'beitrag'); await weiter(page);
   await bildschirm(page, 'person'); await weiter(page);
   await bildschirm(page, 'anschrift'); await weiter(page);
@@ -486,6 +498,8 @@ async function pruefseiteZahn(browser) {
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-ZAHN', 'Prüfseite Zahn bestätigt');
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.ueber === 'pruefseite' && letzter.sparte === 'zahn', 'Bestätigung über die Prüfseite angekommen');
+  const { telefon } = await mock('/__test/telefon');
+  pruefe(gleich(letzter.gesundheit, telefon.zahn), 'Zahnangaben vom Telefon kommen unverändert in der Bestätigung an');
   await foto(page, '390-pruefseite-zahn-02-danke');
   await context.close();
 }
@@ -689,6 +703,75 @@ async function ukvDurchlauf(browser) {
   await context.close();
 }
 
+// Prüfseite im Telefonweg für stationär und UKV: Angaben aus dem Entwurf im Format der Strecke.
+async function pruefseiteLevelnine(browser, art) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.goto(`${AN}/antrag/pruefen#test-${art}`, { waitUntil: 'networkidle' });
+  await bildschirm(page, 'tarif');
+  await weiter(page);
+  const pressen = async (id) => {
+    await bildschirm(page, `frage:${id}`);
+    await page.waitForTimeout(650);
+    pruefe(await page.locator(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`).count() > 0, `${art}: ${id} vorbelegt`);
+    await page.locator(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`).first().click();
+  };
+  if (art === 'stationaer') {
+    await sdkVorFragen(page, null);
+    await bildschirm(page, 'frage:G0');
+    pruefe(await page.inputValue('#feld-frage-G0-groesse') === '170' && await page.inputValue('#feld-frage-G0-gewicht') === '70', 'stationär: Größe und Gewicht vorbelegt');
+    await weiter(page);
+    for (const id of ['G10', 'G11', 'G17']) await pressen(id);
+    await bildschirm(page, 'frage:G18');
+    pruefe(await page.inputValue('#feld-frage-G18\\.C') === 'Kontrolle Schilddrüse' && await page.inputValue('#feld-frage-G18\\.D') === '01.03.2025' && await page.inputValue('#feld-frage-G18\\.J') === '01.06.2025', 'stationär: Folgeangaben vom Telefon vorbelegt');
+    await foto(page, '390-pruefseite-stationaer-G18');
+    await weiter(page);
+    for (const id of ['G19', 'G20', 'G21', 'G3', 'G35']) await pressen(id);
+    await bildschirm(page, 'beitrag');
+    await weiter(page);
+    await sdkNachBeitrag(page, null);
+  } else {
+    await bildschirm(page, 'person');
+    await page.locator('label:has(input[name="anrede"][value="frau"])').click();
+    await weiter(page);
+    await bildschirm(page, 'hinweis');
+    await weiter(page);
+    await bildschirm(page, 'frage:TF0021');
+    pruefe(await page.locator('input[name="frage-TF0021"][value="1"]').isChecked(), 'UKV: fehlende Zähne vorbelegt');
+    await weiter(page);
+    for (const id of ['GF0073', 'GF0074', 'AF0010']) await pressen(id);
+    await bildschirm(page, 'frage:AF_AD_0001');
+    await weiter(page);
+    await bildschirm(page, 'frage:AF_AD_0005');
+    pruefe(await page.locator('input[name="frage-AF_AD_0005"][value="pflichtversichert in deutscher GKV"]').isChecked(), 'UKV: Versicherung vorbelegt');
+    await weiter(page);
+    await bildschirm(page, 'beitrag');
+    await weiter(page);
+    await bildschirm(page, 'erkl:auftrag');
+    for (const key of ['verzicht', 'vollmacht', 'gesundheitsdaten']) await page.locator(`label:has(#feld-${key})`).click();
+    await weiter(page);
+    await bildschirm(page, 'anschrift');
+    await weiter(page);
+    await bildschirm(page, 'zahlung');
+    await page.locator('label:has(input[name="kontoinhaber"][value="selbst"])').click();
+    await page.fill('#feld-iban', 'DE89 3704 0044 0532 0130 00');
+    await page.locator('#feld-iban').blur();
+    await page.locator('label:has(#feld-sepaMandatConfirmation)').click();
+    await weiter(page);
+    await bildschirm(page, 'erkl:unterlagen');
+    await weiter(page);
+  }
+  await bildschirm(page, 'zusammenfassung');
+  await page.click('#knopf-absenden');
+  await page.waitForSelector('[data-danke], [data-sendefehler]');
+  if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler ${art}: ${await page.textContent('[data-sendefehler]')}`);
+  const { letzter } = await mock('/__test/letzter');
+  const { telefon } = await mock('/__test/telefon');
+  pruefe(letzter.ueber === 'pruefseite' && gleich(letzter.gesundheit, telefon[art === 'stationaer' ? 'stationaer' : 'zahn-ukv']), `${art}: Angaben vom Telefon kommen unverändert in der Bestätigung an`);
+  await context.close();
+}
+
 async function pruefseiteAmbulantOnline(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
@@ -731,6 +814,7 @@ async function pruefseiteAmbulantOnline(browser) {
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-12-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
+  pruefe(letzter.zahlung.bankname === 'Testbank', 'Prüfseite ambulant (Online-Fassung) fragt den Banknamen ab');
   await context.close();
 }
 
@@ -792,9 +876,14 @@ try {
   await starteServer();
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   try {
-    // --nur pruefseite-ambulant: nur diesen Teil (zum schnellen Nachprüfen).
-    const nurTeil = arg('--nur', null) === 'pruefseite-ambulant';
+    // --nur pruefseite-ambulant | pruefseiten: nur diese Teile (zum schnellen Nachprüfen).
+    const nurTeil = ['pruefseite-ambulant', 'pruefseiten'].includes(arg('--nur', null));
     if (nurTeil) await pruefseiteAmbulantOnline(browser);
+    if (arg('--nur', null) === 'pruefseiten') {
+      await pruefseiteZahn(browser);
+      await pruefseiteLevelnine(browser, 'stationaer');
+      await pruefseiteLevelnine(browser, 'ukv');
+    }
     for (const breite of nurTeil ? [] : [390, 1280]) {
       await durchlauf(browser, breite, false, breite === 390 ? 'werber' : 'direkt');
       await durchlauf(browser, breite, true, breite === 390 ? 'wahl' : 'direkt');
@@ -818,6 +907,8 @@ async function alleWeiteren(browser) {
     await ukvDurchlauf(browser);
     await pruefseiteZahn(browser);
     await pruefseiteAmbulantOnline(browser);
+    await pruefseiteLevelnine(browser, 'stationaer');
+    await pruefseiteLevelnine(browser, 'ukv');
     await sonderfaelle(browser);
     await schalterAus(browser);
 }

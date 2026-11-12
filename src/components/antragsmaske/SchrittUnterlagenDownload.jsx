@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ladeUnterlagenDatei } from '@/lib/antragApi';
 import { CheckCircle2, Download } from 'lucide-react';
 import {
   Button, Callout, FehlerText, bodyText, buttonClass, cx, schuetze,
@@ -10,14 +11,11 @@ import { TeilKopf, telefonLink } from './teile';
 // Antragsdienst (keine öffentliche Adresse). Der Zeitpunkt jedes Downloads
 // geht mit dem Antrag mit (unterlagenGeoeffnet).
 
-function speichere(unterlage) {
-  const roh = atob(unterlage.inhalt || '');
-  const bytes = new Uint8Array(roh.length);
-  for (let stelle = 0; stelle < roh.length; stelle += 1) bytes[stelle] = roh.charCodeAt(stelle);
-  const adresse = URL.createObjectURL(new Blob([bytes], { type: unterlage.mime || 'application/pdf' }));
+function speichere(blob, unterlage) {
+  const adresse = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = adresse;
-  link.download = unterlage.dateiname || `${unterlage.name}.pdf`;
+  link.download = unterlage.dateiname || `${String(unterlage.name).replace(/^[^:]+:\s*/, '').replace(/[^A-Za-z0-9._-]+/g, '_')}.pdf`;
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -34,9 +32,19 @@ export default function SchrittUnterlagenDownload({
     liste.forEach((unterlage) => { if (!neu[schluessel(unterlage)]) neu[schluessel(unterlage)] = new Date().toISOString(); });
     return { unterlagenGeoeffnet: neu };
   });
-  const lade = (liste) => {
-    liste.forEach((unterlage) => { try { speichere(unterlage); } catch { /* Download blockiert, Kunde kann erneut tippen */ } });
-    merke(liste);
+  const [ladeFehler, setLadeFehler] = useState(false);
+  // Das PDF kommt vom Antragsdienst; als heruntergeladen gilt es erst, wenn es da ist.
+  const lade = async (liste) => {
+    setLadeFehler(false);
+    const geschafft = [];
+    for (const unterlage of liste) {
+      try {
+        const blob = await ladeUnterlagenDatei({ produkt: regel.produkt, tarifCode: daten.tarif, id: unterlage.id });
+        speichere(blob, unterlage);
+        geschafft.push(unterlage);
+      } catch { setLadeFehler(true); }
+    }
+    if (geschafft.length) merke(geschafft);
   };
 
   return (
@@ -52,6 +60,7 @@ export default function SchrittUnterlagenDownload({
           </div>
         </Callout>
       )}
+      {ladeFehler && <p className="text-base font-semibold leading-6 text-rose-700" role="alert">Ein Dokument ließ sich gerade nicht laden. Tippe bitte noch einmal darauf.</p>}
       {!unterlagen.fehler && !unterlagen.liste && <p className={bodyText} aria-live="polite">Einen Moment, wir laden deine Unterlagen …</p>}
       {unterlagen.liste && (
         <>

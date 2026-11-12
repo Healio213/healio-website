@@ -54,7 +54,7 @@ export const REGELWERK_FASSUNG_ONLINE = '2026-11-12-sdk-ambulant-online';
 const istAndereSparte = (entwurf) => (Boolean(entwurf?.sparte) && entwurf.sparte !== 'ambulant')
   || entwurf?.regelwerkFassung === REGELWERK_FASSUNG_ONLINE;
 
-function pruefDaten(entwurf) {
+function pruefDaten(entwurf, definition) {
   const a = entwurf?.angaben || {};
   const f = a.formular || {};
   const weitere = entwurf?.beginnOptionen?.weitere || [];
@@ -69,6 +69,8 @@ function pruefDaten(entwurf) {
     plz: f.plz || '',
     anrede: ['frau', 'herr', 'divers'].includes(a.anrede) ? a.anrede : null,
     formular: { ...f },
+    // Angaben aus dem Gespräch vorbelegt; verbindlich ist, was der Kunde hier bestätigt.
+    antworten: typeof definition?.gesundheitAusVertrag === 'function' ? definition.gesundheitAusVertrag(entwurf?.gesundheitTelefon, { angaben: a }) : {},
   };
 }
 
@@ -84,7 +86,7 @@ function AndereSparte({ token, entwurf, titelRef }) {
     <Antragsmaske
       definition={definition}
       pruefen={{
-        daten: pruefDaten(entwurf),
+        daten: pruefDaten(entwurf, definition),
         beginnWahl,
         absenden: (body) => bestaetigeAntrag(token, { ...body, textfassung: definition.textfassung }),
       }}

@@ -367,6 +367,25 @@ const zahn = {
     ];
   },
 
+  // Telefonweg: Format der Strecke ({ fragebogen, antworten: [{ frageId, antwort }] })
+  // oder einfache Form des Dienstes ({ z1 | z1s, z2 … z5: 'ja' | 'nein' }).
+  gesundheitAusVertrag: (gesundheit = {}) => {
+    const g = gesundheit || {};
+    const antworten = {};
+    if (Array.isArray(g.antworten)) {
+      const smart = g.fragebogen === 'KZV_SMART';
+      g.antworten.forEach((eintrag) => {
+        const frage = FRAGEN.find((f) => f.original.frageId === eintrag.frageId && (eintrag.frageId !== '1' || (smart ? f.id === 'z1s' : f.id === 'z1')));
+        if (!frage) return;
+        const wert = eintrag.antwort || (eintrag.antwortId === frage.original.ja ? 'ja' : eintrag.antwortId === frage.original.nein ? 'nein' : null);
+        if (wert === 'ja' || wert === 'nein') antworten[frage.id] = wert;
+      });
+    } else {
+      FRAGEN.forEach((frage) => { if (g[frage.id] === 'ja' || g[frage.id] === 'nein') antworten[frage.id] = g[frage.id]; });
+    }
+    return antworten;
+  },
+
   // Antworten im Format der Risikoprüfung der Bayerischen
   // (POST /api/risk/evaluation): Fragebogen KZV oder KZV_SMART, je Frage die
   // Antwort-Kennung. Bei Frage 5 „ja“ wie im Original mit „unbekannt“.

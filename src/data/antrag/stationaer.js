@@ -16,7 +16,7 @@ import { HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
 import { ERKLAERUNG_KURZ, TEXT_10_VOLLMACHT } from '../sdkAmbulantAntragTexte.js';
 import { bedingungErfuellt } from '../../lib/antragsmaske/regeln.js';
 import {
-  LEVELNINE, feldAus, fragenZuordnung, frageAus,
+  LEVELNINE, antwortenAusStrecke, feldAus, fragenZuordnung, frageAus,
 } from './levelnine.js';
 import {
   SDK_ABLAUF, SDK_HINWEIS_NACH_EINGANG, sdkDatenZuordnung, sdkTeile,
@@ -105,6 +105,16 @@ const stationaer = {
     antworten: fragenZuordnung(FRAGEN.filter((frage) => frage.typ !== 'masse'), antworten, bedingungErfuellt, { antworten, tarif }),
     ...(MIT_FRAGEN.tarif.includes(tarif) ? { G0A: String(antworten.G0?.groesse ?? ''), G0B: String(antworten.G0?.gewicht ?? '') } : {}),
   }),
+  // Telefonweg: Angaben im Format der Strecke (gesundheitFuerVertrag) oder in der
+  // einfachen Form des Dienstes ({ groesse, gewicht, antworten: { G10: … } }).
+  gesundheitAusVertrag: (gesundheit = {}) => {
+    const g = gesundheit || {};
+    const antworten = antwortenAusStrecke(FRAGEN.filter((frage) => frage.typ !== 'masse'), g.antworten);
+    const groesse = g.G0A ?? g.groesse;
+    const gewicht = g.G0B ?? g.gewicht;
+    if (groesse || gewicht) antworten.G0 = { groesse: String(groesse ?? ''), gewicht: String(gewicht ?? '') };
+    return antworten;
+  },
   originalFuerVertrag: (daten, { beginn } = {}) => {
     const tarif = TARIFE.find((eintrag) => eintrag.id === daten.tarif);
     const iso = (text) => { const t = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(String(text || '')); return t ? `${t[3]}-${t[2]}-${t[1]}` : null; };

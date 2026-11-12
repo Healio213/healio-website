@@ -201,7 +201,7 @@ export default function Antragsmaske({ definition, pruefen = null }) {
     if (!unterlagenSchluessel) return undefined;
     const steuerung = new AbortController();
     ladeSelbstUnterlagen({ produkt: definition.unterlagenDownload.produkt, tarifCode: daten.tarif }, { signal: steuerung.signal })
-      .then((antwort) => setUnterlagenDienst({ schluessel: unterlagenSchluessel, liste: Array.isArray(antwort.unterlagen) ? antwort.unterlagen : [], fehler: false }))
+      .then((antwort) => setUnterlagenDienst({ schluessel: unterlagenSchluessel, liste: (Array.isArray(antwort.unterlagen) ? antwort.unterlagen : []).filter((u) => u.pflichtDownload !== false), fehler: false }))
       .catch((fehler) => { if (fehler?.name !== 'AbortError') setUnterlagenDienst({ schluessel: unterlagenSchluessel, liste: null, fehler: true }); });
     return () => steuerung.abort();
   }, [unterlagenSchluessel, unterlagenVersuch]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -235,7 +235,8 @@ export default function Antragsmaske({ definition, pruefen = null }) {
       tarif: tarif.id, geburtsdatum, beginn, plz: plzFuerPreis, antworten: daten.antworten,
     })
     : null), [definition, tarif, geburtsdatum?.jahr, geburtsdatum?.monat, geburtsdatum?.tag, beginn?.iso, plzFuerPreis, daten.antworten, grenze]); // eslint-disable-line react-hooks/exhaustive-deps
-  const preise = mitDienst ? dienstJetzt.antwort?.alleTarife || null : preiseLokal;
+  // Dienst (12.2) nennt die Beiträge aller Tarife „alleStufen“, die Attrappe zusätzlich „alleTarife“.
+  const preise = mitDienst ? dienstJetzt.antwort?.alleStufen || dienstJetzt.antwort?.alleTarife || null : preiseLokal;
   const beitrag = mitDienst
     ? (dienstJetzt.antwort ? {
       beitrag: dienstJetzt.antwort.beitrag,

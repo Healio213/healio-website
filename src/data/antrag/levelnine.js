@@ -127,3 +127,29 @@ export function sdkUnterlagen(tarif) {
   const liste = LEVELNINE.sdkUnterlagen[tarif] || [];
   return liste.map(([id, name]) => ({ id, name }));
 }
+
+// Rückweg: Antworten im Format der Strecke ({ feld, wert } bzw. einfache Form
+// { G10: 'true' }) → Antworten der Maske (ja/nein, TT.MM.JJJJ). Für die
+// Prüfseite im Telefonweg: Angaben aus dem Gespräch erscheinen vorbelegt.
+export function antwortenAusStrecke(fragen, liste) {
+  const werte = {};
+  if (Array.isArray(liste)) liste.forEach((eintrag) => { if (eintrag && eintrag.feld !== undefined) werte[eintrag.feld] = eintrag.wert; });
+  else if (liste && typeof liste === 'object') Object.assign(werte, liste);
+  const antworten = {};
+  const geh = (frage) => {
+    const id = frage.original?.id || frage.id;
+    if (werte[id] !== undefined && werte[id] !== null && werte[id] !== '') {
+      const wert = String(werte[id]);
+      if (frage.typ === 'janein') {
+        if (wert === 'true' || wert === 'ja') antworten[frage.id] = 'ja';
+        else if (wert === 'false' || wert === 'nein') antworten[frage.id] = 'nein';
+      } else if (frage.typ === 'datum') {
+        const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(wert);
+        antworten[frage.id] = iso ? `${iso[3]}.${iso[2]}.${iso[1]}` : wert;
+      } else antworten[frage.id] = wert;
+    }
+    (frage.folge || []).forEach(geh);
+  };
+  fragen.forEach(geh);
+  return antworten;
+}

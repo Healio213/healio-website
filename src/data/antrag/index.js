@@ -12,7 +12,12 @@ export const DEFINITIONEN = {
   ambulant, zahn, stationaer, 'zahn-ukv': zahnUkv,
 };
 
-export const definitionFuer = (produkt) => DEFINITIONEN[produkt] || null;
+// Produktnamen des Antragsdienstes (SCHNITTSTELLE.md 12.1) auf die Pfade der Maske.
+export const DIENST_PRODUKTE = {
+  'sdk-ambulant': 'ambulant', 'sdk-stationaer': 'stationaer', 'bayerische-zahn': 'zahn', 'ukv-zahn': 'zahn-ukv',
+};
+
+export const definitionFuer = (produkt) => DEFINITIONEN[produkt] || DEFINITIONEN[DIENST_PRODUKTE[produkt]] || null;
 
 // Produkt zu Sparte und Versicherer (z. B. zahn + ukv → zahn-ukv).
 export const produktFuer = (sparte, versicherer) => Object.values(DEFINITIONEN).find((definition) => definition.sparte === sparte && definition.versicherer.id === versicherer) || null;

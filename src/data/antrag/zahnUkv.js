@@ -23,7 +23,7 @@ import {
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
 import { bedingungErfuellt } from '../../lib/antragsmaske/regeln.js';
 import {
-  LEVELNINE, feldAus, fragenZuordnung, frageAus,
+  LEVELNINE, antwortenAusStrecke, feldAus, fragenZuordnung, frageAus,
 } from './levelnine.js';
 
 const SCHRITTE = LEVELNINE.ukvZahn.schritte;
@@ -232,6 +232,20 @@ const zahnUkv = {
   gesundheitFuerVertrag: (antworten = {}, { tarif } = {}) => ({
     fragebogen: 'UKV_ZAHN', antworten: fragenZuordnung(FRAGEN, antworten, bedingungErfuellt, { antworten, tarif }),
   }),
+  // Telefonweg: Format der Strecke oder einfache Form des Dienstes
+  // ({ fehlendeZaehne, behandlung, parodontose, pkvZahn }, Versicherung aus angaben.versicherung).
+  gesundheitAusVertrag: (gesundheit = {}, { angaben } = {}) => {
+    const g = gesundheit || {};
+    if (Array.isArray(g.antworten)) return antwortenAusStrecke(FRAGEN, g.antworten);
+    const jn = (wert) => (wert === true || wert === 'true' || wert === 'ja' ? 'true' : wert === false || wert === 'false' || wert === 'nein' ? 'false' : undefined);
+    return antwortenAusStrecke(FRAGEN, {
+      TF0021: g.fehlendeZaehne !== undefined ? String(g.fehlendeZaehne) : undefined,
+      GF0073: jn(g.behandlung),
+      GF0074: jn(g.parodontose),
+      AF0010: jn(g.pkvZahn),
+      AF_AD_0005: angaben?.versicherung,
+    });
+  },
   originalFuerVertrag: (daten, { beginn } = {}) => {
     const fo = daten.formular || {};
     const tarif = TARIFE.find((eintrag) => eintrag.id === daten.tarif);

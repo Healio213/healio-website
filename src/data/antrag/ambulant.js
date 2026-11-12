@@ -225,6 +225,17 @@ const ambulant = {
     ];
   },
 
+  // Telefonweg: Gesundheit im Format von SCHNITTSTELLE.md 3 → Antworten der Maske.
+  gesundheitAusVertrag: (g = {}) => {
+    const antworten = {};
+    if (!g) return antworten;
+    if (g.antwort1a === 'ja' || g.antwort1a === 'nein') antworten['1a'] = g.antwort1a;
+    if (g.antwort1a === 'ja' && Array.isArray(g.kreuze1a)) antworten['1a-kreuze'] = [...g.kreuze1a];
+    FRAGEN_1B_1K.forEach((frage) => { if (['ja', 'nein'].includes(g.antworten?.[frage.id])) antworten[frage.id] = g.antworten[frage.id]; });
+    if (g.groesse || g.gewicht) antworten['2'] = { groesse: String(g.groesse ?? ''), gewicht: String(g.gewicht ?? '') };
+    return antworten;
+  },
+
   gesundheitFuerVertrag: (antworten = {}) => ({
     antwort1a: antworten['1a'] ?? null,
     kreuze1a: antworten['1a'] === 'ja' && Array.isArray(antworten['1a-kreuze']) ? FRAGE_1A_ITEMS.map((item) => item.id).filter((id) => antworten['1a-kreuze'].includes(id)) : [],
