@@ -14,6 +14,7 @@ import SceneHero, { sceneAccentClass, sceneBelow, scenePrimaryButtonClass } from
 import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
+import { zahnBeispielpreisText } from '@/data/zahnBeispielpreis';
 import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
 import SelfServiceEntryActions from '@/components/guided/SelfServiceEntryActions';
 
@@ -116,7 +117,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={guidedCallbackEnabled && surface === 'zahn'
-        ? (language === 'en' ? 'Three or four short questions, then on to the premium calculator. Apply directly online.' : 'Drei bis vier kurze Fragen, dann zum Beitragsrechner. Antrag direkt online.')
+        ? (language === 'en' ? `Three or four short questions, then on to the premium calculator. ${zahnBeispielpreisText('en')}` : `Drei bis vier kurze Fragen, dann zum Beitragsrechner. ${zahnBeispielpreisText('de')}`)
         : guidedCallbackEnabled && selfServiceSurface ? undefined
         : guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
       urgency={isHome || surface === 'zahn' || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}
