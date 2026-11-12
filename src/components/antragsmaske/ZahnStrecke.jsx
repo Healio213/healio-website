@@ -24,7 +24,7 @@ import {
   Button, Callout, FOKUS, Field, NeuerTab, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria, schuetze, sofortScrollen,
 } from '@/components/antrag/ui';
 import Antragsmaske from './Antragsmaske';
-import { HilfeKarte, KARTE } from './rahmen';
+import { GeteilteSeite, NitaDunkel, VertrauenPunkte } from './rahmen';
 import { TERMIN_LINK, telefonLink } from './teile';
 import { gestellteFragen, naechsteFrage, zielAus } from './zahnVorabfrage';
 
@@ -110,8 +110,8 @@ function ergebnisTexte(ziel, a, definition) {
   if (ziel.ziel === 'bayerische-sofort') {
     return {
       gruende: [
-        'Deine anstehende oder schon begonnene Behandlung ist über ZAHN Sofort rückwirkend mitversichert.',
-        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Nach deinen Antworten passt du zu den Annahmefragen der Bayerischen.',
+        'Für deine anstehende oder schon begonnene Behandlung gibt es mit ZAHN Sofort rückwirkenden Schutz.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte.',
         'Keine Wartezeiten, der Schutz gilt ab Beginn.',
       ],
       gutZuWissen: [ergebnis.reasons[0], ergebnis.reasons[2], ergebnis.warning],
@@ -120,8 +120,8 @@ function ergebnisTexte(ziel, a, definition) {
   if (ziel.ziel === 'bayerische') {
     return {
       gruende: [
-        'Deine Behandlung ist abgerechnet. Die Fragen der Bayerischen betreffen den heutigen Zustand deiner Zähne, und der passt.',
-        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Nach deinen Antworten passt du zu den Annahmefragen der Bayerischen.',
+        'Deine Behandlung ist abgerechnet. Die Bayerische fragt nach dem heutigen Zustand deiner Zähne, nicht nach Empfehlungen der letzten zwei Jahre.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte.',
         'Keine Wartezeiten in allen drei Stufen.',
       ],
       gutZuWissen: [
@@ -133,7 +133,7 @@ function ergebnisTexte(ziel, a, definition) {
   const gruende = [];
   if (a.q2 === 'wenige') gruende.push(`Deine ${a.anzahl === '1' ? 'Lücke ist' : `${a.anzahl} fehlenden Zähne sind`} nach Annahme mitversichert, mit einem Zuschlag je Zahn.`);
   else gruende.push('Dir fehlen keine Zähne, deshalb ohne Zuschlag.');
-  gruende.push('In den letzten zwei Jahren wurde nichts empfohlen, und es läuft nichts. Genau danach fragt die UKV.');
+  gruende.push('In den letzten zwei Jahren wurde nichts empfohlen, und es läuft nichts.');
   if (a.q3 === 'ja') gruende.push('Prothese und älterer Zahnersatz sind bei der UKV keine Antragsfrage. Bei Parodontose gilt nur ein Ausschluss für deren Behandlung.');
   else if (a.q4 === 'leistung') gruende.push('Du willst viel Leistung: Mit ZahnPRIVAT 100 zahlen Kasse und Tarif zusammen 100 % der Rechnung.');
   else if (a.q4 === 'preis') gruende.push('Du willst einen günstigen Einstieg: ZahnPRIVAT 75 ist die günstigste Stufe der UKV.');
@@ -439,53 +439,58 @@ export default function ZahnStrecke({ definition }) {
     || null;
   const zeigeZurueck = phase !== 'fragen' || gestellt.length > 1;
 
+  const rechts = (
+    <>
+      <section>
+        <FriendlyIcon kind="dental" size="md" tone="mint" />
+        <h2 className="mt-4 font-display text-2xl font-extrabold leading-tight">So geht es weiter</h2>
+        <ol className="mt-5 space-y-4">
+          {['Kurze Fragen zu deinen Zähnen', 'Dein passender Tarif mit Beitrag', 'Antrag in Ruhe ausfüllen und absenden'].map((punkt, stelle) => {
+            const jetzt = (stelle === 0 && phase === 'fragen') || (stelle === 1 && phase !== 'fragen');
+            return (
+              <li key={punkt} className="flex items-center gap-3 text-base leading-6">
+                <span aria-hidden="true" className={cx('flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-display font-extrabold', jetzt ? 'bg-home-mint text-home-midnight' : 'bg-white/10 text-slate-300')}>{stelle + 1}</span>
+                <span className={cx('min-w-0', jetzt ? 'font-semibold text-white' : 'text-slate-300')}>{punkt}</span>
+              </li>
+            );
+          })}
+        </ol>
+        <p className="mt-6 text-base leading-6 text-slate-300">Deine Antworten bleiben auf dieser Seite. Gesendet wird erst dein fertiger Antrag.</p>
+      </section>
+      <VertrauenPunkte definition={zielDefinition} className="[@media(max-height:820px)]:hidden" />
+      <NitaDunkel sparte="zahn" />
+    </>
+  );
+
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pt-5 sm:px-6 sm:pt-8" data-zahn-vorab="" data-bildschirm={`vorab:${phase === 'fragen' ? frage : phase}`}>
-      <div className="flex flex-1 flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-8">
-        <div className={cx('flex min-w-0 flex-1 flex-col lg:p-10', 'lg:rounded-[1.75rem] lg:bg-white lg:shadow-[0_1px_2px_rgba(7,17,31,0.06),0_24px_48px_-28px_rgba(7,17,31,0.28)] lg:ring-1 lg:ring-home-midnight/[0.06]')}>
-          <div className="pb-6">{inhalt}</div>
-          {(zeigeZurueck || weiterKnopf) && (
-            <div className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none">
-              <div className="flex items-center gap-3 lg:justify-between">
-                {zeigeZurueck && (
-                  <Button variant="secondary" onClick={zurueck} aria-label="Zurück zur vorigen Frage" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6">
-                    <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-                    <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
-                  </Button>
-                )}
-                {weiterKnopf?.href && (
-                  <a href={weiterKnopf.href} data-zaehler-ignorieren="" className={buttonClass('primary', 'min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10')} {...weiterKnopf.data}>
-                    {weiterKnopf.text}
-                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </a>
-                )}
-                {weiterKnopf && !weiterKnopf.href && (
-                  <Button onClick={weiterKnopf.onClick} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" {...weiterKnopf.data}>
-                    {weiterKnopf.text}
-                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </Button>
-                )}
-              </div>
+    <GeteilteSeite rechts={rechts} data-zahn-vorab="" data-bildschirm={`vorab:${phase === 'fragen' ? frage : phase}`}>
+      <div className="flex min-w-0 flex-1 flex-col lg:pt-4">
+        <div className="pb-6">{inhalt}</div>
+        {(zeigeZurueck || weiterKnopf) && (
+          <div className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:mb-12 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none">
+            <div className="flex items-center gap-3 lg:justify-between">
+              {zeigeZurueck && (
+                <Button variant="secondary" onClick={zurueck} aria-label="Zurück zur vorigen Frage" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6">
+                  <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+                  <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
+                </Button>
+              )}
+              {weiterKnopf?.href && (
+                <a href={weiterKnopf.href} data-zaehler-ignorieren="" className={buttonClass('primary', 'min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10')} {...weiterKnopf.data}>
+                  {weiterKnopf.text}
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {weiterKnopf && !weiterKnopf.href && (
+                <Button onClick={weiterKnopf.onClick} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" {...weiterKnopf.data}>
+                  {weiterKnopf.text}
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </Button>
+              )}
             </div>
-          )}
-        </div>
-        <aside className="hidden space-y-4 lg:sticky lg:top-6 lg:block">
-          <section className={cx(KARTE, 'p-5')}>
-            <h2 className="font-display text-base font-extrabold text-home-midnight">So geht es weiter</h2>
-            <ol className="mt-3 space-y-3">
-              {['Kurze Fragen zu deinen Zähnen', 'Dein passender Tarif mit Beitrag', 'Antrag in Ruhe ausfüllen und absenden'].map((punkt, stelle) => (
-                <li key={punkt} className="flex gap-3 text-base leading-6 text-home-midnight">
-                  <span aria-hidden="true" className={cx('flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-display font-extrabold', (stelle === 0 && phase === 'fragen') || (stelle === 1 && phase !== 'fragen') ? 'bg-home-midnight text-white' : 'bg-home-ice text-home-slate')}>{stelle + 1}</span>
-                  <span className="min-w-0 pt-0.5">{punkt}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-4 border-t border-home-midnight/10 pt-3 text-base leading-6 text-home-slate">Deine Antworten bleiben auf dieser Seite. Gesendet wird erst dein fertiger Antrag.</p>
-          </section>
-          <HilfeKarte sparte="zahn" />
-        </aside>
+          </div>
+        )}
       </div>
-      <div className="h-6 lg:h-12" aria-hidden="true" />
-    </div>
+    </GeteilteSeite>
   );
 }

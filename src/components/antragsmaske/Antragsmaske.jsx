@@ -17,7 +17,7 @@ import {
 import {
   Button, TRENNUNG, cx, schuetze, sofortScrollen,
 } from '@/components/antrag/ui';
-import SchrittTarif, { fehlerTarif } from './SchrittTarif';
+import SchrittTarif, { fehlerTarif, kernZeilen } from './SchrittTarif';
 import SchrittFrage, { SchrittHinweis, fehlerFrage, fehlerHinweis } from './SchrittFrage';
 import SchrittBeitrag from './SchrittBeitrag';
 import SchrittDaten, { fehlerAnschrift, fehlerPerson } from './SchrittDaten';
@@ -28,7 +28,7 @@ import SchrittUnterlagenDownload from './SchrittUnterlagenDownload';
 import { fehlerUnterlagen } from './unterlagenPflicht';
 import { TelefonAusweg } from './teile';
 import {
-  Begruessung, DeinSchutzKarte, HilfeKarte, KARTE, KARTE_LG, Schrittleiste,
+  Begruessung, GeteilteSeite, KARTE, NitaDunkel, Schrittleiste, SchutzPanel, VertrauenPunkte,
 } from './rahmen';
 import { kurzName } from './anzeige';
 
@@ -626,9 +626,17 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
 
   if (ergebnis) {
     return (
-      <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
-        <Danke definition={definition} ergebnis={ergebnis} titelRef={h1Ref} />
-      </div>
+      <GeteilteSeite
+        data-danke-seite=""
+        rechts={(
+          <>
+            <VertrauenPunkte definition={definition} />
+            <NitaDunkel sparte={definition.sparte} />
+          </>
+        )}
+      >
+        <div className="pb-12"><Danke definition={definition} ergebnis={ergebnis} titelRef={h1Ref} /></div>
+      </GeteilteSeite>
     );
   }
 
@@ -744,60 +752,60 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const gewaehlteBausteine = (definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id));
   const leisteSichtbar = zeigeZurueck || weiterText;
 
+  const rechts = (
+    <>
+      <SchutzPanel definition={definition} tarif={tarif} bausteine={gewaehlteBausteine} beginn={beginn} preis={anzeigePreis} kernzeilen={tarif ? kernZeilen(tarif, definition.versicherer.id).zeilen : []} />
+      <VertrauenPunkte definition={definition} className="[@media(max-height:960px)]:hidden" />
+      <NitaDunkel sparte={definition.sparte} />
+    </>
+  );
+
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col break-words px-4 pt-5 sm:px-6 sm:pt-8" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
+    <GeteilteSeite rechts={rechts} className="break-words" data-antragsmaske={definition.sparte} data-bildschirm={pos.id}>
       <Schrittleiste abschnitte={abschnitte} aktuell={schritt} />
 
-      <div className="mt-5 flex flex-1 flex-col lg:mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-8">
-        <div className={cx('flex min-w-0 flex-1 flex-col lg:p-10', KARTE_LG)}>
-          {pos.id === 'tarif' && !pruefen && !vorab?.daten && !pos.aendern && <Begruessung definition={definition} />}
-          <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
-            <h1 ref={h1Ref} tabIndex={-1} className={cx('min-w-0 break-words font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl', TRENNUNG)}>
-              <span className="sr-only">Schritt {schritt} von {schrittAnzahl}: </span>
-              {aktuell?.titel}
-            </h1>
-            {pruefen && <TelefonAusweg sparte={definition.sparte} className="-ml-1 sm:mt-1" />}
-          </div>
-          {(pruefen?.kennzeile || !pruefen) && <p className={cx('mt-1 text-base text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</p>}
-
-          <div className="mt-5 pb-6 sm:mt-7">{inhalt}</div>
-
-          {leisteSichtbar && (
-            <div
-              ref={leisteRef}
-              data-leiste=""
-              className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-6 sm:px-6 lg:static lg:mx-0 lg:border-home-midnight/10 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none [@media(max-height:480px)]:static"
-            >
-              <div className="flex items-center gap-3 lg:justify-between">
-                {zeigeZurueck && (
-                  <Button variant="secondary" onClick={zurueck} aria-label="Zurück" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6">
-                    <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-                    <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
-                  </Button>
-                )}
-                {anzeigePreis && pos.id !== 'beitrag' && (
-                  <p className="min-w-0 shrink-0 leading-tight lg:hidden" aria-hidden="true" data-leiste-preis="">
-                    <span className="block whitespace-nowrap font-display text-lg font-extrabold text-home-midnight">{euro(anzeigePreis.betrag)}</span>
-                    <span className="block whitespace-nowrap text-base text-home-slate">{anzeigePreis.einheit}</span>
-                  </p>
-                )}
-                {weiterText && (
-                  <Button onClick={weiter} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" data-weiter="">
-                    {weiterText}
-                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </Button>
-                )}
-              </div>
-            </div>
-          )}
+      <div className="mt-6 flex min-w-0 flex-1 flex-col lg:mt-10">
+        {pos.id === 'tarif' && !pruefen && !vorab?.daten && !pos.aendern && <Begruessung definition={definition} />}
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+          <h1 ref={h1Ref} tabIndex={-1} className={cx('min-w-0 break-words font-display text-[1.75rem] font-extrabold leading-tight tracking-[-0.02em] text-home-midnight outline-none sm:text-4xl lg:text-[2.6rem]', TRENNUNG)}>
+            <span className="sr-only">Schritt {schritt} von {schrittAnzahl}: </span>
+            {aktuell?.titel}
+          </h1>
+          {pruefen && <TelefonAusweg sparte={definition.sparte} className="-ml-1 sm:mt-1" />}
         </div>
+        {(pruefen?.kennzeile || !pruefen) && <p className={cx('mt-1 text-base text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</p>}
 
-        <aside className="hidden space-y-4 lg:sticky lg:top-6 lg:block">
-          <DeinSchutzKarte definition={definition} tarif={tarif} bausteine={gewaehlteBausteine} beginn={beginn} preis={anzeigePreis} />
-          <HilfeKarte sparte={definition.sparte} />
-        </aside>
+        <div className="mt-5 pb-6 sm:mt-8">{inhalt}</div>
+
+        {leisteSichtbar && (
+          <div
+            ref={leisteRef}
+            data-leiste=""
+            className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:mb-12 lg:border-home-midnight/10 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none [@media(max-height:480px)]:static"
+          >
+            <div className="flex items-center gap-3 lg:justify-between">
+              {zeigeZurueck && (
+                <Button variant="secondary" onClick={zurueck} aria-label="Zurück" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6">
+                  <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+                  <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
+                </Button>
+              )}
+              {anzeigePreis && pos.id !== 'beitrag' && (
+                <p className="min-w-0 shrink-0 leading-tight lg:hidden" aria-hidden="true" data-leiste-preis="">
+                  <span className="block whitespace-nowrap font-display text-lg font-extrabold text-home-midnight">{euro(anzeigePreis.betrag)}</span>
+                  <span className="block whitespace-nowrap text-base text-home-slate">{anzeigePreis.einheit}</span>
+                </p>
+              )}
+              {weiterText && (
+                <Button onClick={weiter} className="min-w-0 flex-1 lg:ml-auto lg:flex-none lg:px-10" data-weiter="">
+                  {weiterText}
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="h-6 lg:h-12" aria-hidden="true" />
-    </div>
+    </GeteilteSeite>
   );
 }

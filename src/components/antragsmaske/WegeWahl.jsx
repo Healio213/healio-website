@@ -87,7 +87,7 @@ export default function WegeWahl({
         <Dialog.Content
           lang="de"
           data-wegewahl={sparte}
-          className="fixed bottom-0 left-1/2 z-[121] max-h-[90dvh] w-full max-w-[460px] -translate-x-1/2 overflow-y-auto rounded-t-[1.75rem] border border-white/10 bg-home-midnight px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-7 font-sans text-white shadow-2xl outline-none sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 sm:rounded-[1.75rem] sm:p-8"
+          className="fixed bottom-0 left-1/2 z-[121] max-h-[90dvh] w-full max-w-[460px] -translate-x-1/2 lg:max-w-3xl lg:p-12 overflow-y-auto rounded-t-[1.75rem] border border-white/10 bg-home-midnight px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-7 font-sans text-white shadow-2xl outline-none sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 sm:rounded-[1.75rem] sm:p-8"
           onOpenAutoFocus={(event) => { event.preventDefault(); ersterWeg.current?.querySelector('a')?.focus(); }}
         >
           <Dialog.Close aria-label="Fenster schließen" className="absolute right-2 top-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-home-mint">
@@ -96,7 +96,7 @@ export default function WegeWahl({
           <img src="/healio-logo-white-web.svg" alt="Healio" width="100" height="40" className="mb-4 h-8 w-auto" />
           <Dialog.Title className="pr-8 font-display text-[26px] font-bold leading-[1.2] tracking-tight sm:text-[28px]">Wie möchtest du abschließen?</Dialog.Title>
           <Dialog.Description className="mt-3 text-base leading-6 text-slate-300">Gleicher Tarif, gleicher Beitrag. Du entscheidest, wie.</Dialog.Description>
-          <div ref={ersterWeg} className="mt-6 grid gap-3">
+          <div ref={ersterWeg} className="mt-6 grid gap-3 lg:mt-8 lg:grid-cols-2 lg:gap-4">
             <Weg
               icon="document"
               hervor

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Check, Lock, Phone,
 } from 'lucide-react';
@@ -9,9 +9,10 @@ import { FOKUS, cx, schuetze } from '@/components/antrag/ui';
 import { TERMIN_LINK, telefonLink } from './teile';
 import { produktAnzeige } from './anzeige';
 
-// Rahmen der Antragsmaske (12.11.2026): schlanker Kopf mit Logo zurück zur
-// Produktseite, „Sicher übertragen“ und dem Weg ans Telefon; Schrittleiste;
-// Karte „Dein Schutz“ und Hilfe-Karte. Keine Navigation, keine Messung.
+// Rahmen der Antragsmaske (12.11.2026): schlanker Kopf über die ganze Breite
+// mit Logo zurück zur Produktseite, „Sicher übertragen“ und dem Weg ans
+// Telefon; ab Desktop eine zweigeteilte Seite (links der Schritt, rechts die
+// stehende Nachtblau-Fläche „Dein Schutz“). Keine Navigation, keine Messung.
 
 export const PRODUKTSEITE = { ambulant: '/ambulant', zahn: '/zahn', stationaer: '/stationaer' };
 
@@ -35,15 +36,26 @@ function TelefonKopf({ sparte }) {
   );
 }
 
+// Auf breiten Bildschirmen wachsen Schrift und Abstände maßvoll mit (rem-Basis
+// nur auf dieser Seite, beim Verlassen zurück): 16 px bis etwa 1560 px Breite,
+// 17,6 px bei 1920, höchstens 18,5 px.
+const SCHRIFT_FLIESSEND = 'clamp(16px, calc(9px + 0.45vw), 18.5px)';
+
 export function MaskenRahmen({ sparte, children }) {
+  useEffect(() => {
+    const root = document.documentElement;
+    const vorher = root.style.fontSize;
+    root.style.fontSize = SCHRIFT_FLIESSEND;
+    return () => { root.style.fontSize = vorher; };
+  }, []);
   return (
     <div className="flex min-h-screen w-full flex-col bg-home-ice text-home-midnight">
       <header className="bg-home-midnight">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="flex h-16 w-full items-center justify-between gap-3 px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
           <a href={PRODUKTSEITE[sparte] || '/'} data-zaehler-ignorieren="" className={cx(FOKUS, 'rounded-lg focus-visible:ring-home-mint focus-visible:ring-offset-home-midnight')}>
             <img src="/healio-logo-white-web.svg" alt="Healio, zurück zur Produktseite" width="250" height="100" className="h-8 w-auto sm:h-9" />
           </a>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <p className="hidden items-center gap-1.5 text-sm font-semibold text-slate-200 md:flex">
               <Lock className="h-4 w-4 text-home-mint" aria-hidden="true" />
               Sicher übertragen
@@ -54,7 +66,7 @@ export function MaskenRahmen({ sparte, children }) {
       </header>
       <main className="flex flex-1 flex-col">{children}</main>
       <footer className="border-t border-home-midnight/10 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-5 gap-y-2 px-4 py-6 text-sm text-slate-600">
+        <div className="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 px-4 py-6 text-sm text-slate-600 sm:px-8 lg:px-12">
           <span className="inline-flex items-center gap-1.5 md:hidden"><Lock className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />Sicher übertragen</span>
           <span>© Healio GmbH</span>
           <a href="/impressum" target="_blank" rel="noopener" className="font-semibold underline underline-offset-2">Impressum</a>
@@ -62,6 +74,125 @@ export function MaskenRahmen({ sparte, children }) {
         </div>
       </footer>
     </div>
+  );
+}
+
+// Zweigeteilte Seite: links der Arbeitsbereich (hell), rechts ab 1024 px eine
+// durchgehende Nachtblau-Fläche bis zum Rand, die beim Scrollen stehen bleibt.
+// Der Inhalt links bleibt lesbar breit (zentriert), die Fläche wächst mit.
+export function GeteilteSeite({
+  rechts, children, className, ...props
+}) {
+  return (
+    <div className={cx('flex flex-1 flex-col lg:grid lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[minmax(0,58fr)_minmax(0,42fr)]', className)} {...props}>
+      <div className="flex min-w-0 flex-1 flex-col px-4 pt-5 sm:px-8 sm:pt-8 lg:px-12 lg:pt-10 xl:px-16 2xl:px-24">
+        <div className="mx-auto flex w-full flex-1 flex-col lg:max-w-[52rem] 2xl:max-w-[60rem]">{children}</div>
+      </div>
+      {rechts && (
+        <aside className="relative hidden bg-home-midnight text-white lg:block">
+          <div className="sticky top-0 max-h-[calc(100dvh-4rem)] overflow-y-auto px-10 py-8 xl:px-14 2xl:px-20 2xl:py-12 [scrollbar-width:thin]">
+            <div className="mx-auto max-w-[30rem] space-y-6 2xl:space-y-8">{rechts}</div>
+          </div>
+        </aside>
+      )}
+    </div>
+  );
+}
+
+// Vertrauenspunkte und Nita auf der Nachtblau-Fläche.
+export function VertrauenPunkte({ definition, className }) {
+  const punkte = [
+    'Sicher übertragen. Deine Angaben gehen erst mit dem Absenden raus.',
+    definition ? `Der Vertrag kommt direkt von ${definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`}.` : 'Der Vertrag kommt direkt vom Versicherer.',
+    'Alle Unterlagen bekommst du per E-Mail über einen geschützten Link.',
+  ];
+  return (
+    <ul className={cx('space-y-3', className)} data-vertrauen="">
+      {punkte.map((punkt) => (
+        <li key={punkt} className="flex gap-3 text-base leading-6 text-slate-200">
+          <span aria-hidden="true" className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-home-mint/15"><Check className="h-3.5 w-3.5 text-home-mint" strokeWidth={3} /></span>
+          <span className="min-w-0">{schuetze(punkt)}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function NitaDunkel({ sparte }) {
+  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  return (
+    <section aria-label="Hilfe" className="flex items-center gap-4 rounded-[1.4rem] bg-white/[0.06] p-4 ring-1 ring-white/10">
+      <img src="/nita-avatar.jpg" alt="" width="56" height="56" className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-home-mint/50" />
+      <div className="min-w-0">
+        <p className="font-display text-base font-extrabold">Lieber gemeinsam?</p>
+        <p className="text-base leading-6 text-slate-300">{telefon ? 'Nita geht den Antrag am Telefon mit dir durch.' : 'Wir gehen den Antrag persönlich mit dir durch.'}</p>
+        <a href={telefon ? telefonLink(sparte) : TERMIN_LINK} data-zaehler-ignorieren="" className="mt-1 inline-flex min-h-11 items-center font-semibold text-home-mint-active underline underline-offset-4 outline-none focus-visible:ring-[3px] focus-visible:ring-home-mint">
+          {telefon ? 'Zusammen am Telefon' : 'Termin vereinbaren'}
+        </a>
+      </div>
+    </section>
+  );
+}
+
+// „Dein Schutz“ auf der Nachtblau-Fläche: Versicherer, Tarif, Beginn, Beitrag
+// groß, darunter die Kernleistungen der gewählten Stufe.
+export function SchutzPanel({
+  definition, tarif, bausteine = [], beginn, preis, kernzeilen = [],
+}) {
+  const produkt = produktAnzeige(definition.sparte);
+  return (
+    <section aria-label="Dein Schutz" data-dein-schutz="">
+      <div className="flex items-center gap-4">
+        <FriendlyIcon kind={produkt.icon} size="md" tone="mint" />
+        <div className="min-w-0">
+          <h2 className="font-display text-2xl font-extrabold leading-tight">{produkt.schutz}</h2>
+          <p className="text-base leading-6 text-slate-300">bei {schuetze(definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`)}</p>
+        </div>
+      </div>
+      <div className="mt-5" aria-live="polite">
+        {preis ? (
+          <>
+            <p className="text-base text-home-mint-active">{preis.einheit === 'im Jahr' ? 'Dein Beitrag im Jahr' : 'Dein Beitrag im Monat'}</p>
+            <p className="mt-1 whitespace-nowrap font-display text-[2.75rem] font-extrabold leading-none tracking-[-0.03em] 2xl:text-[3.25rem]">{euro(preis.betrag)}</p>
+            {preis.hinweis && <p className="mt-2 text-base leading-6 text-slate-300">{preis.hinweis}</p>}
+          </>
+        ) : (
+          <p className="text-base leading-7 text-slate-300">Sobald dein Geburtsdatum{definition.beitrag?.art === 'dienst' ? ' und deine Postleitzahl' : ''} da {definition.beitrag?.art === 'dienst' ? 'sind' : 'ist'}, siehst du hier deinen Beitrag.</p>
+        )}
+      </div>
+      <dl className="mt-5 divide-y divide-white/10 border-y border-white/10 text-base">
+        <div className="flex justify-between gap-4 py-2.5">
+          <dt className="text-slate-300">Tarif</dt>
+          <dd className="text-right font-semibold">{tarif ? tarif.name : <span className="font-normal text-slate-400">noch offen</span>}</dd>
+        </div>
+        {bausteine.map((baustein) => (
+          <div key={baustein.id} className="flex justify-between gap-4 py-2.5">
+            <dt className="text-slate-300">Dazu</dt>
+            <dd className="text-right font-semibold">{baustein.name}</dd>
+          </div>
+        ))}
+        <div className="flex justify-between gap-4 py-2.5">
+          <dt className="text-slate-300">Beginn</dt>
+          <dd className="text-right font-semibold">{beginn?.label || <span className="font-normal text-slate-400">noch offen</span>}</dd>
+        </div>
+      </dl>
+      {tarif && kernzeilen.length > 0 && (
+        <div className="mt-5" data-kernleistungen="">
+          <p className="text-base font-semibold text-slate-300">Das steckt in {tarif.name}</p>
+          <ul className="mt-2 space-y-1.5">
+            {kernzeilen.slice(0, 5).map(([label, wert]) => (
+              <li key={label} className="flex items-start justify-between gap-4 text-base leading-6">
+                <span className="flex min-w-0 gap-2 text-slate-200">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-home-mint" strokeWidth={3} aria-hidden="true" />
+                  <span className="min-w-0">{label}</span>
+                </span>
+                {wert && <span className={cx('max-w-[50%] text-right font-semibold', wert === 'nicht enthalten' ? 'font-normal text-slate-400' : 'text-white')}>{wert}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -101,7 +232,7 @@ export function Schrittleiste({ abschnitte, aktuell }) {
               >
                 {fertig ? <Check className="h-4 w-4" strokeWidth={3} /> : nummer}
               </span>
-              <span className={cx('mt-2 px-1 text-base leading-tight', jetzt ? 'font-bold text-home-midnight' : 'text-home-slate')}>{abschnitt.name}</span>
+              <span lang="de" className={cx('mt-2 max-w-full px-0.5 leading-tight [hyphens:auto] [overflow-wrap:anywhere]', anzahl > 8 ? 'text-[16px]' : 'text-base', jetzt ? 'font-bold text-home-midnight' : 'text-home-slate')}>{abschnitt.name}</span>
             </li>
           );
         })}

@@ -101,14 +101,17 @@ function DienstBeitrag({
 }
 
 const ZEILEN_SICHTBAR = 5;
+const ZEILEN_HANDY = 3;
 
 function Stufenkarte({
-  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen, versicherer,
+  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen, versicherer, platzHalten,
 }) {
   const { kopf, zeilen } = kernZeilen(tarif, versicherer);
   // Zeilen nur, wenn alle Stufen welche haben (gleich große Karten); sonst unter „Alle Leistungen“.
   const sichtbar = zeigeZeilen ? zeilen.slice(0, ZEILEN_SICHTBAR) : [];
   const mehr = zeilen.length > sichtbar.length || Boolean(tarif.details);
+  // Handy: nur drei Kernzeilen in der Karte, der Rest unter „Alle Leistungen“.
+  const mehrHandy = !mehr && sichtbar.length > ZEILEN_HANDY;
   return (
     <div className="flex h-full min-w-0 flex-col" data-stufe={tarif.id}>
       <label className="relative block min-w-0 flex-1 cursor-pointer">
@@ -153,8 +156,8 @@ function Stufenkarte({
           {kopf && sichtbar.length > 0 && <span className="mt-3 block text-base font-bold text-home-midnight">{kopf}</span>}
           {sichtbar.length > 0 && (
             <span className={cx('block divide-y divide-home-midnight/10 border-t border-home-midnight/10', kopf ? 'mt-1' : 'mt-3')}>
-              {sichtbar.map(([label, wert]) => (
-                <span key={label} className={cx('flex gap-x-3 py-2 text-base leading-6', wert.length > 12 ? 'flex-col' : 'items-start justify-between')}>
+              {sichtbar.map(([label, wert], stelle) => (
+                <span key={label} className={cx('gap-x-3 py-2 text-base leading-6', wert.length > 12 ? 'flex-col' : 'items-start justify-between', stelle >= ZEILEN_HANDY ? 'hidden sm:flex' : 'flex')}>
                   <span className="flex min-w-0 gap-2 text-home-slate">
                     {!wert && <Check className="mt-1 h-4 w-4 shrink-0 text-emerald-700" strokeWidth={3} aria-hidden="true" />}
                     <span className="min-w-0">{label}</span>
@@ -166,9 +169,9 @@ function Stufenkarte({
           )}
         </span>
       </label>
-      {!mehr && <span className="mt-1 block min-h-11" aria-hidden="true" />}
-      {mehr && (
-        <details className="group mt-1 px-1">
+      {!mehr && platzHalten && <span className={cx('mt-1 min-h-11', mehrHandy ? 'hidden sm:block' : 'block')} aria-hidden="true" />}
+      {(mehr || mehrHandy) && (
+        <details className={cx('group mt-1 px-1', mehrHandy && 'sm:hidden')}>
           <summary className={cx(FOKUS, 'inline-flex min-h-11 cursor-pointer list-none items-center gap-1.5 rounded-lg text-base font-semibold text-emerald-800 underline underline-offset-4 [&::-webkit-details-marker]:hidden')}>
             Alle Leistungen<span className="sr-only"> von {tarif.name}</span>
             <ChevronDown className="h-4 w-4 transition group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
@@ -203,14 +206,22 @@ export default function SchrittTarif({
   const empfehlung = empfohlen || null;
   // Handy: die gewählte Stufe beim Start in den sichtbaren Bereich der Wischkarten holen.
   const stufenRef = useRef(null);
+  const [sichtbareStufe, setSichtbareStufe] = useState(0);
+  const beimWischen = () => {
+    const leiste = stufenRef.current;
+    if (!leiste) return;
+    const breite = leiste.firstElementChild?.getBoundingClientRect().width || 1;
+    setSichtbareStufe(Math.min(anzahl - 1, Math.round(leiste.scrollLeft / (breite + 12))));
+  };
   useEffect(() => {
     const leiste = stufenRef.current;
     const gewaehlt = leiste?.querySelector('input[name="tarif"]:checked')?.closest('[data-stufe]')?.parentElement;
     if (leiste && gewaehlt && leiste.scrollWidth > leiste.clientWidth) leiste.scrollLeft = Math.max(0, gewaehlt.offsetLeft - 16);
+    beimWischen();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <section aria-labelledby="tarif-angaben" className="space-y-3">
         <h2 id="tarif-angaben" ref={ueberschriftRef} tabIndex={-1} className="scroll-mt-4 font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
           {brauchtPlz(definition) ? 'Zwei Angaben für deinen Beitrag' : 'Eine Angabe für deinen Beitrag'}
@@ -266,7 +277,7 @@ export default function SchrittTarif({
         </div>
         {definition.zahlweiseImTarif && (
           <Gruppe legend="Wie möchtest du zahlen?" fehlerId="fehler-zahlweise" error={fehler.zahlweise}>
-            <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:max-w-2xl">
+            <div className="grid grid-cols-2 gap-2 sm:max-w-2xl">
               {definition.zahlung.zahlweisen.map((zahlweise, stelle) => (
                 <OptionCard
                   key={zahlweise.id}
@@ -293,11 +304,12 @@ export default function SchrittTarif({
         {/* Handy: Wischkarten; ab Tablet nebeneinander, gleich groß. */}
         <div
           className={cx(
-            'relative -mx-4 mt-2 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pt-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden',
+            'relative -mx-4 mt-2 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 pt-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:snap-none sm:scroll-px-0 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden',
             anzahl === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2',
           )}
           data-stufen=""
           ref={stufenRef}
+          onScroll={beimWischen}
         >
           {definition.tarife.map((tarif, stelle) => (
             <div key={tarif.id} className="w-[80%] max-w-[20rem] shrink-0 snap-start sm:w-auto sm:max-w-none">
@@ -313,11 +325,18 @@ export default function SchrittTarif({
                 onWaehlen={() => set({ tarif: tarif.id })}
                 zeigeZeilen={definition.tarife.every((eintrag) => kernZeilen(eintrag, definition.versicherer.id).zeilen.length > 0)}
                 versicherer={definition.versicherer.id}
+                platzHalten={definition.tarife.some((eintrag) => eintrag.details || kernZeilen(eintrag, definition.versicherer.id).zeilen.length > ZEILEN_SICHTBAR)}
               />
             </div>
           ))}
         </div>
-        {anzahl > 1 && <p className="mt-1 text-base text-home-slate sm:hidden" aria-hidden="true">Wische für alle {anzahl} Stufen.</p>}
+        {anzahl > 1 && (
+          <div className="mt-2 flex items-center justify-center gap-2 sm:hidden" aria-hidden="true" data-stufen-punkte="">
+            {definition.tarife.map((eintrag, stelle) => (
+              <span key={eintrag.id} className={cx('h-2 rounded-full transition-all duration-200', stelle === sichtbareStufe ? 'w-6 bg-emerald-600' : 'w-2 bg-home-midnight/20')} />
+            ))}
+          </div>
+        )}
         {ALLE_STUFEN_HINWEIS[definition.versicherer.id] && <p className="mt-2 flex items-center gap-2 text-base text-home-midnight"><Check className="h-4 w-4 text-emerald-700" strokeWidth={3} aria-hidden="true" />{ALLE_STUFEN_HINWEIS[definition.versicherer.id]}</p>}
 
         {(definition.bausteine || []).map((baustein) => {
@@ -429,7 +448,7 @@ export default function SchrittTarif({
       </Gruppe>
 
       {definition.tarifFussnote && <p className="rounded-[1rem] bg-home-ice px-4 py-3 text-base leading-7 text-home-slate">{schuetze(definition.tarifFussnote)}</p>}
-      <p className="text-base leading-7 text-home-slate">
+      <p className="hidden text-base leading-7 text-home-slate sm:block">
         Unsicher bei der Stufe?{' '}
         <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Lass dich beraten<NeuerTab /></a>
       </p>
