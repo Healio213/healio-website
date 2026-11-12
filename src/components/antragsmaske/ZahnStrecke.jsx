@@ -111,7 +111,7 @@ function ergebnisTexte(ziel, a, definition) {
     return {
       gruende: [
         'Deine anstehende oder schon begonnene Behandlung ist über ZAHN Sofort rückwirkend mitversichert.',
-        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Deshalb passt der Antrag ohne Zuschlag, die Bayerische rechnet keine Zuschläge.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Nach deinen Antworten passt du zu den Annahmefragen der Bayerischen.',
         'Keine Wartezeiten, der Schutz gilt ab Beginn.',
       ],
       gutZuWissen: [ergebnis.reasons[0], ergebnis.reasons[2], ergebnis.warning],
@@ -121,7 +121,7 @@ function ergebnisTexte(ziel, a, definition) {
     return {
       gruende: [
         'Deine Behandlung ist abgerechnet. Die Fragen der Bayerischen betreffen den heutigen Zustand deiner Zähne, und der passt.',
-        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Die Bayerische rechnet keine Zuschläge.',
+        'Dir fehlen keine Zähne und es gibt keine Vorgeschichte. Nach deinen Antworten passt du zu den Annahmefragen der Bayerischen.',
         'Keine Wartezeiten in allen drei Stufen.',
       ],
       gutZuWissen: [
