@@ -49,6 +49,15 @@ export function folgeAngaben(frage, antworten, kontext) {
     .filter((eintrag) => eintrag.antwort);
 }
 
+// Ist der Kurztitel nur der Anfang oder die gekürzte Fassung des Wortlauts
+// (stationär), zeigt die Liste ihn nicht zusätzlich: nur Anzeige, die Daten
+// bleiben unverändert. Echte Kurztitel („Frage 1b: Atemwege …“) bleiben.
+const vergleichbar = (text) => String(text || '').replace(/(\s*(…|\.\.\.))+\s*$/, '').replace(/[?:.\s]+$/, '').replace(/\s+/g, ' ').trim().toLowerCase();
+export function kurztitelDoppelt(kurz, wortlaut) {
+  const k = vergleichbar(kurz);
+  return Boolean(k) && vergleichbar(wortlaut).startsWith(k);
+}
+
 function Wortlaut({ text }) {
   if (text.length <= KURZ) return <span className={cx('block text-base leading-6 text-home-midnight', TRENNUNG_LANG)}>{text}</span>;
   return (
@@ -73,7 +82,9 @@ export default function Antwortenliste({
         return (
           <li key={frage.id} className="flex items-start justify-between gap-3 border-t border-slate-300 py-2 first:border-t-0" data-antwort-zu={frage.id}>
             <span className="min-w-0 flex-1">
-              <span className={cx('block text-base leading-6 text-home-slate', TRENNUNG_LANG)}>{frage.kurz || frage.titel}</span>
+              {!kurztitelDoppelt(frage.kurz || frage.titel, frageWortlaut(frage)) && (
+                <span className={cx('block text-base leading-6 text-home-slate', TRENNUNG_LANG)}>{frage.kurz || frage.titel}</span>
+              )}
               <Wortlaut text={frageWortlaut(frage)} />
               <span className="mt-0.5 block break-words hyphens-auto text-base font-bold leading-6 text-home-midnight">{antwortText(frage, daten.antworten, kontext)}</span>
               {folge.length > 0 && (
