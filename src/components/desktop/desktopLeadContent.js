@@ -54,7 +54,7 @@ const content = {
       description: 'Ein Implantat kostet schnell 3.000 EUR, die Kasse zahlt nur den Festzuschuss. ZahnPRIVAT 100 erstattet bis zu 100 % der erstattungsfähigen Kosten für Implantate, Kronen und Prophylaxe, einschließlich Kassenleistung. Dein Kassenbonus kann den Versicherungsbeitrag je nach Kasse und Aktivitäten ganz oder teilweise ausgleichen.',
       condition: 'Bis zu 100 % Erstattung nach Tarif und Kassenleistung. Annahme, Leistungsstaffeln und bereits empfohlene oder laufende Behandlungen werden gesondert geprüft.',
       cta: 'Passenden Zahnschutz prüfen',
-      hint: 'Vier kurze Fragen. Ohne Kontaktdaten. Die verbindliche Annahme erfolgt im Antrag.',
+      hint: 'Eine Minute, vier kurze Fragen. Die verbindliche Annahme erfolgt im Antrag.',
       panelTitle: 'Deine Situation entscheidet.',
       panelText: '',
       benefits: [
@@ -136,7 +136,7 @@ const content = {
       description: 'An implant can easily cost EUR 3,000, and your health fund only pays a fixed subsidy. ZahnPRIVAT 100 reimburses up to 100% of eligible costs for implants, crowns and preventive dental care, including statutory benefits. Depending on your fund and activities, your bonus may offset some or all of the insurance premium.',
       condition: 'Up to 100% reimbursement subject to the plan and statutory contribution. Benefit scales, acceptance and recommended or ongoing treatment are checked separately.',
       cta: 'Check suitable dental cover',
-      hint: 'Four short questions. No contact details. Binding acceptance takes place in the application.',
+      hint: 'One minute, four short questions. Binding acceptance takes place in the application.',
       panelTitle: 'Your situation determines the pathway.',
       panelText: 'Two options with different requirements.',
       benefits: [

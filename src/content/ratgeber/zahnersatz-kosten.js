@@ -340,7 +340,7 @@ export const article = {
           type: 'path',
           to: '/zahn#zahn-check',
           icon: 'dental',
-          text: 'Vier kurze Fragen, keine Kontaktdaten: Der Zahn-Check zeigt, welcher der beiden Wege bei dir offen ist.',
+          text: 'Vier kurze Fragen, rund eine Minute: Der Zahn-Check zeigt, welcher der beiden Wege bei dir offen ist.',
           label: 'Zahn-Check starten',
         },
       ],

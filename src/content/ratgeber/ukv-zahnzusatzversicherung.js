@@ -240,7 +240,7 @@ export const article = {
           type: 'path',
           to: '/zahn#zahn-check',
           icon: 'dental',
-          text: 'Vier kurze Fragen, keine Kontaktdaten: Der Zahn-Check zeigt, welcher Weg bei deiner Zahnsituation offen ist.',
+          text: 'Vier kurze Fragen, rund eine Minute: Der Zahn-Check zeigt, welcher Weg bei deiner Zahnsituation offen ist.',
           label: 'Zahn-Check starten',
         },
       ],
@@ -253,7 +253,7 @@ export const article = {
           type: 'steps',
           heading: 'In drei Schritten zum Antrag',
           items: [
-            { title: 'Zahn-Check', text: 'Er dauert etwa eine Minute, braucht keine Kontaktdaten und zeigt den Tarifweg für deine Situation. Deine Antworten werden weder gespeichert noch übertragen.' },
+            { title: 'Zahn-Check', text: 'Er dauert etwa eine Minute, hat vier kurze Fragen und zeigt den Tarifweg für deine Situation. Deine Antworten werden weder gespeichert noch übertragen.' },
             { title: 'Tarifrechner der UKV', text: 'Du wirst zur ZahnPRIVAT-Abschlussstrecke der UKV weitergeleitet, wählst dort die Stufe und siehst deinen Beitrag, bevor du den Antrag abschickst.' },
             { title: 'Antrag und Gesundheitsfragen', text: 'Erst die UKV entscheidet im Antrag verbindlich über Annahme und Leistung. Mindestlaufzeit und Kündigungsfrist können je nach Tarif unterschiedlich sein, du findest sie vor dem Abschluss in den Verbraucherinformationen.' },
           ],

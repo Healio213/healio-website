@@ -144,7 +144,7 @@ export const article = {
           type: 'steps',
           heading: 'So gehst du vor',
           items: [
-            { title: 'Zahn-Check', text: 'Er dauert etwa eine Minute und braucht keine Kontaktdaten. Frage 1 trennt, ob in den letzten 2 Jahren etwas empfohlen wurde oder schon läuft.' },
+            { title: 'Zahn-Check', text: 'Er dauert etwa eine Minute und hat höchstens vier kurze Fragen. Frage 1 trennt, ob in den letzten 2 Jahren etwas empfohlen wurde oder schon läuft.' },
             { title: 'Sofortschutz berechnen', text: 'Ergibt der Check den Weg ZAHN Sofort, rechnest du den Baustein samt Zahntarif durch und siehst deinen Beitrag, bevor du den Antrag abschickst.' },
             { title: 'Antrag vor der Rechnung', text: 'Schließe ab, solange die Behandlung weder abgeschlossen noch abgerechnet ist. Die Bayerische entscheidet im Antrag verbindlich über Annahme und Leistungsumfang.' },
           ],

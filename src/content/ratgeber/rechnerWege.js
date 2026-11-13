@@ -24,7 +24,7 @@ const ZAHN = {
   icon: 'dental',
   eyebrow: 'Zahn-Check',
   title: 'Welcher Zahntarif passt zu dir?',
-  text: 'Vier kurze Fragen, rund eine Minute, keine Kontaktdaten. Danach siehst du, welchen Tarifweg du als Nächstes prüfen solltest.',
+  text: 'Vier kurze Fragen, rund eine Minute. Danach siehst du, welchen Tarifweg du als Nächstes prüfen solltest.',
   label: 'Zum Zahn-Check',
 };
 
