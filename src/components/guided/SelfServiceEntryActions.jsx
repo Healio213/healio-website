@@ -7,6 +7,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useReferrer } from '@/hooks/useReferrer';
 import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
+import { useStationaerSelection } from '@/lib/stationaer-selection';
 
 // Frank 01.11.2026: Auf /ambulant und /stationaer schließen Besucher in erster
 // Linie selbst online ab. Der Einstieg führt direkt in den SDK-Tarifrechner,
@@ -26,7 +27,14 @@ export default function SelfServiceEntryActions({ product, target, className = '
   const reduceMotion = useReducedMotion();
   const referrer = useReferrer();
   const stufe = useAmbulantStufe();
-  const sdkUrl = buildSdkUrl({ ref: referrer, tarifTypes: TARIFF_TYPES[product], ...(product === 'ambulant' ? { stufe } : {}) });
+  // Stationär: gleicher Tarif wie Tarifwahl und Schlussknopf, ohne Auswahl SP2 (13.11.2026).
+  const stationaerTarif = useStationaerSelection();
+  const sdkUrl = buildSdkUrl({
+    ref: referrer,
+    tarifTypes: TARIFF_TYPES[product],
+    ...(product === 'ambulant' ? { stufe } : {}),
+    ...(product === 'stationaer' ? { tarif: stationaerTarif } : {}),
+  });
   const en = lang === 'en';
   return (
     <div data-self-service-actions={product} className={`flex w-full flex-col items-start gap-2 ${className}`}>
