@@ -72,7 +72,9 @@ export default function SchrittZusammenfassung({
         </section>
 
         <Gruppe titel="Über dich">
-          <Pruefzeile label="Name" id="name" aendern={() => aendern('person')}>{[anrede?.label, f.vorname, f.nachname].filter(Boolean).join(' ')}</Pruefzeile>
+          <Pruefzeile label="Name" id="name" aendern={() => aendern('person')}>{[f.vorname, f.nachname].filter(Boolean).join(' ')}</Pruefzeile>
+          {/* Geschlecht (SDK, UKV) bzw. Anrede (Bayerische) als eigene Zeile, nicht in der Namenszeile. */}
+          {anrede && <Pruefzeile label={definition.person.anredeLegend || 'Anrede'} id="anrede" aendern={() => aendern('person')}>{anrede.label}</Pruefzeile>}
           <Pruefzeile label="Geburtsdatum" id="geburtsdatum" aendern={() => aendern('tarif')}>{geburtsdatumText}</Pruefzeile>
           <Pruefzeile label="Adresse" id="adresse" aendern={() => aendern('anschrift')}>{[f.strasse, f.hausnummer].filter(Boolean).join(' ')}, {f.plz} {f.ort}</Pruefzeile>
           <Pruefzeile label="Kontakt" id="kontakt" aendern={() => aendern('anschrift')}>

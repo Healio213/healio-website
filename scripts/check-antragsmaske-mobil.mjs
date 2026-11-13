@@ -19,6 +19,8 @@ const ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
 const arg = (name, standard) => { const stelle = args.indexOf(name); return stelle >= 0 ? args[stelle + 1] : standard; };
 const FOTOS = arg('--fotos', path.join(ROOT, 'tmp-maske-mobil'));
+// --nachsatz nachher: Fotos der Zusammenfassung zusätzlich als <name>-nachher.png (Vorher-Nachher-Vergleich).
+const NACHSATZ = arg('--nachsatz', '');
 const API_PORT = Number(arg('--api-port', 8812));
 const PORT = Number(arg('--port', 3048));
 const API = `http://127.0.0.1:${API_PORT}`;
@@ -63,7 +65,8 @@ const stoppe = () => prozesse.forEach((kind) => { try { kind.kill('SIGTERM'); } 
 async function schritt(page, strecke, nr, name) {
   await page.waitForTimeout(350);
   fs.mkdirSync(FOTOS, { recursive: true });
-  await page.screenshot({ path: path.join(FOTOS, `${strecke}-${String(nr).padStart(2, '0')}-${name}.png`), fullPage: true });
+  const endung = NACHSATZ && name === 'zusammenfassung' ? `-${NACHSATZ}` : '';
+  await page.screenshot({ path: path.join(FOTOS, `${strecke}-${String(nr).padStart(2, '0')}-${name}${endung}.png`), fullPage: true });
   const lage = await page.evaluate(() => {
     const breit = document.documentElement.scrollWidth > window.innerWidth;
     // Nur für Sehende sichtbare Elemente; Screenreader-Texte und Wischkarten-Leisten zählen nicht.
