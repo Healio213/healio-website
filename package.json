@@ -76,6 +76,8 @@
     "test:anfrage-zaehler": "node scripts/check-anfrage-zaehler.mjs",
     "test:baby-geplant-rechner": "node --test scripts/check-baby-geplant-rechner.mjs",
     "test:schwangerschaft-anlaesse": "node --test scripts/check-schwangerschaft-anlaesse.mjs",
+    "test:osteopathie-rechner": "node --test scripts/check-osteopathie-rechner.mjs",
+    "test:ambulant-anlaesse": "node --test scripts/check-ambulant-anlaesse.mjs",
     "antrag:mock": "node scripts/antrag-mock-server.mjs",
     "test:antrag-pruefseite": "node scripts/check-antrag-pruefseite-rendered.mjs",
     "antrag-gespraech:mock": "node scripts/antrag-gespraech-mock.mjs",

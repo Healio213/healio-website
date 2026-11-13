@@ -18,6 +18,8 @@ const NITA_PILL_ROUTES = new Set([
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Leiste wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',
+  // Ambulant-Anlassseite Osteopathie (13.11.2026): gleiche Leiste wie /ambulant.
+  '/ambulant/osteopathie',
 ]);
 
 const Layout = () => {
@@ -37,6 +39,8 @@ const Layout = () => {
     '/schwangerschaft',
     // Schwangerschafts-Anlassseite (11.11.2026): gleicher schmaler App-Hinweis wie /schwangerschaft.
     '/schwangerschaft/baby-geplant',
+    // Ambulant-Anlassseite Osteopathie (13.11.2026): gleicher schmaler App-Hinweis wie /ambulant.
+    '/ambulant/osteopathie',
     // Hebammenseite (08.10.2026): gleicher schmaler App-Hinweis im Fuß wie auf
     // den Produktseiten statt des großen Patienten-Banners.
     '/hebammen',

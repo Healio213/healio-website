@@ -31,6 +31,7 @@ import { planRatgeberLeistungsweg } from '@/content/leistungsweg';
 import { AlleBausteineLink, LeistungsHinweisEnde, LeistungsHinweisMitte } from '@/components/leistungsweg/LeistungsHinweis';
 import { getRatgeberEinstiege } from '@/content/altersvorsorgeZielgruppen/ratgeberZuordnung';
 import { getSchwangerschaftRatgeberEinstiege } from '@/content/schwangerschaftAnlaesse/ratgeberZuordnung';
+import { getAmbulantRatgeberEinstiege } from '@/content/ambulantAnlaesse/ratgeberZuordnung';
 
 // Tarifvergleich ambulant (15.10.2026): eigener Chunk, aber ohne
 // Sichtbarkeitsbremse geladen, damit alle Tarife im Prerender-HTML stehen.
@@ -42,6 +43,7 @@ const TarifvergleichPlatzhalter = () => (
 const AltersvorsorgeArtikelCheck = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeArtikelCheck'));
 const AltersvorsorgeEinstiege = React.lazy(() => import('@/components/sections/altersvorsorge/AltersvorsorgeEinstiege'));
 const SchwangerschaftAnlassEinstiege = React.lazy(() => import('@/components/sections/schwangerschaft/SchwangerschaftAnlassEinstiege'));
+const AmbulantAnlassEinstiege = React.lazy(() => import('@/components/sections/ambulant/AmbulantAnlassEinstiege'));
 
 /**
  * Wiederverwendbare Artikelvorlage fuer /ratgeber.
@@ -512,6 +514,12 @@ const RatgeberArticleLayout = ({ article, groupId = null }) => {
           {getSchwangerschaftRatgeberEinstiege(article.slug).length > 0 && (
             <React.Suspense fallback={null}>
               <SchwangerschaftAnlassEinstiege anlaesse={getSchwangerschaftRatgeberEinstiege(article.slug)} />
+            </React.Suspense>
+          )}
+
+          {getAmbulantRatgeberEinstiege(article.slug).length > 0 && (
+            <React.Suspense fallback={null}>
+              <AmbulantAnlassEinstiege anlaesse={getAmbulantRatgeberEinstiege(article.slug)} />
             </React.Suspense>
           )}
 

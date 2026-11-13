@@ -21,6 +21,8 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',
+  // Ambulant-Anlassseite Osteopathie (13.11.2026): gleiche Stille wie die Osteopathie-Ratgeber.
+  '/ambulant/osteopathie',
   // Meta-Zielseite fuer Schwangere (19.10.2026): gleiche Stille wie /schwangerschaft.
   '/check/schwangerschaft',
   '/check/schwangerschaft/danke',

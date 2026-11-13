@@ -81,6 +81,7 @@ const AltersvorsorgeRiesterKuendigenPage = React.lazy(() => import('@/pages/alte
 const AltersvorsorgeEhepartnerPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeEhepartnerPage'));
 const AltersvorsorgeKindergeldEndetPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeKindergeldEndetPage'));
 const BabyGeplantPage = React.lazy(() => import('@/pages/schwangerschaftAnlaesse/BabyGeplantPage'));
+const OsteopathiePage = React.lazy(() => import('@/pages/ambulantAnlaesse/OsteopathiePage'));
 const RatgeberPage = React.lazy(() => import('@/pages/RatgeberPage'));
 const RatgeberArtikelPage = React.lazy(() => import('@/pages/RatgeberArtikelPage'));
 const TikTokPage = React.lazy(() => import('@/pages/TikTokPage'));
@@ -272,6 +273,7 @@ function App() {
               <Route path="kontakt" element={<KontaktPage />} />
               <Route path="terminvereinbarung" element={<TerminvereinbarungPage />} />
               <Route path="ambulant" element={<AmbulantPage />} />
+              <Route path="ambulant/osteopathie" element={<OsteopathiePage />} />
               <Route path="kassenbonus" element={<KassenbonusPage />} />
               <Route path="schwangerschaft" element={<SchwangerschaftPage />} />
               <Route path="schwangerschaft/baby-geplant" element={<BabyGeplantPage />} />

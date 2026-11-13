@@ -19,6 +19,8 @@ export const ZAEHLER_PFAD_MUSTER = /^[a-z0-9/-]{1,160}$/;
 // Leistungsseiten, deren Aufruf als Weg zählt. Englische Fassungen mit.
 export const LEISTUNGSSEITEN = Object.freeze([
   '/ambulant',
+  // Ambulant-Anlassseite Osteopathie (13.11.2026).
+  '/ambulant/osteopathie',
   '/zahn',
   '/stationaer',
   '/schwangerschaft',

@@ -14,6 +14,8 @@ import { zielgruppenSeiten } from '../src/content/altersvorsorgeZielgruppen/inde
 import { zielgruppenSeoRoute } from '../src/content/altersvorsorgeZielgruppen/seo.js';
 import { schwangerschaftAnlassSeiten } from '../src/content/schwangerschaftAnlaesse/index.js';
 import { schwangerschaftAnlassSeoRoute } from '../src/content/schwangerschaftAnlaesse/seo.js';
+import { ambulantAnlassSeiten } from '../src/content/ambulantAnlaesse/index.js';
+import { ambulantAnlassSeoRoute } from '../src/content/ambulantAnlaesse/seo.js';
 import { applyBlogEditorialFixes } from '../src/lib/blogEditorialFixes.js';
 import { AMBULANT_FAQS } from '../src/components/sections/ambulant/ambulantFaqs.js';
 
@@ -106,6 +108,8 @@ export const seoRoutes = [
   ...zielgruppenSeiten.map(zielgruppenSeoRoute),
   // Schwangerschafts-Anlassseiten (Seitenplan 11.11.2026)
   ...schwangerschaftAnlassSeiten.map(schwangerschaftAnlassSeoRoute),
+  // Ambulant-Anlassseiten (Seitenplan 13.11.2026)
+  ...ambulantAnlassSeiten.map(ambulantAnlassSeoRoute),
   {
     path: '/altersvorsorgedepot/danke',
     title: 'Startinfos zum Altersvorsorgedepot | Healio',
