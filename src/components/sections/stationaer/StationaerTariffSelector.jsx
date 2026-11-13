@@ -11,6 +11,7 @@ import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import StationaerDkvAlternative from './StationaerDkvAlternative';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
+import { STATIONAER_DEFAULT_TARIFF, setStationaerSelection } from '@/lib/stationaer-selection';
 
 // Frank 07.10.2026: Karten liebevoller gestalten. Jede Karte zeigt oben eine
 // Cartoon-Szene, darunter ein weicher Pastellton statt Weiß (wie bei den
@@ -26,8 +27,11 @@ const StationaerTariffSelector = () => {
   const { lang } = useLanguage();
   // Befund 4 (12.11.2026): SP2 ist vorgewählt, damit der SDK-Rechnerknopf sofort
   // sichtbar steht und die DKV erst danach kommt.
-  const [selected, setSelected] = useState('sp2');
+  const [selected, setSelected] = useState(STATIONAER_DEFAULT_TARIFF);
   const guidedTariff = selected ? `SDK ${selected.toUpperCase()}` : '';
+  useEffect(() => {
+    setStationaerSelection(selected);
+  }, [selected]);
   useEffect(() => {
     if (GUIDED_CALLBACK_ENABLED) setGuidedSelection('stationaer', guidedTariff);
   }, [guidedTariff]);
