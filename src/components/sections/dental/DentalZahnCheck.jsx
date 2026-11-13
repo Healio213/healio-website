@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  ChevronDown,
   ExternalLink,
   Lock,
   RotateCcw,
@@ -225,7 +226,7 @@ const DentalZahnCheck = () => {
           </p>
 
           {/* Experiment Handy-Conversion 10/2026: Stempel und Fortschrittspunkte nur ab md.
-              Am Handy stehen "1 Minute. Keine Kontaktdaten." und "Frage 1 von höchstens 4"
+              Am Handy stehen "1 Minute. Vier kurze Fragen." und "Frage 1 von höchstens 4"
               schon darüber und in der Karte, so rückt die erste Antwort nach dem Sprung ins erste Bild. */}
           <div className="mt-5 hidden max-w-full items-center gap-3 rounded-[1.65rem] border border-[#efd99b]/70 bg-[#fff8df] p-2 pr-5 text-[#07111f] shadow-[0_18px_46px_rgba(0,0,0,0.22)] sm:gap-4 sm:pr-6 md:mt-8 md:inline-flex">
             <FriendlyIcon kind="choice" tone="butter" size="sm" className="-rotate-3 md:h-20 md:w-20 md:rounded-[1.55rem] md:text-[2.75rem]" />
@@ -374,12 +375,28 @@ const DentalZahnCheck = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[#f2d794] bg-[#fff8df] p-4 md:mt-6">
-                    <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-[#9a6d00]" aria-hidden="true" />
-                    <p className="text-base leading-6 text-slate-700 md:leading-7">
-                      <strong className="text-slate-950">{content.warningLabel}</strong> {result.warning}
-                    </p>
-                  </div>
+                  {(() => {
+                    const warningBox = (
+                      <div className="mt-5 flex items-start gap-3 rounded-2xl border border-[#f2d794] bg-[#fff8df] p-4 md:mt-6">
+                        <AlertTriangle className="mt-0.5 h-5 w-5 flex-none text-[#9a6d00]" aria-hidden="true" />
+                        <p className="text-base leading-6 text-slate-700 md:leading-7">
+                          <strong className="text-slate-950">{content.warningLabel}</strong> {result.warning}
+                        </p>
+                      </div>
+                    );
+                    return result.warningFold ? (
+                      <details data-zahn-staffel-fold="" className="group/staffel mt-5 md:mt-6">
+                        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl border border-[#f2d794] bg-[#fff8df] px-4 py-3 text-base font-semibold text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9a6d00] [&::-webkit-details-marker]:hidden">
+                          <span className="flex items-center gap-3">
+                            <AlertTriangle className="h-5 w-5 flex-none text-[#9a6d00]" aria-hidden="true" />
+                            {result.warningFold}
+                          </span>
+                          <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open/staffel:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+                        </summary>
+                        <div className="[&>div]:mt-2">{warningBox}</div>
+                      </details>
+                    ) : warningBox;
+                  })()}
 
                   {result.ctaType === 'ukv' && (
                     <p id="zahn-calculator-handoff" className="mt-5 rounded-2xl border border-[#c8deeb] bg-[#eff7fc] px-4 py-3 text-base leading-6 text-[#324d60] md:leading-7">

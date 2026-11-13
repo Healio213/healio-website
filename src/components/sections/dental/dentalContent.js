@@ -8,6 +8,8 @@
 // Jahren. Eine ältere Empfehlung begründet deshalb keine automatische Deckung.
 // Kieferorthopädie hat in 6.2.4 keine solche Rückblickfrist. Die neun lokalen
 // Ergebniswege bleiben eine Orientierung, die Aufnahme entscheidet der Antrag.
+import { ZAHN_BEISPIELPREIS } from '../../../data/zahnBeispielpreis.js';
+
 const de = {
   hero: {
     eyebrow: 'Zahnzusatzversicherung',
@@ -39,7 +41,7 @@ const de = {
     ],
   },
   check: {
-    eyebrow: '1 Minute. Keine Kontaktdaten.',
+    eyebrow: '1 Minute. Vier kurze Fragen.',
     title: 'Wo stehst du gerade?',
     titleLead: 'Wo stehst du',
     titleAccent: 'gerade?',
@@ -218,7 +220,8 @@ const de = {
         warning: 'In den ersten drei Kalenderjahren gilt eine Zahnstaffel: bis 1.000 EUR im ersten Jahr, zusammen bis 3.000 EUR in den ersten zwei und bis 6.000 EUR in den ersten drei Jahren, danach endet die Staffel und es gelten allein die Erstattungssätze des Tarifs. Bei Unfall gilt keine Staffel.',
         cta: 'UKV-Tarife berechnen',
         ctaType: 'ukv',
-        calculatorHint: 'Im nächsten Fenster ist ZahnPRIVAT 100 schon ausgewählt. Dort siehst du deinen Beitrag.',
+        calculatorHint: `ZahnPRIVAT 100 ist im nächsten Fenster schon ausgewählt. Mit ${ZAHN_BEISPIELPREIS.age} Jahren: ${ZAHN_BEISPIELPREIS.euroPerMonth.toFixed(2).replace('.', ',')} EUR im Monat.`,
+        warningFold: 'Was gilt in den ersten drei Jahren?',
         note: 'Nach dem Zwischenschritt mit Vorname und E-Mail öffnet sich die UKV-Antragsstrecke in einem neuen Tab. Erst dort werden Beitrag und Annahme verbindlich geprüft.',
       },
       ukvPreis: {
@@ -420,7 +423,7 @@ const en = {
   },
   check: {
     ...de.check,
-    eyebrow: '1 minute. No contact details.',
+    eyebrow: '1 minute. Four short questions.',
     title: 'Where are you right now?',
     titleLead: 'Where are you',
     titleAccent: 'right now?',
@@ -590,7 +593,8 @@ const en = {
         ],
         warning: 'A benefit scale applies in the first three calendar years: up to €1,000 in the first year, up to €3,000 in total over the first two and up to €6,000 over the first three years; after that the scale ends and only the reimbursement rates of the tariff apply. No scale applies after an accident.',
         cta: 'Calculate UKV tariffs',
-        calculatorHint: 'ZahnPRIVAT 100 is already selected in the next window, where you see your premium. The insurer’s application is in German.',
+        calculatorHint: `ZahnPRIVAT 100 is already selected in the next window. At age ${ZAHN_BEISPIELPREIS.age}: EUR ${ZAHN_BEISPIELPREIS.euroPerMonth.toFixed(2)} a month. The insurer’s application is in German.`,
+        warningFold: 'What applies in the first three years?',
         note: 'After entering your first name and email, the UKV application opens in a new tab. Your premium and acceptance are assessed there.',
       },
       ukvPreis: {
