@@ -26,6 +26,7 @@ import {
   shouldAbortPrerenderRequest,
 } from './lib/prerenderResilience.mjs';
 import { seoRoutes } from './seo-routes.mjs';
+import { createContentApiProxy, resolveContentApiOrigin } from './lib/contentApiFallback.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -49,16 +50,35 @@ const MIME = {
 // app.healio.de weiter, hier tut es dieser Server. Ohne den Proxy
 // bekaeme der Prerender statt JSON die index.html zurueck und wuerde
 // den Leer-Zustand der Blogseiten fest einbacken.
+//
+// Hängt die Content-API, versucht der Proxy jeden Abruf bis zu dreimal und
+// bedient die Artikelabrufe danach aus dem geprüften Schnappschuss
+// (public/data/blog-articles-cache.json). Fehlt der, bricht der Bau ab.
+// Der lokale Testschalter (siehe contentApiFallback.mjs) wirkt nur auf die
+// Content-API, andere /api/-Pfade gehen weiter an API_ORIGIN.
 const API_ORIGIN = process.env.VITE_APP_API_URL || 'https://app.healio.de';
+const contentApi = createContentApiProxy({
+  apiOrigin: resolveContentApiOrigin(API_ORIGIN),
+  label: 'prerender',
+});
+const CONTENT_API_PREFIX = '/api/v1/content/';
 
 function serveDist() {
   const server = http.createServer(async (req, res) => {
     const urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
 
+    if (urlPath.startsWith(CONTENT_API_PREFIX)) {
+      const result = await contentApi.handle(req.url);
+      res.writeHead(result.status, { 'Content-Type': result.contentType });
+      res.end(result.body);
+      return;
+    }
+
     if (urlPath.startsWith('/api/')) {
       try {
         const upstream = await fetch(`${API_ORIGIN}${req.url}`, {
           headers: { accept: 'application/json' },
+          signal: AbortSignal.timeout(10000),
         });
         const body = Buffer.from(await upstream.arrayBuffer());
         res.writeHead(upstream.status, {
@@ -131,6 +151,21 @@ async function createPage(browser) {
   await page.setRequestInterception(true);
   page.on('request', (req) => {
     const requestUrl = new URL(req.url());
+    // Ruft die App die Content-API direkt unter app.healio.de auf
+    // (VITE_APP_API_URL gesetzt), gilt dieselbe Absicherung wie im Proxy.
+    if (ALLOWED_EXTERNAL_HOSTS.has(requestUrl.hostname)
+      && requestUrl.pathname.startsWith(CONTENT_API_PREFIX)
+      && req.method() === 'GET') {
+      contentApi.handle(`${requestUrl.pathname}${requestUrl.search}`)
+        .then((result) => req.respond({
+          status: result.status,
+          contentType: result.contentType,
+          headers: { 'Access-Control-Allow-Origin': '*' },
+          body: result.body,
+        }))
+        .catch(() => req.abort().catch(() => {}));
+      return;
+    }
     if (shouldAbortPrerenderRequest({
       hostname: requestUrl.hostname,
       pathname: requestUrl.pathname,
@@ -224,6 +259,7 @@ async function main() {
   const getBrowser = () => browser;
 
   const server = await serveDist();
+  await contentApi.preflight();
   let ok = 0;
   let failed = 0;
   const fatalErrors = [];
@@ -276,6 +312,9 @@ async function main() {
     await browser.close().catch(() => {});
     await new Promise((resolve) => server.close(resolve));
   }
+
+  contentApi.report();
+  fatalErrors.push(...contentApi.fatalErrors);
 
   const validation = validatePrerenderOutput({ distDir });
   fatalErrors.push(...validation.errors);

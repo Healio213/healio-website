@@ -1013,8 +1013,19 @@ export const seoRoutes = [
 
 // Der geprüfte CMS-Cache ist auch für die Blog-Metadaten die Quelle. Ältere
 // manuelle SEO-Titel dürfen WebPage-Schema und sichtbaren Artikel nicht trennen.
+function readBlogSnapshot() {
+  try {
+    return readFileSync(new URL('../public/data/blog-articles-cache.json', import.meta.url), 'utf8');
+  } catch (error) {
+    throw new Error(
+      'BAU ABGEBROCHEN: Der Blog-Schnappschuss public/data/blog-articles-cache.json fehlt '
+      + `(${error.code || error.message}). Ohne ihn entstehen keine Blogrouten und kein Ersatz bei `
+      + 'Ausfall der Content-API. Wiederherstellen aus Git oder `npm run sync:blog-cache` ausführen.',
+    );
+  }
+}
 const blogMetadata = new Map(
-  JSON.parse(readFileSync(new URL('../public/data/blog-articles-cache.json', import.meta.url), 'utf8'))
+  JSON.parse(readBlogSnapshot())
     .map(applyBlogEditorialFixes)
     .map((article) => [article.slug, article]),
 );

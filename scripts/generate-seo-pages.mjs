@@ -25,10 +25,16 @@ import {
 import { createEditorialTransparencyHtml } from '../src/content/editorialTransparency.js';
 import { planBlogLeistungsweg, teileBlogHtml } from '../src/content/leistungsweg.js';
 import { leistungsHinweisEndeHtml, leistungsHinweisMitteHtml } from '../src/lib/leistungswegMarkup.js';
+import {
+  describeSnapshotAge,
+  fetchWithRetry,
+  normalizeSnapshotArticle,
+  resolveContentApiOrigin,
+} from './lib/contentApiFallback.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
-const articleApiBase = process.env.VITE_APP_API_URL || 'https://app.healio.de';
+const articleApiBase = resolveContentApiOrigin(process.env.VITE_APP_API_URL || 'https://app.healio.de');
 const articleCachePath = path.resolve(__dirname, '..', 'public', 'data', 'blog-articles-cache.json');
 
 // Basis-Template laden (die von Vite gebaute index.html)
@@ -248,18 +254,20 @@ function createBlogArticleSchema(article, route) {
   };
 }
 
+// Bis zu drei Versuche mit je 8 s Zeitgrenze (Netzfehler, Zeitüberschreitung
+// und 5xx). Danach greift der geprüfte Schnappschuss in loadBlogArticles().
 async function fetchArticle(slug) {
   try {
-    const response = await fetch(`${articleApiBase}/api/v1/content/articles?slug=${encodeURIComponent(slug)}`, {
-      headers: { accept: 'application/json' },
-      signal: AbortSignal.timeout(8000),
-    });
+    const response = await fetchWithRetry(
+      `${articleApiBase}/api/v1/content/articles?slug=${encodeURIComponent(slug)}`,
+      { label: 'SEO' },
+    );
 
-    if (!response.ok) {
+    if (response.status < 200 || response.status >= 300) {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const data = await response.json();
+    const data = JSON.parse(response.body.toString('utf8'));
     return data.article || null;
   } catch (error) {
     console.warn(`SEO: Blogartikel "${slug}" konnte nicht vorgeladen werden: ${error.message}`);
@@ -291,20 +299,32 @@ function loadCachedBlogArticles() {
     throw new Error(`SEO: Blog-Cache enthält unvollständige Artikel: ${invalidArticles.map((article) => article?.slug || '(ohne Slug)').join(', ')}`);
   }
 
-  return new Map(articles.map(applyBlogEditorialFixes).map((article) => [article.slug, article]));
+  return new Map(articles
+    .map(normalizeSnapshotArticle)
+    .map(applyBlogEditorialFixes)
+    .map((article) => [article.slug, article]));
 }
 
 async function loadBlogArticles() {
   const slugs = [...new Set(seoRoutes.map((route) => getBlogSlug(route.path)).filter(Boolean))];
   const cachedArticles = loadCachedBlogArticles();
-  let fallbackCount = 0;
+  const fallbackSlugs = [];
+  const outdatedSlugs = [];
 
   const entries = await Promise.all(slugs.map(async (slug) => {
     const liveArticle = applyBlogEditorialFixes(await fetchArticle(slug));
-    if (isCompleteBlogArticle(liveArticle)) return [slug, liveArticle];
-
     const cachedArticle = cachedArticles.get(slug);
-    if (cachedArticle) fallbackCount += 1;
+    if (isCompleteBlogArticle(liveArticle)) {
+      // Nur Hinweis: weicht der Schnappschuss vom Live-Stand ab, sollte er
+      // aufgefrischt werden, damit ein späterer Störfall den aktuellen Text zeigt.
+      if (!cachedArticle || ['title', 'meta_description', 'excerpt', 'content_html', 'geo_section']
+        .some((field) => (liveArticle[field] || '') !== (cachedArticle[field] || ''))) {
+        outdatedSlugs.push(slug);
+      }
+      return [slug, liveArticle];
+    }
+
+    if (cachedArticle) fallbackSlugs.push(slug);
     return [slug, cachedArticle || null];
   }));
 
@@ -313,8 +333,21 @@ async function loadBlogArticles() {
     throw new Error(`SEO: Kein vollständiger Artikel für indexierbare Routen: ${missingSlugs.join(', ')}`);
   }
 
-  if (fallbackCount > 0) {
-    console.warn(`SEO: ${fallbackCount} Blogartikel aus dem geprüften Cache geladen.`);
+  if (fallbackSlugs.length > 0) {
+    console.warn(
+      `\nSEO: ================= WARNUNG: SCHNAPPSCHUSS VERWENDET =================\n`
+      + `SEO: ${fallbackSlugs.length} von ${slugs.length} Blogartikeln kamen nicht von der Content-API, sondern aus\n`
+      + `SEO: public/data/blog-articles-cache.json, ${describeSnapshotAge().text}.\n`
+      + `SEO: Ersetzt: ${fallbackSlugs.sort().join(', ')}\n`
+      + `SEO: ===================================================================\n`,
+    );
+  }
+
+  if (outdatedSlugs.length > 0) {
+    console.warn(
+      `SEO: Hinweis: Schnappschuss weicht bei ${outdatedSlugs.length} Artikel(n) vom Live-Stand ab `
+      + `(${outdatedSlugs.sort().join(', ')}). Auffrischen mit \`npm run sync:blog-cache\` und committen.`,
+    );
   }
 
   return new Map(entries);

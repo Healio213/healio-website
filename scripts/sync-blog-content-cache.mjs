@@ -21,6 +21,9 @@ const PUBLIC_FIELDS = [
   'structured_data',
   'published_at',
   'updated_at',
+  // Reihenfolge der API-Liste (neueste zuerst nach Anlagedatum); im Störfall
+  // bedient der Bau die Liste in derselben Reihenfolge.
+  'created_at',
   'author',
   'reading_time_minutes',
 ];
@@ -109,6 +112,16 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 const temporaryOutputPath = `${outputPath}.tmp`;
 fs.writeFileSync(temporaryOutputPath, `${JSON.stringify(normalizedArticles, null, 2)}\n`);
 fs.renameSync(temporaryOutputPath, outputPath);
+
+// Zeitstempel des Schnappschusses. Der Bau nennt damit im Störfall das Alter
+// des Stands, aus dem er die Artikel bedient (scripts/lib/contentApiFallback.mjs).
+const standPath = path.join(rootDir, 'scripts', 'data', 'blog-articles-cache-stand.json');
+fs.mkdirSync(path.dirname(standPath), { recursive: true });
+fs.writeFileSync(standPath, `${JSON.stringify({
+  refreshedAt: new Date().toISOString(),
+  articleCount: normalizedArticles.length,
+  source: inputPath ? 'npm run sync:blog-cache --input' : 'npm run sync:blog-cache (Content-API)',
+}, null, 2)}\n`);
 
 // Nur tatsächlich veröffentlichte Änderungsdaten übernehmen. Ein späterer
 // CMS-Text darf nicht mit dem alten Datum der ursprünglichen SEO-Welle erscheinen.
