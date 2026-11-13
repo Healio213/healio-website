@@ -4,25 +4,31 @@ import path from 'node:path';
 import puppeteer from 'puppeteer';
 
 const targetUrl = process.env.DESKTOP_PREVIEW_URL || 'http://127.0.0.1:3198';
-const baselineUrl = process.env.MOBILE_BASELINE_URL || 'http://127.0.0.1:3197';
+// Ohne eigene Vergleichsfassung vergleicht die Handy-Prüfung mit derselben Vorschau.
+const baselineUrl = process.env.MOBILE_BASELINE_URL || targetUrl;
 const outputDir = path.resolve('docs/desktop-2026-10-07/pruefung');
+// Stand 13.11.2026 (live seit 01.11.): Die Startseite führt im Kopfbereich zum
+// Termin, /ambulant und /stationaer direkt in den SDK-Tarifrechner mit Tarif,
+// /zahn springt zum Zahn-Check. Externe Ziele werden nur am Link geprüft, nicht
+// angeklickt (sonst öffnet sich das Fenster vor dem Rechner).
 const routes = [
-  { path: '/', key: 'home', destination: 'external' },
-  { path: '/ambulant', key: 'ambulant', destination: 'budget-kompass' },
+  { path: '/', key: 'home', destination: { host: 'calendar.google.com' } },
+  { path: '/ambulant', key: 'ambulant', destination: { host: 'insurances-online.levelnine.biz', tariffs: 'SDKAP1@' } },
   { path: '/zahn', key: 'zahn', destination: 'zahn-check' },
-  { path: '/stationaer', key: 'stationaer', destination: 'tarife' },
+  { path: '/stationaer', key: 'stationaer', destination: { host: 'insurances-online.levelnine.biz', tariffs: 'SDKSP2@' } },
 ];
 
 await fs.mkdir(outputDir, { recursive: true });
 const browser = await puppeteer.launch({ headless: true });
 const report = { desktop: [], mobile: [], breakpoints: [], navigation: [] };
 const mobileHeadlines = {
-  '/': 'Dein Kassenbonus ist zu wertvoll, um ihn ungenutzt zu lassen.',
+  '/': 'Passender Schutz. Gemeinsam geklärt.',
   '/ambulant': 'Warum zahlst du Heilpraktiker und Brille noch selbst? Bis zu 3.000 EUR zurück, ohne Wartezeit.',
-  '/zahn': 'Dein Lächeln ist dein stärkstes Statussignal. Warum überlässt du es dem Kassenstandard?',
-  '/stationaer': 'Wenn es um deine Gesundheit geht, sind Arztwahl und Privatsphäre keine Nebensache.',
-  '/partner': 'Wie viele hochwertige Behandlungspläne verlierst du an die Angst vor dem Eigenanteil?',
+  '/zahn': 'Starker Schutz für deine Zähne.',
+  '/stationaer': 'Dein Zimmer. Deine Arztwahl.',
+  '/partner': 'Mehr Spielraum für deine Patienten.',
 };
+const partnerDesktopHeadline = 'Wie viele hochwertige Behandlungspläne verlierst du an die Angst vor dem Eigenanteil?';
 const page = await browser.newPage();
 await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
 await page.setRequestInterception(true);
@@ -114,8 +120,12 @@ try {
       assert(current.primaryBox?.bottom < viewport.height, `${route.path}: primary action is above the fold`);
       assert(current.primaryBox.height >= 44, `${route.path}: primary action has a usable hit area`);
       assert(current.primaryUncovered, `${route.path}: consent and fixed UI do not cover the primary action`);
-      if (route.destination === 'external') {
-        assert.equal(new URL(current.primaryHref).hostname, 'kassenboost.de');
+      if (typeof route.destination === 'object') {
+        const target = new URL(current.primaryHref);
+        assert.equal(target.hostname, route.destination.host, `${route.path}: primary action leads to ${route.destination.host}`);
+        if (route.destination.tariffs) {
+          assert.equal(target.searchParams.get('tariffs'), route.destination.tariffs, `${route.path}: calculator opens with ${route.destination.tariffs}`);
+        }
       } else {
         assert.equal(current.primaryHref, `#${route.destination}`);
         assert(await page.$(`#${route.destination}`), `${route.path}: CTA has a real destination`);
@@ -143,11 +153,13 @@ try {
     assert.equal(current.swipeRows, baseline.swipeRows, `${route.path}: swipe rows remain available`);
     assert(current.swipeRows > 0, `${route.path}: horizontal mobile cards are present`);
     await page.screenshot({ path: path.join(outputDir, `${route.key}-mobile.png`), fullPage: true });
+    // /zahn beschriftet die Punkte mit „Zu Karte 2 springen“, die anderen Seiten mit „Karte 2 von …“.
     const swipe = await page.evaluate(() => {
+      const SECOND_CARD = 'button[aria-label^="Karte 2 von"], button[aria-label="Zu Karte 2 springen"]';
       const row = [...document.querySelectorAll('.snap-x')].find((node) => node.getClientRects().length
         && node.scrollWidth > node.clientWidth
-        && node.parentElement.querySelector('button[aria-label^="Karte 2 von"]'));
-      const dot = row?.parentElement.querySelector('button[aria-label^="Karte 2 von"]');
+        && node.parentElement.querySelector(SECOND_CARD));
+      const dot = row?.parentElement.querySelector(SECOND_CARD);
       if (!row || !dot) return null;
       dot.click();
       return { width: row.clientWidth, scrollWidth: row.scrollWidth };
@@ -156,7 +168,10 @@ try {
     await page.waitForFunction(() => [...document.querySelectorAll('.snap-x')].some((node) => node.getClientRects().length && node.scrollLeft > 30));
     report.mobile.push({ route: route.path, viewport, copyUpdated: true, structurePreserved: true, height: current.height, swipeRows: current.swipeRows, secondCardOpened: true });
   }
-  for (const [hash, target] of [['so-funktioniert', 'desktop-home-process'], ['schutz', 'desktop-home-products']]) {
+  // Seit dem begleiteten Abschluss (GUIDED_CALLBACK_ENABLED) zeigt die Startseite am
+  // Desktop den Ablauf-Abschnitt #desktop-home-process bewusst nicht mehr, und kein
+  // Link führt auf #so-funktioniert. Geprüft wird deshalb nur noch #schutz.
+  for (const [hash, target] of [['schutz', 'desktop-home-products']]) {
     await open(`${targetUrl}/#${hash}`, { width: 1440, height: 900 });
     const top = await page.$eval(`#${target}`, (node) => node.getBoundingClientRect().top);
     assert(top >= 70 && top <= 130, `Existing #${hash} fragment opens its visible desktop section below the header`);
@@ -168,7 +183,12 @@ try {
     assert.equal(current.totalH1, 1, `${route}: exactly one H1`);
     assert(current.heroVisible && current.primaryBox.bottom < 800, `${route}: desktop action is visible above the fold`);
     assert.equal(current.documentWidth, 1280, `${route}: no overflow`);
-    if (route.includes('bonus-check')) assert.equal(current.primaryHref, '#tarifwahl');
+    // Seit 01.11.2026 führt auch der Einstieg aus dem Bonus-Check direkt in den SDK-Rechner.
+    if (route.includes('bonus-check')) {
+      const target = new URL(current.primaryHref);
+      assert.equal(target.hostname, 'insurances-online.levelnine.biz', `${route}: primary action opens the SDK calculator`);
+      assert.equal(target.searchParams.get('tariffs'), 'SDKAP1@', `${route}: calculator opens with SDKAP1@`);
+    }
     report.navigation.push({ path: route, heading: current.headings[0], primaryHref: current.primaryHref });
   }
   for (const width of [767, 768, 1023, 1024]) {
@@ -189,19 +209,23 @@ try {
     await chooseNecessaryOnlyForBooking();
     const current = await snapshot();
     assert.equal(current.totalH1, 1, 'Partner retains exactly one H1');
-    assert.deepEqual(current.headings, [mobileHeadlines['/partner']], 'Partner displays the selected headline');
+    // /partner hat getrennte Überschriften: am Handy die kurze, am Desktop die Frage.
+    const partnerHeadline = viewport.width >= 1024 ? partnerDesktopHeadline : mobileHeadlines['/partner'];
+    assert.deepEqual(current.headings, [partnerHeadline], 'Partner displays the selected headline');
     assert.equal(current.documentWidth, viewport.width, 'Partner fills the width without page overflow');
     assert.equal(current.outsideHeroText, baseline.outsideHeroText, 'Partner content outside the hero is unchanged');
     assert.deepEqual(current.swipeCards, baseline.swipeCards, 'Partner swipe cards are preserved');
     // Partner has separate desktop and mobile heroes. Select the booking
     // action inside the visible hero, rather than the hidden desktop button
     // that appears first in the document on a phone.
-    const primaryHandle = await page.evaluateHandle(() => {
+    // Knopftext am Handy „30 Minuten kennenlernen“, am Desktop „30-minütiges Kennenlernen buchen“.
+    const bookingLabel = viewport.width >= 1024 ? '30-minütiges Kennenlernen buchen' : '30 Minuten kennenlernen';
+    const primaryHandle = await page.evaluateHandle((label) => {
       const heading = [...document.querySelectorAll('main h1')].find((node) => node.getClientRects().length);
       return [...(heading?.closest('section')?.querySelectorAll('button') || [])].find((node) => (
-        node.getClientRects().length && node.innerText.trim() === '30-minütiges Kennenlernen buchen'
+        node.getClientRects().length && node.innerText.trim() === label
       ));
-    });
+    }, bookingLabel);
     const primary = primaryHandle.asElement();
     assert(primary, 'Partner hero retains its booking button');
     assert(await page.$('#google-termin'), 'Partner booking CTA has a real destination');
