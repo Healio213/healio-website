@@ -62,10 +62,10 @@ export default function SchrittZahlung({
 
       <Gruppe legend={z.kontoinhaberFrage} hint={z.kontoinhaberHinweis || undefined} fehlerId="fehler-kontoinhaber" error={fehler.kontoinhaber}>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <OptionCard id="feld-kontoinhaber" kompakt name="kontoinhaber" value="selbst" checked={daten.kontoinhaber === 'selbst'} onChange={() => set({ kontoinhaber: 'selbst' })} invalid={Boolean(fehler.kontoinhaber)}>
+          <OptionCard id="feld-kontoinhaber" kompakt name="kontoinhaber" value="selbst" checked={daten.kontoinhaber === 'selbst'} onChange={() => set({ kontoinhaber: 'selbst' })} invalid={Boolean(fehler.kontoinhaber)} describedBy={fehler.kontoinhaber ? 'fehler-kontoinhaber' : undefined}>
             Ja, das ist mein Konto
           </OptionCard>
-          <OptionCard kompakt name="kontoinhaber" value="andere" checked={daten.kontoinhaber === 'andere'} onChange={() => set({ kontoinhaber: 'andere' })} invalid={Boolean(fehler.kontoinhaber)}>
+          <OptionCard kompakt name="kontoinhaber" value="andere" checked={daten.kontoinhaber === 'andere'} onChange={() => set({ kontoinhaber: 'andere' })} invalid={Boolean(fehler.kontoinhaber)} describedBy={fehler.kontoinhaber ? 'fehler-kontoinhaber' : undefined}>
             Nein, es gehört jemand anderem
           </OptionCard>
         </div>
