@@ -108,7 +108,7 @@ const COPY = {
         prevention: { label: 'Vorsorge & Impfungen', detail: 'Checks, Impfungen & anerkannte Präventionskurse' },
         copay: { label: 'Hilfsmittel & Zuzahlungen', detail: 'Verordnete Hilfsmittel & gesetzliche Eigenanteile' },
       },
-      cta: 'Beitrag berechnen & online abschließen',
+      cta: 'Jetzt online abschließen',
       disclosure: 'Die Werte zeigen vier eigene Höchstbeträge je zwei Kalenderjahre ab Versicherungsbeginn. Du erhältst Erstattungen für versicherte Rechnungen, kein frei verfügbares Guthaben. Vorsorge, Impfungen und anerkannte Präventionskurse teilen sich einen Topf. Tarifbedingungen und Erstattungsgrenzen gelten.',
     },
     calculator: {
@@ -139,7 +139,7 @@ const COPY = {
     finalEyebrow: 'Dein nächster Schritt',
     finalTitle: 'Mach aus Selbstzahlerkosten dein Gesundheitsbudget.',
     finalText: 'Ohne Zusatzschutz bleibt jede Heilpraktiker-Rechnung bei dir. Stufe wählen, Beitrag sehen, online abschließen.',
-    finalCta: 'Beitrag berechnen & online abschließen',
+    finalCta: 'Beitrag sehen & abschließen',
     finalMicro: 'Beitrag in 2 Minuten · Antrag direkt online · ohne Vertreteranrufe.',
     finalHelp: 'Noch unsicher? Persönlich einordnen lassen',
     // Fragen und Antworten liegen in ambulantFaqs.js, weil das vorgerenderte
@@ -204,7 +204,7 @@ const COPY = {
         prevention: { label: 'Screening & vaccines', detail: 'Checks, vaccines & approved prevention courses' },
         copay: { label: 'Medical aids & co-payments', detail: 'Prescribed aids & statutory out-of-pocket shares' },
       },
-      cta: 'Calculate premium & apply online',
+      cta: 'Apply online now',
       disclosure: 'The values are four separate maximums per two calendar years from the policy start. Eligible invoices are reimbursed; this is not cash to spend freely. Screening, vaccines and approved prevention courses share one pot. Policy terms and reimbursement limits apply.',
     },
     calculator: {
@@ -235,7 +235,7 @@ const COPY = {
     finalEyebrow: 'Your next step',
     finalTitle: 'Turn out-of-pocket costs into a health budget.',
     finalText: 'Without supplementary cover, every non-medical practitioner bill stays with you. Choose a tier, see your premium, apply online.',
-    finalCta: 'Calculate premium & apply online',
+    finalCta: 'See premium & apply',
     finalMicro: 'Premium in 2 minutes · Apply directly online · No sales calls.',
     finalHelp: 'Not sure yet? Get personal guidance',
     faqs: AMBULANT_FAQS.en,
