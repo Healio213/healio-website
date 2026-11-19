@@ -92,6 +92,8 @@ const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 const AntragPruefenPage = React.lazy(() => import('@/pages/AntragPruefenPage'));
 // Antragsgespräch mit Nita (10.11.2026): eigenständig, noindex, ohne Messung, hinter HEALIO_ANTRAG_GESPRAECH_AKTIV.
 const AntragAufnehmenPage = React.lazy(() => import('@/pages/AntragAufnehmenPage'));
+// Eigene Antragsmaske je Sparte (12.11.2026): eigenständig, noindex, ohne Messung, hinter HEALIO_ANTRAGSMASKE_AKTIV.
+const AntragsmaskePage = React.lazy(() => import('@/pages/AntragsmaskePage'));
 
 const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));
 
@@ -126,7 +128,8 @@ function App() {
   // Prüfseite des Antrags (09.11.2026) und Antragsgespräch /antrag/aufnehmen (10.11.2026): ohne Nita und ohne WhatsApp,
   // auch bei anderer Schreibweise. Der Name isAntragPruefen bleibt, weil test:privacy ihn im Quelltext erwartet.
   const antragPfad = location.pathname.replace(/\/+$/, '').toLowerCase() || '/';
-  const isAntragPruefen = antragPfad === '/antrag/pruefen' || antragPfad === '/antrag/aufnehmen';
+  // Dazu die eigene Antragsmaske /antrag/ambulant, /antrag/zahn, /antrag/stationaer (12.11.2026).
+  const isAntragPruefen = ['/antrag/pruefen', '/antrag/aufnehmen', '/antrag/ambulant', '/antrag/zahn', '/antrag/stationaer', '/antrag/zahn-ukv'].includes(antragPfad);
   // Experiment 05.10.2026: auf /zahn sitzt WhatsApp in der Nita-Leiste (NitaQuickPill).
   const isDentalPage = location.pathname === '/zahn' || location.pathname === '/en/dental';
   // Experiment 06.10.2026: auch auf /ambulant und /stationaer sitzt WhatsApp am
@@ -347,6 +350,11 @@ function App() {
             <Route path="/antrag/pruefen" element={<AntragPruefenPage />} />
             {/* Antragsgespräch mit Nita (10.11.2026): ohne Layout, noindex, kein Tracking, Einstieg nur als echte Seitennavigation. */}
             <Route path="/antrag/aufnehmen" element={<AntragAufnehmenPage />} />
+            {/* Eigene Antragsmaske (12.11.2026): ohne Layout, noindex, kein Tracking, Gesundheitsangaben und IBAN nur im Arbeitsspeicher. */}
+            <Route path="/antrag/ambulant" element={<AntragsmaskePage sparte="ambulant" />} />
+            <Route path="/antrag/zahn" element={<AntragsmaskePage sparte="zahn" />} />
+            <Route path="/antrag/stationaer" element={<AntragsmaskePage sparte="stationaer" />} />
+            <Route path="/antrag/zahn-ukv" element={<AntragsmaskePage sparte="zahn-ukv" />} />
 
             {/* TikTok Bio-Link — standalone, ohne Layout/Header/Footer */}
             <Route path="/tiktok" element={<TikTokPage />} />

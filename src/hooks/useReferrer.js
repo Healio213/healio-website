@@ -6,6 +6,7 @@ import {
   readStoredReferrer,
   storeReferrer,
 } from '@/lib/referrer';
+import { merkeHerkunft } from '@/lib/herkunftSpeicher';
 
 /**
  * Liest den Empfehlungs- oder Partnercode aus der URL (?ref=HP123) und hält
@@ -22,7 +23,10 @@ export function useReferrer() {
 
   useEffect(() => {
     const urlRef = readReferrerFromSearch(window.location.search);
-    if (urlRef) setRef(storeReferrer(urlRef));
+    if (urlRef) {
+      setRef(storeReferrer(urlRef));
+      merkeHerkunft({ ref: urlRef });
+    }
   }, []);
 
   return ref;

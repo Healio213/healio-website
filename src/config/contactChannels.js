@@ -35,3 +35,24 @@ export const HEALIO_ANTRAG_KNOPF_AKTIV = ANTRAG_KNOPF_LOKAL === '1' || ANTRAG_KN
 
 // Adresse des HD-Dienstes für das Antragsgespräch (Vertrag 11.2).
 export const HEALIO_ANTRAG_GESPRAECH_API = import.meta.env?.VITE_ANTRAG_GESPRAECH_API || 'https://voice-pilot.healio.de/nita/antrag';
+
+// Eigene Antragsmaske (12.11.2026). Zwei getrennte Schalter, beide Standard aus:
+// HEALIO_ANTRAGSMASKE_AKTIV: Die Routen /antrag/ambulant, /antrag/zahn, /antrag/stationaer zeigen die Strecke
+//   (bleiben unverlinkt, noindex, nicht in der Sitemap). Bei false zeigen sie nur die anderen Wege.
+// HEALIO_ANTRAGSWAHL_AKTIV: Die Abschlussknöpfe auf /ambulant, /zahn, /stationaer zeigen statt des E-Mail-Fensters
+//   die Wahl „Allein abschließen“ oder „Antrag zusammen am Telefon“ (LeadCaptureProvider.jsx). Bei false bleibt
+//   alles wie heute.
+// Nur im Entwicklungsmodus (npm run dev) dürfen VITE_ANTRAGSMASKE=1 und VITE_ANTRAGSWAHL=1 die Werte einschalten,
+// im Build nie.
+const ANTRAGSMASKE_FREIGABE = false;
+const ANTRAGSWAHL_FREIGABE = false;
+const ANTRAGSMASKE_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE : undefined;
+const ANTRAGSWAHL_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSWAHL : undefined;
+export const HEALIO_ANTRAGSMASKE_AKTIV = ANTRAGSMASKE_LOKAL === '1' || ANTRAGSMASKE_FREIGABE;
+export const HEALIO_ANTRAGSWAHL_AKTIV = ANTRAGSWAHL_LOKAL === '1' || ANTRAGSWAHL_FREIGABE;
+
+// Zweites Zahn-Produkt UKV ZahnPRIVAT 75/90/100 in der eigenen Maske (/antrag/zahn-ukv, 12.11.2026), Standard aus.
+// Erst einschalten, wenn die Makler-Erklärungen der UKV-Strecke mit Fonds Finanz/UKV geklärt sind.
+const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;
+const ANTRAGSMASKE_UKV_ZAHN_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE_UKV_ZAHN : undefined;
+export const HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV = ANTRAGSMASKE_UKV_ZAHN_LOKAL === '1' || ANTRAGSMASKE_UKV_ZAHN_FREIGABE;

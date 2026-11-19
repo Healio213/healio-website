@@ -80,9 +80,11 @@ export function tarifName(tarif) {
 
 const zweistellig = (zahl) => String(zahl).padStart(2, '0');
 
-// SDK-Höchstgrenze für den Beginn noch prüfen: So viele Monate nach dem
-// nächstmöglichen Beginn lässt die Auswahl „Anderer Beginn“ zu.
-export const BEGINN_MONATE_NACH_NAECHSTMOEGLICH = 6;
+// Online-Strecke der SDK (Erfassung 12.11.2026): höchstens 5 weitere Monate
+// nach dem nächstmöglichen Beginn; bis einschließlich zum 15. ist zusätzlich
+// der Erste des laufenden Monats wählbar (beginnOptionen: frueher).
+export const BEGINN_MONATE_NACH_NAECHSTMOEGLICH = 5;
+export const BEGINN_LAUFENDER_MONAT_BIS_TAG = 15;
 
 function monatsErster(heute, schritt) {
   const datum = new Date(heute.getFullYear(), heute.getMonth() + schritt, 1);
@@ -103,7 +105,8 @@ function monatsErster(heute, schritt) {
 export function beginnOptionen(heute = new Date()) {
   const weitere = [];
   for (let schritt = 2; schritt <= BEGINN_MONATE_NACH_NAECHSTMOEGLICH + 1; schritt += 1) weitere.push(monatsErster(heute, schritt));
-  return { naechstmoeglich: monatsErster(heute, 1), weitere };
+  const frueher = heute.getDate() <= BEGINN_LAUFENDER_MONAT_BIS_TAG ? monatsErster(heute, 0) : null;
+  return { naechstmoeglich: monatsErster(heute, 1), weitere, frueher };
 }
 
 // Der gewählte Beginn: art 'naechstmoeglich' oder 'anderer' (dann zählt iso
@@ -111,7 +114,7 @@ export function beginnOptionen(heute = new Date()) {
 // Datum gewählt ist.
 export function gewaehlterBeginn(optionen, art, iso) {
   if (art === 'naechstmoeglich') return optionen.naechstmoeglich;
-  if (art === 'anderer') return optionen.weitere.find((option) => option.iso === iso) || null;
+  if (art === 'anderer') return [...optionen.weitere, optionen.frueher].filter(Boolean).find((option) => option.iso === iso) || null;
   return null;
 }
 
@@ -253,7 +256,7 @@ export const SDK_VORSPANN_ABSAETZE = [
 
 export const SDK_VORSPANN = SDK_VORSPANN_ABSAETZE.join(' ');
 
-export const FRAGE_1_TEXT = 'Werden oder wurden in den letzten 3 Jahren Beratungen, Behandlungen oder Untersuchungen (auch Kontrolluntersuchungen aufgrund Vorerkrankungen) hinsichtlich einer der nachfolgend aufgeführten Erkrankungen durch Ärzte, Heilpraktiker oder sonstigen Therapeuten durchgeführt bzw. sind solche angeraten oder beabsichtigt?';
+export const FRAGE_1_TEXT = 'Werden oder wurden in den letzten 3 Jahren Beratungen, Behandlungen oder Untersuchungen (auch Kontrollunter-suchungen aufgrund Vorerkrankungen) hinsichtlich einer der nachfolgend aufgeführten Erkrankungen durch Ärzte, Heilpraktiker oder sonstigen Therapeuten durchgeführt bzw. sind solche angeraten oder beabsichtigt?';
 
 // 1a: erst Ja oder Nein (Franks Vorgabe 16.10.2026), bei „ja“ die
 // zutreffenden Erkrankungen ankreuzen, jedes Kreuz 40 % Zuschlag.
@@ -261,7 +264,7 @@ export const ZUSCHLAG_PRO_KREUZ_1A = 40;
 
 export const FRAGE_1A_ITEMS = [
   { id: 'aids-hepatitis', label: 'AIDS/HIV Infektion, Hepatitis B/C' },
-  { id: 'als', label: 'Amyotrophe Lateralsklerose (ALS), progressive Muskelatrophie, Bulbärparalyse' },
+  { id: 'als', label: 'Amyothrophe Lateralsklerose (ALS), progressive Muskelatrophie, Bulbärparalyse' },
   { id: 'weichteilrheuma', label: 'Weichteilrheumatismus' },
   { id: 'chorea', label: 'Chorea Huntington' },
   { id: 'niere', label: 'Chronische Niereninsuffizienz bzw. Nierenentzündung' },
@@ -269,7 +272,7 @@ export const FRAGE_1A_ITEMS = [
   { id: 'diabetes', label: 'Diabetes mellitus' },
   { id: 'gliedmassen', label: 'Fehlende Gliedmaßen' },
   { id: 'fertilitaet', label: 'Fertilitätsstörungen' },
-  { id: 'hoerschaedigung', label: 'Hörschädigung/​Schwerhörigkeit (exkl. akuter Hörsturz)' },
+  { id: 'hoerschaedigung', label: 'Hörschädigung/​Schwerhörigkeit(exkl. akuter Hörsturz)' },
   { id: 'krebs', label: 'Krebserkrankungen' },
   { id: 'lunge', label: 'Lungenemphysem, Mukoviszidose' },
   { id: 'lymphoedem', label: 'Lymphödem' },
@@ -288,7 +291,7 @@ export const FRAGEN_1B_1K = [
   { id: '1g', prozent: 20, kurz: 'Haut und Pilzerkrankungen', text: 'Erkrankungen der Haut (Akne, Dermatitis, Ekzem, Neurodermitis, Schuppenflechte, Parästhesie der Haut) und Pilzerkrankungen (Fuß-, Haut-, Nagelpilz)' },
   { id: '1h', prozent: 20, kurz: 'Stoffwechsel und Mangelerscheinungen', text: 'Stoffwechselerkrankungen (Schilddrüsenunter/-überfunktion, Fettstoffwechselstörung, Hyperurikämie) und Mangelerscheinungen (Vitamin- und Eisenmangel)' },
   { id: '1i', prozent: 20, kurz: 'Kopfschmerzen und Migräne', text: 'Kopfschmerzen (nicht durch eine andere Krankheit verursacht), Migräne' },
-  { id: '1j', prozent: 20, kurz: 'Nebenhöhlen', text: 'Chronische Erkrankungen der Nebenhöhlen (Abzess, chronische Sinusitis, Furunkel, Hypertrophie der Nasenmuscheln, Karbunkel, Mukozele der Nase oder Nasennebenhöhle, Nasenpolypen, Zyste)' },
+  { id: '1j', prozent: 20, kurz: 'Nebenhöhlen', text: 'Chronische Erkrankungen der Nebenhöhlen (Abszess, chronische Sinusitis, Furunkel, Hypertrophie der Nasenmuscheln, Karbunkel, Mukozele der Nase oder Nasennebenhöhle, Nasenpolypen, Zyste)' },
   { id: '1k', prozent: 20, kurz: 'Schwindel, Hörsturz, Gleichgewicht, Tinnitus', text: 'Chronischer Schwindel, Hörsturz, Morbus Menière, Gleichgewichtsstörungen, Tinnitus' },
 ];
 
@@ -323,14 +326,12 @@ export const GEWICHT_MAX = 300;
 // Liefert { bmi, anzeige, prozent, plausibel }. prozent ist nur dann null,
 // wenn die Angaben nicht plausibel sind.
 //
-// Grenzen der BMI-Tabelle auf Seite 4 des Antrags 1.770aai: unter 17 sind
-// 20 %, unter 30 sind 0 %, unter 36 sind 20 %, ab 36 sind 40 %. Diese Lesart
-// trifft alle Zellen der Tabelle (1,60 bis 1,94 m, 40 bis 120 kg), auch
-// BMI 29 bis unter 30 (immer 0 %) und 35 bis unter 36 (immer 20 %). Die SDK
-// schneidet die Nachkommastellen also ab. Die Legende für Maße außerhalb der
-// Tabelle (17 bis 29, 30 bis 35, ab 36) passt dazu.
-// anzeige ist der BMI auf eine Nachkommastelle abgeschnitten, damit eine
-// gerundete Anzeige nie eine Tabellengrenze überspringt.
+// Online-Strecke der SDK (Erfassung 12.11.2026, Abschnitt 4a): Der BMI wird
+// auf eine Nachkommastelle gerundet, dann gilt: unter 17,0 = 20 %, 17,0 bis
+// 29,9 = 0 %, 30,0 bis 35,9 = 20 %, ab 36,0 = 40 %. Belege: 191/62
+// (16,995) 0 %, 189/107 (29,954) 20 %, 170/104 (35,986) 40 %.
+// Bis 12.11.2026 schnitt das Regelwerk ab (Lesart der Papiertabelle).
+// anzeige ist der gerundete BMI, nach dem auch der Zuschlag geht.
 export function bmiZuschlag(groesseCm, gewichtKg) {
   const groesse = Number(groesseCm);
   const gewicht = Number(gewichtKg);
@@ -342,12 +343,12 @@ export function bmiZuschlag(groesseCm, gewichtKg) {
   const meter = groesse / 100;
   // Rundung auf sechs Stellen gegen Gleitkomma-Rauschen an den Grenzen.
   const bmi = Math.round((gewicht / (meter * meter)) * 1e6) / 1e6;
-  const anzeige = Math.floor(bmi * 10) / 10;
+  const anzeige = Math.round(bmi * 10) / 10;
 
   let prozent;
-  if (bmi < 17) prozent = 20;
-  else if (bmi < 30) prozent = 0;
-  else if (bmi < 36) prozent = 20;
+  if (anzeige < 17) prozent = 20;
+  else if (anzeige < 30) prozent = 0;
+  else if (anzeige < 36) prozent = 20;
   else prozent = 40;
 
   return { bmi, anzeige, prozent, plausibel: true };

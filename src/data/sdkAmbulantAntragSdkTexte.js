@@ -23,7 +23,8 @@
 export const SDK_TEXTE_QUELLE = 'SDK-Antrag 1.770aai, Fassung 01.24, Seiten 4 bis 6';
 
 export const SDK_VVG_19_MITTEILUNG = null;
-export const SDK_VERZICHT_SATZ = null;
+// Beratungsverzicht der SDK im Wortlaut der Online-Strecke (Erfassung 12.11.2026, Schritt 6).
+export const SDK_VERZICHT_SATZ = 'Beratungsverzicht: Im Zuge des Onlineantrages verzichte ich auf die angebotene fachliche Beratung und deren Dokumentation. Mir ist bewusst, welche Bedeutung einer Beratung in Versicherungsfragen zukommt und, dass sich der Verzicht nachteilig darauf auswirken kann, zu einem späteren Zeitpunkt Schadensersatzansprüche gegen den Versicherer geltend zu machen.';
 
 // Text 6: Standort des Servers von Healio (Antragsdienst).
 export const TEXT_6_STANDORT = 'Deutschland (Rechenzentrum von Hetzner)';

@@ -982,6 +982,42 @@ export const seoRoutes = [
     robots: 'noindex, nofollow',
   },
   {
+    // Eigene Antragsmaske (12.11.2026): nie indexieren, nicht in Sitemap oder llms.txt.
+    path: '/antrag/ambulant',
+    title: 'Antrag ambulanter Zusatzschutz | Healio',
+    description: 'Dein Antrag auf den ambulanten Zusatzschutz der SDK.',
+    canonical: 'https://healio.de/antrag/ambulant',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    // Eigene Antragsmaske (12.11.2026): nie indexieren, nicht in Sitemap oder llms.txt.
+    path: '/antrag/zahn',
+    title: 'Antrag Zahnzusatzschutz | Healio',
+    description: 'Dein Antrag auf den Zahnzusatzschutz.',
+    canonical: 'https://healio.de/antrag/zahn',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    // Eigene Antragsmaske (12.11.2026): nie indexieren, nicht in Sitemap oder llms.txt.
+    path: '/antrag/stationaer',
+    title: 'Antrag Klinikschutz | Healio',
+    description: 'Dein Antrag auf den Klinikschutz der SDK.',
+    canonical: 'https://healio.de/antrag/stationaer',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
+    // Eigene Antragsmaske, zweites Zahn-Produkt UKV (12.11.2026): nie indexieren.
+    path: '/antrag/zahn-ukv',
+    title: 'Antrag Zahnzusatzschutz UKV | Healio',
+    description: 'Dein Antrag auf den Zahnzusatzschutz ZahnPRIVAT.',
+    canonical: 'https://healio.de/antrag/zahn-ukv',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
     path: '/tiktok',
     title: 'Healio auf TikTok | Healio',
     description: 'Alle Healio-Links aus der TikTok-Bio auf einen Blick.',

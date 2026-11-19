@@ -76,6 +76,11 @@ export const EXPECTED_GOOGLE_META_EXCLUDED_PATHS = Object.freeze([
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
   '/antrag/aufnehmen',
+  // Eigene Antragsmaske (12.11.2026): Gesundheitsangaben und IBAN, nie messen.
+  '/antrag/ambulant',
+  '/antrag/zahn',
+  '/antrag/stationaer',
+  '/antrag/zahn-ukv',
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',
@@ -106,6 +111,11 @@ export const EXPECTED_ANALYTICS_EXCLUDED_PATHS = Object.freeze([
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
   '/antrag/aufnehmen',
+  // Eigene Antragsmaske (12.11.2026): Gesundheitsangaben und IBAN, nie messen.
+  '/antrag/ambulant',
+  '/antrag/zahn',
+  '/antrag/stationaer',
+  '/antrag/zahn-ukv',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',

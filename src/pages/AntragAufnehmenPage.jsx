@@ -6,7 +6,9 @@ import {
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import CampaignShell from '@/components/campaign/CampaignShell';
-import { HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API } from '@/config/contactChannels';
+import { HEALIO_ANTRAGSWAHL_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API } from '@/config/contactChannels';
+import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
+import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
 import {
   formatBeitrag, formatUhr, mailZustand, starteAntragGespraech,
 } from '@/lib/nitaAntragGespraech';
@@ -21,6 +23,15 @@ import {
 // Die Zustimmung zur Sprachverbindung lebt nur im Zustand dieser Seite, nichts wird gespeichert.
 
 const ONLINE_LINK = '/ambulant';
+// Sparte aus der Wahl der zwei Wege (12.11.2026, ?sparte=). Das Gespräch kann heute nur ambulant. Für Zahn und
+// stationär steht oben nur ein Hinweis, ohne mehr zu versprechen.
+const SPARTE_HINWEIS = {
+  zahn: 'Es geht dir um deinen Zahnschutz? Nita nimmt deinen Wunsch auf.',
+  stationaer: 'Es geht dir um deinen Klinikschutz? Nita nimmt deinen Wunsch auf.',
+};
+const sparteAusAdresse = () => {
+  try { return new URLSearchParams(window.location.search).get('sparte'); } catch { return null; }
+};
 const TERMIN_LINK = '/terminvereinbarung';
 // Textlink im Fließtext: inline statt inline-flex (LINK), damit Zeilen nicht auseinanderfallen; Tippfläche über Polster.
 const LINK_IM_TEXT = 'rounded py-2.5 font-semibold text-emerald-800 underline underline-offset-4 outline-none focus-visible:ring-[3px] focus-visible:ring-home-midnight [@media(hover:hover)]:hover:text-home-midnight';
@@ -87,9 +98,11 @@ function Ausgeschaltet({ titelRef }) {
 }
 
 function Einstieg({ zustimmung, setZustimmung, starten, titelRef }) {
+  const [sparte] = useState(sparteAusAdresse);
   return (
     <div className="space-y-6" data-zustand="einstieg">
       <Kopf titel="Deinen Antrag gemeinsam mit Nita aufnehmen" titelRef={titelRef} />
+      {SPARTE_HINWEIS[sparte] && <Callout tone="info" data-sparte-hinweis={sparte}><p>{SPARTE_HINWEIS[sparte]}</p></Callout>}
       <div className="space-y-3">
         <p className={bodyText}>
           Nita ist eine KI. Sie geht mit dir im Gespräch den Antrag für den ambulanten Zusatzschutz der SDK durch. Das dauert etwa fünf bis zehn Minuten.
@@ -332,6 +345,12 @@ function Gespraechsablauf({ titelRef }) {
   const [beitrag, setBeitrag] = useState(null);
   const [festgehalten, setFestgehalten] = useState(null);
   const gespraechRef = useRef(null);
+  // Herkunft aus der Wahl der zwei Wege (12.11.2026), nur bei HEALIO_ANTRAGSWAHL_AKTIV. Sonst bleibt alles wie bisher.
+  const [herkunft] = useState(() => {
+    if (!HEALIO_ANTRAGSWAHL_AKTIV) return null;
+    const sparte = ['ambulant', 'zahn', 'stationaer'].includes(sparteAusAdresse()) ? sparteAusAdresse() : 'ambulant';
+    return sammleHerkunft({ sparte, weg: 'telefon', mitgebracht: holeVorbelegung(null).herkunft });
+  });
 
   const starten = useCallback(() => {
     if (!zustimmung || gespraechRef.current) return;
@@ -340,6 +359,7 @@ function Gespraechsablauf({ titelRef }) {
     setLauf({ phase: 'mikrofon' });
     const gespraech = starteAntragGespraech({
       api: HEALIO_ANTRAG_GESPRAECH_API,
+      herkunft,
       aufZustand: (z) => {
         if (z.phase === 'fehler' || z.phase === 'beendet') gespraechRef.current = null;
         setLauf(z);
@@ -350,7 +370,7 @@ function Gespraechsablauf({ titelRef }) {
       },
     });
     gespraechRef.current = gespraech;
-  }, [zustimmung]);
+  }, [zustimmung, herkunft]);
 
   const beenden = useCallback(() => { gespraechRef.current?.beenden(); }, []);
 

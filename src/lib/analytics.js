@@ -1,3 +1,4 @@
+import { merkeHerkunft } from './herkunftSpeicher.js';
 import {
   getConsentState,
   hasConsent,
@@ -16,6 +17,11 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/antrag/pruefen',
   // Antragsgespräch mit Nita (10.11.2026): Personen- und Gesundheitsangaben im Gespräch, nie messen.
   '/antrag/aufnehmen',
+  // Eigene Antragsmaske (12.11.2026): Gesundheitsangaben und IBAN, nie messen.
+  '/antrag/ambulant',
+  '/antrag/zahn',
+  '/antrag/stationaer',
+  '/antrag/zahn-ukv',
   '/zahn',
   '/en/dental',
   '/schwangerschaft',
@@ -193,9 +199,24 @@ const readExternalReferrerOrigin = () => {
 };
 
 // Beim Laden der App festhalten, bevor Navigation die Adresse aendert.
+const readLandingPath = () => {
+  if (!isBrowser()) return '';
+  const pfad = (window.location.pathname || '/').toLowerCase().replace(/\/+$/, '') || '/';
+  return /^[a-z0-9/-]{1,160}$/.test(pfad) ? pfad : '';
+};
 const landingContext = isBrowser()
-  ? Object.freeze({ query: readLandingCampaign(), referrer: readExternalReferrerOrigin() })
-  : Object.freeze({ query: '', referrer: '' });
+  ? Object.freeze({ query: readLandingCampaign(), referrer: readExternalReferrerOrigin(), pfad: readLandingPath() })
+  : Object.freeze({ query: '', referrer: '', pfad: '' });
+
+// Herkunft des Besuchs für den Antrag (12.11.2026, Antragsmaske und Antragsgespräch): dieselben geprüften
+// utm-Kennzeichen und die Einstiegsseite, die beim Laden festgehalten wurden. Nur im Arbeitsspeicher, nie gesendet,
+// außer mit dem Antrag selbst.
+if (isBrowser()) merkeHerkunft({ utm: Object.fromEntries(new URLSearchParams(landingContext.query)), einstiegsseite: landingContext.pfad || null });
+
+export const einstiegsHerkunft = () => ({
+  utm: Object.fromEntries(new URLSearchParams(landingContext.query)),
+  einstiegsseite: landingContext.pfad || null,
+});
 let landingAttributionSent = false;
 
 const ensureDataLayer = () => {

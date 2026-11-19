@@ -160,8 +160,10 @@ function warteAufKandidaten(verbindung, ms, u) {
 //   beendet { grund: selbst | zeit | getrennt | aufgelegt }.
 // aufErgebnis bekommt { art: 'beitrag', beitrag } oder { art: 'festgehalten', mail }.
 // Rückgabe: { beenden() }.
+// herkunft (optional, 12.11.2026): geht nur beim Festhalten als eigenes Feld mit. Ohne herkunft bleibt die Anfrage
+// genau wie bisher.
 export function starteAntragGespraech({
-  api, aufZustand = () => {}, aufErgebnis = () => {}, umgebung = {},
+  api, aufZustand = () => {}, aufErgebnis = () => {}, umgebung = {}, herkunft = null,
 }) {
   const u = { ...standardUmgebung(), ...umgebung };
   const basis = String(api || '').replace(/\/+$/, '');
@@ -268,7 +270,11 @@ export function starteAntragGespraech({
               mode: 'cors',
               referrerPolicy: 'no-referrer',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ karte, name: aufruf.name, arguments: aufruf.args }),
+              body: JSON.stringify(herkunft && aufruf.name === 'antrag_festhalten'
+                ? {
+                  karte, name: aufruf.name, arguments: aufruf.args, herkunft,
+                }
+                : { karte, name: aufruf.name, arguments: aufruf.args }),
             });
             const daten = await antwort.json().catch(() => null);
             auswertung = werteWerkzeugAntwort({ name: aufruf.name, status: antwort.status, daten });

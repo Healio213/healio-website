@@ -7,7 +7,7 @@
  * Wer hier etwas ändert, ändert die SQL-Dateien mit.
  */
 
-export const ZAEHLER_EREIGNISSE = Object.freeze(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick']);
+export const ZAEHLER_EREIGNISSE = Object.freeze(['leistungsweg_klick', 'sdk_klick', 'kurzcheck_abgeschickt', 'versicherer_klick', 'antragsweg']);
 const EREIGNIS_SET = new Set(ZAEHLER_EREIGNISSE);
 
 export const ZAEHLER_GERAETE = Object.freeze(['mobil', 'desktop']);
@@ -41,6 +41,11 @@ const KURZCHECK_VARIANTEN_SET = new Set(KURZCHECK_VARIANTEN);
 // Antwort oder Ergebnis eines Checks.
 export const ZAEHLER_VERSICHERER = Object.freeze(['bayerische', 'ukv']);
 const VERSICHERER_SET = new Set(ZAEHLER_VERSICHERER);
+
+// Wahl der zwei Wege vor dem Abschluss (12.11.2026, docs/supabase/2026-11-12_anonyme_zaehler_antragsweg.sql):
+// je Sparte nur „Wahl gezeigt“, „allein abschließen“ oder „zusammen am Telefon“. Nie Tarif, Antwort oder Person.
+export const ANTRAGSWEG_ZIELE = Object.freeze(['ambulant', 'zahn', 'stationaer'].flatMap((sparte) => ['gezeigt', 'allein', 'telefon'].map((weg) => `${sparte}-${weg}`)));
+const ANTRAGSWEG_SET = new Set(ANTRAGSWEG_ZIELE);
 
 export const istLeistungsseite = (pfad) => LEISTUNGSSEITEN_SET.has(pfad);
 
@@ -76,6 +81,10 @@ export const baueZaehlerEintrag = (ereignis, { vonPfad, ziel = null } = {}, gera
     // von_pfad ist jede Seite mit erlaubtem Pfad, auch künftige Unterseiten
     // wie /zahn/behandlung-steht-an. Das Ziel ist nur der Versicherer.
     if (!VERSICHERER_SET.has(ziel)) return null;
+    return { ereignis, von_pfad: von, ziel, geraet };
+  }
+  if (ereignis === 'antragsweg') {
+    if (!ANTRAGSWEG_SET.has(ziel)) return null;
     return { ereignis, von_pfad: von, ziel, geraet };
   }
   // sdk_klick: nur die Seite, auf der der Rechner geöffnet wurde.
