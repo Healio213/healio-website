@@ -7,7 +7,8 @@ import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import {
   Button, Callout, FehlerText, TRENNUNG, bodyText, buttonClass, cx, schuetze,
 } from '@/components/antrag/ui';
-import { TeilKopf, telefonLink } from './teile';
+import { antragTelefonAktiv } from '@/config/contactChannels';
+import { TERMIN_LINK, TeilKopf, telefonLink } from './teile';
 import { UNTERLAGEN_HINWEIS, unterlagenUnvollstaendig } from './unterlagenPflicht';
 
 // „Ihre Vertragsunterlagen“ wie in der SDK-Strecke: Jedes Dokument muss
@@ -70,7 +71,9 @@ export default function SchrittUnterlagenDownload({
           <p>{UNTERLAGEN_HINWEIS}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button variant="secondary" onClick={unterlagen.nochmal}>Noch einmal versuchen</Button>
-            <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Lieber zusammen am Telefon</a>
+            {antragTelefonAktiv(definition.sparte)
+              ? <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Lieber zusammen am Telefon</a>
+              : <a href={TERMIN_LINK} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Termin vereinbaren</a>}
           </div>
         </Callout>
       )}

@@ -745,7 +745,11 @@ async function ukvDurchlauf(browser) {
   await foto(page, '390-ukv-02-beitrag');
   await weiter(page);
   await bildschirm(page, 'erkl:auftrag');
+  // Erklärungen einheitlich (19.11.2026): Level Nine als Empfänger, Link zur Datenschutzerklärung.
+  pruefe(await page.locator('a[href="/datenschutz"][data-unterlage]').count() === 1, 'UKV: Link zur Datenschutzerklärung an der Einwilligung');
+  pruefe(/cpit comparit GmbH \(Level Nine\) für die UKV/.test(await page.textContent('[data-bildschirm="erkl:auftrag"]')), 'UKV: Level Nine als Empfänger im Einwilligungstext');
   for (const key of ['verzicht', 'vollmacht', 'gesundheitsdaten']) await page.locator(`label:has(#feld-${key})`).click();
+  await foto(page, '390-ukv-02b-erklaerungen');
   await weiter(page);
   await bildschirm(page, 'anschrift');
   await page.fill('#feld-strasse', 'Musterweg 12');

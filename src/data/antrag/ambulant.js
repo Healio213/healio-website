@@ -149,7 +149,7 @@ const frage2 = {
 };
 
 const teileSdk = sdkTeile({
-  strecke: 'sdkAmbulant', produkt: 'sdk-ambulant', vollmacht: TEXT_10_VOLLMACHT, tarifFuerUnterlagen: () => 'AP',
+  strecke: 'sdkAmbulant', produkt: 'sdk-ambulant', vollmacht: TEXT_10_VOLLMACHT, tarifFuerUnterlagen: () => 'AP', auswahl: TEXT_8_AUSWAHL,
 });
 
 const ambulant = {

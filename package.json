@@ -84,7 +84,7 @@
     "test:antrag-gespraech": "node --test scripts/check-antrag-gespraech.mjs",
     "test:antrag-aufnehmen": "node scripts/check-antrag-aufnehmen-rendered.mjs",
     "antrag-selbst:mock": "node scripts/antrag-selbst-mock.mjs",
-    "test:antragsmaske": "node --test scripts/check-antragsmaske-regeln.mjs scripts/check-zahn-vorabfrage.mjs scripts/check-antrag-schalter.mjs",
+    "test:antragsmaske": "node --test scripts/check-antragsmaske-regeln.mjs scripts/check-zahn-vorabfrage.mjs scripts/check-antrag-schalter.mjs scripts/check-antragsmaske-erklaerungen.mjs",
     "test:antragsmaske-rendered": "node scripts/check-antragsmaske-rendered.mjs"
   },
   "dependencies": {

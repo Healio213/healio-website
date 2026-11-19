@@ -39,6 +39,7 @@ import {
   UNTERLAGEN_HEALIO,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
+import { DATENSCHUTZ_LINK } from './sdkStrecke.js';
 
 const BA = 'BA die Bayerische Allgemeine Versicherung AG';
 const ASSET = (id) => `https://bayculator.diebayerische.de/cms/assets/${id}?download`;
@@ -259,6 +260,7 @@ const zahn = {
           titel: 'Gesundheitsangaben bei Healio',
           kurz: fuerBayerische(ERKLAERUNG_KURZ.gesundheitsdaten),
           volltext: [['p', fuerBayerische(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join(''))]],
+          links: [DATENSCHUTZ_LINK],
           haken: 'Ich bin einverstanden.',
           pflicht: true,
         },

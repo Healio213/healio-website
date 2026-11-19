@@ -9,7 +9,7 @@
 
 import {
   BEITRAG_VORBEHALT, ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, SDK_NAME, TEIL_3_TITEL, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
-  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS,
+  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS, UNTERLAGEN_HEALIO,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
 import {
@@ -19,9 +19,18 @@ import {
 export const WICHTIGE_INFORMATIONEN = 'https://www.sdk.de/downloads/online-absatz/0.155a.pdf';
 export const SDK_HINWEIS_NACH_EINGANG = 'Die SDK prüft deine Angaben nach Eingang und entscheidet dann über deinen Antrag.';
 
-// strecke: 'sdkAmbulant' | 'sdkStationaer'; vollmacht: Text 10 für dieses Produkt.
+// Link zur Datenschutzerklärung an der Einwilligung zu den Gesundheitsangaben
+// (19.11.2026, gleiche Art wie am Datenschutz-Haken im Schritt „Deine Daten“).
+export const DATENSCHUTZ_LINK = Object.freeze({ label: 'Datenschutzerklärung', href: '/datenschutz' });
+// Unterlagen von Healio wie in der Strecke der Bayerischen und der UKV (19.11.2026).
+export const UNTERLAGEN_VON_HEALIO = Object.freeze({
+  von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))],
+});
+
+// strecke: 'sdkAmbulant' | 'sdkStationaer'; vollmacht: Text 10 für dieses Produkt;
+// auswahl: Text 8, Hinweis auf die eingeschränkte Auswahl dieses Produkts.
 export function sdkTeile({
-  strecke, produkt, vollmacht, vollmachtKurz, tarifFuerUnterlagen,
+  strecke, produkt, vollmacht, vollmachtKurz, tarifFuerUnterlagen, auswahl,
 }) {
   const schritte = LEVELNINE[strecke].schritte;
   const f = (schritt, id) => feldAus(schritte, schritt, id);
@@ -91,10 +100,14 @@ export function sdkTeile({
         id: 'beratung',
         teil: 'Beratung und Auftrag',
         eintraege: [
+          ...(auswahl ? [{ art: 'hinweis', text: auswahl }] : []),
           { art: 'hinweis', text: beratung.wortlaut, terminLink: true },
           hakenAus(f(6, 'avoidAdvice'), { schritt: 6, titel: 'Beratungsverzicht gegenüber der SDK' }),
           {
             art: 'haken', key: 'verzicht', titel: 'Verzicht auf Beratung durch Healio', warnung: TEXT_9_HINWEIS, haken: TEXT_9_HAKEN, pflicht: true,
+          },
+          {
+            art: 'unterlagen', key: 'unterlagenHealio', titel: 'Unterlagen von Healio', gruppen: [UNTERLAGEN_VON_HEALIO], pflicht: false,
           },
           {
             art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: vollmachtKurz || ERKLAERUNG_KURZ.vollmacht, volltext: [['p', vollmacht]], dokument: 'Maklervertrag', haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
@@ -105,6 +118,7 @@ export function sdkTeile({
             titel: 'Gesundheitsangaben bei Healio',
             kurz: ERKLAERUNG_KURZ.gesundheitsdaten,
             volltext: [['p', TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join('')]],
+            links: [DATENSCHUTZ_LINK],
             haken: 'Ich bin einverstanden.',
             pflicht: true,
           },

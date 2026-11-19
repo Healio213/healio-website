@@ -150,11 +150,10 @@ export const TEIL_3_TITEL = 'Deine Prüfseite';
 // Angabe aus Schritt 1, die Healio laut Text 10 nur bestätigt eintragen darf.
 export const PRUEF_KRANKENVERSICHERUNG = 'Gesetzlich versichert, Wohnsitz in Deutschland';
 
-// Text 12: Bestätigungsknopf (die SMS-Bestätigung gibt es im Entwurf noch nicht).
-// Ausgelöst wird der Auftrag wie im Konzept per Klick und SMS-Code; ob es
-// stattdessen ein Link per E-Mail wird, entscheidet Frank.
+// Text 12: Bestätigungsknopf. Ausgelöst wird der Auftrag per Klick. Eine
+// zusätzliche Bestätigung per Code (SMS oder E-Mail) ist nicht gebaut; der
+// frühere Platzhaltertext dafür ist seit 19.11.2026 entfernt (nirgends genutzt).
 export const TEXT_12_KNOPF = 'Mit dem Klick beauftragst du Healio, deinen Antrag genau so, wie du ihn hier siehst, in deinem Namen bei der SDK zu stellen. Er kostet dich den oben genannten Monatsbeitrag.';
-export const TEXT_12_SMS_PLATZHALTER = 'Platzhalter: Im echten Betrieb bestätigst du hier zusätzlich mit dem Code aus einer SMS.';
 export const KNOPF_BEANTRAGEN = 'Jetzt kostenpflichtig beantragen lassen';
 
 // Text 13: Kontoinhaber (wie im Konzept). Wie der Link den Kontoinhaber

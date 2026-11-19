@@ -21,6 +21,7 @@ import {
   TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS, UNTERLAGEN_HEALIO,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
+import { DATENSCHUTZ_LINK } from './sdkStrecke.js';
 import { bedingungErfuellt } from '../../lib/antragsmaske/regeln.js';
 import {
   LEVELNINE, antwortenAusStrecke, feldAus, fragenZuordnung, frageAus,
@@ -30,18 +31,22 @@ const SCHRITTE = LEVELNINE.ukvZahn.schritte;
 const f = (schritt, id) => feldAus(SCHRITTE, schritt, id);
 const UKV = 'Union Krankenversicherung AG';
 
+const LEVEL_NINE_SDK = 'in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt';
+const LEVEL_NINE_UKV = 'in die Online-Antragsstrecke der UKV, die die cpit comparit GmbH (Level Nine) für die UKV betreibt';
+
 // Healio-Texte der Prüfseite mit der UKV statt der SDK (Name ersetzt, sonst gleich).
 function fuerUkv(text) {
   const neu = text
     .replace('die ambulante Zusatzversicherung bei der Süddeutschen Krankenversicherung a. G. (SDK)', `die Zahnzusatzversicherung ZahnPRIVAT bei der ${UKV} (UKV)`)
-    .replace('in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt', 'in die Online-Antragsstrecke der UKV')
+    // Die UKV-Strecke betreibt ebenfalls Level Nine: Empfänger in derselben Form wie bei der SDK (19.11.2026).
+    .replace(LEVEL_NINE_SDK, LEVEL_NINE_UKV)
     .replace(/Online-Antragsstrecke der SDK/g, 'Online-Antragsstrecke der UKV')
     .replace(/Post der SDK/g, 'Post der UKV')
     .replace(/bei der SDK/g, 'bei der UKV')
     .replace(/an die SDK/g, 'an die UKV')
     .replace(/Stellt die SDK/g, 'Stellt die UKV')
     .replace(/Nennt die SDK/g, 'Nennt die UKV');
-  if (/SDK|Süddeutsche|Level Nine|cpit/.test(neu)) throw new Error(`zahnUkv.js: SDK-Rest im Text: ${neu.slice(0, 80)}`);
+  if (/SDK|Süddeutsche|Level Nine|cpit/.test(neu.replace(LEVEL_NINE_UKV, ''))) throw new Error(`zahnUkv.js: SDK-Rest im Text: ${neu.slice(0, 80)}`);
   return neu;
 }
 
@@ -202,6 +207,7 @@ const zahnUkv = {
           titel: 'Gesundheitsangaben bei Healio',
           kurz: fuerUkv(ERKLAERUNG_KURZ.gesundheitsdaten),
           volltext: [['p', fuerUkv(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join(''))]],
+          links: [DATENSCHUTZ_LINK],
           haken: 'Ich bin einverstanden.',
           pflicht: true,
         },

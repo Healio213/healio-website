@@ -65,8 +65,11 @@ const GRUPPEN = Object.entries(LEVELNINE.beitraege.sdkStationaer).map(([alter, z
   von: Number(alter), bis: Number(alter), preise: { SP1: zeile.SDKSP1, SP2: zeile.SDKSP2, SPU: zeile.SDKSPU },
 })).sort((a, b) => a.von - b.von);
 
+// Text 8 für stationär, gleich gebaut wie bei ambulant, Bayerischer und UKV (19.11.2026).
+const TEXT_8_AUSWAHL_STATIONAER = 'Gut zu wissen: In diesem Antrag geht es nur um die stationären Tarife SP1, SP2 und SPU der Süddeutschen Krankenversicherung a. G. (SDK). Grundlage sind die Bedingungen und Beiträge der SDK. Andere Versicherer vergleichen wir hier nicht.';
+
 const teile = sdkTeile({
-  strecke: 'sdkStationaer', produkt: 'sdk-stationaer', vollmacht: VOLLMACHT, vollmachtKurz: ERKLAERUNG_KURZ.vollmacht, tarifFuerUnterlagen: (tarif) => tarif,
+  strecke: 'sdkStationaer', produkt: 'sdk-stationaer', vollmacht: VOLLMACHT, vollmachtKurz: ERKLAERUNG_KURZ.vollmacht, tarifFuerUnterlagen: (tarif) => tarif, auswahl: TEXT_8_AUSWAHL_STATIONAER,
 });
 
 const stationaer = {
