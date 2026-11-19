@@ -13,7 +13,7 @@
  * vor dem Vertragsbeginn. false: volle 750 EUR im ersten Kalenderjahr. Bei
  * false entfallen das Feld Beginnmonat und der Pflichtsatz P5 von selbst.
  */
-export const BEGINNJAHR_ANTEILIG = true;
+export const BEGINNJAHR_ANTEILIG = false;
 
 export const JAHRESGRENZE_CENT = 75000;
 export const BAUSTEIN_MONATSBEITRAG_CENT = 2990;

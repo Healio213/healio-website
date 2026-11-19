@@ -4,7 +4,7 @@
  * (Formeln 4.3, Grenzfälle 4.4, Schalter 4.5, Prüffälle 4.7).
  *
  * - alle 13 Prüffälle, je mit Jahresgrenze anteilig (Schalter true) und voll (false)
- * - Schalter BEGINNJAHR_ANTEILIG steht auf true und ist eine einzelne Konstante
+ * - Schalter BEGINNJAHR_ANTEILIG steht auf false (volle Jahressumme im Beginnjahr) und ist eine einzelne Konstante
  * - Eingabe „1.040,50“ und „1040,5“ werden richtig gelesen
  * - S1 ist nie 1.500 EUR, Beträge in ganzen Cent
  * - Datenschutz: Quelltext von Logik und Oberfläche enthält weder localStorage,
@@ -136,14 +136,14 @@ test('Formatierung: deutsch mit zwei Nachkommastellen und EUR', () => {
   assert.equal(formatEuro(6250), '62,50 EUR');
 });
 
-test('Schalter BEGINNJAHR_ANTEILIG steht auf true und ist genau eine Konstante im Code', () => {
-  assert.equal(BEGINNJAHR_ANTEILIG, true);
+test('Schalter BEGINNJAHR_ANTEILIG steht auf false und ist genau eine Konstante im Code', () => {
+  assert.equal(BEGINNJAHR_ANTEILIG, false);
   const quelle = readFileSync(new URL('../src/lib/zahnSofortRechner.js', import.meta.url), 'utf8');
-  assert.equal((quelle.match(/export const BEGINNJAHR_ANTEILIG = true;/g) || []).length, 1);
+  assert.equal((quelle.match(/export const BEGINNJAHR_ANTEILIG = false;/g) || []).length, 1);
   // Ohne ausdrückliche Option rechnet die Funktion mit dem Schalter.
   const ohneOption = berechneZahnSofort({ gesamt: '1.200,00', kasse: '200,00', tarif: 'prestige', beginnMonat: 12 });
-  assert.equal(ohneOption.sofort1, 6250);
-  assert.equal(ohneOption.anteilig, true);
+  assert.equal(ohneOption.sofort1, 75000);
+  assert.equal(ohneOption.anteilig, false);
 });
 
 test('Vorwahl des Beginnmonats: Monat nach dem heutigen, im Dezember der Januar', () => {

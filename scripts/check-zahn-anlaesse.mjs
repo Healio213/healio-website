@@ -207,7 +207,8 @@ test('Gerendertes HTML der Seite (nur mit vorhandenem dist/)', { skip: !existsSy
   assert.ok(html.includes(seite.hero.h1), 'H1 im HTML');
   assert.match(html, /"@type":"FAQPage"/);
   for (const nr of ['p1', 'p2', 'p3', 'p4']) assert.ok(html.includes(seite.rechner.pflichtsaetze[nr]), `Pflichtsatz ${nr} im HTML`);
-  assert.ok(html.includes(seite.rechner.pflichtsaetze.p5), 'Pflichtsatz P5 im HTML (Schalter steht auf true)');
+  assert.ok(!html.includes(seite.rechner.pflichtsaetze.p5), 'Pflichtsatz P5 fehlt im HTML (Schalter steht auf false)');
+  assert.ok(!html.includes(seite.rechner.felder.beginnMonat.label), 'Feld Beginnmonat fehlt im HTML (Schalter steht auf false)');
   assert.doesNotMatch(html, /googletagmanager|connect\.facebook\.net|googleadservices/);
   assert.ok(!/name="robots" content="noindex/.test(html), 'indexierbar');
 });
