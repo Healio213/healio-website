@@ -47,30 +47,27 @@ function fenster({ pfad = '/ambulant', suche = '', verweis = '' } = {}) {
 }
 function aufraeumen() { delete globalThis.window; delete globalThis.document; }
 
-// Seit 19.11.2026 (Franks Ja): nur Stationär mit Maske und Wahl an, ohne Telefonweg; alles andere aus.
-test('Vorgabe: nur Stationär an (Maske und Wahl, kein Telefonweg), auch im Build mit gesetzten VITE-Werten', async () => {
+test('Vorgabe: alle Sparten aus (Maske, Wahl, Telefonweg), auch im Build mit gesetzten VITE-Werten', async () => {
   fenster();
   for (const env of [{}, { DEV: false, VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAG_TELEFON: '1' }]) {
     const m = await lade(env);
     for (const sparte of ['ambulant', 'zahn', 'stationaer']) {
-      const an = sparte === 'stationaer';
-      assert.equal(m.antragsmaskeAktiv(sparte), an, `Maske ${sparte}`);
-      assert.equal(m.antragswahlAktiv(sparte), an, `Wahl ${sparte}`);
+      assert.equal(m.antragsmaskeAktiv(sparte), false, `Maske ${sparte}`);
+      assert.equal(m.antragswahlAktiv(sparte), false, `Wahl ${sparte}`);
       assert.equal(m.antragTelefonAktiv(sparte), false, `Telefon ${sparte}`);
     }
-    assert.equal(m.HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV, true);
+    assert.equal(m.HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV, false);
     assert.equal(m.antragsmaskeAktiv('zahn-ukv'), false, 'unbekannte Sparte bleibt aus');
     assert.equal(m.HEALIO_ANTRAG_GESPRAECH_AKTIV, true, 'Antragsgespräch ambulant (heute versteckt live) unverändert an');
   }
   aufraeumen();
 });
 
-test('Freigabe im Quelltext: nur Stationär bei Maske und Wahl, Telefonweg überall aus', () => {
+test('Freigabe im Quelltext: drei Schalter je Sparte, alle false', () => {
   const text = fs.readFileSync(path.join(SRC, 'config/contactChannels.js'), 'utf8');
-  for (const name of ['ANTRAGSMASKE_FREIGABE', 'ANTRAGSWAHL_FREIGABE']) {
-    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: false, zahn: false, stationaer: true \\};`), name);
+  for (const name of ['ANTRAGSMASKE_FREIGABE', 'ANTRAGSWAHL_FREIGABE', 'ANTRAG_TELEFON_FREIGABE']) {
+    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: false, zahn: false, stationaer: false \\};`), name);
   }
-  assert.match(text, /const ANTRAG_TELEFON_FREIGABE = \{ ambulant: false, zahn: false, stationaer: false \};/);
   assert.match(text, /const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;/);
   // Kein alter Gesamtschalter mehr, der alle Sparten auf einmal einschaltet.
   const alle = fs.readdirSync(SRC, { recursive: true }).filter((f) => /\.(jsx?|tsx?)$/.test(f));

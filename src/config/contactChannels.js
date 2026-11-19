@@ -51,10 +51,8 @@ export const HEALIO_ANTRAG_GESPRAECH_API = import.meta.env?.VITE_ANTRAG_GESPRAEC
 // Werte überschreiben, im Build nie: '1' schaltet alle Sparten ein, '0' alle aus, eine Liste wie 'ambulant,zahn'
 // genau diese ein.
 export const ANTRAG_SPARTEN = Object.freeze(['ambulant', 'zahn', 'stationaer']);
-// 19.11.2026 (Franks Ja): nur Stationär (SDK) an. Mit Maske und Wahl an und ohne Telefonweg führt jeder
-// Abschlussknopf für SDK stationär direkt in die Maske (LeadCaptureProvider.jsx, direkteMaske).
-const ANTRAGSMASKE_FREIGABE = { ambulant: false, zahn: false, stationaer: true };
-const ANTRAGSWAHL_FREIGABE = { ambulant: false, zahn: false, stationaer: true };
+const ANTRAGSMASKE_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
+const ANTRAGSWAHL_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
 const ANTRAG_TELEFON_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
 
 // freigabe: { sparte: boolean }; lokal: Wert der VITE_-Variable oder undefined. Nur bekannte Sparten zählen.

@@ -183,19 +183,6 @@ const DatenschutzPage = () => {
               <p>{lang === 'en' ? 'You may withdraw consent at any time through the unsubscribe link in each update or by emailing info@healio.de. The mailing address is retained while your subscription is active; after withdrawal we stop sending and retain only evidence necessary to demonstrate consent or prevent further messages for as long as that purpose requires. Your choice does not affect access to articles, the calculator or personal enquiries. A session-only browser flag prevents repeated automatic pop-ups; it contains no name, email address or tracking identifier.' : 'Sie können Ihre Einwilligung jederzeit über den Abmeldelink in jeder Informationsmail oder per E-Mail an info@healio.de widerrufen. Die Versandadresse bleibt während Ihrer Anmeldung gespeichert; nach dem Widerruf stoppen wir den Versand und bewahren nur erforderliche Nachweise der Einwilligung beziehungsweise eine notwendige Versandsperre zweckgebunden auf. Ihre Entscheidung hat keinen Einfluss auf den Zugang zu Ratgebern, Rechner oder persönlichen Anfragen. Eine nur für die Browsersitzung gespeicherte Markierung verhindert wiederholte automatische Pop-ups; sie enthält keinen Namen, keine E-Mail-Adresse und keine Trackingkennung.'}</p>
               <h3 className="text-xl font-semibold mt-6 mb-3">{t('datenschutz.insurerFlowsTitle')}</h3>
               <p>{t('datenschutz.insurerFlowsText')}</p>
-              {/* Eigene Antragsmaske (19.11.2026, zunächst nur Klinikschutz der SDK); die Maske gibt es nur auf Deutsch. */}
-              {lang !== 'en' && (
-                <>
-                  <h3 id="online-antrag" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.onlineAntragTitle')}</h3>
-                  <p>{t('datenschutz.onlineAntragText')}</p>
-                  <p>{t('datenschutz.onlineAntragDaten')}</p>
-                  <p>{t('datenschutz.onlineAntragZweck')}</p>
-                  <p>{t('datenschutz.onlineAntragSpeicher')}</p>
-                  <p>{t('datenschutz.onlineAntragMails')}</p>
-                  <p>{t('datenschutz.onlineAntragHerkunft')}</p>
-                  <p>{t('datenschutz.onlineAntragRechte')}</p>
-                </>
-              )}
               <h3 id="partnercode" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.partnerCodeTitle')}</h3>
               <p>{t('datenschutz.partnerCodeText')}</p>
               <p>{t('datenschutz.partnerCodeLinks')}</p>

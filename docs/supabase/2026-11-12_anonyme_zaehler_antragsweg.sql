@@ -3,28 +3,18 @@ begin;
 -- ---------------------------------------------------------------------------
 -- Anonymer Zähler: neues Ereignis antragsweg (public.anonyme_zaehler)
 --
--- Stand: 19.11.2026, ENDGÜLTIG, NICHT AUSGEFÜHRT. Einspielen nur nach Franks
--- Go (Ja vom 19.11.2026 zum Einschalten Stationär), im Projekt „HEALIO
--- Production“. Legt KEINE neue Tabelle an: Die Datei ändert an der
--- bestehenden Tabelle public.anonyme_zaehler die beiden CHECKs zu Ereignis
--- und Zielliste und die Einfügeregel für anon (vollständig neu geschrieben,
--- versicherer_klick bleibt enthalten). Spalten, Rechte (nur insert für anon,
--- kein select/update/delete), Zeilensicherheit (bleibt an) und Löschfrist
--- (pg_cron, 25 Monate) bleiben unverändert.
---
--- Voraussetzung: 2026-11-02_anonyme_zaehler.sql und
--- 2026-11-10_anonyme_zaehler_versicherer_klick.sql sind eingespielt (Prüfung
--- unten, Schritt 0). Die Datei ist mehrfach gefahrlos ausführbar (drop … if
--- exists, dann neu anlegen, alles in einer Transaktion).
+-- Stand: 12.11.2026. VORBEREITET, NICHT AUSGEFÜHRT. Einspielen nur nach Franks
+-- Go, im Projekt „HEALIO Production“, nach
+-- 2026-11-10_anonyme_zaehler_versicherer_klick.sql. Die Datei schreibt beide
+-- CHECKs und die Einfügeregel vollständig neu (enthält versicherer_klick mit).
 --
 -- Solange diese Datei fehlt, lehnt die Datenbank antragsweg ab, api/zaehler.js
--- antwortet trotzdem 204 und die Website merkt nichts.
+-- antwortet trotzdem 204 und die Website merkt nichts. Die Wahl selbst ist
+-- ohnehin hinter HEALIO_ANTRAGSWAHL_AKTIV (Standard aus).
 --
 -- Was neu gezählt wird (shared/anonyme-zaehler.js, ANTRAGSWEG_ZIELE):
---   antragsweg  von_pfad = Seite des Knopfs (Produktseite oder z. B.
---               /schwangerschaft), ziel = <sparte>-gezeigt | <sparte>-allein |
---               <sparte>-telefon. Beim direkten Weg in die Maske (Stationär seit
---               19.11.2026, keine Wahl) zählt nur „stationaer-allein“.
+--   antragsweg  von_pfad = Produktseite der Wahl (/ambulant, /zahn, /stationaer),
+--               ziel = <sparte>-gezeigt | <sparte>-allein | <sparte>-telefon
 --
 -- Was bewusst fehlt: Tarif, Geburtsjahr, Antworten, jede Angabe zur Person,
 -- IP, Uhrzeit, Kennung. Spalten, Rechte und Löschfrist bleiben unverändert.
@@ -70,22 +60,11 @@ create policy anonyme_zaehler_anon_insert on public.anonyme_zaehler
 commit;
 
 -- ---------------------------------------------------------------------------
--- Schritt 0, vor dem Einspielen (nur lesen): Tabelle und Vorgänger da?
---   select to_regclass('public.anonyme_zaehler');                      -- erwartet: anonyme_zaehler
---   select pg_get_constraintdef(oid) from pg_constraint
---    where conname = 'anonyme_zaehler_ereignis_check';                 -- erwartet: enthält versicherer_klick
---
 -- Prüfung nach dem Einspielen (nur lesen):
 --
 --   select conname, pg_get_constraintdef(oid) from pg_constraint
 --    where conrelid = 'public.anonyme_zaehler'::regclass order by conname;
 --   Erwartet: ereignis_check und ziel_liste_check mit antragsweg.
---   select relrowsecurity from pg_class where oid = 'public.anonyme_zaehler'::regclass;   -- erwartet: true
---   select polname, pg_get_expr(polqual, polrelid), pg_get_expr(polwithcheck, polrelid)
---     from pg_policy where polrelid = 'public.anonyme_zaehler'::regclass;               -- erwartet: anon_insert mit antragsweg
---   Wirkung: nach einem Klick auf einen Stationär-Knopf auf healio.de
---     select ziel, count(*) from public.anonyme_zaehler where ereignis = 'antragsweg' and tag = current_date group by 1;
---   erwartet: stationaer-allein mit mindestens 1.
 --
 -- Auswertung der Wahl (Summen, nie Einzelzeilen weitergeben):
 --   select ziel, geraet, count(*) as anzahl
