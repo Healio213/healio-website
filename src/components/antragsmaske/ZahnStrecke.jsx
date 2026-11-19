@@ -5,7 +5,7 @@ import {
   ArrowLeft, ArrowRight, Check, Phone,
 } from 'lucide-react';
 import {
-  HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_PHONE_DISPLAY, HEALIO_PHONE_TEL,
+  HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_PHONE_DISPLAY, HEALIO_PHONE_TEL, antragTelefonAktiv,
 } from '@/config/contactChannels';
 import { DEFINITIONEN } from '@/data/antrag';
 import {
@@ -89,8 +89,8 @@ function Optionen({ id, frage, wert, onWahl }) {
 function TelefonWege({ sparte = 'zahn' }) {
   return (
     <div className="flex flex-wrap gap-2">
-      <a href={HEALIO_ANTRAG_GESPRAECH_AKTIV ? telefonLink(sparte) : TERMIN_LINK} data-zaehler-ignorieren="" className={buttonClass('primary')}>
-        {HEALIO_ANTRAG_GESPRAECH_AKTIV ? 'Mit Nita am Telefon' : 'Termin vereinbaren'}
+      <a href={antragTelefonAktiv(sparte) ? telefonLink(sparte) : TERMIN_LINK} data-zaehler-ignorieren="" className={buttonClass('primary')}>
+        {antragTelefonAktiv(sparte) ? 'Mit Nita am Telefon' : 'Termin vereinbaren'}
         <ArrowRight className="h-5 w-5" aria-hidden="true" />
       </a>
       <a href={HEALIO_PHONE_TEL} data-zaehler-ignorieren="" className={buttonClass('secondary')}>
@@ -307,7 +307,8 @@ export default function ZahnStrecke({ definition }) {
           {bayerisch ? 'Noch zwei Angaben für deinen Beitrag' : 'Noch eine Angabe für deinen Beitrag'}
         </h1>
         <p className="mt-2 text-base leading-7 text-home-slate">Damit zeigen wir dir gleich deinen echten Monatsbeitrag.</p>
-        <form className={cx('mt-6 grid gap-4', bayerisch && 'sm:grid-cols-2')} onSubmit={(event) => { event.preventDefault(); angabenWeiter(); }} noValidate>
+        {/* Bewusst kein Formular-Element: hier wird nichts abgeschickt (check-form-hardening). Enter in einem Feld geht weiter wie der Knopf. */}
+        <div className={cx('mt-6 grid gap-4', bayerisch && 'sm:grid-cols-2')} onKeyDown={(event) => { if (event.key === 'Enter' && event.target.tagName === 'INPUT') { event.preventDefault(); angabenWeiter(); } }}>
           <Field id="vorab-geburtsdatum" label="Dein Geburtsdatum" error={versucht && !grenze ? datumFehler : null}>
             <input
               {...fieldAria('vorab-geburtsdatum', { error: versucht && !grenze ? datumFehler : null })}
@@ -337,8 +338,7 @@ export default function ZahnStrecke({ definition }) {
               />
             </Field>
           )}
-          <button type="submit" className="sr-only">Weiter</button>
-        </form>
+        </div>
         {grenze && (
           <Callout tone="hinweis" className="mt-4" data-altersgrenze="">
             <p className="font-bold">{grenze.text}</p>
@@ -432,7 +432,7 @@ export default function ZahnStrecke({ definition }) {
     );
   }
 
-  const telefonZiel = HEALIO_ANTRAG_GESPRAECH_AKTIV ? { text: 'Mit Nita am Telefon', href: telefonLink('zahn') } : { text: 'Termin vereinbaren', href: TERMIN_LINK };
+  const telefonZiel = antragTelefonAktiv('zahn') ? { text: 'Mit Nita am Telefon', href: telefonLink('zahn') } : { text: 'Termin vereinbaren', href: TERMIN_LINK };
   const weiterKnopf = (phase === 'angaben' && { text: 'Beitrag zeigen', onClick: angabenWeiter, data: { 'data-vorab-weiter': '' } })
     || (phase === 'ergebnis' && ziel?.ziel === 'telefon' && { ...telefonZiel, data: { 'data-vorab-telefon': '' } })
     || (phase === 'ergebnis' && ziel?.ziel !== 'telefon' && !ukvAus && { text: 'Weiter zum Antrag', onClick: () => setPhase('maske'), data: { 'data-vorab-start': '' } })

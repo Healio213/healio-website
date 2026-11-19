@@ -92,7 +92,7 @@ const InstagramPage = React.lazy(() => import('@/pages/InstagramPage'));
 const AntragPruefenPage = React.lazy(() => import('@/pages/AntragPruefenPage'));
 // Antragsgespräch mit Nita (10.11.2026): eigenständig, noindex, ohne Messung, hinter HEALIO_ANTRAG_GESPRAECH_AKTIV.
 const AntragAufnehmenPage = React.lazy(() => import('@/pages/AntragAufnehmenPage'));
-// Eigene Antragsmaske je Sparte (12.11.2026): eigenständig, noindex, ohne Messung, hinter HEALIO_ANTRAGSMASKE_AKTIV.
+// Eigene Antragsmaske je Sparte (12.11.2026): eigenständig, noindex, ohne Messung, je Sparte hinter antragsmaskeAktiv (contactChannels.js).
 const AntragsmaskePage = React.lazy(() => import('@/pages/AntragsmaskePage'));
 
 const AltersvorsorgeStartinfoPopup = React.lazy(() => import('@/components/ratgeber/AltersvorsorgeStartinfoPopup'));

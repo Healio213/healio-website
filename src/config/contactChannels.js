@@ -36,23 +36,50 @@ export const HEALIO_ANTRAG_KNOPF_AKTIV = ANTRAG_KNOPF_LOKAL === '1' || ANTRAG_KN
 // Adresse des HD-Dienstes für das Antragsgespräch (Vertrag 11.2).
 export const HEALIO_ANTRAG_GESPRAECH_API = import.meta.env?.VITE_ANTRAG_GESPRAECH_API || 'https://voice-pilot.healio.de/nita/antrag';
 
-// Eigene Antragsmaske (12.11.2026). Zwei getrennte Schalter, beide Standard aus:
-// HEALIO_ANTRAGSMASKE_AKTIV: Die Routen /antrag/ambulant, /antrag/zahn, /antrag/stationaer zeigen die Strecke
-//   (bleiben unverlinkt, noindex, nicht in der Sitemap). Bei false zeigen sie nur die anderen Wege.
-// HEALIO_ANTRAGSWAHL_AKTIV: Die Abschlussknöpfe auf /ambulant, /zahn, /stationaer zeigen statt des E-Mail-Fensters
-//   die Wahl „Allein abschließen“ oder „Antrag zusammen am Telefon“ (LeadCaptureProvider.jsx). Bei false bleibt
-//   alles wie heute.
-// Nur im Entwicklungsmodus (npm run dev) dürfen VITE_ANTRAGSMASKE=1 und VITE_ANTRAGSWAHL=1 die Werte einschalten,
-// im Build nie.
-const ANTRAGSMASKE_FREIGABE = false;
-const ANTRAGSWAHL_FREIGABE = false;
-const ANTRAGSMASKE_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE : undefined;
-const ANTRAGSWAHL_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSWAHL : undefined;
-export const HEALIO_ANTRAGSMASKE_AKTIV = ANTRAGSMASKE_LOKAL === '1' || ANTRAGSMASKE_FREIGABE;
-export const HEALIO_ANTRAGSWAHL_AKTIV = ANTRAGSWAHL_LOKAL === '1' || ANTRAGSWAHL_FREIGABE;
+// Eigene Antragsmaske (12.11.2026, je Sparte getrennt seit 19.11.2026). Drei Schalter je Sparte
+// (ambulant, zahn, stationaer), alle Standard aus. Eine Sparte geht nur live, wenn ihr Wert hier auf true steht.
+// ANTRAGSMASKE_FREIGABE[sparte]: /antrag/<sparte> zeigt die Strecke (unverlinkt, noindex, nicht in der Sitemap).
+//   Bei false ist dort nichts ausfüllbar; die Seite führt zur Produktseite (/ambulant, /zahn, /stationaer) zurück.
+// ANTRAGSWAHL_FREIGABE[sparte]: Die Abschlussknöpfe auf /ambulant, /zahn, /stationaer zeigen statt des E-Mail-
+//   Fensters die Wahl der Wege (LeadCaptureProvider.jsx). Bei false bleibt diese Seite wie heute.
+//   „Allein abschließen“ führt nur dann zur eigenen Maske, wenn auch ANTRAGSMASKE_FREIGABE[sparte] an ist, sonst
+//   wie heute zum Online-Abschluss des Versicherers.
+// ANTRAG_TELEFON_FREIGABE[sparte]: Der Weg „Antrag zusammen am Telefon“ (Nita, /antrag/aufnehmen) in der Wahl und
+//   in der Maske dieser Sparte. Zahn und stationär bleiben aus, bis Nita diese Anträge aufnehmen kann.
+//   Wirkt nur zusammen mit HEALIO_ANTRAG_GESPRAECH_AKTIV.
+// Nur im Entwicklungsmodus (npm run dev) dürfen VITE_ANTRAGSMASKE, VITE_ANTRAGSWAHL und VITE_ANTRAG_TELEFON die
+// Werte überschreiben, im Build nie: '1' schaltet alle Sparten ein, '0' alle aus, eine Liste wie 'ambulant,zahn'
+// genau diese ein.
+export const ANTRAG_SPARTEN = Object.freeze(['ambulant', 'zahn', 'stationaer']);
+const ANTRAGSMASKE_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
+const ANTRAGSWAHL_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
+const ANTRAG_TELEFON_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
+
+// freigabe: { sparte: boolean }; lokal: Wert der VITE_-Variable oder undefined. Nur bekannte Sparten zählen.
+export function schalterJeSparte(freigabe, lokal) {
+  const liste = typeof lokal === 'string' ? lokal.split(',').map((teil) => teil.trim()).filter(Boolean) : [];
+  return Object.freeze(Object.fromEntries(ANTRAG_SPARTEN.map((sparte) => {
+    if (lokal === '1') return [sparte, true];
+    if (lokal === '0') return [sparte, false];
+    if (liste.length) return [sparte, liste.includes(sparte)];
+    return [sparte, freigabe?.[sparte] === true];
+  })));
+}
+
+const lokalerWert = (name) => (ANTRAG_ENTWICKLUNG ? import.meta.env?.[name] : undefined);
+export const HEALIO_ANTRAGSMASKE_SPARTEN = schalterJeSparte(ANTRAGSMASKE_FREIGABE, lokalerWert('VITE_ANTRAGSMASKE'));
+export const HEALIO_ANTRAGSWAHL_SPARTEN = schalterJeSparte(ANTRAGSWAHL_FREIGABE, lokalerWert('VITE_ANTRAGSWAHL'));
+export const HEALIO_ANTRAG_TELEFON_SPARTEN = schalterJeSparte(ANTRAG_TELEFON_FREIGABE, lokalerWert('VITE_ANTRAG_TELEFON'));
+
+export const antragsmaskeAktiv = (sparte) => HEALIO_ANTRAGSMASKE_SPARTEN[sparte] === true;
+export const antragswahlAktiv = (sparte) => HEALIO_ANTRAGSWAHL_SPARTEN[sparte] === true;
+export const antragTelefonAktiv = (sparte) => HEALIO_ANTRAG_GESPRAECH_AKTIV && HEALIO_ANTRAG_TELEFON_SPARTEN[sparte] === true;
+// Irgendeine Sparte an (Maske oder Wahl): nur dann darf die Herkunft mit Zustimmung im Sitzungsspeicher liegen.
+export const HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV = ANTRAG_SPARTEN.some((sparte) => antragsmaskeAktiv(sparte) || antragswahlAktiv(sparte));
 
 // Zweites Zahn-Produkt UKV ZahnPRIVAT 75/90/100 in der eigenen Maske (/antrag/zahn-ukv, 12.11.2026), Standard aus.
 // Erst einschalten, wenn die Makler-Erklärungen der UKV-Strecke mit Fonds Finanz/UKV geklärt sind.
+// Wirkt nur, wenn auch die Sparte zahn (ANTRAGSMASKE_FREIGABE.zahn) an ist.
 const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;
 const ANTRAGSMASKE_UKV_ZAHN_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE_UKV_ZAHN : undefined;
 export const HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV = ANTRAGSMASKE_UKV_ZAHN_LOKAL === '1' || ANTRAGSMASKE_UKV_ZAHN_FREIGABE;

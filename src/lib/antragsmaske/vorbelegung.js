@@ -14,7 +14,11 @@ export function merkeVorbelegung({
 }) {
   try {
     const eintrag = { sparte, zeit: Date.now() };
-    if (herkunft) eintrag.herkunft = { ref: herkunft.ref || null, utm: herkunft.utm || {}, einstiegsseite: herkunft.einstiegsseite || null };
+    if (herkunft) {
+      eintrag.herkunft = {
+        ref: herkunft.ref || null, utm: herkunft.utm || {}, einstiegsseite: herkunft.einstiegsseite || null, letzteSeite: herkunft.letzteSeite || null, verweiser: herkunft.verweiser || null,
+      };
+    }
     if (typeof tarif === 'string' && /^[A-Z0-9]{2,6}$/.test(tarif)) eintrag.tarif = tarif;
     if (Number.isInteger(geburtsjahr) && geburtsjahr > 1900 && geburtsjahr < 2100) eintrag.geburtsjahr = geburtsjahr;
     window.sessionStorage.setItem(SCHLUESSEL, JSON.stringify(eintrag));

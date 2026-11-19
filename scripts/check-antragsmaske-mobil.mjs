@@ -54,7 +54,7 @@ async function starteServer() {
     cwd: ROOT, env: { ...process.env, ANTRAG_SELBST_MOCK_PORT: String(API_PORT), ANTRAG_ERLAUBTE_HERKUNFT: AN }, stdio: 'ignore',
   }));
   prozesse.push(spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(PORT), '--strictPort'], {
-    cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1' }, stdio: 'ignore',
+    cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1', VITE_ANTRAG_TELEFON: 'ambulant' }, stdio: 'ignore',
   }));
   await warteAuf(`${API}/antrag/gesund`);
   await warteAuf(`${AN}/antrag/ambulant`);

@@ -258,16 +258,16 @@ test('Datensatz für den Selbstantrag (ambulant, Online-Strecke)', () => {
   assert.equal(bildschirmFuerFeld('angaben.formular.plz').bildschirm, 'anschrift');
   assert.equal(bildschirmFuerFeld('zahlung.iban').bildschirm, 'zahlung');
   assert.deepEqual(body.herkunft, {
-    ref: null, utm: {}, einstiegsseite: null, sparte: 'ambulant', weg: 'allein',
+    ref: null, utm: {}, einstiegsseite: null, sparte: 'ambulant', weg: 'allein', letzteSeite: null, verweiser: null,
   }, 'ohne Kennzeichen: leere Herkunft, kein Fehler');
   const mitRef = baueSelbstantrag(ambulant, daten, {
     beginn: BEGINN, beitrag, heute: HEUTE, herkunft: { ref: 'HP-praxis-test', utm: { utm_source: 'qr', utm_campaign: 'flyer-1', gclid: 'x' }, einstiegsseite: '/ambulant' },
   });
   assert.deepEqual(mitRef.herkunft, {
-    ref: 'HP-praxis-test', utm: { utm_source: 'qr', utm_campaign: 'flyer-1' }, einstiegsseite: '/ambulant', sparte: 'ambulant', weg: 'allein',
+    ref: 'HP-praxis-test', utm: { utm_source: 'qr', utm_campaign: 'flyer-1' }, einstiegsseite: '/ambulant', sparte: 'ambulant', weg: 'allein', letzteSeite: null, verweiser: null,
   });
   assert.deepEqual(bereinigeHerkunft({ ref: 'a b<script>', utm: { utm_source: 'x y' }, einstiegsseite: '/a?x=1', weg: 'fax' }), {
-    ref: null, utm: {}, einstiegsseite: null, sparte: null, weg: null,
+    ref: null, utm: {}, einstiegsseite: null, sparte: null, weg: null, letzteSeite: null, verweiser: null,
   }, 'unsaubere Kennzeichen fallen weg');
 });
 
@@ -527,25 +527,39 @@ test('Herkunft: ohne Zustimmung kein Speichereintrag (Gate 3), mit Zustimmung im
   globalThis.window = {
     sessionStorage: speicherAus(sitzung), localStorage: speicherAus(lokal), addEventListener: () => {}, removeEventListener: () => {}, dispatchEvent: () => true,
   };
-  const { leseHerkunft, merkeHerkunft, beiZustimmungsWechsel } = await import('../src/lib/herkunftSpeicher.js');
+  const {
+    leseHerkunft, merkeHerkunft, beiZustimmungsWechsel, erlaubeSitzungsspeicher,
+  } = await import('../src/lib/herkunftSpeicher.js');
   const { parseConsentState, getDefaultConsentState } = await import('../src/lib/consent.js');
   // Ohne Zustimmung: nur Arbeitsspeicher.
   merkeHerkunft({ utm: { utm_source: 'qr', name: 'Lena' }, einstiegsseite: '/ambulant' });
   merkeHerkunft({ ref: 'HP-test', iban: 'DE89370400440532013000' });
   assert.equal(sitzung.size, 0, 'ohne Zustimmung kein Eintrag im Sitzungsspeicher');
-  assert.deepEqual(leseHerkunft(), { ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant' });
-  // Zustimmung erteilt: Eintrag mit genau den Kennzeichen.
+  assert.deepEqual(leseHerkunft(), {
+    ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant', verweiser: null,
+  });
+  // Zustimmung erteilt, aber alle Sparten aus (Standard, 19.11.2026): weiter kein Eintrag.
   const zustimmung = { version: 2, decided: true, preferences: { analytics: true }, source: 'banner', updatedAt: '2026-11-12T10:00:00.000Z' };
   lokal.set('healio:consent:v2', JSON.stringify(zustimmung));
   beiZustimmungsWechsel(parseConsentState(zustimmung));
   merkeHerkunft({ utm: { utm_source: 'spaeter' }, einstiegsseite: '/zahn' });
+  assert.equal(sitzung.size, 0, 'Schalter aus: auch mit Zustimmung kein Eintrag im Sitzungsspeicher');
+  // Eine Sparte an: Eintrag mit genau den Kennzeichen.
+  erlaubeSitzungsspeicher(true);
+  merkeHerkunft({ utm: { utm_source: 'spaeter' }, einstiegsseite: '/zahn', verweiser: 'www.google.com' });
   assert.deepEqual([...sitzung.keys()], ['healio.herkunft']);
-  assert.deepEqual(JSON.parse(sitzung.get('healio.herkunft')), { ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant' }, 'erste Einstiegsseite bleibt');
+  assert.deepEqual(JSON.parse(sitzung.get('healio.herkunft')), {
+    ref: 'HP-test', utm: { utm_source: 'qr' }, einstiegsseite: '/ambulant', verweiser: 'www.google.com',
+  }, 'erste Einstiegsseite bleibt, Verweiser kommt dazu');
   assert.ok(!/Lena|DE89/.test(sitzung.get('healio.herkunft')), 'keine Personen- oder Bankdaten');
   // Widerruf: Eintrag weg.
   lokal.delete('healio:consent:v2');
   beiZustimmungsWechsel(getDefaultConsentState());
   assert.equal(sitzung.size, 0, 'Widerruf löscht den Eintrag');
+  // Schalter wieder aus: ein alter Eintrag wird entfernt.
+  sitzung.set('healio.herkunft', '{}');
+  erlaubeSitzungsspeicher(false);
+  assert.equal(sitzung.size, 0, 'Schalter aus entfernt einen alten Eintrag');
   delete globalThis.window;
 });
 

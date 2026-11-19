@@ -38,7 +38,7 @@ alter table public.anonyme_zaehler
       or (ereignis = 'versicherer_klick' and ziel in ('bayerische', 'ukv'))
       or (ereignis = 'antragsweg' and ziel in ('ambulant-gezeigt', 'ambulant-allein', 'ambulant-telefon', 'zahn-gezeigt', 'zahn-allein', 'zahn-telefon', 'stationaer-gezeigt', 'stationaer-allein', 'stationaer-telefon'))
       or (ereignis = 'leistungsweg_klick' and ziel in (
-        '/ambulant', '/zahn', '/stationaer', '/schwangerschaft', '/schwangerschaft/baby-geplant', '/leistungen',
+        '/ambulant', '/ambulant/osteopathie', '/zahn', '/stationaer', '/schwangerschaft', '/schwangerschaft/baby-geplant', '/leistungen',
         '/en/outpatient', '/en/dental', '/en/inpatient', '/en/services'))
     );
 

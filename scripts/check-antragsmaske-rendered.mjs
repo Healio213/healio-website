@@ -58,8 +58,11 @@ async function starteServer() {
   const vite = (port, env) => spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
     cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, ...env }, stdio: 'ignore',
   });
-  prozesse.push(vite(AN_PORT, { VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1' }));
-  prozesse.push(vite(AUS_PORT, { VITE_ANTRAGSMASKE: '0', VITE_ANTRAGSWAHL: '0' }));
+  // Telefonweg wie geplant nur ambulant (Zahn und stationär bleiben aus, 19.11.2026).
+  prozesse.push(vite(AN_PORT, {
+    VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1', VITE_ANTRAG_TELEFON: 'ambulant',
+  }));
+  prozesse.push(vite(AUS_PORT, { VITE_ANTRAGSMASKE: '0', VITE_ANTRAGSWAHL: '0', VITE_ANTRAG_TELEFON: '0' }));
   await warteAuf(`${API}/antrag/gesund`);
   await warteAuf(`${AN}/antrag/ambulant`);
   await warteAuf(`${AUS}/antrag/ambulant`);
@@ -282,7 +285,10 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   }));
   pruefe(speicher.lokal.length === 0, 'Antragsdaten im localStorage');
   pruefe(!/DE89|Muster|1a|krebs|178/.test(speicher.sitzung), 'Antragsdaten im sessionStorage');
-  pruefe(speicher.adresse === '' || /^\?ref=[A-Za-z0-9_-]+$/.test(speicher.adresse), `Angaben in der Adresse (${speicher.adresse})`);
+  // Nur die Herkunftskennzeichen der Wahl (19.11.2026), nie Personen- oder Gesundheitsangaben.
+  const erlaubt = new Set(['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'einstiegsseite', 'letzteSeite', 'verweiser']);
+  const teile = [...new URLSearchParams(speicher.adresse.replace(/^\?/, '').replace(/#.*$/, ''))];
+  pruefe(!speicher.adresse.includes('#') && teile.every(([key]) => erlaubt.has(key)) && !/DE89|Muster|Lena|1990|krebs|178/i.test(speicher.adresse), `Angaben in der Adresse (${speicher.adresse})`);
 
   await page.click('#knopf-absenden');
   await page.waitForSelector('[data-danke]');
@@ -293,15 +299,18 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   pruefe(letzter?.kanal === 'web-selbst' && letzter.zahlung.iban === 'DE89370400440532013000', 'Datensatz kommt an');
   pruefe(letzter.gesundheit.antwort1a === (mitJa ? 'ja' : 'nein') && letzter.gesundheit.antworten['1b'] === (mitJa ? 'ja' : 'nein'), 'Gesundheitsangaben im Vertragsformat');
   pruefe(letzter.original.find((e) => e.feld === 'G49').wert === (mitJa ? 'true' : 'false') && letzter.unterlagen.geoeffnet.length === 5, 'Zuordnung G49 und fünf Downloads im Antrag');
+  // Seit 19.11.2026 trägt der Link der Wahl die Herkunft in der Adresse: mit und ohne Zustimmung gleich.
+  const ueberWahl = (ref, utm) => ({
+    ref, utm, einstiegsseite: '/ambulant', sparte: 'ambulant', weg: 'allein', letzteSeite: '/ambulant', verweiser: null,
+  });
   if (einstieg === 'werber') {
-    pruefe(JSON.stringify(letzter.herkunft) === JSON.stringify({ ref: WERBER.ref, utm: WERBER.utm, einstiegsseite: '/ambulant', sparte: 'ambulant', weg: 'allein' }), `Herkunft mit Werber kommt an: ${JSON.stringify(letzter.herkunft)}`);
+    pruefe(gleich(letzter.herkunft, ueberWahl(WERBER.ref, WERBER.utm)), `Herkunft mit Werber kommt an: ${JSON.stringify(letzter.herkunft)}`);
   } else if (einstieg === 'werber-ohne') {
-    pruefe(JSON.stringify(letzter.herkunft) === JSON.stringify({ ref: WERBER.ref, utm: {}, einstiegsseite: '/antrag/ambulant', sparte: 'ambulant', weg: 'allein' }), `Herkunft ohne Zustimmung: ref über den Link, sonst nichts gespeichert: ${JSON.stringify(letzter.herkunft)}`);
+    pruefe(gleich(letzter.herkunft, ueberWahl(WERBER.ref, WERBER.utm)), `Herkunft ohne Zustimmung: ref, utm, Einstieg und letzte Seite über den Link: ${JSON.stringify(letzter.herkunft)}`);
   } else if (einstieg === 'wahl') {
-    // Ohne Zustimmung keine Übergabe über den Seitenwechsel: Einstiegsseite ist die Maske selbst.
-    pruefe(JSON.stringify(letzter.herkunft) === JSON.stringify({ ref: null, utm: {}, einstiegsseite: '/antrag/ambulant', sparte: 'ambulant', weg: 'allein' }), `Herkunft ohne Werber leer: ${JSON.stringify(letzter.herkunft)}`);
+    pruefe(gleich(letzter.herkunft, ueberWahl(null, {})), `Herkunft ohne Werber: Einstieg und letzte Seite über den Link: ${JSON.stringify(letzter.herkunft)}`);
   } else {
-    pruefe(letzter.herkunft?.ref === null && letzter.herkunft?.einstiegsseite === '/antrag/ambulant', `Herkunft bei Direktaufruf: ${JSON.stringify(letzter.herkunft)}`);
+    pruefe(letzter.herkunft?.ref === null && letzter.herkunft?.einstiegsseite === '/antrag/ambulant' && letzter.herkunft?.letzteSeite === null, `Herkunft bei Direktaufruf: ${JSON.stringify(letzter.herkunft)}`);
   }
   pruefe(fremd.length === 0, `Anfragen an fremde Adressen oder Zähler: ${fremd.join(', ')}`);
   await context.close();
@@ -479,7 +488,7 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   pruefe(letzter.erklaerungen.werbung === false, 'Werbung nicht angehakt übermittelt');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.name === 'Produktinformationsblatt Zahn Prestige') && letzter.unterlagen.geoeffnet.length === 1 && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'unterlagen'), 'Gezeigte, geöffnete und bestätigte Unterlagen im Antrag');
   pruefe(danke.includes('Unterlagen schicken wir dir zusätzlich per E-Mail'), 'Danke: Unterlagen kommen per Mail');
-  if (viaWahl) pruefe(letzter.herkunft.ref === WERBER.ref, `Herkunft Zahn (ohne Zustimmung, ref über den Link): ${JSON.stringify(letzter.herkunft)}`);
+  if (viaWahl) pruefe(letzter.herkunft.ref === WERBER.ref && gleich(letzter.herkunft.utm, {}) && letzter.herkunft.letzteSeite === '/zahn' && letzter.herkunft.einstiegsseite === '/zahn', `Herkunft Zahn (ohne Zustimmung, über den Link): ${JSON.stringify(letzter.herkunft)}`);
   await context.close();
 }
 
@@ -503,7 +512,8 @@ async function zahnAblehnung(browser) {
   await page.waitForSelector('[data-pruefung]');
   pruefe(await page.locator('[data-weiter]').count() === 0, 'Ablehnung: kein Weiter');
   const hinweis = await page.textContent('[data-pruefung]');
-  pruefe(!/barmenia/i.test(hinweis) && /UKV ZahnPRIVAT/.test(hinweis) && /Zusammen am Telefon/.test(hinweis), 'Auswege UKV und Telefon, kein Barmenia');
+  // Telefonweg Zahn aus (19.11.2026): statt „Zusammen am Telefon“ der Termin.
+  pruefe(!/barmenia/i.test(hinweis) && /UKV ZahnPRIVAT/.test(hinweis) && /Termin vereinbaren/.test(hinweis) && !/Zusammen am Telefon/.test(hinweis), 'Auswege UKV und Termin (Telefonweg Zahn aus), kein Barmenia');
   await foto(page, '390-zahn-ablehnung');
   // Altersgrenze 71: schon in der Vorabfrage, bevor ein Ergebnis kommt.
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
@@ -896,9 +906,15 @@ async function wahl(browser, breite) {
     await page.waitForSelector(`[data-wegewahl="${sparte}"]`, { timeout: 6000 });
     pruefe(await page.locator('[role="dialog"]:has-text("Bonusleitfaden")').count() === 0, `${sparte}: kein E-Mail-Fenster`);
     const allein = await page.getAttribute('[data-weg="allein"]', 'href');
-    const telefon = await page.getAttribute('[data-weg="telefon"]', 'href');
-    pruefe(telefon === `/antrag/aufnehmen?sparte=${sparte}`, `${sparte}: Telefonweg mit Sparte`);
-    pruefe(allein === `/antrag/${sparte}`, `${sparte}: Allein-Weg (${allein})`);
+    // Ohne Kennzeichen beim Aufruf: Einstiegsseite und letzte Seite in der Adresse (19.11.2026).
+    const erwartet = `/antrag/${sparte}?${new URLSearchParams({ einstiegsseite: `/${sparte}`, letzteSeite: `/${sparte}` })}`;
+    pruefe(allein === erwartet, `${sparte}: Allein-Weg (${allein})`);
+    if (sparte === 'ambulant') {
+      const telefon = await page.getAttribute('[data-weg="telefon"]', 'href');
+      pruefe(telefon?.startsWith(`/antrag/aufnehmen?sparte=${sparte}&`), `${sparte}: Telefonweg mit Sparte (${telefon})`);
+    } else {
+      pruefe(await page.locator('[data-weg="telefon"]').count() === 0, `${sparte}: kein Telefonweg in der Wahl (Schalter aus)`);
+    }
     await foto(page, `${breite}-wahl-${sparte}`);
     if (sparte === 'ambulant') {
       await page.click('[data-weg="allein"]');
@@ -908,7 +924,7 @@ async function wahl(browser, breite) {
     }
   }
   await page.goto(`${AN}/antrag/aufnehmen?sparte=zahn`, { waitUntil: 'networkidle' });
-  pruefe(await page.locator('[data-sparte-hinweis="zahn"]').isVisible(), 'Hinweis „Nita nimmt deinen Wunsch auf“ für Zahn');
+  pruefe(await page.locator('[data-sparte-hinweis="zahn"]').count() === 0, 'Telefonweg Zahn aus: kein Hinweis „Nita nimmt deinen Wunsch auf“');
   await foto(page, `${breite}-aufnehmen-zahn`);
 
   await context.close();
@@ -928,6 +944,10 @@ async function schalterAus(browser) {
   await foto(page, '390-schalter-aus-ambulant');
   await page.goto(`${AUS}/antrag/ambulant`, { waitUntil: 'networkidle' });
   pruefe(await page.locator('[data-andere-wege]').isVisible() && await page.locator('[data-antragsmaske]').count() === 0, 'Schalter aus: /antrag/ambulant ohne Strecke');
+  pruefe(await page.locator('[data-andere-wege] a[href="/ambulant"]').count() >= 1 && await page.locator('[data-andere-wege] a[href^="/antrag/aufnehmen"]').count() === 0, 'Schalter aus: Weg zur Produktseite, kein Telefonweg');
+  // Werbercode und utm laufen auf dem Rückweg zur Produktseite mit.
+  await page.goto(`${AUS}/antrag/stationaer?ref=TEST1&utm_source=qr&gclid=x`, { waitUntil: 'networkidle' });
+  pruefe(await page.locator('[data-antragsmaske]').count() === 0 && await page.locator('[data-andere-wege] a[href="/stationaer?ref=TEST1&utm_source=qr"]').count() >= 1, 'Schalter aus: /antrag/stationaer führt mit ref und utm zur Produktseite, ohne gclid');
   await foto(page, '390-schalter-aus-maske');
   await context.close();
 }

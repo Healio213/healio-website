@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Check, Lock, Phone,
 } from 'lucide-react';
-import { HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
+import { antragTelefonAktiv } from '@/config/contactChannels';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { euro } from '@/lib/antragsmaske/regeln';
 import { FOKUS, cx, schuetze } from '@/components/antrag/ui';
@@ -21,7 +21,7 @@ export const KARTE = 'rounded-[1.75rem] bg-white shadow-[0_1px_2px_rgba(7,17,31,
 export const KARTE_LG = 'lg:rounded-[1.75rem] lg:bg-white lg:shadow-[0_1px_2px_rgba(7,17,31,0.06),0_24px_48px_-28px_rgba(7,17,31,0.28)] lg:ring-1 lg:ring-home-midnight/[0.06]';
 
 function TelefonKopf({ sparte }) {
-  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  const telefon = antragTelefonAktiv(sparte);
   return (
     <a
       href={telefon ? telefonLink(sparte) : TERMIN_LINK}
@@ -124,7 +124,7 @@ export function VertrauenPunkte({ definition, className }) {
 }
 
 export function NitaDunkel({ sparte }) {
-  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  const telefon = antragTelefonAktiv(sparte);
   return (
     <section aria-label="Hilfe" className="flex items-center gap-4 rounded-[1.4rem] bg-white/[0.06] p-4 ring-1 ring-white/10">
       <img src="/nita-avatar.jpg" alt="" width="56" height="56" className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-home-mint/50" />
@@ -321,7 +321,7 @@ export function DeinSchutzKarte({
 
 // Hilfe-Karte: Nita und der Weg ans Telefon oder zum Termin.
 export function HilfeKarte({ sparte }) {
-  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  const telefon = antragTelefonAktiv(sparte);
   return (
     <section aria-label="Hilfe" className={cx(KARTE, 'flex gap-3 p-5')}>
       <img src="/nita-avatar.jpg" alt="" width="56" height="56" className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-home-mint/40" />

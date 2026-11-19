@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronDown, FileText, Phone } from 'lucide-react';
-import { HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
+import { antragTelefonAktiv } from '@/config/contactChannels';
 import {
   FOKUS, FehlerText, LINK, NeuerTab, OptionCard, TRENNUNG, cx, schuetze,
 } from '@/components/antrag/ui';
@@ -117,7 +117,7 @@ export function UnterlageLink({ href, children, beimOeffnen }) {
 // Ausweg „Lieber zusammen am Telefon“, auf jedem Bildschirm sichtbar. Ist das
 // Antragsgespräch abgeschaltet, führt er zum Termin.
 export function TelefonAusweg({ sparte, className }) {
-  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  const telefon = antragTelefonAktiv(sparte);
   return (
     <a
       href={telefon ? telefonLink(sparte) : TERMIN_LINK}

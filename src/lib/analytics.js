@@ -1,4 +1,5 @@
-import { merkeHerkunft } from './herkunftSpeicher.js';
+import { erlaubeSitzungsspeicher, merkeHerkunft } from './herkunftSpeicher.js';
+import { HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV } from '../config/contactChannels.js';
 import {
   getConsentState,
   hasConsent,
@@ -211,11 +212,19 @@ const landingContext = isBrowser()
 // Herkunft des Besuchs für den Antrag (12.11.2026, Antragsmaske und Antragsgespräch): dieselben geprüften
 // utm-Kennzeichen und die Einstiegsseite, die beim Laden festgehalten wurden. Nur im Arbeitsspeicher, nie gesendet,
 // außer mit dem Antrag selbst.
-if (isBrowser()) merkeHerkunft({ utm: Object.fromEntries(new URLSearchParams(landingContext.query)), einstiegsseite: landingContext.pfad || null });
+// Seit 19.11.2026 dazu der Verweiser: nur der Hostname der fremden Seite beim ersten Laden (aus landingContext.referrer).
+const verweiserHost = () => {
+  try { return landingContext.referrer ? new URL(landingContext.referrer).hostname.toLowerCase().slice(0, 100) || null : null; } catch { return null; }
+};
+if (isBrowser()) {
+  erlaubeSitzungsspeicher(HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV);
+  merkeHerkunft({ utm: Object.fromEntries(new URLSearchParams(landingContext.query)), einstiegsseite: landingContext.pfad || null, verweiser: verweiserHost() });
+}
 
 export const einstiegsHerkunft = () => ({
   utm: Object.fromEntries(new URLSearchParams(landingContext.query)),
   einstiegsseite: landingContext.pfad || null,
+  verweiser: verweiserHost(),
 });
 let landingAttributionSent = false;
 

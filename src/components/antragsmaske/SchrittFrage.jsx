@@ -5,7 +5,7 @@ import {
   Aufklapper, Callout, FOKUS, FehlerText, Field, Gruppe, OptionCard, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria,
 } from '@/components/antrag/ui';
 import { UKV_URL } from '@/components/sections/dental/dentalLinks';
-import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV } from '@/config/contactChannels';
+import { HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, antragTelefonAktiv, antragsmaskeAktiv } from '@/config/contactChannels';
 import { TERMIN_LINK, telefonLink } from './teile';
 import { WARUM_GESUNDHEIT } from './anzeige';
 
@@ -271,16 +271,18 @@ function Stamm({ frage }) {
 // Hinweis, wenn eine Antwort nur mit persönlicher Prüfung geht oder der
 // Versicherer online nicht annimmt. Auswege aus der Definition, wie sie die
 // Produktseite schon anbietet (Zahn: UKV oder zusammen am Telefon).
+// Ist der Telefonweg der Sparte aus (contactChannels.js), wird aus „telefon“ der Termin.
 const AUSWEGE = {
-  telefon: (sparte) => ({ href: telefonLink(sparte), label: 'Zusammen am Telefon' }),
+  telefon: (sparte) => (antragTelefonAktiv(sparte) ? { href: telefonLink(sparte), label: 'Zusammen am Telefon' } : { href: TERMIN_LINK, label: 'Termin vereinbaren' }),
   termin: () => ({ href: TERMIN_LINK, label: 'Termin vereinbaren' }),
   // Mit eingeschaltetem UKV-Produkt bleibt der Kunde in der eigenen Maske.
-  ukv: () => (HEALIO_ANTRAGSMASKE_AKTIV && HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV
+  ukv: () => (antragsmaskeAktiv('zahn') && HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV
     ? { href: '/antrag/zahn-ukv', label: 'UKV ZahnPRIVAT beantragen' }
     : { href: UKV_URL, label: 'UKV ZahnPRIVAT online berechnen', extern: true }),
 };
 function PruefungHinweis({ wirkung, sparte }) {
-  const auswege = (wirkung.auswege || ['telefon', 'termin']).map((art) => AUSWEGE[art]?.(sparte)).filter(Boolean);
+  const auswege = (wirkung.auswege || ['telefon', 'termin']).map((art) => AUSWEGE[art]?.(sparte)).filter(Boolean)
+    .filter((weg, stelle, alle) => alle.findIndex((anderer) => anderer.href === weg.href) === stelle);
   return (
     <Callout tone="hinweis" title={wirkung.art === 'keineAufnahme' ? 'Hier geht es online leider nicht weiter.' : 'Das schauen wir uns am besten zusammen an.'} data-pruefung="">
       {wirkung.text && <p>{wirkung.text}</p>}

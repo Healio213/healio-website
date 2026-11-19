@@ -1,25 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowRight, Lock, X } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
-import { HEALIO_ANTRAGSMASKE_AKTIV, HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV } from '@/config/contactChannels';
+import { HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, antragTelefonAktiv, antragsmaskeAktiv } from '@/config/contactChannels';
 import { eigeneMaskeFuer } from '@/data/antrag';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import { merkeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
-import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
+import { adresseMitHerkunft, sammleHerkunft } from '@/lib/antragsmaske/herkunft';
 import { hasConsent } from '@/lib/consent';
 import { openApplicationWindow } from '@/lib/lead-capture';
 import { TERMIN_LINK, telefonLink } from './teile';
 
 // Wahl der zwei Wege vor dem Abschluss (12.11.2026): „Allein abschließen“
-// oder „Antrag zusammen am Telefon“. Ersetzt bei HEALIO_ANTRAGSWAHL_AKTIV das
+// oder „Antrag zusammen am Telefon“. Ersetzt bei eingeschalteter Wahl der Sparte das
 // E-Mail-Fenster (LeadCaptureProvider.jsx). Beide Wege öffnen als echte
 // Seitennavigation, damit auf der Antragsseite keine Mess-Skripte dieser
 // Seite weiterlaufen. Gezählt wird nur anonym: Wahl gezeigt, Weg gewählt.
 //
-// Allein: Gibt es für Sparte und Versicherer eine fertige eigene Maske, geht
-// es nach /antrag/<sparte> (Tarifstufe und Geburtsjahr vorbelegt), sonst wie
-// heute direkt zum Online-Abschluss des Versicherers.
+// Allein: Gibt es für Sparte und Versicherer eine fertige eigene Maske und ist
+// die Sparte eingeschaltet (contactChannels.js), geht es nach /antrag/<sparte>
+// (Tarifstufe und Geburtsjahr vorbelegt), sonst wie heute direkt zum
+// Online-Abschluss des Versicherers. Telefon: nur, wenn der Telefonweg dieser
+// Sparte eingeschaltet ist.
+//
+// Herkunft (19.11.2026): Die Links zur Maske und zum Antragsgespräch tragen
+// ref, utm_*, Einstiegsseite, letzte Seite (diese Seite) und Verweiser in der
+// Adresse, damit sie auch ohne Zustimmung zur Messung ankommen.
 
 const TEXTE = {
   ambulant: { telefon: 'Nita geht alle Fragen mit dir durch und nennt dir den Beitrag.' },
@@ -53,8 +59,11 @@ export default function WegeWahl({
   link, targetUrl, vorbelegung, onClose, onExternalOpen,
 }) {
   const sparte = link.sparte;
-  const eigene = HEALIO_ANTRAGSMASKE_AKTIV ? eigeneMaskeFuer(link, { ukvZahn: HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV }) : null;
-  const telefon = HEALIO_ANTRAG_GESPRAECH_AKTIV;
+  const eigene = antragsmaskeAktiv(sparte) ? eigeneMaskeFuer(link, { ukvZahn: HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV }) : null;
+  const telefon = antragTelefonAktiv(sparte);
+  const letzteSeite = typeof window !== 'undefined' ? window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/' : null;
+  const herkunftAllein = useMemo(() => sammleHerkunft({ sparte, weg: 'allein', letzteSeite }), [sparte, letzteSeite]);
+  const herkunftTelefon = useMemo(() => sammleHerkunft({ sparte, weg: 'telefon', letzteSeite }), [sparte, letzteSeite]);
   const ersterWeg = useRef(null);
   const gezaehlt = useRef(false);
 
@@ -69,7 +78,7 @@ export default function WegeWahl({
     if (eigene) {
       merkeVorbelegung({
         // Herkunft nur mit Zustimmung zur Messung über den Seitenwechsel tragen (Gate 3); ref kommt sonst über den Link.
-        sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: hasConsent('analytics') ? sammleHerkunft({ sparte, weg: 'allein' }) : null,
+        sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: hasConsent('analytics') ? herkunftAllein : null,
       });
       return; // Der Link selbst navigiert nach /antrag/<sparte>.
     }
@@ -102,7 +111,7 @@ export default function WegeWahl({
               hervor
               titel="Allein abschließen"
               text={eigene ? 'Du beantwortest die Fragen in Ruhe selbst, direkt hier bei Healio.' : 'Du füllst den Antrag selbst online beim Versicherer aus.'}
-              href={eigene ? `/antrag/${eigene.pfad}` : targetUrl}
+              href={eigene ? adresseMitHerkunft(`/antrag/${eigene.pfad}`, herkunftAllein) : targetUrl}
               onClick={allein}
               data={{ 'data-weg': 'allein' }}
             />
@@ -111,10 +120,10 @@ export default function WegeWahl({
                 icon="support"
                 titel="Antrag zusammen am Telefon"
                 text={TEXTE[sparte]?.telefon}
-                href={telefonLink(sparte)}
+                href={adresseMitHerkunft(telefonLink(sparte), herkunftTelefon)}
                 onClick={() => {
                   zaehle('antragsweg', { ziel: `${sparte}-telefon` });
-                  if (hasConsent('analytics')) merkeVorbelegung({ sparte, herkunft: sammleHerkunft({ sparte, weg: 'telefon' }) });
+                  if (hasConsent('analytics')) merkeVorbelegung({ sparte, herkunft: herkunftTelefon });
                 }}
                 data={{ 'data-weg': 'telefon' }}
               />

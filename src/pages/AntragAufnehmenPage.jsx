@@ -6,7 +6,9 @@ import {
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import CampaignShell from '@/components/campaign/CampaignShell';
-import { HEALIO_ANTRAGSWAHL_AKTIV, HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API } from '@/config/contactChannels';
+import {
+  HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API, antragTelefonAktiv, antragswahlAktiv,
+} from '@/config/contactChannels';
 import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
 import {
@@ -102,7 +104,7 @@ function Einstieg({ zustimmung, setZustimmung, starten, titelRef }) {
   return (
     <div className="space-y-6" data-zustand="einstieg">
       <Kopf titel="Deinen Antrag gemeinsam mit Nita aufnehmen" titelRef={titelRef} />
-      {SPARTE_HINWEIS[sparte] && <Callout tone="info" data-sparte-hinweis={sparte}><p>{SPARTE_HINWEIS[sparte]}</p></Callout>}
+      {SPARTE_HINWEIS[sparte] && antragTelefonAktiv(sparte) && <Callout tone="info" data-sparte-hinweis={sparte}><p>{SPARTE_HINWEIS[sparte]}</p></Callout>}
       <div className="space-y-3">
         <p className={bodyText}>
           Nita ist eine KI. Sie geht mit dir im Gespräch den Antrag für den ambulanten Zusatzschutz der SDK durch. Das dauert etwa fünf bis zehn Minuten.
@@ -345,10 +347,11 @@ function Gespraechsablauf({ titelRef }) {
   const [beitrag, setBeitrag] = useState(null);
   const [festgehalten, setFestgehalten] = useState(null);
   const gespraechRef = useRef(null);
-  // Herkunft aus der Wahl der zwei Wege (12.11.2026), nur bei HEALIO_ANTRAGSWAHL_AKTIV. Sonst bleibt alles wie bisher.
+  // Herkunft aus der Wahl der zwei Wege (12.11.2026), nur wenn Wahl und Telefonweg dieser Sparte eingeschaltet sind
+  // (contactChannels.js, 19.11.2026). Sonst bleibt alles wie bisher: keine Herkunft, keine Vorbelegung gelesen.
   const [herkunft] = useState(() => {
-    if (!HEALIO_ANTRAGSWAHL_AKTIV) return null;
     const sparte = ['ambulant', 'zahn', 'stationaer'].includes(sparteAusAdresse()) ? sparteAusAdresse() : 'ambulant';
+    if (!antragswahlAktiv(sparte) || !antragTelefonAktiv(sparte)) return null;
     return sammleHerkunft({ sparte, weg: 'telefon', mitgebracht: holeVorbelegung(null).herkunft });
   });
 
