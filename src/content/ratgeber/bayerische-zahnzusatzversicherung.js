@@ -68,7 +68,7 @@ export const article = {
     facts: [
       { value: 'bis 1.500 EUR', label: 'insgesamt möglich, bis zu 750 EUR je Kalenderjahr' },
       { value: '24 Monate', label: 'Laufzeit des Bausteins, der Zahntarif läuft weiter' },
-      { value: 'vor der Rechnung', label: 'muss der Abschluss erfolgen' },
+      { value: 'vor der Rechnung', label: 'muss der Versicherungsbeginn liegen' },
     ],
     text: 'ZAHN Sofort ist für Behandlungen gedacht, die ein normaler Zahntarif nicht zahlt, weil sie schon empfohlen oder begonnen sind.',
     path: { to: '/zahn#zahn-check', text: 'Behandlung steht an? Weg prüfen', label: 'Zahn-Check starten' },
@@ -121,7 +121,7 @@ export const article = {
           type: 'list',
           items: [
             { lead: 'Neuer Zahntarif.', text: 'Der Baustein ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar.' },
-            { lead: 'Abschluss vor der Rechnung.', text: 'Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.' },
+            { lead: 'Versicherungsbeginn vor der Rechnung.', text: 'Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.' },
             { lead: 'Es fehlen keine Zähne.', text: 'Fehlt dir schon ein Zahn, passt dieser Weg nicht.' },
             { lead: 'Keine Zahn-Vorgeschichte.', text: 'Der Zahn-Check fragt zum Beispiel nach Parodontitis in den letzten 3 Jahren, einer herausnehmbaren Prothese oder Zahnersatz, der älter als 10 Jahre ist.' },
           ],
@@ -169,7 +169,7 @@ export const article = {
           rows: [
             ['Krone angeraten, Heil- und Kostenplan liegt vor, Rechnung noch nicht gestellt', '239,03 EUR', '159,36 EUR', 'Der Weg ZAHN Sofort ist offen, wenn Abschluss und Rechnung zeitlich richtig liegen'],
             ['Krone schon abgerechnet', '239,03 EUR', '159,36 EUR', 'Nicht umfasst, die Behandlung ist abgerechnet'],
-            ['Behandlung läuft schon, ist aber weder abgeschlossen noch abgerechnet', '239,03 EUR', '159,36 EUR', 'Der Abschluss vor der Rechnung ist noch möglich'],
+            ['Behandlung läuft schon, ist aber weder abgeschlossen noch abgerechnet', '239,03 EUR', '159,36 EUR', 'Ein Versicherungsbeginn vor der Rechnung ist noch möglich'],
             ['Ein Zahn fehlt schon und Ersatz ist angeraten', 'Festzuschuss laut Befund', 'Rest laut Heil- und Kostenplan', 'ZAHN Sofort passt nicht, weil keine Zähne fehlen dürfen'],
           ],
           note: 'Beispiel, keine Preisangabe und keine Erstattungszusage. Regelversorgung und Festzuschuss: G-BA, Festzuschuss-Richtlinie, Beträge ab 01.01.2026, Befund 1.1 (398,39 EUR, 60 Prozent gleich 239,03 EUR); Eigenanteil ist eigene Rechnung. Annahmen: Die Rechnung entspricht der Regelversorgung, kein Bonusheft, kein Härtefall. Baustein nach den Unterlagen auf healio.de/zahn, verbindlich sind die Bedingungen im Antrag.',
@@ -205,7 +205,7 @@ export const article = {
           caption: 'Situation, Weg und was gilt, nach den Tarifunterlagen auf healio.de/zahn',
           head: ['Situation', 'Weg', 'Was gilt'],
           rows: [
-            ['In den letzten 2 Jahren empfohlen oder geplant, oder Behandlung läuft', 'Bayerische mit ZAHN Sofort', 'Bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR möglich, Abschluss vor der Rechnung, keine fehlenden Zähne, keine Zahn-Vorgeschichte'],
+            ['In den letzten 2 Jahren empfohlen oder geplant, oder Behandlung läuft', 'Bayerische mit ZAHN Sofort', 'Bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR möglich, Versicherungsbeginn vor der Rechnung, keine fehlenden Zähne, keine Zahn-Vorgeschichte'],
             ['Nichts empfohlen, nichts geplant, nichts läuft', 'UKV ZahnPRIVAT 75, 90 oder 100', 'Keine Wartezeiten, in den ersten drei Kalenderjahren die Zahnstaffel'],
             ['Vor mehr als 2 Jahren empfohlen, seitdem nichts geplant', 'UKV ZahnPRIVAT', 'Die Behandlung ist wieder versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung.'],
             ['1 bis 3 Zähne fehlen, noch nicht ersetzt', 'UKV ZahnPRIVAT mit Zuschlag je Zahn', 'Aufnahme mit Risikozuschlag je Zahn, ab 4 fehlenden Zähnen keine Aufnahme'],
@@ -240,7 +240,7 @@ export const article = {
           heading: 'Ehrlich gesagt',
           items: [
             { lead: 'Die Beträge sind Höchstwerte.', text: 'Bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR sind möglich, nicht zugesagt. Der Baustein endet nach 24 Monaten.' },
-            { lead: 'Zu spät ist zu spät.', text: 'Wer erst nach der Rechnung abschließt, hat für diese Behandlung keinen Weg mehr. Der Abschluss muss vor der Rechnung erfolgen.' },
+            { lead: 'Zu spät ist zu spät.', text: 'Wer erst nach der Rechnung abschließt, hat für diese Behandlung keinen Weg mehr. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen.' },
             { lead: 'Ein fehlender Zahn oder eine Zahn-Vorgeschichte schließt den Weg aus.', text: 'Kommt das mit einer angeratenen Behandlung zusammen, klärst du am besten persönlich mit Healio, welche Wege noch prüfbar sind.' },
             { lead: 'Hier steht kein Beitrag.', text: 'Er hängt vom Zahntarif ab und steht im Rechner, bevor du den Antrag abschickst. Verbindlich entscheidet die Bayerische im Antrag.' },
           ],
@@ -292,7 +292,7 @@ export const article = {
     {
       question: 'Bis wann muss ich ZAHN Sofort abschließen?',
       answer:
-        'Der Abschluss muss vor der Rechnung erfolgen. Eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst.',
+        'Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst.',
     },
     {
       question: 'Gilt ZAHN Sofort auch, wenn mir Zähne fehlen?',

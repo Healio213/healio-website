@@ -236,7 +236,7 @@ export const article = {
           items: [
             'Der Baustein ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar.',
             'Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter.',
-            'Der Abschluss muss vor der Rechnung erfolgen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
+            'Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
             'Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
           ],
         },

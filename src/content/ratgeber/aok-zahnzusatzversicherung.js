@@ -265,7 +265,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Für Behandlungen, die in den letzten 2 Jahren empfohlen oder geplant wurden oder schon laufen, gibt es den Baustein ZAHN Sofort der Bayerischen. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, der Abschluss muss vor der Rechnung erfolgen. Dafür gelten Voraussetzungen, die du im Überblick zur Bayerischen findest.',
+          text: 'Für Behandlungen, die in den letzten 2 Jahren empfohlen oder geplant wurden oder schon laufen, gibt es den Baustein ZAHN Sofort der Bayerischen. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, der Versicherungsbeginn muss vor der Rechnung liegen. Dafür gelten Voraussetzungen, die du im Überblick zur Bayerischen findest.',
         },
         {
           type: 'segments',

@@ -130,7 +130,7 @@
           "Applies to dentures and dental treatment, from crowns to root canals",
           "The module ends automatically after 24 months, then your dental tariff continues, for example the test winner ZAHN Prestige"
         ],
-        "warning": "Sign up before your dentist issues the invoice. And choose the module directly at sign-up, it cannot be added later.",
+        "warning": "The insurance start must be before your dentist's invoice. Choose the module directly at sign-up, it cannot be added later.",
         "cta": "Calculate premium and sign up",
         "ctaType": "bayerische",
         "note": "You will be redirected to the online calculator of die Bayerische. It asks 4 short health questions.",
@@ -289,12 +289,12 @@
         "Applies to dentures and dental treatment, from crowns to root canals",
         "Immediate protection without waiting periods, the dental tariff then continues for everything new",
         "Only available at initial sign-up: choose the module right away, it cannot be added later",
-        "Important: sign up first, receive the invoice afterwards"
+        "Important: the insurance start must be before the invoice"
       ],
       "highlight": {
         "badge": "Savings logic",
         "title": "The calendar-year trick: 1,500 instead of 750 euros",
-        "text": "The subsidy applies per calendar year (up to 750 euros, up to 1,500 euros in total). Example: diagnosis in September, sign up immediately, before the invoice is issued. If the first treatment step is invoiced in December and the treatment is completed in the new year, you use both annual allowances, up to 1,500 euros. Larger treatments often span the turn of the year anyway, just discuss the treatment plan with your dentist."
+        "text": "The subsidy applies per calendar year (up to 750 euros, up to 1,500 euros in total). Example: diagnosis in September, insurance start immediately, before the invoice. If the first treatment step is invoiced in December and the treatment is completed in the new year, you use both annual allowances, up to 1,500 euros. Larger treatments often span the turn of the year anyway, just discuss the treatment plan with your dentist."
       },
       "cta": "Calculate premium and sign up",
       "note": "You will be redirected to the online calculator of die Bayerische."
@@ -335,7 +335,7 @@
       "items": [
         {
           "situation": "A treatment has been recommended or is already underway",
-          "empfehlung": "die Bayerische: dental tariff plus the ZAHN Sofort module. Important: sign up before the invoice is issued.",
+          "empfehlung": "die Bayerische: dental tariff plus the ZAHN Sofort module. Important: the insurance start must be before the invoice.",
           "weg": "bayerische"
         },
         {
@@ -385,7 +385,7 @@
     "moreHide": "Hide additional benefits",
     "noWait": {
       "title": "Immediate cover possible",
-      "desc": "The ZAHN Sofort module of die Bayerische even covers treatments that have already been recommended or started, with up to €1,500 towards them. Important: sign up first, receive the invoice afterwards."
+      "desc": "The ZAHN Sofort module of die Bayerische even covers treatments that have already been recommended or started, with up to €1,500 towards them. Important: the insurance start must be before the invoice."
     },
     "zahnersatz": {
       "title": "Up to 100% for dentures",
@@ -448,8 +448,8 @@
         "a": "How much a health-fund bonus reduces your premium depends on your activities and the applicable conditions. KassenBoost compares contributions, achievable bonuses and benefits separately so you can decide what matters most."
       },
       {
-        "q": "Why is signing up before the invoice so important?",
-        "a": "With the immediate cover of die Bayerische, a treatment is insurable as long as it has not been invoiced yet. Once the invoice is written, it is too late for that treatment. So: sign up first, then receive the invoice. Contact us if you have timing questions."
+        "q": "Why must the insurance start be before the invoice?",
+        "a": "With the immediate cover of die Bayerische, a treatment is insurable as long as it has not been invoiced yet. Once the invoice is written, it is too late for that treatment. So: the insurance start stated on your policy must be before the invoice. Contact us if you have timing questions."
       },
       {
         "q": "Are there waiting periods?",

@@ -181,7 +181,7 @@ export const article = {
           items: [
             'Der Baustein ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar.',
             'Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter.',
-            'Der Abschluss muss vor der Rechnung erfolgen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
+            'Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
             'Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
           ],
         },
@@ -302,7 +302,7 @@ export const article = {
     {
       question: 'Zahlt meine Zahnzusatzversicherung eine schon angeratene Wurzelbehandlung?',
       answer:
-        'Nein, nicht bei der UKV: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Für diesen Fall gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
+        'Nein, nicht bei der UKV: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Für diesen Fall gibt es den Baustein ZAHN Sofort der Bayerischen, dessen Versicherungsbeginn vor der Rechnung liegen muss.',
     },
     {
       question: 'Zahlt die Kasse eine Revision der Wurzelfüllung?',

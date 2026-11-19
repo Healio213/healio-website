@@ -30,7 +30,7 @@ const de = {
     offersAria: 'Zahn-Situationen und ihr Weg im Überblick',
     offers: [
       { code: 'UKV ZahnPRIVAT 100', label: 'Maximaler Zahnschutz', note: 'Kasse und Tarif zahlen zusammen 100 % der Rechnung, ohne Wartezeit' },
-      { code: 'ZAHN Sofort', label: 'Behandlung steht an', note: 'In den letzten 2 Jahren empfohlen oder schon begonnen: bis zu 1.500 EUR Zuschuss möglich, Abschluss vor der Rechnung' },
+      { code: 'ZAHN Sofort', label: 'Behandlung steht an', note: 'In den letzten 2 Jahren empfohlen oder schon begonnen: bis zu 1.500 EUR Zuschuss möglich, Versicherungsbeginn vor der Rechnung' },
       { code: 'UKV mit Zuschlag', label: 'Zähne fehlen schon', note: 'Bei 1 bis 3 fehlenden Zähnen Aufnahme mit Zuschlag je Zahn' },
       { code: 'UKV ZahnPRIVAT', label: 'Familie und Vorsorge', note: 'Kieferorthopädie und Zahnreinigung je nach Stufe' },
     ],
@@ -120,7 +120,7 @@ const de = {
           'Nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar',
           'Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter',
         ],
-        warning: 'Der Abschluss muss vor der Rechnung erfolgen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
+        warning: 'Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
         cta: 'Sofortschutz berechnen',
         ctaType: 'bayerische',
         note: 'ZAHN Sofort kostet zusätzlich 29,90 EUR monatlich für 24 Monate, zuzüglich des Beitrags für den regulären Zahntarif. Annahme und Leistungsumfang werden im Antrag geprüft.',
@@ -343,7 +343,7 @@ const de = {
     items: [
       {
         q: 'Es wurde schon eine Behandlung angeraten. Ist es zu spät?',
-        a: 'Nicht unbedingt. Im UKV-Antrag zählen Empfehlungen aus den letzten 2 Jahren sowie aktuell beabsichtigte und laufende Behandlungen. Eine ältere Empfehlung macht eine heute geplante Behandlung nicht automatisch versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Für bereits angeratene oder laufende Behandlungen können mit ZAHN Sofort bis zu 1.500 EUR Zuschuss möglich sein. Der Abschluss muss vor der Rechnung erfolgen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein ist nur bei einem Neuabschluss wählbar. Annahme und Leistung werden im Antrag geprüft.',
+        a: 'Nicht unbedingt. Im UKV-Antrag zählen Empfehlungen aus den letzten 2 Jahren sowie aktuell beabsichtigte und laufende Behandlungen. Eine ältere Empfehlung macht eine heute geplante Behandlung nicht automatisch versichert. Ausnahme Zahnspange: Da zählt auch eine ältere Empfehlung. Für bereits angeratene oder laufende Behandlungen können mit ZAHN Sofort bis zu 1.500 EUR Zuschuss möglich sein. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein ist nur bei einem Neuabschluss wählbar. Annahme und Leistung werden im Antrag geprüft.',
       },
       {
         q: 'Mein Zahnarzt hat vor mehr als 2 Jahren etwas empfohlen. Bin ich trotzdem versichert?',
@@ -355,7 +355,7 @@ const de = {
       },
       {
         q: 'Wie funktioniert der Sofortschutz bei einer laufenden Behandlung?',
-        a: 'ZAHN Sofort ist ein Zusatzbaustein zu einem neuen Zahntarif. Bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Er kostet zusätzlich 29,90 EUR monatlich für 24 Monate, zuzüglich des Beitrags für den regulären Zahntarif. Der Abschluss muss vor der Rechnung erfolgen; eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter. Annahme und Leistungsumfang werden im Antrag geprüft.',
+        a: 'ZAHN Sofort ist ein Zusatzbaustein zu einem neuen Zahntarif. Bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Er kostet zusätzlich 29,90 EUR monatlich für 24 Monate, zuzüglich des Beitrags für den regulären Zahntarif. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen; eine bereits abgeschlossene oder abgerechnete Behandlung ist nicht umfasst. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter. Annahme und Leistungsumfang werden im Antrag geprüft.',
       },
       {
         q: 'Was kostet eine Zahnzusatzversicherung?',
@@ -415,7 +415,7 @@ const en = {
     offersAria: 'Dental situations and their route at a glance',
     offers: [
       { code: 'UKV ZahnPRIVAT 100', label: 'Maximum dental cover', note: 'Health fund and plan together pay 100% of the bill, no waiting period' },
-      { code: 'ZAHN Sofort', label: 'Treatment coming up', note: 'Recommended in the last 2 years or already started: subsidy of up to €1,500 possible, sign up before the invoice' },
+      { code: 'ZAHN Sofort', label: 'Treatment coming up', note: 'Recommended in the last 2 years or already started: subsidy of up to €1,500 possible, insurance start before the invoice' },
       { code: 'UKV with surcharge', label: 'Teeth already missing', note: 'With 1 to 3 missing teeth, acceptance with a surcharge per tooth' },
       { code: 'UKV ZahnPRIVAT', label: 'Family and prevention', note: 'Orthodontics and teeth cleaning depending on the level' },
     ],
@@ -500,7 +500,7 @@ const en = {
           'Only available together with a new dental tariff from die Bayerische',
           'The module ends after 24 months while the dental tariff continues',
         ],
-        warning: 'You must sign up before the invoice. Treatment must not yet be completed or invoiced.',
+        warning: 'The insurance start stated on your policy must be before the invoice. Treatment must not yet be completed or invoiced.',
         cta: 'Calculate immediate cover',
         note: 'ZAHN Sofort costs an additional EUR 29.90 a month for 24 months, plus the regular dental plan premium. Acceptance and exact benefits are assessed in the application.',
       },
@@ -703,7 +703,7 @@ const en = {
     items: [
       {
         q: 'Treatment has already been recommended. Is it too late?',
-        a: 'Not necessarily. UKV asks about recommendations from the last 2 years and treatment currently intended or underway. An older recommendation does not automatically cover treatment planned today. Exception: for braces, an older recommendation still counts. ZAHN Sofort may provide up to EUR 1,500 towards already recommended or ongoing treatment. You must sign up before the invoice, treatment must not yet be completed or invoiced, and the add-on is only available with a new contract. Acceptance and benefits are assessed in the application.',
+        a: 'Not necessarily. UKV asks about recommendations from the last 2 years and treatment currently intended or underway. An older recommendation does not automatically cover treatment planned today. Exception: for braces, an older recommendation still counts. ZAHN Sofort may provide up to EUR 1,500 towards already recommended or ongoing treatment. The insurance start stated on your policy must be before the invoice, treatment must not yet be completed or invoiced, and the add-on is only available with a new contract. Acceptance and benefits are assessed in the application.',
       },
       {
         q: 'My dentist recommended something more than 2 years ago. Am I still covered?',
@@ -715,7 +715,7 @@ const en = {
       },
       {
         q: 'How does immediate cover work when treatment is underway?',
-        a: 'ZAHN Sofort is an add-on to a new dental tariff. Up to €750 per calendar year and €1,500 in total may be possible. It costs an additional EUR 29.90 a month for 24 months, plus the regular dental plan premium. You must sign up before the invoice; treatment already completed or invoiced is not included. The add-on ends after 24 months while the dental tariff continues. Acceptance and benefits are assessed in the application.',
+        a: 'ZAHN Sofort is an add-on to a new dental tariff. Up to €750 per calendar year and €1,500 in total may be possible. It costs an additional EUR 29.90 a month for 24 months, plus the regular dental plan premium. The insurance start stated on your policy must be before the invoice; treatment already completed or invoiced is not included. The add-on ends after 24 months while the dental tariff continues. Acceptance and benefits are assessed in the application.',
       },
       {
         q: 'What does supplementary dental insurance cost?',

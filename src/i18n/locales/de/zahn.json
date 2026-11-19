@@ -130,7 +130,7 @@
           "Gilt für Zahnersatz und Zahnbehandlung, von der Krone bis zur Wurzelbehandlung",
           "Der Baustein endet nach 24 Monaten automatisch, danach läuft dein Zahntarif weiter, zum Beispiel der Testsieger ZAHN Prestige"
         ],
-        "warning": "Schließe ab, bevor dein Zahnarzt die Rechnung stellt. Und wähle den Baustein direkt beim Abschluss dazu, nachträglich geht es nicht.",
+        "warning": "Der Versicherungsbeginn muss vor der Rechnung deines Zahnarztes liegen. Wähle den Baustein direkt beim Abschluss dazu, nachträglich geht es nicht.",
         "cta": "Beitrag berechnen und abschließen",
         "ctaType": "bayerische",
         "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet. Dort beantwortest du 4 kurze Gesundheitsfragen.",
@@ -283,18 +283,18 @@
       "label": "Sofortschutz für den Ernstfall",
       "insurer": "die Bayerische",
       "tariff": "Zahntarif + Baustein ZAHN Sofort",
-      "text": "Mit dem Baustein ZAHN Sofort gibt dir die Bayerische bis zu 1.500 EUR Zuschuss für eine bereits angeratene oder begonnene Behandlung (750 EUR pro Kalenderjahr, zusätzlich zum Festzuschuss deiner Krankenkasse). Entscheidend ist der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt.",
+      "text": "Mit dem Baustein ZAHN Sofort gibt dir die Bayerische bis zu 1.500 EUR Zuschuss für eine bereits angeratene oder begonnene Behandlung (750 EUR pro Kalenderjahr, zusätzlich zum Festzuschuss deiner Krankenkasse). Entscheidend ist der Zeitpunkt: Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung deines Zahnarztes liegen.",
       "bullets": [
         "Bis zu 1.500 EUR Zuschuss für angeratene und laufende Behandlungen",
         "Gilt für Zahnersatz und Zahnbehandlung, von der Krone bis zur Wurzelbehandlung",
         "Sofortschutz ohne Wartezeit, der Zahntarif läuft danach für alles Neue weiter",
         "Nur beim Neuabschluss wählbar: Baustein direkt mitnehmen, nachträglich geht es nicht",
-        "Wichtig: erst abschließen, dann Rechnung erhalten"
+        "Wichtig: Der Versicherungsbeginn muss vor der Rechnung liegen"
       ],
       "highlight": {
         "badge": "Spar-Logik",
         "title": "Der Kalenderjahres-Trick: 1.500 statt 750 Euro",
-        "text": "Der Zuschuss gilt je Kalenderjahr (bis zu 750 Euro, insgesamt bis zu 1.500 Euro). Beispiel: Diagnose im September, Abschluss sofort, noch bevor die Rechnung gestellt wird. Läuft der erste Behandlungsschritt mit Rechnung noch im Dezember und der Abschluss der Behandlung im neuen Jahr, nutzt du beide Jahres-Töpfe, also bis zu 1.500 Euro. Gerade größere Behandlungen strecken sich ohnehin über den Jahreswechsel, sprich den Behandlungsplan einfach mit deinem Zahnarzt durch."
+        "text": "Der Zuschuss gilt je Kalenderjahr (bis zu 750 Euro, insgesamt bis zu 1.500 Euro). Beispiel: Diagnose im September, Versicherungsbeginn sofort, noch vor der Rechnung. Läuft der erste Behandlungsschritt mit Rechnung noch im Dezember und der Abschluss der Behandlung im neuen Jahr, nutzt du beide Jahres-Töpfe, also bis zu 1.500 Euro. Gerade größere Behandlungen strecken sich ohnehin über den Jahreswechsel, sprich den Behandlungsplan einfach mit deinem Zahnarzt durch."
       },
       "cta": "Beitrag berechnen und abschließen",
       "note": "Du wirst zum Online-Rechner der Bayerischen weitergeleitet."
@@ -335,7 +335,7 @@
       "items": [
         {
           "situation": "Eine Behandlung ist angeraten oder läuft schon",
-          "empfehlung": "die Bayerische: Zahntarif plus Baustein ZAHN Sofort. Wichtig: abschließen, bevor die Rechnung gestellt wird.",
+          "empfehlung": "die Bayerische: Zahntarif plus Baustein ZAHN Sofort. Wichtig: Der Versicherungsbeginn muss vor der Rechnung liegen.",
           "weg": "bayerische"
         },
         {
@@ -385,7 +385,7 @@
     "moreHide": "Weitere Leistungen ausblenden",
     "noWait": {
       "title": "Sofortschutz möglich",
-      "desc": "Der Baustein ZAHN Sofort der Bayerischen versichert auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 € Zuschuss. Wichtig: erst abschließen, dann Rechnung erhalten."
+      "desc": "Der Baustein ZAHN Sofort der Bayerischen versichert auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 € Zuschuss. Wichtig: Der Versicherungsbeginn muss vor der Rechnung liegen."
     },
     "zahnersatz": {
       "title": "Bis zu 100 % Zahnersatz",
@@ -421,7 +421,7 @@
     "items": [
       {
         "q": "Mein Zahnarzt hat schon eine Behandlung angeraten. Kann ich noch abschließen?",
-        "a": "Ja, genau dafür gibt es den Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Abschluss muss erfolgen, bevor dein Zahnarzt die Rechnung stellt."
+        "a": "Ja, genau dafür gibt es den Sofortschutz-Weg: Die Bayerische versichert mit dem Baustein ZAHN Sofort auch bereits angeratene oder begonnene Behandlungen, mit bis zu 1.500 Euro Zuschuss (750 Euro pro Kalenderjahr), zusätzlich zum Festzuschuss deiner Krankenkasse. Entscheidend ist nur der Zeitpunkt: Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung deines Zahnarztes liegen."
       },
       {
         "q": "Welcher Weg passt zu mir: die Bayerische oder die UKV?",
@@ -448,8 +448,8 @@
         "a": "Wie stark ein Kassenbonus deinen Beitrag entlastet, hängt von deinen Aktivitäten und den jeweiligen Bedingungen ab. Bei KassenBoost vergleichst du Beitrag, erreichbaren Bonus und Leistungen getrennt und entscheidest selbst, was dir wichtiger ist."
       },
       {
-        "q": "Warum ist der Abschluss vor der Rechnungsstellung so wichtig?",
-        "a": "Beim Sofortschutz der Bayerischen gilt eine Behandlung als versicherbar, solange sie noch nicht in Rechnung gestellt wurde. Sobald die Rechnung geschrieben ist, ist es für diese Behandlung zu spät. Deshalb gilt: erst abschließen, dann behandeln lassen bzw. die Rechnung erhalten. Bei Fragen zum Timing melde dich gerne bei uns."
+        "q": "Warum ist der Versicherungsbeginn vor der Rechnungsstellung so wichtig?",
+        "a": "Beim Sofortschutz der Bayerischen gilt eine Behandlung als versicherbar, solange sie noch nicht in Rechnung gestellt wurde. Sobald die Rechnung geschrieben ist, ist es für diese Behandlung zu spät. Deshalb gilt: Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Bei Fragen zum Timing melde dich gerne bei uns."
       },
       {
         "q": "Gibt es Wartezeiten?",

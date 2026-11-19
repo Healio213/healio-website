@@ -6,6 +6,7 @@ import { HEALIO_PHONE_DISPLAY, HEALIO_PHONE_TEL } from '@/config/contactChannels
 import { emailjsService } from '@/services/emailjsService';
 import { useLanguage } from '@/hooks/useLanguage';
 import { trackEvent } from '@/lib/analytics';
+import FriendlyIcon from '@/components/ui/FriendlyIcon';
 
 // Experiment 05.10.2026 nach dem Kontaktformular am Ende der Modellseiten auf
 // mercedes-benz.de: ganz unten auf /zahn ein kurzes Rückruf-Formular als
@@ -56,9 +57,14 @@ const ChoiceGroup = ({ legend, name, options, value, onChange }) => (
   </fieldset>
 );
 
-const DentalCallbackForm = () => {
+const STANDARD_TEXT = 'Hinterlass deinen Namen und deine Nummer. Wir rufen dich zurück und gehen deine Zahn-Situation in Ruhe mit dir durch.';
+
+// herkunft: Pfad der Seite für die Mailzeile (Vorgabe /zahn). startThema: vorgewähltes
+// Thema (Vorgabe keins). text: Einleitung unter der Überschrift (Vorgabe wie bisher).
+// motiv: optionales Motiv aus dem Friendly-Icon-Satz über der Überschrift (Vorgabe keins).
+const DentalCallbackForm = ({ herkunft = '/zahn', startThema = '', text = STANDARD_TEXT, motiv = null }) => {
   const { getPath } = useLanguage();
-  const [form, setForm] = useState(INITIAL);
+  const [form, setForm] = useState({ ...INITIAL, thema: startThema });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
@@ -94,7 +100,7 @@ const DentalCallbackForm = () => {
         from_name: form.vorname.trim(),
         from_email: form.email.trim(),
         phone: form.telefon.trim(),
-        message: `Rückrufwunsch von healio.de/zahn\nThema: ${topic}\nBeste Zeit: ${time}\n\n${form.nachricht.trim()}`,
+        message: `Rückrufwunsch von healio.de${herkunft}\nThema: ${topic}\nBeste Zeit: ${time}\n\n${form.nachricht.trim()}`,
       }, 'Zahnseite Rückruf');
       trackEvent('zahn_rueckruf_gesendet', { thema: form.thema || 'keins' });
       setStatus('sent');
@@ -107,12 +113,13 @@ const DentalCallbackForm = () => {
     <section id="zahn-kontakt" className="scroll-mt-28 bg-white px-4 py-12 sm:px-6 md:py-24 lg:px-8 lg:py-28" aria-labelledby="zahn-kontakt-heading">
       <div className="mx-auto grid max-w-7xl gap-6 md:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
         <div>
+          {motiv ? <FriendlyIcon kind={motiv} tone="mint" size="lg" className="mb-4" /> : null}
           <p className="font-display text-base font-bold text-[#0b7a5a]">Rückruf</p>
           <h2 id="zahn-kontakt-heading" className="mt-3 max-w-none font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.04em] text-[#07111f] [text-wrap:balance] sm:text-4xl md:max-w-[14ch] lg:text-5xl">
             Lieber kurz sprechen?
           </h2>
           <p className="mt-3 max-w-md text-base leading-7 text-slate-600 md:mt-5 md:text-lg md:leading-8">
-            Hinterlass deinen Namen und deine Nummer. Wir rufen dich zurück und gehen deine Zahn-Situation in Ruhe mit dir durch.
+            {text}
           </p>
           <ul className="mt-5 space-y-2 md:mt-7 md:space-y-3">
             {['Registrierter Versicherungsmakler', 'Deine Angaben nutzen wir nur für den Rückruf', 'Die Entscheidung bleibt bei dir'].map((point) => (

@@ -163,7 +163,7 @@ export const article = {
           items: [
             'Der Baustein ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar.',
             'Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter.',
-            'Der Abschluss muss vor der Rechnung erfolgen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
+            'Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen. Die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein.',
             'Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
           ],
         },
@@ -301,7 +301,7 @@ export const article = {
     {
       question: 'Ist eine schon angeratene Behandlung versichert?',
       answer:
-        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen aus den letzten 2 Jahren gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
+        'Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen aus den letzten 2 Jahren gibt es den Baustein ZAHN Sofort der Bayerischen, dessen Versicherungsbeginn vor der Rechnung liegen muss.',
     },
     {
       question: 'Was ist die Zahnstaffel?',

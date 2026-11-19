@@ -125,7 +125,7 @@ const ActiveNitaConsentWidget = ({ whatsapp = false, mobileHidden = false }) => 
   const launcherRef = useRef(null);
   const language = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'de';
   const copy = COPY[language];
-  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental';
+  const isDentalCheckRoute = pathname === '/zahn' || pathname === '/en/dental' || pathname === '/zahn/behandlung-steht-an';
   const providerAllowed = hasConsent('openai', consent);
   const sessionEndpoint = getSessionEndpoint();
 

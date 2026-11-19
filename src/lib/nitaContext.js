@@ -10,6 +10,7 @@ const EXACT_ROUTE_CONTEXTS = new Map([
   ['/heilpraktiker-zusatzversicherung', ['outpatient', 'outpatient']],
   ['/Ambulante-zusatzversicherung', ['outpatient', 'outpatient']],
   ['/zahn', ['dental', 'dental']],
+  ['/zahn/behandlung-steht-an', ['dental', 'dental']],
   ['/en/dental', ['dental', 'dental']],
   ['/healio-zahnzusatz', ['dental', 'dental']],
   ['/en/healio-dental', ['dental', 'dental']],

@@ -211,7 +211,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Bei einer bereits angeratenen oder begonnenen Behandlung nennt die Live-Seite ZAHN Sofort als Zusatzbaustein zu einem neuen Zahntarif: bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Der Abschluss muss vor der Rechnung liegen; die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter."
+          "text": "Bei einer bereits angeratenen oder begonnenen Behandlung nennt die Live-Seite ZAHN Sofort als Zusatzbaustein zu einem neuen Zahntarif: bis zu 750 EUR je Kalenderjahr und insgesamt bis zu 1.500 EUR können möglich sein. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen; die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Der Baustein endet nach 24 Monaten, der Zahntarif läuft weiter."
         },
         {
           "type": "paragraph",

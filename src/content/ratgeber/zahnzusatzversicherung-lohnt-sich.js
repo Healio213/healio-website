@@ -213,7 +213,7 @@ export const article = {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Zuerst zählt eine Frage: Wurde in den letzten 2 Jahren etwas empfohlen oder geplant, oder läuft eine Behandlung schon? Wenn nein, ist es die UKV ZahnPRIVAT mit drei Leistungsstufen ohne Wartezeiten, bei 1 bis 3 fehlenden Zähnen mit Zuschlag je Zahn. Wenn ja, kommt der Baustein ZAHN Sofort der Bayerischen in Frage, sofern dir keine Zähne fehlen und es keine Zahn-Vorgeschichte gibt. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Der Baustein ist nur zusammen mit einem neuen Zahntarif wählbar, und der Abschluss muss vor der Rechnung erfolgen.',
+          text: 'Zuerst zählt eine Frage: Wurde in den letzten 2 Jahren etwas empfohlen oder geplant, oder läuft eine Behandlung schon? Wenn nein, ist es die UKV ZahnPRIVAT mit drei Leistungsstufen ohne Wartezeiten, bei 1 bis 3 fehlenden Zähnen mit Zuschlag je Zahn. Wenn ja, kommt der Baustein ZAHN Sofort der Bayerischen in Frage, sofern dir keine Zähne fehlen und es keine Zahn-Vorgeschichte gibt. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Der Baustein ist nur zusammen mit einem neuen Zahntarif wählbar, und der Versicherungsbeginn muss vor der Rechnung liegen.',
         },
         {
           type: 'segments',
@@ -304,7 +304,7 @@ export const article = {
     {
       question: 'Lohnt sich eine Zahnzusatzversicherung, wenn schon etwas angeraten wurde?',
       answer:
-        'Ein normaler Tarif zahlt genau diese Behandlung nicht. Bei der UKV gilt: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen der letzten 2 Jahre gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.',
+        'Ein normaler Tarif zahlt genau diese Behandlung nicht. Bei der UKV gilt: Gab es in den letzten 2 Jahren einen Heil- und Kostenplan oder wurde die Behandlung angeraten, ist genau diese Behandlung nicht versichert. Eine ältere Empfehlung macht eine aktuell beabsichtigte oder laufende Behandlung nicht automatisch versichert. Verbindlich prüft die UKV die Angaben im Antrag. Für Behandlungen der letzten 2 Jahre gibt es den Baustein ZAHN Sofort der Bayerischen, dessen Versicherungsbeginn vor der Rechnung liegen muss.',
     },
     {
       question: 'Wie rechne ich, ob sich eine Zahnzusatzversicherung lohnt?',

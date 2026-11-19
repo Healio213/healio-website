@@ -79,6 +79,7 @@ const AltersvorsorgeUnter25Page = React.lazy(() => import('@/pages/altersvorsorg
 const AltersvorsorgeElternzeitPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeElternzeitPage'));
 const AltersvorsorgeRiesterKuendigenPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeRiesterKuendigenPage'));
 const AltersvorsorgeEhepartnerPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeEhepartnerPage'));
+const ZahnBehandlungStehtAnPage = React.lazy(() => import('@/pages/zahnAnlaesse/ZahnBehandlungStehtAnPage'));
 const AltersvorsorgeKindergeldEndetPage = React.lazy(() => import('@/pages/altersvorsorgeZielgruppen/AltersvorsorgeKindergeldEndetPage'));
 const BabyGeplantPage = React.lazy(() => import('@/pages/schwangerschaftAnlaesse/BabyGeplantPage'));
 const OsteopathiePage = React.lazy(() => import('@/pages/ambulantAnlaesse/OsteopathiePage'));
@@ -283,6 +284,7 @@ function App() {
               <Route path="heilpraktiker-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="Ambulante-zusatzversicherung" element={<Navigate to="/ambulant" replace />} />
               <Route path="zahn" element={<ZahnPage />} />
+              <Route path="zahn/behandlung-steht-an" element={<ZahnBehandlungStehtAnPage />} />
               <Route path="healio-zahnzusatz" element={<Navigate to="/zahn" replace />} />
               <Route path="stationaer" element={<StationaerPage />} />
               <Route path="klinik-upgrade" element={<Navigate to="/stationaer" replace />} />

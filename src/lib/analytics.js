@@ -25,6 +25,8 @@ const ANALYTICS_EXCLUDED_PATHS = new Set([
   '/antrag/zahn-ukv',
   '/zahn',
   '/en/dental',
+  // Zahn-Anlassseite (10.11.2026): schon der Besuch verrät eine anstehende Behandlung (Art. 9 DSGVO), gleiche Stille wie /zahn.
+  '/zahn/behandlung-steht-an',
   '/schwangerschaft',
   // Schwangerschafts-Anlassseite (11.11.2026): gleiche Stille wie /schwangerschaft.
   '/schwangerschaft/baby-geplant',

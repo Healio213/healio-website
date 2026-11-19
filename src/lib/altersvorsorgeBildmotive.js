@@ -43,6 +43,8 @@ export const KACHEL_MOTIVE = {
   jahr: 'calendar',
   rueckforderung: 'bonus',
   wege: 'choice',
+  // Zahn-Anlassseiten (/zahn/behandlung-steht-an)
+  zahn: 'dental',
 };
 
 // Figur, die in der Angebotskarte hinter den Kacheln hervorschaut und auf die Überschrift zeigt.
@@ -65,6 +67,7 @@ export const MOTIV_SITZ = {
   bonus: { b: 311, h: 315, l: 0.122, o: 0.165, r: 0.058, u: 0.06 },
   thinking: { b: 512, h: 512, l: 0.166, o: 0.021, r: 0.133, u: 0.025 },
   switch: { b: 311, h: 315, l: 0.183, o: 0.016, r: 0.106, u: 0.146 },
+  dental: { b: 311, h: 315, l: 0.106, o: 0.162, r: 0.016, u: 0.14 },
 };
 
 const rund = (wert) => Math.round(wert * 1000) / 1000;
