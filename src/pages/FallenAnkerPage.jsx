@@ -2,11 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Calculator,
-  CheckCircle2,
   ChevronDown,
   Clock,
   Globe2,
-  Headphones,
   Info,
   Languages,
   HelpCircle,
@@ -572,6 +570,21 @@ const TEXTE = {
 const fuelle = (text, werte) =>
   Object.entries(werte).reduce((acc, [k, v]) => acc.split(`{${k}}`).join(String(v)), text);
 
+// Gerenderte 3D-Icons (public/images/icons-3d, 192 px WebP), reine Zierde, wie auf /tabea
+const Icon3D = ({ name, size = 72, className = '' }) => (
+  <img
+    src={`/images/icons-3d/${name}.webp`}
+    width={size}
+    height={size}
+    loading="lazy"
+    decoding="async"
+    alt=""
+    aria-hidden="true"
+    className={`select-none ${className}`}
+    style={{ width: size, height: size }}
+  />
+);
+
 const SectionBadge = ({ icon: Icon, children }) => (
   <div className="inline-flex items-center gap-2 border bg-healio-light border-home-mint/20 text-healio-primary-dark text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
     <Icon className="w-3.5 h-3.5" />
@@ -708,10 +721,10 @@ const FallenAnkerPage = () => {
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {t.steps.map((schritt, i) => (
                 <div key={i} className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-full bg-[#25c990] text-slate-900 text-lg font-bold mb-5">
-                    {i + 1}
-                  </span>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">{schritt.title}</h3>
+                  <Icon3D name={['aktentasche', 'muenzen-plus', 'wachstum'][i]} size={96} className="mb-4 -ml-1" />
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    <span className="text-healio-primary-dark mr-1">{i + 1}.</span> {schritt.title}
+                  </h3>
                   <p className="text-slate-600 leading-relaxed">{schritt.text}</p>
                 </div>
               ))}
@@ -728,12 +741,14 @@ const FallenAnkerPage = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-balance">{t.whyTitle}</h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-              {t.why.map((block) => (
+              {t.why.map((block, i) => (
                 <div key={block.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-slate-900 mb-2">
-                    <CheckCircle2 className="w-5 h-5 shrink-0 text-[#25c990]" />
-                    {block.title}
-                  </h3>
+                  <Icon3D
+                    name={['sparschwein', 'haende', 'dokument', 'muenzen-plus', 'haus'][i]}
+                    size={80}
+                    className="mb-3 -ml-1"
+                  />
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{block.title}</h3>
                   <p className="text-slate-600 leading-relaxed">{block.text}</p>
                 </div>
               ))}
@@ -1087,7 +1102,7 @@ const FallenAnkerPage = () => {
                 <p className="text-sm text-slate-500">{t.askNote}</p>
               </div>
               <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl">
-                <Headphones className="w-10 h-10 text-[#25c990] mb-5" />
+                <Icon3D name="telefon" size={96} className="mb-5 -ml-1" />
                 <ul className="space-y-4">
                   {t.askPoints.map((punkt, i) => {
                     const Icon = [Globe2, Clock, HelpCircle][i];
