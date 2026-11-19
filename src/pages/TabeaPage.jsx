@@ -6,7 +6,6 @@ import {
   ChevronDown,
   Clock,
   Globe2,
-  Headphones,
   Info,
   Languages,
   HelpCircle,
@@ -14,13 +13,7 @@ import {
   TrendingUp,
   CalendarCheck,
   ArrowUpRight,
-  Briefcase,
-  Car,
-  HeartHandshake,
-  HeartPulse,
-  Home,
-  Stethoscope,
-  Umbrella
+  HeartPulse
 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import SEOHead from '@/components/SEOHead';
@@ -534,6 +527,21 @@ const TEXTE = {
 const fuelle = (text, werte) =>
   Object.entries(werte).reduce((acc, [k, v]) => acc.split(`{${k}}`).join(String(v)), text);
 
+// Gerenderte 3D-Icons (public/images/icons-3d, 192 px WebP), reine Zierde
+const Icon3D = ({ name, size = 72, className = '' }) => (
+  <img
+    src={`/images/icons-3d/${name}.webp`}
+    width={size}
+    height={size}
+    loading="lazy"
+    decoding="async"
+    alt=""
+    aria-hidden="true"
+    className={`select-none ${className}`}
+    style={{ width: size, height: size }}
+  />
+);
+
 const SectionBadge = ({ icon: Icon, children }) => (
   <div className="inline-flex items-center gap-2 border bg-healio-light border-home-mint/20 text-healio-primary-dark text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-5">
     <Icon className="w-3.5 h-3.5" />
@@ -662,12 +670,10 @@ const TabeaPage = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-balance">{t.whyTitle}</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-              {t.why.map((block) => (
+              {t.why.map((block, i) => (
                 <div key={block.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-slate-900 mb-2">
-                    <CheckCircle2 className="w-5 h-5 shrink-0 text-[#25c990]" />
-                    {block.title}
-                  </h3>
+                  <Icon3D name={['dokument', 'anker', 'klemmbrett'][i]} size={80} className="mb-3 -ml-1" />
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{block.title}</h3>
                   <p className="text-slate-600 leading-relaxed">{block.text}</p>
                 </div>
               ))}
@@ -686,10 +692,10 @@ const TabeaPage = () => {
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {t.ways.map((weg, i) => (
                 <div key={weg.title} className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-full bg-[#25c990] text-slate-900 text-lg font-bold mb-5">
-                    {i + 1}
-                  </span>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">{weg.title}</h3>
+                  <Icon3D name={['sparschwein', 'schild-herz', 'beides'][i]} size={96} className="mb-4 -ml-1" />
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    <span className="text-healio-primary-dark mr-1">{i + 1}.</span> {weg.title}
+                  </h3>
                   <p className="text-slate-600 leading-relaxed">{weg.text}</p>
                 </div>
               ))}
@@ -711,7 +717,6 @@ const TabeaPage = () => {
               <p className="text-slate-600 text-center mb-6">{t.buPriceSub}</p>
               <div className="grid md:grid-cols-3 gap-4">
                 {BU_BEISPIELE.map((preis, i) => {
-                  const Icon = [Briefcase, HeartHandshake, Stethoscope][i];
                   return (
                     <div
                       key={i}
@@ -720,7 +725,7 @@ const TabeaPage = () => {
                       }`}
                       data-testid={`tb-bu-${i}`}
                     >
-                      <Icon className="w-7 h-7 text-healio-primary-dark mb-3" />
+                      <Icon3D name={['aktentasche', 'haende', 'stethoskop'][i]} size={72} className="mb-3 -ml-1" />
                       <p className="font-semibold text-slate-900 mb-2">{t.buGroups[i]}</p>
                       <p className="text-2xl font-bold text-slate-900 whitespace-nowrap">
                         {fuelle(t.buRange, { von: preis.von, bis: preis.bis })}
@@ -1032,7 +1037,8 @@ const TabeaPage = () => {
           <div className="container mx-auto px-4 sm:px-6 md:px-8">
             <div className="max-w-5xl mx-auto rounded-3xl bg-healio-light/60 border border-home-mint/30 p-6 sm:p-10 grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
               <div>
-                <SectionBadge icon={Stethoscope}>{t.kbBadge}</SectionBadge>
+                <Icon3D name="kassenkarte" size={96} className="mb-4 -ml-1" />
+                <SectionBadge icon={Info}>{t.kbBadge}</SectionBadge>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 text-balance">{t.kbTitle}</h2>
                 <p className="text-slate-600 leading-relaxed mb-6">{t.kbText}</p>
                 <a
@@ -1071,7 +1077,7 @@ const TabeaPage = () => {
                 <p className="text-sm text-slate-500">{t.askNote}</p>
               </div>
               <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl">
-                <Headphones className="w-10 h-10 text-[#25c990] mb-5" />
+                <Icon3D name="telefon" size={96} className="mb-5 -ml-1" />
                 <ul className="space-y-4">
                   {t.askPoints.map((punkt, i) => {
                     const Icon = [Globe2, Clock, HelpCircle][i];
@@ -1132,10 +1138,9 @@ const TabeaPage = () => {
               <p className="text-slate-600 leading-relaxed max-w-2xl mx-auto">{t.rvText}</p>
               <div className="grid grid-cols-3 gap-3 sm:gap-4 mt-8">
                 {t.rvItems.map((item, i) => {
-                  const Icon = [Home, Umbrella, Car][i];
                   return (
                     <div key={item} className="rounded-2xl bg-white border border-slate-200 p-4 sm:p-6">
-                      <Icon className="w-8 h-8 mx-auto text-[#25c990]" />
+                      <Icon3D name={['haus', 'regenschirm', 'auto'][i]} size={72} className="mx-auto" />
                       <p className="font-semibold text-slate-900 text-sm sm:text-base mt-2 break-words hyphens-auto">{item}</p>
                     </div>
                   );
