@@ -149,7 +149,8 @@ function Danke({ definition, ergebnis, titelRef }) {
   const vorbehalt = definition.absenden?.vorbehalt;
   const schritte = [
     { icon: Send, titel: 'Wir reichen ein', texte: punkte.slice(0, 2) },
-    { icon: ShieldCheck, titel: `Die ${definition.versicherer.kurz} bestätigt`, texte: punkte.slice(2, 3) },
+    // Ebene 1, B9: eingegangen heißt nicht angenommen (absenden.nachEingang).
+    { icon: ShieldCheck, titel: definition.absenden?.nachEingang ? `Die ${definition.versicherer.kurz} entscheidet` : `Die ${definition.versicherer.kurz} bestätigt`, texte: [punkte[2], definition.absenden?.nachEingang] },
     { icon: Inbox, titel: 'Unterlagen per E-Mail', texte: [punkte[3], 'Der Link gilt, solange wir deinen Antrag speichern.'] },
   ];
   return (
@@ -265,7 +266,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     const warte = window.setTimeout(() => {
       berechneSelbstBeitrag(JSON.parse(dienstSchluessel), { signal: steuerung.signal })
         .then((antwort) => setDienst({ schluessel: dienstSchluessel, antwort, fehler: false }))
-        .catch((fehler) => { if (fehler?.name !== 'AbortError') setDienst({ schluessel: dienstSchluessel, antwort: null, fehler: true }); });
+        // Ebene 1, B3: „antrag_preis_nicht_bestaetigt“ (Preisregion nicht prüfbar) bekommt einen eigenen Hinweis.
+        .catch((fehler) => { if (fehler?.name !== 'AbortError') setDienst({ schluessel: dienstSchluessel, antwort: null, fehler: fehler?.code === 'antrag_preis_nicht_bestaetigt' ? fehler.code : true }); });
     }, 250);
     return () => { window.clearTimeout(warte); steuerung.abort(); };
   }, [dienstSchluessel, dienstVersuch]);

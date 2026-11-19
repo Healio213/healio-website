@@ -18,6 +18,7 @@ import {
   jaNeinFrageAmIndex,
   offeneFragen,
   parseGeburtsdatum,
+  ZAHLWEISEN,
 } from '@/data/sdkAmbulantAntrag';
 import {
   AntragFehler, TEXTFASSUNG, berechneBeitrag, bestaetigeAntrag, fehlerText, ladeEntwurf, tokenAusHash,
@@ -212,7 +213,8 @@ function startDaten(entwurf) {
     antworten: {},
     groesse: '',
     gewicht: '',
-    zahlweise: null,
+    // Ebene 1, B6: nur monatlich (wie die Online-Strecke der SDK), daher vorgewählt.
+    zahlweise: ZAHLWEISEN.length === 1 ? ZAHLWEISEN[0].id : null,
     kontoinhaber: null,
     iban: '',
     erklaerungen: {

@@ -8,18 +8,20 @@
 //   die Folgefelder des Originals; bei SPU entfällt der Schritt Gesundheitsfragen.
 // - Ein „Ja“ ändert online nichts am Beitrag, die SDK entscheidet erst nach
 //   Eingang. Die Maske sagt das, verspricht keine Annahme, nennt keinen Zuschlag.
+//   19.11.2026 (Ebene 1, B9): Hinweis nennt Zuschlag, Ausschluss und Ablehnung nach
+//   Eingang; Vorbehalt „vorbehaltlich der Annahme“; Textfassung 2026-11-19b.
 // - Beitrag: Eintrittsalter = Beginnjahr minus Geburtsjahr, Tabelle 0 bis 80.
 // - Beginn wie im Original: nächster Monatserster vorbelegt, bis zum 15. auch
-//   der laufende Monat, dazu 5 weitere Monate.
+//   der laufende Monat (im Dezember den ganzen Monat), dazu 5 weitere Monate.
 
-import { HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
+import { BEGINN_DEZEMBER_GANZER_MONAT, HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
 import { ERKLAERUNG_KURZ, TEXT_10_VOLLMACHT } from '../sdkAmbulantAntragTexte.js';
 import { bedingungErfuellt } from '../../lib/antragsmaske/regeln.js';
 import {
   LEVELNINE, antwortenAusStrecke, feldAus, fragenZuordnung, frageAus,
 } from './levelnine.js';
 import {
-  SDK_ABLAUF, SDK_HINWEIS_NACH_EINGANG, sdkDatenZuordnung, sdkTeile,
+  SDK_ABLAUF, SDK_HINWEIS_BEI_JA, SDK_HINWEIS_NACH_EINGANG, SDK_NACH_EINGANG_STATIONAER, sdkDatenZuordnung, sdkTeile,
 } from './sdkStrecke.js';
 
 const SCHRITTE = LEVELNINE.sdkStationaer.schritte;
@@ -84,7 +86,7 @@ const FRAGEN = [
     ],
   },
   ...felderGesundheit.filter((feld) => !['G0A', 'G0B'].includes(feld.id)).map(mitWeiterenBloecken).map((feld) => ({
-    ...frageAus(feld, { schritt: 5, hinweisBeiJa: SDK_HINWEIS_NACH_EINGANG }),
+    ...frageAus(feld, { schritt: 5, hinweisBeiJa: SDK_HINWEIS_BEI_JA }),
     bedingung: MIT_FRAGEN,
     kurz: feld.wortlaut.length > 70 ? `${feld.wortlaut.slice(0, 67).replace(/\s+\S*$/, '')} …` : feld.wortlaut,
   })),
@@ -100,6 +102,7 @@ const TEXT_8_AUSWAHL_STATIONAER = 'Gut zu wissen: In diesem Antrag geht es nur u
 
 const teile = sdkTeile({
   strecke: 'sdkStationaer', produkt: 'sdk-stationaer', vollmacht: VOLLMACHT, vollmachtKurz: ERKLAERUNG_KURZ.vollmacht, tarifFuerUnterlagen: (tarif) => tarif, auswahl: TEXT_8_AUSWAHL_STATIONAER,
+  nachEingang: SDK_NACH_EINGANG_STATIONAER,
 });
 
 const stationaer = {
@@ -110,7 +113,7 @@ const stationaer = {
   stand: '2026-11-12',
   // 19.11.2026 (Paket 1): Versicherungsnehmer sichtbar, Werbeeinwilligung Ja/Nein,
   // Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei, sechs Blöcke.
-  textfassung: '2026-11-19-sdk-stationaer-online',
+  textfassung: '2026-11-19b-sdk-stationaer-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, erfasst 12.11.2026',
   kennzeile: 'Klinikschutz der SDK',
   seitentitel: 'Antrag Klinikschutz | Healio',
@@ -123,7 +126,7 @@ const stationaer = {
   })),
   tarifHinweis: 'Beitrag im Monat.',
   beginn: {
-    art: 'monatsErster', abMonat: 1, bisMonat: 6, laufenderMonatBisTag: 15,
+    art: 'monatsErster', abMonat: 1, bisMonat: 6, laufenderMonatBisTag: 15, dezemberGanzerMonat: BEGINN_DEZEMBER_GANZER_MONAT,
   },
   // Online nur Volljährige für sich selbst (Versicherungsnehmer = versicherte
   // Person); Tabelle bis 80, darüber persönlich.

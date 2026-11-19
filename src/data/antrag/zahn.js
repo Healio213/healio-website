@@ -25,9 +25,10 @@
 
 import { ANREDEN, HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
 import {
-  BEITRAG_VORBEHALT,
+  BEITRAG_VORBEHALT_ANNAHME,
   ERKLAERUNG_KURZ,
   KNOPF_BEANTRAGEN,
+  NACH_EINGANG_ANNAHME,
   TEIL_3_TITEL,
   TEXT_10_VOLLMACHT,
   TEXT_12_KNOPF,
@@ -67,7 +68,10 @@ function fuerBayerische(text) {
     .replace(/bei der SDK/g, 'bei der Bayerischen')
     .replace(/an die SDK/g, 'an die Bayerische')
     .replace(/Stellt die SDK/g, 'Stellt die Bayerische')
-    .replace(/Nennt die SDK/g, 'Nennt die Bayerische');
+    .replace(/Nennt die SDK/g, 'Nennt die Bayerische')
+    .replace(/Zeigt die SDK/g, 'Zeigt die Bayerische')
+    .replace(/durch die SDK/g, 'durch die Bayerische')
+    .replace(/entscheidet die SDK/g, 'entscheidet die Bayerische');
   if (/SDK|Süddeutsche|Level Nine|cpit/.test(neu)) throw new Error(`zahn.js: SDK-Rest im Text: ${neu.slice(0, 80)}`);
   return neu;
 }
@@ -88,15 +92,26 @@ const frage = (id, titel, text, original, wirkungJa, bedingung) => ({
   id, typ: 'janein', titel, kurz: titel, text, original, wirkung: { ja: wirkungJa }, ...(bedingung ? { bedingung } : {}),
 });
 
+// Smart mit „Ja“ bei Frage 5: Das Original lieferte dafür keine Entscheidung
+// (Antwort 424, Gegenprüfung 19.11.2026). Bis eine Nachmessung „angenommen“
+// zeigt, nimmt Healio Smart mit Frage 5 „Ja“ online nicht an (Bauplan Ebene 1,
+// B5). Zeigt das Original „angenommen“, hier auf true stellen.
+export const SMART_FRAGE5_JA_ONLINE = false;
+export const SMART_FRAGE5_TEXT = 'Mit dieser Antwort können wir Smart online gerade nicht abschließen. Lass uns das zusammen klären.';
+const SMART_FRAGE5_WIRKUNG = SMART_FRAGE5_JA_ONLINE ? [] : [{
+  art: 'keineAufnahme', text: SMART_FRAGE5_TEXT, auswege: ['telefon', 'termin'], tarif: ['SMART'],
+}];
+
 const FRAGEN = [
   frage('z1', 'Frage 1', 'Haben Sie fehlende Zähne, die noch nicht ersetzt sind oder/ und ist angeraten, einen oder mehrere Zähne zu ziehen?', { frageId: '1', ja: '2', nein: '9' }, ablehnung(PERSOENLICH), { tarif: ['KOMFORT', 'PRESTIGE'] }),
   frage('z1s', 'Frage 1', 'Haben Sie fehlende Zähne, die noch nicht ersetzt sind?', { frageId: '1', ja: '2', nein: '9' }, ablehnung(MIT_UKV), { tarif: ['SMART'] }),
   frage('z2', 'Frage 2', 'Haben Sie eine bestehende, herausnehmbare Voll- oder Teilprothese?', { frageId: '10', ja: '11', nein: '12' }, ablehnung(PERSOENLICH)),
   frage('z3', 'Frage 3', 'Haben Sie Zahnersatz, der älter als 10 Jahre ist?', { frageId: '13', ja: '14', nein: '21' }, ablehnung(MIT_UKV)),
   frage('z4', 'Frage 4', 'Besteht oder bestand in den letzten 3 Jahren eine / mehrere der folgenden Erkrankungen: -Paradontose, -Paradontitis, - Zahnschmelzdefekt?', { frageId: '22', ja: '23', nein: '24' }, ablehnung(PERSOENLICH)),
-  // Ja: angenommen, Beitrag unverändert. Die Folgefrage „Wie lange?“ zeigt das
-  // Original nicht und schickt „unbekannt“ (Antwort 34).
-  frage('z5', 'Frage 5', 'Bestand in den letzten 12 Monaten vor Vertragsabschluss eine Zahnzusatzversicherung bei einem anderen privaten Krankenversicherer?', { frageId: '25', ja: '26', nein: '35', folgeBeiJa: { frageId: '28', antwortId: '34' } }, []),
+  // Ja: Komfort und Prestige angenommen, Beitrag unverändert; Smart siehe
+  // SMART_FRAGE5_JA_ONLINE. Die Folgefrage „Wie lange?“ zeigt das Original nicht
+  // und schickt „unbekannt“ (Antwort 34).
+  frage('z5', 'Frage 5', 'Bestand in den letzten 12 Monaten vor Vertragsabschluss eine Zahnzusatzversicherung bei einem anderen privaten Krankenversicherer?', { frageId: '25', ja: '26', nein: '35', folgeBeiJa: { frageId: '28', antwortId: '34' } }, SMART_FRAGE5_WIRKUNG),
 ];
 
 const zahn = {
@@ -107,7 +122,8 @@ const zahn = {
   stand: '2026-11-12',
   // 19.11.2026 (Paket 2): Adressprüfung im Wortlaut der Bayerischen, Kasten
   // „*Bonitätsauskunft“ wie im Original, Auftrag ohne Verweis auf eine fehlende Datei.
-  textfassung: '2026-11-19-bayerische-zahn',
+  // 19.11.2026 spät (Ebene 1): Vorbehalt „vorbehaltlich der Annahme“, Smart mit Frage 5 „Ja“ nicht online.
+  textfassung: '2026-11-19b-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',
@@ -166,7 +182,7 @@ const zahn = {
       label: 'Wie lautet Ihre Postleitzahl?',
       hinweis: 'Hinweis: Unser Tarif gewährt je nach Wohnort einen günstigeren Beitrag. Bitte geben Sie für die Berechnung des Beitrags die Postleitzahl Ihres Wohnortes an.',
     },
-    vorbehalt: fuerBayerische(BEITRAG_VORBEHALT),
+    vorbehalt: fuerBayerische(BEITRAG_VORBEHALT_ANNAHME),
   },
 
   gesundheit: {
@@ -359,7 +375,9 @@ const zahn = {
   ],
 
   zusammenfassung: { titel: TEIL_3_TITEL },
-  absenden: { satz: fuerBayerische(TEXT_12_KNOPF), vorbehalt: fuerBayerische(BEITRAG_VORBEHALT), knopf: KNOPF_BEANTRAGEN },
+  absenden: {
+    satz: fuerBayerische(TEXT_12_KNOPF), vorbehalt: fuerBayerische(BEITRAG_VORBEHALT_ANNAHME), nachEingang: fuerBayerische(NACH_EINGANG_ANNAHME), knopf: KNOPF_BEANTRAGEN,
+  },
 
   // Zuordnung zur Original-Strecke (Franks Vorgabe 12.11.2026): je Feld
   // Schritt und Feldname bzw. Kennung wie in bayerische-zahn.json, Wert so,

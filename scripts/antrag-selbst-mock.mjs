@@ -11,6 +11,7 @@
 // Nur für Prüfskripte:
 //   POST /__test/beitrag-aendern     rechnet ab jetzt 1,00 EUR mehr (für 409)
 //   POST /__test/unterlagen-leer     der nächste Listenabruf der Unterlagen liefert []
+//   POST /__test/region-weg          Rechner der Bayerischen „nicht erreichbar“: PLZ ohne Stichprobe 503 (B3)
 //   POST /__test/zuruecksetzen
 //   GET  /__test/letzter             der zuletzt angenommene Datensatz
 
@@ -47,8 +48,10 @@ function zahnBeitrag({
   const grund = monat(tarifCode);
   if (grund === null) return null;
   const sofort = bausteine.includes('ZAHN_SOFORT') ? ZAHN.zahn_sofort : 0;
+  // Ebene 1, B1: Tarif und Baustein je für sich gerundet, dann addiert (wie die Bayerische, 717,30).
+  const bausteinBeitrag = sofort ? jeZahlweise(sofort) : 0;
   return {
-    alter, region, zahlweise, alleTarife, beitrag: jeZahlweise(Math.round((grund + sofort) * 100) / 100), stand: '2026-11-12',
+    alter, region, zahlweise, alleTarife, bausteinBeitrag, beitrag: Math.round((jeZahlweise(grund) + bausteinBeitrag) * 100) / 100, stand: '2026-11-12',
   };
 }
 
@@ -87,6 +90,7 @@ const PORT = Number(process.env.ANTRAG_SELBST_MOCK_PORT || 8792);
 const ERLAUBT = new Set((process.env.ANTRAG_ERLAUBTE_HERKUNFT || 'http://localhost:3018,http://127.0.0.1:3018').split(',').map((eintrag) => eintrag.trim()).filter(Boolean));
 let aufschlag = 0;
 let unterlagenLeer = 0; // NUR TEST: so viele Listenabrufe liefern eine leere Liste
+let regionWeg = 0; // NUR TEST: Rechner der Bayerischen nicht erreichbar (Ebene 1, B3)
 let letzter = null;
 let zaehler = 0;
 
@@ -243,7 +247,8 @@ function pruefeZahn(body, heute) {
   if (!geburt) felder.push('angaben.geburtsdatum');
   const g = body.gesundheit || {};
   const erwartet = g.fragebogen === 'KZV_SMART' ? 5 : 5;
-  const abgelehnt = (g.antworten || []).some((eintrag) => ['1', '10', '13', '22'].includes(eintrag.frageId) && eintrag.antwort === 'ja');
+  // Ebene 1, B5: Smart mit Frage 5 „Ja“ online nicht.
+  const abgelehnt = (g.antworten || []).some((eintrag) => (['1', '10', '13', '22'].includes(eintrag.frageId) || (g.fragebogen === 'KZV_SMART' && eintrag.frageId === '25')) && eintrag.antwort === 'ja');
   if (!Array.isArray(g.antworten) || g.antworten.filter((eintrag) => eintrag.frageId !== '28').length !== erwartet || abgelehnt) felder.push('gesundheit');
   if (!istIban(body.zahlung?.iban)) felder.push('zahlung.iban');
   const e = body.erklaerungen || {};
@@ -253,6 +258,7 @@ function pruefeZahn(body, heute) {
     tarifCode: a.tarifCode, bausteine: body.bausteine || [], zahlweise: body.zahlung?.zahlweise, geburtsdatum: a.geburtsdatum, beginnIso: a.beginnIso, plz: f.plz,
   });
   if (!beitrag) return { status: 422, fehler: 'antrag_angaben_ungueltig', felder: ['angaben.tarifCode'] };
+  if (regionWeg && !ZAHN.plz[f.plz]) return { status: 503, fehler: 'antrag_preis_nicht_bestaetigt' };
   const wert = Math.round((beitrag.beitrag + aufschlag) * 100) / 100;
   if (body.beitragAngezeigt !== wert) return { status: 409, fehler: 'antrag_beitrag_geaendert', beitrag: { beitrag: wert } };
   return { status: 201, beitrag: wert };
@@ -268,7 +274,8 @@ const server = http.createServer((anfrage, antwort) => {
   if (pfad === '/__test/letzter') { senden(antwort, 200, { ok: true, letzter }, herkunft); return; }
   if (pfad === '/__test/beitrag-aendern') { aufschlag = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/unterlagen-leer') { unterlagenLeer = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
-  if (pfad === '/__test/zuruecksetzen') { unterlagenLeer = 0; aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/region-weg') { regionWeg = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/zuruecksetzen') { regionWeg = 0; unterlagenLeer = 0; aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
   // Unterlagen wie der Dienst (SCHNITTSTELLE.md 12.6): Liste und Datei. NUR TEST:
   // Platzhalter-PDFs mit dem Vermerk „Testdatei der Attrappe“, keine echten Unterlagen.
   if ((pfad === '/antrag/api/unterlagen' || pfad === '/antrag/api/unterlagen/datei') && anfrage.method === 'GET') {
@@ -390,8 +397,10 @@ const server = http.createServer((anfrage, antwort) => {
       if (body?.sparte !== 'zahn' || body?.versicherer !== 'bayerische') { senden(antwort, 409, { ok: false, fehler: 'antrag_sparte_nicht_bereit' }, herkunft); return; }
       const beitrag = zahnBeitrag(body);
       if (!beitrag) { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: [] }, herkunft); return; }
+      // Ebene 1, B3: Rechner der Bayerischen „nicht erreichbar“ (Testschalter): für PLZ ohne Stichprobe kein Beitrag.
+      if (regionWeg && !ZAHN.plz[body.plz]) { senden(antwort, 503, { ok: false, fehler: 'antrag_preis_nicht_bestaetigt' }, herkunft); return; }
       senden(antwort, 200, {
-        ok: true, sparte: 'zahn', produkt: 'bayerische-zahn', tarifCode: body.tarifCode, ...beitrag, alleStufen: beitrag.alleTarife, regionGeprueft: Boolean(ZAHN.plz[body.plz]), ablehnung: null, beitrag: Math.round((beitrag.beitrag + aufschlag) * 100) / 100,
+        ok: true, sparte: 'zahn', produkt: 'bayerische-zahn', tarifCode: body.tarifCode, ...beitrag, alleStufen: beitrag.alleTarife, regionGeprueft: true, bestaetigt: true, ablehnung: null, beitrag: Math.round((beitrag.beitrag + aufschlag) * 100) / 100,
       }, herkunft);
       return;
     }

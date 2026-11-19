@@ -8,7 +8,7 @@
 // unverändert aus original/levelnine.js.
 
 import {
-  BEITRAG_VORBEHALT, ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, SDK_NAME, TEIL_3_TITEL, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
+  BEITRAG_VORBEHALT_ANNAHME, ERKLAERUNG_KURZ, NACH_EINGANG_ANNAHME, KNOPF_BEANTRAGEN, SDK_NAME, TEIL_3_TITEL, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
   TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
@@ -17,7 +17,13 @@ import {
 } from './levelnine.js';
 
 export const WICHTIGE_INFORMATIONEN = 'https://www.sdk.de/downloads/online-absatz/0.155a.pdf';
-export const SDK_HINWEIS_NACH_EINGANG = 'Die SDK prüft deine Angaben nach Eingang und entscheidet dann über deinen Antrag.';
+// Stationär, Hinweis bei „Ja“ (Bauplan Ebene 1, B9, Entwurf für Frank): Online
+// gibt es keinen Zuschlag, die SDK entscheidet nach Eingang (1.770asi Z. 251,
+// 424 bis 427, 600 bis 606, 665 bis 667). Am Beitrag steht der Satz mit „oben“.
+const SDK_PRUEFT_NACH_EINGANG = 'Die SDK prüft deine Angaben, nachdem dein Antrag eingegangen ist. Sie kann dann einen Zuschlag verlangen, einzelne Leistungen ausschließen oder den Antrag ablehnen.';
+export const SDK_HINWEIS_NACH_EINGANG = `${SDK_PRUEFT_NACH_EINGANG} Der Beitrag oben gilt, wenn sie ohne Änderung annimmt.`;
+export const SDK_HINWEIS_BEI_JA = `${SDK_PRUEFT_NACH_EINGANG} Dein Beitrag gilt, wenn sie ohne Änderung annimmt.`;
+export const SDK_NACH_EINGANG_STATIONAER = `Eingegangen heißt noch nicht angenommen. ${SDK_PRUEFT_NACH_EINGANG}`;
 
 // Link zur Datenschutzerklärung an der Einwilligung zu den Gesundheitsangaben
 // (19.11.2026, gleiche Art wie am Datenschutz-Haken im Schritt „Deine Daten“).
@@ -47,7 +53,7 @@ const JA_NEIN = [{ id: 'ja', label: 'Ja', original: 'true' }, { id: 'nein', labe
 // strecke: 'sdkAmbulant' | 'sdkStationaer'; vollmacht: Text 10 für dieses Produkt;
 // auswahl: Text 8, Hinweis auf die eingeschränkte Auswahl dieses Produkts.
 export function sdkTeile({
-  strecke, produkt, vollmacht, vollmachtKurz, tarifFuerUnterlagen, auswahl,
+  strecke, produkt, vollmacht, vollmachtKurz, tarifFuerUnterlagen, auswahl, nachEingang,
 }) {
   const schritte = LEVELNINE[strecke].schritte;
   const f = (schritt, id) => feldAus(schritte, schritt, id);
@@ -154,7 +160,8 @@ export function sdkTeile({
     zusammenfassung: { titel: TEIL_3_TITEL },
     absenden: {
       satz: TEXT_12_KNOPF,
-      vorbehalt: BEITRAG_VORBEHALT,
+      vorbehalt: BEITRAG_VORBEHALT_ANNAHME,
+      nachEingang: nachEingang || NACH_EINGANG_ANNAHME,
       knopf: KNOPF_BEANTRAGEN,
       bestaetigung: {
         key: 'angabenBestaetigt', original: 'bestaetigungsdialog', originalSchritt: 9, titel: 'Bestätigung für die SDK', vorspann: BESTAETIGUNG_VORSPANN, text: dialog.wortlaut, fehler: 'Bitte bestätige diesen Satz, bevor du absendest.',

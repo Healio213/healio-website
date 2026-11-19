@@ -11,6 +11,7 @@ import { LEVELNINE, feldAus } from './levelnine.js';
 
 import {
   ANREDEN,
+  BEGINN_DEZEMBER_GANZER_MONAT,
   BEGINN_MONATE_NACH_NAECHSTMOEGLICH,
   FRAGEN_1B_1K,
   FRAGE_1A_ITEMS,
@@ -41,7 +42,7 @@ import {
   tarifName,
 } from '../sdkAmbulantAntrag.js';
 import {
-  BEITRAG_VORBEHALT,
+  BEITRAG_VORBEHALT_ANNAHME,
   ERKLAERUNG_KURZ,
   FRAGE_1_AUFKLAPPEN,
   GKV_BESTAETIGUNG,
@@ -163,7 +164,8 @@ const ambulant = {
   // Wortlaute ab 12.11.2026 nach der Online-Strecke der SDK (Erfassung Level Nine).
   // 19.11.2026 (Paket 1): Frage 1a als 15 Einzelfragen, Versicherungsnehmer sichtbar,
   // Werbeeinwilligung Ja/Nein, Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei.
-  textfassung: '2026-11-19-sdk-ambulant-online',
+  // 19.11.2026 spät (Ebene 1, B9/B10): Vorbehalt „vorbehaltlich der Annahme“ am Auftragsknopf.
+  textfassung: '2026-11-19b-sdk-ambulant-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, abgeglichen 12.11.2026',
   kennzeile: 'Ambulanter Zusatzschutz der SDK',
   seitentitel: 'Antrag ambulanter Zusatzschutz | Healio',
@@ -179,7 +181,7 @@ const ambulant = {
   tarifHinweis: 'Beitrag im Monat, noch ohne Zuschlag aus den Gesundheitsfragen.',
 
   beginn: {
-    art: 'monatsErster', abMonat: 1, bisMonat: 1 + BEGINN_MONATE_NACH_NAECHSTMOEGLICH, laufenderMonatBisTag: 15,
+    art: 'monatsErster', abMonat: 1, bisMonat: 1 + BEGINN_MONATE_NACH_NAECHSTMOEGLICH, laufenderMonatBisTag: 15, dezemberGanzerMonat: BEGINN_DEZEMBER_GANZER_MONAT,
   },
   alter: { min: 18, stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG },
 
@@ -201,10 +203,10 @@ const ambulant = {
         zuschlagEuro: 0,
         beitrag: verlauf.beginnjahr.beitragMonat,
         folgejahr: verlauf.wechselZumFolgejahr ? { ab: verlauf.folgejahr.ab, beitrag: verlauf.folgejahr.beitragMonat } : null,
-        bestaetigt: beitragFuer2026Bestaetigt(gruppe, tarif),
+        bestaetigt: beitragFuer2026Bestaetigt(gruppe, tarif, beginn.jahr),
       };
     },
-    vorbehalt: BEITRAG_VORBEHALT,
+    vorbehalt: BEITRAG_VORBEHALT_ANNAHME,
   },
 
   // Die Online-Strecke hat keinen Vorspann vor den Fragen (der Hinweis zur

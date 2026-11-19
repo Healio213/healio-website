@@ -634,5 +634,60 @@ test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals'
   assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
   assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
   assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
-  assert.equal(zahn.textfassung, '2026-11-19-bayerische-zahn');
+  assert.equal(zahn.textfassung, '2026-11-19b-bayerische-zahn'); // Ebene 1 (19.11.2026 spät): Vorbehalt neu
+});
+
+// ---------------------------------------------------------------------------
+// Ebene 1, Paket B (Healio/Antragsstrecken/BAUPLAN-EBENE1-EBENE2-2026-11-19.md), Website-Seite. Rechnung und Annahme prüft der Dienst
+// (ebene1.test.mjs im Antragsdienst, gleiche Regeldateien über den Prüfsummentest).
+test('Ebene 1 B5: Smart mit Frage 5 „Ja“ stoppt online, Komfort und Prestige nicht', async () => {
+  const { default: zahn, SMART_FRAGE5_JA_ONLINE } = await import('../src/data/antrag/zahn.js');
+  const { wirkungen, stopWirkungDerFrage } = await import('../src/lib/antragsmaske/regeln.js');
+  assert.equal(SMART_FRAGE5_JA_ONLINE, false);
+  const basis = { z2: 'nein', z3: 'nein', z4: 'nein', z5: 'ja' };
+  assert.equal(wirkungen(zahn, { tarif: 'SMART', antworten: { ...basis, z1s: 'nein' } }).keineAufnahme.length, 1);
+  const z5 = zahn.gesundheit.fragen.find((f) => f.id === 'z5');
+  assert.equal(stopWirkungDerFrage(z5, { tarif: 'SMART', antworten: { z5: 'ja' } })?.art, 'keineAufnahme');
+  assert.equal(stopWirkungDerFrage(z5, { tarif: 'KOMFORT', antworten: { z5: 'ja' } }), null);
+  assert.equal(stopWirkungDerFrage(z5, { tarif: 'PRESTIGE', antworten: { z5: 'ja' } }), null);
+  assert.deepEqual(pruefeDefinition(zahn), []);
+});
+
+test('Ebene 1 B6/B7: Ambulant nur monatlich, alle Altersgruppen für Beginn 2026 und 2027 bestätigt', async () => {
+  const { ZAHLWEISEN, BEITRAGSTABELLE, beitragFuer2026Bestaetigt } = await import('../src/data/sdkAmbulantAntrag.js');
+  assert.deepEqual(ZAHLWEISEN.map((z) => z.id), ['monatlich']);
+  assert.equal(BEITRAGSTABELLE.bestaetigtAm, '2026-11-19');
+  for (const von of [0, 21, 31, 41, 51, 61, 71]) for (const code of ['AP5', 'AP7', 'AP9', 'AP1']) assert.equal(beitragFuer2026Bestaetigt({ von }, code, 2027), true, `${von} ${code}`);
+  assert.equal(beitragFuer2026Bestaetigt({ von: 51 }, 'AP1', 2028), false);
+  const b = ambulant.beitrag.berechne({ tarif: 'AP7', geburtsdatum: { jahr: 1960, monat: 3, tag: 5 }, beginn: { jahr: 2027, monat: 1 }, zuschlagProzent: 0 });
+  assert.equal(b.bestaetigt, true);
+});
+
+test('Ebene 1 B8: 01.12. im ganzen Dezember wie im Original (ambulant und stationär), Bayerische nie rückwirkend', async () => {
+  const { beginnOptionenAus } = await import('../src/lib/antragsmaske/regeln.js');
+  const { default: stationaer } = await import('../src/data/antrag/stationaer.js');
+  const { default: zahn } = await import('../src/data/antrag/zahn.js');
+  const liste = (o) => [o.frueher, o.naechstmoeglich, ...o.weitere].filter(Boolean).map((x) => x.iso);
+  for (const def of [ambulant, stationaer]) {
+    assert.deepEqual(liste(beginnOptionenAus(def.beginn, new Date(2026, 11, 20, 12))), ['2026-12-01', '2027-01-01', '2027-02-01', '2027-03-01', '2027-04-01', '2027-05-01', '2027-06-01']);
+    assert.deepEqual(liste(beginnOptionenAus(def.beginn, new Date(2026, 10, 16, 12)))[0], '2026-12-01');
+    assert.deepEqual(liste(beginnOptionenAus(def.beginn, new Date(2027, 0, 15, 12)))[0], '2027-01-01');
+    assert.deepEqual(liste(beginnOptionenAus(def.beginn, new Date(2027, 0, 16, 12)))[0], '2027-02-01');
+  }
+  assert.deepEqual(liste(beginnOptionenAus(zahn.beginn, new Date(2026, 11, 20, 12))), ['2027-01-01', '2027-02-01', '2027-03-01', '2027-04-01', '2027-05-01']);
+  assert.deepEqual(liste(beginnOptionenAus(zahn.beginn, new Date(2026, 11, 1, 12))), ['2027-01-01', '2027-02-01', '2027-03-01', '2027-04-01', '2027-05-01']);
+});
+
+test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „eingegangen heißt nicht angenommen“; neue Textfassungen', async () => {
+  const { default: stationaer } = await import('../src/data/antrag/stationaer.js');
+  const { default: zahn } = await import('../src/data/antrag/zahn.js');
+  const { default: zahnUkv } = await import('../src/data/antrag/zahnUkv.js');
+  assert.match(stationaer.beitrag.hinweisNachEingang, /^Die SDK prüft deine Angaben, nachdem dein Antrag eingegangen ist\. Sie kann dann einen Zuschlag verlangen, einzelne Leistungen ausschließen oder den Antrag ablehnen\. Der Beitrag oben gilt, wenn sie ohne Änderung annimmt\.$/);
+  for (const def of [ambulant, stationaer, zahn]) {
+    assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\./);
+    assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
+    assert.match(def.textfassung, /^2026-11-19b-/);
+  }
+  assert.equal(zahnUkv.textfassung, '2026-11-12-ukv-zahn-online', 'UKV unverändert');
+  assert.equal(zahnUkv.absenden.nachEingang, undefined);
 });

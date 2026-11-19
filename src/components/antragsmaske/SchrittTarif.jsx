@@ -63,6 +63,11 @@ export function kernZeilen(tarif, versicherer) {
   return { kopf: null, zeilen: zeilen.slice(start >= 0 ? start + 1 : 1).filter((zeile) => !/^AVB|Teil I/.test(zeile)).map((zeile) => [zeile, '']) };
 }
 
+export const PREIS_NICHT_BESTAETIGT = Object.freeze({
+  titel: 'Deinen Beitrag können wir gerade nicht bestätigen.',
+  text: 'Der Rechner der Bayerischen antwortet im Moment nicht. Ohne bestätigten Beitrag nehmen wir keinen Antrag an. Versuch es später noch einmal oder vereinbare einen Termin mit uns.',
+});
+
 // Zustand der Beitragsabfrage beim Antragsdienst (nur bei beitrag.art 'dienst').
 // Bei Erfolg eine Aufschlüsselung: Stufe + Zusatzbaustein = Gesamt (keine
 // Wiederholung der Karte „Dein Schutz“).
@@ -70,6 +75,21 @@ function DienstBeitrag({
   dienst, sparte, zahlweise, tarif, preisStufe, bausteine,
 }) {
   if (!dienst || dienst.leer) return null;
+  // Ebene 1, B3: Preisregion der Bayerischen nicht prüfbar. Ohne bestätigten
+  // Beitrag kein Antrag, kein Rückfallpreis.
+  if (dienst.fehler === 'antrag_preis_nicht_bestaetigt') {
+    return (
+      <Callout tone="hinweis" title={PREIS_NICHT_BESTAETIGT.titel} data-beitrag-nicht-bestaetigt="">
+        <p>{PREIS_NICHT_BESTAETIGT.text}</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button type="button" onClick={dienst.nochmal} className={buttonClass('secondary')}>Später noch einmal versuchen</button>
+          <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={buttonClass('secondary')}>
+            Termin vereinbaren<NeuerTab />
+          </a>
+        </div>
+      </Callout>
+    );
+  }
   if (dienst.fehler) {
     return (
       <Callout tone="hinweis" title="Dein Beitrag lädt gerade nicht." data-beitrag-fehler="">
@@ -83,7 +103,10 @@ function DienstBeitrag({
   }
   if (!dienst.antwort) return <p className="text-base leading-7 text-home-slate" aria-live="polite" data-beitrag-laedt="">Einen Moment, wir rechnen deinen Beitrag aus …</p>;
   const gesamt = dienst.antwort.beitrag;
-  const aufpreis = Number.isFinite(preisStufe) && bausteine.length ? Math.round((gesamt - preisStufe) * 100) / 100 : null;
+  // Baustein wie die Strecke einzeln gerundet (Dienst: bausteinBeitrag), sonst Differenz.
+  const aufpreis = bausteine.length && Number.isFinite(dienst.antwort.bausteinBeitrag) && dienst.antwort.bausteinBeitrag > 0
+    ? dienst.antwort.bausteinBeitrag
+    : (Number.isFinite(preisStufe) && bausteine.length ? Math.round((gesamt - preisStufe) * 100) / 100 : null);
   const einheit = zahlweise === 'jaehrlich' ? 'im Jahr' : 'im Monat';
   return (
     <div className="rounded-[1.2rem] bg-white px-5 py-3 ring-1 ring-home-midnight/10" aria-live="polite" data-gesamtbeitrag="">
@@ -202,7 +225,9 @@ export default function SchrittTarif({
   const anderer = daten.beginnArt === 'anderer';
   const anzahl = definition.tarife.length;
   const fehlt = [!daten.geburtsdatum || datumFehler ? 'Geburtsdatum' : null, brauchtPlz(definition) && !/^\d{5}$/.test(String(daten.plz || '')) ? 'PLZ' : null].filter(Boolean);
-  const platzhalter = fehlt.length ? `Beitrag nach ${fehlt.join(' und ')}` : 'Beitrag wird berechnet …';
+  let platzhalter = fehlt.length ? `Beitrag nach ${fehlt.join(' und ')}` : 'Beitrag wird berechnet …';
+  // Ebene 1, B3: kein „wird berechnet“, wenn der Dienst keinen Beitrag liefern kann.
+  if (!fehlt.length && dienst?.fehler) platzhalter = dienst.fehler === 'antrag_preis_nicht_bestaetigt' ? 'Beitrag gerade nicht bestätigt' : 'Beitrag lädt gerade nicht';
   const empfehlung = empfohlen || null;
   // Handy: die gewählte Stufe beim Start in den sichtbaren Bereich der Wischkarten holen.
   const stufenRef = useRef(null);

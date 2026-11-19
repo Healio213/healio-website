@@ -85,6 +85,12 @@ const zweistellig = (zahl) => String(zahl).padStart(2, '0');
 // der Erste des laufenden Monats wählbar (beginnOptionen: frueher).
 export const BEGINN_MONATE_NACH_NAECHSTMOEGLICH = 5;
 export const BEGINN_LAUFENDER_MONAT_BIS_TAG = 15;
+// Regel des Originals (SDKBeginDateSelection.tsx, öffentliche Source Map der
+// Strecke, gelesen 19.11.2026): Den 01.12. bietet die Strecke im ganzen
+// Dezember an, auch nach dem 15. („Allow the 1st of December, even if it's
+// after the 15th“). Healio folgt dem (Bauplan Ebene 1, B8). Mit false bietet
+// Healio den 01.12. nach dem 15.12. nicht mehr an (Stand vor dem 19.11.).
+export const BEGINN_DEZEMBER_GANZER_MONAT = true;
 
 function monatsErster(heute, schritt) {
   const datum = new Date(heute.getFullYear(), heute.getMonth() + schritt, 1);
@@ -105,7 +111,7 @@ function monatsErster(heute, schritt) {
 export function beginnOptionen(heute = new Date()) {
   const weitere = [];
   for (let schritt = 2; schritt <= BEGINN_MONATE_NACH_NAECHSTMOEGLICH + 1; schritt += 1) weitere.push(monatsErster(heute, schritt));
-  const frueher = heute.getDate() <= BEGINN_LAUFENDER_MONAT_BIS_TAG ? monatsErster(heute, 0) : null;
+  const frueher = heute.getDate() <= BEGINN_LAUFENDER_MONAT_BIS_TAG || (BEGINN_DEZEMBER_GANZER_MONAT && heute.getMonth() === 11) ? monatsErster(heute, 0) : null;
   return { naechstmoeglich: monatsErster(heute, 1), weitere, frueher };
 }
 
@@ -169,26 +175,34 @@ export function gruppenName(gruppe) {
 
 const ALLE_CODES = ['AP5', 'AP7', 'AP9', 'AP1'];
 
-// Welche Zellen für 2026 direkt bei der SDK bestätigt sind (Abschlussstrecke
-// oder sdk.de), je Altersgruppe (Schlüssel: Alter von). Alle übrigen Zellen
-// stammen aus der SDK-Beitragstabelle 06/2020, siehe sdkAmbulantBeitraege.js.
-// Öffentlich zeigt die Strecke keinen Prüfstatus (Frank).
+// Welche Zellen direkt an der Online-Strecke der SDK geprüft sind, je
+// Altersgruppe (Schlüssel: Alter von). Gegenprüfung 19.11.2026
+// (pruefung-zuschlaege-2026-11-19/gegenpruefung/sdk-ambulant/raender/):
+// 208 von 208 Werten gleich, alle vier Tarife, Eintrittsalter 19 bis 101,
+// Beginn 01.12.2026 bis 01.05.2027. Der Beitrag hängt nur am Kalenderjahr des
+// Beginns, geprüft sind damit die Beginnjahre 2026 und 2027
+// (bestaetigtFuerBeginnjahre). Öffentlich zeigt die Strecke keinen Prüfstatus (Frank).
 export const BEITRAGSTABELLE = {
   stand: SDK_AMBULANT_BEITRAEGE.stand,
+  bestaetigtAm: '2026-11-19',
+  bestaetigtFuerBeginnjahre: [2026, 2027],
   bestaetigt2026: {
-    0: ['AP1'],
+    0: ALLE_CODES,
     21: ALLE_CODES,
     31: ALLE_CODES,
     41: ALLE_CODES,
-    51: ['AP5'],
-    61: [],
-    71: [],
+    51: ALLE_CODES,
+    61: ALLE_CODES,
+    71: ALLE_CODES,
   },
-  hinweisIntern: 'Die Beiträge ab 51 Jahren sind für 2026 nicht vollständig belegt. Für 51 bis 60 Jahre ist nur AP5 bestätigt, ab 61 Jahren keine Stufe. Diese Werte stammen aus der SDK-Beitragstabelle 06/2020 und sind vor dem Echtbetrieb in der SDK-Strecke zu prüfen. Eine Beitragsanpassung der SDK, etwa zum 01.01.2027, ist nicht berücksichtigt.',
+  hinweisIntern: 'Alle Beiträge sind am 19.11.2026 an der Online-Strecke der SDK geprüft (Beginn 01.12.2026 bis 01.05.2027, Eintrittsalter 19 bis 101). Eine spätere Beitragsanpassung der SDK, etwa zum 01.01.2027, ist nicht berücksichtigt; vor dem Einschalten und Mitte Dezember neu prüfen.',
 };
 
-export function beitragFuer2026Bestaetigt(gruppe, code) {
+// beginnJahr (optional): Kalenderjahr des Beginns. Für Jahre ohne Prüfung gilt
+// der Beitrag nicht als bestätigt.
+export function beitragFuer2026Bestaetigt(gruppe, code, beginnJahr = null) {
   if (!gruppe) return false;
+  if (beginnJahr !== null && !BEITRAGSTABELLE.bestaetigtFuerBeginnjahre.includes(beginnJahr)) return false;
   return (BEITRAGSTABELLE.bestaetigt2026[gruppe.von] || []).includes(code);
 }
 
@@ -669,8 +683,9 @@ export const ANREDEN = [
   { id: 'divers', label: 'Divers' },
 ];
 
-// Zahlweise laut SDK-Antrag: monatlich oder jährlich mit derzeit 1 % Skonto.
+// Zahlweise: nur monatlich wie in der Online-Strecke der SDK (Bauplan Ebene 1,
+// B6, 19.11.2026). Der Papierantrag kannte jährlich mit 1 % Skonto, die
+// Strecke fragt keine Zahlweise ab.
 export const ZAHLWEISEN = [
   { id: 'monatlich', label: 'Monatlich' },
-  { id: 'jaehrlich', label: 'Jährlich, derzeit 1 % Skonto laut SDK' },
 ];

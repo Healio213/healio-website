@@ -670,7 +670,7 @@ async function stationaerDurchlauf(browser, breite, tarif) {
       if (id === 'G18') {
         await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="ja"]`);
         await page.waitForSelector('#feld-frage-G18\\.C');
-        pruefe((await page.textContent('[data-hinweis-ja]')).includes('Die SDK prüft deine Angaben nach Eingang'), 'ehrlicher Hinweis statt Zuschlag');
+        pruefe((await page.textContent('[data-hinweis-ja]')).includes('Die SDK prüft deine Angaben, nachdem dein Antrag eingegangen ist. Sie kann dann einen Zuschlag verlangen, einzelne Leistungen ausschließen oder den Antrag ablehnen.'), 'ehrlicher Hinweis statt Zuschlag (Ebene 1, B9)');
         await weiter(page);
         pruefe(await page.locator('#feld-frage-G18\\.C-fehler').isVisible(), 'Folgefelder sind Pflicht wie im Original');
         await page.fill('#feld-frage-G18\\.C', 'Kontrolle Schilddrüse');
@@ -688,7 +688,7 @@ async function stationaerDurchlauf(browser, breite, tarif) {
       }
     }
     await bildschirm(page, 'beitrag');
-    pruefe((await page.textContent('[data-hinweis-eingang]')).includes('Die SDK prüft'), 'Beitrag: Prüfung nach Eingang, kein Zuschlag');
+    pruefe((await page.textContent('[data-hinweis-eingang]')).includes('Der Beitrag oben gilt, wenn sie ohne Änderung annimmt.'), 'Beitrag: Prüfung nach Eingang, kein Zuschlag (B9)');
   }
   pruefe((await page.textContent('[data-beitrag-wert]')).includes(tarif === 'SP2' ? '36,50 EUR' : '7,92 EUR'), 'Beitrag ohne Zuschlag');
   await foto(page, `${name}-03-beitrag`);
@@ -704,6 +704,7 @@ async function stationaerDurchlauf(browser, breite, tarif) {
   await sdkAbsenden(page, tarif === 'SP2' ? name : null);
   await page.waitForSelector('[data-danke]');
   pruefe(await page.locator('[data-mein-antrag]').isVisible(), `Stationär ${tarif}: Mein Antrag auf der Danke-Seite`);
+  pruefe((await page.textContent('[data-danke]')).includes('Eingegangen heißt noch nicht angenommen.') && (await page.textContent('[data-danke]')).includes('Die SDK entscheidet'), `Stationär ${tarif}: Danke-Seite sagt, dass eingegangen nicht angenommen heißt (B9)`);
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.sparte === 'stationaer' && letzter.angaben.tarifCode === tarif, `Stationär ${tarif} kommt an`);
   if (tarif === 'SP2') {
@@ -914,7 +915,7 @@ async function pruefseiteAmbulantOnline(browser) {
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler: ${await page.textContent('[data-sendefehler]')}`);
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
   const { letzter } = await mock('/__test/letzter');
-  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-19-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
+  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-19b-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
   pruefe(letzter.zahlung.bankname === 'Testbank', 'Prüfseite ambulant (Online-Fassung) fragt den Banknamen ab');
   await context.close();
 }
@@ -1103,7 +1104,62 @@ async function zahnVorabUkv(browser) {
   await zweiter.close();
 }
 
+// Ebene 1 (Bauplan Paket B): B1 Jahresbeitrag wie die Bayerische, B3 Preisregion nicht prüfbar, B5 Smart mit Frage 5 „Ja“.
+async function ebene1Zahn(browser, breite) {
+  const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
+  const page = await context.newPage();
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await zahnVorab(page, VORAB_SOFORT, { plz: '20095', ziel: 'bayerische-sofort' });
+  await bildschirm(page, 'tarif');
+  await page.locator('label:has(input[name="tarif"][value="KOMFORT"])').click();
+  await page.locator('label:has(input[name="zahlweise"][value="jaehrlich"])').click();
+  await page.waitForFunction(() => /717,30 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
+  const jahr = await page.textContent('[data-gesamtbeitrag]');
+  pruefe(jahr.includes('365,70 EUR') && jahr.includes('351,60 EUR') && jahr.includes('717,30 EUR'), `${breite}: Komfort + ZAHN Sofort jährlich 365,70 + 351,60 = 717,30 wie die Bayerische (B1)`);
+  await foto(page, `${breite}-ebene1-zahn-jaehrlich-717`);
+  // B3: Rechner der Bayerischen nicht erreichbar, PLZ ohne Stichprobe.
+  await mock('/__test/region-weg', 'POST');
+  await page.fill('#feld-plzTarif', '37139');
+  await page.waitForSelector('[data-beitrag-nicht-bestaetigt]');
+  const b3 = await page.textContent('[data-beitrag-nicht-bestaetigt]');
+  pruefe(b3.includes('Deinen Beitrag können wir gerade nicht bestätigen.') && b3.includes('Später noch einmal versuchen') && b3.includes('Termin vereinbaren'), `${breite}: Preis nicht bestätigt, später noch einmal und Termin (B3)`);
+  pruefe(await page.locator('[data-weiter]').count() === 0, `${breite}: ohne bestätigten Beitrag kein Weiter (B3)`);
+  const stufe = await page.textContent('[data-stufe-beitrag="KOMFORT"]');
+  pruefe(!/EUR/.test(stufe) && stufe.includes('Beitrag gerade nicht bestätigt'), `${breite}: kein Rückfallpreis in den Stufen (B3)`);
+  await page.locator('[data-beitrag-nicht-bestaetigt]').scrollIntoViewIfNeeded();
+  await foto(page, `${breite}-ebene1-zahn-preis-nicht-bestaetigt`);
+  await mock('/__test/zuruecksetzen', 'POST');
+  await page.click('[data-beitrag-nicht-bestaetigt] button');
+  await page.waitForSelector('[data-gesamtbeitrag]');
+  pruefe(true, `${breite}: später noch einmal holt den Beitrag (B3)`);
+  if (breite < 600) {
+    // B5: Smart mit Frage 5 „Ja“.
+    await page.fill('#feld-plzTarif', '20095');
+    await page.locator('label:has(input[name="zahlweise"][value="monatlich"])').click();
+    await page.locator('label:has(input[name="tarif"][value="SMART"])').click();
+    await page.waitForFunction(() => /EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
+    await weiter(page);
+    await bildschirm(page, 'hinweis');
+    await weiter(page);
+    for (const id of ['z1s', 'z2', 'z3', 'z4']) {
+      await bildschirm(page, `frage:${id}`);
+      await page.waitForTimeout(650);
+      await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
+    }
+    await bildschirm(page, 'frage:z5');
+    await page.waitForTimeout(650);
+    await page.click('[data-bildschirm="frage:z5"] [data-antwort="ja"]');
+    await page.waitForSelector('[data-pruefung]');
+    pruefe((await page.textContent('[data-pruefung]')).includes('Mit dieser Antwort können wir Smart online gerade nicht abschließen.') && await page.locator('[data-weiter]').count() === 0, 'Smart mit Frage 5 „Ja“: online nicht, kein Weiter (B5)');
+    await foto(page, `${breite}-ebene1-zahn-smart-frage5`);
+  }
+  await context.close();
+}
+
 async function alleWeiteren(browser) {
+    await ebene1Zahn(browser, 390);
+    await ebene1Zahn(browser, 1280);
     await zahnVorabUkv(browser);
     await zahnDurchlauf(browser, 390, true);
     await zahnDurchlauf(browser, 1280, false);

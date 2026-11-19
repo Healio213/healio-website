@@ -215,7 +215,7 @@ function pruefeBestaetigung(body) {
   ['hinweisOk', 'verzicht', 'vollmacht', 'gesundheitsdaten', 'schluss', 'sepa'].forEach((key) => { if (e[key] !== true) felder.push(`erklaerungen.${key}`); });
   if (!['I', 'II'].includes(e.schweigepflicht)) felder.push('erklaerungen.schweigepflicht');
   if (typeof e.bonitaet !== 'boolean') felder.push('erklaerungen.bonitaet');
-  if (body.textfassung !== '2026-11-09') felder.push('textfassung');
+  if (!['2026-11-09', '2026-11-19'].includes(body.textfassung)) felder.push('textfassung');
   if (!Number.isFinite(body.beitragAngezeigt)) felder.push('beitragAngezeigt');
   return felder;
 }

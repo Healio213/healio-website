@@ -180,7 +180,12 @@ export function zahlAusText(text) {
 //   { art: 'ausschluss', text: '…' }                 wird Teil des Vertrags
 //   { art: 'pruefung', text: '…' }                   geht nur mit persönlicher Prüfung
 //   { art: 'keineAufnahme', text: '…' }              der Versicherer nimmt nicht an
-function wirkungenDerFrage(frage, antworten) {
+// Jede Wirkung kann mit tarif: [Tarif-ids] auf bestimmte Tarife beschränkt sein.
+const fuerTarif = (liste, tarif) => (liste || []).filter((wirkung) => !Array.isArray(wirkung?.tarif) || wirkung.tarif.includes(tarif));
+function wirkungenDerFrage(frage, antworten, tarif) {
+  return fuerTarif(wirkungenOhneTarif(frage, antworten), tarif);
+}
+function wirkungenOhneTarif(frage, antworten) {
   const wert = antworten[frage.id];
   if (frage.typ === 'janein') return (frage.wirkung && frage.wirkung[wert]) || [];
   if (frage.typ === 'auswahl') return (frage.optionen || []).find((option) => option.id === wert)?.wirkung || [];
@@ -201,7 +206,7 @@ export function wirkungen(definition, kontext = {}) {
     zuschlagProzent: 0, zuschlagEuro: 0, gruende: [], ausschluesse: [], pruefung: [], keineAufnahme: [], jeFrage: {},
   };
   alleGeltendenFragen(definition, kontext).forEach((frage) => {
-    const liste = wirkungenDerFrage(frage, antworten);
+    const liste = wirkungenDerFrage(frage, antworten, kontext.tarif);
     if (liste.length) ergebnis.jeFrage[frage.id] = liste;
     liste.forEach((wirkung) => {
       if (wirkung.art === 'zuschlag') {
@@ -227,7 +232,7 @@ export function stopWirkungDerFrage(frage, kontext = {}) {
   const { antworten = {} } = kontext;
   const fragen = [frage, ...sichtbareFolgefragen(frage, kontext)];
   for (const teil of fragen) {
-    const stop = wirkungenDerFrage(teil, antworten).find((wirkung) => wirkung.art === 'pruefung' || wirkung.art === 'keineAufnahme');
+    const stop = wirkungenDerFrage(teil, antworten, kontext.tarif).find((wirkung) => wirkung.art === 'pruefung' || wirkung.art === 'keineAufnahme');
     if (stop) return stop;
   }
   return null;
@@ -276,7 +281,9 @@ export function beginnOptionenAus(regel = {}, heute = new Date()) {
   };
   const liste = [];
   for (let schritt = ab; schritt <= bis; schritt += 1) liste.push(option(schritt));
-  const frueher = Number.isInteger(regel.laufenderMonatBisTag) && heute.getDate() <= regel.laufenderMonatBisTag ? option(0) : null;
+  // dezemberGanzerMonat: Den 01.12. bietet die SDK im ganzen Dezember an (Regel des Originals).
+  const frueher = Number.isInteger(regel.laufenderMonatBisTag)
+    && (heute.getDate() <= regel.laufenderMonatBisTag || (regel.dezemberGanzerMonat === true && heute.getMonth() === 11)) ? option(0) : null;
   return { naechstmoeglich: liste[0] || null, weitere: liste.slice(1), frueher };
 }
 

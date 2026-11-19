@@ -5,7 +5,9 @@
 
 export const ANTRAG_API_BASIS = String(import.meta.env.VITE_ANTRAG_API || 'https://voice-pilot.healio.de/antrag/api').replace(/\/+$/, '');
 
-export const TEXTFASSUNG = '2026-11-09';
+// 2026-11-19: ohne jährliche Zahlung mit Skonto (Ebene 1, B6). Der Dienst nimmt
+// 2026-11-09 (heute ausgeliefert, jährlich möglich) im Übergang weiter an.
+export const TEXTFASSUNG = '2026-11-19';
 
 export class AntragFehler extends Error {
   constructor(code, status = 0, daten = null) {
@@ -133,6 +135,8 @@ export function fehlerText(fehler) {
       return 'Du hast diesen Antrag schon bestätigt.';
     case 'antrag_beitrag_geaendert':
       return 'Dein Beitrag hat sich gerade geändert.';
+    case 'antrag_preis_nicht_bestaetigt':
+      return 'Deinen Beitrag können wir gerade nicht bestätigen. Versuch es später noch einmal oder vereinbare einen Termin mit uns.';
     case 'antrag_selbst_aus':
     case 'antrag_sparte_nicht_bereit':
       return 'Der Antrag lässt sich hier gerade nicht abschicken. Ruf uns gern an, dann machen wir ihn zusammen.';

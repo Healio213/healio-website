@@ -256,6 +256,9 @@ async function ganzerAblauf(browser, breite) {
 
   // 4.3 Zahlung
   await erwarteText(page, /Zahlung/, `${w} 4.3`);
+  // Ebene 1, B6: nur monatlich wie die Online-Strecke der SDK, vorgewählt, kein Skonto.
+  pruefe(await page.locator('input[name="zahlweise"]').count() === 1 && await page.locator('input[name="zahlweise"][value="monatlich"]').isChecked() && !/Skonto/.test(await page.textContent('body')), `${w}: nur monatlich, vorgewählt (B6)`);
+  await foto(page, `${breite}-12-zahlung-nur-monatlich`);
   await page.locator('input[name="zahlweise"][value="monatlich"]').check();
   await page.locator('input[name="kontoinhaber"][value="andere"]').check();
   await erwarteText(page, /Das klären wir am besten kurz zusammen/, `${w} Terminweg`);
@@ -314,7 +317,7 @@ async function ganzerAblauf(browser, breite) {
   await foto(page, `${breite}-17-abschluss`);
 
   const { letzte } = await mock('/__test/letzte-bestaetigung', 'GET');
-  pruefe(letzte && letzte.versand === 'email' && letzte.textfassung === '2026-11-09', `${w}: versand und textfassung nach Vertrag`);
+  pruefe(letzte && letzte.versand === 'email' && letzte.textfassung === '2026-11-19', `${w}: versand und textfassung nach Vertrag`);
   pruefe(letzte.erklaerungen.schweigepflicht === 'II' && letzte.erklaerungen.bonitaet === false && letzte.erklaerungen.hinweisOk === true && letzte.erklaerungen.sepa === true, `${w}: Erklärungen nach Vertrag`);
   pruefe(letzte.zahlung.kontoinhaber === 'selbst' && letzte.zahlung.zahlweise === 'monatlich', `${w}: Zahlung nach Vertrag`);
   pruefe(letzte.gesundheit.antworten['1b'] === 'ja' && Object.keys(letzte.gesundheit.antworten).length === 10, `${w}: Gesundheit vollständig`);
