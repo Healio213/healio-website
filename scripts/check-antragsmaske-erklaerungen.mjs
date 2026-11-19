@@ -27,7 +27,16 @@ for (const [pfad, definition] of Object.entries(DEFINITIONEN)) {
     const healio = eintraege.flatMap((eintrag) => eintrag.gruppen || []).filter((gruppe) => gruppe.von === 'Von Healio');
     assert.equal(healio.length, 1, 'genau eine Gruppe „Von Healio“');
     assert.deepEqual(healio[0].eintraege[0], { name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] });
-    assert.deepEqual(healio[0].eintraege.slice(1).map((e) => e.name), texte.UNTERLAGEN_HEALIO);
+    if (definition.versicherer.id === 'sdk') {
+      // Paket 1 (19.11.2026): keine Namen ohne Datei; die Healio-Erklärungen stehen in „Mein Antrag“.
+      assert.deepEqual(healio[0].eintraege.slice(1), []);
+      const unterlagen = eintraege.find((eintrag) => eintrag.art === 'unterlagen' && (eintrag.gruppen || []).some((gruppe) => gruppe.von === 'Von Healio'));
+      assert.match(unterlagen.text, /PDF „Mein Antrag“/);
+      const vollmacht = eintraege.find((eintrag) => eintrag.key === 'vollmacht');
+      assert.equal(vollmacht.dokument, undefined, 'kein Verweis auf eine Datei „Maklervertrag“');
+      assert.doesNotMatch(volltext(vollmacht), /Maklervertrag habe ich als PDF erhalten/);
+      assert.match(volltext(vollmacht), /als PDF „Mein Antrag“/);
+    } else assert.deepEqual(healio[0].eintraege.slice(1).map((e) => e.name), texte.UNTERLAGEN_HEALIO);
     const einwilligung = eintraege.find((eintrag) => eintrag.key === 'gesundheitsdaten');
     assert.deepEqual(einwilligung.links, [{ label: 'Datenschutzerklärung', href: '/datenschutz' }]);
     assert.equal(einwilligung.haken, 'Ich bin einverstanden.', 'Wortlaut des Hakens unverändert');

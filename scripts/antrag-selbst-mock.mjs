@@ -135,8 +135,13 @@ function pruefe(body, heute = new Date()) {
 
   const g = body.gesundheit || {};
   const ids1a = new Set(FRAGE_1A_ITEMS.map((item) => item.id));
-  const gesundOk = (g.antwort1a === 'nein' && Array.isArray(g.kreuze1a) && g.kreuze1a.length === 0)
-    || (g.antwort1a === 'ja' && Array.isArray(g.kreuze1a) && g.kreuze1a.length > 0 && g.kreuze1a.every((id) => ids1a.has(id)));
+  // Seit 19.11.2026 wie der Dienst: 15 Einzelantworten (einzel1a), passend zu antwort1a und kreuze1a.
+  const einzel = g.einzel1a || {};
+  const jaEinzel = FRAGE_1A_ITEMS.filter((item) => einzel[item.id] === 'ja').map((item) => item.id);
+  const einzelOk = FRAGE_1A_ITEMS.every((item) => ['ja', 'nein'].includes(einzel[item.id]))
+    && g.antwort1a === (jaEinzel.length ? 'ja' : 'nein') && Array.isArray(g.kreuze1a) && g.kreuze1a.length === jaEinzel.length && jaEinzel.every((id) => g.kreuze1a.includes(id));
+  const gesundOk = einzelOk && ((g.antwort1a === 'nein' && g.kreuze1a.length === 0)
+    || (g.antwort1a === 'ja' && g.kreuze1a.length > 0 && g.kreuze1a.every((id) => ids1a.has(id))));
   if (!gesundOk || FRAGEN_1B_1K.some((frage) => !['ja', 'nein'].includes(g.antworten?.[frage.id])) || !bmiAusEingabe(g.groesse, g.gewicht).plausibel) felder.push('gesundheit');
 
   const z = body.zahlung || {};
@@ -158,15 +163,31 @@ function pruefe(body, heute = new Date()) {
   return { status: 201, beitrag };
 }
 
-// Pflicht-Erklärungen laut Definition (Haken und SEPA), freiwillige als boolean.
+// Pflicht-Erklärungen laut Definition (Haken und SEPA), freiwillige als boolean,
+// Ja/Nein-Erklärungen als 'ja'/'nein', Bestätigungssatz vor dem Absenden Pflicht
+// (wie definitionen.mjs im Dienst seit 19.11.2026).
 function pruefeErklaerungen(definition, body, felder) {
   const e = body.erklaerungen || {};
-  definition.erklaerungen.flatMap((teil) => teil.eintraege).filter((eintrag) => eintrag.key && eintrag.art !== 'hinweis').forEach((eintrag) => {
+  definition.erklaerungen.flatMap((teil) => teil.eintraege).filter((eintrag) => eintrag.key && eintrag.art !== 'hinweis' && eintrag.art !== 'fest').forEach((eintrag) => {
+    if (eintrag.art === 'janein') { if (!['ja', 'nein'].includes(e[eintrag.key])) felder.push(`erklaerungen.${eintrag.key}`); return; }
     if (eintrag.pflicht && e[eintrag.key] !== true) felder.push(`erklaerungen.${eintrag.key}`);
     if (!eintrag.pflicht && typeof e[eintrag.key] !== 'boolean') felder.push(`erklaerungen.${eintrag.key}`);
   });
   if (e[definition.zahlung.sepa.key] !== true) felder.push(`erklaerungen.${definition.zahlung.sepa.key}`);
+  const schluss = definition.absenden?.bestaetigung?.key;
+  if (schluss && e[schluss] !== true) felder.push(`erklaerungen.${schluss}`);
+  // Pflicht-Downloads: Nachweis je Unterlage (Dienst prüft das seit 19.11.2026 selbst).
+  if (definition.unterlagenDownload) {
+    const tarif = body.angaben?.tarifCode;
+    const geoeffnet = new Set((body.unterlagen?.geoeffnet || []).map((eintrag) => eintrag.href));
+    if (definition.unterlagenDownload.liste(tarif).some((u, stelle) => !geoeffnet.has(`dienst:${u.id ?? `${definition.produkt === 'ambulant' ? 'AP' : tarif}-${stelle}`}`))) felder.push('unterlagen');
+  }
 }
+
+// „Mein Antrag“ in der Antwort wie beim Dienst. NUR TEST: ein Platzhalter-PDF, kein echtes Dokument.
+const meinAntragAttrappe = (kennung) => ({
+  name: `Mein Antrag ${kennung}.pdf`, pdf: Buffer.from(`%PDF-1.4\n% TESTDATEI DER ATTRAPPE: Mein Antrag ${kennung}\n%%EOF\n`).toString('base64'),
+});
 
 // SDK stationär und UKV Zahn: Beitrag aus der Tabelle der Definition, UKV mit Zuschlag je fehlendem Zahn.
 function pruefeLevelnine(definition, body, heute) {
@@ -346,11 +367,13 @@ const server = http.createServer((anfrage, antwort) => {
         'Bearer test-zahn': 'HA-261112-ZAHN', 'Bearer test-ambulant-online': 'HA-261112-AMBO', 'Bearer test-stationaer': 'HA-261112-STAT', 'Bearer test-ukv': 'HA-261112-UKVZ',
       };
       if (!KENNUNGEN[token] || !body) { senden(antwort, 404, { ok: false, fehler: 'antrag_link_ungueltig' }, herkunft); return; }
-      if (token === 'Bearer test-ambulant-online' && body.textfassung !== '2026-11-12-sdk-ambulant-online') { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: ['textfassung'] }, herkunft); return; }
+      if (token === 'Bearer test-ambulant-online' && body.textfassung !== DEFINITIONEN.ambulant.textfassung) { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: ['textfassung'] }, herkunft); return; }
       const ergebnis = token === 'Bearer test-zahn' ? pruefeZahn(body, new Date()) : pruefe(body);
       if (ergebnis.status !== 201) { senden(antwort, ergebnis.status, { ok: false, fehler: ergebnis.fehler, ...(ergebnis.felder ? { felder: ergebnis.felder } : {}) }, herkunft); return; }
       letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft), ueber: 'pruefseite' };
-      senden(antwort, 200, { ok: true, kennung: KENNUNGEN[token], status: 'bestaetigt', bestaetigtAm: new Date().toISOString() }, herkunft);
+      senden(antwort, 200, {
+        ok: true, kennung: KENNUNGEN[token], status: 'bestaetigt', bestaetigtAm: new Date().toISOString(), ...(token === 'Bearer test-zahn' ? {} : { meinAntrag: meinAntragAttrappe(KENNUNGEN[token]) }),
+      }, herkunft);
     });
     return;
   }
@@ -382,7 +405,7 @@ const server = http.createServer((anfrage, antwort) => {
     letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft) };
     const kennung = `HS-261112-T${String(zaehler).padStart(3, '0')}`;
     senden(antwort, 201, {
-      ok: true, kennung, status: 'eingegangen', eingegangenAm: new Date().toISOString(), beitrag: ergebnis.beitrag,
+      ok: true, kennung, status: 'eingegangen', eingegangenAm: new Date().toISOString(), beitrag: ergebnis.beitrag, ...(body.versicherer === 'bayerische' ? {} : { meinAntrag: meinAntragAttrappe(kennung) }),
     }, herkunft);
   });
 });

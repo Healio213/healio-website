@@ -6,7 +6,7 @@ import {
   Button, Callout, FOKUS, bodyText, cx, schuetze,
 } from '@/components/antrag/ui';
 import Antwortenliste from './Antwortenliste';
-import { TeilKopf } from './teile';
+import { Haken, TeilKopf } from './teile';
 
 // Schritt 7: alles auf einen Blick, „ändern“ an jeder Angabe, dann Absenden.
 
@@ -43,8 +43,9 @@ function AendernHell({ onClick, label }) {
 
 export default function SchrittZusammenfassung({
   definition, daten, kontext, tarif, beginn, beitrag, geburtsdatumText, aendern, aendernFrage, ueberschriftRef,
-  absenden, sendet, sendeFehler, beitragNeu,
+  absenden, sendet, sendeFehler, beitragNeu, setBestaetigung, bestaetigungFehler,
 }) {
+  const bestaetigung = definition.absenden?.bestaetigung;
   const f = daten.formular;
   const anrede = (definition.person.anreden || []).find((eintrag) => eintrag.id === daten.anrede);
   const zahlweise = definition.zahlung.zahlweisen.find((eintrag) => eintrag.id === daten.zahlweise);
@@ -120,6 +121,15 @@ export default function SchrittZusammenfassung({
         </Callout>
       )}
 
+      {bestaetigung && (
+        <section className="space-y-3 rounded-[1.4rem] bg-white p-5 ring-1 ring-home-midnight/10" data-bestaetigung-sdk="">
+          <h3 className="font-display text-lg font-extrabold text-home-midnight">{bestaetigung.titel}</h3>
+          {bestaetigung.vorspann && <p className={bodyText}>{schuetze(bestaetigung.vorspann)}</p>}
+          <Haken feldKey={bestaetigung.key} checked={daten.erklaerungen?.[bestaetigung.key]} onChange={setBestaetigung} fehler={bestaetigungFehler ? bestaetigung.fehler : null}>
+            {schuetze(bestaetigung.text)}
+          </Haken>
+        </section>
+      )}
       <div className="rounded-[1.4rem] bg-home-ice p-5 ring-1 ring-emerald-900/10">
         <p className="text-base font-bold leading-7 text-home-midnight" data-auftrag="">{schuetze(auftragSatz(definition, daten, beitrag))}</p>
         {definition.absenden.vorbehalt && <p className={bodyText}>{schuetze(definition.absenden.vorbehalt)}</p>}

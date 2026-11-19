@@ -31,9 +31,11 @@ const BEGINN = { iso: '2026-12-01', jahr: 2026, monat: 12, label: '01.12.2026' }
 const BEGINN_JAN = { iso: '2027-01-01', jahr: 2027, monat: 1, label: '01.01.2027' };
 
 // Nein auf alles, Größe und Gewicht ohne Zuschlag.
+// Frage 1a seit 19.11.2026 als 15 Einzelfragen wie in der SDK-Strecke (Paket 1 Punkt 7).
+const EINZEL_1A = (wert = 'nein') => Object.fromEntries(FRAGE_1A_ITEMS.map((item) => [`1a-${item.id}`, wert]));
 const alleNein = () => ({
   hinweisOk: true,
-  '1a': 'nein',
+  ...EINZEL_1A(),
   ...Object.fromEntries(FRAGEN_1B_1K.map((frage) => [frage.id, 'nein'])),
   2: { groesse: '178', gewicht: '75' },
 });
@@ -66,15 +68,16 @@ test('Bedingungen und Folgefragen', () => {
   assert.equal(bedingungErfuellt({ frgae: 'a', ist: 'ja' }, kontext), false, 'Tippfehler schaltet nichts frei');
 
   const frage1a = ambulant.gesundheit.fragen[0];
-  assert.equal(sichtbareFolgefragen(frage1a, { antworten: { '1a': 'nein' } }).length, 0);
-  assert.equal(sichtbareFolgefragen(frage1a, { antworten: { '1a': 'ja' } })[0].id, '1a-kreuze');
-  assert.equal(sichtbareFragen(ambulant, {}).length, 12, '12 Fragen wie im SDK-Antrag (1a bis 1k, 2)');
+  assert.equal(frage1a.id, '1a-aids-hepatitis');
+  assert.equal(sichtbareFolgefragen(frage1a, { antworten: { [frage1a.id]: 'ja' } }).length, 0, 'keine Ankreuzliste mehr');
+  assert.equal(sichtbareFragen(ambulant, {}).length, 26, '26 Fragen wie in der SDK-Strecke (15 Punkte von 1a, 1b bis 1k, 2)');
+  assert.deepEqual(ambulant.gesundheit.fragen.slice(0, 15).map((frage) => frage.original.id), ['G42', 'G43', 'G43A', 'G43B', 'G44', 'G45', 'G46', 'G47', 'G47A', 'G48', 'G49', 'G50', 'G50A', 'G51', 'G53']);
 
-  // „nein“ löscht die Kreuze darunter.
-  const bereinigt = antwortenBereinigt(ambulant, { antworten: { '1a': 'nein', '1a-kreuze': ['krebs'], hinweisOk: true } });
-  assert.deepEqual(bereinigt, { '1a': 'nein' }, 'ohne Vorspann der Online-Strecke');
+  const bereinigt = antwortenBereinigt(ambulant, { antworten: { '1a-krebs': 'nein', '1a-kreuze': ['krebs'], hinweisOk: true } });
+  assert.deepEqual(bereinigt, { '1a-krebs': 'nein' }, 'alte Ankreuzliste fällt weg, ohne Vorspann der Online-Strecke');
   assert.deepEqual(offeneGesundheitsfragen(ambulant, { antworten: alleNein() }), []);
-  assert.ok(offeneGesundheitsfragen(ambulant, { antworten: { ...alleNein(), '1a': 'ja' } }).includes('1a-kreuze'));
+  const ohneEinen = alleNein(); delete ohneEinen['1a-osteoporose'];
+  assert.deepEqual(offeneGesundheitsfragen(ambulant, { antworten: ohneEinen }), ['1a-osteoporose'], 'jeder Punkt einzeln Pflicht');
   assert.ok(offeneGesundheitsfragen(ambulant, { antworten: { ...alleNein(), 2: { groesse: '90', gewicht: '75' } } }).includes('2'));
 });
 
@@ -116,8 +119,8 @@ test('Beitrag ambulant ohne Zuschlag: jede Altersgruppe und Stufe wie sdkAmbulan
 test('Zuschlag ambulant: 300 zufällige Antworten gleich zuschlagAufteilung() des Antragsdienstes', () => {
   const wuerfel = zufall(20261112);
   for (let lauf = 0; lauf < 300; lauf += 1) {
-    const antworten = { hinweisOk: true, '1a': wuerfel() < 0.3 ? 'ja' : 'nein' };
-    if (antworten['1a'] === 'ja') antworten['1a-kreuze'] = FRAGE_1A_ITEMS.filter(() => wuerfel() < 0.2).map((item) => item.id).concat(FRAGE_1A_ITEMS[0].id);
+    const antworten = { hinweisOk: true, ...EINZEL_1A() };
+    if (wuerfel() < 0.3) FRAGE_1A_ITEMS.forEach((item, stelle) => { if (stelle === 0 || wuerfel() < 0.2) antworten[`1a-${item.id}`] = 'ja'; });
     FRAGEN_1B_1K.forEach((frage) => { antworten[frage.id] = wuerfel() < 0.25 ? 'ja' : 'nein'; });
     const groesse = String(150 + Math.floor(wuerfel() * 50));
     const gewicht = String(40 + Math.floor(wuerfel() * 90));
@@ -212,7 +215,7 @@ test('Datensatz für den Selbstantrag (ambulant, Online-Strecke)', () => {
   const daten = {
     tarif: 'AP1',
     geburtsdatum: '5.3.1990',
-    antworten: { ...alleNein(), '1a': 'ja', '1a-kreuze': ['krebs', 'als'] },
+    antworten: { ...alleNein(), '1a-krebs': 'ja', '1a-als': 'ja' },
     anrede: 'frau',
     formular: {
       vorname: ' Lena ', nachname: 'Muster', strasse: 'Musterweg', hausnummer: '12', plz: '20095', ort: 'Hamburg', telefon: '0151 1234567', email: 'lena@beispiel.de',
@@ -239,9 +242,20 @@ test('Datensatz für den Selbstantrag (ambulant, Online-Strecke)', () => {
   });
   assert.deepEqual(body.bestaetigungen, { acknowledge: true });
   assert.deepEqual(body.gesundheit.kreuze1a, ['als', 'krebs'], 'Reihenfolge wie im Formular');
+  assert.equal(body.gesundheit.antwort1a, 'ja');
+  assert.equal(Object.keys(body.gesundheit.einzel1a).length, 15, '15 Einzelantworten');
+  assert.equal(body.gesundheit.einzel1a.krebs, 'ja'); assert.equal(body.gesundheit.einzel1a.diabetes, 'nein');
   assert.equal(body.zahlung.iban, 'DE89370400440532013000');
   assert.equal(body.zahlung.bankname, 'Testbank');
-  assert.equal(body.erklaerungen.declarationOfConsentAdvertising, false, 'Werbung leer heißt false');
+  assert.equal(body.erklaerungen.declarationOfConsentAdvertising, null, 'Werbung ohne Antwort bleibt leer (Pflicht Ja/Nein, nichts vorbelegt)');
+  assert.equal(body.erklaerungen.angabenBestaetigt, false, 'Bestätigungssatz nicht angehakt');
+  const mitWahl = baueSelbstantrag(ambulant, { ...daten, erklaerungen: { ...daten.erklaerungen, declarationOfConsentAdvertising: 'nein', angabenBestaetigt: true } }, { beginn: BEGINN, beitrag, heute: HEUTE });
+  assert.equal(mitWahl.erklaerungen.declarationOfConsentAdvertising, 'nein');
+  assert.equal(mitWahl.erklaerungen.angabenBestaetigt, true);
+  const o = (feld) => mitWahl.original.find((eintrag) => eintrag.feld === feld)?.wert;
+  assert.equal(o('declarationOfConsentAdvertising'), 'false');
+  assert.equal(o('bestaetigungsdialog'), 'true');
+  assert.equal(o('policyHolderIsEqualInsuredPerson'), 'true', 'Versicherungsnehmer sichtbar, fest Ja');
   assert.equal(body.erklaerungen.avoidAdvice, true);
   const g = (feld) => body.original.find((eintrag) => eintrag.feld === feld)?.wert;
   assert.equal(g('G43'), 'true', 'ALS: eigene Zuordnung G43');

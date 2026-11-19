@@ -34,6 +34,36 @@ const VOLLMACHT = TEXT_10_VOLLMACHT.replace('die ambulante Zusatzversicherung', 
 
 // Gesundheitsfragen: Größe und Gewicht (G0A, G0B) auf einem Bildschirm, dann G10 bis G35.
 const felderGesundheit = SCHRITTE.find((schritt) => schritt.schritt === 5).felder;
+
+// „Weitere Angaben“ (Paket 1 Punkt 13): Die Erfassung vom 12.11. kennt nur
+// Block 1 und 2. Der Probelauf vom 19.11.2026 (Testperson, bis Schritt 5) hat
+// gezeigt: Die SDK öffnet mit „Weitere Angaben: Ja“ bis zu sechs Blöcke mit
+// denselben Wortlauten (Felder G10&C&1 … G10&K&5), ab Block 6 gibt es keine
+// „Weitere Angaben“ mehr. Die Blöcke 3 bis 6 entstehen hier aus Block 2, nur
+// die Kennungen zählen hoch; kein Wortlaut wird verändert.
+export const WEITERE_BLOECKE_MAX = 5;
+export function mitWeiterenBloecken(feld) {
+  const w1 = feld.folgefragen?.find((x) => x.id === `${feld.id}.1`);
+  const vorlage = w1?.folgefragen;
+  if (!vorlage?.length) return feld;
+  const zwei = `${feld.id}.2`;
+  const neu = (id, k) => {
+    if (id === zwei) return `${feld.id}.${k + 1}`;
+    const t = new RegExp(`^(${feld.id}(?:\\.[A-Z])?)\\.1$`).exec(String(id));
+    return t ? `${t[1]}.${k}` : id;
+  };
+  const kopie = (f, k) => ({
+    ...f, id: neu(f.id, k), ...(f.bedingung ? { bedingung: { ...f.bedingung, frage: neu(f.bedingung.frage, k) } } : {}), ...(f.folgefragen ? { folgefragen: f.folgefragen.map((x) => kopie(x, k)) } : {}),
+  });
+  const block = (k) => vorlage
+    .filter((f) => k < WEITERE_BLOECKE_MAX || f.id !== zwei)
+    .map((f) => kopie(f, k))
+    .map((f) => (f.id === `${feld.id}.${k + 1}` ? { ...f, folgefragen: block(k + 1) } : f));
+  return {
+    ...feld,
+    folgefragen: feld.folgefragen.map((f) => (f.id === w1.id ? { ...f, folgefragen: f.folgefragen.map((x) => (x.id === zwei ? { ...x, folgefragen: block(2) } : x)) } : f)),
+  };
+}
 const groesse = felderGesundheit.find((feld) => feld.id === 'G0A');
 const gewicht = felderGesundheit.find((feld) => feld.id === 'G0B');
 const FRAGEN = [
@@ -53,7 +83,7 @@ const FRAGEN = [
       },
     ],
   },
-  ...felderGesundheit.filter((feld) => !['G0A', 'G0B'].includes(feld.id)).map((feld) => ({
+  ...felderGesundheit.filter((feld) => !['G0A', 'G0B'].includes(feld.id)).map(mitWeiterenBloecken).map((feld) => ({
     ...frageAus(feld, { schritt: 5, hinweisBeiJa: SDK_HINWEIS_NACH_EINGANG }),
     bedingung: MIT_FRAGEN,
     kurz: feld.wortlaut.length > 70 ? `${feld.wortlaut.slice(0, 67).replace(/\s+\S*$/, '')} …` : feld.wortlaut,
@@ -78,7 +108,9 @@ const stationaer = {
   pfad: 'stationaer',
   bereit: true,
   stand: '2026-11-12',
-  textfassung: '2026-11-12-sdk-stationaer-online',
+  // 19.11.2026 (Paket 1): Versicherungsnehmer sichtbar, Werbeeinwilligung Ja/Nein,
+  // Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei, sechs Blöcke.
+  textfassung: '2026-11-19-sdk-stationaer-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, erfasst 12.11.2026',
   kennzeile: 'Klinikschutz der SDK',
   seitentitel: 'Antrag Klinikschutz | Healio',

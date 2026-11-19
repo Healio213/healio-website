@@ -98,6 +98,38 @@ async function bildschirm(page, id) {
   }
 }
 async function weiter(page) { await page.waitForTimeout(500); await page.locator("[data-weiter]").click(); }
+// Frage 1a seit 19.11.2026 als 15 Einzelfragen wie in der SDK-Strecke (Paket 1 Punkt 7).
+const PUNKTE_1A = ['aids-hepatitis', 'als', 'weichteilrheuma', 'chorea', 'niere', 'colitis', 'diabetes', 'gliedmassen', 'fertilitaet', 'hoerschaedigung', 'krebs', 'lunge', 'lymphoedem', 'ms', 'osteoporose'];
+async function fragen1a(page, ja = [], name = null) {
+  for (const [stelle, id] of PUNKTE_1A.entries()) {
+    await bildschirm(page, `frage:1a-${id}`);
+    await page.waitForTimeout(650);
+    if (name && stelle === 0) await foto(page, `${name}-05-frage-1a-punkt-1`);
+    if (name && ja.includes(id)) await foto(page, `${name}-05-frage-1a-${id}`);
+    await page.click(`[data-bildschirm="frage:1a-${id}"] [data-antwort="${ja.includes(id) ? 'ja' : 'nein'}"]`);
+  }
+}
+// Erklärungen der SDK: drei Haken, Versicherungsnehmer fest auf Ja, Werbeeinwilligung Ja/Nein ohne Vorbelegung.
+async function sdkErklaerungen(page, werbung = 'nein', name = null) {
+  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  pruefe(await page.locator('input[name="fest-policyHolderIsEqualInsuredPerson"][value="ja"]').isChecked() && await page.locator('input[name="fest-policyHolderIsEqualInsuredPerson"][value="ja"]').isDisabled(), 'Versicherungsnehmer sichtbar, fest Ja, gesperrt');
+  pruefe(!(await page.locator('input[name="declarationOfConsentAdvertising"]:checked').count()), 'Werbeeinwilligung ohne Vorbelegung');
+  await weiter(page);
+  pruefe(await page.locator('#fehler-declarationOfConsentAdvertising').isVisible(), 'Werbeeinwilligung ist Pflicht (Ja oder Nein)');
+  await page.locator(`label:has(input[name="declarationOfConsentAdvertising"][value="${werbung}"])`).click();
+  if (name) await foto(page, `${name}-04-erklaerungen`);
+  await weiter(page);
+}
+// Bestätigungssatz der SDK vor dem Absenden: ohne Haken geht nichts ab.
+async function sdkAbsenden(page, name = null) {
+  await page.click('#knopf-absenden');
+  await page.waitForTimeout(300);
+  pruefe(await page.locator('#fehler-angabenBestaetigt').isVisible() && !(await page.locator('[data-danke]').count()), 'Bestätigungssatz der SDK ist Pflicht');
+  pruefe((await page.textContent('[data-bestaetigung-sdk]')).includes('Hiermit bestätige ich, dass alle gemachten Angaben korrekt und vollständig sind.'), 'Satz der SDK im Wortlaut');
+  await page.locator('label:has(#feld-angabenBestaetigt)').click();
+  if (name) await foto(page, `${name}-11b-bestaetigung`);
+  await page.click('#knopf-absenden');
+}
 
 // einstieg: 'direkt' (Maske direkt aufgerufen), 'werber' (/ambulant mit ?ref= und utm, dann Wahl), 'wahl' (ohne Kennzeichen).
 const WERBER = { ref: 'HP-testpraxis', utm: { utm_source: 'testquelle', utm_medium: 'qr', utm_campaign: 'praxisflyer' } };
@@ -186,27 +218,11 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   await weiter(page);
 
   await bildschirm(page, 'erkl:erklaerungen');
-  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
-  pruefe(!(await page.locator('#feld-declarationOfConsentAdvertising').isChecked()), 'Werbeeinwilligung leer');
-  await foto(page, `${name}-04-erklaerungen`);
-  await weiter(page);
+  await sdkErklaerungen(page, mitJa ? 'ja' : 'nein', name);
 
-  await bildschirm(page, 'frage:1a');
+  await bildschirm(page, 'frage:1a-aids-hepatitis');
   await pruefeSeite(page, `${name} Frage 1a`);
-  if (mitJa) {
-    await page.waitForTimeout(650);
-    await page.click('[data-bildschirm="frage:1a"] [data-antwort="ja"]');
-    await page.waitForSelector('#gruppe-1a-kreuze');
-    await weiter(page);
-    pruefe(await page.locator('#fehler-frage-1a-kreuze').isVisible(), '1a Ja ohne Kreuz bleibt stehen');
-    await page.locator('label:has(input[name="frage-1a-kreuze"][value="krebs"])').click();
-    await foto(page, `${name}-05-frage-1a-ja`);
-    await weiter(page);
-  } else {
-    await foto(page, `${name}-05-frage-1a`);
-    await page.waitForTimeout(650);
-    await page.click('[data-bildschirm="frage:1a"] [data-antwort="nein"]');
-  }
+  await fragen1a(page, mitJa ? ['krebs'] : [], name);
   for (const id of ['1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
     await bildschirm(page, `frage:${id}`);
     await page.waitForTimeout(650);
@@ -272,7 +288,7 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   await pruefeSeite(page, `${name} Zusammenfassung`);
   const uebersicht = await page.textContent('[data-uebersicht]');
   pruefe(uebersicht.includes('AP1') && uebersicht.includes(erwartet) && uebersicht.includes('…3000') && !uebersicht.includes('0532'), 'Übersicht mit Beitrag, IBAN nur gekürzt');
-  pruefe((await page.textContent('[data-antwortenliste]')).includes(mitJa ? 'Ja: Krebserkrankungen' : 'Nein'), 'Antworten in der Übersicht');
+  pruefe((await page.textContent('[data-antwortenliste]')).includes('Krebserkrankungen') && (await page.textContent('[data-antwortenliste]')).includes('Osteoporose'), 'alle 15 Punkte von 1a einzeln in der Übersicht');
   pruefe((await page.textContent('[data-antwortenliste]')).includes('Atemwegserkrankungen (Asthma'), 'Fragetext im Wortlaut bei den Antworten');
   pruefe((await page.textContent('[data-auftrag]')).includes(`Monatsbeitrag von ${erwartet}`), 'Auftragssatz nennt Monatsbeitrag mit Betrag');
   await foto(page, `${name}-11-zusammenfassung`);
@@ -290,14 +306,21 @@ async function durchlauf(browser, breite, mitJa, einstieg = 'direkt') {
   const teile = [...new URLSearchParams(speicher.adresse.replace(/^\?/, '').replace(/#.*$/, ''))];
   pruefe(!speicher.adresse.includes('#') && teile.every(([key]) => erlaubt.has(key)) && !/DE89|Muster|Lena|1990|krebs|178/i.test(speicher.adresse), `Angaben in der Adresse (${speicher.adresse})`);
 
-  await page.click('#knopf-absenden');
+  await sdkAbsenden(page, name);
   await page.waitForSelector('[data-danke]');
+  pruefe(await page.locator('[data-mein-antrag]').isVisible(), 'Danke-Seite bietet „Mein Antrag“ als PDF');
+  const [download] = await Promise.all([page.waitForEvent('download'), page.click('[data-mein-antrag-laden]')]);
+  pruefe(/^Mein Antrag HS-\d{6}-T\d{3}\.pdf$/.test(download.suggestedFilename()), `Mein Antrag als Datei (${download.suggestedFilename()})`);
+  pruefe((await page.textContent('[data-danke-punkte]')).includes('geschützter Link zu deinem Antrag und allen Unterlagen'), 'Danke-Seite verspricht nur, was geschieht');
   pruefe(/^HS-\d{6}-T\d{3}$/.test((await page.textContent('[data-kennung]')).trim()), 'Kennung auf der Danke-Seite');
   await pruefeSeite(page, `${name} Danke`).catch(() => { /* Danke ohne Ausweg ist gewollt */ });
   await foto(page, `${name}-12-danke`);
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter?.kanal === 'web-selbst' && letzter.zahlung.iban === 'DE89370400440532013000', 'Datensatz kommt an');
   pruefe(letzter.gesundheit.antwort1a === (mitJa ? 'ja' : 'nein') && letzter.gesundheit.antworten['1b'] === (mitJa ? 'ja' : 'nein'), 'Gesundheitsangaben im Vertragsformat');
+  pruefe(Object.values(letzter.gesundheit.einzel1a).filter((w) => w === 'nein').length === (mitJa ? 14 : 15), '15 Einzelantworten zu Frage 1a');
+  pruefe(letzter.erklaerungen.declarationOfConsentAdvertising === (mitJa ? 'ja' : 'nein') && letzter.erklaerungen.angabenBestaetigt === true, 'Werbeeinwilligung und Bestätigungssatz vom Kunden');
+  pruefe(letzter.original.find((e) => e.feld === 'bestaetigungsdialog')?.wert === 'true' && letzter.original.find((e) => e.feld === 'declarationOfConsentAdvertising')?.wert === (mitJa ? 'true' : 'false'), 'Zuordnung Bestätigungsdialog und Werbung');
   pruefe(letzter.original.find((e) => e.feld === 'G49').wert === (mitJa ? 'true' : 'false') && letzter.unterlagen.geoeffnet.length === 5, 'Zuordnung G49 und fünf Downloads im Antrag');
   // Seit 19.11.2026 trägt der Link der Wahl die Herkunft in der Adresse: mit und ohne Zustimmung gleich.
   const ueberWahl = (ref, utm) => ({
@@ -487,7 +510,7 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   pruefe(letzter.bestaetigungen?.adresseBestaetigt === true && letzter.original.find((e) => e.feld === 'adresseBestaetigt')?.wert === true, 'Adressbestätigung im Antrag und in der Zuordnung');
   pruefe(letzter.erklaerungen.werbung === false, 'Werbung nicht angehakt übermittelt');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.name === 'Produktinformationsblatt Zahn Prestige') && letzter.unterlagen.geoeffnet.length === 1 && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'unterlagen'), 'Gezeigte, geöffnete und bestätigte Unterlagen im Antrag');
-  pruefe(danke.includes('Unterlagen schicken wir dir zusätzlich per E-Mail'), 'Danke: Unterlagen kommen per Mail');
+  pruefe(danke.includes('In unserer Eingangsbestätigung steht ein geschützter Link zu allen Unterlagen.'), 'Danke: Link zu den Unterlagen in der Eingangsbestätigung (Bayerische ohne Mein Antrag)');
   if (viaWahl) pruefe(letzter.herkunft.ref === WERBER.ref && gleich(letzter.herkunft.utm, {}) && letzter.herkunft.letzteSeite === '/zahn' && letzter.herkunft.einstiegsseite === '/zahn', `Herkunft Zahn (ohne Zustimmung, über den Link): ${JSON.stringify(letzter.herkunft)}`);
   await context.close();
 }
@@ -589,8 +612,7 @@ async function sdkVorFragen(page, name) {
   await page.click('[data-alle-downloads]');
   await weiter(page);
   await bildschirm(page, 'erkl:erklaerungen');
-  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
-  await weiter(page);
+  await sdkErklaerungen(page, 'nein', name);
 }
 async function sdkNachBeitrag(page, name) {
   await bildschirm(page, 'erkl:beratung');
@@ -675,8 +697,9 @@ async function stationaerDurchlauf(browser, breite, tarif) {
     pruefe(zusammen.includes('Kontrolle Schilddrüse') && zusammen.includes('Von wann') && zusammen.includes('01.03.2025'), 'Folgeangaben nach Ja in der Zusammenfassung');
     await foto(page, `${name}-zusammenfassung`);
   }
-  await page.click('#knopf-absenden');
+  await sdkAbsenden(page, tarif === 'SP2' ? name : null);
   await page.waitForSelector('[data-danke]');
+  pruefe(await page.locator('[data-mein-antrag]').isVisible(), `Stationär ${tarif}: Mein Antrag auf der Danke-Seite`);
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.sparte === 'stationaer' && letzter.angaben.tarifCode === tarif, `Stationär ${tarif} kommt an`);
   if (tarif === 'SP2') {
@@ -837,7 +860,7 @@ async function pruefseiteLevelnine(browser, art) {
     await weiter(page);
   }
   await bildschirm(page, 'zusammenfassung');
-  await page.click('#knopf-absenden');
+  if (art === 'stationaer') await sdkAbsenden(page); else await page.click('#knopf-absenden');
   await page.waitForSelector('[data-danke], [data-sendefehler]');
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler ${art}: ${await page.textContent('[data-sendefehler]')}`);
   const { letzter } = await mock('/__test/letzter');
@@ -863,11 +886,11 @@ async function pruefseiteAmbulantOnline(browser) {
   await page.click('[data-alle-downloads]');
   await weiter(page);
   await bildschirm(page, 'erkl:erklaerungen');
-  for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
-  await weiter(page);
-  await bildschirm(page, 'frage:1a');
-  await page.waitForTimeout(650);
-  await page.click('[data-bildschirm="frage:1a"] [data-antwort="nein"]');
+  await sdkErklaerungen(page, 'nein');
+  // Vom Telefon kam „1a: nein“ als eine Antwort; die 15 Punkte beantwortet der Kunde selbst (nichts abgeleitet).
+  await bildschirm(page, 'frage:1a-aids-hepatitis');
+  pruefe(await page.locator('[data-bildschirm="frage:1a-aids-hepatitis"] [aria-pressed="true"]').count() === 0, 'Prüfseite: Punkte von 1a nicht vorbelegt');
+  await fragen1a(page, []);
   for (const id of ['1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
     await bildschirm(page, `frage:${id}`);
     await page.waitForTimeout(650);
@@ -882,12 +905,12 @@ async function pruefseiteAmbulantOnline(browser) {
   await sdkNachBeitrag(page, null);
   await bildschirm(page, 'zusammenfassung');
   await foto(page, '390-pruefseite-ambulant-online-zusammenfassung');
-  await page.click('#knopf-absenden');
+  await sdkAbsenden(page);
   await page.waitForSelector('[data-danke], [data-sendefehler]');
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler: ${await page.textContent('[data-sendefehler]')}`);
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
   const { letzter } = await mock('/__test/letzter');
-  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-12-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
+  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-19-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
   pruefe(letzter.zahlung.bankname === 'Testbank', 'Prüfseite ambulant (Online-Fassung) fragt den Banknamen ab');
   await context.close();
 }
@@ -1083,6 +1106,7 @@ async function alleWeiteren(browser) {
     await zahnAblehnung(browser);
     await stationaerDurchlauf(browser, 390, 'SP2');
     await stationaerDurchlauf(browser, 1280, 'SPU');
+    await stationaerDurchlauf(browser, 1280, 'SP2');
     await ukvDurchlauf(browser);
     await unterlagenLeerListe(browser);
     await pruefseiteZahn(browser);

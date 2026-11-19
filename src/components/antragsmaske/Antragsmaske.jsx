@@ -2,7 +2,7 @@ import React, {
   useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState,
 } from 'react';
 import {
-  ArrowLeft, ArrowRight, CheckCircle2, Inbox, Send, ShieldCheck,
+  ArrowLeft, ArrowRight, CheckCircle2, Download, FileText, Inbox, Send, ShieldCheck,
 } from 'lucide-react';
 import {
   altersgrenze, antwortenBereinigt, beginnOptionenAus, berechneBeitrag, eintrittsalter, euro, parseDatum,
@@ -15,7 +15,7 @@ import {
   AntragFehler, berechneSelbstBeitrag, fehlerText, ladeSelbstUnterlagen, sendeSelbstantrag,
 } from '@/lib/antragApi';
 import {
-  Button, TRENNUNG, cx, schuetze, sofortScrollen,
+  Button, LINK, NeuerTab, TRENNUNG, cx, schuetze, sofortScrollen,
 } from '@/components/antrag/ui';
 import SchrittTarif, { fehlerTarif, kernZeilen } from './SchrittTarif';
 import SchrittFrage, { SchrittHinweis, fehlerFrage, fehlerHinweis } from './SchrittFrage';
@@ -97,25 +97,60 @@ function mitVorab(start, vorabDaten) {
 }
 
 // Danke-Seite (Franks Vorgabe 12.11.2026): ehrlich, ohne Fristversprechen.
-export function dankePunkte(definition, email) {
+export function dankePunkte(definition, email, mitAntrag = true) {
   const beiDer = definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`;
   return [
     'Dein Antrag ist bei Healio eingegangen. Du bekommst gleich eine Eingangsbestätigung von Healio per E-Mail.',
     `Healio reicht deinen Antrag jetzt in deinem Namen bei ${beiDer} ein.`,
     `Die Antragsbestätigung ${beiDer} kommt per E-Mail${email ? ` an ${email}` : ''}.`,
-    'Deine Unterlagen schicken wir dir zusätzlich per E-Mail.',
+    mitAntrag ? 'In unserer Eingangsbestätigung steht ein geschützter Link zu deinem Antrag und allen Unterlagen.' : 'In unserer Eingangsbestätigung steht ein geschützter Link zu allen Unterlagen.',
     definition.absenden?.vorbehalt,
   ].filter(Boolean);
 }
 
+// „Mein Antrag“ (Paket 1 Punkt 1): das PDF aus der Antwort des Dienstes, nur auf
+// dieser Seite. Es entsteht erst beim Klick als Datei im Browser.
+function MeinAntrag({ datei }) {
+  const laden = () => {
+    try {
+      const roh = window.atob(datei.pdf);
+      const bytes = new Uint8Array(roh.length);
+      for (let stelle = 0; stelle < roh.length; stelle += 1) bytes[stelle] = roh.charCodeAt(stelle);
+      const adresse = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+      const link = document.createElement('a');
+      link.href = adresse;
+      link.download = datei.name;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(adresse), 4000);
+    } catch { /* bleibt über den Link in der Mail abrufbar */ }
+  };
+  return (
+    <div className="mt-6 flex flex-col gap-3 rounded-[1.2rem] bg-home-ice p-4 ring-1 ring-emerald-900/10 sm:flex-row sm:items-center sm:justify-between" data-mein-antrag="">
+      <div className="flex min-w-0 items-start gap-3">
+        <FileText className="mt-0.5 h-6 w-6 shrink-0 text-emerald-700" aria-hidden="true" />
+        <div className="min-w-0">
+          <p className="font-display text-lg font-extrabold leading-snug text-home-midnight">Mein Antrag</p>
+          <p className="text-base leading-6 text-home-slate">Hier sind alle deine Angaben und Erklärungen als PDF. Am besten speicherst du es gleich ab.</p>
+        </div>
+      </div>
+      <Button variant="secondary" onClick={laden} className="shrink-0" data-mein-antrag-laden="">
+        <Download className="h-5 w-5" aria-hidden="true" />
+        PDF herunterladen
+      </Button>
+    </div>
+  );
+}
+
 // Die Punkte bleiben wortgleich (dankePunkte); die Seite ordnet sie in drei Schritte.
 function Danke({ definition, ergebnis, titelRef }) {
-  const punkte = dankePunkte(definition, ergebnis.email);
+  const punkte = dankePunkte(definition, ergebnis.email, Boolean(ergebnis.meinAntrag));
   const vorbehalt = definition.absenden?.vorbehalt;
   const schritte = [
     { icon: Send, titel: 'Wir reichen ein', texte: punkte.slice(0, 2) },
     { icon: ShieldCheck, titel: `Die ${definition.versicherer.kurz} bestätigt`, texte: punkte.slice(2, 3) },
-    { icon: Inbox, titel: 'Unterlagen per E-Mail', texte: [punkte[3], 'Alle Vertragsunterlagen und Produktinformationen bekommst du über einen geschützten Link.'] },
+    { icon: Inbox, titel: 'Unterlagen per E-Mail', texte: [punkte[3], 'Der Link gilt, solange wir deinen Antrag speichern.'] },
   ];
   return (
     <div className="space-y-6" data-danke="">
@@ -133,6 +168,7 @@ function Danke({ definition, ergebnis, titelRef }) {
             )}
           </div>
         </div>
+        {ergebnis.meinAntrag && <MeinAntrag datei={ergebnis.meinAntrag} />}
         <dl className="mt-6 grid gap-px overflow-hidden rounded-[1.2rem] bg-home-midnight/10 sm:grid-cols-3">
           <div className="bg-home-ice px-4 py-3"><dt className="text-base text-home-slate">Tarif bei {schuetze(definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`)}</dt><dd className="font-bold">{ergebnis.tarifName}</dd></div>
           <div className="bg-home-ice px-4 py-3"><dt className="text-base text-home-slate">Beginn</dt><dd className="font-bold">{ergebnis.beginnText}</dd></div>
@@ -186,6 +222,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const [beitragNeu, setBeitragNeu] = useState(null);
   const [ergebnis, setErgebnis] = useState(null);
   const [falle, setFalle] = useState('');
+  const [bestaetigungFehler, setBestaetigungFehler] = useState(false);
+  const schlussKey = definition.absenden?.bestaetigung?.key || null;
 
   const posRef = useRef(pos);
   posRef.current = pos;
@@ -510,6 +548,12 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
       zeige({ id: bildschirme[grenzeIndex].id, aendern: null, uebersicht: false });
       return;
     }
+    // Bestätigungssatz der SDK: ohne den Haken des Kunden geht nichts ab.
+    if (schlussKey && daten.erklaerungen?.[schlussKey] !== true) {
+      setBestaetigungFehler(true);
+      setFokusAuftrag({ key: schlussKey, zeit: Date.now() });
+      return;
+    }
     const body = baueSelbstantrag(definition, { ...daten, unterlagenDienst: unterlagenJetzt.liste || [] }, {
       beginn, beitrag, heute, dauerSekunden: (Date.now() - startZeit.current) / 1000, feld: falle,
       herkunft: sammleHerkunft({ sparte: definition.sparte, weg: 'allein', mitgebracht: vorbelegung.herkunft }),
@@ -527,6 +571,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         beginnText: beginn?.label,
         beitrag: beitrag?.beitrag,
         jaehrlich: daten.zahlweise === 'jaehrlich' && definition.zahlweiseImTarif,
+        // „Mein Antrag“ als PDF vom Antragsdienst (nur hier und über den geschützten Link, nie per Mail).
+        meinAntrag: antwort.meinAntrag && typeof antwort.meinAntrag.pdf === 'string' ? { name: String(antwort.meinAntrag.name || 'Mein Antrag.pdf'), pdf: antwort.meinAntrag.pdf } : null,
       });
       // Nach dem Absenden bleibt nichts im Speicher der Seite.
       setDaten(startDaten(definition, {}));
@@ -708,6 +754,14 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
           sendet={sendet}
           sendeFehler={sendeFehler}
           beitragNeu={beitragNeu}
+          setBestaetigung={(wert) => {
+            setBestaetigungFehler(false);
+            set((alt) => ({
+              erklaerungen: { ...alt.erklaerungen, [schlussKey]: wert },
+              zeitpunkte: { ...alt.zeitpunkte, [schlussKey]: wert ? new Date().toISOString() : undefined },
+            }));
+          }}
+          bestaetigungFehler={bestaetigungFehler}
         />
         {/* Falle für Programme, die jedes Feld füllen. Menschen sehen sie nie. */}
         <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
@@ -776,6 +830,15 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         {(pruefen?.kennzeile || !pruefen) && <p className={cx('mt-1 text-base text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</p>}
 
         <div className="mt-5 pb-6 sm:mt-8">{inhalt}</div>
+        {/* Wie im Original: Datenschutzhinweise des Versicherers auf jeder Seite der Strecke (SDK, Paket 1 Punkt 11). */}
+        {definition.versicherer.datenschutz && (
+          <p className="pb-4 text-base leading-6 text-home-slate" data-datenschutz-versicherer="">
+            <a href={definition.versicherer.datenschutz.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>
+              {definition.versicherer.datenschutz.label}
+              <NeuerTab />
+            </a>
+          </p>
+        )}
 
         {leisteSichtbar && (
           <div

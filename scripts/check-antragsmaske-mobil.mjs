@@ -230,9 +230,13 @@ async function ambulant(browser) {
   await page.click('[data-alle-downloads]'); await schritt(page, s, n++, 'unterlagen'); await weiter(page);
   await bildschirm(page, 'erkl:erklaerungen'); await fehlerPruefen(page, s, 'erklaerungen-leer');
   for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  // Werbeeinwilligung der SDK: Ja oder Nein ist Pflicht (Paket 1, 19.11.2026).
+  await page.locator('label:has(input[name="declarationOfConsentAdvertising"][value="nein"])').click();
   await schritt(page, s, n++, 'erklaerungen'); await weiter(page);
-  await bildschirm(page, 'frage:1a'); await schritt(page, s, n++, 'frage-1a');
-  for (const id of ['1a', '1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
+  await bildschirm(page, 'frage:1a-aids-hepatitis'); await schritt(page, s, n++, 'frage-1a');
+  // Frage 1a als 15 Einzelfragen wie in der SDK-Strecke.
+  const punkte1a = ['aids-hepatitis', 'als', 'weichteilrheuma', 'chorea', 'niere', 'colitis', 'diabetes', 'gliedmassen', 'fertilitaet', 'hoerschaedigung', 'krebs', 'lunge', 'lymphoedem', 'ms', 'osteoporose'].map((id) => `1a-${id}`);
+  for (const id of [...punkte1a, '1b', '1c', '1d', '1e', '1f', '1g', '1h', '1i', '1j', '1k']) {
     await bildschirm(page, `frage:${id}`); await page.waitForTimeout(700);
     await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
   }
@@ -333,6 +337,8 @@ async function stationaer(browser) {
   await page.click('[data-alle-downloads]'); await schritt(page, s, n++, 'unterlagen'); await weiter(page);
   await bildschirm(page, 'erkl:erklaerungen');
   for (const key of ['saveConfirmationtext', 'declarationOfConsentTermsOfContract', 'declarationOfConsentAndReleaseFromConfidentiality']) await page.locator(`label:has(#feld-${key})`).click();
+  // Werbeeinwilligung der SDK: Ja oder Nein ist Pflicht (Paket 1, 19.11.2026).
+  await page.locator('label:has(input[name="declarationOfConsentAdvertising"][value="nein"])').click();
   await schritt(page, s, n++, 'erklaerungen'); await weiter(page);
   await bildschirm(page, 'frage:G0'); await fehlerPruefen(page, s, 'frage-G0-leer');
   await page.fill('#feld-frage-G0-groesse', '180'); await page.fill('#feld-frage-G0-gewicht', '80');

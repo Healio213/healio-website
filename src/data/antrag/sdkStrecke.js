@@ -9,7 +9,7 @@
 
 import {
   BEITRAG_VORBEHALT, ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, SDK_NAME, TEIL_3_TITEL, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
-  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS, UNTERLAGEN_HEALIO,
+  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
 import {
@@ -23,9 +23,26 @@ export const SDK_HINWEIS_NACH_EINGANG = 'Die SDK prüft deine Angaben nach Einga
 // (19.11.2026, gleiche Art wie am Datenschutz-Haken im Schritt „Deine Daten“).
 export const DATENSCHUTZ_LINK = Object.freeze({ label: 'Datenschutzerklärung', href: '/datenschutz' });
 // Unterlagen von Healio wie in der Strecke der Bayerischen und der UKV (19.11.2026).
+// Paket 1 (19.11.2026): Nur noch Unterlagen mit Datei. Hinweis zur Tarifauswahl,
+// Beratungsverzicht und Auftrag stehen im Wortlaut in „Mein Antrag“ (PDF nach
+// dem Absenden), deshalb hier kein Name ohne Datei mehr.
 export const UNTERLAGEN_VON_HEALIO = Object.freeze({
-  von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))],
+  von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }],
 });
+export const MEIN_ANTRAG_HINWEIS = 'Deinen ganzen Antrag mit allen Angaben und Erklärungen bekommst du direkt nach dem Absenden als PDF „Mein Antrag“. Darin stehen auch der Hinweis zur Tarifauswahl, dein Beratungsverzicht und dein Auftrag an Healio im Wortlaut.';
+// Text 10 der Prüfseite endet mit „Den vollständigen Maklervertrag habe ich als
+// PDF erhalten.“ Eine solche Datei gibt es nicht (Abgleich 19.11.2026); in der
+// Maske steht stattdessen, was der Kunde wirklich bekommt.
+export const VOLLMACHT_PDF_ALT = 'Den vollständigen Maklervertrag habe ich als PDF erhalten.';
+export const VOLLMACHT_PDF_NEU = 'Diesen Auftrag bekomme ich mit allen meinen Angaben und Erklärungen nach dem Absenden als PDF „Mein Antrag“.';
+export const vollmachtMitPdf = (text) => String(text).replace(VOLLMACHT_PDF_ALT, VOLLMACHT_PDF_NEU);
+// Datenschutzhinweise der SDK: im Original im Fuß jeder Seite (Abgleich 19.11.2026).
+export const SDK_DATENSCHUTZ = Object.freeze({ label: 'Datenschutzhinweise der SDK', href: 'https://www.sdk.de/datenschutz' });
+// Vor dem Absenden bestätigt der Kunde den Satz aus dem Bestätigungsdialog der
+// SDK selbst (Schritt 9, Wortlaut aus der Erfassung). Der Einreicher klickt
+// „Kostenpflichtig Beantragen“ nur, wenn diese Bestätigung vorliegt.
+export const BESTAETIGUNG_VORSPANN = 'Diesen Satz bestätigst du gegenüber der SDK. Healio klickt danach in deinem Auftrag auf „Kostenpflichtig Beantragen“.';
+const JA_NEIN = [{ id: 'ja', label: 'Ja', original: 'true' }, { id: 'nein', label: 'Nein', original: 'false' }];
 
 // strecke: 'sdkAmbulant' | 'sdkStationaer'; vollmacht: Text 10 für dieses Produkt;
 // auswahl: Text 8, Hinweis auf die eingeschränkte Auswahl dieses Produkts.
@@ -38,10 +55,13 @@ export function sdkTeile({
   const beratung = f(6, 'hinweis_beratung');
   const sepa = f(7, 'sepaMandatConfirmation');
   const kontoinhaber = f(7, 'orderIbanName');
+  const werbung = f(4, 'declarationOfConsentAdvertising');
+  const versicherungsnehmer = f(4, 'policyHolderIsEqualInsuredPerson');
+  const dialog = schritte.find((eintrag) => eintrag.schritt === 9)?.felder.find((feld) => /^Hiermit bestätige ich/.test(feld.wortlaut || ''));
 
   return {
     versicherer: {
-      id: 'sdk', name: SDK_NAME, kurz: 'SDK', beiDer: 'der SDK',
+      id: 'sdk', name: SDK_NAME, kurz: 'SDK', beiDer: 'der SDK', datenschutz: SDK_DATENSCHUTZ,
     },
     person: {
       // Original Schritt 1: Geschlecht Männlich/Weiblich (MALE/FEMALE).
@@ -87,13 +107,19 @@ export function sdkTeile({
         id: 'erklaerungen',
         teil: 'Erklärungen',
         eintraege: [
+          // Original Schritt 4: mit „Ja“ vorbelegt und gesperrt, sichtbar (Paket 1 Punkt 11).
+          {
+            art: 'fest', original: versicherungsnehmer.id, originalSchritt: 4, titel: 'Versicherungsnehmer', text: versicherungsnehmer.wortlaut, optionen: JA_NEIN, wert: 'ja',
+            hinweis: 'Das steht fest auf Ja, denn online beantragst du den Schutz für dich selbst.',
+          },
           hakenAus(f(4, 'saveConfirmationtext'), { schritt: 4, titel: 'Vorvertragliche Anzeigepflicht', links: [{ label: 'Wichtige Informationen für den Antragssteller', href: WICHTIGE_INFORMATIONEN }] }),
           hakenAus(f(4, 'declarationOfConsentTermsOfContract'), { schritt: 4, titel: 'Vertragsunterlagen' }),
           hakenAus(f(4, 'declarationOfConsentAndReleaseFromConfidentiality'), { schritt: 4, titel: 'Datenschutz und Schweigepflichtentbindung' }),
-          // Original: Ja oder Nein ist Pflicht zu wählen. Healio: leer und freiwillig, ohne Haken geht „false“ an das Original.
-          hakenAus(f(4, 'declarationOfConsentAdvertising'), {
-            schritt: 4, titel: 'Informationen der SDK', pflicht: false, freiwilligText: 'Freiwillig. Dein Antrag geht auch ohne diesen Haken.',
-          }),
+          // Original: Ja oder Nein ist Pflicht zu wählen, nichts vorbelegt (Paket 1 Punkt 6).
+          {
+            art: 'janein', key: werbung.id, original: werbung.id, originalSchritt: 4, titel: 'Informationen der SDK', text: werbung.wortlaut, optionen: JA_NEIN, pflicht: true,
+            hinweis: 'Dein Antrag geht mit Ja genauso wie mit Nein.', fehler: 'Bitte wähle Ja oder Nein.',
+          },
         ],
       },
       {
@@ -107,10 +133,10 @@ export function sdkTeile({
             art: 'haken', key: 'verzicht', titel: 'Verzicht auf Beratung durch Healio', warnung: TEXT_9_HINWEIS, haken: TEXT_9_HAKEN, pflicht: true,
           },
           {
-            art: 'unterlagen', key: 'unterlagenHealio', titel: 'Unterlagen von Healio', gruppen: [UNTERLAGEN_VON_HEALIO], pflicht: false,
+            art: 'unterlagen', key: 'unterlagenHealio', titel: 'Unterlagen von Healio', gruppen: [UNTERLAGEN_VON_HEALIO], text: MEIN_ANTRAG_HINWEIS, pflicht: false,
           },
           {
-            art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: vollmachtKurz || ERKLAERUNG_KURZ.vollmacht, volltext: [['p', vollmacht]], dokument: 'Maklervertrag', haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
+            art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: vollmachtKurz || ERKLAERUNG_KURZ.vollmacht, volltext: [['p', vollmachtMitPdf(vollmacht)]], haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
           },
           {
             art: 'haken',
@@ -126,10 +152,18 @@ export function sdkTeile({
       },
     ],
     zusammenfassung: { titel: TEIL_3_TITEL },
-    absenden: { satz: TEXT_12_KNOPF, vorbehalt: BEITRAG_VORBEHALT, knopf: KNOPF_BEANTRAGEN },
-    // Verdeckte Antworten, die das Original selbst setzt (nie angezeigt).
+    absenden: {
+      satz: TEXT_12_KNOPF,
+      vorbehalt: BEITRAG_VORBEHALT,
+      knopf: KNOPF_BEANTRAGEN,
+      bestaetigung: {
+        key: 'angabenBestaetigt', original: 'bestaetigungsdialog', originalSchritt: 9, titel: 'Bestätigung für die SDK', vorspann: BESTAETIGUNG_VORSPANN, text: dialog.wortlaut, fehler: 'Bitte bestätige diesen Satz, bevor du absendest.',
+      },
+    },
+    // Verdeckte Antworten, die das Original selbst setzt (nie angezeigt). Die
+    // Frage zum Versicherungsnehmer steht seit 19.11.2026 sichtbar unter
+    // „Erklärungen“ (art 'fest').
     verdeckt: [
-      { schritt: 4, feld: 'policyHolderIsEqualInsuredPerson', wert: 'true' },
       { schritt: 4, feld: 'confirmDataProtection', wert: 'true', hinweis: 'Vermittlererklärung der ObjectiveIT GmbH, setzt die Seite selbst (Frank prüfen)' },
     ],
   };
@@ -155,17 +189,28 @@ export function sdkDatenZuordnung(definition, daten) {
   const f = daten.formular || {};
   const anrede = definition.person.anreden.find((eintrag) => eintrag.id === daten.anrede);
   const ja = (key) => (daten.erklaerungen?.[key] === true ? 'true' : 'false');
+  // Ja/Nein-Erklärung: nur eine gewählte Antwort zählt, sonst null (fehlt).
+  const wahl = (eintrag) => eintrag.optionen.find((option) => option.id === daten.erklaerungen?.[eintrag.key])?.original ?? null;
+  const wertDer = (eintrag) => {
+    if (eintrag.art === 'fest') return eintrag.optionen.find((option) => option.id === eintrag.wert)?.original ?? null;
+    if (eintrag.art === 'janein') return wahl(eintrag);
+    return ja(eintrag.key);
+  };
+  const schluss = definition.absenden?.bestaetigung;
   const liste = [
     { schritt: 1, feld: 'geschlecht', wert: anrede?.original || null },
     { schritt: 2, feld: 'firstName', wert: String(f.vorname || '').trim() },
     { schritt: 2, feld: 'lastName', wert: String(f.nachname || '').trim() },
     { schritt: 2, feld: 'acknowledge', wert: daten.bestaetigungen?.acknowledge === true ? 'true' : 'false' },
-    ...definition.erklaerungen.flatMap((teil) => teil.eintraege).filter((e) => e.original && e.originalSchritt).map((e) => ({ schritt: e.originalSchritt, feld: e.original, wert: ja(e.key) })),
+    ...definition.erklaerungen.flatMap((teil) => teil.eintraege).filter((e) => e.original && e.originalSchritt).map((e) => ({
+      schritt: e.originalSchritt, feld: e.original, wert: wertDer(e), ...(e.art === 'fest' ? { gesperrt: true } : {}),
+    })),
     ...definition.person.anschrift.map((feld) => ({ schritt: 7, feld: feld.original, wert: feld.gesperrt ? feld.wert : String(f[feld.id] || '').trim() })),
     { schritt: 7, feld: 'orderIbanName', wert: [f.vorname, f.nachname].map((teil) => String(teil || '').trim()).join(' ') },
     { schritt: 7, feld: 'orderIban', wert: String(daten.iban || '').replace(/\s/g, '').toUpperCase() },
     { schritt: 7, feld: 'orderBankName', wert: String(daten.bankname || '').trim() },
     { schritt: 7, feld: 'sepaMandatConfirmation', wert: ja('sepaMandatConfirmation') },
+    ...(schluss ? [{ schritt: schluss.originalSchritt, feld: schluss.original, wert: ja(schluss.key) }] : []),
     ...definition.verdeckt.map((eintrag) => ({ ...eintrag, verdeckt: true })),
   ];
   return liste;

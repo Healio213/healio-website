@@ -22,7 +22,7 @@ export function fehlerErklaerungen(teil, daten) {
   teil.eintraege.forEach((eintrag) => {
     if (!eintrag.key || !eintrag.pflicht) return;
     const wert = daten.erklaerungen[eintrag.key];
-    if (eintrag.art === 'wahl') {
+    if (eintrag.art === 'wahl' || eintrag.art === 'janein') {
       if (!eintrag.optionen.some((option) => option.id === wert)) fehler.push({ key: eintrag.key, text: eintrag.fehler });
     } else if (wert !== true) fehler.push({ key: eintrag.key, text: HAKEN_FEHLT });
   });
@@ -149,6 +149,49 @@ export default function SchrittErklaerungen({
             </Karte>
           );
         }
+        // Feste Antwort des Originals (z. B. Versicherungsnehmer: Ja, gesperrt), sichtbar wie dort.
+        if (eintrag.art === 'fest') {
+          return (
+            <Karte key={eintrag.original} titel={eintrag.titel} data-fest={eintrag.original}>
+              <Gruppe legend={eintrag.text} hint={eintrag.hinweis}>
+                <div className="grid grid-cols-2 gap-2">
+                  {eintrag.optionen.map((option) => (
+                    <OptionCard key={option.id} name={`fest-${eintrag.original}`} value={option.id} checked={eintrag.wert === option.id} onChange={() => {}} disabled kompakt>
+                      <span className="font-bold">{option.label}</span>
+                    </OptionCard>
+                  ))}
+                </div>
+              </Gruppe>
+            </Karte>
+          );
+        }
+        // Ja/Nein-Erklärung des Originals: Pflicht, nichts vorbelegt (z. B. Werbeeinwilligung der SDK).
+        if (eintrag.art === 'janein') {
+          const text = fehler[eintrag.key];
+          return (
+            <Karte key={eintrag.key} titel={eintrag.titel} data-janein={eintrag.key}>
+              <Gruppe legend={eintrag.text} hint={eintrag.hinweis} fehlerId={`fehler-${eintrag.key}`} error={text}>
+                <div className="grid grid-cols-2 gap-2">
+                  {eintrag.optionen.map((option, stelle) => (
+                    <OptionCard
+                      key={option.id}
+                      id={stelle === 0 ? `feld-${eintrag.key}` : undefined}
+                      name={eintrag.key}
+                      value={option.id}
+                      checked={daten.erklaerungen[eintrag.key] === option.id}
+                      onChange={() => setze(eintrag.key, option.id)}
+                      describedBy={text ? `fehler-${eintrag.key}` : undefined}
+                      invalid={Boolean(text)}
+                      kompakt
+                    >
+                      <span className="font-bold">{option.label}</span>
+                    </OptionCard>
+                  ))}
+                </div>
+              </Gruppe>
+            </Karte>
+          );
+        }
         if (eintrag.art === 'unterlagen') {
           return (
             <Karte key={eintrag.key} titel={eintrag.titel}>
@@ -157,6 +200,7 @@ export default function SchrittErklaerungen({
                 <span>Alle Vertragsunterlagen und Produktinformationen bekommst du mit der Bestätigung per E-Mail über einen geschützten Link.</span>
               </p>
               <Unterlagen eintrag={eintrag} kontext={kontext} oeffnen={oeffnen} />
+              {eintrag.text && <p className={cx('text-base leading-7 text-home-midnight', TRENNUNG)} data-mein-antrag-hinweis="">{schuetze(eintrag.text)}</p>}
               {eintrag.haken && (
               <Haken feldKey={eintrag.key} checked={daten.erklaerungen[eintrag.key]} onChange={(wert) => setze(eintrag.key, wert)} fehler={fehler[eintrag.key]}>
                 <span className="block font-bold">{eintrag.haken}</span>

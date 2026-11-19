@@ -1,4 +1,5 @@
 import { SDK_ABLAUF, sdkDatenZuordnung, sdkTeile } from './sdkStrecke.js';
+import { LEVELNINE, feldAus } from './levelnine.js';
 
 // Produktdefinition der Antragsmaske ambulant: SDK, Tarife AP5, AP7, AP9, AP1
 // (12.11.2026). Nur Zuordnung: Alle Wortlaute, Tarife, Beiträge und
@@ -92,30 +93,31 @@ const ganzeZahl = (text) => (/^\d{1,3}$/.test(String(text ?? '').trim()) ? Numbe
 export const ORIGINAL_1A = ['G42', 'G43', 'G43A', 'G43B', 'G44', 'G45', 'G46', 'G47', 'G47A', 'G48', 'G49', 'G50', 'G50A', 'G51', 'G53'];
 export const ORIGINAL_1B_1K = ['G54', 'G55', 'G56', 'G57', 'G58', 'G59', 'G60', 'G61', 'G62', 'G63'];
 
-const frage1a = {
-  id: '1a',
-  typ: 'janein',
-  titel: 'Frage 1a',
-  kurz: 'Frage 1a',
-  stamm: { label: 'Frage 1', text: FRAGE_1_TEXT },
-  liste: FRAGE_1A_ITEMS.map((item) => item.label),
-  zuschlagText: `Bei „ja“: je zutreffender Erkrankung ${ZUSCHLAG_PRO_KREUZ_1A} % Beitragszuschlag.`,
-  // Bei „ja“ geht es nicht von selbst weiter: erst ankreuzen, dann „Weiter“.
-  weiterBeiJa: false,
-  folge: [{
-    id: '1a-kreuze',
-    typ: 'mehrfach',
-    bedingung: { frage: '1a', ist: 'ja' },
-    legend: 'Bitte ankreuzen, was zutrifft.',
-    mindestens: 1,
-    fehlerMindestens: 'Bitte kreuze mindestens eine Erkrankung an.',
-    optionen: FRAGE_1A_ITEMS.map((item) => ({
-      id: item.id,
-      label: item.label,
-      wirkung: [{ art: 'zuschlag', prozent: ZUSCHLAG_PRO_KREUZ_1A, grund: item.label.replace(/​/g, '') }],
-    })),
-  }],
-};
+// Frage 1a wie im Original (Paket 1 Punkt 7, 19.11.2026): 15 einzelne
+// Ja/Nein-Fragen G42 bis G53 unter dem Stamm G40, jede Pflicht, nichts
+// vorbelegt, nichts abgeleitet. Wortlaute aus der Erfassung der Strecke.
+const SCHRITT_5 = LEVELNINE.sdkAmbulant.schritte;
+export const FRAGEN_1A_EINZELN = FRAGE_1A_ITEMS.map((item, stelle) => {
+  const feld = feldAus(SCHRITT_5, 5, ORIGINAL_1A[stelle]);
+  return {
+    id: `1a-${item.id}`,
+    typ: 'janein',
+    titel: `Frage 1a, Punkt ${stelle + 1} von ${FRAGE_1A_ITEMS.length}`,
+    kurz: `Frage 1a, Punkt ${stelle + 1}`,
+    ...(stelle === 0 ? { stamm: { label: 'Frage 1', text: FRAGE_1_TEXT } } : { stammAufklappbar: { titel: FRAGE_1_AUFKLAPPEN, text: FRAGE_1_TEXT } }),
+    text: feld.wortlaut,
+    original: { schritt: 5, id: feld.id, werte: { ja: 'true', nein: 'false' } },
+    zuschlagText: `Bei „ja“: ${ZUSCHLAG_PRO_KREUZ_1A} % Beitragszuschlag.`,
+    wirkung: { ja: [{ art: 'zuschlag', prozent: ZUSCHLAG_PRO_KREUZ_1A, grund: item.label.replace(/​/g, '') }] },
+  };
+});
+
+// „ja“, sobald ein Punkt ja ist; „nein“ erst, wenn alle 15 Punkte nein sind.
+function antwort1aAus(antworten) {
+  const werte = FRAGE_1A_ITEMS.map((item) => antworten[`1a-${item.id}`]);
+  if (werte.some((wert) => wert === 'ja')) return 'ja';
+  return werte.every((wert) => wert === 'nein') ? 'nein' : null;
+}
 
 const fragen1bk = FRAGEN_1B_1K.map((frage) => ({
   id: frage.id,
@@ -159,7 +161,9 @@ const ambulant = {
   bereit: true,
   stand: '2026-11-12',
   // Wortlaute ab 12.11.2026 nach der Online-Strecke der SDK (Erfassung Level Nine).
-  textfassung: '2026-11-12-sdk-ambulant-online',
+  // 19.11.2026 (Paket 1): Frage 1a als 15 Einzelfragen, Versicherungsnehmer sichtbar,
+  // Werbeeinwilligung Ja/Nein, Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei.
+  textfassung: '2026-11-19-sdk-ambulant-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, abgeglichen 12.11.2026',
   kennzeile: 'Ambulanter Zusatzschutz der SDK',
   seitentitel: 'Antrag ambulanter Zusatzschutz | Healio',
@@ -205,11 +209,10 @@ const ambulant = {
 
   // Die Online-Strecke hat keinen Vorspann vor den Fragen (der Hinweis zur
   // Anzeigepflicht steht als Haken unter „Erklärungen“).
-  gesundheit: { titel: 'Gesundheitsfragen der SDK', vorspann: null, fragen: [frage1a, ...fragen1bk, frage2] },
+  gesundheit: { titel: 'Gesundheitsfragen der SDK', vorspann: null, fragen: [...FRAGEN_1A_EINZELN, ...fragen1bk, frage2] },
 
   originalFuerVertrag: (daten, { beginn } = {}) => {
     const a = daten.antworten || {};
-    const kreuze = a['1a'] === 'ja' && Array.isArray(a['1a-kreuze']) ? a['1a-kreuze'] : [];
     const iso = (text) => { const t = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(String(text || '')); return t ? `${t[3]}-${t[2]}-${t[1]}` : null; };
     const tf = (wert) => (wert === 'ja' ? 'true' : wert === 'nein' ? 'false' : null);
     return [
@@ -217,7 +220,7 @@ const ambulant = {
       { schritt: 1, feld: 'geburtsdatum', wert: iso(daten.geburtsdatumText) },
       { schritt: 1, feld: 'tarifwahl', wert: daten.tarif ? `SDK${daten.tarif}#` : null },
       ...(daten.unterlagenDienst || []).map((u) => ({ schritt: 3, feld: `downloadLnDocument_${u.id ?? u.name}`, wert: daten.unterlagenGeoeffnet?.[`dienst:${u.id ?? u.name}`] ? 'true' : null })),
-      ...FRAGE_1A_ITEMS.map((item, stelle) => ({ schritt: 5, feld: ORIGINAL_1A[stelle], wert: a['1a'] ? (kreuze.includes(item.id) ? 'true' : 'false') : null })),
+      ...FRAGE_1A_ITEMS.map((item, stelle) => ({ schritt: 5, feld: ORIGINAL_1A[stelle], wert: tf(a[`1a-${item.id}`]) })),
       ...FRAGEN_1B_1K.map((frage, stelle) => ({ schritt: 5, feld: ORIGINAL_1B_1K[stelle], wert: tf(a[frage.id]) })),
       { schritt: 5, feld: 'G0A', wert: String(a['2']?.groesse ?? '') },
       { schritt: 5, feld: 'G0B', wert: String(a['2']?.gewicht ?? '') },
@@ -226,19 +229,28 @@ const ambulant = {
   },
 
   // Telefonweg: Gesundheit im Format von SCHNITTSTELLE.md 3 → Antworten der Maske.
+  // Frage 1a: Einzelantworten übernehmen; aus dem Gespräch nur die genannten
+  // Punkte als „ja“. Ein „nein“ zu allen 15 Punkten wird nicht abgeleitet, der
+  // Kunde beantwortet jeden Punkt selbst (Paket 1 Punkt 7).
   gesundheitAusVertrag: (g = {}) => {
     const antworten = {};
     if (!g) return antworten;
-    if (g.antwort1a === 'ja' || g.antwort1a === 'nein') antworten['1a'] = g.antwort1a;
-    if (g.antwort1a === 'ja' && Array.isArray(g.kreuze1a)) antworten['1a-kreuze'] = [...g.kreuze1a];
+    FRAGE_1A_ITEMS.forEach((item) => {
+      const einzeln = g.einzel1a?.[item.id];
+      if (einzeln === 'ja' || einzeln === 'nein') antworten[`1a-${item.id}`] = einzeln;
+      else if (g.antwort1a === 'ja' && Array.isArray(g.kreuze1a) && g.kreuze1a.includes(item.id)) antworten[`1a-${item.id}`] = 'ja';
+    });
     FRAGEN_1B_1K.forEach((frage) => { if (['ja', 'nein'].includes(g.antworten?.[frage.id])) antworten[frage.id] = g.antworten[frage.id]; });
     if (g.groesse || g.gewicht) antworten['2'] = { groesse: String(g.groesse ?? ''), gewicht: String(g.gewicht ?? '') };
     return antworten;
   },
 
+  // Format des Regelwerks (Dienst rechnet damit den Zuschlag) plus die 15
+  // Einzelantworten (einzel1a), aus denen antwort1a und kreuze1a folgen.
   gesundheitFuerVertrag: (antworten = {}) => ({
-    antwort1a: antworten['1a'] ?? null,
-    kreuze1a: antworten['1a'] === 'ja' && Array.isArray(antworten['1a-kreuze']) ? FRAGE_1A_ITEMS.map((item) => item.id).filter((id) => antworten['1a-kreuze'].includes(id)) : [],
+    antwort1a: antwort1aAus(antworten),
+    kreuze1a: FRAGE_1A_ITEMS.map((item) => item.id).filter((id) => antworten[`1a-${id}`] === 'ja'),
+    einzel1a: Object.fromEntries(FRAGE_1A_ITEMS.map((item) => [item.id, antworten[`1a-${item.id}`] ?? null])),
     antworten: Object.fromEntries(FRAGEN_1B_1K.map((frage) => [frage.id, antworten[frage.id] ?? null])),
     groesse: groesseEingabeBereinigt(antworten['2']?.groesse ?? ''),
     gewicht: gewichtEingabeBereinigt(antworten['2']?.gewicht ?? ''),

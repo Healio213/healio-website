@@ -51,9 +51,12 @@ export function baueSelbstantrag(definition, daten, {
   const erklaerungen = bestaetigungKey ? { [bestaetigungKey]: daten.antworten?.[bestaetigungKey] === true } : {};
   (definition.erklaerungen || []).forEach((teil) => teil.eintraege.forEach((eintrag) => {
     if (!eintrag.key) return;
-    erklaerungen[eintrag.key] = eintrag.art === 'wahl' ? (daten.erklaerungen?.[eintrag.key] ?? null) : daten.erklaerungen?.[eintrag.key] === true;
+    erklaerungen[eintrag.key] = eintrag.art === 'wahl' || eintrag.art === 'janein' ? (daten.erklaerungen?.[eintrag.key] ?? null) : daten.erklaerungen?.[eintrag.key] === true;
   }));
   if (definition.zahlung?.sepa?.key) erklaerungen[definition.zahlung.sepa.key] = daten.erklaerungen?.[definition.zahlung.sepa.key] === true;
+  // Bestätigungssatz vor dem Absenden (SDK: Satz aus dem Bestätigungsdialog, Paket 1 Punkt 5).
+  const schluss = definition.absenden?.bestaetigung?.key;
+  if (schluss) erklaerungen[schluss] = daten.erklaerungen?.[schluss] === true;
   return {
     kanal: SELBSTANTRAG_KANAL,
     sparte: definition.sparte,
@@ -113,6 +116,8 @@ export function bildschirmFuerFeld(pfad) {
     if (zweit === 'formular' || zweit === 'krankenkasse' || zweit === 'gkv') return { bildschirm: 'anschrift', label: 'Anschrift und Kontakt' };
   }
   if (kopf === 'gesundheit') return { bildschirm: 'zusammenfassung', label: 'Gesundheitsfragen' };
+  if (kopf === 'unterlagen') return { bildschirm: 'unterlagenDownload', label: 'Deine Unterlagen' };
+  if (kopf === 'erklaerungen' && zweit === 'angabenBestaetigt') return { bildschirm: 'zusammenfassung', label: 'Bestätigung für die SDK' };
   if (kopf === 'zahlung' || (kopf === 'erklaerungen' && zweit === 'sepa')) return { bildschirm: 'zahlung', label: 'Zahlung und IBAN' };
   if (kopf === 'erklaerungen') return { bildschirm: 'erklaerungen', label: 'Erklärungen' };
   return null;
