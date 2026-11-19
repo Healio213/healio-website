@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Calculator,
+  CheckCircle2,
   ChevronDown,
   Clock,
   Globe2,
@@ -77,6 +78,17 @@ const TEXTE = {
         text: 'Dein Geld wird angelegt und kann wachsen. Auch der Zuwachs wächst dann weiter. Über viele Jahre macht die Verzinsung den größten Unterschied.'
       }
     ],
+    whyBadge: 'Für dich erklärt',
+    whyTitle: 'Was die Betriebsrente für dich tut',
+    why: [
+      { title: 'Eine zweite Rente', text: 'Später bekommst du die gesetzliche Rente. Die Betriebsrente kommt obendrauf. So hast du im Alter mehr Geld zur Verfügung.' },
+      { title: 'Du musst nichts tun', text: 'Dein Arbeitgeber zahlt jeden Monat ein, zusätzlich zu deinem Lohn. Auf deinem Lohnzettel siehst du dafür keinen Abzug.' },
+      { title: 'Das Geld gehört dir', text: 'Der Vertrag läuft auf deinen Namen. Was eingezahlt wurde, wächst über die Jahre weiter.' },
+      { title: 'Du kannst mehr daraus machen', text: 'Wenn du selbst etwas dazulegst, geht das direkt vom Bruttolohn ab. Dadurch zahlst du weniger Steuern und Abgaben. Netto fehlt dir weniger, als du einzahlst.' },
+      { title: 'Im Alter', text: 'Du bekommst das Geld als monatliche Rente oder auf einmal, je nach Vertrag. Ehrlich dazu: Dann fallen Steuern und Beiträge zur Kranken- und Pflegeversicherung an.' }
+    ],
+    whyExampleLabel: 'Ein Beispiel',
+    whyExample: 'Du verdienst 3.200 EUR brutto im Monat. Dann zahlt dein Arbeitgeber 128 EUR im Monat für dich ein, das sind 1.536 EUR im Jahr, ohne dass du etwas tun musst.',
     grossNote: 'Bruttolohn heißt: dein Lohn vor Steuern und Abgaben.',
     calcBadge: 'Dein Rechner',
     calcTitle: 'Rechne selbst nach',
@@ -119,11 +131,11 @@ const TEXTE = {
     faq: [
       {
         q: 'Was ist eine Betriebsrente?',
-        a: 'Eine Betriebsrente ist eine Rente zusätzlich zur gesetzlichen Rente. Während du arbeitest, zahlt dein Arbeitgeber ein, und wenn du möchtest, auch du. Im Rentenalter bekommst du das Geld als monatliche Rente oder auf einmal, je nach Vertrag.'
+        a: 'Eine Betriebsrente ist eine Rente über deinen Arbeitgeber, zusätzlich zur gesetzlichen Rente. Während du arbeitest, wird für dich eingezahlt. Wie das genau funktioniert, steht weiter oben auf dieser Seite.'
       },
       {
         q: 'Kostet mich das etwas?',
-        a: 'Den Beitrag von 4 % zahlt dein Arbeitgeber. Das kostet dich nichts. Wenn du selbst etwas dazulegst, geht das von deinem Bruttolohn ab. Weil du darauf weniger Steuern und Abgaben zahlst, sinkt dein Nettolohn weniger, als du einzahlst.'
+        a: 'Nein. Den Beitrag von 4 % zahlt dein Arbeitgeber. Nur wenn du selbst etwas dazulegst, geht das von deinem Bruttolohn ab. Die Beratung ist für dich kostenlos.'
       },
       {
         q: 'Was passiert, wenn ich den Arbeitgeber wechsle?',
@@ -167,6 +179,17 @@ const TEXTE = {
         text: 'Your money is invested and can grow. The growth then keeps growing too. Over many years, the rate of return makes the biggest difference.'
       }
     ],
+    whyBadge: 'Explained for you',
+    whyTitle: 'What your company pension does for you',
+    why: [
+      { title: 'A second pension', text: 'Later on you will get your state pension. Your company pension comes on top. So you have more money when you are older.' },
+      { title: 'You do not have to do anything', text: 'Your employer pays in every month, on top of your wages. You will not see anything taken off your payslip for it.' },
+      { title: 'The money is yours', text: 'The contract is in your name. What has been paid in keeps growing over the years.' },
+      { title: 'You can make more of it', text: 'If you add something yourself, it comes straight out of your gross pay. That means you pay less tax and fewer deductions. Your take-home pay goes down by less than you pay in.' },
+      { title: 'When you retire', text: 'You get the money as a monthly pension or all at once, depending on the contract. To be honest: tax and contributions to health and long-term care insurance are due then.' }
+    ],
+    whyExampleLabel: 'An example',
+    whyExample: 'You earn 3.200 EUR gross a month. Your employer then pays 128 EUR a month for you. That is 1.536 EUR a year, without you having to do anything.',
     grossNote: 'Gross pay means your pay before tax and deductions.',
     calcBadge: 'Your calculator',
     calcTitle: 'Do the maths yourself',
@@ -209,11 +232,11 @@ const TEXTE = {
     faq: [
       {
         q: 'What is a company pension?',
-        a: 'A company pension is paid on top of your state pension. While you work, your employer pays in, and you can too if you want. When you retire, you get the money as a monthly pension or all at once, depending on the contract.'
+        a: 'A company pension is a pension through your employer, on top of your state pension. While you work, money is paid in for you. You can read how it works further up on this page.'
       },
       {
         q: 'Does it cost me anything?',
-        a: 'Your employer pays the 4 % contribution. It costs you nothing. If you add money yourself, it comes out of your gross pay. Because you pay less tax and fewer deductions on it, your take-home pay goes down by less than you pay in.'
+        a: 'No. Your employer pays the 4 % contribution. Only if you add something yourself does it come out of your gross pay. The advice is free for you.'
       },
       {
         q: 'What happens if I change jobs?',
@@ -257,6 +280,17 @@ const TEXTE = {
         text: 'Paran yatırıma yönlendirilir ve büyüyebilir. Büyüyen kısım da büyümeye devam eder. Uzun yıllar içinde en büyük farkı getiri oranı yaratır.'
       }
     ],
+    whyBadge: 'Senin için açıkladık',
+    whyTitle: 'İşyeri emekliliği senin için ne yapar',
+    why: [
+      { title: 'İkinci bir emeklilik', text: 'İleride devlet emekliliğini alacaksın. İşyeri emekliliği bunun üstüne gelir. Böylece yaşlılıkta elinde daha fazla para olur.' },
+      { title: 'Bir şey yapmana gerek yok', text: 'İşverenin her ay maaşına ek olarak para yatırır. Maaş bordronda bunun için bir kesinti görmezsin.' },
+      { title: 'Para senindir', text: 'Sözleşme senin adına yapılır. Yatırılan para yıllar içinde büyümeye devam eder.' },
+      { title: 'Daha fazlasını yapabilirsin', text: 'Kendin bir miktar eklersen, bu tutar doğrudan brüt maaşından kesilir. Böylece daha az vergi ve kesinti ödersin. Net maaşından, yatırdığın tutardan daha azı eksilir.' },
+      { title: 'Emeklilikte', text: 'Parayı sözleşmeye göre aylık emekli maaşı olarak ya da bir seferde alırsın. Açıkça söyleyelim: O zaman vergi ile sağlık ve bakım sigortası primleri ödenir.' }
+    ],
+    whyExampleLabel: 'Bir örnek',
+    whyExample: 'Ayda 3.200 EUR brüt kazanıyorsun. O zaman işverenin senin için ayda 128 EUR yatırır. Bu, yılda 1.536 EUR eder ve senin bir şey yapmana gerek yoktur.',
     grossNote: 'Brüt maaş, vergiler ve kesintilerden önceki maaşındır.',
     calcBadge: 'Hesaplayıcın',
     calcTitle: 'Kendin hesapla',
@@ -299,11 +333,11 @@ const TEXTE = {
     faq: [
       {
         q: 'İşyeri emekliliği (Betriebsrente) nedir?',
-        a: 'Devlet emekliliğine ek olarak ödenen bir emekliliktir. Sen çalışırken işverenin para yatırır, istersen sen de yatırabilirsin. Emekli olunca bu parayı sözleşmeye göre aylık emekli maaşı olarak ya da bir seferde alırsın.'
+        a: 'İşyeri emekliliği, devlet emekliliğine ek olarak işverenin üzerinden yapılan bir emekliliktir. Sen çalışırken senin için para yatırılır. Nasıl işlediğini bu sayfanın yukarısında okuyabilirsin.'
       },
       {
         q: 'Bunun bana bir maliyeti var mı?',
-        a: '%4’lük katkıyı işverenin öder. Bu sana hiçbir şeye mal olmaz. Kendin bir miktar eklersen, bu tutar brüt maaşından kesilir. Bu tutar için daha az vergi ve kesinti ödediğin için net maaşın, yatırdığın tutardan daha az düşer.'
+        a: 'Hayır. %4’lük katkıyı işverenin öder. Sadece kendin bir miktar eklersen, bu tutar brüt maaşından kesilir. Danışmanlık senin için ücretsiz.'
       },
       {
         q: 'İşverenimi değiştirirsem ne olur?',
@@ -347,6 +381,17 @@ const TEXTE = {
         text: 'Twoje pieniądze są inwestowane i mogą rosnąć. Przyrost też dalej rośnie. Przez wiele lat największą różnicę robi oprocentowanie.'
       }
     ],
+    whyBadge: 'Wyjaśniamy dla ciebie',
+    whyTitle: 'Co daje ci emerytura pracownicza',
+    why: [
+      { title: 'Druga emerytura', text: 'Później dostaniesz emeryturę państwową. Emerytura pracownicza dochodzi do niej dodatkowo. Dzięki temu na starość masz więcej pieniędzy.' },
+      { title: 'Nie musisz nic robić', text: 'Twój pracodawca co miesiąc wpłaca pieniądze, dodatkowo do twojej pensji. Na pasku wypłaty nie zobaczysz z tego powodu żadnego potrącenia.' },
+      { title: 'Pieniądze należą do ciebie', text: 'Umowa jest zawarta na twoje nazwisko. To, co zostało wpłacone, dalej rośnie przez lata.' },
+      { title: 'Możesz zrobić z tego więcej', text: 'Jeśli dołożysz coś sam, kwota jest pobierana od razu z wynagrodzenia brutto. Dzięki temu płacisz mniej podatków i składek. Netto brakuje ci mniej, niż wpłacasz.' },
+      { title: 'Na emeryturze', text: 'Dostajesz pieniądze co miesiąc albo jednorazowo, zależnie od umowy. Uczciwie mówiąc: wtedy płaci się podatek i składki na ubezpieczenie zdrowotne i pielęgnacyjne.' }
+    ],
+    whyExampleLabel: 'Przykład',
+    whyExample: 'Zarabiasz 3.200 EUR brutto miesięcznie. Wtedy twój pracodawca wpłaca za ciebie 128 EUR miesięcznie, czyli 1.536 EUR rocznie, a ty nie musisz nic robić.',
     grossNote: 'Brutto to twoje wynagrodzenie przed podatkami i składkami.',
     calcBadge: 'Twój kalkulator',
     calcTitle: 'Policz sam',
@@ -389,11 +434,11 @@ const TEXTE = {
     faq: [
       {
         q: 'Czym jest emerytura pracownicza (Betriebsrente)?',
-        a: 'To emerytura dodatkowa do emerytury państwowej. W czasie pracy wpłaca na nią twój pracodawca, a jeśli chcesz, także ty. Na emeryturze dostajesz te pieniądze co miesiąc albo jednorazowo, zależnie od umowy.'
+        a: 'To emerytura przez twojego pracodawcę, dodatkowo do emerytury państwowej. W czasie pracy wpłacane są za ciebie pieniądze. Jak to działa, przeczytasz wyżej na tej stronie.'
       },
       {
         q: 'Czy to mnie coś kosztuje?',
-        a: 'Wpłatę 4 % płaci twój pracodawca. To nic cię nie kosztuje. Jeśli dołożysz coś sam, kwota jest pobierana z wynagrodzenia brutto. Ponieważ płacisz od niej mniej podatków i składek, twoja pensja netto spada mniej, niż wynosi wpłata.'
+        a: 'Nie. Wpłatę 4 % płaci twój pracodawca. Tylko jeśli dołożysz coś sam, kwota jest pobierana z wynagrodzenia brutto. Doradztwo jest dla ciebie bezpłatne.'
       },
       {
         q: 'Co się stanie, gdy zmienię pracodawcę?',
@@ -549,6 +594,31 @@ const FallenAnkerPage = () => {
               ))}
             </div>
             <p className="text-center text-slate-500 mt-8">{t.grossNote}</p>
+          </div>
+        </section>
+
+        {/* WAS DIE BETRIEBSRENTE FÜR DICH TUT */}
+        <section className="py-16 lg:py-24 bg-healio-light/50" data-testid="fa-why">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <SectionBadge icon={Sparkles}>{t.whyBadge}</SectionBadge>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 text-balance">{t.whyTitle}</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+              {t.why.map((block) => (
+                <div key={block.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="flex items-center gap-2 text-lg font-semibold text-slate-900 mb-2">
+                    <CheckCircle2 className="w-5 h-5 shrink-0 text-[#25c990]" />
+                    {block.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">{block.text}</p>
+                </div>
+              ))}
+              <div className="rounded-2xl bg-slate-900 text-white p-6 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#25c990] mb-2">{t.whyExampleLabel}</p>
+                <p className="leading-relaxed text-white/90" data-testid="fa-why-beispiel">{t.whyExample}</p>
+              </div>
+            </div>
           </div>
         </section>
 
