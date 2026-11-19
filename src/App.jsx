@@ -60,6 +60,8 @@ const HeilberufePraxisMaterialPage = React.lazy(() => import('@/pages/Heilberufe
 const ZahnaerztePraxisMaterialPage = React.lazy(() => import('@/pages/ZahnaerztePraxisMaterialPage'));
 const HeilberufeVorsorgePage = React.lazy(() => import('@/pages/HeilberufeVorsorgePage'));
 const LebenshilfePage = React.lazy(() => import('@/pages/LebenshilfePage'));
+const FallenAnkerPage = React.lazy(() => import('@/pages/FallenAnkerPage'));
+const TabeaPage = React.lazy(() => import('@/pages/TabeaPage'));
 const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage'));
 const KontaktPage = React.lazy(() => import('@/pages/KontaktPage'));
 const PotenzialanalysePage = React.lazy(() => import('@/pages/PotenzialanalysePage'));
@@ -271,6 +273,8 @@ function App() {
               <Route path="heilberufe-vorsorge" element={<HeilberufeVorsorgePage />} />
               <Route path="heilberufe-vorsorge/praxis-material" element={<HeilberufePraxisMaterialPage />} />
               <Route path="lebenshilfe" element={<LebenshilfePage />} />
+              <Route path="fallen-anker" element={<FallenAnkerPage />} />
+              <Route path="tabea" element={<TabeaPage />} />
               <Route path="heilpraktiker-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="osteopathen-vorsorge" element={<Navigate to="/heilberufe-vorsorge" replace />} />
               <Route path="praxis-absicherung" element={<Navigate to="/heilberufe-vorsorge" replace />} />

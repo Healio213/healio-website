@@ -11,6 +11,8 @@ import HealioAwardsRow from '@/components/sections/shared/HealioAwardsRow';
 import AmbulantAufEinenBlick from '@/components/sections/ambulant/AmbulantAufEinenBlick';
 import AmbulantDreiSchritte from '@/components/sections/ambulant/AmbulantDreiSchritte';
 import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
+import KernfeldAnlassKarte from '@/components/sections/shared/KernfeldAnlassKarte';
+import { ANLAESSE as AMBULANT_ANLAESSE } from '@/content/ambulantAnlaesse/gemeinsam';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -75,6 +77,12 @@ const AmbulantPage = () => {
         <div className="order-1 md:contents">
           <AmbulantAufEinenBlick fromBonusTopic={fromBonusTopic} />
         </div>
+        {/* Einstieg auf die Anlassseite Osteopathie, nur auf der deutschen Hauptseite. */}
+        {pathname === '/ambulant' && (
+          <div className="order-2 md:contents">
+            <KernfeldAnlassKarte feld="ambulant" anlass={AMBULANT_ANLAESSE[0]} />
+          </div>
+        )}
         {/* Frank 10.10.: Film unter dem Einstieg, vor Siegeln und Karten. */}
         <div className="order-2 md:contents">
           <AmbulantExplainerVideo />

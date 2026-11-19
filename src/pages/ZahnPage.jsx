@@ -38,6 +38,8 @@ import useDesktopLayout from '@/hooks/useDesktopLayout';
 import { useTranslation } from 'react-i18next';
 import { trackMetaRechnerStart } from '@/lib/meta-pixel';
 import { ZAHN_WEITERLESEN } from '@/content/ratgeber/zahnWeiterlesen';
+import KernfeldAnlassKarte from '@/components/sections/shared/KernfeldAnlassKarte';
+import { ANLAESSE as ZAHN_ANLAESSE } from '@/content/zahnAnlaesse/gemeinsam';
 
 // Zwei Zahn-Wege seit Franks Entscheidung vom 05.10.2026: UKV ZahnPRIVAT für
 // alle Situationen ohne angeratene Behandlung (auch 1 bis 3 fehlende Zähne),
@@ -263,6 +265,9 @@ const ZahnPage = () => {
         <HealioAwardsRow size="large" productSet="zahn" mobileWithIkk className="order-[-1] md:order-none" />
 
         <DentalHighlightCards />
+
+        {/* Einstieg auf die Anlassseite, nur deutsch (die Seite gibt es nicht auf Englisch). */}
+        {lang === 'de' && <KernfeldAnlassKarte feld="zahn" anlass={ZAHN_ANLAESSE[0]} />}
 
         <DentalZahnCheck />
 

@@ -18,6 +18,8 @@ import SceneHero, { sceneBelow, scenePrimaryButtonClass, sceneSecondaryButtonCla
 import { getPregnancyOnwardPath } from '@/lib/pregnancyBonus';
 import { buildSdkUrl } from '@/lib/sdk-url';
 import { createFAQSchema } from '@/lib/createSchemaMarkup';
+import KernfeldAnlassKarte from '@/components/sections/shared/KernfeldAnlassKarte';
+import { ANLAESSE as SCHWANGERSCHAFT_ANLAESSE } from '@/content/schwangerschaftAnlaesse/gemeinsam';
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-home-midnight';
 const primary = `inline-flex min-h-[48px] items-center justify-center rounded-full bg-home-mint px-7 py-3 text-center font-semibold text-home-midnight hover:bg-home-mint-active ${focus}`;
@@ -346,6 +348,9 @@ export default function BenefitFunnelPage() {
             ))}
           </MobileSwipeRow>
         </section>
+
+        {/* Einstieg auf die Anlassseite Baby geplant, direkt nach dem ersten Abschnitt. */}
+        <KernfeldAnlassKarte feld="schwangerschaft" anlass={SCHWANGERSCHAFT_ANLAESSE[0]} />
 
         <PregnancyCoverageComparison />
 
