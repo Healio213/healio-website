@@ -153,7 +153,7 @@ export const article = {
       heading: 'Wie ist das bei der Zahnzusatzversicherung?',
       blocks: [
         { type: 'paragraph', text: 'Auch hier fragt der Antrag nach deiner Vorgeschichte. Häufig geht es um fehlende Zähne, laufende oder angeratene Behandlungen und bestimmte Vorerkrankungen. Bei der UKV ZahnPRIVAT haben die Fragen jeweils eigene Zeiträume. Bei 1 bis 3 fehlenden Zähnen prüft die UKV die Aufnahme mit Zuschlag je Zahn. Selbst bei Parodontitis innerhalb der letzten 2 Jahre gibt es die Annahme mit Ausschluss nur für Parodontose-Behandlungen statt Ablehnung.' },
-        { type: 'paragraph', text: 'Eine Behandlung, die in den letzten 2 Jahren angeraten wurde oder schon läuft, ist im normalen Zahntarif nicht versichert. Für solche Fälle ohne fehlenden Zahn gibt es den Baustein ZAHN Sofort der Bayerischen, wenn der Abschluss vor der Rechnung erfolgt. Annahme und Leistungsumfang werden im Antrag geprüft.' },
+        { type: 'paragraph', text: 'Eine Behandlung, die in den letzten 2 Jahren angeraten wurde oder schon läuft, ist im normalen Zahntarif nicht versichert. Für solche Fälle ohne fehlenden Zahn gibt es den Baustein ZAHN Sofort der Bayerischen, wenn der Versicherungsbeginn vor der Rechnung liegt. Annahme und Leistungsumfang werden im Antrag geprüft.' },
         { type: 'segments', segments: [
           { text: 'Mehr dazu im Ratgeber ' },
           { text: 'Zahnzusatzversicherung bei laufender Behandlung', to: '/ratgeber/zahnzusatzversicherung-laufende-behandlung' },

@@ -263,7 +263,7 @@ export const article = {
           heading: 'Ehrlich gesagt',
           items: [
             { lead: 'Ohne Wartezeit heißt nicht ohne Grenzen.', text: 'Die Zahnstaffel begrenzt die Erstattung in den ersten drei Kalenderjahren, bei Unfall gilt sie nicht.' },
-            { lead: 'Angeratenes zahlt auch die UKV nicht.', text: 'Was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft, ist nicht versichert. Für solche Fälle gibt es den Baustein ZAHN Sofort der Bayerischen, der vor der Rechnung abgeschlossen sein muss.' },
+            { lead: 'Angeratenes zahlt auch die UKV nicht.', text: 'Was in den letzten 2 Jahren angeraten wurde, aktuell beabsichtigt ist oder schon läuft, ist nicht versichert. Für solche Fälle gibt es den Baustein ZAHN Sofort der Bayerischen, dessen Versicherungsbeginn vor der Rechnung liegen muss.' },
             { lead: 'Hier steht kein Beitrag.', text: 'Er hängt unter anderem von Alter, Tarif und Leistungsstufe ab. Deinen konkreten Beitrag siehst du im Tarifrechner.' },
             { lead: 'Verbindlich entscheidet die UKV.', text: 'Annahme und Leistungsumfang prüft sie nach den Angaben im Antrag.' },
           ],

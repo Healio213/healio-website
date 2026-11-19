@@ -17,7 +17,7 @@
  *     (Erstattung 75/100 einschließlich Kassenleistung, Zahnstaffel, keine
  *     Wartezeiten, Zuschläge 6,10/9,00/10,90 EUR, 2-Jahres-Regel, ZAHN Sofort
  *     750 EUR je Kalenderjahr, insgesamt 1.500 EUR, 29,90 EUR monatlich für 24
- *     Monate, Abschluss vor der Rechnung, keine fehlenden Zähne). /zahn nennt
+ *     Monate, Versicherungsbeginn vor der Rechnung, keine fehlenden Zähne). /zahn nennt
  *     keine Beiträge nach Alter; die Beitragstabelle stammt deshalb aus der
  *     Primärquelle UKV "Unsere Produkte im Überblick", gültig ab 1. Mai 2026,
  *     S. 22 bis 25 (Materialnummer 322611, Abruf 10.10.2026, SHA-256
@@ -142,7 +142,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Eine Behandlung, die in den letzten 2 Jahren empfohlen wurde, aktuell beabsichtigt ist oder schon läuft, ist bei der UKV nicht versichert. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit Risikozuschlag je Zahn auf, ab 4 fehlenden Zähnen ist keine Aufnahme möglich. ZAHN Sofort der Bayerischen leistet bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, auch für eine schon angeratene Behandlung. Dafür muss der Abschluss vor der Rechnung liegen, die Behandlung darf weder abgeschlossen noch abgerechnet sein, und es dürfen keine Zähne fehlen. Wartezeiten gibt es laut Bayerischer in keinem ihrer drei Zahntarife. Dafür begrenzt eine Leistungsstaffel die Erstattung des Zahntarifs in den ersten vier Kalenderjahren. Was ZAHN Sofort zahlt, wird darauf nicht angerechnet."
+          "text": "Eine Behandlung, die in den letzten 2 Jahren empfohlen wurde, aktuell beabsichtigt ist oder schon läuft, ist bei der UKV nicht versichert. Bei 1 bis 3 fehlenden Zähnen nimmt die UKV mit Risikozuschlag je Zahn auf, ab 4 fehlenden Zähnen ist keine Aufnahme möglich. ZAHN Sofort der Bayerischen leistet bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR, auch für eine schon angeratene Behandlung. Dafür muss der Versicherungsbeginn vor der Rechnung liegen, die Behandlung darf weder abgeschlossen noch abgerechnet sein, und es dürfen keine Zähne fehlen. Wartezeiten gibt es laut Bayerischer in keinem ihrer drei Zahntarife. Dafür begrenzt eine Leistungsstaffel die Erstattung des Zahntarifs in den ersten vier Kalenderjahren. Was ZAHN Sofort zahlt, wird darauf nicht angerechnet."
         },
         {
           "type": "paragraph",
@@ -324,7 +324,7 @@ export const article = {
               "Krone in den letzten 2 Jahren angeraten, Rechnung noch offen, ohne Bonusheft",
               "239,03 EUR",
               "159,36 EUR",
-              "Bei der UKV nicht versichert. Mit ZAHN Sofort der Bayerischen ist der Weg offen, wenn der Abschluss vor der Rechnung liegt"
+              "Bei der UKV nicht versichert. Mit ZAHN Sofort der Bayerischen ist der Weg offen, wenn der Versicherungsbeginn vor der Rechnung liegt"
             ]
           ],
           "note": "Beispiel, keine Preisangabe. Regelversorgung und Festzuschuss: G-BA, Festzuschuss-Richtlinie, Beträge ab 01.01.2026, Befund 1.1 (398,39 EUR); der Eigenanteil ist eigene Rechnung. Annahmen: Die Rechnung entspricht genau der Regelversorgung, alle Kosten sind erstattungsfähig, kein Härtefall. Für Festzuschüsse, die ab 01.01.2027 bewilligt werden, gelten 50, 60 und 65 Prozent. Tarif nach den Unterlagen auf healio.de/zahn, verbindlich sind die Tarifbedingungen.",
@@ -486,7 +486,7 @@ export const article = {
     },
     {
       "question": "Gibt es für Barmer-Mitglieder eine Zahnzusatzversicherung mit Sofortleistung?",
-      "answer": "Für eine schon angeratene oder begonnene Behandlung gibt es den Baustein ZAHN Sofort der Bayerischen, wählbar zu einem neuen Zahntarif. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Der Abschluss muss vor der Rechnung erfolgen, und es dürfen keine Zähne fehlen. Der Baustein kostet zusätzlich 29,90 EUR monatlich für 24 Monate. Deine Kasse spielt dafür keine Rolle."
+      "answer": "Für eine schon angeratene oder begonnene Behandlung gibt es den Baustein ZAHN Sofort der Bayerischen, wählbar zu einem neuen Zahntarif. Möglich sind bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen, und es dürfen keine Zähne fehlen. Der Baustein kostet zusätzlich 29,90 EUR monatlich für 24 Monate. Deine Kasse spielt dafür keine Rolle."
     },
     {
       "question": "Zahlt die Barmer die professionelle Zahnreinigung?",

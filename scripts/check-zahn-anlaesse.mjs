@@ -162,7 +162,7 @@ test('Ratgeber-Zuordnung: Slugs und Ziele existieren, Ausschlüsse stehen nicht 
     slug: 'behandlung-steht-an',
     path: PFAD,
     label: 'Behandlung steht an',
-    kurz: 'Heil- und Kostenplan nachrechnen und vor der Rechnung den Sofortschutz abschließen.',
+    kurz: 'Heil- und Kostenplan nachrechnen und den Sofortschutz so abschließen, dass der Versicherungsbeginn vor der Rechnung liegt.',
     linkLabel: 'Plan nachrechnen',
     motiv: 'dental',
   });

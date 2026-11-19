@@ -232,7 +232,7 @@ export const article = {
         },
         {
           type: 'paragraph',
-          text: 'Wurde dir die Krone in den letzten 2 Jahren angeraten oder geplant, zahlt ein normaler Zahntarif sie nicht. Dann gibt es den Baustein ZAHN Sofort der Bayerischen. Bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Er ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar und endet nach 24 Monaten, der Zahntarif läuft weiter. Der Abschluss muss vor der Rechnung erfolgen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Voraussetzung: Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
+          text: 'Wurde dir die Krone in den letzten 2 Jahren angeraten oder geplant, zahlt ein normaler Zahntarif sie nicht. Dann gibt es den Baustein ZAHN Sofort der Bayerischen. Bis zu 750 EUR je Kalenderjahr, insgesamt bis zu 1.500 EUR. Er ist nur zusammen mit einem neuen Zahntarif der Bayerischen wählbar und endet nach 24 Monaten, der Zahntarif läuft weiter. Der Versicherungsbeginn laut Versicherungsschein muss vor der Rechnung liegen, die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein. Voraussetzung: Es fehlen keine Zähne und es gibt keine Zahn-Vorgeschichte, zum Beispiel keine Parodontitis in den letzten 3 Jahren und keine herausnehmbare Prothese.',
         },
         {
           type: 'honest',
@@ -303,7 +303,7 @@ export const article = {
     {
       question: 'Zahlt die Zahnzusatzversicherung eine Krone, die schon angeraten ist?',
       answer:
-        'Wurde sie in den letzten 2 Jahren angeraten oder geplant oder läuft sie schon, ist sie bei einem normalen Zahntarif nicht versichert. Dafür gibt es den Baustein ZAHN Sofort der Bayerischen, wenn der Abschluss vor der Rechnung erfolgt. Liegt die Empfehlung länger als 2 Jahre zurück, ist sie bei der UKV wieder versichert.',
+        'Wurde sie in den letzten 2 Jahren angeraten oder geplant oder läuft sie schon, ist sie bei einem normalen Zahntarif nicht versichert. Dafür gibt es den Baustein ZAHN Sofort der Bayerischen, wenn der Versicherungsbeginn vor der Rechnung liegt. Liegt die Empfehlung länger als 2 Jahre zurück, ist sie bei der UKV wieder versichert.',
     },
   ],
 

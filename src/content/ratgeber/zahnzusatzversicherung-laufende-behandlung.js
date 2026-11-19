@@ -204,7 +204,7 @@ export const article = {
         },
         {
           "type": "paragraph",
-          "text": "Die Kalenderjahre kannst du nutzen. Verteilen sich Rechnungen einer größeren Behandlung auf zwei Kalenderjahre, kann der Jahreshöchstbetrag zweimal greifen. Plane die Termine mit deiner Praxis, aber nur so, wie es medizinisch passt."
+          "text": "Die Kalenderjahre kannst du nutzen. Fällt eine größere Behandlung in zwei Kalenderjahre, kann der Jahreshöchstbetrag zweimal greifen. Plane die Termine mit deiner Praxis, aber nur so, wie es medizinisch passt."
         },
         {
           "type": "table",

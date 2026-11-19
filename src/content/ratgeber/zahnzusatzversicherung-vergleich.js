@@ -164,7 +164,7 @@ export const article = {
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Bei einer bereits empfohlenen oder begonnenen Behandlung brauchst du einen gesonderten Prüfweg. Auf Healio wird dafür die Bayerische mit ZAHN Sofort beschrieben. Der Baustein ist nur zusammen mit einem neuen Zahntarif wählbar; der Abschluss muss vor der Rechnung erfolgen und die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein."
+          "text": "Bei einer bereits empfohlenen oder begonnenen Behandlung brauchst du einen gesonderten Prüfweg. Auf Healio wird dafür die Bayerische mit ZAHN Sofort beschrieben. Der Baustein ist nur zusammen mit einem neuen Zahntarif wählbar; der Versicherungsbeginn muss vor der Rechnung liegen und die Behandlung darf noch nicht abgeschlossen oder abgerechnet sein."
         },
         {
           "type": "paragraph",
