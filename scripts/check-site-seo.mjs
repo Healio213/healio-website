@@ -7,7 +7,7 @@ const SITE_URL = 'https://healio.de';
 const publicRouterPaths = [
   '/', '/about', '/leistungen', '/kassenboost', '/kassenbonus', '/unternehmen', '/unternehmen/vorsorge-rechner', '/partner', '/partner/leitfaden', '/partner/leitfaden/danke', '/hebammen', '/zahnaerzte',
   '/zahnaerzte/praxis-checkliste',
-  '/heilberufe-vorsorge', '/lebenshilfe', '/kontakt', '/terminvereinbarung', '/ambulant', '/schwangerschaft',
+  '/heilberufe-vorsorge', '/lebenshilfe', '/fallen-anker', '/kontakt', '/terminvereinbarung', '/ambulant', '/schwangerschaft',
   '/zahn', '/stationaer', '/presse', '/impressum', '/agb', '/datenschutz', '/erstinformation',
   '/konto-loeschen', '/blog',
   '/ratgeber', '/ratgeber/krankenkassen-bonus-zusatzversicherung',
@@ -36,7 +36,7 @@ const publicRouterPaths = [
 const noindexPaths = new Set([
   '/partner/leitfaden/danke',
   '/check/naturheilkunde', '/check/naturheilkunde/danke', '/check/schwangerschaft', '/check/schwangerschaft/danke', '/antrag/pruefen', '/antrag/aufnehmen', '/antrag/ambulant', '/antrag/zahn', '/antrag/stationaer', '/antrag/zahn-ukv',
-  '/lebenshilfe', '/zahnaerzte/praxis-checkliste', '/konto-loeschen', '/confirmation', '/en/confirmation',
+  '/lebenshilfe', '/fallen-anker', '/zahnaerzte/praxis-checkliste', '/konto-loeschen', '/confirmation', '/en/confirmation',
   '/app-bestaetigt', '/reset-password', '/tiktok', '/en/tiktok',
   '/instagram', '/en/instagram',
   '/unternehmen/vorsorge-rechner', '/en/companies/pension-calculator',

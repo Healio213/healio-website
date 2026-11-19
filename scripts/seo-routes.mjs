@@ -822,6 +822,14 @@ export const seoRoutes = [
     robots: 'noindex, nofollow',
   },
   {
+    path: '/fallen-anker',
+    title: 'Beispielseite Betriebsrente für Fallen Anker | Healio',
+    description: 'Beispielseite zur betrieblichen Altersvorsorge für Mitarbeiter in der Pflege.',
+    canonical: 'https://healio.de/fallen-anker',
+    lang: 'de',
+    robots: 'noindex, nofollow',
+  },
+  {
     path: '/unternehmen/vorsorge-rechner',
     title: 'bAV-Entscheidungsrechner 2026 | Healio',
     description: 'Arbeitgeberfinanzierte bAV mit 2026er Beitragsgrenzen, Sozialabgaben und Kapitalprojektion transparent modellieren.',
