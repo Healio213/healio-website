@@ -11,8 +11,10 @@ import {
   Languages,
   HelpCircle,
   Sparkles,
+  TrendingUp,
   CalendarCheck
 } from 'lucide-react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import SEOHead from '@/components/SEOHead';
 
 // Beispielseite für die Mitarbeiter von Fallen Anker (Hamburg), Stand 19.11.2026.
@@ -45,6 +47,33 @@ const endkapital = (monatlich, zinsProJahr, jahre) => {
   if (i === 0) return monatlich * n;
   return monatlich * ((Math.pow(1 + i, n) - 1) / i);
 };
+
+// Jahresangabe mit passender Mehrzahl je Sprache
+const jahreText = (lang, n) => {
+  if (lang === 'en') return `${n} ${n === 1 ? 'year' : 'years'}`;
+  if (lang === 'tr') return `${n} yıl`;
+  if (lang === 'pl') {
+    if (n === 1) return '1 rok';
+    const m10 = n % 10;
+    const m100 = n % 100;
+    return `${n} ${m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? 'lata' : 'lat'}`;
+  }
+  return `${n} ${n === 1 ? 'Jahr' : 'Jahre'}`;
+};
+
+// Platzhalter {key} durch hervorgehobene Werte ersetzen
+const mitWerten = (text, werte, className) =>
+  text.split(/(\{[a-z]+\})/).map((teil, i) => {
+    const key = teil.match(/^\{([a-z]+)\}$/)?.[1];
+    return key && key in werte ? (
+      <strong key={i} className={className}>{werte[key]}</strong>
+    ) : (
+      <React.Fragment key={i}>{teil}</React.Fragment>
+    );
+  });
+
+const kurzEuro = (wert) =>
+  wert >= 1000 ? `${new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 }).format(wert / 1000)} T` : euro(wert);
 
 const SPRACHEN = [
   { code: 'de', label: 'Deutsch' },
@@ -105,8 +134,28 @@ const TEXTE = {
     limitNote: 'Die Grenze liegt {jahr} bei {grenze} EUR im Monat für alles zusammen. Der Beitrag deines Arbeitgebers zählt mit.',
     perMonth: 'im Monat',
     totalLabel: 'Zusammen fließen jeden Monat in deine Rente',
+    ziBadge: 'Zinseszins',
+    ziTitle: 'Zinseszins: Dein Geld arbeitet für dich',
+    ziText: 'Du bekommst Zinsen auf dein Geld. Im nächsten Jahr bekommst du auch Zinsen auf diese Zinsen. Darum wächst es am Ende immer schneller.',
+    ziRateLabel: 'Wähle eine Verzinsung im Jahr',
+    ziKey: 'Von {ende} hast du {einzahlung} eingezahlt. {zuwachs} kommen aus Zinsen und Zinseszins.',
+    ziEndLabel: 'Guthaben nach {jahre} Jahren',
+    ziLegendPaid: 'Eingezahlt',
+    ziLegendGain: 'Zinsen und Zinseszins',
+    ziAxisYears: 'Jahre',
+    ziChartAria: 'Diagramm: So wächst dein Guthaben über {jt} bei {zins} im Jahr.',
+    ziValuesToggle: 'Werte als Text anzeigen',
+    ziValuesRow: 'Nach {jahr} Jahren: {wert} EUR, davon eingezahlt {einzahlung} EUR',
+    earlyTitle: 'Früh anfangen lohnt sich',
+    earlyText: 'Gleiche Rate von {rate} EUR im Monat, gleiche Verzinsung. Nur der Start ist anders.',
+    earlyNow: 'Heute anfangen ({jt})',
+    earlyLater: '10 Jahre später anfangen ({jt})',
+    earlyDiff: 'So viel mehr bringt dir der frühe Start',
+    cardsTitle: 'Alle Beispiele im Überblick',
+    cardsHint: 'Tippe auf eine Karte, dann siehst du sie im Diagramm.',
+    rateNote: 'Die Prozentwerte sind Beispiele für eine mögliche jährliche Wertentwicklung, keine festen Zinsen.',
     scenTitle: 'So kann dein Guthaben wachsen',
-    scenSub: 'Gleiche Einzahlung, {jahre} Jahre lang. Nur die Verzinsung ist anders.',
+    scenSub: 'Gleiche Einzahlung, {jt} lang. Nur die Verzinsung ist anders.',
     perYear: 'im Jahr',
     tagOld: 'klassischer Altvertrag, Beispiel',
     tagModel: 'Modellrechnung',
@@ -206,8 +255,28 @@ const TEXTE = {
     limitNote: 'In {jahr} the limit is {grenze} EUR a month for everything together. Your employer’s contribution counts towards it.',
     perMonth: 'a month',
     totalLabel: 'Going into your pension every month in total',
+    ziBadge: 'Compound interest',
+    ziTitle: 'Compound interest: your money works for you',
+    ziText: 'You get interest on your money. The next year, you also get interest on that interest. That is why it grows faster and faster in the end.',
+    ziRateLabel: 'Choose a yearly rate',
+    ziKey: 'Of {ende}, you paid in {einzahlung}. {zuwachs} come from interest and compound interest.',
+    ziEndLabel: 'Savings after {jahre} years',
+    ziLegendPaid: 'Paid in',
+    ziLegendGain: 'Interest and compound interest',
+    ziAxisYears: 'Years',
+    ziChartAria: 'Chart: how your savings grow over {jt} at {zins} a year.',
+    ziValuesToggle: 'Show values as text',
+    ziValuesRow: 'After {jahr} years: {wert} EUR, of which {einzahlung} EUR paid in',
+    earlyTitle: 'Starting early pays off',
+    earlyText: 'Same {rate} EUR a month, same rate. Only the start is different.',
+    earlyNow: 'Start today ({jt})',
+    earlyLater: 'Start 10 years later ({jt})',
+    earlyDiff: 'This is how much more an early start gives you',
+    cardsTitle: 'All examples at a glance',
+    cardsHint: 'Tap a card to see it in the chart.',
+    rateNote: 'The percentages are examples of possible yearly growth, not fixed interest rates.',
     scenTitle: 'How your savings could grow',
-    scenSub: 'Same payment for {jahre} years. Only the rate of return is different.',
+    scenSub: 'Same payment for {jt}. Only the rate is different.',
     perYear: 'a year',
     tagOld: 'classic old contract, example',
     tagModel: 'model calculation',
@@ -307,8 +376,28 @@ const TEXTE = {
     limitNote: '{jahr} yılında bu sınır, hepsi birlikte ayda {grenze} EUR. İşvereninin katkısı da buna dahil.',
     perMonth: 'ayda',
     totalLabel: 'Her ay emekliliğine giden toplam',
+    ziBadge: 'Bileşik faiz',
+    ziTitle: 'Bileşik faiz: Paran senin için çalışır',
+    ziText: 'Paran için faiz alırsın. Ertesi yıl bu faizin de faizini alırsın. Bu yüzden paran sonunda giderek daha hızlı büyür.',
+    ziRateLabel: 'Yıllık bir oran seç',
+    ziKey: 'Toplam {ende}. Bunun {einzahlung} kısmını sen yatırdın. {zuwachs} faiz ve bileşik faizden gelir.',
+    ziEndLabel: '{jahre} yıl sonra birikim',
+    ziLegendPaid: 'Yatırılan',
+    ziLegendGain: 'Faiz ve bileşik faiz',
+    ziAxisYears: 'Yıl',
+    ziChartAria: 'Grafik: Birikimin yıllık {zins} ile {jt} içinde böyle büyür.',
+    ziValuesToggle: 'Değerleri metin olarak göster',
+    ziValuesRow: '{jahr} yıl sonra: {wert} EUR, bunun {einzahlung} EUR kısmı yatırılan',
+    earlyTitle: 'Erken başlamak kazandırır',
+    earlyText: 'Ayda aynı {rate} EUR, aynı oran. Sadece başlangıç farklı.',
+    earlyNow: 'Bugün başla ({jt})',
+    earlyLater: '10 yıl sonra başla ({jt})',
+    earlyDiff: 'Erken başlamak sana bu kadar fazlasını getirir',
+    cardsTitle: 'Tüm örnekler bir bakışta',
+    cardsHint: 'Grafikte görmek için bir karta dokun.',
+    rateNote: 'Yüzde değerleri, olası bir yıllık değer artışı için örneklerdir, sabit faiz değildir.',
     scenTitle: 'Birikimin böyle büyüyebilir',
-    scenSub: '{jahre} yıl boyunca aynı ödeme. Sadece getiri oranı farklı.',
+    scenSub: '{jt} boyunca aynı ödeme. Sadece oran farklı.',
     perYear: 'yıllık',
     tagOld: 'klasik eski sözleşme, örnek',
     tagModel: 'model hesaplama',
@@ -408,8 +497,28 @@ const TEXTE = {
     limitNote: 'W {jahr} roku granica wynosi {grenze} EUR miesięcznie łącznie. Wpłata pracodawcy też się do niej wlicza.',
     perMonth: 'miesięcznie',
     totalLabel: 'Razem co miesiąc na twoją emeryturę',
+    ziBadge: 'Procent składany',
+    ziTitle: 'Procent składany: twoje pieniądze pracują dla ciebie',
+    ziText: 'Dostajesz odsetki od swoich pieniędzy. W kolejnym roku dostajesz też odsetki od tych odsetek. Dlatego na końcu pieniądze rosną coraz szybciej.',
+    ziRateLabel: 'Wybierz roczne oprocentowanie',
+    ziKey: 'Z {ende} wpłaciłeś {einzahlung}. {zuwachs} pochodzi z odsetek i procentu składanego.',
+    ziEndLabel: 'Kapitał po {jahre} latach',
+    ziLegendPaid: 'Wpłacono',
+    ziLegendGain: 'Odsetki i procent składany',
+    ziAxisYears: 'Lata',
+    ziChartAria: 'Wykres: tak rośnie twój kapitał przez {jt} przy {zins} rocznie.',
+    ziValuesToggle: 'Pokaż wartości jako tekst',
+    ziValuesRow: 'Po {jahr} latach: {wert} EUR, w tym wpłacono {einzahlung} EUR',
+    earlyTitle: 'Wczesny start się opłaca',
+    earlyText: 'Ta sama wpłata {rate} EUR miesięcznie, to samo oprocentowanie. Różni się tylko start.',
+    earlyNow: 'Start dziś ({jt})',
+    earlyLater: 'Start 10 lat później ({jt})',
+    earlyDiff: 'Tyle więcej daje ci wczesny start',
+    cardsTitle: 'Wszystkie przykłady w skrócie',
+    cardsHint: 'Dotknij karty, aby zobaczyć ją na wykresie.',
+    rateNote: 'Wartości procentowe to przykłady możliwego rocznego wzrostu wartości, a nie stałe odsetki.',
     scenTitle: 'Tak może rosnąć twój kapitał',
-    scenSub: 'Ta sama wpłata przez {jahre} lat. Różni się tylko oprocentowanie.',
+    scenSub: 'Ta sama wpłata przez {jt}. Różni się tylko oprocentowanie.',
     perYear: 'rocznie',
     tagOld: 'klasyczna stara umowa, przykład',
     tagModel: 'obliczenie modelowe',
@@ -476,6 +585,7 @@ const FallenAnkerPage = () => {
   const [laufzeit, setLaufzeit] = useState(25);
   const [eigen, setEigen] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
+  const [zinsIndex, setZinsIndex] = useState(2);
   const t = TEXTE[lang];
 
   const werte = useMemo(() => {
@@ -497,6 +607,19 @@ const FallenAnkerPage = () => {
       })),
     [werte.gesamt, laufzeit]
   );
+
+  const gewaehlt = SZENARIEN[zinsIndex];
+  const verlauf = useMemo(() => {
+    const punkte = [];
+    for (let jahr = 0; jahr <= laufzeit; jahr += 1) {
+      const eingezahlt = werte.gesamt * 12 * jahr;
+      const wert = endkapital(werte.gesamt, gewaehlt.zins, jahr);
+      punkte.push({ jahr, eingezahlt: Math.round(eingezahlt), zuwachs: Math.round(wert - eingezahlt), wert });
+    }
+    return punkte;
+  }, [werte.gesamt, gewaehlt.zins, laufzeit]);
+  const ergebnis = verlauf[verlauf.length - 1];
+  const spaeter = laufzeit > 10 ? endkapital(werte.gesamt, gewaehlt.zins, laufzeit - 10) : null;
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   const isEn = lang === 'en';
@@ -671,7 +794,7 @@ const FallenAnkerPage = () => {
                         {t.yearsLabel}
                       </label>
                       <span className="font-bold text-xl whitespace-nowrap" data-testid="fa-laufzeit-wert">
-                        {laufzeit} {t.yearsUnit}
+                        {jahreText(lang, laufzeit)}
                       </span>
                     </div>
                     <input
@@ -731,25 +854,186 @@ const FallenAnkerPage = () => {
                 </p>
               </div>
 
-              {/* SZENARIEN */}
+              {/* ZINSESZINS (nutzt die Eingaben des Rechners) */}
+              <div className="mt-12 rounded-3xl border border-slate-200 bg-white p-5 sm:p-8 shadow-sm" data-testid="fa-zinseszins">
+                <div className="text-center max-w-2xl mx-auto">
+                  <SectionBadge icon={TrendingUp}>{t.ziBadge}</SectionBadge>
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 text-balance">{t.ziTitle}</h3>
+                  <p className="text-slate-600 leading-relaxed">{t.ziText}</p>
+                </div>
+
+                <p className="text-sm font-medium text-slate-700 mt-8 mb-3 text-center">{t.ziRateLabel}</p>
+                <div className="grid grid-cols-4 gap-2 max-w-md mx-auto" role="group" aria-label={t.ziRateLabel}>
+                  {SZENARIEN.map((s, i) => (
+                    <button
+                      key={s.zins}
+                      type="button"
+                      onClick={() => setZinsIndex(i)}
+                      aria-pressed={zinsIndex === i}
+                      data-zins={i}
+                      className={`rounded-xl px-2 py-3 text-base font-bold whitespace-nowrap transition ${
+                        zinsIndex === i
+                          ? 'bg-[#25c990] text-slate-900 shadow'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      {prozent(s.zins)}
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-lg md:text-2xl text-slate-700 leading-snug text-center max-w-3xl mx-auto mt-8" data-testid="fa-zi-aussage">
+                  {mitWerten(
+                    t.ziKey,
+                    {
+                      ende: `${euro(ergebnis.wert)}\u00a0EUR`,
+                      einzahlung: `${euro(ergebnis.eingezahlt)}\u00a0EUR`,
+                      zuwachs: `${euro(ergebnis.wert - ergebnis.eingezahlt)}\u00a0EUR`
+                    },
+                    'font-bold text-slate-900 whitespace-nowrap'
+                  )}
+                </p>
+
+                <div className="grid lg:grid-cols-[1fr_15rem] gap-6 mt-8 items-center">
+                  <div
+                    role="img"
+                    aria-label={fuelle(t.ziChartAria, { jt: jahreText(lang, laufzeit), zins: prozent(gewaehlt.zins) })}
+                    className="min-w-0"
+                  >
+                    <p className="text-xs text-slate-500 mb-1" aria-hidden="true">EUR</p>
+                    <div className="h-64 sm:h-80" data-testid="fa-zi-diagramm">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={verlauf} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                          <XAxis
+                            dataKey="jahr"
+                            ticks={verlauf.filter((p) => p.jahr % 5 === 0).map((p) => p.jahr)}
+                            tickLine={false}
+                            axisLine={{ stroke: '#cbd5e1' }}
+                            tick={{ fill: '#64748b', fontSize: 12 }}
+                          />
+                          <YAxis
+                            tickFormatter={kurzEuro}
+                            tickLine={false}
+                            axisLine={false}
+                            width={52}
+                            tick={{ fill: '#64748b', fontSize: 12 }}
+                          />
+                          <Area
+                            type="monotone"
+                            dataKey="eingezahlt"
+                            stackId="1"
+                            stroke="#94a3b8"
+                            fill="#cbd5e1"
+                            fillOpacity={0.9}
+                            isAnimationActive={false}
+                          />
+                          <Area
+                            type="monotone"
+                            dataKey="zuwachs"
+                            stackId="1"
+                            stroke="#1fb17e"
+                            fill="#25c990"
+                            fillOpacity={0.75}
+                            isAnimationActive={false}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <p className="text-xs text-slate-500 text-right mt-1" aria-hidden="true">{t.ziAxisYears}</p>
+                  </div>
+
+                  <div className="rounded-2xl bg-slate-900 text-white p-5">
+                    <p className="text-sm text-white/75">{fuelle(t.ziEndLabel, { jahre: laufzeit })}</p>
+                    <p className="text-3xl font-bold text-[#25c990] mb-4 whitespace-nowrap" data-testid="fa-zi-ende">
+                      {euro(ergebnis.wert)} EUR
+                    </p>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-start gap-2">
+                        <span className="mt-1 w-3 h-3 rounded-sm bg-[#cbd5e1] shrink-0" aria-hidden="true" />
+                        <span>
+                          {t.ziLegendPaid}
+                          <br />
+                          <strong className="text-base" data-testid="fa-zi-einzahlung">{euro(ergebnis.eingezahlt)} EUR</strong>
+                        </span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="mt-1 w-3 h-3 rounded-sm bg-[#25c990] shrink-0" aria-hidden="true" />
+                        <span>
+                          {t.ziLegendGain}
+                          <br />
+                          <strong className="text-base" data-testid="fa-zi-zuwachs">
+                            {euro(ergebnis.wert - ergebnis.eingezahlt)} EUR
+                          </strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <details className="mt-4 text-sm text-slate-600">
+                  <summary className="cursor-pointer font-medium text-healio-primary-dark">{t.ziValuesToggle}</summary>
+                  <ul className="mt-2 space-y-1">
+                    {verlauf
+                      .filter((p) => p.jahr > 0 && (p.jahr % 5 === 0 || p.jahr === laufzeit))
+                      .map((p) => (
+                        <li key={p.jahr}>
+                          {fuelle(t.ziValuesRow, { jahr: p.jahr, wert: euro(p.wert), einzahlung: euro(p.eingezahlt) })}
+                        </li>
+                      ))}
+                  </ul>
+                </details>
+
+                {spaeter !== null && (
+                  <div className="mt-8 rounded-2xl bg-healio-light/60 border border-home-mint/30 p-5 sm:p-6" data-testid="fa-frueh">
+                    <h4 className="text-xl font-bold text-slate-900 mb-1">{t.earlyTitle}</h4>
+                    <p className="text-slate-600 mb-5">{fuelle(t.earlyText, { rate: euro(werte.gesamt) })}</p>
+                    <div className="grid sm:grid-cols-3 gap-3">
+                      <div className="rounded-xl bg-white border border-slate-200 p-4">
+                        <p className="text-sm text-slate-500">{fuelle(t.earlyNow, { jt: jahreText(lang, laufzeit) })}</p>
+                        <p className="text-2xl font-bold text-slate-900 whitespace-nowrap" data-testid="fa-frueh-heute">
+                          {euro(ergebnis.wert)} EUR
+                        </p>
+                      </div>
+                      <div className="rounded-xl bg-white border border-slate-200 p-4">
+                        <p className="text-sm text-slate-500">{fuelle(t.earlyLater, { jt: jahreText(lang, laufzeit - 10) })}</p>
+                        <p className="text-2xl font-bold text-slate-700 whitespace-nowrap" data-testid="fa-frueh-spaeter">
+                          {euro(spaeter)} EUR
+                        </p>
+                      </div>
+                      <div className="rounded-xl bg-slate-900 text-white p-4">
+                        <p className="text-sm text-white/75">{t.earlyDiff}</p>
+                        <p className="text-2xl font-bold text-[#25c990] whitespace-nowrap" data-testid="fa-frueh-diff">
+                          + {euro(ergebnis.wert - spaeter)} EUR
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ALLE BEISPIELE (Karte wählt die Kurve) */}
               <div className="mt-12">
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-2">{t.scenTitle}</h3>
+                <h3 className="text-2xl font-bold text-slate-900 text-center mb-2">{t.cardsTitle}</h3>
                 <p className="text-slate-600 text-center max-w-2xl mx-auto mb-8">
-                  {fuelle(t.scenSub, { jahre: laufzeit })}
+                  {fuelle(t.scenSub, { jt: jahreText(lang, laufzeit) })} {t.cardsHint}
                 </p>
                 <div
                   className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-4 md:overflow-visible md:pb-0"
                   data-testid="fa-szenarien"
                 >
                   {szenarien.map((s, i) => {
-                    const hervor = i === szenarien.length - 1;
+                    const aktiv = i === zinsIndex;
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={s.zins}
-                        className={`snap-start shrink-0 w-[78%] sm:w-[45%] md:w-auto rounded-2xl p-6 ${
-                          hervor
+                        onClick={() => setZinsIndex(i)}
+                        aria-pressed={aktiv}
+                        className={`text-left snap-start shrink-0 w-[78%] sm:w-[45%] md:w-auto rounded-2xl p-6 transition ${
+                          aktiv
                             ? 'border-2 border-[#25c990] bg-healio-light/60 shadow-md'
-                            : 'border border-slate-200 bg-white'
+                            : 'border border-slate-200 bg-white hover:border-slate-300'
                         }`}
                         data-testid={`fa-szenario-${i}`}
                       >
@@ -768,19 +1052,22 @@ const FallenAnkerPage = () => {
                         </p>
                         <p className="text-sm text-slate-500">{t.endValue}</p>
                         <p
-                          className={`text-2xl font-bold ${hervor ? 'text-healio-primary-dark' : 'text-slate-900'}`}
+                          className={`text-2xl font-bold ${aktiv ? 'text-healio-primary-dark' : 'text-slate-900'}`}
                           data-testid="fa-ende"
                         >
                           {euro(s.ende)} EUR
                         </p>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
                 <p className="md:hidden text-center text-sm text-slate-500 mt-2">{t.swipeHint}</p>
                 <div className="mt-6 rounded-2xl border border-slate-300 bg-slate-50 p-5 flex items-start gap-3">
                   <Info className="w-5 h-5 shrink-0 mt-0.5 text-healio-primary-dark" />
-                  <p className="text-base text-slate-700 leading-relaxed" data-testid="fa-hinweis">{t.disclaimer}</p>
+                  <div className="text-base text-slate-700 leading-relaxed space-y-2" data-testid="fa-hinweis">
+                    <p>{t.disclaimer}</p>
+                    <p>{t.rateNote}</p>
+                  </div>
                 </div>
               </div>
             </div>
