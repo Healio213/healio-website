@@ -627,3 +627,12 @@ test('UKV: Unterlagen über den Antragsdienst, neun PDF mit Kennung, im Antrag a
   const gezeigt = gezeigteUnterlagen(def, { tarif: 'Z90' });
   UKV_UNTERLAGEN.forEach(([id, name]) => assert.ok(gezeigt.some((g) => g.href === `dienst:${id}` && g.name === name), `${id} gezeigt`));
 });
+
+test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals', async () => {
+  const { default: zahn, ADRESSE_NICHT_ERKANNT, BONITAET } = await import('../src/data/antrag/zahn.js');
+  assert.equal(zahn.person.bestaetigungen[0].originalText, ADRESSE_NICHT_ERKANNT);
+  assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
+  assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
+  assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
+  assert.equal(zahn.textfassung, '2026-11-19-bayerische-zahn');
+});

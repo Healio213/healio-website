@@ -73,6 +73,9 @@ function Bestaetigungen({
 }) {
   return (definition.person.bestaetigungen || []).map((eintrag) => (
         <div key={eintrag.key} data-fehlerblock="">
+          {/* Bayerische: Satz der Adressprüfung im Wortlaut des Originals (Paket 2). */}
+          {eintrag.vorspann && <p className="mb-2 text-base leading-6 text-home-slate">{eintrag.vorspann}</p>}
+          {eintrag.originalText && <p className="mb-3 rounded-[1rem] bg-home-ice p-3 text-base leading-6 text-home-midnight ring-1 ring-emerald-900/10" data-original-text="">„{eintrag.originalText}“</p>}
           <OptionCard
             id={`feld-${eintrag.key}`}
             type="checkbox"

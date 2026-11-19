@@ -149,6 +149,16 @@ export default function SchrittErklaerungen({
             </Karte>
           );
         }
+        // Kasten des Originals ohne eigenen Haken (Bayerische: „*Bonitätsauskunft“, Paket 2).
+        if (eintrag.art === 'kasten') {
+          return (
+            <Karte key={eintrag.original || eintrag.titel} titel={eintrag.titel} data-kasten={eintrag.original}>
+              {eintrag.absaetze.map((absatz) => <p key={absatz.slice(0, 30)} className={cx('text-base leading-7 text-home-midnight', TRENNUNG)}>{schuetze(absatz)}</p>)}
+              <p className={cx('text-base leading-7 text-home-midnight', TRENNUNG)}>{schuetze(eintrag.schluss)}</p>
+              {eintrag.link && <a href={eintrag.link.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>{eintrag.link.label}<NeuerTab /></a>}
+            </Karte>
+          );
+        }
         // Feste Antwort des Originals (z. B. Versicherungsnehmer: Ja, gesperrt), sichtbar wie dort.
         if (eintrag.art === 'fest') {
           return (

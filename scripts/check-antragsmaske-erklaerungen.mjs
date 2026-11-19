@@ -27,8 +27,8 @@ for (const [pfad, definition] of Object.entries(DEFINITIONEN)) {
     const healio = eintraege.flatMap((eintrag) => eintrag.gruppen || []).filter((gruppe) => gruppe.von === 'Von Healio');
     assert.equal(healio.length, 1, 'genau eine Gruppe „Von Healio“');
     assert.deepEqual(healio[0].eintraege[0], { name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] });
-    if (definition.versicherer.id === 'sdk') {
-      // Paket 1 (19.11.2026): keine Namen ohne Datei; die Healio-Erklärungen stehen in „Mein Antrag“.
+    if (['sdk', 'bayerische'].includes(definition.versicherer.id)) {
+      // Paket 1 und 2 (19.11.2026): keine Namen ohne Datei; die Healio-Erklärungen stehen in „Mein Antrag“.
       assert.deepEqual(healio[0].eintraege.slice(1), []);
       const unterlagen = eintraege.find((eintrag) => eintrag.art === 'unterlagen' && (eintrag.gruppen || []).some((gruppe) => gruppe.von === 'Von Healio'));
       assert.match(unterlagen.text, /PDF „Mein Antrag“/);

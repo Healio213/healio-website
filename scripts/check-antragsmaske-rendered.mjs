@@ -465,6 +465,7 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await weiter(page);
   await bildschirm(page, 'anschrift');
   pruefe(await page.locator('#fehler-adresseBestaetigt').count() > 0 && (await page.textContent('#fehler-adresseBestaetigt')).includes('Adresse'), 'Bayerische: ohne Adressbestätigung kein Weiter');
+  pruefe((await page.textContent('[data-original-text]')).includes('Die angegebene Adresse wurde von unserem System nicht erkannt. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:'), 'Bayerische: Satz der Adressprüfung im Wortlaut');
   await page.locator('label:has(#feld-adresseBestaetigt)').click();
   await foto(page, `${name}-04-anschrift`);
   await weiter(page);
@@ -485,6 +486,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await weiter(page);
   await bildschirm(page, 'erkl:2');
   const unterlagen = await page.textContent('[data-bildschirm="erkl:2"]');
+  pruefe(unterlagen.includes('Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.') && await page.locator('[data-kasten="BitCreditReport"] a[href="https://finance.arvato.com/icdinfoblatt"]').count() === 1, 'Bayerische: Kasten Bonitätsauskunft mit Satz und Widerrufslink');
+  await foto(page, `${name}-05b-unterlagen-bonitaet`);
   pruefe(unterlagen.includes('Produktinformationsblatt Zahn Prestige') && unterlagen.includes('Produktinformationsblatt ZAHN Sofort') && !unterlagen.includes('Zahn Smart'), 'Unterlagen passend zu Tarif und Baustein');
   await context.route('https://bayculator.diebayerische.de/**', (route) => route.fulfill({ status: 200, body: 'PDF' }));
   const [neu] = await Promise.all([context.waitForEvent('page'), page.locator('[data-bildschirm="erkl:2"] [data-unterlage]').first().click()]);
@@ -510,7 +513,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   pruefe(letzter.bestaetigungen?.adresseBestaetigt === true && letzter.original.find((e) => e.feld === 'adresseBestaetigt')?.wert === true, 'Adressbestätigung im Antrag und in der Zuordnung');
   pruefe(letzter.erklaerungen.werbung === false, 'Werbung nicht angehakt übermittelt');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.name === 'Produktinformationsblatt Zahn Prestige') && letzter.unterlagen.geoeffnet.length === 1 && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'unterlagen'), 'Gezeigte, geöffnete und bestätigte Unterlagen im Antrag');
-  pruefe(danke.includes('In unserer Eingangsbestätigung steht ein geschützter Link zu allen Unterlagen.'), 'Danke: Link zu den Unterlagen in der Eingangsbestätigung (Bayerische ohne Mein Antrag)');
+  pruefe(danke.includes('In unserer Eingangsbestätigung steht ein geschützter Link zu deinem Antrag und allen Unterlagen.'), 'Danke: Link zu Antrag und Unterlagen (Bayerische mit Mein Antrag, Paket 2)');
+  pruefe(await page.locator('[data-mein-antrag]').isVisible(), 'Bayerische: Mein Antrag auf der Danke-Seite');
   if (viaWahl) pruefe(letzter.herkunft.ref === WERBER.ref && gleich(letzter.herkunft.utm, {}) && letzter.herkunft.letzteSeite === '/zahn' && letzter.herkunft.einstiegsseite === '/zahn', `Herkunft Zahn (ohne Zustimmung, über den Link): ${JSON.stringify(letzter.herkunft)}`);
   await context.close();
 }

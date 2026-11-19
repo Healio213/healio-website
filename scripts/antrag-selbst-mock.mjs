@@ -372,7 +372,7 @@ const server = http.createServer((anfrage, antwort) => {
       if (ergebnis.status !== 201) { senden(antwort, ergebnis.status, { ok: false, fehler: ergebnis.fehler, ...(ergebnis.felder ? { felder: ergebnis.felder } : {}) }, herkunft); return; }
       letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft), ueber: 'pruefseite' };
       senden(antwort, 200, {
-        ok: true, kennung: KENNUNGEN[token], status: 'bestaetigt', bestaetigtAm: new Date().toISOString(), ...(token === 'Bearer test-zahn' ? {} : { meinAntrag: meinAntragAttrappe(KENNUNGEN[token]) }),
+        ok: true, kennung: KENNUNGEN[token], status: 'bestaetigt', bestaetigtAm: new Date().toISOString(), meinAntrag: meinAntragAttrappe(KENNUNGEN[token]),
       }, herkunft);
     });
     return;
@@ -405,7 +405,7 @@ const server = http.createServer((anfrage, antwort) => {
     letzter = { ...body, herkunft: bereinigeHerkunft(body.herkunft) };
     const kennung = `HS-261112-T${String(zaehler).padStart(3, '0')}`;
     senden(antwort, 201, {
-      ok: true, kennung, status: 'eingegangen', eingegangenAm: new Date().toISOString(), beitrag: ergebnis.beitrag, ...(body.versicherer === 'bayerische' ? {} : { meinAntrag: meinAntragAttrappe(kennung) }),
+      ok: true, kennung, status: 'eingegangen', eingegangenAm: new Date().toISOString(), beitrag: ergebnis.beitrag, meinAntrag: meinAntragAttrappe(kennung),
     }, herkunft);
   });
 });

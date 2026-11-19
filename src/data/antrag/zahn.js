@@ -36,12 +36,24 @@ import {
   TEXT_6_STANDORT_PLATZHALTER,
   TEXT_9_HAKEN,
   TEXT_9_HINWEIS,
-  UNTERLAGEN_HEALIO,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
-import { DATENSCHUTZ_LINK } from './sdkStrecke.js';
+import { DATENSCHUTZ_LINK, MEIN_ANTRAG_HINWEIS, vollmachtMitPdf } from './sdkStrecke.js';
 
 const BA = 'BA die Bayerische Allgemeine Versicherung AG';
+// Wortlaute aus dem Programmcode der Strecke (Rechner release-1.53.26, Abgleich 19.11.2026), unverändert.
+export const ADRESSE_NICHT_ERKANNT = 'Die angegebene Adresse wurde von unserem System nicht erkannt. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:';
+export const BONITAET = Object.freeze({
+  art: 'kasten',
+  original: 'BitCreditReport',
+  titel: '*Bonitätsauskunft',
+  absaetze: [
+    'Der Versicherer darf Informationen von der infoscore Consumer Data GmbH, Rheinstraße 99, 76532 Baden-Baden beziehen und nutzen.',
+    'Diese Informationen betreffen mein bisheriges Zahlungsverhalten sowie Melderegisterauskünfte. Sie werden für den Vertragsabschluss und bei Bedarf auch während unserer Geschäftsbeziehung benötigt.',
+  ],
+  schluss: 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.',
+  link: { label: 'Einwilligung zur Bonitätsprüfung widerrufen', href: 'https://finance.arvato.com/icdinfoblatt' },
+});
 const ASSET = (id) => `https://bayculator.diebayerische.de/cms/assets/${id}?download`;
 
 // Name der SDK in den Healio-Texten durch die Bayerische ersetzen. Prüft,
@@ -93,7 +105,9 @@ const zahn = {
   pfad: 'zahn',
   bereit: true,
   stand: '2026-11-12',
-  textfassung: '2026-11-12-bayerische-zahn',
+  // 19.11.2026 (Paket 2): Adressprüfung im Wortlaut der Bayerischen, Kasten
+  // „*Bonitätsauskunft“ wie im Original, Auftrag ohne Verweis auf eine fehlende Datei.
+  textfassung: '2026-11-19-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',
@@ -192,16 +206,18 @@ const zahn = {
       },
     ],
     // Wie im Original (Schritt 5): Erkennt die Bayerische eine Adresse nicht,
-    // fragt sie „Bitte bestätigen Sie, dass diese Adresse existiert:“ mit dem
-    // Haken unten (gesehen 12.11.2026, auch bei echten Adressen). Healio
-    // fragt das immer, der Einreicher setzt den Haken beim Versicherer nur,
-    // wenn der Kunde ihn hier gesetzt hat.
+    // zeigt sie den Satz unter originalText und den Haken unten (gesehen
+    // 12.11. und 19.11.2026, auch bei der Testadresse). Healio zeigt beides im
+    // Wortlaut (Paket 2, 19.11.2026) und fragt immer; der Einreicher setzt den
+    // Haken beim Versicherer nur, wenn der Kunde ihn hier gesetzt hat.
     bestaetigungen: [
       {
         key: 'adresseBestaetigt',
+        vorspann: 'Die Bayerische prüft deine Adresse. Erkennt ihr System sie nicht, fragt sie so nach:',
+        originalText: ADRESSE_NICHT_ERKANNT,
         label: 'Ich bestätige, dass die eingegebene Adresse korrekt ist.',
         fehler: 'Bitte bestätige, dass deine Adresse stimmt.',
-        original: { schritt: 5, frage: 'Bitte bestätigen Sie, dass diese Adresse existiert:' },
+        original: { schritt: 5, frage: ADRESSE_NICHT_ERKANNT },
       },
     ],
   },
@@ -247,7 +263,7 @@ const zahn = {
           pflicht: true,
         },
         {
-          art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: fuerBayerische(ERKLAERUNG_KURZ.vollmacht), volltext: [['p', fuerBayerische(TEXT_10_VOLLMACHT)]], dokument: 'Maklervertrag', haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
+          art: 'haken', key: 'vollmacht', titel: 'Auftrag und Vollmacht', kurz: fuerBayerische(ERKLAERUNG_KURZ.vollmacht), volltext: [['p', vollmachtMitPdf(fuerBayerische(TEXT_10_VOLLMACHT))]], haken: 'Ich erteile Healio diesen Auftrag und diese Vollmacht.', pflicht: true,
         },
       ],
     },
@@ -274,7 +290,6 @@ const zahn = {
             { label: 'Schweigepflichtentbindungserklärung', href: ASSET('de3cea1f-6145-4a2c-989c-d47e08a55cfa') },
             { label: 'Weitere Informationen zur Datenverarbeitung', href: ASSET('9b960eae-f97d-4de5-8338-e766f9d91a7a') },
           ],
-          volltext: [['p', '*Bonitätsauskunft: Der Versicherer darf Informationen von der infoscore Consumer Data GmbH, Rheinstraße 99, 76532 Baden-Baden beziehen und nutzen. Diese Informationen betreffen mein bisheriges Zahlungsverhalten sowie Melderegisterauskünfte. Sie werden für den Vertragsabschluss und bei Bedarf auch während unserer Geschäftsbeziehung benötigt.']],
           haken: 'Ich habe die Einwilligungserklärung in die Erhebung und Verwendung von Gesundheitsdaten und Schweigepflichtentbindungserklärung heruntergeladen und zur Kenntnis genommen. Mit den dort erläuterten Datenverarbeitungen und der Einholung einer Bonitätsauskunft* erkläre ich mich einverstanden.',
           pflicht: true,
         },
@@ -327,12 +342,18 @@ const zahn = {
                 { name: '§ 19 Abs. 5 VVG', dateien: [{ label: '§ 19 Abs. 5 VVG', href: ASSET('7249e1d4-8a50-4b5d-bf5a-9ef18a74d7a6') }] },
               ],
             },
-            { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))] },
+            // Paket 2: keine Namen ohne Datei; die Healio-Erklärungen stehen in „Mein Antrag“.
+            { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }] },
           ],
+          text: MEIN_ANTRAG_HINWEIS,
           haken: 'Ich bestätige, dass ich vor Abgabe meiner Vertragserklärung folgende Informationen in Textform erhalten und gespeichert oder ausgedruckt habe:',
           hakenAbsaetze: ['Sie können alle Vertragsunterlagen natürlich auch nach Abschluss jederzeit abrufen. Dafür richten wir Ihnen nach Abschluss den Versicherungs- und Vertragsmanager "Meine Bayerische" ein. Weitere Details dazu sowie Ihre Zugangsdaten erhalten Sie per E-Mail.'],
           pflicht: true,
         },
+        // Wie im Original nach allen Einwilligungen (creditReportOption der
+        // Zahn-Konfiguration an): Kasten „*Bonitätsauskunft“ mit beiden Texten,
+        // dem Einverständnissatz und dem Widerrufslink, ohne eigenen Haken.
+        BONITAET,
       ],
     },
   ],
