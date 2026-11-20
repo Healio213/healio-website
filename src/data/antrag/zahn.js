@@ -126,7 +126,8 @@ const zahn = {
   // „*Bonitätsauskunft“ wie im Original, Auftrag ohne Verweis auf eine fehlende Datei.
   // 19.11.2026 spät (Ebene 1): Vorbehalt „vorbehaltlich der Annahme“, Smart mit Frage 5 „Ja“ nicht online.
   // 20.11.2026 (Nachbesserung Ebene 1): Smart mit Frage 5 „Ja“ wieder online (Original nimmt an), Vorbehalt ohne Zusage zum Halt.
-  textfassung: '2026-11-20-bayerische-zahn',
+  // 20.11.2026 (Ebene 2, Paket A): Vorbehalt wieder mit dem Satz zum Halt.
+  textfassung: '2026-11-20b-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',

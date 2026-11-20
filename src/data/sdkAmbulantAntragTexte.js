@@ -165,12 +165,12 @@ export const KONTO_ANDERE_KURZ = 'Gehört jemand anderem, er bestätigt das Last
 // Vorbehalt zum Beitrag, direkt am Auftragsknopf und im Schlussbild.
 export const BEITRAG_VORBEHALT = 'Nennt die SDK einen anderen Beitrag, fragt Healio dich vorher.';
 // Eigene Maske (Bauplan Ebene 1, B9 und B10, 19.11.2026, Entwurf für Frank):
-// Vorbehalt am Auftragsknopf, gleich in den Mails. Seit 20.11.2026 ohne den
-// zweiten Satz „Zeigt die SDK beim Einreichen einen anderen Beitrag, reicht
-// Healio nichts ein und meldet sich bei dir.“: Diesen Halt hat der Einreicher
-// noch nicht (Paket A, A1 bis A5). Erst mit Paket A wieder anhängen und die
-// Textfassungen hochzählen.
-export const BEITRAG_VORBEHALT_ANNAHME = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die SDK.';
+// Vorbehalt am Auftragsknopf, gleich in den Mails. Am 20.11.2026 kurz ohne den
+// zweiten Satz, seit Ebene 2 (Paket A, 20.11.2026) wieder mit ihm: Der
+// Einreicher vergleicht jetzt Grundbeitrag, Zuschlag und Endpreis mit der
+// Strecke und hält bei jeder Abweichung an (Dienst einreicher/preisabgleich.mjs).
+// Textfassungen dazu 2026-11-20b.
+export const BEITRAG_VORBEHALT_ANNAHME = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die SDK. Zeigt die SDK beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir.';
 // Danke-Seite und „Mein Antrag“: eingegangen heißt nicht angenommen.
 export const NACH_EINGANG_ANNAHME = 'Eingegangen heißt noch nicht angenommen. Über deinen Antrag entscheidet die SDK.';
 

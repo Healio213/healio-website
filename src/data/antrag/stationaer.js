@@ -115,7 +115,8 @@ const stationaer = {
   // 19.11.2026 (Paket 1): Versicherungsnehmer sichtbar, Werbeeinwilligung Ja/Nein,
   // Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei, sechs Blöcke.
   // 20.11.2026 (Nachbesserung Ebene 1): Vorbehalt ohne Zusage zum Halt (kommt erst mit Paket A).
-  textfassung: '2026-11-20-sdk-stationaer-online',
+  // 20.11.2026 (Ebene 2, Paket A): Vorbehalt wieder mit dem Satz zum Halt.
+  textfassung: '2026-11-20b-sdk-stationaer-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, erfasst 12.11.2026',
   kennzeile: 'Klinikschutz der SDK',
   seitentitel: 'Antrag Klinikschutz | Healio',

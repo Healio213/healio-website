@@ -634,7 +634,7 @@ test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals'
   assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
   assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
   assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
-  assert.equal(zahn.textfassung, '2026-11-20-bayerische-zahn'); // Nachbesserung Ebene 1 (20.11.2026): Smart Frage 5, Vorbehalt ohne Halt-Zusage
+  assert.equal(zahn.textfassung, '2026-11-20b-bayerische-zahn'); // Ebene 2 (20.11.2026): Vorbehalt wieder mit dem Satz zum Halt
 });
 
 // ---------------------------------------------------------------------------
@@ -693,12 +693,11 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
   const { default: zahnUkv } = await import('../src/data/antrag/zahnUkv.js');
   assert.match(stationaer.beitrag.hinweisNachEingang, /^Die SDK prüft deine Angaben, nachdem dein Antrag eingegangen ist\. Sie kann dann einen Zuschlag verlangen, einzelne Leistungen ausschließen oder den Antrag ablehnen\. Der Beitrag oben gilt, wenn sie ohne Änderung annimmt\.$/);
   for (const def of [ambulant, stationaer, zahn]) {
-    assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\.$/);
-    // Nachbesserung 20.11.2026: keine Zusage zum Halt, solange der Einreicher keinen Preis vergleicht (Paket A).
-    assert.doesNotMatch(def.absenden.vorbehalt, /nichts ein|meldet sich/);
-    assert.equal(def.beitrag.vorbehalt === undefined || !/nichts ein|meldet sich/.test(def.beitrag.vorbehalt), true);
+    // Ebene 2 (Paket A, 20.11.2026): Der Einreicher vergleicht den Preis und hält an, die Zusage steht wieder da.
+    assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\. Zeigt die \1 beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir\.$/);
+    assert.doesNotMatch(def.absenden.vorbehalt, /[–—]/);
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
-    assert.match(def.textfassung, /^2026-11-20-/);
+    assert.match(def.textfassung, /^2026-11-20b-/);
   }
   assert.equal(zahnUkv.textfassung, '2026-11-12-ukv-zahn-online', 'UKV unverändert');
   assert.equal(zahnUkv.absenden.nachEingang, undefined);

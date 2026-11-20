@@ -915,7 +915,7 @@ async function pruefseiteAmbulantOnline(browser) {
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler: ${await page.textContent('[data-sendefehler]')}`);
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
   const { letzter } = await mock('/__test/letzter');
-  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-20-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
+  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-20b-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
   pruefe(letzter.zahlung.bankname === 'Testbank', 'Prüfseite ambulant (Online-Fassung) fragt den Banknamen ab');
   await context.close();
 }
