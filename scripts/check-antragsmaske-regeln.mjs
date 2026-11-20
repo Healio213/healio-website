@@ -690,7 +690,7 @@ test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals'
   assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
   assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
   assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
-  assert.equal(zahn.textfassung, '2026-11-20b-bayerische-zahn'); // Ebene 2 (20.11.2026): Vorbehalt wieder mit dem Satz zum Halt
+  assert.equal(zahn.textfassung, '2026-11-20c-bayerische-zahn'); // Paket C (20.11.2026): Text 6 ohne Größe und Gewicht (vorher 2026-11-20b)
 });
 
 // ---------------------------------------------------------------------------
@@ -753,10 +753,12 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
     assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\. Zeigt die \1 beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir\.$/);
     assert.doesNotMatch(def.absenden.vorbehalt, /[–—]/);
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
-    assert.match(def.textfassung, /^2026-11-20b-/);
+    // Paket C (C6): die Bayerische mit eigener Fassung 2026-11-20c (Text 6 für Zahn), die SDK unverändert 2026-11-20b.
+    assert.match(def.textfassung, def === zahn ? /^2026-11-20c-/ : /^2026-11-20b-/);
   }
   // Paket C (C13, 20.11.2026): Der Einreicher vergleicht auch bei der UKV den Preis, der Satz zum Halt steht wieder da; Fassung 2026-11-20c.
-  assert.equal(zahnUkv.textfassung, '2026-11-20c-ukv-zahn-online');
+  // Paket C (C6): Texte der Weiche-Strecke, Fassung 2026-11-20d.
+  assert.equal(zahnUkv.textfassung, '2026-11-20d-ukv-zahn-online');
   for (const v of [zahnUkv.absenden.vorbehalt, zahnUkv.beitrag.vorbehalt]) {
     assert.equal(v, 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV. Zeigt die UKV beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir.');
     assert.doesNotMatch(v, /fragt Healio|[–—]/);

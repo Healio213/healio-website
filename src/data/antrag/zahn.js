@@ -76,6 +76,14 @@ function fuerBayerische(text) {
   return neu;
 }
 
+// Paket C (2.9 Nr. 6): Bei Zahn gibt es weder Größe noch Gewicht. Text 6 ohne den Teilsatz, Kurzfassung für die Zahnfragen.
+export const ohneGroesseGewicht = (text) => {
+  const neu = text.replace(' sowie Größe und Gewicht', '');
+  if (/Größe|Gewicht/.test(neu)) throw new Error('zahn.js: Größe oder Gewicht im Zahn-Text');
+  return neu;
+};
+export const ZAHN_KURZ_GESUNDHEIT = (gesellschaft) => `Healio speichert deine Antworten auf die Zahnfragen und nutzt sie nur, um deinen Antrag an ${gesellschaft} zu übermitteln. Jederzeit widerrufbar.`;
+
 export const ABLEHNUNG_TEXT = 'Leider können wir dir online keinen Tarif der Bayerischen anbieten. Lass uns zusammen schauen, welcher Schutz für dich passt.';
 
 // Ja bei Frage 1 bis 4: Ablehnung der Bayerischen (Risikoprüfung REJECTED).
@@ -127,7 +135,9 @@ const zahn = {
   // 19.11.2026 spät (Ebene 1): Vorbehalt „vorbehaltlich der Annahme“, Smart mit Frage 5 „Ja“ nicht online.
   // 20.11.2026 (Nachbesserung Ebene 1): Smart mit Frage 5 „Ja“ wieder online (Original nimmt an), Vorbehalt ohne Zusage zum Halt.
   // 20.11.2026 (Ebene 2, Paket A): Vorbehalt wieder mit dem Satz zum Halt.
-  textfassung: '2026-11-20b-bayerische-zahn',
+  // 20.11.2026 (Paket C, C6): Einwilligung Gesundheitsangaben (Text 6 und Kurzfassung) ohne „Größe und Gewicht“; auf dem Weg über
+  // die Weiche gelten zusätzlich die Texte aus zahnWeiche.js (definitionFuerWeiche). Der Dienst nimmt 2026-11-20b weiter an.
+  textfassung: '2026-11-20c-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',
@@ -294,8 +304,8 @@ const zahn = {
           art: 'haken',
           key: 'gesundheitsdaten',
           titel: 'Gesundheitsangaben bei Healio',
-          kurz: fuerBayerische(ERKLAERUNG_KURZ.gesundheitsdaten),
-          volltext: [['p', fuerBayerische(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join(''))]],
+          kurz: ZAHN_KURZ_GESUNDHEIT('die Bayerische'),
+          volltext: [['p', ohneGroesseGewicht(fuerBayerische(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join('')))]],
           links: [DATENSCHUTZ_LINK],
           haken: 'Ich bin einverstanden.',
           pflicht: true,

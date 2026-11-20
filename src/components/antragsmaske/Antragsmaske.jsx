@@ -15,7 +15,7 @@ import {
   AntragFehler, berechneSelbstBeitrag, fehlerText, ladeSelbstUnterlagen, sendeSelbstantrag,
 } from '@/lib/antragApi';
 import {
-  Button, LINK, NeuerTab, TRENNUNG, cx, schuetze, sofortScrollen,
+  Button, Callout, LINK, NeuerTab, TRENNUNG, cx, schuetze, sofortScrollen,
 } from '@/components/antrag/ui';
 import SchrittTarif, { fehlerTarif, kernZeilen } from './SchrittTarif';
 import SchrittFrage, { SchrittHinweis, fehlerFrage, fehlerHinweis } from './SchrittFrage';
@@ -94,7 +94,8 @@ function mitVorab(start, vorabDaten) {
   if (!vorabDaten) return start;
   const neu = { ...start, ...vorabDaten };
   if (vorabDaten.antworten) neu.antworten = { ...start.antworten, ...vorabDaten.antworten };
-  if (vorabDaten.plz) neu.formular = { ...start.formular, plz: vorabDaten.plz };
+  // Weiche (Paket C): Name aus der Rückweiche bleibt, die PLZ der Vorfragen kommt dazu.
+  if (vorabDaten.plz || vorabDaten.formular) neu.formular = { ...start.formular, ...(vorabDaten.formular || {}), ...(vorabDaten.plz ? { plz: vorabDaten.plz } : {}) };
   return neu;
 }
 
@@ -245,7 +246,13 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const sperreBis = useRef(0);
 
   // ---- Abgeleitete Werte -----------------------------------------------------
-  const beginnWahl = useMemo(() => pruefen?.beginnWahl || beginnOptionenAus(definition.beginn, heute), [definition, heute, pruefen]);
+  // Paket C (1.2 Nr. 7): Auf dem Weg über die Weiche bietet die Maske keinen Termin an, an dem der Kunde aus der Grenze der Gesellschaft fiele.
+  const beginnWahl = useMemo(() => {
+    const roh = pruefen?.beginnWahl || beginnOptionenAus(definition.beginn, heute);
+    const erlaubt = !pruefen && vorab?.beginnErlaubt;
+    if (!erlaubt) return roh;
+    return { ...roh, weitere: roh.weitere.filter((option) => erlaubt(option)), frueher: roh.frueher && erlaubt(roh.frueher) ? roh.frueher : null };
+  }, [definition, heute, pruefen]); // eslint-disable-line react-hooks/exhaustive-deps
   const beginn = daten.beginnArt === 'anderer'
     ? [...beginnWahl.weitere, beginnWahl.frueher].filter(Boolean).find((option) => option.iso === daten.beginnIso) || null
     : beginnWahl.naechstmoeglich;
@@ -519,6 +526,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const zurueck = () => {
     const jetzt = posRef.current;
     if (jetzt.aendern) { weiter(); return; }
+    // Weiche (1.7): Zurück auf dem ersten Maskenschritt führt zur Weiche; die Eingaben gehen mit, falls die Gesellschaft bleibt.
+    if (vorab?.zurueck && indexVon(jetzt.id) <= 0) { vorab.zurueck(daten); return; }
     if (tiefeRef.current > 0) { window.history.back(); return; }
     const stelle = indexVon(jetzt.id);
     if (stelle > 0) zeige({ id: bildschirme[stelle - 1].id, aendern: null, uebersicht: false });
@@ -706,6 +715,38 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     );
   }
 
+  // ---- Rückweiche und Hinweise der Weiche (Paket C, 1.7 und 2.7) --------------------
+  // Lehnt eine Antwort ab: erst ein anderer Tarif derselben Gesellschaft ohne diese Wirkung (Stufe wechseln, 2.6), dann die
+  // Rückweiche der Zahn-Strecke (vorab.beiAblehnung). Nie ein Wechsel ohne Klick des Kunden.
+  function rueckweicheFuer(frage) {
+    const stop = stopWirkungDerFrage(frage, kontext);
+    if (!stop || pruefen || !vorab?.weiche) return null;
+    if (Array.isArray(stop.tarif)) {
+      const andere = definition.tarife.filter((eintrag) => !stop.tarif.includes(eintrag.id) && angeboten?.[eintrag.id] !== false
+        && !stopWirkungDerFrage(frage, { ...kontext, tarif: eintrag.id }));
+      if (andere.length) {
+        return {
+          art: 'stufe', text: vorab.stufeText, knopf: vorab.stufeKnopf, onKlick: () => zeige({ id: 'tarif', aendern: null, uebersicht: false }),
+        };
+      }
+    }
+    return vorab.beiAblehnung?.({ frageId: frage.id, wert: daten.antworten[frage.id], daten, tarif: daten.tarif }) || null;
+  }
+  let weicheHinweis = null;
+  if (vorab?.weiche && !pruefen && tarif && beginn) {
+    if (pos.id === 'tarif' && vorab.preiseWeiche?.beginnIso && beginn.iso !== vorab.preiseWeiche.beginnIso && daten.zahlweise !== 'jaehrlich') {
+      const alt = vorab.preiseWeiche.stufen?.[tarif.id];
+      const neu = preise?.[tarif.id];
+      if (Number.isFinite(alt) && Number.isFinite(neu) && Math.abs(alt - neu) > 0.004) weicheHinweis = vorab.hinweisBeginn?.(beginn.label, euro(alt), euro(neu));
+    }
+    if (pos.id === 'beitrag' && vorab.zaehne && daten.antworten.TF0021 !== undefined && daten.antworten.TF0021 !== vorab.zaehne && beitrag && geburtsdatum) {
+      const vorher = berechneBeitrag(definition, {
+        tarif: tarif.id, geburtsdatum, beginn, plz: plzFuerPreis, antworten: { ...daten.antworten, TF0021: vorab.zaehne },
+      })?.beitrag;
+      if (Number.isFinite(vorher) && Math.abs(vorher - beitrag.beitrag) > 0.004) weicheHinweis = vorab.hinweisZaehne?.(euro(vorher), euro(beitrag.beitrag), daten.antworten.TF0021);
+    }
+  }
+
   // ---- Inhalt ----------------------------------------------------------------------
   const gemeinsam = {
     definition, daten, set, fehler: fehlerJetzt, ueberschriftRef: unterRef,
@@ -730,6 +771,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         weiter={weiter}
         vorbelegt={Boolean(vorab?.vorbelegt?.includes(aktuell.frage.id) && daten.antworten[aktuell.frage.id] !== undefined)}
         vorbelegtVon={vorab?.quelle}
+        rueckweiche={rueckweicheFuer(aktuell.frage)}
+        ohneUkvAusweg={Boolean(vorab?.weiche && !pruefen)}
       />
     );
   } else if (pos.id === 'beitrag') {
@@ -804,7 +847,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   if (pos.id === 'zahlung' && daten.kontoinhaber === 'andere') weiterText = null;
   if (pos.id === 'zusammenfassung' && !pos.aendern) weiterText = null;
   if (pos.id === 'beitrag' && !beitrag) weiterText = null;
-  const zeigeZurueck = pos.aendern || indexVon(pos.id) > 0;
+  const zeigeZurueck = pos.aendern || indexVon(pos.id) > 0 || Boolean(vorab?.zurueck);
 
   // Abschnitte mit Kurznamen für die Schrittleiste (reine Anzeige).
   const abschnitte = [];
@@ -849,6 +892,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         </div>
         {(pruefen?.kennzeile || !pruefen) && <p className={cx('mt-1 text-base text-home-slate', TRENNUNG)}>{pruefen?.kennzeile || definition.kennzeile}</p>}
 
+        {weicheHinweis && <Callout tone="hinweis" className="mt-5" data-beitrag-geaendert="">{weicheHinweis}</Callout>}
         <div className="mt-5 pb-6 sm:mt-8">{inhalt}</div>
         {/* Wie im Original: Datenschutzhinweise des Versicherers auf jeder Seite der Strecke (SDK, Paket 1 Punkt 11). */}
         {definition.versicherer.datenschutz && (

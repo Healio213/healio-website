@@ -36,6 +36,9 @@ for (const [pfad, definition] of Object.entries(DEFINITIONEN)) {
       assert.equal(vollmacht.dokument, undefined, 'kein Verweis auf eine Datei „Maklervertrag“');
       assert.doesNotMatch(volltext(vollmacht), /Maklervertrag habe ich als PDF erhalten/);
       assert.match(volltext(vollmacht), /als PDF „Mein Antrag“/);
+    } else if (definition.versicherer.id === 'ukv') {
+      // Paket C (2.9 Nr. 10): auch bei der UKV nur Unterlagen mit Datei.
+      assert.deepEqual(healio[0].eintraege.slice(1), []);
     } else assert.deepEqual(healio[0].eintraege.slice(1).map((e) => e.name), texte.UNTERLAGEN_HEALIO);
     const einwilligung = eintraege.find((eintrag) => eintrag.key === 'gesundheitsdaten');
     assert.deepEqual(einwilligung.links, [{ label: 'Datenschutzerklärung', href: '/datenschutz' }]);

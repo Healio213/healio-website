@@ -264,33 +264,46 @@ async function zahn(browser) {
   const page = await context.newPage();
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
   let n = 1;
-  for (const [frage, wert] of [['q1', 'ja'], ['q2', 'keine'], ['q3', 'nein'], ['schmelz', 'nein']]) {
-    await page.waitForSelector(`[data-vorab-frage="${frage}"]`);
-    await schritt(page, s, n++, `vorab-${frage}`);
-    await page.click(`[data-vorab-antwort="${wert}"]`);
-  }
-  await page.waitForSelector('[data-vorab-angaben]');
-  // Leere und falsche Vorab-Angaben.
+  // Paket C (20.11.2026): Weiche mit Geburtsdatum, Krankenversicherung, Einwilligung und Vorfragen, PLZ an der Weiche.
+  await page.waitForSelector('[data-vorab-frage="V1"]');
+  await schritt(page, s, n++, 'vorab-V1');
+  // Leeres und falsches Geburtsdatum.
   await page.click('[data-vorab-weiter]'); await page.waitForTimeout(400);
-  const vorabFehler = await page.evaluate(() => [...document.querySelectorAll('[data-vorab-angaben] [role="alert"], [data-vorab-angaben] [id*="fehler"]')].filter((el) => el.offsetParent !== null).map((el) => el.textContent.trim()));
-  if (!vorabFehler.length) mangel(s, 'Vorabfrage: leeres Weiter ohne Fehlermeldung');
+  const vorabFehler = await page.evaluate(() => [...document.querySelectorAll('[data-vorab-frage] [role="alert"], [data-vorab-frage] [id*="fehler"]')].filter((el) => el.offsetParent !== null).map((el) => el.textContent.trim()).filter(Boolean));
+  if (!vorabFehler.length) mangel(s, 'Weiche: leeres Weiter beim Geburtsdatum ohne Fehlermeldung');
   vorabFehler.forEach((t) => bericht.fehlertexte.push(`zahn/vorab-leer: ${t}`));
   await page.fill('#vorab-geburtsdatum', PERSON.geburt);
-  await page.fill('#vorab-plz', '209');
-  await page.click('[data-vorab-weiter]'); await page.waitForTimeout(400);
-  const plzFehler = await page.evaluate(() => [...document.querySelectorAll('[data-vorab-angaben] [role="alert"], [data-vorab-angaben] [id*="fehler"]')].filter((el) => el.offsetParent !== null).map((el) => el.textContent.trim()));
-  if (!plzFehler.length && !(await page.locator('[data-vorab-angaben]').count() === 0)) mangel(s, 'Vorabfrage: PLZ mit drei Ziffern nicht abgewiesen');
+  await tastatur(page, s, 'vorab-V1');
+  await page.click('[data-vorab-weiter]');
+  await page.waitForSelector('[data-vorab-frage="V2"]');
+  await schritt(page, s, n++, 'vorab-V2');
+  await page.click('[data-vorab-antwort="pflicht"]');
+  await page.waitForSelector('[data-einwilligung]');
+  await page.click('[data-einwilligung-weiter]'); await page.waitForTimeout(400);
+  const einwFehler = await page.evaluate(() => [...document.querySelectorAll('[data-einwilligung] [role="alert"], [data-einwilligung] [id*="fehler"]')].filter((el) => el.offsetParent !== null).map((el) => el.textContent.trim()).filter(Boolean));
+  if (!einwFehler.length) mangel(s, 'Weiche: Einwilligung ohne Haken ohne Fehlermeldung');
+  einwFehler.forEach((t) => bericht.fehlertexte.push(`zahn/einwilligung: ${t}`));
+  await schritt(page, s, n++, 'vorab-einwilligung');
+  await page.locator('label:has(#feld-weicheEinwilligung)').click();
+  await page.click('[data-einwilligung-weiter]');
+  for (const [frage, wert] of [['V3', 'steht_an'], ['V3a', 'nein'], ['V4', '0'], ['V5', 'nein']]) {
+    await page.waitForSelector(`[data-vorab-frage="${frage}"]`);
+    await schritt(page, s, n++, `vorab-${frage}`);
+    await page.click(`[data-vorab-frage="${frage}"] [data-vorab-antwort="${wert}"]`);
+  }
+  await page.waitForSelector('[data-weiche-ergebnis]');
+  await page.fill('#weiche-plz', '209');
+  await page.click('[data-weiche-plz-weiter]'); await page.waitForTimeout(400);
+  const plzFehler = await page.evaluate(() => [...document.querySelectorAll('[data-weiche-ergebnis] [role="alert"], [data-weiche-ergebnis] [id*="fehler"]')].filter((el) => el.offsetParent !== null).map((el) => el.textContent.trim()).filter(Boolean));
+  if (!plzFehler.length) mangel(s, 'Weiche: PLZ mit drei Ziffern nicht abgewiesen');
   plzFehler.forEach((t) => bericht.fehlertexte.push(`zahn/vorab-plz: ${t}`));
-  if (await page.locator('#vorab-plz').count()) await page.fill('#vorab-plz', PERSON.plz);
-  await tastatur(page, s, 'vorab-angaben');
-  await schritt(page, s, n++, 'vorab-angaben');
-  if (await page.locator('[data-vorab-weiter]').count()) await page.click('[data-vorab-weiter]');
-  await page.waitForSelector('[data-vorab-ergebnis]');
-  await page.waitForFunction(() => /EUR/.test(document.querySelector('[data-vorab-preis]')?.textContent || ''), null, { timeout: 15000 }).catch(() => {});
-  bericht.werte[`${s}.vorabErgebnis`] = (await page.getAttribute('[data-vorab-ergebnis]', 'data-vorab-ergebnis'));
-  bericht.werte[`${s}.vorabPreis`] = ((await page.textContent('[data-vorab-preis]').catch(() => '')) || '').replace(/\s+/g, ' ').trim();
+  await page.fill('#weiche-plz', PERSON.plz);
+  await tastatur(page, s, 'weiche-plz');
+  await page.waitForFunction(() => document.querySelectorAll('[data-weiche-stufe]').length === 3, null, { timeout: 15000 }).catch(() => {});
+  bericht.werte[`${s}.vorabErgebnis`] = (await page.getAttribute('[data-weiche-ergebnis]', 'data-weiche-ergebnis'));
+  bericht.werte[`${s}.vorabPreis`] = ((await page.textContent('[data-weiche-preis]').catch(() => '')) || '').replace(/\s+/g, ' ').trim();
   await schritt(page, s, n++, 'vorab-ergebnis');
-  await page.click('[data-vorab-start]');
+  await page.click('[data-weiche-weiter]');
   await bildschirm(page, 'tarif');
   await page.waitForSelector('[data-gesamtbeitrag]');
   bericht.werte[`${s}.tarifGesamt`] = (await page.textContent('[data-gesamtbeitrag]')).replace(/\s+/g, ' ').trim();

@@ -109,13 +109,16 @@ export default function SchrittErklaerungen({
   return (
     <div className="space-y-4">
       <TeilKopf vorTitel={anzahl > 1 ? `Teil ${nummer} von ${anzahl}` : null} titel={teil.teil} ueberschriftRef={ueberschriftRef} />
-      {teil.eintraege.map((eintrag) => {
+      {teil.eintraege.filter((eintrag) => bedingungErfuellt(eintrag.bedingung, kontext)).map((eintrag) => {
+        // Paket C (1.18): Nachweis der Einwilligung vor den Zahnfragen (Weiche). Gegeben ist sie schon, die Maske zeigt sie nicht noch einmal.
+        if (eintrag.art === 'nachweis') return null;
         if (eintrag.art === 'hinweis') {
           return (
             <div key={eintrag.text.slice(0, 30)} className={cx('flex gap-3 rounded-[1.2rem] bg-home-mint/10 p-4 text-base leading-7 text-home-midnight ring-1 ring-emerald-900/10', TRENNUNG)}>
               <Info className="mt-1 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
               <div className="min-w-0">
                 <p>{schuetze(eintrag.text)}</p>
+                {(eintrag.absaetze || []).map((absatz) => <p key={absatz.slice(0, 30)} className="mt-2">{schuetze(absatz)}</p>)}
                 {eintrag.terminLink && <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>Termin vereinbaren<NeuerTab /></a>}
               </div>
             </div>

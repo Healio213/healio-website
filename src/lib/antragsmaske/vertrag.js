@@ -62,6 +62,8 @@ export function baueSelbstantrag(definition, daten, {
     sparte: definition.sparte,
     versicherer: definition.versicherer.id,
     textfassung: definition.textfassung,
+    // Paket C (1.18): Antrag über die Weiche der Zahn-Strecke (Einwilligung vor den Zahnfragen mit Zeitpunkt, Texte nach 2.9).
+    ...(definition.weiche ? { weiche: true } : {}),
     angaben: angabenAus(daten, beginn, heute),
     gesundheit: definition.gesundheitFuerVertrag(daten.antworten || {}, { tarif: daten.tarif, bausteine: daten.bausteine || [] }),
     ...(definition.bausteine ? { bausteine: (daten.bausteine || []).filter((id) => definition.bausteine.some((baustein) => baustein.id === id)) } : {}),

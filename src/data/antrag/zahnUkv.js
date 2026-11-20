@@ -18,8 +18,9 @@
 import { HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
 import {
   ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, TEIL_3_TITEL, TEXT_10_VOLLMACHT, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
-  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS, UNTERLAGEN_HEALIO,
+  TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS,
 } from '../sdkAmbulantAntragTexte.js';
+import { ZAHN_KURZ_GESUNDHEIT, ohneGroesseGewicht } from './zahn.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
 import { DATENSCHUTZ_LINK } from './sdkStrecke.js';
 import { bedingungErfuellt } from '../../lib/antragsmaske/regeln.js';
@@ -114,7 +115,12 @@ tf0021.optionen = tf0021.optionen.map((option) => {
 
 const gf0073 = { ...frageAus(f(4, 'GF0073'), { schritt: 4 }), titel: 'Laufende oder empfohlene Behandlung', kurz: 'Laufende oder empfohlene Behandlung', wirkung: { ja: keineAufnahme } };
 const gf0074 = {
-  ...frageAus(f(4, 'GF0074'), { schritt: 4 }), titel: 'Parodontose', kurz: 'Parodontose', wirkung: { ja: [{ art: 'ausschluss', text: 'Für Parodontosebehandlungen besteht kein Versicherungsschutz.' }] },
+  ...frageAus(f(4, 'GF0074'), { schritt: 4 }),
+  titel: 'Parodontose',
+  kurz: 'Parodontose',
+  wirkung: { ja: [{ art: 'ausschluss', text: 'Für Parodontosebehandlungen besteht kein Versicherungsschutz.' }] },
+  // 2.9 Nr. 14: Die Wirkung „ausschluss“ zeigt die Maske sonst nirgends.
+  hinweisNachJa: 'Für Parodontosebehandlungen hast du bei der UKV keinen Versicherungsschutz. Dein Beitrag ändert sich dadurch nicht.',
 };
 // C9: Im Original sichtbar, eine Antwort (TABELLE Nr. 29), Pflicht. Keine Vorauswahl.
 const vp0004 = { ...frageAus(f(4, 'VP0004'), { schritt: 4 }), titel: 'Beziehung zum Versicherungsnehmer', kurz: 'Beziehung zum Versicherungsnehmer' };
@@ -168,7 +174,9 @@ const zahnUkv = {
   // 20.11.2026 (Paket C, C7 bis C13): UKV 1 zu 1 (privat lehnt ab, Mindestbeitrag, Beginn ohne Rückwirkung, offene Fälle,
   // Versicherungsnehmer und Beziehung sichtbar, Unterlagen je Tarif) und Vorbehalt wieder mit dem Satz zum Halt (Preisabgleich C13).
   // Der Dienst nimmt 2026-11-20b weiter an, 2026-11-12 nicht mehr (Ergänzung 1.20: C7 und C9 ändern Regeln).
-  textfassung: '2026-11-20c-ukv-zahn-online',
+  // 20.11.2026 (Paket C, C6): Text 6 und Kurzfassung ohne „Größe und Gewicht“, Satz nach GF0074 „Ja“, Unterlagen „Von Healio“ nur mit
+  // Datei. Auf dem Weg über die Weiche zusätzlich die Texte aus zahnWeiche.js. Der Dienst nimmt 2026-11-20c und 2026-11-20b weiter an.
+  textfassung: '2026-11-20d-ukv-zahn-online',
   quelle: 'Online-Strecke der UKV (Level Nine, mandant vmk), erfasst 12.11.2026',
   versicherer: {
     id: 'ukv', name: UKV, kurz: 'UKV', beiDer: 'der UKV',
@@ -292,8 +300,8 @@ const zahnUkv = {
           art: 'haken',
           key: 'gesundheitsdaten',
           titel: 'Gesundheitsangaben bei Healio',
-          kurz: fuerUkv(ERKLAERUNG_KURZ.gesundheitsdaten),
-          volltext: [['p', fuerUkv(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join(''))]],
+          kurz: ZAHN_KURZ_GESUNDHEIT('die UKV'),
+          volltext: [['p', ohneGroesseGewicht(fuerUkv(TEXT_6_GESUNDHEIT.map((stueck) => (stueck === TEXT_6_STANDORT_PLATZHALTER ? TEXT_6_STANDORT : stueck)).join('')))]],
           links: [DATENSCHUTZ_LINK],
           haken: 'Ich bin einverstanden.',
           pflicht: true,
@@ -321,7 +329,8 @@ const zahnUkv = {
                 name, dateien: [{ label: name, dienstId }], ...(UKV_UNTERLAGEN_NUR[dienstId] ? { bedingung: { tarif: [...UKV_UNTERLAGEN_NUR[dienstId]] } } : {}),
               })),
             },
-            { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))] },
+            // Paket C (2.9 Nr. 10): wie Paket 2 bei der Bayerischen nur Unterlagen mit Datei; die Healio-Erklärungen stehen in „Mein Antrag“.
+            { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }] },
           ],
           pflicht: false,
         },

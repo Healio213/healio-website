@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
-import { frageFehler, sichtbareFolgefragen, zahlAusText } from '@/lib/antragsmaske/regeln';
+import {
+  euro, frageFehler, sichtbareFolgefragen, zahlAusText,
+} from '@/lib/antragsmaske/regeln';
 import {
   Aufklapper, Callout, FOKUS, FehlerText, Field, Gruppe, OptionCard, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria,
 } from '@/components/antrag/ui';
@@ -280,8 +282,45 @@ const AUSWEGE = {
     ? { href: '/antrag/zahn-ukv', label: 'UKV ZahnPRIVAT beantragen' }
     : { href: UKV_URL, label: 'UKV ZahnPRIVAT online berechnen', extern: true }),
 };
-function PruefungHinweis({ wirkung, sparte }) {
-  const auswege = (wirkung.auswege || ['telefon', 'termin']).map((art) => AUSWEGE[art]?.(sparte)).filter(Boolean)
+// Rückweiche der Zahn-Strecke (Paket C, 1.7 und 2.6): eigener Kasten mit Wechselknopf und „Lieber am Telefon“. Gewechselt wird
+// erst mit dem Klick; der neue Beitrag steht vorher da.
+function RueckweicheHinweis({ rueckweiche, wirkung, sparte }) {
+  const telefon = AUSWEGE.telefon(sparte);
+  const knopf = buttonClass('primary');
+  return (
+    <Callout tone="hinweis" title={rueckweiche.titel || 'Hier geht es online leider nicht weiter.'} data-pruefung="" data-rueckweiche={rueckweiche.art || 'wechsel'}>
+      {rueckweiche.art === 'stufe' && wirkung.text && <p>{wirkung.text}</p>}
+      {rueckweiche.text && <p>{rueckweiche.text}</p>}
+      {rueckweiche.stufen?.length > 0 && (
+        <ul className="mt-2 space-y-1" data-rueckweiche-stufen="">
+          {rueckweiche.stufen.map((stufe) => (
+            <li key={stufe.id} className="flex flex-wrap justify-between gap-x-3 font-semibold" data-rueckweiche-stufe={stufe.id}>
+              <span>{stufe.name}</span>
+              <span className="whitespace-nowrap">{euro(stufe.beitrag)} im Monat</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {rueckweiche.beginn && <p className="mt-1">Beitrag bei Beginn am {rueckweiche.beginn.label}</p>}
+      <div className="mt-3 flex flex-wrap gap-2">
+        {!rueckweiche.nurTelefon && rueckweiche.href && (
+          <a href={rueckweiche.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={knopf} data-rueckweiche-knopf="">
+            {rueckweiche.knopf}
+            <span className="sr-only"> (öffnet in neuem Tab)</span>
+          </a>
+        )}
+        {!rueckweiche.nurTelefon && !rueckweiche.href && <button type="button" onClick={rueckweiche.onKlick} className={knopf} data-rueckweiche-knopf="">{rueckweiche.knopf}</button>}
+        <a href={telefon.href} data-zaehler-ignorieren="" data-ausweg="" className={buttonClass('secondary')}>Lieber am Telefon</a>
+      </div>
+    </Callout>
+  );
+}
+
+// ohneUkv (Weiche, Ergänzung 1.7): Der statische Ausweg „UKV“ ist ein Neuanfang ohne Prüfung der Lage; auf dem Weg über die Weiche gilt
+// stattdessen die Rückweiche, sonst Telefon und Termin.
+function PruefungHinweis({ wirkung, sparte, ohneUkv = false }) {
+  const arten = (wirkung.auswege || ['telefon', 'termin']).filter((art) => !(ohneUkv && art === 'ukv'));
+  const auswege = (arten.length ? arten : ['telefon', 'termin']).map((art) => AUSWEGE[art]?.(sparte)).filter(Boolean)
     .filter((weg, stelle, alle) => alle.findIndex((anderer) => anderer.href === weg.href) === stelle);
   return (
     <Callout tone="hinweis" title={wirkung.art === 'keineAufnahme' ? 'Hier geht es online leider nicht weiter.' : 'Das schauen wir uns am besten zusammen an.'} data-pruefung="">
@@ -299,7 +338,7 @@ function PruefungHinweis({ wirkung, sparte }) {
 }
 
 export default function SchrittFrage({
-  definition, frage, nummer, anzahl, daten, setAntwort, beantworte, gesperrt, fehler, ueberschriftRef, kontext, stop, weiter, vorbelegt = false, vorbelegtVon,
+  definition, frage, nummer, anzahl, daten, setAntwort, beantworte, gesperrt, fehler, ueberschriftRef, kontext, stop, weiter, vorbelegt = false, vorbelegtVon, rueckweiche = null, ohneUkvAusweg = false,
 }) {
   const folge = sichtbareFolgefragen(frage, kontext);
   // Bei Folgefragen ohne Hinweis: Hinweis bei „ja“ trotzdem zeigen (SDK stationär).
@@ -349,7 +388,10 @@ export default function SchrittFrage({
       <div className="space-y-3">
         <Folgefragen frage={frage} daten={daten} setAntwort={setAntwort} beantworte={beantworte} fehler={fehler} kontext={kontext} />
       </div>
-      {stop && <PruefungHinweis wirkung={stop} sparte={definition.sparte} />}
+      {/* Paket C (2.9 Nr. 14): Satz nach einer Ja-Antwort ohne Folgefragen, z. B. UKV GF0074 (Ausschluss Parodontose). */}
+      {folge.length === 0 && wert === 'ja' && frage.hinweisNachJa && <p className="text-base leading-6 text-emerald-900" data-hinweis-ja="">{frage.hinweisNachJa}</p>}
+      {stop && rueckweiche && <RueckweicheHinweis rueckweiche={rueckweiche} wirkung={stop} sparte={definition.sparte} />}
+      {stop && !rueckweiche && <PruefungHinweis wirkung={stop} sparte={definition.sparte} ohneUkv={ohneUkvAusweg} />}
     </div>
   );
 }

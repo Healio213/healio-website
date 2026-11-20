@@ -95,6 +95,7 @@ let aufschlag = 0;
 let unterlagenLeer = 0; // NUR TEST: so viele Listenabrufe liefern eine leere Liste
 let regionWeg = 0; // NUR TEST: Rechner der Bayerischen nicht erreichbar (Ebene 1, B3)
 let letzter = null;
+let preisAnfragen = [];
 let zaehler = 0;
 
 function senden(antwort, status, daten, herkunft) {
@@ -275,10 +276,12 @@ const server = http.createServer((anfrage, antwort) => {
   if (pfad === '/antrag/gesund') { senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/telefon') { senden(antwort, 200, { ok: true, telefon: TELEFON_GESUNDHEIT }, herkunft); return; }
   if (pfad === '/__test/letzter') { senden(antwort, 200, { ok: true, letzter }, herkunft); return; }
+  // Paket C (Test 50): Bausteine der Preisabfragen (nur Schlüssel ohne Personenangaben), damit die Weiche nachweisbar keinen Baustein schickt.
+  if (pfad === '/__test/preisanfragen') { senden(antwort, 200, { ok: true, anfragen: preisAnfragen }, herkunft); return; }
   if (pfad === '/__test/beitrag-aendern') { aufschlag = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/unterlagen-leer') { unterlagenLeer = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
   if (pfad === '/__test/region-weg') { regionWeg = 1; senden(antwort, 200, { ok: true }, herkunft); return; }
-  if (pfad === '/__test/zuruecksetzen') { regionWeg = 0; unterlagenLeer = 0; aufschlag = 0; letzter = null; senden(antwort, 200, { ok: true }, herkunft); return; }
+  if (pfad === '/__test/zuruecksetzen') { regionWeg = 0; unterlagenLeer = 0; aufschlag = 0; letzter = null; preisAnfragen = []; senden(antwort, 200, { ok: true }, herkunft); return; }
   // Unterlagen wie der Dienst (SCHNITTSTELLE.md 12.6): Liste und Datei. NUR TEST:
   // Platzhalter-PDFs mit dem Vermerk „Testdatei der Attrappe“, keine echten Unterlagen.
   if ((pfad === '/antrag/api/unterlagen' || pfad === '/antrag/api/unterlagen/datei') && anfrage.method === 'GET') {
@@ -397,6 +400,7 @@ const server = http.createServer((anfrage, antwort) => {
     let body;
     try { body = JSON.parse(roh); } catch { senden(antwort, 400, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: [] }, herkunft); return; }
     if (pfad === '/antrag/api/selbstantrag/beitrag') {
+      preisAnfragen.push({ schluessel: Object.keys(body || {}).sort(), bausteine: body?.bausteine ?? null, tarifCode: body?.tarifCode ?? null });
       if (body?.sparte !== 'zahn' || body?.versicherer !== 'bayerische') { senden(antwort, 409, { ok: false, fehler: 'antrag_sparte_nicht_bereit' }, herkunft); return; }
       const beitrag = zahnBeitrag(body);
       if (!beitrag) { senden(antwort, 422, { ok: false, fehler: 'antrag_angaben_ungueltig', felder: [] }, herkunft); return; }

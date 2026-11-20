@@ -1,3 +1,7 @@
+// Seit Paket C (20.11.2026) nicht mehr in der Strecke: Die Weiche steht in
+// src/data/antrag/zahnWeiche.js (ohne Wunschfrage q4 und ohne Stufenvorgabe).
+// Die Datei bleibt bis zu Franks Freigabe unverändert stehen, ebenso ihr Test.
+//
 // Vorabfrage der Zahn-Strecke /antrag/zahn (12.11.2026, Franks Auftrag): Der
 // Kunde wählt keinen Versicherer. Healio fragt vorab, daraus folgt genau ein
 // Ziel: UKV ZahnPRIVAT, die Bayerische mit ZAHN Sofort oder das Telefon.
