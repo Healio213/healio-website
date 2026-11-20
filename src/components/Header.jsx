@@ -11,6 +11,8 @@ import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl, trackSdkClick } from '@/lib/sdk-url';
 import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
+import { useStationaerSelection } from '@/lib/stationaer-selection';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { scrollToTarget } from '@/components/guided/SelfServiceEntryActions';
 import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
@@ -48,17 +50,43 @@ const Header = () => {
   // Frank 01.11.2026: Auf den Produktseiten führt der Kopfknopf zum Onlineabschluss,
   // nur die Startseite behält den Termin.
   const selfServiceTarget = guidedSurface ? { ambulant: 'tarifwahl', zahn: 'zahn-check', stationaer: 'tarife' }[guidedProduct] : undefined;
-  const selfServiceLink = (placement, className, onClick) => (
+  // Frank 20.11.2026: Steht „abschließen“ oben, öffnet der Knopf gleich den Antrag,
+  // nicht erst die Tarifwahl. Für Stationär auf deutschen Seiten mit direkter Maske
+  // (LeadCaptureProvider, direkteMaske) zeigt er auf den SDK-Rechner mit dem
+  // gewählten Tarif; LeadCaptureLink führt dann in /antrag/stationaer. Sonst wie bisher.
+  const stationaerTarif = useStationaerSelection();
+  const stationaerAntragUrl = guidedProduct === 'stationaer'
+    ? buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: stationaerTarif })
+    : null;
+  const selfServiceDirekt = Boolean(stationaerAntragUrl && direkteMaske(stationaerAntragUrl, location.pathname));
+  const selfServiceLabel = (placement) => (
+    <>
+      {placement === 'mobile' ? (lang === 'de' ? 'Abschließen' : 'Apply') : (lang === 'de' ? 'Online abschließen' : 'Apply online')}
+      {placement === 'desktop' && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
+    </>
+  );
+  const selfServiceLink = (placement, className, onClick) => (selfServiceDirekt ? (
+    <LeadCaptureLink
+      href={stationaerAntragUrl}
+      trackingCategory="sdk-stationaer"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-self-service-header={placement}
+      onClick={() => { onClick?.(); trackSdkClick(`stationaer-header-${placement}`, referrer); }}
+      className={className}
+    >
+      {selfServiceLabel(placement)}
+    </LeadCaptureLink>
+  ) : (
     <a
       href={`#${selfServiceTarget}`}
       data-self-service-header={placement}
       onClick={(event) => { onClick?.(); scrollToTarget(event, selfServiceTarget, false); }}
       className={className}
     >
-      {placement === 'mobile' ? (lang === 'de' ? 'Abschließen' : 'Apply') : (lang === 'de' ? 'Online abschließen' : 'Apply online')}
-      {placement === 'desktop' && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
+      {selfServiceLabel(placement)}
     </a>
-  );
+  ));
   const isCompany = location.pathname === '/unternehmen'
     || location.pathname === '/en/companies'
     || location.pathname === '/unternehmen/vorsorge-rechner'

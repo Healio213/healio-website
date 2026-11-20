@@ -230,7 +230,16 @@ test('DE/EN-Header führt auf Produktseiten zum Onlineabschluss statt zum Termin
       for (const placement of ['desktop', 'mobile']) {
         const link = document.querySelector(`[data-self-service-header="${placement}"]`);
         assert.equal(link?.tagName, 'A', `${path}/${placement}: Abschluss-Link im Kopf`);
-        assert.equal(link.getAttribute('href'), `#${selfServiceHeaderTargets[product]}`);
+        if (path === '/stationaer') {
+          // Frank 20.11.2026: Stationär ist eingeschaltet; „abschließen“ oben führt direkt in den Antrag
+          // (SDK-Link mit gewähltem Tarif, LeadCaptureProvider macht daraus /antrag/stationaer).
+          const ziel = new URL(link.getAttribute('href'));
+          assert.equal(ziel.hostname, 'insurances-online.levelnine.biz', `${path}/${placement}: SDK-Link`);
+          assert.equal(ziel.searchParams.get('tarifftypes'), 'Stationär');
+          assert.equal(ziel.searchParams.get('tariffs'), 'SDKSP2@', `${path}/${placement}: Vorwahl SP2`);
+        } else {
+          assert.equal(link.getAttribute('href'), `#${selfServiceHeaderTargets[product]}`);
+        }
       }
       assert.equal(document.querySelector(`[data-guided-callback="${product}"]`), null, `${path}: kein Termin-Knopf im Kopf`);
       assert.equal(h.requests.length, 0);

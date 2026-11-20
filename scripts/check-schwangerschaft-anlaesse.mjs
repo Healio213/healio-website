@@ -260,7 +260,8 @@ test('Die Seite /schwangerschaft selbst bleibt unberührt: kein Link auf die neu
 test('Abschlussknöpfe: feste Links ohne Parameter, nur anonyme Zähler-Ereignisse', () => {
   const quelle = lies('src/pages/SchwangerschaftAnlassPage.jsx');
   assert.match(quelle, /BAYERISCHE_STATIONAER_URL.*from '@\/components\/sections\/hospital\/hospitalLinks'/);
-  assert.match(quelle, /buildSdkUrl\(\{ ref: referrer, tarifTypes: 'Stationär' \}\)/);
+  // 20.11.2026: fester Tarif SP1 (die Seite stellt nur SP1 vor), sonst keine Parameter aus dem Rechner.
+  assert.match(quelle, /buildSdkUrl\(\{ ref: referrer, tarifTypes: 'Stationär', tarif: 'sp1' \}\)/);
   assert.match(quelle, /zaehle\('versicherer_klick', \{ ziel: 'bayerische' \}\)/);
   assert.match(quelle, /zaehle\('sdk_klick'\)/);
   for (const verboten of ['trackStationaerBayerischeClick', 'trackSdkClick', 'trackGoogleAdsAntrag', 'trackEvent', 'trackMeta', 'localStorage', 'sessionStorage', 'URLSearchParams']) {

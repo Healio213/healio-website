@@ -90,8 +90,9 @@ const SchwangerschaftAnlassPage = ({ inhalt }) => {
   } = inhalt;
 
   // Dieselbe SDK-Klinikstrecke wie auf /schwangerschaft, Ref-Code wie dort. Die Auswahl des Rechners kommt nie in den Link.
+  // 20.11.2026: Die Seite stellt nur SP1 vor, darum ist SP1 im Rechner und im Antrag vorgewählt.
   const referrer = useReferrer();
-  const sdkUrl = useMemo(() => buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' }), [referrer]);
+  const sdkUrl = useMemo(() => buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: 'sp1' }), [referrer]);
 
   const knopfBayerische = (text, extra = '') => (
     <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" onClick={zaehleBayerische} aria-label={`${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
