@@ -17,7 +17,7 @@
 
 import { HINWEIS_MINDERJAEHRIG } from '../sdkAmbulantAntrag.js';
 import {
-  BEITRAG_VORBEHALT, ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, TEIL_3_TITEL, TEXT_10_VOLLMACHT, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
+  ERKLAERUNG_KURZ, KNOPF_BEANTRAGEN, TEIL_3_TITEL, TEXT_10_VOLLMACHT, TEXT_12_KNOPF, TEXT_13_FRAGE, TEXT_6_GESUNDHEIT,
   TEXT_6_STANDORT_PLATZHALTER, TEXT_9_HAKEN, TEXT_9_HINWEIS, UNTERLAGEN_HEALIO,
 } from '../sdkAmbulantAntragTexte.js';
 import { TEXT_6_STANDORT } from '../sdkAmbulantAntragSdkTexte.js';
@@ -30,6 +30,8 @@ import {
 const SCHRITTE = LEVELNINE.ukvZahn.schritte;
 const f = (schritt, id) => feldAus(SCHRITTE, schritt, id);
 const UKV = 'Union Krankenversicherung AG';
+// Ohne Halt-Zusage: Der Einreicher vergleicht bei der UKV keinen Preis (Paket C). Erst danach darf wieder ein Satz zum Halt hier stehen.
+const VORBEHALT_UKV = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV.';
 
 const LEVEL_NINE_SDK = 'in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt';
 const LEVEL_NINE_UKV = 'in die Online-Antragsstrecke der UKV, die die cpit comparit GmbH (Level Nine) für die UKV betreibt';
@@ -104,7 +106,9 @@ const zahnUkv = {
   schalter: 'ukvZahn',
   bereit: true,
   stand: '2026-11-12',
-  textfassung: '2026-11-12-ukv-zahn-online',
+  // 20.11.2026 (Nachbesserung Ebene 2): Vorbehalt ohne die Zusage „fragt Healio dich vorher“, denn für die UKV gibt es noch keinen
+  // Preisabgleich beim Eintragen. Der Dienst nimmt die Fassung 2026-11-12 weiter an.
+  textfassung: '2026-11-20b-ukv-zahn-online',
   quelle: 'Online-Strecke der UKV (Level Nine, mandant vmk), erfasst 12.11.2026',
   versicherer: {
     id: 'ukv', name: UKV, kurz: 'UKV', beiDer: 'der UKV',
@@ -135,7 +139,7 @@ const zahnUkv = {
   alter: {
     min: 18, max: 80, maxZaehlung: 'kalenderjahr', stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG, hinweisZuAlt: 'Ab 81 Jahren nehmen wir den Antrag gemeinsam mit dir auf.',
   },
-  beitrag: { alter: 'kalenderjahr', gruppen: GRUPPEN, vorbehalt: fuerUkv(BEITRAG_VORBEHALT) },
+  beitrag: { alter: 'kalenderjahr', gruppen: GRUPPEN, vorbehalt: VORBEHALT_UKV },
 
   gesundheit: {
     titel: 'Zahnfragen',
@@ -241,7 +245,7 @@ const zahnUkv = {
   ],
 
   zusammenfassung: { titel: TEIL_3_TITEL },
-  absenden: { satz: fuerUkv(TEXT_12_KNOPF), vorbehalt: fuerUkv(BEITRAG_VORBEHALT), knopf: KNOPF_BEANTRAGEN },
+  absenden: { satz: fuerUkv(TEXT_12_KNOPF), vorbehalt: VORBEHALT_UKV, knopf: KNOPF_BEANTRAGEN },
   verdeckt: [
     { schritt: 3, feld: 'policyHolderIsEqualInsuredPerson', wert: 'true' },
     { schritt: 3, feld: 'agentConfirmation', wert: 'true', hinweis: 'Maklerbestätigung, setzt das Original verdeckt (Frank klärt mit Fonds Finanz/UKV)' },

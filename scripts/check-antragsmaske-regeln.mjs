@@ -699,6 +699,11 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
     assert.match(def.textfassung, /^2026-11-20b-/);
   }
-  assert.equal(zahnUkv.textfassung, '2026-11-12-ukv-zahn-online', 'UKV unverändert');
+  // Nachbesserung Ebene 2 (20.11.2026): UKV ohne Preisabgleich, also ohne Zusage im Vorbehalt; neue Textfassung.
+  assert.equal(zahnUkv.textfassung, '2026-11-20b-ukv-zahn-online');
+  for (const v of [zahnUkv.absenden.vorbehalt, zahnUkv.beitrag.vorbehalt]) {
+    assert.equal(v, 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV.');
+    assert.doesNotMatch(v, /fragt Healio|reicht Healio nichts ein|[–—]/);
+  }
   assert.equal(zahnUkv.absenden.nachEingang, undefined);
 });
