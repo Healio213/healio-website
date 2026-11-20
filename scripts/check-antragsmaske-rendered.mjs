@@ -422,11 +422,10 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
     await zahnCheckBayerische(page);
     const link = page.locator('a[href*="diebayerische.de/diebayerische/online-berechnen/zahn"]').filter({ visible: true }).first();
     await link.scrollIntoViewIfNeeded();
-    await link.click();
-    await page.waitForSelector('[data-wegewahl="zahn"]');
-    pruefe(await page.getAttribute('[data-weg="allein"]', 'href') === '/antrag/zahn' || (await page.getAttribute('[data-weg="allein"]', 'href')).startsWith('/antrag/zahn?ref='), 'Zahn: Allein führt in die eigene Maske');
-    await foto(page, `${breite}-wahl-zahn`);
-    await page.click('[data-weg="allein"]');
+    // Ohne Telefonweg Zahn (19.11.2026) keine Wahl: der Knopf führt direkt in die eigene Maske, ref läuft mit.
+    await Promise.all([page.waitForURL(/\/antrag\/zahn\?/), link.click()]);
+    pruefe(new URL(page.url()).searchParams.get('ref') === WERBER.ref, `Zahn: Knopf führt direkt in die eigene Maske mit ref (${page.url()})`);
+    await foto(page, `${breite}-zahn-direkt-maske`);
   } else {
     await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
     // Direkt aufgerufen: erst Healios Vorabfrage, dann ohne Bruch die Bayerische.
@@ -996,6 +995,29 @@ async function wahl(browser, breite) {
     const link = page.locator(ziele[sparte]).filter({ visible: true }).first();
     pruefe(await link.count() > 0, `${sparte}: Abschlussknopf gefunden`);
     await link.scrollIntoViewIfNeeded();
+    // Ohne Telefonweg (hier Zahn und Stationär) gibt es nichts zu wählen: Der Knopf führt direkt in die Maske (19.11.2026).
+    if (sparte === 'zahn') {
+      await Promise.all([page.waitForURL(/\/antrag\/zahn\?/), link.click()]);
+      pruefe(new URL(page.url()).searchParams.get('letzteSeite') === '/zahn' && await page.locator('[data-wegewahl]').count() === 0, `zahn: direkt in die Maske ohne Wahl (${page.url()})`);
+      continue;
+    }
+    if (sparte === 'stationaer') {
+      await Promise.all([page.waitForURL(/\/antrag\/stationaer\?/), link.click()]);
+      const ziel = new URL(page.url());
+      pruefe(ziel.searchParams.get('einstiegsseite') === '/stationaer' && ziel.searchParams.get('letzteSeite') === '/stationaer', `stationär: direkt in die Maske mit Herkunft (${ziel.pathname}${ziel.search})`);
+      await page.waitForSelector('[data-bildschirm="tarif"]');
+      pruefe(await page.locator('[data-wegewahl]').count() === 0, 'stationär: keine Wahl');
+      await foto(page, `${breite}-stationaer-direkt-maske`);
+      // Auch einfache Links (ohne LeadCaptureLink) auf deutschen Seiten, z. B. /schwangerschaft.
+      await page.goto(`${AN}/schwangerschaft?ref=HP-test`, { waitUntil: 'networkidle' });
+      const klinik = page.locator(ziele.stationaer).filter({ visible: true }).first();
+      if (await klinik.count()) {
+        await klinik.scrollIntoViewIfNeeded();
+        await Promise.all([page.waitForURL(/\/antrag\/stationaer\?/), klinik.click()]);
+        pruefe(new URL(page.url()).searchParams.get('ref') === 'HP-test', `schwangerschaft: Klinik-Link führt in die Maske mit ref (${page.url()})`);
+      } else pruefe(false, 'schwangerschaft: Klinik-Link sichtbar');
+      continue;
+    }
     await link.click();
     await page.waitForSelector(`[data-wegewahl="${sparte}"]`, { timeout: 6000 });
     pruefe(await page.locator('[role="dialog"]:has-text("Bonusleitfaden")').count() === 0, `${sparte}: kein E-Mail-Fenster`);
