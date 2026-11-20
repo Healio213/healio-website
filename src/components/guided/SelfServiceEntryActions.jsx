@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowDown, Calculator } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -36,6 +38,9 @@ export default function SelfServiceEntryActions({ product, target, className = '
     ...(product === 'stationaer' ? { tarif: stationaerTarif } : {}),
   });
   const en = lang === 'en';
+  // 20.11.2026: Führt der Knopf direkt in Healios Antrag (Stationär), ist es nicht mehr der SDK-Rechner.
+  const { pathname } = useLocation();
+  const direkt = Boolean(direkteMaske(sdkUrl, pathname));
   return (
     <div data-self-service-actions={product} className={`flex w-full flex-col items-start gap-2 ${className}`}>
       <LeadCaptureLink
@@ -51,7 +56,7 @@ export default function SelfServiceEntryActions({ product, target, className = '
         {en ? 'See what you would pay' : 'Jetzt sehen, was du zahlst'}
       </LeadCaptureLink>
       <p className="text-sm leading-6 text-slate-300">
-        {en ? 'SDK premium calculator, apply directly online. ' : 'SDK-Tarifrechner, Antrag direkt online. '}
+        {en ? 'SDK premium calculator, apply directly online. ' : direkt ? 'Tarifrechner und Antrag direkt online. ' : 'SDK-Tarifrechner, Antrag direkt online. '}
         <a
           href={`#${target}`}
           onClick={(event) => scrollToTarget(event, target, reduceMotion)}
