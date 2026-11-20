@@ -82,7 +82,9 @@ export const TELEFON_GESUNDHEIT = {
   'zahn-ukv': {
     fragebogen: 'UKV_ZAHN',
     antworten: [
-      { schritt: 4, feld: 'TF0021', wert: '1' }, { schritt: 4, feld: 'GF0073', wert: 'false' }, { schritt: 4, feld: 'GF0074', wert: 'false' }, { schritt: 4, feld: 'AF0010', wert: 'false' }, { schritt: 4, feld: 'AF_AD_0001', wert: 'Einzelfallentbindung' }, { schritt: 4, feld: 'AF_AD_0005', wert: 'pflichtversichert in deutscher GKV' },
+      // Paket C (C9): Versicherungsnehmer und Beziehung sichtbar wie im Original.
+      { schritt: 3, feld: 'policyHolderIsEqualInsuredPerson', wert: 'true' },
+      { schritt: 4, feld: 'TF0021', wert: '1' }, { schritt: 4, feld: 'GF0073', wert: 'false' }, { schritt: 4, feld: 'GF0074', wert: 'false' }, { schritt: 4, feld: 'VP0004', wert: 'Versicherungsnehmer selbst' }, { schritt: 4, feld: 'AF0010', wert: 'false' }, { schritt: 4, feld: 'AF_AD_0001', wert: 'Einzelfallentbindung' }, { schritt: 4, feld: 'AF_AD_0005', wert: 'pflichtversichert in deutscher GKV' },
     ],
   },
 };

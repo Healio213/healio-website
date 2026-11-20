@@ -69,7 +69,8 @@ test('vorbelegte Antworten gehören zu echten Fragen des Zielprodukts', () => {
       else assert.ok(frage.optionen.some((o) => o.id === wert), `${id}=${wert}`);
       // Nie eine vorbelegte Antwort, die online ablehnt.
       const wirkung = frage.typ === 'janein' ? frage.wirkung?.[wert] : frage.optionen.find((o) => o.id === wert)?.wirkung;
-      assert.ok(!(wirkung || []).some((w) => w.art === 'keineAufnahme'), `${id}=${wert} lehnt ab`);
+      // Paket C: Wirkungen nur für einzelne Tarife (UKV_BELEGT, z. B. 75er mit 2 Zähnen) zählen nur bei genau diesem vorgegebenen Tarif.
+      assert.ok(!(wirkung || []).some((w) => w.art === 'keineAufnahme' && (!Array.isArray(w.tarif) || (ziel.tarif && w.tarif.includes(ziel.tarif)))), `${id}=${wert} lehnt ab`);
     });
   });
 });

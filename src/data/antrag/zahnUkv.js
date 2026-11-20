@@ -30,8 +30,25 @@ import {
 const SCHRITTE = LEVELNINE.ukvZahn.schritte;
 const f = (schritt, id) => feldAus(SCHRITTE, schritt, id);
 const UKV = 'Union Krankenversicherung AG';
-// Ohne Halt-Zusage: Der Einreicher vergleicht bei der UKV keinen Preis (Paket C). Erst danach darf wieder ein Satz zum Halt hier stehen.
-const VORBEHALT_UKV = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV.';
+// Paket C (C13, 20.11.2026): Der Einreicher vergleicht jetzt auch bei der UKV Grundbeitrag und Preis nach den Zahnfragen
+// (einreicher/preisabgleich.mjs pruefeUkvRisiko) und hält bei jeder Abweichung an. Darum steht der Satz zum Halt wieder da (wie Paket A).
+const VORBEHALT_UKV = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV. Zeigt die UKV beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir.';
+
+// Paket C (C11, Ergänzung 1.13, 20.11.2026): Fälle, deren Ergebnis bei der UKV online nie gesehen wurde. false heißt: online nicht,
+// Telefon oder Termin. Nach der Messung im Prüfschritt (Teil 6 Nr. 1) je Fall eine Zeile auf true stellen, dann gilt die Regel des
+// Originals (Zuschlag laut Papierantrag 5084 bzw. keine Wirkung). Weiche und Einzelmaske lesen dieselben Werte.
+//   z90DreiZaehne  ZahnPRIVAT 90 mit 3 fehlenden Zähnen (nur Papierantrag S. 12, TABELLE Nr. 4)
+//   z75ZweiZaehne  ZahnPRIVAT 75 mit 2 fehlenden Zähnen (nur Papierantrag S. 12, TABELLE Nr. 6)
+//   kfo1819        ZahnPRIVAT 90 und 100 bei Eintrittsalter 18 und 19 (KFO-Frage 6.2.4 online nie geprüft, TABELLE Nr. 25)
+//   freiwilligGkv  „freiwillig gesetzlich versichert in deutscher GKV“ (online nie gefahren, TABELLE Nr. 14)
+//   alter71bis80   Eintrittsalter 71 bis 80 (Preis gesehen, Annahme nie, raender A11/B10)
+export const UKV_BELEGT = Object.freeze({
+  z90DreiZaehne: false,
+  z75ZweiZaehne: false,
+  kfo1819: false,
+  freiwilligGkv: false,
+  alter71bis80: false,
+});
 
 const LEVEL_NINE_SDK = 'in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt';
 const LEVEL_NINE_UKV = 'in die Online-Antragsstrecke der UKV, die die cpit comparit GmbH (Level Nine) für die UKV betreibt';
@@ -61,32 +78,73 @@ const ZUSCHLAG_JE_ZAHN = { Z100: 10.9, Z90: 9.0, Z75: 6.1 };
 
 export const UKV_KEINE_AUFNAHME = 'Mit dieser Antwort ist der Tarif online leider nicht möglich. Lass uns zusammen schauen, welcher Schutz für dich passt.';
 const keineAufnahme = [{ art: 'keineAufnahme', text: UKV_KEINE_AUFNAHME, auswege: ['telefon', 'termin'] }];
+// Nicht belegte Fälle (UKV_BELEGT): neutral, ohne Prüfstatus (Ergänzung 1.22). Gleiche Folge im Code wie keineAufnahme.
+export const UKV_GEMEINSAM = 'Mit dieser Antwort nehmen wir deinen Antrag gemeinsam mit dir auf.';
+export const UKV_ALTER_GEMEINSAM = 'In deinem Alter nehmen wir den Antrag gemeinsam mit dir auf.';
+export const UKV_VN_GEMEINSAM = 'Ist jemand anderes Versicherungsnehmer, nehmen wir den Antrag gemeinsam mit dir auf.';
+const offen = (fall, extra = {}) => ({
+  art: 'keineAufnahme', text: UKV_GEMEINSAM, auswege: ['telefon', 'termin'], offen: fall, ...extra,
+});
+
+// C9 (Ergänzung 1.11): Im Original sichtbar und mit Ja vorgewählt, Nein ist dort nicht nutzbar (TABELLE Nr. 30, netz/lauf1
+// 03-versicherungsnehmer.txt). Bei Nein nehmen wir den Antrag gemeinsam auf. Die Folgefelder für einen anderen Versicherungsnehmer
+// entfallen; policyHolderBirthday setzt der Server selbst (verdeckt unten, vomServer).
+const vn = { ...frageAus(f(3, 'policyHolderIsEqualInsuredPerson'), { schritt: 3 }), titel: 'Versicherungsnehmer', kurz: 'Versicherungsnehmer' };
+delete vn.folge;
+vn.wirkung = { nein: [{ art: 'keineAufnahme', text: UKV_VN_GEMEINSAM, auswege: ['telefon', 'termin'] }] };
 
 const tf0021 = frageAus(f(4, 'TF0021'), { schritt: 4 });
 tf0021.titel = 'Fehlende Zähne';
 tf0021.kurz = 'Fehlende Zähne';
+// C11: 90er mit 3 und 75er mit 2 Zähnen sind online nie gesehen (UKV_BELEGT), bis dahin je Tarif gesperrt.
+const OFFEN_ZAEHNE = { 3: UKV_BELEGT.z90DreiZaehne ? [] : ['Z90'], 2: UKV_BELEGT.z75ZweiZaehne ? [] : ['Z75'] };
 tf0021.optionen = tf0021.optionen.map((option) => {
   if (option.id === '>3') return { ...option, wirkung: keineAufnahme };
   const anzahl = Number(option.id);
-  return anzahl > 0 ? { ...option, wirkung: [{ art: 'zuschlag', euroJeTarif: ZUSCHLAG_JE_ZAHN, anzahl, grund: `${anzahl} fehlende${anzahl === 1 ? 'r Zahn' : ' Zähne'}` }] } : option;
+  if (!(anzahl > 0)) return option;
+  const gesperrt = OFFEN_ZAEHNE[anzahl] || [];
+  return {
+    ...option,
+    wirkung: [
+      { art: 'zuschlag', euroJeTarif: ZUSCHLAG_JE_ZAHN, anzahl, grund: `${anzahl} fehlende${anzahl === 1 ? 'r Zahn' : ' Zähne'}` },
+      ...(gesperrt.length ? [offen(anzahl === 3 ? 'z90DreiZaehne' : 'z75ZweiZaehne', { tarif: gesperrt })] : []),
+    ],
+  };
 });
 
 const gf0073 = { ...frageAus(f(4, 'GF0073'), { schritt: 4 }), titel: 'Laufende oder empfohlene Behandlung', kurz: 'Laufende oder empfohlene Behandlung', wirkung: { ja: keineAufnahme } };
 const gf0074 = {
   ...frageAus(f(4, 'GF0074'), { schritt: 4 }), titel: 'Parodontose', kurz: 'Parodontose', wirkung: { ja: [{ art: 'ausschluss', text: 'Für Parodontosebehandlungen besteht kein Versicherungsschutz.' }] },
 };
+// C9: Im Original sichtbar, eine Antwort (TABELLE Nr. 29), Pflicht. Keine Vorauswahl.
+const vp0004 = { ...frageAus(f(4, 'VP0004'), { schritt: 4 }), titel: 'Beziehung zum Versicherungsnehmer', kurz: 'Beziehung zum Versicherungsnehmer' };
 const af0010 = { ...frageAus(f(4, 'AF0010'), { schritt: 4 }), titel: 'Andere Zahnzusatzversicherung', kurz: 'Andere Zahnzusatzversicherung' };
 const afAd0001 = { ...frageAus(f(4, 'AF_AD_0001'), { schritt: 4 }), titel: 'Einzelfallentbindung', kurz: 'Einzelfallentbindung' };
+// C7 (Ergänzung 1.9): „private Krankenversicherung/Heilfürsorge“ lehnt das Original ab (netz lauf4 wh3, „Nicht in der GK
+// versichert#…“). „freiwillig gesetzlich versichert“ ist online nie gefahren (UKV_BELEGT.freiwilligGkv).
 const afAd0005 = { ...frageAus(f(4, 'AF_AD_0005'), { schritt: 4 }), titel: 'Krankenversicherung', kurz: 'Krankenversicherung' };
-const FRAGEN = [tf0021, gf0073, gf0074, af0010, afAd0001, afAd0005];
+afAd0005.optionen = afAd0005.optionen.map((option) => {
+  if (option.id === 'private Krankenversicherung/Heilfürsorge') return { ...option, wirkung: keineAufnahme };
+  if (option.id === 'freiwillig gesetzlich versichert in deutscher GKV' && !UKV_BELEGT.freiwilligGkv) return { ...option, wirkung: [offen('freiwilligGkv')] };
+  return option;
+});
+// Reihenfolge des Originals: Schritt 3 Versicherungsnehmer, Schritt 4 TF0021, GF0073, GF0074, VP0004, AF0010, AF_AD_0001, AF_AD_0005.
+const FRAGEN = [vn, tf0021, gf0073, gf0074, vp0004, af0010, afAd0001, afAd0005];
+// Keine Gesundheitsangaben (Ergänzung 1.11: sensibel je Feld, nicht pauschal für Schritt 4).
+export const UKV_NICHT_SENSIBEL = Object.freeze(['policyHolderIsEqualInsuredPerson', 'VP0004', 'AF_AD_0001', 'AF_AD_0005']);
 
 const GRUPPEN = Object.entries(LEVELNINE.beitraege.ukvZahn).map(([alter, zeile]) => ({
   von: Number(alter), bis: Number(alter), preise: Object.fromEntries(TARIFE.map((tarif) => [tarif.id, zeile[tarif.schluessel]])),
 })).sort((a, b) => a.von - b.von);
 
-// Unterlagen der UKV für ZahnPRIVAT 75, 90 und 100 (gleich für alle drei
-// Tarife), erfasst 12.11.2026 über …/vmk/calculate/tariffs/additional/
-// UKVZahnPRIVAT<n>%23/documents. Name nach dem Kopf des jeweiligen PDF.
+// Unterlagen der UKV für ZahnPRIVAT 75, 90 und 100, erfasst 12.11.2026 über
+// …/vmk/calculate/tariffs/additional/UKVZahnPRIVAT<n>%23/documents. Name nach
+// dem Kopf des jeweiligen PDF. Paket C (C10, Ergänzung 1.12, Voreinstellung
+// Teil 5 Nr. 8): Franks Vorgabe vom 12.11. bleibt (ohne leeren Papierantrag
+// 5084, je Dokument die neueste Fassung). 15605 liefert das Original nur bei
+// ZahnPRIVAT 75 und 100 (TABELLE Nr. 37), also 9 bei 100 und 75, 8 bei 90.
+export const UKV_UNTERLAGEN_NUR = Object.freeze({ 15605: ['Z100', 'Z75'] });
+export const ukvUnterlagenFuer = (tarif) => UKV_UNTERLAGEN.filter(([id]) => !UKV_UNTERLAGEN_NUR[id] || UKV_UNTERLAGEN_NUR[id].includes(tarif));
 export const UKV_UNTERLAGEN = [
   ['13019', 'Teil I AVB/ZV: Allgemeine Versicherungsbedingungen, Stand 02.2023'],
   ['15523', 'Teil II Tarife ZahnPRIVAT 100, 90 und 75, Stand 01.08.2024'],
@@ -105,10 +163,12 @@ const zahnUkv = {
   pfad: 'zahn-ukv',
   schalter: 'ukvZahn',
   bereit: true,
-  stand: '2026-11-12',
-  // 20.11.2026 (Nachbesserung Ebene 2): Vorbehalt ohne die Zusage „fragt Healio dich vorher“, denn für die UKV gibt es noch keinen
-  // Preisabgleich beim Eintragen. Der Dienst nimmt die Fassung 2026-11-12 weiter an.
-  textfassung: '2026-11-20b-ukv-zahn-online',
+  stand: '2026-11-20',
+  // 20.11.2026 (Nachbesserung Ebene 2): Vorbehalt ohne die Zusage „fragt Healio dich vorher“, Fassung 2026-11-20b.
+  // 20.11.2026 (Paket C, C7 bis C13): UKV 1 zu 1 (privat lehnt ab, Mindestbeitrag, Beginn ohne Rückwirkung, offene Fälle,
+  // Versicherungsnehmer und Beziehung sichtbar, Unterlagen je Tarif) und Vorbehalt wieder mit dem Satz zum Halt (Preisabgleich C13).
+  // Der Dienst nimmt 2026-11-20b weiter an, 2026-11-12 nicht mehr (Ergänzung 1.20: C7 und C9 ändern Regeln).
+  textfassung: '2026-11-20c-ukv-zahn-online',
   quelle: 'Online-Strecke der UKV (Level Nine, mandant vmk), erfasst 12.11.2026',
   versicherer: {
     id: 'ukv', name: UKV, kurz: 'UKV', beiDer: 'der UKV',
@@ -133,13 +193,34 @@ const zahnUkv = {
     id: tarif.id, name: tarif.name, original: { tarif: tarif.original }, details: LEVELNINE.ukvZahn.leistungstexte[tarif.original] || null,
   })),
   tarifHinweis: 'Beitrag im Monat, noch ohne Zuschlag aus den Zahnfragen.',
+  // 1.19 (Voreinstellung Teil 5 Nr. 9): kein rückwirkender Beginn. Das Original schlägt den Ersten des Folgemonats vor und rechnet
+  // Daten in der Vergangenheit nur mit Hinweis (raender 5.2); laufenderMonatBisTag entfällt. Monatserste Folgemonat bis 6 Monate.
   beginn: {
-    art: 'monatsErster', abMonat: 1, bisMonat: 6, laufenderMonatBisTag: 15,
+    art: 'monatsErster', abMonat: 1, bisMonat: 6,
   },
   alter: {
-    min: 18, max: 80, maxZaehlung: 'kalenderjahr', stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG, hinweisZuAlt: 'Ab 81 Jahren nehmen wir den Antrag gemeinsam mit dir auf.',
+    min: 18,
+    max: 80,
+    maxZaehlung: 'kalenderjahr',
+    stichtag: 'heute',
+    hinweisZuJung: HINWEIS_MINDERJAEHRIG,
+    hinweisZuAlt: 'Ab 81 Jahren nehmen wir den Antrag gemeinsam mit dir auf.',
+    // C11 (Ergänzung 1.13): offene Altersfälle nach Eintrittsalter (Kalenderjahr wie die Beitragstabelle).
+    sperren: [
+      ...(UKV_BELEGT.kfo1819 ? [] : [{
+        von: 18, bis: 19, tarif: ['Z100', 'Z90'], text: UKV_ALTER_GEMEINSAM, offen: 'kfo1819',
+      }]),
+      ...(UKV_BELEGT.alter71bis80 ? [] : [{
+        von: 71, bis: 80, text: UKV_ALTER_GEMEINSAM, offen: 'alter71bis80',
+      }]),
+    ],
+    hinweisKeinTarif: UKV_ALTER_GEMEINSAM,
   },
-  beitrag: { alter: 'kalenderjahr', gruppen: GRUPPEN, vorbehalt: VORBEHALT_UKV },
+  // C8 (Ergänzung 1.10): Das Original zeigt nur Tarife mit Grundbeitrag über 5,00 Euro (minPrice 5.0, fee > minPrice), etwa
+  // ZahnPRIVAT 75 zu 0,99 Euro bei Eintrittsalter 18 und 19 nicht (regeln.js tarifAngeboten).
+  beitrag: {
+    alter: 'kalenderjahr', gruppen: GRUPPEN, vorbehalt: VORBEHALT_UKV, mindestGrundbeitrag: 5,
+  },
 
   gesundheit: {
     titel: 'Zahnfragen',
@@ -149,6 +230,8 @@ const zahnUkv = {
       absaetze: [f(3, 'AT_AD_0001').wortlaut],
     },
     fragen: FRAGEN,
+    // Vorauswahl wie im Original (C9): „Ist die versicherte Person auch der Inhaber der Versicherung“ steht dort auf Ja.
+    vorgaben: { policyHolderIsEqualInsuredPerson: 'ja' },
   },
 
   person: {
@@ -234,7 +317,9 @@ const zahnUkv = {
           gruppen: [
             {
               von: 'Von der UKV',
-              eintraege: UKV_UNTERLAGEN.map(([dienstId, name]) => ({ name, dateien: [{ label: name, dienstId }] })),
+              eintraege: UKV_UNTERLAGEN.map(([dienstId, name]) => ({
+                name, dateien: [{ label: name, dienstId }], ...(UKV_UNTERLAGEN_NUR[dienstId] ? { bedingung: { tarif: [...UKV_UNTERLAGEN_NUR[dienstId]] } } : {}),
+              })),
             },
             { von: 'Von Healio', eintraege: [{ name: 'Erstinformation', dateien: [{ label: 'Erstinformation', href: '/erstinformation' }] }, ...UNTERLAGEN_HEALIO.map((name) => ({ name, dateien: [] }))] },
           ],
@@ -246,13 +331,23 @@ const zahnUkv = {
 
   zusammenfassung: { titel: TEIL_3_TITEL },
   absenden: { satz: fuerUkv(TEXT_12_KNOPF), vorbehalt: VORBEHALT_UKV, knopf: KNOPF_BEANTRAGEN },
+  // C15 (Ergänzung 1.17): Was die Seite oder der Server von sich aus setzt, steht hier nur zur Dokumentation (vomServer: true). Der
+  // Einreicher schreibt keins dieser Felder und vergleicht sie nicht (spickzettel.mjs). Frank klärt sie mit der UKV.
+  // Belege: netz-beobachtung.md „Was die Strecke ohne Zutun des Kunden mitschickt“, TABELLE Nr. 32 bis 35.
   verdeckt: [
-    { schritt: 3, feld: 'policyHolderIsEqualInsuredPerson', wert: 'true' },
-    { schritt: 3, feld: 'agentConfirmation', wert: 'true', hinweis: 'Maklerbestätigung, setzt das Original verdeckt (Frank klärt mit Fonds Finanz/UKV)' },
-    { schritt: 4, feld: 'VP0004', wert: 'Versicherungsnehmer selbst' },
-    { schritt: 4, feld: 'AF_AD_0002', wert: 'vor Unterschrift des Antrags gewünscht', hinweis: 'verdeckt im Original' },
-    { schritt: 4, feld: 'AF_AD_0003', wert: 'wird vom Kunden gewünscht', hinweis: 'verdeckt im Original' },
-    { schritt: 4, feld: 'AF_AD_0004', wert: 'true', hinweis: 'Erklärung des Maklers, verdeckt im Original (Frank klären)' },
+    { schritt: 3, feld: 'agentConfirmation', wert: 'true', vomServer: true, hinweis: 'Maklerbestätigung, setzt die Seite verdeckt (Frank klärt mit Fonds Finanz/UKV)' },
+    { schritt: 3, feld: 'policyHolderBirthday', wert: '1989-07-01', vomServer: true, hinweis: 'Platzhalter des Servers für das Geburtsdatum des Versicherungsnehmers, auch bei anderem Jahrgang' },
+    { schritt: 3, feld: 'occupationDescription', wert: 'Kaufmann/-frau Bank', vomServer: true, hinweis: 'Platzhalter des Servers für den Beruf' },
+    { schritt: 3, feld: 'occupationStatus', wert: 'A', vomServer: true, hinweis: 'Platzhalter des Servers' },
+    { schritt: 1, feld: 'maritalStatus', wert: '1', vomServer: true, hinweis: 'fest von der Seite' },
+    { schritt: 1, feld: 'occupationGroup', wert: '1', vomServer: true, hinweis: 'fest von der Seite' },
+    { schritt: 3, feld: 'confirmDataProtection', wert: 'true', vomServer: true, hinweis: 'setzt die Seite verdeckt' },
+    { schritt: 4, feld: 'AF_AD_0002', wert: 'vor Unterschrift des Antrags gewünscht', vomServer: true, hinweis: 'verdeckt im Original' },
+    { schritt: 4, feld: 'AF_AD_0003', wert: 'wird vom Kunden gewünscht', vomServer: true, hinweis: 'verdeckt im Original' },
+    { schritt: 4, feld: 'AF_AD_0004', wert: 'true', vomServer: true, hinweis: 'Erklärung des Maklers, verdeckt im Original (Frank klären)' },
+    { schritt: 4, feld: 'homecareLevel5Inpatient', wert: '1500', vomServer: true, hinweis: 'fester Wert der Seite ohne Bezug zum Zahntarif' },
+    { schritt: 4, feld: 'daySicknessDailyAllowance1', wert: '43', vomServer: true, hinweis: 'fester Wert der Seite ohne Bezug zum Zahntarif' },
+    { schritt: 4, feld: 'rateSicknessDailyAllowance1', wert: '30', vomServer: true, hinweis: 'fester Wert der Seite ohne Bezug zum Zahntarif' },
   ],
 
   gesundheitFuerVertrag: (antworten = {}, { tarif } = {}) => ({
@@ -284,7 +379,8 @@ const zahnUkv = {
       { schritt: 1, feld: 'tarifwahl', wert: tarif?.original || null },
       { schritt: 2, feld: 'firstName', wert: String(fo.vorname || '').trim() },
       { schritt: 2, feld: 'lastName', wert: String(fo.nachname || '').trim() },
-      ...fragenZuordnung(FRAGEN, daten.antworten || {}, bedingungErfuellt, { antworten: daten.antworten || {}, tarif: daten.tarif }).map((e) => ({ ...e, schritt: 4 })),
+      ...fragenZuordnung(FRAGEN, daten.antworten || {}, bedingungErfuellt, { antworten: daten.antworten || {}, tarif: daten.tarif })
+        .map((e) => ({ ...e, ...(UKV_NICHT_SENSIBEL.includes(e.feld) ? { sensibel: false } : {}) })),
       ...zahnUkv.person.anschrift.filter((feld) => feld.original).map((feld) => ({ schritt: 5, feld: feld.original, wert: String(fo[feld.id] || '').trim() })),
       { schritt: 5, feld: 'orderIbanName', wert: [fo.vorname, fo.nachname].map((teil) => String(teil || '').trim()).join(' ') },
       { schritt: 5, feld: 'orderIban', wert: String(daten.iban || '').replace(/\s/g, '').toUpperCase() },

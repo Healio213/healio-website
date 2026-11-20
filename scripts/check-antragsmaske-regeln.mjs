@@ -16,7 +16,7 @@ import ambulant, {
 } from '../src/data/antrag/ambulant.js';
 import {
   altersgrenze, antwortenBereinigt, bedingungErfuellt, beginnOptionenAus, berechneBeitrag, feldFehler, ibanHinweis, istIban,
-  mitZuschlag, offeneGesundheitsfragen, regionAusPlz, sichtbareFolgefragen, sichtbareFragen, wirkungen,
+  mitZuschlag, offeneGesundheitsfragen, parseDatum, regionAusPlz, sichtbareFolgefragen, sichtbareFragen, tarifAngeboten, wirkungen,
 } from '../src/lib/antragsmaske/regeln.js';
 import { fehlerUnterlagen, unterlagenUnvollstaendig } from '../src/components/antragsmaske/unterlagenPflicht.js';
 import { baueSelbstantrag, bereinigeHerkunft, bildschirmFuerFeld } from '../src/lib/antragsmaske/vertrag.js';
@@ -504,7 +504,7 @@ test('SDK ambulant: Regeländerungen 12.11.2026 (BMI gerundet, Beginn)', () => {
 test('UKV Zahn: Zuschlag je Zahn und Tarif, Ablehnung, Ausschluss, Vollständigkeit', { skip: !lnDa && 'Erfassung fehlt' }, () => {
   const def = DEFINITIONEN['zahn-ukv'];
   const basis = {
-    TF0021: '0', GF0073: 'nein', GF0074: 'nein', AF0010: 'nein', AF_AD_0001: 'Einzelfallentbindung', AF_AD_0005: 'pflichtversichert in deutscher GKV',
+    policyHolderIsEqualInsuredPerson: 'ja', TF0021: '0', GF0073: 'nein', GF0074: 'nein', VP0004: 'Versicherungsnehmer selbst', AF0010: 'nein', AF_AD_0001: 'Einzelfallentbindung', AF_AD_0005: 'pflichtversichert in deutscher GKV',
   };
   const b = (tarif, antworten) => berechneBeitrag(def, { tarif, geburtsdatum: { tag: 1, monat: 1, jahr: 1990 }, beginn: BEGINN, antworten })?.beitrag;
   assert.equal(b('Z100', basis), 30.05, '36 Jahre ZahnPRIVAT 100');
@@ -517,6 +517,58 @@ test('UKV Zahn: Zuschlag je Zahn und Tarif, Ablehnung, Ausschluss, Vollständigk
   assert.deepEqual(wirkungen(def, { tarif: 'Z100', antworten: { ...basis, GF0074: 'ja' } }).ausschluesse, ['Für Parodontosebehandlungen besteht kein Versicherungsschutz.']);
   const erfassung = JSON.parse(fs.readFileSync(path.join(ERFASSUNG_LN, 'ukv-zahn.json'), 'utf8'));
   pruefeVollstaendigkeit('UKV Zahn', def, erfassung, { ...lnDaten('Z100', basis), unterlagenDienst: [] });
+});
+
+// Paket C (BAUPLAN-PAKET-C-D-ERGAENZUNG-2026-11-19.md, Teil 4 Nr. 10 bis 23, 33), 20.11.2026: UKV 1 zu 1.
+test('Paket C UKV: privat lehnt ab, freiwillig und offene Zahnfälle zum Telefon, Mindestbeitrag, Altersregeln, Beginn, sichtbare Fragen, Vollständigkeit über Fragen', { skip: !lnDa && 'Erfassung fehlt' }, async () => {
+  const { UKV_BELEGT, UKV_KEINE_AUFNAHME, UKV_GEMEINSAM } = await import('../src/data/antrag/zahnUkv.js');
+  const def = DEFINITIONEN['zahn-ukv'];
+  const basis = {
+    policyHolderIsEqualInsuredPerson: 'ja', TF0021: '0', GF0073: 'nein', GF0074: 'nein', VP0004: 'Versicherungsnehmer selbst', AF0010: 'nein', AF_AD_0001: 'Einzelfallentbindung', AF_AD_0005: 'pflichtversichert in deutscher GKV',
+  };
+  const w = (tarif, antworten) => wirkungen(def, { tarif, antworten: { ...basis, ...antworten } }).keineAufnahme;
+  assert.ok(Object.values(UKV_BELEGT).every((wert) => wert === false), 'Voreinstellung: offene Fälle gesperrt');
+  // C7: privat lehnt ab (Original lauf4 wh3), freiwillig offen (Telefon und Termin), pflicht ohne Wirkung.
+  assert.deepEqual(w('Z100', { AF_AD_0005: 'private Krankenversicherung/Heilfürsorge' }), [UKV_KEINE_AUFNAHME]);
+  assert.deepEqual(w('Z100', { AF_AD_0005: 'freiwillig gesetzlich versichert in deutscher GKV' }), [UKV_GEMEINSAM]);
+  assert.deepEqual(w('Z100', {}), []);
+  // C11: 90er mit 3 und 75er mit 2 Zähnen gesperrt, 100er mit 3 frei (62,75 bei Alter 36).
+  assert.deepEqual(w('Z90', { TF0021: '3' }), [UKV_GEMEINSAM]);
+  assert.deepEqual(w('Z75', { TF0021: '2' }), [UKV_GEMEINSAM]);
+  assert.deepEqual([w('Z100', { TF0021: '3' }), w('Z75', { TF0021: '3' }), w('Z90', { TF0021: '2' })], [[], [], []]);
+  assert.equal(berechneBeitrag(def, { tarif: 'Z100', geburtsdatum: { tag: 1, monat: 1, jahr: 1990 }, beginn: BEGINN, antworten: { ...basis, TF0021: '3' } }).beitrag, 62.75);
+  // C11: Eintrittsalter 18/19 im 90er und 100er, 71 bis 80 bei allen Tarifen: gemeinsam aufnehmen.
+  const heute = new Date(2026, 10, 19, 12);
+  const g = (text) => parseDatum(text, heute);
+  for (const tarif of ['Z90', 'Z100']) assert.equal(altersgrenze(def, g('15.05.2007'), { heute, beginn: BEGINN, tarif })?.art, 'gemeinsam', tarif);
+  assert.equal(altersgrenze(def, g('15.05.2007'), { heute, beginn: BEGINN, tarif: 'Z75' }), null, 'Z75 ohne Altersregel');
+  assert.equal(altersgrenze(def, g('15.05.2007'), { heute, beginn: BEGINN }), null, 'ohne Tarif nur die allgemeinen Regeln');
+  assert.equal(altersgrenze(def, g('15.05.1950'), { heute, beginn: BEGINN })?.art, 'gemeinsam', 'Eintrittsalter 76');
+  assert.equal(altersgrenze(def, g('15.05.1956'), { heute, beginn: BEGINN }), null, 'Eintrittsalter 70');
+  assert.equal(altersgrenze(def, g('01.01.1945'), { heute, beginn: BEGINN })?.art, 'zuAlt', 'ab 81 unverändert');
+  // C8: Grundbeitrag bis 5,00 Euro nicht angeboten (Jahrgang 2007 im Dezember 0,99), im Januar 8,00 angeboten.
+  assert.equal(tarifAngeboten(def, { tarif: 'Z75', geburtsdatum: g('31.12.2007'), beginn: BEGINN, heute }), false);
+  assert.equal(tarifAngeboten(def, { tarif: 'Z75', geburtsdatum: g('31.12.2007'), beginn: BEGINN_JAN, heute }), true);
+  assert.equal(tarifAngeboten(def, { tarif: 'Z75', geburtsdatum: null, beginn: BEGINN, heute }), null);
+  assert.equal(tarifAngeboten(DEFINITIONEN.stationaer, { tarif: 'SP2', geburtsdatum: g('15.05.1990'), beginn: BEGINN, heute }), true, 'andere Produkte unberührt');
+  // 1.19: kein rückwirkender Beginn, Monatserste vom Folgemonat bis 6 Monate.
+  assert.equal(beginnOptionenAus(def.beginn, new Date(2026, 11, 10, 12)).frueher, null);
+  assert.equal(beginnOptionenAus(def.beginn, new Date(2026, 11, 10, 12)).naechstmoeglich.iso, '2027-01-01');
+  assert.equal(beginnOptionenAus(def.beginn, new Date(2026, 11, 10, 12)).weitere.at(-1).iso, '2027-06-01');
+  // C9: Versicherungsnehmer und Beziehung sichtbar wie im Original, Ja vorgewählt, Nein nimmt gemeinsam auf; beide über Fragen, nicht verdeckt.
+  assert.deepEqual(def.gesundheit.fragen.map((f) => f.id), ['policyHolderIsEqualInsuredPerson', 'TF0021', 'GF0073', 'GF0074', 'VP0004', 'AF0010', 'AF_AD_0001', 'AF_AD_0005']);
+  assert.deepEqual(def.gesundheit.vorgaben, { policyHolderIsEqualInsuredPerson: 'ja' });
+  assert.equal(w('Z100', { policyHolderIsEqualInsuredPerson: 'nein' }).length, 1);
+  assert.deepEqual(def.gesundheit.fragen.find((f) => f.id === 'VP0004').optionen.map((o) => o.id), ['Versicherungsnehmer selbst']);
+  assert.ok(!def.verdeckt.some((v) => ['VP0004', 'policyHolderIsEqualInsuredPerson'].includes(v.feld)));
+  assert.ok(def.verdeckt.every((v) => v.vomServer === true), 'C15: verdeckte Felder nur zur Dokumentation');
+  assert.ok(offeneGesundheitsfragen(def, { antworten: { ...basis, VP0004: undefined }, tarif: 'Z100' }).includes('VP0004'), 'VP0004 Pflicht');
+  const zuordnung = def.originalFuerVertrag({ ...lnDaten('Z100', basis), unterlagenDienst: [] }, { beginn: BEGINN });
+  const z = (feld) => zuordnung.find((e) => e.feld === feld);
+  assert.deepEqual([z('policyHolderIsEqualInsuredPerson').schritt, z('policyHolderIsEqualInsuredPerson').wert, z('policyHolderIsEqualInsuredPerson').verdeckt, z('VP0004').wert, z('VP0004').sensibel, z('TF0021').sensibel],
+    [3, 'true', undefined, 'Versicherungsnehmer selbst', false, undefined]);
+  // Texte ohne Gedankenstrich, ohne Prüfstatus.
+  for (const text of [UKV_GEMEINSAM, def.absenden.vorbehalt, ...def.alter.sperren.map((sperre) => sperre.text)]) assert.doesNotMatch(text, /[–—]|geprüft|belegt/);
 });
 
 test('Auftragssatz vor dem Absenden passt zur Zahlweise und nennt den Betrag (alle vier Produkte)', async () => {
@@ -615,7 +667,7 @@ test('Bayerische: Adressbestätigung wie im Original (Pflicht in der Maske, Feld
   assert.equal(wert({}).wert, false, 'ohne Haken des Kunden: false');
 });
 
-test('UKV: Unterlagen über den Antragsdienst, neun PDF mit Kennung, im Antrag als dienst:<id> gezeigt', async () => {
+test('UKV: Unterlagen über den Antragsdienst, neun PDF mit Kennung (Paket C: 15605 nur bei ZahnPRIVAT 75 und 100), im Antrag als dienst:<id> gezeigt', async () => {
   const { UKV_UNTERLAGEN } = await import('../src/data/antrag/zahnUkv.js');
   const { gezeigteUnterlagen } = await import('../src/lib/antragsmaske/vertrag.js');
   const def = DEFINITIONEN['zahn-ukv'];
@@ -624,8 +676,12 @@ test('UKV: Unterlagen über den Antragsdienst, neun PDF mit Kennung, im Antrag a
   assert.equal(eintrag.dienstProdukt, 'ukv-zahn');
   const ukv = eintrag.gruppen.find((g) => g.von === 'Von der UKV').eintraege;
   assert.deepEqual(ukv.map((u) => u.dateien[0].dienstId), UKV_UNTERLAGEN.map(([id]) => id));
-  const gezeigt = gezeigteUnterlagen(def, { tarif: 'Z90' });
-  UKV_UNTERLAGEN.forEach(([id, name]) => assert.ok(gezeigt.some((g) => g.href === `dienst:${id}` && g.name === name), `${id} gezeigt`));
+  for (const [tarif, anzahl] of [['Z100', 9], ['Z75', 9], ['Z90', 8]]) {
+    const gezeigt = gezeigteUnterlagen(def, { tarif }).filter((g) => /^dienst:/.test(g.href));
+    assert.equal(gezeigt.length, anzahl, tarif);
+    UKV_UNTERLAGEN.filter(([id]) => tarif !== 'Z90' || id !== '15605').forEach(([id, name]) => assert.ok(gezeigt.some((g) => g.href === `dienst:${id}` && g.name === name), `${tarif} ${id} gezeigt`));
+    assert.equal(gezeigt.some((g) => g.href === 'dienst:15605'), tarif !== 'Z90', `${tarif} 15605`);
+  }
 });
 
 test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals', async () => {
@@ -699,11 +755,11 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
     assert.match(def.textfassung, /^2026-11-20b-/);
   }
-  // Nachbesserung Ebene 2 (20.11.2026): UKV ohne Preisabgleich, also ohne Zusage im Vorbehalt; neue Textfassung.
-  assert.equal(zahnUkv.textfassung, '2026-11-20b-ukv-zahn-online');
+  // Paket C (C13, 20.11.2026): Der Einreicher vergleicht auch bei der UKV den Preis, der Satz zum Halt steht wieder da; Fassung 2026-11-20c.
+  assert.equal(zahnUkv.textfassung, '2026-11-20c-ukv-zahn-online');
   for (const v of [zahnUkv.absenden.vorbehalt, zahnUkv.beitrag.vorbehalt]) {
-    assert.equal(v, 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV.');
-    assert.doesNotMatch(v, /fragt Healio|reicht Healio nichts ein|[–—]/);
+    assert.equal(v, 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV. Zeigt die UKV beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir.');
+    assert.doesNotMatch(v, /fragt Healio|[–—]/);
   }
   assert.equal(zahnUkv.absenden.nachEingang, undefined);
 });

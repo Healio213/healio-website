@@ -300,8 +300,12 @@ export function eintrittsalter(regel, geburtsdatum, beginn) {
 // maxZaehlung?: 'kalenderjahr' }. min gilt immer nach vollendeten Jahren am
 // Stichtag (Antragsteller volljährig), max auf Wunsch als Eintrittsalter
 // (Jahr des Beginns minus Geburtsjahr). Liefert null (passt) oder
-// { art: 'zuJung' | 'zuAlt', text }.
-export function altersgrenze(definition, geburtsdatum, { heute = new Date(), beginn = null } = {}) {
+// { art: 'zuJung' | 'zuAlt' | 'gemeinsam', text }.
+// sperren (Paket C, UKV 20.11.2026): [{ von, bis, tarif?: [ids], text }] nach
+// dem Eintrittsalter der Beitragsregel (nur mit Beginn). Eine Sperre ohne
+// tarif gilt für alle Tarife, eine mit tarif nur, wenn dieser Tarif übergeben
+// ist (tarif). Ergebnis art 'gemeinsam': online nicht, Telefon oder Termin.
+export function altersgrenze(definition, geburtsdatum, { heute = new Date(), beginn = null, tarif = null } = {}) {
   const regel = definition?.alter;
   if (!regel || !geburtsdatum) return null;
   const stichtag = regel.stichtag === 'beginn' && beginn ? new Date(beginn.jahr, beginn.monat - 1, 1) : heute;
@@ -310,7 +314,33 @@ export function altersgrenze(definition, geburtsdatum, { heute = new Date(), beg
   if (Number.isFinite(regel.min) && alter < regel.min) return { art: 'zuJung', text: regel.hinweisZuJung };
   const alterMax = regel.maxZaehlung === 'kalenderjahr' && beginn ? beginn.jahr - geburtsdatum.jahr : alter;
   if (Number.isFinite(regel.max) && alterMax > regel.max) return { art: 'zuAlt', text: regel.hinweisZuAlt };
+  if (beginn && Array.isArray(regel.sperren)) {
+    const eintritt = eintrittsalter(definition.beitrag?.alter, geburtsdatum, beginn);
+    const sperre = regel.sperren.find((eintrag) => Number.isFinite(eintritt) && eintritt >= eintrag.von && eintritt <= eintrag.bis
+      && (!Array.isArray(eintrag.tarif) || (tarif !== null && eintrag.tarif.includes(tarif))));
+    if (sperre) return { art: 'gemeinsam', text: sperre.text, ...(Array.isArray(sperre.tarif) ? { tarif: [...sperre.tarif] } : {}) };
+  }
   return null;
+}
+
+// Bietet das Original diesen Tarif für Geburtsdatum und Beginn an? (Paket C,
+// UKV 20.11.2026.) Nein bei einer Altersgrenze für diesen Tarif und bei einem
+// Grundbeitrag bis einschließlich beitrag.mindestGrundbeitrag: Das Original
+// zeigt nur Tarife mit fee > minPrice (minPrice 5.0, contribution.thunk.ts
+// Z. 98 bis 100). Liefert true, false oder null (Angaben fehlen noch).
+export function tarifAngeboten(definition, {
+  tarif, geburtsdatum, beginn, plz = '', heute = new Date(),
+} = {}) {
+  if (!definition?.tarife?.some((eintrag) => eintrag.id === tarif)) return false;
+  if (!geburtsdatum || !beginn) return null;
+  if (altersgrenze(definition, geburtsdatum, { heute, beginn, tarif })) return false;
+  const mindest = definition.beitrag?.mindestGrundbeitrag;
+  if (!Number.isFinite(mindest)) return true;
+  const grund = berechneBeitrag(definition, {
+    tarif, geburtsdatum, beginn, plz, ohneZuschlag: true,
+  })?.grundbeitrag;
+  if (!Number.isFinite(grund)) return null;
+  return grund > mindest;
 }
 
 // ---------------------------------------------------------------------------

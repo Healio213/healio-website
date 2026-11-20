@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import {
   altersgrenze, antwortenBereinigt, beginnOptionenAus, berechneBeitrag, eintrittsalter, euro, parseDatum,
-  sichtbareFolgefragen, sichtbareFragen, stopWirkungDerFrage,
+  sichtbareFolgefragen, sichtbareFragen, stopWirkungDerFrage, tarifAngeboten,
 } from '@/lib/antragsmaske/regeln';
 import { baueSelbstantrag, bildschirmFuerFeld, datumText } from '@/lib/antragsmaske/vertrag';
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
@@ -73,7 +73,8 @@ export function startDaten(definition, vorbelegung = {}) {
     beginnIso: null,
     geburtsdatum: '',
     plz: '',
-    antworten: {},
+    // Vorauswahl wie im Original (Paket C, UKV: Versicherungsnehmer „Ja“); ohne gesundheit.vorgaben leer wie bisher.
+    antworten: { ...(definition.gesundheit?.vorgaben || {}) },
     anrede: null,
     formular: {
       vorname: '', nachname: '', strasse: '', plz: '', ort: '', telefon: '', email: '', krankenkasse: '',
@@ -92,8 +93,15 @@ export function startDaten(definition, vorbelegung = {}) {
 function mitVorab(start, vorabDaten) {
   if (!vorabDaten) return start;
   const neu = { ...start, ...vorabDaten };
+  if (vorabDaten.antworten) neu.antworten = { ...start.antworten, ...vorabDaten.antworten };
   if (vorabDaten.plz) neu.formular = { ...start.formular, plz: vorabDaten.plz };
   return neu;
+}
+
+// Prüfseite: Angaben vom Telefon über die Startwerte, Antworten zusammengeführt (eine Vorauswahl der Maske bleibt, wenn das
+// Telefon die Frage nicht beantwortet hat).
+function mitPruefDaten(start, pruefDaten) {
+  return { ...start, ...pruefDaten, ...(pruefDaten.antworten ? { antworten: { ...start.antworten, ...pruefDaten.antworten } } : {}) };
 }
 
 // Danke-Seite (Franks Vorgabe 12.11.2026): ehrlich, ohne Fristversprechen.
@@ -209,8 +217,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   const startZeit = useRef(Date.now());
   const [vorbelegung] = useState(() => (pruefen ? {} : vorab?.vorbelegung || holeVorbelegung(definition.pfad || definition.sparte)));
   const [daten, setDaten] = useState(() => (pruefen?.daten
-    // Leere Angaben vom Telefon überschreiben keine Vorgabe der Maske (z. B. Zahlweise monatlich).
-    ? { ...startDaten(definition, {}), ...Object.fromEntries(Object.entries(pruefen.daten).filter(([, wert]) => wert !== null && wert !== undefined && wert !== '')) }
+    // Leere Angaben vom Telefon überschreiben keine Vorgabe der Maske (z. B. Zahlweise monatlich, Vorauswahl einer Frage).
+    ? mitPruefDaten(startDaten(definition, {}), Object.fromEntries(Object.entries(pruefen.daten).filter(([, wert]) => wert !== null && wert !== undefined && wert !== '')))
     : mitVorab(startDaten(definition, vorbelegung), vorab?.daten)));
   const [dienst, setDienst] = useState({ schluessel: null, antwort: null, fehler: false });
   const [dienstVersuch, setDienstVersuch] = useState(0);
@@ -243,7 +251,17 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     : beginnWahl.naechstmoeglich;
   const geburtsdatum = parseDatum(datumText(daten.geburtsdatum, heute) || daten.geburtsdatum, heute);
   const geburtsdatumText = datumText(daten.geburtsdatum, heute);
-  const grenze = geburtsdatum ? altersgrenze(definition, geburtsdatum, { heute, beginn }) : null;
+  // Paket C (C8, C11): Tarife, die das Original für Geburtsdatum und Beginn nicht anbietet (Mindestbeitrag, Altersregel je Tarif),
+  // zeigt die Maske nicht. Bietet sie keinen an, gilt das wie eine Altersgrenze (gemeinsam aufnehmen).
+  const angeboten = useMemo(() => (geburtsdatum && beginn
+    ? Object.fromEntries(definition.tarife.map((eintrag) => [eintrag.id, tarifAngeboten(definition, {
+      tarif: eintrag.id, geburtsdatum, beginn, plz: definition.beitrag?.regionen ? daten.plz : '', heute,
+    })]))
+    : null), [definition, geburtsdatum?.jahr, geburtsdatum?.monat, geburtsdatum?.tag, beginn?.iso, daten.plz, heute]); // eslint-disable-line react-hooks/exhaustive-deps
+  const keinTarif = angeboten && Object.values(angeboten).every((wert) => wert === false);
+  const grenze = geburtsdatum
+    ? altersgrenze(definition, geburtsdatum, { heute, beginn }) || (keinTarif ? { art: 'gemeinsam', text: definition.alter?.hinweisKeinTarif || 'Für dein Alter nehmen wir den Antrag gemeinsam auf.' } : null)
+    : null;
   const alter = geburtsdatum && beginn ? eintrittsalter(definition.beitrag?.alter, geburtsdatum, beginn) : null;
   const kontext = useMemo(() => ({
     antworten: daten.antworten, tarif: daten.tarif, alter, bausteine: daten.bausteine,
@@ -303,12 +321,12 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     ? { jahr: vorbelegung.geburtsjahr, monat: 1, tag: 1 } : null);
   const preiseLokal = useMemo(() => {
     if (mitDienst || !preisDatum || !beginn || grenze) return null;
-    return Object.fromEntries(definition.tarife.map((eintrag) => [eintrag.id, berechneBeitrag(definition, {
+    return Object.fromEntries(definition.tarife.map((eintrag) => [eintrag.id, angeboten?.[eintrag.id] === false ? null : berechneBeitrag(definition, {
       tarif: eintrag.id, geburtsdatum: preisDatum, beginn, plz: plzFuerPreis, ohneZuschlag: true,
     })?.beitrag ?? null]));
-  }, [definition, preisDatum?.jahr, preisDatum?.monat, preisDatum?.tag, beginn?.iso, plzFuerPreis, grenze]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [definition, preisDatum?.jahr, preisDatum?.monat, preisDatum?.tag, beginn?.iso, plzFuerPreis, grenze, angeboten]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const beitragLokal = useMemo(() => (!mitDienst && tarif && geburtsdatum && beginn && !grenze
+  const beitragLokal = useMemo(() => (!mitDienst && tarif && geburtsdatum && beginn && !grenze && angeboten?.[tarif.id] !== false
     ? berechneBeitrag(definition, {
       tarif: tarif.id, geburtsdatum, beginn, plz: plzFuerPreis, antworten: daten.antworten,
     })
@@ -372,7 +390,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     if (!eintrag) return [];
     if (id === 'tarif') {
       return fehlerTarif(definition, daten, {
-        heute, beginn, grenze, dienst: dienstJetzt,
+        heute, beginn, grenze, dienst: dienstJetzt, angeboten,
       });
     }
     if (id === 'hinweis') return fehlerHinweis(definition, daten);
@@ -694,7 +712,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   };
   let inhalt;
   if (pos.id === 'tarif') {
-    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} empfohlen={vorab?.empfohlen} />;
+    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} angeboten={angeboten} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} empfohlen={vorab?.empfohlen} />;
   } else if (pos.id === 'hinweis') {
     inhalt = <SchrittHinweis {...gemeinsam} setAntwort={setAntwort} anzahl={fragen.length} />;
   } else if (aktuell.frage) {

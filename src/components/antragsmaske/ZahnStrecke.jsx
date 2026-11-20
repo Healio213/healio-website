@@ -15,7 +15,7 @@ import { getDentalContent } from '@/components/sections/dental/dentalContent';
 import { UKV_URL } from '@/components/sections/dental/dentalLinks';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import {
-  altersgrenze, beginnOptionenAus, berechneBeitrag, euro, parseDatum,
+  altersgrenze, beginnOptionenAus, berechneBeitrag, euro, parseDatum, tarifAngeboten, wirkungen,
 } from '@/lib/antragsmaske/regeln';
 import { datumText } from '@/lib/antragsmaske/vertrag';
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
@@ -175,9 +175,17 @@ export default function ZahnStrecke({ definition }) {
   // (mit Zuschlag je fehlendem Zahn); Bayerische: vom Antragsdienst.
   const ukvPreis = useMemo(() => {
     if (ziel?.ziel !== 'ukv' || !datum || !beginn || grenze) return null;
-    const rechne = (tarifId) => berechneBeitrag(zielDefinition, {
-      tarif: tarifId, geburtsdatum: datum, beginn, antworten: { TF0021: ziel.antworten.TF0021 },
-    })?.beitrag ?? null;
+    // Paket C (C8, C11): nur Tarife, die das Original anbietet (Mindestbeitrag, Altersregel), und ohne gesperrte Zahl fehlender Zähne.
+    const rechne = (tarifId) => {
+      if (tarifAngeboten(zielDefinition, {
+        tarif: tarifId, geburtsdatum: datum, beginn, heute,
+      }) !== true) return null;
+      const antwortenVorab = { TF0021: ziel.antworten.TF0021 };
+      if (wirkungen(zielDefinition, { antworten: antwortenVorab, tarif: tarifId }).keineAufnahme.length) return null;
+      return berechneBeitrag(zielDefinition, {
+        tarif: tarifId, geburtsdatum: datum, beginn, antworten: antwortenVorab,
+      })?.beitrag ?? null;
+    };
     if (ziel.tarif) return { betrag: rechne(ziel.tarif), ab: false };
     const alle = zielDefinition.tarife.map((tarif) => rechne(tarif.id)).filter(Number.isFinite);
     return alle.length ? { betrag: Math.min(...alle), ab: true } : null;

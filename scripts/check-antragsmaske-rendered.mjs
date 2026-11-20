@@ -737,8 +737,24 @@ async function ukvDurchlauf(browser) {
   await page.click('[data-pruefung] a[href="/antrag/zahn-ukv"]');
   await bildschirm(page, 'tarif');
   pruefe(page.url().includes('/antrag/zahn-ukv'), 'Ausweg führt in die UKV-Maske');
+  // Paket C (C8, C11): Eintrittsalter 19 im Dezember: ZahnPRIVAT 75 (0,99 EUR) bietet das Original nicht an, 90er und 100er gehen zum
+  // Telefon. Keine Stufenkarte, kein Preis bis 5 EUR, Hinweis zum gemeinsamen Antrag.
+  await page.fill('#feld-geburtsdatum', '31.12.2007');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.waitForSelector('[data-altersgrenze]');
+  pruefe((await page.textContent('[data-altersgrenze]')).includes('In deinem Alter nehmen wir den Antrag gemeinsam mit dir auf.'), 'UKV Eintrittsalter 19: gemeinsam aufnehmen');
+  pruefe(await page.locator('[data-stufe]').count() === 0 && !/0,99/.test(await page.textContent('main')), 'UKV Eintrittsalter 19: keine Stufe, kein Preis 0,99 EUR');
+  await foto(page, '390-ukv-00-alter-19');
+  await page.fill('#feld-geburtsdatum', '15.05.1950');
+  await page.locator('#feld-geburtsdatum').blur();
+  await page.waitForFunction(() => /gemeinsam mit dir auf/.test(document.querySelector('[data-altersgrenze]')?.textContent || ''));
+  pruefe(true, 'UKV Eintrittsalter 76: gemeinsam aufnehmen');
   await page.fill('#feld-geburtsdatum', '05.03.1990');
   await page.locator('#feld-geburtsdatum').blur();
+  await page.waitForFunction(() => document.querySelectorAll('[data-stufe]').length === 3);
+  pruefe(await page.locator('[data-altersgrenze]').count() === 0, 'UKV 36 Jahre: drei Stufen, kein Altershinweis');
+  // 1.19: kein rückwirkender Beginn.
+  pruefe(!/Rückwirkend/.test(await page.textContent('main')), 'UKV ohne rückwirkenden Beginn');
   await page.locator('label:has(input[name="tarif"][value="Z100"])').click();
   await page.waitForFunction(() => /30,05 EUR/.test(document.querySelector('[data-stufe-beitrag="Z100"]')?.textContent || ''));
   await foto(page, '390-ukv-01-tarif');
@@ -750,6 +766,16 @@ async function ukvDurchlauf(browser) {
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
+  // Paket C (C9): Versicherungsnehmer sichtbar und wie im Original mit Ja vorgewählt.
+  await bildschirm(page, 'frage:policyHolderIsEqualInsuredPerson');
+  await page.waitForTimeout(650);
+  pruefe((await page.textContent('[data-bildschirm="frage:policyHolderIsEqualInsuredPerson"]')).includes('Ist die versicherte Person auch der Inhaber der Versicherung (Versicherungsnehmer/VN)?:'), 'UKV: Versicherungsnehmer-Frage im Wortlaut');
+  pruefe(await page.locator('[data-bildschirm="frage:policyHolderIsEqualInsuredPerson"] [data-antwort="ja"][aria-pressed="true"]').count() === 1, 'UKV: Versicherungsnehmer mit Ja vorgewählt');
+  await page.click('[data-antwort="nein"]');
+  await page.waitForSelector('[data-pruefung]');
+  pruefe((await page.textContent('[data-pruefung]')).includes('Ist jemand anderes Versicherungsnehmer, nehmen wir den Antrag gemeinsam mit dir auf.'), 'UKV: Nein nimmt gemeinsam auf');
+  await foto(page, '390-ukv-01b-versicherungsnehmer-nein');
+  await page.click('[data-antwort="ja"]');
   await bildschirm(page, 'frage:TF0021');
   await page.locator('label:has(input[name="frage-TF0021"][value="1"])').click();
   await weiter(page);
@@ -759,6 +785,11 @@ async function ukvDurchlauf(browser) {
   await bildschirm(page, 'frage:GF0074');
   await page.waitForTimeout(650);
   await page.click('[data-antwort="nein"]');
+  // C9: Beziehung zum Versicherungsnehmer sichtbar, eine Antwort, ohne Vorauswahl.
+  await bildschirm(page, 'frage:VP0004');
+  pruefe(await page.locator('input[name="frage-VP0004"]').count() === 1 && await page.locator('input[name="frage-VP0004"]:checked').count() === 0, 'UKV: Beziehung sichtbar, eine Antwort, nicht vorgewählt');
+  await page.locator('label:has(input[name="frage-VP0004"])').click();
+  await weiter(page);
   await bildschirm(page, 'frage:AF0010');
   await page.waitForTimeout(650);
   await page.click('[data-antwort="nein"]');
@@ -766,6 +797,11 @@ async function ukvDurchlauf(browser) {
   await page.locator('label:has(input[name="frage-AF_AD_0001"])').click();
   await weiter(page);
   await bildschirm(page, 'frage:AF_AD_0005');
+  // C7: privat lehnt ab wie im Original, mit Telefon und Termin.
+  await page.locator('label:has(input[name="frage-AF_AD_0005"][value="private Krankenversicherung/Heilfürsorge"])').click();
+  await page.waitForSelector('[data-pruefung]');
+  pruefe((await page.textContent('[data-pruefung]')).includes('Mit dieser Antwort ist der Tarif online leider nicht möglich.'), 'UKV: private Krankenversicherung lehnt ab');
+  await foto(page, '390-ukv-01c-privat');
   await page.locator('label:has(input[name="frage-AF_AD_0005"][value="pflichtversichert in deutscher GKV"])').click();
   await weiter(page);
   await bildschirm(page, 'beitrag');
@@ -801,6 +837,8 @@ async function ukvDurchlauf(browser) {
   const { letzter } = await mock('/__test/letzter');
   const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
   pruefe(letzter.versicherer === 'ukv' && letzter.beitragAngezeigt === 40.95 && g('TF0021') === '1' && g('tarifwahl') === 'UKVZahnPRIVAT100#', 'UKV-Antrag mit Zuschlag und Zuordnung');
+  pruefe(g('policyHolderIsEqualInsuredPerson') === 'true' && g('VP0004') === 'Versicherungsnehmer selbst' && letzter.textfassung === '2026-11-20c-ukv-zahn-online', 'UKV: sichtbare Felder in der Zuordnung, Textfassung 2026-11-20c');
+  pruefe(letzter.unterlagen.gezeigt.some((u) => u.href === 'dienst:15605'), 'UKV 100: 15605 in den Unterlagen');
   await foto(page, '390-ukv-03-danke');
   await context.close();
 }
@@ -839,10 +877,15 @@ async function pruefseiteLevelnine(browser, art) {
     await weiter(page);
     await bildschirm(page, 'hinweis');
     await weiter(page);
+    await pressen('policyHolderIsEqualInsuredPerson');
     await bildschirm(page, 'frage:TF0021');
     pruefe(await page.locator('input[name="frage-TF0021"][value="1"]').isChecked(), 'UKV: fehlende Zähne vorbelegt');
     await weiter(page);
-    for (const id of ['GF0073', 'GF0074', 'AF0010']) await pressen(id);
+    for (const id of ['GF0073', 'GF0074']) await pressen(id);
+    await bildschirm(page, 'frage:VP0004');
+    pruefe(await page.locator('input[name="frage-VP0004"][value="Versicherungsnehmer selbst"]').isChecked(), 'UKV: Beziehung vom Telefon vorbelegt');
+    await weiter(page);
+    await pressen('AF0010');
     await bildschirm(page, 'frage:AF_AD_0001');
     await weiter(page);
     await bildschirm(page, 'frage:AF_AD_0005');
@@ -1077,6 +1120,11 @@ async function zahnVorabUkv(browser) {
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
+  // Paket C (C9): zuerst die Versicherungsnehmer-Frage des Originals, mit Ja vorgewählt (keine Vorbelegung aus der Vorabfrage).
+  await bildschirm(page, 'frage:policyHolderIsEqualInsuredPerson');
+  await page.waitForTimeout(650);
+  pruefe(await page.locator('[data-vorbelegt]').count() === 0, 'Versicherungsnehmer: Vorauswahl des Originals, nicht aus der Vorabfrage');
+  await page.click('[data-antwort="ja"]');
   await bildschirm(page, 'frage:TF0021');
   pruefe(await page.locator('input[name="frage-TF0021"][value="2"]').isChecked() && await page.locator('[data-vorbelegt]').count() === 1, 'TF0021 mit 2 Zähnen vorbelegt');
   await weiter(page);

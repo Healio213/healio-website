@@ -23,8 +23,11 @@ function geburtsdatumBeimTippen(feld) {
 
 export const brauchtPlz = (definition) => Boolean(definition.beitrag?.regionen || definition.beitrag?.plz);
 
+// Paket C (C8): Stufe, die das Original für Geburtsdatum und Beginn nicht anbietet (angeboten[id] === false).
+export const STUFE_NICHT_ANGEBOTEN = 'Diese Stufe können wir dir online nicht anbieten. Bitte wähle eine andere Stufe.';
+
 export function fehlerTarif(definition, daten, {
-  heute, beginn, grenze, dienst,
+  heute, beginn, grenze, dienst, angeboten = null,
 }) {
   const fehler = [];
   const datumFehler = geburtsdatumFehler(daten.geburtsdatum, heute);
@@ -32,6 +35,7 @@ export function fehlerTarif(definition, daten, {
   else if (grenze) fehler.push({ key: 'geburtsdatum', text: grenze.text || 'Für dieses Alter nehmen wir den Antrag gemeinsam auf.' });
   if (brauchtPlz(definition) && !/^\d{5}$/.test(String(daten.plz || '').trim())) fehler.push({ key: 'plzTarif', text: 'Bitte gib deine fünfstellige PLZ ein.' });
   if (!definition.tarife.some((tarif) => tarif.id === daten.tarif)) fehler.push({ key: 'tarif', text: 'Bitte wähle eine Stufe.' });
+  else if (!grenze && angeboten?.[daten.tarif] === false) fehler.push({ key: 'tarif', text: STUFE_NICHT_ANGEBOTEN });
   if (definition.zahlweiseImTarif && !definition.zahlung.zahlweisen.some((eintrag) => eintrag.id === daten.zahlweise)) fehler.push({ key: 'zahlweise', text: 'Bitte wähle, wie du zahlen möchtest.' });
   if (!beginn) fehler.push({ key: 'beginn', text: 'Bitte wähle, ab wann dein Schutz beginnen soll.' });
   // Beitrag vom Antragsdienst: ohne Antwort kein Weiter (kein geratener Preis).
@@ -216,7 +220,7 @@ function Stufenkarte({
 }
 
 export default function SchrittTarif({
-  definition, daten, set, fehler, ueberschriftRef, heute, beginnWahl, preise, grenze, vorbelegtJahr, dienst, empfohlen,
+  definition, daten, set, fehler, ueberschriftRef, heute, beginnWahl, preise, grenze, vorbelegtJahr, dienst, empfohlen, angeboten = null,
 }) {
   const plzRegel = definition.beitrag?.plz;
   const proJahr = definition.zahlweiseImTarif && daten.zahlweise === 'jaehrlich';
@@ -224,7 +228,9 @@ export default function SchrittTarif({
   const datumFehler = fehler.geburtsdatum
     || (beruehrt && daten.geburtsdatum !== '' && !grenze ? geburtsdatumFehler(daten.geburtsdatum, heute) : null);
   const anderer = daten.beginnArt === 'anderer';
-  const anzahl = definition.tarife.length;
+  // Paket C (C8, C11): nur Stufen, die das Original anbietet (solange Geburtsdatum oder Beginn fehlen, alle).
+  const stufen = definition.tarife.filter((tarif) => angeboten?.[tarif.id] !== false);
+  const anzahl = stufen.length;
   const fehlt = [!daten.geburtsdatum || datumFehler ? 'Geburtsdatum' : null, brauchtPlz(definition) && !/^\d{5}$/.test(String(daten.plz || '')) ? 'PLZ' : null].filter(Boolean);
   let platzhalter = fehlt.length ? `Beitrag nach ${fehlt.join(' und ')}` : 'Beitrag wird berechnet …';
   // Ebene 1, B3: kein „wird berechnet“, wenn der Dienst keinen Beitrag liefern kann.
@@ -337,7 +343,7 @@ export default function SchrittTarif({
           ref={stufenRef}
           onScroll={beimWischen}
         >
-          {definition.tarife.map((tarif, stelle) => (
+          {stufen.map((tarif, stelle) => (
             <div key={tarif.id} className="w-[80%] max-w-[20rem] shrink-0 snap-start sm:w-auto sm:max-w-none">
               <Stufenkarte
                 tarif={tarif}
@@ -349,16 +355,16 @@ export default function SchrittTarif({
                 platzhalter={platzhalter}
                 fehler={Boolean(fehler.tarif)}
                 onWaehlen={() => set({ tarif: tarif.id })}
-                zeigeZeilen={definition.tarife.every((eintrag) => kernZeilen(eintrag, definition.versicherer.id).zeilen.length > 0)}
+                zeigeZeilen={stufen.every((eintrag) => kernZeilen(eintrag, definition.versicherer.id).zeilen.length > 0)}
                 versicherer={definition.versicherer.id}
-                platzHalten={definition.tarife.some((eintrag) => eintrag.details || kernZeilen(eintrag, definition.versicherer.id).zeilen.length > ZEILEN_SICHTBAR)}
+                platzHalten={stufen.some((eintrag) => eintrag.details || kernZeilen(eintrag, definition.versicherer.id).zeilen.length > ZEILEN_SICHTBAR)}
               />
             </div>
           ))}
         </div>
         {anzahl > 1 && (
           <div className="mt-2 flex items-center justify-center gap-2 sm:hidden" aria-hidden="true" data-stufen-punkte="">
-            {definition.tarife.map((eintrag, stelle) => (
+            {stufen.map((eintrag, stelle) => (
               <span key={eintrag.id} className={cx('h-2 rounded-full transition-all duration-200', stelle === sichtbareStufe ? 'w-6 bg-emerald-600' : 'w-2 bg-home-midnight/20')} />
             ))}
           </div>
