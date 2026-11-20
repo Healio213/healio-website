@@ -24,6 +24,7 @@ import {
 import { bereinigeHerkunft } from '../src/lib/antragsmaske/vertrag.js';
 import { grundbeitragAusTabelle, mitZuschlag } from '../src/lib/antragsmaske/regeln.js';
 import { DEFINITIONEN } from '../src/data/antrag/index.js';
+import { SMART_FRAGE5_JA_ONLINE } from '../src/data/antrag/zahn.js';
 import LEVELNINE from '../src/data/antrag/original/levelnine.js';
 import {
   KASSE_MUSTER, istEmailText, istIban, istNameText, istPlzText, istStrasseText, istTelefonText,
@@ -247,8 +248,8 @@ function pruefeZahn(body, heute) {
   if (!geburt) felder.push('angaben.geburtsdatum');
   const g = body.gesundheit || {};
   const erwartet = g.fragebogen === 'KZV_SMART' ? 5 : 5;
-  // Ebene 1, B5: Smart mit Frage 5 „Ja“ online nicht.
-  const abgelehnt = (g.antworten || []).some((eintrag) => (['1', '10', '13', '22'].includes(eintrag.frageId) || (g.fragebogen === 'KZV_SMART' && eintrag.frageId === '25')) && eintrag.antwort === 'ja');
+  // Ebene 1, B5: Smart mit Frage 5 „Ja“ wie die Definition (seit 20.11.2026 angenommen, SMART_FRAGE5_JA_ONLINE).
+  const abgelehnt = (g.antworten || []).some((eintrag) => (['1', '10', '13', '22'].includes(eintrag.frageId) || (!SMART_FRAGE5_JA_ONLINE && g.fragebogen === 'KZV_SMART' && eintrag.frageId === '25')) && eintrag.antwort === 'ja');
   if (!Array.isArray(g.antworten) || g.antworten.filter((eintrag) => eintrag.frageId !== '28').length !== erwartet || abgelehnt) felder.push('gesundheit');
   if (!istIban(body.zahlung?.iban)) felder.push('zahlung.iban');
   const e = body.erklaerungen || {};

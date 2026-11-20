@@ -634,20 +634,26 @@ test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals'
   assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
   assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
   assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
-  assert.equal(zahn.textfassung, '2026-11-19b-bayerische-zahn'); // Ebene 1 (19.11.2026 spät): Vorbehalt neu
+  assert.equal(zahn.textfassung, '2026-11-20-bayerische-zahn'); // Nachbesserung Ebene 1 (20.11.2026): Smart Frage 5, Vorbehalt ohne Halt-Zusage
 });
 
 // ---------------------------------------------------------------------------
 // Ebene 1, Paket B (Healio/Antragsstrecken/BAUPLAN-EBENE1-EBENE2-2026-11-19.md), Website-Seite. Rechnung und Annahme prüft der Dienst
 // (ebene1.test.mjs im Antragsdienst, gleiche Regeldateien über den Prüfsummentest).
-test('Ebene 1 B5: Smart mit Frage 5 „Ja“ stoppt online, Komfort und Prestige nicht', async () => {
+test('Ebene 1 B5 (Nachbesserung 20.11.2026): Smart mit Frage 5 „Ja“ wie im Original angenommen, Komfort und Prestige auch', async () => {
   const { default: zahn, SMART_FRAGE5_JA_ONLINE } = await import('../src/data/antrag/zahn.js');
   const { wirkungen, stopWirkungDerFrage } = await import('../src/lib/antragsmaske/regeln.js');
-  assert.equal(SMART_FRAGE5_JA_ONLINE, false);
+  // Nachmessung am Original 20.11.2026: Risikoprüfung KZV_SMART mit 25→26 und 28→34 ergibt ACCEPTED, 14,60 unverändert.
+  assert.equal(SMART_FRAGE5_JA_ONLINE, true);
   const basis = { z2: 'nein', z3: 'nein', z4: 'nein', z5: 'ja' };
-  assert.equal(wirkungen(zahn, { tarif: 'SMART', antworten: { ...basis, z1s: 'nein' } }).keineAufnahme.length, 1);
+  assert.equal(wirkungen(zahn, { tarif: 'SMART', antworten: { ...basis, z1s: 'nein' } }).keineAufnahme.length, 0);
+  assert.equal(wirkungen(zahn, { tarif: 'SMART', antworten: { ...basis, z1s: 'ja' } }).keineAufnahme.length, 1, 'Frage 1 „Ja“ lehnt weiter ab');
   const z5 = zahn.gesundheit.fragen.find((f) => f.id === 'z5');
-  assert.equal(stopWirkungDerFrage(z5, { tarif: 'SMART', antworten: { z5: 'ja' } })?.art, 'keineAufnahme');
+  assert.equal(stopWirkungDerFrage(z5, { tarif: 'SMART', antworten: { z5: 'ja' } }), null);
+  // Übermittlung wie die Seite selbst: 25→26, Folgefrage 28→34 („unbekannt“).
+  const g = zahn.gesundheitFuerVertrag({ ...basis, z1s: 'nein' }, { tarif: 'SMART' });
+  assert.equal(g.fragebogen, 'KZV_SMART');
+  assert.deepEqual(g.antworten.slice(-2).map((a) => [a.frageId, a.antwortId]), [['25', '26'], ['28', '34']]);
   assert.equal(stopWirkungDerFrage(z5, { tarif: 'KOMFORT', antworten: { z5: 'ja' } }), null);
   assert.equal(stopWirkungDerFrage(z5, { tarif: 'PRESTIGE', antworten: { z5: 'ja' } }), null);
   assert.deepEqual(pruefeDefinition(zahn), []);
@@ -659,6 +665,9 @@ test('Ebene 1 B6/B7: Ambulant nur monatlich, alle Altersgruppen für Beginn 2026
   assert.equal(BEITRAGSTABELLE.bestaetigtAm, '2026-11-19');
   for (const von of [0, 21, 31, 41, 51, 61, 71]) for (const code of ['AP5', 'AP7', 'AP9', 'AP1']) assert.equal(beitragFuer2026Bestaetigt({ von }, code, 2027), true, `${von} ${code}`);
   assert.equal(beitragFuer2026Bestaetigt({ von: 51 }, 'AP1', 2028), false);
+  // Nachbesserung 20.11.2026: Hinweis intern passt zum Kennzeichen (bestätigt heißt Stand 19.11.2026, 2028 nicht geprüft).
+  assert.match(BEITRAGSTABELLE.hinweisIntern, /Stand 19\.11\.2026/);
+  assert.match(BEITRAGSTABELLE.hinweisIntern, /2028 sind nicht geprüft/);
   const b = ambulant.beitrag.berechne({ tarif: 'AP7', geburtsdatum: { jahr: 1960, monat: 3, tag: 5 }, beginn: { jahr: 2027, monat: 1 }, zuschlagProzent: 0 });
   assert.equal(b.bestaetigt, true);
 });
@@ -684,9 +693,12 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
   const { default: zahnUkv } = await import('../src/data/antrag/zahnUkv.js');
   assert.match(stationaer.beitrag.hinweisNachEingang, /^Die SDK prüft deine Angaben, nachdem dein Antrag eingegangen ist\. Sie kann dann einen Zuschlag verlangen, einzelne Leistungen ausschließen oder den Antrag ablehnen\. Der Beitrag oben gilt, wenn sie ohne Änderung annimmt\.$/);
   for (const def of [ambulant, stationaer, zahn]) {
-    assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\./);
+    assert.match(def.absenden.vorbehalt, /^Dein Beitrag gilt vorbehaltlich der Annahme durch die (SDK|Bayerische)\.$/);
+    // Nachbesserung 20.11.2026: keine Zusage zum Halt, solange der Einreicher keinen Preis vergleicht (Paket A).
+    assert.doesNotMatch(def.absenden.vorbehalt, /nichts ein|meldet sich/);
+    assert.equal(def.beitrag.vorbehalt === undefined || !/nichts ein|meldet sich/.test(def.beitrag.vorbehalt), true);
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
-    assert.match(def.textfassung, /^2026-11-19b-/);
+    assert.match(def.textfassung, /^2026-11-20-/);
   }
   assert.equal(zahnUkv.textfassung, '2026-11-12-ukv-zahn-online', 'UKV unverändert');
   assert.equal(zahnUkv.absenden.nachEingang, undefined);

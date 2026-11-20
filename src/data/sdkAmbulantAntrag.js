@@ -195,7 +195,7 @@ export const BEITRAGSTABELLE = {
     61: ALLE_CODES,
     71: ALLE_CODES,
   },
-  hinweisIntern: 'Alle Beiträge sind am 19.11.2026 an der Online-Strecke der SDK geprüft (Beginn 01.12.2026 bis 01.05.2027, Eintrittsalter 19 bis 101). Eine spätere Beitragsanpassung der SDK, etwa zum 01.01.2027, ist nicht berücksichtigt; vor dem Einschalten und Mitte Dezember neu prüfen.',
+  hinweisIntern: 'Alle Beiträge sind am 19.11.2026 an der Online-Strecke der SDK geprüft (Beginn 01.12.2026 bis 01.05.2027, Eintrittsalter 19 bis 101). „Bestätigt“ für die Beginnjahre 2026 und 2027 heißt: Stand 19.11.2026. Gibt die SDK danach eine Beitragsanpassung bekannt, etwa zum 01.01.2027, ist sie nicht berücksichtigt; vor dem Einschalten und Mitte Dezember neu prüfen. Beiträge ab dem Kalenderjahr 2028 sind nicht geprüft.',
 };
 
 // beginnJahr (optional): Kalenderjahr des Beginns. Für Jahre ohne Prüfung gilt

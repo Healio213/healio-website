@@ -92,11 +92,13 @@ const frage = (id, titel, text, original, wirkungJa, bedingung) => ({
   id, typ: 'janein', titel, kurz: titel, text, original, wirkung: { ja: wirkungJa }, ...(bedingung ? { bedingung } : {}),
 });
 
-// Smart mit „Ja“ bei Frage 5: Das Original lieferte dafür keine Entscheidung
-// (Antwort 424, Gegenprüfung 19.11.2026). Bis eine Nachmessung „angenommen“
-// zeigt, nimmt Healio Smart mit Frage 5 „Ja“ online nicht an (Bauplan Ebene 1,
-// B5). Zeigt das Original „angenommen“, hier auf true stellen.
-export const SMART_FRAGE5_JA_ONLINE = false;
+// Smart mit „Ja“ bei Frage 5 (Bauplan Ebene 1, B5): Die Nachmessung über die
+// Oberfläche des Originals am 20.11.2026 zeigt „angenommen“ (Risikoprüfung 200,
+// ACCEPTED, Beitrag unverändert 14,60; Beleg pruefung-zuschlaege-2026-11-19/bau/
+// ebene1/skeptiker/nachmessung-b5/lauf-1/). Der frühere Fehler 424 kam aus einer
+// nachgebauten Wiederholung, nicht aus der Oberfläche. Darum nimmt Healio Smart
+// mit Frage 5 „Ja“ online an. false stellt den Stopp wieder her.
+export const SMART_FRAGE5_JA_ONLINE = true;
 export const SMART_FRAGE5_TEXT = 'Mit dieser Antwort können wir Smart online gerade nicht abschließen. Lass uns das zusammen klären.';
 const SMART_FRAGE5_WIRKUNG = SMART_FRAGE5_JA_ONLINE ? [] : [{
   art: 'keineAufnahme', text: SMART_FRAGE5_TEXT, auswege: ['telefon', 'termin'], tarif: ['SMART'],
@@ -108,8 +110,8 @@ const FRAGEN = [
   frage('z2', 'Frage 2', 'Haben Sie eine bestehende, herausnehmbare Voll- oder Teilprothese?', { frageId: '10', ja: '11', nein: '12' }, ablehnung(PERSOENLICH)),
   frage('z3', 'Frage 3', 'Haben Sie Zahnersatz, der älter als 10 Jahre ist?', { frageId: '13', ja: '14', nein: '21' }, ablehnung(MIT_UKV)),
   frage('z4', 'Frage 4', 'Besteht oder bestand in den letzten 3 Jahren eine / mehrere der folgenden Erkrankungen: -Paradontose, -Paradontitis, - Zahnschmelzdefekt?', { frageId: '22', ja: '23', nein: '24' }, ablehnung(PERSOENLICH)),
-  // Ja: Komfort und Prestige angenommen, Beitrag unverändert; Smart siehe
-  // SMART_FRAGE5_JA_ONLINE. Die Folgefrage „Wie lange?“ zeigt das Original nicht
+  // Ja: alle drei Tarife angenommen, Beitrag unverändert (Smart: Nachmessung
+  // 20.11.2026, SMART_FRAGE5_JA_ONLINE). Die Folgefrage „Wie lange?“ zeigt das Original nicht
   // und schickt „unbekannt“ (Antwort 34).
   frage('z5', 'Frage 5', 'Bestand in den letzten 12 Monaten vor Vertragsabschluss eine Zahnzusatzversicherung bei einem anderen privaten Krankenversicherer?', { frageId: '25', ja: '26', nein: '35', folgeBeiJa: { frageId: '28', antwortId: '34' } }, SMART_FRAGE5_WIRKUNG),
 ];
@@ -123,7 +125,8 @@ const zahn = {
   // 19.11.2026 (Paket 2): Adressprüfung im Wortlaut der Bayerischen, Kasten
   // „*Bonitätsauskunft“ wie im Original, Auftrag ohne Verweis auf eine fehlende Datei.
   // 19.11.2026 spät (Ebene 1): Vorbehalt „vorbehaltlich der Annahme“, Smart mit Frage 5 „Ja“ nicht online.
-  textfassung: '2026-11-19b-bayerische-zahn',
+  // 20.11.2026 (Nachbesserung Ebene 1): Smart mit Frage 5 „Ja“ wieder online (Original nimmt an), Vorbehalt ohne Zusage zum Halt.
+  textfassung: '2026-11-20-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',

@@ -65,7 +65,8 @@ export function kernZeilen(tarif, versicherer) {
 
 export const PREIS_NICHT_BESTAETIGT = Object.freeze({
   titel: 'Deinen Beitrag können wir gerade nicht bestätigen.',
-  text: 'Der Rechner der Bayerischen antwortet im Moment nicht. Ohne bestätigten Beitrag nehmen wir keinen Antrag an. Versuch es später noch einmal oder vereinbare einen Termin mit uns.',
+  // Neutral (Nachbesserung 20.11.2026): gilt auch, wenn der Rechner antwortet, der Betrag aber zu keiner Region passt.
+  text: 'Der Abgleich mit der Bayerischen klappt im Moment nicht. Ohne bestätigten Beitrag nehmen wir keinen Antrag an. Versuch es später noch einmal oder vereinbare einen Termin mit uns.',
 });
 
 // Zustand der Beitragsabfrage beim Antragsdienst (nur bei beitrag.art 'dienst').

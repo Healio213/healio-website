@@ -9,7 +9,8 @@
 // - Ein „Ja“ ändert online nichts am Beitrag, die SDK entscheidet erst nach
 //   Eingang. Die Maske sagt das, verspricht keine Annahme, nennt keinen Zuschlag.
 //   19.11.2026 (Ebene 1, B9): Hinweis nennt Zuschlag, Ausschluss und Ablehnung nach
-//   Eingang; Vorbehalt „vorbehaltlich der Annahme“; Textfassung 2026-11-19b.
+//   Eingang; Vorbehalt „vorbehaltlich der Annahme“; Textfassung 2026-11-19b,
+//   seit 20.11.2026 2026-11-20 (Vorbehalt ohne Zusage zum Halt).
 // - Beitrag: Eintrittsalter = Beginnjahr minus Geburtsjahr, Tabelle 0 bis 80.
 // - Beginn wie im Original: nächster Monatserster vorbelegt, bis zum 15. auch
 //   der laufende Monat (im Dezember den ganzen Monat), dazu 5 weitere Monate.
@@ -113,7 +114,8 @@ const stationaer = {
   stand: '2026-11-12',
   // 19.11.2026 (Paket 1): Versicherungsnehmer sichtbar, Werbeeinwilligung Ja/Nein,
   // Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei, sechs Blöcke.
-  textfassung: '2026-11-19b-sdk-stationaer-online',
+  // 20.11.2026 (Nachbesserung Ebene 1): Vorbehalt ohne Zusage zum Halt (kommt erst mit Paket A).
+  textfassung: '2026-11-20-sdk-stationaer-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, erfasst 12.11.2026',
   kennzeile: 'Klinikschutz der SDK',
   seitentitel: 'Antrag Klinikschutz | Healio',

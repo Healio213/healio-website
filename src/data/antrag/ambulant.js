@@ -165,7 +165,8 @@ const ambulant = {
   // 19.11.2026 (Paket 1): Frage 1a als 15 Einzelfragen, Versicherungsnehmer sichtbar,
   // Werbeeinwilligung Ja/Nein, Bestätigungssatz der SDK, Auftrag ohne Verweis auf eine fehlende Datei.
   // 19.11.2026 spät (Ebene 1, B9/B10): Vorbehalt „vorbehaltlich der Annahme“ am Auftragsknopf.
-  textfassung: '2026-11-19b-sdk-ambulant-online',
+  // 20.11.2026 (Nachbesserung Ebene 1): Vorbehalt ohne Zusage zum Halt (kommt erst mit Paket A).
+  textfassung: '2026-11-20-sdk-ambulant-online',
   quelle: 'Online-Strecke der SDK über den Exklusivlink 901334, abgeglichen 12.11.2026',
   kennzeile: 'Ambulanter Zusatzschutz der SDK',
   seitentitel: 'Antrag ambulanter Zusatzschutz | Healio',

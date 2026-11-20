@@ -915,7 +915,7 @@ async function pruefseiteAmbulantOnline(browser) {
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler: ${await page.textContent('[data-sendefehler]')}`);
   pruefe((await page.textContent('[data-kennung]')).trim() === 'HA-261112-AMBO', 'Prüfseite ambulant (Online-Fassung) bestätigt');
   const { letzter } = await mock('/__test/letzter');
-  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-19b-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
+  pruefe(letzter.ueber === 'pruefseite' && letzter.textfassung === '2026-11-20-sdk-ambulant-online' && letzter.erklaerungen.avoidAdvice === true && !('hinweisOk' in letzter.erklaerungen), 'neue Schlüssel und Fassung an den Dienst');
   pruefe(letzter.zahlung.bankname === 'Testbank', 'Prüfseite ambulant (Online-Fassung) fragt den Banknamen ab');
   await context.close();
 }
@@ -1123,7 +1123,7 @@ async function ebene1Zahn(browser, breite) {
   await page.fill('#feld-plzTarif', '37139');
   await page.waitForSelector('[data-beitrag-nicht-bestaetigt]');
   const b3 = await page.textContent('[data-beitrag-nicht-bestaetigt]');
-  pruefe(b3.includes('Deinen Beitrag können wir gerade nicht bestätigen.') && b3.includes('Später noch einmal versuchen') && b3.includes('Termin vereinbaren'), `${breite}: Preis nicht bestätigt, später noch einmal und Termin (B3)`);
+  pruefe(b3.includes('Deinen Beitrag können wir gerade nicht bestätigen.') && b3.includes('Der Abgleich mit der Bayerischen klappt im Moment nicht.') && !b3.includes('Rechner') && b3.includes('Später noch einmal versuchen') && b3.includes('Termin vereinbaren'), `${breite}: Preis nicht bestätigt, später noch einmal und Termin (B3)`);
   pruefe(await page.locator('[data-weiter]').count() === 0, `${breite}: ohne bestätigten Beitrag kein Weiter (B3)`);
   const stufe = await page.textContent('[data-stufe-beitrag="KOMFORT"]');
   pruefe(!/EUR/.test(stufe) && stufe.includes('Beitrag gerade nicht bestätigt'), `${breite}: kein Rückfallpreis in den Stufen (B3)`);
@@ -1150,8 +1150,9 @@ async function ebene1Zahn(browser, breite) {
     await bildschirm(page, 'frage:z5');
     await page.waitForTimeout(650);
     await page.click('[data-bildschirm="frage:z5"] [data-antwort="ja"]');
-    await page.waitForSelector('[data-pruefung]');
-    pruefe((await page.textContent('[data-pruefung]')).includes('Mit dieser Antwort können wir Smart online gerade nicht abschließen.') && await page.locator('[data-weiter]').count() === 0, 'Smart mit Frage 5 „Ja“: online nicht, kein Weiter (B5)');
+    // Nachbesserung 20.11.2026: Das Original nimmt Smart mit Frage 5 „Ja“ an (Nachmessung), Healio auch.
+    await bildschirm(page, 'beitrag');
+    pruefe(await page.locator('[data-pruefung]').count() === 0 && (await page.textContent('[data-beitrag-wert]')).includes('44,50 EUR'), 'Smart mit Frage 5 „Ja“: angenommen, Beitrag unverändert (Smart 14,60 + ZAHN Sofort 29,90) wie im Original (B5)');
     await foto(page, `${breite}-ebene1-zahn-smart-frage5`);
   }
   await context.close();
